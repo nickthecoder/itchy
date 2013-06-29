@@ -1,0 +1,32 @@
+Here are the attributions for each sound sample used.
+All sounds have been resampled to 22050Hz
+Each sample has :
+
+* Its original name
+* A url of the original file
+* The role of the sound sample
+* A short description of any modifications I made to the original sample
+* The name of the file as used in the game
+
+33245__ljudman__grenade.wav
+http://www.freesound.org/samplesViewSingle.php?id=33245
+A Shootble dying
+Removed the short silence at the beginning
+explode.ogg
+
+45656__csengeri__tuzijatek.wav
+http://www.freesound.org/samplesViewSingle.php?id=45656
+Used the 2nd noise, trimmed, and faded out the end to make it very short.
+Ship firing a bullet
+fire.ogg
+
+35716__analogchill__scream.wav
+http://www.freesound.org/people/analogchill/sounds/35716/
+Cut it short, and faded it out. Changed the pitch for #2 and #3.
+Aliens dying
+ahh1.ogg ahh2.ogg ahh3.ogg
+
+74395__Benboncan__Ricochet_3.wav
+http://www.freesound.org/samplesViewSingle.php?id=74395
+Bullets hitting bombs
+ricochet.ogg

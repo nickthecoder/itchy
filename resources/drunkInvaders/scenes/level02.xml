@@ -1,0 +1,36 @@
+<scene>
+  <actor costume="earth" x="0" y="0" direction="0.0" start="default"/>
+  <actor costume="ship" x="314" y="89" direction="90.0" start="default"/>
+  <actor costume="factory" x="65" y="431" direction="0.0" start="default">
+    <property name="costumeName" value="alien1"/>
+    <property name="greenFlag" value="260"/>
+    <property name="spacing" value="80.0"/>
+    <property name="alienCount" value="4"/>
+    <property name="delay" value="0"/>
+    <property name="ticksPerAlien" value="20"/>
+  </actor>
+  <actor costume="factory" x="65" y="385" direction="0.0" start="default">
+    <property name="costumeName" value="alien2"/>
+    <property name="greenFlag" value="260"/>
+    <property name="spacing" value="80.0"/>
+    <property name="alienCount" value="4"/>
+    <property name="delay" value="33"/>
+    <property name="ticksPerAlien" value="20"/>
+  </actor>
+  <actor costume="factory" x="68" y="334" direction="0.0" start="default">
+    <property name="costumeName" value="alien3"/>
+    <property name="greenFlag" value="260"/>
+    <property name="spacing" value="80.0"/>
+    <property name="alienCount" value="4"/>
+    <property name="delay" value="66"/>
+    <property name="ticksPerAlien" value="20"/>
+  </actor>
+  <actor costume="shieldFactory" x="177" y="115" direction="3.623738158960611" start="default">
+    <property name="height" value="4"/>
+    <property name="width" value="6"/>
+  </actor>
+  <actor costume="shieldFactory" x="394" y="115" direction="-6.420504696828644" start="default">
+    <property name="height" value="4"/>
+    <property name="width" value="6"/>
+  </actor>
+</scene>

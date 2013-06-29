@@ -1,0 +1,151 @@
+package uk.co.nickthecoder.itchy;
+
+import java.util.HashMap;
+
+import uk.co.nickthecoder.itchy.editor.SceneDesignerBehaviour;
+import uk.co.nickthecoder.itchy.util.NullBehaviour;
+import uk.co.nickthecoder.itchy.util.Property;
+import uk.co.nickthecoder.jame.RGBA;
+
+public abstract class SceneActor implements Cloneable
+{
+    public static SceneActor createSceneActor( Actor actor )
+    {
+        if ( actor.getAppearance().getPose() instanceof TextPose ) {
+            return new TextSceneActor( actor );
+        } else if ( actor.getCostume() != null ) {
+            return new CostumeSceneActor( actor );
+        } else {
+            return null;
+        }
+    }
+
+    public int x;
+
+    public int y;
+
+    double direction;
+
+    double scale;
+
+    public String startEvent;
+
+    public String behaviourClassName;
+
+    public RGBA colorize;
+
+    public HashMap<String,Object> customProperties = new HashMap<String,Object>();
+
+    protected SceneActor()
+    {
+    }
+
+    protected SceneActor( Actor actor )
+    {
+        this.x = (int) actor.getX();
+        this.y = (int) actor.getY();
+        this.direction = actor.getAppearance().getDirection();
+        this.startEvent = "default";
+        this.scale = actor.getAppearance().getScale();
+        this.behaviourClassName = ((SceneDesignerBehaviour) actor.getBehaviour()).getBehaviourClassName();
+        this.colorize = actor.getAppearance().getColorize() == null ? null : new RGBA( actor.getAppearance().getColorize() );
+        Behaviour actualBehaviour = ((SceneDesignerBehaviour) actor.getBehaviour()).actualBehaviour;
+
+        for ( Property<Behaviour,?> property : actualBehaviour.getProperties() ) {
+            try {
+                Object value = property.getValue( actualBehaviour );
+                this.customProperties.put( property.access, value );
+            } catch ( Exception e ) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    protected void updateActor( Actor actor, boolean designMode )
+    {
+        actor.moveTo( this.x, this.y );
+        actor.getAppearance().setDirection( this.direction );
+        actor.getAppearance().setScale( this.scale );
+        actor.getAppearance().setColorize( this.colorize == null ? null : new RGBA( this.colorize ) );
+        String behaviourClassName = this.behaviourClassName;
+        if ( behaviourClassName == null ) {
+            if ( actor.getCostume() == null ) {
+                behaviourClassName = NullBehaviour.class.getName();
+            } else {
+                behaviourClassName = actor.getCostume().behaviourClassName;
+            }
+        }
+
+        Behaviour actualBehaviour;
+
+        if ( designMode ) {
+
+            SceneDesignerBehaviour behaviour = new SceneDesignerBehaviour();
+            actor.setBehaviour( behaviour );
+
+            try {
+                behaviour.setBehaviourClassName( behaviourClassName );
+            } catch (Exception e ) {
+                e.printStackTrace();
+            }
+
+            actualBehaviour = behaviour.actualBehaviour;
+
+
+        } else {
+
+            try {
+                Class<?> klass = Class.forName( behaviourClassName );
+                actualBehaviour = (Behaviour) klass.newInstance();
+
+            } catch ( Exception e ) {
+                e.printStackTrace();
+                return;
+            }
+        }
+
+        for ( Property<Behaviour,?> property : actualBehaviour.getProperties() ) {
+            Object value = this.customProperties.get( property.access );
+            if ( value != null ) {
+                try {
+                    property.setValue( actualBehaviour, value );
+                } catch (Exception e ) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        if ( ! designMode ) {
+            actor.setBehaviour( actualBehaviour );
+        }
+
+
+    }
+
+    public abstract Actor createActor( boolean designActor );
+
+    @Override
+    public Object clone()
+        throws CloneNotSupportedException
+    {
+        SceneActor result = (SceneActor) super.clone();
+
+        result.customProperties = new HashMap<String,Object>();
+        for ( String key : this.customProperties.keySet() ) {
+            result.customProperties.put( key, this.customProperties.get( key ) );
+        }
+
+        return result;
+    }
+
+    public SceneActor copy()
+    {
+        try {
+            return (SceneActor) this.clone();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+}

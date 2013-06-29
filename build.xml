@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE project>
+<project name="Itchy" default="build" basedir=".">
+
+    <property name="jarfile" value="itchy.jar" />
+
+    <path id="project.class.path">
+        <fileset dir=".">
+            <include name="itchy.jar"/>
+        </fileset>
+        <fileset dir="lib">
+            <include name="*.jar"/>
+        </fileset>
+    </path>
+	
+    <target name="build">
+        <mkdir dir="../build"/>
+        <javac
+            srcdir="src"
+            destdir="build"
+            classpathref="project.class.path"
+            deprecation="on"
+        	debug="on"
+        	debugLevel="lines,vars,source"
+        	includeantruntime="false"
+        />
+        <jar jarfile="${jarfile}">
+            <fileset dir="build">
+                <include name="**/*.class"/>
+          </fileset>
+        </jar>
+
+    </target>
+
+    
+	<!-- publish : Used to create zip files of the source and binaries -->
+    <target name="publish">
+    	
+    	<mkdir dir="publish"/>
+    	
+        <jar jarfile="publish/itchy-win32.zip">
+            <fileset dir=".">
+                <include name="itchy.jar"/>
+                <include name="lib/*.jar"/>
+                <include name="drunkInvaders.bat"/>
+                <include name="native/win32/*.dll"/>
+                <include name="resources/**/*.xml"/>
+                <include name="resources/**/*.png"/>
+                <include name="resources/**/*.ttf"/>
+                <include name="resources/**/*.ogg"/>
+            </fileset>
+        </jar>
+
+        <tar destfile="publish/itchy-linux.tar.gz" compression="gzip">
+            <fileset dir=".">
+                <include name="itchy.jar"/>
+                <include name="lib/*.jar"/>
+                <include name="drunkInvaders.sh"/>
+                <include name="native/i686/*.so"/>
+                <include name="native/x86-64/*.so"/>
+                <include name="resources/**/*.xml"/>
+                <include name="resources/**/*.png"/>
+                <include name="resources/**/*.ttf"/>
+                <include name="resources/**/*.ogg"/>
+            </fileset>
+        </tar>
+
+        <jar jarfile="publish/itchy-src.zip">
+            <fileset dir=".">
+                <include name="src/**/*.java"/>
+                <include name="*.txt"/>
+                <include name="docs/**/*.ucls"/>
+                <include name="resources/**/*.svg"/>
+                <include name="resources/**/*.xml"/>
+                <include name="resources/**/*.png"/>
+                <include name="resources/**/*.ttf"/>
+                <include name="resources/**/*.ogg"/>
+            </fileset>
+        </jar>
+    	
+	</target>
+    
+    <!-- Generate javadocs -->
+    <target name="javadoc" depends="build">
+        <javadoc sourcepath="src"
+            classpathref="project.class.path"
+            access="protected"
+            destdir="docs/api"
+            windowtitle="Itchy">
+
+            <package name="uk.co.nickthecoder.itchy"/>
+            <package name="uk.co.nickthecoder.itchy.animation"/>
+            <package name="uk.co.nickthecoder.itchy.gui"/>
+            <package name="uk.co.nickthecoder.itchy.util"/>
+        </javadoc>
+    </target>
+
+    <target name="clean">
+        <delete includeEmptyDirs="true">
+            <fileset dir=".">
+                <include name="itchy.jar" />
+                <include name="build/**" />
+                <exclude name="build" />
+            </fileset>
+        </delete>
+    </target>
+
+
+    <target name="test" depends="build">
+
+        <junit fork="true" printsummary="false" haltonfailure="yes" dir="." >
+            <classpath refid="project.class.path" />
+
+            <formatter type="plain" usefile="false" />
+
+            <batchtest toDir="testResults" >
+                <fileset dir="src">
+                    <include name="**/*Test.java" />
+                </fileset>
+            </batchtest>
+
+        </junit>
+    </target>
+
+</project>

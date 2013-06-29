@@ -1,0 +1,11 @@
+<scene>
+  <actor costume="earth" x="0" y="0" direction="0.0" start="default"/>
+  <text text="Drunk Invaders" font="vera" size="38" color="#ffffff" x="326" y="436" direction="0.0" start="default"/>
+  <text text="Written by Nick Robinson" font="vera" size="22" color="#ffffff" x="323" y="332" direction="0.0" start="default"/>
+  <text text="Version 0.1" font="vera" size="22" color="#ffffff" x="323" y="402" direction="0.0" start="default"/>
+  <text text="Inspired and helped by Simon Lucas" font="vera" size="22" color="#ffffff" x="324" y="296" direction="0.0" start="default"/>
+  <text text="BACK" font="blackCasper" size="42" color="#000000" behaviour="uk.co.nickthecoder.drunkinvaders.DrunkButtonBehaviour" x="319" y="29" direction="0.0" start="default">
+    <property name="action" value="menu"/>
+  </text>
+  <text text="©2012" font="vera" size="14" color="#ffffff" x="500" y="445" direction="0.0" start="default"/>
+</scene>

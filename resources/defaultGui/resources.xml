@@ -1,0 +1,60 @@
+<resources>
+ 
+    <ninePatches>
+        <ninePatch name="background" filename="background.png" top="0" right="0" left="0" bottom="0" />
+        <ninePatch name="shade" filename="shade.png" top="0" right="0" left="0" bottom="0" middle="fill" />
+
+        <ninePatch name="titleBar" filename="titleBar.png" top="10" right="10" left="10" bottom="10"  middle="fill" />
+        <ninePatch name="clientArea" filename="clientArea.png" top="0" right="12" left="12" bottom="12"  middle="fill"/>
+         
+        <ninePatch name="tab" filename="tab.png" top="14" right="8" left="8" bottom="8"  middle="fill" />
+        <ninePatch name="tab-down" filename="tab-down.png" top="8" right="8" left="8" bottom="8"  middle="fill" />
+        <ninePatch name="tab-selected" filename="tab-selected.png" top="8" right="8" left="8" bottom="8"  middle="fill" />
+        <ninePatch name="tab-focus" filename="tab-focus.png" top="8" right="8" left="8" bottom="8"  middle="fill" />
+
+        <ninePatch name="panel" filename="panel.png" top="6" right="6" left="6" bottom="6"  middle="fill" />
+
+        <ninePatch name="tab-semi" filename="tab-semi.png" top="14" right="8" left="8" bottom="8"  middle="fill" />
+        <ninePatch name="tab-down-semi" filename="tab-down-semi.png" top="8" right="8" left="8" bottom="8"  middle="fill" />
+        <ninePatch name="tab-focus-semi" filename="tab-focus-semi.png" top="8" right="8" left="8" bottom="8"  middle="fill" />
+        <ninePatch name="panel-semi" filename="panel-semi.png" top="6" right="6" left="6" bottom="6"  middle="fill" />
+        
+        <ninePatch name="button" filename="button.png" top="8" right="8" left="8" bottom="8"  middle="fill" />
+        <ninePatch name="button-down" filename="button-down.png" top="8" right="8" left="8" bottom="8"  middle="fill" />
+        <ninePatch name="button-focus" filename="button-focus.png" top="8" right="8" left="8" bottom="8"  middle="fill" />
+
+
+        <ninePatch name="tableHeadings" filename="tableHeadings.png" top="6" right="6" left="6" bottom="6"  middle="fill" />
+        <ninePatch name="tableData" filename="tableData.png" top="6" right="6" left="6" bottom="8"  middle="fill" />
+        <ninePatch name="even" filename="even.png" top="0" right="0" left="0" bottom="0"  middle="fill" />
+        <ninePatch name="selected" filename="selected.png" top="0" right="0" left="0" bottom="0" middle="fill" />
+        <ninePatch name="focus" filename="focus.png" top="0" right="0" left="0" bottom="0" middle="fill" />
+        
+        <ninePatch name="text" filename="text.png" top="8" right="8" bottom="8" left="8"  middle="fill" />
+        <ninePatch name="text-focus" filename="text-focus.png" top="8" right="8" bottom="8" left="8"  middle="fill" />
+        <ninePatch name="text-error" filename="text-error.png" top="8" right="8" bottom="8" left="8"  middle="fill" />
+        <ninePatch name="caret" filename="caret.png" top="8" right="0" bottom="8" left="12"  middle="fill" />                
+
+        <ninePatch name="scrollbar" filename="scrollbar.png" top="13" right="1" bottom="13" left="1"  middle="fill" />                
+        <ninePatch name="scroller" filename="scroller.png" top="7" right="5" bottom="7" left="5"  middle="fill" />                
+
+        <ninePatch name="checkers" filename="checkers.png" top="0" right="0" bottom="0" left="0"  middle="fill" />                
+        <ninePatch name="highlight" filename="highlight.png" top="2" right="2" bottom="2" left="2"  middle="fill" />                
+        <ninePatch name="pageBorder" filename="pageBorder.png" top="2" right="2" bottom="2" left="2"  middle="fill" />                
+
+    </ninePatches>
+    
+    <poses>
+        <pose name="buttonUp" filename="up.png" />                
+        <pose name="buttonDelete" filename="delete.png" />                
+        <pose name="checked" filename="checked.png"/>                
+        <pose name="scaleHandle" filename="scaleHandle.png"/>                
+        <pose name="rotateHandle" filename="rotateHandle.png" offsetX="6"/>                
+    </poses>
+    
+    <fonts>
+        <font name="vera" filename="fonts/Vera/Vera.ttf"/>
+    </fonts>
+
+</resources>
+ 

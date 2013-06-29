@@ -1,0 +1,84 @@
+<resources>
+
+  <fonts>
+    <font name="vera" filename="fonts/Vera/Vera.ttf"/>
+  </fonts>
+  
+  <poses>
+    <pose name="alien1a" filename="alien1a.png" direction="-90.0"/>
+    <pose name="alien1b" filename="alien1b.png" direction="-90.0"/>
+    <pose name="alien2a" filename="alien2a.png" direction="-90.0"/>
+    <pose name="alien2b" filename="alien2b.png" direction="-90.0"/>
+    <pose name="alien3a" filename="alien3a.png" direction="-90.0"/>
+    <pose name="alien3b" filename="alien3b.png" direction="-90.0"/>
+    <pose name="bomb1" filename="bomb1.png" direction="-90.0"/>
+    <pose name="bomb2" filename="bomb2.png" direction="-90.0"/>
+  </poses>
+  
+  <animations>
+  
+    <animation name="bomb">
+      <parallel loops="0">
+	      <frames>
+	        <frame pose="bomb1" delay="50"/>
+	        <frame pose="bomb2" delay="50"/>
+	      </frames>
+      </parallel>
+    </animation>
+    
+    <animation name="deathSpiral">
+      <parallel loops="1">
+        <alpha ticks="200" from="255" to="1" profile="linear"/>
+        <turn ticks="200" from="1" to="10.0" profile="linear"/>
+      </parallel>
+    </animation>
+    
+    <animation name="alienWalk">
+      <parallel loops="0">
+          <sequence loops="0">
+	          <frames>
+	            <frame pose="alien1a" delay="50"/>
+	            <frame pose="alien1b" delay="50"/>
+	          </frames>
+          </sequence>
+	      <sequence2 loops="0">
+	        <move ticks="300" dx="1" dy="0"/>
+	        <move ticks="50" dx="0" dy="1"/>
+	        <move ticks="300" dx="-1" dy="0"/>
+	        <move ticks="50" dx="0" dy="1"/>
+	      </sequence2>
+      </parallel>
+    </animation>
+    
+  </animations>
+  
+  <costumes>
+  
+    <costume name="alien3">
+      <pose name="default" pose="alien3a"/>
+      <animation name="death" animation="deathSpiral"/>
+    </costume>
+
+    <costume name="alien2">
+      <pose name="default" pose="alien2a"/>
+      <animation name="death" animation="deathSpiral"/>
+    </costume>
+
+    <costume name="alien1">
+      <pose name="default" pose="alien1a"/>
+      <animation name="death" animation="alienWalk"/>
+    </costume>
+
+    <costume name="bomb">
+      <pose name="default" pose="bomb1"/>
+      <animation name="default" animation="bomb"/>
+      <animation name="death" animation="bomb"/>
+    </costume>
+
+  </costumes>
+  
+  <scenes>
+    <scene name="testAnimation" filename="scenes/testAnimation.xml"/>
+  </scenes>
+  
+</resources>

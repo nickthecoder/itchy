@@ -1,0 +1,234 @@
+
+What's Next
+===========
+
+
+Add Jame and Itchy to GitHub
+
+Make the main loop a little more clever, to ensure the game loop runs at a consistent speed,
+even if it as to drop frames to do so.
+    SDL has an extension which does something good???
+
+Go through each class. Replace with new idioms, such as varargs and new "for :" syntax.
+
+Check for code consistency. Use self everywhere. Use eclipse's syntax guides.
+
+Create diagrams and javadocs aimed at games programmers.
+
+Create a strategy for large objects.
+    Keep track of the square in the top left and bottom right of the object.
+    During update, add/remove from the squares as appropriate.
+    During touching, iterate over all squares from (topLeft.nw()) to (bottomRight.se()).
+        Need Square to know its neighbours by name. i.e. methods "n", "ne", "e", etc.
+        Also a method getNeighbour( int dx, int dy )
+       
+
+Scenery Editor
+
+    Duplicate, Copy, Paste
+
+    Fail gracefully when scene save fails - and check it can be loaded (like resource).
+    When save a scene save the resources too
+
+    Missing properties
+        start event
+        
+    Lock actors (useful for background images) - a padlock icon near a corner?
+        
+    Make it easy (single click) to create a costume for a Pose just after its been added.
+    
+    Tags in the editor? Costume would need a set of tags 
+    
+Copy resources such as a Font when selected from outside the resources folder.
+
+Costumes can have different default property values for their behaviours.
+    e.g. BulletBehaviour can have a targetTagName of "shootable" (bullet) or "killable" (bomb)
+
+Create an actor using a costume???
+    It includes creating the behaviour as defined in the costume.
+    Use this to create bombs and bullets???  
+    
+costumeScroll client height to be "maximum".
+
+scene to have a "hide mouse" attribute.
+
+Send to Matthew
+
+
+
+Soon Features
+=============
+
+Test button on Animation Editor.
+
+
+Possible Refactoring
+====================
+
+Put the surface's pixel format data into the java object (lazily?)
+
+TextBox to have an inner class for its layout rather than implement it.
+
+FlowLayout - calculateRequirements is weird
+
+
+Bugs
+====
+
+Popup windows dont center themselves when window grows. Should they?
+
+Check what happens when you load and save and reload a single non-compound animation. Is it right?
+   In the editor, the top-most animation must always be a CompoundAnimation
+
+On Remove, there is no check that the resource isn't being used by something else.
+
+Loading sounds doesn't always fail when not a sound file - bug in Jame?
+
+Scrollbar positioned to the right of the client, i.e. like horizontal layout.
+  If tables want it inside, then *they* can do the minus margins tricks.
+  
+Costumes are updated even when cancel is pressed (need to COPY the costume?)
+
+  
+Later Features
+==============
+
+PoseDecorator - Takes a Pose and decorates it, making another Pose. Appearance can have a list of
+decorators, which are applied in turn.
+   e.g. Speech bubble around text, Button images around text, drop shadows, blur
+   
+
+Giant invaders, each pixel is shot individually
+   If allowed to grow, then each pixel becomes an invader
+   Maybe invaders are fed from the saucer.
+
+If strings begin with "_", then look them up in a I18N resource
+    Will need to do the same for the editor.
+
+Stretchy NinePatches as well as clever NinePatches, which tile AND scale, so that an exact number
+of tiles are used. e.g. if the span is 3.5, then 3 tiles will be used, scaled up a little.
+As well as the "middle" behaviour (empty, tile, fill, stretch, clever), we have a behaviour for
+the edges (tile, stretch, clever).
+
+DirectionAnimation, sets the angle - similar, but not the same as turn.
+
+AlphaTransitionAnimation - moves from one Image to another by changing the alpha of each.
+
+Animations which change a Pose's offsets or other attributes
+   Would need to ensure that it is a COPY of the pose, not the one shared in Resources.
+   This could make it easier to animate a "bump" upwards.
+
+Make everything use a consistent Random, so that each game is repeatable. 
+
+Background colour rule, useful for GuiPose and table rows.
+
+Each repeatable item in a costume has a frequency, so that some appear less frequently than others.
+
+Itchy to store all events so that they can be played back
+
+New Game wizard
+
+Low CPU mode for Itchy, will allow the editor to run without large CPU usage.
+The display is only updated when the GuiPoses have been altered.
+
+Default Button (clicks itself when ENTER is hit)
+
+Cancel button (clicks itself when ESC is hit)
+
+Stretch NinePatches, as well as tiled.
+
+Multi-line text.
+
+Fullscreen 
+
+Mouse pointer on/off
+
+Later Possible Refactoring
+==========================
+
+
+The Behaviours should have the tags, because its them that have the Interface.
+Also, I could change the behaviour, and the tags would magically vanish (without the "removeAll"!
+Don't use tags for "active".
+
+Container.render should get the NinePatches to render directly onto the gc, not via a temp surface.
+RenderableInterface is rubbish. NinePatches should be told where and how large to draw themselves
+   (assuming that they can render onto a existing surface rather than needing a new surface).
+
+
+Other Thoughts
+==============
+
+Consider how to implement Asteriods' dougnut shaped universe. Is there a better solution than every
+behaviour enforcing the loops in the coordinate systems, or could all Actors be coerced to do it automatically?
+Documentation - javadocs and class diagrams
+
+
+Create special styles "firstChild", which are automagically available, but never set (they are evaluated).
+  Remove the "firstColumn" stuff from Table
+  Check it by adding horizontal lines to the tables (except the first).
+OR
+  Create a child number criteria e.g. "foo #3" is the 3rd child of a foo component.
+  So firstChild would just be "foo #1"
+  
+Mapping of keys, rather than hard-code
+    Create a GUI which any game can call upon.
+
+
+Finish DrunkInvaders
+====================
+   
+Levels / Lives / Whatever to finish the game play.
+
+Saucer to make an appearance
+
+tick/tock sounds
+
+Pixel Explosion
+    Create a list of points of the pose, create a projectile for each, and
+    expand then away at a speed proportional from their distance to the center + a little randomness,
+
+Write a script which takes a simple bitmap, enlarges it, adds the grid and fuzzy borders.
+    Create a series of poses and use FramedAnimation.
+
+
+
+Replace crufty render and render2 methods with the concept of a Graphics Context.
+To scroll, a sub-layer, push the context, alter its mapping, call the childrens render,
+then pop the context.
+
+
+Pause
+    boolean Behaviour.activeWhilePaused
+    Itchy.isPaused
+    Itchy.setPause( boolean )
+
+
+Create fake multi-threading. For example, when shot, instead of trying to do the death scene in the
+tick method (which can be tricky), let it start a new thread like so :
+if (shot) {
+    new Async( this ) {
+        public void run() {
+            for ( int i = 0; i < 3; i ++ ) {
+                getActor().setPose( "Death" + i );
+                sleep( 2 );
+            } 
+        }
+    };
+}
+
+It creates a new thread, but only one thread runs at any time, and the sleep method yields.
+
+
+Appearance optimised so that it doesn't need to re-render the appearance to get the worldRectangle
+    Maybe calculate the maximum rectangle for the Pose for any rotation
+    When asked for its wordRect, if cached, returned that, other wise if direction == 0, return pose.rectangle * scale, otherwise return maximum rect * scale   
+
+Tile optimisation for collision detection and/or redraw optimisation.
+   When things are placed in the world, calculate which tile they overlap and/or which tile their
+   center is on. Allow for easy iteration over all objects within nearby tiles.
+
+
+
+Create a handful of simple, short games showing off how little code it takes to write a fun game.
+    

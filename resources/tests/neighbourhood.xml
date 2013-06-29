@@ -1,0 +1,20 @@
+<resources>
+  <poses>
+    <pose name="30x30" filename="30x30.png"/>
+    <pose name="10x30" filename="10x30.png"/>
+    <pose name="30x10" filename="30x10.png"/>
+  </poses>
+  <costumes>
+    <costume name="30x30">
+      <pose name="default" pose="30x30"/>
+    </costume>
+    <costume name="10x30">
+      <pose name="default" pose="10x30"/>
+    </costume>
+    <costume name="30x10">
+      <pose name="default" pose="30x10"/>
+    </costume>
+  </costumes>
+  <scenes>
+  </scenes>
+</resources>

@@ -1,0 +1,133 @@
+package uk.co.nickthecoder.itchy.neighbourhood;
+
+import java.util.Set;
+import java.util.HashSet;
+
+import uk.co.nickthecoder.itchy.Actor;
+
+/**
+    Uses a Neighbourhood to optimise Actor's overlapping and touching methods.
+    This strategy uses a grid based neighbourhood, when the actor is placed into a single
+    NeighbourhoodSquare based on the Actors x,y coordintate.
+    When checking for collisions, actors in the same square, and neighbouring squares are
+    considered. This means that all of the actors which use this strategy must not be larger than
+    the neighbourhood's square size. In fact, if an actor's origin is not its center, then the length
+    to all edges must not be larger than half the neighbourhood's square size.
+
+    It is possbile to mix and match SinglePointCollisionStrategy, and a stategy which places the actor
+    into more than one neighbourhood square (because that actor is bigger than the square size). However,
+    this other strategy hasn't been written yet! This alternative will be useful for large, static
+    actors, such as collidable scenery.
+*/
+
+public class SinglePointCollisionStrategy
+    extends ActorCollisionStrategy
+{
+    private Neighbourhood neighbourhood;
+    
+    private Square neighbourhoodSquare;
+
+    
+    public SinglePointCollisionStrategy( Actor actor, Neighbourhood neighbourhood )
+    {
+    	super( actor );
+        this.neighbourhood = neighbourhood;
+        this.update();
+    }
+    
+    public Square getSquare()
+    {
+    	return this.neighbourhoodSquare;
+    }
+    
+    public void update()
+    {
+        Square ns = this.neighbourhood.getSquare( this.actor.getX(), this.actor.getY() );
+        if (ns != this.neighbourhoodSquare ) {
+            if ( this.neighbourhoodSquare != null ) {
+                this.neighbourhoodSquare.remove( this.actor );
+            }
+            this.neighbourhoodSquare = ns;
+            this.neighbourhoodSquare.add( this.actor );
+        }
+    }
+    
+    public void remove()
+    {
+        if ( this.neighbourhoodSquare != null ) {
+            this.neighbourhoodSquare.remove( this.actor );
+            this.neighbourhoodSquare = null;
+        }
+    }
+    
+    @Override
+    public Set<Actor> overlapping( Actor source, String... tags )
+    {
+        Set<Actor> results = new HashSet<Actor>();
+
+        // System.out.println( "overlapping..." );
+        for ( Square square : this.neighbourhoodSquare.getNeighbouringSquares() ) {
+
+            System.out.println( "sqaure : " + square );
+
+        	for ( Actor actor : square.getOccupants() ) {
+
+                // System.out.println( "Actor " + actor );
+
+                if ( (actor != source) && (! results.contains( actor )) ) {
+                    for ( int i = 0; i < tags.length; i ++ ) {
+                        if ( actor.hasTag( tags[ i ] ) ) {
+
+                            // System.out.println( "Has tag" );
+
+                            //System.out.println( "Checking " + source + " vs " + actor );
+                            if ( source.overlapping( actor ) ) {
+                                // System.out.println( "is overlapping" );
+                                results.add( actor );
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        return results;
+    }
+
+    @Override
+    public Set<Actor> touching( Actor source, String... tags )
+    {
+        Set<Actor> results = new HashSet<Actor>();
+
+        // System.out.println( "overlapping..." );
+        for ( Square square : this.neighbourhoodSquare.getNeighbouringSquares() ) {
+
+            // System.out.println( "square : " + square );
+
+        	for ( Actor actor : square.getOccupants() ) {
+
+                //System.out.println( "Actor " + actor );
+
+                if ( (actor != source) && (! results.contains( actor )) ) {
+                    for ( int i = 0; i < tags.length; i ++ ) {
+                        if ( actor.hasTag( tags[ i ] ) ) {
+
+                            // System.out.println( "Has tag" );
+
+                            //System.out.println( "Checking " + source + " vs " + actor );
+                            if ( source.touching( actor ) ) {
+                                // System.out.println( "is touching" );
+                                results.add( actor );
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        return results;
+    }
+}
+
