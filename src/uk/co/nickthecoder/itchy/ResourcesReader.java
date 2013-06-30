@@ -12,6 +12,7 @@ import uk.co.nickthecoder.itchy.animation.Frame;
 import uk.co.nickthecoder.itchy.animation.FramedAnimation;
 import uk.co.nickthecoder.itchy.animation.MoveAnimation;
 import uk.co.nickthecoder.itchy.animation.Profile;
+import uk.co.nickthecoder.itchy.animation.ScaleAnimation;
 import uk.co.nickthecoder.itchy.animation.TurnAnimation;
 import uk.co.nickthecoder.itchy.util.NinePatch;
 import uk.co.nickthecoder.itchy.util.NullBehaviour;
@@ -350,6 +351,20 @@ public class ResourcesReader
             double from = childTag.getOptionalDoubleAttribute( "from", 1 );
             double to = childTag.getOptionalDoubleAttribute( "to", 0 );
             TurnAnimation ani = new TurnAnimation( ticks, profile, from, to );
+            animation.addAnimation( ani );
+        }
+        for ( Iterator<XMLTag> j = parentTag.getTags( "scale" ); j.hasNext(); ) {
+            XMLTag childTag = j.next();
+
+            String profileName = childTag.getOptionalAttribute( "profile", "linear" );
+            Profile profile = NumericAnimation.getProfile( profileName );
+            if ( profile == null ) {
+                throw new XMLException( "Unknown profile : " + profileName );
+            }
+            int ticks = childTag.getIntAttribute( "ticks" );
+            double from = childTag.getOptionalDoubleAttribute( "from", 1 );
+            double to = childTag.getOptionalDoubleAttribute( "to", 0 );
+            ScaleAnimation ani = new ScaleAnimation( ticks, profile, from, to );
             animation.addAnimation( ani );
         }
     }

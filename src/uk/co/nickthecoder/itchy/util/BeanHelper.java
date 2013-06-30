@@ -30,7 +30,8 @@ public class BeanHelper
             } catch ( NoSuchMethodException e ) {
             }
 
-            Field field = subject.getClass().getDeclaredField( attributeName );
+            Field field = subject.getClass().getField( attributeName );
+            //Field field = subject.getClass().getDeclaredField( attributeName );
             return field.get( subject );
 
         }
@@ -86,7 +87,8 @@ public class BeanHelper
             }
 
 
-            Field field = subject.getClass().getDeclaredField( attributeName );
+            Field field = subject.getClass().getField( attributeName );
+            //Field field = subject.getClass().getDeclaredField( attributeName );
             field.set( subject, value );
         }
     }

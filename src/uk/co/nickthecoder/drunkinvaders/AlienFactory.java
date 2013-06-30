@@ -27,6 +27,8 @@ public class AlienFactory extends Behaviour
 
     public double spacing = 80;
 
+    public double shootRate = 1;
+    
     private int ticks = 0;
 
     private int ticksRemaining = 0;
@@ -45,6 +47,7 @@ public class AlienFactory extends Behaviour
         list.add( new IntegerProperty<Behaviour>( "Delay per Alien", "ticksPerAlien" ) );
         list.add( new IntegerProperty<Behaviour>( "Aliens", "alienCount" ) );
         list.add( new DoubleProperty<Behaviour>( "Spacing", "spacing" ) );
+        list.add( new DoubleProperty<Behaviour>( "Shoot Rate", "shootRate" ) );
     }
 
     @Override
@@ -72,13 +75,13 @@ public class AlienFactory extends Behaviour
                 Actor alien = new Actor( costume );
                 alien.getAppearance().setDirection( this.actor.getAppearance().getDirection() - 90 );
                 AlienBehaviour alienBehaviour = new AlienBehaviour();
+                alienBehaviour.shootFactor = shootRate / 1000.0;
                 alien.moveTo( this.actor.getX() + this.aliens.size() * this.spacing, this.actor.getY() );
                 this.actor.getLayer().add( alien );
                 alien.setBehaviour( alienBehaviour );
                 alien.activate();
                 alien.event( "birth" );
                 this.aliens.add( alien );
-                DrunkInvaders.singleton.addAliens( 1 );
             }
         }
 

@@ -23,8 +23,10 @@ public class ShieldBehaviour extends Behaviour implements Shootable
 
     public void onKilled()
     {
-        this.collisionStrategy.remove();
-        this.collisionStrategy = null;
+        if ( this.collisionStrategy != null ) {
+            this.collisionStrategy.remove();
+            this.collisionStrategy = null;
+        }
     }
     
     @Override

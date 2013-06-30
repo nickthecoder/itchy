@@ -1,4 +1,19 @@
 
+2013-06-30
+==========
+Added MothershipBehaviour to drunkinvaders
+Added new type of animation : ScaleAnimation 
+Ship reload is better (realoads as soon as the previous bullet dies).
+
+2013-06-29
+==========
+OMG, I assumed the game was syncing its frame rate with the monitor frame rate.
+It wasn't, instead, it was going as fast as the CPU could manage, which is what made it
+appear as though my laptop wasn't fast enough to run the game. (It was running at 250 fps).
+Added a simplistic delay to the game loop so each frame is takes a consistant amount of time,
+and adjusted all of the drunkinvaders timings to take reflect the new frame rate. 
+
+
 2012-08-14
 ==========
 Changed all float attributes to doubles.

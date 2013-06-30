@@ -12,6 +12,7 @@ import uk.co.nickthecoder.itchy.animation.FramedAnimation;
 import uk.co.nickthecoder.itchy.animation.MoveAnimation;
 import uk.co.nickthecoder.itchy.animation.NumericAnimation;
 import uk.co.nickthecoder.itchy.animation.Profile;
+import uk.co.nickthecoder.itchy.animation.ScaleAnimation;
 import uk.co.nickthecoder.itchy.animation.TurnAnimation;
 import uk.co.nickthecoder.itchy.util.NinePatch;
 import uk.co.nickthecoder.itchy.util.NullBehaviour;
@@ -211,6 +212,15 @@ public class ResourcesWriter extends XMLWriter
             this.attribute( "from", turnAnimation.getFrom() );
             this.attribute( "to", turnAnimation.getTo() );
             this.writeProfile( turnAnimation.profile );
+            this.endTag( "turn" );
+
+        } else if ( animation instanceof ScaleAnimation ) {
+            ScaleAnimation scaleAnimation = (ScaleAnimation) animation;
+            this.beginTag( "scale" );
+            this.attribute( "ticks", scaleAnimation.ticks );
+            this.attribute( "from", scaleAnimation.getFrom() );
+            this.attribute( "to", scaleAnimation.getTo() );
+            this.writeProfile( scaleAnimation.profile );
             this.endTag( "turn" );
 
         } else {

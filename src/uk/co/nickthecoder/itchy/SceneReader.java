@@ -133,7 +133,11 @@ public class SceneReader
 
         for ( Property<Behaviour,?> property : sda.actualBehaviour.getProperties() ) {
             if ( properties.containsKey( property.access ) ) {
-                sceneActor.customProperties.put(  property.access, property.parse( properties.get( property.access ) ) );
+                try {
+                    sceneActor.customProperties.put(  property.access, property.parse( properties.get( property.access ) ) );
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
     }

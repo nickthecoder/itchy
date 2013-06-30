@@ -2,8 +2,26 @@
 What's Next
 ===========
 
+Create a debug actor, which you can print to, and therefore easily display debug info on the screen.
 
-Add Jame and Itchy to GitHub
+Add sound for the mothership
+Add sound for the mothership giving birth
+
+All behaviour can call "sleep", which will suspend its thread for the given number of millis.
+    As we are a game engine for newbies, we can't do multithreading properly.
+    Instead, make a list of all ticks which need to be done.
+        Create a new thread.
+            Have it do a tick, and remove it from the list.
+            If it calls sleep :
+                Set a flag on the current thread stating that it is a sleeper.
+                Create a new thread, and have it start at step 2 (Have it do a tick)
+                    Make it block on a "singleThread" condition.
+                Set a flag to indicate it is already ticking, so future calls to tick do nothing.
+                sleep for the given about of time.
+                Unset the amTicking flag
+                When it returns
+                
+            If it returns without sleeping, let it continue with the subsequent ticks.
 
 Make the main loop a little more clever, to ensure the game loop runs at a consistent speed,
 even if it as to drop frames to do so.

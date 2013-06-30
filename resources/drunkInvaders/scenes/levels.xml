@@ -30,4 +30,16 @@
     <property name="font" value="blackCasper"/>
     <property name="fontSize" value="32"/>
   </actor>
+  <actor costume="level" x="73" y="291" direction="0.0" start="default">
+    <property name="fontColor" value="#ea8138ff"/>
+    <property name="levelNumber" value="6"/>
+    <property name="font" value="blackCasper"/>
+    <property name="fontSize" value="32"/>
+  </actor>
+  <actor costume="level" x="173" y="288" direction="0.0" start="default">
+    <property name="fontColor" value="#ea8138ff"/>
+    <property name="levelNumber" value="7"/>
+    <property name="font" value="blackCasper"/>
+    <property name="fontSize" value="32"/>
+  </actor>
 </scene>

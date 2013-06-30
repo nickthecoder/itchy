@@ -251,8 +251,6 @@ public class Itchy
     public double getFrameRate()
     {
     	long now = System.currentTimeMillis();
-    	System.out.println( "Frames : " + frames );
-    	System.out.println( "Seconds : " + ( (now - framesStart) / 1000.0) );
     	return ((double) (frames)) / ((double) (now - framesStart) / 1000.0 );
     }
     

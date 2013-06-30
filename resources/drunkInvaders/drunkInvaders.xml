@@ -16,6 +16,7 @@
     <pose name="alien3a" filename="alien3a.png" direction="-90.0"/>
     <pose name="shield-r" filename="shield-r.png"/>
     <pose name="pixel" filename="pixel.png"/>
+    <pose name="saucer" filename="saucer.png"/>
     <pose name="ship" filename="ship.png" direction="90.0"/>
     <pose name="alien3b" filename="alien3b.png" direction="-90.0"/>
     <pose name="bomb1" filename="bomb1.png" direction="-90.0"/>
@@ -35,8 +36,8 @@
   <sounds>
     <sound name="explode" filename="sounds/explode.ogg"/>
     <sound name="ahh2" filename="sounds/ahh2.ogg"/>
-    <sound name="ricochet" filename="sounds/ricochet.ogg"/>
     <sound name="ahh1" filename="sounds/ahh1.ogg"/>
+    <sound name="ricochet" filename="sounds/ricochet.ogg"/>
     <sound name="ahh3" filename="sounds/ahh3.ogg"/>
     <sound name="fire" filename="sounds/fire.ogg"/>
   </sounds>
@@ -51,11 +52,6 @@
         <alpha ticks="40" from="0.0" to="255.0" profile="linear"/>
       </sequence>
     </animation>
-    <animation name="alien1">
-      <sequence loops="1">
-        <frames/>
-      </sequence>
-    </animation>
     <animation name="alienYell">
       <parallel loops="1">
         <move ticks="80" dx="0.0" dy="0.1" profile="unit"/>
@@ -63,7 +59,7 @@
         <turn ticks="80" from="0.0" to="2.0" profile="linear"/>
       </parallel>
     </animation>
-    <animation name="alien2">
+    <animation name="alien1">
       <sequence loops="1">
         <frames/>
       </sequence>
@@ -74,6 +70,16 @@
           <frame pose="bomb1" delay="10"/>
           <frame pose="bomb2" delay="10"/>
         </pingPong>
+      </sequence>
+    </animation>
+    <animation name="alien2">
+      <sequence loops="1">
+        <frames/>
+      </sequence>
+    </animation>
+    <animation name="grow">
+      <sequence loops="1">
+        <scale ticks="100" from="0.1" to="1.0" profile="linear"/>
       </sequence>
     </animation>
     <animation name="deathSpiral">
@@ -104,6 +110,7 @@
       <font name="speech" font="vera"/>
       <animation name="birth" animation="fadeIn"/>
       <animation name="yell" animation="alienYell"/>
+      <animation name="dropped" animation="grow"/>
       <animation name="death" animation="deathSpiral"/>
     </costume>
     <costume name="alien3" extends="alien" behaviour="uk.co.nickthecoder.drunkinvaders.AlienBehaviour">
@@ -120,6 +127,9 @@
     </costume>
     <costume name="shield-r" behaviour="uk.co.nickthecoder.drunkinvaders.ShieldBehaviour">
       <pose name="default" pose="shield-r"/>
+    </costume>
+    <costume name="saucer" behaviour="uk.co.nickthecoder.drunkinvaders.MothershipBehaviour">
+      <pose name="default" pose="saucer"/>
     </costume>
     <costume name="ship" behaviour="uk.co.nickthecoder.drunkinvaders.ShipBehaviour">
       <pose name="default" pose="ship"/>
@@ -167,12 +177,14 @@
     </costume>
   </costumes>
   <scenes>
+    <scene name="level07" filename="scenes/level07.xml"/>
+    <scene name="level06" filename="scenes/level06.xml"/>
     <scene name="levels" filename="scenes/levels.xml"/>
     <scene name="level05" filename="scenes/level05.xml"/>
-    <scene name="level04" filename="scenes/level04.xml"/>
     <scene name="menu" filename="scenes/menu.xml"/>
-    <scene name="about" filename="scenes/about.xml"/>
+    <scene name="level04" filename="scenes/level04.xml"/>
     <scene name="level03" filename="scenes/level03.xml"/>
+    <scene name="about" filename="scenes/about.xml"/>
     <scene name="level02" filename="scenes/level02.xml"/>
     <scene name="level01" filename="scenes/level01.xml"/>
     <scene name="completed" filename="scenes/completed.xml"/>

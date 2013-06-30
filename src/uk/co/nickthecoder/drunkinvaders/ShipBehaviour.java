@@ -32,6 +32,7 @@ public class ShipBehaviour extends Behaviour implements Shootable
 
     private ActorCollisionStrategy collisionStrategy;
     
+    private Actor latestBullet;
     
     @Override
     public void init()
@@ -47,8 +48,10 @@ public class ShipBehaviour extends Behaviour implements Shootable
 
     public void onKilled()
     {
-        this.collisionStrategy.remove();
-        this.collisionStrategy = null;
+        if ( this.collisionStrategy != null ) {
+            this.collisionStrategy.remove();
+            this.collisionStrategy = null;
+        }
     }
     
     @Override
@@ -74,8 +77,9 @@ public class ShipBehaviour extends Behaviour implements Shootable
 
         if ( this.recharge > 0 ) {
             this.recharge--;
-            if ( this.recharge == 0 ) {
+            if ( (this.recharge == 0) || ( (latestBullet != null) && latestBullet.isDead() ) ) {
                 this.event( "charged" );
+                this.recharge = 0;
             }
         } else {
 
@@ -116,6 +120,7 @@ public class ShipBehaviour extends Behaviour implements Shootable
         this.event( "fire" );
 
         Actor bullet = new Actor( DrunkInvaders.singleton.resources.getCostume( "bullet" ), "default" );
+        latestBullet = bullet;
         bullet.moveTo( this.actor );
         bullet.getAppearance().setDirection( this.actor.getAppearance().getDirection() );
         DrunkInvaders.singleton.mainLayer.add( bullet );

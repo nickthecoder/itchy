@@ -325,10 +325,12 @@ public class Actor
      */
     public void kill()
     {
-        this.dead = true;
-        this.behaviour.onKilled();
-        this.deactivate();
-        this.tagMembership.removeAll();
+        if ( ! this.dead ) {
+            this.dead = true;
+            this.behaviour.onKilled();
+            this.deactivate();
+            this.tagMembership.removeAll();
+        }
     }
 
     public boolean isDying()

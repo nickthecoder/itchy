@@ -21,7 +21,7 @@ import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.itchy.neighbourhood.ActorCollisionStrategy;
 import uk.co.nickthecoder.itchy.neighbourhood.Neighbourhood;
 import uk.co.nickthecoder.itchy.neighbourhood.SinglePointCollisionStrategy;
-import uk.co.nickthecoder.itchy.util.FPSBehaviour;
+import uk.co.nickthecoder.itchy.util.DoubleBehaviour;
 
 public class DrunkInvaders extends Game
 {
@@ -53,7 +53,11 @@ public class DrunkInvaders extends Game
 
     private Neighbourhood neighbourhood;
 
+    private boolean showInfo = false;
+    
     private Actor fpsActor;
+    
+    private Actor aliensRemainingActor;
     
     public DrunkInvaders()
     {
@@ -107,7 +111,7 @@ public class DrunkInvaders extends Game
     	}
     	
     	if ( ke.symbol == Keys.F2 ) {
-    		toggleFPS();
+    		toggleInfo();
     	}
     	
         if ( "levels".equals( this.sceneName ) ) {
@@ -158,17 +162,40 @@ public class DrunkInvaders extends Game
         this.metronomeCountdown--;
     }
     
-    public void toggleFPS()
+    public void toggleInfo()
     {
-    	if (fpsActor == null) {
-    		System.out.println( "Showing fps" );
-    		fpsActor = FPSBehaviour.createActor( resources.getFont("vera"),  16 );
+        showInfo = ! showInfo;
+        
+    	if ( showInfo ) {
+    	    if ( fpsActor != null ) {
+    	        fpsActor.kill();
+    	    }
+    		fpsActor = DoubleBehaviour.createFPSActor( resources.getFont("vera"),  16 );
     		fpsActor.moveTo( 60, 460 );
     		glassLayer.add( fpsActor );
     		fpsActor.activate();
+
+    		if ( aliensRemainingActor != null ) {
+    		    aliensRemainingActor.kill();
+    		}
+    		aliensRemainingActor = new DoubleBehaviour() {
+
+                @Override
+                public double getValue()
+                {
+                    return aliensRemaining;
+                }
+    		
+    		}.createActor( resources.getFont( "vera" ), 16 );
+    		aliensRemainingActor.moveTo( 60, 400 );
+    		glassLayer.add( aliensRemainingActor );
+    		aliensRemainingActor.activate();
+    		
     	} else {
-    		System.out.println( "Hiding fps" );
     		fpsActor.kill();
+    		fpsActor = null;
+    		aliensRemainingActor.kill();
+    		aliensRemainingActor = null;
     	}
     }
     
@@ -223,6 +250,13 @@ public class DrunkInvaders extends Game
 
     public void addAliens( int n )
     {
+        /*
+        try {
+            throw new Exception();
+        } catch ( Exception e ) {
+            e.printStackTrace();
+        }
+        */
         this.aliensRemaining += n;
         if ( this.aliensRemaining == 0 ) {
             this.completedLevels.add( this.levelNumber );
