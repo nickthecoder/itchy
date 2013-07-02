@@ -68,32 +68,32 @@ public class Rule
 
     public boolean matches( Component component )
     {
-        return this.matches( component, this.criteria.size() - 1 );
+        return this.matches(component, this.criteria.size() - 1);
     }
 
-    private boolean matches( Component component, int index  )
+    private boolean matches( Component component, int index )
     {
-        for ( int i = index; i >= 0; i -- ) {
-            RuleCriteria criteria = this.criteria.get( i );
+        for (int i = index; i >= 0; i--) {
+            RuleCriteria criteria = this.criteria.get(i);
 
-            if ( component == null ) {
+            if (component == null) {
                 return false;
             }
 
-            if ( criteria.wildcard ) {
+            if (criteria.wildcard) {
 
-                for ( Component parent = component; parent != null; parent = parent.getParent() ) {
-                    if ( this.matches( parent, index - 1 ) ) {
+                for (Component parent = component; parent != null; parent = parent.getParent()) {
+                    if (this.matches(parent, index - 1)) {
                         return true;
                     }
                 }
                 return false;
 
             } else {
-                if ( (criteria.style != null) && ( ! component.getStyles().contains( criteria.style ) ) ) {
+                if ((criteria.style != null) && (!component.getStyles().contains(criteria.style))) {
                     return false;
                 }
-                if ( (criteria.type != null) && ( ! criteria.type.equals( component.getType() ) ) ) {
+                if ((criteria.type != null) && (!criteria.type.equals(component.getType()))) {
                     return false;
                 }
             }
@@ -105,74 +105,72 @@ public class Rule
 
     public void apply( Component component )
     {
-        if ( this.marginTop != NOT_SET ) {
-            component.setMarginTop( this.marginTop );
+        if (this.marginTop != NOT_SET) {
+            component.setMarginTop(this.marginTop);
         }
-        if ( this.marginRight != NOT_SET ) {
-            component.setMarginRight( this.marginRight );
+        if (this.marginRight != NOT_SET) {
+            component.setMarginRight(this.marginRight);
         }
-        if ( this.marginBottom != NOT_SET ) {
-            component.setMarginBottom( this.marginBottom );
+        if (this.marginBottom != NOT_SET) {
+            component.setMarginBottom(this.marginBottom);
         }
-        if ( this.marginLeft != NOT_SET ) {
-            component.setMarginLeft( this.marginLeft );
-        }
-
-
-        if ( this.minimumWidth != NOT_SET ) {
-            component.setMinimumWidth( this.minimumWidth );
-        }
-        if ( this.minimumHeight != NOT_SET ) {
-            component.setMinimumHeight( this.minimumHeight );
-        }
-        if ( this.maximumWidth != NOT_SET ) {
-            component.setMaximumWidth( this.maximumWidth );
-        }
-        if ( this.maximumHeight != NOT_SET ) {
-            component.setMaximumHeight( this.maximumHeight );
+        if (this.marginLeft != NOT_SET) {
+            component.setMarginLeft(this.marginLeft);
         }
 
+        if (this.minimumWidth != NOT_SET) {
+            component.setMinimumWidth(this.minimumWidth);
+        }
+        if (this.minimumHeight != NOT_SET) {
+            component.setMinimumHeight(this.minimumHeight);
+        }
+        if (this.maximumWidth != NOT_SET) {
+            component.setMaximumWidth(this.maximumWidth);
+        }
+        if (this.maximumHeight != NOT_SET) {
+            component.setMaximumHeight(this.maximumHeight);
+        }
 
-        if ( component instanceof Container ) {
+        if (component instanceof Container) {
             Container container = (Container) component;
 
-            if ( this.spacing != NOT_SET ) {
-                container.setSpacing( this.spacing );
+            if (this.spacing != NOT_SET) {
+                container.setSpacing(this.spacing);
             }
 
-            if ( this.paddingTop != NOT_SET ) {
-                container.setPaddingTop( this.paddingTop );
+            if (this.paddingTop != NOT_SET) {
+                container.setPaddingTop(this.paddingTop);
             }
-            if ( this.paddingRight != NOT_SET ) {
-                container.setPaddingRight( this.paddingRight );
+            if (this.paddingRight != NOT_SET) {
+                container.setPaddingRight(this.paddingRight);
             }
-            if ( this.paddingBottom != NOT_SET ) {
-                container.setPaddingBottom( this.paddingBottom );
+            if (this.paddingBottom != NOT_SET) {
+                container.setPaddingBottom(this.paddingBottom);
             }
-            if ( this.paddingLeft != NOT_SET ) {
-                container.setPaddingLeft( this.paddingLeft );
+            if (this.paddingLeft != NOT_SET) {
+                container.setPaddingLeft(this.paddingLeft);
             }
 
         }
 
-        if ( component instanceof ImageComponent ) {
-            if ( this.image != null ) {
-                ( (ImageComponent) component ).setImage( this.image );
+        if (component instanceof ImageComponent) {
+            if (this.image != null) {
+                ((ImageComponent) component).setImage(this.image);
             }
         }
 
-        component.setFont( this.font );
+        component.setFont(this.font);
 
-        if ( this.fontSize != NOT_SET ) {
-            component.setFontSize( this.fontSize );
+        if (this.fontSize != NOT_SET) {
+            component.setFontSize(this.fontSize);
         }
 
-        component.setColor( this.color );
+        component.setColor(this.color);
 
-        if ( this.background == NO_BACKGROUND ) {
-            component.setBackground( null );
+        if (this.background == NO_BACKGROUND) {
+            component.setBackground(null);
         } else {
-            component.setBackground( this.background );
+            component.setBackground(this.background);
         }
 
     }
@@ -185,68 +183,66 @@ public class Rule
 
     public void merge( Rule other )
     {
-        if ( other.marginTop != NOT_SET ) {
+        if (other.marginTop != NOT_SET) {
             this.marginTop = other.marginTop;
         }
-        if ( other.marginRight != NOT_SET ) {
+        if (other.marginRight != NOT_SET) {
             this.marginRight = other.marginRight;
         }
-        if ( other.marginBottom != NOT_SET ) {
+        if (other.marginBottom != NOT_SET) {
             this.marginBottom = other.marginBottom;
         }
-        if ( other.marginLeft != NOT_SET ) {
+        if (other.marginLeft != NOT_SET) {
             this.marginLeft = other.marginLeft;
         }
 
-        if ( other.paddingTop != NOT_SET ) {
+        if (other.paddingTop != NOT_SET) {
             this.paddingTop = other.paddingTop;
         }
-        if ( other.paddingRight != NOT_SET ) {
+        if (other.paddingRight != NOT_SET) {
             this.paddingRight = other.paddingRight;
         }
-        if ( other.paddingBottom != NOT_SET ) {
+        if (other.paddingBottom != NOT_SET) {
             this.paddingBottom = other.paddingBottom;
         }
-        if ( other.paddingLeft != NOT_SET ) {
+        if (other.paddingLeft != NOT_SET) {
             this.paddingLeft = other.paddingLeft;
         }
 
-
-        if ( other.minimumWidth != NOT_SET ) {
+        if (other.minimumWidth != NOT_SET) {
             this.minimumWidth = other.minimumWidth;
         }
-        if ( other.minimumHeight != NOT_SET ) {
+        if (other.minimumHeight != NOT_SET) {
             this.minimumHeight = other.minimumHeight;
         }
-        if ( other.maximumWidth != NOT_SET ) {
+        if (other.maximumWidth != NOT_SET) {
             this.maximumWidth = other.maximumWidth;
         }
-        if ( other.maximumHeight != NOT_SET ) {
+        if (other.maximumHeight != NOT_SET) {
             this.maximumHeight = other.maximumHeight;
         }
 
-
-        if ( other.spacing != NOT_SET ) {
+        if (other.spacing != NOT_SET) {
             this.spacing = other.spacing;
         }
 
-        if ( other.font != null ) {
+        if (other.font != null) {
             this.font = other.font;
         }
 
-        if ( other.fontSize != NOT_SET ) {
+        if (other.fontSize != NOT_SET) {
             this.fontSize = other.fontSize;
         }
 
-        if ( other.color != null ) {
+        if (other.color != null) {
             this.color = other.color;
         }
 
-        if ( other.background != null ) {
+        if (other.background != null) {
             this.background = other.background;
         }
 
-        if ( other.image != null ) {
+        if (other.image != null) {
             this.image = other.image;
         }
 

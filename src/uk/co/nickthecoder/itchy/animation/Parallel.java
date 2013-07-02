@@ -22,20 +22,20 @@ public class Parallel implements SequenceOrParallel
     public void start( Actor actor )
     {
         this.animations.clear();
-        for ( Animation child : this.compoundAnimation.children ) {
+        for (Animation child : this.compoundAnimation.children) {
             Animation copy = child.copy();
-            this.animations.add( copy );
-            copy.start( actor );
+            this.animations.add(copy);
+            copy.start(actor);
         }
     }
 
     @Override
     public void tick( Actor actor )
     {
-        for ( Iterator<Animation> i = this.animations.iterator(); i.hasNext(); ) {
+        for (Iterator<Animation> i = this.animations.iterator(); i.hasNext();) {
             Animation child = i.next();
-            child.tick( actor );
-            if ( child.isFinished() ) {
+            child.tick(actor);
+            if (child.isFinished()) {
                 i.remove();
             }
         }
@@ -54,7 +54,7 @@ public class Parallel implements SequenceOrParallel
         try {
             result = (SequenceOrParallel) super.clone();
 
-        } catch ( CloneNotSupportedException e ) {
+        } catch (CloneNotSupportedException e) {
             e.printStackTrace();
             return null;
         }

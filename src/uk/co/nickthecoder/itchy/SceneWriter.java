@@ -14,11 +14,10 @@ public class SceneWriter extends XMLWriter
         this.sceneResource = sceneResource;
     }
 
-    public void write( String filename )
-            throws Exception
+    public void write( String filename ) throws Exception
     {
 
-        this.begin( filename );
+        this.begin(filename);
 
         try {
 
@@ -29,57 +28,56 @@ public class SceneWriter extends XMLWriter
         }
     }
 
-    private void writeResources()
-            throws XMLException
+    private void writeResources() throws XMLException
     {
-        this.beginTag( "scene" );
+        this.beginTag("scene");
 
         this.writeActors();
 
-        this.endTag( "scene" );
+        this.endTag("scene");
     }
 
-    private void writeActors()
-            throws XMLException
+    private void writeActors() throws XMLException
     {
         // this.beginTag( "actors" );
         Scene scene;
         ;
         try {
             scene = this.sceneResource.getScene();
-            System.out.println( "SceneWriter scene : " + scene );
-        } catch ( Exception e ) {
-            throw new XMLException( "Failed to get scene" );
+            System.out.println("SceneWriter scene : " + scene);
+        } catch (Exception e) {
+            throw new XMLException("Failed to get scene");
         }
 
-        for ( SceneActor sceneActor : scene.sceneActors ) {
+        for (SceneActor sceneActor : scene.sceneActors) {
 
-            if ( sceneActor instanceof CostumeSceneActor ) {
+            if (sceneActor instanceof CostumeSceneActor) {
 
                 CostumeSceneActor csa = (CostumeSceneActor) sceneActor;
-                this.beginTag( "actor" );
-                this.attribute( "costume", this.sceneResource.resources.getCostumeName( csa.costume ) );
-                this.writeSceneActorAttributes( sceneActor );
+                this.beginTag("actor");
+                this.attribute("costume", this.sceneResource.resources.getCostumeName(csa.costume));
+                this.writeSceneActorAttributes(sceneActor);
 
-                if ( (csa.costume.behaviourClassName==null) || (! csa.costume.behaviourClassName.equals( csa.behaviourClassName)) )  {
-                    this.attribute( "behaviour", sceneActor.behaviourClassName );
+                if ((csa.costume.behaviourClassName == null) ||
+                        (!csa.costume.behaviourClassName.equals(csa.behaviourClassName))) {
+                    this.attribute("behaviour", sceneActor.behaviourClassName);
                 }
 
-                this.endTag( "actor" );
+                this.endTag("actor");
 
-            } else if ( sceneActor instanceof TextSceneActor ) {
+            } else if (sceneActor instanceof TextSceneActor) {
                 TextSceneActor tsa = (TextSceneActor) sceneActor;
-                this.beginTag( "text" );
-                this.attribute( "text", tsa.text );
-                this.attribute( "font", this.sceneResource.resources.getFontName( tsa.font ) );
-                this.attribute( "size", tsa.fontSize );
-                this.attribute( "color", tsa.color.getRGBCode() );
-                if ( ! NullBehaviour.class.getName().equals( sceneActor.behaviourClassName ) ) {
-                    this.attribute( "behaviour", sceneActor.behaviourClassName );
+                this.beginTag("text");
+                this.attribute("text", tsa.text);
+                this.attribute("font", this.sceneResource.resources.getFontName(tsa.font));
+                this.attribute("size", tsa.fontSize);
+                this.attribute("color", tsa.color.getRGBCode());
+                if (!NullBehaviour.class.getName().equals(sceneActor.behaviourClassName)) {
+                    this.attribute("behaviour", sceneActor.behaviourClassName);
                 }
-                this.writeSceneActorAttributes( sceneActor );
+                this.writeSceneActorAttributes(sceneActor);
 
-                this.endTag( "text" );
+                this.endTag("text");
             }
 
         }
@@ -87,31 +85,34 @@ public class SceneWriter extends XMLWriter
         // this.endTag( "actors" );
     }
 
-    private void writeSceneActorAttributes( SceneActor sceneActor )
-            throws XMLException
+    private void writeSceneActorAttributes( SceneActor sceneActor ) throws XMLException
     {
-        this.attribute( "x", sceneActor.x );
-        this.attribute( "y", sceneActor.y );
-        this.attribute( "direction", sceneActor.direction );
-        this.attribute( "start", sceneActor.startEvent );
+        this.attribute("x", sceneActor.x);
+        this.attribute("y", sceneActor.y);
+        this.attribute("direction", sceneActor.direction);
+        this.attribute("start", sceneActor.startEvent);
 
-        if ( sceneActor.colorize != null ) {
-            this.attribute( "colorize", sceneActor.colorize.getRGBACode() );
+        if (sceneActor.colorize != null) {
+            this.attribute("colorize", sceneActor.colorize.getRGBACode());
         }
 
-        if ( sceneActor.scale != 1 ) {
-            this.attribute( "scale", sceneActor.scale );
+        if (sceneActor.scale != 1) {
+            this.attribute("scale", sceneActor.scale);
         }
 
-        for ( String key : sceneActor.customProperties.keySet() ) {
-            Object value = sceneActor.customProperties.get( key );
+        if (sceneActor.activationDelay != 0) {
+            this.attribute("activationDelay", sceneActor.activationDelay);
+        }
+        
+        for (String key : sceneActor.customProperties.keySet()) {
+            Object value = sceneActor.customProperties.get(key);
 
-            String stringValue = this.getPropertyValue( value );
-            if ( stringValue != null ) {
-                this.beginTag(  "property" );
-                this.attribute( "name", key );
-                this.attribute( "value", stringValue );
-                this.endTag( "property" );
+            String stringValue = this.getPropertyValue(value);
+            if (stringValue != null) {
+                this.beginTag("property");
+                this.attribute("name", key);
+                this.attribute("value", stringValue);
+                this.endTag("property");
             }
         }
 
@@ -119,16 +120,16 @@ public class SceneWriter extends XMLWriter
 
     private String getPropertyValue( Object value )
     {
-        if ( (value instanceof String) || (value instanceof Double) || (value instanceof Integer) ) {
-            return String.valueOf( value );
+        if ((value instanceof String) || (value instanceof Double) || (value instanceof Integer)) {
+            return String.valueOf(value);
 
-        } else if ( value instanceof RGBA ) {
+        } else if (value instanceof RGBA) {
             return ((RGBA) value).getRGBACode();
 
-        } else if ( value instanceof Font ) {
+        } else if (value instanceof Font) {
 
             Font font = (Font) value;
-            String fontName = this.sceneResource.resources.getFontName( font );
+            String fontName = this.sceneResource.resources.getFontName(font);
             return fontName;
         }
 

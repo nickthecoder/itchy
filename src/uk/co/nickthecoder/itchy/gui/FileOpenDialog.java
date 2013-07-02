@@ -19,21 +19,20 @@ public class FileOpenDialog extends Window
 
     public FileOpenDialog()
     {
-        this( "Open" );
-        this.clientArea.setLayout( new VerticalLayout() );
-        this.clientArea.setFill( true, true );
+        this("Open");
+        this.clientArea.setLayout(new VerticalLayout());
+        this.clientArea.setFill(true, true);
 
         this.ancestors = new Container();
-        this.ancestors.addStyle( "buttonBar" );
-        this.clientArea.addChild( this.ancestors );
+        this.ancestors.addStyle("buttonBar");
+        this.clientArea.addChild(this.ancestors);
 
         List<TableModelColumn> columns = new ArrayList<TableModelColumn>();
-        TableModelColumn nameColumn = new TableModelColumn( "Name", 1, 300 );
-        columns.add( nameColumn );
+        TableModelColumn nameColumn = new TableModelColumn("Name", 1, 300);
+        columns.add(nameColumn);
         this.tableModel = new SimpleTableModel();
-        this.table = new Table( this.tableModel, columns );
-        this.table.addTableListener( new TableListener()
-        {
+        this.table = new Table(this.tableModel, columns);
+        this.table.addTableListener(new TableListener() {
             @Override
             public void onRowSelected( TableRow tableRow )
             {
@@ -44,47 +43,45 @@ public class FileOpenDialog extends Window
             {
                 FileOpenDialog.this.onOk();
             }
-        } );
+        });
 
-        this.clientArea.addChild( this.table );
+        this.clientArea.addChild(this.table);
 
-        this.message = new Label( " " );
-        this.message.setVisible( false );
-        this.message.addStyle( "error" );
-        this.clientArea.addChild( this.message );
+        this.message = new Label(" ");
+        this.message.setVisible(false);
+        this.message.addStyle("error");
+        this.clientArea.addChild(this.message);
 
         Container buttonBar = new Container();
-        buttonBar.addStyle( "buttonBar" );
-        buttonBar.setXAlignment( 0.5f );
-        this.clientArea.addChild( buttonBar );
+        buttonBar.addStyle("buttonBar");
+        buttonBar.setXAlignment(0.5f);
+        this.clientArea.addChild(buttonBar);
 
-        Button ok = new Button( "Ok" );
-        ok.addActionListener( new ActionListener()
-        {
+        Button ok = new Button("Ok");
+        ok.addActionListener(new ActionListener() {
             @Override
             public void action()
             {
                 FileOpenDialog.this.onOk();
             }
-        } );
-        buttonBar.addChild( ok );
+        });
+        buttonBar.addChild(ok);
 
-        Button cancel = new Button( "Cancel" );
-        cancel.addActionListener( new ActionListener()
-        {
+        Button cancel = new Button("Cancel");
+        cancel.addActionListener(new ActionListener() {
             @Override
             public void action()
             {
                 FileOpenDialog.this.onCancel();
             }
-        } );
-        buttonBar.addChild( cancel );
+        });
+        buttonBar.addChild(cancel);
 
     }
 
     public FileOpenDialog( String title )
     {
-        super( title );
+        super(title);
     }
 
     public void setDirectory( File directory )
@@ -93,60 +90,59 @@ public class FileOpenDialog extends Window
         this.tableModel.clear();
 
         File[] children = this.directory.listFiles();
-        Arrays.sort( children );
+        Arrays.sort(children);
 
-        for ( File child : children ) {
-            if ( child.isDirectory() ) {
-                this.addFile( child );
+        for (File child : children) {
+            if (child.isDirectory()) {
+                this.addFile(child);
             }
         }
-        for ( File child : children ) {
-            if ( child.isFile() ) {
-                this.addFile( child );
+        for (File child : children) {
+            if (child.isFile()) {
+                this.addFile(child);
             }
         }
 
         this.table.reset();
 
         this.ancestors.clear();
-        this.addAncestor( directory );
+        this.addAncestor(directory);
     }
 
     private void addAncestor( final File directory )
     {
-        if ( directory.getParentFile() != null ) {
-            this.addAncestor( directory.getParentFile() );
+        if (directory.getParentFile() != null) {
+            this.addAncestor(directory.getParentFile());
         }
-        Button button = new Button( directory.getName() );
-        button.addActionListener( new ActionListener()
-        {
+        Button button = new Button(directory.getName());
+        button.addActionListener(new ActionListener() {
             @Override
             public void action()
             {
-                FileOpenDialog.this.setDirectory( directory );
+                FileOpenDialog.this.setDirectory(directory);
             }
-        } );
-        this.ancestors.addChild( button );
+        });
+        this.ancestors.addChild(button);
     }
 
     private void addFile( File child )
     {
-        if ( !child.isHidden() ) {
+        if (!child.isHidden()) {
             SimpleTableModelRow row = new SimpleTableModelRow();
-            row.add( child );
-            row.add( child.getName() );
-            this.tableModel.addRow( row );
+            row.add(child);
+            row.add(child.getName());
+            this.tableModel.addRow(row);
         }
     }
 
     public void setMessage( String message )
     {
-        if ( this.message == null ) {
-            this.message.setText( " " );
-            this.message.setVisible( false );
+        if (this.message == null) {
+            this.message.setText(" ");
+            this.message.setVisible(false);
         } else {
-            this.message.setText( message );
-            this.message.setVisible( true );
+            this.message.setText(message);
+            this.message.setVisible(true);
         }
         this.forceLayout();
     }
@@ -154,29 +150,28 @@ public class FileOpenDialog extends Window
     private void onOk()
     {
         TableModelRow row = this.table.getCurrentTableModelRow();
-        if ( row == null ) {
+        if (row == null) {
             return;
         }
 
-        File file = (File) row.getData( 0 );
-        if ( file.isDirectory() ) {
-            this.setDirectory( file );
+        File file = (File) row.getData(0);
+        if (file.isDirectory()) {
+            this.setDirectory(file);
         } else {
-            this.onChosen( file );
+            this.onChosen(file);
         }
     }
 
     private void onCancel()
     {
-        this.onChosen( null );
+        this.onChosen(null);
     }
 
     /**
-     * Called when the user has finished with the dialog, either by Ok or
-     * Cancel.
-     *
+     * Called when the user has finished with the dialog, either by Ok or Cancel.
+     * 
      * @param file
-     *            The file that was chosen or null if no file were chosen.
+     *        The file that was chosen or null if no file were chosen.
      */
     protected void onChosen( File file )
     {

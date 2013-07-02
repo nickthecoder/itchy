@@ -14,9 +14,9 @@ public class DoubleBoxSynchronizer implements ComponentChangeListener
         this.subject = subject;
         this.propertyName = propertyName;
 
-        doubleBox.addChangeListener( this );
+        doubleBox.addChangeListener(this);
         try {
-            doubleBox.setValue( (Double) BeanHelper.getProperty( subject, propertyName) );
+            doubleBox.setValue((Double) BeanHelper.getProperty(subject, propertyName));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -26,8 +26,8 @@ public class DoubleBoxSynchronizer implements ComponentChangeListener
     public void changed()
     {
         try {
-            BeanHelper.setProperty( this.subject, this.propertyName, this.doubleBox.getText() );
-        } catch ( Exception e ) {
+            BeanHelper.setProperty(this.subject, this.propertyName, this.doubleBox.getText());
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

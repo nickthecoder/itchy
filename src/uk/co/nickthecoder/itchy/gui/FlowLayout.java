@@ -11,18 +11,21 @@ public class FlowLayout implements Layout
 
         List<Component> children = container.getChildren();
 
-        for ( Component child : children ) {
-            if ( child.isVisible() ) {
+        for (Component child : children) {
+            if (child.isVisible()) {
 
-                int tempHeight = child.getRequiredHeight() + child.getMarginTop() + child.getMarginBottom();
-                if ( tempHeight > maxHeight ) {
+                int tempHeight = child.getRequiredHeight() + child.getMarginTop() +
+                        child.getMarginBottom();
+                if (tempHeight > maxHeight) {
                     maxHeight = tempHeight;
                 }
             }
         }
 
-        container.setNaturalWidth( 100 ); //requiredSum + container.getPaddingLeft() + container.getPaddingRight() );
-        container.setNaturalHeight( maxHeight + container.getPaddingTop() + container.getPaddingBottom() );
+        container.setNaturalWidth(100); // requiredSum + container.getPaddingLeft() +
+                                        // container.getPaddingRight() );
+        container.setNaturalHeight(maxHeight + container.getPaddingTop() +
+                container.getPaddingBottom());
     }
 
     @Override
@@ -38,25 +41,25 @@ public class FlowLayout implements Layout
 
         List<Component> children = container.getChildren();
 
-        for ( Component child : children ) {
+        for (Component child : children) {
             int width = child.getRequiredWidth();
             int height = child.getRequiredHeight();
 
-            if ( ( x != left ) && ( x + width > right ) ) {
+            if ((x != left) && (x + width > right)) {
                 x = left;
                 y += container.getSpacing() + maxHeight;
                 maxHeight = 0;
             }
 
-            child.setPosition( x, y, width, height );
+            child.setPosition(x, y, width, height);
             x += width + container.getSpacing();
 
-            if ( height > maxHeight ) {
+            if (height > maxHeight) {
                 maxHeight = height;
             }
         }
 
-        container.setNaturalHeight( y + maxHeight + container.getPaddingBottom() );
+        container.setNaturalHeight(y + maxHeight + container.getPaddingBottom());
 
     }
 

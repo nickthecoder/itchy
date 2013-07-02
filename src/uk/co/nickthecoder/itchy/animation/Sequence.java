@@ -19,19 +19,21 @@ public class Sequence implements SequenceOrParallel
     public void start( Actor actor )
     {
         this.index = 0;
-        this.currentAnimation = this.compoundAnimation.children.get( this.index );
-        this.currentAnimation.start( actor );
+        this.currentAnimation = this.compoundAnimation.children.get(this.index);
+        if ( this.currentAnimation != null ) {
+            this.currentAnimation.start(actor);
+        }
     }
 
     @Override
     public void tick( Actor actor )
     {
-        this.currentAnimation.tick( actor );
-        if ( this.currentAnimation.isFinished() ) {
+        this.currentAnimation.tick(actor);
+        if (this.currentAnimation.isFinished()) {
             this.index++;
-            if ( this.index < this.compoundAnimation.children.size() ) {
-                this.currentAnimation = this.compoundAnimation.children.get( this.index );
-                this.currentAnimation.start( actor );
+            if (this.index < this.compoundAnimation.children.size()) {
+                this.currentAnimation = this.compoundAnimation.children.get(this.index);
+                this.currentAnimation.start(actor);
             } else {
                 this.currentAnimation = null;
             }
@@ -51,7 +53,7 @@ public class Sequence implements SequenceOrParallel
         try {
             result = (SequenceOrParallel) super.clone();
 
-        } catch ( CloneNotSupportedException e ) {
+        } catch (CloneNotSupportedException e) {
             e.printStackTrace();
             return null;
         }

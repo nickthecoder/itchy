@@ -10,15 +10,15 @@ public abstract class NumericAnimation extends AbstractAnimation
 
     public static final Profile linear = new LinearProfile();
     public static final Profile bounce = new BounceProfile();
-    public static final Profile unit = new ConstantProfile( 1 );
+    public static final Profile unit = new ConstantProfile(1);
 
     public static HashMap<String, Profile> getProfiles()
     {
-        if ( profiles == null ) {
+        if (profiles == null) {
             profiles = new HashMap<String, Profile>();
-            profiles.put( "linear", linear );
-            profiles.put( "bounce", bounce );
-            profiles.put( "unit", unit );
+            profiles.put("linear", linear);
+            profiles.put("bounce", bounce);
+            profiles.put("unit", unit);
         }
 
         return profiles;
@@ -26,13 +26,13 @@ public abstract class NumericAnimation extends AbstractAnimation
 
     public static Profile getProfile( String name )
     {
-        return getProfiles().get( name );
+        return getProfiles().get(name);
     }
 
     public static String getProfileName( Profile profile )
     {
-        for ( String name : getProfiles().keySet() ) {
-            if ( getProfiles().get( name ) == profile ) {
+        for (String name : getProfiles().keySet()) {
+            if (getProfiles().get(name) == profile) {
                 return name;
             }
         }
@@ -54,7 +54,7 @@ public abstract class NumericAnimation extends AbstractAnimation
 
     public String getProfileName()
     {
-        return getProfileName( this.profile );
+        return getProfileName(this.profile);
     }
 
     @Override
@@ -66,11 +66,11 @@ public abstract class NumericAnimation extends AbstractAnimation
     @Override
     public void tick( Actor actor )
     {
-        double amount = this.currentFrame / (double) (this.ticks -1);
-        this.tick( actor, this.profile.amount( amount ) );
+        double amount = this.currentFrame / (double) (this.ticks - 1);
+        this.tick(actor, this.profile.amount(amount));
         this.currentFrame++;
 
-        super.tick( actor );
+        super.tick(actor);
     }
 
     @Override

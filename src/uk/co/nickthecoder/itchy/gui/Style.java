@@ -8,7 +8,7 @@ public class Style
 
     static {
 
-        defaultFont = new Font( "drunkInvaders/fonts/Vera/Vera.ttf" );
+        defaultFont = new Font("drunkInvaders/fonts/Vera/Vera.ttf");
 
     }
 

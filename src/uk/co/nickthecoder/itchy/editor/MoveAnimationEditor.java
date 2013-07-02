@@ -1,7 +1,7 @@
 package uk.co.nickthecoder.itchy.editor;
 
-import uk.co.nickthecoder.itchy.animation.NumericAnimation;
 import uk.co.nickthecoder.itchy.animation.MoveAnimation;
+import uk.co.nickthecoder.itchy.animation.NumericAnimation;
 import uk.co.nickthecoder.itchy.animation.Profile;
 import uk.co.nickthecoder.itchy.gui.DoubleBox;
 import uk.co.nickthecoder.itchy.gui.GridLayout;
@@ -18,7 +18,7 @@ public class MoveAnimationEditor extends AnimationEditor
 
     public MoveAnimationEditor( Editor editor, MoveAnimation animation )
     {
-        super( editor, animation );
+        super(editor, animation);
     }
 
     @Override
@@ -26,17 +26,18 @@ public class MoveAnimationEditor extends AnimationEditor
     {
         MoveAnimation moveAnimation = (MoveAnimation) this.animation;
 
-        this.txtTicks = new IntegerBox( moveAnimation.ticks );
-        gridLayout.addRow( new Label( "Duration" ), Editor.addHint( this.txtTicks, "frames" ) );
+        this.txtTicks = new IntegerBox(moveAnimation.ticks);
+        gridLayout.addRow(new Label("Duration"), Editor.addHint(this.txtTicks, "frames"));
 
-        this.pickProfile = new PickerButton<Profile>( "Profile", moveAnimation.profile, NumericAnimation.getProfiles() );
-        gridLayout.addRow( new Label( "Profile" ), this.pickProfile );
+        this.pickProfile = new PickerButton<Profile>("Profile", moveAnimation.profile,
+                NumericAnimation.getProfiles());
+        gridLayout.addRow(new Label("Profile"), this.pickProfile);
 
-        this.txtDx = new DoubleBox( moveAnimation.dx );
-        gridLayout.addRow( new Label( "Delta X" ), Editor.addHint( this.txtDx, "pixels per frame" ) );
+        this.txtDx = new DoubleBox(moveAnimation.dx);
+        gridLayout.addRow(new Label("Delta X"), Editor.addHint(this.txtDx, "pixels per frame"));
 
-        this.txtDy = new DoubleBox( moveAnimation.dy );
-        gridLayout.addRow( new Label( "Delta Y" ), Editor.addHint( this.txtDy, "pixels per frame" ) );
+        this.txtDy = new DoubleBox(moveAnimation.dy);
+        gridLayout.addRow(new Label("Delta Y"), Editor.addHint(this.txtDy, "pixels per frame"));
     }
 
     @Override

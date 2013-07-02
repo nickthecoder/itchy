@@ -53,7 +53,7 @@ public class Container extends Component
         this.naturalHeight = NOT_SET;
 
         this.children = new ArrayList<Component>();
-        this.readOnlyChildren = Collections.unmodifiableList( this.children );
+        this.readOnlyChildren = Collections.unmodifiableList(this.children);
         this.layout = new HorizontalLayout();
         this.type = "container";
     }
@@ -65,8 +65,8 @@ public class Container extends Component
 
     public void addChild( Component child )
     {
-        assert ( child.parent == null ) : "Component already has a parent";
-        this.children.add( child );
+        assert (child.parent == null) : "Component already has a parent";
+        this.children.add(child);
         child.parent = this;
         this.forceLayout();
         child.reStyle();
@@ -74,8 +74,8 @@ public class Container extends Component
 
     public void removeChild( Component child )
     {
-        assert ( child.parent == this );
-        this.children.remove( child );
+        assert (child.parent == this);
+        this.children.remove(child);
         child.parent = null;
         this.forceLayout();
     }
@@ -89,7 +89,7 @@ public class Container extends Component
 
     public void setPaddingTop( int value )
     {
-        if ( this.paddingTop != value ) {
+        if (this.paddingTop != value) {
             this.paddingTop = value;
             this.forceLayout();
         }
@@ -97,7 +97,7 @@ public class Container extends Component
 
     public void setPaddingRight( int value )
     {
-        if ( this.paddingRight != value ) {
+        if (this.paddingRight != value) {
             this.paddingRight = value;
             this.forceLayout();
         }
@@ -105,7 +105,7 @@ public class Container extends Component
 
     public void setPaddingBottom( int value )
     {
-        if ( this.paddingBottom != value ) {
+        if (this.paddingBottom != value) {
             this.paddingBottom = value;
             this.forceLayout();
         }
@@ -113,7 +113,7 @@ public class Container extends Component
 
     public void setPaddingLeft( int value )
     {
-        if ( this.paddingLeft != value ) {
+        if (this.paddingLeft != value) {
             this.paddingLeft = value;
             this.forceLayout();
         }
@@ -146,7 +146,7 @@ public class Container extends Component
 
     public void setSpacing( int value )
     {
-        if ( this.spacing != value ) {
+        if (this.spacing != value) {
             this.spacing = value;
             this.forceLayout();
         }
@@ -182,10 +182,10 @@ public class Container extends Component
 
     public void ensureLayedOut()
     {
-        if ( !this.layedOut ) {
-            if ( this.layout != null ) {
-                this.layout.calculateRequirements( this );
-                this.layout.layout( this );
+        if (!this.layedOut) {
+            if (this.layout != null) {
+                this.layout.calculateRequirements(this);
+                this.layout.layout(this);
             }
             this.requirementsCalculated = true;
             this.layedOut = true;
@@ -196,7 +196,7 @@ public class Container extends Component
     {
         this.requirementsCalculated = false;
         this.layedOut = false;
-        if ( this.parent != null ) {
+        if (this.parent != null) {
             this.parent.forceLayout();
         }
     }
@@ -205,45 +205,44 @@ public class Container extends Component
     {
         boolean found = from == null;
 
-        for ( Component child : Reversed.list( this.children ) ) {
+        for (Component child : Reversed.list(this.children)) {
 
-            if ( found ) {
+            if (found) {
 
-                if ( child == stop ) {
+                if (child == stop) {
                     return true;
                 }
 
-                if ( child.isVisible() ) {
+                if (child.isVisible()) {
 
-                    if ( child.canFocus() ) {
+                    if (child.canFocus()) {
                         child.focus();
                         return true;
                     }
-                    if ( child instanceof Container ) {
+                    if (child instanceof Container) {
                         Container container = (Container) child;
-                        if ( container.previousFocus( null, stop ) ) {
+                        if (container.previousFocus(null, stop)) {
                             return true;
                         }
                     }
                 }
             }
-            if ( child == from ) {
+            if (child == from) {
                 found = true;
             }
         }
 
-        if ( this.parent != null ) {
-            if ( this.parent.previousFocus( this, stop ) ) {
+        if (this.parent != null) {
+            if (this.parent.previousFocus(this, stop)) {
                 return true;
             }
         }
 
-        if ( from != null ) {
+        if (from != null) {
 
-            return this.previousFocus( null, stop );
+            return this.previousFocus(null, stop);
 
         }
-
 
         return false;
     }
@@ -252,42 +251,42 @@ public class Container extends Component
     {
         boolean found = from == null;
 
-        for ( Component child : this.children ) {
+        for (Component child : this.children) {
 
-            if ( found ) {
+            if (found) {
 
-                if ( child == stop ) {
+                if (child == stop) {
                     return true;
                 }
 
-                if ( child.isVisible() ) {
+                if (child.isVisible()) {
 
-                    if ( child.canFocus() ) {
+                    if (child.canFocus()) {
                         child.focus();
                         return true;
                     }
-                    if ( child instanceof Container ) {
+                    if (child instanceof Container) {
                         Container container = (Container) child;
-                        if ( container.nextFocus( null, stop ) ) {
+                        if (container.nextFocus(null, stop)) {
                             return true;
                         }
                     }
                 }
             }
-            if ( child == from ) {
+            if (child == from) {
                 found = true;
             }
         }
 
-        if ( this.parent != null ) {
-            if ( this.parent.nextFocus( this, stop ) ) {
+        if (this.parent != null) {
+            if (this.parent.nextFocus(this, stop)) {
                 return true;
             }
         }
 
-        if ( from != null ) {
+        if (from != null) {
 
-            return this.nextFocus( null, stop );
+            return this.nextFocus(null, stop);
 
         }
 
@@ -297,8 +296,8 @@ public class Container extends Component
 
     private void ensureRequirementsCalculated()
     {
-        if ( !this.requirementsCalculated ) {
-            this.layout.calculateRequirements( this );
+        if (!this.requirementsCalculated) {
+            this.layout.calculateRequirements(this);
         }
         this.requirementsCalculated = true;
     }
@@ -318,8 +317,7 @@ public class Container extends Component
     }
 
     /**
-     * @return True iff the child components should expand to fill the
-     *         containers full width
+     * @return True iff the child components should expand to fill the containers full width
      */
     public boolean getFillX()
     {
@@ -327,8 +325,7 @@ public class Container extends Component
     }
 
     /**
-     * @return True iff the child components should expand to fill the
-     *         containers full height
+     * @return True iff the child components should expand to fill the containers full height
      */
     public boolean getFillY()
     {
@@ -336,8 +333,8 @@ public class Container extends Component
     }
 
     /**
-     * Used to determine if child components should expand to fill this
-     * containers full width and height.
+     * Used to determine if child components should expand to fill this containers full width and
+     * height.
      */
     public void setFill( boolean x, boolean y )
     {
@@ -351,9 +348,9 @@ public class Container extends Component
      */
     void setNaturalWidth( int width )
     {
-        if ( width != this.naturalWidth ) {
+        if (width != this.naturalWidth) {
             this.naturalWidth = width;
-            if ( this.parent != null ) {
+            if (this.parent != null) {
                 this.parent.forceLayout();
             }
         }
@@ -364,9 +361,9 @@ public class Container extends Component
      */
     void setNaturalHeight( int height )
     {
-        if ( height != this.naturalHeight ) {
+        if (height != this.naturalHeight) {
             this.naturalHeight = height;
-            if ( this.parent != null ) {
+            if (this.parent != null) {
                 this.parent.forceLayout();
             }
         }
@@ -377,14 +374,15 @@ public class Container extends Component
     {
         this.ensureLayedOut();
 
-        super.render( gc );
+        super.render(gc);
 
-        for ( Component child : this.children ) {
-            if ( child.isVisible() ) {
-                Rect rect = new Rect( child.getX(), child.getY(), child.getWidth(), child.getHeight() );
-                GraphicsContext childGc = gc.window( rect );
-                if ( !childGc.empty() ) {
-                    child.render( childGc );
+        for (Component child : this.children) {
+            if (child.isVisible()) {
+                Rect rect = new Rect(child.getX(), child.getY(), child.getWidth(),
+                        child.getHeight());
+                GraphicsContext childGc = gc.window(rect);
+                if (!childGc.empty()) {
+                    child.render(childGc);
                 }
             }
         }
@@ -394,7 +392,7 @@ public class Container extends Component
     public void reStyle()
     {
         super.reStyle();
-        for ( Component child : this.children ) {
+        for (Component child : this.children) {
             child.reStyle();
         }
     }
@@ -402,13 +400,13 @@ public class Container extends Component
     @Override
     public boolean mouseDown( MouseButtonEvent mbe )
     {
-        ListIterator<Component> i = this.children.listIterator( this.children.size() );
-        while ( i.hasPrevious() ) {
+        ListIterator<Component> i = this.children.listIterator(this.children.size());
+        while (i.hasPrevious()) {
             Component child = i.previous();
 
-            if ( child.isVisible() ) {
+            if (child.isVisible()) {
 
-                if ( child.testMouseDown( mbe ) ) {
+                if (child.testMouseDown(mbe)) {
                     return true;
                 }
 

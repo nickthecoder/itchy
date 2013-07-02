@@ -34,7 +34,6 @@ import uk.co.nickthecoder.itchy.gui.TextBox;
 import uk.co.nickthecoder.jame.Surface;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 
-
 public class CostumesEditor extends SubEditor
 {
     private static final int EVENT_RESOURCE_COLUMN = 3;
@@ -55,33 +54,31 @@ public class CostumesEditor extends SubEditor
 
     public CostumesEditor( Editor editor )
     {
-        super( editor );
+        super(editor);
     }
 
     @Override
     public Container createPage()
     {
         Container form = super.createPage();
-        form.setFill( true, true );
+        form.setFill(true, true);
 
+        TableModelColumn name = new TableModelColumn("Name", 0, 200);
+        name.rowComparator = new SingleColumnRowComparator<String>(0);
 
-        TableModelColumn name = new TableModelColumn( "Name", 0, 200 );
-        name.rowComparator = new SingleColumnRowComparator<String>( 0 );
+        TableModelColumn extendedFrom = new TableModelColumn("Extends", 2, 200);
+        extendedFrom.rowComparator = new SingleColumnRowComparator<String>(2);
 
-        TableModelColumn extendedFrom = new TableModelColumn( "Extends", 2, 200 );
-        extendedFrom.rowComparator = new SingleColumnRowComparator<String>( 2 );
-
-        TableModelColumn image = new TableModelColumn( "\"default\" Pose", 1, 150 )
-        {
+        TableModelColumn image = new TableModelColumn("\"default\" Pose", 1, 150) {
             public Component createLabelOrImage( TableModelRow row )
             {
-                Costume costume = (Costume) row.getData( this.index );
+                Costume costume = (Costume) row.getData(this.index);
 
-                Surface surface = CostumesEditor.this.editor.resources.getThumbnail( costume );
-                if ( surface == null ) {
-                    return new Label( "none" );
+                Surface surface = CostumesEditor.this.editor.resources.getThumbnail(costume);
+                if (surface == null) {
+                    return new Label("none");
                 } else {
-                    return new ImageComponent( surface );
+                    return new ImageComponent(surface);
                 }
             }
 
@@ -89,7 +86,7 @@ public class CostumesEditor extends SubEditor
             public Component createCell( TableModelRow row )
             {
                 Container container = new Container();
-                container.addChild( this.createLabelOrImage( row ) );
+                container.addChild(this.createLabelOrImage(row));
                 return container;
             }
 
@@ -98,32 +95,32 @@ public class CostumesEditor extends SubEditor
             {
                 Container container = (Container) component;
                 container.clear();
-                container.addChild( this.createLabelOrImage( row ) );
+                container.addChild(this.createLabelOrImage(row));
             }
         };
 
         List<TableModelColumn> columns = new ArrayList<TableModelColumn>();
-        columns.add( name );
-        columns.add( extendedFrom );
-        columns.add( image );
+        columns.add(name);
+        columns.add(extendedFrom);
+        columns.add(image);
 
         TableModel model = this.createTableModel();
-        this.table = new Table( model, columns );
-        this.table.addTableListener( new AbstractTableListener() {
+        this.table = new Table(model, columns);
+        this.table.addTableListener(new AbstractTableListener() {
             @Override
             public void onRowPicked( TableRow tableRow )
             {
                 CostumesEditor.this.onEdit();
             }
 
-        } );
-        this.table.sort( 0 );
-        this.table.setFill( true, true );
-        this.table.setExpansion( 1.0 );
-        form.addChild( this.table );
+        });
+        this.table.sort(0);
+        this.table.setFill(true, true);
+        this.table.setExpansion(1.0);
+        form.addChild(this.table);
 
-        form.addChild( this.createListButtons() );
-        this.table.sort( 0 );
+        form.addChild(this.createListButtons());
+        this.table.sort(0);
 
         return form;
     }
@@ -133,10 +130,11 @@ public class CostumesEditor extends SubEditor
         SimpleTableModel model = new SimpleTableModel();
 
         String[] attributeNames = { "name", "costume", "extendedFromName" };
-        for ( String costumeName : this.editor.resources.costumeNames() ) {
-            CostumeResource costumeResource = this.editor.resources.getCostumeResource( costumeName );
-            TableModelRow row = new ReflectionTableModelRow<CostumeResource>( costumeResource, attributeNames );
-            model.addRow( row );
+        for (String costumeName : this.editor.resources.costumeNames()) {
+            CostumeResource costumeResource = this.editor.resources.getCostumeResource(costumeName);
+            TableModelRow row = new ReflectionTableModelRow<CostumeResource>(costumeResource,
+                    attributeNames);
+            model.addRow(row);
         }
         return model;
     }
@@ -144,91 +142,87 @@ public class CostumesEditor extends SubEditor
     private void rebuildTable()
     {
         TableModel model = this.createTableModel();
-        this.table.setTableModel( model );
+        this.table.setTableModel(model);
     }
-
-
 
     @Override
     protected void edit( GridLayout grid, Object resource )
     {
         this.currentCostumeResource = (CostumeResource) resource;
 
-        this.txtName = new TextBox( this.currentCostumeResource.getName() );
+        this.txtName = new TextBox(this.currentCostumeResource.getName());
 
         Costume base = this.currentCostumeResource.costume.getExtendedFrom();
-        this.labelExtendedFrom = new Label( base == null ? "None" : this.editor.resources.getCostumeResource( base )
-            .getName() );
-        this.buttonExtendedFrom = new Button( this.labelExtendedFrom )
-        {
+        this.labelExtendedFrom = new Label(base == null ? "None" : this.editor.resources
+                .getCostumeResource(base).getName());
+        this.buttonExtendedFrom = new Button(this.labelExtendedFrom) {
             @Override
             public void onClick( MouseButtonEvent e )
             {
-                CostumePicker picker = new CostumePicker( CostumesEditor.this.editor.resources, "None" )
-                {
+                CostumePicker picker = new CostumePicker(CostumesEditor.this.editor.resources,
+                        "None") {
                     @Override
                     public void pick( CostumeResource costumeResource )
                     {
-                        CostumesEditor.this.labelExtendedFrom.setText( costumeResource == null ? "None"
-                            : costumeResource.getName() );
+                        CostumesEditor.this.labelExtendedFrom
+                                .setText(costumeResource == null ? "None" : costumeResource
+                                        .getName());
                     }
                 };
                 picker.show();
             };
         };
 
-        this.txtBehaviour = new TextBox( this.currentCostumeResource.costume.behaviourClassName );
+        this.txtBehaviour = new TextBox(this.currentCostumeResource.costume.behaviourClassName);
 
-        grid.addRow( "Name", this.txtName );
-        grid.addRow( "Extends", this.buttonExtendedFrom );
-        grid.addRow( "Behaviour", this.txtBehaviour );
+        grid.addRow("Name", this.txtName);
+        grid.addRow("Extends", this.buttonExtendedFrom);
+        grid.addRow("Behaviour", this.txtBehaviour);
 
         this.eventsTable = this.createEventsTable();
-        this.eventsTable.addTableListener( new AbstractTableListener()
-        {
+        this.eventsTable.addTableListener(new AbstractTableListener() {
             @Override
             public void onRowPicked( TableRow tableRow )
             {
                 CostumesEditor.this.onEditEvent();
             }
-        } );
+        });
 
-        this.eventsTable.sort( 0 );
-        grid.addRow( "Events", this.eventsTable );
+        this.eventsTable.sort(0);
+        grid.addRow("Events", this.eventsTable);
     }
 
     private Table createEventsTable()
     {
-        TableModelColumn eventColumn = new TableModelColumn( "Event", 0, 200 );
-        eventColumn.rowComparator = new SingleColumnRowComparator<String>( 0 );
+        TableModelColumn eventColumn = new TableModelColumn("Event", 0, 200);
+        eventColumn.rowComparator = new SingleColumnRowComparator<String>(0);
 
-        TableModelColumn typeColumn = new TableModelColumn( "Type", 1, 100 );
-        typeColumn.rowComparator = new SingleColumnRowComparator<String>( 0 );
+        TableModelColumn typeColumn = new TableModelColumn("Type", 1, 100);
+        typeColumn.rowComparator = new SingleColumnRowComparator<String>(0);
 
-        TableModelColumn nameColumn = new TableModelColumn( "Resource", 2, 200 );
-        nameColumn.rowComparator = new SingleColumnRowComparator<String>( 0 );
+        TableModelColumn nameColumn = new TableModelColumn("Resource", 2, 200);
+        nameColumn.rowComparator = new SingleColumnRowComparator<String>(0);
 
-        TableModelColumn previewColumn = new TableModelColumn( "", 3, 100 ) {
+        TableModelColumn previewColumn = new TableModelColumn("", 3, 100) {
             public void addPlainCell( Container container, final TableModelRow row )
             {
-                final Object data = row.getData( 3 );
-                if ( data instanceof String ) {
-                    container.addChild( new Label( (String) data ) );
-                } else if ( data instanceof PoseResource ) {
+                final Object data = row.getData(3);
+                if (data instanceof String) {
+                    container.addChild(new Label((String) data));
+                } else if (data instanceof PoseResource) {
                     PoseResource resource = (PoseResource) data;
-                    container.addChild( new ImageComponent( resource.getThumbnail() ) );
-                } else if ( data instanceof SoundResource ) {
-                    Button button = new Button( "Play" );
-                    button.addActionListener( new ActionListener()
-                    {
+                    container.addChild(new ImageComponent(resource.getThumbnail()));
+                } else if (data instanceof SoundResource) {
+                    Button button = new Button("Play");
+                    button.addActionListener(new ActionListener() {
                         @Override
                         public void action()
                         {
                             SoundResource resource = (SoundResource) data;
                             resource.getSound().play();
                         }
-                    } );
-                    container.addChild( button );
+                    });
+                    container.addChild(button);
                 }
             }
 
@@ -236,27 +230,27 @@ public class CostumesEditor extends SubEditor
             public Component createCell( TableModelRow row )
             {
                 Container container = new Container();
-                this.addPlainCell( container, row  );
+                this.addPlainCell(container, row);
                 return container;
             };
 
             @Override
-            public void updateComponent(Component component, TableModelRow row)
+            public void updateComponent( Component component, TableModelRow row )
             {
                 Container container = (Container) component;
                 container.clear();
-                this.addPlainCell( container, row );
+                this.addPlainCell(container, row);
             };
         };
 
         List<TableModelColumn> columns = new ArrayList<TableModelColumn>();
-        columns.add(  eventColumn  );
-        columns.add(  typeColumn  );
-        columns.add(  nameColumn  );
-        columns.add(  previewColumn  );
+        columns.add(eventColumn);
+        columns.add(typeColumn);
+        columns.add(nameColumn);
+        columns.add(previewColumn);
 
         this.eventsTableModel = this.createEventsTableModel();
-        return new Table( this.eventsTableModel,  columns );
+        return new Table(this.eventsTableModel, columns);
 
     }
 
@@ -266,64 +260,64 @@ public class CostumesEditor extends SubEditor
 
         Costume costume = this.currentCostumeResource.costume;
 
-        for ( String name : costume.getPoseNames() ) {
-            for ( PoseResource poseResource : costume.getPoseChoices( name ) ) {
+        for (String name : costume.getPoseNames()) {
+            for (PoseResource poseResource : costume.getPoseChoices(name)) {
 
                 SimpleTableModelRow row = new SimpleTableModelRow();
-                row.add( name );
-                row.add( "Pose" );
-                row.add( poseResource.getName() );
-                row.add( poseResource );
+                row.add(name);
+                row.add("Pose");
+                row.add(poseResource.getName());
+                row.add(poseResource);
 
-                model.addRow( row );
+                model.addRow(row);
             }
         }
-        for ( String name : costume.getAnimationNames() ) {
-            for ( AnimationResource animationResource : costume.getAnimationChoices( name ) ) {
+        for (String name : costume.getAnimationNames()) {
+            for (AnimationResource animationResource : costume.getAnimationChoices(name)) {
 
                 SimpleTableModelRow row = new SimpleTableModelRow();
-                row.add( name );
-                row.add( "Animation" );
-                row.add( animationResource.getName() );
-                row.add( animationResource );
+                row.add(name);
+                row.add("Animation");
+                row.add(animationResource.getName());
+                row.add(animationResource);
 
-                model.addRow( row );
+                model.addRow(row);
             }
         }
-        for ( String name : costume.getSoundNames() ) {
-            for ( SoundResource soundResource : costume.getSoundChoices( name ) ) {
+        for (String name : costume.getSoundNames()) {
+            for (SoundResource soundResource : costume.getSoundChoices(name)) {
 
                 SimpleTableModelRow row = new SimpleTableModelRow();
-                row.add( name );
-                row.add( "Sound" );
-                row.add( soundResource.getName() );
-                row.add( soundResource );
+                row.add(name);
+                row.add("Sound");
+                row.add(soundResource.getName());
+                row.add(soundResource);
 
-                model.addRow( row );
+                model.addRow(row);
             }
         }
-        for ( String name : costume.getFontNames() ) {
-            for ( FontResource fontResource : costume.getFontChoices( name ) ) {
+        for (String name : costume.getFontNames()) {
+            for (FontResource fontResource : costume.getFontChoices(name)) {
 
                 SimpleTableModelRow row = new SimpleTableModelRow();
-                row.add( name );
-                row.add( "Font" );
-                row.add( fontResource.getName() );
-                row.add( fontResource );
+                row.add(name);
+                row.add("Font");
+                row.add(fontResource.getName());
+                row.add(fontResource);
 
-                model.addRow( row );
+                model.addRow(row);
             }
         }
-        for ( String name : costume.getStringNames() ) {
-            for ( String string : costume.getStringChoices( name ) ) {
+        for (String name : costume.getStringNames()) {
+            for (String string : costume.getStringChoices(name)) {
 
                 SimpleTableModelRow row = new SimpleTableModelRow();
-                row.add( name );
-                row.add( "Font" );
-                row.add( string );
-                row.add( string );
+                row.add(name);
+                row.add("Font");
+                row.add(string);
+                row.add(string);
 
-                model.addRow( row );
+                model.addRow(row);
             }
         }
 
@@ -333,70 +327,66 @@ public class CostumesEditor extends SubEditor
     @Override
     protected void addDetailButtons( Container buttons )
     {
-        Button edit = new Button( new Label( "Edit" ) );
-        edit.addActionListener( new ActionListener()
-        {
+        Button edit = new Button(new Label("Edit"));
+        edit.addActionListener(new ActionListener() {
             @Override
             public void action()
             {
                 CostumesEditor.this.onEditEvent();
             }
-        } );
-        buttons.addChild( edit );
+        });
+        buttons.addChild(edit);
 
-        Button add = new Button( new Label( "Add" ) );
-        add.addActionListener( new ActionListener()
-        {
+        Button add = new Button(new Label("Add"));
+        add.addActionListener(new ActionListener() {
             @Override
             public void action()
             {
                 CostumesEditor.this.onAddEvent();
             }
-        } );
-        buttons.addChild( add );
+        });
+        buttons.addChild(add);
 
-        Button remove = new Button( new Label( "Remove" ) );
-        remove.addActionListener( new ActionListener()
-        {
+        Button remove = new Button(new Label("Remove"));
+        remove.addActionListener(new ActionListener() {
             @Override
             public void action()
             {
                 CostumesEditor.this.onRemoveEvent();
             }
-        } );
-        buttons.addChild( remove );
+        });
+        buttons.addChild(remove);
 
-
-        super.addDetailButtons( buttons );
+        super.addDetailButtons(buttons);
     }
 
     private void onAddEvent()
     {
-        HashMap<String,Class<?>> pickList = new HashMap<String,Class<?>>();
+        HashMap<String, Class<?>> pickList = new HashMap<String, Class<?>>();
 
-        pickList.put( "String", String.class );
-        pickList.put( "Pose", PoseResource.class );
-        pickList.put( "Animation", AnimationResource.class );
-        pickList.put( "Sound", SoundResource.class );
-        pickList.put( "Font", FontResource.class );
+        pickList.put("String", String.class);
+        pickList.put("Pose", PoseResource.class);
+        pickList.put("Animation", AnimationResource.class);
+        pickList.put("Sound", SoundResource.class);
+        pickList.put("Font", FontResource.class);
 
-        Picker<Class<?>> picker = new Picker<Class<?>>( "Which Type?", pickList ) {
+        Picker<Class<?>> picker = new Picker<Class<?>>("Which Type?", pickList) {
             @Override
             public void pick( String string, Class<?> picked )
             {
-                if ( picked == String.class ) {
+                if (picked == String.class) {
                     CostumesEditor.this.onAddString();
 
-                } else if ( picked == PoseResource.class ) {
+                } else if (picked == PoseResource.class) {
                     CostumesEditor.this.onAddPose();
 
-                } else if ( picked == AnimationResource.class ) {
+                } else if (picked == AnimationResource.class) {
                     CostumesEditor.this.onAddAnimation();
 
-                } else if ( picked == SoundResource.class ) {
+                } else if (picked == SoundResource.class) {
                     CostumesEditor.this.onAddSound();
 
-                } else if ( picked == FontResource.class ) {
+                } else if (picked == FontResource.class) {
                     CostumesEditor.this.onAddFont();
                 }
 
@@ -411,12 +401,12 @@ public class CostumesEditor extends SubEditor
 
     private void onAddPose()
     {
-        PosePicker picker = new PosePicker( this.editor.resources ) {
+        PosePicker picker = new PosePicker(this.editor.resources) {
             @Override
-            public void pick(PoseResource poseResource)
+            public void pick( PoseResource poseResource )
             {
                 Costume costume = CostumesEditor.this.currentCostumeResource.costume;
-                costume.addPose( "newEvent", poseResource );
+                costume.addPose("newEvent", poseResource);
                 CostumesEditor.this.rebuiltEventTable();
             }
         };
@@ -435,18 +425,17 @@ public class CostumesEditor extends SubEditor
     {
     }
 
-
     private void onRemoveEvent()
     {
         Costume costume = this.currentCostumeResource.costume;
 
         TableModelRow row = this.eventsTable.getCurrentTableModelRow();
-        if ( row != null ) {
-            Object data = row.getData( EVENT_RESOURCE_COLUMN );
-            String name = (String) row.getData( 0 );
+        if (row != null) {
+            Object data = row.getData(EVENT_RESOURCE_COLUMN);
+            String name = (String) row.getData(0);
 
-            if ( data instanceof PoseResource ) {
-                costume.removePose( name, (PoseResource) data );
+            if (data instanceof PoseResource) {
+                costume.removePose(name, (PoseResource) data);
             }
 
             this.rebuiltEventTable();
@@ -459,55 +448,55 @@ public class CostumesEditor extends SubEditor
 
     private void rebuiltEventTable()
     {
-        this.eventsTable.setTableModel( this.createEventsTableModel() );
+        this.eventsTable.setTableModel(this.createEventsTableModel());
     }
 
     @Override
     protected void onOk()
     {
-        if ( this.adding || ( !this.txtName.getText().equals( this.currentCostumeResource.getName() ) ) ) {
-            if ( this.editor.resources.getCostumeResource( this.txtName.getText() ) != null ) {
-                this.setMessage( "That name is already being used." );
+        if (this.adding || (!this.txtName.getText().equals(this.currentCostumeResource.getName()))) {
+            if (this.editor.resources.getCostumeResource(this.txtName.getText()) != null) {
+                this.setMessage("That name is already being used.");
                 return;
             }
         }
 
-        if ( ! Behaviour.isValidClassName( this.txtBehaviour.getText() ) ) {
-            this.setMessage( "Not a valid behaviour class name" );
+        if (!Behaviour.isValidClassName(this.txtBehaviour.getText())) {
+            this.setMessage("Not a valid behaviour class name");
             return;
         }
 
         Costume oldBase = this.currentCostumeResource.costume.getExtendedFrom();
-        if ( this.labelExtendedFrom.getText().equals( "None" ) ) {
-            this.currentCostumeResource.costume.setExtendedFrom( null );
+        if (this.labelExtendedFrom.getText().equals("None")) {
+            this.currentCostumeResource.costume.setExtendedFrom(null);
         } else {
-            Costume base = this.editor.resources.getCostume( this.labelExtendedFrom.getText() );
-            this.currentCostumeResource.costume.setExtendedFrom( base );
+            Costume base = this.editor.resources.getCostume(this.labelExtendedFrom.getText());
+            this.currentCostumeResource.costume.setExtendedFrom(base);
             Costume costume = base;
-            for ( int i = 0; i < 100; i++ ) {
-                if ( costume == null ) {
+            for (int i = 0; i < 100; i++) {
+                if (costume == null) {
                     break;
                 }
                 costume = costume.getExtendedFrom();
-                if ( i == 99 ) {
-                    this.currentCostumeResource.costume.setExtendedFrom( oldBase );
-                    this.setMessage( "Bad Extends - forms a loop." );
+                if (i == 99) {
+                    this.currentCostumeResource.costume.setExtendedFrom(oldBase);
+                    this.setMessage("Bad Extends - forms a loop.");
                     return;
                 }
             }
         }
 
-        this.currentCostumeResource.rename( this.txtName.getText() );
+        this.currentCostumeResource.rename(this.txtName.getText());
 
         this.currentCostumeResource.costume.behaviourClassName = this.txtBehaviour.getText();
 
-        if ( this.adding ) {
-            this.editor.resources.addCostume( this.currentCostumeResource );
+        if (this.adding) {
+            this.editor.resources.addCostume(this.currentCostumeResource);
             this.rebuildTable();
         } else {
-            this.table.updateRow( this.table.getCurrentTableModelRow() );
+            this.table.updateRow(this.table.getCurrentTableModelRow());
         }
-        Itchy.singleton.hideWindow( this.editWindow );
+        Itchy.singleton.hideWindow(this.editWindow);
 
     }
 
@@ -516,7 +505,7 @@ public class CostumesEditor extends SubEditor
     {
         CostumeResource costumeResource = (CostumeResource) resource;
 
-        this.editor.resources.removeCostume( costumeResource.getName() );
+        this.editor.resources.removeCostume(costumeResource.getName());
         this.rebuildTable();
 
     }
@@ -524,12 +513,11 @@ public class CostumesEditor extends SubEditor
     @Override
     protected void onAdd()
     {
-        PosePicker posePicker = new PosePicker( this.editor.resources )
-        {
+        PosePicker posePicker = new PosePicker(this.editor.resources) {
             @Override
             public void pick( PoseResource poseResource )
             {
-                CostumesEditor.this.add( poseResource );
+                CostumesEditor.this.add(poseResource);
             }
         };
         posePicker.show();
@@ -538,10 +526,11 @@ public class CostumesEditor extends SubEditor
     private void add( PoseResource poseResouerce )
     {
         Costume costume = new Costume();
-        costume.addPose( "default", poseResouerce );
-        this.currentCostumeResource = new CostumeResource( this.editor.resources, poseResouerce.getName(), costume );
+        costume.addPose("default", poseResouerce);
+        this.currentCostumeResource = new CostumeResource(this.editor.resources,
+                poseResouerce.getName(), costume);
         this.adding = true;
-        this.showDetails( this.currentCostumeResource );
+        this.showDetails(this.currentCostumeResource);
 
     }
 }

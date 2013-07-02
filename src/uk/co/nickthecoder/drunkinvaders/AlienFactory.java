@@ -9,7 +9,6 @@ import uk.co.nickthecoder.itchy.Behaviour;
 import uk.co.nickthecoder.itchy.Costume;
 import uk.co.nickthecoder.itchy.util.DoubleProperty;
 import uk.co.nickthecoder.itchy.util.IntegerProperty;
-import uk.co.nickthecoder.itchy.util.Property;
 import uk.co.nickthecoder.itchy.util.StringProperty;
 
 public class AlienFactory extends Behaviour
@@ -17,84 +16,68 @@ public class AlienFactory extends Behaviour
 
     public String costumeName;
 
-    public int delay = 0;
-
-    public int greenFlag = 1300;
-
-    public int ticksPerAlien = 20;
+    public double delayPerAlien = 0.500;
 
     public int alienCount = 6;
 
     public double spacing = 80;
 
-    public double shootRate = 1;
-    
-    private int ticks = 0;
-
-    private int ticksRemaining = 0;
+    public double fireOnceEvery = 1; // The aliens' average number of seconds between bombs
 
     private List<Actor> aliens;
 
     private static Random random = new Random();
 
     @Override
-    protected void addProperties( List<Property<Behaviour, ?>> list )
+    protected void addProperties()
     {
-        super.addProperties( list );
-        list.add( new StringProperty<Behaviour>( "Costume", "costumeName" ) );
-        list.add( new IntegerProperty<Behaviour>( "Delay", "delay" ) );
-        list.add( new IntegerProperty<Behaviour>( "Green Flag", "greenFlag" ) );
-        list.add( new IntegerProperty<Behaviour>( "Delay per Alien", "ticksPerAlien" ) );
-        list.add( new IntegerProperty<Behaviour>( "Aliens", "alienCount" ) );
-        list.add( new DoubleProperty<Behaviour>( "Spacing", "spacing" ) );
-        list.add( new DoubleProperty<Behaviour>( "Shoot Rate", "shootRate" ) );
+        super.addProperties();
+
+        addProperty(new StringProperty("Costume", "costumeName"));
+        addProperty(new DoubleProperty("Delay per Alien", "delayPerAlien"));
+        addProperty(new IntegerProperty("Aliens", "alienCount"));
+        addProperty(new DoubleProperty("Spacing", "spacing"));
+        addProperty(new DoubleProperty("Fire Once Every (s)", "fireOnceEvery"));
     }
 
     @Override
     public void init()
     {
-        this.aliens = new ArrayList<Actor>( this.alienCount );
+        this.aliens = new ArrayList<Actor>(this.alienCount);
     }
 
     @Override
     public void tick()
     {
-        this.actor.getAppearance().setAlpha( 0 );
+        this.actor.getAppearance().setAlpha(0);
 
-        this.ticks++;
-        if ( this.ticks < this.delay ) {
-            return;
+        for (int i = 0; i < this.alienCount; i++) {
+            createAlien();
+            this.getActor().sleep(this.delayPerAlien);
         }
 
-        if ( this.ticksRemaining-- <= 0 ) {
-            if ( this.aliens.size() < this.alienCount ) {
-
-                this.ticksRemaining = this.ticksPerAlien;
-
-                Costume costume = DrunkInvaders.singleton.resources.getCostume( this.costumeName );
-                Actor alien = new Actor( costume );
-                alien.getAppearance().setDirection( this.actor.getAppearance().getDirection() - 90 );
-                AlienBehaviour alienBehaviour = new AlienBehaviour();
-                alienBehaviour.shootFactor = shootRate / 1000.0;
-                alien.moveTo( this.actor.getX() + this.aliens.size() * this.spacing, this.actor.getY() );
-                this.actor.getLayer().add( alien );
-                alien.setBehaviour( alienBehaviour );
-                alien.activate();
-                alien.event( "birth" );
-                this.aliens.add( alien );
-            }
+        for (Actor actor : this.aliens) {
+            Alien ab = (Alien) actor.getBehaviour();
+            ab.vx = random.nextDouble() * 2.0 + 0.2;
+            ab.vy = random.nextDouble() * 0.6;
         }
 
-        if ( this.ticks >= this.greenFlag ) {
-            this.actor.kill();
+        this.actor.kill();
+    }
 
-            for ( Actor actor : this.aliens ) {
-                AlienBehaviour ab = (AlienBehaviour) actor.getBehaviour();
-                ab.vx = random.nextDouble() * 2.0 + 0.2;
-                ab.vy = random.nextDouble() * 0.6;
-                // ab.getActor().event( "start" );
-            }
-        }
+    private void createAlien()
+    {
+        Costume costume = DrunkInvaders.singleton.resources.getCostume(this.costumeName);
+        Actor alien = new Actor(costume);
+        alien.getAppearance().setDirection(this.actor.getAppearance().getDirection() - 90);
+        Alien alienBehaviour = new Alien();
+        alienBehaviour.fireOnceEvery = this.fireOnceEvery;
+        alien.moveTo(this.actor.getX() + this.aliens.size() * this.spacing, this.actor.getY());
+        this.actor.getLayer().add(alien);
+        alien.setBehaviour(alienBehaviour);
+        alien.activate();
+        alien.event("birth");
+        this.aliens.add(alien);
 
     }
 

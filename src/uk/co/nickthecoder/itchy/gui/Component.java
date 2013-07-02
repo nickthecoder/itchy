@@ -86,7 +86,7 @@ public abstract class Component
 
     public RootContainer getRoot()
     {
-        if ( this.parent == null ) {
+        if (this.parent == null) {
             return null;
         }
         return this.parent.getRoot();
@@ -99,16 +99,16 @@ public abstract class Component
 
     public void addStyle( String style )
     {
-        if ( !this.styles.contains( style ) ) {
-            this.styles.add( style );
+        if (!this.styles.contains(style)) {
+            this.styles.add(style);
             this.reStyle();
         }
     }
 
     public void removeStyle( String style )
     {
-        if ( this.styles.contains( style ) ) {
-            this.styles.remove( style );
+        if (this.styles.contains(style)) {
+            this.styles.remove(style);
             this.reStyle();
         }
     }
@@ -117,10 +117,10 @@ public abstract class Component
     {
         try {
             RootContainer root = this.getRoot();
-            if ( root != null ) {
-                root.style( this );
+            if (root != null) {
+                root.style(this);
             }
-        } catch ( Exception e ) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -143,8 +143,8 @@ public abstract class Component
     public void focus()
     {
         RootContainer root = this.getRoot();
-        if ( root != null ) {
-            root.setFocus( this );
+        if (root != null) {
+            root.setFocus(this);
         }
     }
 
@@ -159,11 +159,11 @@ public abstract class Component
 
     public void setExpansion( double value )
     {
-        if ( value != this.expansion ) {
+        if (value != this.expansion) {
             this.expansion = value;
 
             this.invalidate();
-            if ( this.parent != null ) {
+            if (this.parent != null) {
                 this.parent.forceLayout();
             }
         }
@@ -177,7 +177,7 @@ public abstract class Component
     public void setVisible( boolean value )
     {
         this.visible = value;
-        if ( this.parent != null ) {
+        if (this.parent != null) {
             this.parent.forceLayout();
         }
     }
@@ -204,9 +204,9 @@ public abstract class Component
 
     public void setMarginTop( int value )
     {
-        if ( this.marginTop != value ) {
+        if (this.marginTop != value) {
             this.marginTop = value;
-            if ( this.parent != null ) {
+            if (this.parent != null) {
                 this.parent.forceLayout();
             }
         }
@@ -214,9 +214,9 @@ public abstract class Component
 
     public void setMarginRight( int value )
     {
-        if ( this.marginRight != value ) {
+        if (this.marginRight != value) {
             this.marginRight = value;
-            if ( this.parent != null ) {
+            if (this.parent != null) {
                 this.parent.forceLayout();
             }
         }
@@ -224,9 +224,9 @@ public abstract class Component
 
     public void setMarginBottom( int value )
     {
-        if ( this.marginBottom != value ) {
+        if (this.marginBottom != value) {
             this.marginBottom = value;
-            if ( this.parent != null ) {
+            if (this.parent != null) {
                 this.parent.forceLayout();
             }
         }
@@ -234,9 +234,9 @@ public abstract class Component
 
     public void setMarginLeft( int value )
     {
-        if ( this.marginLeft != value ) {
+        if (this.marginLeft != value) {
             this.marginLeft = value;
-            if ( this.parent != null ) {
+            if (this.parent != null) {
                 this.parent.forceLayout();
             }
         }
@@ -244,46 +244,48 @@ public abstract class Component
 
     public void setMinimumWidth( int value )
     {
-        if ( this.minimumWidth != value ) {
+        if (this.minimumWidth != value) {
             this.minimumWidth = value;
-            if ( this.parent != null ) {
+            if (this.parent != null) {
                 this.parent.forceLayout();
             }
         }
     }
+
     public void setMinimumHeight( int value )
     {
-        if ( this.minimumHeight != value ) {
+        if (this.minimumHeight != value) {
             this.minimumHeight = value;
-            if ( this.parent != null ) {
+            if (this.parent != null) {
                 this.parent.forceLayout();
             }
         }
     }
+
     public void setMaximumWidth( int value )
     {
-        if ( this.maximumWidth != value ) {
+        if (this.maximumWidth != value) {
             this.maximumWidth = value;
-            if ( this.parent != null ) {
+            if (this.parent != null) {
                 this.parent.forceLayout();
             }
         }
     }
+
     public void setMaximumHeight( int value )
     {
-        if ( this.maximumHeight != value ) {
+        if (this.maximumHeight != value) {
             this.maximumHeight = value;
-            if ( this.parent != null ) {
+            if (this.parent != null) {
                 this.parent.forceLayout();
             }
         }
     }
 
     /**
-     * Gets the required width of the component, and is based entirely on this
-     * component. It cannot be dependent on the parent's width, because that
-     * would lead to a circular dependency.
-     *
+     * Gets the required width of the component, and is based entirely on this component. It cannot
+     * be dependent on the parent's width, because that would lead to a circular dependency.
+     * 
      * @return The required width of the component
      */
     public abstract int getNaturalWidth();
@@ -292,12 +294,12 @@ public abstract class Component
 
     public int getRequiredWidth()
     {
-        return Math.min( this.maximumWidth, Math.max( this.minimumWidth, this.getNaturalWidth() ) );
+        return Math.min(this.maximumWidth, Math.max(this.minimumWidth, this.getNaturalWidth()));
     }
 
     public int getRequiredHeight()
     {
-        return Math.min( this.maximumHeight, Math.max( this.minimumHeight, this.getNaturalHeight() ) );
+        return Math.min(this.maximumHeight, Math.max(this.minimumHeight, this.getNaturalHeight()));
     }
 
     public Font getFont()
@@ -307,9 +309,9 @@ public abstract class Component
 
     public void setFont( Font font )
     {
-        if ( this.font != font ) {
+        if (this.font != font) {
             this.font = font;
-            if ( this.parent != null ) {
+            if (this.parent != null) {
                 this.parent.forceLayout();
             }
         }
@@ -322,9 +324,9 @@ public abstract class Component
 
     public void setFontSize( int fontSize )
     {
-        if ( this.fontSize != fontSize ) {
+        if (this.fontSize != fontSize) {
             this.fontSize = fontSize;
-            if ( this.parent != null ) {
+            if (this.parent != null) {
                 this.parent.forceLayout();
             }
         }
@@ -332,7 +334,7 @@ public abstract class Component
 
     public int getX()
     {
-        if ( this.parent != null ) {
+        if (this.parent != null) {
             this.parent.ensureLayedOut();
         }
         return this.x;
@@ -340,7 +342,7 @@ public abstract class Component
 
     public int getY()
     {
-        if ( this.parent != null ) {
+        if (this.parent != null) {
             this.parent.ensureLayedOut();
         }
         return this.y;
@@ -348,7 +350,7 @@ public abstract class Component
 
     public int getWidth()
     {
-        if ( this.parent != null ) {
+        if (this.parent != null) {
             this.parent.ensureLayedOut();
         }
         return this.width;
@@ -356,20 +358,19 @@ public abstract class Component
 
     public int getHeight()
     {
-        if ( this.parent != null ) {
+        if (this.parent != null) {
             this.parent.ensureLayedOut();
         }
         return this.height;
     }
 
     /**
-     * Called by the parent's layout during the layout phase. If the parent has
-     * a free-layout, then the position and size of children can be set
-     * arbitrarily by the application designer.
+     * Called by the parent's layout during the layout phase. If the parent has a free-layout, then
+     * the position and size of children can be set arbitrarily by the application designer.
      */
     public void setPosition( int x, int y, int width, int height )
     {
-        if ( ( this.x != x ) || ( this.y != y ) || ( this.width != width ) || ( this.height != height ) ) {
+        if ((this.x != x) || (this.y != y) || (this.width != width) || (this.height != height)) {
             this.x = x;
             this.y = y;
             this.width = width;
@@ -380,7 +381,7 @@ public abstract class Component
 
     public void moveTo( int x, int y )
     {
-        if ( ( this.x != x ) || ( this.y != y ) ) {
+        if ((this.x != x) || (this.y != y)) {
             this.x = x;
             this.y = y;
             this.invalidate();
@@ -390,29 +391,29 @@ public abstract class Component
     public void invalidate()
     {
         RootContainer root = this.getRoot();
-        if ( root != null ) {
+        if (root != null) {
             root.invalidate();
         }
     }
 
     protected void render( GraphicsContext gc )
     {
-        this.renderBackground( gc );
+        this.renderBackground(gc);
     }
 
     protected void renderBackground( GraphicsContext gc )
     {
-        if ( this.background != null ) {
-            Surface surface = new Surface( this.getWidth(), this.getHeight(), true );
-            this.background.render( surface );
-            gc.blit( surface, 0, 0, Surface.BlendMode.COMPOSITE );
+        if (this.background != null) {
+            Surface surface = new Surface(this.getWidth(), this.getHeight(), true);
+            this.background.render(surface);
+            gc.blit(surface, 0, 0, Surface.BlendMode.COMPOSITE);
             surface.free();
         }
     }
 
     public void setBackground( Renderable background )
     {
-        if ( this.background != background ) {
+        if (this.background != background) {
             this.background = background;
             this.invalidate();
         }
@@ -431,10 +432,10 @@ public abstract class Component
 
     public boolean hasAncestor( String type )
     {
-        for ( Iterator<Container> i = this.getAncestors(); i.hasNext(); ) {
+        for (Iterator<Container> i = this.getAncestors(); i.hasNext();) {
             Component ancestor = i.next();
 
-            if ( type.equals( ancestor.getType() ) ) {
+            if (type.equals(ancestor.getType())) {
                 return true;
             }
         }
@@ -444,10 +445,10 @@ public abstract class Component
 
     public boolean hasAncestorStyle( String style )
     {
-        for ( Iterator<Container> i = this.getAncestors(); i.hasNext(); ) {
+        for (Iterator<Container> i = this.getAncestors(); i.hasNext();) {
             Component ancestor = i.next();
 
-            if ( ancestor.getStyles().contains( style ) ) {
+            if (ancestor.getStyles().contains(style)) {
                 return true;
             }
         }
@@ -457,10 +458,10 @@ public abstract class Component
 
     public Rect getAbsolutePosition()
     {
-        Rect rect = new Rect( this.x, this.y, this.getWidth(), this.getHeight() );
+        Rect rect = new Rect(this.x, this.y, this.getWidth(), this.getHeight());
 
         Container parent = this.parent;
-        while ( parent != null ) {
+        while (parent != null) {
             rect.x += parent.getX();
             rect.y += parent.getY();
 
@@ -482,7 +483,7 @@ public abstract class Component
         @Override
         public boolean hasNext()
         {
-            return ( this.nextAncestor != null ) && ( this.nextAncestor.parent != null );
+            return (this.nextAncestor != null) && (this.nextAncestor.parent != null);
         }
 
         @Override
@@ -500,15 +501,14 @@ public abstract class Component
     }
 
     /**
-     *
+     * 
      * @param event
-     *            The mouse event, where x and y are relative to the parent
-     *            container.
+     *        The mouse event, where x and y are relative to the parent container.
      * @return
      */
     public boolean testMouseDown( MouseButtonEvent event )
     {
-        if ( this.contains2( event ) ) {
+        if (this.contains2(event)) {
 
             int dx = this.x;
             int dy = this.y;
@@ -516,7 +516,7 @@ public abstract class Component
             event.x -= dx;
             event.y -= dy;
             try {
-                return this.mouseDown( event );
+                return this.mouseDown(event);
             } finally {
                 event.x += dx;
                 event.y += dy;
@@ -526,9 +526,9 @@ public abstract class Component
     }
 
     /**
-     *
+     * 
      * @param event
-     *            The mouse event, where x and y are relative to this component.
+     *        The mouse event, where x and y are relative to this component.
      */
     public boolean mouseDown( MouseButtonEvent event )
     {
@@ -537,9 +537,9 @@ public abstract class Component
     }
 
     /**
-     *
+     * 
      * @param mbe
-     *            The mouse event, where x and y are relative to this component.
+     *        The mouse event, where x and y are relative to this component.
      */
     public void mouseMove( MouseMotionEvent event )
     {
@@ -547,9 +547,9 @@ public abstract class Component
     }
 
     /**
-     *
+     * 
      * @param event
-     *            The mouse event, where x and y are relative to this component.
+     *        The mouse event, where x and y are relative to this component.
      */
     public void mouseUp( MouseButtonEvent event )
     {
@@ -558,13 +558,15 @@ public abstract class Component
 
     public boolean contains( MouseEvent event )
     {
-        return ( event.x ) >= 0 && ( event.y >= 0 ) && ( event.x < this.getWidth() ) && ( event.y < this.getHeight() );
+        return (event.x) >= 0 && (event.y >= 0) && (event.x < this.getWidth()) &&
+                (event.y < this.getHeight());
     }
 
     public boolean contains2( MouseEvent event )
     {
-        return ( event.x ) >= this.getX() && ( event.y >= this.getY() ) && ( event.x < this.getX() + this.getWidth() )
-            && ( event.y < this.getY() + this.getHeight() );
+        return (event.x) >= this.getX() && (event.y >= this.getY()) &&
+                (event.x < this.getX() + this.getWidth()) &&
+                (event.y < this.getY() + this.getHeight());
     }
 
     @Override

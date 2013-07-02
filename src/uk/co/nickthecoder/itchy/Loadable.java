@@ -12,39 +12,35 @@ public abstract class Loadable
 
     protected boolean saveFailed = false;
 
-    public void load( String filename )
-        throws Exception
+    public void load( String filename ) throws Exception
     {
-        this.file = new File( filename );
+        this.file = new File(filename);
         this.directory = this.file.getAbsoluteFile().getParentFile();
     }
 
-    public void save()
-        throws Exception
+    public void save() throws Exception
     {
         try {
-            File saveAs = new File( this.directory, "#" + this.file.getName() + "#" );
-            this.actualSave( saveAs.getPath() );
-            this.checkSave( saveAs.getPath() );
+            File saveAs = new File(this.directory, "#" + this.file.getName() + "#");
+            this.actualSave(saveAs.getPath());
+            this.checkSave(saveAs.getPath());
 
             try {
                 this.file.delete();
-            } catch ( Exception e ) {
+            } catch (Exception e) {
                 // Do nothing
             }
-            saveAs.renameTo( this.file );
+            saveAs.renameTo(this.file);
 
-        } catch ( Exception e ) {
+        } catch (Exception e) {
             this.saveFailed = false;
             throw e;
         }
     }
 
-    protected abstract void actualSave( String filename )
-        throws Exception;
+    protected abstract void actualSave( String filename ) throws Exception;
 
-    protected abstract void checkSave( String filename )
-        throws Exception;
+    protected abstract void checkSave( String filename ) throws Exception;
 
     public File getDirectory()
     {
@@ -63,32 +59,33 @@ public abstract class Loadable
 
     public void setFilename( String filename )
     {
-        this.file = new File( filename );
-        this.directory = new File( filename ).getAbsoluteFile().getParentFile();
+        this.file = new File(filename);
+        this.directory = new File(filename).getAbsoluteFile().getParentFile();
     }
 
     public String nameFromFilename( String filename )
     {
-        File file = new File( filename );
+        File file = new File(filename);
         String name = file.getName();
-        int firstDot = name.indexOf( '.' );
-        if ( firstDot > 1 ) {
-            return name.substring( 0, firstDot );
+        int firstDot = name.indexOf('.');
+        if (firstDot > 1) {
+            return name.substring(0, firstDot);
         }
         return name;
     }
 
     public String resolveFilename( String filename )
     {
-        if ( this.directory == null ) {
+        if (this.directory == null) {
             return filename;
         } else {
-            File file = new File( filename );
-            if ( file.isAbsolute() ) {
-                System.err.println( "Warning. Using absolute filenames to load resource : " + filename );
+            File file = new File(filename);
+            if (file.isAbsolute()) {
+                System.err.println("Warning. Using absolute filenames to load resource : " +
+                        filename);
                 return filename;
             } else {
-                File result = new File( this.directory, filename );
+                File result = new File(this.directory, filename);
                 return result.getPath();
             }
         }
@@ -100,17 +97,17 @@ public abstract class Loadable
             String filePath = file.getCanonicalPath();
             String dirPath = this.directory.getCanonicalPath();
 
-            if ( dirPath == filePath ) {
+            if (dirPath == filePath) {
                 return "";
             }
 
-            if ( filePath.startsWith( dirPath ) ) {
-                return filePath.substring( dirPath.length() + 1 );
+            if (filePath.startsWith(dirPath)) {
+                return filePath.substring(dirPath.length() + 1);
             } else {
                 return file.getPath();
             }
 
-        } catch ( IOException e ) {
+        } catch (IOException e) {
             e.printStackTrace();
             return file.getPath();
         }
@@ -119,15 +116,15 @@ public abstract class Loadable
 
     public boolean fileExists( String filename )
     {
-        File file = new File( this.resolveFilename( filename ) );
+        File file = new File(this.resolveFilename(filename));
         return file.exists() && file.isFile();
     }
 
     public boolean rename( String oldName, String newName )
     {
-        File file = new File( this.resolveFilename( oldName ) );
-        File dest = new File( this.resolveFilename( newName ) );
-        return file.renameTo( dest );
+        File file = new File(this.resolveFilename(oldName));
+        File dest = new File(this.resolveFilename(newName));
+        return file.renameTo(dest);
     }
 
 }

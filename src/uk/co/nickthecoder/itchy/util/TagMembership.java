@@ -1,6 +1,8 @@
 package uk.co.nickthecoder.itchy.util;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
 public class TagMembership<M>
 {
@@ -19,42 +21,42 @@ public class TagMembership<M>
 
     public M getMember()
     {
-        return member;
+        return this.member;
     }
 
     public boolean hasTag( String tag )
     {
-        return this.tags.contains( tag );
+        return this.tags.contains(tag);
     }
 
     public void add( String tag )
     {
-        this.tags.add( tag );
-        this.tagCollection.add( tag, this.member );
+        this.tags.add(tag);
+        this.tagCollection.add(tag, this.member);
     }
 
     public void remove( String tag )
     {
-        this.tags.remove( tag );
-        this.tagCollection.remove( tag, this.member );
+        this.tags.remove(tag);
+        this.tagCollection.remove(tag, this.member);
     }
 
     public void removeAll()
     {
-        for ( Iterator<String> i = this.tags.iterator(); i.hasNext(); ) {
+        for (Iterator<String> i = this.tags.iterator(); i.hasNext();) {
             String tag = i.next();
             i.remove();
-            this.tagCollection.remove( tag, this.member );
+            this.tagCollection.remove(tag, this.member);
         }
     }
 
     public void removeAllExcept( String except )
     {
-        for ( Iterator<String> i = this.tags.iterator(); i.hasNext(); ) {
+        for (Iterator<String> i = this.tags.iterator(); i.hasNext();) {
             String tag = i.next();
-            if ( !except.equals( tag ) ) {
+            if (!except.equals(tag)) {
                 i.remove();
-                this.tagCollection.remove( tag, this.member );
+                this.tagCollection.remove(tag, this.member);
             }
         }
     }

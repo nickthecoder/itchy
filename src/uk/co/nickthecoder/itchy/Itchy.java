@@ -20,37 +20,36 @@ import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 import uk.co.nickthecoder.jame.event.QuitEvent;
 
 /**
- * The is the overall manager of the Itchy game engine. There is only one
- * instance (Itchy.singleton).
- *
- * The init method should be called as soon as possible, ideally right at the
- * top of your program's main method.
- *
+ * The is the overall manager of the Itchy game engine. There is only one instance
+ * (Itchy.singleton).
+ * 
+ * The init method should be called as soon as possible, ideally right at the top of your program's
+ * main method.
+ * 
  * General notes about Itchy :
- *
- * Itchy works with two types of coordinates; pixel coordinates, and world
- * coordinates. World coordinates are used to keep track of Actors' positions,
- * and are stored in doubles. Pixel coordinates are stored as integers and are
- * used when dealing with the low-level processing of images.
- *
+ * 
+ * Itchy works with two types of coordinates; pixel coordinates, and world coordinates. World
+ * coordinates are used to keep track of Actors' positions, and are stored in doubles. Pixel
+ * coordinates are stored as integers and are used when dealing with the low-level processing of
+ * images.
+ * 
  * @author nick
- *
+ * 
  */
 public class Itchy
 {
 
     /**
-     * As sdljava hasn't implemented GetKeystate, I've had to implement it
-     * myself. This holds a boolean for each key. On key pressed events sets the
-     * appropriate boolean, and key released events reset the boolean. Uses the
-     * SDL keysym values to index the array.
+     * As sdljava hasn't implemented GetKeystate, I've had to implement it myself. This holds a
+     * boolean for each key. On key pressed events sets the appropriate boolean, and key released
+     * events reset the boolean. Uses the SDL keysym values to index the array.
      */
     private boolean[] keyboardState;
 
     /**
-     * This is the highest SDL key sym which can be checked using isKeyDown().
-     * The highest key sym is currently 321, and I'm using 400, which leaves
-     * plenty of room for additional keys to be added in the future.
+     * This is the highest SDL key sym which can be checked using isKeyDown(). The highest key sym
+     * is currently 321, and I'm using 400, which leaves plenty of room for additional keys to be
+     * added in the future.
      */
     private static int KEYBOARD_STATE_SIZE = 400;
 
@@ -92,39 +91,38 @@ public class Itchy
     public int keyboardRepeatInterval = Events.DEFAULT_REPEAT_INTERVAL;
 
     private int frames;
-    
+
     private long framesStart;
+
+    GameLoopJob gameLoopJob = new GameLoopJob();
 
     private Itchy()
     {
         this.windows = new ArrayList<GuiPose>();
     }
 
-    public void init( Game game )
-            throws JameException
+    public void init( Game game ) throws JameException
     {
-        this.init( game, game.getWidth(), game.getHeight(), 32 );
-    }
-    public void init( Game game, int width, int height )
-            throws JameException
-    {
-        this.init( game, width, height, 32 );
+        this.init(game, game.getWidth(), game.getHeight(), 32);
     }
 
-    public void init( Game game, int width, int height, int bpp )
-            throws JameException
+    public void init( Game game, int width, int height ) throws JameException
     {
-        while ( this.windows.size() > 0 ) {
-            this.windows.get( 0 ).destroy();
+        this.init(game, width, height, 32);
+    }
+
+    public void init( Game game, int width, int height, int bpp ) throws JameException
+    {
+        while (this.windows.size() > 0) {
+            this.windows.get(0).destroy();
         }
         this.eventListeners = new LinkedList<EventListener>();
         this.mouseListeners = new LinkedList<MouseListener>();
         this.keyListeners = new LinkedList<KeyListener>();
-        
-        if ( this.rootLayer != null ) {
+
+        if (this.rootLayer != null) {
             this.rootLayer.destroy();
         }
-
 
         this.game = game;
         this.keyboardState = new boolean[KEYBOARD_STATE_SIZE];
@@ -132,28 +130,28 @@ public class Itchy
         Video.init();
         Audio.init();
         Audio.open();
-        Events.enableKeyTranslation( true );
+        Events.enableKeyTranslation(true);
 
-        if ( game.getTitle() == null ) {
-            Video.setWindowTitle( "Itchy" );
+        if (game.getTitle() == null) {
+            Video.setWindowTitle("Itchy");
         } else {
-            Video.setWindowTitle( game.getTitle() );
+            Video.setWindowTitle(game.getTitle());
         }
-        if ( game.getIconFilename() != null ) {
-            Video.setWindowIcon( game.getIconFilename() );
+        if (game.getIconFilename() != null) {
+            Video.setWindowIcon(game.getIconFilename());
         }
 
-        System.out.println( "Itchy initialising screen " + width + "," + height );
-        this.screen = Video.setMode( width, height );
+        System.out.println("Itchy initialising screen " + width + "," + height);
+        this.screen = Video.setMode(width, height);
 
-        this.rootRect = new Rect( 0, 0, width, height );
-        this.rootLayer = new CompoundLayer( this.rootRect );
-        this.gameLayer = new CompoundLayer( this.rootRect );
-        this.rootLayer.add( this.gameLayer );
+        this.rootRect = new Rect(0, 0, width, height);
+        this.rootLayer = new CompoundLayer(this.rootRect);
+        this.gameLayer = new CompoundLayer(this.rootRect);
+        this.rootLayer.add(this.gameLayer);
 
-        this.popupLayer = new ScrollableLayer( this.rootRect, null, true );
-        this.popupLayer.setVisible( true );
-        this.rootLayer.add( this.popupLayer );
+        this.popupLayer = new ScrollableLayer(this.rootRect, null, true);
+        this.popupLayer.setVisible(true);
+        this.rootLayer.add(this.popupLayer);
     }
 
     public Game getGame()
@@ -181,7 +179,7 @@ public class Itchy
      */
     public void clear()
     {
-        for ( Actor actor : Actor.allByTag( "active" ) ) {
+        for (Actor actor : Actor.allByTag("active")) {
             actor.kill();
         }
 
@@ -191,210 +189,225 @@ public class Itchy
 
     public void resetFrameRate()
     {
-    	frames = 0;
-    	framesStart = System.currentTimeMillis();
+        this.frames = 0;
+        this.framesStart = System.currentTimeMillis();
     }
-    
+
     public void loop()
     {
-    	resetFrameRate();
+        resetFrameRate();
         this.running = true;
 
-        while ( this.running ) {
+        while (this.running) {
 
             try {
-            	long frameStart = System.currentTimeMillis();
-            	
-                while ( true ) {
+                long frameStart = System.currentTimeMillis();
+
+                while (true) {
                     Event event = Events.poll();
-                    if ( event == null ) {
+                    if (event == null) {
                         break;
                     } else {
-                        this.processEvent( event );
+                        this.processEvent(event); // TODO make this a task.
                     }
                 }
 
-                this.game.tick();
-                for ( Actor actor : Actor.allByTag( "active" ) ) {
-                    if ( actor.isActive() ) {
-                        actor.tick();
-                    }
-                }
+                this.gameLoopJob.start();
 
-                this.rootLayer.render( this.rootRect, this.screen );
+                if ( ! this.gameLoopJob.finished() ) {
+                    System.err.println( "Itchy gameloopjob not finished" );
+                }
+                
+                this.gameLoopJob.lock();
+                try {
+                    this.game.tick(); // TODO make this a task
+                    this.rootLayer.render(this.rootRect, this.screen);
+                } finally {
+                    this.gameLoopJob.unlock();
+                }
 
                 this.screen.flip();
-                frames ++;
-                
+                this.frames++;
+
                 long delay = 20 - (System.currentTimeMillis() - frameStart);
-            	// System.out.println( "delay " + delay );
-                if ( delay > 1 ) {
-                	Thread.sleep( delay );
+                if (delay > 1) {
+                    Thread.sleep(delay);
                 }
-                
-            } catch ( Exception e ) {
+
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
         } // loop
     }
-    
-    public void endOfFrame()
-    {    	
+
+    public void completeTasks()
+    {
+        while ( this.gameLoopJob.doTask() ) {
+            // Do nothing
+        }
     }
     
+    public void addTask( Task task )
+    {
+        this.gameLoopJob.add(task);
+    }
+
+
+    public void endOfFrame()
+    {
+    }
+
     public boolean isRunning()
     {
-    	return this.running;
+        return this.running;
     }
-    
+
     public double getFrameRate()
     {
-    	long now = System.currentTimeMillis();
-    	return ((double) (frames)) / ((double) (now - framesStart) / 1000.0 );
+        long now = System.currentTimeMillis();
+        return ((this.frames)) / ((now - this.framesStart) / 1000.0);
     }
-    
 
-    
     private void processEvent( Event event )
     {
-        if ( event instanceof QuitEvent ) {
-            for ( EventListener el : this.eventListeners ) {
-                if ( el.onQuit() ) {
+        if (event instanceof QuitEvent) {
+            for (EventListener el : this.eventListeners) {
+                if (el.onQuit()) {
                     return;
                 }
             }
             this.terminate();
         }
 
-        if ( event instanceof KeyboardEvent ) {
+        if (event instanceof KeyboardEvent) {
             KeyboardEvent ke = (KeyboardEvent) event;
 
-            if ( ke.isPressed() ) {
+            if (ke.isPressed()) {
                 int key = ke.symbol;
-                if ( ( key > 0 ) && ( key < this.keyboardState.length ) ) {
+                if ((key > 0) && (key < this.keyboardState.length)) {
                     this.keyboardState[key] = true;
                 }
 
-                if ( this.modalListener == null ) {
+                if (this.modalListener == null) {
 
-                    for ( KeyListener listener : this.keyListeners ) {
-                        if ( listener.onKeyDown( ke ) ) {
+                    for (KeyListener listener : this.keyListeners) {
+                        if (listener.onKeyDown(ke)) {
                             return;
                         }
                     }
 
-                    for ( EventListener el : this.eventListeners ) {
-                        if ( el.onKeyDown( ke ) ) {
+                    for (EventListener el : this.eventListeners) {
+                        if (el.onKeyDown(ke)) {
                             return;
                         }
                     }
                 } else {
-                    this.modalListener.onKeyDown( ke );
+                    this.modalListener.onKeyDown(ke);
                     return;
                 }
 
-            } else if ( ke.isReleased() ) {
+            } else if (ke.isReleased()) {
 
                 int key = ke.symbol;
-                if ( ( key > 0 ) && ( key < this.keyboardState.length ) ) {
+                if ((key > 0) && (key < this.keyboardState.length)) {
                     this.keyboardState[key] = false;
                 }
 
-                if ( this.modalListener == null ) {
+                if (this.modalListener == null) {
 
-                    for ( KeyListener listener : this.keyListeners ) {
-                        if ( listener.onKeyUp( ke ) ) {
+                    for (KeyListener listener : this.keyListeners) {
+                        if (listener.onKeyUp(ke)) {
                             return;
                         }
                     }
 
-                    for ( EventListener el : this.eventListeners ) {
-                        if ( el.onKeyUp( ke ) ) {
+                    for (EventListener el : this.eventListeners) {
+                        if (el.onKeyUp(ke)) {
                             return;
                         }
                     }
                 } else {
-                    this.modalListener.onKeyUp( ke );
+                    this.modalListener.onKeyUp(ke);
                     return;
                 }
 
             }
         }
 
-        if ( event instanceof MouseButtonEvent ) {
+        if (event instanceof MouseButtonEvent) {
             MouseButtonEvent mbe = (MouseButtonEvent) event;
 
-            if ( mbe.isPressed() ) {
+            if (mbe.isPressed()) {
 
-                if ( this.modalListener == null ) {
-                    for ( EventListener el : this.eventListeners ) {
-                        if ( el.onMouseDown( mbe ) ) {
+                if (this.modalListener == null) {
+                    for (EventListener el : this.eventListeners) {
+                        if (el.onMouseDown(mbe)) {
                             return;
                         }
                     }
-                    for ( MouseListener el : this.mouseListeners ) {
-                        if ( el.onMouseDown( mbe ) ) {
+                    for (MouseListener el : this.mouseListeners) {
+                        if (el.onMouseDown(mbe)) {
                             return;
                         }
                     }
                 } else {
-                    this.modalListener.onMouseDown( mbe );
+                    this.modalListener.onMouseDown(mbe);
                     return;
                 }
 
             }
 
-            if ( mbe.isReleased() ) {
+            if (mbe.isReleased()) {
 
-                if ( this.mouseOwner == null ) {
+                if (this.mouseOwner == null) {
 
-                    if ( this.modalListener == null ) {
-                        for ( EventListener el : this.eventListeners ) {
-                            if ( el.onMouseUp( mbe ) ) {
+                    if (this.modalListener == null) {
+                        for (EventListener el : this.eventListeners) {
+                            if (el.onMouseUp(mbe)) {
                                 return;
                             }
                         }
-                        for ( MouseListener el : this.mouseListeners ) {
-                            if ( el.onMouseUp( mbe ) ) {
+                        for (MouseListener el : this.mouseListeners) {
+                            if (el.onMouseUp(mbe)) {
                                 return;
                             }
                         }
                     } else {
-                        this.modalListener.onMouseUp( mbe );
+                        this.modalListener.onMouseUp(mbe);
                         return;
                     }
 
                 } else {
-                    this.mouseOwner.onMouseUp( mbe );
+                    this.mouseOwner.onMouseUp(mbe);
                     return;
                 }
             }
 
         }
 
-        if ( event instanceof MouseMotionEvent ) {
+        if (event instanceof MouseMotionEvent) {
             MouseMotionEvent mme = (MouseMotionEvent) event;
-            if ( this.mouseOwner == null ) {
+            if (this.mouseOwner == null) {
 
-                if ( this.modalListener == null ) {
-                    for ( EventListener el : this.eventListeners ) {
-                        if ( el.onMouseMove( mme ) ) {
+                if (this.modalListener == null) {
+                    for (EventListener el : this.eventListeners) {
+                        if (el.onMouseMove(mme)) {
                             return;
                         }
                     }
-                    for ( MouseListener el : this.mouseListeners ) {
-                        if ( el.onMouseMove( mme ) ) {
+                    for (MouseListener el : this.mouseListeners) {
+                        if (el.onMouseMove(mme)) {
                             return;
                         }
                     }
                 } else {
-                    this.modalListener.onMouseMove( mme );
+                    this.modalListener.onMouseMove(mme);
                     return;
                 }
 
             } else {
-                this.mouseOwner.onMouseMove( mme );
+                this.mouseOwner.onMouseMove(mme);
                 return;
             }
 
@@ -403,10 +416,10 @@ public class Itchy
 
     public void enableKeyboardRepeat( boolean value )
     {
-        if ( value ) {
-            Events.keyboardRepeat( this.keyboardRepeatDelay, this.keyboardRepeatInterval );
+        if (value) {
+            Events.keyboardRepeat(this.keyboardRepeatDelay, this.keyboardRepeatInterval);
         } else {
-            Events.keyboardRepeat( 0, 0 );
+            Events.keyboardRepeat(0, 0);
         }
     }
 
@@ -416,42 +429,44 @@ public class Itchy
     }
 
     /**
-     * Tests state of either shift keys
-     * A convenience method, the same as isKeyDown( Keys.LSHIFT ) || isKeyDown( Keys.RSHIFT )
+     * Tests state of either shift keys A convenience method, the same as isKeyDown( Keys.LSHIFT )
+     * || isKeyDown( Keys.RSHIFT )
      */
     public boolean isShiftDown()
     {
-        return this.keyboardState[ Keys.LSHIFT ] || this.keyboardState[ Keys.RSHIFT ];
-    }
-    /**
-     * Tests state of either control keys
-     * A convenience method, the same as isKeyDown( Keys.LCTRL ) || isKeyDown( Keys.RCTRL )
-     */
-    public boolean isCtrlDown()
-    {
-        return this.keyboardState[ Keys.LCTRL] || this.keyboardState[ Keys.RCTRL ];
-    }
-    /**
-     * Tests state of either meta keys
-     * A convenience method, the same as isKeyDown( Keys.LMETA ) || isKeyDown( Keys.RMETA )
-     */
-    public boolean isMetaDown()
-    {
-        return this.keyboardState[ Keys.LMETA] || this.keyboardState[ Keys.RMETA ];
-    }
-    /**
-     * Tests state of either super keys
-     * A convenience method, the same as isKeyDown( Keys.LSUPER ) || isKeyDown( Keys.RSUPER )
-     */
-    public boolean isSuperDown()
-    {
-        return this.keyboardState[ Keys.LSUPER] || this.keyboardState[ Keys.RSUPER ];
+        return this.keyboardState[Keys.LSHIFT] || this.keyboardState[Keys.RSHIFT];
     }
 
     /**
-     * Indicates that the main loop should end. Note the game does not end
-     * immediately, it only sets a flag, which will cause the main loop to end
-     * after the current frame has been processed.
+     * Tests state of either control keys A convenience method, the same as isKeyDown( Keys.LCTRL )
+     * || isKeyDown( Keys.RCTRL )
+     */
+    public boolean isCtrlDown()
+    {
+        return this.keyboardState[Keys.LCTRL] || this.keyboardState[Keys.RCTRL];
+    }
+
+    /**
+     * Tests state of either meta keys A convenience method, the same as isKeyDown( Keys.LMETA ) ||
+     * isKeyDown( Keys.RMETA )
+     */
+    public boolean isMetaDown()
+    {
+        return this.keyboardState[Keys.LMETA] || this.keyboardState[Keys.RMETA];
+    }
+
+    /**
+     * Tests state of either super keys A convenience method, the same as isKeyDown( Keys.LSUPER )
+     * || isKeyDown( Keys.RSUPER )
+     */
+    public boolean isSuperDown()
+    {
+        return this.keyboardState[Keys.LSUPER] || this.keyboardState[Keys.RSUPER];
+    }
+
+    /**
+     * Indicates that the main loop should end. Note the game does not end immediately, it only sets
+     * a flag, which will cause the main loop to end after the current frame has been processed.
      */
     public void terminate()
     {
@@ -465,43 +480,43 @@ public class Itchy
 
     public void addEventListener( EventListener listener )
     {
-        this.eventListeners.add( listener );
+        this.eventListeners.add(listener);
     }
 
     public void removeEventListener( EventListener listener )
     {
-        this.eventListeners.remove( listener );
+        this.eventListeners.remove(listener);
     }
 
     public void addMouseListener( MouseListener listener )
     {
-        this.mouseListeners.add( listener );
+        this.mouseListeners.add(listener);
     }
 
     public void removeMouseListener( MouseListener listener )
     {
-        this.mouseListeners.remove( listener );
+        this.mouseListeners.remove(listener);
     }
 
     public void addKeyListener( KeyListener listener )
     {
-        this.keyListeners.add( listener );
+        this.keyListeners.add(listener);
     }
 
     public void removeKeyListener( KeyListener listener )
     {
-        this.keyListeners.remove( listener );
+        this.keyListeners.remove(listener);
     }
 
     public void captureMouse( EventListener owner )
     {
-        assert ( this.mouseOwner == null );
+        assert (this.mouseOwner == null);
         this.mouseOwner = owner;
     }
 
     public void releaseMouse( EventListener owner )
     {
-        assert ( this.mouseOwner == owner );
+        assert (this.mouseOwner == owner);
         this.mouseOwner = null;
     }
 
@@ -512,47 +527,47 @@ public class Itchy
 
     public void showWindow( GuiPose window )
     {
-        this.windows.add( window );
+        this.windows.add(window);
 
-        if ( window.getRules() == null ) {
-            window.setRules( this.rules );
+        if (window.getRules() == null) {
+            window.setRules(this.rules);
         }
         window.reStyle();
         window.forceLayout();
-        window.setPosition( 0, 0, window.getRequiredWidth(), window.getRequiredHeight() );
+        window.setPosition(0, 0, window.getRequiredWidth(), window.getRequiredHeight());
 
         Actor actor = window.getActor();
 
-        actor.moveTo( Math.max( 0, ( this.popupLayer.position.width - window.getRequiredWidth() ) / 2 ),
-                Math.max( 0, ( this.popupLayer.position.height - window.getRequiredHeight() ) / 2 ) );
+        actor.moveTo(Math.max(0, (this.popupLayer.position.width - window.getRequiredWidth()) / 2),
+                Math.max(0, (this.popupLayer.position.height - window.getRequiredHeight()) / 2));
 
-        this.popupLayer.add( actor );
+        this.popupLayer.add(actor);
 
-        if ( window.modal ) {
-            this.setModalListener( window );
+        if (window.modal) {
+            this.setModalListener(window);
         }
-        this.addEventListener( window );
+        this.addEventListener(window);
 
     }
 
     public void hideWindow( GuiPose window )
     {
-        this.removeEventListener( window );
-        this.popupLayer.remove( window.getActor() );
+        this.removeEventListener(window);
+        this.popupLayer.remove(window.getActor());
 
-        this.windows.remove( window );
+        this.windows.remove(window);
 
-        if ( window.modal ) {
-            if ( this.windows.size() > 0 ) {
-                GuiPose topWindow = this.windows.get( this.windows.size() - 1 );
-                if ( topWindow.modal ) {
-                    this.setModalListener( topWindow );
+        if (window.modal) {
+            if (this.windows.size() > 0) {
+                GuiPose topWindow = this.windows.get(this.windows.size() - 1);
+                if (topWindow.modal) {
+                    this.setModalListener(topWindow);
 
                 } else {
-                    this.setModalListener( null );
+                    this.setModalListener(null);
                 }
             } else {
-                this.setModalListener( null );
+                this.setModalListener(null);
             }
         }
 

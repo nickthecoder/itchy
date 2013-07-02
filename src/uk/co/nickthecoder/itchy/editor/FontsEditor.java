@@ -34,42 +34,41 @@ public class FontsEditor extends SubEditor
 
     public FontsEditor( Editor editor )
     {
-        super( editor );
+        super(editor);
     }
 
     @Override
     public Container createPage()
     {
         Container form = super.createPage();
-        form.setFill( true, true );
+        form.setFill(true, true);
 
-        TableModelColumn name = new TableModelColumn( "Name", 0, 200 );
-        name.rowComparator = new SingleColumnRowComparator<String>( 0 );
+        TableModelColumn name = new TableModelColumn("Name", 0, 200);
+        name.rowComparator = new SingleColumnRowComparator<String>(0);
 
-        TableModelColumn filename = new TableModelColumn( "Filename", 1, 300 );
-        filename.rowComparator = new SingleColumnRowComparator<String>( 1 );
+        TableModelColumn filename = new TableModelColumn("Filename", 1, 300);
+        filename.rowComparator = new SingleColumnRowComparator<String>(1);
 
         List<TableModelColumn> columns = new ArrayList<TableModelColumn>();
-        columns.add( name );
-        columns.add( filename );
+        columns.add(name);
+        columns.add(filename);
 
         TableModel model = this.createTableModel();
-        this.table = new Table( model, columns );
-        this.table.addTableListener( new AbstractTableListener()
-        {
+        this.table = new Table(model, columns);
+        this.table.addTableListener(new AbstractTableListener() {
             @Override
             public void onRowPicked( TableRow tableRow )
             {
                 FontsEditor.this.onEdit();
             }
-        } );
+        });
 
-        this.table.setFill( true, true );
-        this.table.setExpansion( 1.0 );
-        this.table.sort( 0 );
+        this.table.setFill(true, true);
+        this.table.setExpansion(1.0);
+        this.table.sort(0);
 
-        form.addChild( this.table );
-        form.addChild( this.createListButtons() );
+        form.addChild(this.table);
+        form.addChild(this.createListButtons());
 
         return form;
     }
@@ -78,18 +77,19 @@ public class FontsEditor extends SubEditor
     {
         SimpleTableModel model = new SimpleTableModel();
 
-        for ( String fontName : this.editor.resources.fontNames() ) {
-            FontResource fontResource = this.editor.resources.getFontResource( fontName );
+        for (String fontName : this.editor.resources.fontNames()) {
+            FontResource fontResource = this.editor.resources.getFontResource(fontName);
             String[] attributeNames = { "name", "filename" };
-            TableModelRow row = new ReflectionTableModelRow<FontResource>( fontResource, attributeNames );
-            model.addRow( row );
+            TableModelRow row = new ReflectionTableModelRow<FontResource>(fontResource,
+                    attributeNames);
+            model.addRow(row);
         }
         return model;
     }
 
     private void rebuildTable()
     {
-        this.table.setTableModel( this.createTableModel() );
+        this.table.setTableModel(this.createTableModel());
     }
 
     @Override
@@ -97,53 +97,52 @@ public class FontsEditor extends SubEditor
     {
         this.currentFontResource = (FontResource) resource;
 
-        this.txtName = new TextBox( this.currentFontResource.getName() );
-        grid.addRow( new Label( "Name" ), this.txtName );
+        this.txtName = new TextBox(this.currentFontResource.getName());
+        grid.addRow(new Label("Name"), this.txtName);
 
         Container filenameContainer = new Container();
-        this.txtFilename = new TextBox( this.currentFontResource.filename );
-        filenameContainer.addChild( this.txtFilename );
+        this.txtFilename = new TextBox(this.currentFontResource.filename);
+        filenameContainer.addChild(this.txtFilename);
 
-        Button rename = new Button( "Rename" );
-        rename.addActionListener( new ActionListener()
-        {
+        Button rename = new Button("Rename");
+        rename.addActionListener(new ActionListener() {
             @Override
             public void action()
             {
                 FontsEditor.this.onRename();
             }
-        } );
-        filenameContainer.addChild( rename );
-        grid.addRow( new Label( "Filename" ), filenameContainer );
+        });
+        filenameContainer.addChild(rename);
+        grid.addRow(new Label("Filename"), filenameContainer);
 
     }
 
     @Override
     protected void onOk()
     {
-        boolean exists = this.editor.resources.fileExists( this.txtFilename.getText() );
-        if ( !exists ) {
-            this.setMessage( "Filename not found" );
+        boolean exists = this.editor.resources.fileExists(this.txtFilename.getText());
+        if (!exists) {
+            this.setMessage("Filename not found");
             return;
         }
-        if ( this.adding || ( !this.txtName.getText().equals( this.currentFontResource.getName() ) ) ) {
-            if ( this.editor.resources.getFontResource( this.txtName.getText() ) != null ) {
-                this.setMessage( "That name is already being used." );
+        if (this.adding || (!this.txtName.getText().equals(this.currentFontResource.getName()))) {
+            if (this.editor.resources.getFontResource(this.txtName.getText()) != null) {
+                this.setMessage("That name is already being used.");
                 return;
             }
         }
 
-        this.currentFontResource.rename( this.txtName.getText() );
+        this.currentFontResource.rename(this.txtName.getText());
         this.currentFontResource.filename = this.txtFilename.getText();
 
-        if ( this.adding ) {
-            this.editor.resources.addFont( this.currentFontResource );
+        if (this.adding) {
+            this.editor.resources.addFont(this.currentFontResource);
             this.rebuildTable();
         } else {
 
-            this.table.updateRow( this.table.getCurrentTableModelRow() );
+            this.table.updateRow(this.table.getCurrentTableModelRow());
         }
-        Itchy.singleton.hideWindow( this.editWindow );
+        Itchy.singleton.hideWindow(this.editWindow);
 
     }
 
@@ -152,7 +151,7 @@ public class FontsEditor extends SubEditor
     {
         FontResource fontResource = (FontResource) resource;
 
-        this.editor.resources.removeFont( fontResource.getName() );
+        this.editor.resources.removeFont(fontResource.getName());
         this.rebuildTable();
 
     }
@@ -160,39 +159,39 @@ public class FontsEditor extends SubEditor
     @Override
     protected void onAdd()
     {
-        this.openDialog = new FileOpenDialog()
-        {
+        this.openDialog = new FileOpenDialog() {
             @Override
             public void onChosen( File file )
             {
-                FontsEditor.this.onAdd( file );
+                FontsEditor.this.onAdd(file);
             }
         };
-        this.openDialog.setDirectory( this.editor.resources.getDirectory() );
-        Itchy.singleton.showWindow( this.openDialog );
+        this.openDialog.setDirectory(this.editor.resources.getDirectory());
+        Itchy.singleton.showWindow(this.openDialog);
     }
 
     public void onAdd( File file )
     {
-        Itchy.singleton.hideWindow( this.openDialog );
+        Itchy.singleton.hideWindow(this.openDialog);
 
-        if ( file != null ) {
-            String filename = this.editor.resources.makeRelativeFilename( file );
-            String name = this.editor.resources.nameFromFilename( filename );
+        if (file != null) {
+            String filename = this.editor.resources.makeRelativeFilename(file);
+            String name = this.editor.resources.nameFromFilename(filename);
 
-            this.currentFontResource = new FontResource( this.editor.resources, name, filename );
+            this.currentFontResource = new FontResource(this.editor.resources, name, filename);
             this.adding = true;
-            this.showDetails( this.currentFontResource );
+            this.showDetails(this.currentFontResource);
         }
     }
 
     protected void onRename()
     {
-        if ( !this.editor.resources.rename( this.currentFontResource.filename, this.txtFilename.getText() ) ) {
-            this.setMessage( "Rename failed" );
+        if (!this.editor.resources.rename(this.currentFontResource.filename,
+                this.txtFilename.getText())) {
+            this.setMessage("Rename failed");
         } else {
             this.currentFontResource.filename = this.txtFilename.getText();
-            this.table.updateRow( this.table.getCurrentTableModelRow() );
+            this.table.updateRow(this.table.getCurrentTableModelRow());
         }
 
     }

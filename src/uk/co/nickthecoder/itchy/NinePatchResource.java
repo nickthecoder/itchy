@@ -18,27 +18,26 @@ public class NinePatchResource extends NamedResource
 
     public NinePatchResource( Resources resources, String name, String filename, NinePatch ninePatch )
     {
-        super( resources, name );
+        super(resources, name);
         this.filename = filename;
         this.ninePatch = ninePatch;
     }
 
-    public void setFilename( String filename )
-        throws JameException
+    public void setFilename( String filename ) throws JameException
     {
-        this.ninePatch.loadImage( this.resources.resolveFilename( filename ) );
+        this.ninePatch.loadImage(this.resources.resolveFilename(filename));
         this.filename = filename;
     }
 
     public Surface getThumbnail()
     {
-        if ( this.thumbnail == null ) {
-        	
+        if (this.thumbnail == null) {
+
             Surface full = this.ninePatch.getSurface();
-            if ( ( full.getWidth() > THUMBNAIL_WIDTH ) || ( full.getHeight() > THUMBNAIL_HEIGHT ) ) {
-                double scale = Math.min( THUMBNAIL_WIDTH / (double) full.getWidth(), THUMBNAIL_HEIGHT
-                    / (double) full.getHeight() );
-                this.thumbnail = full.zoom( scale, scale, true );
+            if ((full.getWidth() > THUMBNAIL_WIDTH) || (full.getHeight() > THUMBNAIL_HEIGHT)) {
+                double scale = Math.min(THUMBNAIL_WIDTH / (double) full.getWidth(),
+                        THUMBNAIL_HEIGHT / (double) full.getHeight());
+                this.thumbnail = full.zoom(scale, scale, true);
             } else {
                 this.thumbnail = full;
             }

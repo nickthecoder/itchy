@@ -13,26 +13,25 @@ import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 
 /**
- * GuiPose is an intermediary between the worlds of Actor/Layers and and the world of Components/Containers.
- * A GuiPose is both a Container (a RootContainer in fact), and a Pose which is part of an Actor's
- * Appearance.
- *
- * A GuiPose can be included within a game, because it can be part of an Actor, just like any other Actor.
- * See GuiPose.getActor.
- *
- * If you wish to use the gui pacakage without using Actors and Layers etc, then use RootContainer instead of
- * GuiPose. However, you would then need to deal with how RootContainer is drawn on the screen, and how it
- * receives keyboard and mouse events.
+ * GuiPose is an intermediary between the worlds of Actor/Layers and and the world of
+ * Components/Containers. A GuiPose is both a Container (a RootContainer in fact), and a Pose which
+ * is part of an Actor's Appearance.
+ * 
+ * A GuiPose can be included within a game, because it can be part of an Actor, just like any other
+ * Actor. See GuiPose.getActor.
+ * 
+ * If you wish to use the gui pacakage without using Actors and Layers etc, then use RootContainer
+ * instead of GuiPose. However, you would then need to deal with how RootContainer is drawn on the
+ * screen, and how it receives keyboard and mouse events.
  */
 public class GuiPose extends RootContainer implements Pose, EventListener
 {
     private Actor actor;
 
     /**
-     * Used to implement Pose's changedSinceLastUsed method. When a component is
-     * invalidated, it bubbles up to this root component, and sets changed to
-     * true. If appearance is doing effects on this Pose (such as a rotation),
-     * then it will clear its cached image, and start again.
+     * Used to implement Pose's changedSinceLastUsed method. When a component is invalidated, it
+     * bubbles up to this root component, and sets changed to true. If appearance is doing effects
+     * on this Pose (such as a rotation), then it will clear its cached image, and start again.
      */
     private boolean changed;
 
@@ -54,20 +53,20 @@ public class GuiPose extends RootContainer implements Pose, EventListener
     {
         super();
 
-        Itchy.singleton.addEventListener( this );
+        Itchy.singleton.addEventListener(this);
     }
 
     @Override
     public Surface getSurface()
     {
         this.ensureLayedOut();
-        if ( this.surface == null ) {
-            this.surface = new Surface( this.width, this.height, true );
+        if (this.surface == null) {
+            this.surface = new Surface(this.width, this.height, true);
         }
-        if ( this.invalid ) {
-            this.surface.fill( new RGBA( 0, 0, 0, 0 ) );
-            GraphicsContext gc = new GraphicsContext( this.surface );
-            this.render( gc );
+        if (this.invalid) {
+            this.surface.fill(new RGBA(0, 0, 0, 0));
+            GraphicsContext gc = new GraphicsContext(this.surface);
+            this.render(gc);
 
         }
         this.invalid = false;
@@ -77,10 +76,11 @@ public class GuiPose extends RootContainer implements Pose, EventListener
     @Override
     public void setPosition( int x, int y, int width, int height )
     {
-        if ( ( this.surface == null ) || ( this.surface.getWidth() != width ) || ( this.surface.getHeight() != height ) ) {
-            super.setPosition( x, y, width, height );
+        if ((this.surface == null) || (this.surface.getWidth() != width) ||
+                (this.surface.getHeight() != height)) {
+            super.setPosition(x, y, width, height);
 
-            if ( this.surface != null ) {
+            if (this.surface != null) {
                 this.surface.free();
 
                 this.surface = null;
@@ -99,8 +99,8 @@ public class GuiPose extends RootContainer implements Pose, EventListener
 
     public Actor getActor()
     {
-        if ( this.actor == null ) {
-            this.actor = new Actor( this );
+        if (this.actor == null) {
+            this.actor = new Actor(this);
         }
         return this.actor;
     }
@@ -132,7 +132,7 @@ public class GuiPose extends RootContainer implements Pose, EventListener
     @Override
     public boolean onMouseDown( MouseButtonEvent event )
     {
-        if ( this.actor.getLayer() == null ) {
+        if (this.actor.getLayer() == null) {
             return false;
         }
 
@@ -145,7 +145,7 @@ public class GuiPose extends RootContainer implements Pose, EventListener
         event.y -= offsetPos.y;
         try {
 
-            return this.testMouseDown( event );
+            return this.testMouseDown(event);
 
         } finally {
             event.x += offsetPos.x;
@@ -156,11 +156,11 @@ public class GuiPose extends RootContainer implements Pose, EventListener
     @Override
     public boolean onMouseUp( MouseButtonEvent event )
     {
-        if ( this.actor.getLayer() == null ) {
+        if (this.actor.getLayer() == null) {
             return false;
         }
 
-        if ( this.mouseOwner != null ) {
+        if (this.mouseOwner != null) {
 
             // Calculate the position of this gui on the screen, and the
             // component within the gui.
@@ -176,7 +176,7 @@ public class GuiPose extends RootContainer implements Pose, EventListener
             event.y -= offsetPos.y;
             try {
 
-                this.mouseOwner.mouseUp( event );
+                this.mouseOwner.mouseUp(event);
 
             } finally {
                 event.x += offsetPos.x;
@@ -191,11 +191,11 @@ public class GuiPose extends RootContainer implements Pose, EventListener
     @Override
     public boolean onMouseMove( MouseMotionEvent mbe )
     {
-        if ( this.actor.getLayer() == null ) {
+        if (this.actor.getLayer() == null) {
             return false;
         }
 
-        if ( this.mouseOwner != null ) {
+        if (this.mouseOwner != null) {
 
             // Calculate the position of this gui on the screen, and the
             // component within the gui.
@@ -211,7 +211,7 @@ public class GuiPose extends RootContainer implements Pose, EventListener
             mbe.y -= offsetPos.y;
             try {
 
-                this.mouseOwner.mouseMove( mbe );
+                this.mouseOwner.mouseMove(mbe);
 
             } finally {
                 mbe.x += offsetPos.x;
@@ -222,13 +222,14 @@ public class GuiPose extends RootContainer implements Pose, EventListener
 
         return false;
     }
+
     @Override
     public boolean onKeyDown( KeyboardEvent ke )
     {
-        if ( this.actor.getLayer() == null ) {
+        if (this.actor.getLayer() == null) {
             return false;
         }
-        return this.keyDown( ke );
+        return this.keyDown(ke);
 
     }
 
@@ -241,19 +242,19 @@ public class GuiPose extends RootContainer implements Pose, EventListener
     @Override
     public void captureMouse( Component component )
     {
-        assert ( this.mouseOwner == null );
+        assert (this.mouseOwner == null);
 
         this.mouseOwner = component;
-        Itchy.singleton.captureMouse( this );
+        Itchy.singleton.captureMouse(this);
     }
 
     @Override
     public void releaseMouse( Component component )
     {
-        assert ( this.mouseOwner == component );
+        assert (this.mouseOwner == component);
 
         this.mouseOwner = null;
-        Itchy.singleton.releaseMouse( this );
+        Itchy.singleton.releaseMouse(this);
     }
 
     @Override
@@ -270,13 +271,14 @@ public class GuiPose extends RootContainer implements Pose, EventListener
 
     public void show()
     {
-        Itchy.singleton.showWindow( this );
+        Itchy.singleton.showWindow(this);
     }
 
     public void hide()
     {
-        Itchy.singleton.hideWindow( this );
+        Itchy.singleton.hideWindow(this);
     }
+
     public void destroy()
     {
         this.hide();
@@ -286,9 +288,9 @@ public class GuiPose extends RootContainer implements Pose, EventListener
     @Override
     public boolean mouseDown( MouseButtonEvent event )
     {
-        if ( this.draggable ) {
-            if ( (event.button == 2) || ((event.button == 1) && Itchy.singleton.isCtrlDown()) ) {
-                this.captureMouse( this );
+        if (this.draggable) {
+            if ((event.button == 2) || ((event.button == 1) && Itchy.singleton.isCtrlDown())) {
+                this.captureMouse(this);
                 this.dragging = true;
                 this.dragStartX = event.x;
                 this.dragStartY = event.y;
@@ -296,27 +298,27 @@ public class GuiPose extends RootContainer implements Pose, EventListener
             }
         }
 
-        return super.mouseDown( event );
+        return super.mouseDown(event);
     }
 
     @Override
     public void mouseMove( MouseMotionEvent event )
     {
-        if ( this.dragging ) {
+        if (this.dragging) {
             int dx = event.x - this.dragStartX;
             int dy = event.y - this.dragStartY;
 
-            this.getActor().moveBy( dx, dy );
-            //this.dragStartX = event.x;
-            //this.dragStartY = event.y;
+            this.getActor().moveBy(dx, dy);
+            // this.dragStartX = event.x;
+            // this.dragStartY = event.y;
         }
     }
 
     @Override
     public void mouseUp( MouseButtonEvent event )
     {
-        if ( this.dragging ) {
-            this.releaseMouse( this );
+        if (this.dragging) {
+            this.releaseMouse(this);
             this.dragging = true;
         }
     }

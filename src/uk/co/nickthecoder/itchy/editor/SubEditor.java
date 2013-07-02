@@ -27,8 +27,8 @@ public abstract class SubEditor
     protected FileOpenDialog openDialog;
 
     /**
-     * True iff the currently edited resource isn't in the resources yet, ie we
-     * are adding a new record.
+     * True iff the currently edited resource isn't in the resources yet, ie we are adding a new
+     * record.
      */
     protected boolean adding;
 
@@ -40,8 +40,8 @@ public abstract class SubEditor
     public Container createPage()
     {
         Container form = new Container();
-        form.setLayout( new VerticalLayout() );
-        form.setFill( true, false );
+        form.setLayout(new VerticalLayout());
+        form.setFill(true, false);
 
         return form;
     }
@@ -49,85 +49,80 @@ public abstract class SubEditor
     protected Container createListButtons()
     {
         Container buttons = new Container();
-        buttons.addStyle( "buttonBar" );
-        buttons.setXAlignment( 0.5f );
+        buttons.addStyle("buttonBar");
+        buttons.setXAlignment(0.5f);
 
-        this.addListButtons( buttons );
+        this.addListButtons(buttons);
 
         return buttons;
     }
 
     protected void addListButtons( Container buttons )
     {
-        Button edit = new Button( new Label( "Edit" ) );
-        edit.addActionListener( new ActionListener()
-        {
+        Button edit = new Button(new Label("Edit"));
+        edit.addActionListener(new ActionListener() {
             @Override
             public void action()
             {
                 SubEditor.this.onEdit();
             }
-        } );
-        buttons.addChild( edit );
+        });
+        buttons.addChild(edit);
 
-        Button add = new Button( new Label( "Add" ) );
-        add.addActionListener( new ActionListener()
-        {
+        Button add = new Button(new Label("Add"));
+        add.addActionListener(new ActionListener() {
             @Override
             public void action()
             {
                 SubEditor.this.onAdd();
             }
-        } );
-        buttons.addChild( add );
+        });
+        buttons.addChild(add);
 
-        Button remove = new Button( new Label( "Remove" ) );
-        remove.addActionListener( new ActionListener()
-        {
+        Button remove = new Button(new Label("Remove"));
+        remove.addActionListener(new ActionListener() {
             @Override
             public void action()
             {
                 SubEditor.this.onRemove();
             }
-        } );
-        buttons.addChild( remove );
+        });
+        buttons.addChild(remove);
 
     }
 
     protected void addDetailButtons( Container buttons )
     {
 
-        Button ok = new Button( new Label( "Ok" ) );
-        ok.addActionListener( new ActionListener()
-        {
+        Button ok = new Button(new Label("Ok"));
+        ok.addActionListener(new ActionListener() {
             @Override
             public void action()
             {
                 SubEditor.this.onOk();
             }
-        } );
-        buttons.addChild( ok );
+        });
+        buttons.addChild(ok);
 
-        Button cancel = new Button( new Label( "Cancel" ) );
-        cancel.addActionListener( new ActionListener()
-        {
+        Button cancel = new Button(new Label("Cancel"));
+        cancel.addActionListener(new ActionListener() {
             @Override
             public void action()
             {
                 SubEditor.this.onCancel();
             }
-        } );
-        buttons.addChild( cancel );
+        });
+        buttons.addChild(cancel);
 
     }
 
     public void setMessage( String message )
     {
-        if ( ( message == null ) || ( message.equals( "" ) ) ) {
-            this.message.setVisible( false );
+        if ((message == null) || (message.equals(""))) {
+            this.message.setVisible(false);
         } else {
-            this.message.setVisible( true );
-            this.message.setText( message );
+            this.message.setVisible(true);
+            this.message.setText(message);
         }
     }
 
@@ -135,9 +130,9 @@ public abstract class SubEditor
     {
         Component result = component;
 
-        if ( component.getRequiredHeight() > maxHeight ) {
-            VerticalScroll vs = new VerticalScroll( result );
-            vs.setClientHeight( maxHeight );
+        if (component.getRequiredHeight() > maxHeight) {
+            VerticalScroll vs = new VerticalScroll(result);
+            vs.setClientHeight(maxHeight);
             result = vs;
         }
 
@@ -147,53 +142,55 @@ public abstract class SubEditor
     public void onEdit()
     {
         this.adding = false;
-        if ( this.table.getCurrentTableModelRow() == null ) {
+        if (this.table.getCurrentTableModelRow() == null) {
             return;
         }
-        ReflectionTableModelRow<?> row = (ReflectionTableModelRow<?>) this.table.getCurrentTableModelRow();
+        ReflectionTableModelRow<?> row = (ReflectionTableModelRow<?>) this.table
+                .getCurrentTableModelRow();
 
-        this.showDetails( row.getData() );
+        this.showDetails(row.getData());
     }
 
     public void onRemove()
     {
         this.adding = false;
-        if ( this.table.getCurrentTableModelRow() == null ) {
+        if (this.table.getCurrentTableModelRow() == null) {
             return;
         }
-        ReflectionTableModelRow<?> row = (ReflectionTableModelRow<?>) this.table.getCurrentTableModelRow();
+        ReflectionTableModelRow<?> row = (ReflectionTableModelRow<?>) this.table
+                .getCurrentTableModelRow();
 
-        this.remove( row.getData() );
+        this.remove(row.getData());
     }
 
     public void showDetails( Object resource )
     {
-        Window window = new Window( "Edit" );
-        window.clientArea.setFill( true, true );
-        window.clientArea.setLayout( new VerticalLayout() );
+        Window window = new Window("Edit");
+        window.clientArea.setFill(true, true);
+        window.clientArea.setLayout(new VerticalLayout());
 
         Container form = new Container();
-        form.addStyle( "form" );
-        GridLayout grid = new GridLayout( form, 2 );
-        form.setLayout( grid );
-        window.clientArea.addChild( form );
+        form.addStyle("form");
+        GridLayout grid = new GridLayout(form, 2);
+        form.setLayout(grid);
+        window.clientArea.addChild(form);
 
-        this.edit( grid, resource );
+        this.edit(grid, resource);
 
-        this.message = new Label( "" );
-        this.message.addStyle( "error" );
-        this.message.setVisible( false );
-        window.clientArea.addChild( this.message );
+        this.message = new Label("");
+        this.message.addStyle("error");
+        this.message.setVisible(false);
+        window.clientArea.addChild(this.message);
 
         Container buttons = new Container();
-        buttons.addStyle( "buttonBar" );
-        buttons.setXAlignment( 0.5f );
+        buttons.addStyle("buttonBar");
+        buttons.setXAlignment(0.5f);
 
-        this.addDetailButtons( buttons );
+        this.addDetailButtons(buttons);
 
-        window.clientArea.addChild( buttons );
+        window.clientArea.addChild(buttons);
 
-        Itchy.singleton.showWindow( window );
+        Itchy.singleton.showWindow(window);
         this.editWindow = window;
     }
 
@@ -203,7 +200,7 @@ public abstract class SubEditor
 
     protected void onCancel()
     {
-        Itchy.singleton.hideWindow( this.editWindow );
+        Itchy.singleton.hideWindow(this.editWindow);
     }
 
     protected abstract void remove( Object resource );

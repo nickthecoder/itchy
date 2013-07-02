@@ -16,10 +16,9 @@ public class Reversed<T> implements Iterable<T>
     @Override
     public Iterator<T> iterator()
     {
-        final ListIterator<T> i = this.original.listIterator( this.original.size() );
+        final ListIterator<T> i = this.original.listIterator(this.original.size());
 
-        return new Iterator<T>()
-        {
+        return new Iterator<T>() {
             @Override
             public boolean hasNext()
             {
@@ -42,6 +41,6 @@ public class Reversed<T> implements Iterable<T>
 
     public static <S> Reversed<S> list( List<S> original )
     {
-        return new Reversed<S>( original );
+        return new Reversed<S>(original);
     }
 }

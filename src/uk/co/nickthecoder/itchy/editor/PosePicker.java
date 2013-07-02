@@ -19,29 +19,29 @@ public abstract class PosePicker extends Window
 
     public PosePicker( Resources resources )
     {
-        super( "Pick a Pose" );
+        super("Pick a Pose");
         this.resources = resources;
 
         Container container = new Container();
-        VerticalScroll vs = new VerticalScroll( container );
+        VerticalScroll vs = new VerticalScroll(container);
 
-        this.createPoses( container );
-        this.clientArea.addChild( vs );
-        this.clientArea.addStyle( "vScrolled" );
+        this.createPoses(container);
+        this.clientArea.addChild(vs);
+        this.clientArea.addStyle("vScrolled");
     }
 
     private void createPoses( Container container )
     {
-        GridLayout gridLayout = new GridLayout( container, 5 );
-        container.setLayout( gridLayout );
-        container.addStyle( "pickGrid" );
+        GridLayout gridLayout = new GridLayout(container, 5);
+        container.setLayout(gridLayout);
+        container.addStyle("pickGrid");
 
-        for ( String name : this.resources.poseNames() ) {
-            PoseResource poseResource = this.resources.getPoseResource( name );
+        for (String name : this.resources.poseNames()) {
+            PoseResource poseResource = this.resources.getPoseResource(name);
 
-            Component component = this.createButton( poseResource );
+            Component component = this.createButton(poseResource);
 
-            gridLayout.addChild( component );
+            gridLayout.addChild(component);
         }
         gridLayout.endRow();
     }
@@ -51,26 +51,25 @@ public abstract class PosePicker extends Window
         // final Pose pose = poseResource.pose;
         Container container = new Container();
 
-        container.setLayout( new VerticalLayout() );
-        container.setXAlignment( 0.5f );
+        container.setLayout(new VerticalLayout());
+        container.setXAlignment(0.5f);
 
-        ImageComponent img = new ImageComponent( poseResource.getThumbnail() );
-        Button button = new Button( img );
-        button.addStyle( "test" );
-        button.addActionListener( new ActionListener()
-        {
+        ImageComponent img = new ImageComponent(poseResource.getThumbnail());
+        Button button = new Button(img);
+        button.addStyle("test");
+        button.addActionListener(new ActionListener() {
             @Override
             public void action()
             {
                 PosePicker.this.destroy();
-                PosePicker.this.pick( poseResource );
+                PosePicker.this.pick(poseResource);
             }
-        } );
+        });
 
-        Label label = new Label( poseResource.getName() );
+        Label label = new Label(poseResource.getName());
 
-        container.addChild( button );
-        container.addChild( label );
+        container.addChild(button);
+        container.addChild(label);
 
         return container;
     }

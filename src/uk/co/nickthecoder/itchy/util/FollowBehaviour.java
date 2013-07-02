@@ -13,7 +13,7 @@ public class FollowBehaviour extends Behaviour
 
     public FollowBehaviour( Actor following )
     {
-        this( following, 0, 0 );
+        this(following, 0, 0);
     }
 
     public FollowBehaviour( Actor following, double dx, double dy )
@@ -26,7 +26,7 @@ public class FollowBehaviour extends Behaviour
     @Override
     public void tick()
     {
-        this.actor.moveTo( this.following.getX() + this.dx, this.following.getY() + this.dy );
+        this.actor.moveTo(this.following.getX() + this.dx, this.following.getY() + this.dy);
     }
 
 }

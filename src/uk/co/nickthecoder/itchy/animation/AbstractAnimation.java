@@ -16,15 +16,14 @@ public abstract class AbstractAnimation implements Animation, Cloneable
     @Override
     public abstract void start( Actor actor );
 
-
     @Override
     public abstract boolean isFinished();
 
     @Override
     public void tick( Actor actor )
     {
-        if ( this.isFinished() ) {
-            for ( AnimationListener listener : this.listeners ) {
+        if (this.isFinished()) {
+            for (AnimationListener listener : this.listeners) {
                 listener.finished();
             }
         }
@@ -32,21 +31,21 @@ public abstract class AbstractAnimation implements Animation, Cloneable
 
     public void addAnimationListener( AnimationListener listener )
     {
-        this.listeners.add( listener );
+        this.listeners.add(listener);
     }
+
     public void removeAnimationListener( AnimationListener listener )
     {
-        this.listeners.remove( listener );
+        this.listeners.remove(listener);
     }
 
     @Override
-    public Object clone()
-        throws CloneNotSupportedException
+    public Object clone() throws CloneNotSupportedException
     {
         AbstractAnimation result = (AbstractAnimation) super.clone();
         result.listeners = new ArrayList<AnimationListener>();
-        for ( AnimationListener listener : this.listeners ) {
-            result.listeners.add( listener );
+        for (AnimationListener listener : this.listeners) {
+            result.listeners.add(listener);
         }
         return result;
     }
@@ -56,7 +55,7 @@ public abstract class AbstractAnimation implements Animation, Cloneable
     {
         try {
             return (Animation) this.clone();
-        } catch ( CloneNotSupportedException e ) {
+        } catch (CloneNotSupportedException e) {
             e.printStackTrace();
             return null;
         }

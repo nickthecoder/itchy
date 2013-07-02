@@ -9,22 +9,22 @@ public class CostumeResource extends NamedResource
 
     public CostumeResource( Resources resources, String name, Costume costume )
     {
-        super( resources, name );
+        super(resources, name);
         this.costume = costume;
     }
 
     public String getExtendedFromName()
     {
-        Costume base = costume.getExtendedFrom();
-        if ( base == null ) {
+        Costume base = this.costume.getExtendedFrom();
+        if (base == null) {
             return null;
         } else {
-            return this.resources.getCostumeName( base );
+            return this.resources.getCostumeName(base);
         }
     }
 
     public Surface getThumbnail()
     {
-        return this.resources.getThumbnail( this );
+        return this.resources.getThumbnail(this);
     }
 }

@@ -31,21 +31,21 @@ public class CompoundAnimation extends AbstractAnimation
 
     public void addAnimation( Animation child )
     {
-        this.children.add( child );
+        this.children.add(child);
     }
 
     public void removeAnimation( Animation child )
     {
-        this.children.remove( child );
+        this.children.remove(child);
     }
 
     public void moveAnimationUp( Animation child )
     {
-        int index = this.children.indexOf( child );
-        assert ( index > 0 );
-        Animation other = this.children.get( index - 1 );
-        this.children.set( index, other );
-        this.children.set( index - 1, child );
+        int index = this.children.indexOf(child);
+        assert (index > 0);
+        Animation other = this.children.get(index - 1);
+        this.children.set(index, other);
+        this.children.set(index - 1, child);
     }
 
     @Override
@@ -53,42 +53,41 @@ public class CompoundAnimation extends AbstractAnimation
     {
         this.loopsRemaining = this.loops == 0 ? 1 : this.loops;
 
-        if ( this.sequence ) {
-            this.sop = new Sequence( this, actor );
+        if (this.sequence) {
+            this.sop = new Sequence(this, actor);
         } else {
-            this.sop = new Parallel( this, actor );
+            this.sop = new Parallel(this, actor);
         }
-        this.sop.start( actor );
+        this.sop.start(actor);
 
     }
 
     @Override
     public void tick( Actor actor )
     {
-        this.sop.tick( actor );
+        this.sop.tick(actor);
 
-        if ( this.sop.isFinished() ) {
-            if ( this.loops != 0 ) {
+        if (this.sop.isFinished()) {
+            if (this.loops != 0) {
                 this.loopsRemaining--;
             }
-            if ( this.loopsRemaining > 0 ) {
-                this.sop.start( actor );
+            if (this.loopsRemaining > 0) {
+                this.sop.start(actor);
             }
         }
-        super.tick( actor );
+        super.tick(actor);
     }
 
     @Override
-    public Animation clone()
-        throws CloneNotSupportedException
+    public Animation clone() throws CloneNotSupportedException
     {
-        assert( this.sop == null ); // Can only clone an animation which hasn't started
+        assert (this.sop == null); // Can only clone an animation which hasn't started
 
         CompoundAnimation result = (CompoundAnimation) super.clone();
 
         result.children = new ArrayList<Animation>();
-        for ( Animation child : this.children ) {
-            result.children.add( child.copy() );
+        for (Animation child : this.children) {
+            result.children.add(child.copy());
         }
 
         return result;

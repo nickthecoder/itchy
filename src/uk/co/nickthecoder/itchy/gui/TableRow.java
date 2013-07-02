@@ -31,15 +31,15 @@ public class TableRow extends ClickableContainer
     public void onClick( MouseButtonEvent e )
     {
         this.table.focus();
-        if ( this.row != this.table.getCurrentTableModelRow() ) {
-            this.table.selectRow( this );
+        if (this.row != this.table.getCurrentTableModelRow()) {
+            this.table.selectRow(this);
         }
     }
 
     @Override
     public void onDoubleClick( MouseButtonEvent e )
     {
-        this.table.pickRow( this );
+        this.table.pickRow(this);
     }
 
 }

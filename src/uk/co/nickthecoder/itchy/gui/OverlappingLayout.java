@@ -4,6 +4,7 @@ import java.util.List;
 
 public class OverlappingLayout implements Layout
 {
+    @Override
     public void calculateRequirements( Container container )
     {
         int width = 0;
@@ -11,39 +12,43 @@ public class OverlappingLayout implements Layout
 
         List<Component> children = container.getChildren();
 
-        for ( Component child : children ) {
-            if ( width < child.getRequiredWidth() ) {
+        for (Component child : children) {
+            if (width < child.getRequiredWidth()) {
                 width = child.getRequiredWidth();
             }
-            if ( height < child.getRequiredHeight() ) {
+            if (height < child.getRequiredHeight()) {
                 height = child.getRequiredHeight();
             }
         }
 
-        container.setNaturalWidth( width + container.getPaddingLeft() + container.getPaddingRight() );
-        container.setNaturalHeight( height + container.getPaddingTop() + container.getPaddingBottom() );
+        container.setNaturalWidth(width + container.getPaddingLeft() + container.getPaddingRight());
+        container.setNaturalHeight(height + container.getPaddingTop() +
+                container.getPaddingBottom());
 
     }
 
+    @Override
     public void layout( Container container )
     {
         List<Component> children = container.getChildren();
 
-        int fullWidth = container.getWidth() - container.getPaddingLeft() - container.getPaddingRight();
-        int fullHeight = container.getHeight() - container.getPaddingTop() - container.getPaddingBottom();
+        int fullWidth = container.getWidth() - container.getPaddingLeft() -
+                container.getPaddingRight();
+        int fullHeight = container.getHeight() - container.getPaddingTop() -
+                container.getPaddingBottom();
 
-        for ( Component child : children ) {
+        for (Component child : children) {
             int width = fullWidth;
             int height = fullHeight;
 
-            if ( ( !container.getFillX() ) && ( child.getRequiredWidth() < fullWidth ) ) {
+            if ((!container.getFillX()) && (child.getRequiredWidth() < fullWidth)) {
                 width = child.getRequiredWidth();
             }
-            if ( ( !container.getFillY() ) && ( child.getRequiredHeight() < fullHeight ) ) {
+            if ((!container.getFillY()) && (child.getRequiredHeight() < fullHeight)) {
                 height = child.getRequiredHeight();
             }
 
-            child.setPosition( container.getPaddingLeft(), container.getPaddingTop(), width, height );
+            child.setPosition(container.getPaddingLeft(), container.getPaddingTop(), width, height);
         }
 
     }

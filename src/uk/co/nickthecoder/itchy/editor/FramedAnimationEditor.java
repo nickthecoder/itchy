@@ -32,63 +32,62 @@ public class FramedAnimationEditor extends AnimationEditor
 
     public FramedAnimationEditor( Editor editor, Resources resources, FramedAnimation animation )
     {
-        super( editor, animation );
+        super(editor, animation);
         this.resources = resources;
     }
 
     @Override
     public void createButtons( Container buttonBar )
     {
-        Button add = new Button( "Add" );
-        add.addActionListener( new ActionListener()
-        {
+        Button add = new Button("Add");
+        add.addActionListener(new ActionListener() {
             @Override
             public void action()
             {
-                PosePicker posePicker = new PosePicker( FramedAnimationEditor.this.resources )
-                {
+                PosePicker posePicker = new PosePicker(FramedAnimationEditor.this.resources) {
                     @Override
                     public void pick( PoseResource poseResource )
                     {
-                        FramedAnimationEditor.this.frames.add( new Frame( poseResource.getName(), poseResource.pose ) );
+                        FramedAnimationEditor.this.frames.add(new Frame(poseResource.getName(),
+                                poseResource.pose));
                         FramedAnimationEditor.this.rebuildFrames();
                     }
                 };
 
                 posePicker.show();
             }
-        } );
-        buttonBar.addChild( add );
+        });
+        buttonBar.addChild(add);
 
-        super.createButtons( buttonBar );
+        super.createButtons(buttonBar);
     }
 
     @Override
     public void createForm( GridLayout gridLayout )
     {
         FramedAnimation fa = (FramedAnimation) this.animation;
-        this.chkPingPong = new CheckBox( fa.pingPong );
+        this.chkPingPong = new CheckBox(fa.pingPong);
 
-        gridLayout.addRow( "Ping Pong", this.chkPingPong );
+        gridLayout.addRow("Ping Pong", this.chkPingPong);
     }
 
     @Override
     public Component createExtra()
     {
-        this.frames = new ArrayList<Frame>( ( (FramedAnimation) this.animation ).getFrames() );
+        this.frames = new ArrayList<Frame>(((FramedAnimation) this.animation).getFrames());
 
         this.framesContainer = new Container();
-        this.framesContainer.addStyle( "form" );
-        this.framesGrid = new GridLayout( this.framesContainer, 4 );
+        this.framesContainer.addStyle("form");
+        this.framesGrid = new GridLayout(this.framesContainer, 4);
 
-        this.framesGrid.addRow( "Pose", new Label( "Frames" ), null, null );
+        this.framesGrid.addRow("Pose", new Label("Frames"), null, null);
 
-        this.framesContainer.setLayout( this.framesGrid );
+        this.framesContainer.setLayout(this.framesGrid);
 
         this.rebuildFrames();
 
-        VerticalScroll vs = new VerticalScroll( this.framesContainer );
-        vs.addStyle( "panel" );
+        VerticalScroll vs = new VerticalScroll(this.framesContainer);
+        vs.addStyle("panel");
 
         return vs;
     }
@@ -98,9 +97,9 @@ public class FramedAnimationEditor extends AnimationEditor
         this.framesGrid.clear();
 
         int i = -1;
-        for ( Frame frame : this.frames ) {
+        for (Frame frame : this.frames) {
             i++;
-            this.rebuildFrame( i, frame );
+            this.rebuildFrame(i, frame);
         }
         this.framesContainer.invalidate();
     }
@@ -108,40 +107,39 @@ public class FramedAnimationEditor extends AnimationEditor
     private void rebuildFrame( final int i, final Frame frame )
     {
         Component image;
-        ImageComponent img = new ImageComponent( frame.getPose().getSurface() );
+        ImageComponent img = new ImageComponent(frame.getPose().getSurface());
         image = img;
-        IntegerBox delay = new IntegerBox( frame.getDelay() );
+        IntegerBox delay = new IntegerBox(frame.getDelay());
 
         Button up = null;
-        if ( i > 0 ) {
-            up = new Button( "Up" );
-            up.addActionListener( new ActionListener()
-            {
+        if (i > 0) {
+            up = new Button("Up");
+            up.addActionListener(new ActionListener() {
                 @Override
                 public void action()
                 {
-                    Frame other = FramedAnimationEditor.this.frames.get( i - 1 );
-                    FramedAnimationEditor.this.frames.set( i, other );
-                    FramedAnimationEditor.this.frames.set( i - 1, frame );
+                    Frame other = FramedAnimationEditor.this.frames.get(i - 1);
+                    FramedAnimationEditor.this.frames.set(i, other);
+                    FramedAnimationEditor.this.frames.set(i - 1, frame);
                     FramedAnimationEditor.this.rebuildFrames();
                 }
-            } );
+            });
         }
 
-        Button delete = new Button( new ImageComponent( this.editor.rules.resources.getPose( "buttonDelete" ).getSurface() ) );
-        delete.addActionListener( new ActionListener()
-        {
+        Button delete = new Button(new ImageComponent(this.editor.rules.resources.getPose(
+                "buttonDelete").getSurface()));
+        delete.addActionListener(new ActionListener() {
             @Override
             public void action()
             {
-                FramedAnimationEditor.this.frames.remove( i );
+                FramedAnimationEditor.this.frames.remove(i);
                 FramedAnimationEditor.this.rebuildFrames();
             }
-        } );
+        });
 
-        delete.addStyle( "plain" );
+        delete.addStyle("plain");
 
-        this.framesGrid.addRow( image, delay, up, delete );
+        this.framesGrid.addRow(image, delay, up, delete);
     }
 
     @Override
@@ -150,7 +148,7 @@ public class FramedAnimationEditor extends AnimationEditor
         FramedAnimation framedAnimation = (FramedAnimation) this.animation;
 
         framedAnimation.pingPong = this.chkPingPong.getValue();
-        framedAnimation.replaceFrames( this.frames );
+        framedAnimation.replaceFrames(this.frames);
 
         return true;
     }

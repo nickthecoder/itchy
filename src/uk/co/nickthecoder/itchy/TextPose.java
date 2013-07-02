@@ -26,7 +26,7 @@ public class TextPose implements Pose
 
     public TextPose( String text, Font font, double fontSize )
     {
-        this( text, font, fontSize, new RGBA( 255, 255, 255 ) );
+        this(text, font, fontSize, new RGBA(255, 255, 255));
     }
 
     public TextPose( String text, Font font, double fontSize, RGBA color )
@@ -44,19 +44,21 @@ public class TextPose implements Pose
 
     public void setText( String text )
     {
-        if ( ! this.text.equals( text ) ) {
+        if (!this.text.equals(text)) {
             this.text = text;
             this.clearSurfaceCache();
         }
 
     }
+
     public Font getFont()
     {
         return this.font;
     }
+
     public void setFont( Font font )
     {
-        if ( this.font != font ) {
+        if (this.font != font) {
             this.font = font;
             this.clearSurfaceCache();
         }
@@ -69,7 +71,7 @@ public class TextPose implements Pose
 
     public void setFontSize( double fontSize )
     {
-        if ( (int) this.fontSize != (int) fontSize ) {
+        if ((int) this.fontSize != (int) fontSize) {
             this.clearSurfaceCache();
         }
         this.fontSize = fontSize;
@@ -96,14 +98,14 @@ public class TextPose implements Pose
 
     public void adjustFontSize( double delta )
     {
-        this.setFontSize( this.fontSize + delta );
+        this.setFontSize(this.fontSize + delta);
     }
 
     private void clearSurfaceCache()
     {
         this.changed = true;
 
-        if ( this.surface != null ) {
+        if (this.surface != null) {
             this.surface.free();
         }
         this.surface = null;
@@ -116,8 +118,8 @@ public class TextPose implements Pose
 
     public void setXAlignment( double xAlignment )
     {
-        if ( ( xAlignment < 0 ) || ( xAlignment > 1 ) ) {
-            throw new IllegalArgumentException( "Alignments must be in the range (0..1)" );
+        if ((xAlignment < 0) || (xAlignment > 1)) {
+            throw new IllegalArgumentException("Alignments must be in the range (0..1)");
         }
         this.xAlignment = xAlignment;
     }
@@ -129,8 +131,8 @@ public class TextPose implements Pose
 
     public void setYAlignment( double yAlignment )
     {
-        if ( ( yAlignment < 0 ) || ( yAlignment > 1 ) ) {
-            throw new IllegalArgumentException( "Alignments must be in the range (0..1)" );
+        if ((yAlignment < 0) || (yAlignment > 1)) {
+            throw new IllegalArgumentException("Alignments must be in the range (0..1)");
         }
         this.yAlignment = yAlignment;
     }
@@ -141,25 +143,25 @@ public class TextPose implements Pose
     public int getOffsetX()
     {
         this.ensureCached();
-        return (int) ( this.surface.getWidth() * this.xAlignment );
+        return (int) (this.surface.getWidth() * this.xAlignment);
     }
 
     @Override
     public int getOffsetY()
     {
         this.ensureCached();
-        return (int) ( this.surface.getHeight() * this.yAlignment );
+        return (int) (this.surface.getHeight() * this.yAlignment);
     }
 
     private void ensureCached()
     {
-        if ( this.surface == null ) {
-        	try {
-        		TrueTypeFont ttf = this.font.getSize( (int) this.fontSize );
-        		this.surface = ttf.renderBlended( this.text, this.color );
-        	} catch (JameException e) {
-        		throw new JameRuntimeException( e );
-        	}
+        if (this.surface == null) {
+            try {
+                TrueTypeFont ttf = this.font.getSize((int) this.fontSize);
+                this.surface = ttf.renderBlended(this.text, this.color);
+            } catch (JameException e) {
+                throw new JameRuntimeException(e);
+            }
         }
     }
 

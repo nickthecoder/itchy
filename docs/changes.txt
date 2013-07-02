@@ -1,9 +1,26 @@
+2013-07-03
+==========
+Its one year since I started writing Itchy (only about 2 months actually writing it - a 10 month gap).
+
+2013-07-02
+==========
+Used eclipse's Clean Up to tidy up all of the code.
+Refactored Property, so that sub classes of Behaviour don't need to use generics. 
+Actors in a scene can delay being activated. Used this for the mothership.
+Drunkinvaders: scaled up aliens bounce with appropriate amount of mass.
+
+2013-07-01
+==========
+Added "GameLoopJob" which allows game to sleep, without the nastiness of multi-threading.
+Refactored AlienFactory to use sleep.
+Added 'random' utilities onceEvery and oneIn.
+Normalised the time units used in DrunkInvaders to seconds
 
 2013-06-30
 ==========
 Added MothershipBehaviour to drunkinvaders
 Added new type of animation : ScaleAnimation 
-Ship reload is better (realoads as soon as the previous bullet dies).
+Ship reload is better (reloads as soon as the previous bullet dies).
 
 2013-06-29
 ==========
@@ -167,4 +184,10 @@ A simple event handler is in place, including a "keyboard" state, which is basic
 ==========
 
 Started Itchy after being inspired by Simon's success with SDL with the sdljava Java bindings.
+Itchy is the sequel to Itch (which was a newbie friendly game engine written in Python). After many failed attempts
+refactoring python code, I've all but given up on the language for projects of any reasonable size.
+I find coding in Java is MUCH quicker than python. Errors are spotted while you type. There are many
+refactorings which can be done automatically by the eclipse IDE. Even if you aren't using an IDE, catching
+errors at compile time is much better than finding them at run time, as is the case with Python.
+
 

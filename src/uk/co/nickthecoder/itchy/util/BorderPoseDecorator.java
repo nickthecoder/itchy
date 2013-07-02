@@ -17,15 +17,16 @@ public class BorderPoseDecorator implements PoseDecorator
 
     public BorderPoseDecorator( NinePatch eightPatch, int border )
     {
-        this( eightPatch, border, border );
+        this(eightPatch, border, border);
     }
 
     public BorderPoseDecorator( NinePatch eightPatch, int borderTopBottom, int borderLeftRight )
     {
-        this( eightPatch, borderTopBottom, borderLeftRight, borderTopBottom, borderLeftRight );
+        this(eightPatch, borderTopBottom, borderLeftRight, borderTopBottom, borderLeftRight);
     }
 
-    public BorderPoseDecorator( Renderable renderable, int borderTop, int borderRight, int borderBottom, int borderLeft )
+    public BorderPoseDecorator( Renderable renderable, int borderTop, int borderRight,
+            int borderBottom, int borderLeft )
     {
         this.renderable = renderable;
 
@@ -35,18 +36,19 @@ public class BorderPoseDecorator implements PoseDecorator
         this.borderLeft = borderLeft;
     }
 
+    @Override
     public Pose createPose( Pose srcPose )
     {
         Surface srcSurface = srcPose.getSurface();
-        Surface surface = new Surface( srcSurface.getWidth() + this.borderLeft + this.borderRight,
-            srcSurface.getHeight() + this.borderTop + this.borderBottom, true );
+        Surface surface = new Surface(srcSurface.getWidth() + this.borderLeft + this.borderRight,
+                srcSurface.getHeight() + this.borderTop + this.borderBottom, true);
 
-        renderable.render( surface );
-        srcSurface.blit( surface, this.borderLeft, this.borderRight );
+        this.renderable.render(surface);
+        srcSurface.blit(surface, this.borderLeft, this.borderRight);
 
-        ImagePose result = new ImagePose( surface );
-        result.setOffsetX( srcPose.getOffsetX() + this.borderLeft );
-        result.setOffsetY( srcPose.getOffsetY() + this.borderTop );
+        ImagePose result = new ImagePose(surface);
+        result.setOffsetX(srcPose.getOffsetX() + this.borderLeft);
+        result.setOffsetY(srcPose.getOffsetY() + this.borderTop);
 
         return result;
     }

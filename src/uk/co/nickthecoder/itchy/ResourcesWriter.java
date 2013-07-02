@@ -30,12 +30,11 @@ public class ResourcesWriter extends XMLWriter
         this.resources = resources;
     }
 
-    public void write( String filename )
-        throws Exception
+    public void write( String filename ) throws Exception
     {
         this.writtenCostumeName = new HashSet<String>();
 
-        this.begin( filename );
+        this.begin(filename);
 
         try {
 
@@ -46,10 +45,9 @@ public class ResourcesWriter extends XMLWriter
         }
     }
 
-    private void writeResources()
-        throws XMLException
+    private void writeResources() throws XMLException
     {
-        this.beginTag( "resources" );
+        this.beginTag("resources");
 
         this.writeFonts();
         this.writeNinePatches();
@@ -59,375 +57,357 @@ public class ResourcesWriter extends XMLWriter
         this.writeCostumes();
         this.writeScenes();
 
-        this.endTag( "resources" );
+        this.endTag("resources");
     }
 
-    private void writeFonts()
-        throws XMLException
+    private void writeFonts() throws XMLException
     {
-        this.beginTag( "fonts" );
+        this.beginTag("fonts");
 
-        for ( String name : this.resources.fontNames() ) {
-            FontResource fontResource = this.resources.getFontResource( name );
+        for (String name : this.resources.fontNames()) {
+            FontResource fontResource = this.resources.getFontResource(name);
 
-            this.beginTag( "font" );
-            this.attribute( "name", name );
-            this.attribute( "filename", fontResource.filename );
-            this.endTag( "font" );
+            this.beginTag("font");
+            this.attribute("name", name);
+            this.attribute("filename", fontResource.filename);
+            this.endTag("font");
         }
 
-        this.endTag( "fonts" );
+        this.endTag("fonts");
     }
 
-    private void writeNinePatches()
-        throws XMLException
+    private void writeNinePatches() throws XMLException
     {
-        this.beginTag( "ninePatches" );
+        this.beginTag("ninePatches");
 
-        for ( String name : this.resources.ninePatchNames() ) {
-            NinePatchResource ninePatchResource = this.resources.getNinePatchResource( name );
+        for (String name : this.resources.ninePatchNames()) {
+            NinePatchResource ninePatchResource = this.resources.getNinePatchResource(name);
 
-            this.beginTag( "ninePatch" );
+            this.beginTag("ninePatch");
 
-            this.attribute( "name", name );
-            this.attribute( "filename", ninePatchResource.filename );
+            this.attribute("name", name);
+            this.attribute("filename", ninePatchResource.filename);
 
-            if ( ninePatchResource.ninePatch instanceof NinePatch ) {
-                NinePatch patch = ( ninePatchResource.ninePatch );
+            if (ninePatchResource.ninePatch instanceof NinePatch) {
+                NinePatch patch = (ninePatchResource.ninePatch);
 
-                this.attribute( "top", patch.getMarginTop() );
-                this.attribute( "right", patch.getMarginRight() );
-                this.attribute( "bottom", patch.getMarginBottom() );
-                this.attribute( "left", patch.getMarginLeft() );
+                this.attribute("top", patch.getMarginTop());
+                this.attribute("right", patch.getMarginRight());
+                this.attribute("bottom", patch.getMarginBottom());
+                this.attribute("left", patch.getMarginLeft());
             }
 
-            this.endTag( "ninePatch" );
+            this.endTag("ninePatch");
         }
 
-        this.endTag( "ninePatches" );
+        this.endTag("ninePatches");
     }
 
-    private void writePoses()
-        throws XMLException
+    private void writePoses() throws XMLException
     {
-        this.beginTag( "poses" );
+        this.beginTag("poses");
 
-        for ( String name : this.resources.poseNames() ) {
-            PoseResource poseResource = this.resources.getPoseResource( name );
+        for (String name : this.resources.poseNames()) {
+            PoseResource poseResource = this.resources.getPoseResource(name);
 
-            this.beginTag( "pose" );
-            this.attribute( "name", name );
-            this.attribute( "filename", poseResource.filename );
-            if ( poseResource.pose.getDirection() != 0 ) {
-                this.attribute( "direction", poseResource.pose.getDirection() );
+            this.beginTag("pose");
+            this.attribute("name", name);
+            this.attribute("filename", poseResource.filename);
+            if (poseResource.pose.getDirection() != 0) {
+                this.attribute("direction", poseResource.pose.getDirection());
             }
-            if ( poseResource.pose.getOffsetX() != poseResource.pose.getSurface().getWidth() / 2 ) {
-                this.attribute( "offsetX", poseResource.pose.getOffsetX() );
+            if (poseResource.pose.getOffsetX() != poseResource.pose.getSurface().getWidth() / 2) {
+                this.attribute("offsetX", poseResource.pose.getOffsetX());
             }
-            if ( poseResource.pose.getOffsetY() != poseResource.pose.getSurface().getHeight() / 2 ) {
-                this.attribute( "offsetY", poseResource.pose.getOffsetY() );
+            if (poseResource.pose.getOffsetY() != poseResource.pose.getSurface().getHeight() / 2) {
+                this.attribute("offsetY", poseResource.pose.getOffsetY());
             }
-            this.endTag( "pose" );
+            this.endTag("pose");
         }
 
-        this.endTag( "poses" );
+        this.endTag("poses");
     }
 
-    private void writeSounds()
-        throws XMLException
+    private void writeSounds() throws XMLException
     {
-        this.beginTag( "sounds" );
+        this.beginTag("sounds");
 
-        for ( String name : this.resources.soundNames() ) {
-            SoundResource soundResource = this.resources.getSoundResource( name );
+        for (String name : this.resources.soundNames()) {
+            SoundResource soundResource = this.resources.getSoundResource(name);
 
-            this.beginTag( "sound" );
-            this.attribute( "name", name );
-            this.attribute( "filename", soundResource.filename );
-            this.endTag( "sound" );
+            this.beginTag("sound");
+            this.attribute("name", name);
+            this.attribute("filename", soundResource.filename);
+            this.endTag("sound");
         }
 
-        this.endTag( "sounds" );
+        this.endTag("sounds");
     }
 
-    private void writeAnimations()
-        throws XMLException
+    private void writeAnimations() throws XMLException
     {
-        this.beginTag( "animations" );
+        this.beginTag("animations");
 
-        for ( String name : this.resources.animationNames() ) {
-            Animation animation = this.resources.getAnimation( name );
+        for (String name : this.resources.animationNames()) {
+            Animation animation = this.resources.getAnimation(name);
 
-            this.beginTag( "animation" );
-            this.attribute( "name", name );
+            this.beginTag("animation");
+            this.attribute("name", name);
 
-            this.writeAnimation( animation );
+            this.writeAnimation(animation);
 
-            this.endTag( "animation" );
+            this.endTag("animation");
         }
 
-        this.endTag( "animations" );
+        this.endTag("animations");
     }
 
-    private void writeAnimation( Animation animation )
-        throws XMLException
+    private void writeAnimation( Animation animation ) throws XMLException
     {
-        if ( animation instanceof CompoundAnimation ) {
+        if (animation instanceof CompoundAnimation) {
             CompoundAnimation ca = (CompoundAnimation) animation;
             String tagName = ca.sequence ? "sequence" : "parallel";
-            this.beginTag( tagName );
-            this.attribute( "loops", ca.loops );
-            this.writeAnimations( (CompoundAnimation) animation );
-            this.endTag( tagName );
+            this.beginTag(tagName);
+            this.attribute("loops", ca.loops);
+            this.writeAnimations((CompoundAnimation) animation);
+            this.endTag(tagName);
 
-        } else if ( animation instanceof FramedAnimation ) {
+        } else if (animation instanceof FramedAnimation) {
             FramedAnimation framedAnimation = (FramedAnimation) animation;
             String tagName = framedAnimation.pingPong ? "pingPong" : "frames";
-            this.beginTag( tagName );
-            this.writeFrames( framedAnimation.getFrames() );
-            this.endTag( tagName );
+            this.beginTag(tagName);
+            this.writeFrames(framedAnimation.getFrames());
+            this.endTag(tagName);
 
-        } else if ( animation instanceof MoveAnimation ) {
+        } else if (animation instanceof MoveAnimation) {
             MoveAnimation moveAnimation = (MoveAnimation) animation;
-            this.beginTag( "move" );
-            this.attribute( "ticks", moveAnimation.ticks );
-            this.attribute( "dx", moveAnimation.dx );
-            this.attribute( "dy", moveAnimation.dy );
-            this.writeProfile( moveAnimation.profile );
-            this.endTag( "move" );
+            this.beginTag("move");
+            this.attribute("ticks", moveAnimation.ticks);
+            this.attribute("dx", moveAnimation.dx);
+            this.attribute("dy", moveAnimation.dy);
+            this.writeProfile(moveAnimation.profile);
+            this.endTag("move");
 
-        } else if ( animation instanceof AlphaAnimation ) {
+        } else if (animation instanceof AlphaAnimation) {
             AlphaAnimation alphaAnimation = (AlphaAnimation) animation;
-            this.beginTag( "alpha" );
-            this.attribute( "ticks", alphaAnimation.ticks );
-            this.attribute( "from", alphaAnimation.getFrom() );
-            this.attribute( "to", alphaAnimation.getTo() );
-            this.writeProfile( alphaAnimation.profile );
-            this.endTag( "alpha" );
+            this.beginTag("alpha");
+            this.attribute("ticks", alphaAnimation.ticks);
+            this.attribute("from", alphaAnimation.getFrom());
+            this.attribute("to", alphaAnimation.getTo());
+            this.writeProfile(alphaAnimation.profile);
+            this.endTag("alpha");
 
-        } else if ( animation instanceof TurnAnimation ) {
+        } else if (animation instanceof TurnAnimation) {
             TurnAnimation turnAnimation = (TurnAnimation) animation;
-            this.beginTag( "turn" );
-            this.attribute( "ticks", turnAnimation.ticks );
-            this.attribute( "from", turnAnimation.getFrom() );
-            this.attribute( "to", turnAnimation.getTo() );
-            this.writeProfile( turnAnimation.profile );
-            this.endTag( "turn" );
+            this.beginTag("turn");
+            this.attribute("ticks", turnAnimation.ticks);
+            this.attribute("from", turnAnimation.getFrom());
+            this.attribute("to", turnAnimation.getTo());
+            this.writeProfile(turnAnimation.profile);
+            this.endTag("turn");
 
-        } else if ( animation instanceof ScaleAnimation ) {
+        } else if (animation instanceof ScaleAnimation) {
             ScaleAnimation scaleAnimation = (ScaleAnimation) animation;
-            this.beginTag( "scale" );
-            this.attribute( "ticks", scaleAnimation.ticks );
-            this.attribute( "from", scaleAnimation.getFrom() );
-            this.attribute( "to", scaleAnimation.getTo() );
-            this.writeProfile( scaleAnimation.profile );
-            this.endTag( "turn" );
+            this.beginTag("scale");
+            this.attribute("ticks", scaleAnimation.ticks);
+            this.attribute("from", scaleAnimation.getFrom());
+            this.attribute("to", scaleAnimation.getTo());
+            this.writeProfile(scaleAnimation.profile);
+            this.endTag("turn");
 
         } else {
-            throw new XMLException( "Unknown animation type : " + animation.getClass().getName() );
+            throw new XMLException("Unknown animation type : " + animation.getClass().getName());
         }
     }
 
-    private void writeProfile( Profile profile )
-        throws XMLException
+    private void writeProfile( Profile profile ) throws XMLException
     {
-        String name = NumericAnimation.getProfileName( profile );
-        if ( name == null ) {
-            throw new XMLException( "Unknown animation profile : " + profile );
+        String name = NumericAnimation.getProfileName(profile);
+        if (name == null) {
+            throw new XMLException("Unknown animation profile : " + profile);
         }
-        this.attribute( "profile", name );
+        this.attribute("profile", name);
     }
 
-    private void writeFrames( List<Frame> frames )
-        throws XMLException
+    private void writeFrames( List<Frame> frames ) throws XMLException
     {
-        for ( Frame frame : frames ) {
-            this.beginTag( "frame" );
-            this.attribute( "pose", this.resources.getPoseName( frame.getPose() ) );
-            this.attribute( "delay", frame.getDelay() );
-            this.endTag( "frame" );
+        for (Frame frame : frames) {
+            this.beginTag("frame");
+            this.attribute("pose", this.resources.getPoseName(frame.getPose()));
+            this.attribute("delay", frame.getDelay());
+            this.endTag("frame");
         }
     }
 
-    private void writeAnimations( CompoundAnimation parent )
-        throws XMLException
+    private void writeAnimations( CompoundAnimation parent ) throws XMLException
     {
-        for ( Animation child : parent.children ) {
-            this.writeAnimation( child );
+        for (Animation child : parent.children) {
+            this.writeAnimation(child);
         }
     }
 
-    private void writeCostumes()
-        throws XMLException
+    private void writeCostumes() throws XMLException
     {
-        this.beginTag( "costumes" );
+        this.beginTag("costumes");
 
-        for ( String name : this.resources.costumeNames() ) {
+        for (String name : this.resources.costumeNames()) {
 
-            this.writeCostume( name );
+            this.writeCostume(name);
         }
 
-        this.endTag( "costumes" );
+        this.endTag("costumes");
 
     }
 
-    private void writeCostume( String name )
-        throws XMLException
+    private void writeCostume( String name ) throws XMLException
     {
-        Costume costume = this.resources.getCostume( name );
+        Costume costume = this.resources.getCostume(name);
         String baseName = null;
 
         Costume extendedCostume = costume.getExtendedFrom();
-        if ( extendedCostume != null ) {
+        if (extendedCostume != null) {
 
-            baseName = this.resources.getCostumeName( extendedCostume );
-            if ( baseName == null ) {
-                throw new XMLException( "Costume not found : " + extendedCostume );
+            baseName = this.resources.getCostumeName(extendedCostume);
+            if (baseName == null) {
+                throw new XMLException("Costume not found : " + extendedCostume);
             }
 
-            if ( !this.writtenCostumeName.contains( baseName ) ) {
-                this.writeCostume( baseName );
+            if (!this.writtenCostumeName.contains(baseName)) {
+                this.writeCostume(baseName);
             }
 
-            this.writeCostume( costume, name, baseName );
+            this.writeCostume(costume, name, baseName);
 
         } else {
-            this.writeCostume( costume, name, null );
+            this.writeCostume(costume, name, null);
         }
     }
 
     private void writeCostume( Costume simpleCostume, String name, String baseName )
         throws XMLException
     {
-        if ( this.writtenCostumeName.contains( name ) ) {
+        if (this.writtenCostumeName.contains(name)) {
             return;
         }
 
-        this.beginTag( "costume" );
-        this.attribute( "name", name );
+        this.beginTag("costume");
+        this.attribute("name", name);
 
-        if ( baseName != null ) {
-            this.attribute( "extends", baseName );
+        if (baseName != null) {
+            this.attribute("extends", baseName);
         }
-        if ( ! NullBehaviour.class.getName().equals( simpleCostume.behaviourClassName ) ) {
-            this.attribute( "behaviour", simpleCostume.behaviourClassName );
+        if (!NullBehaviour.class.getName().equals(simpleCostume.behaviourClassName)) {
+            this.attribute("behaviour", simpleCostume.behaviourClassName);
         }
 
+        this.writeCostumePoses(simpleCostume);
+        this.writeCostumeStrings(simpleCostume);
+        this.writeCostumeSounds(simpleCostume);
+        this.writeCostumeFonts(simpleCostume);
+        this.writeCostumeAnimations(simpleCostume);
 
-        this.writeCostumePoses( simpleCostume );
-        this.writeCostumeStrings( simpleCostume );
-        this.writeCostumeSounds( simpleCostume );
-        this.writeCostumeFonts( simpleCostume );
-        this.writeCostumeAnimations( simpleCostume );
+        this.endTag("costume");
 
-        this.endTag( "costume" );
-
-        this.writtenCostumeName.add( name );
+        this.writtenCostumeName.add(name);
     }
 
-    private void writeCostumePoses( Costume costume )
-        throws XMLException
+    private void writeCostumePoses( Costume costume ) throws XMLException
     {
 
-        for ( String name : costume.getPoseNames() ) {
+        for (String name : costume.getPoseNames()) {
 
-            for ( PoseResource poseResource : costume.getPoseChoices( name ) ) {
-                this.beginTag( "pose" );
-                this.attribute( "name", name );
+            for (PoseResource poseResource : costume.getPoseChoices(name)) {
+                this.beginTag("pose");
+                this.attribute("name", name);
 
-                this.attribute( "pose", poseResource.name );
+                this.attribute("pose", poseResource.name);
 
-                this.endTag( "pose" );
+                this.endTag("pose");
             }
         }
     }
 
-    private void writeCostumeStrings( Costume costume )
-        throws XMLException
+    private void writeCostumeStrings( Costume costume ) throws XMLException
     {
 
-        for ( String name : costume.getStringNames() ) {
+        for (String name : costume.getStringNames()) {
 
-            for ( String str : costume.getStringChoices( name ) ) {
+            for (String str : costume.getStringChoices(name)) {
 
-                this.beginTag( "string" );
-                this.attribute( "name", name );
-                this.body( str );
-                this.endTag( "string" );
+                this.beginTag("string");
+                this.attribute("name", name);
+                this.body(str);
+                this.endTag("string");
 
             }
         }
     }
 
-    private void writeCostumeSounds( Costume costume )
-        throws XMLException
+    private void writeCostumeSounds( Costume costume ) throws XMLException
     {
 
-        for ( String name : costume.getSoundNames() ) {
+        for (String name : costume.getSoundNames()) {
 
-            for ( SoundResource soundResource : costume.getSoundChoices( name ) ) {
-                this.beginTag( "sound" );
-                this.attribute( "name", name );
+            for (SoundResource soundResource : costume.getSoundChoices(name)) {
+                this.beginTag("sound");
+                this.attribute("name", name);
 
-                this.attribute( "sound", soundResource.name );
+                this.attribute("sound", soundResource.name);
 
-                this.endTag( "sound" );
+                this.endTag("sound");
             }
 
         }
     }
 
-    private void writeCostumeFonts( Costume costume )
-        throws XMLException
+    private void writeCostumeFonts( Costume costume ) throws XMLException
     {
 
-        for ( String name : costume.getFontNames() ) {
+        for (String name : costume.getFontNames()) {
 
-            for ( FontResource fontResource : costume.getFontChoices( name ) ) {
-                this.beginTag( "font" );
-                this.attribute( "name", name );
+            for (FontResource fontResource : costume.getFontChoices(name)) {
+                this.beginTag("font");
+                this.attribute("name", name);
 
-                this.attribute( "font", fontResource.name );
+                this.attribute("font", fontResource.name);
 
-                this.endTag( "font" );
+                this.endTag("font");
             }
         }
 
     }
 
-    private void writeCostumeAnimations( Costume costume )
-        throws XMLException
+    private void writeCostumeAnimations( Costume costume ) throws XMLException
     {
 
-        for ( String name : costume.getAnimationNames() ) {
+        for (String name : costume.getAnimationNames()) {
 
-            for ( AnimationResource animationResource : costume.getAnimationChoices( name ) ) {
-                this.beginTag( "animation" );
-                this.attribute( "name", name );
+            for (AnimationResource animationResource : costume.getAnimationChoices(name)) {
+                this.beginTag("animation");
+                this.attribute("name", name);
 
-                this.attribute( "animation", animationResource.name );
+                this.attribute("animation", animationResource.name);
 
-                this.endTag( "animation" );
+                this.endTag("animation");
             }
         }
 
     }
 
-    private void writeScenes()
-        throws XMLException
+    private void writeScenes() throws XMLException
     {
-        this.beginTag( "scenes" );
+        this.beginTag("scenes");
 
-        for ( String name : this.resources.sceneNames() ) {
-            SceneResource sceneResource = this.resources.getSceneResource( name );
+        for (String name : this.resources.sceneNames()) {
+            SceneResource sceneResource = this.resources.getSceneResource(name);
 
-            this.beginTag( "scene" );
-            this.attribute( "name", name );
-            this.attribute( "filename", sceneResource.getFilename() );
-            this.endTag( "scene" );
+            this.beginTag("scene");
+            this.attribute("name", name);
+            this.attribute("filename", sceneResource.getFilename());
+            this.endTag("scene");
         }
 
-        this.endTag( "scenes" );
+        this.endTag("scenes");
     }
 
 }

@@ -21,40 +21,37 @@ public class Rules extends Loadable
 
     public void style( Component component )
     {
-        Rule accumalator = new Rule( null );
+        Rule accumalator = new Rule(null);
 
-        for ( Rule rule : this.rules ) {
-            if ( rule.matches( component ) ) {
-                accumalator.merge( rule );
+        for (Rule rule : this.rules) {
+            if (rule.matches(component)) {
+                accumalator.merge(rule);
             }
         }
 
-        accumalator.apply( component );
+        accumalator.apply(component);
     }
 
     @Override
-    public void load( String filename )
-        throws Exception
+    public void load( String filename ) throws Exception
     {
-        super.load( filename );
-        RulesReader loader = new RulesReader( this );
-        loader.load( filename );
+        super.load(filename);
+        RulesReader loader = new RulesReader(this);
+        loader.load(filename);
     }
 
     public void addRule( Rule rule )
     {
-        this.rules.add( rule );
+        this.rules.add(rule);
     }
 
     @Override
-    protected void actualSave( String filename )
-        throws Exception
+    protected void actualSave( String filename ) throws Exception
     {
     }
 
     @Override
-    protected void checkSave( String filename )
-        throws Exception
+    protected void checkSave( String filename ) throws Exception
     {
     }
 

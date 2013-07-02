@@ -10,6 +10,5 @@ public interface CollisionStrategy
     public Set<Actor> overlapping( Actor actor, String... tags );
 
     public Set<Actor> touching( Actor actor, String... tags );
-    
 
 }

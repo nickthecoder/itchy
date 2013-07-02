@@ -10,12 +10,12 @@ public class ScaleAnimation extends NumericAnimation
 
     public ScaleAnimation()
     {
-        this( 0, linear, 1, 2 );
+        this(200, linear, 1, 2);
     }
 
     public ScaleAnimation( int ticks, Profile profile, double from, double to )
     {
-        super( ticks, profile );
+        super(ticks, profile);
         this.from = from;
         this.to = to;
     }
@@ -39,7 +39,8 @@ public class ScaleAnimation extends NumericAnimation
     @Override
     public void tick( Actor actor, double amount )
     {
-        actor.getAppearance().setScale( amount );
+        double value = this.from + (this.to - this.from) * amount;
+        actor.getAppearance().setScale(value);
     }
 
 }

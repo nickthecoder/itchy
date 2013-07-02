@@ -8,10 +8,10 @@ public class ImageComponent extends SurfaceComponent
 
     public static Surface getDummySurface()
     {
-        if ( dummySurface == null ) {
+        if (dummySurface == null) {
             try {
-                dummySurface = new Surface( 1, 1, true );
-            } catch ( Exception e ) {
+                dummySurface = new Surface(1, 1, true);
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -20,7 +20,7 @@ public class ImageComponent extends SurfaceComponent
 
     public ImageComponent()
     {
-        this( getDummySurface() );
+        this(getDummySurface());
     }
 
     public ImageComponent( Surface surface )
@@ -28,6 +28,7 @@ public class ImageComponent extends SurfaceComponent
         this.plainSurface = surface;
     }
 
+    @Override
     public String getType()
     {
         return "image";
@@ -36,22 +37,25 @@ public class ImageComponent extends SurfaceComponent
     public void setImage( Surface surface )
     {
         this.plainSurface = surface;
-        if ( this.parent != null ) {
+        if (this.parent != null) {
             this.parent.forceLayout();
         }
         this.invalidate();
     }
 
+    @Override
     public Surface getPlainSurface()
     {
         return this.plainSurface;
     }
 
+    @Override
     protected void clearPlainSurface()
     {
-        throw new RuntimeException( "You should not clear the plain surface of an ImageComponent" );
+        throw new RuntimeException("You should not clear the plain surface of an ImageComponent");
     }
 
+    @Override
     protected void createPlainSurface()
     {
     }

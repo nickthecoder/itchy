@@ -17,9 +17,9 @@ public class TestIterleavedThreads
     public void run()
     {
         InterleavedThreads its = new InterleavedThreads();
-        for ( int i = 0; i < 10; i++ ) {
-            TestThread x = new TestThread( i );
-            its.add( x );
+        for (int i = 0; i < 10; i++) {
+            TestThread x = new TestThread(i);
+            its.add(x);
         }
         its.start();
     }
@@ -34,14 +34,16 @@ public class TestIterleavedThreads
 
         }
 
+        @Override
         public void work()
         {
-            result.append( "Starting thread " ).append( this.id );
-            for ( int j = 0; j < 10; j++ ) {
-                result.append( this.id ).append( "(" ).append( j ).append( ")" );
+            TestIterleavedThreads.this.result.append("Starting thread ").append(this.id);
+            for (int j = 0; j < 10; j++) {
+                TestIterleavedThreads.this.result.append(this.id).append("(").append(j).append(")");
                 this.next();
             }
-            result.append( "Finished thread " ).append( this.id ).append( "\n" );
+            TestIterleavedThreads.this.result.append("Finished thread ").append(this.id)
+                    .append("\n");
         }
 
     }

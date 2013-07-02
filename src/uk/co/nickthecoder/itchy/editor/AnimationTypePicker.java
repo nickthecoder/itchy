@@ -17,41 +17,40 @@ import uk.co.nickthecoder.itchy.gui.Window;
 
 public abstract class AnimationTypePicker extends Window
 {
-    private static final Animation[] animationPrototypes = { new CompoundAnimation( true ),
-        new CompoundAnimation( false ), new MoveAnimation(), new AlphaAnimation(), new TurnAnimation(),
-        new FramedAnimation(), new ScaleAnimation() };
+    private static final Animation[] animationPrototypes = { new CompoundAnimation(true),
+        new CompoundAnimation(false), new MoveAnimation(), new AlphaAnimation(),
+        new TurnAnimation(), new FramedAnimation(), new ScaleAnimation() };
 
     public AnimationTypePicker()
     {
-        super( "Pick an Animation Type" );
+        super("Pick an Animation Type");
 
         Container container = new Container();
-        container.setLayout( new VerticalLayout() );
+        container.setLayout(new VerticalLayout());
 
-        for ( Animation animation : animationPrototypes ) {
+        for (Animation animation : animationPrototypes) {
 
-            Component component = this.createButton( animation );
+            Component component = this.createButton(animation);
 
-            container.addChild( component );
+            container.addChild(component);
         }
 
-        VerticalScroll vs = new VerticalScroll( container );
-        this.clientArea.addChild( vs );
+        VerticalScroll vs = new VerticalScroll(container);
+        this.clientArea.addChild(vs);
     }
 
     private Component createButton( final Animation animation )
     {
 
-        Button button = new Button( animation.getName() );
-        button.addActionListener( new ActionListener()
-        {
+        Button button = new Button(animation.getName());
+        button.addActionListener(new ActionListener() {
             @Override
             public void action()
             {
                 AnimationTypePicker.this.destroy();
-                AnimationTypePicker.this.pick( animation );
+                AnimationTypePicker.this.pick(animation);
             }
-        } );
+        });
 
         return button;
     }

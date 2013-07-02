@@ -6,10 +6,10 @@ public class SceneDesignerBehaviour extends Behaviour
 {
     public Behaviour actualBehaviour;
 
-    public void setBehaviourClassName( String name )
-            throws ClassNotFoundException, InstantiationException, IllegalAccessException
+    public void setBehaviourClassName( String name ) throws ClassNotFoundException,
+        InstantiationException, IllegalAccessException
     {
-        Class<?> klass = Class.forName( name );
+        Class<?> klass = Class.forName(name);
         this.actualBehaviour = (Behaviour) klass.newInstance();
     }
 

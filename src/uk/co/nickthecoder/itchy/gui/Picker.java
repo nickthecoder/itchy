@@ -8,32 +8,33 @@ public abstract class Picker<T> extends Window
 {
     public Picker( String title, HashMap<String, T> hashmap )
     {
-        this( title, hashmap, null );
+        this(title, hashmap, null);
     }
 
     public Picker( String title, HashMap<String, T> hashmap, T selected )
     {
-        super( title );
+        super(title);
 
         Container container = new Container();
-        container.setLayout( new VerticalLayout() );
-        container.setFill( true, true );
+        container.setLayout(new VerticalLayout());
+        container.setFill(true, true);
 
-        VerticalScroll vs = new VerticalScroll( container );
-        this.clientArea.addChild( vs );
+        VerticalScroll vs = new VerticalScroll(container);
+        this.clientArea.addChild(vs);
 
-        ArrayList<String> keys = new ArrayList<String>( hashmap.keySet() );
-        Collections.sort( keys );
+        ArrayList<String> keys = new ArrayList<String>(hashmap.keySet());
+        Collections.sort(keys);
 
-        for ( String key : keys ) {
+        for (String key : keys) {
 
-            T object = hashmap.get( key );
+            T object = hashmap.get(key);
 
-            Component component = this.createButton( key, object );
-            container.addChild( component );
+            Component component = this.createButton(key, object);
+            container.addChild(component);
 
-            if ( ((object == null) && (selected==null) ) || ((object!=null) &&object.equals( selected ) ) ) {
-                component.addStyle( "selected" );
+            if (((object == null) && (selected == null)) ||
+                    ((object != null) && object.equals(selected))) {
+                component.addStyle("selected");
                 component.focus();
             }
 
@@ -44,16 +45,15 @@ public abstract class Picker<T> extends Window
     private Component createButton( final String label, final T object )
     {
 
-        Button button = new Button( label );
-        button.addActionListener( new ActionListener()
-        {
+        Button button = new Button(label);
+        button.addActionListener(new ActionListener() {
             @Override
             public void action()
             {
                 Picker.this.destroy();
-                Picker.this.pick( label, object );
+                Picker.this.pick(label, object);
             }
-        } );
+        });
 
         return button;
     }

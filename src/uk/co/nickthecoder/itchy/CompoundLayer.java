@@ -12,7 +12,7 @@ public class CompoundLayer extends Layer
 
     public CompoundLayer( Rect positionOnScreen )
     {
-        super( positionOnScreen, false );
+        super(positionOnScreen, false);
         this.children = new LinkedList<Layer>();
     }
 
@@ -20,14 +20,14 @@ public class CompoundLayer extends Layer
     public void render2( Rect clip, Surface destSurface )
     {
 
-        for ( Iterator<Layer> i = this.children.iterator(); i.hasNext(); ) {
+        for (Iterator<Layer> i = this.children.iterator(); i.hasNext();) {
             Layer child = i.next();
-            if ( child.isVisible() ) {
+            if (child.isVisible()) {
 
-                child.render( clip, destSurface );
+                child.render(clip, destSurface);
 
             }
-            if ( child.isRemovePending() ) {
+            if (child.isRemovePending()) {
                 i.remove();
             }
         }
@@ -35,14 +35,14 @@ public class CompoundLayer extends Layer
 
     public void add( Layer layer )
     {
-        this.children.add( layer );
+        this.children.add(layer);
         layer.parent = this;
     }
 
     @Override
     public void clear()
     {
-        for ( Layer child : this.children ) {
+        for (Layer child : this.children) {
             child.clear();
         }
     }
@@ -50,9 +50,9 @@ public class CompoundLayer extends Layer
     @Override
     public void destroy()
     {
-        while ( this.children.size() > 0 ) {
+        while (this.children.size() > 0) {
             this.children.get(0).destroy();
-            this.children.remove( 0 );
+            this.children.remove(0);
         }
         this.clear();
     }

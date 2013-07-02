@@ -10,12 +10,12 @@ public class TurnAnimation extends NumericAnimation
 
     public TurnAnimation()
     {
-        this( 200, linear, 1, 1 );
+        this(200, linear, 1, 1);
     }
 
     public TurnAnimation( int ticks, Profile profile, double from, double to )
     {
-        super( ticks, profile );
+        super(ticks, profile);
         this.from = from;
         this.to = to;
     }
@@ -39,7 +39,7 @@ public class TurnAnimation extends NumericAnimation
     @Override
     public void tick( Actor actor, double amount )
     {
-        actor.getAppearance().adjustDirection( this.from + ( this.to - this.from ) * amount );
+        actor.getAppearance().adjustDirection(this.from + (this.to - this.from) * amount);
     }
 
 }

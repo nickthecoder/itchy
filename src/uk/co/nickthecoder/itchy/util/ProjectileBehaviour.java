@@ -20,13 +20,12 @@ public class ProjectileBehaviour extends Behaviour
     @Override
     public void tick()
     {
-        this.actor.moveBy( this.vx, this.vy );
+        this.actor.moveBy(this.vx, this.vy);
         this.vy += this.gravity;
-        this.actor.getAppearance().adjustAlpha( -this.fade );
-        this.actor.getAppearance().adjustDirection( this.spin );
+        this.actor.getAppearance().adjustAlpha(-this.fade);
+        this.actor.getAppearance().adjustDirection(this.spin);
 
-
-        if ( ( this.life-- < 0 ) || ( this.actor.getAppearance().getAlpha() <= 0 ) ) {
+        if ((this.life-- < 0) || (this.actor.getAppearance().getAlpha() <= 0)) {
             this.actor.kill();
         }
 

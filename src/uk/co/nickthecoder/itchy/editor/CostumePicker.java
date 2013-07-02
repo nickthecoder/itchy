@@ -22,38 +22,38 @@ public abstract class CostumePicker extends Window
 
     public CostumePicker( Resources resources )
     {
-        this( resources, null );
+        this(resources, null);
     }
 
     public CostumePicker( Resources resources, String nullText )
     {
-        super( "Pick a Costume" );
+        super("Pick a Costume");
         this.nullText = nullText;
         this.resources = resources;
 
         Container container = new Container();
-        VerticalScroll vs = new VerticalScroll( container );
+        VerticalScroll vs = new VerticalScroll(container);
 
-        this.createCostumes( container );
-        this.clientArea.addChild( vs );
+        this.createCostumes(container);
+        this.clientArea.addChild(vs);
     }
 
     private void createCostumes( Container container )
     {
-        GridLayout gridLayout = new GridLayout( container, 5 );
-        container.addStyle( "pickGrid" );
-        container.setLayout( gridLayout );
+        GridLayout gridLayout = new GridLayout(container, 5);
+        container.addStyle("pickGrid");
+        container.setLayout(gridLayout);
 
-        if ( this.nullText != null ) {
-            gridLayout.addChild( this.createButton( null ) );
+        if (this.nullText != null) {
+            gridLayout.addChild(this.createButton(null));
         }
 
-        for ( String name : this.resources.costumeNames() ) {
-            CostumeResource costumeResource = this.resources.getCostumeResource( name );
+        for (String name : this.resources.costumeNames()) {
+            CostumeResource costumeResource = this.resources.getCostumeResource(name);
 
-            Component component = this.createButton( costumeResource );
+            Component component = this.createButton(costumeResource);
 
-            gridLayout.addChild( component );
+            gridLayout.addChild(component);
         }
         gridLayout.endRow();
     }
@@ -62,32 +62,31 @@ public abstract class CostumePicker extends Window
     {
         // final Pose pose = poseResource.pose;
         Container container = new Container();
-        container.setLayout( new VerticalLayout() );
-        container.setXAlignment( 0.5f );
+        container.setLayout(new VerticalLayout());
+        container.setXAlignment(0.5f);
 
         Button button;
         Surface surface = costumeResource == null ? null : costumeResource.getThumbnail();
-        if ( surface == null ) {
-            button = new Button( costumeResource == null ? this.nullText : costumeResource.getName() );
+        if (surface == null) {
+            button = new Button(costumeResource == null ? this.nullText : costumeResource.getName());
         } else {
-            ImageComponent img = new ImageComponent( surface );
-            button = new Button( img );
+            ImageComponent img = new ImageComponent(surface);
+            button = new Button(img);
         }
 
-        button.addActionListener( new ActionListener()
-        {
+        button.addActionListener(new ActionListener() {
             @Override
             public void action()
             {
                 CostumePicker.this.destroy();
-                CostumePicker.this.pick( costumeResource );
+                CostumePicker.this.pick(costumeResource);
             }
-        } );
+        });
 
-        Label label = new Label( costumeResource == null ? this.nullText : costumeResource.getName() );
+        Label label = new Label(costumeResource == null ? this.nullText : costumeResource.getName());
 
-        container.addChild( button );
-        container.addChild( label );
+        container.addChild(button);
+        container.addChild(label);
 
         return container;
     }

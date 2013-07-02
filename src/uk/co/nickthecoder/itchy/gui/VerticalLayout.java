@@ -23,22 +23,26 @@ public class VerticalLayout implements Layout
 
         List<Component> children = container.getChildren();
 
-        for ( Component child : children ) {
-            if ( child.isVisible() ) {
+        for (Component child : children) {
+            if (child.isVisible()) {
 
-                this.requiredSum += child.getRequiredHeight() + child.getMarginTop() + child.getMarginBottom();
+                this.requiredSum += child.getRequiredHeight() + child.getMarginTop() +
+                        child.getMarginBottom();
                 this.sumExpansion += child.getExpansion();
-                int tempWidth = child.getRequiredWidth() + child.getMarginLeft() + child.getMarginRight();
-                if ( tempWidth > this.maxWidth ) {
+                int tempWidth = child.getRequiredWidth() + child.getMarginLeft() +
+                        child.getMarginRight();
+                if (tempWidth > this.maxWidth) {
                     this.maxWidth = tempWidth;
                 }
             }
         }
 
-        this.requiredSum += container.getSpacing() * ( children.size() - 1 );
+        this.requiredSum += container.getSpacing() * (children.size() - 1);
 
-        container.setNaturalHeight( this.requiredSum + container.getPaddingTop() + container.getPaddingBottom() );
-        container.setNaturalWidth( this.maxWidth + container.getPaddingLeft() + container.getPaddingRight() );
+        container.setNaturalHeight(this.requiredSum + container.getPaddingTop() +
+                container.getPaddingBottom());
+        container.setNaturalWidth(this.maxWidth + container.getPaddingLeft() +
+                container.getPaddingRight());
 
     }
 
@@ -51,31 +55,32 @@ public class VerticalLayout implements Layout
 
         int extraHeight = container.getHeight() - container.getNaturalHeight();
 
-        if ( !container.getFillY() ) {
+        if (!container.getFillY()) {
             y += extraHeight * container.getYAlignment();
             extraHeight = 0;
         }
-        int xSpace = container.getWidth() - container.getPaddingLeft() - container.getPaddingRight();
+        int xSpace = container.getWidth() - container.getPaddingLeft() -
+                container.getPaddingRight();
 
         List<Component> children = container.getChildren();
 
-        for ( Component child : children ) {
+        for (Component child : children) {
 
-            if ( child.isVisible() ) {
+            if (child.isVisible()) {
 
-                int width = container.getFillX() ? container.getWidth() - container.getPaddingLeft()
-                        - container.getPaddingRight() - child.getMarginLeft() - child.getMarginRight() : child
-                        .getRequiredWidth();
+                int width = container.getFillX() ? container.getWidth() -
+                        container.getPaddingLeft() - container.getPaddingRight() -
+                        child.getMarginLeft() - child.getMarginRight() : child.getRequiredWidth();
 
-                double expansionRatio = ( this.sumExpansion == 0 ) ? 1.0 / children.size() : child.getExpansion()
-                        / this.sumExpansion;
-                int singleExtraHeight = (int) ( extraHeight * expansionRatio );
+                double expansionRatio = (this.sumExpansion == 0) ? 1.0 / children.size() : child
+                        .getExpansion() / this.sumExpansion;
+                int singleExtraHeight = (int) (extraHeight * expansionRatio);
                 int height = child.getRequiredHeight() + singleExtraHeight;
 
-                int tx = (int) ( container.getXAlignment() * ( xSpace - child.getRequiredWidth() ) +
-                        container.getPaddingLeft() + child.getMarginLeft() );
+                int tx = (int) (container.getXAlignment() * (xSpace - child.getRequiredWidth()) +
+                        container.getPaddingLeft() + child.getMarginLeft());
 
-                child.setPosition( tx, y + child.getMarginTop(), width, height );
+                child.setPosition(tx, y + child.getMarginTop(), width, height);
 
                 y += child.getMarginTop() + height + child.getMarginBottom() + spacing;
 

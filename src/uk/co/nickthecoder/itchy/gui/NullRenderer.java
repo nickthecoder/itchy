@@ -5,6 +5,7 @@ import uk.co.nickthecoder.jame.Surface;
 
 public class NullRenderer implements Renderable
 {
+    @Override
     public void render( Surface surface )
     {
     }

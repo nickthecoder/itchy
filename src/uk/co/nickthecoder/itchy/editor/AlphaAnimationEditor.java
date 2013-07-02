@@ -18,7 +18,7 @@ public class AlphaAnimationEditor extends AnimationEditor
 
     public AlphaAnimationEditor( Editor editor, AlphaAnimation animation )
     {
-        super( editor, animation );
+        super(editor, animation);
     }
 
     @Override
@@ -26,17 +26,20 @@ public class AlphaAnimationEditor extends AnimationEditor
     {
         AlphaAnimation alphaAnimation = (AlphaAnimation) this.animation;
 
-        this.txtTicks = new IntegerBox( alphaAnimation.ticks );
-        gridLayout.addRow( new Label( "Duration" ), Editor.addHint( this.txtTicks, "frames" ) );
+        this.txtTicks = new IntegerBox(alphaAnimation.ticks);
+        gridLayout.addRow(new Label("Duration"), Editor.addHint(this.txtTicks, "frames"));
 
-        this.pickProfile = new PickerButton<Profile>( "Profile", alphaAnimation.profile, NumericAnimation.getProfiles() );
-        gridLayout.addRow( new Label( "Profile" ), this.pickProfile );
+        this.pickProfile = new PickerButton<Profile>("Profile", alphaAnimation.profile,
+                NumericAnimation.getProfiles());
+        gridLayout.addRow(new Label("Profile"), this.pickProfile);
 
-        this.txtFrom = new DoubleBox( alphaAnimation.from );
-        gridLayout.addRow( new Label( "Start Alpha" ), Editor.addHint( this.txtFrom, "0 = transparent. 255 = opaque" ) );
+        this.txtFrom = new DoubleBox(alphaAnimation.from);
+        gridLayout.addRow(new Label("Start Alpha"),
+                Editor.addHint(this.txtFrom, "0 = transparent. 255 = opaque"));
 
-        this.txtTo = new DoubleBox( alphaAnimation.to );
-        gridLayout.addRow( new Label( "End Alpha" ), Editor.addHint( this.txtTo, "0 = transparent. 255 = opaque" ) );
+        this.txtTo = new DoubleBox(alphaAnimation.to);
+        gridLayout.addRow(new Label("End Alpha"),
+                Editor.addHint(this.txtTo, "0 = transparent. 255 = opaque"));
     }
 
     @Override

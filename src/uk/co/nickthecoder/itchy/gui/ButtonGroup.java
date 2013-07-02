@@ -11,15 +11,15 @@ public class ButtonGroup
 
     public void add( ToggleButton button )
     {
-        assert( button.buttonGroup == null );
+        assert (button.buttonGroup == null);
         button.buttonGroup = this;
-        this.buttons.add( button );
+        this.buttons.add(button);
     }
 
     public void select( ToggleButton selected )
     {
-        for( ToggleButton button : this.buttons ) {
-            button.setState( button == selected );
+        for (ToggleButton button : this.buttons) {
+            button.setState(button == selected);
         }
     }
 

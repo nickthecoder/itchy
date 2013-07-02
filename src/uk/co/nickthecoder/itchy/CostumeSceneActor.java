@@ -6,7 +6,7 @@ public class CostumeSceneActor extends SceneActor
 
     public CostumeSceneActor( Costume costume )
     {
-        this( costume, "default" );
+        this(costume, "default");
     }
 
     public CostumeSceneActor( Costume costume, String startEvent )
@@ -17,7 +17,7 @@ public class CostumeSceneActor extends SceneActor
 
     public CostumeSceneActor( Actor actor )
     {
-        super( actor );
+        super(actor);
         this.costume = actor.getCostume();
 
     }
@@ -25,8 +25,8 @@ public class CostumeSceneActor extends SceneActor
     @Override
     public Actor createActor( boolean designActor )
     {
-        Actor actor = new Actor( this.costume, this.startEvent );
-        this.updateActor( actor, designActor );
+        Actor actor = new Actor(this.costume, this.startEvent);
+        this.updateActor(actor, designActor);
         return actor;
     }
 

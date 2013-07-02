@@ -17,10 +17,9 @@ public abstract class Layer implements MouseListener
     protected WorldRectangle worldRect;
 
     /**
-     * It it the norm in mathematics, for the Y axis to point upwards, but
-     * display devices have the Y axis pointing downwards. This boolean lets you
-     * choose which of these two conventions you want to use for the world
-     * coordinates (i.e. values of Actor.y).
+     * It it the norm in mathematics, for the Y axis to point upwards, but display devices have the
+     * Y axis pointing downwards. This boolean lets you choose which of these two conventions you
+     * want to use for the world coordinates (i.e. values of Actor.y).
      */
     protected boolean yAxisPointsDown;
 
@@ -31,17 +30,16 @@ public abstract class Layer implements MouseListener
 
     public Layer( Rect position, boolean yAxisPointsDown )
     {
-        assert ( position != null );
+        assert (position != null);
         this.position = position;
         this.yAxisPointsDown = yAxisPointsDown;
-        this.worldRect = new WorldRectangle( 0,0, position.width, position.height );
+        this.worldRect = new WorldRectangle(0, 0, position.width, position.height);
     }
 
     /**
-     * It it the norm in mathematics, for the Y axis to point upwards, but
-     * display devices have the Y axis pointing downwards. This boolean lets you
-     * choose which of these two conventions you want to use for the world
-     * coordinates (i.e. values of Actor.y). Set in the constructor.
+     * It it the norm in mathematics, for the Y axis to point upwards, but display devices have the
+     * Y axis pointing downwards. This boolean lets you choose which of these two conventions you
+     * want to use for the world coordinates (i.e. values of Actor.y). Set in the constructor.
      */
     public boolean getYAxisPointsDown()
     {
@@ -76,10 +74,10 @@ public abstract class Layer implements MouseListener
 
     public Rect getAbsolutePosition()
     {
-        Rect rect = new Rect( this.position );
+        Rect rect = new Rect(this.position);
         Layer parent = this.parent;
-        while ( parent != null ) {
-            parent.adjustPosition( rect );
+        while (parent != null) {
+            parent.adjustPosition(rect);
             parent = parent.parent;
         }
         return rect;
@@ -98,14 +96,14 @@ public abstract class Layer implements MouseListener
         int clipWidth = this.position.width;
         int clipHeight = this.position.height;
 
-        if ( clipLeft + clipWidth > within.x + within.width ) {
+        if (clipLeft + clipWidth > within.x + within.width) {
             clipWidth = within.x + within.width - clipLeft;
         }
-        if ( clipTop + clipHeight > within.y + within.height ) {
+        if (clipTop + clipHeight > within.y + within.height) {
             clipHeight = within.y + within.height - clipTop;
         }
-        Rect clip = new Rect( clipLeft, clipTop, clipWidth, clipHeight );
-        this.render2( clip, destSurface );
+        Rect clip = new Rect(clipLeft, clipTop, clipWidth, clipHeight);
+        this.render2(clip, destSurface);
     }
 
     protected abstract void render2( Rect clip, Surface destSurface );
@@ -114,29 +112,28 @@ public abstract class Layer implements MouseListener
 
     public void addMouseListener( MouseListener listener )
     {
-        if ( this.mouseListeners == null ) {
+        if (this.mouseListeners == null) {
             this.mouseListeners = new ArrayList<MouseListener>();
-            Itchy.singleton.addMouseListener( this );
+            Itchy.singleton.addMouseListener(this);
         }
-        this.mouseListeners.add( listener );
+        this.mouseListeners.add(listener);
     }
 
     public void removeMouseListener( MouseListener listener )
     {
-        this.mouseListeners.remove( listener );
-        if ( this.mouseListeners.size() == 0 ) {
+        this.mouseListeners.remove(listener);
+        if (this.mouseListeners.size() == 0) {
             this.mouseListeners = null;
-            Itchy.singleton.removeMouseListener( this );
+            Itchy.singleton.removeMouseListener(this);
         }
     }
-
 
     protected void adjustMouse( MouseEvent event )
     {
         Rect position = this.getAbsolutePosition();
         event.x -= position.x;
 
-        if ( this.yAxisPointsDown ) {
+        if (this.yAxisPointsDown) {
             event.y -= this.position.y;
         } else {
             event.y = position.y + this.position.height - event.y;
@@ -146,7 +143,8 @@ public abstract class Layer implements MouseListener
     protected boolean contains( int x, int y )
     {
         Rect position = this.getAbsolutePosition();
-        if ( (x < position.x) || (y < position.y) || (x > position.x + position.width) || (y > position.y + position.height) ) {
+        if ((x < position.x) || (y < position.y) || (x > position.x + position.width) ||
+                (y > position.y + position.height)) {
             return false;
         }
         return true;
@@ -155,18 +153,18 @@ public abstract class Layer implements MouseListener
     @Override
     public boolean onMouseDown( MouseButtonEvent event )
     {
-        if ( ! this.contains( event.x, event.y ) ) {
+        if (!this.contains(event.x, event.y)) {
             return false;
         }
 
         int tx = event.x;
         int ty = event.y;
 
-        this.adjustMouse( event );
+        this.adjustMouse(event);
 
         try {
-            for ( MouseListener listener : this.mouseListeners ) {
-                if ( listener.onMouseDown( event ) ) {
+            for (MouseListener listener : this.mouseListeners) {
+                if (listener.onMouseDown(event)) {
                     return true;
                 }
             }
@@ -177,21 +175,22 @@ public abstract class Layer implements MouseListener
 
         return false;
     }
+
     @Override
     public boolean onMouseUp( MouseButtonEvent event )
     {
-        if ( ! this.contains( event.x, event.y ) ) {
+        if (!this.contains(event.x, event.y)) {
             return false;
         }
 
         int tx = event.x;
         int ty = event.y;
 
-        this.adjustMouse( event );
+        this.adjustMouse(event);
 
         try {
-            for ( MouseListener listener : this.mouseListeners ) {
-                if ( listener.onMouseUp( event ) ) {
+            for (MouseListener listener : this.mouseListeners) {
+                if (listener.onMouseUp(event)) {
                     return true;
                 }
             }
@@ -201,24 +200,24 @@ public abstract class Layer implements MouseListener
         }
 
         return false;
-     }
+    }
 
     @Override
     public boolean onMouseMove( MouseMotionEvent event )
     {
 
-        if ( ! this.contains( event.x, event.y ) ) {
+        if (!this.contains(event.x, event.y)) {
             return false;
         }
 
         int tx = event.x;
         int ty = event.y;
 
-        this.adjustMouse( event );
+        this.adjustMouse(event);
 
         try {
-           for ( MouseListener listener : this.mouseListeners ) {
-                if ( listener.onMouseMove( event ) ) {
+            for (MouseListener listener : this.mouseListeners) {
+                if (listener.onMouseMove(event)) {
                     return true;
                 }
             }
@@ -228,7 +227,7 @@ public abstract class Layer implements MouseListener
         }
 
         return false;
-     }
+    }
 
     public abstract void destroy();
 }

@@ -44,7 +44,7 @@ public class Frame implements Cloneable
     {
         try {
             return (Frame) this.clone();
-        } catch ( CloneNotSupportedException e ) {
+        } catch (CloneNotSupportedException e) {
             e.printStackTrace();
             return null;
         }

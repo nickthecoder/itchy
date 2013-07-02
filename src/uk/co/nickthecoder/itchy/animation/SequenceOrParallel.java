@@ -10,6 +10,5 @@ public interface SequenceOrParallel extends Cloneable
 
     public boolean isFinished();
 
-
     public abstract SequenceOrParallel copy();
 }

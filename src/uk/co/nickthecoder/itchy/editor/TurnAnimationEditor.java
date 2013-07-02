@@ -18,7 +18,7 @@ public class TurnAnimationEditor extends AnimationEditor
 
     public TurnAnimationEditor( Editor editor, TurnAnimation animation )
     {
-        super( editor, animation );
+        super(editor, animation);
     }
 
     @Override
@@ -26,17 +26,20 @@ public class TurnAnimationEditor extends AnimationEditor
     {
         TurnAnimation turnAnimation = (TurnAnimation) this.animation;
 
-        this.txtTicks = new IntegerBox( turnAnimation.ticks );
-        gridLayout.addRow( new Label( "Duration" ), Editor.addHint( this.txtTicks, "frames" ) );
+        this.txtTicks = new IntegerBox(turnAnimation.ticks);
+        gridLayout.addRow(new Label("Duration"), Editor.addHint(this.txtTicks, "frames"));
 
-        this.pickProfile = new PickerButton<Profile>( "Profile", turnAnimation.profile, NumericAnimation.getProfiles() );
-        gridLayout.addRow( new Label( "Profile" ), this.pickProfile );
+        this.pickProfile = new PickerButton<Profile>("Profile", turnAnimation.profile,
+                NumericAnimation.getProfiles());
+        gridLayout.addRow(new Label("Profile"), this.pickProfile);
 
-        this.txtFrom = new DoubleBox( turnAnimation.from );
-        gridLayout.addRow( new Label( "Turn by (at the start)" ), Editor.addHint( this.txtFrom, "degrees per frame" ) );
+        this.txtFrom = new DoubleBox(turnAnimation.from);
+        gridLayout.addRow(new Label("Turn by (at the start)"),
+                Editor.addHint(this.txtFrom, "degrees per frame"));
 
-        this.txtTo = new DoubleBox( turnAnimation.to );
-        gridLayout.addRow( new Label( "Turn by (at the end)" ), Editor.addHint( this.txtTo, "degrees per frame" ) );
+        this.txtTo = new DoubleBox(turnAnimation.to);
+        gridLayout.addRow(new Label("Turn by (at the end)"),
+                Editor.addHint(this.txtTo, "degrees per frame"));
     }
 
     @Override

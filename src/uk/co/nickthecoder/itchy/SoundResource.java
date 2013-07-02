@@ -1,7 +1,7 @@
 package uk.co.nickthecoder.itchy;
 
-import uk.co.nickthecoder.jame.Sound;
 import uk.co.nickthecoder.jame.JameException;
+import uk.co.nickthecoder.jame.Sound;
 
 public class SoundResource extends NamedResource
 {
@@ -9,19 +9,17 @@ public class SoundResource extends NamedResource
 
     private Sound sound;
 
-    public SoundResource( Resources resources, String name, String filename )
-    		throws JameException
+    public SoundResource( Resources resources, String name, String filename ) throws JameException
     {
-        super( resources, name );
-        this.sound = new Sound( this.resources.resolveFilename( filename ) );
+        super(resources, name);
+        this.sound = new Sound(this.resources.resolveFilename(filename));
         this.filename = filename;
     }
 
-    public void setFilename( String filename )
-    		throws JameException
+    public void setFilename( String filename ) throws JameException
     {
         this.sound.free();
-        this.sound = new Sound( this.resources.resolveFilename( filename ) );
+        this.sound = new Sound(this.resources.resolveFilename(filename));
         this.filename = filename;
     }
 

@@ -1,27 +1,27 @@
 
+Add a shield - temporarily make the Ship Bouncy (but don't allow it to fire). vx,vy = 0, mass is LARGE.
+
+
 What's Next
 ===========
 
+CompoundBehaviour an actor can have more than one behaviour.
+
+Level to define if the mouse is visible or not, and turn it on/off accordingly.
+    Defaults to off
+
+Try it on a RaspPi
+
+Properties to have hints (which are in green on the right of their control)
+   Use it to put (seconds) after alien factory & alien fireOnceEvery
+
+
 Create a debug actor, which you can print to, and therefore easily display debug info on the screen.
+   Use it to display FPS and alien count.
 
 Add sound for the mothership
 Add sound for the mothership giving birth
 
-All behaviour can call "sleep", which will suspend its thread for the given number of millis.
-    As we are a game engine for newbies, we can't do multithreading properly.
-    Instead, make a list of all ticks which need to be done.
-        Create a new thread.
-            Have it do a tick, and remove it from the list.
-            If it calls sleep :
-                Set a flag on the current thread stating that it is a sleeper.
-                Create a new thread, and have it start at step 2 (Have it do a tick)
-                    Make it block on a "singleThread" condition.
-                Set a flag to indicate it is already ticking, so future calls to tick do nothing.
-                sleep for the given about of time.
-                Unset the amTicking flag
-                When it returns
-                
-            If it returns without sleeping, let it continue with the subsequent ticks.
 
 Make the main loop a little more clever, to ensure the game loop runs at a consistent speed,
 even if it as to drop frames to do so.
@@ -31,12 +31,14 @@ Go through each class. Replace with new idioms, such as varargs and new "for :" 
 
 Check for code consistency. Use self everywhere. Use eclipse's syntax guides.
 
-Create diagrams and javadocs aimed at games programmers.
+Create diagrams and javadocs aimed at games programmers. Change classes from public, where appropriate
+to remove them form the javadocs.
+    Maybe have more than one set of javadocs.
+        Novice, Experienced, Itchy Guru
 
 Create a strategy for large objects.
     Keep track of the square in the top left and bottom right of the object.
-    During update, add/remove from the squares as appropriate.
-    During touching, iterate over all squares from (topLeft.nw()) to (bottomRight.se()).
+    During update, add/remove from the squares as appropriate.    During touching, iterate over all squares from (topLeft.nw()) to (bottomRight.se()).
         Need Square to know its neighbours by name. i.e. methods "n", "ne", "e", etc.
         Also a method getNeighbour( int dx, int dy )
        

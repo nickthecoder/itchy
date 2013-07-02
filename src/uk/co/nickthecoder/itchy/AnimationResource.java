@@ -8,7 +8,7 @@ public class AnimationResource extends NamedResource
 
     public AnimationResource( Resources resources, String name, Animation animation )
     {
-        super( resources, name );
+        super(resources, name);
         this.animation = animation;
     }
 

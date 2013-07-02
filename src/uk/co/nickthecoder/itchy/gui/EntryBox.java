@@ -16,9 +16,9 @@ import uk.co.nickthecoder.jame.TrueTypeFont;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 
-public class EntryBox <E extends EntryBox<?>> extends ClickableContainer implements Layout
+public class EntryBox<E extends EntryBox<?>> extends ClickableContainer implements Layout
 {
-    private static final RGBA ANY_COLOR = new RGBA( 0, 0, 0 );
+    private static final RGBA ANY_COLOR = new RGBA(0, 0, 0);
 
     private final Label label;
 
@@ -34,27 +34,27 @@ public class EntryBox <E extends EntryBox<?>> extends ClickableContainer impleme
 
     public EntryBox( String str )
     {
-        if ( str == null ) {
+        if (str == null) {
             str = "";
         }
 
-        this.setType( "textBox" );
-        this.label = new Label( str );
-        this.addChild( this.label );
-        this.label.setExpansion( 1.0 );
+        this.setType("textBox");
+        this.label = new Label(str);
+        this.addChild(this.label);
+        this.label.setExpansion(1.0);
 
         this.caret = new Container();
-        this.caret.setType( "caret" );
-        this.addChild( this.caret );
+        this.caret.setType("caret");
+        this.addChild(this.caret);
 
         this.caretIndex = str.length();
 
-        this.setFill( true, true );
-        this.setLayout( this );
+        this.setFill(true, true);
+        this.setLayout(this);
 
         this.boxWidth = 30;
 
-        this.caret.setVisible( false );
+        this.caret.setVisible(false);
         this.focusable = true;
 
         this.changeListeners = new ArrayList<ComponentChangeListener>();
@@ -62,12 +62,12 @@ public class EntryBox <E extends EntryBox<?>> extends ClickableContainer impleme
 
     public void addChangeListener( ComponentChangeListener listener )
     {
-        this.changeListeners.add( listener );
+        this.changeListeners.add(listener);
     }
 
     public void removeChangeListener( ComponentChangeListener listener )
     {
-        this.changeListeners.remove( listener );
+        this.changeListeners.remove(listener);
     }
 
     public int getBoxWidth()
@@ -88,116 +88,117 @@ public class EntryBox <E extends EntryBox<?>> extends ClickableContainer impleme
     public void onClick( MouseButtonEvent ke )
     {
         this.focus();
-        if ( ke == null ) {
+        if (ke == null) {
             return;
         }
         try {
-            TrueTypeFont ttf = this.label.getFont().getSize( this.label.getFontSize() );
+            TrueTypeFont ttf = this.label.getFont().getSize(this.label.getFontSize());
 
             int index;
-            for ( index = 0; index <= this.label.getText().length(); index++ ) {
-                String text = this.label.getText().substring( 0, index );
-                Surface surface = ttf.renderBlended( text, ANY_COLOR );
+            for (index = 0; index <= this.label.getText().length(); index++) {
+                String text = this.label.getText().substring(0, index);
+                Surface surface = ttf.renderBlended(text, ANY_COLOR);
                 int width = surface.getWidth();
                 surface.free();
-                if ( width > ke.x ) {
-                    this.setCaretPosition( index - 1 );
+                if (width > ke.x) {
+                    this.setCaretPosition(index - 1);
                     return;
                 }
             }
 
-        } catch ( Exception e ) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
-        this.setCaretPosition( this.label.getText().length() );
+        this.setCaretPosition(this.label.getText().length());
 
     }
 
     @Override
     public void onFocus( boolean focus )
     {
-        this.caret.setVisible( focus );
+        this.caret.setVisible(focus);
     }
 
     @Override
     public boolean onKeyDown( KeyboardEvent ke )
     {
-        if ( ke.symbol == Keys.HOME ) {
+        if (ke.symbol == Keys.HOME) {
             this.caretIndex = 0;
             this.update();
             return true;
         }
 
-        if ( ke.symbol == Keys.END ) {
+        if (ke.symbol == Keys.END) {
             this.caretIndex = this.label.getText().length();
             this.update();
             return true;
         }
 
-        if ( ke.symbol == Keys.LEFT ) {
-            if ( this.caretIndex > 0 ) {
+        if (ke.symbol == Keys.LEFT) {
+            if (this.caretIndex > 0) {
                 this.caretIndex--;
                 this.update();
             }
             return true;
         }
 
-        if ( ke.symbol == Keys.RIGHT ) {
-            if ( this.caretIndex < this.label.getText().length() ) {
+        if (ke.symbol == Keys.RIGHT) {
+            if (this.caretIndex < this.label.getText().length()) {
                 this.caretIndex++;
                 this.update();
             }
             return true;
         }
 
-        if ( ke.symbol == Keys.BACKSPACE ) {
-            if ( this.caretIndex > 0 ) {
+        if (ke.symbol == Keys.BACKSPACE) {
+            if (this.caretIndex > 0) {
                 int pos = this.caretIndex; // setText will change the caretIndex
                                            // if at the end - don't want to do
                                            // it twice!
                 this.caretIndex--;
-                this.setEntryText( this.label.getText().substring( 0, pos - 1 ) + this.label.getText().substring( pos ) );
+                this.setEntryText(this.label.getText().substring(0, pos - 1) +
+                        this.label.getText().substring(pos));
             }
             return true;
         }
 
-        if ( ke.symbol == Keys.DELETE ) {
-            if ( this.caretIndex < this.label.getText().length() ) {
-                this.setEntryText( this.label.getText().substring( 0, this.caretIndex )
-                        + this.label.getText().substring( this.caretIndex + 1 ) );
+        if (ke.symbol == Keys.DELETE) {
+            if (this.caretIndex < this.label.getText().length()) {
+                this.setEntryText(this.label.getText().substring(0, this.caretIndex) +
+                        this.label.getText().substring(this.caretIndex + 1));
             }
             return true;
         }
 
-        if ( ( ke.symbol == Keys.v ) && ( Itchy.singleton.isCtrlDown() ) ) {
+        if ((ke.symbol == Keys.v) && (Itchy.singleton.isCtrlDown())) {
 
             try {
                 Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-                String str = (String) clipboard.getData( DataFlavor.stringFlavor );
+                String str = (String) clipboard.getData(DataFlavor.stringFlavor);
 
-                this.setEntryText( this.label.getText().substring( 0, this.caretIndex ) + str
-                        + this.label.getText().substring( this.caretIndex ) );
+                this.setEntryText(this.label.getText().substring(0, this.caretIndex) + str +
+                        this.label.getText().substring(this.caretIndex));
 
                 this.caretIndex += str.length();
 
-            } catch ( UnsupportedFlavorException e ) {
+            } catch (UnsupportedFlavorException e) {
                 e.printStackTrace();
-            } catch ( IOException e ) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
             return true;
         }
 
-        if ( ( ke.c >= 32 ) ) {
-            if ( this.setEntryText( this.label.getText().substring( 0, this.caretIndex ) + ke.c
-                    + this.label.getText().substring( this.caretIndex ) ) ) {
+        if ((ke.c >= 32)) {
+            if (this.setEntryText(this.label.getText().substring(0, this.caretIndex) + ke.c +
+                    this.label.getText().substring(this.caretIndex))) {
                 this.caretIndex++;
             }
             return true;
         }
 
-        return super.onKeyDown( ke );
+        return super.onKeyDown(ke);
     }
 
     public void setCaretPosition( int index )
@@ -208,15 +209,15 @@ public class EntryBox <E extends EntryBox<?>> extends ClickableContainer impleme
     }
 
     /**
-     *
+     * 
      * @param text
-     * @return true if the change was allowed (sub classes of TextBox, such as
-     *         IntegerBox may prevent arbitrary text)
+     * @return true if the change was allowed (sub classes of TextBox, such as IntegerBox may
+     *         prevent arbitrary text)
      */
     protected boolean setEntryText( String text )
     {
-        this.label.setText( text );
-        if ( this.caretIndex > text.length() ) {
+        this.label.setText(text);
+        if (this.caretIndex > text.length()) {
             this.caretIndex = text.length();
         }
         this.update();
@@ -228,7 +229,7 @@ public class EntryBox <E extends EntryBox<?>> extends ClickableContainer impleme
         this.forceLayout();
         this.invalidate();
 
-        for ( ComponentChangeListener listener : this.changeListeners ) {
+        for (ComponentChangeListener listener : this.changeListeners) {
             listener.changed();
         }
     }
@@ -242,19 +243,19 @@ public class EntryBox <E extends EntryBox<?>> extends ClickableContainer impleme
     public void calculateRequirements( Container c )
     {
         try {
-            TrueTypeFont ttf = this.label.getFont().getSize( this.label.getFontSize() );
+            TrueTypeFont ttf = this.label.getFont().getSize(this.label.getFontSize());
 
-            Surface surface = ttf.renderBlended( "M", ANY_COLOR );
+            Surface surface = ttf.renderBlended("M", ANY_COLOR);
             this.boxWidthPixels = surface.getWidth() * this.boxWidth;
             surface.free();
 
-        } catch ( Exception e ) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
-        this.setNaturalWidth( this.boxWidthPixels + this.getPaddingLeft() + this.getPaddingRight() );
-        this.setNaturalHeight( this.label.getRequiredHeight() + this.label.getMarginTop()
-                + this.label.getMarginBottom() + this.getPaddingTop() + this.getPaddingBottom() );
+        this.setNaturalWidth(this.boxWidthPixels + this.getPaddingLeft() + this.getPaddingRight());
+        this.setNaturalHeight(this.label.getRequiredHeight() + this.label.getMarginTop() +
+                this.label.getMarginBottom() + this.getPaddingTop() + this.getPaddingBottom());
     }
 
     @Override
@@ -264,19 +265,20 @@ public class EntryBox <E extends EntryBox<?>> extends ClickableContainer impleme
         int height = this.label.getRequiredHeight();
 
         int caretX = 0;
-        String text = this.label.getText().substring( 0, this.caretIndex );
+        String text = this.label.getText().substring(0, this.caretIndex);
         try {
-            Surface surface = this.label.getFont().getSize( this.label.getFontSize() ).renderBlended( text, ANY_COLOR );
+            Surface surface = this.label.getFont().getSize(this.label.getFontSize())
+                    .renderBlended(text, ANY_COLOR);
             caretX = surface.getWidth();
             surface.free();
-        } catch ( Exception e ) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
-        this.label.setPosition( this.getPaddingLeft() + this.label.getMarginLeft(),
-                this.getPaddingTop() + this.label.getMarginTop(), width, height );
-        this.caret.setPosition( this.getPaddingLeft() + this.caret.getMarginLeft() + caretX, this.getPaddingTop()
-                + this.caret.getPaddingTop(), this.caret.getRequiredWidth(), height - this.caret.getPaddingTop()
-                - this.caret.getPaddingBottom() );
+        this.label.setPosition(this.getPaddingLeft() + this.label.getMarginLeft(),
+                this.getPaddingTop() + this.label.getMarginTop(), width, height);
+        this.caret.setPosition(this.getPaddingLeft() + this.caret.getMarginLeft() + caretX,
+                this.getPaddingTop() + this.caret.getPaddingTop(), this.caret.getRequiredWidth(),
+                height - this.caret.getPaddingTop() - this.caret.getPaddingBottom());
     }
 }

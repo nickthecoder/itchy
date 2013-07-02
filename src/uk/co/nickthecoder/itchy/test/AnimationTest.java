@@ -14,18 +14,17 @@ public class AnimationTest extends Game
 {
     public ActorsLayer mainLayer;
 
-    public Rect size = new Rect( 0, 0, this.getWidth(), this.getHeight() );
+    public Rect size = new Rect(0, 0, this.getWidth(), this.getHeight());
 
-    public void init()
-        throws Exception
+    public void init() throws Exception
     {
-        Itchy.singleton.init( this );
+        Itchy.singleton.init(this);
 
-        this.mainLayer = new ScrollableLayer( this.size, new RGBA( 0, 0, 0 ), true );
-        Itchy.singleton.getGameLayer().add( this.mainLayer );
+        this.mainLayer = new ScrollableLayer(this.size, new RGBA(0, 0, 0), true);
+        Itchy.singleton.getGameLayer().add(this.mainLayer);
 
-        this.resources.load( "resources/drunkInvaders/test.xml" );
-        Itchy.singleton.addEventListener( this );
+        this.resources.load("resources/drunkInvaders/test.xml");
+        Itchy.singleton.addEventListener(this);
 
     }
 
@@ -34,21 +33,20 @@ public class AnimationTest extends Game
     {
         this.mainLayer.clear();
 
-        if ( ke.symbol == Keys.SPACE ) {
+        if (ke.symbol == Keys.SPACE) {
             try {
-                this.resources.getScene( "testAnimation" ).create( this.mainLayer, false );
-            } catch ( Exception e ) {
+                this.resources.getScene("testAnimation").create(this.mainLayer, false);
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-            for ( Actor actor : this.mainLayer.getActors() ) {
-                actor.deathEvent( "death" );
+            for (Actor actor : this.mainLayer.getActors()) {
+                actor.deathEvent("death");
             }
             return true;
         }
 
         return false;
     }
-
 
     @Override
     public int getWidth()
@@ -80,9 +78,7 @@ public class AnimationTest extends Game
         return "resources/drunkInvaders/icon.bmp";
     }
 
-
-    public static void main( String[] argv )
-        throws Exception
+    public static void main( String[] argv ) throws Exception
     {
 
         AnimationTest test = new AnimationTest();

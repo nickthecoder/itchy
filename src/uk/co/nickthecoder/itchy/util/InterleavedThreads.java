@@ -1,6 +1,8 @@
 package uk.co.nickthecoder.itchy.util;
 
-import java.util.*;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
 public class InterleavedThreads extends Thread
 {
@@ -18,7 +20,7 @@ public class InterleavedThreads extends Thread
 
     public void add( InterleavedThread thread )
     {
-        this.newThreads.add( thread );
+        this.newThreads.add(thread);
         thread.pending = false;
     }
 
@@ -27,36 +29,37 @@ public class InterleavedThreads extends Thread
         this.quitting = true;
     }
 
+    @Override
     public void run()
     {
         this.quitting = false;
 
-        while ( !this.quitting ) {
+        while (!this.quitting) {
 
-            for ( InterleavedThread thread : this.newThreads ) {
-                this.threads.add( thread );
+            for (InterleavedThread thread : this.newThreads) {
+                this.threads.add(thread);
                 thread.start();
                 try {
                     thread.lock.lockInterruptibly();
-                } catch ( InterruptedException e ) {
-                    System.out.println( "New thread interrupted" );
+                } catch (InterruptedException e) {
+                    System.out.println("New thread interrupted");
                 }
             }
             this.newThreads.clear();
 
             // System.out.println( "Start loop" );
-            for ( Iterator<InterleavedThread> i = this.threads.iterator(); i.hasNext(); ) {
+            for (Iterator<InterleavedThread> i = this.threads.iterator(); i.hasNext();) {
 
                 InterleavedThread thread = i.next();
 
-                if ( thread.isAlive() ) {
+                if (thread.isAlive()) {
 
                     thread.pending = true;
 
                     // Allow the thread to do work
                     thread.lock.unlock();
 
-                    while ( thread.pending ) {
+                    while (thread.pending) {
                         Thread.yield();
                     }
                     // thread.interrupt();
@@ -64,8 +67,8 @@ public class InterleavedThreads extends Thread
                     // Regain the lock when it has finished its morsel of work
                     try {
                         thread.lock.lockInterruptibly();
-                    } catch ( InterruptedException e ) {
-                        System.out.println( "ITs interrupted" );
+                    } catch (InterruptedException e) {
+                        System.out.println("ITs interrupted");
                     }
 
                 } else {

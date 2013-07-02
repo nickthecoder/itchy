@@ -23,16 +23,16 @@ public class RuleCriteria
     @Override
     public String toString()
     {
-        if ( this.wildcard ) {
+        if (this.wildcard) {
             return "*";
         }
-        if ( this.type == null ) {
-            if ( this.style == null ) {
+        if (this.type == null) {
+            if (this.style == null) {
                 return "?";
             }
             return "." + this.style;
         }
-        if ( this.style == null ) {
+        if (this.style == null) {
             return this.type;
         } else {
             return this.type + "." + this.style;

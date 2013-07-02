@@ -2,31 +2,25 @@
   <actor costume="earth" x="0" y="0" direction="0.0" start="default"/>
   <actor costume="ship" x="314" y="89" direction="90.0" start="default"/>
   <actor costume="factory" x="35" y="431" direction="0.0" start="default">
-    <property name="shootRate" value="4.0"/>
+    <property name="fireOnceEvery" value="6.0"/>
     <property name="costumeName" value="alien1"/>
-    <property name="greenFlag" value="260"/>
+    <property name="delayPerAlien" value="0.5"/>
     <property name="spacing" value="80.0"/>
     <property name="alienCount" value="8"/>
-    <property name="delay" value="0"/>
-    <property name="ticksPerAlien" value="20"/>
   </actor>
   <actor costume="factory" x="35" y="385" direction="0.0" start="default">
-    <property name="shootRate" value="3.0"/>
+    <property name="fireOnceEvery" value="8.0"/>
     <property name="costumeName" value="alien2"/>
-    <property name="greenFlag" value="260"/>
+    <property name="delayPerAlien" value="0.5"/>
     <property name="spacing" value="80.0"/>
     <property name="alienCount" value="8"/>
-    <property name="delay" value="6"/>
-    <property name="ticksPerAlien" value="20"/>
   </actor>
   <actor costume="factory" x="38" y="334" direction="0.0" start="default">
-    <property name="shootRate" value="2.0"/>
+    <property name="fireOnceEvery" value="10.0"/>
     <property name="costumeName" value="alien3"/>
-    <property name="greenFlag" value="260"/>
+    <property name="delayPerAlien" value="0.5"/>
     <property name="spacing" value="80.0"/>
     <property name="alienCount" value="8"/>
-    <property name="delay" value="12"/>
-    <property name="ticksPerAlien" value="20"/>
   </actor>
   <actor costume="shieldFactory" x="73" y="97" direction="10.878774444084861" start="default">
     <property name="height" value="2"/>
@@ -35,5 +29,13 @@
   <actor costume="shieldFactory" x="445" y="111" direction="-10.619655276155134" start="default">
     <property name="height" value="2"/>
     <property name="width" value="9"/>
+  </actor>
+  <actor costume="saucer" x="680" y="461" direction="-90.0" start="default" activationDelay="20.0">
+    <property name="childrenCount" value="0"/>
+    <property name="vy" value="0.0"/>
+    <property name="childFireOnceEvery" value="1.0"/>
+    <property name="vx" value="-5.0"/>
+    <property name="birthInterval" value="1.0"/>
+    <property name="firstBornDelay" value="0.0"/>
   </actor>
 </scene>

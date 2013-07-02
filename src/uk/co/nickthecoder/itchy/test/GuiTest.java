@@ -35,220 +35,218 @@ public class GuiTest extends Game
 
     public GuiPose guiPose;
 
-    public Rect size = new Rect( 0, 0, 640, 480 );
+    public Rect size = new Rect(0, 0, 640, 480);
 
     // public ActionListener menuAction;
 
-    public void init()
-            throws Exception
+    public void init() throws Exception
     {
-        Itchy.singleton.init( this );
+        Itchy.singleton.init(this);
 
-        this.mainLayer = new ScrollableLayer( this.size, new RGBA( 255, 255, 255 ), true );
-        Itchy.singleton.getGameLayer().add( this.mainLayer );
+        this.mainLayer = new ScrollableLayer(this.size, new RGBA(255, 255, 255), true);
+        Itchy.singleton.getGameLayer().add(this.mainLayer);
 
         this.rules = new Rules();
-        this.rules.load( "resources/defaultGui/style.xml" );
+        this.rules.load("resources/defaultGui/style.xml");
 
         this.guiPose = new GuiPose();
-        this.guiPose.setRules( this.rules );
-        this.guiPose.addStyle( "test" );
-        this.guiPose.setPosition( 0, 0, this.size.width, this.size.height );
+        this.guiPose.setRules(this.rules);
+        this.guiPose.addStyle("test");
+        this.guiPose.setPosition(0, 0, this.size.width, this.size.height);
         Actor actor = this.guiPose.getActor();
-        this.mainLayer.add( actor );
+        this.mainLayer.add(actor);
 
-        Itchy.singleton.addEventListener( this.guiPose );
+        Itchy.singleton.addEventListener(this.guiPose);
 
     }
 
     public void oneHorizontal()
     {
-        this.guiPose.setLayout( new HorizontalLayout() );
+        this.guiPose.setLayout(new HorizontalLayout());
 
-        Label label1 = new Label( "Hello World" );
-        label1.addStyle( "likeButton" );
-        this.guiPose.addChild( label1 );
+        Label label1 = new Label("Hello World");
+        label1.addStyle("likeButton");
+        this.guiPose.addChild(label1);
     }
 
     public void oneVertical()
     {
-        this.guiPose.setLayout( new VerticalLayout() );
+        this.guiPose.setLayout(new VerticalLayout());
 
-        Label label1 = new Label( "Hello World" );
-        label1.addStyle( "likeButton" );
-        this.guiPose.addChild( label1 );
+        Label label1 = new Label("Hello World");
+        label1.addStyle("likeButton");
+        this.guiPose.addChild(label1);
     }
 
     public void twoHorizontal()
     {
-        this.guiPose.setLayout( new HorizontalLayout() );
+        this.guiPose.setLayout(new HorizontalLayout());
 
-        Label label1 = new Label( "Hello World" );
-        Label label2 = new Label( "Second Label" );
-        label1.addStyle( "likeButton" );
-        label2.addStyle( "likeButton" );
-        this.guiPose.addChild( label1 );
-        this.guiPose.addChild( label2 );
+        Label label1 = new Label("Hello World");
+        Label label2 = new Label("Second Label");
+        label1.addStyle("likeButton");
+        label2.addStyle("likeButton");
+        this.guiPose.addChild(label1);
+        this.guiPose.addChild(label2);
     }
 
     public void twoVertical()
     {
-        this.guiPose.setLayout( new VerticalLayout() );
+        this.guiPose.setLayout(new VerticalLayout());
 
-        Label label1 = new Label( "Hello World" );
-        Label label2 = new Label( "Second Label" );
-        label1.addStyle( "likeButton" );
-        label2.addStyle( "likeButton" );
-        this.guiPose.addChild( label1 );
-        this.guiPose.addChild( label2 );
+        Label label1 = new Label("Hello World");
+        Label label2 = new Label("Second Label");
+        label1.addStyle("likeButton");
+        label2.addStyle("likeButton");
+        this.guiPose.addChild(label1);
+        this.guiPose.addChild(label2);
     }
 
     public void oneHorizontalFilled()
     {
-        this.guiPose.setLayout( new HorizontalLayout() );
-        this.guiPose.setFill( true, true );
+        this.guiPose.setLayout(new HorizontalLayout());
+        this.guiPose.setFill(true, true);
 
-        Label label1 = new Label( "Hello World" );
-        label1.addStyle( "likeButton" );
-        this.guiPose.addChild( label1 );
+        Label label1 = new Label("Hello World");
+        label1.addStyle("likeButton");
+        this.guiPose.addChild(label1);
     }
 
     public void oneVerticalFilled()
     {
-        this.guiPose.setLayout( new VerticalLayout() );
-        this.guiPose.setFill( true, true );
+        this.guiPose.setLayout(new VerticalLayout());
+        this.guiPose.setFill(true, true);
 
-        Label label1 = new Label( "Hello World" );
-        label1.addStyle( "likeButton" );
-        this.guiPose.addChild( label1 );
+        Label label1 = new Label("Hello World");
+        label1.addStyle("likeButton");
+        this.guiPose.addChild(label1);
     }
 
     public void twoHorizontalFilled()
     {
-        this.guiPose.setLayout( new HorizontalLayout() );
-        this.guiPose.setFill( true, true );
+        this.guiPose.setLayout(new HorizontalLayout());
+        this.guiPose.setFill(true, true);
 
-        Label label1 = new Label( "Hello World" );
-        Label label2 = new Label( "Second Label" );
+        Label label1 = new Label("Hello World");
+        Label label2 = new Label("Second Label");
 
-        label1.addStyle( "likeButton" );
-        label2.addStyle( "likeButton" );
+        label1.addStyle("likeButton");
+        label2.addStyle("likeButton");
 
-        this.guiPose.addChild( label1 );
-        this.guiPose.addChild( label2 );
+        this.guiPose.addChild(label1);
+        this.guiPose.addChild(label2);
     }
 
     public void twoVerticalFilled()
     {
-        this.guiPose.setLayout( new VerticalLayout() );
-        this.guiPose.setFill( true, true );
+        this.guiPose.setLayout(new VerticalLayout());
+        this.guiPose.setFill(true, true);
 
-        Label label1 = new Label( "Hello World" );
-        Label label2 = new Label( "Second Label" );
+        Label label1 = new Label("Hello World");
+        Label label2 = new Label("Second Label");
 
-        label1.addStyle( "likeButton" );
-        label2.addStyle( "likeButton" );
+        label1.addStyle("likeButton");
+        label2.addStyle("likeButton");
 
-        this.guiPose.addChild( label1 );
-        this.guiPose.addChild( label2 );
+        this.guiPose.addChild(label1);
+        this.guiPose.addChild(label2);
     }
 
     public void table()
     {
         SimpleTableModel model = new SimpleTableModel();
         List<TableModelColumn> columns = new ArrayList<TableModelColumn>();
-        TableModelColumn col1 = new TableModelColumn( "One", 0, 100 );
-        TableModelColumn col2 = new TableModelColumn( "Two", 0, 200 );
-        columns.add( col1 );
-        columns.add( col2 );
+        TableModelColumn col1 = new TableModelColumn("One", 0, 100);
+        TableModelColumn col2 = new TableModelColumn("Two", 0, 200);
+        columns.add(col1);
+        columns.add(col2);
 
         SimpleTableModelRow row1 = new SimpleTableModelRow();
-        row1.add( "Top Left" );
-        row1.add( "Top Right" );
+        row1.add("Top Left");
+        row1.add("Top Right");
 
         SimpleTableModelRow row2 = new SimpleTableModelRow();
-        row2.add( "Middle Left" );
-        row2.add( "Middle Right" );
+        row2.add("Middle Left");
+        row2.add("Middle Right");
 
         SimpleTableModelRow row3 = new SimpleTableModelRow();
-        row3.add( "Bottom Left" );
-        row3.add( "Bottom Right" );
+        row3.add("Bottom Left");
+        row3.add("Bottom Right");
 
-        model.addRow( row1 );
-        model.addRow( row2 );
-        model.addRow( row3 );
+        model.addRow(row1);
+        model.addRow(row2);
+        model.addRow(row3);
 
-        Table table = new Table( model, columns );
+        Table table = new Table(model, columns);
 
-        this.guiPose.addChild( table );
+        this.guiPose.addChild(table);
     }
 
     public void window()
     {
-        Window win = new Window( "Test Window" );
-        win.clientArea.setFill( true, true );
-        win.clientArea.setLayout( new VerticalLayout() );
-        win.clientArea.addChild( new Label( "Hello" ) );
-        win.clientArea.addChild( new Label( "World" ) );
-        win.setRules( this.rules );
+        Window win = new Window("Test Window");
+        win.clientArea.setFill(true, true);
+        win.clientArea.setLayout(new VerticalLayout());
+        win.clientArea.addChild(new Label("Hello"));
+        win.clientArea.addChild(new Label("World"));
+        win.setRules(this.rules);
         win.show();
     }
 
     public void loop()
     {
-        Itchy.singleton.addEventListener( this );
+        Itchy.singleton.addEventListener(this);
         Itchy.singleton.loop();
     }
 
     public void reset()
     {
-        this.guiPose.setFill( false, false );
+        this.guiPose.setFill(false, false);
         this.guiPose.clear();
-        this.guiPose.setLayout( new VerticalLayout() );
+        this.guiPose.setLayout(new VerticalLayout());
     }
 
     public void addTest( final String name )
     {
-        Button button = new Button( name );
-        button.addActionListener( new ActionListener()
-        {
+        Button button = new Button(name);
+        button.addActionListener(new ActionListener() {
             @Override
             public void action()
             {
                 GuiTest.this.reset();
-                GuiTest.this.runTest( name );
+                GuiTest.this.runTest(name);
             }
-        } );
+        });
 
-        this.guiPose.addChild( button );
+        this.guiPose.addChild(button);
     }
 
     public void menu()
     {
         this.reset();
-        this.guiPose.setLayout( new FlowLayout() );
+        this.guiPose.setLayout(new FlowLayout());
 
-        this.addTest( "oneHorizontal" );
-        this.addTest( "oneVertical" );
+        this.addTest("oneHorizontal");
+        this.addTest("oneVertical");
 
-        this.addTest( "twoHorizontal" );
-        this.addTest( "twoVertical" );
+        this.addTest("twoHorizontal");
+        this.addTest("twoVertical");
 
-        this.addTest( "oneHorizontalFilled" );
-        this.addTest( "oneVerticalFilled" );
+        this.addTest("oneHorizontalFilled");
+        this.addTest("oneVerticalFilled");
 
-        this.addTest( "twoHorizontalFilled" );
-        this.addTest( "twoVerticalFilled" );
+        this.addTest("twoHorizontalFilled");
+        this.addTest("twoVerticalFilled");
 
-        this.addTest( "table" );
-        this.addTest( "window" );
+        this.addTest("table");
+        this.addTest("window");
     }
 
     @Override
     public boolean onKeyDown( KeyboardEvent ke )
     {
-        System.out.println( "Key symbol " + ke.symbol );
-        if ( ke.symbol == Keys.ESCAPE ) {
+        System.out.println("Key symbol " + ke.symbol);
+        if (ke.symbol == Keys.ESCAPE) {
             this.menu();
             return true;
         }
@@ -260,13 +258,12 @@ public class GuiTest extends Game
     {
         try {
             Class<?>[] argTypes = new Class<?>[] {};
-            Method method = this.getClass().getDeclaredMethod( name, argTypes );
-            method.invoke( this );
-        } catch ( Exception e ) {
+            Method method = this.getClass().getDeclaredMethod(name, argTypes);
+            method.invoke(this);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
 
     @Override
     public int getWidth()
@@ -296,10 +293,8 @@ public class GuiTest extends Game
     {
         return null;
     }
-    
 
-    public static void main( String[] argv )
-            throws Exception
+    public static void main( String[] argv ) throws Exception
     {
 
         GuiTest testGui = new GuiTest();

@@ -21,11 +21,11 @@ public final class Editor
     public static Container addHint( Component component, String hint )
     {
         Container container = new Container();
-        container.addChild( component );
+        container.addChild(component);
 
-        Label label = new Label( hint );
-        label.addStyle( "hint" );
-        container.addChild( label );
+        Label label = new Label(hint);
+        label.addStyle("hint");
+        container.addChild(label);
 
         return container;
     }
@@ -52,10 +52,7 @@ public final class Editor
 
     public Rules rules;
 
-    public final Rect size = new Rect( 0, 0, 1000, 750 );
-
-
-
+    public final Rect size = new Rect(0, 0, 1000, 750);
 
     public Editor( Game game )
     {
@@ -63,86 +60,83 @@ public final class Editor
         this.resources = game.resources; // new Resources();
     }
 
-    public void init()
-        throws Exception
+    public void init() throws Exception
     {
 
-        Itchy.singleton.init( this.game, this.size.width, this.size.height );
+        Itchy.singleton.init(this.game, this.size.width, this.size.height);
 
         this.rules = new Rules();
-        this.rules.load( "resources/defaultGui/style.xml" );
-        Itchy.singleton.setGuiRules( this.rules );
-        Itchy.singleton.enableKeyboardRepeat( true );
+        this.rules.load("resources/defaultGui/style.xml");
+        Itchy.singleton.setGuiRules(this.rules);
+        Itchy.singleton.enableKeyboardRepeat(true);
 
     }
 
     public void go()
     {
         this.mainGuiPose = new GuiPose();
-        this.mainGuiPose.setRules( this.rules );
-        this.mainGuiPose.setLayout( new VerticalLayout() );
-        this.mainGuiPose.setFill( true, true );
-        this.mainGuiPose.addStyle( "editor" );
+        this.mainGuiPose.setRules(this.rules);
+        this.mainGuiPose.setLayout(new VerticalLayout());
+        this.mainGuiPose.setFill(true, true);
+        this.mainGuiPose.addStyle("editor");
 
-        this.mainGuiPose.setMinimumWidth( this.size.width );
-        this.mainGuiPose.setMinimumHeight( this.size.height );
+        this.mainGuiPose.setMinimumWidth(this.size.width);
+        this.mainGuiPose.setMinimumHeight(this.size.height);
 
-        this.mainGuiPose.setMaximumWidth( this.size.width );
-        this.mainGuiPose.setMaximumHeight( this.size.height );
+        this.mainGuiPose.setMaximumWidth(this.size.width);
+        this.mainGuiPose.setMaximumHeight(this.size.height);
 
         this.mainGuiPose.show();
 
-        //this.mainLayer.add( this.mainGuiPose.getActor() );
+        // this.mainLayer.add( this.mainGuiPose.getActor() );
 
-        this.soundsEditor = new SoundsEditor( this );
-        this.posesEditor = new PosesEditor( this );
-        this.fontsEditor = new FontsEditor( this );
-        this.ninePatchEditor = new NinePatchEditor( this );
-        this.animationsEditor = new AnimationsEditor( this );
-        this.costumesEditor = new CostumesEditor( this );
-        this.scenesEditor = new ScenesEditor( this );
+        this.soundsEditor = new SoundsEditor(this);
+        this.posesEditor = new PosesEditor(this);
+        this.fontsEditor = new FontsEditor(this);
+        this.ninePatchEditor = new NinePatchEditor(this);
+        this.animationsEditor = new AnimationsEditor(this);
+        this.costumesEditor = new CostumesEditor(this);
+        this.scenesEditor = new ScenesEditor(this);
 
         Notebook notebook = new Notebook();
-        this.mainGuiPose.addChild( notebook );
-        notebook.setFill( true, true );
-        notebook.setExpansion( 1 );
+        this.mainGuiPose.addChild(notebook);
+        notebook.setFill(true, true);
+        notebook.setExpansion(1);
 
-        notebook.addPage( new Label( "Poses" ), this.posesEditor.createPage() );
-        notebook.addPage( new Label( "Animations" ), this.animationsEditor.createPage() );
-        notebook.addPage( new Label( "Nine Patches" ), this.ninePatchEditor.createPage() );
-        notebook.addPage( new Label( "Sounds" ), this.soundsEditor.createPage() );
-        notebook.addPage( new Label( "Fonts" ), this.fontsEditor.createPage() );
-        notebook.addPage( new Label( "Costumes" ), this.costumesEditor.createPage() );
-        notebook.addPage( new Label( "Scenes" ), this.scenesEditor.createPage() );
+        notebook.addPage(new Label("Poses"), this.posesEditor.createPage());
+        notebook.addPage(new Label("Animations"), this.animationsEditor.createPage());
+        notebook.addPage(new Label("Nine Patches"), this.ninePatchEditor.createPage());
+        notebook.addPage(new Label("Sounds"), this.soundsEditor.createPage());
+        notebook.addPage(new Label("Fonts"), this.fontsEditor.createPage());
+        notebook.addPage(new Label("Costumes"), this.costumesEditor.createPage());
+        notebook.addPage(new Label("Scenes"), this.scenesEditor.createPage());
 
         Container buttons = new Container();
-        buttons.addStyle( "buttonBar" );
-        buttons.setXAlignment( 1 );
+        buttons.addStyle("buttonBar");
+        buttons.setXAlignment(1);
 
-        Button quit = new Button( new Label( "Quit" ) );
-        quit.addActionListener( new ActionListener()
-        {
+        Button quit = new Button(new Label("Quit"));
+        quit.addActionListener(new ActionListener() {
             @Override
             public void action()
             {
                 Editor.this.game.onQuit();
             }
-        } );
-        buttons.addChild( quit );
+        });
+        buttons.addChild(quit);
 
-        Button save = new Button( new Label( "Save" ) );
-        buttons.addChild( save );
-        save.addActionListener( new ActionListener()
-        {
+        Button save = new Button(new Label("Save"));
+        buttons.addChild(save);
+        save.addActionListener(new ActionListener() {
             @Override
             public void action()
             {
                 Editor.this.onSave();
             }
-        } );
-        this.mainGuiPose.addChild( buttons );
+        });
+        this.mainGuiPose.addChild(buttons);
 
-        this.mainGuiPose.setPosition( 0, 0, this.size.width, this.size.height );
+        this.mainGuiPose.setPosition(0, 0, this.size.width, this.size.height);
         this.mainGuiPose.reStyle(); // TODO needed ?
 
         Itchy.singleton.loop();
@@ -152,12 +146,10 @@ public final class Editor
     {
         try {
             this.resources.save();
-        } catch ( Exception e ) {
-            new MessageBox( "Save Failed", e.getMessage() ).show();
+        } catch (Exception e) {
+            new MessageBox("Save Failed", e.getMessage()).show();
             e.printStackTrace();
         }
     }
 
 }
-
-

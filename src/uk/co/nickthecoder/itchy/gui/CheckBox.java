@@ -12,16 +12,16 @@ public class CheckBox extends ClickableContainer
     {
         super();
         this.image = new ImageComponent();
-        this.addChild( this.image );
+        this.addChild(this.image);
 
-        this.setValue( value );
+        this.setValue(value);
         this.type = "checkbox";
 
     }
 
     public CheckBox()
     {
-        this( false );
+        this(false);
     }
 
     public boolean getValue()
@@ -31,35 +31,35 @@ public class CheckBox extends ClickableContainer
 
     public final void setValue( boolean value )
     {
-        if ( this.value != value ) {
+        if (this.value != value) {
             this.value = value;
-            if ( this.value ) {
-                this.addStyle( "checked" );
+            if (this.value) {
+                this.addStyle("checked");
             } else {
-                this.removeStyle( "checked" );
+                this.removeStyle("checked");
             }
             this.invalidate();
         }
-        this.image.setVisible( value );
+        this.image.setVisible(value);
     }
 
     @Override
     public int getNaturalWidth()
     {
-        return this.image.getRequiredHeight() + this.image.getMarginLeft() + this.image.getMarginRight()
-            + this.getPaddingLeft() + this.getPaddingRight();
+        return this.image.getRequiredHeight() + this.image.getMarginLeft() +
+                this.image.getMarginRight() + this.getPaddingLeft() + this.getPaddingRight();
     }
 
     @Override
     public int getNaturalHeight()
     {
-        return this.image.getRequiredWidth() + this.image.getMarginTop() + this.image.getMarginBottom()
-            + this.getPaddingTop() + this.getPaddingBottom();
+        return this.image.getRequiredWidth() + this.image.getMarginTop() +
+                this.image.getMarginBottom() + this.getPaddingTop() + this.getPaddingBottom();
     }
 
     @Override
     public void onClick( MouseButtonEvent mbe )
     {
-        this.setValue( !this.getValue() );
+        this.setValue(!this.getValue());
     }
 }

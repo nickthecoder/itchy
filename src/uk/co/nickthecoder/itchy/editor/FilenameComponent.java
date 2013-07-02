@@ -25,37 +25,35 @@ public class FilenameComponent extends Container
     {
         this.resources = resources;
 
-        this.textBox = new TextBox( filename );
-        this.addChild( this.textBox );
+        this.textBox = new TextBox(filename);
+        this.addChild(this.textBox);
 
-        Button pick = new Button( "..." );
-        pick.addActionListener( new ActionListener()
-        {
+        Button pick = new Button("...");
+        pick.addActionListener(new ActionListener() {
             @Override
             public void action()
             {
                 FilenameComponent.this.pickFilename();
             }
-        } );
-        this.addChild( pick );
+        });
+        this.addChild(pick);
 
-        Button rename = new Button( "Rename" );
-        rename.addActionListener( new ActionListener()
-        {
+        Button rename = new Button("Rename");
+        rename.addActionListener(new ActionListener() {
             @Override
             public void action()
             {
                 FilenameComponent.this.onRename();
             }
-        } );
-        this.addChild( rename );
+        });
+        this.addChild(rename);
 
-        this.setText( filename );
+        this.setText(filename);
     }
 
     public final void setText( String value )
     {
-        this.textBox.setText( value );
+        this.textBox.setText(value);
         this.initialFilename = value;
     }
 
@@ -66,33 +64,32 @@ public class FilenameComponent extends Container
 
     private void pickFilename()
     {
-        this.openDialog = new FileOpenDialog()
-        {
+        this.openDialog = new FileOpenDialog() {
             @Override
             public void onChosen( File file )
             {
-                FilenameComponent.this.onPickFilename( file );
+                FilenameComponent.this.onPickFilename(file);
             }
         };
-        this.openDialog.setDirectory( this.resources.getDirectory() );
-        Itchy.singleton.showWindow( this.openDialog );
+        this.openDialog.setDirectory(this.resources.getDirectory());
+        Itchy.singleton.showWindow(this.openDialog);
     }
 
     private void onPickFilename( File file )
     {
-        if ( file == null ) {
-            Itchy.singleton.hideWindow( this.openDialog );
+        if (file == null) {
+            Itchy.singleton.hideWindow(this.openDialog);
         } else {
-            String filename = this.resources.makeRelativeFilename( file );
-            this.textBox.setText( filename );
-            Itchy.singleton.hideWindow( this.openDialog );
+            String filename = this.resources.makeRelativeFilename(file);
+            this.textBox.setText(filename);
+            Itchy.singleton.hideWindow(this.openDialog);
         }
     }
 
     protected void onRename()
     {
-        if ( !this.resources.rename( this.initialFilename, this.textBox.getText() ) ) {
-            new MessageDialog( "Error", "Rename failed" ).show();
+        if (!this.resources.rename(this.initialFilename, this.textBox.getText())) {
+            new MessageDialog("Error", "Rename failed").show();
         }
 
     }

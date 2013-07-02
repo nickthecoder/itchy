@@ -14,30 +14,28 @@ public class PoseResource extends NamedResource
 
     private Surface thumbnail;
 
-    public PoseResource( Resources resources, String name, String filename )
-    		throws JameException
+    public PoseResource( Resources resources, String name, String filename ) throws JameException
     {
-        super( resources, name );
+        super(resources, name);
         this.filename = filename;
-        this.pose = new ImagePose( this.resources.resolveFilename( filename ) );
+        this.pose = new ImagePose(this.resources.resolveFilename(filename));
     }
 
-    public void setFilename( String filename )
-    		throws JameException
+    public void setFilename( String filename ) throws JameException
     {
-        this.pose = new ImagePose( this.resources.resolveFilename( filename ) );
+        this.pose = new ImagePose(this.resources.resolveFilename(filename));
         this.filename = filename;
     }
 
     public Surface getThumbnail()
     {
-        if ( this.thumbnail == null ) {
+        if (this.thumbnail == null) {
 
-        	Surface full = this.pose.getSurface();
-            if ( ( full.getWidth() > THUMBNAIL_WIDTH ) || ( full.getHeight() > THUMBNAIL_HEIGHT ) ) {
-                double scale = Math.min( THUMBNAIL_WIDTH / (double) full.getWidth(), THUMBNAIL_HEIGHT
-                    / (double) full.getHeight() );
-                this.thumbnail = full.zoom( scale, scale, true );
+            Surface full = this.pose.getSurface();
+            if ((full.getWidth() > THUMBNAIL_WIDTH) || (full.getHeight() > THUMBNAIL_HEIGHT)) {
+                double scale = Math.min(THUMBNAIL_WIDTH / (double) full.getWidth(),
+                        THUMBNAIL_HEIGHT / (double) full.getHeight());
+                this.thumbnail = full.zoom(scale, scale, true);
             } else {
                 this.thumbnail = full;
             }

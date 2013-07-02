@@ -18,7 +18,7 @@ public class ScaleAnimationEditor extends AnimationEditor
 
     public ScaleAnimationEditor( Editor editor, ScaleAnimation animation )
     {
-        super( editor, animation );
+        super(editor, animation);
     }
 
     @Override
@@ -26,17 +26,20 @@ public class ScaleAnimationEditor extends AnimationEditor
     {
         ScaleAnimation scaleAnimation = (ScaleAnimation) this.animation;
 
-        this.txtTicks = new IntegerBox( scaleAnimation.ticks );
-        gridLayout.addRow( new Label( "Duration" ), Editor.addHint( this.txtTicks, "frames" ) );
+        this.txtTicks = new IntegerBox(scaleAnimation.ticks);
+        gridLayout.addRow(new Label("Duration"), Editor.addHint(this.txtTicks, "frames"));
 
-        this.pickProfile = new PickerButton<Profile>( "Profile", scaleAnimation.profile, NumericAnimation.getProfiles() );
-        gridLayout.addRow( new Label( "Profile" ), this.pickProfile );
+        this.pickProfile = new PickerButton<Profile>("Profile", scaleAnimation.profile,
+                NumericAnimation.getProfiles());
+        gridLayout.addRow(new Label("Profile"), this.pickProfile);
 
-        this.txtFrom = new DoubleBox( scaleAnimation.from );
-        gridLayout.addRow( new Label( "Scale (at the start)" ), Editor.addHint( this.txtFrom, "1 = normal size" ) );
+        this.txtFrom = new DoubleBox(scaleAnimation.from);
+        gridLayout.addRow(new Label("Scale (at the start)"),
+                Editor.addHint(this.txtFrom, "1 = normal size"));
 
-        this.txtTo = new DoubleBox( scaleAnimation.to );
-        gridLayout.addRow( new Label( "Scale (at the end)" ), Editor.addHint( this.txtTo, "1 = normal size" ) );
+        this.txtTo = new DoubleBox(scaleAnimation.to);
+        gridLayout.addRow(new Label("Scale (at the end)"),
+                Editor.addHint(this.txtTo, "1 = normal size"));
     }
 
     @Override

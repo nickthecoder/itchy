@@ -14,7 +14,7 @@
    height="1052.3622047"
    id="svg2"
    version="1.1"
-   inkscape:version="0.47 r22583"
+   inkscape:version="0.48.3.1 r9886"
    sodipodi:docname="invaders.svg">
   <defs
      id="defs4">
@@ -374,16 +374,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.5335344"
-     inkscape:cx="367.33559"
-     inkscape:cy="345.62529"
+     inkscape:zoom="1.0670688"
+     inkscape:cx="372.63689"
+     inkscape:cy="795.81863"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="1280"
-     inkscape:window-height="1000"
+     inkscape:window-height="747"
      inkscape:window-x="0"
-     inkscape:window-y="0"
+     inkscape:window-y="27"
      inkscape:window-maximized="1">
     <inkscape:grid
        type="xygrid"
@@ -4595,7 +4595,7 @@
        inkscape:export-filename="/home/nick/projects/itchy/resources/pixel.png"
        inkscape:export-xdpi="36"
        inkscape:export-ydpi="36"
-       transform="translate(260,-430)">
+       transform="translate(258.67467,-428.67467)">
       <rect
          rx="1"
          ry="1"
@@ -7428,7 +7428,7 @@
        inkscape:export-filename="/home/nick/projects/itchy/resources/bomb1.png"
        inkscape:export-xdpi="36"
        inkscape:export-ydpi="36"
-       transform="translate(-55,-150)">
+       transform="translate(-55.662663,-149.33734)">
       <g
          style="fill:#000000;fill-opacity:0.99078357;stroke:#000000;stroke-opacity:1;filter:url(#filter5826)"
          id="g5694"
@@ -12099,6 +12099,85 @@
          y="602.00928"
          ry="0.12551399"
          rx="0.092440851" />
+    </g>
+    <g
+       transform="translate(-14.57757,-206.989)"
+       inkscape:export-ydpi="36"
+       inkscape:export-xdpi="36"
+       inkscape:export-filename="/home/nick/projects/itchy/resources/drunkInvaders/redPixel.png"
+       id="g5010">
+      <g
+         transform="translate(38,-2)"
+         id="g5012"
+         style="fill:#000000;fill-opacity:0.99078357;stroke:#000000;stroke-opacity:1;filter:url(#filter5826)">
+        <rect
+           inkscape:transform-center-y="-35"
+           inkscape:transform-center-x="5"
+           style="fill:#000000;fill-opacity:0.99078357;fill-rule:nonzero;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+           id="rect5014"
+           width="10"
+           height="10"
+           x="475"
+           y="-312.36218"
+           ry="1"
+           rx="1"
+           transform="scale(1,-1)" />
+      </g>
+      <g
+         id="g5020"
+         transform="translate(40,0)">
+        <rect
+           transform="scale(1,-1)"
+           rx="1"
+           ry="1"
+           y="-312.36218"
+           x="475"
+           height="10"
+           width="10"
+           id="rect5022"
+           style="fill:#ec3624;fill-opacity:0.99078357;fill-rule:nonzero;stroke:#8a8fb4;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+           inkscape:transform-center-x="5"
+           inkscape:transform-center-y="-35" />
+      </g>
+    </g>
+    <g
+       inkscape:export-ydpi="36"
+       inkscape:export-xdpi="36"
+       inkscape:export-filename="/home/nick/projects/itchy/resources/drunkInvaders/greenPixel.png"
+       transform="translate(-76.928941,-149.69971)"
+       id="g5028">
+      <g
+         id="g5030"
+         style="fill:#000000;fill-opacity:0.99078357;filter:url(#filter5644)"
+         transform="translate(-2,-2)">
+        <rect
+           inkscape:transform-center-y="-35"
+           inkscape:transform-center-x="5"
+           style="fill:#000000;fill-opacity:0.99078357;fill-rule:nonzero;stroke:#8a8fb4;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+           id="rect5034"
+           width="10"
+           height="10"
+           x="-590"
+           y="292.36218"
+           ry="1"
+           rx="1"
+           transform="scale(-1,1)" />
+      </g>
+      <g
+         id="g5038">
+        <rect
+           transform="scale(-1,1)"
+           rx="1"
+           ry="1"
+           y="292.36218"
+           x="-590"
+           height="10"
+           width="10"
+           id="rect5042"
+           style="fill:#37ec24;fill-opacity:0.99078357;fill-rule:nonzero;stroke:#8a8fb4;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+           inkscape:transform-center-x="5"
+           inkscape:transform-center-y="-35" />
+      </g>
     </g>
   </g>
 </svg>

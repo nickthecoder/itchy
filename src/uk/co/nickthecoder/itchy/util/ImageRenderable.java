@@ -13,16 +13,14 @@ public abstract class ImageRenderable implements Renderable
         this.surface = surface;
     }
 
-    public ImageRenderable( String filename )
-    		throws JameException
+    public ImageRenderable( String filename ) throws JameException
     {
-        this( new Surface( filename ) );
+        this(new Surface(filename));
     }
 
-    public void loadImage( String filename )
-    		throws JameException
+    public void loadImage( String filename ) throws JameException
     {
-        this.surface = new Surface( filename );
+        this.surface = new Surface(filename);
     }
 
     public Surface getSurface()

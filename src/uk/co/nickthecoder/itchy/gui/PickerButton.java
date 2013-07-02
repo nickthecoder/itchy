@@ -24,30 +24,29 @@ public class PickerButton<T> extends Button
         this.focusable = true;
 
         String labelString = "<select>";
-        if ( current != null ) {
-            for ( String key : hashMap.keySet() ) {
-                if ( current.equals( hashMap.get( key ) ) ) {
+        if (current != null) {
+            for (String key : hashMap.keySet()) {
+                if (current.equals(hashMap.get(key))) {
                     labelString = key;
                     break;
                 }
             }
         }
 
-        this.label = new Label( labelString );
-        this.addChild( this.label );
+        this.label = new Label(labelString);
+        this.addChild(this.label);
     }
 
     @Override
     public void onClick( final MouseButtonEvent e )
     {
-        Picker<T> picker = new Picker<T>( this.title, this.hashMap, this.getValue() )
-        {
+        Picker<T> picker = new Picker<T>(this.title, this.hashMap, this.getValue()) {
             @Override
             public void pick( String label, T object )
             {
-                PickerButton.this.label.setText( label );
+                PickerButton.this.label.setText(label);
                 PickerButton.this.value = object;
-                PickerButton.super.onClick( e );
+                PickerButton.super.onClick(e);
             }
         };
         picker.show();

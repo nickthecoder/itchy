@@ -29,7 +29,7 @@ public class Costume
 
     public Costume()
     {
-        this( null );
+        this(null);
     }
 
     public Costume( Costume extendsFrom )
@@ -82,172 +82,182 @@ public class Costume
 
     public void addString( String name, String value )
     {
-        List<String> choices = this.stringChoices.get( name );
-        if ( choices == null ) {
+        List<String> choices = this.stringChoices.get(name);
+        if (choices == null) {
             choices = new ArrayList<String>();
-            this.stringChoices.put( name, choices );
+            this.stringChoices.put(name, choices);
         }
-        choices.add( value );
+        choices.add(value);
     }
 
     public String getString( String name )
     {
-        List<String> strings = this.stringChoices.get( name );
-        if ( strings == null ) {
-            if ( this.extendedFrom != null ) {
-                return this.extendedFrom.getString( name );
+        List<String> strings = this.stringChoices.get(name);
+        if (strings == null) {
+            if (this.extendedFrom != null) {
+                return this.extendedFrom.getString(name);
             }
             return null;
         }
-        String string = strings.get( random.nextInt( strings.size() ) );
+        String string = strings.get(random.nextInt(strings.size()));
         return string;
     }
 
     public List<String> getStringChoices( String name )
     {
-        return this.stringChoices.get( name );
+        return this.stringChoices.get(name);
     }
 
     // Pose
 
     public void addPose( String name, PoseResource poseResource )
     {
-        List<PoseResource> choices = this.poseChoices.get( name );
-        if ( choices == null ) {
+        List<PoseResource> choices = this.poseChoices.get(name);
+        if (choices == null) {
             choices = new ArrayList<PoseResource>();
-            this.poseChoices.put( name, choices );
+            this.poseChoices.put(name, choices);
         }
-        choices.add( poseResource );
+        choices.add(poseResource);
     }
+
     public void removePose( String name, PoseResource resource )
     {
-        List<PoseResource> choices = this.poseChoices.get( name );
-        assert( choices.contains(  resource  ) );
-        choices.remove( resource );
+        List<PoseResource> choices = this.poseChoices.get(name);
+        assert (choices.contains(resource));
+        choices.remove(resource);
     }
+
     public PoseResource getPoseResource( String name )
     {
-        List<PoseResource> choices = this.poseChoices.get( name );
-        if ( choices == null ) {
-            if ( this.extendedFrom != null ) {
-                return this.extendedFrom.getPoseResource( name );
+        List<PoseResource> choices = this.poseChoices.get(name);
+        if (choices == null) {
+            if (this.extendedFrom != null) {
+                return this.extendedFrom.getPoseResource(name);
             }
             return null;
         }
-        PoseResource poseResource = choices.get( random.nextInt( choices.size() ) );
+        PoseResource poseResource = choices.get(random.nextInt(choices.size()));
         return poseResource;
     }
+
     public Pose getPose( String name )
     {
-        PoseResource resource = this.getPoseResource( name );
+        PoseResource resource = this.getPoseResource(name);
         return resource == null ? null : resource.pose;
     }
+
     public List<PoseResource> getPoseChoices( String name )
     {
-        return this.poseChoices.get( name );
+        return this.poseChoices.get(name);
     }
-
-
 
     // Sound
 
     public void addSound( String name, SoundResource soundResource )
     {
-        List<SoundResource> choices = this.soundChoices.get( name );
-        if ( choices == null ) {
+        List<SoundResource> choices = this.soundChoices.get(name);
+        if (choices == null) {
             choices = new ArrayList<SoundResource>();
-            this.soundChoices.put( name, choices );
+            this.soundChoices.put(name, choices);
         }
-        choices.add( soundResource );
+        choices.add(soundResource);
     }
+
     public SoundResource getSoundResource( String name )
     {
-        List<SoundResource> choices = this.soundChoices.get( name );
-        if ( choices == null ) {
-            if ( this.extendedFrom != null ) {
-                return this.extendedFrom.getSoundResource( name );
+        List<SoundResource> choices = this.soundChoices.get(name);
+        if (choices == null) {
+            if (this.extendedFrom != null) {
+                return this.extendedFrom.getSoundResource(name);
             }
             return null;
         }
-        SoundResource soundResource = choices.get( random.nextInt( choices.size() ) );
+        SoundResource soundResource = choices.get(random.nextInt(choices.size()));
         return soundResource;
     }
+
     public Sound getSound( String name )
     {
-        SoundResource resource = this.getSoundResource( name );
+        SoundResource resource = this.getSoundResource(name);
         return resource == null ? null : resource.getSound();
     }
+
     public List<SoundResource> getSoundChoices( String name )
     {
-        return this.soundChoices.get( name );
+        return this.soundChoices.get(name);
     }
-
 
     // Font
 
     public void addFont( String name, FontResource fontResource )
     {
-        List<FontResource> choices = this.fontChoices.get( name );
-        if ( choices == null ) {
+        List<FontResource> choices = this.fontChoices.get(name);
+        if (choices == null) {
             choices = new ArrayList<FontResource>();
-            this.fontChoices.put( name, choices );
+            this.fontChoices.put(name, choices);
         }
-        choices.add( fontResource );
+        choices.add(fontResource);
     }
+
     public FontResource getFontResource( String name )
     {
-        List<FontResource> fontList = this.fontChoices.get( name );
-        if ( fontList == null ) {
-            if ( this.extendedFrom != null ) {
-                return this.extendedFrom.getFontResource( name );
+        List<FontResource> fontList = this.fontChoices.get(name);
+        if (fontList == null) {
+            if (this.extendedFrom != null) {
+                return this.extendedFrom.getFontResource(name);
             }
             return null;
         }
-        FontResource fontResource = fontList.get( random.nextInt( fontList.size() ) );
+        FontResource fontResource = fontList.get(random.nextInt(fontList.size()));
         return fontResource;
     }
+
     public Font getFont( String name )
     {
-        FontResource resource = this.getFontResource( name );
+        FontResource resource = this.getFontResource(name);
         return resource == null ? null : resource.font;
     }
+
     public List<FontResource> getFontChoices( String name )
     {
-        return this.fontChoices.get( name );
+        return this.fontChoices.get(name);
     }
 
     // Animation
 
     public void addAnimation( String name, AnimationResource animationResource )
     {
-        List<AnimationResource> choices = this.animationChoices.get( name );
-        if ( choices == null ) {
+        List<AnimationResource> choices = this.animationChoices.get(name);
+        if (choices == null) {
             choices = new ArrayList<AnimationResource>();
-            this.animationChoices.put( name, choices );
+            this.animationChoices.put(name, choices);
         }
-        choices.add( animationResource );
+        choices.add(animationResource);
     }
+
     public AnimationResource getAnimationResource( String name )
     {
-        List<AnimationResource> animationList = this.animationChoices.get( name );
-        if ( animationList == null ) {
-            if ( this.extendedFrom != null ) {
-                return this.extendedFrom.getAnimationResource( name );
+        List<AnimationResource> animationList = this.animationChoices.get(name);
+        if (animationList == null) {
+            if (this.extendedFrom != null) {
+                return this.extendedFrom.getAnimationResource(name);
             }
             return null;
         }
-        AnimationResource animationResource = animationList.get( random.nextInt( animationList.size() ) );
+        AnimationResource animationResource = animationList
+                .get(random.nextInt(animationList.size()));
         return animationResource;
     }
+
     public Animation getAnimation( String name )
     {
-        AnimationResource resource = this.getAnimationResource( name );
+        AnimationResource resource = this.getAnimationResource(name);
         return resource == null ? null : resource.animation;
     }
+
     public List<AnimationResource> getAnimationChoices( String name )
     {
-        return this.animationChoices.get( name );
+        return this.animationChoices.get(name);
     }
 
 }
-

@@ -51,51 +51,50 @@ public class PosesEditor extends SubEditor
 
     public PosesEditor( Editor editor )
     {
-        super( editor );
+        super(editor);
     }
 
     @Override
     public Container createPage()
     {
         Container form = super.createPage();
-        form.setFill( true, true );
+        form.setFill(true, true);
 
-        TableModelColumn name = new TableModelColumn( "Name", 0, 200 );
-        name.rowComparator = new SingleColumnRowComparator<String>( 0 );
+        TableModelColumn name = new TableModelColumn("Name", 0, 200);
+        name.rowComparator = new SingleColumnRowComparator<String>(0);
 
-        TableModelColumn filename = new TableModelColumn( "Filename", 1, 300 );
-        filename.rowComparator = new SingleColumnRowComparator<String>( 1 );
+        TableModelColumn filename = new TableModelColumn("Filename", 1, 300);
+        filename.rowComparator = new SingleColumnRowComparator<String>(1);
 
-        TableModelColumn image = new TableModelColumn( "Image", 2, 100 )
-        {
+        TableModelColumn image = new TableModelColumn("Image", 2, 100) {
             @Override
             public Component createCell( TableModelRow row )
             {
-                return new ImageComponent( (Surface) ( row.getData( this.index ) ) );
+                return new ImageComponent((Surface) (row.getData(this.index)));
             }
         };
 
         List<TableModelColumn> columns = new ArrayList<TableModelColumn>();
-        columns.add( name );
-        columns.add( filename );
-        columns.add( image );
+        columns.add(name);
+        columns.add(filename);
+        columns.add(image);
 
         this.tableModel = this.createTableModel();
-        this.table = new Table( this.tableModel, columns );
-        this.table.addTableListener( new AbstractTableListener() {
+        this.table = new Table(this.tableModel, columns);
+        this.table.addTableListener(new AbstractTableListener() {
             @Override
             public void onRowPicked( TableRow tableRow )
             {
                 PosesEditor.this.onEdit();
             }
-        } );
+        });
 
-        this.table.setFill( true, true );
-        this.table.setExpansion( 1.0 );
-        form.addChild( this.table );
-        this.table.sort( 0 );
+        this.table.setFill(true, true);
+        this.table.setExpansion(1.0);
+        form.addChild(this.table);
+        this.table.sort(0);
 
-        form.addChild( this.createListButtons() );
+        form.addChild(this.createListButtons());
 
         return form;
     }
@@ -104,18 +103,19 @@ public class PosesEditor extends SubEditor
     {
         SimpleTableModel model = new SimpleTableModel();
 
-        for ( String soundName : this.editor.resources.poseNames() ) {
-            PoseResource poseResource = this.editor.resources.getPoseResource( soundName );
+        for (String soundName : this.editor.resources.poseNames()) {
+            PoseResource poseResource = this.editor.resources.getPoseResource(soundName);
             String[] attributeNames = { "name", "filename", "thumbnail" };
-            TableModelRow row = new ReflectionTableModelRow<PoseResource>( poseResource, attributeNames );
-            model.addRow( row );
+            TableModelRow row = new ReflectionTableModelRow<PoseResource>(poseResource,
+                    attributeNames);
+            model.addRow(row);
         }
         return model;
     }
 
     private void rebuildTable()
     {
-        this.table.setTableModel( this.createTableModel() );
+        this.table.setTableModel(this.createTableModel());
     }
 
     @Override
@@ -124,94 +124,94 @@ public class PosesEditor extends SubEditor
         this.currentPoseResource = (PoseResource) resource;
         ImagePose pose = this.currentPoseResource.pose;
 
-        this.txtName = new TextBox( this.currentPoseResource.getName() );
-        grid.addRow( new Label( "Name" ), this.txtName );
+        this.txtName = new TextBox(this.currentPoseResource.getName());
+        grid.addRow(new Label("Name"), this.txtName);
 
-        this.txtFilename = new FilenameComponent( this.editor.resources, this.currentPoseResource.filename );
-        grid.addRow( new Label( "Filename" ), this.txtFilename );
+        this.txtFilename = new FilenameComponent(this.editor.resources,
+                this.currentPoseResource.filename);
+        grid.addRow(new Label("Filename"), this.txtFilename);
 
-        this.txtDirection = new DoubleBox( pose.getDirection() );
-        grid.addRow( new Label( "Direction" ), this.txtDirection );
+        this.txtDirection = new DoubleBox(pose.getDirection());
+        grid.addRow(new Label("Direction"), this.txtDirection);
 
-        this.txtOffsetX = new IntegerBox( pose.getOffsetX() );
-        grid.addRow( new Label( "Offset X" ), this.txtOffsetX );
+        this.txtOffsetX = new IntegerBox(pose.getOffsetX());
+        grid.addRow(new Label("Offset X"), this.txtOffsetX);
 
-        this.txtOffsetY = new IntegerBox( pose.getOffsetY() );
-        grid.addRow( new Label( "Offset Y" ), this.txtOffsetY );
+        this.txtOffsetY = new IntegerBox(pose.getOffsetY());
+        grid.addRow(new Label("Offset Y"), this.txtOffsetY);
 
-        Container imageContainer = new ClickableContainer()
-        {
+        Container imageContainer = new ClickableContainer() {
             @Override
             public void onClick( MouseButtonEvent e )
             {
-                PosesEditor.this.txtOffsetX.setValue( e.x );
-                PosesEditor.this.txtOffsetY.setValue( e.y );
+                PosesEditor.this.txtOffsetX.setValue(e.x);
+                PosesEditor.this.txtOffsetY.setValue(e.y);
             }
         };
-        this.imgPose = new ImageComponent( pose.getSurface() );
-        this.imgPose.addStyle( "checkered" );
+        this.imgPose = new ImageComponent(pose.getSurface());
+        this.imgPose.addStyle("checkered");
 
-        if ( pose.getSurface().getHeight() > 130 ) {
-            VerticalScroll scroll = new VerticalScroll( this.imgPose );
-            scroll.setClientHeight( 130 );
-            imageContainer.addChild( scroll );
+        if (pose.getSurface().getHeight() > 130) {
+            VerticalScroll scroll = new VerticalScroll(this.imgPose);
+            scroll.setClientHeight(130);
+            imageContainer.addChild(scroll);
         } else {
-            imageContainer.addChild( this.imgPose );
+            imageContainer.addChild(this.imgPose);
         }
-        grid.addRow( new Label( "Image" ), imageContainer );
-        grid.addRow( new Label( "" ), new Label( "(Click the image to set its offsets)" ) );
+        grid.addRow(new Label("Image"), imageContainer);
+        grid.addRow(new Label(""), new Label("(Click the image to set its offsets)"));
 
-        grid.addRow( new Label( "Size" ), new Label( "" + pose.getSurface().getWidth() + ","
-            + pose.getSurface().getHeight() ) );
+        grid.addRow(new Label("Size"), new Label("" + pose.getSurface().getWidth() + "," +
+                pose.getSurface().getHeight()));
     }
 
     @Override
     protected void onOk()
     {
-        boolean exists = this.editor.resources.fileExists( this.txtFilename.getText() );
-        if ( !exists ) {
-            this.setMessage( "Filename not found" );
+        boolean exists = this.editor.resources.fileExists(this.txtFilename.getText());
+        if (!exists) {
+            this.setMessage("Filename not found");
             return;
         }
 
-        if ( this.adding || ( !this.txtName.getText().equals( this.currentPoseResource.getName() ) ) ) {
-            if ( this.editor.resources.getPoseResource( this.txtName.getText() ) != null ) {
-                this.setMessage( "That name is already being used." );
+        if (this.adding || (!this.txtName.getText().equals(this.currentPoseResource.getName()))) {
+            if (this.editor.resources.getPoseResource(this.txtName.getText()) != null) {
+                this.setMessage("That name is already being used.");
                 return;
             }
         }
-        this.currentPoseResource.rename( this.txtName.getText() );
+        this.currentPoseResource.rename(this.txtName.getText());
         this.currentPoseResource.filename = this.txtFilename.getText();
 
         try {
-            this.currentPoseResource.pose.setDirection( this.txtDirection.getValue() );
-        } catch ( Exception e ) {
-            this.setMessage( "Direction must be a number" );
+            this.currentPoseResource.pose.setDirection(this.txtDirection.getValue());
+        } catch (Exception e) {
+            this.setMessage("Direction must be a number");
             return;
         }
 
         try {
-            this.currentPoseResource.pose.setOffsetX( Integer.parseInt( this.txtOffsetX.getText() ) );
-        } catch ( Exception e ) {
-            this.setMessage( "Offset X must be an integer" );
+            this.currentPoseResource.pose.setOffsetX(Integer.parseInt(this.txtOffsetX.getText()));
+        } catch (Exception e) {
+            this.setMessage("Offset X must be an integer");
             return;
         }
         try {
-            this.currentPoseResource.pose.setOffsetY( Integer.parseInt( this.txtOffsetY.getText() ) );
-        } catch ( Exception e ) {
-            this.setMessage( "Offset Y must be an integer" );
+            this.currentPoseResource.pose.setOffsetY(Integer.parseInt(this.txtOffsetY.getText()));
+        } catch (Exception e) {
+            this.setMessage("Offset Y must be an integer");
             return;
         }
 
-        if ( this.adding ) {
-            this.editor.resources.addPose( this.currentPoseResource );
+        if (this.adding) {
+            this.editor.resources.addPose(this.currentPoseResource);
             this.rebuildTable();
         } else {
 
-            this.table.updateRow( this.table.getCurrentTableModelRow() );
+            this.table.updateRow(this.table.getCurrentTableModelRow());
         }
 
-        Itchy.singleton.hideWindow( this.editWindow );
+        Itchy.singleton.hideWindow(this.editWindow);
     }
 
     @Override
@@ -219,7 +219,7 @@ public class PosesEditor extends SubEditor
     {
         PoseResource poseResource = (PoseResource) resource;
 
-        this.editor.resources.removePose( poseResource.getName() );
+        this.editor.resources.removePose(poseResource.getName());
         this.rebuildTable();
 
     }
@@ -227,32 +227,31 @@ public class PosesEditor extends SubEditor
     @Override
     protected void onAdd()
     {
-        this.openDialog = new FileOpenDialog()
-        {
+        this.openDialog = new FileOpenDialog() {
             @Override
             public void onChosen( File file )
             {
-                PosesEditor.this.onAdd( file );
+                PosesEditor.this.onAdd(file);
             }
         };
-        this.openDialog.setDirectory( this.editor.resources.getDirectory() );
-        Itchy.singleton.showWindow( this.openDialog );
+        this.openDialog.setDirectory(this.editor.resources.getDirectory());
+        Itchy.singleton.showWindow(this.openDialog);
     }
 
     public void onAdd( File file )
     {
-        if ( file == null ) {
-            Itchy.singleton.hideWindow( this.openDialog );
+        if (file == null) {
+            Itchy.singleton.hideWindow(this.openDialog);
         } else {
-            String filename = this.editor.resources.makeRelativeFilename( file );
-            String name = this.editor.resources.nameFromFilename( filename );
+            String filename = this.editor.resources.makeRelativeFilename(file);
+            String name = this.editor.resources.nameFromFilename(filename);
             try {
-                this.currentPoseResource = new PoseResource( this.editor.resources, name, filename );
+                this.currentPoseResource = new PoseResource(this.editor.resources, name, filename);
                 this.adding = true;
-                Itchy.singleton.hideWindow( this.openDialog );
-                this.showDetails( this.currentPoseResource );
-            } catch ( JameException e ) {
-                this.openDialog.setMessage( e.getMessage() );
+                Itchy.singleton.hideWindow(this.openDialog);
+                this.showDetails(this.currentPoseResource);
+            } catch (JameException e) {
+                this.openDialog.setMessage(e.getMessage());
                 return;
             }
         }

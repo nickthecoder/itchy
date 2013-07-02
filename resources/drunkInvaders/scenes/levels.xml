@@ -42,4 +42,10 @@
     <property name="font" value="blackCasper"/>
     <property name="fontSize" value="32"/>
   </actor>
+  <actor costume="level" x="290" y="288" direction="0.0" start="default">
+    <property name="fontColor" value="#ea8138ff"/>
+    <property name="levelNumber" value="8"/>
+    <property name="font" value="blackCasper"/>
+    <property name="fontSize" value="32"/>
+  </actor>
 </scene>

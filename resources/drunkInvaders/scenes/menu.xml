@@ -5,17 +5,17 @@
   <actor costume="bullet" x="193" y="139" direction="95.90614111377052" start="default"/>
   <text text="Drunk" font="boycott" size="86" color="#cc2222" x="475" y="407" direction="7.594643368591445" start="default"/>
   <text text="Invaders" font="boycott" size="61" color="#ffffff" x="486" y="331" direction="2.160560963458598" start="default"/>
-  <text text="Play" font="blackCasper" size="56" color="#ffffff" behaviour="uk.co.nickthecoder.drunkinvaders.DrunkButtonBehaviour" x="319" y="225" direction="0.0" start="default">
+  <text text="Play" font="blackCasper" size="56" color="#ffffff" behaviour="uk.co.nickthecoder.drunkinvaders.DrunkButton" x="319" y="225" direction="0.0" start="default">
     <property name="action" value="play"/>
   </text>
-  <text text="Credits" font="blackCasper" size="46" color="#ffffff" behaviour="uk.co.nickthecoder.drunkinvaders.DrunkButtonBehaviour" x="324" y="88" direction="0.0" start="default">
+  <text text="Credits" font="blackCasper" size="46" color="#ffffff" behaviour="uk.co.nickthecoder.drunkinvaders.DrunkButton" x="324" y="88" direction="0.0" start="default">
     <property name="action" value="about"/>
   </text>
-  <text text="Quit" font="blackCasper" size="66" color="#000000" behaviour="uk.co.nickthecoder.drunkinvaders.DrunkButtonBehaviour" x="319" y="25" direction="0.0" start="default">
+  <text text="Quit" font="blackCasper" size="66" color="#000000" behaviour="uk.co.nickthecoder.drunkinvaders.DrunkButton" x="319" y="25" direction="0.0" start="default">
     <property name="action" value="quit"/>
   </text>
   <actor costume="bomb" x="181" y="234" direction="-90.0" start="default" scale="3.5"/>
-  <text text="Editor" font="blackCasper" size="46" color="#ffffff" behaviour="uk.co.nickthecoder.drunkinvaders.DrunkButtonBehaviour" x="322" y="155" direction="0.0" start="default">
+  <text text="Editor" font="blackCasper" size="46" color="#ffffff" behaviour="uk.co.nickthecoder.drunkinvaders.DrunkButton" x="322" y="155" direction="0.0" start="default">
     <property name="action" value="editor"/>
   </text>
 </scene>

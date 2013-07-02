@@ -36,20 +36,20 @@ public class TableModelColumn
 
     public Component createCell( TableModelRow row )
     {
-        Object data = row.getData( this.index );
-        if ( data == null ) {
-            return new Label( "" );
+        Object data = row.getData(this.index);
+        if (data == null) {
+            return new Label("");
         } else {
-            return new Label( data.toString() );
+            return new Label(data.toString());
         }
     }
 
     public void updateComponent( Component component, TableModelRow row )
     {
-        if ( component instanceof Label ) {
+        if (component instanceof Label) {
             Label label = (Label) component;
-            Object data = row.getData( this.index );
-            label.setText( data == null ? "" : data.toString() );
+            Object data = row.getData(this.index);
+            label.setText(data == null ? "" : data.toString());
         }
     }
 

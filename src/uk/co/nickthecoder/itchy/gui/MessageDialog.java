@@ -6,32 +6,31 @@ public class MessageDialog extends Window
 {
     public MessageDialog( String title, String message )
     {
-        super( title );
-        this.clientArea.setLayout( new VerticalLayout() );
+        super(title);
+        this.clientArea.setLayout(new VerticalLayout());
 
-        this.clientArea.addChild( new Label( message ) );
+        this.clientArea.addChild(new Label(message));
 
         Container buttons = new Container();
-        buttons.addStyle( "buttonBar" );
-        this.clientArea.addChild( buttons );
+        buttons.addStyle("buttonBar");
+        this.clientArea.addChild(buttons);
 
-        Button ok = new Button( "Ok" );
-        ok.addActionListener( new ActionListener()
-        {
+        Button ok = new Button("Ok");
+        ok.addActionListener(new ActionListener() {
             @Override
             public void action()
             {
-                Itchy.singleton.hideWindow( MessageDialog.this );
+                Itchy.singleton.hideWindow(MessageDialog.this);
             }
-        } );
-        buttons.addChild( ok );
+        });
+        buttons.addChild(ok);
 
     }
 
     @Override
     public void show()
     {
-        Itchy.singleton.showWindow( this );
+        Itchy.singleton.showWindow(this);
     }
 
 }

@@ -16,12 +16,12 @@ public abstract class SurfaceComponent extends Component
     @Override
     public int getNaturalWidth()
     {
-        return  this.getPlainSurface().getWidth();
+        return this.getPlainSurface().getWidth();
     }
 
     public Surface getPlainSurface()
     {
-        if ( this.plainSurface == null ) {
+        if (this.plainSurface == null) {
             this.createPlainSurface();
         }
 
@@ -30,7 +30,7 @@ public abstract class SurfaceComponent extends Component
 
     protected void clearPlainSurface()
     {
-        if ( this.plainSurface != null ) {
+        if (this.plainSurface != null) {
             this.plainSurface.free();
             this.plainSurface = null;
         }
@@ -40,10 +40,10 @@ public abstract class SurfaceComponent extends Component
     @Override
     protected void render( GraphicsContext gc )
     {
-        super.render( gc );
+        super.render(gc);
         Surface plainSurface = this.getPlainSurface();
 
-        gc.blit( plainSurface, 0, 0, Surface.BlendMode.COMPOSITE );
+        gc.blit(plainSurface, 0, 0, Surface.BlendMode.COMPOSITE);
 
     }
 

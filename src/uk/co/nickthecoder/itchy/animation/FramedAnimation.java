@@ -23,8 +23,8 @@ public class FramedAnimation extends AbstractAnimation
 
     public void addFrame( Frame frame )
     {
-        this.frames.add( frame );
-        if ( this.frames.size() == 1 ) {
+        this.frames.add(frame);
+        if (this.frames.size() == 1) {
             this.delay = frame.getDelay();
         }
     }
@@ -32,7 +32,7 @@ public class FramedAnimation extends AbstractAnimation
     public FramedAnimation()
     {
         this.frames = new ArrayList<Frame>();
-        this.readOnlyFrames = Collections.unmodifiableList( this.frames );
+        this.readOnlyFrames = Collections.unmodifiableList(this.frames);
         this.frameIndex = 0;
         this.delay = 0;
     }
@@ -51,37 +51,37 @@ public class FramedAnimation extends AbstractAnimation
     public void replaceFrames( List<Frame> newFrames )
     {
         this.frames.clear();
-        this.frames.addAll( newFrames );
+        this.frames.addAll(newFrames);
     }
 
     @Override
     public void start( Actor actor )
     {
         this.frameIndex = 0;
-        actor.getAppearance().setPose( this.frames.get( this.frameIndex ).getPose() );
+        actor.getAppearance().setPose(this.frames.get(this.frameIndex).getPose());
     }
 
     @Override
     public void tick( Actor actor )
     {
-        if ( this.delay > 0 ) {
+        if (this.delay > 0) {
             this.delay--;
             return;
         }
 
         this.nextFrame();
-        if ( !this.isFinished() ) {
-            actor.getAppearance().setPose( this.frames.get( this.frameIndex ).getPose() );
-            this.delay = this.frames.get( this.frameIndex ).getDelay();
+        if (!this.isFinished()) {
+            actor.getAppearance().setPose(this.frames.get(this.frameIndex).getPose());
+            this.delay = this.frames.get(this.frameIndex).getDelay();
         }
 
-        super.tick( actor );
+        super.tick(actor);
     }
 
     private void nextFrame()
     {
         this.frameIndex += this.direction;
-        if ( this.pingPong && ( this.frameIndex >= this.frames.size() ) ) {
+        if (this.pingPong && (this.frameIndex >= this.frames.size())) {
             this.frameIndex = this.frames.size() - 2;
             this.direction = -1;
         }
@@ -94,12 +94,12 @@ public class FramedAnimation extends AbstractAnimation
             FramedAnimation result = (FramedAnimation) super.clone();
 
             result.frames = new ArrayList<Frame>();
-            for ( Frame frame : this.frames ) {
-                result.frames.add( frame.copy() );
+            for (Frame frame : this.frames) {
+                result.frames.add(frame.copy());
             }
 
             return result;
-        } catch ( CloneNotSupportedException e ) {
+        } catch (CloneNotSupportedException e) {
             e.printStackTrace();
             return null;
         }
@@ -108,7 +108,7 @@ public class FramedAnimation extends AbstractAnimation
     @Override
     public boolean isFinished()
     {
-        return ( this.frameIndex < 0 ) || ( this.frameIndex >= this.frames.size() );
+        return (this.frameIndex < 0) || (this.frameIndex >= this.frames.size());
     }
 
 }

@@ -18,16 +18,16 @@ public class Button extends ClickableContainer
 
     public Button( String text )
     {
-        this( new Label( text ) );
+        this(new Label(text));
     }
 
     public Button( Component child )
     {
         this();
 
-        this.addChild( child );
-        this.setXAlignment( 0.5f );
-        this.setYAlignment( 0.5f );
+        this.addChild(child);
+        this.setXAlignment(0.5f);
+        this.setYAlignment(0.5f);
     }
 
     @Override
@@ -35,13 +35,13 @@ public class Button extends ClickableContainer
     {
         this.focus();
 
-        for ( ActionListener actionListener : this.actionListeners ) {
+        for (ActionListener actionListener : this.actionListeners) {
             actionListener.action();
         }
     }
 
     public void addActionListener( ActionListener actionListener )
     {
-        this.actionListeners.add( actionListener );
+        this.actionListeners.add(actionListener);
     }
 }

@@ -14,9 +14,9 @@ public class TextBoxSynchronizer implements ComponentChangeListener
         this.subject = subject;
         this.propertyName = propertyName;
 
-        textBox.addChangeListener( this );
+        textBox.addChangeListener(this);
         try {
-            textBox.setEntryText( (String) BeanHelper.getProperty( subject, propertyName) );
+            textBox.setEntryText((String) BeanHelper.getProperty(subject, propertyName));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -26,8 +26,8 @@ public class TextBoxSynchronizer implements ComponentChangeListener
     public void changed()
     {
         try {
-            BeanHelper.setProperty( this.subject, this.propertyName, this.textBox.getText() );
-        } catch ( Exception e ) {
+            BeanHelper.setProperty(this.subject, this.propertyName, this.textBox.getText());
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

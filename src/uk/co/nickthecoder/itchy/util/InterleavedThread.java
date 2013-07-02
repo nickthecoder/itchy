@@ -17,6 +17,7 @@ public abstract class InterleavedThread extends Thread
         // this.parent = parent;
     }
 
+    @Override
     public void run()
     {
         this.lock.lock();
@@ -35,15 +36,15 @@ public abstract class InterleavedThread extends Thread
         // parent.interrupt();
 
         // When I'm allowed, take back control
-        while ( true ) {
-            if ( this.pending ) {
+        while (true) {
+            if (this.pending) {
                 try {
                     this.lock.lockInterruptibly();
-                } catch ( InterruptedException e ) {
-                    System.out.println( "IT interrupted" );
-                    System.out.println( "Interupted? " + this.isInterrupted() );
+                } catch (InterruptedException e) {
+                    System.out.println("IT interrupted");
+                    System.out.println("Interupted? " + this.isInterrupted());
                 }
-                System.out.println( "Interupted Now? " + this.isInterrupted() );
+                System.out.println("Interupted Now? " + this.isInterrupted());
                 return;
             } else {
                 Thread.yield();

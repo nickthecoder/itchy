@@ -9,12 +9,12 @@ public class MoveAnimation extends NumericAnimation
 
     public MoveAnimation()
     {
-        this( 200, NumericAnimation.unit, 0, 0 );
+        this(200, NumericAnimation.unit, 0, 0);
     }
 
     public MoveAnimation( int ticks, Profile profile, double dx, double dy )
     {
-        super( ticks, profile );
+        super(ticks, profile);
         this.dx = dx;
         this.dy = dy;
     }
@@ -28,7 +28,7 @@ public class MoveAnimation extends NumericAnimation
     @Override
     public void tick( Actor actor, double amount )
     {
-        actor.moveBy( this.dx * amount, this.dy * amount );
+        actor.moveBy(this.dx * amount, this.dy * amount);
     }
 
 }

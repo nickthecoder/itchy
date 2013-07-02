@@ -10,12 +10,12 @@ public class AlphaAnimation extends NumericAnimation
 
     public AlphaAnimation()
     {
-        this( 200, linear, 255, 0 );
+        this(200, linear, 255, 0);
     }
 
     public AlphaAnimation( int ticks, Profile profile, double from, double to )
     {
-        super( ticks, profile );
+        super(ticks, profile);
         this.from = from;
         this.to = to;
     }
@@ -39,8 +39,8 @@ public class AlphaAnimation extends NumericAnimation
     @Override
     public void tick( Actor actor, double amount )
     {
-        double value = this.from + ( this.to - this.from ) * amount;
-        actor.getAppearance().setAlpha( value );
+        double value = this.from + (this.to - this.from) * amount;
+        actor.getAppearance().setAlpha(value);
     }
 
 }
