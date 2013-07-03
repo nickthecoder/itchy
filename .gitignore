@@ -8,3 +8,5 @@ native
 docs/api
 build
 bin
+lib/junit.jar
+
