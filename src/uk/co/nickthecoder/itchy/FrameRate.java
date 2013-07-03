@@ -13,12 +13,14 @@ package uk.co.nickthecoder.itchy;
  */
 public abstract class FrameRate
 {
+    private static final int NANOS_TO_MILLIS = 1000000;
+
+    private static final int NANOS_TO_SECONDS = 1000000000;
+    
     private int requiredRate;
 
-    private double requiredPeriodSeconds;
-
-    private long requiredPeriodNanos;
-
+    private int requiredPeriodNanos;
+    
     /**
      * The maximum number of consecutive frames to skip redrawing when the frame rate is too low.
      */
@@ -36,7 +38,7 @@ public abstract class FrameRate
      * schedule. A positive number means we are lagging, the time taken was more than the required
      * period.
      */
-    private long errorNanos;
+    private int errorNanos;
 
     /**
      * The time at the end of the previous frame
@@ -58,8 +60,7 @@ public abstract class FrameRate
     public final void setRequiredRate( int value )
     {
         this.requiredRate = value;
-        this.requiredPeriodSeconds = 1.0 / this.requiredRate;
-        this.requiredPeriodNanos = (long) (1.0E9 / this.requiredRate);
+        this.requiredPeriodNanos = NANOS_TO_SECONDS / this.requiredRate;
         this.errorNanos = 0;
     }
 
@@ -68,15 +69,10 @@ public abstract class FrameRate
         return this.requiredRate;
     }
 
-    public double getRequiredPeriodSeconds()
-    {
-        return this.requiredPeriodSeconds;
-    }
-
     /**
      * @return The number of nanoseconds the last frame was from perfect timing.
      */
-    public long getErrorNanos()
+    public int getErrorNanos()
     {
         return this.errorNanos;
     }
@@ -85,13 +81,13 @@ public abstract class FrameRate
      */
     public int getErrorMillis()
     {
-        return (int) (this.errorNanos / 1.0E06);
+        return (int) (this.errorNanos / NANOS_TO_MILLIS);
     }
     
     /**
      * @return The total number of dropped frames.
      */
-    public int getDroppedFrames()
+    public final int getDroppedFrames()
     {
         return this.droppedFrames;
     }
@@ -128,30 +124,33 @@ public abstract class FrameRate
 
     private void completeFrame()
     {
+        // The time the frame actually took, including in the error from previous frame(s).
         long frameTimeNanos = this.errorNanos + System.nanoTime() - this.previousNanoTime;
 
         if (frameTimeNanos < this.requiredPeriodNanos) {
             // We finished the frame with time to spare
 
-            int sleep = (int) ((this.requiredPeriodNanos - frameTimeNanos) / 1.0E6);
+            int sleep = (int) ((this.requiredPeriodNanos - frameTimeNanos) / NANOS_TO_MILLIS);
 
-            // Don't bother sleeping if its very close to the required rate.
-            while (sleep > 1) {
+            // Don't bother sleeping if its very close to zero.
+            // Thread.sleep doesn't guarantee it can sleep for short periods, and during my tests,
+            // it took at least 4ms when trying to sleep for 1ms.
+            while (sleep > 3) {
                 try {
                     Thread.sleep(sleep);
                     break;
                 } catch (InterruptedException e) {
-                    // We didn't sleep for the full amount, so lets work out the diff again.
-                    System.err.println( e );
+                    // We didn't sleep for the full amount, so lets work out the sleep again.
+                    // System.err.println( e );
                 } finally {
                     // Recalculate the sleep again
                     frameTimeNanos = this.errorNanos + System.nanoTime() - this.previousNanoTime;
-                    sleep = (int) ((this.requiredPeriodNanos - frameTimeNanos) / 1.0E-6);
+                    sleep = (int) ((this.requiredPeriodNanos - frameTimeNanos) / NANOS_TO_MILLIS);
                 }
             }
         }
         
-        this.errorNanos = frameTimeNanos - this.requiredPeriodNanos;
+        this.errorNanos = (int) (frameTimeNanos - this.requiredPeriodNanos);
 
         this.previousNanoTime = System.nanoTime();
     }
