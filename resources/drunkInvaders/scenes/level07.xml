@@ -1,4 +1,4 @@
-<scene>
+<scene showMouse="false">
   <actor costume="earth" x="0" y="0" direction="0.0" start="default"/>
   <actor costume="ship" x="321" y="61" direction="90.0" start="default"/>
   <actor costume="shieldFactory" x="113" y="78" direction="7.594643368591445" start="default">

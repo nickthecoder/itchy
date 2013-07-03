@@ -1,9 +1,9 @@
-<scene>
+<scene showMouse="true">
   <actor costume="earth" x="0" y="0" direction="0.0" start="default"/>
-  <text text="Well Done" font="boycott" size="111" color="#22bb22" x="314" y="377" direction="0.0" start="default"/>
-  <text text="The world Is safe" font="vera" size="22" color="#ffffff" x="303" y="297" direction="0.0" start="default"/>
-  <text text="The aliens are dead" font="vera" size="22" color="#ffffff" x="305" y="261" direction="0.0" start="default"/>
-  <text text="MENU" font="blackCasper" size="53" color="#000000" behaviour="uk.co.nickthecoder.drunkinvaders.DrunkButton" x="307" y="23" direction="0.0" start="default">
+  <text text="Well Done" font="boycott" size="111" color="#22bb22" x="314" y="377" direction="0.0" start=""/>
+  <text text="The world Is safe" font="vera" size="22" color="#ffffff" x="303" y="297" direction="0.0" start=""/>
+  <text text="The aliens are dead" font="vera" size="22" color="#ffffff" x="305" y="261" direction="0.0" start=""/>
+  <text text="MENU" font="blackCasper" size="53" color="#000000" behaviour="uk.co.nickthecoder.drunkinvaders.DrunkButton" x="307" y="23" direction="0.0" start="">
     <property name="action" value="menu"/>
   </text>
   <actor costume="ship" x="302" y="92" direction="90.0" start="default"/>

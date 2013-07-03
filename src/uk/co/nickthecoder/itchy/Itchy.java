@@ -38,14 +38,10 @@ import uk.co.nickthecoder.jame.event.QuitEvent;
  */
 public class Itchy
 {
-
-    /**
-     * As sdljava hasn't implemented GetKeystate, I've had to implement it myself. This holds a
-     * boolean for each key. On key pressed events sets the appropriate boolean, and key released
-     * events reset the boolean. Uses the SDL keysym values to index the array.
-     */
-    private boolean[] keyboardState;
-
+    public static void showMousePointer( boolean value )
+    {
+        uk.co.nickthecoder.jame.Video.showMousePointer( value );
+    }
     /**
      * This is the highest SDL key sym which can be checked using isKeyDown(). The highest key sym
      * is currently 321, and I'm using 400, which leaves plenty of room for additional keys to be
@@ -53,6 +49,15 @@ public class Itchy
      */
     private static int KEYBOARD_STATE_SIZE = 400;
 
+    public static Itchy singleton = new Itchy();
+
+    /**
+     * As sdljava hasn't implemented GetKeystate, I've had to implement it myself. This holds a
+     * boolean for each key. On key pressed events sets the appropriate boolean, and key released
+     * events reset the boolean. Uses the SDL keysym values to index the array.
+     */
+    private boolean[] keyboardState;
+    
     public Surface screen;
 
     private CompoundLayer rootLayer;
@@ -62,8 +67,6 @@ public class Itchy
     private Rect rootRect;
 
     private boolean running;
-
-    public static Itchy singleton = new Itchy();
 
     // private long defaultSurfaceFlags = SDLVideo.SDL_SWSURFACE; //
     // SDLVideo.SDL_HWSURFACE;

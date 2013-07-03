@@ -1,4 +1,4 @@
-<scene>
+<scene showMouse="true">
   <actor costume="earth" x="0" y="0" direction="0.0" start="default"/>
   <actor costume="level" x="55" y="373" direction="0.0" start="default">
     <property name="fontColor" value="#ea8138ff"/>

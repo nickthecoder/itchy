@@ -1,11 +1,10 @@
-<scene>
+<scene showMouse="false">
   <actor costume="earth" x="0" y="0" direction="0.0" start="default"/>
   <actor costume="ship" x="314" y="89" direction="90.0" start="default"/>
   <actor costume="factory" x="64" y="431" direction="0.0" start="default">
     <property name="fireOnceEvery" value="6.0"/>
     <property name="costumeName" value="alien1"/>
     <property name="delayPerAlien" value="0.5"/>
-    <property name="initialDelay" value="0.0"/>
     <property name="spacing" value="80.0"/>
     <property name="alienCount" value="4"/>
   </actor>
@@ -13,7 +12,6 @@
     <property name="fireOnceEvery" value="8.0"/>
     <property name="costumeName" value="alien2"/>
     <property name="delayPerAlien" value="0.5"/>
-    <property name="initialDelay" value="0.2"/>
     <property name="spacing" value="80.0"/>
     <property name="alienCount" value="4"/>
   </actor>
@@ -21,7 +19,6 @@
     <property name="fireOnceEvery" value="10.0"/>
     <property name="costumeName" value="alien3"/>
     <property name="delayPerAlien" value="0.5"/>
-    <property name="initialDelay" value="0.4"/>
     <property name="spacing" value="80.0"/>
     <property name="alienCount" value="4"/>
   </actor>

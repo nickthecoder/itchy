@@ -8,6 +8,7 @@ import uk.co.nickthecoder.jame.RGBA;
 public class SceneWriter extends XMLWriter
 {
     private final SceneResource sceneResource;
+    private Scene scene;
 
     public SceneWriter( SceneResource sceneResource )
     {
@@ -21,16 +22,24 @@ public class SceneWriter extends XMLWriter
 
         try {
 
-            this.writeResources();
+            this.writeScene();
 
         } finally {
             this.end();
         }
     }
 
-    private void writeResources() throws XMLException
+    private void writeScene() throws XMLException
     {
+        try {
+            this.scene = this.sceneResource.getScene();
+            System.out.println("SceneWriter scene : " + this.scene);
+        } catch (Exception e) {
+            throw new XMLException("Failed to get scene");
+        }
+
         this.beginTag("scene");
+        this.attribute("showMouse", this.scene.showMouse);
 
         this.writeActors();
 
@@ -39,17 +48,7 @@ public class SceneWriter extends XMLWriter
 
     private void writeActors() throws XMLException
     {
-        // this.beginTag( "actors" );
-        Scene scene;
-        ;
-        try {
-            scene = this.sceneResource.getScene();
-            System.out.println("SceneWriter scene : " + scene);
-        } catch (Exception e) {
-            throw new XMLException("Failed to get scene");
-        }
-
-        for (SceneActor sceneActor : scene.sceneActors) {
+        for (SceneActor sceneActor : this.scene.sceneActors) {
 
             if (sceneActor instanceof CostumeSceneActor) {
 
@@ -103,7 +102,7 @@ public class SceneWriter extends XMLWriter
         if (sceneActor.activationDelay != 0) {
             this.attribute("activationDelay", sceneActor.activationDelay);
         }
-        
+
         for (String key : sceneActor.customProperties.keySet()) {
             Object value = sceneActor.customProperties.get(key);
 

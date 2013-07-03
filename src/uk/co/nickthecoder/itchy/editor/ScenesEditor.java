@@ -9,6 +9,7 @@ import uk.co.nickthecoder.itchy.SceneResource;
 import uk.co.nickthecoder.itchy.gui.AbstractTableListener;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Button;
+import uk.co.nickthecoder.itchy.gui.CheckBox;
 import uk.co.nickthecoder.itchy.gui.Container;
 import uk.co.nickthecoder.itchy.gui.GridLayout;
 import uk.co.nickthecoder.itchy.gui.Label;
@@ -25,6 +26,8 @@ import uk.co.nickthecoder.itchy.gui.TextBox;
 public class ScenesEditor extends SubEditor
 {
     private TextBox txtName;
+
+    private CheckBox checkBoxShowMouse;
 
     private SceneResource currentSceneResource;
 
@@ -117,7 +120,14 @@ public class ScenesEditor extends SubEditor
 
         this.txtName = new TextBox(this.currentSceneResource.getName());
         grid.addRow(new Label("Name"), this.txtName);
-
+        
+        try {
+            this.checkBoxShowMouse = new CheckBox(this.currentSceneResource.getScene().showMouse);
+            grid.addRow(new Label("Show Mouse"), this.checkBoxShowMouse);
+        } catch (Exception e) {
+            // Do nothing
+        }
+        
     }
 
     @Override
@@ -159,12 +169,21 @@ public class ScenesEditor extends SubEditor
         this.currentSceneResource.rename(this.txtName.getText());
         this.currentSceneResource.setFilename(filename);
 
+
         if (this.adding) {
             this.editor.resources.addScene(this.currentSceneResource);
             this.rebuildTable();
         } else {
 
             this.table.updateRow(this.table.getCurrentTableModelRow());
+        }
+
+        try {
+            this.currentSceneResource.getScene().showMouse = this.checkBoxShowMouse.getValue();
+            this.currentSceneResource.save();
+        } catch (Exception e) {
+            e.printStackTrace();
+            this.setMessage("Failed to save scene file");            
         }
         Itchy.singleton.hideWindow(this.editWindow);
 

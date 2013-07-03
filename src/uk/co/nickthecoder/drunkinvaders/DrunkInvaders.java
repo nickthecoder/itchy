@@ -209,9 +209,12 @@ public class DrunkInvaders extends Game
 
         try {
             final Scene scene = this.resources.getScene(this.sceneName);
+            
             if (scene == null) {
                 return false;
             }
+
+            Itchy.showMousePointer( scene.showMouse );
 
             AlphaAnimation fadeOut = new AlphaAnimation(15, NumericAnimation.linear, 0, 255);
             AlphaAnimation fadeIn = new AlphaAnimation(15, NumericAnimation.linear, 255, 0);

@@ -206,8 +206,8 @@
     <scene name="level05" filename="scenes/level05.xml"/>
     <scene name="level04" filename="scenes/level04.xml"/>
     <scene name="menu" filename="scenes/menu.xml"/>
-    <scene name="about" filename="scenes/about.xml"/>
     <scene name="level03" filename="scenes/level03.xml"/>
+    <scene name="about" filename="scenes/about.xml"/>
     <scene name="level02" filename="scenes/level02.xml"/>
     <scene name="level01" filename="scenes/level01.xml"/>
     <scene name="levels" filename="scenes/levels.xml"/>

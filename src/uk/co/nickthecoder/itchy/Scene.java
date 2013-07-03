@@ -7,6 +7,9 @@ public class Scene
 {
     public List<SceneActor> sceneActors;
 
+    public boolean showMouse = true;
+    
+    
     public Scene()
     {
         this.sceneActors = new ArrayList<SceneActor>();
@@ -36,6 +39,8 @@ public class Scene
     public Scene copy()
     {
         Scene result = new Scene();
+        result.showMouse = this.showMouse;
+        
         for (SceneActor sceneActor : this.sceneActors) {
             result.sceneActors.add(sceneActor.copy());
         }

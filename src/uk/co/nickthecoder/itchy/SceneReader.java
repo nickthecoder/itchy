@@ -40,10 +40,11 @@ public class SceneReader
         return this.scene;
     }
 
-    private void readScene( XMLTag resourcesTag ) throws Exception
+    private void readScene( XMLTag sceneTag ) throws Exception
     {
-
-        for (Iterator<XMLTag> i = resourcesTag.getTags(); i.hasNext();) {
+        this.scene.showMouse = sceneTag.getOptionalBooleanAttribute("showMouse", true);
+        
+        for (Iterator<XMLTag> i = sceneTag.getTags(); i.hasNext();) {
             XMLTag tag = i.next();
             if (tag.getName() == "actor") {
                 this.readActor(tag);

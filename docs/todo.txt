@@ -1,11 +1,7 @@
 
-Add a shield - temporarily make the Ship Bouncy (but don't allow it to fire). vx,vy = 0, mass is LARGE.
-
 
 What's Next
 ===========
-
-CompoundBehaviour an actor can have more than one behaviour.
 
 Level to define if the mouse is visible or not, and turn it on/off accordingly.
     Defaults to off
