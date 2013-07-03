@@ -1,6 +1,11 @@
 2013-07-03
 ==========
-Its one year since I started writing Itchy (only about 2 months actually writing it - a 10 month gap).
+Added a shield to DrunkInvader's ship.
+
+Its exactly one year since I started writing Itchy (only about 2 months actually writing it - a 10 month gap).
+I'm very happy with progress. Writing games in Itchy is very nice. It easy to get something smart
+up and running very quickly.
+The editor needs a LOT of polish.
 
 2013-07-02
 ==========

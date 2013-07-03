@@ -1,50 +1,56 @@
 <scene>
   <actor costume="earth" x="0" y="0" direction="0.0" start="default"/>
-  <actor costume="level" x="73" y="411" direction="0.0" start="default">
+  <actor costume="level" x="55" y="373" direction="0.0" start="default">
     <property name="fontColor" value="#ea8138ff"/>
     <property name="levelNumber" value="1"/>
     <property name="font" value="blackCasper"/>
     <property name="fontSize" value="32"/>
   </actor>
-  <actor costume="level" x="179" y="410" direction="0.0" start="default">
+  <actor costume="level" x="132" y="421" direction="0.0" start="default">
     <property name="fontColor" value="#ea8138ff"/>
     <property name="levelNumber" value="2"/>
     <property name="font" value="blackCasper"/>
     <property name="fontSize" value="32"/>
   </actor>
-  <actor costume="level" x="290" y="407" direction="0.0" start="default">
+  <actor costume="level" x="215" y="437" direction="0.0" start="default">
     <property name="fontColor" value="#ea8138ff"/>
     <property name="levelNumber" value="3"/>
     <property name="font" value="blackCasper"/>
     <property name="fontSize" value="32"/>
   </actor>
-  <actor costume="level" x="405" y="409" direction="0.0" start="default">
+  <actor costume="level" x="305" y="440" direction="0.0" start="default">
     <property name="fontColor" value="#ea8138ff"/>
     <property name="levelNumber" value="4"/>
     <property name="font" value="blackCasper"/>
     <property name="fontSize" value="32"/>
   </actor>
-  <actor costume="level" x="517" y="407" direction="0.0" start="default">
+  <actor costume="level" x="395" y="433" direction="0.0" start="default">
     <property name="fontColor" value="#ea8138ff"/>
     <property name="levelNumber" value="5"/>
     <property name="font" value="blackCasper"/>
     <property name="fontSize" value="32"/>
   </actor>
-  <actor costume="level" x="73" y="291" direction="0.0" start="default">
+  <actor costume="level" x="481" y="405" direction="0.0" start="default">
     <property name="fontColor" value="#ea8138ff"/>
     <property name="levelNumber" value="6"/>
     <property name="font" value="blackCasper"/>
     <property name="fontSize" value="32"/>
   </actor>
-  <actor costume="level" x="173" y="288" direction="0.0" start="default">
+  <actor costume="level" x="539" y="344" direction="0.0" start="default">
     <property name="fontColor" value="#ea8138ff"/>
     <property name="levelNumber" value="7"/>
     <property name="font" value="blackCasper"/>
     <property name="fontSize" value="32"/>
   </actor>
-  <actor costume="level" x="290" y="288" direction="0.0" start="default">
+  <actor costume="level" x="578" y="263" direction="0.0" start="default">
     <property name="fontColor" value="#ea8138ff"/>
     <property name="levelNumber" value="8"/>
+    <property name="font" value="blackCasper"/>
+    <property name="fontSize" value="32"/>
+  </actor>
+  <actor costume="level" x="563" y="179" direction="0.0" start="default">
+    <property name="fontColor" value="#ea8138ff"/>
+    <property name="levelNumber" value="9"/>
     <property name="font" value="blackCasper"/>
     <property name="fontSize" value="32"/>
   </actor>

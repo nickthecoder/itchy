@@ -97,7 +97,7 @@ public class Mothership extends Alien
             alien.moveForward(5, 0);
             alienBehaviour.vy = this.vy + 1;
         } else {
-            alien.moveForward(5, 0);
+            alien.moveForward(-5, 0);
             alienBehaviour.vy = this.vy - 1;
         }
 

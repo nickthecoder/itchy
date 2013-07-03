@@ -1,18 +1,17 @@
 package uk.co.nickthecoder.drunkinvaders;
 
 import uk.co.nickthecoder.itchy.Actor;
-import uk.co.nickthecoder.itchy.Behaviour;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Pose;
 import uk.co.nickthecoder.itchy.TextPose;
-import uk.co.nickthecoder.itchy.neighbourhood.ActorCollisionStrategy;
 import uk.co.nickthecoder.itchy.util.BorderPoseDecorator;
+import uk.co.nickthecoder.itchy.util.DoubleProperty;
 import uk.co.nickthecoder.itchy.util.ExplosionBehaviour;
 import uk.co.nickthecoder.itchy.util.PoseDecorator;
 import uk.co.nickthecoder.jame.Keys;
 import uk.co.nickthecoder.jame.RGBA;
 
-public class Ship extends Behaviour implements Shootable
+public class Ship extends Bouncy implements Shootable
 {
     private static RGBA SPEECH_COLOR = new RGBA(0, 0, 0);
 
@@ -23,30 +22,50 @@ public class Ship extends Behaviour implements Shootable
 
     private int recharge = 0;
     private static final int RECHARGE_DURATION = 40;
-
+    
+    private static final int SHIELD_POSE_COUNT = 7;
+    
     private final double ox = 320;
     private final double oy = -1300;
     private double radius;
     private final double rotationSpeed = 0.003;
     private double angle;
 
-    private ActorCollisionStrategy collisionStrategy;
-
     private Actor latestBullet;
+
+    private boolean shielded = false;
+
+    /**
+     * 1 is fully charged 0 is fully drained.
+     */
+    private double shieldStrength = 1.0;
+
+    private double shieldRechargeRate = 0.001;
+
+    private double shieldDischargeRate = 0.01;
 
     @Override
     public void init()
     {
+        super.init();
+
+        this.mass = 100000000000.0;
         this.actor.addTag("killable");
         this.radius = Math.sqrt((this.actor.getX() - this.ox) * (this.actor.getX() - this.ox) +
                 (this.actor.getY() - this.oy) * (this.actor.getY() - this.oy));
         this.angle = Math.atan2(this.actor.getY() - this.oy, this.actor.getX() - this.ox);
         this.actor.getAppearance().setDirectionRadians(this.angle);
         this.recalculateDirection();
-
-        this.collisionStrategy = DrunkInvaders.singleton.createCollisionStrategy(this.actor);
     }
 
+    @Override
+    protected void addProperties()
+    {
+        super.addProperties();
+        addProperty(new DoubleProperty("Shield Discharge Rate", "sheildDischargeRate"));
+        addProperty(new DoubleProperty("Shield Recharge Rate", "sheildRechargeRate"));
+    }
+    
     @Override
     public void onKill()
     {
@@ -60,48 +79,63 @@ public class Ship extends Behaviour implements Shootable
     public void tick()
     {
 
-        if (Itchy.singleton.isKeyDown(Keys.LEFT)) {
-            this.angle += this.rotationSpeed;
-            this.recalculateDirection();
-            if (this.actor.getX() < 30) {
-                this.angle -= this.rotationSpeed;
-                this.recalculateDirection();
-            }
-        }
-        if (Itchy.singleton.isKeyDown(Keys.RIGHT)) {
-            this.angle -= this.rotationSpeed;
-            this.recalculateDirection();
-            if (this.actor.getX() > 640 - 30) {
-                this.angle += this.rotationSpeed;
-                this.recalculateDirection();
-            }
-        }
-
-        if (this.recharge > 0) {
-            this.recharge--;
-            if ((this.recharge == 0) || ((this.latestBullet != null) && this.latestBullet.isDead())) {
-                this.event("charged");
-                this.recharge = 0;
+        if (Itchy.singleton.isKeyDown(Keys.LSHIFT) || Itchy.singleton.isKeyDown(Keys.RSHIFT)) {
+            if (!this.shielded) {
+                activateShield();
             }
         } else {
-
-            if (Itchy.singleton.isKeyDown(Keys.SPACE)) {
-                this.fire();
+            if (this.shielded) {
+                deactivateShield();
             }
         }
 
-        if (Itchy.singleton.isKeyDown(Keys.p)) {
-            System.out.println("Waiting...");
-            getActor().sleep(3.0);
-            System.out.println("Done...");
-        }
+        if (this.shielded) {
+            super.tick();
+            dischargeShield();
 
-        this.collisionStrategy.update();
+        } else {
 
-        for (Actor actor : this.collisionStrategy.touching(this.actor, DEADLY_LIST)) {
-            this.shot(actor);
-            ((Shootable) actor.getBehaviour()).shot(this.actor);
-            break;
+            chargeShield();
+
+            if (Itchy.singleton.isKeyDown(Keys.LEFT)) {
+                this.angle += this.rotationSpeed;
+                this.recalculateDirection();
+                if (this.actor.getX() < 30) {
+                    this.angle -= this.rotationSpeed;
+                    this.recalculateDirection();
+                }
+            }
+            if (Itchy.singleton.isKeyDown(Keys.RIGHT)) {
+                this.angle -= this.rotationSpeed;
+                this.recalculateDirection();
+                if (this.actor.getX() > 640 - 30) {
+                    this.angle += this.rotationSpeed;
+                    this.recalculateDirection();
+                }
+            }
+
+            if (this.recharge > 0) {
+                this.recharge--;
+                if ((this.recharge == 0) ||
+                        ((this.latestBullet != null) && this.latestBullet.isDead())) {
+                    this.event("charged");
+                    this.recharge = 0;
+                }
+            } else {
+
+                if (Itchy.singleton.isKeyDown(Keys.SPACE)) {
+                    this.fire();
+                }
+            }
+
+            this.collisionStrategy.update();
+
+            for (Actor actor : this.collisionStrategy.touching(this.actor, DEADLY_LIST)) {
+                this.shot(actor);
+                ((Shootable) actor.getBehaviour()).shot(this.actor);
+                break;
+            }
+
         }
 
     }
@@ -113,8 +147,55 @@ public class Ship extends Behaviour implements Shootable
         this.actor.setY(this.radius * Math.sin(this.angle) + this.oy);
     }
 
+    public void activateShield()
+    {
+        long level = Math.round( this.shieldStrength * SHIELD_POSE_COUNT );
+        if ( level > 0 ) {
+            this.event("shield");
+            long newLevel = Math.round( this.shieldStrength * SHIELD_POSE_COUNT );
+            event( "shielded" + newLevel );
+            this.shielded = true;
+        } else {
+            this.event("shieldFailed");
+        }
+    }
+
+    public void deactivateShield()
+    {
+        this.event("deshield");
+        this.shielded = false;
+    }
+
+    private void dischargeShield()
+    {
+        long oldLevel = Math.round( this.shieldStrength * SHIELD_POSE_COUNT );
+        this.shieldStrength -= this.shieldDischargeRate;
+        long newLevel = Math.round( this.shieldStrength * SHIELD_POSE_COUNT );
+
+        if (this.shieldStrength < 0 ) {
+            this.deactivateShield();
+            return;
+        }
+        
+        if  ( oldLevel != newLevel ) {
+            event( "shielded" + newLevel );
+        }
+    }
+
+    private void chargeShield()
+    {
+        this.shieldStrength += this.shieldRechargeRate;
+        if (this.shieldStrength > 1) {
+            this.shieldStrength = 1;
+        }
+    }
+    
     public void fire()
     {
+        if (this.shielded) {
+            return;
+        }
+
         this.event("fire");
 
         Actor bullet = new Actor(DrunkInvaders.singleton.resources.getCostume("bullet"), "default");
@@ -133,6 +214,11 @@ public class Ship extends Behaviour implements Shootable
     @Override
     public void shot( Actor other )
     {
+        if (this.shielded) {
+            this.event("deflect");
+            return;
+        }
+
         TextPose textPose = new TextPose(this.actor.getCostume().getString("death"),
                 DrunkInvaders.singleton.resources.getFont("vera"), 18, SPEECH_COLOR);
         Pose bubble = bubbleCreator.createPose(textPose);
