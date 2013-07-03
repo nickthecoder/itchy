@@ -54,8 +54,6 @@ public class DrunkInvaders extends Game
 
     private boolean showInfo = false;
 
-    private Actor fpsActor;
-
     private Actor aliensRemainingActor;
 
     public boolean fadingOut = false;
@@ -166,13 +164,6 @@ public class DrunkInvaders extends Game
         this.showInfo = !this.showInfo;
 
         if (this.showInfo) {
-            if (this.fpsActor != null) {
-                this.fpsActor.kill();
-            }
-            this.fpsActor = DoubleBehaviour.createFPSActor(this.resources.getFont("vera"), 16);
-            this.fpsActor.moveTo(60, 460);
-            this.glassLayer.add(this.fpsActor);
-            this.fpsActor.activate();
 
             if (this.aliensRemainingActor != null) {
                 this.aliensRemainingActor.kill();
@@ -186,13 +177,11 @@ public class DrunkInvaders extends Game
                 }
 
             }.createActor(this.resources.getFont("vera"), 16);
-            this.aliensRemainingActor.moveTo(60, 400);
+            this.aliensRemainingActor.moveTo(40, 460);
             this.glassLayer.add(this.aliensRemainingActor);
             this.aliensRemainingActor.activate();
 
         } else {
-            this.fpsActor.kill();
-            this.fpsActor = null;
             this.aliensRemainingActor.kill();
             this.aliensRemainingActor = null;
         }

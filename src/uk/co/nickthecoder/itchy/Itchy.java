@@ -90,12 +90,11 @@ public class Itchy
 
     public int keyboardRepeatInterval = Events.DEFAULT_REPEAT_INTERVAL;
 
-    private int frames;
-
-    private long framesStart;
-
+    public FrameRate frameRate = createFrameRate();
+    
     GameLoopJob gameLoopJob = new GameLoopJob();
 
+    
     private Itchy()
     {
         this.windows = new ArrayList<GuiPose>();
@@ -187,59 +186,74 @@ public class Itchy
 
     }
 
-    public void resetFrameRate()
-    {
-        this.frames = 0;
-        this.framesStart = System.currentTimeMillis();
-    }
-
     public void loop()
     {
-        resetFrameRate();
+        
         this.running = true;
 
-        while (this.running) {
-
-            try {
-                long frameStart = System.currentTimeMillis();
-
-                while (true) {
-                    Event event = Events.poll();
-                    if (event == null) {
-                        break;
-                    } else {
-                        this.processEvent(event); // TODO make this a task.
-                    }
-                }
-
-                this.gameLoopJob.start();
-
-                if ( ! this.gameLoopJob.finished() ) {
-                    System.err.println( "Itchy gameloopjob not finished" );
-                }
-                
-                this.gameLoopJob.lock();
-                try {
-                    this.game.tick(); // TODO make this a task
-                    this.rootLayer.render(this.rootRect, this.screen);
-                } finally {
-                    this.gameLoopJob.unlock();
-                }
-
-                this.screen.flip();
-                this.frames++;
-
-                long delay = 20 - (System.currentTimeMillis() - frameStart);
-                if (delay > 1) {
-                    Thread.sleep(delay);
-                }
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-        } // loop
+        this.frameRate.loop();
+        
     }
+    
+    private FrameRate createFrameRate()
+    {
+        return new FrameRate() {
+            
+            @Override
+            public boolean isRunning() {
+                return Itchy.this.running;
+            }
+            
+            @Override
+            public void doGameLogic()
+            {
+                Itchy.this.doGameLogic();
+            }
+            
+            @Override
+            public void doRedraw()
+            {
+                Itchy.this.doRedraw();
+            }
+        };
+    }
+
+    private void doGameLogic()
+    {
+        while (true) {
+            Event event = Events.poll();
+            if (event == null) {
+                break;
+            } else {
+                this.processEvent(event); // TODO make this a task.
+            }
+        }
+        
+        this.gameLoopJob.start();
+
+        if ( ! this.gameLoopJob.finished() ) {
+            System.err.println( "Itchy gameloopjob not finished" );
+        }
+        
+        this.gameLoopJob.lock();
+        try {
+            this.game.tick(); // TODO make this a task
+        } finally {
+            this.gameLoopJob.unlock();
+        }
+    }
+    
+    private void doRedraw()
+    {
+        this.gameLoopJob.lock();
+        try {
+            this.rootLayer.render(this.rootRect, this.screen);
+            this.screen.flip();
+        } finally {
+            this.gameLoopJob.unlock();
+        }
+    }
+
 
     public void completeTasks()
     {
@@ -261,12 +275,6 @@ public class Itchy
     public boolean isRunning()
     {
         return this.running;
-    }
-
-    public double getFrameRate()
-    {
-        long now = System.currentTimeMillis();
-        return ((this.frames)) / ((now - this.framesStart) / 1000.0);
     }
 
     private void processEvent( Event event )

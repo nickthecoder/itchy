@@ -42,7 +42,7 @@ public class Util
      */
     public static boolean randomOnceEvery( double seconds )
     {
-        return random.nextDouble() * seconds * Itchy.singleton.getFrameRate() < 1.0;
+        return random.nextDouble() * seconds * Itchy.singleton.frameRate.getRequiredRate() < 1.0;
     }
 
     /**
