@@ -8,12 +8,7 @@ Try it on a RaspPi
 Create a debug actor, which you can print to, and therefore easily display debug info on the screen.
    Use it to display FPS and alien count.
 
-Add sound for the mothership
-Add sound for the mothership giving birth
-
 Go through each class. Replace with new idioms, such as varargs and new "for :" syntax.
-
-Check for code consistency. Use self everywhere. Use eclipse's syntax guides.
 
 Create diagrams and javadocs aimed at games programmers. Change classes from public, where appropriate
 to remove them form the javadocs.

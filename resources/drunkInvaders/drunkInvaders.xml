@@ -52,6 +52,7 @@
     <sound name="fire" filename="sounds/fire.ogg"/>
     <sound name="ahh4" filename="sounds/ahh4.ogg"/>
     <sound name="shatter" filename="sounds/shatter.ogg"/>
+    <sound name="pop" filename="sounds/pop.ogg"/>
   </sounds>
   <animations>
     <animation name="alien3">
@@ -168,6 +169,7 @@
       <pose name="default" pose="saucer"/>
       <pose name="pixel" pose="redPixel"/>
       <sound name="death" sound="ahh4"/> 
+      <sound name="giveBirth" sound="pop"/> 
     </costume>
     <costume name="alien1" extends="alien" behaviour="uk.co.nickthecoder.drunkinvaders.Alien">
       <pose name="tick" pose="alien1a"/>

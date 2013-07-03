@@ -38,6 +38,13 @@ ahh4.ogg
 
 165911__deganoth__explosion-1.wav shatter.ogg
 http://www.freesound.org/people/Deganoth/sounds/165911/
+Cut and faded out to make a shorter sample
 Ship is hit, but not destroyed
 shatter.ogg
+
+176727__yottasounds__pop.wav
+http://www.freesound.org/people/yottasounds/sounds/176727/
+Cut and made quieter
+Mothership giving birth
+pop.ogg
 
