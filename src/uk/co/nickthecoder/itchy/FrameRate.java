@@ -70,24 +70,9 @@ public abstract class FrameRate
     }
 
     /**
-     * @return The number of nanoseconds the last frame was from perfect timing.
-     */
-    public int getErrorNanos()
-    {
-        return this.errorNanos;
-    }
-    /**
-     * @return The number of milliseconds the last frame was from perfect timing.
-     */
-    public int getErrorMillis()
-    {
-        return (int) (this.errorNanos / NANOS_TO_MILLIS);
-    }
-    
-    /**
      * @return The total number of dropped frames.
      */
-    public final int getDroppedFrames()
+    public int getDroppedFrames()
     {
         return this.droppedFrames;
     }
@@ -140,7 +125,6 @@ public abstract class FrameRate
                     Thread.sleep(sleep);
                     break;
                 } catch (InterruptedException e) {
-                    // We didn't sleep for the full amount, so lets work out the sleep again.
                     // System.err.println( e );
                 } finally {
                     // Recalculate the sleep again

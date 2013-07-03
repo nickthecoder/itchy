@@ -189,22 +189,19 @@ public class DrunkInvaders extends Game
 
     public ActorCollisionStrategy createCollisionStrategy( Actor actor )
     {
-        SinglePointCollisionStrategy spcs = new SinglePointCollisionStrategy(actor,
-                this.neighbourhood);
-        // BruteForceActorCollisionStrategy bfcs = new BruteForceActorCollisionStrategy( actor );
-        // return new DebugCollisionStrategy( spcs, bfcs );
-        return spcs;
+        return new SinglePointCollisionStrategy(actor, this.neighbourhood);
+        // return new uk.co.nickthecoder.itchy.neighbourhood.BruteForceActorCollisionStrategy( actor
+        // );
     }
 
     public boolean startScene( String sceneName )
     {
         System.out.println("Starting scene " + sceneName);
-        System.out.println( "fading in ? " + fadingOut );
+        System.out.println("fading in ? " + this.fadingOut);
 
-        if ( this.fadingOut ) {
+        if (this.fadingOut) {
             return false;
         }
-        
 
         this.neighbourhood.clear();
 
@@ -258,10 +255,10 @@ public class DrunkInvaders extends Game
         // System.out.println( "Alien count delta " + n );
         this.aliensRemaining += n;
 
-        if ( this.fadingOut ) {
+        if (this.fadingOut) {
             return;
         }
-        
+
         if (this.aliensRemaining == 0) {
             this.completedLevels.add(this.levelNumber);
             this.levelNumber += 1;
