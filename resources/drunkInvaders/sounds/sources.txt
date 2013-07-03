@@ -30,3 +30,14 @@ ahh1.ogg ahh2.ogg ahh3.ogg
 http://www.freesound.org/samplesViewSingle.php?id=74395
 Bullets hitting bombs
 ricochet.ogg
+
+35464__jobro__explosion-7.wav
+http://www.freesound.org/people/jobro/sounds/35464/
+Mothership exploding
+ahh4.ogg
+
+165911__deganoth__explosion-1.wav shatter.ogg
+http://www.freesound.org/people/Deganoth/sounds/165911/
+Ship is hit, but not destroyed
+shatter.ogg
+

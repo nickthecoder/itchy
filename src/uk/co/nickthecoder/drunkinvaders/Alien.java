@@ -121,6 +121,7 @@ public class Alien extends Bouncy implements Shootable
         
         this.shotsRequired --;
         if ( this.shotsRequired > 0 ) {
+            event("shot");
             return;
         }
         

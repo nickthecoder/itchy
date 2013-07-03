@@ -1,27 +1,15 @@
-
+Compile and test using windows.
 
 What's Next
 ===========
 
-Level to define if the mouse is visible or not, and turn it on/off accordingly.
-    Defaults to off
-
 Try it on a RaspPi
-
-Properties to have hints (which are in green on the right of their control)
-   Use it to put (seconds) after alien factory & alien fireOnceEvery
-
 
 Create a debug actor, which you can print to, and therefore easily display debug info on the screen.
    Use it to display FPS and alien count.
 
 Add sound for the mothership
 Add sound for the mothership giving birth
-
-
-Make the main loop a little more clever, to ensure the game loop runs at a consistent speed,
-even if it as to drop frames to do so.
-    SDL has an extension which does something good???
 
 Go through each class. Replace with new idioms, such as varargs and new "for :" syntax.
 
@@ -40,6 +28,10 @@ Create a strategy for large objects.
        
 
 Scenery Editor
+
+    Properties to have hints (which are in green on the right of their control)
+         Use it to put (seconds) after alien factory & alien fireOnceEvery
+
 
     Duplicate, Copy, Paste
 
@@ -66,10 +58,7 @@ Create an actor using a costume???
     
 costumeScroll client height to be "maximum".
 
-scene to have a "hide mouse" attribute.
-
 Send to Matthew
-
 
 
 Soon Features

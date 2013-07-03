@@ -1,4 +1,4 @@
-SET CLASSPATH=itchy.jar;lib\jame.jar;lib\bsh.jar;lib\jdom.jar
+SET CLASSPATH=itchy.jar;lib\jame.jar
 SET MAIN=uk.co.nickthecoder.drunkinvaders.DrunkInvaders
 
 move native\win32\*.dll .

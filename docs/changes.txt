@@ -2,6 +2,8 @@
 ==========
 Added a shield to DrunkInvader's ship.
 New FrameRate class to keep a consistent frame rate, inspired by Simon Lucas.
+Scenes know if they should show the mouse pointer
+Added sounds for exploding mothership and hit, but not destroyed aliens
 
 Milestone
 =========

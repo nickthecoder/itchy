@@ -50,6 +50,8 @@
     <sound name="ahh1" filename="sounds/ahh1.ogg"/>
     <sound name="ahh3" filename="sounds/ahh3.ogg"/>
     <sound name="fire" filename="sounds/fire.ogg"/>
+    <sound name="ahh4" filename="sounds/ahh4.ogg"/>
+    <sound name="shatter" filename="sounds/shatter.ogg"/>
   </sounds>
   <animations>
     <animation name="alien3">
@@ -123,6 +125,7 @@
       <animation name="yell" animation="alienYell"/>
       <animation name="dropped" animation="grow"/>
       <animation name="death" animation="deathSpiral"/>
+      <sound name="shot" sound="shatter"/>    
     </costume>
     <costume name="alien3" extends="alien" behaviour="uk.co.nickthecoder.drunkinvaders.Alien">
       <pose name="tick" pose="alien3a"/>
@@ -164,6 +167,7 @@
     <costume name="saucer" extends="alien" behaviour="uk.co.nickthecoder.drunkinvaders.Mothership">
       <pose name="default" pose="saucer"/>
       <pose name="pixel" pose="redPixel"/>
+      <sound name="death" sound="ahh4"/> 
     </costume>
     <costume name="alien1" extends="alien" behaviour="uk.co.nickthecoder.drunkinvaders.Alien">
       <pose name="tick" pose="alien1a"/>
