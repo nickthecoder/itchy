@@ -86,7 +86,6 @@ public class DrunkInvaders extends Game
 
         this.levelNumber = 1;
 
-        Itchy.singleton.addEventListener(this);
         this.startScene("menu");
         Itchy.singleton.loop();
 

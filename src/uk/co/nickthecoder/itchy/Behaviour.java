@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.util.GProperty;
+import uk.co.nickthecoder.jame.JameException;
 
 public abstract class Behaviour
 {
@@ -32,6 +33,23 @@ public abstract class Behaviour
         this.actor = null;
     }
 
+    public Actor createActor( String imageFilename, int x, int y, ActorsLayer layer )
+        throws JameException
+    {
+        ImagePose imagePose = new ImagePose(imageFilename);
+        return createActor( imagePose, x, y, layer );
+    }
+    
+    public Actor createActor( Pose pose, int x, int y, ActorsLayer layer )
+    {
+        Actor actor = new Actor(pose);
+        actor.moveTo(x, y);
+        actor.setBehaviour(this);
+        layer.add( actor );
+        
+        return actor;
+    }
+    
     public List<GProperty<Behaviour, ?>> getProperties()
     {
         List<GProperty<Behaviour, ?>> result = this.allProperties.get(this.getClass());

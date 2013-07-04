@@ -30,13 +30,26 @@ public abstract class Game extends Task implements EventListener
         return true;
     }
 
-    public abstract int getWidth();
+    public int getWidth()
+    {
+        return 640;
+    }
 
-    public abstract int getHeight();
+    public int getHeight()
+    {
+        return 480;
+    }
 
-    public abstract String getTitle();
+    public String getTitle()
+    {
+        return this.getClass().getName();
+    }
 
-    public abstract String getIconFilename();
+    public String getIconFilename()
+    {
+        return "icon.bmp";
+    }
+    
 
     /**
      * Called when a button is pressed. Most games don't use onKeyDown or onKeyUp during game play,
@@ -85,6 +98,17 @@ public abstract class Game extends Task implements EventListener
     {
     }
 
+    public void loop()
+    {
+        Itchy.singleton.addEventListener(this);
+        Itchy.singleton.loop();
+    }
+    
+    public void terminate()
+    {
+        Itchy.singleton.terminate();
+    }
+    
     /**
      * Part of the Task interface, and simply calls 'tick'. You subclass should override tick, and
      * do nothing with 'run'.
