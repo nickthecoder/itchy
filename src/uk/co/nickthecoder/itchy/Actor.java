@@ -315,17 +315,17 @@ public class Actor extends Task
 
     public void activate()
     {
-        // if ( ! this.active ) {
-        this.addTag("active");
-        this.active = true;
-        Itchy.singleton.gameLoopJob.add(new Task() {
-            @Override
-            public void run()
-            {
-                Actor.this.getBehaviour().onActivate();
-            }
-        });
-        // }
+        if (!this.active) {
+            this.addTag("active");
+            this.active = true;
+            Itchy.singleton.gameLoopJob.add(new Task() {
+                @Override
+                public void run()
+                {
+                    Actor.this.getBehaviour().onActivate();
+                }
+            });
+        }
     }
 
     /**
@@ -334,17 +334,17 @@ public class Actor extends Task
      */
     public void deactivate()
     {
-        // if ( this.active ) {
-        this.active = false;
-        this.removeTag("active");
-        Itchy.singleton.gameLoopJob.add(new Task() {
-            @Override
-            public void run()
-            {
-                Actor.this.getBehaviour().onDeactivate();
-            }
-        });
-        // }
+        if (this.active) {
+            this.active = false;
+            this.removeTag("active");
+            Itchy.singleton.gameLoopJob.add(new Task() {
+                @Override
+                public void run()
+                {
+                    Actor.this.getBehaviour().onDeactivate();
+                }
+            });
+        }
     }
 
     /**
