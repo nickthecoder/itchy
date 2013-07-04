@@ -1,8 +1,6 @@
 package uk.co.nickthecoder.drunkinvaders;
 
 import java.text.DecimalFormat;
-import java.util.HashSet;
-import java.util.Set;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Game;
@@ -47,8 +45,6 @@ public class DrunkInvaders extends Game
     private int aliensRemaining;
 
     private int levelNumber;
-
-    private final Set<Integer> completedLevels = new HashSet<Integer>();
 
     private Neighbourhood neighbourhood;
 
@@ -208,12 +204,12 @@ public class DrunkInvaders extends Game
 
         try {
             final Scene scene = this.resources.getScene(this.sceneName);
-            
+
             if (scene == null) {
                 return false;
             }
 
-            Itchy.showMousePointer( scene.showMouse );
+            Itchy.showMousePointer(scene.showMouse);
 
             AlphaAnimation fadeOut = new AlphaAnimation(15, NumericAnimation.linear, 0, 255);
             AlphaAnimation fadeIn = new AlphaAnimation(15, NumericAnimation.linear, 255, 0);
@@ -254,7 +250,6 @@ public class DrunkInvaders extends Game
 
     public void addAliens( int n )
     {
-        // System.out.println( "Alien count delta " + n );
         this.aliensRemaining += n;
 
         if (this.fadingOut) {
@@ -262,18 +257,20 @@ public class DrunkInvaders extends Game
         }
 
         if (this.aliensRemaining == 0) {
-            this.completedLevels.add(this.levelNumber);
+            getPreferences().putBoolean("completedLevel" + this.levelNumber, true);
+
             this.levelNumber += 1;
 
             if (!this.play()) {
                 this.startScene("completed");
+                this.levelNumber = 1;
             }
         }
     }
 
     public boolean completedLevel( int level )
     {
-        return this.completedLevels.contains(level);
+        return getPreferences().getBoolean("completedLevel" + level, false);
     }
 
     public void play( int levelNumber )

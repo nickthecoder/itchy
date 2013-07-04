@@ -10,19 +10,19 @@
     <ninePatch name="speech" filename="speech.png" top="10" right="31" bottom="23" left="10"/>
   </ninePatches>
   <poses>
-    <pose name="alien3a" filename="alien3a.png" direction="-90.0"/>
     <pose name="alien1b" filename="alien1b.png" direction="-90.0"/>
-    <pose name="pixel" filename="pixel.png"/>
+    <pose name="alien3a" filename="alien3a.png" direction="-90.0"/>
     <pose name="shield-r" filename="shield-r.png"/>
+    <pose name="pixel" filename="pixel.png"/>
     <pose name="ship" filename="ship.png" direction="90.0"/>
-    <pose name="bomb1" filename="bomb1.png" direction="-90.0"/>
     <pose name="alien3b" filename="alien3b.png" direction="-90.0"/>
+    <pose name="bomb1" filename="bomb1.png" direction="-90.0"/>
     <pose name="alien1a" filename="alien1a.png" direction="-90.0"/>
     <pose name="shielded7" filename="shielded7.png" direction="90.0"/>
     <pose name="shielded6" filename="shielded6.png" direction="90.0"/>
     <pose name="shielded5" filename="shielded5.png" direction="90.0"/>
-    <pose name="shielded4" filename="shielded4.png" direction="90.0"/>
     <pose name="level" filename="level.png" offsetY="44"/>
+    <pose name="shielded4" filename="shielded4.png" direction="90.0"/>
     <pose name="shielded3" filename="shielded3.png" direction="90.0"/>
     <pose name="shielded2" filename="shielded2.png" direction="90.0"/>
     <pose name="ship2" filename="ship2.png" direction="90.0"/>
@@ -36,8 +36,8 @@
     <pose name="white" filename="white.png" offsetX="0" offsetY="480"/>
     <pose name="alien2a" filename="alien2a.png" direction="-90.0"/>
     <pose name="alien2b" filename="alien2b.png" direction="-90.0"/>
-    <pose name="level-completed" filename="level-completed.png" offsetY="42"/>
     <pose name="greenPixel" filename="greenPixel.png"/>
+    <pose name="level-completed" filename="level-completed.png" offsetY="42"/>
     <pose name="factory" filename="factory.png"/>
     <pose name="earth" filename="earth.png" offsetX="0" offsetY="480"/>
     <pose name="shield" filename="shield.png"/>
@@ -46,13 +46,13 @@
   <sounds>
     <sound name="explode" filename="sounds/explode.ogg"/>
     <sound name="ahh2" filename="sounds/ahh2.ogg"/>
-    <sound name="ricochet" filename="sounds/ricochet.ogg"/>
     <sound name="ahh1" filename="sounds/ahh1.ogg"/>
-    <sound name="ahh3" filename="sounds/ahh3.ogg"/>
-    <sound name="fire" filename="sounds/fire.ogg"/>
+    <sound name="ricochet" filename="sounds/ricochet.ogg"/>
     <sound name="ahh4" filename="sounds/ahh4.ogg"/>
+    <sound name="ahh3" filename="sounds/ahh3.ogg"/>
     <sound name="shatter" filename="sounds/shatter.ogg"/>
     <sound name="pop" filename="sounds/pop.ogg"/>
+    <sound name="fire" filename="sounds/fire.ogg"/>
   </sounds>
   <animations>
     <animation name="alien3">
@@ -65,11 +65,6 @@
         <alpha ticks="40" from="0.0" to="255.0" profile="linear"/>
       </sequence>
     </animation>
-    <animation name="alien1">
-      <sequence loops="1">
-        <frames/>
-      </sequence>
-    </animation>
     <animation name="alienYell">
       <parallel loops="1">
         <move ticks="80" dx="0.0" dy="0.1" profile="unit"/>
@@ -77,12 +72,7 @@
         <turn ticks="80" from="0.0" to="2.0" profile="linear"/>
       </parallel>
     </animation>
-    <animation name="grow">
-      <sequence loops="1">
-        <scale ticks="100" from="0.1" to="1.0" profile="linear"/>
-      </sequence>
-    </animation>
-    <animation name="alien2">
+    <animation name="alien1">
       <sequence loops="1">
         <frames/>
       </sequence>
@@ -93,6 +83,16 @@
           <frame pose="bomb1" delay="10"/>
           <frame pose="bomb2" delay="10"/>
         </pingPong>
+      </sequence>
+    </animation>
+    <animation name="alien2">
+      <sequence loops="1">
+        <frames/>
+      </sequence>
+    </animation>
+    <animation name="grow">
+      <sequence loops="1">
+        <scale ticks="100" from="0.1" to="1.0" profile="linear"/>
       </sequence>
     </animation>
     <animation name="deathSpiral">
@@ -121,12 +121,12 @@
       <string name="death">Eeek</string>
       <string name="death">I'll be back</string>
       <string name="death">OMG</string>
+      <sound name="shot" sound="shatter"/>
       <font name="speech" font="vera"/>
       <animation name="birth" animation="fadeIn"/>
       <animation name="yell" animation="alienYell"/>
       <animation name="dropped" animation="grow"/>
       <animation name="death" animation="deathSpiral"/>
-      <sound name="shot" sound="shatter"/>    
     </costume>
     <costume name="alien3" extends="alien" behaviour="uk.co.nickthecoder.drunkinvaders.Alien">
       <pose name="tick" pose="alien3a"/>
@@ -168,8 +168,8 @@
     <costume name="saucer" extends="alien" behaviour="uk.co.nickthecoder.drunkinvaders.Mothership">
       <pose name="default" pose="saucer"/>
       <pose name="pixel" pose="redPixel"/>
-      <sound name="death" sound="ahh4"/> 
-      <sound name="giveBirth" sound="pop"/> 
+      <sound name="death" sound="ahh4"/>
+      <sound name="giveBirth" sound="pop"/>
     </costume>
     <costume name="alien1" extends="alien" behaviour="uk.co.nickthecoder.drunkinvaders.Alien">
       <pose name="tick" pose="alien1a"/>
@@ -216,6 +216,7 @@
     <scene name="about" filename="scenes/about.xml"/>
     <scene name="level02" filename="scenes/level02.xml"/>
     <scene name="level01" filename="scenes/level01.xml"/>
+    <scene name="level10" filename="scenes/level10.xml"/>
     <scene name="levels" filename="scenes/levels.xml"/>
     <scene name="level99" filename="scenes/level99.xml"/>
     <scene name="completed" filename="scenes/completed.xml"/>

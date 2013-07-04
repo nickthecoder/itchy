@@ -1,5 +1,8 @@
 package uk.co.nickthecoder.itchy;
 
+import java.util.prefs.Preferences;
+
+import uk.co.nickthecoder.itchy.util.AutoFlushPreferences;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
@@ -9,7 +12,17 @@ public abstract class Game extends Task implements EventListener
     public final Resources resources = new Resources();
 
     private boolean ticking = false;
+
+    private AutoFlushPreferences preferences;
     
+    public AutoFlushPreferences getPreferences()
+    {
+        if ( preferences == null ) {
+            preferences = new AutoFlushPreferences( Preferences.userNodeForPackage(this.getClass()) );
+        }
+        return preferences;
+    }
+
     @Override
     public boolean onQuit()
     {
@@ -79,10 +92,10 @@ public abstract class Game extends Task implements EventListener
     @Override
     public void run()
     {
-        if ( this.ticking ) {
+        if (this.ticking) {
             return;
         }
-        
+
         try {
             this.ticking = true;
             this.tick();

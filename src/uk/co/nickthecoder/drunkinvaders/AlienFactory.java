@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import uk.co.nickthecoder.itchy.Actor;
+import uk.co.nickthecoder.itchy.Appearance;
 import uk.co.nickthecoder.itchy.Behaviour;
 import uk.co.nickthecoder.itchy.Costume;
 import uk.co.nickthecoder.itchy.util.DoubleProperty;
@@ -54,6 +55,9 @@ public class AlienFactory extends Behaviour
         for (int i = 0; i < this.alienCount; i++) {
             createAlien();
             this.getActor().sleep(this.delayPerAlien);
+            if ( this.actor.isDead()) {
+                return;
+            }
         }
 
         for (Actor actor : this.aliens) {
@@ -69,16 +73,23 @@ public class AlienFactory extends Behaviour
     {
         Costume costume = DrunkInvaders.singleton.resources.getCostume(this.costumeName);
         Actor alien = new Actor(costume);
-        alien.getAppearance().setDirection(this.actor.getAppearance().getDirection() - 90);
+        Appearance alienAppearance = alien.getAppearance();
+        Appearance thisAppearance = this.actor.getAppearance();
+        
+        alienAppearance.setDirection(this.actor.getAppearance().getDirection() - 90);
+        alienAppearance.setScale( thisAppearance.getScale() );
+        
         Alien alienBehaviour = new Alien();
         alienBehaviour.fireOnceEvery = this.fireOnceEvery;
+        
         alien.moveTo(this.actor.getX() + this.aliens.size() * this.spacing, this.actor.getY());
         this.actor.getLayer().add(alien);
+        
         alien.setBehaviour(alienBehaviour);
         alien.activate();
         alien.event("birth");
+        
         this.aliens.add(alien);
-
     }
 
 }

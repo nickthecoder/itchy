@@ -60,4 +60,10 @@
     <property name="font" value="veraBold"/>
     <property name="fontSize" value="22"/>
   </actor>
+  <actor costume="level" x="499" y="101" direction="0.0" start="default">
+    <property name="fontColor" value="#ea8138ff"/>
+    <property name="levelNumber" value="10"/>
+    <property name="font" value="blackCasper"/>
+    <property name="fontSize" value="22"/>
+  </actor>
 </scene>
