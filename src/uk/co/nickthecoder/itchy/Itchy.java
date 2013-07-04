@@ -231,19 +231,15 @@ public class Itchy
                 this.processEvent(event); // TODO make this a task.
             }
         }
-        
+
         this.gameLoopJob.start();
 
-        if ( ! this.gameLoopJob.finished() ) {
-            System.err.println( "Itchy gameloopjob not finished" );
-        }
-        
-        this.gameLoopJob.lock();
-        try {
-            this.game.tick(); // TODO make this a task
-        } finally {
-            this.gameLoopJob.unlock();
-        }
+//        this.gameLoopJob.lock();
+//        try {
+//            this.game.tick(); // TODO make this a task. Needs to do the "isTicking" guard like Actor does.
+//        } finally {
+//            this.gameLoopJob.unlock();
+//        }
     }
     
     private void doRedraw()
@@ -260,9 +256,7 @@ public class Itchy
 
     public void completeTasks()
     {
-        while ( this.gameLoopJob.doTask() ) {
-            // Do nothing
-        }
+        this.gameLoopJob.completeTasks();
     }
     
     public void addTask( Task task )

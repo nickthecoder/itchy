@@ -34,7 +34,6 @@ public abstract class Job implements Runnable
     @Override
     public void run()
     {
-        // synchronized( this ) {
         // System.out.println("Job.run obtaining lock");
         this.lock();
         try {
@@ -59,14 +58,20 @@ public abstract class Job implements Runnable
     public void lock()
     {
         this.lock.lock();
+        if ( (this.lockingThread != null) && (this.lockingThread != Thread.currentThread()) ) {
+            throw new RuntimeException( "Obtained a lock when another thread has it.");
+        }
         this.lockingThread = Thread.currentThread();
     }
 
     public void unlock()
     {
-        // this.lock.tryLock();
-        this.lockingThread = null;
-        this.lock.unlock();
+        if (hasLock()) {
+            this.lockingThread = null;
+            this.lock.unlock();
+        } else {
+            throw new RuntimeException( "Tried to unlock without first having the lock" );
+        }
     }
 
     /**
@@ -86,10 +91,10 @@ public abstract class Job implements Runnable
 
         while (!this.complete) {
             // System.out.println( "Waiting for the job to complete" );
-            //System.out.println( "Looping till copmlete" );
+            // System.out.println( "Looping till copmlete" );
             this.lock();
             this.unlock();
-            //System.out.println( "joining" );
+            // System.out.println( "joining" );
             try {
                 this.mainWorker.join(10);
             } catch (InterruptedException e) {
@@ -113,10 +118,11 @@ public abstract class Job implements Runnable
             try {
                 this.unlock();
                 Thread.sleep(wakeTime - System.currentTimeMillis());
-                // System.out.println("Attempting to reobtain lock after sleep");
-                this.lock();
+                // System.out.println("Attempting to re-obtain lock after sleep");
             } catch (InterruptedException e) {
                 e.printStackTrace();
+            } finally {
+                this.lock();
             }
         }
     }
@@ -126,4 +132,15 @@ public abstract class Job implements Runnable
         return Thread.currentThread() == this.mainWorker;
     }
 
+    public boolean isComplete()
+    {
+        return this.complete;
+    }
+    public boolean hasLock()
+    {
+        //if ( this.lockingThread != Thread.currentThread() ) { // TODO Remove
+        //    System.out.println( "Lock thread : " + this.lockingThread + " This Thread " + Thread.currentThread() );
+        //}
+        return this.lockingThread == Thread.currentThread();
+    }
 }

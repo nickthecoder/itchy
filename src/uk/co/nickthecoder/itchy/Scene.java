@@ -24,14 +24,8 @@ public class Scene
             if (actor.getActivationDelay() == 0) {
                 actor.activate();
             } else if (actor.getActivationDelay() > 0) {
-                Itchy.singleton.addTask( new ActorTask( actor ) {
-                    @Override
-                    public void run()
-                    {
-                        delay( this.actor.getActivationDelay() );
-                        this.actor.activate();
-                    }                    
-                });
+                actor.activateAfter( actor.getActivationDelay() );
+                //actor.activate();
             }
         }
     }

@@ -1,3 +1,8 @@
+2013-07-04
+==========
+Debugged the GameLoopJob code, and found that Task were being run twice on occasions, which led
+to the alien count being off.
+
 2013-07-03
 ==========
 Added a shield to DrunkInvader's ship.

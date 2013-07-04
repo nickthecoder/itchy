@@ -8,6 +8,8 @@ public abstract class Game extends Task implements EventListener
 {
     public final Resources resources = new Resources();
 
+    private boolean ticking = false;
+    
     @Override
     public boolean onQuit()
     {
@@ -77,12 +79,16 @@ public abstract class Game extends Task implements EventListener
     @Override
     public void run()
     {
-        this.tick();
+        if ( this.ticking ) {
+            return;
+        }
+        
+        try {
+            this.ticking = true;
+            this.tick();
+        } finally {
+            this.ticking = false;
+        }
     }
 
-    @Override
-    public boolean getAbort()
-    {
-        return false;
-    }
 }

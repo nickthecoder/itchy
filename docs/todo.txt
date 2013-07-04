@@ -1,8 +1,20 @@
+Make the events Tasks (in case they cause a "sleep".
+    The events would have to be added to the list first, as the event loop need to be the main thread.
+
+Jame is out of date, need to rebuild for win32 and i386
+Add the dll and so files to jame's git tree
 Compile and test using windows.
+
+Add to ntc web site - replace the "games" tab with "software", which is a wiki namespace.
+
+
 
 What's Next
 ===========
 
+Create a tiny game in java and in bsh
+    Rain?
+    
 Try it on a RaspPi
 
 Create a debug actor, which you can print to, and therefore easily display debug info on the screen.
@@ -92,6 +104,10 @@ Costumes are updated even when cancel is pressed (need to COPY the costume?)
   
 Later Features
 ==============
+
+Hook it up with GitHub!
+    Game designers can exchange games via github
+    Issues with trust - could use java's sandboxing to prevent malicious code running.
 
 PoseDecorator - Takes a Pose and decorates it, making another Pose. Appearance can have a list of
 decorators, which are applied in turn.

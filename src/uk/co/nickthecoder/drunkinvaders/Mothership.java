@@ -63,10 +63,15 @@ public class Mothership extends Alien
     {
         super.onActivate();
 
-        this.getActor().delay(this.firstBornDelay);
+        this.getActor().sleep(this.firstBornDelay);
         for (int i = 0; i < this.childrenCount; i++) {
+            if ( this.actor.isDead()) {
+                return;
+            }
             giveBirth();
-            this.actor.delay(this.birthInterval);
+            //System.out.println( "Mothership birth delay" );
+            this.actor.sleep(this.birthInterval);
+            //System.out.println( "Mothership birth done" );
         }
     }
 

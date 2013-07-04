@@ -85,10 +85,6 @@ public abstract class Behaviour
         this.actor.sleep(seconds);
     }
 
-    public void delay( double seconds )
-    {
-        this.actor.delay(seconds);
-    }
 
     /**
      * You may override this method to do one-time initialisation. Use this instead of a

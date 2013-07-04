@@ -46,7 +46,9 @@ public class Actor extends Task
     private boolean active = false;
     private boolean dead = false;
     private boolean dying = false;
-    
+
+    private boolean ticking = false;
+
     private double activationDelay;
 
     public Actor( Costume costume )
@@ -71,8 +73,6 @@ public class Actor extends Task
         this.appearance = new Appearance(pose);
         this.tagMembership = new TagMembership<Actor>(actorTags, this);
         this.appearance.setActor(this);
-        this.active = false;
-        this.dead = false;
 
         this.setBehaviour(new NullBehaviour());
 
@@ -289,7 +289,43 @@ public class Actor extends Task
     public boolean isActive()
     {
         return this.active;
-        // return this.hasTag("active");
+    }
+
+    public void setActivationDelay( double value )
+    {
+        this.activationDelay = value;
+    }
+
+    public double getActivationDelay()
+    {
+        return this.activationDelay;
+    }
+
+    public void activateAfter( final double seconds )
+    {
+        Itchy.singleton.gameLoopJob.add(new Task() {
+            @Override
+            public void run()
+            {
+                sleep(seconds);
+                activate();
+            }
+        });
+    }
+
+    public void activate()
+    {
+        // if ( ! this.active ) {
+        this.addTag("active");
+        this.active = true;
+        Itchy.singleton.gameLoopJob.add(new Task() {
+            @Override
+            public void run()
+            {
+                Actor.this.getBehaviour().onActivate();
+            }
+        });
+        // }
     }
 
     /**
@@ -298,38 +334,17 @@ public class Actor extends Task
      */
     public void deactivate()
     {
+        // if ( this.active ) {
         this.active = false;
         this.removeTag("active");
-        Itchy.singleton.gameLoopJob.add(new ActorTask(this) {
+        Itchy.singleton.gameLoopJob.add(new Task() {
             @Override
             public void run()
             {
                 Actor.this.getBehaviour().onDeactivate();
             }
         });
-    }
-
-    public void setActivationDelay( double value )
-    {
-        this.activationDelay = value;
-    }
-    
-    public double getActivationDelay()
-    {
-        return this.activationDelay;
-    }
-    
-    public void activate()
-    {
-        this.addTag("active");
-        this.active = true;
-        Itchy.singleton.gameLoopJob.add(new ActorTask(this) {
-            @Override
-            public void run()
-            {
-                Actor.this.getBehaviour().onActivate();
-            }
-        });
+        // }
     }
 
     /**
@@ -352,7 +367,7 @@ public class Actor extends Task
     {
         if (!this.dead) {
             this.dead = true;
-            Itchy.singleton.addTask(new ActorTask(this) {
+            Itchy.singleton.addTask(new Task() {
                 @Override
                 public void run()
                 {
@@ -557,20 +572,31 @@ public class Actor extends Task
 
     public void tick()
     {
+        // If a task sleeps during a tick, don't allow it to tick again until it awakes from its
+        // sleep.
+        if (this.ticking) {
+            return;
+        }
 
-        if (this.animation2 != null) {
+        try {
+            this.ticking = true;
 
-            this.animation2.tick(this);
-            if (this.animation2.isFinished()) {
-                this.setAnimation(null);
-                if (this.dying) {
-                    this.kill();
-                    return;
+            if (this.animation2 != null) {
+
+                this.animation2.tick(this);
+                if (this.animation2.isFinished()) {
+                    this.setAnimation(null);
+                    if (this.dying) {
+                        this.kill();
+                        return;
+                    }
                 }
             }
-        }
-        if (!this.dead) {
-            this.behaviour.tick();
+            if (!this.dead) {
+                this.behaviour.tick();
+            }
+        } finally {
+            this.ticking = false;
         }
     }
 
@@ -579,12 +605,6 @@ public class Actor extends Task
     {
         return "Actor #" + this._id + " @ " + getX() + "," + getY() +
                 (getBehaviour() == null ? "" : "(" + getBehaviour().getClass().getName() + ")");
-    }
-
-    @Override
-    public boolean getAbort()
-    {
-        return this.isDead();
     }
 
     @Override

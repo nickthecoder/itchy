@@ -197,7 +197,6 @@ public class DrunkInvaders extends Game
     public boolean startScene( String sceneName )
     {
         System.out.println("Starting scene " + sceneName);
-        System.out.println("fading in ? " + this.fadingOut);
 
         if (this.fadingOut) {
             return false;

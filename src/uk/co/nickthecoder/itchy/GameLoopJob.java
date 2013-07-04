@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.util.Job;
-import uk.co.nickthecoder.itchy.util.SkipMessage;
 
 /**
  * Organises the game loop into a series of small tasks.
@@ -54,11 +53,7 @@ class GameLoopJob extends Job
         lock();
         try {
             this.actors.addAll(Actor.allByTag("active"));
-
-            // this.tasks.add( Itchy.singleton.getGame() );
-
-            this.actorsIndex = 0;
-            this.tasksIndex = 0;
+            this.tasks.add( Itchy.singleton.getGame() );
         } finally {
             unlock();
         }
@@ -70,7 +65,7 @@ class GameLoopJob extends Job
         this.tasks.add(task);
     }
 
-    public boolean finished()
+    public boolean isFinished()
     {
         //System.out.println( "Tasks  " + this.tasksIndex + " vs " + this.tasks.size() );
         //System.out.println( "Actors " + this.actorsIndex + " vs " + this.actors.size() );
@@ -87,16 +82,7 @@ class GameLoopJob extends Job
             Task task = this.tasks.get(this.tasksIndex);
             this.tasksIndex++;
 
-            if (!task.getSkip()) {
-                try {
-                    task.run();
-                    if (task.getSkip()) {
-                        task.setSkip(false);
-                    }
-                } catch (SkipMessage e) {
-                    // Do nothing.
-                }
-            }
+            task.run();
 
         } else {
 
@@ -121,19 +107,31 @@ class GameLoopJob extends Job
             Actor actor = this.actors.get(this.actorsIndex);
             this.actorsIndex++;
 
-            if (!actor.getSkip()) {
-                try {
-                    actor.tick();
-                    if (actor.getSkip()) {
-                        actor.setSkip(false);
-                    }
-                } catch (SkipMessage e) {
-                    // Do nothing.
-                }
-            }
+            actor.tick();
 
         }
 
         return true;
+    }
+
+    public void completeTasks()
+    {
+        while ( doTask() ) {
+            // Do nothing
+        }
+    }
+    
+    public void debug()
+    {
+        System.out.println( "GameLoopJob" );
+        System.out.println( "Tasks " + this.tasksIndex + " of " + this.tasks.size() );
+        System.out.println( "Actors " + this.actorsIndex + " of " + this.actors.size() );
+        
+        for ( int i = this.tasksIndex; i < this.tasks.size(); i ++ ) {
+            System.out.println( "Task : " + this.tasks.get(i) );
+        }
+        for ( int i = this.actorsIndex; i < this.actors.size(); i ++ ) {
+            System.out.println( "Actor: " + this.actors.get(i) );
+        }
     }
 }
