@@ -5,6 +5,7 @@ import java.text.DecimalFormat;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Game;
 import uk.co.nickthecoder.itchy.Itchy;
+import uk.co.nickthecoder.itchy.MultiLineTextPose;
 import uk.co.nickthecoder.itchy.Scene;
 import uk.co.nickthecoder.itchy.ScrollableLayer;
 import uk.co.nickthecoder.itchy.animation.AlphaAnimation;
@@ -15,7 +16,7 @@ import uk.co.nickthecoder.itchy.editor.Editor;
 import uk.co.nickthecoder.itchy.neighbourhood.ActorCollisionStrategy;
 import uk.co.nickthecoder.itchy.neighbourhood.Neighbourhood;
 import uk.co.nickthecoder.itchy.neighbourhood.SinglePointCollisionStrategy;
-import uk.co.nickthecoder.itchy.util.DoubleBehaviour;
+import uk.co.nickthecoder.itchy.util.TextBehaviour;
 import uk.co.nickthecoder.jame.Keys;
 import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
@@ -48,9 +49,7 @@ public class DrunkInvaders extends Game
 
     private Neighbourhood neighbourhood;
 
-    private boolean showInfo = false;
-
-    private Actor aliensRemainingActor;
+    private TextBehaviour info;
 
     public boolean fadingOut = false;
 
@@ -87,7 +86,7 @@ public class DrunkInvaders extends Game
         this.levelNumber = 1;
 
         this.startScene("menu");
-        Itchy.singleton.loop();
+        loop();
 
     }
 
@@ -156,29 +155,25 @@ public class DrunkInvaders extends Game
 
     public void toggleInfo()
     {
-        this.showInfo = !this.showInfo;
+        if (this.info == null) {
 
-        if (this.showInfo) {
-
-            if (this.aliensRemainingActor != null) {
-                this.aliensRemainingActor.kill();
-            }
-            this.aliensRemainingActor = new DoubleBehaviour() {
-
-                @Override
-                public double getValue()
-                {
-                    return DrunkInvaders.this.aliensRemaining;
+            this.info = new TextBehaviour( new MultiLineTextPose( this.resources.getFont("vera"), 16 ) )
+            {
+                public void tick() {
+                    this.setText(
+                        "Aliens Remaining : " + DrunkInvaders.this.aliensRemaining + "\n" +
+                        "Dropped Frames   : " + Itchy.singleton.frameRate.getDroppedFrames()
+                    );
                 }
-
-            }.createActor(this.resources.getFont("vera"), 16);
-            this.aliensRemainingActor.moveTo(40, 460);
-            this.glassLayer.add(this.aliensRemainingActor);
-            this.aliensRemainingActor.activate();
+            };
+            this.info.textPose.setAlignment( 0,0 );
+            this.info.createActor().moveTo(40, 460);
+            this.glassLayer.add(this.info.getActor());
+            this.info.getActor().activate();
 
         } else {
-            this.aliensRemainingActor.kill();
-            this.aliensRemainingActor = null;
+            this.info.getActor().kill();
+            this.info = null;
         }
     }
 

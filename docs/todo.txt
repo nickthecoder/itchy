@@ -11,9 +11,6 @@ Add to ntc web site - replace the "games" tab with "software", which is a wiki n
 What's Next
 ===========
 
-Create a tiny game in java and in bsh
-    Rain?
-    
 Try it on a RaspPi
 
 Create a debug actor, which you can print to, and therefore easily display debug info on the screen.
