@@ -1,6 +1,3 @@
-Make the events Tasks (in case they cause a "sleep".
-    The events would have to be added to the list first, as the event loop need to be the main thread.
-
 Jame is out of date, need to rebuild for win32 and i386
 Add the dll and so files to jame's git tree
 Compile and test using windows.

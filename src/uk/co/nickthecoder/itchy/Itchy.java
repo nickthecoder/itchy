@@ -228,18 +228,24 @@ public class Itchy
             if (event == null) {
                 break;
             } else {
-                this.processEvent(event); // TODO make this a task.
+                this.queueEvent(event);
             }
         }
 
         this.gameLoopJob.start();
 
-//        this.gameLoopJob.lock();
-//        try {
-//            this.game.tick(); // TODO make this a task. Needs to do the "isTicking" guard like Actor does.
-//        } finally {
-//            this.gameLoopJob.unlock();
-//        }
+    }
+
+    private void queueEvent( final Event event )
+    {
+        this.gameLoopJob.add(new Task() {
+
+            @Override
+            public void run()
+            {
+                Itchy.this.processEvent( event );
+            }
+        });
     }
     
     private void doRedraw()

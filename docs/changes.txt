@@ -1,7 +1,16 @@
+2013-07-05
+==========
+Baseline Text alignment (which required more features of Jame).
+MultilineTextPose
+Processed Events as tasks (which means "sleep", is now allowed inside event handlers).
+
 2013-07-04
 ==========
 Debugged the GameLoopJob code, and found that Task were being run twice on occasions, which led
 to the alien count being off.
+1st cut demo game using bean shell.
+Persistent preferences
+Put guards around onActive and onDeactivate to prevent them running when already (de)activated.
 
 2013-07-03
 ==========
