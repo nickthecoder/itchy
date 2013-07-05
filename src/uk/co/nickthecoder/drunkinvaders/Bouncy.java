@@ -42,10 +42,8 @@ public class Bouncy extends Behaviour
     public void onKill()
     {
         super.onKill();
-        if (this.collisionStrategy != null) {
-            this.collisionStrategy.remove();
-            this.collisionStrategy = null;
-        }
+        this.collisionStrategy.remove();
+        this.collisionStrategy = null;
     }
 
     @Override

@@ -315,7 +315,7 @@ public class Actor extends Task
 
     public void activate()
     {
-        if (!this.active) {
+        if ((! this.dead) && (!this.active)) {
             this.addTag("active");
             this.active = true;
             Itchy.singleton.gameLoopJob.add(new Task() {
@@ -367,6 +367,7 @@ public class Actor extends Task
     {
         if (!this.dead) {
             this.dead = true;
+            this.deactivate();
             Itchy.singleton.addTask(new Task() {
                 @Override
                 public void run()
@@ -374,7 +375,6 @@ public class Actor extends Task
                     Actor.this.getBehaviour().onKill();
                 }
             });
-            this.deactivate();
             this.tagMembership.removeAll();
         }
     }

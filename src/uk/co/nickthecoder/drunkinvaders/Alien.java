@@ -43,7 +43,14 @@ public class Alien extends Bouncy implements Shootable
     @Override
     public void onActivate()
     {
+        super.onActivate();
         DrunkInvaders.singleton.addAliens(1);
+    }
+    @Override
+    public void onDeactivate()
+    {
+        super.onActivate();
+        DrunkInvaders.singleton.addAliens(-1);
     }
 
     @Override
@@ -54,7 +61,6 @@ public class Alien extends Bouncy implements Shootable
             this.collisionStrategy.remove();
             this.collisionStrategy = null;
         }
-        DrunkInvaders.singleton.addAliens(-1);
     }
 
     @Override

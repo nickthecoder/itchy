@@ -54,7 +54,7 @@ public class AlienFactory extends Behaviour
 
         for (int i = 0; i < this.alienCount; i++) {
             createAlien();
-            this.getActor().sleep(this.delayPerAlien);
+            sleep(this.delayPerAlien);
             if ( this.actor.isDead()) {
                 return;
             }
