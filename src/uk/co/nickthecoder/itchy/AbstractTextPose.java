@@ -141,8 +141,6 @@ public abstract class AbstractTextPose implements Pose
         setYAlignment(y);
     }
 
-    // TODO Allow alignment to be set to the font baseline.
-
     @Override
     public int getOffsetX()
     {

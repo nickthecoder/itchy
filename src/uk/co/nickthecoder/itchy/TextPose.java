@@ -73,4 +73,12 @@ public class TextPose extends AbstractTextPose
         return this.surface.getHeight();
     }
 
+    /**
+     * Sets the y alignment, so that it uses the baseline of the text as the reference line.
+     * Use this to line up text sensibly.
+     */
+    public void setBaselineAlignment()
+    {
+        setYAlignment( this.getTrueTypeFont().getAscent() / (double) this.getTrueTypeFont().getHeight() );
+    }
 }
