@@ -1,13 +1,11 @@
 package uk.co.nickthecoder.itchy.util;
 
-import java.util.List;
 import java.util.Random;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Appearance;
 import uk.co.nickthecoder.itchy.Behaviour;
 import uk.co.nickthecoder.itchy.Pose;
-import uk.co.nickthecoder.itchy.PoseResource;
 
 public class ExplosionBehaviour extends Behaviour
 {
@@ -15,7 +13,7 @@ public class ExplosionBehaviour extends Behaviour
 
     public int projectileCount = 0;
 
-    public int countPerTick = 0;
+    public int countPerTick = 1000;
 
     public double gravity = 0;
 
@@ -270,24 +268,27 @@ public class ExplosionBehaviour extends Behaviour
             }
             this.projectileCount--;
 
-            Pose pose;
+            Pose pose = null;
             if ( this.poseName != null ) {
                 pose = this.actor.getCostume().getPose( this.poseName );
-            } else {
+            }
+            if ( pose == null ) {
                 pose = this.actor.getAppearance().getPose();
             }
-            
+            if ( pose == null ) {
+                return;
+            }
             Actor actor = new Actor(pose);
             Appearance appearance = actor.getAppearance();
             ProjectileBehaviour behaviour = new ProjectileBehaviour();
-
-            actor.moveTo(this.actor);
-            actor.moveForward(this.distance + random.nextDouble() * this.randomDistance);
 
             appearance.setDirection(this.direction + random.nextDouble() * this.randomDirection);
             appearance.setScale(this.scale + random.nextDouble() * this.randomScale);            
             appearance.setAlpha( this.alpha + random.nextDouble() * this.randomAlpha );
             
+            actor.moveTo(this.actor);
+            actor.moveForward(this.distance + random.nextDouble() * this.randomDistance);
+
             behaviour.growFactor = this.grow + random.nextDouble() * this.randomGrow;
             behaviour.life = this.life + (int) (random.nextDouble() * this.randomLife);
             behaviour.spin = this.spin + random.nextDouble() * this.randomSpin;
