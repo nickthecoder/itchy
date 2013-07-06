@@ -3,6 +3,7 @@ package uk.co.nickthecoder.drunkinvaders;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Pose;
 import uk.co.nickthecoder.itchy.TextPose;
+import uk.co.nickthecoder.itchy.animation.NumericAnimation;
 import uk.co.nickthecoder.itchy.animation.ScaleAnimation;
 import uk.co.nickthecoder.itchy.util.BorderPoseDecorator;
 import uk.co.nickthecoder.itchy.util.ExplosionBehaviour;
@@ -18,7 +19,7 @@ public class Alien extends Bouncy implements Shootable
     public static final String[] SHOOTABLE_LIST = new String[] { "shootable" };
 
     private static PoseDecorator bubbleCreator = new BorderPoseDecorator(
-            DrunkInvaders.singleton.resources.getNinePatch("speech"), 10, 10, 20, 10);
+        DrunkInvaders.singleton.resources.getNinePatch("speech"), 10, 10, 20, 10);
 
     public double fireOnceEvery = 1.0; // Average duration between bombs in seconds
 
@@ -34,6 +35,7 @@ public class Alien extends Bouncy implements Shootable
         this.actor.addTag("shootable");
     }
 
+    @Override
     protected void addProperties()
     {
         super.addProperties();
@@ -46,6 +48,7 @@ public class Alien extends Bouncy implements Shootable
         super.onActivate();
         DrunkInvaders.singleton.addAliens(1);
     }
+
     @Override
     public void onDeactivate()
     {
@@ -106,33 +109,30 @@ public class Alien extends Bouncy implements Shootable
     @Override
     public void shot( Actor bullet )
     {
-        Actor explosion = new Actor(this.actor.getCostume().getPose("pixel"));
-        ExplosionBehaviour eb = new ExplosionBehaviour();
-        eb.distance = 0;
-        eb.randomDistance = 20;
-        eb.projectileCount = 20;
-        eb.speed = 6.0;
-        eb.randomSpeed = 0.1;
-        eb.fade = 0.5;
-        explosion.setBehaviour(eb);
-        explosion.moveTo(this.actor);
-        this.actor.getLayer().add(explosion);
-        explosion.activate();
-
-        double scale = this.getActor().getAppearance().getScale();
-        if ( scale > 1 ) {
-            ScaleAnimation scaleAnimation = new ScaleAnimation( 10, ScaleAnimation.linear, scale, scale / (this.shotsRequired +2) * (this.shotsRequired + 1) );
-            this.getActor().setAnimation( scaleAnimation );
-        }
+        // Actor explosion = new Actor(this.actor.getCostume().getPose("pixel"));
+        new ExplosionBehaviour()
+            .projectiles(40).projectilesPerClick(10)
+            .distance(0, 20)
+            .speed(3, 6)
+            .fade(0.5)
+            .createActor(this.actor, "pixel")
+            .activate();
         
-        this.shotsRequired --;
-        if ( this.shotsRequired > 0 ) {
+        double scale = this.getActor().getAppearance().getScale();
+        if (scale > 1) {
+            ScaleAnimation scaleAnimation = new ScaleAnimation(10, NumericAnimation.linear, scale,
+                scale / (this.shotsRequired + 2) * (this.shotsRequired + 1));
+            this.getActor().setAnimation(scaleAnimation);
+        }
+
+        this.shotsRequired--;
+        if (this.shotsRequired > 0) {
             event("shot");
             return;
         }
-        
+
         TextPose textPose = new TextPose(this.actor.getCostume().getString("death"),
-                DrunkInvaders.singleton.resources.getFont("vera"), 18, SPEECH_COLOR);
+            DrunkInvaders.singleton.resources.getFont("vera"), 18, SPEECH_COLOR);
         Pose bubble = bubbleCreator.createPose(textPose);
 
         Actor yell = new Actor(bubble);

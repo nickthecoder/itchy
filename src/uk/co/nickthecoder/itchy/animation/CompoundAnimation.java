@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.Actor;
+import uk.co.nickthecoder.itchy.MessageListener;
 
 public class CompoundAnimation extends AbstractAnimation
 {
@@ -46,6 +47,22 @@ public class CompoundAnimation extends AbstractAnimation
         Animation other = this.children.get(index - 1);
         this.children.set(index, other);
         this.children.set(index - 1, child);
+    }
+
+    public void addMessageListener( MessageListener listener )
+    {
+        super.addMessageListener(listener);
+        for ( Animation child : this.children ){ 
+            child.addMessageListener( listener );
+        }
+    }
+
+    public void removeMessageListener( MessageListener listener )
+    {
+        super.removeMessageListener(listener);
+        for ( Animation child : this.children ){ 
+            child.removeMessageListener( listener );
+        }
     }
 
     @Override

@@ -116,6 +116,11 @@ public abstract class Behaviour
     {
     }
 
+    public void onMessage( String message )
+    {
+        // do nothing
+    }
+    
     public void onKill()
     {
         // do nothing

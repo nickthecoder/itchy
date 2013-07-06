@@ -32,7 +32,7 @@ public final class Appearance implements OffsetSurface
     private double direction;
 
     /**
-     * How transparent the image is from 0 (fully opaque) to 1 (fully transparent).
+     * How transparent the image is from 0 (fully transparent) to 255 (fully opaque).
      */
     private double alpha;
 

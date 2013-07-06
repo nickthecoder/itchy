@@ -9,12 +9,14 @@ public class ProjectileBehaviour extends Behaviour
     public double vx;
 
     public double vy;
-
+    
     public double spin;
 
     public double fade;
 
-    public int life = 10000; // An arbitary amount of time till it dies.
+    public double growFactor;
+    
+    public int life = 1000; // An arbitary amount of time till it dies.
                              // Projectiles are usually short lived
 
     @Override
@@ -25,6 +27,10 @@ public class ProjectileBehaviour extends Behaviour
         this.actor.getAppearance().adjustAlpha(-this.fade);
         this.actor.getAppearance().adjustDirection(this.spin);
 
+        if ( growFactor != 1 ) {
+            this.actor.getAppearance().setScale( this.actor.getAppearance().getScale() * growFactor );
+        }
+        
         if ((this.life-- < 0) || (this.actor.getAppearance().getAlpha() <= 0)) {
             this.actor.kill();
         }

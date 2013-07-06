@@ -17,7 +17,7 @@ import uk.co.nickthecoder.jame.RGBA;
 import uk.co.nickthecoder.jame.Sound;
 import uk.co.nickthecoder.jame.Surface;
 
-public class Actor extends Task
+public class Actor extends Task implements MessageListener
 {
     // private static Map<Class,Integer> _nextIds = new HashMap<Class,Integer>();
     private static int _nextId = 1;
@@ -29,7 +29,7 @@ public class Actor extends Task
 
     Behaviour behaviour;
 
-    private Animation animation2;
+    private Animation animation;
 
     private final Appearance appearance;
 
@@ -186,18 +186,20 @@ public class Actor extends Task
     public void setAnimation( Animation animation )
     {
         if (animation != null) {
-            this.animation2 = animation.copy();
-            this.animation2.start(this);
-            this.animation2.tick(this);
+            this.animation = animation.copy();
+            this.animation.start(this);
+            this.animation.tick(this);
+            this.animation.addMessageListener( this );
         } else {
-            this.animation2 = null;
+            this.animation = null;
         }
     }
 
     public Animation getAnimation()
     {
-        return this.animation2;
+        return this.animation;
     }
+
 
     public void event( String eventName )
     {
@@ -313,6 +315,19 @@ public class Actor extends Task
         });
     }
 
+    public void onMessage( String message )
+    {
+        if ( "kill".equals( message ) ) {
+            this.kill();
+        } else if ( "activate".equals(message) ) {
+            this.activate();
+        } else if ( "deactivate".equals(message) ) {
+            this.deactivate();
+        } else {
+            this.getBehaviour().onMessage( message );
+        }
+    }
+    
     public void activate()
     {
         if ((! this.dead) && (!this.active)) {
@@ -581,10 +596,10 @@ public class Actor extends Task
         try {
             this.ticking = true;
 
-            if (this.animation2 != null) {
+            if (this.animation != null) {
 
-                this.animation2.tick(this);
-                if (this.animation2.isFinished()) {
+                this.animation.tick(this);
+                if (this.animation.isFinished()) {
                     this.setAnimation(null);
                     if (this.dying) {
                         this.kill();

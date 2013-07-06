@@ -9,7 +9,6 @@ import uk.co.nickthecoder.itchy.MultiLineTextPose;
 import uk.co.nickthecoder.itchy.Scene;
 import uk.co.nickthecoder.itchy.ScrollableLayer;
 import uk.co.nickthecoder.itchy.animation.AlphaAnimation;
-import uk.co.nickthecoder.itchy.animation.AnimationListener;
 import uk.co.nickthecoder.itchy.animation.CompoundAnimation;
 import uk.co.nickthecoder.itchy.animation.NumericAnimation;
 import uk.co.nickthecoder.itchy.editor.Editor;
@@ -196,56 +195,51 @@ public class DrunkInvaders extends Game
 
         this.sceneName = sceneName;
 
-        try {
-            final Scene scene = this.resources.getScene(this.sceneName);
+        AlphaAnimation fadeOut = new AlphaAnimation(15, NumericAnimation.linear, 0, 255);
+        AlphaAnimation fadeIn = new AlphaAnimation(15, NumericAnimation.linear, 255, 0);
+        CompoundAnimation animation = new CompoundAnimation(true);
+        animation.addAnimation(fadeOut);
+        animation.addAnimation(fadeIn);
 
-            if (scene == null) {
-                return false;
-            }
-
-            Itchy.showMousePointer(scene.showMouse);
-
-            AlphaAnimation fadeOut = new AlphaAnimation(15, NumericAnimation.linear, 0, 255);
-            AlphaAnimation fadeIn = new AlphaAnimation(15, NumericAnimation.linear, 255, 0);
-            CompoundAnimation animation = new CompoundAnimation(true);
-            animation.addAnimation(fadeOut);
-            animation.addAnimation(fadeIn);
-
-            this.fadingOut = true;
-
-            fadeOut.addAnimationListener(new AnimationListener() {
-                @Override
-                public void finished()
-                {
-                    DrunkInvaders.this.mainLayer.clear();
-                    Itchy.singleton.completeTasks();
-                    DrunkInvaders.this.fadingOut = false;
-                    // DrunkInvaders.this.aliensRemaining = 0;
-                    scene.create(DrunkInvaders.this.mainLayer, false);
-                }
-            });
-
-            animation.addAnimationListener(new AnimationListener() {
-                @Override
-                public void finished()
-                {
-                    DrunkInvaders.this.fadingOut = false;
-                }
-            });
-
-            this.fadeActor.setAnimation(animation);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        fadeOut.setFinishedMessage( "fadedOut" );
+        fadeOut.addMessageListener( this );
+        
+        fadeIn.setFinishedMessage( "fadedIn" );
+        fadeIn.addMessageListener( this );
+        
+        this.fadingOut = true;
+        this.fadeActor.setAnimation(animation);
 
         return true;
     }
+    
+    public void onMessage( String message )
+    {
+        if ( "fadedIn".equals( message ) ) {
+            DrunkInvaders.this.fadingOut = false;
 
+        } else if ( "fadedOut".equals( message ) ) {
+
+            this.mainLayer.clear();
+            Itchy.singleton.completeTasks();
+            this.fadingOut = false;
+            try {
+                Scene scene = this.resources.getScene(this.sceneName);
+                scene.create(DrunkInvaders.this.mainLayer, false);
+                Itchy.showMousePointer(scene.showMouse);
+
+            } catch (Exception e) {
+                throw new RuntimeException( e );
+            }
+            
+        }
+    }
+    
     public void addAliens( int n )
     {
         this.aliensRemaining += n;
 
+        // We only care when the last alien was kill during play, not when fading te scene out.
         if (this.fadingOut) {
             return;
         }

@@ -4,11 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.Actor;
+import uk.co.nickthecoder.itchy.MessageListener;
 
 public abstract class AbstractAnimation implements Animation, Cloneable
 {
 
     private List<AnimationListener> listeners = new ArrayList<AnimationListener>();
+
+    private List<MessageListener> messageListeners = new ArrayList<MessageListener>();
+
+    private String finishedMessage = null;
 
     @Override
     public abstract String getName();
@@ -26,17 +31,48 @@ public abstract class AbstractAnimation implements Animation, Cloneable
             for (AnimationListener listener : this.listeners) {
                 listener.finished();
             }
+            if (this.finishedMessage != null) {
+                for (MessageListener listener : this.messageListeners) {
+                    listener.onMessage(this.finishedMessage);
+                }
+            }
         }
     }
 
+    @Override
+    public String getFinishedMessage()
+    {
+        return this.finishedMessage;
+    }
+
+    @Override
+    public void setFinishedMessage( String message )
+    {
+        this.finishedMessage = message;
+    }
+
+    @Override
     public void addAnimationListener( AnimationListener listener )
     {
         this.listeners.add(listener);
     }
 
+    @Override
     public void removeAnimationListener( AnimationListener listener )
     {
         this.listeners.remove(listener);
+    }
+
+    @Override
+    public void addMessageListener( MessageListener listener )
+    {
+        this.messageListeners.add(listener);
+    }
+
+    @Override
+    public void removeMessageListener( MessageListener listener )
+    {
+        this.messageListeners.remove(listener);
     }
 
     @Override
@@ -46,6 +82,10 @@ public abstract class AbstractAnimation implements Animation, Cloneable
         result.listeners = new ArrayList<AnimationListener>();
         for (AnimationListener listener : this.listeners) {
             result.listeners.add(listener);
+        }
+        result.messageListeners = new ArrayList<MessageListener>();
+        for (MessageListener listener : this.messageListeners) {
+            result.messageListeners.add(listener);
         }
         return result;
     }
