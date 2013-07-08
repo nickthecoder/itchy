@@ -17,6 +17,7 @@ import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Costume;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.neighbourhood.Neighbourhood;
+import uk.co.nickthecoder.itchy.neighbourhood.StandardNeighbourhood;
 import uk.co.nickthecoder.itchy.neighbourhood.SinglePointCollisionStrategy;
 import uk.co.nickthecoder.itchy.neighbourhood.Square;
 import uk.co.nickthecoder.jame.Video;
@@ -67,7 +68,7 @@ public class NeighbourhoodTest
 
     public void testOneSquare()
     {
-        Neighbourhood nbh = new Neighbourhood(1);
+        Neighbourhood nbh = new StandardNeighbourhood(1);
 
         Square sq1 = nbh.getSquare(0, 0);
         assertNotNull("Looking for the origin square", sq1);
@@ -93,7 +94,7 @@ public class NeighbourhoodTest
     @Test
     public void createSquares()
     {
-        Neighbourhood nbh = new Neighbourhood(50);
+        Neighbourhood nbh = new StandardNeighbourhood(50);
 
         spcs(nbh, this.c30x30, 0, 0);
         spcs(nbh, this.c30x30, 60, 0);
@@ -105,7 +106,7 @@ public class NeighbourhoodTest
     @Test
     public void createRows()
     {
-        Neighbourhood nbh = new Neighbourhood(50);
+        Neighbourhood nbh = new StandardNeighbourhood(50);
 
         spcs(nbh, this.c30x30, 0, 0);
         spcs(nbh, this.c30x30, 0, 60);
@@ -117,7 +118,7 @@ public class NeighbourhoodTest
     @Test
     public void actorsInSquares()
     {
-        Neighbourhood nbh = new Neighbourhood(50);
+        Neighbourhood nbh = new StandardNeighbourhood(50);
 
         SinglePointCollisionStrategy a = spcs(nbh, this.c30x30, 0, 0);
         assertEquals(a.getSquare(), nbh.getSquare(0, 0));
@@ -156,7 +157,7 @@ public class NeighbourhoodTest
     @Test
     public void touching()
     {
-        Neighbourhood nbh = new Neighbourhood(50);
+        Neighbourhood nbh = new StandardNeighbourhood(50);
 
         SinglePointCollisionStrategy a = spcs(nbh, this.c30x30, 0, 0);
         SinglePointCollisionStrategy b = spcs(nbh, this.c30x30, 10, 0);

@@ -14,6 +14,7 @@ import uk.co.nickthecoder.itchy.animation.NumericAnimation;
 import uk.co.nickthecoder.itchy.editor.Editor;
 import uk.co.nickthecoder.itchy.neighbourhood.ActorCollisionStrategy;
 import uk.co.nickthecoder.itchy.neighbourhood.Neighbourhood;
+import uk.co.nickthecoder.itchy.neighbourhood.StandardNeighbourhood;
 import uk.co.nickthecoder.itchy.neighbourhood.SinglePointCollisionStrategy;
 import uk.co.nickthecoder.itchy.util.TextBehaviour;
 import uk.co.nickthecoder.jame.Keys;
@@ -54,7 +55,7 @@ public class DrunkInvaders extends Game
 
     public DrunkInvaders()
     {
-        this.neighbourhood = new Neighbourhood(NEIGHBOURHOOD_SQUARE_SIZE);
+        this.neighbourhood = new StandardNeighbourhood(NEIGHBOURHOOD_SQUARE_SIZE);
     }
 
     private void go() throws Exception
