@@ -3,12 +3,15 @@ package uk.co.nickthecoder.itchy;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 import uk.co.nickthecoder.itchy.util.GProperty;
 import uk.co.nickthecoder.jame.JameException;
 
 public abstract class Behaviour
 {
+    public ActorCollisionStrategy collisionStrategy;
+    
     private final HashMap<Class<?>, List<GProperty<Behaviour, ?>>> allProperties = new HashMap<Class<?>, List<GProperty<Behaviour, ?>>>();
 
     public static boolean isValidClassName( String behaviourClassName )
@@ -75,6 +78,9 @@ public abstract class Behaviour
     {
         assert (this.actor == null);
         this.actor = actor;
+        if ( this.collisionStrategy == null ) {
+            this.collisionStrategy = new BruteForceActorCollisionStrategy( this.actor );
+        }
         this.init();
     }
 
@@ -83,6 +89,16 @@ public abstract class Behaviour
         return this.actor;
     }
 
+    public Set<Actor> overlapping( String... tags )
+    {
+        return this.collisionStrategy.overlapping(tags);
+    }
+    
+    public Set<Actor> touching( String... tags )
+    {
+        return this.collisionStrategy.touching(tags);
+    }
+    
     public void play( String soundName )
     {
         this.actor.play(soundName);

@@ -3,6 +3,7 @@ package uk.co.nickthecoder.drunkinvaders;
 import java.text.DecimalFormat;
 
 import uk.co.nickthecoder.itchy.Actor;
+import uk.co.nickthecoder.itchy.ActorCollisionStrategy;
 import uk.co.nickthecoder.itchy.Game;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.MultiLineTextPose;
@@ -12,7 +13,7 @@ import uk.co.nickthecoder.itchy.animation.AlphaAnimation;
 import uk.co.nickthecoder.itchy.animation.CompoundAnimation;
 import uk.co.nickthecoder.itchy.animation.NumericAnimation;
 import uk.co.nickthecoder.itchy.editor.Editor;
-import uk.co.nickthecoder.itchy.neighbourhood.ActorCollisionStrategy;
+import uk.co.nickthecoder.itchy.neighbourhood.NeighbourhoodCollisionStrategy;
 import uk.co.nickthecoder.itchy.neighbourhood.Neighbourhood;
 import uk.co.nickthecoder.itchy.neighbourhood.StandardNeighbourhood;
 import uk.co.nickthecoder.itchy.neighbourhood.SinglePointCollisionStrategy;
@@ -45,7 +46,7 @@ public class DrunkInvaders extends Game
 
     private int aliensRemaining;
 
-    private int levelNumber;
+    private int levelNumber = 1;
 
     private Neighbourhood neighbourhood;
 
@@ -82,8 +83,6 @@ public class DrunkInvaders extends Game
         this.fadeActor.getAppearance().setAlpha(0);
         this.fadeActor.activate();
         this.fadeLayer.add(this.fadeActor);
-
-        this.levelNumber = 1;
 
         this.startScene("menu");
         loop();
@@ -179,17 +178,20 @@ public class DrunkInvaders extends Game
 
     public ActorCollisionStrategy createCollisionStrategy( Actor actor )
     {
-        return new SinglePointCollisionStrategy(actor, this.neighbourhood);
-        // return new uk.co.nickthecoder.itchy.neighbourhood.BruteForceActorCollisionStrategy( actor
-        // );
+        //Appearance appearance = actor.getAppearance();
+        //if ( appearance.getWidth() > this.neighbourhood.getSquareSize() )  {
+            return new NeighbourhoodCollisionStrategy(actor, this.neighbourhood);
+        //} else {
+        //    return new SinglePointCollisionStrategy(actor, this.neighbourhood);
+        //}
     }
 
-    public boolean startScene( String sceneName )
+    public void startScene( String sceneName )
     {
         System.out.println("Starting scene " + sceneName);
 
         if (this.fadingOut) {
-            return false;
+            return;
         }
 
         this.neighbourhood.clear();
@@ -210,8 +212,6 @@ public class DrunkInvaders extends Game
         
         this.fadingOut = true;
         this.fadeActor.setAnimation(animation);
-
-        return true;
     }
     
     public void onMessage( String message )
@@ -226,6 +226,11 @@ public class DrunkInvaders extends Game
             this.fadingOut = false;
             try {
                 Scene scene = this.resources.getScene(this.sceneName);
+                if ( scene == null) {
+                    this.sceneName = "completed";
+                    this.levelNumber = 1;
+                    scene =  this.resources.getScene(this.sceneName);
+                }
                 scene.create(DrunkInvaders.this.mainLayer, false);
                 Itchy.showMousePointer(scene.showMouse);
 
@@ -240,7 +245,7 @@ public class DrunkInvaders extends Game
     {
         this.aliensRemaining += n;
 
-        // We only care when the last alien was kill during play, not when fading te scene out.
+        // We only care when the last alien was kill during play, not when fading the scene out.
         if (this.fadingOut) {
             return;
         }
@@ -249,11 +254,8 @@ public class DrunkInvaders extends Game
             getPreferences().putBoolean("completedLevel" + this.levelNumber, true);
 
             this.levelNumber += 1;
+            this.play();
 
-            if (!this.play()) {
-                this.startScene("completed");
-                this.levelNumber = 1;
-            }
         }
     }
 
@@ -268,10 +270,10 @@ public class DrunkInvaders extends Game
         this.play();
     }
 
-    public boolean play()
+    public void play()
     {
         DecimalFormat df = new DecimalFormat("00");
-        return this.startScene("level" + df.format(this.levelNumber));
+        this.startScene("level" + df.format(this.levelNumber));
     }
 
     public void action( String action )

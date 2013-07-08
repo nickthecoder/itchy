@@ -85,10 +85,15 @@ public abstract class Job implements Runnable
     {
         this.complete = false;
 
-        this.mainWorker = new Thread(this);
-        this.mainWorker.setDaemon(true);
-        this.mainWorker.start();
-
+        this.lock();
+        try {
+            this.mainWorker = new Thread(this);
+            this.mainWorker.setDaemon(true);
+            this.mainWorker.start();
+        } finally {
+            this.unlock();
+        }
+        
         while (!this.complete) {
             // System.out.println( "Waiting for the job to complete" );
             // System.out.println( "Looping till copmlete" );

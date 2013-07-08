@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import uk.co.nickthecoder.itchy.Actor;
+import uk.co.nickthecoder.itchy.ActorCollisionStrategy;
 
 /**
  * Uses a Neighbourhood to optimise Actor's overlapping and touching methods. This strategy uses a

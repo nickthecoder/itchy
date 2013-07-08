@@ -2,7 +2,6 @@ package uk.co.nickthecoder.drunkinvaders;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Costume;
-import uk.co.nickthecoder.itchy.neighbourhood.ActorCollisionStrategy;
 import uk.co.nickthecoder.itchy.util.DoubleProperty;
 import uk.co.nickthecoder.itchy.util.IntegerProperty;
 import uk.co.nickthecoder.itchy.util.StringProperty;
@@ -36,8 +35,6 @@ public class Mothership extends Alien
      */
     public int childrenCount;
 
-    private ActorCollisionStrategy collisionStrategy;
-
     @Override
     public void init()
     {
@@ -69,9 +66,7 @@ public class Mothership extends Alien
                 return;
             }
             giveBirth();
-            //System.out.println( "Mothership birth delay" );
             this.actor.sleep(this.birthInterval);
-            //System.out.println( "Mothership birth done" );
         }
     }
 

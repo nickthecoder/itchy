@@ -6,10 +6,19 @@ import uk.co.nickthecoder.itchy.util.*;
 import uk.co.nickthecoder.jame.*;
 import uk.co.nickthecoder.jame.event.*;
 
+density = 1/3.0;
+dropSpeed = 3.0;
+
+dropSpeedDelta = 0.1;
+densityDelta = 0.01;
+
+background = new RGBA(0,0,0);
+
+dropPng = "resources/rain/rain.png";
+playerPng = "resources/rain/player.png";
+
 public class RainGame extends Game
 {
-    delay = 0.5;
-    
     public boolean onKeyDown( KeyboardEvent ke )
     {
         if (ke.symbol == Keys.ESCAPE) {
@@ -26,9 +35,10 @@ public class RainGame extends Game
         drop = new Drop().createActor( dropImage, x, y, layer );
         drop.addTag( "deadly" );
         drop.activate();
-        sleep( delay );
-        delay = delay * 0.98;
-        dropSpeed = dropSpeed * 1.01;
+        sleep( 1 / density / dropSpeed );
+        
+        density += densityDelta;
+        dropSpeed += dropSpeedDelta;
     }
 
 }
@@ -43,24 +53,22 @@ public class Player extends Behaviour
         if (itchy.isKeyDown(Keys.RIGHT)) {
             actor.moveBy( 10, 0 );
         }
-        for (Actor other : Actor.allByTag("deadly")) {
 
-            if (actor.touching(other)) {
-                print( "You died" );
-                game.terminate();
-            }
+        for (Actor other : touching( new String[] { "deadly" } ) ) {
+            print( "You died" );
+            game.terminate();
         }
+        
     }
 }
 
-dropSpeed = -3;
 
 public class Drop extends Behaviour
 {
     
     public void tick()
     {
-        actor.moveBy( 0, dropSpeed );
+        actor.moveBy( 0, - dropSpeed );
         if ( actor.getY() < -30 ) {
             actor.kill();
         }
@@ -68,16 +76,14 @@ public class Drop extends Behaviour
 }
 
 itchy = Itchy.singleton;
-
 game = new RainGame();
 itchy.init(game);
 
-background = new RGBA(0,0,0);
 layer = new ScrollableLayer(new Rect(0, 0, 640, 480), background, false);
 itchy.getGameLayer().add(layer);
 
-dropImage = new ImagePose( "resources/rain/rain.png" );
-playerImage = new ImagePose( "resources/rain/player.png" );
+dropImage = new ImagePose( dropPng );
+playerImage = new ImagePose( playerPng );
 
 player = new Player().createActor( playerImage, 320, 40, layer );
 player.activate();

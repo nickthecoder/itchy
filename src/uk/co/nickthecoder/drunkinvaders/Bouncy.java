@@ -2,7 +2,6 @@ package uk.co.nickthecoder.drunkinvaders;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Behaviour;
-import uk.co.nickthecoder.itchy.neighbourhood.ActorCollisionStrategy;
 import uk.co.nickthecoder.itchy.util.DoubleProperty;
 
 public class Bouncy extends Behaviour
@@ -16,8 +15,6 @@ public class Bouncy extends Behaviour
     public double radius = 20;
     
     public double mass = 1;
-
-    protected ActorCollisionStrategy collisionStrategy;
 
     @Override
     protected void addProperties()
@@ -68,8 +65,8 @@ public class Bouncy extends Behaviour
 
         this.collisionStrategy.update();
 
-        for (Actor touching : this.collisionStrategy.touching(BOUNCY_LIST)) {
-            collide(this.actor, touching);
+        for (Actor other : touching(BOUNCY_LIST)) {
+            collide(this.actor, other);
         }
 
     }

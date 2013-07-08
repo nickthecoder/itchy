@@ -4,6 +4,7 @@ import java.util.Set;
 
 import uk.co.nickthecoder.drunkinvaders.DrunkInvaders;
 import uk.co.nickthecoder.itchy.Actor;
+import uk.co.nickthecoder.itchy.ActorCollisionStrategy;
 
 public class DebugCollisionStrategy extends ActorCollisionStrategy
 {

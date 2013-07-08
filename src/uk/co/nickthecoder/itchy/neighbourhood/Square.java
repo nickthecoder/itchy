@@ -82,6 +82,14 @@ public class Square
 
     }
 
+    public double getX()
+    {
+        return ox;
+    }
+    public double getY()
+    {
+        return oy;
+    }
     public void add( Actor actor )
     {
         this.occupants.add(actor);

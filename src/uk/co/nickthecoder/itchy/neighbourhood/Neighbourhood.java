@@ -2,8 +2,6 @@ package uk.co.nickthecoder.itchy.neighbourhood;
 
 import java.util.Iterator;
 
-import uk.co.nickthecoder.itchy.util.WorldRectangle;
-
 public interface Neighbourhood
 {
 
@@ -19,7 +17,14 @@ public interface Neighbourhood
      */
     public abstract Square getSquare( double x, double y );
 
-    public abstract Iterator<Square> squareIterator( WorldRectangle area );
+    /**
+     * Iterates over the set of squares contained by the rectangle defined by the top left and
+     * bottom right squares.
+     * @param topLeft
+     * @param bottomRight Note, the iteration INCLUDES this square, and others in its row and column.
+     *      This is different to most range tests, where the "to" is usually exclusive.
+     */
+    public abstract Iterator<Square> squareIterator( Square topLeft, Square bottomRight );
 
     /**
      * Looks for a NeighbourhoodSquare within this neighbourhood. If a square at the given

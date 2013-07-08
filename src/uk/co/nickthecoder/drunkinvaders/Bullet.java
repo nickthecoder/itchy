@@ -1,8 +1,8 @@
 package uk.co.nickthecoder.drunkinvaders;
 
 import uk.co.nickthecoder.itchy.Actor;
+import uk.co.nickthecoder.itchy.ActorCollisionStrategy;
 import uk.co.nickthecoder.itchy.Behaviour;
-import uk.co.nickthecoder.itchy.neighbourhood.ActorCollisionStrategy;
 import uk.co.nickthecoder.itchy.util.DoubleProperty;
 import uk.co.nickthecoder.itchy.util.StringProperty;
 
@@ -61,22 +61,13 @@ public class Bullet extends Behaviour implements Shootable
             this.actor.kill();
         }
 
-        /*
-         * for ( Actor other : Actor.allByTag( this.targetTagName ) ) { if ( this.actor.overlapping(
-         * other ) ) { //if ( this.actor.touching( other ) ) { ( (Shootable) other.getBehaviour()
-         * ).shot( this.actor ); this.actor.kill();
-         * 
-         * break; } }
-         */
-        if (this.collisionStrategy != null) {
-            this.collisionStrategy.update();
+        this.collisionStrategy.update();
 
-            for (Actor touching : this.collisionStrategy.touching(this.targetTagName)) {
-                ((Shootable) touching.getBehaviour()).shot(this.actor);
-                this.actor.kill();
+        for (Actor other : touching(this.targetTagName)) {
+            ((Shootable) other.getBehaviour()).shot(this.actor);
+            this.actor.kill();
 
-                break;
-            }
+            break;
         }
     }
 }

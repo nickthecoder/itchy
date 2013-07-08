@@ -5,7 +5,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.Actor;
-import uk.co.nickthecoder.itchy.util.WorldRectangle;
 
 public class StandardNeighbourhood implements Neighbourhood
 {
@@ -22,7 +21,6 @@ public class StandardNeighbourhood implements Neighbourhood
         this.oy = 0;
     }
 
-
     @Override
     public void clear()
     {
@@ -30,13 +28,11 @@ public class StandardNeighbourhood implements Neighbourhood
         this.oy = 0;
     }
 
-
     @Override
     public double getSquareSize()
     {
         return this.squareSize;
     }
-
 
     @Override
     public Square getSquare( double x, double y )
@@ -48,33 +44,28 @@ public class StandardNeighbourhood implements Neighbourhood
         return row.getSquare(x);
     }
 
-
     @Override
-    public Iterator<Square> squareIterator( final WorldRectangle area )
+    public Iterator<Square> squareIterator( final Square topLeft, final Square bottomRight )
     {
         return new Iterator<Square>() {
 
-            private double x = area.x;
-            private double y = area.y;
-
-            private double tx = area.x + area.width;
-            private double ty = area.y + area.height;
+            private double x = topLeft.getX();
+            private double y = topLeft.getY();
 
             @Override
             public boolean hasNext()
             {
-                return (this.x < this.tx) && (this.y < this.ty);
+                return (this.y <= bottomRight.getY());
             }
 
             @Override
             public Square next()
             {
                 Square square = StandardNeighbourhood.this.getSquare(this.x, this.y);
-                if (this.x < this.tx) {
-                    this.x += StandardNeighbourhood.this.squareSize;
-                } else {
+                this.x += StandardNeighbourhood.this.squareSize;
+                if (this.x > bottomRight.getX()) {
                     this.y += StandardNeighbourhood.this.squareSize;
-                    this.x = area.x;
+                    this.x = topLeft.getX();
                 }
                 return square;
             }
@@ -88,7 +79,6 @@ public class StandardNeighbourhood implements Neighbourhood
         };
     }
 
-   
     @Override
     public Square getExistingSquare( double x, double y )
     {
@@ -212,7 +202,8 @@ public class StandardNeighbourhood implements Neighbourhood
                 int extra = ix - this.row.size() + 1;
                 // System.out.println( "Creating Squares at tail " + ix + " extras " + extra );
                 for (int i = 0; i < extra; i++) {
-                    Square square = new Square(StandardNeighbourhood.this, this.ox + (this.row.size()) *
+                    Square square = new Square(StandardNeighbourhood.this, this.ox +
+                        (this.row.size()) *
                         StandardNeighbourhood.this.squareSize, this.y);
                     this.row.add(square);
                     square.initialise();
@@ -224,7 +215,6 @@ public class StandardNeighbourhood implements Neighbourhood
         }
 
     }
-
 
     @Override
     public void debug()

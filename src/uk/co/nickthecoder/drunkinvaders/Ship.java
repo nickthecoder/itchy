@@ -18,13 +18,13 @@ public class Ship extends Bouncy implements Shootable
     public static final String[] DEADLY_LIST = new String[] { "deadly" };
 
     private static PoseDecorator bubbleCreator = new BorderPoseDecorator(
-            DrunkInvaders.singleton.resources.getNinePatch("speech2"), 10, 10, 20, 10);
+        DrunkInvaders.singleton.resources.getNinePatch("speech2"), 10, 10, 20, 10);
 
     private int recharge = 0;
     private static final int RECHARGE_DURATION = 40;
-    
+
     private static final int SHIELD_POSE_COUNT = 7;
-    
+
     private final double ox = 320;
     private final double oy = -1300;
     private double radius;
@@ -52,7 +52,7 @@ public class Ship extends Bouncy implements Shootable
         this.mass = 100000000000.0;
         this.actor.addTag("killable");
         this.radius = Math.sqrt((this.actor.getX() - this.ox) * (this.actor.getX() - this.ox) +
-                (this.actor.getY() - this.oy) * (this.actor.getY() - this.oy));
+            (this.actor.getY() - this.oy) * (this.actor.getY() - this.oy));
         this.angle = Math.atan2(this.actor.getY() - this.oy, this.actor.getX() - this.ox);
         this.actor.getAppearance().setDirectionRadians(this.angle);
         this.recalculateDirection();
@@ -65,7 +65,7 @@ public class Ship extends Bouncy implements Shootable
         addProperty(new DoubleProperty("Shield Discharge Rate", "sheildDischargeRate"));
         addProperty(new DoubleProperty("Shield Recharge Rate", "sheildRechargeRate"));
     }
-    
+
     @Override
     public void onKill()
     {
@@ -117,7 +117,7 @@ public class Ship extends Bouncy implements Shootable
             if (this.recharge > 0) {
                 this.recharge--;
                 if ((this.recharge == 0) ||
-                        ((this.latestBullet != null) && this.latestBullet.isDead())) {
+                    ((this.latestBullet != null) && this.latestBullet.isDead())) {
                     this.event("charged");
                     this.recharge = 0;
                 }
@@ -130,9 +130,11 @@ public class Ship extends Bouncy implements Shootable
 
             this.collisionStrategy.update();
 
-            for (Actor actor : this.collisionStrategy.touching(this.actor, DEADLY_LIST)) {
-                this.shot(actor);
-                ((Shootable) actor.getBehaviour()).shot(this.actor);
+            for (Actor other : touching(DEADLY_LIST)) {
+                this.shot(other);
+                if (other.getBehaviour() instanceof Shootable) {
+                    ((Shootable) other.getBehaviour()).shot(this.actor);
+                }
                 break;
             }
 
@@ -149,11 +151,11 @@ public class Ship extends Bouncy implements Shootable
 
     public void activateShield()
     {
-        long level = Math.round( this.shieldStrength * SHIELD_POSE_COUNT );
-        if ( level > 0 ) {
+        long level = Math.round(this.shieldStrength * SHIELD_POSE_COUNT);
+        if (level > 0) {
             this.event("shield");
-            long newLevel = Math.round( this.shieldStrength * SHIELD_POSE_COUNT );
-            event( "shielded" + newLevel );
+            long newLevel = Math.round(this.shieldStrength * SHIELD_POSE_COUNT);
+            event("shielded" + newLevel);
             this.shielded = true;
         } else {
             this.event("shieldFailed");
@@ -168,17 +170,17 @@ public class Ship extends Bouncy implements Shootable
 
     private void dischargeShield()
     {
-        long oldLevel = Math.round( this.shieldStrength * SHIELD_POSE_COUNT );
+        long oldLevel = Math.round(this.shieldStrength * SHIELD_POSE_COUNT);
         this.shieldStrength -= this.shieldDischargeRate;
-        long newLevel = Math.round( this.shieldStrength * SHIELD_POSE_COUNT );
+        long newLevel = Math.round(this.shieldStrength * SHIELD_POSE_COUNT);
 
-        if (this.shieldStrength < 0 ) {
+        if (this.shieldStrength < 0) {
             this.deactivateShield();
             return;
         }
-        
-        if  ( oldLevel != newLevel ) {
-            event( "shielded" + newLevel );
+
+        if (oldLevel != newLevel) {
+            event("shielded" + newLevel);
         }
     }
 
@@ -189,7 +191,7 @@ public class Ship extends Bouncy implements Shootable
             this.shieldStrength = 1;
         }
     }
-    
+
     public void fire()
     {
         if (this.shielded) {
@@ -220,30 +222,22 @@ public class Ship extends Bouncy implements Shootable
         }
 
         TextPose textPose = new TextPose(this.actor.getCostume().getString("death"),
-                DrunkInvaders.singleton.resources.getFont("vera"), 18, SPEECH_COLOR);
+            DrunkInvaders.singleton.resources.getFont("vera"), 18, SPEECH_COLOR);
         Pose bubble = bubbleCreator.createPose(textPose);
 
         Actor yell = new Actor(bubble);
         yell.moveTo(this.actor);
+        yell.moveBy( 0, 40 );
         yell.activate();
         this.actor.getLayer().add(yell);
         yell.deathEvent(this.actor.getCostume(), "yell");
 
-        Actor explosion = new Actor(this.actor.getCostume().getPose("pixel")); // DrunkInvaders.singleton.resources.getPose(
-                                                                               // "pixel" ) );
-        ExplosionBehaviour eb = new ExplosionBehaviour();
-        eb.distance = 0;
-        eb.randomDistance = 20;
-        eb.projectileCount = 20;
-        eb.speed = 1.5;
-        eb.randomSpeed = 0.1;
-        eb.fade = 2.5;
-        // explosion.getAppearance().setColorize( new RGBA( 0, 255, 0 ) );
-        explosion.setBehaviour(eb);
-
-        explosion.moveTo(this.actor);
-        this.actor.getLayer().add(explosion);
-        explosion.activate();
+        new ExplosionBehaviour()
+            .projectiles(40)
+            .distance(0, 10)
+            .speed(1, 3)
+            .fade(1.5)
+            .createActor(this.actor, "pixel").activate();
 
         this.deathEvent("death");
     }

@@ -2,12 +2,9 @@ package uk.co.nickthecoder.drunkinvaders;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Behaviour;
-import uk.co.nickthecoder.itchy.neighbourhood.ActorCollisionStrategy;
 
 public class Shield extends Behaviour implements Shootable
 {
-    private ActorCollisionStrategy collisionStrategy;
-
     public Shield()
     {
     }

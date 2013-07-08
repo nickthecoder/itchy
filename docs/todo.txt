@@ -1,12 +1,12 @@
 Jame is out of date, need to rebuild for win32 and i386
-Add the dll and so files to jame's git tree
-Compile and test using windows.
-
-Add to ntc web site - replace the "games" tab with "software", which is a wiki namespace.
+    Compile and test using windows.
+    Add the dll and so files to jame's git tree??
 
 
 What's Next
 ===========
+
+Yell is long winded - do it like ExplosionBehaviour
 
 Try it on a RaspPi
 
