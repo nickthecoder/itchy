@@ -115,6 +115,11 @@ public class ExplosionBehaviour extends Behaviour
         this.gravity = value;
         return this;
     }
+    /**
+     * Are the particles images to be rotated? Typically set to false if the particles are
+     * small or circular.
+     * @return this.
+     */
     public ExplosionBehaviour rotate( boolean value )
     {
         this.rotate = value;
@@ -164,7 +169,19 @@ public class ExplosionBehaviour extends Behaviour
         this.randomDirection = to - from;
         return this;
     }
-
+    /**
+     * All fragments point in the same direction as the source actor,
+     * The particles will more in the direction given by the "heading" method,
+     * (which defaults to 0..360 degrees (i.e. randomly in a full circle)
+     * @return this
+     */
+    public ExplosionBehaviour forwards()
+    {
+        this.rotate(true);
+        direction(this.source.getAppearance().getDirection());
+        this.sameDirection = false;
+        return this;
+    }
     public ExplosionBehaviour heading( double value )
     {
         return this.heading( value, value );

@@ -12,6 +12,20 @@ import uk.co.nickthecoder.itchy.PoseResource;
 import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.Surface;
 
+/**
+ * Fragments an actor's pose in lots of random shaped pieces. The pieces are added to the actor's
+ * costume with the given pose name. The recommended name to use is "fragment", but you can choose
+ * any name you like.
+ * 
+ * The fragments are only created once, so if you call fragment twice, with the same pose name, then
+ * you will still only have the fragments from the first call.
+ * 
+ * This algorithm is inefficient (in memory, and speed), so ideally don't use it while the game is playing.
+ * Instead, call it during a Behaviour's init method.
+ * 
+ * This class is often used in conjunction with ExplosionBehaviour, to product an explosion with the
+ * pieces of the actor flying apart in different directions.
+ */
 public class Fragment
 {
     private Actor actor;
@@ -58,7 +72,13 @@ public class Fragment
         fragment(this.actor.getCostume(), this.poseName, destPose);
     }
 
-    public void fragment( Costume costume, String srcPose, String destPose )
+    /**
+     * This is the work horse. 
+     * @param costume The costume used as the source of the pose, and the destination of the fragments
+     * @param srcPose The name of the pose to use as the source
+     * @param destPose The name of the poses which are created.
+     */
+    private void fragment( Costume costume, String srcPose, String destPose )
     {
         if (costume.getPose(destPose) != null) {
             return;
@@ -126,7 +146,6 @@ public class Fragment
 
         void setOwner( int x, int y )
         {
-            System.out.println("Fragment setOwner " + x + "," + y);
             this.surface.fill(new Rect(x, y, 1, 1), Fragment.this.source.getPixelColor(x, y));
             addEdge(x + 1, y);
             addEdge(x - 1, y);
