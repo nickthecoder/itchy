@@ -7,6 +7,7 @@ import uk.co.nickthecoder.itchy.TextPose;
 import uk.co.nickthecoder.itchy.util.BorderPoseDecorator;
 import uk.co.nickthecoder.itchy.util.DoubleProperty;
 import uk.co.nickthecoder.itchy.util.ExplosionBehaviour;
+import uk.co.nickthecoder.itchy.util.Fragment;
 import uk.co.nickthecoder.itchy.util.PoseDecorator;
 import uk.co.nickthecoder.jame.Keys;
 import uk.co.nickthecoder.jame.RGBA;
@@ -21,14 +22,22 @@ public class Ship extends Bouncy implements Shootable
         DrunkInvaders.singleton.resources.getNinePatch("speech2"), 10, 10, 20, 10);
 
     private int recharge = 0;
+    
     private static final int RECHARGE_DURATION = 40;
 
     private static final int SHIELD_POSE_COUNT = 7;
 
     private final double ox = 320;
+    
     private final double oy = -1300;
+    
+    /**
+     * The radius of my orbit around the planet.
+     */   
     private double radius;
+    
     private final double rotationSpeed = 0.003;
+    
     private double angle;
 
     private Actor latestBullet;
@@ -51,11 +60,17 @@ public class Ship extends Bouncy implements Shootable
 
         this.mass = 100000000000.0;
         this.actor.addTag("killable");
-        this.radius = Math.sqrt((this.actor.getX() - this.ox) * (this.actor.getX() - this.ox) +
+        
+        this.radius = Math.sqrt(
+            (this.actor.getX() - this.ox) * (this.actor.getX() - this.ox) +
             (this.actor.getY() - this.oy) * (this.actor.getY() - this.oy));
+        
         this.angle = Math.atan2(this.actor.getY() - this.oy, this.actor.getX() - this.ox);
         this.actor.getAppearance().setDirectionRadians(this.angle);
         this.recalculateDirection();
+
+        // Create the fragments for the explosions when I get shot.
+        new Fragment().actor(this.actor).create("fragment");
     }
 
     @Override
@@ -227,17 +242,25 @@ public class Ship extends Bouncy implements Shootable
 
         Actor yell = new Actor(bubble);
         yell.moveTo(this.actor);
-        yell.moveBy( 0, 40 );
+        yell.moveBy(0, 40);
         yell.activate();
         this.actor.getLayer().add(yell);
         yell.deathEvent(this.actor.getCostume(), "yell");
 
-        new ExplosionBehaviour()
+        new ExplosionBehaviour(this.actor)
+            .projectiles(20)
+            .speed(0.3, 0.9)
+            .fade(.7)
+            .spin(-0.2, 0.2)
+            .rotate(false)
+            .createActor("fragment").activate();
+
+        new ExplosionBehaviour(this.actor)
             .projectiles(40)
             .distance(0, 10)
             .speed(1, 3)
             .fade(1.5)
-            .createActor(this.actor, "pixel").activate();
+            .createActor("pixel").activate();
 
         this.deathEvent("death");
     }

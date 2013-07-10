@@ -7,6 +7,7 @@ import uk.co.nickthecoder.itchy.animation.NumericAnimation;
 import uk.co.nickthecoder.itchy.animation.ScaleAnimation;
 import uk.co.nickthecoder.itchy.util.BorderPoseDecorator;
 import uk.co.nickthecoder.itchy.util.ExplosionBehaviour;
+import uk.co.nickthecoder.itchy.util.Fragment;
 import uk.co.nickthecoder.itchy.util.IntegerProperty;
 import uk.co.nickthecoder.itchy.util.PoseDecorator;
 import uk.co.nickthecoder.itchy.util.Util;
@@ -33,6 +34,9 @@ public class Alien extends Bouncy implements Shootable
         super.init();
         this.actor.addTag("deadly");
         this.actor.addTag("shootable");
+
+        // Create the fragments for the explosions when I get shot.
+        new Fragment().actor(this.actor).create("fragment");
     }
 
     @Override
@@ -109,13 +113,21 @@ public class Alien extends Bouncy implements Shootable
     @Override
     public void shot( Actor bullet )
     {
-        // Actor explosion = new Actor(this.actor.getCostume().getPose("pixel"));
-        new ExplosionBehaviour()
+
+        new ExplosionBehaviour(this.actor)
+            .projectiles(20)
+            .fade(1.2)
+            .spin(-0.4, 0.4)
+            .speed(0.1,1)
+            .rotate(true)
+            .createActor("fragment").activate();
+
+        new ExplosionBehaviour(this.actor)
             .projectiles(40).projectilesPerClick(10)
             .distance(0, 20)
             .speed(3, 6)
             .fade(0.5)
-            .createActor(this.actor, "pixel")
+            .createActor("pixel")
             .activate();
         
         double scale = this.getActor().getAppearance().getScale();

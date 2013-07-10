@@ -6,6 +6,11 @@ public class NamedResource
 
     protected String name;
 
+    public NamedResource( String name )
+    {
+        this.name = name;
+    }
+    
     public NamedResource( Resources resources, String name )
     {
         this.resources = resources;

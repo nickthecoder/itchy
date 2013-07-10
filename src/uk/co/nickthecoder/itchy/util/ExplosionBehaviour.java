@@ -72,31 +72,32 @@ public class ExplosionBehaviour extends Behaviour
     
     private String poseName;
 
-    public Actor createActor( Actor source )
+    private Actor source;
+    
+    public ExplosionBehaviour( Actor actor )
     {
-        return this.createActor( source, "" );
+        super();
+        this.direction = actor.getAppearance().getDirection();
+        this.source = actor;
     }
     
-    public Actor createActor( Actor source, String poseName )
+    public Actor createActor()
     {
-        Actor result = new Actor( source.getCostume() );
+        return this.createActor( "" );
+    }
+    
+    public Actor createActor( String poseName )
+    {
+        Actor result = new Actor( this.source.getCostume() );
         this.poseName = poseName;
         
-        result.moveTo(source);
+        result.moveTo(this.source);
         result.getAppearance().setAlpha(0);
         result.setBehaviour(this);
         
-        source.getLayer().add(result);
+        this.source.getLayer().add(result);
 
         return result;
-    }
-    
-    public ExplosionBehaviour usePoses( Actor actor, String poseName )
-    {
-        this.actor.setCostume( actor.getCostume() );
-        this.poseName = poseName;
-        
-        return this;
     }
     
     public ExplosionBehaviour projectiles( int value )
@@ -282,7 +283,10 @@ public class ExplosionBehaviour extends Behaviour
             Appearance appearance = actor.getAppearance();
             ProjectileBehaviour behaviour = new ProjectileBehaviour();
 
-            appearance.setDirection(this.direction + random.nextDouble() * this.randomDirection);
+            double direction = this.direction + random.nextDouble() * this.randomDirection;
+            if (this.rotate) {
+                appearance.setDirection(direction);
+            }
             appearance.setScale(this.scale + random.nextDouble() * this.randomScale);            
             appearance.setAlpha( this.alpha + random.nextDouble() * this.randomAlpha );
             
@@ -301,16 +305,15 @@ public class ExplosionBehaviour extends Behaviour
 
             // Do speed and randomSpeed
             if ((this.speed != 0) || (this.randomSpeed != 0)) {
-                double direction = sameDirection ? appearance.getDirection() :
-                    this.heading + random.nextDouble() * this.randomHeading;
+                if ( ! sameDirection ) {
+                    direction = this.heading + random.nextDouble() * this.randomHeading;
+                }
                 double cos = Math.cos(direction / 180.0 * Math.PI);
                 double sin = Math.sin(direction / 180.0 * Math.PI);
                 behaviour.vx += cos * (this.speed + random.nextDouble() * this.randomSpeed);
                 behaviour.vy -= sin * (this.speed + random.nextDouble() * this.randomSpeed);
             }
-            if (!this.rotate) {
-                appearance.setDirection(0);
-            }
+            
 
             appearance.setColorize(this.actor.getAppearance().getColorize());
 

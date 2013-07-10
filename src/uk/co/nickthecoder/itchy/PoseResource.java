@@ -21,6 +21,12 @@ public class PoseResource extends NamedResource
         this.pose = new ImagePose(this.resources.resolveFilename(filename));
     }
 
+    public PoseResource( String name, ImagePose pose )
+    {
+        super(name);
+        this.pose = pose;
+    }
+
     public void setFilename( String filename ) throws JameException
     {
         this.pose = new ImagePose(this.resources.resolveFilename(filename));
@@ -34,7 +40,7 @@ public class PoseResource extends NamedResource
             Surface full = this.pose.getSurface();
             if ((full.getWidth() > THUMBNAIL_WIDTH) || (full.getHeight() > THUMBNAIL_HEIGHT)) {
                 double scale = Math.min(THUMBNAIL_WIDTH / (double) full.getWidth(),
-                        THUMBNAIL_HEIGHT / (double) full.getHeight());
+                    THUMBNAIL_HEIGHT / (double) full.getHeight());
                 this.thumbnail = full.zoom(scale, scale, true);
             } else {
                 this.thumbnail = full;
