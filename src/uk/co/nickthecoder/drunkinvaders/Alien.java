@@ -116,10 +116,9 @@ public class Alien extends Bouncy implements Shootable
 
         new ExplosionBehaviour(this.actor)
             .projectiles(20)
+            .forwards()
             .fade(1.2)
-            .spin(-0.4, 0.4)
             .speed(0.1,1)
-            .rotate(true)
             .createActor("fragment").activate();
 
         new ExplosionBehaviour(this.actor)

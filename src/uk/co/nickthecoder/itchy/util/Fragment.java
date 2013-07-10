@@ -9,7 +9,6 @@ import uk.co.nickthecoder.itchy.Costume;
 import uk.co.nickthecoder.itchy.ImagePose;
 import uk.co.nickthecoder.itchy.Pose;
 import uk.co.nickthecoder.itchy.PoseResource;
-import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.Surface;
 
 /**
@@ -146,7 +145,7 @@ public class Fragment
 
         void setOwner( int x, int y )
         {
-            this.surface.fill(new Rect(x, y, 1, 1), Fragment.this.source.getPixelColor(x, y));
+            this.surface.setPixel(x, y, Fragment.this.source.getPixelColor(x, y));
             addEdge(x + 1, y);
             addEdge(x - 1, y);
             addEdge(x, y - 1);

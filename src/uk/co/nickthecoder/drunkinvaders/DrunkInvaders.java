@@ -16,7 +16,6 @@ import uk.co.nickthecoder.itchy.editor.Editor;
 import uk.co.nickthecoder.itchy.neighbourhood.NeighbourhoodCollisionStrategy;
 import uk.co.nickthecoder.itchy.neighbourhood.Neighbourhood;
 import uk.co.nickthecoder.itchy.neighbourhood.StandardNeighbourhood;
-import uk.co.nickthecoder.itchy.neighbourhood.SinglePointCollisionStrategy;
 import uk.co.nickthecoder.itchy.util.TextBehaviour;
 import uk.co.nickthecoder.jame.Keys;
 import uk.co.nickthecoder.jame.Rect;

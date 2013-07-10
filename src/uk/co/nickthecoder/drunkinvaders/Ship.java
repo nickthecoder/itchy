@@ -249,6 +249,7 @@ public class Ship extends Bouncy implements Shootable
 
         new ExplosionBehaviour(this.actor)
             .projectiles(20)
+            .forwards()
             .speed(0.3, 0.9)
             .fade(.7)
             .spin(-0.2, 0.2)
