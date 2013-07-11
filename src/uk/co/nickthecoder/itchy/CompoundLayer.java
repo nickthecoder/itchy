@@ -12,7 +12,7 @@ public class CompoundLayer extends Layer
 
     public CompoundLayer( Rect positionOnScreen )
     {
-        super(positionOnScreen, false);
+        super(positionOnScreen);
         this.children = new LinkedList<Layer>();
     }
 

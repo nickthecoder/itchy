@@ -3,7 +3,6 @@ package uk.co.nickthecoder.itchy;
 import java.util.ArrayList;
 import java.util.List;
 
-import uk.co.nickthecoder.itchy.util.WorldRectangle;
 import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.Surface;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
@@ -21,18 +20,17 @@ public abstract class Layer implements MouseListener
      * Y axis pointing downwards. This boolean lets you choose which of these two conventions you
      * want to use for the world coordinates (i.e. values of Actor.y).
      */
-    protected boolean yAxisPointsDown;
+    protected boolean yAxisPointsDown = false;
 
     private boolean visible = true;
     private boolean removePending = false;
     protected Layer parent;
     protected List<MouseListener> mouseListeners;
 
-    public Layer( Rect position, boolean yAxisPointsDown )
+    public Layer( Rect position )
     {
         assert (position != null);
         this.position = position;
-        this.yAxisPointsDown = yAxisPointsDown;
         this.worldRect = new WorldRectangle(0, 0, position.width, position.height);
     }
 
@@ -44,6 +42,11 @@ public abstract class Layer implements MouseListener
     public boolean getYAxisPointsDown()
     {
         return this.yAxisPointsDown;
+    }
+
+    public void setYAxisPointsDown( boolean value )
+    {
+        this.yAxisPointsDown = value;
     }
 
     public boolean isRemovePending()
@@ -144,7 +147,7 @@ public abstract class Layer implements MouseListener
     {
         Rect position = this.getAbsolutePosition();
         if ((x < position.x) || (y < position.y) || (x > position.x + position.width) ||
-                (y > position.y + position.height)) {
+            (y > position.y + position.height)) {
             return false;
         }
         return true;

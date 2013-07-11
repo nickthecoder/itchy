@@ -1,4 +1,4 @@
-package uk.co.nickthecoder.itchy.util;
+package uk.co.nickthecoder.itchy.extras;
 
 import java.awt.Point;
 import java.util.LinkedList;

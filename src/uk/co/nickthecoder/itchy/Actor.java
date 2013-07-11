@@ -10,7 +10,6 @@ import uk.co.nickthecoder.itchy.util.GFontProperty;
 import uk.co.nickthecoder.itchy.util.GProperty;
 import uk.co.nickthecoder.itchy.util.GRGBAProperty;
 import uk.co.nickthecoder.itchy.util.GStringProperty;
-import uk.co.nickthecoder.itchy.util.NullBehaviour;
 import uk.co.nickthecoder.itchy.util.TagCollection;
 import uk.co.nickthecoder.itchy.util.TagMembership;
 import uk.co.nickthecoder.jame.RGBA;

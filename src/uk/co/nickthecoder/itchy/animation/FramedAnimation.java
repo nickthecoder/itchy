@@ -17,7 +17,7 @@ public class FramedAnimation extends AbstractAnimation
 
     protected int delay;
 
-    protected int direction;
+    protected int direction = 1;
 
     public boolean pingPong;
 

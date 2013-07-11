@@ -1,9 +1,9 @@
-package uk.co.nickthecoder.itchy.util;
+package uk.co.nickthecoder.itchy.extras;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Behaviour;
 
-public class ProjectileBehaviour extends Behaviour
+public class Projectile extends Behaviour
 {
     public double gravity;
 
@@ -32,37 +32,37 @@ public class ProjectileBehaviour extends Behaviour
         return actor;
     }
     
-    public ProjectileBehaviour speed( double value )
+    public Projectile speed( double value )
     {
         this.speed = value;
         return this;
     }
-    public ProjectileBehaviour vx( double value )
+    public Projectile vx( double value )
     {
         this.vx = value;
         return this;
     }
-    public ProjectileBehaviour vy( double value )
+    public Projectile vy( double value )
     {
         this.vy = value;
         return this;
     }
-    public ProjectileBehaviour gravity( double value )
+    public Projectile gravity( double value )
     {
         this.gravity = value;
         return this;
     }
-    public ProjectileBehaviour spin( double value )
+    public Projectile spin( double value )
     {
         this.spin = value;
         return this;
     }
-    public ProjectileBehaviour fade( double value )
+    public Projectile fade( double value )
     {
         this.fade = value;
         return this;
     }
-    public ProjectileBehaviour growFactor( double value )
+    public Projectile growFactor( double value )
     {
         this.growFactor = value;
         return this;

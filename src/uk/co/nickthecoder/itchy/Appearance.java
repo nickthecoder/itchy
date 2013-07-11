@@ -1,6 +1,5 @@
 package uk.co.nickthecoder.itchy;
 
-import uk.co.nickthecoder.itchy.util.WorldRectangle;
 import uk.co.nickthecoder.jame.RGBA;
 import uk.co.nickthecoder.jame.Surface;
 

@@ -25,7 +25,7 @@ public class Costume
 
     private final HashMap<String, List<FontResource>> fontChoices;
 
-    public String behaviourClassName = uk.co.nickthecoder.itchy.util.NullBehaviour.class.getName();
+    public String behaviourClassName = uk.co.nickthecoder.itchy.NullBehaviour.class.getName();
 
     public Costume()
     {

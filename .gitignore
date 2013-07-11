@@ -1,12 +1,13 @@
 *~
-/itchy.jar
 /.project
 /.classpath
 /.settings
 /publish
-/native
 /docs/api
 /build
 /bin
 /lib/junit.jar
+/lib/jame.jar
+/lib/itchy.jar
+/lib/native
 /test.bsh

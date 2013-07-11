@@ -66,16 +66,18 @@ public class DrunkInvaders extends Game
         this.metronome = 20;
 
         this.resources.load(RESOURCES);
+        
+        Rect screenSize = new Rect(0,0,640,480);
 
-        this.mainLayer = new ScrollableLayer(new Rect(0, 0, 640, 480), null, false);
+        this.mainLayer = new ScrollableLayer(screenSize);
         this.mainLayer.centerOn(320, 240);
         this.mainLayer.enableMouseListener();
         Itchy.singleton.getGameLayer().add(this.mainLayer);
 
-        this.glassLayer = new ScrollableLayer(new Rect(0, 0, 640, 480), null, false);
+        this.glassLayer = new ScrollableLayer(screenSize);
         Itchy.singleton.getGameLayer().add(this.glassLayer);
 
-        this.fadeLayer = new ScrollableLayer(new Rect(0, 0, 640, 480), null, false);
+        this.fadeLayer = new ScrollableLayer(screenSize);
         Itchy.singleton.getGameLayer().add(this.fadeLayer);
 
         this.fadeActor = new Actor(this.resources.getPose("white"));

@@ -1,4 +1,4 @@
-package uk.co.nickthecoder.itchy.util;
+package uk.co.nickthecoder.itchy;
 
 public class WorldRectangle
 {

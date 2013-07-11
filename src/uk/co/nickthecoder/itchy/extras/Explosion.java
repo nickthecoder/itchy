@@ -1,4 +1,4 @@
-package uk.co.nickthecoder.itchy.util;
+package uk.co.nickthecoder.itchy.extras;
 
 import java.util.Random;
 
@@ -7,7 +7,7 @@ import uk.co.nickthecoder.itchy.Appearance;
 import uk.co.nickthecoder.itchy.Behaviour;
 import uk.co.nickthecoder.itchy.Pose;
 
-public class ExplosionBehaviour extends Behaviour
+public class Explosion extends Behaviour
 {
     public static Random random = new Random();
 
@@ -74,7 +74,7 @@ public class ExplosionBehaviour extends Behaviour
 
     private Actor source;
     
-    public ExplosionBehaviour( Actor actor )
+    public Explosion( Actor actor )
     {
         super();
         this.direction = actor.getAppearance().getDirection();
@@ -100,17 +100,17 @@ public class ExplosionBehaviour extends Behaviour
         return result;
     }
     
-    public ExplosionBehaviour projectiles( int value )
+    public Explosion projectiles( int value )
     {
         this.projectileCount = value;
         return this;
     }
-    public ExplosionBehaviour projectilesPerClick( int value )
+    public Explosion projectilesPerClick( int value )
     {
         this.countPerTick = value;
         return this;
     }
-    public ExplosionBehaviour gravity( double value )
+    public Explosion gravity( double value )
     {
         this.gravity = value;
         return this;
@@ -120,50 +120,50 @@ public class ExplosionBehaviour extends Behaviour
      * small or circular.
      * @return this.
      */
-    public ExplosionBehaviour rotate( boolean value )
+    public Explosion rotate( boolean value )
     {
         this.rotate = value;
         return this;
     }
     
-    public ExplosionBehaviour spin( double value )
+    public Explosion spin( double value )
     {
         return this.spin( value, value );
     }
-    public ExplosionBehaviour spin( double from, double to )
+    public Explosion spin( double from, double to )
     {
         this.spin = from;
         this.randomSpin = to - from;
         return this;
     }
 
-    public ExplosionBehaviour vx( double value )
+    public Explosion vx( double value )
     {
         return this.vx( value, value );
     }
-    public ExplosionBehaviour vx( double from, double to )
+    public Explosion vx( double from, double to )
     {
         this.vx = from;
         this.randomVx = to - from;
         return this;
     }
 
-    public ExplosionBehaviour vy( double value )
+    public Explosion vy( double value )
     {
         return this.vy( value, value );
     }
-    public ExplosionBehaviour vy( double from, double to )
+    public Explosion vy( double from, double to )
     {
         this.vy = from;
         this.randomVy = to - from;
         return this;
     }
 
-    public ExplosionBehaviour direction( double value )
+    public Explosion direction( double value )
     {
         return this.direction( value, value );
     }
-    public ExplosionBehaviour direction( double from, double to )
+    public Explosion direction( double from, double to )
     {
         this.direction = from;
         this.randomDirection = to - from;
@@ -175,18 +175,18 @@ public class ExplosionBehaviour extends Behaviour
      * (which defaults to 0..360 degrees (i.e. randomly in a full circle)
      * @return this
      */
-    public ExplosionBehaviour forwards()
+    public Explosion forwards()
     {
         this.rotate(true);
         direction(this.source.getAppearance().getDirection());
         this.sameDirection = false;
         return this;
     }
-    public ExplosionBehaviour heading( double value )
+    public Explosion heading( double value )
     {
         return this.heading( value, value );
     }
-    public ExplosionBehaviour heading( double from, double to )
+    public Explosion heading( double from, double to )
     {
         this.sameDirection = false;
         this.heading = from;
@@ -194,22 +194,22 @@ public class ExplosionBehaviour extends Behaviour
         return this;
     }
 
-    public ExplosionBehaviour speed( double value )
+    public Explosion speed( double value )
     {
         return this.speed( value, value );
     }
-    public ExplosionBehaviour speed( double from, double to )
+    public Explosion speed( double from, double to )
     {
         this.speed = from;
         this.randomSpeed = to - from;
         return this;
     }
 
-    public ExplosionBehaviour distance( double value )
+    public Explosion distance( double value )
     {
         return this.distance( value, value );
     }
-    public ExplosionBehaviour distance( double from, double to )
+    public Explosion distance( double from, double to )
     {
         this.distance = from;
         this.randomDistance = to - from;
@@ -217,56 +217,56 @@ public class ExplosionBehaviour extends Behaviour
     }
 
 
-    public ExplosionBehaviour fade( double value )
+    public Explosion fade( double value )
     {
         return this.fade( value, value );
     }
-    public ExplosionBehaviour fade( double from, double to )
+    public Explosion fade( double from, double to )
     {
         this.fade = from;
         this.randomFade = to - from;
         return this;
     }
 
-    public ExplosionBehaviour scale( double value )
+    public Explosion scale( double value )
     {
         return this.scale( value, value );
     }
-    public ExplosionBehaviour scale( double from, double to )
+    public Explosion scale( double from, double to )
     {
         this.scale = from;
         this.randomScale = to - from;
         return this;
     }
 
-    public ExplosionBehaviour grow( double value )
+    public Explosion grow( double value )
     {
         return this.grow( value, value );
     }
-    public ExplosionBehaviour grow( double from, double to )
+    public Explosion grow( double from, double to )
     {
         this.grow = from;
         this.randomGrow = to - from;
         return this;
     }
 
-    public ExplosionBehaviour life( int value )
+    public Explosion life( int value )
     {
         return this.life( value, value );
     }
-    public ExplosionBehaviour life( int from, int to )
+    public Explosion life( int from, int to )
     {
         this.life = from;
         this.randomLife = to - from;
         return this;
     }
     
-    public ExplosionBehaviour alpha( int alpha )
+    public Explosion alpha( int alpha )
     {
         return alpha( alpha, alpha );
     }
 
-    public ExplosionBehaviour alpha( int from, int to )
+    public Explosion alpha( int from, int to )
     {
         this.alpha = from;
         this.randomAlpha = to - from;
@@ -298,7 +298,7 @@ public class ExplosionBehaviour extends Behaviour
             }
             Actor actor = new Actor(pose);
             Appearance appearance = actor.getAppearance();
-            ProjectileBehaviour behaviour = new ProjectileBehaviour();
+            Projectile behaviour = new Projectile();
 
             double direction = this.direction + random.nextDouble() * this.randomDirection;
             if (this.rotate) {

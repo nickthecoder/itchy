@@ -4,7 +4,6 @@ import java.util.HashMap;
 
 import uk.co.nickthecoder.itchy.editor.SceneDesignerBehaviour;
 import uk.co.nickthecoder.itchy.util.GProperty;
-import uk.co.nickthecoder.itchy.util.NullBehaviour;
 import uk.co.nickthecoder.jame.RGBA;
 
 public abstract class SceneActor implements Cloneable

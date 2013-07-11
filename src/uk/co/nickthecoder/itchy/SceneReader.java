@@ -8,7 +8,6 @@ import java.util.Iterator;
 
 import uk.co.nickthecoder.itchy.editor.SceneDesignerBehaviour;
 import uk.co.nickthecoder.itchy.util.GProperty;
-import uk.co.nickthecoder.itchy.util.NullBehaviour;
 import uk.co.nickthecoder.itchy.util.XMLException;
 import uk.co.nickthecoder.itchy.util.XMLTag;
 import uk.co.nickthecoder.jame.RGBA;

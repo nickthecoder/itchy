@@ -20,7 +20,8 @@ public class AnimationTest extends Game
     {
         Itchy.singleton.init(this);
 
-        this.mainLayer = new ScrollableLayer(this.size, new RGBA(0, 0, 0), true);
+        this.mainLayer = new ScrollableLayer(this.size, new RGBA(0, 0, 0));
+        this.mainLayer.setYAxisPointsDown(true);
         Itchy.singleton.getGameLayer().add(this.mainLayer);
 
         this.resources.load("resources/drunkInvaders/test.xml");

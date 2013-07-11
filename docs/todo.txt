@@ -1,31 +1,38 @@
+Rod to handle the change ends, and everything else other than the initiation of the connection.
+
+Editor doesn't launch from inside the games.
+
 Jame is out of date, need to rebuild for win32 and i386
     Compile and test using windows.
-    Add the dll and so files to jame's git tree??
+    Add the dependant dlls to jame's git tree?
+        No. If NuGet can automate the download of dependencies, then an ant task can bundle them.
+    Add the compiled dll and .so files to jame's git tree??
+        No. Ant task which uploads the compiled object to a ftp server?
 
+Place native files (dll and so) into lib/native rather than native
+    For jame and itchy and iThrust
+
+SceneActor,TextSceneActor, CostumeSceneActor to go into the editor package.
+
+Make WorldRectangle final??? Should it be in the main Itchy package?
+
+PoseDecorator interface looks naff.
+
+Do I want TextBehaviour?
+
+Use @Property instead of addProperties?
 
 What's Next
 ===========
 
-Yell is long winded - do it like ExplosionBehaviour
-
+Yell is long winded - do it like ExplosionBehaviour?
+    Use Follower class, but add offsetX, offsetY, and distance / direction
+    Ok for the equivalent of Scratch's talk, but mine are animated (moving upwards).
+    
+Solution : Yell class creates an appropriate Pose/Appearance, and optionally a dumb actor too.
+    Combine with Follower or MoveAnimation to get it moving.
+        
 Try it on a RaspPi
-
-Create a debug actor, which you can print to, and therefore easily display debug info on the screen.
-   Use it to display FPS and alien count.
-
-Go through each class. Replace with new idioms, such as varargs and new "for :" syntax.
-
-Create diagrams and javadocs aimed at games programmers. Change classes from public, where appropriate
-to remove them form the javadocs.
-    Maybe have more than one set of javadocs.
-        Novice, Experienced, Itchy Guru
-
-Create a strategy for large objects.
-    Keep track of the square in the top left and bottom right of the object.
-    During update, add/remove from the squares as appropriate.    During touching, iterate over all squares from (topLeft.nw()) to (bottomRight.se()).
-        Need Square to know its neighbours by name. i.e. methods "n", "ne", "e", etc.
-        Also a method getNeighbour( int dx, int dy )
-       
 
 Scenery Editor
 

@@ -6,12 +6,11 @@ import java.util.List;
 import java.util.Set;
 
 import uk.co.nickthecoder.itchy.util.GProperty;
-import uk.co.nickthecoder.jame.JameException;
 
 public abstract class Behaviour
 {
     public ActorCollisionStrategy collisionStrategy;
-    
+
     private final HashMap<Class<?>, List<GProperty<Behaviour, ?>>> allProperties = new HashMap<Class<?>, List<GProperty<Behaviour, ?>>>();
 
     public static boolean isValidClassName( String behaviourClassName )
@@ -36,23 +35,16 @@ public abstract class Behaviour
         this.actor = null;
     }
 
-    public Actor createActor( String imageFilename, int x, int y, ActorsLayer layer )
-        throws JameException
+    public Actor createActor( ActorsLayer layer, String costumeName )
     {
-        ImagePose imagePose = new ImagePose(imageFilename);
-        return createActor( imagePose, x, y, layer );
-    }
-    
-    public Actor createActor( Pose pose, int x, int y, ActorsLayer layer )
-    {
-        Actor actor = new Actor(pose);
-        actor.moveTo(x, y);
+        Costume costume = Itchy.singleton.getResources().getCostume(costumeName);
+        Actor actor = new Actor(costume);
+        layer.add(actor);
         actor.setBehaviour(this);
-        layer.add( actor );
         
         return actor;
     }
-    
+
     public List<GProperty<Behaviour, ?>> getProperties()
     {
         List<GProperty<Behaviour, ?>> result = this.allProperties.get(this.getClass());
@@ -78,8 +70,8 @@ public abstract class Behaviour
     {
         assert (this.actor == null);
         this.actor = actor;
-        if ( this.collisionStrategy == null ) {
-            this.collisionStrategy = new BruteForceActorCollisionStrategy( this.actor );
+        if (this.collisionStrategy == null) {
+            this.collisionStrategy = new BruteForceActorCollisionStrategy(this.actor);
         }
         this.init();
     }
@@ -93,12 +85,12 @@ public abstract class Behaviour
     {
         return this.collisionStrategy.overlapping(tags);
     }
-    
+
     public Set<Actor> touching( String... tags )
     {
         return this.collisionStrategy.touching(tags);
     }
-    
+
     public void play( String soundName )
     {
         this.actor.play(soundName);
@@ -119,7 +111,6 @@ public abstract class Behaviour
         this.actor.sleep(seconds);
     }
 
-
     /**
      * You may override this method to do one-time initialisation. Use this instead of a
      * Constructor, because the behaviour will not be fully formed in the constructor - it won't be
@@ -136,7 +127,7 @@ public abstract class Behaviour
     {
         // do nothing
     }
-    
+
     public void onKill()
     {
         // do nothing

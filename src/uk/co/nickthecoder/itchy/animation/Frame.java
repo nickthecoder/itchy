@@ -17,7 +17,7 @@ public class Frame implements Cloneable
     {
         this.poseName = poseName;
         this.pose = pose;
-        this.delay = 1;
+        this.delay = 0;
     }
 
     public String getPoseName()

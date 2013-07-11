@@ -4,10 +4,10 @@ import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Pose;
 import uk.co.nickthecoder.itchy.TextPose;
+import uk.co.nickthecoder.itchy.extras.Explosion;
+import uk.co.nickthecoder.itchy.extras.Fragment;
 import uk.co.nickthecoder.itchy.util.BorderPoseDecorator;
 import uk.co.nickthecoder.itchy.util.DoubleProperty;
-import uk.co.nickthecoder.itchy.util.ExplosionBehaviour;
-import uk.co.nickthecoder.itchy.util.Fragment;
 import uk.co.nickthecoder.itchy.util.PoseDecorator;
 import uk.co.nickthecoder.jame.Keys;
 import uk.co.nickthecoder.jame.RGBA;
@@ -57,6 +57,8 @@ public class Ship extends Bouncy implements Shootable
     public void init()
     {
         super.init();
+        
+        this.actor.removeTag("bouncy");
 
         this.mass = 100000000000.0;
         this.actor.addTag("killable");
@@ -169,6 +171,7 @@ public class Ship extends Bouncy implements Shootable
         long level = Math.round(this.shieldStrength * SHIELD_POSE_COUNT);
         if (level > 0) {
             this.event("shield");
+            this.actor.addTag( "bouncy" );
             long newLevel = Math.round(this.shieldStrength * SHIELD_POSE_COUNT);
             event("shielded" + newLevel);
             this.shielded = true;
@@ -179,6 +182,7 @@ public class Ship extends Bouncy implements Shootable
 
     public void deactivateShield()
     {
+        this.actor.removeTag( "bouncy" );
         this.event("deshield");
         this.shielded = false;
     }
@@ -247,7 +251,7 @@ public class Ship extends Bouncy implements Shootable
         this.actor.getLayer().add(yell);
         yell.deathEvent(this.actor.getCostume(), "yell");
 
-        new ExplosionBehaviour(this.actor)
+        new Explosion(this.actor)
             .projectiles(20)
             .forwards()
             .speed(0.3, 0.9)
@@ -256,7 +260,7 @@ public class Ship extends Bouncy implements Shootable
             .rotate(false)
             .createActor("fragment").activate();
 
-        new ExplosionBehaviour(this.actor)
+        new Explosion(this.actor)
             .projectiles(40)
             .distance(0, 10)
             .speed(1, 3)

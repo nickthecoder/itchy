@@ -14,11 +14,13 @@ import uk.co.nickthecoder.itchy.ImagePose;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.KeyListener;
 import uk.co.nickthecoder.itchy.MouseListener;
+import uk.co.nickthecoder.itchy.NullBehaviour;
 import uk.co.nickthecoder.itchy.Scene;
 import uk.co.nickthecoder.itchy.SceneActor;
 import uk.co.nickthecoder.itchy.SceneResource;
 import uk.co.nickthecoder.itchy.ScrollableLayer;
 import uk.co.nickthecoder.itchy.TextPose;
+import uk.co.nickthecoder.itchy.extras.Follower;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Button;
 import uk.co.nickthecoder.itchy.gui.ButtonGroup;
@@ -35,11 +37,9 @@ import uk.co.nickthecoder.itchy.gui.Notebook;
 import uk.co.nickthecoder.itchy.gui.TextBox;
 import uk.co.nickthecoder.itchy.gui.ToggleButton;
 import uk.co.nickthecoder.itchy.gui.VerticalScroll;
-import uk.co.nickthecoder.itchy.util.FollowBehaviour;
 import uk.co.nickthecoder.itchy.util.GProperty;
 import uk.co.nickthecoder.itchy.util.GStringProperty;
 import uk.co.nickthecoder.itchy.util.NinePatch;
-import uk.co.nickthecoder.itchy.util.NullBehaviour;
 import uk.co.nickthecoder.itchy.util.Reversed;
 import uk.co.nickthecoder.jame.Keys;
 import uk.co.nickthecoder.jame.RGBA;
@@ -129,9 +129,9 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.createToolbar();
         this.createToolbox();
 
-        this.actorsLayer = new ScrollableLayer(this.editor.size, this.sceneBackground, false);
-        this.glassLayer = new ScrollableLayer(this.editor.size, null, false);
-        this.guiLayer = new ScrollableLayer(this.editor.size, this.guiBackground, true);
+        this.actorsLayer = new ScrollableLayer(this.editor.size, this.sceneBackground);
+        this.glassLayer = new ScrollableLayer(this.editor.size);
+        this.guiLayer = new ScrollableLayer(this.editor.size, this.guiBackground);
 
         this.actorsLayer.setVisible(true);
         this.glassLayer.setVisible(true);
@@ -808,7 +808,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.highlightActor = new Actor(newPose);
         this.highlightActor.moveTo(this.currentActor);
         this.glassLayer.add(this.highlightActor);
-        this.highlightActor.setBehaviour(new FollowBehaviour(this.currentActor));
+        this.highlightActor.setBehaviour(new Follower(this.currentActor));
         this.highlightActor.activate();
 
         for (ScaleHandleBehaviour be : this.scaleHandles) {

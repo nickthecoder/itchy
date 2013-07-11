@@ -1,7 +1,7 @@
 #!/bin/bash
 
-NATIVE_DIR=native/`uname -m`
-CLASSPATH=itchy.jar:lib/jame.jar
+NATIVE_DIR=lib/native/`uname -m`
+CLASSPATH=lib/itchy.jar:lib/jame.jar
 MAIN=uk.co.nickthecoder.drunkinvaders.DrunkInvaders
 
 

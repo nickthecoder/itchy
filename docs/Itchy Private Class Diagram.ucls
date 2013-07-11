@@ -172,8 +172,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="20" language="java" name="uk.co.nickthecoder.itchy.util.ProjectileBehaviour" project="itchy" 
-    file="/itchy/src/uk/co/nickthecoder/itchy/util/ProjectileBehaviour.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="20" language="java" name="uk.co.nickthecoder.itchy.extras.Projectile" project="itchy" 
+    file="/itchy/src/uk/co/nickthecoder/itchy/extras/Projectile.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="337" y="1243"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
@@ -181,8 +181,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="21" language="java" name="uk.co.nickthecoder.itchy.util.ExplosionBehaviour" project="itchy" 
-    file="/itchy/src/uk/co/nickthecoder/itchy/util/ExplosionBehaviour.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="21" language="java" name="uk.co.nickthecoder.itchy.extras.Explosion" project="itchy" 
+    file="/itchy/src/uk/co/nickthecoder/itchy/extras/Explosion.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="180" y="1398"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      

@@ -23,9 +23,14 @@ public class ScrollableLayer extends ActorsLayer
      * allowed, then the width and height are the same as in super.positionOnScreen.
      */
 
-    public ScrollableLayer( Rect position, RGBA backgroundColor, boolean yAxisPointsDown )
+    public ScrollableLayer( Rect position )
     {
-        super(position, yAxisPointsDown);
+        this(position, null);
+    }
+
+    public ScrollableLayer( Rect position, RGBA backgroundColor )
+    {
+        super(position);
 
         this.backgroundColor = backgroundColor;
     }
@@ -81,7 +86,7 @@ public class ScrollableLayer extends ActorsLayer
         // Where is the world's (0,0) on screen (in screen coordinates)?
         int tx = clipLeft - (int) this.worldRect.x;
         int ty = this.getYAxisPointsDown() ? clipTop - (int) this.worldRect.y : clipTop +
-                clipHeight + (int) this.worldRect.y;
+            clipHeight + (int) this.worldRect.y;
 
         List<Actor> actors = new ArrayList<Actor>();
         actors.addAll(this.actors);
@@ -114,8 +119,8 @@ public class ScrollableLayer extends ActorsLayer
                     // coordinates "down" is negative.
                     int screenX = tx + (int) (actor.getX()) - actor.getAppearance().getOffsetX();
                     int screenY = this.getYAxisPointsDown() ? ty + (int) (actor.getY()) -
-                            actor.getAppearance().getOffsetY() : ty - (int) (actor.getY()) -
-                            actor.getAppearance().getOffsetY();
+                        actor.getAppearance().getOffsetY() : ty - (int) (actor.getY()) -
+                        actor.getAppearance().getOffsetY();
 
                     try {
                         // actorSurface.blit( Itchy.singleton.screen, 0, 0 ); //
@@ -194,7 +199,7 @@ public class ScrollableLayer extends ActorsLayer
                          * " failed to delay during ScrollableLayer.render" ); }
                          */
                         System.err.println("WARNING : attempt #" + retry +
-                                " failed to blit surface during ScrollableLayer.render");
+                            " failed to blit surface during ScrollableLayer.render");
                     }
                 }
             }

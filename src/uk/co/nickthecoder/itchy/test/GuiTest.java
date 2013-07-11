@@ -43,7 +43,8 @@ public class GuiTest extends Game
     {
         Itchy.singleton.init(this);
 
-        this.mainLayer = new ScrollableLayer(this.size, new RGBA(255, 255, 255), true);
+        this.mainLayer = new ScrollableLayer(this.size, new RGBA(255, 255, 255));
+        this.mainLayer.setYAxisPointsDown(true);
         Itchy.singleton.getGameLayer().add(this.mainLayer);
 
         this.rules = new Rules();

@@ -151,7 +151,8 @@ public class Itchy
         this.gameLayer = new CompoundLayer(this.rootRect);
         this.rootLayer.add(this.gameLayer);
 
-        this.popupLayer = new ScrollableLayer(this.rootRect, null, true);
+        this.popupLayer = new ScrollableLayer(this.rootRect);
+        this.popupLayer.setYAxisPointsDown(true);
         this.popupLayer.setVisible(true);
         this.rootLayer.add(this.popupLayer);
     }

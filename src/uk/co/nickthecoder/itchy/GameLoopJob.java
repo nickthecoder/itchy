@@ -3,7 +3,6 @@ package uk.co.nickthecoder.itchy;
 import java.util.ArrayList;
 import java.util.List;
 
-import uk.co.nickthecoder.itchy.util.Job;
 
 /**
  * Organises the game loop into a series of small tasks.

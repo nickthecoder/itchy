@@ -5,9 +5,9 @@ import uk.co.nickthecoder.itchy.Pose;
 import uk.co.nickthecoder.itchy.TextPose;
 import uk.co.nickthecoder.itchy.animation.NumericAnimation;
 import uk.co.nickthecoder.itchy.animation.ScaleAnimation;
+import uk.co.nickthecoder.itchy.extras.Explosion;
+import uk.co.nickthecoder.itchy.extras.Fragment;
 import uk.co.nickthecoder.itchy.util.BorderPoseDecorator;
-import uk.co.nickthecoder.itchy.util.ExplosionBehaviour;
-import uk.co.nickthecoder.itchy.util.Fragment;
 import uk.co.nickthecoder.itchy.util.IntegerProperty;
 import uk.co.nickthecoder.itchy.util.PoseDecorator;
 import uk.co.nickthecoder.itchy.util.Util;
@@ -114,14 +114,14 @@ public class Alien extends Bouncy implements Shootable
     public void shot( Actor bullet )
     {
 
-        new ExplosionBehaviour(this.actor)
+        new Explosion(this.actor)
             .projectiles(20)
             .forwards()
             .fade(1.2)
             .speed(0.1,1)
             .createActor("fragment").activate();
 
-        new ExplosionBehaviour(this.actor)
+        new Explosion(this.actor)
             .projectiles(40).projectilesPerClick(10)
             .distance(0, 20)
             .speed(3, 6)

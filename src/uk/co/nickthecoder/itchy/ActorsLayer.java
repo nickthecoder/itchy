@@ -23,9 +23,9 @@ public abstract class ActorsLayer extends Layer
     private MouseListener mouseListener = null;
     private final List<Actor> actorMouseListeners = new ArrayList<Actor>();
 
-    public ActorsLayer( Rect position, boolean yAxisPointsDown )
+    public ActorsLayer( Rect position )
     {
-        super(position, yAxisPointsDown);
+        super(position);
     }
 
     public Iterator<Actor> iterator()
@@ -142,7 +142,7 @@ public abstract class ActorsLayer extends Layer
             public boolean onMouseDown( MouseButtonEvent event )
             {
                 for (Iterator<Actor> i = ActorsLayer.this.actorMouseListeners.iterator(); i
-                        .hasNext();) {
+                    .hasNext();) {
                     Actor actor = i.next();
                     if (actor.getBehaviour() instanceof MouseListener) {
                         if (((MouseListener) actor.getBehaviour()).onMouseDown(event)) {
@@ -159,7 +159,7 @@ public abstract class ActorsLayer extends Layer
             public boolean onMouseUp( MouseButtonEvent event )
             {
                 for (Iterator<Actor> i = ActorsLayer.this.actorMouseListeners.iterator(); i
-                        .hasNext();) {
+                    .hasNext();) {
                     Actor actor = i.next();
                     if (actor.getBehaviour() instanceof MouseListener) {
                         if (((MouseListener) actor.getBehaviour()).onMouseUp(event)) {
@@ -176,7 +176,7 @@ public abstract class ActorsLayer extends Layer
             public boolean onMouseMove( MouseMotionEvent event )
             {
                 for (Iterator<Actor> i = ActorsLayer.this.actorMouseListeners.iterator(); i
-                        .hasNext();) {
+                    .hasNext();) {
                     Actor actor = i.next();
                     if (actor.getBehaviour() instanceof MouseListener) {
                         if (((MouseListener) actor.getBehaviour()).onMouseMove(event)) {

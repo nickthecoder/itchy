@@ -2,12 +2,9 @@
 <!DOCTYPE project>
 <project name="Itchy" default="build" basedir=".">
 
-    <property name="jarfile" value="itchy.jar" />
+    <property name="jarfile" value="lib/itchy.jar" />
 
     <path id="project.class.path">
-        <fileset dir=".">
-            <include name="itchy.jar"/>
-        </fileset>
         <fileset dir="lib">
             <include name="*.jar"/>
         </fileset>
@@ -40,7 +37,6 @@
     	
         <jar jarfile="publish/itchy-win32.zip">
             <fileset dir=".">
-                <include name="itchy.jar"/>
                 <include name="lib/*.jar"/>
                 <include name="drunkInvaders.bat"/>
                 <include name="native/win32/*.dll"/>
@@ -53,7 +49,6 @@
 
         <tar destfile="publish/itchy-linux.tar.gz" compression="gzip">
             <fileset dir=".">
-                <include name="itchy.jar"/>
                 <include name="lib/*.jar"/>
                 <include name="drunkInvaders.sh"/>
                 <include name="native/i686/*.so"/>
@@ -98,7 +93,7 @@
     <target name="clean">
         <delete includeEmptyDirs="true">
             <fileset dir=".">
-                <include name="itchy.jar" />
+                <include name="lib/itchy.jar" />
                 <include name="build/**" />
                 <exclude name="build" />
             </fileset>

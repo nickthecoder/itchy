@@ -15,7 +15,6 @@ import uk.co.nickthecoder.itchy.animation.Profile;
 import uk.co.nickthecoder.itchy.animation.ScaleAnimation;
 import uk.co.nickthecoder.itchy.animation.TurnAnimation;
 import uk.co.nickthecoder.itchy.util.NinePatch;
-import uk.co.nickthecoder.itchy.util.NullBehaviour;
 import uk.co.nickthecoder.itchy.util.XMLException;
 import uk.co.nickthecoder.itchy.util.XMLTag;
 import uk.co.nickthecoder.jame.Surface;
