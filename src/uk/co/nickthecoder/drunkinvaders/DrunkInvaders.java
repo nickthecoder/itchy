@@ -13,8 +13,8 @@ import uk.co.nickthecoder.itchy.animation.AlphaAnimation;
 import uk.co.nickthecoder.itchy.animation.CompoundAnimation;
 import uk.co.nickthecoder.itchy.animation.NumericAnimation;
 import uk.co.nickthecoder.itchy.editor.Editor;
-import uk.co.nickthecoder.itchy.neighbourhood.NeighbourhoodCollisionStrategy;
 import uk.co.nickthecoder.itchy.neighbourhood.Neighbourhood;
+import uk.co.nickthecoder.itchy.neighbourhood.NeighbourhoodCollisionStrategy;
 import uk.co.nickthecoder.itchy.neighbourhood.StandardNeighbourhood;
 import uk.co.nickthecoder.itchy.util.TextBehaviour;
 import uk.co.nickthecoder.jame.Keys;
@@ -27,7 +27,7 @@ public class DrunkInvaders extends Game
 
     public static final int NEIGHBOURHOOD_SQUARE_SIZE = 60;
 
-    public static DrunkInvaders singleton = new DrunkInvaders();
+    public static DrunkInvaders game;
 
     public ScrollableLayer mainLayer;
 
@@ -53,21 +53,21 @@ public class DrunkInvaders extends Game
 
     public boolean fadingOut = false;
 
-    public DrunkInvaders()
+    public DrunkInvaders() throws Exception
     {
+        Itchy.singleton.init(this);
+        this.resources.load(RESOURCES);
+
         this.neighbourhood = new StandardNeighbourhood(NEIGHBOURHOOD_SQUARE_SIZE);
     }
 
-    private void go() throws Exception
+    @Override
+    public void init()
     {
-        Itchy.singleton.init(this);
-
         this.metronomeCountdown = 0;
         this.metronome = 20;
 
-        this.resources.load(RESOURCES);
-        
-        Rect screenSize = new Rect(0,0,640,480);
+        Rect screenSize = new Rect(0, 0, 640, 480);
 
         this.mainLayer = new ScrollableLayer(screenSize);
         this.mainLayer.centerOn(320, 240);
@@ -86,8 +86,6 @@ public class DrunkInvaders extends Game
         this.fadeLayer.add(this.fadeActor);
 
         this.startScene("menu");
-        loop();
-
     }
 
     @Override
@@ -157,16 +155,18 @@ public class DrunkInvaders extends Game
     {
         if (this.info == null) {
 
-            this.info = new TextBehaviour( new MultiLineTextPose( this.resources.getFont("vera"), 16 ) )
+            this.info = new TextBehaviour(new MultiLineTextPose(this.resources.getFont("vera"), 16))
             {
-                public void tick() {
+                @Override
+                public void tick()
+                {
                     this.setText(
                         "Aliens Remaining : " + DrunkInvaders.this.aliensRemaining + "\n" +
-                        "Dropped Frames   : " + Itchy.singleton.frameRate.getDroppedFrames()
-                    );
+                            "Dropped Frames   : " + Itchy.singleton.frameRate.getDroppedFrames()
+                        );
                 }
             };
-            this.info.textPose.setAlignment( 0,0 );
+            this.info.textPose.setAlignment(0, 0);
             this.info.createActor().moveTo(40, 460);
             this.glassLayer.add(this.info.getActor());
             this.info.getActor().activate();
@@ -179,12 +179,7 @@ public class DrunkInvaders extends Game
 
     public ActorCollisionStrategy createCollisionStrategy( Actor actor )
     {
-        //Appearance appearance = actor.getAppearance();
-        //if ( appearance.getWidth() > this.neighbourhood.getSquareSize() )  {
-            return new NeighbourhoodCollisionStrategy(actor, this.neighbourhood);
-        //} else {
-        //    return new SinglePointCollisionStrategy(actor, this.neighbourhood);
-        //}
+        return new NeighbourhoodCollisionStrategy(actor, this.neighbourhood);
     }
 
     public void startScene( String sceneName )
@@ -205,43 +200,44 @@ public class DrunkInvaders extends Game
         animation.addAnimation(fadeOut);
         animation.addAnimation(fadeIn);
 
-        fadeOut.setFinishedMessage( "fadedOut" );
-        fadeOut.addMessageListener( this );
-        
-        fadeIn.setFinishedMessage( "fadedIn" );
-        fadeIn.addMessageListener( this );
-        
+        fadeOut.setFinishedMessage("fadedOut");
+        fadeOut.addMessageListener(this);
+
+        fadeIn.setFinishedMessage("fadedIn");
+        fadeIn.addMessageListener(this);
+
         this.fadingOut = true;
         this.fadeActor.setAnimation(animation);
     }
-    
+
+    @Override
     public void onMessage( String message )
     {
-        if ( "fadedIn".equals( message ) ) {
+        if ("fadedIn".equals(message)) {
             DrunkInvaders.this.fadingOut = false;
 
-        } else if ( "fadedOut".equals( message ) ) {
+        } else if ("fadedOut".equals(message)) {
 
             this.mainLayer.clear();
             Itchy.singleton.completeTasks();
             this.fadingOut = false;
             try {
                 Scene scene = this.resources.getScene(this.sceneName);
-                if ( scene == null) {
+                if (scene == null) {
                     this.sceneName = "completed";
                     this.levelNumber = 1;
-                    scene =  this.resources.getScene(this.sceneName);
+                    scene = this.resources.getScene(this.sceneName);
                 }
                 scene.create(DrunkInvaders.this.mainLayer, false);
                 Itchy.showMousePointer(scene.showMouse);
 
             } catch (Exception e) {
-                throw new RuntimeException( e );
+                throw new RuntimeException(e);
             }
-            
+
         }
     }
-    
+
     public void addAliens( int n )
     {
         this.aliensRemaining += n;
@@ -296,18 +292,6 @@ public class DrunkInvaders extends Game
         }
     }
 
-    private void startEditor()
-    {
-        try {
-            Editor editor = new Editor(DrunkInvaders.singleton);
-            editor.init();
-            editor.go();
-            this.go();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     @Override
     public int getWidth()
     {
@@ -337,21 +321,35 @@ public class DrunkInvaders extends Game
         this.neighbourhood.debug();
     }
 
+    private void startEditor()
+    {
+        Itchy.singleton.removeEventListener(this);
+
+        try {
+            Editor editor = new Editor(DrunkInvaders.game);
+            editor.init();
+            editor.start();
+            // this.go();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void main( String argv[] )
     {
         System.out.println("Welcome to Drunk Invaders");
 
         try {
+            game = new DrunkInvaders();
+
             if ((argv.length == 1) && ("--editor".equals(argv[0]))) {
 
-                Editor editor = new Editor(DrunkInvaders.singleton);
+                Editor editor = new Editor(game);
                 editor.init();
-                DrunkInvaders.singleton.resources.load(RESOURCES);
-                editor.go();
+                editor.start();
 
             } else {
-                DrunkInvaders.singleton.go();
-
+                game.start();
             }
 
         } catch (Exception e) {

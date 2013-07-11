@@ -19,8 +19,7 @@ public class Alien extends Bouncy implements Shootable
 
     public static final String[] SHOOTABLE_LIST = new String[] { "shootable" };
 
-    private static PoseDecorator bubbleCreator = new BorderPoseDecorator(
-        DrunkInvaders.singleton.resources.getNinePatch("speech"), 10, 10, 20, 10);
+    private PoseDecorator bubbleCreator;
 
     public double fireOnceEvery = 1.0; // Average duration between bombs in seconds
 
@@ -32,6 +31,10 @@ public class Alien extends Bouncy implements Shootable
     public void init()
     {
         super.init();
+
+        bubbleCreator = new BorderPoseDecorator(
+            DrunkInvaders.game.resources.getNinePatch("speech"), 10, 10, 20, 10);
+
         this.actor.addTag("deadly");
         this.actor.addTag("shootable");
 
@@ -50,14 +53,14 @@ public class Alien extends Bouncy implements Shootable
     public void onActivate()
     {
         super.onActivate();
-        DrunkInvaders.singleton.addAliens(1);
+        DrunkInvaders.game.addAliens(1);
     }
 
     @Override
     public void onDeactivate()
     {
         super.onActivate();
-        DrunkInvaders.singleton.addAliens(-1);
+        DrunkInvaders.game.addAliens(-1);
     }
 
     @Override
@@ -77,7 +80,7 @@ public class Alien extends Bouncy implements Shootable
             return;
         }
 
-        if (DrunkInvaders.singleton.metronomeCountdown == 1) {
+        if (DrunkInvaders.game.metronomeCountdown == 1) {
             if (this.actor.getAnimation() == null) {
                 this.tock = !this.tock;
                 this.actor.event(this.tock ? "tock" : "tick");
@@ -101,10 +104,10 @@ public class Alien extends Bouncy implements Shootable
     {
         this.event("fire");
 
-        Actor bullet = new Actor(DrunkInvaders.singleton.resources.getCostume("bomb"), "default");
+        Actor bullet = new Actor(DrunkInvaders.game.resources.getCostume("bomb"), "default");
         bullet.moveTo(this.actor);
         bullet.getAppearance().setDirection(this.actor.getAppearance().getDirection());
-        DrunkInvaders.singleton.mainLayer.add(bullet);
+        DrunkInvaders.game.mainLayer.add(bullet);
         bullet.moveForward(10);
         bullet.setBehaviour(new Bullet("killable"));
         bullet.activate();
@@ -143,7 +146,7 @@ public class Alien extends Bouncy implements Shootable
         }
 
         TextPose textPose = new TextPose(this.actor.getCostume().getString("death"),
-            DrunkInvaders.singleton.resources.getFont("vera"), 18, SPEECH_COLOR);
+            DrunkInvaders.game.resources.getFont("vera"), 18, SPEECH_COLOR);
         Pose bubble = bubbleCreator.createPose(textPose);
 
         Actor yell = new Actor(bubble);

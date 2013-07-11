@@ -26,7 +26,7 @@ public class DrunkButton extends Behaviour implements MouseListener
     public boolean onMouseDown( MouseButtonEvent event )
     {
         if (this.actor.contains(event.x, event.y)) {
-            DrunkInvaders.singleton.action(this.action);
+            DrunkInvaders.game.action(this.action);
             return true;
         }
         return false;

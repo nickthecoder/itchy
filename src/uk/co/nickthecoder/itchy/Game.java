@@ -24,13 +24,6 @@ public abstract class Game extends Task implements EventListener, MessageListene
         return this.preferences;
     }
 
-    @Override
-    public boolean onQuit()
-    {
-        Itchy.singleton.terminate();
-        return true;
-    }
-
     public int getWidth()
     {
         return 640;
@@ -51,6 +44,13 @@ public abstract class Game extends Task implements EventListener, MessageListene
         return "icon.bmp";
     }
 
+    @Override
+    public boolean onQuit()
+    {
+        Itchy.singleton.terminate();
+        return true;
+    }
+    
     /**
      * Called when a button is pressed. Most games don't use onKeyDown or onKeyUp during game play,
      * instead, each Actor uses : Itchy.singleton.isKeyDown( ... ). onKeyDown and onKeyUp are useful
@@ -103,19 +103,20 @@ public abstract class Game extends Task implements EventListener, MessageListene
     {
     }
 
-    public void loop()
+    public abstract void init();
+    
+    public void start()
     {
-        Itchy.singleton.addEventListener(this);
-        Itchy.singleton.loop();
+        Itchy.singleton.startGame(this);
     }
 
-    public void terminate()
+    public void stop()
     {
-        Itchy.singleton.terminate();
+        Itchy.singleton.endGame();
     }
 
     /**
-     * Part of the Task interface, and simply calls 'tick'. You subclass should override tick, and
+     * Part of the Task interface, and simply calls 'tick'. Your subclass should override tick, and
      * do nothing with 'run'.
      */
     @Override

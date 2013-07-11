@@ -3,6 +3,7 @@ package uk.co.nickthecoder.itchy;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Stack;
 
 import uk.co.nickthecoder.itchy.gui.GuiPose;
 import uk.co.nickthecoder.itchy.gui.Rules;
@@ -40,8 +41,9 @@ public class Itchy
 {
     public static void showMousePointer( boolean value )
     {
-        uk.co.nickthecoder.jame.Video.showMousePointer( value );
+        uk.co.nickthecoder.jame.Video.showMousePointer(value);
     }
+
     /**
      * This is the highest SDL key sym which can be checked using isKeyDown(). The highest key sym
      * is currently 321, and I'm using 400, which leaves plenty of room for additional keys to be
@@ -57,7 +59,7 @@ public class Itchy
      * events reset the boolean. Uses the SDL keysym values to index the array.
      */
     private boolean[] keyboardState;
-    
+
     public Surface screen;
 
     private CompoundLayer rootLayer;
@@ -83,6 +85,11 @@ public class Itchy
 
     private Game game;
 
+    /**
+     * If one game calls another game, and then exists, this is how we return to the previous game.
+     */
+    private Stack<Game> gameStack = new Stack<Game>();
+
     private ActorsLayer popupLayer;
 
     private final List<GuiPose> windows;
@@ -94,10 +101,9 @@ public class Itchy
     public int keyboardRepeatInterval = Events.DEFAULT_REPEAT_INTERVAL;
 
     public FrameRate frameRate = createFrameRate();
-    
+
     GameLoopJob gameLoopJob = new GameLoopJob();
 
-    
     private Itchy()
     {
         this.windows = new ArrayList<GuiPose>();
@@ -116,7 +122,7 @@ public class Itchy
     public void init( Game game, int width, int height, int bpp ) throws JameException
     {
         while (this.windows.size() > 0) {
-            this.windows.get(0).destroy();
+            this.windows.get(0).destroy(); // TODO does this work???
         }
         this.eventListeners = new LinkedList<EventListener>();
         this.mouseListeners = new LinkedList<MouseListener>();
@@ -126,7 +132,6 @@ public class Itchy
             this.rootLayer.destroy();
         }
 
-        this.game = game;
         this.keyboardState = new boolean[KEYBOARD_STATE_SIZE];
 
         Video.init();
@@ -190,30 +195,67 @@ public class Itchy
 
     }
 
-    public void loop()
+    public void startGame( Game game )
     {
-        
-        this.running = true;
+        this.gameStack.push(this.game);
+        this.game = game;
 
-        this.frameRate.loop();
-        
+        startGame();
     }
-    
+
+    private void startGame()
+    {
+        try {
+            this.init(this.game);
+            this.addEventListener(this.game);
+            this.game.init();
+            if (!this.running) {
+                this.running = true;
+                this.frameRate.loop();
+            }
+        } catch (Exception e) {
+            System.err.println("Failed to initialise game");
+            e.printStackTrace();
+        }
+    }
+
+    public void endGame()
+    {
+        this.removeEventListener(this.game);
+        if (this.gameStack.isEmpty()) {
+            this.terminate();
+        } else {
+            this.game = this.gameStack.pop();
+            startGame();
+        }
+    }
+
+    /**
+     * Indicates that the main loop should end. Note the game does not end immediately, it only sets
+     * a flag, which will cause the main loop to end after the current frame has been processed.
+     */
+    public void terminate()
+    {
+        System.out.println("Terminating itchy");
+        this.running = false;
+    }
+
     private FrameRate createFrameRate()
     {
         return new FrameRate() {
-            
+
             @Override
-            public boolean isRunning() {
+            public boolean isRunning()
+            {
                 return Itchy.this.running;
             }
-            
+
             @Override
             public void doGameLogic()
             {
                 Itchy.this.doGameLogic();
             }
-            
+
             @Override
             public void doRedraw()
             {
@@ -244,11 +286,11 @@ public class Itchy
             @Override
             public void run()
             {
-                Itchy.this.processEvent( event );
+                Itchy.this.processEvent(event);
             }
         });
     }
-    
+
     private void doRedraw()
     {
         this.gameLoopJob.lock();
@@ -260,17 +302,15 @@ public class Itchy
         }
     }
 
-
     public void completeTasks()
     {
         this.gameLoopJob.completeTasks();
     }
-    
+
     public void addTask( Task task )
     {
         this.gameLoopJob.add(task);
     }
-
 
     public void endOfFrame()
     {
@@ -476,15 +516,6 @@ public class Itchy
         return this.keyboardState[Keys.LSUPER] || this.keyboardState[Keys.RSUPER];
     }
 
-    /**
-     * Indicates that the main loop should end. Note the game does not end immediately, it only sets
-     * a flag, which will cause the main loop to end after the current frame has been processed.
-     */
-    public void terminate()
-    {
-        this.running = false;
-    }
-
     public void setModalListener( EventListener listener )
     {
         this.modalListener = listener;
@@ -551,7 +582,7 @@ public class Itchy
         Actor actor = window.getActor();
 
         actor.moveTo(Math.max(0, (this.popupLayer.position.width - window.getRequiredWidth()) / 2),
-                Math.max(0, (this.popupLayer.position.height - window.getRequiredHeight()) / 2));
+            Math.max(0, (this.popupLayer.position.height - window.getRequiredHeight()) / 2));
 
         this.popupLayer.add(actor);
 

@@ -18,8 +18,7 @@ public class Ship extends Bouncy implements Shootable
 
     public static final String[] DEADLY_LIST = new String[] { "deadly" };
 
-    private static PoseDecorator bubbleCreator = new BorderPoseDecorator(
-        DrunkInvaders.singleton.resources.getNinePatch("speech2"), 10, 10, 20, 10);
+    private PoseDecorator bubbleCreator;
 
     private int recharge = 0;
     
@@ -58,6 +57,9 @@ public class Ship extends Bouncy implements Shootable
     {
         super.init();
         
+        bubbleCreator = new BorderPoseDecorator(
+            DrunkInvaders.game.resources.getNinePatch("speech2"), 10, 10, 20, 10);
+
         this.actor.removeTag("bouncy");
 
         this.mass = 100000000000.0;
@@ -219,11 +221,11 @@ public class Ship extends Bouncy implements Shootable
 
         this.event("fire");
 
-        Actor bullet = new Actor(DrunkInvaders.singleton.resources.getCostume("bullet"), "default");
+        Actor bullet = new Actor(DrunkInvaders.game.resources.getCostume("bullet"), "default");
         this.latestBullet = bullet;
         bullet.moveTo(this.actor);
         bullet.getAppearance().setDirection(this.actor.getAppearance().getDirection());
-        DrunkInvaders.singleton.mainLayer.add(bullet);
+        DrunkInvaders.game.mainLayer.add(bullet);
         bullet.moveForward(10);
         bullet.setBehaviour(new Bullet());
         bullet.addTag("killable");
@@ -241,7 +243,7 @@ public class Ship extends Bouncy implements Shootable
         }
 
         TextPose textPose = new TextPose(this.actor.getCostume().getString("death"),
-            DrunkInvaders.singleton.resources.getFont("vera"), 18, SPEECH_COLOR);
+            DrunkInvaders.game.resources.getFont("vera"), 18, SPEECH_COLOR);
         Pose bubble = bubbleCreator.createPose(textPose);
 
         Actor yell = new Actor(bubble);

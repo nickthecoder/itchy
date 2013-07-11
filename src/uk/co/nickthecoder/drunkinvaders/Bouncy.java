@@ -31,7 +31,7 @@ public class Bouncy extends Behaviour
     {
         super.init();
         this.actor.addTag("bouncy");
-        this.collisionStrategy = DrunkInvaders.singleton.createCollisionStrategy(this.actor);
+        this.collisionStrategy = DrunkInvaders.game.createCollisionStrategy(this.actor);
 
     }
 

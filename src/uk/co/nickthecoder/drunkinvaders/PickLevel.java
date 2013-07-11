@@ -36,7 +36,7 @@ public class PickLevel extends Behaviour implements MouseListener
     @Override
     public void init()
     {
-        if (DrunkInvaders.singleton.completedLevel(this.levelNumber)) {
+        if (DrunkInvaders.game.completedLevel(this.levelNumber)) {
             this.actor.event("completed");
         }
 
@@ -60,7 +60,7 @@ public class PickLevel extends Behaviour implements MouseListener
     public boolean onMouseDown( MouseButtonEvent event )
     {
         if (this.actor.contains(event.x, event.y)) {
-            DrunkInvaders.singleton.play(this.levelNumber);
+            DrunkInvaders.game.play(this.levelNumber);
             return true;
         }
         return false;

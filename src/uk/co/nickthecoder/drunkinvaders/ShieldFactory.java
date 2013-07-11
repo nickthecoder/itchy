@@ -27,12 +27,12 @@ public class ShieldFactory extends Behaviour
         for (int x = 0; x < this.width; x++) {
             for (int y = 0; y < this.height; y++) {
 
-                Costume costume = DrunkInvaders.singleton.resources.getCostume("shield");
+                Costume costume = DrunkInvaders.game.resources.getCostume("shield");
                 if (y == this.height - 1) {
                     if (x == 0) {
-                        costume = DrunkInvaders.singleton.resources.getCostume("shield-l");
+                        costume = DrunkInvaders.game.resources.getCostume("shield-l");
                     } else if (x == this.width - 1) {
-                        costume = DrunkInvaders.singleton.resources.getCostume("shield-r");
+                        costume = DrunkInvaders.game.resources.getCostume("shield-r");
                     }
                 }
 

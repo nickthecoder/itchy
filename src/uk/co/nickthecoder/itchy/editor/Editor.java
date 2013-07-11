@@ -15,7 +15,7 @@ import uk.co.nickthecoder.itchy.gui.Rules;
 import uk.co.nickthecoder.itchy.gui.VerticalLayout;
 import uk.co.nickthecoder.jame.Rect;
 
-public final class Editor
+public final class Editor extends Game
 {
 
     public static Container addHint( Component component, String hint )
@@ -54,26 +54,35 @@ public final class Editor
 
     public final Rect size = new Rect(0, 0, 1000, 750);
 
-    public Editor( Game game )
+    public Editor( Game game ) throws Exception
     {
+        Itchy.singleton.init(this);
+
         this.game = game;
         this.resources = game.resources; // new Resources();
-    }
-
-    public void init() throws Exception
-    {
-
-        Itchy.singleton.init(this.game, this.size.width, this.size.height);
 
         this.rules = new Rules();
         this.rules.load("resources/defaultGui/style.xml");
+    }
+
+    @Override
+    public int getWidth()
+    {
+        return this.size.width;
+    }
+
+    @Override
+    public int getHeight()
+    {
+        return this.size.height;
+    }
+
+    @Override
+    public void init()
+    {
         Itchy.singleton.setGuiRules(this.rules);
         Itchy.singleton.enableKeyboardRepeat(true);
 
-    }
-
-    public void go()
-    {
         this.mainGuiPose = new GuiPose();
         this.mainGuiPose.setRules(this.rules);
         this.mainGuiPose.setLayout(new VerticalLayout());
@@ -120,7 +129,7 @@ public final class Editor
             @Override
             public void action()
             {
-                Editor.this.game.onQuit();
+                Editor.this.stop();
             }
         });
         buttons.addChild(quit);
@@ -139,7 +148,6 @@ public final class Editor
         this.mainGuiPose.setPosition(0, 0, this.size.width, this.size.height);
         this.mainGuiPose.reStyle(); // TODO needed ?
 
-        Itchy.singleton.loop();
     }
 
     private void onSave()

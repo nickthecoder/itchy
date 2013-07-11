@@ -71,7 +71,7 @@ public class AlienFactory extends Behaviour
 
     private void createAlien()
     {
-        Costume costume = DrunkInvaders.singleton.resources.getCostume(this.costumeName);
+        Costume costume = DrunkInvaders.game.resources.getCostume(this.costumeName);
         Actor alien = new Actor(costume);
         Appearance alienAppearance = alien.getAppearance();
         Appearance thisAppearance = this.actor.getAppearance();

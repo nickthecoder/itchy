@@ -16,17 +16,19 @@ public class AnimationTest extends Game
 
     public Rect size = new Rect(0, 0, this.getWidth(), this.getHeight());
 
-    public void init() throws Exception
+    public AnimationTest() throws Exception
     {
         Itchy.singleton.init(this);
+        this.resources.load("resources/drunkInvaders/test.xml");        
+    }
+    
+    public void init()
+    {
 
         this.mainLayer = new ScrollableLayer(this.size, new RGBA(0, 0, 0));
         this.mainLayer.setYAxisPointsDown(true);
         Itchy.singleton.getGameLayer().add(this.mainLayer);
-
-        this.resources.load("resources/drunkInvaders/test.xml");
         Itchy.singleton.addEventListener(this);
-
     }
 
     @Override
@@ -85,6 +87,6 @@ public class AnimationTest extends Game
         AnimationTest test = new AnimationTest();
         test.init();
 
-        Itchy.singleton.loop();
+        // Itchy.singleton.loop();
     }
 }

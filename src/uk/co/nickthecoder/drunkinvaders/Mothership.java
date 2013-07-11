@@ -41,7 +41,7 @@ public class Mothership extends Alien
         super.init();
         this.actor.addTag("deadly");
         this.actor.addTag("shootable");
-        this.collisionStrategy = DrunkInvaders.singleton.createCollisionStrategy(this.actor);
+        this.collisionStrategy = DrunkInvaders.game.createCollisionStrategy(this.actor);
     }
 
     @Override
@@ -84,7 +84,7 @@ public class Mothership extends Alien
     {
         this.event("giveBirth");
 
-        Costume costume = DrunkInvaders.singleton.resources.getCostume(this.costumeName);
+        Costume costume = DrunkInvaders.game.resources.getCostume(this.costumeName);
         Actor alien = new Actor(costume);
         alien.getAppearance().setDirection(this.actor.getAppearance().getDirection());
         Alien alienBehaviour = new Alien();

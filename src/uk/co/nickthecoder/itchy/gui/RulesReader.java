@@ -217,7 +217,6 @@ public class RulesReader
             }
         }
 
-        System.out.println("Rule : " + criteria);
         return new Rule(criteria);
     }
 

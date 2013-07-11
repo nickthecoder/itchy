@@ -39,16 +39,20 @@ public class GuiTest extends Game
 
     // public ActionListener menuAction;
 
-    public void init() throws Exception
+    public GuiTest() throws Exception
     {
         Itchy.singleton.init(this);
 
+        this.rules = new Rules();
+        this.rules.load("resources/defaultGui/style.xml");
+        
+    }
+    
+    public void init()
+    {
         this.mainLayer = new ScrollableLayer(this.size, new RGBA(255, 255, 255));
         this.mainLayer.setYAxisPointsDown(true);
         Itchy.singleton.getGameLayer().add(this.mainLayer);
-
-        this.rules = new Rules();
-        this.rules.load("resources/defaultGui/style.xml");
 
         this.guiPose = new GuiPose();
         this.guiPose.setRules(this.rules);
@@ -194,10 +198,10 @@ public class GuiTest extends Game
         win.show();
     }
 
-    public void loop()
+    public void start()
     {
         Itchy.singleton.addEventListener(this);
-        Itchy.singleton.loop();
+        // Itchy.singleton.loop();
     }
 
     public void reset()
@@ -303,7 +307,7 @@ public class GuiTest extends Game
 
         testGui.menu();
 
-        testGui.loop();
+        testGui.start();
 
     }
 }

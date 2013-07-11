@@ -31,7 +31,7 @@ public class DebugCollisionStrategy extends ActorCollisionStrategy
             System.err.println("Collision failed for " + getActor());
             System.err.println("Results1 : " + results1);
             System.err.println("Results2 : " + results2);
-            DrunkInvaders.singleton.debug();
+            DrunkInvaders.game.debug();
         }
         return results1;
     }
@@ -47,7 +47,7 @@ public class DebugCollisionStrategy extends ActorCollisionStrategy
             System.err.println("Touching failed for " + getActor());
             System.err.println("Results1 : " + results1);
             System.err.println("Results2 : " + results2);
-            DrunkInvaders.singleton.debug();
+            DrunkInvaders.game.debug();
 
             System.err.println("Source actor's square : " + this.strategy1.getSquare());
             this.strategy1.getSquare().debug();
