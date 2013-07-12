@@ -1,20 +1,9 @@
-Rod to handle the change ends, and everything else other than the initiation of the connection.
-
-Editor doesn't launch from inside the games.
-
 Jame is out of date, need to rebuild for win32 and i386
     Compile and test using windows.
     Add the dependant dlls to jame's git tree?
         No. If NuGet can automate the download of dependencies, then an ant task can bundle them.
     Add the compiled dll and .so files to jame's git tree??
         No. Ant task which uploads the compiled object to a ftp server?
-
-Place native files (dll and so) into lib/native rather than native
-    For jame and itchy and iThrust
-
-SceneActor,TextSceneActor, CostumeSceneActor to go into the editor package.
-
-Make WorldRectangle final??? Should it be in the main Itchy package?
 
 PoseDecorator interface looks naff.
 

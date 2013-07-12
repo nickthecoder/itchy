@@ -2,38 +2,40 @@ package uk.co.nickthecoder.drunkinvaders;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Costume;
-import uk.co.nickthecoder.itchy.util.DoubleProperty;
-import uk.co.nickthecoder.itchy.util.IntegerProperty;
-import uk.co.nickthecoder.itchy.util.StringProperty;
+import uk.co.nickthecoder.itchy.util.Property;
 import uk.co.nickthecoder.itchy.util.Util;
 
 public class Mothership extends Alien
 {
-    // private static RGBA SPEECH_COLOR = new RGBA( 0, 0, 0 );
-
     public static final String[] SHOOTABLE_LIST = new String[] { "shootable" };
 
+    /**
+     * The number of aliens to create
+     */
+    @Property(label="Children")
+    public int childrenCount;
+
+    @Property(label="Children's Costume")
     public String costumeName;
 
     /**
      * The time in seconds between children being born.
      */
+    @Property(label="Birth Interval (s)")
     public double birthInterval = 1.0;
 
     /**
      * The children's average duration is seconds between bombs
      */
+    @Property(label="Child Fire Once Every (s)")
     public double childFireOnceEvery = 1;
 
     /**
      * How long in seconds for the first child to be born after the mothership is activated.
      */
+    @Property(label="First Born Delay (s)")
     public double firstBornDelay = 0;
 
-    /**
-     * The number of aliens to create
-     */
-    public int childrenCount;
 
     @Override
     public void init()
@@ -44,16 +46,6 @@ public class Mothership extends Alien
         this.collisionStrategy = DrunkInvaders.game.createCollisionStrategy(this.actor);
     }
 
-    @Override
-    protected void addProperties()
-    {
-        super.addProperties();
-        addProperty(new DoubleProperty("First Born Delay", "firstBornDelay"));
-        addProperty(new DoubleProperty("Birth Interval", "birthInterval"));
-        addProperty(new IntegerProperty("Children", "childrenCount"));
-        addProperty(new StringProperty("Children's Costume", "costumeName"));
-        addProperty(new DoubleProperty("Child Fire Once Every", "childFireOnceEvery"));
-    }
 
     @Override
     public void onActivate()

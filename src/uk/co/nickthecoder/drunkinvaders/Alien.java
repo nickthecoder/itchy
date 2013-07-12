@@ -8,7 +8,7 @@ import uk.co.nickthecoder.itchy.animation.ScaleAnimation;
 import uk.co.nickthecoder.itchy.extras.Explosion;
 import uk.co.nickthecoder.itchy.extras.Fragment;
 import uk.co.nickthecoder.itchy.util.BorderPoseDecorator;
-import uk.co.nickthecoder.itchy.util.IntegerProperty;
+import uk.co.nickthecoder.itchy.util.Property;
 import uk.co.nickthecoder.itchy.util.PoseDecorator;
 import uk.co.nickthecoder.itchy.util.Util;
 import uk.co.nickthecoder.jame.RGBA;
@@ -19,14 +19,19 @@ public class Alien extends Bouncy implements Shootable
 
     public static final String[] SHOOTABLE_LIST = new String[] { "shootable" };
 
-    private PoseDecorator bubbleCreator;
-
+    
+    
+    @Property(label="Fire Every (s)")
     public double fireOnceEvery = 1.0; // Average duration between bombs in seconds
+
+    @Property(label="Shots Required")
+    public int shotsRequired = 1;
+
+    private PoseDecorator bubbleCreator;
 
     public boolean tock = true;
 
-    public int shotsRequired = 1;
-
+    
     @Override
     public void init()
     {
@@ -40,13 +45,6 @@ public class Alien extends Bouncy implements Shootable
 
         // Create the fragments for the explosions when I get shot.
         new Fragment().actor(this.actor).create("fragment");
-    }
-
-    @Override
-    protected void addProperties()
-    {
-        super.addProperties();
-        addProperty(new IntegerProperty("Shots Required", "shotsRequired"));
     }
 
     @Override

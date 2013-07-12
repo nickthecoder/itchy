@@ -4,35 +4,30 @@ import uk.co.nickthecoder.itchy.Behaviour;
 import uk.co.nickthecoder.itchy.Font;
 import uk.co.nickthecoder.itchy.MouseListener;
 import uk.co.nickthecoder.itchy.TextPose;
-import uk.co.nickthecoder.itchy.util.FontProperty;
-import uk.co.nickthecoder.itchy.util.IntegerProperty;
-import uk.co.nickthecoder.itchy.util.RGBAProperty;
+import uk.co.nickthecoder.itchy.util.Property;
+
 import uk.co.nickthecoder.jame.RGBA;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 
 public class PickLevel extends Behaviour implements MouseListener
 {
+    @Property(label="Level Number")
     public int levelNumber;
 
+    @Property(label="Font")
     public Font font;
 
+    @Property(label="Font Size")
     public int fontSize = 22;
 
+    @Property(label="Colour")
     public RGBA fontColor = new RGBA(255, 255, 255);
 
+    @Property(label="Shadow Colour")
     public RGBA shadowColor = new RGBA(0, 0, 0);
 
-    @Override
-    protected void addProperties()
-    {
-        super.addProperties();
-        addProperty(new IntegerProperty("Level", "levelNumber"));
-        addProperty(new FontProperty("Font", "font"));
-        addProperty(new IntegerProperty("Font Size", "fontSize"));
-        addProperty(new RGBAProperty("Font Color", "fontColor", false, false));
-    }
-
+    
     @Override
     public void init()
     {

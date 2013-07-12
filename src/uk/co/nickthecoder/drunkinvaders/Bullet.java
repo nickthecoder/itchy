@@ -1,19 +1,19 @@
 package uk.co.nickthecoder.drunkinvaders;
 
 import uk.co.nickthecoder.itchy.Actor;
-import uk.co.nickthecoder.itchy.ActorCollisionStrategy;
 import uk.co.nickthecoder.itchy.Behaviour;
-import uk.co.nickthecoder.itchy.util.DoubleProperty;
-import uk.co.nickthecoder.itchy.util.StringProperty;
+import uk.co.nickthecoder.itchy.util.Property;
 
 public class Bullet extends Behaviour implements Shootable
 {
+    @Property(label="Speed")
     public double speed = 5.0;
 
+    @Property(label="Target Tag")
     public String targetTagName;
 
-    private ActorCollisionStrategy collisionStrategy;
-
+    
+    
     public Bullet()
     {
         this("shootable");
@@ -38,13 +38,6 @@ public class Bullet extends Behaviour implements Shootable
         this.collisionStrategy = null;
     }
 
-    @Override
-    protected void addProperties()
-    {
-        super.addProperties();
-        addProperty(new StringProperty("Target Tag", "targetTagName"));
-        addProperty(new DoubleProperty("Speed", "speed"));
-    }
 
     @Override
     public void shot( Actor by )

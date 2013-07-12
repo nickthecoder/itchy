@@ -1,17 +1,25 @@
 package uk.co.nickthecoder.itchy;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
-import uk.co.nickthecoder.itchy.util.GProperty;
+import uk.co.nickthecoder.itchy.util.DoubleProperty;
+import uk.co.nickthecoder.itchy.util.FontProperty;
+import uk.co.nickthecoder.itchy.util.IntegerProperty;
+import uk.co.nickthecoder.itchy.util.AbstractProperty;
+import uk.co.nickthecoder.itchy.util.RGBAProperty;
+import uk.co.nickthecoder.itchy.util.StringPropert;
+import uk.co.nickthecoder.itchy.util.Property;
+import uk.co.nickthecoder.jame.RGBA;
 
 public abstract class Behaviour
 {
     public ActorCollisionStrategy collisionStrategy;
 
-    private final HashMap<Class<?>, List<GProperty<Behaviour, ?>>> allProperties = new HashMap<Class<?>, List<GProperty<Behaviour, ?>>>();
+    private final static HashMap<Class<?>, List<AbstractProperty<Behaviour, ?>>> allProperties = new HashMap<Class<?>, List<AbstractProperty<Behaviour, ?>>>();
 
     public static boolean isValidClassName( String behaviourClassName )
     {
@@ -41,29 +49,86 @@ public abstract class Behaviour
         Actor actor = new Actor(costume);
         layer.add(actor);
         actor.setBehaviour(this);
-        
+
         return actor;
     }
 
-    public List<GProperty<Behaviour, ?>> getProperties()
+    public List<AbstractProperty<Behaviour, ?>> getProperties()
     {
-        List<GProperty<Behaviour, ?>> result = this.allProperties.get(this.getClass());
+        List<AbstractProperty<Behaviour, ?>> result = allProperties.get(this.getClass());
         if (result == null) {
-            result = new ArrayList<GProperty<Behaviour, ?>>();
-            this.allProperties.put(this.getClass(), result);
+            result = new ArrayList<AbstractProperty<Behaviour, ?>>();
+            allProperties.put(this.getClass(), result);
             this.addProperties();
         }
         return result;
     }
 
-    protected void addProperties() // List<Property<?>> list )
+    /**
+     * For Itchy Gurus Only.
+     * 
+     * Allows a behaviour to manually add a property, which will appear in the GUI scene editor.
+     * Most behaviour's won't need this, instead they will use a '@Property(label="Whatever")'
+     * annotation above the field.
+     *
+     * The only good reason to use addProperty, is if you want to add a property to a Behaviour,
+     * which cannot be implemented as a simple field.
+     * 
+     * Must only be called from within addProperties to ensure that the property won't be added twice.
+     */
+    protected void addProperty( AbstractProperty<Behaviour, ?> property )
     {
+        allProperties.get(this.getClass()).add(property);
+    }
+    
+    /**
+     * For Itchy Gurus Only.
+     * 
+     * Override this method, and then call addProperty for each property you wish to add.
+     */
+    protected void addProperties()
+    {
+        Class<? extends Behaviour> klass = this.getClass();
+
+        for (Field field : klass.getFields()) {
+            Property property = field.getAnnotation(Property.class);
+            if (property != null) {
+                AbstractProperty<Behaviour, ?> gProperty = createProperty(field, property);
+                if (gProperty != null) {
+                    addProperty(gProperty);
+                }
+            }
+        }
     }
 
-    protected void addProperty( GProperty<Behaviour, ?> property )
+    private AbstractProperty<Behaviour, ?> createProperty( Field field, Property property )
     {
-        List<GProperty<Behaviour, ?>> result = this.allProperties.get(this.getClass());
-        result.add(property);
+        String name = field.getName();
+        String label = property.label();
+
+        Class<?> klass = field.getType();
+
+        if (klass == int.class) {
+            return new IntegerProperty<Behaviour>(label, name);
+        }
+        if (klass == double.class) {
+            return new DoubleProperty<Behaviour>(label, name);
+        }
+        if (klass == String.class) {
+            return new StringPropert<Behaviour>(label, name);
+        }
+        if (klass == RGBA.class) {
+            return new RGBAProperty<Behaviour>(label, name, false, true);
+        }
+        if (klass == Font.class) {
+            return new FontProperty<Behaviour>(label, name);
+        }
+        
+        System.err.println("Unexpected property : " +
+            field.getDeclaringClass() + "." +
+            field.getName());
+
+        return null;
     }
 
     public void attach( Actor actor )

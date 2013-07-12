@@ -21,10 +21,11 @@ public class PoseResource extends NamedResource
         this.pose = new ImagePose(this.resources.resolveFilename(filename));
     }
 
-    public PoseResource( String name, ImagePose pose )
+    public PoseResource( ImagePose pose )
     {
-        super(name);
+        super("anon");
         this.pose = pose;
+        this.filename = null;
     }
 
     public void setFilename( String filename ) throws JameException

@@ -37,8 +37,8 @@ import uk.co.nickthecoder.itchy.gui.Notebook;
 import uk.co.nickthecoder.itchy.gui.TextBox;
 import uk.co.nickthecoder.itchy.gui.ToggleButton;
 import uk.co.nickthecoder.itchy.gui.VerticalScroll;
-import uk.co.nickthecoder.itchy.util.GProperty;
-import uk.co.nickthecoder.itchy.util.GStringProperty;
+import uk.co.nickthecoder.itchy.util.AbstractProperty;
+import uk.co.nickthecoder.itchy.util.StringPropert;
 import uk.co.nickthecoder.itchy.util.NinePatch;
 import uk.co.nickthecoder.itchy.util.Reversed;
 import uk.co.nickthecoder.jame.Keys;
@@ -356,7 +356,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.propertiesContainer.setLayout(grid);
         grid.clear();
 
-        for (GProperty<Actor, ?> property : this.currentActor.getProperties()) {
+        for (AbstractProperty<Actor, ?> property : this.currentActor.getProperties()) {
             try {
                 Component component = property.createComponent(this.currentActor, true);
                 grid.addRow(property.label, component);
@@ -374,7 +374,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.behaviourContainer.setLayout(grid);
         grid.clear();
 
-        GStringProperty<Actor> beProp = new GStringProperty<Actor>("Behaviour",
+        StringPropert<Actor> beProp = new StringPropert<Actor>("Behaviour",
                 "behaviour.behaviourClassName");
         ComponentChangeListener ccl = new ComponentChangeListener() {
             @Override
@@ -394,7 +394,7 @@ public class SceneDesigner implements MouseListener, KeyListener
 
         SceneDesignerBehaviour behaviour = (SceneDesignerBehaviour) this.currentActor
                 .getBehaviour();
-        for (GProperty<Behaviour, ?> property : behaviour.actualBehaviour.getProperties()) {
+        for (AbstractProperty<Behaviour, ?> property : behaviour.actualBehaviour.getProperties()) {
             try {
                 Component component = property.createComponent(behaviour.actualBehaviour, true);
                 grid.addRow(property.label, component);

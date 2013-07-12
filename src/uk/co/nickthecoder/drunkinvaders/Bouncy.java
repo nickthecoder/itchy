@@ -2,30 +2,25 @@ package uk.co.nickthecoder.drunkinvaders;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Behaviour;
-import uk.co.nickthecoder.itchy.util.DoubleProperty;
+import uk.co.nickthecoder.itchy.util.Property;
 
 public class Bouncy extends Behaviour
 {
     public static final String[] BOUNCY_LIST = new String[] { "bouncy" };
 
+    
+    @Property(label="Speed X")
     public double vx = 0;
 
+    @Property(label="Speed Y")
     public double vy = 0;
-
-    public double radius = 20;
     
+    @Property(label="Mass")
     public double mass = 1;
 
-    @Override
-    protected void addProperties()
-    {
-        super.addProperties();
-        addProperty(new DoubleProperty("Speed X", "vx"));
-        addProperty(new DoubleProperty("Speed Y", "vy"));
-        addProperty(new DoubleProperty("Mass", "mass"));
-        
-    }
+    public double radius = 20;
 
+    
     @Override
     public void init()
     {

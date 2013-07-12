@@ -3,23 +3,18 @@ package uk.co.nickthecoder.drunkinvaders;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Behaviour;
 import uk.co.nickthecoder.itchy.Costume;
-import uk.co.nickthecoder.itchy.util.IntegerProperty;
+import uk.co.nickthecoder.itchy.util.Property;
 
 public class ShieldFactory extends Behaviour
 {
+    @Property(label="Width")
     public int width = 6;
 
+    @Property(label="Height")
     public int height = 4;
 
+    @Property(label="Spacing")
     public double spacing = 10;
-
-    @Override
-    protected void addProperties()
-    {
-        super.addProperties();
-        addProperty(new IntegerProperty("Width", "width"));
-        addProperty(new IntegerProperty("Height", "height"));
-    }
 
     @Override
     public void tick()

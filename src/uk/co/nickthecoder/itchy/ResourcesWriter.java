@@ -316,12 +316,19 @@ public class ResourcesWriter extends XMLWriter
         for (String name : costume.getPoseNames()) {
 
             for (PoseResource poseResource : costume.getPoseChoices(name)) {
-                this.beginTag("pose");
-                this.attribute("name", name);
-
-                this.attribute("pose", poseResource.name);
-
-                this.endTag("pose");
+                
+                // Ignore poses which were GENERATED rather than loaded.
+                // For example Fragment, generates poses, which are added to a costume, but should be
+                // ignore when saving the resources.
+                if ( poseResource.filename!=null) {
+                    
+                    this.beginTag("pose");
+                    this.attribute("name", name);
+    
+                    this.attribute("pose", poseResource.name);
+    
+                    this.endTag("pose");
+                }
             }
         }
     }

@@ -5,13 +5,13 @@ import java.lang.reflect.InvocationTargetException;
 import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 
-public abstract class GProperty<S, T>
+public abstract class AbstractProperty<S, T>
 {
     public String label;
 
     public String access;
 
-    public GProperty( String label, String access )
+    public AbstractProperty( String label, String access )
     {
         this.label = label;
         this.access = access;

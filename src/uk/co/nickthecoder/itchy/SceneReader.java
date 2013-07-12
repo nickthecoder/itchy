@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 import uk.co.nickthecoder.itchy.editor.SceneDesignerBehaviour;
-import uk.co.nickthecoder.itchy.util.GProperty;
+import uk.co.nickthecoder.itchy.util.AbstractProperty;
 import uk.co.nickthecoder.itchy.util.XMLException;
 import uk.co.nickthecoder.itchy.util.XMLTag;
 import uk.co.nickthecoder.jame.RGBA;
@@ -128,7 +128,7 @@ public class SceneReader
         Actor actor = sceneActor.createActor(true);
         SceneDesignerBehaviour sda = (SceneDesignerBehaviour) actor.getBehaviour();
 
-        for (GProperty<Behaviour, ?> property : sda.actualBehaviour.getProperties()) {
+        for (AbstractProperty<Behaviour, ?> property : sda.actualBehaviour.getProperties()) {
             if (properties.containsKey(property.access)) {
                 try {
                     sceneActor.customProperties.put(property.access,

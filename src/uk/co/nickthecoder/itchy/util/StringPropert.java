@@ -6,9 +6,9 @@ import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.TextBox;
 
-public class GStringProperty<S> extends GProperty<S, String>
+public class StringPropert<S> extends AbstractProperty<S, String>
 {
-    public GStringProperty( String label, String access )
+    public StringPropert( String label, String access )
     {
         super(label, access);
     }
@@ -25,7 +25,7 @@ public class GStringProperty<S> extends GProperty<S, String>
                 public void changed()
                 {
                     try {
-                        GStringProperty.this.update(subject, box);
+                        StringPropert.this.update(subject, box);
                         if (listener != null) {
                             listener.changed();
                         }

@@ -115,7 +115,7 @@ public class Fragment
                 pose.getOffsetY());
             
             newPose.setDirection(pose.getDirection());
-            costume.addPose(destPose, new PoseResource(destPose, newPose));
+            costume.addPose(destPose, new PoseResource(newPose));
         }
     }
 

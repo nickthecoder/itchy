@@ -4,8 +4,8 @@
   <text text="Written by Nick Robinson" font="vera" size="22" color="#ffffff" x="323" y="332" direction="0.0" start=""/>
   <text text="Version 0.1" font="vera" size="22" color="#ffffff" x="323" y="402" direction="0.0" start=""/>
   <text text="Inspired and helped by Simon Lucas" font="vera" size="22" color="#ffffff" x="324" y="296" direction="0.0" start=""/>
-  <text text="BACK" font="blackCasper" size="42" color="#000000" behaviour="uk.co.nickthecoder.drunkinvaders.DrunkButton" x="319" y="29" direction="0.0" start="">
-    <property name="action" value="menu"/>
+  <text text="BACK" font="blackCasper" size="42" color="#000000" behaviour="uk.co.nickthecoder.itchy.extras.Button" x="319" y="29" direction="0.0" start="">
+    <property name="message" value="menu"/>
   </text>
   <text text="©2012" font="vera" size="14" color="#ffffff" x="500" y="445" direction="0.0" start=""/>
 </scene>

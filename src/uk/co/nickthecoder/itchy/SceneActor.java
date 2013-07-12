@@ -3,7 +3,7 @@ package uk.co.nickthecoder.itchy;
 import java.util.HashMap;
 
 import uk.co.nickthecoder.itchy.editor.SceneDesignerBehaviour;
-import uk.co.nickthecoder.itchy.util.GProperty;
+import uk.co.nickthecoder.itchy.util.AbstractProperty;
 import uk.co.nickthecoder.jame.RGBA;
 
 public abstract class SceneActor implements Cloneable
@@ -56,7 +56,7 @@ public abstract class SceneActor implements Cloneable
         
         Behaviour actualBehaviour = ((SceneDesignerBehaviour) actor.getBehaviour()).actualBehaviour;
 
-        for (GProperty<Behaviour, ?> property : actualBehaviour.getProperties()) {
+        for (AbstractProperty<Behaviour, ?> property : actualBehaviour.getProperties()) {
             try {
                 Object value = property.getValue(actualBehaviour);
                 this.customProperties.put(property.access, value);
@@ -110,7 +110,7 @@ public abstract class SceneActor implements Cloneable
             }
         }
 
-        for (GProperty<Behaviour, ?> property : actualBehaviour.getProperties()) {
+        for (AbstractProperty<Behaviour, ?> property : actualBehaviour.getProperties()) {
             Object value = this.customProperties.get(property.access);
             if (value != null) {
                 try {

@@ -5,11 +5,11 @@ import java.util.List;
 import java.util.Set;
 
 import uk.co.nickthecoder.itchy.animation.Animation;
-import uk.co.nickthecoder.itchy.util.GDoubleProperty;
-import uk.co.nickthecoder.itchy.util.GFontProperty;
-import uk.co.nickthecoder.itchy.util.GProperty;
-import uk.co.nickthecoder.itchy.util.GRGBAProperty;
-import uk.co.nickthecoder.itchy.util.GStringProperty;
+import uk.co.nickthecoder.itchy.util.DoubleProperty;
+import uk.co.nickthecoder.itchy.util.FontProperty;
+import uk.co.nickthecoder.itchy.util.AbstractProperty;
+import uk.co.nickthecoder.itchy.util.RGBAProperty;
+import uk.co.nickthecoder.itchy.util.StringPropert;
 import uk.co.nickthecoder.itchy.util.TagCollection;
 import uk.co.nickthecoder.itchy.util.TagMembership;
 import uk.co.nickthecoder.jame.RGBA;
@@ -23,8 +23,8 @@ public class Actor extends Task implements MessageListener
 
     private int _id;
 
-    private static List<GProperty<Actor, ?>> normalProperties;
-    private static List<GProperty<Actor, ?>> textProperties;
+    private static List<AbstractProperty<Actor, ?>> normalProperties;
+    private static List<AbstractProperty<Actor, ?>> textProperties;
 
     Behaviour behaviour;
 
@@ -80,26 +80,26 @@ public class Actor extends Task implements MessageListener
         this.getAppearance().setDirection(pose.getDirection());
     }
 
-    public List<GProperty<Actor, ?>> getProperties()
+    public List<AbstractProperty<Actor, ?>> getProperties()
     {
         if (normalProperties == null) {
-            normalProperties = new ArrayList<GProperty<Actor, ?>>();
+            normalProperties = new ArrayList<AbstractProperty<Actor, ?>>();
 
-            normalProperties.add(new GDoubleProperty<Actor>("X", "x"));
-            normalProperties.add(new GDoubleProperty<Actor>("Y", "y"));
-            normalProperties.add(new GDoubleProperty<Actor>("Alpha", "appearance.alpha"));
-            normalProperties.add(new GDoubleProperty<Actor>("Direction", "appearance.direction"));
-            normalProperties.add(new GDoubleProperty<Actor>("Scale", "appearance.scale"));
-            normalProperties.add(new GRGBAProperty<Actor>("Colorize", "appearance.colorize", true,
+            normalProperties.add(new DoubleProperty<Actor>("X", "x"));
+            normalProperties.add(new DoubleProperty<Actor>("Y", "y"));
+            normalProperties.add(new DoubleProperty<Actor>("Alpha", "appearance.alpha"));
+            normalProperties.add(new DoubleProperty<Actor>("Direction", "appearance.direction"));
+            normalProperties.add(new DoubleProperty<Actor>("Scale", "appearance.scale"));
+            normalProperties.add(new RGBAProperty<Actor>("Colorize", "appearance.colorize", true,
                     true));
-            normalProperties.add(new GDoubleProperty<Actor>("Activation Delay", "activationDelay"));
+            normalProperties.add(new DoubleProperty<Actor>("Activation Delay", "activationDelay"));
 
-            textProperties = new ArrayList<GProperty<Actor, ?>>();
+            textProperties = new ArrayList<AbstractProperty<Actor, ?>>();
             textProperties.addAll(normalProperties);
-            textProperties.add(new GFontProperty<Actor>("Font", "appearance.pose.font"));
-            textProperties.add(new GDoubleProperty<Actor>("Font Size", "appearance.pose.fontSize"));
-            textProperties.add(new GStringProperty<Actor>("Text", "appearance.pose.text"));
-            textProperties.add(new GRGBAProperty<Actor>("Text Color", "appearance.pose.color",
+            textProperties.add(new FontProperty<Actor>("Font", "appearance.pose.font"));
+            textProperties.add(new DoubleProperty<Actor>("Font Size", "appearance.pose.fontSize"));
+            textProperties.add(new StringPropert<Actor>("Text", "appearance.pose.text"));
+            textProperties.add(new RGBAProperty<Actor>("Text Color", "appearance.pose.color",
                     false, false));
 
         }

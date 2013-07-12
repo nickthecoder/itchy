@@ -213,7 +213,22 @@ public class DrunkInvaders extends Game
     @Override
     public void onMessage( String message )
     {
-        if ("fadedIn".equals(message)) {
+        if ("play".equals(message)) {
+            startScene("levels");
+
+        } else if ("menu".equals(message)) {
+            startScene("menu");
+
+        } else if ("about".equals(message)) {
+            startScene("about");
+
+        } else if ("editor".equals(message)) {
+            startEditor();
+
+        } else if ("quit".equals(message)) {
+            stop();
+            
+        } else if ("fadedIn".equals(message)) {
             DrunkInvaders.this.fadingOut = false;
 
         } else if ("fadedOut".equals(message)) {
@@ -273,24 +288,6 @@ public class DrunkInvaders extends Game
         this.startScene("level" + df.format(this.levelNumber));
     }
 
-    public void action( String action )
-    {
-        if ("play".equals(action)) {
-            this.startScene("levels");
-
-        } else if ("menu".equals(action)) {
-            this.startScene("menu");
-
-        } else if ("about".equals(action)) {
-            this.startScene("about");
-
-        } else if ("editor".equals(action)) {
-            this.startEditor();
-
-        } else if ("quit".equals(action)) {
-            Itchy.singleton.terminate();
-        }
-    }
 
     @Override
     public int getWidth()

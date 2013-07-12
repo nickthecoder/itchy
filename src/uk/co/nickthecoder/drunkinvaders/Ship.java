@@ -7,8 +7,8 @@ import uk.co.nickthecoder.itchy.TextPose;
 import uk.co.nickthecoder.itchy.extras.Explosion;
 import uk.co.nickthecoder.itchy.extras.Fragment;
 import uk.co.nickthecoder.itchy.util.BorderPoseDecorator;
-import uk.co.nickthecoder.itchy.util.DoubleProperty;
 import uk.co.nickthecoder.itchy.util.PoseDecorator;
+import uk.co.nickthecoder.itchy.util.Property;
 import uk.co.nickthecoder.jame.Keys;
 import uk.co.nickthecoder.jame.RGBA;
 
@@ -18,6 +18,14 @@ public class Ship extends Bouncy implements Shootable
 
     public static final String[] DEADLY_LIST = new String[] { "deadly" };
 
+
+    @Property(label="Shield's Recharge Rate")
+    public double shieldRechargeRate = 0.001;
+
+    @Property(label="Shield's Discharge Rate")
+    public double shieldDischargeRate = 0.01;
+
+    
     private PoseDecorator bubbleCreator;
 
     private int recharge = 0;
@@ -48,10 +56,7 @@ public class Ship extends Bouncy implements Shootable
      */
     private double shieldStrength = 1.0;
 
-    private double shieldRechargeRate = 0.001;
-
-    private double shieldDischargeRate = 0.01;
-
+    
     @Override
     public void init()
     {
@@ -75,14 +80,6 @@ public class Ship extends Bouncy implements Shootable
 
         // Create the fragments for the explosions when I get shot.
         new Fragment().actor(this.actor).create("fragment");
-    }
-
-    @Override
-    protected void addProperties()
-    {
-        super.addProperties();
-        addProperty(new DoubleProperty("Shield Discharge Rate", "sheildDischargeRate"));
-        addProperty(new DoubleProperty("Shield Recharge Rate", "sheildRechargeRate"));
     }
 
     @Override

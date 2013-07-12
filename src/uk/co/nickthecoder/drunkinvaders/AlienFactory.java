@@ -2,45 +2,35 @@ package uk.co.nickthecoder.drunkinvaders;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Appearance;
 import uk.co.nickthecoder.itchy.Behaviour;
 import uk.co.nickthecoder.itchy.Costume;
-import uk.co.nickthecoder.itchy.util.DoubleProperty;
-import uk.co.nickthecoder.itchy.util.IntegerProperty;
-import uk.co.nickthecoder.itchy.util.StringProperty;
+import uk.co.nickthecoder.itchy.util.Property;
+import uk.co.nickthecoder.itchy.util.Util;
 
 public class AlienFactory extends Behaviour
 {
 
+    @Property(label="Costume")
     public String costumeName;
 
+    @Property(label="Delay per Alien")
     public double delayPerAlien = 0.500;
 
+    @Property(label="Aliens")
     public int alienCount = 6;
 
+    @Property(label="Spacing")
     public double spacing = 80;
 
+    @Property(label="Fire Once Every (s)")
     public double fireOnceEvery = 1; // The aliens' average number of seconds between bombs
 
     private List<Actor> aliens;
 
-    private static Random random = new Random();
-
-    @Override
-    protected void addProperties()
-    {
-        super.addProperties();
-
-        addProperty(new StringProperty("Costume", "costumeName"));
-        addProperty(new DoubleProperty("Delay per Alien", "delayPerAlien"));
-        addProperty(new IntegerProperty("Aliens", "alienCount"));
-        addProperty(new DoubleProperty("Spacing", "spacing"));
-        addProperty(new DoubleProperty("Fire Once Every (s)", "fireOnceEvery"));
-    }
-
+    
     @Override
     public void init()
     {
@@ -62,8 +52,8 @@ public class AlienFactory extends Behaviour
 
         for (Actor actor : this.aliens) {
             Alien ab = (Alien) actor.getBehaviour();
-            ab.vx = random.nextDouble() * 2.0 + 0.2;
-            ab.vy = random.nextDouble() * 0.6;
+            ab.vx = Util.randomBetween(2, 2.2);
+            ab.vy = Util.randomBetween(0,0.6);
         }
 
         this.actor.kill();
