@@ -15,5 +15,8 @@ import java.lang.annotation.RetentionPolicy;
 public @interface Property {
 
     String label();
-    
+
+    boolean allowNull() default false;    
+
+    boolean alpha() default true; // Only used for RGBA properties
 }

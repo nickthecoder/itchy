@@ -2,12 +2,9 @@ package uk.co.nickthecoder.drunkinvaders;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Itchy;
-import uk.co.nickthecoder.itchy.Pose;
-import uk.co.nickthecoder.itchy.TextPose;
 import uk.co.nickthecoder.itchy.extras.Explosion;
 import uk.co.nickthecoder.itchy.extras.Fragment;
-import uk.co.nickthecoder.itchy.util.BorderPoseDecorator;
-import uk.co.nickthecoder.itchy.util.PoseDecorator;
+import uk.co.nickthecoder.itchy.extras.Talk;
 import uk.co.nickthecoder.itchy.util.Property;
 import uk.co.nickthecoder.jame.Keys;
 import uk.co.nickthecoder.jame.RGBA;
@@ -26,8 +23,6 @@ public class Ship extends Bouncy implements Shootable
     public double shieldDischargeRate = 0.01;
 
     
-    private PoseDecorator bubbleCreator;
-
     private int recharge = 0;
     
     private static final int RECHARGE_DURATION = 40;
@@ -62,9 +57,6 @@ public class Ship extends Bouncy implements Shootable
     {
         super.init();
         
-        bubbleCreator = new BorderPoseDecorator(
-            DrunkInvaders.game.resources.getNinePatch("speech2"), 10, 10, 20, 10);
-
         this.actor.removeTag("bouncy");
 
         this.mass = 100000000000.0;
@@ -239,15 +231,15 @@ public class Ship extends Bouncy implements Shootable
             return;
         }
 
-        TextPose textPose = new TextPose(this.actor.getCostume().getString("death"),
-            DrunkInvaders.game.resources.getFont("vera"), 18, SPEECH_COLOR);
-        Pose bubble = bubbleCreator.createPose(textPose);
-
-        Actor yell = new Actor(bubble);
-        yell.moveTo(this.actor);
-        yell.moveBy(0, 40);
+        Actor yell = new Talk(this)
+            .message("death")
+            .font("vera", 18)
+            .color(SPEECH_COLOR)
+            .bubble("speechBubble2")
+            .offset(0, 40)
+            .margin(10, 10, 20, 10)
+            .createActor();
         yell.activate();
-        this.actor.getLayer().add(yell);
         yell.deathEvent(this.actor.getCostume(), "yell");
 
         new Explosion(this.actor)

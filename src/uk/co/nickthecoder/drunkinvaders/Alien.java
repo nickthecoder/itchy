@@ -1,15 +1,12 @@
 package uk.co.nickthecoder.drunkinvaders;
 
 import uk.co.nickthecoder.itchy.Actor;
-import uk.co.nickthecoder.itchy.Pose;
-import uk.co.nickthecoder.itchy.TextPose;
 import uk.co.nickthecoder.itchy.animation.NumericAnimation;
 import uk.co.nickthecoder.itchy.animation.ScaleAnimation;
 import uk.co.nickthecoder.itchy.extras.Explosion;
 import uk.co.nickthecoder.itchy.extras.Fragment;
-import uk.co.nickthecoder.itchy.util.BorderPoseDecorator;
+import uk.co.nickthecoder.itchy.extras.Talk;
 import uk.co.nickthecoder.itchy.util.Property;
-import uk.co.nickthecoder.itchy.util.PoseDecorator;
 import uk.co.nickthecoder.itchy.util.Util;
 import uk.co.nickthecoder.jame.RGBA;
 
@@ -19,26 +16,18 @@ public class Alien extends Bouncy implements Shootable
 
     public static final String[] SHOOTABLE_LIST = new String[] { "shootable" };
 
-    
-    
-    @Property(label="Fire Every (s)")
+    @Property(label = "Fire Every (s)")
     public double fireOnceEvery = 1.0; // Average duration between bombs in seconds
 
-    @Property(label="Shots Required")
+    @Property(label = "Shots Required")
     public int shotsRequired = 1;
-
-    private PoseDecorator bubbleCreator;
 
     public boolean tock = true;
 
-    
     @Override
     public void init()
     {
         super.init();
-
-        bubbleCreator = new BorderPoseDecorator(
-            DrunkInvaders.game.resources.getNinePatch("speech"), 10, 10, 20, 10);
 
         this.actor.addTag("deadly");
         this.actor.addTag("shootable");
@@ -119,7 +108,7 @@ public class Alien extends Bouncy implements Shootable
             .projectiles(20)
             .forwards()
             .fade(1.2)
-            .speed(0.1,1)
+            .speed(0.1, 1)
             .createActor("fragment").activate();
 
         new Explosion(this.actor)
@@ -129,7 +118,7 @@ public class Alien extends Bouncy implements Shootable
             .fade(0.5)
             .createActor("pixel")
             .activate();
-        
+
         double scale = this.getActor().getAppearance().getScale();
         if (scale > 1) {
             ScaleAnimation scaleAnimation = new ScaleAnimation(10, NumericAnimation.linear, scale,
@@ -143,16 +132,17 @@ public class Alien extends Bouncy implements Shootable
             return;
         }
 
-        TextPose textPose = new TextPose(this.actor.getCostume().getString("death"),
-            DrunkInvaders.game.resources.getFont("vera"), 18, SPEECH_COLOR);
-        Pose bubble = bubbleCreator.createPose(textPose);
 
-        Actor yell = new Actor(bubble);
-        yell.moveTo(this.actor);
-        yell.moveBy(0, 40);
+        Actor yell = new Talk(this)
+            .message("death")
+            .font("vera", 18)
+            .color(SPEECH_COLOR)
+            .bubble("speechBubble")
+            .offset(0, 40)
+            .margin(10, 10, 20, 10)
+            .createActor();
         yell.activate();
         yell.deathEvent(this.actor.getCostume(), "yell");
-        this.actor.getLayer().add(yell);
 
         this.actor.removeAllTags();
         this.deathEvent("death");

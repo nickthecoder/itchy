@@ -15,6 +15,18 @@ public class BorderPoseDecorator implements PoseDecorator
     private int borderBottom;
     private int borderLeft;
 
+    
+    public BorderPoseDecorator( NinePatch eightPatch )
+    {
+        this(
+            eightPatch,
+            eightPatch.marginTop, 
+            eightPatch.marginRight, 
+            eightPatch.marginBottom, 
+            eightPatch.marginLeft
+        ); 
+    }
+    
     public BorderPoseDecorator( NinePatch eightPatch, int border )
     {
         this(eightPatch, border, border);

@@ -118,7 +118,7 @@ public abstract class Behaviour
             return new StringPropert<Behaviour>(label, name);
         }
         if (klass == RGBA.class) {
-            return new RGBAProperty<Behaviour>(label, name, false, true);
+            return new RGBAProperty<Behaviour>(label, name, property.allowNull(), property.alpha());
         }
         if (klass == Font.class) {
             return new FontProperty<Behaviour>(label, name);

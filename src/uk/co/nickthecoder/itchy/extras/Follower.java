@@ -3,6 +3,7 @@ package uk.co.nickthecoder.itchy.extras;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Behaviour;
 import uk.co.nickthecoder.itchy.Costume;
+import uk.co.nickthecoder.itchy.Pose;
 
 public class Follower extends Behaviour
 {
@@ -14,6 +15,11 @@ public class Follower extends Behaviour
 
     private double distance = 0;
 
+    public Follower( Behaviour following )
+    {
+        this(following.getActor());
+    }
+    
     public Follower( Actor following )
     {
         this.following = following;
@@ -35,11 +41,16 @@ public class Follower extends Behaviour
     @Override
     public void tick()
     {
-        this.actor.moveTo(this.following);
-        this.actor.moveForward(this.distance);
-        this.actor.moveBy(this.dx, this.dy);
+        updatePosition();
     }
 
+    private void updatePosition()
+    {
+        this.actor.moveTo(this.following);
+        this.actor.moveForward(this.distance);
+        this.actor.moveBy(this.dx, this.dy);   
+    }
+    
     public Actor createActor()
     {
         return createActor(this.following.getCostume());
@@ -48,10 +59,23 @@ public class Follower extends Behaviour
     public Actor createActor( Costume costume )
     {
         Actor actor = new Actor(costume);
+        updateActor(actor);
+        return actor;
+    }
+    
+    public Actor createActor( Pose pose )
+    {
+        Actor actor = new Actor(pose);
+        updateActor(actor);
+        return actor;
+    }
+
+    private void updateActor(Actor actor)
+    {
         actor.moveTo(this.following);
         this.following.getLayer().add(actor);
         actor.setBehaviour(this);
-
-        return actor;
+        updatePosition();
     }
+
 }

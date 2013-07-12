@@ -212,6 +212,18 @@ public class Resources extends Loadable
         return null;
     }
 
+    /**
+     * @return The default font. At the moment this is a randomly picked font!
+     */
+    public Font getDefaultFont()
+    {
+        FontResource fr = this.fonts.values().iterator().next();
+        if ( fr == null ) {
+            return null;
+        }
+        return fr.font;
+    }
+    
     // Poses
 
     public void addPose( PoseResource resource )

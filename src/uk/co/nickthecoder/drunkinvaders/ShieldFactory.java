@@ -2,7 +2,7 @@ package uk.co.nickthecoder.drunkinvaders;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Behaviour;
-import uk.co.nickthecoder.itchy.Costume;
+import uk.co.nickthecoder.itchy.Pose;
 import uk.co.nickthecoder.itchy.util.Property;
 
 public class ShieldFactory extends Behaviour
@@ -22,16 +22,17 @@ public class ShieldFactory extends Behaviour
         for (int x = 0; x < this.width; x++) {
             for (int y = 0; y < this.height; y++) {
 
-                Costume costume = DrunkInvaders.game.resources.getCostume("shield");
+                String poseName = "full";
                 if (y == this.height - 1) {
                     if (x == 0) {
-                        costume = DrunkInvaders.game.resources.getCostume("shield-l");
+                        poseName = "left";
                     } else if (x == this.width - 1) {
-                        costume = DrunkInvaders.game.resources.getCostume("shield-r");
+                        poseName = "right";
                     }
                 }
+                Pose pose = this.actor.getCostume().getPose( poseName );                
 
-                Actor shield = new Actor(costume);
+                Actor shield = new Actor(pose);
                 Shield shieldBehaviour = new Shield();
                 shield.getAppearance().setDirection(this.actor.getAppearance().getDirection());
                 this.actor.getLayer().add(shield);
