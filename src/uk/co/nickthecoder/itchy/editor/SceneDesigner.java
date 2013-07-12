@@ -133,6 +133,8 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.glassLayer = new ScrollableLayer(this.editor.size);
         this.guiLayer = new ScrollableLayer(this.editor.size, this.guiBackground);
 
+        this.guiLayer.setYAxisPointsDown(true);
+
         this.actorsLayer.setVisible(true);
         this.glassLayer.setVisible(true);
         this.guiLayer.setVisible(true);
@@ -158,6 +160,12 @@ public class SceneDesigner implements MouseListener, KeyListener
 
         this.setMode(MODE_SELECT);
         toolboxActor.moveTo(0, this.editor.size.height - this.toolboxPose.getHeight());
+
+        System.out.println( "Editor height : " + // TODO Remove me 
+            this.editor.size.height + " toolbox heigt : " +
+            this.toolboxPose.getHeight() +
+            "final position " + toolboxActor.getY()
+        );
 
         this.onHome();
     }

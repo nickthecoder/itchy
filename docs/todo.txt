@@ -5,22 +5,9 @@ Jame is out of date, need to rebuild for win32 and i386
     Add the compiled dll and .so files to jame's git tree??
         No. Ant task which uploads the compiled object to a ftp server?
 
-PoseDecorator interface looks naff.
-
-Do I want TextBehaviour?
-
-Use @Property instead of addProperties?
-
 What's Next
 ===========
 
-Yell is long winded - do it like ExplosionBehaviour?
-    Use Follower class, but add offsetX, offsetY, and distance / direction
-    Ok for the equivalent of Scratch's talk, but mine are animated (moving upwards).
-    
-Solution : Yell class creates an appropriate Pose/Appearance, and optionally a dumb actor too.
-    Combine with Follower or MoveAnimation to get it moving.
-        
 Try it on a RaspPi
 
 Scenery Editor
