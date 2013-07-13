@@ -8,6 +8,7 @@ import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.animation.AlphaAnimation;
 import uk.co.nickthecoder.itchy.animation.Animation;
 import uk.co.nickthecoder.itchy.animation.CompoundAnimation;
+import uk.co.nickthecoder.itchy.animation.ForwardsAnimation;
 import uk.co.nickthecoder.itchy.animation.FramedAnimation;
 import uk.co.nickthecoder.itchy.animation.MoveAnimation;
 import uk.co.nickthecoder.itchy.animation.ScaleAnimation;
@@ -90,10 +91,10 @@ public class AnimationsEditor extends SubEditor
 
         for (String animationName : this.editor.resources.animationNames()) {
             AnimationResource animationResource = this.editor.resources
-                    .getAnimationResource(animationName);
+                .getAnimationResource(animationName);
             String[] attributeNames = { "name" };
             TableModelRow row = new ReflectionTableModelRow<AnimationResource>(animationResource,
-                    attributeNames);
+                attributeNames);
             model.addRow(row);
         }
         return model;
@@ -129,6 +130,9 @@ public class AnimationsEditor extends SubEditor
         if (animation instanceof MoveAnimation) {
             return new MoveAnimationEditor(this.editor, (MoveAnimation) animation);
 
+        } else if (animation instanceof ForwardsAnimation) {
+            return new ForwardAnimationEditor(this.editor, (ForwardsAnimation) animation);
+
         } else if (animation instanceof TurnAnimation) {
             return new TurnAnimationEditor(this.editor, (TurnAnimation) animation);
 
@@ -140,7 +144,7 @@ public class AnimationsEditor extends SubEditor
 
         } else if (animation instanceof FramedAnimation) {
             return new FramedAnimationEditor(this.editor, this.editor.resources,
-                    (FramedAnimation) animation);
+                (FramedAnimation) animation);
 
         } else {
             return new AnimationEditor(this.editor, animation);
@@ -159,7 +163,7 @@ public class AnimationsEditor extends SubEditor
 
         if ((parent != null) && (parent.children.get(0) != animation)) {
             Button up = new Button(new ImageComponent(this.editor.rules.resources.getPose(
-                    "buttonUp").getSurface()));
+                "buttonUp").getSurface()));
             up.addStyle("plain");
             up.addActionListener(new ActionListener() {
                 @Override
@@ -174,7 +178,7 @@ public class AnimationsEditor extends SubEditor
 
         if (parent != null) {
             Button delete = new Button(new ImageComponent(this.editor.rules.resources.getPose(
-                    "buttonDelete").getSurface()));
+                "buttonDelete").getSurface()));
             delete.addStyle("plain");
             delete.addActionListener(new ActionListener() {
                 @Override
@@ -219,7 +223,10 @@ public class AnimationsEditor extends SubEditor
                 @Override
                 public void changed()
                 {
-                    ca.loops = loops.getValue();
+                    try {
+                        ca.loops = loops.getValue();
+                    } catch (Exception e) {
+                    }
                 }
             });
             secondLine.addChild(loops);
@@ -282,7 +289,7 @@ public class AnimationsEditor extends SubEditor
     protected void onOk()
     {
         if (this.adding ||
-                (!this.txtName.getText().equals(this.currentAnimationResource.getName()))) {
+            (!this.txtName.getText().equals(this.currentAnimationResource.getName()))) {
             if (this.editor.resources.getAnimation(this.txtName.getText()) != null) {
                 this.setMessage("That name is already being used.");
                 return;
@@ -317,7 +324,7 @@ public class AnimationsEditor extends SubEditor
 
         this.currentAnimation = new CompoundAnimation(true);
         this.currentAnimationResource = new AnimationResource(this.editor.resources,
-                "newAnimation", this.currentAnimation);
+            "newAnimation", this.currentAnimation);
 
         this.showDetails(this.currentAnimationResource);
     }

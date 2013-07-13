@@ -1,0 +1,12 @@
+The moon
+Torben Bjørn Hansen. CC-BY
+http://www.flickr.com/photos/torbenh/3817150315/in/faves-jasonidzerda/
+Rotated and clipped
+
+The Earth
+Debian wallpaper GPL (BlueMarbleWest.jpg)
+Removed atmosphere using Gimp, and then process in Inkscape, adding various effects, stars, and
+cropping it in various places.
+
+All other images drawn from scratch by Nick Robinson.
+

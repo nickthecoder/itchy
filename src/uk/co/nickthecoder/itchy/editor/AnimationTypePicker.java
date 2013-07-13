@@ -3,6 +3,7 @@ package uk.co.nickthecoder.itchy.editor;
 import uk.co.nickthecoder.itchy.animation.AlphaAnimation;
 import uk.co.nickthecoder.itchy.animation.Animation;
 import uk.co.nickthecoder.itchy.animation.CompoundAnimation;
+import uk.co.nickthecoder.itchy.animation.ForwardsAnimation;
 import uk.co.nickthecoder.itchy.animation.FramedAnimation;
 import uk.co.nickthecoder.itchy.animation.MoveAnimation;
 import uk.co.nickthecoder.itchy.animation.ScaleAnimation;
@@ -17,9 +18,15 @@ import uk.co.nickthecoder.itchy.gui.Window;
 
 public abstract class AnimationTypePicker extends Window
 {
-    private static final Animation[] animationPrototypes = { new CompoundAnimation(true),
-        new CompoundAnimation(false), new MoveAnimation(), new AlphaAnimation(),
-        new TurnAnimation(), new FramedAnimation(), new ScaleAnimation() };
+    private static final Animation[] animationPrototypes = {
+        new CompoundAnimation(true),
+        new CompoundAnimation(false),
+        new MoveAnimation(),
+        new ForwardsAnimation(),
+        new AlphaAnimation(),
+        new TurnAnimation(),
+        new FramedAnimation(),
+        new ScaleAnimation() };
 
     public AnimationTypePicker()
     {

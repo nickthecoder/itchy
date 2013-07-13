@@ -13,8 +13,7 @@ public class AlphaAnimationEditor extends AnimationEditor
 {
     private IntegerBox txtTicks;
     private PickerButton<Profile> pickProfile;
-    private DoubleBox txtFrom;
-    private DoubleBox txtTo;
+    private DoubleBox txtTarget;
 
     public AlphaAnimationEditor( Editor editor, AlphaAnimation animation )
     {
@@ -33,13 +32,10 @@ public class AlphaAnimationEditor extends AnimationEditor
                 NumericAnimation.getProfiles());
         gridLayout.addRow(new Label("Profile"), this.pickProfile);
 
-        this.txtFrom = new DoubleBox(alphaAnimation.from);
-        gridLayout.addRow(new Label("Start Alpha"),
-                Editor.addHint(this.txtFrom, "0 = transparent. 255 = opaque"));
+        this.txtTarget = new DoubleBox(alphaAnimation.target);
+        gridLayout.addRow(new Label("Target Alpha"),
+                Editor.addHint(this.txtTarget, "0 = transparent. 255 = opaque"));
 
-        this.txtTo = new DoubleBox(alphaAnimation.to);
-        gridLayout.addRow(new Label("End Alpha"),
-                Editor.addHint(this.txtTo, "0 = transparent. 255 = opaque"));
     }
 
     @Override
@@ -50,8 +46,7 @@ public class AlphaAnimationEditor extends AnimationEditor
         alphaAnimation.ticks = this.txtTicks.getValue();
         alphaAnimation.profile = this.pickProfile.getValue();
 
-        alphaAnimation.from = this.txtFrom.getValue();
-        alphaAnimation.to = this.txtTo.getValue();
+        alphaAnimation.target = this.txtTarget.getValue();
 
         return true;
     }

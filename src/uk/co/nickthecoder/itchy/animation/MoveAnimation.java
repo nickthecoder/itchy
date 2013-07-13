@@ -4,12 +4,19 @@ import uk.co.nickthecoder.itchy.Actor;
 
 public class MoveAnimation extends NumericAnimation
 {
+    /**
+     * The total X distance to move
+     */
     public double dx;
+    
+    /**
+     * The total Y distance to move.
+     */
     public double dy;
 
     public MoveAnimation()
     {
-        this(200, NumericAnimation.unit, 0, 0);
+        this(200, NumericAnimation.linear, 0, 0);
     }
 
     public MoveAnimation( int ticks, Profile profile, double dx, double dy )
@@ -26,9 +33,9 @@ public class MoveAnimation extends NumericAnimation
     }
 
     @Override
-    public void tick( Actor actor, double amount )
+    public void tick( Actor actor, double amount, double delta )
     {
-        actor.moveBy(this.dx * amount, this.dy * amount);
+        actor.moveBy(this.dx * delta, this.dy * delta);
     }
 
 }

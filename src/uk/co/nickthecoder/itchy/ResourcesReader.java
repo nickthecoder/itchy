@@ -7,6 +7,7 @@ import java.util.Iterator;
 
 import uk.co.nickthecoder.itchy.animation.AlphaAnimation;
 import uk.co.nickthecoder.itchy.animation.CompoundAnimation;
+import uk.co.nickthecoder.itchy.animation.ForwardsAnimation;
 import uk.co.nickthecoder.itchy.animation.Frame;
 import uk.co.nickthecoder.itchy.animation.FramedAnimation;
 import uk.co.nickthecoder.itchy.animation.MoveAnimation;
@@ -328,6 +329,20 @@ public class ResourcesReader
             MoveAnimation ani = new MoveAnimation(ticks, profile, dx, dy);
             animation.addAnimation(ani);
         }
+        for (Iterator<XMLTag> j = parentTag.getTags("forwards"); j.hasNext();) {
+            XMLTag forwardsTag = j.next();
+
+            String profileName = forwardsTag.getOptionalAttribute("profile", "unit");
+            Profile profile = NumericAnimation.getProfile(profileName);
+            if (profile == null) {
+                throw new XMLException("Unknown profile : " + profileName);
+            }
+            int ticks = forwardsTag.getIntAttribute("ticks");
+            double forwards = forwardsTag.getDoubleAttribute("forwards");
+            double sideways = forwardsTag.getDoubleAttribute("sideways");
+            ForwardsAnimation ani = new ForwardsAnimation(ticks, profile, forwards, sideways);
+            animation.addAnimation(ani);
+        }
         for (Iterator<XMLTag> j = parentTag.getTags("alpha"); j.hasNext();) {
             XMLTag childTag = j.next();
 
@@ -337,9 +352,8 @@ public class ResourcesReader
                 throw new XMLException("Unknown profile : " + profileName);
             }
             int ticks = childTag.getIntAttribute("ticks");
-            double from = childTag.getOptionalDoubleAttribute("from", 1);
-            double to = childTag.getOptionalDoubleAttribute("to", 0);
-            AlphaAnimation ani = new AlphaAnimation(ticks, profile, from, to);
+            double target = childTag.getOptionalDoubleAttribute("target", 255);
+            AlphaAnimation ani = new AlphaAnimation(ticks, profile, target);
             animation.addAnimation(ani);
         }
         for (Iterator<XMLTag> j = parentTag.getTags("turn"); j.hasNext();) {
@@ -351,9 +365,8 @@ public class ResourcesReader
                 throw new XMLException("Unknown profile : " + profileName);
             }
             int ticks = childTag.getIntAttribute("ticks");
-            double from = childTag.getOptionalDoubleAttribute("from", 1);
-            double to = childTag.getOptionalDoubleAttribute("to", 0);
-            TurnAnimation ani = new TurnAnimation(ticks, profile, from, to);
+            double turn = childTag.getOptionalDoubleAttribute("turn", 360);
+            TurnAnimation ani = new TurnAnimation(ticks, profile, turn);
             animation.addAnimation(ani);
         }
         for (Iterator<XMLTag> j = parentTag.getTags("scale"); j.hasNext();) {
@@ -365,9 +378,8 @@ public class ResourcesReader
                 throw new XMLException("Unknown profile : " + profileName);
             }
             int ticks = childTag.getIntAttribute("ticks");
-            double from = childTag.getOptionalDoubleAttribute("from", 1);
-            double to = childTag.getOptionalDoubleAttribute("to", 0);
-            ScaleAnimation ani = new ScaleAnimation(ticks, profile, from, to);
+            double target = childTag.getOptionalDoubleAttribute("target", 1);
+            ScaleAnimation ani = new ScaleAnimation(ticks, profile, target);
             animation.addAnimation(ani);
         }
     }

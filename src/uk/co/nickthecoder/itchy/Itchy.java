@@ -197,7 +197,9 @@ public class Itchy
 
     public void startGame( Game game )
     {
-        this.gameStack.push(this.game);
+        if (this.game!=null) {
+            this.gameStack.push(this.game);
+        }
         this.game = game;
 
         startGame();

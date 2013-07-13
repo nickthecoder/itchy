@@ -11,64 +11,61 @@ import uk.co.nickthecoder.jame.RGBA;
 
 public class Ship extends Bouncy implements Shootable
 {
-    private static RGBA SPEECH_COLOR = new RGBA(0, 0, 0);
-
-    public static final String[] DEADLY_LIST = new String[] { "deadly" };
-
-
-    @Property(label="Shield's Recharge Rate")
-    public double shieldRechargeRate = 0.001;
-
-    @Property(label="Shield's Discharge Rate")
-    public double shieldDischargeRate = 0.01;
-
-    
-    private int recharge = 0;
-    
     private static final int RECHARGE_DURATION = 40;
 
     private static final int SHIELD_POSE_COUNT = 7;
 
-    private final double ox = 320;
-    
-    private final double oy = -1300;
-    
-    /**
-     * The radius of my orbit around the planet.
-     */   
-    private double radius;
-    
-    private final double rotationSpeed = 0.003;
-    
+    private static RGBA SPEECH_COLOR = new RGBA(0, 0, 0);
+
+    public static final String[] DEADLY_LIST = new String[] { "deadly" };
+
+    @Property(label = "Planet Center X")
+    public double ox = 320;
+
+    @Property(label = "Planet Center Y")
+    public double oy = -1300;
+
+    @Property(label = "Speed")
+    public double rotationSpeed = 0.003;
+
+    @Property(label = "Shield's Recharge Rate")
+    public double shieldRechargeRate = 0.001;
+
+    @Property(label = "Shield's Discharge Rate")
+    public double shieldDischargeRate = 0.01;
+
+    public double radius;
+
     private double angle;
 
     private Actor latestBullet;
 
     private boolean shielded = false;
 
+    private int recharge = 0;
+
     /**
      * 1 is fully charged 0 is fully drained.
      */
     private double shieldStrength = 1.0;
 
-    
     @Override
     public void init()
     {
         super.init();
-        
+
         this.actor.removeTag("bouncy");
 
         this.mass = 100000000000.0;
         this.actor.addTag("killable");
-        
+
         this.radius = Math.sqrt(
             (this.actor.getX() - this.ox) * (this.actor.getX() - this.ox) +
-            (this.actor.getY() - this.oy) * (this.actor.getY() - this.oy));
-        
+                (this.actor.getY() - this.oy) * (this.actor.getY() - this.oy));
+
         this.angle = Math.atan2(this.actor.getY() - this.oy, this.actor.getX() - this.ox);
         this.actor.getAppearance().setDirectionRadians(this.angle);
-        this.recalculateDirection();
+        this.turn(0); // calculates the direction
 
         // Create the fragments for the explosions when I get shot.
         new Fragment().actor(this.actor).create("fragment");
@@ -106,20 +103,10 @@ public class Ship extends Bouncy implements Shootable
             chargeShield();
 
             if (Itchy.singleton.isKeyDown(Keys.LEFT)) {
-                this.angle += this.rotationSpeed;
-                this.recalculateDirection();
-                if (this.actor.getX() < 30) {
-                    this.angle -= this.rotationSpeed;
-                    this.recalculateDirection();
-                }
+                this.turn(this.rotationSpeed);
             }
             if (Itchy.singleton.isKeyDown(Keys.RIGHT)) {
-                this.angle -= this.rotationSpeed;
-                this.recalculateDirection();
-                if (this.actor.getX() > 640 - 30) {
-                    this.angle += this.rotationSpeed;
-                    this.recalculateDirection();
-                }
+                this.turn(-this.rotationSpeed);
             }
 
             if (this.recharge > 0) {
@@ -150,11 +137,23 @@ public class Ship extends Bouncy implements Shootable
 
     }
 
-    private void recalculateDirection()
+    private void turn( double speed )
     {
+        double oldX = this.actor.getX();
+        double oldY = this.actor.getY();
+        double oldDirection = this.actor.getAppearance().getDirection();
+
+        this.angle += speed;
+
         this.actor.getAppearance().setDirectionRadians(this.angle);
         this.actor.setX(this.radius * Math.cos(this.angle) + this.ox);
         this.actor.setY(this.radius * Math.sin(this.angle) + this.oy);
+
+        if (this.actor.isOffScreen()) {
+            this.angle -= speed;
+            this.actor.moveTo(oldX, oldY);
+            this.actor.getAppearance().setDirection(oldDirection);
+        }
     }
 
     public void activateShield()
@@ -162,7 +161,7 @@ public class Ship extends Bouncy implements Shootable
         long level = Math.round(this.shieldStrength * SHIELD_POSE_COUNT);
         if (level > 0) {
             this.event("shield");
-            this.actor.addTag( "bouncy" );
+            this.actor.addTag("bouncy");
             long newLevel = Math.round(this.shieldStrength * SHIELD_POSE_COUNT);
             event("shielded" + newLevel);
             this.shielded = true;
@@ -173,7 +172,7 @@ public class Ship extends Bouncy implements Shootable
 
     public void deactivateShield()
     {
-        this.actor.removeTag( "bouncy" );
+        this.actor.removeTag("bouncy");
         this.event("deshield");
         this.shielded = false;
     }
@@ -248,7 +247,6 @@ public class Ship extends Bouncy implements Shootable
             .speed(0.3, 0.9)
             .fade(.7)
             .spin(-0.2, 0.2)
-            .rotate(false)
             .createActor("fragment").activate();
 
         new Explosion(this.actor)

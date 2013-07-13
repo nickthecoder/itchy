@@ -49,19 +49,21 @@ public class CompoundAnimation extends AbstractAnimation
         this.children.set(index - 1, child);
     }
 
+    @Override
     public void addMessageListener( MessageListener listener )
     {
         super.addMessageListener(listener);
-        for ( Animation child : this.children ){ 
-            child.addMessageListener( listener );
+        for (Animation child : this.children) {
+            child.addMessageListener(listener);
         }
     }
 
+    @Override
     public void removeMessageListener( MessageListener listener )
     {
         super.removeMessageListener(listener);
-        for ( Animation child : this.children ){ 
-            child.removeMessageListener( listener );
+        for (Animation child : this.children) {
+            child.removeMessageListener(listener);
         }
     }
 
@@ -113,7 +115,7 @@ public class CompoundAnimation extends AbstractAnimation
     @Override
     public boolean isFinished()
     {
-        return this.sop.isFinished();
+        return this.loopsRemaining == 0;
     }
 
 }

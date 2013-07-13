@@ -4,20 +4,21 @@ import uk.co.nickthecoder.itchy.Actor;
 
 public class TurnAnimation extends NumericAnimation
 {
-    public double from;
-
-    public double to;
-
+    /**
+     * The total turn in degrees
+     */
+    public double turn;
+    
+    
     public TurnAnimation()
     {
-        this(200, linear, 1, 1);
+        this(200, linear, 1);
     }
 
-    public TurnAnimation( int ticks, Profile profile, double from, double to )
+    public TurnAnimation( int ticks, Profile profile, double turn)
     {
         super(ticks, profile);
-        this.from = from;
-        this.to = to;
+        this.turn = turn;
     }
 
     @Override
@@ -25,21 +26,11 @@ public class TurnAnimation extends NumericAnimation
     {
         return "Turn";
     }
-
-    public double getFrom()
-    {
-        return this.from;
-    }
-
-    public double getTo()
-    {
-        return this.to;
-    }
-
+    
     @Override
-    public void tick( Actor actor, double amount )
+    public void tick( Actor actor, double amount, double delta )
     {
-        actor.getAppearance().adjustDirection(this.from + (this.to - this.from) * amount);
+        actor.getAppearance().adjustDirection(this.turn * delta );
     }
 
 }

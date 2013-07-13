@@ -254,8 +254,10 @@ public class EntryBox<E extends EntryBox<?>> extends ClickableContainer implemen
         }
 
         this.setNaturalWidth(this.boxWidthPixels + this.getPaddingLeft() + this.getPaddingRight());
-        this.setNaturalHeight(this.label.getRequiredHeight() + this.label.getMarginTop() +
-                this.label.getMarginBottom() + this.getPaddingTop() + this.getPaddingBottom());
+        
+        this.setNaturalHeight(
+            this.label.getRequiredHeight() + this.label.getMarginTop() +
+            this.label.getMarginBottom() + this.getPaddingTop() + this.getPaddingBottom());
     }
 
     @Override
@@ -265,20 +267,29 @@ public class EntryBox<E extends EntryBox<?>> extends ClickableContainer implemen
         int height = this.label.getRequiredHeight();
 
         int caretX = 0;
-        String text = this.label.getText().substring(0, this.caretIndex);
+        
         try {
+            String text = this.label.getText().substring(0, this.caretIndex);
             Surface surface = this.label.getFont().getSize(this.label.getFontSize())
                     .renderBlended(text, ANY_COLOR);
+            
             caretX = surface.getWidth();
             surface.free();
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        this.label.setPosition(this.getPaddingLeft() + this.label.getMarginLeft(),
-                this.getPaddingTop() + this.label.getMarginTop(), width, height);
-        this.caret.setPosition(this.getPaddingLeft() + this.caret.getMarginLeft() + caretX,
-                this.getPaddingTop() + this.caret.getPaddingTop(), this.caret.getRequiredWidth(),
-                height - this.caret.getPaddingTop() - this.caret.getPaddingBottom());
+        this.label.setPosition(
+            this.getPaddingLeft() + this.label.getMarginLeft(),
+            this.getPaddingTop() + this.label.getMarginTop(),
+            width,
+            height);
+        
+        this.caret.setPosition(
+            this.getPaddingLeft() + this.caret.getMarginLeft() + caretX,
+            this.getPaddingTop() + this.caret.getPaddingTop(),
+            this.caret.getRequiredWidth(),
+            height - this.caret.getPaddingTop() - this.caret.getPaddingBottom());
     }
 }

@@ -13,8 +13,7 @@ public class TurnAnimationEditor extends AnimationEditor
 {
     private IntegerBox txtTicks;
     private PickerButton<Profile> pickProfile;
-    private DoubleBox txtFrom;
-    private DoubleBox txtTo;
+    private DoubleBox txtTurn;
 
     public TurnAnimationEditor( Editor editor, TurnAnimation animation )
     {
@@ -33,13 +32,10 @@ public class TurnAnimationEditor extends AnimationEditor
                 NumericAnimation.getProfiles());
         gridLayout.addRow(new Label("Profile"), this.pickProfile);
 
-        this.txtFrom = new DoubleBox(turnAnimation.from);
-        gridLayout.addRow(new Label("Turn by (at the start)"),
-                Editor.addHint(this.txtFrom, "degrees per frame"));
+        this.txtTurn = new DoubleBox(turnAnimation.turn);
+        gridLayout.addRow(new Label("Turn"),
+                Editor.addHint(this.txtTurn, "degrees"));
 
-        this.txtTo = new DoubleBox(turnAnimation.to);
-        gridLayout.addRow(new Label("Turn by (at the end)"),
-                Editor.addHint(this.txtTo, "degrees per frame"));
     }
 
     @Override
@@ -50,8 +46,7 @@ public class TurnAnimationEditor extends AnimationEditor
         turnAnimation.ticks = this.txtTicks.getValue();
         turnAnimation.profile = this.pickProfile.getValue();
 
-        turnAnimation.from = this.txtFrom.getValue();
-        turnAnimation.to = this.txtTo.getValue();
+        turnAnimation.turn = this.txtTurn.getValue();
 
         return true;
     }

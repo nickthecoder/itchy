@@ -180,11 +180,7 @@ public final class Appearance implements OffsetSurface
 
     public boolean visibleWithin( WorldRectangle worldRect )
     {
-        if (!this.getWorldRectangle().overlaps(worldRect)) {
-            return false;
-        }
-
-        return true;
+        return this.getWorldRectangle().overlaps(worldRect);
     }
 
     public void clearCachedSurface()

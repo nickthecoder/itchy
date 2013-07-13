@@ -4,20 +4,23 @@ import uk.co.nickthecoder.itchy.Actor;
 
 public class AlphaAnimation extends NumericAnimation
 {
-    public double from;
-
-    public double to;
+    /**
+     * The final delta value
+     */
+    public double target;
+    
+    private double initialValue;
+    
 
     public AlphaAnimation()
     {
-        this(200, linear, 255, 0);
+        this(200, linear, 255);
     }
 
-    public AlphaAnimation( int ticks, Profile profile, double from, double to )
+    public AlphaAnimation( int ticks, Profile profile, double target )
     {
         super(ticks, profile);
-        this.from = from;
-        this.to = to;
+        this.target = target;
     }
 
     @Override
@@ -26,20 +29,16 @@ public class AlphaAnimation extends NumericAnimation
         return "Alpha";
     }
 
-    public double getFrom()
-    {
-        return this.from;
-    }
-
-    public double getTo()
-    {
-        return this.to;
-    }
-
     @Override
-    public void tick( Actor actor, double amount )
+    public void start( Actor actor )
     {
-        double value = this.from + (this.to - this.from) * amount;
+        this.initialValue = actor.getAppearance().getAlpha();
+    }
+    
+    @Override
+    public void tick( Actor actor, double amount, double delta )
+    {
+        double value = this.initialValue + (this.target - this.initialValue ) * amount;
         actor.getAppearance().setAlpha(value);
     }
 

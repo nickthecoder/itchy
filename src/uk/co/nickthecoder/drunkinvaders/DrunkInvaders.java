@@ -124,6 +124,10 @@ public class DrunkInvaders extends Game
             if (ke.symbol == Keys.a) {
                 this.startScene("about");
             }
+            
+            if (ke.symbol == Keys.w){
+                this.startScene("completed");
+            }
 
         } else {
             if (ke.symbol == Keys.ESCAPE) {
@@ -194,8 +198,8 @@ public class DrunkInvaders extends Game
 
         this.sceneName = sceneName;
 
-        AlphaAnimation fadeOut = new AlphaAnimation(15, NumericAnimation.linear, 0, 255);
-        AlphaAnimation fadeIn = new AlphaAnimation(15, NumericAnimation.linear, 255, 0);
+        AlphaAnimation fadeOut = new AlphaAnimation(15, NumericAnimation.linear, 255);
+        AlphaAnimation fadeIn = new AlphaAnimation(15, NumericAnimation.linear, 0);
         CompoundAnimation animation = new CompoundAnimation(true);
         animation.addAnimation(fadeOut);
         animation.addAnimation(fadeIn);

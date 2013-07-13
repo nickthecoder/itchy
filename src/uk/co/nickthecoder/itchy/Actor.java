@@ -262,6 +262,23 @@ public class Actor extends Task implements MessageListener
         return this.y;
     }
 
+    /**
+     * This is NOT the opposite of isOnScreen.
+     * @return True is any part of the actor's bounding rectangle is off screen.
+     */
+    public boolean isOffScreen()
+    {
+        if (this.layer == null) {
+            return true;
+        }
+        
+        return ! this.appearance.getWorldRectangle().within( this.layer.worldRect);
+    }
+    
+    /**
+     * This is NOT the opposite of isOffScreen.
+     * @return True if any part of the actor's bounding rectangle is on screen.
+     */
     public boolean isOnScreen()
     {
         if (this.layer == null) {

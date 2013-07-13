@@ -2,7 +2,6 @@ package uk.co.nickthecoder.itchy.editor;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.ActorsLayer;
@@ -38,9 +37,9 @@ import uk.co.nickthecoder.itchy.gui.TextBox;
 import uk.co.nickthecoder.itchy.gui.ToggleButton;
 import uk.co.nickthecoder.itchy.gui.VerticalScroll;
 import uk.co.nickthecoder.itchy.util.AbstractProperty;
-import uk.co.nickthecoder.itchy.util.StringPropert;
 import uk.co.nickthecoder.itchy.util.NinePatch;
 import uk.co.nickthecoder.itchy.util.Reversed;
+import uk.co.nickthecoder.itchy.util.StringPropert;
 import uk.co.nickthecoder.jame.Keys;
 import uk.co.nickthecoder.jame.RGBA;
 import uk.co.nickthecoder.jame.Rect;
@@ -161,12 +160,6 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.setMode(MODE_SELECT);
         toolboxActor.moveTo(0, this.editor.size.height - this.toolboxPose.getHeight());
 
-        System.out.println( "Editor height : " + // TODO Remove me 
-            this.editor.size.height + " toolbox heigt : " +
-            this.toolboxPose.getHeight() +
-            "final position " + toolboxActor.getY()
-        );
-
         this.onHome();
     }
 
@@ -175,7 +168,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         int margin = 0;
         NinePatch ninePatch = this.editor.rules.resources.getNinePatch("pageBorder");
         Surface newSurface = ninePatch.createSurface(this.sceneRect.width + margin * 2,
-                this.sceneRect.height + margin * 2);
+            this.sceneRect.height + margin * 2);
 
         ImagePose newPose = new ImagePose(newSurface);
         newPose.setOffsetX(margin);
@@ -220,9 +213,9 @@ public class SceneDesigner implements MouseListener, KeyListener
         VerticalScroll behaviourScroll = new VerticalScroll(this.behaviourContainer);
 
         this.toolboxNotebook = new Notebook();
-        this.toolboxNotebook.addPage(new Label("C"), costumesScroll);
-        this.toolboxNotebook.addPage(new Label("P"), propertiesScroll);
-        this.toolboxNotebook.addPage(new Label("B"), behaviourScroll);
+        this.toolboxNotebook.addPage(new Label("Costumes"), costumesScroll);
+        this.toolboxNotebook.addPage(new Label("Actor"), propertiesScroll);
+        this.toolboxNotebook.addPage(new Label("Behaviour"), behaviourScroll);
 
         this.toolboxPose.setFill(true, true);
         this.toolboxNotebook.setFill(true, true);
@@ -250,7 +243,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         // this.toolbarPose.setFill( true, true );
 
         this.toolbarPose.setPosition(0, 0, this.editor.size.width,
-                this.toolbarPose.getRequiredHeight());
+            this.toolbarPose.getRequiredHeight());
     }
 
     private void addToolbarButtons( Container toolbar )
@@ -383,7 +376,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         grid.clear();
 
         StringPropert<Actor> beProp = new StringPropert<Actor>("Behaviour",
-                "behaviour.behaviourClassName");
+            "behaviour.behaviourClassName");
         ComponentChangeListener ccl = new ComponentChangeListener() {
             @Override
             public void changed()
@@ -394,14 +387,14 @@ public class SceneDesigner implements MouseListener, KeyListener
 
         try {
             TextBox txtBehaviourClassName = (TextBox) beProp.createComponent(this.currentActor,
-                    true, ccl);
+                true, ccl);
             grid.addRow(beProp.label, txtBehaviourClassName);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         SceneDesignerBehaviour behaviour = (SceneDesignerBehaviour) this.currentActor
-                .getBehaviour();
+            .getBehaviour();
         for (AbstractProperty<Behaviour, ?> property : behaviour.actualBehaviour.getProperties()) {
             try {
                 Component component = property.createComponent(behaviour.actualBehaviour, true);
@@ -480,56 +473,90 @@ public class SceneDesigner implements MouseListener, KeyListener
     {
 
         if (Itchy.singleton.isCtrlDown()) {
+            System.out.println( "Ctrl" ); //TODO Remove
 
             int scrollAmount = Itchy.singleton.isShiftDown() ? 100 : 10;
 
             if (event.symbol == Keys.s) {
                 this.onSave();
+                return true;
+
             } else if (event.symbol == Keys.LEFT) {
                 this.actorsLayer.scrollBy(-scrollAmount, 0);
                 this.glassLayer.scrollBy(-scrollAmount, 0);
+                return true;
+
             } else if (event.symbol == Keys.RIGHT) {
                 this.actorsLayer.scrollBy(scrollAmount, 0);
                 this.glassLayer.scrollBy(scrollAmount, 0);
+                return true;
+
             } else if (event.symbol == Keys.UP) {
                 this.actorsLayer.scrollBy(0, scrollAmount);
                 this.glassLayer.scrollBy(0, scrollAmount);
+                return true;
+
             } else if (event.symbol == Keys.DOWN) {
                 this.actorsLayer.scrollBy(0, -scrollAmount);
                 this.glassLayer.scrollBy(0, -scrollAmount);
+                return true;
+
+            } else if (event.symbol == Keys.DELETE) {
+                this.onActorDelete();
+                return true;
+            } else if (event.symbol == Keys.KEY_1) {
+                this.toolboxNotebook.selectPage(0);
+                return true;
+
+            } else if (event.symbol == Keys.KEY_2) {
+                this.toolboxNotebook.selectPage(1);
+                return true;
+
+            } else if (event.symbol == Keys.KEY_3) {
+                this.toolboxNotebook.selectPage(2);
+                return true;
+
+            } else if (event.symbol == Keys.HOME) {
+                this.onHome();
+                return true;
             }
 
         } else {
 
             int moveAmount = Itchy.singleton.isShiftDown() ? 10 : 1;
 
-            if (event.symbol == Keys.DELETE) {
-                this.onActorDelete();
-                return true;
-            } else if (event.symbol == Keys.KEY_1) {
-                this.toolboxNotebook.selectPage(0);
-            } else if (event.symbol == Keys.KEY_2) {
-                this.toolboxNotebook.selectPage(1);
-            } else if (event.symbol == Keys.KEY_3) {
-                this.toolboxNotebook.selectPage(2);
-            } else if (event.symbol == Keys.PAGEUP) {
+            if (event.symbol == Keys.PAGEUP) {
                 this.onActorUp();
+                return true;
+
             } else if (event.symbol == Keys.PAGEDOWN) {
                 this.onActorDown();
+                return true;
+
             } else if (event.symbol == Keys.HOME) {
                 this.onActorTop();
+                return true;
+
             } else if (event.symbol == Keys.END) {
                 this.onActorBottom();
-            } else if (event.symbol == Keys.o) {
-                this.onHome();
+                return true;
+
             } else if (event.symbol == Keys.LEFT) {
                 this.moveActor(-moveAmount, 0);
+                return true;
+
             } else if (event.symbol == Keys.RIGHT) {
                 this.moveActor(moveAmount, 0);
+                return true;
+
             } else if (event.symbol == Keys.UP) {
                 this.moveActor(0, moveAmount);
+                return true;
+
             } else if (event.symbol == Keys.DOWN) {
                 this.moveActor(0, -moveAmount);
+                return true;
+
             }
 
         }
@@ -580,7 +607,7 @@ public class SceneDesigner implements MouseListener, KeyListener
 
             boolean fromBottom = Itchy.singleton.isShiftDown();
             for (Actor actor : fromBottom ? this.actorsLayer.getActors() : Reversed
-                    .list(this.actorsLayer.getActors())) {
+                .list(this.actorsLayer.getActors())) {
                 if (actor.touching(event.x, event.y)) {
                     this.selectActor(actor);
                     this.setMode(MODE_DRAG_ACTOR);
@@ -779,24 +806,24 @@ public class SceneDesigner implements MouseListener, KeyListener
 
     private void onText()
     {
-        Set<String> names = this.editor.resources.fontNames();
-        if (names.size() == 0) {
+        Font font = this.editor.resources.getDefaultFont();
+        if ( font == null) {
             return;
         }
-        for (String name : names) {
-            this.selectActor(null);
-            this.setMode(MODE_STAMP_COSTUME);
+        String text = "newText";
 
-            Font font = this.editor.resources.getFont(name);
-            String text = "newText";
-
-            TextPose pose = new TextPose(text, font, 22);
-            this.stampActor = new Actor(pose);
-
-            this.stampActor.moveTo(-10000, -10000); // Anywhere off screen
-            this.glassLayer.add(this.stampActor);
-            break;
+        if ( this.stampActor != null ) {
+            this.stampActor.kill();
         }
+        
+        this.selectActor(null);
+        this.setMode(MODE_STAMP_COSTUME);
+        
+        TextPose pose = new TextPose(text, font, 22);
+        this.stampActor = new Actor(pose);
+
+        this.stampActor.moveTo(-10000, -10000); // Anywhere off screen
+        this.glassLayer.add(this.stampActor);
 
     }
 
@@ -807,7 +834,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         int margin = 10;
         NinePatch ninePatch = this.editor.rules.resources.getNinePatch("highlight");
         Surface newSurface = ninePatch.createSurface(actorSurface.getWidth() + margin * 2,
-                actorSurface.getHeight() + margin * 2);
+            actorSurface.getHeight() + margin * 2);
 
         ImagePose newPose = new ImagePose(newSurface);
         newPose.setOffsetX(this.currentActor.getAppearance().getOffsetX() + margin);
@@ -834,7 +861,9 @@ public class SceneDesigner implements MouseListener, KeyListener
             be.getActor().getAppearance().setAlpha(0);
         }
         this.rotateHandle.getActor().getAppearance().setAlpha(0);
-        this.highlightActor.getAppearance().setAlpha(0);
+        if (this.highlightActor != null) {
+            this.highlightActor.getAppearance().setAlpha(0);
+        }
     }
 
     private void deleteHighlightActor()
@@ -940,7 +969,7 @@ public class SceneDesigner implements MouseListener, KeyListener
             super.dragStart();
             if (this.target.getAppearance().getPose() instanceof TextPose) {
                 this.startScale = ((TextPose) (this.target.getAppearance().getPose()))
-                        .getFontSize();
+                    .getFontSize();
             } else {
                 this.startScale = this.target.getAppearance().getScale();
             }
@@ -974,9 +1003,9 @@ public class SceneDesigner implements MouseListener, KeyListener
             assert (this.target != null);
 
             double ratioX = (this.target.getX() - this.opposite.actor.getX()) /
-                    (this.actor.getX() - this.opposite.actor.getX());
+                (this.actor.getX() - this.opposite.actor.getX());
             double ratioY = (this.target.getY() - this.opposite.actor.getY()) /
-                    (this.actor.getY() - this.opposite.actor.getY());
+                (this.actor.getY() - this.opposite.actor.getY());
 
             super.moveBy(dx, dy);
 

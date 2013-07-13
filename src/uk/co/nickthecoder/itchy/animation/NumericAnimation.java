@@ -12,6 +12,8 @@ public abstract class NumericAnimation extends AbstractAnimation
     public static final Profile bounce = new BounceProfile();
     public static final Profile unit = new ConstantProfile(1);
 
+    private double previous;
+    
     public static HashMap<String, Profile> getProfiles()
     {
         if (profiles == null) {
@@ -60,6 +62,7 @@ public abstract class NumericAnimation extends AbstractAnimation
     @Override
     public void start( Actor actor )
     {
+        this.previous = 0;
         this.currentFrame = 0;
     }
 
@@ -67,7 +70,11 @@ public abstract class NumericAnimation extends AbstractAnimation
     public void tick( Actor actor )
     {
         double amount = this.currentFrame / (double) (this.ticks - 1);
-        this.tick(actor, this.profile.amount(amount));
+        double delta = amount - this.previous;
+        
+        this.tick(actor, this.profile.amount(amount), delta);
+        this.previous = amount;
+        
         this.currentFrame++;
 
         super.tick(actor);
@@ -79,6 +86,6 @@ public abstract class NumericAnimation extends AbstractAnimation
         return this.currentFrame >= this.ticks;
     }
 
-    public abstract void tick( Actor actor, double amount );
+    public abstract void tick( Actor actor, double amount, double delta );
 
 }

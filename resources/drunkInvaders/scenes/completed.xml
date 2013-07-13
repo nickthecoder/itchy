@@ -1,10 +1,50 @@
 <scene showMouse="true">
-  <actor costume="earth" x="0" y="0" direction="0.0" start="default"/>
-  <text text="Well Done" font="boycott" size="111" color="#22bb22" x="314" y="377" direction="0.0" start=""/>
-  <text text="The world Is safe" font="vera" size="22" color="#ffffff" x="303" y="297" direction="0.0" start=""/>
-  <text text="The aliens are dead" font="vera" size="22" color="#ffffff" x="305" y="261" direction="0.0" start=""/>
-  <text text="MENU" font="blackCasper" size="53" color="#000000" behaviour="uk.co.nickthecoder.itchy.extras.Button" x="307" y="23" direction="0.0" start="">
+  <actor costume="earth3" x="320" y="240" direction="0.0" start="default"/>
+  <text text="Well Done" font="boycott" size="111" color="#22bb22" x="314" y="377" direction="0.0" start="default"/>
+  <text text="The world Is safe" font="vera" size="22" color="#ffffff" x="319" y="108" direction="0.0" start="default"/>
+  <text text="The aliens are dead" font="vera" size="22" color="#ffffff" x="320" y="80" direction="0.0" start="default"/>
+  <text text="MENU" font="blackCasper" size="53" color="#000000" behaviour="uk.co.nickthecoder.itchy.extras.Button" x="307" y="23" direction="0.0" start="default">
     <property name="message" value="menu"/>
   </text>
-  <actor costume="ship" x="302" y="92" direction="90.0" start="default"/>
+  <actor costume="ship" x="316" y="302" direction="90.0" start="default">
+    <property name="mass" value="1.0"/>
+    <property name="vy" value="0.0"/>
+    <property name="vx" value="0.0"/>
+    <property name="shieldRechargeRate" value="0.001"/>
+    <property name="rotationSpeed" value="0.012"/>
+    <property name="ox" value="320.0"/>
+    <property name="shieldDischargeRate" value="0.01"/>
+    <property name="oy" value="207.0"/>
+  </actor>
+  <actor costume="shieldFactory" x="183" y="202" direction="89.29168795888526" start="default">
+    <property name="height" value="4"/>
+    <property name="width" value="6"/>
+    <property name="spacing" value="10.0"/>
+  </actor>
+  <actor costume="shieldFactory" x="440" y="152" direction="-129.44092152412315" start="default">
+    <property name="height" value="4"/>
+    <property name="width" value="6"/>
+    <property name="spacing" value="10.0"/>
+  </actor>
+  <actor costume="shieldFactory" x="456" y="239" direction="-90.14886469626032" start="default">
+    <property name="height" value="4"/>
+    <property name="width" value="6"/>
+    <property name="spacing" value="10.0"/>
+  </actor>
+  <actor costume="shieldFactory" x="402" y="316" direction="-46.87531224688961" start="default">
+    <property name="height" value="4"/>
+    <property name="width" value="6"/>
+    <property name="spacing" value="10.0"/>
+  </actor>
+  <actor costume="shieldFactory" x="214" y="286" direction="46.2188752351313" start="default">
+    <property name="height" value="4"/>
+    <property name="width" value="6"/>
+    <property name="spacing" value="10.0"/>
+  </actor>
+  <actor costume="shieldFactory" x="222" y="113" direction="133.1523897340054" start="default">
+    <property name="height" value="4"/>
+    <property name="width" value="6"/>
+    <property name="spacing" value="10.0"/>
+  </actor>
+  <actor costume="pacman1" x="717" y="63" direction="-179.0449955242733" start="default"/>
 </scene>

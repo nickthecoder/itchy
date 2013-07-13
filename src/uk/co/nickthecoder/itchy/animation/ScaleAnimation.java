@@ -4,20 +4,20 @@ import uk.co.nickthecoder.itchy.Actor;
 
 public class ScaleAnimation extends NumericAnimation
 {
-    public double from;
-
-    public double to;
+    public double target;
+    
+    private double initialScale;
+    
 
     public ScaleAnimation()
     {
-        this(200, linear, 1, 2);
+        this(200, linear, 1);
     }
 
-    public ScaleAnimation( int ticks, Profile profile, double from, double to )
+    public ScaleAnimation( int ticks, Profile profile, double target )
     {
         super(ticks, profile);
-        this.from = from;
-        this.to = to;
+        this.target = target;
     }
 
     @Override
@@ -26,20 +26,16 @@ public class ScaleAnimation extends NumericAnimation
         return "Scale";
     }
 
-    public double getFrom()
-    {
-        return this.from;
-    }
-
-    public double getTo()
-    {
-        return this.to;
-    }
-
     @Override
-    public void tick( Actor actor, double amount )
+    public void start( Actor actor )
     {
-        double value = this.from + (this.to - this.from) * amount;
+        this.initialScale = actor.getAppearance().getScale();
+    }
+    
+    @Override
+    public void tick( Actor actor, double amount, double delta )
+    {
+        double value = this.initialScale + (this.target - this.initialScale) * amount;
         actor.getAppearance().setScale(value);
     }
 

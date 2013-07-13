@@ -17,6 +17,7 @@ import uk.co.nickthecoder.jame.Rect;
 
 public final class Editor extends Game
 {
+    public static Editor singleton;
 
     public static Container addHint( Component component, String hint )
     {
@@ -56,6 +57,7 @@ public final class Editor extends Game
 
     public Editor( Game game ) throws Exception
     {
+        singleton = this;
         Itchy.singleton.init(this);
 
         this.game = game;
@@ -129,6 +131,7 @@ public final class Editor extends Game
             @Override
             public void action()
             {
+                Editor.singleton = null;
                 Editor.this.stop();
             }
         });

@@ -13,8 +13,7 @@ public class ScaleAnimationEditor extends AnimationEditor
 {
     private IntegerBox txtTicks;
     private PickerButton<Profile> pickProfile;
-    private DoubleBox txtFrom;
-    private DoubleBox txtTo;
+    private DoubleBox txtTarget;
 
     public ScaleAnimationEditor( Editor editor, ScaleAnimation animation )
     {
@@ -33,13 +32,10 @@ public class ScaleAnimationEditor extends AnimationEditor
                 NumericAnimation.getProfiles());
         gridLayout.addRow(new Label("Profile"), this.pickProfile);
 
-        this.txtFrom = new DoubleBox(scaleAnimation.from);
-        gridLayout.addRow(new Label("Scale (at the start)"),
-                Editor.addHint(this.txtFrom, "1 = normal size"));
+        this.txtTarget = new DoubleBox(scaleAnimation.target);
+        gridLayout.addRow(new Label("Scale Target"),
+                Editor.addHint(this.txtTarget, "1 = Normal Size"));
 
-        this.txtTo = new DoubleBox(scaleAnimation.to);
-        gridLayout.addRow(new Label("Scale (at the end)"),
-                Editor.addHint(this.txtTo, "1 = normal size"));
     }
 
     @Override
@@ -50,8 +46,7 @@ public class ScaleAnimationEditor extends AnimationEditor
         scaleAnimation.ticks = this.txtTicks.getValue();
         scaleAnimation.profile = this.pickProfile.getValue();
 
-        scaleAnimation.from = this.txtFrom.getValue();
-        scaleAnimation.to = this.txtTo.getValue();
+        scaleAnimation.target = this.txtTarget.getValue();
 
         return true;
     }

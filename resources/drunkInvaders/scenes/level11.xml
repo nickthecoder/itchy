@@ -1,14 +1,14 @@
 <scene showMouse="true">
-  <actor costume="earth1" x="320" y="240" direction="0.0" start="default"/>
-  <actor costume="ship" x="183" y="183" direction="45.0" start="default">
+  <actor costume="earth3" x="320" y="240" direction="0.0" start="default"/>
+  <actor costume="ship" x="391" y="275" direction="41.686525499159565" start="default">
     <property name="mass" value="1.0"/>
     <property name="vy" value="0.0"/>
     <property name="vx" value="0.0"/>
     <property name="shieldRechargeRate" value="0.001"/>
-    <property name="rotationSpeed" value="0.012"/>
-    <property name="ox" value="0.0"/>
+    <property name="rotationSpeed" value="0.06"/>
+    <property name="ox" value="320.0"/>
     <property name="shieldDischargeRate" value="0.01"/>
-    <property name="oy" value="0.0"/>
+    <property name="oy" value="207.0"/>
   </actor>
   <actor costume="factory" x="65" y="431" direction="0.0" start="default">
     <property name="fireOnceEvery" value="6.0"/>

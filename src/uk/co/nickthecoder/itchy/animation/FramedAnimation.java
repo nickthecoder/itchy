@@ -58,6 +58,7 @@ public class FramedAnimation extends AbstractAnimation
     public void start( Actor actor )
     {
         this.frameIndex = 0;
+        this.direction = 1;
         actor.getAppearance().setPose(this.frames.get(this.frameIndex).getPose());
     }
 

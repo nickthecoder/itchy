@@ -5,15 +5,14 @@ import uk.co.nickthecoder.jame.RGBA;
 
 public class ColorAnimation extends NumericAnimation
 {
-    public RGBA startColor;
+    public RGBA targetColor;
+    
+    private RGBA startColor;
 
-    public RGBA endColor;
-
-    public ColorAnimation( int ticks, Profile profile, RGBA start, RGBA end )
+    public ColorAnimation( int ticks, Profile profile, RGBA target )
     {
         super(ticks, profile);
-        this.startColor = start;
-        this.endColor = end;
+        this.targetColor = target;
     }
 
     @Override
@@ -25,16 +24,20 @@ public class ColorAnimation extends NumericAnimation
     @Override
     public void start( Actor actor )
     {
-        actor.getAppearance().setColorize(this.startColor);
+        this.startColor = actor.getAppearance().getColorize();
+        if ( this.startColor == null ) {
+            this.startColor = new RGBA(255,255,255,255);
+            // this.startColor = new RGBA( targetColor.r, targetColor.g, targetColor.b, 0 );
+        }
     }
 
     @Override
-    public void tick( Actor actor, double amount )
+    public void tick( Actor actor, double amount, double delta )
     {
-        double red = this.startColor.r + (this.endColor.r - this.startColor.r) * amount;
-        double green = this.startColor.g + (this.endColor.g - this.startColor.g) * amount;
-        double blue = this.startColor.b + (this.endColor.b - this.startColor.b) * amount;
-        double alpha = this.startColor.a + (this.endColor.a - this.startColor.a) * amount;
+        double red = this.startColor.r + (this.targetColor.r - this.startColor.r) * amount;
+        double green = this.startColor.g + (this.targetColor.g - this.startColor.g) * amount;
+        double blue = this.startColor.b + (this.targetColor.b - this.startColor.b) * amount;
+        double alpha = this.startColor.a + (this.targetColor.a - this.startColor.a) * amount;
 
         actor.getAppearance()
                 .setColorize(new RGBA((int) red, (int) green, (int) blue, (int) alpha));

@@ -120,18 +120,20 @@ public class Alien extends Bouncy implements Shootable
             .activate();
 
         double scale = this.getActor().getAppearance().getScale();
-        if (scale > 1) {
-            ScaleAnimation scaleAnimation = new ScaleAnimation(10, NumericAnimation.linear, scale,
-                scale / (this.shotsRequired + 2) * (this.shotsRequired + 1));
-            this.getActor().setAnimation(scaleAnimation);
-        }
 
         this.shotsRequired--;
         if (this.shotsRequired > 0) {
             event("shot");
+
+            if (scale > 1) {
+                double newScale = 1 + (scale -1) * (this.shotsRequired ) / ( this.shotsRequired + 1 );
+                System.out.println( "Shots R " + this.shotsRequired + " newScale " + newScale );
+                ScaleAnimation scaleAnimation = new ScaleAnimation(10, NumericAnimation.linear, newScale);
+                this.getActor().setAnimation(scaleAnimation);
+            }
+
             return;
         }
-
 
         Actor yell = new Talk(this)
             .message("death")

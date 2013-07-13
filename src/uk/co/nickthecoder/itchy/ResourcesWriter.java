@@ -7,6 +7,7 @@ import java.util.Set;
 import uk.co.nickthecoder.itchy.animation.AlphaAnimation;
 import uk.co.nickthecoder.itchy.animation.Animation;
 import uk.co.nickthecoder.itchy.animation.CompoundAnimation;
+import uk.co.nickthecoder.itchy.animation.ForwardsAnimation;
 import uk.co.nickthecoder.itchy.animation.Frame;
 import uk.co.nickthecoder.itchy.animation.FramedAnimation;
 import uk.co.nickthecoder.itchy.animation.MoveAnimation;
@@ -187,12 +188,20 @@ public class ResourcesWriter extends XMLWriter
             this.writeProfile(moveAnimation.profile);
             this.endTag("move");
 
+        } else if (animation instanceof ForwardsAnimation) {
+            ForwardsAnimation forwardsAnimation = (ForwardsAnimation) animation;
+            this.beginTag("forwards");
+            this.attribute("ticks", forwardsAnimation.ticks);
+            this.attribute("forwards", forwardsAnimation.forwards);
+            this.attribute("sideways", forwardsAnimation.sideways);
+            this.writeProfile(forwardsAnimation.profile);
+            this.endTag("forwards");
+
         } else if (animation instanceof AlphaAnimation) {
             AlphaAnimation alphaAnimation = (AlphaAnimation) animation;
             this.beginTag("alpha");
             this.attribute("ticks", alphaAnimation.ticks);
-            this.attribute("from", alphaAnimation.getFrom());
-            this.attribute("to", alphaAnimation.getTo());
+            this.attribute("target", alphaAnimation.target);
             this.writeProfile(alphaAnimation.profile);
             this.endTag("alpha");
 
@@ -200,8 +209,7 @@ public class ResourcesWriter extends XMLWriter
             TurnAnimation turnAnimation = (TurnAnimation) animation;
             this.beginTag("turn");
             this.attribute("ticks", turnAnimation.ticks);
-            this.attribute("from", turnAnimation.getFrom());
-            this.attribute("to", turnAnimation.getTo());
+            this.attribute("turn", turnAnimation.turn);
             this.writeProfile(turnAnimation.profile);
             this.endTag("turn");
 
@@ -209,8 +217,7 @@ public class ResourcesWriter extends XMLWriter
             ScaleAnimation scaleAnimation = (ScaleAnimation) animation;
             this.beginTag("scale");
             this.attribute("ticks", scaleAnimation.ticks);
-            this.attribute("from", scaleAnimation.getFrom());
-            this.attribute("to", scaleAnimation.getTo());
+            this.attribute("target", scaleAnimation.target);
             this.writeProfile(scaleAnimation.profile);
             this.endTag("turn");
 

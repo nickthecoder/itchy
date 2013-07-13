@@ -6,6 +6,7 @@ import java.util.HashMap;
 import uk.co.nickthecoder.itchy.Font;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Resources;
+import uk.co.nickthecoder.itchy.editor.Editor;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
@@ -19,18 +20,23 @@ public class FontProperty<S> extends AbstractProperty<S, Font>
     }
 
     @Override
-    public Component createComponent( final S subject, final boolean autoUpdate,
-            final ComponentChangeListener listener ) throws IllegalArgumentException,
-        SecurityException, IllegalAccessException, InvocationTargetException, NoSuchFieldException
+    public Component createComponent(
+        final S subject,
+        final boolean autoUpdate,
+        final ComponentChangeListener listener
+        ) throws IllegalArgumentException, SecurityException, IllegalAccessException,
+            InvocationTargetException, NoSuchFieldException
     {
         HashMap<String, Font> hashMap = new HashMap<String, Font>();
-        Resources resources = Itchy.singleton.getGame().resources;
+        Resources resources = Editor.singleton.resources;
         for (String name : resources.fontNames()) {
             hashMap.put(name, resources.getFont(name));
         }
 
-        final PickerButton<Font> pickerButton = new PickerButton<Font>("Fonts",
-                this.getValue(subject), hashMap);
+        final PickerButton<Font> pickerButton = new PickerButton<Font>(
+            "Fonts",
+            this.getValue(subject),
+            hashMap);
 
         if (autoUpdate) {
 
