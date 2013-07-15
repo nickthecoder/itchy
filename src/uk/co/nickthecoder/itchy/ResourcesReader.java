@@ -282,105 +282,104 @@ public class ResourcesReader
     private void readCompoundAnimation( XMLTag parentTag, CompoundAnimation animation )
         throws XMLException
     {
-        for (Iterator<XMLTag> j = parentTag.getTags("parallel"); j.hasNext();) {
-            XMLTag parallelTag = j.next();
+        for (Iterator<XMLTag> j = parentTag.getTags(); j.hasNext();) {
 
-            CompoundAnimation parallel = new CompoundAnimation(false);
-            int loops = parallelTag.getIntAttribute("loops");
-            parallel.loops = loops;
-            this.readCompoundAnimation(parallelTag, parallel);
-            animation.addAnimation(parallel);
-        }
-        for (Iterator<XMLTag> j = parentTag.getTags("sequence"); j.hasNext();) {
-            XMLTag sequenceTag = j.next();
+            XMLTag tag = j.next();
 
-            CompoundAnimation sequential = new CompoundAnimation(true);
-            int loops = sequenceTag.getIntAttribute("loops");
-            sequential.loops = loops;
-            this.readCompoundAnimation(sequenceTag, sequential);
-            animation.addAnimation(sequential);
-        }
-        for (Iterator<XMLTag> j = parentTag.getTags("pingPong"); j.hasNext();) {
-            XMLTag pingPongTag = j.next();
+            if ( tag.getName().equals("parallel") ) {
+    
+                CompoundAnimation parallel = new CompoundAnimation(false);
+                int loops = tag.getIntAttribute("loops");
+                parallel.loops = loops;
+                this.readCompoundAnimation(tag, parallel);
+                animation.addAnimation(parallel);
+                
+            } else if ( tag.getName().equals("sequence") ) {
+    
+                CompoundAnimation sequential = new CompoundAnimation(true);
+                int loops = tag.getIntAttribute("loops");
+                sequential.loops = loops;
+                this.readCompoundAnimation(tag, sequential);
+                animation.addAnimation(sequential);
 
-            FramedAnimation pingPong = new FramedAnimation();
-            pingPong.pingPong = true;
-            this.readFramedAnimation(pingPongTag, pingPong);
-            animation.addAnimation(pingPong);
-        }
-        for (Iterator<XMLTag> j = parentTag.getTags("frames"); j.hasNext();) {
-            XMLTag loopTag = j.next();
+            } else if ( tag.getName().equals("pingPong") ) {
+    
+                FramedAnimation pingPong = new FramedAnimation();
+                pingPong.pingPong = true;
+                this.readFramedAnimation(tag, pingPong);
+                animation.addAnimation(pingPong);
 
-            FramedAnimation frames = new FramedAnimation();
-            this.readFramedAnimation(loopTag, frames);
-            animation.addAnimation(frames);
-        }
-        for (Iterator<XMLTag> j = parentTag.getTags("move"); j.hasNext();) {
-            XMLTag moveTag = j.next();
+            } else if ( tag.getName().equals("frames") ) {
+    
+                FramedAnimation frames = new FramedAnimation();
+                this.readFramedAnimation(tag, frames);
+                animation.addAnimation(frames);
 
-            String profileName = moveTag.getOptionalAttribute("profile", "unit");
-            Profile profile = NumericAnimation.getProfile(profileName);
-            if (profile == null) {
-                throw new XMLException("Unknown profile : " + profileName);
+            } else if ( tag.getName().equals("move") ) {
+
+                String profileName = tag.getOptionalAttribute("profile", "unit");
+                Profile profile = NumericAnimation.getProfile(profileName);
+                if (profile == null) {
+                    throw new XMLException("Unknown profile : " + profileName);
+                }
+                int ticks = tag.getIntAttribute("ticks");
+                double dx = tag.getDoubleAttribute("dx");
+                double dy = tag.getDoubleAttribute("dy");
+                MoveAnimation ani = new MoveAnimation(ticks, profile, dx, dy);
+                animation.addAnimation(ani);
+
+            } else if ( tag.getName().equals("forwards") ) {
+                    
+                String profileName = tag.getOptionalAttribute("profile", "unit");
+                Profile profile = NumericAnimation.getProfile(profileName);
+                if (profile == null) {
+                    throw new XMLException("Unknown profile : " + profileName);
+                }
+                int ticks = tag.getIntAttribute("ticks");
+                double forwards = tag.getDoubleAttribute("forwards");
+                double sideways = tag.getDoubleAttribute("sideways");
+                ForwardsAnimation ani = new ForwardsAnimation(ticks, profile, forwards, sideways);
+                animation.addAnimation(ani);
+                
+            } else if ( tag.getName().equals("alpha") ) {
+    
+                String profileName = tag.getOptionalAttribute("profile", "linear");
+                Profile profile = NumericAnimation.getProfile(profileName);
+                if (profile == null) {
+                    throw new XMLException("Unknown profile : " + profileName);
+                }
+                int ticks = tag.getIntAttribute("ticks");
+                double target = tag.getOptionalDoubleAttribute("target", 255);
+                AlphaAnimation ani = new AlphaAnimation(ticks, profile, target);
+                animation.addAnimation(ani);
+
+            } else if ( tag.getName().equals("turn") ) {
+    
+                String profileName = tag.getOptionalAttribute("profile", "linear");
+                Profile profile = NumericAnimation.getProfile(profileName);
+                if (profile == null) {
+                    throw new XMLException("Unknown profile : " + profileName);
+                }
+                int ticks = tag.getIntAttribute("ticks");
+                double turn = tag.getOptionalDoubleAttribute("turn", 360);
+                TurnAnimation ani = new TurnAnimation(ticks, profile, turn);
+                animation.addAnimation(ani);
+
+            } else if ( tag.getName().equals("scale") ) {
+    
+                String profileName = tag.getOptionalAttribute("profile", "linear");
+                Profile profile = NumericAnimation.getProfile(profileName);
+                if (profile == null) {
+                    throw new XMLException("Unknown profile : " + profileName);
+                }
+                int ticks = tag.getIntAttribute("ticks");
+                double target = tag.getOptionalDoubleAttribute("target", 1);
+                ScaleAnimation ani = new ScaleAnimation(ticks, profile, target);
+                animation.addAnimation(ani);
+
+            } else {
+                System.err.println( "Ignoring animation tag " + tag.getName() );
             }
-            int ticks = moveTag.getIntAttribute("ticks");
-            double dx = moveTag.getDoubleAttribute("dx");
-            double dy = moveTag.getDoubleAttribute("dy");
-            MoveAnimation ani = new MoveAnimation(ticks, profile, dx, dy);
-            animation.addAnimation(ani);
-        }
-        for (Iterator<XMLTag> j = parentTag.getTags("forwards"); j.hasNext();) {
-            XMLTag forwardsTag = j.next();
-
-            String profileName = forwardsTag.getOptionalAttribute("profile", "unit");
-            Profile profile = NumericAnimation.getProfile(profileName);
-            if (profile == null) {
-                throw new XMLException("Unknown profile : " + profileName);
-            }
-            int ticks = forwardsTag.getIntAttribute("ticks");
-            double forwards = forwardsTag.getDoubleAttribute("forwards");
-            double sideways = forwardsTag.getDoubleAttribute("sideways");
-            ForwardsAnimation ani = new ForwardsAnimation(ticks, profile, forwards, sideways);
-            animation.addAnimation(ani);
-        }
-        for (Iterator<XMLTag> j = parentTag.getTags("alpha"); j.hasNext();) {
-            XMLTag childTag = j.next();
-
-            String profileName = childTag.getOptionalAttribute("profile", "linear");
-            Profile profile = NumericAnimation.getProfile(profileName);
-            if (profile == null) {
-                throw new XMLException("Unknown profile : " + profileName);
-            }
-            int ticks = childTag.getIntAttribute("ticks");
-            double target = childTag.getOptionalDoubleAttribute("target", 255);
-            AlphaAnimation ani = new AlphaAnimation(ticks, profile, target);
-            animation.addAnimation(ani);
-        }
-        for (Iterator<XMLTag> j = parentTag.getTags("turn"); j.hasNext();) {
-            XMLTag childTag = j.next();
-
-            String profileName = childTag.getOptionalAttribute("profile", "linear");
-            Profile profile = NumericAnimation.getProfile(profileName);
-            if (profile == null) {
-                throw new XMLException("Unknown profile : " + profileName);
-            }
-            int ticks = childTag.getIntAttribute("ticks");
-            double turn = childTag.getOptionalDoubleAttribute("turn", 360);
-            TurnAnimation ani = new TurnAnimation(ticks, profile, turn);
-            animation.addAnimation(ani);
-        }
-        for (Iterator<XMLTag> j = parentTag.getTags("scale"); j.hasNext();) {
-            XMLTag childTag = j.next();
-
-            String profileName = childTag.getOptionalAttribute("profile", "linear");
-            Profile profile = NumericAnimation.getProfile(profileName);
-            if (profile == null) {
-                throw new XMLException("Unknown profile : " + profileName);
-            }
-            int ticks = childTag.getIntAttribute("ticks");
-            double target = childTag.getOptionalDoubleAttribute("target", 1);
-            ScaleAnimation ani = new ScaleAnimation(ticks, profile, target);
-            animation.addAnimation(ani);
         }
     }
 

@@ -23,14 +23,14 @@ public class ScrollableLayer extends ActorsLayer
      * allowed, then the width and height are the same as in super.positionOnScreen.
      */
 
-    public ScrollableLayer( Rect position )
+    public ScrollableLayer( String name, Rect position )
     {
-        this(position, null);
+        this(name, position, null);
     }
 
-    public ScrollableLayer( Rect position, RGBA backgroundColor )
+    public ScrollableLayer( String name, Rect position, RGBA backgroundColor )
     {
-        super(position);
+        super(name, position);
 
         this.backgroundColor = backgroundColor;
     }
@@ -192,12 +192,6 @@ public class ScrollableLayer extends ActorsLayer
 
                     } catch (JameRuntimeException e) {
                         actor.getAppearance().clearCachedSurface();
-                        /*
-                         * try { // Wait a little while, and then try again. // TODO SDLTimer.delay(
-                         * 10 ); } catch ( InterruptedException ignore ) { System.err.println(
-                         * "WARNING : attempt #" + retry +
-                         * " failed to delay during ScrollableLayer.render" ); }
-                         */
                         System.err.println("WARNING : attempt #" + retry +
                             " failed to blit surface during ScrollableLayer.render");
                     }

@@ -25,9 +25,9 @@ public class AnimationTest extends Game
     public void init()
     {
 
-        this.mainLayer = new ScrollableLayer(this.size, new RGBA(0, 0, 0));
+        this.mainLayer = new ScrollableLayer("main",this.size, new RGBA(0, 0, 0));
         this.mainLayer.setYAxisPointsDown(true);
-        Itchy.singleton.getGameLayer().add(this.mainLayer);
+        this.layers.add(this.mainLayer);
         Itchy.singleton.addEventListener(this);
     }
 

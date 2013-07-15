@@ -29,6 +29,8 @@ public class DrunkInvaders extends Game
 
     public static DrunkInvaders game;
 
+    public ScrollableLayer backgroundLayer;
+
     public ScrollableLayer mainLayer;
 
     public ScrollableLayer glassLayer;
@@ -59,6 +61,30 @@ public class DrunkInvaders extends Game
         this.resources.load(RESOURCES);
 
         this.neighbourhood = new StandardNeighbourhood(NEIGHBOURHOOD_SQUARE_SIZE);
+        Rect screenSize = new Rect(0, 0, 640, 480);
+
+        this.mainLayer = new ScrollableLayer("main",screenSize);
+        this.mainLayer.centerOn(320, 240);
+
+        this.backgroundLayer = new ScrollableLayer("background",screenSize);
+        this.backgroundLayer.centerOn(320, 240);
+
+        this.glassLayer = new ScrollableLayer("glass",screenSize);
+        this.fadeLayer = new ScrollableLayer("fade",screenSize);
+
+        this.fadeActor = new Actor(this.resources.getPose("white"));
+        this.fadeActor.getAppearance().setAlpha(0);
+        this.fadeActor.activate();
+        this.fadeLayer.add(this.fadeActor);
+        
+        this.layers.add( backgroundLayer );
+        this.layers.add( mainLayer );
+        this.layers.add( glassLayer );
+        this.layers.add( fadeLayer );
+        
+        this.glassLayer.locked = true;
+        this.fadeLayer.locked = true;
+
     }
 
     @Override
@@ -67,23 +93,8 @@ public class DrunkInvaders extends Game
         this.metronomeCountdown = 0;
         this.metronome = 20;
 
-        Rect screenSize = new Rect(0, 0, 640, 480);
-
-        this.mainLayer = new ScrollableLayer(screenSize);
-        this.mainLayer.centerOn(320, 240);
+        this.mainLayer.disableMouseListener();
         this.mainLayer.enableMouseListener();
-        Itchy.singleton.getGameLayer().add(this.mainLayer);
-
-        this.glassLayer = new ScrollableLayer(screenSize);
-        Itchy.singleton.getGameLayer().add(this.glassLayer);
-
-        this.fadeLayer = new ScrollableLayer(screenSize);
-        Itchy.singleton.getGameLayer().add(this.fadeLayer);
-
-        this.fadeActor = new Actor(this.resources.getPose("white"));
-        this.fadeActor.getAppearance().setAlpha(0);
-        this.fadeActor.activate();
-        this.fadeLayer.add(this.fadeActor);
 
         this.startScene("menu");
     }
@@ -330,7 +341,6 @@ public class DrunkInvaders extends Game
             Editor editor = new Editor(DrunkInvaders.game);
             editor.init();
             editor.start();
-            // this.go();
         } catch (Exception e) {
             e.printStackTrace();
         }

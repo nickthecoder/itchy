@@ -48,7 +48,7 @@ public class ImagePose implements Pose
         return result;
     }
 
-    // TODO What's this for? Surely it shouldn't be public, even if it is still required.
+    // MORE What's this for? Surely it shouldn't be public, even if it is still required.
     public static ImagePose getDummyPose()
     {
         if (dummyPose == null) {

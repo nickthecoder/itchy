@@ -12,13 +12,13 @@
   <poses>
     <pose name="moon" filename="moon.jpg"/>
     <pose name="shield-l" filename="shield-l.png"/>
-    <pose name="alien1b" filename="alien1b.png" direction="-90.0"/>
     <pose name="alien3a" filename="alien3a.png" direction="-90.0"/>
-    <pose name="shield-r" filename="shield-r.png"/>
+    <pose name="alien1b" filename="alien1b.png" direction="-90.0"/>
     <pose name="pixel" filename="pixel.png"/>
+    <pose name="shield-r" filename="shield-r.png"/>
     <pose name="ship" filename="ship.png" direction="90.0"/>
-    <pose name="alien3b" filename="alien3b.png" direction="-90.0"/>
     <pose name="bomb1" filename="bomb1.png" direction="-90.0"/>
+    <pose name="alien3b" filename="alien3b.png" direction="-90.0"/>
     <pose name="alien1a" filename="alien1a.png" direction="-90.0"/>
     <pose name="shielded7" filename="shielded7.png" direction="90.0"/>
     <pose name="shielded6" filename="shielded6.png" direction="90.0"/>
@@ -30,22 +30,22 @@
     <pose name="ship2" filename="ship2.png" direction="90.0"/>
     <pose name="shielded1" filename="shielded1.png" direction="90.0"/>
     <pose name="shielded0" filename="shielded0.png" direction="90.0"/>
-    <pose name="pacman2" filename="pacman2.png" offsetX="72" offsetY="71"/>
-    <pose name="pacman3" filename="pacman3.png" offsetX="71" offsetY="71"/>
+    <pose name="pacman2" filename="pacman2.png" offsetY="69"/>
+    <pose name="pacman3" filename="pacman3.png" offsetY="71"/>
     <pose name="bomb2" filename="bomb2.png" direction="-90.0"/>
-    <pose name="pacman1" filename="pacman1.png" offsetX="55" offsetY="71"/>
+    <pose name="pacman1" filename="pacman1.png" offsetX="66" offsetY="70"/>
     <pose name="redPixel" filename="redPixel.png"/>
-    <pose name="pacman4" filename="pacman4.png" offsetX="73" offsetY="68"/>
-    <pose name="pacman5" filename="pacman5.png" offsetX="72"/>
+    <pose name="pacman4" filename="pacman4.png" offsetX="65" offsetY="69"/>
+    <pose name="pacman5" filename="pacman5.png" offsetX="65" offsetY="71"/>
     <pose name="shieldFactory" filename="shieldFactory.png" offsetX="9" offsetY="37"/>
-    <pose name="saucer" filename="saucer.png" direction="-90.0"/>
     <pose name="earth3" filename="earth3.png"/>
-    <pose name="earth1" filename="earth1.jpg"/>
-    <pose name="alien2a" filename="alien2a.png" direction="-90.0"/>
+    <pose name="saucer" filename="saucer.png" direction="-90.0"/>
     <pose name="white" filename="white.png" offsetX="0" offsetY="480"/>
+    <pose name="alien2a" filename="alien2a.png" direction="-90.0"/>
+    <pose name="earth1" filename="earth1.jpg"/>
     <pose name="alien2b" filename="alien2b.png" direction="-90.0"/>
-    <pose name="greenPixel" filename="greenPixel.png"/>
     <pose name="level-completed" filename="level-completed.png" offsetY="42"/>
+    <pose name="greenPixel" filename="greenPixel.png"/>
     <pose name="factory" filename="factory.png"/>
     <pose name="earth" filename="earth.png" offsetX="0" offsetY="480"/>
     <pose name="shield" filename="shield.png"/>
@@ -54,8 +54,8 @@
   <sounds>
     <sound name="explode" filename="sounds/explode.ogg"/>
     <sound name="ahh2" filename="sounds/ahh2.ogg"/>
-    <sound name="ahh1" filename="sounds/ahh1.ogg"/>
     <sound name="ricochet" filename="sounds/ricochet.ogg"/>
+    <sound name="ahh1" filename="sounds/ahh1.ogg"/>
     <sound name="ahh4" filename="sounds/ahh4.ogg"/>
     <sound name="ahh3" filename="sounds/ahh3.ogg"/>
     <sound name="shatter" filename="sounds/shatter.ogg"/>
@@ -70,7 +70,7 @@
     </animation>
     <animation name="pacman">
       <parallel loops="1">
-        <parallel loops="0">
+        <sequence loops="0">
           <pingPong>
             <frame pose="pacman1" delay="3"/>
             <frame pose="pacman2" delay="3"/>
@@ -78,25 +78,27 @@
             <frame pose="pacman4" delay="3"/>
             <frame pose="pacman5" delay="3"/>
           </pingPong>
-        </parallel>
+        </sequence>
         <sequence loops="1">
+          <forwards ticks="200" forwards="400.0" sideways="0.0" profile="linear"/>
           <parallel loops="1">
-            <forwards ticks="360" forwards="3.0" sideways="0.0" profile="unit"/>
+            <forwards ticks="360" forwards="890.0" sideways="0.0" profile="linear"/>
+            <turn ticks="360" turn="-360.0" profile="linear"/>
+          </parallel>
+          <forwards ticks="200" forwards="400.0" sideways="0.0" profile="linear"/>
+          <turn ticks="10" turn="180.0" profile="linear"/>
+          <forwards ticks="200" forwards="400.0" sideways="0.0" profile="linear"/>
+          <parallel loops="1">
+            <forwards ticks="360" forwards="890.0" sideways="0.0" profile="linear"/>
             <turn ticks="360" turn="360.0" profile="linear"/>
           </parallel>
-          <forwards ticks="200" forwards="2.0" sideways="0.0" profile="unit"/>
-          <forwards ticks="200" forwards="2.0" sideways="0.0" profile="unit"/>
+          <forwards ticks="200" forwards="400.0" sideways="0.0" profile="linear"/>
         </sequence>
       </parallel>
     </animation>
     <animation name="fadeIn">
       <sequence loops="1">
         <alpha ticks="40" target="255.0" profile="linear"/>
-      </sequence>
-    </animation>
-    <animation name="alien1">
-      <sequence loops="1">
-        <frames/>
       </sequence>
     </animation>
     <animation name="alienYell">
@@ -106,9 +108,14 @@
         <turn ticks="80" turn="40.0" profile="linear"/>
       </parallel>
     </animation>
-    <animation name="grow">
+    <animation name="alien1">
       <sequence loops="1">
-        <scale ticks="100" target="1.0" profile="linear"/>
+        <frames/>
+      </sequence>
+    </animation>
+    <animation name="alien2">
+      <sequence loops="1">
+        <frames/>
       </sequence>
     </animation>
     <animation name="bomb">
@@ -119,9 +126,9 @@
         </pingPong>
       </sequence>
     </animation>
-    <animation name="alien2">
+    <animation name="grow">
       <sequence loops="1">
-        <frames/>
+        <scale ticks="100" target="1.0" profile="linear"/>
       </sequence>
     </animation>
     <animation name="deathSpiral">
@@ -228,12 +235,17 @@
     <costume name="factory" behaviour="uk.co.nickthecoder.drunkinvaders.AlienFactory">
       <pose name="default" pose="factory"/>
     </costume>
+    <costume name="pacman1" behaviour="uk.co.nickthecoder.drunkinvaders.Pacman">
+      <pose name="default" pose="pacman1"/>
+      <animation name="default" animation="pacman"/>
+    </costume>
     <costume name="earth">
       <pose name="default" pose="earth"/>
     </costume>
-    <costume name="pacman1">
-      <pose name="default" pose="pacman1"/>
-      <animation name="default" animation="pacman"/>
+    <costume name="ship-won" extends="ship" behaviour="uk.co.nickthecoder.drunkinvaders.Ship">
+      <pose name="default" pose="ship2"/>
+      <string name="death">Are you kidding me?</string>
+      <string name="death">Failed at the last hurdle!</string>
     </costume>
     <costume name="bullet">
       <pose name="default" pose="bullet"/>
@@ -254,6 +266,7 @@
     <scene name="level11" filename="scenes/level11.xml"/>
     <scene name="level02" filename="scenes/level02.xml"/>
     <scene name="level01" filename="scenes/level01.xml"/>
+    <scene name="level13" filename="scenes/level13.xml"/>
     <scene name="level10" filename="scenes/level10.xml"/>
     <scene name="levels" filename="scenes/levels.xml"/>
     <scene name="level99" filename="scenes/level99.xml"/>

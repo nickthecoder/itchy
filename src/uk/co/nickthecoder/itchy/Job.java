@@ -143,9 +143,6 @@ public abstract class Job implements Runnable
     }
     public boolean hasLock()
     {
-        //if ( this.lockingThread != Thread.currentThread() ) { // TODO Remove
-        //    System.out.println( "Lock thread : " + this.lockingThread + " This Thread " + Thread.currentThread() );
-        //}
         return this.lockingThread == Thread.currentThread();
     }
 }

@@ -34,6 +34,7 @@ public abstract class SubEditor
 
     public SubEditor( Editor editor )
     {
+        System.out.println( "SubEditor : " + editor.game.getLayers() );
         this.editor = editor;
     }
 

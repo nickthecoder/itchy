@@ -50,9 +50,9 @@ public class GuiTest extends Game
     
     public void init()
     {
-        this.mainLayer = new ScrollableLayer(this.size, new RGBA(255, 255, 255));
+        this.mainLayer = new ScrollableLayer("main",this.size, new RGBA(255, 255, 255));
         this.mainLayer.setYAxisPointsDown(true);
-        Itchy.singleton.getGameLayer().add(this.mainLayer);
+        this.layers.add(this.mainLayer);
 
         this.guiPose = new GuiPose();
         this.guiPose.setRules(this.rules);

@@ -54,17 +54,15 @@ public class Itchy
     public static Itchy singleton = new Itchy();
 
     /**
-     * As sdljava hasn't implemented GetKeystate, I've had to implement it myself. This holds a
-     * boolean for each key. On key pressed events sets the appropriate boolean, and key released
-     * events reset the boolean. Uses the SDL keysym values to index the array.
+     * Holds a boolean for each key.
+     * On key pressed events sets the appropriate boolean, and key released
+     * events reset the boolean. Uses the Keys values to index the array.
      */
     private boolean[] keyboardState;
 
     public Surface screen;
 
     private CompoundLayer rootLayer;
-
-    private CompoundLayer gameLayer;
 
     private Rect rootRect;
 
@@ -122,15 +120,11 @@ public class Itchy
     public void init( Game game, int width, int height, int bpp ) throws JameException
     {
         while (this.windows.size() > 0) {
-            this.windows.get(0).destroy(); // TODO does this work???
+            this.windows.get(0).destroy(); // MORE does this work???
         }
         this.eventListeners = new LinkedList<EventListener>();
         this.mouseListeners = new LinkedList<MouseListener>();
         this.keyListeners = new LinkedList<KeyListener>();
-
-        if (this.rootLayer != null) {
-            this.rootLayer.destroy();
-        }
 
         this.keyboardState = new boolean[KEYBOARD_STATE_SIZE];
 
@@ -152,11 +146,9 @@ public class Itchy
         this.screen = Video.setMode(width, height);
 
         this.rootRect = new Rect(0, 0, width, height);
-        this.rootLayer = new CompoundLayer(this.rootRect);
-        this.gameLayer = new CompoundLayer(this.rootRect);
-        this.rootLayer.add(this.gameLayer);
+        this.rootLayer = new CompoundLayer("root",this.rootRect);
 
-        this.popupLayer = new ScrollableLayer(this.rootRect);
+        this.popupLayer = new ScrollableLayer("popup",this.rootRect);
         this.popupLayer.setYAxisPointsDown(true);
         this.popupLayer.setVisible(true);
         this.rootLayer.add(this.popupLayer);
@@ -177,10 +169,6 @@ public class Itchy
         this.rules = rules;
     }
 
-    public CompoundLayer getGameLayer()
-    {
-        return this.gameLayer;
-    }
 
     /**
      * Removes all layers and kills all Actors on those layers
@@ -209,6 +197,8 @@ public class Itchy
     {
         try {
             this.init(this.game);
+            this.rootLayer.add(this.game.layers);
+            System.out.println( "Layers : " + this.rootLayer );
             this.addEventListener(this.game);
             this.game.init();
             if (!this.running) {
@@ -223,6 +213,7 @@ public class Itchy
 
     public void endGame()
     {
+        this.rootLayer.remove(this.game.layers);
         this.removeEventListener(this.game);
         if (this.gameStack.isEmpty()) {
             this.terminate();

@@ -93,7 +93,6 @@ public class GraphicsContext
     private Rect adjustRect( Rect rect )
     {
         Rect result = new Rect(rect.x + this.ox, rect.y + this.oy, rect.width, rect.height);
-        // TODO clip
         return result;
     }
 

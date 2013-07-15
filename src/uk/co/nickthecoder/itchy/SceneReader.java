@@ -67,7 +67,7 @@ public class SceneReader
         sceneActor.behaviourClassName = costume.behaviourClassName;
         this.readSceneActorAttributes(actorTag, sceneActor);
 
-        this.scene.sceneActors.add(sceneActor);
+        this.scene.add(sceneActor);
     }
 
     private void readText( XMLTag textTag ) throws Exception
@@ -93,7 +93,7 @@ public class SceneReader
 
         this.readSceneActorAttributes(textTag, sceneActor);
 
-        this.scene.sceneActors.add(sceneActor);
+        this.scene.add(sceneActor);
     }
 
     private void readSceneActorAttributes( XMLTag actorTag, SceneActor sceneActor )

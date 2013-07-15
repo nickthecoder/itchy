@@ -91,4 +91,11 @@
     <property name="fontSize" value="32"/>
     <property name="shadowColor" value="#000000ff"/>
   </actor>
+  <actor costume="level" x="233" y="97" direction="0.0" start="default">
+    <property name="fontColor" value="#ffffffff"/>
+    <property name="levelNumber" value="13"/>
+    <property name="font" value="blackCasper"/>
+    <property name="fontSize" value="22"/>
+    <property name="shadowColor" value="#000000ff"/>
+  </actor>
 </scene>

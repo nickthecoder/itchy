@@ -52,8 +52,8 @@ public class Table extends Container
 
         this.scroll = new VerticalScroll(this.rows);
         this.scroll.setType("tableData");
-        this.scroll.setExpansion(1); // TODO MORE ???
-        this.setFill(false, true); // TODO MORE ???
+        this.scroll.setExpansion(1); // MORE ???
+        this.setFill(false, true); // MORE ???
 
         for (int i = 0; i < this.columns.size(); i++) {
             Component heading = this.createHeading(i);
@@ -216,24 +216,41 @@ public class Table extends Container
         }
     }
 
+    public void selectRow( TableModelRow row )
+    {
+        this.selectRow(this.getTableRow(row));
+    }
+
     public void addTableListener( TableListener listener )
     {
         this.tableListeners.add(listener);
     }
 
-    public void updateRow( TableModelRow row )
+    private TableRow getTableRow( TableModelRow row )
     {
+        if (row == null) {
+            return null;
+        }
+
         for (Component rowc : this.rows.getChildren()) {
             TableRow tableRow = (TableRow) rowc;
 
             if (tableRow.row == row) {
+                return tableRow;
+            }
+        }
+        return null;
+    }
 
-                int i = 0;
-                for (TableModelColumn column : this.columns) {
-                    Component component = tableRow.getChildren().get(i);
-                    column.updateComponent(component, row);
-                    i++;
-                }
+    public void updateRow( TableModelRow row )
+    {
+        TableRow tableRow = this.getTableRow(row);
+        if (tableRow != null) {
+            int i = 0;
+            for (TableModelColumn column : this.columns) {
+                Component component = tableRow.getChildren().get(i);
+                column.updateComponent(component, row);
+                i++;
             }
         }
     }
@@ -245,14 +262,14 @@ public class Table extends Container
             if (ke.symbol == Keys.UP) {
                 if (this.currentRow.getRowIndex() > 0) {
                     this.selectRow((TableRow) this.rows.getChildren().get(
-                            this.currentRow.getRowIndex() - 1));
+                        this.currentRow.getRowIndex() - 1));
                 }
                 return true;
             }
             if (ke.symbol == Keys.DOWN) {
                 if (this.currentRow.getRowIndex() < this.rows.getChildren().size() - 1) {
                     this.selectRow((TableRow) this.rows.getChildren().get(
-                            this.currentRow.getRowIndex() + 1));
+                        this.currentRow.getRowIndex() + 1));
                 }
                 return true;
             }

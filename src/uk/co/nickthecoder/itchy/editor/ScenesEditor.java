@@ -102,7 +102,7 @@ public class ScenesEditor extends SubEditor
             SceneResource sceneResource = this.editor.resources.getSceneResource(sceneName);
             String[] attributeNames = { "name" };
             TableModelRow row = new ReflectionTableModelRow<SceneResource>(sceneResource,
-                    attributeNames);
+                attributeNames);
             model.addRow(row);
         }
         return model;
@@ -120,14 +120,14 @@ public class ScenesEditor extends SubEditor
 
         this.txtName = new TextBox(this.currentSceneResource.getName());
         grid.addRow(new Label("Name"), this.txtName);
-        
+
         try {
             this.checkBoxShowMouse = new CheckBox(this.currentSceneResource.getScene().showMouse);
             grid.addRow(new Label("Show Mouse"), this.checkBoxShowMouse);
         } catch (Exception e) {
             // Do nothing
         }
-        
+
     }
 
     @Override
@@ -159,7 +159,7 @@ public class ScenesEditor extends SubEditor
         } else {
             if (!this.currentSceneResource.getFilename().equals(filename)) {
                 if (!this.editor.resources
-                        .rename(this.currentSceneResource.getFilename(), filename)) {
+                    .rename(this.currentSceneResource.getFilename(), filename)) {
                     this.setMessage("Rename failed");
                     return;
                 }
@@ -168,7 +168,6 @@ public class ScenesEditor extends SubEditor
 
         this.currentSceneResource.rename(this.txtName.getText());
         this.currentSceneResource.setFilename(filename);
-
 
         if (this.adding) {
             this.editor.resources.addScene(this.currentSceneResource);
@@ -183,7 +182,7 @@ public class ScenesEditor extends SubEditor
             this.currentSceneResource.save();
         } catch (Exception e) {
             e.printStackTrace();
-            this.setMessage("Failed to save scene file");            
+            this.setMessage("Failed to save scene file");
         }
         Itchy.singleton.hideWindow(this.editWindow);
 
@@ -210,7 +209,7 @@ public class ScenesEditor extends SubEditor
     private void onDuplicate()
     {
         ReflectionTableModelRow<?> row = (ReflectionTableModelRow<?>) this.table
-                .getCurrentTableModelRow();
+            .getCurrentTableModelRow();
         if (row == null) {
             return;
         }
@@ -231,7 +230,7 @@ public class ScenesEditor extends SubEditor
     private void onDesign()
     {
         ReflectionTableModelRow<?> row = (ReflectionTableModelRow<?>) this.table
-                .getCurrentTableModelRow();
+            .getCurrentTableModelRow();
         if (row == null) {
             return;
         }

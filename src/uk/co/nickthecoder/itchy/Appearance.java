@@ -302,7 +302,7 @@ public final class Appearance implements OffsetSurface
 
     public WorldRectangle getWorldRectangle()
     {
-        // TODO Calc the rectangle without needing to redraw the surface
+        // MORE Calc the rectangle without needing to redraw the surface
         // If available, give the surface's rectangle
         // otherwise
         // if rotated

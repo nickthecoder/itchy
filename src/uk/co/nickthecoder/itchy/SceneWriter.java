@@ -47,7 +47,7 @@ public class SceneWriter extends XMLWriter
 
     private void writeActors() throws XMLException
     {
-        for (SceneActor sceneActor : this.scene.sceneActors) {
+        for (SceneActor sceneActor : this.scene.getSceneActors()) {
 
             if (sceneActor instanceof CostumeSceneActor) {
 

@@ -3,6 +3,7 @@ package uk.co.nickthecoder.itchy;
 import java.util.prefs.Preferences;
 
 import uk.co.nickthecoder.itchy.util.AutoFlushPreferences;
+import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
@@ -14,6 +15,9 @@ public abstract class Game extends Task implements EventListener, MessageListene
     private boolean ticking = false;
 
     private AutoFlushPreferences preferences;
+    
+    protected CompoundLayer layers =
+        new CompoundLayer("game", new Rect(0,0,this.getWidth(), this.getHeight()));
 
     public AutoFlushPreferences getPreferences()
     {
@@ -24,6 +28,11 @@ public abstract class Game extends Task implements EventListener, MessageListene
         return this.preferences;
     }
 
+    public CompoundLayer getLayers()
+    {
+        return layers;
+    }
+    
     public int getWidth()
     {
         return 640;

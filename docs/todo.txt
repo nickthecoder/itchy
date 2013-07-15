@@ -8,9 +8,12 @@ Jame is out of date, need to rebuild for win32 and i386
 What's Next
 ===========
 
-Add a moon scene - The moon is at the top, you point downwards!
+Use annotations to set initial tags :
+    @Tagged("deadly") @Tagged("bouncy") class Alien {...)
 
 Try it on a RaspPi
+
+Allow calculated values inside animations?
 
 Scenery Editor
 
@@ -135,7 +138,6 @@ Multi-line text.
 
 Fullscreen 
 
-Mouse pointer on/off
 
 Later Possible Refactoring
 ==========================

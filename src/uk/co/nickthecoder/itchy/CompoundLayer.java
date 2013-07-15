@@ -1,7 +1,9 @@
 package uk.co.nickthecoder.itchy;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 
 import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.Surface;
@@ -9,10 +11,10 @@ import uk.co.nickthecoder.jame.Surface;
 public class CompoundLayer extends Layer
 {
     private final LinkedList<Layer> children;
-
-    public CompoundLayer( Rect positionOnScreen )
+    
+    public CompoundLayer( String name, Rect positionOnScreen )
     {
-        super(positionOnScreen);
+        super(name, positionOnScreen);
         this.children = new LinkedList<Layer>();
     }
 
@@ -39,6 +41,16 @@ public class CompoundLayer extends Layer
         layer.parent = this;
     }
 
+    public void remove( Layer layer)
+    {
+        this.children.remove(layer);
+    }
+    
+    public List<Layer> getChildren()
+    {
+        return Collections.unmodifiableList(this.children);
+    }
+    
     @Override
     public void clear()
     {
@@ -57,4 +69,17 @@ public class CompoundLayer extends Layer
         this.clear();
     }
 
+    @Override
+    public String toString()
+    {
+        StringBuffer result = new StringBuffer();
+        result.append(super.toString()).append("\n");
+        
+        for ( Layer layer : this.children ) {
+            result.append("Child : " ).append( layer.toString() ).append("\n");
+        }
+        
+        return result.toString();
+    }
+    
 }

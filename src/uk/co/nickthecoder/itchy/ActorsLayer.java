@@ -23,9 +23,9 @@ public abstract class ActorsLayer extends Layer
     private MouseListener mouseListener = null;
     private final List<Actor> actorMouseListeners = new ArrayList<Actor>();
 
-    public ActorsLayer( Rect position )
+    public ActorsLayer( String name, Rect position )
     {
-        super(position);
+        super(name,position);
     }
 
     public Iterator<Actor> iterator()
@@ -141,6 +141,7 @@ public abstract class ActorsLayer extends Layer
             @Override
             public boolean onMouseDown( MouseButtonEvent event )
             {
+                System.out.println("ActorsLayer MouseListener onMouseDown");
                 for (Iterator<Actor> i = ActorsLayer.this.actorMouseListeners.iterator(); i
                     .hasNext();) {
                     Actor actor = i.next();

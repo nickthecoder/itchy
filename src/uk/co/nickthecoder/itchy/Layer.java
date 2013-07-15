@@ -11,6 +11,8 @@ import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 
 public abstract class Layer implements MouseListener
 {
+    private String name;
+    
     public final Rect position;
 
     protected WorldRectangle worldRect;
@@ -26,14 +28,25 @@ public abstract class Layer implements MouseListener
     private boolean removePending = false;
     protected Layer parent;
     protected List<MouseListener> mouseListeners;
+    
+    /**
+     * Used by the editor.
+     */
+    public boolean locked = false;
 
-    public Layer( Rect position )
+    public Layer( String name, Rect position )
     {
         assert (position != null);
+        this.name = name;
         this.position = position;
         this.worldRect = new WorldRectangle(0, 0, position.width, position.height);
     }
 
+    public String getName()
+    {
+        return this.name;
+    }
+    
     /**
      * It it the norm in mathematics, for the Y axis to point upwards, but display devices have the
      * Y axis pointing downwards. This boolean lets you choose which of these two conventions you
@@ -233,4 +246,9 @@ public abstract class Layer implements MouseListener
     }
 
     public abstract void destroy();
+    
+    public String toString()
+    {
+        return this.getClass().getName() + " (" + this.name + ")";
+    }
 }

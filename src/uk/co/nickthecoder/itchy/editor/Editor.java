@@ -13,7 +13,6 @@ import uk.co.nickthecoder.itchy.gui.MessageBox;
 import uk.co.nickthecoder.itchy.gui.Notebook;
 import uk.co.nickthecoder.itchy.gui.Rules;
 import uk.co.nickthecoder.itchy.gui.VerticalLayout;
-import uk.co.nickthecoder.jame.Rect;
 
 public final class Editor extends Game
 {
@@ -53,15 +52,14 @@ public final class Editor extends Game
 
     public Rules rules;
 
-    public final Rect size = new Rect(0, 0, 1000, 750);
-
     public Editor( Game game ) throws Exception
     {
+        this.game = game;
+
         singleton = this;
         Itchy.singleton.init(this);
 
-        this.game = game;
-        this.resources = game.resources; // new Resources();
+        this.resources = game.resources;
 
         this.rules = new Rules();
         this.rules.load("resources/defaultGui/style.xml");
@@ -70,13 +68,13 @@ public final class Editor extends Game
     @Override
     public int getWidth()
     {
-        return this.size.width;
+        return 1000;
     }
 
     @Override
     public int getHeight()
     {
-        return this.size.height;
+        return 750;
     }
 
     @Override
@@ -91,16 +89,17 @@ public final class Editor extends Game
         this.mainGuiPose.setFill(true, true);
         this.mainGuiPose.addStyle("editor");
 
-        this.mainGuiPose.setMinimumWidth(this.size.width);
-        this.mainGuiPose.setMinimumHeight(this.size.height);
+        this.mainGuiPose.setMinimumWidth(this.getWidth());
+        this.mainGuiPose.setMinimumHeight(this.getHeight());
 
-        this.mainGuiPose.setMaximumWidth(this.size.width);
-        this.mainGuiPose.setMaximumHeight(this.size.height);
+        this.mainGuiPose.setMaximumWidth(this.getWidth());
+        this.mainGuiPose.setMaximumHeight(this.getHeight());
 
         this.mainGuiPose.show();
 
         // this.mainLayer.add( this.mainGuiPose.getActor() );
 
+        System.out.println( "Editor init : " + this.game.getLayers() );
         this.soundsEditor = new SoundsEditor(this);
         this.posesEditor = new PosesEditor(this);
         this.fontsEditor = new FontsEditor(this);
@@ -148,8 +147,8 @@ public final class Editor extends Game
         });
         this.mainGuiPose.addChild(buttons);
 
-        this.mainGuiPose.setPosition(0, 0, this.size.width, this.size.height);
-        this.mainGuiPose.reStyle(); // TODO needed ?
+        this.mainGuiPose.setPosition(0, 0, this.getWidth(), this.getHeight());
+        this.mainGuiPose.reStyle(); // MORE needed ?
 
     }
 
