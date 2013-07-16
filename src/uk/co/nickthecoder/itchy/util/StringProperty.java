@@ -6,9 +6,9 @@ import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.TextBox;
 
-public class StringPropert<S> extends AbstractProperty<S, String>
+public class StringProperty<S> extends AbstractProperty<S, String>
 {
-    public StringPropert( String label, String access )
+    public StringProperty( String label, String access )
     {
         super(label, access);
     }
@@ -25,7 +25,7 @@ public class StringPropert<S> extends AbstractProperty<S, String>
                 public void changed()
                 {
                     try {
-                        StringPropert.this.update(subject, box);
+                        StringProperty.this.update(subject, box);
                         if (listener != null) {
                             listener.changed();
                         }

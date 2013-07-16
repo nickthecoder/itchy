@@ -25,7 +25,6 @@ public class SceneReader
 
     public Scene load( String filename ) throws Exception
     {
-        System.out.println("Loading scene : " + filename);
         BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(
                 filename)));
         this.scene = new Scene();
@@ -43,17 +42,32 @@ public class SceneReader
     {
         this.scene.showMouse = sceneTag.getOptionalBooleanAttribute("showMouse", true);
         
-        for (Iterator<XMLTag> i = sceneTag.getTags(); i.hasNext();) {
+        // For old versions without multiple layers, the actor tags are directly within the scene tag.
+        readLayer( sceneTag, this.scene.getDefaultSceneLayer());
+        
+        // For new versions, the scene tag has a set of layer tags, and the layer tags have the actors.
+        for (Iterator<XMLTag> i = sceneTag.getTags("layer"); i.hasNext();) {
+            XMLTag layerTag = i.next();
+            String name = layerTag.getAttribute("name");
+            Scene.SceneLayer sceneLayer = this.scene.createSceneLayer(name);
+            this.readLayer(layerTag, sceneLayer);
+        }
+
+    }
+    
+    private void readLayer( XMLTag parentTag, Scene.SceneLayer sceneLayer ) throws Exception
+    {
+        for (Iterator<XMLTag> i = parentTag.getTags(); i.hasNext();) {
             XMLTag tag = i.next();
             if (tag.getName() == "actor") {
-                this.readActor(tag);
+                this.readActor(tag, sceneLayer);
             } else if (tag.getName() == "text") {
-                this.readText(tag);
+                this.readText(tag, sceneLayer);
             }
         }
     }
 
-    private void readActor( XMLTag actorTag ) throws Exception
+    private void readActor( XMLTag actorTag, Scene.SceneLayer sceneLayer ) throws Exception
     {
         String costumeName = actorTag.getAttribute("costume");
         Costume costume = this.resources.getCostume(costumeName);
@@ -67,10 +81,10 @@ public class SceneReader
         sceneActor.behaviourClassName = costume.behaviourClassName;
         this.readSceneActorAttributes(actorTag, sceneActor);
 
-        this.scene.add(sceneActor);
+        sceneLayer.add(sceneActor);
     }
 
-    private void readText( XMLTag textTag ) throws Exception
+    private void readText( XMLTag textTag, Scene.SceneLayer sceneLayer ) throws Exception
     {
         String fontName = textTag.getAttribute("font");
         int fontSize = textTag.getIntAttribute("size");
@@ -93,7 +107,7 @@ public class SceneReader
 
         this.readSceneActorAttributes(textTag, sceneActor);
 
-        this.scene.add(sceneActor);
+        sceneLayer.add(sceneActor);
     }
 
     private void readSceneActorAttributes( XMLTag actorTag, SceneActor sceneActor )

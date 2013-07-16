@@ -2,7 +2,6 @@ package uk.co.nickthecoder.itchy.editor;
 
 import uk.co.nickthecoder.itchy.Game;
 import uk.co.nickthecoder.itchy.Itchy;
-import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Button;
 import uk.co.nickthecoder.itchy.gui.Component;
@@ -31,8 +30,6 @@ public final class Editor extends Game
     }
 
     public Game game;
-
-    public Resources resources;
 
     public GuiPose mainGuiPose;
 
@@ -74,7 +71,7 @@ public final class Editor extends Game
     @Override
     public int getHeight()
     {
-        return 750;
+        return 720;
     }
 
     @Override

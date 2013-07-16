@@ -10,7 +10,7 @@ import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 
 public abstract class Game extends Task implements EventListener, MessageListener
 {
-    public final Resources resources = new Resources();
+    public Resources resources = new Resources();
 
     private boolean ticking = false;
 

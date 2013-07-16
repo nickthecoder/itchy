@@ -91,11 +91,11 @@ public abstract class FrameRate
                 this.sequentialDroppedFrames++;
                 
                 if (this.sequentialDroppedFrames >= this.droppedFramesLimit) {
-                    System.err.println("Maximum frame skipping, cannot maintain frame rate.");
+                    //System.err.println("Maximum frame skipping, cannot maintain frame rate.");
                     doRedraw();
                     this.sequentialDroppedFrames = 0;
                 } else {
-                    System.err.println( "Dropped a frame" );
+                    //System.err.println( "Dropped a frame" );
                     this.droppedFrames++;
                 }
             } else {

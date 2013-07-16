@@ -1,40 +1,44 @@
 <scene showMouse="true">
-  <actor costume="earth3" x="320" y="240" direction="0.0" start="default"/>
-  <text text="Well Done" font="boycott" size="111" color="#22bb22" x="322" y="404" direction="0.0" start="default"/>
-  <text text="The world is safe" font="vera" size="22" color="#ffffff" x="319" y="108" direction="0.0" start="default"/>
-  <text text="The aliens are dead" font="vera" size="22" color="#ffffff" x="320" y="80" direction="0.0" start="default"/>
-  <text text="MENU" font="blackCasper" size="53" color="#000000" behaviour="uk.co.nickthecoder.itchy.extras.Button" x="320" y="24" direction="0.0" start="default">
-    <property name="message" value="menu"/>
-  </text>
-  <actor costume="shieldFactory" x="183" y="202" direction="89.29168795888526" start="default">
-    <property name="height" value="4"/>
-    <property name="width" value="6"/>
-    <property name="spacing" value="10.0"/>
-  </actor>
-  <actor costume="shieldFactory" x="456" y="239" direction="-90.14886469626032" start="default">
-    <property name="height" value="4"/>
-    <property name="width" value="6"/>
-    <property name="spacing" value="10.0"/>
-  </actor>
-  <actor costume="shieldFactory" x="402" y="316" direction="-46.87531224688961" start="default">
-    <property name="height" value="4"/>
-    <property name="width" value="6"/>
-    <property name="spacing" value="10.0"/>
-  </actor>
-  <actor costume="shieldFactory" x="214" y="286" direction="46.2188752351313" start="default">
-    <property name="height" value="4"/>
-    <property name="width" value="6"/>
-    <property name="spacing" value="10.0"/>
-  </actor>
-  <actor costume="pacman1" x="716" y="65" direction="180.0" start="default"/>
-  <actor costume="ship-won" x="320" y="302" direction="90.0" start="default">
-    <property name="mass" value="1.0"/>
-    <property name="vy" value="0.0"/>
-    <property name="vx" value="0.0"/>
-    <property name="shieldRechargeRate" value="0.001"/>
-    <property name="rotationSpeed" value="0.012"/>
-    <property name="ox" value="320.0"/>
-    <property name="shieldDischargeRate" value="0.01"/>
-    <property name="oy" value="207.0"/>
-  </actor>
+  <layer name="background">
+    <actor costume="earth3" x="321" y="240" direction="0.0" start="default"/>
+  </layer>
+  <layer name="main">
+    <text text="Well Done" font="boycott" size="111" color="#22bb22" x="322" y="404" direction="0.0" start="default"/>
+    <text text="The world is safe" font="vera" size="22" color="#ffffff" x="319" y="108" direction="0.0" start="default"/>
+    <text text="The aliens are dead" font="vera" size="22" color="#ffffff" x="320" y="80" direction="0.0" start="default"/>
+    <text text="MENU" font="blackCasper" size="53" color="#000000" behaviour="uk.co.nickthecoder.itchy.extras.Button" x="320" y="24" direction="0.0" start="default">
+      <property name="message" value="menu"/>
+    </text>
+    <actor costume="shieldFactory" x="183" y="202" direction="89.29168795888526" start="default">
+      <property name="height" value="4"/>
+      <property name="width" value="6"/>
+      <property name="spacing" value="10.0"/>
+    </actor>
+    <actor costume="shieldFactory" x="456" y="239" direction="-90.14886469626032" start="default">
+      <property name="height" value="4"/>
+      <property name="width" value="6"/>
+      <property name="spacing" value="10.0"/>
+    </actor>
+    <actor costume="shieldFactory" x="402" y="316" direction="-46.87531224688961" start="default">
+      <property name="height" value="4"/>
+      <property name="width" value="6"/>
+      <property name="spacing" value="10.0"/>
+    </actor>
+    <actor costume="shieldFactory" x="214" y="286" direction="46.2188752351313" start="default">
+      <property name="height" value="4"/>
+      <property name="width" value="6"/>
+      <property name="spacing" value="10.0"/>
+    </actor>
+    <actor costume="pacman1" x="716" y="65" direction="180.0" start="default"/>
+    <actor costume="ship-won" x="320" y="302" direction="90.0" start="default">
+      <property name="mass" value="1.0"/>
+      <property name="vy" value="0.0"/>
+      <property name="vx" value="0.0"/>
+      <property name="shieldRechargeRate" value="0.001"/>
+      <property name="rotationSpeed" value="0.012"/>
+      <property name="ox" value="320.0"/>
+      <property name="shieldDischargeRate" value="0.01"/>
+      <property name="oy" value="207.0"/>
+    </actor>
+  </layer>
 </scene>

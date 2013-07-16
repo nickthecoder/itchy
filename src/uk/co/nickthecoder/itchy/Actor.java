@@ -9,7 +9,7 @@ import uk.co.nickthecoder.itchy.util.DoubleProperty;
 import uk.co.nickthecoder.itchy.util.FontProperty;
 import uk.co.nickthecoder.itchy.util.AbstractProperty;
 import uk.co.nickthecoder.itchy.util.RGBAProperty;
-import uk.co.nickthecoder.itchy.util.StringPropert;
+import uk.co.nickthecoder.itchy.util.StringProperty;
 import uk.co.nickthecoder.itchy.util.TagCollection;
 import uk.co.nickthecoder.itchy.util.TagMembership;
 import uk.co.nickthecoder.jame.RGBA;
@@ -98,7 +98,7 @@ public class Actor extends Task implements MessageListener
             textProperties.addAll(normalProperties);
             textProperties.add(new FontProperty<Actor>("Font", "appearance.pose.font"));
             textProperties.add(new DoubleProperty<Actor>("Font Size", "appearance.pose.fontSize"));
-            textProperties.add(new StringPropert<Actor>("Text", "appearance.pose.text"));
+            textProperties.add(new StringProperty<Actor>("Text", "appearance.pose.text"));
             textProperties.add(new RGBAProperty<Actor>("Text Color", "appearance.pose.color",
                     false, false));
 
@@ -635,6 +635,7 @@ public class Actor extends Task implements MessageListener
     public String toString()
     {
         return "Actor #" + this._id + " @ " + getX() + "," + getY() +
+               " size(" + this.getAppearance().getWidth() + "," + this.getAppearance().getHeight() + ") " +
                 (getBehaviour() == null ? "" : "(" + getBehaviour().getClass().getName() + ")");
     }
 

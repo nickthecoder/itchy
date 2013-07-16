@@ -66,9 +66,6 @@ class GameLoopJob extends Job
 
     public boolean isFinished()
     {
-        //System.out.println( "Tasks  " + this.tasksIndex + " vs " + this.tasks.size() );
-        //System.out.println( "Actors " + this.actorsIndex + " vs " + this.actors.size() );
-        
         return (this.tasksIndex >= this.tasks.size()) && ((this.actorsIndex >= this.actors.size()));
     }
 

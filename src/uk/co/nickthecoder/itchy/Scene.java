@@ -18,14 +18,24 @@ public class Scene
         this.sceneLayers = new ArrayList<SceneLayer>();
         this.layersMap = new HashMap<String, SceneLayer>();
 
-        this.createLayer("default");
+        this.createSceneLayer("default");
     }
 
-    public SceneLayer createLayer( String name )
+    public List<SceneLayer> getSceneLayers()
+    {
+        return this.sceneLayers;
+    }
+
+    public SceneLayer createSceneLayer( String name )
     {
         SceneLayer layer = new SceneLayer(name);
         addSceneLayer(layer);
         return layer;
+    }
+
+    public SceneLayer getDefaultSceneLayer()
+    {
+        return this.sceneLayers.get(0);
     }
 
     private void addSceneLayer( SceneLayer sceneLayer )
@@ -36,9 +46,34 @@ public class Scene
 
     public void create( ActorsLayer layer, boolean designMode )
     {
-        for ( SceneLayer sceneLayer : this.sceneLayers ) {
-            sceneLayer.create( layer, designMode );
+        for (SceneLayer sceneLayer : this.sceneLayers) {
+            sceneLayer.create(layer, designMode);
         }
+    }
+
+    public void create( CompoundLayer layer, boolean designMode )
+    {
+        for (SceneLayer sceneLayer : this.sceneLayers) {
+            String name = sceneLayer.name;
+            
+            sceneLayer.create(findLayer(layer,name), designMode);
+        }
+    }
+    
+    private ActorsLayer findLayer( CompoundLayer parent, String name )
+    {
+        Layer best = null;
+        
+        for (Layer childLayer : parent.getChildren()) {
+            if (( childLayer instanceof ActorsLayer) && (!childLayer.locked)) {
+                if (name.equals(childLayer.getName())) {
+                    return (ActorsLayer) childLayer;
+                }
+                best = childLayer;
+            }
+        }
+        
+        return (ActorsLayer) best;
     }
 
     public void add( SceneActor sceneActor )
@@ -64,7 +99,7 @@ public class Scene
         return result;
     }
 
-    class SceneLayer
+    public class SceneLayer
     {
         String name;
 
@@ -72,6 +107,7 @@ public class Scene
 
         public SceneLayer( String name )
         {
+            this.name = name;
             this.sceneActors = new ArrayList<SceneActor>();
         }
 
@@ -98,13 +134,19 @@ public class Scene
             }
             return result;
         }
+
+        public boolean isEmpty()
+        {
+            return this.sceneActors.size() == 0;
+        }
         
         public void create( ActorsLayer layer, boolean designMode )
         {
+            
             for (SceneActor sceneActor : this.sceneActors) {
                 Actor actor = sceneActor.createActor(designMode);
                 layer.add(actor);
-    
+
                 if (!designMode) {
                     if (actor.getActivationDelay() == 0) {
                         actor.activate();

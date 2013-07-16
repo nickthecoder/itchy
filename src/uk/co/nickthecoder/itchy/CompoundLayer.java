@@ -73,12 +73,12 @@ public class CompoundLayer extends Layer
     public String toString()
     {
         StringBuffer result = new StringBuffer();
-        result.append(super.toString()).append("\n");
+        result.append(super.toString()).append("\n{\n");
         
         for ( Layer layer : this.children ) {
             result.append("Child : " ).append( layer.toString() ).append("\n");
         }
-        
+        result.append("}\n");
         return result.toString();
     }
     

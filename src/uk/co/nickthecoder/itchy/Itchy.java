@@ -64,6 +64,8 @@ public class Itchy
 
     private CompoundLayer rootLayer;
 
+    private CompoundLayer gameLayer;
+    
     private Rect rootRect;
 
     private boolean running;
@@ -148,6 +150,9 @@ public class Itchy
         this.rootRect = new Rect(0, 0, width, height);
         this.rootLayer = new CompoundLayer("root",this.rootRect);
 
+        this.gameLayer = new CompoundLayer("placeholder",this.rootRect);
+        this.rootLayer.add(this.gameLayer);
+        
         this.popupLayer = new ScrollableLayer("popup",this.rootRect);
         this.popupLayer.setYAxisPointsDown(true);
         this.popupLayer.setVisible(true);
@@ -197,8 +202,7 @@ public class Itchy
     {
         try {
             this.init(this.game);
-            this.rootLayer.add(this.game.layers);
-            System.out.println( "Layers : " + this.rootLayer );
+            this.gameLayer.add(this.game.layers);
             this.addEventListener(this.game);
             this.game.init();
             if (!this.running) {
@@ -586,6 +590,13 @@ public class Itchy
 
     }
 
+    public void debug()
+    {
+        System.out.println( "Itchy Debug" );
+        System.out.println( "Layers : " + this.rootLayer );
+        System.out.println( "End Itchy Debug" );
+    }
+    
     public void hideWindow( GuiPose window )
     {
         this.removeEventListener(window);

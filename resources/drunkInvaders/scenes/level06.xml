@@ -1,21 +1,39 @@
-<scene showMouse="false">
-  <actor costume="earth" x="0" y="0" direction="0.0" start="default"/>
-  <actor costume="ship" x="321" y="61" direction="90.0" start="default"/>
-  <actor costume="shieldFactory" x="113" y="78" direction="7.594643368591445" start="default">
-    <property name="height" value="4"/>
-    <property name="width" value="6"/>
-  </actor>
-  <actor costume="shieldFactory" x="432" y="82" direction="-8.130102354155978" start="default">
-    <property name="height" value="4"/>
-    <property name="width" value="6"/>
-  </actor>
-  <actor costume="saucer" x="688" y="451" direction="-90.0" start="default">
-    <property name="childrenCount" value="15"/>
-    <property name="costumeName" value="alien1"/>
-    <property name="vy" value="0.0"/>
-    <property name="childFireOnceEvery" value="5.0"/>
-    <property name="vx" value="-3.0"/>
-    <property name="birthInterval" value="1.0"/>
-    <property name="firstBornDelay" value="0.2"/>
-  </actor>
+<scene showMouse="true">
+  <layer name="background">
+    <actor costume="earth" x="0" y="0" direction="0.0" start="default"/>
+  </layer>
+  <layer name="main">
+    <actor costume="ship" x="321" y="61" direction="90.0" start="default">
+      <property name="mass" value="1.0"/>
+      <property name="vy" value="0.0"/>
+      <property name="vx" value="0.0"/>
+      <property name="shieldRechargeRate" value="0.001"/>
+      <property name="rotationSpeed" value="0.003"/>
+      <property name="ox" value="320.0"/>
+      <property name="shieldDischargeRate" value="0.01"/>
+      <property name="oy" value="-1300.0"/>
+    </actor>
+    <actor costume="shieldFactory" x="113" y="78" direction="7.594643368591445" start="default">
+      <property name="height" value="4"/>
+      <property name="width" value="6"/>
+      <property name="spacing" value="10.0"/>
+    </actor>
+    <actor costume="shieldFactory" x="432" y="82" direction="-8.130102354155978" start="default">
+      <property name="height" value="4"/>
+      <property name="width" value="6"/>
+      <property name="spacing" value="10.0"/>
+    </actor>
+    <actor costume="saucer" x="688" y="451" direction="-90.0" start="default">
+      <property name="mass" value="1.0"/>
+      <property name="fireOnceEvery" value="1.0"/>
+      <property name="childrenCount" value="15"/>
+      <property name="vy" value="0.0"/>
+      <property name="costumeName" value="alien1"/>
+      <property name="vx" value="-3.0"/>
+      <property name="childFireOnceEvery" value="5.0"/>
+      <property name="birthInterval" value="1.0"/>
+      <property name="firstBornDelay" value="0.2"/>
+      <property name="shotsRequired" value="1"/>
+    </actor>
+  </layer>
 </scene>

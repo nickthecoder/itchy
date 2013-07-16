@@ -40,14 +40,26 @@ public class SceneWriter extends XMLWriter
         this.beginTag("scene");
         this.attribute("showMouse", this.scene.showMouse);
 
-        this.writeActors();
+
+        for ( Scene.SceneLayer sceneLayer : this.scene.getSceneLayers() ) {
+            
+            if ( !sceneLayer.isEmpty() ) {
+                this.beginTag("layer");
+                this.attribute("name",sceneLayer.name);
+                
+                this.writeActors(sceneLayer);
+    
+                this.endTag("layer");
+            }
+        }            
+
 
         this.endTag("scene");
     }
 
-    private void writeActors() throws XMLException
+    private void writeActors(Scene.SceneLayer sceneLayer) throws XMLException
     {
-        for (SceneActor sceneActor : this.scene.getSceneActors()) {
+        for (SceneActor sceneActor : sceneLayer.getSceneActors()) {
 
             if (sceneActor instanceof CostumeSceneActor) {
 

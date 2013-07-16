@@ -11,7 +11,7 @@ import uk.co.nickthecoder.itchy.util.FontProperty;
 import uk.co.nickthecoder.itchy.util.IntegerProperty;
 import uk.co.nickthecoder.itchy.util.AbstractProperty;
 import uk.co.nickthecoder.itchy.util.RGBAProperty;
-import uk.co.nickthecoder.itchy.util.StringPropert;
+import uk.co.nickthecoder.itchy.util.StringProperty;
 import uk.co.nickthecoder.itchy.util.Property;
 import uk.co.nickthecoder.jame.RGBA;
 
@@ -115,7 +115,7 @@ public abstract class Behaviour
             return new DoubleProperty<Behaviour>(label, name);
         }
         if (klass == String.class) {
-            return new StringPropert<Behaviour>(label, name);
+            return new StringProperty<Behaviour>(label, name);
         }
         if (klass == RGBA.class) {
             return new RGBAProperty<Behaviour>(label, name, property.allowNull(), property.alpha());

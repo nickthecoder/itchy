@@ -1,34 +1,38 @@
 <scene showMouse="true">
-  <actor costume="moon" x="320" y="240" direction="0.0" start="default"/>
-  <actor costume="ship" x="481" y="140" direction="147.0293614504022" start="default">
-    <property name="mass" value="1.0"/>
-    <property name="vy" value="0.0"/>
-    <property name="vx" value="0.0"/>
-    <property name="shieldRechargeRate" value="0.001"/>
-    <property name="rotationSpeed" value="0.012"/>
-    <property name="ox" value="563.0"/>
-    <property name="shieldDischargeRate" value="0.01"/>
-    <property name="oy" value="90.0"/>
-  </actor>
-  <actor costume="factory" x="48" y="389" direction="0.862253792047138" start="default">
-    <property name="fireOnceEvery" value="6.0"/>
-    <property name="costumeName" value="alien1"/>
-    <property name="delayPerAlien" value="0.5"/>
-    <property name="spacing" value="80.0"/>
-    <property name="alienCount" value="7"/>
-  </actor>
-  <actor costume="factory" x="51" y="334" direction="-0.5969659161142871" start="default">
-    <property name="fireOnceEvery" value="8.0"/>
-    <property name="costumeName" value="alien2"/>
-    <property name="delayPerAlien" value="0.5"/>
-    <property name="spacing" value="80.0"/>
-    <property name="alienCount" value="7"/>
-  </actor>
-  <actor costume="factory" x="49" y="278" direction="1.5095402328430814" start="default">
-    <property name="fireOnceEvery" value="10.0"/>
-    <property name="costumeName" value="alien3"/>
-    <property name="delayPerAlien" value="0.5"/>
-    <property name="spacing" value="80.0"/>
-    <property name="alienCount" value="7"/>
-  </actor>
+  <layer name="background">
+    <actor costume="moon" x="320" y="240" direction="0.0" start="default"/>
+  </layer>
+  <layer name="main">
+    <actor costume="ship" x="481" y="140" direction="147.0293614504022" start="default">
+      <property name="mass" value="1.0"/>
+      <property name="vy" value="0.0"/>
+      <property name="vx" value="0.0"/>
+      <property name="shieldRechargeRate" value="0.001"/>
+      <property name="rotationSpeed" value="0.012"/>
+      <property name="ox" value="563.0"/>
+      <property name="shieldDischargeRate" value="0.01"/>
+      <property name="oy" value="90.0"/>
+    </actor>
+    <actor costume="factory" x="48" y="389" direction="0.862253792047138" start="default">
+      <property name="fireOnceEvery" value="6.0"/>
+      <property name="costumeName" value="alien1"/>
+      <property name="delayPerAlien" value="0.5"/>
+      <property name="spacing" value="80.0"/>
+      <property name="alienCount" value="7"/>
+    </actor>
+    <actor costume="factory" x="51" y="334" direction="-0.5969659161142871" start="default">
+      <property name="fireOnceEvery" value="8.0"/>
+      <property name="costumeName" value="alien2"/>
+      <property name="delayPerAlien" value="0.5"/>
+      <property name="spacing" value="80.0"/>
+      <property name="alienCount" value="7"/>
+    </actor>
+    <actor costume="factory" x="49" y="278" direction="1.5095402328430814" start="default">
+      <property name="fireOnceEvery" value="10.0"/>
+      <property name="costumeName" value="alien3"/>
+      <property name="delayPerAlien" value="0.5"/>
+      <property name="spacing" value="80.0"/>
+      <property name="alienCount" value="7"/>
+    </actor>
+  </layer>
 </scene>
