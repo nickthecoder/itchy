@@ -133,7 +133,7 @@ public class CostumesEditor extends SubEditor
         for (String costumeName : this.editor.resources.costumeNames()) {
             CostumeResource costumeResource = this.editor.resources.getCostumeResource(costumeName);
             TableModelRow row = new ReflectionTableModelRow<CostumeResource>(costumeResource,
-                    attributeNames);
+                attributeNames);
             model.addRow(row);
         }
         return model;
@@ -154,19 +154,19 @@ public class CostumesEditor extends SubEditor
 
         Costume base = this.currentCostumeResource.costume.getExtendedFrom();
         this.labelExtendedFrom = new Label(base == null ? "None" : this.editor.resources
-                .getCostumeResource(base).getName());
+            .getCostumeResource(base).getName());
         this.buttonExtendedFrom = new Button(this.labelExtendedFrom) {
             @Override
             public void onClick( MouseButtonEvent e )
             {
                 CostumePicker picker = new CostumePicker(CostumesEditor.this.editor.resources,
-                        "None") {
+                    "None") {
                     @Override
                     public void pick( CostumeResource costumeResource )
                     {
                         CostumesEditor.this.labelExtendedFrom
-                                .setText(costumeResource == null ? "None" : costumeResource
-                                        .getName());
+                            .setText(costumeResource == null ? "None" : costumeResource
+                                .getName());
                     }
                 };
                 picker.show();
@@ -528,7 +528,7 @@ public class CostumesEditor extends SubEditor
         Costume costume = new Costume();
         costume.addPose("default", poseResouerce);
         this.currentCostumeResource = new CostumeResource(this.editor.resources,
-                poseResouerce.getName(), costume);
+            poseResouerce.getName(), costume);
         this.adding = true;
         this.showDetails(this.currentCostumeResource);
 

@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import uk.co.nickthecoder.jame.RGBA;
 import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.Surface;
 
@@ -12,15 +13,30 @@ public class CompoundLayer extends Layer
 {
     private final LinkedList<Layer> children;
     
+    /**
+     * The color to fill the whole area before actors are rendered, or null if no fill should take
+     * place.
+     */
+    public RGBA backgroundColor;
+
     public CompoundLayer( String name, Rect positionOnScreen )
+    {
+        this(name,positionOnScreen,null);
+    }
+
+    public CompoundLayer( String name, Rect positionOnScreen, RGBA background )
     {
         super(name, positionOnScreen);
         this.children = new LinkedList<Layer>();
+        this.backgroundColor = background;
     }
 
     @Override
     public void render2( Rect clip, Surface destSurface )
     {
+        if (this.backgroundColor != null) {
+            destSurface.fill(clip, this.backgroundColor);
+        }
 
         for (Iterator<Layer> i = this.children.iterator(); i.hasNext();) {
             Layer child = i.next();

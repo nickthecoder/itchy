@@ -13,7 +13,7 @@ import uk.co.nickthecoder.jame.event.MouseEvent;
 public class ScrollableLayer extends ActorsLayer
 {
     /**
-     * The color to fill the whole area before actors are rendered, or null if not fill should take
+     * The color to fill the whole area before actors are rendered, or null if no fill should take
      * place.
      */
     public RGBA backgroundColor;

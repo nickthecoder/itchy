@@ -40,6 +40,7 @@ import uk.co.nickthecoder.itchy.gui.SimpleTableModelRow;
 import uk.co.nickthecoder.itchy.gui.Table;
 import uk.co.nickthecoder.itchy.gui.TableListener;
 import uk.co.nickthecoder.itchy.gui.TableModelColumn;
+import uk.co.nickthecoder.itchy.gui.TableModelRow;
 import uk.co.nickthecoder.itchy.gui.TableRow;
 import uk.co.nickthecoder.itchy.gui.TextBox;
 import uk.co.nickthecoder.itchy.gui.ToggleButton;
@@ -143,19 +144,14 @@ public class SceneDesigner implements MouseListener, KeyListener
     {
         Rect rect = new Rect(0, 0, this.editor.getWidth(), this.editor.getHeight());
 
-        this.designLayers = new CompoundLayer("design", rect);
-
-        RGBA background = this.sceneBackground;
+        this.designLayers = new CompoundLayer("design", rect, this.sceneBackground);
 
         for (Layer gameLayer : Editor.singleton.game.getLayers().getChildren()) {
             if ((gameLayer instanceof
                 ScrollableLayer) && (!gameLayer.locked)) {
                 
-                ScrollableLayer designLayer = new ScrollableLayer(gameLayer.getName(), rect,
-                    background);
+                ScrollableLayer designLayer = new ScrollableLayer(gameLayer.getName(), rect);
                 
-                background = null;
-
                 this.designLayers.add(designLayer);
                 this.currentDesignLayer = designLayer;
             }
@@ -485,9 +481,51 @@ public class SceneDesigner implements MouseListener, KeyListener
                 this.layersTableModel.addRow(row);
             }
         }
-        TableModelColumn column = new TableModelColumn("Layer", 1, 300);
+
         List<TableModelColumn> columns = new ArrayList<TableModelColumn>(1);
-        columns.add(column);
+
+        TableModelColumn showHideColumn = new TableModelColumn("", 0, 70) {
+            public void addPlainCell( Container container, final TableModelRow row )
+            {
+                final Layer layer = (Layer) row.getData(0);
+                final Button button = new Button("Hide");
+                button.addActionListener(new ActionListener() {
+                    @Override
+                    public void action()
+                    {
+                        if ( layer.isVisible()) {
+                            layer.setVisible(false);
+                            ((Label) button.getChildren().get(0)).setText("Show");
+                        } else {
+                            layer.setVisible(true);
+                            ((Label) button.getChildren().get(0)).setText("Hide");
+                        }
+                    }
+                });
+                container.addChild(button);
+            }
+
+            @Override
+            public Component createCell( TableModelRow row )
+            {
+                Container container = new Container();
+                this.addPlainCell(container, row);
+                return container;
+            };
+
+            @Override
+            public void updateComponent( Component component, TableModelRow row )
+            {
+                Container container = (Container) component;
+                container.clear();
+                this.addPlainCell(container, row);
+            };
+        };
+        columns.add(showHideColumn);
+            
+        TableModelColumn nameColumn = new TableModelColumn("Layer", 1, 300);
+        columns.add(nameColumn);
+
 
         this.layersTable = new Table(this.layersTableModel, columns);
         this.layersTable.setFill(true, true);

@@ -29,6 +29,8 @@ public class DrunkInvaders extends Game
 
     public static DrunkInvaders game;
 
+    
+    
     public ScrollableLayer backgroundLayer;
 
     public ScrollableLayer mainLayer;
@@ -63,25 +65,25 @@ public class DrunkInvaders extends Game
         this.neighbourhood = new StandardNeighbourhood(NEIGHBOURHOOD_SQUARE_SIZE);
         Rect screenSize = new Rect(0, 0, 640, 480);
 
-        this.mainLayer = new ScrollableLayer("main",screenSize);
+        this.mainLayer = new ScrollableLayer("main", screenSize);
         this.mainLayer.centerOn(320, 240);
 
-        this.backgroundLayer = new ScrollableLayer("background",screenSize);
+        this.backgroundLayer = new ScrollableLayer("background", screenSize);
         this.backgroundLayer.centerOn(320, 240);
 
-        this.glassLayer = new ScrollableLayer("glass",screenSize);
-        this.fadeLayer = new ScrollableLayer("fade",screenSize);
+        this.glassLayer = new ScrollableLayer("glass", screenSize);
+        this.fadeLayer = new ScrollableLayer("fade", screenSize);
 
         this.fadeActor = new Actor(this.resources.getPose("white"));
         this.fadeActor.getAppearance().setAlpha(0);
         this.fadeActor.activate();
         this.fadeLayer.add(this.fadeActor);
-        
-        this.layers.add( backgroundLayer );
-        this.layers.add( mainLayer );
-        this.layers.add( glassLayer );
-        this.layers.add( fadeLayer );
-        
+
+        this.layers.add(this.backgroundLayer);
+        this.layers.add(this.mainLayer);
+        this.layers.add(this.glassLayer);
+        this.layers.add(this.fadeLayer);
+
         this.glassLayer.locked = true;
         this.fadeLayer.locked = true;
 
@@ -135,8 +137,8 @@ public class DrunkInvaders extends Game
             if (ke.symbol == Keys.a) {
                 this.startScene("about");
             }
-            
-            if (ke.symbol == Keys.w){
+
+            if (ke.symbol == Keys.w) {
                 this.startScene("completed");
             }
 
@@ -242,7 +244,7 @@ public class DrunkInvaders extends Game
 
         } else if ("quit".equals(message)) {
             stop();
-            
+
         } else if ("fadedIn".equals(message)) {
             DrunkInvaders.this.fadingOut = false;
 
@@ -303,7 +305,6 @@ public class DrunkInvaders extends Game
         this.startScene("level" + df.format(this.levelNumber));
     }
 
-
     @Override
     public int getWidth()
     {
@@ -351,16 +352,16 @@ public class DrunkInvaders extends Game
         System.out.println("Welcome to Drunk Invaders");
 
         try {
-            game = new DrunkInvaders();
+            DrunkInvaders.game = new DrunkInvaders();
 
             if ((argv.length == 1) && ("--editor".equals(argv[0]))) {
 
-                Editor editor = new Editor(game);
+                Editor editor = new Editor(DrunkInvaders.game);
                 editor.init();
                 editor.start();
 
             } else {
-                game.start();
+                DrunkInvaders.game.start();
             }
 
         } catch (Exception e) {
