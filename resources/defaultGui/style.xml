@@ -41,6 +41,7 @@
     <rule criteria="textBox" background="text" padding="4" />
     <rule criteria="textBox.focus" background="text-focus" />
     <rule criteria="textBox.error" background="text-error" />
+    <rule criteria="comboBox.error textBox" background="text-error" />
     <rule criteria="caret" background="caret" marginLeft="-6" paddingTop="-6" paddingBottom="-6" paddingLeft="12" />
 
     <rule criteria="scrollbar" paddingLeft="4" paddingRight="4" />

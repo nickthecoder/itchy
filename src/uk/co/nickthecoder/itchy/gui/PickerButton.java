@@ -9,7 +9,6 @@ package uk.co.nickthecoder.itchy.gui;
 
 import java.util.HashMap;
 
-import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 
 public class PickerButton<T> extends Button
@@ -47,9 +46,7 @@ public class PickerButton<T> extends Button
 
     @Override
     public void onClick( final MouseButtonEvent e )
-    {
-        Itchy.singleton.debug();
-        
+    {        
         Picker<T> picker = new Picker<T>(this.title, this.hashMap, this.getValue()) {
             @Override
             public void pick( String label, T object )

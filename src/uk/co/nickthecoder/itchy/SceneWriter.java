@@ -121,6 +121,9 @@ public class SceneWriter extends XMLWriter
         }
 
         for (String key : sceneActor.customProperties.keySet()) {
+            if( key.equals("shootable") ) {
+                System.out.println("Saving shootable");
+            }
             Object value = sceneActor.customProperties.get(key);
 
             String stringValue = this.getPropertyValue(value);
@@ -136,7 +139,7 @@ public class SceneWriter extends XMLWriter
 
     private String getPropertyValue( Object value )
     {
-        if ((value instanceof String) || (value instanceof Double) || (value instanceof Integer)) {
+        if ((value instanceof String) || (value instanceof Boolean)  || (value instanceof Double) || (value instanceof Integer)) {
             return String.valueOf(value);
 
         } else if (value instanceof RGBA) {

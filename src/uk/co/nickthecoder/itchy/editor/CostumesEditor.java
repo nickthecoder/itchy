@@ -1,9 +1,7 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0 which accompanies this
+ * distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.editor;
 
@@ -53,8 +51,8 @@ public class CostumesEditor extends SubEditor
 
     private Button buttonExtendedFrom;
 
-    private TextBox txtBehaviour;
-
+    private ComboBox behaviour;
+    
     private Table eventsTable;
 
     private SimpleTableModel eventsTableModel;
@@ -180,11 +178,13 @@ public class CostumesEditor extends SubEditor
             };
         };
 
-        this.txtBehaviour = new TextBox(this.currentCostumeResource.costume.behaviourClassName);
+        this.behaviour = new ComboBox(
+            this.currentCostumeResource.costume.behaviourClassName,
+            this.editor.game.resources.getBehaviourClassNames());
 
         grid.addRow("Name", this.txtName);
         grid.addRow("Extends", this.buttonExtendedFrom);
-        grid.addRow("Behaviour", this.txtBehaviour);
+        grid.addRow("Behaviour", this.behaviour);
 
         this.eventsTable = this.createEventsTable();
         this.eventsTable.addTableListener(new AbstractTableListener() {
@@ -468,7 +468,7 @@ public class CostumesEditor extends SubEditor
             }
         }
 
-        if (!Behaviour.isValidClassName(this.txtBehaviour.getText())) {
+        if (!Behaviour.isValidClassName(this.behaviour.getText())) {
             this.setMessage("Not a valid behaviour class name");
             return;
         }
@@ -495,7 +495,7 @@ public class CostumesEditor extends SubEditor
 
         this.currentCostumeResource.rename(this.txtName.getText());
 
-        this.currentCostumeResource.costume.behaviourClassName = this.txtBehaviour.getText();
+        this.currentCostumeResource.costume.behaviourClassName = this.behaviour.getText();
 
         if (this.adding) {
             this.editor.resources.addCostume(this.currentCostumeResource);

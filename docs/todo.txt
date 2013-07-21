@@ -8,9 +8,6 @@ Jame is out of date, need to rebuild for win32 and i386
 What's Next
 ===========
 
-Door buttons
-    Maybe door buttons are activated like picking up a ball.
-
 Behaviour class picker
     Wherever a Behaviour class is, have a "..." button which lists all of the known behaviours.
     Resources can keep track of them

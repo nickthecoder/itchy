@@ -7,8 +7,12 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 import uk.co.nickthecoder.itchy.animation.Animation;
 import uk.co.nickthecoder.itchy.util.NinePatch;
@@ -18,6 +22,13 @@ import uk.co.nickthecoder.jame.Surface;
 public class Resources extends Loadable
 {
 
+    private static List<String> sortNames(Set<String> set)
+    {
+        ArrayList<String> names = new ArrayList<String>(set);
+        Collections.sort(names);
+        return names;
+    }
+    
     private final HashMap<String, SoundResource> sounds;
 
     private final HashMap<String, FontResource> fonts;
@@ -32,6 +43,9 @@ public class Resources extends Loadable
 
     private final HashMap<String, CostumeResource> costumes;
 
+    private TreeSet<String> behaviourClassNames;
+    
+    
     public Resources()
     {
         super();
@@ -43,6 +57,8 @@ public class Resources extends Loadable
         this.poses = new HashMap<String, PoseResource>();
         this.costumes = new HashMap<String, CostumeResource>();
         this.animations = new HashMap<String, AnimationResource>();
+        
+        this.behaviourClassNames = new TreeSet<String>();
     }
 
     @Override
@@ -154,9 +170,9 @@ public class Resources extends Loadable
         return resource == null ? null : resource.getSound();
     }
 
-    public Set<String> soundNames()
+    public List<String> soundNames()
     {
-        return this.sounds.keySet();
+        return sortNames(this.sounds.keySet());
     }
 
     void rename2( SoundResource soundResource, String name )
@@ -198,9 +214,9 @@ public class Resources extends Loadable
         return resource == null ? null : resource.font;
     }
 
-    public Set<String> fontNames()
+    public List<String> fontNames()
     {
-        return this.fonts.keySet();
+        return sortNames(this.fonts.keySet());
     }
 
     void rename2( FontResource fontResource, String name )
@@ -254,9 +270,9 @@ public class Resources extends Loadable
         return resource == null ? null : resource.pose;
     }
 
-    public Set<String> poseNames()
+    public List<String> poseNames()
     {
-        return this.poses.keySet();
+        return sortNames(this.poses.keySet());
     }
 
     void rename2( PoseResource poseResource, String name )
@@ -317,9 +333,9 @@ public class Resources extends Loadable
         return resource == null ? null : resource.ninePatch;
     }
 
-    public Set<String> ninePatchNames()
+    public List<String> ninePatchNames()
     {
-        return this.ninePatches.keySet();
+        return sortNames(this.ninePatches.keySet());
     }
 
     void rename2( NinePatchResource ninePatchResource, String name )
@@ -333,6 +349,7 @@ public class Resources extends Loadable
     public void addCostume( CostumeResource resource )
     {
         this.costumes.put(resource.name, resource);
+        this.registerBehaviourClassName( resource.costume.behaviourClassName );
     }
 
     public void removeCostume( String name )
@@ -351,9 +368,9 @@ public class Resources extends Loadable
         return this.costumes.get(name);
     }
 
-    public Set<String> costumeNames()
+    public List<String> costumeNames()
     {
-        return this.costumes.keySet();
+        return sortNames(this.costumes.keySet());
     }
 
     public String getCostumeName( Costume costume )
@@ -423,9 +440,9 @@ public class Resources extends Loadable
         return this.animations.get(name);
     }
 
-    public Set<String> animationNames()
+    public List<String> animationNames()
     {
-        return this.animations.keySet();
+        return sortNames(this.animations.keySet());
     }
 
     public String getAnimationName( Animation animation )
@@ -467,9 +484,9 @@ public class Resources extends Loadable
         return resource == null ? null : resource.getScene();
     }
 
-    public Set<String> sceneNames()
+    public List<String> sceneNames()
     {
-        return this.scenes.keySet();
+        return sortNames(this.scenes.keySet());
     }
 
     void rename2( SceneResource sceneResource, String name )
@@ -478,4 +495,29 @@ public class Resources extends Loadable
         this.scenes.put(name, sceneResource);
     }
 
+    public boolean registerBehaviourClassName(String className)
+    {
+        try {
+            if ( this.behaviourClassNames.contains(className)) {
+                return true;
+            }
+            Class<?> klass = Class.forName(className);
+            while (klass != null) {
+                if (klass == Behaviour.class) {
+                    this.behaviourClassNames.add(className);
+                    return true;
+                }
+                klass = klass.getSuperclass();
+            }
+        } catch (Exception e) {
+            //Do nothing
+        }
+        return false;
+    }
+    
+    public Set<String> getBehaviourClassNames()
+    {
+        return this.behaviourClassNames;
+    }
+    
 }
