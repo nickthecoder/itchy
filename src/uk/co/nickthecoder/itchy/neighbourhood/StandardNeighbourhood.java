@@ -113,16 +113,11 @@ public class StandardNeighbourhood implements Neighbourhood
     {
         int iy = (int) Math.floor((y - this.oy) / StandardNeighbourhood.this.squareSize);
 
-        // System.out.println( "Creating row " + y + " ... " + iy );
-
         if (iy < 0) {
 
-            // System.out.println( "Creating rows at head for " + y + " iy=" + iy );
             List<NeighbourhoodRow> newRows = new ArrayList<NeighbourhoodRow>(-iy);
             this.oy += iy * StandardNeighbourhood.this.squareSize;
             for (int i = 0; i <= -iy - 1; i++) {
-                // System.out.println( "Creating row at head " + ( this.oy + i * this.squareSize )
-                // );
                 newRows.add(new NeighbourhoodRow(this.oy + i * this.squareSize));
             }
             this.rows.addAll(0, newRows);
@@ -130,10 +125,7 @@ public class StandardNeighbourhood implements Neighbourhood
         } else if (iy >= this.rows.size()) {
 
             int extra = iy - this.rows.size() + 1;
-            // System.out.println( "Creating rows at tail " + extra );
             for (int i = 0; i < extra; i++) {
-                // System.out.println( "Creating row at tail " + ( this.oy + this.rows.size() *
-                // this.squareSize ) );
                 NeighbourhoodRow row = new NeighbourhoodRow(this.oy + this.rows.size() *
                     this.squareSize);
                 this.rows.add(row);
@@ -187,10 +179,8 @@ public class StandardNeighbourhood implements Neighbourhood
         private Square createSquare( double x )
         {
             int ix = (int) Math.floor((x - this.ox) / StandardNeighbourhood.this.squareSize);
-            // System.out.println( "Creating square @ " + x );
 
             if (ix < 0) {
-                // System.out.println( "Creating Sq at head " + ix );
                 List<Square> newSquares = new ArrayList<Square>(-ix);
                 this.ox += ix * StandardNeighbourhood.this.squareSize;
                 for (int i = 0; i < -ix; i++) {
@@ -199,15 +189,10 @@ public class StandardNeighbourhood implements Neighbourhood
                 }
                 this.row.addAll(0, newSquares);
                 for (int i = 0; i < -ix; i++) {
-                    // System.out.println( "Index " + i + " sizes " + newSquares.size() + " & " +
-                    // this.row.size() );
-                    // System.out.println( "   new square " + ( newSquares.get( i ) == this.row.get(
-                    // i ) ) );
                     this.row.get(i).initialise();
                 }
             } else {
                 int extra = ix - this.row.size() + 1;
-                // System.out.println( "Creating Squares at tail " + ix + " extras " + extra );
                 for (int i = 0; i < extra; i++) {
                     Square square = new Square(StandardNeighbourhood.this, this.ox +
                         (this.row.size()) *

@@ -1,9 +1,7 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0 which accompanies this
+ * distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.neighbourhood;
 
@@ -13,6 +11,7 @@ import java.util.Set;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.ActorCollisionStrategy;
+import uk.co.nickthecoder.itchy.BruteForceCollisionStrategy;
 import uk.co.nickthecoder.itchy.WorldRectangle;
 
 /**
@@ -43,8 +42,8 @@ import uk.co.nickthecoder.itchy.WorldRectangle;
 /*
  * Idealy, this class shouldn't make assumptions about the geometry of the neighbourhood. For
  * example, can it cope with the circular side scrollers, or the doughnut world of asteroids? To do
- * this we need to let neighbourhood handle the iteration from top left to bottom right.
- * Note, at the time of writing neither circular, nor doughnut shaped Neighbourhoods have been implemented. 
+ * this we need to let neighbourhood handle the iteration from top left to bottom right. Note, at
+ * the time of writing neither circular, nor doughnut shaped Neighbourhoods have been implemented.
  */
 
 public class NeighbourhoodCollisionStrategy extends ActorCollisionStrategy
@@ -52,9 +51,9 @@ public class NeighbourhoodCollisionStrategy extends ActorCollisionStrategy
     private Neighbourhood neighbourhood;
 
     private Square topLeft;
-    
+
     private Square bottomRight;
-    
+
     public NeighbourhoodCollisionStrategy( Actor actor, Neighbourhood neighbourhood )
     {
         super(actor);
@@ -66,30 +65,30 @@ public class NeighbourhoodCollisionStrategy extends ActorCollisionStrategy
     public void update()
     {
         WorldRectangle rect = this.actor.getAppearance().getWorldRectangle();
-        
-        Square newTopLeft = this.neighbourhood.getSquare( rect.x,  rect.y );
-        Square newBottomRight = this.neighbourhood.getSquare( rect.x + rect.width,  rect.y + rect.height );
-        
-        if ( (topLeft== null) || ( topLeft != newTopLeft ) || ( bottomRight != newBottomRight ) ) {
 
-            // System.out.println( "Updating multisquare" );
-            
-            if ( this.topLeft != null ) {
-                for ( Iterator<Square> i = this.neighbourhood.squareIterator( this.topLeft, this.bottomRight ); i.hasNext(); ) {
+        Square newTopLeft = this.neighbourhood.getSquare(rect.x, rect.y);
+        Square newBottomRight = this.neighbourhood.getSquare(rect.x + rect.width, rect.y +
+            rect.height);
+
+        if ((this.topLeft == null) || (this.topLeft != newTopLeft) ||
+            (this.bottomRight != newBottomRight)) {
+
+            if (this.topLeft != null) {
+                for (Iterator<Square> i = this.neighbourhood.squareIterator(this.topLeft,
+                    this.bottomRight); i.hasNext();) {
                     Square square = i.next();
-                    square.remove(actor);
+                    square.remove(this.actor);
                 }
             }
 
             this.topLeft = newTopLeft;
             this.bottomRight = newBottomRight;
 
-            for ( Iterator<Square> i = this.neighbourhood.squareIterator( this.topLeft, this.bottomRight ); i.hasNext(); ) {
+            for (Iterator<Square> i = this.neighbourhood.squareIterator(this.topLeft,
+                this.bottomRight); i.hasNext();) {
                 Square square = i.next();
-                square.add(actor);
-                //System.out.println( "Added to : " + square );
+                square.add(this.actor);
             }
-
 
         }
     }
@@ -97,40 +96,35 @@ public class NeighbourhoodCollisionStrategy extends ActorCollisionStrategy
     @Override
     public void remove()
     {
-        if (topLeft== null) {
-            for ( Iterator<Square> i = this.neighbourhood.squareIterator( this.topLeft, this.bottomRight ); i.hasNext(); ) {
+        if (this.topLeft == null) {
+            for (Iterator<Square> i = this.neighbourhood.squareIterator(this.topLeft,
+                this.bottomRight); i.hasNext();) {
                 Square square = i.next();
-                square.remove(actor);
+                square.remove(this.actor);
             }
         }
     }
 
     @Override
-    public Set<Actor> overlapping( Actor source, String... tags )
+    public Set<Actor> overlapping( Actor source, String[] includeTags, String[] excludeTags )
     {
         Set<Actor> results = new HashSet<Actor>();
 
-        // System.out.println( "overlapping..." );
-        for ( Iterator<Square> i = this.neighbourhood.squareIterator( this.topLeft, this.bottomRight ); i.hasNext(); ) {
+        for (Iterator<Square> i = this.neighbourhood.squareIterator(this.topLeft, this.bottomRight); i
+            .hasNext();) {
             Square square = i.next();
-
-            // System.out.println("sqaure : " + square);
 
             for (Actor actor : square.getOccupants()) {
 
-                // System.out.println( "Actor " + actor );
-
                 if ((actor != source) && (!results.contains(actor))) {
-                    for (String tag : tags) {
-                        if (actor.hasTag(tag)) {
+                    for (String includeTag : includeTags) {
+                        if (actor.hasTag(includeTag)) {
+                            if (!BruteForceCollisionStrategy.exclude(actor, excludeTags)) {
 
-                            // System.out.println( "Has tag" );
-
-                            // System.out.println( "Checking " + source + " vs " + actor );
-                            if (source.overlapping(actor)) {
-                                // System.out.println( "is overlapping" );
-                                results.add(actor);
-                                break;
+                                if (source.overlapping(actor)) {
+                                    results.add(actor);
+                                    break;
+                                }
                             }
                         }
                     }
@@ -142,38 +136,32 @@ public class NeighbourhoodCollisionStrategy extends ActorCollisionStrategy
     }
 
     @Override
-    public Set<Actor> touching( Actor source, String... tags )
+    public Set<Actor> touching( Actor source, String[] includeTags, String[] excludeTags )
     {
         Set<Actor> results = new HashSet<Actor>();
 
-        // System.out.println( "overlapping..." );
-        for ( Iterator<Square> i = this.neighbourhood.squareIterator( this.topLeft, this.bottomRight ); i.hasNext(); ) {
+        for (Iterator<Square> i = this.neighbourhood.squareIterator(this.topLeft, this.bottomRight); i
+            .hasNext();) {
             Square square = i.next();
-
-            // System.out.println("sqaure : " + square);
 
             for (Actor actor : square.getOccupants()) {
 
-                // System.out.println( "Actor " + actor );
-
                 if ((actor != source) && (!results.contains(actor))) {
-                    for (String tag : tags) {
-                        if (actor.hasTag(tag)) {
-
-                            // System.out.println( "Has tag" );
-
-                            // System.out.println( "Checking " + source + " vs " + actor );
-                            if (source.touching(actor)) {
-                                // System.out.println( "is overlapping" );
-                                results.add(actor);
-                                break;
+                    if (!BruteForceCollisionStrategy.exclude(actor, excludeTags)) {
+                        for (String includeTag : includeTags) {
+                            if (actor.hasTag(includeTag)) {
+    
+                                if (source.touching(actor)) {
+                                    results.add(actor);
+                                    break;
+                                }
                             }
                         }
                     }
                 }
             }
         }
-        
+
         return results;
     }
 }

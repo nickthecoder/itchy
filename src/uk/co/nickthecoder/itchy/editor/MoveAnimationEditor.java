@@ -45,11 +45,15 @@ public class MoveAnimationEditor extends AnimationEditor
 
         this.txtDy = new DoubleBox(moveAnimation.dy);
         gridLayout.addRow(new Label("Delta Y"), Editor.addHint(this.txtDy, "pixels per frame"));
+        
+        super.createForm(gridLayout);
     }
 
     @Override
     public boolean save()
     {
+        super.save();
+        
         MoveAnimation moveAnimation = (MoveAnimation) this.animation;
 
         moveAnimation.ticks = this.txtTicks.getValue();

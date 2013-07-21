@@ -7,39 +7,32 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.animation;
 
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 import uk.co.nickthecoder.itchy.Actor;
 
 public class Parallel implements SequenceOrParallel
 {
-    private final List<Animation> animations;
-
     private final CompoundAnimation compoundAnimation;
 
     public Parallel( CompoundAnimation ca, Actor actor )
     {
-        this.animations = new ArrayList<Animation>();
+        // this.animations = new ArrayList<Animation>();
         this.compoundAnimation = ca;
     }
 
     @Override
     public void start( Actor actor )
     {
-        this.animations.clear();
         for (Animation child : this.compoundAnimation.children) {
-            Animation copy = child.copy();
-            this.animations.add(copy);
-            copy.start(actor);
+            child.start(actor);
         }
     }
 
     @Override
     public void tick( Actor actor )
     {
-        for (Iterator<Animation> i = this.animations.iterator(); i.hasNext();) {
+        for (Iterator<Animation> i = this.compoundAnimation.children.iterator(); i.hasNext();) {
             Animation child = i.next();
             child.tick(actor);
             if (child.isFinished()) {
@@ -51,7 +44,7 @@ public class Parallel implements SequenceOrParallel
     @Override
     public boolean isFinished()
     {
-        return this.animations.size() == 0;
+        return this.compoundAnimation.children.size() == 0;
     }
 
     @Override

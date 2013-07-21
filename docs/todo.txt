@@ -8,12 +8,23 @@ Jame is out of date, need to rebuild for win32 and i386
 What's Next
 ===========
 
+Door buttons
+    Maybe door buttons are activated like picking up a ball.
+
+Behaviour class picker
+    Wherever a Behaviour class is, have a "..." button which lists all of the known behaviours.
+    Resources can keep track of them
+    
+Left/Right don't work in text fields in the editor
+
 Use annotations to set initial tags :
     @Tagged("deadly") @Tagged("bouncy") class Alien {...)
 
 Try it on a RaspPi
+    Need to compile Jame for the ARM processor!
 
 Allow calculated values inside animations?
+    Use the Property tag and GProperty types to define the properties
 
 Scenery Editor
 

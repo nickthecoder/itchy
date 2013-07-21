@@ -148,7 +148,6 @@ public abstract class ActorsLayer extends Layer
             @Override
             public boolean onMouseDown( MouseButtonEvent event )
             {
-                System.out.println("ActorsLayer MouseListener onMouseDown");
                 for (Iterator<Actor> i = ActorsLayer.this.actorMouseListeners.iterator(); i
                     .hasNext();) {
                     Actor actor = i.next();

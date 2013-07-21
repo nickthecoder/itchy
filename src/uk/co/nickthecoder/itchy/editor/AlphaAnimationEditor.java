@@ -43,11 +43,14 @@ public class AlphaAnimationEditor extends AnimationEditor
         gridLayout.addRow(new Label("Target Alpha"),
                 Editor.addHint(this.txtTarget, "0 = transparent. 255 = opaque"));
 
+        super.createForm(gridLayout);
     }
 
     @Override
     public boolean save()
     {
+        super.save();
+        
         AlphaAnimation alphaAnimation = (AlphaAnimation) this.animation;
 
         alphaAnimation.ticks = this.txtTicks.getValue();

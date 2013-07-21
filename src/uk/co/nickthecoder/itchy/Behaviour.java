@@ -1,9 +1,7 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0 which accompanies this
+ * distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
@@ -13,21 +11,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
+import uk.co.nickthecoder.itchy.util.AbstractProperty;
+import uk.co.nickthecoder.itchy.util.BooleanProperty;
 import uk.co.nickthecoder.itchy.util.DoubleProperty;
 import uk.co.nickthecoder.itchy.util.FontProperty;
 import uk.co.nickthecoder.itchy.util.IntegerProperty;
-import uk.co.nickthecoder.itchy.util.AbstractProperty;
+import uk.co.nickthecoder.itchy.util.Property;
 import uk.co.nickthecoder.itchy.util.RGBAProperty;
 import uk.co.nickthecoder.itchy.util.StringProperty;
-import uk.co.nickthecoder.itchy.util.Property;
 import uk.co.nickthecoder.jame.RGBA;
 
-public abstract class Behaviour
+public abstract class Behaviour implements MessageListener
 {
-    public ActorCollisionStrategy collisionStrategy;
-
     private final static HashMap<Class<?>, List<AbstractProperty<Behaviour, ?>>> allProperties = new HashMap<Class<?>, List<AbstractProperty<Behaviour, ?>>>();
 
+    
     public static boolean isValidClassName( String behaviourClassName )
     {
         try {
@@ -43,8 +41,12 @@ public abstract class Behaviour
         return true;
     }
 
+
     protected Actor actor;
 
+    public ActorCollisionStrategy collisionStrategy;
+
+    
     public Behaviour()
     {
         this.actor = null;
@@ -77,17 +79,18 @@ public abstract class Behaviour
      * Allows a behaviour to manually add a property, which will appear in the GUI scene editor.
      * Most behaviour's won't need this, instead they will use a '@Property(label="Whatever")'
      * annotation above the field.
-     *
+     * 
      * The only good reason to use addProperty, is if you want to add a property to a Behaviour,
      * which cannot be implemented as a simple field.
      * 
-     * Must only be called from within addProperties to ensure that the property won't be added twice.
+     * Must only be called from within addProperties to ensure that the property won't be added
+     * twice.
      */
     protected void addProperty( AbstractProperty<Behaviour, ?> property )
     {
         allProperties.get(this.getClass()).add(property);
     }
-    
+
     /**
      * For Itchy Gurus Only.
      * 
@@ -124,13 +127,16 @@ public abstract class Behaviour
         if (klass == String.class) {
             return new StringProperty<Behaviour>(label, name);
         }
+        if (klass == boolean.class) {
+            return new BooleanProperty<Behaviour>(label,name);
+        }
         if (klass == RGBA.class) {
             return new RGBAProperty<Behaviour>(label, name, property.allowNull(), property.alpha());
         }
         if (klass == Font.class) {
             return new FontProperty<Behaviour>(label, name);
         }
-        
+
         System.err.println("Unexpected property : " +
             field.getDeclaringClass() + "." +
             field.getName());
@@ -161,6 +167,16 @@ public abstract class Behaviour
     public Set<Actor> touching( String... tags )
     {
         return this.collisionStrategy.touching(tags);
+    }
+
+    public Set<Actor> overlapping( String[] including, String[] excluding )
+    {
+        return this.collisionStrategy.overlapping(including, excluding);
+    }
+
+    public Set<Actor> touching( String[] including, String[] excluding )
+    {
+        return this.collisionStrategy.touching(including, excluding);
     }
 
     public void play( String soundName )
@@ -195,6 +211,7 @@ public abstract class Behaviour
     {
     }
 
+    @Override
     public void onMessage( String message )
     {
         // do nothing

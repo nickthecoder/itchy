@@ -1,9 +1,7 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0 which accompanies this
+ * distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
@@ -13,6 +11,7 @@ import java.io.InputStreamReader;
 import java.util.Iterator;
 
 import uk.co.nickthecoder.itchy.animation.AlphaAnimation;
+import uk.co.nickthecoder.itchy.animation.Animation;
 import uk.co.nickthecoder.itchy.animation.CompoundAnimation;
 import uk.co.nickthecoder.itchy.animation.ForwardsAnimation;
 import uk.co.nickthecoder.itchy.animation.Frame;
@@ -38,14 +37,11 @@ public class ResourcesReader
 
     public void load( String filename ) throws Exception
     {
-        System.out.println("Loading resources :" + filename);
         BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(
-                filename)));
+            filename)));
         try {
             XMLTag document = XMLTag.openDocument(reader);
             this.readResources(document.getTag("resources"));
-
-            System.out.println("Loaded resources file : " + filename);
 
         } finally {
             reader.close();
@@ -97,7 +93,6 @@ public class ResourcesReader
             int marginBottom = eightPatchTag.getIntAttribute("bottom");
             int marginLeft = eightPatchTag.getIntAttribute("left");
 
-            System.out.println("Loading ninePatch : " + filename);
             Surface surface = new Surface(this.resources.resolveFilename(filename));
 
             String middleStr = eightPatchTag.getOptionalAttribute("middle", "tile");
@@ -105,9 +100,9 @@ public class ResourcesReader
                 NinePatch.Middle middle = NinePatch.Middle.valueOf(middleStr);
 
                 NinePatch ninePatch = new NinePatch(surface, marginTop, marginRight, marginBottom,
-                        marginLeft, middle);
+                    marginLeft, middle);
                 NinePatchResource resource = new NinePatchResource(this.resources, name, filename,
-                        ninePatch);
+                    ninePatch);
                 this.resources.addNinePatch(resource);
 
             } catch (IllegalArgumentException e) {
@@ -126,7 +121,6 @@ public class ResourcesReader
             String name = poseTag.getAttribute("name");
             String filename = poseTag.getAttribute("filename");
 
-            System.out.println("Loading image : " + filename);
             PoseResource resource = new PoseResource(this.resources, name, filename);
             ImagePose pose = resource.pose;
             this.resources.addPose(resource);
@@ -150,7 +144,6 @@ public class ResourcesReader
             String name = soundTag.getAttribute("name");
             String filename = soundTag.getAttribute("filename");
 
-            System.out.println("Loading sound : " + filename);
             SoundResource soundResource = new SoundResource(this.resources, name, filename);
             this.resources.addSound(soundResource);
         }
@@ -170,11 +163,11 @@ public class ResourcesReader
             // But only one animation can be named
             if (dummyAnimation.children.size() != 1) {
                 throw new XMLException(
-                        "animation tag requires exactly one child (pingPong, frames, sequence, parallel etc)");
+                    "animation tag requires exactly one child (pingPong, frames, sequence, parallel etc)");
             }
 
             AnimationResource ar = new AnimationResource(this.resources, itemName,
-                    dummyAnimation.children.get(0));
+                dummyAnimation.children.get(0));
             this.resources.addAnimation(ar);
         }
     }
@@ -185,7 +178,6 @@ public class ResourcesReader
             XMLTag costumeTag = i.next();
 
             String costumeName = costumeTag.getAttribute("name");
-            System.out.println("Loading costume " + costumeName);
 
             Costume costume = new Costume();
 
@@ -194,17 +186,17 @@ public class ResourcesReader
                 Costume base = this.resources.getCostume(extendsName);
                 if (base == null) {
                     throw new XMLException("Failed to find base costume : " + extendsName +
-                            " for costume : " + costumeName);
+                        " for costume : " + costumeName);
                 }
                 costume.setExtendedFrom(base);
 
             }
 
             costume.behaviourClassName = costumeTag.getOptionalAttribute("behaviour",
-                    NullBehaviour.class.getName());
+                NullBehaviour.class.getName());
             if (!Behaviour.isValidClassName(costume.behaviourClassName)) {
                 throw new XMLException("Expected a subclass of Behaviour : " +
-                        costume.behaviourClassName);
+                    costume.behaviourClassName);
             }
 
             for (Iterator<XMLTag> j = costumeTag.getTags("pose"); j.hasNext();) {
@@ -212,11 +204,10 @@ public class ResourcesReader
 
                 String itemName = poseTag.getAttribute("name");
                 String poseName = poseTag.getAttribute("pose");
-                System.out.println("Loading costume pose " + itemName + "," + poseName);
                 PoseResource poseResource = this.resources.getPoseResource(poseName);
                 if (poseResource == null) {
                     throw new XMLException("Pose : " + poseName + " not found for costume : " +
-                            costumeName);
+                        costumeName);
                 }
                 costume.addPose(itemName, poseResource);
 
@@ -227,12 +218,11 @@ public class ResourcesReader
 
                 String itemName = soundTag.getAttribute("name");
                 String soundName = soundTag.getAttribute("sound");
-                System.out.println("Loading costume sound " + itemName + "," + soundName);
 
                 SoundResource soundResource = this.resources.getSoundResource(soundName);
                 if (soundResource == null) {
                     throw new XMLException("Sound : " + soundName + " not found for costume : " +
-                            costumeName);
+                        costumeName);
                 }
                 costume.addSound(itemName, soundResource);
             }
@@ -250,12 +240,11 @@ public class ResourcesReader
 
                 String itemName = stringTag.getAttribute("name");
                 String fontName = stringTag.getAttribute("font");
-                System.out.println("Loading costume font " + itemName + "," + fontName);
 
                 FontResource fontResource = this.resources.getFontResource(fontName);
                 if (fontResource == null) {
                     throw new XMLException("Font : " + fontName + " not found for costume : " +
-                            costumeName);
+                        costumeName);
                 }
                 costume.addFont(itemName, fontResource);
             }
@@ -265,13 +254,12 @@ public class ResourcesReader
 
                 String itemName = animationTag.getAttribute("name");
                 String animationName = animationTag.getAttribute("animation");
-                System.out.println("Loading costume animation " + itemName + "," + animationName);
 
                 AnimationResource animationResource = this.resources
-                        .getAnimationResource(animationName);
+                    .getAnimationResource(animationName);
                 if (animationResource == null) {
                     throw new XMLException("Animation : " + animationName +
-                            " not found for costume : " + costumeName);
+                        " not found for costume : " + costumeName);
                 }
 
                 costume.addAnimation(itemName, animationResource);
@@ -280,49 +268,58 @@ public class ResourcesReader
             CostumeResource resource = new CostumeResource(this.resources, costumeName, costume);
             this.resources.addCostume(resource);
 
-            System.out.println("Loaded costume " + costumeName);
-
         }
 
+    }
+
+    private void readAnimation( XMLTag tag, Animation animation ) throws XMLException
+    {
+        animation.setFinishedMessage(tag.getOptionalAttribute("finishedMessage", null));
     }
 
     private void readCompoundAnimation( XMLTag parentTag, CompoundAnimation animation )
         throws XMLException
     {
+        readAnimation(parentTag, animation);
+
         for (Iterator<XMLTag> j = parentTag.getTags(); j.hasNext();) {
 
             XMLTag tag = j.next();
 
-            if ( tag.getName().equals("parallel") ) {
-    
+            if (tag.getName().equals("parallel")) {
+
                 CompoundAnimation parallel = new CompoundAnimation(false);
+                readAnimation(tag, parallel);
                 int loops = tag.getIntAttribute("loops");
                 parallel.loops = loops;
                 this.readCompoundAnimation(tag, parallel);
                 animation.addAnimation(parallel);
-                
-            } else if ( tag.getName().equals("sequence") ) {
-    
+
+            } else if (tag.getName().equals("sequence")) {
+
                 CompoundAnimation sequential = new CompoundAnimation(true);
+                readAnimation(tag, sequential);
                 int loops = tag.getIntAttribute("loops");
                 sequential.loops = loops;
                 this.readCompoundAnimation(tag, sequential);
                 animation.addAnimation(sequential);
 
-            } else if ( tag.getName().equals("pingPong") ) {
-    
+            } else if (tag.getName().equals("pingPong")) {
+
                 FramedAnimation pingPong = new FramedAnimation();
+                readAnimation(tag, pingPong);
                 pingPong.pingPong = true;
                 this.readFramedAnimation(tag, pingPong);
                 animation.addAnimation(pingPong);
 
-            } else if ( tag.getName().equals("frames") ) {
-    
+            } else if (tag.getName().equals("frames")) {
+
                 FramedAnimation frames = new FramedAnimation();
+                readAnimation(tag, frames);
                 this.readFramedAnimation(tag, frames);
                 animation.addAnimation(frames);
 
-            } else if ( tag.getName().equals("move") ) {
+            } else if (tag.getName().equals("move")) {
 
                 String profileName = tag.getOptionalAttribute("profile", "unit");
                 Profile profile = NumericAnimation.getProfile(profileName);
@@ -333,10 +330,11 @@ public class ResourcesReader
                 double dx = tag.getDoubleAttribute("dx");
                 double dy = tag.getDoubleAttribute("dy");
                 MoveAnimation ani = new MoveAnimation(ticks, profile, dx, dy);
+                readAnimation(tag, ani);
                 animation.addAnimation(ani);
 
-            } else if ( tag.getName().equals("forwards") ) {
-                    
+            } else if (tag.getName().equals("forwards")) {
+
                 String profileName = tag.getOptionalAttribute("profile", "unit");
                 Profile profile = NumericAnimation.getProfile(profileName);
                 if (profile == null) {
@@ -346,10 +344,11 @@ public class ResourcesReader
                 double forwards = tag.getDoubleAttribute("forwards");
                 double sideways = tag.getDoubleAttribute("sideways");
                 ForwardsAnimation ani = new ForwardsAnimation(ticks, profile, forwards, sideways);
+                readAnimation(tag, ani);
                 animation.addAnimation(ani);
-                
-            } else if ( tag.getName().equals("alpha") ) {
-    
+
+            } else if (tag.getName().equals("alpha")) {
+
                 String profileName = tag.getOptionalAttribute("profile", "linear");
                 Profile profile = NumericAnimation.getProfile(profileName);
                 if (profile == null) {
@@ -358,10 +357,11 @@ public class ResourcesReader
                 int ticks = tag.getIntAttribute("ticks");
                 double target = tag.getOptionalDoubleAttribute("target", 255);
                 AlphaAnimation ani = new AlphaAnimation(ticks, profile, target);
+                readAnimation(tag, ani);
                 animation.addAnimation(ani);
 
-            } else if ( tag.getName().equals("turn") ) {
-    
+            } else if (tag.getName().equals("turn")) {
+
                 String profileName = tag.getOptionalAttribute("profile", "linear");
                 Profile profile = NumericAnimation.getProfile(profileName);
                 if (profile == null) {
@@ -370,10 +370,11 @@ public class ResourcesReader
                 int ticks = tag.getIntAttribute("ticks");
                 double turn = tag.getOptionalDoubleAttribute("turn", 360);
                 TurnAnimation ani = new TurnAnimation(ticks, profile, turn);
+                readAnimation(tag, ani);
                 animation.addAnimation(ani);
 
-            } else if ( tag.getName().equals("scale") ) {
-    
+            } else if (tag.getName().equals("scale")) {
+
                 String profileName = tag.getOptionalAttribute("profile", "linear");
                 Profile profile = NumericAnimation.getProfile(profileName);
                 if (profile == null) {
@@ -382,10 +383,11 @@ public class ResourcesReader
                 int ticks = tag.getIntAttribute("ticks");
                 double target = tag.getOptionalDoubleAttribute("target", 1);
                 ScaleAnimation ani = new ScaleAnimation(ticks, profile, target);
+                readAnimation(tag, ani);
                 animation.addAnimation(ani);
 
             } else {
-                System.err.println( "Ignoring animation tag " + tag.getName() );
+                System.err.println("Ignoring animation tag " + tag.getName());
             }
         }
     }
@@ -393,6 +395,8 @@ public class ResourcesReader
     private void readFramedAnimation( XMLTag parentTag, FramedAnimation animation )
         throws XMLException
     {
+        readAnimation(parentTag, animation);
+
         for (Iterator<XMLTag> k = parentTag.getTags("frame"); k.hasNext();) {
             XMLTag frameTag = k.next();
 
@@ -420,7 +424,6 @@ public class ResourcesReader
             String name = fontTag.getAttribute("name");
             String filename = fontTag.getAttribute("filename");
 
-            System.out.println("Loading font : " + filename);
             FontResource fontResource = new FontResource(this.resources, name, filename);
             this.resources.addFont(fontResource);
         }
@@ -435,7 +438,6 @@ public class ResourcesReader
             String name = sceneTag.getAttribute("name");
             String filename = sceneTag.getAttribute("filename");
 
-            System.out.println("Loading scene : " + filename);
             SceneResource sceneResource = new SceneResource(this.resources, name, filename);
             this.resources.addScene(sceneResource);
         }

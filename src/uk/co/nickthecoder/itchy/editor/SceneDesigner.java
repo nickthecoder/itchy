@@ -412,16 +412,18 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.propertiesContainer.setLayout(grid);
         grid.clear();
 
-        for (AbstractProperty<Actor, ?> property : this.currentActor.getProperties()) {
-            try {
-                Component component = property.createComponent(this.currentActor, true);
-                grid.addRow(property.label, component);
-
-            } catch (Exception e) {
-                e.printStackTrace();
+        if ( this.currentActor != null ) {
+            for (AbstractProperty<Actor, ?> property : this.currentActor.getProperties()) {
+                try {
+                    Component component = property.createComponent(this.currentActor, true);
+                    grid.addRow(property.label, component);
+    
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
+            this.createBehaviourProperties();
         }
-        this.createBehaviourProperties();
         this.updateLayersTable();
     }
 
@@ -760,13 +762,11 @@ public class SceneDesigner implements MouseListener, KeyListener
             
             if (Itchy.singleton.isCtrlDown()) {
                 
-                System.out.println( "Looking through all layers" );
                 for( Layer child: fromBottom ?
                     this.designLayers.getChildren() :
                     Reversed.list(this.designLayers .getChildren())) {
                         
                     ActorsLayer layer = (ActorsLayer) child;
-                    System.out.println( "Looking through layer " + layer.getName() );
                     
                     for (Actor actor : fromBottom ?
                         layer.getActors() :
@@ -867,10 +867,7 @@ public class SceneDesigner implements MouseListener, KeyListener
             return true;
 
         } else if (this.mode == MODE_DRAG_SCROLL) {
-
             scrollBy(-dx, -dy);
-            scrollBy(-dx, -dy);
-            
             return true;
 
         } else if (this.mode == MODE_DRAG_ACTOR) {

@@ -12,6 +12,7 @@ import java.util.List;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.MessageListener;
+import uk.co.nickthecoder.itchy.util.StringUtils;
 
 public abstract class AbstractAnimation implements Animation, Cloneable
 {
@@ -22,6 +23,7 @@ public abstract class AbstractAnimation implements Animation, Cloneable
 
     private String finishedMessage = null;
 
+    
     @Override
     public abstract String getName();
 
@@ -38,7 +40,7 @@ public abstract class AbstractAnimation implements Animation, Cloneable
             for (AnimationListener listener : this.listeners) {
                 listener.finished();
             }
-            if (this.finishedMessage != null) {
+            if (! StringUtils.isBlank(this.finishedMessage)) {
                 for (MessageListener listener : this.messageListeners) {
                     listener.onMessage(this.finishedMessage);
                 }
@@ -86,14 +88,17 @@ public abstract class AbstractAnimation implements Animation, Cloneable
     public Object clone() throws CloneNotSupportedException
     {
         AbstractAnimation result = (AbstractAnimation) super.clone();
+        
         result.listeners = new ArrayList<AnimationListener>();
         for (AnimationListener listener : this.listeners) {
             result.listeners.add(listener);
         }
+        
         result.messageListeners = new ArrayList<MessageListener>();
         for (MessageListener listener : this.messageListeners) {
             result.messageListeners.add(listener);
         }
+        
         return result;
     }
 

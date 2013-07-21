@@ -12,6 +12,7 @@ import java.util.Set;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.ActorCollisionStrategy;
+import uk.co.nickthecoder.itchy.BruteForceCollisionStrategy;
 
 /**
  * Uses a Neighbourhood to optimise Actor's overlapping and touching methods. This strategy uses a
@@ -68,30 +69,22 @@ public class SinglePointCollisionStrategy extends ActorCollisionStrategy
     }
 
     @Override
-    public Set<Actor> overlapping( Actor source, String... tags )
+    public Set<Actor> overlapping( Actor source, String[] includeTags, String[] excludeTags )
     {
         Set<Actor> results = new HashSet<Actor>();
 
-        // System.out.println( "overlapping..." );
         for (Square square : this.neighbourhoodSquare.getNeighbouringSquares()) {
-
-            System.out.println("sqaure : " + square);
-
             for (Actor actor : square.getOccupants()) {
 
-                // System.out.println( "Actor " + actor );
-
                 if ((actor != source) && (!results.contains(actor))) {
-                    for (String tag : tags) {
-                        if (actor.hasTag(tag)) {
-
-                            // System.out.println( "Has tag" );
-
-                            // System.out.println( "Checking " + source + " vs " + actor );
-                            if (source.overlapping(actor)) {
-                                // System.out.println( "is overlapping" );
-                                results.add(actor);
-                                break;
+                    if (!BruteForceCollisionStrategy.exclude(actor, excludeTags)) {
+                        for (String includeTag : includeTags) {
+                            if (actor.hasTag(includeTag)) {
+    
+                                if (source.overlapping(actor)) {
+                                    results.add(actor);
+                                    break;
+                                }
                             }
                         }
                     }
@@ -103,30 +96,23 @@ public class SinglePointCollisionStrategy extends ActorCollisionStrategy
     }
 
     @Override
-    public Set<Actor> touching( Actor source, String... tags )
+    public Set<Actor> touching( Actor source, String[] includeTags, String[] excludeTags )
     {
         Set<Actor> results = new HashSet<Actor>();
 
-        // System.out.println( "overlapping..." );
         for (Square square : this.neighbourhoodSquare.getNeighbouringSquares()) {
-
-            // System.out.println( "square : " + square );
 
             for (Actor actor : square.getOccupants()) {
 
-                // System.out.println( "Actor " + actor );
-
                 if ((actor != source) && (!results.contains(actor))) {
-                    for (String tag : tags) {
-                        if (actor.hasTag(tag)) {
-
-                            // System.out.println( "Has tag" );
-
-                            // System.out.println( "Checking " + source + " vs " + actor );
-                            if (source.touching(actor)) {
-                                // System.out.println( "is touching" );
-                                results.add(actor);
-                                break;
+                    if (!BruteForceCollisionStrategy.exclude(actor, excludeTags)) {
+                        for (String includeTag : includeTags) {
+                            if (actor.hasTag(includeTag)) {
+    
+                                if (source.touching(actor)) {
+                                    results.add(actor);
+                                    break;
+                                }
                             }
                         }
                     }

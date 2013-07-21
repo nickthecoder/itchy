@@ -126,15 +126,15 @@ class GameLoopJob extends Job
     
     public void debug()
     {
-        System.out.println( "GameLoopJob" );
-        System.out.println( "Tasks " + this.tasksIndex + " of " + this.tasks.size() );
-        System.out.println( "Actors " + this.actorsIndex + " of " + this.actors.size() );
+        System.err.println( "GameLoopJob" );
+        System.err.println( "Tasks " + this.tasksIndex + " of " + this.tasks.size() );
+        System.err.println( "Actors " + this.actorsIndex + " of " + this.actors.size() );
         
         for ( int i = this.tasksIndex; i < this.tasks.size(); i ++ ) {
-            System.out.println( "Task : " + this.tasks.get(i) );
+            System.err.println( "Task : " + this.tasks.get(i) );
         }
         for ( int i = this.actorsIndex; i < this.actors.size(); i ++ ) {
-            System.out.println( "Actor: " + this.actors.get(i) );
+            System.err.println( "Actor: " + this.actors.get(i) );
         }
     }
 }

@@ -45,11 +45,15 @@ public class ForwardAnimationEditor extends AnimationEditor
 
         this.txtSidewards = new DoubleBox(forwardsAnimation.sideways);
         gridLayout.addRow(new Label("Sidewards By"), Editor.addHint(this.txtSidewards, "(pixels)"));
+    
+        super.createForm(gridLayout);
     }
 
     @Override
     public boolean save()
     {
+        super.save();
+        
         ForwardsAnimation forwardsAnimation = (ForwardsAnimation) this.animation;
 
         forwardsAnimation.ticks = this.txtTicks.getValue();

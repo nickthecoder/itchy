@@ -33,14 +33,12 @@ public class RulesReader
 
     public void load( String filename ) throws Exception
     {
-        System.out.println("Loading gui rules :" + filename);
         BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(
                 filename)));
         try {
             XMLTag document = XMLTag.openDocument(reader);
             this.readRules(document.getTag("rules"));
 
-            System.out.println("Loaded gui rules : " + filename);
             reader.close();
 
         } finally {

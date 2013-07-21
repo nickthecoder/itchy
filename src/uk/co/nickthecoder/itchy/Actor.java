@@ -1,9 +1,7 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0 which accompanies this
+ * distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
@@ -12,9 +10,9 @@ import java.util.List;
 import java.util.Set;
 
 import uk.co.nickthecoder.itchy.animation.Animation;
+import uk.co.nickthecoder.itchy.util.AbstractProperty;
 import uk.co.nickthecoder.itchy.util.DoubleProperty;
 import uk.co.nickthecoder.itchy.util.FontProperty;
-import uk.co.nickthecoder.itchy.util.AbstractProperty;
 import uk.co.nickthecoder.itchy.util.RGBAProperty;
 import uk.co.nickthecoder.itchy.util.StringProperty;
 import uk.co.nickthecoder.itchy.util.TagCollection;
@@ -23,7 +21,7 @@ import uk.co.nickthecoder.jame.RGBA;
 import uk.co.nickthecoder.jame.Sound;
 import uk.co.nickthecoder.jame.Surface;
 
-public class Actor extends Task implements MessageListener
+public class Actor extends Task
 {
     // private static Map<Class,Integer> _nextIds = new HashMap<Class,Integer>();
     private static int _nextId = 1;
@@ -98,7 +96,7 @@ public class Actor extends Task implements MessageListener
             normalProperties.add(new DoubleProperty<Actor>("Direction", "appearance.direction"));
             normalProperties.add(new DoubleProperty<Actor>("Scale", "appearance.scale"));
             normalProperties.add(new RGBAProperty<Actor>("Colorize", "appearance.colorize", true,
-                    true));
+                true));
             normalProperties.add(new DoubleProperty<Actor>("Activation Delay", "activationDelay"));
 
             textProperties = new ArrayList<AbstractProperty<Actor, ?>>();
@@ -107,7 +105,7 @@ public class Actor extends Task implements MessageListener
             textProperties.add(new DoubleProperty<Actor>("Font Size", "appearance.pose.fontSize"));
             textProperties.add(new StringProperty<Actor>("Text", "appearance.pose.text"));
             textProperties.add(new RGBAProperty<Actor>("Text Color", "appearance.pose.color",
-                    false, false));
+                false, false));
 
         }
 
@@ -167,7 +165,7 @@ public class Actor extends Task implements MessageListener
             return this.getY() - this.getAppearance().getOffsetY();
         } else {
             return this.getY() - this.getAppearance().getSurface().getHeight() +
-                    this.getAppearance().getOffsetY();
+                this.getAppearance().getOffsetY();
         }
     }
 
@@ -195,7 +193,8 @@ public class Actor extends Task implements MessageListener
             this.animation = animation.copy();
             this.animation.start(this);
             this.animation.tick(this);
-            this.animation.addMessageListener( this );
+            this.animation.addMessageListener(getBehaviour());
+
         } else {
             this.animation = null;
         }
@@ -205,7 +204,6 @@ public class Actor extends Task implements MessageListener
     {
         return this.animation;
     }
-
 
     public void event( String eventName )
     {
@@ -271,6 +269,7 @@ public class Actor extends Task implements MessageListener
 
     /**
      * This is NOT the opposite of isOnScreen.
+     * 
      * @return True is any part of the actor's bounding rectangle is off screen.
      */
     public boolean isOffScreen()
@@ -278,12 +277,13 @@ public class Actor extends Task implements MessageListener
         if (this.layer == null) {
             return true;
         }
-        
-        return ! this.appearance.getWorldRectangle().within( this.layer.worldRect);
+
+        return !this.appearance.getWorldRectangle().within(this.layer.worldRect);
     }
-    
+
     /**
      * This is NOT the opposite of isOffScreen.
+     * 
      * @return True if any part of the actor's bounding rectangle is on screen.
      */
     public boolean isOnScreen()
@@ -338,22 +338,9 @@ public class Actor extends Task implements MessageListener
         });
     }
 
-    public void onMessage( String message )
-    {
-        if ( "kill".equals( message ) ) {
-            this.kill();
-        } else if ( "activate".equals(message) ) {
-            this.activate();
-        } else if ( "deactivate".equals(message) ) {
-            this.deactivate();
-        } else {
-            this.getBehaviour().onMessage( message );
-        }
-    }
-    
     public void activate()
     {
-        if ((! this.dead) && (!this.active)) {
+        if ((!this.dead) && (!this.active)) {
             this.addTag("active");
             this.active = true;
             Itchy.singleton.gameLoopJob.add(new Task() {
@@ -486,6 +473,26 @@ public class Actor extends Task implements MessageListener
 
     }
 
+    public void moveTowards( Actor actor, double amount )
+    {
+        double dx = actor.x - this.x;
+        double dy = actor.y - this.y;
+        
+        double scale = Math.sqrt(dx * dx + dy * dy);
+        if ( scale == 0) {
+            return;
+        }
+        this.moveBy(dx * amount / scale, dy * amount / scale);
+    }
+
+    public double distance( Actor other )
+    {
+        double dx = this.x - other.x;
+        double dy = this.y - other.y;
+
+        return Math.sqrt(dx * dx + dy * dy);
+    }
+
     public void play( String soundName )
     {
         this.costume.getSound(soundName).play();
@@ -520,7 +527,7 @@ public class Actor extends Task implements MessageListener
     public double distanceTo( Actor other )
     {
         return Math.sqrt((this.x - other.x) * (this.x - other.x) + (this.y - other.y) *
-                (this.y - other.y));
+            (this.y - other.y));
     }
 
     public double directionOf( Actor other )
@@ -569,14 +576,14 @@ public class Actor extends Task implements MessageListener
     public boolean touching( Actor other )
     {
         int dx = ((int) this.getX() - this.appearance.getOffsetX()) -
-                ((int) (other.getX()) - other.appearance.getOffsetX());
+            ((int) (other.getX()) - other.appearance.getOffsetX());
         int dy = this.getYAxisPointsDown() ? ((int) this.getY() - this.appearance.getOffsetY()) -
-                ((int) (other.getY()) - other.appearance.getOffsetY())
-                : ((int) -this.getY() - this.appearance.getOffsetY()) -
-                        ((int) (-other.getY()) - other.appearance.getOffsetY());
+            ((int) (other.getY()) - other.appearance.getOffsetY())
+            : ((int) -this.getY() - this.appearance.getOffsetY()) -
+                ((int) (-other.getY()) - other.appearance.getOffsetY());
 
         return this.getAppearance().getSurface()
-                .overlaps(other.getAppearance().getSurface(), dx, dy, 64);
+            .overlaps(other.getAppearance().getSurface(), dx, dy, 64);
 
     }
 
@@ -642,8 +649,9 @@ public class Actor extends Task implements MessageListener
     public String toString()
     {
         return "Actor #" + this._id + " @ " + getX() + "," + getY() +
-               " size(" + this.getAppearance().getWidth() + "," + this.getAppearance().getHeight() + ") " +
-                (getBehaviour() == null ? "" : "(" + getBehaviour().getClass().getName() + ")");
+            " size(" + this.getAppearance().getWidth() + "," + this.getAppearance().getHeight() +
+            ") " +
+            (getBehaviour() == null ? "" : "(" + getBehaviour().getClass().getName() + ")");
     }
 
     @Override

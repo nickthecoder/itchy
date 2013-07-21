@@ -40,7 +40,7 @@ public class Alien extends Bouncy implements Shootable
         this.actor.addTag("shootable");
 
         // Create the fragments for the explosions when I get shot.
-        new Fragment().actor(this.actor).create("fragment");
+        new Fragment().actor(this.actor).createPoses("fragment");
     }
 
     @Override
@@ -134,7 +134,6 @@ public class Alien extends Bouncy implements Shootable
 
             if (scale > 1) {
                 double newScale = 1 + (scale -1) * (this.shotsRequired ) / ( this.shotsRequired + 1 );
-                System.out.println( "Shots R " + this.shotsRequired + " newScale " + newScale );
                 ScaleAnimation scaleAnimation = new ScaleAnimation(10, NumericAnimation.linear, newScale);
                 this.getActor().setAnimation(scaleAnimation);
             }

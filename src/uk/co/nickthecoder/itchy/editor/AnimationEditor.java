@@ -1,9 +1,7 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0 which accompanies this
+ * distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.editor;
 
@@ -14,6 +12,8 @@ import uk.co.nickthecoder.itchy.gui.Button;
 import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.Container;
 import uk.co.nickthecoder.itchy.gui.GridLayout;
+import uk.co.nickthecoder.itchy.gui.Label;
+import uk.co.nickthecoder.itchy.gui.TextBox;
 import uk.co.nickthecoder.itchy.gui.VerticalLayout;
 import uk.co.nickthecoder.itchy.gui.Window;
 
@@ -22,6 +22,8 @@ public class AnimationEditor extends Window
     public Animation animation;
 
     protected Editor editor;
+
+    private TextBox txtMessage;
 
     public AnimationEditor( Editor editor, Animation animation )
     {
@@ -77,6 +79,8 @@ public class AnimationEditor extends Window
 
     public void createForm( GridLayout gridLayout )
     {
+        this.txtMessage = new TextBox(this.animation.getFinishedMessage());
+        gridLayout.addRow(new Label("Complettion Message"), this.txtMessage);
     }
 
     public Component createExtra()
@@ -104,6 +108,7 @@ public class AnimationEditor extends Window
 
     public boolean save()
     {
+        this.animation.setFinishedMessage(this.txtMessage.getText());
         return true;
     }
 }

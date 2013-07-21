@@ -23,6 +23,7 @@ import uk.co.nickthecoder.itchy.animation.Profile;
 import uk.co.nickthecoder.itchy.animation.ScaleAnimation;
 import uk.co.nickthecoder.itchy.animation.TurnAnimation;
 import uk.co.nickthecoder.itchy.util.NinePatch;
+import uk.co.nickthecoder.itchy.util.StringUtils;
 import uk.co.nickthecoder.itchy.util.XMLException;
 import uk.co.nickthecoder.itchy.util.XMLWriter;
 
@@ -177,6 +178,9 @@ public class ResourcesWriter extends XMLWriter
             this.beginTag(tagName);
             this.attribute("loops", ca.loops);
             this.writeAnimations((CompoundAnimation) animation);
+            if ( ! StringUtils.isBlank(animation.getFinishedMessage())) {
+                this.attribute("finishedMessage", animation.getFinishedMessage());
+            }
             this.endTag(tagName);
 
         } else if (animation instanceof FramedAnimation) {
@@ -184,6 +188,9 @@ public class ResourcesWriter extends XMLWriter
             String tagName = framedAnimation.pingPong ? "pingPong" : "frames";
             this.beginTag(tagName);
             this.writeFrames(framedAnimation.getFrames());
+            if ( ! StringUtils.isBlank(animation.getFinishedMessage())) {
+                this.attribute("finishedMessage", animation.getFinishedMessage());
+            }
             this.endTag(tagName);
 
         } else if (animation instanceof MoveAnimation) {
@@ -193,6 +200,9 @@ public class ResourcesWriter extends XMLWriter
             this.attribute("dx", moveAnimation.dx);
             this.attribute("dy", moveAnimation.dy);
             this.writeProfile(moveAnimation.profile);
+            if ( ! StringUtils.isBlank(animation.getFinishedMessage())) {
+                this.attribute("finishedMessage", animation.getFinishedMessage());
+            }
             this.endTag("move");
 
         } else if (animation instanceof ForwardsAnimation) {
@@ -202,6 +212,9 @@ public class ResourcesWriter extends XMLWriter
             this.attribute("forwards", forwardsAnimation.forwards);
             this.attribute("sideways", forwardsAnimation.sideways);
             this.writeProfile(forwardsAnimation.profile);
+            if ( ! StringUtils.isBlank(animation.getFinishedMessage())) {
+                this.attribute("finishedMessage", animation.getFinishedMessage());
+            }
             this.endTag("forwards");
 
         } else if (animation instanceof AlphaAnimation) {
@@ -210,6 +223,9 @@ public class ResourcesWriter extends XMLWriter
             this.attribute("ticks", alphaAnimation.ticks);
             this.attribute("target", alphaAnimation.target);
             this.writeProfile(alphaAnimation.profile);
+            if ( ! StringUtils.isBlank(animation.getFinishedMessage())) {
+                this.attribute("finishedMessage", animation.getFinishedMessage());
+            }
             this.endTag("alpha");
 
         } else if (animation instanceof TurnAnimation) {
@@ -218,6 +234,9 @@ public class ResourcesWriter extends XMLWriter
             this.attribute("ticks", turnAnimation.ticks);
             this.attribute("turn", turnAnimation.turn);
             this.writeProfile(turnAnimation.profile);
+            if ( ! StringUtils.isBlank(animation.getFinishedMessage())) {
+                this.attribute("finishedMessage", animation.getFinishedMessage());
+            }
             this.endTag("turn");
 
         } else if (animation instanceof ScaleAnimation) {
@@ -226,11 +245,15 @@ public class ResourcesWriter extends XMLWriter
             this.attribute("ticks", scaleAnimation.ticks);
             this.attribute("target", scaleAnimation.target);
             this.writeProfile(scaleAnimation.profile);
-            this.endTag("turn");
+            if ( ! StringUtils.isBlank(animation.getFinishedMessage())) {
+                this.attribute("finishedMessage", animation.getFinishedMessage());
+            }
+            this.endTag("scale");
 
         } else {
             throw new XMLException("Unknown animation type : " + animation.getClass().getName());
         }
+        
     }
 
     private void writeProfile( Profile profile ) throws XMLException

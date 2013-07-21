@@ -28,13 +28,12 @@ public class DebugCollisionStrategy extends ActorCollisionStrategy
     }
 
     @Override
-    public Set<Actor> overlapping( Actor actor, String... tags )
+    public Set<Actor> overlapping( Actor actor, String[] includeTags, String[] excludeTags )
     {
-        Set<Actor> results1 = this.strategy1.overlapping(tags);
-        Set<Actor> results2 = this.strategy2.overlapping(tags);
+        Set<Actor> results1 = this.strategy1.overlapping(includeTags, excludeTags);
+        Set<Actor> results2 = this.strategy2.overlapping(includeTags, excludeTags);
 
         if (!results1.equals(results2)) {
-            System.out.println("Collision failed for " + getActor());
             System.err.println("Collision failed for " + getActor());
             System.err.println("Results1 : " + results1);
             System.err.println("Results2 : " + results2);
@@ -44,13 +43,12 @@ public class DebugCollisionStrategy extends ActorCollisionStrategy
     }
 
     @Override
-    public Set<Actor> touching( Actor actor, String... tags )
+    public Set<Actor> touching( Actor actor, String[] includeTags, String[] excludeTags )
     {
-        Set<Actor> results1 = this.strategy1.touching(tags);
-        Set<Actor> results2 = this.strategy2.touching(tags);
+        Set<Actor> results1 = this.strategy1.touching(includeTags,excludeTags);
+        Set<Actor> results2 = this.strategy2.touching(includeTags,excludeTags);
 
         if (!results1.equals(results2)) {
-            System.out.println("Touching failed for " + getActor());
             System.err.println("Touching failed for " + getActor());
             System.err.println("Results1 : " + results1);
             System.err.println("Results2 : " + results2);

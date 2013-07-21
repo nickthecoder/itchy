@@ -73,7 +73,7 @@ public class Fragment
         return this;
     }
 
-    public void create( String destPose )
+    public void createPoses( String destPose )
     {
         fragment(this.actor.getCostume(), this.poseName, destPose);
     }
@@ -136,7 +136,15 @@ public class Fragment
         this.pieces[owner].setOwner(x, y);
     }
 
-    public class Piece
+    
+    /**
+     * Inner class Piece, is one fragment of the larger image.
+     * Each piece has its own surface which is the same size as the original image. This surface starts
+     * off completely transparent, and then one pixel is chosen as the seed point for this fragment.
+     * The seed pixel is set to the same as the original image. As the piece grows, more pixels are
+     * set until every pixel on the origianal image has been copied to one of the pieces.
+     */
+    class Piece
     {
         int owner;
         LinkedList<Point> edges;

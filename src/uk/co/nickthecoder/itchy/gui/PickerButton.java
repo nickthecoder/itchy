@@ -48,7 +48,6 @@ public class PickerButton<T> extends Button
     @Override
     public void onClick( final MouseButtonEvent e )
     {
-        System.out.println( "Clicked picker button. Items : " + this.hashMap.size() ); //TODO remove
         Itchy.singleton.debug();
         
         Picker<T> picker = new Picker<T>(this.title, this.hashMap, this.getValue()) {

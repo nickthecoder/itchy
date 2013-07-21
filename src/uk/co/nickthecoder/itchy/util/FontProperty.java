@@ -37,7 +37,6 @@ public class FontProperty<S> extends AbstractProperty<S, Font>
         Resources resources = Itchy.singleton.getGame().resources;
         for (String name : resources.fontNames()) {
             hashMap.put(name, resources.getFont(name));
-            System.out.println( "Added font " + name + " -> " + resources.getFont(name) ); // TODO remove
         }
 
         final PickerButton<Font> pickerButton = new PickerButton<Font>(

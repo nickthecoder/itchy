@@ -39,7 +39,6 @@ public class SceneWriter extends XMLWriter
     {
         try {
             this.scene = this.sceneResource.getScene();
-            System.out.println("SceneWriter scene : " + this.scene);
         } catch (Exception e) {
             throw new XMLException("Failed to get scene");
         }
@@ -73,12 +72,12 @@ public class SceneWriter extends XMLWriter
                 CostumeSceneActor csa = (CostumeSceneActor) sceneActor;
                 this.beginTag("actor");
                 this.attribute("costume", this.sceneResource.resources.getCostumeName(csa.costume));
-                this.writeSceneActorAttributes(sceneActor);
 
                 if ((csa.costume.behaviourClassName == null) ||
                         (!csa.costume.behaviourClassName.equals(csa.behaviourClassName))) {
                     this.attribute("behaviour", sceneActor.behaviourClassName);
                 }
+                this.writeSceneActorAttributes(sceneActor);
 
                 this.endTag("actor");
 

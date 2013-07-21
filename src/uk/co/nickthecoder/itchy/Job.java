@@ -41,24 +41,19 @@ public abstract class Job implements Runnable
     @Override
     public void run()
     {
-        // System.out.println("Job.run obtaining lock");
         this.lock();
         try {
             while (true) {
-                // System.out.println("Doing a task");
                 if (!doTask()) {
-                    // System.out.println("All tasks complete");
                     this.complete = true;
                     return;
                 }
                 if (!isMainWorker()) {
-                    // System.out.println("Not the main worker");
                     return;
                 }
             }
         } finally {
             this.unlock();
-            // System.out.println("A Job thread is complete");
         }
     }
 
@@ -102,11 +97,8 @@ public abstract class Job implements Runnable
         }
         
         while (!this.complete) {
-            // System.out.println( "Waiting for the job to complete" );
-            // System.out.println( "Looping till copmlete" );
             this.lock();
             this.unlock();
-            // System.out.println( "joining" );
             try {
                 this.mainWorker.join(10);
             } catch (InterruptedException e) {
@@ -116,7 +108,6 @@ public abstract class Job implements Runnable
 
     public void sleep( long millis )
     {
-        // System.out.println("Sleeping");
         if (this.lockingThread != Thread.currentThread()) {
             throw new RuntimeException("Attempt to call sleep from outside of a running task");
         }
@@ -130,7 +121,6 @@ public abstract class Job implements Runnable
             try {
                 this.unlock();
                 Thread.sleep(wakeTime - System.currentTimeMillis());
-                // System.out.println("Attempting to re-obtain lock after sleep");
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } finally {

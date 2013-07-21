@@ -101,9 +101,6 @@ public final class Editor extends Game
 
         this.mainGuiPose.show();
 
-        // this.mainLayer.add( this.mainGuiPose.getActor() );
-
-        System.out.println( "Editor init : " + this.game.getLayers() );
         this.soundsEditor = new SoundsEditor(this);
         this.posesEditor = new PosesEditor(this);
         this.fontsEditor = new FontsEditor(this);

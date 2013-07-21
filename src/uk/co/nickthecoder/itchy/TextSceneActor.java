@@ -44,6 +44,7 @@ public class TextSceneActor extends SceneActor
         pose.setColor(this.color);
         Actor actor = new Actor(pose);
         this.updateActor(actor, designActor);
+        
         return actor;
     }
 

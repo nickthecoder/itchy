@@ -599,9 +599,9 @@ public class Itchy
 
     public void debug()
     {
-        System.out.println( "Itchy Debug" );
-        System.out.println( "Layers : " + this.rootLayer );
-        System.out.println( "End Itchy Debug" );
+        System.err.println( "Itchy Debug" );
+        System.err.println( "Layers : " + this.rootLayer );
+        System.err.println( "End Itchy Debug" );
     }
     
     public void hideWindow( GuiPose window )

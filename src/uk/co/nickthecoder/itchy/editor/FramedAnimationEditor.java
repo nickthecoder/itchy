@@ -76,6 +76,8 @@ public class FramedAnimationEditor extends AnimationEditor
         this.chkPingPong = new CheckBox(fa.pingPong);
 
         gridLayout.addRow("Ping Pong", this.chkPingPong);
+        
+        super.createForm(gridLayout);
     }
 
     @Override
@@ -152,6 +154,8 @@ public class FramedAnimationEditor extends AnimationEditor
     @Override
     public boolean save()
     {
+        super.save();
+        
         FramedAnimation framedAnimation = (FramedAnimation) this.animation;
 
         framedAnimation.pingPong = this.chkPingPong.getValue();

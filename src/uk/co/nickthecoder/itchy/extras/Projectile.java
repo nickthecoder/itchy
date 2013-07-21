@@ -28,16 +28,6 @@ public class Projectile extends Behaviour
 
     public int life = 1000;
     
-    public Actor createActor( Actor source, String poseName )
-    {
-        Actor actor = new Actor( source.getCostume().getPose( poseName ) );
-        actor.getAppearance().setDirection( source.getAppearance().getDirection());
-        actor.moveTo( source );
-        actor.setBehaviour(this);
-        source.getLayer().add(actor);
-        
-        return actor;
-    }
     
     public Projectile speed( double value )
     {
@@ -73,6 +63,17 @@ public class Projectile extends Behaviour
     {
         this.growFactor = value;
         return this;
+    }
+
+    public Actor createActor( Actor source, String poseName )
+    {
+        Actor actor = new Actor( source.getCostume().getPose( poseName ) );
+        actor.getAppearance().setDirection( source.getAppearance().getDirection());
+        actor.moveTo( source );
+        actor.setBehaviour(this);
+        source.getLayer().add(actor);
+        
+        return actor;
     }
     
     @Override

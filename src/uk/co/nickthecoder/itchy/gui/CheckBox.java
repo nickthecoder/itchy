@@ -7,6 +7,9 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.gui;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 
 public class CheckBox extends ClickableContainer
@@ -15,9 +18,13 @@ public class CheckBox extends ClickableContainer
 
     private final ImageComponent image;
 
+    private final List<ComponentChangeListener> changeListeners;
+
     public CheckBox( boolean value )
     {
         super();
+        this.changeListeners = new ArrayList<ComponentChangeListener>();
+
         this.image = new ImageComponent();
         this.addChild(this.image);
 
@@ -29,6 +36,17 @@ public class CheckBox extends ClickableContainer
     public CheckBox()
     {
         this(false);
+    }
+
+
+    public void addChangeListener( ComponentChangeListener listener )
+    {
+        this.changeListeners.add(listener);
+    }
+
+    public void removeChangeListener( ComponentChangeListener listener )
+    {
+        this.changeListeners.remove(listener);
     }
 
     public boolean getValue()
@@ -46,6 +64,11 @@ public class CheckBox extends ClickableContainer
                 this.removeStyle("checked");
             }
             this.invalidate();
+
+            for (ComponentChangeListener listener : this.changeListeners) {
+                listener.changed();
+            }
+
         }
         this.image.setVisible(value);
     }

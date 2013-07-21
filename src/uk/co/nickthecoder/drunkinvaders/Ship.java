@@ -75,7 +75,7 @@ public class Ship extends Bouncy implements Shootable
         this.turn(0); // calculates the direction
 
         // Create the fragments for the explosions when I get shot.
-        new Fragment().actor(this.actor).create("fragment");
+        new Fragment().actor(this.actor).createPoses("fragment");
     }
 
     @Override

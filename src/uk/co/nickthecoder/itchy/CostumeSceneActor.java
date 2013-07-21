@@ -34,6 +34,7 @@ public class CostumeSceneActor extends SceneActor
     {
         Actor actor = new Actor(this.costume, this.startEvent);
         this.updateActor(actor, designActor);
+        
         return actor;
     }
 

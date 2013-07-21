@@ -19,15 +19,15 @@ public class BruteForceActorCollisionStrategy extends ActorCollisionStrategy
     }
 
     @Override
-    public Set<Actor> overlapping( Actor actor, String... tags )
+    public Set<Actor> overlapping( Actor actor, String[] includeTags, String[] excludeTags )
     {
-        return BruteForceCollisionStrategy.singleton.overlapping(actor, tags);
+        return BruteForceCollisionStrategy.singleton.overlapping(actor, includeTags, excludeTags);
     }
 
     @Override
-    public Set<Actor> touching( Actor actor, String... tags )
+    public Set<Actor> touching( Actor actor, String[] includeTags, String[] excludeTags )
     {
-        return BruteForceCollisionStrategy.singleton.touching(actor, tags);
+        return BruteForceCollisionStrategy.singleton.touching(actor, includeTags, excludeTags);
     }
 
 }
