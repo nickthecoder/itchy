@@ -11,8 +11,6 @@ What's Next
 Costumes can have different default property values for their behaviours.
     e.g. BulletBehaviour can have a targetTagName of "shootable" (bullet) or "killable" (bomb)
 
-Safe Save scene, just like resources.
-    
 Left/Right don't work in text fields in the editor
 
 Use annotations to set initial tags :

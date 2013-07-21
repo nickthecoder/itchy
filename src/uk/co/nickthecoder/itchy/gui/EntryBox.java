@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.Itchy;
+import uk.co.nickthecoder.itchy.KeyListener;
 import uk.co.nickthecoder.jame.Keys;
 import uk.co.nickthecoder.jame.RGBA;
 import uk.co.nickthecoder.jame.Surface;
@@ -23,7 +24,7 @@ import uk.co.nickthecoder.jame.TrueTypeFont;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 
-public class EntryBox<E extends EntryBox<?>> extends ClickableContainer implements Layout
+public class EntryBox<E extends EntryBox<?>> extends ClickableContainer implements Layout, KeyListener
 {
     private static final RGBA ANY_COLOR = new RGBA(0, 0, 0);
 
@@ -208,6 +209,12 @@ public class EntryBox<E extends EntryBox<?>> extends ClickableContainer implemen
         return super.onKeyDown(ke);
     }
 
+    @Override
+    public boolean onKeyUp( KeyboardEvent ke )
+    {
+        return false;
+    }
+
     public void setCaretPosition( int index )
     {
         this.caretIndex = index;
@@ -299,4 +306,5 @@ public class EntryBox<E extends EntryBox<?>> extends ClickableContainer implemen
             this.caret.getRequiredWidth(),
             height - this.caret.getPaddingTop() - this.caret.getPaddingBottom());
     }
+
 }

@@ -12,6 +12,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
 
+import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.GuiPose;
 import uk.co.nickthecoder.itchy.gui.Rules;
 import uk.co.nickthecoder.jame.Audio;
@@ -89,6 +90,8 @@ public class Itchy
     private MouseListener mouseOwner;
 
     private EventListener modalListener;
+
+    private Component keyboardFocus;
 
     private Game game;
 
@@ -345,6 +348,12 @@ public class Itchy
                     this.keyboardState[key] = true;
                 }
 
+                if ( this.keyboardFocus != null ) {
+                    if ( this.keyboardFocus.onKeyDown(ke)) {
+                        return;
+                    }
+                }
+                
                 if (this.modalListener == null) {
 
                     for (KeyListener listener : this.keyListeners) {
@@ -523,6 +532,16 @@ public class Itchy
     public void setModalListener( EventListener listener )
     {
         this.modalListener = listener;
+    }
+    
+    /**
+     * Used when a single entity believes it deserves first priority to all key strokes.
+     * In particular, this is used by GUI components, which accept keyboard input when they
+     * have the focus.
+     */
+    public void setFocus( Component focus )
+    {
+        this.keyboardFocus = focus;
     }
 
     public void addEventListener( EventListener listener )
