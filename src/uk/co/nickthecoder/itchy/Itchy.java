@@ -91,7 +91,7 @@ public class Itchy
 
     private EventListener modalListener;
 
-    private Component keyboardFocus;
+    private Focusable keyboardFocus;
 
     private Game game;
 
@@ -539,7 +539,7 @@ public class Itchy
      * In particular, this is used by GUI components, which accept keyboard input when they
      * have the focus.
      */
-    public void setFocus( Component focus )
+    public void setFocus( Focusable focus )
     {
         this.keyboardFocus = focus;
     }

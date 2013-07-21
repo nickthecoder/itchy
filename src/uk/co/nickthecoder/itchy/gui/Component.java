@@ -11,6 +11,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+import uk.co.nickthecoder.itchy.Focusable;
 import uk.co.nickthecoder.itchy.Font;
 import uk.co.nickthecoder.itchy.GraphicsContext;
 import uk.co.nickthecoder.itchy.Renderable;
@@ -22,7 +23,7 @@ import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 
-public abstract class Component
+public abstract class Component implements Focusable
 {
     Container parent;
 
@@ -142,6 +143,11 @@ public abstract class Component
         return false;
     }
 
+    public boolean onKeyUp( KeyboardEvent ke)
+    {
+        return false;
+    }
+    
     public boolean canFocus()
     {
         return this.focusable;
@@ -152,6 +158,14 @@ public abstract class Component
         RootContainer root = this.getRoot();
         if (root != null) {
             root.setFocus(this);
+        }
+    }
+    
+    public void lostFocus()
+    {
+        RootContainer root = this.getRoot();
+        if (root != null) {
+            root.setFocus(null);
         }
     }
 

@@ -11,10 +11,11 @@ What's Next
 Costumes can have different default property values for their behaviours.
     e.g. BulletBehaviour can have a targetTagName of "shootable" (bullet) or "killable" (bomb)
 
-Left/Right don't work in text fields in the editor
-
 Use annotations to set initial tags :
     @Tagged("deadly") @Tagged("bouncy") class Alien {...)
+
+Components shouldn't handle keyboard events except the component with the focus.
+    If no component has the focus, then the entire GUIPose will receive no keyboard events.
 
 Try it on a RaspPi
     Need to compile Jame for the ARM processor!

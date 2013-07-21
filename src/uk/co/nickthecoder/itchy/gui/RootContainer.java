@@ -1,13 +1,9 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0 which accompanies this
+ * distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.gui;
-
-import java.util.Iterator;
 
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.jame.Keys;
@@ -72,7 +68,7 @@ public abstract class RootContainer extends Container
                     this.previousFocus(null, this);
                 } else {
                     RootContainer.focus.parent.previousFocus(RootContainer.focus,
-                            RootContainer.focus);
+                        RootContainer.focus);
                 }
 
             } else {
@@ -87,30 +83,13 @@ public abstract class RootContainer extends Container
             return true;
         }
 
-        if (RootContainer.focus != null) {
-            if (RootContainer.focus.onKeyDown(ke)) {
-                return true;
-            }
-
-            Iterator<Container> i = RootContainer.focus.getAncestors();
-            while (i.hasNext()) {
-                Container container = i.next();
-                if (container == this) {
-                    break;
-                }
-                if (container.onKeyDown(ke)) {
-                    return true;
-                }
-            }
-        }
-
         return false;
     }
 
     public void setFocus( Component component )
     {
-        Itchy.singleton.setFocus( component );
-        
+        Itchy.singleton.setFocus(component);
+
         if (RootContainer.focus == component) {
             return;
         }
@@ -129,7 +108,7 @@ public abstract class RootContainer extends Container
             // Ensure that the newly focused component is visible, by scrolling any parent
             // scrollables.
             for (Container parent = component.getParent(); parent != null; parent = parent
-                    .getParent()) {
+                .getParent()) {
                 if (parent instanceof Scrollable) {
                     Scrollable scrollable = (Scrollable) parent;
                     scrollable.ensureVisible(component);
