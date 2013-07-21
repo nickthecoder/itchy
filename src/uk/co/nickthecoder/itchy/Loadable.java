@@ -1,9 +1,7 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0 which accompanies this
+ * distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
@@ -18,6 +16,16 @@ public abstract class Loadable
     private File file;
 
     protected boolean saveFailed = false;
+
+    public Loadable()
+    {
+    }
+
+    public Loadable( String filename )
+    {
+        this.file = new File(filename);
+        this.directory = this.file.getAbsoluteFile().getParentFile();
+    }
 
     public void load( String filename ) throws Exception
     {
@@ -89,7 +97,7 @@ public abstract class Loadable
             File file = new File(filename);
             if (file.isAbsolute()) {
                 System.err.println("Warning. Using absolute filenames to load resource : " +
-                        filename);
+                    filename);
                 return filename;
             } else {
                 File result = new File(this.directory, filename);
@@ -134,4 +142,17 @@ public abstract class Loadable
         return file.renameTo(dest);
     }
 
+    public void ensure( Object a, Object b, String reason ) throws Exception
+    {
+        if (!a.equals(b)) {
+            throw new Exception(reason);
+        }
+    }
+
+    public void ensure( boolean test, String reason ) throws Exception
+    {
+        if (!test) {
+            throw new Exception( reason );
+        }
+    }
 }

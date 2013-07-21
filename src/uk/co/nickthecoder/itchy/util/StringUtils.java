@@ -25,6 +25,15 @@ public class StringUtils
         return isBlank(object.toString());
     }
 
+    public static boolean equals( Object a, Object b )
+    {
+        if ( a == null ) {
+            return b == null;
+        } else {
+            return a.equals(b);
+        }
+    }
+    
     public static boolean isBlank( String string )
     {
         return isEmpty(string);

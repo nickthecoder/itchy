@@ -106,7 +106,7 @@ public class SceneWriter extends XMLWriter
         this.attribute("x", sceneActor.x);
         this.attribute("y", sceneActor.y);
         this.attribute("direction", sceneActor.direction);
-        this.attribute("start", sceneActor.startEvent);
+        this.attribute("startEvent", sceneActor.startEvent);
 
         if (sceneActor.colorize != null) {
             this.attribute("colorize", sceneActor.colorize.getRGBACode());

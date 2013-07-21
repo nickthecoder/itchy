@@ -1,9 +1,7 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0 which accompanies this
+ * distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
@@ -11,6 +9,7 @@ import java.util.HashMap;
 
 import uk.co.nickthecoder.itchy.editor.SceneDesignerBehaviour;
 import uk.co.nickthecoder.itchy.util.AbstractProperty;
+import uk.co.nickthecoder.itchy.util.StringUtils;
 import uk.co.nickthecoder.jame.RGBA;
 
 public abstract class SceneActor implements Cloneable
@@ -34,14 +33,14 @@ public abstract class SceneActor implements Cloneable
 
     double scale;
 
-    public String startEvent;
+    public String startEvent = "default";
 
     public String behaviourClassName;
 
     public RGBA colorize;
 
     public double activationDelay;
-    
+
     public HashMap<String, Object> customProperties = new HashMap<String, Object>();
 
     protected SceneActor()
@@ -53,14 +52,13 @@ public abstract class SceneActor implements Cloneable
         this.x = (int) actor.getX();
         this.y = (int) actor.getY();
         this.direction = actor.getAppearance().getDirection();
-        this.startEvent = "default";
         this.scale = actor.getAppearance().getScale();
         this.behaviourClassName = ((SceneDesignerBehaviour) actor.getBehaviour())
-                .getBehaviourClassName();
+            .getBehaviourClassName();
         this.colorize = actor.getAppearance().getColorize() == null ? null : new RGBA(actor
-                .getAppearance().getColorize());
+            .getAppearance().getColorize());
         this.activationDelay = actor.getActivationDelay();
-        
+
         Behaviour actualBehaviour = ((SceneDesignerBehaviour) actor.getBehaviour()).actualBehaviour;
 
         for (AbstractProperty<Behaviour, ?> property : actualBehaviour.getProperties()) {
@@ -80,8 +78,8 @@ public abstract class SceneActor implements Cloneable
         actor.getAppearance().setScale(this.scale);
         actor.getAppearance().setColorize(this.colorize == null ? null : new RGBA(this.colorize));
         String behaviourClassName = this.behaviourClassName;
-        actor.setActivationDelay( this.activationDelay );
-        
+        actor.setActivationDelay(this.activationDelay);
+
         if (behaviourClassName == null) {
             if (actor.getCostume() == null) {
                 behaviourClassName = NullBehaviour.class.getName();
@@ -157,6 +155,42 @@ public abstract class SceneActor implements Cloneable
             e.printStackTrace();
             return null;
         }
+    }
+
+    @Override
+    public boolean equals( Object obj )
+    {
+        if (! (obj instanceof SceneActor)) {
+            return false;
+        }
+        SceneActor other = (SceneActor) obj;
+
+        if (this.x != other.x) {
+            return false;
+        }
+        if (this.y != other.y) {
+            return false;
+        }
+        if (this.direction != other.direction) {
+            return false;
+        }
+        if (this.scale != other.scale) {
+            return false;
+        }
+        if (this.activationDelay != other.activationDelay) {
+            return false;
+        }
+        if (!StringUtils.equals(this.startEvent, other.startEvent)) {
+            return false;
+        }
+        if (!StringUtils.equals(this.behaviourClassName, other.behaviourClassName)) {
+            return false;
+        }
+        if (!StringUtils.equals(this.colorize, other.colorize)) {
+            return false;
+        }
+        
+        return this.customProperties.equals(other.customProperties);
     }
 
 }

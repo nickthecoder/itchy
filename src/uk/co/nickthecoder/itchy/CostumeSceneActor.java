@@ -13,13 +13,7 @@ public class CostumeSceneActor extends SceneActor
 
     public CostumeSceneActor( Costume costume )
     {
-        this(costume, "default");
-    }
-
-    public CostumeSceneActor( Costume costume, String startEvent )
-    {
         this.costume = costume;
-        this.startEvent = startEvent;
     }
 
     public CostumeSceneActor( Actor actor )

@@ -53,9 +53,7 @@ public class BooleanProperty<S> extends AbstractProperty<S, Boolean>
     {
         CheckBox checkBox = (CheckBox) component;
         try {
-            System.out.println( "Updating value"); // TODO remove
             this.setValue(subject, checkBox.getValue());
-            System.out.println( "New value : " + checkBox.getValue());
             checkBox.removeStyle("error");
         } catch (Exception e) {
             checkBox.addStyle("error");

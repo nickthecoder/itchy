@@ -82,9 +82,7 @@ public class SceneReader
             throw new XMLException("Costume not found : " + costumeName);
         }
 
-        String startEvent = actorTag.getAttribute("start");
-
-        CostumeSceneActor sceneActor = new CostumeSceneActor(costume, startEvent);
+        CostumeSceneActor sceneActor = new CostumeSceneActor(costume);
         sceneActor.behaviourClassName = costume.behaviourClassName;
         this.readSceneActorAttributes(actorTag, sceneActor);
 
@@ -125,7 +123,8 @@ public class SceneReader
         sceneActor.direction = actorTag.getDoubleAttribute("direction");
         sceneActor.scale = actorTag.getOptionalDoubleAttribute("scale", 1);
         sceneActor.activationDelay = actorTag.getOptionalDoubleAttribute("activationDelay", 0);
-
+        sceneActor.startEvent = actorTag.getOptionalAttribute("startEvent", "default");
+        
         if (actorTag.hasAttribute("colorize")) {
             try {
                 sceneActor.colorize = RGBA.parse(actorTag.getAttribute("colorize"));

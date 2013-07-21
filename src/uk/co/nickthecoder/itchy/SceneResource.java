@@ -1,40 +1,45 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0 which accompanies this
+ * distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
-public class SceneResource extends NamedResource
-{
-    private String filename;
+import java.util.List;
 
+public class SceneResource extends Loadable
+{
     private Scene scene;
+
+    public Resources resources;
+
+    public String name;
 
     public SceneResource( Resources resources, String name, String filename )
     {
-        super(resources, name);
-        this.filename = filename;
+        super(resources.resolveFilename(filename));
+
+        this.resources = resources;
         this.scene = null;
+        this.name = name;
     }
 
-    public String getFilename()
+    public String getName()
     {
-        return this.filename;
+        return this.name;
     }
 
-    public final void setFilename( String filename )
+    public void rename( String newName )
     {
-        this.filename = filename;
+        this.resources.rename(this, newName);
+        this.name = newName;
     }
 
     public Scene getScene() throws Exception
     {
         if (this.scene == null) {
             SceneReader sceneReader = new SceneReader(this.resources);
-            this.scene = sceneReader.load(this.resources.resolveFilename(this.filename));
+            this.scene = sceneReader.load(this.getFilename());
         }
         return this.scene;
     }
@@ -44,7 +49,8 @@ public class SceneResource extends NamedResource
         this.scene = scene;
     }
 
-    public void save() throws Exception
+    @Override
+    protected void actualSave( String filename ) throws Exception
     {
         try {
             this.getScene();
@@ -53,7 +59,36 @@ public class SceneResource extends NamedResource
         }
 
         SceneWriter sceneWriter = new SceneWriter(this);
-        sceneWriter.write(this.resources.resolveFilename(this.filename));
+        sceneWriter.write(filename);
+    }
+
+    @Override
+    protected void checkSave( String filename ) throws Exception
+    {
+        SceneReader sceneReader = new SceneReader(this.resources);
+        Scene newScene = sceneReader.load(filename);
+
+        List<Scene.SceneLayer> newSceneLayers = newScene.getSceneLayers();
+        ensure(newSceneLayers.size() == this.scene.getSceneLayers().size(),
+            "Different number of layers");
+        
+        int i = 0;
+        for (Scene.SceneLayer oldSceneLayer : this.scene.getSceneLayers()) {
+            Scene.SceneLayer newSceneLayer = newSceneLayers.get(i);
+            i++;
+            ensure(oldSceneLayer.name, newSceneLayer.name, "Different layer name");
+
+            List<SceneActor> newSceneActors = newSceneLayer.getSceneActors();
+            ensure(newSceneActors.size() == oldSceneLayer.getSceneActors().size(), "Different number of actors");
+            
+            int j = 0;
+            for (SceneActor oldSceneActor : oldSceneLayer.getSceneActors()) {
+                SceneActor newSceneActor = newSceneActors.get(j);
+                j++;
+                ensure(oldSceneActor, newSceneActor, "different actor #" + j);
+            }
+
+        }
     }
 
 }

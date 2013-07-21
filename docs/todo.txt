@@ -7,10 +7,11 @@ Jame is out of date, need to rebuild for win32 and i386
 
 What's Next
 ===========
+    
+Costumes can have different default property values for their behaviours.
+    e.g. BulletBehaviour can have a targetTagName of "shootable" (bullet) or "killable" (bomb)
 
-Behaviour class picker
-    Wherever a Behaviour class is, have a "..." button which lists all of the known behaviours.
-    Resources can keep track of them
+Safe Save scene, just like resources.
     
 Left/Right don't work in text fields in the editor
 
@@ -45,28 +46,12 @@ Scenery Editor
     
 Copy resources such as a Font when selected from outside the resources folder.
 
-Costumes can have different default property values for their behaviours.
-    e.g. BulletBehaviour can have a targetTagName of "shootable" (bullet) or "killable" (bomb)
-
-Create an actor using a costume???
-    It includes creating the behaviour as defined in the costume.
-    Use this to create bombs and bullets???  
-    
-costumeScroll client height to be "maximum".
-
-Send to Matthew
-
-
-Soon Features
-=============
 
 Test button on Animation Editor.
 
 
 Possible Refactoring
 ====================
-
-Put the surface's pixel format data into the java object (lazily?)
 
 TextBox to have an inner class for its layout rather than implement it.
 
