@@ -1,11 +1,11 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0 which accompanies this
+ * distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.editor;
+
+import java.io.File;
 
 import uk.co.nickthecoder.itchy.Game;
 import uk.co.nickthecoder.itchy.Itchy;
@@ -65,8 +65,7 @@ public final class Editor extends Game
 
         this.resources = game.resources;
 
-        this.rules = new Rules();
-        this.rules.load("resources/defaultGui/style.xml");
+        this.rules = new Rules(new File("resources/defaultGui/style.xml"));
     }
 
     @Override

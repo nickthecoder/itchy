@@ -1,12 +1,11 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0 which accompanies this
+ * distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.util;
 
+import java.io.File;
 import java.util.Random;
 
 import uk.co.nickthecoder.itchy.Itchy;
@@ -54,6 +53,7 @@ public class Util
 
     /**
      * Generates a random number - not limited to just whole numbers.
+     * 
      * @param from
      * @param to
      * @return A random number greater or equal to <code>from<code> but less than <code>to<code>.
@@ -70,4 +70,18 @@ public class Util
         return choices[index];
     }
 
+    public static String nameFromFilename( String filename )
+    {
+        return nameFromFile(new File(filename));
+    }
+
+    public static String nameFromFile( File file )
+    {
+        String name = file.getName();
+        int lastDot = name.lastIndexOf('.');
+        if (lastDot > 1) {
+            return name.substring(0, lastDot);
+        }
+        return name;
+    }
 }

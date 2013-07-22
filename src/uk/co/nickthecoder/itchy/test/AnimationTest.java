@@ -7,6 +7,8 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.test;
 
+import java.io.File;
+
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.ActorsLayer;
 import uk.co.nickthecoder.itchy.Game;
@@ -26,7 +28,7 @@ public class AnimationTest extends Game
     public AnimationTest() throws Exception
     {
         Itchy.singleton.init(this);
-        this.resources.load("resources/drunkInvaders/test.xml");        
+        this.resources.load( new File("resources/drunkInvaders/test.xml") );        
     }
     
     public void init()

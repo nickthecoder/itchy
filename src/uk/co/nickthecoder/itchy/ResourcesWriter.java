@@ -442,11 +442,10 @@ public class ResourcesWriter extends XMLWriter
         this.beginTag("scenes");
 
         for (String name : this.resources.sceneNames()) {
-            SceneResource sceneResource = this.resources.getSceneResource(name);
+            //SceneResource sceneResource = this.resources.getSceneResource(name);
 
             this.beginTag("scene");
             this.attribute("name", name);
-            this.attribute("filename", sceneResource.getFilename());
             this.endTag("scene");
         }
 

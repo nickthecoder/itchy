@@ -11,51 +11,58 @@ import java.io.IOException;
 public abstract class Loadable
 {
 
+    /**
+     * The base directory. The resource will live in this directory, or one of its sub-directories.
+     */
     private File directory;
 
+    /**
+     * The name of the resource. This is usually RELATIVE to this.directory, but can be absolute,
+     * but will issue warnings that the resource is being loaded from an absolute path.
+     */
     private File file;
-
-    protected boolean saveFailed = false;
 
     public Loadable()
     {
+        this.directory = null;
+        this.file = null;
     }
 
-    public Loadable( String filename )
+    public Loadable( File file )
     {
-        this.file = new File(filename);
-        this.directory = this.file.getAbsoluteFile().getParentFile();
+        this.directory = file.getAbsoluteFile().getParentFile();
+        this.file = new File(file.getName());
     }
 
-    public void load( String filename ) throws Exception
+    public Loadable( File directory, File file )
     {
-        this.file = new File(filename);
-        this.directory = this.file.getAbsoluteFile().getParentFile();
+        this.directory = directory;
+        this.file = file;
     }
+
+    public void load( File file ) throws Exception
+    {
+        this.directory = file.getAbsoluteFile().getParentFile();
+        this.file = new File(file.getName());
+        this.load();
+    }
+
+    public abstract void load() throws Exception;
 
     public void save() throws Exception
     {
-        try {
-            File saveAs = new File(this.directory, "#" + this.file.getName() + "#");
-            this.actualSave(saveAs.getPath());
-            this.checkSave(saveAs.getPath());
+        File saveAs = new File(this.directory, "#" + this.file.getName() + "#");
+        this.actualSave(saveAs);
+        this.checkSave(saveAs);
 
-            try {
-                this.file.delete();
-            } catch (Exception e) {
-                // Do nothing
-            }
-            saveAs.renameTo(this.file);
-
-        } catch (Exception e) {
-            this.saveFailed = false;
-            throw e;
-        }
+        File file = this.getFile();
+        file.delete();
+        saveAs.renameTo(file);
     }
 
-    protected abstract void actualSave( String filename ) throws Exception;
+    protected abstract void actualSave( File file ) throws Exception;
 
-    protected abstract void checkSave( String filename ) throws Exception;
+    protected abstract void checkSave( File file ) throws Exception;
 
     public File getDirectory()
     {
@@ -64,46 +71,33 @@ public abstract class Loadable
 
     public File getFile()
     {
-        return this.file;
+        return resolveFile(this.file);
     }
 
     public String getFilename()
     {
-        return this.file.getPath();
+        return resolveFile(this.file).getPath();
     }
 
-    public void setFilename( String filename )
+    public File resolveFile( File file )
     {
-        this.file = new File(filename);
-        this.directory = new File(filename).getAbsoluteFile().getParentFile();
-    }
-
-    public String nameFromFilename( String filename )
-    {
-        File file = new File(filename);
-        String name = file.getName();
-        int firstDot = name.indexOf('.');
-        if (firstDot > 1) {
-            return name.substring(0, firstDot);
+        if (this.directory == null) {
+            return file;
+        } else {
+            if (file.isAbsolute()) {
+                System.err.println("Warning. Using absolute filenames to load resource : " +
+                    file);
+                return file;
+            } else {
+                File result = new File(this.directory, file.getPath());
+                return result;
+            }
         }
-        return name;
     }
 
     public String resolveFilename( String filename )
     {
-        if (this.directory == null) {
-            return filename;
-        } else {
-            File file = new File(filename);
-            if (file.isAbsolute()) {
-                System.err.println("Warning. Using absolute filenames to load resource : " +
-                    filename);
-                return filename;
-            } else {
-                File result = new File(this.directory, filename);
-                return result.getPath();
-            }
-        }
+        return resolveFile(new File(filename)).getPath();
     }
 
     public String makeRelativeFilename( File file )
@@ -152,7 +146,7 @@ public abstract class Loadable
     public void ensure( boolean test, String reason ) throws Exception
     {
         if (!test) {
-            throw new Exception( reason );
+            throw new Exception(reason);
         }
     }
 }

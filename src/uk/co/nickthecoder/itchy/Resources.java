@@ -1,12 +1,11 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0 which accompanies this
+ * distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -22,13 +21,13 @@ import uk.co.nickthecoder.jame.Surface;
 public class Resources extends Loadable
 {
 
-    private static List<String> sortNames(Set<String> set)
+    private static List<String> sortNames( Set<String> set )
     {
         ArrayList<String> names = new ArrayList<String>(set);
         Collections.sort(names);
         return names;
     }
-    
+
     private final HashMap<String, SoundResource> sounds;
 
     private final HashMap<String, FontResource> fonts;
@@ -44,8 +43,7 @@ public class Resources extends Loadable
     private final HashMap<String, CostumeResource> costumes;
 
     private TreeSet<String> behaviourClassNames;
-    
-    
+
     public Resources()
     {
         super();
@@ -57,30 +55,29 @@ public class Resources extends Loadable
         this.poses = new HashMap<String, PoseResource>();
         this.costumes = new HashMap<String, CostumeResource>();
         this.animations = new HashMap<String, AnimationResource>();
-        
+
         this.behaviourClassNames = new TreeSet<String>();
     }
 
     @Override
-    public void load( String filename ) throws Exception
+    public void load() throws Exception
     {
-        super.load(filename);
         ResourcesReader loader = new ResourcesReader(this);
-        loader.load(filename);
+        loader.load(getFilename());
     }
 
     @Override
-    protected void actualSave( String filename ) throws Exception
+    protected void actualSave( File file ) throws Exception
     {
         ResourcesWriter writer = new ResourcesWriter(this);
-        writer.write(filename);
+        writer.write(file.getPath());
     }
 
     @Override
-    protected void checkSave( String filename ) throws Exception
+    protected void checkSave( File file) throws Exception
     {
         Resources resources = new Resources();
-        resources.load(filename);
+        resources.load(file);
 
         for (String name : this.animationNames()) {
             if (resources.getAnimation(name) == null) {
@@ -241,12 +238,12 @@ public class Resources extends Loadable
     public Font getDefaultFont()
     {
         FontResource fr = this.fonts.values().iterator().next();
-        if ( fr == null ) {
+        if (fr == null) {
             return null;
         }
         return fr.font;
     }
-    
+
     // Poses
 
     public void addPose( PoseResource resource )
@@ -349,7 +346,7 @@ public class Resources extends Loadable
     public void addCostume( CostumeResource resource )
     {
         this.costumes.put(resource.name, resource);
-        this.registerBehaviourClassName( resource.costume.behaviourClassName );
+        this.registerBehaviourClassName(resource.costume.behaviourClassName);
     }
 
     public void removeCostume( String name )
@@ -495,10 +492,10 @@ public class Resources extends Loadable
         this.scenes.put(name, sceneResource);
     }
 
-    public boolean registerBehaviourClassName(String className)
+    public boolean registerBehaviourClassName( String className )
     {
         try {
-            if ( this.behaviourClassNames.contains(className)) {
+            if (this.behaviourClassNames.contains(className)) {
                 return true;
             }
             Class<?> klass = Class.forName(className);
@@ -510,14 +507,14 @@ public class Resources extends Loadable
                 klass = klass.getSuperclass();
             }
         } catch (Exception e) {
-            //Do nothing
+            // Do nothing
         }
         return false;
     }
-    
+
     public Set<String> getBehaviourClassNames()
     {
         return this.behaviourClassNames;
     }
-    
+
 }

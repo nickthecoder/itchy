@@ -8,12 +8,14 @@
 package uk.co.nickthecoder.itchy.gui;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.Pose;
 import uk.co.nickthecoder.itchy.Renderable;
 import uk.co.nickthecoder.itchy.util.XMLException;
@@ -63,7 +65,7 @@ public class RulesReader
     {
         String filename = resourcesTag.getAttribute("filename");
         try {
-            this.rules.resources.load(this.rules.resolveFilename(filename));
+            this.rules.resources.load( new File( this.rules.getDirectory(), filename) );
         } catch (Exception e) {
             throw new XMLException("Failed to read resource file : " + filename + "(" +
                     e.getMessage() + ")");

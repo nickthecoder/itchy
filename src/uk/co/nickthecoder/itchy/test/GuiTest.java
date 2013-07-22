@@ -7,6 +7,7 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.test;
 
+import java.io.File;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,8 +51,7 @@ public class GuiTest extends Game
     {
         Itchy.singleton.init(this);
 
-        this.rules = new Rules();
-        this.rules.load("resources/defaultGui/style.xml");
+        this.rules = new Rules(new File("resources/defaultGui/style.xml"));
         
     }
     

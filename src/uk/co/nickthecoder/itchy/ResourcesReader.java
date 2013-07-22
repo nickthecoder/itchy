@@ -436,9 +436,8 @@ public class ResourcesReader
             XMLTag sceneTag = i.next();
 
             String name = sceneTag.getAttribute("name");
-            String filename = sceneTag.getAttribute("filename");
 
-            SceneResource sceneResource = new SceneResource(this.resources, name, filename);
+            SceneResource sceneResource = new SceneResource(this.resources, name);
             this.resources.addScene(sceneResource);
         }
     }

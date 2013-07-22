@@ -109,6 +109,24 @@ public class Costume
         String string = strings.get(random.nextInt(strings.size()));
         return string;
     }
+    
+    public int getInt( String name, int defaultValue )
+    {
+        try {
+            return Integer.parseInt( getString(name) );
+        } catch (Exception e) {
+            return defaultValue;
+        }
+    }
+
+    public double getDouble( String name, double defaultValue )
+    {
+        try {
+            return Double.parseDouble( getString(name) );
+        } catch (Exception e) {
+            return defaultValue;
+        }
+    }
 
     public List<String> getStringChoices( String name )
     {

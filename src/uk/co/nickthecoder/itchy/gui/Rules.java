@@ -7,6 +7,7 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.gui;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,15 +16,17 @@ import uk.co.nickthecoder.itchy.Resources;
 
 public class Rules extends Loadable
 {
-
     public Resources resources;
 
     private final List<Rule> rules;
 
-    public Rules()
+    public Rules( File file )
+        throws Exception
     {
+        super( file );
         this.rules = new ArrayList<Rule>();
         this.resources = new Resources();
+        this.load();
     }
 
     public void style( Component component )
@@ -39,12 +42,10 @@ public class Rules extends Loadable
         accumalator.apply(component);
     }
 
-    @Override
-    public void load( String filename ) throws Exception
+    public void load() throws Exception
     {
-        super.load(filename);
         RulesReader loader = new RulesReader(this);
-        loader.load(filename);
+        loader.load(getFilename());
     }
 
     public void addRule( Rule rule )
@@ -53,12 +54,12 @@ public class Rules extends Loadable
     }
 
     @Override
-    protected void actualSave( String filename ) throws Exception
+    protected void actualSave( File file ) throws Exception
     {
     }
 
     @Override
-    protected void checkSave( String filename ) throws Exception
+    protected void checkSave( File file ) throws Exception
     {
     }
 

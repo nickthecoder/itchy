@@ -7,7 +7,6 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.editor;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -147,15 +146,8 @@ public class ScenesEditor extends SubEditor
             }
         }
 
-        File directory = new File(this.editor.resources.resolveFilename("scenes"));
-        directory.mkdirs();
-
-        File file = new File("scenes", this.txtName.getText() + ".xml");
-        String filename = file.getPath();
-
         if (this.adding) {
             try {
-                this.currentSceneResource.setFilename(filename);
                 this.currentSceneResource.save();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -163,18 +155,9 @@ public class ScenesEditor extends SubEditor
                 return;
             }
 
-        } else {
-            if (!this.currentSceneResource.getFilename().equals(filename)) {
-                if (!this.editor.resources
-                    .rename(this.currentSceneResource.getFilename(), filename)) {
-                    this.setMessage("Rename failed");
-                    return;
-                }
-            }
         }
 
         this.currentSceneResource.rename(this.txtName.getText());
-        this.currentSceneResource.setFilename(filename);
 
         if (this.adding) {
             this.editor.resources.addScene(this.currentSceneResource);
@@ -208,7 +191,7 @@ public class ScenesEditor extends SubEditor
     @Override
     protected void onAdd()
     {
-        this.currentSceneResource = new SceneResource(this.editor.resources, "newScene", "");
+        this.currentSceneResource = new SceneResource(this.editor.resources, "newScene");
         this.adding = true;
         this.showDetails(this.currentSceneResource);
     }
@@ -222,7 +205,7 @@ public class ScenesEditor extends SubEditor
         }
         SceneResource sceneResource = (SceneResource) row.getData();
 
-        this.currentSceneResource = new SceneResource(this.editor.resources, "newScene", "");
+        this.currentSceneResource = new SceneResource(this.editor.resources, "newScene");
         try {
             this.currentSceneResource.setScene(sceneResource.getScene().copy());
         } catch (Exception e) {

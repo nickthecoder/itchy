@@ -29,6 +29,7 @@ import uk.co.nickthecoder.itchy.gui.TableModelColumn;
 import uk.co.nickthecoder.itchy.gui.TableModelRow;
 import uk.co.nickthecoder.itchy.gui.TableRow;
 import uk.co.nickthecoder.itchy.gui.TextBox;
+import uk.co.nickthecoder.itchy.util.Util;
 
 public class FontsEditor extends SubEditor
 {
@@ -183,7 +184,7 @@ public class FontsEditor extends SubEditor
 
         if (file != null) {
             String filename = this.editor.resources.makeRelativeFilename(file);
-            String name = this.editor.resources.nameFromFilename(filename);
+            String name = Util.nameFromFilename(filename);
 
             this.currentFontResource = new FontResource(this.editor.resources, name, filename);
             this.adding = true;

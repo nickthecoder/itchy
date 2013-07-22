@@ -35,6 +35,7 @@ import uk.co.nickthecoder.itchy.gui.TableModelRow;
 import uk.co.nickthecoder.itchy.gui.TableRow;
 import uk.co.nickthecoder.itchy.gui.TextBox;
 import uk.co.nickthecoder.itchy.util.NinePatch;
+import uk.co.nickthecoder.itchy.util.Util;
 import uk.co.nickthecoder.jame.JameException;
 import uk.co.nickthecoder.jame.RGBA;
 import uk.co.nickthecoder.jame.Rect;
@@ -271,7 +272,7 @@ public class NinePatchEditor extends SubEditor
             Itchy.singleton.hideWindow(this.openDialog);
         } else {
             String filename = this.editor.resources.makeRelativeFilename(file);
-            String name = this.editor.resources.nameFromFilename(filename);
+            String name = Util.nameFromFilename(filename);
             try {
                 NinePatch ninePatch = new NinePatch(new Surface(
                         this.editor.resources.resolveFilename(filename)), 0, 0, 0, 0);

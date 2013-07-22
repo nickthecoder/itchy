@@ -33,6 +33,7 @@ import uk.co.nickthecoder.itchy.gui.TableModelRow;
 import uk.co.nickthecoder.itchy.gui.TableRow;
 import uk.co.nickthecoder.itchy.gui.TextBox;
 import uk.co.nickthecoder.itchy.gui.VerticalScroll;
+import uk.co.nickthecoder.itchy.util.Util;
 import uk.co.nickthecoder.jame.JameException;
 import uk.co.nickthecoder.jame.Surface;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
@@ -257,7 +258,7 @@ public class PosesEditor extends SubEditor
             Itchy.singleton.hideWindow(this.openDialog);
         } else {
             String filename = this.editor.resources.makeRelativeFilename(file);
-            String name = this.editor.resources.nameFromFilename(filename);
+            String name = Util.nameFromFilename(filename);
             try {
                 this.currentPoseResource = new PoseResource(this.editor.resources, name, filename);
                 this.adding = true;

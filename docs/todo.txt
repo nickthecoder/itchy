@@ -9,15 +9,12 @@ What's Next
 ===========
 
 Choose appropriate defaults for each type of ship and ball, door etc.
-
-Create a soft landing spot, where balls can be dropped without them exploding.
+   Only if moving slowly.
 
 Create a "Sensor", which opens/closes doors when the ship gets close.
     One side of the door lets Ship1 through, the other side lets Ship2 through, so need to
         switch ships at both ends of the route.
     Create a circular route,
-
-BallWithShip to have firerate, and add default values in the costumes.
 
 Use annotations to set initial tags :
     @Tagged("deadly") @Tagged("bouncy") class Alien {...)
@@ -35,8 +32,6 @@ Properties to have a default value.
 Picker to have a cancel button
 
 Much of costume editor doesn't work yet!
-
-Pose offsets set by clicking doesn't work when the pose is scrolled.
 
 Scenery Editor
 

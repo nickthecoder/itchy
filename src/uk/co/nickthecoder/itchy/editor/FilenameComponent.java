@@ -95,9 +95,10 @@ public class FilenameComponent extends Container
 
     protected void onRename()
     {
-        if (!this.resources.rename(this.initialFilename, this.textBox.getText())) {
-            new MessageDialog("Error", "Rename failed").show();
-        }
+        // TODO Rename is broken
+        //if (!this.resources.rename(this.initialFilename, this.textBox.getText())) {
+        //    new MessageDialog("Error", "Rename failed").show();
+        //}
 
     }
 

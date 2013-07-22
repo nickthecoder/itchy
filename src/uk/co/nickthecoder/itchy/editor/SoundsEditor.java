@@ -29,6 +29,7 @@ import uk.co.nickthecoder.itchy.gui.TableModelColumn;
 import uk.co.nickthecoder.itchy.gui.TableModelRow;
 import uk.co.nickthecoder.itchy.gui.TableRow;
 import uk.co.nickthecoder.itchy.gui.TextBox;
+import uk.co.nickthecoder.itchy.util.Util;
 import uk.co.nickthecoder.jame.JameException;
 import uk.co.nickthecoder.jame.JameRuntimeException;
 
@@ -198,7 +199,7 @@ public class SoundsEditor extends SubEditor
             Itchy.singleton.hideWindow(this.openDialog);
         } else {
             String filename = this.editor.resources.makeRelativeFilename(file);
-            String name = this.editor.resources.nameFromFilename(filename);
+            String name = Util.nameFromFilename(filename);
             try {
                 this.currentSoundResource = new SoundResource(this.editor.resources, name, filename);
                 this.currentSoundResource.getSound().play();

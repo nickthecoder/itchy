@@ -14,6 +14,8 @@ import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
+import java.io.File;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -61,7 +63,7 @@ public class NeighbourhoodTest
         System.out.println("Loading resources");
 
         resources = new Resources();
-        resources.load("resources/tests/neighbourhood.xml");
+        resources.load(new File("resources/tests/neighbourhood.xml"));
 
         this.c30x30 = resources.getCostume("30x30");
         this.c10x30 = resources.getCostume("10x30");

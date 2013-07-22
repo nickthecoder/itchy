@@ -5,6 +5,7 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
+import java.io.File;
 import java.util.List;
 
 public class SceneResource extends Loadable
@@ -15,9 +16,15 @@ public class SceneResource extends Loadable
 
     public String name;
 
-    public SceneResource( Resources resources, String name, String filename )
+    private static File makeFile( String name )
     {
-        super(resources.resolveFilename(filename));
+        File file = new File("scenes");
+        return new File(file, name + ".xml");
+    }
+
+    public SceneResource( Resources resources, String name )
+    {
+        super(resources.getDirectory(), makeFile(name));
 
         this.resources = resources;
         this.scene = null;
@@ -38,8 +45,7 @@ public class SceneResource extends Loadable
     public Scene getScene() throws Exception
     {
         if (this.scene == null) {
-            SceneReader sceneReader = new SceneReader(this.resources);
-            this.scene = sceneReader.load(this.getFilename());
+            this.load();
         }
         return this.scene;
     }
@@ -50,7 +56,7 @@ public class SceneResource extends Loadable
     }
 
     @Override
-    protected void actualSave( String filename ) throws Exception
+    protected void actualSave( File file ) throws Exception
     {
         try {
             this.getScene();
@@ -59,28 +65,38 @@ public class SceneResource extends Loadable
         }
 
         SceneWriter sceneWriter = new SceneWriter(this);
-        sceneWriter.write(filename);
+        sceneWriter.write(file.getPath());
     }
 
     @Override
-    protected void checkSave( String filename ) throws Exception
+    protected void checkSave( File file ) throws Exception
     {
         SceneReader sceneReader = new SceneReader(this.resources);
-        Scene newScene = sceneReader.load(filename);
+        Scene newScene = sceneReader.load(file.getPath());
 
         List<Scene.SceneLayer> newSceneLayers = newScene.getSceneLayers();
-        ensure(newSceneLayers.size() == this.scene.getSceneLayers().size(),
-            "Different number of layers");
-        
+
         int i = 0;
         for (Scene.SceneLayer oldSceneLayer : this.scene.getSceneLayers()) {
+            if (i >= newSceneLayers.size()) {
+                if (oldSceneLayer.getSceneActors().size() != 0) {
+                    throw new Exception("Layers differ");
+                }
+                continue;
+            }
             Scene.SceneLayer newSceneLayer = newSceneLayers.get(i);
+            if (!oldSceneLayer.getName().equals(newSceneLayer.getName())) {
+                if (oldSceneLayer.getSceneActors().size() == 0) {
+                    continue;
+                }
+            }
             i++;
             ensure(oldSceneLayer.name, newSceneLayer.name, "Different layer name");
 
             List<SceneActor> newSceneActors = newSceneLayer.getSceneActors();
-            ensure(newSceneActors.size() == oldSceneLayer.getSceneActors().size(), "Different number of actors");
-            
+            ensure(newSceneActors.size() == oldSceneLayer.getSceneActors().size(),
+                "Different number of actors");
+
             int j = 0;
             for (SceneActor oldSceneActor : oldSceneLayer.getSceneActors()) {
                 SceneActor newSceneActor = newSceneActors.get(j);
@@ -89,6 +105,13 @@ public class SceneResource extends Loadable
             }
 
         }
+    }
+
+    @Override
+    public void load() throws Exception
+    {
+        SceneReader sceneReader = new SceneReader(this.resources);
+        this.scene = sceneReader.load(getFilename());
     }
 
 }
