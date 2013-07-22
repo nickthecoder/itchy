@@ -1,4 +1,4 @@
-Jame is out of date, need to rebuild for win32 and i386
+Jame is out of date, need to rebuild for win32 and i386 and ARM??
     Compile and test using windows.
     Add the dependant dlls to jame's git tree?
         No. If NuGet can automate the download of dependencies, then an ant task can bundle them.
@@ -7,15 +7,20 @@ Jame is out of date, need to rebuild for win32 and i386
 
 What's Next
 ===========
-    
-Costumes can have different default property values for their behaviours.
-    e.g. BulletBehaviour can have a targetTagName of "shootable" (bullet) or "killable" (bomb)
+
+Choose appropriate defaults for each type of ship and ball, door etc.
+
+Create a soft landing spot, where balls can be dropped without them exploding.
+
+Create a "Sensor", which opens/closes doors when the ship gets close.
+    One side of the door lets Ship1 through, the other side lets Ship2 through, so need to
+        switch ships at both ends of the route.
+    Create a circular route,
+
+BallWithShip to have firerate, and add default values in the costumes.
 
 Use annotations to set initial tags :
     @Tagged("deadly") @Tagged("bouncy") class Alien {...)
-
-Components shouldn't handle keyboard events except the component with the focus.
-    If no component has the focus, then the entire GUIPose will receive no keyboard events.
 
 Try it on a RaspPi
     Need to compile Jame for the ARM processor!
@@ -23,16 +28,34 @@ Try it on a RaspPi
 Allow calculated values inside animations?
     Use the Property tag and GProperty types to define the properties
 
+Properties to have a default value.
+    Scene designer has a "default" button for each behaviour's property
+        Uses the property's default value, which is overriden if there is a string value in the costume.
+
+Picker to have a cancel button
+
+Much of costume editor doesn't work yet!
+
+Pose offsets set by clicking doesn't work when the pose is scrolled.
+
 Scenery Editor
 
     Properties to have hints (which are in green on the right of their control)
          Use it to put (seconds) after alien factory & alien fireOnceEvery
 
+    Buttons to use icons, not (just?) text
+        Would be nice to have tooltips when mouse hovers over the buttons
+            A description and the keyboard shortcut.
 
     Duplicate, Copy, Paste
+    
+    Undo/Redo
 
-    Fail gracefully when scene save fails - and check it can be loaded (like resource).
     When save a scene save the resources too
+
+    Warn when exiting the scene designer without saving.
+
+    Warn when exiting the editor without saving.
 
     Missing properties
         start event
@@ -66,6 +89,9 @@ Check what happens when you load and save and reload a single non-compound anima
    In the editor, the top-most animation must always be a CompoundAnimation
 
 On Remove, there is no check that the resource isn't being used by something else.
+    Easy pose, animation, sound..., but tricky for costume, as they could be used in any scene
+    
+Renaming a costume will cause scenes that use it to fail.
 
 Loading sounds doesn't always fail when not a sound file - bug in Jame?
 
@@ -88,6 +114,8 @@ decorators, which are applied in turn.
    
 
 Giant invaders, each pixel is shot individually
+   Use Surface.getPixel to discover which pixels are set, and then create a corresponding Follower
+        The parent of these followers is invisible, and dies when the last of its followers die.
    If allowed to grow, then each pixel becomes an invader
    Maybe invaders are fed from the saucer.
 
@@ -102,14 +130,14 @@ the edges (tile, stretch, clever).
 DirectionAnimation, sets the angle - similar, but not the same as turn.
 
 AlphaTransitionAnimation - moves from one Image to another by changing the alpha of each.
+    Or create a Follower underneith which changes its alpha and its parent's until the parent is
+    fully transparent, at which point it changes its pose.
 
 Animations which change a Pose's offsets or other attributes
    Would need to ensure that it is a COPY of the pose, not the one shared in Resources.
    This could make it easier to animate a "bump" upwards.
 
 Make everything use a consistent Random, so that each game is repeatable. 
-
-Background colour rule, useful for GuiPose and table rows.
 
 Each repeatable item in a costume has a frequency, so that some appear less frequently than others.
 
@@ -168,8 +196,6 @@ Finish DrunkInvaders
    
 Levels / Lives / Whatever to finish the game play.
 
-Saucer to make an appearance
-
 tick/tock sounds
 
 Pixel Explosion
@@ -192,22 +218,6 @@ Pause
     Itchy.setPause( boolean )
 
 
-Create fake multi-threading. For example, when shot, instead of trying to do the death scene in the
-tick method (which can be tricky), let it start a new thread like so :
-if (shot) {
-    new Async( this ) {
-        public void run() {
-            for ( int i = 0; i < 3; i ++ ) {
-                getActor().setPose( "Death" + i );
-                sleep( 2 );
-            } 
-        }
-    };
-}
-
-It creates a new thread, but only one thread runs at any time, and the sleep method yields.
-
-
 Appearance optimised so that it doesn't need to re-render the appearance to get the worldRectangle
     Maybe calculate the maximum rectangle for the Pose for any rotation
     When asked for its wordRect, if cached, returned that, other wise if direction == 0, return pose.rectangle * scale, otherwise return maximum rect * scale   
@@ -219,4 +229,30 @@ Tile optimisation for collision detection and/or redraw optimisation.
 
 
 Create a handful of simple, short games showing off how little code it takes to write a fun game.
+    Rain
+    Driving game (similar to rain, but with less obstacles, and road edges)
+    Tetris?
+    Saloon sally
+    Purple meanies? Trap monsters to kill them, push blocks is easy, destroying blocks takes more time.
     
+    Add a menu to switch from one game to another.    
+
+Rox - it would be nice to reproduce every level, so that they can be played on modern hardware.
+
+
+
+
+Tetris
+======
+Each Piece has a central square, and a set of others, which are rotated around the central square.
+    Well, almost, the long one only has two states, not four, so it isn't truly rotated.
+The game area is a grid, where the left, right and bottom edges are solid.
+Pieces are added at the top, with the central square 2 down from the top. 
+
+Cyan (I)   : ll,r; u,dd (-1,0 -2,0 1,0 ) (0,1 0,-1, 0,-2)
+Yellow (O) : dlu; dlu;  (-1,0 -1,-1, 0,-1) 
+Green (S)  : r,dl; u,rd (1,0 -1,0 -1,-1) (0,1 1,0 1,-1)
+Red (Z)    : l,dr; ru,d (-1,0 0,-1 1,-1) (1,0 1,1, 0,-1)
+Orange (L) : ld,r; dr,u; ru,l; ul,d (-1,0 -1,-1 1,0) (0,-1 1,-1 0,1) (1,0 1,1 -1,0) (0,1 -1,1 0,-1)
+Blue (J)   : l,rd; d,ur; r,lu; u,dl (-1,0 1,0 1,-1) (0,-1 0,1 1,1) (1,0 -1,0 -1,1) (0,1 0,-1 -1,-1)
+Purple (T) : l,r,d; u,d,r; l,r,u; d,u,l (-1,0 1,0 0,-1) (0,1 0,-1 0,1) (-1,0 1,0 0,1) (0,-1 0,1 -1,0)

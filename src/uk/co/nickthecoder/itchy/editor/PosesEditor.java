@@ -151,21 +151,27 @@ public class PosesEditor extends SubEditor
             @Override
             public void onClick( MouseButtonEvent e )
             {
+                Container parent = this.getParent();
+                while (parent != null) {
+                    System.out.println( "Image liniage " + parent );
+                    parent = parent.getParent();
+                }
                 PosesEditor.this.txtOffsetX.setValue(e.x);
                 PosesEditor.this.txtOffsetY.setValue(e.y);
             }
         };
         this.imgPose = new ImageComponent(pose.getSurface());
+        imageContainer.addChild( this.imgPose );
         this.imgPose.addStyle("checkered");
 
         if (pose.getSurface().getHeight() > 130) {
-            VerticalScroll scroll = new VerticalScroll(this.imgPose);
+            VerticalScroll scroll = new VerticalScroll(imageContainer);            
             scroll.setClientHeight(130);
-            imageContainer.addChild(scroll);
+            grid.addRow(new Label("Image"), scroll);
+
         } else {
-            imageContainer.addChild(this.imgPose);
+            grid.addRow(new Label("Image"), imageContainer);
         }
-        grid.addRow(new Label("Image"), imageContainer);
         grid.addRow(new Label(""), new Label("(Click the image to set its offsets)"));
 
         grid.addRow(new Label("Size"), new Label("" + pose.getSurface().getWidth() + "," +

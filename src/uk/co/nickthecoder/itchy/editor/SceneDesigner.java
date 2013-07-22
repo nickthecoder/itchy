@@ -807,6 +807,7 @@ public class SceneDesigner implements MouseListener, KeyListener
 
             SceneDesignerBehaviour behaviour = new SceneDesignerBehaviour();
             String behaviourClassName;
+            
             if (this.stampActor.getAppearance().getPose() instanceof TextPose) {
                 actor = new Actor(this.stampActor.getAppearance().getPose());
                 behaviourClassName = NullBehaviour.class.getName();
@@ -815,10 +816,15 @@ public class SceneDesigner implements MouseListener, KeyListener
                 actor = new Actor(this.currentCostume);
                 behaviourClassName = this.stampActor.getCostume().behaviourClassName;
             }
+            
             try {
                 behaviour.setBehaviourClassName(behaviourClassName);
             } catch (Exception e) {
                 e.printStackTrace();
+            }
+            
+            if (! (this.stampActor.getAppearance().getPose() instanceof TextPose)) {
+                setDefaultProperties( behaviour.actualBehaviour, this.currentCostume );
             }
 
             actor.moveTo(event.x, event.y);
@@ -888,6 +894,20 @@ public class SceneDesigner implements MouseListener, KeyListener
     {
         this.dragStartX = event.x;
         this.dragStartY = event.y;
+    }
+
+    private void setDefaultProperties( Behaviour behaviour, Costume costume )
+    {
+        for (AbstractProperty<Behaviour,?> property : behaviour.getProperties() ) {
+            try {
+                String stringValue = costume.getString( property.access );
+                if ( stringValue != null ) {
+                    property.setValueByString(behaviour,stringValue);
+                }
+            } catch (Exception e)  {
+                //Do nothing
+            }
+        }
     }
 
     private void selectActor( Actor actor )
