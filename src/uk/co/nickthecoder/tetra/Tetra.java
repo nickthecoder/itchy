@@ -333,7 +333,7 @@ public class Tetra extends Game
             level = 1;
         } else if ((this.completedLines >= 1) && (this.completedLines <= 90)) {
             level = 1 + ((this.completedLines) / 10);
-        } else if (this.completedLines >= 91) {
+        } else if (this.completedLines >= 90) {
             level = 10;
         }
         if (level > this.level) {
