@@ -58,6 +58,8 @@ public final class Editor extends Game
 
     public Editor( Game game ) throws Exception
     {
+        super();
+        
         this.game = game;
 
         singleton = this;

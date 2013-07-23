@@ -68,17 +68,10 @@ public class Itchy
     private boolean[] keyboardState;
 
     public Surface screen;
-
-    private CompoundLayer rootLayer;
-
-    private CompoundLayer gameLayer;
     
     private Rect rootRect;
 
     private boolean running;
-
-    // private long defaultSurfaceFlags = SDLVideo.SDL_SWSURFACE; //
-    // SDLVideo.SDL_HWSURFACE;
 
     private List<EventListener> eventListeners;
 
@@ -98,8 +91,6 @@ public class Itchy
      * If one game calls another game, and then exists, this is how we return to the previous game.
      */
     private Stack<Game> gameStack = new Stack<Game>();
-
-    private ActorsLayer popupLayer;
 
     private final List<GuiPose> windows;
 
@@ -155,17 +146,7 @@ public class Itchy
 
         System.out.println("Itchy initialising screen " + width + "," + height);
         this.screen = Video.setMode(width, height);
-
-        this.rootRect = new Rect(0, 0, width, height);
-        this.rootLayer = new CompoundLayer("root",this.rootRect);
-
-        this.gameLayer = new CompoundLayer("placeholder",this.rootRect);
-        this.rootLayer.add(this.gameLayer);
         
-        this.popupLayer = new ScrollableLayer("popup",this.rootRect);
-        this.popupLayer.setYAxisPointsDown(true);
-        this.popupLayer.setVisible(true);
-        this.rootLayer.add(this.popupLayer);
     }
 
     public Game getGame()
@@ -183,20 +164,6 @@ public class Itchy
         this.rules = rules;
     }
 
-
-    /**
-     * Removes all layers and kills all Actors on those layers
-     */
-    public void clear()
-    {
-        for (Actor actor : Actor.allByTag("active")) {
-            actor.kill();
-        }
-
-        this.rootLayer.clear();
-
-    }
-
     public void startGame( Game game )
     {
         if (this.game!=null) {
@@ -211,7 +178,6 @@ public class Itchy
     {
         try {
             this.init(this.game);
-            this.gameLayer.add(this.game.layers);
             this.addEventListener(this.game);
             this.game.init();
             if (!this.running) {
@@ -226,7 +192,6 @@ public class Itchy
 
     public void endGame()
     {
-        this.rootLayer.remove(this.game.layers);
         this.removeEventListener(this.game);
         if (this.gameStack.isEmpty()) {
             this.terminate();
@@ -301,7 +266,7 @@ public class Itchy
     {
         this.gameLoopJob.lock();
         try {
-            this.rootLayer.render(this.rootRect, this.screen);
+            this.game.render( this.screen );
             this.screen.flip();
         } finally {
             this.gameLoopJob.unlock();
@@ -603,10 +568,12 @@ public class Itchy
 
         Actor actor = window.getActor();
 
-        actor.moveTo(Math.max(0, (this.popupLayer.position.width - window.getRequiredWidth()) / 2),
-            Math.max(0, (this.popupLayer.position.height - window.getRequiredHeight()) / 2));
+        ActorsLayer popupLayer = this.game.popupLayer;
+        
+        actor.moveTo(Math.max(0, (popupLayer.position.width - window.getRequiredWidth()) / 2),
+            Math.max(0, (popupLayer.position.height - window.getRequiredHeight()) / 2));
 
-        this.popupLayer.add(actor);
+        popupLayer.add(actor);
 
         if (window.modal) {
             this.setModalListener(window);
@@ -615,17 +582,11 @@ public class Itchy
 
     }
 
-    public void debug()
-    {
-        System.err.println( "Itchy Debug" );
-        System.err.println( "Layers : " + this.rootLayer );
-        System.err.println( "End Itchy Debug" );
-    }
     
     public void hideWindow( GuiPose window )
     {
         this.removeEventListener(window);
-        this.popupLayer.remove(window.getActor());
+        this.game.popupLayer.remove(window.getActor());
 
         this.windows.remove(window);
 
@@ -645,4 +606,7 @@ public class Itchy
 
     }
 
+    public void debug()
+    {
+    }
 }
