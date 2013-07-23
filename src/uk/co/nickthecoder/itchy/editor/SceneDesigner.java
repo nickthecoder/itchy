@@ -445,21 +445,26 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.behaviourContainer.setLayout(grid);
         grid.clear();
 
+        SceneDesignerBehaviour sdb = (SceneDesignerBehaviour) this.currentActor.getBehaviour();
+        
         if ( behaviourClassName == null ) {
             behaviourClassName = new ComboBox(
-                this.currentActor.getBehaviour().getClass().getName(),
+                sdb.actualBehaviour.getClass().getName(),
                 this.editor.game.resources.getBehaviourClassNames());
              behaviourClassName.addChangeListener( new ComponentChangeListener() {
                 
                 @Override
                 public void changed()
                 {
-                    String value = behaviourClassName.getText();
-                    if (!SceneDesigner.this.editor.game.resources.registerBehaviourClassName(value)) {
-                        behaviourClassName.addStyle("error");
-                    } else {
+                    String value = behaviourClassName.getText();//TODO 
+                    SceneDesignerBehaviour sdb = (SceneDesignerBehaviour) currentActor.getBehaviour();
+                    try {
+                        sdb.setBehaviourClassName(value);
+                        SceneDesigner.this.createBehaviourProperties();
+                        SceneDesigner.this.editor.game.resources.registerBehaviourClassName(value);
                         behaviourClassName.removeStyle("error");                        
-                        SceneDesigner.this.createBehaviourProperties();                    
+                    } catch (Exception e) {
+                        behaviourClassName.addStyle("error");                            
                     }
                 }
             });

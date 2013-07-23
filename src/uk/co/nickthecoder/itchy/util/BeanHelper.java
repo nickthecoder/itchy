@@ -1,9 +1,7 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0 which accompanies this
+ * distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.util;
 
@@ -29,7 +27,7 @@ public class BeanHelper
             // Look for a method called getXXX first
             Class<?>[] argTypes = new Class<?>[] {};
             String methodName = "get" + attributeName.substring(0, 1).toUpperCase() +
-                    attributeName.substring(1);
+                attributeName.substring(1);
 
             try {
                 Method method = subject.getClass().getMethod(methodName, argTypes);
@@ -67,7 +65,7 @@ public class BeanHelper
     }
 
     public static void setProperty( Object subject, String attributeName, Object value,
-            Class<?> klass ) throws IllegalArgumentException, IllegalAccessException,
+        Class<?> klass ) throws IllegalArgumentException, IllegalAccessException,
         InvocationTargetException, SecurityException, NoSuchFieldException
     {
         int dot = attributeName.indexOf(".");
@@ -84,7 +82,7 @@ public class BeanHelper
             argTypes[0] = klass;
 
             String methodName = "set" + attributeName.substring(0, 1).toUpperCase() +
-                    attributeName.substring(1);
+                attributeName.substring(1);
 
             try {
                 Method method = subject.getClass().getMethod(methodName, argTypes);
@@ -101,4 +99,25 @@ public class BeanHelper
         }
     }
 
+    private Object subject;
+
+    private String access;
+
+    public BeanHelper( Object subject, String access )
+    {
+        this.subject = subject;
+        this.access = access;
+    }
+
+    public Object get() throws IllegalArgumentException, IllegalAccessException,
+        InvocationTargetException, SecurityException, NoSuchFieldException
+    {
+        return getProperty(this.subject, this.access);
+    }
+
+    public void set( Object value ) throws IllegalArgumentException, SecurityException,
+        IllegalAccessException, InvocationTargetException, NoSuchFieldException
+    {
+        setProperty(this.subject, this.access, value);
+    }
 }

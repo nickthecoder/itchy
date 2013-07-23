@@ -1,0 +1,96 @@
+<resources>
+  <fonts>
+    <font name="Boycott" filename="fonts/Boycott.ttf"/>
+  </fonts>
+  <ninePatches/>
+  <poses>
+    <pose name="background" filename="background.png"/>
+    <pose name="blue" filename="blue.png"/>
+    <pose name="board" filename="board.png"/>
+    <pose name="button" filename="button.png"/>
+    <pose name="cyan" filename="cyan.png"/>
+    <pose name="green" filename="green.png"/>
+    <pose name="orange" filename="orange.png"/>
+    <pose name="purple" filename="purple.png"/>
+    <pose name="red" filename="red.png"/>
+    <pose name="yellow" filename="yellow.png"/>
+  </poses>
+  <sounds>
+    <sound name="explode" filename="sounds/explode.ogg"/>
+    <sound name="pop" filename="sounds/pop.ogg"/>
+    <sound name="shatter" filename="sounds/shatter.ogg"/>
+  </sounds>
+  <animations>
+    <animation name="moveDown1">
+      <parallel loops="1">
+        <move ticks="10" dx="0.0" dy="-20.0" profile="linear"/>
+      </parallel>
+    </animation>
+    <animation name="moveDown2">
+      <parallel loops="1">
+        <move ticks="15" dx="0.0" dy="-40.0" profile="linear"/>
+      </parallel>
+    </animation>
+    <animation name="moveDown3">
+      <parallel loops="1">
+        <move ticks="20" dx="0.0" dy="-60.0" profile="linear"/>
+      </parallel>
+    </animation>
+    <animation name="moveDown4">
+      <parallel loops="1">
+        <move ticks="30" dx="0.0" dy="-80.0" profile="linear"/>
+        <sequence loops="1">
+          <turn ticks="5" turn="30.0" profile="linear"/>
+          <turn ticks="5" turn="-30.0" profile="linear"/>
+          <turn ticks="5" turn="30.0" profile="linear"/>
+          <turn ticks="5" turn="-30.0" profile="linear"/>
+          <turn ticks="5" turn="30.0" profile="linear"/>
+          <turn ticks="5" turn="-30.0" profile="linear"/>
+        </sequence>
+      </parallel>
+    </animation>
+  </animations>
+  <costumes>
+    <costume name="background">
+      <pose name="default" pose="background"/>
+    </costume>
+    <costume name="square">
+      <pose name="default" pose="blue"/>
+      <animation name="moveDown3" animation="moveDown3"/>
+      <animation name="moveDown1" animation="moveDown1"/>
+      <animation name="moveDown4" animation="moveDown4"/>
+      <animation name="moveDown2" animation="moveDown2"/>
+    </costume>
+    <costume name="blue" extends="square">
+      <pose name="default" pose="blue"/>
+    </costume>
+    <costume name="board">
+      <pose name="default" pose="board"/>
+    </costume>
+    <costume name="button" behaviour="uk.co.nickthecoder.itchy.extras.Button">
+      <pose name="default" pose="button"/>
+    </costume>
+    <costume name="cyan" extends="square">
+      <pose name="default" pose="cyan"/>
+    </costume>
+    <costume name="green" extends="square">
+      <pose name="default" pose="green"/>
+    </costume>
+    <costume name="orange" extends="square">
+      <pose name="default" pose="orange"/>
+    </costume>
+    <costume name="purple" extends="square">
+      <pose name="default" pose="purple"/>
+    </costume>
+    <costume name="red" extends="square">
+      <pose name="default" pose="red"/>
+    </costume>
+    <costume name="yellow" extends="square">
+      <pose name="default" pose="yellow"/>
+    </costume>
+  </costumes>
+  <scenes>
+    <scene name="main"/>
+    <scene name="menu"/>
+  </scenes>
+</resources>

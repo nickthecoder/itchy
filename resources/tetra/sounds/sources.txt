@@ -1,0 +1,30 @@
+Here are the attributions for each sound sample used.
+All sounds have been resampled to 22050Hz
+Each sample has :
+
+* Its original name
+* A url of the original file
+* The role of the sound sample
+* A short description of any modifications I made to the original sample
+* The name of the file as used in the game
+
+33245__ljudman__grenade.wav
+http://www.freesound.org/samplesViewSingle.php?id=33245
+A Shootble dying
+Removed the short silence at the beginning
+explode.ogg
+
+35464__jobro__explosion-7.wav
+http://www.freesound.org/people/jobro/sounds/35464/
+ahh4.ogg
+
+165911__deganoth__explosion-1.wav shatter.ogg
+http://www.freesound.org/people/Deganoth/sounds/165911/
+Cut and faded out to make a shorter sample
+shatter.ogg
+
+176727__yottasounds__pop.wav
+http://www.freesound.org/people/yottasounds/sounds/176727/
+Cut and made quieter
+pop.ogg
+
