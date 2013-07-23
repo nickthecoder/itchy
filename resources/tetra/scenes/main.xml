@@ -1,8 +1,12 @@
 <scene showMouse="true">
   <layer name="main">
     <actor costume="background" x="320" y="240" direction="0.0" startEvent="default"/>
-    <text text="Tetra" font="Boycott" size="70" color="#ffffff" x="511" y="428" direction="0.0" startEvent="default"/>
+    <text text="Level" font="Boycott" size="40" color="#000000" x="515" y="250" direction="0.0" startEvent="default"/>
+    <text text="Score" font="Boycott" size="40" color="#000000" x="513" y="347" direction="0.0" startEvent="default"/>
+    <text text="Tetra" font="Boycott" size="70" color="#000000" x="515" y="422" direction="0.0" startEvent="default"/>
+    <text text="Tetra" font="Boycott" size="70" color="#ffffff" x="510" y="427" direction="0.0" startEvent="default"/>
     <text text="Score" font="Boycott" size="40" color="#ffffff" x="511" y="352" direction="0.0" startEvent="default"/>
+    <text text="High Score" font="Boycott" size="30" color="#000000" x="512" y="91" direction="0.0" startEvent="default"/>
     <text text="0000000" font="Boycott" size="22" color="#ffffff" behaviour="uk.co.nickthecoder.itchy.extras.NumberValue" x="511" y="309" direction="0.0" startEvent="default">
       <property name="formatPattern" value="0000000"/>
       <property name="nullValue" value=""/>
@@ -10,22 +14,23 @@
       <property name="updateInterval" value="0"/>
       <property name="access" value="score"/>
     </text>
-    <text text="1" font="Boycott" size="22" color="#ffffff" behaviour="uk.co.nickthecoder.itchy.extras.TextValue" x="542" y="253" direction="0.0" startEvent="default">
+    <text text="01" font="Boycott" size="40" color="#ffffff" behaviour="uk.co.nickthecoder.itchy.extras.NumberValue" x="511" y="209" direction="0.0" startEvent="default">
+      <property name="formatPattern" value="00"/>
       <property name="nullValue" value=""/>
       <property name="errorValue" value=""/>
       <property name="updateInterval" value="0"/>
       <property name="access" value="level"/>
     </text>
-    <text text="Level :" font="Boycott" size="22" color="#ffffff" x="500" y="253" direction="0.0" startEvent="default"/>
+    <text text="Level" font="Boycott" size="40" color="#ffffff" x="511" y="254" direction="0.0" startEvent="default"/>
     <actor costume="board" x="164" y="228" direction="0.0" startEvent="default"/>
-    <text text="Lines :" font="Boycott" size="22" color="#ffffff" x="499" y="218" direction="0.0" startEvent="default"/>
-    <text text="0" font="Boycott" size="22" color="#ffffff" behaviour="uk.co.nickthecoder.itchy.extras.TextValue" x="542" y="217" direction="0.0" startEvent="default">
+    <text text="Lines :" font="Boycott" size="22" color="#ffffff" x="499" y="156" direction="0.0" startEvent="default"/>
+    <text text="0" font="Boycott" size="22" color="#ffffff" behaviour="uk.co.nickthecoder.itchy.extras.TextValue" x="538" y="155" direction="0.0" startEvent="default">
       <property name="nullValue" value=""/>
       <property name="errorValue" value=""/>
       <property name="updateInterval" value="0"/>
       <property name="access" value="completedLines"/>
     </text>
-    <text text="High Score" font="Boycott" size="30" color="#ffffff" x="511" y="93" direction="0.0" startEvent="default"/>
+    <text text="High Score" font="Boycott" size="30" color="#ffffff" x="509" y="94" direction="0.0" startEvent="default"/>
     <text text="0000000" font="Boycott" size="22" color="#ffffff" behaviour="uk.co.nickthecoder.itchy.extras.NumberValue" x="511" y="64" direction="0.0" startEvent="default">
       <property name="formatPattern" value="0000000"/>
       <property name="nullValue" value=""/>

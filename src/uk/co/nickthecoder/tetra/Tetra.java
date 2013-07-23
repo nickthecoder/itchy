@@ -28,7 +28,7 @@ import uk.co.nickthecoder.jame.event.KeyboardEvent;
 public class Tetra extends Game
 {
     /**
-     * A static reference to the Tetris object, which makes it easy for extenal classes to interact
+     * A static reference to the Tetris object, which makes it easy for external classes to interact
      * with the game.
      */
     public static Tetra game;
@@ -45,13 +45,12 @@ public class Tetra extends Game
      * The bottom edge of the playing area
      */
     public static final int BOTTOM = 30;
-
     /**
      * The width of the playing area in squares
      */
     public static final int WIDTH = 10;
     /**
-     * The height ofd the playing area in squares
+     * The height of the playing area in squares
      */
     public static final int HEIGHT = 20;
 
@@ -78,7 +77,7 @@ public class Tetra extends Game
     /**
      * The data for each of the tetris shapes. Each array holds a list of offsets from the tetris
      * shapes central square. The x and y coordinates are mushed together into a single array i.e.
-     * x1a,y1a, x1b,y1b, x1c, y1c, x2a,y2a, x2b,y2b x2c, y2c, etc. The central square isn't
+     * x1a,y1a, x1b,y1b, x1c,y1c, x2a,y2a, x2b,y2b x2c, y2c, etc. The central square isn't
      * included, so there are (x,y) pairs in groups of three (as a tetris shape has four squares),
      * and there are 4 lots of these, one for each possible rotation.
      */
@@ -213,7 +212,7 @@ public class Tetra extends Game
     {
         int n = new Random().nextInt(names.length);
         this.piece = new Piece(n, 5, 20);
-        if (this.piece.overlapping()) {
+        if (this.piece.isOverlapping()) {
             gameOver();
             setHighScore(this.score);
         }  
@@ -239,6 +238,7 @@ public class Tetra extends Game
         }
         if (ke.symbol == Keys.ESCAPE) {
             gameOver();
+            this.level = getStartingLevel();
             startScene("menu");
         }
 
@@ -332,7 +332,7 @@ public class Tetra extends Game
         if (this.completedLines <= 0) {
             level = 1;
         } else if ((this.completedLines >= 1) && (this.completedLines <= 90)) {
-            level = 1 + ((this.completedLines - 1) / 10);
+            level = 1 + ((this.completedLines) / 10);
         } else if (this.completedLines >= 91) {
             level = 10;
         }
@@ -392,7 +392,6 @@ public class Tetra extends Game
 
     private void gameOver()
     {
-        this.level = getStartingLevel();
         if (this.piece != null) {
             for(Actor actor : this.piece.actors) {
                 kill(actor);
@@ -525,7 +524,7 @@ public class Tetra extends Game
         public void rotate()
         {
             this.rotation = (this.rotation + 1) % 4;
-            if (overlapping()) {
+            if (isOverlapping()) {
                 this.rotation = (this.rotation + 3) % 4;
             } else {
                 this.update();
@@ -535,7 +534,7 @@ public class Tetra extends Game
         public void slide( int dx )
         {
             this.centerX += dx;
-            if (overlapping()) {
+            if (isOverlapping()) {
                 this.centerX -= dx;
             }
             update();
@@ -554,7 +553,7 @@ public class Tetra extends Game
         public boolean down()
         {
             this.centerY -= 1;
-            if (overlapping()) {
+            if (isOverlapping()) {
                 this.centerY += 1;
                 update();
                 return true;
@@ -575,7 +574,7 @@ public class Tetra extends Game
             clearLines();
         }
 
-        public boolean overlapping()
+        public boolean isOverlapping()
         {
             for (int i = 0; i < PIECES; i++) {
                 Point point = this.places[this.rotation][i];
@@ -598,11 +597,6 @@ public class Tetra extends Game
             }
         }
 
-        public class Offset
-        {
-            int dx;
-            int dy;
-        }
     }
 
 }
