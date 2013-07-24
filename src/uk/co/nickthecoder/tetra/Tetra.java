@@ -392,8 +392,8 @@ public class Tetra extends Game
         if (this.piece != null) {
             for(Actor actor : this.piece.actors) {
                 kill(actor);
-                resources.getSound("shatter").play();
             }
+            resources.getSound("shatter").play();
         }
         this.playing = false;
         this.piece = null;

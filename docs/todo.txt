@@ -11,11 +11,6 @@ What's Next
 Choose appropriate defaults for each type of ship and ball, door etc.
    Only if moving slowly.
 
-Create a "Sensor", which opens/closes doors when the ship gets close.
-    One side of the door lets Ship1 through, the other side lets Ship2 through, so need to
-        switch ships at both ends of the route.
-    Create a circular route,
-
 Use annotations to set initial tags :
     @Tagged("deadly") @Tagged("bouncy") class Alien {...)
 
@@ -54,9 +49,7 @@ Scenery Editor
 
     Missing properties
         start event
-        
-    Lock actors (useful for background images) - a padlock icon near a corner?
-        
+                
     Make it easy (single click) to create a costume for a Pose just after its been added.
     
     Tags in the editor? Costume would need a set of tags 
