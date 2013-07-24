@@ -38,8 +38,9 @@ public class SceneResource extends Loadable
 
     public void rename( String newName )
     {
-        this.resources.rename(this, newName);
+        this.resources.renameResource(this, newName);
         this.name = newName;
+        this.renameFile( makeFile( newName ) );
     }
 
     public Scene getScene() throws Exception

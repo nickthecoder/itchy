@@ -194,7 +194,7 @@ public class FontsEditor extends SubEditor
 
     protected void onRename()
     {
-        if (!this.editor.resources.rename(this.currentFontResource.filename,
+        if (!this.editor.resources.renameFile(this.currentFontResource.filename,
                 this.txtFilename.getText())) {
             this.setMessage("Rename failed");
         } else {

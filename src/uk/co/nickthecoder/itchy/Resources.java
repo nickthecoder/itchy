@@ -116,7 +116,7 @@ public class Resources extends Loadable
         }
     }
 
-    public void rename( Object object, String name )
+    public void renameResource( Object object, String name )
     {
         if (object instanceof SoundResource) {
             this.rename2((SoundResource) object, name);

@@ -26,7 +26,7 @@ public class NamedResource
 
     public void rename( String newName )
     {
-        this.resources.rename(this, newName);
+        this.resources.renameResource(this, newName);
         this.name = newName;
     }
 

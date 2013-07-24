@@ -127,12 +127,14 @@ public class ScenesEditor extends SubEditor
         this.txtName = new TextBox(this.currentSceneResource.getName());
         grid.addRow(new Label("Name"), this.txtName);
 
+        boolean showMouse = false;
         try {
-            this.checkBoxShowMouse = new CheckBox(this.currentSceneResource.getScene().showMouse);
-            grid.addRow(new Label("Show Mouse"), this.checkBoxShowMouse);
+            showMouse = this.currentSceneResource.getScene().showMouse;
         } catch (Exception e) {
             // Do nothing
         }
+        this.checkBoxShowMouse = new CheckBox(showMouse);
+        grid.addRow(new Label("Show Mouse"), this.checkBoxShowMouse);
 
     }
 
@@ -146,6 +148,8 @@ public class ScenesEditor extends SubEditor
             }
         }
 
+        this.currentSceneResource.rename(this.txtName.getText());
+
         if (this.adding) {
             try {
                 this.currentSceneResource.save();
@@ -155,13 +159,9 @@ public class ScenesEditor extends SubEditor
                 return;
             }
 
-        }
-
-        this.currentSceneResource.rename(this.txtName.getText());
-
-        if (this.adding) {
-            this.editor.resources.addScene(this.currentSceneResource);
+           this.editor.resources.addScene(this.currentSceneResource);
             this.rebuildTable();
+
         } else {
 
             this.table.updateRow(this.table.getCurrentTableModelRow());
@@ -173,7 +173,9 @@ public class ScenesEditor extends SubEditor
         } catch (Exception e) {
             e.printStackTrace();
             this.setMessage("Failed to save scene file");
+            return;
         }
+        
         Itchy.singleton.getGame().hideWindow(this.editWindow);
 
     }

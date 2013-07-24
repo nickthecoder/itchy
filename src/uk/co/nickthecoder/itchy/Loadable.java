@@ -74,6 +74,32 @@ public abstract class Loadable
         return resolveFile(this.file);
     }
 
+    /**
+     * Renames the current object on disk.
+     * 
+     * @param file
+     *        The new name for the file, which can be (and usually is) relative to this.directory.
+     */
+    public void renameFile( File file )
+    {
+        File oldFile = getFile();
+        this.file = file;
+        File newFile = getFile();
+
+        oldFile.renameTo(newFile);
+    }
+
+    /**
+     * Renames a file using names relative to this directory.
+     * @return true if the rename succeeded.
+     */
+    public boolean renameFile( String oldName, String newName )
+    {
+        File file = new File(this.resolveFilename(oldName));
+        File dest = new File(this.resolveFilename(newName));
+        return file.renameTo(dest);
+    }
+
     public String getFilename()
     {
         return resolveFile(this.file).getPath();
@@ -127,13 +153,6 @@ public abstract class Loadable
     {
         File file = new File(this.resolveFilename(filename));
         return file.exists() && file.isFile();
-    }
-
-    public boolean rename( String oldName, String newName )
-    {
-        File file = new File(this.resolveFilename(oldName));
-        File dest = new File(this.resolveFilename(newName));
-        return file.renameTo(dest);
     }
 
     public void ensure( Object a, Object b, String reason ) throws Exception
