@@ -76,9 +76,9 @@ public class Tetra extends Game
     /**
      * The data for each of the tetris shapes. Each array holds a list of offsets from the tetris
      * shapes central square. The x and y coordinates are mushed together into a single array i.e.
-     * x1a,y1a, x1b,y1b, x1c,y1c, x2a,y2a, x2b,y2b x2c, y2c, etc. The central square isn't
-     * included, so there are (x,y) pairs in groups of three (as a tetris shape has four squares),
-     * and there are 4 lots of these, one for each possible rotation.
+     * x1a,y1a, x1b,y1b, x1c,y1c, x2a,y2a, x2b,y2b x2c, y2c, etc. The central square isn't included,
+     * so there are (x,y) pairs in groups of three (as a tetris shape has four squares), and there
+     * are 4 lots of these, one for each possible rotation.
      */
     private static final int[][] data = new int[][] { cyan, yellow, green, red, orange, blue,
         purple };
@@ -110,6 +110,8 @@ public class Tetra extends Game
 
     boolean playing = false;
 
+    String sceneName;
+    
     /**
      * A countdown timer, which regulates the speed of the game. The speed is changed in setLevel,
      * which is increased by one for each ten lines removed.
@@ -136,14 +138,12 @@ public class Tetra extends Game
      */
     public int completedLines;
 
-    
-    
     public Tetra() throws Exception
     {
-        super( "Tetra", 640, 480 );
+        super("Tetra", 640, 480);
         this.resources.load(RESOURCES);
 
-        this.mainLayer = new ScrollableLayer("main", screenRect, new RGBA(0, 0, 0));
+        this.mainLayer = new ScrollableLayer("main", this.screenRect, new RGBA(0, 0, 0));
         this.layers.add(this.mainLayer);
 
     }
@@ -159,6 +159,7 @@ public class Tetra extends Game
 
     public void startScene( String name )
     {
+        sceneName = name;
         try {
             Scene scene = this.resources.getScene(name);
             scene.create(this.mainLayer, false);
@@ -212,9 +213,9 @@ public class Tetra extends Game
         if (this.piece.isOverlapping()) {
             gameOver();
             setHighScore(this.score);
-        }  
+        }
     }
-    
+
     @Override
     public boolean onKeyDown( KeyboardEvent ke )
     {
@@ -233,8 +234,22 @@ public class Tetra extends Game
         if ((ke.symbol >= Keys.KEY_0) && (ke.symbol <= Keys.KEY_9)) {
             chooseLevel(ke.symbol - Keys.KEY_0);
         }
-        if (ke.symbol == Keys.ESCAPE) {
+        
+        if ((ke.symbol == Keys.ESCAPE) && (sceneName.equals("main"))) {
             gameOver();
+            this.resources.getSound("shatter").play();
+            for (int x = 1; x <= WIDTH; x++) {
+                for (int y = 1; y <= HEIGHT; y++) {
+                    Actor actor = this.grid[x][y];
+                    if (actor != null) {
+                        kill(actor);
+                        this.grid[x][y] = null;
+                    }
+                }
+            }
+            this.removeEventListener(this);
+            sleep(2);
+            this.addEventListener(this);
             this.level = getStartingLevel();
             startScene("menu");
         }
@@ -271,15 +286,15 @@ public class Tetra extends Game
             return;
         }
 
-        getPreferences().putInt( "startingLevel", level);
+        getPreferences().putInt("startingLevel", level);
         if (!this.playing || this.level < level) {
             setLevel(level);
         }
     }
-    
+
     public int getStartingLevel()
     {
-        return getPreferences().getInt( "startingLevel", 1 );
+        return getPreferences().getInt("startingLevel", 1);
     }
 
     public void clearLines()
@@ -366,8 +381,8 @@ public class Tetra extends Game
             .projectiles(5)
             .forwards()
             .speed(1, 3)
-            .fade(.9)
-            .spin(-0.2, 0.2)
+            .fade(3)
+            //.spin(-0.2, 0.2)
             .createActor("fragment").activate();
 
         actor.kill();
@@ -390,10 +405,11 @@ public class Tetra extends Game
     private void gameOver()
     {
         if (this.piece != null) {
-            for(Actor actor : this.piece.actors) {
+            for (Actor actor : this.piece.actors) {
                 kill(actor);
             }
-            resources.getSound("shatter").play();
+
+            this.resources.getSound("shatter").play();
         }
         this.playing = false;
         this.piece = null;
