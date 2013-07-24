@@ -127,8 +127,7 @@ public class SceneDesigner implements MouseListener, KeyListener
     private SimpleTableModel layersTableModel;
 
     private ComboBox behaviourClassName;
-    
-    
+
     public SceneDesigner( Editor editor, SceneResource sceneResource )
     {
         this.editor = editor;
@@ -441,36 +440,41 @@ public class SceneDesigner implements MouseListener, KeyListener
 
     private void createBehaviourProperties()
     {
-        GridLayout grid = new GridLayout(this.behaviourContainer, 2);
+        final GridLayout grid = new GridLayout(this.behaviourContainer, 2);
         this.behaviourContainer.setLayout(grid);
-        grid.clear();
 
         SceneDesignerBehaviour sdb = (SceneDesignerBehaviour) this.currentActor.getBehaviour();
-        
-        if ( behaviourClassName == null ) {
-            behaviourClassName = new ComboBox(
-                sdb.actualBehaviour.getClass().getName(),
-                this.editor.game.resources.getBehaviourClassNames());
-             behaviourClassName.addChangeListener( new ComponentChangeListener() {
-                
-                @Override
-                public void changed()
-                {
-                    String value = behaviourClassName.getText();//TODO 
-                    SceneDesignerBehaviour sdb = (SceneDesignerBehaviour) currentActor.getBehaviour();
-                    try {
-                        sdb.setBehaviourClassName(value);
-                        SceneDesigner.this.createBehaviourProperties();
-                        SceneDesigner.this.editor.game.resources.registerBehaviourClassName(value);
-                        behaviourClassName.removeStyle("error");                        
-                    } catch (Exception e) {
-                        behaviourClassName.addStyle("error");                            
-                    }
+
+        this.behaviourClassName = new ComboBox(
+            sdb.actualBehaviour.getClass().getName(),
+            this.editor.game.resources.getBehaviourClassNames());
+
+        this.behaviourClassName.addChangeListener(new ComponentChangeListener() {
+
+            @Override
+            public void changed()
+            {
+                String value = SceneDesigner.this.behaviourClassName.getText();
+                SceneDesignerBehaviour sdb = (SceneDesignerBehaviour) SceneDesigner.this.currentActor
+                    .getBehaviour();
+                try {
+                    sdb.setBehaviourClassName(value);
+                    SceneDesigner.this.createBehaviourProperties( grid );
+                    SceneDesigner.this.editor.game.resources.registerBehaviourClassName(value);
+                    SceneDesigner.this.behaviourClassName.removeStyle("error");
+                } catch (Exception e) {
+                    SceneDesigner.this.behaviourClassName.addStyle("error");
                 }
-            });
-        }
-        grid.addRow("Behaviour", behaviourClassName);
-             
+            }
+        });
+        
+        createBehaviourProperties( grid );
+    }
+
+    private void createBehaviourProperties( GridLayout grid )
+    {
+        grid.clear();
+        grid.addRow("Behaviour", this.behaviourClassName);
 
         SceneDesignerBehaviour behaviour = (SceneDesignerBehaviour) this.currentActor
             .getBehaviour();
@@ -812,7 +816,7 @@ public class SceneDesigner implements MouseListener, KeyListener
 
             SceneDesignerBehaviour behaviour = new SceneDesignerBehaviour();
             String behaviourClassName;
-            
+
             if (this.stampActor.getAppearance().getPose() instanceof TextPose) {
                 actor = new Actor(this.stampActor.getAppearance().getPose());
                 behaviourClassName = NullBehaviour.class.getName();
@@ -821,15 +825,15 @@ public class SceneDesigner implements MouseListener, KeyListener
                 actor = new Actor(this.currentCostume);
                 behaviourClassName = this.stampActor.getCostume().behaviourClassName;
             }
-            
+
             try {
                 behaviour.setBehaviourClassName(behaviourClassName);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            
-            if (! (this.stampActor.getAppearance().getPose() instanceof TextPose)) {
-                setDefaultProperties( behaviour.actualBehaviour, this.currentCostume );
+
+            if (!(this.stampActor.getAppearance().getPose() instanceof TextPose)) {
+                setDefaultProperties(behaviour.actualBehaviour, this.currentCostume);
             }
 
             actor.moveTo(event.x, event.y);
@@ -903,14 +907,14 @@ public class SceneDesigner implements MouseListener, KeyListener
 
     private void setDefaultProperties( Behaviour behaviour, Costume costume )
     {
-        for (AbstractProperty<Behaviour,?> property : behaviour.getProperties() ) {
+        for (AbstractProperty<Behaviour, ?> property : behaviour.getProperties()) {
             try {
-                String stringValue = costume.getString( property.access );
-                if ( stringValue != null ) {
-                    property.setValueByString(behaviour,stringValue);
+                String stringValue = costume.getString(property.access);
+                if (stringValue != null) {
+                    property.setValueByString(behaviour, stringValue);
                 }
-            } catch (Exception e)  {
-                //Do nothing
+            } catch (Exception e) {
+                // Do nothing
             }
         }
     }
