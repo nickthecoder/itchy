@@ -166,7 +166,7 @@ public class SoundsEditor extends SubEditor
             this.table.updateRow(this.table.getCurrentTableModelRow());
         }
 
-        Itchy.singleton.hideWindow(this.editWindow);
+        Itchy.singleton.getGame().hideWindow(this.editWindow);
     }
 
     @Override
@@ -190,13 +190,13 @@ public class SoundsEditor extends SubEditor
             }
         };
         this.openDialog.setDirectory(this.editor.resources.getDirectory());
-        Itchy.singleton.showWindow(this.openDialog);
+        Itchy.singleton.getGame().showWindow(this.openDialog);
     }
 
     public void onAdd( File file )
     {
         if (file == null) {
-            Itchy.singleton.hideWindow(this.openDialog);
+            Itchy.singleton.getGame().hideWindow(this.openDialog);
         } else {
             String filename = this.editor.resources.makeRelativeFilename(file);
             String name = Util.nameFromFilename(filename);
@@ -204,7 +204,7 @@ public class SoundsEditor extends SubEditor
                 this.currentSoundResource = new SoundResource(this.editor.resources, name, filename);
                 this.currentSoundResource.getSound().play();
                 this.adding = true;
-                Itchy.singleton.hideWindow(this.openDialog);
+                Itchy.singleton.getGame().hideWindow(this.openDialog);
                 this.showDetails(this.currentSoundResource);
             } catch (JameException e) {
                 this.openDialog.setMessage(e.getMessage());

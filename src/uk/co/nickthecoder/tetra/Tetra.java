@@ -21,7 +21,6 @@ import uk.co.nickthecoder.itchy.extras.Fragment;
 import uk.co.nickthecoder.itchy.extras.Recharge;
 import uk.co.nickthecoder.jame.Keys;
 import uk.co.nickthecoder.jame.RGBA;
-import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.Sound;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 
@@ -141,19 +140,17 @@ public class Tetra extends Game
     
     public Tetra() throws Exception
     {
-        Itchy.singleton.init(this);
+        super( "Tetra", 640, 480 );
         this.resources.load(RESOURCES);
 
-        Rect screenSize = new Rect(0, 0, 640, 480);
-
-        this.mainLayer = new ScrollableLayer("main", screenSize, new RGBA(0, 0, 0));
+        this.mainLayer = new ScrollableLayer("main", screenRect, new RGBA(0, 0, 0));
         this.layers.add(this.mainLayer);
+
     }
 
     @Override
     public void init()
     {
-        this.mainLayer.disableMouseListener();
         this.mainLayer.enableMouseListener();
 
         this.level = getStartingLevel();
@@ -426,11 +423,8 @@ public class Tetra extends Game
 
     private void startEditor()
     {
-        Itchy.singleton.removeEventListener(this);
-
         try {
             Editor editor = new Editor(this);
-            editor.init();
             editor.start();
         } catch (Exception e) {
             e.printStackTrace();

@@ -182,7 +182,7 @@ public class SceneDesigner implements MouseListener, KeyListener
 
         // Can be ANY of the scrolling layers, so I picked the first for convenience.
         this.designLayers.getChildren().get(0).addMouseListener(this);
-        Itchy.singleton.addKeyListener(this);
+        Itchy.singleton.getGame().addKeyListener(this);
 
         this.scene.create(this.designLayers, true);
 
@@ -201,7 +201,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.editor.getLayers().remove(this.glassLayer);
         this.editor.getLayers().remove(this.guiLayer);
 
-        Itchy.singleton.removeKeyListener(this);
+        Itchy.singleton.getGame().removeKeyListener(this);
         this.designLayers.getChildren().get(0).removeMouseListener(this);
 
         this.toolboxPose.destroy();

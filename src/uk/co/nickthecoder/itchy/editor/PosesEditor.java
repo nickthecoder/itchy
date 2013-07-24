@@ -225,7 +225,7 @@ public class PosesEditor extends SubEditor
             this.table.updateRow(this.table.getCurrentTableModelRow());
         }
 
-        Itchy.singleton.hideWindow(this.editWindow);
+        Itchy.singleton.getGame().hideWindow(this.editWindow);
     }
 
     @Override
@@ -249,20 +249,20 @@ public class PosesEditor extends SubEditor
             }
         };
         this.openDialog.setDirectory(this.editor.resources.getDirectory());
-        Itchy.singleton.showWindow(this.openDialog);
+        Itchy.singleton.getGame().showWindow(this.openDialog);
     }
 
     public void onAdd( File file )
     {
         if (file == null) {
-            Itchy.singleton.hideWindow(this.openDialog);
+            Itchy.singleton.getGame().hideWindow(this.openDialog);
         } else {
             String filename = this.editor.resources.makeRelativeFilename(file);
             String name = Util.nameFromFilename(filename);
             try {
                 this.currentPoseResource = new PoseResource(this.editor.resources, name, filename);
                 this.adding = true;
-                Itchy.singleton.hideWindow(this.openDialog);
+                Itchy.singleton.getGame().hideWindow(this.openDialog);
                 this.showDetails(this.currentPoseResource);
             } catch (JameException e) {
                 this.openDialog.setMessage(e.getMessage());

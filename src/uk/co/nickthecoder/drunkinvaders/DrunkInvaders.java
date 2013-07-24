@@ -24,7 +24,6 @@ import uk.co.nickthecoder.itchy.neighbourhood.NeighbourhoodCollisionStrategy;
 import uk.co.nickthecoder.itchy.neighbourhood.StandardNeighbourhood;
 import uk.co.nickthecoder.itchy.util.TextBehaviour;
 import uk.co.nickthecoder.jame.Keys;
-import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 
 public class DrunkInvaders extends Game
@@ -63,20 +62,19 @@ public class DrunkInvaders extends Game
 
     public DrunkInvaders() throws Exception
     {
-        Itchy.singleton.init(this);
+        super("Drunk Invaders", 640, 480);
         this.resources.load(RESOURCES);
 
         this.neighbourhood = new StandardNeighbourhood(NEIGHBOURHOOD_SQUARE_SIZE);
-        Rect screenSize = new Rect(0, 0, 640, 480);
 
-        this.mainLayer = new ScrollableLayer("main", screenSize);
+        this.mainLayer = new ScrollableLayer("main", this.screenRect);
         this.mainLayer.centerOn(320, 240);
 
-        this.backgroundLayer = new ScrollableLayer("background", screenSize);
+        this.backgroundLayer = new ScrollableLayer("background", this.screenRect);
         this.backgroundLayer.centerOn(320, 240);
 
-        this.glassLayer = new ScrollableLayer("glass", screenSize);
-        this.fadeLayer = new ScrollableLayer("fade", screenSize);
+        this.glassLayer = new ScrollableLayer("glass", this.screenRect);
+        this.fadeLayer = new ScrollableLayer("fade", this.screenRect);
 
         this.fadeActor = new Actor(this.resources.getPose("white"));
         this.fadeActor.getAppearance().setAlpha(0);
@@ -96,11 +94,10 @@ public class DrunkInvaders extends Game
     @Override
     public void init()
     {
+        this.mainLayer.enableMouseListener();
+
         this.metronomeCountdown = 0;
         this.metronome = 20;
-
-        this.mainLayer.disableMouseListener();
-        this.mainLayer.enableMouseListener();
 
         this.startScene("menu");
     }
@@ -247,7 +244,7 @@ public class DrunkInvaders extends Game
             startEditor();
 
         } else if ("quit".equals(message)) {
-            stop();
+            end();
 
         } else if ("fadedIn".equals(message)) {
             DrunkInvaders.this.fadingOut = false;
@@ -310,24 +307,6 @@ public class DrunkInvaders extends Game
     }
 
     @Override
-    public int getWidth()
-    {
-        return 640;
-    }
-
-    @Override
-    public int getHeight()
-    {
-        return 480;
-    }
-
-    @Override
-    public String getTitle()
-    {
-        return "Drunk Invaders";
-    }
-
-    @Override
     public String getIconFilename()
     {
         return "resources/drunkInvaders/icon.bmp";
@@ -340,11 +319,8 @@ public class DrunkInvaders extends Game
 
     private void startEditor()
     {
-        Itchy.singleton.removeEventListener(this);
-
         try {
             Editor editor = new Editor(DrunkInvaders.game);
-            editor.init();
             editor.start();
         } catch (Exception e) {
             e.printStackTrace();
@@ -361,7 +337,6 @@ public class DrunkInvaders extends Game
             if ((argv.length == 1) && ("--editor".equals(argv[0]))) {
 
                 Editor editor = new Editor(DrunkInvaders.game);
-                editor.init();
                 editor.start();
 
             } else {

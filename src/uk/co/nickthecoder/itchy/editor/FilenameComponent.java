@@ -15,7 +15,6 @@ import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Button;
 import uk.co.nickthecoder.itchy.gui.Container;
 import uk.co.nickthecoder.itchy.gui.FileOpenDialog;
-import uk.co.nickthecoder.itchy.gui.MessageDialog;
 import uk.co.nickthecoder.itchy.gui.TextBox;
 
 public class FilenameComponent extends Container
@@ -79,17 +78,17 @@ public class FilenameComponent extends Container
             }
         };
         this.openDialog.setDirectory(this.resources.getDirectory());
-        Itchy.singleton.showWindow(this.openDialog);
+        Itchy.singleton.getGame().showWindow(this.openDialog);
     }
 
     private void onPickFilename( File file )
     {
         if (file == null) {
-            Itchy.singleton.hideWindow(this.openDialog);
+            Itchy.singleton.getGame().hideWindow(this.openDialog);
         } else {
             String filename = this.resources.makeRelativeFilename(file);
             this.textBox.setText(filename);
-            Itchy.singleton.hideWindow(this.openDialog);
+            Itchy.singleton.getGame().hideWindow(this.openDialog);
         }
     }
 

@@ -174,7 +174,7 @@ public class ScenesEditor extends SubEditor
             e.printStackTrace();
             this.setMessage("Failed to save scene file");
         }
-        Itchy.singleton.hideWindow(this.editWindow);
+        Itchy.singleton.getGame().hideWindow(this.editWindow);
 
     }
 

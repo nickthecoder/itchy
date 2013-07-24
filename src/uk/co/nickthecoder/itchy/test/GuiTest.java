@@ -1,9 +1,7 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0 which accompanies this
+ * distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.test;
 
@@ -15,7 +13,6 @@ import java.util.List;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.ActorsLayer;
 import uk.co.nickthecoder.itchy.Game;
-import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.ScrollableLayer;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Button;
@@ -32,7 +29,6 @@ import uk.co.nickthecoder.itchy.gui.VerticalLayout;
 import uk.co.nickthecoder.itchy.gui.Window;
 import uk.co.nickthecoder.jame.Keys;
 import uk.co.nickthecoder.jame.RGBA;
-import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 
 public class GuiTest extends Game
@@ -43,33 +39,30 @@ public class GuiTest extends Game
 
     public GuiPose guiPose;
 
-    public Rect size = new Rect(0, 0, 640, 480);
-
-    // public ActionListener menuAction;
-
     public GuiTest() throws Exception
     {
-        Itchy.singleton.init(this);
+        super("GuiTest", 640, 480);
 
         this.rules = new Rules(new File("resources/defaultGui/style.xml"));
-        
+
     }
-    
+
+    @Override
     public void init()
     {
-        this.mainLayer = new ScrollableLayer("main",this.size, new RGBA(255, 255, 255));
+        this.mainLayer = new ScrollableLayer("main", this.screenRect, new RGBA(255, 255, 255));
         this.mainLayer.setYAxisPointsDown(true);
         this.layers.add(this.mainLayer);
 
         this.guiPose = new GuiPose();
         this.guiPose.setRules(this.rules);
         this.guiPose.addStyle("test");
-        this.guiPose.setPosition(0, 0, this.size.width, this.size.height);
+        this.guiPose.setPosition(0, 0, this.screenRect.width, this.screenRect.height);
         Actor actor = this.guiPose.getActor();
         this.mainLayer.add(actor);
 
-        Itchy.singleton.addEventListener(this.guiPose);
-
+        addEventListener(this.guiPose);
+        menu();
     }
 
     public void oneHorizontal()
@@ -205,12 +198,6 @@ public class GuiTest extends Game
         win.show();
     }
 
-    public void start()
-    {
-        Itchy.singleton.addEventListener(this);
-        // Itchy.singleton.loop();
-    }
-
     public void reset()
     {
         this.guiPose.setFill(false, false);
@@ -277,44 +264,9 @@ public class GuiTest extends Game
         }
     }
 
-    @Override
-    public int getWidth()
-    {
-        return 640;
-    }
-
-    @Override
-    public int getHeight()
-    {
-        return 480;
-    }
-
-    @Override
-    public void tick()
-    {
-    }
-
-    @Override
-    public String getTitle()
-    {
-        return "Test GUI";
-    }
-
-    @Override
-    public String getIconFilename()
-    {
-        return null;
-    }
-
     public static void main( String[] argv ) throws Exception
     {
-
         GuiTest testGui = new GuiTest();
-        testGui.init();
-
-        testGui.menu();
-
         testGui.start();
-
     }
 }

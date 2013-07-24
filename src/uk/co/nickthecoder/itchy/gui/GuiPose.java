@@ -60,7 +60,7 @@ public class GuiPose extends RootContainer implements Pose, EventListener
     {
         super();
 
-        Itchy.singleton.addEventListener(this);
+        Itchy.singleton.getGame().addEventListener(this);
     }
 
     @Override
@@ -252,7 +252,7 @@ public class GuiPose extends RootContainer implements Pose, EventListener
         assert (this.mouseOwner == null);
 
         this.mouseOwner = component;
-        Itchy.singleton.captureMouse(this);
+        Itchy.singleton.getGame().captureMouse(this);
     }
 
     @Override
@@ -261,7 +261,7 @@ public class GuiPose extends RootContainer implements Pose, EventListener
         assert (this.mouseOwner == component);
 
         this.mouseOwner = null;
-        Itchy.singleton.releaseMouse(this);
+        Itchy.singleton.getGame().releaseMouse(this);
     }
 
     @Override
@@ -278,12 +278,12 @@ public class GuiPose extends RootContainer implements Pose, EventListener
 
     public void show()
     {
-        Itchy.singleton.showWindow(this);
+        Itchy.singleton.getGame().showWindow(this);
     }
 
     public void hide()
     {
-        Itchy.singleton.hideWindow(this);
+        Itchy.singleton.getGame().hideWindow(this);
     }
 
     public void destroy()

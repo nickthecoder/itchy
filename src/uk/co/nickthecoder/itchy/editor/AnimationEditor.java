@@ -91,19 +91,19 @@ public class AnimationEditor extends Window
     @Override
     public void show()
     {
-        Itchy.singleton.showWindow(this);
+        Itchy.singleton.getGame().showWindow(this);
     }
 
     public void onOk()
     {
         if (this.save()) {
-            Itchy.singleton.hideWindow(this);
+            Itchy.singleton.getGame().hideWindow(this);
         }
     }
 
     public void onCancel()
     {
-        Itchy.singleton.hideWindow(this);
+        Itchy.singleton.getGame().hideWindow(this);
     }
 
     public boolean save()

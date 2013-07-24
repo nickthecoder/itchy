@@ -7,25 +7,17 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+
 import java.util.Stack;
 
-import uk.co.nickthecoder.itchy.gui.GuiPose;
 import uk.co.nickthecoder.itchy.gui.Rules;
 import uk.co.nickthecoder.jame.Audio;
 import uk.co.nickthecoder.jame.Events;
-import uk.co.nickthecoder.jame.JameException;
 import uk.co.nickthecoder.jame.Keys;
-import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.Surface;
 import uk.co.nickthecoder.jame.Video;
 import uk.co.nickthecoder.jame.event.Event;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
-import uk.co.nickthecoder.jame.event.MouseButtonEvent;
-import uk.co.nickthecoder.jame.event.MouseMotionEvent;
-import uk.co.nickthecoder.jame.event.QuitEvent;
 
 /**
  * The is the overall manager of the Itchy game engine. There is only one instance
@@ -69,21 +61,7 @@ public class Itchy
 
     public Surface screen;
     
-    private Rect rootRect;
-
     private boolean running;
-
-    private List<EventListener> eventListeners;
-
-    private List<MouseListener> mouseListeners;
-
-    private List<KeyListener> keyListeners;
-
-    private MouseListener mouseOwner;
-
-    private EventListener modalListener;
-
-    private Focusable keyboardFocus;
 
     private Game game;
 
@@ -92,9 +70,8 @@ public class Itchy
      */
     private Stack<Game> gameStack = new Stack<Game>();
 
-    private final List<GuiPose> windows;
 
-    private Rules rules;
+    public Rules rules;
 
     public int keyboardRepeatDelay = Events.DEFAULT_REPEAT_DELAY;
 
@@ -106,47 +83,18 @@ public class Itchy
 
     private Itchy()
     {
-        this.windows = new ArrayList<GuiPose>();
     }
-
-    public void init( Game game ) throws JameException
+    
+    public void init(Game game) throws Exception
     {
-        this.init(game, game.getWidth(), game.getHeight(), 32);
-    }
-
-    public void init( Game game, int width, int height ) throws JameException
-    {
-        this.init(game, width, height, 32);
-    }
-
-    public void init( Game game, int width, int height, int bpp ) throws JameException
-    {
-        while (this.windows.size() > 0) {
-            this.windows.get(0).destroy(); // MORE does this work???
-        }
-        this.eventListeners = new LinkedList<EventListener>();
-        this.mouseListeners = new LinkedList<MouseListener>();
-        this.keyListeners = new LinkedList<KeyListener>();
-
-        this.keyboardState = new boolean[KEYBOARD_STATE_SIZE];
-
         Video.init();
         Audio.init();
         Audio.open();
         Events.enableKeyTranslation(true);
-
-        if (game.getTitle() == null) {
-            Video.setWindowTitle("Itchy");
-        } else {
-            Video.setWindowTitle(game.getTitle());
-        }
-        if (game.getIconFilename() != null) {
-            Video.setWindowIcon(game.getIconFilename());
-        }
-
-        System.out.println("Itchy initialising screen " + width + "," + height);
-        this.screen = Video.setMode(width, height);
         
+        this.keyboardState = new boolean[KEYBOARD_STATE_SIZE];
+        
+        setScreenMode( game );
     }
 
     public Game getGame()
@@ -164,22 +112,37 @@ public class Itchy
         this.rules = rules;
     }
 
+    private void setScreenMode(Game game)
+    {
+        if (game.getTitle() == null) {
+            Video.setWindowTitle("Itchy");
+        } else {
+            Video.setWindowTitle(game.getTitle());
+        }
+        if (game.getIconFilename() != null) {
+            Video.setWindowIcon(game.getIconFilename());
+        }
+
+        try {
+            this.screen = Video.setMode(game.getWidth(), game.getHeight());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+    }
+    
     public void startGame( Game game )
     {
         if (this.game!=null) {
             this.gameStack.push(this.game);
         }
         this.game = game;
-
-        startGame();
+        setScreenMode(game);
     }
 
-    private void startGame()
+    public void mainLoop()
     {
         try {
-            this.init(this.game);
-            this.addEventListener(this.game);
-            this.game.init();
             if (!this.running) {
                 this.running = true;
                 this.frameRate.loop();
@@ -192,12 +155,16 @@ public class Itchy
 
     public void endGame()
     {
-        this.removeEventListener(this.game);
         if (this.gameStack.isEmpty()) {
             this.terminate();
         } else {
             this.game = this.gameStack.pop();
-            startGame();
+            try {
+                setScreenMode(this.game);
+            }  catch (Exception e) {
+                e.printStackTrace();
+            }
+            mainLoop();
         }
     }
 
@@ -292,157 +259,6 @@ public class Itchy
         return this.running;
     }
 
-    private void processEvent( Event event )
-    {
-        if (event instanceof QuitEvent) {
-            for (EventListener el : this.eventListeners) {
-                if (el.onQuit()) {
-                    return;
-                }
-            }
-            this.terminate();
-        }
-
-        if (event instanceof KeyboardEvent) {
-            KeyboardEvent ke = (KeyboardEvent) event;
-
-            if (ke.isPressed()) {
-                int key = ke.symbol;
-                if ((key > 0) && (key < this.keyboardState.length)) {
-                    this.keyboardState[key] = true;
-                }
-
-                if ( this.keyboardFocus != null ) {
-                    if ( this.keyboardFocus.onKeyDown(ke)) {
-                        return;
-                    }
-                }
-                
-                if (this.modalListener == null) {
-
-                    for (KeyListener listener : this.keyListeners) {
-                        if (listener.onKeyDown(ke)) {
-                            return;
-                        }
-                    }
-
-                    for (EventListener el : this.eventListeners) {
-                        if (el.onKeyDown(ke)) {
-                            return;
-                        }
-                    }
-                } else {
-                    this.modalListener.onKeyDown(ke);
-                    return;
-                }
-
-            } else if (ke.isReleased()) {
-
-                int key = ke.symbol;
-                if ((key > 0) && (key < this.keyboardState.length)) {
-                    this.keyboardState[key] = false;
-                }
-
-                if (this.modalListener == null) {
-
-                    for (KeyListener listener : this.keyListeners) {
-                        if (listener.onKeyUp(ke)) {
-                            return;
-                        }
-                    }
-
-                    for (EventListener el : this.eventListeners) {
-                        if (el.onKeyUp(ke)) {
-                            return;
-                        }
-                    }
-                } else {
-                    this.modalListener.onKeyUp(ke);
-                    return;
-                }
-
-            }
-        }
-
-        if (event instanceof MouseButtonEvent) {
-            MouseButtonEvent mbe = (MouseButtonEvent) event;
-
-            if (mbe.isPressed()) {
-
-                if (this.modalListener == null) {
-                    for (EventListener el : this.eventListeners) {
-                        if (el.onMouseDown(mbe)) {
-                            return;
-                        }
-                    }
-                    for (MouseListener el : this.mouseListeners) {
-                        if (el.onMouseDown(mbe)) {
-                            return;
-                        }
-                    }
-                } else {
-                    this.modalListener.onMouseDown(mbe);
-                    return;
-                }
-
-            }
-
-            if (mbe.isReleased()) {
-
-                if (this.mouseOwner == null) {
-
-                    if (this.modalListener == null) {
-                        for (EventListener el : this.eventListeners) {
-                            if (el.onMouseUp(mbe)) {
-                                return;
-                            }
-                        }
-                        for (MouseListener el : this.mouseListeners) {
-                            if (el.onMouseUp(mbe)) {
-                                return;
-                            }
-                        }
-                    } else {
-                        this.modalListener.onMouseUp(mbe);
-                        return;
-                    }
-
-                } else {
-                    this.mouseOwner.onMouseUp(mbe);
-                    return;
-                }
-            }
-
-        }
-
-        if (event instanceof MouseMotionEvent) {
-            MouseMotionEvent mme = (MouseMotionEvent) event;
-            if (this.mouseOwner == null) {
-
-                if (this.modalListener == null) {
-                    for (EventListener el : this.eventListeners) {
-                        if (el.onMouseMove(mme)) {
-                            return;
-                        }
-                    }
-                    for (MouseListener el : this.mouseListeners) {
-                        if (el.onMouseMove(mme)) {
-                            return;
-                        }
-                    }
-                } else {
-                    this.modalListener.onMouseMove(mme);
-                    return;
-                }
-
-            } else {
-                this.mouseOwner.onMouseMove(mme);
-                return;
-            }
-
-        }
-    }
-
     public void enableKeyboardRepeat( boolean value )
     {
         if (value) {
@@ -493,118 +309,37 @@ public class Itchy
         return this.keyboardState[Keys.LSUPER] || this.keyboardState[Keys.RSUPER];
     }
 
-    public void setModalListener( EventListener listener )
+
+    private void processEvent( Event event )
     {
-        this.modalListener = listener;
+        this.game.processEvent( event );
+        
+        if (event instanceof KeyboardEvent) {
+            KeyboardEvent ke = (KeyboardEvent) event;
+
+            if (ke.isPressed()) {
+                int key = ke.symbol;
+                if ((key > 0) && (key < this.keyboardState.length)) {
+                    this.keyboardState[key] = true;
+                }
+            
+            } else if (ke.isReleased()) {
+    
+                int key = ke.symbol;
+                if ((key > 0) && (key < this.keyboardState.length)) {
+                    this.keyboardState[key] = false;
+                }
+            }
+        }
     }
     
-    /**
-     * Used when a single entity believes it deserves first priority to all key strokes.
-     * In particular, this is used by GUI components, which accept keyboard input when they
-     * have the focus.
-     */
-    public void setFocus( Focusable focus )
-    {
-        this.keyboardFocus = focus;
-    }
-
-    public void addEventListener( EventListener listener )
-    {
-        this.eventListeners.add(listener);
-    }
-
-    public void removeEventListener( EventListener listener )
-    {
-        this.eventListeners.remove(listener);
-    }
-
-    public void addMouseListener( MouseListener listener )
-    {
-        this.mouseListeners.add(listener);
-    }
-
-    public void removeMouseListener( MouseListener listener )
-    {
-        this.mouseListeners.remove(listener);
-    }
-
-    public void addKeyListener( KeyListener listener )
-    {
-        this.keyListeners.add(listener);
-    }
-
-    public void removeKeyListener( KeyListener listener )
-    {
-        this.keyListeners.remove(listener);
-    }
-
-    public void captureMouse( EventListener owner )
-    {
-        assert (this.mouseOwner == null);
-        this.mouseOwner = owner;
-    }
-
-    public void releaseMouse( EventListener owner )
-    {
-        assert (this.mouseOwner == owner);
-        this.mouseOwner = null;
-    }
 
     public Rules getRules()
     {
         return this.rules;
     }
 
-    public void showWindow( GuiPose window )
-    {
-        this.windows.add(window);
 
-        if (window.getRules() == null) {
-            window.setRules(this.rules);
-        }
-        window.reStyle();
-        window.forceLayout();
-        window.setPosition(0, 0, window.getRequiredWidth(), window.getRequiredHeight());
-
-        Actor actor = window.getActor();
-
-        ActorsLayer popupLayer = this.game.popupLayer;
-        
-        actor.moveTo(Math.max(0, (popupLayer.position.width - window.getRequiredWidth()) / 2),
-            Math.max(0, (popupLayer.position.height - window.getRequiredHeight()) / 2));
-
-        popupLayer.add(actor);
-
-        if (window.modal) {
-            this.setModalListener(window);
-        }
-        this.addEventListener(window);
-
-    }
-
-    
-    public void hideWindow( GuiPose window )
-    {
-        this.removeEventListener(window);
-        this.game.popupLayer.remove(window.getActor());
-
-        this.windows.remove(window);
-
-        if (window.modal) {
-            if (this.windows.size() > 0) {
-                GuiPose topWindow = this.windows.get(this.windows.size() - 1);
-                if (topWindow.modal) {
-                    this.setModalListener(topWindow);
-
-                } else {
-                    this.setModalListener(null);
-                }
-            } else {
-                this.setModalListener(null);
-            }
-        }
-
-    }
 
     public void debug()
     {

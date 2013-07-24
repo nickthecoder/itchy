@@ -88,7 +88,7 @@ public abstract class RootContainer extends Container
 
     public void setFocus( Component component )
     {
-        Itchy.singleton.setFocus(component);
+        Itchy.singleton.getGame().setFocus(component);
 
         if (RootContainer.focus == component) {
             return;

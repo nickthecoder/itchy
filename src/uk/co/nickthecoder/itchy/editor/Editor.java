@@ -58,28 +58,15 @@ public final class Editor extends Game
 
     public Editor( Game game ) throws Exception
     {
-        super();
+        super("Editor", 1000,720);
         
         this.game = game;
 
         singleton = this;
-        Itchy.singleton.init(this);
 
         this.resources = game.resources;
 
         this.rules = new Rules(new File("resources/defaultGui/style.xml"));
-    }
-
-    @Override
-    public int getWidth()
-    {
-        return 1000;
-    }
-
-    @Override
-    public int getHeight()
-    {
-        return 720;
     }
 
     @Override
@@ -133,7 +120,7 @@ public final class Editor extends Game
             public void action()
             {
                 Editor.singleton = null;
-                Editor.this.stop();
+                Editor.this.end();
             }
         });
         buttons.addChild(quit);

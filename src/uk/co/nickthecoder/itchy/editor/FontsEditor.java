@@ -150,7 +150,7 @@ public class FontsEditor extends SubEditor
 
             this.table.updateRow(this.table.getCurrentTableModelRow());
         }
-        Itchy.singleton.hideWindow(this.editWindow);
+        Itchy.singleton.getGame().hideWindow(this.editWindow);
 
     }
 
@@ -175,12 +175,12 @@ public class FontsEditor extends SubEditor
             }
         };
         this.openDialog.setDirectory(this.editor.resources.getDirectory());
-        Itchy.singleton.showWindow(this.openDialog);
+        Itchy.singleton.getGame().showWindow(this.openDialog);
     }
 
     public void onAdd( File file )
     {
-        Itchy.singleton.hideWindow(this.openDialog);
+        Itchy.singleton.getGame().hideWindow(this.openDialog);
 
         if (file != null) {
             String filename = this.editor.resources.makeRelativeFilename(file);

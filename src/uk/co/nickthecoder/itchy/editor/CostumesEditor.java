@@ -503,7 +503,7 @@ public class CostumesEditor extends SubEditor
         } else {
             this.table.updateRow(this.table.getCurrentTableModelRow());
         }
-        Itchy.singleton.hideWindow(this.editWindow);
+        Itchy.singleton.getGame().hideWindow(this.editWindow);
 
     }
 
