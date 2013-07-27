@@ -1,9 +1,7 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0 which accompanies this
+ * distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.gui;
 
@@ -17,6 +15,7 @@ import java.util.List;
 
 import uk.co.nickthecoder.itchy.Pose;
 import uk.co.nickthecoder.itchy.Renderable;
+import uk.co.nickthecoder.itchy.ResourcesReader;
 import uk.co.nickthecoder.itchy.util.XMLException;
 import uk.co.nickthecoder.itchy.util.XMLTag;
 import uk.co.nickthecoder.jame.JameException;
@@ -27,6 +26,8 @@ public class RulesReader
 {
     private final Rules rules;
 
+    private boolean included = false;
+
     public RulesReader( Rules rules )
     {
         this.rules = rules;
@@ -35,7 +36,7 @@ public class RulesReader
     public void load( String filename ) throws Exception
     {
         BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(
-                filename)));
+            filename)));
         try {
             XMLTag document = XMLTag.openDocument(reader);
             this.readRules(document.getTag("rules"));
@@ -54,20 +55,45 @@ public class RulesReader
             this.readResources(resourcesTag);
         }
 
-        for (Iterator<XMLTag> i = rulesTag.getTags("rule"); i.hasNext();) {
-            XMLTag ruleTag = i.next();
-            this.readRule(ruleTag);
+        for (Iterator<XMLTag> i = rulesTag.getTags(); i.hasNext();) {
+            XMLTag childTag = i.next();
+
+            if ("rule".equals(childTag.getName())) {
+                this.readRule(childTag);
+            } else if ("include".equals(childTag.getName())) {
+                this.readInclude(childTag);
+            }
         }
     }
 
     public void readResources( XMLTag resourcesTag ) throws XMLException
     {
         String filename = resourcesTag.getAttribute("filename");
+        String resolvedFilename = this.rules.resolveFilename(filename);
         try {
-            this.rules.resources.load( new File( this.rules.getDirectory(), filename) );
+            ResourcesReader reader = new ResourcesReader(this.rules.resources);
+            reader.included = this.included;
+            reader.load(resolvedFilename);
         } catch (Exception e) {
-            throw new XMLException("Failed to read resource file : " + filename + "(" +
-                    e.getMessage() + ")");
+            throw new XMLException("Failed to read resource file : " + resolvedFilename + "(" +
+                e.getMessage() + ")");
+        }
+    }
+
+    public void readInclude( XMLTag includeTag ) throws XMLException
+    {
+        String filename = includeTag.getAttribute("filename");
+        File file = new File(this.rules.getDirectory(), filename);
+
+        try {
+            Rules rules = new Rules(file);
+
+            this.rules.merge( rules );
+            
+        } catch (XMLException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new XMLException("Failed to load included rules : " + file.getPath());
         }
     }
 
@@ -176,7 +202,7 @@ public class RulesReader
                 background = this.rules.resources.getNinePatch(backgroundName);
                 if (background == null) {
                     throw new XMLException("Background not found : " +
-                            ruleTag.getAttribute("background"));
+                        ruleTag.getAttribute("background"));
                 }
             }
             rule.background = background;

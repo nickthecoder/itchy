@@ -24,6 +24,8 @@ public final class Editor extends Game
 {
     public static Editor singleton;
 
+    public static final String RULES = "resources/editor/style.xml";
+    
     public static Container addHint( Component component, String hint )
     {
         Container container = new Container();
@@ -66,7 +68,7 @@ public final class Editor extends Game
 
         this.resources = game.resources;
 
-        this.rules = new Rules(new File("resources/defaultGui/style.xml"));
+        this.rules = new Rules(new File( RULES ));
     }
 
     @Override

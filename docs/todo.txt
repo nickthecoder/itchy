@@ -8,19 +8,16 @@ Jame is out of date, need to rebuild for win32 and i386 and ARM??
 What's Next
 ===========
 
+    Ensure that the svgs are complete, with the right name, and are in git.
+        
+    The Rules object needs to be on Game, its probably on Itchy right now.
+
 Complete GUI styles
-    The scroller can look like the butterscotch one (not the scrollbar part).
     The animation's close button should look like the butterscotch one.
         Use existing button, just don't change margin/padding??
-    Open... dialog needs work - button put into a combo
 
-BUG :
-    Popup windows don't take focus away from buttons, table rows etc. So you can activate them by hitting enter.
-    
-BUG :
-    "Rename" button is not obvious, or doesn't work.
-    Make the text be in error state, when the file doesn't exist. Rename will clear the error.
-    
+
+
 Follower/Leader behaviours
     A giant space invader is composed of many follower squares, as each square is hit, it informs its
     leader. When all are dead the leader dies too. If the leader dies before its followers, the followers

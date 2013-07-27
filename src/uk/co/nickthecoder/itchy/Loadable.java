@@ -69,6 +69,12 @@ public abstract class Loadable
         return this.directory;
     }
 
+    public void setFile( File file )
+    {
+        this.directory = file.getParentFile();
+        this.file = new File( file.getName() );
+    }
+    
     public File getFile()
     {
         return resolveFile(this.file);

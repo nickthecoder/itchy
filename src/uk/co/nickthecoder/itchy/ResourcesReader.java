@@ -6,6 +6,7 @@
 package uk.co.nickthecoder.itchy;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.util.Iterator;
@@ -30,6 +31,11 @@ public class ResourcesReader
 {
     private final Resources resources;
 
+    /**
+     * true if the resources being read are included from another file.
+     */
+    public boolean included;
+
     public ResourcesReader( Resources resources )
     {
         this.resources = resources;
@@ -41,6 +47,7 @@ public class ResourcesReader
             filename)));
         try {
             XMLTag document = XMLTag.openDocument(reader);
+            this.resources.setFile(new File(filename));
             this.readResources(document.getTag("resources"));
 
         } finally {
@@ -50,6 +57,10 @@ public class ResourcesReader
 
     private void readResources( XMLTag resourcesTag ) throws Exception
     {
+//        for (Iterator<XMLTag> i = resourcesTag.getTags("include"); i.hasNext();) {
+//            XMLTag includeTag = i.next();
+//            this.readInclude(includeTag);
+//        }
         for (Iterator<XMLTag> i = resourcesTag.getTags("fonts"); i.hasNext();) {
             XMLTag fontsTag = i.next();
             this.readFonts(fontsTag);
@@ -79,6 +90,19 @@ public class ResourcesReader
             this.readScenes(scenesTag);
         }
     }
+
+//    private void readInclude( XMLTag includeTag ) throws Exception
+//    {
+//        String filename = includeTag.getAttribute("filename");
+//        ResourcesReader reader = new ResourcesReader(this.resources);
+//        reader.included = true;
+//        try {
+//            reader.load(this.resources.resolveFilename(filename));
+//        } catch (Exception e) {
+//            throw new XMLException("Failed to load included resource " + filename + " : " +
+//                e.getMessage());
+//        }
+//    }
 
     private void readNinePatches( XMLTag eightPatchesTag ) throws Exception
     {

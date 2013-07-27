@@ -1,5 +1,14 @@
 <resources>
- 
+
+    <fonts>
+        <font name="regular" filename="fonts/DejaVu/DejaVuSans.ttf"/>
+        <font name="bold" filename="fonts/DejaVu/DejaVuSans-Bold.ttf"/>
+    </fonts>
+    
+    <poses>
+        <pose name="checked" filename="checked.png"/>                
+    </poses>
+     
     <ninePatches>
         <ninePatch name="background" filename="background.png" top="0" right="0" left="0" bottom="0" />
 
@@ -41,24 +50,7 @@
 
         <ninePatch name="scrollerV" filename="scrollerV.png" top="14" right="5" bottom="14" left="5"  middle="fill" />                
 
-        <ninePatch name="checkers" filename="checkers.png" top="0" right="0" bottom="0" left="0"  middle="fill" />                
-        <ninePatch name="highlight" filename="highlight.png" top="2" right="2" bottom="2" left="2"  middle="fill" />                
-        <ninePatch name="pageBorder" filename="pageBorder.png" top="2" right="2" bottom="2" left="2"  middle="fill" />                
-
     </ninePatches>
-    
-    <poses>
-        <pose name="buttonUp" filename="up.png" />                
-        <pose name="buttonDelete" filename="delete.png" />                
-        <pose name="checked" filename="checked.png"/>                
-        <pose name="scaleHandle" filename="scaleHandle.png"/>                
-        <pose name="rotateHandle" filename="rotateHandle.png" offsetX="6"/>                
-    </poses>
-    
-    <fonts>
-        <font name="regular" filename="fonts/DejaVu/DejaVuSans.ttf"/>
-        <font name="bold" filename="fonts/DejaVu/DejaVuSans-Bold.ttf"/>
-    </fonts>
 
 </resources>
  

@@ -53,6 +53,13 @@ public class Rules extends Loadable
         this.rules.add(rule);
     }
 
+    public void merge( Rules other )
+    {
+        for ( Rule rule : other.rules ) {
+            this.addRule( rule );
+        }
+    }
+    
     @Override
     protected void actualSave( File file ) throws Exception
     {

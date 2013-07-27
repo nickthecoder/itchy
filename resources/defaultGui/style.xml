@@ -84,16 +84,5 @@
     <rule criteria=".panel * .panel" background="panel2"/>
     <rule criteria=".panel * .panel * .panel" background="panel1"/>
     <rule criteria=".panel * .panel * .panel * .panel" background="panel2"/>
-    
-    <rule criteria=".animationIndent" spacing="6" marginLeft="20" />
-    <rule criteria=".animationTree" spacing="10" paddingRight="25" />
-    
-    <rule criteria=".checkered" background="checkers"/>
-    <rule criteria=".pickGrid" spacing="10"/>
-    <rule criteria=".pickGrid * button" width="80" height="60"/>
-    <rule criteria=".pickGrid * label" maximumWidth="80"/>
-    
-    <rule criteria=".costumes" padding="0" spacing="2"/>
-    <rule criteria=".costumes button" width="60" height="60" padding="0"/>
-    
+            
 </rules>
