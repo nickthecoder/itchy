@@ -210,7 +210,7 @@ public class CostumesEditor extends SubEditor
         TableModelColumn nameColumn = new TableModelColumn("Resource", 2, 200);
         nameColumn.rowComparator = new SingleColumnRowComparator<String>(0);
 
-        TableModelColumn previewColumn = new TableModelColumn("", 3, 100) {
+        TableModelColumn previewColumn = new TableModelColumn("", 3, 140) {
             public void addPlainCell( Container container, final TableModelRow row )
             {
                 final Object data = row.getData(3);

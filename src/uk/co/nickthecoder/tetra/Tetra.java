@@ -111,7 +111,7 @@ public class Tetra extends Game
     boolean playing = false;
 
     String sceneName;
-    
+
     /**
      * A countdown timer, which regulates the speed of the game. The speed is changed in setLevel,
      * which is increased by one for each ten lines removed.
@@ -159,7 +159,7 @@ public class Tetra extends Game
 
     public void startScene( String name )
     {
-        sceneName = name;
+        this.sceneName = name;
         try {
             Scene scene = this.resources.getScene(name);
             scene.create(this.mainLayer, false);
@@ -234,8 +234,8 @@ public class Tetra extends Game
         if ((ke.symbol >= Keys.KEY_0) && (ke.symbol <= Keys.KEY_9)) {
             chooseLevel(ke.symbol - Keys.KEY_0);
         }
-        
-        if ((ke.symbol == Keys.ESCAPE) && (sceneName.equals("main"))) {
+
+        if ((ke.symbol == Keys.ESCAPE) && (this.sceneName.equals("main"))) {
             gameOver();
             this.resources.getSound("shatter").play();
             for (int x = 1; x <= WIDTH; x++) {
@@ -260,7 +260,7 @@ public class Tetra extends Game
             }
         } else {
             if (this.piece != null) {
-                if (ke.symbol == Keys.DOWN) {
+                if ((ke.symbol == Keys.DOWN) || (ke.symbol == Keys.SPACE)) {
                     this.piece.drop();
                 }
                 if (ke.symbol == Keys.UP) {
@@ -382,7 +382,7 @@ public class Tetra extends Game
             .forwards()
             .speed(1, 3)
             .fade(3)
-            //.spin(-0.2, 0.2)
+            // .spin(-0.2, 0.2)
             .createActor("fragment").activate();
 
         actor.kill();

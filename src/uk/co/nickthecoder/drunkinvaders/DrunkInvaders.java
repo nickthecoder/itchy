@@ -306,12 +306,6 @@ public class DrunkInvaders extends Game
         this.startScene("level" + df.format(this.levelNumber));
     }
 
-    @Override
-    public String getIconFilename()
-    {
-        return "resources/drunkInvaders/icon.bmp";
-    }
-
     public void debug()
     {
         this.neighbourhood.debug();

@@ -42,5 +42,5 @@ public class Window extends GuiPose
         this.setPosition(0, 0, this.getRequiredWidth(), this.getRequiredHeight());
         super.ensureLayedOut();
     }
-
+    
 }

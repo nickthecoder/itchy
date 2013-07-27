@@ -94,6 +94,14 @@ public class Container extends Component
         this.forceLayout();
     }
 
+    public void setPosition( int x, int y, int width, int height )
+    {
+        if ((width != this.width) || (height != this.height)) {
+            this.forceLayout();
+        }
+        super.setPosition( x, y, width, height );
+    }
+    
     public void setPaddingTop( int value )
     {
         if (this.paddingTop != value) {

@@ -2,82 +2,98 @@
    
     <resources filename="resources.xml"/>
    
-    <rule criteria="label" font="vera" fontSize="14" margins="0" color="#000" />
+    <rule criteria="label" font="regular" fontSize="14" color="#c6c1b8" />
        
-    <rule criteria="titleBar" background="titleBar" paddingTop="10" paddingBottom="10" paddingLeft="20" paddingRight="20" />
-    <rule criteria="titleBar *" color="#fff" /> 
-    <rule criteria="clientArea" background="clientArea" paddingTop="20" paddingBottom="20" paddingLeft="20" paddingRight="20" spacing="10"/>
+    <rule criteria="titleBar" background="titleBar" paddingTop="16" paddingBottom="6" paddingLeft="20" paddingRight="20" />
+    <rule criteria=".focus * titleBar" background="titleBar-focus" />
+    <rule criteria="titleBar *" color="#c6c1b8" font="bold" fontSize="16" /> 
+    <rule criteria="clientArea" background="clientArea" padding="20" spacing="10"/>
+    <rule criteria=".focus * clientArea" background="clientArea-focus" />
     <rule criteria="clientArea.vScrolled" paddingRight="0" />
-    
-    <rule criteria="button" background="button" color="#000" paddingTop="4" paddingBottom="4" paddingLeft="10" paddingRight="10" />
-    <rule criteria="button.plain" background="" paddingLeft="4" paddingRight="4" />
+
+    <rule criteria="button" background="button" padding="10" minimumWidth="80" />
     <rule criteria="button.focus" background="button-focus" />
     <rule criteria="button.down" background="button-down" />
     <rule criteria="button.selected" background="button-down" />
+    <rule criteria="button.plain" background="" padding="4" minimumWidth="0"/>
+    <rule criteria="button label" font="bold" color="#c6c1b8" />
     
-    <rule criteria="pickerButton" background="button" color="#000" paddingTop="4" paddingBottom="4" paddingLeft="10" paddingRight="10" />
-    <rule criteria="pickerButton.focus" background="button-focus" />
-    <rule criteria="pickerButton.down" background="button-down" />
+    <rule criteria=".toolbar" background="panel1" />
+    <rule criteria=".toolbar button" background="button-naked" minimumWidth="0" marginLeft="-1" marginRight="-1"/>
+    <rule criteria=".toolbar button.focus" background="button-naked-focus"/>
+    <rule criteria=".toolbar button.selected" background="button-naked-selected"/>
+    <rule criteria=".toolbar button.down" background="button-naked-down"/>
     
-    <rule criteria="notebook" spacing="-2" />
-    <rule criteria="notebookPages" background="panel" padding="10" />
-    <rule criteria="notebookTabs" marginLeft="20" spacing="1"/>
-    <rule criteria="tab" background="tab" paddingTop="6" paddingBottom="6" paddingLeft="12" paddingRight="12" />
-    <rule criteria="tab.down" background="tab-down" />
-    <rule criteria="tab.focus" background="tab-focus" />
-    <rule criteria="tab.selected" background="tab-selected" />
-    
-    <rule criteria="tab *" color="#333" />
-    <rule criteria="tab.selected *" color="#000" /> 
+    <rule criteria="notebook" />
+    <rule criteria="notebookPages" />
+    <rule criteria="notebookTabs" spacing="-2" padding="2" marginBottom="5" background="panel1"/>
+    <rule criteria="tab" background="button-naked" padding="10" margin="0"/>
+    <rule criteria="tab.selected" background="button-naked-selected"/>
+    <rule criteria="tab.focus" background="button-naked-focus" />
+    <rule criteria="tab.down" background="button-naked-down" />
+    <rule criteria="tab *" font="bold" color="#a39b8c" />
+    <rule criteria="tab.selected *" color="#c6c1b8" />
 
-    <rule criteria="tableHeadings" background="tableHeadings" paddingLeft="1" paddingRight="1" />
-    <rule criteria="tableData" background="tableData" paddingLeft="1" paddingRight="1" paddingBottom="9" paddingTop="0" />
-    <rule criteria="tableRow.even" background="even"/>
-    <rule criteria="tableRow.selected" background="selected"/>
-    <rule criteria=".focus * tableRow.selected" background="focus"/>
-    <rule criteria=".cell" marginTop="6" marginRight="6" marginBottom="6" marginLeft="6" />
-    <rule criteria=".heading" marginTop="8" marginBottom="8" background="" />
-    
-    <rule criteria="textBox" background="text" padding="4" />
-    <rule criteria="textBox.focus" background="text-focus" />
+    <rule criteria="table" background="panel1" padding="5" paddingBottom="10"/>
+    <rule criteria="tableHeadings" background="tableHeadings"/>
+    <rule criteria="tableData" />
+    <rule criteria="tableRow" background="row" />
+    <rule criteria="tableRow.selected" background="row-selected"/>
+    <rule criteria=".focus * tableRow.selected" background="row-focus" />
+    <rule criteria=".focus * tableRow.selected * label" color="#211b12" />
+    <rule criteria=".cell" marginTop="4" marginRight="6" marginBottom="4" marginLeft="6" />
+    <rule criteria=".heading" margin="6" font="bold" minimumWidth="0" background="" padding="0"/>
+    <rule criteria=".heading label" />
+    <rule criteria="tableRow * button" padding="8" margin="0" minimumWidth="0" />
+
+    <rule criteria="textBox" background="text" padding="10" />
+    <rule criteria="textBox.focus" background="text-focus"/>
+    <rule criteria="textBox.focus label" color="#eac328"/>
     <rule criteria="textBox.error" background="text-error" />
+    <rule criteria="textBox.error label"  color="#000" />
     <rule criteria="comboBox.error textBox" background="text-error" />
-    <rule criteria="caret" background="caret" marginLeft="-6" paddingTop="-6" paddingBottom="-6" paddingLeft="12" />
+    <rule criteria="comboBox.error textBox label" color="#000" />
+    <rule criteria="caret" background="caret" marginLeft="-6" paddingTop="-10" paddingBottom="-10" paddingLeft="12" />
 
-    <rule criteria="scrollbar" paddingLeft="4" paddingRight="4" />
-    <rule criteria="scroller" background="scroller" width="16" />
+    <rule criteria="scrollbar.v" background="panel1" padding="0"/>
+    <rule criteria="scroller.v" background="scrollerV" width="14" />
 
-    <rule criteria="clientArea.vScrolled vScroll" paddingRight="36" />
-    <rule criteria="clientArea vScroll scrollbar" marginRight="-28" />
+    <rule criteria="checkbox" background="checkbox" width="25" height="25"/>
+    <rule criteria="checkbox image" image="checked" marginLeft="4" marginTop="6"/>
 
-    <rule criteria="checkbox" background="button"/>
-    <rule criteria="checkbox image" image="checked" margin="6"/>
-
-    <rule criteria="root.popup" background="shade" />
     <rule criteria="root.editor" background="background" paddingTop="10" paddingBottom="0" paddingLeft="10" paddingRight="10"/>
     
     <rule criteria=".form" spacing="10" />
     <rule criteria=".buttonBar" spacing="10" marginTop="10" marginBottom="10"/>
     <rule criteria=".error" color="#ff0000" />
     <rule criteria=".hint" color="#228822" marginLeft="10" />
-    <rule criteria=".panel" background="panel" padding="10" />
+    
+    
+    <rule criteria=".combo" background="combo" padding="1" spacing="-3"/>
+    <rule criteria=".combo textBox" background="text-naked"/>
+    <rule criteria=".combo textBox.focus" background="text-naked-focus"/>
+    <rule criteria=".combo textBox.focus" background="text-naked-focus"/>
+    <rule criteria=".combo textBox.error" background="text-naked-error"/>
+    <rule criteria=".combo button" background="button-naked" minimumWidth="0"/>
+    <rule criteria=".combo button.focus" background="button-focus"/>
+    <rule criteria=".combo button.down" background="button-naked-down"/>
+    <rule criteria=".combo button.selected" background="button-naked-selected"/>
+    
+    
+    <rule criteria=".panel" background="panel1" padding="10" />
+    <rule criteria=".panel * .panel" background="panel2"/>
+    <rule criteria=".panel * .panel * .panel" background="panel1"/>
+    <rule criteria=".panel * .panel * .panel * .panel" background="panel2"/>
     
     <rule criteria=".animationIndent" spacing="6" marginLeft="20" />
     <rule criteria=".animationTree" spacing="10" paddingRight="25" />
     
     <rule criteria=".checkered" background="checkers"/>
-    <rule criteria=".pickGrid" spacing="16"/>
-    <rule criteria=".pickGrid * button" width="100" height="80"/>
+    <rule criteria=".pickGrid" spacing="10"/>
+    <rule criteria=".pickGrid * button" width="80" height="60"/>
+    <rule criteria=".pickGrid * label" maximumWidth="80"/>
     
-    <rule criteria=".main" background="focus" />
     <rule criteria=".costumes" padding="0" spacing="2"/>
     <rule criteria=".costumes button" width="60" height="60" padding="0"/>
-    
-    
-    <rule criteria=".semi * notebookPages" background="panel-semi" />
-    <rule criteria=".semi * tab" background="tab-semi" />
-    <rule criteria=".semi * tab.down" background="tab-down-semi" />
-    <rule criteria=".semi * tab.focus" background="tab-focus-semi" />   
-    <rule criteria=".semi * tab.selected" background="tab-selected" />
     
 </rules>

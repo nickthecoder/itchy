@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.Pose;
 import uk.co.nickthecoder.itchy.Renderable;
 import uk.co.nickthecoder.itchy.util.XMLException;

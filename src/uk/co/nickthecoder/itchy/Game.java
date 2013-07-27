@@ -308,7 +308,7 @@ public abstract class Game extends Task implements EventListener, MessageListene
 
     public String getIconFilename()
     {
-        return "icon.bmp";
+        return this.resources.resolveFilename("icon.bmp");
     }
 
     @Override
@@ -420,6 +420,7 @@ public abstract class Game extends Task implements EventListener, MessageListene
         if (window.modal) {
             this.setModalListener(window);
         }
+        window.focus();
         this.addEventListener(window);
 
     }

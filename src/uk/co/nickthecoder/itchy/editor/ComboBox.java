@@ -29,6 +29,7 @@ public class ComboBox extends Container
     {
         super();
         this.type="comboBox";
+        this.addStyle("combo");
         this.name = new TextBox(defaultValue);
         this.map = new HashMap<String, String>();
         for (String value : values) {

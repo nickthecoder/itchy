@@ -14,8 +14,6 @@ import java.util.List;
 import uk.co.nickthecoder.itchy.FontResource;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.gui.AbstractTableListener;
-import uk.co.nickthecoder.itchy.gui.ActionListener;
-import uk.co.nickthecoder.itchy.gui.Button;
 import uk.co.nickthecoder.itchy.gui.Container;
 import uk.co.nickthecoder.itchy.gui.FileOpenDialog;
 import uk.co.nickthecoder.itchy.gui.GridLayout;
@@ -36,7 +34,7 @@ public class FontsEditor extends SubEditor
 
     private TextBox txtName;
 
-    private TextBox txtFilename;
+    private FilenameComponent txtFilename;
 
     private FontResource currentFontResource;
 
@@ -108,20 +106,8 @@ public class FontsEditor extends SubEditor
         this.txtName = new TextBox(this.currentFontResource.getName());
         grid.addRow(new Label("Name"), this.txtName);
 
-        Container filenameContainer = new Container();
-        this.txtFilename = new TextBox(this.currentFontResource.filename);
-        filenameContainer.addChild(this.txtFilename);
-
-        Button rename = new Button("Rename");
-        rename.addActionListener(new ActionListener() {
-            @Override
-            public void action()
-            {
-                FontsEditor.this.onRename();
-            }
-        });
-        filenameContainer.addChild(rename);
-        grid.addRow(new Label("Filename"), filenameContainer);
+        this.txtFilename = new FilenameComponent(this.editor.resources, this.currentFontResource.filename);
+        grid.addRow(new Label("Filename"), this.txtFilename);
 
     }
 

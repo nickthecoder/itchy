@@ -1,9 +1,7 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0 which accompanies this
+ * distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.editor;
 
@@ -139,7 +137,7 @@ public abstract class SubEditor
 
         if (component.getRequiredHeight() > maxHeight) {
             VerticalScroll vs = new VerticalScroll(result);
-            vs.setClientHeight(maxHeight);
+            vs.setNaturalHeight(maxHeight);
             result = vs;
         }
 
@@ -153,7 +151,7 @@ public abstract class SubEditor
             return;
         }
         ReflectionTableModelRow<?> row = (ReflectionTableModelRow<?>) this.table
-                .getCurrentTableModelRow();
+            .getCurrentTableModelRow();
 
         this.showDetails(row.getData());
     }
@@ -165,7 +163,7 @@ public abstract class SubEditor
             return;
         }
         ReflectionTableModelRow<?> row = (ReflectionTableModelRow<?>) this.table
-                .getCurrentTableModelRow();
+            .getCurrentTableModelRow();
 
         this.remove(row.getData());
     }

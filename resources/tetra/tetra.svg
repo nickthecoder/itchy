@@ -15,7 +15,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.3.1 r9886"
-   sodipodi:docname="tetris.svg">
+   sodipodi:docname="tetra.svg">
   <defs
      id="defs4">
     <filter
@@ -870,9 +870,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.7"
-     inkscape:cx="803.36562"
-     inkscape:cy="321.96652"
+     inkscape:zoom="0.49497475"
+     inkscape:cx="946.80728"
+     inkscape:cy="499.75337"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -1062,7 +1062,8 @@
        id="g3140"
        inkscape:export-filename="/media/home/nick/projects/itchy/resources/tetra/button.png"
        inkscape:export-xdpi="45.351574"
-       inkscape:export-ydpi="45.351574">
+       inkscape:export-ydpi="45.351574"
+       transform="translate(60,-200)">
       <use
          height="1052.3622"
          width="744.09448"
@@ -1096,5 +1097,18 @@
          width="744.09448"
          height="1052.3622" />
     </g>
+    <rect
+       transform="matrix(0.66666667,0,0,0.66666667,280,137.45406)"
+       style="fill:#8a8a6c;fill-opacity:1;stroke:none;filter:url(#filter4313)"
+       id="rect3137"
+       width="60"
+       height="59.999996"
+       x="600"
+       y="412.36218"
+       rx="1.0921937"
+       ry="0.89607495"
+       inkscape:export-filename="/media/home/nick/projects/itchy/resources/tetra/icon.png"
+       inkscape:export-xdpi="63.529999"
+       inkscape:export-ydpi="63.529999" />
   </g>
 </svg>

@@ -105,6 +105,15 @@ public abstract class Component implements Focusable
         return this.styles;
     }
 
+    public void addStyle( String style, boolean test)
+    {
+        if ( test) {
+            this.addStyle(style);
+        } else {
+            this.removeStyle(style);
+        }
+    }
+
     public void addStyle( String style )
     {
         if (!this.styles.contains(style)) {
@@ -120,7 +129,7 @@ public abstract class Component implements Focusable
             this.reStyle();
         }
     }
-
+    
     public void reStyle()
     {
         try {
@@ -593,7 +602,8 @@ public abstract class Component implements Focusable
     @Override
     public String toString()
     {
-        return this.getClass().getName() + " Type: " + this.type + " Styles: " + this.styles;
+        return this.getClass().getName() + " Type: " + this.type + " Styles: " + this.styles
+            + " (" + this.x + "," + this.y + ") - (" + this.width + "," + this.height + ")";
     }
 
 }

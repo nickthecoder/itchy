@@ -200,8 +200,16 @@ public class GridLayout implements Layout
             int x = container.getPaddingLeft();
 
             int maxHeight = 0;
-            int i = 0;
             for (Component component : row) {
+                int height = component.getRequiredHeight() + component.getMarginTop() + component.getMarginBottom();
+                if ( height > maxHeight) {
+                    maxHeight = height;
+                }
+            }
+        
+            int i = 0;
+            for (Component component : row
+                ) {
                 int height = component.getRequiredHeight();
                 int width = component.getRequiredWidth();
 
@@ -209,9 +217,8 @@ public class GridLayout implements Layout
                 if (heightInc > maxHeight) {
                     maxHeight = heightInc;
                 }
-
-                component.setPosition(x + component.getMarginLeft(), y + component.getMarginTop(),
-                        width, height);
+                int centerY = maxHeight - (component.getRequiredHeight() + component.getMarginTop() + component.getMarginBottom());
+                component.setPosition(x + component.getMarginLeft(), y + centerY / 2, width, height);
 
                 x += component.getMarginLeft() + widths[i] + component.getMarginRight() +
                         container.getSpacing();

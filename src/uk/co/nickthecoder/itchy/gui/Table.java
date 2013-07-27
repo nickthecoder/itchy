@@ -39,6 +39,8 @@ public class Table extends Container
 
     public Table( TableModel model, List<TableModelColumn> columns )
     {
+        this.setType("table");
+        
         this.focusable = true;
 
         this.model = model;

@@ -31,7 +31,7 @@ public class FileOpenDialog extends Window
         this.clientArea.setFill(true, true);
 
         this.ancestors = new Container();
-        this.ancestors.addStyle("buttonBar");
+        this.ancestors.addStyle("combo");
         this.clientArea.addChild(this.ancestors);
 
         List<TableModelColumn> columns = new ArrayList<TableModelColumn>();
@@ -91,7 +91,16 @@ public class FileOpenDialog extends Window
         super(title);
     }
 
+
     public void setDirectory( File directory )
+    {
+        setAncestorDirectory( directory );
+        
+        this.ancestors.clear();
+        this.addAncestor(directory, true);
+    }
+    
+    public void setAncestorDirectory( File directory )
     {
         this.directory = directory;
         this.tableModel.clear();
@@ -112,23 +121,29 @@ public class FileOpenDialog extends Window
 
         this.table.reset();
 
-        this.ancestors.clear();
-        this.addAncestor(directory);
     }
 
-    private void addAncestor( final File directory )
+    private void addAncestor( final File directory, boolean selected )
     {
         if (directory.getParentFile() != null) {
-            this.addAncestor(directory.getParentFile());
+            this.addAncestor(directory.getParentFile(), false);
         }
-        Button button = new Button(directory.getName());
+        final Button button = new Button(directory.getName());
         button.addActionListener(new ActionListener() {
             @Override
             public void action()
             {
-                FileOpenDialog.this.setDirectory(directory);
+                FileOpenDialog.this.setAncestorDirectory(directory);
+                for ( Component other : button.getParent().getChildren()) {
+                   other.removeStyle("selected");
+                }
+                button.addStyle("selected");
             }
         });
+        if ( selected ) {
+            button.addStyle("selected");
+        }
+        
         this.ancestors.addChild(button);
     }
 

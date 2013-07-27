@@ -65,8 +65,10 @@ public class SoundsEditor extends SubEditor
             @Override
             public Component createCell( final TableModelRow row )
             {
-                Button result = new Button("Play");
-                result.addActionListener(new ActionListener() {
+                Container container = new Container();
+                
+                Button button = new Button("Play");
+                button.addActionListener(new ActionListener() {
                     @Override
                     public void action()
                     {
@@ -74,7 +76,8 @@ public class SoundsEditor extends SubEditor
                         ((SoundResource) rrow.getData()).getSound().play();
                     };
                 });
-                return result;
+                container.addChild(button);
+                return container;
 
             }
         };

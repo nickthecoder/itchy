@@ -30,6 +30,7 @@ import uk.co.nickthecoder.itchy.extras.Follower;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Button;
 import uk.co.nickthecoder.itchy.gui.ButtonGroup;
+import uk.co.nickthecoder.itchy.gui.CheckBox;
 import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.Container;
@@ -277,8 +278,6 @@ public class SceneDesigner implements MouseListener, KeyListener
         costumesScroll.setExpansion(1);
         costumesScroll.setFill(true, true);
 
-        costumesScroll.setClientHeight(700);
-
         this.toolboxPose.addChild(this.toolboxNotebook);
     }
 
@@ -504,25 +503,19 @@ public class SceneDesigner implements MouseListener, KeyListener
 
         List<TableModelColumn> columns = new ArrayList<TableModelColumn>(1);
 
-        TableModelColumn showHideColumn = new TableModelColumn("", 0, 70) {
+        TableModelColumn showHideColumn = new TableModelColumn("Show", 0, 70) {
             public void addPlainCell( Container container, final TableModelRow row )
             {
                 final Layer layer = (Layer) row.getData(0);
-                final Button button = new Button("Hide");
-                button.addActionListener(new ActionListener() {
+                final CheckBox hideShow = new CheckBox(layer.isVisible());
+                hideShow.addChangeListener(new ComponentChangeListener() {
                     @Override
-                    public void action()
+                    public void changed()
                     {
-                        if (layer.isVisible()) {
-                            layer.setVisible(false);
-                            ((Label) button.getChildren().get(0)).setText("Show");
-                        } else {
-                            layer.setVisible(true);
-                            ((Label) button.getChildren().get(0)).setText("Hide");
-                        }
+                        layer.setVisible(hideShow.getValue());
                     }
                 });
-                container.addChild(button);
+                container.addChild(hideShow);
             }
 
             @Override

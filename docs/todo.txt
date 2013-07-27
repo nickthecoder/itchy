@@ -8,25 +8,59 @@ Jame is out of date, need to rebuild for win32 and i386 and ARM??
 What's Next
 ===========
 
+Complete GUI styles
+    The scroller can look like the butterscotch one (not the scrollbar part).
+    The animation's close button should look like the butterscotch one.
+        Use existing button, just don't change margin/padding??
+    Open... dialog needs work - button put into a combo
+
+BUG :
+    Popup windows don't take focus away from buttons, table rows etc. So you can activate them by hitting enter.
+    
+BUG :
+    "Rename" button is not obvious, or doesn't work.
+    Make the text be in error state, when the file doesn't exist. Rename will clear the error.
+    
+Follower/Leader behaviours
+    A giant space invader is composed of many follower squares, as each square is hit, it informs its
+    leader. When all are dead the leader dies too. If the leader dies before its followers, the followers
+    are also killed.
+        One of the squares is the follower, and if this is shot, then all of the followers become regular
+            invaders.
+        Each square is itself bouncy, and is held in it place by a pretend spring to its leader.
+    
+Shaded text
+    A ShadedText behaviour automatically creates a follower with the same text, behind itself,
+    offset as needed.
+    Should I institute ActorListeners, which are informed whenever an actor moves, changes appearance
+    in any way... If so, the shadow could use this, rather then checking it leader every tick.
+        Make each a Task, not only will that be good if the listener decides to sleep, but
+        it also means that multiple changes can be combined into a single call, by having a "dirty"
+        flag on actor, which is cleared just before the listener task is run.
+        Could make the dirty flag be a set of flags ORed together. e.g. position, direction, scale, alpha, pose...
+    
+    If not, the followers should be have a "followerUpdate" method, rather than their tick, because
+    otherwise, their tick may happen before the leaders, and they will be 1 frame out of sync.
+    
+Other special effects
+    Blur
+        Generic matrix processing, so simple edge detection is possible.
+    Shear (useful for text shadows)
+    Grey - converts the RGB to grey scale - useful for creating shadows of images.
+    Scale X & Y independently - including -ve values - Useful for reflections.
+
 Choose appropriate defaults for each type of ship and ball, door etc.
    Only if moving slowly.
+
+Picker to have a cancel button
+
+Much of costume editor doesn't work yet!
 
 Use annotations to set initial tags :
     @Tagged("deadly") @Tagged("bouncy") class Alien {...)
 
 Try it on a RaspPi
     Need to compile Jame for the ARM processor!
-
-Allow calculated values inside animations?
-    Use the Property tag and GProperty types to define the properties
-
-Properties to have a default value.
-    Scene designer has a "default" button for each behaviour's property
-        Uses the property's default value, which is overriden if there is a string value in the costume.
-
-Picker to have a cancel button
-
-Much of costume editor doesn't work yet!
 
 Scenery Editor
 
@@ -85,12 +119,23 @@ Loading sounds doesn't always fail when not a sound file - bug in Jame?
 
 Scrollbar positioned to the right of the client, i.e. like horizontal layout.
   If tables want it inside, then *they* can do the minus margins tricks.
+  The table row should leave extra space for the scrollbar.
+  
+Scrollbars aren't the right size - even when there is nothing to scroll they still appear.
   
 Costumes are updated even when cancel is pressed (need to COPY the costume?)
 
   
 Later Features
 ==============
+
+
+Allow calculated values inside animations?
+    Use the Property tag and GProperty types to define the properties
+
+Properties to have a default value.
+    Scene designer has a "default" button for each behaviour's property
+        Uses the property's default value, which is overriden if there is a string value in the costume.
 
 Hook it up with GitHub!
     Game designers can exchange games via github
@@ -165,8 +210,8 @@ Other Thoughts
 
 Consider how to implement Asteriods' dougnut shaped universe. Is there a better solution than every
 behaviour enforcing the loops in the coordinate systems, or could all Actors be coerced to do it automatically?
-Documentation - javadocs and class diagrams
 
+Documentation - javadocs and class diagrams
 
 Create special styles "firstChild", which are automagically available, but never set (they are evaluated).
   Remove the "firstColumn" stuff from Table

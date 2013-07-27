@@ -23,10 +23,12 @@ public class PickerButton<T> extends Button
 
     public PickerButton( String title, T current, HashMap<String, T> hashMap )
     {
+        super();
+        
         this.title = title;
 
         this.hashMap = hashMap;
-        this.type = "pickerButton";
+        this.addStyle("pickerButton");
         this.value = current;
         this.focusable = true;
 

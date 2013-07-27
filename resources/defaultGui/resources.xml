@@ -2,41 +2,44 @@
  
     <ninePatches>
         <ninePatch name="background" filename="background.png" top="0" right="0" left="0" bottom="0" />
-        <ninePatch name="shade" filename="shade.png" top="0" right="0" left="0" bottom="0" middle="fill" />
 
-        <ninePatch name="titleBar" filename="titleBar.png" top="10" right="10" left="10" bottom="10"  middle="fill" />
-        <ninePatch name="clientArea" filename="clientArea.png" top="0" right="12" left="12" bottom="12"  middle="fill"/>
+        <ninePatch name="titleBar" filename="titleBar.png" top="18" right="18" left="18" bottom="0"  middle="tile" />
+        <ninePatch name="titleBar-focus" filename="titleBar-focus.png" top="18" right="18" left="18" bottom="0"  middle="tile" />
+        <ninePatch name="clientArea" filename="clientArea.png" top="0" right="18" left="18" bottom="18"  middle="tile"/>
+        <ninePatch name="clientArea-focus" filename="clientArea-focus.png" top="0" right="18" left="18" bottom="18"  middle="tile"/>
          
-        <ninePatch name="tab" filename="tab.png" top="14" right="8" left="8" bottom="8"  middle="fill" />
-        <ninePatch name="tab-down" filename="tab-down.png" top="8" right="8" left="8" bottom="8"  middle="fill" />
-        <ninePatch name="tab-selected" filename="tab-selected.png" top="8" right="8" left="8" bottom="8"  middle="fill" />
-        <ninePatch name="tab-focus" filename="tab-focus.png" top="8" right="8" left="8" bottom="8"  middle="fill" />
-
-        <ninePatch name="panel" filename="panel.png" top="6" right="6" left="6" bottom="6"  middle="fill" />
-
-        <ninePatch name="tab-semi" filename="tab-semi.png" top="14" right="8" left="8" bottom="8"  middle="fill" />
-        <ninePatch name="tab-down-semi" filename="tab-down-semi.png" top="8" right="8" left="8" bottom="8"  middle="fill" />
-        <ninePatch name="tab-focus-semi" filename="tab-focus-semi.png" top="8" right="8" left="8" bottom="8"  middle="fill" />
-        <ninePatch name="panel-semi" filename="panel-semi.png" top="6" right="6" left="6" bottom="6"  middle="fill" />
+        <ninePatch name="panel1" filename="panel1.png" top="10" right="10" left="10" bottom="10"  middle="tile" />
+        <ninePatch name="panel2" filename="panel2.png" top="10" right="10" left="10" bottom="10"  middle="tile" />
+        <ninePatch name="combo" filename="combo.png" top="10" right="10" left="10" bottom="10"  middle="fill" />
         
-        <ninePatch name="button" filename="button.png" top="8" right="8" left="8" bottom="8"  middle="fill" />
-        <ninePatch name="button-down" filename="button-down.png" top="8" right="8" left="8" bottom="8"  middle="fill" />
-        <ninePatch name="button-focus" filename="button-focus.png" top="8" right="8" left="8" bottom="8"  middle="fill" />
+        <ninePatch name="button" filename="button.png" top="10" right="10" left="10" bottom="10"  middle="fill"/>
+        <ninePatch name="button-down" filename="button-down.png" top="10" right="10" left="10" bottom="10"  middle="fill" />
+        <ninePatch name="button-focus" filename="button-focus.png" top="10" right="10" left="10" bottom="10"  middle="fill" />
+        <ninePatch name="button-selected" filename="button-selected.png" top="10" right="10" left="10" bottom="10"  middle="fill" />
 
+        <ninePatch name="button-naked" filename="button-naked.png" top="12" right="12" left="12" bottom="12"  middle="fill" />
+        <ninePatch name="button-naked-down" filename="button-naked-down.png" top="12" right="12" left="12" bottom="12"  middle="fill" />
+        <ninePatch name="button-naked-focus" filename="button-naked-focus.png" top="12" right="12" left="12" bottom="12"  middle="fill" />
+        <ninePatch name="button-naked-selected" filename="button-naked-selected.png" top="12" right="12" left="12" bottom="12"  middle="fill" />
 
-        <ninePatch name="tableHeadings" filename="tableHeadings.png" top="6" right="6" left="6" bottom="6"  middle="fill" />
+        <ninePatch name="checkbox" filename="checkbox.png" top="12" right="12" left="12" bottom="12"  middle="fill" />
+
+        <ninePatch name="tableHeadings" filename="tableHeadings.png" top="10" right="10" left="10" bottom="10"  middle="tile" />
         <ninePatch name="tableData" filename="tableData.png" top="6" right="6" left="6" bottom="8"  middle="fill" />
-        <ninePatch name="even" filename="even.png" top="0" right="0" left="0" bottom="0"  middle="fill" />
-        <ninePatch name="selected" filename="selected.png" top="0" right="0" left="0" bottom="0" middle="fill" />
-        <ninePatch name="focus" filename="focus.png" top="0" right="0" left="0" bottom="0" middle="fill" />
+        <ninePatch name="row" filename="row.png" top="3" right="3" left="3" bottom="3"  middle="fill" />
+        <ninePatch name="row-focus" filename="row-focus.png" top="3" right="3" left="3" bottom="3" middle="fill" />
+        <ninePatch name="row-selected" filename="row-selected.png" top="3" right="3" left="3" bottom="3" middle="fill" />
         
-        <ninePatch name="text" filename="text.png" top="8" right="8" bottom="8" left="8"  middle="fill" />
-        <ninePatch name="text-focus" filename="text-focus.png" top="8" right="8" bottom="8" left="8"  middle="fill" />
-        <ninePatch name="text-error" filename="text-error.png" top="8" right="8" bottom="8" left="8"  middle="fill" />
+        <ninePatch name="text" filename="text.png" top="18" right="18" bottom="18" left="18"  middle="fill" />
+        <ninePatch name="text-focus" filename="text-focus.png" top="18" right="18" bottom="18" left="18"  middle="fill" />
+        <ninePatch name="text-error" filename="text-error.png" top="18" right="18" bottom="18" left="18"  middle="fill" />
         <ninePatch name="caret" filename="caret.png" top="8" right="0" bottom="8" left="12"  middle="fill" />                
 
-        <ninePatch name="scrollbar" filename="scrollbar.png" top="13" right="1" bottom="13" left="1"  middle="fill" />                
-        <ninePatch name="scroller" filename="scroller.png" top="7" right="5" bottom="7" left="5"  middle="fill" />                
+        <ninePatch name="text-naked" filename="text-naked.png" top="18" right="18" bottom="18" left="18"  middle="fill" />
+        <ninePatch name="text-naked-focus" filename="text-naked-focus.png" top="18" right="18" bottom="18" left="18"  middle="fill" />
+        <ninePatch name="text-naked-error" filename="text-naked-error.png" top="18" right="18" bottom="18" left="18"  middle="fill" />
+
+        <ninePatch name="scrollerV" filename="scrollerV.png" top="14" right="5" bottom="14" left="5"  middle="fill" />                
 
         <ninePatch name="checkers" filename="checkers.png" top="0" right="0" bottom="0" left="0"  middle="fill" />                
         <ninePatch name="highlight" filename="highlight.png" top="2" right="2" bottom="2" left="2"  middle="fill" />                
@@ -53,7 +56,8 @@
     </poses>
     
     <fonts>
-        <font name="vera" filename="fonts/Vera/Vera.ttf"/>
+        <font name="regular" filename="fonts/DejaVu/DejaVuSans.ttf"/>
+        <font name="bold" filename="fonts/DejaVu/DejaVuSans-Bold.ttf"/>
     </fonts>
 
 </resources>

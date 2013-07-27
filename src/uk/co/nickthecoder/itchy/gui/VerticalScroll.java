@@ -1,9 +1,7 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0 which accompanies this
+ * distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.gui;
 
@@ -23,8 +21,6 @@ public class VerticalScroll extends Container implements Layout, Scrollable
 
     private int scroll = 0;
 
-    private int clientHeight = 300;
-
     public VerticalScroll( Component child )
     {
         this.setType("vScroll");
@@ -38,23 +34,14 @@ public class VerticalScroll extends Container implements Layout, Scrollable
         this.scrollbar = new Scrollbar();
         this.addChild(this.scrollbar);
 
+        this.setNaturalHeight(300); // An arbitrary height
         this.setLayout(this);
     }
 
-    public void setClientHeight( int height )
+    @Override
+    public void setNaturalHeight( int height )
     {
-        if (this.clientHeight != height) {
-            this.clientHeight = height;
-            this.forceLayout();
-            if (this.parent != null) {
-                this.parent.forceLayout();
-            }
-        }
-    }
-
-    public int getClientHeight()
-    {
-        return this.clientHeight;
+        super.setNaturalHeight(height);
     }
 
     @Override
@@ -134,8 +121,7 @@ public class VerticalScroll extends Container implements Layout, Scrollable
         }
         this.layout(this);
         this.invalidate();
-        this.scrollbar.update();
-
+        this.scrollbar.forceLayout();
     }
 
     public void scrollBy( int delta )
@@ -147,30 +133,27 @@ public class VerticalScroll extends Container implements Layout, Scrollable
     public void calculateRequirements( Container me )
     {
         int width = this.child.getRequiredWidth() + this.getPaddingLeft() + this.getPaddingRight() +
-                this.child.getMarginLeft() + this.child.getMarginRight();
-        int height = this.clientHeight + this.getPaddingTop() + this.getPaddingBottom();
+            this.child.getMarginLeft() + this.child.getMarginRight();
 
         this.setNaturalWidth(width);
-        this.setNaturalHeight(height);
-
     }
 
     @Override
     public void layout( Container me )
     {
         int width = this.getFillX() ? this.getWidth() - this.getPaddingLeft() -
-                this.getPaddingRight() - this.child.getMarginLeft() - this.child.getMarginRight()
-                : this.child.getRequiredWidth();
+            this.getPaddingRight() - this.child.getMarginLeft() - this.child.getMarginRight()
+            : this.child.getRequiredWidth();
 
         this.child.setPosition(this.getPaddingLeft() + this.child.getMarginLeft(),
-                this.getPaddingTop() + this.child.getMarginTop() - this.scroll, width,
-                this.child.getRequiredHeight());
+            this.getPaddingTop() + this.child.getMarginTop() - this.scroll, width,
+            this.child.getRequiredHeight());
 
         this.scrollbar.setPosition(this.getWidth() - this.scrollbar.getRequiredWidth() -
-                this.scrollbar.getMarginRight() - this.getPaddingRight(), this.getPaddingTop() +
-                this.scrollbar.getMarginTop(), this.scrollbar.getRequiredWidth(), this.getHeight() -
-                this.getPaddingTop() - this.getPaddingBottom() - this.scrollbar.getMarginTop() -
-                this.scrollbar.getMarginBottom());
+            this.scrollbar.getMarginRight() - this.getPaddingRight(), this.getPaddingTop() +
+            this.scrollbar.getMarginTop(), this.scrollbar.getRequiredWidth(), this.getHeight() -
+            this.getPaddingTop() - this.getPaddingBottom() - this.scrollbar.getMarginTop() -
+            this.scrollbar.getMarginBottom());
     }
 
     @Override
@@ -180,8 +163,8 @@ public class VerticalScroll extends Container implements Layout, Scrollable
         this.renderBackground(gc);
 
         Rect rect = new Rect(this.child.getX(), this.child.getY() + this.scroll,
-                this.child.getWidth(), this.getHeight() - this.getPaddingBottom() -
-                        this.getPaddingTop());
+            this.child.getWidth(), this.getHeight() - this.getPaddingBottom() -
+                this.getPaddingTop());
         GraphicsContext childGc = gc.window(rect);
         childGc.scroll(0, this.scroll);
         if (!childGc.empty()) {
@@ -190,7 +173,7 @@ public class VerticalScroll extends Container implements Layout, Scrollable
 
         if (this.scrollbar.isVisible()) {
             rect = new Rect(this.scrollbar.getX(), this.scrollbar.getY(),
-                    this.scrollbar.getWidth(), this.scrollbar.getHeight());
+                this.scrollbar.getWidth(), this.scrollbar.getHeight());
             childGc = gc.window(rect);
             if (!childGc.empty()) {
                 this.scrollbar.render(childGc);
@@ -214,27 +197,31 @@ public class VerticalScroll extends Container implements Layout, Scrollable
             this.scroller.setType("scroller");
             this.addChild(this.scroller);
 
+            this.addStyle("v");
+            this.scroller.addStyle("v");
         }
 
         @Override
         public void calculateRequirements( Container me )
         {
-            this.setNaturalWidth(this.getPaddingLeft() + this.getPaddingRight() +
-                    this.scroller.getRequiredWidth() + this.scroller.getMarginLeft() +
-                    this.scroller.getMarginRight());
-            this.setNaturalHeight(VerticalScroll.this.getHeight() - this.getMarginTop() -
-                    this.getMarginBottom());
+            int height = VerticalScroll.this.getHeight() - this.getMarginTop() -
+                this.getMarginBottom();
+            int width = this.getPaddingLeft() + this.getPaddingRight() +
+                this.scroller.getRequiredWidth() + this.scroller.getMarginLeft() +
+                this.scroller.getMarginRight();
 
-            double maxScroll = VerticalScroll.this.child.getRequiredHeight() -
-                    VerticalScroll.this.getRequiredHeight() - VerticalScroll.this.getPaddingTop() -
-                    VerticalScroll.this.getPaddingBottom();
-            this.setVisible(maxScroll > 0);
+            this.setNaturalWidth(width);
+            this.setNaturalHeight(height);
+
+            if (VerticalScroll.this.getHeight() >= VerticalScroll.this.child.getRequiredHeight()) {
+                setVisible(false);
+            }
         }
 
         public int positionForScroll()
         {
             int visible = VerticalScroll.this.getHeight() - VerticalScroll.this.getPaddingBottom() -
-                    VerticalScroll.this.getPaddingTop();
+                VerticalScroll.this.getPaddingTop();
             int actual = VerticalScroll.this.child.getHeight();
             int barExtent = this.getHeight() - this.scroller.getHeight();
 
@@ -244,7 +231,7 @@ public class VerticalScroll extends Container implements Layout, Scrollable
         public int positionToScroll( int position )
         {
             int visible = VerticalScroll.this.getHeight() - VerticalScroll.this.getPaddingBottom() -
-                    VerticalScroll.this.getPaddingTop();
+                VerticalScroll.this.getPaddingTop();
             int actual = VerticalScroll.this.child.getHeight();
             int barExtent = this.getHeight() - this.scroller.getHeight();
 
@@ -254,29 +241,37 @@ public class VerticalScroll extends Container implements Layout, Scrollable
         @Override
         public void layout( Container me )
         {
-            int visible = 100; // VerticalScroll.this.getRequiredHeight() -
-                               // VerticalScroll.this.getPaddingBottom() -
-                               // VerticalScroll.this.getPaddingTop();
-            int actual = 200; // VerticalScroll.this.child.getRequiredHeight();
+            int scrollBarHeight = Scrollbar.this.getHeight();
+            int clientHeight = VerticalScroll.this.getHeight(); // VerticalScroll.this.clientHeight;
+            int contentHeight = VerticalScroll.this.child.getHeight();
 
-            int height = this.getRequiredHeight() * visible / actual;
+            if (contentHeight <= 0) {
+                setVisible(false);
+                return;
+            }
 
-            this.scroller.setPosition(this.getPaddingLeft() + this.scroller.getMarginLeft(), 0,
-                    this.scroller.getRequiredWidth(), height);
+            float barSize = scrollBarHeight * clientHeight / (float) contentHeight;
+            float scrollerTravel = scrollBarHeight - barSize;
+            float contentTravel = contentHeight - clientHeight;
 
-        }
+            if (contentTravel <= 0) {
+                setVisible(false);
+                return;
+            }
 
-        public void update()
-        {
-            int visible = VerticalScroll.this.getRequiredHeight() -
-                    VerticalScroll.this.getPaddingBottom() - VerticalScroll.this.getPaddingTop();
-            int actual = VerticalScroll.this.child.getRequiredHeight();
+            float scrollerPosition = scrollerTravel * VerticalScroll.this.scroll / contentTravel;
 
-            int height = this.getRequiredHeight() * visible / actual;
+            int width = this.scroller.getRequiredWidth();
+            int height = (int) barSize;
 
-            this.scroller.setPosition(this.getPaddingLeft() + this.scroller.getMarginLeft(),
-                    this.positionForScroll(), this.scroller.getRequiredWidth(), height);
+            this.scroller.height = height;
+            this.scroller.width = width;
 
+            this.scroller.setPosition(
+                this.getPaddingLeft() + this.scroller.getMarginLeft(),
+                (int) scrollerPosition,
+                width,
+                height);
         }
 
         @Override

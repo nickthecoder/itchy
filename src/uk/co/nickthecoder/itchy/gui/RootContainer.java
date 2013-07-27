@@ -86,6 +86,12 @@ public abstract class RootContainer extends Container
         return false;
     }
 
+    @Override
+    public void focus()
+    {
+        this.nextFocus(null, this);
+    }
+
     public void setFocus( Component component )
     {
         Itchy.singleton.getGame().setFocus(component);
@@ -96,6 +102,7 @@ public abstract class RootContainer extends Container
         if (RootContainer.focus != null) {
             RootContainer.focus.hasFocus = false;
             RootContainer.focus.removeStyle("focus");
+            RootContainer.focus.getRoot().removeStyle("focus");
             RootContainer.focus.onFocus(false);
         }
         RootContainer.focus = component;
@@ -103,6 +110,7 @@ public abstract class RootContainer extends Container
         if (RootContainer.focus != null) {
             RootContainer.focus.hasFocus = true;
             RootContainer.focus.addStyle("focus");
+            this.addStyle("focus");
             RootContainer.focus.onFocus(true);
 
             // Ensure that the newly focused component is visible, by scrolling any parent

@@ -154,7 +154,6 @@ public class PosesEditor extends SubEditor
             {
                 Container parent = this.getParent();
                 while (parent != null) {
-                    System.out.println( "Image liniage " + parent );
                     parent = parent.getParent();
                 }
                 PosesEditor.this.txtOffsetX.setValue(e.x);
@@ -167,7 +166,7 @@ public class PosesEditor extends SubEditor
 
         if (pose.getSurface().getHeight() > 130) {
             VerticalScroll scroll = new VerticalScroll(imageContainer);            
-            scroll.setClientHeight(130);
+            scroll.setNaturalHeight(130);
             grid.addRow(new Label("Image"), scroll);
 
         } else {

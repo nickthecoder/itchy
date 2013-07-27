@@ -15,7 +15,9 @@ import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Button;
 import uk.co.nickthecoder.itchy.gui.Container;
 import uk.co.nickthecoder.itchy.gui.FileOpenDialog;
+import uk.co.nickthecoder.itchy.gui.MessageDialog;
 import uk.co.nickthecoder.itchy.gui.TextBox;
+import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 
 public class FilenameComponent extends Container
 {
@@ -25,15 +27,39 @@ public class FilenameComponent extends Container
 
     private FileOpenDialog openDialog;
 
-    private String initialFilename;
+    /**
+     * Used to hold the filename before it was changed, so that the rename button knows what to
+     * rename from.
+     */
+    private String preRename;
 
+    /**
+     * True if the file must exist - the textbox will have the "error" style if this is set, and
+     * the file does not exist.
+     */
+    public boolean mustExist = true;
+    
+    
     public FilenameComponent( Resources resources, String filename )
     {
+        this.type = "filename";
+        this.addStyle( "combo" );
+
         this.resources = resources;
 
         this.textBox = new TextBox(filename);
+        this.textBox.addChangeListener( new ComponentChangeListener() {
+
+            @Override
+            public void changed()
+            {
+                FilenameComponent.this.onChanged();
+            }
+            
+        });
         this.addChild(this.textBox);
 
+        
         Button pick = new Button("...");
         pick.addActionListener(new ActionListener() {
             @Override
@@ -60,7 +86,8 @@ public class FilenameComponent extends Container
     public final void setText( String value )
     {
         this.textBox.setText(value);
-        this.initialFilename = value;
+        this.preRename = value;
+        onChanged();
     }
 
     public String getText()
@@ -81,6 +108,13 @@ public class FilenameComponent extends Container
         Itchy.singleton.getGame().showWindow(this.openDialog);
     }
 
+    public void onChanged()
+    {
+        if (this.mustExist) {
+            this.textBox.addStyle("error", ! resources.fileExists(this.textBox.getText()));
+        }
+    }
+    
     private void onPickFilename( File file )
     {
         if (file == null) {
@@ -94,10 +128,12 @@ public class FilenameComponent extends Container
 
     protected void onRename()
     {
-        // TODO Rename is broken
-        //if (!this.resources.rename(this.initialFilename, this.textBox.getText())) {
-        //    new MessageDialog("Error", "Rename failed").show();
-        //}
+        if (!this.resources.renameFile(this.preRename, this.textBox.getText())) {
+            new MessageDialog("Error", "Rename failed").show();
+        } else {
+            this.preRename = this.textBox.getText();
+            onChanged(); // Re-evaluates the error status
+        }
 
     }
 
