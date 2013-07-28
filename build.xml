@@ -11,7 +11,8 @@
     </path>
 	
     <target name="build">
-        <mkdir dir="../build"/>
+        <mkdir dir="build"/>
+        <mkdir dir="lib"/>
         <javac
             srcdir="src"
             destdir="build"
