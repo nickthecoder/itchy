@@ -1,8 +1,8 @@
 <resources>
   
     <poses>
-        <pose name="buttonUp" filename="up.png" />                
-        <pose name="buttonDelete" filename="delete.png" />                
+        <pose name="up" filename="up.png" />                
+        <pose name="delete" filename="delete.png" />                
         <pose name="scaleHandle" filename="scaleHandle.png"/>                
         <pose name="rotateHandle" filename="rotateHandle.png" offsetX="6"/>                
     </poses>

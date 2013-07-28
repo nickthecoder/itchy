@@ -12,12 +12,14 @@
     <rule criteria="clientArea.vScrolled" paddingRight="0" />
 
     <rule criteria="button" background="button" padding="10" minimumWidth="80" />
+    <rule criteria="button.compact" padding="8" minimumWidth="0"/>
     <rule criteria="button.focus" background="button-focus" />
     <rule criteria="button.down" background="button-down" />
     <rule criteria="button.selected" background="button-down" />
     <rule criteria="button.plain" background="" padding="4" minimumWidth="0"/>
     <rule criteria="button label" font="bold" color="#c6c1b8" />
     
+
     <rule criteria="slider" background="slider" paddingLeft="4" paddingRight="4" width="100" height="40"/>
     <rule criteria="slider .knob" image="sliderKnob" />
     <rule criteria="slider.focus .knob" image="sliderKnob-focus" />
@@ -62,7 +64,7 @@
     <rule criteria="comboBox.error textBox label" color="#000" />
     <rule criteria="caret" background="caret" marginLeft="-6" paddingTop="-10" paddingBottom="-10" paddingLeft="12" />
 
-    <rule criteria="scrollbar.v" background="panel1" padding="0"/>
+    <rule criteria="scrollbar.v" padding="4" marginTop="4" marginBottom="4"/>
     <rule criteria="scroller.v" background="scrollerV" width="14" />
 
     <rule criteria="checkbox" background="checkbox" width="25" height="25"/>

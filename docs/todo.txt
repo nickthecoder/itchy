@@ -8,8 +8,7 @@ Jame is out of date, need to rebuild for win32 and i386 and ARM??
 What's Next
 ===========
 
-    Ensure that the svgs are complete, with the right name, and are in git.
-        
+Create a game which uses the GUI        
     The Rules object needs to be on Game, its probably on Itchy right now.
 
 Complete GUI styles
