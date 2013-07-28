@@ -50,15 +50,18 @@ public class AlphaAnimationEditor extends AnimationEditor
     public boolean save()
     {
         super.save();
-        
-        AlphaAnimation alphaAnimation = (AlphaAnimation) this.animation;
-
-        alphaAnimation.ticks = this.txtTicks.getValue();
-        alphaAnimation.profile = this.pickProfile.getValue();
-
-        alphaAnimation.target = this.txtTarget.getValue();
-
-        return true;
+        try {
+            AlphaAnimation alphaAnimation = (AlphaAnimation) this.animation;
+    
+            alphaAnimation.ticks = this.txtTicks.getValue();
+            alphaAnimation.profile = this.pickProfile.getValue();
+    
+            alphaAnimation.target = this.txtTarget.getValue();
+    
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
 }

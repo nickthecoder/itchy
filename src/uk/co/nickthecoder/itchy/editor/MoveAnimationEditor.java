@@ -53,16 +53,19 @@ public class MoveAnimationEditor extends AnimationEditor
     public boolean save()
     {
         super.save();
-        
-        MoveAnimation moveAnimation = (MoveAnimation) this.animation;
-
-        moveAnimation.ticks = this.txtTicks.getValue();
-        moveAnimation.profile = this.pickProfile.getValue();
-
-        moveAnimation.dx = this.txtDx.getValue();
-        moveAnimation.dy = this.txtDy.getValue();
-
-        return true;
+        try {
+            MoveAnimation moveAnimation = (MoveAnimation) this.animation;
+    
+            moveAnimation.ticks = this.txtTicks.getValue();
+            moveAnimation.profile = this.pickProfile.getValue();
+    
+            moveAnimation.dx = this.txtDx.getValue();
+            moveAnimation.dy = this.txtDy.getValue();
+    
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
 }

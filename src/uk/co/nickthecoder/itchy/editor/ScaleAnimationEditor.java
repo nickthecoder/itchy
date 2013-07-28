@@ -48,14 +48,18 @@ public class ScaleAnimationEditor extends AnimationEditor
     @Override
     public boolean save()
     {
-        ScaleAnimation scaleAnimation = (ScaleAnimation) this.animation;
+        try {
+            ScaleAnimation scaleAnimation = (ScaleAnimation) this.animation;
+            scaleAnimation.ticks = this.txtTicks.getValue();
+            scaleAnimation.profile = this.pickProfile.getValue();
 
-        scaleAnimation.ticks = this.txtTicks.getValue();
-        scaleAnimation.profile = this.pickProfile.getValue();
+            scaleAnimation.target = this.txtTarget.getValue();
 
-        scaleAnimation.target = this.txtTarget.getValue();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
 
-        return true;
     }
 
 }

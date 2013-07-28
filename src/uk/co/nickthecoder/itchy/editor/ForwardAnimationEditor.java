@@ -53,16 +53,19 @@ public class ForwardAnimationEditor extends AnimationEditor
     public boolean save()
     {
         super.save();
-        
-        ForwardsAnimation forwardsAnimation = (ForwardsAnimation) this.animation;
-
-        forwardsAnimation.ticks = this.txtTicks.getValue();
-        forwardsAnimation.profile = this.pickProfile.getValue();
-
-        forwardsAnimation.forwards = this.txtForwards.getValue();
-        forwardsAnimation.sideways = this.txtSidewards.getValue();
-
-        return true;
+        try {
+            ForwardsAnimation forwardsAnimation = (ForwardsAnimation) this.animation;
+    
+            forwardsAnimation.ticks = this.txtTicks.getValue();
+            forwardsAnimation.profile = this.pickProfile.getValue();
+    
+            forwardsAnimation.forwards = this.txtForwards.getValue();
+            forwardsAnimation.sideways = this.txtSidewards.getValue();
+    
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
 }

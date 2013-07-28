@@ -7,6 +7,8 @@
     
     <poses>
         <pose name="checked" filename="checked.png"/>                
+        <pose name="sliderKnob" filename="sliderKnob.png"/>
+        <pose name="sliderKnob-focus" filename="sliderKnob-focus.png"/>
     </poses>
      
     <ninePatches>
@@ -33,6 +35,10 @@
 
         <ninePatch name="checkbox" filename="checkbox.png" top="12" right="12" left="12" bottom="12"  middle="fill" />
 
+        <ninePatch name="slider" filename="slider.png" top="19" right="12" left="12" bottom="1"  middle="fill" />
+        <ninePatch name="swatch" filename="swatch.png" top="5" right="5" left="5" bottom="5"  middle="fill" />
+        <ninePatch name="checkered" filename="checkered.png" top="0" right="0" left="0" bottom="0"  middle="tile" />
+    
         <ninePatch name="tableHeadings" filename="tableHeadings.png" top="10" right="10" left="10" bottom="10"  middle="tile" />
         <ninePatch name="tableData" filename="tableData.png" top="6" right="6" left="6" bottom="8"  middle="fill" />
         <ninePatch name="row" filename="row.png" top="3" right="3" left="3" bottom="3"  middle="fill" />

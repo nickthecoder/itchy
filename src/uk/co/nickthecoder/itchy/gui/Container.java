@@ -72,7 +72,9 @@ public class Container extends Component
 
     public void addChild( Component child )
     {
-        assert (child.parent == null) : "Component already has a parent";
+        if (child.parent != null) {
+            throw new RuntimeException( "Component is already within another Container" );
+        }
         this.children.add(child);
         child.parent = this;
         this.forceLayout();

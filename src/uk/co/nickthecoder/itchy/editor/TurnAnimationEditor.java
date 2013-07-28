@@ -47,15 +47,18 @@ public class TurnAnimationEditor extends AnimationEditor
     public boolean save()
     {
         super.save();
-        
-        TurnAnimation turnAnimation = (TurnAnimation) this.animation;
-
-        turnAnimation.ticks = this.txtTicks.getValue();
-        turnAnimation.profile = this.pickProfile.getValue();
-
-        turnAnimation.turn = this.txtTurn.getValue();
-
-        return true;
+        try {
+            TurnAnimation turnAnimation = (TurnAnimation) this.animation;
+    
+            turnAnimation.ticks = this.txtTicks.getValue();
+            turnAnimation.profile = this.pickProfile.getValue();
+    
+            turnAnimation.turn = this.txtTurn.getValue();
+    
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
 }

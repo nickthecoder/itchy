@@ -18,6 +18,13 @@
     <rule criteria="button.plain" background="" padding="4" minimumWidth="0"/>
     <rule criteria="button label" font="bold" color="#c6c1b8" />
     
+    <rule criteria="slider" background="slider" paddingLeft="4" paddingRight="4" width="100" height="40"/>
+    <rule criteria="slider .knob" image="sliderKnob" />
+    <rule criteria="slider.focus .knob" image="sliderKnob-focus" />
+    
+    <rule criteria="swatch" background="swatch" padding="2"/>
+    <rule criteria="swatch image" background="checkered"/>
+    
     <rule criteria=".toolbar" background="panel1" />
     <rule criteria=".toolbar button" background="button-naked" minimumWidth="0" marginLeft="-1" marginRight="-1"/>
     <rule criteria=".toolbar button.focus" background="button-naked-focus"/>
