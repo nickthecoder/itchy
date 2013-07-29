@@ -8,6 +8,42 @@ Jame is out of date, need to rebuild for win32 and i386 and ARM??
 What's Next
 ===========
 
+touching vs overlapping when dealing with Text vs ImagePose actors
+    Button always uses "contains", but the editor always uses "touching".
+    Should both use contains when dealing with text, but overlapping when dealing with images?
+
+Create a simple parallax scrolling game, so that I can implement and test a parallax scrolling layer!
+    
+    Would like a circular world i.e. the left edge joins the right edge
+    
+    For a scenery only background, those layers could be smaller that the main one, but cyclic.
+    The cycle size for each layer would have to be different
+        Maybe the cycle size is a Property, which is available in the GUI editor
+        And also the factor which determines how much this layer scrolls compared to the main one.
+        
+    As one layer will be scrolled, which will then control the scrolling of the other layers,
+    there needs to be a parent/child relationship, or a listener pattern.
+        Use this on existing layers, so that they stay in sync without the game having to scroll all layers.
+
+    How should the editor handle this?
+        Layers have a createEditorLayer, which normally just creates a copy of itself, but could create something else
+        OR set a "editor" flag, which may cause them to behave differently.
+
+
+    If Thrust had parallax layers, then the collisions would have to be based on the different layer
+    offsets. The neighbourhood system doesn't work either!
+        Maybe the FOREGROUND (non-colliding) layer can use parallax. Nah would look naff.
+       
+    A Simple platform game
+        Sky,cloud, mountains in the background layer
+        Trees, then bushes and flowers just behind main
+        Main Layer, where most, if not all the game stuff happens.
+        Foreground for silly things, such as sign posts, some grass and flowers
+            Simple parallax only works if there isn't anywhere where one layer touches another, such as
+            a tree touching the soil. 
+    
+Use SceneBehaviour in the games.
+
 Create a game which uses the GUI        
     The Rules object needs to be on Game, its probably on Itchy right now.
 

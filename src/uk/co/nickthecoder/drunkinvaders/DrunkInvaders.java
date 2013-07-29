@@ -13,12 +13,10 @@ import uk.co.nickthecoder.itchy.ActorCollisionStrategy;
 import uk.co.nickthecoder.itchy.Game;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.MultiLineTextPose;
-import uk.co.nickthecoder.itchy.Scene;
 import uk.co.nickthecoder.itchy.ScrollableLayer;
 import uk.co.nickthecoder.itchy.animation.AlphaAnimation;
 import uk.co.nickthecoder.itchy.animation.CompoundAnimation;
 import uk.co.nickthecoder.itchy.animation.NumericAnimation;
-import uk.co.nickthecoder.itchy.editor.Editor;
 import uk.co.nickthecoder.itchy.neighbourhood.Neighbourhood;
 import uk.co.nickthecoder.itchy.neighbourhood.NeighbourhoodCollisionStrategy;
 import uk.co.nickthecoder.itchy.neighbourhood.StandardNeighbourhood;
@@ -60,6 +58,7 @@ public class DrunkInvaders extends Game
 
     public boolean fadingOut = false;
 
+    
     public DrunkInvaders() throws Exception
     {
         super("Drunk Invaders", 640, 480);
@@ -254,18 +253,10 @@ public class DrunkInvaders extends Game
             this.mainLayer.clear();
             Itchy.singleton.completeTasks();
             this.fadingOut = false;
-            try {
-                Scene scene = this.resources.getScene(this.sceneName);
-                if (scene == null) {
-                    this.sceneName = "completed";
-                    this.levelNumber = 1;
-                    scene = this.resources.getScene(this.sceneName);
-                }
-                scene.create(DrunkInvaders.this.mainLayer, false);
-                Itchy.showMousePointer(scene.showMouse);
-
-            } catch (Exception e) {
-                throw new RuntimeException(e);
+            if ( ! this.loadScene(this.sceneName, this.mainLayer) ) {
+                this.levelNumber = 1;
+                this.sceneName = "completed";
+                this.loadScene( this.sceneName, this.mainLayer);
             }
 
         }
@@ -311,36 +302,10 @@ public class DrunkInvaders extends Game
         this.neighbourhood.debug();
     }
 
-    private void startEditor()
+    public static void main( String argv[] ) throws Exception
     {
-        try {
-            Editor editor = new Editor(DrunkInvaders.game);
-            editor.start();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        DrunkInvaders.game = new DrunkInvaders();
+        DrunkInvaders.game.runFromMain( argv );
     }
-
-    public static void main( String argv[] )
-    {
-        System.out.println("Welcome to Drunk Invaders");
-
-        try {
-            DrunkInvaders.game = new DrunkInvaders();
-
-            if ((argv.length == 1) && ("--editor".equals(argv[0]))) {
-
-                Editor editor = new Editor(DrunkInvaders.game);
-                editor.start();
-
-            } else {
-                DrunkInvaders.game.start();
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        System.out.println("Goodbye from Drunk Invaders");
-    }
-
+    
 }

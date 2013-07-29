@@ -10,6 +10,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.prefs.Preferences;
 
+import uk.co.nickthecoder.drunkinvaders.DrunkInvaders;
+import uk.co.nickthecoder.itchy.editor.Editor;
 import uk.co.nickthecoder.itchy.gui.GuiPose;
 import uk.co.nickthecoder.itchy.util.AutoFlushPreferences;
 import uk.co.nickthecoder.jame.Rect;
@@ -49,6 +51,9 @@ public abstract class Game extends Task implements EventListener, MessageListene
     private Focusable keyboardFocus;
 
     private final List<GuiPose> windows;
+    
+    private SceneBehaviour currentSceneBehaviour = new NullSceneBehaviour();
+    
 
     public Game( String title, int width, int height ) throws Exception
     {
@@ -326,7 +331,7 @@ public abstract class Game extends Task implements EventListener, MessageListene
     @Override
     public boolean onKeyDown( KeyboardEvent ke )
     {
-        return false;
+        return this.currentSceneBehaviour.onKeyDown(ke);
     }
 
     /**
@@ -337,25 +342,25 @@ public abstract class Game extends Task implements EventListener, MessageListene
     @Override
     public boolean onKeyUp( KeyboardEvent ke )
     {
-        return false;
+        return this.currentSceneBehaviour.onKeyUp(ke);
     }
 
     @Override
     public boolean onMouseDown( MouseButtonEvent mbe )
     {
-        return false;
+        return this.currentSceneBehaviour.onMouseDown(mbe);
     }
 
     @Override
     public boolean onMouseUp( MouseButtonEvent mbe )
     {
-        return false;
+        return this.currentSceneBehaviour.onMouseDown(mbe);
     }
 
     @Override
     public boolean onMouseMove( MouseMotionEvent mbe )
     {
-        return false;
+        return this.currentSceneBehaviour.onMouseMove(mbe);
     }
 
     /**
@@ -363,11 +368,13 @@ public abstract class Game extends Task implements EventListener, MessageListene
      */
     public void tick()
     {
+        this.currentSceneBehaviour.tick();
     }
 
     @Override
     public void onMessage( String message )
     {
+        this.currentSceneBehaviour.onMessage(message);
     }
 
     public abstract void init();
@@ -384,6 +391,24 @@ public abstract class Game extends Task implements EventListener, MessageListene
         Itchy.singleton.startGame(this);
         this.init();
         Itchy.singleton.mainLoop();
+    }
+
+    public boolean loadScene( String sceneName, ActorsLayer layer )
+    {
+        try {
+            Scene scene = this.resources.getScene(sceneName);
+            if (scene == null) {
+                return false;
+            }
+            
+            this.currentSceneBehaviour = scene.createSceneBehaviour();
+            scene.create(layer, false);
+            Itchy.showMousePointer(scene.showMouse);
+            
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -467,4 +492,25 @@ public abstract class Game extends Task implements EventListener, MessageListene
         }
     }
 
+    protected void startEditor()
+    {
+        try {
+            Editor editor = new Editor(this);
+            editor.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    protected void runFromMain(String[] argv) throws Exception
+    {
+        if ((argv.length == 1) && ("--editor".equals(argv[0]))) {
+
+            Editor editor = new Editor(this);
+            editor.start();
+
+        } else {
+            this.start();
+        }
+    }
 }

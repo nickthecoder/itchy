@@ -15,7 +15,6 @@ import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Scene;
 import uk.co.nickthecoder.itchy.ScrollableLayer;
 import uk.co.nickthecoder.itchy.animation.Animation;
-import uk.co.nickthecoder.itchy.editor.Editor;
 import uk.co.nickthecoder.itchy.extras.Explosion;
 import uk.co.nickthecoder.itchy.extras.Fragment;
 import uk.co.nickthecoder.itchy.extras.Recharge;
@@ -437,16 +436,6 @@ public class Tetra extends Game
         this.playing = true;
     }
 
-    private void startEditor()
-    {
-        try {
-            Editor editor = new Editor(this);
-            editor.start();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     public int getHighScore()
     {
         return getPreferences().getInt("highScore", 0);
@@ -459,28 +448,6 @@ public class Tetra extends Game
         }
     }
 
-    public static void main( String argv[] )
-    {
-        System.out.println("Welcome to Tetris");
-
-        try {
-            Tetra.game = new Tetra();
-
-            if ((argv.length == 1) && ("--editor".equals(argv[0]))) {
-
-                Editor editor = new Editor(Tetra.game);
-                editor.init();
-                editor.start();
-
-            } else {
-                Tetra.game.start();
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        System.out.println("Goodbye from Tetris");
-    }
 
     public void debug()
     {
@@ -609,4 +576,9 @@ public class Tetra extends Game
 
     }
 
+    public static void main( String argv[] ) throws Exception
+    {
+        Tetra.game = new Tetra();
+        Tetra.game.runFromMain(argv);
+    }
 }

@@ -19,6 +19,8 @@ public class Scene
     private HashMap<String, SceneLayer> layersMap;
 
     public boolean showMouse = true;
+    
+    public String sceneBehaviourName;
 
     public Scene()
     {
@@ -106,6 +108,18 @@ public class Scene
         return result;
     }
 
+    public SceneBehaviour createSceneBehaviour()
+        throws Exception
+    {
+        if (this.sceneBehaviourName == null) {
+            return new NullSceneBehaviour();
+        } else {
+            Class<?> klass = Class.forName(sceneBehaviourName);
+            return (SceneBehaviour) klass.newInstance();
+        }
+    }
+
+    
     public class SceneLayer
     {
         String name;
@@ -164,7 +178,7 @@ public class Scene
                 }
             }
         }
-
+        
     }
 
 }
