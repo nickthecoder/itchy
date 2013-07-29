@@ -8,6 +8,7 @@ Jame is out of date, need to rebuild for win32 and i386 and ARM??
 What's Next
 ===========
 
+Remove hard-coded java directory from the jame Makefile
 touching vs overlapping when dealing with Text vs ImagePose actors
     Button always uses "contains", but the editor always uses "touching".
     Should both use contains when dealing with text, but overlapping when dealing with images?
@@ -29,6 +30,8 @@ Create a simple parallax scrolling game, so that I can implement and test a para
         Layers have a createEditorLayer, which normally just creates a copy of itself, but could create something else
         OR set a "editor" flag, which may cause them to behave differently.
 
+    Editor should made glassLayer follow the currently selected layer, and add that layers mouse listener
+    
 
     If Thrust had parallax layers, then the collisions would have to be based on the different layer
     offsets. The neighbourhood system doesn't work either!

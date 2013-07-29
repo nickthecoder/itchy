@@ -76,14 +76,15 @@ public abstract class NumericAnimation extends AbstractAnimation
     @Override
     public void tick( Actor actor )
     {
-        double amount = this.currentFrame / (double) (this.ticks - 1);
-        double delta = amount - this.previous;
-        
-        this.tick(actor, this.profile.amount(amount), delta);
-        this.previous = amount;
-        
         this.currentFrame++;
 
+        double amount = this.currentFrame / (double) this.ticks;
+        double eased = this.profile.amount(amount);
+        double delta = eased - this.previous;
+        
+        this.tick(actor, eased, delta);
+        this.previous = eased;
+        
         super.tick(actor);
     }
 

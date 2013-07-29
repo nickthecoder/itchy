@@ -29,7 +29,7 @@ import uk.co.nickthecoder.jame.Surface;
  * This algorithm is inefficient (in memory, and speed), so ideally don't use it while the game is playing.
  * Instead, call it during a Behaviour's init method.
  * 
- * This class is often used in conjunction with ExplosionBehaviour, to product an explosion with the
+ * This class is often used in conjunction with ExplosionBehaviour, to produce an explosion with the
  * pieces of the actor flying apart in different directions.
  */
 public class Fragment
