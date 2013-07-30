@@ -8,7 +8,13 @@ Jame is out of date, need to rebuild for win32 and i386 and ARM??
 What's Next
 ===========
 
-Remove hard-coded java directory from the jame Makefile
+BUG
+    One of the animation profiles shows that the NumericAnimation isn't quite right.
+    
+BUG
+    When a window has no focusable components, then it recurses till the stack explodes.
+    
+    
 touching vs overlapping when dealing with Text vs ImagePose actors
     Button always uses "contains", but the editor always uses "touching".
     Should both use contains when dealing with text, but overlapping when dealing with images?

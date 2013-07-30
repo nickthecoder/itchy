@@ -54,17 +54,32 @@ public class Actor extends Task
     private boolean ticking = false;
 
     private double activationDelay;
+    
+    private String startEvent = "default";
 
     public Actor( Costume costume )
     {
         this(costume, "default");
     }
 
-    public Actor( Costume costume, String poseName )
+    private static Pose startPose( Costume costume, String name )
     {
-        this(ImagePose.getDummyPose());
+        Pose pose = costume.getPose(name);
+        if ( pose == null ) {
+            pose = costume.getPose("default");
+        }
+        if (pose == null ) {
+            pose = ImagePose.getDummyPose();
+        }
+        return pose;
+    }
+    
+    public Actor( Costume costume, String eventName )
+    {
+        this(startPose(costume, eventName));
+        
         this.costume = costume;
-        this.event(poseName);
+        this.event(eventName);
         this.getAppearance().setDirection(this.getAppearance().getPose().getDirection());
     }
 
@@ -85,6 +100,16 @@ public class Actor extends Task
         this.getAppearance().setDirection(pose.getDirection());
     }
 
+    public String getStartEvent()
+    {
+        return startEvent;
+    }
+    
+    public void setStartEvent( String value )
+    {
+        startEvent = value;
+    }
+
     public List<AbstractProperty<Actor, ?>> getProperties()
     {
         if (normalProperties == null) {
@@ -92,6 +117,7 @@ public class Actor extends Task
 
             normalProperties.add(new DoubleProperty<Actor>("X", "x"));
             normalProperties.add(new DoubleProperty<Actor>("Y", "y"));
+            normalProperties.add(new StringProperty<Actor>("Start Event", "startEvent"));
             normalProperties.add(new DoubleProperty<Actor>("Alpha", "appearance.alpha"));
             normalProperties.add(new DoubleProperty<Actor>("Direction", "appearance.direction"));
             normalProperties.add(new DoubleProperty<Actor>("Scale", "appearance.scale"));

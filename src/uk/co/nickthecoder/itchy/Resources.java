@@ -21,8 +21,11 @@ import uk.co.nickthecoder.jame.Surface;
 public class Resources extends Loadable
 {
 
-    private static List<String> sortNames( Set<String> set )
+    public static List<String> sortNames( Set<String> set )
     {
+        if (set == null) {
+            return null;
+        }
         ArrayList<String> names = new ArrayList<String>(set);
         Collections.sort(names);
         return names;

@@ -15,60 +15,82 @@ import uk.co.nickthecoder.jame.Keys;
 import uk.co.nickthecoder.jame.RGBA;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 
-public class AnimationTest extends Game
+public class TestGame extends Game
 {
     public ActorsLayer mainLayer;
+    
+    public String sceneName = "menu";
 
-    public AnimationTest() throws Exception
+    public TestGame() throws Exception
     {
-        super("AnimationTest", 640, 480);
-        this.resources.load(new File("resources/tests/animations.xml"));
+        super("AnimationTest", 800, 600);
+        this.resources.load(new File("resources/tests/resources.xml"));
     }
 
     @Override
     public void init()
     {
         this.mainLayer = new ScrollableLayer("main", this.screenRect, new RGBA(0, 0, 0));
-        this.mainLayer.setYAxisPointsDown(true);
+        this.mainLayer.enableMouseListener();
         this.layers.add(this.mainLayer);
+        loadScene( "menu", this.mainLayer);
+    }
+
+    public void reloadScene()
+    {
+        loadScene(this.sceneName);
+    }
+    
+    public void loadScene(String sceneName)
+    {
+        System.out.println("Starting scene " + sceneName );
+        this.sceneName = sceneName;
+        this.mainLayer.clear();
+        this.loadScene( this.sceneName,  this.mainLayer);
     }
 
     @Override
     public boolean onKeyDown( KeyboardEvent ke )
     {
-        this.mainLayer.clear();
+        if (ke.symbol == Keys.F12) {
+            startEditor();
+            return true;
+        }
 
-        if (ke.symbol == Keys.SPACE) {
-            try {
-                this.resources.getScene("testAnimation").create(this.mainLayer, false);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        if (ke.symbol == Keys.ESCAPE) {
+            loadScene( "menu" );
+        }
+
+        if (ke.symbol == Keys.RETURN) {
+            reloadScene();
+        }
+
+        if (ke.symbol == Keys.DELETE) {
             for (Actor actor : this.mainLayer.getActors()) {
                 actor.deathEvent("death");
             }
             return true;
         }
 
-        return false;
+        return super.onKeyDown(ke);
     }
 
-    @Override
-    public void tick()
+    public void onMessage(String message)
     {
-
+        System.out.println("Message : " + message);
+        
+        if (message.startsWith("scene:")) {
+            loadScene( message.substring(6));
+            return;
+        }
+        
+        super.onMessage(message);
     }
-
-    @Override
-    public String getIconFilename()
-    {
-        return "resources/drunkInvaders/icon.bmp";
-    }
-
+    
     public static void main( String[] argv ) throws Exception
     {
 
-        AnimationTest test = new AnimationTest();
+        TestGame test = new TestGame();
         test.start();
     }
 }

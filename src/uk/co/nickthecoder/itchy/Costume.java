@@ -65,24 +65,24 @@ public class Costume
         return this.fontChoices.keySet();
     }
 
-    public Set<String> getStringNames()
+    public List<String> getStringNames()
     {
-        return this.stringChoices.keySet();
+        return Resources.sortNames(this.stringChoices.keySet());
     }
 
-    public Set<String> getPoseNames()
+    public List<String> getPoseNames()
     {
-        return this.poseChoices.keySet();
+        return Resources.sortNames(this.poseChoices.keySet());
     }
 
-    public Set<String> getSoundNames()
+    public List<String> getSoundNames()
     {
-        return this.soundChoices.keySet();
+        return Resources.sortNames(this.soundChoices.keySet());
     }
 
-    public Set<String> getAnimationNames()
+    public List<String> getAnimationNames()
     {
-        return this.animationChoices.keySet();
+        return Resources.sortNames(this.animationChoices.keySet());
     }
 
     // String

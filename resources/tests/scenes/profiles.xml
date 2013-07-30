@@ -1,0 +1,50 @@
+<scene showMouse="true">
+  <layer name="main">
+    <text text="ease" font="vera" size="14" color="#ffffff" x="573" y="53" direction="0.0" startEvent="default"/>
+    <text text="easeIn" font="vera" size="14" color="#ffffff" x="32" y="44" direction="0.0" startEvent="default"/>
+    <text text="easeInCirc" font="vera" size="14" color="#ffffff" x="90" y="15" direction="0.0" startEvent="default"/>
+    <text text="easeInCubic" font="vera" size="14" color="#ffffff" x="160" y="46" direction="0.0" startEvent="default"/>
+    <text text="easeInExpo" font="vera" size="14" color="#ffffff" x="288" y="49" direction="0.0" startEvent="default"/>
+    <text text="easeInQuad" font="vera" size="14" color="#ffffff" x="230" y="21" direction="0.0" startEvent="default"/>
+    <text text="easeOut" font="vera" size="14" color="#ffffff" x="32" y="582" direction="0.0" startEvent="default"/>
+    <text text="easeOutCirc" font="vera" size="14" color="#ffffff" x="104" y="564" direction="0.0" startEvent="default"/>
+    <text text="easeOutCubic" font="vera" size="14" color="#ffffff" x="163" y="585" direction="0.0" startEvent="default"/>
+    <text text="easeOutExpo" font="vera" size="14" color="#ffffff" x="270" y="586" direction="0.0" startEvent="default"/>
+    <text text="easeOutQuad" font="vera" size="14" color="#ffffff" x="227" y="563" direction="0.0" startEvent="default"/>
+    <text text="easeInOut" font="vera" size="14" color="#ffffff" x="418" y="587" direction="0.0" startEvent="default"/>
+    <text text="easeInBack" font="vera" size="14" color="#ffffff" x="363" y="31" direction="0.0" startEvent="default"/>
+    <text text="linear" font="vera" size="14" color="#ffffff" x="517" y="32" direction="0.0" startEvent="default"/>
+    <text text="easeOutBack" font="vera" size="14" color="#ffffff" x="333" y="564" direction="0.0" startEvent="default"/>
+    <actor costume="alien1b" x="30" y="85" direction="-90.0" startEvent="easeIn"/>
+    <actor costume="alien2a" x="87" y="85" direction="-90.0" startEvent="easeInCirc"/>
+    <actor costume="alien2b" x="159" y="85" direction="-90.0" startEvent="easeInCubic"/>
+    <actor costume="alien3a" x="289" y="86" direction="-90.0" startEvent="easeInExpo"/>
+    <actor costume="alien3b" x="229" y="85" direction="-90.0" startEvent="easeInQuad"/>
+    <actor costume="alien1a" x="357" y="85" direction="-90.0" startEvent="easeInBack"/>
+    <actor costume="alien3b" x="508" y="85" direction="-90.0" startEvent="linear"/>
+    <actor costume="alien3a" x="574" y="85" direction="-90.0" startEvent="ease"/>
+    <actor costume="alien1b" x="29" y="385" direction="-90.0" startEvent="easeOut"/>
+    <actor costume="alien2a" x="85" y="385" direction="-90.0" startEvent="easeOutCirc"/>
+    <actor costume="alien2b" x="146" y="385" direction="-90.0" startEvent="easeOutCubic"/>
+    <actor costume="alien3a" x="285" y="385" direction="-90.0" startEvent="easeOutExpo"/>
+    <actor costume="alien3b" x="205" y="385" direction="-90.0" startEvent="easeOutQuad"/>
+    <actor costume="alien1a" x="349" y="385" direction="-90.0" startEvent="easeOutBack"/>
+    <actor costume="alien2a" x="483" y="385" direction="-90.0" startEvent="easeInOutCirc"/>
+    <actor costume="alien1b" x="432" y="385" direction="-90.0" startEvent="easeInOut"/>
+    <actor costume="alien2b" x="538" y="385" direction="-90.0" startEvent="easeInOutCubic"/>
+    <actor costume="alien3a" x="593" y="385" direction="-90.0" startEvent="easeInOutQuad"/>
+    <actor costume="alien3b" x="654" y="385" direction="-90.0" startEvent="easeInOutExpo"/>
+    <actor costume="alien1a" x="712" y="385" direction="-90.0" startEvent="easeInOutBack"/>
+    <text text="easeInOutCirc" font="vera" size="14" color="#ffffff" x="469" y="572" direction="0.0" startEvent="default"/>
+    <text text="easeInOutCubic" font="vera" size="14" color="#ffffff" x="529" y="557" direction="0.0" startEvent="default"/>
+    <text text="easeInOutQuad" font="vera" size="14" color="#ffffff" x="593" y="586" direction="0.0" startEvent="default"/>
+    <text text="easeInOutExpo" font="vera" size="14" color="#ffffff" x="656" y="570" direction="0.0" startEvent="default"/>
+    <text text="easeInOutBack" font="vera" size="14" color="#ffffff" x="712" y="551" direction="0.0" startEvent="default"/>
+    <actor costume="alien1a" x="637" y="85" direction="-90.0" startEvent="bounce"/>
+    <actor costume="alien1b" x="685" y="85" direction="-90.0" startEvent="bounce2"/>
+    <actor costume="alien2a" x="746" y="85" direction="-90.0" startEvent="bounce3"/>
+    <text text="bounce" font="vera" size="14" color="#ffffff" x="629" y="37" direction="0.0" startEvent="default"/>
+    <text text="bounce2" font="vera" size="14" color="#ffffff" x="677" y="52" direction="0.0" startEvent="default"/>
+    <text text="bounce3" font="vera" size="14" color="#ffffff" x="747" y="35" direction="0.0" startEvent="default"/>
+  </layer>
+</scene>

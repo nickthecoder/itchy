@@ -345,7 +345,7 @@ public class ResourcesReader
 
             } else if (tag.getName().equals("move")) {
 
-                String profileName = tag.getOptionalAttribute("profile", "unit");
+                String profileName = tag.getOptionalAttribute("profile", "linear");
                 Profile profile = NumericAnimation.getProfile(profileName);
                 if (profile == null) {
                     throw new XMLException("Unknown profile : " + profileName);

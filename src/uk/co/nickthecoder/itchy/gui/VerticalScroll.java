@@ -30,6 +30,7 @@ public class VerticalScroll extends Container implements Layout, Scrollable
 
         this.child = child;
         this.addChild(child);
+        this.child.addStyle( "vScrolled" );
 
         this.scrollbar = new Scrollbar();
         this.addChild(this.scrollbar);
@@ -145,15 +146,19 @@ public class VerticalScroll extends Container implements Layout, Scrollable
             this.getPaddingRight() - this.child.getMarginLeft() - this.child.getMarginRight()
             : this.child.getRequiredWidth();
 
-        this.child.setPosition(this.getPaddingLeft() + this.child.getMarginLeft(),
-            this.getPaddingTop() + this.child.getMarginTop() - this.scroll, width,
+        this.child.setPosition(
+            this.getPaddingLeft() + this.child.getMarginLeft(),
+            this.getPaddingTop() + this.child.getMarginTop() - this.scroll,
+            width,
             this.child.getRequiredHeight());
 
-        this.scrollbar.setPosition(this.getWidth() - this.scrollbar.getRequiredWidth() -
-            this.scrollbar.getMarginRight() - this.getPaddingRight(), this.getPaddingTop() +
-            this.scrollbar.getMarginTop(), this.scrollbar.getRequiredWidth(), this.getHeight() -
-            this.getPaddingTop() - this.getPaddingBottom() - this.scrollbar.getMarginTop() -
-            this.scrollbar.getMarginBottom());
+        this.scrollbar.setPosition(
+            this.getWidth() - this.scrollbar.getRequiredWidth() -
+                this.scrollbar.getMarginLeft() - this.scrollbar.getMarginRight(),
+            this.getPaddingTop() + this.scrollbar.getMarginTop(),
+            this.scrollbar.getRequiredWidth(),
+            this.getHeight() - this.getPaddingTop() - this.getPaddingBottom() -
+                this.scrollbar.getMarginTop() - this.scrollbar.getMarginBottom());
     }
 
     @Override

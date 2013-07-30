@@ -58,7 +58,8 @@ public abstract class SceneActor implements Cloneable
         this.colorize = actor.getAppearance().getColorize() == null ? null : new RGBA(actor
             .getAppearance().getColorize());
         this.activationDelay = actor.getActivationDelay();
-
+        this.startEvent = actor.getStartEvent();
+        
         Behaviour actualBehaviour = ((SceneDesignerBehaviour) actor.getBehaviour()).actualBehaviour;
 
         for (AbstractProperty<Behaviour, ?> property : actualBehaviour.getProperties()) {

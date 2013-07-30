@@ -65,22 +65,31 @@
   <animations>
     <animation name="alien1">
       <sequence loops="1">
-        <frames/>
+        <pingPong>
+          <frame pose="alien1a" />
+          <frame pose="alien1b" />
+        </pingPong>
       </sequence>
     </animation>
     <animation name="alien2">
       <sequence loops="1">
-        <frames/>
+        <pingPong>
+          <frame pose="alien2a" />
+          <frame pose="alien2b" />
+        </pingPong>
       </sequence>
     </animation>
     <animation name="alien3">
       <sequence loops="1">
-        <frames/>
+        <pingPong>
+          <frame pose="alien3a" />
+          <frame pose="alien3b" />
+        </pingPong>
       </sequence>
     </animation>
     <animation name="alienYell">
       <parallel loops="1">
-        <move ticks="80" dx="0.0" dy="20.0" profile="unit"/>
+        <move ticks="80" dx="0.0" dy="20.0" profile="linear"/>
         <alpha ticks="80" target="0.0" profile="linear"/>
         <turn ticks="80" turn="40.0" profile="linear"/>
       </parallel>
@@ -95,7 +104,7 @@
     </animation>
     <animation name="deathSpiral">
       <parallel loops="1">
-        <move ticks="40" dx="40.0" dy="40.0" profile="unit"/>
+        <move ticks="40" dx="40.0" dy="40.0" profile="linear"/>
         <alpha ticks="40" target="0.0" profile="linear"/>
         <turn ticks="40" turn="40.0" profile="linear"/>
       </parallel>
@@ -140,7 +149,7 @@
     </animation>
     <animation name="toHeaven">
       <parallel loops="1">
-        <move ticks="120" dx="0.0" dy="60.0" profile="unit"/>
+        <move ticks="120" dx="0.0" dy="60.0" profile="linear"/>
         <alpha ticks="120" target="0.0" profile="linear"/>
       </parallel>
     </animation>
@@ -228,11 +237,11 @@
       <pose name="shielded7" pose="shielded7"/>
       <pose name="shielded6" pose="shielded6"/>
       <pose name="shielded5" pose="shielded5"/>
-      <pose name="default" pose="ship"/>
       <pose name="shielded4" pose="shielded4"/>
+      <pose name="default" pose="ship"/>
       <pose name="shielded3" pose="shielded3"/>
-      <pose name="pixel" pose="greenPixel"/>
       <pose name="shielded2" pose="shielded2"/>
+      <pose name="pixel" pose="greenPixel"/>
       <pose name="shielded1" pose="shielded1"/>
       <pose name="shielded0" pose="shielded0"/>
       <pose name="charged" pose="ship"/>

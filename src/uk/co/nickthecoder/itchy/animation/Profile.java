@@ -7,7 +7,11 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.animation;
 
+import uk.co.nickthecoder.jame.Surface;
+
 public interface Profile
 {
     public double amount( double amount );
+    
+    public Surface getThumbnail();
 }

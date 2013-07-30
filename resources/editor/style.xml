@@ -9,7 +9,7 @@
     
     <rule criteria=".checkered" background="checkers"/>
     <rule criteria=".pickGrid" spacing="10"/>
-    <rule criteria=".pickGrid * button" width="80" height="60"/>
+    <rule criteria=".pickGrid * button" width="80" minimumHeight="60"/>
     <rule criteria=".pickGrid * label" maximumWidth="80"/>
     
     <rule criteria=".costumes" padding="0" spacing="2"/>

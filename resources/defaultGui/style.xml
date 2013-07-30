@@ -9,7 +9,6 @@
     <rule criteria="titleBar *" color="#c6c1b8" font="bold" fontSize="16" /> 
     <rule criteria="clientArea" background="clientArea" padding="20" spacing="10"/>
     <rule criteria=".focus * clientArea" background="clientArea-focus" />
-    <rule criteria="clientArea.vScrolled" paddingRight="0" />
 
     <rule criteria="button" background="button" padding="10" minimumWidth="80" />
     <rule criteria="button.compact" padding="8" minimumWidth="0"/>
@@ -64,7 +63,8 @@
     <rule criteria="comboBox.error textBox label" color="#000" />
     <rule criteria="caret" background="caret" marginLeft="-6" paddingTop="-10" paddingBottom="-10" paddingLeft="12" />
 
-    <rule criteria="scrollbar.v" padding="4" marginTop="4" marginBottom="4"/>
+    <rule criteria="vScroll" paddingRight="20"/>
+    <rule criteria="scrollbar.v" padding="4" marginTop="4" marginBottom="4" marginRight="-6"/>
     <rule criteria="scroller.v" background="scrollerV" width="14" />
 
     <rule criteria="checkbox" background="checkbox" width="25" height="25"/>

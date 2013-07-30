@@ -7,7 +7,7 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.animation;
 
-public class LinearProfile implements Profile
+public class LinearProfile extends AbstractProfile
 {
     @Override
     public double amount( double amount )

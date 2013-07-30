@@ -581,69 +581,62 @@
          inkscape:connector-curvature="0"
          sodipodi:nodetypes="cc" />
     </g>
+    <rect
+       ry="2.2737368e-13"
+       rx="2.2737368e-13"
+       y="660.57648"
+       x="-69.285713"
+       height="119.64286"
+       width="152.5"
+       id="rect6171"
+       style="fill:#9e9e9e;fill-opacity:1;stroke:#8d8a8a;stroke-width:0;stroke-linecap:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
     <g
-       style="display:inline"
-       id="g5411"
-       inkscape:export-filename="/media/home/nick/projects/itchy/resources/editor/delete.png"
-       inkscape:export-xdpi="63.529999"
        inkscape:export-ydpi="63.529999"
+       inkscape:export-xdpi="63.529999"
+       inkscape:export-filename="/media/home/nick/projects/itchy/resources/editor/delete.png"
+       id="g6186"
        transform="translate(-191.73346,-277.49247)">
-      <rect
-         style="fill:#9e9e9e;fill-opacity:1;stroke:#8d8a8a;stroke-width:0;stroke-linecap:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-         id="rect6171"
-         width="152.5"
-         height="119.64286"
-         x="122.44775"
-         y="938.06897"
-         rx="2.2737368e-13"
-         ry="2.2737368e-13" />
       <g
-         id="g6186"
-         inkscape:export-filename="/media/home/nick/projects/itchy/resources/editor/delete.png"
-         inkscape:export-xdpi="63.529999"
-         inkscape:export-ydpi="63.529999">
+         id="g6178"
+         style="stroke:#000000;stroke-width:5;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none">
         <g
-           style="stroke:#000000;stroke-opacity:1;stroke-width:5;stroke-miterlimit:4;stroke-dasharray:none"
-           id="g6178">
-          <g
-             transform="translate(120,540)"
-             inkscape:export-ydpi="63.529999"
-             inkscape:export-xdpi="63.529999"
-             inkscape:export-filename="/media/home/nick/projects/itchy/resources/defaultGui/close.png"
-             id="g6180"
-             style="stroke:#000000;stroke-opacity:1;stroke-width:5;stroke-miterlimit:4;stroke-dasharray:none">
-            <path
-               style="fill:none;stroke:#000000;stroke-width:5;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;display:inline"
-               d="m 180,432.36218 20,20"
-               id="path6182"
-               inkscape:connector-curvature="0" />
-            <path
-               style="fill:none;stroke:#000000;stroke-width:5;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;display:inline"
-               d="m 200,432.36218 -20,20"
-               id="path6184"
-               inkscape:connector-curvature="0" />
-          </g>
+           style="stroke:#000000;stroke-width:5;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+           id="g6180"
+           inkscape:export-filename="/media/home/nick/projects/itchy/resources/defaultGui/close.png"
+           inkscape:export-xdpi="63.529999"
+           inkscape:export-ydpi="63.529999"
+           transform="translate(120,540)">
+          <path
+             inkscape:connector-curvature="0"
+             id="path6182"
+             d="m 180,432.36218 20,20"
+             style="fill:none;stroke:#000000;stroke-width:5;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;display:inline" />
+          <path
+             inkscape:connector-curvature="0"
+             id="path6184"
+             d="m 200,432.36218 -20,20"
+             style="fill:none;stroke:#000000;stroke-width:5;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;display:inline" />
         </g>
+      </g>
+      <g
+         id="g6173">
         <g
-           id="g6173">
-          <g
-             style="stroke:#ec1313;stroke-opacity:1"
-             id="g5381"
-             inkscape:export-filename="/media/home/nick/projects/itchy/resources/defaultGui/close.png"
-             inkscape:export-xdpi="63.529999"
-             inkscape:export-ydpi="63.529999"
-             transform="translate(120,540)">
-            <path
-               inkscape:connector-curvature="0"
-               id="path5383"
-               d="m 180,432.36218 20,20"
-               style="fill:none;stroke:#ec1313;stroke-width:4;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;display:inline" />
-            <path
-               inkscape:connector-curvature="0"
-               id="use5385"
-               d="m 200,432.36218 -20,20"
-               style="fill:none;stroke:#ec1313;stroke-width:4;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;display:inline" />
-          </g>
+           transform="translate(120,540)"
+           inkscape:export-ydpi="63.529999"
+           inkscape:export-xdpi="63.529999"
+           inkscape:export-filename="/media/home/nick/projects/itchy/resources/defaultGui/close.png"
+           id="g5381"
+           style="stroke:#ec1313;stroke-opacity:1">
+          <path
+             style="fill:none;stroke:#ec1313;stroke-width:4;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;display:inline"
+             d="m 180,432.36218 20,20"
+             id="path5383"
+             inkscape:connector-curvature="0" />
+          <path
+             style="fill:none;stroke:#ec1313;stroke-width:4;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;display:inline"
+             d="m 200,432.36218 -20,20"
+             id="use5385"
+             inkscape:connector-curvature="0" />
         </g>
       </g>
     </g>

@@ -1,24 +1,24 @@
 <scene showMouse="true">
   <layer name="background">
-    <actor costume="earth" x="0" y="0" direction="0.0" start="default"/>
+    <actor costume="earth" x="0" y="0" direction="0.0" startEvent="default"/>
   </layer>
   <layer name="main">
-    <actor costume="alien3" x="163" y="365" direction="-90.0" start="default" colorize="#00ff0022" scale="6.107142857142857" behaviour="uk.co.nickthecoder.itchy.NullBehaviour"/>
-    <actor costume="ship" x="198" y="85" direction="93.94518622903759" start="default" behaviour="uk.co.nickthecoder.itchy.NullBehaviour"/>
-    <actor costume="bullet" x="193" y="139" direction="95.90614111377052" start="default"/>
-    <text text="Drunk" font="boycott" size="86" color="#cc2222" x="475" y="407" direction="7.594643368591445" start="default"/>
-    <text text="Invaders" font="boycott" size="61" color="#ffffff" x="486" y="331" direction="2.160560963458598" start="default"/>
-    <text text="Play" font="blackCasper" size="56" color="#ffffff" behaviour="uk.co.nickthecoder.itchy.extras.Button" x="319" y="225" direction="0.0" start="default">
+    <actor costume="alien3" behaviour="uk.co.nickthecoder.itchy.NullBehaviour" x="163" y="365" direction="-90.0" startEvent="default" colorize="#00ff0022" scale="6.107142857142857"/>
+    <actor costume="ship" behaviour="uk.co.nickthecoder.itchy.NullBehaviour" x="198" y="85" direction="93.94518622903759" startEvent="default"/>
+    <actor costume="bullet" x="193" y="139" direction="95.90614111377052" startEvent="default"/>
+    <text text="Drunk" font="boycott" size="86" color="#cc2222" x="475" y="407" direction="7.594643368591445" startEvent="default"/>
+    <text text="Invaders" font="boycott" size="61" color="#ffffff" x="486" y="331" direction="2.160560963458598" startEvent="default"/>
+    <text text="Play" font="blackCasper" size="56" color="#ffffff" behaviour="uk.co.nickthecoder.itchy.extras.Button" x="319" y="225" direction="0.0" startEvent="default">
       <property name="message" value="play"/>
     </text>
-    <text text="Credits" font="blackCasper" size="46" color="#ffffff" behaviour="uk.co.nickthecoder.itchy.extras.Button" x="324" y="88" direction="0.0" start="default">
+    <text text="Credits" font="blackCasper" size="46" color="#ffffff" behaviour="uk.co.nickthecoder.itchy.extras.Button" x="324" y="88" direction="0.0" startEvent="default">
       <property name="message" value="about"/>
     </text>
-    <text text="Quit" font="blackCasper" size="66" color="#000000" behaviour="uk.co.nickthecoder.itchy.extras.Button" x="319" y="25" direction="0.0" start="default">
+    <text text="Quit" font="blackCasper" size="66" color="#000000" behaviour="uk.co.nickthecoder.itchy.extras.Button" x="319" y="25" direction="0.0" startEvent="default">
       <property name="message" value="quit"/>
     </text>
-    <actor costume="bomb" x="181" y="234" direction="-90.0" start="default" scale="3.5"/>
-    <text text="Editor" font="blackCasper" size="46" color="#ffffff" behaviour="uk.co.nickthecoder.itchy.extras.Button" x="322" y="155" direction="0.0" start="default">
+    <actor costume="bomb" x="181" y="234" direction="-90.0" startEvent="default" scale="3.5"/>
+    <text text="Editor" font="blackCasper" size="46" color="#ffffff" behaviour="uk.co.nickthecoder.itchy.extras.Button" x="322" y="155" direction="0.0" startEvent="default">
       <property name="message" value="editor"/>
     </text>
   </layer>

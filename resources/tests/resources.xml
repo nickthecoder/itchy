@@ -1,0 +1,224 @@
+<resources>
+  <fonts>
+    <font name="vera" filename="fonts/Vera/Vera.ttf"/>
+  </fonts>
+  <ninePatches/>
+  <poses>
+    <pose name="alien1a" filename="alien1a.png" direction="-90.0"/>
+    <pose name="alien1b" filename="alien1b.png" direction="-90.0"/>
+    <pose name="alien2a" filename="alien2a.png" direction="-90.0"/>
+    <pose name="alien2b" filename="alien2b.png" direction="-90.0"/>
+    <pose name="alien3a" filename="alien3a.png" direction="-90.0"/>
+    <pose name="alien3b" filename="alien3b.png" direction="-90.0"/>
+    <pose name="bomb1" filename="bomb1.png" direction="-90.0"/>
+    <pose name="bomb2" filename="bomb2.png" direction="-90.0"/>
+  </poses>
+  <sounds/>
+  <animations>
+    <animation name="bomb">
+      <parallel loops="0">
+        <frames>
+          <frame pose="bomb1" delay="50"/>
+          <frame pose="bomb2" delay="50"/>
+        </frames>
+      </parallel>
+    </animation>
+    <animation name="bounce">
+      <sequence loops="1">
+        <move ticks="200" dx="0.0" dy="200.0" profile="bounce"/>
+        <move ticks="200" dx="0.0" dy="-200.0" profile="bounce"/>
+      </sequence>
+    </animation>
+    <animation name="bounce2">
+      <sequence loops="1">
+        <move ticks="200" dx="0.0" dy="200.0" profile="bounce2"/>
+        <move ticks="200" dx="0.0" dy="-200.0" profile="bounce2"/>
+      </sequence>
+    </animation>
+    <animation name="bounce3">
+      <sequence loops="1">
+        <move ticks="200" dx="0.0" dy="200.0" profile="bounce3"/>
+        <move ticks="200" dx="0.0" dy="-200.0" profile="bounce3"/>
+      </sequence>
+    </animation>
+    <animation name="ease">
+      <sequence loops="1">
+        <move ticks="200" dx="0.0" dy="200.0" profile="ease"/>
+        <move ticks="200" dx="0.0" dy="-200.0" profile="ease"/>
+      </sequence>
+    </animation>
+    <animation name="easeIn">
+      <sequence loops="1">
+        <move ticks="200" dx="0.0" dy="200.0" profile="easeIn"/>
+        <move ticks="200" dx="0.0" dy="-200.0" profile="easeIn"/>
+      </sequence>
+    </animation>
+    <animation name="easeInBack">
+      <sequence loops="1">
+        <move ticks="200" dx="0.0" dy="200.0" profile="easeInBack"/>
+        <move ticks="200" dx="0.0" dy="-200.0" profile="easeInBack"/>
+      </sequence>
+    </animation>
+    <animation name="easeInCirc">
+      <sequence loops="1">
+        <move ticks="200" dx="0.0" dy="200.0" profile="easeInCirc"/>
+        <move ticks="200" dx="0.0" dy="-200.0" profile="easeInCirc"/>
+      </sequence>
+    </animation>
+    <animation name="easeInCubic">
+      <sequence loops="1">
+        <move ticks="200" dx="0.0" dy="200.0" profile="easeInCubic"/>
+        <move ticks="200" dx="0.0" dy="-200.0" profile="easeInCubic"/>
+      </sequence>
+    </animation>
+    <animation name="easeInExpo">
+      <sequence loops="1">
+        <move ticks="200" dx="0.0" dy="200.0" profile="easeInExpo"/>
+        <move ticks="200" dx="0.0" dy="-200.0" profile="easeInExpo"/>
+      </sequence>
+    </animation>
+    <animation name="easeInOut">
+      <sequence loops="1">
+        <move ticks="200" dx="0.0" dy="200.0" profile="easeOut"/>
+        <move ticks="200" dx="0.0" dy="-200.0" profile="easeOut"/>
+      </sequence>
+    </animation>
+    <animation name="easeInOutBack">
+      <sequence loops="1">
+        <move ticks="200" dx="0.0" dy="200.0" profile="easeInOutBack"/>
+        <move ticks="200" dx="0.0" dy="-200.0" profile="easeInOutBack"/>
+      </sequence>
+    </animation>
+    <animation name="easeInOutCirc">
+      <sequence loops="1">
+        <move ticks="200" dx="0.0" dy="200.0" profile="easeInOutCirc"/>
+        <move ticks="200" dx="0.0" dy="-200.0" profile="easeInOutCirc"/>
+      </sequence>
+    </animation>
+    <animation name="easeInOutCubic">
+      <sequence loops="1">
+        <move ticks="200" dx="0.0" dy="200.0" profile="easeInOutCubic"/>
+        <move ticks="200" dx="0.0" dy="-200.0" profile="easeInOutCubic"/>
+      </sequence>
+    </animation>
+    <animation name="easeInOutExpo">
+      <sequence loops="1">
+        <move ticks="200" dx="0.0" dy="200.0" profile="easeInOutExpo"/>
+        <move ticks="200" dx="0.0" dy="-200.0" profile="easeInOutExpo"/>
+      </sequence>
+    </animation>
+    <animation name="easeInOutQuad">
+      <sequence loops="1">
+        <move ticks="200" dx="0.0" dy="200.0" profile="easeInOutQuad"/>
+        <move ticks="200" dx="0.0" dy="-200.0" profile="easeInOutQuad"/>
+      </sequence>
+    </animation>
+    <animation name="easeInQuad">
+      <sequence loops="1">
+        <move ticks="200" dx="0.0" dy="200.0" profile="easeInQuad"/>
+        <move ticks="200" dx="0.0" dy="-200.0" profile="easeInQuad"/>
+      </sequence>
+    </animation>
+    <animation name="easeOut">
+      <sequence loops="1">
+        <move ticks="200" dx="0.0" dy="200.0" profile="easeOut"/>
+        <move ticks="200" dx="0.0" dy="-200.0" profile="easeOut"/>
+      </sequence>
+    </animation>
+    <animation name="easeOutBack">
+      <sequence loops="1">
+        <move ticks="200" dx="0.0" dy="200.0" profile="easeOutBack"/>
+        <move ticks="200" dx="0.0" dy="-200.0" profile="easeOutBack"/>
+      </sequence>
+    </animation>
+    <animation name="easeOutCirc">
+      <sequence loops="1">
+        <move ticks="200" dx="0.0" dy="200.0" profile="easeOutCirc"/>
+        <move ticks="200" dx="0.0" dy="-200.0" profile="easeOutCirc"/>
+      </sequence>
+    </animation>
+    <animation name="easeOutCubic">
+      <sequence loops="1">
+        <move ticks="200" dx="0.0" dy="200.0" profile="easeOutCubic"/>
+        <move ticks="200" dx="0.0" dy="-200.0" profile="easeOutCubic"/>
+      </sequence>
+    </animation>
+    <animation name="easeOutExpo">
+      <sequence loops="1">
+        <move ticks="200" dx="0.0" dy="200.0" profile="easeOutExpo"/>
+        <move ticks="200" dx="0.0" dy="-200.0" profile="easeOutExpo"/>
+      </sequence>
+    </animation>
+    <animation name="easeOutQuad">
+      <sequence loops="1">
+        <move ticks="200" dx="0.0" dy="200.0" profile="easeOutQuad"/>
+        <move ticks="200" dx="0.0" dy="-200.0" profile="easeOutQuad"/>
+      </sequence>
+    </animation>
+    <animation name="fade">
+      <sequence loops="1">
+        <alpha ticks="200" target="0.0" profile="ease"/>
+      </sequence>
+    </animation>
+    <animation name="linear">
+      <sequence loops="1">
+        <move ticks="200" dx="0.0" dy="200.0" profile="linear"/>
+        <move ticks="200" dx="0.0" dy="-200.0" profile="linear"/>
+      </sequence>
+    </animation>
+  </animations>
+  <costumes>
+    <costume name="alien">
+      <pose name="default" pose="alien1a"/>
+      <animation name="bounce" animation="bounce"/>
+      <animation name="bounce2" animation="bounce2"/>
+      <animation name="bounce3" animation="bounce3"/>
+      <animation name="ease" animation="ease"/>
+      <animation name="easeIn" animation="easeIn"/>
+      <animation name="easeInBack" animation="easeInBack"/>
+      <animation name="easeInCirc" animation="easeInCirc"/>
+      <animation name="easeInCubic" animation="easeInCubic"/>
+      <animation name="easeInExpo" animation="easeInExpo"/>
+      <animation name="easeInOut" animation="easeInOut"/>
+      <animation name="easeInOutBack" animation="easeInOutBack"/>
+      <animation name="easeInOutCirc" animation="easeInOutCirc"/>
+      <animation name="easeInOutCubic" animation="easeInOutCubic"/>
+      <animation name="easeInOutExpo" animation="easeInOutExpo"/>
+      <animation name="easeInOutQuad" animation="easeInOutQuad"/>
+      <animation name="easeInQuad" animation="easeInQuad"/>
+      <animation name="easeOut" animation="easeOut"/>
+      <animation name="easeOutBack" animation="easeOutBack"/>
+      <animation name="easeOutCirc" animation="easeOutCirc"/>
+      <animation name="easeOutCubic" animation="easeOutCubic"/>
+      <animation name="easeOutExpo" animation="easeOutExpo"/>
+      <animation name="easeOutQuad" animation="easeOutQuad"/>
+      <animation name="linear" animation="linear"/>
+    </costume>
+    <costume name="alien1a" extends="alien">
+      <pose name="default" pose="alien1a"/>
+    </costume>
+    <costume name="alien1b" extends="alien">
+      <pose name="default" pose="alien1b"/>
+    </costume>
+    <costume name="alien2a" extends="alien">
+      <pose name="default" pose="alien2a"/>
+    </costume>
+    <costume name="alien2b" extends="alien">
+      <pose name="default" pose="alien2b"/>
+    </costume>
+    <costume name="alien3a" extends="alien">
+      <pose name="default" pose="alien3a"/>
+    </costume>
+    <costume name="alien3b" extends="alien">
+      <pose name="default" pose="alien3b"/>
+    </costume>
+    <costume name="bomb">
+      <pose name="default" pose="bomb1"/>
+      <animation name="default" animation="bomb"/>
+    </costume>
+  </costumes>
+  <scenes>
+    <scene name="menu"/>
+    <scene name="profiles"/>
+  </scenes>
+</resources>
