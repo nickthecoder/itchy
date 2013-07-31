@@ -10,7 +10,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.prefs.Preferences;
 
-import uk.co.nickthecoder.drunkinvaders.DrunkInvaders;
 import uk.co.nickthecoder.itchy.editor.Editor;
 import uk.co.nickthecoder.itchy.gui.GuiPose;
 import uk.co.nickthecoder.itchy.util.AutoFlushPreferences;

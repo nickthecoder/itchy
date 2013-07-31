@@ -134,7 +134,10 @@ public class SceneReader
         }
 
         if (actorTag.hasAttribute("behaviour")) {
-            sceneActor.behaviourClassName = actorTag.getAttribute("behaviour");
+            String name = actorTag.getAttribute("behaviour");
+            if (this.resources.registerBehaviourClassName(name)) {
+                sceneActor.behaviourClassName = name;
+            }
         }
 
         HashMap<String, String> properties = new HashMap<String, String>();

@@ -146,6 +146,13 @@ public abstract class Component implements Focusable
     {
         return this.parent;
     }
+    
+    public void remove()
+    {
+        if ( this.parent != null) {
+            this.getParent().removeChild(this);
+        }
+    }
 
     public boolean onKeyDown( KeyboardEvent ke )
     {

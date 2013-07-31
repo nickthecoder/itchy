@@ -1,7 +1,8 @@
 <rules>
    
     <resources filename="resources.xml"/>
-   
+
+    <rule criteria="root" background="background"/>   
     <rule criteria="label" font="regular" fontSize="14" color="#c6c1b8" />
        
     <rule criteria="titleBar" background="titleBar" paddingTop="16" paddingBottom="6" paddingLeft="20" paddingRight="20" />
@@ -27,7 +28,8 @@
     <rule criteria="swatch image" background="checkered"/>
     
     <rule criteria=".toolbar" background="panel1" />
-    <rule criteria=".toolbar button" background="button-naked" minimumWidth="0" marginLeft="-1" marginRight="-1"/>
+    <rule criteria=".toolbar button" padding="7" background="button-naked" minimumWidth="0" marginLeft="-1" marginRight="-1"/>
+    <rule criteria=".toolbar button" minimumWidth="36" minimumHeight="36"/>
     <rule criteria=".toolbar button.focus" background="button-naked-focus"/>
     <rule criteria=".toolbar button.selected" background="button-naked-selected"/>
     <rule criteria=".toolbar button.down" background="button-naked-down"/>
@@ -69,8 +71,6 @@
 
     <rule criteria="checkbox" background="checkbox" width="25" height="25"/>
     <rule criteria="checkbox image" image="checked" marginLeft="4" marginTop="6"/>
-
-    <rule criteria="root.editor" background="background" paddingTop="10" paddingBottom="0" paddingLeft="10" paddingRight="10"/>
     
     <rule criteria=".form" spacing="10" />
     <rule criteria=".buttonBar" spacing="10" marginTop="10" marginBottom="10"/>
@@ -83,6 +83,7 @@
     <rule criteria=".combo textBox.focus" background="text-naked-focus"/>
     <rule criteria=".combo textBox.focus" background="text-naked-focus"/>
     <rule criteria=".combo textBox.error" background="text-naked-error"/>
+    <rule criteria="comboBox.error textBox" background="text-naked-error"/>
     <rule criteria=".combo button" background="button-naked" minimumWidth="0"/>
     <rule criteria=".combo button.focus" background="button-focus"/>
     <rule criteria=".combo button.down" background="button-naked-down"/>

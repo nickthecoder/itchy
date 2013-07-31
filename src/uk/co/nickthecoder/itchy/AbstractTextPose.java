@@ -91,6 +91,7 @@ public abstract class AbstractTextPose implements Pose
     public void setFontSize( double fontSize )
     {
         if ((int) this.fontSize != (int) fontSize) {
+            this.ttf = null;
             this.clearSurfaceCache();
         }
         this.fontSize = fontSize;

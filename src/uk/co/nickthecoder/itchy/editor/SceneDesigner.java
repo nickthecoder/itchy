@@ -21,6 +21,7 @@ import uk.co.nickthecoder.itchy.KeyListener;
 import uk.co.nickthecoder.itchy.Layer;
 import uk.co.nickthecoder.itchy.MouseListener;
 import uk.co.nickthecoder.itchy.NullBehaviour;
+import uk.co.nickthecoder.itchy.Pose;
 import uk.co.nickthecoder.itchy.Scene;
 import uk.co.nickthecoder.itchy.SceneActor;
 import uk.co.nickthecoder.itchy.SceneResource;
@@ -192,7 +193,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.setMode(MODE_SELECT);
         toolboxActor.moveTo(0, this.editor.getHeight() - this.toolboxPose.getHeight());
 
-        this.onHome();
+        this.onCenter();
     }
 
     private void onDone()
@@ -233,7 +234,15 @@ public class SceneDesigner implements MouseListener, KeyListener
 
     private void createToolbox()
     {
-        this.toolboxPose = new GuiPose();
+        this.toolboxPose = new GuiPose() {
+            // Mouse clicks on the toolbox mustn't get propagated to the design area underneigth.
+            @Override
+            public boolean mouseDown( MouseButtonEvent event )
+            {
+                super.mouseDown(event);
+                return true;
+            }
+        };
         this.toolboxPose.addStyle("toolbox");
         this.toolboxPose.draggable = true;
 
@@ -283,7 +292,17 @@ public class SceneDesigner implements MouseListener, KeyListener
 
     private void createToolbar()
     {
-        this.toolbarPose = new GuiPose();
+        this.toolbarPose = new GuiPose() {
+            @Override
+            public boolean mouseDown( MouseButtonEvent event )
+            {
+                // Mouse clicks on the toolbar mustn't get propagated to the design area
+                // underneigth.
+                super.mouseDown(event);
+                return true;
+            }
+        };
+
         this.toolbarPose.addStyle("toolbar");
 
         this.toolbarPose.setRules(this.editor.rules);
@@ -297,79 +316,31 @@ public class SceneDesigner implements MouseListener, KeyListener
             this.toolbarPose.getRequiredHeight());
     }
 
+    public Button createButton( String name, String text )
+    {
+        Pose pose = this.editor.rules.resources.getPose("icon_" + name);
+        if (pose == null) {
+            return new Button(text);
+        } else {
+            ImageComponent image = new ImageComponent(pose.getSurface());
+            return new Button(image);
+        }
+    }
+
     private void addToolbarButtons( Container toolbar )
     {
-        Button done = new Button("Done");
-        done.addActionListener(new ActionListener() {
+
+        Button exit = createButton("exit", "Exit");
+        exit.addActionListener(new ActionListener() {
             @Override
             public void action()
             {
                 SceneDesigner.this.onDone();
             }
         });
-        toolbar.addChild(done);
+        toolbar.addChild(exit);
 
-        Button home = new Button("Home");
-        home.addActionListener(new ActionListener() {
-            @Override
-            public void action()
-            {
-                SceneDesigner.this.onHome();
-            }
-        });
-        toolbar.addChild(home);
-
-        Button actorUp = new Button("Up");
-        actorUp.addActionListener(new ActionListener() {
-            @Override
-            public void action()
-            {
-                SceneDesigner.this.onActorUp();
-            }
-        });
-        toolbar.addChild(actorUp);
-
-        Button actorDown = new Button("Down");
-        actorDown.addActionListener(new ActionListener() {
-            @Override
-            public void action()
-            {
-                SceneDesigner.this.onActorDown();
-            }
-        });
-        toolbar.addChild(actorDown);
-
-        Button actorTop = new Button("Top");
-        actorTop.addActionListener(new ActionListener() {
-            @Override
-            public void action()
-            {
-                SceneDesigner.this.onActorTop();
-            }
-        });
-        toolbar.addChild(actorTop);
-
-        Button actorBottom = new Button("Bottom");
-        actorBottom.addActionListener(new ActionListener() {
-            @Override
-            public void action()
-            {
-                SceneDesigner.this.onActorBottom();
-            }
-        });
-        toolbar.addChild(actorBottom);
-
-        Button actorDelete = new Button("Delete");
-        actorDelete.addActionListener(new ActionListener() {
-            @Override
-            public void action()
-            {
-                SceneDesigner.this.onActorDelete();
-            }
-        });
-        toolbar.addChild(actorDelete);
-
-        Button save = new Button("Save");
+        Button save = createButton("save", "Save");
         save.addActionListener(new ActionListener() {
             @Override
             public void action()
@@ -379,19 +350,97 @@ public class SceneDesigner implements MouseListener, KeyListener
         });
         toolbar.addChild(save);
 
-        this.selectButton = new ToggleButton("Select");
-        this.costumeButtonGroup.add(this.selectButton);
-        this.costumeButtonGroup.defaultButton = this.selectButton;
-        this.selectButton.addActionListener(new ActionListener() {
+        Button home = createButton("center", "Center");
+        home.addActionListener(new ActionListener() {
             @Override
             public void action()
             {
-                SceneDesigner.this.onSelect();
+                SceneDesigner.this.onCenter();
             }
         });
-        toolbar.addChild(this.selectButton);
+        toolbar.addChild(home);
 
-        Button textButton = new Button("Text");
+        Button actorUp = createButton("up", "Up");
+        actorUp.addActionListener(new ActionListener() {
+            @Override
+            public void action()
+            {
+                SceneDesigner.this.onActorUp();
+            }
+        });
+        toolbar.addChild(actorUp);
+
+        Button actorDown = createButton("down", "Down");
+        actorDown.addActionListener(new ActionListener() {
+            @Override
+            public void action()
+            {
+                SceneDesigner.this.onActorDown();
+            }
+        });
+        toolbar.addChild(actorDown);
+
+        Button actorTop = createButton("top", "Top");
+        actorTop.addActionListener(new ActionListener() {
+            @Override
+            public void action()
+            {
+                SceneDesigner.this.onActorTop();
+            }
+        });
+        toolbar.addChild(actorTop);
+
+        Button actorBottom = createButton("bottom", "Bottom");
+        actorBottom.addActionListener(new ActionListener() {
+            @Override
+            public void action()
+            {
+                SceneDesigner.this.onActorBottom();
+            }
+        });
+        toolbar.addChild(actorBottom);
+
+        Button actorUpLayer = createButton("moveUpLayer", "Up a Layer");
+        actorBottom.addActionListener(new ActionListener() {
+            @Override
+            public void action()
+            {
+                SceneDesigner.this.onActorUpLayer();
+            }
+        });
+        toolbar.addChild(actorUpLayer);
+
+        Button actorDownLayer = createButton("moveDownLayer", "Down a Layer");
+        actorBottom.addActionListener(new ActionListener() {
+            @Override
+            public void action()
+            {
+                SceneDesigner.this.onActorDownLayer();
+            }
+        });
+        toolbar.addChild(actorDownLayer);
+
+        Button actorUnrotate = createButton("unrotate", "Unrotate");
+        actorUnrotate.addActionListener(new ActionListener() {
+            @Override
+            public void action()
+            {
+                SceneDesigner.this.onActorUnrotate();
+            }
+        });
+        toolbar.addChild(actorUnrotate);
+
+        Button actorUnscale = createButton("unscale", "Scale = 1");
+        actorUnscale.addActionListener(new ActionListener() {
+            @Override
+            public void action()
+            {
+                SceneDesigner.this.onActorUnscale();
+            }
+        });
+        toolbar.addChild(actorUnscale);
+
+        Button textButton = createButton("text", "Text");
         textButton.addActionListener(new ActionListener() {
             @Override
             public void action()
@@ -400,6 +449,17 @@ public class SceneDesigner implements MouseListener, KeyListener
             }
         });
         toolbar.addChild(textButton);
+
+        Button actorDelete = createButton("delete", "Delete");
+        actorDelete.addActionListener(new ActionListener() {
+            @Override
+            public void action()
+            {
+                SceneDesigner.this.onActorDelete();
+            }
+        });
+        toolbar.addChild(actorDelete);
+
     }
 
     private void createProperties()
@@ -458,21 +518,24 @@ public class SceneDesigner implements MouseListener, KeyListener
                     .getBehaviour();
                 try {
                     sdb.setBehaviourClassName(value);
-                    SceneDesigner.this.createBehaviourProperties( grid );
+                    SceneDesigner.this.createBehaviourProperties(grid);
                     SceneDesigner.this.editor.game.resources.registerBehaviourClassName(value);
                     SceneDesigner.this.behaviourClassName.removeStyle("error");
                 } catch (Exception e) {
                     SceneDesigner.this.behaviourClassName.addStyle("error");
                 }
+                System.out.println("Styles : " + SceneDesigner.this.behaviourClassName.getStyles());
             }
         });
-        
-        createBehaviourProperties( grid );
+
+        grid.addRow("Behaviour", this.behaviourClassName);
+        createBehaviourProperties(grid);
     }
 
     private void createBehaviourProperties( GridLayout grid )
     {
         grid.clear();
+        this.behaviourClassName.remove();
         grid.addRow("Behaviour", this.behaviourClassName);
 
         SceneDesignerBehaviour behaviour = (SceneDesignerBehaviour) this.currentActor
@@ -612,14 +675,14 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.createStampActor();
     }
 
-    private void onSelect()
-    {
-        this.setMode(MODE_SELECT);
-    }
-
     @Override
     public boolean onKeyDown( KeyboardEvent event )
     {
+
+        if (event.symbol == Keys.ESCAPE) {
+            this.onEscape();
+            return true;
+        }
 
         if (Itchy.singleton.isCtrlDown()) {
 
@@ -627,6 +690,10 @@ public class SceneDesigner implements MouseListener, KeyListener
 
             if (event.symbol == Keys.s) {
                 this.onSave();
+                return true;
+
+            } else if (event.symbol == Keys.w) {
+                this.onDone();
                 return true;
 
             } else if (event.symbol == Keys.LEFT) {
@@ -665,7 +732,7 @@ public class SceneDesigner implements MouseListener, KeyListener
                 return true;
 
             } else if (event.symbol == Keys.HOME) {
-                this.onHome();
+                this.onCenter();
                 return true;
 
             } else if (event.symbol == Keys.PAGEUP) {
@@ -674,6 +741,18 @@ public class SceneDesigner implements MouseListener, KeyListener
 
             } else if (event.symbol == Keys.PAGEDOWN) {
                 this.onActorDownLayer();
+                return true;
+
+            } else if (event.symbol == Keys.o) {
+                this.onActorUnrotate();
+                return true;
+
+            } else if (event.symbol == Keys.KEY_0) {
+                this.onActorUnscale();
+                return true;
+
+            } else if (event.symbol == Keys.s) {
+                this.onSave();
                 return true;
             }
 
@@ -720,6 +799,12 @@ public class SceneDesigner implements MouseListener, KeyListener
         return false;
     }
 
+    private void onEscape()
+    {
+        setMode(MODE_SELECT);
+        selectActor(null);
+    }
+
     private void moveActor( int dx, int dy )
     {
         if (this.currentActor != null) {
@@ -751,7 +836,7 @@ public class SceneDesigner implements MouseListener, KeyListener
             for (HandleBehaviour handleBehaviour : this.handles) {
                 Actor actor = handleBehaviour.getActor();
 
-                if (actor.touching(event.x, event.y)) {
+                if (actor.hitting(event.x, event.y)) {
                     this.beginDrag(event);
                     handleBehaviour.dragStart();
                     this.currentHandleBehaviour = handleBehaviour;
@@ -775,7 +860,7 @@ public class SceneDesigner implements MouseListener, KeyListener
                         layer.getActors() :
                         Reversed.list(layer.getActors())) {
 
-                        if (actor.touching(event.x, event.y)) {
+                        if (actor.hitting(event.x, event.y)) {
                             this.selectActor(actor);
                             this.setMode(MODE_DRAG_ACTOR);
                             this.beginDrag(event);
@@ -790,7 +875,7 @@ public class SceneDesigner implements MouseListener, KeyListener
                     this.currentDesignLayer.getActors() :
                     Reversed.list(this.currentDesignLayer.getActors())) {
 
-                    if (actor.touching(event.x, event.y)) {
+                    if (actor.hitting(event.x, event.y)) {
                         this.selectActor(actor);
                         this.setMode(MODE_DRAG_ACTOR);
                         this.beginDrag(event);
@@ -950,7 +1035,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.glassLayer.scrollBy(dx, dy);
     }
 
-    private void onHome()
+    private void onCenter()
     {
         int x = 0;
         int y = this.sceneRect.height - this.editor.getHeight() + this.toolbarPose.getHeight();
@@ -958,32 +1043,6 @@ public class SceneDesigner implements MouseListener, KeyListener
             ((ScrollableLayer) layer).scrollTo(x, y);
         }
         this.glassLayer.scrollTo(x, y);
-    }
-
-    private void onActorUpLayer()
-    {
-        if ((this.mode == MODE_SELECT) && (this.currentActor != null)) {
-            ActorsLayer otherLayer = getLayerAbove(this.currentActor.getLayer());
-
-            if (otherLayer != null) {
-                this.currentActor.getLayer().remove(this.currentActor);
-                otherLayer.add(this.currentActor);
-                updateLayersTable();
-            }
-        }
-    }
-
-    private void onActorDownLayer()
-    {
-        if ((this.mode == MODE_SELECT) && (this.currentActor != null)) {
-            ActorsLayer otherLayer = getLayerBelow(this.currentActor.getLayer());
-
-            if (otherLayer != null) {
-                this.currentActor.getLayer().remove(this.currentActor);
-                otherLayer.add(this.currentActor);
-                updateLayersTable();
-            }
-        }
     }
 
     private ActorsLayer getLayerBelow( ActorsLayer layer )
@@ -1047,6 +1106,49 @@ public class SceneDesigner implements MouseListener, KeyListener
         if ((this.mode == MODE_SELECT) && (this.currentActor != null)) {
             this.currentActor.kill();
             this.selectActor(null);
+        }
+    }
+
+    private void onActorUpLayer()
+    {
+        if ((this.mode == MODE_SELECT) && (this.currentActor != null)) {
+            ActorsLayer otherLayer = getLayerAbove(this.currentActor.getLayer());
+
+            if (otherLayer != null) {
+                this.currentActor.getLayer().remove(this.currentActor);
+                otherLayer.add(this.currentActor);
+                updateLayersTable();
+            }
+        }
+    }
+
+    private void onActorUnrotate()
+    {
+        if ((this.mode == MODE_SELECT) && (this.currentActor != null)) {
+            this.currentActor.getAppearance().setDirection(
+                this.currentActor.getAppearance().getPose().getDirection());
+            this.selectActor(this.currentActor);
+        }
+    }
+    
+    private void onActorUnscale()
+    {
+        if ((this.mode == MODE_SELECT) && (this.currentActor != null)) {
+            this.currentActor.getAppearance().setScale(1);
+            this.selectActor(this.currentActor);
+        }
+    }
+
+    private void onActorDownLayer()
+    {
+        if ((this.mode == MODE_SELECT) && (this.currentActor != null)) {
+            ActorsLayer otherLayer = getLayerBelow(this.currentActor.getLayer());
+
+            if (otherLayer != null) {
+                this.currentActor.getLayer().remove(this.currentActor);
+                otherLayer.add(this.currentActor);
+                updateLayersTable();
+            }
         }
     }
 

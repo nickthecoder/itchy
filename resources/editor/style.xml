@@ -4,6 +4,8 @@
 
     <include filename="../defaultGui/style.xml"/>
 
+    <rule criteria="root.editor" paddingTop="10" paddingBottom="0" paddingLeft="10" paddingRight="10"/>
+
     <rule criteria=".animationIndent" spacing="6" marginLeft="20" />
     <rule criteria=".animationTree" spacing="10" paddingRight="25" />
     
@@ -15,5 +17,6 @@
     <rule criteria=".costumes" padding="0" spacing="2"/>
     <rule criteria=".costumes button" width="60" height="60" padding="0"/>
     
+   
 </rules>
 

@@ -8,16 +8,26 @@ Jame is out of date, need to rebuild for win32 and i386 and ARM??
 What's Next
 ===========
 
+BUG Colorize doesn't handle blank values correctly.
+
+IntegerBox to allow up and down keys to adjust value, like scrollwheel.
+
+Copy Paste and duplicate in SceneDesigner 
+
+Finish CostumesEditor
+
+F8 to go straight to the Text property for Text in SceneDesigner
+
+Create a GenericGame, which can load arbitrary resources (for a simple start to a game)
+
 BUG
     One of the animation profiles shows that the NumericAnimation isn't quite right.
     
 BUG
     When a window has no focusable components, then it recurses till the stack explodes.
     
-    
-touching vs overlapping when dealing with Text vs ImagePose actors
-    Button always uses "contains", but the editor always uses "touching".
-    Should both use contains when dealing with text, but overlapping when dealing with images?
+BUG
+    Designer can scale actors to -ve values, which are then unselectable
 
 Create a simple parallax scrolling game, so that I can implement and test a parallax scrolling layer!
     
@@ -56,10 +66,15 @@ Use SceneBehaviour in the games.
 Create a game which uses the GUI        
     The Rules object needs to be on Game, its probably on Itchy right now.
 
-Complete GUI styles
-    The animation's close button should look like the butterscotch one.
-        Use existing button, just don't change margin/padding??
 
+About Page in the editor
+    Name of the game
+    Author(s), Graphics Designer(s) etc
+    Source code directory
+    Package name
+
+Generate code stubs
+    Game subclass, Behaviour subclass, SceneBehaviour subclass
 
 
 Follower/Leader behaviours

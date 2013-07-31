@@ -23,7 +23,7 @@ public class TestGame extends Game
 
     public TestGame() throws Exception
     {
-        super("AnimationTest", 800, 600);
+        super("Test", 800, 600);
         this.resources.load(new File("resources/tests/resources.xml"));
     }
 

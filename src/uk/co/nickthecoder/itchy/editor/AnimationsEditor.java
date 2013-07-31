@@ -170,7 +170,7 @@ public class AnimationsEditor extends SubEditor
 
         if ((parent != null) && (parent.children.get(0) != animation)) {
             Button up = new Button(new ImageComponent(this.editor.rules.resources.getPose(
-                "up").getSurface()));
+                "icon_up").getSurface()));
             up.addStyle("compact");
             up.addActionListener(new ActionListener() {
                 @Override
@@ -185,7 +185,7 @@ public class AnimationsEditor extends SubEditor
 
         if (parent != null) {
             Button delete = new Button(new ImageComponent(this.editor.rules.resources.getPose(
-                "delete").getSurface()));
+                "icon_delete").getSurface()));
             delete.addStyle("compact");
             delete.addActionListener(new ActionListener() {
                 @Override

@@ -569,6 +569,25 @@ public class Actor extends Task
         return false;
     }
 
+    /**
+     * For an Actor displaying text, this is the same as the method 'contains', but for
+     * other actors (displaying an image), it is the same as the method 'touching'.
+     * 
+     * This should be used whenever you want to know if the mouse is clicking the actor.
+     */
+    public boolean hitting( int x, int y )
+    {
+        if ( this.getAppearance().getAlpha() < 1 ) {
+            return false;
+        }
+        
+        if ( getAppearance().getPose() instanceof ImagePose ) {
+            return this.touching(x,y);
+        } else {
+            return this.contains(x,y);
+        }
+    }
+    
     public boolean touching( int x, int y )
     {
         return this.touching(x, y, 0);
