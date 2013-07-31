@@ -7,14 +7,9 @@ package uk.co.nickthecoder.itchy.util;
 
 import java.lang.reflect.InvocationTargetException;
 
-import uk.co.nickthecoder.itchy.gui.ActionListener;
-import uk.co.nickthecoder.itchy.gui.Button;
 import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
-import uk.co.nickthecoder.itchy.gui.Container;
-import uk.co.nickthecoder.itchy.gui.RGBAPicker;
-import uk.co.nickthecoder.itchy.gui.TextBox;
-import uk.co.nickthecoder.jame.JameException;
+import uk.co.nickthecoder.itchy.gui.RGBABox;
 import uk.co.nickthecoder.jame.RGBA;
 
 public class RGBAProperty<S> extends AbstractProperty<S, RGBA>
@@ -36,34 +31,16 @@ public class RGBAProperty<S> extends AbstractProperty<S, RGBA>
         SecurityException, IllegalAccessException, InvocationTargetException, NoSuchFieldException
     {
         RGBA color = this.getValue(subject);
-        Container combo = new Container();
-        combo.addStyle("combo");
-
-        final TextBox textBox = new TextBox(color == null ? ""
-            : this.includeAlpha ? color.getRGBACode() : color.getRGBCode());
-        textBox.setBoxWidth(8);
-
-        Button button = new Button("...");
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void action()
-            {
-                RGBAPicker picker = new RGBAPicker(RGBAProperty.this.includeAlpha, textBox);
-                picker.show();
-            }
-        });
-
-        combo.addChild(textBox);
-        combo.addChild(button);
+        final RGBABox result = new RGBABox(color, this.allowNull, this.includeAlpha);
 
         if (autoUpdate) {
 
-            textBox.addChangeListener(new ComponentChangeListener() {
+            result.addChangeListener(new ComponentChangeListener() {
                 @Override
                 public void changed()
                 {
                     try {
-                        RGBAProperty.this.update(subject, textBox);
+                        RGBAProperty.this.update(subject, result);
                         if (listener != null) {
                             listener.changed();
                         }
@@ -73,38 +50,26 @@ public class RGBAProperty<S> extends AbstractProperty<S, RGBA>
             });
         }
 
-        return combo;
+        return result;
     }
 
     @Override
-    public void update( S subject, Component component ) throws Exception
+    public void update( S subject, Component component )
     {
-        TextBox textBox = (TextBox) component;
+        RGBABox rgbaBox = (RGBABox) component;
         try {
-            this.setValue(subject, this.parse(textBox.getText()));
-            textBox.removeStyle("error");
+            this.setValue(subject, rgbaBox.getValue());
         } catch (Exception e) {
-            textBox.addStyle("error");
         }
     }
 
     @Override
     public RGBA parse( String value )
     {
-        if (this.allowNull && ("".equals(value))) {
-            return null;
-        }
-
         try {
-            RGBA result = RGBA.parse(value);
-            if (!this.includeAlpha) {
-                if (result.a != 255) {
-                    throw new NullPointerException();
-                }
-            }
-            return result;
-        } catch (JameException e) {
-            throw new NullPointerException();
+            return RGBA.parse(value, this.allowNull, this.includeAlpha);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 

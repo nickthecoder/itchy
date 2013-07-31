@@ -47,7 +47,7 @@ public class BeanHelper
         throws IllegalArgumentException, SecurityException, IllegalAccessException,
         InvocationTargetException, NoSuchFieldException
     {
-        Class<?> klass = value.getClass();
+        Class<?> klass = value == null ? null : value.getClass();
 
         if (klass == Double.class) {
             klass = double.class;
@@ -77,22 +77,37 @@ public class BeanHelper
 
         } else {
 
-            // Look for a method called setXXX first
-            Class<?>[] argTypes = new Class<?>[1];
-            argTypes[0] = klass;
-
             String methodName = "set" + attributeName.substring(0, 1).toUpperCase() +
                 attributeName.substring(1);
 
-            try {
-                Method method = subject.getClass().getMethod(methodName, argTypes);
-
-                method.invoke(subject, value);
-                return;
-
-            } catch (NoSuchMethodException e) {
+            // Look for a method called setXXX first
+            if ( (klass == null) && (value == null) ) {
+                // Damn, we don't know the class of the parameter, and its null, so look for ANY
+                // method, which takes a single object as its parameter.
+                
+                for ( Method method : subject.getClass().getMethods() ) {
+                    if ( method.getName().equals( methodName) ) {
+                        if (method.getParameterTypes().length == 1) {
+                            method.invoke(subject, value);
+                            return;
+                        }
+                    }
+                }
+                
+            } else {
+                Class<?>[] argTypes = new Class<?>[1];
+                argTypes[0] = klass;
+        
+                try {
+                    Method method = subject.getClass().getMethod(methodName, argTypes);
+    
+                    method.invoke(subject, value);
+                    return;
+    
+                } catch (NoSuchMethodException e) {
+                }
             }
-
+            
             Field field = subject.getClass().getField(attributeName);
             // Field field = subject.getClass().getDeclaredField( attributeName );
             field.set(subject, value);

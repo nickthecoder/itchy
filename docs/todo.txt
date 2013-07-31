@@ -33,6 +33,10 @@ Create a simple parallax scrolling game, so that I can implement and test a para
     
     Would like a circular world i.e. the left edge joins the right edge
     
+touching vs overlapping when dealing with Text vs ImagePose actors
+    Button always uses "contains", but the editor always uses "touching".
+    Should both use contains when dealing with text, but overlapping when dealing with images?
+    
     For a scenery only background, those layers could be smaller that the main one, but cyclic.
     The cycle size for each layer would have to be different
         Maybe the cycle size is a Property, which is available in the GUI editor
