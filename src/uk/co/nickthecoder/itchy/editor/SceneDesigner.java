@@ -71,6 +71,11 @@ public class SceneDesigner implements MouseListener, KeyListener
     private static final int MODE_DRAG_ACTOR = 4;
     private static final int MODE_DRAG_HANDLE = 5;
 
+    /**
+     * Used when copying and pasting
+     */
+    private static SceneActor copiedActor;
+
     private final Editor editor;
 
     private final SceneResource sceneResource;
@@ -360,6 +365,38 @@ public class SceneDesigner implements MouseListener, KeyListener
         });
         toolbar.addChild(home);
 
+        Button cut = createButton("cut", "Cut");
+        cut.addActionListener(new ActionListener() {
+            @Override
+            public void action()
+            {
+                SceneDesigner.this.onCopy();
+                SceneDesigner.this.onActorDelete();
+            }
+        });
+        toolbar.addChild(cut);
+
+
+        Button copy = createButton("copy", "Copy");
+        copy.addActionListener(new ActionListener() {
+            @Override
+            public void action()
+            {
+                SceneDesigner.this.onCopy();
+            }
+        });
+        toolbar.addChild(copy);
+
+        Button paste = createButton("paste", "Paste");
+        paste.addActionListener(new ActionListener() {
+            @Override
+            public void action()
+            {
+                SceneDesigner.this.onPaste();
+            }
+        });
+        toolbar.addChild(paste);
+        
         Button actorUp = createButton("up", "Up");
         actorUp.addActionListener(new ActionListener() {
             @Override
@@ -450,15 +487,6 @@ public class SceneDesigner implements MouseListener, KeyListener
         });
         toolbar.addChild(textButton);
 
-        Button actorDelete = createButton("delete", "Delete");
-        actorDelete.addActionListener(new ActionListener() {
-            @Override
-            public void action()
-            {
-                SceneDesigner.this.onActorDelete();
-            }
-        });
-        toolbar.addChild(actorDelete);
 
     }
 
@@ -694,6 +722,19 @@ public class SceneDesigner implements MouseListener, KeyListener
 
             } else if (event.symbol == Keys.w) {
                 this.onDone();
+                return true;
+
+            } else if (event.symbol == Keys.x) {
+                this.onCopy();
+                this.onActorDelete();
+                return true;
+
+            } else if (event.symbol == Keys.c) {
+                this.onCopy();
+                return true;
+
+            } else if (event.symbol == Keys.v) {
+                this.onPaste();
                 return true;
 
             } else if (event.symbol == Keys.LEFT) {
@@ -1101,6 +1142,23 @@ public class SceneDesigner implements MouseListener, KeyListener
         }
     }
 
+    private void onCopy()
+    {
+        if ((this.mode == MODE_SELECT) && (this.currentActor != null)) {
+            SceneDesigner.copiedActor = SceneActor.createSceneActor(this.currentActor);
+        }
+    }
+
+    private void onPaste()
+    {
+        if (SceneDesigner.copiedActor != null) {
+            Actor actor = SceneDesigner.copiedActor.createActor(true);
+            actor.moveBy(10, 10);
+            this.currentDesignLayer.add(actor);
+            this.selectActor( actor );
+        }
+    }
+
     private void onActorDelete()
     {
         if ((this.mode == MODE_SELECT) && (this.currentActor != null)) {
@@ -1130,7 +1188,7 @@ public class SceneDesigner implements MouseListener, KeyListener
             this.selectActor(this.currentActor);
         }
     }
-    
+
     private void onActorUnscale()
     {
         if ((this.mode == MODE_SELECT) && (this.currentActor != null)) {
