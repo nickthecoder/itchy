@@ -10,7 +10,6 @@
         <pose name="icon_bottom" filename="bottom.png" />                
         <pose name="icon_moveUpLayer" filename="moveUpLayer.png" />                
         <pose name="icon_moveDownLayer" filename="moveDownLayer.png" />                
-        <pose name="icon_delete" filename="edit-delete.png" />                
         <pose name="icon_cut" filename="edit-cut.png" />                
         <pose name="icon_copy" filename="edit-copy.png" />                
         <pose name="icon_paste" filename="edit-paste.png" />                

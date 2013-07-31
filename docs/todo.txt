@@ -10,8 +10,6 @@ What's Next
 
 IntegerBox to allow up and down keys to adjust value, like scrollwheel.
 
-Copy Paste and duplicate in SceneDesigner 
-
 Finish CostumesEditor
 
 F8 to go straight to the Text property for Text in SceneDesigner

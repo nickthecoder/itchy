@@ -8,6 +8,7 @@ package uk.co.nickthecoder.itchy.gui;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.jame.Keys;
 import uk.co.nickthecoder.jame.event.Event;
+import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 
 public class IntegerBox extends EntryBox<IntegerBox>
@@ -87,7 +88,7 @@ public class IntegerBox extends EntryBox<IntegerBox>
     {
         try {
             int newValue = this.getValue() + delta;
-            if (( newValue >= this.minimumValue) && (newValue<=this.maximumValue)) {
+            if ((newValue >= this.minimumValue) && (newValue <= this.maximumValue)) {
                 this.setValue(newValue);
             }
         } catch (Exception e) {
@@ -103,6 +104,25 @@ public class IntegerBox extends EntryBox<IntegerBox>
         } catch (Exception e) {
             return false;
         }
+    }
+
+    @Override
+    public boolean onKeyDown( KeyboardEvent ke )
+    {
+        if (ke.symbol == Keys.UP) {
+            this.adjust(1);
+            return true;
+        } else if (ke.symbol == Keys.DOWN) {
+            this.adjust(-1);
+            return true;
+        } else if (ke.symbol == Keys.PAGEUP) {
+            this.adjust(10);
+            return true;
+        } else if (ke.symbol == Keys.PAGEDOWN) {
+            this.adjust(-10);
+            return true;
+        }
+        return super.onKeyDown(ke);
     }
 
     @Override
