@@ -113,14 +113,12 @@ public abstract class RootContainer extends Container
             this.addStyle("focus");
             RootContainer.focus.onFocus(true);
 
-            // Ensure that the newly focused component is visible, by scrolling any parent
-            // scrollables.
-            for (Container parent = component.getParent(); parent != null; parent = parent
-                .getParent()) {
-                if (parent instanceof Scrollable) {
-                    Scrollable scrollable = (Scrollable) parent;
-                    scrollable.ensureVisible(component);
-                }
+            // Ensure that the newly focused component is visible, scrollable will scroll,
+            // and notebooks will select the appropriate tab.
+            Container parent = component.getParent();
+            while (parent != null) {
+                parent.ensureVisible(component);
+                parent = parent.getParent();
             }
         }
 

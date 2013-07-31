@@ -569,6 +569,10 @@ public class Actor extends Task
         return false;
     }
 
+    public boolean isText()
+    {
+        return ! (getAppearance().getPose() instanceof ImagePose);
+    }
     /**
      * For an Actor displaying text, this is the same as the method 'contains', but for
      * other actors (displaying an image), it is the same as the method 'touching'.
@@ -581,10 +585,10 @@ public class Actor extends Task
             return false;
         }
         
-        if ( getAppearance().getPose() instanceof ImagePose ) {
-            return this.touching(x,y);
-        } else {
+        if ( isText() ) {
             return this.contains(x,y);
+        } else {
+            return this.touching(x,y);
         }
     }
     

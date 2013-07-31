@@ -218,6 +218,16 @@ public class Container extends Component
         }
     }
 
+    /**
+     * Used to ensure that the component is visble on screen.
+     * Most containers do nothing, but a scrollable will scroll the client as appropriate, and
+     * Notebooks will select the appropriate tab.
+     */
+    public void ensureVisible( Component child )
+    {
+        // Does nothing.
+    }
+    
     boolean previousFocus( Component from, Component stop )
     {
         boolean found = from == null;

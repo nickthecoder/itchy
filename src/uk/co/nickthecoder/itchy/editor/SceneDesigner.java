@@ -135,6 +135,13 @@ public class SceneDesigner implements MouseListener, KeyListener
 
     private ComboBox behaviourClassName;
 
+    /**
+     * When a text actor is the current actor, then this will be the TextBox that you enter the
+     * Actor's text. This field is used to set the focus on it whenever a new text is added, and
+     * when a shortcut is used (F8).
+     */
+    private Component actorTextInput;
+
     public SceneDesigner( Editor editor, SceneResource sceneResource )
     {
         this.editor = editor;
@@ -376,7 +383,6 @@ public class SceneDesigner implements MouseListener, KeyListener
         });
         toolbar.addChild(cut);
 
-
         Button copy = createButton("copy", "Copy");
         copy.addActionListener(new ActionListener() {
             @Override
@@ -396,7 +402,7 @@ public class SceneDesigner implements MouseListener, KeyListener
             }
         });
         toolbar.addChild(paste);
-        
+
         Button actorUp = createButton("up", "Up");
         actorUp.addActionListener(new ActionListener() {
             @Override
@@ -487,7 +493,6 @@ public class SceneDesigner implements MouseListener, KeyListener
         });
         toolbar.addChild(textButton);
 
-
     }
 
     private void createProperties()
@@ -496,15 +501,22 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.propertiesContainer.setLayout(grid);
         grid.clear();
 
+        this.actorTextInput = null;
+
         if (this.currentActor != null) {
             for (AbstractProperty<Actor, ?> property : this.currentActor.getProperties()) {
                 try {
                     Component component = property.createComponent(this.currentActor, true);
                     grid.addRow(property.label, component);
 
+                    if ("appearance.pose.text".equals(property.access)) {
+                        this.actorTextInput = component;
+                    }
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+
             }
             this.createBehaviourProperties();
         }
@@ -573,7 +585,6 @@ public class SceneDesigner implements MouseListener, KeyListener
             try {
                 Component component = property.createComponent(behaviour.actualBehaviour, true);
                 grid.addRow(property.label, component);
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -736,7 +747,6 @@ public class SceneDesigner implements MouseListener, KeyListener
             } else if (event.symbol == Keys.v) {
                 this.onPaste();
                 return true;
-
             } else if (event.symbol == Keys.LEFT) {
                 this.scrollBy(-scrollAmount, 0);
                 return true;
@@ -801,6 +811,7 @@ public class SceneDesigner implements MouseListener, KeyListener
 
             int moveAmount = Itchy.singleton.isShiftDown() ? 10 : 1;
 
+            
             if (event.symbol == Keys.PAGEUP) {
                 this.onActorUp();
                 return true;
@@ -833,6 +844,9 @@ public class SceneDesigner implements MouseListener, KeyListener
                 this.moveActor(0, -moveAmount);
                 return true;
 
+            } else if (event.symbol == Keys.F8) {
+                this.onEditText();
+                return true;
             }
 
         }
@@ -951,7 +965,7 @@ public class SceneDesigner implements MouseListener, KeyListener
                 e.printStackTrace();
             }
 
-            if (!(this.stampActor.getAppearance().getPose() instanceof TextPose)) {
+            if (!this.stampActor.isText()) {
                 setDefaultProperties(behaviour.actualBehaviour, this.currentCostume);
             }
 
@@ -962,7 +976,10 @@ public class SceneDesigner implements MouseListener, KeyListener
             if (!Itchy.singleton.isShiftDown()) {
                 this.setMode(MODE_SELECT);
                 this.selectActor(actor);
+                
+                this.onEditText();
             }
+            
             return true;
         }
 
@@ -1155,7 +1172,7 @@ public class SceneDesigner implements MouseListener, KeyListener
             Actor actor = SceneDesigner.copiedActor.createActor(true);
             actor.moveBy(10, 10);
             this.currentDesignLayer.add(actor);
-            this.selectActor( actor );
+            this.selectActor(actor);
         }
     }
 
@@ -1210,6 +1227,15 @@ public class SceneDesigner implements MouseListener, KeyListener
         }
     }
 
+    private void onEditText()
+    {
+        if ((this.mode == MODE_SELECT) && (this.currentActor != null)) {
+            if (this.actorTextInput != null ) {
+                this.actorTextInput.focus();
+            }
+        }
+    }
+    
     private void onSave()
     {
         Scene scene = new Scene();

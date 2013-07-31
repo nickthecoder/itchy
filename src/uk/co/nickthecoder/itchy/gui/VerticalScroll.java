@@ -13,7 +13,7 @@ import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseEvent;
 
-public class VerticalScroll extends Container implements Layout, Scrollable
+public class VerticalScroll extends Container implements Layout
 {
     protected Component child;
 
