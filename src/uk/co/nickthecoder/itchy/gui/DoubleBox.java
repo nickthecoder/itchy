@@ -13,6 +13,7 @@ import java.text.Format;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.jame.Keys;
 import uk.co.nickthecoder.jame.event.Event;
+import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 
 public class DoubleBox extends EntryBox<DoubleBox>
@@ -60,6 +61,26 @@ public class DoubleBox extends EntryBox<DoubleBox>
         this.setValue(this.getValue() + delta);
     }
 
+
+    @Override
+    public boolean onKeyDown( KeyboardEvent ke )
+    {
+        if (ke.symbol == Keys.UP) {
+            this.adjust(1);
+            return true;
+        } else if (ke.symbol == Keys.DOWN) {
+            this.adjust(-1);
+            return true;
+        } else if (ke.symbol == Keys.PAGEUP) {
+            this.adjust(10);
+            return true;
+        } else if (ke.symbol == Keys.PAGEDOWN) {
+            this.adjust(-10);
+            return true;
+        }
+        return super.onKeyDown(ke);
+    }
+    
     @Override
     public boolean mouseDown( MouseButtonEvent mbe )
     {
