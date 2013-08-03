@@ -6,6 +6,7 @@
 package uk.co.nickthecoder.itchy.editor;
 
 import uk.co.nickthecoder.itchy.Itchy;
+import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Button;
 import uk.co.nickthecoder.itchy.gui.Component;
@@ -42,6 +43,11 @@ public abstract class SubEditor
         this.editor = editor;
     }
 
+    public Resources getResources()
+    {
+        return this.editor.game.resources;
+    }
+    
     public Container createPage()
     {
         Container form = new Container();

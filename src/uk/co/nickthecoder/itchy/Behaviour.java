@@ -200,6 +200,8 @@ public abstract class Behaviour implements MessageListener
     }
 
     /**
+     * Called when the Behaviour is first attached to its actor. For most behaviours, this will
+     * be when the actor is first created.
      * You may override this method to do one-time initialisation. Use this instead of a
      * Constructor, because the behaviour will not be fully formed in the constructor - it won't be
      * attached to its Actor yet.

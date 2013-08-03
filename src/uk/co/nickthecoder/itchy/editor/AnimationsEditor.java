@@ -186,6 +186,7 @@ public class AnimationsEditor extends SubEditor
         if (parent != null) {
             Button delete = new Button(new ImageComponent(this.editor.rules.resources.getPose(
                 "icon_delete").getSurface()));
+            
             delete.addStyle("compact");
             delete.addActionListener(new ActionListener() {
                 @Override

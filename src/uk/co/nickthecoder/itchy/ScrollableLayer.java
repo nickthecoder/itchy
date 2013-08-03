@@ -199,6 +199,12 @@ public class ScrollableLayer extends ActorsLayer
     }
 
     @Override
+    public void reset()
+    {
+        scrollTo(0,0);
+    }
+    
+    @Override
     public void destroy()
     {
         this.clear();

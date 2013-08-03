@@ -1,9 +1,7 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0 which accompanies this
+ * distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
@@ -33,7 +31,7 @@ public class SceneReader
     public Scene load( String filename ) throws Exception
     {
         BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(
-                filename)));
+            filename)));
         this.scene = new Scene();
         try {
             XMLTag document = XMLTag.openDocument(reader);
@@ -48,11 +46,15 @@ public class SceneReader
     private void readScene( XMLTag sceneTag ) throws Exception
     {
         this.scene.showMouse = sceneTag.getOptionalBooleanAttribute("showMouse", true);
-        
-        // For old versions without multiple layers, the actor tags are directly within the scene tag.
-        readLayer( sceneTag, this.scene.getDefaultSceneLayer());
-        
-        // For new versions, the scene tag has a set of layer tags, and the layer tags have the actors.
+        this.scene.sceneBehaviourName = sceneTag.getOptionalAttribute("behaviour",
+            NullSceneBehaviour.class.getName());
+
+        // For old versions without multiple layers, the actor tags are directly within the scene
+        // tag.
+        readLayer(sceneTag, this.scene.getDefaultSceneLayer());
+
+        // For new versions, the scene tag has a set of layer tags, and the layer tags have the
+        // actors.
         for (Iterator<XMLTag> i = sceneTag.getTags("layer"); i.hasNext();) {
             XMLTag layerTag = i.next();
             String name = layerTag.getAttribute("name");
@@ -61,7 +63,7 @@ public class SceneReader
         }
 
     }
-    
+
     private void readLayer( XMLTag parentTag, Scene.SceneLayer sceneLayer ) throws Exception
     {
         for (Iterator<XMLTag> i = parentTag.getTags(); i.hasNext();) {
@@ -124,7 +126,7 @@ public class SceneReader
         sceneActor.scale = actorTag.getOptionalDoubleAttribute("scale", 1);
         sceneActor.activationDelay = actorTag.getOptionalDoubleAttribute("activationDelay", 0);
         sceneActor.startEvent = actorTag.getOptionalAttribute("startEvent", "default");
-        
+
         if (actorTag.hasAttribute("colorize")) {
             try {
                 sceneActor.colorize = RGBA.parse(actorTag.getAttribute("colorize"));
@@ -155,7 +157,7 @@ public class SceneReader
             if (properties.containsKey(property.access)) {
                 try {
                     sceneActor.customProperties.put(property.access,
-                            property.parse(properties.get(property.access)));
+                        property.parse(properties.get(property.access)));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

@@ -253,10 +253,10 @@ public class DrunkInvaders extends Game
             this.mainLayer.clear();
             Itchy.singleton.completeTasks();
             this.fadingOut = false;
-            if ( ! this.loadScene(this.sceneName, this.mainLayer) ) {
+            if ( ! this.loadScene(this.sceneName) ) {
                 this.levelNumber = 1;
                 this.sceneName = "completed";
-                this.loadScene( this.sceneName, this.mainLayer);
+                this.loadScene( this.sceneName);
             }
 
         }

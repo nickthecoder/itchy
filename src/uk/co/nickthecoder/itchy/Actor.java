@@ -282,6 +282,7 @@ public class Actor extends Task
             this.setAnimation(animation);
         }
     }
+    
 
     public double getX()
     {
@@ -366,7 +367,13 @@ public class Actor extends Task
 
     public void activate()
     {
-        if ((!this.dead) && (!this.active)) {
+        if (this.dead) {
+            this.dying = false;
+            this.dead = false;
+            this.active = false;
+        }
+        
+        if (!this.active) {
             this.addTag("active");
             this.active = true;
             Itchy.singleton.gameLoopJob.add(new Task() {
@@ -529,6 +536,21 @@ public class Actor extends Task
         return this.getAppearance().getWorldRectangle().contains(x, y);
     }
 
+    public static Actor nearest( double x, double y, String tag )
+    {
+        Actor closestActor = null;
+        double closestDistance = Double.MAX_VALUE;
+
+        for (Actor other : Actor.allByTag(tag)) {
+            double distance = other.distanceTo( x, y );
+            if (distance < closestDistance) {
+                closestDistance = distance;
+                closestActor = other;
+            }
+        }
+        return closestActor;
+    }
+
     /**
      * If there are a large number of Actors with this tag, then this will be slow, because unlike
      * overalpping and touching, there is no optimisation based on CollisionStrategy.
@@ -548,6 +570,11 @@ public class Actor extends Task
             }
         }
         return closestActor;
+    }
+
+    public double distanceTo( double x, double y )
+    {
+        return Math.sqrt((this.x - x) * (this.x - x) + (this.y - y) * (this.y - y));
     }
 
     public double distanceTo( Actor other )

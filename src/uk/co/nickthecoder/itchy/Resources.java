@@ -47,6 +47,8 @@ public class Resources extends Loadable
 
     private TreeSet<String> behaviourClassNames;
 
+    private TreeSet<String> sceneBehaviourClassNames;
+
     public Resources()
     {
         super();
@@ -60,6 +62,10 @@ public class Resources extends Loadable
         this.animations = new HashMap<String, AnimationResource>();
 
         this.behaviourClassNames = new TreeSet<String>();
+        this.sceneBehaviourClassNames = new TreeSet<String>();
+        
+        this.registerBehaviourClassName( NullBehaviour.class.getName() );
+        this.registerSceneBehaviourClassName( NullSceneBehaviour.class.getName() );
     }
 
     @Override
@@ -502,13 +508,26 @@ public class Resources extends Loadable
                 return true;
             }
             Class<?> klass = Class.forName(className);
-            while (klass != null) {
-                if (klass == Behaviour.class) {
-                    this.behaviourClassNames.add(className);
-                    return true;
-                }
-                klass = klass.getSuperclass();
+            klass.asSubclass(Behaviour.class);
+            this.behaviourClassNames.add(className);
+            return true;
+        } catch (Exception e) {
+            // Do nothing
+        }
+        return false;
+    }
+
+    public boolean registerSceneBehaviourClassName( String className )
+    {
+        try {
+            if (this.sceneBehaviourClassNames.contains(className)) {
+                return true;
             }
+            Class<?> klass = Class.forName(className);
+            klass.asSubclass(SceneBehaviour.class);
+            this.behaviourClassNames.add(className);
+            return true;
+
         } catch (Exception e) {
             // Do nothing
         }
@@ -518,6 +537,11 @@ public class Resources extends Loadable
     public Set<String> getBehaviourClassNames()
     {
         return this.behaviourClassNames;
+    }
+
+    public Set<String> getSceneBehaviourClassNames()
+    {
+        return this.sceneBehaviourClassNames;
     }
 
 }

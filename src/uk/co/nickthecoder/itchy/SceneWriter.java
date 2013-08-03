@@ -45,7 +45,9 @@ public class SceneWriter extends XMLWriter
 
         this.beginTag("scene");
         this.attribute("showMouse", this.scene.showMouse);
-
+        if ( ! NullSceneBehaviour.class.getName().equals(this.scene.sceneBehaviourName)) {
+            this.attribute("behaviour", this.scene.sceneBehaviourName);
+        }
 
         for ( Scene.SceneLayer sceneLayer : this.scene.getSceneLayers() ) {
             
@@ -121,9 +123,6 @@ public class SceneWriter extends XMLWriter
         }
 
         for (String key : sceneActor.customProperties.keySet()) {
-            if( key.equals("shootable") ) {
-                System.out.println("Saving shootable");
-            }
             Object value = sceneActor.customProperties.get(key);
 
             String stringValue = this.getPropertyValue(value);

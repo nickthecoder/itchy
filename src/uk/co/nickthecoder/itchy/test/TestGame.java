@@ -33,7 +33,7 @@ public class TestGame extends Game
         this.mainLayer = new ScrollableLayer("main", this.screenRect, new RGBA(0, 0, 0));
         this.mainLayer.enableMouseListener();
         this.layers.add(this.mainLayer);
-        loadScene( "menu", this.mainLayer);
+        loadScene("menu");
     }
 
     public void reloadScene()
@@ -41,12 +41,11 @@ public class TestGame extends Game
         loadScene(this.sceneName);
     }
     
-    public void loadScene(String sceneName)
+    public boolean loadScene(String sceneName)
     {
-        System.out.println("Starting scene " + sceneName );
         this.sceneName = sceneName;
         this.mainLayer.clear();
-        this.loadScene( this.sceneName,  this.mainLayer);
+        return super.loadScene(this.sceneName);
     }
 
     @Override

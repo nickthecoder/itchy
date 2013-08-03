@@ -362,6 +362,17 @@ public class SceneDesigner implements MouseListener, KeyListener
         });
         toolbar.addChild(save);
 
+
+        Button test = createButton("test", "Test");
+        test.addActionListener(new ActionListener() {
+            @Override
+            public void action()
+            {
+                SceneDesigner.this.onTest();
+            }
+        });
+        toolbar.addChild(test);
+        
         Button home = createButton("center", "Center");
         home.addActionListener(new ActionListener() {
             @Override
@@ -847,6 +858,10 @@ public class SceneDesigner implements MouseListener, KeyListener
             } else if (event.symbol == Keys.F8) {
                 this.onEditText();
                 return true;
+    
+            } else if (event.symbol == Keys.F12) {
+                this.onTest();
+                return true;
             }
 
         }
@@ -1258,6 +1273,11 @@ public class SceneDesigner implements MouseListener, KeyListener
             e.printStackTrace();
             MessageBox.show("Error", "Save failed.");
         }
+    }
+    
+    private void onTest()
+    {
+        this.editor.game.testScene(this.sceneResource.name);
     }
 
     private void onText()

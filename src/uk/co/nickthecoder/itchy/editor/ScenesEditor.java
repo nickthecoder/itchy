@@ -1,9 +1,7 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0 which accompanies this
+ * distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.editor;
 
@@ -11,11 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.Itchy;
+import uk.co.nickthecoder.itchy.NullSceneBehaviour;
+import uk.co.nickthecoder.itchy.Scene;
 import uk.co.nickthecoder.itchy.SceneResource;
 import uk.co.nickthecoder.itchy.gui.AbstractTableListener;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Button;
 import uk.co.nickthecoder.itchy.gui.CheckBox;
+import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.Container;
 import uk.co.nickthecoder.itchy.gui.GridLayout;
 import uk.co.nickthecoder.itchy.gui.Label;
@@ -119,6 +120,8 @@ public class ScenesEditor extends SubEditor
         this.table.setTableModel(this.createTableModel());
     }
 
+    private ComboBox sceneBehaviourName;
+
     @Override
     protected void edit( GridLayout grid, Object resource )
     {
@@ -127,14 +130,37 @@ public class ScenesEditor extends SubEditor
         this.txtName = new TextBox(this.currentSceneResource.getName());
         grid.addRow(new Label("Name"), this.txtName);
 
+        String behaviourName = NullSceneBehaviour.class.getName();
+
         boolean showMouse = false;
         try {
-            showMouse = this.currentSceneResource.getScene().showMouse;
+            Scene scene = this.currentSceneResource.getScene();
+            showMouse = scene.showMouse;
+            behaviourName = scene.sceneBehaviourName;
+
         } catch (Exception e) {
             // Do nothing
         }
+
+        this.sceneBehaviourName = new ComboBox(behaviourName,
+            this.editor.game.resources.getSceneBehaviourClassNames());
+        this.sceneBehaviourName.addChangeListener(new ComponentChangeListener() {
+
+            @Override
+            public void changed()
+            {
+                ComboBox box = ScenesEditor.this.sceneBehaviourName;
+                String value = box.getText();
+                boolean ok = ScenesEditor.this.editor.game.resources
+                    .registerSceneBehaviourClassName(value);
+                box.addStyle("error", !ok);
+            }
+        });
+
+        grid.addRow("Scene Behaviour", this.sceneBehaviourName);
+
         this.checkBoxShowMouse = new CheckBox(showMouse);
-        grid.addRow(new Label("Show Mouse"), this.checkBoxShowMouse);
+        grid.addRow("Show Mouse", this.checkBoxShowMouse);
 
     }
 
@@ -142,12 +168,16 @@ public class ScenesEditor extends SubEditor
     protected void onOk()
     {
         if (this.adding || (!this.txtName.getText().equals(this.currentSceneResource.getName()))) {
-            if (this.editor.resources.getSceneResource(this.txtName.getText()) != null) {
+            if (getResources().getSceneResource(this.txtName.getText()) != null) {
                 this.setMessage("That name is already being used.");
                 return;
             }
         }
 
+        if (!getResources().registerSceneBehaviourClassName(this.sceneBehaviourName.getText())) {
+            this.setMessage("Invalid Scene Behaviour");
+            return;
+        }
         this.currentSceneResource.rename(this.txtName.getText());
 
         if (this.adding) {
@@ -159,7 +189,7 @@ public class ScenesEditor extends SubEditor
                 return;
             }
 
-           this.editor.resources.addScene(this.currentSceneResource);
+            this.editor.resources.addScene(this.currentSceneResource);
             this.rebuildTable();
 
         } else {
@@ -169,13 +199,14 @@ public class ScenesEditor extends SubEditor
 
         try {
             this.currentSceneResource.getScene().showMouse = this.checkBoxShowMouse.getValue();
+            this.currentSceneResource.getScene().sceneBehaviourName = this.sceneBehaviourName.getText();
             this.currentSceneResource.save();
         } catch (Exception e) {
             e.printStackTrace();
             this.setMessage("Failed to save scene file");
             return;
         }
-        
+
         Itchy.singleton.getGame().hideWindow(this.editWindow);
 
     }

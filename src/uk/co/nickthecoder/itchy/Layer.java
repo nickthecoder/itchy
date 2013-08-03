@@ -254,6 +254,10 @@ public abstract class Layer implements MouseListener
 
     public abstract void destroy();
     
+    public abstract void reset();
+
+    public abstract void deactivateAll();
+    
     public String toString()
     {
         return this.getClass().getName() + " (" + this.name + ")";

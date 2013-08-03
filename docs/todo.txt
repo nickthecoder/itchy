@@ -8,107 +8,40 @@ Jame is out of date, need to rebuild for win32 and i386 and ARM??
 What's Next
 ===========
 
+Create a spline from the escape root from the ship to the gate.
+    Create a cubic spline for every pair of points along the way.
+    If count == 2, then do a straight line
+    P0 = ship P3 = 1st EscapeRoot
+    Calculate the vector from ship to 2nd EscapeRoot, and create a normalised one of a set size
+    P2 = P3 - normalised vector above
+    P4 = P3 + normalised vector above
+    P1 = P0 + normalised vector from P0 to P2 ( Or could just make P1 = P0 ) 
+
 Finish CostumesEditor
 
-F8 to go straight to the Text property for Text in SceneDesigner
+
+Pause - Use Tetra to try it out.
+    Game still ticks, but not any of the actors.
+    A boolean on Game?
 
 Create a GenericGame, which can load arbitrary resources (for a simple start to a game)
 
-BUG
-    One of the animation profiles shows that the NumericAnimation isn't quite right.
-    
 BUG
     When a window has no focusable components, then it recurses till the stack explodes.
     
 BUG
     Designer can scale actors to -ve values, which are then unselectable
 
-Create a simple parallax scrolling game, so that I can implement and test a parallax scrolling layer!
-    
-    Would like a circular world i.e. the left edge joins the right edge
-    
-touching vs overlapping when dealing with Text vs ImagePose actors
-    Button always uses "contains", but the editor always uses "touching".
-    Should both use contains when dealing with text, but overlapping when dealing with images?
-    
-    For a scenery only background, those layers could be smaller that the main one, but cyclic.
-    The cycle size for each layer would have to be different
-        Maybe the cycle size is a Property, which is available in the GUI editor
-        And also the factor which determines how much this layer scrolls compared to the main one.
-        
-    As one layer will be scrolled, which will then control the scrolling of the other layers,
-    there needs to be a parent/child relationship, or a listener pattern.
-        Use this on existing layers, so that they stay in sync without the game having to scroll all layers.
 
-    How should the editor handle this?
-        Layers have a createEditorLayer, which normally just creates a copy of itself, but could create something else
-        OR set a "editor" flag, which may cause them to behave differently.
-
-    Editor should made glassLayer follow the currently selected layer, and add that layers mouse listener
-    
-
-    If Thrust had parallax layers, then the collisions would have to be based on the different layer
-    offsets. The neighbourhood system doesn't work either!
-        Maybe the FOREGROUND (non-colliding) layer can use parallax. Nah would look naff.
-       
-    A Simple platform game
-        Sky,cloud, mountains in the background layer
-        Trees, then bushes and flowers just behind main
-        Main Layer, where most, if not all the game stuff happens.
-        Foreground for silly things, such as sign posts, some grass and flowers
-            Simple parallax only works if there isn't anywhere where one layer touches another, such as
-            a tree touching the soil. 
-    
 Use SceneBehaviour in the games.
 
 Create a game which uses the GUI        
     The Rules object needs to be on Game, its probably on Itchy right now.
 
-
-About Page in the editor
-    Name of the game
-    Author(s), Graphics Designer(s) etc
-    Source code directory
-    Package name
-
-Generate code stubs
-    Game subclass, Behaviour subclass, SceneBehaviour subclass
-
-
-Follower/Leader behaviours
-    A giant space invader is composed of many follower squares, as each square is hit, it informs its
-    leader. When all are dead the leader dies too. If the leader dies before its followers, the followers
-    are also killed.
-        One of the squares is the follower, and if this is shot, then all of the followers become regular
-            invaders.
-        Each square is itself bouncy, and is held in it place by a pretend spring to its leader.
-    
-Shaded text
-    A ShadedText behaviour automatically creates a follower with the same text, behind itself,
-    offset as needed.
-    Should I institute ActorListeners, which are informed whenever an actor moves, changes appearance
-    in any way... If so, the shadow could use this, rather then checking it leader every tick.
-        Make each a Task, not only will that be good if the listener decides to sleep, but
-        it also means that multiple changes can be combined into a single call, by having a "dirty"
-        flag on actor, which is cleared just before the listener task is run.
-        Could make the dirty flag be a set of flags ORed together. e.g. position, direction, scale, alpha, pose...
-    
-    If not, the followers should be have a "followerUpdate" method, rather than their tick, because
-    otherwise, their tick may happen before the leaders, and they will be 1 frame out of sync.
-    
-Other special effects
-    Blur
-        Generic matrix processing, so simple edge detection is possible.
-    Shear (useful for text shadows)
-    Grey - converts the RGB to grey scale - useful for creating shadows of images.
-    Scale X & Y independently - including -ve values - Useful for reflections.
-
 Choose appropriate defaults for each type of ship and ball, door etc.
    Only if moving slowly.
 
 Picker to have a cancel button
-
-Much of costume editor doesn't work yet!
 
 Use annotations to set initial tags :
     @Tagged("deadly") @Tagged("bouncy") class Alien {...)
@@ -116,45 +49,12 @@ Use annotations to set initial tags :
 Try it on a RaspPi
     Need to compile Jame for the ARM processor!
 
-Scenery Editor
 
-    Properties to have hints (which are in green on the right of their control)
-         Use it to put (seconds) after alien factory & alien fireOnceEvery
+Minor BUGS
+==========
 
-    Buttons to use icons, not (just?) text
-        Would be nice to have tooltips when mouse hovers over the buttons
-            A description and the keyboard shortcut.
-
-    Duplicate, Copy, Paste
+One of the animation profiles shows that the NumericAnimation isn't quite right.
     
-    Undo/Redo
-
-    When save a scene save the resources too
-
-    Warn when exiting the scene designer without saving.
-
-    Warn when exiting the editor without saving.
-
-    Missing properties
-        start event
-                
-    Make it easy (single click) to create a costume for a Pose just after its been added.
-    
-    Tags in the editor? Costume would need a set of tags 
-    
-Copy resources such as a Font when selected from outside the resources folder.
-
-
-Test button on Animation Editor.
-
-
-Possible Refactoring
-====================
-
-TextBox to have an inner class for its layout rather than implement it.
-
-FlowLayout - calculateRequirements is weird
-
 
 Bugs
 ====
@@ -169,82 +69,7 @@ On Remove, there is no check that the resource isn't being used by something els
     
 Renaming a costume will cause scenes that use it to fail.
 
-Loading sounds doesn't always fail when not a sound file - bug in Jame?
-
-Scrollbar positioned to the right of the client, i.e. like horizontal layout.
-  If tables want it inside, then *they* can do the minus margins tricks.
-  The table row should leave extra space for the scrollbar.
-  
-Scrollbars aren't the right size - even when there is nothing to scroll they still appear.
-  
 Costumes are updated even when cancel is pressed (need to COPY the costume?)
-
-  
-Later Features
-==============
-
-
-Allow calculated values inside animations?
-    Use the Property tag and GProperty types to define the properties
-
-Properties to have a default value.
-    Scene designer has a "default" button for each behaviour's property
-        Uses the property's default value, which is overriden if there is a string value in the costume.
-
-Hook it up with GitHub!
-    Game designers can exchange games via github
-    Issues with trust - could use java's sandboxing to prevent malicious code running.
-
-PoseDecorator - Takes a Pose and decorates it, making another Pose. Appearance can have a list of
-decorators, which are applied in turn.
-   e.g. Speech bubble around text, Button images around text, drop shadows, blur
-   
-
-Giant invaders, each pixel is shot individually
-   Use Surface.getPixel to discover which pixels are set, and then create a corresponding Follower
-        The parent of these followers is invisible, and dies when the last of its followers die.
-   If allowed to grow, then each pixel becomes an invader
-   Maybe invaders are fed from the saucer.
-
-If strings begin with "_", then look them up in a I18N resource
-    Will need to do the same for the editor.
-
-Stretchy NinePatches as well as clever NinePatches, which tile AND scale, so that an exact number
-of tiles are used. e.g. if the span is 3.5, then 3 tiles will be used, scaled up a little.
-As well as the "middle" behaviour (empty, tile, fill, stretch, clever), we have a behaviour for
-the edges (tile, stretch, clever).
-
-DirectionAnimation, sets the angle - similar, but not the same as turn.
-
-AlphaTransitionAnimation - moves from one Image to another by changing the alpha of each.
-    Or create a Follower underneith which changes its alpha and its parent's until the parent is
-    fully transparent, at which point it changes its pose.
-
-Animations which change a Pose's offsets or other attributes
-   Would need to ensure that it is a COPY of the pose, not the one shared in Resources.
-   This could make it easier to animate a "bump" upwards.
-
-Make everything use a consistent Random, so that each game is repeatable. 
-
-Each repeatable item in a costume has a frequency, so that some appear less frequently than others.
-
-Itchy to store all events so that they can be played back
-
-New Game wizard
-
-Low CPU mode for Itchy, will allow the editor to run without large CPU usage.
-The display is only updated when the GuiPoses have been altered.
-
-Default Button (clicks itself when ENTER is hit)
-
-Cancel button (clicks itself when ESC is hit)
-
-Stretch NinePatches, as well as tiled.
-
-Multi-line text.
-
-Fullscreen 
-
 
 Later Possible Refactoring
 ==========================
@@ -259,51 +84,9 @@ RenderableInterface is rubbish. NinePatches should be told where and how large t
    (assuming that they can render onto a existing surface rather than needing a new surface).
 
 
-Other Thoughts
-==============
-
-Consider how to implement Asteriods' dougnut shaped universe. Is there a better solution than every
-behaviour enforcing the loops in the coordinate systems, or could all Actors be coerced to do it automatically?
-
-Documentation - javadocs and class diagrams
-
-Create special styles "firstChild", which are automagically available, but never set (they are evaluated).
-  Remove the "firstColumn" stuff from Table
-  Check it by adding horizontal lines to the tables (except the first).
-OR
-  Create a child number criteria e.g. "foo #3" is the 3rd child of a foo component.
-  So firstChild would just be "foo #1"
-  
-Mapping of keys, rather than hard-code
-    Create a GUI which any game can call upon.
-
-
-Finish DrunkInvaders
-====================
-   
-Levels / Lives / Whatever to finish the game play.
-
-tick/tock sounds
-
-Pixel Explosion
-    Create a list of points of the pose, create a projectile for each, and
-    expand then away at a speed proportional from their distance to the center + a little randomness,
-
-Write a script which takes a simple bitmap, enlarges it, adds the grid and fuzzy borders.
-    Create a series of poses and use FramedAnimation.
-
-
-
 Replace crufty render and render2 methods with the concept of a Graphics Context.
 To scroll, a sub-layer, push the context, alter its mapping, call the childrens render,
 then pop the context.
-
-
-Pause
-    boolean Behaviour.activeWhilePaused
-    Itchy.isPaused
-    Itchy.setPause( boolean )
-
 
 Appearance optimised so that it doesn't need to re-render the appearance to get the worldRectangle
     Maybe calculate the maximum rectangle for the Pose for any rotation
@@ -314,32 +97,3 @@ Tile optimisation for collision detection and/or redraw optimisation.
    center is on. Allow for easy iteration over all objects within nearby tiles.
 
 
-
-Create a handful of simple, short games showing off how little code it takes to write a fun game.
-    Rain
-    Driving game (similar to rain, but with less obstacles, and road edges)
-    Tetris?
-    Saloon sally
-    Purple meanies? Trap monsters to kill them, push blocks is easy, destroying blocks takes more time.
-    
-    Add a menu to switch from one game to another.    
-
-Rox - it would be nice to reproduce every level, so that they can be played on modern hardware.
-
-
-
-
-Tetris
-======
-Each Piece has a central square, and a set of others, which are rotated around the central square.
-    Well, almost, the long one only has two states, not four, so it isn't truly rotated.
-The game area is a grid, where the left, right and bottom edges are solid.
-Pieces are added at the top, with the central square 2 down from the top. 
-
-Cyan (I)   : ll,r; u,dd (-1,0 -2,0 1,0 ) (0,1 0,-1, 0,-2)
-Yellow (O) : dlu; dlu;  (-1,0 -1,-1, 0,-1) 
-Green (S)  : r,dl; u,rd (1,0 -1,0 -1,-1) (0,1 1,0 1,-1)
-Red (Z)    : l,dr; ru,d (-1,0 0,-1 1,-1) (1,0 1,1, 0,-1)
-Orange (L) : ld,r; dr,u; ru,l; ul,d (-1,0 -1,-1 1,0) (0,-1 1,-1 0,1) (1,0 1,1 -1,0) (0,1 -1,1 0,-1)
-Blue (J)   : l,rd; d,ur; r,lu; u,dl (-1,0 1,0 1,-1) (0,-1 0,1 1,1) (1,0 -1,0 -1,1) (0,1 0,-1 -1,-1)
-Purple (T) : l,r,d; u,d,r; l,r,u; d,u,l (-1,0 1,0 0,-1) (0,1 0,-1 0,1) (-1,0 1,0 0,1) (0,-1 0,1 -1,0)

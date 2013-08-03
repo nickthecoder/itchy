@@ -16,6 +16,7 @@
         <pose name="icon_text" filename="text.png" />                
         <pose name="icon_center" filename="center.png" />                
         <pose name="icon_save" filename="save.png" />                
+        <pose name="icon_delete" filename="delete.png" />                
         <pose name="scaleHandle" filename="scaleHandle.png"/>                
         <pose name="rotateHandle" filename="rotateHandle.png" offsetX="6"/>                
     </poses>

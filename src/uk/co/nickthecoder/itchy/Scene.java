@@ -12,6 +12,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
+import uk.co.nickthecoder.itchy.util.StringUtils;
+
 public class Scene
 {
     private List<SceneLayer> sceneLayers;
@@ -21,6 +23,8 @@ public class Scene
     public boolean showMouse = true;
     
     public String sceneBehaviourName;
+
+    private List<Actor> activateList; 
 
     public Scene()
     {
@@ -55,18 +59,34 @@ public class Scene
 
     public void create( ActorsLayer layer, boolean designMode )
     {
+        activateList = new ArrayList<Actor>(); 
+
         for (SceneLayer sceneLayer : this.sceneLayers) {
             sceneLayer.create(layer, designMode);
         }
+        
+        for (Actor actor : activateList) {
+            actor.activate();
+        }
+        activateList.clear();
+        activateList = null;
     }
 
     public void create( CompoundLayer layer, boolean designMode )
     {
+        activateList = new ArrayList<Actor>(); 
+
         for (SceneLayer sceneLayer : this.sceneLayers) {
             String name = sceneLayer.name;
             
             sceneLayer.create(findLayer(layer,name), designMode);
         }
+
+        for (Actor actor : activateList) {
+            actor.activate();
+        }
+        activateList.clear();
+        activateList = null;
     }
     
     private ActorsLayer findLayer( CompoundLayer parent, String name )
@@ -111,7 +131,7 @@ public class Scene
     public SceneBehaviour createSceneBehaviour()
         throws Exception
     {
-        if (this.sceneBehaviourName == null) {
+        if (StringUtils.isBlank(this.sceneBehaviourName)) {
             return new NullSceneBehaviour();
         } else {
             Class<?> klass = Class.forName(sceneBehaviourName);
@@ -170,7 +190,7 @@ public class Scene
                 
                 if (!designMode) {
                     if (actor.getActivationDelay() == 0) {
-                        actor.activate();
+                        activateList.add(actor);
                     } else if (actor.getActivationDelay() > 0) {
                         actor.activateAfter(actor.getActivationDelay());
                         // actor.activate();

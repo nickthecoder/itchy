@@ -13,6 +13,7 @@ import java.util.prefs.Preferences;
 import uk.co.nickthecoder.itchy.editor.Editor;
 import uk.co.nickthecoder.itchy.gui.GuiPose;
 import uk.co.nickthecoder.itchy.util.AutoFlushPreferences;
+import uk.co.nickthecoder.jame.Keys;
 import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.Surface;
 import uk.co.nickthecoder.jame.event.Event;
@@ -50,9 +51,17 @@ public abstract class Game extends Task implements EventListener, MessageListene
     private Focusable keyboardFocus;
 
     private final List<GuiPose> windows;
-    
-    private SceneBehaviour currentSceneBehaviour = new NullSceneBehaviour();
-    
+
+    public SceneBehaviour currentSceneBehaviour = new NullSceneBehaviour();
+
+    private String sceneName;
+
+    protected boolean testing;
+
+    private boolean initialised = false;
+
+    private String preTestSceneName;
+
 
     public Game( String title, int width, int height ) throws Exception
     {
@@ -76,6 +85,23 @@ public abstract class Game extends Task implements EventListener, MessageListene
         Itchy.singleton.init(this);
     }
 
+    /**
+     * Typically, this is called immediately after you have created your Game object, usually in the
+     * "main" method.
+     * 
+     * Do NOT override this method, if you need to do one-time initialisation, then do it in the
+     * init method. This will ensure that everything gets initialised in the correct order.
+     */
+    public void start()
+    {
+        Itchy.singleton.startGame(this);
+        this.init();
+        this.initialised = true;
+        Itchy.singleton.mainLoop();
+    }
+    
+    public abstract void init();
+
     public AutoFlushPreferences getPreferences()
     {
         if (this.preferences == null) {
@@ -88,6 +114,11 @@ public abstract class Game extends Task implements EventListener, MessageListene
     public CompoundLayer getLayers()
     {
         return this.layers;
+    }
+
+    public ActorsLayer getPopupLayer()
+    {
+        return this.popupLayer;
     }
 
     public void render( Surface screen )
@@ -110,8 +141,16 @@ public abstract class Game extends Task implements EventListener, MessageListene
         if (event instanceof KeyboardEvent) {
             KeyboardEvent ke = (KeyboardEvent) event;
 
+
             if (ke.isPressed()) {
 
+                if (this.testing) {
+                    if ((ke.symbol == Keys.ESCAPE) || (ke.symbol == Keys.F12)) {
+                        endTest();
+                        return;
+                    }
+                }
+                
                 if (this.keyboardFocus != null) {
                     if (this.keyboardFocus.onKeyDown(ke)) {
                         return;
@@ -376,38 +415,63 @@ public abstract class Game extends Task implements EventListener, MessageListene
         this.currentSceneBehaviour.onMessage(message);
     }
 
-    public abstract void init();
 
-    /**
-     * Typically, this is called immediately after you have created your Game object, usually in the
-     * "main" method.
-     * 
-     * Do NOT override this method, if you need to do one-time initialisation, then do it in the
-     * init method. This will ensure that everything gets initialised in the correct order.
-     */
-    public void start()
+    public void testScene( String sceneName )
     {
-        Itchy.singleton.startGame(this);
-        this.init();
-        Itchy.singleton.mainLoop();
+        try {
+            this.preTestSceneName = this.sceneName;
+            if (!this.initialised) {
+                init();
+                this.initialised = true;
+            }
+            this.testing = true;
+            Itchy.singleton.startGame(this);
+            this.layers.clear();
+            this.layers.reset();
+            loadScene(sceneName);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    public boolean loadScene( String sceneName, ActorsLayer layer )
+    public void endTest()
+    {
+        Itchy.singleton.endGame();
+        this.testing = false;
+        this.layers.clear();
+        this.layers.reset();
+        if (this.preTestSceneName != null) {
+            loadScene(this.preTestSceneName);
+        }
+    }
+
+
+    public boolean loadScene( String sceneName )
     {
         try {
             Scene scene = this.resources.getScene(sceneName);
             if (scene == null) {
+                System.err.println("Scene not found : " + sceneName);
                 return false;
             }
-            
+
             this.currentSceneBehaviour = scene.createSceneBehaviour();
-            scene.create(layer, false);
+            scene.create(this.layers, false);
             Itchy.showMousePointer(scene.showMouse);
-            
+
         } catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
+
+        this.sceneName = sceneName;
         return true;
+    }
+
+    public String getSceneName()
+    {
+        return this.sceneName;
     }
 
     /**
@@ -491,7 +555,7 @@ public abstract class Game extends Task implements EventListener, MessageListene
         }
     }
 
-    protected void startEditor()
+    public void startEditor()
     {
         try {
             Editor editor = new Editor(this);
@@ -500,8 +564,8 @@ public abstract class Game extends Task implements EventListener, MessageListene
             e.printStackTrace();
         }
     }
-    
-    protected void runFromMain(String[] argv) throws Exception
+
+    protected void runFromMain( String[] argv ) throws Exception
     {
         if ((argv.length == 1) && ("--editor".equals(argv[0]))) {
 
