@@ -7,19 +7,17 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.editor;
 
-import uk.co.nickthecoder.itchy.animation.NumericAnimation;
-import uk.co.nickthecoder.itchy.animation.Profile;
+import uk.co.nickthecoder.itchy.animation.ProfilePickerButton;
 import uk.co.nickthecoder.itchy.animation.ScaleAnimation;
 import uk.co.nickthecoder.itchy.gui.DoubleBox;
 import uk.co.nickthecoder.itchy.gui.GridLayout;
 import uk.co.nickthecoder.itchy.gui.IntegerBox;
 import uk.co.nickthecoder.itchy.gui.Label;
-import uk.co.nickthecoder.itchy.gui.PickerButton;
 
 public class ScaleAnimationEditor extends AnimationEditor
 {
     private IntegerBox txtTicks;
-    private PickerButton<Profile> pickProfile;
+    private ProfilePickerButton pickProfile;
     private DoubleBox txtTarget;
 
     public ScaleAnimationEditor( Editor editor, ScaleAnimation animation )
@@ -35,8 +33,7 @@ public class ScaleAnimationEditor extends AnimationEditor
         this.txtTicks = new IntegerBox(scaleAnimation.ticks);
         gridLayout.addRow(new Label("Duration"), Editor.addHint(this.txtTicks, "frames"));
 
-        this.pickProfile = new PickerButton<Profile>("Profile", scaleAnimation.profile,
-                NumericAnimation.getProfiles());
+        this.pickProfile = new ProfilePickerButton( scaleAnimation.profile );
         gridLayout.addRow(new Label("Profile"), this.pickProfile);
 
         this.txtTarget = new DoubleBox(scaleAnimation.target);

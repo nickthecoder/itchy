@@ -97,8 +97,6 @@ public class DrunkInvaders extends Game
 
         this.metronomeCountdown = 0;
         this.metronome = 20;
-
-        this.startScene("menu");
     }
 
     @Override
@@ -306,6 +304,12 @@ public class DrunkInvaders extends Game
     {
         DrunkInvaders.game = new DrunkInvaders();
         DrunkInvaders.game.runFromMain( argv );
+    }
+
+    @Override
+    public String getInitialSceneName()
+    {
+        return "menu";
     }
     
 }

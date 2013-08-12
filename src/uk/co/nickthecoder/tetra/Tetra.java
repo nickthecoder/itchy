@@ -153,7 +153,6 @@ public class Tetra extends Game
         this.mainLayer.enableMouseListener();
 
         this.level = getStartingLevel();
-        this.startScene("menu");
     }
 
     public void startScene( String name )
@@ -580,5 +579,11 @@ public class Tetra extends Game
     {
         Tetra.game = new Tetra();
         Tetra.game.runFromMain(argv);
+    }
+
+    @Override
+    public String getInitialSceneName()
+    {
+        return "menu";
     }
 }

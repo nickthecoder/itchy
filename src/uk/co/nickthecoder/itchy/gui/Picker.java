@@ -46,7 +46,18 @@ public abstract class Picker<T> extends Window
             }
 
         }
-
+        
+        Button cancelButton = new Button("Cancel");
+        cancelButton.addActionListener(new ActionListener() {
+            @Override
+            public void action()
+            {
+                Picker.this.destroy();
+            }
+            
+        });
+        
+        this.clientArea.addChild( cancelButton );
     }
 
     private Component createButton( final String label, final T object )

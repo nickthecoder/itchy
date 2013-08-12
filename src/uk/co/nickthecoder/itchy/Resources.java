@@ -525,7 +525,7 @@ public class Resources extends Loadable
             }
             Class<?> klass = Class.forName(className);
             klass.asSubclass(SceneBehaviour.class);
-            this.behaviourClassNames.add(className);
+            this.sceneBehaviourClassNames.add(className);
             return true;
 
         } catch (Exception e) {

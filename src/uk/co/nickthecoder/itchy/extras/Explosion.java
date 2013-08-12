@@ -79,7 +79,8 @@ public class Explosion extends Behaviour
     private boolean below = false;;
     
     private Actor source;
-
+    
+    
     public Explosion( Actor actor )
     {
         super();
@@ -106,12 +107,12 @@ public class Explosion extends Behaviour
         result.getAppearance().setAlpha(0);
         result.setBehaviour(this);
 
-        if ( this.below) {
+        if ( this.below ) {
             this.source.getLayer().addBelow(result,this.source);
         } else {
             this.source.getLayer().add(result);
         }
-
+        
         return result;
     }
 

@@ -219,6 +219,18 @@ public abstract class Behaviour implements MessageListener
         // do nothing
     }
 
+    public void sendMessage( final String message )
+    {
+        Itchy.singleton.addTask( new Task() {
+            @Override
+            public void run()
+            {
+                Behaviour.this.onMessage( message );
+            }
+            
+        });
+    }
+
     public void onKill()
     {
         // do nothing

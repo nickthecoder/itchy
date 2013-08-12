@@ -58,6 +58,9 @@ public final class Editor extends Game
 
     public Rules rules;
 
+    private String designSceneName = null;
+    
+    
     public Editor( Game game ) throws Exception
     {
         super("Editor", 1000,720);
@@ -141,6 +144,9 @@ public final class Editor extends Game
         this.mainGuiPose.setPosition(0, 0, this.getWidth(), this.getHeight());
         this.mainGuiPose.reStyle(); // MORE needed ?
 
+        if ( this.designSceneName != null ) {
+            this.scenesEditor.design( this.designSceneName );
+        }
     }
 
     private void onSave()
@@ -152,5 +158,16 @@ public final class Editor extends Game
             e.printStackTrace();
         }
     }
+    
+    public void designScene( String sceneName )
+    {
+        this.designSceneName = sceneName;
+    }
 
+    @Override
+    public String getInitialSceneName()
+    {
+        return null;
+    }
+    
 }

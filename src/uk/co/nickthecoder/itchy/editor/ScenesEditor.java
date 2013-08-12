@@ -144,6 +144,7 @@ public class ScenesEditor extends SubEditor
 
         this.sceneBehaviourName = new ComboBox(behaviourName,
             this.editor.game.resources.getSceneBehaviourClassNames());
+        
         this.sceneBehaviourName.addChangeListener(new ComponentChangeListener() {
 
             @Override
@@ -262,5 +263,13 @@ public class ScenesEditor extends SubEditor
         SceneDesigner designer = new SceneDesigner(this.editor, sceneResource);
         this.editor.mainGuiPose.hide();
         designer.go();
+    }
+    
+    public void design( String sceneName )
+    {
+        SceneResource sceneResource = this.editor.resources.getSceneResource( sceneName );
+        SceneDesigner designer = new SceneDesigner(this.editor, sceneResource);
+        this.editor.mainGuiPose.hide();
+        designer.go();        
     }
 }

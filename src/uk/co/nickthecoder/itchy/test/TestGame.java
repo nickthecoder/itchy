@@ -33,7 +33,6 @@ public class TestGame extends Game
         this.mainLayer = new ScrollableLayer("main", this.screenRect, new RGBA(0, 0, 0));
         this.mainLayer.enableMouseListener();
         this.layers.add(this.mainLayer);
-        loadScene("menu");
     }
 
     public void reloadScene()
@@ -91,5 +90,11 @@ public class TestGame extends Game
 
         TestGame test = new TestGame();
         test.start();
+    }
+
+    @Override
+    public String getInitialSceneName()
+    {
+        return "menu";
     }
 }

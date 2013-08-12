@@ -97,6 +97,16 @@ public class Costume
         choices.add(value);
     }
 
+    public String getString( String name, String defaultValue )
+    {
+        String result = this.getString(name);
+        if ( result == null) {
+            return defaultValue;
+        }
+        
+        return result;
+    }
+    
     public String getString( String name )
     {
         List<String> strings = this.stringChoices.get(name);

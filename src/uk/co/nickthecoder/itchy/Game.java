@@ -94,13 +94,54 @@ public abstract class Game extends Task implements EventListener, MessageListene
      */
     public void start()
     {
+        start( getInitialSceneName());
+    }
+    
+    public void start( String sceneName )
+    {
         Itchy.singleton.startGame(this);
-        this.init();
-        this.initialised = true;
+        if (!this.initialised) {
+            init();
+            this.initialised = true;
+        }
+        
+        if ( sceneName != null ) {
+            this.layers.clear();
+            this.layers.reset();
+            loadScene( sceneName );
+        }
+        
         Itchy.singleton.mainLoop();
     }
     
     public abstract void init();
+
+    public abstract String getInitialSceneName();
+    
+    public void testScene( String sceneName )
+    {
+        try {
+            this.preTestSceneName = this.sceneName;
+            this.testing = true;
+
+            start( sceneName );
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void endTest()
+    {
+        System.out.println("Ending the test");
+        this.testing = false;
+        this.layers.clear();
+        this.layers.reset();
+        if (this.preTestSceneName != null) {
+            loadScene(this.preTestSceneName);
+        }
+        Itchy.singleton.endGame();
+    }
 
     public AutoFlushPreferences getPreferences()
     {
@@ -416,36 +457,6 @@ public abstract class Game extends Task implements EventListener, MessageListene
     }
 
 
-    public void testScene( String sceneName )
-    {
-        try {
-            this.preTestSceneName = this.sceneName;
-            if (!this.initialised) {
-                init();
-                this.initialised = true;
-            }
-            this.testing = true;
-            Itchy.singleton.startGame(this);
-            this.layers.clear();
-            this.layers.reset();
-            loadScene(sceneName);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void endTest()
-    {
-        Itchy.singleton.endGame();
-        this.testing = false;
-        this.layers.clear();
-        this.layers.reset();
-        if (this.preTestSceneName != null) {
-            loadScene(this.preTestSceneName);
-        }
-    }
-
 
     public boolean loadScene( String sceneName )
     {
@@ -559,21 +570,33 @@ public abstract class Game extends Task implements EventListener, MessageListene
     {
         try {
             Editor editor = new Editor(this);
-            editor.start();
+            editor.start( null );
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+    public void startEditor( String designSceneName )
+    {
+        try {
+            Editor editor = new Editor(this);
+            editor.designScene(designSceneName);
+            editor.start( null );
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     protected void runFromMain( String[] argv ) throws Exception
     {
         if ((argv.length == 1) && ("--editor".equals(argv[0]))) {
 
             Editor editor = new Editor(this);
-            editor.start();
+            editor.start( null );
 
         } else {
-            this.start();
+            this.start( getInitialSceneName());
         }
     }
 }

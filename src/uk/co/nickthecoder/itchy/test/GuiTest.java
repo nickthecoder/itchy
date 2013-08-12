@@ -269,4 +269,10 @@ public class GuiTest extends Game
         GuiTest testGui = new GuiTest();
         testGui.start();
     }
+
+    @Override
+    public String getInitialSceneName()
+    {
+        return null;
+    }
 }

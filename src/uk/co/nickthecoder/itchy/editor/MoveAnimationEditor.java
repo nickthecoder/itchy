@@ -8,18 +8,16 @@
 package uk.co.nickthecoder.itchy.editor;
 
 import uk.co.nickthecoder.itchy.animation.MoveAnimation;
-import uk.co.nickthecoder.itchy.animation.NumericAnimation;
-import uk.co.nickthecoder.itchy.animation.Profile;
+import uk.co.nickthecoder.itchy.animation.ProfilePickerButton;
 import uk.co.nickthecoder.itchy.gui.DoubleBox;
 import uk.co.nickthecoder.itchy.gui.GridLayout;
 import uk.co.nickthecoder.itchy.gui.IntegerBox;
 import uk.co.nickthecoder.itchy.gui.Label;
-import uk.co.nickthecoder.itchy.gui.PickerButton;
 
 public class MoveAnimationEditor extends AnimationEditor
 {
     private IntegerBox txtTicks;
-    private PickerButton<Profile> pickProfile;
+    private ProfilePickerButton pickProfile;
     private DoubleBox txtDx;
     private DoubleBox txtDy;
 
@@ -36,8 +34,7 @@ public class MoveAnimationEditor extends AnimationEditor
         this.txtTicks = new IntegerBox(moveAnimation.ticks);
         gridLayout.addRow(new Label("Duration"), Editor.addHint(this.txtTicks, "frames"));
 
-        this.pickProfile = new PickerButton<Profile>("Profile", moveAnimation.profile,
-                NumericAnimation.getProfiles());
+        this.pickProfile = new ProfilePickerButton( moveAnimation.profile );
         gridLayout.addRow(new Label("Profile"), this.pickProfile);
 
         this.txtDx = new DoubleBox(moveAnimation.dx);

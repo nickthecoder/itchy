@@ -28,6 +28,7 @@ public class ComboBox extends Container
     public ComboBox( String defaultValue, Collection<String> values )
     {
         super();
+        
         this.type="comboBox";
         this.addStyle("combo");
         this.name = new TextBox(defaultValue);
