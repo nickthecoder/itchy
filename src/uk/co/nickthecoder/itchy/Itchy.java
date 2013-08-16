@@ -79,6 +79,8 @@ public class Itchy
 
     public FrameRate frameRate = createFrameRate();
 
+    public final SoundManager soundManager = new SoundManager();
+    
     GameLoopJob gameLoopJob = new GameLoopJob();
 
     private Itchy()
@@ -155,6 +157,8 @@ public class Itchy
 
     public void endGame()
     {
+        soundManager.stopAll();
+        
         if (this.gameStack.isEmpty()) {
             this.terminate();
         } else {
@@ -213,6 +217,7 @@ public class Itchy
             }
         }
 
+        this.soundManager.tick();
         this.gameLoopJob.start();
 
     }

@@ -126,7 +126,7 @@ public class FontsEditor extends SubEditor
             }
         }
 
-        this.currentFontResource.rename(this.txtName.getText());
+        this.currentFontResource.setName(this.txtName.getText());
         this.currentFontResource.filename = this.txtFilename.getText();
 
         if (this.adding) {

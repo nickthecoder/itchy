@@ -15,6 +15,7 @@ import uk.co.nickthecoder.itchy.Costume;
 import uk.co.nickthecoder.itchy.CostumeResource;
 import uk.co.nickthecoder.itchy.FontResource;
 import uk.co.nickthecoder.itchy.Itchy;
+import uk.co.nickthecoder.itchy.ManagedSound;
 import uk.co.nickthecoder.itchy.PoseResource;
 import uk.co.nickthecoder.itchy.SoundResource;
 import uk.co.nickthecoder.itchy.gui.AbstractTableListener;
@@ -219,13 +220,14 @@ public class CostumesEditor extends SubEditor
                 } else if (data instanceof PoseResource) {
                     PoseResource resource = (PoseResource) data;
                     container.addChild(new ImageComponent(resource.getThumbnail()));
-                } else if (data instanceof SoundResource) {
+                } else if (data instanceof ManagedSound) {
                     Button button = new Button("Play");
                     button.addActionListener(new ActionListener() {
                         @Override
                         public void action()
                         {
-                            SoundResource resource = (SoundResource) data;
+                            ManagedSound cs = (ManagedSound) data; 
+                            SoundResource resource = cs.soundResource;
                             resource.getSound().play();
                         }
                     });
@@ -292,13 +294,13 @@ public class CostumesEditor extends SubEditor
             }
         }
         for (String name : costume.getSoundNames()) {
-            for (SoundResource soundResource : costume.getSoundChoices(name)) {
+            for (ManagedSound costumeSound : costume.getSoundChoices(name)) {
 
                 SimpleTableModelRow row = new SimpleTableModelRow();
                 row.add(name);
                 row.add("Sound");
-                row.add(soundResource.getName());
-                row.add(soundResource);
+                row.add(costumeSound.soundResource.getName());
+                row.add(costumeSound);
 
                 model.addRow(row);
             }
@@ -374,7 +376,7 @@ public class CostumesEditor extends SubEditor
         pickList.put("String", String.class);
         pickList.put("Pose", PoseResource.class);
         pickList.put("Animation", AnimationResource.class);
-        pickList.put("Sound", SoundResource.class);
+        pickList.put("Sound", ManagedSound.class);
         pickList.put("Font", FontResource.class);
 
         Picker<Class<?>> picker = new Picker<Class<?>>("Which Type?", pickList) {
@@ -390,7 +392,7 @@ public class CostumesEditor extends SubEditor
                 } else if (picked == AnimationResource.class) {
                     CostumesEditor.this.onAddAnimation();
 
-                } else if (picked == SoundResource.class) {
+                } else if (picked == ManagedSound.class) {
                     CostumesEditor.this.onAddSound();
 
                 } else if (picked == FontResource.class) {
@@ -493,7 +495,7 @@ public class CostumesEditor extends SubEditor
             }
         }
 
-        this.currentCostumeResource.rename(this.txtName.getText());
+        this.currentCostumeResource.setName(this.txtName.getText());
 
         this.currentCostumeResource.costume.behaviourClassName = this.behaviour.getText();
 

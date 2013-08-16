@@ -7,18 +7,28 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.animation;
 
+import java.util.List;
+
 import uk.co.nickthecoder.itchy.Actor;
+import uk.co.nickthecoder.itchy.util.AbstractProperty;
+import uk.co.nickthecoder.itchy.util.Property;
 
 public class MoveAnimation extends NumericAnimation
 {
+    private static final List<AbstractProperty<Animation, ?>> properties =
+        AbstractProperty.<Animation> findAnnotations(MoveAnimation.class);
+
+
     /**
      * The total X distance to move
      */
+    @Property(label="X Distance")
     public double dx;
     
     /**
      * The total Y distance to move.
      */
+    @Property(label="Y Distance")
     public double dy;
 
     public MoveAnimation()
@@ -31,6 +41,12 @@ public class MoveAnimation extends NumericAnimation
         super(ticks, profile);
         this.dx = dx;
         this.dy = dy;
+    }
+    
+    @Override
+    public List<AbstractProperty<Animation, ?>> getProperties()
+    {
+        return properties;
     }
 
     @Override

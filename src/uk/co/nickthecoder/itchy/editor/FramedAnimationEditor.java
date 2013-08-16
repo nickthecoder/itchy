@@ -16,7 +16,6 @@ import uk.co.nickthecoder.itchy.animation.Frame;
 import uk.co.nickthecoder.itchy.animation.FramedAnimation;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Button;
-import uk.co.nickthecoder.itchy.gui.CheckBox;
 import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.Container;
 import uk.co.nickthecoder.itchy.gui.GridLayout;
@@ -34,8 +33,6 @@ public class FramedAnimationEditor extends AnimationEditor
     private Container framesContainer;
 
     private GridLayout framesGrid;
-
-    public CheckBox chkPingPong;
 
     public FramedAnimationEditor( Editor editor, Resources resources, FramedAnimation animation )
     {
@@ -67,17 +64,6 @@ public class FramedAnimationEditor extends AnimationEditor
         buttonBar.addChild(add);
 
         super.createButtons(buttonBar);
-    }
-
-    @Override
-    public void createForm( GridLayout gridLayout )
-    {
-        FramedAnimation fa = (FramedAnimation) this.animation;
-        this.chkPingPong = new CheckBox(fa.pingPong);
-
-        gridLayout.addRow("Ping Pong", this.chkPingPong);
-        
-        super.createForm(gridLayout);
     }
 
     @Override
@@ -122,7 +108,8 @@ public class FramedAnimationEditor extends AnimationEditor
 
         Button up = null;
         if (i > 0) {
-            up = new Button("Up");
+            up = new Button(new ImageComponent(this.editor.rules.resources.getPose(
+                "icon_up").getSurface()));
             up.addActionListener(new ActionListener() {
                 @Override
                 public void action()
@@ -133,10 +120,11 @@ public class FramedAnimationEditor extends AnimationEditor
                     FramedAnimationEditor.this.rebuildFrames();
                 }
             });
+            up.addStyle("compact");
         }
 
         Button delete = new Button(new ImageComponent(this.editor.rules.resources.getPose(
-                "buttonDelete").getSurface()));
+                "icon_delete").getSurface()));
         delete.addActionListener(new ActionListener() {
             @Override
             public void action()
@@ -145,8 +133,7 @@ public class FramedAnimationEditor extends AnimationEditor
                 FramedAnimationEditor.this.rebuildFrames();
             }
         });
-
-        delete.addStyle("plain");
+        delete.addStyle("compact");
 
         this.framesGrid.addRow(image, delay, up, delete);
     }
@@ -157,8 +144,6 @@ public class FramedAnimationEditor extends AnimationEditor
         super.save();
         
         FramedAnimation framedAnimation = (FramedAnimation) this.animation;
-
-        framedAnimation.pingPong = this.chkPingPong.getValue();
         framedAnimation.replaceFrames(this.frames);
 
         return true;

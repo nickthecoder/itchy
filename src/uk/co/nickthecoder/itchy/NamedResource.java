@@ -7,6 +7,8 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
+import uk.co.nickthecoder.itchy.util.Property;
+
 public class NamedResource
 {
     protected Resources resources;
@@ -24,14 +26,16 @@ public class NamedResource
         this.name = name;
     }
 
-    public void rename( String newName )
+    public void setName( String newName )
     {
         this.resources.renameResource(this, newName);
         this.name = newName;
     }
 
+    @Property(label="Name")
     public String getName()
     {
         return this.name;
     }
+
 }

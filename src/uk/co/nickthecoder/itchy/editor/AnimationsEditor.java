@@ -12,14 +12,9 @@ import java.util.List;
 
 import uk.co.nickthecoder.itchy.AnimationResource;
 import uk.co.nickthecoder.itchy.Itchy;
-import uk.co.nickthecoder.itchy.animation.AlphaAnimation;
 import uk.co.nickthecoder.itchy.animation.Animation;
 import uk.co.nickthecoder.itchy.animation.CompoundAnimation;
-import uk.co.nickthecoder.itchy.animation.ForwardsAnimation;
 import uk.co.nickthecoder.itchy.animation.FramedAnimation;
-import uk.co.nickthecoder.itchy.animation.MoveAnimation;
-import uk.co.nickthecoder.itchy.animation.ScaleAnimation;
-import uk.co.nickthecoder.itchy.animation.TurnAnimation;
 import uk.co.nickthecoder.itchy.gui.AbstractTableListener;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Button;
@@ -134,22 +129,7 @@ public class AnimationsEditor extends SubEditor
 
     private AnimationEditor createAnimationEditor( Animation animation )
     {
-        if (animation instanceof MoveAnimation) {
-            return new MoveAnimationEditor(this.editor, (MoveAnimation) animation);
-
-        } else if (animation instanceof ForwardsAnimation) {
-            return new ForwardAnimationEditor(this.editor, (ForwardsAnimation) animation);
-
-        } else if (animation instanceof TurnAnimation) {
-            return new TurnAnimationEditor(this.editor, (TurnAnimation) animation);
-
-        } else if (animation instanceof ScaleAnimation) {
-            return new ScaleAnimationEditor(this.editor, (ScaleAnimation) animation);
-
-        } else if (animation instanceof AlphaAnimation) {
-            return new AlphaAnimationEditor(this.editor, (AlphaAnimation) animation);
-
-        } else if (animation instanceof FramedAnimation) {
+        if (animation instanceof FramedAnimation) {
             return new FramedAnimationEditor(this.editor, this.editor.resources,
                 (FramedAnimation) animation);
 
@@ -303,7 +283,7 @@ public class AnimationsEditor extends SubEditor
                 return;
             }
         }
-        this.currentAnimationResource.rename(this.txtName.getText());
+        this.currentAnimationResource.setName(this.txtName.getText());
         this.currentAnimationResource.animation = this.currentAnimation;
 
         if (this.adding) {

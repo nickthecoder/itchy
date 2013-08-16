@@ -29,9 +29,9 @@ public class Bouncy extends Behaviour
 
     
     @Override
-    public void init()
+    public void onAttach()
     {
-        super.init();
+        super.onAttach();
         this.actor.addTag("bouncy");
         this.collisionStrategy = DrunkInvaders.game.createCollisionStrategy(this.actor);
 

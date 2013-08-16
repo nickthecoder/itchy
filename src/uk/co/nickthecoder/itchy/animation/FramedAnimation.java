@@ -12,10 +12,17 @@ import java.util.Collections;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.Actor;
+import uk.co.nickthecoder.itchy.util.AbstractProperty;
+import uk.co.nickthecoder.itchy.util.Property;
 
 public class FramedAnimation extends AbstractAnimation
-
 {
+    private static final List<AbstractProperty<Animation, ?>> properties =
+        AbstractProperty.<Animation> findAnnotations(FramedAnimation.class);
+
+    @Property(label="Ping Pong")
+    public boolean pingPong;
+
     List<Frame> frames;
 
     private final List<Frame> readOnlyFrames;
@@ -26,8 +33,12 @@ public class FramedAnimation extends AbstractAnimation
 
     protected int direction = 1;
 
-    public boolean pingPong;
-
+    @Override
+    public List<AbstractProperty<Animation, ?>> getProperties()
+    {
+        return properties;
+    }
+    
     public void addFrame( Frame frame )
     {
         this.frames.add(frame);

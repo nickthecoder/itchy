@@ -8,6 +8,17 @@ Jame is out of date, need to rebuild for win32 and i386 and ARM??
 What's Next
 ===========
 
+Framed Animations can't be edited - they revert to their old frames when "Done" is clicked.
+
+Complete the change of AnimationEditors
+    Need a ProfileProperty 
+
+Add "aka" to Property, and then make the loaders look for the aka attribute first.
+    Change Animations "profile" to "ease" and related classes
+
+Load/Save ManagedSound attributes of Costume's sound
+    Use Property for all attributes, for both load/save and editing across the whole GUI. 
+
 Bucket to be more transparent
 Water looks naff
 No instructions for picking up water

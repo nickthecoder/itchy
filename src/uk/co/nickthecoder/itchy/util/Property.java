@@ -18,10 +18,12 @@ import java.lang.annotation.RetentionPolicy;
  * 
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.FIELD)
+@Target(value = {ElementType.FIELD,ElementType.METHOD})
 public @interface Property {
 
     String label();
+    
+    boolean recurse() default false;
 
     boolean allowNull() default false;    
 

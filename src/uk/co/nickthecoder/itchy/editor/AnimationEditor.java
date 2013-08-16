@@ -12,18 +12,15 @@ import uk.co.nickthecoder.itchy.gui.Button;
 import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.Container;
 import uk.co.nickthecoder.itchy.gui.GridLayout;
-import uk.co.nickthecoder.itchy.gui.Label;
-import uk.co.nickthecoder.itchy.gui.TextBox;
 import uk.co.nickthecoder.itchy.gui.VerticalLayout;
 import uk.co.nickthecoder.itchy.gui.Window;
+import uk.co.nickthecoder.itchy.util.AbstractProperty;
 
 public class AnimationEditor extends Window
 {
     public Animation animation;
 
     protected Editor editor;
-
-    private TextBox txtMessage;
 
     public AnimationEditor( Editor editor, Animation animation )
     {
@@ -56,7 +53,7 @@ public class AnimationEditor extends Window
 
     public void createButtons( Container buttonBar )
     {
-        Button ok = new Button("Ok");
+        Button ok = new Button("Done");
         ok.addActionListener(new ActionListener() {
             @Override
             public void action()
@@ -65,22 +62,17 @@ public class AnimationEditor extends Window
             }
         });
         buttonBar.addChild(ok);
-
-        Button cancel = new Button("Cancel");
-        cancel.addActionListener(new ActionListener() {
-            @Override
-            public void action()
-            {
-                AnimationEditor.this.onCancel();
-            }
-        });
-        buttonBar.addChild(cancel);
     }
-
+    
     public void createForm( GridLayout gridLayout )
     {
-        this.txtMessage = new TextBox(this.animation.getFinishedMessage());
-        gridLayout.addRow(new Label("Complettion Message"), this.txtMessage);
+        for (AbstractProperty<Animation, ?> property : this.animation.getProperties()) {
+            try {
+                Component component = property.createComponent(this.animation, true);
+                gridLayout.addRow(property.label, component);
+            } catch (Exception e) {
+            }
+        }
     }
 
     public Component createExtra()
@@ -108,7 +100,6 @@ public class AnimationEditor extends Window
 
     public boolean save()
     {
-        this.animation.setFinishedMessage(this.txtMessage.getText());
         return true;
     }
 }

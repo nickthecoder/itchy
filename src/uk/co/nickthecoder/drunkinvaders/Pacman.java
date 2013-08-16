@@ -14,9 +14,9 @@ public class Pacman extends Behaviour
 {
 
     @Override
-    public void init()
+    public void onAttach()
     {
-        super.init();
+        super.onAttach();
 
         this.actor.addTag("deadly");
         this.collisionStrategy = DrunkInvaders.game.createCollisionStrategy(this.actor);

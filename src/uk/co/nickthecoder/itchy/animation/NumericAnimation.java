@@ -8,6 +8,7 @@ package uk.co.nickthecoder.itchy.animation;
 import java.util.HashMap;
 
 import uk.co.nickthecoder.itchy.Actor;
+import uk.co.nickthecoder.itchy.util.Property;
 
 public abstract class NumericAnimation extends AbstractAnimation
 {
@@ -58,7 +59,6 @@ public abstract class NumericAnimation extends AbstractAnimation
         .addProfile(easeOutQuad, 0.05, 0.99)
         .addProfile(easeInQuad, 0.05, 1);
 
-    private double previous;
 
     public static HashMap<String, Profile> getProfiles()
     {
@@ -112,9 +112,15 @@ public abstract class NumericAnimation extends AbstractAnimation
         return null;
     }
 
+    
+    
+    @Property(label="Ticks")
     public int ticks;
 
+    @Property(label="Profile")
     public Profile profile;
+
+    private double previous;
 
     protected int currentFrame;
 

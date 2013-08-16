@@ -1,9 +1,7 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0 which accompanies this
+ * distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
@@ -26,7 +24,7 @@ public class Costume
 
     private final HashMap<String, List<String>> stringChoices;
 
-    private final HashMap<String, List<SoundResource>> soundChoices;
+    private final HashMap<String, List<ManagedSound>> soundChoices;
 
     private final HashMap<String, List<PoseResource>> poseChoices;
 
@@ -44,7 +42,7 @@ public class Costume
         this.extendedFrom = extendsFrom;
 
         this.stringChoices = new HashMap<String, List<String>>();
-        this.soundChoices = new HashMap<String, List<SoundResource>>();
+        this.soundChoices = new HashMap<String, List<ManagedSound>>();
         this.poseChoices = new HashMap<String, List<PoseResource>>();
         this.fontChoices = new HashMap<String, List<FontResource>>();
         this.animationChoices = new HashMap<String, List<AnimationResource>>();
@@ -100,13 +98,13 @@ public class Costume
     public String getString( String name, String defaultValue )
     {
         String result = this.getString(name);
-        if ( result == null) {
+        if (result == null) {
             return defaultValue;
         }
-        
+
         return result;
     }
-    
+
     public String getString( String name )
     {
         List<String> strings = this.stringChoices.get(name);
@@ -119,11 +117,11 @@ public class Costume
         String string = strings.get(random.nextInt(strings.size()));
         return string;
     }
-    
+
     public int getInt( String name, int defaultValue )
     {
         try {
-            return Integer.parseInt( getString(name) );
+            return Integer.parseInt(getString(name));
         } catch (Exception e) {
             return defaultValue;
         }
@@ -132,7 +130,7 @@ public class Costume
     public double getDouble( String name, double defaultValue )
     {
         try {
-            return Double.parseDouble( getString(name) );
+            return Double.parseDouble(getString(name));
         } catch (Exception e) {
             return defaultValue;
         }
@@ -188,27 +186,40 @@ public class Costume
 
     // Sound
 
-    public void addSound( String name, SoundResource soundResource )
+    public ManagedSound addSound( String name, SoundResource soundResource )
     {
-        List<SoundResource> choices = this.soundChoices.get(name);
+        ManagedSound costumeSound = new ManagedSound(soundResource);
+        List<ManagedSound> choices = this.soundChoices.get(name);
         if (choices == null) {
-            choices = new ArrayList<SoundResource>();
+            choices = new ArrayList<ManagedSound>();
             this.soundChoices.put(name, choices);
         }
-        choices.add(soundResource);
+        choices.add(costumeSound);
+
+        return costumeSound;
     }
 
     public SoundResource getSoundResource( String name )
     {
-        List<SoundResource> choices = this.soundChoices.get(name);
+        ManagedSound cs = getCostumeSound(name);
+        if (cs == null) {
+            return null;
+        } else {
+            return cs.soundResource;
+        }
+    }
+
+    public ManagedSound getCostumeSound( String name )
+    {
+        List<ManagedSound> choices = this.soundChoices.get(name);
         if (choices == null) {
             if (this.extendedFrom != null) {
-                return this.extendedFrom.getSoundResource(name);
+                return this.extendedFrom.getCostumeSound(name);
             }
             return null;
         }
-        SoundResource soundResource = choices.get(random.nextInt(choices.size()));
-        return soundResource;
+        ManagedSound costumeSound = choices.get(random.nextInt(choices.size()));
+        return costumeSound;
     }
 
     public Sound getSound( String name )
@@ -217,7 +228,7 @@ public class Costume
         return resource == null ? null : resource.getSound();
     }
 
-    public List<SoundResource> getSoundChoices( String name )
+    public List<ManagedSound> getSoundChoices( String name )
     {
         return this.soundChoices.get(name);
     }
@@ -280,7 +291,7 @@ public class Costume
             return null;
         }
         AnimationResource animationResource = animationList
-                .get(random.nextInt(animationList.size()));
+            .get(random.nextInt(animationList.size()));
         return animationResource;
     }
 

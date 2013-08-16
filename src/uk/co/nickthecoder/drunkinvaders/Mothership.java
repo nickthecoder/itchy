@@ -45,9 +45,9 @@ public class Mothership extends Alien
 
 
     @Override
-    public void init()
+    public void onAttach()
     {
-        super.init();
+        super.onAttach();
         this.actor.addTag("deadly");
         this.actor.addTag("shootable");
         this.collisionStrategy = DrunkInvaders.game.createCollisionStrategy(this.actor);

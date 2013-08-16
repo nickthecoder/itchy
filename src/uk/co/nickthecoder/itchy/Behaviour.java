@@ -5,21 +5,12 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
 import uk.co.nickthecoder.itchy.util.AbstractProperty;
-import uk.co.nickthecoder.itchy.util.BooleanProperty;
-import uk.co.nickthecoder.itchy.util.DoubleProperty;
-import uk.co.nickthecoder.itchy.util.FontProperty;
-import uk.co.nickthecoder.itchy.util.IntegerProperty;
-import uk.co.nickthecoder.itchy.util.Property;
-import uk.co.nickthecoder.itchy.util.RGBAProperty;
-import uk.co.nickthecoder.itchy.util.StringProperty;
-import uk.co.nickthecoder.jame.RGBA;
 
 public abstract class Behaviour implements MessageListener
 {
@@ -98,50 +89,7 @@ public abstract class Behaviour implements MessageListener
      */
     protected void addProperties()
     {
-        Class<? extends Behaviour> klass = this.getClass();
-
-        for (Field field : klass.getFields()) {
-            Property property = field.getAnnotation(Property.class);
-            if (property != null) {
-                AbstractProperty<Behaviour, ?> gProperty = createProperty(field, property);
-                if (gProperty != null) {
-                    addProperty(gProperty);
-                }
-            }
-        }
-    }
-
-    private AbstractProperty<Behaviour, ?> createProperty( Field field, Property property )
-    {
-        String name = field.getName();
-        String label = property.label();
-
-        Class<?> klass = field.getType();
-
-        if (klass == int.class) {
-            return new IntegerProperty<Behaviour>(label, name);
-        }
-        if (klass == double.class) {
-            return new DoubleProperty<Behaviour>(label, name);
-        }
-        if (klass == String.class) {
-            return new StringProperty<Behaviour>(label, name);
-        }
-        if (klass == boolean.class) {
-            return new BooleanProperty<Behaviour>(label,name);
-        }
-        if (klass == RGBA.class) {
-            return new RGBAProperty<Behaviour>(label, name, property.allowNull(), property.alpha());
-        }
-        if (klass == Font.class) {
-            return new FontProperty<Behaviour>(label, name);
-        }
-
-        System.err.println("Unexpected property : " +
-            field.getDeclaringClass() + "." +
-            field.getName());
-
-        return null;
+        AbstractProperty.addProperties( this.getClass(), allProperties.get(this.getClass()));
     }
 
     public void attach( Actor actor )
@@ -151,7 +99,7 @@ public abstract class Behaviour implements MessageListener
         if (this.collisionStrategy == null) {
             this.collisionStrategy = new BruteForceActorCollisionStrategy(this.actor);
         }
-        this.init();
+        this.onAttach();
     }
 
     public Actor getActor()
@@ -189,6 +137,11 @@ public abstract class Behaviour implements MessageListener
         this.actor.event(poseName);
     }
 
+    public void endEvent( String poseName )
+    {
+        this.actor.endEvent(poseName);
+    }
+
     public void deathEvent( String poseName )
     {
         this.actor.deathEvent(poseName);
@@ -207,9 +160,13 @@ public abstract class Behaviour implements MessageListener
      * attached to its Actor yet.
      * 
      * Consider using onActivated for game logic, and in particular, never use sleep or delay from
-     * within init - weird things will happen!
+     * within onAttach - weird things will happen!
      */
-    public void init()
+    public void onAttach()
+    {
+    }
+
+    public void onDetach()
     {
     }
 

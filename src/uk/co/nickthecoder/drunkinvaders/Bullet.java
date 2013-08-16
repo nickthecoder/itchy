@@ -33,7 +33,7 @@ public class Bullet extends Behaviour implements Shootable
     }
 
     @Override
-    public void init()
+    public void onAttach()
     {
         this.collisionStrategy = DrunkInvaders.game.createCollisionStrategy(this.actor);
     }

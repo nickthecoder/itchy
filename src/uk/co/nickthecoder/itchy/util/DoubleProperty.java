@@ -7,14 +7,17 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.util;
 
-import java.lang.reflect.InvocationTargetException;
-
 import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.DoubleBox;
 
 public class DoubleProperty<S> extends AbstractProperty<S, Double>
 {
+    public DoubleProperty( String label, String access, String key )
+    {
+        super( label, access, key );
+    }
+    
     public DoubleProperty( String label, String access )
     {
         super(label, access);
@@ -22,8 +25,7 @@ public class DoubleProperty<S> extends AbstractProperty<S, Double>
 
     @Override
     public Component createComponent( final S subject, boolean autoUpdate,
-            final ComponentChangeListener listener ) throws IllegalArgumentException,
-        SecurityException, IllegalAccessException, InvocationTargetException, NoSuchFieldException
+            final ComponentChangeListener listener ) throws Exception
     {
         final DoubleBox box = new DoubleBox(this.getValue(subject));
         if (autoUpdate) {

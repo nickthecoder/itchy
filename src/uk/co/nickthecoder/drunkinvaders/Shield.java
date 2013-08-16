@@ -17,7 +17,7 @@ public class Shield extends Behaviour implements Shootable
     }
 
     @Override
-    public void init()
+    public void onAttach()
     {
         this.actor.addTag("killable");
         this.actor.addTag("shootable");

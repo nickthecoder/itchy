@@ -39,7 +39,7 @@ public class AlienFactory extends Behaviour
 
     
     @Override
-    public void init()
+    public void onAttach()
     {
         this.aliens = new ArrayList<Actor>(this.alienCount);
     }

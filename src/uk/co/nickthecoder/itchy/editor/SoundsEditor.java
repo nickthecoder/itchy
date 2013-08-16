@@ -154,7 +154,7 @@ public class SoundsEditor extends SubEditor
             }
         }
 
-        this.currentSoundResource.rename(this.txtName.getText());
+        this.currentSoundResource.setName(this.txtName.getText());
         this.currentSoundResource.filename = this.txtFilename.getText();
 
         if (this.adding) {

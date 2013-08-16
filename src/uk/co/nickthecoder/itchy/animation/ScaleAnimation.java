@@ -7,10 +7,18 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.animation;
 
+import java.util.List;
+
 import uk.co.nickthecoder.itchy.Actor;
+import uk.co.nickthecoder.itchy.util.AbstractProperty;
+import uk.co.nickthecoder.itchy.util.Property;
 
 public class ScaleAnimation extends NumericAnimation
 {
+    private static final List<AbstractProperty<Animation, ?>> properties =
+        AbstractProperty.<Animation> findAnnotations(ScaleAnimation.class);
+
+    @Property(label="Target Scale")
     public double target;
     
     private double initialScale;
@@ -27,6 +35,12 @@ public class ScaleAnimation extends NumericAnimation
         this.target = target;
     }
 
+    @Override
+    public List<AbstractProperty<Animation, ?>> getProperties()
+    {
+        return properties;
+    }
+    
     @Override
     public String getName()
     {

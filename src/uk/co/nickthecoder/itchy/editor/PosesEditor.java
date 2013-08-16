@@ -147,7 +147,8 @@ public class PosesEditor extends SubEditor
 
         this.txtOffsetY = new IntegerBox(pose.getOffsetY());
         grid.addRow(new Label("Offset Y"), this.txtOffsetY);
-
+     
+        
         Container imageContainer = new ClickableContainer() {
             @Override
             public void onClick( MouseButtonEvent e )
@@ -193,7 +194,7 @@ public class PosesEditor extends SubEditor
                 return;
             }
         }
-        this.currentPoseResource.rename(this.txtName.getText());
+        this.currentPoseResource.setName(this.txtName.getText());
         this.currentPoseResource.filename = this.txtFilename.getText();
 
         try {

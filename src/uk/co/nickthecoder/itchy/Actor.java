@@ -18,7 +18,6 @@ import uk.co.nickthecoder.itchy.util.StringProperty;
 import uk.co.nickthecoder.itchy.util.TagCollection;
 import uk.co.nickthecoder.itchy.util.TagMembership;
 import uk.co.nickthecoder.jame.RGBA;
-import uk.co.nickthecoder.jame.Sound;
 import uk.co.nickthecoder.jame.Surface;
 
 public class Actor extends Task
@@ -252,12 +251,23 @@ public class Actor extends Task
             this.setAnimation(animation);
         }
 
-        Sound sound = costume.getSound(eventName);
-        if (sound != null) {
-            sound.play();
+        ManagedSound cs = costume.getCostumeSound(eventName);
+        if (cs != null) {
+            Itchy.singleton.soundManager.play( this, eventName, cs );
         }
     }
 
+    /**
+     * Will fade out or stop sounds corresponding to the given even name.
+     * Future versions of Itchy may also stop corresponding animations.
+     *  
+     * @param eventName
+     */
+    public void endEvent( String eventName )
+    {
+        Itchy.singleton.soundManager.end(this, eventName);
+    }
+    
     public void deathEvent( String eventName )
     {
         this.deathEvent(this.costume, eventName);
@@ -324,8 +334,24 @@ public class Actor extends Task
 
     public final void setBehaviour( Behaviour behaviour )
     {
+        if ( behaviour == this.behaviour ) {
+            return;
+        }
+
+        if ( this.behaviour != null) {
+            final Behaviour oldBehaviour = this.behaviour;
+            Itchy.singleton.gameLoopJob.add(new Task() {
+                @Override
+                public void run()
+                {
+                    oldBehaviour.onDetach();
+                }
+            });
+        }
+        
         this.behaviour = behaviour;
         behaviour.attach(this);
+
     }
 
     public Behaviour getBehaviour()

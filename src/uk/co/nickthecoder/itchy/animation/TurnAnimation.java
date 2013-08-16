@@ -7,13 +7,22 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.animation;
 
+import java.util.List;
+
 import uk.co.nickthecoder.itchy.Actor;
+import uk.co.nickthecoder.itchy.util.AbstractProperty;
+import uk.co.nickthecoder.itchy.util.Property;
 
 public class TurnAnimation extends NumericAnimation
 {
+    private static final List<AbstractProperty<Animation, ?>> properties =
+        AbstractProperty.<Animation> findAnnotations(TurnAnimation.class);
+
+
     /**
      * The total turn in degrees
      */
+    @Property(label="Turn")
     public double turn;
     
     
@@ -26,6 +35,12 @@ public class TurnAnimation extends NumericAnimation
     {
         super(ticks, profile);
         this.turn = turn;
+    }
+    
+    @Override
+    public List<AbstractProperty<Animation, ?>> getProperties()
+    {
+        return properties;
     }
 
     @Override

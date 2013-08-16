@@ -57,9 +57,9 @@ public class Ship extends Bouncy implements Shootable
     private double shieldStrength = 1.0;
 
     @Override
-    public void init()
+    public void onAttach()
     {
-        super.init();
+        super.onAttach();
 
         this.actor.removeTag("bouncy");
 

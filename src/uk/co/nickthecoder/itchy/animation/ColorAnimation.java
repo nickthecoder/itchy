@@ -7,11 +7,19 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.animation;
 
+import java.util.List;
+
 import uk.co.nickthecoder.itchy.Actor;
+import uk.co.nickthecoder.itchy.util.AbstractProperty;
+import uk.co.nickthecoder.itchy.util.Property;
 import uk.co.nickthecoder.jame.RGBA;
 
 public class ColorAnimation extends NumericAnimation
 {
+    private static final List<AbstractProperty<Animation, ?>> properties =
+        AbstractProperty.<Animation> findAnnotations(ColorAnimation.class);
+
+    @Property(label="Target Color")
     public RGBA targetColor;
     
     private RGBA startColor;
@@ -22,6 +30,12 @@ public class ColorAnimation extends NumericAnimation
         this.targetColor = target;
     }
 
+    @Override
+    public List<AbstractProperty<Animation, ?>> getProperties()
+    {
+        return properties;
+    }
+    
     @Override
     public String getName()
     {

@@ -32,9 +32,9 @@ public class Alien extends Bouncy implements Shootable
     public boolean tock = true;
 
     @Override
-    public void init()
+    public void onAttach()
     {
-        super.init();
+        super.onAttach();
 
         this.actor.addTag("deadly");
         this.actor.addTag("shootable");

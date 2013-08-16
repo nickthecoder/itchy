@@ -391,11 +391,11 @@ public class ResourcesWriter extends XMLWriter
 
         for (String name : costume.getSoundNames()) {
 
-            for (SoundResource soundResource : costume.getSoundChoices(name)) {
+            for (ManagedSound cs : costume.getSoundChoices(name)) { 
                 this.beginTag("sound");
                 this.attribute("name", name);
 
-                this.attribute("sound", soundResource.name);
+                this.attribute("sound", cs.soundResource.name);
 
                 this.endTag("sound");
             }

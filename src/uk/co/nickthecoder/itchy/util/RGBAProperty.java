@@ -5,8 +5,6 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.util;
 
-import java.lang.reflect.InvocationTargetException;
-
 import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.RGBABox;
@@ -18,6 +16,13 @@ public class RGBAProperty<S> extends AbstractProperty<S, RGBA>
 
     private final boolean includeAlpha;
 
+    public RGBAProperty( String label, String access, String key, boolean allowNull, boolean includeAlpha )
+    {
+        super(label, access, key);
+        this.allowNull = allowNull;
+        this.includeAlpha = includeAlpha;
+    }
+    
     public RGBAProperty( String label, String access, boolean allowNull, boolean includeAlpha )
     {
         super(label, access);
@@ -27,8 +32,7 @@ public class RGBAProperty<S> extends AbstractProperty<S, RGBA>
 
     @Override
     public Component createComponent( final S subject, final boolean autoUpdate,
-        final ComponentChangeListener listener ) throws IllegalArgumentException,
-        SecurityException, IllegalAccessException, InvocationTargetException, NoSuchFieldException
+        final ComponentChangeListener listener ) throws Exception
     {
         RGBA color = this.getValue(subject);
         final RGBABox result = new RGBABox(color, this.allowNull, this.includeAlpha);

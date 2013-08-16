@@ -7,11 +7,22 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.animation;
 
+import java.util.List;
+
 import uk.co.nickthecoder.itchy.Actor;
+import uk.co.nickthecoder.itchy.util.AbstractProperty;
+import uk.co.nickthecoder.itchy.util.Property;
 
 public class ForwardsAnimation extends NumericAnimation
 {
+    private static final List<AbstractProperty<Animation, ?>> properties =
+        AbstractProperty.<Animation> findAnnotations(ForwardsAnimation.class);
+
+    @Property(label="Forwards")
     public double forwards;
+
+    // TODO Change to sidewards
+    @Property(label="Sideways")
     public double sideways;
     
     public ForwardsAnimation()
@@ -26,6 +37,12 @@ public class ForwardsAnimation extends NumericAnimation
         this.sideways = sideways;
     }
 
+    @Override
+    public List<AbstractProperty<Animation, ?>> getProperties()
+    {
+        return properties;
+    }
+    
     @Override
     public String getName()
     {

@@ -197,7 +197,7 @@ public class NinePatchEditor extends SubEditor
             }
         }
 
-        this.currentResource.rename(this.txtName.getText());
+        this.currentResource.setName(this.txtName.getText());
         this.currentResource.filename = this.txtFilename.getText();
 
         try {

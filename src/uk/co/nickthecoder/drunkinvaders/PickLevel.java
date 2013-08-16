@@ -36,7 +36,7 @@ public class PickLevel extends Behaviour implements MouseListener
 
     
     @Override
-    public void init()
+    public void onAttach()
     {
         if (DrunkInvaders.game.completedLevel(this.levelNumber)) {
             this.actor.event("completed");

@@ -1,11 +1,11 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0 which accompanies this
+ * distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
+
+import uk.co.nickthecoder.itchy.util.Property;
 
 /**
  * A Pose is a single image used by an Actor's Appearance. A Pose consists of a single Surface,
@@ -13,10 +13,7 @@ package uk.co.nickthecoder.itchy;
  * Pose is drawn on screen at x,y, the top left of the Pose will be drawn at ( x-offsetX, y-offsetY
  * ) Also, if the Actor can be rotated, then the offset will be the point around which the Actor
  * will rotate.
- * 
- * @author nick
  */
-
 public interface Pose extends OffsetSurface
 {
 
@@ -30,6 +27,7 @@ public interface Pose extends OffsetSurface
      *         degrees is straight up (assuming your Y axis points upwards). See ScrollableLayer's
      *         constructor's yAxisPointsDown parameter.
      */
+    @Property(label = "Direction")
     public double getDirection();
 
     /**

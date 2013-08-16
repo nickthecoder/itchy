@@ -12,16 +12,25 @@ import java.util.List;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.MessageListener;
+import uk.co.nickthecoder.itchy.util.AbstractProperty;
+import uk.co.nickthecoder.itchy.util.Property;
 
 public class CompoundAnimation extends AbstractAnimation
 {
+    private static final List<AbstractProperty<Animation, ?>> properties =
+        AbstractProperty.<Animation> findAnnotations(CompoundAnimation.class);
+
+
     public List<Animation> children = new ArrayList<Animation>();
 
+    @Property(label="Sequence?")
     public boolean sequence;
 
-    public SequenceOrParallel sop;
-
+    @Property(label="Loops")
     public int loops;
+
+    // TODO Can this be private?
+    public SequenceOrParallel sop;
 
     private int loopsRemaining;
 
@@ -31,6 +40,12 @@ public class CompoundAnimation extends AbstractAnimation
         this.loops = 1;
     }
 
+    @Override
+    public List<AbstractProperty<Animation, ?>> getProperties()
+    {
+        return properties;
+    }
+    
     @Override
     public String getName()
     {

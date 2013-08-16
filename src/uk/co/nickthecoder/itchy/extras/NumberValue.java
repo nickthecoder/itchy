@@ -17,7 +17,7 @@ public class NumberValue extends TextValue
     private DecimalFormat format;
 
     @Override
-    public void init()
+    public void onAttach()
     {
         this.format = new DecimalFormat(this.formatPattern);
     }

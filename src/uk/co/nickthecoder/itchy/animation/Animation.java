@@ -7,11 +7,17 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.animation;
 
+import java.util.List;
+
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.MessageListener;
+import uk.co.nickthecoder.itchy.util.AbstractProperty;
+import uk.co.nickthecoder.itchy.util.Property;
 
 public interface Animation extends Cloneable
 {
+    public List<AbstractProperty<Animation,?>> getProperties();
+    
     public String getName();
 
     public void start( Actor actor );
@@ -32,6 +38,7 @@ public interface Animation extends Cloneable
 
     public void removeMessageListener( MessageListener listener );
 
+    @Property(label="Finished Message")
     public String getFinishedMessage();
     
     public void setFinishedMessage( String message );

@@ -7,17 +7,27 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
+import java.util.List;
+
+import uk.co.nickthecoder.itchy.util.AbstractProperty;
+import uk.co.nickthecoder.itchy.util.Property;
 import uk.co.nickthecoder.jame.JameException;
 import uk.co.nickthecoder.jame.Surface;
 
 public class PoseResource extends NamedResource
 {
+    public static List<AbstractProperty<PoseResource, ?>> properties = 
+        AbstractProperty.findAnnotations(PoseResource.class);
+
+
     public static final int THUMBNAIL_WIDTH = 50;
     public static final int THUMBNAIL_HEIGHT = 50;
 
-    public ImagePose pose;
-
+    @Property(label="Filename")
     public String filename;
+
+    @Property(label="Pose", recurse=true)
+    public ImagePose pose;
 
     private Surface thumbnail;
 
