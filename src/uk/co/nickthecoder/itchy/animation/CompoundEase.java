@@ -11,35 +11,35 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Join three profiles together into a single compound profile.
- * Imagine a Profile as a graph which goes from (0,0) to (1,1), a linear Profile would be a straight line,
- * and a EaseInOut profile would be a slanted S shape.
- * A CompoundProfile is a set of these graphs all joined together. Each section is a profile which goes
- * from 0 to 1, but the CompoundProfile, can change the destination for all but the last Profile.
- * For example, if we joined two LinearProfiles together, which the first destination was 0.5, then it
- * would be identical to a single LinearProfile. However, if we made the first destination 0.1, then the
+ * Join three eases together into a single compound ease.
+ * Imagine an Ease as a graph which goes from (0,0) to (1,1), a linear Ease would be a straight line,
+ * and a EaseInOut Ease would be a slanted S shape.
+ * A CompoundEase is a set of these graphs all joined together. Each section is an ease which goes
+ * from 0 to 1, but the CompoundEase, can change the destination for all but the last Ease.
+ * For example, if we joined two LinearEases together, which the first destination was 0.5, then it
+ * would be identical to a single LinearEase. However, if we made the first destination 0.1, then the
  * first part of the animation would change slowly (as the gradient is shallow), and the second half would
  * be quick (going from 0.1 to 1 in the same time as the first half took to go from 0 to 0.1).  
  */
-public class CompoundProfile extends AbstractProfile
+public class CompoundEase extends AbstractEase
 {
     private List<Section> sections;
         
     private double totalWidth;
         
-    public CompoundProfile()
+    public CompoundEase()
     {
         sections = new ArrayList<Section>();
         totalWidth = 0;
     }
 
     /**
-     * Note, the last profile to be added should always have a destination of 1.
-     * @param profile
-     * @param width The amount of time that this profile is to be used relative to the other added profiles
+     * Note, the last ease to be added should always have a destination of 1.
+     * @param ease
+     * @param width The amount of time that this ease is to be used relative to the other added eases
      * @param destination 
      */
-    public CompoundProfile addProfile( Profile profile, double width, double destination )
+    public CompoundEase addEase( Ease ease, double width, double destination )
     {        
         totalWidth += width;
         double prevY;
@@ -49,7 +49,7 @@ public class CompoundProfile extends AbstractProfile
             Section prevSection = sections.get(sections.size()-1);
             prevY = prevSection.y0 + prevSection.actualHeight;
         }
-        sections.add( new Section( profile, width, prevY, destination ) );
+        sections.add( new Section( ease, width, prevY, destination ) );
 
         double accumulatedWidth = 0;
         for ( Section section : sections ) {
@@ -76,9 +76,9 @@ public class CompoundProfile extends AbstractProfile
     {
         StringBuffer buffer = new StringBuffer();
         
-        buffer.append( "CompoundProfile : \n" );
+        buffer.append( "CompoundEase : \n" );
         for (Section section: sections) {
-            buffer.append( section.profile )
+            buffer.append( section.ease )
                 .append( " x0 : " ).append(section.x0)
                 .append( " width : " ).append(section.actualWidth)
                 .append( " y0 : " ).append(section.y0)
@@ -90,7 +90,7 @@ public class CompoundProfile extends AbstractProfile
     
     private class Section
     {
-        Profile profile;
+        Ease ease;
         double width;
         
         double actualWidth;
@@ -99,9 +99,9 @@ public class CompoundProfile extends AbstractProfile
         double x0;
         double y0;
 
-        public Section( Profile profile, double width, double y0, double y1 )
+        public Section( Ease ease, double width, double y0, double y1 )
         {
-            this.profile = profile;
+            this.ease = ease;
             this.width = width;
             this.y0 = y0;
             this.actualHeight = y1 - y0;
@@ -112,7 +112,7 @@ public class CompoundProfile extends AbstractProfile
         {
             amount = (amount - this.x0) / this.actualWidth;
             
-            double result = this.profile.amount( amount );
+            double result = this.ease.amount( amount );
             
             return result * actualHeight + y0;
         }

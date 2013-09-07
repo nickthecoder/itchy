@@ -9,7 +9,7 @@ package uk.co.nickthecoder.itchy.animation;
 
 import uk.co.nickthecoder.jame.Surface;
 
-public interface Profile
+public interface Ease
 {
     public double amount( double amount );
     

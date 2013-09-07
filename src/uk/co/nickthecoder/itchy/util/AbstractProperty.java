@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Set;
 
 import uk.co.nickthecoder.itchy.Font;
-import uk.co.nickthecoder.itchy.animation.Profile;
+import uk.co.nickthecoder.itchy.animation.Ease;
 import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.jame.RGBA;
@@ -160,8 +160,8 @@ public abstract class AbstractProperty<S, T>
         if (klass == Font.class) {
             return new FontProperty<SS>(label, access, key);
         }
-        if (klass == Profile.class) {
-            return new ProfileProperty<SS>(label, access, key);
+        if (klass == Ease.class) {
+            return new EaseProperty<SS>(label, access, key);
         }
         if (property.recurse()) {
             return null;

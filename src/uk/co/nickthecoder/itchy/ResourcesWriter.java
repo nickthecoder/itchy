@@ -19,7 +19,7 @@ import uk.co.nickthecoder.itchy.animation.Frame;
 import uk.co.nickthecoder.itchy.animation.FramedAnimation;
 import uk.co.nickthecoder.itchy.animation.MoveAnimation;
 import uk.co.nickthecoder.itchy.animation.NumericAnimation;
-import uk.co.nickthecoder.itchy.animation.Profile;
+import uk.co.nickthecoder.itchy.animation.Ease;
 import uk.co.nickthecoder.itchy.animation.ScaleAnimation;
 import uk.co.nickthecoder.itchy.animation.TurnAnimation;
 import uk.co.nickthecoder.itchy.util.NinePatch;
@@ -199,7 +199,7 @@ public class ResourcesWriter extends XMLWriter
             this.attribute("ticks", moveAnimation.ticks);
             this.attribute("dx", moveAnimation.dx);
             this.attribute("dy", moveAnimation.dy);
-            this.writeProfile(moveAnimation.profile);
+            this.writeEase(moveAnimation.ease);
             if ( ! StringUtils.isBlank(animation.getFinishedMessage())) {
                 this.attribute("finishedMessage", animation.getFinishedMessage());
             }
@@ -211,7 +211,7 @@ public class ResourcesWriter extends XMLWriter
             this.attribute("ticks", forwardsAnimation.ticks);
             this.attribute("forwards", forwardsAnimation.forwards);
             this.attribute("sideways", forwardsAnimation.sideways);
-            this.writeProfile(forwardsAnimation.profile);
+            this.writeEase(forwardsAnimation.ease);
             if ( ! StringUtils.isBlank(animation.getFinishedMessage())) {
                 this.attribute("finishedMessage", animation.getFinishedMessage());
             }
@@ -222,7 +222,7 @@ public class ResourcesWriter extends XMLWriter
             this.beginTag("alpha");
             this.attribute("ticks", alphaAnimation.ticks);
             this.attribute("target", alphaAnimation.target);
-            this.writeProfile(alphaAnimation.profile);
+            this.writeEase(alphaAnimation.ease);
             if ( ! StringUtils.isBlank(animation.getFinishedMessage())) {
                 this.attribute("finishedMessage", animation.getFinishedMessage());
             }
@@ -233,7 +233,7 @@ public class ResourcesWriter extends XMLWriter
             this.beginTag("turn");
             this.attribute("ticks", turnAnimation.ticks);
             this.attribute("turn", turnAnimation.turn);
-            this.writeProfile(turnAnimation.profile);
+            this.writeEase(turnAnimation.ease);
             if ( ! StringUtils.isBlank(animation.getFinishedMessage())) {
                 this.attribute("finishedMessage", animation.getFinishedMessage());
             }
@@ -244,7 +244,7 @@ public class ResourcesWriter extends XMLWriter
             this.beginTag("scale");
             this.attribute("ticks", scaleAnimation.ticks);
             this.attribute("target", scaleAnimation.target);
-            this.writeProfile(scaleAnimation.profile);
+            this.writeEase(scaleAnimation.ease);
             if ( ! StringUtils.isBlank(animation.getFinishedMessage())) {
                 this.attribute("finishedMessage", animation.getFinishedMessage());
             }
@@ -256,13 +256,13 @@ public class ResourcesWriter extends XMLWriter
         
     }
 
-    private void writeProfile( Profile profile ) throws XMLException
+    private void writeEase( Ease ease ) throws XMLException
     {
-        String name = NumericAnimation.getProfileName(profile);
+        String name = NumericAnimation.getEaseName(ease);
         if (name == null) {
-            throw new XMLException("Unknown animation profile : " + profile);
+            throw new XMLException("Unknown animation ease : " + ease);
         }
-        this.attribute("profile", name);
+        this.attribute("ease", name);
     }
 
     private void writeFrames( List<Frame> frames ) throws XMLException

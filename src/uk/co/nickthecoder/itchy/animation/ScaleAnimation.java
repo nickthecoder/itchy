@@ -29,9 +29,9 @@ public class ScaleAnimation extends NumericAnimation
         this(200, linear, 1);
     }
 
-    public ScaleAnimation( int ticks, Profile profile, double target )
+    public ScaleAnimation( int ticks, Ease ease, double target )
     {
-        super(ticks, profile);
+        super(ticks, ease);
         this.target = target;
     }
 

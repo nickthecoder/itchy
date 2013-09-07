@@ -8,7 +8,7 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.animation;
 
-public class BezierProfile extends AbstractProfile
+public class BezierEase extends AbstractEase
 {
 
     private static final int NEWTON_ITERATIONS = 4;
@@ -24,7 +24,7 @@ public class BezierProfile extends AbstractProfile
 
     private double mX2, mY2;
 
-    public BezierProfile( double x1, double y1, double x2, double y2 )
+    public BezierEase( double x1, double y1, double x2, double y2 )
     {
         this.mSampleValues = new double[kSplineTableSize];
 

@@ -24,9 +24,9 @@ public class ColorAnimation extends NumericAnimation
     
     private RGBA startColor;
 
-    public ColorAnimation( int ticks, Profile profile, RGBA target )
+    public ColorAnimation( int ticks, Ease ease, RGBA target )
     {
-        super(ticks, profile);
+        super(ticks, ease);
         this.targetColor = target;
     }
 

@@ -11,7 +11,7 @@ import uk.co.nickthecoder.jame.RGBA;
 import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.Surface;
 
-public abstract class AbstractProfile implements Profile
+public abstract class AbstractEase implements Ease
 {
     public static RGBA THUMBNAIL_COLOR = new RGBA( 241, 163, 12 );
     public static final int THUMBNAIL_SIZE = 50;
@@ -31,7 +31,7 @@ public abstract class AbstractProfile implements Profile
     }
 
     /**
-     * If the profile changes, then call this to cause its thumbnail to be regenerated when it is
+     * If the ease changes, then call this to cause its thumbnail to be regenerated when it is
      * next requested.
      */
     public void resetThumbnail()
@@ -43,7 +43,7 @@ public abstract class AbstractProfile implements Profile
     {
         // We create an over-sized image, and the shrink it to make anit aliased lines.
         int size = 200;
-        int margin = 25; // Extra top and bottom for profiles with overshoot.
+        int margin = 25; // Extra top and bottom for eases with overshoot.
         int dotSize = 10;
         Rect dot = new Rect( 0,0, dotSize, dotSize);
         

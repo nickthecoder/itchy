@@ -6,19 +6,19 @@
 package uk.co.nickthecoder.itchy.util;
 
 import uk.co.nickthecoder.itchy.animation.NumericAnimation;
-import uk.co.nickthecoder.itchy.animation.Profile;
-import uk.co.nickthecoder.itchy.animation.ProfilePickerButton;
+import uk.co.nickthecoder.itchy.animation.Ease;
+import uk.co.nickthecoder.itchy.animation.EasePickerButton;
 import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 
-public class ProfileProperty<S> extends AbstractProperty<S, Profile>
+public class EaseProperty<S> extends AbstractProperty<S, Ease>
 {
 
-    public ProfileProperty( String label, String access, String key )
+    public EaseProperty( String label, String access, String key )
     {
         super( label, access, key );
     }
-    public ProfileProperty( String label, String access )
+    public EaseProperty( String label, String access )
     {
         super(label, access);
     }
@@ -27,7 +27,7 @@ public class ProfileProperty<S> extends AbstractProperty<S, Profile>
     public Component createComponent( final S subject, boolean autoUpdate,
         final ComponentChangeListener listener ) throws Exception
     {
-        final ProfilePickerButton button = new ProfilePickerButton(getValue(subject));
+        final EasePickerButton button = new EasePickerButton(getValue(subject));
         System.out.println( "Autoupdate? " + autoUpdate );
         
         if (autoUpdate) {
@@ -36,7 +36,7 @@ public class ProfileProperty<S> extends AbstractProperty<S, Profile>
                 public void changed()
                 {
                     try {
-                        ProfileProperty.this.update(subject, button);
+                        EaseProperty.this.update(subject, button);
                         if (listener != null) {
                             listener.changed();
                         }
@@ -52,18 +52,18 @@ public class ProfileProperty<S> extends AbstractProperty<S, Profile>
     @Override
     public void update( S subject, Component component ) throws Exception
     {
-        ProfilePickerButton button = (ProfilePickerButton) component;
+        EasePickerButton button = (EasePickerButton) component;
         setValue(subject, button.getValue());
     }
 
     @Override
-    public Profile parse( String value )
+    public Ease parse( String value )
     {
-        Profile profile = NumericAnimation.getProfile(value);
-        if ( profile == null ) {
-            throw new RuntimeException( "Named Profile not found : " + value );
+        Ease ease = NumericAnimation.getEase(value);
+        if ( ease == null ) {
+            throw new RuntimeException( "Named Ease not found : " + value );
         }
-        return profile;
+        return ease;
     }
         
 }

@@ -29,9 +29,9 @@ public class AlphaAnimation extends NumericAnimation
         this(200, linear, 255);
     }
 
-    public AlphaAnimation( int ticks, Profile profile, double target )
+    public AlphaAnimation( int ticks, Ease ease, double target )
     {
-        super(ticks, profile);
+        super(ticks, ease);
         this.target = target;
     }
 

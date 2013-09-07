@@ -36,9 +36,9 @@ public class MoveAnimation extends NumericAnimation
         this(200, NumericAnimation.linear, 0, 0);
     }
 
-    public MoveAnimation( int ticks, Profile profile, double dx, double dy )
+    public MoveAnimation( int ticks, Ease ease, double dx, double dy )
     {
-        super(ticks, profile);
+        super(ticks, ease);
         this.dx = dx;
         this.dy = dy;
     }

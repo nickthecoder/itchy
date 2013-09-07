@@ -30,9 +30,9 @@ public class ForwardsAnimation extends NumericAnimation
         this(200, NumericAnimation.linear, 0, 0);
     }
 
-    public ForwardsAnimation( int ticks, Profile profile, double forwards, double sideways )
+    public ForwardsAnimation( int ticks, Ease ease, double forwards, double sideways )
     {
-        super(ticks, profile);
+        super(ticks, ease);
         this.forwards = forwards;
         this.sideways = sideways;
     }

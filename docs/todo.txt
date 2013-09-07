@@ -8,8 +8,9 @@ Jame is out of date, need to rebuild for win32 and i386 and ARM??
 What's Next
 ===========
 
-Add "aka" to Property, and then make the loaders look for the aka attribute first.
-    Change Animations "profile" to "ease" and related classes
+Change Animations "profile" to "ease" and related classes
+
+EaseButton to show the thumbnail graph.
 
 Load/Save ManagedSound attributes of Costume's sound
     Use Property for all attributes, for both load/save and editing across the whole GUI. 

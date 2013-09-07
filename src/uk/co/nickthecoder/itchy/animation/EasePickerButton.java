@@ -13,28 +13,28 @@ import uk.co.nickthecoder.itchy.gui.Button;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.Label;
 
-public class ProfilePickerButton extends Button implements ActionListener
+public class EasePickerButton extends Button implements ActionListener
 {
-    private Profile profile;
+    private Ease ease;
 
     private List<ComponentChangeListener> changeListeners = new ArrayList<ComponentChangeListener>();
     
-    public ProfilePickerButton( Profile profile )
+    public EasePickerButton( Ease ease )
     {
-        super(NumericAnimation.getProfileName(profile));
-        this.profile = profile;
+        super(NumericAnimation.getEaseName(ease));
+        this.ease = ease;
         this.addActionListener(this);
     }
 
-    public Profile getValue()
+    public Ease getValue()
     {
-        return this.profile;
+        return this.ease;
     }
 
-    public void setValue( Profile profile )
+    public void setValue( Ease ease )
     {
-        this.profile = profile;
-        ((Label) (this.getChildren().get(0))).setText(NumericAnimation.getProfileName(profile) );
+        this.ease = ease;
+        ((Label) (this.getChildren().get(0))).setText(NumericAnimation.getEaseName(ease) );
 
         for (ComponentChangeListener listener : this.changeListeners) {
             listener.changed();
@@ -44,12 +44,12 @@ public class ProfilePickerButton extends Button implements ActionListener
     @Override
     public void action()
     {
-        ProfilePicker picker = new ProfilePicker()
+        EasePicker picker = new EasePicker()
         {
             @Override
-            public void pick( Profile profile )
+            public void pick( Ease ease )
             {
-                setValue(profile);
+                setValue(ease);
             }
         };
         picker.show();
