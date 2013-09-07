@@ -22,10 +22,9 @@ import uk.co.nickthecoder.jame.Surface;
 
 public class Actor extends Task
 {
-    // private static Map<Class,Integer> _nextIds = new HashMap<Class,Integer>();
     private static int _nextId = 1;
 
-    private int _id;
+    private final int _id;
 
     private static List<AbstractProperty<Actor, ?>> normalProperties;
     private static List<AbstractProperty<Actor, ?>> textProperties;
@@ -339,14 +338,7 @@ public class Actor extends Task
         }
 
         if ( this.behaviour != null) {
-            final Behaviour oldBehaviour = this.behaviour;
-            Itchy.singleton.gameLoopJob.add(new Task() {
-                @Override
-                public void run()
-                {
-                    oldBehaviour.onDetach();
-                }
-            });
+            this.behaviour.detatch();
         }
         
         this.behaviour = behaviour;

@@ -16,7 +16,6 @@ public abstract class Behaviour implements MessageListener
 {
     private final static HashMap<Class<?>, List<AbstractProperty<Behaviour, ?>>> allProperties = new HashMap<Class<?>, List<AbstractProperty<Behaviour, ?>>>();
 
-    
     public static boolean isValidClassName( String behaviourClassName )
     {
         try {
@@ -32,12 +31,10 @@ public abstract class Behaviour implements MessageListener
         return true;
     }
 
-
     protected Actor actor;
 
-    public ActorCollisionStrategy collisionStrategy;
+    public CollisionStrategy collisionStrategy = BruteForceCollisionStrategy.singleton;
 
-    
     public Behaviour()
     {
         this.actor = null;
@@ -89,17 +86,27 @@ public abstract class Behaviour implements MessageListener
      */
     protected void addProperties()
     {
-        AbstractProperty.addProperties( this.getClass(), allProperties.get(this.getClass()));
+        AbstractProperty.addProperties(this.getClass(), allProperties.get(this.getClass()));
     }
 
     public void attach( Actor actor )
     {
         assert (this.actor == null);
         this.actor = actor;
-        if (this.collisionStrategy == null) {
-            this.collisionStrategy = new BruteForceActorCollisionStrategy(this.actor);
-        }
+        this.actor.addTag(this.getClass().getName());
         this.onAttach();
+    }
+
+    public void detatch()
+    {
+        this.actor.removeTag(this.getClass().getName());
+        Itchy.singleton.gameLoopJob.add(new Task() {
+            @Override
+            public void run()
+            {
+                Behaviour.this.onDetach();
+            }
+        });
     }
 
     public Actor getActor()
@@ -109,22 +116,47 @@ public abstract class Behaviour implements MessageListener
 
     public Set<Actor> overlapping( String... tags )
     {
-        return this.collisionStrategy.overlapping(tags);
+        return this.collisionStrategy.overlapping(this.actor,tags,null);
+    }
+
+    /**
+     * Returns all Actors with a given type of Behaviour which are touching this Behaviour's Actor.
+     * 
+     * @param klass
+     *        The type of Behaviour to match. If you want to test for base classes or interfaces,
+     *        then you must manually add appropriate tags in the Behaviour's onAttach method. e.g. :
+     * 
+     *        <pre>
+     * public void onAttach()
+     * {
+     *     this.actor.addTag(MyBaseClass.class.getName());
+     * }
+     * 
+     * public void onDetatch()
+     * {
+     *     this.actor.removeTag(MyBaseClass.class.getName());
+     * }
+     * </pre>
+     * @return The set of all touching Actors with matching behaviours.
+     */
+    public Set<Actor> touching( Class<Behaviour> klass )
+    {
+        return touching(klass.getName());
     }
 
     public Set<Actor> touching( String... tags )
     {
-        return this.collisionStrategy.touching(tags);
+        return this.collisionStrategy.touching(this.actor,tags,null);
     }
 
     public Set<Actor> overlapping( String[] including, String[] excluding )
     {
-        return this.collisionStrategy.overlapping(including, excluding);
+        return this.collisionStrategy.overlapping(this.actor,including, excluding);
     }
 
     public Set<Actor> touching( String[] including, String[] excluding )
     {
-        return this.collisionStrategy.touching(including, excluding);
+        return this.collisionStrategy.touching(this.actor,including, excluding);
     }
 
     public void play( String soundName )
@@ -153,11 +185,10 @@ public abstract class Behaviour implements MessageListener
     }
 
     /**
-     * Called when the Behaviour is first attached to its actor. For most behaviours, this will
-     * be when the actor is first created.
-     * You may override this method to do one-time initialisation. Use this instead of a
-     * Constructor, because the behaviour will not be fully formed in the constructor - it won't be
-     * attached to its Actor yet.
+     * Called when the Behaviour is first attached to its actor. For most behaviours, this will be
+     * when the actor is first created. You may override this method to do one-time initialisation.
+     * Use this instead of a Constructor, because the behaviour will not be fully formed in the
+     * constructor - it won't be attached to its Actor yet.
      * 
      * Consider using onActivated for game logic, and in particular, never use sleep or delay from
      * within onAttach - weird things will happen!
@@ -178,13 +209,13 @@ public abstract class Behaviour implements MessageListener
 
     public void sendMessage( final String message )
     {
-        Itchy.singleton.addTask( new Task() {
+        Itchy.singleton.addTask(new Task() {
             @Override
             public void run()
             {
-                Behaviour.this.onMessage( message );
+                Behaviour.this.onMessage(message);
             }
-            
+
         });
     }
 

@@ -15,7 +15,16 @@ import java.util.Set;
 
 public class BruteForceCollisionStrategy implements CollisionStrategy
 {
+    public void update()
+    {
+        // Do nothing
+    }
 
+    public void remove()
+    {
+        // Do nothing
+    }
+    
     /**
      * Should the actor be excluded from consideration based on the exclude tags?
      * @param actor The actor who's tags are to be tested

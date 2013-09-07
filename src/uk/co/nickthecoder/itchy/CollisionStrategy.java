@@ -31,7 +31,10 @@ import java.util.Set;
  */
 public interface CollisionStrategy
 {
+    public void update();
 
+    public void remove();
+    
     public Set<Actor> overlapping( Actor actor, String[] includeTags, String[] excludeTags );
 
     public Set<Actor> touching( Actor actor, String[] includeTags, String[] excludeTags );

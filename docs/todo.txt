@@ -8,10 +8,9 @@ Jame is out of date, need to rebuild for win32 and i386 and ARM??
 What's Next
 ===========
 
-EaseButton to show the thumbnail graph.
+Allow touching/overlapping to use types (as it does with tags), and it have it return the correct type.
 
-Load/Save ManagedSound attributes of Costume's sound
-    Use Property for all attributes, for both load/save and editing across the whole GUI. 
+EaseButton to show the thumbnail graph.
 
 Bucket to be more transparent
 Water looks naff
@@ -35,9 +34,6 @@ Use SceneBehaviour in the games.
 Create a game which uses the GUI        
     The Rules object needs to be on Game, its probably on Itchy right now.
 
-Use annotations to set initial tags :
-    @Tagged("deadly") @Tagged("bouncy") class Alien {...)
-    Allow touching using interface/class, and it returns it in the correct type.
 
 Costumes can have properties (not per instance of Actor, but per Costume)
     Already have a half measure by using the String resources, but I should bin that, and introduce real properties
