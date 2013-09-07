@@ -324,8 +324,11 @@ public class ResourcesReader
     public Animation createAnimation( String tagName )
         throws XMLException
     {
-        if (tagName.equals("parallel")) {
-            return new CompoundAnimation(false);
+        if (tagName.equals("compound")) {
+            return new CompoundAnimation(true);
+
+        } else if (tagName.equals("parallel")) {
+                return new CompoundAnimation(false);
 
         } else if (tagName.equals("sequence")) {
             return new CompoundAnimation(true);
@@ -373,8 +376,8 @@ public class ResourcesReader
                 try {
                     property.setValueByString(animation, value);
                 } catch (Exception e) {
-                    throw new XMLException("Failed to parse animation property : " + property.key +
-                        " value : " + value);
+                    throw new XMLException("Failed to parse animation property : '" + property.key +
+                        "'. value : '" + value + "'");
                 }
             }
         }

@@ -65,5 +65,15 @@ public class EaseProperty<S> extends AbstractProperty<S, Ease>
         }
         return ease;
     }
-        
+
+    @Override
+    public String getStringValue( S subject ) throws Exception
+    {
+        Ease ease = getValue( subject );
+        if (ease == null) {
+            return null;
+        } else {
+            return NumericAnimation.getEaseName( ease );
+        }
+    }
 }

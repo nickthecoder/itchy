@@ -1,9 +1,7 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0 which accompanies this
+ * distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
@@ -18,10 +16,9 @@ import uk.co.nickthecoder.itchy.animation.ForwardsAnimation;
 import uk.co.nickthecoder.itchy.animation.Frame;
 import uk.co.nickthecoder.itchy.animation.FramedAnimation;
 import uk.co.nickthecoder.itchy.animation.MoveAnimation;
-import uk.co.nickthecoder.itchy.animation.NumericAnimation;
-import uk.co.nickthecoder.itchy.animation.Ease;
 import uk.co.nickthecoder.itchy.animation.ScaleAnimation;
 import uk.co.nickthecoder.itchy.animation.TurnAnimation;
+import uk.co.nickthecoder.itchy.util.AbstractProperty;
 import uk.co.nickthecoder.itchy.util.NinePatch;
 import uk.co.nickthecoder.itchy.util.StringUtils;
 import uk.co.nickthecoder.itchy.util.XMLException;
@@ -170,99 +167,68 @@ public class ResourcesWriter extends XMLWriter
         this.endTag("animations");
     }
 
-    private void writeAnimation( Animation animation ) throws XMLException
+    private String getAnimationTagName( Animation animation )
+        throws XMLException
     {
         if (animation instanceof CompoundAnimation) {
-            CompoundAnimation ca = (CompoundAnimation) animation;
-            String tagName = ca.sequence ? "sequence" : "parallel";
-            this.beginTag(tagName);
-            this.attribute("loops", ca.loops);
-            this.writeAnimations((CompoundAnimation) animation);
-            if ( ! StringUtils.isBlank(animation.getFinishedMessage())) {
-                this.attribute("finishedMessage", animation.getFinishedMessage());
-            }
-            this.endTag(tagName);
+            return "compound";
 
         } else if (animation instanceof FramedAnimation) {
-            FramedAnimation framedAnimation = (FramedAnimation) animation;
-            String tagName = framedAnimation.pingPong ? "pingPong" : "frames";
-            this.beginTag(tagName);
-            this.writeFrames(framedAnimation.getFrames());
-            if ( ! StringUtils.isBlank(animation.getFinishedMessage())) {
-                this.attribute("finishedMessage", animation.getFinishedMessage());
-            }
-            this.endTag(tagName);
+            return "frames";
 
         } else if (animation instanceof MoveAnimation) {
-            MoveAnimation moveAnimation = (MoveAnimation) animation;
-            this.beginTag("move");
-            this.attribute("ticks", moveAnimation.ticks);
-            this.attribute("dx", moveAnimation.dx);
-            this.attribute("dy", moveAnimation.dy);
-            this.writeEase(moveAnimation.ease);
-            if ( ! StringUtils.isBlank(animation.getFinishedMessage())) {
-                this.attribute("finishedMessage", animation.getFinishedMessage());
-            }
-            this.endTag("move");
+            return "move";
 
         } else if (animation instanceof ForwardsAnimation) {
-            ForwardsAnimation forwardsAnimation = (ForwardsAnimation) animation;
-            this.beginTag("forwards");
-            this.attribute("ticks", forwardsAnimation.ticks);
-            this.attribute("forwards", forwardsAnimation.forwards);
-            this.attribute("sideways", forwardsAnimation.sideways);
-            this.writeEase(forwardsAnimation.ease);
-            if ( ! StringUtils.isBlank(animation.getFinishedMessage())) {
-                this.attribute("finishedMessage", animation.getFinishedMessage());
-            }
-            this.endTag("forwards");
+            return "forwards";
 
         } else if (animation instanceof AlphaAnimation) {
-            AlphaAnimation alphaAnimation = (AlphaAnimation) animation;
-            this.beginTag("alpha");
-            this.attribute("ticks", alphaAnimation.ticks);
-            this.attribute("target", alphaAnimation.target);
-            this.writeEase(alphaAnimation.ease);
-            if ( ! StringUtils.isBlank(animation.getFinishedMessage())) {
-                this.attribute("finishedMessage", animation.getFinishedMessage());
-            }
-            this.endTag("alpha");
+            return "alpha";
 
         } else if (animation instanceof TurnAnimation) {
-            TurnAnimation turnAnimation = (TurnAnimation) animation;
-            this.beginTag("turn");
-            this.attribute("ticks", turnAnimation.ticks);
-            this.attribute("turn", turnAnimation.turn);
-            this.writeEase(turnAnimation.ease);
-            if ( ! StringUtils.isBlank(animation.getFinishedMessage())) {
-                this.attribute("finishedMessage", animation.getFinishedMessage());
-            }
-            this.endTag("turn");
+            return "turn";
 
         } else if (animation instanceof ScaleAnimation) {
-            ScaleAnimation scaleAnimation = (ScaleAnimation) animation;
-            this.beginTag("scale");
-            this.attribute("ticks", scaleAnimation.ticks);
-            this.attribute("target", scaleAnimation.target);
-            this.writeEase(scaleAnimation.ease);
-            if ( ! StringUtils.isBlank(animation.getFinishedMessage())) {
-                this.attribute("finishedMessage", animation.getFinishedMessage());
-            }
-            this.endTag("scale");
+            return "scale";
 
         } else {
-            throw new XMLException("Unknown animation type : " + animation.getClass().getName());
+            throw new XMLException("Unknown animation : " + animation.getClass().getName());
         }
-        
     }
 
-    private void writeEase( Ease ease ) throws XMLException
+    private void writeAnimationProperties( Animation animation )
+        throws XMLException
     {
-        String name = NumericAnimation.getEaseName(ease);
-        if (name == null) {
-            throw new XMLException("Unknown animation ease : " + ease);
+        for (AbstractProperty<Animation, ?> property : animation.getProperties()) {
+
+            try {
+                String value = property.getStringValue(animation);
+                if (!StringUtils.isBlank(value)) {
+                    this.attribute(property.key, value);
+                }
+
+            } catch (Exception e) {
+                throw new XMLException("Failed to write animation property : " + property.key);
+            }
+
         }
-        this.attribute("ease", name);
+    }
+
+    private void writeAnimation( Animation animation ) throws XMLException
+    {
+        String tagName = getAnimationTagName(animation);
+        this.beginTag(tagName);
+
+        writeAnimationProperties(animation);
+
+        if (animation instanceof FramedAnimation) {
+            this.writeFrames(((FramedAnimation) animation).getFrames());
+        } else if (animation instanceof CompoundAnimation) {
+            this.writeAnimations((CompoundAnimation) animation);
+        }
+
+        this.endTag(tagName);
+
     }
 
     private void writeFrames( List<Frame> frames ) throws XMLException
@@ -353,17 +319,18 @@ public class ResourcesWriter extends XMLWriter
         for (String name : costume.getPoseNames()) {
 
             for (PoseResource poseResource : costume.getPoseChoices(name)) {
-                
+
                 // Ignore poses which were GENERATED rather than loaded.
-                // For example Fragment, generates poses, which are added to a costume, but should be
+                // For example Fragment, generates poses, which are added to a costume, but should
+                // be
                 // ignore when saving the resources.
-                if ( poseResource.filename!=null) {
-                    
+                if (poseResource.filename != null) {
+
                     this.beginTag("pose");
                     this.attribute("name", name);
-    
+
                     this.attribute("pose", poseResource.name);
-    
+
                     this.endTag("pose");
                 }
             }
@@ -391,7 +358,7 @@ public class ResourcesWriter extends XMLWriter
 
         for (String name : costume.getSoundNames()) {
 
-            for (ManagedSound cs : costume.getSoundChoices(name)) { 
+            for (ManagedSound cs : costume.getSoundChoices(name)) {
                 this.beginTag("sound");
                 this.attribute("name", name);
 
@@ -442,7 +409,7 @@ public class ResourcesWriter extends XMLWriter
         this.beginTag("scenes");
 
         for (String name : this.resources.sceneNames()) {
-            //SceneResource sceneResource = this.resources.getSceneResource(name);
+            // SceneResource sceneResource = this.resources.getSceneResource(name);
 
             this.beginTag("scene");
             this.attribute("name", name);
