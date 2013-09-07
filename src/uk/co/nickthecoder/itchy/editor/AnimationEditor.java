@@ -69,6 +69,7 @@ public class AnimationEditor extends Window
         for (AbstractProperty<Animation, ?> property : this.animation.getProperties()) {
             try {
                 Component component = property.createComponent(this.animation, true);
+                System.out.println( "Name " + property.key + " value " + property.getStringValue(this.animation));
                 gridLayout.addRow(property.label, component);
             } catch (Exception e) {
             }

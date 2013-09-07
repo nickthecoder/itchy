@@ -8,7 +8,6 @@ package uk.co.nickthecoder.itchy;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
-import java.util.HashMap;
 import java.util.Iterator;
 
 import uk.co.nickthecoder.itchy.editor.SceneDesignerBehaviour;
@@ -142,26 +141,38 @@ public class SceneReader
             }
         }
 
-        HashMap<String, String> properties = new HashMap<String, String>();
+        Actor actor = sceneActor.createActor(true);
+
         for (Iterator<XMLTag> i = actorTag.getTags("property"); i.hasNext();) {
             XMLTag tag = i.next();
 
             String name = tag.getAttribute("name");
             String value = tag.getAttribute("value");
-            properties.put(name, value);
+            setProperty(sceneActor, actor, name, value);
         }
-        Actor actor = sceneActor.createActor(true);
-        SceneDesignerBehaviour sda = (SceneDesignerBehaviour) actor.getBehaviour();
+    }
 
-        for (AbstractProperty<Behaviour, ?> property : sda.actualBehaviour.getProperties()) {
-            if (properties.containsKey(property.access)) {
-                try {
-                    sceneActor.customProperties.put(property.access,
-                        property.parse(properties.get(property.access)));
-                } catch (Exception e) {
-                    e.printStackTrace();
+    private void setProperty( SceneActor sceneActor, Actor actor, String name, String value )
+        throws Exception
+    {
+        SceneDesignerBehaviour sdb = (SceneDesignerBehaviour) actor.getBehaviour();
+
+        for (AbstractProperty<Behaviour, ?> property : sdb.actualBehaviour.getProperties()) {
+            if (property.key.equals(name)) {
+                sceneActor.customProperties.put(property.key, property.parse(value));
+                return;
+            }
+        }
+
+        for (AbstractProperty<Behaviour, ?> property : sdb.actualBehaviour.getProperties()) {
+            for (String alias : property.aliases) {
+                if (alias.equals(name)) {
+                    sceneActor.customProperties.put(property.key, property.parse(value));
+                    return;
                 }
             }
         }
+        throw new Exception("Failed to find property : " + name);
     }
+
 }

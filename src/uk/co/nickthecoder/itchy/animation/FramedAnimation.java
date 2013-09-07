@@ -25,7 +25,7 @@ public class FramedAnimation extends AbstractAnimation
 
     List<Frame> frames;
 
-    private final List<Frame> readOnlyFrames;
+    private List<Frame> readOnlyFrames;
 
     protected int frameIndex;
 
@@ -70,6 +70,7 @@ public class FramedAnimation extends AbstractAnimation
     {
         this.frames.clear();
         this.frames.addAll(newFrames);
+        this.readOnlyFrames = Collections.unmodifiableList(this.frames);
     }
 
     @Override

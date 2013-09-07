@@ -8,11 +8,6 @@ Jame is out of date, need to rebuild for win32 and i386 and ARM??
 What's Next
 ===========
 
-Framed Animations can't be edited - they revert to their old frames when "Done" is clicked.
-
-Complete the change of AnimationEditors
-    Need a ProfileProperty 
-
 Add "aka" to Property, and then make the loaders look for the aka attribute first.
     Change Animations "profile" to "ease" and related classes
 
@@ -26,9 +21,6 @@ No instructions for picking up water
 Turn mouse pointer off
 
 Move appearance properties to their own tab, rather than on Actor tab.
-
-Actor sounds need to be managed, so that when the actor dies, its sounds fade
-    Thrust's ship carries on with the thrust sound if you die while thrusting.
 
 Finish CostumesEditor
 

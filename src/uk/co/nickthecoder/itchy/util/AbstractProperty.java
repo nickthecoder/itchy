@@ -9,7 +9,9 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import uk.co.nickthecoder.itchy.Font;
 import uk.co.nickthecoder.itchy.animation.Profile;
@@ -85,6 +87,10 @@ public abstract class AbstractProperty<S, T>
                 if (annotation.recurse()) {
                     addProperties(field.getType(), prefix + field.getName() + ".", collection);
                 }
+                
+                if (annotation.aliases().length > 0) {
+                    property.addAliases( annotation.aliases() );
+                }
             }
         }
 
@@ -105,7 +111,6 @@ public abstract class AbstractProperty<S, T>
             Property annotation = method.getAnnotation(Property.class);
 
             if (annotation != null) {
-                System.out.println("Found Annotated Method " + method.getName());
 
                 if (method.getName().startsWith("get")) {
 
@@ -203,11 +208,18 @@ public abstract class AbstractProperty<S, T>
      */
     public String key;
 
+    /**
+     * An alternative names for this property. This is used so that properties can be renamed, and loading
+     * from a file which uses the old name will still work.
+     */
+    public Set<String> aliases;
+    
     public AbstractProperty( String label, String access, String key )
     {
         this.label = label;
         this.access = access;
         this.key = key;
+        this.aliases = new HashSet<String>();
     }
 
     public AbstractProperty( String label, String access )
@@ -215,6 +227,13 @@ public abstract class AbstractProperty<S, T>
         this(label, access, access);
     }
 
+    public void addAliases( String[] values )
+    {
+        for ( String value : values ) {
+            this.aliases.add(value);
+        }
+    }
+    
     public T getValue( S subject ) throws Exception
     {
         @SuppressWarnings("unchecked")

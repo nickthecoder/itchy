@@ -81,7 +81,7 @@ public abstract class NumericAnimation extends AbstractAnimation
             profiles.put("easeOutCirc", easeOutCirc);
             profiles.put("easeOutBack", easeOutBack);
 
-            profiles.put("easeInOut", easeOut);
+            profiles.put("easeInOut", easeInOut);
             profiles.put("easeInOutQuad", easeInOutQuad);
             profiles.put("easeInOutCubic", easeInOutCubic);
             profiles.put("easeInOutExpo", easeInOutExpo);

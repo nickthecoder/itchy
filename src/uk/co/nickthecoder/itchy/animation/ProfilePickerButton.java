@@ -5,14 +5,20 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.animation;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Button;
+import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.Label;
 
 public class ProfilePickerButton extends Button implements ActionListener
 {
     private Profile profile;
 
+    private List<ComponentChangeListener> changeListeners = new ArrayList<ComponentChangeListener>();
+    
     public ProfilePickerButton( Profile profile )
     {
         super(NumericAnimation.getProfileName(profile));
@@ -29,6 +35,10 @@ public class ProfilePickerButton extends Button implements ActionListener
     {
         this.profile = profile;
         ((Label) (this.getChildren().get(0))).setText(NumericAnimation.getProfileName(profile) );
+
+        for (ComponentChangeListener listener : this.changeListeners) {
+            listener.changed();
+        }
     }
 
     @Override
@@ -43,6 +53,16 @@ public class ProfilePickerButton extends Button implements ActionListener
             }
         };
         picker.show();
+    }
+
+    public void addChangeListener( ComponentChangeListener ccl )
+    {
+        this.changeListeners.add(ccl);
+    }
+    
+    public void removeChangeListener( ComponentChangeListener ccl )
+    {
+        this.changeListeners.remove(ccl);
     }
 
 }

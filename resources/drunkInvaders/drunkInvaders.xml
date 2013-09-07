@@ -65,48 +65,46 @@
   <animations>
     <animation name="alien1">
       <sequence loops="1">
-        <pingPong>
-          <frame pose="alien1a" />
-          <frame pose="alien1b" />
-        </pingPong>
+        <frames>
+          <frame pose="alien1a" delay="1"/>
+          <frame pose="alien1b" delay="1"/>
+        </frames>
       </sequence>
     </animation>
     <animation name="alien2">
       <sequence loops="1">
-        <pingPong>
-          <frame pose="alien2a" />
-          <frame pose="alien2b" />
-        </pingPong>
+        <frames>
+          <frame pose="alien2a" delay="1"/>
+          <frame pose="alien2b" delay="1"/>
+        </frames>
       </sequence>
     </animation>
     <animation name="alien3">
       <sequence loops="1">
-        <pingPong>
-          <frame pose="alien3a" />
-          <frame pose="alien3b" />
-        </pingPong>
+        <frames>
+          <frame pose="alien3a" delay="1"/>
+          <frame pose="alien3b" delay="1"/>
+        </frames>
       </sequence>
     </animation>
     <animation name="alienYell">
       <parallel loops="1">
-        <move ticks="80" dx="0.0" dy="20.0" profile="linear"/>
-        <alpha ticks="80" target="0.0" profile="linear"/>
-        <turn ticks="80" turn="40.0" profile="linear"/>
+        <alpha ticks="180" target="0.0" profile="linear"/>
+        <turn ticks="180" turn="40.0" profile="linear"/>
       </parallel>
     </animation>
     <animation name="bomb">
       <sequence loops="0">
-        <pingPong>
+        <frames>
           <frame pose="bomb1" delay="10"/>
           <frame pose="bomb2" delay="10"/>
-        </pingPong>
+        </frames>
       </sequence>
     </animation>
     <animation name="deathSpiral">
       <parallel loops="1">
-        <move ticks="40" dx="40.0" dy="40.0" profile="linear"/>
         <alpha ticks="40" target="0.0" profile="linear"/>
-        <turn ticks="40" turn="40.0" profile="linear"/>
+        <move ticks="180" dx="0.0" dy="100.0" profile="easeOut"/>
       </parallel>
     </animation>
     <animation name="fadeIn">
@@ -122,13 +120,13 @@
     <animation name="pacman">
       <parallel loops="1">
         <sequence loops="0">
-          <pingPong>
+          <frames>
             <frame pose="pacman1" delay="3"/>
             <frame pose="pacman2" delay="3"/>
             <frame pose="pacman3" delay="3"/>
             <frame pose="pacman4" delay="3"/>
             <frame pose="pacman5" delay="3"/>
-          </pingPong>
+          </frames>
         </sequence>
         <sequence loops="1">
           <forwards ticks="200" forwards="400.0" sideways="0.0" profile="linear"/>
@@ -169,25 +167,25 @@
       <sound name="shot" sound="shatter"/>
       <font name="speech" font="vera"/>
       <animation name="birth" animation="fadeIn"/>
-      <animation name="yell" animation="alienYell"/>
-      <animation name="dropped" animation="grow"/>
       <animation name="death" animation="deathSpiral"/>
+      <animation name="dropped" animation="grow"/>
+      <animation name="yell" animation="alienYell"/>
     </costume>
     <costume name="alien1" extends="alien" behaviour="uk.co.nickthecoder.drunkinvaders.Alien">
-      <pose name="tick" pose="alien1a"/>
       <pose name="default" pose="alien1a"/>
+      <pose name="tick" pose="alien1a"/>
       <pose name="tock" pose="alien1b"/>
       <sound name="death" sound="ahh1"/>
     </costume>
     <costume name="alien2" extends="alien" behaviour="uk.co.nickthecoder.drunkinvaders.Alien">
-      <pose name="tick" pose="alien2a"/>
       <pose name="default" pose="alien2a"/>
+      <pose name="tick" pose="alien2a"/>
       <pose name="tock" pose="alien2b"/>
       <sound name="death" sound="ahh2"/>
     </costume>
     <costume name="alien3" extends="alien" behaviour="uk.co.nickthecoder.drunkinvaders.Alien">
-      <pose name="tick" pose="alien3a"/>
       <pose name="default" pose="alien3a"/>
+      <pose name="tick" pose="alien3a"/>
       <pose name="tock" pose="alien3b"/>
       <sound name="death" sound="ahh3"/>
     </costume>
@@ -211,8 +209,8 @@
       <pose name="default" pose="factory"/>
     </costume>
     <costume name="level" behaviour="uk.co.nickthecoder.drunkinvaders.PickLevel">
-      <pose name="default" pose="level"/>
       <pose name="completed" pose="level-completed"/>
+      <pose name="default" pose="level"/>
     </costume>
     <costume name="moon">
       <pose name="default" pose="moon"/>
@@ -234,19 +232,19 @@
       <pose name="right" pose="shield-r"/>
     </costume>
     <costume name="ship" behaviour="uk.co.nickthecoder.drunkinvaders.Ship">
-      <pose name="shielded7" pose="shielded7"/>
-      <pose name="shielded6" pose="shielded6"/>
-      <pose name="shielded5" pose="shielded5"/>
-      <pose name="shielded4" pose="shielded4"/>
-      <pose name="default" pose="ship"/>
-      <pose name="shielded3" pose="shielded3"/>
-      <pose name="shielded2" pose="shielded2"/>
-      <pose name="pixel" pose="greenPixel"/>
-      <pose name="shielded1" pose="shielded1"/>
-      <pose name="shielded0" pose="shielded0"/>
       <pose name="charged" pose="ship"/>
-      <pose name="fire" pose="ship2"/>
+      <pose name="default" pose="ship"/>
       <pose name="deshield" pose="ship"/>
+      <pose name="fire" pose="ship2"/>
+      <pose name="pixel" pose="greenPixel"/>
+      <pose name="shielded0" pose="shielded0"/>
+      <pose name="shielded1" pose="shielded1"/>
+      <pose name="shielded2" pose="shielded2"/>
+      <pose name="shielded3" pose="shielded3"/>
+      <pose name="shielded4" pose="shielded4"/>
+      <pose name="shielded5" pose="shielded5"/>
+      <pose name="shielded6" pose="shielded6"/>
+      <pose name="shielded7" pose="shielded7"/>
       <string name="death">The earth is doomed</string>
       <string name="death">The aliens have won!</string>
       <sound name="death" sound="explode"/>

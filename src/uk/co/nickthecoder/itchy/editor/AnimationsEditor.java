@@ -1,9 +1,7 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0 which accompanies this
+ * distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.editor;
 
@@ -130,8 +128,8 @@ public class AnimationsEditor extends SubEditor
     private AnimationEditor createAnimationEditor( Animation animation )
     {
         if (animation instanceof FramedAnimation) {
-            return new FramedAnimationEditor(this.editor, this.editor.resources,
-                (FramedAnimation) animation);
+            FramedAnimation framedAnimation = (FramedAnimation) animation;
+            return new FramedAnimationEditor(this.editor, this.editor.resources, framedAnimation);
 
         } else {
             return new AnimationEditor(this.editor, animation);
@@ -166,7 +164,7 @@ public class AnimationsEditor extends SubEditor
         if (parent != null) {
             Button delete = new Button(new ImageComponent(this.editor.rules.resources.getPose(
                 "icon_delete").getSurface()));
-            
+
             delete.addStyle("compact");
             delete.addActionListener(new ActionListener() {
                 @Override

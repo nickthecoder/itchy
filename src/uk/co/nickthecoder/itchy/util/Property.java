@@ -23,6 +23,8 @@ public @interface Property {
 
     String label();
     
+    String[] aliases() default {};
+    
     boolean recurse() default false;
 
     boolean allowNull() default false;    

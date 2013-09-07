@@ -24,10 +24,28 @@ public class ProfileProperty<S> extends AbstractProperty<S, Profile>
     }
 
     @Override
-    public Component createComponent( S subject, boolean autoUpdate,
-        ComponentChangeListener listener ) throws Exception
+    public Component createComponent( final S subject, boolean autoUpdate,
+        final ComponentChangeListener listener ) throws Exception
     {
-        ProfilePickerButton button = new ProfilePickerButton(getValue(subject));
+        final ProfilePickerButton button = new ProfilePickerButton(getValue(subject));
+        System.out.println( "Autoupdate? " + autoUpdate );
+        
+        if (autoUpdate) {
+            button.addChangeListener(new ComponentChangeListener() {
+                @Override
+                public void changed()
+                {
+                    try {
+                        ProfileProperty.this.update(subject, button);
+                        if (listener != null) {
+                            listener.changed();
+                        }
+                    } catch (Exception e) {
+                    }
+                }
+            });
+        }
+        
         return button;
     }
 

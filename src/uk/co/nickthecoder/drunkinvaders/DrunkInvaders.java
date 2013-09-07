@@ -199,8 +199,6 @@ public class DrunkInvaders extends Game
 
     public void startScene( String sceneName )
     {
-        System.out.println("Starting scene " + sceneName);
-
         if (this.fadingOut) {
             return;
         }
@@ -223,11 +221,13 @@ public class DrunkInvaders extends Game
 
         this.fadingOut = true;
         this.fadeActor.setAnimation(animation);
+        this.fadeLayer.add(this.fadeActor);
+        this.fadeActor.activate();
     }
 
     @Override
     public void onMessage( String message )
-    {
+    {        
         if ("play".equals(message)) {
             startScene("levels");
 
