@@ -20,6 +20,7 @@ import uk.co.nickthecoder.itchy.animation.ScaleAnimation;
 import uk.co.nickthecoder.itchy.animation.TurnAnimation;
 import uk.co.nickthecoder.itchy.util.AbstractProperty;
 import uk.co.nickthecoder.itchy.util.NinePatch;
+import uk.co.nickthecoder.itchy.util.PropertySubject;
 import uk.co.nickthecoder.itchy.util.StringUtils;
 import uk.co.nickthecoder.itchy.util.XMLException;
 import uk.co.nickthecoder.itchy.util.XMLWriter;
@@ -196,19 +197,19 @@ public class ResourcesWriter extends XMLWriter
         }
     }
 
-    private void writeAnimationProperties( Animation animation )
+    private <S extends PropertySubject<S>> void writeProperties( S subject )
         throws XMLException
     {
-        for (AbstractProperty<Animation, ?> property : animation.getProperties()) {
+        for (AbstractProperty<S, ?> property : subject.getProperties()) {
 
             try {
-                String value = property.getStringValue(animation);
+                String value = property.getStringValue(subject);
                 if (!StringUtils.isBlank(value)) {
                     this.attribute(property.key, value);
                 }
 
             } catch (Exception e) {
-                throw new XMLException("Failed to write animation property : " + property.key);
+                throw new XMLException("Failed to write property : " + property.key);
             }
 
         }
@@ -219,7 +220,7 @@ public class ResourcesWriter extends XMLWriter
         String tagName = getAnimationTagName(animation);
         this.beginTag(tagName);
 
-        writeAnimationProperties(animation);
+        writeProperties(animation);
 
         if (animation instanceof FramedAnimation) {
             this.writeFrames(((FramedAnimation) animation).getFrames());
@@ -363,7 +364,8 @@ public class ResourcesWriter extends XMLWriter
                 this.attribute("name", name);
 
                 this.attribute("sound", cs.soundResource.name);
-
+                writeProperties( cs );
+                
                 this.endTag("sound");
             }
 

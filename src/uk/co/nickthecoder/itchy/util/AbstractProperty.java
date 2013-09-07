@@ -233,7 +233,7 @@ public abstract class AbstractProperty<S, T>
             this.aliases.add(value);
         }
     }
-    
+
     public T getValue( S subject ) throws Exception
     {
         @SuppressWarnings("unchecked")

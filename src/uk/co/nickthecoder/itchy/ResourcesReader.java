@@ -22,6 +22,7 @@ import uk.co.nickthecoder.itchy.animation.ScaleAnimation;
 import uk.co.nickthecoder.itchy.animation.TurnAnimation;
 import uk.co.nickthecoder.itchy.util.AbstractProperty;
 import uk.co.nickthecoder.itchy.util.NinePatch;
+import uk.co.nickthecoder.itchy.util.PropertySubject;
 import uk.co.nickthecoder.itchy.util.XMLException;
 import uk.co.nickthecoder.itchy.util.XMLTag;
 import uk.co.nickthecoder.jame.Surface;
@@ -191,6 +192,7 @@ public class ResourcesReader
             this.resources.addAnimation(ar);
         }
     }
+    
 
     private void readCostumes( XMLTag costumesTag ) throws Exception
     {
@@ -244,7 +246,10 @@ public class ResourcesReader
                     throw new XMLException("Sound : " + soundName + " not found for costume : " +
                         costumeName);
                 }
-                costume.addSound(itemName, soundResource);
+                ManagedSound managedSound = new ManagedSound( soundResource );
+                readProperties( soundTag, managedSound );
+                
+                costume.addSound(itemName, managedSound);
             }
 
             for (Iterator<XMLTag> j = costumeTag.getTags("string"); j.hasNext();) {
@@ -307,7 +312,7 @@ public class ResourcesReader
             XMLTag tag = j.next();
 
             Animation child = createAnimation(tag.getName());
-            readAnimationProperties(tag, child);
+            readProperties(tag, child);
             
             if ( child instanceof CompoundAnimation) {
                 readCompoundAnimation( tag, (CompoundAnimation) child );
@@ -359,10 +364,14 @@ public class ResourcesReader
         }
     }
 
-    private void readAnimationProperties( XMLTag tag, Animation animation )
+
+    
+
+    private <S extends PropertySubject<S>> void readProperties( XMLTag tag, S subject)
         throws XMLException
     {
-        for (AbstractProperty<Animation, ?> property : animation.getProperties()) {
+        
+        for (AbstractProperty<S, ?> property : subject.getProperties()) {
             String value = tag.getOptionalAttribute(property.key, null);
             if (value == null) {
                 for (String alias : property.aliases) {
@@ -374,9 +383,9 @@ public class ResourcesReader
             }
             if (value != null) {
                 try {
-                    property.setValueByString(animation, value);
+                    property.setValueByString(subject, value);
                 } catch (Exception e) {
-                    throw new XMLException("Failed to parse animation property : '" + property.key +
+                    throw new XMLException("Failed to parse property : '" + property.key +
                         "'. value : '" + value + "'");
                 }
             }

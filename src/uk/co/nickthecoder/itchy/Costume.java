@@ -185,18 +185,22 @@ public class Costume
     }
 
     // Sound
-
-    public ManagedSound addSound( String name, SoundResource soundResource )
+    public void addSound( String name, ManagedSound managedSound )
     {
-        ManagedSound costumeSound = new ManagedSound(soundResource);
         List<ManagedSound> choices = this.soundChoices.get(name);
         if (choices == null) {
             choices = new ArrayList<ManagedSound>();
             this.soundChoices.put(name, choices);
         }
-        choices.add(costumeSound);
-
-        return costumeSound;
+        choices.add(managedSound);
+        
+    }
+    
+    public ManagedSound addSound( String name, SoundResource soundResource )
+    {
+        ManagedSound managedSound = new ManagedSound(soundResource);
+        this.addSound( name, managedSound );
+        return managedSound;
     }
 
     public SoundResource getSoundResource( String name )

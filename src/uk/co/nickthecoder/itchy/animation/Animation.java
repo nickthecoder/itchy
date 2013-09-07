@@ -13,8 +13,9 @@ import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.MessageListener;
 import uk.co.nickthecoder.itchy.util.AbstractProperty;
 import uk.co.nickthecoder.itchy.util.Property;
+import uk.co.nickthecoder.itchy.util.PropertySubject;
 
-public interface Animation extends Cloneable
+public interface Animation extends Cloneable, PropertySubject<Animation>
 {
     public List<AbstractProperty<Animation,?>> getProperties();
     

@@ -88,6 +88,8 @@ public class Resources extends Loadable
         Resources resources = new Resources();
         resources.load(file);
 
+        // MORE. Should check that each resource is identical to the other one.
+
         for (String name : this.animationNames()) {
             if (resources.getAnimation(name) == null) {
                 throw new Exception("Animation " + name + " wasn't saved");
@@ -123,6 +125,7 @@ public class Resources extends Loadable
                 throw new Exception("Costume " + name + " wasn't saved");
             }
         }
+        
     }
 
     public void renameResource( Object object, String name )

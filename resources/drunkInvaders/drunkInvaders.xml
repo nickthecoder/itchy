@@ -164,7 +164,7 @@
       <string name="death">Eeek</string>
       <string name="death">I'll be back</string>
       <string name="death">OMG</string>
-      <sound name="shot" sound="shatter"/>
+      <sound name="shot" sound="shatter" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false"/>
       <font name="speech" font="vera"/>
       <animation name="birth" animation="fadeIn"/>
       <animation name="death" animation="deathSpiral"/>
@@ -175,26 +175,26 @@
       <pose name="default" pose="alien1a"/>
       <pose name="tick" pose="alien1a"/>
       <pose name="tock" pose="alien1b"/>
-      <sound name="death" sound="ahh1"/>
+      <sound name="death" sound="ahh1" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false"/>
     </costume>
     <costume name="alien2" extends="alien" behaviour="uk.co.nickthecoder.drunkinvaders.Alien">
       <pose name="default" pose="alien2a"/>
       <pose name="tick" pose="alien2a"/>
       <pose name="tock" pose="alien2b"/>
-      <sound name="death" sound="ahh2"/>
+      <sound name="death" sound="ahh2" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false"/>
     </costume>
     <costume name="alien3" extends="alien" behaviour="uk.co.nickthecoder.drunkinvaders.Alien">
       <pose name="default" pose="alien3a"/>
       <pose name="tick" pose="alien3a"/>
       <pose name="tock" pose="alien3b"/>
-      <sound name="death" sound="ahh3"/>
+      <sound name="death" sound="ahh3" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false"/>
     </costume>
     <costume name="bomb">
       <pose name="default" pose="bomb1"/>
     </costume>
     <costume name="bullet">
       <pose name="default" pose="bullet"/>
-      <sound name="shot" sound="ricochet"/>
+      <sound name="shot" sound="ricochet" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false"/>
     </costume>
     <costume name="earth">
       <pose name="default" pose="earth"/>
@@ -222,8 +222,8 @@
     <costume name="saucer" extends="alien" behaviour="uk.co.nickthecoder.drunkinvaders.Mothership">
       <pose name="default" pose="saucer"/>
       <pose name="pixel" pose="redPixel"/>
-      <sound name="death" sound="ahh4"/>
-      <sound name="giveBirth" sound="pop"/>
+      <sound name="death" sound="ahh4" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false"/>
+      <sound name="giveBirth" sound="pop" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false"/>
     </costume>
     <costume name="shieldFactory" behaviour="uk.co.nickthecoder.drunkinvaders.ShieldFactory">
       <pose name="default" pose="shieldFactory"/>
@@ -247,9 +247,9 @@
       <pose name="shielded7" pose="shielded7"/>
       <string name="death">The earth is doomed</string>
       <string name="death">The aliens have won!</string>
-      <sound name="death" sound="explode"/>
-      <sound name="deflect" sound="ricochet"/>
-      <sound name="fire" sound="fire"/>
+      <sound name="death" sound="explode" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false"/>
+      <sound name="deflect" sound="ricochet" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false"/>
+      <sound name="fire" sound="fire" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false"/>
       <font name="speech" font="vera"/>
       <animation name="yell" animation="toHeaven"/>
     </costume>

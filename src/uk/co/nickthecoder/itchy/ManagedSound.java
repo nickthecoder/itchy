@@ -5,14 +5,24 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
-public class ManagedSound
+import java.util.List;
+
+import uk.co.nickthecoder.itchy.util.AbstractProperty;
+import uk.co.nickthecoder.itchy.util.Property;
+import uk.co.nickthecoder.itchy.util.PropertySubject;
+
+public class ManagedSound implements PropertySubject<ManagedSound>
 {
+    private static final List<AbstractProperty<ManagedSound, ?>> properties =
+        AbstractProperty.<ManagedSound> findAnnotations(ManagedSound.class);
+
     public enum MultipleBehaviour {
         PLAY_BOTH, STOP_FIRST, FADE_FIRST, IGNORE_SECOND
     };
-    
+
     public SoundResource soundResource;
 
+    
     /**
      * The priority of the sound. The recommended range is 0 (lowest priority) to 3 (highest priority),
      * but you are free to use whatever range you want.
@@ -21,16 +31,19 @@ public class ManagedSound
      * high priority sounds will cause low priority sounds to end abruptly. If there are no low priority
      * sounds, then new sounds won't play when the limit is exceeded.
      */
+    @Property(label="Priority")
     public int priority = 1;
 
     /**
      * How quickly to fade out the sound when the sound must be cut short.
      */
+    @Property(label="Fade Out (s)")
     public double fadeOutSeconds = 1;
 
     /**
      * If true, then the sound will fade out automatically when the Actor dies
      */
+    @Property(label="Fade on Death?")
     public boolean fadeOnDeath = false;
     
     /**
@@ -43,6 +56,11 @@ public class ManagedSound
     public ManagedSound( SoundResource soundResource )
     {
         this.soundResource = soundResource;
+    }
+
+    public List<AbstractProperty<ManagedSound,?>> getProperties()
+    {
+        return properties;
     }
 
     public int getFadeOutMillis()
