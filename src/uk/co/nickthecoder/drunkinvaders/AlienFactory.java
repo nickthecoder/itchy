@@ -35,13 +35,13 @@ public class AlienFactory extends Behaviour
     @Property(label="Fire Once Every (s)")
     public double fireOnceEvery = 1; // The aliens' average number of seconds between bombs
 
-    private List<Actor> aliens;
+    private List<Alien> aliens;
 
     
     @Override
     public void onAttach()
     {
-        this.aliens = new ArrayList<Actor>(this.alienCount);
+        this.aliens = new ArrayList<Alien>(this.alienCount);
     }
 
     @Override
@@ -57,8 +57,7 @@ public class AlienFactory extends Behaviour
             }
         }
 
-        for (Actor actor : this.aliens) {
-            Alien ab = (Alien) actor.getBehaviour();
+        for (Alien ab : this.aliens) {
             ab.vx = Util.randomBetween(2, 2.2);
             ab.vy = Util.randomBetween(0,0.6);
         }
@@ -69,8 +68,8 @@ public class AlienFactory extends Behaviour
     private void createAlien()
     {
         Costume costume = DrunkInvaders.game.resources.getCostume(this.costumeName);
-        Actor alien = new Actor(costume);
-        Appearance alienAppearance = alien.getAppearance();
+        Actor alienActor = new Actor(costume);
+        Appearance alienAppearance = alienActor.getAppearance();
         Appearance thisAppearance = this.actor.getAppearance();
         
         alienAppearance.setDirection(this.actor.getAppearance().getDirection() - 90);
@@ -80,14 +79,14 @@ public class AlienFactory extends Behaviour
         Alien alienBehaviour = new Alien();
         alienBehaviour.fireOnceEvery = this.fireOnceEvery;
         
-        alien.moveTo(this.actor.getX() + this.aliens.size() * this.spacing, this.actor.getY());
-        this.actor.getLayer().add(alien);
+        alienActor.moveTo(this.actor.getX() + this.aliens.size() * this.spacing, this.actor.getY());
+        this.actor.getLayer().add(alienActor);
         
-        alien.setBehaviour(alienBehaviour);
-        alien.activate();
-        alien.event("birth");
+        alienActor.setBehaviour(alienBehaviour);
+        alienActor.activate();
+        alienActor.event("birth");
         
-        this.aliens.add(alien);
+        this.aliens.add(alienBehaviour);
     }
 
 }

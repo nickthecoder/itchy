@@ -720,20 +720,7 @@ public class Actor extends Task
         try {
             this.ticking = true;
 
-            if (this.animation != null) {
-
-                this.animation.tick(this);
-                if (this.animation.isFinished()) {
-                    this.setAnimation(null);
-                    if (this.dying) {
-                        this.kill();
-                        return;
-                    }
-                }
-            }
-            if (!this.dead) {
-                this.behaviour.tick();
-            }
+            getBehaviour().tickHandler();
         } finally {
             this.ticking = false;
         }

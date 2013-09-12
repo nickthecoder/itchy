@@ -1,98 +1,98 @@
-<scene showMouse="true">
+<scene showMouse="true" behaviour="uk.co.nickthecoder.drunkinvaders.Levels">
   <layer name="main">
-    <actor costume="earth" x="0" y="0" direction="0.0" start="default"/>
-    <actor costume="level" x="55" y="373" direction="0.0" start="default">
+    <actor costume="earth" x="0" y="0" direction="0.0" startEvent="default"/>
+    <actor costume="level" x="55" y="373" direction="0.0" startEvent="default">
       <property name="fontColor" value="#ea8138ff"/>
       <property name="levelNumber" value="1"/>
       <property name="font" value="blackCasper"/>
       <property name="fontSize" value="32"/>
       <property name="shadowColor" value="#000000ff"/>
     </actor>
-    <actor costume="level" x="132" y="421" direction="0.0" start="default">
+    <actor costume="level" x="132" y="421" direction="0.0" startEvent="default">
       <property name="fontColor" value="#ea8138ff"/>
       <property name="levelNumber" value="2"/>
       <property name="font" value="blackCasper"/>
       <property name="fontSize" value="32"/>
       <property name="shadowColor" value="#000000ff"/>
     </actor>
-    <actor costume="level" x="215" y="437" direction="0.0" start="default">
+    <actor costume="level" x="215" y="437" direction="0.0" startEvent="default">
       <property name="fontColor" value="#ea8138ff"/>
       <property name="levelNumber" value="3"/>
       <property name="font" value="blackCasper"/>
       <property name="fontSize" value="32"/>
       <property name="shadowColor" value="#000000ff"/>
     </actor>
-    <actor costume="level" x="305" y="440" direction="0.0" start="default">
+    <actor costume="level" x="305" y="440" direction="0.0" startEvent="default">
       <property name="fontColor" value="#ea8138ff"/>
       <property name="levelNumber" value="4"/>
       <property name="font" value="blackCasper"/>
       <property name="fontSize" value="32"/>
       <property name="shadowColor" value="#000000ff"/>
     </actor>
-    <actor costume="level" x="395" y="433" direction="0.0" start="default">
+    <actor costume="level" x="395" y="433" direction="0.0" startEvent="default">
       <property name="fontColor" value="#ea8138ff"/>
       <property name="levelNumber" value="5"/>
       <property name="font" value="blackCasper"/>
       <property name="fontSize" value="32"/>
       <property name="shadowColor" value="#000000ff"/>
     </actor>
-    <actor costume="level" x="481" y="405" direction="0.0" start="default">
+    <actor costume="level" x="481" y="405" direction="0.0" startEvent="default">
       <property name="fontColor" value="#ea8138ff"/>
       <property name="levelNumber" value="6"/>
       <property name="font" value="blackCasper"/>
       <property name="fontSize" value="32"/>
       <property name="shadowColor" value="#000000ff"/>
     </actor>
-    <actor costume="level" x="539" y="344" direction="0.0" start="default">
+    <actor costume="level" x="539" y="344" direction="0.0" startEvent="default">
       <property name="fontColor" value="#ea8138ff"/>
       <property name="levelNumber" value="7"/>
       <property name="font" value="blackCasper"/>
       <property name="fontSize" value="32"/>
       <property name="shadowColor" value="#000000ff"/>
     </actor>
-    <actor costume="level" x="578" y="263" direction="0.0" start="default">
+    <actor costume="level" x="578" y="263" direction="0.0" startEvent="default">
       <property name="fontColor" value="#ea8138ff"/>
       <property name="levelNumber" value="8"/>
       <property name="font" value="blackCasper"/>
       <property name="fontSize" value="32"/>
       <property name="shadowColor" value="#000000ff"/>
     </actor>
-    <actor costume="level" x="563" y="179" direction="0.0" start="default">
+    <actor costume="level" x="563" y="179" direction="0.0" startEvent="default">
       <property name="fontColor" value="#ea8138ff"/>
       <property name="levelNumber" value="9"/>
       <property name="font" value="blackCasper"/>
       <property name="fontSize" value="32"/>
       <property name="shadowColor" value="#000000ff"/>
     </actor>
-    <actor costume="level" x="594" y="48" direction="0.0" start="default">
+    <actor costume="level" x="594" y="48" direction="0.0" startEvent="default">
       <property name="fontColor" value="#ea8138ff"/>
       <property name="levelNumber" value="99"/>
       <property name="font" value="blackCasper"/>
       <property name="fontSize" value="22"/>
       <property name="shadowColor" value="#000000ff"/>
     </actor>
-    <actor costume="level" x="499" y="101" direction="0.0" start="default">
+    <actor costume="level" x="499" y="101" direction="0.0" startEvent="default">
       <property name="fontColor" value="#ea8138ff"/>
       <property name="levelNumber" value="10"/>
       <property name="font" value="blackCasper"/>
       <property name="fontSize" value="22"/>
       <property name="shadowColor" value="#000000ff"/>
     </actor>
-    <actor costume="level" x="410" y="68" direction="0.0" start="default">
+    <actor costume="level" x="410" y="68" direction="0.0" startEvent="default">
       <property name="fontColor" value="#ea8138ff"/>
       <property name="levelNumber" value="11"/>
       <property name="font" value="blackCasper"/>
       <property name="fontSize" value="22"/>
       <property name="shadowColor" value="#000000ff"/>
     </actor>
-    <actor costume="level" x="312" y="67" direction="0.0" start="default">
+    <actor costume="level" x="312" y="67" direction="0.0" startEvent="default">
       <property name="fontColor" value="#ea8138ff"/>
       <property name="levelNumber" value="12"/>
       <property name="font" value="blackCasper"/>
       <property name="fontSize" value="32"/>
       <property name="shadowColor" value="#000000ff"/>
     </actor>
-    <actor costume="level" x="233" y="97" direction="0.0" start="default">
+    <actor costume="level" x="233" y="97" direction="0.0" startEvent="default">
       <property name="fontColor" value="#ea8138ff"/>
       <property name="levelNumber" value="13"/>
       <property name="font" value="blackCasper"/>

@@ -17,6 +17,7 @@ import uk.co.nickthecoder.itchy.ScrollableLayer;
 import uk.co.nickthecoder.itchy.animation.AlphaAnimation;
 import uk.co.nickthecoder.itchy.animation.CompoundAnimation;
 import uk.co.nickthecoder.itchy.animation.NumericAnimation;
+import uk.co.nickthecoder.itchy.extras.Pause;
 import uk.co.nickthecoder.itchy.neighbourhood.Neighbourhood;
 import uk.co.nickthecoder.itchy.neighbourhood.NeighbourhoodCollisionStrategy;
 import uk.co.nickthecoder.itchy.neighbourhood.StandardNeighbourhood;
@@ -58,6 +59,8 @@ public class DrunkInvaders extends Game
 
     public boolean fadingOut = false;
 
+    public Pause pause = new Pause();
+    
     
     public DrunkInvaders() throws Exception
     {
@@ -102,49 +105,12 @@ public class DrunkInvaders extends Game
     @Override
     public boolean onKeyDown( KeyboardEvent ke )
     {
-        if (ke.isReleased()) {
-            return false;
-        }
-
         if (ke.symbol == Keys.F1) {
             debug();
         }
 
         if (ke.symbol == Keys.F2) {
             toggleInfo();
-        }
-
-        if ("levels".equals(this.sceneName)) {
-            if (ke.symbol == Keys.RETURN) {
-                this.play();
-                return true;
-            }
-        }
-
-        if ("menu".equals(this.sceneName)) {
-            if (ke.symbol == Keys.ESCAPE) {
-                Itchy.singleton.terminate();
-                return true;
-            }
-
-            if ((ke.symbol == Keys.p) || (ke.symbol == Keys.RETURN)) {
-                this.startScene("levels");
-                return true;
-            }
-
-            if (ke.symbol == Keys.a) {
-                this.startScene("about");
-            }
-
-            if (ke.symbol == Keys.w) {
-                this.startScene("completed");
-            }
-
-        } else {
-            if (ke.symbol == Keys.ESCAPE) {
-                this.startScene("menu");
-            }
-            return true;
         }
 
         return super.onKeyDown(ke);
@@ -199,6 +165,10 @@ public class DrunkInvaders extends Game
 
     public void startScene( String sceneName )
     {
+        if (pause.isPaused()) {
+            pause.unpause();
+        }
+        
         if (this.fadingOut) {
             return;
         }

@@ -8,15 +8,11 @@ Jame is out of date, need to rebuild for win32 and i386 and ARM??
 What's Next
 ===========
 
-Allow touching/overlapping to use types (as it does with tags), and it have it return the correct type.
-
 EaseButton to show the thumbnail graph.
 
 Bucket to be more transparent
 Water looks naff
 No instructions for picking up water
-
-Turn mouse pointer off
 
 Move appearance properties to their own tab, rather than on Actor tab.
 
@@ -88,9 +84,5 @@ then pop the context.
 Appearance optimised so that it doesn't need to re-render the appearance to get the worldRectangle
     Maybe calculate the maximum rectangle for the Pose for any rotation
     When asked for its wordRect, if cached, returned that, other wise if direction == 0, return pose.rectangle * scale, otherwise return maximum rect * scale   
-
-Tile optimisation for collision detection and/or redraw optimisation.
-   When things are placed in the world, calculate which tile they overlap and/or which tile their
-   center is on. Allow for easy iteration over all objects within nearby tiles.
 
 

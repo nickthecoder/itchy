@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
+import uk.co.nickthecoder.itchy.animation.Animation;
 import uk.co.nickthecoder.itchy.util.AbstractProperty;
 
 public abstract class Behaviour implements MessageListener
@@ -234,6 +235,25 @@ public abstract class Behaviour implements MessageListener
         // do nothing
     }
 
+    protected void tickHandler()
+    {
+        Animation animation = actor.getAnimation();
+        if (animation != null) {
+
+            animation.tick(actor);
+            if (animation.isFinished()) {
+                actor.setAnimation(null);
+                if (actor.isDying()) {
+                    actor.kill();
+                    return;
+                }
+            }
+        }
+        if (!actor.isDead()) {
+            this.tick();
+        }
+    }
+    
     public abstract void tick();
 
 }
