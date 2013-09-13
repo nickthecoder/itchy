@@ -13,10 +13,10 @@ import uk.co.nickthecoder.itchy.util.Util;
  * 
  * Useful for bullets, which have a maximum period between shots.
  */
-public class Recharge
+public class Timer
 {
     /**
-     * The recharge period in milliseconds
+     * The timer period in milliseconds
      */
     public int period;
     
@@ -25,29 +25,29 @@ public class Recharge
     public int maximumPeriod;
 
     /**
-     * The time the the recharge was started. It will be ready at startTime + period.
+     * The time the the timer was started. It will be ready at startTime + period.
      */
     private long startTime;
 
     
-    public static Recharge createRechargeSeconds( double seconds )
+    public static Timer createTimerSeconds( double seconds )
     {
-        return new Recharge((int) (seconds * 1000));
+        return new Timer((int) (seconds * 1000));
     }
 
-    public static Recharge createRechargeSeconds( double from, double to )
+    public static Timer createTimerSeconds( double from, double to )
     {
-        return new Recharge((int) (from * 1000), (int) (to*1000));
+        return new Timer((int) (from * 1000), (int) (to*1000));
     }
 
-    public Recharge( int period )
+    public Timer( int period )
     {
         this.minimumPeriod = period;
         this.maximumPeriod = period;
         this.period = period;
         this.reset();
     }
-    public Recharge( int from, int to )
+    public Timer( int from, int to )
     {
         this.minimumPeriod = from;
         this.maximumPeriod = to;
@@ -55,17 +55,34 @@ public class Recharge
         this.reset();
     }
 
-    public boolean isCharged()
+    public boolean isFinished()
     {
         return System.currentTimeMillis() > this.startTime + this.period;
     }
 
     /**
-     * The amount of charge
+     * The proportion of the time still remaining.
      * 
-     * @return 0 for fully discharged, 1 for fully charged.
+     * @return 0 to 1 (0: the timer has finished, 1: the timer has only just started).
      */
-    public double getCharge()
+    public double getRemainder()
+    {
+        double result = (System.currentTimeMillis() - this.startTime) /
+            (double) this.period;
+
+        if (result > 1) {
+            return 1;
+        } else {
+            return result;
+        }
+    }
+    
+    /**
+     * The proportion of the time elapsed so far.
+     * 
+     * @return 0 to 1 (0: the time has just started, 1: the time has finished).
+     */
+    public double getProgress()
     {
         double result = (System.currentTimeMillis() - (this.startTime + this.period)) /
             (double) this.period;
@@ -74,7 +91,7 @@ public class Recharge
             return 1;
         } else {
             return result;
-        }
+        }        
     }
     
     public final void reset()

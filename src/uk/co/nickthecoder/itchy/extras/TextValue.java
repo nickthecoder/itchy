@@ -33,14 +33,14 @@ public class TextValue extends Behaviour
 
     private BeanHelper beanHelper;
 
-    private Recharge recharge;
+    private Timer timer;
     
     @Override
     public void onActivate()
     {
         this.beanHelper = new BeanHelper(Itchy.singleton.getGame(), this.access);
         if ( updateInterval > 0 ) {
-            recharge = new Recharge( this.updateInterval);
+            timer = new Timer( this.updateInterval);
         }
         tick();
         if ( updateInterval < 0 ) {
@@ -51,9 +51,9 @@ public class TextValue extends Behaviour
     @Override
     public void tick()
     {
-        if ( recharge!= null) {
-            if (recharge.isCharged()) {
-                recharge.reset();
+        if ( timer!= null) {
+            if (timer.isFinished()) {
+                timer.reset();
             } else {
                 return;
             }

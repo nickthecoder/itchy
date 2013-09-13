@@ -9,7 +9,14 @@ What's Next
 ===========
 
 Remove or fix "sleep", so that it can't go wrong in conjunction with pause.
-Maybe only "tick" can sleep?
+    Maybe only "tick" can sleep?
+    Remove sleep from iThrust BallFactory
+    
+
+Rename Recharge to Timer?
+    And subclass it to Recharge to add actual recharge capabilities?
+
+Make all Itchy methods static?
 
 Change Recharge, so that it works correctly in conjunction with pause.
 

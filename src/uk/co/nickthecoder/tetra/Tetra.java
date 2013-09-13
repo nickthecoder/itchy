@@ -17,7 +17,7 @@ import uk.co.nickthecoder.itchy.ScrollableLayer;
 import uk.co.nickthecoder.itchy.animation.Animation;
 import uk.co.nickthecoder.itchy.extras.Explosion;
 import uk.co.nickthecoder.itchy.extras.Fragment;
-import uk.co.nickthecoder.itchy.extras.Recharge;
+import uk.co.nickthecoder.itchy.extras.Timer;
 import uk.co.nickthecoder.jame.Keys;
 import uk.co.nickthecoder.jame.RGBA;
 import uk.co.nickthecoder.jame.Sound;
@@ -110,12 +110,14 @@ public class Tetra extends Game
     boolean playing = false;
 
     String sceneName;
+    
+    Timer escapeTimer;
 
     /**
      * A countdown timer, which regulates the speed of the game. The speed is changed in setLevel,
      * which is increased by one for each ten lines removed.
      */
-    Recharge recharge;
+    Timer timer;
 
     /**
      * The currently falling piece.
@@ -189,9 +191,19 @@ public class Tetra extends Game
     @Override
     public void tick()
     {
+        if (escapeTimer != null) {
+            if (escapeTimer.isFinished()) {
+                this.addEventListener(this);
+                this.level = getStartingLevel();
+                startScene("menu");
+                escapeTimer = null;
+            }
+            return;
+        }
+
         if (this.playing) {
-            if (this.recharge.isCharged()) {
-                this.recharge.reset();
+            if (this.timer.isFinished()) {
+                this.timer.reset();
                 if (this.piece == null) {
                     createNextPiece();
                 } else {
@@ -246,10 +258,7 @@ public class Tetra extends Game
                 }
             }
             this.removeEventListener(this);
-            sleep(2);
-            this.addEventListener(this);
-            this.level = getStartingLevel();
-            startScene("menu");
+            escapeTimer = Timer.createTimerSeconds( 2 );
         }
 
         if (!this.playing) {
@@ -355,7 +364,7 @@ public class Tetra extends Game
     {
         this.level = level;
         int delay = (11 - this.level) * 50;
-        this.recharge = new Recharge(delay);
+        this.timer = new Timer(delay);
     }
 
     public boolean isLineFull( int y )
@@ -411,7 +420,7 @@ public class Tetra extends Game
         }
         this.playing = false;
         this.piece = null;
-        this.recharge = null;
+        this.timer = null;
     }
 
     private void play()

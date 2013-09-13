@@ -18,7 +18,7 @@ import uk.co.nickthecoder.jame.RGBA;
 
 public class Ship extends Bouncy implements Shootable
 {
-    private static final int RECHARGE_DURATION = 40;
+    private static final int TIMER_DURATION = 40;
 
     private static final int SHIELD_POSE_COUNT = 7;
 
@@ -226,7 +226,7 @@ public class Ship extends Bouncy implements Shootable
         bullet.addTag("killable");
         bullet.activate();
 
-        this.recharge = RECHARGE_DURATION;
+        this.recharge = TIMER_DURATION;
     }
 
     @Override

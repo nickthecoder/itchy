@@ -9,6 +9,7 @@ package uk.co.nickthecoder.drunkinvaders;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Costume;
+import uk.co.nickthecoder.itchy.extras.Timer;
 import uk.co.nickthecoder.itchy.util.Property;
 import uk.co.nickthecoder.itchy.util.Util;
 
@@ -43,6 +44,9 @@ public class Mothership extends Alien
     @Property(label="First Born Delay (s)")
     public double firstBornDelay = 0;
 
+    private Timer firstBornTimer = Timer.createTimerSeconds(this.firstBornDelay);
+
+    private Timer birthTimer = null;
 
     @Override
     public void onAttach()
@@ -55,28 +59,23 @@ public class Mothership extends Alien
 
 
     @Override
-    public void onActivate()
+    public void tick()
     {
-        super.onActivate();
-
-        this.getActor().sleep(this.firstBornDelay);
-        for (int i = 0; i < this.childrenCount; i++) {
-            if ( this.actor.isDead()) {
-                return;
+        super.tick();
+        
+        if (firstBornTimer.isFinished()) {
+            if ( birthTimer == null) {
+                birthTimer = Timer.createTimerSeconds(this.birthInterval);
+                
+            } else if ( birthTimer.isFinished() ) {
+                if ( this.childrenCount > 0 ) {
+                    this.childrenCount --;
+                    giveBirth();
+                    birthTimer.reset();
+                }
             }
-            giveBirth();
-            this.actor.sleep(this.birthInterval);
         }
-    }
-
-    @Override
-    public void onKill()
-    {
-        super.onKill();
-        if (this.collisionStrategy != null) {
-            this.collisionStrategy.remove();
-            this.collisionStrategy = null;
-        }
+        
     }
 
     public void giveBirth()

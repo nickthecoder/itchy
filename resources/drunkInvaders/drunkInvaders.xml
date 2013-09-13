@@ -121,6 +121,7 @@
     </animation>
     <animation name="grow">
       <compound sequence="true" loops="1">
+        <scale target="0.1" ticks="1" ease="linear"/>
         <scale target="1.0" ticks="100" ease="linear"/>
       </compound>
     </animation>

@@ -61,10 +61,7 @@ public class Alien extends Bouncy implements Shootable
     public void onKill()
     {
         super.onKill();
-        if (this.collisionStrategy != null) {
-            this.collisionStrategy.remove();
-            this.collisionStrategy = null;
-        }
+        resetCollisionStrategy();
     }
 
     @Override

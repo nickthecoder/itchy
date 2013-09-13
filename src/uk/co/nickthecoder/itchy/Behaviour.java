@@ -120,6 +120,12 @@ public abstract class Behaviour implements MessageListener
         return this.collisionStrategy.overlapping(this.actor,tags,null);
     }
 
+    public void resetCollisionStrategy()
+    {
+        this.collisionStrategy.remove();
+        this.collisionStrategy = BruteForceCollisionStrategy.singleton;
+    }
+    
     /**
      * Returns all Actors with a given type of Behaviour which are touching this Behaviour's Actor.
      * 
