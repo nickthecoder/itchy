@@ -32,6 +32,7 @@
     <pose name="pacman3" filename="pacman3.png" offsetY="71"/>
     <pose name="pacman4" filename="pacman4.png" offsetX="65" offsetY="69"/>
     <pose name="pacman5" filename="pacman5.png" offsetX="65" offsetY="71"/>
+    <pose name="paused" filename="paused.png"/>
     <pose name="pixel" filename="pixel.png"/>
     <pose name="redPixel" filename="redPixel.png"/>
     <pose name="saucer" filename="saucer.png" direction="-90.0"/>
@@ -109,7 +110,13 @@
     </animation>
     <animation name="fadeIn">
       <compound sequence="true" loops="1">
+        <alpha target="0.0" ticks="1" ease="linear"/>
         <alpha target="255.0" ticks="40" ease="linear"/>
+      </compound>
+    </animation>
+    <animation name="fadeOut">
+      <compound sequence="true" loops="1">
+        <alpha target="0.0" ticks="40" ease="linear"/>
       </compound>
     </animation>
     <animation name="grow">
@@ -218,6 +225,11 @@
     <costume name="pacman1" behaviour="uk.co.nickthecoder.drunkinvaders.Pacman">
       <pose name="default" pose="pacman1"/>
       <animation name="default" animation="pacman"/>
+    </costume>
+    <costume name="paused">
+      <pose name="default" pose="paused"/>
+      <animation name="pause" animation="fadeIn"/>
+      <animation name="unpause" animation="fadeOut"/>
     </costume>
     <costume name="saucer" extends="alien" behaviour="uk.co.nickthecoder.drunkinvaders.Mothership">
       <pose name="default" pose="saucer"/>

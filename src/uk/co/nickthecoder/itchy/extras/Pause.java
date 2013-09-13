@@ -6,11 +6,28 @@
 package uk.co.nickthecoder.itchy.extras;
 
 import uk.co.nickthecoder.itchy.Actor;
+import uk.co.nickthecoder.itchy.ActorsLayer;
 import uk.co.nickthecoder.itchy.Behaviour;
+import uk.co.nickthecoder.itchy.Costume;
+import uk.co.nickthecoder.itchy.Itchy;
 
 public class Pause
 {
     private boolean paused;
+
+    private String costumeName;
+
+    private Actor pauseActor;
+
+    public Pause()
+    {
+        this("paused");
+    }
+
+    public Pause( String costumeName )
+    {
+        this.costumeName = costumeName;
+    }
 
     public boolean isPaused()
     {
@@ -39,11 +56,38 @@ public class Pause
                 actor.setBehaviour(new PausedBehaviour(actor.getBehaviour()));
             }
         }
+
+        this.pauseActor = createActor();
+        if (this.pauseActor != null) {
+            this.pauseActor.activate();
+            this.pauseActor.event("pause");
+        }
+
         onPause();
+    }
+
+    protected Actor createActor()
+    {
+        Costume costume = Itchy.singleton.getGame().resources.getCostume(this.costumeName);
+        if (costume == null) {
+            return null;
+        }
+
+        Actor actor = new Actor(costume);
+        ActorsLayer layer = Itchy.singleton.getGame().getPopupLayer();
+        actor.moveTo(layer.getWorldRectangle().width / 2, layer.getWorldRectangle().height / 2);
+        layer.add(actor);
+
+        return actor;
     }
 
     public void unpause()
     {
+        if (this.pauseActor != null) {
+            this.pauseActor.deathEvent("unpause");
+            this.pauseActor = null;
+        }
+
         if (this.paused == false) {
             return;
         }

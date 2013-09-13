@@ -431,6 +431,58 @@
          stdDeviation="9.4746103"
          id="feGaussianBlur13654" />
     </filter>
+    <filter
+       inkscape:collect="always"
+       id="filter6447"
+       x="-0.011120429"
+       width="1.0222409"
+       y="-0.11635387"
+       height="1.2327077">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="2.1714087"
+         id="feGaussianBlur6449" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       id="filter6482"
+       x="-0.038360656"
+       width="1.0767213"
+       y="-0.16714286"
+       height="1.3342857">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="3.1192383"
+         id="feGaussianBlur6484" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       id="filter6497">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="1.4283711"
+         id="feGaussianBlur6499" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       id="filter6514">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.51901094"
+         id="feGaussianBlur6516" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       id="filter6550"
+       x="-0.053022502"
+       width="1.106045"
+       y="-0.1769947"
+       height="1.3539894">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="3.5292744"
+         id="feGaussianBlur6552" />
+    </filter>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -439,9 +491,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.2667672"
-     inkscape:cx="1373.1895"
-     inkscape:cy="134.07856"
+     inkscape:zoom="0.37726579"
+     inkscape:cx="871.70619"
+     inkscape:cy="482.72953"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -19997,6 +20049,15 @@
       </g>
     </g>
     <rect
+       style="fill:#00ff2f;fill-opacity:1;stroke:#ffffff;stroke-width:10;stroke-linecap:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect6452"
+       width="222.57236"
+       height="81.531761"
+       x="721.37793"
+       y="330.83289"
+       rx="9.9999695"
+       ry="9.9999695" />
+    <rect
        rx="1"
        ry="1"
        y="670.05402"
@@ -27579,6 +27640,52 @@
            y="0"
            x="0" />
       </g>
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-size:20px;font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill-opacity:1;font-family:StayPuft;-inkscape-font-specification:StayPuft Medium"
+       x="751.83521"
+       y="392.21597"
+       id="text5635"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan5637"
+         x="751.83521"
+         y="392.21597"
+         style="font-size:56px;font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-family:StayPuft;-inkscape-font-specification:StayPuft Medium">Paused</tspan></text>
+    <g
+       id="g6501"
+       transform="matrix(1.6884691,0,0,1.6884691,-617.99769,-424.48231)"
+       inkscape:export-filename="/media/home/nick/projects/itchy/resources/drunkInvaders/paused.png"
+       inkscape:export-xdpi="60.368084"
+       inkscape:export-ydpi="60.368084">
+      <use
+         style="stroke:#000000;stroke-width:1.77675748;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;filter:url(#filter6550)"
+         height="1052.3622"
+         width="1488.189"
+         transform="translate(60.836651,195.15572)"
+         id="use6487"
+         xlink:href="#text5635"
+         y="0"
+         x="0" />
+      <use
+         style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:1.77675748;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;filter:url(#filter6514)"
+         height="1052.3622"
+         width="1488.189"
+         transform="translate(55.738499,199.46972)"
+         id="use6411"
+         xlink:href="#text5635"
+         y="0"
+         x="0" />
+      <use
+         style="fill:#514bc4;fill-opacity:1"
+         x="0"
+         y="0"
+         xlink:href="#text5635"
+         id="use6413"
+         transform="translate(55.875743,199.57855)"
+         width="1488.189"
+         height="1052.3622" />
     </g>
   </g>
 </svg>

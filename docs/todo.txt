@@ -8,6 +8,11 @@ Jame is out of date, need to rebuild for win32 and i386 and ARM??
 What's Next
 ===========
 
+Remove or fix "sleep", so that it can't go wrong in conjunction with pause.
+Maybe only "tick" can sleep?
+
+Change Recharge, so that it works correctly in conjunction with pause.
+
 EaseButton to show the thumbnail graph.
 
 Bucket to be more transparent
@@ -17,10 +22,6 @@ No instructions for picking up water
 Move appearance properties to their own tab, rather than on Actor tab.
 
 Finish CostumesEditor
-
-Pause - Use Tetra to try it out.
-    Game still ticks, but not any of the actors.
-    A boolean on Game?
 
 Create a GenericGame, which can load arbitrary resources (for a simple start to a game)
     Started (called Launcher).
