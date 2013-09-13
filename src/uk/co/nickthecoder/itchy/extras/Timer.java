@@ -67,7 +67,7 @@ public class Timer
      */
     public double getRemainder()
     {
-        double result = (System.currentTimeMillis() - this.startTime) /
+        double result = (this.startTime + this.period - System.currentTimeMillis()) /
             (double) this.period;
 
         if (result > 1) {
@@ -84,7 +84,7 @@ public class Timer
      */
     public double getProgress()
     {
-        double result = (System.currentTimeMillis() - (this.startTime + this.period)) /
+        double result = (System.currentTimeMillis() - this.startTime) /
             (double) this.period;
 
         if (result > 1) {
