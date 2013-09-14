@@ -36,14 +36,15 @@ public class AlienFactory extends Behaviour
 
     private List<Alien> aliens;
 
-    private Timer timer = Timer.createTimerSeconds(this.delayPerAlien);;
-
+    private Timer timer;
 
     @Override
-    public void onActivate()
+    public void init()
     {
-        super.onActivate();
+        super.init();
+
         this.aliens = new ArrayList<Alien>(this.alienCount);
+        this.timer = Timer.createTimerSeconds(this.delayPerAlien);
     }
 
     @Override
@@ -81,7 +82,8 @@ public class AlienFactory extends Behaviour
         Alien alienBehaviour = new Alien();
         alienBehaviour.fireOnceEvery = this.fireOnceEvery;
 
-        alienActor.moveTo(this.getActor().getX() + this.aliens.size() * this.spacing, this.getActor().getY());
+        alienActor.moveTo(this.getActor().getX() + this.aliens.size() * this.spacing, this
+            .getActor().getY());
         this.getActor().getLayer().add(alienActor);
 
         alienActor.setBehaviour(alienBehaviour);

@@ -33,6 +33,14 @@ public class Bouncy extends Behaviour
     }
 
     @Override
+    public void onDetach()
+    {
+        super.onDetach();
+        this.getActor().removeTag("bouncy");
+        resetCollisionStrategy();
+    }
+
+    @Override
     public void onKill()
     {
         super.onKill();

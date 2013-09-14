@@ -31,6 +31,12 @@ public class Alien extends Bouncy implements Shootable
 
     public boolean tock = true;
 
+    public void init()
+    {
+        // Create the fragments for the explosions when I get shot.
+        new Fragment().actor(this.getActor()).createPoses("fragment");        
+    }
+    
     @Override
     public void onAttach()
     {
@@ -39,15 +45,21 @@ public class Alien extends Bouncy implements Shootable
         this.getActor().addTag("deadly");
         this.getActor().addTag("shootable");
     }
+    
+    @Override
+    public void onDetach()
+    {
+        super.onDetach();
+
+        this.getActor().removeTag("deadly");
+        this.getActor().removeTag("shootable");
+    }
 
     @Override
     public void onActivate()
     {
         super.onActivate();
         DrunkInvaders.game.addAliens(1);
-
-        // Create the fragments for the explosions when I get shot.
-        new Fragment().actor(this.getActor()).createPoses("fragment");
     }
 
     @Override

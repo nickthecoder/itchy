@@ -17,8 +17,17 @@ public class Pacman extends Behaviour
     public void onAttach()
     {
         super.onAttach();
+        
         this.getActor().addTag("deadly");
         this.collisionStrategy = DrunkInvaders.game.createCollisionStrategy(this.getActor());
+    }
+    @Override
+    public void onDetach()
+    {
+        super.onDetach();
+        
+        this.getActor().removeTag("deadly");
+        resetCollisionStrategy();
     }
     
     @Override

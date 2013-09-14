@@ -19,9 +19,21 @@ public class Shield extends Behaviour implements Shootable
     @Override
     public void onAttach()
     {
+        super.onAttach();
+        
         this.getActor().addTag("killable");
         this.getActor().addTag("shootable");
         this.collisionStrategy = DrunkInvaders.game.createCollisionStrategy(this.getActor());
+    }
+    
+    @Override
+    public void onDetach()
+    {
+        super.onDetach();
+        
+        this.getActor().removeTag("killable");
+        this.getActor().removeTag("shootable");
+        resetCollisionStrategy();
     }
 
     @Override

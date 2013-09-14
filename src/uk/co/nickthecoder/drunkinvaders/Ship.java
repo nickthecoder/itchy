@@ -55,18 +55,10 @@ public class Ship extends Bouncy implements Shootable
     private double shieldStrength = 1.0;
 
     @Override
-    public void onAttach()
+    public void init()
     {
-        super.onAttach();
+        super.init();
 
-        this.getActor().addTag("killable");
-        this.getActor().removeTag("bouncy");
-    }
-
-    @Override
-    public void onActivate()
-    {
-        super.onActivate();
         this.mass = 100000000000.0;
 
         this.radius = Math.sqrt(
@@ -79,6 +71,23 @@ public class Ship extends Bouncy implements Shootable
 
         // Create the fragments for the explosions when I get shot.
         new Fragment().actor(this.getActor()).createPoses("fragment");
+    }
+
+    @Override
+    public void onAttach()
+    {
+        super.onAttach();
+
+        this.getActor().addTag("killable");
+        this.getActor().removeTag("bouncy");
+    }
+
+    @Override
+    public void onDetach()
+    {
+        super.onDetach();
+
+        this.getActor().removeTag("killable");
     }
 
     @Override

@@ -8,8 +8,6 @@ Jame is out of date, need to rebuild for win32 and i386 and ARM??
 What's Next
 ===========
 
-onAttach should hardly ever be used, as it will be re-called after unpause.
-
 Remove or fix "sleep", so that it can't go wrong in conjunction with pause.
     Maybe only "tick" can sleep?
     Remove sleep from iThrust BallFactory
@@ -27,21 +25,16 @@ Move appearance properties to their own tab, rather than on Actor tab.
 
 Finish CostumesEditor
 
-Create a GenericGame, which can load arbitrary resources (for a simple start to a game)
-    Started (called Launcher).
+Implement Costume custom properties
+    GUI
+    Load/Save
+    Refactor the code which uses Costume's strings. Replace with custom properties.
+    Should it get the list of properties from the Behaviour?
+        Behaviour's properties have a scope of either Costume or Behaviour?
 
-Use SceneBehaviour in the games.
-
-Create a game which uses the GUI        
-    The Rules object needs to be on Game, its probably on Itchy right now.
-
-
-Costumes can have properties (not per instance of Actor, but per Costume)
-    Already have a half measure by using the String resources, but I should bin that, and introduce real properties
-    Add a "scope" to the property tag. Either "behaviour" or "costume".
-
-Try it on a RaspPi
-    Need to compile Jame for the ARM processor!
+Javacript for each Behaviour, SceneBehaviour and later for Game itself.
+    If the Behaviour is JavascriptBehaviour, then look for a text file with the appropriate name relative to
+    the resources file.
 
 
 Minor BUGS
@@ -69,9 +62,17 @@ Renaming a costume will cause scenes that use it to fail.
 
 Costumes are updated even when cancel is pressed (need to COPY the costume?)
 
-Later Possible Refactoring
-==========================
+Later
+=====
 
+Create a GenericGame, which can load arbitrary resources (for a simple start to a game)
+    Started (called Launcher).
+
+Create a game which uses the GUI        
+    The Rules object needs to be on Game, its probably on Itchy right now.
+
+Try it on a RaspPi
+    Need to compile Jame for the ARM processor!
 
 The Behaviours should have the tags, because its them that have the Interface.
 Also, I could change the behaviour, and the tags would magically vanish (without the "removeAll"!
