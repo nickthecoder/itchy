@@ -36,11 +36,8 @@ public class Alien extends Bouncy implements Shootable
     {
         super.onAttach();
 
-        this.actor.addTag("deadly");
-        this.actor.addTag("shootable");
-
-        // Create the fragments for the explosions when I get shot.
-        new Fragment().actor(this.actor).createPoses("fragment");
+        this.getActor().addTag("deadly");
+        this.getActor().addTag("shootable");
     }
 
     @Override
@@ -48,6 +45,9 @@ public class Alien extends Bouncy implements Shootable
     {
         super.onActivate();
         DrunkInvaders.game.addAliens(1);
+
+        // Create the fragments for the explosions when I get shot.
+        new Fragment().actor(this.getActor()).createPoses("fragment");
     }
 
     @Override
@@ -67,14 +67,14 @@ public class Alien extends Bouncy implements Shootable
     @Override
     public void tick()
     {
-        if (this.actor.isDying()) {
+        if (this.getActor().isDying()) {
             return;
         }
 
         if (DrunkInvaders.game.metronomeCountdown == 1) {
-            if (this.actor.getAnimation() == null) {
+            if (this.getActor().getAnimation() == null) {
                 this.tock = !this.tock;
-                this.actor.event(this.tock ? "tock" : "tick");
+                this.getActor().event(this.tock ? "tock" : "tick");
             }
         }
 
@@ -85,8 +85,8 @@ public class Alien extends Bouncy implements Shootable
         super.tick();
 
         for (Actor other : touching(SHOOTABLE_LIST)) {
-            if ((this.actor != other) && (!other.hasTag("bouncy"))) {
-                ((Shootable) other.getBehaviour()).shot(this.actor);
+            if ((this.getActor() != other) && (!other.hasTag("bouncy"))) {
+                ((Shootable) other.getBehaviour()).shot(this.getActor());
             }
         }
     }
@@ -96,8 +96,8 @@ public class Alien extends Bouncy implements Shootable
         this.event("fire");
 
         Actor bullet = new Actor(DrunkInvaders.game.resources.getCostume("bomb"), "default");
-        bullet.moveTo(this.actor);
-        bullet.getAppearance().setDirection(this.actor.getAppearance().getDirection());
+        bullet.moveTo(this.getActor());
+        bullet.getAppearance().setDirection(this.getActor().getAppearance().getDirection());
         DrunkInvaders.game.mainLayer.add(bullet);
         bullet.moveForward(10);
         bullet.setBehaviour(new Bullet("killable"));
@@ -108,14 +108,14 @@ public class Alien extends Bouncy implements Shootable
     public void shot( Actor bullet )
     {
 
-        new Explosion(this.actor)
+        new Explosion(this.getActor())
             .projectiles(20)
             .forwards()
             .fade(1.2)
             .speed(1, 3)
             .createActor("fragment").activate();
 
-        new Explosion(this.actor)
+        new Explosion(this.getActor())
             .projectiles(40).projectilesPerClick(10)
             .distance(0, 20)
             .speed(3, 6)
@@ -147,9 +147,9 @@ public class Alien extends Bouncy implements Shootable
             .margin(10, 10, 20, 10)
             .createActor();
         yell.activate();
-        yell.deathEvent(this.actor.getCostume(), "yell");
+        yell.deathEvent(this.getActor().getCostume(), "yell");
 
-        this.actor.removeAllTags();
+        this.getActor().removeAllTags();
         this.deathEvent("death");
 
     }

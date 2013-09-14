@@ -1,9 +1,7 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0 which accompanies this
+ * distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.drunkinvaders;
 
@@ -15,26 +13,23 @@ public class Bouncy extends Behaviour
 {
     public static final String[] BOUNCY_LIST = new String[] { "bouncy" };
 
-    
-    @Property(label="Speed X")
+    @Property(label = "Speed X")
     public double vx = 0;
 
-    @Property(label="Speed Y")
+    @Property(label = "Speed Y")
     public double vy = 0;
-    
-    @Property(label="Mass")
+
+    @Property(label = "Mass")
     public double mass = 1;
 
     public double radius = 20;
 
-    
     @Override
     public void onAttach()
     {
         super.onAttach();
-        this.actor.addTag("bouncy");
-        this.collisionStrategy = DrunkInvaders.game.createCollisionStrategy(this.actor);
-
+        this.getActor().addTag("bouncy");
+        this.collisionStrategy = DrunkInvaders.game.createCollisionStrategy(this.getActor());
     }
 
     @Override
@@ -47,27 +42,27 @@ public class Bouncy extends Behaviour
     @Override
     public void tick()
     {
-        this.actor.moveBy(this.vx, this.vy);
+        this.getActor().moveBy(this.vx, this.vy);
 
         double radius = this.radius * this.getActor().getAppearance().getScale();
-        
-        if ((this.vy) > 0 && (this.actor.getY() + radius > 480)) {
+
+        if ((this.vy) > 0 && (this.getActor().getY() + radius > 480)) {
             this.vy = -this.vy;
         }
-        if ((this.vx) > 0 && (this.actor.getX() + radius > 640)) {
+        if ((this.vx) > 0 && (this.getActor().getX() + radius > 640)) {
             this.vx = -this.vx;
         }
-        if ((this.vy) < 0 && (this.actor.getY() - radius < 0)) {
+        if ((this.vy) < 0 && (this.getActor().getY() - radius < 0)) {
             this.vy = -this.vy;
         }
-        if ((this.vx) < 0 && (this.actor.getX() - radius < 0)) {
+        if ((this.vx) < 0 && (this.getActor().getX() - radius < 0)) {
             this.vx = -this.vx;
         }
 
         this.collisionStrategy.update();
 
         for (Actor other : touching(BOUNCY_LIST)) {
-            collide(this.actor, other);
+            collide(this.getActor(), other);
         }
 
     }
@@ -99,9 +94,9 @@ public class Bouncy extends Behaviour
         double scaleB = bbb.getActor().getAppearance().getScale();
         double massA = bba.mass * scaleA * scaleA * scaleA;
         double massB = bbb.mass * scaleB * scaleB * scaleB;
-        
+
         double massSum = massA + massB;
-        
+
         bba.vx += dx / dist * collision * 2 * massB / massSum;
         bbb.vx -= dx / dist * collision * 2 * massA / massSum;
 
@@ -109,10 +104,10 @@ public class Bouncy extends Behaviour
         bbb.vy -= dy / dist * collision * 2 * massA / massSum;
 
     }
-    
+
     public static void collideOld( Actor a, Actor b )
     {
-                
+
         Bouncy bba = (Bouncy) a.getBehaviour();
         Bouncy bbb = (Bouncy) b.getBehaviour();
 
@@ -130,7 +125,7 @@ public class Bouncy extends Behaviour
             // They are moving away from each other
             return;
         }
-        
+
         bba.vx += dx / dist * collision;
         bbb.vx -= dx / dist * collision;
 

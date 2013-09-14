@@ -1408,8 +1408,8 @@ public class SceneDesigner implements MouseListener, KeyListener
 
         public void dragStart()
         {
-            this.startX = (int) this.actor.getX();
-            this.startY = (int) this.actor.getY();
+            this.startX = (int) this.getActor().getX();
+            this.startY = (int) this.getActor().getY();
             this.dragging = true;
         }
 
@@ -1420,7 +1420,7 @@ public class SceneDesigner implements MouseListener, KeyListener
 
         public void moveBy( int dx, int dy )
         {
-            this.actor.moveBy(dx, dy);
+            this.getActor().moveBy(dx, dy);
         }
     }
 
@@ -1478,17 +1478,17 @@ public class SceneDesigner implements MouseListener, KeyListener
         {
             assert (this.target != null);
 
-            double ratioX = (this.target.getX() - this.opposite.actor.getX()) /
-                (this.actor.getX() - this.opposite.actor.getX());
-            double ratioY = (this.target.getY() - this.opposite.actor.getY()) /
-                (this.actor.getY() - this.opposite.actor.getY());
+            double ratioX = (this.target.getX() - this.opposite.getActor().getX()) /
+                (this.getActor().getX() - this.opposite.getActor().getX());
+            double ratioY = (this.target.getY() - this.opposite.getActor().getY()) /
+                (this.getActor().getY() - this.opposite.getActor().getY());
 
             super.moveBy(dx, dy);
 
             Actor other = Itchy.singleton.isShiftDown() ? this.target : this.opposite.getActor();
 
-            double scaleX = (other.getX() - this.actor.getX()) / (other.getX() - this.startX);
-            double scaleY = (other.getY() - this.actor.getY()) / (other.getY() - this.startY);
+            double scaleX = (other.getX() - this.getActor().getX()) / (other.getX() - this.startX);
+            double scaleY = (other.getY() - this.getActor().getY()) / (other.getY() - this.startY);
             double scale = Math.min(scaleX, scaleY);
 
             if (!Itchy.singleton.isShiftDown()) {
@@ -1512,11 +1512,11 @@ public class SceneDesigner implements MouseListener, KeyListener
         {
             super.moveBy(dx, dy);
 
-            double tx = this.actor.getX() - this.target.getX();
-            double ty = this.actor.getY() - this.target.getY();
+            double tx = this.getActor().getX() - this.target.getX();
+            double ty = this.getActor().getY() - this.target.getY();
 
             double angle = Math.atan2(ty, tx);
-            this.actor.getAppearance().setDirectionRadians(angle);
+            this.getActor().getAppearance().setDirectionRadians(angle);
             this.target.getAppearance().setDirectionRadians(angle);
 
         }
@@ -1529,9 +1529,9 @@ public class SceneDesigner implements MouseListener, KeyListener
             }
 
             if (this.target != null) {
-                this.actor.moveTo(this.target);
-                this.actor.getAppearance().setDirection(this.target.getAppearance().getDirection());
-                this.actor.moveForward(30);
+                this.getActor().moveTo(this.target);
+                this.getActor().getAppearance().setDirection(this.target.getAppearance().getDirection());
+                this.getActor().moveForward(30);
             }
         }
 

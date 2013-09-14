@@ -36,30 +36,32 @@ public class AlienFactory extends Behaviour
 
     private List<Alien> aliens;
 
-    private Timer timer = Timer.createTimerSeconds(this.delayPerAlien);
+    private Timer timer = Timer.createTimerSeconds(this.delayPerAlien);;
+
 
     @Override
-    public void onAttach()
+    public void onActivate()
     {
+        super.onActivate();
         this.aliens = new ArrayList<Alien>(this.alienCount);
     }
 
     @Override
     public void tick()
     {
-        this.actor.getAppearance().setAlpha(0);
+        this.getActor().getAppearance().setAlpha(0);
 
-        if (timer.isFinished()) {
-            timer.reset();
+        if (this.timer.isFinished()) {
+            this.timer.reset();
             createAlien();
-            
-            if (aliens.size() == this.alienCount) {
+
+            if (this.aliens.size() == this.alienCount) {
                 for (Alien ab : this.aliens) {
                     ab.vx = Util.randomBetween(2, 2.2);
                     ab.vy = Util.randomBetween(0, 0.6);
                 }
-                this.actor.kill();
-                
+                this.getActor().kill();
+
             }
         }
 
@@ -70,17 +72,17 @@ public class AlienFactory extends Behaviour
         Costume costume = DrunkInvaders.game.resources.getCostume(this.costumeName);
         Actor alienActor = new Actor(costume);
         Appearance alienAppearance = alienActor.getAppearance();
-        Appearance thisAppearance = this.actor.getAppearance();
+        Appearance thisAppearance = this.getActor().getAppearance();
 
-        alienAppearance.setDirection(this.actor.getAppearance().getDirection() - 90);
+        alienAppearance.setDirection(this.getActor().getAppearance().getDirection() - 90);
         alienAppearance.setScale(thisAppearance.getScale());
         alienAppearance.setAlpha(0);
 
         Alien alienBehaviour = new Alien();
         alienBehaviour.fireOnceEvery = this.fireOnceEvery;
 
-        alienActor.moveTo(this.actor.getX() + this.aliens.size() * this.spacing, this.actor.getY());
-        this.actor.getLayer().add(alienActor);
+        alienActor.moveTo(this.getActor().getX() + this.aliens.size() * this.spacing, this.getActor().getY());
+        this.getActor().getLayer().add(alienActor);
 
         alienActor.setBehaviour(alienBehaviour);
         alienActor.activate();

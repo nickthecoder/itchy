@@ -17,9 +17,8 @@ public class Pacman extends Behaviour
     public void onAttach()
     {
         super.onAttach();
-
-        this.actor.addTag("deadly");
-        this.collisionStrategy = DrunkInvaders.game.createCollisionStrategy(this.actor);
+        this.getActor().addTag("deadly");
+        this.collisionStrategy = DrunkInvaders.game.createCollisionStrategy(this.getActor());
     }
     
     @Override
@@ -28,8 +27,8 @@ public class Pacman extends Behaviour
         this.collisionStrategy.update();
         
         for (Actor other : touching(Alien.SHOOTABLE_LIST)) {
-            if ((this.actor != other) && (!other.hasTag("bouncy"))) {
-                ((Shootable) other.getBehaviour()).shot(this.actor);
+            if ((this.getActor() != other) && (!other.hasTag("bouncy"))) {
+                ((Shootable) other.getBehaviour()).shot(this.getActor());
             }
         }
     }

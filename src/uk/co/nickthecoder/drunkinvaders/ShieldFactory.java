@@ -37,13 +37,13 @@ public class ShieldFactory extends Behaviour
                         poseName = "right";
                     }
                 }
-                Pose pose = this.actor.getCostume().getPose( poseName );                
+                Pose pose = this.getActor().getCostume().getPose( poseName );                
 
                 Actor shield = new Actor(pose);
                 Shield shieldBehaviour = new Shield();
-                shield.getAppearance().setDirection(this.actor.getAppearance().getDirection());
-                this.actor.getLayer().add(shield);
-                shield.moveTo(this.actor.getX(), this.actor.getY());
+                shield.getAppearance().setDirection(this.getActor().getAppearance().getDirection());
+                this.getActor().getLayer().add(shield);
+                shield.moveTo(this.getActor().getX(), this.getActor().getY());
                 shield.moveForward(x * this.spacing, y * this.spacing);
                 shield.setBehaviour(shieldBehaviour);
                 shield.activate();
@@ -51,7 +51,7 @@ public class ShieldFactory extends Behaviour
             }
         }
 
-        this.actor.kill();
+        this.getActor().kill();
 
     }
 

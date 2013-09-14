@@ -52,15 +52,8 @@ public class Pieces extends Behaviour implements Cloneable
     
     public Pieces clone()
     {
-        try {
-            Pieces result = (Pieces) super.clone();
-            result.actor = null;
-            result.pieces = 0;
-            return result;
-            
-        } catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-            return null;
-        }
+        Pieces result = (Pieces) super.clone();
+        result.pieces = 0;
+        return result;
     }
 }

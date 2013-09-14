@@ -5,6 +5,7 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.extras;
 
+import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.util.Util;
 
 /**
@@ -29,6 +30,7 @@ public class Timer
      */
     private long startTime;
 
+    private boolean ignorePauses = false;
     
     public static Timer createTimerSeconds( double seconds )
     {
@@ -55,9 +57,28 @@ public class Timer
         this.reset();
     }
 
+    public void setIgnorePauses( boolean value )
+    {
+        this.ignorePauses = value;
+    }
+    
+    public boolean getIgnorePauses()
+    {
+        return this.ignorePauses;
+    }
+    
+    private long currentTimeMillis()
+    {
+        if ( this.ignorePauses ) {
+            return System.currentTimeMillis();
+        } else {
+            return Itchy.singleton.getGame().gameTimeMillis();
+        }
+    }
+    
     public boolean isFinished()
     {
-        return System.currentTimeMillis() > this.startTime + this.period;
+        return currentTimeMillis() > this.startTime + this.period;
     }
 
     /**
@@ -67,7 +88,7 @@ public class Timer
      */
     public double getRemainder()
     {
-        double result = (this.startTime + this.period - System.currentTimeMillis()) /
+        double result = (this.startTime + this.period - currentTimeMillis()) /
             (double) this.period;
 
         if (result > 1) {
@@ -84,7 +105,7 @@ public class Timer
      */
     public double getProgress()
     {
-        double result = (System.currentTimeMillis() - this.startTime) /
+        double result = (currentTimeMillis() - this.startTime) /
             (double) this.period;
 
         if (result > 1) {
@@ -99,6 +120,6 @@ public class Timer
         if ( this.minimumPeriod != this.maximumPeriod ) {
             this.period = (int) Util.randomBetween(this.minimumPeriod,  this.maximumPeriod);
         }
-        this.startTime = System.currentTimeMillis();
+        this.startTime = currentTimeMillis();
     }
 }

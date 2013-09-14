@@ -17,7 +17,6 @@ import uk.co.nickthecoder.itchy.ScrollableLayer;
 import uk.co.nickthecoder.itchy.animation.AlphaAnimation;
 import uk.co.nickthecoder.itchy.animation.CompoundAnimation;
 import uk.co.nickthecoder.itchy.animation.NumericAnimation;
-import uk.co.nickthecoder.itchy.extras.Pause;
 import uk.co.nickthecoder.itchy.neighbourhood.Neighbourhood;
 import uk.co.nickthecoder.itchy.neighbourhood.NeighbourhoodCollisionStrategy;
 import uk.co.nickthecoder.itchy.neighbourhood.StandardNeighbourhood;
@@ -59,8 +58,6 @@ public class DrunkInvaders extends Game
 
     public boolean fadingOut = false;
 
-    public Pause pause = new Pause();
-    
     
     public DrunkInvaders() throws Exception
     {

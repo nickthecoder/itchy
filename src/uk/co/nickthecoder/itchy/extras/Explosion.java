@@ -318,17 +318,17 @@ public class Explosion extends Behaviour
         for (int i = 0; i < this.countPerTick; i++) {
 
             if (this.projectileCount <= 0) {
-                this.actor.kill();
+                this.getActor().kill();
                 return;
             }
             this.projectileCount--;
 
             Pose pose = null;
-            if ((this.poseName != null) && (this.actor.getCostume() != null)) {
-                pose = this.actor.getCostume().getPose(this.poseName);
+            if ((this.poseName != null) && (this.getActor().getCostume() != null)) {
+                pose = this.getActor().getCostume().getPose(this.poseName);
             }
             if (pose == null) {
-                pose = this.actor.getAppearance().getPose();
+                pose = this.getActor().getAppearance().getPose();
             }
             
             Actor actor = new Actor(pose);
@@ -342,7 +342,7 @@ public class Explosion extends Behaviour
             appearance.setScale(this.scale + random.nextDouble() * this.randomScale);
             appearance.setAlpha(this.alpha + random.nextDouble() * this.randomAlpha);
 
-            actor.moveTo(this.actor);
+            actor.moveTo(this.getActor());
             actor.moveForward(this.distance + random.nextDouble() * this.randomDistance);
             
             behaviour.growFactor = this.grow + random.nextDouble() * this.randomGrow;
@@ -366,13 +366,13 @@ public class Explosion extends Behaviour
                 behaviour.vy -= sin * (this.speed + random.nextDouble() * this.randomSpeed);
             }
 
-            appearance.setColorize(this.actor.getAppearance().getColorize());
+            appearance.setColorize(this.getActor().getAppearance().getColorize());
 
             actor.setBehaviour(behaviour);
             if (this.below) {
-                this.actor.getLayer().addBelow(actor, this.actor);
+                this.getActor().getLayer().addBelow(actor, this.getActor());
             } else {
-                this.actor.getLayer().add(actor);
+                this.getActor().getLayer().add(actor);
             }
             actor.activate();
         }

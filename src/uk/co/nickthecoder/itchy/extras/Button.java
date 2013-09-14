@@ -27,7 +27,7 @@ public class Button extends Behaviour implements MouseListener
     @Override
     public boolean onMouseDown( MouseButtonEvent event )
     {
-        if (this.actor.contains(event.x, event.y)) {
+        if (this.getActor().contains(event.x, event.y)) {
             Itchy.singleton.getGame().onMessage(this.message);
             return true;
         }

@@ -53,9 +53,9 @@ public class Follower extends Behaviour
 
     private void updatePosition()
     {
-        this.actor.moveTo(this.following);
-        this.actor.moveForward(this.distance);
-        this.actor.moveBy(this.dx, this.dy);   
+        this.getActor().moveTo(this.following);
+        this.getActor().moveForward(this.distance);
+        this.getActor().moveBy(this.dx, this.dy);   
     }
     
     public Actor createActor()

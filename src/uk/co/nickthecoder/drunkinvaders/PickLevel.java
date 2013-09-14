@@ -36,10 +36,10 @@ public class PickLevel extends Behaviour implements MouseListener
 
     
     @Override
-    public void onAttach()
+    public void onActivate()
     {
         if (DrunkInvaders.game.completedLevel(this.levelNumber)) {
-            this.actor.event("completed");
+            this.getActor().event("completed");
         }
 
         if (this.font != null) {
@@ -48,8 +48,8 @@ public class PickLevel extends Behaviour implements MouseListener
 
             TextPose textPose = new TextPose(String.valueOf(this.levelNumber), this.font,
                     this.fontSize, this.fontColor);
-            this.actor.getAppearance().superimpose(shadowPose, 2, 2);
-            this.actor.getAppearance().superimpose(textPose, 0, 0);
+            this.getActor().getAppearance().superimpose(shadowPose, 2, 2);
+            this.getActor().getAppearance().superimpose(textPose, 0, 0);
         }
     }
 
@@ -61,7 +61,7 @@ public class PickLevel extends Behaviour implements MouseListener
     @Override
     public boolean onMouseDown( MouseButtonEvent event )
     {
-        if (this.actor.contains(event.x, event.y)) {
+        if (this.getActor().contains(event.x, event.y)) {
             DrunkInvaders.game.play(this.levelNumber);
             return true;
         }

@@ -9,23 +9,34 @@ import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.ActorsLayer;
 import uk.co.nickthecoder.itchy.Behaviour;
 import uk.co.nickthecoder.itchy.Costume;
-import uk.co.nickthecoder.itchy.Itchy;
+import uk.co.nickthecoder.itchy.Game;
 
 public class Pause
 {
+    private final Game game;
+    
     private boolean paused;
 
     private String costumeName;
 
     private Actor pauseActor;
 
-    public Pause()
+    private long totalTimePausedMillis;
+    
+    /**
+     * Remembers the time that the game was last paused, so that timers which don't count down during
+     * pauses can use this time when the game is paused.
+     */
+    private long pauseTimeMillis;
+    
+    public Pause( Game game )
     {
-        this("paused");
+        this( game, "paused");
     }
 
-    public Pause( String costumeName )
+    public Pause( Game game, String costumeName )
     {
+        this.game = game;
         this.costumeName = costumeName;
     }
 
@@ -43,12 +54,31 @@ public class Pause
         }
     }
 
-    public void pause()
+    /**
+     * Remembers the time that the game was last paused, so that timers which don't count down during
+     * pauses can use this time when the game is paused.
+     */
+    public long pauseTimeMillis()
     {
+        return pauseTimeMillis;
+    }
+    
+    /**
+     * The total time in milliseconds that the game was in a paused state.
+     * @return
+     */
+    public long totalTimePausedMillis()
+    {
+        return totalTimePausedMillis;
+    }
+    
+    public void pause()
+    {        
         if (this.paused) {
             return;
         }
 
+        this.pauseTimeMillis = game.gameTimeMillis();
         this.paused = true;
 
         for (Actor actor : Actor.allByTag("active")) {
@@ -68,13 +98,13 @@ public class Pause
 
     protected Actor createActor()
     {
-        Costume costume = Itchy.singleton.getGame().resources.getCostume(this.costumeName);
+        Costume costume = game.resources.getCostume(this.costumeName);
         if (costume == null) {
             return null;
         }
 
         Actor actor = new Actor(costume);
-        ActorsLayer layer = Itchy.singleton.getGame().getPopupLayer();
+        ActorsLayer layer = game.getPopupLayer();
         actor.moveTo(layer.getWorldRectangle().width / 2, layer.getWorldRectangle().height / 2);
         layer.add(actor);
 
@@ -99,6 +129,9 @@ public class Pause
                 ((PausedBehaviour) actor.getBehaviour()).unpause();
             }
         }
+        
+        this.totalTimePausedMillis += game.gameTimeMillis() - this.pauseTimeMillis;
+        
         onUnpaused();
     }
 

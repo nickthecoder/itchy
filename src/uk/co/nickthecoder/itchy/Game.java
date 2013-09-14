@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.prefs.Preferences;
 
 import uk.co.nickthecoder.itchy.editor.Editor;
+import uk.co.nickthecoder.itchy.extras.Pause;
 import uk.co.nickthecoder.itchy.gui.GuiPose;
 import uk.co.nickthecoder.itchy.util.AutoFlushPreferences;
 import uk.co.nickthecoder.jame.Keys;
@@ -62,9 +63,11 @@ public abstract class Game extends Task implements EventListener, MessageListene
 
     private String preTestSceneName;
 
+    public Pause pause;
 
     public Game( String title, int width, int height ) throws Exception
     {
+        this.pause = new Pause(this);
         this.title = title;
         this.screenRect = new Rect(0, 0, width, height);
 
@@ -94,9 +97,9 @@ public abstract class Game extends Task implements EventListener, MessageListene
      */
     public void start()
     {
-        start( getInitialSceneName());
+        start(getInitialSceneName());
     }
-    
+
     public void start( String sceneName )
     {
         Itchy.singleton.startGame(this);
@@ -104,28 +107,28 @@ public abstract class Game extends Task implements EventListener, MessageListene
             init();
             this.initialised = true;
         }
-        
-        if ( sceneName != null ) {
+
+        if (sceneName != null) {
             this.layers.clear();
             this.layers.reset();
-            loadScene( sceneName );
+            loadScene(sceneName);
         }
-        
+
         Itchy.singleton.mainLoop();
     }
-    
+
     public abstract void init();
 
     public abstract String getInitialSceneName();
-    
+
     public void testScene( String sceneName )
     {
         try {
             this.preTestSceneName = this.sceneName;
             this.testing = true;
 
-            start( sceneName );
-            
+            start(sceneName);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -168,6 +171,20 @@ public abstract class Game extends Task implements EventListener, MessageListene
         this.popupLayer.render(this.screenRect, screen);
     }
 
+    /**
+     * Use this to time actual game play, which will exclude time while the game is paused. A single
+     * value from gameTimeMillis is meaningless, it only has meaning when one value is subtracted
+     * from a later value (which will give the number of milliseconds of game time.
+     */
+    public long gameTimeMillis()
+    {
+        if (this.pause.isPaused()) {
+            return this.pause.pauseTimeMillis();
+        } else {
+            return System.currentTimeMillis() - this.pause.totalTimePausedMillis();
+        }
+    }
+
     public void processEvent( Event event )
     {
         if (event instanceof QuitEvent) {
@@ -182,7 +199,6 @@ public abstract class Game extends Task implements EventListener, MessageListene
         if (event instanceof KeyboardEvent) {
             KeyboardEvent ke = (KeyboardEvent) event;
 
-
             if (ke.isPressed()) {
 
                 if (this.testing) {
@@ -191,7 +207,7 @@ public abstract class Game extends Task implements EventListener, MessageListene
                         return;
                     }
                 }
-                
+
                 if (this.keyboardFocus != null) {
                     if (this.keyboardFocus.onKeyDown(ke)) {
                         return;
@@ -456,8 +472,6 @@ public abstract class Game extends Task implements EventListener, MessageListene
         this.currentSceneBehaviour.onMessage(message);
     }
 
-
-
     public boolean loadScene( String sceneName )
     {
         try {
@@ -570,7 +584,7 @@ public abstract class Game extends Task implements EventListener, MessageListene
     {
         try {
             Editor editor = new Editor(this);
-            editor.start( null );
+            editor.start(null);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -581,22 +595,21 @@ public abstract class Game extends Task implements EventListener, MessageListene
         try {
             Editor editor = new Editor(this);
             editor.designScene(designSceneName);
-            editor.start( null );
+            editor.start(null);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
 
     protected void runFromMain( String[] argv ) throws Exception
     {
         if ((argv.length == 1) && ("--editor".equals(argv[0]))) {
 
             Editor editor = new Editor(this);
-            editor.start( null );
+            editor.start(null);
 
         } else {
-            this.start( getInitialSceneName());
+            this.start(getInitialSceneName());
         }
     }
 }

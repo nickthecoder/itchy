@@ -79,19 +79,19 @@ public class Projectile extends Behaviour
     @Override
     public void tick()
     {
-        this.actor.moveBy(this.vx, this.vy);
-        this.actor.moveForward(this.speed);
+        this.getActor().moveBy(this.vx, this.vy);
+        this.getActor().moveForward(this.speed);
         this.vy += this.gravity;
-        this.actor.getAppearance().adjustAlpha(-this.fade);
-        this.actor.getAppearance().adjustDirection(this.spin);
+        this.getActor().getAppearance().adjustAlpha(-this.fade);
+        this.getActor().getAppearance().adjustDirection(this.spin);
 
         if (this.growFactor != 1) {
-            this.actor.getAppearance().setScale(
-                this.actor.getAppearance().getScale() * this.growFactor);
+            this.getActor().getAppearance().setScale(
+                this.getActor().getAppearance().getScale() * this.growFactor);
         }
 
-        if ((this.life-- < 0) || (this.actor.getAppearance().getAlpha() <= 0)) {
-            this.actor.kill();
+        if ((this.life-- < 0) || (this.getActor().getAppearance().getAlpha() <= 0)) {
+            this.getActor().kill();
         }
 
     }

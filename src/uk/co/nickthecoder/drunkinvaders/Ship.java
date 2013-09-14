@@ -1,9 +1,7 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0 which accompanies this
+ * distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.drunkinvaders;
 
@@ -61,21 +59,26 @@ public class Ship extends Bouncy implements Shootable
     {
         super.onAttach();
 
-        this.actor.removeTag("bouncy");
+        this.getActor().addTag("killable");
+        this.getActor().removeTag("bouncy");
+    }
 
+    @Override
+    public void onActivate()
+    {
+        super.onActivate();
         this.mass = 100000000000.0;
-        this.actor.addTag("killable");
 
         this.radius = Math.sqrt(
-            (this.actor.getX() - this.ox) * (this.actor.getX() - this.ox) +
-                (this.actor.getY() - this.oy) * (this.actor.getY() - this.oy));
+            (this.getActor().getX() - this.ox) * (this.getActor().getX() - this.ox) +
+                (this.getActor().getY() - this.oy) * (this.getActor().getY() - this.oy));
 
-        this.angle = Math.atan2(this.actor.getY() - this.oy, this.actor.getX() - this.ox);
-        this.actor.getAppearance().setDirectionRadians(this.angle);
+        this.angle = Math.atan2(this.getActor().getY() - this.oy, this.getActor().getX() - this.ox);
+        this.getActor().getAppearance().setDirectionRadians(this.angle);
         this.turn(0); // calculates the direction
 
         // Create the fragments for the explosions when I get shot.
-        new Fragment().actor(this.actor).createPoses("fragment");
+        new Fragment().actor(this.getActor()).createPoses("fragment");
     }
 
     @Override
@@ -135,7 +138,7 @@ public class Ship extends Bouncy implements Shootable
             for (Actor other : touching(DEADLY_LIST)) {
                 this.shot(other);
                 if (other.getBehaviour() instanceof Shootable) {
-                    ((Shootable) other.getBehaviour()).shot(this.actor);
+                    ((Shootable) other.getBehaviour()).shot(this.getActor());
                 }
                 break;
             }
@@ -146,20 +149,20 @@ public class Ship extends Bouncy implements Shootable
 
     private void turn( double speed )
     {
-        double oldX = this.actor.getX();
-        double oldY = this.actor.getY();
-        double oldDirection = this.actor.getAppearance().getDirection();
+        double oldX = this.getActor().getX();
+        double oldY = this.getActor().getY();
+        double oldDirection = this.getActor().getAppearance().getDirection();
 
         this.angle += speed;
 
-        this.actor.getAppearance().setDirectionRadians(this.angle);
-        this.actor.setX(this.radius * Math.cos(this.angle) + this.ox);
-        this.actor.setY(this.radius * Math.sin(this.angle) + this.oy);
+        this.getActor().getAppearance().setDirectionRadians(this.angle);
+        this.getActor().setX(this.radius * Math.cos(this.angle) + this.ox);
+        this.getActor().setY(this.radius * Math.sin(this.angle) + this.oy);
 
-        if (this.actor.isOffScreen()) {
+        if (this.getActor().isOffScreen()) {
             this.angle -= speed;
-            this.actor.moveTo(oldX, oldY);
-            this.actor.getAppearance().setDirection(oldDirection);
+            this.getActor().moveTo(oldX, oldY);
+            this.getActor().getAppearance().setDirection(oldDirection);
         }
     }
 
@@ -168,7 +171,7 @@ public class Ship extends Bouncy implements Shootable
         long level = Math.round(this.shieldStrength * SHIELD_POSE_COUNT);
         if (level > 0) {
             this.event("shield");
-            this.actor.addTag("bouncy");
+            this.getActor().addTag("bouncy");
             long newLevel = Math.round(this.shieldStrength * SHIELD_POSE_COUNT);
             event("shielded" + newLevel);
             this.shielded = true;
@@ -179,7 +182,7 @@ public class Ship extends Bouncy implements Shootable
 
     public void deactivateShield()
     {
-        this.actor.removeTag("bouncy");
+        this.getActor().removeTag("bouncy");
         this.event("deshield");
         this.shielded = false;
     }
@@ -218,8 +221,8 @@ public class Ship extends Bouncy implements Shootable
 
         Actor bullet = new Actor(DrunkInvaders.game.resources.getCostume("bullet"), "default");
         this.latestBullet = bullet;
-        bullet.moveTo(this.actor);
-        bullet.getAppearance().setDirection(this.actor.getAppearance().getDirection());
+        bullet.moveTo(this.getActor());
+        bullet.getAppearance().setDirection(this.getActor().getAppearance().getDirection());
         DrunkInvaders.game.mainLayer.add(bullet);
         bullet.moveForward(10);
         bullet.setBehaviour(new Bullet());
@@ -246,9 +249,9 @@ public class Ship extends Bouncy implements Shootable
             .margin(10, 10, 20, 10)
             .createActor();
         yell.activate();
-        yell.deathEvent(this.actor.getCostume(), "yell");
+        yell.deathEvent(this.getActor().getCostume(), "yell");
 
-        new Explosion(this.actor)
+        new Explosion(this.getActor())
             .projectiles(20)
             .forwards()
             .speed(0.3, 0.9)
@@ -256,7 +259,7 @@ public class Ship extends Bouncy implements Shootable
             .spin(-0.2, 0.2)
             .createActor("fragment").activate();
 
-        new Explosion(this.actor)
+        new Explosion(this.getActor())
             .projectiles(40)
             .distance(0, 10)
             .speed(1, 3)

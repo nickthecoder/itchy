@@ -13,32 +13,34 @@ import java.util.Set;
 import uk.co.nickthecoder.itchy.animation.Animation;
 import uk.co.nickthecoder.itchy.util.AbstractProperty;
 
-public abstract class Behaviour implements MessageListener
+public abstract class Behaviour implements MessageListener, Cloneable
 {
     private final static HashMap<Class<?>, List<AbstractProperty<Behaviour, ?>>> allProperties = new HashMap<Class<?>, List<AbstractProperty<Behaviour, ?>>>();
 
     public static boolean isValidClassName( String behaviourClassName )
     {
         try {
-            Class<?> klass = Class.forName(behaviourClassName);
-            Object testBehaviour = klass.newInstance();
-            if (!(testBehaviour instanceof Behaviour)) {
-                return false;
-            }
+            @SuppressWarnings({ "unchecked", "unused" })
+            Class<Behaviour> klass = (Class<Behaviour>) Class.forName(behaviourClassName);
+
+            //Object testBehaviour = klass.newInstance();
+            //if (!(testBehaviour instanceof Behaviour)) {
+            //    return false;
+            //}
         } catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
 
         return true;
     }
 
-    protected Actor actor;
+    private Actor actor;
 
     public CollisionStrategy collisionStrategy = BruteForceCollisionStrategy.singleton;
 
     public Behaviour()
     {
-        this.actor = null;
     }
 
     public Actor createActor( ActorsLayer layer, String costumeName )
@@ -49,6 +51,15 @@ public abstract class Behaviour implements MessageListener
         actor.setBehaviour(this);
 
         return actor;
+    }
+    
+    /**
+     * Called when the behaviour is first attached to its actor. Override this method to perform
+     * one time initialisation.
+     */
+    public void init()
+    {
+        // Do nothing
     }
 
     public List<AbstractProperty<Behaviour, ?>> getProperties()
@@ -92,15 +103,22 @@ public abstract class Behaviour implements MessageListener
 
     public void attach( Actor actor )
     {
-        assert (this.actor == null);
+        assert ((this.getActor() == null) || ( this.getActor() == actor));
+        Actor oldActor = this.actor;
+        
         this.actor = actor;
         this.actor.addTag(this.getClass().getName());
+        
+        if (oldActor == null) {
+            this.init();
+        }
+        
         this.onAttach();
     }
 
     public void detatch()
     {
-        this.actor.removeTag(this.getClass().getName());
+        this.getActor().removeTag(this.getClass().getName());
         Itchy.singleton.gameLoopJob.add(new Task() {
             @Override
             public void run()
@@ -117,7 +135,7 @@ public abstract class Behaviour implements MessageListener
 
     public Set<Actor> overlapping( String... tags )
     {
-        return this.collisionStrategy.overlapping(this.actor,tags,null);
+        return this.collisionStrategy.overlapping(this.getActor(), tags, null);
     }
 
     public void resetCollisionStrategy()
@@ -125,7 +143,7 @@ public abstract class Behaviour implements MessageListener
         this.collisionStrategy.remove();
         this.collisionStrategy = BruteForceCollisionStrategy.singleton;
     }
-    
+
     /**
      * Returns all Actors with a given type of Behaviour which are touching this Behaviour's Actor.
      * 
@@ -153,42 +171,42 @@ public abstract class Behaviour implements MessageListener
 
     public Set<Actor> touching( String... tags )
     {
-        return this.collisionStrategy.touching(this.actor,tags,null);
+        return this.collisionStrategy.touching(this.getActor(), tags, null);
     }
 
     public Set<Actor> overlapping( String[] including, String[] excluding )
     {
-        return this.collisionStrategy.overlapping(this.actor,including, excluding);
+        return this.collisionStrategy.overlapping(this.getActor(), including, excluding);
     }
 
     public Set<Actor> touching( String[] including, String[] excluding )
     {
-        return this.collisionStrategy.touching(this.actor,including, excluding);
+        return this.collisionStrategy.touching(this.getActor(), including, excluding);
     }
 
     public void play( String soundName )
     {
-        this.actor.play(soundName);
+        this.getActor().play(soundName);
     }
 
     public void event( String poseName )
     {
-        this.actor.event(poseName);
+        this.getActor().event(poseName);
     }
 
     public void endEvent( String poseName )
     {
-        this.actor.endEvent(poseName);
+        this.getActor().endEvent(poseName);
     }
 
     public void deathEvent( String poseName )
     {
-        this.actor.deathEvent(poseName);
+        this.getActor().deathEvent(poseName);
     }
 
     public void sleep( double seconds )
     {
-        this.actor.sleep(seconds);
+        this.getActor().sleep(seconds);
     }
 
     /**
@@ -243,23 +261,37 @@ public abstract class Behaviour implements MessageListener
 
     protected void tickHandler()
     {
-        Animation animation = actor.getAnimation();
+        Animation animation = this.getActor().getAnimation();
         if (animation != null) {
 
-            animation.tick(actor);
+            animation.tick(this.getActor());
             if (animation.isFinished()) {
-                actor.setAnimation(null);
-                if (actor.isDying()) {
-                    actor.kill();
+                this.getActor().setAnimation(null);
+                if (this.getActor().isDying()) {
+                    this.getActor().kill();
                     return;
                 }
             }
         }
-        if (!actor.isDead()) {
+        if (!this.getActor().isDead()) {
             this.tick();
         }
     }
-    
+
     public abstract void tick();
 
+    public Behaviour clone()
+    {
+        try {
+            Behaviour result = (Behaviour) super.clone();
+            result.actor = null;
+            
+            return result;
+            
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
 }
