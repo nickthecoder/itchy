@@ -20,8 +20,9 @@ import uk.co.nickthecoder.itchy.util.TagMembership;
 import uk.co.nickthecoder.jame.RGBA;
 import uk.co.nickthecoder.jame.Surface;
 
-public class Actor extends Task
+public class Actor
 {
+
     private static int _nextId = 1;
 
     private final int _id;
@@ -48,8 +49,6 @@ public class Actor extends Task
     private boolean active = false;
     private boolean dead = false;
     private boolean dying = false;
-
-    private boolean ticking = false;
 
     private double activationDelay;
     
@@ -373,14 +372,8 @@ public class Actor extends Task
 
     public void activateAfter( final double seconds )
     {
-        Itchy.singleton.gameLoopJob.add(new Task() {
-            @Override
-            public void run()
-            {
-                sleep(seconds);
-                activate();
-            }
-        });
+        this.setBehaviour( new DelayedActivation(seconds, this.getBehaviour()) );
+        this.activate();
     }
 
     public void activate()
@@ -394,13 +387,7 @@ public class Actor extends Task
         if (!this.active) {
             this.addTag("active");
             this.active = true;
-            Itchy.singleton.gameLoopJob.add(new Task() {
-                @Override
-                public void run()
-                {
-                    Actor.this.getBehaviour().onActivate();
-                }
-            });
+            getBehaviour().onActivate();
         }
     }
 
@@ -413,13 +400,7 @@ public class Actor extends Task
         if (this.active) {
             this.active = false;
             this.removeTag("active");
-            Itchy.singleton.gameLoopJob.add(new Task() {
-                @Override
-                public void run()
-                {
-                    Actor.this.getBehaviour().onDeactivate();
-                }
-            });
+            getBehaviour().onDeactivate();
         }
     }
 
@@ -444,13 +425,8 @@ public class Actor extends Task
         if (!this.dead) {
             this.dead = true;
             this.deactivate();
-            Itchy.singleton.addTask(new Task() {
-                @Override
-                public void run()
-                {
-                    Actor.this.getBehaviour().onKill();
-                }
-            });
+            getBehaviour().onKill();
+            
             this.tagMembership.removeAll();
         }
     }
@@ -711,22 +687,9 @@ public class Actor extends Task
 
     public void tick()
     {
-        // If a task sleeps during a tick, don't allow it to tick again until it awakes from its
-        // sleep.
-        if (this.ticking) {
-            return;
-        }
-
-        try {
-            this.ticking = true;
-
-            getBehaviour().tickHandler();
-        } finally {
-            this.ticking = false;
-        }
+        getBehaviour().tickHandler();
     }
 
-    @Override
     public String toString()
     {
         return "Actor #" + this._id + " @ " + getX() + "," + getY() +
@@ -735,9 +698,4 @@ public class Actor extends Task
             (getBehaviour() == null ? "" : "(" + getBehaviour().getClass().getName() + ")");
     }
 
-    @Override
-    public void run()
-    {
-        this.tick();
-    }
 }

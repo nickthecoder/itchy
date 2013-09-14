@@ -8,11 +8,6 @@ Jame is out of date, need to rebuild for win32 and i386 and ARM??
 What's Next
 ===========
 
-Remove or fix "sleep", so that it can't go wrong in conjunction with pause.
-    Maybe only "tick" can sleep?
-    Remove sleep from iThrust BallFactory
-    
-
 Make all Itchy methods static?
 
 EaseButton to show the thumbnail graph.

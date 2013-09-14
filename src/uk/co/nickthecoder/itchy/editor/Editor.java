@@ -77,7 +77,7 @@ public final class Editor extends Game
     @Override
     public void init()
     {
-        Itchy.singleton.setGuiRules(this.rules);
+        this.setRules(this.rules);
         Itchy.singleton.enableKeyboardRepeat(true);
 
         this.mainGuiPose = new GuiPose();

@@ -13,6 +13,7 @@ import java.util.prefs.Preferences;
 import uk.co.nickthecoder.itchy.editor.Editor;
 import uk.co.nickthecoder.itchy.extras.Pause;
 import uk.co.nickthecoder.itchy.gui.GuiPose;
+import uk.co.nickthecoder.itchy.gui.Rules;
 import uk.co.nickthecoder.itchy.util.AutoFlushPreferences;
 import uk.co.nickthecoder.jame.Keys;
 import uk.co.nickthecoder.jame.Rect;
@@ -23,11 +24,9 @@ import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 import uk.co.nickthecoder.jame.event.QuitEvent;
 
-public abstract class Game extends Task implements EventListener, MessageListener
+public abstract class Game implements EventListener, MessageListener
 {
     public Resources resources = new Resources();
-
-    private boolean ticking = false;
 
     private AutoFlushPreferences preferences;
 
@@ -65,6 +64,8 @@ public abstract class Game extends Task implements EventListener, MessageListene
 
     public Pause pause;
 
+    private Rules rules;
+    
     public Game( String title, int width, int height ) throws Exception
     {
         this.pause = new Pause(this);
@@ -512,12 +513,23 @@ public abstract class Game extends Task implements EventListener, MessageListene
         Itchy.singleton.endGame();
     }
 
+    public void setRules( Rules rules )
+    {
+        this.rules = rules;
+    }
+
+
+    public Rules getRules()
+    {
+        return this.rules;
+    }
+
     public void showWindow( GuiPose window )
     {
         this.windows.add(window);
 
         if (window.getRules() == null) {
-            window.setRules(Itchy.singleton.rules);
+            window.setRules(this.rules);
         }
         window.reStyle();
         window.forceLayout();
@@ -559,25 +571,6 @@ public abstract class Game extends Task implements EventListener, MessageListene
             }
         }
 
-    }
-
-    /**
-     * Part of the Task interface, and simply calls 'tick'. Your subclass should override tick, and
-     * do nothing with 'run'.
-     */
-    @Override
-    public void run()
-    {
-        if (this.ticking) {
-            return;
-        }
-
-        try {
-            this.ticking = true;
-            this.tick();
-        } finally {
-            this.ticking = false;
-        }
     }
 
     public void startEditor()

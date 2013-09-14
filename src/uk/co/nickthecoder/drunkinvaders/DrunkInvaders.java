@@ -216,7 +216,6 @@ public class DrunkInvaders extends Game
         } else if ("fadedOut".equals(message)) {
 
             this.mainLayer.clear();
-            Itchy.singleton.completeTasks();
             this.fadingOut = false;
             if ( ! this.loadScene(this.sceneName) ) {
                 this.levelNumber = 1;

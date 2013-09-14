@@ -1,16 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0 which accompanies this
+ * distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
-
 import java.util.Stack;
 
-import uk.co.nickthecoder.itchy.gui.Rules;
 import uk.co.nickthecoder.jame.Audio;
 import uk.co.nickthecoder.jame.Events;
 import uk.co.nickthecoder.jame.Keys;
@@ -33,8 +29,6 @@ import uk.co.nickthecoder.jame.event.KeyboardEvent;
  * coordinates are stored as integers and are used when dealing with the low-level processing of
  * images.
  * 
- * @author nick
- * 
  */
 public class Itchy
 {
@@ -53,14 +47,13 @@ public class Itchy
     public static Itchy singleton = new Itchy();
 
     /**
-     * Holds a boolean for each key.
-     * On key pressed events sets the appropriate boolean, and key released
-     * events reset the boolean. Uses the Keys values to index the array.
+     * Holds a boolean for each key. On key pressed events sets the appropriate boolean, and key
+     * released events reset the boolean. Uses the Keys values to index the array.
      */
     private boolean[] keyboardState;
 
     public Surface screen;
-    
+
     private boolean running;
 
     private Game game;
@@ -70,9 +63,6 @@ public class Itchy
      */
     private Stack<Game> gameStack = new Stack<Game>();
 
-
-    public Rules rules;
-
     public int keyboardRepeatDelay = Events.DEFAULT_REPEAT_DELAY;
 
     public int keyboardRepeatInterval = Events.DEFAULT_REPEAT_INTERVAL;
@@ -80,23 +70,21 @@ public class Itchy
     public FrameRate frameRate = createFrameRate();
 
     public final SoundManager soundManager = new SoundManager();
-    
-    GameLoopJob gameLoopJob = new GameLoopJob();
 
     private Itchy()
     {
     }
-    
-    public void init(Game game) throws Exception
+
+    public void init( Game game ) throws Exception
     {
         Video.init();
         Audio.init();
         Audio.open();
         Events.enableKeyTranslation(true);
-        
+
         this.keyboardState = new boolean[KEYBOARD_STATE_SIZE];
-        
-        setScreenMode( game );
+
+        setScreenMode(game);
     }
 
     public Game getGame()
@@ -109,12 +97,7 @@ public class Itchy
         return this.game.resources;
     }
 
-    public void setGuiRules( Rules rules )
-    {
-        this.rules = rules;
-    }
-
-    private void setScreenMode(Game game)
+    private void setScreenMode( Game game )
     {
         if (game.getTitle() == null) {
             Video.setWindowTitle("Itchy");
@@ -130,12 +113,12 @@ public class Itchy
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
     }
-    
+
     public void startGame( Game game )
     {
-        if (this.game!=null) {
+        if (this.game != null) {
             this.gameStack.push(this.game);
         }
         this.game = game;
@@ -157,15 +140,15 @@ public class Itchy
 
     public void endGame()
     {
-        soundManager.stopAll();
-        
+        this.soundManager.stopAll();
+
         if (this.gameStack.isEmpty()) {
             this.terminate();
         } else {
             this.game = this.gameStack.pop();
             try {
                 setScreenMode(this.game);
-            }  catch (Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             mainLoop();
@@ -213,46 +196,22 @@ public class Itchy
             if (event == null) {
                 break;
             } else {
-                this.queueEvent(event);
+                processEvent(event);
             }
         }
 
         this.soundManager.tick();
-        this.gameLoopJob.start();
 
-    }
-
-    private void queueEvent( final Event event )
-    {
-        this.gameLoopJob.add(new Task() {
-
-            @Override
-            public void run()
-            {
-                Itchy.this.processEvent(event);
-            }
-        });
+        this.game.tick();
+        for (Actor actor : Actor.allByTag("active")) {
+            actor.tick();
+        }
     }
 
     private void doRedraw()
     {
-        this.gameLoopJob.lock();
-        try {
-            this.game.render( this.screen );
-            this.screen.flip();
-        } finally {
-            this.gameLoopJob.unlock();
-        }
-    }
-
-    public void completeTasks()
-    {
-        this.gameLoopJob.completeTasks();
-    }
-
-    public void addTask( Task task )
-    {
-        this.gameLoopJob.add(task);
+        this.game.render(this.screen);
+        this.screen.flip();
     }
 
     public void endOfFrame()
@@ -314,11 +273,10 @@ public class Itchy
         return this.keyboardState[Keys.LSUPER] || this.keyboardState[Keys.RSUPER];
     }
 
-
     private void processEvent( Event event )
     {
-        this.game.processEvent( event );
-        
+        this.game.processEvent(event);
+
         if (event instanceof KeyboardEvent) {
             KeyboardEvent ke = (KeyboardEvent) event;
 
@@ -327,26 +285,14 @@ public class Itchy
                 if ((key > 0) && (key < this.keyboardState.length)) {
                     this.keyboardState[key] = true;
                 }
-            
+
             } else if (ke.isReleased()) {
-    
+
                 int key = ke.symbol;
                 if ((key > 0) && (key < this.keyboardState.length)) {
                     this.keyboardState[key] = false;
                 }
             }
         }
-    }
-    
-
-    public Rules getRules()
-    {
-        return this.rules;
-    }
-
-
-
-    public void debug()
-    {
     }
 }

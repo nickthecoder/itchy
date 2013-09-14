@@ -119,13 +119,7 @@ public abstract class Behaviour implements MessageListener, Cloneable
     public void detatch()
     {
         this.getActor().removeTag(this.getClass().getName());
-        Itchy.singleton.gameLoopJob.add(new Task() {
-            @Override
-            public void run()
-            {
-                Behaviour.this.onDetach();
-            }
-        });
+        onDetach();
     }
 
     public Actor getActor()
@@ -204,11 +198,6 @@ public abstract class Behaviour implements MessageListener, Cloneable
         this.getActor().deathEvent(poseName);
     }
 
-    public void sleep( double seconds )
-    {
-        this.getActor().sleep(seconds);
-    }
-
     /**
      * Called when the Behaviour is first attached to its actor. For most behaviours, this will be
      * when the actor is first created. You may override this method to do one-time initialisation.
@@ -232,21 +221,14 @@ public abstract class Behaviour implements MessageListener, Cloneable
         // do nothing
     }
 
-    public void sendMessage( final String message )
+    public void sendMessage( String message )
     {
-        Itchy.singleton.addTask(new Task() {
-            @Override
-            public void run()
-            {
-                Behaviour.this.onMessage(message);
-            }
-
-        });
+        onMessage(message);
     }
 
     public void onKill()
     {
-        // do nothing
+        resetCollisionStrategy();
     }
 
     public void onActivate()
