@@ -140,7 +140,7 @@ public class DrunkInvaders extends Game
                 {
                     this.setText(
                         "Aliens Remaining : " + DrunkInvaders.this.aliensRemaining + "\n" +
-                            "Dropped Frames   : " + Itchy.singleton.frameRate.getDroppedFrames()
+                            "Dropped Frames   : " + Itchy.frameRate.getDroppedFrames()
                         );
                 }
             };

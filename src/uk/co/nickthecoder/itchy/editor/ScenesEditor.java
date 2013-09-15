@@ -208,7 +208,7 @@ public class ScenesEditor extends SubEditor
             return;
         }
 
-        Itchy.singleton.getGame().hideWindow(this.editWindow);
+        Itchy.getGame().hideWindow(this.editWindow);
 
     }
 

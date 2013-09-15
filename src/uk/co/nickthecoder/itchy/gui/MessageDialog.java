@@ -27,7 +27,7 @@ public class MessageDialog extends Window
             @Override
             public void action()
             {
-                Itchy.singleton.getGame().hideWindow(MessageDialog.this);
+                Itchy.getGame().hideWindow(MessageDialog.this);
             }
         });
         buttons.addChild(ok);
@@ -37,7 +37,7 @@ public class MessageDialog extends Window
     @Override
     public void show()
     {
-        Itchy.singleton.getGame().showWindow(this);
+        Itchy.getGame().showWindow(this);
     }
 
 }

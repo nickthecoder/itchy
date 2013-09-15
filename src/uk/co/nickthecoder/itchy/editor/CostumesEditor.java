@@ -37,6 +37,8 @@ import uk.co.nickthecoder.itchy.gui.TableModelColumn;
 import uk.co.nickthecoder.itchy.gui.TableModelRow;
 import uk.co.nickthecoder.itchy.gui.TableRow;
 import uk.co.nickthecoder.itchy.gui.TextBox;
+import uk.co.nickthecoder.itchy.gui.VerticalLayout;
+import uk.co.nickthecoder.itchy.gui.Window;
 import uk.co.nickthecoder.jame.Surface;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 
@@ -53,7 +55,7 @@ public class CostumesEditor extends SubEditor
     private Button buttonExtendedFrom;
 
     private ComboBox behaviour;
-    
+
     private Table eventsTable;
 
     private SimpleTableModel eventsTableModel;
@@ -226,7 +228,7 @@ public class CostumesEditor extends SubEditor
                         @Override
                         public void action()
                         {
-                            ManagedSound cs = (ManagedSound) data; 
+                            ManagedSound cs = (ManagedSound) data;
                             SoundResource resource = cs.soundResource;
                             resource.getSound().play();
                         }
@@ -336,7 +338,7 @@ public class CostumesEditor extends SubEditor
     @Override
     protected void addDetailButtons( Container buttons )
     {
-        Button edit = new Button(new Label("Edit"));
+        Button edit = new Button("Edit");
         edit.addActionListener(new ActionListener() {
             @Override
             public void action()
@@ -346,7 +348,7 @@ public class CostumesEditor extends SubEditor
         });
         buttons.addChild(edit);
 
-        Button add = new Button(new Label("Add"));
+        Button add = new Button("Add");
         add.addActionListener(new ActionListener() {
             @Override
             public void action()
@@ -356,7 +358,7 @@ public class CostumesEditor extends SubEditor
         });
         buttons.addChild(add);
 
-        Button remove = new Button(new Label("Remove"));
+        Button remove = new Button("Remove");
         remove.addActionListener(new ActionListener() {
             @Override
             public void action()
@@ -432,6 +434,16 @@ public class CostumesEditor extends SubEditor
 
     private void onAddFont()
     {
+        FontPicker picker = new FontPicker(this.editor.resources) {
+            @Override
+            public void pick( FontResource fontResource )
+            {
+                Costume costume = CostumesEditor.this.currentCostumeResource.costume;
+                costume.addFont("newEvent", fontResource);
+                CostumesEditor.this.rebuiltEventTable();
+            }
+        };
+        picker.show();
     }
 
     private void onRemoveEvent()
@@ -439,20 +451,140 @@ public class CostumesEditor extends SubEditor
         Costume costume = this.currentCostumeResource.costume;
 
         TableModelRow row = this.eventsTable.getCurrentTableModelRow();
+
         if (row != null) {
+
             Object data = row.getData(EVENT_RESOURCE_COLUMN);
             String name = (String) row.getData(0);
 
             if (data instanceof PoseResource) {
                 costume.removePose(name, (PoseResource) data);
+
+            } else if (data instanceof String) {
+                costume.removeString(name, (String) data);
+
+            } else if (data instanceof AnimationResource) {
+                costume.removeAnimation(name, (AnimationResource) data);
+
+            } else if (data instanceof FontResource) {
+                costume.removeFont(name, (FontResource) data);
+
+            } else if (data instanceof ManagedSound) {
+                costume.removeSound(name, (ManagedSound) data);
+
+            } else {
+                System.err.println("Unknown data : " + data.getClass().getName());
             }
 
             this.rebuiltEventTable();
         }
     }
 
+    private TextBox txtEventName;
+
+    private TextBox txtEventString;
+
+    private PosePickerButton eventPosePickerButton;
+
+    private FontPickerButton eventFontPickerButton;
+    
     private void onEditEvent()
     {
+        TableModelRow row = this.eventsTable.getCurrentTableModelRow();
+        String name = (String) row.getData(0);
+        Object data = row.getData(EVENT_RESOURCE_COLUMN);
+
+        if (row != null) {
+
+            final Window window = new Window("Edit Event");
+            window.clientArea.setFill(true, true);
+            window.clientArea.setLayout(new VerticalLayout());
+
+            Container form = new Container();
+            form.addStyle("form");
+            GridLayout grid = new GridLayout(form, 2);
+            form.setLayout(grid);
+            window.clientArea.addChild(form);
+
+            this.txtEventName = new TextBox(name);
+            grid.addRow("Event Name", this.txtEventName);
+
+            if (data instanceof String) {
+                this.txtEventString = new TextBox((String) data);
+                grid.addRow("String", this.txtEventString);
+
+            } else if (data instanceof PoseResource) {
+                this.eventPosePickerButton = new PosePickerButton(this.getResources(),
+                    (PoseResource) data);
+                grid.addRow("Pose", this.eventPosePickerButton);
+
+            } else if (data instanceof FontResource) {
+                this.eventFontPickerButton = new FontPickerButton(this.getResources(),
+                    (FontResource) data);
+                grid.addRow("Pose", this.eventFontPickerButton);
+
+            } else {
+                System.err.println("Unexpected type in onEditEvent : " + data.getClass().getName());
+            }
+
+            Container buttons = new Container();
+            buttons.addStyle("buttonBar");
+            buttons.setXAlignment(0.5f);
+
+            Button ok = new Button(new Label("Ok"));
+            ok.addActionListener(new ActionListener() {
+                @Override
+                public void action()
+                {
+                    CostumesEditor.this.onEditEventOk();
+                    window.destroy();
+                }
+            });
+            Button cancel = new Button(new Label("Cancel"));
+            cancel.addActionListener(new ActionListener() {
+                @Override
+                public void action()
+                {
+                    window.destroy();
+                }
+            });
+            buttons.addChild(ok);
+            buttons.addChild(cancel);
+
+            window.clientArea.addChild(buttons);
+
+            Itchy.getGame().showWindow(window);
+        }
+    }
+
+    private void onEditEventOk()
+    {
+        Costume costume = this.currentCostumeResource.costume;
+        TableModelRow row = this.eventsTable.getCurrentTableModelRow();
+
+        if (row != null) {
+
+            String name = (String) row.getData(0);
+            Object data = row.getData(EVENT_RESOURCE_COLUMN);
+            onRemoveEvent();
+
+            if (data instanceof String) {
+                costume.addString(name, (String) data);
+
+            } else if (data instanceof PoseResource) {
+                costume.addPose(name, this.eventPosePickerButton.getValue());
+
+            } else if (data instanceof FontResource) {
+                costume.addFont(name, this.eventFontPickerButton.getValue());
+
+            } else {
+                System.err.println("Unexpected type in onEditEventOk : " +
+                    data.getClass().getName());
+            }
+        }
+
+        CostumesEditor.this.rebuiltEventTable();
+
     }
 
     private void rebuiltEventTable()
@@ -505,7 +637,7 @@ public class CostumesEditor extends SubEditor
         } else {
             this.table.updateRow(this.table.getCurrentTableModelRow());
         }
-        Itchy.singleton.getGame().hideWindow(this.editWindow);
+        Itchy.getGame().hideWindow(this.editWindow);
 
     }
 

@@ -48,7 +48,7 @@ public class ShadowText extends Projectile
 
     public ShadowText font( String name )
     {
-        this.font = Itchy.singleton.getGame().resources.getFont(name);
+        this.font = Itchy.getGame().resources.getFont(name);
         return this;
     }
 
@@ -137,7 +137,7 @@ public class ShadowText extends Projectile
     public Actor createActor( Actor source )
     {
         if (this.font == null) {
-            this.font = Itchy.singleton.getResources().getDefaultFont();
+            this.font = Itchy.getResources().getDefaultFont();
         }
         TextPose text = new TextPose(this.text, this.font, this.fontSize, this.color);
         TextPose shadow = new TextPose(this.text, this.font, this.fontSize, this.shadow);

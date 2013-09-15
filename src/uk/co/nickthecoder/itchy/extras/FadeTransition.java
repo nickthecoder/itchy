@@ -32,10 +32,10 @@ public class FadeTransition extends NullSceneBehaviour
         this.fadeActor.getAppearance().setAlpha(0);
         this.fadeActor.activate();
 
-        Itchy.singleton.getGame().getPopupLayer().add(this.fadeActor);
+        Itchy.getGame().getPopupLayer().add(this.fadeActor);
 
         this.sceneName = sceneName;
-        Itchy.singleton.getGame().getLayers().deactivateAll();
+        Itchy.getGame().getLayers().deactivateAll();
 
         AlphaAnimation fadeOut = new AlphaAnimation(fadeOutDuration, NumericAnimation.linear, 255);
         AlphaAnimation fadeIn = new AlphaAnimation(fadeInDuration, NumericAnimation.linear, 0);
@@ -47,10 +47,10 @@ public class FadeTransition extends NullSceneBehaviour
             @Override
             public void finished()
             {
-                Itchy.singleton.getGame().getLayers().clear();
-                Itchy.singleton.getGame().getLayers().reset();
+                Itchy.getGame().getLayers().clear();
+                Itchy.getGame().getLayers().reset();
 
-                Itchy.singleton.getGame().loadScene(FadeTransition.this.sceneName);
+                Itchy.getGame().loadScene(FadeTransition.this.sceneName);
             }
         });
 

@@ -175,7 +175,7 @@ public class Tetra extends Game
     public void onMessage( String message )
     {
         if (message.equals("quit")) {
-            Itchy.singleton.terminate();
+            Itchy.terminate();
         }
         if (message.equals("play")) {
             this.play();

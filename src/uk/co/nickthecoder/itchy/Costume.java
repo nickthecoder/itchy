@@ -95,6 +95,13 @@ public class Costume
         choices.add(value);
     }
 
+    public void removeString( String name, String value )
+    {
+        List<String> choices = this.stringChoices.get(name);
+        assert (choices.contains(value));
+        choices.remove(value);
+    }
+
     public String getString( String name, String defaultValue )
     {
         String result = this.getString(name);
@@ -203,6 +210,13 @@ public class Costume
         return managedSound;
     }
 
+    public void removeSound( String name, ManagedSound value )
+    {
+        List<ManagedSound> choices = this.soundChoices.get(name);
+        assert (choices.contains(value));
+        choices.remove(value);
+    }
+    
     public SoundResource getSoundResource( String name )
     {
         ManagedSound cs = getCostumeSound(name);
@@ -248,6 +262,13 @@ public class Costume
         }
         choices.add(fontResource);
     }
+    
+    public void removeFont( String name, FontResource value )
+    {
+        List<FontResource> choices = this.fontChoices.get(name);
+        assert (choices.contains(value));
+        choices.remove(value);
+    }
 
     public FontResource getFontResource( String name )
     {
@@ -285,6 +306,13 @@ public class Costume
         choices.add(animationResource);
     }
 
+    public void removeAnimation( String name, AnimationResource value )
+    {
+        List<AnimationResource> choices = this.animationChoices.get(name);
+        assert (choices.contains(value));
+        choices.remove(value);
+    }
+    
     public AnimationResource getAnimationResource( String name )
     {
         List<AnimationResource> animationList = this.animationChoices.get(name);

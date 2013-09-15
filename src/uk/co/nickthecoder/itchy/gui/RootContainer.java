@@ -21,7 +21,7 @@ public abstract class RootContainer extends Container
     {
         super();
         this.type = "root";
-        this.rules = Itchy.singleton.getGame().getRules();
+        this.rules = Itchy.getGame().getRules();
     }
 
     public void style( Component component )
@@ -94,7 +94,7 @@ public abstract class RootContainer extends Container
 
     public void setFocus( Component component )
     {
-        Itchy.singleton.getGame().setFocus(component);
+        Itchy.getGame().setFocus(component);
 
         if (RootContainer.focus == component) {
             return;

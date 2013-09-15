@@ -17,6 +17,7 @@
     <rule criteria=".costumes" padding="0" spacing="2"/>
     <rule criteria=".costumes button" width="60" height="60" padding="0"/>
     
-   
+    <rule criteria=".exampleFont" font="null" fontSize="30"/>
+
 </rules>
 

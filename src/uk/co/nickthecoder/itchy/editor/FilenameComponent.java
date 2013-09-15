@@ -105,7 +105,7 @@ public class FilenameComponent extends Container
             }
         };
         this.openDialog.setDirectory(this.resources.getDirectory());
-        Itchy.singleton.getGame().showWindow(this.openDialog);
+        Itchy.getGame().showWindow(this.openDialog);
     }
 
     public void onChanged()
@@ -118,11 +118,11 @@ public class FilenameComponent extends Container
     private void onPickFilename( File file )
     {
         if (file == null) {
-            Itchy.singleton.getGame().hideWindow(this.openDialog);
+            Itchy.getGame().hideWindow(this.openDialog);
         } else {
             String filename = this.resources.makeRelativeFilename(file);
             this.textBox.setText(filename);
-            Itchy.singleton.getGame().hideWindow(this.openDialog);
+            Itchy.getGame().hideWindow(this.openDialog);
         }
     }
 

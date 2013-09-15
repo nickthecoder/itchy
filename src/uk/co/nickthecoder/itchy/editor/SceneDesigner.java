@@ -195,7 +195,7 @@ public class SceneDesigner implements MouseListener, KeyListener
 
         // Can be ANY of the scrolling layers, so I picked the first for convenience.
         this.designLayers.getChildren().get(0).addMouseListener(this);
-        Itchy.singleton.getGame().addKeyListener(this);
+        Itchy.getGame().addKeyListener(this);
 
         this.scene.create(this.designLayers, true);
 
@@ -214,7 +214,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.editor.getLayers().remove(this.glassLayer);
         this.editor.getLayers().remove(this.guiLayer);
 
-        Itchy.singleton.getGame().removeKeyListener(this);
+        Itchy.getGame().removeKeyListener(this);
         this.designLayers.getChildren().get(0).removeMouseListener(this);
 
         this.toolboxPose.destroy();
@@ -734,9 +734,9 @@ public class SceneDesigner implements MouseListener, KeyListener
             return true;
         }
 
-        if (Itchy.singleton.isCtrlDown()) {
+        if (Itchy.isCtrlDown()) {
 
-            int scrollAmount = Itchy.singleton.isShiftDown() ? 100 : 10;
+            int scrollAmount = Itchy.isShiftDown() ? 100 : 10;
 
             if (event.symbol == Keys.s) {
                 this.onSave();
@@ -820,7 +820,7 @@ public class SceneDesigner implements MouseListener, KeyListener
 
         } else {
 
-            int moveAmount = Itchy.singleton.isShiftDown() ? 10 : 1;
+            int moveAmount = Itchy.isShiftDown() ? 10 : 1;
 
             
             if (event.symbol == Keys.PAGEUP) {
@@ -891,7 +891,7 @@ public class SceneDesigner implements MouseListener, KeyListener
     @Override
     public boolean onMouseDown( MouseButtonEvent event )
     {
-        if ((event.button == 2) || ((event.button == 1) && Itchy.singleton.isShiftDown())) {
+        if ((event.button == 2) || ((event.button == 1) && Itchy.isShiftDown())) {
             this.setMode(MODE_DRAG_SCROLL);
             this.beginDrag(event);
             return true;
@@ -916,9 +916,9 @@ public class SceneDesigner implements MouseListener, KeyListener
                 }
             }
 
-            boolean fromBottom = false; // Itchy.singleton.isShiftDown();
+            boolean fromBottom = false; // Itchy.isShiftDown();
 
-            if (Itchy.singleton.isCtrlDown()) {
+            if (Itchy.isCtrlDown()) {
 
                 for (Layer child : fromBottom ?
                     this.designLayers.getChildren() :
@@ -988,7 +988,7 @@ public class SceneDesigner implements MouseListener, KeyListener
             actor.setBehaviour(behaviour);
             this.currentDesignLayer.add(actor);
 
-            if (!Itchy.singleton.isShiftDown()) {
+            if (!Itchy.isShiftDown()) {
                 this.setMode(MODE_SELECT);
                 this.selectActor(actor);
                 
@@ -1485,13 +1485,13 @@ public class SceneDesigner implements MouseListener, KeyListener
 
             super.moveBy(dx, dy);
 
-            Actor other = Itchy.singleton.isShiftDown() ? this.target : this.opposite.getActor();
+            Actor other = Itchy.isShiftDown() ? this.target : this.opposite.getActor();
 
             double scaleX = (other.getX() - this.getActor().getX()) / (other.getX() - this.startX);
             double scaleY = (other.getY() - this.getActor().getY()) / (other.getY() - this.startY);
             double scale = Math.min(scaleX, scaleY);
 
-            if (!Itchy.singleton.isShiftDown()) {
+            if (!Itchy.isShiftDown()) {
                 this.target.moveBy(dx * ratioX, dy * ratioY);
             }
 

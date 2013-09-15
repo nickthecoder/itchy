@@ -291,7 +291,7 @@ public class AnimationsEditor extends SubEditor
             this.table.updateRow(this.table.getCurrentTableModelRow());
         }
 
-        Itchy.singleton.getGame().hideWindow(this.editWindow);
+        Itchy.getGame().hideWindow(this.editWindow);
     }
 
     @Override

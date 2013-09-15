@@ -72,7 +72,7 @@ public class Timer
         if ( this.ignorePauses ) {
             return System.currentTimeMillis();
         } else {
-            return Itchy.singleton.getGame().gameTimeMillis();
+            return Itchy.getGame().gameTimeMillis();
         }
     }
     

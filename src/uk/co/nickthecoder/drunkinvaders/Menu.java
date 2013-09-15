@@ -17,7 +17,7 @@ public class Menu extends NullSceneBehaviour
     public boolean onKeyDown( KeyboardEvent ke )
     {
         if (ke.symbol == Keys.ESCAPE) {
-            Itchy.singleton.terminate();
+            Itchy.terminate();
             return true;
         }
 
@@ -26,14 +26,14 @@ public class Menu extends NullSceneBehaviour
             return true;
         }
 
-        if (ke.symbol == Keys.a) {
+        if ((ke.symbol == Keys.a) || (ke.symbol == Keys.c))  {
             DrunkInvaders.game.startScene("about");
         }
 
-        if (ke.symbol == Keys.w) {
-            DrunkInvaders.game.startScene("completed");
+        if ((ke.symbol == Keys.F12) || (ke.symbol == Keys.e))  {
+            DrunkInvaders.game.startEditor();
         }
-        
+
         return false;
     }
 

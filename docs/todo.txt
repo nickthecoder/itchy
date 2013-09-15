@@ -8,7 +8,11 @@ Jame is out of date, need to rebuild for win32 and i386 and ARM??
 What's Next
 ===========
 
-Make all Itchy methods static?
+Component : Override all rules. Currently only Font can be overridden.  
+    Allow to be reset to default (i.e. be restyled). 
+    Rename to Style and StyleSheet?
+    
+Finish CostumesEditor
 
 EaseButton to show the thumbnail graph.
 
@@ -17,8 +21,6 @@ Water looks naff
 No instructions for picking up water
 
 Move appearance properties to their own tab, rather than on Actor tab.
-
-Finish CostumesEditor
 
 Implement Costume custom properties
     GUI

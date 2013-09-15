@@ -103,7 +103,7 @@ public class Ship extends Bouncy implements Shootable
     public void tick()
     {
 
-        if (Itchy.singleton.isKeyDown(Keys.LSHIFT) || Itchy.singleton.isKeyDown(Keys.RSHIFT)) {
+        if (Itchy.isKeyDown(Keys.LSHIFT) || Itchy.isKeyDown(Keys.RSHIFT)) {
             if (!this.shielded) {
                 activateShield();
             }
@@ -121,10 +121,10 @@ public class Ship extends Bouncy implements Shootable
 
             chargeShield();
 
-            if (Itchy.singleton.isKeyDown(Keys.LEFT)) {
+            if (Itchy.isKeyDown(Keys.LEFT)) {
                 this.turn(this.rotationSpeed);
             }
-            if (Itchy.singleton.isKeyDown(Keys.RIGHT)) {
+            if (Itchy.isKeyDown(Keys.RIGHT)) {
                 this.turn(-this.rotationSpeed);
             }
 
@@ -137,7 +137,7 @@ public class Ship extends Bouncy implements Shootable
                 }
             } else {
 
-                if (Itchy.singleton.isKeyDown(Keys.SPACE)) {
+                if (Itchy.isKeyDown(Keys.SPACE)) {
                     this.fire();
                 }
             }

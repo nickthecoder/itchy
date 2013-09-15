@@ -166,7 +166,9 @@ public class Rule
             }
         }
 
-        component.setFont(this.font);
+        if (this.font != null) {
+            component.setFontFromRule(this.font);
+        }
 
         if (this.fontSize != NOT_SET) {
             component.setFontSize(this.fontSize);

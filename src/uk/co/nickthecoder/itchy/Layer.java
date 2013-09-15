@@ -137,7 +137,7 @@ public abstract class Layer implements MouseListener
     {
         if (this.mouseListeners == null) {
             this.mouseListeners = new ArrayList<MouseListener>();
-            Itchy.singleton.getGame().addMouseListener(this);
+            Itchy.getGame().addMouseListener(this);
         }
         this.mouseListeners.add(listener);
     }
@@ -147,7 +147,7 @@ public abstract class Layer implements MouseListener
         this.mouseListeners.remove(listener);
         if (this.mouseListeners.size() == 0) {
             this.mouseListeners = null;
-            Itchy.singleton.getGame().removeMouseListener(this);
+            Itchy.getGame().removeMouseListener(this);
         }
     }
 

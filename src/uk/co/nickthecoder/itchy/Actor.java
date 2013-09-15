@@ -251,7 +251,7 @@ public class Actor
 
         ManagedSound cs = costume.getCostumeSound(eventName);
         if (cs != null) {
-            Itchy.singleton.soundManager.play( this, eventName, cs );
+            Itchy.soundManager.play( this, eventName, cs );
         }
     }
 
@@ -263,7 +263,7 @@ public class Actor
      */
     public void endEvent( String eventName )
     {
-        Itchy.singleton.soundManager.end(this, eventName);
+        Itchy.soundManager.end(this, eventName);
     }
     
     public void deathEvent( String eventName )
@@ -282,7 +282,7 @@ public class Actor
 
     public void deathAnimation( String animationName )
     {
-        Animation animation = Itchy.singleton.getResources().getAnimation(animationName);
+        Animation animation = Itchy.getResources().getAnimation(animationName);
         if (animation == null) {
             this.kill();
         } else {

@@ -201,7 +201,7 @@ public abstract class SubEditor
 
         window.clientArea.addChild(buttons);
 
-        Itchy.singleton.getGame().showWindow(window);
+        Itchy.getGame().showWindow(window);
         this.editWindow = window;
     }
 
@@ -211,7 +211,7 @@ public abstract class SubEditor
 
     protected void onCancel()
     {
-        Itchy.singleton.getGame().hideWindow(this.editWindow);
+        Itchy.getGame().hideWindow(this.editWindow);
     }
 
     protected abstract void remove( Object resource );

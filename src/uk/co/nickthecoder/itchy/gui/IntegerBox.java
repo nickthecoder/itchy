@@ -130,13 +130,13 @@ public class IntegerBox extends EntryBox<IntegerBox>
     {
         if (this.hasFocus) {
             if (mbe.button == Event.BUTTON_WHEELUP) {
-                this.adjust(Itchy.singleton.isKeyDown(Keys.LSHIFT) ||
-                    Itchy.singleton.isKeyDown(Keys.RSHIFT) ? 10 : 1);
+                this.adjust(Itchy.isKeyDown(Keys.LSHIFT) ||
+                    Itchy.isKeyDown(Keys.RSHIFT) ? 10 : 1);
                 return true;
 
             } else if (mbe.button == Event.BUTTON_WHEELDOWN) {
-                this.adjust(Itchy.singleton.isKeyDown(Keys.LSHIFT) ||
-                    Itchy.singleton.isKeyDown(Keys.RSHIFT) ? -10 : -1);
+                this.adjust(Itchy.isKeyDown(Keys.LSHIFT) ||
+                    Itchy.isKeyDown(Keys.RSHIFT) ? -10 : -1);
                 return true;
             }
         }

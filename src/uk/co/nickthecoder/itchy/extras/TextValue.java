@@ -38,7 +38,7 @@ public class TextValue extends Behaviour
     @Override
     public void onActivate()
     {
-        this.beanHelper = new BeanHelper(Itchy.singleton.getGame(), this.access);
+        this.beanHelper = new BeanHelper(Itchy.getGame(), this.access);
         if ( updateInterval > 0 ) {
             timer = new Timer( this.updateInterval);
         }

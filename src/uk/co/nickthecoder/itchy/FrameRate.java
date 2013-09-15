@@ -14,7 +14,7 @@ package uk.co.nickthecoder.itchy;
  * 
  * <pre>
  * <code>
- * Itchy.singleton.frameRate.setRequiredRate( 60 )
+ * Itchy.frameRate.setRequiredRate( 60 )
  * </code>
  * </pre>
  */

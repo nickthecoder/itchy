@@ -86,7 +86,7 @@ public abstract class Game implements EventListener, MessageListener
 
         this.addEventListener(this);
 
-        Itchy.singleton.init(this);
+        Itchy.init(this);
     }
 
     /**
@@ -103,7 +103,7 @@ public abstract class Game implements EventListener, MessageListener
 
     public void start( String sceneName )
     {
-        Itchy.singleton.startGame(this);
+        Itchy.startGame(this);
         if (!this.initialised) {
             init();
             this.initialised = true;
@@ -115,7 +115,7 @@ public abstract class Game implements EventListener, MessageListener
             loadScene(sceneName);
         }
 
-        Itchy.singleton.mainLoop();
+        Itchy.mainLoop();
     }
 
     public abstract void init();
@@ -144,7 +144,7 @@ public abstract class Game implements EventListener, MessageListener
         if (this.preTestSceneName != null) {
             loadScene(this.preTestSceneName);
         }
-        Itchy.singleton.endGame();
+        Itchy.endGame();
     }
 
     public AutoFlushPreferences getPreferences()
@@ -194,7 +194,7 @@ public abstract class Game implements EventListener, MessageListener
                     return;
                 }
             }
-            Itchy.singleton.terminate();
+            Itchy.terminate();
         }
 
         if (event instanceof KeyboardEvent) {
@@ -415,13 +415,13 @@ public abstract class Game implements EventListener, MessageListener
     @Override
     public boolean onQuit()
     {
-        Itchy.singleton.terminate();
+        Itchy.terminate();
         return true;
     }
 
     /**
      * Called when a button is pressed. Most games don't use onKeyDown or onKeyUp during game play,
-     * instead, each Actor uses : Itchy.singleton.isKeyDown( ... ). onKeyDown and onKeyUp are useful
+     * instead, each Actor uses : Itchy.isKeyDown( ... ). onKeyDown and onKeyUp are useful
      * for typing.
      */
     @Override
@@ -432,7 +432,7 @@ public abstract class Game implements EventListener, MessageListener
 
     /**
      * Called when a button is pressed. Most games don't use onKeyDown or onKeyUp during game play,
-     * instead, each Actor uses : Itchy.singleton.isKeyDown( ... ). onKeyDown and onKeyUp are useful
+     * instead, each Actor uses : Itchy.isKeyDown( ... ). onKeyDown and onKeyUp are useful
      * for typing.
      */
     @Override
@@ -510,7 +510,7 @@ public abstract class Game implements EventListener, MessageListener
      */
     public void end()
     {
-        Itchy.singleton.endGame();
+        Itchy.endGame();
     }
 
     public void setRules( Rules rules )

@@ -35,7 +35,7 @@ public class FontProperty<S> extends AbstractProperty<S, Font>
         ) throws Exception
     {
         HashMap<String, Font> hashMap = new HashMap<String, Font>();
-        Resources resources = Itchy.singleton.getGame().resources;
+        Resources resources = Itchy.getGame().resources;
         for (String name : resources.fontNames()) {
             hashMap.put(name, resources.getFont(name));
         }
@@ -85,7 +85,7 @@ public class FontProperty<S> extends AbstractProperty<S, Font>
         if ("".equals(value) || (value == null)) {
             return null;
         }
-        Font result = Itchy.singleton.getGame().resources.getFont(value);
+        Font result = Itchy.getGame().resources.getFont(value);
         if (result == null) {
             throw new NullPointerException();
         }

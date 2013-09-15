@@ -60,7 +60,7 @@ public class GuiPose extends RootContainer implements Pose, EventListener
     {
         super();
 
-        Itchy.singleton.getGame().addEventListener(this);
+        Itchy.getGame().addEventListener(this);
     }
 
     @Override
@@ -252,7 +252,7 @@ public class GuiPose extends RootContainer implements Pose, EventListener
         assert (this.mouseOwner == null);
 
         this.mouseOwner = component;
-        Itchy.singleton.getGame().captureMouse(this);
+        Itchy.getGame().captureMouse(this);
     }
 
     @Override
@@ -261,7 +261,7 @@ public class GuiPose extends RootContainer implements Pose, EventListener
         assert (this.mouseOwner == component);
 
         this.mouseOwner = null;
-        Itchy.singleton.getGame().releaseMouse(this);
+        Itchy.getGame().releaseMouse(this);
     }
 
     @Override
@@ -278,12 +278,12 @@ public class GuiPose extends RootContainer implements Pose, EventListener
 
     public void show()
     {
-        Itchy.singleton.getGame().showWindow(this);
+        Itchy.getGame().showWindow(this);
     }
 
     public void hide()
     {
-        Itchy.singleton.getGame().hideWindow(this);
+        Itchy.getGame().hideWindow(this);
     }
 
     public void destroy()
@@ -296,7 +296,7 @@ public class GuiPose extends RootContainer implements Pose, EventListener
     public boolean mouseDown( MouseButtonEvent event )
     {
         if (this.draggable) {
-            if ((event.button == 2) || ((event.button == 1) && Itchy.singleton.isCtrlDown())) {
+            if ((event.button == 2) || ((event.button == 1) && Itchy.isCtrlDown())) {
                 this.captureMouse(this);
                 this.dragging = true;
                 this.dragStartX = event.x;

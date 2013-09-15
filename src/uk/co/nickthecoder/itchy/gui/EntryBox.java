@@ -179,7 +179,7 @@ public class EntryBox<E extends EntryBox<?>> extends ClickableContainer implemen
             return true;
         }
 
-        if ((ke.symbol == Keys.v) && (Itchy.singleton.isCtrlDown())) {
+        if ((ke.symbol == Keys.v) && (Itchy.isCtrlDown())) {
 
             try {
                 Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();

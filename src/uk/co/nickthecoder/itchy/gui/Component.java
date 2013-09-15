@@ -344,6 +344,15 @@ public abstract class Component implements Focusable
         return this.font;
     }
 
+    
+    private boolean overrideFontRule;
+    void setFontFromRule( Font font )
+    {
+        if (!overrideFontRule) {
+            setFont(font);
+            overrideFontRule = false;
+        }
+    }
     public void setFont( Font font )
     {
         if (this.font != font) {
@@ -352,6 +361,7 @@ public abstract class Component implements Focusable
                 this.parent.forceLayout();
             }
         }
+        overrideFontRule = true;
     }
 
     public int getFontSize()

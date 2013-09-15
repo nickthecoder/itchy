@@ -74,7 +74,7 @@ public class Talk extends Follower
 
     public Talk font( String fontName )
     {
-        Font font = Itchy.singleton.getResources().getFont(fontName);
+        Font font = Itchy.getResources().getFont(fontName);
         return font(font);
     }
 
@@ -86,7 +86,7 @@ public class Talk extends Follower
 
     public Talk font( String fontName, int fontSize )
     {
-        Font font = Itchy.singleton.getResources().getFont(fontName);
+        Font font = Itchy.getResources().getFont(fontName);
         return font(font,fontSize);
     }
     
@@ -145,10 +145,10 @@ public class Talk extends Follower
     @Override
     public Actor createActor()
     {
-        NinePatch bubble = Itchy.singleton.getResources().getNinePatch(this.bubbleName);
+        NinePatch bubble = Itchy.getResources().getNinePatch(this.bubbleName);
 
         if (this.font == null) {
-            this.font = Itchy.singleton.getResources().getDefaultFont();
+            this.font = Itchy.getResources().getDefaultFont();
         }
         Pose pose = new TextPose(this.text, this.font, this.fontSize, this.color);
 

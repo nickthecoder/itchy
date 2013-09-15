@@ -28,7 +28,6 @@ import uk.co.nickthecoder.jame.event.KeyboardEvent;
  * coordinates are used to keep track of Actors' positions, and are stored in doubles. Pixel
  * coordinates are stored as integers and are used when dealing with the low-level processing of
  * images.
- * 
  */
 public class Itchy
 {
@@ -44,60 +43,54 @@ public class Itchy
      */
     private static int KEYBOARD_STATE_SIZE = 400;
 
-    public static Itchy singleton = new Itchy();
-
     /**
      * Holds a boolean for each key. On key pressed events sets the appropriate boolean, and key
      * released events reset the boolean. Uses the Keys values to index the array.
      */
-    private boolean[] keyboardState;
+    private static boolean[] keyboardState;
 
-    public Surface screen;
+    public static Surface screen;
 
-    private boolean running;
+    private static boolean running;
 
-    private Game game;
+    private static Game currentGame;
 
     /**
      * If one game calls another game, and then exists, this is how we return to the previous game.
      */
-    private Stack<Game> gameStack = new Stack<Game>();
+    private static Stack<Game> gameStack = new Stack<Game>();
 
-    public int keyboardRepeatDelay = Events.DEFAULT_REPEAT_DELAY;
+    public static int keyboardRepeatDelay = Events.DEFAULT_REPEAT_DELAY;
 
-    public int keyboardRepeatInterval = Events.DEFAULT_REPEAT_INTERVAL;
+    public static int keyboardRepeatInterval = Events.DEFAULT_REPEAT_INTERVAL;
 
-    public FrameRate frameRate = createFrameRate();
+    public static FrameRate frameRate = createFrameRate();
 
-    public final SoundManager soundManager = new SoundManager();
+    public static SoundManager soundManager;
 
-    private Itchy()
-    {
-    }
-
-    public void init( Game game ) throws Exception
+    public static void init( Game game ) throws Exception
     {
         Video.init();
         Audio.init();
         Audio.open();
         Events.enableKeyTranslation(true);
 
-        this.keyboardState = new boolean[KEYBOARD_STATE_SIZE];
-
+        keyboardState = new boolean[KEYBOARD_STATE_SIZE];
+        soundManager = new SoundManager();
         setScreenMode(game);
     }
 
-    public Game getGame()
+    public static Game getGame()
     {
-        return this.game;
+        return currentGame;
     }
 
-    public Resources getResources()
+    public static Resources getResources()
     {
-        return this.game.resources;
+        return currentGame.resources;
     }
 
-    private void setScreenMode( Game game )
+    private static void setScreenMode( Game game )
     {
         if (game.getTitle() == null) {
             Video.setWindowTitle("Itchy");
@@ -109,28 +102,28 @@ public class Itchy
         }
 
         try {
-            this.screen = Video.setMode(game.getWidth(), game.getHeight());
+            screen = Video.setMode(game.getWidth(), game.getHeight());
         } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
 
-    public void startGame( Game game )
+    public static void startGame( Game game )
     {
-        if (this.game != null) {
-            this.gameStack.push(this.game);
+        if (currentGame != null) {
+            gameStack.push(currentGame);
         }
-        this.game = game;
-        setScreenMode(game);
+        currentGame = game;
+        setScreenMode(currentGame);
     }
 
-    public void mainLoop()
+    public static void mainLoop()
     {
         try {
-            if (!this.running) {
-                this.running = true;
-                this.frameRate.loop();
+            if (!running) {
+                running = true;
+                frameRate.loop();
             }
         } catch (Exception e) {
             System.err.println("Failed to initialise game");
@@ -138,16 +131,16 @@ public class Itchy
         }
     }
 
-    public void endGame()
+    public static void endGame()
     {
-        this.soundManager.stopAll();
+        soundManager.stopAll();
 
-        if (this.gameStack.isEmpty()) {
-            this.terminate();
+        if (gameStack.isEmpty()) {
+            terminate();
         } else {
-            this.game = this.gameStack.pop();
+            currentGame = gameStack.pop();
             try {
-                setScreenMode(this.game);
+                setScreenMode(currentGame);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -159,37 +152,37 @@ public class Itchy
      * Indicates that the main loop should end. Note the game does not end immediately, it only sets
      * a flag, which will cause the main loop to end after the current frame has been processed.
      */
-    public void terminate()
+    public static void terminate()
     {
         System.out.println("Terminating itchy");
-        this.running = false;
+        running = false;
     }
 
-    private FrameRate createFrameRate()
+    private static FrameRate createFrameRate()
     {
         return new FrameRate() {
 
             @Override
             public boolean isRunning()
             {
-                return Itchy.this.running;
+                return Itchy.running;
             }
 
             @Override
             public void doGameLogic()
             {
-                Itchy.this.doGameLogic();
+                Itchy.doGameLogic();
             }
 
             @Override
             public void doRedraw()
             {
-                Itchy.this.doRedraw();
+                Itchy.doRedraw();
             }
         };
     }
 
-    private void doGameLogic()
+    private static void doGameLogic()
     {
         while (true) {
             Event event = Events.poll();
@@ -200,97 +193,97 @@ public class Itchy
             }
         }
 
-        this.soundManager.tick();
+        soundManager.tick();
 
-        this.game.tick();
+        currentGame.tick();
         for (Actor actor : Actor.allByTag("active")) {
             actor.tick();
         }
     }
 
-    private void doRedraw()
+    private static void doRedraw()
     {
-        this.game.render(this.screen);
-        this.screen.flip();
+        currentGame.render(screen);
+        screen.flip();
     }
 
-    public void endOfFrame()
+    public static void endOfFrame()
     {
     }
 
-    public boolean isRunning()
+    public static boolean isRunning()
     {
-        return this.running;
+        return running;
     }
 
-    public void enableKeyboardRepeat( boolean value )
+    public static void enableKeyboardRepeat( boolean value )
     {
         if (value) {
-            Events.keyboardRepeat(this.keyboardRepeatDelay, this.keyboardRepeatInterval);
+            Events.keyboardRepeat(keyboardRepeatDelay, keyboardRepeatInterval);
         } else {
             Events.keyboardRepeat(0, 0);
         }
     }
 
-    public boolean isKeyDown( int keySym )
+    public static boolean isKeyDown( int keySym )
     {
-        return this.keyboardState[keySym];
+        return keyboardState[keySym];
     }
 
     /**
      * Tests state of either shift keys A convenience method, the same as isKeyDown( Keys.LSHIFT )
      * || isKeyDown( Keys.RSHIFT )
      */
-    public boolean isShiftDown()
+    public static boolean isShiftDown()
     {
-        return this.keyboardState[Keys.LSHIFT] || this.keyboardState[Keys.RSHIFT];
+        return keyboardState[Keys.LSHIFT] || keyboardState[Keys.RSHIFT];
     }
 
     /**
      * Tests state of either control keys A convenience method, the same as isKeyDown( Keys.LCTRL )
      * || isKeyDown( Keys.RCTRL )
      */
-    public boolean isCtrlDown()
+    public static boolean isCtrlDown()
     {
-        return this.keyboardState[Keys.LCTRL] || this.keyboardState[Keys.RCTRL];
+        return keyboardState[Keys.LCTRL] || keyboardState[Keys.RCTRL];
     }
 
     /**
      * Tests state of either meta keys A convenience method, the same as isKeyDown( Keys.LMETA ) ||
      * isKeyDown( Keys.RMETA )
      */
-    public boolean isMetaDown()
+    public static boolean isMetaDown()
     {
-        return this.keyboardState[Keys.LMETA] || this.keyboardState[Keys.RMETA];
+        return keyboardState[Keys.LMETA] || keyboardState[Keys.RMETA];
     }
 
     /**
      * Tests state of either super keys A convenience method, the same as isKeyDown( Keys.LSUPER )
      * || isKeyDown( Keys.RSUPER )
      */
-    public boolean isSuperDown()
+    public static boolean isSuperDown()
     {
-        return this.keyboardState[Keys.LSUPER] || this.keyboardState[Keys.RSUPER];
+        return keyboardState[Keys.LSUPER] || keyboardState[Keys.RSUPER];
     }
 
-    private void processEvent( Event event )
+    private static void processEvent( Event event )
     {
-        this.game.processEvent(event);
+        currentGame.processEvent(event);
 
         if (event instanceof KeyboardEvent) {
             KeyboardEvent ke = (KeyboardEvent) event;
 
             if (ke.isPressed()) {
                 int key = ke.symbol;
-                if ((key > 0) && (key < this.keyboardState.length)) {
-                    this.keyboardState[key] = true;
+                if ((key > 0) && (key < keyboardState.length)) {
+                    keyboardState[key] = true;
                 }
 
             } else if (ke.isReleased()) {
 
                 int key = ke.symbol;
-                if ((key > 0) && (key < this.keyboardState.length)) {
-                    this.keyboardState[key] = false;
+                if ((key > 0) && (key < keyboardState.length)) {
+                    keyboardState[key] = false;
                 }
             }
         }

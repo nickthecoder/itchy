@@ -87,10 +87,10 @@ public class DoubleBox extends EntryBox<DoubleBox>
         if (this.hasFocus) {
 
             double amount = 1;
-            if (Itchy.singleton.isKeyDown(Keys.LSHIFT) || Itchy.singleton.isKeyDown(Keys.RSHIFT)) {
+            if (Itchy.isKeyDown(Keys.LSHIFT) || Itchy.isKeyDown(Keys.RSHIFT)) {
                 amount = 10;
-            } else if (Itchy.singleton.isKeyDown(Keys.LCTRL) ||
-                    Itchy.singleton.isKeyDown(Keys.RCTRL)) {
+            } else if (Itchy.isKeyDown(Keys.LCTRL) ||
+                    Itchy.isKeyDown(Keys.RCTRL)) {
                 amount = 0.1;
             }
 

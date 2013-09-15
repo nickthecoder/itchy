@@ -45,7 +45,7 @@ public abstract class Behaviour implements MessageListener, Cloneable
 
     public Actor createActor( ActorsLayer layer, String costumeName )
     {
-        Costume costume = Itchy.singleton.getResources().getCostume(costumeName);
+        Costume costume = Itchy.getResources().getCostume(costumeName);
         Actor actor = new Actor(costume);
         layer.add(actor);
         actor.setBehaviour(this);
