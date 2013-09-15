@@ -14,26 +14,26 @@ import java.util.List;
 import uk.co.nickthecoder.itchy.Loadable;
 import uk.co.nickthecoder.itchy.Resources;
 
-public class Rules extends Loadable
+public class Stylesheet extends Loadable
 {
     public Resources resources;
 
-    private final List<Rule> rules;
+    private final List<StyleRule> rules;
 
-    public Rules( File file )
+    public Stylesheet( File file )
         throws Exception
     {
         super( file );
-        this.rules = new ArrayList<Rule>();
+        this.rules = new ArrayList<StyleRule>();
         this.resources = new Resources();
         this.load();
     }
 
     public void style( Component component )
     {
-        Rule accumalator = new Rule(null);
+        StyleRule accumalator = new StyleRule(null);
 
-        for (Rule rule : this.rules) {
+        for (StyleRule rule : this.rules) {
             if (rule.matches(component)) {
                 accumalator.merge(rule);
             }
@@ -44,18 +44,18 @@ public class Rules extends Loadable
 
     public void load() throws Exception
     {
-        RulesReader loader = new RulesReader(this);
+        StyleSheetReader loader = new StyleSheetReader(this);
         loader.load(getFilename());
     }
 
-    public void addRule( Rule rule )
+    public void addRule( StyleRule rule )
     {
         this.rules.add(rule);
     }
 
-    public void merge( Rules other )
+    public void merge( Stylesheet other )
     {
-        for ( Rule rule : other.rules ) {
+        for ( StyleRule rule : other.rules ) {
             this.addRule( rule );
         }
     }

@@ -14,12 +14,12 @@ import uk.co.nickthecoder.itchy.Renderable;
 import uk.co.nickthecoder.jame.RGBA;
 import uk.co.nickthecoder.jame.Surface;
 
-public class Rule
+public class StyleRule
 {
     public static final int NOT_SET = Integer.MAX_VALUE;
     public static final Renderable NO_BACKGROUND = new NullRenderer();
 
-    private final List<RuleCriteria> criteria;
+    private final List<StyleCriteria> criteria;
 
     public int marginTop;
     public int marginRight;
@@ -45,7 +45,7 @@ public class Rule
 
     public int spacing;
 
-    public Rule( List<RuleCriteria> criteria )
+    public StyleRule( List<StyleCriteria> criteria )
     {
         this.criteria = criteria;
 
@@ -81,7 +81,7 @@ public class Rule
     private boolean matches( Component component, int index )
     {
         for (int i = index; i >= 0; i--) {
-            RuleCriteria criteria = this.criteria.get(i);
+            StyleCriteria criteria = this.criteria.get(i);
 
             if (component == null) {
                 return false;
@@ -190,7 +190,7 @@ public class Rule
         return "Rule #" + this.criteria;
     }
 
-    public void merge( Rule other )
+    public void merge( StyleRule other )
     {
         if (other.marginTop != NOT_SET) {
             this.marginTop = other.marginTop;

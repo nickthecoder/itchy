@@ -22,13 +22,13 @@ import uk.co.nickthecoder.jame.JameException;
 import uk.co.nickthecoder.jame.JameRuntimeException;
 import uk.co.nickthecoder.jame.RGBA;
 
-public class RulesReader
+public class StyleSheetReader
 {
-    private final Rules rules;
+    private final Stylesheet rules;
 
     private boolean included = false;
 
-    public RulesReader( Rules rules )
+    public StyleSheetReader( Stylesheet rules )
     {
         this.rules = rules;
     }
@@ -86,7 +86,7 @@ public class RulesReader
         File file = new File(this.rules.getDirectory(), filename);
 
         try {
-            Rules rules = new Rules(file);
+            Stylesheet rules = new Stylesheet(file);
 
             this.rules.merge( rules );
             
@@ -100,7 +100,7 @@ public class RulesReader
     public void readRule( XMLTag ruleTag ) throws XMLException
     {
         String criteria = ruleTag.getAttribute("criteria");
-        Rule rule = this.createRule(criteria);
+        StyleRule rule = this.createRule(criteria);
 
         if (ruleTag.hasAttribute("font")) {
             String fontName = ruleTag.getAttribute("font");
@@ -195,7 +195,7 @@ public class RulesReader
             Renderable background = null;
             if (("".equals(backgroundName))) {
 
-                background = Rule.NO_BACKGROUND;
+                background = StyleRule.NO_BACKGROUND;
 
             } else {
 
@@ -225,31 +225,31 @@ public class RulesReader
         this.rules.addRule(rule);
     }
 
-    private Rule createRule( String stringCriteria )
+    private StyleRule createRule( String stringCriteria )
     {
         stringCriteria = stringCriteria.trim();
         String[] parts = stringCriteria.split("  *");
 
-        List<RuleCriteria> criteria = new ArrayList<RuleCriteria>();
+        List<StyleCriteria> criteria = new ArrayList<StyleCriteria>();
 
         for (String part : parts) {
             if ("?".equals(part)) {
-                criteria.add(new RuleCriteria(false));
+                criteria.add(new StyleCriteria(false));
             } else if ("*".equals(part)) {
-                criteria.add(new RuleCriteria(true));
+                criteria.add(new StyleCriteria(true));
             } else {
                 int dot = part.indexOf(".");
                 if (dot < 0) {
-                    criteria.add(new RuleCriteria(part, null));
+                    criteria.add(new StyleCriteria(part, null));
                 } else if (dot == 0) {
-                    criteria.add(new RuleCriteria(null, part.substring(1)));
+                    criteria.add(new StyleCriteria(null, part.substring(1)));
                 } else {
-                    criteria.add(new RuleCriteria(part.substring(0, dot), part.substring(dot + 1)));
+                    criteria.add(new StyleCriteria(part.substring(0, dot), part.substring(dot + 1)));
                 }
             }
         }
 
-        return new Rule(criteria);
+        return new StyleRule(criteria);
     }
 
 }

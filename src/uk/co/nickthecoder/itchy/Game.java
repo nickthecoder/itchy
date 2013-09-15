@@ -13,7 +13,7 @@ import java.util.prefs.Preferences;
 import uk.co.nickthecoder.itchy.editor.Editor;
 import uk.co.nickthecoder.itchy.extras.Pause;
 import uk.co.nickthecoder.itchy.gui.GuiPose;
-import uk.co.nickthecoder.itchy.gui.Rules;
+import uk.co.nickthecoder.itchy.gui.Stylesheet;
 import uk.co.nickthecoder.itchy.util.AutoFlushPreferences;
 import uk.co.nickthecoder.jame.Keys;
 import uk.co.nickthecoder.jame.Rect;
@@ -64,7 +64,7 @@ public abstract class Game implements EventListener, MessageListener
 
     public Pause pause;
 
-    private Rules rules;
+    private Stylesheet stylesheet;
     
     public Game( String title, int width, int height ) throws Exception
     {
@@ -513,23 +513,23 @@ public abstract class Game implements EventListener, MessageListener
         Itchy.endGame();
     }
 
-    public void setRules( Rules rules )
+    public void setStylesheet( Stylesheet rules )
     {
-        this.rules = rules;
+        this.stylesheet = rules;
     }
 
 
-    public Rules getRules()
+    public Stylesheet getStylesheet()
     {
-        return this.rules;
+        return this.stylesheet;
     }
 
     public void showWindow( GuiPose window )
     {
         this.windows.add(window);
 
-        if (window.getRules() == null) {
-            window.setRules(this.rules);
+        if (window.getStylesheet() == null) {
+            window.setStylesheet(this.stylesheet);
         }
         window.reStyle();
         window.forceLayout();

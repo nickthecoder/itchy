@@ -13,7 +13,7 @@ import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 
 public abstract class RootContainer extends Container
 {
-    protected Rules rules;
+    protected Stylesheet stylesheet;
 
     protected static Component focus;
 
@@ -21,25 +21,25 @@ public abstract class RootContainer extends Container
     {
         super();
         this.type = "root";
-        this.rules = Itchy.getGame().getRules();
+        this.stylesheet = Itchy.getGame().getStylesheet();
     }
 
     public void style( Component component )
     {
-        if (this.rules != null) {
-            this.rules.style(component);
+        if (this.stylesheet != null) {
+            this.stylesheet.style(component);
         }
     }
 
-    public void setRules( Rules rules )
+    public void setStylesheet( Stylesheet stylesheet )
     {
-        this.rules = rules;
+        this.stylesheet = stylesheet;
         this.reStyle();
     }
 
-    public Rules getRules()
+    public Stylesheet getStylesheet()
     {
-        return this.rules;
+        return this.stylesheet;
     }
 
     @Override

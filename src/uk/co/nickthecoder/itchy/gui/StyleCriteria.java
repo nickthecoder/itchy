@@ -7,20 +7,20 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.gui;
 
-public class RuleCriteria
+public class StyleCriteria
 {
     public String type;
     public String style;
     public boolean wildcard;
 
-    public RuleCriteria( String type, String style )
+    public StyleCriteria( String type, String style )
     {
         this.type = type;
         this.style = style;
         this.wildcard = false;
     }
 
-    public RuleCriteria( boolean wildcard )
+    public StyleCriteria( boolean wildcard )
     {
         this.wildcard = wildcard;
         this.type = null;

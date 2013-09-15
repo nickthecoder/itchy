@@ -20,7 +20,7 @@ import uk.co.nickthecoder.itchy.gui.FlowLayout;
 import uk.co.nickthecoder.itchy.gui.GuiPose;
 import uk.co.nickthecoder.itchy.gui.HorizontalLayout;
 import uk.co.nickthecoder.itchy.gui.Label;
-import uk.co.nickthecoder.itchy.gui.Rules;
+import uk.co.nickthecoder.itchy.gui.Stylesheet;
 import uk.co.nickthecoder.itchy.gui.SimpleTableModel;
 import uk.co.nickthecoder.itchy.gui.SimpleTableModelRow;
 import uk.co.nickthecoder.itchy.gui.Table;
@@ -35,7 +35,7 @@ public class GuiTest extends Game
 {
     public ActorsLayer mainLayer;
 
-    public Rules rules;
+    public Stylesheet rules;
 
     public GuiPose guiPose;
 
@@ -43,7 +43,7 @@ public class GuiTest extends Game
     {
         super("GuiTest", 640, 480);
 
-        this.rules = new Rules(new File("resources/defaultGui/style.xml"));
+        this.rules = new Stylesheet(new File("resources/defaultGui/style.xml"));
 
     }
 
@@ -55,7 +55,7 @@ public class GuiTest extends Game
         this.layers.add(this.mainLayer);
 
         this.guiPose = new GuiPose();
-        this.guiPose.setRules(this.rules);
+        this.guiPose.setStylesheet(this.rules);
         this.guiPose.addStyle("test");
         this.guiPose.setPosition(0, 0, this.screenRect.width, this.screenRect.height);
         Actor actor = this.guiPose.getActor();
@@ -194,7 +194,7 @@ public class GuiTest extends Game
         win.clientArea.setLayout(new VerticalLayout());
         win.clientArea.addChild(new Label("Hello"));
         win.clientArea.addChild(new Label("World"));
-        win.setRules(this.rules);
+        win.setStylesheet(this.rules);
         win.show();
     }
 

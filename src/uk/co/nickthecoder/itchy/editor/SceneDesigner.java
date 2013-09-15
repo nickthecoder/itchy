@@ -226,7 +226,7 @@ public class SceneDesigner implements MouseListener, KeyListener
     private void createPageBorder()
     {
         int margin = 0;
-        NinePatch ninePatch = this.editor.rules.resources.getNinePatch("pageBorder");
+        NinePatch ninePatch = this.editor.getStylesheet().resources.getNinePatch("pageBorder");
         Surface newSurface = ninePatch.createSurface(this.sceneRect.width + margin * 2,
             this.sceneRect.height + margin * 2);
 
@@ -258,7 +258,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.toolboxPose.addStyle("toolbox");
         this.toolboxPose.draggable = true;
 
-        this.toolboxPose.setRules(this.editor.rules);
+        this.toolboxPose.setStylesheet(this.editor.getStylesheet());
         this.toolboxPose.reStyle();
         this.toolboxPose.forceLayout();
         this.toolboxPose.setPosition(0, 0, this.editor.getWidth(), 200);
@@ -317,7 +317,7 @@ public class SceneDesigner implements MouseListener, KeyListener
 
         this.toolbarPose.addStyle("toolbar");
 
-        this.toolbarPose.setRules(this.editor.rules);
+        this.toolbarPose.setStylesheet(this.editor.getStylesheet());
         this.toolbarPose.reStyle();
         this.toolbarPose.forceLayout();
 
@@ -330,7 +330,7 @@ public class SceneDesigner implements MouseListener, KeyListener
 
     public Button createButton( String name, String text )
     {
-        Pose pose = this.editor.rules.resources.getPose("icon_" + name);
+        Pose pose = this.editor.getStylesheet().resources.getPose("icon_" + name);
         if (pose == null) {
             return new Button(text);
         } else {
@@ -1308,7 +1308,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         Surface actorSurface = this.currentActor.getAppearance().getSurface();
 
         int margin = 10;
-        NinePatch ninePatch = this.editor.rules.resources.getNinePatch("highlight");
+        NinePatch ninePatch = this.editor.getStylesheet().resources.getNinePatch("highlight");
         Surface newSurface = ninePatch.createSurface(actorSurface.getWidth() + margin * 2,
             actorSurface.getHeight() + margin * 2);
 
@@ -1357,7 +1357,7 @@ public class SceneDesigner implements MouseListener, KeyListener
     private void createHandles()
     {
 
-        ImagePose pose = this.editor.rules.resources.getPose("rotateHandle");
+        ImagePose pose = this.editor.getStylesheet().resources.getPose("rotateHandle");
         Actor rotateActor = new Actor(pose);
         this.rotateHandle = new RotateHandleBehaviour();
         rotateActor.setBehaviour(this.rotateHandle);
@@ -1366,7 +1366,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.glassLayer.add(rotateActor);
         this.handles.add(this.rotateHandle);
 
-        pose = this.editor.rules.resources.getPose("scaleHandle");
+        pose = this.editor.getStylesheet().resources.getPose("scaleHandle");
         for (int dx = -1; dx < 2; dx += 2) {
             for (int dy = -1; dy < 2; dy += 2) {
                 Actor scaleHandle = new Actor(pose);

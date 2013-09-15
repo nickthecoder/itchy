@@ -17,7 +17,7 @@ import uk.co.nickthecoder.itchy.gui.GuiPose;
 import uk.co.nickthecoder.itchy.gui.Label;
 import uk.co.nickthecoder.itchy.gui.MessageBox;
 import uk.co.nickthecoder.itchy.gui.Notebook;
-import uk.co.nickthecoder.itchy.gui.Rules;
+import uk.co.nickthecoder.itchy.gui.Stylesheet;
 import uk.co.nickthecoder.itchy.gui.VerticalLayout;
 
 public final class Editor extends Game
@@ -56,8 +56,6 @@ public final class Editor extends Game
 
     public ScenesEditor scenesEditor;
 
-    public Rules rules;
-
     private String designSceneName = null;
     
     
@@ -70,18 +68,20 @@ public final class Editor extends Game
         singleton = this;
 
         this.resources = game.resources;
-
-        this.rules = new Rules(new File( RULES ));
     }
 
     @Override
     public void init()
     {
-        this.setRules(this.rules);
+        try {
+            setStylesheet(new Stylesheet(new File( RULES )));
+        } catch (Exception e) {
+            System.err.println("Failed to load stylesheet : " + RULES );
+            e.printStackTrace();
+        }
         Itchy.enableKeyboardRepeat(true);
 
         this.mainGuiPose = new GuiPose();
-        this.mainGuiPose.setRules(this.rules);
         this.mainGuiPose.setLayout(new VerticalLayout());
         this.mainGuiPose.setFill(true, true);
         this.mainGuiPose.addStyle("editor");

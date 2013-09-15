@@ -10,7 +10,6 @@ What's Next
 
 Component : Override all rules. Currently only Font can be overridden.  
     Allow to be reset to default (i.e. be restyled). 
-    Rename to Style and StyleSheet?
     
 Finish CostumesEditor
 

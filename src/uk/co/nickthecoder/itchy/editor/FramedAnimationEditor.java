@@ -108,7 +108,7 @@ public class FramedAnimationEditor extends AnimationEditor
 
         Button up = null;
         if (i > 0) {
-            up = new Button(new ImageComponent(this.editor.rules.resources.getPose(
+            up = new Button(new ImageComponent(this.editor.getStylesheet().resources.getPose(
                 "icon_up").getSurface()));
             up.addActionListener(new ActionListener() {
                 @Override
@@ -123,7 +123,7 @@ public class FramedAnimationEditor extends AnimationEditor
             up.addStyle("compact");
         }
 
-        Button delete = new Button(new ImageComponent(this.editor.rules.resources.getPose(
+        Button delete = new Button(new ImageComponent(this.editor.getStylesheet().resources.getPose(
                 "icon_delete").getSurface()));
         delete.addActionListener(new ActionListener() {
             @Override
