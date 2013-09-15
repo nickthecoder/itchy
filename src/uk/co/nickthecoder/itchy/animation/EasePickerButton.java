@@ -11,17 +11,32 @@ import java.util.List;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Button;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
+import uk.co.nickthecoder.itchy.gui.ImageComponent;
 import uk.co.nickthecoder.itchy.gui.Label;
+import uk.co.nickthecoder.itchy.gui.VerticalLayout;
 
 public class EasePickerButton extends Button implements ActionListener
 {
     private Ease ease;
 
     private List<ComponentChangeListener> changeListeners = new ArrayList<ComponentChangeListener>();
-    
+
+    private ImageComponent img;
+
+    private Label label;
+
     public EasePickerButton( Ease ease )
     {
-        super(NumericAnimation.getEaseName(ease));
+        super();
+        this.setLayout(new VerticalLayout());
+        this.setXAlignment(0.5f);
+
+        this.label = new Label(NumericAnimation.getEaseName(ease));
+        this.img = new ImageComponent(ease.getThumbnail());
+
+        this.addChild(this.img);
+        this.addChild(this.label);
+
         this.ease = ease;
         this.addActionListener(this);
     }
@@ -34,7 +49,8 @@ public class EasePickerButton extends Button implements ActionListener
     public void setValue( Ease ease )
     {
         this.ease = ease;
-        ((Label) (this.getChildren().get(0))).setText(NumericAnimation.getEaseName(ease) );
+        this.label.setText(NumericAnimation.getEaseName(ease));
+        this.img.setImage(ease.getThumbnail());
 
         for (ComponentChangeListener listener : this.changeListeners) {
             listener.changed();
@@ -59,7 +75,7 @@ public class EasePickerButton extends Button implements ActionListener
     {
         this.changeListeners.add(ccl);
     }
-    
+
     public void removeChangeListener( ComponentChangeListener ccl )
     {
         this.changeListeners.remove(ccl);

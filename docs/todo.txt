@@ -13,7 +13,8 @@ Component : Override all rules. Currently only Font can be overridden.
     
 Finish CostumesEditor
 
-EaseButton to show the thumbnail graph.
+Use FontPicker for FontProperty.getComponent
+    Make a compact version excludes example text, or small and horiz layout.
 
 Bucket to be more transparent
 Water looks naff
