@@ -33,7 +33,7 @@ public class FontPickerButton extends Button implements ActionListener
         super();
         this.layout = new VerticalLayout();
         this.setXAlignment(0.5f);
-        
+
         this.example = FontPicker.createExample(fontResource);
         this.label = new Label(fontResource.getName());
         this.addChild(this.example);
@@ -47,6 +47,11 @@ public class FontPickerButton extends Button implements ActionListener
     public FontResource getValue()
     {
         return this.fontResource;
+    }
+
+    public void setCompact( boolean value )
+    {
+        this.example.setVisible(!value);
     }
 
     public void setValue( FontResource fontResource )
@@ -64,7 +69,7 @@ public class FontPickerButton extends Button implements ActionListener
     @Override
     public void action()
     {
-        FontPicker picker = new FontPicker(this.resources)
+        FontPicker picker = new FontPicker(this.resources, this.getValue())
         {
             @Override
             public void pick( FontResource fontResource )

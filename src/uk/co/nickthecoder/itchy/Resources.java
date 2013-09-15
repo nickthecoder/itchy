@@ -217,6 +217,16 @@ public class Resources extends Loadable
         return this.fonts.get(name);
     }
 
+    public FontResource getFontResource( Font font )
+    {
+        for ( FontResource fontResource : fonts.values() ) {
+            if ( fontResource.font == font) {
+                return fontResource;
+            }
+        }
+        return null;
+    }
+    
     public Font getFont( String name )
     {
         FontResource resource = this.fonts.get(name);

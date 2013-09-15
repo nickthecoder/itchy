@@ -31,15 +31,38 @@ public class Stylesheet extends Loadable
 
     public void style( Component component )
     {
+        // TODO Remove
+        if (component.getStyles().contains("TEST")) {
+            System.out.println("Styling TEST component");
+            StyleRule rule = this.rules.get(82);
+            System.out.println("Checking match : " + rule );
+            if (rule.matches(component)) {
+                System.out.println("Yes it matches");
+            }
+        }
+        
         StyleRule accumalator = new StyleRule(null);
 
         for (StyleRule rule : this.rules) {
+            
             if (rule.matches(component)) {
+                
+                // TODO Remove
+                if (component.getStyles().contains("TEST")) {
+                    System.out.println( "Matching rule : " + rule );
+                }
+
                 accumalator.merge(rule);
             }
         }
 
+        
         accumalator.apply(component);
+
+        // TODO Remove
+        if (component.getStyles().contains("TEST")) {
+            System.out.println("\n");
+        }
     }
 
     public void load() throws Exception
@@ -70,4 +93,13 @@ public class Stylesheet extends Loadable
     {
     }
 
+    public void debug()
+    {
+        System.out.println("\nStylesheet");
+        int i = 0;
+        for (StyleRule rule : this.rules) {
+            System.out.println( "#" + i + " : " + rule );
+            i ++;
+        }
+    }
 }

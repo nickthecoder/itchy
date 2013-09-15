@@ -7,6 +7,13 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.gui;
 
+/**
+ * A top-level Container, that has the appearance of a Window.
+ * It is composed of a title bar and a client area.
+ * The appearance of the window, such as the size and colour of the title bar and borders
+ * are derived from the Game's Stylesheet.
+ *
+ */
 public class Window extends GuiPose
 {
     public Container clientArea;

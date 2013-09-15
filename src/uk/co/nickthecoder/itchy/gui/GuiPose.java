@@ -1,9 +1,7 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0 which accompanies this
+ * distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.gui;
 
@@ -20,12 +18,11 @@ import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 
 /**
- * GuiPose is an intermediary between the worlds of Actor/Layers and and the world of
- * Components/Containers. A GuiPose is both a Container (a RootContainer in fact), and a Pose which
- * is part of an Actor's Appearance.
+ * GuiPose is an intermediary between the world of Actor/Layers and and the world of
+ * Components/Containers. A GuiPose is both a Container (a RootContainer in fact), and a Pose (which
+ * is part of an Actor's Appearance).
  * 
- * A GuiPose can be included within a game, because it can be part of an Actor, just like any other
- * Actor. See GuiPose.getActor.
+ * A GuiPose can be included within a game, just like any other Actor. See GuiPose.getActor.
  * 
  * If you wish to use the gui pacakage without using Actors and Layers etc, then use RootContainer
  * instead of GuiPose. However, you would then need to deal with how RootContainer is drawn on the
@@ -84,7 +81,7 @@ public class GuiPose extends RootContainer implements Pose, EventListener
     public void setPosition( int x, int y, int width, int height )
     {
         if ((this.surface == null) || (this.surface.getWidth() != width) ||
-                (this.surface.getHeight() != height)) {
+            (this.surface.getHeight() != height)) {
             super.setPosition(x, y, width, height);
 
             if (this.surface != null) {
@@ -104,6 +101,12 @@ public class GuiPose extends RootContainer implements Pose, EventListener
         this.changed = true;
     }
 
+    /**
+     * Returns the Actor associated with this GuiPose. Note you should NOT create an Actor manually,
+     * always call getActor instead.
+     * 
+     * @return
+     */
     public Actor getActor()
     {
         if (this.actor == null) {
@@ -276,14 +279,28 @@ public class GuiPose extends RootContainer implements Pose, EventListener
         this.changed = false;
     }
 
+    private Component localFocus;
+    
     public void show()
     {
         Itchy.getGame().showWindow(this);
+        if ((localFocus != null) && (localFocus.getRoot() == this)) {
+            localFocus.focus();
+        } else {
+            this.focus();
+        }
     }
 
     public void hide()
     {
         Itchy.getGame().hideWindow(this);
+    }
+
+    @Override
+    public void setFocus( Component component )
+    {
+        this.localFocus = component;
+        super.setFocus(component);
     }
 
     public void destroy()

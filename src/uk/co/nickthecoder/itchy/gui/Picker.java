@@ -22,6 +22,9 @@ public abstract class Picker<T> extends Window
     {
         super(title);
 
+        this.clientArea.setLayout(new VerticalLayout());
+        this.clientArea.setFill(true, false);
+
         Container container = new Container();
         container.setLayout(new VerticalLayout());
         container.setFill(true, true);
@@ -41,11 +44,16 @@ public abstract class Picker<T> extends Window
 
             if (((object == null) && (selected == null)) ||
                     ((object != null) && object.equals(selected))) {
-                component.addStyle("selected");
+                //component.addStyle("selected");
                 component.focus();
             }
 
         }
+        
+        Container buttons = new Container();
+        buttons.addStyle("buttonBar");
+        buttons.setLayout(new HorizontalLayout());
+        buttons.setXAlignment(0.5f);
         
         Button cancelButton = new Button("Cancel");
         cancelButton.addActionListener(new ActionListener() {
@@ -56,8 +64,9 @@ public abstract class Picker<T> extends Window
             }
             
         });
+        buttons.addChild(cancelButton);
         
-        this.clientArea.addChild( cancelButton );
+        this.clientArea.addChild( buttons );
     }
 
     private Component createButton( final String label, final T object )

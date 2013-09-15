@@ -11,8 +11,8 @@
     
     <rule criteria=".checkered" background="checkers"/>
     <rule criteria=".pickGrid" spacing="10"/>
-    <rule criteria=".pickGrid * button" width="80" minimumHeight="60"/>
-    <rule criteria=".pickGrid * label" maximumWidth="80"/>
+    <rule criteria=".pickGrid * button" width="120" minimumHeight="60"/>
+    <rule criteria=".pickGrid * button label" maximumWidth="100" font="regular"/>
     
     <rule criteria=".costumes" padding="0" spacing="2"/>
     <rule criteria=".costumes button" width="60" height="60" padding="0"/>
@@ -20,4 +20,3 @@
     <rule criteria=".exampleFont" font="null" fontSize="30"/>
 
 </rules>
-

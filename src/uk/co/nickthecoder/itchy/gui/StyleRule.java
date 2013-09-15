@@ -90,7 +90,7 @@ public class StyleRule
             if (criteria.wildcard) {
 
                 for (Component parent = component; parent != null; parent = parent.getParent()) {
-                    if (this.matches(parent, index - 1)) {
+                    if (this.matches(parent, i - 1)) {
                         return true;
                     }
                 }
@@ -187,7 +187,7 @@ public class StyleRule
     @Override
     public String toString()
     {
-        return "Rule #" + this.criteria;
+        return "Criteria " + this.criteria;
     }
 
     public void merge( StyleRule other )

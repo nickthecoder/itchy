@@ -60,7 +60,7 @@ public class EasePickerButton extends Button implements ActionListener
     @Override
     public void action()
     {
-        EasePicker picker = new EasePicker()
+        EasePicker picker = new EasePicker(getValue())
         {
             @Override
             public void pick( Ease ease )

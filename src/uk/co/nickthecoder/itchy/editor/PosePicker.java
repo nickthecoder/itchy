@@ -12,6 +12,7 @@ import uk.co.nickthecoder.itchy.gui.Button;
 import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.Container;
 import uk.co.nickthecoder.itchy.gui.GridLayout;
+import uk.co.nickthecoder.itchy.gui.HorizontalLayout;
 import uk.co.nickthecoder.itchy.gui.ImageComponent;
 import uk.co.nickthecoder.itchy.gui.Label;
 import uk.co.nickthecoder.itchy.gui.VerticalLayout;
@@ -24,19 +25,51 @@ public abstract class PosePicker extends Window
 
     public PosePicker( Resources resources )
     {
+        this(resources, null);
+    }
+
+    public PosePicker( Resources resources, PoseResource defaultPoseResource )
+    {
         super("Pick a Pose");
         this.resources = resources;
+
+        this.clientArea.setLayout(new VerticalLayout());
+        this.clientArea.setFill(true, false);
 
         Container container = new Container();
         VerticalScroll vs = new VerticalScroll(container);
 
-        this.createPoses(container);
+        Component focus = this.createPoses(container, defaultPoseResource);
         this.clientArea.addChild(vs);
         this.clientArea.addStyle("vScrolled");
+
+        Container buttons = new Container();
+        buttons.addStyle("buttonBar");
+        buttons.setLayout(new HorizontalLayout());
+        buttons.setXAlignment(0.5f);
+
+        Button cancel = new Button("Cancel");
+        cancel.addActionListener(new ActionListener() {
+
+            @Override
+            public void action()
+            {
+                PosePicker.this.destroy();
+            }
+
+        });
+        buttons.addChild(cancel);
+        this.clientArea.addChild(buttons);
+
+        if (focus != null) {
+            focus.focus();
+        }
     }
 
-    private void createPoses( Container container )
+    private Component createPoses( Container container, PoseResource defaultPoseResource )
     {
+        Component focus = null;
+
         GridLayout gridLayout = new GridLayout(container, 5);
         container.setLayout(gridLayout);
         container.addStyle("pickGrid");
@@ -45,10 +78,15 @@ public abstract class PosePicker extends Window
             PoseResource poseResource = this.resources.getPoseResource(name);
 
             Component component = this.createButton(poseResource);
+            if (poseResource == defaultPoseResource) {
+                focus = component;
+            }
 
             gridLayout.addChild(component);
         }
         gridLayout.endRow();
+
+        return focus;
     }
 
     private Component createButton( final PoseResource poseResource )

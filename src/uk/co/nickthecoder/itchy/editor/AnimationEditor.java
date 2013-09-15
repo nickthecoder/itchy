@@ -29,6 +29,7 @@ public class AnimationEditor extends Window
         this.editor = editor;
         this.animation = animation;
         this.clientArea.setLayout(new VerticalLayout());
+        this.clientArea.setFill(true, false);
 
         Container form = new Container();
         GridLayout grid = new GridLayout(form, 2);
@@ -46,6 +47,7 @@ public class AnimationEditor extends Window
         }
 
         Container buttonBar = new Container();
+        buttonBar.setXAlignment(0.5f);
         buttonBar.addStyle("buttonBar");
         this.createButtons(buttonBar);
         this.clientArea.addChild(buttonBar);
@@ -63,13 +65,14 @@ public class AnimationEditor extends Window
         });
         buttonBar.addChild(ok);
     }
-    
+
     public void createForm( GridLayout gridLayout )
     {
         for (AbstractProperty<Animation, ?> property : this.animation.getProperties()) {
             try {
                 Component component = property.createComponent(this.animation, true);
-                System.out.println( "Name " + property.key + " value " + property.getStringValue(this.animation));
+                System.out.println("Name " + property.key + " value " +
+                    property.getStringValue(this.animation));
                 gridLayout.addRow(property.label, component);
             } catch (Exception e) {
             }

@@ -19,6 +19,8 @@ import uk.co.nickthecoder.itchy.gui.MessageBox;
 import uk.co.nickthecoder.itchy.gui.Notebook;
 import uk.co.nickthecoder.itchy.gui.Stylesheet;
 import uk.co.nickthecoder.itchy.gui.VerticalLayout;
+import uk.co.nickthecoder.jame.Keys;
+import uk.co.nickthecoder.jame.event.KeyboardEvent;
 
 public final class Editor extends Game
 {
@@ -159,6 +161,16 @@ public final class Editor extends Game
         }
     }
     
+    @Override
+    public boolean onKeyDown( KeyboardEvent ke )
+    {
+        if (ke.symbol == Keys.F1) {
+            this.debug();
+            return true;
+        }
+        return false;
+    }
+    
     public void designScene( String sceneName )
     {
         this.designSceneName = sceneName;
@@ -168,6 +180,11 @@ public final class Editor extends Game
     public String getInitialSceneName()
     {
         return null;
+    }
+    
+    public void debug()
+    {
+        getStylesheet().debug();
     }
     
 }

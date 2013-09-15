@@ -14,6 +14,7 @@ import uk.co.nickthecoder.itchy.gui.Button;
 import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.Container;
 import uk.co.nickthecoder.itchy.gui.GridLayout;
+import uk.co.nickthecoder.itchy.gui.HorizontalLayout;
 import uk.co.nickthecoder.itchy.gui.ImageComponent;
 import uk.co.nickthecoder.itchy.gui.Label;
 import uk.co.nickthecoder.itchy.gui.VerticalLayout;
@@ -24,18 +25,51 @@ public abstract class EasePicker extends Window
 {
     public EasePicker()
     {
+        this(null);
+    }
+    
+    public EasePicker(Ease defaultEase)
+    {
         super("Ease Picker");
 
+        this.clientArea.setLayout(new VerticalLayout());
+        this.clientArea.setFill(true, false);
+        
         Container container = new Container();
         VerticalScroll vs = new VerticalScroll(container);
 
-        this.createEases(container);
+        Component focus = this.createEases(container, defaultEase);
         this.clientArea.addChild(vs);
         this.clientArea.addStyle("vScrolled");
+
+        Container buttons = new Container();
+        buttons.addStyle("buttonBar");
+        buttons.setLayout(new HorizontalLayout());
+        buttons.setXAlignment(0.5f);
+        
+
+        Button cancel = new Button("Cancel");
+        cancel.addActionListener(new ActionListener() {
+
+            @Override
+            public void action()
+            {
+                EasePicker.this.destroy();
+            }
+
+        });
+        buttons.addChild(cancel);
+        this.clientArea.addChild(buttons);
+        
+        if (focus!=null) {
+            focus.focus();
+        }
     }
 
-    private void createEases( Container container )
+    private Component createEases( Container container, Ease defaultEase )
     {
+        Component focus = null;
+        
         GridLayout gridLayout = new GridLayout(container, 5);
         container.setLayout(gridLayout);
         container.addStyle("pickGrid");
@@ -47,22 +81,22 @@ public abstract class EasePicker extends Window
             Ease ease = map.get(name);
 
             Component component = this.createButton(name, ease);
-
+            if (ease == defaultEase) {
+                focus = component;
+            }
             gridLayout.addChild(component);
         }
         gridLayout.endRow();
+        
+        return focus;
     }
 
     private Component createButton( final String name, final Ease ease )
     {
-        Container container = new Container();
+        Button button = new Button();
+        button.setLayout(new VerticalLayout());
+        button.setXAlignment(0.5f);
 
-        container.setLayout(new VerticalLayout());
-        container.setXAlignment(0.5f);
-
-        ImageComponent img = new ImageComponent(ease.getThumbnail());
-        Button button = new Button(img);
-        button.addStyle("test");
         button.addActionListener(new ActionListener() {
             @Override
             public void action()
@@ -72,12 +106,14 @@ public abstract class EasePicker extends Window
             }
         });
 
+        ImageComponent img = new ImageComponent(ease.getThumbnail());
         Label label = new Label(name);
+        label.addStyle("TEST"); // TODO remove
 
-        container.addChild(button);
-        container.addChild(label);
+        button.addChild(img);
+        button.addChild(label);
 
-        return container;
+        return button;
     }
 
     public abstract void pick( Ease ease );

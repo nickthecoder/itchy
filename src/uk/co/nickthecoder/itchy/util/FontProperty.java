@@ -5,15 +5,14 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.util;
 
-import java.util.HashMap;
-
 import uk.co.nickthecoder.itchy.Font;
+import uk.co.nickthecoder.itchy.FontResource;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Resources;
+import uk.co.nickthecoder.itchy.editor.FontPickerButton;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
-import uk.co.nickthecoder.itchy.gui.PickerButton;
 
 public class FontProperty<S> extends AbstractProperty<S, Font>
 {
@@ -34,16 +33,12 @@ public class FontProperty<S> extends AbstractProperty<S, Font>
         final ComponentChangeListener listener
         ) throws Exception
     {
-        HashMap<String, Font> hashMap = new HashMap<String, Font>();
         Resources resources = Itchy.getGame().resources;
-        for (String name : resources.fontNames()) {
-            hashMap.put(name, resources.getFont(name));
-        }
 
-        final PickerButton<Font> pickerButton = new PickerButton<Font>(
-            "Fonts",
-            this.getValue(subject),
-            hashMap);
+        FontResource fontResource = resources.getFontResource(this.getValue(subject));
+        
+        final FontPickerButton pickerButton = new FontPickerButton(resources,fontResource);
+        pickerButton.setCompact(true);
 
         if (autoUpdate) {
 
@@ -69,10 +64,9 @@ public class FontProperty<S> extends AbstractProperty<S, Font>
     @Override
     public void update( S subject, Component component ) throws Exception
     {
-        @SuppressWarnings("unchecked")
-        PickerButton<String> pickerButton = (PickerButton<String>) component;
+        FontPickerButton pickerButton = (FontPickerButton) component;
         try {
-            this.setValue(subject, pickerButton.getValue());
+            this.setValue(subject, pickerButton.getValue().font);
             pickerButton.removeStyle("error");
         } catch (Exception e) {
             pickerButton.addStyle("error");

@@ -51,6 +51,7 @@
     <rule criteria="tableRow.selected" background="row-selected"/>
     <rule criteria=".focus * tableRow.selected" background="row-focus" />
     <rule criteria=".focus * tableRow.selected * label" color="#211b12" />
+    <rule criteria=".focus * tableRow.selected * button label" color="#c6c1b8" />
     <rule criteria=".cell" marginTop="4" marginRight="6" marginBottom="4" marginLeft="6" />
     <rule criteria=".heading" margin="6" font="bold" minimumWidth="0" background="" padding="0"/>
     <rule criteria=".heading label" />

@@ -545,7 +545,6 @@ public abstract class Game implements EventListener, MessageListener
         if (window.modal) {
             this.setModalListener(window);
         }
-        window.focus();
         this.addEventListener(window);
 
     }
