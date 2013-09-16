@@ -8,13 +8,12 @@ Jame is out of date, need to rebuild for win32 and i386 and ARM??
 What's Next
 ===========
 
-Component : Override all rules. Currently only Font can be overridden.  
-    Allow to be reset to default (i.e. be restyled). 
-    
 Finish CostumesEditor
 
-Use FontPicker for FontProperty.getComponent
-    Make a compact version excludes example text, or small and horiz layout.
+Icons on each editor tab and also on the CostumeEditor for each event type (String,Pose,Sound etc).
+
+Component : Override all rules. Currently only Font can be overridden.  
+    Allow to be reset to default (i.e. be restyled). 
 
 Bucket to be more transparent
 Water looks naff
