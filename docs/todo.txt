@@ -8,8 +8,6 @@ Jame is out of date, need to rebuild for win32 and i386 and ARM??
 What's Next
 ===========
 
-Finish CostumesEditor - (ManagedSound's enum property).
-
 Component : Override all rules. Currently only Font can be overridden.  
     Allow to be reset to default (i.e. be restyled). 
 

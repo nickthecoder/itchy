@@ -87,9 +87,9 @@ public abstract class AbstractProperty<S, T>
                 if (annotation.recurse()) {
                     addProperties(field.getType(), prefix + field.getName() + ".", collection);
                 }
-                
+
                 if (annotation.aliases().length > 0) {
-                    property.addAliases( annotation.aliases() );
+                    property.addAliases(annotation.aliases());
                 }
             }
         }
@@ -99,10 +99,10 @@ public abstract class AbstractProperty<S, T>
     private static <SS> void addMethodProperties( Class<?> klass, String prefix,
         Collection<AbstractProperty<SS, ?>> collection )
     {
-        if ( klass.getSuperclass() != null ) {
-            addMethodProperties( klass.getSuperclass(), prefix, collection );
+        if (klass.getSuperclass() != null) {
+            addMethodProperties(klass.getSuperclass(), prefix, collection);
         }
-        
+
         for (Class<?> klass2 : klass.getInterfaces()) {
             addMethodProperties(klass2, prefix, collection);
         }
@@ -133,9 +133,8 @@ public abstract class AbstractProperty<S, T>
                 }
             }
         }
-        
-    }
 
+    }
 
     private static <SS> AbstractProperty<SS, ?> createProperty(
         Class<?> klass, String access, String key, Property property )
@@ -162,6 +161,14 @@ public abstract class AbstractProperty<S, T>
         }
         if (klass == Ease.class) {
             return new EaseProperty<SS>(label, access, key);
+        }
+        if (Enum.class.isAssignableFrom(klass)) {
+
+        //if (klass.isAssignableFrom(Enum.class)) {
+            @SuppressWarnings({ "rawtypes", "unchecked" })
+            AbstractProperty<SS, ?> result = new EnumProperty<SS, Enum>(label, access, key,
+                (Class<Enum>) klass);
+            return result;
         }
         if (property.recurse()) {
             return null;
@@ -209,11 +216,11 @@ public abstract class AbstractProperty<S, T>
     public String key;
 
     /**
-     * An alternative names for this property. This is used so that properties can be renamed, and loading
-     * from a file which uses the old name will still work.
+     * An alternative names for this property. This is used so that properties can be renamed, and
+     * loading from a file which uses the old name will still work.
      */
     public Set<String> aliases;
-    
+
     public AbstractProperty( String label, String access, String key )
     {
         this.label = label;
@@ -229,7 +236,7 @@ public abstract class AbstractProperty<S, T>
 
     public void addAliases( String[] values )
     {
-        for ( String value : values ) {
+        for (String value : values) {
             this.aliases.add(value);
         }
     }
@@ -243,14 +250,14 @@ public abstract class AbstractProperty<S, T>
 
     public String getStringValue( S subject ) throws Exception
     {
-        T result = getValue( subject );
+        T result = getValue(subject);
         if (result == null) {
             return null;
         } else {
             return result.toString();
         }
     }
-    
+
     public void setValue( S subject, Object value ) throws Exception
     {
         BeanHelper.setProperty(subject, this.access, value);
@@ -329,10 +336,11 @@ public abstract class AbstractProperty<S, T>
     @Override
     public String toString()
     {
-        if ( StringUtils.equals(this.access, this.key) ) {
+        if (StringUtils.equals(this.access, this.key)) {
             return this.getClass().getName() + " " + this.label + " (" + this.access + ")";
         } else {
-            return this.getClass().getName() + " " + this.label + " (" + this.access + " : " + this.key + ")";
+            return this.getClass().getName() + " " + this.label + " (" + this.access + " : " +
+                this.key + ")";
         }
     }
 }

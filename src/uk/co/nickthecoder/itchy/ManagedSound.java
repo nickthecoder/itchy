@@ -50,6 +50,7 @@ public class ManagedSound implements PropertySubject<ManagedSound>
      * What happens if the same sound is played more than once, so that they would overlap?
      * Either both are allowed to play, or the first is stopped, or the second is ignored.
      */
+    @Property(label="Multiple Behaviour")
     public MultipleBehaviour multipleBehaviour = MultipleBehaviour.IGNORE_SECOND;
     
 
