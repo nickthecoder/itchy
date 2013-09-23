@@ -193,7 +193,6 @@ public class Scene
                         activateList.add(actor);
                     } else if (actor.getActivationDelay() > 0) {
                         actor.activateAfter(actor.getActivationDelay());
-                        // actor.activate();
                     }
                 }
             }

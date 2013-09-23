@@ -47,7 +47,8 @@ public abstract class ActorsLayer extends Layer
 
     public void add( Actor actor )
     {
-        actor.setLayer(this);
+        actor.removeFromLayer();
+        actor.setLayerAttribute(this);
         this.actors.add(actor);
 
         if (actor.getBehaviour() instanceof MouseListener) {
@@ -58,19 +59,21 @@ public abstract class ActorsLayer extends Layer
     public boolean remove( Actor actor )
     {
         this.actorMouseListeners.remove(actor);
-        actor.setLayer(null);
+        actor.setLayerAttribute(null);
         return this.actors.remove(actor);
     }
 
     public void addBottom( Actor actor )
     {
-        actor.setLayer(this);
+        actor.removeFromLayer();
+        actor.setLayerAttribute(this);
         this.actors.add(0, actor);
     }
 
     public void addBelow( Actor actor, Actor other )
     {
-        actor.setLayer(this);
+        actor.removeFromLayer();
+        actor.setLayerAttribute(this);
         int index = this.actors.indexOf(other);
         if (index < 0) {
             this.actors.add(0, other);
@@ -81,7 +84,8 @@ public abstract class ActorsLayer extends Layer
 
     public void addAbove( Actor actor, Actor other )
     {
-        actor.setLayer(this);
+        actor.removeFromLayer();
+        actor.setLayerAttribute(this);
         int index = this.actors.indexOf(other);
         if (index < 0) {
             this.actors.add(other);

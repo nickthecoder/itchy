@@ -8,9 +8,7 @@ Jame is out of date, need to rebuild for win32 and i386 and ARM??
 What's Next
 ===========
 
-Finish CostumesEditor
-
-Icons on each editor tab and also on the CostumeEditor for each event type (String,Pose,Sound etc).
+Finish CostumesEditor - (ManagedSound's enum property).
 
 Component : Override all rules. Currently only Font can be overridden.  
     Allow to be reset to default (i.e. be restyled). 
@@ -60,6 +58,8 @@ Costumes are updated even when cancel is pressed (need to COPY the costume?)
 
 Later
 =====
+
+Icons on each editor tab and also on the CostumeEditor for each event type (String,Pose,Sound etc).
 
 Create a GenericGame, which can load arbitrary resources (for a simple start to a game)
     Started (called Launcher).

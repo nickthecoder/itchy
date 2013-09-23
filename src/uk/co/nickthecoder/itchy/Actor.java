@@ -202,11 +202,30 @@ public class Actor
         return this.layer;
     }
 
-    void setLayer( ActorsLayer layer )
+    public void removeFromLayer()
     {
-        if (this.layer != null) {
-            this.layer = null;
+        setLayer(null);
+    }
+    
+    public void setLayer( ActorsLayer layer )
+    {
+        if (this.layer == layer) {
+            return;
         }
+        
+        if( layer == null) {
+            this.layer.remove(this);
+        } else {
+            layer.add(this);
+        }
+    }
+    
+    void setLayerAttribute( ActorsLayer layer )
+    {
+        if (layer == this.layer) {
+            return;
+        }
+        
         this.layer = layer;
     }
 
@@ -379,9 +398,7 @@ public class Actor
     public void activate()
     {
         if (this.dead) {
-            this.dying = false;
-            this.dead = false;
-            this.active = false;
+            return;
         }
         
         if (!this.active) {
