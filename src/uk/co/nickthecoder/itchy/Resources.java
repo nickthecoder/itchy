@@ -47,6 +47,8 @@ public class Resources extends Loadable
 
     private TreeSet<String> behaviourClassNames;
 
+    private TreeSet<String> costumePropertiesClassNames;
+
     private TreeSet<String> sceneBehaviourClassNames;
 
     public Resources()
@@ -62,10 +64,12 @@ public class Resources extends Loadable
         this.animations = new HashMap<String, AnimationResource>();
 
         this.behaviourClassNames = new TreeSet<String>();
+        this.costumePropertiesClassNames = new TreeSet<String>();
         this.sceneBehaviourClassNames = new TreeSet<String>();
-        
-        this.registerBehaviourClassName( NullBehaviour.class.getName() );
-        this.registerSceneBehaviourClassName( NullSceneBehaviour.class.getName() );
+
+        this.registerBehaviourClassName(NullBehaviour.class.getName());
+        this.registerCostumePropertiesClassName(NoProperties.class.getName());
+        this.registerSceneBehaviourClassName(NullSceneBehaviour.class.getName());
     }
 
     @Override
@@ -83,7 +87,7 @@ public class Resources extends Loadable
     }
 
     @Override
-    protected void checkSave( File file) throws Exception
+    protected void checkSave( File file ) throws Exception
     {
         Resources resources = new Resources();
         resources.load(file);
@@ -125,7 +129,7 @@ public class Resources extends Loadable
                 throw new Exception("Costume " + name + " wasn't saved");
             }
         }
-        
+
     }
 
     public void renameResource( Object object, String name )
@@ -219,14 +223,14 @@ public class Resources extends Loadable
 
     public FontResource getFontResource( Font font )
     {
-        for ( FontResource fontResource : fonts.values() ) {
-            if ( fontResource.font == font) {
+        for (FontResource fontResource : this.fonts.values()) {
+            if (fontResource.font == font) {
                 return fontResource;
             }
         }
         return null;
     }
-    
+
     public Font getFont( String name )
     {
         FontResource resource = this.fonts.get(name);
@@ -369,6 +373,7 @@ public class Resources extends Loadable
     {
         this.costumes.put(resource.name, resource);
         this.registerBehaviourClassName(resource.costume.behaviourClassName);
+        this.registerCostumePropertiesClassName(resource.costume.getPropertiesClassName());
     }
 
     public void removeCostume( String name )
@@ -530,6 +535,18 @@ public class Resources extends Loadable
         return false;
     }
 
+    public boolean registerCostumePropertiesClassName( String className )
+    {
+        if (this.costumePropertiesClassNames.contains(className)) {
+            return true;
+        }
+        if (NoProperties.isValidClassName(className)) {
+            this.costumePropertiesClassNames.add(className);
+            return true;
+        }
+        return false;
+    }
+
     public boolean registerSceneBehaviourClassName( String className )
     {
         try {
@@ -550,6 +567,11 @@ public class Resources extends Loadable
     public Set<String> getBehaviourClassNames()
     {
         return this.behaviourClassNames;
+    }
+
+    public Set<String> getCostumePropertiesClassNames()
+    {
+        return this.costumePropertiesClassNames;
     }
 
     public Set<String> getSceneBehaviourClassNames()

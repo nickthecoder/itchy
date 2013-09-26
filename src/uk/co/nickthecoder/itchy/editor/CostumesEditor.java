@@ -10,22 +10,24 @@ import java.util.HashMap;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.AnimationResource;
-import uk.co.nickthecoder.itchy.Behaviour;
 import uk.co.nickthecoder.itchy.Costume;
 import uk.co.nickthecoder.itchy.CostumeResource;
 import uk.co.nickthecoder.itchy.FontResource;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.ManagedSound;
+import uk.co.nickthecoder.itchy.NoProperties;
 import uk.co.nickthecoder.itchy.PoseResource;
 import uk.co.nickthecoder.itchy.SoundResource;
 import uk.co.nickthecoder.itchy.gui.AbstractTableListener;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Button;
 import uk.co.nickthecoder.itchy.gui.Component;
+import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.Container;
 import uk.co.nickthecoder.itchy.gui.GridLayout;
 import uk.co.nickthecoder.itchy.gui.ImageComponent;
 import uk.co.nickthecoder.itchy.gui.Label;
+import uk.co.nickthecoder.itchy.gui.Notebook;
 import uk.co.nickthecoder.itchy.gui.Picker;
 import uk.co.nickthecoder.itchy.gui.PickerButton;
 import uk.co.nickthecoder.itchy.gui.ReflectionTableModelRow;
@@ -58,11 +60,17 @@ public class CostumesEditor extends SubEditor
 
     private Button buttonExtendedFrom;
 
+    private Notebook notebook;
+
     private ComboBox behaviour;
+
+    private ComboBox propertiesClassName;
 
     private Table eventsTable;
 
     private SimpleTableModel eventsTableModel;
+
+    private Container propertiesContainer;
 
     public CostumesEditor( Editor editor )
     {
@@ -161,10 +169,11 @@ public class CostumesEditor extends SubEditor
     protected void edit( GridLayout grid, Object resource )
     {
         this.currentCostumeResource = (CostumeResource) resource;
+        final Costume costume = this.currentCostumeResource.costume;
 
         this.txtName = new TextBox(this.currentCostumeResource.getName());
 
-        Costume base = this.currentCostumeResource.costume.getExtendedFrom();
+        Costume base = costume.getExtendedFrom();
         this.labelExtendedFrom = new Label(base == null ? "None" : this.editor.resources
             .getCostumeResource(base).getName());
         this.buttonExtendedFrom = new Button(this.labelExtendedFrom) {
@@ -186,12 +195,26 @@ public class CostumesEditor extends SubEditor
         };
 
         this.behaviour = new ComboBox(
-            this.currentCostumeResource.costume.behaviourClassName,
+            costume.behaviourClassName,
             this.editor.game.resources.getBehaviourClassNames());
 
         grid.addRow("Name", this.txtName);
         grid.addRow("Extends", this.buttonExtendedFrom);
         grid.addRow("Behaviour", this.behaviour);
+
+        Container all = new Container();
+        all.setLayout(new VerticalLayout());
+        this.notebook = new Notebook();
+
+        Container eventsPage = new Container();
+        Container propertiesPage = new Container();
+        this.notebook.addPage("Events", eventsPage);
+        this.notebook.addPage("Properties", propertiesPage);
+
+        grid.addRow("", this.notebook);
+
+        eventsPage.setLayout(new VerticalLayout());
+        Container eventsTableSection = new Container();
 
         this.eventsTable = this.createEventsTable();
         this.eventsTable.addTableListener(new AbstractTableListener() {
@@ -203,7 +226,111 @@ public class CostumesEditor extends SubEditor
         });
 
         this.eventsTable.sort(0);
-        grid.addRow("Events", this.eventsTable);
+        eventsTableSection.addChild(this.eventsTable);
+        eventsPage.addChild(eventsTableSection);
+        Container eventsTableButtons = new Container();
+        eventsTableButtons.setLayout(new VerticalLayout());
+        eventsTableButtons.setYAlignment(0.5f);
+        eventsTableSection.setFill(true, true);
+        eventsTableButtons.addStyle("buttonColumn");
+
+        eventsTableSection.addChild(eventsTableButtons); // TODO more
+
+        Button edit = new Button("Edit");
+        edit.addActionListener(new ActionListener() {
+            @Override
+            public void action()
+            {
+                CostumesEditor.this.onEditEvent();
+            }
+        });
+        eventsTableButtons.addChild(edit);
+
+        Button add = new Button("Add");
+        add.addActionListener(new ActionListener() {
+            @Override
+            public void action()
+            {
+                CostumesEditor.this.onAddEvent();
+            }
+        });
+        eventsTableButtons.addChild(add);
+
+        Button remove = new Button("Remove");
+        remove.addActionListener(new ActionListener() {
+            @Override
+            public void action()
+            {
+                CostumesEditor.this.onRemoveEvent();
+            }
+        });
+        eventsTableButtons.addChild(remove);
+
+        propertiesPage.setLayout(new VerticalLayout());
+
+        this.propertiesClassName = new ComboBox(
+            costume.getPropertiesClassName(),
+            this.editor.game.resources.getCostumePropertiesClassNames());
+
+        this.propertiesClassName.addChangeListener(new ComponentChangeListener() {
+
+            @Override
+            public void changed()
+            {
+                if (CostumesEditor.this.propertiesClassName.getText().equals(
+                    costume.getPropertiesClassName())) {
+                    CostumesEditor.this.propertiesClassName.removeStyle("error");
+                } else {
+                    try {
+                        costume.setPropertiesClassName(CostumesEditor.this.propertiesClassName
+                            .getText());
+                        createPropertiesGrid();
+                        CostumesEditor.this.propertiesClassName.removeStyle("error");
+
+                    } catch (Exception e) {
+                        System.out.println("Adding style error");
+                        CostumesEditor.this.propertiesClassName.addStyle("error");
+                    }
+                }
+            }
+
+        });
+
+        propertiesPage.addChild(this.propertiesClassName);
+        this.propertiesContainer = new Container();
+        propertiesPage.addChild(this.propertiesContainer);
+        createPropertiesGrid();
+
+    }
+
+    private List<Component> propertiesComponents;
+
+    private void createPropertiesGrid()
+    {
+        this.propertiesComponents = new ArrayList<Component>();
+
+        Object properties = this.currentCostumeResource.costume.getProperties();
+        if (!properties.getClass().getName().equals(this.propertiesClassName.getText())) {
+            properties = NoProperties.createProperties(this.propertiesClassName.getText());
+        }
+
+        GridLayout grid = new GridLayout(this.propertiesContainer, 2);
+        this.propertiesContainer.setLayout(grid);
+
+        for (AbstractProperty<Object, ?> property : AbstractProperty
+            .findAnnotations(properties.getClass())) {
+
+            try {
+                Component component = property.createComponent(properties, false);
+                this.propertiesComponents.add(component);
+                grid.addRow(property.label, component);
+
+            } catch (Exception e) {
+                System.err.println("Failed to create component for Costume Property : " +
+                    property.key);
+            }
+
+        }
     }
 
     private Table createEventsTable()
@@ -337,42 +464,6 @@ public class CostumesEditor extends SubEditor
         }
 
         return model;
-    }
-
-    @Override
-    protected void addDetailButtons( Container buttons )
-    {
-        Button edit = new Button("Edit");
-        edit.addActionListener(new ActionListener() {
-            @Override
-            public void action()
-            {
-                CostumesEditor.this.onEditEvent();
-            }
-        });
-        buttons.addChild(edit);
-
-        Button add = new Button("Add");
-        add.addActionListener(new ActionListener() {
-            @Override
-            public void action()
-            {
-                CostumesEditor.this.onAddEvent();
-            }
-        });
-        buttons.addChild(add);
-
-        Button remove = new Button("Remove");
-        remove.addActionListener(new ActionListener() {
-            @Override
-            public void action()
-            {
-                CostumesEditor.this.onRemoveEvent();
-            }
-        });
-        buttons.addChild(remove);
-
-        super.addDetailButtons(buttons);
     }
 
     private void onAddEvent()
@@ -722,8 +813,14 @@ public class CostumesEditor extends SubEditor
             }
         }
 
-        if (!Behaviour.isValidClassName(this.behaviour.getText())) {
+        if (!this.editor.resources.registerBehaviourClassName(this.behaviour.getText())) {
             this.setMessage("Not a valid behaviour class name");
+            return;
+        }
+
+        if (!this.editor.resources.registerCostumePropertiesClassName(this.propertiesClassName
+            .getText())) {
+            this.setMessage("Not a valid class name");
             return;
         }
 
@@ -748,8 +845,32 @@ public class CostumesEditor extends SubEditor
         }
 
         this.currentCostumeResource.setName(this.txtName.getText());
-
         this.currentCostumeResource.costume.behaviourClassName = this.behaviour.getText();
+
+        if (NoProperties.isValidClassName(this.propertiesClassName.getText())) {
+            this.currentCostumeResource.costume.setPropertiesClassName(this.propertiesClassName
+                .getText());
+            Object properties = this.currentCostumeResource.costume.getProperties();
+
+            int index = 0;
+            for (AbstractProperty<Object, ?> property : AbstractProperty
+                .findAnnotations(properties.getClass())) {
+
+                Component component = this.propertiesComponents.get(index);
+                try {
+                    property.update(properties, component);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    this.setMessage("Failed to set property " + property.label);
+                    return;
+                }
+                index += 1;
+            }
+
+        } else {
+            this.setMessage("Invalid properties class name");
+            return;
+        }
 
         if (this.adding) {
             this.editor.resources.addCostume(this.currentCostumeResource);

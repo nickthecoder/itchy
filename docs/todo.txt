@@ -8,6 +8,10 @@ Jame is out of date, need to rebuild for win32 and i386 and ARM??
 What's Next
 ===========
 
+Finish Costume properties
+    Place Events and Properties into a Notebook.
+    Have an instance of the class
+
 Component : Override all rules. Currently only Font can be overridden.  
     Allow to be reset to default (i.e. be restyled). 
 
@@ -23,20 +27,19 @@ Implement Costume custom properties
     Refactor the code which uses Costume's strings. Replace with custom properties.
     Should it get the list of properties from the Behaviour?
         Behaviour's properties have a scope of either Costume or Behaviour?
+    Or should a costume have a "CostumeProperty" class 
 
 Javacript for each Behaviour, SceneBehaviour and later for Game itself.
     If the Behaviour is JavascriptBehaviour, then look for a text file with the appropriate name relative to
     the resources file.
 
 
-Minor BUGS
-==========
-
-One of the animation profiles shows that the NumericAnimation isn't quite right.
     
 
 Bugs
 ====
+
+One of the animation profiles shows that the NumericAnimation isn't quite right.
 
 When a window has no focusable components, then it recurses till the stack explodes.
 

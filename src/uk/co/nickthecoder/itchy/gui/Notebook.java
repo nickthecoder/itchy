@@ -36,6 +36,11 @@ public class Notebook extends Container
         this.type = "notebook";
     }
 
+    public void addPage( String label, Component page )
+    {
+        addPage( new Label(label),page);
+    }
+    
     public void addPage( Component label, Component page )
     {
         Tab tab = new Tab(label, page, this.tabs.getChildren().size());

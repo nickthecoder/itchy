@@ -32,6 +32,8 @@ public class Costume
 
     public String behaviourClassName = uk.co.nickthecoder.itchy.NullBehaviour.class.getName();
 
+    private Object properties = new NoProperties();
+
     public Costume()
     {
         this(null);
@@ -125,24 +127,6 @@ public class Costume
         return string;
     }
 
-    public int getInt( String name, int defaultValue )
-    {
-        try {
-            return Integer.parseInt(getString(name));
-        } catch (Exception e) {
-            return defaultValue;
-        }
-    }
-
-    public double getDouble( String name, double defaultValue )
-    {
-        try {
-            return Double.parseDouble(getString(name));
-        } catch (Exception e) {
-            return defaultValue;
-        }
-    }
-
     public List<String> getStringChoices( String name )
     {
         return this.stringChoices.get(name);
@@ -176,6 +160,9 @@ public class Costume
             }
             return null;
         }
+        if (choices.size() == 0) {
+            return null;
+        }
         PoseResource poseResource = choices.get(random.nextInt(choices.size()));
         return poseResource;
     }
@@ -200,13 +187,13 @@ public class Costume
             this.soundChoices.put(name, choices);
         }
         choices.add(managedSound);
-        
+
     }
-    
+
     public ManagedSound addSound( String name, SoundResource soundResource )
     {
         ManagedSound managedSound = new ManagedSound(soundResource);
-        this.addSound( name, managedSound );
+        this.addSound(name, managedSound);
         return managedSound;
     }
 
@@ -216,7 +203,7 @@ public class Costume
         assert (choices.contains(value));
         choices.remove(value);
     }
-    
+
     public SoundResource getSoundResource( String name )
     {
         ManagedSound cs = getCostumeSound(name);
@@ -262,7 +249,7 @@ public class Costume
         }
         choices.add(fontResource);
     }
-    
+
     public void removeFont( String name, FontResource value )
     {
         List<FontResource> choices = this.fontChoices.get(name);
@@ -312,7 +299,7 @@ public class Costume
         assert (choices.contains(value));
         choices.remove(value);
     }
-    
+
     public AnimationResource getAnimationResource( String name )
     {
         List<AnimationResource> animationList = this.animationChoices.get(name);
@@ -336,6 +323,28 @@ public class Costume
     public List<AnimationResource> getAnimationChoices( String name )
     {
         return this.animationChoices.get(name);
+    }
+
+    public String getPropertiesClassName()
+    {
+        return this.properties.getClass().getName();
+    }
+
+    public void setPropertiesClassName( String value )
+    {
+        if (!value.equals(getPropertiesClassName())) {
+            this.properties = NoProperties.createProperties(value);
+        }
+    }
+
+    public Object getProperties()
+    {
+        return this.properties;
+    }
+
+    public void setProperties( Object value )
+    {
+        this.properties = value;
     }
 
 }

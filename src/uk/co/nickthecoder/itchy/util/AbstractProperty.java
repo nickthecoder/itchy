@@ -28,7 +28,7 @@ import uk.co.nickthecoder.jame.RGBA;
  * Currently, Actor and Behaviour have properties which can be edited within the SceneDesigner
  * 
  * @param <S>
- *        The propertie's subject, such as Actor, Behaviour, GameBehaviour etc.
+ *        The property's subject, such as Actor, Behaviour, GameBehaviour etc.
  * @param <T>
  *        The type of the property, such as String, Integer, Double etc.
  */
@@ -164,7 +164,7 @@ public abstract class AbstractProperty<S, T>
         }
         if (Enum.class.isAssignableFrom(klass)) {
 
-        //if (klass.isAssignableFrom(Enum.class)) {
+            // if (klass.isAssignableFrom(Enum.class)) {
             @SuppressWarnings({ "rawtypes", "unchecked" })
             AbstractProperty<SS, ?> result = new EnumProperty<SS, Enum>(label, access, key,
                 (Class<Enum>) klass);

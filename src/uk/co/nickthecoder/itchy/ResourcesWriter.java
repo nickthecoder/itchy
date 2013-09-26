@@ -197,6 +197,30 @@ public class ResourcesWriter extends XMLWriter
         }
     }
 
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+    private <S extends PropertySubject<S>> void writeObjectProperties( Object subject )
+        throws XMLException
+    {
+        if ( subject instanceof PropertySubject) {
+            writeProperties( (PropertySubject) subject);
+        } else {
+            
+            for (AbstractProperty<Object, ?> property : AbstractProperty.findAnnotations(subject.getClass())) {
+
+                try {
+                    String value = property.getStringValue(subject);
+                    if (!StringUtils.isBlank(value)) {
+                        this.attribute(property.key, value);
+                    }
+
+                } catch (Exception e) {
+                    throw new XMLException("Failed to write property : " + property.key);
+                }
+
+            }
+        }
+    }
+    
     private <S extends PropertySubject<S>> void writeProperties( S subject )
         throws XMLException
     {
@@ -303,15 +327,34 @@ public class ResourcesWriter extends XMLWriter
             this.attribute("behaviour", simpleCostume.behaviourClassName);
         }
 
+        if (NoProperties.class != simpleCostume.getProperties().getClass()) {
+            this.attribute("properties", simpleCostume.getPropertiesClassName());
+        }
+
         this.writeCostumePoses(simpleCostume);
         this.writeCostumeStrings(simpleCostume);
         this.writeCostumeSounds(simpleCostume);
         this.writeCostumeFonts(simpleCostume);
         this.writeCostumeAnimations(simpleCostume);
+        this.writeCostumeProperties(simpleCostume);
 
         this.endTag("costume");
 
         this.writtenCostumeName.add(name);
+    }
+
+    private void writeCostumeProperties( Costume costume ) throws XMLException
+    {
+        Object properties = costume.getProperties();
+
+        if (properties.getClass() == NoProperties.class) {
+            return;
+        }
+
+        this.beginTag("properties");
+        writeObjectProperties(properties);
+        this.endTag("properties");
+
     }
 
     private void writeCostumePoses( Costume costume ) throws XMLException
@@ -364,8 +407,8 @@ public class ResourcesWriter extends XMLWriter
                 this.attribute("name", name);
 
                 this.attribute("sound", cs.soundResource.name);
-                writeProperties( cs );
-                
+                writeProperties(cs);
+
                 this.endTag("sound");
             }
 

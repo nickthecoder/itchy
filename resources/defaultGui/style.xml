@@ -75,6 +75,7 @@
     
     <rule criteria=".form" spacing="10" />
     <rule criteria=".buttonBar" spacing="10" marginTop="10" marginBottom="10"/>
+    <rule criteria=".buttonColumn" spacing="10" margin="10"/>
     <rule criteria=".error" color="#ff0000" />
     <rule criteria=".hint" color="#228822" marginLeft="10" />
     

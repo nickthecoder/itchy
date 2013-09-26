@@ -88,19 +88,6 @@ public class ResourcesReader
         }
     }
 
-//    private void readInclude( XMLTag includeTag ) throws Exception
-//    {
-//        String filename = includeTag.getAttribute("filename");
-//        ResourcesReader reader = new ResourcesReader(this.resources);
-//        reader.included = true;
-//        try {
-//            reader.load(this.resources.resolveFilename(filename));
-//        } catch (Exception e) {
-//            throw new XMLException("Failed to load included resource " + filename + " : " +
-//                e.getMessage());
-//        }
-//    }
-
     private void readNinePatches( XMLTag eightPatchesTag ) throws Exception
     {
         for (Iterator<XMLTag> i = eightPatchesTag.getTags("ninePatch"); i.hasNext();) {
@@ -192,7 +179,6 @@ public class ResourcesReader
             this.resources.addAnimation(ar);
         }
     }
-    
 
     private void readCostumes( XMLTag costumesTag ) throws Exception
     {
@@ -214,11 +200,30 @@ public class ResourcesReader
 
             }
 
-            costume.behaviourClassName = costumeTag.getOptionalAttribute("behaviour",
+            String behaviourClassName = costumeTag.getOptionalAttribute("behaviour",
                 NullBehaviour.class.getName());
-            if (!Behaviour.isValidClassName(costume.behaviourClassName)) {
+            if (this.resources.registerBehaviourClassName(behaviourClassName)) {
+                costume.behaviourClassName = behaviourClassName;
+            } else {
                 throw new XMLException("Expected a subclass of Behaviour : " +
                     costume.behaviourClassName);
+            }
+
+            String propertiesClassName = costumeTag.getOptionalAttribute("properties",
+                NoProperties.class.getName());
+            if (this.resources.registerCostumePropertiesClassName(propertiesClassName)) {
+                costume.setPropertiesClassName(propertiesClassName);
+
+            } else {
+                throw new XMLException("Expected a name of a Properties class : " +
+                    propertiesClassName);
+            }
+
+            
+            for (Iterator<XMLTag> j = costumeTag.getTags("properties"); j.hasNext();) {
+                XMLTag propertiesTag = j.next();
+                
+                readObjectProperties( propertiesTag, costume.getProperties());
             }
 
             for (Iterator<XMLTag> j = costumeTag.getTags("pose"); j.hasNext();) {
@@ -246,9 +251,9 @@ public class ResourcesReader
                     throw new XMLException("Sound : " + soundName + " not found for costume : " +
                         costumeName);
                 }
-                ManagedSound managedSound = new ManagedSound( soundResource );
-                readProperties( soundTag, managedSound );
-                
+                ManagedSound managedSound = new ManagedSound(soundResource);
+                readProperties(soundTag, managedSound);
+
                 costume.addSound(itemName, managedSound);
             }
 
@@ -313,16 +318,16 @@ public class ResourcesReader
 
             Animation child = createAnimation(tag.getName());
             readProperties(tag, child);
-            
-            if ( child instanceof CompoundAnimation) {
-                readCompoundAnimation( tag, (CompoundAnimation) child );
-                
-            } else if ( child instanceof FramedAnimation) {
-                readFramedAnimation( tag, (FramedAnimation) child );
+
+            if (child instanceof CompoundAnimation) {
+                readCompoundAnimation(tag, (CompoundAnimation) child);
+
+            } else if (child instanceof FramedAnimation) {
+                readFramedAnimation(tag, (FramedAnimation) child);
             }
-            
-            animation.addAnimation( child );
-            
+
+            animation.addAnimation(child);
+
         }
     }
 
@@ -333,7 +338,7 @@ public class ResourcesReader
             return new CompoundAnimation(true);
 
         } else if (tagName.equals("parallel")) {
-                return new CompoundAnimation(false);
+            return new CompoundAnimation(false);
 
         } else if (tagName.equals("sequence")) {
             return new CompoundAnimation(true);
@@ -364,13 +369,35 @@ public class ResourcesReader
         }
     }
 
-
-    
-
-    private <S extends PropertySubject<S>> void readProperties( XMLTag tag, S subject)
+    private void readObjectProperties( XMLTag tag, Object subject )
         throws XMLException
     {
-        
+        for (AbstractProperty<Object, ?> property : AbstractProperty.findAnnotations(subject.getClass())) {
+            String value = tag.getOptionalAttribute(property.key, null);
+            if (value == null) {
+                for (String alias : property.aliases) {
+                    value = tag.getOptionalAttribute(alias, null);
+                    if (value != null) {
+                        break;
+                    }
+                }
+            }
+            if (value != null) {
+                try {
+                    property.setValueByString(subject, value);
+                } catch (Exception e) {
+                    throw new XMLException("Failed to parse property : '" + property.key +
+                        "'. value : '" + value + "'");
+                }
+            }
+        }
+
+    }
+    
+    private <S extends PropertySubject<S>> void readProperties( XMLTag tag, S subject )
+        throws XMLException
+    {
+
         for (AbstractProperty<S, ?> property : subject.getProperties()) {
             String value = tag.getOptionalAttribute(property.key, null);
             if (value == null) {
