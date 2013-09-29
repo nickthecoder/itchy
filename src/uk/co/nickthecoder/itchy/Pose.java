@@ -47,4 +47,13 @@ public interface Pose extends OffsetSurface
      * no-op.
      */
     public void used();
+
+    @Override
+    @Property(label = "Offset X")
+    public int getOffsetX();
+
+    @Override
+    @Property(label = "Offset Y")
+    public int getOffsetY();
+
 }

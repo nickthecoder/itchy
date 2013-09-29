@@ -40,7 +40,7 @@ public class TextValue extends Behaviour
     {
         this.beanHelper = new BeanHelper(Itchy.getGame(), this.access);
         if ( updateInterval > 0 ) {
-            timer = new Timer( this.updateInterval);
+            timer = Timer.createTimerSeconds( this.updateInterval);
         }
         tick();
         if ( updateInterval < 0 ) {

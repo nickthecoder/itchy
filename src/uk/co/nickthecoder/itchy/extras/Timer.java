@@ -42,14 +42,14 @@ public class Timer
         return new Timer((int) (from * 1000), (int) (to*1000));
     }
 
-    public Timer( int period )
+    private Timer( int period )
     {
         this.minimumPeriod = period;
         this.maximumPeriod = period;
         this.period = period;
         this.reset();
     }
-    public Timer( int from, int to )
+    private Timer( int from, int to )
     {
         this.minimumPeriod = from;
         this.maximumPeriod = to;
@@ -121,5 +121,10 @@ public class Timer
             this.period = (int) Util.randomBetween(this.minimumPeriod,  this.maximumPeriod);
         }
         this.startTime = currentTimeMillis();
+    }
+    
+    public String toString()
+    {
+        return "Timer : " + this.period + " progress  "+  getProgress() + " finished ? " + isFinished(); 
     }
 }

@@ -9,7 +9,9 @@ package uk.co.nickthecoder.drunkinvaders;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Behaviour;
+import uk.co.nickthecoder.itchy.util.Tag;
 
+@Tag(names = {"killable","shootable"})
 public class Shield extends Behaviour implements Shootable
 {
     public Shield()
@@ -21,8 +23,6 @@ public class Shield extends Behaviour implements Shootable
     {
         super.onAttach();
         
-        this.getActor().addTag("killable");
-        this.getActor().addTag("shootable");
         this.collisionStrategy = DrunkInvaders.game.createCollisionStrategy(this.getActor());
     }
     
@@ -31,8 +31,6 @@ public class Shield extends Behaviour implements Shootable
     {
         super.onDetach();
         
-        this.getActor().removeTag("killable");
-        this.getActor().removeTag("shootable");
         resetCollisionStrategy();
     }
 

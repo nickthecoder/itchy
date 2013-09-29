@@ -73,6 +73,11 @@ public class Pause
     }
     
     public void pause()
+    {
+        pause(true);
+    }
+    
+    public void pause( boolean showMessage )
     {        
         if (this.paused) {
             return;
@@ -87,12 +92,14 @@ public class Pause
             }
         }
 
-        this.pauseActor = createActor();
-        if (this.pauseActor != null) {
-            this.pauseActor.activate();
-            this.pauseActor.event("pause");
+        if ( showMessage ) {
+            this.pauseActor = createActor();
+            if (this.pauseActor != null) {
+                this.pauseActor.activate();
+                this.pauseActor.event("pause");
+            }
         }
-
+        
         onPause();
     }
 

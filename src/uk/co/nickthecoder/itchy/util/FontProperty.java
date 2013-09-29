@@ -10,7 +10,6 @@ import uk.co.nickthecoder.itchy.FontResource;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.editor.FontPickerButton;
-import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 
@@ -36,15 +35,16 @@ public class FontProperty<S> extends AbstractProperty<S, Font>
         Resources resources = Itchy.getGame().resources;
 
         FontResource fontResource = resources.getFontResource(this.getValue(subject));
-        
-        final FontPickerButton pickerButton = new FontPickerButton(resources,fontResource);
+
+        final FontPickerButton pickerButton = new FontPickerButton(resources, fontResource);
         pickerButton.setCompact(true);
 
         if (autoUpdate) {
 
-            pickerButton.addActionListener(new ActionListener() {
+            pickerButton.addChangeListener(new ComponentChangeListener() {
+
                 @Override
-                public void action()
+                public void changed()
                 {
                     try {
                         FontProperty.this.update(subject, pickerButton);

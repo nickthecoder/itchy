@@ -9,8 +9,10 @@ import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Costume;
 import uk.co.nickthecoder.itchy.extras.Timer;
 import uk.co.nickthecoder.itchy.util.Property;
+import uk.co.nickthecoder.itchy.util.Tag;
 import uk.co.nickthecoder.itchy.util.Util;
 
+@Tag(names = {"deadly","shootable"})
 public class Mothership extends Alien
 {
     public static final String[] SHOOTABLE_LIST = new String[] { "shootable" };
@@ -57,8 +59,6 @@ public class Mothership extends Alien
     public void onAttach()
     {
         super.onAttach();
-        this.getActor().addTag("deadly");
-        this.getActor().addTag("shootable");
         this.collisionStrategy = DrunkInvaders.game.createCollisionStrategy(this.getActor());
     }
     
@@ -66,8 +66,6 @@ public class Mothership extends Alien
     public void onDetach()
     {
         super.onDetach();
-        this.getActor().removeTag("deadly");
-        this.getActor().removeTag("shootable");
         resetCollisionStrategy();
     }
     

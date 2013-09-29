@@ -14,9 +14,8 @@ import uk.co.nickthecoder.itchy.Game;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.MultiLineTextPose;
 import uk.co.nickthecoder.itchy.ScrollableLayer;
-import uk.co.nickthecoder.itchy.animation.AlphaAnimation;
-import uk.co.nickthecoder.itchy.animation.CompoundAnimation;
-import uk.co.nickthecoder.itchy.animation.NumericAnimation;
+import uk.co.nickthecoder.itchy.animation.Animation;
+import uk.co.nickthecoder.itchy.extras.FilmTransition;
 import uk.co.nickthecoder.itchy.neighbourhood.Neighbourhood;
 import uk.co.nickthecoder.itchy.neighbourhood.NeighbourhoodCollisionStrategy;
 import uk.co.nickthecoder.itchy.neighbourhood.StandardNeighbourhood;
@@ -44,10 +43,6 @@ public class DrunkInvaders extends Game
 
     public int metronomeCountdown;
 
-    private String sceneName = null;
-
-    private Actor fadeActor;
-
     private int aliensRemaining;
 
     private int levelNumber = 1;
@@ -56,9 +51,8 @@ public class DrunkInvaders extends Game
 
     private TextBehaviour info;
 
-    public boolean fadingOut = false;
+    public boolean transitioning = false;
 
-    
     public DrunkInvaders() throws Exception
     {
         super("Drunk Invaders", 640, 480);
@@ -74,11 +68,6 @@ public class DrunkInvaders extends Game
 
         this.glassLayer = new ScrollableLayer("glass", this.screenRect);
         this.fadeLayer = new ScrollableLayer("fade", this.screenRect);
-
-        this.fadeActor = new Actor(this.resources.getPose("white"));
-        this.fadeActor.getAppearance().setAlpha(0);
-        this.fadeActor.activate();
-        this.fadeLayer.add(this.fadeActor);
 
         this.layers.add(this.backgroundLayer);
         this.layers.add(this.mainLayer);
@@ -162,39 +151,30 @@ public class DrunkInvaders extends Game
 
     public void startScene( String sceneName )
     {
-        if (pause.isPaused()) {
-            pause.unpause();
-        }
-        
-        if (this.fadingOut) {
-            return;
+        if (this.pause.isPaused()) {
+            this.pause.unpause();
         }
 
         this.neighbourhood.clear();
 
-        this.sceneName = sceneName;
-
-        AlphaAnimation fadeOut = new AlphaAnimation(15, NumericAnimation.linear, 255);
-        AlphaAnimation fadeIn = new AlphaAnimation(15, NumericAnimation.linear, 0);
-        CompoundAnimation animation = new CompoundAnimation(true);
-        animation.addAnimation(fadeOut);
-        animation.addAnimation(fadeIn);
-
-        fadeOut.setFinishedMessage("fadedOut");
-        fadeOut.addMessageListener(this);
-
-        fadeIn.setFinishedMessage("fadedIn");
-        fadeIn.addMessageListener(this);
-
-        this.fadingOut = true;
-        this.fadeActor.setAnimation(animation);
-        this.fadeLayer.add(this.fadeActor);
-        this.fadeActor.activate();
+        this.transitioning = true;
+        Animation transition = FilmTransition.slideUp();
+        
+        if ("about".equals(sceneName)) {
+            transition = FilmTransition.slideRight();
+            
+        } else if ("levels".equals(sceneName)) {
+                transition = FilmTransition.slideRight();
+                
+        } else if ("menu".equals(sceneName)) {
+            transition = FilmTransition.slideLeft();
+        }
+        new FilmTransition().animation(transition).transition(sceneName);
     }
 
     @Override
     public void onMessage( String message )
-    {        
+    {
         if ("play".equals(message)) {
             startScene("levels");
 
@@ -209,20 +189,9 @@ public class DrunkInvaders extends Game
 
         } else if ("quit".equals(message)) {
             end();
-
-        } else if ("fadedIn".equals(message)) {
-            DrunkInvaders.this.fadingOut = false;
-
-        } else if ("fadedOut".equals(message)) {
-
-            this.mainLayer.clear();
-            this.fadingOut = false;
-            if ( ! this.loadScene(this.sceneName) ) {
-                this.levelNumber = 1;
-                this.sceneName = "completed";
-                this.loadScene( this.sceneName);
-            }
-
+            
+        } else if ( message == FilmTransition.COMPLETE) {
+            this.transitioning = false;
         }
     }
 
@@ -230,8 +199,8 @@ public class DrunkInvaders extends Game
     {
         this.aliensRemaining += n;
 
-        // We only care when the last alien was kill during play, not when fading the scene out.
-        if (this.fadingOut) {
+        // We only care when the last alien was killed during play, not when fading the scene out.
+        if (this.transitioning) {
             return;
         }
 
@@ -269,7 +238,7 @@ public class DrunkInvaders extends Game
     public static void main( String argv[] ) throws Exception
     {
         DrunkInvaders.game = new DrunkInvaders();
-        DrunkInvaders.game.runFromMain( argv );
+        DrunkInvaders.game.runFromMain(argv);
     }
 
     @Override
@@ -277,5 +246,5 @@ public class DrunkInvaders extends Game
     {
         return "menu";
     }
-    
+
 }

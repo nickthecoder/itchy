@@ -72,12 +72,15 @@ public class RGBAPicker extends Window
     private final void createRGBForm()
     {
         Container rgbForm = new Container();
+        this.color = null;
         try {
             this.color = RGBA.parse(this.target.getText());
         } catch (Exception e) {
+        }
+        if ( this.color == null) {
             this.color = RGBA.WHITE;
         }
-
+        
         this.red = new IntegerBox(this.color.r, 3).range(0, 255);
         this.green = new IntegerBox(this.color.g, 3).range(0, 255);
         this.blue = new IntegerBox(this.color.b, 3).range(0, 255);

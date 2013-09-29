@@ -7,9 +7,19 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.util;
 
-import java.util.List;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Target;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
-public interface PropertySubject<S extends PropertySubject<S>>
-{
-    public List<AbstractProperty<S,?>> getProperties();
+/**
+ * Annotate a sub class of Behaviour, and it will automatically add these tags to the behaviour's
+ * Actor.
+ */
+@Retention(RetentionPolicy.RUNTIME)
+@Target(value = {ElementType.TYPE})
+public @interface Tag {
+
+    public String[] names();
+    
 }

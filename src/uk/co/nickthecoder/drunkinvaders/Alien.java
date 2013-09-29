@@ -14,9 +14,11 @@ import uk.co.nickthecoder.itchy.extras.Explosion;
 import uk.co.nickthecoder.itchy.extras.Fragment;
 import uk.co.nickthecoder.itchy.extras.Talk;
 import uk.co.nickthecoder.itchy.util.Property;
+import uk.co.nickthecoder.itchy.util.Tag;
 import uk.co.nickthecoder.itchy.util.Util;
 import uk.co.nickthecoder.jame.RGBA;
 
+@Tag(names = {"deadly","shootable"})
 public class Alien extends Bouncy implements Shootable
 {
     private static RGBA SPEECH_COLOR = new RGBA(0, 0, 0);
@@ -35,24 +37,6 @@ public class Alien extends Bouncy implements Shootable
     {
         // Create the fragments for the explosions when I get shot.
         new Fragment().actor(this.getActor()).createPoses("fragment");        
-    }
-    
-    @Override
-    public void onAttach()
-    {
-        super.onAttach();
-
-        this.getActor().addTag("deadly");
-        this.getActor().addTag("shootable");
-    }
-    
-    @Override
-    public void onDetach()
-    {
-        super.onDetach();
-
-        this.getActor().removeTag("deadly");
-        this.getActor().removeTag("shootable");
     }
 
     @Override

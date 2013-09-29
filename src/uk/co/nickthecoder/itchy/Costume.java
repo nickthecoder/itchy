@@ -32,7 +32,7 @@ public class Costume
 
     public String behaviourClassName = uk.co.nickthecoder.itchy.NullBehaviour.class.getName();
 
-    private Object properties = new NoProperties();
+    private CostumeProperties properties = new CostumeProperties();
 
     public Costume()
     {
@@ -117,7 +117,7 @@ public class Costume
     public String getString( String name )
     {
         List<String> strings = this.stringChoices.get(name);
-        if (strings == null) {
+        if ((strings == null) || (strings.size()==0)) {
             if (this.extendedFrom != null) {
                 return this.extendedFrom.getString(name);
             }
@@ -154,7 +154,7 @@ public class Costume
     public PoseResource getPoseResource( String name )
     {
         List<PoseResource> choices = this.poseChoices.get(name);
-        if (choices == null) {
+        if ((choices == null) || (choices.size()==0)) {
             if (this.extendedFrom != null) {
                 return this.extendedFrom.getPoseResource(name);
             }
@@ -217,7 +217,7 @@ public class Costume
     public ManagedSound getCostumeSound( String name )
     {
         List<ManagedSound> choices = this.soundChoices.get(name);
-        if (choices == null) {
+        if ((choices == null) || (choices.size()==0)) {
             if (this.extendedFrom != null) {
                 return this.extendedFrom.getCostumeSound(name);
             }
@@ -259,14 +259,14 @@ public class Costume
 
     public FontResource getFontResource( String name )
     {
-        List<FontResource> fontList = this.fontChoices.get(name);
-        if (fontList == null) {
+        List<FontResource> choices = this.fontChoices.get(name);
+        if ((choices == null) || (choices.size()==0)) {
             if (this.extendedFrom != null) {
                 return this.extendedFrom.getFontResource(name);
             }
             return null;
         }
-        FontResource fontResource = fontList.get(random.nextInt(fontList.size()));
+        FontResource fontResource = choices.get(random.nextInt(choices.size()));
         return fontResource;
     }
 
@@ -302,15 +302,15 @@ public class Costume
 
     public AnimationResource getAnimationResource( String name )
     {
-        List<AnimationResource> animationList = this.animationChoices.get(name);
-        if (animationList == null) {
+        List<AnimationResource> choices = this.animationChoices.get(name);
+        if ((choices == null) || (choices.size()==0)) {
             if (this.extendedFrom != null) {
                 return this.extendedFrom.getAnimationResource(name);
             }
             return null;
         }
-        AnimationResource animationResource = animationList
-            .get(random.nextInt(animationList.size()));
+        AnimationResource animationResource = choices
+            .get(random.nextInt(choices.size()));
         return animationResource;
     }
 
@@ -333,16 +333,16 @@ public class Costume
     public void setPropertiesClassName( String value )
     {
         if (!value.equals(getPropertiesClassName())) {
-            this.properties = NoProperties.createProperties(value);
+            this.properties = CostumeProperties.createProperties(value);
         }
     }
 
-    public Object getProperties()
+    public CostumeProperties getProperties()
     {
         return this.properties;
     }
 
-    public void setProperties( Object value )
+    public void setProperties( CostumeProperties value )
     {
         this.properties = value;
     }

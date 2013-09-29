@@ -8,31 +8,9 @@ Jame is out of date, need to rebuild for win32 and i386 and ARM??
 What's Next
 ===========
 
-Finish Costume properties
-    Place Events and Properties into a Notebook.
-    Have an instance of the class
-
-Component : Override all rules. Currently only Font can be overridden.  
-    Allow to be reset to default (i.e. be restyled). 
-
-Bucket to be more transparent
-Water looks naff
-No instructions for picking up water
-
-Move appearance properties to their own tab, rather than on Actor tab.
-
-Implement Costume custom properties
-    GUI
-    Load/Save
-    Refactor the code which uses Costume's strings. Replace with custom properties.
-    Should it get the list of properties from the Behaviour?
-        Behaviour's properties have a scope of either Costume or Behaviour?
-    Or should a costume have a "CostumeProperty" class 
-
-Javacript for each Behaviour, SceneBehaviour and later for Game itself.
-    If the Behaviour is JavascriptBehaviour, then look for a text file with the appropriate name relative to
+Javascript for each Behaviour, SceneBehaviour and later for Game and CostumeProperties.
+    If the Behaviour is JSBehaviour, then look for a text file with the appropriate name relative to
     the resources file.
-
 
     
 
@@ -43,12 +21,7 @@ One of the animation profiles shows that the NumericAnimation isn't quite right.
 
 When a window has no focusable components, then it recurses till the stack explodes.
 
-Designer can scale actors to -ve values, which are then unselectable
-
 Popup windows dont center themselves when window grows. Should they?
-
-Check what happens when you load and save and reload a single non-compound animation. Is it right?
-   In the editor, the top-most animation must always be a CompoundAnimation
 
 On Remove, there is no check that the resource isn't being used by something else.
     Easy pose, animation, sound..., but tricky for costume, as they could be used in any scene
@@ -59,6 +32,15 @@ Costumes are updated even when cancel is pressed (need to COPY the costume?)
 
 Later
 =====
+
+
+Bucket to be more transparent
+Water looks naff
+
+The stars on Drunk Invaders backgrounds should have more variation (alpha and slight colour - maybe size too).
+
+Component : Override all rules. Currently only Font can be overridden.  
+    Allow to be reset to default (i.e. be restyled). 
 
 Icons on each editor tab and also on the CostumeEditor for each event type (String,Pose,Sound etc).
 
@@ -86,6 +68,6 @@ then pop the context.
 
 Appearance optimised so that it doesn't need to re-render the appearance to get the worldRectangle
     Maybe calculate the maximum rectangle for the Pose for any rotation
-    When asked for its wordRect, if cached, returned that, other wise if direction == 0, return pose.rectangle * scale, otherwise return maximum rect * scale   
+    When asked for its worldRect, if cached, returned that, other wise if direction == 0, return pose.rectangle * scale, otherwise return maximum rect * scale   
 
 

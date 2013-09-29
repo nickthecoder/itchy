@@ -19,7 +19,6 @@ public class PoseResource extends NamedResource
     public static List<AbstractProperty<PoseResource, ?>> properties = 
         AbstractProperty.findAnnotations(PoseResource.class);
 
-
     public static final int THUMBNAIL_WIDTH = 50;
     public static final int THUMBNAIL_HEIGHT = 50;
 
@@ -40,7 +39,7 @@ public class PoseResource extends NamedResource
 
     public PoseResource( ImagePose pose )
     {
-        super("anon");
+        super();
         this.pose = pose;
         this.filename = null;
     }

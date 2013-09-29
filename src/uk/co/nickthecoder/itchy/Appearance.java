@@ -1,17 +1,43 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0 which accompanies this
+ * distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import uk.co.nickthecoder.itchy.util.AbstractProperty;
+import uk.co.nickthecoder.itchy.util.DoubleProperty;
+import uk.co.nickthecoder.itchy.util.FontProperty;
+import uk.co.nickthecoder.itchy.util.Property;
+import uk.co.nickthecoder.itchy.util.PropertySubject;
+import uk.co.nickthecoder.itchy.util.RGBAProperty;
+import uk.co.nickthecoder.itchy.util.StringProperty;
 import uk.co.nickthecoder.jame.RGBA;
 import uk.co.nickthecoder.jame.Surface;
 
-public final class Appearance implements OffsetSurface
+public final class Appearance implements OffsetSurface, PropertySubject<Appearance>
 {
+    private static List<AbstractProperty<Appearance, ?>> normalProperties =
+        AbstractProperty.findAnnotations(Appearance.class);
+
+    private static List<AbstractProperty<Appearance, ?>> textProperties = createTextProperties();
+
+    private static List<AbstractProperty<Appearance, ?>> createTextProperties()
+    {
+        List<AbstractProperty<Appearance, ?>> result =
+            new ArrayList<AbstractProperty<Appearance, ?>>(normalProperties);
+
+        result.add(new FontProperty<Appearance>("Font", "pose.font"));
+        result.add(new DoubleProperty<Appearance>("Font Size", "pose.fontSize"));
+        result.add(new StringProperty<Appearance>("Text", "pose.text"));
+        result.add(new RGBAProperty<Appearance>("Text Color", "pose.color", false, false));
+
+        return result;
+    }
+
     private Actor actor;
 
     private Surface processedSurface;
@@ -30,21 +56,25 @@ public final class Appearance implements OffsetSurface
      * A scale factor. A value of 1 leaves the appearance unchanged, less than 1 shrinks, greater
      * than 1 scales.
      */
+    @Property(label = "Scale")
     private double scale;
 
     /**
      * The direction the image is pointing towards in degrees.
      */
+    @Property(label = "Direction")
     private double direction;
 
     /**
      * How transparent the image is from 0 (fully transparent) to 255 (fully opaque).
      */
+    @Property(label = "Alpha (0..255)")
     private double alpha;
 
     /**
      * If set, then the image tends to this color (uses the alpha value).
      */
+    @Property(label = "Colourise")
     private RGBA colorize;
 
     public Appearance( Pose pose )
@@ -65,8 +95,8 @@ public final class Appearance implements OffsetSurface
         this.actor = actor;
 
         this.worldRectangle = new WorldRectangle(this.actor.getX() - this.pose.getOffsetX(),
-                this.actor.getY() - this.pose.getOffsetY(), this.pose.getSurface().getWidth(),
-                this.pose.getSurface().getHeight());
+            this.actor.getY() - this.pose.getOffsetY(), this.pose.getSurface().getWidth(),
+            this.pose.getSurface().getHeight());
     }
 
     public Actor getActor()
@@ -99,6 +129,7 @@ public final class Appearance implements OffsetSurface
         return this.offsetY;
     }
 
+    @Property(label = "Alpha")
     public double getAlpha()
     {
         return this.alpha;
@@ -117,6 +148,7 @@ public final class Appearance implements OffsetSurface
         this.setAlpha(this.alpha + amount);
     }
 
+    @Property(label = "Colourise", allowNull = true)
     public RGBA getColorize()
     {
         return this.colorize;
@@ -128,6 +160,7 @@ public final class Appearance implements OffsetSurface
         this.clearCachedSurface();
     }
 
+    @Property(label = "Direction")
     public double getDirection()
     {
         return this.direction;
@@ -162,6 +195,7 @@ public final class Appearance implements OffsetSurface
         this.setDirection((radians * 180 / Math.PI));
     }
 
+    @Property(label = "Scale")
     public double getScale()
     {
         return this.scale;
@@ -273,7 +307,7 @@ public final class Appearance implements OffsetSurface
             if (this.colorize != null) {
 
                 Surface colorSurface = new Surface(newSurface.getWidth(), newSurface.getHeight(),
-                        true);
+                    true);
                 // if ( newSurface == pose.getSurface() ) {
                 if (!this.dynamicSurface) {
                     newSurface = newSurface.copy();
@@ -328,7 +362,7 @@ public final class Appearance implements OffsetSurface
                 y = this.actor.getY() + this.offsetY - this.processedSurface.getHeight();
             }
             this.worldRectangle = new WorldRectangle(this.actor.getX() - this.offsetX, y,
-                    this.processedSurface.getWidth(), this.processedSurface.getHeight());
+                this.processedSurface.getWidth(), this.processedSurface.getHeight());
         }
         return this.worldRectangle;
     }
@@ -346,6 +380,16 @@ public final class Appearance implements OffsetSurface
     public void superimpose( OffsetSurface other, int dx, int dy )
     {
         this.setPose(ImagePose.superimpose(this, other, dx, dy));
+    }
+
+    @Override
+    public List<AbstractProperty<Appearance, ?>> getProperties()
+    {
+        if (this.pose instanceof TextPose) {
+            return textProperties;
+        } else {
+            return normalProperties;
+        }
     }
 
 }

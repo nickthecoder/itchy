@@ -15,9 +15,17 @@ public class NamedResource
 
     protected String name;
 
-    public NamedResource( String name )
+    public static final String ANONYMOUS = "anonymous"; 
+
+    /**
+     * Create an anonymous resource, which isn't part of the Resources.
+     * This is useful for dynamically created resources, such as by the class Fragment.
+     * Anonymous resources are not saved, or displayed in the editor.
+     */
+    public NamedResource()
     {
-        this.name = name;
+        this.name = ANONYMOUS;
+        this.resources = null;
     }
     
     public NamedResource( Resources resources, String name )
@@ -26,6 +34,11 @@ public class NamedResource
         this.name = name;
     }
 
+    public boolean isAnonymous()
+    {
+        return this.resources == null;
+    }
+    
     public void setName( String newName )
     {
         this.resources.renameResource(this, newName);

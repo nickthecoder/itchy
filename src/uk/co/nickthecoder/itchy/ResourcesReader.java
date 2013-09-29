@@ -210,7 +210,7 @@ public class ResourcesReader
             }
 
             String propertiesClassName = costumeTag.getOptionalAttribute("properties",
-                NoProperties.class.getName());
+                CostumeProperties.class.getName());
             if (this.resources.registerCostumePropertiesClassName(propertiesClassName)) {
                 costume.setPropertiesClassName(propertiesClassName);
 
@@ -223,7 +223,7 @@ public class ResourcesReader
             for (Iterator<XMLTag> j = costumeTag.getTags("properties"); j.hasNext();) {
                 XMLTag propertiesTag = j.next();
                 
-                readObjectProperties( propertiesTag, costume.getProperties());
+                readProperties( propertiesTag, costume.getProperties());
             }
 
             for (Iterator<XMLTag> j = costumeTag.getTags("pose"); j.hasNext();) {
@@ -367,31 +367,6 @@ public class ResourcesReader
         } else {
             throw new XMLException("Unknown animation : " + tagName);
         }
-    }
-
-    private void readObjectProperties( XMLTag tag, Object subject )
-        throws XMLException
-    {
-        for (AbstractProperty<Object, ?> property : AbstractProperty.findAnnotations(subject.getClass())) {
-            String value = tag.getOptionalAttribute(property.key, null);
-            if (value == null) {
-                for (String alias : property.aliases) {
-                    value = tag.getOptionalAttribute(alias, null);
-                    if (value != null) {
-                        break;
-                    }
-                }
-            }
-            if (value != null) {
-                try {
-                    property.setValueByString(subject, value);
-                } catch (Exception e) {
-                    throw new XMLException("Failed to parse property : '" + property.key +
-                        "'. value : '" + value + "'");
-                }
-            }
-        }
-
     }
     
     private <S extends PropertySubject<S>> void readProperties( XMLTag tag, S subject )

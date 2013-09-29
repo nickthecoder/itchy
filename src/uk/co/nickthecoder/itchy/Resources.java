@@ -68,7 +68,7 @@ public class Resources extends Loadable
         this.sceneBehaviourClassNames = new TreeSet<String>();
 
         this.registerBehaviourClassName(NullBehaviour.class.getName());
-        this.registerCostumePropertiesClassName(NoProperties.class.getName());
+        this.registerCostumePropertiesClassName(CostumeProperties.class.getName());
         this.registerSceneBehaviourClassName(NullSceneBehaviour.class.getName());
     }
 
@@ -540,7 +540,7 @@ public class Resources extends Loadable
         if (this.costumePropertiesClassNames.contains(className)) {
             return true;
         }
-        if (NoProperties.isValidClassName(className)) {
+        if (CostumeProperties.isValidClassName(className)) {
             this.costumePropertiesClassNames.add(className);
             return true;
         }

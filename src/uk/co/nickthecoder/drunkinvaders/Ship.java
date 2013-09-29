@@ -11,9 +11,11 @@ import uk.co.nickthecoder.itchy.extras.Explosion;
 import uk.co.nickthecoder.itchy.extras.Fragment;
 import uk.co.nickthecoder.itchy.extras.Talk;
 import uk.co.nickthecoder.itchy.util.Property;
+import uk.co.nickthecoder.itchy.util.Tag;
 import uk.co.nickthecoder.jame.Keys;
 import uk.co.nickthecoder.jame.RGBA;
 
+@Tag(names = {"killable"})
 public class Ship extends Bouncy implements Shootable
 {
     private static final int TIMER_DURATION = 40;
@@ -77,17 +79,12 @@ public class Ship extends Bouncy implements Shootable
     public void onAttach()
     {
         super.onAttach();
-
-        this.getActor().addTag("killable");
-        this.getActor().removeTag("bouncy");
     }
 
     @Override
     public void onDetach()
     {
         super.onDetach();
-
-        this.getActor().removeTag("killable");
     }
 
     @Override

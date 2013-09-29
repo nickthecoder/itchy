@@ -364,7 +364,7 @@ public class Tetra extends Game
     {
         this.level = level;
         int delay = (11 - this.level) * 50;
-        this.timer = new Timer(delay);
+        this.timer = Timer.createTimerSeconds(delay);
     }
 
     public boolean isLineFull( int y )

@@ -5,30 +5,28 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 import uk.co.nickthecoder.itchy.animation.Animation;
 import uk.co.nickthecoder.itchy.util.AbstractProperty;
-import uk.co.nickthecoder.itchy.util.DoubleProperty;
-import uk.co.nickthecoder.itchy.util.FontProperty;
-import uk.co.nickthecoder.itchy.util.RGBAProperty;
-import uk.co.nickthecoder.itchy.util.StringProperty;
+import uk.co.nickthecoder.itchy.util.Property;
+import uk.co.nickthecoder.itchy.util.PropertySubject;
 import uk.co.nickthecoder.itchy.util.TagCollection;
 import uk.co.nickthecoder.itchy.util.TagMembership;
 import uk.co.nickthecoder.jame.RGBA;
 import uk.co.nickthecoder.jame.Surface;
 
-public class Actor
+public class Actor implements PropertySubject<Actor>
 {
 
     private static int _nextId = 1;
 
     private final int _id;
 
-    private static List<AbstractProperty<Actor, ?>> normalProperties;
-    private static List<AbstractProperty<Actor, ?>> textProperties;
+    private static List<AbstractProperty<Actor, ?>> properties = AbstractProperty.findAnnotations(Actor.class);
+    // private static List<AbstractProperty<Actor, ?>> normalProperties;
+    // private static List<AbstractProperty<Actor, ?>> textProperties;
 
     Behaviour behaviour;
 
@@ -97,6 +95,7 @@ public class Actor
         this.getAppearance().setDirection(pose.getDirection());
     }
 
+    @Property(label="Start Event")
     public String getStartEvent()
     {
         return startEvent;
@@ -107,6 +106,7 @@ public class Actor
         startEvent = value;
     }
 
+    /*
     public List<AbstractProperty<Actor, ?>> getProperties()
     {
         if (normalProperties == null) {
@@ -138,7 +138,8 @@ public class Actor
             return normalProperties;
         }
     }
-
+    */
+    
     public Costume getCostume()
     {
         return this.costume;
@@ -311,11 +312,13 @@ public class Actor
     }
     
 
+    @Property(label="X")
     public double getX()
     {
         return this.x;
     }
 
+    @Property(label="Y")
     public double getY()
     {
         return this.y;
@@ -384,6 +387,7 @@ public class Actor
         this.activationDelay = value;
     }
 
+    @Property(label="Activation Delay")
     public double getActivationDelay()
     {
         return this.activationDelay;
@@ -713,6 +717,12 @@ public class Actor
             " size(" + this.getAppearance().getWidth() + "," + this.getAppearance().getHeight() +
             ") " +
             (getBehaviour() == null ? "" : "(" + getBehaviour().getClass().getName() + ")");
+    }
+
+    @Override
+    public List<AbstractProperty<Actor,?>> getProperties()
+    {
+        return properties;
     }
 
 }

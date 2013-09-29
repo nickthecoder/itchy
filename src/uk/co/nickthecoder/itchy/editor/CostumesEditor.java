@@ -15,7 +15,7 @@ import uk.co.nickthecoder.itchy.CostumeResource;
 import uk.co.nickthecoder.itchy.FontResource;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.ManagedSound;
-import uk.co.nickthecoder.itchy.NoProperties;
+import uk.co.nickthecoder.itchy.CostumeProperties;
 import uk.co.nickthecoder.itchy.PoseResource;
 import uk.co.nickthecoder.itchy.SoundResource;
 import uk.co.nickthecoder.itchy.gui.AbstractTableListener;
@@ -309,16 +309,16 @@ public class CostumesEditor extends SubEditor
     {
         this.propertiesComponents = new ArrayList<Component>();
 
-        Object properties = this.currentCostumeResource.costume.getProperties();
+        CostumeProperties properties = this.currentCostumeResource.costume.getProperties();
+        
         if (!properties.getClass().getName().equals(this.propertiesClassName.getText())) {
-            properties = NoProperties.createProperties(this.propertiesClassName.getText());
+            properties = CostumeProperties.createProperties(this.propertiesClassName.getText());
         }
 
         GridLayout grid = new GridLayout(this.propertiesContainer, 2);
         this.propertiesContainer.setLayout(grid);
 
-        for (AbstractProperty<Object, ?> property : AbstractProperty
-            .findAnnotations(properties.getClass())) {
+        for (AbstractProperty<CostumeProperties, ?> property : properties.getProperties()) {
 
             try {
                 Component component = property.createComponent(properties, false);
@@ -405,13 +405,15 @@ public class CostumesEditor extends SubEditor
         for (String name : costume.getPoseNames()) {
             for (PoseResource poseResource : costume.getPoseChoices(name)) {
 
-                SimpleTableModelRow row = new SimpleTableModelRow();
-                row.add(name);
-                row.add("Pose");
-                row.add(poseResource.getName());
-                row.add(poseResource);
-
-                model.addRow(row);
+                if ( !poseResource.isAnonymous()) {
+                    SimpleTableModelRow row = new SimpleTableModelRow();
+                    row.add(name);
+                    row.add("Pose");
+                    row.add(poseResource.getName());
+                    row.add(poseResource);
+    
+                    model.addRow(row);
+                }
             }
         }
         for (String name : costume.getAnimationNames()) {
@@ -847,14 +849,13 @@ public class CostumesEditor extends SubEditor
         this.currentCostumeResource.setName(this.txtName.getText());
         this.currentCostumeResource.costume.behaviourClassName = this.behaviour.getText();
 
-        if (NoProperties.isValidClassName(this.propertiesClassName.getText())) {
+        if (CostumeProperties.isValidClassName(this.propertiesClassName.getText())) {
             this.currentCostumeResource.costume.setPropertiesClassName(this.propertiesClassName
                 .getText());
-            Object properties = this.currentCostumeResource.costume.getProperties();
+            CostumeProperties properties = this.currentCostumeResource.costume.getProperties();
 
             int index = 0;
-            for (AbstractProperty<Object, ?> property : AbstractProperty
-                .findAnnotations(properties.getClass())) {
+            for (AbstractProperty<CostumeProperties, ?> property : properties.getProperties() ) {
 
                 Component component = this.propertiesComponents.get(index);
                 try {

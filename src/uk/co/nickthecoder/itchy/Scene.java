@@ -183,6 +183,7 @@ public class Scene
         
         public void create( ActorsLayer layer, boolean designMode )
         {
+            layer.reset();
             
             for (SceneActor sceneActor : this.sceneActors) {
                 Actor actor = sceneActor.createActor(designMode);

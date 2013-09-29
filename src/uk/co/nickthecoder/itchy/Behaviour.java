@@ -12,6 +12,7 @@ import java.util.Set;
 
 import uk.co.nickthecoder.itchy.animation.Animation;
 import uk.co.nickthecoder.itchy.util.AbstractProperty;
+import uk.co.nickthecoder.itchy.util.Tag;
 
 public abstract class Behaviour implements MessageListener, Cloneable
 {
@@ -113,6 +114,12 @@ public abstract class Behaviour implements MessageListener, Cloneable
             this.init();
         }
         
+        Tag tags = this.getClass().getAnnotation(Tag.class);
+        if ( tags !=null) {
+            for (String name : tags.names() ) {
+                getActor().addTag(name);
+            }
+        }
         this.onAttach();
     }
 
@@ -120,6 +127,13 @@ public abstract class Behaviour implements MessageListener, Cloneable
     {
         this.getActor().removeTag(this.getClass().getName());
         onDetach();
+        
+        Tag tags = this.getClass().getAnnotation(Tag.class);
+        if ( tags !=null) {
+            for (String name : tags.names() ) {
+                getActor().removeTag(name);
+            }
+        }
     }
 
     public Actor getActor()

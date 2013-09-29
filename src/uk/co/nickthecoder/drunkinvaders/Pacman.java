@@ -9,7 +9,9 @@ package uk.co.nickthecoder.drunkinvaders;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Behaviour;
+import uk.co.nickthecoder.itchy.util.Tag;
 
+@Tag(names = {"deadly"})
 public class Pacman extends Behaviour
 {
 
@@ -18,7 +20,6 @@ public class Pacman extends Behaviour
     {
         super.onAttach();
         
-        this.getActor().addTag("deadly");
         this.collisionStrategy = DrunkInvaders.game.createCollisionStrategy(this.getActor());
     }
     @Override
@@ -26,7 +27,6 @@ public class Pacman extends Behaviour
     {
         super.onDetach();
         
-        this.getActor().removeTag("deadly");
         resetCollisionStrategy();
     }
     

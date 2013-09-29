@@ -172,7 +172,7 @@ public class SceneReader
                 }
             }
         }
-        throw new Exception("Failed to find property : " + name);
+        System.err.println("Ignoring unknown property : " + name);
     }
 
 }

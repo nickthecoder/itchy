@@ -10,6 +10,7 @@ import java.util.List;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.ActorsLayer;
+import uk.co.nickthecoder.itchy.Appearance;
 import uk.co.nickthecoder.itchy.Behaviour;
 import uk.co.nickthecoder.itchy.CompoundLayer;
 import uk.co.nickthecoder.itchy.Costume;
@@ -109,6 +110,8 @@ public class SceneDesigner implements MouseListener, KeyListener
     private Container propertiesContainer;
 
     private Container behaviourContainer;
+
+    private Container appearanceContainer;
 
     private Container layersContainer;
 
@@ -277,6 +280,9 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.propertiesContainer = new Container();
         VerticalScroll propertiesScroll = new VerticalScroll(this.propertiesContainer);
 
+        this.appearanceContainer = new Container();
+        VerticalScroll appearanceScroll = new VerticalScroll(this.appearanceContainer);
+        
         this.behaviourContainer = new Container();
         VerticalScroll behaviourScroll = new VerticalScroll(this.behaviourContainer);
 
@@ -288,6 +294,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.toolboxNotebook = new Notebook();
         this.toolboxNotebook.addPage(new Label("Costumes"), costumesScroll);
         this.toolboxNotebook.addPage(new Label("Actor"), propertiesScroll);
+        this.toolboxNotebook.addPage(new Label("Appearance"), appearanceScroll);
         this.toolboxNotebook.addPage(new Label("Behaviour"), behaviourScroll);
         this.toolboxNotebook.addPage(new Label("Layers"), layersScroll);
 
@@ -506,34 +513,61 @@ public class SceneDesigner implements MouseListener, KeyListener
 
     }
 
-    private void createProperties()
+    private void updateTabs()
+    {
+        createActorProperties();
+        createBehaviourProperties();
+        createAppearanceProperties();
+        updateLayersTable();
+    }
+    
+    private void createActorProperties()
     {
         GridLayout grid = new GridLayout(this.propertiesContainer, 2);
+        this.propertiesContainer.clear();
         this.propertiesContainer.setLayout(grid);
-        grid.clear();
 
         this.actorTextInput = null;
 
         if (this.currentActor != null) {
+
             for (AbstractProperty<Actor, ?> property : this.currentActor.getProperties()) {
                 try {
                     Component component = property.createComponent(this.currentActor, true);
                     grid.addRow(property.label, component);
-
-                    if ("appearance.pose.text".equals(property.access)) {
-                        this.actorTextInput = component;
-                    }
-
+    
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
             }
-            this.createBehaviourProperties();
         }
-        this.updateLayersTable();
     }
 
+    private void createAppearanceProperties()
+    {
+        GridLayout grid = new GridLayout(this.appearanceContainer, 2);
+        this.appearanceContainer.clear();
+        this.appearanceContainer.setLayout(grid);
+
+        if (this.currentActor != null) {
+            for (AbstractProperty<Appearance, ?> property : this.currentActor.getAppearance().getProperties()) {
+                
+                try {
+                    Component component = property.createComponent(this.currentActor.getAppearance(), true);
+                    grid.addRow(property.label, component);
+    
+                    if ("pose.text".equals(property.access)) {
+                        this.actorTextInput = component;
+                    }
+    
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } 
+                
+            }
+        }
+    }
+    
     private void updateLayersTable()
     {
         String layerName = this.currentActor == null ? "" : this.currentActor.getLayer().getName();
@@ -1005,7 +1039,7 @@ public class SceneDesigner implements MouseListener, KeyListener
     public boolean onMouseUp( MouseButtonEvent event )
     {
         if ((this.mode == MODE_DRAG_HANDLE) || (this.mode == MODE_DRAG_ACTOR)) {
-            this.createProperties();
+            this.updateTabs();
         }
 
         if (this.mode == MODE_DRAG_HANDLE) {
@@ -1078,7 +1112,7 @@ public class SceneDesigner implements MouseListener, KeyListener
 
         if (actor != null) {
 
-            this.createProperties();
+            this.updateTabs();
             this.createHightlightActor();
         }
     }
@@ -1485,20 +1519,32 @@ public class SceneDesigner implements MouseListener, KeyListener
 
             super.moveBy(dx, dy);
 
-            Actor other = Itchy.isShiftDown() ? this.target : this.opposite.getActor();
+            Actor other = Itchy.isCtrlDown() ? this.target : this.opposite.getActor();
 
             double scaleX = (other.getX() - this.getActor().getX()) / (other.getX() - this.startX);
             double scaleY = (other.getY() - this.getActor().getY()) / (other.getY() - this.startY);
             double scale = Math.min(scaleX, scaleY);
 
-            if (!Itchy.isShiftDown()) {
+            if (!Itchy.isCtrlDown()) {
                 this.target.moveBy(dx * ratioX, dy * ratioY);
             }
 
             if (this.target.getAppearance().getPose() instanceof TextPose) {
                 TextPose pose = (TextPose) this.target.getAppearance().getPose();
-                pose.setFontSize(this.startScale * scale);
+                double newFontSize = this.startScale * scale;
+                if ( newFontSize < 5 ) {
+                    super.moveBy(-dx, -dy);
+                    return;
+                }
+                pose.setFontSize(newFontSize);
             } else {
+                double newScale = this.startScale * scale;
+                double width = getActor().getAppearance().getPose().getSurface().getWidth() * newScale;
+                double height = getActor().getAppearance().getPose().getSurface().getHeight() * newScale;
+                if ((width < 4) || (height <4) ) {
+                    super.moveBy(-dx, -dy);
+                    return;
+                }
                 this.target.getAppearance().setScale(this.startScale * scale);
             }
         }

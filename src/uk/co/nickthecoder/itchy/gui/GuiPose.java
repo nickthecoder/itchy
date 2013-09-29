@@ -313,7 +313,7 @@ public class GuiPose extends RootContainer implements Pose, EventListener
     public boolean mouseDown( MouseButtonEvent event )
     {
         if (this.draggable) {
-            if ((event.button == 2) || ((event.button == 1) && Itchy.isCtrlDown())) {
+            if ((event.button == 2) || ((event.button == 1) && Itchy.isShiftDown())) {
                 this.captureMouse(this);
                 this.dragging = true;
                 this.dragStartX = event.x;
