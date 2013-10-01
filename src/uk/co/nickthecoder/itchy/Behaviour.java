@@ -10,6 +10,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
+import javax.script.ScriptException;
+
 import uk.co.nickthecoder.itchy.animation.Animation;
 import uk.co.nickthecoder.itchy.util.AbstractProperty;
 import uk.co.nickthecoder.itchy.util.Tag;
@@ -18,16 +20,15 @@ public abstract class Behaviour implements MessageListener, Cloneable
 {
     private final static HashMap<Class<?>, List<AbstractProperty<Behaviour, ?>>> allProperties = new HashMap<Class<?>, List<AbstractProperty<Behaviour, ?>>>();
 
-    public static boolean isValidClassName( String behaviourClassName )
+    public static boolean isValidClassName( Resources resources, String className )
     {
+        if (resources.scriptManager.isValidScript(className)) {
+            return true;
+        }
         try {
             @SuppressWarnings({ "unchecked", "unused" })
-            Class<Behaviour> klass = (Class<Behaviour>) Class.forName(behaviourClassName);
+            Class<Behaviour> klass = (Class<Behaviour>) Class.forName(className);
 
-            //Object testBehaviour = klass.newInstance();
-            //if (!(testBehaviour instanceof Behaviour)) {
-            //    return false;
-            //}
         } catch (Exception e) {
             e.printStackTrace();
             return false;
@@ -35,7 +36,23 @@ public abstract class Behaviour implements MessageListener, Cloneable
 
         return true;
     }
+    
+    public String getClassName()
+    {
+        return this.getClass().getName();
+    }
 
+    public static Behaviour createBehaviour( Resources resources, String className )
+        throws InstantiationException, IllegalAccessException, ScriptException, ClassNotFoundException
+    {        
+        if (resources.scriptManager.isValidScript(className)) {
+            return resources.scriptManager.createBehaviour(className);
+        } else {
+            Class<?> klass = Class.forName(className);
+            return (Behaviour) klass.newInstance();
+        }
+    }
+    
     private Actor actor;
 
     public CollisionStrategy collisionStrategy = BruteForceCollisionStrategy.singleton;
@@ -108,7 +125,7 @@ public abstract class Behaviour implements MessageListener, Cloneable
         Actor oldActor = this.actor;
         
         this.actor = actor;
-        this.actor.addTag(this.getClass().getName());
+        this.actor.addTag(this.getClass().getName()); // TODO Remove this.
         
         if (oldActor == null) {
             this.init();
@@ -125,7 +142,7 @@ public abstract class Behaviour implements MessageListener, Cloneable
 
     public void detatch()
     {
-        this.getActor().removeTag(this.getClass().getName());
+        this.getActor().removeTag(this.getClass().getName()); // TODO Remove this
         onDetach();
         
         Tag tags = this.getClass().getAnnotation(Tag.class);
@@ -141,10 +158,6 @@ public abstract class Behaviour implements MessageListener, Cloneable
         return this.actor;
     }
 
-    public Set<Actor> overlapping( String... tags )
-    {
-        return this.collisionStrategy.overlapping(this.getActor(), tags, null);
-    }
 
     public void resetCollisionStrategy()
     {
@@ -172,25 +185,44 @@ public abstract class Behaviour implements MessageListener, Cloneable
      * </pre>
      * @return The set of all touching Actors with matching behaviours.
      */
+    //TODO Remove this
     public Set<Actor> touching( Class<Behaviour> klass )
     {
         return touching(klass.getName());
     }
 
+    
+    public Set<Actor> touching( String tag )
+    {
+        return this.collisionStrategy.touching(this.getActor(), new String[] { tag }, null );
+    }
+    
     public Set<Actor> touching( String... tags )
     {
         return this.collisionStrategy.touching(this.getActor(), tags, null);
-    }
-
-    public Set<Actor> overlapping( String[] including, String[] excluding )
-    {
-        return this.collisionStrategy.overlapping(this.getActor(), including, excluding);
     }
 
     public Set<Actor> touching( String[] including, String[] excluding )
     {
         return this.collisionStrategy.touching(this.getActor(), including, excluding);
     }
+
+
+    public Set<Actor> overlapping( String tag )
+    {
+        return this.collisionStrategy.overlapping(this.getActor(), new String[] { tag }, null );
+    }
+    
+    public Set<Actor> overlapping( String... tags )
+    {
+        return this.collisionStrategy.overlapping(this.getActor(), tags, null);
+    }
+    
+    public Set<Actor> overlapping( String[] including, String[] excluding )
+    {
+        return this.collisionStrategy.overlapping(this.getActor(), including, excluding);
+    }
+
 
     public void play( String soundName )
     {

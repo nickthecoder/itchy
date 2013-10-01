@@ -7,22 +7,24 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.editor;
 
+import javax.script.ScriptException;
+
 import uk.co.nickthecoder.itchy.Behaviour;
+import uk.co.nickthecoder.itchy.Resources;
 
 public class SceneDesignerBehaviour extends Behaviour
 {
     public Behaviour actualBehaviour;
 
-    public void setBehaviourClassName( String name ) throws ClassNotFoundException,
-        InstantiationException, IllegalAccessException
+    public void setBehaviourClassName( Resources resources, String name ) throws ClassNotFoundException,
+        InstantiationException, IllegalAccessException, ScriptException
     {
-        Class<?> klass = Class.forName(name);
-        this.actualBehaviour = (Behaviour) klass.newInstance();
+        this.actualBehaviour = Behaviour.createBehaviour(resources, name);
     }
 
     public String getBehaviourClassName()
     {
-        return this.actualBehaviour.getClass().getName();
+        return this.actualBehaviour.getClassName();
     }
 
     @Override

@@ -1,0 +1,19 @@
+<scene showMouse="true" behaviour="Play.js">
+  <layer name="main">
+    <actor costume="player" x="414" y="28" direction="0.0" startEvent="default"/>
+    <actor costume="rain" x="295" y="393" direction="0.0" startEvent="default"/>
+    <actor costume="rain" x="396" y="340" direction="0.0" startEvent="default"/>
+    <actor costume="rain" x="524" y="552" direction="0.0" startEvent="default"/>
+    <actor costume="rain" x="197" y="550" direction="0.0" startEvent="default"/>
+    <actor costume="rain" x="84" y="782" direction="0.0" startEvent="default"/>
+    <actor costume="rain" x="297" y="652" direction="0.0" startEvent="default"/>
+    <actor costume="rain" x="642" y="749" direction="0.0" startEvent="default"/>
+    <actor costume="rain" x="467" y="849" direction="0.0" startEvent="default"/>
+    <actor costume="rain" x="229" y="915" direction="0.0" startEvent="default"/>
+    <actor costume="rain" x="55" y="1032" direction="0.0" startEvent="default"/>
+    <actor costume="rain" x="376" y="1020" direction="0.0" startEvent="default"/>
+    <actor costume="rain" x="571" y="898" direction="0.0" startEvent="default"/>
+    <actor costume="rain" x="204" y="1440" direction="0.0" startEvent="default"/>
+    <actor costume="rain" x="425" y="1719" direction="0.0" startEvent="default"/>
+  </layer>
+</scene>

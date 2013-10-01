@@ -25,7 +25,7 @@ public class Stylesheet extends Loadable
     {
         super( file );
         this.rules = new ArrayList<StyleRule>();
-        this.resources = new Resources();
+        this.resources = new Resources(null);
         this.load();
     }
 

@@ -716,7 +716,7 @@ public class Actor implements PropertySubject<Actor>
         return "Actor #" + this._id + " @ " + getX() + "," + getY() +
             " size(" + this.getAppearance().getWidth() + "," + this.getAppearance().getHeight() +
             ") " +
-            (getBehaviour() == null ? "" : "(" + getBehaviour().getClass().getName() + ")");
+            (getBehaviour() == null ? "" : "(" + getBehaviour().getClassName() + ")");
     }
 
     @Override

@@ -200,7 +200,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.designLayers.getChildren().get(0).addMouseListener(this);
         Itchy.getGame().addKeyListener(this);
 
-        this.scene.create(this.designLayers, true);
+        this.scene.create(this.designLayers, this.editor.resources, true);
 
         this.createPageBorder();
         this.createHandles();
@@ -590,7 +590,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         SceneDesignerBehaviour sdb = (SceneDesignerBehaviour) this.currentActor.getBehaviour();
 
         this.behaviourClassName = new ComboBox(
-            sdb.actualBehaviour.getClass().getName(),
+            sdb.actualBehaviour.getClassName(),
             this.editor.game.resources.getBehaviourClassNames());
 
         this.behaviourClassName.addChangeListener(new ComponentChangeListener() {
@@ -602,7 +602,7 @@ public class SceneDesigner implements MouseListener, KeyListener
                 SceneDesignerBehaviour sdb = (SceneDesignerBehaviour) SceneDesigner.this.currentActor
                     .getBehaviour();
                 try {
-                    sdb.setBehaviourClassName(value);
+                    sdb.setBehaviourClassName(SceneDesigner.this.editor.resources,value);
                     SceneDesigner.this.createBehaviourProperties(grid);
                     SceneDesigner.this.editor.game.resources.registerBehaviourClassName(value);
                     SceneDesigner.this.behaviourClassName.removeStyle("error");
@@ -1009,7 +1009,7 @@ public class SceneDesigner implements MouseListener, KeyListener
             }
 
             try {
-                behaviour.setBehaviourClassName(behaviourClassName);
+                behaviour.setBehaviourClassName(this.editor.resources, behaviourClassName);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -1218,7 +1218,7 @@ public class SceneDesigner implements MouseListener, KeyListener
     private void onPaste()
     {
         if (SceneDesigner.copiedActor != null) {
-            Actor actor = SceneDesigner.copiedActor.createActor(true);
+            Actor actor = SceneDesigner.copiedActor.createActor(this.editor.resources, true);
             actor.moveBy(10, 10);
             this.currentDesignLayer.add(actor);
             this.selectActor(actor);

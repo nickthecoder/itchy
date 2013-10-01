@@ -14,6 +14,7 @@ import uk.co.nickthecoder.jame.Surface;
 import uk.co.nickthecoder.jame.Video;
 import uk.co.nickthecoder.jame.event.Event;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
+import uk.co.nickthecoder.jame.event.MouseEvent;
 
 /**
  * The is the overall manager of the Itchy game engine. There is only one instance
@@ -49,6 +50,10 @@ public class Itchy
      */
     private static boolean[] keyboardState;
 
+    private static int mouseX;
+    
+    private static int mouseY;
+
     public static Surface screen;
 
     private static boolean running;
@@ -63,7 +68,7 @@ public class Itchy
     public static int keyboardRepeatDelay = Events.DEFAULT_REPEAT_DELAY;
 
     public static int keyboardRepeatInterval = Events.DEFAULT_REPEAT_INTERVAL;
-
+    
     public static FrameRate frameRate = createFrameRate();
 
     public static SoundManager soundManager;
@@ -268,7 +273,6 @@ public class Itchy
 
     private static void processEvent( Event event )
     {
-        currentGame.processEvent(event);
 
         if (event instanceof KeyboardEvent) {
             KeyboardEvent ke = (KeyboardEvent) event;
@@ -286,6 +290,24 @@ public class Itchy
                     keyboardState[key] = false;
                 }
             }
+        } else if (event instanceof MouseEvent) {
+            MouseEvent me = (MouseEvent) event;
+            
+            mouseX = me.x;
+            mouseY = me.y;
         }
+
+        
+        currentGame.processEvent(event);
+    }
+    
+    public static int getMouseX()
+    {
+        return mouseX;
+    }
+    
+    public static int getMouseY()
+    {
+        return mouseY;
     }
 }

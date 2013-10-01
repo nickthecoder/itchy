@@ -162,7 +162,7 @@ public class Tetra extends Game
         this.sceneName = name;
         try {
             Scene scene = this.resources.getScene(name);
-            scene.create(this.mainLayer, false);
+            scene.create(this.mainLayer, this.resources, false);
             Itchy.showMousePointer(scene.showMouse);
 
         } catch (Exception e) {
@@ -363,7 +363,7 @@ public class Tetra extends Game
     public void setLevel( int level )
     {
         this.level = level;
-        int delay = (11 - this.level) * 50;
+        double delay = (11 - this.level) * 50.0 / 1000.0;
         this.timer = Timer.createTimerSeconds(delay);
     }
 

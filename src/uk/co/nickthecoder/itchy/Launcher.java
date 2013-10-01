@@ -8,6 +8,8 @@
 package uk.co.nickthecoder.itchy;
 
 import java.io.File;
+import java.util.Arrays;
+
 import uk.co.nickthecoder.jame.RGBA;
 
 public class Launcher extends Game
@@ -21,7 +23,6 @@ public class Launcher extends Game
         
         mainLayer = new ScrollableLayer("main", this.screenRect, RGBA.BLACK);
         this.layers.add( mainLayer );
-
     }
 
     @Override
@@ -33,9 +34,20 @@ public class Launcher extends Game
     
     public static void main( String argv[] ) throws Exception
     {
+        for (String arg : argv) {
+            System.out.println(arg);
+        }
+        
         if ( argv.length > 0 ) {
-            String resources = argv[0];
-            Launcher launcher = new Launcher( resources);
+            String name = argv[0];
+            String resourcePath;
+            if (new File(name).exists()) {
+                resourcePath = name;
+            } else {
+                resourcePath = "resources" + File.separator + name + File.separator + name + ".xml";
+            }
+            argv = Arrays.copyOfRange(argv, 1, argv.length);
+            Launcher launcher = new Launcher(resourcePath);
             launcher.runFromMain( argv );
         } else {
             System.out.println( "Usage : Launcher RESOURCES_FILE [--editor]");

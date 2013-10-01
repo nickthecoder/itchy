@@ -18,7 +18,7 @@ import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 public class NullSceneBehaviour implements SceneBehaviour
 {
     @Override
-    public void init()
+    public void onActivate()
     {    
     }
     

@@ -1,0 +1,21 @@
+<resources>
+  <fonts/>
+  <ninePatches/>
+  <poses>
+    <pose name="player" filename="player.png"/>
+    <pose name="rain" filename="rain.png"/>
+  </poses>
+  <sounds/>
+  <animations/>
+  <costumes>
+    <costume name="player" behaviour="Player.js">
+      <pose name="default" pose="player"/>
+    </costume>
+    <costume name="rain" behaviour="Droplet.js">
+      <pose name="default" pose="rain"/>
+    </costume>
+  </costumes>
+  <scenes>
+    <scene name="start"/>
+  </scenes>
+</resources>

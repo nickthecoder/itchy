@@ -164,10 +164,9 @@ public abstract class AbstractProperty<S, T>
         }
         if (Enum.class.isAssignableFrom(klass)) {
 
-            // if (klass.isAssignableFrom(Enum.class)) {
-            @SuppressWarnings({ "rawtypes", "unchecked" })
-            AbstractProperty<SS, ?> result = new EnumProperty<SS, Enum>(label, access, key,
-                (Class<Enum>) klass);
+            @SuppressWarnings("unchecked")
+            AbstractProperty<SS, Enum<?>> result = new EnumProperty<SS, Enum<?>>(label, access, key,
+                (Class<Enum<?>>) klass);
             return result;
         }
         if (property.recurse()) {

@@ -141,7 +141,7 @@ public class SceneReader
             }
         }
 
-        Actor actor = sceneActor.createActor(true);
+        Actor actor = sceneActor.createActor(this.resources, true);
 
         for (Iterator<XMLTag> i = actorTag.getTags("property"); i.hasNext();) {
             XMLTag tag = i.next();

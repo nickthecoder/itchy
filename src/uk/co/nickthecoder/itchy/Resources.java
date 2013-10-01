@@ -14,6 +14,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import uk.co.nickthecoder.itchy.animation.Animation;
+import uk.co.nickthecoder.itchy.script.ScriptManager;
 import uk.co.nickthecoder.itchy.util.NinePatch;
 import uk.co.nickthecoder.jame.Sound;
 import uk.co.nickthecoder.jame.Surface;
@@ -30,6 +31,8 @@ public class Resources extends Loadable
         Collections.sort(names);
         return names;
     }
+
+    public ScriptManager scriptManager;
 
     private final HashMap<String, SoundResource> sounds;
 
@@ -51,9 +54,15 @@ public class Resources extends Loadable
 
     private TreeSet<String> sceneBehaviourClassNames;
 
-    public Resources()
+    public final Game game;
+    
+    public Resources( Game game )
     {
         super();
+
+        this.game = game;
+        this.scriptManager = new ScriptManager(this);
+
         this.sounds = new HashMap<String, SoundResource>();
         this.fonts = new HashMap<String, FontResource>();
         this.ninePatches = new HashMap<String, NinePatchResource>();
@@ -89,7 +98,7 @@ public class Resources extends Loadable
     @Override
     protected void checkSave( File file ) throws Exception
     {
-        Resources resources = new Resources();
+        Resources resources = new Resources(this.game);
         resources.load(file);
 
         // MORE. Should check that each resource is identical to the other one.
@@ -525,8 +534,15 @@ public class Resources extends Loadable
             if (this.behaviourClassNames.contains(className)) {
                 return true;
             }
-            Class<?> klass = Class.forName(className);
-            klass.asSubclass(Behaviour.class);
+
+            if (this.scriptManager.isValidScript(className)) {
+                // Do nothing
+            } else {
+                // Ensure the class exists, and is the correct type.
+                Class<?> klass = Class.forName(className);
+                klass.asSubclass(Behaviour.class);
+            }
+
             this.behaviourClassNames.add(className);
             return true;
         } catch (Exception e) {
@@ -553,8 +569,12 @@ public class Resources extends Loadable
             if (this.sceneBehaviourClassNames.contains(className)) {
                 return true;
             }
-            Class<?> klass = Class.forName(className);
-            klass.asSubclass(SceneBehaviour.class);
+            if (this.scriptManager.isValidScript(className)) {
+                // Do nothing
+            } else {
+                Class<?> klass = Class.forName(className);
+                klass.asSubclass(SceneBehaviour.class);
+            }
             this.sceneBehaviourClassNames.add(className);
             return true;
 

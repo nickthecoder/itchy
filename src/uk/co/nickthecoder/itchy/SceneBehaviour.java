@@ -9,7 +9,7 @@ package uk.co.nickthecoder.itchy;
 
 public interface SceneBehaviour extends MouseListener, KeyListener, MessageListener
 {
-    public void init();
+    public void onActivate();
     
     public void tick();
 }

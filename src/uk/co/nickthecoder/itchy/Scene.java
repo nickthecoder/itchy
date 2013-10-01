@@ -57,12 +57,12 @@ public class Scene
         this.layersMap.put(sceneLayer.getName(), sceneLayer);
     }
 
-    public void create( ActorsLayer layer, boolean designMode )
+    public void create( ActorsLayer layer, Resources resources, boolean designMode )
     {
         activateList = new ArrayList<Actor>(); 
 
         for (SceneLayer sceneLayer : this.sceneLayers) {
-            sceneLayer.create(layer, designMode);
+            sceneLayer.create(layer, resources, designMode);
         }
         
         for (Actor actor : activateList) {
@@ -72,14 +72,14 @@ public class Scene
         activateList = null;
     }
 
-    public void create( CompoundLayer layer, boolean designMode )
+    public void create( CompoundLayer layer, Resources resources, boolean designMode )
     {
         activateList = new ArrayList<Actor>(); 
 
         for (SceneLayer sceneLayer : this.sceneLayers) {
             String name = sceneLayer.name;
             
-            sceneLayer.create(findLayer(layer,name), designMode);
+            sceneLayer.create(findLayer(layer,name), resources, designMode);
         }
 
         for (Actor actor : activateList) {
@@ -128,14 +128,18 @@ public class Scene
         return result;
     }
 
-    public SceneBehaviour createSceneBehaviour()
+    public SceneBehaviour createSceneBehaviour( Resources resources )
         throws Exception
     {
         if (StringUtils.isBlank(this.sceneBehaviourName)) {
             return new NullSceneBehaviour();
         } else {
-            Class<?> klass = Class.forName(sceneBehaviourName);
-            return (SceneBehaviour) klass.newInstance();
+            if ( resources.scriptManager.isValidScript( this.sceneBehaviourName )) {
+                return resources.scriptManager.createSceneBehaviour(this.sceneBehaviourName);
+            } else {
+                Class<?> klass = Class.forName(sceneBehaviourName);
+                return (SceneBehaviour) klass.newInstance();
+            }
         }
     }
 
@@ -181,12 +185,12 @@ public class Scene
             return this.sceneActors.size() == 0;
         }
         
-        public void create( ActorsLayer layer, boolean designMode )
+        public void create( ActorsLayer layer, Resources resources, boolean designMode )
         {
             layer.reset();
             
             for (SceneActor sceneActor : this.sceneActors) {
-                Actor actor = sceneActor.createActor(designMode);
+                Actor actor = sceneActor.createActor(resources, designMode);
                 layer.add(actor);
                 
                 if (!designMode) {

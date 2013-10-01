@@ -72,7 +72,7 @@ public abstract class SceneActor implements Cloneable
         }
     }
 
-    protected void updateActor( Actor actor, boolean designMode )
+    protected void updateActor( Actor actor, Resources resources, boolean designMode )
     {
         actor.moveTo(this.x, this.y);
         actor.getAppearance().setDirection(this.direction);
@@ -97,7 +97,7 @@ public abstract class SceneActor implements Cloneable
             actor.setBehaviour(behaviour);
 
             try {
-                behaviour.setBehaviourClassName(behaviourClassName);
+                behaviour.setBehaviourClassName(resources, behaviourClassName);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -107,8 +107,7 @@ public abstract class SceneActor implements Cloneable
         } else {
 
             try {
-                Class<?> klass = Class.forName(behaviourClassName);
-                actualBehaviour = (Behaviour) klass.newInstance();
+                actualBehaviour = Behaviour.createBehaviour(resources, behaviourClassName);
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -133,7 +132,7 @@ public abstract class SceneActor implements Cloneable
 
     }
 
-    public abstract Actor createActor( boolean designActor );
+    public abstract Actor createActor( Resources resources, boolean designActor );
 
     @Override
     public Object clone() throws CloneNotSupportedException

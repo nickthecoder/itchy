@@ -8,11 +8,28 @@ Jame is out of date, need to rebuild for win32 and i386 and ARM??
 What's Next
 ===========
 
-Javascript for each Behaviour, SceneBehaviour and later for Game and CostumeProperties.
-    If the Behaviour is JSBehaviour, then look for a text file with the appropriate name relative to
-    the resources file.
+Complete SceneBehaviour script with example in rain.
 
+Implement SceneBehaviour.onDeactive
+
+Add properties on script behaviours
+
+Script versions of CostumeProperties and Game.
+
+If SceneBehaviour doesn't have properties, then add them.
+    Need to edit them in the editor too. A new tab in the SceneDesigner seems sensible.
+
+Rain
+    Add a score (which needs a Font)
+    Add a highscore, and persist it.
+    Add a welcome screen
+    Add multiple levels - sparse, jamed, tiny rain, barriers
+    Tilt ship left, right or straight depending on the movement left/right 
     
+Fix frame rate problems at the start of the game.
+
+An "include" function, which includes another script file - use ScriptManager.loadScript    
+
 
 Bugs
 ====

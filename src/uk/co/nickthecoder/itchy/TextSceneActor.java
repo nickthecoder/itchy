@@ -38,12 +38,12 @@ public class TextSceneActor extends SceneActor
     }
 
     @Override
-    public Actor createActor( boolean designActor )
+    public Actor createActor( Resources resources, boolean designActor )
     {
         TextPose pose = new TextPose(this.text, this.font, this.fontSize);
         pose.setColor(this.color);
         Actor actor = new Actor(pose);
-        this.updateActor(actor, designActor);
+        this.updateActor(actor, resources, designActor);
         
         return actor;
     }

@@ -26,7 +26,7 @@ import uk.co.nickthecoder.jame.event.QuitEvent;
 
 public abstract class Game implements EventListener, MessageListener
 {
-    public Resources resources = new Resources();
+    public Resources resources;
 
     private AutoFlushPreferences preferences;
 
@@ -52,7 +52,7 @@ public abstract class Game implements EventListener, MessageListener
 
     private final List<GuiPose> windows;
 
-    public SceneBehaviour currentSceneBehaviour = new NullSceneBehaviour();
+    private SceneBehaviour sceneBehaviour;
 
     private String sceneName;
 
@@ -68,6 +68,9 @@ public abstract class Game implements EventListener, MessageListener
     
     public Game( String title, int width, int height ) throws Exception
     {
+        this.resources = new Resources(this);
+        
+        this.sceneBehaviour = new NullSceneBehaviour();
         this.pause = new Pause(this);
         this.title = title;
         this.screenRect = new Rect(0, 0, width, height);
@@ -427,7 +430,7 @@ public abstract class Game implements EventListener, MessageListener
     @Override
     public boolean onKeyDown( KeyboardEvent ke )
     {
-        return this.currentSceneBehaviour.onKeyDown(ke);
+        return this.getSceneBehaviour().onKeyDown(ke);
     }
 
     /**
@@ -438,25 +441,25 @@ public abstract class Game implements EventListener, MessageListener
     @Override
     public boolean onKeyUp( KeyboardEvent ke )
     {
-        return this.currentSceneBehaviour.onKeyUp(ke);
+        return this.getSceneBehaviour().onKeyUp(ke);
     }
 
     @Override
     public boolean onMouseDown( MouseButtonEvent mbe )
     {
-        return this.currentSceneBehaviour.onMouseDown(mbe);
+        return this.getSceneBehaviour().onMouseDown(mbe);
     }
 
     @Override
     public boolean onMouseUp( MouseButtonEvent mbe )
     {
-        return this.currentSceneBehaviour.onMouseDown(mbe);
+        return this.getSceneBehaviour().onMouseDown(mbe);
     }
 
     @Override
     public boolean onMouseMove( MouseMotionEvent mbe )
     {
-        return this.currentSceneBehaviour.onMouseMove(mbe);
+        return this.getSceneBehaviour().onMouseMove(mbe);
     }
 
     /**
@@ -464,13 +467,19 @@ public abstract class Game implements EventListener, MessageListener
      */
     public void tick()
     {
-        this.currentSceneBehaviour.tick();
+        this.getSceneBehaviour().tick();
     }
 
     @Override
     public void onMessage( String message )
     {
-        this.currentSceneBehaviour.onMessage(message);
+        this.getSceneBehaviour().onMessage(message);
+    }
+
+
+    public SceneBehaviour getSceneBehaviour()
+    {
+        return sceneBehaviour;
     }
 
     public boolean loadScene( String sceneName )
@@ -482,8 +491,10 @@ public abstract class Game implements EventListener, MessageListener
                 return false;
             }
 
-            this.currentSceneBehaviour = scene.createSceneBehaviour();
-            scene.create(this.layers, false);
+            // TODO this.sceneBehaviour.onDeactivate();
+            this.sceneBehaviour = scene.createSceneBehaviour( this.resources );
+            this.sceneBehaviour.onActivate();
+            scene.create(this.layers, this.resources, false);
             Itchy.showMousePointer(scene.showMouse);
 
         } catch (Exception e) {

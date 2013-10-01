@@ -23,11 +23,11 @@ public class CostumeSceneActor extends SceneActor
     }
 
     @Override
-    public Actor createActor( boolean designActor )
+    public Actor createActor( Resources resources, boolean designActor )
     {
         Actor actor = new Actor(this.costume, designActor ? "default" : this.startEvent);
         actor.setStartEvent(this.startEvent);
-        this.updateActor(actor, designActor);
+        this.updateActor(actor, resources, designActor);
         
         return actor;
     }
