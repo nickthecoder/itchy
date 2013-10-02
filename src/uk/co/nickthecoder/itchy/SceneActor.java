@@ -30,6 +30,8 @@ public abstract class SceneActor implements Cloneable
     public int y;
 
     double direction;
+    
+    double alpha;
 
     double scale;
 
@@ -45,12 +47,14 @@ public abstract class SceneActor implements Cloneable
 
     protected SceneActor()
     {
+        this.alpha = 255;
     }
 
     protected SceneActor( Actor actor )
     {
         this.x = (int) actor.getX();
         this.y = (int) actor.getY();
+        this.alpha = actor.getAppearance().getAlpha();
         this.direction = actor.getAppearance().getDirection();
         this.scale = actor.getAppearance().getScale();
         this.behaviourClassName = ((SceneDesignerBehaviour) actor.getBehaviour())
@@ -65,7 +69,7 @@ public abstract class SceneActor implements Cloneable
         for (AbstractProperty<Behaviour, ?> property : actualBehaviour.getProperties()) {
             try {
                 Object value = property.getValue(actualBehaviour);
-                this.customProperties.put(property.access, value);
+                this.customProperties.put(property.key, value);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -75,6 +79,7 @@ public abstract class SceneActor implements Cloneable
     protected void updateActor( Actor actor, Resources resources, boolean designMode )
     {
         actor.moveTo(this.x, this.y);
+        actor.getAppearance().setAlpha(this.alpha);
         actor.getAppearance().setDirection(this.direction);
         actor.getAppearance().setScale(this.scale);
         actor.getAppearance().setColorize(this.colorize == null ? null : new RGBA(this.colorize));
@@ -116,7 +121,7 @@ public abstract class SceneActor implements Cloneable
         }
 
         for (AbstractProperty<Behaviour, ?> property : actualBehaviour.getProperties()) {
-            Object value = this.customProperties.get(property.access);
+            Object value = this.customProperties.get(property.key);
             if (value != null) {
                 try {
                     property.setValue(actualBehaviour, value);

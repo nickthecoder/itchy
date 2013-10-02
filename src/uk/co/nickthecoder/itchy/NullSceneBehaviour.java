@@ -23,6 +23,11 @@ public class NullSceneBehaviour implements SceneBehaviour
     }
     
     @Override
+    public void onDeactivate()
+    {    
+    }
+    
+    @Override
     public boolean onMouseDown( MouseButtonEvent mbe )
     {
         return false;

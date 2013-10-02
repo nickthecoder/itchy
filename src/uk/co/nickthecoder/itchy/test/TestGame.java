@@ -11,9 +11,9 @@ import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.ActorsLayer;
 import uk.co.nickthecoder.itchy.Game;
 import uk.co.nickthecoder.itchy.ScrollableLayer;
-import uk.co.nickthecoder.jame.Keys;
 import uk.co.nickthecoder.jame.RGBA;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
+import uk.co.nickthecoder.jame.event.Keys;
 
 public class TestGame extends Game
 {

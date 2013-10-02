@@ -41,7 +41,9 @@ public class NamedResource
     
     public void setName( String newName )
     {
-        this.resources.renameResource(this, newName);
+        if (this.resources.has(this)) {
+            this.resources.renameResource(this, newName);
+        }
         this.name = newName;
     }
 

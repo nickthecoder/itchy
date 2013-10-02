@@ -12,8 +12,8 @@ import java.util.Comparator;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.util.ReverseComparator;
-import uk.co.nickthecoder.jame.Keys;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
+import uk.co.nickthecoder.jame.event.Keys;
 
 public class Table extends Container
 {

@@ -35,6 +35,26 @@ public class JavascriptLanguage extends ScriptLanguage
         this.engine = new ScriptEngineManager().getEngineByName("javascript");
     }
 
+
+    @Override
+    public Object getProperty( Object inst, String name ) throws ScriptException
+    {
+        Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
+        bindings.put("inst", inst);
+        return this.engine.eval("inst." + name + ";");
+    }
+
+    @Override
+    public Object putProperty( Object inst, String name, Object value ) throws ScriptException
+    {
+        Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
+        bindings.put("inst", inst);
+        bindings.put("value", value);
+        return this.engine.eval("inst." + name + " = value;");
+    }
+
+    
+    
     @Override
     public Behaviour createBehaviour( String filename )
         throws ScriptException
@@ -48,7 +68,7 @@ public class JavascriptLanguage extends ScriptLanguage
         Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
         bindings.put("scriptBehaviour", scriptBehvaiour);
         bindings.put("javaBehaviour", javaBehaviour);
-        this.engine.eval("scriptBehaviour.behaviour = javaBehaviour;");
+        this.engine.eval("scriptBehaviour.owner = javaBehaviour;");
 
         return javaBehaviour;
     }
@@ -73,22 +93,24 @@ public class JavascriptLanguage extends ScriptLanguage
         this.engine.eval("scriptBehaviour.onDetach(); scriptBehaviour.actor = null;");
     }
 
+    @Override
     public void onActivate( ScriptedBehaviour behaviour )
         throws ScriptException
     {
         Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
         bindings.put("scriptBehaviour", behaviour.scriptBehaviour);
-        this.engine.eval("scriptBehaviour.onActivate();");        
+        this.engine.eval("scriptBehaviour.onActivate();");
     }
 
+    @Override
     public void onDeactivate( ScriptedBehaviour behaviour )
         throws ScriptException
     {
         Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
         bindings.put("scriptBehaviour", behaviour.scriptBehaviour);
-        this.engine.eval("scriptBehaviour.onDeactivate();");        
+        this.engine.eval("scriptBehaviour.onDeactivate();");
     }
-    
+
     @Override
     public void tick( ScriptedBehaviour behaviour )
         throws ScriptException
@@ -118,12 +140,6 @@ public class JavascriptLanguage extends ScriptLanguage
         this.engine.eval("scriptBehaviour.onKill();");
     }
 
-    
-    
-    
-    
-    
-
     @Override
     public SceneBehaviour createSceneBehaviour( String filename )
         throws ScriptException
@@ -132,7 +148,8 @@ public class JavascriptLanguage extends ScriptLanguage
 
         Object scriptBehvaiour = this.engine.eval("new " + name + "();");
 
-        ScriptedSceneBehaviour javaBehaviour = new ScriptedSceneBehaviour(filename, this, scriptBehvaiour);
+        ScriptedSceneBehaviour javaBehaviour = new ScriptedSceneBehaviour(filename, this,
+            scriptBehvaiour);
 
         Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
         bindings.put("scriptBehaviour", scriptBehvaiour);
@@ -142,75 +159,91 @@ public class JavascriptLanguage extends ScriptLanguage
         return javaBehaviour;
     }
 
-    public void onActivate( ScriptedSceneBehaviour behaviour)
+    @Override
+    public void onActivate( ScriptedSceneBehaviour behaviour )
         throws ScriptException
     {
         Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
         bindings.put("scriptBehaviour", behaviour.scriptBehaviour);
         this.engine.eval("scriptBehaviour.onActivate();");
     }
-    
-    public void tick(ScriptedSceneBehaviour behaviour)
+
+    @Override
+    public void onDeactivate( ScriptedSceneBehaviour behaviour )
+        throws ScriptException
+    {
+        Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
+        bindings.put("scriptBehaviour", behaviour.scriptBehaviour);
+        this.engine.eval("scriptBehaviour.onDeactivate();");
+    }
+
+    @Override
+    public void tick( ScriptedSceneBehaviour behaviour )
         throws ScriptException
     {
         Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
         bindings.put("scriptBehaviour", behaviour.scriptBehaviour);
         this.engine.eval("scriptBehaviour.tick();");
     }
-    
+
+    @Override
     public boolean onMouseDown( ScriptedSceneBehaviour behaviour, MouseButtonEvent mbe )
         throws ScriptException
     {
         Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
         bindings.put("scriptBehaviour", behaviour.scriptBehaviour);
-        bindings.put("arg", mbe );
+        bindings.put("arg", mbe);
         return (boolean) this.engine.eval("scriptBehaviour.onMouseDown(arg);");
     }
-    
-    public boolean onMouseUp( ScriptedSceneBehaviour behaviour,MouseButtonEvent mbe )
+
+    @Override
+    public boolean onMouseUp( ScriptedSceneBehaviour behaviour, MouseButtonEvent mbe )
         throws ScriptException
     {
         Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
         bindings.put("scriptBehaviour", behaviour.scriptBehaviour);
-        bindings.put("arg", mbe );
-        return (boolean) this.engine.eval("scriptBehaviour.onMouseUp(arg);");        
-    }
-    
-    public boolean onMouseMove( ScriptedSceneBehaviour behaviour,MouseMotionEvent mme )
-        throws ScriptException
-    {
-        Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
-        bindings.put("scriptBehaviour", behaviour.scriptBehaviour);
-        bindings.put("arg", mme );
-        return (boolean) this.engine.eval("scriptBehaviour.onMouseMove(arg);");
-    }
-    
-    public boolean onKeyDown( ScriptedSceneBehaviour behaviour,KeyboardEvent ke )
-        throws ScriptException
-    {
-        Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
-        bindings.put("scriptBehaviour", behaviour.scriptBehaviour);
-        bindings.put("arg", ke );
-        return (boolean) this.engine.eval("scriptBehaviour.onKeyDown(arg);");
-    }
-    
-    public boolean onKeyUp( ScriptedSceneBehaviour behaviour,KeyboardEvent ke )
-        throws ScriptException
-    {
-        Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
-        bindings.put("scriptBehaviour", behaviour.scriptBehaviour);
-        bindings.put("arg", ke );
-        return (boolean) this.engine.eval("scriptBehaviour.onKeyUp(arg);");
-    }
-    
-    public void onMessage( ScriptedSceneBehaviour behaviour,String message )
-        throws ScriptException
-    {
-        Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
-        bindings.put("scriptBehaviour", behaviour.scriptBehaviour);
-        bindings.put("arg", message );
-        this.engine.eval("scriptBehaviour.onMessage(arg);");
+        bindings.put("arg", mbe);
+        return (boolean) this.engine.eval("scriptBehaviour.onMouseUp(arg);");
     }
 
+    @Override
+    public boolean onMouseMove( ScriptedSceneBehaviour behaviour, MouseMotionEvent mme )
+        throws ScriptException
+    {
+        Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
+        bindings.put("scriptBehaviour", behaviour.scriptBehaviour);
+        bindings.put("arg", mme);
+        return (boolean) this.engine.eval("scriptBehaviour.onMouseMove(arg);");
+    }
+
+    @Override
+    public boolean onKeyDown( ScriptedSceneBehaviour behaviour, KeyboardEvent ke )
+        throws ScriptException
+    {
+        Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
+        bindings.put("scriptBehaviour", behaviour.scriptBehaviour);
+        bindings.put("arg", ke);
+        return (boolean) this.engine.eval("scriptBehaviour.onKeyDown(arg);");
+    }
+
+    @Override
+    public boolean onKeyUp( ScriptedSceneBehaviour behaviour, KeyboardEvent ke )
+        throws ScriptException
+    {
+        Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
+        bindings.put("scriptBehaviour", behaviour.scriptBehaviour);
+        bindings.put("arg", ke);
+        return (boolean) this.engine.eval("scriptBehaviour.onKeyUp(arg);");
+    }
+
+    @Override
+    public void onMessage( ScriptedSceneBehaviour behaviour, String message )
+        throws ScriptException
+    {
+        Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
+        bindings.put("scriptBehaviour", behaviour.scriptBehaviour);
+        bindings.put("arg", message);
+        this.engine.eval("scriptBehaviour.onMessage(arg);");
+    }
 
 }

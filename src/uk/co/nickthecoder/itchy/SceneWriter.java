@@ -94,6 +94,10 @@ public class SceneWriter extends XMLWriter
                 if (!NullBehaviour.class.getName().equals(sceneActor.behaviourClassName)) {
                     this.attribute("behaviour", sceneActor.behaviourClassName);
                 }
+                if ( tsa.costume != null) {
+                    this.attribute("costume", this.sceneResource.resources.getCostumeName(tsa.costume));
+                }
+
                 this.writeSceneActorAttributes(sceneActor);
 
                 this.endTag("text");
@@ -110,6 +114,10 @@ public class SceneWriter extends XMLWriter
         this.attribute("y", sceneActor.y);
         this.attribute("direction", sceneActor.direction);
         this.attribute("startEvent", sceneActor.startEvent);
+
+        if (sceneActor.alpha != 255) {
+            this.attribute("alpha", sceneActor.alpha);
+        }
 
         if (sceneActor.colorize != null) {
             this.attribute("colorize", sceneActor.colorize.getRGBACode());

@@ -906,12 +906,12 @@ public class CostumesEditor extends SubEditor
         posePicker.show();
     }
 
-    private void add( PoseResource poseResouerce )
+    private void add( PoseResource poseResource )
     {
         Costume costume = new Costume();
-        costume.addPose("default", poseResouerce);
+        costume.addPose("default", poseResource);
         this.currentCostumeResource = new CostumeResource(this.editor.resources,
-            poseResouerce.getName(), costume);
+            poseResource.getName(), costume);
         this.adding = true;
         this.showDetails(this.currentCostumeResource);
 

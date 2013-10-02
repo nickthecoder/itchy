@@ -60,13 +60,20 @@ public class Actor implements PropertySubject<Actor>
     private static Pose startPose( Costume costume, String name )
     {
         Pose pose = costume.getPose(name);
-        if ( pose == null ) {
-            pose = costume.getPose("default");
+        if ( pose != null ) {
+            return pose;
         }
-        if (pose == null ) {
-            pose = ImagePose.getDummyPose();
+        
+        // It doesn't have a pose, so it will be a TextPose...
+        String text = costume.getString(name);
+        if ( text == null ) {
+            text = "?";
         }
-        return pose;
+        Font font = costume.getFont(name);
+        if ( font == null) {
+            return ImagePose.getDummyPose();
+        } 
+        return new TextPose(text,font,20);
     }
     
     public Actor( Costume costume, String eventName )

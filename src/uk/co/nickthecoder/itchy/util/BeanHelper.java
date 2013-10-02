@@ -8,6 +8,7 @@ package uk.co.nickthecoder.itchy.util;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Map;
 
 public class BeanHelper
 {
@@ -36,10 +37,17 @@ public class BeanHelper
             } catch (NoSuchMethodException e) {
             }
 
-            Field field = subject.getClass().getField(attributeName);
-            // Field field = subject.getClass().getDeclaredField( attributeName );
-            return field.get(subject);
-
+            try {
+                Field field = subject.getClass().getField(attributeName);
+                // Field field = subject.getClass().getDeclaredField( attributeName );
+                return field.get(subject);
+            } catch ( NoSuchFieldException e ) {
+                if (subject instanceof Map<?,?>) {
+                    Map<?, ?> map = (Map<?,?>) subject;
+                    return map.get(attributeName);
+                }
+                throw e;
+            }
         }
     }
 
@@ -107,10 +115,21 @@ public class BeanHelper
                 } catch (NoSuchMethodException e) {
                 }
             }
+                        
+            try {
+                Field field = subject.getClass().getField(attributeName);
+                // Field field = subject.getClass().getDeclaredField( attributeName );
+                field.set(subject, value);
+            } catch ( NoSuchFieldException e ) {
+                if (subject instanceof Map<?,?>) {
+                    @SuppressWarnings("unchecked")
+                    Map<String, Object> map = (Map<String,Object>) subject;
+                    map.put(attributeName,value);
+                } else {
+                    throw e;
+                }
+            }
             
-            Field field = subject.getClass().getField(attributeName);
-            // Field field = subject.getClass().getDeclaredField( attributeName );
-            field.set(subject, value);
         }
     }
 

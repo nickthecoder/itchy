@@ -5,14 +5,19 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.script;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.io.Reader;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.script.Bindings;
 import javax.script.ScriptContext;
@@ -72,6 +77,59 @@ public abstract class ScriptLanguage
 
     }
 
+    void createFromTemplate( String filename, String templateName, Map<String,String> substitutions )
+        throws IOException
+    {
+        File file = this.manager.getScript(filename);
+
+        String templateFilename = ".." + File.separator + "templates" + File.separator +
+            templateName + "." + this.getExtension();
+        File templateFile = this.manager.getScript(templateFilename);
+
+        BufferedReader reader = new BufferedReader( new InputStreamReader( new FileInputStream(templateFile) ));
+        PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+        
+        String line = reader.readLine();
+        while(line != null){
+            writeTemplateLine( writer, line, substitutions );
+            
+            line = reader.readLine();
+        }
+        reader.close();
+        writer.close();
+
+    }
+
+    private void writeTemplateLine(PrintWriter out, String line, Map<String,String> substitutions )
+    {
+        int fromIndex = 0;
+        int open = line.indexOf("${");
+        while ( open >= 0 ) {
+
+            out.print(line.substring(fromIndex, open));
+            
+            int close = line.indexOf( "}",open );
+            if (close < 0) {
+                out.println( "${" );
+                fromIndex += 2;
+                
+            } else {
+                String key = line.substring(open + 2, close);
+                System.out.println("Found key : " + key );
+                if (substitutions.containsKey(key)) {
+                    out.print(substitutions.get(key));
+                } else {
+                    out.print("${");
+                    out.print(key);
+                    out.print("}");
+                }
+                fromIndex = close + 1;
+            }
+            open = line.indexOf("${", fromIndex); 
+        }
+        out.println(line.substring(fromIndex));
+    }
+    
     protected void loadScript( String filename )
         throws ScriptException
     {
@@ -92,7 +150,7 @@ public abstract class ScriptLanguage
 
         long lastModified = file.lastModified();
         this.engine.put(ScriptEngine.FILENAME, file.getPath());
-        
+
         if (this.lastLoadedMap.containsKey(file)) {
             long lastLoaded = this.lastLoadedMap.get(file);
             if (lastLoaded > lastModified) {
@@ -105,14 +163,18 @@ public abstract class ScriptLanguage
             Reader reader = new InputStreamReader(new FileInputStream(file));
             this.engine.eval(reader);
         } catch (IOException e) {
-            
+
         }
 
         this.lastLoadedMap.put(file, new Date().getTime());
     }
 
-    
-    
+    public abstract Object getProperty( Object inst, String name )
+        throws ScriptException;
+
+    public abstract Object putProperty( Object inst, String name, Object value )
+        throws ScriptException;
+
     public abstract Behaviour createBehaviour( String filename )
         throws ScriptException;
 
@@ -127,7 +189,7 @@ public abstract class ScriptLanguage
 
     public abstract void onDeactivate( ScriptedBehaviour behaviour )
         throws ScriptException;
-    
+
     public abstract void onKill( ScriptedBehaviour behaviour )
         throws ScriptException;
 
@@ -137,37 +199,34 @@ public abstract class ScriptLanguage
     public abstract void tick( ScriptedBehaviour behaviour )
         throws ScriptException;
 
-    
-    
     public abstract SceneBehaviour createSceneBehaviour( String filename )
         throws ScriptException;
 
+    public abstract void onActivate( ScriptedSceneBehaviour behaviour )
+        throws ScriptException;
 
-    
-    public abstract void onActivate( ScriptedSceneBehaviour behaviour)
+    public abstract void onDeactivate( ScriptedSceneBehaviour behaviour )
         throws ScriptException;
-    
-    public abstract void tick(ScriptedSceneBehaviour behaviour)
+
+    public abstract void tick( ScriptedSceneBehaviour behaviour )
         throws ScriptException;
-    
+
     public abstract boolean onMouseDown( ScriptedSceneBehaviour behaviour, MouseButtonEvent mbe )
         throws ScriptException;
-    
-    public abstract boolean onMouseUp( ScriptedSceneBehaviour behaviour,MouseButtonEvent mbe )
+
+    public abstract boolean onMouseUp( ScriptedSceneBehaviour behaviour, MouseButtonEvent mbe )
         throws ScriptException;
 
-    public abstract boolean onMouseMove( ScriptedSceneBehaviour behaviour,MouseMotionEvent mme )
-        throws ScriptException;
-    
-    public abstract boolean onKeyDown( ScriptedSceneBehaviour behaviour,KeyboardEvent ke )
-        throws ScriptException;
-    
-    public abstract boolean onKeyUp( ScriptedSceneBehaviour behaviour,KeyboardEvent ke )
-        throws ScriptException;
-    
-    public abstract void onMessage( ScriptedSceneBehaviour behaviour,String message )
+    public abstract boolean onMouseMove( ScriptedSceneBehaviour behaviour, MouseMotionEvent mme )
         throws ScriptException;
 
+    public abstract boolean onKeyDown( ScriptedSceneBehaviour behaviour, KeyboardEvent ke )
+        throws ScriptException;
 
-    
+    public abstract boolean onKeyUp( ScriptedSceneBehaviour behaviour, KeyboardEvent ke )
+        throws ScriptException;
+
+    public abstract void onMessage( ScriptedSceneBehaviour behaviour, String message )
+        throws ScriptException;
+
 }

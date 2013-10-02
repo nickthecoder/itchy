@@ -17,11 +17,11 @@ import java.util.List;
 
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.KeyListener;
-import uk.co.nickthecoder.jame.Keys;
 import uk.co.nickthecoder.jame.RGBA;
 import uk.co.nickthecoder.jame.Surface;
 import uk.co.nickthecoder.jame.TrueTypeFont;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
+import uk.co.nickthecoder.jame.event.Keys;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 
 public class EntryBox<E extends EntryBox<?>> extends ClickableContainer implements Layout, KeyListener

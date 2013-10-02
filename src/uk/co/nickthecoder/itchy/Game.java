@@ -15,11 +15,11 @@ import uk.co.nickthecoder.itchy.extras.Pause;
 import uk.co.nickthecoder.itchy.gui.GuiPose;
 import uk.co.nickthecoder.itchy.gui.Stylesheet;
 import uk.co.nickthecoder.itchy.util.AutoFlushPreferences;
-import uk.co.nickthecoder.jame.Keys;
 import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.Surface;
 import uk.co.nickthecoder.jame.event.Event;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
+import uk.co.nickthecoder.jame.event.Keys;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 import uk.co.nickthecoder.jame.event.QuitEvent;
@@ -482,6 +482,12 @@ public abstract class Game implements EventListener, MessageListener
         return sceneBehaviour;
     }
 
+    public void startScene( String sceneName )
+    {
+        this.layers.clear();
+        this.loadScene(sceneName);
+    }
+
     public boolean loadScene( String sceneName )
     {
         try {
@@ -491,7 +497,10 @@ public abstract class Game implements EventListener, MessageListener
                 return false;
             }
 
-            // TODO this.sceneBehaviour.onDeactivate();
+            this.sceneBehaviour.onDeactivate();
+
+            this.sceneName = sceneName;
+
             this.sceneBehaviour = scene.createSceneBehaviour( this.resources );
             this.sceneBehaviour.onActivate();
             scene.create(this.layers, this.resources, false);
@@ -502,7 +511,6 @@ public abstract class Game implements EventListener, MessageListener
             return false;
         }
 
-        this.sceneName = sceneName;
         return true;
     }
 

@@ -55,11 +55,11 @@ import uk.co.nickthecoder.itchy.gui.VerticalScroll;
 import uk.co.nickthecoder.itchy.util.AbstractProperty;
 import uk.co.nickthecoder.itchy.util.NinePatch;
 import uk.co.nickthecoder.itchy.util.Reversed;
-import uk.co.nickthecoder.jame.Keys;
 import uk.co.nickthecoder.jame.RGBA;
 import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.Surface;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
+import uk.co.nickthecoder.jame.event.Keys;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
@@ -1001,7 +1001,12 @@ public class SceneDesigner implements MouseListener, KeyListener
 
             if (this.stampActor.getAppearance().getPose() instanceof TextPose) {
                 actor = new Actor(this.stampActor.getAppearance().getPose());
-                behaviourClassName = NullBehaviour.class.getName();
+                if ( this.stampActor.getCostume() != null ) {
+                    actor.setCostume(this.stampActor.getCostume());
+                    behaviourClassName = stampActor.getCostume().behaviourClassName;
+                } else {
+                    behaviourClassName = NullBehaviour.class.getName();
+                }
 
             } else {
                 actor = new Actor(this.currentCostume);
@@ -1121,6 +1126,7 @@ public class SceneDesigner implements MouseListener, KeyListener
     {
         assert (this.stampActor == null);
         this.stampActor = new Actor(this.currentCostume);
+
         this.stampActor.moveTo(-10000, -10000); // Anywhere off screen
         this.stampActor.getAppearance().setAlpha(128);
         this.glassLayer.add(this.stampActor);
@@ -1288,7 +1294,15 @@ public class SceneDesigner implements MouseListener, KeyListener
     private void onSave()
     {
         Scene scene = new Scene();
-
+        
+        // TODO - Replace this with SceneProperties when they are implemented.
+        // And then remove that from the ScenesEditor?
+        try {
+            scene.sceneBehaviourName = sceneResource.getScene().sceneBehaviourName;
+        } catch (Exception e) {
+            // Do nothing
+        }
+        
         for (Layer child : this.designLayers.getChildren()) {
             ActorsLayer layer = (ActorsLayer) child;
 

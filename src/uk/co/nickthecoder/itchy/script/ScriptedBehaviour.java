@@ -5,23 +5,65 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.script;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 import uk.co.nickthecoder.itchy.Behaviour;
+import uk.co.nickthecoder.itchy.util.AbstractProperty;
 
 public class ScriptedBehaviour extends Behaviour
 {
+    private final static HashMap<String, List<AbstractProperty<Behaviour, ?>>> allProperties = new HashMap<String, List<AbstractProperty<Behaviour, ?>>>();
+    
     private String filename;
 
     private ScriptLanguage language;
 
     public final Object scriptBehaviour;
 
-    public ScriptedBehaviour( String name, ScriptLanguage language, Object scriptInstance )
+    public final ScriptProperties propertyValues;
+    
+    public ScriptedBehaviour( String filename, ScriptLanguage language, Object scriptInstance )
     {
-        this.filename = name;
+        this.filename = filename;
         this.language = language;
         this.scriptBehaviour = scriptInstance;
+        this.propertyValues = new ScriptProperties(this.language, scriptInstance);
+    }
+    
+    public List<AbstractProperty<Behaviour, ?>> getProperties()
+    {
+        String name = language.manager.getName( this.filename );
+
+        List<AbstractProperty<Behaviour, ?>> result = allProperties.get(name);
+        if (result == null) {
+            result = new ArrayList<AbstractProperty<Behaviour, ?>>();
+            allProperties.put(name, result);
+        }
+        return result;
     }
 
+    public static void declareBehaviourProperty( 
+        String behaviourName, String propertyName, String label, Object defaultValue, Class<?> klass )
+    {
+        System.out.println( "Declaring property for " + behaviourName + " propName : " + propertyName + " Lable : " + label + " defaultValue : " + defaultValue + " Class : " + klass );
+
+        List<AbstractProperty<Behaviour, ?>> properties = allProperties.get(behaviourName);
+        if (properties == null) {
+            properties = new ArrayList<AbstractProperty<Behaviour, ?>>();
+            allProperties.put(behaviourName, properties);
+        }
+        
+        AbstractProperty<Behaviour,?> property = AbstractProperty.createProperty(
+            klass, "propertyValues." + propertyName, propertyName, label, true, false, true);
+        System.out.println( "Created property " + property );
+        if ( property != null) {
+            properties.add(property);
+        }
+        
+    }
+    
     @Override
     public String getClassName()
     {

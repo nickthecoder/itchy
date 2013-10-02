@@ -1,9 +1,7 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0 which accompanies this
+ * distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
@@ -21,10 +19,10 @@ public class Scene
     private HashMap<String, SceneLayer> layersMap;
 
     public boolean showMouse = true;
-    
+
     public String sceneBehaviourName;
 
-    private List<Actor> activateList; 
+    private List<Actor> activateList;
 
     public Scene()
     {
@@ -59,49 +57,49 @@ public class Scene
 
     public void create( ActorsLayer layer, Resources resources, boolean designMode )
     {
-        activateList = new ArrayList<Actor>(); 
+        this.activateList = new ArrayList<Actor>();
 
         for (SceneLayer sceneLayer : this.sceneLayers) {
             sceneLayer.create(layer, resources, designMode);
         }
-        
-        for (Actor actor : activateList) {
+
+        for (Actor actor : this.activateList) {
             actor.activate();
         }
-        activateList.clear();
-        activateList = null;
+        this.activateList.clear();
+        this.activateList = null;
     }
 
     public void create( CompoundLayer layer, Resources resources, boolean designMode )
     {
-        activateList = new ArrayList<Actor>(); 
+        this.activateList = new ArrayList<Actor>();
 
         for (SceneLayer sceneLayer : this.sceneLayers) {
             String name = sceneLayer.name;
-            
-            sceneLayer.create(findLayer(layer,name), resources, designMode);
+
+            sceneLayer.create(findLayer(layer, name), resources, designMode);
         }
 
-        for (Actor actor : activateList) {
+        for (Actor actor : this.activateList) {
             actor.activate();
         }
-        activateList.clear();
-        activateList = null;
+        this.activateList.clear();
+        this.activateList = null;
     }
-    
+
     private ActorsLayer findLayer( CompoundLayer parent, String name )
     {
         Layer best = null;
-        
+
         for (Layer childLayer : parent.getChildren()) {
-            if (( childLayer instanceof ActorsLayer) && (!childLayer.locked)) {
+            if ((childLayer instanceof ActorsLayer) && (!childLayer.locked)) {
                 if (name.equals(childLayer.getName())) {
                     return (ActorsLayer) childLayer;
                 }
                 best = childLayer;
             }
         }
-        
+
         return (ActorsLayer) best;
     }
 
@@ -134,16 +132,15 @@ public class Scene
         if (StringUtils.isBlank(this.sceneBehaviourName)) {
             return new NullSceneBehaviour();
         } else {
-            if ( resources.scriptManager.isValidScript( this.sceneBehaviourName )) {
+            if (resources.scriptManager.isValidScript(this.sceneBehaviourName)) {
                 return resources.scriptManager.createSceneBehaviour(this.sceneBehaviourName);
             } else {
-                Class<?> klass = Class.forName(sceneBehaviourName);
+                Class<?> klass = Class.forName(this.sceneBehaviourName);
                 return (SceneBehaviour) klass.newInstance();
             }
         }
     }
 
-    
     public class SceneLayer
     {
         String name;
@@ -184,25 +181,25 @@ public class Scene
         {
             return this.sceneActors.size() == 0;
         }
-        
+
         public void create( ActorsLayer layer, Resources resources, boolean designMode )
         {
             layer.reset();
-            
+
             for (SceneActor sceneActor : this.sceneActors) {
                 Actor actor = sceneActor.createActor(resources, designMode);
                 layer.add(actor);
-                
+
                 if (!designMode) {
                     if (actor.getActivationDelay() == 0) {
-                        activateList.add(actor);
+                        Scene.this.activateList.add(actor);
                     } else if (actor.getActivationDelay() > 0) {
                         actor.activateAfter(actor.getActivationDelay());
                     }
                 }
             }
         }
-        
+
     }
 
 }

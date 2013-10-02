@@ -1,0 +1,58 @@
+<scene showMouse="true" behaviour="Play.js">
+  <layer name="main">
+    <actor costume="background" x="0" y="601" direction="0.0" startEvent="default"/>
+    <text text="Hard" font="Boycott" size="72" color="#401c00" x="384" y="559" direction="0.0" startEvent="default"/>
+    <text text="Hard" font="Boycott" size="65" color="#93472e" x="384" y="559" direction="0.0" startEvent="default"/>
+    <text text="Score :" font="Boycott" size="35" color="#000000" x="74" y="570" direction="0.0" startEvent="default"/>
+    <text text="0" font="Boycott" size="32" color="#93190e" behaviour="Score.js" x="63" y="531" direction="0.0" startEvent="default"/>
+    <text text="Top" font="BlackCasper" size="22" color="#ffffff" x="0" y="1200" direction="0.0" startEvent="default"/>
+    <actor costume="player" x="414" y="21" direction="0.0" startEvent="default"/>
+    <actor costume="drop1" x="91" y="639" direction="0.0" startEvent="default">
+      <property name="distance" value="600"/>
+    </actor>
+    <actor costume="drop1" x="133" y="1082" direction="0.0" startEvent="default">
+      <property name="distance" value="610"/>
+    </actor>
+    <actor costume="drop1" x="84" y="1037" direction="0.0" startEvent="default">
+      <property name="distance" value="610"/>
+    </actor>
+    <actor costume="drop1" x="85" y="1122" direction="0.0" startEvent="default">
+      <property name="distance" value="600"/>
+    </actor>
+    <actor costume="drop1" x="136" y="672" direction="0.0" startEvent="default">
+      <property name="distance" value="600"/>
+    </actor>
+    <actor costume="drop1" x="85" y="707" direction="0.0" startEvent="default">
+      <property name="distance" value="600"/>
+    </actor>
+    <actor costume="drop1" x="132" y="877" direction="0.0" startEvent="default">
+      <property name="distance" value="600"/>
+    </actor>
+    <actor costume="drop1" x="79" y="911" direction="0.0" startEvent="default">
+      <property name="distance" value="600"/>
+    </actor>
+    <actor costume="drop3" x="253" y="794" direction="0.0" startEvent="default">
+      <property name="distance" value="610"/>
+    </actor>
+    <actor costume="drop3" x="254" y="652" direction="0.0" startEvent="default">
+      <property name="distance" value="600"/>
+    </actor>
+    <actor costume="drop3" x="289" y="988" direction="0.0" startEvent="default">
+      <property name="distance" value="600"/>
+    </actor>
+    <actor costume="drop2" x="123" y="781" direction="0.0" startEvent="default">
+      <property name="distance" value="720"/>
+    </actor>
+    <actor costume="drop2" x="253" y="979" direction="0.0" startEvent="default">
+      <property name="distance" value="720"/>
+    </actor>
+    <actor costume="drop2" x="445" y="1009" direction="0.0" startEvent="default">
+      <property name="distance" value="720"/>
+    </actor>
+    <actor costume="drop3" x="289" y="1124" direction="0.0" startEvent="default">
+      <property name="distance" value="600"/>
+    </actor>
+    <text text="0" font="Boycott" size="32" color="#93190e" behaviour="HighScore.js" x="701" y="527" direction="0.0" startEvent="default"/>
+    <text text="High Score" font="Boycott" size="35" color="#8f9688" x="704" y="570" direction="0.0" startEvent="default"/>
+  </layer>
+</scene>

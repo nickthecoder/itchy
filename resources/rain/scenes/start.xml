@@ -1,19 +1,29 @@
-<scene showMouse="true" behaviour="Play.js">
+<scene showMouse="true" behaviour="Menu.js">
   <layer name="main">
-    <actor costume="player" x="414" y="28" direction="0.0" startEvent="default"/>
-    <actor costume="rain" x="295" y="393" direction="0.0" startEvent="default"/>
-    <actor costume="rain" x="396" y="340" direction="0.0" startEvent="default"/>
-    <actor costume="rain" x="524" y="552" direction="0.0" startEvent="default"/>
-    <actor costume="rain" x="197" y="550" direction="0.0" startEvent="default"/>
-    <actor costume="rain" x="84" y="782" direction="0.0" startEvent="default"/>
-    <actor costume="rain" x="297" y="652" direction="0.0" startEvent="default"/>
-    <actor costume="rain" x="642" y="749" direction="0.0" startEvent="default"/>
-    <actor costume="rain" x="467" y="849" direction="0.0" startEvent="default"/>
-    <actor costume="rain" x="229" y="915" direction="0.0" startEvent="default"/>
-    <actor costume="rain" x="55" y="1032" direction="0.0" startEvent="default"/>
-    <actor costume="rain" x="376" y="1020" direction="0.0" startEvent="default"/>
-    <actor costume="rain" x="571" y="898" direction="0.0" startEvent="default"/>
-    <actor costume="rain" x="204" y="1440" direction="0.0" startEvent="default"/>
-    <actor costume="rain" x="425" y="1719" direction="0.0" startEvent="default"/>
+    <actor costume="background" x="0" y="600" direction="0.0" startEvent="default" alpha="57.0"/>
+    <text text="It's Gonna" font="Boycott" size="57" color="#000000" x="170" y="555" direction="0.0" startEvent="default"/>
+    <text text="It's Gonna" font="Boycott" size="54" color="#6b6f2e" x="170" y="552" direction="0.0" startEvent="default"/>
+    <text text="Rain" font="Boycott" size="140" color="#3d2b0a" x="175" y="456" direction="0.0" startEvent="default" alpha="160.0"/>
+    <text text="Rain" font="Boycott" size="128" color="#cc9656" x="178" y="451" direction="0.0" startEvent="default" alpha="121.0"/>
+    <text text="Easy" font="BlackCasper" size="58" color="#333364" x="157" y="329" direction="0.0" startEvent="default"/>
+    <text text="Medium" font="BlackCasper" size="54" color="#333364" x="178" y="253" direction="0.0" startEvent="default"/>
+    <text text="Easy" font="BlackCasper" size="51" color="#5d8cc5" behaviour="uk.co.nickthecoder.itchy.extras.Button" costume="play" x="155" y="332" direction="0.0" startEvent="default">
+      <property name="message" value="easy"/>
+    </text>
+    <text text="Hard" font="BlackCasper" size="61" color="#333364" x="161" y="172" direction="0.0" startEvent="default"/>
+    <text text="Quit" font="Boycott" size="41" color="#333364" x="76" y="38" direction="0.0" startEvent="default"/>
+    <text text="Medium" font="BlackCasper" size="46" color="#5d8cc5" behaviour="uk.co.nickthecoder.itchy.extras.Button" costume="play" x="170" y="256" direction="0.0" startEvent="default">
+      <property name="message" value="medium"/>
+    </text>
+    <text text="Editor" font="Boycott" size="40" color="#333364" x="224" y="40" direction="0.0" startEvent="default"/>
+    <text text="Hard" font="BlackCasper" size="53" color="#5d8cc5" behaviour="uk.co.nickthecoder.itchy.extras.Button" costume="play" x="159" y="173" direction="0.0" startEvent="default">
+      <property name="message" value="hard"/>
+    </text>
+    <text text="Quit" font="Boycott" size="35" color="#5d8cc5" behaviour="uk.co.nickthecoder.itchy.extras.Button" costume="quit" x="73" y="38" direction="0.0" startEvent="default">
+      <property name="message" value="quit"/>
+    </text>
+    <text text="EDITOR" font="Boycott" size="37" color="#5d8cc5" behaviour="uk.co.nickthecoder.itchy.extras.Button" costume="editor" x="224" y="39" direction="0.0" startEvent="default">
+      <property name="message" value="editor"/>
+    </text>
   </layer>
 </scene>

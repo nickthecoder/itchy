@@ -19,6 +19,8 @@ public class TextSceneActor extends SceneActor
 
     public RGBA color;
 
+    public Costume costume;
+
     protected TextSceneActor( Actor actor )
     {
         super(actor);
@@ -27,6 +29,7 @@ public class TextSceneActor extends SceneActor
         this.fontSize = (int) pose.getFontSize();
         this.text = pose.getText();
         this.color = new RGBA(pose.getColor());
+        this.costume = actor.getCostume();
     }
 
     public TextSceneActor( Font font, int fontSize, String text )
@@ -35,6 +38,7 @@ public class TextSceneActor extends SceneActor
         this.fontSize = fontSize;
         this.text = text;
         this.color = new RGBA(255, 255, 255);
+        this.costume = null;
     }
 
     @Override
@@ -43,6 +47,9 @@ public class TextSceneActor extends SceneActor
         TextPose pose = new TextPose(this.text, this.font, this.fontSize);
         pose.setColor(this.color);
         Actor actor = new Actor(pose);
+        if ( this.costume != null) {
+            actor.setCostume(this.costume);
+        }
         this.updateActor(actor, resources, designActor);
         
         return actor;

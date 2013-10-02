@@ -8,27 +8,23 @@ Jame is out of date, need to rebuild for win32 and i386 and ARM??
 What's Next
 ===========
 
-Complete SceneBehaviour script with example in rain.
-
-Implement SceneBehaviour.onDeactive
-
-Add properties on script behaviours
+Allow scripts to be created from the editor use a template for each script language/class.
 
 Script versions of CostumeProperties and Game.
+    Launcher to create a DIFFERENT type of Game from itself.
+    Stored in the resources xml
+        Launcher becomes just Main, not a Game.
+    
+Text alignment properties in editor?
+    Align the score on the right (or left), bu never the middle - it wiggles!
 
 If SceneBehaviour doesn't have properties, then add them.
     Need to edit them in the editor too. A new tab in the SceneDesigner seems sensible.
 
-Rain
-    Add a score (which needs a Font)
-    Add a highscore, and persist it.
-    Add a welcome screen
-    Add multiple levels - sparse, jamed, tiny rain, barriers
-    Tilt ship left, right or straight depending on the movement left/right 
     
 Fix frame rate problems at the start of the game.
 
-An "include" function, which includes another script file - use ScriptManager.loadScript    
+Test "include" function, which includes another script file    
 
 
 Bugs

@@ -50,6 +50,16 @@ public class ScriptedSceneBehaviour implements SceneBehaviour
     }
 
     @Override
+    public void onDeactivate()
+    {
+        try {
+            this.language.onDeactivate(this);
+        } catch (Exception e) {
+            handleException(e);
+        }        
+    }
+
+    @Override
     public void tick()
     {
         try {

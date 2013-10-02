@@ -9,11 +9,11 @@ import java.util.Stack;
 
 import uk.co.nickthecoder.jame.Audio;
 import uk.co.nickthecoder.jame.Events;
-import uk.co.nickthecoder.jame.Keys;
 import uk.co.nickthecoder.jame.Surface;
 import uk.co.nickthecoder.jame.Video;
 import uk.co.nickthecoder.jame.event.Event;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
+import uk.co.nickthecoder.jame.event.Keys;
 import uk.co.nickthecoder.jame.event.MouseEvent;
 
 /**

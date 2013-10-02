@@ -104,6 +104,15 @@ public class SceneReader
         TextSceneActor sceneActor = new TextSceneActor(font, fontSize, text);
         sceneActor.behaviourClassName = NullBehaviour.class.getName();
 
+        String costumeName = textTag.getOptionalAttribute("costume",null);
+        if (costumeName != null) {
+            Costume costume = this.resources.getCostume(costumeName);
+            if (costume == null) {
+                throw new XMLException("Costume not found : " + costumeName);
+            }
+            sceneActor.costume = costume;
+        }
+
         String colorString = textTag.getOptionalAttribute("color", "#ffffff");
         try {
             sceneActor.color = RGBA.parse(colorString);
@@ -121,7 +130,8 @@ public class SceneReader
     {
         sceneActor.x = actorTag.getIntAttribute("x");
         sceneActor.y = actorTag.getIntAttribute("y");
-        sceneActor.direction = actorTag.getDoubleAttribute("direction");
+        sceneActor.alpha = actorTag.getOptionalDoubleAttribute("alpha",255);
+        sceneActor.direction = actorTag.getOptionalDoubleAttribute("direction",0);
         sceneActor.scale = actorTag.getOptionalDoubleAttribute("scale", 1);
         sceneActor.activationDelay = actorTag.getOptionalDoubleAttribute("activationDelay", 0);
         sceneActor.startEvent = actorTag.getOptionalAttribute("startEvent", "default");

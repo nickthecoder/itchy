@@ -20,8 +20,8 @@ import uk.co.nickthecoder.itchy.neighbourhood.Neighbourhood;
 import uk.co.nickthecoder.itchy.neighbourhood.NeighbourhoodCollisionStrategy;
 import uk.co.nickthecoder.itchy.neighbourhood.StandardNeighbourhood;
 import uk.co.nickthecoder.itchy.util.TextBehaviour;
-import uk.co.nickthecoder.jame.Keys;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
+import uk.co.nickthecoder.jame.event.Keys;
 
 public class DrunkInvaders extends Game
 {

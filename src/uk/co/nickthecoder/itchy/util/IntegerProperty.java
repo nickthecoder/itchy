@@ -45,6 +45,19 @@ public class IntegerProperty<S> extends AbstractProperty<S, Integer>
         }
         return box;
     }
+    
+    /**
+     * Do don't use the super class, just in case the type of the property value isn't an Integer
+     * (which would cause a cast exception). This could happen if the property was being retrieved
+     * from a dynamically typed language, where we don't directly control attribute types. 
+     */
+    @Override
+    public Integer getValue( S subject )
+        throws Exception
+    {
+        Number result = (Number) BeanHelper.getProperty(subject, this.access);
+        return result.intValue();
+    }
 
     @Override
     public void update( S subject, Component component ) throws Exception

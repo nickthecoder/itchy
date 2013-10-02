@@ -139,22 +139,27 @@ public abstract class AbstractProperty<S, T>
     private static <SS> AbstractProperty<SS, ?> createProperty(
         Class<?> klass, String access, String key, Property property )
     {
-        String label = property.label();
+        return createProperty(
+            klass, access, key, property.label(), property.allowNull(), property.recurse(), property.alpha());
+    }
 
-        if (klass == int.class) {
+    public static <SS> AbstractProperty<SS, ?> createProperty(
+        Class<?> klass, String access, String key, String label, boolean allowNull, boolean recurse, boolean alpha )
+    {
+        if (klass == int.class || klass == Integer.class) {
             return new IntegerProperty<SS>(label, access, key);
         }
-        if (klass == double.class) {
+        if (klass == double.class || klass == Double.class) {
             return new DoubleProperty<SS>(label, access, key);
         }
         if (klass == String.class) {
             return new StringProperty<SS>(label, access, key);
         }
-        if (klass == boolean.class) {
+        if (klass == boolean.class || klass == Boolean.class) {
             return new BooleanProperty<SS>(label, access, key);
         }
         if (klass == RGBA.class) {
-            return new RGBAProperty<SS>(label, access, key, property.allowNull(), property.alpha());
+            return new RGBAProperty<SS>(label, access, key, allowNull, alpha);
         }
         if (klass == Font.class) {
             return new FontProperty<SS>(label, access, key);
@@ -165,11 +170,12 @@ public abstract class AbstractProperty<S, T>
         if (Enum.class.isAssignableFrom(klass)) {
 
             @SuppressWarnings("unchecked")
-            AbstractProperty<SS, Enum<?>> result = new EnumProperty<SS, Enum<?>>(label, access, key,
+            AbstractProperty<SS, Enum<?>> result = new EnumProperty<SS, Enum<?>>(label, access,
+                key,
                 (Class<Enum<?>>) klass);
             return result;
         }
-        if (property.recurse()) {
+        if (recurse) {
             return null;
         }
 

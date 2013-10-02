@@ -6,9 +6,9 @@
 package uk.co.nickthecoder.itchy.gui;
 
 import uk.co.nickthecoder.itchy.Itchy;
-import uk.co.nickthecoder.jame.Keys;
 import uk.co.nickthecoder.jame.event.Event;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
+import uk.co.nickthecoder.jame.event.Keys;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 
 public class IntegerBox extends EntryBox<IntegerBox>

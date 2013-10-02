@@ -98,9 +98,6 @@ public abstract class Behaviour implements MessageListener, Cloneable
      * Most behaviour's won't need this, instead they will use a '@Property(label="Whatever")'
      * annotation above the field.
      * 
-     * The only good reason to use addProperty, is if you want to add a property to a Behaviour,
-     * which cannot be implemented as a simple field.
-     * 
      * Must only be called from within addProperties to ensure that the property won't be added
      * twice.
      */

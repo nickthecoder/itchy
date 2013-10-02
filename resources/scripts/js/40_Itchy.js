@@ -1,12 +1,16 @@
-itchy = Packages.uk.co.nickthecoder.itchy;
+//Package aliases
+itchy=Packages.uk.co.nickthecoder.itchy;
+jame=Packages.uk.co.nickthecoder.jame;
 
-Behaviour = new Class()  ({
+//Objects
+Itchy=itchy.Itchy;
 
-    __init__ : function()
-    {
-        behaviour = null;
-        actor = null;
-    },
+//Functions
+include=language.loadScript;
+
+
+
+Behaviour = new Class() ({
 
     tick : function() {},
     
@@ -18,15 +22,34 @@ Behaviour = new Class()  ({
     
     onDeactivate : function() {},
     
-    onKill : function() {}
+    onKill : function() {},
     
 });
+Behaviour.declareProperty = function( className, propertyName, label, defaultValue, klass ) {
+    itchy.script.ScriptedBehaviour.declareBehaviourProperty(
+        className, propertyName, label, defaultValue, klass
+    );
+};
+Behaviour.stringProperty = function( className, propertyName, label, defaultValue ) {
+    Behaviour.declareProperty( className, propertyName, label, defaultValue, java.lang.String );
+};
+Behaviour.integerProperty = function( className, propertyName, label, defaultValue ) {
+    Behaviour.declareProperty( className, propertyName, label, defaultValue, java.lang.Integer );
+};
+Behaviour.doubleProperty = function( className, propertyName, label, defaultValue ) {
+    Behaviour.declareProperty( className, propertyName, label, defaultValue, java.lang.Double );
+};
+Behaviour.rgbaProperty = function( className, propertyName, label, defaultValue ) {
+    Behaviour.declareProperty( className, propertyName, label, defaultValue, jame.RGBA );
+};
 
 
 
 SceneBehaviour = new Class()  ({
 
     onActivate: function() { sceneBehaviour = this; },
+    
+    onDeactivate: function() { sceneBehaviour = null; },
     
     tick: function() {},
 

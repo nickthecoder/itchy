@@ -12,8 +12,8 @@ import uk.co.nickthecoder.itchy.extras.Fragment;
 import uk.co.nickthecoder.itchy.extras.Talk;
 import uk.co.nickthecoder.itchy.util.Property;
 import uk.co.nickthecoder.itchy.util.Tag;
-import uk.co.nickthecoder.jame.Keys;
 import uk.co.nickthecoder.jame.RGBA;
+import uk.co.nickthecoder.jame.event.Keys;
 
 @Tag(names = {"killable"})
 public class Ship extends Bouncy implements Shootable

@@ -16,6 +16,8 @@ import java.util.TreeSet;
 import uk.co.nickthecoder.itchy.animation.Animation;
 import uk.co.nickthecoder.itchy.script.ScriptManager;
 import uk.co.nickthecoder.itchy.util.NinePatch;
+import uk.co.nickthecoder.jame.JameException;
+import uk.co.nickthecoder.jame.RGBA;
 import uk.co.nickthecoder.jame.Sound;
 import uk.co.nickthecoder.jame.Surface;
 
@@ -55,7 +57,7 @@ public class Resources extends Loadable
     private TreeSet<String> sceneBehaviourClassNames;
 
     public final Game game;
-    
+
     public Resources( Game game )
     {
         super();
@@ -139,6 +141,30 @@ public class Resources extends Loadable
             }
         }
 
+    }
+    
+    public boolean has( NamedResource object )
+    {
+        if ( object instanceof SoundResource) {
+            return this.getSoundResource(object.name) == object;
+            
+        } else if ( object instanceof FontResource ) {
+            return this.getFontResource(object.name) == object;
+            
+        } else if ( object instanceof PoseResource ) {
+            return this.getPoseResource(object.name) == object;
+            
+        } else if ( object instanceof NinePatchResource ) {
+            return this.getNinePatchResource(object.name) == object;
+            
+        } else if ( object instanceof AnimationResource ) {
+            return this.getAnimationResource(object.name) == object;
+
+        } else if ( object instanceof CostumeResource ) {
+            return this.getCostumeResource(object.name) == object;
+
+        }
+        return false;
     }
 
     public void renameResource( Object object, String name )
@@ -445,9 +471,31 @@ public class Resources extends Loadable
     {
         Pose pose = resource.costume.getPose("default");
         if (pose == null) {
+
+            String text = resource.costume.getString("default");
+            if (text != null) {
+                Font font = resource.costume.getFont("default");
+                if (font == null) {
+                    font = this.getDefaultFont();
+                }
+                if (font == null) {
+                    return null;
+                }
+                return this.getThumbnail(font, text);
+            }
+
             return null;
         }
         return this.getThumbnail(pose);
+    }
+
+    public Surface getThumbnail( Font font, String text )
+    {
+        try {
+            return font.getSize(16).renderBlended(text, RGBA.BLACK);
+        } catch (JameException e) {
+            return null;
+        }
     }
 
     // Animations
