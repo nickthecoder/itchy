@@ -150,7 +150,7 @@ public class Tetra extends Game
     }
 
     @Override
-    public void init()
+    public void onActivate()
     {
         this.mainLayer.enableMouseListener();
 

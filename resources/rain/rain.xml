@@ -2,8 +2,6 @@
   <fonts>
     <font name="BlackCasper" filename="fonts/BlackCasper/BlackCasper.ttf"/>
     <font name="Boycott" filename="fonts/Boycott/Boycott.ttf"/>
-    <font name="Vera" filename="fonts/Vera/Vera.ttf"/>
-    <font name="VeraBold" filename="fonts/Vera/VeraBd.ttf"/>
   </fonts>
   <ninePatches/>
   <poses>
@@ -14,10 +12,8 @@
     <pose name="droplet1" filename="droplet1.png"/>
     <pose name="droplet2" filename="droplet2.png"/>
     <pose name="droplet3" filename="droplet3.png"/>
-    <pose name="goat" filename="goat.png" offsetX="25" offsetY="84"/>
-    <pose name="player" filename="player.png" offsetY="62"/>
+    <pose name="sheep" filename="sheep.png" offsetX="25" offsetY="84"/>
     <pose name="wally" filename="wally.png"/>
-    <pose name="zebra" filename="zebra.png" offsetY="110"/>
   </poses>
   <sounds>
     <sound name="ItAintGunnaRain" filename="sounds/ItAintGunnaRain.ogg"/>
@@ -67,7 +63,7 @@
     <costume name="drop1" behaviour="Drop.js">
       <pose name="default" pose="drop1"/>
       <pose name="droplet" pose="droplet1"/>
-      <sound name="drip" sound="drip" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="PLAY_BOTH"/>
+      <sound name="drip" sound="drip" priority="3" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="PLAY_BOTH"/>
     </costume>
     <costume name="drop2" behaviour="Drop.js">
       <pose name="default" pose="drop2"/>
@@ -76,17 +72,17 @@
     <costume name="drop3" behaviour="Drop.js">
       <pose name="default" pose="drop3"/>
       <pose name="droplet" pose="droplet3"/>
-      <sound name="drip" sound="hallelujah" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="PLAY_BOTH"/>
       <sound name="drip" sound="forFortyDays" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="PLAY_BOTH"/>
-      <sound name="drip" sound="hallelujah2" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="PLAY_BOTH"/>
-      <sound name="drip" sound="myLordMyLord" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="PLAY_BOTH"/>
-      <sound name="drip" sound="theyDidntBelieveThatItWasGunnaRain" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="PLAY_BOTH"/>
-      <sound name="drip" sound="rain" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="PLAY_BOTH"/>
+      <sound name="drip" sound="hallelujah" priority="2" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="PLAY_BOTH"/>
+      <sound name="drip" sound="hallelujah2" priority="2" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="PLAY_BOTH"/>
+      <sound name="drip" sound="rain" priority="2" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="PLAY_BOTH"/>
+      <sound name="drip" sound="theyDidntBelieveThatItWasGunnaRain" priority="2" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="PLAY_BOTH"/>
+      <sound name="drip" sound="myLordMyLord" priority="2" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="PLAY_BOTH"/>
     </costume>
     <costume name="editor" behaviour="uk.co.nickthecoder.itchy.extras.Button">
       <string name="default">Editor</string>
       <sound name="onClick" sound="theyDidntBelieveThatItWasGunnaRain" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
-      <font name="default" font="VeraBold"/>
+      <font name="default" font="Boycott"/>
     </costume>
     <costume name="play" behaviour="uk.co.nickthecoder.itchy.extras.Button">
       <string name="default">play</string>
@@ -94,7 +90,7 @@
       <font name="default" font="BlackCasper"/>
     </costume>
     <costume name="player" behaviour="Player.js">
-      <pose name="default" pose="goat"/>
+      <pose name="default" pose="sheep"/>
       <sound name="death" sound="ohLord" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
       <sound name="highScore" sound="woo" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
       <animation name="death" animation="death"/>
@@ -107,11 +103,6 @@
     <costume name="wally">
       <pose name="default" pose="wally"/>
       <animation name="default" animation="wally_walk"/>
-    </costume>
-    <costume name="zebra" behaviour="Player.js">
-      <pose name="default" pose="zebra"/>
-      <sound name="death" sound="ohLord" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="PLAY_BOTH"/>
-      <animation name="death" animation="death"/>
     </costume>
   </costumes>
   <scenes>

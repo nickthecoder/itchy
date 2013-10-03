@@ -4,9 +4,18 @@ jame=Packages.uk.co.nickthecoder.jame;
 
 //Objects
 Itchy=itchy.Itchy;
+sceneBehaviour = null;
 
 //Functions
 include=language.loadScript;
+
+
+Game = new Class()  ({
+
+    onActivate: function() {},
+    
+    getInitialSceneName: function() { return "start" }
+});
 
 
 
@@ -44,7 +53,6 @@ Behaviour.rgbaProperty = function( className, propertyName, label, defaultValue 
 };
 
 
-
 SceneBehaviour = new Class()  ({
 
     onActivate: function() { sceneBehaviour = this; },
@@ -67,5 +75,5 @@ SceneBehaviour = new Class()  ({
 
 });
 
-var sceneBehaviour = null;
+
 

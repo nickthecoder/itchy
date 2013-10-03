@@ -26,10 +26,10 @@ public class Launcher extends Game
     }
 
     @Override
-    public void init()
+    public void onActivate()
     {
         this.mainLayer.enableMouseListener();
-        this.loadScene("start");
+        this.loadScene(getInitialSceneName());
     }
     
     public static void main( String argv[] ) throws Exception
@@ -57,7 +57,7 @@ public class Launcher extends Game
     @Override
     public String getInitialSceneName()
     {
-        return null;
+        return "start";
     }
 
 }

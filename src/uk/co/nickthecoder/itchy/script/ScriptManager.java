@@ -11,6 +11,7 @@ import java.util.HashMap;
 import javax.script.ScriptException;
 
 import uk.co.nickthecoder.itchy.Behaviour;
+import uk.co.nickthecoder.itchy.Game;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.SceneBehaviour;
 
@@ -98,7 +99,19 @@ public class ScriptManager
         ScriptLanguage language = getLanguage(getExtension(filename));
         language.loadScript( filename );
     }
+
     
+    
+    public Game createGame( String filename )
+        throws ScriptException
+    {
+        ScriptLanguage language = getLanguage(getExtension(filename));
+        language.loadScript(filename);
+
+        return language.createGame(filename);
+    }
+    
+
     public Behaviour createBehaviour( String filename )
         throws ScriptException
     {

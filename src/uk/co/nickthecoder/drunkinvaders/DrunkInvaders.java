@@ -80,7 +80,7 @@ public class DrunkInvaders extends Game
     }
 
     @Override
-    public void init()
+    public void onActivate()
     {
         this.mainLayer.enableMouseListener();
 

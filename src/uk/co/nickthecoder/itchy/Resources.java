@@ -56,13 +56,16 @@ public class Resources extends Loadable
 
     private TreeSet<String> sceneBehaviourClassNames;
 
-    public final Game game;
+    public Game game;
+    
+    private String gameClassName;
 
     public Resources( Game game )
     {
         super();
 
         this.game = game;
+        this.gameClassName = null;
         this.scriptManager = new ScriptManager(this);
 
         this.sounds = new HashMap<String, SoundResource>();
@@ -83,6 +86,23 @@ public class Resources extends Loadable
         this.registerSceneBehaviourClassName(NullSceneBehaviour.class.getName());
     }
 
+    public void setGameClassName(String className)
+        throws Exception
+    {
+        this.gameClassName = className;
+        if (this.scriptManager.isValidScript(className)) {
+            this.game = this.scriptManager.createGame(className);
+        } else {
+            Class<?> klass = Class.forName(className);
+            this.game = (Game) klass.newInstance();
+        }
+    }
+    
+    public String getGameClassName()
+    {
+        return this.gameClassName;
+    }
+    
     @Override
     public void load() throws Exception
     {

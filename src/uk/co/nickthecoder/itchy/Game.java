@@ -108,7 +108,7 @@ public abstract class Game implements EventListener, MessageListener
     {
         Itchy.startGame(this);
         if (!this.initialised) {
-            init();
+            onActivate();
             this.initialised = true;
         }
 
@@ -121,7 +121,7 @@ public abstract class Game implements EventListener, MessageListener
         Itchy.mainLoop();
     }
 
-    public abstract void init();
+    public abstract void onActivate();
 
     public abstract String getInitialSceneName();
 

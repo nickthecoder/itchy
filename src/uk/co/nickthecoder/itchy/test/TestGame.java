@@ -28,7 +28,7 @@ public class TestGame extends Game
     }
 
     @Override
-    public void init()
+    public void onActivate()
     {
         this.mainLayer = new ScrollableLayer("main", this.screenRect, new RGBA(0, 0, 0));
         this.mainLayer.enableMouseListener();

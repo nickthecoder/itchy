@@ -11,6 +11,7 @@ import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
 import uk.co.nickthecoder.itchy.Behaviour;
+import uk.co.nickthecoder.itchy.Game;
 import uk.co.nickthecoder.itchy.SceneBehaviour;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
@@ -53,8 +54,53 @@ public class JavascriptLanguage extends ScriptLanguage
         return this.engine.eval("inst." + name + " = value;");
     }
 
+    // ===== GAME ======
+    
+    @Override
+    public Game createGame( String filename )
+        throws ScriptException
+    {
+        String name = this.manager.getName(filename);
+
+        Object scriptGame = this.engine.eval("new " + name + "();");
+
+        ScriptedGame javaGame;
+        try {
+            javaGame = new ScriptedGame(filename, this, scriptGame);
+        } catch (Exception e) {
+            throw new ScriptException( e );
+        }
+
+        Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
+        bindings.put("scriptGame", scriptGame);
+        bindings.put("javaGame", javaGame);
+        this.engine.eval("scriptGame.owner = javaGame;");
+
+        return javaGame;
+    }
+    
+    public void onActivate( ScriptedGame game)
+        throws ScriptException
+    {
+        Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
+        bindings.put("scriptGame", game.scriptGame);
+        this.engine.eval("scriptGame.onActivate();");        
+    }
+
+    public String getInitialSceneName( ScriptedGame game)
+        throws ScriptException
+    {
+        Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
+        bindings.put("scriptGame", game.scriptGame);
+        return (String) this.engine.eval("scriptGame.getInitialSceneName();");
+    }
     
     
+   
+    
+    // ===== Behaviour ======
+    
+  
     @Override
     public Behaviour createBehaviour( String filename )
         throws ScriptException
@@ -140,6 +186,10 @@ public class JavascriptLanguage extends ScriptLanguage
         this.engine.eval("scriptBehaviour.onKill();");
     }
 
+    
+    // ===== SceneBehaviour ======
+
+    
     @Override
     public SceneBehaviour createSceneBehaviour( String filename )
         throws ScriptException

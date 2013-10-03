@@ -57,6 +57,10 @@ public class ResourcesReader
 
     private void readResources( XMLTag resourcesTag ) throws Exception
     {
+        for (Iterator<XMLTag> i = resourcesTag.getTags("game"); i.hasNext();) {
+            XMLTag gameTag = i.next();
+            this.readGame(gameTag);
+        }
 
         for (Iterator<XMLTag> i = resourcesTag.getTags("fonts"); i.hasNext();) {
             XMLTag fontsTag = i.next();
@@ -86,6 +90,12 @@ public class ResourcesReader
             XMLTag scenesTag = i.next();
             this.readScenes(scenesTag);
         }
+    }
+
+    private void readGame( XMLTag gameTag ) throws Exception
+    {
+        String className = gameTag.getAttribute("class");
+        resources.setGameClassName( className );
     }
 
     private void readNinePatches( XMLTag eightPatchesTag ) throws Exception

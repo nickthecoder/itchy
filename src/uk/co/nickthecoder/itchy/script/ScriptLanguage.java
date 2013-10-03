@@ -25,6 +25,7 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptException;
 
 import uk.co.nickthecoder.itchy.Behaviour;
+import uk.co.nickthecoder.itchy.Game;
 import uk.co.nickthecoder.itchy.SceneBehaviour;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
@@ -175,9 +176,23 @@ public abstract class ScriptLanguage
     public abstract Object putProperty( Object inst, String name, Object value )
         throws ScriptException;
 
-    public abstract Behaviour createBehaviour( String filename )
+    
+    
+    
+    public abstract Game createGame( String filename )
         throws ScriptException;
 
+    public abstract void onActivate( ScriptedGame game)
+        throws ScriptException;
+
+    public abstract String getInitialSceneName( ScriptedGame game)
+        throws ScriptException;
+    
+    
+    
+    public abstract Behaviour createBehaviour( String filename )
+        throws ScriptException;
+    
     public abstract void onAttach( ScriptedBehaviour behaviour )
         throws ScriptException;
 
@@ -199,6 +214,9 @@ public abstract class ScriptLanguage
     public abstract void tick( ScriptedBehaviour behaviour )
         throws ScriptException;
 
+    
+    
+    
     public abstract SceneBehaviour createSceneBehaviour( String filename )
         throws ScriptException;
 

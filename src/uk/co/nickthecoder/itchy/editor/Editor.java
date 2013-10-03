@@ -73,7 +73,7 @@ public final class Editor extends Game
     }
 
     @Override
-    public void init()
+    public void onActivate()
     {
         try {
             setStylesheet(new Stylesheet(new File( RULES )));

@@ -48,7 +48,7 @@ public class GuiTest extends Game
     }
 
     @Override
-    public void init()
+    public void onActivate()
     {
         this.mainLayer = new ScrollableLayer("main", this.screenRect, new RGBA(255, 255, 255));
         this.mainLayer.setYAxisPointsDown(true);
