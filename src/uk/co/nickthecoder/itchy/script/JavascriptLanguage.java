@@ -12,6 +12,7 @@ import javax.script.ScriptException;
 
 import uk.co.nickthecoder.itchy.Behaviour;
 import uk.co.nickthecoder.itchy.Game;
+import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.SceneBehaviour;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
@@ -57,7 +58,7 @@ public class JavascriptLanguage extends ScriptLanguage
     // ===== GAME ======
     
     @Override
-    public Game createGame( String filename )
+    public Game createGame( Resources resources, String filename )
         throws ScriptException
     {
         String name = this.manager.getName(filename);
@@ -66,7 +67,7 @@ public class JavascriptLanguage extends ScriptLanguage
 
         ScriptedGame javaGame;
         try {
-            javaGame = new ScriptedGame(filename, this, scriptGame);
+            javaGame = new ScriptedGame(this, scriptGame);
         } catch (Exception e) {
             throw new ScriptException( e );
         }

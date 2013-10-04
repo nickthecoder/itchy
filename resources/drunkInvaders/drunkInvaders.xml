@@ -1,4 +1,5 @@
 <resources>
+  <game className="uk.co.nickthecoder.drunkInvaders.DrunkInvaders" width="640" height="480" title="Drunk Invaders" iconFilename="icon.bmp"/>
   <fonts>
     <font name="blackCasper" filename="fonts/BlackCasper/BlackCasper.ttf"/>
     <font name="boycott" filename="fonts/Boycott/Boycott.ttf"/>

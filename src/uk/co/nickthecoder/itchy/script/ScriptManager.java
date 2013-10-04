@@ -108,7 +108,7 @@ public class ScriptManager
         ScriptLanguage language = getLanguage(getExtension(filename));
         language.loadScript(filename);
 
-        return language.createGame(filename);
+        return language.createGame(this.resources, filename);
     }
     
 

@@ -27,7 +27,7 @@ public final class Editor extends Game
     public static Editor singleton;
 
     public static final String RULES = "resources/editor/style.xml";
-    
+
     public static Container addHint( Component component, String hint )
     {
         Container container = new Container();
@@ -44,6 +44,8 @@ public final class Editor extends Game
 
     public GuiPose mainGuiPose;
 
+    public GameInfoEditor gameInfoEditor;
+    
     public SoundsEditor soundsEditor;
 
     public PosesEditor posesEditor;
@@ -59,26 +61,52 @@ public final class Editor extends Game
     public ScenesEditor scenesEditor;
 
     private String designSceneName = null;
-    
-    
+
     public Editor( Game game ) throws Exception
     {
-        super("Editor", 1000,720);
-        
-        this.game = game;
+        super();
 
+        this.game = game;
+        this.resources = game.resources;
         singleton = this;
 
-        this.resources = game.resources;
+        this.gameInfoEditor = new GameInfoEditor(this);
+        this.soundsEditor = new SoundsEditor(this);
+        this.posesEditor = new PosesEditor(this);
+        this.fontsEditor = new FontsEditor(this);
+        this.ninePatchEditor = new NinePatchEditor(this);
+        this.animationsEditor = new AnimationsEditor(this);
+        this.costumesEditor = new CostumesEditor(this);
+        this.scenesEditor = new ScenesEditor(this);
+    }
+
+    @Override
+    public String getTitle()
+    {
+        return "Itchy Editor : " + this.game.getTitle();
+    }
+
+    @Override
+    public int getWidth()
+    {
+        return 1000;
+    }
+
+    @Override
+    public int getHeight()
+    {
+        return 720;
     }
 
     @Override
     public void onActivate()
     {
+        super.onActivate();
+        
         try {
-            setStylesheet(new Stylesheet(new File( RULES )));
+            setStylesheet(new Stylesheet(new File(RULES)));
         } catch (Exception e) {
-            System.err.println("Failed to load stylesheet : " + RULES );
+            System.err.println("Failed to load stylesheet : " + RULES);
             e.printStackTrace();
         }
         Itchy.enableKeyboardRepeat(true);
@@ -96,19 +124,13 @@ public final class Editor extends Game
 
         this.mainGuiPose.show();
 
-        this.soundsEditor = new SoundsEditor(this);
-        this.posesEditor = new PosesEditor(this);
-        this.fontsEditor = new FontsEditor(this);
-        this.ninePatchEditor = new NinePatchEditor(this);
-        this.animationsEditor = new AnimationsEditor(this);
-        this.costumesEditor = new CostumesEditor(this);
-        this.scenesEditor = new ScenesEditor(this);
 
         Notebook notebook = new Notebook();
         this.mainGuiPose.addChild(notebook);
         notebook.setFill(true, true);
         notebook.setExpansion(1);
 
+        notebook.addPage(new Label("Info"), this.gameInfoEditor.createPage());
         notebook.addPage(new Label("Poses"), this.posesEditor.createPage());
         notebook.addPage(new Label("Animations"), this.animationsEditor.createPage());
         notebook.addPage(new Label("Nine Patches"), this.ninePatchEditor.createPage());
@@ -146,8 +168,8 @@ public final class Editor extends Game
         this.mainGuiPose.setPosition(0, 0, this.getWidth(), this.getHeight());
         this.mainGuiPose.reStyle(); // MORE needed ?
 
-        if ( this.designSceneName != null ) {
-            this.scenesEditor.design( this.designSceneName );
+        if (this.designSceneName != null) {
+            this.scenesEditor.design(this.designSceneName);
         }
     }
 
@@ -160,7 +182,7 @@ public final class Editor extends Game
             e.printStackTrace();
         }
     }
-    
+
     @Override
     public boolean onKeyDown( KeyboardEvent ke )
     {
@@ -170,7 +192,7 @@ public final class Editor extends Game
         }
         return false;
     }
-    
+
     public void designScene( String sceneName )
     {
         this.designSceneName = sceneName;
@@ -181,10 +203,10 @@ public final class Editor extends Game
     {
         return null;
     }
-    
+
     public void debug()
     {
         getStylesheet().debug();
     }
-    
+
 }

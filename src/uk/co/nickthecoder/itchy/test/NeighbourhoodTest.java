@@ -62,7 +62,7 @@ public class NeighbourhoodTest
     {
         System.out.println("Loading resources");
 
-        resources = new Resources(null);
+        resources = new Resources();
         resources.load(new File("resources/tests/neighbourhood.xml"));
 
         this.c30x30 = resources.getCostume("30x30");

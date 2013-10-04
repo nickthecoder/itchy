@@ -1,4 +1,5 @@
 <resources>
+  <game className="uk.co.nickthecoder.itchy.Launcher" width="640" height="480" title="Tetra" iconFilename="icon.bmp"/>
   <fonts>
     <font name="Boycott" filename="fonts/Boycott.ttf"/>
   </fonts>
@@ -22,32 +23,32 @@
   </sounds>
   <animations>
     <animation name="moveDown1">
-      <parallel loops="1">
-        <move ticks="10" dx="0.0" dy="-20.0" profile="linear"/>
-      </parallel>
+      <compound sequence="false" loops="1">
+        <move dx="0.0" dy="-20.0" ticks="10" ease="linear"/>
+      </compound>
     </animation>
     <animation name="moveDown2">
-      <parallel loops="1">
-        <move ticks="15" dx="0.0" dy="-40.0" profile="linear"/>
-      </parallel>
+      <compound sequence="false" loops="1">
+        <move dx="0.0" dy="-40.0" ticks="15" ease="linear"/>
+      </compound>
     </animation>
     <animation name="moveDown3">
-      <parallel loops="1">
-        <move ticks="20" dx="0.0" dy="-60.0" profile="linear"/>
-      </parallel>
+      <compound sequence="false" loops="1">
+        <move dx="0.0" dy="-60.0" ticks="20" ease="linear"/>
+      </compound>
     </animation>
     <animation name="moveDown4">
-      <parallel loops="1">
-        <move ticks="30" dx="0.0" dy="-80.0" profile="linear"/>
-        <sequence loops="1">
-          <turn ticks="5" turn="30.0" profile="linear"/>
-          <turn ticks="5" turn="-30.0" profile="linear"/>
-          <turn ticks="5" turn="30.0" profile="linear"/>
-          <turn ticks="5" turn="-30.0" profile="linear"/>
-          <turn ticks="5" turn="30.0" profile="linear"/>
-          <turn ticks="5" turn="-30.0" profile="linear"/>
-        </sequence>
-      </parallel>
+      <compound sequence="false" loops="1">
+        <move dx="0.0" dy="-80.0" ticks="30" ease="linear"/>
+        <compound sequence="true" loops="1">
+          <turn turn="30.0" ticks="5" ease="linear"/>
+          <turn turn="-30.0" ticks="5" ease="linear"/>
+          <turn turn="30.0" ticks="5" ease="linear"/>
+          <turn turn="-30.0" ticks="5" ease="linear"/>
+          <turn turn="30.0" ticks="5" ease="linear"/>
+          <turn turn="-30.0" ticks="5" ease="linear"/>
+        </compound>
+      </compound>
     </animation>
   </animations>
   <costumes>
@@ -56,10 +57,10 @@
     </costume>
     <costume name="square">
       <pose name="default" pose="blue"/>
-      <animation name="moveDown3" animation="moveDown3"/>
       <animation name="moveDown1" animation="moveDown1"/>
-      <animation name="moveDown4" animation="moveDown4"/>
       <animation name="moveDown2" animation="moveDown2"/>
+      <animation name="moveDown3" animation="moveDown3"/>
+      <animation name="moveDown4" animation="moveDown4"/>
     </costume>
     <costume name="blue" extends="square">
       <pose name="default" pose="blue"/>

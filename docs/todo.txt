@@ -8,12 +8,23 @@ Jame is out of date, need to rebuild for win32 and i386 and ARM??
 What's Next
 ===========
 
+Place the correct objects into the script scope as appropriate.
+
+Get Scripted Game working
+    All methods
+
+Launcher becomes just Main, not a Game.
+    Game becomes non-abstract?
+    
+Editor for game metadata : title width, height, game class name.
+    GameInfo
+    Move it to its own class, and use Property tags to save/load and edit.
+
+Compile the JavaScript
+
 Allow scripts to be created from the editor use a template for each script language/class.
 
-Script versions of CostumeProperties and Game.
-    Launcher to create a DIFFERENT type of Game from itself.
-    Stored in the resources xml
-        Launcher becomes just Main, not a Game.
+Script version of CostumeProperties
     
 Text alignment properties in editor?
     Align the score on the right (or left), bu never the middle - it wiggles!
@@ -24,7 +35,7 @@ If SceneBehaviour doesn't have properties, then add them.
     
 Fix frame rate problems at the start of the game.
 
-Test "include" function, which includes another script file    
+Test the "include" javascript function, which includes another script file    
 
 
 Bugs

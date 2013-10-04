@@ -15,6 +15,7 @@ import uk.co.nickthecoder.itchy.extras.Pause;
 import uk.co.nickthecoder.itchy.gui.GuiPose;
 import uk.co.nickthecoder.itchy.gui.Stylesheet;
 import uk.co.nickthecoder.itchy.util.AutoFlushPreferences;
+import uk.co.nickthecoder.jame.RGBA;
 import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.Surface;
 import uk.co.nickthecoder.jame.event.Event;
@@ -33,8 +34,6 @@ public abstract class Game implements EventListener, MessageListener
     protected CompoundLayer layers;
 
     protected ActorsLayer popupLayer;
-
-    protected String title;
 
     protected Rect screenRect;
 
@@ -58,28 +57,17 @@ public abstract class Game implements EventListener, MessageListener
 
     protected boolean testing;
 
-    private boolean initialised = false;
-
     private String preTestSceneName;
 
     public Pause pause;
 
     private Stylesheet stylesheet;
     
-    public Game( String title, int width, int height ) throws Exception
+    public Game() throws Exception
     {
-        this.resources = new Resources(this);
-        
+       
         this.sceneBehaviour = new NullSceneBehaviour();
         this.pause = new Pause(this);
-        this.title = title;
-        this.screenRect = new Rect(0, 0, width, height);
-
-        this.layers = new CompoundLayer("game", this.screenRect);
-
-        this.popupLayer = new ScrollableLayer("popup", this.screenRect);
-        this.popupLayer.setYAxisPointsDown(true);
-        this.popupLayer.setVisible(true);
 
         this.eventListeners = new LinkedList<EventListener>();
         this.mouseListeners = new LinkedList<MouseListener>();
@@ -89,9 +77,33 @@ public abstract class Game implements EventListener, MessageListener
 
         this.addEventListener(this);
 
-        Itchy.init(this);
     }
 
+    public void onActivate()
+    {
+        this.screenRect = new Rect(0, 0, getWidth(), getHeight());
+
+        this.layers = new CompoundLayer("game", this.screenRect);
+
+        this.popupLayer = new ScrollableLayer("popup", this.screenRect);
+        this.popupLayer.setYAxisPointsDown(true);
+        this.popupLayer.setVisible(true);
+        
+        this.createLayers();
+    }
+
+    public void onDeactivate()
+    {
+    }
+    
+    protected void createLayers()
+    {
+        ScrollableLayer mainLayer = new ScrollableLayer("main", this.screenRect, RGBA.BLACK);
+        this.layers.add(mainLayer);
+        
+        mainLayer.enableMouseListener();
+    }
+    
     /**
      * Typically, this is called immediately after you have created your Game object, usually in the
      * "main" method.
@@ -107,10 +119,6 @@ public abstract class Game implements EventListener, MessageListener
     public void start( String sceneName )
     {
         Itchy.startGame(this);
-        if (!this.initialised) {
-            onActivate();
-            this.initialised = true;
-        }
 
         if (sceneName != null) {
             this.layers.clear();
@@ -120,8 +128,6 @@ public abstract class Game implements EventListener, MessageListener
 
         Itchy.mainLoop();
     }
-
-    public abstract void onActivate();
 
     public abstract String getInitialSceneName();
 
@@ -397,22 +403,22 @@ public abstract class Game implements EventListener, MessageListener
 
     public int getWidth()
     {
-        return this.screenRect.width;
+        return this.resources.gameInfo.width;
     }
 
     public int getHeight()
     {
-        return this.screenRect.height;
+        return this.resources.gameInfo.height;
     }
 
     public String getTitle()
     {
-        return this.title;
+        return this.resources.gameInfo.title;
     }
 
     public String getIconFilename()
     {
-        return this.resources.resolveFilename("icon.bmp");
+        return this.resources.gameInfo.iconFilename;
     }
 
     @Override

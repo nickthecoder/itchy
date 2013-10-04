@@ -13,6 +13,7 @@ import java.util.List;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.ActorsLayer;
 import uk.co.nickthecoder.itchy.Game;
+import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.ScrollableLayer;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Button;
@@ -41,8 +42,7 @@ public class GuiTest extends Game
 
     public GuiTest() throws Exception
     {
-        super("GuiTest", 640, 480);
-
+        super();
         this.rules = new Stylesheet(new File("resources/defaultGui/style.xml"));
 
     }
@@ -266,7 +266,9 @@ public class GuiTest extends Game
 
     public static void main( String[] argv ) throws Exception
     {
+        Resources resources = new Resources();
         GuiTest testGui = new GuiTest();
+        testGui.resources = resources;
         testGui.start();
     }
 

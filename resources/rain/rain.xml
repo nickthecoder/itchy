@@ -1,4 +1,5 @@
 <resources>
+  <game className="uk.co.nickthecoder.itchy.Launcher" width="800" height="600" title="It's Gonna Rain" iconFilename="icon.bmp"/>
   <fonts>
     <font name="BlackCasper" filename="fonts/BlackCasper/BlackCasper.ttf"/>
     <font name="Boycott" filename="fonts/Boycott/Boycott.ttf"/>

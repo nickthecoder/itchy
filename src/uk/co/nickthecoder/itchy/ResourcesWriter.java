@@ -55,6 +55,7 @@ public class ResourcesWriter extends XMLWriter
     {
         this.beginTag("resources");
 
+        this.writeGame();
         this.writeFonts();
         this.writeNinePatches();
         this.writePoses();
@@ -66,6 +67,13 @@ public class ResourcesWriter extends XMLWriter
         this.endTag("resources");
     }
 
+    private void writeGame() throws XMLException
+    {
+        this.beginTag("game");
+        this.writeProperties(resources.gameInfo);
+        this.endTag("game");
+    }
+    
     private void writeFonts() throws XMLException
     {
         this.beginTag("fonts");

@@ -33,8 +33,13 @@ public class Resources extends Loadable
         Collections.sort(names);
         return names;
     }
+    
 
-    public ScriptManager scriptManager;
+    private Game game;
+
+    public final GameInfo gameInfo;
+    
+    public final ScriptManager scriptManager;
 
     private final HashMap<String, SoundResource> sounds;
 
@@ -56,16 +61,11 @@ public class Resources extends Loadable
 
     private TreeSet<String> sceneBehaviourClassNames;
 
-    public Game game;
-    
-    private String gameClassName;
-
-    public Resources( Game game )
+    public Resources()
     {
         super();
 
-        this.game = game;
-        this.gameClassName = null;
+        this.gameInfo = new GameInfo();
         this.scriptManager = new ScriptManager(this);
 
         this.sounds = new HashMap<String, SoundResource>();
@@ -86,23 +86,24 @@ public class Resources extends Loadable
         this.registerSceneBehaviourClassName(NullSceneBehaviour.class.getName());
     }
 
-    public void setGameClassName(String className)
+    public Game createGame()
         throws Exception
     {
-        this.gameClassName = className;
-        if (this.scriptManager.isValidScript(className)) {
-            this.game = this.scriptManager.createGame(className);
+        if (this.scriptManager.isValidScript(this.gameInfo.className)) {
+            this.game = this.scriptManager.createGame(this.gameInfo.className);
         } else {
-            Class<?> klass = Class.forName(className);
+            Class<?> klass = Class.forName(this.gameInfo.className);
             this.game = (Game) klass.newInstance();
         }
+        this.game.resources = this;
+        return this.game;
     }
     
-    public String getGameClassName()
+    public Game getGame()
     {
-        return this.gameClassName;
+        return this.game;
     }
-    
+
     @Override
     public void load() throws Exception
     {
@@ -120,7 +121,7 @@ public class Resources extends Loadable
     @Override
     protected void checkSave( File file ) throws Exception
     {
-        Resources resources = new Resources(this.game);
+        Resources resources = new Resources();
         resources.load(file);
 
         // MORE. Should check that each resource is identical to the other one.
@@ -162,25 +163,25 @@ public class Resources extends Loadable
         }
 
     }
-    
+
     public boolean has( NamedResource object )
     {
-        if ( object instanceof SoundResource) {
+        if (object instanceof SoundResource) {
             return this.getSoundResource(object.name) == object;
-            
-        } else if ( object instanceof FontResource ) {
+
+        } else if (object instanceof FontResource) {
             return this.getFontResource(object.name) == object;
-            
-        } else if ( object instanceof PoseResource ) {
+
+        } else if (object instanceof PoseResource) {
             return this.getPoseResource(object.name) == object;
-            
-        } else if ( object instanceof NinePatchResource ) {
+
+        } else if (object instanceof NinePatchResource) {
             return this.getNinePatchResource(object.name) == object;
-            
-        } else if ( object instanceof AnimationResource ) {
+
+        } else if (object instanceof AnimationResource) {
             return this.getAnimationResource(object.name) == object;
 
-        } else if ( object instanceof CostumeResource ) {
+        } else if (object instanceof CostumeResource) {
             return this.getCostumeResource(object.name) == object;
 
         }

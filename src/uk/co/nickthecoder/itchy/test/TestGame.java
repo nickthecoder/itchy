@@ -10,6 +10,7 @@ import java.io.File;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.ActorsLayer;
 import uk.co.nickthecoder.itchy.Game;
+import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.ScrollableLayer;
 import uk.co.nickthecoder.jame.RGBA;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
@@ -23,8 +24,7 @@ public class TestGame extends Game
 
     public TestGame() throws Exception
     {
-        super("Test", 800, 600);
-        this.resources.load(new File("resources/tests/resources.xml"));
+        super();
     }
 
     @Override
@@ -87,8 +87,11 @@ public class TestGame extends Game
     
     public static void main( String[] argv ) throws Exception
     {
+        Resources resources = new Resources();
+        resources.load(new File("resources/tests/resources.xml"));
 
         TestGame test = new TestGame();
+        test.resources = resources;
         test.start();
     }
 

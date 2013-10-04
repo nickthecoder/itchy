@@ -13,6 +13,7 @@ import uk.co.nickthecoder.itchy.ActorCollisionStrategy;
 import uk.co.nickthecoder.itchy.Game;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.MultiLineTextPose;
+import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.ScrollableLayer;
 import uk.co.nickthecoder.itchy.animation.Animation;
 import uk.co.nickthecoder.itchy.extras.FilmTransition;
@@ -53,13 +54,18 @@ public class DrunkInvaders extends Game
 
     public boolean transitioning = false;
 
-    public DrunkInvaders() throws Exception
+    public DrunkInvaders()
+        throws Exception
     {
-        super("Drunk Invaders", 640, 480);
-        this.resources.load(RESOURCES);
+        super();
 
         this.neighbourhood = new StandardNeighbourhood(NEIGHBOURHOOD_SQUARE_SIZE);
 
+    }
+
+    @Override
+    public void createLayers()
+    {
         this.mainLayer = new ScrollableLayer("main", this.screenRect);
         this.mainLayer.centerOn(320, 240);
 
@@ -82,6 +88,7 @@ public class DrunkInvaders extends Game
     @Override
     public void onActivate()
     {
+        super.onActivate();
         this.mainLayer.enableMouseListener();
 
         this.metronomeCountdown = 0;
@@ -149,6 +156,7 @@ public class DrunkInvaders extends Game
         return new NeighbourhoodCollisionStrategy(actor, this.neighbourhood);
     }
 
+    @Override
     public void startScene( String sceneName )
     {
         if (this.pause.isPaused()) {
@@ -159,13 +167,13 @@ public class DrunkInvaders extends Game
 
         this.transitioning = true;
         Animation transition = FilmTransition.slideUp();
-        
+
         if ("about".equals(sceneName)) {
             transition = FilmTransition.slideRight();
-            
+
         } else if ("levels".equals(sceneName)) {
-                transition = FilmTransition.slideRight();
-                
+            transition = FilmTransition.slideRight();
+
         } else if ("menu".equals(sceneName)) {
             transition = FilmTransition.slideLeft();
         }
@@ -189,8 +197,8 @@ public class DrunkInvaders extends Game
 
         } else if ("quit".equals(message)) {
             end();
-            
-        } else if ( message == FilmTransition.COMPLETE) {
+
+        } else if (message == FilmTransition.COMPLETE) {
             this.transitioning = false;
         }
     }
@@ -237,7 +245,11 @@ public class DrunkInvaders extends Game
 
     public static void main( String argv[] ) throws Exception
     {
+        Resources resources = new Resources();
+        resources.load(RESOURCES);
+
         DrunkInvaders.game = new DrunkInvaders();
+        DrunkInvaders.game.resources = resources;
         DrunkInvaders.game.runFromMain(argv);
     }
 

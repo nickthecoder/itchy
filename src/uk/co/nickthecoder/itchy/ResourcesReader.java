@@ -94,8 +94,8 @@ public class ResourcesReader
 
     private void readGame( XMLTag gameTag ) throws Exception
     {
-        String className = gameTag.getAttribute("class");
-        resources.setGameClassName( className );
+        this.readProperties(gameTag, this.resources.gameInfo);        
+        Itchy.init(this.resources);
     }
 
     private void readNinePatches( XMLTag eightPatchesTag ) throws Exception
@@ -229,11 +229,10 @@ public class ResourcesReader
                     propertiesClassName);
             }
 
-            
             for (Iterator<XMLTag> j = costumeTag.getTags("properties"); j.hasNext();) {
                 XMLTag propertiesTag = j.next();
-                
-                readProperties( propertiesTag, costume.getProperties());
+
+                readProperties(propertiesTag, costume.getProperties());
             }
 
             for (Iterator<XMLTag> j = costumeTag.getTags("pose"); j.hasNext();) {
@@ -378,7 +377,7 @@ public class ResourcesReader
             throw new XMLException("Unknown animation : " + tagName);
         }
     }
-    
+
     private <S extends PropertySubject<S>> void readProperties( XMLTag tag, S subject )
         throws XMLException
     {

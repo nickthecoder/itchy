@@ -12,6 +12,7 @@ import java.util.Random;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Game;
 import uk.co.nickthecoder.itchy.Itchy;
+import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.Scene;
 import uk.co.nickthecoder.itchy.ScrollableLayer;
 import uk.co.nickthecoder.itchy.animation.Animation;
@@ -110,7 +111,7 @@ public class Tetra extends Game
     boolean playing = false;
 
     String sceneName;
-    
+
     Timer escapeTimer;
 
     /**
@@ -141,22 +142,26 @@ public class Tetra extends Game
 
     public Tetra() throws Exception
     {
-        super("Tetra", 640, 480);
-        this.resources.load(RESOURCES);
+        super();
+    }
 
+    @Override
+    protected void createLayers()
+    {
         this.mainLayer = new ScrollableLayer("main", this.screenRect, new RGBA(0, 0, 0));
         this.layers.add(this.mainLayer);
-
     }
 
     @Override
     public void onActivate()
     {
+        super.onActivate();
         this.mainLayer.enableMouseListener();
 
         this.level = getStartingLevel();
     }
 
+    @Override
     public void startScene( String name )
     {
         this.sceneName = name;
@@ -191,12 +196,12 @@ public class Tetra extends Game
     @Override
     public void tick()
     {
-        if (escapeTimer != null) {
-            if (escapeTimer.isFinished()) {
+        if (this.escapeTimer != null) {
+            if (this.escapeTimer.isFinished()) {
                 this.addEventListener(this);
                 this.level = getStartingLevel();
                 startScene("menu");
-                escapeTimer = null;
+                this.escapeTimer = null;
             }
             return;
         }
@@ -258,7 +263,7 @@ public class Tetra extends Game
                 }
             }
             this.removeEventListener(this);
-            escapeTimer = Timer.createTimerSeconds( 2 );
+            this.escapeTimer = Timer.createTimerSeconds(2);
         }
 
         if (!this.playing) {
@@ -456,7 +461,6 @@ public class Tetra extends Game
         }
     }
 
-
     public void debug()
     {
         System.out.println();
@@ -586,7 +590,11 @@ public class Tetra extends Game
 
     public static void main( String argv[] ) throws Exception
     {
+        Resources resources = new Resources();
+        resources.load(RESOURCES);
+
         Tetra.game = new Tetra();
+        Tetra.game.resources = resources;
         Tetra.game.runFromMain(argv);
     }
 

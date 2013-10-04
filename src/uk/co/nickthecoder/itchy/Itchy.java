@@ -51,7 +51,7 @@ public class Itchy
     private static boolean[] keyboardState;
 
     private static int mouseX;
-    
+
     private static int mouseY;
 
     public static Surface screen;
@@ -68,13 +68,18 @@ public class Itchy
     public static int keyboardRepeatDelay = Events.DEFAULT_REPEAT_DELAY;
 
     public static int keyboardRepeatInterval = Events.DEFAULT_REPEAT_INTERVAL;
-    
+
     public static FrameRate frameRate = createFrameRate();
 
     public static SoundManager soundManager;
 
-    public static void init( Game game ) throws Exception
+    private static boolean initialised = false;
+
+    public static void init( Resources resources ) throws Exception
     {
+        if (initialised) {
+            return;
+        }
         Video.init();
         Audio.init();
         Audio.open();
@@ -82,7 +87,8 @@ public class Itchy
 
         keyboardState = new boolean[KEYBOARD_STATE_SIZE];
         soundManager = new SoundManager();
-        setScreenMode(game);
+        setScreenMode(resources);
+        initialised = true;
     }
 
     public static Game getGame()
@@ -97,13 +103,10 @@ public class Itchy
 
     private static void setScreenMode( Game game )
     {
-        if (game.getTitle() == null) {
-            Video.setWindowTitle("Itchy");
-        } else {
-            Video.setWindowTitle(game.getTitle());
-        }
+        Video.setWindowTitle(game.getTitle());
+
         if (game.getIconFilename() != null) {
-            Video.setWindowIcon(game.getIconFilename());
+            Video.setWindowIcon(game.resources.resolveFilename(game.getIconFilename()));
         }
 
         try {
@@ -111,15 +114,31 @@ public class Itchy
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
 
+    private static void setScreenMode( Resources resources )
+    {
+        Video.setWindowTitle(resources.gameInfo.title);
+
+        if (resources.gameInfo.iconFilename != null) {
+            Video.setWindowIcon(resources.resolveFilename(resources.gameInfo.iconFilename));
+        }
+
+        try {
+            screen = Video.setMode(resources.gameInfo.width, resources.gameInfo.height);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static void startGame( Game game )
     {
         if (currentGame != null) {
+            currentGame.onDeactivate();
             gameStack.push(currentGame);
         }
         currentGame = game;
+        currentGame.onActivate();
         setScreenMode(currentGame);
     }
 
@@ -292,20 +311,19 @@ public class Itchy
             }
         } else if (event instanceof MouseEvent) {
             MouseEvent me = (MouseEvent) event;
-            
+
             mouseX = me.x;
             mouseY = me.y;
         }
 
-        
         currentGame.processEvent(event);
     }
-    
+
     public static int getMouseX()
     {
         return mouseX;
     }
-    
+
     public static int getMouseY()
     {
         return mouseY;

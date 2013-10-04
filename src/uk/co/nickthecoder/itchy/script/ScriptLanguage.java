@@ -26,6 +26,7 @@ import javax.script.ScriptException;
 
 import uk.co.nickthecoder.itchy.Behaviour;
 import uk.co.nickthecoder.itchy.Game;
+import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.SceneBehaviour;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
@@ -59,7 +60,7 @@ public abstract class ScriptLanguage
             initialise();
 
             Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
-            bindings.put("game", this.manager.resources.game);
+            bindings.put("game", this.manager.resources.getGame());
             bindings.put("language", this.engine);
         }
 
@@ -179,7 +180,7 @@ public abstract class ScriptLanguage
     
     
     
-    public abstract Game createGame( String filename )
+    public abstract Game createGame( Resources resources, String filename )
         throws ScriptException;
 
     public abstract void onActivate( ScriptedGame game)
