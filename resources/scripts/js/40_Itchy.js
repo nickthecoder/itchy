@@ -13,7 +13,7 @@ sceneBehaviourScript = null;
 include=language.loadScript;
 
 
-GameScript = new Class()  ({
+GameScript = Class({
 
     onActivate: function() {},
     
@@ -25,7 +25,7 @@ GameScript = new Class()  ({
 
 
 
-BehaviourScript = new Class() ({
+BehaviourScript = Class({
 
     tick : function() {},
     
@@ -59,7 +59,7 @@ BehaviourScript.rgbaProperty = function( className, propertyName, label, default
 };
 
 
-SceneBehaviourScript = new Class()  ({
+SceneBehaviourScript = Class({
 
     onActivate: function() {},
     

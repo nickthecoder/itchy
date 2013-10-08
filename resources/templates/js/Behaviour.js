@@ -1,6 +1,7 @@
-${NAME} = new Class( BehaviourScript )
-({
-    __init__: function() {
+${NAME} = Class({
+    Extends: BehaviourScript,
+    
+    init: function() {
         // TODO Initialise your object. Note you can't access this.actor yet.
     },
     

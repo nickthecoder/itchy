@@ -1,6 +1,8 @@
-${NAME} = new Class( GameScript )
-({
-    __init__: function() {
+${NAME} = Class({
+
+    Extends: GameScript,
+
+    init: function() {
         // TODO Initialise your object.
     },
     

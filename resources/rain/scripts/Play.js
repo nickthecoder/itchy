@@ -1,6 +1,8 @@
-Play = new Class( SceneBehaviourScript )
-({
-    __init__: function() {
+Play = new Class({
+
+    Extends: SceneBehaviourScript,
+    
+    init: function() {
         this.player = null;
         this.speed = 5;
         this.score = 0;

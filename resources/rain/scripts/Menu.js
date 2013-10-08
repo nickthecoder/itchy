@@ -1,5 +1,7 @@
-Menu = new Class( SceneBehaviourScript )
-({
+Menu = new Class({
+
+    Extends: SceneBehaviourScript,
+    
     onMessage: function( message ) {
         stdout.println("Message : " + message );
         if (message == "editor") {

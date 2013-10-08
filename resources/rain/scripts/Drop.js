@@ -1,9 +1,10 @@
-Drop = new Class( BehaviourScript )
-({   
-    __init__: function() {
+Drop = Class({
+    Extends: BehaviourScript,
+    
+    init: function() {
         this.distance = 600;
         this.speed = sceneBehaviourScript.speed;
-        stdout.println( "Dump of Drop : " + dump(this,1) );
+        stdout.println( "Dump of Drop : " + Util.dump(this,1) );
     },
 
     onAttach: function() {

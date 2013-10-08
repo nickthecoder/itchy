@@ -1,5 +1,7 @@
-Player = new Class( BehaviourScript )
-({
+Player = new Class({
+
+    Extends: BehaviourScript,
+    
     onActivate: function() {
         sceneBehaviourScript.player = this;
     },
