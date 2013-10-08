@@ -1,10 +1,11 @@
 <scene showMouse="true" behaviour="Play.js">
   <layer name="main">
-    <actor costume="background" x="0" y="601" direction="0.0" startEvent="default"/>
+    <actor costume="background" x="0" y="600" direction="0.0" startEvent="default"/>
     <text text="Medium" font="Boycott" size="72" color="#401c00" x="384" y="559" direction="0.0" startEvent="default"/>
     <text text="Medium" font="Boycott" size="65" color="#93472e" x="382" y="561" direction="0.0" startEvent="default"/>
     <text text="Score :" font="Boycott" size="35" color="#000000" x="74" y="570" direction="0.0" startEvent="default"/>
-    <text text="0" font="Boycott" size="32" color="#93190e" behaviour="Score.js" x="63" y="531" direction="0.0" startEvent="default"/>
+    <text text="0000" font="Boycott" size="32" color="#93190e" xAlignment="0.0" yAlignment="0.5" behaviour="Score.js" x="31" y="538" direction="0.0" startEvent="default"/>
+    <text text="0000" font="Boycott" size="32" color="#93190e" xAlignment="0.0" yAlignment="0.5" behaviour="HighScore.js" x="675" y="532" direction="0.0" startEvent="default"/>
     <text text="Top" font="BlackCasper" size="22" color="#ffffff" x="0" y="1200" direction="0.0" startEvent="default"/>
     <actor costume="drop1" x="91" y="639" direction="0.0" startEvent="default">
       <property name="distance" value="600"/>
@@ -39,8 +40,8 @@
     <actor costume="drop3" x="276" y="1093" direction="0.0" startEvent="default">
       <property name="distance" value="600"/>
     </actor>
-    <actor costume="player" x="463" y="18" direction="0.0" startEvent="default"/>
-    <text text="0" font="Boycott" size="32" color="#93190e" behaviour="HighScore.js" x="701" y="527" direction="0.0" startEvent="default"/>
     <text text="High Score" font="Boycott" size="35" color="#8f9688" x="704" y="570" direction="0.0" startEvent="default"/>
+    <actor costume="player" x="416" y="25" direction="0.0" startEvent="default"/>
+    <actor costume="wally" x="-1000" y="57" direction="0.0" startEvent="default"/>
   </layer>
 </scene>

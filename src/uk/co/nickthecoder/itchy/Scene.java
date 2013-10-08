@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
+import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.itchy.util.StringUtils;
 
 public class Scene
@@ -20,7 +21,7 @@ public class Scene
 
     public boolean showMouse = true;
 
-    public String sceneBehaviourName;
+    public ClassName sceneBehaviourName;
 
     private List<Actor> activateList;
 
@@ -135,7 +136,7 @@ public class Scene
             if (resources.scriptManager.isValidScript(this.sceneBehaviourName)) {
                 return resources.scriptManager.createSceneBehaviour(this.sceneBehaviourName);
             } else {
-                Class<?> klass = Class.forName(this.sceneBehaviourName);
+                Class<?> klass = Class.forName(this.sceneBehaviourName.name);
                 return (SceneBehaviour) klass.newInstance();
             }
         }

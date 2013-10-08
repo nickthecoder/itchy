@@ -5,19 +5,19 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.editor;
 
-import uk.co.nickthecoder.itchy.GameInfo;
+import uk.co.nickthecoder.itchy.gui.ActionListener;
+import uk.co.nickthecoder.itchy.gui.Button;
 import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.Container;
 import uk.co.nickthecoder.itchy.gui.GridLayout;
 import uk.co.nickthecoder.itchy.gui.VerticalLayout;
 import uk.co.nickthecoder.itchy.util.AbstractProperty;
 
-public class GameInfoEditor
+public class PreferencesEditor
 {
     private Editor editor;
 
-    
-    public GameInfoEditor( Editor editor )
+    public PreferencesEditor( Editor editor )
     {
         this.editor = editor;
     }
@@ -32,19 +32,34 @@ public class GameInfoEditor
         GridLayout grid = new GridLayout(form, 2);
         form.setLayout(grid);
 
-        GameInfo gameInfo = this.editor.game.resources.gameInfo;
+        EditorPreferences editorPreferences = this.editor.preferences;
 
-        for (AbstractProperty<GameInfo, ?> property : gameInfo.getProperties()) {
+        for (AbstractProperty<EditorPreferences, ?> property : AbstractProperty
+            .findAnnotations(EditorPreferences.class)) {
             try {
-                Component component = property.createComponent(gameInfo, true);
+                Component component = property.createComponent(editorPreferences, true);
                 grid.addRow(property.label, component);
             } catch (Exception e) {
-                e.printStackTrace();
             }
         }
 
-        page.addChild(form);
+        Container buttonBar = new Container();
+        Button save = new Button("Save");
+        save.addActionListener(new ActionListener() {
 
+            @Override
+            public void action()
+            {
+                PreferencesEditor.this.editor.preferences.save();
+            }
+
+        });
+
+        buttonBar.addChild(save);
+
+        page.addChild(form);
+        page.addChild(buttonBar);
+        
         return page;
     }
 

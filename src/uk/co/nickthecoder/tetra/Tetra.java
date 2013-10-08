@@ -6,13 +6,12 @@
 package uk.co.nickthecoder.tetra;
 
 import java.awt.Point;
-import java.io.File;
 import java.util.Random;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Game;
 import uk.co.nickthecoder.itchy.Itchy;
-import uk.co.nickthecoder.itchy.Resources;
+import uk.co.nickthecoder.itchy.Launcher;
 import uk.co.nickthecoder.itchy.Scene;
 import uk.co.nickthecoder.itchy.ScrollableLayer;
 import uk.co.nickthecoder.itchy.animation.Animation;
@@ -88,12 +87,6 @@ public class Tetra extends Game
      */
     private static final String[] names = new String[] { "cyan", "yellow", "green", "red",
         "orange", "blue", "purple" };
-
-    /**
-     * The location of the resources file, which holds meta data about the images, and screen layout
-     * etc.
-     */
-    private static final File RESOURCES = new File("resources/tetra/tetra.xml");
 
     /**
      * An array of size WIDTH +2, HEIGHT + 2, representing the pieces fixed on the tetris playing
@@ -588,19 +581,15 @@ public class Tetra extends Game
 
     }
 
-    public static void main( String argv[] ) throws Exception
-    {
-        Resources resources = new Resources();
-        resources.load(RESOURCES);
-
-        Tetra.game = new Tetra();
-        Tetra.game.resources = resources;
-        Tetra.game.runFromMain(argv);
-    }
-
     @Override
     public String getInitialSceneName()
     {
         return "menu";
     }
+
+    public static void main( String argv[] ) throws Exception
+    {
+        Launcher.main(new String[] { "tetra" });
+    }
+
 }

@@ -25,7 +25,7 @@ import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 import uk.co.nickthecoder.jame.event.QuitEvent;
 
-public abstract class Game implements EventListener, MessageListener
+public class Game implements EventListener, MessageListener
 {
     public Resources resources;
 
@@ -62,10 +62,10 @@ public abstract class Game implements EventListener, MessageListener
     public Pause pause;
 
     private Stylesheet stylesheet;
-    
+
     public Game() throws Exception
     {
-       
+
         this.sceneBehaviour = new NullSceneBehaviour();
         this.pause = new Pause(this);
 
@@ -88,22 +88,24 @@ public abstract class Game implements EventListener, MessageListener
         this.popupLayer = new ScrollableLayer("popup", this.screenRect);
         this.popupLayer.setYAxisPointsDown(true);
         this.popupLayer.setVisible(true);
-        
+
         this.createLayers();
+
+        this.loadScene(getInitialSceneName());
     }
 
     public void onDeactivate()
     {
     }
-    
+
     protected void createLayers()
     {
         ScrollableLayer mainLayer = new ScrollableLayer("main", this.screenRect, RGBA.BLACK);
         this.layers.add(mainLayer);
-        
+
         mainLayer.enableMouseListener();
     }
-    
+
     /**
      * Typically, this is called immediately after you have created your Game object, usually in the
      * "main" method.
@@ -129,7 +131,10 @@ public abstract class Game implements EventListener, MessageListener
         Itchy.mainLoop();
     }
 
-    public abstract String getInitialSceneName();
+    public String getInitialSceneName()
+    {
+        return "start";
+    }
 
     public void testScene( String sceneName )
     {
@@ -430,8 +435,8 @@ public abstract class Game implements EventListener, MessageListener
 
     /**
      * Called when a button is pressed. Most games don't use onKeyDown or onKeyUp during game play,
-     * instead, each Actor uses : Itchy.isKeyDown( ... ). onKeyDown and onKeyUp are useful
-     * for typing.
+     * instead, each Actor uses : Itchy.isKeyDown( ... ). onKeyDown and onKeyUp are useful for
+     * typing.
      */
     @Override
     public boolean onKeyDown( KeyboardEvent ke )
@@ -441,8 +446,8 @@ public abstract class Game implements EventListener, MessageListener
 
     /**
      * Called when a button is pressed. Most games don't use onKeyDown or onKeyUp during game play,
-     * instead, each Actor uses : Itchy.isKeyDown( ... ). onKeyDown and onKeyUp are useful
-     * for typing.
+     * instead, each Actor uses : Itchy.isKeyDown( ... ). onKeyDown and onKeyUp are useful for
+     * typing.
      */
     @Override
     public boolean onKeyUp( KeyboardEvent ke )
@@ -482,10 +487,9 @@ public abstract class Game implements EventListener, MessageListener
         this.getSceneBehaviour().onMessage(message);
     }
 
-
     public SceneBehaviour getSceneBehaviour()
     {
-        return sceneBehaviour;
+        return this.sceneBehaviour;
     }
 
     public void startScene( String sceneName )
@@ -507,7 +511,7 @@ public abstract class Game implements EventListener, MessageListener
 
             this.sceneName = sceneName;
 
-            this.sceneBehaviour = scene.createSceneBehaviour( this.resources );
+            this.sceneBehaviour = scene.createSceneBehaviour(this.resources);
             this.sceneBehaviour.onActivate();
             scene.create(this.layers, this.resources, false);
             Itchy.showMousePointer(scene.showMouse);
@@ -542,7 +546,6 @@ public abstract class Game implements EventListener, MessageListener
     {
         this.stylesheet = rules;
     }
-
 
     public Stylesheet getStylesheet()
     {
@@ -618,15 +621,4 @@ public abstract class Game implements EventListener, MessageListener
         }
     }
 
-    protected void runFromMain( String[] argv ) throws Exception
-    {
-        if ((argv.length == 1) && ("--editor".equals(argv[0]))) {
-
-            Editor editor = new Editor(this);
-            editor.start(null);
-
-        } else {
-            this.start(getInitialSceneName());
-        }
-    }
 }

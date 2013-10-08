@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.script.Bindings;
+import javax.script.Compilable;
 import javax.script.ScriptContext;
 import javax.script.ScriptEngine;
 import javax.script.ScriptException;
@@ -28,6 +29,7 @@ import uk.co.nickthecoder.itchy.Behaviour;
 import uk.co.nickthecoder.itchy.Game;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.SceneBehaviour;
+import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
@@ -79,22 +81,38 @@ public abstract class ScriptLanguage
 
     }
 
-    void createFromTemplate( String filename, String templateName, Map<String,String> substitutions )
+    public boolean createScript( String templateName, ClassName className )
+    {
+        HashMap<String, String> subs = new HashMap<String, String>();
+        subs.put("NAME", className.name);
+        
+        try {
+            createFromTemplate( className, templateName, subs );
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    void createFromTemplate( ClassName className, String templateName, Map<String, String> substitutions )
         throws IOException
     {
-        File file = this.manager.getScript(filename);
+        File file = this.manager.getScript(className.name);
 
-        String templateFilename = ".." + File.separator + "templates" + File.separator +
-            templateName + "." + this.getExtension();
-        File templateFile = this.manager.getScript(templateFilename);
-
-        BufferedReader reader = new BufferedReader( new InputStreamReader( new FileInputStream(templateFile) ));
-        PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+        String templateFilename = ".." + File.separator + "templates" + File.separator + getExtension() +
+            File.separator + templateName + "." + this.getExtension();
         
+        File templateFile = new File( this.manager.resources.resolveFilename( templateFilename ) );
+
+        BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(
+            templateFile)));
+        PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+
         String line = reader.readLine();
-        while(line != null){
-            writeTemplateLine( writer, line, substitutions );
-            
+        while (line != null) {
+            writeTemplateLine(writer, line, substitutions);
+
             line = reader.readLine();
         }
         reader.close();
@@ -102,22 +120,22 @@ public abstract class ScriptLanguage
 
     }
 
-    private void writeTemplateLine(PrintWriter out, String line, Map<String,String> substitutions )
+    private void writeTemplateLine( PrintWriter out, String line, Map<String, String> substitutions )
     {
         int fromIndex = 0;
         int open = line.indexOf("${");
-        while ( open >= 0 ) {
+        while (open >= 0) {
 
             out.print(line.substring(fromIndex, open));
-            
-            int close = line.indexOf( "}",open );
+
+            int close = line.indexOf("}", open);
             if (close < 0) {
-                out.println( "${" );
+                out.println("${");
                 fromIndex += 2;
-                
+
             } else {
                 String key = line.substring(open + 2, close);
-                System.out.println("Found key : " + key );
+                System.out.println("Found key : " + key);
                 if (substitutions.containsKey(key)) {
                     out.print(substitutions.get(key));
                 } else {
@@ -127,11 +145,11 @@ public abstract class ScriptLanguage
                 }
                 fromIndex = close + 1;
             }
-            open = line.indexOf("${", fromIndex); 
+            open = line.indexOf("${", fromIndex);
         }
         out.println(line.substring(fromIndex));
     }
-    
+
     protected void loadScript( String filename )
         throws ScriptException
     {
@@ -160,10 +178,16 @@ public abstract class ScriptLanguage
             }
         }
 
-        System.out.println("Loading script : " + file);
         try {
             Reader reader = new InputStreamReader(new FileInputStream(file));
-            this.engine.eval(reader);
+            if (this.engine instanceof Compilable) {
+                System.out.println("Compiling script : " + file);
+                Compilable compilable = (Compilable) this.engine;
+                compilable.compile(reader).eval();
+            } else {
+                System.out.println("Loading script : " + file);
+                this.engine.eval(reader);
+            }
         } catch (IOException e) {
 
         }
@@ -177,23 +201,18 @@ public abstract class ScriptLanguage
     public abstract Object putProperty( Object inst, String name, Object value )
         throws ScriptException;
 
-    
-    
-    
-    public abstract Game createGame( Resources resources, String filename )
+    public abstract Game createGame( Resources resources, ClassName className )
         throws ScriptException;
 
-    public abstract void onActivate( ScriptedGame game)
+    public abstract void onActivate( ScriptedGame game )
         throws ScriptException;
 
-    public abstract String getInitialSceneName( ScriptedGame game)
+    public abstract String getInitialSceneName( ScriptedGame game )
         throws ScriptException;
-    
-    
-    
-    public abstract Behaviour createBehaviour( String filename )
+
+    public abstract Behaviour createBehaviour( ClassName className )
         throws ScriptException;
-    
+
     public abstract void onAttach( ScriptedBehaviour behaviour )
         throws ScriptException;
 
@@ -215,10 +234,7 @@ public abstract class ScriptLanguage
     public abstract void tick( ScriptedBehaviour behaviour )
         throws ScriptException;
 
-    
-    
-    
-    public abstract SceneBehaviour createSceneBehaviour( String filename )
+    public abstract SceneBehaviour createSceneBehaviour( ClassName className )
         throws ScriptException;
 
     public abstract void onActivate( ScriptedSceneBehaviour behaviour )

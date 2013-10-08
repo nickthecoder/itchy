@@ -19,7 +19,7 @@ import uk.co.nickthecoder.jame.event.Keys;
 public class TestGame extends Game
 {
     public ActorsLayer mainLayer;
-    
+
     public String sceneName = "menu";
 
     public TestGame() throws Exception
@@ -39,8 +39,9 @@ public class TestGame extends Game
     {
         loadScene(this.sceneName);
     }
-    
-    public boolean loadScene(String sceneName)
+
+    @Override
+    public boolean loadScene( String sceneName )
     {
         this.sceneName = sceneName;
         this.mainLayer.clear();
@@ -56,7 +57,7 @@ public class TestGame extends Game
         }
 
         if (ke.symbol == Keys.ESCAPE) {
-            loadScene( "menu" );
+            loadScene("menu");
         }
 
         if (ke.symbol == Keys.RETURN) {
@@ -73,18 +74,19 @@ public class TestGame extends Game
         return super.onKeyDown(ke);
     }
 
-    public void onMessage(String message)
+    @Override
+    public void onMessage( String message )
     {
         System.out.println("Message : " + message);
-        
+
         if (message.startsWith("scene:")) {
-            loadScene( message.substring(6));
+            loadScene(message.substring(6));
             return;
         }
-        
+
         super.onMessage(message);
     }
-    
+
     public static void main( String[] argv ) throws Exception
     {
         Resources resources = new Resources();

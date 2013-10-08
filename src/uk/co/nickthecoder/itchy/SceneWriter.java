@@ -46,7 +46,7 @@ public class SceneWriter extends XMLWriter
         this.beginTag("scene");
         this.attribute("showMouse", this.scene.showMouse);
         if ( ! NullSceneBehaviour.class.getName().equals(this.scene.sceneBehaviourName)) {
-            this.attribute("behaviour", this.scene.sceneBehaviourName);
+            this.attribute("behaviour", this.scene.sceneBehaviourName.name);
         }
 
         for ( Scene.SceneLayer sceneLayer : this.scene.getSceneLayers() ) {
@@ -76,9 +76,9 @@ public class SceneWriter extends XMLWriter
                 this.attribute("costume", this.sceneResource.resources.getCostumeName(csa.costume));
 
                 if ((csa.costume.behaviourClassName == null) ||
-                        (!csa.costume.behaviourClassName.equals(csa.behaviourClassName))) {
+                        (!csa.costume.behaviourClassName.name.equals(csa.behaviourClassName.name))) {
                     System.out.println( "Behaviour name : " + sceneActor.behaviourClassName );
-                    this.attribute("behaviour", sceneActor.behaviourClassName);
+                    this.attribute("behaviour", sceneActor.behaviourClassName.name);
                 }
                 this.writeSceneActorAttributes(sceneActor);
 
@@ -91,8 +91,10 @@ public class SceneWriter extends XMLWriter
                 this.attribute("font", this.sceneResource.resources.getFontName(tsa.font));
                 this.attribute("size", tsa.fontSize);
                 this.attribute("color", tsa.color.getRGBCode());
-                if (!NullBehaviour.class.getName().equals(sceneActor.behaviourClassName)) {
-                    this.attribute("behaviour", sceneActor.behaviourClassName);
+                this.attribute("xAlignment", tsa.xAlignment);
+                this.attribute("yAlignment", tsa.yAlignment);
+                if (!NullBehaviour.class.getName().equals(sceneActor.behaviourClassName.name)) {
+                    this.attribute("behaviour", sceneActor.behaviourClassName.name);
                 }
                 if ( tsa.costume != null) {
                     this.attribute("costume", this.sceneResource.resources.getCostumeName(tsa.costume));

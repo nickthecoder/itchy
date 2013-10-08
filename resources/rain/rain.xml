@@ -1,5 +1,5 @@
 <resources>
-  <game className="uk.co.nickthecoder.itchy.Launcher" width="800" height="600" title="It's Gonna Rain" iconFilename="icon.bmp"/>
+  <game title="It's Gonna Rain" width="800" height="600" iconFilename="icon.bmp" className="uk.co.nickthecoder.itchy.Game"/>
   <fonts>
     <font name="BlackCasper" filename="fonts/BlackCasper/BlackCasper.ttf"/>
     <font name="Boycott" filename="fonts/Boycott/Boycott.ttf"/>
@@ -51,8 +51,8 @@
       <compound sequence="false" loops="1">
         <move dx="20000.0" dy="0.0" ticks="8000" ease="linear"/>
         <compound sequence="true" loops="0">
-          <move dx="10.0" dy="20.0" ticks="20" ease="easeOutCubic"/>
-          <move dx="-10.0" dy="-20.0" ticks="20" ease="easeOutCubic"/>
+          <move dx="-10.0" dy="20.0" ticks="20" ease="linear"/>
+          <move dx="10.0" dy="-20.0" ticks="20" ease="linear"/>
         </compound>
       </compound>
     </animation>

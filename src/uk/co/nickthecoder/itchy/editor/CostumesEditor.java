@@ -10,17 +10,19 @@ import java.util.HashMap;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.AnimationResource;
+import uk.co.nickthecoder.itchy.Behaviour;
 import uk.co.nickthecoder.itchy.Costume;
+import uk.co.nickthecoder.itchy.CostumeProperties;
 import uk.co.nickthecoder.itchy.CostumeResource;
 import uk.co.nickthecoder.itchy.FontResource;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.ManagedSound;
-import uk.co.nickthecoder.itchy.CostumeProperties;
 import uk.co.nickthecoder.itchy.PoseResource;
 import uk.co.nickthecoder.itchy.SoundResource;
 import uk.co.nickthecoder.itchy.gui.AbstractTableListener;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Button;
+import uk.co.nickthecoder.itchy.gui.ClassNameBox;
 import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.Container;
@@ -62,7 +64,7 @@ public class CostumesEditor extends SubEditor
 
     private Notebook notebook;
 
-    private ComboBox behaviour;
+    private ClassNameBox behaviour;
 
     private ComboBox propertiesClassName;
 
@@ -194,9 +196,11 @@ public class CostumesEditor extends SubEditor
             };
         };
 
-        this.behaviour = new ComboBox(
-            costume.behaviourClassName,
-            this.editor.game.resources.getBehaviourClassNames());
+        // TODO Change to a special component for ClassNames which includes a "create" button for
+        // scripts.
+        this.behaviour = new ClassNameBox(
+            this.editor.resources.scriptManager,
+            costume.behaviourClassName, Behaviour.class);
 
         grid.addRow("Name", this.txtName);
         grid.addRow("Extends", this.buttonExtendedFrom);
@@ -310,7 +314,7 @@ public class CostumesEditor extends SubEditor
         this.propertiesComponents = new ArrayList<Component>();
 
         CostumeProperties properties = this.currentCostumeResource.costume.getProperties();
-        
+
         if (!properties.getClass().getName().equals(this.propertiesClassName.getText())) {
             properties = CostumeProperties.createProperties(this.propertiesClassName.getText());
         }
@@ -405,13 +409,13 @@ public class CostumesEditor extends SubEditor
         for (String name : costume.getPoseNames()) {
             for (PoseResource poseResource : costume.getPoseChoices(name)) {
 
-                if ( !poseResource.isAnonymous()) {
+                if (!poseResource.isAnonymous()) {
                     SimpleTableModelRow row = new SimpleTableModelRow();
                     row.add(name);
                     row.add("Pose");
                     row.add(poseResource.getName());
                     row.add(poseResource);
-    
+
                     model.addRow(row);
                 }
             }
@@ -815,7 +819,7 @@ public class CostumesEditor extends SubEditor
             }
         }
 
-        if (!this.editor.resources.registerBehaviourClassName(this.behaviour.getText())) {
+        if (!this.editor.resources.registerBehaviourClassName(this.behaviour.getClassName().name)) {
             this.setMessage("Not a valid behaviour class name");
             return;
         }
@@ -847,7 +851,7 @@ public class CostumesEditor extends SubEditor
         }
 
         this.currentCostumeResource.setName(this.txtName.getText());
-        this.currentCostumeResource.costume.behaviourClassName = this.behaviour.getText();
+        this.currentCostumeResource.costume.behaviourClassName = this.behaviour.getClassName();
 
         if (CostumeProperties.isValidClassName(this.propertiesClassName.getText())) {
             this.currentCostumeResource.costume.setPropertiesClassName(this.propertiesClassName
@@ -855,7 +859,7 @@ public class CostumesEditor extends SubEditor
             CostumeProperties properties = this.currentCostumeResource.costume.getProperties();
 
             int index = 0;
-            for (AbstractProperty<CostumeProperties, ?> property : properties.getProperties() ) {
+            for (AbstractProperty<CostumeProperties, ?> property : properties.getProperties()) {
 
                 Component component = this.propertiesComponents.get(index);
                 try {

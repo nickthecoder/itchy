@@ -8,6 +8,7 @@ package uk.co.nickthecoder.itchy;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.util.AbstractProperty;
+import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.itchy.util.Property;
 import uk.co.nickthecoder.itchy.util.PropertySubject;
 
@@ -21,13 +22,12 @@ public class GameInfo implements PropertySubject<GameInfo>
 
     @Property(label = "Height")
     public int height;
-       
+
     @Property(label = "Icon")
     public String iconFilename;
 
-    @Property(label = "Class Name")
-    public String className;
-
+    @Property(label = "Class Name", baseClass = Game.class)
+    public ClassName className;
 
     public GameInfo()
     {
@@ -35,7 +35,7 @@ public class GameInfo implements PropertySubject<GameInfo>
         this.width = 800;
         this.height = 600;
         this.iconFilename = "icon.bmp";
-        this.className = Launcher.class.getName();
+        this.className = new ClassName(Game.class.getName());
 
     }
 

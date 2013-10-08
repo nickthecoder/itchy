@@ -1,8 +1,9 @@
-Drop = new Class( Behaviour )
+Drop = new Class( BehaviourScript )
 ({   
     __init__: function() {
         this.distance = 600;
-        this.speed = sceneBehaviour.speed;
+        this.speed = sceneBehaviourScript.speed;
+        stdout.println( "Dump of Drop : " + dump(this,1) );
     },
 
     onAttach: function() {
@@ -18,15 +19,15 @@ Drop = new Class( Behaviour )
                 .forwards().fade(0.9, 3.5).speed(0.1, 1.5).vy(5)
                 .createActor("droplet").activate();
                     
-            if (sceneBehaviour.isPlaying()) {
+            if (sceneBehaviourScript.isPlaying()) {
                 this.actor.event("drip");
                 var x = random.nextInt(Itchy.getGame().getWidth());
                 this.actor.moveTo( x, this.actor.getY() + this.distance );
-                this.speed = sceneBehaviour.speed;
+                this.speed = sceneBehaviourScript.speed;
             }
             
         }
     }
 });
-Behaviour.integerProperty("Drop","distance", "Distance", 600);
+BehaviourScript.integerProperty("Drop","distance", "Distance", 600);
 

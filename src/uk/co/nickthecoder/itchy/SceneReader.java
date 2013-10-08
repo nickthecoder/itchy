@@ -12,6 +12,7 @@ import java.util.Iterator;
 
 import uk.co.nickthecoder.itchy.editor.SceneDesignerBehaviour;
 import uk.co.nickthecoder.itchy.util.AbstractProperty;
+import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.itchy.util.XMLException;
 import uk.co.nickthecoder.itchy.util.XMLTag;
 import uk.co.nickthecoder.jame.RGBA;
@@ -45,8 +46,8 @@ public class SceneReader
     private void readScene( XMLTag sceneTag ) throws Exception
     {
         this.scene.showMouse = sceneTag.getOptionalBooleanAttribute("showMouse", true);
-        this.scene.sceneBehaviourName = sceneTag.getOptionalAttribute("behaviour",
-            NullSceneBehaviour.class.getName());
+        this.scene.sceneBehaviourName = new ClassName(sceneTag.getOptionalAttribute("behaviour",
+            NullSceneBehaviour.class.getName()));
 
         // For old versions without multiple layers, the actor tags are directly within the scene
         // tag.
@@ -102,9 +103,9 @@ public class SceneReader
         }
 
         TextSceneActor sceneActor = new TextSceneActor(font, fontSize, text);
-        sceneActor.behaviourClassName = NullBehaviour.class.getName();
+        sceneActor.behaviourClassName = new ClassName(NullBehaviour.class.getName());
 
-        String costumeName = textTag.getOptionalAttribute("costume",null);
+        String costumeName = textTag.getOptionalAttribute("costume", null);
         if (costumeName != null) {
             Costume costume = this.resources.getCostume(costumeName);
             if (costume == null) {
@@ -119,6 +120,10 @@ public class SceneReader
         } catch (Exception e) {
             throw new XMLException("Illegal color : " + colorString);
         }
+        double xAlignment = textTag.getOptionalDoubleAttribute("xAlignment", 0.5);
+        double yAlignment = textTag.getOptionalDoubleAttribute("yAlignment", 0.5);
+        sceneActor.xAlignment = xAlignment;
+        sceneActor.yAlignment = yAlignment;
 
         this.readSceneActorAttributes(textTag, sceneActor);
 
@@ -130,8 +135,8 @@ public class SceneReader
     {
         sceneActor.x = actorTag.getIntAttribute("x");
         sceneActor.y = actorTag.getIntAttribute("y");
-        sceneActor.alpha = actorTag.getOptionalDoubleAttribute("alpha",255);
-        sceneActor.direction = actorTag.getOptionalDoubleAttribute("direction",0);
+        sceneActor.alpha = actorTag.getOptionalDoubleAttribute("alpha", 255);
+        sceneActor.direction = actorTag.getOptionalDoubleAttribute("direction", 0);
         sceneActor.scale = actorTag.getOptionalDoubleAttribute("scale", 1);
         sceneActor.activationDelay = actorTag.getOptionalDoubleAttribute("activationDelay", 0);
         sceneActor.startEvent = actorTag.getOptionalAttribute("startEvent", "default");
@@ -145,9 +150,10 @@ public class SceneReader
         }
 
         if (actorTag.hasAttribute("behaviour")) {
-            String name = actorTag.getAttribute("behaviour");
-            if (this.resources.registerBehaviourClassName(name)) {
-                sceneActor.behaviourClassName = name;
+            ClassName className = new ClassName(actorTag.getAttribute("behaviour"));
+
+            if (this.resources.registerBehaviourClassName(className.name)) {
+                sceneActor.behaviourClassName = className;
             }
         }
 

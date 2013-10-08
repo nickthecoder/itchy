@@ -1,7 +1,7 @@
-Score = new Class( Behaviour )
+Score = new Class( BehaviourScript )
 ({
     tick: function() {
-        this.actor.getAppearance().getPose().setText( "" + sceneBehaviour.score );
+        this.actor.getAppearance().getPose().setText( "" + sceneBehaviourScript.score );
     }
 });
 

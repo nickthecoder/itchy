@@ -8,27 +8,22 @@ Jame is out of date, need to rebuild for win32 and i386 and ARM??
 What's Next
 ===========
 
-Place the correct objects into the script scope as appropriate.
+Allow scripts to be created from the editor.
+    use a template for each script language/class.
+    A special component for class names
 
 Get Scripted Game working
     All methods
 
-Launcher becomes just Main, not a Game.
-    Game becomes non-abstract?
-    
-Editor for game metadata : title width, height, game class name.
-    GameInfo
-    Move it to its own class, and use Property tags to save/load and edit.
-
-Compile the JavaScript
-
-Allow scripts to be created from the editor use a template for each script language/class.
+Place the correct objects into the script scope as appropriate.
+    GameScript and SceneBehaviourScript  objects are only added during their construction - easy and natural.
+    SceneBehaviour must be added when the scene is loaded, so Game must call ScriptManager even if scripts aren't in use.
+        If it is added straight away, then is the SceneBehaviour is not scripted, but Behaviours are, then we run into problems.
+            So we need an "ensureScriptGlobals" when any script object is created.
+            This can add the Game object too.
 
 Script version of CostumeProperties
     
-Text alignment properties in editor?
-    Align the score on the right (or left), bu never the middle - it wiggles!
-
 If SceneBehaviour doesn't have properties, then add them.
     Need to edit them in the editor too. A new tab in the SceneDesigner seems sensible.
 

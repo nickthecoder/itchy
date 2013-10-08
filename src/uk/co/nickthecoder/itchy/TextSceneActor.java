@@ -1,9 +1,7 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0 which accompanies this
+ * distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
@@ -19,6 +17,10 @@ public class TextSceneActor extends SceneActor
 
     public RGBA color;
 
+    public double xAlignment;
+
+    public double yAlignment;
+
     public Costume costume;
 
     protected TextSceneActor( Actor actor )
@@ -30,6 +32,8 @@ public class TextSceneActor extends SceneActor
         this.text = pose.getText();
         this.color = new RGBA(pose.getColor());
         this.costume = actor.getCostume();
+        this.xAlignment = pose.getXAlignment();
+        this.yAlignment = pose.getYAlignment();
     }
 
     public TextSceneActor( Font font, int fontSize, String text )
@@ -39,6 +43,8 @@ public class TextSceneActor extends SceneActor
         this.text = text;
         this.color = new RGBA(255, 255, 255);
         this.costume = null;
+        this.xAlignment = 0.5;
+        this.yAlignment = 0.5;
     }
 
     @Override
@@ -46,12 +52,13 @@ public class TextSceneActor extends SceneActor
     {
         TextPose pose = new TextPose(this.text, this.font, this.fontSize);
         pose.setColor(this.color);
+        pose.setAlignment(this.xAlignment, this.yAlignment);
         Actor actor = new Actor(pose);
-        if ( this.costume != null) {
+        if (this.costume != null) {
             actor.setCostume(this.costume);
         }
         this.updateActor(actor, resources, designActor);
-        
+
         return actor;
     }
 

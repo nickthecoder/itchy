@@ -1,4 +1,4 @@
-${NAME} = new Class( Behaviour )
+${NAME} = new Class( BehaviourScript )
 ({
     __init__: function() {
         // TODO Initialise your object. Note you can't access this.actor yet.

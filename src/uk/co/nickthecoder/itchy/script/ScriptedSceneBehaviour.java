@@ -8,29 +8,30 @@
 package uk.co.nickthecoder.itchy.script;
 
 import uk.co.nickthecoder.itchy.SceneBehaviour;
+import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 
 public class ScriptedSceneBehaviour implements SceneBehaviour
 {
-    private String filename;
+    private ClassName className;
 
     private ScriptLanguage language;
 
-    public final Object scriptBehaviour;
+    public final Object sceneBehaviourScript;
 
-    public ScriptedSceneBehaviour( String name, ScriptLanguage language, Object scriptInstance )
+    public ScriptedSceneBehaviour( ClassName className, ScriptLanguage language, Object scriptInstance )
     {
-        this.filename = name;
+        this.className = className;
         this.language = language;
-        this.scriptBehaviour = scriptInstance;
+        this.sceneBehaviourScript = scriptInstance;
     }
 
     // TODO Need this? @Override
-    public String getClassName()
+    public ClassName getClassName()
     {
-        return this.filename;
+        return this.className;
     }
 
     private void handleException( Exception e )

@@ -11,30 +11,31 @@ import java.util.List;
 
 import uk.co.nickthecoder.itchy.Behaviour;
 import uk.co.nickthecoder.itchy.util.AbstractProperty;
+import uk.co.nickthecoder.itchy.util.ClassName;
 
 public class ScriptedBehaviour extends Behaviour
 {
     private final static HashMap<String, List<AbstractProperty<Behaviour, ?>>> allProperties = new HashMap<String, List<AbstractProperty<Behaviour, ?>>>();
     
-    private String filename;
+    private ClassName className;
 
     private ScriptLanguage language;
 
-    public final Object scriptBehaviour;
+    public final Object behaviourScript;
 
     public final ScriptProperties propertyValues;
     
-    public ScriptedBehaviour( String filename, ScriptLanguage language, Object scriptInstance )
+    public ScriptedBehaviour( ClassName className, ScriptLanguage language, Object scriptInstance )
     {
-        this.filename = filename;
+        this.className = className;
         this.language = language;
-        this.scriptBehaviour = scriptInstance;
+        this.behaviourScript = scriptInstance;
         this.propertyValues = new ScriptProperties(this.language, scriptInstance);
     }
     
     public List<AbstractProperty<Behaviour, ?>> getProperties()
     {
-        String name = language.manager.getName( this.filename );
+        String name = ScriptManager.getName( this.className );
 
         List<AbstractProperty<Behaviour, ?>> result = allProperties.get(name);
         if (result == null) {
@@ -65,9 +66,9 @@ public class ScriptedBehaviour extends Behaviour
     }
     
     @Override
-    public String getClassName()
+    public ClassName getClassName()
     {
-        return this.filename;
+        return this.className;
     }
 
     private void handleException( Exception e )

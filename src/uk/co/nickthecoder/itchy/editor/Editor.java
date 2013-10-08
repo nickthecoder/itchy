@@ -26,7 +26,9 @@ public final class Editor extends Game
 {
     public static Editor singleton;
 
-    public static final String RULES = "resources/editor/style.xml";
+    private static final String RULES = "resources/editor/style.xml";
+
+    public EditorPreferences preferences;
 
     public static Container addHint( Component component, String hint )
     {
@@ -44,8 +46,10 @@ public final class Editor extends Game
 
     public GuiPose mainGuiPose;
 
+    // public PreferencesEditor preferencesEditor;
+
     public GameInfoEditor gameInfoEditor;
-    
+
     public SoundsEditor soundsEditor;
 
     public PosesEditor posesEditor;
@@ -69,6 +73,7 @@ public final class Editor extends Game
         this.game = game;
         this.resources = game.resources;
         singleton = this;
+        this.preferences = new EditorPreferences();
 
         this.gameInfoEditor = new GameInfoEditor(this);
         this.soundsEditor = new SoundsEditor(this);
@@ -78,6 +83,14 @@ public final class Editor extends Game
         this.animationsEditor = new AnimationsEditor(this);
         this.costumesEditor = new CostumesEditor(this);
         this.scenesEditor = new ScenesEditor(this);
+        // this.preferencesEditor = new PreferencesEditor(this);
+
+        try {
+            setStylesheet(new Stylesheet(new File(RULES)));
+        } catch (Exception e) {
+            System.err.println("Failed to load stylesheet : " + RULES);
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -102,13 +115,7 @@ public final class Editor extends Game
     public void onActivate()
     {
         super.onActivate();
-        
-        try {
-            setStylesheet(new Stylesheet(new File(RULES)));
-        } catch (Exception e) {
-            System.err.println("Failed to load stylesheet : " + RULES);
-            e.printStackTrace();
-        }
+
         Itchy.enableKeyboardRepeat(true);
 
         this.mainGuiPose = new GuiPose();
@@ -124,7 +131,6 @@ public final class Editor extends Game
 
         this.mainGuiPose.show();
 
-
         Notebook notebook = new Notebook();
         this.mainGuiPose.addChild(notebook);
         notebook.setFill(true, true);
@@ -138,6 +144,7 @@ public final class Editor extends Game
         notebook.addPage(new Label("Fonts"), this.fontsEditor.createPage());
         notebook.addPage(new Label("Costumes"), this.costumesEditor.createPage());
         notebook.addPage(new Label("Scenes"), this.scenesEditor.createPage());
+        // notebook.addPage(new Label("Preferences"), this.preferencesEditor.createPage());
 
         Container buttons = new Container();
         buttons.addStyle("buttonBar");

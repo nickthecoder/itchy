@@ -9,6 +9,7 @@ package uk.co.nickthecoder.itchy.util;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.List;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.NodeChangeListener;
 import java.util.prefs.PreferenceChangeListener;
@@ -260,6 +261,32 @@ public class AutoFlushPreferences extends Preferences
         }
     }
 
+    public <S> void load( S subject,  List<AbstractProperty<S,?>> properties )
+    {
+        for (AbstractProperty<S,?> property : properties ) {
+            try {
+                String value = this.get(property.key, null);
+                if (value != null) {
+                    property.setValue(subject, value);
+                }
+            } catch ( Exception e) {
+                //Ignore
+            }
+        }
+    }
+    
+    public <S> void save( S subject,  List<AbstractProperty<S,?>> properties )
+    {
+        for (AbstractProperty<S,?> property : properties ) {
+            try {
+                String value = property.getStringValue( subject );
+                this.put(property.key, value);
+            } catch ( Exception e) {
+                //Ignore
+            }
+        }
+    }
+    
     @Override
     public String toString()
     {

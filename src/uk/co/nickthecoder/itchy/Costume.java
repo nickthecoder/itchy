@@ -12,6 +12,7 @@ import java.util.Random;
 import java.util.Set;
 
 import uk.co.nickthecoder.itchy.animation.Animation;
+import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.jame.Sound;
 
 public class Costume
@@ -30,7 +31,8 @@ public class Costume
 
     private final HashMap<String, List<FontResource>> fontChoices;
 
-    public String behaviourClassName = uk.co.nickthecoder.itchy.NullBehaviour.class.getName();
+    public ClassName behaviourClassName = new ClassName(
+        uk.co.nickthecoder.itchy.NullBehaviour.class.getName());
 
     private CostumeProperties properties = new CostumeProperties();
 
@@ -117,7 +119,7 @@ public class Costume
     public String getString( String name )
     {
         List<String> strings = this.stringChoices.get(name);
-        if ((strings == null) || (strings.size()==0)) {
+        if ((strings == null) || (strings.size() == 0)) {
             if (this.extendedFrom != null) {
                 return this.extendedFrom.getString(name);
             }
@@ -154,7 +156,7 @@ public class Costume
     public PoseResource getPoseResource( String name )
     {
         List<PoseResource> choices = this.poseChoices.get(name);
-        if ((choices == null) || (choices.size()==0)) {
+        if ((choices == null) || (choices.size() == 0)) {
             if (this.extendedFrom != null) {
                 return this.extendedFrom.getPoseResource(name);
             }
@@ -217,7 +219,7 @@ public class Costume
     public ManagedSound getCostumeSound( String name )
     {
         List<ManagedSound> choices = this.soundChoices.get(name);
-        if ((choices == null) || (choices.size()==0)) {
+        if ((choices == null) || (choices.size() == 0)) {
             if (this.extendedFrom != null) {
                 return this.extendedFrom.getCostumeSound(name);
             }
@@ -260,7 +262,7 @@ public class Costume
     public FontResource getFontResource( String name )
     {
         List<FontResource> choices = this.fontChoices.get(name);
-        if ((choices == null) || (choices.size()==0)) {
+        if ((choices == null) || (choices.size() == 0)) {
             if (this.extendedFrom != null) {
                 return this.extendedFrom.getFontResource(name);
             }
@@ -303,7 +305,7 @@ public class Costume
     public AnimationResource getAnimationResource( String name )
     {
         List<AnimationResource> choices = this.animationChoices.get(name);
-        if ((choices == null) || (choices.size()==0)) {
+        if ((choices == null) || (choices.size() == 0)) {
             if (this.extendedFrom != null) {
                 return this.extendedFrom.getAnimationResource(name);
             }

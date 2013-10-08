@@ -34,9 +34,9 @@ public class XMLTag
             return new XMLTag(document);
 
         } catch (javax.xml.parsers.ParserConfigurationException e) {
-            throw new XMLException(e.getMessage());
+            throw new XMLException(e);
         } catch (org.xml.sax.SAXException e) {
-            throw new XMLException(e.getMessage());
+            throw new XMLException(e);
         }
 
     }

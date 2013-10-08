@@ -1,12 +1,10 @@
-Play = new Class( SceneBehaviour )
+Play = new Class( SceneBehaviourScript )
 ({
     __init__: function() {
         this.player = null;
         this.speed = 5;
         this.score = 0;
-        stdout.println("Scene : " + game.getSceneName() );
         this.highScore = game.getPreferences().getInt( game.getSceneName() + ".highScore", 0);
-        stdout.println("Highscore : " + this.highScore );
         this.levelUp = itchy.extras.Timer.createTimerSeconds( 10 );
     },
 
@@ -44,9 +42,7 @@ Play = new Class( SceneBehaviour )
     end: function() {
         this.speed = 0;
         this.player = null;
-        stdout.println( "Score " + this.score + " vs " + this.highScore + " ? " + (this.score > this.highScore) );
         if (this.score > this.highScore) {
-            stdout.println("Setting Highscore : " + this.score );
             game.getPreferences().putInt( game.getSceneName() + ".highScore", this.score );
             stdout.println("New value : " + game.getPreferences().getInt( game.getSceneName() + ".highScore", -1));
         }       

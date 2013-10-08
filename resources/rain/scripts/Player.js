@@ -1,11 +1,11 @@
-Player = new Class( Behaviour )
+Player = new Class( BehaviourScript )
 ({
     onActivate: function() {
-        sceneBehaviour.player = this;
+        sceneBehaviourScript.player = this;
     },
     
     tick: function() {
-        if (sceneBehaviour.isPlaying()) {
+        if (sceneBehaviourScript.isPlaying()) {
             var x = Itchy.getMouseX();
             if ( x < 20 ) {
                 x = 20;
@@ -15,9 +15,9 @@ Player = new Class( Behaviour )
             }
             this.actor.moveTo( x, this.actor.getY() );
             
-            if ( this.owner.touching("deadly").size() > 0 ) {
+            if ( this.behaviour.touching("deadly").size() > 0 ) {
                 this.actor.deathEvent("death");
-                sceneBehaviour.end();
+                sceneBehaviourScript.end();
             }
         }
     }

@@ -1,7 +1,7 @@
-HighScore = new Class( Behaviour )
+HighScore = new Class( BehaviourScript )
 ({
     onAttach: function() {
-        this.actor.getAppearance().getPose().setText( "" + sceneBehaviour.highScore );
+        this.actor.getAppearance().getPose().setText( "" + sceneBehaviourScript.highScore );
     }
 });
 

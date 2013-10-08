@@ -29,6 +29,7 @@ import uk.co.nickthecoder.itchy.gui.TableModelColumn;
 import uk.co.nickthecoder.itchy.gui.TableModelRow;
 import uk.co.nickthecoder.itchy.gui.TableRow;
 import uk.co.nickthecoder.itchy.gui.TextBox;
+import uk.co.nickthecoder.itchy.util.ClassName;
 
 public class ScenesEditor extends SubEditor
 {
@@ -130,7 +131,7 @@ public class ScenesEditor extends SubEditor
         this.txtName = new TextBox(this.currentSceneResource.getName());
         grid.addRow(new Label("Name"), this.txtName);
 
-        String behaviourName = NullSceneBehaviour.class.getName();
+        ClassName behaviourName = new ClassName(NullSceneBehaviour.class.getName());
 
         boolean showMouse = false;
         try {
@@ -142,9 +143,10 @@ public class ScenesEditor extends SubEditor
             // Do nothing
         }
 
-        this.sceneBehaviourName = new ComboBox(behaviourName,
+        // TODO Replace with a special component for ClassNames
+        this.sceneBehaviourName = new ComboBox(behaviourName.name,
             this.editor.game.resources.getSceneBehaviourClassNames());
-        
+
         this.sceneBehaviourName.addChangeListener(new ComponentChangeListener() {
 
             @Override
@@ -175,7 +177,8 @@ public class ScenesEditor extends SubEditor
             }
         }
 
-        if (!getResources().registerSceneBehaviourClassName(this.sceneBehaviourName.getText())) {
+        ClassName className = new ClassName(this.sceneBehaviourName.getText());
+        if (!getResources().registerSceneBehaviourClassName(className.name)) {
             this.setMessage("Invalid Scene Behaviour");
             return;
         }
@@ -200,7 +203,7 @@ public class ScenesEditor extends SubEditor
 
         try {
             this.currentSceneResource.getScene().showMouse = this.checkBoxShowMouse.getValue();
-            this.currentSceneResource.getScene().sceneBehaviourName = this.sceneBehaviourName.getText();
+            this.currentSceneResource.getScene().sceneBehaviourName = className;
             this.currentSceneResource.save();
         } catch (Exception e) {
             e.printStackTrace();
@@ -264,12 +267,12 @@ public class ScenesEditor extends SubEditor
         this.editor.mainGuiPose.hide();
         designer.go();
     }
-    
+
     public void design( String sceneName )
     {
-        SceneResource sceneResource = this.editor.resources.getSceneResource( sceneName );
+        SceneResource sceneResource = this.editor.resources.getSceneResource(sceneName);
         SceneDesigner designer = new SceneDesigner(this.editor, sceneResource);
         this.editor.mainGuiPose.hide();
-        designer.go();        
+        designer.go();
     }
 }

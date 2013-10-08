@@ -139,12 +139,24 @@ public abstract class AbstractProperty<S, T>
     private static <SS> AbstractProperty<SS, ?> createProperty(
         Class<?> klass, String access, String key, Property property )
     {
+        if (klass == ClassName.class) {
+            try {
+                return new ClassNameProperty<SS>(
+                    property.baseClass(), property.label(), access, key);
+                
+            } catch (Exception e) {
+                // Do nothing
+            }
+        }
+
         return createProperty(
-            klass, access, key, property.label(), property.allowNull(), property.recurse(), property.alpha());
+            klass, access, key, property.label(), property.allowNull(), property.recurse(),
+            property.alpha());
     }
 
     public static <SS> AbstractProperty<SS, ?> createProperty(
-        Class<?> klass, String access, String key, String label, boolean allowNull, boolean recurse, boolean alpha )
+        Class<?> klass, String access, String key, String label, boolean allowNull,
+        boolean recurse, boolean alpha )
     {
         if (klass == int.class || klass == Integer.class) {
             return new IntegerProperty<SS>(label, access, key);

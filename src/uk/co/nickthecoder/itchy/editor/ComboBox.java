@@ -28,8 +28,8 @@ public class ComboBox extends Container
     public ComboBox( String defaultValue, Collection<String> values )
     {
         super();
-        
-        this.type="comboBox";
+
+        this.type = "comboBox";
         this.addStyle("combo");
         this.name = new TextBox(defaultValue);
         this.map = new HashMap<String, String>();
@@ -70,9 +70,14 @@ public class ComboBox extends Container
     {
         this.name.setText(text);
     }
-    
+
     public void addChangeListener( ComponentChangeListener ccl )
     {
-        this.name.addChangeListener( ccl );
+        this.name.addChangeListener(ccl);
+    }
+
+    public void removeChangeListener( ComponentChangeListener ccl )
+    {
+        this.name.removeChangeListener(ccl);
     }
 }

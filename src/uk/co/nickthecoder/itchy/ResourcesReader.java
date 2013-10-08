@@ -21,6 +21,7 @@ import uk.co.nickthecoder.itchy.animation.MoveAnimation;
 import uk.co.nickthecoder.itchy.animation.ScaleAnimation;
 import uk.co.nickthecoder.itchy.animation.TurnAnimation;
 import uk.co.nickthecoder.itchy.util.AbstractProperty;
+import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.itchy.util.NinePatch;
 import uk.co.nickthecoder.itchy.util.PropertySubject;
 import uk.co.nickthecoder.itchy.util.XMLException;
@@ -94,7 +95,7 @@ public class ResourcesReader
 
     private void readGame( XMLTag gameTag ) throws Exception
     {
-        this.readProperties(gameTag, this.resources.gameInfo);        
+        this.readProperties(gameTag, this.resources.gameInfo);
         Itchy.init(this.resources);
     }
 
@@ -210,9 +211,10 @@ public class ResourcesReader
 
             }
 
-            String behaviourClassName = costumeTag.getOptionalAttribute("behaviour",
-                NullBehaviour.class.getName());
-            if (this.resources.registerBehaviourClassName(behaviourClassName)) {
+            ClassName behaviourClassName = new ClassName(costumeTag.getOptionalAttribute(
+                "behaviour", NullBehaviour.class.getName()));
+
+            if (this.resources.registerBehaviourClassName(behaviourClassName.name)) {
                 costume.behaviourClassName = behaviourClassName;
             } else {
                 throw new XMLException("Expected a subclass of Behaviour : " +

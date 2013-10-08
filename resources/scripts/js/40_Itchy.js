@@ -4,22 +4,28 @@ jame=Packages.uk.co.nickthecoder.jame;
 
 //Objects
 Itchy=itchy.Itchy;
+game = null;
+gameScript = null;
 sceneBehaviour = null;
+sceneBehaviourScript = null;
 
 //Functions
 include=language.loadScript;
 
 
-Game = new Class()  ({
+GameScript = new Class()  ({
 
     onActivate: function() {},
     
-    getInitialSceneName: function() { return "start" }
+    getInitialSceneName: function() { return "start" },
+    
+    tick: function() {}
+    
 });
 
 
 
-Behaviour = new Class() ({
+BehaviourScript = new Class() ({
 
     tick : function() {},
     
@@ -34,30 +40,30 @@ Behaviour = new Class() ({
     onKill : function() {},
     
 });
-Behaviour.declareProperty = function( className, propertyName, label, defaultValue, klass ) {
+BehaviourScript.declareProperty = function( className, propertyName, label, defaultValue, klass ) {
     itchy.script.ScriptedBehaviour.declareBehaviourProperty(
         className, propertyName, label, defaultValue, klass
     );
 };
-Behaviour.stringProperty = function( className, propertyName, label, defaultValue ) {
-    Behaviour.declareProperty( className, propertyName, label, defaultValue, java.lang.String );
+BehaviourScript.stringProperty = function( className, propertyName, label, defaultValue ) {
+    BehaviourScript.declareProperty( className, propertyName, label, defaultValue, java.lang.String );
 };
-Behaviour.integerProperty = function( className, propertyName, label, defaultValue ) {
-    Behaviour.declareProperty( className, propertyName, label, defaultValue, java.lang.Integer );
+BehaviourScript.integerProperty = function( className, propertyName, label, defaultValue ) {
+    BehaviourScript.declareProperty( className, propertyName, label, defaultValue, java.lang.Integer );
 };
-Behaviour.doubleProperty = function( className, propertyName, label, defaultValue ) {
-    Behaviour.declareProperty( className, propertyName, label, defaultValue, java.lang.Double );
+BehaviourScript.doubleProperty = function( className, propertyName, label, defaultValue ) {
+    BehaviourScript.declareProperty( className, propertyName, label, defaultValue, java.lang.Double );
 };
-Behaviour.rgbaProperty = function( className, propertyName, label, defaultValue ) {
-    Behaviour.declareProperty( className, propertyName, label, defaultValue, jame.RGBA );
+BehaviourScript.rgbaProperty = function( className, propertyName, label, defaultValue ) {
+    BehaviourScript.declareProperty( className, propertyName, label, defaultValue, jame.RGBA );
 };
 
 
-SceneBehaviour = new Class()  ({
+SceneBehaviourScript = new Class()  ({
 
-    onActivate: function() { sceneBehaviour = this; },
+    onActivate: function() {},
     
-    onDeactivate: function() { sceneBehaviour = null; },
+    onDeactivate: function() {},
     
     tick: function() {},
 

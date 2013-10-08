@@ -8,18 +8,10 @@ package uk.co.nickthecoder.itchy;
 import java.io.File;
 import java.util.Arrays;
 
-public class Launcher extends Game
-{
-    public Launcher() throws Exception
-    {
-    }
+import uk.co.nickthecoder.itchy.editor.Editor;
 
-    @Override
-    public void onActivate()
-    {
-        super.onActivate();
-        this.loadScene(getInitialSceneName());
-    }
+public class Launcher
+{
 
     public static void main( String argv[] ) throws Exception
     {
@@ -39,16 +31,19 @@ public class Launcher extends Game
 
             Resources resources = new Resources();
             resources.load(new File(resourcePath));
-            resources.createGame().runFromMain(argv);
+
+            if ((argv.length == 1) && ("--editor".equals(argv[0]))) {
+
+                Editor editor = new Editor(resources.getGame());
+                editor.start(null);
+
+            } else {
+                resources.getGame().start();
+            }
+
         } else {
             System.out.println("Usage : Launcher RESOURCES_FILE [--editor]");
         }
-    }
-
-    @Override
-    public String getInitialSceneName()
-    {
-        return "start";
     }
 
 }

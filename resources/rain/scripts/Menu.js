@@ -1,4 +1,4 @@
-Menu = new Class( SceneBehaviour )
+Menu = new Class( SceneBehaviourScript )
 ({
     onMessage: function( message ) {
         stdout.println("Message : " + message );

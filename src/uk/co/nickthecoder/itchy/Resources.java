@@ -33,13 +33,12 @@ public class Resources extends Loadable
         Collections.sort(names);
         return names;
     }
-    
 
     private Game game;
 
     public final GameInfo gameInfo;
-    
-    public final ScriptManager scriptManager;
+
+    public ScriptManager scriptManager;
 
     private final HashMap<String, SoundResource> sounds;
 
@@ -61,6 +60,8 @@ public class Resources extends Loadable
 
     private TreeSet<String> sceneBehaviourClassNames;
 
+    private TreeSet<String> gameClassNames;
+
     public Resources()
     {
         super();
@@ -80,27 +81,37 @@ public class Resources extends Loadable
         this.behaviourClassNames = new TreeSet<String>();
         this.costumePropertiesClassNames = new TreeSet<String>();
         this.sceneBehaviourClassNames = new TreeSet<String>();
+        this.gameClassNames = new TreeSet<String>();
 
         this.registerBehaviourClassName(NullBehaviour.class.getName());
         this.registerCostumePropertiesClassName(CostumeProperties.class.getName());
         this.registerSceneBehaviourClassName(NullSceneBehaviour.class.getName());
+        this.registerGameClassName(Game.class.getName());
     }
 
     public Game createGame()
         throws Exception
     {
+
         if (this.scriptManager.isValidScript(this.gameInfo.className)) {
             this.game = this.scriptManager.createGame(this.gameInfo.className);
         } else {
-            Class<?> klass = Class.forName(this.gameInfo.className);
+            Class<?> klass = Class.forName(this.gameInfo.className.name);
             this.game = (Game) klass.newInstance();
         }
         this.game.resources = this;
         return this.game;
     }
-    
+
     public Game getGame()
     {
+        if (this.game == null) {
+            try {
+                this.game = createGame();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
         return this.game;
     }
 
@@ -428,7 +439,7 @@ public class Resources extends Loadable
     public void addCostume( CostumeResource resource )
     {
         this.costumes.put(resource.name, resource);
-        this.registerBehaviourClassName(resource.costume.behaviourClassName);
+        this.registerBehaviourClassName(resource.costume.behaviourClassName.name);
         this.registerCostumePropertiesClassName(resource.costume.getPropertiesClassName());
     }
 
@@ -653,6 +664,27 @@ public class Resources extends Loadable
         return false;
     }
 
+    public boolean registerGameClassName( String className )
+    {
+        try {
+            if (this.gameClassNames.contains(className)) {
+                return true;
+            }
+            if (this.scriptManager.isValidScript(className)) {
+                // Do nothing
+            } else {
+                Class<?> klass = Class.forName(className);
+                klass.asSubclass(Game.class);
+            }
+            this.gameClassNames.add(className);
+            return true;
+
+        } catch (Exception e) {
+            // Do nothing
+        }
+        return false;
+    }
+
     public Set<String> getBehaviourClassNames()
     {
         return this.behaviourClassNames;
@@ -666,6 +698,11 @@ public class Resources extends Loadable
     public Set<String> getSceneBehaviourClassNames()
     {
         return this.sceneBehaviourClassNames;
+    }
+
+    public Set<String> getGameClassNames()
+    {
+        return this.gameClassNames;
     }
 
 }

@@ -33,6 +33,7 @@ import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Button;
 import uk.co.nickthecoder.itchy.gui.ButtonGroup;
 import uk.co.nickthecoder.itchy.gui.CheckBox;
+import uk.co.nickthecoder.itchy.gui.ClassNameBox;
 import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.Container;
@@ -53,6 +54,7 @@ import uk.co.nickthecoder.itchy.gui.TableRow;
 import uk.co.nickthecoder.itchy.gui.ToggleButton;
 import uk.co.nickthecoder.itchy.gui.VerticalScroll;
 import uk.co.nickthecoder.itchy.util.AbstractProperty;
+import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.itchy.util.NinePatch;
 import uk.co.nickthecoder.itchy.util.Reversed;
 import uk.co.nickthecoder.jame.RGBA;
@@ -136,7 +138,7 @@ public class SceneDesigner implements MouseListener, KeyListener
 
     private SimpleTableModel layersTableModel;
 
-    private ComboBox behaviourClassName;
+    private ClassNameBox behaviourClassName;
 
     /**
      * When a text actor is the current actor, then this will be the TextBox that you enter the
@@ -282,7 +284,7 @@ public class SceneDesigner implements MouseListener, KeyListener
 
         this.appearanceContainer = new Container();
         VerticalScroll appearanceScroll = new VerticalScroll(this.appearanceContainer);
-        
+
         this.behaviourContainer = new Container();
         VerticalScroll behaviourScroll = new VerticalScroll(this.behaviourContainer);
 
@@ -369,7 +371,6 @@ public class SceneDesigner implements MouseListener, KeyListener
         });
         toolbar.addChild(save);
 
-
         Button test = createButton("test", "Test");
         test.addActionListener(new ActionListener() {
             @Override
@@ -379,7 +380,7 @@ public class SceneDesigner implements MouseListener, KeyListener
             }
         });
         toolbar.addChild(test);
-        
+
         Button home = createButton("center", "Center");
         home.addActionListener(new ActionListener() {
             @Override
@@ -520,7 +521,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         createAppearanceProperties();
         updateLayersTable();
     }
-    
+
     private void createActorProperties()
     {
         GridLayout grid = new GridLayout(this.propertiesContainer, 2);
@@ -535,7 +536,7 @@ public class SceneDesigner implements MouseListener, KeyListener
                 try {
                     Component component = property.createComponent(this.currentActor, true);
                     grid.addRow(property.label, component);
-    
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -550,24 +551,26 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.appearanceContainer.setLayout(grid);
 
         if (this.currentActor != null) {
-            for (AbstractProperty<Appearance, ?> property : this.currentActor.getAppearance().getProperties()) {
-                
+            for (AbstractProperty<Appearance, ?> property : this.currentActor.getAppearance()
+                .getProperties()) {
+
                 try {
-                    Component component = property.createComponent(this.currentActor.getAppearance(), true);
+                    Component component = property.createComponent(
+                        this.currentActor.getAppearance(), true);
                     grid.addRow(property.label, component);
-    
+
                     if ("pose.text".equals(property.access)) {
                         this.actorTextInput = component;
                     }
-    
+
                 } catch (Exception e) {
                     e.printStackTrace();
-                } 
-                
+                }
+
             }
         }
     }
-    
+
     private void updateLayersTable()
     {
         String layerName = this.currentActor == null ? "" : this.currentActor.getLayer().getName();
@@ -589,22 +592,25 @@ public class SceneDesigner implements MouseListener, KeyListener
 
         SceneDesignerBehaviour sdb = (SceneDesignerBehaviour) this.currentActor.getBehaviour();
 
-        this.behaviourClassName = new ComboBox(
+        this.behaviourClassName = new ClassNameBox(
+            this.editor.resources.scriptManager,
             sdb.actualBehaviour.getClassName(),
-            this.editor.game.resources.getBehaviourClassNames());
+            Behaviour.class
+            );
 
         this.behaviourClassName.addChangeListener(new ComponentChangeListener() {
 
             @Override
             public void changed()
             {
-                String value = SceneDesigner.this.behaviourClassName.getText();
+                ClassName className = SceneDesigner.this.behaviourClassName.getClassName();
                 SceneDesignerBehaviour sdb = (SceneDesignerBehaviour) SceneDesigner.this.currentActor
                     .getBehaviour();
                 try {
-                    sdb.setBehaviourClassName(SceneDesigner.this.editor.resources,value);
+                    sdb.setBehaviourClassName(SceneDesigner.this.editor.resources, className);
                     SceneDesigner.this.createBehaviourProperties(grid);
-                    SceneDesigner.this.editor.game.resources.registerBehaviourClassName(value);
+                    SceneDesigner.this.editor.game.resources
+                        .registerBehaviourClassName(className.name);
                     SceneDesigner.this.behaviourClassName.removeStyle("error");
                 } catch (Exception e) {
                     SceneDesigner.this.behaviourClassName.addStyle("error");
@@ -856,7 +862,6 @@ public class SceneDesigner implements MouseListener, KeyListener
 
             int moveAmount = Itchy.isShiftDown() ? 10 : 1;
 
-            
             if (event.symbol == Keys.PAGEUP) {
                 this.onActorUp();
                 return true;
@@ -892,7 +897,7 @@ public class SceneDesigner implements MouseListener, KeyListener
             } else if (event.symbol == Keys.F8) {
                 this.onEditText();
                 return true;
-    
+
             } else if (event.symbol == Keys.F12) {
                 this.onTest();
                 return true;
@@ -997,15 +1002,15 @@ public class SceneDesigner implements MouseListener, KeyListener
             Actor actor;
 
             SceneDesignerBehaviour behaviour = new SceneDesignerBehaviour();
-            String behaviourClassName;
+            ClassName behaviourClassName;
 
             if (this.stampActor.getAppearance().getPose() instanceof TextPose) {
                 actor = new Actor(this.stampActor.getAppearance().getPose());
-                if ( this.stampActor.getCostume() != null ) {
+                if (this.stampActor.getCostume() != null) {
                     actor.setCostume(this.stampActor.getCostume());
-                    behaviourClassName = stampActor.getCostume().behaviourClassName;
+                    behaviourClassName = this.stampActor.getCostume().behaviourClassName;
                 } else {
-                    behaviourClassName = NullBehaviour.class.getName();
+                    behaviourClassName = new ClassName(NullBehaviour.class.getName());
                 }
 
             } else {
@@ -1030,10 +1035,10 @@ public class SceneDesigner implements MouseListener, KeyListener
             if (!Itchy.isShiftDown()) {
                 this.setMode(MODE_SELECT);
                 this.selectActor(actor);
-                
+
                 this.onEditText();
             }
-            
+
             return true;
         }
 
@@ -1285,24 +1290,24 @@ public class SceneDesigner implements MouseListener, KeyListener
     private void onEditText()
     {
         if ((this.mode == MODE_SELECT) && (this.currentActor != null)) {
-            if (this.actorTextInput != null ) {
+            if (this.actorTextInput != null) {
                 this.actorTextInput.focus();
             }
         }
     }
-    
+
     private void onSave()
     {
         Scene scene = new Scene();
-        
+
         // TODO - Replace this with SceneProperties when they are implemented.
         // And then remove that from the ScenesEditor?
         try {
-            scene.sceneBehaviourName = sceneResource.getScene().sceneBehaviourName;
+            scene.sceneBehaviourName = this.sceneResource.getScene().sceneBehaviourName;
         } catch (Exception e) {
             // Do nothing
         }
-        
+
         for (Layer child : this.designLayers.getChildren()) {
             ActorsLayer layer = (ActorsLayer) child;
 
@@ -1322,7 +1327,7 @@ public class SceneDesigner implements MouseListener, KeyListener
             MessageBox.show("Error", "Save failed.");
         }
     }
-    
+
     private void onTest()
     {
         this.editor.game.testScene(this.sceneResource.name);
@@ -1546,16 +1551,18 @@ public class SceneDesigner implements MouseListener, KeyListener
             if (this.target.getAppearance().getPose() instanceof TextPose) {
                 TextPose pose = (TextPose) this.target.getAppearance().getPose();
                 double newFontSize = this.startScale * scale;
-                if ( newFontSize < 5 ) {
+                if (newFontSize < 5) {
                     super.moveBy(-dx, -dy);
                     return;
                 }
                 pose.setFontSize(newFontSize);
             } else {
                 double newScale = this.startScale * scale;
-                double width = getActor().getAppearance().getPose().getSurface().getWidth() * newScale;
-                double height = getActor().getAppearance().getPose().getSurface().getHeight() * newScale;
-                if ((width < 4) || (height <4) ) {
+                double width = getActor().getAppearance().getPose().getSurface().getWidth() *
+                    newScale;
+                double height = getActor().getAppearance().getPose().getSurface().getHeight() *
+                    newScale;
+                if ((width < 4) || (height < 4)) {
                     super.moveBy(-dx, -dy);
                     return;
                 }
@@ -1590,7 +1597,8 @@ public class SceneDesigner implements MouseListener, KeyListener
 
             if (this.target != null) {
                 this.getActor().moveTo(this.target);
-                this.getActor().getAppearance().setDirection(this.target.getAppearance().getDirection());
+                this.getActor().getAppearance()
+                    .setDirection(this.target.getAppearance().getDirection());
                 this.getActor().moveForward(30);
             }
         }

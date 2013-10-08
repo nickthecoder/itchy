@@ -9,6 +9,7 @@ import java.util.HashMap;
 
 import uk.co.nickthecoder.itchy.editor.SceneDesignerBehaviour;
 import uk.co.nickthecoder.itchy.util.AbstractProperty;
+import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.itchy.util.StringUtils;
 import uk.co.nickthecoder.jame.RGBA;
 
@@ -30,14 +31,14 @@ public abstract class SceneActor implements Cloneable
     public int y;
 
     double direction;
-    
+
     double alpha;
 
     double scale;
 
     public String startEvent = "default";
 
-    public String behaviourClassName;
+    public ClassName behaviourClassName;
 
     public RGBA colorize;
 
@@ -63,7 +64,7 @@ public abstract class SceneActor implements Cloneable
             .getAppearance().getColorize());
         this.activationDelay = actor.getActivationDelay();
         this.startEvent = actor.getStartEvent();
-        
+
         Behaviour actualBehaviour = ((SceneDesignerBehaviour) actor.getBehaviour()).actualBehaviour;
 
         for (AbstractProperty<Behaviour, ?> property : actualBehaviour.getProperties()) {
@@ -83,12 +84,12 @@ public abstract class SceneActor implements Cloneable
         actor.getAppearance().setDirection(this.direction);
         actor.getAppearance().setScale(this.scale);
         actor.getAppearance().setColorize(this.colorize == null ? null : new RGBA(this.colorize));
-        String behaviourClassName = this.behaviourClassName;
+        ClassName behaviourClassName = this.behaviourClassName;
         actor.setActivationDelay(this.activationDelay);
 
         if (behaviourClassName == null) {
             if (actor.getCostume() == null) {
-                behaviourClassName = NullBehaviour.class.getName();
+                behaviourClassName = new ClassName(NullBehaviour.class.getName());
             } else {
                 behaviourClassName = actor.getCostume().behaviourClassName;
             }
@@ -165,7 +166,7 @@ public abstract class SceneActor implements Cloneable
     @Override
     public boolean equals( Object obj )
     {
-        if (! (obj instanceof SceneActor)) {
+        if (!(obj instanceof SceneActor)) {
             return false;
         }
         SceneActor other = (SceneActor) obj;
@@ -194,7 +195,7 @@ public abstract class SceneActor implements Cloneable
         if (!StringUtils.equals(this.colorize, other.colorize)) {
             return false;
         }
-        
+
         return this.customProperties.equals(other.customProperties);
     }
 

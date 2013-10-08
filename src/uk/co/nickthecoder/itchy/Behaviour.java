@@ -14,20 +14,21 @@ import javax.script.ScriptException;
 
 import uk.co.nickthecoder.itchy.animation.Animation;
 import uk.co.nickthecoder.itchy.util.AbstractProperty;
+import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.itchy.util.Tag;
 
 public abstract class Behaviour implements MessageListener, Cloneable
 {
     private final static HashMap<Class<?>, List<AbstractProperty<Behaviour, ?>>> allProperties = new HashMap<Class<?>, List<AbstractProperty<Behaviour, ?>>>();
 
-    public static boolean isValidClassName( Resources resources, String className )
+    public static boolean isValidClassName( Resources resources, ClassName className )
     {
         if (resources.scriptManager.isValidScript(className)) {
             return true;
         }
         try {
             @SuppressWarnings({ "unchecked", "unused" })
-            Class<Behaviour> klass = (Class<Behaviour>) Class.forName(className);
+            Class<Behaviour> klass = (Class<Behaviour>) Class.forName(className.name);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -36,23 +37,24 @@ public abstract class Behaviour implements MessageListener, Cloneable
 
         return true;
     }
-    
-    public String getClassName()
+
+    public ClassName getClassName()
     {
-        return this.getClass().getName();
+        return new ClassName(this.getClass().getName());
     }
 
-    public static Behaviour createBehaviour( Resources resources, String className )
-        throws InstantiationException, IllegalAccessException, ScriptException, ClassNotFoundException
-    {        
+    public static Behaviour createBehaviour( Resources resources, ClassName className )
+        throws InstantiationException, IllegalAccessException, ScriptException,
+        ClassNotFoundException
+    {
         if (resources.scriptManager.isValidScript(className)) {
             return resources.scriptManager.createBehaviour(className);
         } else {
-            Class<?> klass = Class.forName(className);
+            Class<?> klass = Class.forName(className.name);
             return (Behaviour) klass.newInstance();
         }
     }
-    
+
     private Actor actor;
 
     public CollisionStrategy collisionStrategy = BruteForceCollisionStrategy.singleton;
@@ -70,10 +72,10 @@ public abstract class Behaviour implements MessageListener, Cloneable
 
         return actor;
     }
-    
+
     /**
-     * Called when the behaviour is first attached to its actor. Override this method to perform
-     * one time initialisation.
+     * Called when the behaviour is first attached to its actor. Override this method to perform one
+     * time initialisation.
      */
     public void init()
     {
@@ -118,19 +120,19 @@ public abstract class Behaviour implements MessageListener, Cloneable
 
     public void attach( Actor actor )
     {
-        assert ((this.getActor() == null) || ( this.getActor() == actor));
+        assert ((this.getActor() == null) || (this.getActor() == actor));
         Actor oldActor = this.actor;
-        
+
         this.actor = actor;
         this.actor.addTag(this.getClass().getName()); // TODO Remove this.
-        
+
         if (oldActor == null) {
             this.init();
         }
-        
+
         Tag tags = this.getClass().getAnnotation(Tag.class);
-        if ( tags !=null) {
-            for (String name : tags.names() ) {
+        if (tags != null) {
+            for (String name : tags.names()) {
                 getActor().addTag(name);
             }
         }
@@ -141,10 +143,10 @@ public abstract class Behaviour implements MessageListener, Cloneable
     {
         this.getActor().removeTag(this.getClass().getName()); // TODO Remove this
         onDetach();
-        
+
         Tag tags = this.getClass().getAnnotation(Tag.class);
-        if ( tags !=null) {
-            for (String name : tags.names() ) {
+        if (tags != null) {
+            for (String name : tags.names()) {
                 getActor().removeTag(name);
             }
         }
@@ -154,7 +156,6 @@ public abstract class Behaviour implements MessageListener, Cloneable
     {
         return this.actor;
     }
-
 
     public void resetCollisionStrategy()
     {
@@ -182,18 +183,17 @@ public abstract class Behaviour implements MessageListener, Cloneable
      * </pre>
      * @return The set of all touching Actors with matching behaviours.
      */
-    //TODO Remove this
+    // TODO Remove this
     public Set<Actor> touching( Class<Behaviour> klass )
     {
         return touching(klass.getName());
     }
 
-    
     public Set<Actor> touching( String tag )
     {
-        return this.collisionStrategy.touching(this.getActor(), new String[] { tag }, null );
+        return this.collisionStrategy.touching(this.getActor(), new String[] { tag }, null);
     }
-    
+
     public Set<Actor> touching( String... tags )
     {
         return this.collisionStrategy.touching(this.getActor(), tags, null);
@@ -204,22 +204,20 @@ public abstract class Behaviour implements MessageListener, Cloneable
         return this.collisionStrategy.touching(this.getActor(), including, excluding);
     }
 
-
     public Set<Actor> overlapping( String tag )
     {
-        return this.collisionStrategy.overlapping(this.getActor(), new String[] { tag }, null );
+        return this.collisionStrategy.overlapping(this.getActor(), new String[] { tag }, null);
     }
-    
+
     public Set<Actor> overlapping( String... tags )
     {
         return this.collisionStrategy.overlapping(this.getActor(), tags, null);
     }
-    
+
     public Set<Actor> overlapping( String[] including, String[] excluding )
     {
         return this.collisionStrategy.overlapping(this.getActor(), including, excluding);
     }
-
 
     public void play( String soundName )
     {
@@ -305,18 +303,19 @@ public abstract class Behaviour implements MessageListener, Cloneable
 
     public abstract void tick();
 
+    @Override
     public Behaviour clone()
     {
         try {
             Behaviour result = (Behaviour) super.clone();
             result.actor = null;
-            
+
             return result;
-            
+
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
             return null;
         }
     }
-    
+
 }

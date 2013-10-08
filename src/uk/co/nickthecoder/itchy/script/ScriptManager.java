@@ -6,6 +6,7 @@
 package uk.co.nickthecoder.itchy.script;
 
 import java.io.File;
+import java.lang.reflect.Constructor;
 import java.util.HashMap;
 
 import javax.script.ScriptException;
@@ -14,15 +15,16 @@ import uk.co.nickthecoder.itchy.Behaviour;
 import uk.co.nickthecoder.itchy.Game;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.SceneBehaviour;
+import uk.co.nickthecoder.itchy.util.ClassName;
 
 /**
  * Allows games to use script languages, such as javascript, for their game logic.
- *
- * Subclasses of Behaviour, SceneBehaviour, CostumeProperties and Game can all be coded
- * in a scripting language.
  * 
- * All scripts are read from a "scripts" folder relative to the game's resources file.
- * (i.e. resources/MY_GAME/scripts/). No further sub-directories are supported.
+ * Subclasses of Behaviour, SceneBehaviour, CostumeProperties and Game can all be coded in a
+ * scripting language.
+ * 
+ * All scripts are read from a "scripts" folder relative to the game's resources file. (i.e.
+ * resources/MY_GAME/scripts/). No further sub-directories are supported.
  * 
  * At present, only Javascript is supported, but it should be simple to add others by subclassing
  * ScriptLanguage and calling ScriptManager.registerLanguage.
@@ -31,47 +33,57 @@ public class ScriptManager
 {
     public Resources resources;
 
-    private HashMap<String, ScriptLanguage> languages;
+    private static HashMap<String, Class<ScriptLanguage>> languageClassMap = new HashMap<String, Class<ScriptLanguage>>();
 
+    private HashMap<String, ScriptLanguage> languages = new HashMap<String, ScriptLanguage>();
+
+    @SuppressWarnings("unchecked")
     public ScriptManager( Resources resources )
     {
         this.resources = resources;
-        this.languages = new HashMap<String, ScriptLanguage>();
 
-        registerLanguage( new JavascriptLanguage(this));
+        registerLanguage("js",
+            (Class<ScriptLanguage>) (JavascriptLanguage.class.asSubclass(ScriptLanguage.class)));
     }
 
-    public void registerLanguage( ScriptLanguage language )
+    public static void registerLanguage( String extension, Class<ScriptLanguage> class1 )
     {
-        this.languages.put(language.getExtension(), language);
-    }
-
-    public File getScript( String filename )
-    {
-        File relative = new File(new File("scripts"), filename);
-        File absolute = this.resources.resolveFile(relative);
-        return absolute;
+        languageClassMap.put(extension, class1);
     }
 
     public ScriptLanguage getLanguage( String extension )
     {
-        return this.languages.get(extension);
+        ScriptLanguage result = this.languages.get(extension);
+        if (result == null) {
+
+            Class<ScriptLanguage> klass = languageClassMap.get(extension);
+            try {
+                Constructor<ScriptLanguage> constructor = klass.getConstructor(ScriptManager.class);
+                result = constructor.newInstance(this);
+                this.languages.put(extension, result);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        return result;
     }
 
     /**
      * Strips the file extension from the filename. (eg from Player.js to Player).
      */
-    public String getName( String filename )
+    public static String getName( ClassName className )
     {
-        int dot = filename.lastIndexOf('.');
+        int dot = className.name.lastIndexOf('.');
         if (dot >= 0) {
-            return filename.substring(0, dot);
+            return className.name.substring(0, dot);
         } else {
-            return filename;
+            return className.name;
         }
     }
 
-    public String getExtension( String filename )
+    public static String getExtension( String filename )
     {
         int dot = filename.lastIndexOf('.');
         if (dot >= 0) {
@@ -81,11 +93,35 @@ public class ScriptManager
         }
     }
 
-    public boolean isValidScript( String filename )
+    public static boolean isScript( ClassName className )
+    {
+        String extension = getExtension(className.name);
+
+        for (String registeredExtension : languageClassMap.keySet()) {
+            if (extension.equals(registeredExtension)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public File getScript( String filename )
+    {
+        File relative = new File(new File("scripts"), filename);
+        File absolute = this.resources.resolveFile(relative);
+        return absolute;
+    }
+
+    public boolean isValidScript( ClassName className )
+    {
+        return isValidScript(className.name);
+    }
+    
+    public boolean isValidScript( String name )
     {
 
-        if (filename.endsWith(".js")) {
-            if (getScript(filename).exists()) {
+        if (name.endsWith(".js")) {
+            if (getScript(name).exists()) {
                 return true;
             }
         }
@@ -97,36 +133,39 @@ public class ScriptManager
         throws ScriptException
     {
         ScriptLanguage language = getLanguage(getExtension(filename));
-        language.loadScript( filename );
+        language.loadScript(filename);
     }
 
-    
-    
-    public Game createGame( String filename )
-        throws ScriptException
+    public boolean createScript( String templateName, ClassName className )
     {
-        ScriptLanguage language = getLanguage(getExtension(filename));
-        language.loadScript(filename);
-
-        return language.createGame(this.resources, filename);
+        ScriptLanguage language = getLanguage(getExtension(className.name));
+        return language.createScript(templateName, className);        
     }
     
-
-    public Behaviour createBehaviour( String filename )
+    public Game createGame( ClassName className )
         throws ScriptException
     {
-        ScriptLanguage language = getLanguage(getExtension(filename));
-        language.loadScript(filename);
+        ScriptLanguage language = getLanguage(getExtension(className.name));
+        language.loadScript(className.name);
 
-        return language.createBehaviour(filename);
+        return language.createGame(this.resources, className);
     }
-    
-    public SceneBehaviour createSceneBehaviour( String filename )
+
+    public Behaviour createBehaviour( ClassName className )
         throws ScriptException
     {
-        ScriptLanguage language = getLanguage(getExtension(filename));
-        language.loadScript(filename);
+        ScriptLanguage language = getLanguage(getExtension(className.name));
+        language.loadScript(className.name);
 
-        return language.createSceneBehaviour(filename);
+        return language.createBehaviour(className);
+    }
+
+    public SceneBehaviour createSceneBehaviour( ClassName className )
+        throws ScriptException
+    {
+        ScriptLanguage language = getLanguage(getExtension(className.name));
+        language.loadScript(className.name);
+
+        return language.createSceneBehaviour(className);
     }
 }

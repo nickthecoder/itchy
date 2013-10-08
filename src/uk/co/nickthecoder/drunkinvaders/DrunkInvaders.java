@@ -5,15 +5,14 @@
  ******************************************************************************/
 package uk.co.nickthecoder.drunkinvaders;
 
-import java.io.File;
 import java.text.DecimalFormat;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.ActorCollisionStrategy;
 import uk.co.nickthecoder.itchy.Game;
 import uk.co.nickthecoder.itchy.Itchy;
+import uk.co.nickthecoder.itchy.Launcher;
 import uk.co.nickthecoder.itchy.MultiLineTextPose;
-import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.ScrollableLayer;
 import uk.co.nickthecoder.itchy.animation.Animation;
 import uk.co.nickthecoder.itchy.extras.FilmTransition;
@@ -26,8 +25,6 @@ import uk.co.nickthecoder.jame.event.Keys;
 
 public class DrunkInvaders extends Game
 {
-    public static final File RESOURCES = new File("resources/drunkInvaders/drunkInvaders.xml");
-
     public static final int NEIGHBOURHOOD_SQUARE_SIZE = 60;
 
     public static DrunkInvaders game;
@@ -59,6 +56,7 @@ public class DrunkInvaders extends Game
     {
         super();
 
+        game = this;
         this.neighbourhood = new StandardNeighbourhood(NEIGHBOURHOOD_SQUARE_SIZE);
 
     }
@@ -245,12 +243,7 @@ public class DrunkInvaders extends Game
 
     public static void main( String argv[] ) throws Exception
     {
-        Resources resources = new Resources();
-        resources.load(RESOURCES);
-
-        DrunkInvaders.game = new DrunkInvaders();
-        DrunkInvaders.game.resources = resources;
-        DrunkInvaders.game.runFromMain(argv);
+        Launcher.main(new String[] { "drunkInvaders" });
     }
 
     @Override
