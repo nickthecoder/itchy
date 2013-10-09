@@ -12,7 +12,13 @@ ${NAME} = Class({
     tick: function() {
         // TODO Called 50 times a second, and is where all the good stuff belongs!
     }
+    
+    // Other methods include :
+    // onAttach, onDetach, onActivat, onDeactivate, onKill
 });
 // TODO Define each editable property like so 
-// Behaviour.declareProperty("${NAME}","myExample", "My Example", 4.5);
+// BehaviourScript.addProperty("${NAME}", "exampleInteger", Integer, "Example Integer");
+// BehaviourScript.addProperty("${NAME}", "exampleDouble", Double, "Example Double");
+// BehaviourScript.addProperty("${NAME}", "exampleString", String, "Example String");
+// BehaviourScript.addProperty("${NAME}", "exampleColour", RGBA, "Example Colour");
 

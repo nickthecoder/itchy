@@ -7,7 +7,9 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
-public interface SceneBehaviour extends MouseListener, KeyListener, MessageListener
+import uk.co.nickthecoder.itchy.util.PropertySubject;
+
+public interface SceneBehaviour extends MouseListener, KeyListener, MessageListener, PropertySubject<SceneBehaviour>
 {
     public void onActivate();
 

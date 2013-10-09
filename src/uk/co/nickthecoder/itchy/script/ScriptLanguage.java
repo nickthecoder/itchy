@@ -85,9 +85,9 @@ public abstract class ScriptLanguage
     {
         HashMap<String, String> subs = new HashMap<String, String>();
         subs.put("NAME", className.name);
-        
+
         try {
-            createFromTemplate( className, templateName, subs );
+            createFromTemplate(className, templateName, subs);
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -95,15 +95,17 @@ public abstract class ScriptLanguage
         }
     }
 
-    void createFromTemplate( ClassName className, String templateName, Map<String, String> substitutions )
+    void createFromTemplate( ClassName className, String templateName,
+        Map<String, String> substitutions )
         throws IOException
     {
         File file = this.manager.getScript(className.name);
 
-        String templateFilename = ".." + File.separator + "templates" + File.separator + getExtension() +
+        String templateFilename = ".." + File.separator + "templates" + File.separator +
+            getExtension() +
             File.separator + templateName + "." + this.getExtension();
-        
-        File templateFile = new File( this.manager.resources.resolveFilename( templateFilename ) );
+
+        File templateFile = new File(this.manager.resources.resolveFilename(templateFilename));
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(
             templateFile)));
@@ -201,14 +203,45 @@ public abstract class ScriptLanguage
     public abstract Object putProperty( Object inst, String name, Object value )
         throws ScriptException;
 
+    // ===== GAME =====
+
     public abstract Game createGame( Resources resources, ClassName className )
+        throws ScriptException;
+
+    public abstract String getInitialSceneName( ScriptedGame game )
         throws ScriptException;
 
     public abstract void onActivate( ScriptedGame game )
         throws ScriptException;
 
-    public abstract String getInitialSceneName( ScriptedGame game )
+    public abstract void onDeactivate( ScriptedGame game )
         throws ScriptException;
+
+    public abstract boolean onQuit( ScriptedGame game )
+        throws ScriptException;
+
+    public abstract boolean onKeyDown( ScriptedGame game, KeyboardEvent ke )
+        throws ScriptException;
+
+    public abstract boolean onKeyUp( ScriptedGame game, KeyboardEvent ke )
+        throws ScriptException;
+
+    public abstract boolean onMouseDown( ScriptedGame game, MouseButtonEvent mbe )
+        throws ScriptException;
+
+    public abstract boolean onMouseUp( ScriptedGame game, MouseButtonEvent mbe )
+        throws ScriptException;
+
+    public abstract boolean onMouseMove( ScriptedGame game, MouseMotionEvent mme )
+        throws ScriptException;
+
+    public abstract void onMessage( ScriptedGame game, String message )
+        throws ScriptException;
+
+    public abstract void tick( ScriptedGame game )
+        throws ScriptException;
+
+    // ===== BEHAVIOUR =====
 
     public abstract Behaviour createBehaviour( ClassName className )
         throws ScriptException;
@@ -233,6 +266,8 @@ public abstract class ScriptLanguage
 
     public abstract void tick( ScriptedBehaviour behaviour )
         throws ScriptException;
+
+    // ===== SCENE BEHAVIOUR =====
 
     public abstract SceneBehaviour createSceneBehaviour( ClassName className )
         throws ScriptException;

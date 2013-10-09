@@ -7,6 +7,7 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
+import uk.co.nickthecoder.itchy.util.AbstractProperty;
 import uk.co.nickthecoder.itchy.util.XMLException;
 import uk.co.nickthecoder.itchy.util.XMLWriter;
 import uk.co.nickthecoder.jame.RGBA;
@@ -48,6 +49,8 @@ public class SceneWriter extends XMLWriter
         if ( ! NullSceneBehaviour.class.getName().equals(this.scene.sceneBehaviourName)) {
             this.attribute("behaviour", this.scene.sceneBehaviourName.name);
         }
+        
+        writeSceneBehaviourProperties();
 
         for ( Scene.SceneLayer sceneLayer : this.scene.getSceneLayers() ) {
             
@@ -65,6 +68,25 @@ public class SceneWriter extends XMLWriter
         this.endTag("scene");
     }
 
+    private void writeSceneBehaviourProperties()
+        throws XMLException
+    {
+            
+        this.beginTag("properties");
+        for ( AbstractProperty<SceneBehaviour,?> property : this.scene.sceneBehaviour.getProperties()) {
+            try {
+                this.beginTag("property");
+                this.attribute("name", property.key);
+                this.attribute("value", property.getStringValue(this.scene.sceneBehaviour));
+                this.endTag("property");
+            } catch (Exception e) {
+                throw new XMLException("Failed to write sceneBehaviour property : " + property.key);
+            }
+        }
+         
+        this.endTag("properties");
+    }
+    
     private void writeActors(Scene.SceneLayer sceneLayer) throws XMLException
     {
         for (SceneActor sceneActor : sceneLayer.getSceneActors()) {

@@ -45,11 +45,9 @@ public class ScriptedBehaviour extends Behaviour
         return result;
     }
 
-    public static void declareBehaviourProperty( 
-        String behaviourName, String propertyName, String label, Object defaultValue, Class<?> klass )
+    public static void addProperty( 
+        String behaviourName, String propertyName, String label, Class<?> klass )
     {
-        System.out.println( "Declaring property for " + behaviourName + " propName : " + propertyName + " Lable : " + label + " defaultValue : " + defaultValue + " Class : " + klass );
-
         List<AbstractProperty<Behaviour, ?>> properties = allProperties.get(behaviourName);
         if (properties == null) {
             properties = new ArrayList<AbstractProperty<Behaviour, ?>>();
@@ -58,7 +56,6 @@ public class ScriptedBehaviour extends Behaviour
         
         AbstractProperty<Behaviour,?> property = AbstractProperty.createProperty(
             klass, "propertyValues." + propertyName, propertyName, label, true, false, true);
-        System.out.println( "Created property " + property );
         if ( property != null) {
             properties.add(property);
         }

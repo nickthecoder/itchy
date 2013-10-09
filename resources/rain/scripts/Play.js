@@ -5,11 +5,17 @@ Play = new Class({
     init: function() {
         this.player = null;
         this.speed = 5;
+        this.speedUpAfter = 10;
         this.score = 0;
-        this.highScore = game.getPreferences().getInt( game.getSceneName() + ".highScore", 0);
-        this.levelUp = itchy.extras.Timer.createTimerSeconds( 10 );
+        this.maxSpeed = 15;
     },
 
+    onActivate: function() {
+        this.highScore = game.getPreferences().getInt( game.getSceneName() + ".highScore", 0);
+        this.speedUp = itchy.extras.Timer.createTimerSeconds( this.speedUpAfter );
+        stdout.println("Start Speed " + this.speed + " Max Speed " + this.maxSpeed + " Speed up after " + this.speedUpAfter );
+    },
+    
     tick: function() {
     
         if (this.isPlaying()) {
@@ -19,13 +25,13 @@ Play = new Class({
             }       
         }
         
-        if (this.levelUp.isFinished()) {
+        if (this.speedUp.isFinished()) {
             this.speed += 1;
-            if (this.speed > 15 ) {
-                this.speed = 15;
+            if (this.speed > this.maxSpeed ) {
+                this.speed = this.maxSpeed;
             }
             stdout.println("Increase Speed to " + this.speed );
-            this.levelUp.reset();
+            this.speedUp.reset();
         }
     },
     
@@ -51,4 +57,7 @@ Play = new Class({
 
     }
 });
+SceneBehaviourScript.addProperty("Play", "speed", Integer, "Speed");
+SceneBehaviourScript.addProperty("Play", "maxSpeed", Integer, "Maximum Speed");
+SceneBehaviourScript.addProperty("Play", "speedUpAfter", Integer, "Speed Up After");
 

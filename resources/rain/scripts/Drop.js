@@ -4,7 +4,6 @@ Drop = Class({
     init: function() {
         this.distance = 600;
         this.speed = sceneBehaviourScript.speed;
-        stdout.println( "Dump of Drop : " + Util.dump(this,1) );
     },
 
     onAttach: function() {
@@ -30,5 +29,5 @@ Drop = Class({
         }
     }
 });
-BehaviourScript.integerProperty("Drop","distance", "Distance", 600);
+BehaviourScript.addProperty("Drop", "distance", Integer, "Distance", 600);
 

@@ -13,9 +13,9 @@ public class IntegerProperty<S> extends AbstractProperty<S, Integer>
 {
     public IntegerProperty( String label, String access, String key )
     {
-        super( label, access, key );
+        super(label, access, key);
     }
-    
+
     public IntegerProperty( String label, String access )
     {
         super(label, access);
@@ -45,18 +45,26 @@ public class IntegerProperty<S> extends AbstractProperty<S, Integer>
         }
         return box;
     }
-    
+
     /**
      * Do don't use the super class, just in case the type of the property value isn't an Integer
      * (which would cause a cast exception). This could happen if the property was being retrieved
-     * from a dynamically typed language, where we don't directly control attribute types. 
+     * from a dynamically typed language, where we don't directly control attribute types.
      */
     @Override
     public Integer getValue( S subject )
         throws Exception
     {
-        Number result = (Number) BeanHelper.getProperty(subject, this.access);
-        return result.intValue();
+        Object value = BeanHelper.getProperty(subject, this.access);
+        try {
+            Number result = (Number) value;
+            return result.intValue();
+        } catch (Exception e) {
+            System.err.println("Expected Integer but found : " + value + " : " +
+                value.getClass().getName());
+            return Integer.parseInt(value.toString());
+        }
+
     }
 
     @Override

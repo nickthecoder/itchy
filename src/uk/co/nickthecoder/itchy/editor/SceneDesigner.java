@@ -25,6 +25,7 @@ import uk.co.nickthecoder.itchy.NullBehaviour;
 import uk.co.nickthecoder.itchy.Pose;
 import uk.co.nickthecoder.itchy.Scene;
 import uk.co.nickthecoder.itchy.SceneActor;
+import uk.co.nickthecoder.itchy.SceneBehaviour;
 import uk.co.nickthecoder.itchy.SceneResource;
 import uk.co.nickthecoder.itchy.ScrollableLayer;
 import uk.co.nickthecoder.itchy.TextPose;
@@ -51,7 +52,9 @@ import uk.co.nickthecoder.itchy.gui.TableListener;
 import uk.co.nickthecoder.itchy.gui.TableModelColumn;
 import uk.co.nickthecoder.itchy.gui.TableModelRow;
 import uk.co.nickthecoder.itchy.gui.TableRow;
+import uk.co.nickthecoder.itchy.gui.TextBox;
 import uk.co.nickthecoder.itchy.gui.ToggleButton;
+import uk.co.nickthecoder.itchy.gui.VerticalLayout;
 import uk.co.nickthecoder.itchy.gui.VerticalScroll;
 import uk.co.nickthecoder.itchy.util.AbstractProperty;
 import uk.co.nickthecoder.itchy.util.ClassName;
@@ -116,6 +119,10 @@ public class SceneDesigner implements MouseListener, KeyListener
     private Container appearanceContainer;
 
     private Container layersContainer;
+
+    private Container sceneDetailsContainer;
+
+    private Container scenePropertiesContainer;
 
     private int mode = MODE_SELECT;
 
@@ -291,9 +298,20 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.layersContainer = new Container();
         VerticalScroll layersScroll = new VerticalScroll(this.layersContainer);
 
+        this.sceneDetailsContainer = new Container();
+        this.scenePropertiesContainer = new Container();
+        this.createSceneDetails();
+        this.createSceneBehaviourProperties();
+        Container sceneDetails1 = new Container();
+        sceneDetails1.setLayout(new VerticalLayout());
+        sceneDetails1.addChild(this.sceneDetailsContainer);
+        sceneDetails1.addChild(this.scenePropertiesContainer);
+        VerticalScroll sceneDetailsScroll = new VerticalScroll(sceneDetails1);
+
         this.createLayersTable();
 
         this.toolboxNotebook = new Notebook();
+        this.toolboxNotebook.addPage(new Label("Scene"), sceneDetailsScroll);
         this.toolboxNotebook.addPage(new Label("Costumes"), costumesScroll);
         this.toolboxNotebook.addPage(new Label("Actor"), propertiesScroll);
         this.toolboxNotebook.addPage(new Label("Appearance"), appearanceScroll);
@@ -542,6 +560,91 @@ public class SceneDesigner implements MouseListener, KeyListener
                 }
             }
         }
+    }
+
+    private TextBox sceneResourceName;
+    private ClassNameBox sceneBehaviourName;
+    private CheckBox checkBoxShowMouse;
+
+    private void createSceneDetails()
+    {
+        final GridLayout grid = new GridLayout(this.sceneDetailsContainer, 2);
+        this.sceneDetailsContainer.clear();
+        this.sceneDetailsContainer.setLayout(grid);
+
+        this.sceneResourceName = new TextBox(this.sceneResource.getName());
+        grid.addRow(new Label("Name"), this.sceneResourceName);
+        // TODO add a "Rename" button.
+
+        this.sceneBehaviourName = new ClassNameBox(
+            this.editor.resources.scriptManager,
+            this.scene.sceneBehaviourName,
+            SceneBehaviour.class);
+
+        this.sceneBehaviourName.addChangeListener(new ComponentChangeListener() {
+
+            @Override
+            public void changed()
+            {
+                ClassNameBox box = SceneDesigner.this.sceneBehaviourName;
+                String value = box.getClassName().name;
+                boolean ok = SceneDesigner.this.editor.game.resources
+                    .registerSceneBehaviourClassName(value);
+
+                box.addStyle("error", !ok);
+                if (ok) {
+                    SceneDesigner.this.scene.sceneBehaviourName = box.getClassName();
+                    try {
+                        SceneDesigner.this.scene.sceneBehaviour =
+                            SceneDesigner.this.scene.createSceneBehaviour(
+                                SceneDesigner.this.editor.resources
+                            );
+                        
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    createSceneBehaviourProperties();
+                }
+            }
+        });
+
+        grid.addRow("Scene Behaviour", this.sceneBehaviourName);
+
+        this.checkBoxShowMouse = new CheckBox(this.scene.showMouse);
+        grid.addRow("Show Mouse", this.checkBoxShowMouse);
+
+        this.checkBoxShowMouse.addChangeListener(new ComponentChangeListener() {
+
+            @Override
+            public void changed()
+            {
+                SceneDesigner.this.scene.showMouse =
+                    SceneDesigner.this.checkBoxShowMouse.getValue();
+            }
+        });
+
+    }
+
+    private void createSceneBehaviourProperties()
+    {
+        GridLayout grid = new GridLayout(this.scenePropertiesContainer, 2);
+        this.scenePropertiesContainer.clear();
+        this.scenePropertiesContainer.setLayout(grid);
+
+        for (AbstractProperty<SceneBehaviour, ?> property : this.scene.sceneBehaviour
+            .getProperties()) {
+
+            try {
+                Component component = property.createComponent(this.scene.sceneBehaviour, true);
+                grid.addRow(property.label, component);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+
     }
 
     private void createAppearanceProperties()
@@ -1300,13 +1403,13 @@ public class SceneDesigner implements MouseListener, KeyListener
     {
         Scene scene = new Scene();
 
-        // TODO - Replace this with SceneProperties when they are implemented.
-        // And then remove that from the ScenesEditor?
         try {
+            // TODO Change to this.scene and remove try ???
             scene.sceneBehaviourName = this.sceneResource.getScene().sceneBehaviourName;
         } catch (Exception e) {
             // Do nothing
         }
+        scene.sceneBehaviour = this.scene.sceneBehaviour;
 
         for (Layer child : this.designLayers.getChildren()) {
             ActorsLayer layer = (ActorsLayer) child;

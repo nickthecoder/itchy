@@ -20,6 +20,11 @@ ${NAME} = Class({
         // TODO Called 50 times a second.
         // Consider using a SceneBehaviour, rather than putting code here.
     }
+    
+    // Other methods include :
+    // onDeactivate, onQuit, onKeyDown, onKeyUp, onMouseDown, onMouseUp, onMouseMove, onMessage
+    // but these are rarely used because SceneBehaviour is often a better place.
 });
 
+// NOTE. You can access this object from your other scripts using the global variable : 'gameScript'.
 

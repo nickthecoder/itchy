@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.util.Iterator;
+import java.util.List;
 
 import uk.co.nickthecoder.itchy.editor.SceneDesignerBehaviour;
 import uk.co.nickthecoder.itchy.util.AbstractProperty;
@@ -53,6 +54,14 @@ public class SceneReader
         // tag.
         readLayer(sceneTag, this.scene.getDefaultSceneLayer());
 
+        this.scene.sceneBehaviour = this.scene.createSceneBehaviour(this.resources);
+        
+        for (Iterator<XMLTag> i = sceneTag.getTags("properties"); i.hasNext();) {
+            XMLTag propertiesTag = i.next();
+            this.readProperties(propertiesTag);
+        }
+        
+        
         // For new versions, the scene tag has a set of layer tags, and the layer tags have the
         // actors.
         for (Iterator<XMLTag> i = sceneTag.getTags("layer"); i.hasNext();) {
@@ -64,6 +73,36 @@ public class SceneReader
 
     }
 
+    private void readProperties( XMLTag propertiesTag )
+        throws Exception
+    {
+        List<AbstractProperty<SceneBehaviour,?>> properties = this.scene.sceneBehaviour.getProperties();
+        
+        for (Iterator<XMLTag> i = propertiesTag.getTags("property"); i.hasNext();) {
+            XMLTag propertyTag = i.next();
+            String name = propertyTag.getAttribute("name");
+            String value = propertyTag.getAttribute("value");
+            
+            AbstractProperty<SceneBehaviour,?> property = findProperty( properties, name );
+            if ( property == null) {
+                throw new Exception( "Didn't find SceneBehaviour property : " + name );
+            }
+            property.setValueByString(this.scene.sceneBehaviour, value);
+        }
+        
+    }
+    
+    private AbstractProperty<SceneBehaviour,?> findProperty(List<AbstractProperty<SceneBehaviour,?>> properties, String name )
+    {
+        for (AbstractProperty<SceneBehaviour,?> property : properties) {
+            if ( property.key.equals( name ) ) {
+                return property;
+            }
+        }
+        return null;
+    }
+
+    
     private void readLayer( XMLTag parentTag, Scene.SceneLayer sceneLayer ) throws Exception
     {
         for (Iterator<XMLTag> i = parentTag.getTags(); i.hasNext();) {

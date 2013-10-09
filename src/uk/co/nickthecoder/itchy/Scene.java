@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
+import uk.co.nickthecoder.itchy.util.AbstractProperty;
 import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.itchy.util.StringUtils;
 
@@ -19,6 +20,8 @@ public class Scene
 
     private HashMap<String, SceneLayer> layersMap;
 
+    public SceneBehaviour sceneBehaviour;
+    
     public boolean showMouse = true;
 
     public ClassName sceneBehaviourName;
@@ -29,7 +32,7 @@ public class Scene
     {
         this.sceneLayers = new ArrayList<SceneLayer>();
         this.layersMap = new HashMap<String, SceneLayer>();
-
+        
         this.createSceneLayer("default");
     }
 
@@ -130,16 +133,25 @@ public class Scene
     public SceneBehaviour createSceneBehaviour( Resources resources )
         throws Exception
     {
+        SceneBehaviour result;
+        
         if (StringUtils.isBlank(this.sceneBehaviourName)) {
-            return new NullSceneBehaviour();
+            result = new NullSceneBehaviour();
         } else {
             if (resources.scriptManager.isValidScript(this.sceneBehaviourName)) {
-                return resources.scriptManager.createSceneBehaviour(this.sceneBehaviourName);
+                result = resources.scriptManager.createSceneBehaviour(this.sceneBehaviourName);
             } else {
                 Class<?> klass = Class.forName(this.sceneBehaviourName.name);
-                return (SceneBehaviour) klass.newInstance();
+                result = (SceneBehaviour) klass.newInstance();
             }
         }
+        // Copy the sceneBehaviour properties
+        if ( this.sceneBehaviour != null ) {
+            for (AbstractProperty<SceneBehaviour, ?> property : result.getProperties()) {
+                property.setValue(result, property.getValue(this.sceneBehaviour));
+            }
+        }
+        return result;
     }
 
     public class SceneLayer

@@ -90,6 +90,13 @@ public class JavascriptLanguage extends ScriptLanguage
     }
 
     @Override
+    public String getInitialSceneName( ScriptedGame game )
+        throws ScriptException
+    {
+        return (String) this.engine.eval("gameScript.getInitialSceneName();");
+    }
+
+    @Override
     public void onActivate( ScriptedGame game )
         throws ScriptException
     {
@@ -97,10 +104,84 @@ public class JavascriptLanguage extends ScriptLanguage
     }
 
     @Override
-    public String getInitialSceneName( ScriptedGame game )
+    public void onDeactivate( ScriptedGame game )
         throws ScriptException
     {
-        return (String) this.engine.eval("gameScript.getInitialSceneName();");
+        this.engine.eval("gameScript.onActivate();");
+    }
+
+    @Override
+    public boolean onQuit( ScriptedGame game )
+        throws ScriptException
+    {
+        return (boolean) this.engine.eval("gameScript.onQuit();");
+    }
+
+    @Override
+    public boolean onKeyDown( ScriptedGame game, KeyboardEvent ke )
+        throws ScriptException
+    {
+        Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
+        bindings.put("arg", ke);
+
+        return (boolean) this.engine.eval("gameScript.onKeyDown( arg );");
+    }
+
+    @Override
+    public boolean onKeyUp( ScriptedGame game, KeyboardEvent ke )
+        throws ScriptException
+    {
+        Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
+        bindings.put("arg", ke);
+
+        return (boolean) this.engine.eval("gameScript.onKeyUp( arg );");
+    }
+
+    @Override
+    public boolean onMouseDown( ScriptedGame game, MouseButtonEvent mbe )
+        throws ScriptException
+    {
+        Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
+        bindings.put("arg", mbe);
+
+        return (boolean) this.engine.eval("gameScript.onMouseDown( arg );");
+    }
+
+    @Override
+    public boolean onMouseUp( ScriptedGame game, MouseButtonEvent mbe )
+        throws ScriptException
+    {
+        Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
+        bindings.put("arg", mbe);
+
+        return (boolean) this.engine.eval("gameScript.onMouseUp( arg );");
+    }
+
+    @Override
+    public boolean onMouseMove( ScriptedGame game, MouseMotionEvent mme )
+        throws ScriptException
+    {
+        Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
+        bindings.put("arg", mme);
+
+        return (boolean) this.engine.eval("gameScript.onMouseMove( arg );");
+    }
+
+    @Override
+    public void onMessage( ScriptedGame game, String message )
+        throws ScriptException
+    {
+        Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
+        bindings.put("arg", message);
+
+        this.engine.eval("gameScript.onMessage( arg );");
+    }
+
+    @Override
+    public void tick( ScriptedGame game )
+        throws ScriptException
+    {
+        this.engine.eval("gameScript.tick( arg );");
     }
 
     // ===== Behaviour ======

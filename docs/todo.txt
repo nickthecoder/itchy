@@ -9,8 +9,11 @@ What's Next
 ===========
 
 Allow scripts to be created from the editor.
-    use a template for each script language/class.
-    A special component for class names
+    CostumeProperies
+
+Create a 'New Game Wizard' 
+    Creates the resources/xxx and resources/xxx/xxx.xml and sub dirs fonts, scripts, scenes, sounds.
+    Maybe an example Pose and Costume too?
 
 Get Scripted Game working
     All methods

@@ -15,9 +15,10 @@ import javax.script.ScriptException;
 import uk.co.nickthecoder.itchy.animation.Animation;
 import uk.co.nickthecoder.itchy.util.AbstractProperty;
 import uk.co.nickthecoder.itchy.util.ClassName;
+import uk.co.nickthecoder.itchy.util.PropertySubject;
 import uk.co.nickthecoder.itchy.util.Tag;
 
-public abstract class Behaviour implements MessageListener, Cloneable
+public abstract class Behaviour implements MessageListener, Cloneable, PropertySubject<Behaviour>
 {
     private final static HashMap<Class<?>, List<AbstractProperty<Behaviour, ?>>> allProperties = new HashMap<Class<?>, List<AbstractProperty<Behaviour, ?>>>();
 
