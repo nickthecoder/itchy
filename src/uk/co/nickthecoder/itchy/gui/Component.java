@@ -1,9 +1,7 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0 which accompanies this
+ * distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.gui;
 
@@ -105,9 +103,9 @@ public abstract class Component implements Focusable
         return this.styles;
     }
 
-    public void addStyle( String style, boolean test)
+    public void addStyle( String style, boolean test )
     {
-        if ( test) {
+        if (test) {
             this.addStyle(style);
         } else {
             this.removeStyle(style);
@@ -129,7 +127,7 @@ public abstract class Component implements Focusable
             this.reStyle();
         }
     }
-    
+
     public void reStyle()
     {
         try {
@@ -146,24 +144,26 @@ public abstract class Component implements Focusable
     {
         return this.parent;
     }
-    
+
     public void remove()
     {
-        if ( this.parent != null) {
+        if (this.parent != null) {
             this.getParent().removeChild(this);
         }
     }
 
+    @Override
     public boolean onKeyDown( KeyboardEvent ke )
     {
         return false;
     }
 
-    public boolean onKeyUp( KeyboardEvent ke)
+    @Override
+    public boolean onKeyUp( KeyboardEvent ke )
     {
         return false;
     }
-    
+
     public boolean canFocus()
     {
         return this.focusable;
@@ -176,7 +176,8 @@ public abstract class Component implements Focusable
             root.setFocus(this);
         }
     }
-    
+
+    @Override
     public void lostFocus()
     {
         RootContainer root = this.getRoot();
@@ -344,15 +345,16 @@ public abstract class Component implements Focusable
         return this.font;
     }
 
-    
     private boolean overrideFontRule;
+
     void setFontFromRule( Font font )
     {
-        if (!overrideFontRule) {
+        if (!this.overrideFontRule) {
             setFont(font);
-            overrideFontRule = false;
+            this.overrideFontRule = false;
         }
     }
+
     public void setFont( Font font )
     {
         if (this.font != font) {
@@ -361,7 +363,7 @@ public abstract class Component implements Focusable
                 this.parent.forceLayout();
             }
         }
-        overrideFontRule = true;
+        this.overrideFontRule = true;
     }
 
     public int getFontSize()
@@ -551,7 +553,8 @@ public abstract class Component implements Focusable
      * 
      * @param event
      *        The mouse event, where x and y are relative to the parent container.
-     * @return
+     * 
+     * @return True is the mouse event has been handled, otherwise false.
      */
     public boolean testMouseDown( MouseButtonEvent event )
     {
@@ -584,8 +587,7 @@ public abstract class Component implements Focusable
     }
 
     /**
-     * 
-     * @param mbe
+     * @param event
      *        The mouse event, where x and y are relative to this component.
      */
     public void mouseMove( MouseMotionEvent event )
@@ -606,14 +608,14 @@ public abstract class Component implements Focusable
     public boolean contains( MouseEvent event )
     {
         return (event.x) >= 0 && (event.y >= 0) && (event.x < this.getWidth()) &&
-                (event.y < this.getHeight());
+            (event.y < this.getHeight());
     }
 
     public boolean contains2( MouseEvent event )
     {
         return (event.x) >= this.getX() && (event.y >= this.getY()) &&
-                (event.x < this.getX() + this.getWidth()) &&
-                (event.y < this.getY() + this.getHeight());
+            (event.x < this.getX() + this.getWidth()) &&
+            (event.y < this.getY() + this.getHeight());
     }
 
     @Override

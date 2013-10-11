@@ -3,6 +3,7 @@
 <project name="Itchy" default="build" basedir=".">
 
     <property name="jarfile" value="lib/itchy.jar" />
+    <property name="publish.dir" value="/gidea/documents/public/itchy/" />
 
     <path id="project.class.path">
         <fileset dir="lib">
@@ -30,17 +31,16 @@
 
     </target>
 
-    
 	<!-- publish : Used to create zip files of the source and binaries -->
-    <target name="publish">
-    	
-    	<mkdir dir="publish"/>
-    	
-        <jar jarfile="publish/itchy-win32.zip">
+    <target name="publish" > <!--depends="clean,build,javadoc">-->
+
+    	<mkdir dir="${publish.dir}"/>
+
+        <jar jarfile="${publish.dir}/itchy-win32.zip">
             <fileset dir=".">
                 <include name="lib/*.jar"/>
-                <include name="drunkInvaders.bat"/>
-                <include name="native/win32/*.dll"/>
+                <include name="launch.bat"/>
+                <include name="lib/native/win32/*.dll"/>
                 <include name="resources/**/*.xml"/>
                 <include name="resources/**/*.png"/>
                 <include name="resources/**/*.ttf"/>
@@ -48,12 +48,12 @@
             </fileset>
         </jar>
 
-        <tar destfile="publish/itchy-linux.tar.gz" compression="gzip">
+        <tar destfile="${publish.dir}/itchy-linux.tar.gz" compression="gzip">
             <fileset dir=".">
                 <include name="lib/*.jar"/>
-                <include name="drunkInvaders.sh"/>
-                <include name="native/i686/*.so"/>
-                <include name="native/x86-64/*.so"/>
+                <include name="launch"/>
+                <include name="lib/native/i686/*.so"/>
+                <include name="lib/native/x86-64/*.so"/>
                 <include name="resources/**/*.xml"/>
                 <include name="resources/**/*.png"/>
                 <include name="resources/**/*.ttf"/>
@@ -61,19 +61,33 @@
             </fileset>
         </tar>
 
-        <jar jarfile="publish/itchy-src.zip">
+    	<jar jarfile="${publish.dir}/itchy-src.zip">
             <fileset dir=".">
                 <include name="src/**/*.java"/>
                 <include name="*.txt"/>
                 <include name="docs/**/*.ucls"/>
+                <include name="docs/**/*.png"/>
+                <include name="resources/**/*.js"/>
                 <include name="resources/**/*.svg"/>
                 <include name="resources/**/*.xml"/>
                 <include name="resources/**/*.png"/>
+                <include name="resources/**/*.bmp"/>
                 <include name="resources/**/*.ttf"/>
                 <include name="resources/**/*.ogg"/>
             </fileset>
         </jar>
+
+    	<buildnumber/>
     	
+        <mkdir dir="${publish.dir}/builds/${build.number}/"/>
+
+        <copy file="${publish.dir}/itchy-linux.tar.gz" todir="${publish.dir}/builds/${build.number}/"/>        
+        <copy file="${publish.dir}/itchy-src.zip" todir="${publish.dir}/builds/${build.number}/"/>   
+        <copy file="${publish.dir}/itchy-win32.zip" todir="${publish.dir}/builds/${build.number}/"/>   
+        <copy todir="${publish.dir}/api/">
+            <fileset dir="docs/api"/>
+    	</copy>
+
 	</target>
     
     <!-- Generate javadocs -->
@@ -82,6 +96,7 @@
             classpathref="project.class.path"
             access="protected"
             destdir="docs/api"
+        	stylesheetfile="docs/stylesheet.css"
             windowtitle="Itchy">
 
             <package name="uk.co.nickthecoder.itchy"/>
@@ -120,5 +135,6 @@
 
         </junit>
     </target>
+	
 
 </project>

@@ -64,8 +64,7 @@ public class Pause
     }
     
     /**
-     * The total time in milliseconds that the game was in a paused state.
-     * @return
+     * @return The total time in milliseconds that the game was in a paused state.
      */
     public long totalTimePausedMillis()
     {

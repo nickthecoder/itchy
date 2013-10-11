@@ -105,7 +105,7 @@ public class GuiPose extends RootContainer implements Pose, EventListener
      * Returns the Actor associated with this GuiPose. Note you should NOT create an Actor manually,
      * always call getActor instead.
      * 
-     * @return
+     * @return The Actor associated with this GuiPose.
      */
     public Actor getActor()
     {

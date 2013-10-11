@@ -33,9 +33,9 @@ public class TextValue extends Behaviour
 
     /**
      * What to display if the retrieving the value results in an Exception being thrown.
-     * The default is an empty string, which can be confusing if {@link access} is wrong, because you
+     * The default is an empty string, which can be confusing if {@link #access} is wrong, because you
      * then get nothing displayed! However, in this case, you should see a stack track in System.err,
-     * unless you have turned it off using the {@link quiet} attribute.
+     * unless you have turned it off using the {@link #quiet} attribute.
      */
     @Property(label = "Error Value")
     public String errorValue = "";

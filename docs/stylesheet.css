@@ -1,0 +1,69 @@
+/* Javadoc style sheet */
+
+/* Colors */
+
+body { color: #000; background: #fff; }
+a { color: #bf3f1c; }
+a:visited { color: #264; }
+h3 { background: #3d311e; color: #fff; }
+h3 a, h3 a:visited { color: #ff9375; }
+
+.topNav, .bottomNav { background: #524228; color: #aaa; }
+.topNav a, .topNav a:visited, .bottomNav a, .subNav a, .subNav a:visited { color: #eee; }
+.subNav { background: #3d311e; color: #aaa; }
+
+table th { background: #85693b; color: #fff; }
+table tr:nth-child(even) { background: #fff; }
+table tr:nth-child(odd) { background: #eee; }
+
+/* My Look and Feel */
+body { margin: 20px 20px 0px 20px; padding: 0; font-family: Cantarell, verdana, arial, sans; }
+
+h1 { font-size: 100%; font-weight: bold; margin: 0; padding: 0; }
+h2 { font-size: 150%; font-weight: bold; margin: 0; padding: 0; }
+h3 { font-size: 110%; font-weight: normal; padding: 4px 1em; margin: 1em -20px; }
+h4 { font-size: 120%; font-weight: normal; padding: 0; margin: 1em 0; }
+
+a { text-decoration: none; font-weight: bold; }
+code { font-family: Courier; }
+
+.header { margin: 1em 0; }
+
+.topNav { margin: -20px -20px 0 -20px; padding: 14px 0; font-weight: bold; }
+.bottomNav { margin: 2em -20px 0 -20px; padding: 8px 0; font-weight: bold; }
+.subNav { font-size: 80%; }
+.subNav { margin: 0 -20px; padding: 8px 0; }
+
+ul.navList { display: inline !important; margin: 0; padding: 0 20px; }
+ul.navList li { display: inline; padding-right: 2em;}
+
+ul.subNavList { display: inline; }
+ul.subNavList li { display: inline; }
+
+
+ul.inheritance { list-style: none; margin: 0; padding: 0; }
+ul.inheritance ul.inheritance { padding: 0 2em; }
+
+ul.blockList { list-style: none; margin: 0; padding: 0 0 1em 0; border-bottom: 1px solid black; }
+ul.blockList:last-child { border-bottom: none; padding-bottom: 0; }
+
+ul.blockListLast { list-style: none; margin: 0; padding: 0; }
+dl { margin: 1.5em 0; }
+
+div.block { margin-top: 0.8em; }
+
+table { width: 100%; margin: 1em 0; }
+table { border-width: 0 0 1px 1px; border-spacing: 0; border-collapse: collapse; border-style: solid; }
+table td { padding: 4px; }
+table th { padding: 4px 1em; }
+table td, table th { margin: 0; border-width: 1px 1px 0 0; border-style: solid; border-color: #000; }
+table th { border-right: 1px solid #ccc; }
+table th:last-child { border-right: 1px solid #000; }
+
+table th { text-align: left; }
+table caption { display: none; }
+
+.indexContainer { font-size: 80%; color: #444; }
+.indexContainer h2 { margin: 1em 0; }
+.indexContainer ul { list-style: none; margin: 1em 0; padding: 0; }
+

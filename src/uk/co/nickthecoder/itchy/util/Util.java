@@ -36,7 +36,6 @@ public class Util
      * </code>
      * </pre>
      * 
-     * @return
      */
     public static boolean randomOneIn( double times )
     {

@@ -143,7 +143,7 @@ public abstract class AbstractProperty<S, T>
             try {
                 return new ClassNameProperty<SS>(
                     property.baseClass(), property.label(), access, key);
-                
+
             } catch (Exception e) {
                 // Do nothing
             }
@@ -304,7 +304,11 @@ public abstract class AbstractProperty<S, T>
      * @param autoUpdate
      *        If true, then the subject is updated whenever the component is changed (i.e. when text
      *        is typed into the text box, or when a checkbox is clicked etc).
-     * @return
+     * 
+     * @return A component which allows the user to change this property's value. It could be a
+     *         simple component, such as a TextBox, or a Container containing multiple child
+     *         Components.
+     * 
      * @throws Exception
      */
     public Component createComponent( final S subject, boolean autoUpdate )
@@ -316,12 +320,6 @@ public abstract class AbstractProperty<S, T>
     /**
      * Does the same as the other version of createComponent, with the added feature that a listener
      * is notified of changes as the user types/clicks.
-     * 
-     * @param subject
-     * @param autoUpdate
-     * @param listener
-     * @return
-     * @throws Exception
      */
     public abstract Component createComponent( final S subject, boolean autoUpdate,
         ComponentChangeListener listener ) throws Exception;
@@ -345,10 +343,12 @@ public abstract class AbstractProperty<S, T>
      * Converts a String representation of the properties value into the appropriate. For example,
      * an IntegerProperty will use Integer.parseInt to return an Integer object.
      * 
-     * @param value
-     * @return
+     * @param stringValue
+     *        The string representation of the value
+     * @return The actual value, for example, if this is a RGBAProperty, then the return value will
+     *         be a RGBA object.
      */
-    public abstract T parse( String value );
+    public abstract T parse( String stringValue );
 
     @Override
     public String toString()

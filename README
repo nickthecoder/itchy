@@ -5,3 +5,9 @@ start writing real programs, graduating from the excellent, but limiting program
 
 It is designed to be fast, using SDL as its low level graphics API, via a java wrapper called "Jame".
 
+To run the example games :
+
+./launch rain
+./launch tetra
+./launch drunkInvaders
+

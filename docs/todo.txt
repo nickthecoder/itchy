@@ -19,7 +19,6 @@ Fix frame rate problems at the start of the game.
 
 "include" javascript function, which includes another script file.
 
-
 Check that Add Scene doesn't rename.
 
 Check that a broken script doesn't cause problems :
