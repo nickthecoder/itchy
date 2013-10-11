@@ -10,15 +10,14 @@ Menu = new Class({
         if (message == "quit") {
             game.end();
         }
-        if (message == "easy") {
-            game.startScene("easy");
+        if (message.indexOf("scene:" == 0)) {
+            stdout.println("Starting scene : " + message.substring(6));
+            game.startScene(message.substring(6));
         }
-        if (message == "medium") {
-            game.startScene("medium");
-        }
-        if (message == "hard") {
-            game.startScene("hard");
-        }
-    }
+    },
+    
+    isPlaying: function() {
+        return false;
+    } 
 });
 

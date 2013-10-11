@@ -23,9 +23,6 @@ public class GameInfo implements PropertySubject<GameInfo>
     @Property(label = "Height")
     public int height;
 
-    @Property(label = "Icon")
-    public String iconFilename;
-
     @Property(label = "Initial Scene")
     public String initialScene;
     
@@ -37,7 +34,6 @@ public class GameInfo implements PropertySubject<GameInfo>
         this.title = "Itchy Game";
         this.width = 800;
         this.height = 600;
-        this.iconFilename = "icon.bmp";
         this.className = new ClassName(Game.class.getName());
         this.initialScene = "start";
     }

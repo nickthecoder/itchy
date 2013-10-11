@@ -43,7 +43,7 @@ Play = new Class({
         }
         
         if (ke.symbol == ke.ESCAPE) {
-            game.startScene("start");
+            game.startScene("menu");
             return true;
         }
         return false;
@@ -60,7 +60,6 @@ Play = new Class({
         this.player = null;
         if (this.score > this.highScore) {
             game.getPreferences().putInt( game.getSceneName() + ".highScore", this.score );
-            stdout.println("New value : " + game.getPreferences().getInt( game.getSceneName() + ".highScore", -1));
         }       
 
     }

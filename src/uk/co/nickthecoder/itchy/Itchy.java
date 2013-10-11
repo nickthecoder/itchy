@@ -103,29 +103,33 @@ public class Itchy
 
     private static void setScreenMode( Game game )
     {
-        Video.setWindowTitle(game.getTitle());
-
-        if (game.getIconFilename() != null) {
-            Video.setWindowIcon(game.resources.resolveFilename(game.getIconFilename()));
-        }
-
-        try {
-            screen = Video.setMode(game.getWidth(), game.getHeight());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        setScreenMode( game.getTitle(), game.resources, game.getWidth(), game.getHeight() );
     }
-
+    
     private static void setScreenMode( Resources resources )
     {
-        Video.setWindowTitle(resources.gameInfo.title);
+        setScreenMode( resources.gameInfo.title, resources,
+            resources.gameInfo.width, resources.gameInfo.height );
+    }
+    
+    private static void setScreenMode( String title, Resources resources, int width, int height )
+    {
+        Video.setWindowTitle(title);
 
-        if (resources.gameInfo.iconFilename != null) {
-            Video.setWindowIcon(resources.resolveFilename(resources.gameInfo.iconFilename));
+        // Load the 32x32 image, and then try to load the higher res image - not caring if it fails.
+        // According to the SDL1.2 docs, windows MUST be given a 32x32 image.
+        String filename32 = resources.resolveFilename("icon32.bmp");
+        String filename = resources.resolveFilename("icon.bmp");
+        
+        try {
+            Video.setWindowIcon(filename32);
+            Video.setWindowIcon(filename);
+        } catch (Exception e) {
+            // Do nothing
         }
 
         try {
-            screen = Video.setMode(resources.gameInfo.width, resources.gameInfo.height);
+            screen = Video.setMode(width, height);
         } catch (Exception e) {
             e.printStackTrace();
         }

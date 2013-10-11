@@ -1,5 +1,5 @@
 <resources>
-  <game title="It's Gonna Rain" width="800" height="600" iconFilename="icon.bmp" initialScene="start" className="uk.co.nickthecoder.itchy.Game"/>
+  <game title="It's Gonna Rain" width="800" height="600" iconFilename="icon.bmp" initialScene="menu" className="uk.co.nickthecoder.itchy.Game"/>
   <fonts>
     <font name="BlackCasper" filename="fonts/BlackCasper/BlackCasper.ttf"/>
     <font name="Boycott" filename="fonts/Boycott/Boycott.ttf"/>
@@ -114,6 +114,6 @@
     <scene name="easy"/>
     <scene name="hard"/>
     <scene name="medium"/>
-    <scene name="start"/>
+    <scene name="menu"/>
   </scenes>
 </resources>

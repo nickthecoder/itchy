@@ -7,8 +7,13 @@ Jame is out of date, need to rebuild for win32 and i386 and ARM??
 
 What's Next
 ===========
+
 When getting a property value from a script, if it doesn't return a valid value, report in stderr, and
     return a reasonable default. "", 0, 0.0, black.
+
+Bug : It seems that the editor is using the REAL behaviour for some text buttons (easy,medium,hard),
+    when it should be using a SceneBehvaiour???
+    Is this also what's causing ./launch tetra --editor spewing out lots of stack traces?
 
 CostumeProperties
     Use auto update components, so we don't have the fragile "for" loop in onOk.
@@ -28,6 +33,19 @@ Check that a broken script doesn't cause problems :
     SceneBehaviour in editor
     SceneBehaviour in designer
     Game
+
+
+Create a "Game" which lists all of the games, and clicking one will play it
+    List all directories in the "resources" directory containing a like named xml file. 
+    Exclude itself
+    A vertical scroll c a set of buttons.
+
+Rain : reset high scores
+
+Game.getPreferences to use a better key than the current game's class name, as they could easily be Game
+    or ScriptedGame.
+    Instead use the name of the resources directory, prefixed with uk.co.nickthecoder.itchy.
+    A subclass of Game can override this.
 
 Bugs
 ====

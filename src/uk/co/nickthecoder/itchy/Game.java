@@ -419,11 +419,6 @@ public class Game implements EventListener, MessageListener
         return this.resources.gameInfo.title;
     }
 
-    public String getIconFilename()
-    {
-        return this.resources.gameInfo.iconFilename;
-    }
-
     @Override
     public boolean onQuit()
     {
