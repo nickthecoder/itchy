@@ -31,6 +31,8 @@ public class Costume
 
     private final HashMap<String, List<FontResource>> fontChoices;
 
+    private ClassName propertiesClassName = new ClassName( CostumeProperties.class.getName() );
+    
     public ClassName behaviourClassName = new ClassName(
         uk.co.nickthecoder.itchy.NullBehaviour.class.getName());
 
@@ -327,26 +329,22 @@ public class Costume
         return this.animationChoices.get(name);
     }
 
-    public String getPropertiesClassName()
+    public ClassName getPropertiesClassName()
     {
-        return this.properties.getClass().getName();
+        return this.propertiesClassName;
     }
 
-    public void setPropertiesClassName( String value )
+    public void setPropertiesClassName( Resources resources, ClassName value )
     {
-        if (!value.equals(getPropertiesClassName())) {
-            this.properties = CostumeProperties.createProperties(value);
+        if (!value.equals(this.propertiesClassName)) {
+            this.properties = CostumeProperties.createProperties(resources, value);
+            this.propertiesClassName = value;
         }
     }
 
     public CostumeProperties getProperties()
     {
         return this.properties;
-    }
-
-    public void setProperties( CostumeProperties value )
-    {
-        this.properties = value;
     }
 
 }

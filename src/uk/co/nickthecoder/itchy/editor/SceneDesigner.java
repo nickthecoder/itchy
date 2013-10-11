@@ -206,7 +206,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.guiLayer.add(toolbarActor);
 
         // Can be ANY of the scrolling layers, so I picked the first for convenience.
-        this.designLayers.getChildren().get(0).addMouseListener(this);
+        this.designLayers.getChildren().get(0).addMouseListener(this, this.editor);
         Itchy.getGame().addKeyListener(this);
 
         this.scene.create(this.designLayers, this.editor.resources, true);
@@ -227,7 +227,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.editor.getLayers().remove(this.guiLayer);
 
         Itchy.getGame().removeKeyListener(this);
-        this.designLayers.getChildren().get(0).removeMouseListener(this);
+        this.designLayers.getChildren().get(0).removeMouseListener(this, this.editor);
 
         this.toolboxPose.destroy();
         this.toolbarPose.destroy();
@@ -574,7 +574,6 @@ public class SceneDesigner implements MouseListener, KeyListener
 
         this.sceneResourceName = new TextBox(this.sceneResource.getName());
         grid.addRow(new Label("Name"), this.sceneResourceName);
-        // TODO add a "Rename" button.
 
         this.sceneBehaviourName = new ClassNameBox(
             this.editor.resources.scriptManager,

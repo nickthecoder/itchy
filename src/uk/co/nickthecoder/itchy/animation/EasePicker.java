@@ -108,7 +108,6 @@ public abstract class EasePicker extends Window
 
         ImageComponent img = new ImageComponent(ease.getThumbnail());
         Label label = new Label(name);
-        label.addStyle("TEST"); // TODO remove
 
         button.addChild(img);
         button.addChild(label);

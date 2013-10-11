@@ -142,7 +142,7 @@ public abstract class ActorsLayer extends Layer
         this.actors.add(0, actor);
     }
 
-    public void enableMouseListener()
+    public void enableMouseListener(Game game)
     {
         if (this.mouseListener != null) {
             return;
@@ -201,13 +201,13 @@ public abstract class ActorsLayer extends Layer
             }
 
         };
-        this.addMouseListener(this.mouseListener);
+        this.addMouseListener(this.mouseListener, game);
     }
 
-    public void disableMouseListener()
+    public void disableMouseListener(Game game)
     {
         if (this.mouseListener != null) {
-            this.removeMouseListener(this.mouseListener);
+            this.removeMouseListener(this.mouseListener,game);
             this.mouseListener = null;
         }
     }

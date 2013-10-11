@@ -1,5 +1,5 @@
 <resources>
-  <game title="It's Gonna Rain" width="800" height="600" iconFilename="icon.bmp" className="uk.co.nickthecoder.itchy.Game"/>
+  <game title="It's Gonna Rain" width="800" height="600" iconFilename="icon.bmp" initialScene="start" className="uk.co.nickthecoder.itchy.Game"/>
   <fonts>
     <font name="BlackCasper" filename="fonts/BlackCasper/BlackCasper.ttf"/>
     <font name="Boycott" filename="fonts/Boycott/Boycott.ttf"/>
@@ -61,16 +61,18 @@
     <costume name="background">
       <pose name="default" pose="background"/>
     </costume>
-    <costume name="drop1" behaviour="Drop.js">
+    <costume name="drop1" behaviour="Drop.js" properties="DropProperties.js">
       <pose name="default" pose="drop1"/>
       <pose name="droplet" pose="droplet1"/>
       <sound name="drip" sound="drip" priority="3" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="PLAY_BOTH"/>
+      <properties extraSpeed="0" speedFactor="1.0"/>
     </costume>
-    <costume name="drop2" behaviour="Drop.js">
+    <costume name="drop2" behaviour="Drop.js" properties="DropProperties.js">
       <pose name="default" pose="drop2"/>
       <pose name="droplet" pose="droplet2"/>
+      <properties extraSpeed="-1" speedFactor="0.5"/>
     </costume>
-    <costume name="drop3" behaviour="Drop.js">
+    <costume name="drop3" behaviour="Drop.js" properties="DropProperties.js">
       <pose name="default" pose="drop3"/>
       <pose name="droplet" pose="droplet3"/>
       <sound name="drip" sound="forFortyDays" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="PLAY_BOTH"/>
@@ -79,6 +81,7 @@
       <sound name="drip" sound="rain" priority="2" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="PLAY_BOTH"/>
       <sound name="drip" sound="theyDidntBelieveThatItWasGunnaRain" priority="2" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="PLAY_BOTH"/>
       <sound name="drip" sound="myLordMyLord" priority="2" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="PLAY_BOTH"/>
+      <properties extraSpeed="1" speedFactor="1.2"/>
     </costume>
     <costume name="editor" behaviour="uk.co.nickthecoder.itchy.extras.Button">
       <string name="default">Editor</string>
@@ -107,6 +110,7 @@
     </costume>
   </costumes>
   <scenes>
+    <scene name="about"/>
     <scene name="easy"/>
     <scene name="hard"/>
     <scene name="medium"/>

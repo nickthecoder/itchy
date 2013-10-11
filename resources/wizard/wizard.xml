@@ -1,0 +1,16 @@
+<resources>
+  <game title="New Game Wizard" width="600" height="480" iconFilename="icon.bmp" className="uk.co.nickthecoder.itchy.wizard.NewGameWizard"/>
+  <fonts>
+  </fonts>
+  <poses>
+  </poses>
+  <sounds>
+  </sounds>
+  <animations>
+  </animations>
+  <costumes>
+  </costumes>
+  <scenes>
+  </scenes>
+</resources>
+

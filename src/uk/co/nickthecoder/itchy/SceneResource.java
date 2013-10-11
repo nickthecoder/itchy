@@ -40,7 +40,7 @@ public class SceneResource extends Loadable
     {
         this.resources.renameResource(this, newName);
         this.name = newName;
-        this.renameFile( makeFile( newName ) );
+        this.renameFile(makeFile(newName));
     }
 
     public Scene getScene() throws Exception
@@ -63,6 +63,9 @@ public class SceneResource extends Loadable
             this.getScene();
         } catch (Exception e) {
             this.scene = new Scene();
+        }
+        if ( this.scene.sceneBehaviour == null) {
+            this.scene.sceneBehaviour = this.scene.createSceneBehaviour(this.resources);
         }
 
         SceneWriter sceneWriter = new SceneWriter(this);

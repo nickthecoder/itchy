@@ -38,6 +38,7 @@ public class ScriptProperties implements Map<String,Object>
         try {
             return this.language.getProperty(inst, name.toString());
         } catch (ScriptException e) {
+            e.printStackTrace();
             return null;
         }
     }

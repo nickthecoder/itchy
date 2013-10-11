@@ -35,7 +35,7 @@ public class Launcher
             if ((argv.length == 1) && ("--editor".equals(argv[0]))) {
 
                 Editor editor = new Editor(resources.getGame());
-                editor.start(null);
+                editor.start();
 
             } else {
                 resources.getGame().start();

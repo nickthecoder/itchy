@@ -312,7 +312,7 @@ public class ResourcesWriter extends XMLWriter
         }
 
         if (CostumeProperties.class != simpleCostume.getProperties().getClass()) {
-            this.attribute("properties", simpleCostume.getPropertiesClassName());
+            this.attribute("properties", simpleCostume.getPropertiesClassName().name);
         }
 
         this.writeCostumePoses(simpleCostume);

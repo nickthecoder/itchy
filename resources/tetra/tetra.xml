@@ -1,5 +1,5 @@
 <resources>
-  <game className="uk.co.nickthecoder.tetra.Tetra" width="640" height="480" title="Tetra" iconFilename="icon.bmp"/>
+  <game initialScene="menu" className="uk.co.nickthecoder.tetra.Tetra" width="640" height="480" title="Tetra" iconFilename="icon.bmp"/>
   <fonts>
     <font name="Boycott" filename="fonts/Boycott.ttf"/>
   </fonts>

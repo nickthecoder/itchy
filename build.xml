@@ -86,7 +86,10 @@
 
             <package name="uk.co.nickthecoder.itchy"/>
             <package name="uk.co.nickthecoder.itchy.animation"/>
+            <package name="uk.co.nickthecoder.itchy.extras"/>
             <package name="uk.co.nickthecoder.itchy.gui"/>
+            <package name="uk.co.nickthecoder.itchy.neighbourhood"/>
+            <package name="uk.co.nickthecoder.itchy.script"/>
             <package name="uk.co.nickthecoder.itchy.util"/>
         </javadoc>
     </target>

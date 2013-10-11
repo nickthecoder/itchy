@@ -13,6 +13,7 @@ import uk.co.nickthecoder.itchy.Game;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.ScrollableLayer;
 import uk.co.nickthecoder.jame.RGBA;
+import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.Keys;
 
@@ -22,16 +23,18 @@ public class TestGame extends Game
 
     public String sceneName = "menu";
 
-    public TestGame() throws Exception
+    public TestGame(Resources resources) throws Exception
     {
-        super();
+        super(resources);
     }
 
     @Override
     public void onActivate()
     {
-        this.mainLayer = new ScrollableLayer("main", this.screenRect, new RGBA(0, 0, 0));
-        this.mainLayer.enableMouseListener();
+        Rect screenRect = new Rect(0, 0, getWidth(), getHeight());
+
+        this.mainLayer = new ScrollableLayer("main", screenRect, new RGBA(0, 0, 0));
+        this.mainLayer.enableMouseListener(this);
         this.layers.add(this.mainLayer);
     }
 
@@ -92,14 +95,8 @@ public class TestGame extends Game
         Resources resources = new Resources();
         resources.load(new File("resources/tests/resources.xml"));
 
-        TestGame test = new TestGame();
-        test.resources = resources;
+        TestGame test = new TestGame(resources);
         test.start();
     }
 
-    @Override
-    public String getInitialSceneName()
-    {
-        return "menu";
-    }
 }

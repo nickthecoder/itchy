@@ -7,34 +7,28 @@ Jame is out of date, need to rebuild for win32 and i386 and ARM??
 
 What's Next
 ===========
+When getting a property value from a script, if it doesn't return a valid value, report in stderr, and
+    return a reasonable default. "", 0, 0.0, black.
 
-Allow scripts to be created from the editor.
-    CostumeProperies
-
-Create a 'New Game Wizard' 
-    Creates the resources/xxx and resources/xxx/xxx.xml and sub dirs fonts, scripts, scenes, sounds.
-    Maybe an example Pose and Costume too?
-
-Get Scripted Game working
-    All methods
-
-Place the correct objects into the script scope as appropriate.
-    GameScript and SceneBehaviourScript  objects are only added during their construction - easy and natural.
-    SceneBehaviour must be added when the scene is loaded, so Game must call ScriptManager even if scripts aren't in use.
-        If it is added straight away, then is the SceneBehaviour is not scripted, but Behaviours are, then we run into problems.
-            So we need an "ensureScriptGlobals" when any script object is created.
-            This can add the Game object too.
-
-Script version of CostumeProperties
-    
-If SceneBehaviour doesn't have properties, then add them.
-    Need to edit them in the editor too. A new tab in the SceneDesigner seems sensible.
-
+CostumeProperties
+    Use auto update components, so we don't have the fragile "for" loop in onOk.
+    Create the object when the name is set, then in onOk, set the className (which 
+        will create another version), and then copy the attributes over.
     
 Fix frame rate problems at the start of the game.
 
-Test the "include" javascript function, which includes another script file    
+"include" javascript function, which includes another script file.
 
+
+Check that Add Scene doesn't rename.
+
+Check that a broken script doesn't cause problems :
+    Costume Properties
+    Behaviour in editor
+    Behaviour in designer
+    SceneBehaviour in editor
+    SceneBehaviour in designer
+    Game
 
 Bugs
 ====

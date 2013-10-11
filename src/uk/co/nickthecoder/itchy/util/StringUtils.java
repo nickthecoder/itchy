@@ -22,7 +22,7 @@ public class StringUtils
      */
     public static boolean isBlank( Object object )
     {
-        return isBlank(object.toString());
+        return (object == null) || isBlank(object.toString());
     }
 
     public static boolean equals( Object a, Object b )

@@ -5,28 +5,35 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
-import java.lang.reflect.Constructor;
 import java.util.List;
 
+import uk.co.nickthecoder.itchy.script.ScriptManager;
 import uk.co.nickthecoder.itchy.util.AbstractProperty;
+import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.itchy.util.PropertySubject;
 
 public class CostumeProperties implements PropertySubject<CostumeProperties>
 {
-    public static CostumeProperties createProperties( String className )
+    public static CostumeProperties createProperties( Resources resources, ClassName className )
     {
         try {
-            @SuppressWarnings("unchecked")
-            Class<CostumeProperties> klass = (Class<CostumeProperties>) Class.forName(className);
-            Constructor<CostumeProperties> constructor = klass.getConstructor();
-            return constructor.newInstance();
+            if (ScriptManager.isScript(className)) {
+                return resources.scriptManager.createCostumeProperties(className);
+            } else {
+                @SuppressWarnings("unchecked")
+                Class<CostumeProperties> klass = (Class<CostumeProperties>) Class
+                    .forName(className.name);
+                return klass.newInstance();
+            }
         } catch (Exception e) {
+            e.printStackTrace();
             return new CostumeProperties();
         }
     }
 
     public static boolean isValidClassName( String className )
     {
+
         try {
             Class<?> klass = Class.forName(className);
             klass.asSubclass(CostumeProperties.class);

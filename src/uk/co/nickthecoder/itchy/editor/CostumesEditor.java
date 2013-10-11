@@ -45,6 +45,7 @@ import uk.co.nickthecoder.itchy.gui.TextBox;
 import uk.co.nickthecoder.itchy.gui.VerticalLayout;
 import uk.co.nickthecoder.itchy.gui.Window;
 import uk.co.nickthecoder.itchy.util.AbstractProperty;
+import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.jame.Surface;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 
@@ -52,7 +53,7 @@ public class CostumesEditor extends SubEditor
 {
     private static final int EVENT_RESOURCE_COLUMN = 3;
 
-    private static final String NEW_EVENT_NAME = "newEvent";
+    private static final String NEW_EVENT_NAME = "";
 
     private TextBox txtName;
 
@@ -66,7 +67,7 @@ public class CostumesEditor extends SubEditor
 
     private ClassNameBox behaviour;
 
-    private ComboBox propertiesClassName;
+    private ClassNameBox propertiesClassName;
 
     private Table eventsTable;
 
@@ -196,8 +197,6 @@ public class CostumesEditor extends SubEditor
             };
         };
 
-        // TODO Change to a special component for ClassNames which includes a "create" button for
-        // scripts.
         this.behaviour = new ClassNameBox(
             this.editor.resources.scriptManager,
             costume.behaviourClassName, Behaviour.class);
@@ -238,7 +237,7 @@ public class CostumesEditor extends SubEditor
         eventsTableSection.setFill(true, true);
         eventsTableButtons.addStyle("buttonColumn");
 
-        eventsTableSection.addChild(eventsTableButtons); // TODO more
+        eventsTableSection.addChild(eventsTableButtons);
 
         Button edit = new Button("Edit");
         edit.addActionListener(new ActionListener() {
@@ -272,28 +271,33 @@ public class CostumesEditor extends SubEditor
 
         propertiesPage.setLayout(new VerticalLayout());
 
-        this.propertiesClassName = new ComboBox(
+        this.propertiesClassName = new ClassNameBox(
+            this.editor.resources.scriptManager,
             costume.getPropertiesClassName(),
-            this.editor.game.resources.getCostumePropertiesClassNames());
+            CostumeProperties.class);
 
         this.propertiesClassName.addChangeListener(new ComponentChangeListener() {
 
             @Override
             public void changed()
             {
-                if (CostumesEditor.this.propertiesClassName.getText().equals(
-                    costume.getPropertiesClassName())) {
+                ClassName className = CostumesEditor.this.propertiesClassName.getClassName();
+
+                if (className.equals(costume.getPropertiesClassName())) {
                     CostumesEditor.this.propertiesClassName.removeStyle("error");
                 } else {
-                    try {
-                        costume.setPropertiesClassName(CostumesEditor.this.propertiesClassName
-                            .getText());
+                    // Assume error...
+                    CostumesEditor.this.propertiesClassName.addStyle("error");
+
+                    if (CostumesEditor.this.editor.resources
+                        .registerSceneBehaviourClassName(className.name)) {
+
+                        costume.setPropertiesClassName(
+                            CostumesEditor.this.editor.resources,
+                            className);
+
                         createPropertiesGrid();
                         CostumesEditor.this.propertiesClassName.removeStyle("error");
-
-                    } catch (Exception e) {
-                        System.out.println("Adding style error");
-                        CostumesEditor.this.propertiesClassName.addStyle("error");
                     }
                 }
             }
@@ -315,8 +319,11 @@ public class CostumesEditor extends SubEditor
 
         CostumeProperties properties = this.currentCostumeResource.costume.getProperties();
 
-        if (!properties.getClass().getName().equals(this.propertiesClassName.getText())) {
-            properties = CostumeProperties.createProperties(this.propertiesClassName.getText());
+        if (!this.currentCostumeResource.costume.getPropertiesClassName().name.equals(
+            this.propertiesClassName.getClassName().name)) {
+
+            properties = CostumeProperties.createProperties(this.editor.resources,
+                this.propertiesClassName.getClassName());
         }
 
         GridLayout grid = new GridLayout(this.propertiesContainer, 2);
@@ -332,6 +339,7 @@ public class CostumesEditor extends SubEditor
             } catch (Exception e) {
                 System.err.println("Failed to create component for Costume Property : " +
                     property.key);
+                e.printStackTrace();
             }
 
         }
@@ -824,8 +832,9 @@ public class CostumesEditor extends SubEditor
             return;
         }
 
-        if (!this.editor.resources.registerCostumePropertiesClassName(this.propertiesClassName
-            .getText())) {
+        if (!this.editor.resources.registerCostumePropertiesClassName(
+            this.propertiesClassName.getClassName().name)) {
+
             this.setMessage("Not a valid class name");
             return;
         }
@@ -853,9 +862,12 @@ public class CostumesEditor extends SubEditor
         this.currentCostumeResource.setName(this.txtName.getText());
         this.currentCostumeResource.costume.behaviourClassName = this.behaviour.getClassName();
 
-        if (CostumeProperties.isValidClassName(this.propertiesClassName.getText())) {
-            this.currentCostumeResource.costume.setPropertiesClassName(this.propertiesClassName
-                .getText());
+        if (this.editor.resources.registerCostumePropertiesClassName(this.propertiesClassName
+            .getClassName().name)) {
+
+            this.currentCostumeResource.costume.setPropertiesClassName(
+                this.editor.resources, this.propertiesClassName.getClassName());
+
             CostumeProperties properties = this.currentCostumeResource.costume.getProperties();
 
             int index = 0;

@@ -8,8 +8,10 @@ Drop = Class({
 
     onAttach: function() {
         this.actor.addTag("deadly");
+        this.speedFactor = this.actor.getCostume().getProperties().values.speedFactor;
+        this.speed *= this.speedFactor;
     },
-    
+
     tick: function() {
         this.actor.moveBy( 0, - this.speed );
         if ( this.actor.getY() < 0) {
@@ -23,7 +25,7 @@ Drop = Class({
                 this.actor.event("drip");
                 var x = random.nextInt(Itchy.getGame().getWidth());
                 this.actor.moveTo( x, this.actor.getY() + this.distance );
-                this.speed = sceneBehaviourScript.speed;
+                this.speed = sceneBehaviourScript.speed * this.speedFactor;
             }
             
         }

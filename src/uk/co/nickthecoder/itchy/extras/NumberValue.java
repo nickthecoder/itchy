@@ -14,11 +14,12 @@ public class NumberValue extends TextValue
     @Property(label = "Format")
     public String formatPattern = "0";
 
-    private DecimalFormat format;
+    private DecimalFormat format = new DecimalFormat("0");
 
     @Override
     public void onActivate()
     {
+        super.onActivate();
         this.format = new DecimalFormat(this.formatPattern);
     }
 

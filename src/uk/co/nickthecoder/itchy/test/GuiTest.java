@@ -29,6 +29,7 @@ import uk.co.nickthecoder.itchy.gui.TableModelColumn;
 import uk.co.nickthecoder.itchy.gui.VerticalLayout;
 import uk.co.nickthecoder.itchy.gui.Window;
 import uk.co.nickthecoder.jame.RGBA;
+import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.Keys;
 
@@ -40,9 +41,9 @@ public class GuiTest extends Game
 
     public GuiPose guiPose;
 
-    public GuiTest() throws Exception
+    public GuiTest( Resources resources ) throws Exception
     {
-        super();
+        super( resources );
         this.rules = new Stylesheet(new File("resources/defaultGui/style.xml"));
 
     }
@@ -50,14 +51,16 @@ public class GuiTest extends Game
     @Override
     public void onActivate()
     {
-        this.mainLayer = new ScrollableLayer("main", this.screenRect, new RGBA(255, 255, 255));
+        Rect screenRect = new Rect(0, 0, getWidth(), getHeight());
+
+        this.mainLayer = new ScrollableLayer("main", screenRect, new RGBA(255, 255, 255));
         this.mainLayer.setYAxisPointsDown(true);
         this.layers.add(this.mainLayer);
 
         this.guiPose = new GuiPose();
         this.guiPose.setStylesheet(this.rules);
         this.guiPose.addStyle("test");
-        this.guiPose.setPosition(0, 0, this.screenRect.width, this.screenRect.height);
+        this.guiPose.setPosition(0, 0, screenRect.width, screenRect.height);
         Actor actor = this.guiPose.getActor();
         this.mainLayer.add(actor);
 
@@ -267,14 +270,8 @@ public class GuiTest extends Game
     public static void main( String[] argv ) throws Exception
     {
         Resources resources = new Resources();
-        GuiTest testGui = new GuiTest();
-        testGui.resources = resources;
+        GuiTest testGui = new GuiTest( resources );
         testGui.start();
     }
 
-    @Override
-    public String getInitialSceneName()
-    {
-        return null;
-    }
 }

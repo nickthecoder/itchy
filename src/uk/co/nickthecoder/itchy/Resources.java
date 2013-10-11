@@ -6,6 +6,7 @@
 package uk.co.nickthecoder.itchy;
 
 import java.io.File;
+import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -97,7 +98,8 @@ public class Resources extends Loadable
             this.game = this.scriptManager.createGame(this.gameInfo.className);
         } else {
             Class<?> klass = Class.forName(this.gameInfo.className.name);
-            this.game = (Game) klass.newInstance();
+            Constructor<?> constructor = klass.getConstructor( Resources.class );            
+            this.game = (Game) constructor.newInstance(this);
         }
         this.game.resources = this;
         return this.game;
@@ -440,7 +442,7 @@ public class Resources extends Loadable
     {
         this.costumes.put(resource.name, resource);
         this.registerBehaviourClassName(resource.costume.behaviourClassName.name);
-        this.registerCostumePropertiesClassName(resource.costume.getPropertiesClassName());
+        this.registerCostumePropertiesClassName(resource.costume.getPropertiesClassName().name);
     }
 
     public void removeCostume( String name )
@@ -636,11 +638,21 @@ public class Resources extends Loadable
         if (this.costumePropertiesClassNames.contains(className)) {
             return true;
         }
-        if (CostumeProperties.isValidClassName(className)) {
-            this.costumePropertiesClassNames.add(className);
-            return true;
+        if (this.scriptManager.isValidScript(className)) {
+            // Do nothing
+        } else {
+
+            try {
+                Class<?> klass = Class.forName(className);
+                klass.asSubclass(CostumeProperties.class);
+
+            } catch (Exception e) {
+                return false;
+            }
+            
         }
-        return false;
+        this.costumePropertiesClassNames.add(className);
+        return true;
     }
 
     public boolean registerSceneBehaviourClassName( String className )

@@ -14,9 +14,6 @@ gameScript = null;
 sceneBehaviour = null;
 sceneBehaviourScript = null;
 
-//Functions
-include=language.loadScript;
-
 
 GameScript = Class({
 
@@ -26,7 +23,7 @@ GameScript = Class({
     
     onDeactivate: function() {},
             
-    onQuit: function() { return true; },
+    onQuit: function() { return false; },
     
     onKeyDown: function( keyEvent ) { return false; },
     
@@ -103,4 +100,20 @@ SceneBehaviourScript = Class({
 });
 
 
+
+CostumePropertiesScript = Class({
+
+    Class: {
+    
+        addProperty: function( className, propertyName, klass, label ) {
+            if (klass == String) klass = java.lang.String;
+            itchy.script.ScriptedCostumeProperties.addProperty(
+                className, propertyName, label, klass
+            );
+        },
+    }
+});
+
+
+    
 

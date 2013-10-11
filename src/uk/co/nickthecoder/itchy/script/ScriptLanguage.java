@@ -5,14 +5,10 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.script;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.io.Reader;
 import java.util.Arrays;
 import java.util.Date;
@@ -26,10 +22,12 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptException;
 
 import uk.co.nickthecoder.itchy.Behaviour;
+import uk.co.nickthecoder.itchy.CostumeProperties;
 import uk.co.nickthecoder.itchy.Game;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.SceneBehaviour;
 import uk.co.nickthecoder.itchy.util.ClassName;
+import uk.co.nickthecoder.itchy.util.Util;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
@@ -63,15 +61,18 @@ public abstract class ScriptLanguage
 
             Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
             bindings.put("game", this.manager.resources.getGame());
-            bindings.put("language", this.engine);
+            bindings.put("scriptLanguage", this);
+            bindings.put("scriptEngine", this.engine);
         }
 
+        // Load all of the scripts in resources/scripts/${LANGUAGE-EXTENSION}/
         String path = ".." + File.separator + "scripts" + File.separator + this.getExtension() +
             File.separator;
         File directory = this.manager.resources.resolveFile(new File(path));
 
         String end = "." + getExtension();
         File[] scripts = directory.listFiles();
+        // Sort by name, so they are loaded in the correct order. The names are prefixed with a 2 digit number.
         Arrays.sort(scripts);
         for (File script : scripts) {
             if (script.getName().endsWith(end)) {
@@ -84,7 +85,7 @@ public abstract class ScriptLanguage
     public boolean createScript( String templateName, ClassName className )
     {
         HashMap<String, String> subs = new HashMap<String, String>();
-        subs.put("NAME", className.name);
+        subs.put("NAME", ScriptManager.getName(className));
 
         try {
             createFromTemplate(className, templateName, subs);
@@ -99,57 +100,14 @@ public abstract class ScriptLanguage
         Map<String, String> substitutions )
         throws IOException
     {
-        File file = this.manager.getScript(className.name);
-
         String templateFilename = ".." + File.separator + "templates" + File.separator +
             getExtension() +
             File.separator + templateName + "." + this.getExtension();
 
         File templateFile = new File(this.manager.resources.resolveFilename(templateFilename));
+        File destFile = this.manager.getScript(className.name);
 
-        BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(
-            templateFile)));
-        PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-
-        String line = reader.readLine();
-        while (line != null) {
-            writeTemplateLine(writer, line, substitutions);
-
-            line = reader.readLine();
-        }
-        reader.close();
-        writer.close();
-
-    }
-
-    private void writeTemplateLine( PrintWriter out, String line, Map<String, String> substitutions )
-    {
-        int fromIndex = 0;
-        int open = line.indexOf("${");
-        while (open >= 0) {
-
-            out.print(line.substring(fromIndex, open));
-
-            int close = line.indexOf("}", open);
-            if (close < 0) {
-                out.println("${");
-                fromIndex += 2;
-
-            } else {
-                String key = line.substring(open + 2, close);
-                System.out.println("Found key : " + key);
-                if (substitutions.containsKey(key)) {
-                    out.print(substitutions.get(key));
-                } else {
-                    out.print("${");
-                    out.print(key);
-                    out.print("}");
-                }
-                fromIndex = close + 1;
-            }
-            open = line.indexOf("${", fromIndex);
-        }
-        out.println(line.substring(fromIndex));
+        Util.template(templateFile, destFile, substitutions);
     }
 
     protected void loadScript( String filename )
@@ -299,4 +257,10 @@ public abstract class ScriptLanguage
     public abstract void onMessage( ScriptedSceneBehaviour behaviour, String message )
         throws ScriptException;
 
+    // ====== COSTUME PROPERTIES =====
+
+    public abstract CostumeProperties createCostumeProperties( ClassName className )
+        throws ScriptException;
+
+    
 }

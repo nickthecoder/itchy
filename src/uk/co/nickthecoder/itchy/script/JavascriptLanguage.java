@@ -11,6 +11,7 @@ import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
 import uk.co.nickthecoder.itchy.Behaviour;
+import uk.co.nickthecoder.itchy.CostumeProperties;
 import uk.co.nickthecoder.itchy.Game;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.SceneBehaviour;
@@ -43,7 +44,8 @@ public class JavascriptLanguage extends ScriptLanguage
     {
         Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
         bindings.put("inst", inst);
-        return this.engine.eval("inst." + name + ";");
+        Object result = this.engine.eval("inst." + name + ";");
+        return result;
     }
 
     @Override
@@ -62,6 +64,14 @@ public class JavascriptLanguage extends ScriptLanguage
         bindings.put("game", game);
         bindings.put("sceneBehaviour", game.getSceneBehaviour());
     }
+    
+    private boolean eventResult( Object object )
+    {
+        if (object == null) {
+            return false;
+        }
+        return (boolean) object;
+    }
 
     // ===== GAME ======
 
@@ -76,7 +86,7 @@ public class JavascriptLanguage extends ScriptLanguage
 
         ScriptedGame game;
         try {
-            game = new ScriptedGame(this, gameScript);
+            game = new ScriptedGame(resources, this, gameScript );
         } catch (Exception e) {
             throw new ScriptException(e);
         }
@@ -124,7 +134,7 @@ public class JavascriptLanguage extends ScriptLanguage
         Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
         bindings.put("arg", ke);
 
-        return (boolean) this.engine.eval("gameScript.onKeyDown( arg );");
+        return eventResult( this.engine.eval("gameScript.onKeyDown( arg );") );
     }
 
     @Override
@@ -181,7 +191,7 @@ public class JavascriptLanguage extends ScriptLanguage
     public void tick( ScriptedGame game )
         throws ScriptException
     {
-        this.engine.eval("gameScript.tick( arg );");
+        this.engine.eval("gameScript.tick();");
     }
 
     // ===== Behaviour ======
@@ -370,6 +380,23 @@ public class JavascriptLanguage extends ScriptLanguage
         Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
         bindings.put("arg", message);
         this.engine.eval("sceneBehaviourScript.onMessage(arg);");
+    }
+
+    // ===== CostumeProperties ======
+
+    @Override
+    public CostumeProperties createCostumeProperties( ClassName className ) throws ScriptException
+    {
+        ensureGlobals();
+
+        String name = ScriptManager.getName(className);
+
+        Object costumePropertiesScript = this.engine.eval("new " + name + "();");
+
+        ScriptedCostumeProperties costumeProperties = new ScriptedCostumeProperties(className, this,
+            costumePropertiesScript);
+
+        return costumeProperties;
     }
 
 }

@@ -221,10 +221,12 @@ public class ResourcesReader
                     costume.behaviourClassName);
             }
 
-            String propertiesClassName = costumeTag.getOptionalAttribute("properties",
-                CostumeProperties.class.getName());
-            if (this.resources.registerCostumePropertiesClassName(propertiesClassName)) {
-                costume.setPropertiesClassName(propertiesClassName);
+            ClassName propertiesClassName = new ClassName(
+                costumeTag.getOptionalAttribute("properties",
+                    CostumeProperties.class.getName()));
+            
+            if (this.resources.registerCostumePropertiesClassName(propertiesClassName.name)) {
+                costume.setPropertiesClassName(this.resources,propertiesClassName);
 
             } else {
                 throw new XMLException("Expected a name of a Properties class : " +

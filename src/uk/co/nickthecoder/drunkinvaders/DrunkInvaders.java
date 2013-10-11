@@ -13,6 +13,7 @@ import uk.co.nickthecoder.itchy.Game;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Launcher;
 import uk.co.nickthecoder.itchy.MultiLineTextPose;
+import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.ScrollableLayer;
 import uk.co.nickthecoder.itchy.animation.Animation;
 import uk.co.nickthecoder.itchy.extras.FilmTransition;
@@ -20,6 +21,7 @@ import uk.co.nickthecoder.itchy.neighbourhood.Neighbourhood;
 import uk.co.nickthecoder.itchy.neighbourhood.NeighbourhoodCollisionStrategy;
 import uk.co.nickthecoder.itchy.neighbourhood.StandardNeighbourhood;
 import uk.co.nickthecoder.itchy.util.TextBehaviour;
+import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.Keys;
 
@@ -51,10 +53,10 @@ public class DrunkInvaders extends Game
 
     public boolean transitioning = false;
 
-    public DrunkInvaders()
+    public DrunkInvaders( Resources resources )
         throws Exception
     {
-        super();
+        super(resources);
 
         game = this;
         this.neighbourhood = new StandardNeighbourhood(NEIGHBOURHOOD_SQUARE_SIZE);
@@ -64,14 +66,16 @@ public class DrunkInvaders extends Game
     @Override
     public void createLayers()
     {
-        this.mainLayer = new ScrollableLayer("main", this.screenRect);
+        Rect screenRect = new Rect(0, 0, getWidth(), getHeight());
+
+        this.mainLayer = new ScrollableLayer("main", screenRect);
         this.mainLayer.centerOn(320, 240);
 
-        this.backgroundLayer = new ScrollableLayer("background", this.screenRect);
+        this.backgroundLayer = new ScrollableLayer("background", screenRect);
         this.backgroundLayer.centerOn(320, 240);
 
-        this.glassLayer = new ScrollableLayer("glass", this.screenRect);
-        this.fadeLayer = new ScrollableLayer("fade", this.screenRect);
+        this.glassLayer = new ScrollableLayer("glass", screenRect);
+        this.fadeLayer = new ScrollableLayer("fade", screenRect);
 
         this.layers.add(this.backgroundLayer);
         this.layers.add(this.mainLayer);
@@ -87,7 +91,7 @@ public class DrunkInvaders extends Game
     public void onActivate()
     {
         super.onActivate();
-        this.mainLayer.enableMouseListener();
+        this.mainLayer.enableMouseListener(this);
 
         this.metronomeCountdown = 0;
         this.metronome = 20;
@@ -244,12 +248,6 @@ public class DrunkInvaders extends Game
     public static void main( String argv[] ) throws Exception
     {
         Launcher.main(new String[] { "drunkInvaders" });
-    }
-
-    @Override
-    public String getInitialSceneName()
-    {
-        return "menu";
     }
 
 }

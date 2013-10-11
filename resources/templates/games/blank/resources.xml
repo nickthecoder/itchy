@@ -1,0 +1,18 @@
+<resources>
+  <game title="${TITLE}" width="${WIDTH}" height="${HEIGHT}" iconFilename="icon.bmp" className="uk.co.nickthecoder.itchy.Game"/>
+  <fonts>
+  </fonts>
+  <ninePatches/>
+  <poses>
+  </poses>
+  <sounds>
+  </sounds>
+  <animations>
+  </animations>
+  <costumes>
+  </costumes>
+  <scenes>
+    <scene name="start"/>
+  </scenes>
+</resources>
+

@@ -2,7 +2,8 @@ Play = new Class({
 
     Extends: SceneBehaviourScript,
     
-    init: function() {
+    init: function()
+    {
         this.player = null;
         this.speed = 5;
         this.speedUpAfter = 10;
@@ -10,14 +11,14 @@ Play = new Class({
         this.maxSpeed = 15;
     },
 
-    onActivate: function() {
+    onActivate: function()
+    {
         this.highScore = game.getPreferences().getInt( game.getSceneName() + ".highScore", 0);
         this.speedUp = itchy.extras.Timer.createTimerSeconds( this.speedUpAfter );
-        stdout.println("Start Speed " + this.speed + " Max Speed " + this.maxSpeed + " Speed up after " + this.speedUpAfter );
     },
     
-    tick: function() {
-    
+    tick: function()
+    {
         if (this.isPlaying()) {
             this.score += 1;
             if (this.score == this.highScore) {
@@ -35,7 +36,12 @@ Play = new Class({
         }
     },
     
-    onKeyDown: function(ke) {
+    onKeyDown: function(ke)
+    {
+        if ((ke.symbol == ke.RETURN) && (!this.isPlaying())) {
+            game.startScene( game.getSceneName() );
+        }
+        
         if (ke.symbol == ke.ESCAPE) {
             game.startScene("start");
             return true;
@@ -43,11 +49,13 @@ Play = new Class({
         return false;
     },
     
-    isPlaying: function() {
+    isPlaying: function()
+    {
         return this.player != null;
     },
     
-    end: function() {
+    end: function()
+    {
         this.speed = 0;
         this.player = null;
         if (this.score > this.highScore) {

@@ -68,10 +68,9 @@ public final class Editor extends Game
 
     public Editor( Game game ) throws Exception
     {
-        super();
+        super(game.resources);
 
         this.game = game;
-        this.resources = game.resources;
         singleton = this;
         this.preferences = new EditorPreferences();
 
@@ -205,11 +204,6 @@ public final class Editor extends Game
         this.designSceneName = sceneName;
     }
 
-    @Override
-    public String getInitialSceneName()
-    {
-        return null;
-    }
 
     public void debug()
     {

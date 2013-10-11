@@ -12,6 +12,7 @@ import java.util.HashMap;
 import javax.script.ScriptException;
 
 import uk.co.nickthecoder.itchy.Behaviour;
+import uk.co.nickthecoder.itchy.CostumeProperties;
 import uk.co.nickthecoder.itchy.Game;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.SceneBehaviour;
@@ -168,4 +169,15 @@ public class ScriptManager
 
         return language.createSceneBehaviour(className);
     }
+    
+    public CostumeProperties createCostumeProperties( ClassName className )
+        throws ScriptException
+    {
+        ScriptLanguage language = getLanguage(getExtension(className.name));
+        language.loadScript(className.name);
+
+        return language.createCostumeProperties(className);
+    }
+    
+    
 }

@@ -176,14 +176,14 @@ public class ScenesEditor extends SubEditor
                 return;
             }
         }
+        this.currentSceneResource.rename(this.txtName.getText());
 
         ClassName className = new ClassName(this.sceneBehaviourName.getText());
         if (!getResources().registerSceneBehaviourClassName(className.name)) {
             this.setMessage("Invalid Scene Behaviour");
             return;
         }
-        this.currentSceneResource.rename(this.txtName.getText());
-
+        
         if (this.adding) {
             try {
                 this.currentSceneResource.save();
@@ -204,6 +204,9 @@ public class ScenesEditor extends SubEditor
         try {
             this.currentSceneResource.getScene().showMouse = this.checkBoxShowMouse.getValue();
             this.currentSceneResource.getScene().sceneBehaviourName = className;
+            this.currentSceneResource.getScene().sceneBehaviourName =
+                new ClassName(this.sceneBehaviourName.getText());
+
             this.currentSceneResource.save();
         } catch (Exception e) {
             e.printStackTrace();

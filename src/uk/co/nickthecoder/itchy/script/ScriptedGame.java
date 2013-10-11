@@ -6,6 +6,7 @@
 package uk.co.nickthecoder.itchy.script;
 
 import uk.co.nickthecoder.itchy.Game;
+import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
@@ -14,13 +15,12 @@ public class ScriptedGame extends Game
 {
     private ScriptLanguage language;
 
-    public final Object scriptGame;
-
-    public ScriptedGame( ScriptLanguage language, Object scriptInstance )
+    public Object scriptGame;
+    
+    public ScriptedGame( Resources resources, ScriptLanguage language, Object scriptInstance)
         throws Exception
     {
-        super();
-
+        super( resources );
         this.language = language;
         this.scriptGame = scriptInstance;
     }
@@ -57,7 +57,7 @@ public class ScriptedGame extends Game
             return this.language.onQuit(this);
         } catch (Exception e) {
             handleException(e);
-            return false;
+            return super.onQuit();
         }
     }
 
@@ -134,17 +134,6 @@ public class ScriptedGame extends Game
             this.language.tick(this);
         } catch (Exception e) {
             handleException(e);
-        }
-    }
-
-    @Override
-    public String getInitialSceneName()
-    {
-        try {
-            return this.language.getInitialSceneName(this);
-        } catch (Exception e) {
-            handleException(e);
-            return "start";
         }
     }
 

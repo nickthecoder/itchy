@@ -26,6 +26,9 @@ public class GameInfo implements PropertySubject<GameInfo>
     @Property(label = "Icon")
     public String iconFilename;
 
+    @Property(label = "Initial Scene")
+    public String initialScene;
+    
     @Property(label = "Class Name", baseClass = Game.class)
     public ClassName className;
 
@@ -36,7 +39,7 @@ public class GameInfo implements PropertySubject<GameInfo>
         this.height = 600;
         this.iconFilename = "icon.bmp";
         this.className = new ClassName(Game.class.getName());
-
+        this.initialScene = "start";
     }
 
     @Override

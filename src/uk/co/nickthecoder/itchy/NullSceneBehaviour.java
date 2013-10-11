@@ -68,11 +68,12 @@ public class NullSceneBehaviour implements SceneBehaviour
     {
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public List<AbstractProperty<SceneBehaviour, ?>> getProperties()
     {
-        return AbstractProperty.findAnnotations((Class<SceneBehaviour>) this.getClass());
+        Class<? extends SceneBehaviour> klass = this.getClass().asSubclass(SceneBehaviour.class);
+        
+        return AbstractProperty.findAnnotations(klass);
     }
 
 }

@@ -5,6 +5,11 @@
  ******************************************************************************/
 package uk.co.nickthecoder.tetra;
 
+/*
+ * Thanks to Colin Fahey, for an excellent guide to all things tetrisy :
+ * http://www.colinfahey.com/tetris/
+ */
+
 import java.awt.Point;
 import java.util.Random;
 
@@ -12,13 +17,14 @@ import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Game;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Launcher;
-import uk.co.nickthecoder.itchy.Scene;
+import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.ScrollableLayer;
 import uk.co.nickthecoder.itchy.animation.Animation;
 import uk.co.nickthecoder.itchy.extras.Explosion;
 import uk.co.nickthecoder.itchy.extras.Fragment;
 import uk.co.nickthecoder.itchy.extras.Timer;
 import uk.co.nickthecoder.jame.RGBA;
+import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.Sound;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.Keys;
@@ -103,8 +109,6 @@ public class Tetra extends Game
 
     boolean playing = false;
 
-    String sceneName;
-
     Timer escapeTimer;
 
     /**
@@ -133,15 +137,17 @@ public class Tetra extends Game
      */
     public int completedLines;
 
-    public Tetra() throws Exception
+    public Tetra( Resources resources ) throws Exception
     {
-        super();
+        super(resources);
     }
 
     @Override
     protected void createLayers()
     {
-        this.mainLayer = new ScrollableLayer("main", this.screenRect, new RGBA(0, 0, 0));
+        Rect screenRect = new Rect(0, 0, getWidth(), getHeight());
+
+        this.mainLayer = new ScrollableLayer("main", screenRect, new RGBA(0, 0, 0));
         this.layers.add(this.mainLayer);
     }
 
@@ -149,24 +155,9 @@ public class Tetra extends Game
     public void onActivate()
     {
         super.onActivate();
-        this.mainLayer.enableMouseListener();
+        this.mainLayer.enableMouseListener(this);
 
         this.level = getStartingLevel();
-    }
-
-    @Override
-    public void startScene( String name )
-    {
-        this.sceneName = name;
-        try {
-            Scene scene = this.resources.getScene(name);
-            scene.create(this.mainLayer, this.resources, false);
-            Itchy.showMousePointer(scene.showMouse);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            startEditor();
-        }
     }
 
     @Override
@@ -243,7 +234,7 @@ public class Tetra extends Game
             chooseLevel(ke.symbol - Keys.KEY_0);
         }
 
-        if ((ke.symbol == Keys.ESCAPE) && (this.sceneName.equals("main"))) {
+        if ((ke.symbol == Keys.ESCAPE) && (this.getSceneName().equals("main"))) {
             gameOver();
             this.resources.getSound("shatter").play();
             for (int x = 1; x <= WIDTH; x++) {
@@ -442,6 +433,11 @@ public class Tetra extends Game
         this.playing = true;
     }
 
+    public int getScore()
+    {
+        return this.score;
+    }
+
     public int getHighScore()
     {
         return getPreferences().getInt("highScore", 0);
@@ -579,12 +575,6 @@ public class Tetra extends Game
             }
         }
 
-    }
-
-    @Override
-    public String getInitialSceneName()
-    {
-        return "menu";
     }
 
     public static void main( String argv[] ) throws Exception

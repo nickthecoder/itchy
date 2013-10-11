@@ -9,8 +9,6 @@ import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.gui.ClassNameBox;
 import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
-import uk.co.nickthecoder.itchy.gui.Container;
-import uk.co.nickthecoder.itchy.gui.TextBox;
 import uk.co.nickthecoder.itchy.script.ScriptManager;
 
 public class ClassNameProperty<S> extends AbstractProperty<S, ClassName>
@@ -47,7 +45,10 @@ public class ClassNameProperty<S> extends AbstractProperty<S, ClassName>
                         if (listener != null) {
                             listener.changed();
                         }
+                        classNameBox.removeStyle("error");
                     } catch (Exception e) {
+                        e.printStackTrace();
+                        classNameBox.addStyle("error");
                     }
                 }
             });
@@ -59,11 +60,10 @@ public class ClassNameProperty<S> extends AbstractProperty<S, ClassName>
     @Override
     public void update( S subject, Component component ) throws Exception
     {
-        Container container = (Container) component;
-        TextBox textBox = (TextBox) container.getChildren().get(0);
+        ClassNameBox classNameBox = (ClassNameBox) component;
 
         try {
-            this.setValue(subject, textBox.getText());
+            this.setValue(subject, classNameBox.getClassName());
         } catch (Exception e) {
         }
     }

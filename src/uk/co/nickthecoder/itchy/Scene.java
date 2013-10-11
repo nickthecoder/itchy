@@ -21,7 +21,7 @@ public class Scene
     private HashMap<String, SceneLayer> layersMap;
 
     public SceneBehaviour sceneBehaviour;
-    
+
     public boolean showMouse = true;
 
     public ClassName sceneBehaviourName;
@@ -32,7 +32,8 @@ public class Scene
     {
         this.sceneLayers = new ArrayList<SceneLayer>();
         this.layersMap = new HashMap<String, SceneLayer>();
-        
+        this.sceneBehaviourName = new ClassName(NullSceneBehaviour.class.getName());
+
         this.createSceneLayer("default");
     }
 
@@ -134,8 +135,8 @@ public class Scene
         throws Exception
     {
         SceneBehaviour result;
-        
-        if (StringUtils.isBlank(this.sceneBehaviourName)) {
+
+        if (StringUtils.isBlank(this.sceneBehaviourName.name)) {
             result = new NullSceneBehaviour();
         } else {
             if (resources.scriptManager.isValidScript(this.sceneBehaviourName)) {
@@ -146,7 +147,7 @@ public class Scene
             }
         }
         // Copy the sceneBehaviour properties
-        if ( this.sceneBehaviour != null ) {
+        if (this.sceneBehaviour != null) {
             for (AbstractProperty<SceneBehaviour, ?> property : result.getProperties()) {
                 property.setValue(result, property.getValue(this.sceneBehaviour));
             }
