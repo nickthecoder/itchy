@@ -26,20 +26,20 @@ public class Util
     private static final Random random = new Random();
 
     /**
-     * A random chance. For a one in size chance :
+     * A random chance. For a one in N chance :
      * 
      * <pre>
      * <code>
-     *  if ( Util.oneIn( 6 ) ) {
+     *  if ( Util.randomOneIn( 6 ) ) {
      *     // Do something
      *  }
      * </code>
      * </pre>
      * 
      */
-    public static boolean randomOneIn( double times )
+    public static boolean randomOneIn( double n )
     {
-        return random.nextDouble() * times < 1.0;
+        return random.nextDouble() * n < 1.0;
     }
 
     /**
@@ -53,8 +53,8 @@ public class Util
      * </code>
      * </pre>
      * 
-     * This method assumes it is being called in a behaviour's tick method. i.e. it will only give
-     * the correct chance if it is being called once every frame.
+     * This method assumes it is being called once every frame. For example, you could call it
+     * from a Behaviour's tick method.
      */
     public static boolean randomOnceEvery( double seconds )
     {
@@ -73,6 +73,12 @@ public class Util
         return random.nextDouble() * (to - from) + from;
     }
 
+    /**
+     * Picks a string randomly from the array of strings supplied.
+     * 
+     * @param choices
+     * @return One of the strings from <code>choices</code>.
+     */
     public static final String randomText( String[] choices )
     {
 
@@ -80,11 +86,24 @@ public class Util
         return choices[index];
     }
 
+    /**
+     * @param filename
+     *        A filename, or path, which may or may not have a file extension
+     * @return The name of the file with the file extension removed. Note, if the file has two
+     *         extensions, such as "foo.tar.gz", then only one is stripped, return "foo.tar" in this
+     *         example.
+     */
     public static String nameFromFilename( String filename )
     {
         return nameFromFile(new File(filename));
     }
 
+    /**
+     * @param file
+     * @return The name of the file with the file extension removed. Note, if the file has two
+     *         extensions, such as "foo.tar.gz", then only one is stripped, return "foo.tar" in this
+     *         example.
+     */
     public static String nameFromFile( File file )
     {
         String name = file.getName();
@@ -94,25 +113,40 @@ public class Util
         }
         return name;
     }
-    
 
+    /**
+     * Copies a directory recursively.
+     * 
+     * @param src
+     *        The directory to copy from.
+     * @param dest
+     *        The directory to be created.
+     * @throws IOException
+     */
     public static void copyDirectory( File src, File dest )
         throws IOException
     {
         dest.mkdir();
-        for ( File file : src.listFiles() ) {
+        for (File file : src.listFiles()) {
             if (file.isDirectory()) {
-                copyDirectory( file, new File(dest, file.getName()));
+                copyDirectory(file, new File(dest, file.getName()));
             } else {
-                copyFile( file, new File(dest, file.getName()));
+                copyFile(file, new File(dest, file.getName()));
             }
         }
     }
-    
-    public static void copyFile(File sourceFile, File destFile)
+
+    /**
+     * Copies a single file.
+     * 
+     * @param sourceFile
+     * @param destFile
+     * @throws IOException
+     */
+    public static void copyFile( File sourceFile, File destFile )
         throws IOException
     {
-        if(!destFile.exists()) {
+        if (!destFile.exists()) {
             destFile.createNewFile();
         }
 
@@ -123,17 +157,26 @@ public class Util
             source = new FileInputStream(sourceFile).getChannel();
             destination = new FileOutputStream(destFile).getChannel();
             destination.transferFrom(source, 0, source.size());
-        }
-        finally {
-            if(source != null) {
+        } finally {
+            if (source != null) {
                 source.close();
             }
-            if(destination != null) {
+            if (destination != null) {
                 destination.close();
             }
         }
     }
-    
+
+    /**
+     * Reads the contents of a file returning it as a String. Only use this if you know that the
+     * file is small, beacause a large file will consume all available memory, which will, at best
+     * crash the program and at worst will make the computer so unresponsive that you'll need to
+     * reboot it uncleanly.
+     * 
+     * @param file
+     * @return The contents of the file
+     * @throws IOException
+     */
     public static String readFile( File file )
         throws IOException
     {
@@ -141,7 +184,7 @@ public class Util
         try {
             StringBuilder sb = new StringBuilder();
             String line = br.readLine();
-    
+
             while (line != null) {
                 sb.append(line);
                 sb.append('\n');
@@ -152,7 +195,16 @@ public class Util
             br.close();
         }
     }
-    
+
+    /**
+     * A very simple template mechanism, copying one file to another, performing substitutions of the for
+     * ${FOO}.
+     * 
+     * @param templateFile The source template to copy from.
+     * @param destFile The file to create
+     * @param substitutions A map of substitutions. Wherever ${KEY} is found in the document it is replaced with that key's value.
+     * @throws IOException
+     */
     public static void template( File templateFile, File destFile, Map<String, String> substitutions )
         throws IOException
     {
@@ -171,7 +223,8 @@ public class Util
 
     }
 
-    private static void writeTemplateLine( PrintWriter out, String line, Map<String, String> substitutions )
+    private static void writeTemplateLine( PrintWriter out, String line,
+        Map<String, String> substitutions )
     {
         int fromIndex = 0;
         int open = line.indexOf("${");

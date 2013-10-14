@@ -1,15 +1,13 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0 which accompanies this
+ * distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
 /**
  * Keeps the frame rate at a constant value, so that each Actor's tick is for a known, and
- * consistent time interval. The default frame rate is 50fps, but this can be changed by the game
+ * consistent time interval. The default frame rate is 60fps, but this can be changed by the game
  * designer by :
  * 
  * <pre>
@@ -23,11 +21,11 @@ public abstract class FrameRate
     private static final int NANOS_TO_MILLIS = 1000000;
 
     private static final int NANOS_TO_SECONDS = 1000000000;
-    
+
     private int requiredRate;
 
     private int requiredPeriodNanos;
-    
+
     /**
      * The maximum number of consecutive frames to skip redrawing when the frame rate is too low.
      */
@@ -54,11 +52,16 @@ public abstract class FrameRate
 
     public FrameRate()
     {
-        setRequiredRate(50);
+        this(60);
+    }
+
+    public FrameRate( int framesPerSecond )
+    {
+        setRequiredRate(framesPerSecond);
     }
 
     /**
-     * Set the required frame rate. The default is 50, and if you want to change it, do so once in
+     * Set the required frame rate. The default is 60, and if you want to change it, do so once in
      * your game's constructor.
      * 
      * @param value
@@ -83,33 +86,33 @@ public abstract class FrameRate
     {
         return this.droppedFrames;
     }
-    
+
     void loop()
     {
         this.previousNanoTime = System.nanoTime();
 
         while (isRunning()) {
-            
+
             doGameLogic();
-            
+
             // Should we redraw the screen?
             if (this.errorNanos > this.requiredPeriodNanos) {
                 // We are lagging by over a frame, correct by not doing the redraw.
                 this.sequentialDroppedFrames++;
-                
+
                 if (this.sequentialDroppedFrames >= this.droppedFramesLimit) {
-                    //System.err.println("Maximum frame skipping, cannot maintain frame rate.");
+                    // System.err.println("Maximum frame skipping, cannot maintain frame rate.");
                     doRedraw();
                     this.sequentialDroppedFrames = 0;
                 } else {
-                    //System.err.println( "Dropped a frame" );
+                    // System.err.println( "Dropped a frame" );
                     this.droppedFrames++;
                 }
             } else {
                 doRedraw();
                 this.sequentialDroppedFrames = 0;
             }
-            
+
             completeFrame();
         }
     }
@@ -140,7 +143,7 @@ public abstract class FrameRate
                 }
             }
         }
-        
+
         this.errorNanos = (int) (frameTimeNanos - this.requiredPeriodNanos);
 
         this.previousNanoTime = System.nanoTime();

@@ -32,7 +32,7 @@
     </target>
 
 	<!-- publish : Used to create zip files of the source and binaries -->
-    <target name="publish" > <!--depends="clean,build,javadoc">-->
+    <target name="publish" depends="clean,build,javadoc">
 
     	<mkdir dir="${publish.dir}"/>
 
@@ -42,7 +42,10 @@
                 <include name="launch.bat"/>
                 <include name="lib/native/win32/*.dll"/>
                 <include name="resources/**/*.xml"/>
+                <include name="resources/**/*.js"/>
                 <include name="resources/**/*.png"/>
+                <include name="resources/**/*.jpg"/>
+                <include name="resources/**/*.bmp"/>
                 <include name="resources/**/*.ttf"/>
                 <include name="resources/**/*.ogg"/>
             </fileset>
@@ -55,7 +58,10 @@
                 <include name="lib/native/i686/*.so"/>
                 <include name="lib/native/x86-64/*.so"/>
                 <include name="resources/**/*.xml"/>
+                <include name="resources/**/*.js"/>
                 <include name="resources/**/*.png"/>
+                <include name="resources/**/*.jpg"/>
+                <include name="resources/**/*.bmp"/>
                 <include name="resources/**/*.ttf"/>
                 <include name="resources/**/*.ogg"/>
             </fileset>
@@ -71,6 +77,7 @@
                 <include name="resources/**/*.svg"/>
                 <include name="resources/**/*.xml"/>
                 <include name="resources/**/*.png"/>
+                <include name="resources/**/*.jpg"/>
                 <include name="resources/**/*.bmp"/>
                 <include name="resources/**/*.ttf"/>
                 <include name="resources/**/*.ogg"/>
@@ -92,11 +99,11 @@
     
     <!-- Generate javadocs -->
     <target name="javadoc" depends="build">
+    	<copy file="docs/stylesheet.css" todir="docs/api/"/>
         <javadoc sourcepath="src"
             classpathref="project.class.path"
             access="protected"
             destdir="docs/api"
-        	stylesheetfile="docs/stylesheet.css"
             windowtitle="Itchy">
 
             <package name="uk.co.nickthecoder.itchy"/>
@@ -106,6 +113,10 @@
             <package name="uk.co.nickthecoder.itchy.neighbourhood"/>
             <package name="uk.co.nickthecoder.itchy.script"/>
             <package name="uk.co.nickthecoder.itchy.util"/>
+        	
+            <link packagelistloc="http://nickthecoder.co.uk/public/jame/api/package-list" href="http://nickthecoder.co.uk/public/jame/api/"/>
+            <link packagelistloc="http://docs.oracle.com/javase/7/docs/api/package-list" href="http://docs.oracle.com/javase/7/docs/api/"/>
+        	
         </javadoc>
     </target>
 

@@ -595,9 +595,10 @@ public class Game implements EventListener, MessageListener
 
     public void startEditor()
     {
+        this.layers.clear();
         try {
             Editor editor = new Editor(this);
-            editor.start(null);
+            editor.start();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -605,6 +606,7 @@ public class Game implements EventListener, MessageListener
 
     public void startEditor( String designSceneName )
     {
+        this.layers.clear();
         try {
             Editor editor = new Editor(this);
             editor.designScene(designSceneName);

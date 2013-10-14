@@ -54,8 +54,6 @@ public class Itchy
 
     private static int mouseY;
 
-    public static Surface screen;
-
     private static boolean running;
 
     private static Game currentGame;
@@ -103,15 +101,15 @@ public class Itchy
 
     private static void setScreenMode( Game game )
     {
-        setScreenMode( game.getTitle(), game.resources, game.getWidth(), game.getHeight() );
+        setScreenMode(game.getTitle(), game.resources, game.getWidth(), game.getHeight());
     }
-    
+
     private static void setScreenMode( Resources resources )
     {
-        setScreenMode( resources.gameInfo.title, resources,
-            resources.gameInfo.width, resources.gameInfo.height );
+        setScreenMode(resources.gameInfo.title, resources,
+            resources.gameInfo.width, resources.gameInfo.height);
     }
-    
+
     private static void setScreenMode( String title, Resources resources, int width, int height )
     {
         Video.setWindowTitle(title);
@@ -120,7 +118,7 @@ public class Itchy
         // According to the SDL1.2 docs, windows MUST be given a 32x32 image.
         String filename32 = resources.resolveFilename("icon32.bmp");
         String filename = resources.resolveFilename("icon.bmp");
-        
+
         try {
             Video.setWindowIcon(filename32);
             Video.setWindowIcon(filename);
@@ -129,7 +127,7 @@ public class Itchy
         }
 
         try {
-            screen = Video.setMode(width, height);
+            Video.setMode(width, height);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -229,10 +227,15 @@ public class Itchy
         }
     }
 
+    public static Surface getDisplaySurface()
+    {
+        return Video.getDisplaySurface();
+    }
+    
     private static void doRedraw()
     {
-        currentGame.render(screen);
-        screen.flip();
+        currentGame.render(Video.getDisplaySurface());
+        Video.flip();
     }
 
     public static void endOfFrame()

@@ -9,6 +9,7 @@ import java.text.DecimalFormat;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.ActorCollisionStrategy;
+import uk.co.nickthecoder.itchy.Behaviour;
 import uk.co.nickthecoder.itchy.Game;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Launcher;
@@ -16,11 +17,11 @@ import uk.co.nickthecoder.itchy.MultiLineTextPose;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.ScrollableLayer;
 import uk.co.nickthecoder.itchy.animation.Animation;
-import uk.co.nickthecoder.itchy.extras.FilmTransition;
+import uk.co.nickthecoder.itchy.animation.CompoundAnimation;
+import uk.co.nickthecoder.itchy.extras.SceneTransition;
 import uk.co.nickthecoder.itchy.neighbourhood.Neighbourhood;
 import uk.co.nickthecoder.itchy.neighbourhood.NeighbourhoodCollisionStrategy;
 import uk.co.nickthecoder.itchy.neighbourhood.StandardNeighbourhood;
-import uk.co.nickthecoder.itchy.util.TextBehaviour;
 import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.Keys;
@@ -49,7 +50,7 @@ public class DrunkInvaders extends Game
 
     private Neighbourhood neighbourhood;
 
-    private TextBehaviour info;
+    private Behaviour info;
 
     public boolean transitioning = false;
 
@@ -131,21 +132,25 @@ public class DrunkInvaders extends Game
     {
         if (this.info == null) {
 
-            this.info = new TextBehaviour(new MultiLineTextPose(this.resources.getFont("vera"), 16))
+            final MultiLineTextPose pose = new MultiLineTextPose(this.resources.getFont("vera"), 16);
+
+            this.info = new Behaviour()
             {
                 @Override
                 public void tick()
                 {
-                    this.setText(
+                    pose.setText(
                         "Aliens Remaining : " + DrunkInvaders.this.aliensRemaining + "\n" +
-                            "Dropped Frames   : " + Itchy.frameRate.getDroppedFrames()
-                        );
+                        "Dropped Frames   : " + Itchy.frameRate.getDroppedFrames()
+                    );
                 }
             };
-            this.info.textPose.setAlignment(0, 0);
-            this.info.createActor().moveTo(40, 460);
-            this.glassLayer.add(this.info.getActor());
-            this.info.getActor().activate();
+            pose.setAlignment(0, 0);
+            Actor actor = new Actor(pose);
+            actor.setBehaviour(this.info);
+            actor.moveTo(40, 460);
+            this.glassLayer.add(actor);
+            actor.activate();
 
         } else {
             this.info.getActor().kill();
@@ -168,18 +173,26 @@ public class DrunkInvaders extends Game
         this.neighbourhood.clear();
 
         this.transitioning = true;
-        Animation transition = FilmTransition.slideUp();
+        Animation transition = new CompoundAnimation(false)
+            .add(SceneTransition.slideUp())
+            .add(SceneTransition.fade());
 
         if ("about".equals(sceneName)) {
-            transition = FilmTransition.slideRight();
+            transition = new CompoundAnimation(false)
+                .add(SceneTransition.slideRight())
+                .add(SceneTransition.fade());
 
         } else if ("levels".equals(sceneName)) {
-            transition = FilmTransition.slideRight();
+            transition = new CompoundAnimation(false)
+            .add(SceneTransition.slideRight())
+            .add(SceneTransition.fade());
 
         } else if ("menu".equals(sceneName)) {
-            transition = FilmTransition.slideLeft();
+            transition = new CompoundAnimation(false)
+            .add(SceneTransition.slideLeft())
+            .add(SceneTransition.fade());
         }
-        new FilmTransition().animation(transition).transition(sceneName);
+        new SceneTransition(transition).transition(sceneName);
     }
 
     @Override
@@ -200,7 +213,7 @@ public class DrunkInvaders extends Game
         } else if ("quit".equals(message)) {
             end();
 
-        } else if (message == FilmTransition.COMPLETE) {
+        } else if (message == SceneTransition.COMPLETE) {
             this.transitioning = false;
         }
     }

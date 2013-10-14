@@ -352,7 +352,7 @@ public class Tetra extends Game
     public void setLevel( int level )
     {
         this.level = level;
-        double delay = (11 - this.level) * 50.0 / 1000.0;
+        double delay = (11 - this.level) * 60.0 / 1000.0;
         this.timer = Timer.createTimerSeconds(delay);
     }
 

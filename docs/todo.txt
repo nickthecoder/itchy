@@ -1,19 +1,29 @@
 Jame is out of date, need to rebuild for win32 and i386 and ARM??
     Compile and test using windows.
-    Add the dependant dlls to jame's git tree?
-        No. If NuGet can automate the download of dependencies, then an ant task can bundle them.
-    Add the compiled dll and .so files to jame's git tree??
-        No. Ant task which uploads the compiled object to a ftp server?
+    Compile on raspPi?
 
 What's Next
 ===========
+
+"Link" behaviour - like Button, but opens the url started.
+
+Wizard to have a "Launch", "Fork", "New" tabs
+
+Launch and launch.bat to try to set the current directory
+    No just make Launcher.main treat the argument in two ways
+        As a name of a folder in "resources" i.e. launch rain
+        As a fully qualified path of the resources file. launch /home/nick/projects/itchy/resources/rain.xml
 
 When getting a property value from a script, if it doesn't return a valid value, report in stderr, and
     return a reasonable default. "", 0, 0.0, black.
 
 Bug : It seems that the editor is using the REAL behaviour for some text buttons (easy,medium,hard),
     when it should be using a SceneBehvaiour???
+    No, I think the old actors haven't been destroyed, and are picking up on mouse clicks.
     Is this also what's causing ./launch tetra --editor spewing out lots of stack traces?
+
+Can Game own all of the Actors? And all of the tags?
+    This would prevent weird error when the actors aren't killed when moving from game to editor.
 
 CostumeProperties
     Use auto update components, so we don't have the fragile "for" loop in onOk.
@@ -34,11 +44,6 @@ Check that a broken script doesn't cause problems :
     SceneBehaviour in designer
     Game
 
-
-Create a "Game" which lists all of the games, and clicking one will play it
-    List all directories in the "resources" directory containing a like named xml file. 
-    Exclude itself
-    A vertical scroll c a set of buttons.
 
 Rain : reset high scores
 

@@ -6,7 +6,7 @@
     <text text="Well Done" font="boycott" size="111" color="#22bb22" x="322" y="404" direction="0.0" startEvent="default"/>
     <text text="The world is safe" font="vera" size="22" color="#ffffff" x="319" y="108" direction="0.0" startEvent="default"/>
     <text text="The aliens are dead" font="vera" size="22" color="#ffffff" x="320" y="80" direction="0.0" startEvent="default"/>
-    <text text="MENU" font="blackCasper" size="53" color="#000000" behaviour="uk.co.nickthecoder.itchy.extras.Button" x="320" y="24" direction="0.0" startEvent="default">
+    <text text="MENU" font="blackCasper" size="53" color="#000000" behaviour="uk.co.nickthecoder.itchy.extras.MessageButton" x="320" y="24" direction="0.0" startEvent="default">
       <property name="message" value="menu"/>
     </text>
     <actor costume="shieldFactory" x="183" y="202" direction="89.29168795888526" startEvent="default">

@@ -68,7 +68,7 @@
     <costume name="board">
       <pose name="default" pose="board"/>
     </costume>
-    <costume name="button" behaviour="uk.co.nickthecoder.itchy.extras.Button">
+    <costume name="button" behaviour="uk.co.nickthecoder.itchy.extras.MessageButton">
       <pose name="default" pose="button"/>
     </costume>
     <costume name="cyan" extends="square">
