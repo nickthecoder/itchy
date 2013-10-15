@@ -1,7 +1,8 @@
 <scene showMouse="true" behaviour="Play.js">
   <properties>
-    <property name="speed" value="3"/>
-    <property name="speedUpAfter" value="8"/>
+    <property name="speed" value="5"/>
+    <property name="maxSpeed" value="15"/>
+    <property name="speedUpAfter" value="12"/>
   </properties>
   <layer name="main">
     <actor costume="background" x="0" y="600" direction="0.0" startEvent="default"/>

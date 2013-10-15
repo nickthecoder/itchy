@@ -5,14 +5,20 @@ Jame is out of date, need to rebuild for win32 and i386 and ARM??
 What's Next
 ===========
 
-"Link" behaviour - like Button, but opens the url started.
-
-Wizard to have a "Launch", "Fork", "New" tabs
-
 Launch and launch.bat to try to set the current directory
-    No just make Launcher.main treat the argument in two ways
+    make Launcher.main treat the argument in two ways
         As a name of a folder in "resources" i.e. launch rain
         As a fully qualified path of the resources file. launch /home/nick/projects/itchy/resources/rain.xml
+    This combo should allow launcher to be launched from anywhere, and also for a game to reside anywhere,
+        not in the same dir as Itchy.
+        Get Thrust to run via "launch" without the resource symlinks to itchy.
+            Need thrusts jar file to be in a lib directory within its resources, and for the jar to be loaded
+            after java has started.
+   Maybe all itchy resource files should end in .itchy. So they can be double clicked!
+        Or maybe they should be zip files? Nah, the icons won't work, nor the .jar file, and it would be annoying to zip it.
+    Scripts and templates should be relative to the current directory, not relative to the game's resources.
+        Test rain from its own little resources directory.
+
 
 When getting a property value from a script, if it doesn't return a valid value, report in stderr, and
     return a reasonable default. "", 0, 0.0, black.
@@ -20,6 +26,7 @@ When getting a property value from a script, if it doesn't return a valid value,
 Bug : It seems that the editor is using the REAL behaviour for some text buttons (easy,medium,hard),
     when it should be using a SceneBehvaiour???
     No, I think the old actors haven't been destroyed, and are picking up on mouse clicks.
+        Possible just the layers, and their mouse listeners.
     Is this also what's causing ./launch tetra --editor spewing out lots of stack traces?
 
 Can Game own all of the Actors? And all of the tags?

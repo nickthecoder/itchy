@@ -15,7 +15,7 @@ import uk.co.nickthecoder.itchy.ActorCollisionStrategy;
 import uk.co.nickthecoder.itchy.BruteForceCollisionStrategy;
 
 /**
- * Uses a Neighbourhood to optimise Actor's overlapping and touching methods. This strategy uses a
+ * Uses a Neighbourhood to optimise Actor's overlapping and pixelOcerlap methods. This strategy uses a
  * grid based neighbourhood, when the actor is placed into a single NeighbourhoodSquare based on the
  * Actors x,y coordintate. When checking for collisions, actors in the same square, and neighbouring
  * squares are considered. This means that all of the actors which use this strategy must not be
@@ -96,7 +96,7 @@ public class SinglePointCollisionStrategy extends ActorCollisionStrategy
     }
 
     @Override
-    public Set<Actor> touching( Actor source, String[] includeTags, String[] excludeTags )
+    public Set<Actor> pixelOverlap( Actor source, String[] includeTags, String[] excludeTags )
     {
         Set<Actor> results = new HashSet<Actor>();
 
@@ -109,7 +109,7 @@ public class SinglePointCollisionStrategy extends ActorCollisionStrategy
                         for (String includeTag : includeTags) {
                             if (actor.hasTag(includeTag)) {
     
-                                if (source.touching(actor)) {
+                                if (source.pixelOverlap(actor)) {
                                     results.add(actor);
                                     break;
                                 }

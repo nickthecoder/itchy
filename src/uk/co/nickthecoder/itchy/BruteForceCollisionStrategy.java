@@ -6,7 +6,7 @@
 package uk.co.nickthecoder.itchy;
 
 /**
- * The default strategy for Actor's overlapping and touching methods. It is Order n squared, and
+ * The default strategy for Actor's overlapping and pixelOverlap methods. It is Order n squared, and
  * therefore slow for large values of n.
  */
 
@@ -69,7 +69,7 @@ public class BruteForceCollisionStrategy implements CollisionStrategy
     }
 
     @Override
-    public Set<Actor> touching( Actor source, String[] includeTags, String[] excludeTags )
+    public Set<Actor> pixelOverlap( Actor source, String[] includeTags, String[] excludeTags )
     {
         Set<Actor> results = new HashSet<Actor>();
         for (String tag : includeTags) {
@@ -77,7 +77,7 @@ public class BruteForceCollisionStrategy implements CollisionStrategy
 
                 if ((other != source) && (!exclude(other, excludeTags))) {
                     if (!results.contains(other)) {
-                        if (source.touching(other)) {
+                        if (source.pixelOverlap(other)) {
                             results.add(other);
                         }
                     }

@@ -9,9 +9,74 @@ import java.io.File;
 import java.util.Arrays;
 
 import uk.co.nickthecoder.itchy.editor.Editor;
+import uk.co.nickthecoder.itchy.gui.Container;
+import uk.co.nickthecoder.itchy.gui.GuiPose;
+import uk.co.nickthecoder.itchy.gui.Notebook;
+import uk.co.nickthecoder.itchy.gui.Stylesheet;
+import uk.co.nickthecoder.itchy.gui.VerticalLayout;
+import uk.co.nickthecoder.itchy.tools.ForkGame;
+import uk.co.nickthecoder.itchy.tools.GameMenu;
+import uk.co.nickthecoder.itchy.tools.NewGameWizard;
 
-public class Launcher
+public class Launcher extends Game
 {
+    private static final String RULES = "resources/editor/style.xml";
+
+    public GuiPose mainGuiPose;
+
+    public Launcher( Resources resources )
+        throws Exception
+    {
+        super(resources);
+
+        try {
+            setStylesheet(new Stylesheet(new File(RULES)));
+        } catch (Exception e) {
+            System.err.println("Failed to load stylesheet : " + RULES);
+            e.printStackTrace();
+        }
+
+    }
+
+    @Override
+    public void onActivate()
+    {
+        Itchy.enableKeyboardRepeat(true);
+
+        this.mainGuiPose = new GuiPose();
+        this.mainGuiPose.addStyle("editor");
+
+        this.mainGuiPose.setMinimumWidth(this.getWidth());
+        this.mainGuiPose.setMinimumHeight(this.getHeight());
+
+        this.mainGuiPose.setMaximumWidth(this.getWidth());
+        this.mainGuiPose.setMaximumHeight(this.getHeight());
+
+        createWindow();
+        this.mainGuiPose.show();
+
+    }
+
+    private void createWindow()
+    {
+        this.mainGuiPose.setLayout(new VerticalLayout());
+        Container form = new Container();
+        this.mainGuiPose.addChild(form);
+
+        Notebook notebook = new Notebook();
+
+
+        GameMenu gameMenu = new GameMenu();
+        NewGameWizard newGameWizard = new NewGameWizard(resources);
+        ForkGame forkGame = new ForkGame();
+        
+        notebook.addPage(gameMenu.getName(), gameMenu.createForm());
+        notebook.addPage(newGameWizard.getName(), newGameWizard.createForm());
+        notebook.addPage( forkGame.getName(), forkGame.createForm());
+
+        this.mainGuiPose.addChild(notebook);
+
+    }
 
     public static void main( String argv[] ) throws Exception
     {
@@ -19,31 +84,33 @@ public class Launcher
             System.out.println(arg);
         }
 
-        if (argv.length > 0) {
-            String name = argv[0];
-            String resourcePath;
-            if (new File(name).exists()) {
-                resourcePath = name;
-            } else {
-                resourcePath = "resources" + File.separator + name + File.separator + name + ".xml";
-            }
+        String name;
+        if (argv.length == 0) {
+            name = "launcher";
+        } else {
+            name = argv[0];
             argv = Arrays.copyOfRange(argv, 1, argv.length);
+        }
 
-            Resources resources = new Resources();
-            resources.load(new File(resourcePath));
+        String resourcePath;
+        if (new File(name).exists()) {
+            resourcePath = name;
+        } else {
+            resourcePath = "resources" + File.separator + name + File.separator + name + ".xml";
+        }
 
-            if ((argv.length == 1) && ("--editor".equals(argv[0]))) {
+        Resources resources = new Resources();
+        resources.load(new File(resourcePath));
 
-                Editor editor = new Editor(resources.getGame());
-                editor.start();
+        if ((argv.length == 1) && ("--editor".equals(argv[0]))) {
 
-            } else {
-                resources.getGame().start();
-            }
+            Editor editor = new Editor(resources.getGame());
+            editor.start();
 
         } else {
-            System.out.println("Usage : Launcher RESOURCES_FILE [--editor]");
+            resources.getGame().start();
         }
+
     }
 
 }

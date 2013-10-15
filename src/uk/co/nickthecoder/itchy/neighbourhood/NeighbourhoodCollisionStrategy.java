@@ -15,7 +15,7 @@ import uk.co.nickthecoder.itchy.BruteForceCollisionStrategy;
 import uk.co.nickthecoder.itchy.WorldRectangle;
 
 /**
- * Uses a Neighbourhood to optimise Actor's overlapping and touching methods. This strategy uses a
+ * Uses a Neighbourhood to optimise Actor's overlapping and pixelOverlap methods. This strategy uses a
  * grid based neighbourhood. It is designed to be used for objects larger than a single square. It
  * can be mixed and matched with SinglePointCollisionStrategy.
  * 
@@ -32,7 +32,7 @@ import uk.co.nickthecoder.itchy.WorldRectangle;
  * 
  * Note. If combined with SinglePointCollisionStrategy, then actors using this strategy must be
  * passive (they never test for collision, only the other actor tests for collision). i.e.
- * MultiplsSquareCollisionStrategy.touching is never called. This is needed because SinglPoint only
+ * MultiplsSquareCollisionStrategy.pixelOverlap is never called. This is needed because SinglPoint only
  * track a single square, and tests all surrounding squares, whereas MultiplSquare tracks all
  * (partially) occupied squares, and only considers them. So if a MultiSquare actor tests for
  * collision with a SinglePoint, it may miss it if the single point is outside the square occupied
@@ -136,7 +136,7 @@ public class NeighbourhoodCollisionStrategy extends ActorCollisionStrategy
     }
 
     @Override
-    public Set<Actor> touching( Actor source, String[] includeTags, String[] excludeTags )
+    public Set<Actor> pixelOverlap( Actor source, String[] includeTags, String[] excludeTags )
     {
         Set<Actor> results = new HashSet<Actor>();
 
@@ -151,7 +151,7 @@ public class NeighbourhoodCollisionStrategy extends ActorCollisionStrategy
                         for (String includeTag : includeTags) {
                             if (actor.hasTag(includeTag)) {
     
-                                if (source.touching(actor)) {
+                                if (source.pixelOverlap(actor)) {
                                     results.add(actor);
                                     break;
                                 }

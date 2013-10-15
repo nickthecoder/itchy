@@ -1,6 +1,7 @@
 <scene showMouse="true" behaviour="Play.js">
   <properties>
     <property name="speed" value="5"/>
+    <property name="maxSpeed" value="15"/>
     <property name="speedUpAfter" value="10"/>
   </properties>
   <layer name="main">
@@ -14,25 +15,25 @@
     <actor costume="drop1" x="91" y="639" direction="0.0" startEvent="default">
       <property name="distance" value="600"/>
     </actor>
-    <actor costume="drop1" x="133" y="1082" direction="0.0" startEvent="default">
+    <actor costume="drop1" x="533" y="1082" direction="0.0" startEvent="default">
       <property name="distance" value="610"/>
     </actor>
     <actor costume="drop1" x="84" y="1037" direction="0.0" startEvent="default">
       <property name="distance" value="610"/>
     </actor>
-    <actor costume="drop1" x="85" y="1122" direction="0.0" startEvent="default">
+    <actor costume="drop1" x="385" y="1122" direction="0.0" startEvent="default">
       <property name="distance" value="600"/>
     </actor>
-    <actor costume="drop1" x="136" y="672" direction="0.0" startEvent="default">
+    <actor costume="drop1" x="536" y="672" direction="0.0" startEvent="default">
       <property name="distance" value="600"/>
     </actor>
-    <actor costume="drop1" x="85" y="707" direction="0.0" startEvent="default">
+    <actor costume="drop1" x="385" y="707" direction="0.0" startEvent="default">
       <property name="distance" value="600"/>
     </actor>
-    <actor costume="drop1" x="144" y="898" direction="0.0" startEvent="default">
+    <actor costume="drop1" x="744" y="898" direction="0.0" startEvent="default">
       <property name="distance" value="600"/>
     </actor>
-    <actor costume="drop1" x="78" y="856" direction="0.0" startEvent="default">
+    <actor costume="drop1" x="178" y="856" direction="0.0" startEvent="default">
       <property name="distance" value="600"/>
     </actor>
     <actor costume="drop3" x="272" y="888" direction="0.0" startEvent="default">

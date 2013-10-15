@@ -35,7 +35,7 @@ public class Pacman extends Behaviour
     {
         this.collisionStrategy.update();
         
-        for (Actor other : touching(Alien.SHOOTABLE_LIST)) {
+        for (Actor other : pixelOverlap(Alien.SHOOTABLE_LIST)) {
             if ((this.getActor() != other) && (!other.hasTag("bouncy"))) {
                 ((Shootable) other.getBehaviour()).shot(this.getActor());
             }

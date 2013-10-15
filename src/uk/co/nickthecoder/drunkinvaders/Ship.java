@@ -141,7 +141,7 @@ public class Ship extends Bouncy implements Shootable
 
             this.collisionStrategy.update();
 
-            for (Actor other : touching(DEADLY_LIST)) {
+            for (Actor other : pixelOverlap(DEADLY_LIST)) {
                 this.shot(other);
                 if (other.getBehaviour() instanceof Shootable) {
                     ((Shootable) other.getBehaviour()).shot(this.getActor());

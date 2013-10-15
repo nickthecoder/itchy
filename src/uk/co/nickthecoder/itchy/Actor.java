@@ -622,9 +622,10 @@ public class Actor implements PropertySubject<Actor>
     {
         return ! (getAppearance().getPose() instanceof ImagePose);
     }
+    
     /**
      * For an Actor displaying text, this is the same as the method 'contains', but for
-     * other actors (displaying an image), it is the same as the method 'touching'.
+     * other actors (displaying an image), it is the same as the method 'pixelOverlap'.
      * 
      * This should be used whenever you want to know if the mouse is clicking the actor.
      */
@@ -637,16 +638,16 @@ public class Actor implements PropertySubject<Actor>
         if ( isText() ) {
             return this.contains(x,y);
         } else {
-            return this.touching(x,y);
+            return this.pixelOverlap(x,y);
         }
     }
     
-    public boolean touching( int x, int y )
+    public boolean pixelOverlap( int x, int y )
     {
-        return this.touching(x, y, 0);
+        return this.pixelOverlap(x, y, 0);
     }
 
-    public boolean touching( int x, int y, int alphaThreashold )
+    public boolean pixelOverlap( int x, int y, int alphaThreashold )
     {
         if (this.getAppearance().getWorldRectangle().contains(x, y)) {
 
@@ -671,7 +672,7 @@ public class Actor implements PropertySubject<Actor>
         return false;
     }
 
-    public boolean touching( Actor other )
+    public boolean pixelOverlap( Actor other )
     {
         int dx = ((int) this.getX() - this.appearance.getOffsetX()) -
             ((int) (other.getX()) - other.appearance.getOffsetX());
@@ -681,7 +682,7 @@ public class Actor implements PropertySubject<Actor>
                 ((int) (-other.getY()) - other.appearance.getOffsetY());
 
         return this.getAppearance().getSurface()
-            .overlaps(other.getAppearance().getSurface(), dx, dy, 64);
+            .pixelOverlap(other.getAppearance().getSurface(), dx, dy, 64);
 
     }
 

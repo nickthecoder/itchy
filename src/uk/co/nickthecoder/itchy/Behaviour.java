@@ -185,24 +185,24 @@ public abstract class Behaviour implements MessageListener, Cloneable, PropertyS
      * @return The set of all touching Actors with matching behaviours.
      */
     // TODO Remove this
-    public Set<Actor> touching( Class<Behaviour> klass )
+    public Set<Actor> pixelOverlap( Class<Behaviour> klass )
     {
-        return touching(klass.getName());
+        return pixelOverlap(klass.getName());
     }
 
-    public Set<Actor> touching( String tag )
+    public Set<Actor> pixelOverlap( String tag )
     {
-        return this.collisionStrategy.touching(this.getActor(), new String[] { tag }, null);
+        return this.collisionStrategy.pixelOverlap(this.getActor(), new String[] { tag }, null);
     }
 
-    public Set<Actor> touching( String... tags )
+    public Set<Actor> pixelOverlap( String... tags )
     {
-        return this.collisionStrategy.touching(this.getActor(), tags, null);
+        return this.collisionStrategy.pixelOverlap(this.getActor(), tags, null);
     }
 
-    public Set<Actor> touching( String[] including, String[] excluding )
+    public Set<Actor> pixelOverlap( String[] including, String[] excluding )
     {
-        return this.collisionStrategy.touching(this.getActor(), including, excluding);
+        return this.collisionStrategy.pixelOverlap(this.getActor(), including, excluding);
     }
 
     public Set<Actor> overlapping( String tag )

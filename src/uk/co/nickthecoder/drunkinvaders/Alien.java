@@ -80,7 +80,7 @@ public class Alien extends Bouncy implements Shootable
 
         super.tick();
 
-        for (Actor other : touching(SHOOTABLE_LIST)) {
+        for (Actor other : pixelOverlap(SHOOTABLE_LIST)) {
             if ((this.getActor() != other) && (!other.hasTag("bouncy"))) {
                 ((Shootable) other.getBehaviour()).shot(this.getActor());
             }

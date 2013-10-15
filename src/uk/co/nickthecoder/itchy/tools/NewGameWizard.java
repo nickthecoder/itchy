@@ -3,69 +3,30 @@
  * are made available under the terms of the GNU Public License v3.0 which accompanies this
  * distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
-package uk.co.nickthecoder.itchy.wizard;
+package uk.co.nickthecoder.itchy.tools;
 
 import java.io.File;
 import java.util.HashMap;
 
-import uk.co.nickthecoder.itchy.Game;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.editor.Editor;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Button;
+import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.Container;
 import uk.co.nickthecoder.itchy.gui.GridLayout;
-import uk.co.nickthecoder.itchy.gui.GuiPose;
 import uk.co.nickthecoder.itchy.gui.IntegerBox;
 import uk.co.nickthecoder.itchy.gui.Label;
 import uk.co.nickthecoder.itchy.gui.PickerButton;
-import uk.co.nickthecoder.itchy.gui.Stylesheet;
 import uk.co.nickthecoder.itchy.gui.TextBox;
 import uk.co.nickthecoder.itchy.gui.VerticalLayout;
 import uk.co.nickthecoder.itchy.util.Util;
 
-public class NewGameWizard extends Game
+public class NewGameWizard
 {
-    private static final String RULES = "resources/editor/style.xml";
 
-    public GuiPose mainGuiPose;
-
-    public NewGameWizard(Resources resources)
-        throws Exception
-    {
-        super(resources);
-
-        try {
-            setStylesheet(new Stylesheet(new File(RULES)));
-        } catch (Exception e) {
-            System.err.println("Failed to load stylesheet : " + RULES);
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void onActivate()
-    {
-        super.onActivate();
-
-        Itchy.enableKeyboardRepeat(true);
-
-        this.mainGuiPose = new GuiPose();
-        this.mainGuiPose.setLayout(new VerticalLayout());
-        this.mainGuiPose.setFill(true, true);
-        this.mainGuiPose.addStyle("editor");
-
-        this.mainGuiPose.setMinimumWidth(this.getWidth());
-        this.mainGuiPose.setMinimumHeight(this.getHeight());
-
-        this.mainGuiPose.setMaximumWidth(this.getWidth());
-        this.mainGuiPose.setMaximumHeight(this.getHeight());
-
-        this.mainGuiPose.show();
-
-        createForm();
-    }
+    private Resources resources;
 
     private TextBox gameIdBox;
     private TextBox gameTitleBox;
@@ -74,14 +35,24 @@ public class NewGameWizard extends Game
     private Label message;
     private PickerButton<File> templatePickerButton;
 
-    private void createForm()
+    public NewGameWizard( Resources resources )
     {
-        this.mainGuiPose.setLayout(new VerticalLayout());
-        Container form = new Container();
-        this.mainGuiPose.addChild(form);
+        this.resources = resources;
+    }
+
+    public String getName()
+    {
+        return "New Game Wizard";
+    }
+
+    public Component createForm()
+    {
+        Container result = new Container();
+        result.setLayout(new VerticalLayout());
+        result.setFill(true, true);
 
         Container main = new Container();
-        this.mainGuiPose.addChild(main);
+        result.addChild(main);
         GridLayout grid = new GridLayout(main, 2);
         main.setLayout(grid);
 
@@ -102,10 +73,10 @@ public class NewGameWizard extends Game
         grid.addRow("Template", this.templatePickerButton);
 
         this.message = new Label("");
-        this.mainGuiPose.addChild(this.message);
+        result.addChild(this.message);
 
         Container buttonBar = new Container();
-        this.mainGuiPose.addChild(buttonBar);
+        result.addChild(buttonBar);
         buttonBar.addStyle("buttonBar");
 
         Button create = new Button("Create");
@@ -146,6 +117,8 @@ public class NewGameWizard extends Game
             }
 
         });
+
+        return result;
     }
 
     private HashMap<String, File> getGameTemplates()
@@ -240,18 +213,18 @@ public class NewGameWizard extends Game
 
         Util.copyDirectory(templateDirectory, destinationDirectory);
 
-        File templateFile = new File( destinationDirectory, "resources.xml" );
-        File destFile = new File( destinationDirectory, this.gameIdBox.getText() + ".xml" );
-        
-        HashMap<String,String> substitutions = new HashMap<String,String>();
-        substitutions.put("NAME", this.gameIdBox.getText() );
-        substitutions.put("TITLE", this.gameTitleBox.getText() );
-        substitutions.put("WIDTH", "" + this.widthBox.getValue() );
-        substitutions.put("HEIGHT", "" + this.heightBox.getValue() );
-        
+        File templateFile = new File(destinationDirectory, "resources.xml");
+        File destFile = new File(destinationDirectory, this.gameIdBox.getText() + ".xml");
+
+        HashMap<String, String> substitutions = new HashMap<String, String>();
+        substitutions.put("NAME", this.gameIdBox.getText());
+        substitutions.put("TITLE", this.gameTitleBox.getText());
+        substitutions.put("WIDTH", "" + this.widthBox.getValue());
+        substitutions.put("HEIGHT", "" + this.heightBox.getValue());
+
         Util.template(templateFile, destFile, substitutions);
         templateFile.delete();
-        
+
         return null;
     }
 

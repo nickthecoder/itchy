@@ -69,7 +69,7 @@ public class Bouncy extends Behaviour
 
         this.collisionStrategy.update();
 
-        for (Actor other : touching(BOUNCY_LIST)) {
+        for (Actor other : pixelOverlap(BOUNCY_LIST)) {
             collide(this.getActor(), other);
         }
 

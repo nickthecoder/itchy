@@ -164,7 +164,7 @@ public class NeighbourhoodTest
     }
 
     @Test
-    public void touching()
+    public void pixelOverlap()
     {
         Neighbourhood nbh = new StandardNeighbourhood(50);
 
@@ -172,14 +172,14 @@ public class NeighbourhoodTest
         SinglePointCollisionStrategy b = spcs(nbh, this.c30x30, 10, 0);
         SinglePointCollisionStrategy c = spcs(nbh, this.c30x30, 50, 0);
 
-        assertTrue(b.getActor().touching(a.getActor()));
-        assertFalse(a.getActor().touching(c.getActor()));
+        assertTrue(b.getActor().pixelOverlap(a.getActor()));
+        assertFalse(a.getActor().pixelOverlap(c.getActor()));
 
         assertTrue(a.overlapping("all").contains(b.getActor()));
         assertFalse(a.overlapping("all").contains(c.getActor()));
 
-        assertTrue(a.touching("all").contains(b.getActor()));
-        assertFalse(a.touching("all").contains(c.getActor()));
+        assertTrue(a.pixelOverlap("all").contains(b.getActor()));
+        assertFalse(a.pixelOverlap("all").contains(c.getActor()));
 
     }
 

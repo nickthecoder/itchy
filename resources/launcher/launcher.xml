@@ -1,5 +1,5 @@
 <resources>
-  <game title="New Game Wizard" width="600" height="480" iconFilename="icon.bmp" className="uk.co.nickthecoder.itchy.wizard.NewGameWizard"/>
+  <game title="Itchy Launcher" width="600" height="480" iconFilename="icon.bmp" className="uk.co.nickthecoder.itchy.Launcher"/>
   <fonts>
   </fonts>
   <poses>

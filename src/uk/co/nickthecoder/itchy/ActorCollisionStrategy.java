@@ -34,9 +34,9 @@ public abstract class ActorCollisionStrategy implements CollisionStrategy
 
     }
 
-    public Set<Actor> touching( String... tags )
+    public Set<Actor> pixelOverlap( String... tags )
     {
-        return this.touching(this.actor, tags, null);
+        return this.pixelOverlap(this.actor, tags, null);
     }
 
     public Set<Actor> overlapping( String[] includeTags, String[] excludeTags )
@@ -45,9 +45,9 @@ public abstract class ActorCollisionStrategy implements CollisionStrategy
 
     }
 
-    public Set<Actor> touching( String[] includeTags, String[] excludeTags )
+    public Set<Actor> pixelPixelOverlap( String[] includeTags, String[] excludeTags )
     {
-        return this.touching(this.actor, includeTags, excludeTags);
+        return this.pixelOverlap(this.actor, includeTags, excludeTags);
     }
 
     @Override

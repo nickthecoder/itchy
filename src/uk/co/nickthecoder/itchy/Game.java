@@ -493,6 +493,7 @@ public class Game implements EventListener, MessageListener
 
     public boolean loadScene( String sceneName )
     {
+        System.out.println("Loading scene");
         try {
             Scene scene = this.resources.getScene(sceneName);
             if (scene == null) {
@@ -514,6 +515,8 @@ public class Game implements EventListener, MessageListener
             return false;
         }
 
+        System.out.println( "Resetting frame rate" );
+        Itchy.frameRate.reset();
         return true;
     }
 

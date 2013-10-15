@@ -35,6 +35,11 @@ public class Resources extends Loadable
         return names;
     }
 
+    public static File getResourceFileFromDirectory( File directory )
+    {
+        return new File( directory, directory.getName() + ".xml" );
+    }
+    
     private Game game;
 
     public final GameInfo gameInfo;

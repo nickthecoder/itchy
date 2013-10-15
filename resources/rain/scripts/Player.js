@@ -17,7 +17,7 @@ Player = new Class({
             }
             this.actor.moveTo( x, this.actor.getY() );
             
-            if ( this.behaviour.touching("deadly").size() > 0 ) {
+            if ( this.behaviour.pixelOverlap("deadly").size() > 0 ) {
                 this.actor.deathEvent("death");
                 sceneBehaviourScript.end();
             }

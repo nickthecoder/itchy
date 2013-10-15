@@ -37,6 +37,6 @@ public interface CollisionStrategy
     
     public Set<Actor> overlapping( Actor actor, String[] includeTags, String[] excludeTags );
 
-    public Set<Actor> touching( Actor actor, String[] includeTags, String[] excludeTags );
+    public Set<Actor> pixelOverlap( Actor actor, String[] includeTags, String[] excludeTags );
 
 }

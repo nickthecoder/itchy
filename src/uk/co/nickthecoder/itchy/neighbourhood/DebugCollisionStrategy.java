@@ -43,13 +43,13 @@ public class DebugCollisionStrategy extends ActorCollisionStrategy
     }
 
     @Override
-    public Set<Actor> touching( Actor actor, String[] includeTags, String[] excludeTags )
+    public Set<Actor> pixelOverlap( Actor actor, String[] includeTags, String[] excludeTags )
     {
-        Set<Actor> results1 = this.strategy1.touching(includeTags,excludeTags);
-        Set<Actor> results2 = this.strategy2.touching(includeTags,excludeTags);
+        Set<Actor> results1 = this.strategy1.pixelPixelOverlap(includeTags,excludeTags);
+        Set<Actor> results2 = this.strategy2.pixelPixelOverlap(includeTags,excludeTags);
 
         if (!results1.equals(results2)) {
-            System.err.println("Touching failed for " + getActor());
+            System.err.println("Pixel Collision failed for " + getActor());
             System.err.println("Results1 : " + results1);
             System.err.println("Results2 : " + results2);
             DrunkInvaders.game.debug();

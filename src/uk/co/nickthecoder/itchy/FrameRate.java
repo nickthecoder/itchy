@@ -60,6 +60,14 @@ public abstract class FrameRate
         setRequiredRate(framesPerSecond);
     }
 
+    
+    public void reset()
+    {
+        this.errorNanos = 0;
+        this.droppedFrames = 0;
+        this.sequentialDroppedFrames = 0;
+    }
+    
     /**
      * Set the required frame rate. The default is 60, and if you want to change it, do so once in
      * your game's constructor.
@@ -97,11 +105,12 @@ public abstract class FrameRate
 
             // Should we redraw the screen?
             if (this.errorNanos > this.requiredPeriodNanos) {
-                // We are lagging by over a frame, correct by not doing the redraw.
                 this.sequentialDroppedFrames++;
+                // Hard dropping a frame. Is this good?
+                this.errorNanos  = 0;
 
                 if (this.sequentialDroppedFrames >= this.droppedFramesLimit) {
-                    // System.err.println("Maximum frame skipping, cannot maintain frame rate.");
+                    System.err.println("Maximum frame skipping, cannot maintain frame rate.");
                     doRedraw();
                     this.sequentialDroppedFrames = 0;
                 } else {
