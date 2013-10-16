@@ -15,7 +15,6 @@ import java.util.Random;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Game;
-import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Launcher;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.ScrollableLayer;
@@ -164,7 +163,7 @@ public class Tetra extends Game
     public void onMessage( String message )
     {
         if (message.equals("quit")) {
-            Itchy.terminate();
+            this.end();
         }
         if (message.equals("play")) {
             this.play();

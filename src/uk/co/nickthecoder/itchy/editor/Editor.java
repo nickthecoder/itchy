@@ -110,10 +110,11 @@ public final class Editor extends Game
         return 720;
     }
 
+    
     @Override
     public void onActivate()
     {
-        super.onActivate();
+        //super.onActivate();
 
         Itchy.enableKeyboardRepeat(true);
 
@@ -203,7 +204,6 @@ public final class Editor extends Game
     {
         this.designSceneName = sceneName;
     }
-
 
     public void debug()
     {

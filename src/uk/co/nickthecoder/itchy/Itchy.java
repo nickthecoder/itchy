@@ -152,7 +152,7 @@ public class Itchy
                 frameRate.loop();
             }
         } catch (Exception e) {
-            System.err.println("Failed to initialise game");
+            System.err.println("Mainloop Failed");
             e.printStackTrace();
         }
     }

@@ -91,7 +91,8 @@ public class GuiPose extends RootContainer implements Pose, EventListener
             }
             this.invalidate();
         }
-
+        
+        this.getActor().moveTo(x,y);
     }
 
     @Override

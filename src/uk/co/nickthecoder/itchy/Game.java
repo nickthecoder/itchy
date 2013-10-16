@@ -56,8 +56,6 @@ public class Game implements EventListener, MessageListener
 
     protected boolean testing;
 
-    private String preTestSceneName;
-
     public Pause pause;
 
     private Stylesheet stylesheet;
@@ -89,12 +87,14 @@ public class Game implements EventListener, MessageListener
 
     public void onActivate()
     {
-
+        System.out.println( "Activating game " + this.resources.gameInfo.title );
         this.loadScene(this.resources.gameInfo.initialScene);
+        System.out.println( "Hopefully loaded the initial scene");
     }
 
     public void onDeactivate()
     {
+        System.out.println( "Deactivating game " + this.resources.gameInfo.title );
     }
 
     protected void createLayers()
@@ -111,16 +111,19 @@ public class Game implements EventListener, MessageListener
      * Typically, this is called immediately after you have created your Game object, usually in the
      * "main" method.
      * 
-     * Do NOT override this method, if you need to do one-time initialisation, then do it in the
-     * init method. This will ensure that everything gets initialised in the correct order.
+     * Do NOT override this method.
      */
     public void start()
     {
-        start(this.resources.gameInfo.initialScene);
+        System.out.println("Starting game" + this.resources.gameInfo.title);
+        Itchy.startGame(this);
+        
+        Itchy.mainLoop();
     }
 
     public void start( String sceneName )
     {
+        System.out.println("Starting game with scene " + sceneName);
         Itchy.startGame(this);
 
         if (! StringUtils.isBlank(sceneName)) {
@@ -135,7 +138,6 @@ public class Game implements EventListener, MessageListener
     public void testScene( String sceneName )
     {
         try {
-            this.preTestSceneName = this.sceneName;
             this.testing = true;
 
             start(sceneName);
@@ -151,9 +153,7 @@ public class Game implements EventListener, MessageListener
         this.testing = false;
         this.layers.clear();
         this.layers.reset();
-        if (this.preTestSceneName != null) {
-            loadScene(this.preTestSceneName);
-        }
+
         Itchy.endGame();
     }
 
@@ -492,8 +492,7 @@ public class Game implements EventListener, MessageListener
     }
 
     public boolean loadScene( String sceneName )
-    {
-        System.out.println("Loading scene");
+    { 
         try {
             Scene scene = this.resources.getScene(sceneName);
             if (scene == null) {
@@ -515,7 +514,7 @@ public class Game implements EventListener, MessageListener
             return false;
         }
 
-        System.out.println( "Resetting frame rate" );
+        // System.out.println( "Resetting frame rate" );
         Itchy.frameRate.reset();
         return true;
     }
