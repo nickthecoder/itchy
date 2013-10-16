@@ -26,8 +26,6 @@ import uk.co.nickthecoder.itchy.util.Util;
 public class NewGameWizard
 {
 
-    private Resources resources;
-
     private TextBox gameIdBox;
     private TextBox gameTitleBox;
     private IntegerBox widthBox;
@@ -35,9 +33,8 @@ public class NewGameWizard
     private Label message;
     private PickerButton<File> templatePickerButton;
 
-    public NewGameWizard( Resources resources )
+    public NewGameWizard()
     {
-        this.resources = resources;
     }
 
     public String getName()
@@ -125,8 +122,8 @@ public class NewGameWizard
     {
         HashMap<String, File> result = new HashMap<String, File>();
 
-        File directory = this.resources.resolveFile(
-            new File(".." + File.separator + "templates" + File.separator + "games"));
+        File directory = new File("resources" + File.separator + "templates" + File.separator +
+            "games");
 
         for (File file : directory.listFiles()) {
             if (file.isDirectory()) {
@@ -162,7 +159,7 @@ public class NewGameWizard
     public File getResources()
     {
         String name = this.gameIdBox.getText();
-        return new File("resources" + File.separator + name + File.separator + name + ".xml");
+        return new File("resources" + File.separator + name + File.separator + name + ".itchy");
     }
 
     private void onTest()
@@ -204,8 +201,8 @@ public class NewGameWizard
             return "Game ID must only contain letters and numbers";
         }
 
-        File destinationDirectory = this.resources.resolveFile(
-            new File(".." + File.separator + this.gameIdBox.getText()));
+        File destinationDirectory = new File("resources" + File.separator +
+            this.gameIdBox.getText());
 
         if (destinationDirectory.exists()) {
             return "Already exists : " + destinationDirectory.getPath();
@@ -213,8 +210,8 @@ public class NewGameWizard
 
         Util.copyDirectory(templateDirectory, destinationDirectory);
 
-        File templateFile = new File(destinationDirectory, "resources.xml");
-        File destFile = new File(destinationDirectory, this.gameIdBox.getText() + ".xml");
+        File templateFile = new File(destinationDirectory, "resources.itchy");
+        File destFile = new File(destinationDirectory, this.gameIdBox.getText() + ".itchy");
 
         HashMap<String, String> substitutions = new HashMap<String, String>();
         substitutions.put("NAME", this.gameIdBox.getText());

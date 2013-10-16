@@ -87,14 +87,11 @@ public class Game implements EventListener, MessageListener
 
     public void onActivate()
     {
-        System.out.println( "Activating game " + this.resources.gameInfo.title );
         this.loadScene(this.resources.gameInfo.initialScene);
-        System.out.println( "Hopefully loaded the initial scene");
     }
 
     public void onDeactivate()
     {
-        System.out.println( "Deactivating game " + this.resources.gameInfo.title );
     }
 
     protected void createLayers()
@@ -115,7 +112,7 @@ public class Game implements EventListener, MessageListener
      */
     public void start()
     {
-        System.out.println("Starting game" + this.resources.gameInfo.title);
+        System.out.println("Starting game : " + this.resources.gameInfo.title);
         Itchy.startGame(this);
         
         Itchy.mainLoop();
@@ -123,7 +120,7 @@ public class Game implements EventListener, MessageListener
 
     public void start( String sceneName )
     {
-        System.out.println("Starting game with scene " + sceneName);
+        System.out.println("Starting game with scene : " + sceneName);
         Itchy.startGame(this);
 
         if (! StringUtils.isBlank(sceneName)) {
@@ -497,6 +494,11 @@ public class Game implements EventListener, MessageListener
             Scene scene = this.resources.getScene(sceneName);
             if (scene == null) {
                 System.err.println("Scene not found : " + sceneName);
+                try {
+                    throw new Exception();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 return false;
             }
 

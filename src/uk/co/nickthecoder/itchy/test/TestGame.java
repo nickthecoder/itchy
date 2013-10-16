@@ -80,8 +80,6 @@ public class TestGame extends Game
     @Override
     public void onMessage( String message )
     {
-        System.out.println("Message : " + message);
-
         if (message.startsWith("scene:")) {
             loadScene(message.substring(6));
             return;

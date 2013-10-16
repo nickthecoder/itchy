@@ -65,14 +65,13 @@ public class Launcher extends Game
 
         Notebook notebook = new Notebook();
 
-
         GameMenu gameMenu = new GameMenu();
-        NewGameWizard newGameWizard = new NewGameWizard(resources);
+        NewGameWizard newGameWizard = new NewGameWizard();
         ForkGame forkGame = new ForkGame();
-        
+
         notebook.addPage(gameMenu.getName(), gameMenu.createForm());
         notebook.addPage(newGameWizard.getName(), newGameWizard.createForm());
-        notebook.addPage( forkGame.getName(), forkGame.createForm());
+        notebook.addPage(forkGame.getName(), forkGame.createForm());
 
         this.mainGuiPose.addChild(notebook);
 
@@ -92,15 +91,15 @@ public class Launcher extends Game
             argv = Arrays.copyOfRange(argv, 1, argv.length);
         }
 
-        String resourcePath;
-        if (new File(name).exists()) {
-            resourcePath = name;
+        File resourcesFile = new File(name);
+        if (resourcesFile.exists() && (resourcesFile.isFile())) {
         } else {
-            resourcePath = "resources" + File.separator + name + File.separator + name + ".xml";
+            name = "resources" + File.separator + name + File.separator + name + ".itchy";
+            resourcesFile = new File(name);
         }
-
+        System.out.println("Loading resources : " + resourcesFile);
         Resources resources = new Resources();
-        resources.load(new File(resourcePath));
+        resources.load(resourcesFile);
 
         if ((argv.length == 1) && ("--editor".equals(argv[0]))) {
 

@@ -37,7 +37,7 @@ public class Resources extends Loadable
 
     public static File getResourceFileFromDirectory( File directory )
     {
-        return new File( directory, directory.getName() + ".xml" );
+        return new File( directory, directory.getName() + ".itchy" );
     }
     
     private Game game;

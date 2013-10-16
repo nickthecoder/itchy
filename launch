@@ -4,5 +4,10 @@ NATIVE_DIR=lib/native/`uname -m`
 CLASSPATH=lib/itchy.jar:lib/jame.jar
 MAIN=uk.co.nickthecoder.itchy.Launcher
 
+# cd to the parent directory of the "resources" folder. Itchy uses relative paths to get to its resources,
+# such as scripts, templates, the editor's resources etc.
+#
+cd `dirname $0`
+
 java  -Djava.library.path=${NATIVE_DIR} -classpath "${CLASSPATH}" "${MAIN}" "$@"
 

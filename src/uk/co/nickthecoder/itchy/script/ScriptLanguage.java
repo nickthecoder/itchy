@@ -66,13 +66,13 @@ public abstract class ScriptLanguage
         }
 
         // Load all of the scripts in resources/scripts/${LANGUAGE-EXTENSION}/
-        String path = ".." + File.separator + "scripts" + File.separator + this.getExtension() +
-            File.separator;
-        File directory = this.manager.resources.resolveFile(new File(path));
+        File directory = new File("resources" + File.separator + "scripts" + File.separator +
+            this.getExtension());
 
         String end = "." + getExtension();
         File[] scripts = directory.listFiles();
-        // Sort by name, so they are loaded in the correct order. The names are prefixed with a 2 digit number.
+        // Sort by name, so they are loaded in the correct order. The names are prefixed with a 2
+        // digit number.
         Arrays.sort(scripts);
         for (File script : scripts) {
             if (script.getName().endsWith(end)) {
@@ -100,11 +100,10 @@ public abstract class ScriptLanguage
         Map<String, String> substitutions )
         throws IOException
     {
-        String templateFilename = ".." + File.separator + "templates" + File.separator +
-            getExtension() +
-            File.separator + templateName + "." + this.getExtension();
-
-        File templateFile = new File(this.manager.resources.resolveFilename(templateFilename));
+        // template file : resources/templates/EXTENSION/TEMPLATE.EXTENSION
+        File templateFile = new File("resources" + File.separator + "templates" + File.separator +
+            getExtension() + File.separator + templateName + "." + this.getExtension());
+        
         File destFile = this.manager.getScript(className.name);
 
         Util.template(templateFile, destFile, substitutions);
@@ -262,5 +261,4 @@ public abstract class ScriptLanguage
     public abstract CostumeProperties createCostumeProperties( ClassName className )
         throws ScriptException;
 
-    
 }

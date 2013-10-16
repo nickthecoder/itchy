@@ -45,7 +45,7 @@ public class GameMenu
 
         for (File dir : directory.listFiles()) {
             if (dir.isDirectory()) {
-                final File resourceFile = new File(dir, dir.getName() + ".xml");
+                final File resourceFile = new File(dir, dir.getName() + ".itchy");
                 if (resourceFile.exists()) {
 
                     Container two = new Container();

@@ -33,6 +33,7 @@ public class ScriptedGame extends Game
     @Override
     public void onActivate()
     {
+        super.onActivate();
         try {
             this.language.onActivate(this);
         } catch (Exception e) {

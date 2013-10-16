@@ -6,19 +6,9 @@ What's Next
 
 Compile on raspPi?
 
-Launch and launch.bat to try to set the current directory
-    make Launcher.main treat the argument in two ways
-        As a name of a folder in "resources" i.e. launch rain
-        As a fully qualified path of the resources file. launch /home/nick/projects/itchy/resources/rain.xml
-    This combo should allow launcher to be launched from anywhere, and also for a game to reside anywhere,
-        not in the same dir as Itchy.
-        Get Thrust to run via "launch" without the resource symlinks to itchy.
-            Need thrusts jar file to be in a lib directory within its resources, and for the jar to be loaded
-            after java has started.
-   Maybe all itchy resource files should end in .itchy. So they can be double clicked!
-        Or maybe they should be zip files? Nah, the icons won't work, nor the .jar file, and it would be annoying to zip it.
-    Scripts and templates should be relative to the current directory, not relative to the game's resources.
-        Test rain from its own little resources directory.
+Get Thrust to run via "launch" without the resource symlinks to itchy.
+    Need thrusts jar file to be in a lib directory within its resources, and for the jar to be loaded
+    after java has started.
 
 
 When getting a property value from a script, if it doesn't return a valid value, report in stderr, and
