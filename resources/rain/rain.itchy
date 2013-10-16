@@ -1,20 +1,20 @@
 <resources>
-  <game title="It's Gonna Rain" width="800" height="600" iconFilename="icon.bmp" initialScene="menu" className="uk.co.nickthecoder.itchy.Game"/>
+  <game title="It's Gonna Rain" width="800" height="600" initialScene="menu" className="uk.co.nickthecoder.itchy.Game"/>
   <fonts>
     <font name="BlackCasper" filename="fonts/BlackCasper/BlackCasper.ttf"/>
     <font name="Boycott" filename="fonts/Boycott/Boycott.ttf"/>
   </fonts>
   <ninePatches/>
   <poses>
-    <pose name="background" filename="background.png" offsetX="0" offsetY="0"/>
-    <pose name="drop1" filename="drop1.png" offsetY="36"/>
-    <pose name="drop2" filename="drop2.png" offsetY="34"/>
-    <pose name="drop3" filename="drop3.png" offsetY="35"/>
-    <pose name="droplet1" filename="droplet1.png"/>
-    <pose name="droplet2" filename="droplet2.png"/>
-    <pose name="droplet3" filename="droplet3.png"/>
-    <pose name="sheep" filename="sheep.png" offsetX="25" offsetY="84"/>
-    <pose name="wally" filename="wally.png"/>
+    <pose name="background" filename="images/background.png" offsetX="0" offsetY="0"/>
+    <pose name="drop1" filename="images/drop1.png" offsetY="36"/>
+    <pose name="drop2" filename="images/drop2.png" offsetY="34"/>
+    <pose name="drop3" filename="images/drop3.png" offsetY="35"/>
+    <pose name="droplet1" filename="images/droplet1.png"/>
+    <pose name="droplet2" filename="images/droplet2.png"/>
+    <pose name="droplet3" filename="images/droplet3.png"/>
+    <pose name="sheep" filename="images/sheep.png" offsetX="25" offsetY="84"/>
+    <pose name="wally" filename="images/wally.png"/>
   </poses>
   <sounds>
     <sound name="ItAintGunnaRain" filename="sounds/ItAintGunnaRain.ogg"/>

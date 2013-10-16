@@ -24,6 +24,7 @@ import org.junit.Test;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Costume;
+import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.neighbourhood.Neighbourhood;
 import uk.co.nickthecoder.itchy.neighbourhood.StandardNeighbourhood;
@@ -63,7 +64,8 @@ public class NeighbourhoodTest
         System.out.println("Loading resources");
 
         resources = new Resources();
-        resources.load(new File("resources/tests/neighbourhood.xml"));
+        resources.load(new File(Itchy.getResourcesDirectory(),
+            "tests" + File.separator + "neighbourhood.xml"));
 
         this.c30x30 = resources.getCostume("30x30");
         this.c10x30 = resources.getCostume("10x30");

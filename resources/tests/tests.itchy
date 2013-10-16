@@ -1,17 +1,18 @@
 <resources>
+  <game title="Tests" width="800" height="600" iconFilename="icon.bmp" initialScene="menu" className="uk.co.nickthecoder.itchy.Game"/>
   <fonts>
     <font name="vera" filename="fonts/Vera/Vera.ttf"/>
   </fonts>
   <ninePatches/>
   <poses>
-    <pose name="alien1a" filename="alien1a.png" direction="-90.0"/>
-    <pose name="alien1b" filename="alien1b.png" direction="-90.0"/>
-    <pose name="alien2a" filename="alien2a.png" direction="-90.0"/>
-    <pose name="alien2b" filename="alien2b.png" direction="-90.0"/>
-    <pose name="alien3a" filename="alien3a.png" direction="-90.0"/>
-    <pose name="alien3b" filename="alien3b.png" direction="-90.0"/>
-    <pose name="bomb1" filename="bomb1.png" direction="-90.0"/>
-    <pose name="bomb2" filename="bomb2.png" direction="-90.0"/>
+    <pose name="alien1a" filename="images/alien1a.png" direction="-90.0"/>
+    <pose name="alien1b" filename="images/alien1b.png" direction="-90.0"/>
+    <pose name="alien2a" filename="images/alien2a.png" direction="-90.0"/>
+    <pose name="alien2b" filename="images/alien2b.png" direction="-90.0"/>
+    <pose name="alien3a" filename="images/alien3a.png" direction="-90.0"/>
+    <pose name="alien3b" filename="images/alien3b.png" direction="-90.0"/>
+    <pose name="bomb1" filename="images/bomb1.png" direction="-90.0"/>
+    <pose name="bomb2" filename="images/bomb2.png" direction="-90.0"/>
   </poses>
   <sounds/>
   <animations>
@@ -43,8 +44,8 @@
     </animation>
     <animation name="ease">
       <sequence loops="1">
-        <move ticks="200" dx="0.0" dy="200.0" profile="ease"/>
-        <move ticks="200" dx="0.0" dy="-200.0" profile="ease"/>
+        <move ticks="200" dx="0.0" dy="200.0" profile="easeIn"/>
+        <move ticks="200" dx="0.0" dy="-200.0" profile="easeIn"/>
       </sequence>
     </animation>
     <animation name="easeIn">
@@ -157,7 +158,7 @@
     </animation>
     <animation name="fade">
       <sequence loops="1">
-        <alpha ticks="200" target="0.0" profile="ease"/>
+        <alpha ticks="200" target="0.0" profile="easeIn"/>
       </sequence>
     </animation>
     <animation name="linear">

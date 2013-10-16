@@ -13,6 +13,7 @@ import java.util.List;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.ActorsLayer;
 import uk.co.nickthecoder.itchy.Game;
+import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.ScrollableLayer;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
@@ -44,7 +45,8 @@ public class GuiTest extends Game
     public GuiTest( Resources resources ) throws Exception
     {
         super( resources );
-        this.rules = new Stylesheet(new File("resources/defaultGui/style.xml"));
+        this.rules = new Stylesheet(new File(Itchy.getResourcesDirectory(),
+            "defaultGui" + File.separator + "style.xml"));
 
     }
 

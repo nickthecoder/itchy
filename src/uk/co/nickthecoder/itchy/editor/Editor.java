@@ -26,7 +26,8 @@ public final class Editor extends Game
 {
     public static Editor singleton;
 
-    private static final String RULES = "resources/editor/style.xml";
+    private static final File RULES = 
+        new File(new File(Itchy.getResourcesDirectory(), "editor"), "style.xml");
 
     public EditorPreferences preferences;
 
@@ -85,7 +86,7 @@ public final class Editor extends Game
         // this.preferencesEditor = new PreferencesEditor(this);
 
         try {
-            setStylesheet(new Stylesheet(new File(RULES)));
+            setStylesheet(new Stylesheet(RULES));
         } catch (Exception e) {
             System.err.println("Failed to load stylesheet : " + RULES);
             e.printStackTrace();
@@ -110,11 +111,10 @@ public final class Editor extends Game
         return 720;
     }
 
-    
     @Override
     public void onActivate()
     {
-        //super.onActivate();
+        // super.onActivate();
 
         Itchy.enableKeyboardRepeat(true);
 

@@ -5,6 +5,7 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
+import java.io.File;
 import java.util.Stack;
 
 import uk.co.nickthecoder.jame.Audio;
@@ -32,10 +33,6 @@ import uk.co.nickthecoder.jame.event.MouseEvent;
  */
 public class Itchy
 {
-    public static void showMousePointer( boolean value )
-    {
-        uk.co.nickthecoder.jame.Video.showMousePointer(value);
-    }
 
     /**
      * This is the highest SDL key sym which can be checked using isKeyDown(). The highest key sym
@@ -73,6 +70,8 @@ public class Itchy
 
     private static boolean initialised = false;
 
+    private static File baseDirectory;
+
     public static void init( Resources resources ) throws Exception
     {
         if (initialised) {
@@ -87,6 +86,30 @@ public class Itchy
         soundManager = new SoundManager();
         setScreenMode(resources);
         initialised = true;
+    }
+
+    public static File getBaseDirectory()
+    {
+        if (baseDirectory == null) {
+            String basePath = System.getProperty("itchy.base");
+            if (basePath == null) {
+                System.err
+                    .println("itchy.base not set. Defaulting to the current directory.");
+                basePath = ".";
+            }
+            baseDirectory = new File(basePath);
+        }
+        return baseDirectory;
+    }
+
+    public static File getResourcesDirectory()
+    {
+        return new File(getBaseDirectory(), "resources");
+    }
+
+    public static void showMousePointer( boolean value )
+    {
+        uk.co.nickthecoder.jame.Video.showMousePointer(value);
     }
 
     public static Game getGame()
@@ -231,7 +254,7 @@ public class Itchy
     {
         return Video.getDisplaySurface();
     }
-    
+
     private static void doRedraw()
     {
         currentGame.render(Video.getDisplaySurface());

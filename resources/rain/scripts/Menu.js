@@ -9,8 +9,8 @@ Menu = new Class({
         if (message == "quit") {
             game.end();
         }
-        if (message.indexOf("scene:") == 0) {
-            game.startScene(message.substring(6));
+        if (message == "resetHighScores") {
+            game.getPreferences().clear();
         }
     },
     

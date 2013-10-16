@@ -198,16 +198,7 @@ public class DrunkInvaders extends Game
     @Override
     public void onMessage( String message )
     {
-        if ("play".equals(message)) {
-            startScene("levels");
-
-        } else if ("menu".equals(message)) {
-            startScene("menu");
-
-        } else if ("about".equals(message)) {
-            startScene("about");
-
-        } else if ("editor".equals(message)) {
+        if ("editor".equals(message)) {
             startEditor();
 
         } else if ("quit".equals(message)) {

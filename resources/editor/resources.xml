@@ -1,30 +1,30 @@
 <resources>
   
     <poses>
-        <pose name="icon_exit" filename="exit.png" />                
-        <pose name="icon_unscale" filename="unscale.png" />                
-        <pose name="icon_unrotate" filename="unrotate.png" />                
-        <pose name="icon_up" filename="up.png" />                
-        <pose name="icon_down" filename="down.png" />                
-        <pose name="icon_top" filename="top.png" />                
-        <pose name="icon_bottom" filename="bottom.png" />                
-        <pose name="icon_moveUpLayer" filename="moveUpLayer.png" />                
-        <pose name="icon_moveDownLayer" filename="moveDownLayer.png" />                
-        <pose name="icon_cut" filename="edit-cut.png" />                
-        <pose name="icon_copy" filename="edit-copy.png" />                
-        <pose name="icon_paste" filename="edit-paste.png" />                
-        <pose name="icon_text" filename="text.png" />                
-        <pose name="icon_center" filename="center.png" />                
-        <pose name="icon_save" filename="save.png" />                
-        <pose name="icon_delete" filename="delete.png" />                
-        <pose name="scaleHandle" filename="scaleHandle.png"/>                
-        <pose name="rotateHandle" filename="rotateHandle.png" offsetX="6"/>                
+        <pose name="icon_exit" filename="images/exit.png" />                
+        <pose name="icon_unscale" filename="images/unscale.png" />                
+        <pose name="icon_unrotate" filename="images/unrotate.png" />                
+        <pose name="icon_up" filename="images/up.png" />                
+        <pose name="icon_down" filename="images/down.png" />                
+        <pose name="icon_top" filename="images/top.png" />                
+        <pose name="icon_bottom" filename="images/bottom.png" />                
+        <pose name="icon_moveUpLayer" filename="images/moveUpLayer.png" />                
+        <pose name="icon_moveDownLayer" filename="images/moveDownLayer.png" />                
+        <pose name="icon_cut" filename="images/edit-cut.png" />                
+        <pose name="icon_copy" filename="images/edit-copy.png" />                
+        <pose name="icon_paste" filename="images/edit-paste.png" />                
+        <pose name="icon_text" filename="images/text.png" />                
+        <pose name="icon_center" filename="images/center.png" />                
+        <pose name="icon_save" filename="images/save.png" />                
+        <pose name="icon_delete" filename="images/delete.png" />                
+        <pose name="scaleHandle" filename="images/scaleHandle.png"/>                
+        <pose name="rotateHandle" filename="images/rotateHandle.png" offsetX="6"/>                
     </poses>
      
     <ninePatches>     
-        <ninePatch name="checkers" filename="checkers.png" top="0" right="0" bottom="0" left="0"  middle="fill" />                
-        <ninePatch name="highlight" filename="highlight.png" top="2" right="2" bottom="2" left="2"  middle="fill" />                
-        <ninePatch name="pageBorder" filename="pageBorder.png" top="2" right="2" bottom="2" left="2"  middle="fill" />                
+        <ninePatch name="checkers" filename="images/checkers.png" top="0" right="0" bottom="0" left="0"  middle="fill" />                
+        <ninePatch name="highlight" filename="images/highlight.png" top="2" right="2" bottom="2" left="2"  middle="fill" />                
+        <ninePatch name="pageBorder" filename="images/pageBorder.png" top="2" right="2" bottom="2" left="2"  middle="fill" />                
     </ninePatches>
     
 </resources>

@@ -8,17 +8,17 @@
     <text text="Rain" font="Boycott" size="128" color="#cc9656" xAlignment="0.5" yAlignment="0.5" x="167" y="449" direction="0.0" startEvent="default" alpha="121.0"/>
     <text text="Easy" font="BlackCasper" size="58" color="#333364" xAlignment="0.5" yAlignment="0.5" x="162" y="327" direction="0.0" startEvent="default"/>
     <text text="Medium" font="BlackCasper" size="54" color="#333364" xAlignment="0.5" yAlignment="0.5" x="174" y="246" direction="0.0" startEvent="default"/>
-    <text text="Easy" font="BlackCasper" size="51" color="#5d8cc5" xAlignment="0.5" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.MessageButton" costume="play" x="160" y="329" direction="0.0" startEvent="default">
-      <property name="message" value="scene:easy"/>
+    <text text="Easy" font="BlackCasper" size="51" color="#5d8cc5" xAlignment="0.5" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.SceneButton" costume="play" x="160" y="329" direction="0.0" startEvent="default">
+      <property name="sceneName" value="easy"/>
     </text>
     <text text="Hard" font="BlackCasper" size="61" color="#333364" xAlignment="0.5" yAlignment="0.5" x="162" y="170" direction="0.0" startEvent="default"/>
     <text text="Quit" font="Boycott" size="41" color="#333364" xAlignment="0.5" yAlignment="0.5" x="738" y="36" direction="0.0" startEvent="default"/>
-    <text text="Medium" font="BlackCasper" size="46" color="#5d8cc5" xAlignment="0.5" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.MessageButton" costume="play" x="170" y="248" direction="0.0" startEvent="default">
-      <property name="message" value="scene:medium"/>
+    <text text="Medium" font="BlackCasper" size="46" color="#5d8cc5" xAlignment="0.5" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.SceneButton" costume="play" x="170" y="248" direction="0.0" startEvent="default">
+      <property name="sceneName" value="medium"/>
     </text>
     <text text="Editor" font="Boycott" size="40" color="#333364" xAlignment="0.5" yAlignment="0.5" x="227" y="39" direction="0.0" startEvent="default"/>
-    <text text="Hard" font="BlackCasper" size="53" color="#5d8cc5" xAlignment="0.5" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.MessageButton" costume="play" x="160" y="170" direction="0.0" startEvent="default">
-      <property name="message" value="scene:hard"/>
+    <text text="Hard" font="BlackCasper" size="53" color="#5d8cc5" xAlignment="0.5" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.SceneButton" costume="play" x="160" y="170" direction="0.0" startEvent="default">
+      <property name="sceneName" value="hard"/>
     </text>
     <text text="Quit" font="Boycott" size="35" color="#5d8cc5" xAlignment="0.5" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.MessageButton" costume="quit" x="736" y="35" direction="0.0" startEvent="default">
       <property name="message" value="quit"/>
@@ -27,8 +27,8 @@
     <text text="EDITOR" font="Boycott" size="37" color="#5d8cc5" xAlignment="0.5" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.MessageButton" costume="editor" x="227" y="39" direction="0.0" startEvent="default">
       <property name="message" value="editor"/>
     </text>
-    <text text="About" font="Boycott" size="35" color="#5d8cc5" xAlignment="0.5" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.MessageButton" costume="quit" x="79" y="39" direction="0.0" startEvent="default">
-      <property name="message" value="scene:about"/>
+    <text text="About" font="Boycott" size="35" color="#5d8cc5" xAlignment="0.5" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.SceneButton" costume="quit" x="79" y="39" direction="0.0" startEvent="default">
+      <property name="sceneName" value="about"/>
     </text>
   </layer>
 </scene>

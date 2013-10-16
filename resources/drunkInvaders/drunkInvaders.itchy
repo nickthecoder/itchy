@@ -1,5 +1,5 @@
 <resources>
-  <game initialScene="menu" className="uk.co.nickthecoder.drunkinvaders.DrunkInvaders" width="640" height="480" title="Drunk Invaders" iconFilename="icon.bmp"/>
+  <game title="Drunk Invaders" width="640" height="480" initialScene="menu" className="uk.co.nickthecoder.drunkinvaders.DrunkInvaders"/>
   <fonts>
     <font name="blackCasper" filename="fonts/BlackCasper/BlackCasper.ttf"/>
     <font name="boycott" filename="fonts/Boycott/Boycott.ttf"/>
@@ -7,51 +7,51 @@
     <font name="veraBold" filename="fonts/Vera/VeraBd.ttf"/>
   </fonts>
   <ninePatches>
-    <ninePatch name="speechBubble" filename="speech.png" top="10" right="31" bottom="23" left="10"/>
-    <ninePatch name="speechBubble2" filename="speech2.png" top="10" right="31" bottom="23" left="10"/>
+    <ninePatch name="speechBubble" filename="images/speech.png" top="10" right="31" bottom="23" left="10"/>
+    <ninePatch name="speechBubble2" filename="images/speech2.png" top="10" right="31" bottom="23" left="10"/>
   </ninePatches>
   <poses>
-    <pose name="alien1a" filename="alien1a.png" direction="-90.0"/>
-    <pose name="alien1b" filename="alien1b.png" direction="-90.0"/>
-    <pose name="alien2a" filename="alien2a.png" direction="-90.0"/>
-    <pose name="alien2b" filename="alien2b.png" direction="-90.0"/>
-    <pose name="alien3a" filename="alien3a.png" direction="-90.0"/>
-    <pose name="alien3b" filename="alien3b.png" direction="-90.0"/>
-    <pose name="bomb1" filename="bomb1.png" direction="-90.0"/>
-    <pose name="bomb2" filename="bomb2.png" direction="-90.0"/>
-    <pose name="bullet" filename="bullet.png" direction="90.0"/>
-    <pose name="earth" filename="earth.png" offsetX="0" offsetY="480"/>
-    <pose name="earth1" filename="earth1.jpg"/>
-    <pose name="earth3" filename="earth3.png"/>
-    <pose name="factory" filename="factory.png"/>
-    <pose name="greenPixel" filename="greenPixel.png"/>
-    <pose name="level" filename="level.png" offsetY="44"/>
-    <pose name="level-completed" filename="level-completed.png" offsetY="42"/>
-    <pose name="moon" filename="moon.jpg"/>
-    <pose name="pacman1" filename="pacman1.png" offsetX="66" offsetY="70"/>
-    <pose name="pacman2" filename="pacman2.png" offsetY="69"/>
-    <pose name="pacman3" filename="pacman3.png" offsetY="71"/>
-    <pose name="pacman4" filename="pacman4.png" offsetX="65" offsetY="69"/>
-    <pose name="pacman5" filename="pacman5.png" offsetX="65" offsetY="71"/>
-    <pose name="paused" filename="paused.png"/>
-    <pose name="pixel" filename="pixel.png"/>
-    <pose name="redPixel" filename="redPixel.png"/>
-    <pose name="saucer" filename="saucer.png" direction="-90.0"/>
-    <pose name="shield" filename="shield.png"/>
-    <pose name="shield-l" filename="shield-l.png"/>
-    <pose name="shield-r" filename="shield-r.png"/>
-    <pose name="shieldFactory" filename="shieldFactory.png" offsetX="9" offsetY="37"/>
-    <pose name="shielded0" filename="shielded0.png" direction="90.0"/>
-    <pose name="shielded1" filename="shielded1.png" direction="90.0"/>
-    <pose name="shielded2" filename="shielded2.png" direction="90.0"/>
-    <pose name="shielded3" filename="shielded3.png" direction="90.0"/>
-    <pose name="shielded4" filename="shielded4.png" direction="90.0"/>
-    <pose name="shielded5" filename="shielded5.png" direction="90.0"/>
-    <pose name="shielded6" filename="shielded6.png" direction="90.0"/>
-    <pose name="shielded7" filename="shielded7.png" direction="90.0"/>
-    <pose name="ship" filename="ship.png" direction="90.0"/>
-    <pose name="ship2" filename="ship2.png" direction="90.0"/>
-    <pose name="white" filename="white.png" offsetX="0" offsetY="480"/>
+    <pose name="alien1a" filename="images/alien1a.png" direction="-90.0"/>
+    <pose name="alien1b" filename="images/alien1b.png" direction="-90.0"/>
+    <pose name="alien2a" filename="images/alien2a.png" direction="-90.0"/>
+    <pose name="alien2b" filename="images/alien2b.png" direction="-90.0"/>
+    <pose name="alien3a" filename="images/alien3a.png" direction="-90.0"/>
+    <pose name="alien3b" filename="images/alien3b.png" direction="-90.0"/>
+    <pose name="bomb1" filename="images/bomb1.png" direction="-90.0"/>
+    <pose name="bomb2" filename="images/bomb2.png" direction="-90.0"/>
+    <pose name="bullet" filename="images/bullet.png" direction="90.0"/>
+    <pose name="earth" filename="images/earth.png" offsetX="0" offsetY="480"/>
+    <pose name="earth1" filename="images/earth1.jpg"/>
+    <pose name="earth3" filename="images/earth3.png"/>
+    <pose name="factory" filename="images/factory.png"/>
+    <pose name="greenPixel" filename="images/greenPixel.png"/>
+    <pose name="level" filename="images/level.png" offsetY="44"/>
+    <pose name="level-completed" filename="images/level-completed.png" offsetY="42"/>
+    <pose name="moon" filename="images/moon.jpg"/>
+    <pose name="pacman1" filename="images/pacman1.png" offsetX="66" offsetY="70"/>
+    <pose name="pacman2" filename="images/pacman2.png" offsetY="69"/>
+    <pose name="pacman3" filename="images/pacman3.png" offsetY="71"/>
+    <pose name="pacman4" filename="images/pacman4.png" offsetX="65" offsetY="69"/>
+    <pose name="pacman5" filename="images/pacman5.png" offsetX="65" offsetY="71"/>
+    <pose name="paused" filename="images/paused.png"/>
+    <pose name="pixel" filename="images/pixel.png"/>
+    <pose name="redPixel" filename="images/redPixel.png"/>
+    <pose name="saucer" filename="images/saucer.png" direction="-90.0"/>
+    <pose name="shield" filename="images/shield.png"/>
+    <pose name="shield-l" filename="images/shield-l.png"/>
+    <pose name="shield-r" filename="images/shield-r.png"/>
+    <pose name="shieldFactory" filename="images/shieldFactory.png" offsetX="9" offsetY="37"/>
+    <pose name="shielded0" filename="images/shielded0.png" direction="90.0"/>
+    <pose name="shielded1" filename="images/shielded1.png" direction="90.0"/>
+    <pose name="shielded2" filename="images/shielded2.png" direction="90.0"/>
+    <pose name="shielded3" filename="images/shielded3.png" direction="90.0"/>
+    <pose name="shielded4" filename="images/shielded4.png" direction="90.0"/>
+    <pose name="shielded5" filename="images/shielded5.png" direction="90.0"/>
+    <pose name="shielded6" filename="images/shielded6.png" direction="90.0"/>
+    <pose name="shielded7" filename="images/shielded7.png" direction="90.0"/>
+    <pose name="ship" filename="images/ship.png" direction="90.0"/>
+    <pose name="ship2" filename="images/ship2.png" direction="90.0"/>
+    <pose name="white" filename="images/white.png" offsetX="0" offsetY="480"/>
   </poses>
   <sounds>
     <sound name="ahh1" filename="sounds/ahh1.ogg"/>

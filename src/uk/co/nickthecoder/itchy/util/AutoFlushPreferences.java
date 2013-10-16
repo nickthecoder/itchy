@@ -55,6 +55,7 @@ public class AutoFlushPreferences extends Preferences
     public void clear()
     {
         try {
+            wrapped.clear();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

@@ -1,7 +1,7 @@
 <scene showMouse="true">
   <layer name="main">
-    <text text="1) Animation Profiles" font="vera" size="22" color="#ffffff" behaviour="uk.co.nickthecoder.itchy.extras.MessageButton" x="150" y="538" direction="0.0" startEvent="default">
-      <property name="message" value="scene:profiles"/>
+    <text text="1) Animation Profiles" font="vera" size="22" color="#ffffff" behaviour="uk.co.nickthecoder.itchy.extras.SceneButton" x="150" y="538" direction="0.0" startEvent="default">
+      <property name="sceneName" value="profiles"/>
     </text>
   </layer>
 </scene>

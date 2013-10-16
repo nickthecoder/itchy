@@ -24,6 +24,7 @@ import javax.script.ScriptException;
 import uk.co.nickthecoder.itchy.Behaviour;
 import uk.co.nickthecoder.itchy.CostumeProperties;
 import uk.co.nickthecoder.itchy.Game;
+import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.SceneBehaviour;
 import uk.co.nickthecoder.itchy.util.ClassName;
@@ -66,8 +67,8 @@ public abstract class ScriptLanguage
         }
 
         // Load all of the scripts in resources/scripts/${LANGUAGE-EXTENSION}/
-        File directory = new File("resources" + File.separator + "scripts" + File.separator +
-            this.getExtension());
+        File directory = new File(Itchy.getResourcesDirectory(),
+            "scripts" + File.separator + this.getExtension());
 
         String end = "." + getExtension();
         File[] scripts = directory.listFiles();
@@ -101,9 +102,10 @@ public abstract class ScriptLanguage
         throws IOException
     {
         // template file : resources/templates/EXTENSION/TEMPLATE.EXTENSION
-        File templateFile = new File("resources" + File.separator + "templates" + File.separator +
-            getExtension() + File.separator + templateName + "." + this.getExtension());
-        
+        File templateFile = new File(Itchy.getResourcesDirectory(),
+            "templates" + File.separator + getExtension() + File.separator + templateName + "." +
+                this.getExtension());
+
         File destFile = this.manager.getScript(className.name);
 
         Util.template(templateFile, destFile, substitutions);

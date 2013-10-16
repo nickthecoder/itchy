@@ -4,12 +4,14 @@ Kitchen, Bedroom.
 What's Next
 ===========
 
-Compile on raspPi?
+Rain : reset high scores
 
-Get Thrust to run via "launch" without the resource symlinks to itchy.
-    Need thrusts jar file to be in a lib directory within its resources, and for the jar to be loaded
-    after java has started.
+Game.getPreferences to use a better key than the current game's class name, as they could easily be Game
+    or ScriptedGame.
+    Instead use the name of the resources directory, prefixed with uk.co.nickthecoder.itchy.
+    A subclass of Game can override this.
 
+Copy the arm binary
 
 When getting a property value from a script, if it doesn't return a valid value, report in stderr, and
     return a reasonable default. "", 0, 0.0, black.
@@ -31,13 +33,6 @@ Check that a broken script doesn't cause problems :
     SceneBehaviour in designer
     Game
 
-
-Rain : reset high scores
-
-Game.getPreferences to use a better key than the current game's class name, as they could easily be Game
-    or ScriptedGame.
-    Instead use the name of the resources directory, prefixed with uk.co.nickthecoder.itchy.
-    A subclass of Game can override this.
 
 Scripted Behaviours can't detect MouseEvents.
     The whole Layer as a MouseListener needs looking at.
@@ -61,6 +56,13 @@ Costumes are updated even when cancel is pressed (need to COPY the costume?)
 Later
 =====
 
+
+Compile on raspPi?
+
+
+Get Thrust to run via "launch" without the resource symlinks to itchy.
+    Need thrusts jar file to be in a lib directory within its resources, and for the jar to be loaded
+    after java has started.
 
 Bucket to be more transparent
 Water looks naff

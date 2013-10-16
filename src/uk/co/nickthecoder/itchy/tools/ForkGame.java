@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 
+import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Button;
@@ -74,7 +75,7 @@ public class ForkGame
     {
         HashMap<String, File> result = new HashMap<String, File>();
 
-        File directory = new File("resources");
+        File directory = Itchy.getResourcesDirectory();
 
         for (File dir : directory.listFiles()) {
             if (dir.isDirectory()) {

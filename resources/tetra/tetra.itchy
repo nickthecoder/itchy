@@ -5,16 +5,16 @@
   </fonts>
   <ninePatches/>
   <poses>
-    <pose name="background" filename="background.png"/>
-    <pose name="blue" filename="blue.png"/>
-    <pose name="board" filename="board.png"/>
-    <pose name="button" filename="button.png"/>
-    <pose name="cyan" filename="cyan.png"/>
-    <pose name="green" filename="green.png"/>
-    <pose name="orange" filename="orange.png"/>
-    <pose name="purple" filename="purple.png"/>
-    <pose name="red" filename="red.png"/>
-    <pose name="yellow" filename="yellow.png"/>
+    <pose name="background" filename="images/background.png"/>
+    <pose name="blue" filename="images/blue.png"/>
+    <pose name="board" filename="images/board.png"/>
+    <pose name="button" filename="images/button.png"/>
+    <pose name="cyan" filename="images/cyan.png"/>
+    <pose name="green" filename="images/green.png"/>
+    <pose name="orange" filename="images/orange.png"/>
+    <pose name="purple" filename="images/purple.png"/>
+    <pose name="red" filename="images/red.png"/>
+    <pose name="yellow" filename="images/yellow.png"/>
   </poses>
   <sounds>
     <sound name="explode" filename="sounds/explode.ogg"/>

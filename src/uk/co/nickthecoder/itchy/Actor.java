@@ -63,6 +63,10 @@ public class Actor implements PropertySubject<Actor>
         if ( pose != null ) {
             return pose;
         }
+        pose = costume.getPose("default");
+        if ( pose != null ) {
+            return pose;
+        }
         
         // It doesn't have a pose, so it will be a TextPose...
         String text = costume.getString(name);
