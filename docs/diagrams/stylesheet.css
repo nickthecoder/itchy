@@ -6,7 +6,7 @@ h1 { background: #440; color: #eee; }
 .title a { color: #eee; }
 
 a { color: #440; }
-.box { background: #fff;  box-shadow: 0px 0px 8px #440; }
+.box { background: url('background.png');  box-shadow: 0px 0px 8px #440; }
 .script { box-shadow: 1px 1px 8px #044; }
 ul { list-style-position: outside; margin: 0; padding: 0 }
 li { margin: 0; padding: 0; }
