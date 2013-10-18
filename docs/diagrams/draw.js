@@ -12,13 +12,26 @@ arrow = function() {
     ctx.stroke();
 };
 
-function connect( aId, bId, label, arrowFunc )
+function connect2( aId, bId, label, reverseLabel, arrowFunc1, arrowFunc2 )
 {
+    connect( aId, bId, label, 8, arrowFunc1 );
+    connect( bId, aId, reverseLabel, 8, arrowFunc2 );
+}
+
+function connect( aId, bId, label, margin, arrowFunc )
+{
+    if (!arrowFunc) {
+        arrowFunc = arrow;
+    }
+    if (!margin) {
+        margin = 0;
+    }
+
     var aEle = document.getElementById( aId );
     var bEle = document.getElementById( bId );
 
-    var aPoint = findEdge( aEle.getBoundingClientRect(), bEle.getBoundingClientRect() );
-    var bPoint = findEdge( bEle.getBoundingClientRect(), aEle.getBoundingClientRect() );
+    var aPoint = findEdge( aEle.getBoundingClientRect(), bEle.getBoundingClientRect(), margin );
+    var bPoint = findEdge( bEle.getBoundingClientRect(), aEle.getBoundingClientRect(), 8 );
     
     var dx = aPoint.x - bPoint.x;
     var dy = aPoint.y - bPoint.y;
@@ -42,7 +55,7 @@ function connect( aId, bId, label, arrowFunc )
     ctx.restore();
 }
 
-function findEdge( rectA, rectB )
+function findEdge( rectA, rectB, margin )
 {
     var ax = (rectA.left + rectA.right) / 2;
     var bx = (rectB.left + rectB.right) / 2;
@@ -54,10 +67,10 @@ function findEdge( rectA, rectB )
     var m = rise / tread;
     var c = by - (m * bx);
 
-    var x = ax < bx ? rectA.right + 3 : rectA.left - 3;
+    var x = ax < bx ? rectA.right + margin : rectA.left - margin;
     var y = m * x + c;
     if ( y < rectA.top || y > rectA.bottom ) {
-        y = ay > by ? rectA.top - 3 : rectA.bottom + 3;
+        y = ay > by ? rectA.top - margin : rectA.bottom + margin;
         x = (y - c) / m;
     }
 

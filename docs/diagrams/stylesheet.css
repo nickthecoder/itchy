@@ -20,6 +20,9 @@ a { text-decoration: none; font-weight: bold; }
 
 .box { position: absolute; border: 1px solid #000; min-width: 100px; }
 .box .title { text-align: center; font-weight: bold; margin: 2px; padding: 0.3em; }
+.box { border-radius: 8px; }
+.box .title { border-radius: 6px; border: 1px solid #222; }
+
 .box .content { padding: 0.5em; font-size: 80%; }
 ul.methods, ul.fields { list-style: none; }
 ul.methods li, ul.fields li { padding-left: 16px; }

@@ -421,25 +421,22 @@ FIELDS
 
 <script type="text/javascript" src="draw.js"></script>
 <script type="text/javascript">
-    connect( "Itchy", "Game", "getGame", arrow );
-
-
-    connect( "Game", "SceneBehaviour", "getSceneBehaviour", arrow );
-    connect( "Actor", "Behaviour", "getBehaviour", arrow );
-    connect( "Behaviour", "Actor", "getActor", arrow );
-    connect( "BehaviourScript", "Behaviour", "behaviour", arrow );
-    connect( "SceneBehaviourScript", "SceneBehaviour", "sceneBehaviour", arrow );
-    connect( "BehaviourScript", "Actor", "actor", arrow );
-    connect( "GameScript", "Game", "game", arrow );
-    connect( "Globals", "Game", "game", arrow );
-    connect( "Globals", "GameScript", "gameScript", arrow );
-    connect( "Globals", "SceneBehaviour", "sceneBehaviour", arrow );
-    connect( "Globals", "SceneBehaviourScript", "sceneBehaviourScript", arrow );
-    connect( "Actor", "Appearance", "getAppearance", arrow );
-    connect( "Appearance", "Pose", "getPose", arrow );
-    connect( "Actor", "Costume", "getCostume", arrow );
-    connect( "Costume", "CostumeProperties", "getProperties", arrow );
-    connect( "CostumeProperties", "CostumePropertiesScript", "values", arrow );
+    connect( "Itchy", "Game", "getGame" );
+    connect( "Game", "SceneBehaviour", "getSceneBehaviour" );
+    connect2( "Actor", "Behaviour", "getBehaviour", "getActor" );
+    connect( "BehaviourScript", "Behaviour", "behaviour" );
+    connect( "SceneBehaviourScript", "SceneBehaviour", "sceneBehaviour" );
+    connect( "BehaviourScript", "Actor", "actor" );
+    connect( "GameScript", "Game", "game" );
+    connect( "Globals", "Game", "game" );
+    connect( "Globals", "GameScript", "gameScript" );
+    connect( "Globals", "SceneBehaviour", "sceneBehaviour" );
+    connect( "Globals", "SceneBehaviourScript", "sceneBehaviourScript" );
+    connect( "Actor", "Appearance", "getAppearance" );
+    connect( "Appearance", "Pose", "getPose" );
+    connect( "Actor", "Costume", "getCostume" );
+    connect( "Costume", "CostumeProperties", "getProperties" );
+    connect( "CostumeProperties", "CostumePropertiesScript", "values" );
 
 </script>
 
