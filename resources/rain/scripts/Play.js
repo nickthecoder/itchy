@@ -23,16 +23,16 @@ Play = new Class({
             this.score += 1;
             if (this.score == this.highScore) {
                 this.player.actor.event("highScore");            
-            }       
-        }
-        
-        if (this.speedUp.isFinished()) {
-            this.speed += 1;
-            if (this.speed > this.maxSpeed ) {
-                this.speed = this.maxSpeed;
             }
-            stdout.println("Increase Speed to " + this.speed );
-            this.speedUp.reset();
+        
+            if (this.speedUp.isFinished()) {
+                this.speed += 1;
+                if (this.speed > this.maxSpeed ) {
+                    this.speed = this.maxSpeed;
+                }
+                stdout.println("Increase Speed to " + this.speed );
+                this.speedUp.reset();
+            }
         }
     },
     

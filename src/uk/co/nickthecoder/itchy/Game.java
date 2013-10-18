@@ -30,6 +30,8 @@ public class Game implements EventListener, MessageListener
 {
     public Resources resources;
 
+    public Pause pause;
+    
     private AutoFlushPreferences preferences;
 
     protected CompoundLayer layers;
@@ -55,8 +57,6 @@ public class Game implements EventListener, MessageListener
     private String sceneName;
 
     protected boolean testing;
-
-    public Pause pause;
 
     private Stylesheet stylesheet;
 
@@ -94,6 +94,7 @@ public class Game implements EventListener, MessageListener
     {
     }
 
+    // TODO Is this good?
     protected void createLayers()
     {
         Rect screenRect = new Rect(0, 0, getWidth(), getHeight());
@@ -157,10 +158,14 @@ public class Game implements EventListener, MessageListener
     public AutoFlushPreferences getPreferences()
     {
         if (this.preferences == null) {
-            this.preferences = new AutoFlushPreferences(Preferences.userNodeForPackage(this
-                .getClass()));
+            this.preferences = new AutoFlushPreferences(getPreferenceNode());
         }
         return this.preferences;
+    }
+    
+    protected Preferences getPreferenceNode()
+    {
+        return Preferences.userNodeForPackage(this.getClass()).node(this.resources.getId());
     }
 
     public CompoundLayer getLayers()

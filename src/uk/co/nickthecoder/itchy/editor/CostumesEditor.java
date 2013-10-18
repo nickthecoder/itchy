@@ -311,12 +311,8 @@ public class CostumesEditor extends SubEditor
 
     }
 
-    private List<Component> propertiesComponents;
-
     private void createPropertiesGrid()
     {
-        this.propertiesComponents = new ArrayList<Component>();
-
         CostumeProperties properties = this.currentCostumeResource.costume.getProperties();
 
         if (!this.currentCostumeResource.costume.getPropertiesClassName().name.equals(
@@ -332,8 +328,7 @@ public class CostumesEditor extends SubEditor
         for (AbstractProperty<CostumeProperties, ?> property : properties.getProperties()) {
 
             try {
-                Component component = property.createComponent(properties, false);
-                this.propertiesComponents.add(component);
+                Component component = property.createComponent(properties, true);
                 grid.addRow(property.label, component);
 
             } catch (Exception e) {
@@ -864,25 +859,6 @@ public class CostumesEditor extends SubEditor
 
         if (this.editor.resources.registerCostumePropertiesClassName(this.propertiesClassName
             .getClassName().name)) {
-
-            this.currentCostumeResource.costume.setPropertiesClassName(
-                this.editor.resources, this.propertiesClassName.getClassName());
-
-            CostumeProperties properties = this.currentCostumeResource.costume.getProperties();
-
-            int index = 0;
-            for (AbstractProperty<CostumeProperties, ?> property : properties.getProperties()) {
-
-                Component component = this.propertiesComponents.get(index);
-                try {
-                    property.update(properties, component);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    this.setMessage("Failed to set property " + property.label);
-                    return;
-                }
-                index += 1;
-            }
 
         } else {
             this.setMessage("Invalid properties class name");

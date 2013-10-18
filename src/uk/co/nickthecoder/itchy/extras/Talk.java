@@ -142,7 +142,6 @@ public class Talk extends Follower
         return this;
     }
 
-    @Override
     public Actor createActor()
     {
         NinePatch bubble = Itchy.getResources().getNinePatch(this.bubbleName);
@@ -163,6 +162,6 @@ public class Talk extends Follower
             pose = bpd.createPose(pose);
         }
 
-        return super.createActor(pose);
+        return super.createActor(pose, false);
     }
 }

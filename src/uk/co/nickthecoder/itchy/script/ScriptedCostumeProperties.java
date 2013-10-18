@@ -7,6 +7,7 @@ package uk.co.nickthecoder.itchy.script;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.CostumeProperties;
@@ -30,6 +31,15 @@ public class ScriptedCostumeProperties extends CostumeProperties
         if (properties == null) {
             properties = new ArrayList<AbstractProperty<CostumeProperties, ?>>();
             allProperties.put(name, properties);
+        } else {
+            // If the property was previously defined, remove it.
+            for ( Iterator<AbstractProperty<CostumeProperties,?>> i = properties.iterator(); i.hasNext(); ) {
+                AbstractProperty<CostumeProperties,?> property = i.next();
+                if (property.key.equals( propertyName )) {
+                    i.remove();
+                }
+            }
+
         }
 
         AbstractProperty<CostumeProperties, ?> property = AbstractProperty.createProperty(

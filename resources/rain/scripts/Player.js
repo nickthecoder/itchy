@@ -18,7 +18,12 @@ Player = new Class({
             this.actor.moveTo( x, this.actor.getY() );
             
             if ( this.behaviour.pixelOverlap("deadly").size() > 0 ) {
+                // Create a skeleton below the sheep, which will become visible when the sheep fades out.
+                new itchy.extras.Follower(this.actor).rotate().createActor("bones", true).activate();
+                
+                // Plays a sound, and starts an animation.
                 this.actor.deathEvent("death");
+                
                 sceneBehaviourScript.end();
             }
         }

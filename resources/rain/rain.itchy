@@ -14,6 +14,7 @@
     <pose name="droplet2" filename="images/droplet2.png"/>
     <pose name="droplet3" filename="images/droplet3.png"/>
     <pose name="sheep" filename="images/sheep.png" offsetX="25" offsetY="84"/>
+    <pose name="sheepBones" filename="images/sheepBones.png" offsetX="25" offsetY="84"/>
     <pose name="wally" filename="images/wally.png"/>
   </poses>
   <sounds>
@@ -65,12 +66,12 @@
       <pose name="default" pose="drop1"/>
       <pose name="droplet" pose="droplet1"/>
       <sound name="drip" sound="drip" priority="3" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="PLAY_BOTH"/>
-      <properties extraSpeed="0" speedFactor="1.0"/>
+      <properties speedFactor="1.0"/>
     </costume>
     <costume name="drop2" behaviour="Drop.js" properties="DropProperties.js">
       <pose name="default" pose="drop2"/>
       <pose name="droplet" pose="droplet2"/>
-      <properties extraSpeed="-1" speedFactor="0.5"/>
+      <properties speedFactor="0.5"/>
     </costume>
     <costume name="drop3" behaviour="Drop.js" properties="DropProperties.js">
       <pose name="default" pose="drop3"/>
@@ -81,7 +82,7 @@
       <sound name="drip" sound="rain" priority="2" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="PLAY_BOTH"/>
       <sound name="drip" sound="theyDidntBelieveThatItWasGunnaRain" priority="2" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="PLAY_BOTH"/>
       <sound name="drip" sound="myLordMyLord" priority="2" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="PLAY_BOTH"/>
-      <properties extraSpeed="1" speedFactor="1.2"/>
+      <properties speedFactor="1.2"/>
     </costume>
     <costume name="editor" behaviour="uk.co.nickthecoder.itchy.extras.MessageButton">
       <string name="default">Editor</string>
@@ -94,9 +95,10 @@
       <font name="default" font="BlackCasper"/>
     </costume>
     <costume name="player" behaviour="Player.js">
+      <pose name="bones" pose="sheepBones"/>
       <pose name="default" pose="sheep"/>
-      <sound name="death" sound="ohLord" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
-      <sound name="highScore" sound="woo" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
+      <sound name="death" sound="ohLord" priority="3" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
+      <sound name="highScore" sound="woo" priority="2" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
       <animation name="death" animation="death"/>
     </costume>
     <costume name="quit" behaviour="uk.co.nickthecoder.itchy.extras.MessageButton">

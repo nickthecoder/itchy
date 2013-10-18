@@ -4,14 +4,8 @@ Kitchen, Bedroom.
 What's Next
 ===========
 
-Rain : reset high scores
-
-Game.getPreferences to use a better key than the current game's class name, as they could easily be Game
-    or ScriptedGame.
-    Instead use the name of the resources directory, prefixed with uk.co.nickthecoder.itchy.
-    A subclass of Game can override this.
-
 Copy the arm binary
+    Test Itchy on Pi
 
 When getting a property value from a script, if it doesn't return a valid value, report in stderr, and
     return a reasonable default. "", 0, 0.0, black.
@@ -40,6 +34,9 @@ Scripted Behaviours can't detect MouseEvents.
 Bugs
 ====
 
+Can't edit a Rain scene when starting the editor directly
+    The GameBehaviour isn't initialised, but it is trying to read the properties???
+
 One of the animation profiles shows that the NumericAnimation isn't quite right.
 
 When a window has no focusable components, then it recurses till the stack explodes.
@@ -56,6 +53,8 @@ Costumes are updated even when cancel is pressed (need to COPY the costume?)
 Later
 =====
 
+Text Costumes.
+    Buttons can have sounds and animations
 
 Compile on raspPi?
 

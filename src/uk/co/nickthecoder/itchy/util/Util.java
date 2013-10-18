@@ -15,6 +15,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.lang.reflect.Array;
 import java.nio.channels.FileChannel;
 import java.util.Map;
 import java.util.Random;
@@ -254,4 +255,15 @@ public class Util
         out.println(line.substring(fromIndex));
     }
 
+    public static <T> T[] concatenate (T[] A, T[] B) {
+        int aLen = A.length;
+        int bLen = B.length;
+
+        @SuppressWarnings("unchecked")
+        T[] C = (T[]) Array.newInstance(A.getClass().getComponentType(), aLen+bLen);
+        System.arraycopy(A, 0, C, 0, aLen);
+        System.arraycopy(B, 0, C, aLen, bLen);
+
+        return C;
+    }
 }

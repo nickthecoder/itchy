@@ -95,6 +95,17 @@ public class Resources extends Loadable
         this.registerGameClassName(Game.class.getName());
     }
 
+    public String getId()
+    {
+        String name = this.getFile().getName();
+        int dot = name.lastIndexOf('.');
+        if ( dot > 0 ) {
+            return name.substring(0,dot);
+        } else {
+            return name;
+        }
+    }
+    
     public Game createGame()
         throws Exception
     {

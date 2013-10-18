@@ -7,5 +7,4 @@ DropProperties = Class({
     }
     
 });
-CostumePropertiesScript.addProperty("DropProperties", "extraSpeed", Integer, "Extra Speed");
 CostumePropertiesScript.addProperty("DropProperties", "speedFactor", Double, "Speed Factor");

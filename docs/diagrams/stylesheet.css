@@ -1,0 +1,34 @@
+/* colours */
+body { background: #fff; color: #000; }
+h1 { background: #440; color: #eee; }
+.title { background: #440; color: #eee; }
+.script .title { background: #044; }
+.title a { color: #eee; }
+
+a { color: #440; }
+.box { background: #fff;  box-shadow: 0px 0px 8px #440; }
+.script { box-shadow: 1px 1px 8px #044; }
+ul { list-style-position: outside; margin: 0; padding: 0 }
+li { margin: 0; padding: 0; }
+
+/* html elements */
+body { font-family: verdana, sans; margin: 20px;}
+h1 { font-size: 150%; font-weight: bold; text-align: center; padding : 0.5em; margin: -20px -20px 1em -20px; }
+a { text-decoration: none; font-weight: bold; }
+
+#canvas { position: absolute; top: 0px; left: 0px; }
+
+.box { position: absolute; border: 1px solid #000; min-width: 100px; }
+.box .title { text-align: center; font-weight: bold; margin: 2px; padding: 0.3em; }
+.box .content { padding: 0.5em; font-size: 80%; }
+ul.methods, ul.fields { list-style: none; }
+ul.methods li, ul.fields li { padding-left: 16px; }
+ul.methods li { background: url('method.png') no-repeat left center; }
+ul.methods li.protected { background: url('protectedMethod.png') no-repeat left center; }
+ul.fields li { background: url('field.png') no-repeat left center; }
+ul.fields li.protected { background: url('protectedField.png') no-repeat left center; }
+.static { font-style: italic; }
+
+.content ul { border-bottom: 1px solid #000; margin-bottom: 10px; padding-bottom: 10px; }
+.content ul:last-child { border-bottom: 0px; margin-bottom: 0; padding-bottom: 0; }
+
