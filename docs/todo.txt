@@ -1,8 +1,8 @@
-Kitchen, Bedroom.
-
 
 What's Next
 ===========
+
+Rain to use NumberValue instead of HishScore and Score.
 
 Copy the arm binary
     Test Itchy on Pi
@@ -12,8 +12,7 @@ When getting a property value from a script, if it doesn't return a valid value,
 
 CostumeProperties
     Use auto update components, so we don't have the fragile "for" loop in onOk.
-    Create the object when the name is set, then in onOk, set the className (which 
-        will create another version), and then copy the attributes over.
+    CostumesEditor needs to copy the costume so that cancel works.
 
 "include" javascript function, which includes another script file.
 

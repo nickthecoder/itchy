@@ -11,7 +11,7 @@ import uk.co.nickthecoder.jame.Surface;
 
 public class CostumeResource extends NamedResource
 {
-
+    // TODO All other XXXResources have getXXX, instead of a public property.
     public Costume costume;
 
     public CostumeResource( Resources resources, String name, Costume costume )

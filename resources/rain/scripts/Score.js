@@ -1,3 +1,4 @@
+// Displays the current score. The value is updated ever frame.
 Score = new Class({
 
     Extends: BehaviourScript,

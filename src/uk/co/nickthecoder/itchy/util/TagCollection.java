@@ -31,7 +31,7 @@ public class TagCollection<M>
         members.add(member);
     }
 
-    public Set<M> getTagMemberships( String tag )
+    public Set<M> getTagMembers( String tag )
     {
         Set<M> result = this.membersByTag.get(tag);
         if (result == null) {

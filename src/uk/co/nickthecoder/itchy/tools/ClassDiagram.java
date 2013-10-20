@@ -12,6 +12,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -147,9 +148,9 @@ public class ClassDiagram
             } else if (line.startsWith("Y")) {
                 this.currentKlass.y = Integer.parseInt(param);
             } else if (line.startsWith("METHODS")) {
-                this.currentSet = this.currentKlass.methodNames;
+                this.currentSet = this.currentKlass.onlyNamedMethods();
             } else if (line.startsWith("FIELDS")) {
-                this.currentSet = this.currentKlass.fieldNames;
+                this.currentSet = this.currentKlass.onlyNamedFields();
             } else {
                 this.currentSet.add(line);
             }
@@ -171,7 +172,6 @@ public class ClassDiagram
 
             String name = arg.getName();
             if (name.indexOf("[L") == 0) {
-                System.out.println("Arg : " + arg + " name " + name);
                 name = name.substring(2, name.length() - 1) + "[]";
             }
             if (!first) {
@@ -182,6 +182,34 @@ public class ClassDiagram
         }
 
         return result;
+    }
+
+    private String getCSSClassTag( int modifiers )
+    {
+        String result = "";
+        if (Modifier.isPrivate(modifiers)) {
+            result += " private";
+        }
+        if (Modifier.isProtected(modifiers)) {
+            result += " protected";
+        }
+        if (Modifier.isPublic(modifiers)) {
+            result += " public";
+        }
+        if (Modifier.isFinal(modifiers)) {
+            result += " final";
+        }
+        if (Modifier.isAbstract(modifiers)) {
+            result += " abstract";
+        }
+        if (Modifier.isInterface(modifiers)) {
+            result += " interface";
+        }
+        if (Modifier.isStatic(modifiers)) {
+            result += " static";
+        }
+
+        return result.length() == 0 ? "" : " class=\"" + result.substring(1) + "\"";
     }
 
     private void generate( ClassRequirements classRequirements )
@@ -197,60 +225,31 @@ public class ClassDiagram
             name + "</a></div>");
         this.writer.println("  <div class=\"content\">");
 
-        if (!classRequirements.fieldNames.isEmpty()) {
-            List<String> sortedFieldNames = new ArrayList<String>(classRequirements.fieldNames);
-            Collections.sort(sortedFieldNames);
-
+        if (classRequirements.listFields().size() > 0) {
             this.writer.println("    <ul class=\"fields\">");
-            for (String fieldName : sortedFieldNames) {
-                try {
-                    Field field = classRequirements.klass.getDeclaredField(fieldName);
-                    String statik = Modifier.isStatic(field.getModifiers()) ? " class=\"static\""
-                        : "";
-                    this.writer.println("      <li" + statik + "><a href=\"../api/" + slashName +
-                        ".html#" + fieldName +
-                        "\">" + fieldName + "</a></li>");
-                } catch (Exception e) {
-                    System.out.println("Field not found : " + fieldName);
-                }
+            List<Field> fields = classRequirements.listFields();
+            Collections.sort(fields, new FieldComparator());
+            for (Field field : fields) {
+                this.writer.println("      <li" + getCSSClassTag(field.getModifiers()) +
+                    "><a href=\"../api/" + slashName +
+                    ".html#" + field.getName() + "\">" + field.getName() + "</a></li>");
             }
             this.writer.println("    </ul>");
-
         }
 
-        HashMap<String, HashMap<String, Method>> knownMethods = new HashMap<String, HashMap<String, Method>>();
-        for (Class<?> klass = classRequirements.klass; klass != null; klass = klass.getSuperclass()) {
-            Method[] declaredMethods = classRequirements.klass.getDeclaredMethods();
-            for (Method method : declaredMethods) {
-                String methodName = method.getName();
-                if (!knownMethods.containsKey(methodName)) {
-                    knownMethods.put(methodName, new HashMap<String, Method>());
-                }
-                knownMethods.get(methodName).put(getMethodSig(method), method);
-            }
-        }
-
-        if (!classRequirements.methodNames.isEmpty()) {
-            List<String> sortedMethodNames = new ArrayList<String>(classRequirements.methodNames);
-            Collections.sort(sortedMethodNames);
-
+        if (classRequirements.listMethods().size() > 0) {
             this.writer.println("    <ul class=\"methods\">");
 
-            for (String methodName : sortedMethodNames) {
+            List<Method> methods = classRequirements.listMethods();
+            Collections.sort(methods, new MethodComparator());
+            for (Method method : methods) {
 
-                HashMap<String, Method> overloaded = knownMethods.get(methodName);
-                if (overloaded == null) {
-                    System.out.println("Method not found : " + methodName);
-                } else {
-                    for (Method method : overloaded.values()) {
-                        String statik = Modifier.isStatic(method.getModifiers())
-                            ? " class=\"static\"" : "";
-                        String methodSig = getMethodSig(method);
-                        this.writer.println("      <li" + statik + "><a href=\"../api/" +
-                            slashName + ".html#" +
-                            methodName + "(" + methodSig + ")\">" + methodName + "</a></li>");
-                    }
-                }
+                String methodSig = getMethodSig(method);
+                this.writer.println("      <li" + getCSSClassTag(method.getModifiers()) +
+                    "><a href=\"../api/" + slashName +
+                    ".html#" + method.getName() + "(" + methodSig + ")\">" + method.getName() +
+                    "</a></li>");
+
             }
             this.writer.println("    </ul>");
         }
@@ -258,7 +257,11 @@ public class ClassDiagram
         this.writer.println("</div>");
 
     }
-
+    void foo()
+    {
+    
+    }
+    
     /**
      * Usage : ClassDiagram HTML_TEMPLATE
      */
@@ -277,6 +280,11 @@ public class ClassDiagram
 
     }
 
+    private void error( String message )
+    {
+        System.out.println(message);
+    }
+
     public class ClassRequirements
     {
         Class<?> klass;
@@ -289,8 +297,134 @@ public class ClassDiagram
             throws Exception
         {
             this.klass = Class.forName(className);
-            this.methodNames = new HashSet<String>();
-            this.fieldNames = new HashSet<String>();
         }
+
+        Set<String> onlyNamedMethods()
+        {
+            this.methodNames = new HashSet<String>();
+            return this.methodNames;
+        }
+
+        Set<String> onlyNamedFields()
+        {
+            this.fieldNames = new HashSet<String>();
+            return this.fieldNames;
+        }
+
+        List<Field> listFields()
+        {
+            if (this.fieldNames != null) {
+                return listNamedFields();
+            } else {
+                return listDeclaredFields();
+            }
+        }
+
+        List<Field> listDeclaredFields()
+        {
+            List<Field> result = new ArrayList<Field>();
+            for (Field field : this.klass.getDeclaredFields()) {
+                int mod = field.getModifiers();
+                if (Modifier.isPublic(mod) || Modifier.isProtected(mod)) {
+                    result.add(field);
+                }
+            }
+            return result;
+        }
+
+        List<Field> listNamedFields()
+        {
+            ArrayList<Field> result = new ArrayList<Field>();
+
+            if (!this.fieldNames.isEmpty()) {
+
+                for (String fieldName : this.fieldNames) {
+                    try {
+                        Field field = this.klass.getDeclaredField(fieldName);
+                        result.add(field);
+                    } catch (Exception e) {
+                        error("Field not found : " + fieldName);
+                    }
+                }
+            }
+            return result;
+        }
+
+        List<Method> listMethods()
+        {
+            if (this.methodNames == null) {
+                return listDeclaredMethods();
+            } else {
+                return listNamedMethods();
+            }
+
+        }
+
+        List<Method> listDeclaredMethods()
+        {
+            List<Method> result = new ArrayList<Method>();
+            for (Method method : this.klass.getDeclaredMethods()) {
+                int mod = method.getModifiers();
+                if (Modifier.isPublic(mod) || Modifier.isProtected(mod)) {
+                    result.add(method);
+                }
+            }
+            return result;
+        }
+
+        List<Method> listNamedMethods()
+        {
+            ArrayList<Method> result = new ArrayList<Method>();
+
+            HashMap<String, HashMap<String, Method>> knownMethods = new HashMap<String, HashMap<String, Method>>();
+            for (Class<?> klass = this.klass; klass != null; klass = klass.getSuperclass()) {
+                Method[] declaredMethods = this.klass.getDeclaredMethods();
+                for (Method method : declaredMethods) {
+                    String methodName = method.getName();
+                    if (!knownMethods.containsKey(methodName)) {
+                        knownMethods.put(methodName, new HashMap<String, Method>());
+                    }
+                    knownMethods.get(methodName).put(getMethodSig(method), method);
+                }
+            }
+
+            if (!this.methodNames.isEmpty()) {
+
+                for (String methodName : this.methodNames) {
+
+                    HashMap<String, Method> overloaded = knownMethods.get(methodName);
+                    if (overloaded == null) {
+                        System.out.println("Method not found : " + methodName);
+                    } else {
+                        for (Method method : overloaded.values()) {
+                            result.add(method);
+                        }
+                    }
+                }
+            }
+
+            return result;
+        }
+
+    }
+
+    public class FieldComparator implements Comparator<Field>
+    {
+        @Override
+        public int compare( Field o1, Field o2 )
+        {
+            return o1.getName().compareTo(o2.getName());
+        }
+
+    }
+
+    public class MethodComparator implements Comparator<Method>
+    {
+        @Override
+        public int compare( Method o1, Method o2 )
+        {
+            return o1.getName().compareTo(o2.getName());
+        }
+
     }
 }

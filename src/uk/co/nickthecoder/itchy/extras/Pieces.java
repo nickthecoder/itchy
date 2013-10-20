@@ -11,7 +11,7 @@ import uk.co.nickthecoder.itchy.Pose;
 import uk.co.nickthecoder.itchy.PoseResource;
 import uk.co.nickthecoder.itchy.util.Property;
 
-
+// TODO Is this used? If so, add it to the extras diagram, otherwise, delete it.
 public class Pieces extends Behaviour implements Cloneable
 {
     @Property(label="Pieces")

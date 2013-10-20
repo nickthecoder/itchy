@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Drunk Invaders Class Diagram</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body style="width:900px;">
+<!-- Tag, Scene, SceneResource -->
+<!--GENERATE
+
+CLASS uk.co.nickthecoder.itchy.Behaviour
+    X 318
+    Y 0
+METHODS
+FIELDS
+
+
+CLASS uk.co.nickthecoder.drunkinvaders.Shootable
+    X 183
+    Y 0
+
+
+CLASS uk.co.nickthecoder.drunkinvaders.Bullet
+    X 33
+    Y 100
+
+CLASS uk.co.nickthecoder.drunkinvaders.Bouncy
+    X 171
+    Y 128
+
+CLASS uk.co.nickthecoder.drunkinvaders.Ship
+    X 75
+    Y 385
+    
+CLASS uk.co.nickthecoder.drunkinvaders.Alien
+    X 234
+    Y 385
+
+CLASS uk.co.nickthecoder.drunkinvaders.Mothership
+    X 234
+    Y 614
+
+CLASS uk.co.nickthecoder.drunkinvaders.AlienFactory
+    X 300
+    Y 100
+
+CLASS uk.co.nickthecoder.drunkinvaders.Shield
+    X 430
+    Y 100
+
+CLASS uk.co.nickthecoder.drunkinvaders.ShieldFactory
+    X 544
+    Y 100
+
+
+
+
+CLASS uk.co.nickthecoder.itchy.SceneBehaviour
+    X 600
+    Y 242
+METHODS
+FIELDS
+
+CLASS uk.co.nickthecoder.itchy.NullSceneBehaviour
+    X 590
+    Y 340
+METHODS
+FIELDS
+
+CLASS uk.co.nickthecoder.drunkinvaders.About
+    X 442
+    Y 480
+
+CLASS uk.co.nickthecoder.drunkinvaders.Level
+    X 550
+    Y 480
+
+CLASS uk.co.nickthecoder.drunkinvaders.Levels
+    X 662
+    Y 480
+
+CLASS uk.co.nickthecoder.drunkinvaders.Menu
+    X 772
+    Y 480
+
+
+
+CLASS uk.co.nickthecoder.itchy.Game
+    X 476
+    Y 639
+METHODS
+FIELDS
+
+CLASS uk.co.nickthecoder.drunkinvaders.DrunkInvaders
+    X 629
+    Y 568
+
+-->
+
+<h1>Drunk Invaders Class Diagram</h1>
+<div id="container" class="tiny">
+
+<canvas id="canvas" width="900" height="900"></canvas>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--BEGIN_CONTENT-->
+<div id="Behaviour" class="box" style="left:318px;top:0px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/Behaviour.html">Behaviour</a></div>
+  <div class="content">
+  </div>
+</div>
+<div id="Shootable" class="box" style="left:183px;top:0px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/drunkinvaders/Shootable.html">Shootable</a></div>
+  <div class="content">
+    <ul class="methods">
+      <li class="public abstract"><a href="../api/uk/co/nickthecoder/drunkinvaders/Shootable.html#shot(uk.co.nickthecoder.itchy.Actor)">shot</a></li>
+    </ul>
+  </div>
+</div>
+<div id="Bullet" class="box" style="left:33px;top:100px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/drunkinvaders/Bullet.html">Bullet</a></div>
+  <div class="content">
+    <ul class="fields">
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Bullet.html#speed">speed</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Bullet.html#targetTagName">targetTagName</a></li>
+    </ul>
+    <ul class="methods">
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Bullet.html#onAttach()">onAttach</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Bullet.html#onDetach()">onDetach</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Bullet.html#shot(uk.co.nickthecoder.itchy.Actor)">shot</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Bullet.html#tick()">tick</a></li>
+    </ul>
+  </div>
+</div>
+<div id="Bouncy" class="box" style="left:171px;top:128px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/drunkinvaders/Bouncy.html">Bouncy</a></div>
+  <div class="content">
+    <ul class="fields">
+      <li class="public final static"><a href="../api/uk/co/nickthecoder/drunkinvaders/Bouncy.html#BOUNCY_LIST">BOUNCY_LIST</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Bouncy.html#mass">mass</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Bouncy.html#radius">radius</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Bouncy.html#vx">vx</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Bouncy.html#vy">vy</a></li>
+    </ul>
+    <ul class="methods">
+      <li class="public static"><a href="../api/uk/co/nickthecoder/drunkinvaders/Bouncy.html#collide(uk.co.nickthecoder.itchy.Actor, uk.co.nickthecoder.itchy.Actor)">collide</a></li>
+      <li class="public static"><a href="../api/uk/co/nickthecoder/drunkinvaders/Bouncy.html#collideOld(uk.co.nickthecoder.itchy.Actor, uk.co.nickthecoder.itchy.Actor)">collideOld</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Bouncy.html#onAttach()">onAttach</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Bouncy.html#onDetach()">onDetach</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Bouncy.html#onKill()">onKill</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Bouncy.html#tick()">tick</a></li>
+    </ul>
+  </div>
+</div>
+<div id="Ship" class="box" style="left:75px;top:385px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/drunkinvaders/Ship.html">Ship</a></div>
+  <div class="content">
+    <ul class="fields">
+      <li class="public final static"><a href="../api/uk/co/nickthecoder/drunkinvaders/Ship.html#DEADLY_LIST">DEADLY_LIST</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Ship.html#ox">ox</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Ship.html#oy">oy</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Ship.html#radius">radius</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Ship.html#rotationSpeed">rotationSpeed</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Ship.html#shieldDischargeRate">shieldDischargeRate</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Ship.html#shieldRechargeRate">shieldRechargeRate</a></li>
+    </ul>
+    <ul class="methods">
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Ship.html#activateShield()">activateShield</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Ship.html#deactivateShield()">deactivateShield</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Ship.html#fire()">fire</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Ship.html#init()">init</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Ship.html#onAttach()">onAttach</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Ship.html#onDetach()">onDetach</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Ship.html#onKill()">onKill</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Ship.html#shot(uk.co.nickthecoder.itchy.Actor)">shot</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Ship.html#tick()">tick</a></li>
+    </ul>
+  </div>
+</div>
+<div id="Alien" class="box" style="left:234px;top:385px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/drunkinvaders/Alien.html">Alien</a></div>
+  <div class="content">
+    <ul class="fields">
+      <li class="public final static"><a href="../api/uk/co/nickthecoder/drunkinvaders/Alien.html#SHOOTABLE_LIST">SHOOTABLE_LIST</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Alien.html#fireOnceEvery">fireOnceEvery</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Alien.html#shotsRequired">shotsRequired</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Alien.html#tock">tock</a></li>
+    </ul>
+    <ul class="methods">
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Alien.html#fire()">fire</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Alien.html#init()">init</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Alien.html#onActivate()">onActivate</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Alien.html#onDeactivate()">onDeactivate</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Alien.html#onKill()">onKill</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Alien.html#shot(uk.co.nickthecoder.itchy.Actor)">shot</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Alien.html#tick()">tick</a></li>
+    </ul>
+  </div>
+</div>
+<div id="Mothership" class="box" style="left:234px;top:614px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/drunkinvaders/Mothership.html">Mothership</a></div>
+  <div class="content">
+    <ul class="fields">
+      <li class="public final static"><a href="../api/uk/co/nickthecoder/drunkinvaders/Mothership.html#SHOOTABLE_LIST">SHOOTABLE_LIST</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Mothership.html#birthInterval">birthInterval</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Mothership.html#childFireOnceEvery">childFireOnceEvery</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Mothership.html#childrenCount">childrenCount</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Mothership.html#costumeName">costumeName</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Mothership.html#firstBornDelay">firstBornDelay</a></li>
+    </ul>
+    <ul class="methods">
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Mothership.html#giveBirth()">giveBirth</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Mothership.html#init()">init</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Mothership.html#onAttach()">onAttach</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Mothership.html#onDetach()">onDetach</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Mothership.html#tick()">tick</a></li>
+    </ul>
+  </div>
+</div>
+<div id="AlienFactory" class="box" style="left:300px;top:100px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/drunkinvaders/AlienFactory.html">AlienFactory</a></div>
+  <div class="content">
+    <ul class="fields">
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/AlienFactory.html#alienCount">alienCount</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/AlienFactory.html#costumeName">costumeName</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/AlienFactory.html#delayPerAlien">delayPerAlien</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/AlienFactory.html#fireOnceEvery">fireOnceEvery</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/AlienFactory.html#spacing">spacing</a></li>
+    </ul>
+    <ul class="methods">
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/AlienFactory.html#init()">init</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/AlienFactory.html#tick()">tick</a></li>
+    </ul>
+  </div>
+</div>
+<div id="Shield" class="box" style="left:430px;top:100px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/drunkinvaders/Shield.html">Shield</a></div>
+  <div class="content">
+    <ul class="methods">
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Shield.html#onAttach()">onAttach</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Shield.html#onDetach()">onDetach</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Shield.html#onKill()">onKill</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Shield.html#shot(uk.co.nickthecoder.itchy.Actor)">shot</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Shield.html#tick()">tick</a></li>
+    </ul>
+  </div>
+</div>
+<div id="ShieldFactory" class="box" style="left:544px;top:100px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/drunkinvaders/ShieldFactory.html">ShieldFactory</a></div>
+  <div class="content">
+    <ul class="fields">
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/ShieldFactory.html#height">height</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/ShieldFactory.html#spacing">spacing</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/ShieldFactory.html#width">width</a></li>
+    </ul>
+    <ul class="methods">
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/ShieldFactory.html#tick()">tick</a></li>
+    </ul>
+  </div>
+</div>
+<div id="SceneBehaviour" class="box" style="left:600px;top:242px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/SceneBehaviour.html">SceneBehaviour</a></div>
+  <div class="content">
+  </div>
+</div>
+<div id="NullSceneBehaviour" class="box" style="left:590px;top:340px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/NullSceneBehaviour.html">NullSceneBehaviour</a></div>
+  <div class="content">
+  </div>
+</div>
+<div id="About" class="box" style="left:442px;top:480px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/drunkinvaders/About.html">About</a></div>
+  <div class="content">
+    <ul class="methods">
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/About.html#onKeyDown(uk.co.nickthecoder.jame.event.KeyboardEvent)">onKeyDown</a></li>
+    </ul>
+  </div>
+</div>
+<div id="Level" class="box" style="left:550px;top:480px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/drunkinvaders/Level.html">Level</a></div>
+  <div class="content">
+    <ul class="methods">
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Level.html#onKeyDown(uk.co.nickthecoder.jame.event.KeyboardEvent)">onKeyDown</a></li>
+    </ul>
+  </div>
+</div>
+<div id="Levels" class="box" style="left:662px;top:480px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/drunkinvaders/Levels.html">Levels</a></div>
+  <div class="content">
+    <ul class="methods">
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Levels.html#onKeyDown(uk.co.nickthecoder.jame.event.KeyboardEvent)">onKeyDown</a></li>
+    </ul>
+  </div>
+</div>
+<div id="Menu" class="box" style="left:772px;top:480px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/drunkinvaders/Menu.html">Menu</a></div>
+  <div class="content">
+    <ul class="methods">
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Menu.html#onKeyDown(uk.co.nickthecoder.jame.event.KeyboardEvent)">onKeyDown</a></li>
+    </ul>
+  </div>
+</div>
+<div id="Game" class="box" style="left:476px;top:639px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/Game.html">Game</a></div>
+  <div class="content">
+  </div>
+</div>
+<div id="DrunkInvaders" class="box" style="left:629px;top:568px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html">DrunkInvaders</a></div>
+  <div class="content">
+    <ul class="fields">
+      <li class="public final static"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#NEIGHBOURHOOD_SQUARE_SIZE">NEIGHBOURHOOD_SQUARE_SIZE</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#backgroundLayer">backgroundLayer</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#fadeLayer">fadeLayer</a></li>
+      <li class="public static"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#game">game</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#glassLayer">glassLayer</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#mainLayer">mainLayer</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#metronome">metronome</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#metronomeCountdown">metronomeCountdown</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#transitioning">transitioning</a></li>
+    </ul>
+    <ul class="methods">
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#addAliens(int)">addAliens</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#completedLevel(int)">completedLevel</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#createCollisionStrategy(uk.co.nickthecoder.itchy.Actor)">createCollisionStrategy</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#createLayers()">createLayers</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#debug()">debug</a></li>
+      <li class="public static"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#main(java.lang.String[])">main</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#onActivate()">onActivate</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#onKeyDown(uk.co.nickthecoder.jame.event.KeyboardEvent)">onKeyDown</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#onKeyUp(uk.co.nickthecoder.jame.event.KeyboardEvent)">onKeyUp</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#onMessage(java.lang.String)">onMessage</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#play()">play</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#play(int)">play</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#startScene(java.lang.String)">startScene</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#tick()">tick</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#toggleInfo()">toggleInfo</a></li>
+    </ul>
+  </div>
+</div>
+<!--END_CONTENT-->
+
+</div>
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.10.3.custom.min.js"></script>
+<script type="text/javascript" src="js/boxes.js"></script>
+
+<script type="text/javascript">
+function drawConnections()
+{
+    clear();
+    ctx.font = "7pt Verdana";
+
+    connect( "Bullet", "Behaviour", "", extendsEnd );
+    connect( "Bouncy", "Behaviour", "", extendsEnd );
+    connect( "Shield", "Behaviour", "", extendsEnd );
+    connect( "ShieldFactory", "Behaviour", "", extendsEnd );
+    connect( "Ship", "Bouncy", "", extendsEnd );
+    connect( "AlienFactory", "Behaviour", "", extendsEnd );
+    connect( "Alien", "Bouncy", "", extendsEnd );
+    connect( "Mothership", "Alien", "", extendsEnd );
+ 
+    connect( "NullSceneBehaviour", "SceneBehaviour", "", implementsEnd );
+    connect( "About", "NullSceneBehaviour", "", extendsEnd );
+    connect( "Menu", "NullSceneBehaviour", "", extendsEnd );
+    connect( "Level", "NullSceneBehaviour", "", extendsEnd );
+    connect( "Levels", "NullSceneBehaviour", "", extendsEnd );
+
+    connect( "Alien", "Shootable", "", implementsEnd );
+    connect( "Bullet", "Shootable", "", implementsEnd );
+    connect( "Shield", "Shootable", "", implementsEnd );
+    connect( "Ship", "Shootable", "", implementsEnd );
+
+    connect( "DrunkInvaders", "Game", "", extendsEnd );
+}
+
+$(function() {
+    $(".box").draggable({
+        stop: function( event, ui ) {
+            dragged($(this));
+        }
+    })  
+    drawConnections();
+});
+
+</script>
+
+</body>
+</html>
+

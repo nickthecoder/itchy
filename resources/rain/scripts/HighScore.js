@@ -1,3 +1,5 @@
+// Used to display the high score for the current level.
+// The text is only updated at the beginning of the scene.
 HighScore = Class({
     
     Extends: BehaviourScript,

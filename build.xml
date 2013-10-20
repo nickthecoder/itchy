@@ -11,6 +11,7 @@
         </fileset>
     </path>
 	
+	<!-- build -->
     <target name="build">
         <mkdir dir="build"/>
         <mkdir dir="lib"/>
@@ -31,12 +32,46 @@
 
     </target>
 
-	<!-- publish : Used to create zip files of the source and binaries -->
-    <target name="publish" depends="clean,build,javadoc">
+    <!-- Generate javadocs -->
+    <target name="javadoc" depends="build">
+        <copy file="docs/stylesheet.css" todir="docs/api/"/>
+        <javadoc sourcepath="src"
+            classpathref="project.class.path"
+            access="protected"
+            destdir="docs/api"
+            windowtitle="Itchy">
 
-    	<mkdir dir="${publish.dir}"/>
+            <package name="uk.co.nickthecoder.itchy"/>
+            <package name="uk.co.nickthecoder.itchy.animation"/>
+            <package name="uk.co.nickthecoder.itchy.extras"/>
+            <package name="uk.co.nickthecoder.itchy.gui"/>
+            <package name="uk.co.nickthecoder.itchy.neighbourhood"/>
+            <package name="uk.co.nickthecoder.itchy.script"/>
+            <package name="uk.co.nickthecoder.itchy.util"/>
+            
+            <link packagelistloc="http://nickthecoder.co.uk/public/jame/api/package-list" href="http://nickthecoder.co.uk/public/jame/api/"/>
+            <link packagelistloc="http://docs.oracle.com/javase/7/docs/api/package-list" href="http://docs.oracle.com/javase/7/docs/api/"/>
+            
+        </javadoc>
+    	<exec executable="docs/diagrams/generateClassDiagrams.sh"/>
+    </target>
 
-        <jar jarfile="${publish.dir}/itchy-win32.zip">
+	<!-- clean : Delete jar file and class files -->
+    <target name="clean">
+        <delete includeEmptyDirs="true">
+            <fileset dir=".">
+                <include name="lib/itchy.jar" />
+                <include name="build/**" />
+                <exclude name="build" />
+            </fileset>
+        </delete>
+    </target>
+
+
+    <!-- publish : Used to create zip files of the source and binaries -->
+	<target name="package" depends="clean,build,javadoc">
+
+        <jar jarfile="docs/itchy-win32.zip">
             <fileset dir=".">
                 <include name="lib/*.jar"/>
                 <include name="launch.bat"/>
@@ -51,7 +86,7 @@
             </fileset>
         </jar>
 
-        <tar destfile="${publish.dir}/itchy-linux.tar.gz" compression="gzip">
+        <tar destfile="docs/itchy-linux.tar.gz" compression="gzip">
             <fileset dir=".">
                 <include name="lib/*.jar"/>
                 <include name="launch"/>
@@ -67,7 +102,7 @@
             </fileset>
         </tar>
 
-    	<jar jarfile="${publish.dir}/itchy-src.zip">
+        <jar jarfile="docs/itchy-src.zip">
             <fileset dir=".">
                 <include name="src/**/*.java"/>
                 <include name="*.txt"/>
@@ -84,53 +119,35 @@
             </fileset>
         </jar>
 
-    	<buildnumber/>
+	</target>
+	
+    <!-- publish : Copies it to my web server's public directory -->
+    <target name="publish" depends="package">
+
+        <buildnumber/>
     	
-        <mkdir dir="${publish.dir}/builds/${build.number}/"/>
+    	<mkdir dir="${publish.dir}"/>
+    	<delete>
+    	    <fileset dir="${publish.dir}" exclude="builds/**"/>
+		</delete>
+    	
+        <copy todir="${publish.dir}">
+            <fileset dir="docs">
+                <include name="**/*.html"/>
+                <include name="**/*.png"/>
+                <include name="**/*.css"/>
+                <include name="**/*.js"/>
+        	</fileset>
+        </copy>
+
+    	<mkdir dir="${publish.dir}/builds/${build.number}/"/>
 
         <copy file="${publish.dir}/itchy-linux.tar.gz" todir="${publish.dir}/builds/${build.number}/"/>        
         <copy file="${publish.dir}/itchy-src.zip" todir="${publish.dir}/builds/${build.number}/"/>   
         <copy file="${publish.dir}/itchy-win32.zip" todir="${publish.dir}/builds/${build.number}/"/>   
-        <copy todir="${publish.dir}/api/">
-            <fileset dir="docs/api"/>
-    	</copy>
 
 	</target>
     
-    <!-- Generate javadocs -->
-    <target name="javadoc" depends="build">
-    	<copy file="docs/stylesheet.css" todir="docs/api/"/>
-        <javadoc sourcepath="src"
-            classpathref="project.class.path"
-            access="protected"
-            destdir="docs/api"
-            windowtitle="Itchy">
-
-            <package name="uk.co.nickthecoder.itchy"/>
-            <package name="uk.co.nickthecoder.itchy.animation"/>
-            <package name="uk.co.nickthecoder.itchy.extras"/>
-            <package name="uk.co.nickthecoder.itchy.gui"/>
-            <package name="uk.co.nickthecoder.itchy.neighbourhood"/>
-            <package name="uk.co.nickthecoder.itchy.script"/>
-            <package name="uk.co.nickthecoder.itchy.util"/>
-        	
-            <link packagelistloc="http://nickthecoder.co.uk/public/jame/api/package-list" href="http://nickthecoder.co.uk/public/jame/api/"/>
-            <link packagelistloc="http://docs.oracle.com/javase/7/docs/api/package-list" href="http://docs.oracle.com/javase/7/docs/api/"/>
-        	
-        </javadoc>
-    </target>
-
-    <target name="clean">
-        <delete includeEmptyDirs="true">
-            <fileset dir=".">
-                <include name="lib/itchy.jar" />
-                <include name="build/**" />
-                <exclude name="build" />
-            </fileset>
-        </delete>
-    </target>
-
-
     <target name="test" depends="build">
 
         <junit fork="true" printsummary="false" haltonfailure="yes" dir="." >

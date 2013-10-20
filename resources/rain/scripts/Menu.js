@@ -1,3 +1,4 @@
+// The SceneBehaviourScript for the main "menu" scene, and the "about" scene.
 Menu = new Class({
 
     Extends: SceneBehaviourScript,
@@ -14,6 +15,7 @@ Menu = new Class({
         }
     },
     
+    // Hmm, I'm not sure this is needed any longer.
     isPlaying: function() {
         return false;
     } 

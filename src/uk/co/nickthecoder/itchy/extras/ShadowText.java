@@ -11,6 +11,7 @@ import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.TextPose;
 import uk.co.nickthecoder.jame.RGBA;
 
+//TODO Weird - shouldn't this inherit from Follower, or nothing?
 public class ShadowText extends Projectile
 {
     public static final RGBA WHITE = new RGBA(255, 255, 255, 255);

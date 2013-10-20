@@ -163,7 +163,7 @@ public class Actor implements PropertySubject<Actor>
 
     public static Set<Actor> allByTag( String tag )
     {
-        return actorTags.getTagMemberships(tag);
+        return actorTags.getTagMembers(tag);
     }
 
     public boolean hasTag( String name )

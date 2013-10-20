@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Itchy Core Classes</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body style="width:1200px;">
+<!-- Tag, Scene, SceneResource -->
+<!--GENERATE
+CLASS uk.co.nickthecoder.itchy.Itchy
+    X 20
+    Y 80
+    
+CLASS uk.co.nickthecoder.itchy.Game
+    X 280
+    Y 27
+    
+CLASS uk.co.nickthecoder.itchy.Actor
+    X 794
+    Y 27
+
+CLASS uk.co.nickthecoder.itchy.Behaviour
+    X 1016
+    Y 78
+
+CLASS uk.co.nickthecoder.itchy.util.TagMembership
+    X 800
+    Y 1060
+
+CLASS uk.co.nickthecoder.itchy.util.TagCollection
+    X 1000
+    Y 1221
+
+CLASS uk.co.nickthecoder.itchy.SceneBehaviour
+    X 100
+    Y 550
+
+CLASS uk.co.nickthecoder.itchy.Appearance
+    X 1020
+    Y 600
+    
+CLASS uk.co.nickthecoder.itchy.Pose
+    X 800
+    Y 1400    
+
+CLASS uk.co.nickthecoder.itchy.ImagePose
+    X 722
+    Y 1600    
+
+CLASS uk.co.nickthecoder.itchy.AbstractTextPose
+    X 879
+    Y 1600    
+
+CLASS uk.co.nickthecoder.itchy.TextPose
+    X 964
+    Y 1998    
+
+CLASS uk.co.nickthecoder.itchy.MultiLineTextPose
+    X 809
+    Y 1998    
+
+CLASS uk.co.nickthecoder.itchy.PoseResource
+    X 513
+    Y 1547    
+    
+CLASS uk.co.nickthecoder.itchy.Costume
+    X 366
+    Y 849  
+    
+CLASS uk.co.nickthecoder.itchy.CostumeResource
+    X 421
+    Y 1794
+    
+CLASS uk.co.nickthecoder.itchy.CostumeProperties
+    X 603
+    Y 1241
+    
+CLASS uk.co.nickthecoder.itchy.Layer
+    X 537
+    Y 78
+    
+CLASS uk.co.nickthecoder.itchy.CompoundLayer
+    X 469
+    Y 542
+    
+CLASS uk.co.nickthecoder.itchy.ActorsLayer
+    X 598
+    Y 542
+
+CLASS uk.co.nickthecoder.itchy.ScrollableLayer
+    X 605
+    Y 944
+
+CLASS uk.co.nickthecoder.itchy.AnimationResource
+    X 150
+    Y 801
+
+CLASS uk.co.nickthecoder.itchy.animation.Animation
+    X 5
+    Y 946
+    
+CLASS uk.co.nickthecoder.itchy.FontResource
+    X 200
+    Y 1100
+
+CLASS uk.co.nickthecoder.itchy.Font
+    X 20
+    Y 1200
+    
+CLASS uk.co.nickthecoder.itchy.SoundResource
+    X 210
+    Y 1354
+
+CLASS uk.co.nickthecoder.jame.Sound
+    X 20
+    Y 1400
+    
+CLASS uk.co.nickthecoder.itchy.ManagedSound
+    X 303
+    Y 1482
+
+CLASS uk.co.nickthecoder.itchy.Resources
+    X 80
+    Y 1668
+METHODS
+ 
+CLASS uk.co.nickthecoder.itchy.GameInfo
+    X 250
+    Y 1800
+ 
+-->
+
+<h1>Itchy Core Classes</h1>
+<div id="container" class="tiny">
+
+<canvas id="canvas" width="1200" height="2200"></canvas>
+
+
+
+
+
+<!--BEGIN_CONTENT-->
+<div id="Itchy" class="box" style="left:20px;top:80px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/Itchy.html">Itchy</a></div>
+  <div class="content">
+    <ul class="fields">
+      <li class="public static"><a href="../api/uk/co/nickthecoder/itchy/Itchy.html#frameRate">frameRate</a></li>
+      <li class="public static"><a href="../api/uk/co/nickthecoder/itchy/Itchy.html#keyboardRepeatDelay">keyboardRepeatDelay</a></li>
+      <li class="public static"><a href="../api/uk/co/nickthecoder/itchy/Itchy.html#keyboardRepeatInterval">keyboardRepeatInterval</a></li>
+      <li class="public static"><a href="../api/uk/co/nickthecoder/itchy/Itchy.html#soundManager">soundManager</a></li>
+    </ul>
+    <ul class="methods">
+      <li class="public static"><a href="../api/uk/co/nickthecoder/itchy/Itchy.html#enableKeyboardRepeat(boolean)">enableKeyboardRepeat</a></li>
+      <li class="public static"><a href="../api/uk/co/nickthecoder/itchy/Itchy.html#endGame()">endGame</a></li>
+      <li class="public static"><a href="../api/uk/co/nickthecoder/itchy/Itchy.html#endOfFrame()">endOfFrame</a></li>
+      <li class="public static"><a href="../api/uk/co/nickthecoder/itchy/Itchy.html#getBaseDirectory()">getBaseDirectory</a></li>
+      <li class="public static"><a href="../api/uk/co/nickthecoder/itchy/Itchy.html#getDisplaySurface()">getDisplaySurface</a></li>
+      <li class="public static"><a href="../api/uk/co/nickthecoder/itchy/Itchy.html#getGame()">getGame</a></li>
+      <li class="public static"><a href="../api/uk/co/nickthecoder/itchy/Itchy.html#getMouseX()">getMouseX</a></li>
+      <li class="public static"><a href="../api/uk/co/nickthecoder/itchy/Itchy.html#getMouseY()">getMouseY</a></li>
+      <li class="public static"><a href="../api/uk/co/nickthecoder/itchy/Itchy.html#getResources()">getResources</a></li>
+      <li class="public static"><a href="../api/uk/co/nickthecoder/itchy/Itchy.html#getResourcesDirectory()">getResourcesDirectory</a></li>
+      <li class="public static"><a href="../api/uk/co/nickthecoder/itchy/Itchy.html#init(uk.co.nickthecoder.itchy.Resources)">init</a></li>
+      <li class="public static"><a href="../api/uk/co/nickthecoder/itchy/Itchy.html#isCtrlDown()">isCtrlDown</a></li>
+      <li class="public static"><a href="../api/uk/co/nickthecoder/itchy/Itchy.html#isKeyDown(int)">isKeyDown</a></li>
+      <li class="public static"><a href="../api/uk/co/nickthecoder/itchy/Itchy.html#isMetaDown()">isMetaDown</a></li>
+      <li class="public static"><a href="../api/uk/co/nickthecoder/itchy/Itchy.html#isRunning()">isRunning</a></li>
+      <li class="public static"><a href="../api/uk/co/nickthecoder/itchy/Itchy.html#isShiftDown()">isShiftDown</a></li>
+      <li class="public static"><a href="../api/uk/co/nickthecoder/itchy/Itchy.html#isSuperDown()">isSuperDown</a></li>
+      <li class="public static"><a href="../api/uk/co/nickthecoder/itchy/Itchy.html#mainLoop()">mainLoop</a></li>
+      <li class="public static"><a href="../api/uk/co/nickthecoder/itchy/Itchy.html#showMousePointer(boolean)">showMousePointer</a></li>
+      <li class="public static"><a href="../api/uk/co/nickthecoder/itchy/Itchy.html#startGame(uk.co.nickthecoder.itchy.Game)">startGame</a></li>
+      <li class="public static"><a href="../api/uk/co/nickthecoder/itchy/Itchy.html#terminate()">terminate</a></li>
+    </ul>
+  </div>
+</div>
+<div id="Game" class="box" style="left:280px;top:27px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/Game.html">Game</a></div>
+  <div class="content">
+    <ul class="fields">
+      <li class="protected"><a href="../api/uk/co/nickthecoder/itchy/Game.html#eventListeners">eventListeners</a></li>
+      <li class="protected"><a href="../api/uk/co/nickthecoder/itchy/Game.html#keyListeners">keyListeners</a></li>
+      <li class="protected"><a href="../api/uk/co/nickthecoder/itchy/Game.html#layers">layers</a></li>
+      <li class="protected"><a href="../api/uk/co/nickthecoder/itchy/Game.html#mouseListeners">mouseListeners</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Game.html#pause">pause</a></li>
+      <li class="protected"><a href="../api/uk/co/nickthecoder/itchy/Game.html#popupLayer">popupLayer</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Game.html#resources">resources</a></li>
+      <li class="protected"><a href="../api/uk/co/nickthecoder/itchy/Game.html#testing">testing</a></li>
+    </ul>
+    <ul class="methods">
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Game.html#addEventListener(uk.co.nickthecoder.itchy.EventListener)">addEventListener</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Game.html#addKeyListener(uk.co.nickthecoder.itchy.KeyListener)">addKeyListener</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Game.html#addMouseListener(uk.co.nickthecoder.itchy.MouseListener)">addMouseListener</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Game.html#captureMouse(uk.co.nickthecoder.itchy.EventListener)">captureMouse</a></li>
+      <li class="protected"><a href="../api/uk/co/nickthecoder/itchy/Game.html#createLayers()">createLayers</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Game.html#end()">end</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Game.html#endTest()">endTest</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Game.html#gameTimeMillis()">gameTimeMillis</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Game.html#getHeight()">getHeight</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Game.html#getLayers()">getLayers</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Game.html#getPopupLayer()">getPopupLayer</a></li>
+      <li class="protected"><a href="../api/uk/co/nickthecoder/itchy/Game.html#getPreferenceNode()">getPreferenceNode</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Game.html#getPreferences()">getPreferences</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Game.html#getSceneBehaviour()">getSceneBehaviour</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Game.html#getSceneName()">getSceneName</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Game.html#getStylesheet()">getStylesheet</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Game.html#getTitle()">getTitle</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Game.html#getWidth()">getWidth</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Game.html#hideWindow(uk.co.nickthecoder.itchy.gui.GuiPose)">hideWindow</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Game.html#loadScene(java.lang.String)">loadScene</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Game.html#onActivate()">onActivate</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Game.html#onDeactivate()">onDeactivate</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Game.html#onKeyDown(uk.co.nickthecoder.jame.event.KeyboardEvent)">onKeyDown</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Game.html#onKeyUp(uk.co.nickthecoder.jame.event.KeyboardEvent)">onKeyUp</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Game.html#onMessage(java.lang.String)">onMessage</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Game.html#onMouseDown(uk.co.nickthecoder.jame.event.MouseButtonEvent)">onMouseDown</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Game.html#onMouseMove(uk.co.nickthecoder.jame.event.MouseMotionEvent)">onMouseMove</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Game.html#onMouseUp(uk.co.nickthecoder.jame.event.MouseButtonEvent)">onMouseUp</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Game.html#onQuit()">onQuit</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Game.html#processEvent(uk.co.nickthecoder.jame.event.Event)">processEvent</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Game.html#releaseMouse(uk.co.nickthecoder.itchy.EventListener)">releaseMouse</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Game.html#removeEventListener(uk.co.nickthecoder.itchy.EventListener)">removeEventListener</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Game.html#removeKeyListener(uk.co.nickthecoder.itchy.KeyListener)">removeKeyListener</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Game.html#removeMouseListener(uk.co.nickthecoder.itchy.MouseListener)">removeMouseListener</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Game.html#render(uk.co.nickthecoder.jame.Surface)">render</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Game.html#setFocus(uk.co.nickthecoder.itchy.Focusable)">setFocus</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Game.html#setModalListener(uk.co.nickthecoder.itchy.EventListener)">setModalListener</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Game.html#setStylesheet(uk.co.nickthecoder.itchy.gui.Stylesheet)">setStylesheet</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Game.html#showWindow(uk.co.nickthecoder.itchy.gui.GuiPose)">showWindow</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Game.html#start()">start</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Game.html#start(java.lang.String)">start</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Game.html#startEditor()">startEditor</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Game.html#startEditor(java.lang.String)">startEditor</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Game.html#startScene(java.lang.String)">startScene</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Game.html#testScene(java.lang.String)">testScene</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Game.html#tick()">tick</a></li>
+    </ul>
+  </div>
+</div>
+<div id="Actor" class="box" style="left:794px;top:27px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/Actor.html">Actor</a></div>
+  <div class="content">
+    <ul class="methods">
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#activate()">activate</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#activateAfter(double)">activateAfter</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#addTag(java.lang.String)">addTag</a></li>
+      <li class="public static"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#allByTag(java.lang.String)">allByTag</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#contains(int, int)">contains</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#deactivate()">deactivate</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#deathAnimation(java.lang.String)">deathAnimation</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#deathEvent(uk.co.nickthecoder.itchy.Costume, java.lang.String)">deathEvent</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#deathEvent(java.lang.String)">deathEvent</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#directionOf(uk.co.nickthecoder.itchy.Actor)">directionOf</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#distance(uk.co.nickthecoder.itchy.Actor)">distance</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#distanceTo(uk.co.nickthecoder.itchy.Actor)">distanceTo</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#distanceTo(double, double)">distanceTo</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#endEvent(java.lang.String)">endEvent</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#event(uk.co.nickthecoder.itchy.Costume, java.lang.String)">event</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#event(java.lang.String)">event</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#getActivationDelay()">getActivationDelay</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#getAnimation()">getAnimation</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#getAppearance()">getAppearance</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#getBehaviour()">getBehaviour</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#getCornerX()">getCornerX</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#getCornerY()">getCornerY</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#getCostume()">getCostume</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#getLayer()">getLayer</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#getProperties()">getProperties</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#getStartEvent()">getStartEvent</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#getSurface()">getSurface</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#getX()">getX</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#getY()">getY</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#getYAxisPointsDown()">getYAxisPointsDown</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#hasTag(java.lang.String)">hasTag</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#hitting(int, int)">hitting</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#isActive()">isActive</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#isDead()">isDead</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#isDying()">isDying</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#isOffScreen()">isOffScreen</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#isOnScreen()">isOnScreen</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#isText()">isText</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#kill()">kill</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#moveBy(double, double)">moveBy</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#moveForward(double, double)">moveForward</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#moveForward(double)">moveForward</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#moveTo(double, double)">moveTo</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#moveTo(uk.co.nickthecoder.itchy.Actor)">moveTo</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#moveTowards(uk.co.nickthecoder.itchy.Actor, double)">moveTowards</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#nearest(java.lang.String)">nearest</a></li>
+      <li class="public static"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#nearest(double, double, java.lang.String)">nearest</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#overlapping(uk.co.nickthecoder.itchy.Actor)">overlapping</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#pixelOverlap(int, int)">pixelOverlap</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#pixelOverlap(int, int, int)">pixelOverlap</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#pixelOverlap(uk.co.nickthecoder.itchy.Actor)">pixelOverlap</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#play(java.lang.String)">play</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#removeAllTags()">removeAllTags</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#removeFromLayer()">removeFromLayer</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#removeTag(java.lang.String)">removeTag</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#setActivationDelay(double)">setActivationDelay</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#setAnimation(uk.co.nickthecoder.itchy.animation.Animation)">setAnimation</a></li>
+      <li class="public final"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#setBehaviour(uk.co.nickthecoder.itchy.Behaviour)">setBehaviour</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#setCostume(uk.co.nickthecoder.itchy.Costume)">setCostume</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#setLayer(uk.co.nickthecoder.itchy.ActorsLayer)">setLayer</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#setStartEvent(java.lang.String)">setStartEvent</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#setX(double)">setX</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#setY(double)">setY</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#tick()">tick</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#toString()">toString</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#zOrderBottom()">zOrderBottom</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#zOrderDown()">zOrderDown</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#zOrderTop()">zOrderTop</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#zOrderUp()">zOrderUp</a></li>
+    </ul>
+  </div>
+</div>
+<div id="Behaviour" class="box" style="left:1016px;top:78px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/Behaviour.html">Behaviour</a></div>
+  <div class="content">
+    <ul class="fields">
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Behaviour.html#collisionStrategy">collisionStrategy</a></li>
+    </ul>
+    <ul class="methods">
+      <li class="protected"><a href="../api/uk/co/nickthecoder/itchy/Behaviour.html#addProperties()">addProperties</a></li>
+      <li class="protected"><a href="../api/uk/co/nickthecoder/itchy/Behaviour.html#addProperty(uk.co.nickthecoder.itchy.util.AbstractProperty)">addProperty</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Behaviour.html#attach(uk.co.nickthecoder.itchy.Actor)">attach</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Behaviour.html#clone()">clone</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Behaviour.html#clone()">clone</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Behaviour.html#createActor(uk.co.nickthecoder.itchy.ActorsLayer, java.lang.String)">createActor</a></li>
+      <li class="public static"><a href="../api/uk/co/nickthecoder/itchy/Behaviour.html#createBehaviour(uk.co.nickthecoder.itchy.Resources, uk.co.nickthecoder.itchy.util.ClassName)">createBehaviour</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Behaviour.html#deathEvent(java.lang.String)">deathEvent</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Behaviour.html#detatch()">detatch</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Behaviour.html#endEvent(java.lang.String)">endEvent</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Behaviour.html#event(java.lang.String)">event</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Behaviour.html#getActor()">getActor</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Behaviour.html#getClassName()">getClassName</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Behaviour.html#getProperties()">getProperties</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Behaviour.html#init()">init</a></li>
+      <li class="public static"><a href="../api/uk/co/nickthecoder/itchy/Behaviour.html#isValidClassName(uk.co.nickthecoder.itchy.Resources, uk.co.nickthecoder.itchy.util.ClassName)">isValidClassName</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Behaviour.html#onActivate()">onActivate</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Behaviour.html#onAttach()">onAttach</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Behaviour.html#onDeactivate()">onDeactivate</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Behaviour.html#onDetach()">onDetach</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Behaviour.html#onKill()">onKill</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Behaviour.html#onMessage(java.lang.String)">onMessage</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Behaviour.html#overlapping(java.lang.String)">overlapping</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Behaviour.html#overlapping(java.lang.String[])">overlapping</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Behaviour.html#overlapping(java.lang.String[], java.lang.String[])">overlapping</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Behaviour.html#pixelOverlap(java.lang.Class)">pixelOverlap</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Behaviour.html#pixelOverlap(java.lang.String)">pixelOverlap</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Behaviour.html#pixelOverlap(java.lang.String[])">pixelOverlap</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Behaviour.html#pixelOverlap(java.lang.String[], java.lang.String[])">pixelOverlap</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Behaviour.html#play(java.lang.String)">play</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Behaviour.html#resetCollisionStrategy()">resetCollisionStrategy</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Behaviour.html#sendMessage(java.lang.String)">sendMessage</a></li>
+      <li class="public abstract"><a href="../api/uk/co/nickthecoder/itchy/Behaviour.html#tick()">tick</a></li>
+      <li class="protected"><a href="../api/uk/co/nickthecoder/itchy/Behaviour.html#tickHandler()">tickHandler</a></li>
+    </ul>
+  </div>
+</div>
+<div id="TagMembership" class="box" style="left:800px;top:1060px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/util/TagMembership.html">TagMembership</a></div>
+  <div class="content">
+    <ul class="methods">
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/util/TagMembership.html#add(java.lang.String)">add</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/util/TagMembership.html#getMember()">getMember</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/util/TagMembership.html#hasTag(java.lang.String)">hasTag</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/util/TagMembership.html#remove(java.lang.String)">remove</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/util/TagMembership.html#removeAll()">removeAll</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/util/TagMembership.html#removeAllExcept(java.lang.String)">removeAllExcept</a></li>
+    </ul>
+  </div>
+</div>
+<div id="TagCollection" class="box" style="left:1000px;top:1221px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/util/TagCollection.html">TagCollection</a></div>
+  <div class="content">
+    <ul class="methods">
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/util/TagCollection.html#add(java.lang.String, java.lang.Object)">add</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/util/TagCollection.html#getTagMembers(java.lang.String)">getTagMembers</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/util/TagCollection.html#remove(java.lang.String, java.lang.Object)">remove</a></li>
+    </ul>
+  </div>
+</div>
+<div id="SceneBehaviour" class="box" style="left:100px;top:550px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/SceneBehaviour.html">SceneBehaviour</a></div>
+  <div class="content">
+    <ul class="methods">
+      <li class="public abstract"><a href="../api/uk/co/nickthecoder/itchy/SceneBehaviour.html#onActivate()">onActivate</a></li>
+      <li class="public abstract"><a href="../api/uk/co/nickthecoder/itchy/SceneBehaviour.html#onDeactivate()">onDeactivate</a></li>
+      <li class="public abstract"><a href="../api/uk/co/nickthecoder/itchy/SceneBehaviour.html#tick()">tick</a></li>
+    </ul>
+  </div>
+</div>
+<div id="Appearance" class="box" style="left:1020px;top:600px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/Appearance.html">Appearance</a></div>
+  <div class="content">
+    <ul class="methods">
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Appearance.html#adjustAlpha(double)">adjustAlpha</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Appearance.html#adjustDirection(double)">adjustDirection</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Appearance.html#adjustScale(double)">adjustScale</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Appearance.html#clearCachedSurface()">clearCachedSurface</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Appearance.html#getActor()">getActor</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Appearance.html#getAlpha()">getAlpha</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Appearance.html#getColorize()">getColorize</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Appearance.html#getDirection()">getDirection</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Appearance.html#getDirectionRadians()">getDirectionRadians</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Appearance.html#getHeight()">getHeight</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Appearance.html#getOffsetX()">getOffsetX</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Appearance.html#getOffsetY()">getOffsetY</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Appearance.html#getPose()">getPose</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Appearance.html#getProperties()">getProperties</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Appearance.html#getScale()">getScale</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Appearance.html#getSurface()">getSurface</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Appearance.html#getWidth()">getWidth</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Appearance.html#getWorldRectangle()">getWorldRectangle</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Appearance.html#onMoved()">onMoved</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Appearance.html#scale(double)">scale</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Appearance.html#setAlpha(double)">setAlpha</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Appearance.html#setColorize(uk.co.nickthecoder.jame.RGBA)">setColorize</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Appearance.html#setDirection(double)">setDirection</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Appearance.html#setDirection(uk.co.nickthecoder.itchy.Actor)">setDirection</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Appearance.html#setDirectionRadians(double)">setDirectionRadians</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Appearance.html#setPose(uk.co.nickthecoder.itchy.Pose)">setPose</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Appearance.html#setScale(double)">setScale</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Appearance.html#superimpose(uk.co.nickthecoder.itchy.OffsetSurface, int, int)">superimpose</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Appearance.html#visibleWithin(uk.co.nickthecoder.itchy.WorldRectangle)">visibleWithin</a></li>
+    </ul>
+  </div>
+</div>
+<div id="Pose" class="box" style="left:800px;top:1400px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/Pose.html">Pose</a></div>
+  <div class="content">
+    <ul class="methods">
+      <li class="public abstract"><a href="../api/uk/co/nickthecoder/itchy/Pose.html#changedSinceLastUsed()">changedSinceLastUsed</a></li>
+      <li class="public abstract"><a href="../api/uk/co/nickthecoder/itchy/Pose.html#getDirection()">getDirection</a></li>
+      <li class="public abstract"><a href="../api/uk/co/nickthecoder/itchy/Pose.html#getOffsetX()">getOffsetX</a></li>
+      <li class="public abstract"><a href="../api/uk/co/nickthecoder/itchy/Pose.html#getOffsetY()">getOffsetY</a></li>
+      <li class="public abstract"><a href="../api/uk/co/nickthecoder/itchy/Pose.html#used()">used</a></li>
+    </ul>
+  </div>
+</div>
+<div id="ImagePose" class="box" style="left:722px;top:1600px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/ImagePose.html">ImagePose</a></div>
+  <div class="content">
+    <ul class="methods">
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/ImagePose.html#changedSinceLastUsed()">changedSinceLastUsed</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/ImagePose.html#getDirection()">getDirection</a></li>
+      <li class="public static"><a href="../api/uk/co/nickthecoder/itchy/ImagePose.html#getDummyPose()">getDummyPose</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/ImagePose.html#getOffsetX()">getOffsetX</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/ImagePose.html#getOffsetY()">getOffsetY</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/ImagePose.html#getSurface()">getSurface</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/ImagePose.html#setDirection(double)">setDirection</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/ImagePose.html#setOffsetX(int)">setOffsetX</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/ImagePose.html#setOffsetY(int)">setOffsetY</a></li>
+      <li class="public static"><a href="../api/uk/co/nickthecoder/itchy/ImagePose.html#superimpose(uk.co.nickthecoder.itchy.OffsetSurface, uk.co.nickthecoder.itchy.OffsetSurface, int, int)">superimpose</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/ImagePose.html#used()">used</a></li>
+    </ul>
+  </div>
+</div>
+<div id="AbstractTextPose" class="box" style="left:879px;top:1600px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/AbstractTextPose.html">AbstractTextPose</a></div>
+  <div class="content">
+    <ul class="methods">
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/AbstractTextPose.html#adjustFontSize(double)">adjustFontSize</a></li>
+      <li class="public abstract"><a href="../api/uk/co/nickthecoder/itchy/AbstractTextPose.html#changedSinceLastUsed()">changedSinceLastUsed</a></li>
+      <li class="protected abstract"><a href="../api/uk/co/nickthecoder/itchy/AbstractTextPose.html#clearSurfaceCache()">clearSurfaceCache</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/AbstractTextPose.html#getColor()">getColor</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/AbstractTextPose.html#getDirection()">getDirection</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/AbstractTextPose.html#getFont()">getFont</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/AbstractTextPose.html#getFontSize()">getFontSize</a></li>
+      <li class="public abstract"><a href="../api/uk/co/nickthecoder/itchy/AbstractTextPose.html#getHeight()">getHeight</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/AbstractTextPose.html#getOffsetX()">getOffsetX</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/AbstractTextPose.html#getOffsetY()">getOffsetY</a></li>
+      <li class="public abstract"><a href="../api/uk/co/nickthecoder/itchy/AbstractTextPose.html#getSurface()">getSurface</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/AbstractTextPose.html#getText()">getText</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/AbstractTextPose.html#getTrueTypeFont()">getTrueTypeFont</a></li>
+      <li class="public abstract"><a href="../api/uk/co/nickthecoder/itchy/AbstractTextPose.html#getWidth()">getWidth</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/AbstractTextPose.html#getXAlignment()">getXAlignment</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/AbstractTextPose.html#getYAlignment()">getYAlignment</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/AbstractTextPose.html#setAlignment(double, double)">setAlignment</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/AbstractTextPose.html#setColor(uk.co.nickthecoder.jame.RGBA)">setColor</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/AbstractTextPose.html#setFont(uk.co.nickthecoder.itchy.Font)">setFont</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/AbstractTextPose.html#setFontSize(double)">setFontSize</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/AbstractTextPose.html#setText(java.lang.String)">setText</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/AbstractTextPose.html#setXAlignment(double)">setXAlignment</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/AbstractTextPose.html#setYAlignment(double)">setYAlignment</a></li>
+    </ul>
+  </div>
+</div>
+<div id="TextPose" class="box" style="left:964px;top:1998px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/TextPose.html">TextPose</a></div>
+  <div class="content">
+    <ul class="methods">
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/TextPose.html#changedSinceLastUsed()">changedSinceLastUsed</a></li>
+      <li class="protected"><a href="../api/uk/co/nickthecoder/itchy/TextPose.html#clearSurfaceCache()">clearSurfaceCache</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/TextPose.html#getHeight()">getHeight</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/TextPose.html#getSurface()">getSurface</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/TextPose.html#getWidth()">getWidth</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/TextPose.html#setBaselineAlignment()">setBaselineAlignment</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/TextPose.html#used()">used</a></li>
+    </ul>
+  </div>
+</div>
+<div id="MultiLineTextPose" class="box" style="left:809px;top:1998px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/MultiLineTextPose.html">MultiLineTextPose</a></div>
+  <div class="content">
+    <ul class="methods">
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/MultiLineTextPose.html#autoSize()">autoSize</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/MultiLineTextPose.html#changedSinceLastUsed()">changedSinceLastUsed</a></li>
+      <li class="protected"><a href="../api/uk/co/nickthecoder/itchy/MultiLineTextPose.html#clearSurfaceCache()">clearSurfaceCache</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/MultiLineTextPose.html#getHeight()">getHeight</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/MultiLineTextPose.html#getSurface()">getSurface</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/MultiLineTextPose.html#getWidth()">getWidth</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/MultiLineTextPose.html#setSize(int, int)">setSize</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/MultiLineTextPose.html#setSizeInCharacters(int, int)">setSizeInCharacters</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/MultiLineTextPose.html#used()">used</a></li>
+    </ul>
+  </div>
+</div>
+<div id="PoseResource" class="box" style="left:513px;top:1547px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/PoseResource.html">PoseResource</a></div>
+  <div class="content">
+    <ul class="fields">
+      <li class="public final static"><a href="../api/uk/co/nickthecoder/itchy/PoseResource.html#THUMBNAIL_HEIGHT">THUMBNAIL_HEIGHT</a></li>
+      <li class="public final static"><a href="../api/uk/co/nickthecoder/itchy/PoseResource.html#THUMBNAIL_WIDTH">THUMBNAIL_WIDTH</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/PoseResource.html#filename">filename</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/PoseResource.html#pose">pose</a></li>
+      <li class="public static"><a href="../api/uk/co/nickthecoder/itchy/PoseResource.html#properties">properties</a></li>
+    </ul>
+    <ul class="methods">
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/PoseResource.html#getThumbnail()">getThumbnail</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/PoseResource.html#setFilename(java.lang.String)">setFilename</a></li>
+    </ul>
+  </div>
+</div>
+<div id="Costume" class="box" style="left:366px;top:849px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/Costume.html">Costume</a></div>
+  <div class="content">
+    <ul class="fields">
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Costume.html#behaviourClassName">behaviourClassName</a></li>
+    </ul>
+    <ul class="methods">
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Costume.html#addAnimation(java.lang.String, uk.co.nickthecoder.itchy.AnimationResource)">addAnimation</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Costume.html#addFont(java.lang.String, uk.co.nickthecoder.itchy.FontResource)">addFont</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Costume.html#addPose(java.lang.String, uk.co.nickthecoder.itchy.PoseResource)">addPose</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Costume.html#addSound(java.lang.String, uk.co.nickthecoder.itchy.SoundResource)">addSound</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Costume.html#addSound(java.lang.String, uk.co.nickthecoder.itchy.ManagedSound)">addSound</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Costume.html#addString(java.lang.String, java.lang.String)">addString</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Costume.html#getAnimation(java.lang.String)">getAnimation</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Costume.html#getAnimationChoices(java.lang.String)">getAnimationChoices</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Costume.html#getAnimationNames()">getAnimationNames</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Costume.html#getAnimationResource(java.lang.String)">getAnimationResource</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Costume.html#getCostumeSound(java.lang.String)">getCostumeSound</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Costume.html#getExtendedFrom()">getExtendedFrom</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Costume.html#getFont(java.lang.String)">getFont</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Costume.html#getFontChoices(java.lang.String)">getFontChoices</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Costume.html#getFontNames()">getFontNames</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Costume.html#getFontResource(java.lang.String)">getFontResource</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Costume.html#getPose(java.lang.String)">getPose</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Costume.html#getPoseChoices(java.lang.String)">getPoseChoices</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Costume.html#getPoseNames()">getPoseNames</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Costume.html#getPoseResource(java.lang.String)">getPoseResource</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Costume.html#getProperties()">getProperties</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Costume.html#getPropertiesClassName()">getPropertiesClassName</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Costume.html#getSound(java.lang.String)">getSound</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Costume.html#getSoundChoices(java.lang.String)">getSoundChoices</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Costume.html#getSoundNames()">getSoundNames</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Costume.html#getSoundResource(java.lang.String)">getSoundResource</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Costume.html#getString(java.lang.String)">getString</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Costume.html#getString(java.lang.String, java.lang.String)">getString</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Costume.html#getStringChoices(java.lang.String)">getStringChoices</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Costume.html#getStringNames()">getStringNames</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Costume.html#removeAnimation(java.lang.String, uk.co.nickthecoder.itchy.AnimationResource)">removeAnimation</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Costume.html#removeFont(java.lang.String, uk.co.nickthecoder.itchy.FontResource)">removeFont</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Costume.html#removePose(java.lang.String, uk.co.nickthecoder.itchy.PoseResource)">removePose</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Costume.html#removeSound(java.lang.String, uk.co.nickthecoder.itchy.ManagedSound)">removeSound</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Costume.html#removeString(java.lang.String, java.lang.String)">removeString</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Costume.html#setExtendedFrom(uk.co.nickthecoder.itchy.Costume)">setExtendedFrom</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Costume.html#setPropertiesClassName(uk.co.nickthecoder.itchy.Resources, uk.co.nickthecoder.itchy.util.ClassName)">setPropertiesClassName</a></li>
+    </ul>
+  </div>
+</div>
+<div id="CostumeResource" class="box" style="left:421px;top:1794px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/CostumeResource.html">CostumeResource</a></div>
+  <div class="content">
+    <ul class="fields">
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/CostumeResource.html#costume">costume</a></li>
+    </ul>
+    <ul class="methods">
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/CostumeResource.html#getExtendedFromName()">getExtendedFromName</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/CostumeResource.html#getThumbnail()">getThumbnail</a></li>
+    </ul>
+  </div>
+</div>
+<div id="CostumeProperties" class="box" style="left:603px;top:1241px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/CostumeProperties.html">CostumeProperties</a></div>
+  <div class="content">
+    <ul class="methods">
+      <li class="public static"><a href="../api/uk/co/nickthecoder/itchy/CostumeProperties.html#createProperties(uk.co.nickthecoder.itchy.Resources, uk.co.nickthecoder.itchy.util.ClassName)">createProperties</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/CostumeProperties.html#getProperties()">getProperties</a></li>
+      <li class="public static"><a href="../api/uk/co/nickthecoder/itchy/CostumeProperties.html#isValidClassName(java.lang.String)">isValidClassName</a></li>
+    </ul>
+  </div>
+</div>
+<div id="Layer" class="box" style="left:537px;top:78px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/Layer.html">Layer</a></div>
+  <div class="content">
+    <ul class="fields">
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Layer.html#locked">locked</a></li>
+      <li class="protected"><a href="../api/uk/co/nickthecoder/itchy/Layer.html#mouseListeners">mouseListeners</a></li>
+      <li class="protected"><a href="../api/uk/co/nickthecoder/itchy/Layer.html#parent">parent</a></li>
+      <li class="public final"><a href="../api/uk/co/nickthecoder/itchy/Layer.html#position">position</a></li>
+      <li class="protected"><a href="../api/uk/co/nickthecoder/itchy/Layer.html#worldRect">worldRect</a></li>
+      <li class="protected"><a href="../api/uk/co/nickthecoder/itchy/Layer.html#yAxisPointsDown">yAxisPointsDown</a></li>
+    </ul>
+    <ul class="methods">
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Layer.html#addMouseListener(uk.co.nickthecoder.itchy.MouseListener, uk.co.nickthecoder.itchy.Game)">addMouseListener</a></li>
+      <li class="protected"><a href="../api/uk/co/nickthecoder/itchy/Layer.html#adjustMouse(uk.co.nickthecoder.jame.event.MouseEvent)">adjustMouse</a></li>
+      <li class="protected"><a href="../api/uk/co/nickthecoder/itchy/Layer.html#adjustPosition(uk.co.nickthecoder.jame.Rect)">adjustPosition</a></li>
+      <li class="protected abstract"><a href="../api/uk/co/nickthecoder/itchy/Layer.html#clear()">clear</a></li>
+      <li class="protected"><a href="../api/uk/co/nickthecoder/itchy/Layer.html#contains(int, int)">contains</a></li>
+      <li class="public abstract"><a href="../api/uk/co/nickthecoder/itchy/Layer.html#deactivateAll()">deactivateAll</a></li>
+      <li class="public abstract"><a href="../api/uk/co/nickthecoder/itchy/Layer.html#destroy()">destroy</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Layer.html#getAbsolutePosition()">getAbsolutePosition</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Layer.html#getName()">getName</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Layer.html#getWorldRectangle()">getWorldRectangle</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Layer.html#getYAxisPointsDown()">getYAxisPointsDown</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Layer.html#isRemovePending()">isRemovePending</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Layer.html#isVisible()">isVisible</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Layer.html#onMouseDown(uk.co.nickthecoder.jame.event.MouseButtonEvent)">onMouseDown</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Layer.html#onMouseMove(uk.co.nickthecoder.jame.event.MouseMotionEvent)">onMouseMove</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Layer.html#onMouseUp(uk.co.nickthecoder.jame.event.MouseButtonEvent)">onMouseUp</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Layer.html#remove()">remove</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Layer.html#removeMouseListener(uk.co.nickthecoder.itchy.MouseListener, uk.co.nickthecoder.itchy.Game)">removeMouseListener</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Layer.html#render(uk.co.nickthecoder.jame.Rect, uk.co.nickthecoder.jame.Surface)">render</a></li>
+      <li class="protected abstract"><a href="../api/uk/co/nickthecoder/itchy/Layer.html#render2(uk.co.nickthecoder.jame.Rect, uk.co.nickthecoder.jame.Surface)">render2</a></li>
+      <li class="public abstract"><a href="../api/uk/co/nickthecoder/itchy/Layer.html#reset()">reset</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Layer.html#setVisible(boolean)">setVisible</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Layer.html#setYAxisPointsDown(boolean)">setYAxisPointsDown</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Layer.html#toString()">toString</a></li>
+    </ul>
+  </div>
+</div>
+<div id="CompoundLayer" class="box" style="left:469px;top:542px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/CompoundLayer.html">CompoundLayer</a></div>
+  <div class="content">
+    <ul class="fields">
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/CompoundLayer.html#backgroundColor">backgroundColor</a></li>
+    </ul>
+    <ul class="methods">
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/CompoundLayer.html#add(uk.co.nickthecoder.itchy.Layer)">add</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/CompoundLayer.html#clear()">clear</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/CompoundLayer.html#deactivateAll()">deactivateAll</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/CompoundLayer.html#destroy()">destroy</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/CompoundLayer.html#getChildren()">getChildren</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/CompoundLayer.html#remove(uk.co.nickthecoder.itchy.Layer)">remove</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/CompoundLayer.html#render2(uk.co.nickthecoder.jame.Rect, uk.co.nickthecoder.jame.Surface)">render2</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/CompoundLayer.html#reset()">reset</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/CompoundLayer.html#toString()">toString</a></li>
+    </ul>
+  </div>
+</div>
+<div id="ActorsLayer" class="box" style="left:598px;top:542px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/ActorsLayer.html">ActorsLayer</a></div>
+  <div class="content">
+    <ul class="fields">
+      <li class="protected"><a href="../api/uk/co/nickthecoder/itchy/ActorsLayer.html#actors">actors</a></li>
+      <li class="protected"><a href="../api/uk/co/nickthecoder/itchy/ActorsLayer.html#readOnlyActors">readOnlyActors</a></li>
+    </ul>
+    <ul class="methods">
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/ActorsLayer.html#add(uk.co.nickthecoder.itchy.Actor)">add</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/ActorsLayer.html#addAbove(uk.co.nickthecoder.itchy.Actor, uk.co.nickthecoder.itchy.Actor)">addAbove</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/ActorsLayer.html#addBelow(uk.co.nickthecoder.itchy.Actor, uk.co.nickthecoder.itchy.Actor)">addBelow</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/ActorsLayer.html#addBottom(uk.co.nickthecoder.itchy.Actor)">addBottom</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/ActorsLayer.html#clear()">clear</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/ActorsLayer.html#deactivateAll()">deactivateAll</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/ActorsLayer.html#disableMouseListener(uk.co.nickthecoder.itchy.Game)">disableMouseListener</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/ActorsLayer.html#enableMouseListener(uk.co.nickthecoder.itchy.Game)">enableMouseListener</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/ActorsLayer.html#getActors()">getActors</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/ActorsLayer.html#iterator()">iterator</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/ActorsLayer.html#remove(uk.co.nickthecoder.itchy.Actor)">remove</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/ActorsLayer.html#zOrderBottom(uk.co.nickthecoder.itchy.Actor)">zOrderBottom</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/ActorsLayer.html#zOrderDown(uk.co.nickthecoder.itchy.Actor)">zOrderDown</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/ActorsLayer.html#zOrderTop(uk.co.nickthecoder.itchy.Actor)">zOrderTop</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/ActorsLayer.html#zOrderUp(uk.co.nickthecoder.itchy.Actor)">zOrderUp</a></li>
+    </ul>
+  </div>
+</div>
+<div id="ScrollableLayer" class="box" style="left:605px;top:944px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/ScrollableLayer.html">ScrollableLayer</a></div>
+  <div class="content">
+    <ul class="fields">
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/ScrollableLayer.html#backgroundColor">backgroundColor</a></li>
+    </ul>
+    <ul class="methods">
+      <li class="protected"><a href="../api/uk/co/nickthecoder/itchy/ScrollableLayer.html#adjustMouse(uk.co.nickthecoder.jame.event.MouseEvent)">adjustMouse</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/ScrollableLayer.html#centerOn(double, double)">centerOn</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/ScrollableLayer.html#ceterOn(uk.co.nickthecoder.itchy.Actor)">ceterOn</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/ScrollableLayer.html#destroy()">destroy</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/ScrollableLayer.html#render2(uk.co.nickthecoder.jame.Rect, uk.co.nickthecoder.jame.Surface)">render2</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/ScrollableLayer.html#reset()">reset</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/ScrollableLayer.html#scrollBy(double, double)">scrollBy</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/ScrollableLayer.html#scrollTo(double, double)">scrollTo</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/ScrollableLayer.html#setBackground(uk.co.nickthecoder.jame.RGBA)">setBackground</a></li>
+    </ul>
+  </div>
+</div>
+<div id="AnimationResource" class="box" style="left:150px;top:801px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/AnimationResource.html">AnimationResource</a></div>
+  <div class="content">
+    <ul class="fields">
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/AnimationResource.html#animation">animation</a></li>
+    </ul>
+  </div>
+</div>
+<div id="Animation" class="box" style="left:5px;top:946px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/animation/Animation.html">Animation</a></div>
+  <div class="content">
+    <ul class="methods">
+      <li class="public abstract"><a href="../api/uk/co/nickthecoder/itchy/animation/Animation.html#addAnimationListener(uk.co.nickthecoder.itchy.animation.AnimationListener)">addAnimationListener</a></li>
+      <li class="public abstract"><a href="../api/uk/co/nickthecoder/itchy/animation/Animation.html#addMessageListener(uk.co.nickthecoder.itchy.MessageListener)">addMessageListener</a></li>
+      <li class="public abstract"><a href="../api/uk/co/nickthecoder/itchy/animation/Animation.html#clone()">clone</a></li>
+      <li class="public abstract"><a href="../api/uk/co/nickthecoder/itchy/animation/Animation.html#copy()">copy</a></li>
+      <li class="public abstract"><a href="../api/uk/co/nickthecoder/itchy/animation/Animation.html#getFinishedMessage()">getFinishedMessage</a></li>
+      <li class="public abstract"><a href="../api/uk/co/nickthecoder/itchy/animation/Animation.html#getName()">getName</a></li>
+      <li class="public abstract"><a href="../api/uk/co/nickthecoder/itchy/animation/Animation.html#getProperties()">getProperties</a></li>
+      <li class="public abstract"><a href="../api/uk/co/nickthecoder/itchy/animation/Animation.html#isFinished()">isFinished</a></li>
+      <li class="public abstract"><a href="../api/uk/co/nickthecoder/itchy/animation/Animation.html#removeAnimationListener(uk.co.nickthecoder.itchy.animation.AnimationListener)">removeAnimationListener</a></li>
+      <li class="public abstract"><a href="../api/uk/co/nickthecoder/itchy/animation/Animation.html#removeMessageListener(uk.co.nickthecoder.itchy.MessageListener)">removeMessageListener</a></li>
+      <li class="public abstract"><a href="../api/uk/co/nickthecoder/itchy/animation/Animation.html#setFinishedMessage(java.lang.String)">setFinishedMessage</a></li>
+      <li class="public abstract"><a href="../api/uk/co/nickthecoder/itchy/animation/Animation.html#start(uk.co.nickthecoder.itchy.Actor)">start</a></li>
+      <li class="public abstract"><a href="../api/uk/co/nickthecoder/itchy/animation/Animation.html#tick(uk.co.nickthecoder.itchy.Actor)">tick</a></li>
+    </ul>
+  </div>
+</div>
+<div id="FontResource" class="box" style="left:200px;top:1100px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/FontResource.html">FontResource</a></div>
+  <div class="content">
+    <ul class="fields">
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/FontResource.html#filename">filename</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/FontResource.html#font">font</a></li>
+    </ul>
+    <ul class="methods">
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/FontResource.html#setFilename(java.lang.String)">setFilename</a></li>
+    </ul>
+  </div>
+</div>
+<div id="Font" class="box" style="left:20px;top:1200px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/Font.html">Font</a></div>
+  <div class="content">
+    <ul class="methods">
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Font.html#getSize(int)">getSize</a></li>
+    </ul>
+  </div>
+</div>
+<div id="SoundResource" class="box" style="left:210px;top:1354px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/SoundResource.html">SoundResource</a></div>
+  <div class="content">
+    <ul class="fields">
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/SoundResource.html#filename">filename</a></li>
+    </ul>
+    <ul class="methods">
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/SoundResource.html#getSound()">getSound</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/SoundResource.html#setFilename(java.lang.String)">setFilename</a></li>
+    </ul>
+  </div>
+</div>
+<div id="Sound" class="box" style="left:20px;top:1400px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/jame/Sound.html">Sound</a></div>
+  <div class="content">
+    <ul class="methods">
+      <li class="public"><a href="../api/uk/co/nickthecoder/jame/Sound.html#fadeOut(int)">fadeOut</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/jame/Sound.html#finalise()">finalise</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/jame/Sound.html#free()">free</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/jame/Sound.html#getMixChannel()">getMixChannel</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/jame/Sound.html#isPlaying()">isPlaying</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/jame/Sound.html#play()">play</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/jame/Sound.html#playOnce()">playOnce</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/jame/Sound.html#stop()">stop</a></li>
+    </ul>
+  </div>
+</div>
+<div id="ManagedSound" class="box" style="left:303px;top:1482px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/ManagedSound.html">ManagedSound</a></div>
+  <div class="content">
+    <ul class="fields">
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/ManagedSound.html#fadeOnDeath">fadeOnDeath</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/ManagedSound.html#fadeOutSeconds">fadeOutSeconds</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/ManagedSound.html#multipleBehaviour">multipleBehaviour</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/ManagedSound.html#priority">priority</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/ManagedSound.html#soundResource">soundResource</a></li>
+    </ul>
+    <ul class="methods">
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/ManagedSound.html#getFadeOutMillis()">getFadeOutMillis</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/ManagedSound.html#getProperties()">getProperties</a></li>
+    </ul>
+  </div>
+</div>
+<div id="Resources" class="box" style="left:80px;top:1668px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/Resources.html">Resources</a></div>
+  <div class="content">
+    <ul class="fields">
+      <li class="public final"><a href="../api/uk/co/nickthecoder/itchy/Resources.html#gameInfo">gameInfo</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Resources.html#scriptManager">scriptManager</a></li>
+    </ul>
+  </div>
+</div>
+<div id="GameInfo" class="box" style="left:250px;top:1800px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/GameInfo.html">GameInfo</a></div>
+  <div class="content">
+    <ul class="fields">
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/GameInfo.html#className">className</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/GameInfo.html#height">height</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/GameInfo.html#initialScene">initialScene</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/GameInfo.html#title">title</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/GameInfo.html#width">width</a></li>
+    </ul>
+    <ul class="methods">
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/GameInfo.html#getProperties()">getProperties</a></li>
+    </ul>
+  </div>
+</div>
+<!--END_CONTENT-->
+
+</div>
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.10.3.custom.min.js"></script>
+<script type="text/javascript" src="js/boxes.js"></script>
+
+<script type="text/javascript">
+function drawConnections()
+{
+    clear();
+    ctx.font = "7pt Verdana";
+    connect( "Itchy", "Game", "getGame" );
+    connect( "Game", "SceneBehaviour", "getSceneBehaviour" );
+    connect2( "Actor", "Behaviour", "getBehaviour", "getActor" );
+    connect( "Actor", "Appearance", "getAppearance" );
+    connect( "Appearance", "Pose", "getPose" );
+    connect( "Actor", "Costume", "getCostume" );
+    connect( "Costume", "CostumeProperties", "getProperties" );
+    
+    connect( "PoseResource", "ImagePose", "getPose" );
+    connect( "AnimationResource", "Animation", "getAnimation" );
+    connect( "FontResource", "Font", "getFont" );
+    connect( "SoundResource", "Sound", "getSound" );
+    connect( "ManagedSound", "SoundResource", "soundResource" );
+    connect( "CostumeResource", "Costume", "costume" );
+            
+    connect( "Resources", "GameInfo", "gameInfo" );
+                
+    connect( "Actor", "ActorsLayer", "actors", aggregationEnd );
+    connect2( "TagMembership", "Actor", "getMember", "tagMembership" );
+    connect( "TagMembership", "TagCollection", "tagCollection" );
+    connect( "TagCollection", "Actor", "getMemberships" );
+    
+    connect( "Layer", "Game", "layers", compositionEnd );
+    connect( "CostumeResource", "Resources", "getCostumeResource", compositionEnd );
+    connect( "FontResource", "Resources", "getFontResource", compositionEnd );
+    connect( "SoundResource", "Resources", "getSoundResource", compositionEnd );
+    connect( "PoseResource", "Resources", "getPoseResource", compositionEnd );
+    connect( "AnimationResource", "Resources", "getAnimationResource", compositionEnd );
+            
+    connect( "PoseResource", "Costume", "getPoseChoices", aggregationEnd );
+    connect( "AnimationResource", "Costume", "getAnimationChoices", aggregationEnd );
+    connect( "FontResource", "Costume", "getFontChoices", aggregationEnd );
+    connect( "ManagedSound", "Costume", "getSoundChoices", aggregationEnd );
+        
+    connect( "CompoundLayer", "Layer", "", extendsEnd );
+    connect( "ActorsLayer", "Layer", "", extendsEnd );
+    connect( "ScrollableLayer", "ActorsLayer", "", extendsEnd );
+    connect( "AbstractTextPose", "Pose", "", extendsEnd );
+    connect( "TextPose", "AbstractTextPose", "", extendsEnd );
+    connect( "MultiLineTextPose", "AbstractTextPose", "", extendsEnd );
+    connect( "ImagePose", "Pose", "", extendsEnd );
+}
+
+$(function() {
+    $(".box").draggable({
+        stop: function( event, ui ) {
+            dragged($(this));
+        }
+    })  
+    drawConnections();
+});
+
+</script>
+
+</body>
+</html>
+

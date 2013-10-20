@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Itchy Overview Diagram</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body style="width:1300px;">
+
+<!--GENERATE
+CLASS uk.co.nickthecoder.itchy.Itchy
+    X 21
+    Y 39
+METHODS
+    isKeyDown
+    isShiftDown
+    isCtrlDown
+    isSuperDown
+    isMetaDown
+    getGame
+
+CLASS uk.co.nickthecoder.itchy.Game
+    X 523
+    Y 0
+FIELDS
+    resources
+    pause
+    layers
+METHODS
+    onActivate
+    onDeactivate
+    createLayers
+    getPreferences
+    gameTimeMillis
+    tick
+    onMessage
+    getSceneBehaviour
+    startScene
+    getSceneName
+    end
+    startEditor
+    
+CLASS uk.co.nickthecoder.itchy.Actor
+    X 296
+    Y 214
+METHODS
+    allByTag
+    getCostume
+    hasTag
+    addTag
+    removeTag
+    getLayer
+    setLayer
+    event
+    deathEvent
+    getX
+    getY
+    setBehaviour
+    getBehaviour
+    getAppearance
+    activate
+    deactivate
+    isDead
+    isDying
+    moveTo
+    setX
+    setY
+    moveBy
+    moveForward
+    moveTowards
+    distance
+    contains
+    nearest
+    distanceTo
+    directionOf
+    overlapping
+    hitting
+    pixelOverlap
+    tick
+
+CLASS uk.co.nickthecoder.itchy.Behaviour
+    X 528
+    Y 730
+METHODS
+    getActor
+    init
+    pixelOverlap
+    overlapping
+    play
+    event
+    deathEvent
+    onAttach
+    onDetach
+    onKill
+    onActivate
+    onDeactivate
+
+CLASS uk.co.nickthecoder.itchy.SceneBehaviour
+    X 524
+    Y 455
+METHODS
+    onActivate
+    onDeactivate
+    tick
+
+CLASS uk.co.nickthecoder.itchy.Appearance
+    X 34
+    Y 322
+METHODS
+    getActor
+    getPose
+    setPose
+    getAlpha
+    setAlpha
+    adjustAlpha
+    setColorize
+    getColorize
+    getDirection
+    getDirectionRadians
+    setDirection
+    setDirectionRadians
+    getScale
+    setScale
+    adjustScale
+    getWidth
+    getHeight
+    
+    
+CLASS uk.co.nickthecoder.itchy.Pose
+    X 54
+    Y 782    
+METHODS
+    getDirection
+    getOffsetX
+    getOffsetY
+    
+CLASS uk.co.nickthecoder.itchy.Costume
+    X 306
+    Y 1102  
+METHODS
+    getProperties
+    
+CLASS uk.co.nickthecoder.itchy.CostumeProperties
+    X 592
+    Y 1112
+FIELDS
+    
+-->
+
+<h1>Itchy Overview</h1>
+
+<div id="container">
+
+<canvas id="canvas" width="1300" height="1300"></canvas>
+
+<!-- BehaviourScript -->
+
+<div id="BehaviourScript" class="script box" style="left:833px;top:751px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/script/ScriptedBehaviour.html">BehaviourScript</a></div>
+  <div class="content">
+    <ul class="fields">
+      <li class="public">actor</li>
+      <li class="public">behaviour</li>
+    </ul>
+    <ul class="methods">
+      <li class="public">tick</li>
+      <li class="public">onAttach</li>
+      <li class="public">onDetach</li>
+      <li class="public">onActivate</li>
+      <li class="public">onDeactive</li>
+      <li class="public">onKill</li>
+    </ul>
+  </div>
+</div>
+
+<!-- SceneBehaviourScript -->
+
+<div id="SceneBehaviourScript" class="script box" style="left:806px;top:495px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/script/ScriptedSceneBehaviour.html">SceneBehaviourScript</a></div>
+  <div class="content">
+    <ul class="fields">
+      <li class="public">sceneBehaviour</li>
+    </ul>
+    <ul class="methods">
+      <li class="public">onActivate</li>
+      <li class="public">onDeactivate</li>
+      <li class="public">onKeyDown</li>
+      <li class="public">onKeyUp</li>
+      <li class="public">onMouseDown</li>
+      <li class="public">onMouseUp</li>
+      <li class="public">onMouseMove</li>
+      <li class="public">onMessage</li>
+      <li class="public">tick</li>
+    </ul>
+  </div>
+</div>
+
+<!-- GameScript -->
+
+<div id="GameScript" class="script box" style="left:854px;top:0px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/script/ScriptedGame.html">GameScript</a></div>
+  <div class="content">
+    <ul class="fields">
+      <li class="public">game</li>
+    </ul>
+    <ul class="methods">
+      <li class="public">onActivate</li>
+      <li class="public">onDeactivate</li>
+      <li class="public">onQuit</li>
+      <li class="public">onKeyDown</li>
+      <li class="public">onKeyUp</li>
+      <li class="public">onMouseDown</li>
+      <li class="public">onMouseUp</li>
+      <li class="public">onMouseMove</li>
+      <li class="public">onMessage</li>
+      <li class="public">tick</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Globals -->
+
+<div id="Globals" class="script box" style="left:1086px;top:272px;">
+  <div class="title">Javascript Globals</div>
+  <div class="content">
+    <ul class="fields">
+      <li class="public">itchy</li>
+      <li class="public">itchy.Itchy</li>
+      <li class="public">game</li>
+      <li class="public">sceneBehaviour</li>
+      <li class="public">gameScript</li>
+      <li class="public">sceneBehaviourScript</li>
+      <li class="public">stdout</li>
+    </ul>
+  </div>
+</div>
+
+<!-- CostumePropertiesScript -->
+
+<div id="CostumePropertiesScript" class="script box" style="left:821px;top:1121px;">
+  <div class="title">CostumePropertiesScript</div>
+  <div class="content">
+  </div>
+</div>
+
+
+
+
+
+
+<!--BEGIN_CONTENT-->
+<div id="Itchy" class="box" style="left:21px;top:39px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/Itchy.html">Itchy</a></div>
+  <div class="content">
+    <ul class="fields">
+      <li class="public static"><a href="../api/uk/co/nickthecoder/itchy/Itchy.html#frameRate">frameRate</a></li>
+      <li class="public static"><a href="../api/uk/co/nickthecoder/itchy/Itchy.html#keyboardRepeatDelay">keyboardRepeatDelay</a></li>
+      <li class="public static"><a href="../api/uk/co/nickthecoder/itchy/Itchy.html#keyboardRepeatInterval">keyboardRepeatInterval</a></li>
+      <li class="public static"><a href="../api/uk/co/nickthecoder/itchy/Itchy.html#soundManager">soundManager</a></li>
+    </ul>
+    <ul class="methods">
+      <li class="public static"><a href="../api/uk/co/nickthecoder/itchy/Itchy.html#getGame()">getGame</a></li>
+      <li class="public static"><a href="../api/uk/co/nickthecoder/itchy/Itchy.html#isCtrlDown()">isCtrlDown</a></li>
+      <li class="public static"><a href="../api/uk/co/nickthecoder/itchy/Itchy.html#isKeyDown(int)">isKeyDown</a></li>
+      <li class="public static"><a href="../api/uk/co/nickthecoder/itchy/Itchy.html#isMetaDown()">isMetaDown</a></li>
+      <li class="public static"><a href="../api/uk/co/nickthecoder/itchy/Itchy.html#isShiftDown()">isShiftDown</a></li>
+      <li class="public static"><a href="../api/uk/co/nickthecoder/itchy/Itchy.html#isSuperDown()">isSuperDown</a></li>
+    </ul>
+  </div>
+</div>
+<div id="Game" class="box" style="left:523px;top:0px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/Game.html">Game</a></div>
+  <div class="content">
+    <ul class="fields">
+      <li class="protected"><a href="../api/uk/co/nickthecoder/itchy/Game.html#layers">layers</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Game.html#pause">pause</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Game.html#resources">resources</a></li>
+    </ul>
+    <ul class="methods">
+      <li class="protected"><a href="../api/uk/co/nickthecoder/itchy/Game.html#createLayers()">createLayers</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Game.html#end()">end</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Game.html#gameTimeMillis()">gameTimeMillis</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Game.html#getPreferences()">getPreferences</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Game.html#getSceneBehaviour()">getSceneBehaviour</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Game.html#getSceneName()">getSceneName</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Game.html#onActivate()">onActivate</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Game.html#onDeactivate()">onDeactivate</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Game.html#onMessage(java.lang.String)">onMessage</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Game.html#startEditor()">startEditor</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Game.html#startEditor(java.lang.String)">startEditor</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Game.html#startScene(java.lang.String)">startScene</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Game.html#tick()">tick</a></li>
+    </ul>
+  </div>
+</div>
+<div id="Actor" class="box" style="left:296px;top:214px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/Actor.html">Actor</a></div>
+  <div class="content">
+    <ul class="methods">
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#activate()">activate</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#addTag(java.lang.String)">addTag</a></li>
+      <li class="public static"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#allByTag(java.lang.String)">allByTag</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#contains(int, int)">contains</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#deactivate()">deactivate</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#deathEvent(uk.co.nickthecoder.itchy.Costume, java.lang.String)">deathEvent</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#deathEvent(java.lang.String)">deathEvent</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#directionOf(uk.co.nickthecoder.itchy.Actor)">directionOf</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#distance(uk.co.nickthecoder.itchy.Actor)">distance</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#distanceTo(uk.co.nickthecoder.itchy.Actor)">distanceTo</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#distanceTo(double, double)">distanceTo</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#event(uk.co.nickthecoder.itchy.Costume, java.lang.String)">event</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#event(java.lang.String)">event</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#getAppearance()">getAppearance</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#getBehaviour()">getBehaviour</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#getCostume()">getCostume</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#getLayer()">getLayer</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#getX()">getX</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#getY()">getY</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#hasTag(java.lang.String)">hasTag</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#hitting(int, int)">hitting</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#isDead()">isDead</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#isDying()">isDying</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#moveBy(double, double)">moveBy</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#moveForward(double, double)">moveForward</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#moveForward(double)">moveForward</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#moveTo(uk.co.nickthecoder.itchy.Actor)">moveTo</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#moveTo(double, double)">moveTo</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#moveTowards(uk.co.nickthecoder.itchy.Actor, double)">moveTowards</a></li>
+      <li class="public static"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#nearest(double, double, java.lang.String)">nearest</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#nearest(java.lang.String)">nearest</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#overlapping(uk.co.nickthecoder.itchy.Actor)">overlapping</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#pixelOverlap(uk.co.nickthecoder.itchy.Actor)">pixelOverlap</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#pixelOverlap(int, int, int)">pixelOverlap</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#pixelOverlap(int, int)">pixelOverlap</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#removeTag(java.lang.String)">removeTag</a></li>
+      <li class="public final"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#setBehaviour(uk.co.nickthecoder.itchy.Behaviour)">setBehaviour</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#setLayer(uk.co.nickthecoder.itchy.ActorsLayer)">setLayer</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#setX(double)">setX</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#setY(double)">setY</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#tick()">tick</a></li>
+    </ul>
+  </div>
+</div>
+<div id="Behaviour" class="box" style="left:528px;top:730px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/Behaviour.html">Behaviour</a></div>
+  <div class="content">
+    <ul class="fields">
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Behaviour.html#collisionStrategy">collisionStrategy</a></li>
+    </ul>
+    <ul class="methods">
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Behaviour.html#deathEvent(java.lang.String)">deathEvent</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Behaviour.html#event(java.lang.String)">event</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Behaviour.html#getActor()">getActor</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Behaviour.html#init()">init</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Behaviour.html#onActivate()">onActivate</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Behaviour.html#onAttach()">onAttach</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Behaviour.html#onDeactivate()">onDeactivate</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Behaviour.html#onDetach()">onDetach</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Behaviour.html#onKill()">onKill</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Behaviour.html#overlapping(java.lang.String[], java.lang.String[])">overlapping</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Behaviour.html#overlapping(java.lang.String[])">overlapping</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Behaviour.html#overlapping(java.lang.String)">overlapping</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Behaviour.html#pixelOverlap(java.lang.String[], java.lang.String[])">pixelOverlap</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Behaviour.html#pixelOverlap(java.lang.Class)">pixelOverlap</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Behaviour.html#pixelOverlap(java.lang.String[])">pixelOverlap</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Behaviour.html#pixelOverlap(java.lang.String)">pixelOverlap</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Behaviour.html#play(java.lang.String)">play</a></li>
+    </ul>
+  </div>
+</div>
+<div id="SceneBehaviour" class="box" style="left:524px;top:455px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/SceneBehaviour.html">SceneBehaviour</a></div>
+  <div class="content">
+    <ul class="methods">
+      <li class="public abstract"><a href="../api/uk/co/nickthecoder/itchy/SceneBehaviour.html#onActivate()">onActivate</a></li>
+      <li class="public abstract"><a href="../api/uk/co/nickthecoder/itchy/SceneBehaviour.html#onDeactivate()">onDeactivate</a></li>
+      <li class="public abstract"><a href="../api/uk/co/nickthecoder/itchy/SceneBehaviour.html#tick()">tick</a></li>
+    </ul>
+  </div>
+</div>
+<div id="Appearance" class="box" style="left:34px;top:322px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/Appearance.html">Appearance</a></div>
+  <div class="content">
+    <ul class="methods">
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Appearance.html#adjustAlpha(double)">adjustAlpha</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Appearance.html#adjustScale(double)">adjustScale</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Appearance.html#getActor()">getActor</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Appearance.html#getAlpha()">getAlpha</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Appearance.html#getColorize()">getColorize</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Appearance.html#getDirection()">getDirection</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Appearance.html#getDirectionRadians()">getDirectionRadians</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Appearance.html#getHeight()">getHeight</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Appearance.html#getPose()">getPose</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Appearance.html#getScale()">getScale</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Appearance.html#getWidth()">getWidth</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Appearance.html#setAlpha(double)">setAlpha</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Appearance.html#setColorize(uk.co.nickthecoder.jame.RGBA)">setColorize</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Appearance.html#setDirection(uk.co.nickthecoder.itchy.Actor)">setDirection</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Appearance.html#setDirection(double)">setDirection</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Appearance.html#setDirectionRadians(double)">setDirectionRadians</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Appearance.html#setPose(uk.co.nickthecoder.itchy.Pose)">setPose</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Appearance.html#setScale(double)">setScale</a></li>
+    </ul>
+  </div>
+</div>
+<div id="Pose" class="box" style="left:54px;top:782px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/Pose.html">Pose</a></div>
+  <div class="content">
+    <ul class="methods">
+      <li class="public abstract"><a href="../api/uk/co/nickthecoder/itchy/Pose.html#getDirection()">getDirection</a></li>
+      <li class="public abstract"><a href="../api/uk/co/nickthecoder/itchy/Pose.html#getOffsetX()">getOffsetX</a></li>
+      <li class="public abstract"><a href="../api/uk/co/nickthecoder/itchy/Pose.html#getOffsetY()">getOffsetY</a></li>
+    </ul>
+  </div>
+</div>
+<div id="Costume" class="box" style="left:306px;top:1102px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/Costume.html">Costume</a></div>
+  <div class="content">
+    <ul class="fields">
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Costume.html#behaviourClassName">behaviourClassName</a></li>
+    </ul>
+    <ul class="methods">
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Costume.html#getProperties()">getProperties</a></li>
+    </ul>
+  </div>
+</div>
+<div id="CostumeProperties" class="box" style="left:592px;top:1112px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/CostumeProperties.html">CostumeProperties</a></div>
+  <div class="content">
+    <ul class="methods">
+      <li class="public static"><a href="../api/uk/co/nickthecoder/itchy/CostumeProperties.html#createProperties(uk.co.nickthecoder.itchy.Resources, uk.co.nickthecoder.itchy.util.ClassName)">createProperties</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/CostumeProperties.html#getProperties()">getProperties</a></li>
+      <li class="public static"><a href="../api/uk/co/nickthecoder/itchy/CostumeProperties.html#isValidClassName(java.lang.String)">isValidClassName</a></li>
+    </ul>
+  </div>
+</div>
+<!--END_CONTENT-->
+
+
+</div>
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.10.3.custom.min.js"></script>
+<script type="text/javascript" src="js/boxes.js"></script>
+
+<script type="text/javascript">
+function drawConnections()
+{
+    clear();
+    connect( "Itchy", "Game", "getGame" );
+    connect( "Game", "SceneBehaviour", "getSceneBehaviour" );
+    connect2( "Actor", "Behaviour", "getBehaviour", "getActor" );
+    connect2( "BehaviourScript", "Behaviour", "behaviour", "behaviourScript" );
+    connect2( "SceneBehaviourScript", "SceneBehaviour", "sceneBehaviour", "sceneBehaviourScript" );
+    connect( "BehaviourScript", "Actor", "actor" );
+    connect2( "GameScript", "Game", "game", "gameScript" );
+
+    connect( "Globals", "Game", "game" );
+    connect( "Globals", "GameScript", "gameScript" );
+    connect( "Globals", "SceneBehaviour", "sceneBehaviour" );
+    connect( "Globals", "SceneBehaviourScript", "sceneBehaviourScript" );
+    connect( "Globals", "Itchy", "itchy.Itchy" );
+
+    connect( "Actor", "Appearance", "getAppearance" );
+    connect( "Appearance", "Pose", "getPose" );
+    connect( "Actor", "Costume", "getCostume" );
+    connect( "Costume", "CostumeProperties", "getProperties" );
+    connect( "CostumeProperties", "CostumePropertiesScript", "values" );
+}
+
+$(function() {
+    $(".box").draggable({
+        stop: function( event, ui ) {
+            dragged($(this));
+        }
+    })  
+    drawConnections();
+});
+</script>
+
+</body>
+</html>
+

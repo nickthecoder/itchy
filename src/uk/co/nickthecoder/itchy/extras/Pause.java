@@ -11,6 +11,7 @@ import uk.co.nickthecoder.itchy.Behaviour;
 import uk.co.nickthecoder.itchy.Costume;
 import uk.co.nickthecoder.itchy.Game;
 
+// TODO Move into main package.
 public class Pause
 {
     private final Game game;
