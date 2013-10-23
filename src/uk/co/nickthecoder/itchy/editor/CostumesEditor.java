@@ -53,7 +53,7 @@ public class CostumesEditor extends SubEditor
 {
     private static final int EVENT_RESOURCE_COLUMN = 3;
 
-    private static final String NEW_EVENT_NAME = "";
+    private static final String NEW_EVENT_NAME = "default";
 
     private TextBox txtName;
 
@@ -888,14 +888,20 @@ public class CostumesEditor extends SubEditor
     @Override
     protected void onAdd()
     {
-        PosePicker posePicker = new PosePicker(this.editor.resources) {
+        PoseOrFontPicker picker = new PoseOrFontPicker(this.editor.resources) {
             @Override
             public void pick( PoseResource poseResource )
             {
                 CostumesEditor.this.add(poseResource);
             }
+
+            @Override
+            public void pick( FontResource fontResource )
+            {
+                CostumesEditor.this.add(fontResource);
+            }
         };
-        posePicker.show();
+        picker.show();
     }
 
     private void add( PoseResource poseResource )
@@ -904,6 +910,18 @@ public class CostumesEditor extends SubEditor
         costume.addPose("default", poseResource);
         this.currentCostumeResource = new CostumeResource(this.editor.resources,
             poseResource.getName(), costume);
+        this.adding = true;
+        this.showDetails(this.currentCostumeResource);
+
+    }
+
+    private void add( FontResource fontResource )
+    {
+        Costume costume = new Costume();
+        costume.addFont("default", fontResource);
+        costume.addString("default", fontResource.getName());
+        this.currentCostumeResource = new CostumeResource(this.editor.resources,
+            fontResource.getName(), costume);
         this.adding = true;
         this.showDetails(this.currentCostumeResource);
 

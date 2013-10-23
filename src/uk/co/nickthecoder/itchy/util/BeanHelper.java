@@ -10,17 +10,31 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Map;
 
+import javax.script.ScriptException;
+
+import uk.co.nickthecoder.itchy.script.ScriptedObject;
+
+/**
+ * 
+ */
 public class BeanHelper
 {
     public static Object getProperty( Object subject, String attributeName )
         throws IllegalArgumentException, IllegalAccessException, InvocationTargetException,
-        SecurityException, NoSuchFieldException
+        SecurityException, NoSuchFieldException, ScriptException
     {
         int dot = attributeName.indexOf(".");
 
         if (dot > 0) {
 
             Object subject2 = getProperty(subject, attributeName.substring(0, dot));
+
+            if (subject instanceof ScriptedObject) {
+                if (((ScriptedObject) subject).getScriptedObject() == subject2) {
+                    return ((ScriptedObject) subject).getProperty(attributeName.substring(dot + 1));
+                }
+            }
+
             return getProperty(subject2, attributeName.substring(dot + 1));
 
         } else {
@@ -41,11 +55,12 @@ public class BeanHelper
                 Field field = subject.getClass().getField(attributeName);
                 // Field field = subject.getClass().getDeclaredField( attributeName );
                 return field.get(subject);
-            } catch ( NoSuchFieldException e ) {
-                if (subject instanceof Map<?,?>) {
-                    Map<?, ?> map = (Map<?,?>) subject;
+            } catch (NoSuchFieldException e) {
+                if (subject instanceof Map<?, ?>) {
+                    Map<?, ?> map = (Map<?, ?>) subject;
                     return map.get(attributeName);
                 }
+
                 throw e;
             }
         }
@@ -53,7 +68,7 @@ public class BeanHelper
 
     public static void setProperty( Object subject, String attributeName, Object value )
         throws IllegalArgumentException, SecurityException, IllegalAccessException,
-        InvocationTargetException, NoSuchFieldException
+        InvocationTargetException, NoSuchFieldException, ScriptException
     {
         Class<?> klass = value == null ? null : value.getClass();
 
@@ -73,8 +88,9 @@ public class BeanHelper
     }
 
     public static void setProperty( Object subject, String attributeName, Object value,
-        Class<?> klass ) throws IllegalArgumentException, IllegalAccessException,
-        InvocationTargetException, SecurityException, NoSuchFieldException
+        Class<?> klass )
+        throws IllegalArgumentException, IllegalAccessException,
+        InvocationTargetException, SecurityException, NoSuchFieldException, ScriptException
     {
         int dot = attributeName.indexOf(".");
 
@@ -89,47 +105,47 @@ public class BeanHelper
                 attributeName.substring(1);
 
             // Look for a method called setXXX first
-            if ( (klass == null) && (value == null) ) {
+            if ((klass == null) && (value == null)) {
                 // Damn, we don't know the class of the parameter, and its null, so look for ANY
                 // method, which takes a single object as its parameter.
-                
-                for ( Method method : subject.getClass().getMethods() ) {
-                    if ( method.getName().equals( methodName) ) {
+
+                for (Method method : subject.getClass().getMethods()) {
+                    if (method.getName().equals(methodName)) {
                         if (method.getParameterTypes().length == 1) {
                             method.invoke(subject, value);
                             return;
                         }
                     }
                 }
-                
+
             } else {
                 Class<?>[] argTypes = new Class<?>[1];
                 argTypes[0] = klass;
-        
+
                 try {
                     Method method = subject.getClass().getMethod(methodName, argTypes);
-    
+
                     method.invoke(subject, value);
                     return;
-    
+
                 } catch (NoSuchMethodException e) {
                 }
             }
-                        
+
             try {
                 Field field = subject.getClass().getField(attributeName);
                 // Field field = subject.getClass().getDeclaredField( attributeName );
                 field.set(subject, value);
-            } catch ( NoSuchFieldException e ) {
-                if (subject instanceof Map<?,?>) {
+            } catch (NoSuchFieldException e) {
+                if (subject instanceof Map<?, ?>) {
                     @SuppressWarnings("unchecked")
-                    Map<String, Object> map = (Map<String,Object>) subject;
-                    map.put(attributeName,value);
+                    Map<String, Object> map = (Map<String, Object>) subject;
+                    map.put(attributeName, value);
                 } else {
                     throw e;
                 }
             }
-            
+
         }
     }
 
@@ -144,13 +160,13 @@ public class BeanHelper
     }
 
     public Object get() throws IllegalArgumentException, IllegalAccessException,
-        InvocationTargetException, SecurityException, NoSuchFieldException
+        InvocationTargetException, SecurityException, NoSuchFieldException, ScriptException
     {
         return getProperty(this.subject, this.access);
     }
 
     public void set( Object value ) throws IllegalArgumentException, SecurityException,
-        IllegalAccessException, InvocationTargetException, NoSuchFieldException
+        IllegalAccessException, InvocationTargetException, NoSuchFieldException, ScriptException
     {
         setProperty(this.subject, this.access, value);
     }

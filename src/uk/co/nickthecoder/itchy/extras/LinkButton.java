@@ -10,6 +10,10 @@ import java.net.URI;
 
 import uk.co.nickthecoder.itchy.util.Property;
 
+/**
+ * When clicked, this button will use the default web browser to display a web page.
+ * The URL (web address) can be editted within the SceneDesigner.
+ */
 public class LinkButton extends Button
 {
     /**
@@ -19,11 +23,10 @@ public class LinkButton extends Button
     public String url = "";
 
     @Override
-    public void onClick()
+    protected void onClick()
     {
         Desktop desktop = Desktop.getDesktop();
 
-        // Browse a URL, say google.com
         try {
             desktop.browse(new URI(this.url));
         } catch (Exception e) {

@@ -10,8 +10,8 @@
             <include name="*.jar"/>
         </fileset>
     </path>
-	
-	<!-- build -->
+    
+    <!-- build -->
     <target name="build">
         <mkdir dir="build"/>
         <mkdir dir="lib"/>
@@ -20,9 +20,9 @@
             destdir="build"
             classpathref="project.class.path"
             deprecation="on"
-        	debug="on"
-        	debugLevel="lines,vars,source"
-        	includeantruntime="false"
+           debug="on"
+           debugLevel="lines,vars,source"
+           includeantruntime="false"
         />
         <jar jarfile="${jarfile}">
             <fileset dir="build">
@@ -53,10 +53,10 @@
             <link packagelistloc="http://docs.oracle.com/javase/7/docs/api/package-list" href="http://docs.oracle.com/javase/7/docs/api/"/>
             
         </javadoc>
-    	<exec executable="docs/diagrams/generateClassDiagrams.sh"/>
+       <exec executable="docs/diagrams/generateClassDiagrams.sh"/>
     </target>
 
-	<!-- clean : Delete jar file and class files -->
+    <!-- clean : Delete jar file and class files -->
     <target name="clean">
         <delete includeEmptyDirs="true">
             <fileset dir=".">
@@ -69,7 +69,7 @@
 
 
     <!-- publish : Used to create zip files of the source and binaries -->
-	<target name="package" depends="clean,build,javadoc">
+    <target name="package" depends="clean,build,javadoc">
 
         <jar jarfile="docs/itchy-win32.zip">
             <fileset dir=".">
@@ -83,6 +83,7 @@
                 <include name="resources/**/*.bmp"/>
                 <include name="resources/**/*.ttf"/>
                 <include name="resources/**/*.ogg"/>
+                <include name="resources/**/*.itchy"/>
             </fileset>
         </jar>
 
@@ -91,14 +92,15 @@
                 <include name="lib/*.jar"/>
                 <include name="launch"/>
                 <include name="lib/native/i686/*.so"/>
-                <include name="lib/native/x86-64/*.so"/>
+                <include name="lib/native/x86_64/*.so"/>
                 <include name="resources/**/*.xml"/>
-                <include name="resources/**/*.js"/>
+                <include name="resources/**/*.js"/> 
                 <include name="resources/**/*.png"/>
                 <include name="resources/**/*.jpg"/>
                 <include name="resources/**/*.bmp"/>
                 <include name="resources/**/*.ttf"/>
                 <include name="resources/**/*.ogg"/>
+                <include name="resources/**/*.itchy"/>
             </fileset>
         </tar>
 
@@ -116,37 +118,43 @@
                 <include name="resources/**/*.bmp"/>
                 <include name="resources/**/*.ttf"/>
                 <include name="resources/**/*.ogg"/>
+                <include name="resources/**/*.itchy"/>
             </fileset>
         </jar>
 
-	</target>
-	
+    </target>
+
     <!-- publish : Copies it to my web server's public directory -->
     <target name="publish" depends="package">
 
         <buildnumber/>
-    	
-    	<mkdir dir="${publish.dir}"/>
-    	<delete>
-    	    <fileset dir="${publish.dir}" exclude="builds/**"/>
-		</delete>
-    	
+
+        <mkdir dir="${publish.dir}"/>
+        <delete>
+            <fileset dir="${publish.dir}">
+                <exclude name="builds/**"/>
+           </fileset>
+        </delete>
+       
         <copy todir="${publish.dir}">
             <fileset dir="docs">
+                <include name="itchy-linux.tar.gz"/>
+                <include name="itchy-src.zip"/>
+                <include name="itchy-win32.zip"/>
                 <include name="**/*.html"/>
                 <include name="**/*.png"/>
                 <include name="**/*.css"/>
                 <include name="**/*.js"/>
-        	</fileset>
+           </fileset>
         </copy>
 
-    	<mkdir dir="${publish.dir}/builds/${build.number}/"/>
+        <mkdir dir="${publish.dir}/builds/${build.number}/"/>
 
         <copy file="${publish.dir}/itchy-linux.tar.gz" todir="${publish.dir}/builds/${build.number}/"/>        
         <copy file="${publish.dir}/itchy-src.zip" todir="${publish.dir}/builds/${build.number}/"/>   
         <copy file="${publish.dir}/itchy-win32.zip" todir="${publish.dir}/builds/${build.number}/"/>   
 
-	</target>
+    </target>
     
     <target name="test" depends="build">
 
@@ -163,6 +171,6 @@
 
         </junit>
     </target>
-	
+    
 
 </project>

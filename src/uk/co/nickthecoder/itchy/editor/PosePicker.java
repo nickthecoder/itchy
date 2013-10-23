@@ -21,8 +21,10 @@ import uk.co.nickthecoder.itchy.gui.Window;
 
 public abstract class PosePicker extends Window
 {
-    private final Resources resources;
+    protected final Resources resources;
 
+    private PoseResource defaultPoseResource;
+    
     public PosePicker( Resources resources )
     {
         this(resources, null);
@@ -32,14 +34,16 @@ public abstract class PosePicker extends Window
     {
         super("Pick a Pose");
         this.resources = resources;
+        this.defaultPoseResource = defaultPoseResource;
 
         this.clientArea.setLayout(new VerticalLayout());
         this.clientArea.setFill(true, false);
 
         Container container = new Container();
+        container.setLayout(new VerticalLayout());
         VerticalScroll vs = new VerticalScroll(container);
 
-        Component focus = this.createPoses(container, defaultPoseResource);
+        Component focus = this.createChoices(container);
         this.clientArea.addChild(vs);
         this.clientArea.addStyle("vScrolled");
 
@@ -66,8 +70,11 @@ public abstract class PosePicker extends Window
         }
     }
 
-    private Component createPoses( Container container, PoseResource defaultPoseResource )
+    protected Component createChoices( Container parent )
     {
+        Container container = new Container();
+        parent.addChild( container );
+        
         Component focus = null;
 
         GridLayout gridLayout = new GridLayout(container, 5);
@@ -77,7 +84,7 @@ public abstract class PosePicker extends Window
         for (String name : this.resources.poseNames()) {
             PoseResource poseResource = this.resources.getPoseResource(name);
 
-            Component component = this.createButton(poseResource);
+            Component component = this.createPoseButton(poseResource);
             if (poseResource == defaultPoseResource) {
                 focus = component;
             }
@@ -89,7 +96,7 @@ public abstract class PosePicker extends Window
         return focus;
     }
 
-    private Component createButton( final PoseResource poseResource )
+    private Component createPoseButton( final PoseResource poseResource )
     {
         // final Pose pose = poseResource.pose;
         Container container = new Container();
@@ -99,7 +106,6 @@ public abstract class PosePicker extends Window
 
         ImageComponent img = new ImageComponent(poseResource.getThumbnail());
         Button button = new Button(img);
-        button.addStyle("test");
         button.addActionListener(new ActionListener() {
             @Override
             public void action()

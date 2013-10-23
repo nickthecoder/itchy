@@ -8,21 +8,16 @@
 package uk.co.nickthecoder.itchy.extras;
 
 import uk.co.nickthecoder.itchy.Itchy;
-import uk.co.nickthecoder.itchy.util.Property;;
 
 /**
- * When clicked, this button will start a given scene. The scene is given by the sceneName
- * property, which can be editted within the Scene Designer.
+ * When clicked, the game will end.
  */
-public class SceneButton extends Button
+public class QuitButton extends Button
 {
-    @Property(label="Scene Name")
-    public String sceneName;
-
     @Override
     protected void onClick()
     {
-        Itchy.getGame().startScene( this.sceneName );
+        Itchy.getGame().end();
     }
 
 }

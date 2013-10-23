@@ -1,17 +1,17 @@
 Drop = Class({
     Extends: BehaviourScript,
-    
+
     init: function() {
         // This is the default height that the drop will return to, after it hits the floor.
         // Each Drop can have it own height set within the Scene Designer - the "Behaviours" section.
         this.distance = 600;
-        // The speed of each drop is determined by the sceneBehaviour. See Play.js for more.
-        this.speed = sceneBehaviourScript.speed;
     },
 
     onAttach: function() {
         // Player checks to see if it has collided with any "deadly" objects.
         this.actor.addTag("deadly");
+        // The speed of each drop is determined by the sceneBehaviour. See Play.js for more.
+        this.speed = sceneBehaviourScript.speed;
         // Each type of drop can got down the screen at different speed. The speedFactor is set from
         // the editor's "Costumes" page, in the "Properties" section.
         this.speedFactor = this.actor.getCostume().getProperties().values.speedFactor;
@@ -19,13 +19,13 @@ Drop = Class({
     },
 
     tick: function() { 
-        // Move down the screen.
+        // The rain drop falls
         this.actor.moveBy( 0, - this.speed );
         
         // Hit the bottom of the screen?
         if ( this.actor.getY() < 0) {
 
-            // Create a splash - lots of water droplets (which aren't deadly)
+            // Create a splash - lots of tiny water droplets (which aren't deadly)
             new itchy.extras.Explosion(this.actor)
                 .projectiles(5).gravity(-0.2)
                 .forwards().fade(0.9, 3.5).speed(0.1, 1.5).vy(5)

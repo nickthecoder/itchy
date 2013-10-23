@@ -10,11 +10,6 @@ Game = Class({
         // TODO Called soon after the game is first created, and when it is re-awoken,
         // for example, after returning from the editor.
     },
-    
-    getInitialSceneName: function() {
-        // Return the name of the scene to load when the game is first started.
-        return "start"
-    },
         
     tick: function() {
         // TODO Called 50 times a second.
@@ -22,32 +17,18 @@ Game = Class({
     },
     
     onKeyDown: function( event ) {
+        // No matter which scene we are on, the escape key will always return to the menu.
         if (event.symbol == event.ESCAPE ) {
             game.startScene("menu");
         }
     },
     
     onMessage: function( message ) {
-        if (message == "play") {
-            game.startScene("play");
-        }
-        if (message == "menu") {
-            game.startScene("menu");
-        }
-        if (message == "about") {
-            game.startScene("about");
-        }
-        if (message == "editor") {
-            game.startEditor();
-        }
-        if (message == "quit") {
-            game.end();
-        }
     }
     
     
     // Other methods include :
-    // onDeactivate, onQuit, onKeyDown, onKeyUp, onMouseDown, onMouseUp, onMouseMove, onMessage
+    // onDeactivate, onQuit, onKeyDown, onKeyUp, onMouseDown, onMouseUp, onMouseMove
     // but these are rarely used because SceneBehaviour is often a better place.
 });
 

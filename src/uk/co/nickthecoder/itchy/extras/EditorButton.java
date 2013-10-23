@@ -8,21 +8,17 @@
 package uk.co.nickthecoder.itchy.extras;
 
 import uk.co.nickthecoder.itchy.Itchy;
-import uk.co.nickthecoder.itchy.util.Property;;
 
 /**
- * When clicked, this button will start a given scene. The scene is given by the sceneName
- * property, which can be editted within the Scene Designer.
+ * When clicked, this button launches the Editor for the current game.
+ * This is useful for adding to your game's title page if you want people to edit scenes.
  */
-public class SceneButton extends Button
+public class EditorButton extends Button
 {
-    @Property(label="Scene Name")
-    public String sceneName;
-
     @Override
     protected void onClick()
     {
-        Itchy.getGame().startScene( this.sceneName );
+        Itchy.getGame().startEditor();
     }
 
 }

@@ -164,103 +164,70 @@ public abstract class ScriptLanguage
 
     // ===== GAME =====
 
-    public abstract Game createGame( Resources resources, ClassName className )
-        throws ScriptException;
+    public abstract Game createGame( Resources resources, ClassName className );
 
-    public abstract String getInitialSceneName( ScriptedGame game )
-        throws ScriptException;
+    public abstract void onActivate( ScriptedGame game );
+    
+    public abstract void onDeactivate( ScriptedGame game );
 
-    public abstract void onActivate( ScriptedGame game )
-        throws ScriptException;
+    public abstract boolean onQuit( ScriptedGame game );
 
-    public abstract void onDeactivate( ScriptedGame game )
-        throws ScriptException;
+    public abstract boolean onKeyDown( ScriptedGame game, KeyboardEvent ke );
 
-    public abstract boolean onQuit( ScriptedGame game )
-        throws ScriptException;
+    public abstract boolean onKeyUp( ScriptedGame game, KeyboardEvent ke );
 
-    public abstract boolean onKeyDown( ScriptedGame game, KeyboardEvent ke )
-        throws ScriptException;
+    public abstract boolean onMouseDown( ScriptedGame game, MouseButtonEvent mbe );
 
-    public abstract boolean onKeyUp( ScriptedGame game, KeyboardEvent ke )
-        throws ScriptException;
+    public abstract boolean onMouseUp( ScriptedGame game, MouseButtonEvent mbe );
 
-    public abstract boolean onMouseDown( ScriptedGame game, MouseButtonEvent mbe )
-        throws ScriptException;
+    public abstract boolean onMouseMove( ScriptedGame game, MouseMotionEvent mme );
 
-    public abstract boolean onMouseUp( ScriptedGame game, MouseButtonEvent mbe )
-        throws ScriptException;
+    public abstract void onMessage( ScriptedGame game, String message );
 
-    public abstract boolean onMouseMove( ScriptedGame game, MouseMotionEvent mme )
-        throws ScriptException;
-
-    public abstract void onMessage( ScriptedGame game, String message )
-        throws ScriptException;
-
-    public abstract void tick( ScriptedGame game )
-        throws ScriptException;
+    public abstract void tick( ScriptedGame game );
 
     // ===== BEHAVIOUR =====
 
-    public abstract Behaviour createBehaviour( ClassName className )
-        throws ScriptException;
+    public abstract Behaviour createBehaviour( ClassName className );
 
-    public abstract void onAttach( ScriptedBehaviour behaviour )
-        throws ScriptException;
+    public abstract void onAttach( ScriptedBehaviour behaviour );
 
-    public abstract void onDetach( ScriptedBehaviour behaviour )
-        throws ScriptException;
+    public abstract void onDetach( ScriptedBehaviour behaviour );
 
-    public abstract void onActivate( ScriptedBehaviour behaviour )
-        throws ScriptException;
+    public abstract void onActivate( ScriptedBehaviour behaviour );
 
-    public abstract void onDeactivate( ScriptedBehaviour behaviour )
-        throws ScriptException;
+    public abstract void onDeactivate( ScriptedBehaviour behaviour );
 
-    public abstract void onKill( ScriptedBehaviour behaviour )
-        throws ScriptException;
+    public abstract void onKill( ScriptedBehaviour behaviour );
 
-    public abstract void onMessage( ScriptedBehaviour behaviour, String message )
-        throws ScriptException;
+    public abstract void onMessage( ScriptedBehaviour behaviour, String message );
 
-    public abstract void tick( ScriptedBehaviour behaviour )
-        throws ScriptException;
+    public abstract void tick( ScriptedBehaviour behaviour );
 
     // ===== SCENE BEHAVIOUR =====
 
-    public abstract SceneBehaviour createSceneBehaviour( ClassName className )
-        throws ScriptException;
+    public abstract SceneBehaviour createSceneBehaviour( ClassName className );
 
-    public abstract void onActivate( ScriptedSceneBehaviour behaviour )
-        throws ScriptException;
+    public abstract void onActivate( ScriptedSceneBehaviour behaviour );
 
-    public abstract void onDeactivate( ScriptedSceneBehaviour behaviour )
-        throws ScriptException;
+    public abstract void onDeactivate( ScriptedSceneBehaviour behaviour );
 
-    public abstract void tick( ScriptedSceneBehaviour behaviour )
-        throws ScriptException;
+    public abstract void tick( ScriptedSceneBehaviour behaviour );
 
-    public abstract boolean onMouseDown( ScriptedSceneBehaviour behaviour, MouseButtonEvent mbe )
-        throws ScriptException;
+    public abstract boolean onMouseDown( ScriptedSceneBehaviour behaviour, MouseButtonEvent mbe );
 
-    public abstract boolean onMouseUp( ScriptedSceneBehaviour behaviour, MouseButtonEvent mbe )
-        throws ScriptException;
+    public abstract boolean onMouseUp( ScriptedSceneBehaviour behaviour, MouseButtonEvent mbe );
 
-    public abstract boolean onMouseMove( ScriptedSceneBehaviour behaviour, MouseMotionEvent mme )
-        throws ScriptException;
+    public abstract boolean onMouseMove( ScriptedSceneBehaviour behaviour, MouseMotionEvent mme );
 
-    public abstract boolean onKeyDown( ScriptedSceneBehaviour behaviour, KeyboardEvent ke )
-        throws ScriptException;
+    public abstract boolean onKeyDown( ScriptedSceneBehaviour behaviour, KeyboardEvent ke );
 
-    public abstract boolean onKeyUp( ScriptedSceneBehaviour behaviour, KeyboardEvent ke )
-        throws ScriptException;
+    public abstract boolean onKeyUp( ScriptedSceneBehaviour behaviour, KeyboardEvent ke );
 
-    public abstract void onMessage( ScriptedSceneBehaviour behaviour, String message )
-        throws ScriptException;
+    public abstract void onMessage( ScriptedSceneBehaviour behaviour, String message );
 
     // ====== COSTUME PROPERTIES =====
 
-    public abstract CostumeProperties createCostumeProperties( ClassName className )
-        throws ScriptException;
+    public abstract CostumeProperties createCostumeProperties( ClassName className );
 
 }

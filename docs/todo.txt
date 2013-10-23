@@ -2,21 +2,13 @@
 What's Next
 ===========
 
-Rain to use NumberValue instead of HishScore and Score.
+Create a game from scratch, deliberately making syntax errors in the code.
+    Fix any bugs and improve the UI along the way. 
 
-Copy the arm binary
-    Test Itchy on Pi
-
-When getting a property value from a script, if it doesn't return a valid value, report in stderr, and
-    return a reasonable default. "", 0, 0.0, black.
-
-CostumeProperties
-    Use auto update components, so we don't have the fragile "for" loop in onOk.
-    CostumesEditor needs to copy the costume so that cancel works.
-
-"include" javascript function, which includes another script file.
-
-Check that Add Scene doesn't rename.
+Catch all ScriptExceptions
+    Report them to ScriptErrorLog, which will also write to stderr (not as a stack trace)
+    An icon on the popup Layer shows when a new error has occurred. Click to open the log viewer.
+        "Clear" button will remove the icon from the popup layer. 
 
 Check that a broken script doesn't cause problems :
     Costume Properties
@@ -26,31 +18,35 @@ Check that a broken script doesn't cause problems :
     SceneBehaviour in designer
     Game
 
-
-Scripted Behaviours can't detect MouseEvents.
-    The whole Layer as a MouseListener needs looking at.
-
 Bugs
 ====
 
-Can't edit a Rain scene when starting the editor directly
-    The GameBehaviour isn't initialised, but it is trying to read the properties???
-
 One of the animation profiles shows that the NumericAnimation isn't quite right.
-
-When a window has no focusable components, then it recurses till the stack explodes.
-
-Popup windows dont center themselves when window grows. Should they?
 
 On Remove, there is no check that the resource isn't being used by something else.
     Easy pose, animation, sound..., but tricky for costume, as they could be used in any scene
-    
+
 Renaming a costume will cause scenes that use it to fail.
 
 Costumes are updated even when cancel is pressed (need to COPY the costume?)
 
+CostumeProperties
+    CostumesEditor needs to copy the costume so that cancel works.
+
 Later
 =====
+
+Is the special Map needed which allows scripted Costume properties to be retrieved from BeanHelper
+    Now we have ScriptedObject, isn't it better to have it done that way?
+    Would need a "set" version of the special code too.
+
+Scripted Behaviours can't detect MouseEvents.
+    The whole Layer as a MouseListener needs looking at.
+
+"include" javascript function, which includes another script file.
+
+Copy the arm binary
+    Test Itchy on Pi
 
 Text Costumes.
     Buttons can have sounds and animations
@@ -70,11 +66,6 @@ The stars on Drunk Invaders backgrounds should have more variation (alpha and sl
 Component : Override all rules. Currently only Font can be overridden.  
     Allow to be reset to default (i.e. be restyled). 
 
-Icons on each editor tab and also on the CostumeEditor for each event type (String,Pose,Sound etc).
-
-Create a GenericGame, which can load arbitrary resources (for a simple start to a game)
-    Started (called Launcher).
-
 Create a game which uses the GUI        
     The Rules object needs to be on Game, its probably on Itchy right now.
 
@@ -88,7 +79,6 @@ Don't use tags for "active".
 Container.render should get the NinePatches to render directly onto the gc, not via a temp surface.
 RenderableInterface is rubbish. NinePatches should be told where and how large to draw themselves
    (assuming that they can render onto a existing surface rather than needing a new surface).
-
 
 Replace crufty render and render2 methods with the concept of a Graphics Context.
 To scroll, a sub-layer, push the context, alter its mapping, call the childrens render,

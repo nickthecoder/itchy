@@ -19,7 +19,6 @@ import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 
 public abstract class ActorsLayer extends Layer
 {
-
     /**
      * The list of actors visible on this layer. The order of the list is the order they will be
      * drawn, and therefore determines the z-order. The first item is draw first, and is therefore

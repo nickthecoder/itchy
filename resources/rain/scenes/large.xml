@@ -1,13 +1,9 @@
 <scene showMouse="true" behaviour="Play.js">
-  <properties>
-    <property name="speed" value="5"/>
-    <property name="maxSpeed" value="15"/>
-    <property name="speedUpAfter" value="12"/>
-  </properties>
+  <properties/>
   <layer name="main">
     <actor costume="background" x="0" y="600" direction="0.0" startEvent="default"/>
-    <text text="Easy" font="Boycott" size="72" color="#401c00" xAlignment="0.5" yAlignment="0.5" x="384" y="559" direction="0.0" startEvent="default"/>
-    <text text="Easy" font="Boycott" size="65" color="#93472e" xAlignment="0.5" yAlignment="0.5" x="382" y="561" direction="0.0" startEvent="default"/>
+    <text text="Large" font="Boycott" size="72" color="#401c00" xAlignment="0.5" yAlignment="0.5" x="384" y="559" direction="0.0" startEvent="default"/>
+    <text text="Large" font="Boycott" size="65" color="#93472e" xAlignment="0.5" yAlignment="0.5" x="383" y="558" direction="0.0" startEvent="default"/>
     <text text="Score :" font="Boycott" size="35" color="#000000" xAlignment="0.5" yAlignment="0.5" x="73" y="576" direction="0.0" startEvent="default"/>
     <text text="0000" font="Boycott" size="32" color="#93190e" xAlignment="0.0" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.NumberValue" x="31" y="538" direction="0.0" startEvent="default">
       <property name="formatPattern" value="0000"/>
@@ -26,31 +22,31 @@
       <property name="access" value="sceneBehaviour.sceneBehaviourScript.highScore"/>
     </text>
     <text text="Top" font="BlackCasper" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="0" y="1200" direction="0.0" startEvent="default"/>
-    <actor costume="drop1" x="100" y="600" direction="0.0" startEvent="default">
+    <actor costume="drop1" x="100" y="600" direction="0.0" startEvent="default" scale="2.0">
       <property name="distance" value="600"/>
     </actor>
-    <actor costume="drop1" x="529" y="679" direction="0.0" startEvent="default">
+    <actor costume="drop1" x="529" y="679" direction="0.0" startEvent="default" scale="2.0">
       <property name="distance" value="600"/>
     </actor>
-    <actor costume="drop1" x="412" y="865" direction="0.0" startEvent="default">
+    <actor costume="drop1" x="412" y="865" direction="0.0" startEvent="default" scale="2.0">
       <property name="distance" value="605"/>
     </actor>
-    <actor costume="drop1" x="100" y="900" direction="0.0" startEvent="default">
+    <actor costume="drop1" x="100" y="900" direction="0.0" startEvent="default" scale="2.0">
       <property name="distance" value="600"/>
     </actor>
-    <actor costume="drop1" x="647" y="1065" direction="0.0" startEvent="default">
+    <actor costume="drop1" x="647" y="1065" direction="0.0" startEvent="default" scale="2.0">
       <property name="distance" value="600"/>
     </actor>
-    <actor costume="drop1" x="231" y="1125" direction="0.0" startEvent="default">
+    <actor costume="drop1" x="231" y="1125" direction="0.0" startEvent="default" scale="2.0">
       <property name="distance" value="600"/>
     </actor>
-    <actor costume="drop3" x="317" y="641" direction="0.0" startEvent="default">
+    <actor costume="drop3" x="317" y="642" direction="0.0" startEvent="default" scale="2.0">
       <property name="distance" value="590"/>
     </actor>
-    <actor costume="drop3" x="160" y="986" direction="0.0" startEvent="default">
+    <actor costume="drop3" x="160" y="986" direction="0.0" startEvent="default" scale="2.0">
       <property name="distance" value="600"/>
     </actor>
-    <actor costume="player" x="424" y="14" direction="0.0" startEvent="default"/>
+    <actor costume="player" x="442" y="-42" direction="0.0" startEvent="default" scale="2.0536797051480202"/>
     <actor costume="wally" x="-10000" y="14" direction="0.0" startEvent="default"/>
     <text text="High Score" font="Boycott" size="35" color="#8f9688" xAlignment="0.5" yAlignment="0.5" x="704" y="570" direction="0.0" startEvent="default"/>
   </layer>

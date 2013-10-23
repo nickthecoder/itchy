@@ -80,79 +80,47 @@ public class ScriptedBehaviour extends Behaviour
         return this.className;
     }
 
-    private void handleException( Exception e )
-    {
-        e.printStackTrace();
-    }
 
     @Override
     public void onAttach()
     {
-        try {
-            this.language.onAttach(this);
-        } catch (Exception e) {
-            handleException(e);
-        }
+        this.language.onAttach(this);
     }
 
     @Override
     public void onDetach()
     {
-        try {
-            this.language.onDetach(this);
-        } catch (Exception e) {
-            handleException(e);
-        }
+        this.language.onDetach(this);
     }
 
     @Override
     public void onActivate()
     {
-        try {
-            this.language.onActivate(this);
-        } catch (Exception e) {
-            handleException(e);
-        }
+        this.language.onActivate(this);
     }
 
     @Override
     public void onDeactivate()
     {
-        try {
-            this.language.onDeactivate(this);
-        } catch (Exception e) {
-            handleException(e);
-        }
+        this.language.onDeactivate(this);
     }
 
     @Override
     public void onMessage( String message )
     {
-        try {
-            this.language.onMessage(this, message);
-        } catch (Exception e) {
-            handleException(e);
-        }
+        this.language.onMessage(this, message);
     }
 
     @Override
     public void onKill()
     {
-        try {
-            this.language.onKill(this);
-        } catch (Exception e) {
-            handleException(e);
-        }
+        this.language.onKill(this);
     }
 
     @Override
     public void tick()
     {
-        try {
-            this.language.tick(this);
-        } catch (Exception e) {
-            handleException(e);
-        }
+        this.language.tick(this);
     }
 
 }

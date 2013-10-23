@@ -182,6 +182,7 @@ public class Itchy
 
     public static void endGame()
     {
+        currentGame.onDeactivate();
         soundManager.stopAll();
 
         if (gameStack.isEmpty()) {
@@ -193,6 +194,7 @@ public class Itchy
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            currentGame.onActivate();
             mainLoop();
         }
     }

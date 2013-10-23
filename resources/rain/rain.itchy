@@ -115,6 +115,7 @@
     <scene name="about"/>
     <scene name="easy"/>
     <scene name="hard"/>
+    <scene name="large"/>
     <scene name="medium"/>
     <scene name="menu"/>
   </scenes>

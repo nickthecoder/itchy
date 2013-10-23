@@ -14,11 +14,12 @@ ${NAME} = Class({
     }
     
     // Other methods include :
-    // onAttach, onDetach, onActivat, onDeactivate, onKill
+    // onDetach, onActivate, onDeactivate, onKill
 });
 // TODO Define each editable property like so 
 // BehaviourScript.addProperty("${NAME}", "exampleInteger", Integer, "Example Integer");
 // BehaviourScript.addProperty("${NAME}", "exampleDouble", Double, "Example Double");
 // BehaviourScript.addProperty("${NAME}", "exampleString", String, "Example String");
 // BehaviourScript.addProperty("${NAME}", "exampleColour", RGBA, "Example Colour");
+// Each property should be initialised to a default value in the "init" method.
 

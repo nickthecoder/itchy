@@ -46,7 +46,7 @@ public class TextValue extends Behaviour
      */
     public String nullValue = "";
 
-    @Property(label = "Update Period (0 for continuous")
+    @Property(label = "Update Period (s) (0 for continuous)")
     /**
      * How often to update. The default is zero, which means it is updated every frame. This is fine
      * unless the value take a long time to calculate, in which case, you may want to update it
@@ -55,7 +55,7 @@ public class TextValue extends Behaviour
      * This is handy for values you know won't need updating. The example game Tetra uses a negative
      * update interval for the High Score.
      */
-    public int updateInterval;
+    public double updateInterval;
 
     @Property(label = "Quiet")
     /**

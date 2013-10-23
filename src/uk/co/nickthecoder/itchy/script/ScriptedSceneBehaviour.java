@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.script.ScriptException;
+
 import uk.co.nickthecoder.itchy.SceneBehaviour;
 import uk.co.nickthecoder.itchy.util.AbstractProperty;
 import uk.co.nickthecoder.itchy.util.ClassName;
@@ -16,7 +18,7 @@ import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 
-public class ScriptedSceneBehaviour implements SceneBehaviour
+public class ScriptedSceneBehaviour implements SceneBehaviour, ScriptedObject
 {
     private final static HashMap<String, List<AbstractProperty<SceneBehaviour, ?>>> allProperties = new HashMap<String, List<AbstractProperty<SceneBehaviour, ?>>>();
 
@@ -35,6 +37,19 @@ public class ScriptedSceneBehaviour implements SceneBehaviour
         this.language = language;
         this.sceneBehaviourScript = scriptInstance;
         this.propertyValues = new ScriptProperties(language, scriptInstance);
+    }
+
+    @Override
+    public Object getScriptedObject()
+    {
+        return this.sceneBehaviourScript;
+    }
+
+    @Override
+    public Object getProperty( String name )
+        throws ScriptException
+    {
+        return this.language.getProperty(this.sceneBehaviourScript, name);
     }
 
     @Override
@@ -73,104 +88,58 @@ public class ScriptedSceneBehaviour implements SceneBehaviour
         return this.className;
     }
 
-    private void handleException( Exception e )
-    {
-        e.printStackTrace();
-    }
-
     @Override
     public void onActivate()
     {
-        try {
-            this.language.onActivate(this);
-        } catch (Exception e) {
-            handleException(e);
-        }
+        this.language.onActivate(this);
     }
 
     @Override
     public void onDeactivate()
     {
-        try {
-            this.language.onDeactivate(this);
-        } catch (Exception e) {
-            handleException(e);
-        }
+        this.language.onDeactivate(this);
     }
 
     @Override
     public void tick()
     {
-        try {
-            this.language.tick(this);
-        } catch (Exception e) {
-            handleException(e);
-        }
+        this.language.tick(this);
     }
 
     @Override
     public boolean onMouseDown( MouseButtonEvent mbe )
     {
-        try {
-            return this.language.onMouseDown(this, mbe);
-        } catch (Exception e) {
-            handleException(e);
-            return false;
-        }
+        return this.language.onMouseDown(this, mbe);
     }
 
     @Override
     public boolean onMouseUp( MouseButtonEvent mbe )
     {
-        try {
-            return this.language.onMouseUp(this, mbe);
-        } catch (Exception e) {
-            handleException(e);
-            return false;
-        }
+        return this.language.onMouseUp(this, mbe);
     }
 
     @Override
     public boolean onMouseMove( MouseMotionEvent mme )
     {
-        try {
-            return this.language.onMouseMove(this, mme);
-        } catch (Exception e) {
-            handleException(e);
-            return false;
-        }
+        return this.language.onMouseMove(this, mme);
     }
 
     @Override
     public boolean onKeyDown( KeyboardEvent ke )
     {
-        try {
-            return this.language.onKeyDown(this, ke);
-        } catch (Exception e) {
-            handleException(e);
-            return false;
-        }
+        return this.language.onKeyDown(this, ke);
     }
 
     @Override
     public boolean onKeyUp( KeyboardEvent ke )
     {
-        try {
-            return this.language.onKeyUp(this, ke);
-        } catch (Exception e) {
-            handleException(e);
-            return false;
-        }
+        return this.language.onKeyUp(this, ke);
     }
 
     @Override
     public void onMessage( String message )
     {
-        try {
-            this.language.onMessage(this, message);
-        } catch (Exception e) {
-            handleException(e);
-        }
+        this.language.onMessage(this, message);
     }
 
 }

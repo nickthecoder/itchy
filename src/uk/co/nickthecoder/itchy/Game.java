@@ -31,7 +31,7 @@ public class Game implements EventListener, MessageListener
     public Resources resources;
 
     public Pause pause;
-    
+
     private AutoFlushPreferences preferences;
 
     protected CompoundLayer layers;
@@ -60,7 +60,7 @@ public class Game implements EventListener, MessageListener
 
     private Stylesheet stylesheet;
 
-    public Game( Resources resources ) throws Exception
+    public Game( Resources resources )
     {
         this.resources = resources;
         this.sceneBehaviour = new NullSceneBehaviour();
@@ -73,7 +73,7 @@ public class Game implements EventListener, MessageListener
         this.windows = new ArrayList<GuiPose>();
 
         this.addEventListener(this);
-        
+
         Rect screenRect = new Rect(0, 0, getWidth(), getHeight());
 
         this.layers = new CompoundLayer("game", screenRect);
@@ -87,7 +87,7 @@ public class Game implements EventListener, MessageListener
 
     public void onActivate()
     {
-        this.loadScene(this.resources.gameInfo.initialScene);
+        startScene(this.resources.gameInfo.initialScene);
     }
 
     public void onDeactivate()
@@ -113,18 +113,15 @@ public class Game implements EventListener, MessageListener
      */
     public void start()
     {
-        System.out.println("Starting game : " + this.resources.gameInfo.title);
         Itchy.startGame(this);
-        
         Itchy.mainLoop();
     }
 
     public void start( String sceneName )
     {
-        System.out.println("Starting game with scene : " + sceneName);
         Itchy.startGame(this);
 
-        if (! StringUtils.isBlank(sceneName)) {
+        if (!StringUtils.isBlank(sceneName)) {
             this.layers.clear();
             this.layers.reset();
             loadScene(sceneName);
@@ -133,11 +130,18 @@ public class Game implements EventListener, MessageListener
         Itchy.mainLoop();
     }
 
+    /**
+     * Called by the SceneDesigner, to test a single scene. Essentially the same as
+     * {@link #start(String)}, but also sets the boolean <code>testing</code>, so that the game
+     * knows its in testing mode.
+     * 
+     * @param sceneName
+     *        The name of the scene to play.
+     */
     public void testScene( String sceneName )
     {
         try {
             this.testing = true;
-
             start(sceneName);
 
         } catch (Exception e) {
@@ -145,16 +149,26 @@ public class Game implements EventListener, MessageListener
         }
     }
 
+    /**
+     * The flip side of {@link testScene(String)}, will return to the scene designer.
+     * 
+     * Essentially the same as {@link #end}.
+     */
     public void endTest()
     {
-        System.out.println("Ending the test");
+        end();
         this.testing = false;
-        this.layers.clear();
-        this.layers.reset();
-
-        Itchy.endGame();
     }
 
+    /**
+     * Preferences contain permanently stored data (i.e. its still there when you wuit the game and
+     * restart it days later). The data is stored in a hierarchy of nodes. Each node has a set of
+     * name/value pairs, just like HashMap. Each node can also have named sub-nodes (which gives it
+     * the hierarchical structure).
+     * 
+     * @return The top level node preferences for this game. The path of this node is determined by
+     *         {@link #getPreferenceNode()}.
+     */
     public AutoFlushPreferences getPreferences()
     {
         if (this.preferences == null) {
@@ -162,28 +176,61 @@ public class Game implements EventListener, MessageListener
         }
         return this.preferences;
     }
-    
+
+    /**
+     * Gets the root node for this game. The default implementation uses the path based on the
+     * Game's class name, and the game's ID. Note, unlike {@link #getPreferences()}, the return
+     * Preferences are not AutoFlushPreferences, you will need to call 'flush' to commit each of the
+     * changes.
+     * 
+     * @return The top level preferences node for this game.
+     */
     protected Preferences getPreferenceNode()
     {
         return Preferences.userNodeForPackage(this.getClass()).node(this.resources.getId());
     }
 
+    /**
+     * Get the top-level CompoundLayer, which holds all of the sub-layers. The sub-layers are the
+     * ones that Actors will be added to. Note that the pop-up layer is NOT part of the hierarchy,
+     * it is above all these.
+     * 
+     * @return
+     */
     public CompoundLayer getLayers()
     {
         return this.layers;
     }
 
+    /**
+     * The popup layer is a layer draw above all of the game's regular layers. It is useful for
+     * displaying dialog boxes, or other critical information.
+     * 
+     * @return The popup layer.
+     */
     public ActorsLayer getPopupLayer()
     {
         return this.popupLayer;
     }
 
-    public void render( Surface screen )
+    /**
+     * Renders all of the layers (including the popup layer) to the display surface.
+     * 
+     * Itchy will call this from inside the game loop, so there is normally no need for you to call
+     * it explicitly. You may call this with a surface of your creation to obtain a screenshot of
+     * the game. {@link uk.co.nikthecoder.extras.SceneTransition} takes screenshots in this manner,
+     * which are then slid, or faded from view.
+     * 
+     * @param display
+     *        The surface to draw onto. This will normally be the display surface, but can be any
+     *        surface.
+     */
+    public void render( Surface display )
     {
         Rect screenRect = new Rect(0, 0, getWidth(), getHeight());
 
-        this.layers.render(screenRect, screen);
-        this.popupLayer.render(screenRect, screen);
+        this.layers.render(screenRect, display);
+        this.popupLayer.render(screenRect, display);
     }
 
     /**
@@ -200,7 +247,16 @@ public class Game implements EventListener, MessageListener
         }
     }
 
-    public void processEvent( Event event )
+    /**
+     * Itchy passes every event through the current game's processEvent method. You shouldn't call
+     * this method directly, or override it. If you need to handle events at the Game level, then
+     * override onKeyDown, onKeyUp, onMouseMove, onMouseDown, onMouseUp etc, and leave this method
+     * well alone!
+     * 
+     * @param event
+     *        The event that needs to be handled.
+     */
+    void processEvent( Event event )
     {
         if (event instanceof QuitEvent) {
             for (EventListener el : this.eventListeners) {
@@ -349,6 +405,8 @@ public class Game implements EventListener, MessageListener
         }
     }
 
+    // TODO remove this.eventListeners, and instead, add listener to all of
+    // mouseListeners, keyListeners, quitListeners. That way the order is more controllable.
     public void addEventListener( EventListener listener )
     {
         this.eventListeners.add(listener);
@@ -379,18 +437,30 @@ public class Game implements EventListener, MessageListener
         this.keyListeners.remove(listener);
     }
 
+    /**
+     * Prevents mouse events going to any other MouseListeners, other than the one specified, until
+     * {@link #releaseMouse(EventListener)} is called.
+     * 
+     */
     public void captureMouse( EventListener owner )
     {
         assert (this.mouseOwner == null);
         this.mouseOwner = owner;
     }
 
+    /**
+     * The flip side of {@link #captureMouse(EventListener)}. MouseListeners will receive mouse
+     * events as normal.
+     * 
+     * @param owner
+     */
     public void releaseMouse( EventListener owner )
     {
         assert (this.mouseOwner == owner);
         this.mouseOwner = null;
     }
 
+    // TODO What is a modal listener?
     public void setModalListener( EventListener listener )
     {
         this.modalListener = listener;
@@ -406,21 +476,37 @@ public class Game implements EventListener, MessageListener
         this.keyboardFocus = focus;
     }
 
+    /**
+     * @return The width of the Game's display in pixels, taken from the {@link GameInfo}, which is
+     *         stored in the game's {@link Resources} file.
+     */
     public int getWidth()
     {
         return this.resources.gameInfo.width;
     }
 
+    /**
+     * @return The height of the Game's display in pixels, taken from the {@link GameInfo}, which is
+     *         stored in the game's {@link Resources} file.
+     */
     public int getHeight()
     {
         return this.resources.gameInfo.height;
     }
 
+    /**
+     * @return The title of the Game, as it should appear in the window's title bar. This is taken
+     *         from the {@link GameInfo}, which is stored in the game's {@link Resources} file.
+     */
     public String getTitle()
     {
         return this.resources.gameInfo.title;
     }
 
+    /**
+     * Called when the application has been asked to quit, such as when Alt-F4 is pressed, or the
+     * window's close button is pressed. The default behaviour is to terminate the application.
+     */
     @Override
     public boolean onQuit()
     {
@@ -431,7 +517,7 @@ public class Game implements EventListener, MessageListener
     /**
      * Called when a button is pressed. Most games don't use onKeyDown or onKeyUp during game play,
      * instead, each Actor uses : Itchy.isKeyDown( ... ). onKeyDown and onKeyUp are useful for
-     * typing.
+     * typing, not for game play.
      */
     @Override
     public boolean onKeyDown( KeyboardEvent ke )
@@ -443,6 +529,9 @@ public class Game implements EventListener, MessageListener
      * Called when a button is pressed. Most games don't use onKeyDown or onKeyUp during game play,
      * instead, each Actor uses : Itchy.isKeyDown( ... ). onKeyDown and onKeyUp are useful for
      * typing.
+     * 
+     * The default behaviour is to do nothing more than forward the event to the current scene's
+     * {@link SceneBehaviour}.
      */
     @Override
     public boolean onKeyUp( KeyboardEvent ke )
@@ -450,18 +539,30 @@ public class Game implements EventListener, MessageListener
         return this.getSceneBehaviour().onKeyUp(ke);
     }
 
+    /**
+     * The default behaviour is to do nothing more than forward the event to the current scene's
+     * {@link SceneBehaviour}.
+     */
     @Override
     public boolean onMouseDown( MouseButtonEvent mbe )
     {
         return this.getSceneBehaviour().onMouseDown(mbe);
     }
 
+    /**
+     * The default behaviour is to do nothing more than forward the event to the current scene's
+     * {@link SceneBehaviour}.
+     */
     @Override
     public boolean onMouseUp( MouseButtonEvent mbe )
     {
         return this.getSceneBehaviour().onMouseDown(mbe);
     }
 
+    /**
+     * The default behaviour is to do nothing more than forward the event to the current scene's
+     * {@link SceneBehaviour}.
+     */
     @Override
     public boolean onMouseMove( MouseMotionEvent mbe )
     {
@@ -469,13 +570,18 @@ public class Game implements EventListener, MessageListener
     }
 
     /**
-     * Override this method to run code once per frame.
+     * Override this method to run code once per frame. The default behaviour is to do nothing more
+     * than to call the current scene's {@link SceneBehaviour}'s tick method.
      */
     public void tick()
     {
         this.getSceneBehaviour().tick();
     }
 
+    /**
+     * The default behaviour is to do nothing more than forward the message to the current scene's
+     * {@link SceneBehaviour}.
+     */
     @Override
     public void onMessage( String message )
     {
@@ -487,14 +593,20 @@ public class Game implements EventListener, MessageListener
         return this.sceneBehaviour;
     }
 
+    /**
+     * Clears and resets the layers, and then loads the specified scene.
+     * 
+     * @param sceneName The name of the scene to load.
+     */
     public void startScene( String sceneName )
     {
         this.layers.clear();
+        this.layers.reset();
         this.loadScene(sceneName);
     }
 
     public boolean loadScene( String sceneName )
-    { 
+    {
         try {
             Scene scene = this.resources.getScene(sceneName);
             if (scene == null) {

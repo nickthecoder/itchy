@@ -5,24 +5,38 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.script;
 
+import javax.script.ScriptException;
+
 import uk.co.nickthecoder.itchy.Game;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 
-public class ScriptedGame extends Game
+public class ScriptedGame extends Game implements ScriptedObject
 {
     private ScriptLanguage language;
 
     public Object scriptGame;
-    
-    public ScriptedGame( Resources resources, ScriptLanguage language, Object scriptInstance)
-        throws Exception
+
+    public ScriptedGame( Resources resources, ScriptLanguage language, Object scriptInstance )
     {
-        super( resources );
+        super(resources);
         this.language = language;
         this.scriptGame = scriptInstance;
+    }
+
+    @Override
+    public Object getScriptedObject()
+    {
+        return this.scriptGame;
+    }
+
+    @Override
+    public Object getProperty( String name )
+        throws ScriptException
+    {
+        return this.language.getProperty(this.scriptGame, name);
     }
 
     private void handleException( Exception e )
@@ -34,11 +48,7 @@ public class ScriptedGame extends Game
     public void onActivate()
     {
         super.onActivate();
-        try {
-            this.language.onActivate(this);
-        } catch (Exception e) {
-            handleException(e);
-        }
+        this.language.onActivate(this);
     }
 
     @Override
