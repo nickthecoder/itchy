@@ -202,7 +202,7 @@ public class Scene
 
             for (SceneActor sceneActor : this.sceneActors) {
                 Actor actor = sceneActor.createActor(resources, designMode);
-                layer.add(actor);
+                layer.addTop(actor);
 
                 if (!designMode) {
                     if (actor.getActivationDelay() == 0) {

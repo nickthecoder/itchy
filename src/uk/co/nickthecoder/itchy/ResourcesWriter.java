@@ -303,6 +303,7 @@ public class ResourcesWriter extends XMLWriter
 
         this.beginTag("costume");
         this.attribute("name", name);
+        this.attribute("defaultZOrder", simpleCostume.defaultZOrder);
 
         if (baseName != null) {
             this.attribute("extends", baseName);

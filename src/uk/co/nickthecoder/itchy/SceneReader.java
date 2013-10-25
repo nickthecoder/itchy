@@ -169,11 +169,20 @@ public class SceneReader
         sceneLayer.add(sceneActor);
     }
 
+    /**
+     * For backwards compatibility, if the zOrder isn't specified, then the default zOrder
+     * increases by 1 for each actor read. Therefore, the actors will have increasing zOrders.
+     */
+    private int defaultZOrder = 0;
+    
     private void readSceneActorAttributes( XMLTag actorTag, SceneActor sceneActor )
         throws Exception
     {
+        defaultZOrder += 1;
+        
         sceneActor.x = actorTag.getIntAttribute("x");
         sceneActor.y = actorTag.getIntAttribute("y");
+        sceneActor.zOrder = actorTag.getOptionalIntAttribute("zOrder", defaultZOrder);
         sceneActor.alpha = actorTag.getOptionalDoubleAttribute("alpha", 255);
         sceneActor.direction = actorTag.getOptionalDoubleAttribute("direction", 0);
         sceneActor.scale = actorTag.getOptionalDoubleAttribute("scale", 1);

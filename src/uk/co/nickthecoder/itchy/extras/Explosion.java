@@ -169,7 +169,7 @@ public class Explosion extends Behaviour
         if (this.below) {
             this.source.getLayer().addBelow(result, this.source);
         } else {
-            this.source.getLayer().add(result);
+            this.source.getLayer().addTop(result);
         }
 
         return result;
@@ -638,7 +638,7 @@ public class Explosion extends Behaviour
             if (this.below) {
                 this.getActor().getLayer().addBelow(actor, this.getActor());
             } else {
-                this.getActor().getLayer().add(actor);
+                this.getActor().getLayer().addTop(actor);
             }
             actor.activate();
         }

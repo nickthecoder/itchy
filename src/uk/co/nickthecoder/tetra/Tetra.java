@@ -491,7 +491,7 @@ public class Tetra extends Game
             this.actors = new Actor[PIECES];
             for (int i = 0; i < PIECES; i++) {
                 this.actors[i] = new Actor(Tetra.this.resources.getCostume(names[n]));
-                Tetra.this.mainLayer.add(this.actors[i]);
+                Tetra.this.mainLayer.addTop(this.actors[i]);
                 this.actors[i].activate();
             }
             update();

@@ -20,9 +20,9 @@ import uk.co.nickthecoder.jame.Surface;
 public class Actor implements PropertySubject<Actor>
 {
 
-    private static int _nextId = 1;
+    private static int nextId = 1;
 
-    private final int _id;
+    public final int id;
 
     private static List<AbstractProperty<Actor, ?>> properties = AbstractProperty.findAnnotations(Actor.class);
     // private static List<AbstractProperty<Actor, ?>> normalProperties;
@@ -47,6 +47,7 @@ public class Actor implements PropertySubject<Actor>
     private boolean active = false;
     private boolean dead = false;
     private boolean dying = false;
+    private int zOrder = 0;
 
     private double activationDelay;
     
@@ -79,24 +80,16 @@ public class Actor implements PropertySubject<Actor>
         } 
         return new TextPose(text,font,20);
     }
-    
-    public Actor( Costume costume, String eventName )
-    {
-        this(startPose(costume, eventName));
         
-        this.costume = costume;
-        this.event(eventName);
-        this.getAppearance().setDirection(this.getAppearance().getPose().getDirection());
-    }
+
 
     public Actor( Pose pose )
     {
-        this._id = _nextId;
-        _nextId++;
-
+        this.id = nextId;
+        nextId++;
+        this.tagMembership = new TagMembership<Actor>(actorTags, this);
         this.costume = null;
         this.appearance = new Appearance(pose);
-        this.tagMembership = new TagMembership<Actor>(actorTags, this);
         this.appearance.setActor(this);
 
         this.setBehaviour(new NullBehaviour());
@@ -106,6 +99,15 @@ public class Actor implements PropertySubject<Actor>
         this.getAppearance().setDirection(pose.getDirection());
     }
 
+    public Actor( Costume costume, String eventName )
+    {
+        this(startPose(costume, eventName));
+        
+        this.costume = costume;
+        this.event(eventName);
+        this.getAppearance().setDirection(this.getAppearance().getPose().getDirection());
+    }
+    
     @Property(label="Start Event")
     public String getStartEvent()
     {
@@ -225,19 +227,17 @@ public class Actor implements PropertySubject<Actor>
             return;
         }
         
-        if( layer == null) {
+        if (this.layer != null) {
             this.layer.remove(this);
-        } else {
+        }
+        
+        if( layer != null) {
             layer.add(this);
         }
     }
     
     void setLayerAttribute( ActorsLayer layer )
     {
-        if (layer == this.layer) {
-            return;
-        }
-        
         this.layer = layer;
     }
 
@@ -707,15 +707,35 @@ public class Actor implements PropertySubject<Actor>
     public void zOrderTop()
     {
         if (this.layer != null) {
-            this.layer.zOrderTop(this);
+            this.layer.addTop(this);
         }
     }
 
     public void zOrderBottom()
     {
         if (this.layer != null) {
-            this.layer.zOrderBottom(this);
+            this.layer.addBottom(this);
         }
+    }
+    
+    @Property(label="Z Order")
+    public int getZOrder()
+    {
+        return this.zOrder;
+    }
+    
+    public void setZOrder( int value )
+    {
+        if ( this.zOrder != value ) {
+            this.zOrder = value;
+            if ( this.layer != null ) {
+                this.layer.add(this);
+            }
+        }
+    }
+    void setZOrderAttribute( int value )
+    {
+        this.zOrder = value;
     }
 
     public void tick()
@@ -725,7 +745,7 @@ public class Actor implements PropertySubject<Actor>
 
     public String toString()
     {
-        return "Actor #" + this._id + " @ " + getX() + "," + getY() +
+        return "Actor #" + this.id + " @ " + getX() + "," + getY() +
             " size(" + this.getAppearance().getWidth() + "," + this.getAppearance().getHeight() +
             ") " +
             (getBehaviour() == null ? "" : "(" + getBehaviour().getClassName() + ")");

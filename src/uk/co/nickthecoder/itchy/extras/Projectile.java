@@ -71,7 +71,7 @@ public class Projectile extends Behaviour
         actor.getAppearance().setDirection( source.getAppearance().getDirection());
         actor.moveTo( source );
         actor.setBehaviour(this);
-        source.getLayer().add(actor);
+        source.getLayer().addTop(actor);
         
         return actor;
     }

@@ -1,17 +1,15 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0 which accompanies this
+ * distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
+import java.util.TreeSet;
 
 import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
@@ -24,14 +22,13 @@ public abstract class ActorsLayer extends Layer
      * drawn, and therefore determines the z-order. The first item is draw first, and is therefore
      * bottom-most.
      */
-    protected LinkedList<Actor> actors = new LinkedList<Actor>();
-    protected List<Actor> readOnlyActors = Collections.unmodifiableList(this.actors);
+    protected TreeSet<Actor> actors = new TreeSet<Actor>( new ZOrderComparactor() );
     private MouseListener mouseListener = null;
     private final List<Actor> actorMouseListeners = new ArrayList<Actor>();
 
     public ActorsLayer( String name, Rect position )
     {
-        super(name,position);
+        super(name, position);
     }
 
     public Iterator<Actor> iterator()
@@ -39,9 +36,9 @@ public abstract class ActorsLayer extends Layer
         return this.actors.iterator();
     }
 
-    public List<Actor> getActors()
+    public TreeSet<Actor> getActors()
     {
-        return this.readOnlyActors;
+        return this.actors;
     }
 
     public void add( Actor actor )
@@ -65,32 +62,39 @@ public abstract class ActorsLayer extends Layer
     public void addBottom( Actor actor )
     {
         actor.removeFromLayer();
-        actor.setLayerAttribute(this);
-        this.actors.add(0, actor);
+        if (!this.actors.isEmpty()) {
+            Actor first = this.actors.first();
+            if (first != null) {
+                actor.setZOrderAttribute(first.getZOrder() - 1);
+            }
+        }
+        this.add(actor);
+    }
+
+    public void addTop( Actor actor )
+    {
+        actor.removeFromLayer();
+        if (!this.actors.isEmpty()) {
+            Actor last = this.actors.last();
+            if (last != null) {
+                actor.setZOrderAttribute(last.getZOrder() + 1);
+            }
+        }
+        this.add(actor);
     }
 
     public void addBelow( Actor actor, Actor other )
     {
         actor.removeFromLayer();
-        actor.setLayerAttribute(this);
-        int index = this.actors.indexOf(other);
-        if (index < 0) {
-            this.actors.add(0, other);
-        } else {
-            this.actors.add(index, actor);
-        }
+        actor.setZOrder(other.getZOrder() - 1);
+        this.add(actor);
     }
 
     public void addAbove( Actor actor, Actor other )
     {
         actor.removeFromLayer();
-        actor.setLayerAttribute(this);
-        int index = this.actors.indexOf(other);
-        if (index < 0) {
-            this.actors.add(other);
-        } else {
-            this.actors.add(index + 1, actor);
-        }
+        actor.setZOrder(other.getZOrder() + 1);
+        this.add(actor);
     }
 
     @Override
@@ -102,6 +106,7 @@ public abstract class ActorsLayer extends Layer
         this.actorMouseListeners.clear();
     }
 
+    @Override
     public void deactivateAll()
     {
         for (Actor actor : this.getActors()) {
@@ -111,37 +116,23 @@ public abstract class ActorsLayer extends Layer
 
     public void zOrderUp( Actor actor )
     {
-        int index = this.actors.indexOf(actor);
-        if (index < this.actors.size() - 1) {
-            Actor other = this.actors.get(index + 1);
-            this.actors.set(index, other);
-            this.actors.set(index + 1, actor);
+        Actor higher = this.actors.higher(actor);
+        if (higher != null) {
+            actor.setZOrderAttribute(higher.getZOrder() + 1);
+            this.add(actor);
         }
     }
 
     public void zOrderDown( Actor actor )
     {
-        int index = this.actors.indexOf(actor);
-        if (index > 0) {
-            Actor other = this.actors.get(index - 1);
-            this.actors.set(index, other);
-            this.actors.set(index - 1, actor);
+        Actor lower = this.actors.lower(actor);
+        if (lower != null) {
+            actor.setZOrderAttribute(lower.getZOrder() - 1);
+            this.add(actor);
         }
     }
 
-    public void zOrderTop( Actor actor )
-    {
-        this.actors.remove(actor);
-        this.actors.add(actor);
-    }
-
-    public void zOrderBottom( Actor actor )
-    {
-        this.actors.remove(actor);
-        this.actors.add(0, actor);
-    }
-
-    public void enableMouseListener(Game game)
+    public void enableMouseListener( Game game )
     {
         if (this.mouseListener != null) {
             return;
@@ -204,12 +195,25 @@ public abstract class ActorsLayer extends Layer
         this.addMouseListener(this.mouseListener, game);
     }
 
-    public void disableMouseListener(Game game)
+    public void disableMouseListener( Game game )
     {
         if (this.mouseListener != null) {
-            this.removeMouseListener(this.mouseListener,game);
+            this.removeMouseListener(this.mouseListener, game);
             this.mouseListener = null;
         }
     }
 
+    public class ZOrderComparactor implements Comparator<Actor>
+    {
+        @Override
+        public int compare( Actor a, Actor b )
+        {
+            if (a.getZOrder() == b.getZOrder()) {
+                return a.id - b.id;
+            } else {
+                return a.getZOrder() - b.getZOrder();
+            }
+        }
+
+    }
 }

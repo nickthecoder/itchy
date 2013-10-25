@@ -150,7 +150,7 @@ public class ShadowText extends Projectile
         actor.moveBy(this.offsetX, this.offsetY);
         actor.moveBy(this.shadowOffsetX, this.shadowOffsetY);
         actor.setBehaviour(this);
-        source.getLayer().add(actor);
+        source.getLayer().addTop(actor);
         return actor;
     }
 

@@ -94,7 +94,7 @@ public class Alien extends Bouncy implements Shootable
         Actor bullet = new Actor(DrunkInvaders.game.resources.getCostume("bomb"), "default");
         bullet.moveTo(this.getActor());
         bullet.getAppearance().setDirection(this.getActor().getAppearance().getDirection());
-        DrunkInvaders.game.mainLayer.add(bullet);
+        DrunkInvaders.game.mainLayer.addTop(bullet);
         bullet.moveForward(10);
         bullet.setBehaviour(new Bullet("killable"));
         bullet.activate();

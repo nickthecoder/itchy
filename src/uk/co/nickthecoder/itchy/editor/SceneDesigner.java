@@ -6,6 +6,7 @@
 package uk.co.nickthecoder.itchy.editor;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.Actor;
@@ -200,10 +201,10 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.createToolbox();
 
         Actor toolboxActor = this.toolboxPose.getActor();
-        this.guiLayer.add(toolboxActor);
+        this.guiLayer.addTop(toolboxActor);
 
         Actor toolbarActor = this.toolbarPose.getActor();
-        this.guiLayer.add(toolbarActor);
+        this.guiLayer.addTop(toolbarActor);
 
         // Can be ANY of the scrolling layers, so I picked the first for convenience.
         this.designLayers.getChildren().get(0).addMouseListener(this, this.editor);
@@ -247,7 +248,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         newPose.setOffsetY(margin);
 
         Actor actor = new Actor(newPose);
-        this.glassLayer.add(actor);
+        this.glassLayer.addTop(actor);
         if (actor.getYAxisPointsDown()) {
             actor.moveTo(margin, margin);
         } else {
@@ -597,8 +598,8 @@ public class SceneDesigner implements MouseListener, KeyListener
                         SceneDesigner.this.scene.sceneBehaviour =
                             SceneDesigner.this.scene.createSceneBehaviour(
                                 SceneDesigner.this.editor.resources
-                            );
-                        
+                                );
+
                     } catch (Exception e) {
                         e.printStackTrace();
                         return;
@@ -1067,9 +1068,10 @@ public class SceneDesigner implements MouseListener, KeyListener
 
                     ActorsLayer layer = (ActorsLayer) child;
 
-                    for (Actor actor : fromBottom ?
-                        layer.getActors() :
-                        Reversed.list(layer.getActors())) {
+                    for (Iterator<Actor> i = fromBottom ? layer.getActors().iterator() : layer
+                        .getActors().descendingIterator(); i.hasNext();) {
+
+                        Actor actor = i.next();
 
                         if (actor.hitting(event.x, event.y)) {
                             this.selectActor(actor);
@@ -1082,9 +1084,11 @@ public class SceneDesigner implements MouseListener, KeyListener
 
             } else {
 
-                for (Actor actor : fromBottom ?
-                    this.currentDesignLayer.getActors() :
-                    Reversed.list(this.currentDesignLayer.getActors())) {
+                for (Iterator<Actor> i = fromBottom ? this.currentDesignLayer.getActors()
+                    .iterator() : this.currentDesignLayer
+                    .getActors().descendingIterator(); i.hasNext();) {
+
+                    Actor actor = i.next();
 
                     if (actor.hitting(event.x, event.y)) {
                         this.selectActor(actor);
@@ -1132,7 +1136,13 @@ public class SceneDesigner implements MouseListener, KeyListener
 
             actor.moveTo(event.x, event.y);
             actor.setBehaviour(behaviour);
-            this.currentDesignLayer.add(actor);
+            actor.setZOrder(this.currentCostume.defaultZOrder);
+            // Place on top if no default zOrder defined for the costume.
+            if (actor.getZOrder() == 0) {
+                this.currentDesignLayer.addTop(actor);
+            } else {
+                this.currentDesignLayer.add(actor);
+            }
 
             if (!Itchy.isShiftDown()) {
                 this.setMode(MODE_SELECT);
@@ -1236,7 +1246,7 @@ public class SceneDesigner implements MouseListener, KeyListener
 
         this.stampActor.moveTo(-10000, -10000); // Anywhere off screen
         this.stampActor.getAppearance().setAlpha(128);
-        this.glassLayer.add(this.stampActor);
+        this.glassLayer.addTop(this.stampActor);
     }
 
     private void deleteStampActor()
@@ -1333,7 +1343,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         if (SceneDesigner.copiedActor != null) {
             Actor actor = SceneDesigner.copiedActor.createActor(this.editor.resources, true);
             actor.moveBy(10, 10);
-            this.currentDesignLayer.add(actor);
+            this.currentDesignLayer.addTop(actor);
             this.selectActor(actor);
         }
     }
@@ -1353,7 +1363,7 @@ public class SceneDesigner implements MouseListener, KeyListener
 
             if (otherLayer != null) {
                 this.currentActor.getLayer().remove(this.currentActor);
-                otherLayer.add(this.currentActor);
+                otherLayer.addTop(this.currentActor);
                 updateLayersTable();
             }
         }
@@ -1383,7 +1393,7 @@ public class SceneDesigner implements MouseListener, KeyListener
 
             if (otherLayer != null) {
                 this.currentActor.getLayer().remove(this.currentActor);
-                otherLayer.add(this.currentActor);
+                otherLayer.addTop(this.currentActor);
                 updateLayersTable();
             }
         }
@@ -1454,7 +1464,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.stampActor = new Actor(pose);
 
         this.stampActor.moveTo(-10000, -10000); // Anywhere off screen
-        this.glassLayer.add(this.stampActor);
+        this.glassLayer.addTop(this.stampActor);
 
     }
 
@@ -1473,7 +1483,7 @@ public class SceneDesigner implements MouseListener, KeyListener
 
         this.highlightActor = new Actor(newPose);
         this.highlightActor.moveTo(this.currentActor);
-        this.glassLayer.add(this.highlightActor);
+        this.glassLayer.addTop(this.highlightActor);
         this.highlightActor.setBehaviour(new Follower(this.currentActor));
         this.highlightActor.activate();
 
@@ -1518,7 +1528,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         rotateActor.setBehaviour(this.rotateHandle);
         rotateActor.getAppearance().setAlpha(0);
         rotateActor.activate();
-        this.glassLayer.add(rotateActor);
+        this.glassLayer.addTop(rotateActor);
         this.handles.add(this.rotateHandle);
 
         pose = this.editor.getStylesheet().resources.getPose("scaleHandle");
@@ -1532,7 +1542,7 @@ public class SceneDesigner implements MouseListener, KeyListener
 
                 this.scaleHandles.add(behaviour);
                 this.handles.add(behaviour);
-                this.glassLayer.add(scaleHandle);
+                this.glassLayer.addTop(scaleHandle);
             }
         }
         this.scaleHandles.get(0).opposite = this.scaleHandles.get(3);

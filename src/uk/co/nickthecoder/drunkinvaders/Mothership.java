@@ -110,7 +110,7 @@ public class Mothership extends Alien
             alienBehaviour.vy = this.vy - 1;
         }
 
-        this.getActor().getLayer().add(alien);
+        this.getActor().getLayer().addTop(alien);
         alien.activate();
         alien.event("dropped");
     }

@@ -113,7 +113,7 @@ public class Pause
         Actor actor = new Actor(costume);
         ActorsLayer layer = game.getPopupLayer();
         actor.moveTo(layer.getWorldRectangle().width / 2, layer.getWorldRectangle().height / 2);
-        layer.add(actor);
+        layer.addTop(actor);
 
         return actor;
     }

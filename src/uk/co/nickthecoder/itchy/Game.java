@@ -105,6 +105,13 @@ public class Game implements EventListener, MessageListener
         mainLayer.enableMouseListener(this);
     }
 
+    public void clear()
+    {
+        this.layers.clear();
+        this.popupLayer.clear();
+        this.layers.reset();
+    }
+    
     /**
      * Typically, this is called immediately after you have created your Game object, usually in the
      * "main" method.
@@ -122,8 +129,7 @@ public class Game implements EventListener, MessageListener
         Itchy.startGame(this);
 
         if (!StringUtils.isBlank(sceneName)) {
-            this.layers.clear();
-            this.layers.reset();
+            clear();
             loadScene(sceneName);
         }
 
@@ -653,6 +659,7 @@ public class Game implements EventListener, MessageListener
      */
     public void end()
     {
+        clear();
         Itchy.endGame();
     }
 
@@ -682,7 +689,7 @@ public class Game implements EventListener, MessageListener
         actor.moveTo(Math.max(0, (this.popupLayer.position.width - window.getRequiredWidth()) / 2),
             Math.max(0, (this.popupLayer.position.height - window.getRequiredHeight()) / 2));
 
-        this.popupLayer.add(actor);
+        this.popupLayer.addTop(actor);
 
         if (window.modal) {
             this.setModalListener(window);
@@ -716,7 +723,7 @@ public class Game implements EventListener, MessageListener
 
     public void startEditor()
     {
-        this.layers.clear();
+        clear();
         try {
             Editor editor = new Editor(this);
             editor.start();
@@ -727,7 +734,7 @@ public class Game implements EventListener, MessageListener
 
     public void startEditor( String designSceneName )
     {
-        this.layers.clear();
+        clear();
         try {
             Editor editor = new Editor(this);
             editor.designScene(designSceneName);

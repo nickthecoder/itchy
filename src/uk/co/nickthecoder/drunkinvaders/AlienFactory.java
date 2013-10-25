@@ -84,7 +84,7 @@ public class AlienFactory extends Behaviour
 
         alienActor.moveTo(this.getActor().getX() + this.aliens.size() * this.spacing, this
             .getActor().getY());
-        this.getActor().getLayer().add(alienActor);
+        this.getActor().getLayer().addTop(alienActor);
 
         alienActor.setBehaviour(alienBehaviour);
         alienActor.activate();

@@ -32,7 +32,7 @@ public class Pieces extends Behaviour implements Cloneable
                 Actor actor = new Actor(pose);
                 actor.setBehaviour(createBehaviour());
                 actor.moveTo(getActor());
-                getActor().getLayer().add(actor);
+                getActor().getLayer().addTop(actor);
                 actor.activate();
             }
             getActor().kill();

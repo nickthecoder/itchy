@@ -38,6 +38,8 @@ public class Costume
 
     private CostumeProperties properties = new CostumeProperties();
 
+    public int defaultZOrder;
+    
     public Costume()
     {
         this(null);

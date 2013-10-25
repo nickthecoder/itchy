@@ -1,6 +1,10 @@
 
+Default z-order on costume?
+
 What's Next
 ===========
+
+Reload button for scripts
 
 Create a game from scratch, deliberately making syntax errors in the code.
     Fix any bugs and improve the UI along the way. 
@@ -29,8 +33,6 @@ On Remove, there is no check that the resource isn't being used by something els
 Renaming a costume will cause scenes that use it to fail.
 
 Costumes are updated even when cancel is pressed (need to COPY the costume?)
-
-CostumeProperties
     CostumesEditor needs to copy the costume so that cancel works.
 
 Later

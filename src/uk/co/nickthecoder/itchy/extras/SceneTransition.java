@@ -165,12 +165,12 @@ public class SceneTransition
     }
 
     /**
-     * Immediately kills the actors on all of the layers. You can override this method if you need
-     * to keep some of the actors alive.
+     * Calls Game.clear to immediately kill the actors on all of the layers.
+     * You can override this method if you need to keep some of the actors alive.
      */
     protected void clear()
     {
-        Itchy.getGame().getLayers().clear();
+        Itchy.getGame().clear();
     }
 
     /**
@@ -181,7 +181,7 @@ public class SceneTransition
     protected void begin()
     {
         this.actor.moveTo(0, 0);
-        Itchy.getGame().getPopupLayer().add(this.actor);
+        Itchy.getGame().getPopupLayer().addTop(this.actor);
         this.animation.addAnimationListener(new AnimationListener() {
             @Override
             public void finished()

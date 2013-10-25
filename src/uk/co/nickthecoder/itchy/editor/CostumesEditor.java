@@ -46,6 +46,7 @@ import uk.co.nickthecoder.itchy.gui.VerticalLayout;
 import uk.co.nickthecoder.itchy.gui.Window;
 import uk.co.nickthecoder.itchy.util.AbstractProperty;
 import uk.co.nickthecoder.itchy.util.ClassName;
+import uk.co.nickthecoder.itchy.util.IntegerProperty;
 import uk.co.nickthecoder.jame.Surface;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 
@@ -337,6 +338,17 @@ public class CostumesEditor extends SubEditor
                 e.printStackTrace();
             }
 
+        }
+
+        // Add the default z order component.
+        try {
+            IntegerProperty<Costume> property = new IntegerProperty<Costume>("Default Z Order",
+                "defaultZOrder");
+            Component component = property.createComponent(this.currentCostumeResource.costume,
+                true);
+            grid.addRow(property.label, component);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

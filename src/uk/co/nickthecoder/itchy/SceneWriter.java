@@ -138,6 +138,7 @@ public class SceneWriter extends XMLWriter
         this.attribute("y", sceneActor.y);
         this.attribute("direction", sceneActor.direction);
         this.attribute("startEvent", sceneActor.startEvent);
+        this.attribute("zOrder", sceneActor.zOrder);
 
         if (sceneActor.alpha != 255) {
             this.attribute("alpha", sceneActor.alpha);
