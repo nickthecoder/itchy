@@ -74,7 +74,7 @@
         <jar jarfile="docs/itchy-win32.zip">
             <fileset dir=".">
                 <include name="lib/*.jar"/>
-                <include name="launch.bat"/>
+                <include name="launch.vbs"/>
                 <include name="lib/native/win32/*.dll"/>
                 <include name="resources/**/*.xml"/>
                 <include name="resources/**/*.js"/>
@@ -106,6 +106,8 @@
 
         <jar jarfile="docs/itchy-src.zip">
             <fileset dir=".">
+                <include name="launch.vbs"/>
+                <include name="launch"/>
                 <include name="src/**/*.java"/>
                 <include name="*.txt"/>
                 <include name="docs/**/*.ucls"/>
