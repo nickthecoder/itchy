@@ -125,7 +125,6 @@ public abstract class Behaviour implements MessageListener, Cloneable, PropertyS
         Actor oldActor = this.actor;
 
         this.actor = actor;
-        this.actor.addTag(this.getClass().getName()); // TODO Remove this.
 
         if (oldActor == null) {
             this.init();
@@ -142,7 +141,6 @@ public abstract class Behaviour implements MessageListener, Cloneable, PropertyS
 
     public void detatch()
     {
-        this.getActor().removeTag(this.getClass().getName()); // TODO Remove this
         onDetach();
 
         Tag tags = this.getClass().getAnnotation(Tag.class);
@@ -162,32 +160,6 @@ public abstract class Behaviour implements MessageListener, Cloneable, PropertyS
     {
         this.collisionStrategy.remove();
         this.collisionStrategy = BruteForceCollisionStrategy.singleton;
-    }
-
-    /**
-     * Returns all Actors with a given type of Behaviour which are touching this Behaviour's Actor.
-     * 
-     * @param klass
-     *        The type of Behaviour to match. If you want to test for base classes or interfaces,
-     *        then you must manually add appropriate tags in the Behaviour's onAttach method. e.g. :
-     * 
-     *        <pre>
-     * public void onAttach()
-     * {
-     *     this.actor.addTag(MyBaseClass.class.getName());
-     * }
-     * 
-     * public void onDetatch()
-     * {
-     *     this.actor.removeTag(MyBaseClass.class.getName());
-     * }
-     * </pre>
-     * @return The set of all touching Actors with matching behaviours.
-     */
-    // TODO Remove this
-    public Set<Actor> pixelOverlap( Class<Behaviour> klass )
-    {
-        return pixelOverlap(klass.getName());
     }
 
     public Set<Actor> pixelOverlap( String tag )

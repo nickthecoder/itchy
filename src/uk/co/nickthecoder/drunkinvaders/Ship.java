@@ -267,7 +267,7 @@ public class Ship extends Bouncy implements Shootable
 
         new Explosion(this.getActor())
             .projectiles(40)
-            .distance(0, 10)
+            .offsets(-10, 10, -10, 10)
             .speed(1, 3)
             .fade(1.5)
             .createActor("pixel").activate();

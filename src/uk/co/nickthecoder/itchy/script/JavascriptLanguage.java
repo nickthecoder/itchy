@@ -87,17 +87,17 @@ public class JavascriptLanguage extends ScriptLanguage
 
     public void handleException( ScriptException e )
     {
-        this.manager.scriptErrorLog.log(e.getMessage());
+        this.manager.resources.errorLog.log(e.getMessage());
     }
 
     public void handleException( String activity, ScriptException e )
     {
-        this.manager.scriptErrorLog.log(activity + " : " + e.getMessage());
+        this.manager.resources.errorLog.log(activity + " : " + e.getMessage());
     }
 
     public void log( String message )
     {
-        this.manager.scriptErrorLog.log(message);
+        this.manager.resources.errorLog.log(message);
     }
 
     public boolean eventResult( Object result )

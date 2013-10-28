@@ -13,6 +13,10 @@ import uk.co.nickthecoder.itchy.Pose;
 public class Follower extends Behaviour
 {
     public Actor following;
+    
+    private Pose pose;
+    
+    private Costume costume;
 
     private double dx = 0;
 
@@ -21,6 +25,8 @@ public class Follower extends Behaviour
     private double distance = 0;
 
     private boolean rotate = false;
+    
+    private int zOrder;
 
     public Follower( Behaviour following )
     {
@@ -30,8 +36,28 @@ public class Follower extends Behaviour
     public Follower( Actor following )
     {
         this.following = following;
+        this.costume = following.getCostume();
+        this.zOrder = following.getZOrder();
     }
 
+    public Follower pose( Pose pose )
+    {
+        this.pose = pose;
+        return this;
+    }
+    
+    public Follower poseName( String poseName )
+    {
+        this.pose = following.getCostume().getPose( poseName );
+        return this;
+    }
+    
+    public Follower costume( Costume costume )
+    {
+        this.costume = costume;
+        return this;
+    }
+    
     public Follower distance( double distance )
     {
         this.distance = distance;
@@ -45,12 +71,24 @@ public class Follower extends Behaviour
         return this;
     }
     
-   public Follower rotate()
-   {
+    public Follower rotate()
+    {
        this.rotate = true;
        return this;
-   }
+    }
 
+    public Follower zOrder( int zOrder )
+    {
+        this.zOrder = zOrder;
+        return this;
+    }
+    
+    public Follower adjustZOrder( int delta )
+    {
+        this.zOrder += delta;
+        return this;
+    }
+    
     @Override
     public void tick()
     {
@@ -68,38 +106,17 @@ public class Follower extends Behaviour
         }
     }
 
-    // TODO Add the layer stuff 
-    public Actor createActor( boolean below )
+    public Actor createActor()
     {
-        return createActor(this.following.getCostume(), below);
-    }
-
-    // TODO Add the layer stuff 
-    public Actor createActor( Costume costume, boolean below )
-    {
-        return createdActor( new Actor(costume), below );
-    }
-
-    // TODO Add the layer stuff 
-    public Actor createActor( Pose pose, boolean below )
-    {
-        return createdActor( new Actor(pose), below );
-    }
-
-    public Actor createActor( String poseName, boolean below )
-    {
-        return createdActor( new Actor(this.following.getCostume(), poseName), below );
-    }
-    
-    private Actor createdActor( Actor actor, boolean below )
-    {
-        actor.setBehaviour(this);
-
-        if ( below ) {
-            this.following.getLayer().addBelow(actor, this.following);
-        } else {
-            this.following.getLayer().addAbove(actor, this.following);
+        Actor actor = new Actor(costume);
+        if (this.pose != null) {
+            actor.getAppearance().setDirection(pose.getDirection());
+            actor.getAppearance().setPose(pose);
         }
+
+        actor.setBehaviour(this);
+        actor.setZOrder( this.zOrder );
+        this.following.getLayer().add(actor);
         
         follow();
         return actor;

@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.prefs.Preferences;
 
 import uk.co.nickthecoder.itchy.editor.Editor;
-import uk.co.nickthecoder.itchy.extras.Pause;
 import uk.co.nickthecoder.itchy.gui.GuiPose;
 import uk.co.nickthecoder.itchy.gui.Stylesheet;
 import uk.co.nickthecoder.itchy.util.AutoFlushPreferences;
@@ -94,7 +93,6 @@ public class Game implements EventListener, MessageListener
     {
     }
 
-    // TODO Is this good?
     protected void createLayers()
     {
         Rect screenRect = new Rect(0, 0, getWidth(), getHeight());

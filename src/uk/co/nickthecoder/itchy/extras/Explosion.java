@@ -89,9 +89,13 @@ public class Explosion extends Behaviour
 
     public double randomSpeed = 0;
 
-    public double distance = 0;
+    public double offsetForwards = 0;
 
-    public double randomDistance = 0;
+    public double offsetSidewards = 0;
+
+    public double randomOffsetForwards = 0;
+
+    public double randomOffsetSidewards = 0;
 
     public double fade = 0;
 
@@ -137,6 +141,7 @@ public class Explosion extends Behaviour
         return this.createActor("");
     }
 
+    //TODO make this like Follower and Projectile - createActor should take no arguments
     /**
      * Creates the explosion actor using a pose from the costume of the actor given in the
      * constructor. This allows the exploding projectiles to look different from the actor that
@@ -160,6 +165,8 @@ public class Explosion extends Behaviour
         } else {
             result = new Actor(this.source.getCostume());
         }
+        result.getAppearance().setPose(this.source.getAppearance().getPose());
+        
         this.poseName = poseName;
 
         result.moveTo(this.source);
@@ -327,21 +334,18 @@ public class Explosion extends Behaviour
 
     /**
      * @param value
-     *        How far forward or backwards to move the centre of the explosion from the exploding
-     *        actor. Useful if you want the explosion to happen at the front (or back) of the actor.
+     *        How far forwards/backwards and sidewards to move the centre of the explosion from the
+     *        exploding actor. Useful if you want the explosion to happen at the front (or back) of
+     *        the actor.
      * @return this
      */
-    public Explosion distance( double value )
+    public Explosion offsets( double forwards, double sidewards )
     {
-        return this.distance(value, value);
+        return this.offsets(forwards, forwards, sidewards, sidewards);
     }
 
-    // TODO Need sideways offset as well as forwards, so that the explosion can appear from any part
-    // of the actor. This probably means that "distance" should be renamed.
-    // Maybe use offset( x, y ) and offset( minX, maxX, minY, maxY )
-
     /**
-     * Randomly pick the distance forwards or backwards of where each Projectile starts.
+     * Randomly pick the distance forwards/backwards and sidewards of where each Projectile starts.
      * 
      * @param from
      *        The minimum amount forwards.
@@ -349,10 +353,14 @@ public class Explosion extends Behaviour
      *        The maximum amount forwards.
      * @return this
      */
-    public Explosion distance( double from, double to )
+    public Explosion offsets( double xFrom, double xTo, double yFrom, double yTo )
     {
-        this.distance = from;
-        this.randomDistance = to - from;
+        this.offsetForwards = xFrom;
+        this.randomOffsetForwards = xTo - xFrom;
+
+        this.offsetSidewards = yFrom;
+        this.randomOffsetSidewards = yTo - yFrom;
+
         return this;
     }
 
@@ -598,7 +606,7 @@ public class Explosion extends Behaviour
 
             Actor actor = new Actor(pose);
             Appearance appearance = actor.getAppearance();
-            Projectile behaviour = new Projectile();
+            Projectile behaviour = new Projectile(this.getActor());
 
             double direction = this.direction + random.nextDouble() * this.randomDirection;
             if (this.rotate) {
@@ -609,7 +617,9 @@ public class Explosion extends Behaviour
 
             actor.moveTo(this.getActor());
             // TODO if rotate is false, this doesn't work???
-            actor.moveForward(this.distance + random.nextDouble() * this.randomDistance);
+            actor.moveForward(
+                this.offsetForwards + random.nextDouble() * this.randomOffsetForwards,
+                this.offsetSidewards + random.nextDouble() * this.randomOffsetSidewards);
 
             behaviour.growFactor = this.grow + random.nextDouble() * this.randomGrow;
             behaviour.life = this.life + (int) (random.nextDouble() * this.randomLife);

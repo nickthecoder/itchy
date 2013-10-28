@@ -82,7 +82,6 @@ public class ScriptedSceneBehaviour implements SceneBehaviour, ScriptedObject
         }
     }
 
-    // TODO Need this? @Override
     public ClassName getClassName()
     {
         return this.className;

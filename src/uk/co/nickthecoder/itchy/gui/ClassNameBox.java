@@ -118,7 +118,7 @@ public class ClassNameBox extends Container
             try {
                 this.scriptManager.loadScript( getClassName().name );
             } catch (ScriptException e) {
-                this.scriptManager.scriptErrorLog.log( e.getMessage() );
+                this.scriptManager.resources.errorLog.log( e.getMessage() );
                 this.comboBox.addStyle("error");
                 ScriptLanguage language = this.scriptManager.getLanguage( getClassName() );
                 this.errorText.setText( language.simpleMessage(e, false));

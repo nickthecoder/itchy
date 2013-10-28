@@ -11,11 +11,13 @@ import java.util.List;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.NullSceneBehaviour;
 import uk.co.nickthecoder.itchy.Scene;
+import uk.co.nickthecoder.itchy.SceneBehaviour;
 import uk.co.nickthecoder.itchy.SceneResource;
 import uk.co.nickthecoder.itchy.gui.AbstractTableListener;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Button;
 import uk.co.nickthecoder.itchy.gui.CheckBox;
+import uk.co.nickthecoder.itchy.gui.ClassNameBox;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.Container;
 import uk.co.nickthecoder.itchy.gui.GridLayout;
@@ -121,7 +123,7 @@ public class ScenesEditor extends SubEditor
         this.table.setTableModel(this.createTableModel());
     }
 
-    private ComboBox sceneBehaviourName;
+    private ClassNameBox sceneBehaviourName;
 
     @Override
     protected void edit( GridLayout grid, Object resource )
@@ -144,16 +146,18 @@ public class ScenesEditor extends SubEditor
         }
 
         // TODO Replace with a special component for ClassNames
-        this.sceneBehaviourName = new ComboBox(behaviourName.name,
-            this.editor.game.resources.getSceneBehaviourClassNames());
+        // this.sceneBehaviourName = new ComboBox(behaviourName.name,
+        // this.editor.game.resources.getSceneBehaviourClassNames());
+        this.sceneBehaviourName = new ClassNameBox(
+            this.editor.resources.scriptManager, behaviourName, SceneBehaviour.class);
 
         this.sceneBehaviourName.addChangeListener(new ComponentChangeListener() {
 
             @Override
             public void changed()
             {
-                ComboBox box = ScenesEditor.this.sceneBehaviourName;
-                String value = box.getText();
+                ClassNameBox box = ScenesEditor.this.sceneBehaviourName;
+                String value = box.getClassName().name;
                 boolean ok = ScenesEditor.this.editor.game.resources
                     .registerSceneBehaviourClassName(value);
                 box.addStyle("error", !ok);
@@ -178,12 +182,12 @@ public class ScenesEditor extends SubEditor
         }
         this.currentSceneResource.rename(this.txtName.getText());
 
-        ClassName className = new ClassName(this.sceneBehaviourName.getText());
+        ClassName className = this.sceneBehaviourName.getClassName();
         if (!getResources().registerSceneBehaviourClassName(className.name)) {
             this.setMessage("Invalid Scene Behaviour");
             return;
         }
-        
+
         if (this.adding) {
             try {
                 this.currentSceneResource.save();
@@ -205,7 +209,7 @@ public class ScenesEditor extends SubEditor
             this.currentSceneResource.getScene().showMouse = this.checkBoxShowMouse.getValue();
             this.currentSceneResource.getScene().sceneBehaviourName = className;
             this.currentSceneResource.getScene().sceneBehaviourName =
-                new ClassName(this.sceneBehaviourName.getText());
+                this.sceneBehaviourName.getClassName();
 
             this.currentSceneResource.save();
         } catch (Exception e) {

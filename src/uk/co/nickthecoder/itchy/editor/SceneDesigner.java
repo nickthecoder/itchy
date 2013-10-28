@@ -1412,12 +1412,7 @@ public class SceneDesigner implements MouseListener, KeyListener
     {
         Scene scene = new Scene();
 
-        try {
-            // TODO Change to this.scene and remove try ???
-            scene.sceneBehaviourName = this.sceneResource.getScene().sceneBehaviourName;
-        } catch (Exception e) {
-            // Do nothing
-        }
+        scene.sceneBehaviourName = this.scene.sceneBehaviourName;
         scene.sceneBehaviour = this.scene.sceneBehaviour;
 
         for (Layer child : this.designLayers.getChildren()) {

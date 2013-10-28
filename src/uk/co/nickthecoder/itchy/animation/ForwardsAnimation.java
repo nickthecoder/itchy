@@ -21,20 +21,19 @@ public class ForwardsAnimation extends NumericAnimation
     @Property(label="Forwards")
     public double forwards;
 
-    // TODO Change to sidewards
-    @Property(label="Sideways")
-    public double sideways;
+    @Property(label="Sidewards", aliases={"sideways"})
+    public double sidewards;
     
     public ForwardsAnimation()
     {
         this(200, NumericAnimation.linear, 0, 0);
     }
 
-    public ForwardsAnimation( int ticks, Ease ease, double forwards, double sideways )
+    public ForwardsAnimation( int ticks, Ease ease, double forwards, double sidewards )
     {
         super(ticks, ease);
         this.forwards = forwards;
-        this.sideways = sideways;
+        this.sidewards = sidewards;
     }
 
     @Override
@@ -52,7 +51,7 @@ public class ForwardsAnimation extends NumericAnimation
     @Override
     public void tick( Actor actor, double amount, double delta )
     {
-        actor.moveForward(this.forwards * delta, this.sideways * delta);
+        actor.moveForward(this.forwards * delta, this.sidewards * delta);
     }
 
 }

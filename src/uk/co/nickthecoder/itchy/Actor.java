@@ -737,6 +737,11 @@ public class Actor implements PropertySubject<Actor>
     {
         this.zOrder = value;
     }
+    
+    public void adjustZOrder( int delta )
+    {
+        setZOrder( this.zOrder + delta );
+    }
 
     public void tick()
     {

@@ -163,7 +163,7 @@ public class ScrollableLayer extends ActorsLayer
 
                         } else {
 
-                            if (alpha > 0 /* totally transparent */) { //TODO Duplicate test?
+                            if (alpha > 0 /* totally transparent */) {
 
                                 // Semi-transparent
                                 // Create a temp surface, and blit the current

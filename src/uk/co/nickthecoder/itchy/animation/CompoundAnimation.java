@@ -29,8 +29,7 @@ public class CompoundAnimation extends AbstractAnimation
     @Property(label="Loops")
     public int loops;
 
-    // TODO Can this be private?
-    public SequenceOrParallel sop;
+    private SequenceOrParallel sop;
 
     private int loopsRemaining;
 

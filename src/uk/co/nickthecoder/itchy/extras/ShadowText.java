@@ -7,33 +7,27 @@ package uk.co.nickthecoder.itchy.extras;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Font;
+import uk.co.nickthecoder.itchy.ImagePose;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.TextPose;
 import uk.co.nickthecoder.jame.RGBA;
 
-//TODO Weird - shouldn't this inherit from Follower, or nothing?
-public class ShadowText extends Projectile
+public class ShadowText
 {
-    public static final RGBA WHITE = new RGBA(255, 255, 255, 255);
-    public static final RGBA BLACK = new RGBA(0, 0, 0, 255);
-
     public String text;
 
     public Font font;
 
     public int fontSize;
 
-    public RGBA color = WHITE;
+    public RGBA color = RGBA.WHITE;
 
-    public RGBA shadow = BLACK;
+    public RGBA shadow = RGBA.BLACK;
 
     public int shadowOffsetX = 4;
 
     public int shadowOffsetY = 4;
 
-    public int offsetX = 0;
-
-    public int offsetY = 0;
 
     public ShadowText text( String text )
     {
@@ -78,64 +72,7 @@ public class ShadowText extends Projectile
         return this;
     }
 
-    public ShadowText offset( int dx, int dy )
-    {
-        this.offsetX = dx;
-        this.offsetY = dy;
-        return this;
-    }
-
-    @Override
-    public ShadowText speed( double value )
-    {
-        super.speed(value);
-        return this;
-    }
-
-    @Override
-    public ShadowText vx( double value )
-    {
-        super.vx(value);
-        return this;
-    }
-
-    @Override
-    public ShadowText vy( double value )
-    {
-        super.vy(value);
-        return this;
-    }
-
-    @Override
-    public ShadowText gravity( double value )
-    {
-        super.gravity(value);
-        return this;
-    }
-
-    @Override
-    public ShadowText spin( double value )
-    {
-        super.spin(value);
-        return this;
-    }
-
-    @Override
-    public ShadowText fade( double value )
-    {
-        super.fade(value);
-        return this;
-    }
-
-    @Override
-    public ShadowText growFactor( double value )
-    {
-        super.growFactor(value);
-        return this;
-    }
-
-    
-    public Actor createActor( Actor source )
+    public ImagePose createPose()
     {
         if (this.font == null) {
             this.font = Itchy.getResources().getDefaultFont();
@@ -143,15 +80,23 @@ public class ShadowText extends Projectile
         TextPose text = new TextPose(this.text, this.font, this.fontSize, this.color);
         TextPose shadow = new TextPose(this.text, this.font, this.fontSize, this.shadow);
 
-        Actor actor = new Actor(shadow);
-        actor.getAppearance().superimpose(text, -this.shadowOffsetX, -this.shadowOffsetY);
+        ImagePose pose = ImagePose.superimpose( shadow, text, -this.shadowOffsetX, -this.shadowOffsetY);
 
-        actor.moveTo(source);
-        actor.moveBy(this.offsetX, this.offsetY);
-        actor.moveBy(this.shadowOffsetX, this.shadowOffsetY);
-        actor.setBehaviour(this);
-        source.getLayer().addTop(actor);
-        return actor;
+        return pose;
+    }
+    
+    public Follower follow( Actor source )
+    {
+        Follower result = new Follower( source );
+        result.pose( createPose() );
+        return result;
+    }
+    
+    public Projectile projectile( Actor source )
+    {
+        Projectile projectile = new Projectile( source );
+        projectile.pose( createPose() );
+        return projectile;
     }
 
 }

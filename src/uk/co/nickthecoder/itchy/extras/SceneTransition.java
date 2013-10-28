@@ -212,8 +212,6 @@ public class SceneTransition
         takeSnapshot();
         clear();
 
-        // TODO Allow the scene to delay activating the actors till the animation has finished
-        // or another arbitrary delay.
         Itchy.getGame().loadScene(sceneName);
         if (this.pause) {
             Itchy.getGame().pause.pause(false);

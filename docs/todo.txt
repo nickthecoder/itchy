@@ -1,9 +1,6 @@
 What's Next
 ===========
 
-How about a Scripts tab
-    List all scripts double click to edit.
-    Show errors / Clear errors
 
 Create a game from scratch, deliberately making syntax errors in the code.
     Fix any bugs and improve the UI along the way. 
@@ -12,6 +9,9 @@ Catch all ScriptExceptions
     Report them to ScriptErrorLog, which will also write to stderr (not as a stack trace)
     An icon on the popup Layer shows when a new error has occurred. Click to open the log viewer.
         "Clear" button will remove the icon from the popup layer. 
+How about a Scripts tab
+    List all scripts double click to edit.
+    Show errors / Clear errors
 
 Check that a broken script doesn't cause problems :
     Costume Properties

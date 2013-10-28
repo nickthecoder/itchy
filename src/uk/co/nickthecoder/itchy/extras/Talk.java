@@ -161,7 +161,8 @@ public class Talk extends Follower
 
             pose = bpd.createPose(pose);
         }
-
-        return super.createActor(pose, false);
+        this.pose( pose );
+        
+        return super.createActor();
     }
 }

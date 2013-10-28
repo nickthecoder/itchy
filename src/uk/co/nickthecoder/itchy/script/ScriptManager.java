@@ -34,8 +34,6 @@ public class ScriptManager
 {
     public Resources resources;
     
-    public ScriptErrorLog scriptErrorLog;
-
     private static HashMap<String, Class<ScriptLanguage>> languageClassMap = new HashMap<String, Class<ScriptLanguage>>();
 
     private HashMap<String, ScriptLanguage> languages = new HashMap<String, ScriptLanguage>();
@@ -44,7 +42,6 @@ public class ScriptManager
     public ScriptManager( Resources resources )
     {
         this.resources = resources;
-        this.scriptErrorLog = new ScriptErrorLog();
 
         registerLanguage("js",
             (Class<ScriptLanguage>) (JavascriptLanguage.class.asSubclass(ScriptLanguage.class)));

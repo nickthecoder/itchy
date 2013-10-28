@@ -68,11 +68,15 @@ public class Resources extends Loadable
 
     private TreeSet<String> gameClassNames;
 
+    public ErrorLog errorLog;
+
     public Resources()
     {
         super();
 
         this.gameInfo = new GameInfo();
+        this.errorLog = new ErrorLog();
+
         this.scriptManager = new ScriptManager(this);
 
         this.sounds = new HashMap<String, SoundResource>();

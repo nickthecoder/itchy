@@ -1,17 +1,23 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0 which accompanies this
+ * distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.extras;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Behaviour;
+import uk.co.nickthecoder.itchy.Costume;
+import uk.co.nickthecoder.itchy.Pose;
 
 public class Projectile extends Behaviour
 {
+    public Actor source;
+
+    private Pose pose;
+    
+    private Costume costume;
+
     public double gravity;
 
     public double vx;
@@ -28,54 +34,109 @@ public class Projectile extends Behaviour
 
     public int life = 1000;
     
+    private int zOrder;
+
+    public Projectile( Behaviour source )
+    {
+        this(source.getActor());
+    }
+
+    public Projectile( Actor source )
+    {
+        this.costume = source.getCostume();
+        this.source = source;
+        this.zOrder = source.getZOrder();
+    }
+
+    public Projectile pose( Pose pose )
+    {
+        this.pose = pose;
+        return this;
+    }
+    
+    public Projectile poseName( String poseName )
+    {
+        this.pose = source.getCostume().getPose( poseName );
+        return this;
+    }
+    
+    public Projectile costume( Costume costume )
+    {
+        this.costume = costume;
+        return this;
+    }
     
     public Projectile speed( double value )
     {
         this.speed = value;
         return this;
     }
+
     public Projectile vx( double value )
     {
         this.vx = value;
         return this;
     }
+
     public Projectile vy( double value )
     {
         this.vy = value;
         return this;
     }
+
     public Projectile gravity( double value )
     {
         this.gravity = value;
         return this;
     }
+
     public Projectile spin( double value )
     {
         this.spin = value;
         return this;
     }
+
     public Projectile fade( double value )
     {
         this.fade = value;
         return this;
     }
+
     public Projectile growFactor( double value )
     {
         this.growFactor = value;
         return this;
     }
 
-    public Actor createActor( Actor source, String poseName )
+    public Projectile zOrder( int zOrder )
     {
-        Actor actor = new Actor( source.getCostume().getPose( poseName ) );
-        actor.getAppearance().setDirection( source.getAppearance().getDirection());
-        actor.moveTo( source );
-        actor.setBehaviour(this);
-        source.getLayer().addTop(actor);
-        
-        return actor;
+        this.zOrder = zOrder;
+        return this;
     }
     
+    public Projectile adjustZOrder( int delta )
+    {
+        this.zOrder += delta;
+        return this;
+    }
+    
+    public Actor createActor()
+    {
+        Actor actor = new Actor(this.costume);
+        if ( this.pose != null ) {
+            actor.getAppearance().setPose(this.pose);
+        }
+        // TODO Do we always want the projectile to be pointing the same way as the source?
+        actor.getAppearance().setDirection(this.source.getAppearance().getDirection());
+        actor.moveTo(this.source);
+        actor.setBehaviour(this);
+
+        actor.setZOrder(this.zOrder);
+        this.source.getLayer().add(actor);
+
+        return actor;
+    }
+
     @Override
     public void tick()
     {
