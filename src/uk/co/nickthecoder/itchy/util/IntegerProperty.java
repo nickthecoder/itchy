@@ -23,9 +23,9 @@ public class IntegerProperty<S> extends AbstractProperty<S, Integer>
 
     @Override
     public Component createComponent( final S subject, boolean autoUpdate,
-        final ComponentChangeListener listener ) throws Exception
+        final ComponentChangeListener listener )
     {
-        final IntegerBox box = new IntegerBox(this.getValue(subject));
+        final IntegerBox box = new IntegerBox(this.getSafeValue(subject));
         if (autoUpdate) {
 
             box.addChangeListener(new ComponentChangeListener() {
@@ -65,6 +65,12 @@ public class IntegerProperty<S> extends AbstractProperty<S, Integer>
             return Integer.parseInt(value.toString());
         }
 
+    }
+
+    @Override
+    public Integer getDefaultValue()
+    {
+        return 0;
     }
 
     @Override

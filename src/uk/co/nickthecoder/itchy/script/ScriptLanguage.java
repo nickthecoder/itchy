@@ -156,6 +156,11 @@ public abstract class ScriptLanguage
         this.lastLoadedMap.put(file, new Date().getTime());
     }
 
+    public String simpleMessage( ScriptException e, boolean includeFilename )
+    {
+        return e.getMessage();
+    }
+    
     public abstract Object getProperty( Object inst, String name )
         throws ScriptException;
 

@@ -101,6 +101,7 @@
                 <include name="resources/**/*.ttf"/>
                 <include name="resources/**/*.ogg"/>
                 <include name="resources/**/*.itchy"/>
+                <include name="resources/**/*.desktop"/>
             </fileset>
         </tar>
 
@@ -121,6 +122,7 @@
                 <include name="resources/**/*.ttf"/>
                 <include name="resources/**/*.ogg"/>
                 <include name="resources/**/*.itchy"/>
+                <include name="resources/**/*.desktop"/>
             </fileset>
         </jar>
 

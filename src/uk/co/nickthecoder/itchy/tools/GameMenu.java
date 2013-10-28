@@ -7,6 +7,7 @@ package uk.co.nickthecoder.itchy.tools;
 
 import java.io.File;
 
+import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.editor.Editor;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
@@ -41,7 +42,7 @@ public class GameMenu
         Container menuScroll = new VerticalScroll(menu);
         result.addChild(menuScroll);
 
-        File directory = new File("resources");
+        File directory = new File(Itchy.getBaseDirectory(), "resources");
 
         for (File dir : directory.listFiles()) {
             if (dir.isDirectory()) {

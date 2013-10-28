@@ -10,6 +10,8 @@ import java.io.File;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.script.ScriptException;
+
 import uk.co.nickthecoder.itchy.Behaviour;
 import uk.co.nickthecoder.itchy.CostumeProperties;
 import uk.co.nickthecoder.itchy.Game;
@@ -17,6 +19,7 @@ import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.SceneBehaviour;
 import uk.co.nickthecoder.itchy.editor.ComboBox;
+import uk.co.nickthecoder.itchy.script.ScriptLanguage;
 import uk.co.nickthecoder.itchy.script.ScriptManager;
 import uk.co.nickthecoder.itchy.util.ClassName;
 
@@ -29,7 +32,11 @@ public class ClassNameBox extends Container
 
     private Button editButton;
 
+    private Button reloadButton;
+    
     private Label editButtonLabel;
+    
+    private Label errorText;
 
     private ClassName value;
 
@@ -40,7 +47,8 @@ public class ClassNameBox extends Container
         super();
 
         this.type = "className";
-
+        this.setLayout(new VerticalLayout());
+        
         this.scriptManager = scriptManager;
         this.value = new ClassName(className.name);
         this.baseClass = baseClass;
@@ -52,10 +60,18 @@ public class ClassNameBox extends Container
         this.editButtonLabel = new Label("Edit");
         this.editButton = new Button(this.editButtonLabel);
 
+        this.reloadButton = new Button("Reload");
+        
         this.addChild(this.comboBox);
         //this.addChild(this.editButton);
         this.comboBox.addChild(this.editButton);
-
+        this.comboBox.addChild(this.reloadButton);
+        
+        this.errorText = new Label("");
+        this.addChild(this.errorText);
+        this.errorText.addStyle("error");
+        this.errorText.setVisible(false);
+        
         this.comboBox.addChangeListener(new ComponentChangeListener() {
 
             @Override
@@ -67,13 +83,19 @@ public class ClassNameBox extends Container
         });
 
         this.editButton.addActionListener(new ActionListener() {
-
             @Override
             public void action()
             {
                 edit();
             }
-
+        });
+        
+        this.reloadButton.addActionListener(new ActionListener() {
+            @Override
+            public void action()
+            {
+                reload();
+            }
         });
 
         update();
@@ -81,13 +103,36 @@ public class ClassNameBox extends Container
 
     private void update()
     {
+        this.comboBox.removeStyle("error");
+        this.errorText.setVisible(false);
+        
         this.value.name = this.comboBox.getText();
-        this.editButtonLabel.setText(
-            this.scriptManager.isValidScript(this.value) ? "Edit" : "Create");
+        boolean isValidScript = this.scriptManager.isValidScript(this.value);
+        this.editButtonLabel.setText(isValidScript ? "Edit" : "Create");
 
         this.editButton.setVisible(this.value.isScript());
-    }
+        this.reloadButton.setVisible(isValidScript);
 
+        if (isValidScript) {
+
+            try {
+                this.scriptManager.loadScript( getClassName().name );
+            } catch (ScriptException e) {
+                this.scriptManager.scriptErrorLog.log( e.getMessage() );
+                this.comboBox.addStyle("error");
+                ScriptLanguage language = this.scriptManager.getLanguage( getClassName() );
+                this.errorText.setText( language.simpleMessage(e, false));
+                this.errorText.setVisible(true);
+            }
+        
+        }
+    }
+    
+    private void reload()
+    {
+        fireChangeEvent();
+    }
+    
     public Set<String> getKnownNames( Resources resources )
     {
         if (this.baseClass == Behaviour.class) {
@@ -118,7 +163,7 @@ public class ClassNameBox extends Container
         }
     }
 
-    public void edit()
+    protected void edit()
     {
 
         if (!this.scriptManager.isValidScript(this.value)) {
@@ -139,6 +184,7 @@ public class ClassNameBox extends Container
         }
     }
 
+    
     public ClassName getClassName()
     {
         return this.value;
@@ -152,6 +198,11 @@ public class ClassNameBox extends Container
     public void removeChangeListener( ComponentChangeListener ccl )
     {
         this.comboBox.removeChangeListener(ccl);
+    }
+    
+    public void fireChangeEvent()
+    {
+        this.comboBox.fireChangeEvent();
     }
 
 }

@@ -26,15 +26,21 @@ public class FontProperty<S> extends AbstractProperty<S, Font>
     }
 
     @Override
+    public Font getDefaultValue()
+    {
+        return null;
+    }
+
+    @Override
     public Component createComponent(
         final S subject,
         final boolean autoUpdate,
         final ComponentChangeListener listener
-        ) throws Exception
+        )
     {
         Resources resources = Itchy.getGame().resources;
 
-        FontResource fontResource = resources.getFontResource(this.getValue(subject));
+        FontResource fontResource = resources.getFontResource(this.getSafeValue(subject));
 
         final FontPickerButton pickerButton = new FontPickerButton(resources, fontResource);
         pickerButton.setCompact(true);

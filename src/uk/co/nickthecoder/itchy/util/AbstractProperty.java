@@ -264,6 +264,17 @@ public abstract class AbstractProperty<S, T>
         T result = (T) BeanHelper.getProperty(subject, this.access);
         return result;
     }
+    
+    public T getSafeValue( S subject )
+    {
+        try {
+            return getValue( subject );
+        } catch (Exception e) {
+            return getDefaultValue();
+        }
+    }
+    
+    public abstract T getDefaultValue();
 
     public String getStringValue( S subject ) throws Exception
     {
@@ -312,7 +323,6 @@ public abstract class AbstractProperty<S, T>
      * @throws Exception
      */
     public Component createComponent( final S subject, boolean autoUpdate )
-        throws Exception
     {
         return this.createComponent(subject, autoUpdate, null);
     }
@@ -322,7 +332,7 @@ public abstract class AbstractProperty<S, T>
      * is notified of changes as the user types/clicks.
      */
     public abstract Component createComponent( final S subject, boolean autoUpdate,
-        ComponentChangeListener listener ) throws Exception;
+        ComponentChangeListener listener );
 
     /**
      * Updates the subject based on the state of the Component. This is used when the Components are

@@ -284,9 +284,9 @@ public class CostumesEditor extends SubEditor
             {
                 ClassName className = CostumesEditor.this.propertiesClassName.getClassName();
 
-                if (className.equals(costume.getPropertiesClassName())) {
-                    CostumesEditor.this.propertiesClassName.removeStyle("error");
-                } else {
+                //if (className.equals(costume.getPropertiesClassName())) {
+                //    CostumesEditor.this.propertiesClassName.removeStyle("error");
+                //} else {
                     // Assume error...
                     CostumesEditor.this.propertiesClassName.addStyle("error");
 
@@ -300,7 +300,7 @@ public class CostumesEditor extends SubEditor
                         createPropertiesGrid();
                         CostumesEditor.this.propertiesClassName.removeStyle("error");
                     }
-                }
+                //}
             }
 
         });

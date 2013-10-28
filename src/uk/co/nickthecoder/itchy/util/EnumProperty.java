@@ -26,11 +26,16 @@ public class EnumProperty<S, E extends Enum<?>> extends AbstractProperty<S, E>
         this.klass = klass;
     }
 
+    public E getDefaultValue()
+    {
+        return null;
+    }
+    
     @Override
     public Component createComponent( final S subject, boolean autoUpdate,
-        final ComponentChangeListener listener ) throws Exception
+        final ComponentChangeListener listener )
     {
-        final EnumPickerButton<E> button = new EnumPickerButton<E>("Picker", this.getValue(subject));
+        final EnumPickerButton<E> button = new EnumPickerButton<E>("Picker", this.getSafeValue(subject));
         
         if (autoUpdate) {
             button.addActionListener(new ActionListener() {

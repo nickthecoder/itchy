@@ -23,9 +23,9 @@ public class DoubleProperty<S> extends AbstractProperty<S, Double>
 
     @Override
     public Component createComponent( final S subject, boolean autoUpdate,
-        final ComponentChangeListener listener ) throws Exception
+        final ComponentChangeListener listener )
     {
-        final DoubleBox box = new DoubleBox(this.getValue(subject));
+        final DoubleBox box = new DoubleBox(this.getSafeValue(subject));
         if (autoUpdate) {
 
             box.addChangeListener(new ComponentChangeListener() {
@@ -60,6 +60,11 @@ public class DoubleProperty<S> extends AbstractProperty<S, Double>
         return result.doubleValue();
     }
 
+    public Double getDefaultValue()
+    {
+        return 0.0;
+    }
+    
     @Override
     public void update( S subject, Component component ) throws Exception
     {

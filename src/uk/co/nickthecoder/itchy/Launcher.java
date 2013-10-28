@@ -20,7 +20,7 @@ import uk.co.nickthecoder.itchy.tools.NewGameWizard;
 
 public class Launcher extends Game
 {
-    private static final String RULES = "resources/editor/style.xml";
+    private static final String RULES = "resources" + File.separator + "editor" + File.separator + "style.xml";
 
     public GuiPose mainGuiPose;
 
@@ -30,7 +30,7 @@ public class Launcher extends Game
         super(resources);
 
         try {
-            setStylesheet(new Stylesheet(new File(RULES)));
+            setStylesheet(new Stylesheet(new File(Itchy.getBaseDirectory(), RULES)));
         } catch (Exception e) {
             System.err.println("Failed to load stylesheet : " + RULES);
             e.printStackTrace();
@@ -94,8 +94,7 @@ public class Launcher extends Game
         File resourcesFile = new File(name);
         if (resourcesFile.exists() && (resourcesFile.isFile())) {
         } else {
-            name = "resources" + File.separator + name + File.separator + name + ".itchy";
-            resourcesFile = new File(name);
+            resourcesFile = new File ( Itchy.getBaseDirectory(), "resources" + File.separator + name + File.separator + name + ".itchy");
         }
         System.out.println("Loading resources : " + resourcesFile);
         Resources resources = new Resources();

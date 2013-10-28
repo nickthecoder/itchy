@@ -243,9 +243,14 @@ public class EntryBox<E extends EntryBox<?>> extends ClickableContainer implemen
         this.forceLayout();
         this.invalidate();
 
+        fireChangeEvent();
+    }
+    
+    public void fireChangeEvent()
+    {
         for (ComponentChangeListener listener : this.changeListeners) {
             listener.changed();
-        }
+        } 
     }
 
     public String getText()

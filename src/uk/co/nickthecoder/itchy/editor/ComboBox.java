@@ -80,4 +80,10 @@ public class ComboBox extends Container
     {
         this.name.removeChangeListener(ccl);
     }
+    
+    public void fireChangeEvent()
+    {
+        this.name.fireChangeEvent();
+    }
+
 }

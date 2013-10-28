@@ -15,17 +15,23 @@ public class StringProperty<S> extends AbstractProperty<S, String>
     {
         super(label, access, key);
     }
-    
+
     public StringProperty( String label, String access )
     {
         super(label, access);
     }
 
     @Override
-    public Component createComponent( final S subject, boolean autoUpdate,
-        final ComponentChangeListener listener ) throws Exception
+    public String getDefaultValue()
     {
-        final TextBox box = new TextBox(this.getValue(subject));
+        return "";
+    }
+
+    @Override
+    public Component createComponent( final S subject, boolean autoUpdate,
+        final ComponentChangeListener listener )
+    {
+        final TextBox box = new TextBox(this.getSafeValue(subject));
         if (autoUpdate) {
             box.addChangeListener(new ComponentChangeListener() {
                 @Override

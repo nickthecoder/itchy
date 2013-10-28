@@ -1,10 +1,9 @@
-
-Default z-order on costume?
-
 What's Next
 ===========
 
-Reload button for scripts
+How about a Scripts tab
+    List all scripts double click to edit.
+    Show errors / Clear errors
 
 Create a game from scratch, deliberately making syntax errors in the code.
     Fix any bugs and improve the UI along the way. 
@@ -37,6 +36,10 @@ Costumes are updated even when cancel is pressed (need to COPY the costume?)
 
 Later
 =====
+
+A Gallery
+    Import poses, costumes, fonts, animations etc from a set of "games" in the gallery, or from any
+    other game's resources.
 
 Is the special Map needed which allows scripted Costume properties to be retrieved from BeanHelper
     Now we have ScriptedObject, isn't it better to have it done that way?

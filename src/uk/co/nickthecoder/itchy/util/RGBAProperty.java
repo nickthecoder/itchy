@@ -30,11 +30,16 @@ public class RGBAProperty<S> extends AbstractProperty<S, RGBA>
         this.includeAlpha = includeAlpha;
     }
 
+    public RGBA getDefaultValue()
+    {
+        return RGBA.BLACK;
+    }
+    
     @Override
     public Component createComponent( final S subject, final boolean autoUpdate,
-        final ComponentChangeListener listener ) throws Exception
+        final ComponentChangeListener listener )
     {
-        RGBA color = this.getValue(subject);
+        RGBA color = this.getSafeValue(subject);
         final RGBABox result = new RGBABox(color, this.allowNull, this.includeAlpha);
 
         if (autoUpdate) {

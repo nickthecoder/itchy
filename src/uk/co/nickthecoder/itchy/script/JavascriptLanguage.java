@@ -43,6 +43,23 @@ public class JavascriptLanguage extends ScriptLanguage
     }
 
     @Override
+    public String simpleMessage( ScriptException e, boolean includeFilename )
+    {
+        String message = e.getMessage();
+        int index = message.indexOf("Exception: ");
+        if ( index >= 0 ) {
+            message = message.substring(index + 11);
+        }
+        
+        if (!includeFilename) {
+            String pattern = "(.*)\\(.*\\#([0-9]*)\\)";
+            message = message.replaceAll(pattern, "Line $2. $1");
+        }
+        
+        return message;
+    }
+
+    @Override
     public Object getProperty( Object inst, String name ) throws ScriptException
     {
         Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
@@ -535,19 +552,19 @@ public class JavascriptLanguage extends ScriptLanguage
         ScriptedCostumeProperties costumeProperties = null;
         try {
             ensureGlobals();
-    
+
             String name = ScriptManager.getName(className);
-    
+
             Object costumePropertiesScript = this.engine.eval("new " + name + "();");
-    
-            costumeProperties= new ScriptedCostumeProperties(className,
+
+            costumeProperties = new ScriptedCostumeProperties(className,
                 this,
                 costumePropertiesScript);
 
         } catch (ScriptException e) {
             handleException("Creating costume properties : " + className.name, e);
         }
-        
+
         if (costumeProperties == null) {
             return new CostumeProperties();
         }

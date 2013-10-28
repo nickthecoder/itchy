@@ -25,7 +25,9 @@ public class CostumeSceneActor extends SceneActor
     @Override
     public Actor createActor( Resources resources, boolean designActor )
     {
-        Actor actor = new Actor(this.costume, designActor ? "default" : this.startEvent);
+        String event = designActor ? "default" : ( (this.activationDelay > 0) ? "" : this.startEvent );
+        Actor actor = new Actor(this.costume, event);
+        
         actor.setStartEvent(this.startEvent);
         this.updateActor(actor, resources, designActor);
         

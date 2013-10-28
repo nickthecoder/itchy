@@ -26,10 +26,16 @@ public class ClassNameProperty<S> extends AbstractProperty<S, ClassName>
     }
 
     @Override
-    public Component createComponent( final S subject, boolean autoUpdate,
-        final ComponentChangeListener listener ) throws Exception
+    public ClassName getDefaultValue()
     {
-        ClassName className = this.getValue(subject);
+        return new ClassName("");
+    }
+
+    @Override
+    public Component createComponent( final S subject, boolean autoUpdate,
+        final ComponentChangeListener listener )
+    {
+        ClassName className = this.getSafeValue(subject);
         ScriptManager scriptManager = Itchy.getGame().resources.scriptManager;
 
         final ClassNameBox classNameBox = new ClassNameBox(scriptManager, className, this.baseClass);

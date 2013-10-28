@@ -5,9 +5,10 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.util;
 
-import uk.co.nickthecoder.itchy.animation.NumericAnimation;
 import uk.co.nickthecoder.itchy.animation.Ease;
 import uk.co.nickthecoder.itchy.animation.EasePickerButton;
+import uk.co.nickthecoder.itchy.animation.LinearEase;
+import uk.co.nickthecoder.itchy.animation.NumericAnimation;
 import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 
@@ -16,20 +17,27 @@ public class EaseProperty<S> extends AbstractProperty<S, Ease>
 
     public EaseProperty( String label, String access, String key )
     {
-        super( label, access, key );
+        super(label, access, key);
     }
+
     public EaseProperty( String label, String access )
     {
         super(label, access);
     }
 
     @Override
-    public Component createComponent( final S subject, boolean autoUpdate,
-        final ComponentChangeListener listener ) throws Exception
+    public Ease getDefaultValue()
     {
-        final EasePickerButton button = new EasePickerButton(getValue(subject));
-        System.out.println( "Autoupdate? " + autoUpdate );
-        
+        return new LinearEase();
+    }
+
+    @Override
+    public Component createComponent( final S subject, boolean autoUpdate,
+        final ComponentChangeListener listener )
+    {
+        final EasePickerButton button = new EasePickerButton(getSafeValue(subject));
+        System.out.println("Autoupdate? " + autoUpdate);
+
         if (autoUpdate) {
             button.addChangeListener(new ComponentChangeListener() {
                 @Override
@@ -45,7 +53,7 @@ public class EaseProperty<S> extends AbstractProperty<S, Ease>
                 }
             });
         }
-        
+
         return button;
     }
 
@@ -60,8 +68,8 @@ public class EaseProperty<S> extends AbstractProperty<S, Ease>
     public Ease parse( String value )
     {
         Ease ease = NumericAnimation.getEase(value);
-        if ( ease == null ) {
-            throw new RuntimeException( "Named Ease not found : " + value );
+        if (ease == null) {
+            throw new RuntimeException("Named Ease not found : " + value);
         }
         return ease;
     }
@@ -69,11 +77,11 @@ public class EaseProperty<S> extends AbstractProperty<S, Ease>
     @Override
     public String getStringValue( S subject ) throws Exception
     {
-        Ease ease = getValue( subject );
+        Ease ease = getValue(subject);
         if (ease == null) {
             return null;
         } else {
-            return NumericAnimation.getEaseName( ease );
+            return NumericAnimation.getEaseName(ease);
         }
     }
 }

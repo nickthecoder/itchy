@@ -122,8 +122,8 @@ public class NewGameWizard
     {
         HashMap<String, File> result = new HashMap<String, File>();
 
-        File directory = new File("resources" + File.separator + "templates" + File.separator +
-            "games");
+        File directory = new File(Itchy.getBaseDirectory(), "resources" + File.separator +
+            "templates" + File.separator + "games");
 
         for (File file : directory.listFiles()) {
             if (file.isDirectory()) {
