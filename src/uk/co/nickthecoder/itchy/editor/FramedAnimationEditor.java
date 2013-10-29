@@ -15,6 +15,7 @@ import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.animation.Frame;
 import uk.co.nickthecoder.itchy.animation.FramedAnimation;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
+import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.Button;
 import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.Container;
@@ -104,7 +105,17 @@ public class FramedAnimationEditor extends AnimationEditor
         Component image;
         ImageComponent img = new ImageComponent(frame.getPose().getSurface());
         image = img;
-        IntegerBox delay = new IntegerBox(frame.getDelay());
+        final IntegerBox delay = new IntegerBox(frame.getDelay());
+        delay.minimumValue = 1;
+        
+        delay.addChangeListener(new ComponentChangeListener() {
+            @Override
+            public void changed()
+            {
+                frame.setDelay(delay.getSafeValue(1));
+            }
+            
+        });
 
         Button up = null;
         if (i > 0) {

@@ -97,7 +97,7 @@ public class CompoundAnimation extends AbstractAnimation
     @Override
     public void start( Actor actor )
     {
-        this.loopsRemaining = this.loops == 0 ? 1 : this.loops;
+        this.loopsRemaining = this.loops > 0 ? this.loops : 1;
 
         if (this.sequence) {
             this.sop = new Sequence(this, actor);
@@ -114,7 +114,7 @@ public class CompoundAnimation extends AbstractAnimation
         this.sop.tick(actor);
 
         if (this.sop.isFinished()) {
-            if (this.loops != 0) {
+            if (this.loops > 0) {
                 this.loopsRemaining--;
             }
             if (this.loopsRemaining > 0) {

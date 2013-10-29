@@ -1,7 +1,12 @@
-<scene showMouse="true">
+<scene showMouse="true" behaviour="uk.co.nickthecoder.itchy.NullSceneBehaviour">
+  <properties/>
   <layer name="main">
-    <text text="1) Animation Profiles" font="vera" size="22" color="#ffffff" behaviour="uk.co.nickthecoder.itchy.extras.SceneButton" x="150" y="538" direction="0.0" startEvent="default">
+    <text text="1) Animation Profiles" font="vera" size="22" color="#ffffff" xAlignment="0.0" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.SceneButton" x="30" y="555" direction="0.0" startEvent="default" zOrder="1">
       <property name="sceneName" value="profiles"/>
     </text>
+    <text text="2) Projectiles" font="vera" size="22" color="#ffffff" xAlignment="0.0" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.SceneButton" x="34" y="511" direction="0.0" startEvent="default" zOrder="2">
+      <property name="sceneName" value="projectiles"/>
+    </text>
+    <text text="Quit" font="vera" size="57" color="#ffffff" xAlignment="0.5" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.QuitButton" x="419" y="54" direction="0.0" startEvent="default" zOrder="3"/>
   </layer>
 </scene>

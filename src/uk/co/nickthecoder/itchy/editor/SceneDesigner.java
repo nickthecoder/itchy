@@ -1136,7 +1136,9 @@ public class SceneDesigner implements MouseListener, KeyListener
 
             actor.moveTo(event.x, event.y);
             actor.setBehaviour(behaviour);
-            actor.setZOrder(this.currentCostume.defaultZOrder);
+            if (this.currentCostume != null) {
+                actor.setZOrder(this.currentCostume.defaultZOrder);
+            }
             // Place on top if no default zOrder defined for the costume.
             if (actor.getZOrder() == 0) {
                 this.currentDesignLayer.addTop(actor);

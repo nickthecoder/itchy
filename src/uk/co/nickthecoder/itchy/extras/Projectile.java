@@ -15,16 +15,20 @@ public class Projectile extends Behaviour
     public Actor source;
 
     private Pose pose;
-    
+
     private Costume costume;
 
+    private String eventName;
+    
     public double gravity;
 
     public double vx;
 
     public double vy;
 
-    public double speed;
+    public double speedForwards;
+
+    public double speedSidewards;
 
     public double spin;
 
@@ -33,8 +37,10 @@ public class Projectile extends Behaviour
     public double growFactor = 1;
 
     public int life = 1000;
-    
+
     private int zOrder;
+
+    private double scale;
 
     public Projectile( Behaviour source )
     {
@@ -46,6 +52,7 @@ public class Projectile extends Behaviour
         this.costume = source.getCostume();
         this.source = source;
         this.zOrder = source.getZOrder();
+        this.scale = source.getAppearance().getScale();
     }
 
     public Projectile pose( Pose pose )
@@ -53,22 +60,47 @@ public class Projectile extends Behaviour
         this.pose = pose;
         return this;
     }
-    
+
+    @Deprecated
     public Projectile poseName( String poseName )
     {
-        this.pose = source.getCostume().getPose( poseName );
+        return pose(poseName);
+    }
+
+    public Projectile pose( String poseName )
+    {
+        this.pose = this.source.getCostume().getPose(poseName);
         return this;
     }
     
+    public Projectile startEvent( String eventName )
+    {
+        this.eventName = eventName;
+        return this;
+    }
+
     public Projectile costume( Costume costume )
     {
         this.costume = costume;
         return this;
     }
-    
+
+    public Projectile scale( double scale )
+    {
+        this.scale = scale;
+        return this;
+    }
+
     public Projectile speed( double value )
     {
-        this.speed = value;
+        this.speedForwards = value;
+        return this;
+    }
+
+    public Projectile speed( double forwards, double sidewards )
+    {
+        this.speedForwards = forwards;
+        this.speedSidewards = sidewards;
         return this;
     }
 
@@ -113,21 +145,25 @@ public class Projectile extends Behaviour
         this.zOrder = zOrder;
         return this;
     }
-    
+
     public Projectile adjustZOrder( int delta )
     {
         this.zOrder += delta;
         return this;
     }
-    
+
     public Actor createActor()
     {
         Actor actor = new Actor(this.costume);
-        if ( this.pose != null ) {
+        if (this.pose != null) {
             actor.getAppearance().setPose(this.pose);
+        }
+        if (this.eventName != null) {
+            actor.event(this.eventName);
         }
         // TODO Do we always want the projectile to be pointing the same way as the source?
         actor.getAppearance().setDirection(this.source.getAppearance().getDirection());
+        actor.getAppearance().setScale(this.scale);
         actor.moveTo(this.source);
         actor.setBehaviour(this);
 
@@ -141,7 +177,7 @@ public class Projectile extends Behaviour
     public void tick()
     {
         this.getActor().moveBy(this.vx, this.vy);
-        this.getActor().moveForward(this.speed);
+        this.getActor().moveForward(this.speedForwards, this.speedSidewards);
         this.vy += this.gravity;
         this.getActor().getAppearance().adjustAlpha(-this.fade);
         this.getActor().getAppearance().adjustDirection(this.spin);

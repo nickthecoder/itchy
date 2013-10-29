@@ -61,6 +61,6 @@
     </actor>
     <text text="High Score" font="Boycott" size="35" color="#8f9688" xAlignment="0.5" yAlignment="0.5" x="704" y="570" direction="0.0" startEvent="default" zOrder="19"/>
     <actor costume="player" x="416" y="25" direction="0.0" startEvent="default" zOrder="20"/>
-    <actor costume="wally" x="-116" y="72" direction="0.0" startEvent="default" zOrder="21" activationDelay="60.0"/>
+    <actor costume="wally" x="-90" y="188" direction="0.0" startEvent="default" zOrder="21" activationDelay="45.0"/>
   </layer>
 </scene>

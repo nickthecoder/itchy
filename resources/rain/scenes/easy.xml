@@ -51,7 +51,7 @@
       <property name="distance" value="600"/>
     </actor>
     <actor costume="player" x="424" y="14" direction="0.0" startEvent="default" zOrder="16"/>
-    <actor costume="wally" x="-119" y="75" direction="0.0" startEvent="default" zOrder="17" activationDelay="60.0"/>
+    <actor costume="wally" x="-102" y="247" direction="0.0" startEvent="default" zOrder="17" scale="1.2092457420924574"/>
     <text text="High Score" font="Boycott" size="35" color="#8f9688" xAlignment="0.5" yAlignment="0.5" x="704" y="570" direction="0.0" startEvent="default" zOrder="18"/>
   </layer>
 </scene>
