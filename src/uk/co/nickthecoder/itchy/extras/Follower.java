@@ -7,26 +7,10 @@ package uk.co.nickthecoder.itchy.extras;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Behaviour;
-import uk.co.nickthecoder.itchy.Costume;
-import uk.co.nickthecoder.itchy.Pose;
 
-public class Follower extends Behaviour
+public class Follower extends Companion<Follower>
 {
-    public Actor following;
-    
-    private Pose pose;
-    
-    private Costume costume;
-
-    private double dx = 0;
-
-    private double dy = 0;
-
-    private double distance = 0;
-
-    private boolean rotate = false;
-    
-    private int zOrder;
+    private boolean rotate = false;;
 
     public Follower( Behaviour following )
     {
@@ -35,60 +19,19 @@ public class Follower extends Behaviour
 
     public Follower( Actor following )
     {
-        this.following = following;
-        this.costume = following.getCostume();
-        this.zOrder = following.getZOrder();
+        super(following);
     }
 
-    public Follower pose( Pose pose )
-    {
-        this.pose = pose;
-        return this;
-    }
-    
-    public Follower poseName( String poseName )
-    {
-        this.pose = following.getCostume().getPose( poseName );
-        return this;
-    }
-    
-    public Follower costume( Costume costume )
-    {
-        this.costume = costume;
-        return this;
-    }
-    
-    public Follower distance( double distance )
-    {
-        this.distance = distance;
-        return this;
-    }
-
-    public Follower offset( double x, double y )
-    {
-        this.dx = x;
-        this.dy = y;
-        return this;
-    }
-    
+    /**
+     * Ensures that the follower always have the same direction as the object its following?
+     * When rotate is not called, the Follower's direction will not be changed.
+     */
     public Follower rotate()
     {
-       this.rotate = true;
-       return this;
+        this.rotate = true;
+        return this;
     }
 
-    public Follower zOrder( int zOrder )
-    {
-        this.zOrder = zOrder;
-        return this;
-    }
-    
-    public Follower adjustZOrder( int delta )
-    {
-        this.zOrder += delta;
-        return this;
-    }
-    
     @Override
     public void tick()
     {
@@ -97,30 +40,21 @@ public class Follower extends Behaviour
 
     private void follow()
     {
-        this.getActor().moveTo(this.following);
-        this.getActor().moveForward(this.distance);
-        this.getActor().moveBy(this.dx, this.dy);
+        this.getActor().moveTo(this.source);
+        this.getActor().moveForward(this.offsetForwards, this.offsetSidewards);
+        this.getActor().moveBy(this.offsetX, this.offsetY);
+        
         if (this.rotate) {
-            this.getActor().getAppearance()
-                .setDirection(this.following.getAppearance().getDirection());
+            this.getActor().getAppearance().setDirection(this.source.getAppearance().getDirection());
         }
     }
 
+    @Override
     public Actor createActor()
     {
-        Actor actor = new Actor(costume);
-        if (this.pose != null) {
-            actor.getAppearance().setDirection(pose.getDirection());
-            actor.getAppearance().setPose(pose);
-        }
-
-        actor.setBehaviour(this);
-        actor.setZOrder( this.zOrder );
-        this.following.getLayer().add(actor);
-        
+        Actor result = super.createActor();
         follow();
-        return actor;
+        return result;
     }
-
 
 }

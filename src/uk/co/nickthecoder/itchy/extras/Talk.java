@@ -56,7 +56,7 @@ public class Talk extends Follower
     
     public Talk message( String message )
     {
-        String text = this.following.getCostume().getString(message);
+        String text = this.source.getCostume().getString(message);
         if (text == null) {
             this.text = message;
         } else {

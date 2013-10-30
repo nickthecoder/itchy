@@ -157,18 +157,18 @@ public class Ship extends Bouncy implements Shootable
     {
         double oldX = this.getActor().getX();
         double oldY = this.getActor().getY();
-        double oldDirection = this.getActor().getAppearance().getDirection();
+        double oldDirection = this.getActor().getHeading();
 
         this.angle += speed;
 
-        this.getActor().getAppearance().setDirectionRadians(this.angle);
+        this.getActor().setDirectionRadians(this.angle);
         this.getActor().setX(this.radius * Math.cos(this.angle) + this.ox);
         this.getActor().setY(this.radius * Math.sin(this.angle) + this.oy);
 
         if (this.getActor().isOffScreen()) {
             this.angle -= speed;
             this.getActor().moveTo(oldX, oldY);
-            this.getActor().getAppearance().setDirection(oldDirection);
+            this.getActor().setDirection(oldDirection);
         }
     }
 
@@ -228,7 +228,7 @@ public class Ship extends Bouncy implements Shootable
         Actor bullet = new Actor(DrunkInvaders.game.resources.getCostume("bullet"), "default");
         this.latestBullet = bullet;
         bullet.moveTo(this.getActor());
-        bullet.getAppearance().setDirection(this.getActor().getAppearance().getDirection());
+        bullet.setDirection(this.getActor().getAppearance().getDirection());
         DrunkInvaders.game.mainLayer.addTop(bullet);
         bullet.moveForward(10);
         bullet.setBehaviour(new Bullet());
@@ -247,12 +247,8 @@ public class Ship extends Bouncy implements Shootable
         }
 
         Actor yell = new Talk(this)
-            .message("death")
-            .font("vera", 18)
-            .color(SPEECH_COLOR)
-            .bubble("speechBubble2")
-            .offset(0, 40)
-            .margin(10, 10, 20, 10)
+            .message("death").font("vera", 18).color(SPEECH_COLOR).bubble("speechBubble2")
+            .offset(0, 40).margin(10, 10, 20, 10).direction(0)
             .createActor();
         yell.activate();
         yell.deathEvent(this.getActor().getCostume(), "yell");
@@ -263,14 +259,16 @@ public class Ship extends Bouncy implements Shootable
             .speed(0.3, 0.9)
             .fade(.7)
             .spin(-0.2, 0.2)
-            .createActor("fragment").activate();
+            .pose("fragment")
+            .createActor().activate();
 
         new Explosion(this.getActor())
             .projectiles(40)
-            .offsets(-10, 10, -10, 10)
+            .offsetForwards(-10, 10).offsetSidewards(-10, 10)
             .speed(1, 3)
             .fade(1.5)
-            .createActor("pixel").activate();
+            .pose("pixel")
+            .createActor().activate();
 
         this.deathEvent("death");
     }

@@ -1,3 +1,9 @@
+Cedar center - Blood transfusion.
+
+Actor to have a heading and direction
+    Load/Save the Actor.heading.
+    Look at Companion, Explosion an co, and make them use heading as well as direction.
+        Remove "sameHeading" cruft. 
 
 What's Next
 ===========

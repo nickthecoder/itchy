@@ -75,7 +75,7 @@ public class AlienFactory extends Behaviour
         Appearance alienAppearance = alienActor.getAppearance();
         Appearance thisAppearance = this.getActor().getAppearance();
 
-        alienAppearance.setDirection(this.getActor().getAppearance().getDirection() - 90);
+        alienActor.setDirection(this.getActor().getAppearance().getDirection() - 90);
         alienAppearance.setScale(thisAppearance.getScale());
         alienAppearance.setAlpha(0);
 

@@ -95,7 +95,7 @@ public class Mothership extends Alien
 
         Costume costume = DrunkInvaders.game.resources.getCostume(this.costumeName);
         Actor alien = new Actor(costume);
-        alien.getAppearance().setDirection(this.getActor().getAppearance().getDirection());
+        alien.setDirection(this.getActor().getAppearance().getDirection());
         Alien alienBehaviour = new Alien();
         alienBehaviour.fireOnceEvery = this.childFireOnceEvery;
         alien.setBehaviour(alienBehaviour);

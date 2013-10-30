@@ -19,9 +19,8 @@
     <animation name="bomb">
       <compound sequence="true" loops="0">
         <frames pingPong="false">
-          <frame pose="bomb1" delay="10"/>
+          <frame pose="bomb1" delay="20"/>
           <frame pose="bomb2" delay="20"/>
-          <frame pose="bomb1" delay="10"/>
         </frames>
       </compound>
     </animation>

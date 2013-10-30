@@ -78,9 +78,16 @@ public class FramedAnimation extends AbstractAnimation
     {
         this.frameIndex = 0;
         this.direction = 1;
-        actor.getAppearance().setPose(this.frames.get(this.frameIndex).getPose());
+        useFrame(actor);
     }
-
+    
+    private void useFrame(Actor actor)
+    {
+        Frame frame = this.frames.get(this.frameIndex);
+        actor.getAppearance().setPose(frame.getPose());
+        this.delay = frame.getDelay();
+    }
+    
     @Override
     public void tick( Actor actor )
     {
@@ -89,21 +96,17 @@ public class FramedAnimation extends AbstractAnimation
             return;
         }
 
-        this.nextFrame();
-        if (!this.isFinished()) {
-            actor.getAppearance().setPose(this.frames.get(this.frameIndex).getPose());
-            this.delay = this.frames.get(this.frameIndex).getDelay();
-        }
-
-        super.tick(actor);
-    }
-
-    private void nextFrame()
-    {
+        // Move onto the next frame.
         this.frameIndex += this.direction;
         if (this.pingPong && (this.frameIndex >= this.frames.size())) {
             this.frameIndex = this.frames.size() - 2;
             this.direction = -1;
+        }
+        
+        if (this.isFinished()) {
+            super.tick(actor);
+        } else {
+            useFrame(actor);
         }
     }
 

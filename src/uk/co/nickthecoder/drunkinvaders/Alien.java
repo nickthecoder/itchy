@@ -93,7 +93,7 @@ public class Alien extends Bouncy implements Shootable
 
         Actor bullet = new Actor(DrunkInvaders.game.resources.getCostume("bomb"), "default");
         bullet.moveTo(this.getActor());
-        bullet.getAppearance().setDirection(this.getActor().getAppearance().getDirection());
+        bullet.setDirection(this.getActor().getAppearance().getDirection());
         DrunkInvaders.game.mainLayer.addTop(bullet);
         bullet.moveForward(10);
         bullet.setBehaviour(new Bullet("killable"));
@@ -109,14 +109,16 @@ public class Alien extends Bouncy implements Shootable
             .forwards()
             .fade(1.2)
             .speed(1, 3)
-            .createActor("fragment").activate();
+            .pose("fragment")
+            .createActor().activate();
 
         new Explosion(this.getActor())
             .projectiles(40).projectilesPerClick(10)
-            .offsets(-10, 10, -10, 10)
+            .offsetForwards(-10, 10).offsetSidewards(-10, 10)
             .speed(3, 6)
             .fade(0.5)
-            .createActor("pixel")
+            .pose("pixel")
+            .createActor()
             .activate();
 
         double scale = this.getActor().getAppearance().getScale();
@@ -135,12 +137,9 @@ public class Alien extends Bouncy implements Shootable
         }
 
         Actor yell = new Talk(this)
-            .message("death")
-            .font("vera", 18)
-            .color(SPEECH_COLOR)
+            .message("death").font("vera", 18).color(SPEECH_COLOR).margin(10, 10, 20, 10)
             .bubble("speechBubble")
-            .offset(0, 40)
-            .margin(10, 10, 20, 10)
+            .offset(0, 40).direction(0)
             .createActor();
         yell.activate();
         yell.deathEvent(this.getActor().getCostume(), "yell");

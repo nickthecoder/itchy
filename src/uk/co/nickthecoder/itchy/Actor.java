@@ -25,8 +25,6 @@ public class Actor implements PropertySubject<Actor>
     public final int id;
 
     private static List<AbstractProperty<Actor, ?>> properties = AbstractProperty.findAnnotations(Actor.class);
-    // private static List<AbstractProperty<Actor, ?>> normalProperties;
-    // private static List<AbstractProperty<Actor, ?>> textProperties;
 
     Behaviour behaviour;
 
@@ -49,6 +47,8 @@ public class Actor implements PropertySubject<Actor>
     private boolean dying = false;
     private int zOrder = 0;
 
+    private double heading;
+    
     private double activationDelay;
     
     private String startEvent = "default";
@@ -96,7 +96,7 @@ public class Actor implements PropertySubject<Actor>
 
         this.x = 0;
         this.y = 0;
-        this.getAppearance().setDirection(pose.getDirection());
+        this.setDirection(pose.getDirection());
     }
 
     public Actor( Costume costume, String eventName )
@@ -105,7 +105,7 @@ public class Actor implements PropertySubject<Actor>
         
         this.costume = costume;
         this.event(eventName);
-        this.getAppearance().setDirection(this.getAppearance().getPose().getDirection());
+        this.setDirection(this.getAppearance().getPose().getDirection());
     }
     
     @Property(label="Start Event")
@@ -118,40 +118,61 @@ public class Actor implements PropertySubject<Actor>
     {
         startEvent = value;
     }
-
-    /*
-    public List<AbstractProperty<Actor, ?>> getProperties()
+    
+    /**
+     * Sets the heading that the actor is travelling in. It does NOT affect the rotation of the
+     * actor's image.
+     * @param degrees
+     */
+    @Property(label="Heading")
+    public void setHeading( double degrees )
     {
-        if (normalProperties == null) {
-            normalProperties = new ArrayList<AbstractProperty<Actor, ?>>();
-
-            normalProperties.add(new DoubleProperty<Actor>("X", "x"));
-            normalProperties.add(new DoubleProperty<Actor>("Y", "y"));
-            normalProperties.add(new StringProperty<Actor>("Start Event", "startEvent"));
-            normalProperties.add(new DoubleProperty<Actor>("Alpha", "appearance.alpha"));
-            normalProperties.add(new DoubleProperty<Actor>("Direction", "appearance.direction"));
-            normalProperties.add(new DoubleProperty<Actor>("Scale", "appearance.scale"));
-            normalProperties.add(new RGBAProperty<Actor>("Colorize", "appearance.colorize", true,
-                true));
-            normalProperties.add(new DoubleProperty<Actor>("Activation Delay", "activationDelay"));
-
-            textProperties = new ArrayList<AbstractProperty<Actor, ?>>();
-            textProperties.addAll(normalProperties);
-            textProperties.add(new FontProperty<Actor>("Font", "appearance.pose.font"));
-            textProperties.add(new DoubleProperty<Actor>("Font Size", "appearance.pose.fontSize"));
-            textProperties.add(new StringProperty<Actor>("Text", "appearance.pose.text"));
-            textProperties.add(new RGBAProperty<Actor>("Text Color", "appearance.pose.color",
-                false, false));
-
-        }
-
-        if (this.getAppearance().getPose() instanceof TextPose) {
-            return textProperties;
-        } else {
-            return normalProperties;
-        }
+        this.heading = degrees;
     }
-    */
+    
+    public void setHeadingRadians( double radians )
+    {
+        this.setHeading(radians * 180 / Math.PI);
+    }
+    
+    public double getHeading()
+    {
+        return this.heading;
+    }
+
+    public double getHeadingRadians()
+    {
+        return this.heading / 180 * Math.PI;
+    }
+
+    /**
+     * Sets the heading and the appearance's direction.
+     * @param degrees
+     */
+    public void setDirection( double degrees )
+    {
+        getAppearance().setDirection( degrees );
+        setHeading( getAppearance().getDirection() );
+    }
+
+    /**
+     * Sets the heading and the appearance's direction.
+     * @param degrees
+     */
+    public void setDirectionRadians( double radians )
+    {
+        setDirection(radians * 180 / Math.PI);
+    }
+    
+    /**
+     * Sets the heading and the appearance's direction.
+     * @param degrees
+     */
+    public void setDirection( Actor other )
+    {
+        getAppearance().setDirection( other );
+        setHeading( getAppearance().getDirection() );
+    }
     
     public Costume getCostume()
     {
@@ -506,7 +527,7 @@ public class Actor implements PropertySubject<Actor>
 
     public void moveForward( double amount )
     {
-        double theta = this.appearance.getDirection() / 180.0 * Math.PI;
+        double theta = this.getHeadingRadians();
         double cosa = Math.cos(theta);
         double sina = Math.sin(theta);
 
@@ -520,7 +541,7 @@ public class Actor implements PropertySubject<Actor>
 
     public void moveForward( double forward, double sideways )
     {
-        double theta = this.appearance.getDirectionRadians();
+        double theta = this.getHeadingRadians();
         double cosa = Math.cos(theta);
         double sina = Math.sin(theta);
 

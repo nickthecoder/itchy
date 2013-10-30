@@ -9,8 +9,6 @@ import java.util.Random;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Appearance;
-import uk.co.nickthecoder.itchy.Behaviour;
-import uk.co.nickthecoder.itchy.Pose;
 
 /**
  * Creates many particles from a central point, spreading outwards. This is typically used when an
@@ -21,7 +19,7 @@ import uk.co.nickthecoder.itchy.Pose;
  * 
  * <pre>
  * <code>
- * new itchy.extras.Explosion(this.actor)
+ * new itchy.extras.Explosion(actor)
  *     .projectiles(10).gravity(-0.2).forwards().fade(0.9, 3.5).speed(0.1, 1.5).vy(5)
  *     .createActor("droplet").activate(); 
  * </code>
@@ -31,7 +29,7 @@ import uk.co.nickthecoder.itchy.Pose;
  * 
  * <pre>
  * <code>
- * Explosion explosion = new itchy.extras.Explosion(this.actor);
+ * Explosion explosion = new itchy.extras.Explosion(actor);
  * explosion.projectiles(10);
  * explosion.gravity(-0.2);
  * explosion.forwards();
@@ -45,13 +43,9 @@ import uk.co.nickthecoder.itchy.Pose;
  * Note that the createActor method returns an Actor (not this Explosion), and therefore must be
  * last.
  */
-public class Explosion extends Behaviour
+public class Explosion extends Companion<Explosion>
 {
     private static Random random = new Random();
-
-    private boolean below = false;;
-
-    private Actor source;
 
     private String poseName;
 
@@ -89,14 +83,6 @@ public class Explosion extends Behaviour
 
     public double randomSpeed = 0;
 
-    public double offsetForwards = 0;
-
-    public double offsetSidewards = 0;
-
-    public double randomOffsetForwards = 0;
-
-    public double randomOffsetSidewards = 0;
-
     public double fade = 0;
 
     public double randomFade = 0;
@@ -104,8 +90,6 @@ public class Explosion extends Behaviour
     public int life = 300;
 
     public int randomLife = 300;
-
-    public int alpha = 255;
 
     public int randomAlpha = 0;
 
@@ -117,6 +101,10 @@ public class Explosion extends Behaviour
 
     public double randomGrow = 0;
 
+    public double randomOffsetForwards = 0;
+
+    public double randomOffsetSidewards = 0;
+
     /**
      * Creates an explosion centred on the given actor.
      * 
@@ -124,24 +112,11 @@ public class Explosion extends Behaviour
      */
     public Explosion( Actor actor )
     {
-        super();
+        super(actor);
         this.direction = actor.getAppearance().getDirection();
-        this.source = actor;
     }
 
-    /**
-     * Creates the explosion actor using the same pose (the same image) as the actor given in the
-     * constructor.
-     * 
-     * @return A new actor, which has an Explosion Behaviour, has been added to the same layer as
-     *         the actor in the constructor, but has not yet been activated.
-     */
-    public Actor createActor()
-    {
-        return this.createActor("");
-    }
-
-    //TODO make this like Follower and Projectile - createActor should take no arguments
+    // TODO make this like Follower and Projectile - createActor should take no arguments
     /**
      * Creates the explosion actor using a pose from the costume of the actor given in the
      * constructor. This allows the exploding projectiles to look different from the actor that
@@ -157,27 +132,12 @@ public class Explosion extends Behaviour
      * @return A new actor, which has an Explosion Behaviour, has been added to the same layer as
      *         the actor in the constructor, but has not been activated yet.
      */
-    public Actor createActor( String poseName )
+    @Override
+    public Actor createActor()
     {
-        Actor result;
-        if (this.source.getCostume() == null) {
-            result = new Actor(this.source.getAppearance().getPose());
-        } else {
-            result = new Actor(this.source.getCostume());
-        }
-        result.getAppearance().setPose(this.source.getAppearance().getPose());
-        
-        this.poseName = poseName;
+        Actor result = super.createActor();
 
-        result.moveTo(this.source);
         result.getAppearance().setAlpha(0);
-        result.setBehaviour(this);
-
-        if (this.below) {
-            this.source.getLayer().addBelow(result, this.source);
-        } else {
-            this.source.getLayer().addTop(result);
-        }
 
         return result;
     }
@@ -224,7 +184,7 @@ public class Explosion extends Behaviour
      * 
      * @param value
      *        True if the objects should be rotated in the direction of movement.
-     * @return this.
+     * @return
      */
     public Explosion rotate( boolean value )
     {
@@ -239,7 +199,7 @@ public class Explosion extends Behaviour
      */
     public Explosion spin( double value )
     {
-        return this.spin(value, value);
+        return spin(value, value);
     }
 
     /**
@@ -268,7 +228,7 @@ public class Explosion extends Behaviour
      */
     public Explosion vx( double value )
     {
-        return this.vx(value, value);
+        return vx(value, value);
     }
 
     /**
@@ -292,7 +252,7 @@ public class Explosion extends Behaviour
      */
     public Explosion vy( double value )
     {
-        return this.vy(value, value);
+        return vy(value, value);
     }
 
     /**
@@ -307,7 +267,7 @@ public class Explosion extends Behaviour
 
     public Explosion direction( double value )
     {
-        return this.direction(value, value);
+        return direction(value, value);
     }
 
     public Explosion direction( double from, double to )
@@ -326,41 +286,9 @@ public class Explosion extends Behaviour
      */
     public Explosion forwards()
     {
-        this.rotate(true);
+        rotate(true);
         direction(this.source.getAppearance().getDirection());
         this.sameDirection = false;
-        return this;
-    }
-
-    /**
-     * @param value
-     *        How far forwards/backwards and sidewards to move the centre of the explosion from the
-     *        exploding actor. Useful if you want the explosion to happen at the front (or back) of
-     *        the actor.
-     * @return this
-     */
-    public Explosion offsets( double forwards, double sidewards )
-    {
-        return this.offsets(forwards, forwards, sidewards, sidewards);
-    }
-
-    /**
-     * Randomly pick the distance forwards/backwards and sidewards of where each Projectile starts.
-     * 
-     * @param from
-     *        The minimum amount forwards.
-     * @param to
-     *        The maximum amount forwards.
-     * @return this
-     */
-    public Explosion offsets( double xFrom, double xTo, double yFrom, double yTo )
-    {
-        this.offsetForwards = xFrom;
-        this.randomOffsetForwards = xTo - xFrom;
-
-        this.offsetSidewards = yFrom;
-        this.randomOffsetSidewards = yTo - yFrom;
-
         return this;
     }
 
@@ -373,7 +301,7 @@ public class Explosion extends Behaviour
      */
     public Explosion heading( double value )
     {
-        return this.heading(value, value);
+        return heading(value, value);
     }
 
     /**
@@ -408,7 +336,7 @@ public class Explosion extends Behaviour
      */
     public Explosion speed( double value )
     {
-        return this.speed(value, value);
+        return speed(value, value);
     }
 
     /**
@@ -428,16 +356,6 @@ public class Explosion extends Behaviour
     }
 
     /**
-     * @param alpha
-     *        The initial alpha value for each projectile (0 to 255).
-     * @return this
-     */
-    public Explosion alpha( int alpha )
-    {
-        return alpha(alpha, alpha);
-    }
-
-    /**
      * Randomly picks an initial alpha value for each projectile between the given range.
      * 
      * @param from
@@ -448,7 +366,7 @@ public class Explosion extends Behaviour
      */
     public Explosion alpha( int from, int to )
     {
-        this.alpha = from;
+        alpha(from);
         this.randomAlpha = to - from;
         return this;
     }
@@ -462,7 +380,7 @@ public class Explosion extends Behaviour
      */
     public Explosion fade( double value )
     {
-        return this.fade(value, value);
+        return fade(value, value);
     }
 
     /**
@@ -490,9 +408,10 @@ public class Explosion extends Behaviour
      *        The initial scale of the Projectile
      * @return this
      */
+    @Override
     public Explosion scale( double value )
     {
-        return this.scale(value, value);
+        return scale(value, value);
     }
 
     /**
@@ -519,7 +438,7 @@ public class Explosion extends Behaviour
      */
     public Explosion grow( double value )
     {
-        return this.grow(value, value);
+        return grow(value, value);
     }
 
     /**
@@ -549,7 +468,7 @@ public class Explosion extends Behaviour
      */
     public Explosion life( int value )
     {
-        return this.life(value, value);
+        return life(value, value);
     }
 
     /**
@@ -569,15 +488,25 @@ public class Explosion extends Behaviour
         return this;
     }
 
-    /**
-     * Causes the projectiles to be added below the exploding actor, otherwise they are added at the
-     * highest z-order.
-     * 
-     * @return this
-     */
-    public Explosion below()
+    public Explosion offsetForwards( double from, double to )
     {
-        this.below = true;
+        offsetForwards(from);
+        this.randomOffsetForwards = to - from;
+        return this;
+    }
+
+    public Explosion offsetSidewards( double from, double to )
+    {
+        offsetSidewards(from);
+        this.randomOffsetSidewards = to - from;
+        return this;
+    }
+
+    @Override
+    public Explosion pose( String poseName )
+    {
+        super.pose(poseName);
+        this.poseName = poseName;
         return this;
     }
 
@@ -591,45 +520,42 @@ public class Explosion extends Behaviour
         for (int i = 0; i < this.countPerTick; i++) {
 
             if (this.projectileCount <= 0) {
-                this.getActor().kill();
+                getActor().kill();
                 return;
             }
             this.projectileCount--;
 
-            Pose pose = null;
-            if ((this.poseName != null) && (this.getActor().getCostume() != null)) {
-                pose = this.getActor().getCostume().getPose(this.poseName);
-            }
-            if (pose == null) {
-                pose = this.getActor().getAppearance().getPose();
+            Projectile projectile = new Projectile(getActor());
+            if ((this.poseName != null) && (getActor().getCostume() != null)) {
+                projectile.pose(this.poseName);
             }
 
-            Actor actor = new Actor(pose);
+            Actor actor = projectile.createActor();
             Appearance appearance = actor.getAppearance();
-            Projectile behaviour = new Projectile(this.getActor());
 
             double direction = this.direction + random.nextDouble() * this.randomDirection;
-            if (this.rotate) {
-                appearance.setDirection(direction);
-            }
+
             appearance.setScale(this.scale + random.nextDouble() * this.randomScale);
             appearance.setAlpha(this.alpha + random.nextDouble() * this.randomAlpha);
 
-            actor.moveTo(this.getActor());
-            // TODO if rotate is false, this doesn't work???
             actor.moveForward(
-                this.offsetForwards + random.nextDouble() * this.randomOffsetForwards,
-                this.offsetSidewards + random.nextDouble() * this.randomOffsetSidewards);
+                random.nextDouble() * this.randomOffsetForwards,
+                random.nextDouble() * this.randomOffsetSidewards);
 
-            behaviour.growFactor = this.grow + random.nextDouble() * this.randomGrow;
-            behaviour.life = this.life + (int) (random.nextDouble() * this.randomLife);
-            behaviour.spin = this.spin + random.nextDouble() * this.randomSpin;
+            if (this.rotate) {
+                appearance.setDirection(direction);
+            } else {
+                appearance.setDirection(appearance.getDirection());
+            }
 
-            behaviour.vx = this.vx + random.nextDouble() * this.randomVx;
-            behaviour.vy = this.vy + random.nextDouble() * this.randomVy;
-            behaviour.gravity = this.gravity;
+            projectile.growFactor = this.grow + random.nextDouble() * this.randomGrow;
+            projectile.life = this.life + (int) (random.nextDouble() * this.randomLife);
+            projectile.spin = this.spin + random.nextDouble() * this.randomSpin;
 
-            behaviour.fade = this.fade + random.nextDouble() * this.randomFade;
+            projectile.vx = this.vx + random.nextDouble() * this.randomVx;
+            projectile.vy = this.vy + random.nextDouble() * this.randomVy;
+            projectile.gravity = this.gravity;
+            projectile.fade = this.fade + random.nextDouble() * this.randomFade;
 
             // Do speed and randomSpeed
             if ((this.speed != 0) || (this.randomSpeed != 0)) {
@@ -638,18 +564,16 @@ public class Explosion extends Behaviour
                 }
                 double cos = Math.cos(direction / 180.0 * Math.PI);
                 double sin = Math.sin(direction / 180.0 * Math.PI);
-                behaviour.vx += cos * (this.speed + random.nextDouble() * this.randomSpeed);
-                behaviour.vy -= sin * (this.speed + random.nextDouble() * this.randomSpeed);
+                projectile.vx += cos *
+                    (this.speed + random.nextDouble() * this.randomSpeed);
+                projectile.vy -= sin *
+                    (this.speed + random.nextDouble() * this.randomSpeed);
             }
 
-            appearance.setColorize(this.getActor().getAppearance().getColorize());
+            appearance.setColorize(getActor().getAppearance().getColorize());
 
-            actor.setBehaviour(behaviour);
-            if (this.below) {
-                this.getActor().getLayer().addBelow(actor, this.getActor());
-            } else {
-                this.getActor().getLayer().addTop(actor);
-            }
+            getActor().getLayer().add(actor);
+
             actor.activate();
         }
     }

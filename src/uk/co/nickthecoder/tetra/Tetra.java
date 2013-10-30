@@ -378,7 +378,8 @@ public class Tetra extends Game
             .speed(1, 3)
             .fade(3)
             // .spin(-0.2, 0.2)
-            .createActor("fragment").activate();
+            .pose("fragment")
+            .createActor().activate();
 
         actor.kill();
     }
