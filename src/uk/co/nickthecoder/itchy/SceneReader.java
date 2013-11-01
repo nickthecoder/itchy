@@ -185,6 +185,7 @@ public class SceneReader
         sceneActor.zOrder = actorTag.getOptionalIntAttribute("zOrder", defaultZOrder);
         sceneActor.alpha = actorTag.getOptionalDoubleAttribute("alpha", 255);
         sceneActor.direction = actorTag.getOptionalDoubleAttribute("direction", 0);
+        sceneActor.heading = actorTag.getOptionalDoubleAttribute("heading", sceneActor.direction);
         sceneActor.scale = actorTag.getOptionalDoubleAttribute("scale", 1);
         sceneActor.activationDelay = actorTag.getOptionalDoubleAttribute("activationDelay", 0);
         sceneActor.startEvent = actorTag.getOptionalAttribute("startEvent", "default");

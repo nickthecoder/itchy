@@ -35,7 +35,6 @@ public class Launcher extends Game
             System.err.println("Failed to load stylesheet : " + RULES);
             e.printStackTrace();
         }
-
     }
 
     @Override

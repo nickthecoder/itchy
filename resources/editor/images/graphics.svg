@@ -1248,9 +1248,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="7.919596"
-     inkscape:cx="135.29477"
-     inkscape:cy="316.13963"
+     inkscape:zoom="1.979899"
+     inkscape:cx="108.48378"
+     inkscape:cy="716.43921"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -2278,6 +2278,96 @@
            style="fill:none;stroke:#c51414;stroke-width:4.92984486;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
            d="m 490,217.36218 c -5,-10 -5,-5 -10,-15"
            id="path6168"
+           sodipodi:nodetypes="cc"
+           inkscape:connector-curvature="0" />
+      </g>
+    </g>
+    <g
+       transform="matrix(0,1,-1,0,825.81309,-117.4997)"
+       inkscape:export-ydpi="30.620001"
+       inkscape:export-xdpi="30.620001"
+       inkscape:export-filename="/home/nick/projects/itchy/resources/editor/images/headingHandle.png"
+       id="g4125"
+       style="filter:url(#filter4106);enable-background:new">
+      <g
+         style="fill:none;stroke:#fff9f9;stroke-width:15;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         id="g4127"
+         transform="translate(-10.500004,340.50002)">
+        <path
+           style="fill:none;stroke:#fff9f9;stroke-width:15;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+           d="m 670,1088.189 c 0,-20 0,-25 0,-40"
+           id="path4129"
+           transform="translate(-190,-845.82678)"
+           sodipodi:nodetypes="cc"
+           inkscape:connector-curvature="0" />
+        <path
+           style="fill:none;stroke:#fff9f9;stroke-width:15;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+           d="m 660,1063.189 c 5,-10 5,-5 10,-15"
+           id="path4131"
+           transform="translate(-190,-845.82678)"
+           sodipodi:nodetypes="cc"
+           inkscape:connector-curvature="0" />
+        <path
+           sodipodi:nodetypes="cc"
+           id="path4133"
+           d="m 490,217.36218 c -5,-10 -5,-5 -10,-15"
+           style="fill:none;stroke:#fff9f9;stroke-width:15;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+           inkscape:connector-curvature="0" />
+      </g>
+      <g
+         inkscape:export-ydpi="30.620001"
+         inkscape:export-xdpi="30.620001"
+         inkscape:export-filename="/home/nick/projects/itchy/resources/defaultGui/scaleHandle.png"
+         transform="matrix(0,-1,1,0,-152.86225,1057.8622)"
+         id="g4135"
+         style="filter:url(#filter4106);enable-background:new">
+        <rect
+           inkscape:export-ydpi="30.620001"
+           inkscape:export-xdpi="30.620001"
+           inkscape:export-filename="/home/nick/projects/itchy/resources/defaultGui/scaleHandle.png"
+           ry="14.999954"
+           rx="14.999954"
+           y="607.36224"
+           x="450"
+           height="29.999908"
+           width="30"
+           id="rect4137"
+           style="fill:#ffffff;fill-opacity:1;stroke:none" />
+        <rect
+           style="fill:#1416c5;fill-opacity:1;stroke:none"
+           id="rect4139"
+           width="20"
+           height="19.999939"
+           x="455"
+           y="612.36224"
+           rx="9.9999695"
+           ry="9.9999695"
+           inkscape:export-filename="/home/nick/projects/itchy/resources/defaultGui/scaleHandle.png"
+           inkscape:export-xdpi="30.620001"
+           inkscape:export-ydpi="30.620001" />
+      </g>
+      <g
+         transform="translate(-10.500004,340.49998)"
+         id="g4141"
+         style="fill:none;stroke:#1416c5;stroke-opacity:1">
+        <path
+           sodipodi:nodetypes="cc"
+           transform="translate(-190,-845.82678)"
+           id="path4143"
+           d="m 670,1088.189 c 0,-20 0,-25 0,-40"
+           style="fill:none;stroke:#1416c5;stroke-width:6;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+           inkscape:connector-curvature="0" />
+        <path
+           sodipodi:nodetypes="cc"
+           transform="translate(-190,-845.82678)"
+           id="path4145"
+           d="m 660,1063.189 c 5,-10 5,-5 10,-15"
+           style="fill:none;stroke:#1416c5;stroke-width:6;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+           inkscape:connector-curvature="0" />
+        <path
+           style="fill:none;stroke:#1416c5;stroke-width:6;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+           d="m 490,217.36218 c -5,-10 -5,-5 -10,-15"
+           id="path4147"
            sodipodi:nodetypes="cc"
            inkscape:connector-curvature="0" />
       </g>

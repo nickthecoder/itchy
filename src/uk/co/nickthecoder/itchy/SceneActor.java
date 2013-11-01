@@ -32,6 +32,8 @@ public abstract class SceneActor implements Cloneable
 
     double direction;
 
+    double heading;
+
     double alpha;
 
     double scale;
@@ -59,6 +61,7 @@ public abstract class SceneActor implements Cloneable
         this.y = (int) actor.getY();
         this.alpha = actor.getAppearance().getAlpha();
         this.direction = actor.getAppearance().getDirection();
+        this.heading = actor.getHeading();
         this.zOrder = actor.getZOrder();
         this.scale = actor.getAppearance().getScale();
         this.behaviourClassName = ((SceneDesignerBehaviour) actor.getBehaviour())
@@ -86,6 +89,7 @@ public abstract class SceneActor implements Cloneable
         actor.setZOrder(this.zOrder);
         actor.getAppearance().setAlpha(this.alpha);
         actor.getAppearance().setDirection(this.direction);
+        actor.setHeading(this.heading);
         actor.getAppearance().setScale(this.scale);
         actor.getAppearance().setColorize(this.colorize == null ? null : new RGBA(this.colorize));
         ClassName behaviourClassName = this.behaviourClassName;
@@ -182,6 +186,9 @@ public abstract class SceneActor implements Cloneable
             return false;
         }
         if (this.direction != other.direction) {
+            return false;
+        }
+        if (this.heading != other.heading) {
             return false;
         }
         if (this.scale != other.scale) {

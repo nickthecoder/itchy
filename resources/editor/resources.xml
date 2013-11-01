@@ -19,6 +19,7 @@
         <pose name="icon_delete" filename="images/delete.png" />                
         <pose name="scaleHandle" filename="images/scaleHandle.png"/>                
         <pose name="rotateHandle" filename="images/rotateHandle.png" offsetX="6"/>                
+        <pose name="headingHandle" filename="images/headingHandle.png" offsetX="6"/>                
     </poses>
      
     <ninePatches>     

@@ -37,9 +37,9 @@ public class Resources extends Loadable
 
     public static File getResourceFileFromDirectory( File directory )
     {
-        return new File( directory, directory.getName() + ".itchy" );
+        return new File(directory, directory.getName() + ".itchy");
     }
-    
+
     private Game game;
 
     public final GameInfo gameInfo;
@@ -103,13 +103,13 @@ public class Resources extends Loadable
     {
         String name = this.getFile().getName();
         int dot = name.lastIndexOf('.');
-        if ( dot > 0 ) {
-            return name.substring(0,dot);
+        if (dot > 0) {
+            return name.substring(0, dot);
         } else {
             return name;
         }
     }
-    
+
     public Game createGame()
         throws Exception
     {
@@ -118,7 +118,7 @@ public class Resources extends Loadable
             this.game = this.scriptManager.createGame(this.gameInfo.className);
         } else {
             Class<?> klass = Class.forName(this.gameInfo.className.name);
-            Constructor<?> constructor = klass.getConstructor( Resources.class );            
+            Constructor<?> constructor = klass.getConstructor(Resources.class);
             this.game = (Game) constructor.newInstance(this);
         }
         this.game.resources = this;
@@ -512,6 +512,51 @@ public class Resources extends Loadable
         this.costumes.put(name, costumeResource);
     }
 
+    /**
+     * Looks for a named string, and then uses that to search for another costume.
+     * <p>
+     * For example, create two ship costumes named bigShip and smallShip, and two bullets named
+     * redBullet and greenBullet. Now create a string within the bigShip : "bullet" -> "redBullet",
+     * and another within the small ship : "bullet" -> "greenBullet". Now we can get a get the
+     * appropriate bullet costume for a ship :
+     * <code>resources.getCompananionCostume( myShipActor.getCostume(), "bullet" )</code>
+     * <p>
+     * This can be useful when using {@link Compananion#costume(Costume)}; for example we may create
+     * a bullet like so : <code> 
+     * <pre>
+     * new Projectile()
+     *     .costume( Itchy.getGame().resources.getCompanionCostume( getActor().getCostume(), "bullet" )
+     *     .offsetForwards(20)
+     *     .speed(5)
+     *     .createActor().activate();
+     * </pre>
+     * </code>
+     * <p>
+     * Note, you will probably use a sub-class of Projectile, as you'll want it to check for
+     * collisions etc.
+     * <p>
+     * By creating multiple strings all named "bullet" within a ship's costume, the code above will
+     * randomly pick from the named costumes.
+     * 
+     * 
+     * @param sourceCostume
+     *        The costume who's strings are search to find the name of another costume.
+     * @param name
+     *        The name of the String to look up, which is then used as a costume name. Note, this is
+     *        NOT a costume name, it is the name of a String.
+     * @return The costume that you were searching for, or null if none was found.
+     */
+    public Costume getCompanionCostume( Costume sourceCostume, String name )
+    {
+        String costumeName = sourceCostume.getString(name);
+        if (costumeName == null) {
+            return null;
+        }
+
+        Costume result = this.getCostume(costumeName);
+        return result;
+    }
+
     public Surface getThumbnail( Costume costume )
     {
         CostumeResource resource = this.getCostumeResource(costume);
@@ -669,7 +714,7 @@ public class Resources extends Loadable
             } catch (Exception e) {
                 return false;
             }
-            
+
         }
         this.costumePropertiesClassNames.add(className);
         return true;

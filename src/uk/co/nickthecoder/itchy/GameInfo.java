@@ -35,7 +35,7 @@ public class GameInfo implements PropertySubject<GameInfo>
         this.width = 800;
         this.height = 600;
         this.className = new ClassName(Game.class.getName());
-        this.initialScene = "start";
+        this.initialScene = "";
     }
 
     @Override

@@ -31,15 +31,15 @@ public class Costume
 
     private final HashMap<String, List<FontResource>> fontChoices;
 
-    private ClassName propertiesClassName = new ClassName( CostumeProperties.class.getName() );
-    
+    private ClassName propertiesClassName = new ClassName(CostumeProperties.class.getName());
+
     public ClassName behaviourClassName = new ClassName(
         uk.co.nickthecoder.itchy.NullBehaviour.class.getName());
 
     private CostumeProperties properties = new CostumeProperties();
 
     public int defaultZOrder;
-    
+
     public Costume()
     {
         this(null);
@@ -137,6 +137,8 @@ public class Costume
     {
         return this.stringChoices.get(name);
     }
+
+
 
     // Pose
 

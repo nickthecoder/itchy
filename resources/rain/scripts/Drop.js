@@ -28,7 +28,7 @@ Drop = Class({
             // Create a splash - lots of tiny water droplets (which aren't deadly)
             new itchy.extras.Explosion(this.actor)
                 .projectiles(5).gravity(-0.2)
-                .forwards().fade(0.9, 3.5).speed(0.1, 1.5).vy(5)
+                .fade(0.9, 3.5).speed(-1.5, 1.5).vy(5,8)
                 .pose("droplet").createActor().activate();
             
             // Blue drops make a "drop" sound, gold drops say a random phrase.

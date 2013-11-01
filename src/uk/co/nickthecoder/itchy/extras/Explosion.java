@@ -9,6 +9,8 @@ import java.util.Random;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Appearance;
+import uk.co.nickthecoder.itchy.Behaviour;
+import uk.co.nickthecoder.itchy.Itchy;
 
 /**
  * Creates many particles from a central point, spreading outwards. This is typically used when an
@@ -19,9 +21,9 @@ import uk.co.nickthecoder.itchy.Appearance;
  * 
  * <pre>
  * <code>
- * new itchy.extras.Explosion(actor)
- *     .projectiles(10).gravity(-0.2).forwards().fade(0.9, 3.5).speed(0.1, 1.5).vy(5)
- *     .createActor("droplet").activate(); 
+ * new Explosion(actor)
+ *     .projectiles(10).gravity(-0.2).fade(0.9, 3.5).speed(0.1, 1.5).vy(5)
+ *     .pose("droplet").createActor().activate(); 
  * </code>
  * </pre>
  * 
@@ -32,32 +34,32 @@ import uk.co.nickthecoder.itchy.Appearance;
  * Explosion explosion = new itchy.extras.Explosion(actor);
  * explosion.projectiles(10);
  * explosion.gravity(-0.2);
- * explosion.forwards();
- * explosion.fade(0.9, 3.5)
- * explosion.speed(0.1, 1.5)
- * explosion.vy(5)
- * explosion.createActor("droplet").activate();
+ * explosion.fade(0.9, 3.5);
+ * explosion.speed(0.1, 1.5);
+ * explosion.vy(5);
+ * explosion.pose("droplet");
+ * explosion.createActor().activate();
  * </code>
  * </pre>
  * 
- * Note that the createActor method returns an Actor (not this Explosion), and therefore must be
+ * Note that the createActor method returns an Actor (not the Explosion), and therefore must be
  * last.
  */
 public class Explosion extends Companion<Explosion>
 {
+    public static final double DEFAULT_LIFE_SECONDS = 6;
+
     private static Random random = new Random();
 
     private String poseName;
 
-    public int projectileCount = 0;
+    public int totalProjectiles = 0;
+
+    public int projectileCounter = 0;
 
     public int countPerTick = 1000;
 
     public double gravity = 0;
-
-    public boolean rotate = false;
-
-    public boolean sameDirection = true;
 
     public double spin = 0;
 
@@ -71,39 +73,48 @@ public class Explosion extends Companion<Explosion>
 
     public double randomVy = 0;
 
-    public double direction = 0;
+    public double speedForwards = 0;
 
-    public double randomDirection = 360;
+    public double speedSidewards = 0;
 
-    public double heading = 0;
+    public double randomSpeedForwards = 0;
 
-    public double randomHeading = 360;
-
-    public double speed = 0;
-
-    public double randomSpeed = 0;
+    public double randomSpeedSidewards = 0;
 
     public double fade = 0;
 
     public double randomFade = 0;
 
-    public int life = 300;
+    public int lifeTicks;
 
-    public int randomLife = 300;
-
-    public int randomAlpha = 0;
-
-    public double scale = 1;
-
-    public double randomScale = 0;
+    public int randomLifeTicks = 0;
 
     public double grow = 1;
 
+    public int randomAlpha = 0;
+
+    public double randomDirection = 0;
+
+    public boolean randomSpread = true;
+
+    public double spreadFrom = 0;
+
+    public double spreadTo = 360;
+
     public double randomGrow = 0;
+
+    public double randomScale = 0;
 
     public double randomOffsetForwards = 0;
 
     public double randomOffsetSidewards = 0;
+
+    public String projectileEventName;
+
+    public Explosion( Behaviour behaviour )
+    {
+        this(behaviour.getActor());
+    }
 
     /**
      * Creates an explosion centred on the given actor.
@@ -114,9 +125,9 @@ public class Explosion extends Companion<Explosion>
     {
         super(actor);
         this.direction = actor.getAppearance().getDirection();
+        this.lifeTicks = (int) (DEFAULT_LIFE_SECONDS * Itchy.frameRate.getRequiredRate());
     }
 
-    // TODO make this like Follower and Projectile - createActor should take no arguments
     /**
      * Creates the explosion actor using a pose from the costume of the actor given in the
      * constructor. This allows the exploding projectiles to look different from the actor that
@@ -143,6 +154,22 @@ public class Explosion extends Companion<Explosion>
     }
 
     /**
+     * The projectiles will fire this event when each Projectile's Actor is created. The event can
+     * select a Pose, an Animation, and can play a sound. If you only want to select a pose, then
+     * use {@link #pose(String)}. It will not fire the event when the Explosion's actor is created.
+     * 
+     * @param eventName
+     *        The name of the event to fire when the actor is created.
+     * @return this
+     */
+    @Override
+    public Explosion startEvent( String eventName )
+    {
+        this.projectileEventName = eventName;
+        return this;
+    }
+
+    /**
      * Sets the number of projectiles to create.
      * 
      * @param value
@@ -150,7 +177,7 @@ public class Explosion extends Companion<Explosion>
      */
     public Explosion projectiles( int value )
     {
-        this.projectileCount = value;
+        this.totalProjectiles = value;
         return this;
     }
 
@@ -160,7 +187,7 @@ public class Explosion extends Companion<Explosion>
      *        want all of the projectiles to be created simultaneously, so don't call this method.
      * @return this
      */
-    public Explosion projectilesPerClick( int value )
+    public Explosion projectilesPerTick( int value )
     {
         this.countPerTick = value;
         return this;
@@ -175,20 +202,6 @@ public class Explosion extends Companion<Explosion>
     public Explosion gravity( double value )
     {
         this.gravity = value;
-        return this;
-    }
-
-    /**
-     * Are the particles images to be rotated? Typically set to false if the particles are small or
-     * circular. Note, this is not the same as {@link #spin}.
-     * 
-     * @param value
-     *        True if the objects should be rotated in the direction of movement.
-     * @return
-     */
-    public Explosion rotate( boolean value )
-    {
-        this.rotate = value;
         return this;
     }
 
@@ -221,9 +234,14 @@ public class Explosion extends Companion<Explosion>
     }
 
     /**
+     * A constant X velocity for all projectiles. Note, this can be used in conjunction with speed,
+     * the projectiles' velocities will be the sum of their speed in the direction of their heading,
+     * and their (vx,vy) velocity.
+     * 
      * @param value
      *        The initial X velocity of each projectile. Use this if you want to carry the momentum
      *        of the exploding actor.
+     * 
      * @return this
      */
     public Explosion vx( double value )
@@ -232,7 +250,9 @@ public class Explosion extends Companion<Explosion>
     }
 
     /**
-     * A random X velocity for each projectile between two values.
+     * A random X velocity for each projectile in a given range. Note, this can be used in
+     * conjunction with speed, the projectiles' velocities will be the sum of their speed in the
+     * direction of their heading, and their (vx,vy) velocity.
      * 
      * @param from
      *        The lowest X velocity in pixels per tick.
@@ -265,59 +285,41 @@ public class Explosion extends Companion<Explosion>
         return this;
     }
 
-    public Explosion direction( double value )
-    {
-        return direction(value, value);
-    }
-
+    /**
+     * Each projectile is points in a random direction within the given range. Note, if this method
+     * is not called, but {@link #rotate} is called, then the projectiles will point in the same
+     * direction as their heading.
+     * 
+     * @param from
+     *        The minimum direction in degrees
+     * @param to
+     *        The maximum direction in degrees
+     * @return this
+     */
     public Explosion direction( double from, double to )
     {
-        this.direction = from;
+        direction(from);
         this.randomDirection = to - from;
         return this;
     }
 
-    /**
-     * All fragments point in the same direction as the source actor, The particles will move in the
-     * direction given by the "heading" method, (which defaults to 0..360 degrees (i.e. randomly in
-     * a full circle).
-     * 
-     * @return this
-     */
-    public Explosion forwards()
+    public Explosion spread( double spreadFrom, double spreadTo )
     {
-        rotate(true);
-        direction(this.source.getAppearance().getDirection());
-        this.sameDirection = false;
+        this.spreadFrom = spreadFrom;
+        this.spreadTo = spreadTo;
+
         return this;
     }
 
-    /**
-     * Used in conjunction with {@link #speed}.
-     * 
-     * @param value
-     *        The direction of movement in degrees.
-     * @return this
-     */
-    public Explosion heading( double value )
+    public Explosion randomSpread()
     {
-        return heading(value, value);
+        this.randomSpread = true;
+        return this;
     }
 
-    /**
-     * Choose a random heading for each Projectile.
-     * 
-     * @param from
-     *        The smallest heading (typically 0 to 360)
-     * @param to
-     *        The largest heading (typically 0 to 360)
-     * @return this
-     */
-    public Explosion heading( double from, double to )
+    public Explosion randomSpread( boolean value )
     {
-        this.sameDirection = false;
-        this.heading = from;
-        this.randomHeading = to - from;
+        this.randomSpread = value;
         return this;
     }
 
@@ -334,24 +336,28 @@ public class Explosion extends Companion<Explosion>
      *        The speed away from the centre of the explosion in pixels per frame.
      * @return this
      */
-    public Explosion speed( double value )
+    public Explosion speed( double forwards, double sidewards )
     {
-        return speed(value, value);
+        return speed(forwards, forwards, sidewards, sidewards);
     }
 
     /**
      * Randomly choose a speed within a given range. See {@link #speed(double)} for more details.
      * 
      * @param from
-     *        The minium speed
+     *        The minimum speed
      * @param to
      *        The maximum speed
      * @return this
      */
-    public Explosion speed( double from, double to )
+    public Explosion speed( double minForwards, double maxForwards, double minSidewards,
+        double maxSidewards )
     {
-        this.speed = from;
-        this.randomSpeed = to - from;
+        this.speedForwards = minForwards;
+        this.randomSpeedForwards = maxForwards - minForwards;
+
+        this.speedSidewards = minSidewards;
+        this.randomSpeedSidewards = maxSidewards - minSidewards;
         return this;
     }
 
@@ -404,17 +410,6 @@ public class Explosion extends Companion<Explosion>
     }
 
     /**
-     * @param value
-     *        The initial scale of the Projectile
-     * @return this
-     */
-    @Override
-    public Explosion scale( double value )
-    {
-        return scale(value, value);
-    }
-
-    /**
      * Randomly picks an initial scale for each Projectile within the given range.
      * 
      * @param from
@@ -425,7 +420,7 @@ public class Explosion extends Companion<Explosion>
      */
     public Explosion scale( double from, double to )
     {
-        this.scale = from;
+        scale(from);
         this.randomScale = to - from;
         return this;
     }
@@ -462,29 +457,28 @@ public class Explosion extends Companion<Explosion>
      * life runs out, whichever is soonest. So if you want a long fade with no abrupt end, you can
      * set life to a large number, and let the fade kill the Projectile.
      * 
-     * @param value
-     *        The number of frames that the projectile lasts for. The default value is 300 frames.
+     * @param seconds
+     *        The number of seconds that each of projectile lasts for.
      * @return this
      */
-    public Explosion life( int value )
+    public Explosion life( double seconds )
     {
-        return life(value, value);
+        return life(seconds, seconds);
     }
 
     /**
-     * Sets the lifespan of the Projectile to a random number of frames within the range given. See
-     * {@link #life(int)}
+     * Sets the lifespan of the Projectile within the range given. See {@link #life(double)}
      * 
      * @param from
-     *        The smallest lifespan (in frames).
+     *        The minimum lifespan of the projectile in seconds.
      * @param to
-     *        The largest lifespan (in frames).
+     *        The maximum lifespan of the projectiles in seconds.
      * @return this
      */
-    public Explosion life( int from, int to )
+    public Explosion life( double from, double to )
     {
-        this.life = from;
-        this.randomLife = to - from;
+        this.lifeTicks = (int) (Itchy.frameRate.getRequiredRate() * from);
+        this.randomLifeTicks = (int) (Itchy.frameRate.getRequiredRate() * (to - from));
         return this;
     }
 
@@ -519,38 +513,42 @@ public class Explosion extends Companion<Explosion>
     {
         for (int i = 0; i < this.countPerTick; i++) {
 
-            if (this.projectileCount <= 0) {
+            if (this.projectileCounter >= this.totalProjectiles) {
                 getActor().kill();
                 return;
             }
-            this.projectileCount--;
 
             Projectile projectile = new Projectile(getActor());
             if ((this.poseName != null) && (getActor().getCostume() != null)) {
                 projectile.pose(this.poseName);
             }
+            if (this.projectileEventName != null) {
+                projectile.startEvent(this.projectileEventName);
+            }
 
             Actor actor = projectile.createActor();
             Appearance appearance = actor.getAppearance();
 
-            double direction = this.direction + random.nextDouble() * this.randomDirection;
-
             appearance.setScale(this.scale + random.nextDouble() * this.randomScale);
             appearance.setAlpha(this.alpha + random.nextDouble() * this.randomAlpha);
 
-            actor.moveForward(
-                random.nextDouble() * this.randomOffsetForwards,
-                random.nextDouble() * this.randomOffsetSidewards);
+            if ((this.randomOffsetForwards != 0) && (this.randomOffsetSidewards != 0)) {
+                actor.moveForward(
+                    random.nextDouble() * this.randomOffsetForwards,
+                    random.nextDouble() * this.randomOffsetSidewards);
+            }
 
             if (this.rotate) {
-                appearance.setDirection(direction);
-            } else {
-                appearance.setDirection(appearance.getDirection());
+                double actualDirection = this.direction + random.nextDouble() *
+                    this.randomDirection;
+                appearance.setDirection(actualDirection);
             }
 
             projectile.growFactor = this.grow + random.nextDouble() * this.randomGrow;
-            projectile.life = this.life + (int) (random.nextDouble() * this.randomLife);
+            projectile.lifeTicks = this.lifeTicks +
+                (int) (random.nextDouble() * this.randomLifeTicks);
             projectile.spin = this.spin + random.nextDouble() * this.randomSpin;
+            projectile.rotate = this.rotate;
 
             projectile.vx = this.vx + random.nextDouble() * this.randomVx;
             projectile.vy = this.vy + random.nextDouble() * this.randomVy;
@@ -558,23 +556,38 @@ public class Explosion extends Companion<Explosion>
             projectile.fade = this.fade + random.nextDouble() * this.randomFade;
 
             // Do speed and randomSpeed
-            if ((this.speed != 0) || (this.randomSpeed != 0)) {
-                if (!this.sameDirection) {
-                    direction = this.heading + random.nextDouble() * this.randomHeading;
-                }
-                double cos = Math.cos(direction / 180.0 * Math.PI);
-                double sin = Math.sin(direction / 180.0 * Math.PI);
-                projectile.vx += cos *
-                    (this.speed + random.nextDouble() * this.randomSpeed);
-                projectile.vy -= sin *
-                    (this.speed + random.nextDouble() * this.randomSpeed);
-            }
+            if ((this.speedForwards != 0) || (this.speedSidewards != 0) ||
+                (this.randomSpeedForwards != 0) || (this.randomSpeedSidewards != 0)) {
 
-            appearance.setColorize(getActor().getAppearance().getColorize());
+                double actualSpeedForwards = this.speedForwards + random.nextDouble() *
+                    this.randomSpeedForwards;
+                double actualSpeedSidewards = this.speedSidewards + random.nextDouble() *
+                    this.randomSpeedSidewards;
+                double actualHeading = this.spreadFrom;
+
+                if (this.randomSpread) {
+                    actualHeading += +random.nextDouble() * (this.spreadTo - this.spreadFrom);
+                } else {
+                    actualHeading += (this.spreadTo - this.spreadFrom) /
+                        (this.totalProjectiles - 1) *
+                        this.projectileCounter;
+                }
+                
+                double cos = Math.cos(actualHeading / 180.0 * Math.PI);
+                double sin = Math.sin(actualHeading / 180.0 * Math.PI);
+
+                projectile.vx = (cos * actualSpeedForwards) - (sin * actualSpeedSidewards);
+                if (this.getActor().getYAxisPointsDown()) {
+                    projectile.vy = (-sin * actualSpeedForwards) - (cos * actualSpeedSidewards);
+                } else {
+                    projectile.vy = (sin * actualSpeedForwards) + (cos * actualSpeedSidewards);
+                }
+            }
 
             getActor().getLayer().add(actor);
 
             actor.activate();
+            this.projectileCounter++;
         }
     }
 

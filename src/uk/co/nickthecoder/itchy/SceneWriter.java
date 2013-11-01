@@ -137,6 +137,7 @@ public class SceneWriter extends XMLWriter
         this.attribute("x", sceneActor.x);
         this.attribute("y", sceneActor.y);
         this.attribute("direction", sceneActor.direction);
+        this.attribute("heading", sceneActor.heading);
         this.attribute("startEvent", sceneActor.startEvent);
         this.attribute("zOrder", sceneActor.zOrder);
 

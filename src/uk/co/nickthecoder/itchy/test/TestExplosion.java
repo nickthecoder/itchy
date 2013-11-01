@@ -6,10 +6,10 @@
 package uk.co.nickthecoder.itchy.test;
 
 import uk.co.nickthecoder.itchy.Behaviour;
-import uk.co.nickthecoder.itchy.extras.Projectile;
+import uk.co.nickthecoder.itchy.extras.Explosion;
 import uk.co.nickthecoder.itchy.util.Property;
 
-public class TestProjectiles extends Behaviour
+public class TestExplosion extends Behaviour
 {
     @Property(label = "Test ID")
     public int id;
@@ -56,31 +56,46 @@ public class TestProjectiles extends Behaviour
     @Property(label = "alpha")
     public double alpha = 255;
 
+    @Property(label = "projectiles")
+    public int projectiles = 10;
+
+    @Property(label = "projectilesPerTick")
+    public int projectilesPerTick = -1;
+
+    @Property(label = "Heading From")
+    public double spreadFrom = 0;
+
+    @Property(label = "Heading To")
+    public double spreadTo = 360;
+
+    @Property(label = "Spread")
+    public boolean randomSpread = false;
+
     @Override
     public void tick()
     {
-        if (this.id == 0) {
-            test0().createActor().activate();
-        } else if (this.id == 1) {
-            test1().createActor().activate();
-        }
+        test0().createActor().activate();
         this.getActor().deactivate();
     }
 
-    private Projectile test0()
+    private Explosion test0()
     {
-        return new Projectile(this)
+        Explosion result = new Explosion(this)
             .offset(this.offsetX, this.offsetY)
             .offsetForwards(this.offsetForwards).offsetSidewards(this.offsetSidewards)
-            .alpha(this.alpha)
-            .life(this.life).vx(this.vx).vy(this.vy)
-            .speed(this.speedForwards, this.speedSidewards).gravity(this.gravity).spin(this.spin)
-            .fade(this.fade).growFactor(this.growFactor).startEvent("bomb");
+            .speed(this.speedForwards, this.speedSidewards).vx(this.vx).vy(this.vy).gravity(this.gravity)
+            .alpha(this.alpha).life(this.life)
+            .fade(this.fade).spin(this.spin).pose("bomb")
+            .projectiles(this.projectiles).rotate()
+            .spread(this.spreadFrom, this.spreadTo).randomSpread(this.randomSpread);
+
+        if (this.projectilesPerTick != -1) {
+            result.projectilesPerTick(this.projectilesPerTick);
+        }
+
+
+        return result;
     }
 
-    private Projectile test1()
-    {
-        return test0().rotate(true);
-    }
 
 }

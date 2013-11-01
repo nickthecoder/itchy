@@ -13,6 +13,7 @@
     <pose name="alien3b" filename="images/alien3b.png" direction="-90.0"/>
     <pose name="bomb1" filename="images/bomb1.png" direction="-90.0"/>
     <pose name="bomb2" filename="images/bomb2.png" direction="-90.0"/>
+    <pose name="line" filename="images/line.png"/>
   </poses>
   <sounds/>
   <animations>
@@ -28,132 +29,242 @@
       <compound sequence="true" loops="1">
         <move dx="0.0" dy="200.0" ticks="200" ease="bounce"/>
         <move dx="0.0" dy="-200.0" ticks="200" ease="bounce"/>
+        <turn turn="360.0" ticks="100" ease="bounce"/>
+        <scale target="2.0" ticks="200" ease="bounce"/>
+        <scale target="1.0" ticks="200" ease="bounce"/>
+        <alpha target="20.0" ticks="200" ease="bounce"/>
+        <alpha target="235.0" ticks="200" ease="bounce"/>
       </compound>
     </animation>
     <animation name="bounce2">
       <compound sequence="true" loops="1">
         <move dx="0.0" dy="200.0" ticks="200" ease="bounce2"/>
         <move dx="0.0" dy="-200.0" ticks="200" ease="bounce2"/>
+        <turn turn="360.0" ticks="100" ease="bounce2"/>
+        <scale target="2.0" ticks="200" ease="bounce2"/>
+        <scale target="1.0" ticks="200" ease="bounce2"/>
+        <alpha target="20.0" ticks="200" ease="bounce2"/>
+        <alpha target="235.0" ticks="200" ease="bounce2"/>
       </compound>
     </animation>
     <animation name="bounce3">
       <compound sequence="true" loops="1">
         <move dx="0.0" dy="200.0" ticks="200" ease="bounce3"/>
         <move dx="0.0" dy="-200.0" ticks="200" ease="bounce3"/>
+        <turn turn="360.0" ticks="100" ease="bounce3"/>
+        <scale target="2.0" ticks="200" ease="bounce3"/>
+        <scale target="1.0" ticks="200" ease="bounce3"/>
+        <alpha target="20.0" ticks="200" ease="bounce3"/>
+        <alpha target="235.0" ticks="200" ease="bounce3"/>
       </compound>
     </animation>
     <animation name="ease">
       <compound sequence="true" loops="1">
-        <move dx="0.0" dy="200.0" ticks="200" ease="easeIn"/>
-        <move dx="0.0" dy="-200.0" ticks="200" ease="easeIn"/>
+        <move dx="0.0" dy="200.0" ticks="200" ease="default"/>
+        <move dx="0.0" dy="-200.0" ticks="200" ease="default"/>
+        <turn turn="360.0" ticks="100" ease="default"/>
+        <scale target="2.0" ticks="200" ease="default"/>
+        <scale target="1.0" ticks="200" ease="default"/>
+        <alpha target="20.0" ticks="200" ease="default"/>
+        <alpha target="235.0" ticks="200" ease="default"/>
       </compound>
     </animation>
     <animation name="easeIn">
       <compound sequence="true" loops="1">
         <move dx="0.0" dy="200.0" ticks="200" ease="easeIn"/>
         <move dx="0.0" dy="-200.0" ticks="200" ease="easeIn"/>
+        <turn turn="360.0" ticks="100" ease="easeIn"/>
+        <scale target="2.0" ticks="200" ease="easeIn"/>
+        <scale target="1.0" ticks="200" ease="easeIn"/>
+        <alpha target="20.0" ticks="200" ease="easeIn"/>
+        <alpha target="235.0" ticks="200" ease="easeIn"/>
       </compound>
     </animation>
     <animation name="easeInBack">
       <compound sequence="true" loops="1">
         <move dx="0.0" dy="200.0" ticks="200" ease="easeInBack"/>
         <move dx="0.0" dy="-200.0" ticks="200" ease="easeInBack"/>
+        <turn turn="360.0" ticks="100" ease="easeInBack"/>
+        <scale target="2.0" ticks="200" ease="easeInBack"/>
+        <scale target="1.0" ticks="200" ease="easeInBack"/>
+        <alpha target="20.0" ticks="200" ease="easeInBack"/>
+        <alpha target="235.0" ticks="200" ease="easeInBack"/>
       </compound>
     </animation>
     <animation name="easeInCirc">
       <compound sequence="true" loops="1">
         <move dx="0.0" dy="200.0" ticks="200" ease="easeInCirc"/>
         <move dx="0.0" dy="-200.0" ticks="200" ease="easeInCirc"/>
+        <turn turn="360.0" ticks="100" ease="easeInCirc"/>
+        <scale target="2.0" ticks="200" ease="easeInCirc"/>
+        <scale target="1.0" ticks="200" ease="easeInCirc"/>
+        <alpha target="20.0" ticks="200" ease="easeInCirc"/>
+        <alpha target="235.0" ticks="200" ease="easeInCirc"/>
       </compound>
     </animation>
     <animation name="easeInCubic">
       <compound sequence="true" loops="1">
         <move dx="0.0" dy="200.0" ticks="200" ease="easeInCubic"/>
         <move dx="0.0" dy="-200.0" ticks="200" ease="easeInCubic"/>
+        <turn turn="360.0" ticks="100" ease="easeInCubic"/>
+        <scale target="2.0" ticks="200" ease="easeInCubic"/>
+        <scale target="1.0" ticks="200" ease="easeInCubic"/>
+        <alpha target="20.0" ticks="200" ease="easeInCubic"/>
+        <alpha target="235.0" ticks="200" ease="easeInCubic"/>
       </compound>
     </animation>
     <animation name="easeInExpo">
       <compound sequence="true" loops="1">
         <move dx="0.0" dy="200.0" ticks="200" ease="easeInExpo"/>
         <move dx="0.0" dy="-200.0" ticks="200" ease="easeInExpo"/>
+        <turn turn="360.0" ticks="100" ease="easeInExpo"/>
+        <scale target="2.0" ticks="200" ease="easeInExpo"/>
+        <scale target="1.0" ticks="200" ease="easeInExpo"/>
+        <alpha target="20.0" ticks="200" ease="easeInExpo"/>
+        <alpha target="235.0" ticks="200" ease="easeInExpo"/>
       </compound>
     </animation>
     <animation name="easeInOut">
       <compound sequence="true" loops="1">
         <move dx="0.0" dy="200.0" ticks="200" ease="easeOut"/>
         <move dx="0.0" dy="-200.0" ticks="200" ease="easeOut"/>
+        <turn turn="360.0" ticks="100" ease="easeOut"/>
+        <scale target="2.0" ticks="200" ease="easeOut"/>
+        <scale target="1.0" ticks="200" ease="easeOut"/>
+        <alpha target="20.0" ticks="200" ease="easeOut"/>
+        <alpha target="235.0" ticks="200" ease="easeOut"/>
       </compound>
     </animation>
     <animation name="easeInOutBack">
       <compound sequence="true" loops="1">
         <move dx="0.0" dy="200.0" ticks="200" ease="easeInOutBack"/>
         <move dx="0.0" dy="-200.0" ticks="200" ease="easeInOutBack"/>
+        <turn turn="360.0" ticks="100" ease="easeInOutBack"/>
+        <scale target="2.0" ticks="200" ease="easeInOutBack"/>
+        <scale target="1.0" ticks="200" ease="easeInOutBack"/>
+        <alpha target="20.0" ticks="200" ease="easeInOutBack"/>
+        <alpha target="235.0" ticks="200" ease="easeInOutBack"/>
       </compound>
     </animation>
     <animation name="easeInOutCirc">
       <compound sequence="true" loops="1">
         <move dx="0.0" dy="200.0" ticks="200" ease="easeInOutCirc"/>
         <move dx="0.0" dy="-200.0" ticks="200" ease="easeInOutCirc"/>
+        <turn turn="360.0" ticks="100" ease="easeInOutCirc"/>
+        <scale target="2.0" ticks="200" ease="easeInOutCirc"/>
+        <scale target="1.0" ticks="200" ease="easeInOutCirc"/>
+        <alpha target="20.0" ticks="200" ease="easeInOutCirc"/>
+        <alpha target="235.0" ticks="200" ease="easeInOutCirc"/>
       </compound>
     </animation>
     <animation name="easeInOutCubic">
       <compound sequence="true" loops="1">
         <move dx="0.0" dy="200.0" ticks="200" ease="easeInOutCubic"/>
         <move dx="0.0" dy="-200.0" ticks="200" ease="easeInOutCubic"/>
+        <turn turn="360.0" ticks="100" ease="easeInOutCubic"/>
+        <scale target="2.0" ticks="200" ease="easeInOutCubic"/>
+        <scale target="1.0" ticks="200" ease="easeInOutCubic"/>
+        <alpha target="20.0" ticks="200" ease="easeInOutCubic"/>
+        <alpha target="235.0" ticks="200" ease="easeInOutCubic"/>
       </compound>
     </animation>
     <animation name="easeInOutExpo">
       <compound sequence="true" loops="1">
         <move dx="0.0" dy="200.0" ticks="200" ease="easeInOutExpo"/>
         <move dx="0.0" dy="-200.0" ticks="200" ease="easeInOutExpo"/>
+        <turn turn="360.0" ticks="100" ease="easeInOutExpo"/>
+        <scale target="2.0" ticks="200" ease="easeInOutExpo"/>
+        <scale target="1.0" ticks="200" ease="easeInOutExpo"/>
+        <alpha target="20.0" ticks="200" ease="easeInOutExpo"/>
+        <alpha target="235.0" ticks="200" ease="easeInOutExpo"/>
       </compound>
     </animation>
     <animation name="easeInOutQuad">
       <compound sequence="true" loops="1">
         <move dx="0.0" dy="200.0" ticks="200" ease="easeInOutQuad"/>
         <move dx="0.0" dy="-200.0" ticks="200" ease="easeInOutQuad"/>
+        <turn turn="360.0" ticks="100" ease="easeInOutQuad"/>
+        <scale target="2.0" ticks="200" ease="easeInOutQuad"/>
+        <scale target="1.0" ticks="200" ease="easeInOutQuad"/>
+        <alpha target="20.0" ticks="200" ease="easeInOutQuad"/>
+        <alpha target="235.0" ticks="200" ease="easeInOutQuad"/>
       </compound>
     </animation>
     <animation name="easeInQuad">
       <compound sequence="true" loops="1">
         <move dx="0.0" dy="200.0" ticks="200" ease="easeInQuad"/>
         <move dx="0.0" dy="-200.0" ticks="200" ease="easeInQuad"/>
+        <turn turn="360.0" ticks="100" ease="easeInQuad"/>
+        <scale target="2.0" ticks="200" ease="easeInQuad"/>
+        <scale target="1.0" ticks="200" ease="easeInQuad"/>
+        <alpha target="20.0" ticks="200" ease="easeInQuad"/>
+        <alpha target="235.0" ticks="200" ease="easeInQuad"/>
       </compound>
     </animation>
     <animation name="easeOut">
       <compound sequence="true" loops="1">
         <move dx="0.0" dy="200.0" ticks="200" ease="easeOut"/>
         <move dx="0.0" dy="-200.0" ticks="200" ease="easeOut"/>
+        <turn turn="360.0" ticks="100" ease="easeOut"/>
+        <scale target="2.0" ticks="200" ease="easeOut"/>
+        <scale target="1.0" ticks="200" ease="easeOut"/>
+        <alpha target="20.0" ticks="200" ease="easeOut"/>
+        <alpha target="235.0" ticks="200" ease="easeOut"/>
       </compound>
     </animation>
     <animation name="easeOutBack">
       <compound sequence="true" loops="1">
         <move dx="0.0" dy="200.0" ticks="200" ease="easeOutBack"/>
         <move dx="0.0" dy="-200.0" ticks="200" ease="easeOutBack"/>
+        <turn turn="360.0" ticks="100" ease="easeOutBack"/>
+        <scale target="2.0" ticks="200" ease="easeOutBack"/>
+        <scale target="1.0" ticks="200" ease="easeOutBack"/>
+        <alpha target="20.0" ticks="200" ease="easeOutBack"/>
+        <alpha target="235.0" ticks="200" ease="easeOutBack"/>
       </compound>
     </animation>
     <animation name="easeOutCirc">
       <compound sequence="true" loops="1">
         <move dx="0.0" dy="200.0" ticks="200" ease="easeOutCirc"/>
         <move dx="0.0" dy="-200.0" ticks="200" ease="easeOutCirc"/>
+        <turn turn="360.0" ticks="100" ease="easeOutCirc"/>
+        <scale target="2.0" ticks="200" ease="easeOutCirc"/>
+        <scale target="1.0" ticks="200" ease="easeOutCirc"/>
+        <alpha target="20.0" ticks="200" ease="easeOutCirc"/>
+        <alpha target="235.0" ticks="200" ease="easeOutCirc"/>
       </compound>
     </animation>
     <animation name="easeOutCubic">
       <compound sequence="true" loops="1">
         <move dx="0.0" dy="200.0" ticks="200" ease="easeOutCubic"/>
         <move dx="0.0" dy="-200.0" ticks="200" ease="easeOutCubic"/>
+        <turn turn="360.0" ticks="100" ease="easeOutCubic"/>
+        <scale target="2.0" ticks="200" ease="easeOutCubic"/>
+        <scale target="1.0" ticks="200" ease="easeOutCubic"/>
+        <alpha target="20.0" ticks="200" ease="easeOutCubic"/>
+        <alpha target="235.0" ticks="200" ease="easeOutCubic"/>
       </compound>
     </animation>
     <animation name="easeOutExpo">
       <compound sequence="true" loops="1">
         <move dx="0.0" dy="200.0" ticks="200" ease="easeOutExpo"/>
         <move dx="0.0" dy="-200.0" ticks="200" ease="easeOutExpo"/>
+        <turn turn="360.0" ticks="100" ease="easeOutExpo"/>
+        <scale target="2.0" ticks="200" ease="easeOutExpo"/>
+        <scale target="1.0" ticks="200" ease="easeOutExpo"/>
+        <alpha target="20.0" ticks="200" ease="easeOutExpo"/>
+        <alpha target="235.0" ticks="200" ease="easeOutExpo"/>
       </compound>
     </animation>
     <animation name="easeOutQuad">
       <compound sequence="true" loops="1">
         <move dx="0.0" dy="200.0" ticks="200" ease="easeOutQuad"/>
         <move dx="0.0" dy="-200.0" ticks="200" ease="easeOutQuad"/>
+        <turn turn="360.0" ticks="100" ease="easeOutQuad"/>
+        <scale target="2.0" ticks="200" ease="easeOutQuad"/>
+        <scale target="1.0" ticks="200" ease="easeOutQuad"/>
+        <alpha target="20.0" ticks="200" ease="easeOutQuad"/>
+        <alpha target="235.0" ticks="200" ease="easeOutQuad"/>
       </compound>
     </animation>
     <animation name="fade">
@@ -165,6 +276,11 @@
       <compound sequence="true" loops="1">
         <move dx="0.0" dy="200.0" ticks="200" ease="linear"/>
         <move dx="0.0" dy="-200.0" ticks="200" ease="linear"/>
+        <turn turn="360.0" ticks="100" ease="linear"/>
+        <scale target="2.0" ticks="200" ease="linear"/>
+        <scale target="1.0" ticks="200" ease="linear"/>
+        <alpha target="20.0" ticks="200" ease="linear"/>
+        <alpha target="235.0" ticks="200" ease="linear"/>
       </compound>
     </animation>
   </animations>
@@ -219,9 +335,14 @@
       <pose name="default" pose="bomb1"/>
       <animation name="default" animation="bomb"/>
     </costume>
+    <costume name="line" defaultZOrder="0">
+      <pose name="default" pose="line"/>
+    </costume>
   </costumes>
   <scenes>
+    <scene name="explosions"/>
     <scene name="menu"/>
+    <scene name="profileBug"/>
     <scene name="profiles"/>
     <scene name="projectiles"/>
   </scenes>

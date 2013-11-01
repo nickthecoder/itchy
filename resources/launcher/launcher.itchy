@@ -1,16 +1,10 @@
 <resources>
-  <game title="Itchy Launcher" width="600" height="480" iconFilename="icon.bmp" className="uk.co.nickthecoder.itchy.Launcher"/>
-  <fonts>
-  </fonts>
-  <poses>
-  </poses>
-  <sounds>
-  </sounds>
-  <animations>
-  </animations>
-  <costumes>
-  </costumes>
-  <scenes>
-  </scenes>
+  <game title="Itchy Launcher" width="600" height="480" className="uk.co.nickthecoder.itchy.Launcher"/>
+  <fonts/>
+  <ninePatches/>
+  <poses/>
+  <sounds/>
+  <animations/>
+  <costumes/>
+  <scenes/>
 </resources>
-

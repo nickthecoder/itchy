@@ -1,13 +1,16 @@
-Cedar center - Blood transfusion.
-
-Actor to have a heading and direction
-    Load/Save the Actor.heading.
-    Look at Companion, Explosion an co, and make them use heading as well as direction.
-        Remove "sameHeading" cruft. 
+Test Explosion
+    VX ,VY not working.
+    
+Test Animation Eases - have the simple test case.
 
 What's Next
 ===========
 
+Tests for Follower
+Check Talk to see if it makes sense - does it play nicely when selecting a pose?
+
+Add pose and nine patch to try to show the image sub directory if it exists.
+    Copy images if outside of the game's directory
 
 Create a game from scratch, deliberately making syntax errors in the code.
     Fix any bugs and improve the UI along the way. 
@@ -30,8 +33,6 @@ Check that a broken script doesn't cause problems :
 
 Bugs
 ====
-
-One of the animation profiles shows that the NumericAnimation isn't quite right.
 
 On Remove, there is no check that the resource isn't being used by something else.
     Easy pose, animation, sound..., but tricky for costume, as they could be used in any scene

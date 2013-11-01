@@ -24,7 +24,8 @@ public class Actor implements PropertySubject<Actor>
 
     public final int id;
 
-    private static List<AbstractProperty<Actor, ?>> properties = AbstractProperty.findAnnotations(Actor.class);
+    private static List<AbstractProperty<Actor, ?>> properties = AbstractProperty
+        .findAnnotations(Actor.class);
 
     Behaviour behaviour;
 
@@ -48,9 +49,9 @@ public class Actor implements PropertySubject<Actor>
     private int zOrder = 0;
 
     private double heading;
-    
+
     private double activationDelay;
-    
+
     private String startEvent = "default";
 
     public Actor( Costume costume )
@@ -61,27 +62,25 @@ public class Actor implements PropertySubject<Actor>
     private static Pose startPose( Costume costume, String name )
     {
         Pose pose = costume.getPose(name);
-        if ( pose != null ) {
+        if (pose != null) {
             return pose;
         }
         pose = costume.getPose("default");
-        if ( pose != null ) {
+        if (pose != null) {
             return pose;
         }
-        
+
         // It doesn't have a pose, so it will be a TextPose...
         String text = costume.getString(name);
-        if ( text == null ) {
+        if (text == null) {
             text = "?";
         }
         Font font = costume.getFont(name);
-        if ( font == null) {
+        if (font == null) {
             return ImagePose.getDummyPose();
-        } 
-        return new TextPose(text,font,20);
+        }
+        return new TextPose(text, font, 20);
     }
-        
-
 
     public Actor( Pose pose )
     {
@@ -102,39 +101,40 @@ public class Actor implements PropertySubject<Actor>
     public Actor( Costume costume, String eventName )
     {
         this(startPose(costume, eventName));
-        
+
         this.costume = costume;
         this.event(eventName);
         this.setDirection(this.getAppearance().getPose().getDirection());
     }
-    
-    @Property(label="Start Event")
+
+    @Property(label = "Start Event")
     public String getStartEvent()
     {
-        return startEvent;
+        return this.startEvent;
     }
-    
+
     public void setStartEvent( String value )
     {
-        startEvent = value;
+        this.startEvent = value;
     }
-    
+
     /**
      * Sets the heading that the actor is travelling in. It does NOT affect the rotation of the
      * actor's image.
+     * 
      * @param degrees
      */
-    @Property(label="Heading")
     public void setHeading( double degrees )
     {
         this.heading = degrees;
     }
-    
+
     public void setHeadingRadians( double radians )
     {
         this.setHeading(radians * 180 / Math.PI);
     }
-    
+
+    @Property(label = "Heading")
     public double getHeading()
     {
         return this.heading;
@@ -147,33 +147,36 @@ public class Actor implements PropertySubject<Actor>
 
     /**
      * Sets the heading and the appearance's direction.
+     * 
      * @param degrees
      */
     public void setDirection( double degrees )
     {
-        getAppearance().setDirection( degrees );
-        setHeading( getAppearance().getDirection() );
+        getAppearance().setDirection(degrees);
+        setHeading(getAppearance().getDirection());
     }
 
     /**
      * Sets the heading and the appearance's direction.
+     * 
      * @param degrees
      */
     public void setDirectionRadians( double radians )
     {
         setDirection(radians * 180 / Math.PI);
     }
-    
+
     /**
      * Sets the heading and the appearance's direction.
+     * 
      * @param degrees
      */
     public void setDirection( Actor other )
     {
-        getAppearance().setDirection( other );
-        setHeading( getAppearance().getDirection() );
+        getAppearance().setDirection(other);
+        setHeading(getAppearance().getDirection());
     }
-    
+
     public Costume getCostume()
     {
         return this.costume;
@@ -212,7 +215,7 @@ public class Actor implements PropertySubject<Actor>
     public boolean getYAxisPointsDown()
     {
         if (this.layer == null) {
-            return true;
+            return false;
         }
         return this.layer.getYAxisPointsDown();
     }
@@ -241,22 +244,22 @@ public class Actor implements PropertySubject<Actor>
     {
         setLayer(null);
     }
-    
+
     public void setLayer( ActorsLayer layer )
     {
         if (this.layer == layer) {
             return;
         }
-        
+
         if (this.layer != null) {
             this.layer.remove(this);
         }
-        
-        if( layer != null) {
+
+        if (layer != null) {
             layer.add(this);
         }
     }
-    
+
     void setLayerAttribute( ActorsLayer layer )
     {
         this.layer = layer;
@@ -267,7 +270,6 @@ public class Actor implements PropertySubject<Actor>
         if (animation != null) {
             this.animation = animation.copy();
             this.animation.start(this);
-            this.animation.tick(this);
             this.animation.addMessageListener(getBehaviour());
 
         } else {
@@ -303,21 +305,21 @@ public class Actor implements PropertySubject<Actor>
 
         ManagedSound cs = costume.getCostumeSound(eventName);
         if (cs != null) {
-            Itchy.soundManager.play( this, eventName, cs );
+            Itchy.soundManager.play(this, eventName, cs);
         }
     }
 
     /**
-     * Will fade out or stop sounds corresponding to the given even name.
-     * Future versions of Itchy may also stop corresponding animations.
-     *  
+     * Will fade out or stop sounds corresponding to the given even name. Future versions of Itchy
+     * may also stop corresponding animations.
+     * 
      * @param eventName
      */
     public void endEvent( String eventName )
     {
         Itchy.soundManager.end(this, eventName);
     }
-    
+
     public void deathEvent( String eventName )
     {
         this.deathEvent(this.costume, eventName);
@@ -342,15 +344,14 @@ public class Actor implements PropertySubject<Actor>
             this.setAnimation(animation);
         }
     }
-    
 
-    @Property(label="X")
+    @Property(label = "X")
     public double getX()
     {
         return this.x;
     }
 
-    @Property(label="Y")
+    @Property(label = "Y")
     public double getY()
     {
         return this.y;
@@ -386,14 +387,14 @@ public class Actor implements PropertySubject<Actor>
 
     public final void setBehaviour( Behaviour behaviour )
     {
-        if ( behaviour == this.behaviour ) {
+        if (behaviour == this.behaviour) {
             return;
         }
 
-        if ( this.behaviour != null) {
+        if (this.behaviour != null) {
             this.behaviour.detatch();
         }
-        
+
         this.behaviour = behaviour;
         behaviour.attach(this);
 
@@ -419,7 +420,7 @@ public class Actor implements PropertySubject<Actor>
         this.activationDelay = value;
     }
 
-    @Property(label="Activation Delay")
+    @Property(label = "Activation Delay")
     public double getActivationDelay()
     {
         return this.activationDelay;
@@ -427,7 +428,7 @@ public class Actor implements PropertySubject<Actor>
 
     public void activateAfter( final double seconds )
     {
-        this.setBehaviour( new DelayedActivation(seconds, this.getBehaviour()) );
+        this.setBehaviour(new DelayedActivation(seconds, this.getBehaviour()));
         this.activate();
     }
 
@@ -436,7 +437,7 @@ public class Actor implements PropertySubject<Actor>
         if (this.dead) {
             return;
         }
-        
+
         if (!this.active) {
             this.addTag("active");
             this.active = true;
@@ -479,7 +480,7 @@ public class Actor implements PropertySubject<Actor>
             this.dead = true;
             this.deactivate();
             getBehaviour().onKill();
-            
+
             this.tagMembership.removeAll();
         }
     }
@@ -557,9 +558,9 @@ public class Actor implements PropertySubject<Actor>
     {
         double dx = actor.x - this.x;
         double dy = actor.y - this.y;
-        
+
         double scale = Math.sqrt(dx * dx + dy * dy);
-        if ( scale == 0) {
+        if (scale == 0) {
             return;
         }
         this.moveBy(dx * amount / scale, dy * amount / scale);
@@ -589,7 +590,7 @@ public class Actor implements PropertySubject<Actor>
         double closestDistance = Double.MAX_VALUE;
 
         for (Actor other : Actor.allByTag(tag)) {
-            double distance = other.distanceTo( x, y );
+            double distance = other.distanceTo(x, y);
             if (distance < closestDistance) {
                 closestDistance = distance;
                 closestActor = other;
@@ -645,28 +646,28 @@ public class Actor implements PropertySubject<Actor>
 
     public boolean isText()
     {
-        return ! (getAppearance().getPose() instanceof ImagePose);
+        return !(getAppearance().getPose() instanceof ImagePose);
     }
-    
+
     /**
-     * For an Actor displaying text, this is the same as the method 'contains', but for
-     * other actors (displaying an image), it is the same as the method 'pixelOverlap'.
+     * For an Actor displaying text, this is the same as the method 'contains', but for other actors
+     * (displaying an image), it is the same as the method 'pixelOverlap'.
      * 
      * This should be used whenever you want to know if the mouse is clicking the actor.
      */
     public boolean hitting( int x, int y )
     {
-        if ( this.getAppearance().getAlpha() < 1 ) {
+        if (this.getAppearance().getAlpha() < 1) {
             return false;
         }
-        
-        if ( isText() ) {
-            return this.contains(x,y);
+
+        if (isText()) {
+            return this.contains(x, y);
         } else {
-            return this.pixelOverlap(x,y);
+            return this.pixelOverlap(x, y);
         }
     }
-    
+
     public boolean pixelOverlap( int x, int y )
     {
         return this.pixelOverlap(x, y, 0);
@@ -738,30 +739,31 @@ public class Actor implements PropertySubject<Actor>
             this.layer.addBottom(this);
         }
     }
-    
-    @Property(label="Z Order")
+
+    @Property(label = "Z Order")
     public int getZOrder()
     {
         return this.zOrder;
     }
-    
+
     public void setZOrder( int value )
     {
-        if ( this.zOrder != value ) {
+        if (this.zOrder != value) {
             this.zOrder = value;
-            if ( this.layer != null ) {
+            if (this.layer != null) {
                 this.layer.add(this);
             }
         }
     }
+
     void setZOrderAttribute( int value )
     {
         this.zOrder = value;
     }
-    
+
     public void adjustZOrder( int delta )
     {
-        setZOrder( this.zOrder + delta );
+        setZOrder(this.zOrder + delta);
     }
 
     public void tick()
@@ -769,6 +771,7 @@ public class Actor implements PropertySubject<Actor>
         getBehaviour().tickHandler();
     }
 
+    @Override
     public String toString()
     {
         return "Actor #" + this.id + " @ " + getX() + "," + getY() +
@@ -778,7 +781,7 @@ public class Actor implements PropertySubject<Actor>
     }
 
     @Override
-    public List<AbstractProperty<Actor,?>> getProperties()
+    public List<AbstractProperty<Actor, ?>> getProperties()
     {
         return properties;
     }

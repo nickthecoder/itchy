@@ -7,9 +7,11 @@ package uk.co.nickthecoder.itchy.extras;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Behaviour;
+import uk.co.nickthecoder.itchy.Itchy;
 
 public class Projectile extends Companion<Projectile>
 {
+    public static final double DEFAULT_LIFE_SECONDS = 6;
 
     public double gravity;
 
@@ -27,8 +29,7 @@ public class Projectile extends Companion<Projectile>
 
     public double growFactor = 1;
 
-    public int life = 1000;
-
+    public int lifeTicks;
 
     public Projectile( Behaviour source )
     {
@@ -38,6 +39,7 @@ public class Projectile extends Companion<Projectile>
     public Projectile( Actor source )
     {
         super(source);
+        this.lifeTicks = (int) (DEFAULT_LIFE_SECONDS * Itchy.frameRate.getRequiredRate());
     }
 
     public Projectile speed( double value )
@@ -89,14 +91,31 @@ public class Projectile extends Companion<Projectile>
         return this;
     }
 
+    public Projectile life( double seconds )
+    {
+        this.lifeTicks = (int) (Itchy.frameRate.getRequiredRate() * seconds);
+        return this;
+    }
+
     @Override
     public void tick()
     {
+        double ox = this.getActor().getX();
+        double oy = this.getActor().getY();
+
         this.getActor().moveBy(this.vx, this.vy);
         this.getActor().moveForward(this.speedForwards, this.speedSidewards);
-        
+
+        // Turn the image in the direction of movement.
+        if ((this.spin == 0) && this.rotate && (this.gravity != 0)) {
+            double dx = this.getActor().getX() - ox;
+            double dy = this.getActor().getY() - oy;
+            double angle = Math.atan2(dy, dx);
+            this.getActor().getAppearance().setDirectionRadians(angle);
+        }
+
         this.vy += this.gravity;
-        
+
         this.getActor().getAppearance().adjustAlpha(-this.fade);
         this.getActor().getAppearance().adjustDirection(this.spin);
 
@@ -105,9 +124,9 @@ public class Projectile extends Companion<Projectile>
                 this.getActor().getAppearance().getScale() * this.growFactor);
         }
 
-        if ((this.life-- < 0) || (this.getActor().getAppearance().getAlpha() <= 0)) {
+        if ((this.lifeTicks-- < 0) || (this.getActor().getAppearance().getAlpha() <= 0)) {
             this.getActor().kill();
         }
     }
-    
+
 }

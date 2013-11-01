@@ -374,10 +374,8 @@ public class Tetra extends Game
 
         new Explosion(actor)
             .projectiles(5)
-            .forwards()
-            .speed(1, 3)
+            .speed(2, 4)
             .fade(3)
-            // .spin(-0.2, 0.2)
             .pose("fragment")
             .createActor().activate();
 

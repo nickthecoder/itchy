@@ -112,9 +112,9 @@ public final class Editor extends Game
     }
 
     @Override
-    public void onActivate()
+    public void start()
     {
-        // super.onActivate();
+        super.start();
 
         Itchy.enableKeyboardRepeat(true);
 

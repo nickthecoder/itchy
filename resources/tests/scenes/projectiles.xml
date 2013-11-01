@@ -1,26 +1,841 @@
 <scene showMouse="true" behaviour="uk.co.nickthecoder.itchy.NullSceneBehaviour">
   <properties/>
   <layer name="main">
-    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestProjectiles" x="129" y="549" direction="-90.0" startEvent="default" zOrder="0">
+    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestProjectiles" x="31" y="541" direction="-90.0" heading="-90.0" startEvent="default" zOrder="0">
+      <property name="fade" value="0.0"/>
+      <property name="offsetY" value="0.0"/>
+      <property name="speedForwards" value="0.1"/>
+      <property name="offsetX" value="0.0"/>
+      <property name="growFactor" value="1.0"/>
+      <property name="speedSidewards" value="0.0"/>
       <property name="id" value="0"/>
+      <property name="vy" value="0.0"/>
+      <property name="offsetSidewards" value="0.0"/>
+      <property name="life" value="1.0"/>
+      <property name="vx" value="0.0"/>
+      <property name="offsetForwards" value="20.0"/>
+      <property name="alpha" value="255.0"/>
+      <property name="spin" value="0.0"/>
+      <property name="gravity" value="0.0"/>
     </actor>
-    <text text="Menu" font="vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.SceneButton" x="712" y="47" direction="0.0" startEvent="default" zOrder="1">
+    <text text="Menu" font="vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.SceneButton" x="712" y="47" direction="0.0" heading="0.0" startEvent="default" zOrder="1">
       <property name="sceneName" value="menu"/>
     </text>
-    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestProjectiles" x="95" y="554" direction="-108.43494882292202" startEvent="default" zOrder="2">
-      <property name="id" value="0"/>
-    </actor>
-    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestProjectiles" x="163" y="556" direction="-65.22485943116808" startEvent="default" zOrder="3">
-      <property name="id" value="0"/>
-    </actor>
-    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestProjectiles" x="185" y="579" direction="-19.290046219188735" startEvent="default" zOrder="4">
-      <property name="id" value="0"/>
-    </actor>
-    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestProjectiles" x="68" y="576" direction="-148.39249775375112" startEvent="default" zOrder="5">
-      <property name="id" value="0"/>
-    </actor>
-    <text text="Go!" font="vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.SceneButton" x="708" y="21" direction="0.0" startEvent="default" zOrder="6">
+    <text text="Go!" font="vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.SceneButton" x="708" y="21" direction="0.0" heading="0.0" startEvent="default" zOrder="2">
       <property name="sceneName" value="projectiles"/>
     </text>
+    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestProjectiles" x="69" y="543" direction="-90.0" heading="-90.0" startEvent="default" zOrder="3">
+      <property name="fade" value="0.0"/>
+      <property name="offsetY" value="0.0"/>
+      <property name="speedForwards" value="0.1"/>
+      <property name="offsetX" value="0.0"/>
+      <property name="growFactor" value="1.0"/>
+      <property name="speedSidewards" value="0.0"/>
+      <property name="id" value="0"/>
+      <property name="vy" value="0.0"/>
+      <property name="offsetSidewards" value="0.0"/>
+      <property name="life" value="2.0"/>
+      <property name="vx" value="0.0"/>
+      <property name="offsetForwards" value="20.0"/>
+      <property name="alpha" value="255.0"/>
+      <property name="spin" value="0.0"/>
+      <property name="gravity" value="0.0"/>
+    </actor>
+    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestProjectiles" x="105" y="541" direction="-90.0" heading="-90.0" startEvent="default" zOrder="4">
+      <property name="fade" value="0.0"/>
+      <property name="offsetY" value="0.0"/>
+      <property name="speedForwards" value="0.1"/>
+      <property name="offsetX" value="0.0"/>
+      <property name="growFactor" value="1.0"/>
+      <property name="speedSidewards" value="0.0"/>
+      <property name="id" value="0"/>
+      <property name="vy" value="0.0"/>
+      <property name="offsetSidewards" value="0.0"/>
+      <property name="life" value="3.0"/>
+      <property name="vx" value="0.0"/>
+      <property name="offsetForwards" value="20.0"/>
+      <property name="alpha" value="255.0"/>
+      <property name="spin" value="0.0"/>
+      <property name="gravity" value="0.0"/>
+    </actor>
+    <text text="Life 123" font="vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="72" y="576" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestProjectiles" x="205" y="543" direction="-90.0" heading="-90.0" startEvent="default" zOrder="6">
+      <property name="fade" value="0.0"/>
+      <property name="offsetY" value="0.0"/>
+      <property name="speedForwards" value="0.1"/>
+      <property name="offsetX" value="0.0"/>
+      <property name="growFactor" value="1.0"/>
+      <property name="speedSidewards" value="0.0"/>
+      <property name="id" value="0"/>
+      <property name="vy" value="0.0"/>
+      <property name="offsetSidewards" value="0.0"/>
+      <property name="life" value="6.0"/>
+      <property name="vx" value="0.0"/>
+      <property name="offsetForwards" value="20.0"/>
+      <property name="alpha" value="255.0"/>
+      <property name="spin" value="0.0"/>
+      <property name="gravity" value="0.0"/>
+    </actor>
+    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestProjectiles" x="171" y="544" direction="-135.0" heading="-135.0" startEvent="default" zOrder="7">
+      <property name="fade" value="0.0"/>
+      <property name="offsetY" value="0.0"/>
+      <property name="speedForwards" value="0.1"/>
+      <property name="offsetX" value="0.0"/>
+      <property name="growFactor" value="1.0"/>
+      <property name="speedSidewards" value="0.0"/>
+      <property name="id" value="0"/>
+      <property name="vy" value="0.0"/>
+      <property name="offsetSidewards" value="0.0"/>
+      <property name="life" value="6.0"/>
+      <property name="vx" value="0.0"/>
+      <property name="offsetForwards" value="20.0"/>
+      <property name="alpha" value="255.0"/>
+      <property name="spin" value="0.0"/>
+      <property name="gravity" value="0.0"/>
+    </actor>
+    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestProjectiles" x="240" y="546" direction="-57.9946167919165" heading="-57.9946167919165" startEvent="default" zOrder="8">
+      <property name="fade" value="0.0"/>
+      <property name="offsetY" value="0.0"/>
+      <property name="speedForwards" value="0.1"/>
+      <property name="offsetX" value="0.0"/>
+      <property name="growFactor" value="1.0"/>
+      <property name="speedSidewards" value="0.0"/>
+      <property name="id" value="0"/>
+      <property name="vy" value="0.0"/>
+      <property name="offsetSidewards" value="0.0"/>
+      <property name="life" value="6.0"/>
+      <property name="vx" value="0.0"/>
+      <property name="offsetForwards" value="20.0"/>
+      <property name="alpha" value="255.0"/>
+      <property name="spin" value="0.0"/>
+      <property name="gravity" value="0.0"/>
+    </actor>
+    <text text="Speed .1" font="vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="204" y="577" direction="0.0" heading="0.0" startEvent="default" zOrder="9"/>
+    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestProjectiles" x="322" y="546" direction="-135.0" heading="-135.0" startEvent="default" zOrder="10">
+      <property name="fade" value="0.0"/>
+      <property name="offsetY" value="0.0"/>
+      <property name="speedForwards" value="0.1"/>
+      <property name="offsetX" value="0.0"/>
+      <property name="growFactor" value="1.0"/>
+      <property name="speedSidewards" value="0.05"/>
+      <property name="id" value="0"/>
+      <property name="vy" value="0.0"/>
+      <property name="offsetSidewards" value="0.0"/>
+      <property name="life" value="6.0"/>
+      <property name="vx" value="0.0"/>
+      <property name="offsetForwards" value="20.0"/>
+      <property name="alpha" value="255.0"/>
+      <property name="spin" value="0.0"/>
+      <property name="gravity" value="0.0"/>
+    </actor>
+    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestProjectiles" x="358" y="542" direction="-92.60726773054272" heading="-92.86007165626424" startEvent="default" zOrder="11">
+      <property name="fade" value="0.0"/>
+      <property name="offsetY" value="0.0"/>
+      <property name="speedForwards" value="0.1"/>
+      <property name="offsetX" value="0.0"/>
+      <property name="growFactor" value="1.0"/>
+      <property name="speedSidewards" value="0.05"/>
+      <property name="id" value="0"/>
+      <property name="vy" value="0.0"/>
+      <property name="offsetSidewards" value="0.0"/>
+      <property name="life" value="6.0"/>
+      <property name="vx" value="0.0"/>
+      <property name="offsetForwards" value="20.0"/>
+      <property name="alpha" value="255.0"/>
+      <property name="spin" value="0.0"/>
+      <property name="gravity" value="0.0"/>
+    </actor>
+    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestProjectiles" x="394" y="546" direction="-57.9946167919165" heading="-57.9946167919165" startEvent="default" zOrder="12">
+      <property name="fade" value="0.0"/>
+      <property name="offsetY" value="0.0"/>
+      <property name="speedForwards" value="0.1"/>
+      <property name="offsetX" value="0.0"/>
+      <property name="growFactor" value="1.0"/>
+      <property name="speedSidewards" value="0.05"/>
+      <property name="id" value="0"/>
+      <property name="vy" value="0.0"/>
+      <property name="offsetSidewards" value="0.0"/>
+      <property name="life" value="6.0"/>
+      <property name="vx" value="0.0"/>
+      <property name="offsetForwards" value="20.0"/>
+      <property name="alpha" value="255.0"/>
+      <property name="spin" value="0.0"/>
+      <property name="gravity" value="0.0"/>
+    </actor>
+    <text text="Speed .1,0.05" font="vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="361" y="578" direction="0.0" heading="0.0" startEvent="default" zOrder="13"/>
+    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestProjectiles" x="486" y="545" direction="-135.0" heading="-135.0" startEvent="default" zOrder="14">
+      <property name="fade" value="0.0"/>
+      <property name="offsetY" value="0.0"/>
+      <property name="speedForwards" value="0.0"/>
+      <property name="offsetX" value="0.0"/>
+      <property name="growFactor" value="1.0"/>
+      <property name="speedSidewards" value="0.0"/>
+      <property name="id" value="0"/>
+      <property name="vy" value="-0.1"/>
+      <property name="offsetSidewards" value="0.0"/>
+      <property name="life" value="6.0"/>
+      <property name="vx" value="0.0"/>
+      <property name="offsetForwards" value="20.0"/>
+      <property name="alpha" value="255.0"/>
+      <property name="spin" value="0.0"/>
+      <property name="gravity" value="0.0"/>
+    </actor>
+    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestProjectiles" x="521" y="544" direction="-90.0" heading="-90.0" startEvent="default" zOrder="15">
+      <property name="fade" value="0.0"/>
+      <property name="offsetY" value="0.0"/>
+      <property name="speedForwards" value="0.0"/>
+      <property name="offsetX" value="0.0"/>
+      <property name="growFactor" value="1.0"/>
+      <property name="speedSidewards" value="0.0"/>
+      <property name="id" value="0"/>
+      <property name="vy" value="-0.1"/>
+      <property name="offsetSidewards" value="0.0"/>
+      <property name="life" value="6.0"/>
+      <property name="vx" value="0.0"/>
+      <property name="offsetForwards" value="20.0"/>
+      <property name="alpha" value="255.0"/>
+      <property name="spin" value="0.0"/>
+      <property name="gravity" value="0.0"/>
+    </actor>
+    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestProjectiles" x="558" y="546" direction="-57.9946167919165" heading="-57.9946167919165" startEvent="default" zOrder="16">
+      <property name="fade" value="0.0"/>
+      <property name="offsetY" value="0.0"/>
+      <property name="speedForwards" value="0.0"/>
+      <property name="offsetX" value="0.0"/>
+      <property name="growFactor" value="1.0"/>
+      <property name="speedSidewards" value="0.0"/>
+      <property name="id" value="0"/>
+      <property name="vy" value="-0.1"/>
+      <property name="offsetSidewards" value="0.0"/>
+      <property name="life" value="6.0"/>
+      <property name="vx" value="0.0"/>
+      <property name="offsetForwards" value="20.0"/>
+      <property name="alpha" value="255.0"/>
+      <property name="spin" value="0.0"/>
+      <property name="gravity" value="0.0"/>
+    </actor>
+    <text text="VY = -1" font="vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="516" y="577" direction="0.0" heading="0.0" startEvent="default" zOrder="17"/>
+    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestProjectiles" x="619" y="545" direction="-135.0" heading="-135.0" startEvent="default" zOrder="18">
+      <property name="fade" value="0.0"/>
+      <property name="offsetY" value="0.0"/>
+      <property name="speedForwards" value="0.0"/>
+      <property name="offsetX" value="0.0"/>
+      <property name="growFactor" value="1.0"/>
+      <property name="speedSidewards" value="0.0"/>
+      <property name="id" value="0"/>
+      <property name="vy" value="0.0"/>
+      <property name="offsetSidewards" value="0.0"/>
+      <property name="life" value="6.0"/>
+      <property name="vx" value="0.1"/>
+      <property name="offsetForwards" value="20.0"/>
+      <property name="alpha" value="255.0"/>
+      <property name="spin" value="0.0"/>
+      <property name="gravity" value="0.0"/>
+    </actor>
+    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestProjectiles" x="654" y="540" direction="-90.0" heading="-90.0" startEvent="default" zOrder="19">
+      <property name="fade" value="0.0"/>
+      <property name="offsetY" value="0.0"/>
+      <property name="speedForwards" value="0.0"/>
+      <property name="offsetX" value="0.0"/>
+      <property name="growFactor" value="1.0"/>
+      <property name="speedSidewards" value="0.0"/>
+      <property name="id" value="0"/>
+      <property name="vy" value="0.0"/>
+      <property name="offsetSidewards" value="0.0"/>
+      <property name="life" value="6.0"/>
+      <property name="vx" value="0.1"/>
+      <property name="offsetForwards" value="20.0"/>
+      <property name="alpha" value="255.0"/>
+      <property name="spin" value="0.0"/>
+      <property name="gravity" value="0.0"/>
+    </actor>
+    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestProjectiles" x="691" y="543" direction="-57.9946167919165" heading="-57.9946167919165" startEvent="default" zOrder="20">
+      <property name="fade" value="0.0"/>
+      <property name="offsetY" value="0.0"/>
+      <property name="speedForwards" value="0.0"/>
+      <property name="offsetX" value="0.0"/>
+      <property name="growFactor" value="1.0"/>
+      <property name="speedSidewards" value="0.0"/>
+      <property name="id" value="0"/>
+      <property name="vy" value="0.0"/>
+      <property name="offsetSidewards" value="0.0"/>
+      <property name="life" value="6.0"/>
+      <property name="vx" value="0.1"/>
+      <property name="offsetForwards" value="20.0"/>
+      <property name="alpha" value="255.0"/>
+      <property name="spin" value="0.0"/>
+      <property name="gravity" value="0.0"/>
+    </actor>
+    <text text="VX = 1" font="vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="654" y="580" direction="0.0" heading="0.0" startEvent="default" zOrder="21"/>
+    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestProjectiles" x="751" y="447" direction="154.0" heading="154.0" startEvent="default" zOrder="22">
+      <property name="fade" value="0.0"/>
+      <property name="offsetY" value="0.0"/>
+      <property name="speedForwards" value="0.1"/>
+      <property name="offsetX" value="0.0"/>
+      <property name="growFactor" value="1.0"/>
+      <property name="speedSidewards" value="0.0"/>
+      <property name="id" value="1"/>
+      <property name="vy" value="0.0"/>
+      <property name="offsetSidewards" value="0.0"/>
+      <property name="life" value="6.0"/>
+      <property name="vx" value="0.0"/>
+      <property name="offsetForwards" value="20.0"/>
+      <property name="alpha" value="255.0"/>
+      <property name="spin" value="0.0"/>
+      <property name="gravity" value="0.0"/>
+    </actor>
+    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestProjectiles" x="754" y="414" direction="-180.0" heading="-180.0" startEvent="default" zOrder="23">
+      <property name="fade" value="0.0"/>
+      <property name="offsetY" value="0.0"/>
+      <property name="speedForwards" value="0.1"/>
+      <property name="offsetX" value="0.0"/>
+      <property name="growFactor" value="1.0"/>
+      <property name="speedSidewards" value="0.0"/>
+      <property name="id" value="1"/>
+      <property name="vy" value="0.0"/>
+      <property name="offsetSidewards" value="0.0"/>
+      <property name="life" value="6.0"/>
+      <property name="vx" value="0.0"/>
+      <property name="offsetForwards" value="20.0"/>
+      <property name="alpha" value="255.0"/>
+      <property name="spin" value="0.0"/>
+      <property name="gravity" value="0.0"/>
+    </actor>
+    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestProjectiles" x="754" y="379" direction="-135.0" heading="-135.0" startEvent="default" zOrder="24">
+      <property name="fade" value="0.0"/>
+      <property name="offsetY" value="0.0"/>
+      <property name="speedForwards" value="0.1"/>
+      <property name="offsetX" value="0.0"/>
+      <property name="growFactor" value="1.0"/>
+      <property name="speedSidewards" value="0.0"/>
+      <property name="id" value="1"/>
+      <property name="vy" value="0.0"/>
+      <property name="offsetSidewards" value="0.0"/>
+      <property name="life" value="6.0"/>
+      <property name="vx" value="0.0"/>
+      <property name="offsetForwards" value="20.0"/>
+      <property name="alpha" value="255.0"/>
+      <property name="spin" value="0.0"/>
+      <property name="gravity" value="0.0"/>
+    </actor>
+    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestProjectiles" x="349" y="288" direction="-90.0" heading="-90.0" startEvent="default" zOrder="25">
+      <property name="fade" value="0.0"/>
+      <property name="offsetY" value="0.0"/>
+      <property name="speedForwards" value="0.1"/>
+      <property name="offsetX" value="0.0"/>
+      <property name="growFactor" value="1.0"/>
+      <property name="speedSidewards" value="0.0"/>
+      <property name="id" value="0"/>
+      <property name="vy" value="0.0"/>
+      <property name="offsetSidewards" value="0.0"/>
+      <property name="life" value="6.0"/>
+      <property name="vx" value="0.0"/>
+      <property name="offsetForwards" value="20.0"/>
+      <property name="alpha" value="255.0"/>
+      <property name="spin" value="0.0"/>
+      <property name="gravity" value="0.0"/>
+    </actor>
+    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestProjectiles" x="372" y="309" direction="0.0" heading="0.0" startEvent="default" zOrder="26">
+      <property name="fade" value="0.0"/>
+      <property name="offsetY" value="0.0"/>
+      <property name="speedForwards" value="0.1"/>
+      <property name="offsetX" value="0.0"/>
+      <property name="growFactor" value="1.0"/>
+      <property name="speedSidewards" value="0.0"/>
+      <property name="id" value="0"/>
+      <property name="vy" value="0.0"/>
+      <property name="offsetSidewards" value="0.0"/>
+      <property name="life" value="6.0"/>
+      <property name="vx" value="0.0"/>
+      <property name="offsetForwards" value="20.0"/>
+      <property name="alpha" value="255.0"/>
+      <property name="spin" value="0.0"/>
+      <property name="gravity" value="0.0"/>
+    </actor>
+    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestProjectiles" x="347" y="327" direction="88.31531568210372" heading="88.31531568210372" startEvent="default" zOrder="27">
+      <property name="fade" value="0.0"/>
+      <property name="offsetY" value="0.0"/>
+      <property name="speedForwards" value="0.1"/>
+      <property name="offsetX" value="0.0"/>
+      <property name="growFactor" value="1.0"/>
+      <property name="speedSidewards" value="0.0"/>
+      <property name="id" value="0"/>
+      <property name="vy" value="0.0"/>
+      <property name="offsetSidewards" value="0.0"/>
+      <property name="life" value="6.0"/>
+      <property name="vx" value="0.0"/>
+      <property name="offsetForwards" value="20.0"/>
+      <property name="alpha" value="255.0"/>
+      <property name="spin" value="0.0"/>
+      <property name="gravity" value="0.0"/>
+    </actor>
+    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestProjectiles" x="324" y="306" direction="177.16447623343498" heading="177.16447623343498" startEvent="default" zOrder="28">
+      <property name="fade" value="0.0"/>
+      <property name="offsetY" value="0.0"/>
+      <property name="speedForwards" value="0.1"/>
+      <property name="offsetX" value="0.0"/>
+      <property name="growFactor" value="1.0"/>
+      <property name="speedSidewards" value="0.0"/>
+      <property name="id" value="0"/>
+      <property name="vy" value="0.0"/>
+      <property name="offsetSidewards" value="0.0"/>
+      <property name="life" value="6.0"/>
+      <property name="vx" value="0.0"/>
+      <property name="offsetForwards" value="20.0"/>
+      <property name="alpha" value="255.0"/>
+      <property name="spin" value="0.0"/>
+      <property name="gravity" value="0.0"/>
+    </actor>
+    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestProjectiles" x="475" y="339" direction="92.29061004263853" heading="92.29061004263853" startEvent="default" zOrder="29">
+      <property name="fade" value="0.0"/>
+      <property name="offsetY" value="0.0"/>
+      <property name="speedForwards" value="0.0"/>
+      <property name="offsetX" value="0.0"/>
+      <property name="growFactor" value="1.0"/>
+      <property name="speedSidewards" value="0.1"/>
+      <property name="id" value="0"/>
+      <property name="vy" value="0.0"/>
+      <property name="offsetSidewards" value="20.0"/>
+      <property name="life" value="6.0"/>
+      <property name="vx" value="0.0"/>
+      <property name="offsetForwards" value="0.0"/>
+      <property name="alpha" value="255.0"/>
+      <property name="spin" value="0.0"/>
+      <property name="gravity" value="0.0"/>
+    </actor>
+    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestProjectiles" x="476" y="303" direction="-178.3796921817934" heading="-178.3796921817934" startEvent="default" zOrder="30">
+      <property name="fade" value="0.0"/>
+      <property name="offsetY" value="0.0"/>
+      <property name="speedForwards" value="0.0"/>
+      <property name="offsetX" value="0.0"/>
+      <property name="growFactor" value="1.0"/>
+      <property name="speedSidewards" value="0.1"/>
+      <property name="id" value="0"/>
+      <property name="vy" value="0.0"/>
+      <property name="offsetSidewards" value="20.0"/>
+      <property name="life" value="6.0"/>
+      <property name="vx" value="0.0"/>
+      <property name="offsetForwards" value="0.0"/>
+      <property name="alpha" value="255.0"/>
+      <property name="spin" value="0.0"/>
+      <property name="gravity" value="0.0"/>
+    </actor>
+    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestProjectiles" x="513" y="304" direction="-88.7932671327712" heading="-88.7932671327712" startEvent="default" zOrder="31">
+      <property name="fade" value="0.0"/>
+      <property name="offsetY" value="0.0"/>
+      <property name="speedForwards" value="0.0"/>
+      <property name="offsetX" value="0.0"/>
+      <property name="growFactor" value="1.0"/>
+      <property name="speedSidewards" value="0.1"/>
+      <property name="id" value="0"/>
+      <property name="vy" value="0.0"/>
+      <property name="offsetSidewards" value="20.0"/>
+      <property name="life" value="6.0"/>
+      <property name="vx" value="0.0"/>
+      <property name="offsetForwards" value="0.0"/>
+      <property name="alpha" value="255.0"/>
+      <property name="spin" value="0.0"/>
+      <property name="gravity" value="0.0"/>
+    </actor>
+    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestProjectiles" x="512" y="341" direction="1.3554397547471242" heading="1.3554397547471242" startEvent="default" zOrder="32">
+      <property name="fade" value="0.0"/>
+      <property name="offsetY" value="0.0"/>
+      <property name="speedForwards" value="0.0"/>
+      <property name="offsetX" value="0.0"/>
+      <property name="growFactor" value="1.0"/>
+      <property name="speedSidewards" value="0.1"/>
+      <property name="id" value="0"/>
+      <property name="vy" value="0.0"/>
+      <property name="offsetSidewards" value="20.0"/>
+      <property name="life" value="6.0"/>
+      <property name="vx" value="0.0"/>
+      <property name="offsetForwards" value="0.0"/>
+      <property name="alpha" value="255.0"/>
+      <property name="spin" value="0.0"/>
+      <property name="gravity" value="0.0"/>
+    </actor>
+    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestProjectiles" x="102" y="341" direction="-90.0" heading="-90.0" startEvent="default" zOrder="33">
+      <property name="fade" value="0.0"/>
+      <property name="offsetY" value="0.0"/>
+      <property name="speedForwards" value="0.1"/>
+      <property name="offsetX" value="0.0"/>
+      <property name="growFactor" value="1.0"/>
+      <property name="speedSidewards" value="0.0"/>
+      <property name="id" value="0"/>
+      <property name="vy" value="0.0"/>
+      <property name="offsetSidewards" value="0.0"/>
+      <property name="life" value="6.0"/>
+      <property name="vx" value="0.0"/>
+      <property name="offsetForwards" value="20.0"/>
+      <property name="alpha" value="255.0"/>
+      <property name="spin" value="0.0"/>
+      <property name="gravity" value="0.0"/>
+    </actor>
+    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestProjectiles" x="142" y="323" direction="-90.0" heading="-90.0" startEvent="default" zOrder="34">
+      <property name="fade" value="0.0"/>
+      <property name="offsetY" value="0.0"/>
+      <property name="speedForwards" value="0.1"/>
+      <property name="offsetX" value="0.0"/>
+      <property name="growFactor" value="1.0"/>
+      <property name="speedSidewards" value="0.1"/>
+      <property name="id" value="0"/>
+      <property name="vy" value="0.0"/>
+      <property name="offsetSidewards" value="0.0"/>
+      <property name="life" value="6.0"/>
+      <property name="vx" value="0.0"/>
+      <property name="offsetForwards" value="20.0"/>
+      <property name="alpha" value="255.0"/>
+      <property name="spin" value="0.0"/>
+      <property name="gravity" value="0.0"/>
+    </actor>
+    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestProjectiles" x="63" y="326" direction="-90.0" heading="-90.0" startEvent="default" zOrder="35">
+      <property name="fade" value="0.0"/>
+      <property name="offsetY" value="0.0"/>
+      <property name="speedForwards" value="0.1"/>
+      <property name="offsetX" value="0.0"/>
+      <property name="growFactor" value="1.0"/>
+      <property name="speedSidewards" value="-0.1"/>
+      <property name="id" value="0"/>
+      <property name="vy" value="0.0"/>
+      <property name="offsetSidewards" value="0.0"/>
+      <property name="life" value="6.0"/>
+      <property name="vx" value="0.0"/>
+      <property name="offsetForwards" value="20.0"/>
+      <property name="alpha" value="255.0"/>
+      <property name="spin" value="0.0"/>
+      <property name="gravity" value="0.0"/>
+    </actor>
+    <text text="Sidewards" font="vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="488" y="384" direction="0.0" heading="0.0" startEvent="default" zOrder="36"/>
+    <text text="Forwards" font="vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="341" y="382" direction="0.0" heading="0.0" startEvent="default" zOrder="37"/>
+    <text text="Fork" font="vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="100" y="376" direction="0.0" heading="0.0" startEvent="default" zOrder="38"/>
+    <text text="Rotate" font="vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="783" y="416" direction="-90.0" heading="-90.0" startEvent="default" zOrder="39"/>
+    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestProjectiles" x="63" y="210" direction="-90.0" heading="-90.0" startEvent="default" zOrder="40">
+      <property name="fade" value="0.0"/>
+      <property name="offsetY" value="0.0"/>
+      <property name="speedForwards" value="0.1"/>
+      <property name="offsetX" value="0.0"/>
+      <property name="growFactor" value="1.0"/>
+      <property name="speedSidewards" value="0.0"/>
+      <property name="id" value="0"/>
+      <property name="vy" value="0.0"/>
+      <property name="offsetSidewards" value="0.0"/>
+      <property name="life" value="6.0"/>
+      <property name="vx" value="0.0"/>
+      <property name="offsetForwards" value="20.0"/>
+      <property name="alpha" value="255.0"/>
+      <property name="spin" value="0.0"/>
+      <property name="gravity" value="0.0"/>
+    </actor>
+    <text text="Fade 0123" font="vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="117" y="248" direction="0.0" heading="0.0" startEvent="default" zOrder="41"/>
+    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestProjectiles" x="100" y="209" direction="-90.0" heading="-90.0" startEvent="default" zOrder="42">
+      <property name="fade" value="1.0"/>
+      <property name="offsetY" value="0.0"/>
+      <property name="speedForwards" value="0.1"/>
+      <property name="offsetX" value="0.0"/>
+      <property name="growFactor" value="1.0"/>
+      <property name="speedSidewards" value="0.0"/>
+      <property name="id" value="0"/>
+      <property name="vy" value="0.0"/>
+      <property name="offsetSidewards" value="0.0"/>
+      <property name="life" value="6.0"/>
+      <property name="vx" value="0.0"/>
+      <property name="offsetForwards" value="20.0"/>
+      <property name="alpha" value="255.0"/>
+      <property name="spin" value="0.0"/>
+      <property name="gravity" value="0.0"/>
+    </actor>
+    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestProjectiles" x="144" y="207" direction="-90.0" heading="-90.0" startEvent="default" zOrder="43">
+      <property name="fade" value="2.0"/>
+      <property name="offsetY" value="0.0"/>
+      <property name="speedForwards" value="0.1"/>
+      <property name="offsetX" value="0.0"/>
+      <property name="growFactor" value="1.0"/>
+      <property name="speedSidewards" value="0.0"/>
+      <property name="id" value="0"/>
+      <property name="vy" value="0.0"/>
+      <property name="offsetSidewards" value="0.0"/>
+      <property name="life" value="6.0"/>
+      <property name="vx" value="0.0"/>
+      <property name="offsetForwards" value="20.0"/>
+      <property name="alpha" value="255.0"/>
+      <property name="spin" value="0.0"/>
+      <property name="gravity" value="0.0"/>
+    </actor>
+    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestProjectiles" x="181" y="207" direction="-90.0" heading="-90.0" startEvent="default" zOrder="44">
+      <property name="fade" value="3.0"/>
+      <property name="offsetY" value="0.0"/>
+      <property name="speedForwards" value="0.1"/>
+      <property name="offsetX" value="0.0"/>
+      <property name="growFactor" value="1.0"/>
+      <property name="speedSidewards" value="0.0"/>
+      <property name="id" value="0"/>
+      <property name="vy" value="0.0"/>
+      <property name="offsetSidewards" value="0.0"/>
+      <property name="life" value="6.0"/>
+      <property name="vx" value="0.0"/>
+      <property name="offsetForwards" value="20.0"/>
+      <property name="alpha" value="255.0"/>
+      <property name="spin" value="0.0"/>
+      <property name="gravity" value="0.0"/>
+    </actor>
+    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestProjectiles" x="316" y="207" direction="-90.0" heading="-90.0" startEvent="default" zOrder="45">
+      <property name="fade" value="0.0"/>
+      <property name="offsetY" value="0.0"/>
+      <property name="speedForwards" value="0.1"/>
+      <property name="offsetX" value="0.0"/>
+      <property name="growFactor" value="1.0"/>
+      <property name="speedSidewards" value="0.0"/>
+      <property name="id" value="0"/>
+      <property name="vy" value="0.0"/>
+      <property name="offsetSidewards" value="0.0"/>
+      <property name="life" value="6.0"/>
+      <property name="vx" value="0.0"/>
+      <property name="offsetForwards" value="20.0"/>
+      <property name="alpha" value="255.0"/>
+      <property name="spin" value="-3.0"/>
+      <property name="gravity" value="0.0"/>
+    </actor>
+    <text text="Spin -3,0,-3" font="vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="358" y="239" direction="0.0" heading="0.0" startEvent="default" zOrder="46"/>
+    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestProjectiles" x="357" y="208" direction="-90.0" heading="-90.0" startEvent="default" zOrder="47">
+      <property name="fade" value="0.0"/>
+      <property name="offsetY" value="0.0"/>
+      <property name="speedForwards" value="0.1"/>
+      <property name="offsetX" value="0.0"/>
+      <property name="growFactor" value="1.0"/>
+      <property name="speedSidewards" value="0.0"/>
+      <property name="id" value="0"/>
+      <property name="vy" value="0.0"/>
+      <property name="offsetSidewards" value="0.0"/>
+      <property name="life" value="6.0"/>
+      <property name="vx" value="0.0"/>
+      <property name="offsetForwards" value="20.0"/>
+      <property name="alpha" value="255.0"/>
+      <property name="spin" value="0.0"/>
+      <property name="gravity" value="0.0"/>
+    </actor>
+    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestProjectiles" x="537" y="205" direction="-90.0" heading="-90.0" startEvent="default" zOrder="48">
+      <property name="fade" value="0.0"/>
+      <property name="offsetY" value="0.0"/>
+      <property name="speedForwards" value="0.1"/>
+      <property name="offsetX" value="0.0"/>
+      <property name="growFactor" value="1.0"/>
+      <property name="speedSidewards" value="0.0"/>
+      <property name="id" value="0"/>
+      <property name="vy" value="0.0"/>
+      <property name="offsetSidewards" value="0.0"/>
+      <property name="life" value="6.0"/>
+      <property name="vx" value="0.0"/>
+      <property name="offsetForwards" value="20.0"/>
+      <property name="alpha" value="255.0"/>
+      <property name="spin" value="0.0"/>
+      <property name="gravity" value="0.0"/>
+    </actor>
+    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestProjectiles" x="580" y="205" direction="-90.0" heading="-90.0" startEvent="default" zOrder="49">
+      <property name="fade" value="0.0"/>
+      <property name="offsetY" value="0.0"/>
+      <property name="speedForwards" value="0.1"/>
+      <property name="offsetX" value="0.0"/>
+      <property name="growFactor" value="1.01"/>
+      <property name="speedSidewards" value="0.0"/>
+      <property name="id" value="0"/>
+      <property name="vy" value="0.0"/>
+      <property name="offsetSidewards" value="0.0"/>
+      <property name="life" value="6.0"/>
+      <property name="vx" value="0.0"/>
+      <property name="offsetForwards" value="20.0"/>
+      <property name="alpha" value="255.0"/>
+      <property name="spin" value="0.0"/>
+      <property name="gravity" value="0.0"/>
+    </actor>
+    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestProjectiles" x="396" y="207" direction="-90.0" heading="-90.0" startEvent="default" zOrder="50">
+      <property name="fade" value="0.0"/>
+      <property name="offsetY" value="0.0"/>
+      <property name="speedForwards" value="0.1"/>
+      <property name="offsetX" value="0.0"/>
+      <property name="growFactor" value="1.0"/>
+      <property name="speedSidewards" value="0.0"/>
+      <property name="id" value="0"/>
+      <property name="vy" value="0.0"/>
+      <property name="offsetSidewards" value="0.0"/>
+      <property name="life" value="6.0"/>
+      <property name="vx" value="0.0"/>
+      <property name="offsetForwards" value="20.0"/>
+      <property name="alpha" value="255.0"/>
+      <property name="spin" value="3.0"/>
+      <property name="gravity" value="0.0"/>
+    </actor>
+    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestProjectiles" x="496" y="205" direction="-90.0" heading="-90.0" startEvent="default" zOrder="51">
+      <property name="fade" value="0.0"/>
+      <property name="offsetY" value="0.0"/>
+      <property name="speedForwards" value="0.1"/>
+      <property name="offsetX" value="0.0"/>
+      <property name="growFactor" value="0.99"/>
+      <property name="speedSidewards" value="0.0"/>
+      <property name="id" value="0"/>
+      <property name="vy" value="0.0"/>
+      <property name="offsetSidewards" value="0.0"/>
+      <property name="life" value="6.0"/>
+      <property name="vx" value="0.0"/>
+      <property name="offsetForwards" value="20.0"/>
+      <property name="alpha" value="255.0"/>
+      <property name="spin" value="0.0"/>
+      <property name="gravity" value="0.0"/>
+    </actor>
+    <text text="Grow .99, 0, 1.01" font="vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="545" y="237" direction="0.0" heading="0.0" startEvent="default" zOrder="52"/>
+    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestProjectiles" x="745" y="116" direction="-178.1523897340054" heading="-179.00937048636757" startEvent="default" zOrder="53">
+      <property name="fade" value="0.0"/>
+      <property name="offsetY" value="0.0"/>
+      <property name="speedForwards" value="1.0"/>
+      <property name="offsetX" value="0.0"/>
+      <property name="growFactor" value="1.0"/>
+      <property name="speedSidewards" value="0.0"/>
+      <property name="id" value="1"/>
+      <property name="vy" value="0.0"/>
+      <property name="offsetSidewards" value="0.0"/>
+      <property name="life" value="6.0"/>
+      <property name="vx" value="0.0"/>
+      <property name="offsetForwards" value="20.0"/>
+      <property name="alpha" value="255.0"/>
+      <property name="spin" value="0.0"/>
+      <property name="gravity" value="-0.02"/>
+    </actor>
+    <text text="Gravity -0.02" font="vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="726" y="229" direction="0.0" heading="0.0" startEvent="default" zOrder="54"/>
+    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestProjectiles" x="746" y="158" direction="-178.1523897340054" heading="-179.00937048636757" startEvent="default" zOrder="55">
+      <property name="fade" value="0.0"/>
+      <property name="offsetY" value="0.0"/>
+      <property name="speedForwards" value="1.0"/>
+      <property name="offsetX" value="0.0"/>
+      <property name="growFactor" value="1.0"/>
+      <property name="speedSidewards" value="0.0"/>
+      <property name="id" value="0"/>
+      <property name="vy" value="0.0"/>
+      <property name="offsetSidewards" value="0.0"/>
+      <property name="life" value="6.0"/>
+      <property name="vx" value="0.0"/>
+      <property name="offsetForwards" value="20.0"/>
+      <property name="alpha" value="255.0"/>
+      <property name="spin" value="0.0"/>
+      <property name="gravity" value="-0.02"/>
+    </actor>
+    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestProjectiles" x="65" y="103" direction="-90.0" heading="-90.0" startEvent="default" zOrder="56">
+      <property name="fade" value="-1.0"/>
+      <property name="offsetY" value="0.0"/>
+      <property name="speedForwards" value="0.1"/>
+      <property name="offsetX" value="0.0"/>
+      <property name="growFactor" value="1.0"/>
+      <property name="speedSidewards" value="0.0"/>
+      <property name="id" value="0"/>
+      <property name="vy" value="0.0"/>
+      <property name="offsetSidewards" value="0.0"/>
+      <property name="life" value="6.0"/>
+      <property name="vx" value="0.0"/>
+      <property name="offsetForwards" value="20.0"/>
+      <property name="alpha" value="128.0"/>
+      <property name="spin" value="0.0"/>
+      <property name="gravity" value="0.0"/>
+    </actor>
+    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestProjectiles" x="105" y="104" direction="-90.0" heading="-90.0" startEvent="default" zOrder="57">
+      <property name="fade" value="-0.5"/>
+      <property name="offsetY" value="0.0"/>
+      <property name="speedForwards" value="0.1"/>
+      <property name="offsetX" value="0.0"/>
+      <property name="growFactor" value="1.0"/>
+      <property name="speedSidewards" value="0.0"/>
+      <property name="id" value="0"/>
+      <property name="vy" value="0.0"/>
+      <property name="offsetSidewards" value="0.0"/>
+      <property name="life" value="6.0"/>
+      <property name="vx" value="0.0"/>
+      <property name="offsetForwards" value="20.0"/>
+      <property name="alpha" value="128.0"/>
+      <property name="spin" value="0.0"/>
+      <property name="gravity" value="0.0"/>
+    </actor>
+    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestProjectiles" x="141" y="103" direction="-90.0" heading="-90.0" startEvent="default" zOrder="58">
+      <property name="fade" value="0.0"/>
+      <property name="offsetY" value="0.0"/>
+      <property name="speedForwards" value="0.1"/>
+      <property name="offsetX" value="0.0"/>
+      <property name="growFactor" value="1.0"/>
+      <property name="speedSidewards" value="0.0"/>
+      <property name="id" value="0"/>
+      <property name="vy" value="0.0"/>
+      <property name="offsetSidewards" value="0.0"/>
+      <property name="life" value="6.0"/>
+      <property name="vx" value="0.0"/>
+      <property name="offsetForwards" value="20.0"/>
+      <property name="alpha" value="128.0"/>
+      <property name="spin" value="0.0"/>
+      <property name="gravity" value="0.0"/>
+    </actor>
+    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestProjectiles" x="177" y="101" direction="-90.0" heading="-90.0" startEvent="default" zOrder="59">
+      <property name="fade" value="0.5"/>
+      <property name="offsetY" value="0.0"/>
+      <property name="speedForwards" value="0.1"/>
+      <property name="offsetX" value="0.0"/>
+      <property name="growFactor" value="1.0"/>
+      <property name="speedSidewards" value="0.0"/>
+      <property name="id" value="0"/>
+      <property name="vy" value="0.0"/>
+      <property name="offsetSidewards" value="0.0"/>
+      <property name="life" value="6.0"/>
+      <property name="vx" value="0.0"/>
+      <property name="offsetForwards" value="20.0"/>
+      <property name="alpha" value="128.0"/>
+      <property name="spin" value="0.0"/>
+      <property name="gravity" value="0.0"/>
+    </actor>
+    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestProjectiles" x="213" y="101" direction="-90.0" heading="-90.0" startEvent="default" zOrder="60">
+      <property name="fade" value="1.0"/>
+      <property name="offsetY" value="0.0"/>
+      <property name="speedForwards" value="0.1"/>
+      <property name="offsetX" value="0.0"/>
+      <property name="growFactor" value="1.0"/>
+      <property name="speedSidewards" value="0.0"/>
+      <property name="id" value="0"/>
+      <property name="vy" value="0.0"/>
+      <property name="offsetSidewards" value="0.0"/>
+      <property name="life" value="6.0"/>
+      <property name="vx" value="0.0"/>
+      <property name="offsetForwards" value="20.0"/>
+      <property name="alpha" value="128.0"/>
+      <property name="spin" value="0.0"/>
+      <property name="gravity" value="0.0"/>
+    </actor>
+    <text text="Alpha 128" font="vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="104" y="141" direction="0.0" heading="0.0" startEvent="default" zOrder="61"/>
+    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestProjectiles" x="348" y="114" direction="-90.0" heading="-90.0" startEvent="default" zOrder="62" scale="2.4210526315789473">
+      <property name="fade" value="0.0"/>
+      <property name="offsetY" value="0.0"/>
+      <property name="speedForwards" value="0.1"/>
+      <property name="offsetX" value="0.0"/>
+      <property name="growFactor" value="1.0"/>
+      <property name="speedSidewards" value="0.0"/>
+      <property name="id" value="0"/>
+      <property name="vy" value="0.0"/>
+      <property name="offsetSidewards" value="0.0"/>
+      <property name="life" value="6.0"/>
+      <property name="vx" value="0.0"/>
+      <property name="offsetForwards" value="20.0"/>
+      <property name="alpha" value="255.0"/>
+      <property name="spin" value="0.0"/>
+      <property name="gravity" value="0.0"/>
+    </actor>
+    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestProjectiles" x="431" y="118" direction="-46.080924186660695" heading="-46.080924186660695" startEvent="default" zOrder="63" scale="2.4210526315789473">
+      <property name="fade" value="0.0"/>
+      <property name="offsetY" value="0.0"/>
+      <property name="speedForwards" value="0.1"/>
+      <property name="offsetX" value="0.0"/>
+      <property name="growFactor" value="1.0"/>
+      <property name="speedSidewards" value="0.0"/>
+      <property name="id" value="0"/>
+      <property name="vy" value="0.0"/>
+      <property name="offsetSidewards" value="0.0"/>
+      <property name="life" value="6.0"/>
+      <property name="vx" value="0.0"/>
+      <property name="offsetForwards" value="20.0"/>
+      <property name="alpha" value="255.0"/>
+      <property name="spin" value="0.0"/>
+      <property name="gravity" value="0.0"/>
+    </actor>
   </layer>
 </scene>

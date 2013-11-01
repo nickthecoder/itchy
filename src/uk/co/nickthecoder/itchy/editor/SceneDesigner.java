@@ -17,6 +17,7 @@ import uk.co.nickthecoder.itchy.CompoundLayer;
 import uk.co.nickthecoder.itchy.Costume;
 import uk.co.nickthecoder.itchy.CostumeResource;
 import uk.co.nickthecoder.itchy.Font;
+import uk.co.nickthecoder.itchy.Game;
 import uk.co.nickthecoder.itchy.ImagePose;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.KeyListener;
@@ -137,6 +138,8 @@ public class SceneDesigner implements MouseListener, KeyListener
     private Actor stampActor;
 
     private RotateHandleBehaviour rotateHandle;
+    private HeadingHandleBehaviour headingHandle;
+    
     private final List<ScaleHandleBehaviour> scaleHandles = new ArrayList<ScaleHandleBehaviour>();
     private final List<HandleBehaviour> handles = new ArrayList<HandleBehaviour>();
 
@@ -1374,8 +1377,11 @@ public class SceneDesigner implements MouseListener, KeyListener
     private void onActorUnrotate()
     {
         if ((this.mode == MODE_SELECT) && (this.currentActor != null)) {
-            this.currentActor.getAppearance().setDirection(
-                this.currentActor.getAppearance().getPose().getDirection());
+            double direction = this.currentActor.getAppearance().getPose().getDirection();
+            if (this.currentActor.getHeading() == this.currentActor.getAppearance().getDirection()) {
+                this.currentActor.setHeading(direction);
+            }
+            this.currentActor.setDirection(direction);
             this.selectActor(this.currentActor);
         }
     }
@@ -1439,7 +1445,14 @@ public class SceneDesigner implements MouseListener, KeyListener
 
     private void onTest()
     {
-        this.editor.game.testScene(this.sceneResource.name);
+        try {
+            
+            Game game = this.editor.game.resources.createGame();
+            game.testScene(this.sceneResource.name);
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void onText()
@@ -1490,6 +1503,9 @@ public class SceneDesigner implements MouseListener, KeyListener
         }
         this.rotateHandle.setTarget(this.currentActor);
         this.rotateHandle.getActor().getAppearance().setAlpha(255);
+        
+        this.headingHandle.setTarget(this.currentActor);
+        this.headingHandle.getActor().getAppearance().setAlpha(255);
 
     }
 
@@ -1498,7 +1514,8 @@ public class SceneDesigner implements MouseListener, KeyListener
         for (ScaleHandleBehaviour be : this.scaleHandles) {
             be.getActor().getAppearance().setAlpha(0);
         }
-        this.rotateHandle.getActor().getAppearance().setAlpha(0);
+        //this.rotateHandle.getActor().getAppearance().setAlpha(0);
+        //this.headingHandle.getActor().getAppearance().setAlpha(0);
         if (this.highlightActor != null) {
             this.highlightActor.getAppearance().setAlpha(0);
         }
@@ -1514,13 +1531,14 @@ public class SceneDesigner implements MouseListener, KeyListener
             be.setTarget(null);
         }
         this.rotateHandle.setTarget(null);
+        this.headingHandle.setTarget(null);
     }
 
     private void createHandles()
     {
 
-        ImagePose pose = this.editor.getStylesheet().resources.getPose("rotateHandle");
-        Actor rotateActor = new Actor(pose);
+        ImagePose rotatePose = this.editor.getStylesheet().resources.getPose("rotateHandle");
+        Actor rotateActor = new Actor(rotatePose);
         this.rotateHandle = new RotateHandleBehaviour();
         rotateActor.setBehaviour(this.rotateHandle);
         rotateActor.getAppearance().setAlpha(0);
@@ -1528,10 +1546,19 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.glassLayer.addTop(rotateActor);
         this.handles.add(this.rotateHandle);
 
-        pose = this.editor.getStylesheet().resources.getPose("scaleHandle");
+        ImagePose headingPose = this.editor.getStylesheet().resources.getPose("headingHandle");
+        Actor headingActor = new Actor(headingPose);
+        this.headingHandle = new HeadingHandleBehaviour();
+        headingActor.setBehaviour(this.headingHandle);
+        headingActor.getAppearance().setAlpha(0);
+        headingActor.activate();
+        this.glassLayer.addTop(headingActor);
+        this.handles.add(this.headingHandle);
+
+        ImagePose scalePose = this.editor.getStylesheet().resources.getPose("scaleHandle");
         for (int dx = -1; dx < 2; dx += 2) {
             for (int dy = -1; dy < 2; dy += 2) {
-                Actor scaleHandle = new Actor(pose);
+                Actor scaleHandle = new Actor(scalePose);
                 ScaleHandleBehaviour behaviour = new ScaleHandleBehaviour(dx, dy);
                 scaleHandle.setBehaviour(behaviour);
                 scaleHandle.getAppearance().setAlpha(0);
@@ -1691,10 +1718,12 @@ public class SceneDesigner implements MouseListener, KeyListener
             double tx = this.getActor().getX() - this.target.getX();
             double ty = this.getActor().getY() - this.target.getY();
 
-            double angle = Math.atan2(ty, tx);
-            this.getActor().getAppearance().setDirectionRadians(angle);
-            this.target.getAppearance().setDirectionRadians(angle);
+            double angleRadians = Math.atan2(ty, tx);
+            double headingDiff = this.target.getHeading() - this.target.getAppearance().getDirection();
+            this.getActor().setDirectionRadians(angleRadians);
 
+            this.target.getAppearance().setDirectionRadians(angleRadians);
+            this.target.setHeading( this.target.getAppearance().getDirection() + headingDiff  );
         }
 
         @Override
@@ -1706,9 +1735,39 @@ public class SceneDesigner implements MouseListener, KeyListener
 
             if (this.target != null) {
                 this.getActor().moveTo(this.target);
-                this.getActor().getAppearance()
-                    .setDirection(this.target.getAppearance().getDirection());
+                this.getActor().setDirection(this.target.getAppearance().getDirection());
                 this.getActor().moveForward(30);
+            }
+        }
+
+    }
+    
+    class HeadingHandleBehaviour extends HandleBehaviour
+    {
+        @Override
+        public void moveBy( int dx, int dy )
+        {
+            super.moveBy(dx, dy);
+
+            double tx = this.getActor().getX() - this.target.getX();
+            double ty = this.getActor().getY() - this.target.getY();
+
+            double angle = Math.atan2(ty, tx);
+            this.getActor().getAppearance().setDirectionRadians(angle);
+            this.target.setHeadingRadians(angle);
+        }
+
+        @Override
+        public void tick()
+        {
+            if (this.dragging) {
+                return;
+            }
+
+            if (this.target != null) {
+                this.getActor().moveTo(this.target);
+                this.getActor().setDirection(this.target.getHeading());
+                this.getActor().moveForward(60);
             }
         }
 

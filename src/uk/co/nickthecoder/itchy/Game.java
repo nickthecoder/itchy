@@ -86,7 +86,6 @@ public class Game implements EventListener, MessageListener
 
     public void onActivate()
     {
-        startScene(this.resources.gameInfo.initialScene);
     }
 
     public void onDeactivate()
@@ -119,6 +118,9 @@ public class Game implements EventListener, MessageListener
     public void start()
     {
         Itchy.startGame(this);
+        if ( !StringUtils.isBlank(this.resources.gameInfo.initialScene)) {
+            startScene(this.resources.gameInfo.initialScene);
+        }
         Itchy.mainLoop();
     }
 
@@ -128,7 +130,7 @@ public class Game implements EventListener, MessageListener
 
         if (!StringUtils.isBlank(sceneName)) {
             clear();
-            loadScene(sceneName);
+            startScene(sceneName);
         }
 
         Itchy.mainLoop();
@@ -145,6 +147,7 @@ public class Game implements EventListener, MessageListener
     public void testScene( String sceneName )
     {
         try {
+            System.err.println("Starting Test");
             this.testing = true;
             start(sceneName);
 
@@ -156,12 +159,14 @@ public class Game implements EventListener, MessageListener
     /**
      * The flip side of {@link testScene(String)}, will return to the scene designer.
      * 
-     * Essentially the same as {@link #end}.
+     * Very similar to {@link #end}.
      */
     public void endTest()
     {
+        clear();
         end();
         this.testing = false;
+        System.err.println("Ended Test");
     }
 
     /**

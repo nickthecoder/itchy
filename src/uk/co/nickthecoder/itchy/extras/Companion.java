@@ -8,11 +8,17 @@ package uk.co.nickthecoder.itchy.extras;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Behaviour;
 import uk.co.nickthecoder.itchy.Costume;
+import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Pose;
+import uk.co.nickthecoder.jame.RGBA;
 
 /**
- * The base class for Explosion, Projectile and Follower. Holds the common
- * 
+ * Companions are spawned by other Behaviours, for example a ship could fire a bullet (in this case
+ * the Companion would be a {@link Projectile}). Another example is a Speech bubble, in which case
+ * use {@link Follower}. {@link Explosion} is also a Companion, which creates a set of Projectiles.
+ * <p>
+ * Companions will typically share the same {@link Costume} as their source, but will use a
+ * different {@link Pose}.
  */
 public abstract class Companion<T extends Companion<T>> extends Behaviour
 {
@@ -30,25 +36,29 @@ public abstract class Companion<T extends Companion<T>> extends Behaviour
 
     public double offsetSidewards = 0;
 
-    protected double offsetX = 0;
+    public double offsetX = 0;
 
-    protected double offsetY = 0;
+    public double offsetY = 0;
 
-    protected Pose pose;
+    public Pose pose;
 
-    protected Costume costume;
+    public Costume costume;
 
-    protected String eventName;
+    public String eventName;
 
-    protected double direction;
+    public double direction;
 
-    protected double heading;
+    public double heading;
 
-    protected int zOrder;
+    public int zOrder;
 
-    public int alpha = 255;
+    public double alpha = 255;
 
-    private double scale;
+    public double scale;
+
+    public boolean rotate = false;
+
+    public RGBA colorize;
 
     public Companion( Actor actor )
     {
@@ -58,32 +68,128 @@ public abstract class Companion<T extends Companion<T>> extends Behaviour
         this.scale = this.source.getAppearance().getScale();
         this.direction = this.source.getAppearance().getDirection();
         this.heading = this.source.getHeading();
+        this.colorize = this.source.getAppearance().getColorize();
     }
 
+    /**
+     * The Companion can have a different costume to the source actor's costume. For simple
+     * Companions, this is not needed. However, if the Companion has many Poses, sounds or
+     * animations, it may be better for it to have its own costume rather than share the source's
+     * costume.
+     * 
+     * @param costume
+     * @return this
+     */
     public T costume( Costume costume )
     {
         this.costume = costume;
         return this.me;
     }
 
+    /**
+     * Looks up the current game's resources to find a costume with the given name. This costume is
+     * then used for the Companion object.
+     * 
+     * @param costumeName
+     *        The name of the costume.
+     * @return this
+     * @throws NullPointerException
+     *         if the costume is not found.
+     */
+    public T costume( String costumeName )
+    {
+        Costume costume = Itchy.getGame().resources.getCostume(costumeName);
+        if (costume == null) {
+            throw new NullPointerException();
+        }
+        costume(costume);
+        return this.me;
+    }
+
+    /**
+     * Uses a different Costume, the costume is found by looking up 'companionType' within the
+     * source actor's costume, and using the result as a costume name.
+     * <p>
+     * For example, imagine we have a costume called "bigShip". Create a string within bigShip,
+     * named "bullet" with a value "redBullet". We can now create a bullet like so :
+     * <code>new Projectile( myBigShipActor ).companionCostume("bullet").createActor().activate();</code>
+     * 
+     * @param companionType
+     *        The name of the string within the source actors costume. This is NOT the name of a
+     *        costume!
+     * 
+     * @return this
+     * @throws NullPointerException
+     *         if the costume is not found.
+     */
+    public T companionCostume( String companionType )
+    {
+        Costume costume = Itchy.getGame().resources.getCompanionCostume(
+            this.source.getCostume(),
+            companionType);
+
+        if (costume == null) {
+            throw new NullPointerException();
+        }
+
+        costume(costume);
+        return this.me;
+    }
+
+    /**
+     * Uses a given pose for the new Companion. It is rare to use this, instead select a Pose from
+     * the source's costume using {@link #pose(String)}, or {@link #eventName(String)}.
+     * 
+     * @param pose
+     *        The pose to use when creating the actor.
+     * @return this
+     */
     public T pose( Pose pose )
     {
         this.pose = pose;
         return this.me;
     }
 
+    /**
+     * Chooses which pose to use from the source's costume. Consider using
+     * {@link #startEvent(String)} instead, as it can also initiate an animation and a sound effect
+     * when the actor is created.
+     * 
+     * @param poseName
+     *        The name of the pose from the source's costume.
+     * @return this
+     */
     public T pose( String poseName )
     {
         this.pose = this.source.getCostume().getPose(poseName);
         return this.me;
     }
 
+    /**
+     * The companion will fire this event when its Actor is created. The event can select a Pose, an
+     * Animation, and can play a sound. If you only want to select a pose, then use
+     * {@link #pose(String)}.
+     * 
+     * @param eventName
+     *        The name of the event to fire when the actor is created.
+     * @return this
+     */
     public T startEvent( String eventName )
     {
         this.eventName = eventName;
         return this.me;
     }
 
+    /**
+     * Offsets the companion relative to its source. The source's heading is not used. Can be used
+     * in conjunction with {@link #offsetForwards(double) and {@link #offsetSidewards(double)}
+     * 
+     * @param x
+     *        The amount to offset left/right
+     * @param y
+     *        The amount to offset up/down.
+     * @return this
+     */
     public T offset( double x, double y )
     {
         this.offsetX = x;
@@ -91,16 +197,10 @@ public abstract class Companion<T extends Companion<T>> extends Behaviour
         return this.me;
     }
 
-    public T direction( double value )
-    {
-        this.direction = value;
-        return this.me;
-    }
-
     /**
      * @param value
-     *        How far forwards/backwards to move the centre of the explosion from the exploding
-     *        actor. Useful if you want the explosion to happen at the front (or back) of the actor.
+     *        How far forwards/backwards to move from the source actor. Can be used in conjunction
+     *        with {@link #offset(double, double)} and {@link #offsetSidewards(double)}.
      * @return this
      */
     public T offsetForwards( double forwards )
@@ -111,8 +211,8 @@ public abstract class Companion<T extends Companion<T>> extends Behaviour
 
     /**
      * @param value
-     *        How far sidewards to move the centre of the explosion from the exploding actor. Useful
-     *        if you want the explosion to happen at the front (or back) of the actor.
+     *        How far sidewards to move from the source actor. Can be used in conjunction with
+     *        {@link #offset(double, double)} and {@link #offsetForwards(double)}.
      * @return this
      */
     public T offsetSidewards( double sidewards )
@@ -121,12 +221,82 @@ public abstract class Companion<T extends Companion<T>> extends Behaviour
         return this.me;
     }
 
+    /**
+     * The actor's image will point in the given direction. Note, the actor heading is not affected.
+     * 
+     * @param degrees
+     *        The angle in derees.
+     * @return
+     */
+    public T direction( double degrees )
+    {
+        rotate();
+        this.direction = degrees;
+        return this.me;
+    }
+
+    /**
+     * Aims the actor in the direction given. This will affect the direction the actor moves using
+     * {@link Actor#moveForward(double)}. It will NOT affect the orientation of the actor's image.
+     * 
+     * @param degrees
+     *        The actor's heading in degrees
+     * @return
+     */
+    public T heading( double degrees )
+    {
+        this.heading = degrees;
+        return this.me;
+    }
+
+    /**
+     * Determines if the Actor's image should be rotate. The default behaviour is for the image NOT
+     * to be rotated.
+     * 
+     * @param value
+     *        Iff true, then the image will be rotated.
+     * @return this
+     */
+    public T rotate( boolean value )
+    {
+        this.rotate = value;
+        return this.me;
+    }
+
+/**
+     * The Actor's image will be rotated to point in the same direction as the source actor, or
+     * it can be overridden by {@link #direction(double)
+     * 
+     * @return this
+     */
+    public T rotate()
+    {
+        this.rotate = true;
+        return this.me;
+    }
+
+    /**
+     * Set the z-order. The default is for it to share the same z-order as the source actor, and as
+     * this actor is newer, it will appear ABOVE the source.
+     * 
+     * @param zOrder
+     *        The new z-order
+     * @return this.
+     */
     public T zOrder( int zOrder )
     {
         this.zOrder = zOrder;
         return this.me;
     }
 
+    /**
+     * Adds delta to the z-order. To ensure that the new copmanion is below the source actor, use a
+     * delta of -1. The default is for the Companion to share the same z-order, and for it to appear
+     * ABOVE the source actor.
+     * 
+     * @param delta
+     * @return
+     */
     public T adjustZOrder( int delta )
     {
         this.zOrder += delta;
@@ -138,23 +308,41 @@ public abstract class Companion<T extends Companion<T>> extends Behaviour
      *        The initial alpha value for each projectile (0 to 255).
      * @return this
      */
-    public T alpha( int alpha )
+    public T alpha( double alpha )
     {
         this.alpha = alpha;
         return this.me;
     }
 
+    /**
+     * Sets the scale for the Companion. The default is for the companion to share the same scale as
+     * its source.
+     * 
+     * @param scale
+     * @return this
+     */
     public T scale( double scale )
     {
         this.scale = scale;
         return this.me;
     }
 
+    public T colorize( RGBA color )
+    {
+        this.colorize = color;
+        return this.me;
+    }
+
+    /**
+     * Creates a new Actor on the same layer as the source actor. The actor has NOT been activated,
+     * but will be visible.
+     * 
+     * @return A new actor.
+     */
     public Actor createActor()
     {
         Actor actor = new Actor(this.costume);
         if (this.pose != null) {
-            actor.getAppearance().setDirection(this.pose.getDirection());
             actor.getAppearance().setPose(this.pose);
         }
 
@@ -164,11 +352,16 @@ public abstract class Companion<T extends Companion<T>> extends Behaviour
 
         actor.setBehaviour(this);
         actor.setZOrder(this.zOrder);
+        if (this.rotate) {
+            actor.getAppearance().setDirection(this.direction);
+        }
         actor.setHeading(this.heading);
         actor.moveTo(this.source);
-        actor.moveForward(this.offsetForwards, this.offsetSidewards);
-        actor.getAppearance().setDirection(this.direction);
+        actor.moveForward(this.offsetForwards * this.scale, this.offsetSidewards * this.scale);
+        actor.moveBy(this.offsetX * this.scale, this.offsetY * this.scale);
         actor.getAppearance().setScale(this.scale);
+        actor.getAppearance().setColorize(this.colorize);
+        actor.getAppearance().setAlpha(this.alpha);
 
         this.source.getLayer().add(actor);
 
