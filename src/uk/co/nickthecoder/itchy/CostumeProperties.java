@@ -14,11 +14,12 @@ import uk.co.nickthecoder.itchy.util.PropertySubject;
 
 public class CostumeProperties implements PropertySubject<CostumeProperties>
 {
-    public static CostumeProperties createProperties( Resources resources, ClassName className )
+    public static CostumeProperties createProperties( ScriptManager scriptManager, ClassName className )
     {
         try {
             if (ScriptManager.isScript(className)) {
-                return resources.scriptManager.createCostumeProperties(className);
+                //TODO Wrong game!
+                return scriptManager.createCostumeProperties(className);
             } else {
                 @SuppressWarnings("unchecked")
                 Class<CostumeProperties> klass = (Class<CostumeProperties>) Class

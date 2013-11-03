@@ -11,10 +11,10 @@ import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.ActorCollisionStrategy;
 import uk.co.nickthecoder.itchy.Behaviour;
 import uk.co.nickthecoder.itchy.Game;
+import uk.co.nickthecoder.itchy.GameManager;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Launcher;
 import uk.co.nickthecoder.itchy.MultiLineTextPose;
-import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.ScrollableLayer;
 import uk.co.nickthecoder.itchy.animation.Animation;
 import uk.co.nickthecoder.itchy.animation.CompoundAnimation;
@@ -54,10 +54,10 @@ public class DrunkInvaders extends Game
 
     public boolean transitioning = false;
 
-    public DrunkInvaders( Resources resources )
+    public DrunkInvaders( GameManager gameManager )
         throws Exception
     {
-        super(resources);
+        super(gameManager);
 
         game = this;
         this.neighbourhood = new StandardNeighbourhood(NEIGHBOURHOOD_SQUARE_SIZE);
@@ -92,6 +92,7 @@ public class DrunkInvaders extends Game
     public void onActivate()
     {
         super.onActivate();
+        game = this;
         this.mainLayer.enableMouseListener(this);
 
         this.metronomeCountdown = 0;
@@ -141,8 +142,8 @@ public class DrunkInvaders extends Game
                 {
                     pose.setText(
                         "Aliens Remaining : " + DrunkInvaders.this.aliensRemaining + "\n" +
-                        "Dropped Frames   : " + Itchy.frameRate.getDroppedFrames()
-                    );
+                            "Dropped Frames   : " + Itchy.frameRate.getDroppedFrames()
+                        );
                 }
             };
             pose.setAlignment(0, 0);
@@ -184,13 +185,13 @@ public class DrunkInvaders extends Game
 
         } else if ("levels".equals(sceneName)) {
             transition = new CompoundAnimation(false)
-            .add(SceneTransition.slideRight())
-            .add(SceneTransition.fade());
+                .add(SceneTransition.slideRight())
+                .add(SceneTransition.fade());
 
         } else if ("menu".equals(sceneName)) {
             transition = new CompoundAnimation(false)
-            .add(SceneTransition.slideLeft())
-            .add(SceneTransition.fade());
+                .add(SceneTransition.slideLeft())
+                .add(SceneTransition.fade());
         }
         new SceneTransition(transition).transition(sceneName);
     }

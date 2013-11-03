@@ -40,7 +40,7 @@ public abstract class Loadable
         this.file = file;
     }
 
-    public void load( File file ) throws Exception
+    public void load(File file ) throws Exception
     {
         this.directory = file.getAbsoluteFile().getParentFile();
         this.file = new File(file.getName());

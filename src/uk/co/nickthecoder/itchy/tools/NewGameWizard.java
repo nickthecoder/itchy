@@ -8,6 +8,7 @@ package uk.co.nickthecoder.itchy.tools;
 import java.io.File;
 import java.util.HashMap;
 
+import uk.co.nickthecoder.itchy.Game;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.editor.Editor;
@@ -167,7 +168,8 @@ public class NewGameWizard
         Resources resources = new Resources();
         try {
             resources.load(getResources());
-            resources.getGame().start();
+            Game game = resources.createGame();
+            game.start();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -180,7 +182,8 @@ public class NewGameWizard
         Resources resources = new Resources();
         try {
             resources.load(getResources());
-            Editor editor = new Editor(resources.getGame());
+            Game game = resources.createGame();
+            Editor editor = new Editor(game);
             Itchy.startGame(editor);
 
         } catch (Exception e) {

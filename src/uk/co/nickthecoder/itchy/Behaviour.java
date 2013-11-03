@@ -24,7 +24,7 @@ public abstract class Behaviour implements MessageListener, Cloneable, PropertyS
 
     public static boolean isValidClassName( Resources resources, ClassName className )
     {
-        if (resources.scriptManager.isValidScript(className)) {
+        if (resources.isValidScript(className)) {
             return true;
         }
         try {
@@ -48,8 +48,8 @@ public abstract class Behaviour implements MessageListener, Cloneable, PropertyS
         throws InstantiationException, IllegalAccessException, ScriptException,
         ClassNotFoundException
     {
-        if (resources.scriptManager.isValidScript(className)) {
-            return resources.scriptManager.createBehaviour(className);
+        if (resources.isValidScript(className)) {
+            return Resources.getScriptManager().createBehaviour(className);
         } else {
             Class<?> klass = Class.forName(className.name);
             return (Behaviour) klass.newInstance();

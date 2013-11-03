@@ -342,7 +342,7 @@
   <scenes>
     <scene name="explosions"/>
     <scene name="menu"/>
-    <scene name="profileBug"/>
+    <scene name="playground"/>
     <scene name="profiles"/>
     <scene name="projectiles"/>
   </scenes>

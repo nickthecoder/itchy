@@ -152,7 +152,7 @@ public abstract class Companion<T extends Companion<T>> extends Behaviour
 
     /**
      * Chooses which pose to use from the source's costume. Consider using
-     * {@link #startEvent(String)} instead, as it can also initiate an animation and a sound effect
+     * {@link #eventName(String)} instead, as it can also initiate an animation and a sound effect
      * when the actor is created.
      * 
      * @param poseName
@@ -174,7 +174,7 @@ public abstract class Companion<T extends Companion<T>> extends Behaviour
      *        The name of the event to fire when the actor is created.
      * @return this
      */
-    public T startEvent( String eventName )
+    public T eventName( String eventName )
     {
         this.eventName = eventName;
         return this.me;
@@ -237,7 +237,7 @@ public abstract class Companion<T extends Companion<T>> extends Behaviour
 
     /**
      * Aims the actor in the direction given. This will affect the direction the actor moves using
-     * {@link Actor#moveForward(double)}. It will NOT affect the orientation of the actor's image.
+     * {@link Actor#moveForwards(double)}. It will NOT affect the orientation of the actor's image.
      * 
      * @param degrees
      *        The actor's heading in degrees
@@ -354,10 +354,13 @@ public abstract class Companion<T extends Companion<T>> extends Behaviour
         actor.setZOrder(this.zOrder);
         if (this.rotate) {
             actor.getAppearance().setDirection(this.direction);
+        } else {
+            actor.getAppearance().setDirection(actor.getAppearance().getPose().getDirection());
         }
+        
         actor.setHeading(this.heading);
         actor.moveTo(this.source);
-        actor.moveForward(this.offsetForwards * this.scale, this.offsetSidewards * this.scale);
+        actor.moveForwards(this.offsetForwards * this.scale, this.offsetSidewards * this.scale);
         actor.moveBy(this.offsetX * this.scale, this.offsetY * this.scale);
         actor.getAppearance().setScale(this.scale);
         actor.getAppearance().setColorize(this.colorize);

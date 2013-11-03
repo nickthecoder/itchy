@@ -8,13 +8,16 @@ package uk.co.nickthecoder.itchy;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 import java.util.prefs.Preferences;
 
 import uk.co.nickthecoder.itchy.editor.Editor;
 import uk.co.nickthecoder.itchy.gui.GuiPose;
 import uk.co.nickthecoder.itchy.gui.Stylesheet;
+import uk.co.nickthecoder.itchy.script.ScriptManager;
 import uk.co.nickthecoder.itchy.util.AutoFlushPreferences;
 import uk.co.nickthecoder.itchy.util.StringUtils;
+import uk.co.nickthecoder.itchy.util.TagCollection;
 import uk.co.nickthecoder.jame.RGBA;
 import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.Surface;
@@ -27,7 +30,11 @@ import uk.co.nickthecoder.jame.event.QuitEvent;
 
 public class Game implements EventListener, MessageListener
 {
-    public Resources resources;
+    public final GameManager gameManager;
+    
+    public final Resources resources;
+
+    public final TagCollection<Actor> actorTags = new TagCollection<Actor>();
 
     public Pause pause;
 
@@ -59,9 +66,14 @@ public class Game implements EventListener, MessageListener
 
     private Stylesheet stylesheet;
 
-    public Game( Resources resources )
+    private boolean showMousePointer = true;
+    
+    
+    public Game( GameManager gameManager )
     {
-        this.resources = resources;
+        this.gameManager = gameManager;
+        this.resources = gameManager.resources;
+        
         this.sceneBehaviour = new NullSceneBehaviour();
         this.pause = new Pause(this);
 
@@ -84,8 +96,14 @@ public class Game implements EventListener, MessageListener
         createLayers();
     }
 
+    public ScriptManager getScriptManager()
+    {
+        return gameManager.scriptManager;
+    }
+    
     public void onActivate()
     {
+        showMousePointer(this.showMousePointer);
     }
 
     public void onDeactivate()
@@ -197,6 +215,11 @@ public class Game implements EventListener, MessageListener
     protected Preferences getPreferenceNode()
     {
         return Preferences.userNodeForPackage(this.getClass()).node(this.resources.getId());
+    }
+    
+    public Set<Actor> findActorsByTag( String tag )
+    {
+        return this.actorTags.getTagMembers(tag);
     }
 
     /**
@@ -414,8 +437,6 @@ public class Game implements EventListener, MessageListener
         }
     }
 
-    // TODO remove this.eventListeners, and instead, add listener to all of
-    // mouseListeners, keyListeners, quitListeners. That way the order is more controllable.
     public void addEventListener( EventListener listener )
     {
         this.eventListeners.add(listener);
@@ -469,7 +490,6 @@ public class Game implements EventListener, MessageListener
         this.mouseOwner = null;
     }
 
-    // TODO What is a modal listener?
     public void setModalListener( EventListener listener )
     {
         this.modalListener = listener;
@@ -602,6 +622,12 @@ public class Game implements EventListener, MessageListener
         return this.sceneBehaviour;
     }
 
+    public void showMousePointer( boolean value )
+    {
+        this.showMousePointer = value;
+        uk.co.nickthecoder.jame.Video.showMousePointer(value);
+    }
+    
     /**
      * Clears and resets the layers, and then loads the specified scene.
      * 
@@ -635,7 +661,7 @@ public class Game implements EventListener, MessageListener
             this.sceneBehaviour = scene.createSceneBehaviour(this.resources);
             this.sceneBehaviour.onActivate();
             scene.create(this.layers, this.resources, false);
-            Itchy.showMousePointer(scene.showMouse);
+            showMousePointer(scene.showMouse);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -726,7 +752,6 @@ public class Game implements EventListener, MessageListener
 
     public void startEditor()
     {
-        clear();
         try {
             Editor editor = new Editor(this);
             editor.start();
@@ -745,6 +770,11 @@ public class Game implements EventListener, MessageListener
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    
+    public String toString()
+    {
+        return this.getClass().getName() + " Resources " + this.resources;
     }
 
 }

@@ -20,6 +20,7 @@ import uk.co.nickthecoder.itchy.animation.FramedAnimation;
 import uk.co.nickthecoder.itchy.animation.MoveAnimation;
 import uk.co.nickthecoder.itchy.animation.ScaleAnimation;
 import uk.co.nickthecoder.itchy.animation.TurnAnimation;
+import uk.co.nickthecoder.itchy.script.ScriptManager;
 import uk.co.nickthecoder.itchy.util.AbstractProperty;
 import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.itchy.util.NinePatch;
@@ -32,6 +33,7 @@ public class ResourcesReader
 {
     private final Resources resources;
 
+    private final ScriptManager scriptManager;
     /**
      * true if the resources being read are included from another file.
      */
@@ -40,6 +42,7 @@ public class ResourcesReader
     public ResourcesReader( Resources resources )
     {
         this.resources = resources;
+        this.scriptManager = new ScriptManager(resources );
     }
 
     public void load( String filename ) throws Exception
@@ -227,7 +230,7 @@ public class ResourcesReader
                     CostumeProperties.class.getName()));
             
             if (this.resources.registerCostumePropertiesClassName(propertiesClassName.name)) {
-                costume.setPropertiesClassName(this.resources,propertiesClassName);
+                costume.setPropertiesClassName(this.scriptManager, propertiesClassName);
 
             } else {
                 throw new XMLException("Expected a name of a Properties class : " +

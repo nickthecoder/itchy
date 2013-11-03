@@ -12,6 +12,7 @@ import java.util.Random;
 import java.util.Set;
 
 import uk.co.nickthecoder.itchy.animation.Animation;
+import uk.co.nickthecoder.itchy.script.ScriptManager;
 import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.jame.Sound;
 
@@ -338,10 +339,10 @@ public class Costume
         return this.propertiesClassName;
     }
 
-    public void setPropertiesClassName( Resources resources, ClassName value )
+    public void setPropertiesClassName( ScriptManager scriptManager, ClassName value )
     {
         if (!value.equals(this.propertiesClassName)) {
-            this.properties = CostumeProperties.createProperties(resources, value);
+            this.properties = CostumeProperties.createProperties(scriptManager, value);
             this.propertiesClassName = value;
         }
     }

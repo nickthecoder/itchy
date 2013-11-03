@@ -26,8 +26,8 @@ public class DelayedActivation extends Behaviour
             getActor().deactivate();
             getActor().setBehaviour(this.behaviour);
             // Was deactivated and now activated so that the behaviour's onActivate method is called. 
-            getActor().activate();
             getActor().event( getActor().getStartEvent() );
+            getActor().activate();
         }
     }
 }

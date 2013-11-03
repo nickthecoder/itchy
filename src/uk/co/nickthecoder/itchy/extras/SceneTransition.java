@@ -104,7 +104,7 @@ public class SceneTransition
      */
     public static Animation fade()
     {
-        return new AlphaAnimation(TRANSITION_FRAMES, NumericAnimation.linear, 0);
+        return new AlphaAnimation(TRANSITION_FRAMES, NumericAnimation.easeInCirc, 0);
     }
 
     private static SceneTransition currentSceneTransition = null;

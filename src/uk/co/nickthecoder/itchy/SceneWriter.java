@@ -99,7 +99,6 @@ public class SceneWriter extends XMLWriter
 
                 if ((csa.costume.behaviourClassName == null) ||
                         (!csa.costume.behaviourClassName.name.equals(csa.behaviourClassName.name))) {
-                    System.out.println( "Behaviour name : " + sceneActor.behaviourClassName );
                     this.attribute("behaviour", sceneActor.behaviourClassName.name);
                 }
                 this.writeSceneActorAttributes(sceneActor);

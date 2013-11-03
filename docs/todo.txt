@@ -1,16 +1,40 @@
-Test Explosion
-    VX ,VY not working.
-    
-Test Animation Eases - have the simple test case.
+Bed covers
+Glasses
+Vacuum bathroom
+
+TODO
+====
+
+Is GameManager really needed?
+
+CostumeResource attributes : All other XXXResources have getXXX, instead of a public property.
+
+Itchy.doGameLogic : Refactor so that Game takes more responsibility. Should be just currentGame.doGameLogic
+
+Game.addEventListener
+    remove this.eventListeners, and instead, add listener to all of
+    mouseListeners, keyListeners, quitListeners. That way the order is more controllable.
+
+ActorsLayer.enableMouseListener
+    Check for instanceof MouseListener rules out ScriptedBehaviour
+
+Game.setModalListener : What is a modal listener?
 
 What's Next
 ===========
 
+Register the "extras" behaviours.
+
+Change the button style within the pickers, so that it looks more like a menu than an array of buttons. 
+
 Tests for Follower
 Check Talk to see if it makes sense - does it play nicely when selecting a pose?
-
-Add pose and nine patch to try to show the image sub directory if it exists.
+    Allow talk to be rotated relative to its subject? Needed in DrunkInvaders, as the aliens point
+    downwards when the talk should point to the right.
+    
+Add pose and nine patch : try to show the image sub directory if it exists.
     Copy images if outside of the game's directory
+        Can do this during SAVE
 
 Create a game from scratch, deliberately making syntax errors in the code.
     Fix any bugs and improve the UI along the way. 
@@ -66,7 +90,6 @@ Text Costumes.
 
 Compile on raspPi?
 
-
 Get Thrust to run via "launch" without the resource symlinks to itchy.
     Need thrusts jar file to be in a lib directory within its resources, and for the jar to be loaded
     after java has started.
@@ -80,10 +103,6 @@ Component : Override all rules. Currently only Font can be overridden.
     Allow to be reset to default (i.e. be restyled). 
 
 Create a game which uses the GUI        
-    The Rules object needs to be on Game, its probably on Itchy right now.
-
-Try it on a RaspPi
-    Need to compile Jame for the ARM processor!
 
 The Behaviours should have the tags, because its them that have the Interface.
 Also, I could change the behaviour, and the tags would magically vanish (without the "removeAll"!

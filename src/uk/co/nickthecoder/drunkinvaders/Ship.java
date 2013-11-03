@@ -225,12 +225,12 @@ public class Ship extends Bouncy implements Shootable
 
         this.event("fire");
 
-        Actor bullet = new Actor(DrunkInvaders.game.resources.getCostume("bullet"), "default");
+        Actor bullet = new Actor(DrunkInvaders.game.resources.getCostume("bullet"));
         this.latestBullet = bullet;
         bullet.moveTo(this.getActor());
         bullet.setDirection(this.getActor().getAppearance().getDirection());
         DrunkInvaders.game.mainLayer.addTop(bullet);
-        bullet.moveForward(10);
+        bullet.moveForwards(10);
         bullet.setBehaviour(new Bullet());
         bullet.addTag("killable");
         bullet.activate();

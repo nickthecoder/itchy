@@ -104,7 +104,7 @@ public class Projectile extends Companion<Projectile>
         double oy = this.getActor().getY();
 
         this.getActor().moveBy(this.vx, this.vy);
-        this.getActor().moveForward(this.speedForwards, this.speedSidewards);
+        this.getActor().moveForwards(this.speedForwards, this.speedSidewards);
 
         // Turn the image in the direction of movement.
         if ((this.spin == 0) && this.rotate && (this.gravity != 0)) {

@@ -25,6 +25,9 @@ public class TestExplosion extends Behaviour
 
     @Property(label = "Offset Y")
     public double offsetY;
+    
+    @Property(label = "distance")
+    public double distance;   
 
     @Property(label = "Life")
     public double life;
@@ -44,8 +47,11 @@ public class TestExplosion extends Behaviour
     @Property(label = "Gravity")
     public double gravity;
 
-    @Property(label = "Spin")
-    public double spin;
+    @Property(label = "Spin From")
+    public double spinFrom;
+
+    @Property(label = "Spin To")
+    public double spinTo;
 
     @Property(label = "Fade")
     public double fade;
@@ -68,9 +74,13 @@ public class TestExplosion extends Behaviour
     @Property(label = "Heading To")
     public double spreadTo = 360;
 
-    @Property(label = "Spread")
+    @Property(label = "Random Spread")
     public boolean randomSpread = false;
 
+    @Property(label = "Delta Z Order")
+    public int deltaZ = 0;
+
+    
     @Override
     public void tick()
     {
@@ -81,12 +91,13 @@ public class TestExplosion extends Behaviour
     private Explosion test0()
     {
         Explosion result = new Explosion(this)
-            .offset(this.offsetX, this.offsetY)
+            .distance(this.distance).offset(this.offsetX, this.offsetY)
             .offsetForwards(this.offsetForwards).offsetSidewards(this.offsetSidewards)
             .speed(this.speedForwards, this.speedSidewards).vx(this.vx).vy(this.vy).gravity(this.gravity)
-            .alpha(this.alpha).life(this.life)
-            .fade(this.fade).spin(this.spin).pose("bomb")
-            .projectiles(this.projectiles).rotate()
+            .alpha(this.alpha).life(this.life).fade(this.fade).spin(this.spinFrom,this.spinTo).rotate()
+            .adjustZOrder(this.deltaZ)
+            .pose("bomb")
+            .projectiles(this.projectiles)
             .spread(this.spreadFrom, this.spreadTo).randomSpread(this.randomSpread);
 
         if (this.projectilesPerTick != -1) {

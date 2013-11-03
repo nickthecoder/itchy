@@ -75,7 +75,7 @@ public class TestProjectiles extends Behaviour
             .alpha(this.alpha)
             .life(this.life).vx(this.vx).vy(this.vy)
             .speed(this.speedForwards, this.speedSidewards).gravity(this.gravity).spin(this.spin)
-            .fade(this.fade).growFactor(this.growFactor).startEvent("bomb");
+            .fade(this.fade).growFactor(this.growFactor).eventName("bomb");
     }
 
     private Projectile test1()

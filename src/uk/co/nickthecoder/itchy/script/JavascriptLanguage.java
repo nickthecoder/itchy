@@ -13,10 +13,10 @@ import javax.script.ScriptException;
 import uk.co.nickthecoder.itchy.Behaviour;
 import uk.co.nickthecoder.itchy.CostumeProperties;
 import uk.co.nickthecoder.itchy.Game;
+import uk.co.nickthecoder.itchy.GameManager;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.NullBehaviour;
 import uk.co.nickthecoder.itchy.NullSceneBehaviour;
-import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.SceneBehaviour;
 import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
@@ -47,15 +47,15 @@ public class JavascriptLanguage extends ScriptLanguage
     {
         String message = e.getMessage();
         int index = message.indexOf("Exception: ");
-        if ( index >= 0 ) {
+        if (index >= 0) {
             message = message.substring(index + 11);
         }
-        
+
         if (!includeFilename) {
             String pattern = "(.*)\\(.*\\#([0-9]*)\\)";
             message = message.replaceAll(pattern, "Line $2. $1");
         }
-        
+
         return message;
     }
 
@@ -80,7 +80,7 @@ public class JavascriptLanguage extends ScriptLanguage
     public void ensureGlobals()
     {
         Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
-        Game game = this.manager.resources.getGame();
+        Game game = Itchy.getGame();
         bindings.put("game", game);
         bindings.put("sceneBehaviour", game.getSceneBehaviour());
     }
@@ -112,7 +112,7 @@ public class JavascriptLanguage extends ScriptLanguage
     // ===== GAME ======
 
     @Override
-    public Game createGame( Resources resources, ClassName className )
+    public Game createGame( GameManager gameManager, ClassName className )
     {
         String name = ScriptManager.getName(className);
         ScriptedGame game = null;
@@ -120,7 +120,7 @@ public class JavascriptLanguage extends ScriptLanguage
         try {
             Object gameScript = this.engine.eval("new " + name + "();");
 
-            game = new ScriptedGame(resources, this, gameScript);
+            game = new ScriptedGame(gameManager, this, gameScript);
 
             Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
             bindings.put("gameScript", gameScript);
@@ -133,7 +133,7 @@ public class JavascriptLanguage extends ScriptLanguage
 
         if (game == null) {
             log("Game not created. Using a default Game instead.");
-            return new Game(resources);
+            return new Game(gameManager);
         }
         return game;
     }
@@ -562,6 +562,7 @@ public class JavascriptLanguage extends ScriptLanguage
                 costumePropertiesScript);
 
         } catch (ScriptException e) {
+            e.printStackTrace();
             handleException("Creating costume properties : " + className.name, e);
         }
 

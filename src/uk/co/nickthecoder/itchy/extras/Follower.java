@@ -10,7 +10,7 @@ import uk.co.nickthecoder.itchy.Behaviour;
 
 public class Follower extends Companion<Follower>
 {
-    private boolean rotate = false;;
+    private boolean followRotatation = false;;
 
     public Follower( Behaviour following )
     {
@@ -26,9 +26,9 @@ public class Follower extends Companion<Follower>
      * Ensures that the follower always have the same direction as the object its following?
      * When rotate is not called, the Follower's direction will not be changed.
      */
-    public Follower rotate()
+    public Follower followRotatation()
     {
-        this.rotate = true;
+        this.followRotatation = true;
         return this;
     }
 
@@ -41,10 +41,10 @@ public class Follower extends Companion<Follower>
     private void follow()
     {
         this.getActor().moveTo(this.source);
-        this.getActor().moveForward(this.offsetForwards, this.offsetSidewards);
+        this.getActor().moveForwards(this.offsetForwards, this.offsetSidewards);
         this.getActor().moveBy(this.offsetX, this.offsetY);
         
-        if (this.rotate) {
+        if (this.followRotatation) {
             this.getActor().getAppearance().setDirection(this.source.getAppearance().getDirection());
         }
     }

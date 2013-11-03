@@ -1,15 +1,18 @@
 <scene showMouse="true" behaviour="uk.co.nickthecoder.itchy.NullSceneBehaviour">
   <properties/>
   <layer name="main">
-    <text text="1) Animation Profiles" font="vera" size="22" color="#ffffff" xAlignment="0.0" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.SceneButton" x="30" y="555" direction="0.0" heading="0.0" startEvent="default" zOrder="1">
+    <text text="1) Animation Profiles" font="vera" size="22" color="#ffffff" xAlignment="0.0" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.SceneButton" x="30" y="520" direction="0.0" heading="0.0" startEvent="default" zOrder="1">
       <property name="sceneName" value="profiles"/>
     </text>
-    <text text="2) Projectiles" font="vera" size="22" color="#ffffff" xAlignment="0.0" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.SceneButton" x="31" y="510" direction="0.0" heading="0.0" startEvent="default" zOrder="2">
+    <text text="2) Projectiles" font="vera" size="22" color="#ffffff" xAlignment="0.0" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.SceneButton" x="30" y="490" direction="0.0" heading="0.0" startEvent="default" zOrder="2">
       <property name="sceneName" value="projectiles"/>
     </text>
     <text text="Quit" font="vera" size="57" color="#ffffff" xAlignment="0.5" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.QuitButton" x="419" y="54" direction="0.0" heading="0.0" startEvent="default" zOrder="3"/>
-    <text text="3) Explosions" font="vera" size="22" color="#ffffff" xAlignment="0.0" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.SceneButton" x="32" y="465" direction="0.0" heading="0.0" startEvent="default" zOrder="4">
+    <text text="3) Explosions" font="vera" size="22" color="#ffffff" xAlignment="0.0" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.SceneButton" x="30" y="460" direction="0.0" heading="0.0" startEvent="default" zOrder="4">
       <property name="sceneName" value="explosions"/>
+    </text>
+    <text text="0) Playground" font="vera" size="22" color="#ffffff" xAlignment="0.0" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.SceneButton" x="30" y="550" direction="0.0" heading="0.0" startEvent="default" zOrder="5">
+      <property name="sceneName" value="playground"/>
     </text>
   </layer>
 </scene>

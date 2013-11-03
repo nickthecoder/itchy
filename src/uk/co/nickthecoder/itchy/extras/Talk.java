@@ -1,9 +1,7 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0 which accompanies this
+ * distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.extras;
 
@@ -15,24 +13,20 @@ import uk.co.nickthecoder.itchy.Pose;
 import uk.co.nickthecoder.itchy.TextPose;
 import uk.co.nickthecoder.itchy.util.BorderPoseDecorator;
 import uk.co.nickthecoder.itchy.util.NinePatch;
-
 import uk.co.nickthecoder.jame.RGBA;
 
 public class Talk extends Follower
 {
-    private static RGBA DEFAULT_COLOR = new RGBA(255,255,255);
-    
-    
     private String text;
 
     private String bubbleName = "speechBubble";
 
     private Font font;
 
-    private int fontSize;
+    private int fontSize = 18;
 
-    private RGBA color = DEFAULT_COLOR;
-    
+    private RGBA color = RGBA.WHITE;
+
     private int marginTop = 0;
     private int marginRight = 0;
     private int marginBottom = 0;
@@ -53,7 +47,7 @@ public class Talk extends Follower
         this.text = text;
         return this;
     }
-    
+
     public Talk message( String message )
     {
         String text = this.source.getCostume().getString(message);
@@ -65,7 +59,21 @@ public class Talk extends Follower
         return this;
     }
 
-    
+    @Override
+    public Talk eventName( String eventName )
+    {
+        super.eventName(eventName);
+
+        if (this.font == null) {
+            this.font = this.source.getCostume().getFont(eventName);
+        }
+        if (this.text == null) {
+            this.text = this.source.getCostume().getString(eventName);
+        }
+
+        return this;
+    }
+
     public Talk bubble( String name )
     {
         this.bubbleName = name;
@@ -87,9 +95,9 @@ public class Talk extends Follower
     public Talk font( String fontName, int fontSize )
     {
         Font font = Itchy.getResources().getFont(fontName);
-        return font(font,fontSize);
+        return font(font, fontSize);
     }
-    
+
     public Talk font( Font font, int fontSize )
     {
         this.font = font;
@@ -108,7 +116,7 @@ public class Talk extends Follower
         this.color = color;
         return this;
     }
-    
+
     public Talk margin( int margin )
     {
         this.marginTop = margin;
@@ -136,12 +144,14 @@ public class Talk extends Follower
         return this;
     }
 
+    @Override
     public Talk offset( double x, double y )
     {
-        super.offset(x,  y );
+        super.offset(x, y);
         return this;
     }
 
+    @Override
     public Actor createActor()
     {
         NinePatch bubble = Itchy.getResources().getNinePatch(this.bubbleName);
@@ -161,8 +171,10 @@ public class Talk extends Follower
 
             pose = bpd.createPose(pose);
         }
-        this.pose( pose );
-        
-        return super.createActor();
+        pose(pose);
+
+        Actor result = super.createActor();
+
+        return result;
     }
 }

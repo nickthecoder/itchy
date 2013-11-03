@@ -8,7 +8,6 @@ package uk.co.nickthecoder.itchy.extras;
 import java.util.Random;
 
 import uk.co.nickthecoder.itchy.Actor;
-import uk.co.nickthecoder.itchy.Appearance;
 import uk.co.nickthecoder.itchy.Behaviour;
 import uk.co.nickthecoder.itchy.Itchy;
 
@@ -73,6 +72,8 @@ public class Explosion extends Companion<Explosion>
 
     public double randomVy = 0;
 
+    public double distance = 0;
+
     public double speedForwards = 0;
 
     public double speedSidewards = 0;
@@ -85,11 +86,13 @@ public class Explosion extends Companion<Explosion>
 
     public double randomFade = 0;
 
-    public int lifeTicks;
+    public int lifeTicks = 300;
 
     public int randomLifeTicks = 0;
 
-    public double grow = 1;
+    public double growFactor = 1;
+
+    public double randomGrowFactor = 0;
 
     public int randomAlpha = 0;
 
@@ -100,8 +103,6 @@ public class Explosion extends Companion<Explosion>
     public double spreadFrom = 0;
 
     public double spreadTo = 360;
-
-    public double randomGrow = 0;
 
     public double randomScale = 0;
 
@@ -163,7 +164,7 @@ public class Explosion extends Companion<Explosion>
      * @return this
      */
     @Override
-    public Explosion startEvent( String eventName )
+    public Explosion eventName( String eventName )
     {
         this.projectileEventName = eventName;
         return this;
@@ -190,6 +191,21 @@ public class Explosion extends Companion<Explosion>
     public Explosion projectilesPerTick( int value )
     {
         this.countPerTick = value;
+        return this;
+    }
+
+    /**
+     * The radius of the explosion at time zero. Note, that this is different to
+     * {@link #offsetForwards(double)}, because offsetForwards move the centre of the explosion
+     * forwards, whereas 'distance' moves each Projectile forwards relative to the centre of the
+     * explosion.
+     * 
+     * @param distance
+     * @return this
+     */
+    public Explosion distance( double distance )
+    {
+        this.distance = distance;
         return this;
     }
 
@@ -327,7 +343,7 @@ public class Explosion extends Companion<Explosion>
      * Defines the speed of each Projectile. This is used in conjunction with
      * {@link #heading(double)}.
      * 
-     * Note that the velecity of the Projectile can also be set using {@link #vx(double)} and
+     * Note that the velocity of the Projectile can also be set using {@link #vx(double)} and
      * {@link #vy(double)}. Both can be used at the same time. For example, you can use vx and vy to
      * carry on the exploding actor's momentum, and use speed to define how fast the projectiles
      * move away from the centre of the explosion.
@@ -413,9 +429,9 @@ public class Explosion extends Companion<Explosion>
      * Randomly picks an initial scale for each Projectile within the given range.
      * 
      * @param from
-     *        The smallest scale (0 or more. 1 for normal size)
+     *        The minimum scale (0 or more. 1 for normal size)
      * @param to
-     *        The larset scale (0 or more. 1 for normal size)
+     *        The maximum scale (0 or more. 1 for normal size)
      * @return this
      */
     public Explosion scale( double from, double to )
@@ -440,15 +456,15 @@ public class Explosion extends Companion<Explosion>
      * Randomly picks the growth factor for each Projectile within the given range.
      * 
      * @param from
-     *        The smallest growth factor.
+     *        The minimum growth factor.
      * @param to
-     *        The largest growth factor.
+     *        The maximum growth factor.
      * @return this
      */
     public Explosion grow( double from, double to )
     {
-        this.grow = from;
-        this.randomGrow = to - from;
+        this.growFactor = from;
+        this.randomGrowFactor = to - from;
         return this;
     }
 
@@ -467,12 +483,12 @@ public class Explosion extends Companion<Explosion>
     }
 
     /**
-     * Sets the lifespan of the Projectile within the range given. See {@link #life(double)}
+     * Sets the life span of the Projectile within the range given. See {@link #life(double)}
      * 
      * @param from
-     *        The minimum lifespan of the projectile in seconds.
+     *        The minimum life span of the projectile in seconds.
      * @param to
-     *        The maximum lifespan of the projectiles in seconds.
+     *        The maximum life span of the projectiles in seconds.
      * @return this
      */
     public Explosion life( double from, double to )
@@ -505,7 +521,7 @@ public class Explosion extends Companion<Explosion>
     }
 
     /**
-     * Creates the Projectile objects and the dies. Unless projectilesPerClick is called, this will
+     * Creates the Projectile objects and then dies. Unless projectilesPerClick is called, this will
      * only tick once, creating all of the Projectiles in one go.
      */
     @Override
@@ -513,40 +529,18 @@ public class Explosion extends Companion<Explosion>
     {
         for (int i = 0; i < this.countPerTick; i++) {
 
-            if (this.projectileCounter >= this.totalProjectiles) {
-                getActor().kill();
-                return;
-            }
-
             Projectile projectile = new Projectile(getActor());
             if ((this.poseName != null) && (getActor().getCostume() != null)) {
                 projectile.pose(this.poseName);
             }
             if (this.projectileEventName != null) {
-                projectile.startEvent(this.projectileEventName);
+                projectile.eventName(this.projectileEventName);
             }
 
-            Actor actor = projectile.createActor();
-            Appearance appearance = actor.getAppearance();
-
-            appearance.setScale(this.scale + random.nextDouble() * this.randomScale);
-            appearance.setAlpha(this.alpha + random.nextDouble() * this.randomAlpha);
-
-            if ((this.randomOffsetForwards != 0) && (this.randomOffsetSidewards != 0)) {
-                actor.moveForward(
-                    random.nextDouble() * this.randomOffsetForwards,
-                    random.nextDouble() * this.randomOffsetSidewards);
-            }
-
-            if (this.rotate) {
-                double actualDirection = this.direction + random.nextDouble() *
-                    this.randomDirection;
-                appearance.setDirection(actualDirection);
-            }
-
-            projectile.growFactor = this.grow + random.nextDouble() * this.randomGrow;
-            projectile.lifeTicks = this.lifeTicks +
-                (int) (random.nextDouble() * this.randomLifeTicks);
+            projectile.scale(this.scale + random.nextDouble() * this.randomScale);
+            projectile.alpha(this.alpha + random.nextDouble() * this.randomAlpha);
+            projectile.growFactor = this.growFactor + random.nextDouble() * this.randomGrowFactor;
+            projectile.lifeTicks = this.lifeTicks + (int) (random.nextDouble() * this.randomLifeTicks);
             projectile.spin = this.spin + random.nextDouble() * this.randomSpin;
             projectile.rotate = this.rotate;
 
@@ -555,39 +549,47 @@ public class Explosion extends Companion<Explosion>
             projectile.gravity = this.gravity;
             projectile.fade = this.fade + random.nextDouble() * this.randomFade;
 
+            double actualHeading = this.spreadFrom;
+            if (this.randomSpread) {
+                actualHeading += +random.nextDouble() * (this.spreadTo - this.spreadFrom);
+            } else {
+                actualHeading += (this.spreadTo - this.spreadFrom) / this.totalProjectiles * this.projectileCounter;
+            }
+            if (this.rotate) {
+                projectile.direction(this.direction + random.nextDouble() * this.randomDirection);
+            }
+            projectile.offsetForwards(random.nextDouble() * this.randomOffsetForwards);
+            projectile.offsetSidewards(random.nextDouble() * this.randomOffsetSidewards);
+
             // Do speed and randomSpeed
             if ((this.speedForwards != 0) || (this.speedSidewards != 0) ||
                 (this.randomSpeedForwards != 0) || (this.randomSpeedSidewards != 0)) {
 
-                double actualSpeedForwards = this.speedForwards + random.nextDouble() *
-                    this.randomSpeedForwards;
-                double actualSpeedSidewards = this.speedSidewards + random.nextDouble() *
-                    this.randomSpeedSidewards;
-                double actualHeading = this.spreadFrom;
+                double actualSpeedForwards = this.speedForwards + random.nextDouble() * this.randomSpeedForwards;
+                double actualSpeedSidewards = this.speedSidewards + random.nextDouble() * this.randomSpeedSidewards;
 
-                if (this.randomSpread) {
-                    actualHeading += +random.nextDouble() * (this.spreadTo - this.spreadFrom);
-                } else {
-                    actualHeading += (this.spreadTo - this.spreadFrom) /
-                        (this.totalProjectiles - 1) *
-                        this.projectileCounter;
-                }
-                
                 double cos = Math.cos(actualHeading / 180.0 * Math.PI);
                 double sin = Math.sin(actualHeading / 180.0 * Math.PI);
 
-                projectile.vx = (cos * actualSpeedForwards) - (sin * actualSpeedSidewards);
+                projectile.vx += (cos * actualSpeedForwards) - (sin * actualSpeedSidewards);
                 if (this.getActor().getYAxisPointsDown()) {
-                    projectile.vy = (-sin * actualSpeedForwards) - (cos * actualSpeedSidewards);
+                    projectile.vy += (-sin * actualSpeedForwards) - (cos * actualSpeedSidewards);
                 } else {
-                    projectile.vy = (sin * actualSpeedForwards) + (cos * actualSpeedSidewards);
+                    projectile.vy += (sin * actualSpeedForwards) + (cos * actualSpeedSidewards);
                 }
             }
 
-            getActor().getLayer().add(actor);
-
+            Actor actor = projectile.createActor();
+            actor.setHeading(actualHeading);
+            actor.moveForwards(this.distance);
             actor.activate();
+
             this.projectileCounter++;
+            if (this.projectileCounter >= this.totalProjectiles) {
+                getActor().kill();
+                return;
+            }
+
         }
     }
 

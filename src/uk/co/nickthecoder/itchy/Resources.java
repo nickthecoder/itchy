@@ -6,7 +6,6 @@
 package uk.co.nickthecoder.itchy;
 
 import java.io.File;
-import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -16,6 +15,7 @@ import java.util.TreeSet;
 
 import uk.co.nickthecoder.itchy.animation.Animation;
 import uk.co.nickthecoder.itchy.script.ScriptManager;
+import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.itchy.util.NinePatch;
 import uk.co.nickthecoder.jame.JameException;
 import uk.co.nickthecoder.jame.RGBA;
@@ -40,11 +40,9 @@ public class Resources extends Loadable
         return new File(directory, directory.getName() + ".itchy");
     }
 
-    private Game game;
-
     public final GameInfo gameInfo;
 
-    public ScriptManager scriptManager;
+    public ScriptManager scriptManagerX;
 
     private final HashMap<String, SoundResource> sounds;
 
@@ -77,8 +75,6 @@ public class Resources extends Loadable
         this.gameInfo = new GameInfo();
         this.errorLog = new ErrorLog();
 
-        this.scriptManager = new ScriptManager(this);
-
         this.sounds = new HashMap<String, SoundResource>();
         this.fonts = new HashMap<String, FontResource>();
         this.ninePatches = new HashMap<String, NinePatchResource>();
@@ -108,33 +104,6 @@ public class Resources extends Loadable
         } else {
             return name;
         }
-    }
-
-    public Game createGame()
-        throws Exception
-    {
-
-        if (this.scriptManager.isValidScript(this.gameInfo.className)) {
-            this.game = this.scriptManager.createGame(this.gameInfo.className);
-        } else {
-            Class<?> klass = Class.forName(this.gameInfo.className.name);
-            Constructor<?> constructor = klass.getConstructor(Resources.class);
-            this.game = (Game) constructor.newInstance(this);
-        }
-        this.game.resources = this;
-        return this.game;
-    }
-
-    public Game getGame()
-    {
-        if (this.game == null) {
-            try {
-                this.game = createGame();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return this.game;
     }
 
     @Override
@@ -682,7 +651,7 @@ public class Resources extends Loadable
                 return true;
             }
 
-            if (this.scriptManager.isValidScript(className)) {
+            if (isValidScript(className)) {
                 // Do nothing
             } else {
                 // Ensure the class exists, and is the correct type.
@@ -693,7 +662,7 @@ public class Resources extends Loadable
             this.behaviourClassNames.add(className);
             return true;
         } catch (Exception e) {
-            // Do nothing
+            e.printStackTrace();
         }
         return false;
     }
@@ -703,7 +672,7 @@ public class Resources extends Loadable
         if (this.costumePropertiesClassNames.contains(className)) {
             return true;
         }
-        if (this.scriptManager.isValidScript(className)) {
+        if (isValidScript(className)) {
             // Do nothing
         } else {
 
@@ -726,7 +695,7 @@ public class Resources extends Loadable
             if (this.sceneBehaviourClassNames.contains(className)) {
                 return true;
             }
-            if (this.scriptManager.isValidScript(className)) {
+            if (isValidScript(className)) {
                 // Do nothing
             } else {
                 Class<?> klass = Class.forName(className);
@@ -747,7 +716,7 @@ public class Resources extends Loadable
             if (this.gameClassNames.contains(className)) {
                 return true;
             }
-            if (this.scriptManager.isValidScript(className)) {
+            if (isValidScript(className)) {
                 // Do nothing
             } else {
                 Class<?> klass = Class.forName(className);
@@ -780,6 +749,33 @@ public class Resources extends Loadable
     public Set<String> getGameClassNames()
     {
         return this.gameClassNames;
+    }
+
+    public boolean isValidScript( ClassName className )
+    {
+        return isValidScript( className.name );
+    }
+    
+    public boolean isValidScript( String path )
+    {
+        if (!ScriptManager.isScript(path)) {
+            return false;
+        }
+
+        File file = new File(resolveFilename("scripts" + File.separator + path));
+        return (file.exists());
+    }
+
+    // TODO Replace this with a good solution
+    public static ScriptManager getScriptManager()
+    {
+        return Itchy.getGame().getScriptManager();
+    }
+    
+    public Game createGame()
+        throws Exception
+    {
+        return new GameManager(this).createGame();
     }
 
 }

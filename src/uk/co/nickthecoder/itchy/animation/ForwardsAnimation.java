@@ -51,7 +51,7 @@ public class ForwardsAnimation extends NumericAnimation
     @Override
     public void tick( Actor actor, double amount, double delta )
     {
-        actor.moveForward(this.forwards * delta, this.sidewards * delta);
+        actor.moveForwards(this.forwards * delta, this.sidewards * delta);
     }
 
 }

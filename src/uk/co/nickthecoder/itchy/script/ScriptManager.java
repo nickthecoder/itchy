@@ -14,6 +14,7 @@ import javax.script.ScriptException;
 import uk.co.nickthecoder.itchy.Behaviour;
 import uk.co.nickthecoder.itchy.CostumeProperties;
 import uk.co.nickthecoder.itchy.Game;
+import uk.co.nickthecoder.itchy.GameManager;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.SceneBehaviour;
 import uk.co.nickthecoder.itchy.util.ClassName;
@@ -99,9 +100,9 @@ public class ScriptManager
         }
     }
 
-    public static boolean isScript( ClassName className )
+    public static boolean isScript( String filename )
     {
-        String extension = getExtension(className.name);
+        String extension = getExtension(filename);
 
         for (String registeredExtension : languageClassMap.keySet()) {
             if (extension.equals(registeredExtension)) {
@@ -109,6 +110,11 @@ public class ScriptManager
             }
         }
         return false;
+    }
+    
+    public static boolean isScript( ClassName className )
+    {
+        return isScript( className.name );
     }
 
     public File getScript( String filename )
@@ -148,13 +154,13 @@ public class ScriptManager
         return language.createScript(templateName, className);        
     }
     
-    public Game createGame( ClassName className )
+    public Game createGame( GameManager gameManager, ClassName className )
         throws ScriptException
     {
         ScriptLanguage language = getLanguage(getExtension(className.name));
         language.loadScript(className.name);
 
-        return language.createGame(this.resources, className);
+        return language.createGame(gameManager, className);
     }
 
     public Behaviour createBehaviour( ClassName className )
@@ -179,6 +185,7 @@ public class ScriptManager
         throws ScriptException
     {
         ScriptLanguage language = getLanguage(getExtension(className.name));
+        System.out.println("Loading : " + className );
         language.loadScript(className.name);
 
         return language.createCostumeProperties(className);

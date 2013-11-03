@@ -54,7 +54,6 @@ public class SoundManager
             for (Iterator<SoundEntry> i = this.soundEntries.iterator(); i.hasNext();) {
                 SoundEntry entry = i.next();
                 
-                // TODO Should a fading out sound be stopped immediately?
                 if ( (!entry.fadingOut) && (entry.getSound() == ms.soundResource.getSound())) {
                     // The sound is already playing.
                     

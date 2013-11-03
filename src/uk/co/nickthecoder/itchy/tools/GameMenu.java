@@ -7,6 +7,7 @@ package uk.co.nickthecoder.itchy.tools;
 
 import java.io.File;
 
+import uk.co.nickthecoder.itchy.Game;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.editor.Editor;
@@ -85,7 +86,7 @@ public class GameMenu
         try {
             resources.load(resourceFile);
 
-            resources.getGame().start();
+            resources.createGame().start();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -96,8 +97,9 @@ public class GameMenu
         Resources resources = new Resources();
         try {
             resources.load(resourceFile);
-
-            Editor editor = new Editor(resources.getGame());
+            Game game = resources.createGame();
+            
+            Editor editor = new Editor(game);
             editor.start();
 
         } catch (Exception e) {

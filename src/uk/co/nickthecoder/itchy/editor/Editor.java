@@ -24,9 +24,9 @@ import uk.co.nickthecoder.jame.event.Keys;
 
 public final class Editor extends Game
 {
-    public static Editor singleton;
+    public static Editor instance;
 
-    private static final File RULES = 
+    private static final File RULES =
         new File(new File(Itchy.getResourcesDirectory(), "editor"), "style.xml");
 
     public EditorPreferences preferences;
@@ -69,10 +69,10 @@ public final class Editor extends Game
 
     public Editor( Game game ) throws Exception
     {
-        super(game.resources);
+        super(game.gameManager);
 
         this.game = game;
-        singleton = this;
+        instance = this;
         this.preferences = new EditorPreferences();
 
         this.gameInfoEditor = new GameInfoEditor(this);
@@ -93,6 +93,11 @@ public final class Editor extends Game
         }
     }
 
+    public void onActivate()
+    {
+        instance = this;
+        super.onActivate();
+    }
     @Override
     public String getTitle()
     {
@@ -114,7 +119,7 @@ public final class Editor extends Game
     @Override
     public void start()
     {
-        super.start();
+        Itchy.startGame(this);
 
         Itchy.enableKeyboardRepeat(true);
 
@@ -155,7 +160,7 @@ public final class Editor extends Game
             @Override
             public void action()
             {
-                Editor.singleton = null;
+                Editor.instance = null;
                 Editor.this.end();
             }
         });
@@ -178,6 +183,8 @@ public final class Editor extends Game
         if (this.designSceneName != null) {
             this.scenesEditor.design(this.designSceneName);
         }
+
+        Itchy.mainLoop();
     }
 
     private void onSave()

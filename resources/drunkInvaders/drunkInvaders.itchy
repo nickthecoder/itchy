@@ -112,7 +112,7 @@
     <animation name="fadeIn">
       <compound sequence="true" loops="1">
         <alpha target="0.0" ticks="1" ease="linear"/>
-        <alpha target="255.0" ticks="40" ease="linear"/>
+        <alpha target="255.0" ticks="40" ease="easeOutCirc"/>
       </compound>
     </animation>
     <animation name="fadeOut">
@@ -138,19 +138,19 @@
           </frames>
         </compound>
         <compound sequence="true" loops="1">
-          <forwards forwards="400.0" sideways="0.0" ticks="200" ease="linear"/>
+          <forwards forwards="400.0" sidewards="0.0" ticks="200" ease="linear"/>
           <compound sequence="false" loops="1">
-            <forwards forwards="890.0" sideways="0.0" ticks="360" ease="linear"/>
+            <forwards forwards="890.0" sidewards="0.0" ticks="360" ease="linear"/>
             <turn turn="-360.0" ticks="360" ease="linear"/>
           </compound>
-          <forwards forwards="400.0" sideways="0.0" ticks="200" ease="linear"/>
+          <forwards forwards="400.0" sidewards="0.0" ticks="200" ease="linear"/>
           <turn turn="180.0" ticks="10" ease="linear"/>
-          <forwards forwards="400.0" sideways="0.0" ticks="200" ease="linear"/>
+          <forwards forwards="400.0" sidewards="0.0" ticks="200" ease="linear"/>
           <compound sequence="false" loops="1">
-            <forwards forwards="890.0" sideways="0.0" ticks="360" ease="linear"/>
+            <forwards forwards="890.0" sidewards="0.0" ticks="360" ease="linear"/>
             <turn turn="360.0" ticks="360" ease="linear"/>
           </compound>
-          <forwards forwards="400.0" sideways="0.0" ticks="200" ease="linear"/>
+          <forwards forwards="400.0" sidewards="0.0" ticks="200" ease="linear"/>
         </compound>
       </compound>
     </animation>
@@ -162,90 +162,91 @@
     </animation>
   </animations>
   <costumes>
-    <costume name="alien">
+    <costume name="alien" defaultZOrder="0">
       <pose name="pixel" pose="pixel"/>
-      <string name="death">I iz Ded</string>
-      <string name="death">Shit!</string>
-      <string name="death">Ow!</string>
-      <string name="death">Ouchy!</string>
-      <string name="death">You git</string>
-      <string name="death">U Kill Me</string>
-      <string name="death">Eeek</string>
-      <string name="death">I'll be back</string>
-      <string name="death">OMG</string>
+      <string name="yell">I iz Ded</string>
+      <string name="yell">Shit!</string>
+      <string name="yell">Ow!</string>
+      <string name="yell">Ouchy!</string>
+      <string name="yell">You git</string>
+      <string name="yell">U Kill Me</string>
+      <string name="yell">Eeek</string>
+      <string name="yell">I'll be back</string>
+      <string name="yell">OMG</string>
       <sound name="shot" sound="shatter" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
       <font name="speech" font="vera"/>
+      <font name="yell" font="vera"/>
       <animation name="birth" animation="fadeIn"/>
       <animation name="death" animation="deathSpiral"/>
       <animation name="dropped" animation="grow"/>
       <animation name="yell" animation="alienYell"/>
     </costume>
-    <costume name="alien1" extends="alien" behaviour="uk.co.nickthecoder.drunkinvaders.Alien">
+    <costume name="alien1" defaultZOrder="0" extends="alien" behaviour="uk.co.nickthecoder.drunkinvaders.Alien">
       <pose name="default" pose="alien1a"/>
       <pose name="tick" pose="alien1a"/>
       <pose name="tock" pose="alien1b"/>
       <sound name="death" sound="ahh1" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
     </costume>
-    <costume name="alien2" extends="alien" behaviour="uk.co.nickthecoder.drunkinvaders.Alien">
+    <costume name="alien2" defaultZOrder="0" extends="alien" behaviour="uk.co.nickthecoder.drunkinvaders.Alien">
       <pose name="default" pose="alien2a"/>
       <pose name="tick" pose="alien2a"/>
       <pose name="tock" pose="alien2b"/>
       <sound name="death" sound="ahh2" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="STOP_FIRST"/>
     </costume>
-    <costume name="alien3" extends="alien" behaviour="uk.co.nickthecoder.drunkinvaders.Alien">
+    <costume name="alien3" defaultZOrder="0" extends="alien" behaviour="uk.co.nickthecoder.drunkinvaders.Alien">
       <pose name="default" pose="alien3a"/>
       <pose name="tick" pose="alien3a"/>
       <pose name="tock" pose="alien3b"/>
       <sound name="death" sound="ahh3" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
     </costume>
-    <costume name="bomb">
+    <costume name="bomb" defaultZOrder="0">
       <pose name="default" pose="bomb1"/>
     </costume>
-    <costume name="bullet">
+    <costume name="bullet" defaultZOrder="0">
       <pose name="default" pose="bullet"/>
       <sound name="shot" sound="ricochet" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
     </costume>
-    <costume name="earth">
+    <costume name="earth" defaultZOrder="0">
       <pose name="default" pose="earth"/>
     </costume>
-    <costume name="earth1">
+    <costume name="earth1" defaultZOrder="0">
       <pose name="default" pose="earth1"/>
     </costume>
-    <costume name="earth3">
+    <costume name="earth3" defaultZOrder="0">
       <pose name="default" pose="earth3"/>
     </costume>
-    <costume name="factory" behaviour="uk.co.nickthecoder.drunkinvaders.AlienFactory">
+    <costume name="factory" defaultZOrder="0" behaviour="uk.co.nickthecoder.drunkinvaders.AlienFactory">
       <pose name="default" pose="factory"/>
     </costume>
-    <costume name="level" behaviour="uk.co.nickthecoder.drunkinvaders.PickLevel">
+    <costume name="level" defaultZOrder="0" behaviour="uk.co.nickthecoder.drunkinvaders.PickLevel">
       <pose name="completed" pose="level-completed"/>
       <pose name="default" pose="level"/>
     </costume>
-    <costume name="moon">
+    <costume name="moon" defaultZOrder="0">
       <pose name="default" pose="moon"/>
     </costume>
-    <costume name="pacman1" behaviour="uk.co.nickthecoder.drunkinvaders.Pacman">
+    <costume name="pacman1" defaultZOrder="0" behaviour="uk.co.nickthecoder.drunkinvaders.Pacman">
       <pose name="default" pose="pacman1"/>
       <animation name="default" animation="pacman"/>
     </costume>
-    <costume name="paused">
+    <costume name="paused" defaultZOrder="0">
       <pose name="default" pose="paused"/>
       <animation name="pause" animation="fadeIn"/>
       <animation name="unpause" animation="fadeOut"/>
     </costume>
-    <costume name="saucer" extends="alien" behaviour="uk.co.nickthecoder.drunkinvaders.Mothership">
+    <costume name="saucer" defaultZOrder="0" extends="alien" behaviour="uk.co.nickthecoder.drunkinvaders.Mothership">
       <pose name="default" pose="saucer"/>
       <pose name="pixel" pose="redPixel"/>
       <sound name="death" sound="ahh4" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
       <sound name="giveBirth" sound="pop" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
     </costume>
-    <costume name="shieldFactory" behaviour="uk.co.nickthecoder.drunkinvaders.ShieldFactory">
+    <costume name="shieldFactory" defaultZOrder="0" behaviour="uk.co.nickthecoder.drunkinvaders.ShieldFactory">
       <pose name="default" pose="shieldFactory"/>
       <pose name="full" pose="shield"/>
       <pose name="left" pose="shield-l"/>
       <pose name="right" pose="shield-r"/>
     </costume>
-    <costume name="ship" behaviour="uk.co.nickthecoder.drunkinvaders.Ship">
+    <costume name="ship" defaultZOrder="0" behaviour="uk.co.nickthecoder.drunkinvaders.Ship">
       <pose name="charged" pose="ship"/>
       <pose name="default" pose="ship"/>
       <pose name="deshield" pose="ship"/>
@@ -267,7 +268,7 @@
       <font name="speech" font="vera"/>
       <animation name="yell" animation="toHeaven"/>
     </costume>
-    <costume name="ship-won" extends="ship" behaviour="uk.co.nickthecoder.drunkinvaders.Ship">
+    <costume name="ship-won" defaultZOrder="0" extends="ship" behaviour="uk.co.nickthecoder.drunkinvaders.Ship">
       <pose name="default" pose="ship2"/>
       <string name="death">Are you kidding me?</string>
       <string name="death">Failed at the last hurdle!</string>

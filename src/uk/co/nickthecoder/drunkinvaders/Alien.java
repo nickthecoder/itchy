@@ -91,11 +91,11 @@ public class Alien extends Bouncy implements Shootable
     {
         this.event("fire");
 
-        Actor bullet = new Actor(DrunkInvaders.game.resources.getCostume("bomb"), "default");
+        Actor bullet = new Actor(DrunkInvaders.game.resources.getCostume("bomb"));
         bullet.moveTo(this.getActor());
         bullet.setDirection(this.getActor().getAppearance().getDirection());
         DrunkInvaders.game.mainLayer.addTop(bullet);
-        bullet.moveForward(10);
+        bullet.moveForwards(10);
         bullet.setBehaviour(new Bullet("killable"));
         bullet.activate();
     }
@@ -136,7 +136,7 @@ public class Alien extends Bouncy implements Shootable
         }
 
         Actor yell = new Talk(this)
-            .message("death").font("vera", 18).color(SPEECH_COLOR).margin(10, 10, 20, 10)
+            .eventName("yell").color(SPEECH_COLOR).margin(10, 10, 20, 10)
             .bubble("speechBubble")
             .offset(0, 40).direction(0)
             .createActor();

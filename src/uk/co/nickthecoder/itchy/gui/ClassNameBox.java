@@ -33,9 +33,9 @@ public class ClassNameBox extends Container
     private Button editButton;
 
     private Button reloadButton;
-    
+
     private Label editButtonLabel;
-    
+
     private Label errorText;
 
     private ClassName value;
@@ -48,7 +48,7 @@ public class ClassNameBox extends Container
 
         this.type = "className";
         this.setLayout(new VerticalLayout());
-        
+
         this.scriptManager = scriptManager;
         this.value = new ClassName(className.name);
         this.baseClass = baseClass;
@@ -61,17 +61,17 @@ public class ClassNameBox extends Container
         this.editButton = new Button(this.editButtonLabel);
 
         this.reloadButton = new Button("Reload");
-        
+
         this.addChild(this.comboBox);
-        //this.addChild(this.editButton);
+        // this.addChild(this.editButton);
         this.comboBox.addChild(this.editButton);
         this.comboBox.addChild(this.reloadButton);
-        
+
         this.errorText = new Label("");
         this.addChild(this.errorText);
         this.errorText.addStyle("error");
         this.errorText.setVisible(false);
-        
+
         this.comboBox.addChangeListener(new ComponentChangeListener() {
 
             @Override
@@ -89,7 +89,7 @@ public class ClassNameBox extends Container
                 edit();
             }
         });
-        
+
         this.reloadButton.addActionListener(new ActionListener() {
             @Override
             public void action()
@@ -105,7 +105,7 @@ public class ClassNameBox extends Container
     {
         this.comboBox.removeStyle("error");
         this.errorText.setVisible(false);
-        
+
         this.value.name = this.comboBox.getText();
         boolean isValidScript = this.scriptManager.isValidScript(this.value);
         this.editButtonLabel.setText(isValidScript ? "Edit" : "Create");
@@ -116,23 +116,23 @@ public class ClassNameBox extends Container
         if (isValidScript) {
 
             try {
-                this.scriptManager.loadScript( getClassName().name );
+                this.scriptManager.loadScript(getClassName().name);
             } catch (ScriptException e) {
-                this.scriptManager.resources.errorLog.log( e.getMessage() );
+                this.scriptManager.resources.errorLog.log(e.getMessage());
                 this.comboBox.addStyle("error");
-                ScriptLanguage language = this.scriptManager.getLanguage( getClassName() );
-                this.errorText.setText( language.simpleMessage(e, false));
+                ScriptLanguage language = this.scriptManager.getLanguage(getClassName());
+                this.errorText.setText(language.simpleMessage(e, false));
                 this.errorText.setVisible(true);
             }
-        
+
         }
     }
-    
+
     private void reload()
     {
         fireChangeEvent();
     }
-    
+
     public Set<String> getKnownNames( Resources resources )
     {
         if (this.baseClass == Behaviour.class) {
@@ -184,7 +184,6 @@ public class ClassNameBox extends Container
         }
     }
 
-    
     public ClassName getClassName()
     {
         return this.value;
@@ -199,7 +198,7 @@ public class ClassNameBox extends Container
     {
         this.comboBox.removeChangeListener(ccl);
     }
-    
+
     public void fireChangeEvent()
     {
         this.comboBox.fireChangeEvent();

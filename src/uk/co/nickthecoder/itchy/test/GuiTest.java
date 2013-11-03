@@ -13,6 +13,7 @@ import java.util.List;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.ActorsLayer;
 import uk.co.nickthecoder.itchy.Game;
+import uk.co.nickthecoder.itchy.GameManager;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.ScrollableLayer;
@@ -29,6 +30,7 @@ import uk.co.nickthecoder.itchy.gui.Table;
 import uk.co.nickthecoder.itchy.gui.TableModelColumn;
 import uk.co.nickthecoder.itchy.gui.VerticalLayout;
 import uk.co.nickthecoder.itchy.gui.Window;
+import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.jame.RGBA;
 import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
@@ -42,9 +44,9 @@ public class GuiTest extends Game
 
     public GuiPose guiPose;
 
-    public GuiTest( Resources resources ) throws Exception
+    public GuiTest( GameManager gameManager ) throws Exception
     {
-        super( resources );
+        super( gameManager );
         this.rules = new Stylesheet(new File(Itchy.getResourcesDirectory(),
             "defaultGui" + File.separator + "style.xml"));
 
@@ -272,7 +274,9 @@ public class GuiTest extends Game
     public static void main( String[] argv ) throws Exception
     {
         Resources resources = new Resources();
-        GuiTest testGui = new GuiTest( resources );
+        resources.gameInfo.className = new ClassName(GuiTest.class.getName());
+        
+        GuiTest testGui = (GuiTest) resources.createGame();
         testGui.start();
     }
 

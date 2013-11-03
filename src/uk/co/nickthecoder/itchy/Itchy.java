@@ -107,11 +107,6 @@ public class Itchy
         return new File(getBaseDirectory(), "resources");
     }
 
-    public static void showMousePointer( boolean value )
-    {
-        uk.co.nickthecoder.jame.Video.showMousePointer(value);
-    }
-
     public static Game getGame()
     {
         return currentGame;
@@ -247,7 +242,7 @@ public class Itchy
         soundManager.tick();
 
         currentGame.tick();
-        for (Actor actor : Actor.allByTag("active")) {
+        for (Actor actor : currentGame.findActorsByTag("active")) {
             actor.tick();
         }
     }
@@ -360,4 +355,5 @@ public class Itchy
     {
         return mouseY;
     }
+
 }

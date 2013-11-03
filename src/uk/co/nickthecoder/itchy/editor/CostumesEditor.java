@@ -199,7 +199,7 @@ public class CostumesEditor extends SubEditor
         };
 
         this.behaviour = new ClassNameBox(
-            this.editor.resources.scriptManager,
+            this.editor.game.getScriptManager(),
             costume.behaviourClassName, Behaviour.class);
 
         grid.addRow("Name", this.txtName);
@@ -273,7 +273,7 @@ public class CostumesEditor extends SubEditor
         propertiesPage.setLayout(new VerticalLayout());
 
         this.propertiesClassName = new ClassNameBox(
-            this.editor.resources.scriptManager,
+            this.editor.game.getScriptManager(),
             costume.getPropertiesClassName(),
             CostumeProperties.class);
 
@@ -294,7 +294,7 @@ public class CostumesEditor extends SubEditor
                         .registerSceneBehaviourClassName(className.name)) {
 
                         costume.setPropertiesClassName(
-                            CostumesEditor.this.editor.resources,
+                            CostumesEditor.this.editor.game.getScriptManager(),
                             className);
 
                         createPropertiesGrid();
@@ -319,7 +319,7 @@ public class CostumesEditor extends SubEditor
         if (!this.currentCostumeResource.costume.getPropertiesClassName().name.equals(
             this.propertiesClassName.getClassName().name)) {
 
-            properties = CostumeProperties.createProperties(this.editor.resources,
+            properties = CostumeProperties.createProperties(this.editor.game.getScriptManager(),
                 this.propertiesClassName.getClassName());
         }
 

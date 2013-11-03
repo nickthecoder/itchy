@@ -24,8 +24,8 @@ import javax.script.ScriptException;
 import uk.co.nickthecoder.itchy.Behaviour;
 import uk.co.nickthecoder.itchy.CostumeProperties;
 import uk.co.nickthecoder.itchy.Game;
+import uk.co.nickthecoder.itchy.GameManager;
 import uk.co.nickthecoder.itchy.Itchy;
-import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.SceneBehaviour;
 import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.itchy.util.Util;
@@ -61,7 +61,6 @@ public abstract class ScriptLanguage
             initialise();
 
             Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
-            bindings.put("game", this.manager.resources.getGame());
             bindings.put("scriptLanguage", this);
             bindings.put("scriptEngine", this.engine);
         }
@@ -160,7 +159,7 @@ public abstract class ScriptLanguage
     {
         return e.getMessage();
     }
-    
+
     public abstract Object getProperty( Object inst, String name )
         throws ScriptException;
 
@@ -169,10 +168,10 @@ public abstract class ScriptLanguage
 
     // ===== GAME =====
 
-    public abstract Game createGame( Resources resources, ClassName className );
+    public abstract Game createGame( GameManager gameManager, ClassName className );
 
     public abstract void onActivate( ScriptedGame game );
-    
+
     public abstract void onDeactivate( ScriptedGame game );
 
     public abstract boolean onQuit( ScriptedGame game );

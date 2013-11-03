@@ -145,7 +145,6 @@ public abstract class ActorsLayer extends Layer
                 for (Iterator<Actor> i = ActorsLayer.this.actorMouseListeners.iterator(); i
                     .hasNext();) {
                     Actor actor = i.next();
-                    // TODO This rules out ScriptedBehaviour
                     if (actor.getBehaviour() instanceof MouseListener) {
                         if (((MouseListener) actor.getBehaviour()).onMouseDown(event)) {
                             return true;

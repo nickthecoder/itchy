@@ -55,7 +55,7 @@ public class Bullet extends Behaviour implements Shootable
     @Override
     public void tick()
     {
-        this.getActor().moveForward(this.speed);
+        this.getActor().moveForwards(this.speed);
 
         if (!this.getActor().isOnScreen()) {
             this.getActor().kill();

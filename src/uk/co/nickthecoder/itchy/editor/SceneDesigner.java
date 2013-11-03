@@ -181,7 +181,7 @@ public class SceneDesigner implements MouseListener, KeyListener
 
         this.designLayers = new CompoundLayer("design", rect, this.sceneBackground);
 
-        for (Layer gameLayer : Editor.singleton.game.getLayers().getChildren()) {
+        for (Layer gameLayer : Editor.instance.game.getLayers().getChildren()) {
             if ((gameLayer instanceof
                 ScrollableLayer) && (!gameLayer.locked)) {
 
@@ -580,7 +580,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         grid.addRow(new Label("Name"), this.sceneResourceName);
 
         this.sceneBehaviourName = new ClassNameBox(
-            this.editor.resources.scriptManager,
+            this.editor.game.getScriptManager(),
             this.scene.sceneBehaviourName,
             SceneBehaviour.class);
 
@@ -699,7 +699,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         SceneDesignerBehaviour sdb = (SceneDesignerBehaviour) this.currentActor.getBehaviour();
 
         this.behaviourClassName = new ClassNameBox(
-            this.editor.resources.scriptManager,
+            this.editor.game.getScriptManager(),
             sdb.actualBehaviour.getClassName(),
             Behaviour.class
             );
@@ -1736,7 +1736,7 @@ public class SceneDesigner implements MouseListener, KeyListener
             if (this.target != null) {
                 this.getActor().moveTo(this.target);
                 this.getActor().setDirection(this.target.getAppearance().getDirection());
-                this.getActor().moveForward(30);
+                this.getActor().moveForwards(30);
             }
         }
 
@@ -1767,7 +1767,7 @@ public class SceneDesigner implements MouseListener, KeyListener
             if (this.target != null) {
                 this.getActor().moveTo(this.target);
                 this.getActor().setDirection(this.target.getHeading());
-                this.getActor().moveForward(60);
+                this.getActor().moveForwards(60);
             }
         }
 

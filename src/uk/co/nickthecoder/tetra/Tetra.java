@@ -15,8 +15,8 @@ import java.util.Random;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Game;
+import uk.co.nickthecoder.itchy.GameManager;
 import uk.co.nickthecoder.itchy.Launcher;
-import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.ScrollableLayer;
 import uk.co.nickthecoder.itchy.animation.Animation;
 import uk.co.nickthecoder.itchy.extras.Explosion;
@@ -136,9 +136,9 @@ public class Tetra extends Game
      */
     public int completedLines;
 
-    public Tetra( Resources resources ) throws Exception
+    public Tetra( GameManager gameManager ) throws Exception
     {
-        super(resources);
+        super(gameManager);
     }
 
     @Override

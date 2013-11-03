@@ -8,7 +8,7 @@ package uk.co.nickthecoder.itchy.script;
 import javax.script.ScriptException;
 
 import uk.co.nickthecoder.itchy.Game;
-import uk.co.nickthecoder.itchy.Resources;
+import uk.co.nickthecoder.itchy.GameManager;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
@@ -19,9 +19,9 @@ public class ScriptedGame extends Game implements ScriptedObject
 
     public Object scriptGame;
 
-    public ScriptedGame( Resources resources, ScriptLanguage language, Object scriptInstance )
+    public ScriptedGame( GameManager gameManager, ScriptLanguage language, Object scriptInstance )
     {
-        super(resources);
+        super(gameManager);
         this.language = language;
         this.scriptGame = scriptInstance;
     }

@@ -86,6 +86,7 @@ public class Scene
         }
 
         for (Actor actor : this.activateList) {
+            actor.event(actor.getStartEvent());
             actor.activate();
         }
         this.activateList.clear();
@@ -139,8 +140,8 @@ public class Scene
         if (StringUtils.isBlank(this.sceneBehaviourName.name)) {
             result = new NullSceneBehaviour();
         } else {
-            if (resources.scriptManager.isValidScript(this.sceneBehaviourName)) {
-                result = resources.scriptManager.createSceneBehaviour(this.sceneBehaviourName);
+            if (resources.isValidScript(this.sceneBehaviourName)) {
+                result = Resources.getScriptManager().createSceneBehaviour(this.sceneBehaviourName);
             } else {
                 Class<?> klass = Class.forName(this.sceneBehaviourName.name);
                 result = (SceneBehaviour) klass.newInstance();

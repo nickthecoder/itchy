@@ -12,7 +12,6 @@ import uk.co.nickthecoder.itchy.animation.Animation;
 import uk.co.nickthecoder.itchy.util.AbstractProperty;
 import uk.co.nickthecoder.itchy.util.Property;
 import uk.co.nickthecoder.itchy.util.PropertySubject;
-import uk.co.nickthecoder.itchy.util.TagCollection;
 import uk.co.nickthecoder.itchy.util.TagMembership;
 import uk.co.nickthecoder.jame.RGBA;
 import uk.co.nickthecoder.jame.Surface;
@@ -24,8 +23,7 @@ public class Actor implements PropertySubject<Actor>
 
     public final int id;
 
-    private static List<AbstractProperty<Actor, ?>> properties = AbstractProperty
-        .findAnnotations(Actor.class);
+    private static List<AbstractProperty<Actor, ?>> properties = AbstractProperty.findAnnotations(Actor.class);
 
     Behaviour behaviour;
 
@@ -36,8 +34,6 @@ public class Actor implements PropertySubject<Actor>
     private Costume costume;
 
     private ActorsLayer layer;
-
-    private static TagCollection<Actor> actorTags = new TagCollection<Actor>();
 
     private final TagMembership<Actor> tagMembership;
 
@@ -86,7 +82,7 @@ public class Actor implements PropertySubject<Actor>
     {
         this.id = nextId;
         nextId++;
-        this.tagMembership = new TagMembership<Actor>(actorTags, this);
+        this.tagMembership = new TagMembership<Actor>(Itchy.getGame().actorTags, this);
         this.costume = null;
         this.appearance = new Appearance(pose);
         this.appearance.setActor(this);
@@ -98,12 +94,11 @@ public class Actor implements PropertySubject<Actor>
         this.setDirection(pose.getDirection());
     }
 
-    public Actor( Costume costume, String eventName )
+    public Actor( Costume costume, String poseName )
     {
-        this(startPose(costume, eventName));
+        this(startPose(costume, poseName));
 
         this.costume = costume;
-        this.event(eventName);
         this.setDirection(this.getAppearance().getPose().getDirection());
     }
 
@@ -187,11 +182,6 @@ public class Actor implements PropertySubject<Actor>
         this.costume = costume;
     }
 
-    public static Set<Actor> allByTag( String tag )
-    {
-        return actorTags.getTagMembers(tag);
-    }
-
     public boolean hasTag( String name )
     {
         return this.tagMembership.hasTag(name);
@@ -211,6 +201,12 @@ public class Actor implements PropertySubject<Actor>
     {
         this.tagMembership.removeAllExcept("active");
     }
+    
+    public static Set<Actor> allByTag( String tag )
+    {
+        return Itchy.getGame().findActorsByTag(tag);
+    }
+
 
     public boolean getYAxisPointsDown()
     {
@@ -526,7 +522,7 @@ public class Actor implements PropertySubject<Actor>
         this.appearance.onMoved();
     }
 
-    public void moveForward( double amount )
+    public void moveForwards( double amount )
     {
         double theta = this.getHeadingRadians();
         double cosa = Math.cos(theta);
@@ -540,7 +536,7 @@ public class Actor implements PropertySubject<Actor>
 
     }
 
-    public void moveForward( double forward, double sideways )
+    public void moveForwards( double forward, double sideways )
     {
         double theta = this.getHeadingRadians();
         double cosa = Math.cos(theta);
@@ -777,7 +773,7 @@ public class Actor implements PropertySubject<Actor>
         return "Actor #" + this.id + " @ " + getX() + "," + getY() +
             " size(" + this.getAppearance().getWidth() + "," + this.getAppearance().getHeight() +
             ") " +
-            (getBehaviour() == null ? "" : "(" + getBehaviour().getClassName() + ")");
+            (getBehaviour() == null ? "" : "(" + getBehaviour().getClass().getName() + ")");
     }
 
     @Override

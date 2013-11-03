@@ -15,13 +15,13 @@ public class EditorPreferences
 
     public EditorPreferences()
     {
-        Editor.singleton.getPreferences().node("editorPreferences")
+        Editor.instance.getPreferences().node("editorPreferences")
             .load(this, AbstractProperty.findAnnotations(this.getClass()));
     }
 
     public void save()
     {
-        Editor.singleton.getPreferences().node("editorPreferences")
+        Editor.instance.getPreferences().node("editorPreferences")
             .save(this, AbstractProperty.findAnnotations(this.getClass()));
     }
 

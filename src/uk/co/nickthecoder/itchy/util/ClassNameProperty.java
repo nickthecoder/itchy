@@ -5,7 +5,7 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.util;
 
-import uk.co.nickthecoder.itchy.Itchy;
+import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.gui.ClassNameBox;
 import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
@@ -36,7 +36,7 @@ public class ClassNameProperty<S> extends AbstractProperty<S, ClassName>
         final ComponentChangeListener listener )
     {
         ClassName className = this.getSafeValue(subject);
-        ScriptManager scriptManager = Itchy.getGame().resources.scriptManager;
+        ScriptManager scriptManager = Resources.getScriptManager();
 
         final ClassNameBox classNameBox = new ClassNameBox(scriptManager, className, this.baseClass);
 

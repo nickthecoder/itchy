@@ -103,10 +103,10 @@ public class Mothership extends Alien
         alienBehaviour.vx = Util.randomBetween(-0.2, 0.2) + this.vx;
         alien.moveTo(this.getActor().getX(), this.getActor().getY());
         if (this.getActor().getY() < 200) {
-            alien.moveForward(5, 0);
+            alien.moveForwards(5, 0);
             alienBehaviour.vy = this.vy + 1;
         } else {
-            alien.moveForward(-5, 0);
+            alien.moveForwards(-5, 0);
             alienBehaviour.vy = this.vy - 1;
         }
 

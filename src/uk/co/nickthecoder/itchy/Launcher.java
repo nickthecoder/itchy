@@ -24,10 +24,10 @@ public class Launcher extends Game
 
     public GuiPose mainGuiPose;
 
-    public Launcher( Resources resources )
+    public Launcher( GameManager gameManager )
         throws Exception
     {
-        super(resources);
+        super(gameManager);
 
         try {
             setStylesheet(new Stylesheet(new File(Itchy.getBaseDirectory(), RULES)));
@@ -93,19 +93,20 @@ public class Launcher extends Game
         File resourcesFile = new File(name);
         if (resourcesFile.exists() && (resourcesFile.isFile())) {
         } else {
-            resourcesFile = new File ( Itchy.getBaseDirectory(), "resources" + File.separator + name + File.separator + name + ".itchy");
+            resourcesFile = new File(Itchy.getBaseDirectory(), "resources" + File.separator + name + File.separator + name + ".itchy");
         }
         System.out.println("Loading resources : " + resourcesFile);
         Resources resources = new Resources();
-        resources.load(resourcesFile);
+        resources.load( resourcesFile );
 
+        Game game = resources.createGame();
         if ((argv.length == 1) && ("--editor".equals(argv[0]))) {
 
-            Editor editor = new Editor(resources.getGame());
+            Editor editor = new Editor(game);
             editor.start();
 
         } else {
-            resources.getGame().start();
+            game.start();
         }
 
     }

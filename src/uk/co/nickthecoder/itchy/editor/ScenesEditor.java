@@ -145,11 +145,8 @@ public class ScenesEditor extends SubEditor
             // Do nothing
         }
 
-        // TODO Replace with a special component for ClassNames
-        // this.sceneBehaviourName = new ComboBox(behaviourName.name,
-        // this.editor.game.resources.getSceneBehaviourClassNames());
         this.sceneBehaviourName = new ClassNameBox(
-            this.editor.resources.scriptManager, behaviourName, SceneBehaviour.class);
+            this.editor.game.getScriptManager(), behaviourName, SceneBehaviour.class);
 
         this.sceneBehaviourName.addChangeListener(new ComponentChangeListener() {
 
