@@ -12,6 +12,7 @@ import java.util.Set;
 import java.util.prefs.Preferences;
 
 import uk.co.nickthecoder.itchy.editor.Editor;
+import uk.co.nickthecoder.itchy.editor.SceneDesigner;
 import uk.co.nickthecoder.itchy.gui.GuiPose;
 import uk.co.nickthecoder.itchy.gui.Stylesheet;
 import uk.co.nickthecoder.itchy.script.ScriptManager;
@@ -28,62 +29,136 @@ import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 import uk.co.nickthecoder.jame.event.QuitEvent;
 
-public class Game implements EventListener, MessageListener
+public class Game implements InputListener, QuitListener, MessageListener
 {
+    /**
+     * Used internally when creating the Game object, and when using scripted game code, rather than
+     * Java code.
+     */
     public final GameManager gameManager;
-    
+
+    /**
+     * Holds all of the images, sounds, fonts, animations costumes etc used by this game.
+     */
     public final Resources resources;
 
+    /**
+     * Holds the tag information for all of the Actors used within this game. This isn't typically
+     * used directly, but instead used via {@link Actor#allByTag(String)},
+     * {@link Actor#hadTag(String)}, {@link Actor#addTag(String)} and
+     * {@link Actor#removeTag(String)}.
+     */
     public final TagCollection<Actor> actorTags = new TagCollection<Actor>();
 
+    /**
+     * Helps to implement a pause feature within your game. Typically, you will pause/unpause from
+     * your game's {@link SceneBehaviour#onKeyDown(KeyboardEvent)} :
+     * <code>myGame.pause.togglePause();</code>
+     */
     public Pause pause;
 
+    /**
+     * Holds data about this game that is stored for use then next time the game is run. For
+     * example, it can be used to store high scores.
+     */
     private AutoFlushPreferences preferences;
 
+    /**
+     * A Game has a set of Layers stacked one on top of another. Actors (the characters within you
+     * game), live on a layer. A simple game may have just one layer, but a more complex game may
+     * have more.
+     */
     protected CompoundLayer layers;
 
+    /**
+     * A special layer which appears above the normal layers, and is used to show pop-up windows.
+     */
     protected ActorsLayer popupLayer;
 
-    protected List<EventListener> eventListeners;
-
+    /**
+     * A list of all the objects that need to know when a mouse is clicked or moved.
+     */
     protected List<MouseListener> mouseListeners;
 
+    /**
+     * A list of all the objects that need to know when a key is pressed.
+     */
     protected List<KeyListener> keyListeners;
 
+    /**
+     * The mouse can be captured for a period of time, which ensures mouse events are only sent to
+     * itself. For example, if you are dragging an object, you may not want any other objects from
+     * receiving the mouse-move event.
+     */
     private MouseListener mouseOwner;
 
-    private EventListener modalListener;
+    /**
+     * The modalListener is give all mouse and keyboard events, and no other listeners hear about
+     * them. This is used for a "modal" popup window. i.e. a window which takes over the whole game,
+     * and doesn't let the user do anything else until it is dismissed.
+     */
+    private InputListener modalListener;
 
+    /**
+     * Which component has the focus - used within the GUI subsystem to highlight a single gui
+     * component.
+     */
     private Focusable keyboardFocus;
 
+    /**
+     * The list of all of the windows current shown.
+     */
     private final List<GuiPose> windows;
 
+    /**
+     * The current SceneBehaviour, which was created during {@link #loadScene(String)}
+     */
     private SceneBehaviour sceneBehaviour;
 
+    /**
+     * The name of the current scene, i.e. the last one started using {@link #startScene(String)}
+     */
     private String sceneName;
 
+    /**
+     * Set when the game is run from the {@link SceneDesigner}.
+     */
     protected boolean testing;
 
+    /**
+     * Defines how GUI components look, such as the images/textures used for the controls, their
+     * margins etc.
+     */
     private Stylesheet stylesheet;
 
+    /**
+     * Keeps a record of if the current scene should show the mouse pointer. This is needed so that
+     * the moue can be shown/hidden when one Game ends and the previous one is re-activated.
+     */
     private boolean showMousePointer = true;
-    
-    
+
+    /**
+     * Game should have only this constructor, it is called dynamically after the Game's resources
+     * have been loaded. The class name determining which sub-class of Game should be created is
+     * included in the resources file.
+     * 
+     * @param gameManager
+     */
     public Game( GameManager gameManager )
     {
         this.gameManager = gameManager;
         this.resources = gameManager.resources;
-        
+
         this.sceneBehaviour = new NullSceneBehaviour();
         this.pause = new Pause(this);
 
-        this.eventListeners = new LinkedList<EventListener>();
         this.mouseListeners = new LinkedList<MouseListener>();
         this.keyListeners = new LinkedList<KeyListener>();
 
         this.windows = new ArrayList<GuiPose>();
 
-        this.addEventListener(this);
+        this.addMouseListener(this);
+        this.addKeyListener(this);
 
         Rect screenRect = new Rect(0, 0, getWidth(), getHeight());
 
@@ -98,18 +173,29 @@ public class Game implements EventListener, MessageListener
 
     public ScriptManager getScriptManager()
     {
-        return gameManager.scriptManager;
+        return this.gameManager.scriptManager;
     }
-    
+
+    /**
+     * Called soon after a Game is created and also
+     * when a Game creates another Game, and the second Game ends (reactivating the first one).
+     */
     public void onActivate()
     {
         showMousePointer(this.showMousePointer);
     }
 
+    /**
+     * Called when a Game gives starts another Game.
+     */
     public void onDeactivate()
     {
     }
 
+    /**
+     * Overridden by sub classes of Game, when they want more than one {@link Layer}.
+     * Called from the end of Game's constructor.
+     */
     protected void createLayers()
     {
         Rect screenRect = new Rect(0, 0, getWidth(), getHeight());
@@ -120,15 +206,18 @@ public class Game implements EventListener, MessageListener
         mainLayer.enableMouseListener(this);
     }
 
+    /**
+     * Removes all actors from all layers, and resets the layers to the origin.
+     */
     public void clear()
     {
         this.layers.clear();
         this.popupLayer.clear();
         this.layers.reset();
     }
-    
+
     /**
-     * Typically, this is called immediately after you have created your Game object, usually in the
+     * Typically, this is called immediately the Game object is created, usually from the 
      * "main" method.
      * 
      * Do NOT override this method.
@@ -136,12 +225,17 @@ public class Game implements EventListener, MessageListener
     public void start()
     {
         Itchy.startGame(this);
-        if ( !StringUtils.isBlank(this.resources.gameInfo.initialScene)) {
+        if (!StringUtils.isBlank(this.resources.gameInfo.initialScene)) {
             startScene(this.resources.gameInfo.initialScene);
         }
         Itchy.mainLoop();
     }
 
+    /**
+     * The same as {@link #start()}, but named scene is started instead of the default scene.
+     * This can be useful during development to jump to a particular scene.
+     * @param sceneName
+     */
     public void start( String sceneName )
     {
         Itchy.startGame(this);
@@ -216,7 +310,13 @@ public class Game implements EventListener, MessageListener
     {
         return Preferences.userNodeForPackage(this.getClass()).node(this.resources.getId());
     }
-    
+
+    /**
+     * Returns a lists of all the Actors tagged with a given tag.
+     * @param tag The tag to search for.
+     * @return A set of Actors meeting the criteria. An empty set if no actors meet the criteria.
+     * @See {@link Actor#addTag(String)}
+     */
     public Set<Actor> findActorsByTag( String tag )
     {
         return this.actorTags.getTagMembers(tag);
@@ -291,10 +391,8 @@ public class Game implements EventListener, MessageListener
     void processEvent( Event event )
     {
         if (event instanceof QuitEvent) {
-            for (EventListener el : this.eventListeners) {
-                if (el.onQuit()) {
-                    return;
-                }
+            if (this.onQuit()) {
+                return;
             }
             Itchy.terminate();
         }
@@ -325,11 +423,6 @@ public class Game implements EventListener, MessageListener
                         }
                     }
 
-                    for (EventListener el : this.eventListeners) {
-                        if (el.onKeyDown(ke)) {
-                            return;
-                        }
-                    }
                 } else {
                     this.modalListener.onKeyDown(ke);
                     return;
@@ -345,11 +438,6 @@ public class Game implements EventListener, MessageListener
                         }
                     }
 
-                    for (EventListener el : this.eventListeners) {
-                        if (el.onKeyUp(ke)) {
-                            return;
-                        }
-                    }
                 } else {
                     this.modalListener.onKeyUp(ke);
                     return;
@@ -364,11 +452,7 @@ public class Game implements EventListener, MessageListener
             if (mbe.isPressed()) {
 
                 if (this.modalListener == null) {
-                    for (EventListener el : this.eventListeners) {
-                        if (el.onMouseDown(mbe)) {
-                            return;
-                        }
-                    }
+
                     for (MouseListener el : this.mouseListeners) {
                         if (el.onMouseDown(mbe)) {
                             return;
@@ -386,11 +470,7 @@ public class Game implements EventListener, MessageListener
                 if (this.mouseOwner == null) {
 
                     if (this.modalListener == null) {
-                        for (EventListener el : this.eventListeners) {
-                            if (el.onMouseUp(mbe)) {
-                                return;
-                            }
-                        }
+
                         for (MouseListener el : this.mouseListeners) {
                             if (el.onMouseUp(mbe)) {
                                 return;
@@ -414,11 +494,7 @@ public class Game implements EventListener, MessageListener
             if (this.mouseOwner == null) {
 
                 if (this.modalListener == null) {
-                    for (EventListener el : this.eventListeners) {
-                        if (el.onMouseMove(mme)) {
-                            return;
-                        }
-                    }
+
                     for (MouseListener el : this.mouseListeners) {
                         if (el.onMouseMove(mme)) {
                             return;
@@ -435,16 +511,6 @@ public class Game implements EventListener, MessageListener
             }
 
         }
-    }
-
-    public void addEventListener( EventListener listener )
-    {
-        this.eventListeners.add(listener);
-    }
-
-    public void removeEventListener( EventListener listener )
-    {
-        this.eventListeners.remove(listener);
     }
 
     public void addMouseListener( MouseListener listener )
@@ -472,25 +538,25 @@ public class Game implements EventListener, MessageListener
      * {@link #releaseMouse(EventListener)} is called.
      * 
      */
-    public void captureMouse( EventListener owner )
+    public void captureMouse( MouseListener owner )
     {
         assert (this.mouseOwner == null);
         this.mouseOwner = owner;
     }
 
     /**
-     * The flip side of {@link #captureMouse(EventListener)}. MouseListeners will receive mouse
+     * The flip side of {@link #captureMouse(InputListener)}. MouseListeners will receive mouse
      * events as normal.
      * 
      * @param owner
      */
-    public void releaseMouse( EventListener owner )
+    public void releaseMouse( MouseListener owner )
     {
         assert (this.mouseOwner == owner);
         this.mouseOwner = null;
     }
 
-    public void setModalListener( EventListener listener )
+    public void setModalListener( InputListener listener )
     {
         this.modalListener = listener;
     }
@@ -599,12 +665,17 @@ public class Game implements EventListener, MessageListener
     }
 
     /**
-     * Override this method to run code once per frame. The default behaviour is to do nothing more
-     * than to call the current scene's {@link SceneBehaviour}'s tick method.
+     * Override this method to run code once per frame. The default behaviour is to call the current
+     * scene's {@link SceneBehaviour}'s tick method and then all of the game's active Actor's tick
+     * methods.
      */
     public void tick()
     {
         this.getSceneBehaviour().tick();
+        for (Actor actor : findActorsByTag("active")) {
+            actor.tick();
+        }
+
     }
 
     /**
@@ -627,14 +698,19 @@ public class Game implements EventListener, MessageListener
         this.showMousePointer = value;
         uk.co.nickthecoder.jame.Video.showMousePointer(value);
     }
-    
+
     /**
      * Clears and resets the layers, and then loads the specified scene.
      * 
-     * @param sceneName The name of the scene to load.
+     * @param sceneName
+     *        The name of the scene to load.
      */
     public void startScene( String sceneName )
     {
+        if (this.pause.isPaused()) {
+            this.pause.unpause();
+        }
+
         this.layers.clear();
         this.layers.reset();
         this.loadScene(sceneName);
@@ -723,13 +799,15 @@ public class Game implements EventListener, MessageListener
         if (window.modal) {
             this.setModalListener(window);
         }
-        this.addEventListener(window);
+        this.addMouseListener(window);
+        this.addKeyListener(window);
 
     }
 
     public void hideWindow( GuiPose window )
     {
-        this.removeEventListener(window);
+        this.removeMouseListener(window);
+        this.removeKeyListener(window);
         this.popupLayer.remove(window.getActor());
 
         this.windows.remove(window);
@@ -762,16 +840,15 @@ public class Game implements EventListener, MessageListener
 
     public void startEditor( String designSceneName )
     {
-        clear();
         try {
             Editor editor = new Editor(this);
-            editor.designScene(designSceneName);
-            editor.start(null);
+            editor.start(designSceneName);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    
+
+    @Override
     public String toString()
     {
         return this.getClass().getName() + " Resources " + this.resources;

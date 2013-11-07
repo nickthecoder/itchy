@@ -179,9 +179,11 @@ public class Tetra extends Game
     @Override
     public void tick()
     {
+        super.tick();
+        
         if (this.escapeTimer != null) {
             if (this.escapeTimer.isFinished()) {
-                this.addEventListener(this);
+                this.addKeyListener(this); // See removeKeyListener in onKeyDown
                 this.level = getStartingLevel();
                 startScene("menu");
                 this.escapeTimer = null;
@@ -245,7 +247,8 @@ public class Tetra extends Game
                     }
                 }
             }
-            this.removeEventListener(this);
+            // Ignore all key presses will the escape time has elapsed.
+            this.removeKeyListener(this);
             this.escapeTimer = Timer.createTimerSeconds(2);
         }
 

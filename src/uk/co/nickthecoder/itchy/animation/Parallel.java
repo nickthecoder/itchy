@@ -28,6 +28,19 @@ public class Parallel implements SequenceOrParallel
             child.start(actor);
         }
     }
+    
+    @Override
+    public void startExceptFirst( Actor actor )
+    {
+        boolean first = true;
+        for (Animation child : this.compoundAnimation.children) {
+            if (first) {
+                first = false;
+            } else {
+                child.start(actor);
+            }
+        }
+    }
 
     @Override
     public void tick( Actor actor )

@@ -43,7 +43,7 @@ public class ImagePose implements Pose
     private int offsetX;
     private int offsetY;
     private double direction;
-
+    
     private final Surface surface;
 
     private static Surface loadSurface( String filename ) throws JameException
@@ -109,7 +109,7 @@ public class ImagePose implements Pose
     {
         this.offsetY = value;
     }
-
+    
     @Override
     public double getDirection()
     {

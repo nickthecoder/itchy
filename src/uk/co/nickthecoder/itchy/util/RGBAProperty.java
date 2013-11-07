@@ -22,7 +22,7 @@ public class RGBAProperty<S> extends AbstractProperty<S, RGBA>
         this.allowNull = allowNull;
         this.includeAlpha = includeAlpha;
     }
-    
+
     public RGBAProperty( String label, String access, boolean allowNull, boolean includeAlpha )
     {
         super(label, access);
@@ -30,14 +30,14 @@ public class RGBAProperty<S> extends AbstractProperty<S, RGBA>
         this.includeAlpha = includeAlpha;
     }
 
+    @Override
     public RGBA getDefaultValue()
     {
         return RGBA.BLACK;
     }
-    
+
     @Override
-    public Component createComponent( final S subject, final boolean autoUpdate,
-        final ComponentChangeListener listener )
+    public Component createComponent( final S subject, final boolean autoUpdate )
     {
         RGBA color = this.getSafeValue(subject);
         final RGBABox result = new RGBABox(color, this.allowNull, this.includeAlpha);
@@ -50,9 +50,6 @@ public class RGBAProperty<S> extends AbstractProperty<S, RGBA>
                 {
                     try {
                         RGBAProperty.this.update(subject, result);
-                        if (listener != null) {
-                            listener.changed();
-                        }
                     } catch (Exception e) {
                     }
                 }
@@ -60,6 +57,13 @@ public class RGBAProperty<S> extends AbstractProperty<S, RGBA>
         }
 
         return result;
+    }
+
+    @Override
+    public void addChangeListener( Component component, ComponentChangeListener listener )
+    {
+        RGBABox rgbaBox = (RGBABox) component;
+        rgbaBox.addChangeListener(listener);
     }
 
     @Override
@@ -80,6 +84,17 @@ public class RGBAProperty<S> extends AbstractProperty<S, RGBA>
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public String getErrorText( Component component )
+    {
+        try {
+            ((RGBABox) component).getValue();
+        } catch (Exception e) {
+            return "Not a valid colour";
+        }
+        return null;
     }
 
 }

@@ -32,8 +32,7 @@ public class ClassNameProperty<S> extends AbstractProperty<S, ClassName>
     }
 
     @Override
-    public Component createComponent( final S subject, boolean autoUpdate,
-        final ComponentChangeListener listener )
+    public Component createComponent( final S subject, boolean autoUpdate )
     {
         ClassName className = this.getSafeValue(subject);
         ScriptManager scriptManager = Resources.getScriptManager();
@@ -48,9 +47,6 @@ public class ClassNameProperty<S> extends AbstractProperty<S, ClassName>
                 {
                     try {
                         ClassNameProperty.this.update(subject, classNameBox);
-                        if (listener != null) {
-                            listener.changed();
-                        }
                         classNameBox.removeStyle("error");
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -61,6 +57,13 @@ public class ClassNameProperty<S> extends AbstractProperty<S, ClassName>
         }
 
         return classNameBox;
+    }
+
+    @Override
+    public void addChangeListener( Component component, ComponentChangeListener listener )
+    {
+        ClassNameBox classNameBox = (ClassNameBox) component;
+        classNameBox.addChangeListener(listener);
     }
 
     @Override
@@ -84,6 +87,12 @@ public class ClassNameProperty<S> extends AbstractProperty<S, ClassName>
     public String getStringValue( S subject ) throws Exception
     {
         return getValue(subject).name;
+    }
+
+    @Override
+    public String getErrorText( Component component )
+    {
+        return null;
     }
 
 }

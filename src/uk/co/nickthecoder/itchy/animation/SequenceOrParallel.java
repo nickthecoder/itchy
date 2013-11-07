@@ -13,6 +13,8 @@ public interface SequenceOrParallel extends Cloneable
 {
     public void start( Actor actor );
 
+    public void startExceptFirst( Actor actor );
+
     public void tick( Actor actor );
 
     public boolean isFinished();

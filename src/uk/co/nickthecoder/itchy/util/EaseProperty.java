@@ -32,8 +32,7 @@ public class EaseProperty<S> extends AbstractProperty<S, Ease>
     }
 
     @Override
-    public Component createComponent( final S subject, boolean autoUpdate,
-        final ComponentChangeListener listener )
+    public Component createComponent( final S subject, boolean autoUpdate )
     {
         final EasePickerButton button = new EasePickerButton(getSafeValue(subject));
         System.out.println("Autoupdate? " + autoUpdate);
@@ -45,9 +44,6 @@ public class EaseProperty<S> extends AbstractProperty<S, Ease>
                 {
                     try {
                         EaseProperty.this.update(subject, button);
-                        if (listener != null) {
-                            listener.changed();
-                        }
                     } catch (Exception e) {
                     }
                 }
@@ -55,6 +51,13 @@ public class EaseProperty<S> extends AbstractProperty<S, Ease>
         }
 
         return button;
+    }
+
+    @Override
+    public void addChangeListener( Component component, ComponentChangeListener listener )
+    {
+        EasePickerButton button = (EasePickerButton) component;
+        button.addChangeListener(listener);
     }
 
     @Override
@@ -83,5 +86,11 @@ public class EaseProperty<S> extends AbstractProperty<S, Ease>
         } else {
             return NumericAnimation.getEaseName(ease);
         }
+    }
+
+    @Override
+    public String getErrorText( Component component )
+    {
+        return null;
     }
 }

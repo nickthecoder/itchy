@@ -73,12 +73,12 @@
     <rule criteria="checkbox" background="checkbox" width="25" height="25"/>
     <rule criteria="checkbox image" image="checked" marginLeft="4" marginTop="6"/>
     
+    <rule criteria="form" marginLeft="10" marginRight="10" xSpacing="20"/>
     <rule criteria=".form" spacing="10" />
     <rule criteria=".buttonBar" spacing="10" marginTop="10" marginBottom="10"/>
     <rule criteria=".buttonColumn" spacing="10" margin="10"/>
     <rule criteria=".error" color="#ff0000" />
     <rule criteria=".hint" color="#228822" marginLeft="10" />
-    
     
     <rule criteria=".combo" background="combo" padding="1" spacing="-3"/>
     <rule criteria=".combo textBox" background="text-naked"/>
@@ -91,10 +91,13 @@
     <rule criteria=".combo button.down" background="button-naked-down"/>
     <rule criteria=".combo button.selected" background="button-naked-selected"/>
     
-    
     <rule criteria=".panel" background="panel1" padding="10" />
     <rule criteria=".panel * .panel" background="panel2"/>
     <rule criteria=".panel * .panel * .panel" background="panel1"/>
     <rule criteria=".panel * .panel * .panel * .panel" background="panel2"/>
-            
+
+    <rule criteria=".picker" background="panel1" paddingTop="8" paddingRight="4" paddingBottom="8" paddingLeft="4" marginLeft="16" />
+    <rule criteria=".picker button" background="row" paddingTop="4" paddingRight="10" paddingBottom="4" paddingLeft="4"/>
+    <rule criteria=".picker button.focus" background="row-focus" color="#211b12"/>
+    <rule criteria=".picker button.focus label" color="#211b12"/>
 </rules>

@@ -204,6 +204,12 @@ public abstract class ScriptLanguage
 
     public abstract void onKill( ScriptedBehaviour behaviour );
 
+    public abstract boolean onMouseDown( ScriptedBehaviour behaviour, MouseButtonEvent mbe );
+
+    public abstract boolean onMouseUp( ScriptedBehaviour behaviour, MouseButtonEvent mbe );
+
+    public abstract boolean onMouseMove( ScriptedBehaviour behaviour, MouseMotionEvent mbe );
+
     public abstract void onMessage( ScriptedBehaviour behaviour, String message );
 
     public abstract void tick( ScriptedBehaviour behaviour );

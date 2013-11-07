@@ -372,6 +372,51 @@ public class JavascriptLanguage extends ScriptLanguage
     }
 
     @Override
+    public boolean onMouseDown( ScriptedBehaviour behaviour, MouseButtonEvent mbe )
+    {
+        try {
+            Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
+            bindings.put("behaviourScript", behaviour.behaviourScript);
+            bindings.put("arg", mbe);
+            return this.eventResult(this.engine.eval("behaviourScript.onMouseDown(arg);"));
+
+        } catch (ScriptException e) {
+            handleException("Behaviour.onMessage", e);
+            return false;
+        }
+    }
+
+    @Override
+    public boolean onMouseUp( ScriptedBehaviour behaviour, MouseButtonEvent mbe )
+    {
+        try {
+            Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
+            bindings.put("behaviourScript", behaviour.behaviourScript);
+            bindings.put("arg", mbe);
+            return this.eventResult(this.engine.eval("behaviourScript.onMouseUp(arg);"));
+
+        } catch (ScriptException e) {
+            handleException("Behaviour.onMessage", e);
+            return false;
+        }
+    }
+
+    @Override
+    public boolean onMouseMove( ScriptedBehaviour behaviour, MouseMotionEvent mme )
+    {
+        try {
+            Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
+            bindings.put("behaviourScript", behaviour.behaviourScript);
+            bindings.put("arg", mme);
+            return this.eventResult(this.engine.eval("behaviourScript.onMouseMove(arg);"));
+
+        } catch (ScriptException e) {
+            handleException("Behaviour.onMessage", e);
+            return false;
+        }
+    }
+    
+    @Override
     public void onMessage( ScriptedBehaviour behaviour, String message )
     {
         try {
@@ -571,5 +616,6 @@ public class JavascriptLanguage extends ScriptLanguage
         }
         return costumeProperties;
     }
+
 
 }

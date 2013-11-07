@@ -1,9 +1,7 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0 which accompanies this
+ * distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
@@ -19,7 +17,7 @@ import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 public abstract class Layer implements MouseListener
 {
     private String name;
-    
+
     public final Rect position;
 
     protected WorldRectangle worldRect;
@@ -27,7 +25,7 @@ public abstract class Layer implements MouseListener
     /**
      * It it the norm in mathematics, for the Y axis to point upwards, but display devices have the
      * Y axis pointing downwards. This boolean lets you choose which of these two conventions you
-     * want to use for the world coordinates (i.e. values of Actor.y).
+     * want to use for the world coordinates (i.e. values of {@link Actor.getY()}).
      */
     protected boolean yAxisPointsDown = false;
 
@@ -35,9 +33,10 @@ public abstract class Layer implements MouseListener
     private boolean removePending = false;
     protected Layer parent;
     protected List<MouseListener> mouseListeners;
-    
+
     /**
-     * Used by the editor.
+     * Used by the editor - can actors be placed onto this layer? This is handy if you have a layer
+     * for non-game objects, for example a layer for a mini-map, control panel, dash boards etc.
      */
     public boolean locked = false;
 
@@ -53,7 +52,7 @@ public abstract class Layer implements MouseListener
     {
         return this.name;
     }
-    
+
     /**
      * It it the norm in mathematics, for the Y axis to point upwards, but display devices have the
      * Y axis pointing downwards. This boolean lets you choose which of these two conventions you
@@ -253,11 +252,12 @@ public abstract class Layer implements MouseListener
     }
 
     public abstract void destroy();
-    
+
     public abstract void reset();
 
     public abstract void deactivateAll();
-    
+
+    @Override
     public String toString()
     {
         return this.getClass().getName() + " (" + this.name + ")";

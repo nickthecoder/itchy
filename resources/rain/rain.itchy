@@ -38,6 +38,26 @@
     <sound name="woo" filename="sounds/woo.ogg"/>
   </sounds>
   <animations>
+    <animation name="buttonDown">
+      <compound sequence="true" loops="1">
+        <scale target="1.5" ticks="5" ease="linear"/>
+      </compound>
+    </animation>
+    <animation name="buttonHoverOut">
+      <compound sequence="true" loops="1">
+        <scale target="1.0" ticks="10" ease="easeInOutCubic"/>
+      </compound>
+    </animation>
+    <animation name="buttonHoverOver">
+      <compound sequence="true" loops="1">
+        <scale target="1.2" ticks="10" ease="linear"/>
+      </compound>
+    </animation>
+    <animation name="buttonUp">
+      <compound sequence="true" loops="1">
+        <scale target="1.0" ticks="10" ease="easeInOutCubic"/>
+      </compound>
+    </animation>
     <animation name="death">
       <compound sequence="true" loops="1">
         <compound sequence="false" loops="1">
@@ -53,6 +73,12 @@
           <turn turn="-60.0" ticks="50" ease="easeIn"/>
         </compound>
         <alpha target="0.0" ticks="200" ease="easeIn"/>
+      </compound>
+    </animation>
+    <animation name="wally_boo">
+      <compound sequence="true" loops="1">
+        <move dx="-30.0" dy="100.0" ticks="20" ease="easeOutQuad"/>
+        <move dx="-30.0" dy="-100.0" ticks="30" ease="bounce3"/>
       </compound>
     </animation>
     <animation name="wally_walk">
@@ -126,6 +152,15 @@
     <costume name="background" defaultZOrder="0">
       <pose name="default" pose="background"/>
     </costume>
+    <costume name="button" defaultZOrder="0">
+      <string name="default">Button</string>
+      <sound name="hoverOver" sound="drip" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
+      <font name="default" font="BlackCasper"/>
+      <animation name="down" animation="buttonDown"/>
+      <animation name="hoverOut" animation="buttonHoverOut"/>
+      <animation name="hoverOver" animation="buttonHoverOver"/>
+      <animation name="up" animation="buttonUp"/>
+    </costume>
     <costume name="drop1" defaultZOrder="0" behaviour="Drop.js" properties="DropProperties.js">
       <pose name="default" pose="drop1"/>
       <pose name="droplet" pose="droplet1"/>
@@ -149,14 +184,14 @@
       <sound name="drip" sound="myLordMyLord" priority="2" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="PLAY_BOTH"/>
       <properties speedFactor="1.2"/>
     </costume>
-    <costume name="editor" defaultZOrder="0" behaviour="uk.co.nickthecoder.itchy.extras.MessageButton">
+    <costume name="editor" defaultZOrder="0" extends="button" behaviour="uk.co.nickthecoder.itchy.extras.MessageButton">
       <string name="default">Editor</string>
-      <sound name="onClick" sound="theyDidntBelieveThatItWasGunnaRain" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
+      <sound name="click" sound="theyDidntBelieveThatItWasGunnaRain" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
       <font name="default" font="Boycott"/>
     </costume>
-    <costume name="play" defaultZOrder="0" behaviour="uk.co.nickthecoder.itchy.extras.MessageButton">
+    <costume name="play" defaultZOrder="0" extends="button" behaviour="uk.co.nickthecoder.itchy.extras.MessageButton">
       <string name="default">play</string>
-      <sound name="onClick" sound="itBeganToRain" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
+      <sound name="click" sound="itBeganToRain" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
       <font name="default" font="BlackCasper"/>
     </costume>
     <costume name="player" defaultZOrder="0" behaviour="Player.js">
@@ -166,12 +201,12 @@
       <sound name="highScore" sound="woo" priority="2" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
       <animation name="death" animation="death"/>
     </costume>
-    <costume name="quit" defaultZOrder="0" behaviour="uk.co.nickthecoder.itchy.extras.MessageButton">
+    <costume name="quit" defaultZOrder="0" extends="button" behaviour="uk.co.nickthecoder.itchy.extras.MessageButton">
       <string name="default">Quit</string>
-      <sound name="onClick" sound="ItAintGunnaRain" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
+      <sound name="click" sound="ItAintGunnaRain" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
       <font name="default" font="Boycott"/>
     </costume>
-    <costume name="wally" defaultZOrder="0">
+    <costume name="wally" defaultZOrder="0" behaviour="Wally.js">
       <pose name="default" pose="wally3"/>
       <pose name="default" pose="wally4"/>
       <pose name="default" pose="wally5"/>
@@ -179,6 +214,7 @@
       <pose name="default" pose="wally2"/>
       <pose name="default" pose="wally6"/>
       <pose name="default" pose="wally7"/>
+      <animation name="boo" animation="wally_boo"/>
       <animation name="default" animation="wally_walk4"/>
       <animation name="default" animation="wally_walk"/>
       <animation name="default" animation="wally_walk2"/>

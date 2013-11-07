@@ -7,7 +7,9 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.gui;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 
@@ -20,6 +22,9 @@ public class PickerButton<T> extends Button
     private T value;
 
     private final String title;
+    
+    private final List<ComponentChangeListener> changeListeners;
+
 
     public PickerButton( String title, T current, HashMap<String, T> hashMap )
     {
@@ -44,8 +49,20 @@ public class PickerButton<T> extends Button
 
         this.label = new Label(labelString);
         this.addChild(this.label);
+
+        this.changeListeners = new ArrayList<ComponentChangeListener>();
     }
 
+    public void addChangeListener( ComponentChangeListener listener )
+    {
+        this.changeListeners.add(listener);
+    }
+
+    public void removeChangeListener( ComponentChangeListener listener )
+    {
+        this.changeListeners.remove(listener);
+    }
+    
     @Override
     public void onClick( final MouseButtonEvent e )
     {        
@@ -55,10 +72,18 @@ public class PickerButton<T> extends Button
             {
                 PickerButton.this.label.setText(label);
                 PickerButton.this.value = object;
+                fireChangeEvent();
                 PickerButton.super.onClick(e);
             }
         };
         picker.show();
+    }
+    
+    public void fireChangeEvent()
+    {
+        for (ComponentChangeListener listener : this.changeListeners) {
+            listener.changed();
+        } 
     }
 
     public T getValue()

@@ -68,7 +68,8 @@ public class GuiTest extends Game
         Actor actor = this.guiPose.getActor();
         this.mainLayer.addTop(actor);
 
-        addEventListener(this.guiPose);
+        addMouseListener(this.guiPose);
+        addKeyListener(this.guiPose);
         menu();
     }
 

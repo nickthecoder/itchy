@@ -54,12 +54,12 @@ public class FlowLayout implements Layout
 
             if ((x != left) && (x + width > right)) {
                 x = left;
-                y += container.getSpacing() + maxHeight;
+                y += container.getYSpacing() + maxHeight;
                 maxHeight = 0;
             }
 
             child.setPosition(x, y, width, height);
-            x += width + container.getSpacing();
+            x += width + container.getXSpacing();
 
             if (height > maxHeight) {
                 maxHeight = height;

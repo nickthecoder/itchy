@@ -28,8 +28,7 @@ public class BooleanProperty<S> extends AbstractProperty<S, Boolean>
     }
 
     @Override
-    public Component createComponent( final S subject, boolean autoUpdate,
-        final ComponentChangeListener listener )
+    public Component createComponent( final S subject, boolean autoUpdate )
     {
         boolean value = this.getSafeValue(subject) == true;
         final CheckBox checkBox = new CheckBox(value);
@@ -42,9 +41,6 @@ public class BooleanProperty<S> extends AbstractProperty<S, Boolean>
                 {
                     try {
                         BooleanProperty.this.update(subject, checkBox);
-                        if (listener != null) {
-                            listener.changed();
-                        }
                     } catch (Exception e) {
                         // Do nothing
                     }
@@ -52,6 +48,13 @@ public class BooleanProperty<S> extends AbstractProperty<S, Boolean>
             });
         }
         return checkBox;
+    }
+
+    @Override
+    public void addChangeListener( Component component, ComponentChangeListener listener )
+    {
+        CheckBox checkBox = (CheckBox) component;
+        checkBox.addChangeListener(listener);
     }
 
     @Override
@@ -70,6 +73,12 @@ public class BooleanProperty<S> extends AbstractProperty<S, Boolean>
     public Boolean parse( String value )
     {
         return Boolean.parseBoolean(value);
+    }
+
+    @Override
+    public String getErrorText( Component component )
+    {
+        return null;
     }
 
 }

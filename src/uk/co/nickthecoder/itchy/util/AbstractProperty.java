@@ -9,6 +9,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -32,7 +33,7 @@ import uk.co.nickthecoder.jame.RGBA;
  * @param <T>
  *        The type of the property, such as String, Integer, Double etc.
  */
-public abstract class AbstractProperty<S, T>
+public abstract class AbstractProperty<S, T> implements Comparable<AbstractProperty<S, T>>
 {
 
     /**
@@ -48,6 +49,8 @@ public abstract class AbstractProperty<S, T>
     {
         List<AbstractProperty<SS, ?>> result = new ArrayList<AbstractProperty<SS, ?>>();
         addProperties(klass, result);
+
+        Collections.sort(result);
         return result;
     }
 
@@ -62,14 +65,12 @@ public abstract class AbstractProperty<S, T>
      *        Where to add the newly created AbstractProperty instances. This is usually an empty
      *        list.
      */
-    public static <SS> void addProperties( Class<? extends SS> klass,
-        Collection<AbstractProperty<SS, ?>> collection )
+    public static <SS> void addProperties( Class<? extends SS> klass, Collection<AbstractProperty<SS, ?>> collection )
     {
         addProperties(klass, "", collection);
     }
 
-    private static <SS> void addProperties( Class<?> klass, String prefix,
-        Collection<AbstractProperty<SS, ?>> collection )
+    private static <SS> void addProperties( Class<?> klass, String prefix, Collection<AbstractProperty<SS, ?>> collection )
     {
         addMethodProperties(klass, prefix, collection);
 
@@ -77,27 +78,13 @@ public abstract class AbstractProperty<S, T>
             Property annotation = field.getAnnotation(Property.class);
 
             if (annotation != null) {
-
-                AbstractProperty<SS, ?> property = createProperty(field.getType(),
-                    field.getName(), prefix + field.getName(), annotation);
-
-                if (property != null) {
-                    collection.add(property);
-                }
-                if (annotation.recurse()) {
-                    addProperties(field.getType(), prefix + field.getName() + ".", collection);
-                }
-
-                if (annotation.aliases().length > 0) {
-                    property.addAliases(annotation.aliases());
-                }
+                addProperty(field.getType(), annotation, field.getName(), prefix, collection);
             }
         }
 
     }
 
-    private static <SS> void addMethodProperties( Class<?> klass, String prefix,
-        Collection<AbstractProperty<SS, ?>> collection )
+    private static <SS> void addMethodProperties( Class<?> klass, String prefix, Collection<AbstractProperty<SS, ?>> collection )
     {
         if (klass.getSuperclass() != null) {
             addMethodProperties(klass.getSuperclass(), prefix, collection);
@@ -117,15 +104,7 @@ public abstract class AbstractProperty<S, T>
                     String name = method.getName();
                     name = name.substring(3, 4).toLowerCase() + name.substring(4);
 
-                    AbstractProperty<SS, ?> property = createProperty(method.getReturnType(),
-                        prefix + name, name,
-                        annotation);
-                    if (property != null) {
-                        collection.add(property);
-                    }
-                    if (annotation.recurse()) {
-                        addProperties(method.getReturnType(), prefix + name + ".", collection);
-                    }
+                    addProperty(method.getReturnType(), annotation, name, prefix, collection);
 
                 } else {
                     System.err.println("Unexpected Property on method : " +
@@ -137,24 +116,72 @@ public abstract class AbstractProperty<S, T>
     }
 
     private static <SS> AbstractProperty<SS, ?> createProperty(
-        Class<?> klass, String access, String key, Property property )
+        Class<?> klass, String access, String key, Property annotation )
     {
+        AbstractProperty<SS, ?> result = null;
+
         if (klass == ClassName.class) {
             try {
-                return new ClassNameProperty<SS>(
-                    property.baseClass(), property.label(), access, key);
+                result = new ClassNameProperty<SS>(annotation.baseClass(), annotation.label(), access, key);
 
             } catch (Exception e) {
-                // Do nothing
+                e.printStackTrace();
             }
+        } else {
+
+            result = createPropertyPrivate(
+                klass, access, key, annotation.label(), annotation.allowNull(), annotation.recurse(), annotation.alpha());
         }
 
-        return createProperty(
-            klass, access, key, property.label(), property.allowNull(), property.recurse(),
-            property.alpha());
+        if (result != null) {
+            result.hint = annotation.hint();
+            result.sortOrder = annotation.sortOrder();
+        }
+
+        return result;
+    }
+
+    private static <SS> void addProperty( Class<?> klass, Property annotation, String name, String prefix,
+        Collection<AbstractProperty<SS, ?>> collection )
+    {
+        if (annotation.recurse()) {
+
+            addProperties(klass, prefix + name + ".", collection);
+
+        } else {
+            AbstractProperty<SS, ?> property = createProperty(klass,
+                prefix + name, name, annotation);
+
+            if (property != null) {
+                property.sortOrder = annotation.sortOrder();
+            }
+            if (annotation.aliases().length > 0) {
+                property.addAliases(annotation.aliases());
+            }
+            collection.add(property);
+            System.out.println("Key : " + property.key + " access : " + property.access);
+        }
+
     }
 
     public static <SS> AbstractProperty<SS, ?> createProperty(
+        Class<?> klass, String access, String key, String label, boolean allowNull,
+        boolean recurse, boolean alpha )
+    {
+        AbstractProperty<SS, ?> result;
+        if (label.matches(".* \\(.*\\)")) {
+            String hint = label.replaceAll(".* \\((.*)\\)", "$1");
+            label = label.replaceAll(" \\(.*\\)", "");
+            result = createPropertyPrivate(klass, access, key, label, allowNull, recurse, alpha);
+            result.hint = hint;
+        } else {
+            result = createPropertyPrivate(klass, access, key, label, allowNull, recurse, alpha);
+        }
+
+        return result;
+    }
+
+    private static <SS> AbstractProperty<SS, ?> createPropertyPrivate(
         Class<?> klass, String access, String key, String label, boolean allowNull,
         boolean recurse, boolean alpha )
     {
@@ -187,19 +214,24 @@ public abstract class AbstractProperty<S, T>
                 (Class<Enum<?>>) klass);
             return result;
         }
-        if (recurse) {
-            return null;
-        }
 
-        System.err.println("Unexpected property : " + klass.getName() + "." + key);
+        System.err.println("Unexpected property : " + klass.getName() + "#" + key);
 
         return null;
     }
+
+    public int sortOrder = 0;
 
     /**
      * The human readable label shown in the GUI
      */
     public String label;
+
+    /**
+     * Green text to the right of the component giving a very brief information about the field. For
+     * example, units (seconds, degrees etc).
+     */
+    public String hint;
 
     /**
      * Describes how to get/set the attribute, using JavaBean rules. For example, if a Behaviour has
@@ -264,16 +296,16 @@ public abstract class AbstractProperty<S, T>
         T result = (T) BeanHelper.getProperty(subject, this.access);
         return result;
     }
-    
+
     public T getSafeValue( S subject )
     {
         try {
-            return getValue( subject );
+            return getValue(subject);
         } catch (Exception e) {
             return getDefaultValue();
         }
     }
-    
+
     public abstract T getDefaultValue();
 
     public String getStringValue( S subject ) throws Exception
@@ -322,17 +354,9 @@ public abstract class AbstractProperty<S, T>
      * 
      * @throws Exception
      */
-    public Component createComponent( final S subject, boolean autoUpdate )
-    {
-        return this.createComponent(subject, autoUpdate, null);
-    }
+    public abstract Component createComponent( final S subject, boolean autoUpdate );
 
-    /**
-     * Does the same as the other version of createComponent, with the added feature that a listener
-     * is notified of changes as the user types/clicks.
-     */
-    public abstract Component createComponent( final S subject, boolean autoUpdate,
-        ComponentChangeListener listener );
+    public abstract void addChangeListener( Component component, ComponentChangeListener listener );
 
     /**
      * Updates the subject based on the state of the Component. This is used when the Components are
@@ -348,6 +372,18 @@ public abstract class AbstractProperty<S, T>
      * @throws Exception
      */
     public abstract void update( S subject, Component component ) throws Exception;
+
+    /**
+     * Checks if the entered value is valid, and if so, returns null, otherwise it returns the error
+     * message explaining what if wrong with the entered value.
+     * 
+     * @param subject
+     *        The object who's property is being edited.
+     * @param component
+     *        The component created via {@link #createComponent(Object, boolean)}
+     * @return Null if there is no error, otherwise a descriptive error message.
+     */
+    public abstract String getErrorText( Component component );
 
     /**
      * Converts a String representation of the properties value into the appropriate. For example,
@@ -366,8 +402,15 @@ public abstract class AbstractProperty<S, T>
         if (StringUtils.equals(this.access, this.key)) {
             return this.getClass().getName() + " " + this.label + " (" + this.access + ")";
         } else {
-            return this.getClass().getName() + " " + this.label + " (" + this.access + " : " +
-                this.key + ")";
+            return this.getClass().getName() + " " + this.label + " (" + this.access + " : " + this.key + ")";
         }
     }
+
+    @Override
+    public int compareTo( AbstractProperty<S, T> other )
+    {
+        int diff = this.sortOrder - other.sortOrder;
+        return diff == 0 ? this.label.compareTo(other.label) : diff;
+    }
+
 }

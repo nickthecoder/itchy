@@ -23,6 +23,10 @@ public @interface Property {
 
     String label();
 
+    String hint() default "";
+
+    int sortOrder() default 0;
+    
     String[] aliases() default {};
 
     boolean recurse() default false;

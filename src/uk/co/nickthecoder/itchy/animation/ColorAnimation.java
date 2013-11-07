@@ -10,6 +10,7 @@ package uk.co.nickthecoder.itchy.animation;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.Actor;
+import uk.co.nickthecoder.itchy.TextPose;
 import uk.co.nickthecoder.itchy.util.AbstractProperty;
 import uk.co.nickthecoder.itchy.util.Property;
 import uk.co.nickthecoder.jame.RGBA;
@@ -24,10 +25,15 @@ public class ColorAnimation extends NumericAnimation
     
     private RGBA startColor;
 
-    public ColorAnimation( int ticks, Ease ease, RGBA target )
+    public ColorAnimation()
     {
-        super(ticks, ease);
-        this.targetColor = target;
+        this(200, linear, RGBA.WHITE);
+    }
+    
+    public ColorAnimation(int ticks, Ease ease, RGBA color)
+    {
+        super(ticks,ease);
+        this.targetColor = color;
     }
 
     @Override
@@ -45,10 +51,14 @@ public class ColorAnimation extends NumericAnimation
     @Override
     public void start( Actor actor )
     {
-        this.startColor = actor.getAppearance().getColorize();
+        if (actor.getAppearance().getPose() instanceof TextPose) {
+            this.startColor = ((TextPose) actor.getAppearance().getPose()).getColor();
+        } else {
+            this.startColor = actor.getAppearance().getColorize();
+        }
+        
         if ( this.startColor == null ) {
-            this.startColor = new RGBA(255,255,255,255);
-            // this.startColor = new RGBA( targetColor.r, targetColor.g, targetColor.b, 0 );
+            this.startColor = RGBA.WHITE;
         }
     }
 
@@ -60,8 +70,13 @@ public class ColorAnimation extends NumericAnimation
         double blue = this.startColor.b + (this.targetColor.b - this.startColor.b) * amount;
         double alpha = this.startColor.a + (this.targetColor.a - this.startColor.a) * amount;
 
-        actor.getAppearance()
-                .setColorize(new RGBA((int) red, (int) green, (int) blue, (int) alpha));
+        RGBA color = new RGBA((int) red, (int) green, (int) blue, (int) alpha);
+        
+        if (actor.getAppearance().getPose() instanceof TextPose) {
+            ((TextPose) actor.getAppearance().getPose()).setColor(color);
+        } else {
+            actor.getAppearance().setColorize(color);
+        }
     }
 
 }

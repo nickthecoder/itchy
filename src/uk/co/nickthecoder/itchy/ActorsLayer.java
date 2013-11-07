@@ -22,9 +22,15 @@ public abstract class ActorsLayer extends Layer
      * drawn, and therefore determines the z-order. The first item is draw first, and is therefore
      * bottom-most.
      */
-    protected TreeSet<Actor> actors = new TreeSet<Actor>( new ZOrderComparactor() );
-    private MouseListener mouseListener = null;
-    private final List<Actor> actorMouseListeners = new ArrayList<Actor>();
+    protected TreeSet<Actor> actors = new TreeSet<Actor>(new ZOrderComparactor());
+    private List<Actor> actorMouseListeners = null;
+    
+    private MouseListener actorsMouseListener = new ActorsMouseListener();
+
+    /**
+     * The actor that requested to capture the mouse events.
+     */
+    private MouseListener mouseOwner;
 
     public ActorsLayer( String name, Rect position )
     {
@@ -47,14 +53,16 @@ public abstract class ActorsLayer extends Layer
         actor.setLayerAttribute(this);
         this.actors.add(actor);
 
-        if (actor.getBehaviour() instanceof MouseListener) {
+        if ((this.actorMouseListeners != null) && (actor.getBehaviour() instanceof MouseListener)) {
             this.actorMouseListeners.add(actor);
         }
     }
 
     public boolean remove( Actor actor )
     {
-        this.actorMouseListeners.remove(actor);
+        if (this.actorMouseListeners != null) {
+            this.actorMouseListeners.remove(actor);
+        }
         actor.setLayerAttribute(null);
         return this.actors.remove(actor);
     }
@@ -103,7 +111,9 @@ public abstract class ActorsLayer extends Layer
         for (Actor actor : new ArrayList<Actor>(this.getActors())) {
             actor.kill();
         }
-        this.actorMouseListeners.clear();
+        if (this.actorMouseListeners != null) {
+            this.actorMouseListeners.clear();
+        }
     }
 
     @Override
@@ -134,72 +144,15 @@ public abstract class ActorsLayer extends Layer
 
     public void enableMouseListener( Game game )
     {
-        if (this.mouseListener != null) {
-            return;
-        }
-
-        this.mouseListener = new MouseListener() {
-            @Override
-            public boolean onMouseDown( MouseButtonEvent event )
-            {
-                for (Iterator<Actor> i = ActorsLayer.this.actorMouseListeners.iterator(); i
-                    .hasNext();) {
-                    Actor actor = i.next();
-                    if (actor.getBehaviour() instanceof MouseListener) {
-                        if (((MouseListener) actor.getBehaviour()).onMouseDown(event)) {
-                            return true;
-                        }
-                    } else {
-                        i.remove();
-                    }
-                }
-                return false;
-            }
-
-            @Override
-            public boolean onMouseUp( MouseButtonEvent event )
-            {
-                for (Iterator<Actor> i = ActorsLayer.this.actorMouseListeners.iterator(); i
-                    .hasNext();) {
-                    Actor actor = i.next();
-                    if (actor.getBehaviour() instanceof MouseListener) {
-                        if (((MouseListener) actor.getBehaviour()).onMouseUp(event)) {
-                            return true;
-                        }
-                    } else {
-                        i.remove();
-                    }
-                }
-                return false;
-            }
-
-            @Override
-            public boolean onMouseMove( MouseMotionEvent event )
-            {
-                for (Iterator<Actor> i = ActorsLayer.this.actorMouseListeners.iterator(); i
-                    .hasNext();) {
-                    Actor actor = i.next();
-                    if (actor.getBehaviour() instanceof MouseListener) {
-                        if (((MouseListener) actor.getBehaviour()).onMouseMove(event)) {
-                            return true;
-                        }
-                    } else {
-                        i.remove();
-                    }
-                }
-                return false;
-            }
-
-        };
-        this.addMouseListener(this.mouseListener, game);
+        this.actorMouseListeners = new ArrayList<Actor>();
+        this.addMouseListener(this.actorsMouseListener, game);
     }
 
     public void disableMouseListener( Game game )
     {
-        if (this.mouseListener != null) {
-            this.removeMouseListener(this.mouseListener, game);
-            this.mouseListener = null;
-        }
+        this.actorMouseListeners = null;
+        this.removeMouseListener(this.actorsMouseListener, game);
+        this.actorMouseListeners = null;
     }
 
     public class ZOrderComparactor implements Comparator<Actor>
@@ -215,4 +168,84 @@ public abstract class ActorsLayer extends Layer
         }
 
     }
+
+    public void captureMouse( MouseListener owner )
+    {
+        this.mouseOwner = owner;
+        Itchy.getGame().captureMouse(this);
+    }
+
+    public void releaseMouse( MouseListener owner )
+    {
+        Itchy.getGame().releaseMouse(this);
+        this.mouseOwner = null;
+    }
+
+    class ActorsMouseListener implements MouseListener
+    {
+        @Override
+        public boolean onMouseDown( MouseButtonEvent event )
+        {
+            if ( mouseOwner == null) {
+                for (Iterator<Actor> i = ActorsLayer.this.actorMouseListeners.iterator(); i.hasNext();) {
+                    Actor actor = i.next();
+                    if (actor.getBehaviour() instanceof MouseListener) {
+                        if (((MouseListener) actor.getBehaviour()).onMouseDown(event)) {
+                            return true;
+                        }
+                    } else {
+                        i.remove();
+                    }
+                }
+            } else {
+                return mouseOwner.onMouseDown(event);
+            }
+            return false;
+        }
+
+        @Override
+        public boolean onMouseUp( MouseButtonEvent event )
+        {
+            if ( mouseOwner == null) {
+    
+                for (Iterator<Actor> i = ActorsLayer.this.actorMouseListeners.iterator(); i.hasNext();) {
+                    Actor actor = i.next();
+                    if (actor.getBehaviour() instanceof MouseListener) {
+                        if (((MouseListener) actor.getBehaviour()).onMouseUp(event)) {
+                            return true;
+                        }
+                    } else {
+                        i.remove();
+                    }
+                }
+                
+            } else {
+                return mouseOwner.onMouseUp(event);
+            }
+            return false;
+        }
+
+        @Override
+        public boolean onMouseMove( MouseMotionEvent event )
+        {
+            if ( mouseOwner == null) {
+
+                for (Iterator<Actor> i = ActorsLayer.this.actorMouseListeners.iterator(); i.hasNext();) {
+                    Actor actor = i.next();
+                    if (actor.getBehaviour() instanceof MouseListener) {
+                        if (((MouseListener) actor.getBehaviour()).onMouseMove(event)) {
+                            return true;
+                        }
+                    } else {
+                        i.remove();
+                    }
+                }
+                
+            } else {
+                return mouseOwner.onMouseMove(event); 
+            }
+            return false;
+        }
+    }
+
 }

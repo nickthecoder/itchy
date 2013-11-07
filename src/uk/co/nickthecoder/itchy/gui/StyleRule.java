@@ -43,7 +43,8 @@ public class StyleRule
     public Renderable background;
     public Surface image;
 
-    public int spacing;
+    public int xSpacing;
+    public int ySpacing;
 
     public StyleRule( List<StyleCriteria> criteria )
     {
@@ -65,7 +66,8 @@ public class StyleRule
         this.minimumHeight = NOT_SET;
         this.minimumWidth = NOT_SET;
 
-        this.spacing = NOT_SET;
+        this.xSpacing = NOT_SET;
+        this.ySpacing = NOT_SET;
 
         this.font = null;
         this.fontSize = NOT_SET;
@@ -141,8 +143,11 @@ public class StyleRule
         if (component instanceof Container) {
             Container container = (Container) component;
 
-            if (this.spacing != NOT_SET) {
-                container.setSpacing(this.spacing);
+            if (this.xSpacing != NOT_SET) {
+                container.setXSpacing(this.xSpacing);
+            }
+            if (this.ySpacing != NOT_SET) {
+                container.setYSpacing(this.ySpacing);
             }
 
             if (this.paddingTop != NOT_SET) {
@@ -231,8 +236,11 @@ public class StyleRule
             this.maximumHeight = other.maximumHeight;
         }
 
-        if (other.spacing != NOT_SET) {
-            this.spacing = other.spacing;
+        if (other.xSpacing != NOT_SET) {
+            this.xSpacing = other.xSpacing;
+        }
+        if (other.ySpacing != NOT_SET) {
+            this.ySpacing = other.ySpacing;
         }
 
         if (other.font != null) {

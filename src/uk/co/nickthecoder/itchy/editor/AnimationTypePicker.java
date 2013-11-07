@@ -9,6 +9,7 @@ package uk.co.nickthecoder.itchy.editor;
 
 import uk.co.nickthecoder.itchy.animation.AlphaAnimation;
 import uk.co.nickthecoder.itchy.animation.Animation;
+import uk.co.nickthecoder.itchy.animation.ColorAnimation;
 import uk.co.nickthecoder.itchy.animation.CompoundAnimation;
 import uk.co.nickthecoder.itchy.animation.ForwardsAnimation;
 import uk.co.nickthecoder.itchy.animation.FramedAnimation;
@@ -33,6 +34,7 @@ public abstract class AnimationTypePicker extends Window
         new AlphaAnimation(),
         new TurnAnimation(),
         new FramedAnimation(),
+        new ColorAnimation(),
         new ScaleAnimation() };
 
     public AnimationTypePicker()
@@ -41,6 +43,7 @@ public abstract class AnimationTypePicker extends Window
 
         Container container = new Container();
         container.setLayout(new VerticalLayout());
+        container.addStyle("picker");
 
         for (Animation animation : animationPrototypes) {
 

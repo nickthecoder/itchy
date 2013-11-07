@@ -8,7 +8,6 @@ package uk.co.nickthecoder.itchy.util;
 import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.EnumPickerButton;
-import uk.co.nickthecoder.itchy.gui.ActionListener;
 
 public class EnumProperty<S, E extends Enum<?>> extends AbstractProperty<S, E>
 {
@@ -26,34 +25,40 @@ public class EnumProperty<S, E extends Enum<?>> extends AbstractProperty<S, E>
         this.klass = klass;
     }
 
+    @Override
     public E getDefaultValue()
     {
         return null;
     }
-    
+
     @Override
-    public Component createComponent( final S subject, boolean autoUpdate,
-        final ComponentChangeListener listener )
+    public Component createComponent( final S subject, boolean autoUpdate )
     {
         final EnumPickerButton<E> button = new EnumPickerButton<E>("Picker", this.getSafeValue(subject));
-        
+
         if (autoUpdate) {
-            button.addActionListener(new ActionListener() {
+            button.addChangeListener(new ComponentChangeListener() {
+
                 @Override
-                public void action()
+                public void changed()
                 {
                     try {
                         EnumProperty.this.update(subject, button);
-                        if (listener != null) {
-                            listener.changed();
-                        }
                     } catch (Exception e) {
                     }
                 }
             });
         }
-        
+
         return button;
+    }
+
+    @Override
+    public void addChangeListener( Component component, ComponentChangeListener listener )
+    {
+        @SuppressWarnings("unchecked")
+        EnumPickerButton<E> button = (EnumPickerButton<E>) component;
+        button.addChangeListener(listener);
     }
 
     @Override
@@ -81,6 +86,12 @@ public class EnumProperty<S, E extends Enum<?>> extends AbstractProperty<S, E>
     {
         E value = getValue(subject);
         return value.name();
+    }
+
+    @Override
+    public String getErrorText( Component component )
+    {
+        return null;
     }
 
 }

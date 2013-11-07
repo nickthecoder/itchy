@@ -21,13 +21,14 @@ public abstract class Picker<T> extends Window
     public Picker( String title, HashMap<String, T> hashmap, T selected )
     {
         super(title);
-
-        this.clientArea.setLayout(new VerticalLayout());
+        
         this.clientArea.setFill(true, false);
+        this.clientArea.setLayout(new VerticalLayout());
 
         Container container = new Container();
         container.setLayout(new VerticalLayout());
         container.setFill(true, true);
+        container.addStyle("picker");
 
         VerticalScroll vs = new VerticalScroll(container);
         this.clientArea.addChild(vs);

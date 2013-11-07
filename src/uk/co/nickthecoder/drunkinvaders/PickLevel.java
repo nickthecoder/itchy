@@ -1,40 +1,33 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0 which accompanies this
+ * distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.drunkinvaders;
 
-import uk.co.nickthecoder.itchy.Behaviour;
 import uk.co.nickthecoder.itchy.Font;
-import uk.co.nickthecoder.itchy.MouseListener;
 import uk.co.nickthecoder.itchy.TextPose;
+import uk.co.nickthecoder.itchy.extras.Button;
 import uk.co.nickthecoder.itchy.util.Property;
-
 import uk.co.nickthecoder.jame.RGBA;
-import uk.co.nickthecoder.jame.event.MouseButtonEvent;
-import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 
-public class PickLevel extends Behaviour implements MouseListener
+public class PickLevel extends Button
 {
-    @Property(label="Level Number")
+    @Property(label = "Level Number")
     public int levelNumber;
 
-    @Property(label="Font")
+    @Property(label = "Font")
     public Font font;
 
-    @Property(label="Font Size")
+    @Property(label = "Font Size")
     public int fontSize = 22;
 
-    @Property(label="Colour")
+    @Property(label = "Colour")
     public RGBA fontColor = new RGBA(255, 255, 255);
 
-    @Property(label="Shadow Colour")
+    @Property(label = "Shadow Colour")
     public RGBA shadowColor = new RGBA(0, 0, 0);
 
-    
     @Override
     public void onActivate()
     {
@@ -44,40 +37,18 @@ public class PickLevel extends Behaviour implements MouseListener
 
         if (this.font != null) {
             TextPose shadowPose = new TextPose(String.valueOf(this.levelNumber), this.font,
-                    this.fontSize, this.shadowColor);
+                this.fontSize, this.shadowColor);
 
             TextPose textPose = new TextPose(String.valueOf(this.levelNumber), this.font,
-                    this.fontSize, this.fontColor);
+                this.fontSize, this.fontColor);
             this.getActor().getAppearance().superimpose(shadowPose, 2, 2);
             this.getActor().getAppearance().superimpose(textPose, 0, 0);
         }
     }
 
     @Override
-    public void tick()
+    public void onClick()
     {
+        DrunkInvaders.game.play(this.levelNumber);
     }
-
-    @Override
-    public boolean onMouseDown( MouseButtonEvent event )
-    {
-        if (this.getActor().contains(event.x, event.y)) {
-            DrunkInvaders.game.play(this.levelNumber);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean onMouseUp( MouseButtonEvent event )
-    {
-        return false;
-    }
-
-    @Override
-    public boolean onMouseMove( MouseMotionEvent event )
-    {
-        return false;
-    }
-
 }

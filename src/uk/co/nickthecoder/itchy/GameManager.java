@@ -5,7 +5,6 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
-import java.io.File;
 import java.lang.reflect.Constructor;
 
 import uk.co.nickthecoder.itchy.script.ScriptManager;
@@ -20,7 +19,7 @@ import uk.co.nickthecoder.itchy.script.ScriptManager;
 public class GameManager
 {
     public final Resources resources;
-    
+
     public final ScriptManager scriptManager;
 
     private Game game;
@@ -28,33 +27,31 @@ public class GameManager
     public GameManager( Resources resources )
     {
         this.resources = resources;
-        this.scriptManager = new ScriptManager( resources );
+        this.scriptManager = new ScriptManager(resources);
     }
-    
 
     public Game createGame()
         throws Exception
     {
 
-        if (resources.isValidScript(resources.gameInfo.className.name)) {
-            this.game = this.scriptManager.createGame(this,this.resources.gameInfo.className);
-            
+        if (this.resources.isValidScript(this.resources.gameInfo.className.name)) {
+            this.game = this.scriptManager.createGame(this, this.resources.gameInfo.className);
+
         } else {
             Class<?> klass = Class.forName(this.resources.gameInfo.className.name);
             Constructor<?> constructor = klass.getConstructor(GameManager.class);
             this.game = (Game) constructor.newInstance(this);
         }
-        
+
         return this.game;
     }
 
-
     public Game getGame()
     {
-        if (game == null) {
+        if (this.game == null) {
             throw new NullPointerException();
         }
-        return game;
+        return this.game;
     }
 
 }

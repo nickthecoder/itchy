@@ -11,10 +11,13 @@ import java.util.Iterator;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.Behaviour;
+import uk.co.nickthecoder.itchy.MouseListener;
 import uk.co.nickthecoder.itchy.util.AbstractProperty;
 import uk.co.nickthecoder.itchy.util.ClassName;
+import uk.co.nickthecoder.jame.event.MouseButtonEvent;
+import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 
-public class ScriptedBehaviour extends Behaviour
+public class ScriptedBehaviour extends Behaviour implements MouseListener
 {
     private final static HashMap<String, List<AbstractProperty<Behaviour, ?>>> allProperties = new HashMap<String, List<AbstractProperty<Behaviour, ?>>>();
 
@@ -121,6 +124,24 @@ public class ScriptedBehaviour extends Behaviour
     public void tick()
     {
         this.language.tick(this);
+    }
+
+    @Override
+    public boolean onMouseDown( MouseButtonEvent mbe )
+    {
+        return this.language.onMouseDown(this, mbe);
+    }
+
+    @Override
+    public boolean onMouseUp( MouseButtonEvent mbe )
+    {
+        return this.language.onMouseUp(this, mbe);
+    }
+
+    @Override
+    public boolean onMouseMove( MouseMotionEvent mbe )
+    {
+        return this.language.onMouseMove(this, mbe);
     }
 
 }

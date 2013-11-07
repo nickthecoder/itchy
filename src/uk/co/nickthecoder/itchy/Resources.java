@@ -430,8 +430,8 @@ public class Resources extends Loadable
     public void addCostume( CostumeResource resource )
     {
         this.costumes.put(resource.name, resource);
-        this.registerBehaviourClassName(resource.costume.behaviourClassName.name);
-        this.registerCostumePropertiesClassName(resource.costume.getPropertiesClassName().name);
+        this.registerBehaviourClassName(resource.getCostume().behaviourClassName.name);
+        this.registerCostumePropertiesClassName(resource.getCostume().getPropertiesClassName().name);
     }
 
     public void removeCostume( String name )
@@ -442,7 +442,7 @@ public class Resources extends Loadable
     public Costume getCostume( String name )
     {
         CostumeResource resource = this.costumes.get(name);
-        return resource == null ? null : resource.costume;
+        return resource == null ? null : resource.getCostume();
     }
 
     public CostumeResource getCostumeResource( String name )
@@ -537,12 +537,12 @@ public class Resources extends Loadable
 
     public Surface getThumbnail( CostumeResource resource )
     {
-        Pose pose = resource.costume.getPose("default");
+        Pose pose = resource.getCostume().getPose("default");
         if (pose == null) {
 
-            String text = resource.costume.getString("default");
+            String text = resource.getCostume().getString("default");
             if (text != null) {
-                Font font = resource.costume.getFont("default");
+                Font font = resource.getCostume().getFont("default");
                 if (font == null) {
                     font = this.getDefaultFont();
                 }

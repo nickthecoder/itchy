@@ -63,6 +63,27 @@ BehaviourScript = Class({
     
     onDeactivate : function() {},
     
+    onMouseDown: function( mouseEvent ) { return false; },
+    
+    onMouseUp: function( mouseEvent ) { return false; },
+    
+    onMouseMove: function( mouseEvent ) { return false; },
+    
+    isMouseListener: function() {
+        return
+            (this.onMouseDown != BehaviourScript.prototype.onMouseDown) ||
+            (this.onMouseUp != BehaviourScript.prototype.onMouseUp) ||
+            (this.onMouseMove != BehaviourScript.prototype.onMouseMove)
+    },
+    
+    captureMouse: function() {
+        this.actor.getLayer().captureMouse( this.behaviour );
+    },
+
+    releaseMouse: function() {
+        this.actor.getLayer().releaseMouse( this.behaviour );
+    },
+    
     onKill : function() {},
     
 });

@@ -28,6 +28,9 @@ public class PoseResource extends NamedResource
     @Property(label="Pose", recurse=true)
     public ImagePose pose;
 
+    @Property(label="Shared")
+    public boolean shared;
+    
     private Surface thumbnail;
 
     public PoseResource( Resources resources, String name, String filename ) throws JameException

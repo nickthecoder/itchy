@@ -54,7 +54,7 @@ public class RowLayout implements Layout
             int height = container.getHeight() - child.getMarginTop() - child.getMarginBottom();
 
             child.setPosition(x + child.getMarginLeft(), y + child.getMarginTop(), width, height);
-            x += width + container.getSpacing();
+            x += width + container.getXSpacing();
         }
     }
 

@@ -240,11 +240,7 @@ public class Itchy
         }
 
         soundManager.tick();
-
         currentGame.tick();
-        for (Actor actor : currentGame.findActorsByTag("active")) {
-            actor.tick();
-        }
     }
 
     public static Surface getDisplaySurface()
@@ -336,6 +332,7 @@ public class Itchy
                     keyboardState[key] = false;
                 }
             }
+            
         } else if (event instanceof MouseEvent) {
             MouseEvent me = (MouseEvent) event;
 

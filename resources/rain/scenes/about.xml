@@ -1,18 +1,23 @@
 <scene showMouse="true" behaviour="Menu.js">
   <properties/>
   <layer name="main">
-    <actor costume="background" x="0" y="600" direction="0.0" startEvent="default" alpha="90.0"/>
-    <actor costume="player" x="456" y="-57" direction="0.0" startEvent="default" scale="2.234042553191489"/>
-    <text text="It's Gonna Rain" font="BlackCasper" size="102" color="#3981af" xAlignment="0.5" yAlignment="0.5" x="388" y="518" direction="0.0" startEvent="default"/>
-    <text text="By Nick Robinson" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="670" y="448" direction="0.0" startEvent="default"/>
-    <text text="Back" font="BlackCasper" size="70" color="#ffffff" xAlignment="0.5" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.SceneButton" x="687" y="47" direction="0.0" startEvent="default">
+    <actor costume="background" x="0" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="1" alpha="90.0"/>
+    <actor costume="player" x="456" y="-57" direction="0.0" heading="0.0" startEvent="default" zOrder="2" scale="2.234042553191489"/>
+    <text text="It's Gonna Rain" font="BlackCasper" size="102" color="#3981af" xAlignment="0.5" yAlignment="0.5" x="388" y="518" direction="0.0" heading="0.0" startEvent="default" zOrder="3"/>
+    <text text="Back" font="BlackCasper" size="72" color="#ffffff" xAlignment="0.5" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.SceneButton" costume="button" x="406" y="221" direction="0.0" heading="0.0" startEvent="default" zOrder="8">
       <property name="sceneName" value="menu"/>
     </text>
-    <text text="Itchy Powered" font="Boycott" size="22" color="#4747ff" xAlignment="0.5" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.LinkButton" x="101" y="36" direction="0.0" startEvent="default">
+    <text text="Reset Highscores" font="Boycott" size="34" color="#ffffff" xAlignment="0.5" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.MessageButton" costume="button" x="173" y="46" direction="0.0" heading="0.0" startEvent="default" zOrder="9">
+      <property name="message" value="resetHighScores"/>
+    </text>
+    <text text="By Nick Robinson" font="Boycott" size="26" color="#ffffff" xAlignment="0.5" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.LinkButton" costume="button" x="404" y="408" direction="0.0" heading="0.0" startEvent="default" zOrder="9">
+      <property name="url" value="http://nickthecoder.co.uk/"/>
+    </text>
+    <text text="Itchy Powered" font="Boycott" size="29" color="#ffffff" xAlignment="0.5" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.LinkButton" costume="button" x="399" y="454" direction="0.0" heading="0.0" startEvent="default" zOrder="10">
       <property name="url" value="http://nickthecoder.co.uk/software/view/Itchy"/>
     </text>
-    <text text="Reset Highscores" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.MessageButton" x="115" y="69" direction="0.0" startEvent="default">
-      <property name="message" value="resetHighScores"/>
+    <text text="By Nick Robinson" font="Boycott" size="26" color="#ffffff" xAlignment="0.5" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.LinkButton" costume="button" x="404" y="408" direction="0.0" heading="0.0" startEvent="default" zOrder="9">
+      <property name="url" value="http://nickthecoder.co.uk/"/>
     </text>
   </layer>
 </scene>

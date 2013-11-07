@@ -13,6 +13,7 @@ import java.util.Iterator;
 
 import uk.co.nickthecoder.itchy.animation.AlphaAnimation;
 import uk.co.nickthecoder.itchy.animation.Animation;
+import uk.co.nickthecoder.itchy.animation.ColorAnimation;
 import uk.co.nickthecoder.itchy.animation.CompoundAnimation;
 import uk.co.nickthecoder.itchy.animation.ForwardsAnimation;
 import uk.co.nickthecoder.itchy.animation.Frame;
@@ -380,6 +381,9 @@ public class ResourcesReader
 
         } else if (tagName.equals("scale")) {
             return new ScaleAnimation();
+
+        } else if (tagName.equals("color")) {
+            return new ColorAnimation();
 
         } else {
             throw new XMLException("Unknown animation : " + tagName);

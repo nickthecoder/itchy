@@ -6,7 +6,7 @@
 package uk.co.nickthecoder.itchy.gui;
 
 import uk.co.nickthecoder.itchy.Actor;
-import uk.co.nickthecoder.itchy.EventListener;
+import uk.co.nickthecoder.itchy.InputListener;
 import uk.co.nickthecoder.itchy.GraphicsContext;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Pose;
@@ -28,7 +28,7 @@ import uk.co.nickthecoder.jame.event.MouseMotionEvent;
  * instead of GuiPose. However, you would then need to deal with how RootContainer is drawn on the
  * screen, and how it receives keyboard and mouse events.
  */
-public class GuiPose extends RootContainer implements Pose, EventListener
+public class GuiPose extends RootContainer implements Pose, InputListener
 {
     private Actor actor;
 
@@ -57,7 +57,8 @@ public class GuiPose extends RootContainer implements Pose, EventListener
     {
         super();
 
-        Itchy.getGame().addEventListener(this);
+        Itchy.getGame().addMouseListener(this);
+        Itchy.getGame().addKeyListener(this);
     }
 
     @Override
@@ -131,12 +132,6 @@ public class GuiPose extends RootContainer implements Pose, EventListener
     public double getDirection()
     {
         return 0;
-    }
-
-    @Override
-    public boolean onQuit()
-    {
-        return false;
     }
 
     @Override

@@ -43,7 +43,8 @@ public class Container extends Component
     private int paddingBottom;
     private int paddingLeft;
 
-    private int spacing = 0;
+    private int xSpacing = 0;
+    private int ySpacing = 0;
 
     private boolean fillX;
 
@@ -156,15 +157,27 @@ public class Container extends Component
         return this.paddingLeft;
     }
 
-    public int getSpacing()
+    public int getXSpacing()
     {
-        return this.spacing;
+        return this.xSpacing;
+    }
+    
+    public int getYSpacing()
+    {
+        return this.ySpacing;
     }
 
-    public void setSpacing( int value )
+    public void setXSpacing( int value )
     {
-        if (this.spacing != value) {
-            this.spacing = value;
+        if (this.xSpacing != value) {
+            this.xSpacing = value;
+            this.forceLayout();
+        }
+    }
+    public void setYSpacing( int value )
+    {
+        if (this.ySpacing != value) {
+            this.ySpacing = value;
             this.forceLayout();
         }
     }

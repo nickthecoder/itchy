@@ -103,6 +103,26 @@
         </frames>
       </compound>
     </animation>
+    <animation name="buttonDown">
+      <compound sequence="false" loops="1">
+        <scale target="1.5" ticks="5" ease="easeOutBack"/>
+      </compound>
+    </animation>
+    <animation name="buttonHoverOut">
+      <compound sequence="true" loops="1">
+        <scale target="1.0" ticks="5" ease="linear"/>
+      </compound>
+    </animation>
+    <animation name="buttonHoverOver">
+      <compound sequence="true" loops="1">
+        <scale target="1.2" ticks="5" ease="linear"/>
+      </compound>
+    </animation>
+    <animation name="buttonUp">
+      <compound sequence="false" loops="1">
+        <scale target="1.0" ticks="10" ease="easeInOutCirc"/>
+      </compound>
+    </animation>
     <animation name="deathSpiral">
       <compound sequence="false" loops="1">
         <alpha target="0.0" ticks="40" ease="linear"/>
@@ -206,6 +226,16 @@
       <pose name="default" pose="bullet"/>
       <sound name="shot" sound="ricochet" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
     </costume>
+    <costume name="button" defaultZOrder="0">
+      <string name="default">blackCasper</string>
+      <sound name="down" sound="explode" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
+      <sound name="hoverOver" sound="pop" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
+      <font name="default" font="blackCasper"/>
+      <animation name="down" animation="buttonDown"/>
+      <animation name="hoverOut" animation="buttonHoverOut"/>
+      <animation name="hoverOver" animation="buttonHoverOver"/>
+      <animation name="up" animation="buttonUp"/>
+    </costume>
     <costume name="earth" defaultZOrder="0">
       <pose name="default" pose="earth"/>
     </costume>
@@ -221,6 +251,12 @@
     <costume name="level" defaultZOrder="0" behaviour="uk.co.nickthecoder.drunkinvaders.PickLevel">
       <pose name="completed" pose="level-completed"/>
       <pose name="default" pose="level"/>
+      <sound name="down" sound="explode" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
+      <sound name="hoverOver" sound="pop" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
+      <animation name="down" animation="buttonDown"/>
+      <animation name="hoverOut" animation="buttonHoverOut"/>
+      <animation name="hoverOver" animation="buttonHoverOver"/>
+      <animation name="up" animation="buttonUp"/>
     </costume>
     <costume name="moon" defaultZOrder="0">
       <pose name="default" pose="moon"/>

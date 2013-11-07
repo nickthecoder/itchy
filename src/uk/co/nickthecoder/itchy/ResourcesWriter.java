@@ -11,6 +11,7 @@ import java.util.Set;
 
 import uk.co.nickthecoder.itchy.animation.AlphaAnimation;
 import uk.co.nickthecoder.itchy.animation.Animation;
+import uk.co.nickthecoder.itchy.animation.ColorAnimation;
 import uk.co.nickthecoder.itchy.animation.CompoundAnimation;
 import uk.co.nickthecoder.itchy.animation.ForwardsAnimation;
 import uk.co.nickthecoder.itchy.animation.Frame;
@@ -199,6 +200,9 @@ public class ResourcesWriter extends XMLWriter
 
         } else if (animation instanceof ScaleAnimation) {
             return "scale";
+
+        } else if (animation instanceof ColorAnimation) {
+            return "color";
 
         } else {
             throw new XMLException("Unknown animation : " + animation.getClass().getName());

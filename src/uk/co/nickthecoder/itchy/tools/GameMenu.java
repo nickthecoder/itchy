@@ -38,7 +38,7 @@ public class GameMenu
 
         Container menu = new Container();
         menu.setLayout(new VerticalLayout());
-        menu.setSpacing(10);
+        menu.setYSpacing(10);
 
         Container menuScroll = new VerticalScroll(menu);
         result.addChild(menuScroll);

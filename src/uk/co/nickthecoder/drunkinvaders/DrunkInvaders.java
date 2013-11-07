@@ -71,6 +71,7 @@ public class DrunkInvaders extends Game
 
         this.mainLayer = new ScrollableLayer("main", screenRect);
         this.mainLayer.centerOn(320, 240);
+        this.mainLayer.enableMouseListener(this);
 
         this.backgroundLayer = new ScrollableLayer("background", screenRect);
         this.backgroundLayer.centerOn(320, 240);
@@ -93,8 +94,7 @@ public class DrunkInvaders extends Game
     {
         super.onActivate();
         game = this;
-        this.mainLayer.enableMouseListener(this);
-
+        
         this.metronomeCountdown = 0;
         this.metronome = 20;
     }
@@ -122,6 +122,8 @@ public class DrunkInvaders extends Game
     @Override
     public void tick()
     {
+        super.tick();
+        
         if (this.metronomeCountdown == 0) {
             this.metronomeCountdown = this.metronome;
         }
@@ -167,10 +169,6 @@ public class DrunkInvaders extends Game
     @Override
     public void startScene( String sceneName )
     {
-        if (this.pause.isPaused()) {
-            this.pause.unpause();
-        }
-
         this.neighbourhood.clear();
 
         this.transitioning = true;
@@ -204,6 +202,9 @@ public class DrunkInvaders extends Game
 
         } else if ("quit".equals(message)) {
             end();
+
+        } else if ("reset".equals(message)) {
+            this.getPreferences().clear();
 
         } else if (message == SceneTransition.COMPLETE) {
             this.transitioning = false;

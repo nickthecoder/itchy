@@ -22,8 +22,7 @@ public class IntegerProperty<S> extends AbstractProperty<S, Integer>
     }
 
     @Override
-    public Component createComponent( final S subject, boolean autoUpdate,
-        final ComponentChangeListener listener )
+    public Component createComponent( final S subject, boolean autoUpdate )
     {
         final IntegerBox box = new IntegerBox(this.getSafeValue(subject));
         if (autoUpdate) {
@@ -34,9 +33,6 @@ public class IntegerProperty<S> extends AbstractProperty<S, Integer>
                 {
                     try {
                         IntegerProperty.this.update(subject, box);
-                        if (listener != null) {
-                            listener.changed();
-                        }
                     } catch (Exception e) {
                         // Do nothing
                     }
@@ -44,6 +40,13 @@ public class IntegerProperty<S> extends AbstractProperty<S, Integer>
             });
         }
         return box;
+    }
+
+    @Override
+    public void addChangeListener( Component component, ComponentChangeListener listener )
+    {
+        IntegerBox integerBox = (IntegerBox) component;
+        integerBox.addChangeListener(listener);
     }
 
     /**
@@ -89,6 +92,17 @@ public class IntegerProperty<S> extends AbstractProperty<S, Integer>
     public Integer parse( String value )
     {
         return Integer.parseInt(value);
+    }
+
+    @Override
+    public String getErrorText( Component component )
+    {
+        try {
+            ((IntegerBox) component).getValue();
+        } catch (Exception e) {
+            return "Not a valid whole number";
+        }
+        return null;
     }
 
 }

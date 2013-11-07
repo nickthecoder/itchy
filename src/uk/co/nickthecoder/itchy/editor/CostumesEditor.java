@@ -173,7 +173,7 @@ public class CostumesEditor extends SubEditor
     protected void edit( GridLayout grid, Object resource )
     {
         this.currentCostumeResource = (CostumeResource) resource;
-        final Costume costume = this.currentCostumeResource.costume;
+        final Costume costume = this.currentCostumeResource.getCostume();
 
         this.txtName = new TextBox(this.currentCostumeResource.getName());
 
@@ -314,9 +314,9 @@ public class CostumesEditor extends SubEditor
 
     private void createPropertiesGrid()
     {
-        CostumeProperties properties = this.currentCostumeResource.costume.getProperties();
+        CostumeProperties properties = this.currentCostumeResource.getCostume().getProperties();
 
-        if (!this.currentCostumeResource.costume.getPropertiesClassName().name.equals(
+        if (!this.currentCostumeResource.getCostume().getPropertiesClassName().name.equals(
             this.propertiesClassName.getClassName().name)) {
 
             properties = CostumeProperties.createProperties(this.editor.game.getScriptManager(),
@@ -344,7 +344,7 @@ public class CostumesEditor extends SubEditor
         try {
             IntegerProperty<Costume> property = new IntegerProperty<Costume>("Default Z Order",
                 "defaultZOrder");
-            Component component = property.createComponent(this.currentCostumeResource.costume,
+            Component component = property.createComponent(this.currentCostumeResource.getCostume(),
                 true);
             grid.addRow(property.label, component);
         } catch (Exception e) {
@@ -419,7 +419,7 @@ public class CostumesEditor extends SubEditor
     {
         SimpleTableModel model = new SimpleTableModel();
 
-        Costume costume = this.currentCostumeResource.costume;
+        Costume costume = this.currentCostumeResource.getCostume();
 
         for (String name : costume.getPoseNames()) {
             for (PoseResource poseResource : costume.getPoseChoices(name)) {
@@ -525,7 +525,7 @@ public class CostumesEditor extends SubEditor
     private void onAddString()
     {
         String newValue = "?";
-        this.currentCostumeResource.costume.addString(NEW_EVENT_NAME, newValue);
+        this.currentCostumeResource.getCostume().addString(NEW_EVENT_NAME, newValue);
         rebuildEventTable();
         selectEventTableRow(NEW_EVENT_NAME, newValue);
         onEditEvent();
@@ -537,7 +537,7 @@ public class CostumesEditor extends SubEditor
             @Override
             public void pick( PoseResource poseResource )
             {
-                Costume costume = CostumesEditor.this.currentCostumeResource.costume;
+                Costume costume = CostumesEditor.this.currentCostumeResource.getCostume();
                 costume.addPose(NEW_EVENT_NAME, poseResource);
                 CostumesEditor.this.rebuildEventTable();
                 selectEventTableRow(NEW_EVENT_NAME, poseResource);
@@ -575,7 +575,7 @@ public class CostumesEditor extends SubEditor
             @Override
             public void pick( String label, AnimationResource animationResource )
             {
-                Costume costume = CostumesEditor.this.currentCostumeResource.costume;
+                Costume costume = CostumesEditor.this.currentCostumeResource.getCostume();
                 costume.addAnimation(NEW_EVENT_NAME, animationResource);
                 CostumesEditor.this.rebuildEventTable();
                 selectEventTableRow(NEW_EVENT_NAME, animationResource);
@@ -594,7 +594,7 @@ public class CostumesEditor extends SubEditor
             @Override
             public void pick( String label, SoundResource soundResource )
             {
-                Costume costume = CostumesEditor.this.currentCostumeResource.costume;
+                Costume costume = CostumesEditor.this.currentCostumeResource.getCostume();
                 ManagedSound ms = new ManagedSound(soundResource);
                 costume.addSound(NEW_EVENT_NAME, ms);
                 CostumesEditor.this.rebuildEventTable();
@@ -612,7 +612,7 @@ public class CostumesEditor extends SubEditor
             @Override
             public void pick( FontResource fontResource )
             {
-                Costume costume = CostumesEditor.this.currentCostumeResource.costume;
+                Costume costume = CostumesEditor.this.currentCostumeResource.getCostume();
                 costume.addFont(NEW_EVENT_NAME, fontResource);
                 CostumesEditor.this.rebuildEventTable();
                 selectEventTableRow(NEW_EVENT_NAME, fontResource);
@@ -624,7 +624,7 @@ public class CostumesEditor extends SubEditor
 
     private void onRemoveEvent()
     {
-        Costume costume = this.currentCostumeResource.costume;
+        Costume costume = this.currentCostumeResource.getCostume();
 
         TableModelRow row = this.eventsTable.getCurrentTableModelRow();
 
@@ -771,7 +771,7 @@ public class CostumesEditor extends SubEditor
 
     private void onEditEventOk()
     {
-        Costume costume = this.currentCostumeResource.costume;
+        Costume costume = this.currentCostumeResource.getCostume();
         TableModelRow row = this.eventsTable.getCurrentTableModelRow();
 
         if (row != null) {
@@ -846,12 +846,12 @@ public class CostumesEditor extends SubEditor
             return;
         }
 
-        Costume oldBase = this.currentCostumeResource.costume.getExtendedFrom();
+        Costume oldBase = this.currentCostumeResource.getCostume().getExtendedFrom();
         if (this.labelExtendedFrom.getText().equals("None")) {
-            this.currentCostumeResource.costume.setExtendedFrom(null);
+            this.currentCostumeResource.getCostume().setExtendedFrom(null);
         } else {
             Costume base = this.editor.resources.getCostume(this.labelExtendedFrom.getText());
-            this.currentCostumeResource.costume.setExtendedFrom(base);
+            this.currentCostumeResource.getCostume().setExtendedFrom(base);
             Costume costume = base;
             for (int i = 0; i < 100; i++) {
                 if (costume == null) {
@@ -859,7 +859,7 @@ public class CostumesEditor extends SubEditor
                 }
                 costume = costume.getExtendedFrom();
                 if (i == 99) {
-                    this.currentCostumeResource.costume.setExtendedFrom(oldBase);
+                    this.currentCostumeResource.getCostume().setExtendedFrom(oldBase);
                     this.setMessage("Bad Extends - forms a loop.");
                     return;
                 }
@@ -867,7 +867,7 @@ public class CostumesEditor extends SubEditor
         }
 
         this.currentCostumeResource.setName(this.txtName.getText());
-        this.currentCostumeResource.costume.behaviourClassName = this.behaviour.getClassName();
+        this.currentCostumeResource.getCostume().behaviourClassName = this.behaviour.getClassName();
 
         if (this.editor.resources.registerCostumePropertiesClassName(this.propertiesClassName
             .getClassName().name)) {

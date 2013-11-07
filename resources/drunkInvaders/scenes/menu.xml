@@ -1,26 +1,22 @@
 <scene showMouse="true" behaviour="uk.co.nickthecoder.drunkinvaders.Menu">
   <properties/>
   <layer name="background">
-    <actor costume="earth" x="0" y="0" direction="0.0" startEvent="default"/>
+    <actor costume="earth" x="0" y="0" direction="0.0" heading="0.0" startEvent="default" zOrder="1"/>
   </layer>
   <layer name="main">
-    <actor costume="alien3" behaviour="uk.co.nickthecoder.itchy.NullBehaviour" x="163" y="365" direction="-90.0" startEvent="default" colorize="#00ff0022" scale="6.107142857142857"/>
-    <actor costume="ship" behaviour="uk.co.nickthecoder.itchy.NullBehaviour" x="198" y="85" direction="93.94518622903759" startEvent="default"/>
-    <actor costume="bullet" x="193" y="139" direction="95.90614111377052" startEvent="default"/>
-    <text text="Drunk" font="boycott" size="86" color="#cc2222" xAlignment="0.5" yAlignment="0.5" x="475" y="407" direction="7.594643368591445" startEvent="default"/>
-    <text text="Invaders" font="boycott" size="61" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="486" y="331" direction="2.160560963458598" startEvent="default"/>
-    <text text="Play" font="blackCasper" size="56" color="#ffffff" xAlignment="0.5" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.SceneButton" x="319" y="225" direction="0.0" startEvent="default">
-      <property name="sceneName" value="levels"/>
-    </text>
-    <text text="Credits" font="blackCasper" size="46" color="#ffffff" xAlignment="0.5" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.SceneButton" x="324" y="88" direction="0.0" startEvent="default">
+    <actor costume="alien3" behaviour="uk.co.nickthecoder.itchy.NullBehaviour" x="163" y="365" direction="-90.0" heading="-90.0" startEvent="default" zOrder="2" colorize="#00ff0022" scale="6.107142857142857"/>
+    <actor costume="ship" behaviour="uk.co.nickthecoder.itchy.NullBehaviour" x="198" y="85" direction="93.94518622903759" heading="93.94518622903759" startEvent="default" zOrder="3"/>
+    <actor costume="bullet" x="193" y="139" direction="95.90614111377052" heading="95.90614111377052" startEvent="default" zOrder="4"/>
+    <text text="Drunk" font="boycott" size="86" color="#cc2222" xAlignment="0.5" yAlignment="0.5" x="475" y="407" direction="7.594643368591445" heading="7.594643368591445" startEvent="default" zOrder="5"/>
+    <text text="Invaders" font="boycott" size="61" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="486" y="331" direction="2.160560963458598" heading="2.160560963458598" startEvent="default" zOrder="6"/>
+    <actor costume="bomb" x="181" y="234" direction="-90.0" heading="-90.0" startEvent="default" zOrder="7" scale="3.5"/>
+    <text text="About" font="blackCasper" size="46" color="#ffffff" xAlignment="0.5" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.SceneButton" costume="button" x="323" y="100" direction="0.0" heading="0.0" startEvent="default" zOrder="8">
       <property name="sceneName" value="about"/>
     </text>
-    <text text="Quit" font="blackCasper" size="66" color="#000000" xAlignment="0.5" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.MessageButton" x="319" y="25" direction="0.0" startEvent="default">
-      <property name="message" value="quit"/>
+    <text text="Editor" font="blackCasper" size="46" color="#ffffff" xAlignment="0.5" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.EditorButton" costume="button" x="321" y="162" direction="0.0" heading="0.0" startEvent="default" zOrder="9"/>
+    <text text="Play" font="blackCasper" size="46" color="#ffffff" xAlignment="0.5" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.SceneButton" costume="button" x="320" y="223" direction="0.0" heading="0.0" startEvent="default" zOrder="10">
+      <property name="sceneName" value="levels"/>
     </text>
-    <actor costume="bomb" x="181" y="234" direction="-90.0" startEvent="default" scale="3.5"/>
-    <text text="Editor" font="blackCasper" size="46" color="#ffffff" xAlignment="0.5" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.MessageButton" x="322" y="155" direction="0.0" startEvent="default">
-      <property name="message" value="editor"/>
-    </text>
+    <text text="Quit" font="blackCasper" size="68" color="#000000" xAlignment="0.5" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.QuitButton" costume="button" x="321" y="25" direction="0.0" heading="0.0" startEvent="default" zOrder="11"/>
   </layer>
 </scene>

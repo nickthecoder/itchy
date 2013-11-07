@@ -22,6 +22,7 @@ public class SceneButton extends Button
     @Override
     protected void onClick()
     {
+        super.onClick();
         Itchy.getGame().startScene( this.sceneName );
     }
 

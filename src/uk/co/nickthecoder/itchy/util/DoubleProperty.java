@@ -22,10 +22,10 @@ public class DoubleProperty<S> extends AbstractProperty<S, Double>
     }
 
     @Override
-    public Component createComponent( final S subject, boolean autoUpdate,
-        final ComponentChangeListener listener )
+    public Component createComponent( final S subject, boolean autoUpdate )
     {
         final DoubleBox box = new DoubleBox(this.getSafeValue(subject));
+
         if (autoUpdate) {
 
             box.addChangeListener(new ComponentChangeListener() {
@@ -34,9 +34,6 @@ public class DoubleProperty<S> extends AbstractProperty<S, Double>
                 {
                     try {
                         DoubleProperty.this.update(subject, box);
-                        if (listener != null) {
-                            listener.changed();
-                        }
                     } catch (Exception e) {
                         // Do nothing
                     }
@@ -46,11 +43,18 @@ public class DoubleProperty<S> extends AbstractProperty<S, Double>
         return box;
     }
 
+    @Override
+    public void addChangeListener( Component component, ComponentChangeListener listener )
+    {
+        DoubleBox doubleBox = (DoubleBox) component;
+        doubleBox.addChangeListener(listener);
+    }
+
     /**
      * Do don't use the super class, just in case the type of the property value isn't a Double
      * (which would cause a cast exception). This could happen if the property was being retrieved
-     * from a dynamically typed language, where we don't directly control attribute types.
-     * For example, the value may be an Integer, not a Double. 
+     * from a dynamically typed language, where we don't directly control attribute types. For
+     * example, the value may be an Integer, not a Double.
      */
     @Override
     public Double getValue( S subject )
@@ -60,11 +64,12 @@ public class DoubleProperty<S> extends AbstractProperty<S, Double>
         return result.doubleValue();
     }
 
+    @Override
     public Double getDefaultValue()
     {
         return 0.0;
     }
-    
+
     @Override
     public void update( S subject, Component component ) throws Exception
     {
@@ -81,6 +86,17 @@ public class DoubleProperty<S> extends AbstractProperty<S, Double>
     public Double parse( String value )
     {
         return Double.parseDouble(value);
+    }
+
+    @Override
+    public String getErrorText( Component component )
+    {
+        try {
+            ((DoubleBox) component).getValue();
+        } catch (Exception e) {
+            return "Not a valid decimal number";
+        }
+        return null;
     }
 
 }

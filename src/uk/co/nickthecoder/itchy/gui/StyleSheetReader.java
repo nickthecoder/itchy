@@ -175,8 +175,18 @@ public class StyleSheetReader
             rule.paddingLeft = ruleTag.getIntAttribute("paddingLeft");
         }
 
+
         if (ruleTag.hasAttribute("spacing")) {
-            rule.spacing = ruleTag.getIntAttribute("spacing");
+            rule.xSpacing = ruleTag.getIntAttribute("spacing");
+            rule.ySpacing = ruleTag.getIntAttribute("spacing");
+        }
+
+        if (ruleTag.hasAttribute("xSpacing")) {
+            rule.xSpacing = ruleTag.getIntAttribute("xSpacing");
+        }
+
+        if (ruleTag.hasAttribute("ySpacing")) {
+            rule.ySpacing = ruleTag.getIntAttribute("ySpacing");
         }
 
         if (ruleTag.hasAttribute("color")) {

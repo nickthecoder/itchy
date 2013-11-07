@@ -5,19 +5,18 @@
  ******************************************************************************/
 package uk.co.nickthecoder.drunkinvaders;
 
-import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.NullSceneBehaviour;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.Keys;
 
 public class Menu extends NullSceneBehaviour
 {
-    
+
     @Override
     public boolean onKeyDown( KeyboardEvent ke )
     {
         if (ke.symbol == Keys.ESCAPE) {
-            Itchy.terminate();
+            DrunkInvaders.game.end();
             return true;
         }
 
@@ -26,11 +25,11 @@ public class Menu extends NullSceneBehaviour
             return true;
         }
 
-        if ((ke.symbol == Keys.a) || (ke.symbol == Keys.c))  {
+        if ((ke.symbol == Keys.a) || (ke.symbol == Keys.c)) {
             DrunkInvaders.game.startScene("about");
         }
 
-        if ((ke.symbol == Keys.F12) || (ke.symbol == Keys.e))  {
+        if ((ke.symbol == Keys.F12) || (ke.symbol == Keys.e)) {
             DrunkInvaders.game.startEditor();
         }
 

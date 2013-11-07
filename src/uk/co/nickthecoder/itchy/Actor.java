@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Set;
 
 import uk.co.nickthecoder.itchy.animation.Animation;
+import uk.co.nickthecoder.itchy.animation.CompoundAnimation;
 import uk.co.nickthecoder.itchy.util.AbstractProperty;
 import uk.co.nickthecoder.itchy.util.Property;
 import uk.co.nickthecoder.itchy.util.PropertySubject;
@@ -263,14 +264,35 @@ public class Actor implements PropertySubject<Actor>
 
     public void setAnimation( Animation animation )
     {
-        if (animation != null) {
-            this.animation = animation.copy();
-            this.animation.start(this);
-            this.animation.addMessageListener(getBehaviour());
-
-        } else {
+        setAnimation( animation, AnimationEvent.REPLACE );
+    }
+    
+    public void setAnimation( Animation animation, AnimationEvent ae )
+    {
+        if (animation == null) {
             this.animation = null;
+            return;
         }
+
+        Animation newAnimation;
+        
+        if ((this.animation == null) || (ae == AnimationEvent.REPLACE)) {
+            newAnimation = animation.copy();
+            newAnimation.start(this);
+                
+        } else if (ae == AnimationEvent.IGNORE) {
+            return;
+            
+        } else {
+            CompoundAnimation ca = new CompoundAnimation( ae == AnimationEvent.SEQUENCE );
+            ca.add(this.getAnimation());
+            ca.add(animation.copy());
+            ca.startExceptFirst(this);
+            newAnimation = ca;
+        }
+        
+        newAnimation.addMessageListener(getBehaviour());
+        this.animation = newAnimation;
     }
 
     public Animation getAnimation()
@@ -280,10 +302,22 @@ public class Actor implements PropertySubject<Actor>
 
     public void event( String eventName )
     {
-        this.event(this.costume, eventName);
+        this.event(this.costume, eventName, AnimationEvent.REPLACE);
     }
 
-    public void event( Costume costume, String eventName )
+    public void event( String eventName, AnimationEvent ae)
+    {
+        this.event(this.costume, eventName, ae);
+    }
+
+    public enum AnimationEvent {
+        REPLACE,
+        SEQUENCE,
+        PARALLEL,
+        IGNORE
+    }
+    
+    public void event( Costume costume, String eventName, AnimationEvent ae )
     {
         if (costume == null) {
             return;
@@ -295,9 +329,7 @@ public class Actor implements PropertySubject<Actor>
         }
 
         Animation animation = costume.getAnimation(eventName);
-        if (animation != null) {
-            this.setAnimation(animation);
-        }
+        this.setAnimation(animation, ae);
 
         ManagedSound cs = costume.getCostumeSound(eventName);
         if (cs != null) {
@@ -324,7 +356,7 @@ public class Actor implements PropertySubject<Actor>
     public void deathEvent( Costume costume, String eventName )
     {
         this.dying = true;
-        this.event(costume, eventName);
+        this.event(costume, eventName, AnimationEvent.REPLACE);
         if ((costume == null) || (costume.getAnimation(eventName) == null)) {
             this.kill();
         }

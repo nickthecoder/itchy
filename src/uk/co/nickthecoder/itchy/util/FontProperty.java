@@ -32,11 +32,7 @@ public class FontProperty<S> extends AbstractProperty<S, Font>
     }
 
     @Override
-    public Component createComponent(
-        final S subject,
-        final boolean autoUpdate,
-        final ComponentChangeListener listener
-        )
+    public Component createComponent( final S subject, final boolean autoUpdate )
     {
         Resources resources = Itchy.getGame().resources;
 
@@ -54,9 +50,6 @@ public class FontProperty<S> extends AbstractProperty<S, Font>
                 {
                     try {
                         FontProperty.this.update(subject, pickerButton);
-                        if (listener != null) {
-                            listener.changed();
-                        }
                     } catch (Exception e) {
                         // Do nothing
                     }
@@ -65,6 +58,13 @@ public class FontProperty<S> extends AbstractProperty<S, Font>
         }
 
         return pickerButton;
+    }
+
+    @Override
+    public void addChangeListener( Component component, ComponentChangeListener listener )
+    {
+        FontPickerButton button = (FontPickerButton) component;
+        button.addChangeListener(listener);
     }
 
     @Override
@@ -90,6 +90,12 @@ public class FontProperty<S> extends AbstractProperty<S, Font>
             throw new NullPointerException();
         }
         return result;
+    }
+
+    @Override
+    public String getErrorText( Component component )
+    {
+        return null;
     }
 
 }

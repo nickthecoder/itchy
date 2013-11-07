@@ -12,19 +12,22 @@ import java.util.List;
 
 import uk.co.nickthecoder.itchy.util.AbstractProperty;
 import uk.co.nickthecoder.itchy.util.ClassName;
+import uk.co.nickthecoder.itchy.util.Property;
 import uk.co.nickthecoder.itchy.util.StringUtils;
 
 public class Scene
 {
+    @Property(label = "Show Mouse")
+    public boolean showMouse = true;
+
+    @Property(label = "Scene Behaviour", baseClass = SceneBehaviour.class, sortOrder = 90)
+    public ClassName sceneBehaviourName;
+
     private List<SceneLayer> sceneLayers;
 
     private HashMap<String, SceneLayer> layersMap;
 
     public SceneBehaviour sceneBehaviour;
-
-    public boolean showMouse = true;
-
-    public ClassName sceneBehaviourName;
 
     private List<Actor> activateList;
 

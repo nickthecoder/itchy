@@ -28,8 +28,7 @@ public abstract class Behaviour implements MessageListener, Cloneable, PropertyS
             return true;
         }
         try {
-            @SuppressWarnings({ "unchecked", "unused" })
-            Class<Behaviour> klass = (Class<Behaviour>) Class.forName(className.name);
+            Class.forName(className.name).asSubclass(Behaviour.class);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -62,16 +61,6 @@ public abstract class Behaviour implements MessageListener, Cloneable, PropertyS
 
     public Behaviour()
     {
-    }
-
-    public Actor createActor( ActorsLayer layer, String costumeName )
-    {
-        Costume costume = Itchy.getResources().getCostume(costumeName);
-        Actor actor = new Actor(costume);
-        layer.addTop(actor);
-        actor.setBehaviour(this);
-
-        return actor;
     }
 
     /**
@@ -129,7 +118,7 @@ public abstract class Behaviour implements MessageListener, Cloneable, PropertyS
         if (oldActor == null) {
             this.init();
         }
-
+        
         Tag tags = this.getClass().getAnnotation(Tag.class);
         if (tags != null) {
             for (String name : tags.names()) {

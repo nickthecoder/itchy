@@ -108,6 +108,19 @@ public class CompoundAnimation extends AbstractAnimation
 
     }
 
+    public void startExceptFirst( Actor actor )
+    {
+        this.loopsRemaining = this.loops > 0 ? this.loops : 1;
+
+        if (this.sequence) {
+            this.sop = new Sequence(this, actor);
+        } else {
+            this.sop = new Parallel(this, actor);
+        }
+        this.sop.startExceptFirst(actor);
+
+    }
+
     @Override
     public void tick( Actor actor )
     {

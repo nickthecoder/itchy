@@ -11,7 +11,7 @@ import uk.co.nickthecoder.jame.Surface;
 
 public class CostumeResource extends NamedResource
 {
-    public Costume costume;
+    private final Costume costume;
 
     public CostumeResource( Resources resources, String name, Costume costume )
     {
@@ -19,6 +19,11 @@ public class CostumeResource extends NamedResource
         this.costume = costume;
     }
 
+    public Costume getCostume()
+    {
+        return this.costume;
+    }
+    
     public String getExtendedFromName()
     {
         Costume base = this.costume.getExtendedFrom();

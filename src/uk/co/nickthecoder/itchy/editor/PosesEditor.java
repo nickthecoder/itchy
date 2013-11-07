@@ -1,16 +1,16 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0 which accompanies this
+ * distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.editor;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
+import uk.co.nickthecoder.itchy.CostumeResource;
 import uk.co.nickthecoder.itchy.ImagePose;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.PoseResource;
@@ -24,6 +24,7 @@ import uk.co.nickthecoder.itchy.gui.GridLayout;
 import uk.co.nickthecoder.itchy.gui.ImageComponent;
 import uk.co.nickthecoder.itchy.gui.IntegerBox;
 import uk.co.nickthecoder.itchy.gui.Label;
+import uk.co.nickthecoder.itchy.gui.PickerButton;
 import uk.co.nickthecoder.itchy.gui.ReflectionTableModelRow;
 import uk.co.nickthecoder.itchy.gui.SimpleTableModel;
 import uk.co.nickthecoder.itchy.gui.SingleColumnRowComparator;
@@ -37,6 +38,7 @@ import uk.co.nickthecoder.itchy.util.Util;
 import uk.co.nickthecoder.jame.JameException;
 import uk.co.nickthecoder.jame.Surface;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
+import uk.co.nickthecoder.itchy.gui.ActionListener;
 
 public class PosesEditor extends SubEditor
 {
@@ -57,9 +59,39 @@ public class PosesEditor extends SubEditor
 
     private SimpleTableModel tableModel;
 
+    private PickerButton<Filter> filterPickerButton;
+
     public PosesEditor( Editor editor )
     {
         super(editor);
+    }
+
+    interface Filter
+    {
+        boolean accept( PoseResource pr );
+    }
+
+    class CostumeFilter implements Filter
+    {
+        CostumeResource costumeResource;
+
+        CostumeFilter( CostumeResource costumeResource )
+        {
+            this.costumeResource = costumeResource;
+        }
+
+        @Override
+        public boolean accept( PoseResource pr )
+        {
+            for (String eventName : this.costumeResource.getCostume().getPoseNames()) {
+                for (PoseResource other : this.costumeResource.getCostume().getPoseChoices(eventName)) {
+                    if (pr == other) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
     }
 
     @Override
@@ -68,6 +100,39 @@ public class PosesEditor extends SubEditor
         Container form = super.createPage();
         form.setFill(true, true);
 
+        HashMap<String, Filter> filterMap = new HashMap<String, Filter>();
+        Filter all = new Filter() {
+            @Override
+            public boolean accept( PoseResource pr )
+            {
+                return true;
+            }
+        };
+        Filter shared = new Filter() {
+            @Override
+            public boolean accept( PoseResource pr )
+            {
+                return pr.shared;
+            }
+        };
+        filterMap.put(" All ", all);
+        filterMap.put(" Shared ", shared);
+        for (String name : this.editor.resources.costumeNames()) {
+            CostumeResource cr = this.editor.resources.getCostumeResource(name);
+            Filter filter = new CostumeFilter(cr);
+            filterMap.put("Costume : " + cr.getName(), filter);
+        }
+
+        this.filterPickerButton = new PickerButton<Filter>("Filter", shared, filterMap);
+        this.filterPickerButton.addActionListener(new ActionListener() {
+            @Override
+            public void action()
+            {
+                rebuildTable();
+            }            
+        });
+        form.addChild(filterPickerButton);
+        
         TableModelColumn name = new TableModelColumn("Name", 0, 200);
         name.rowComparator = new SingleColumnRowComparator<String>(0);
 
@@ -111,12 +176,14 @@ public class PosesEditor extends SubEditor
     {
         SimpleTableModel model = new SimpleTableModel();
 
-        for (String soundName : this.editor.resources.poseNames()) {
-            PoseResource poseResource = this.editor.resources.getPoseResource(soundName);
-            String[] attributeNames = { "name", "filename", "thumbnail" };
-            TableModelRow row = new ReflectionTableModelRow<PoseResource>(poseResource,
+        for (String poseName : this.editor.resources.poseNames()) {
+            PoseResource poseResource = this.editor.resources.getPoseResource(poseName);
+            if (this.filterPickerButton.getValue().accept(poseResource)) {
+                String[] attributeNames = { "name", "filename", "thumbnail" };
+                TableModelRow row = new ReflectionTableModelRow<PoseResource>(poseResource,
                     attributeNames);
-            model.addRow(row);
+                model.addRow(row);
+            }
         }
         return model;
     }
@@ -136,7 +203,7 @@ public class PosesEditor extends SubEditor
         grid.addRow(new Label("Name"), this.txtName);
 
         this.txtFilename = new FilenameComponent(this.editor.resources,
-                this.currentPoseResource.filename);
+            this.currentPoseResource.filename);
         grid.addRow(new Label("Filename"), this.txtFilename);
 
         this.txtDirection = new DoubleBox(pose.getDirection());
@@ -147,8 +214,7 @@ public class PosesEditor extends SubEditor
 
         this.txtOffsetY = new IntegerBox(pose.getOffsetY());
         grid.addRow(new Label("Offset Y"), this.txtOffsetY);
-     
-        
+
         Container imageContainer = new ClickableContainer() {
             @Override
             public void onClick( MouseButtonEvent e )
@@ -162,11 +228,11 @@ public class PosesEditor extends SubEditor
             }
         };
         this.imgPose = new ImageComponent(pose.getSurface());
-        imageContainer.addChild( this.imgPose );
+        imageContainer.addChild(this.imgPose);
         this.imgPose.addStyle("checkered");
 
         if (pose.getSurface().getHeight() > 130) {
-            VerticalScroll scroll = new VerticalScroll(imageContainer);            
+            VerticalScroll scroll = new VerticalScroll(imageContainer);
             scroll.setNaturalHeight(130);
             grid.addRow(new Label("Image"), scroll);
 
@@ -176,7 +242,7 @@ public class PosesEditor extends SubEditor
         grid.addRow(new Label(""), new Label("(Click the image to set its offsets)"));
 
         grid.addRow(new Label("Size"), new Label("" + pose.getSurface().getWidth() + "," +
-                pose.getSurface().getHeight()));
+            pose.getSurface().getHeight()));
     }
 
     @Override

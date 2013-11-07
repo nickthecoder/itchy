@@ -28,8 +28,7 @@ public class StringProperty<S> extends AbstractProperty<S, String>
     }
 
     @Override
-    public Component createComponent( final S subject, boolean autoUpdate,
-        final ComponentChangeListener listener )
+    public Component createComponent( final S subject, boolean autoUpdate )
     {
         final TextBox box = new TextBox(this.getSafeValue(subject));
         if (autoUpdate) {
@@ -39,9 +38,6 @@ public class StringProperty<S> extends AbstractProperty<S, String>
                 {
                     try {
                         StringProperty.this.update(subject, box);
-                        if (listener != null) {
-                            listener.changed();
-                        }
                     } catch (Exception e) {
                         // Do nothing
                     }
@@ -49,6 +45,13 @@ public class StringProperty<S> extends AbstractProperty<S, String>
             });
         }
         return box;
+    }
+
+    @Override
+    public void addChangeListener( Component component, ComponentChangeListener listener )
+    {
+        TextBox textBox = (TextBox) component;
+        textBox.addChangeListener(listener);
     }
 
     @Override
@@ -68,6 +71,12 @@ public class StringProperty<S> extends AbstractProperty<S, String>
     public String parse( String value )
     {
         return value;
+    }
+
+    @Override
+    public String getErrorText( Component component )
+    {
+        return null;
     }
 
 }

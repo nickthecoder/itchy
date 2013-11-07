@@ -33,6 +33,13 @@ public class Sequence implements SequenceOrParallel
     }
 
     @Override
+    public void startExceptFirst( Actor actor )
+    {
+        this.index = 0;
+        this.currentAnimation = this.compoundAnimation.children.get(this.index);
+    }
+
+    @Override
     public void tick( Actor actor )
     {
         this.currentAnimation.tick(actor);

@@ -285,6 +285,7 @@ public class AnimationsEditor extends SubEditor
         this.currentAnimationResource.animation = this.currentAnimation;
 
         if (this.adding) {
+            this.editor.resources.addAnimation(this.currentAnimationResource);
             this.rebuildTable();
         } else {
 

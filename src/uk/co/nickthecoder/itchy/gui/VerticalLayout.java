@@ -44,7 +44,7 @@ public class VerticalLayout implements Layout
             }
         }
 
-        this.requiredSum += container.getSpacing() * (children.size() - 1);
+        this.requiredSum += container.getYSpacing() * (children.size() - 1);
 
         container.setNaturalHeight(this.requiredSum + container.getPaddingTop() +
                 container.getPaddingBottom());
@@ -58,7 +58,7 @@ public class VerticalLayout implements Layout
     {
         int y = container.getPaddingTop();
 
-        int spacing = container.getSpacing();
+        int spacing = container.getYSpacing();
 
         int extraHeight = container.getHeight() - container.getNaturalHeight();
 

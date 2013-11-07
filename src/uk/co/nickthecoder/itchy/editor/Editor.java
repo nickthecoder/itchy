@@ -11,7 +11,6 @@ import uk.co.nickthecoder.itchy.Game;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Button;
-import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.Container;
 import uk.co.nickthecoder.itchy.gui.GuiPose;
 import uk.co.nickthecoder.itchy.gui.Label;
@@ -30,18 +29,6 @@ public final class Editor extends Game
         new File(new File(Itchy.getResourcesDirectory(), "editor"), "style.xml");
 
     public EditorPreferences preferences;
-
-    public static Container addHint( Component component, String hint )
-    {
-        Container container = new Container();
-        container.addChild(component);
-
-        Label label = new Label(hint);
-        label.addStyle("hint");
-        container.addChild(label);
-
-        return container;
-    }
 
     public Game game;
 
@@ -93,11 +80,13 @@ public final class Editor extends Game
         }
     }
 
+    @Override
     public void onActivate()
     {
         instance = this;
         super.onActivate();
     }
+
     @Override
     public String getTitle()
     {
@@ -207,9 +196,11 @@ public final class Editor extends Game
         return false;
     }
 
-    public void designScene( String sceneName )
+    @Override
+    public void start( String sceneName )
     {
         this.designSceneName = sceneName;
+        this.start();
     }
 
     public void debug()

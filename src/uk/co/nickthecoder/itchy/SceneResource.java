@@ -8,13 +8,20 @@ package uk.co.nickthecoder.itchy;
 import java.io.File;
 import java.util.List;
 
+import uk.co.nickthecoder.itchy.util.AbstractProperty;
+import uk.co.nickthecoder.itchy.util.Property;
+
 public class SceneResource extends Loadable
 {
+    public static List<AbstractProperty<SceneResource, ?>> properties = AbstractProperty.findAnnotations(SceneResource.class);
+
     private Scene scene;
+
+    @Property(label="Name", sortOrder=-1)
+    public String name;
 
     public Resources resources;
 
-    public String name;
 
     private static File makeFile( String name )
     {
@@ -43,6 +50,7 @@ public class SceneResource extends Loadable
         this.renameFile(makeFile(newName));
     }
 
+    @Property( label="Scene",recurse=true)
     public Scene getScene() throws Exception
     {
         if (this.scene == null) {
