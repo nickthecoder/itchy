@@ -49,24 +49,10 @@ public class Mothership extends Alien
     private Timer birthTimer;
 
     @Override
-    public void init()
+    public void onBirth()
     {
-        super.init();
+        super.onBirth();
         this.firstBornTimer = Timer.createTimerSeconds(this.firstBornDelay);
-    }
-
-    @Override
-    public void onAttach()
-    {
-        super.onAttach();
-        this.collisionStrategy = DrunkInvaders.game.createCollisionStrategy(this.getActor());
-    }
-    
-    @Override
-    public void onDetach()
-    {
-        super.onDetach();
-        resetCollisionStrategy();
     }
     
     @Override
@@ -111,7 +97,6 @@ public class Mothership extends Alien
         }
 
         this.getActor().getLayer().addTop(alien);
-        alien.activate();
         alien.event("dropped");
     }
 

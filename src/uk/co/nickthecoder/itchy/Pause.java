@@ -5,10 +5,11 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
+
 public class Pause
 {
     private final Game game;
-    
+
     private boolean paused;
 
     private String costumeName;
@@ -16,16 +17,16 @@ public class Pause
     private Actor pauseActor;
 
     private long totalTimePausedMillis;
-    
+
     /**
-     * Remembers the time that the game was last paused, so that timers which don't count down during
-     * pauses can use this time when the game is paused.
+     * Remembers the time that the game was last paused, so that timers which don't count down
+     * during pauses can use this time when the game is paused.
      */
     private long pauseTimeMillis;
-    
+
     public Pause( Game game )
     {
-        this( game, "paused");
+        this(game, "paused");
     }
 
     public Pause( Game game, String costumeName )
@@ -49,62 +50,61 @@ public class Pause
     }
 
     /**
-     * Remembers the time that the game was last paused, so that timers which don't count down during
-     * pauses can use this time when the game is paused.
+     * Remembers the time that the game was last paused, so that timers which don't count down
+     * during pauses can use this time when the game is paused.
      */
     public long pauseTimeMillis()
     {
-        return pauseTimeMillis;
+        return this.pauseTimeMillis;
     }
-    
+
     /**
      * @return The total time in milliseconds that the game was in a paused state.
      */
     public long totalTimePausedMillis()
     {
-        return totalTimePausedMillis;
+        return this.totalTimePausedMillis;
     }
-    
+
     public void pause()
     {
         pause(true);
     }
-    
+
     public void pause( boolean showMessage )
-    {        
+    {
         if (this.paused) {
             return;
         }
 
-        this.pauseTimeMillis = game.gameTimeMillis();
+        this.pauseTimeMillis = this.game.gameTimeMillis();
         this.paused = true;
 
-        for (Actor actor : Actor.allByTag("active")) {
+        for (Actor actor : this.game.getActors()) {
             if (pauseActor(actor)) {
                 actor.setBehaviour(new PausedBehaviour(actor.getBehaviour()));
             }
         }
 
-        if ( showMessage ) {
+        if (showMessage) {
             this.pauseActor = createActor();
             if (this.pauseActor != null) {
-                this.pauseActor.activate();
                 this.pauseActor.event("pause");
             }
         }
-        
+
         onPause();
     }
 
     protected Actor createActor()
     {
-        Costume costume = game.resources.getCostume(this.costumeName);
+        Costume costume = this.game.resources.getCostume(this.costumeName);
         if (costume == null) {
             return null;
         }
 
         Actor actor = new Actor(costume);
-        ActorsLayer layer = game.getPopupLayer();
+        ActorsLayer layer = this.game.getPopupLayer();
         actor.moveTo(layer.getWorldRectangle().width / 2, layer.getWorldRectangle().height / 2);
         layer.addTop(actor);
 
@@ -124,14 +124,14 @@ public class Pause
 
         this.paused = false;
 
-        for (Actor actor : Actor.allByTag("active")) {
+        for (Actor actor : this.game.getActors()) {
             if (actor.getBehaviour() instanceof PausedBehaviour) {
                 ((PausedBehaviour) actor.getBehaviour()).unpause();
             }
         }
-        
-        this.totalTimePausedMillis += game.gameTimeMillis() - this.pauseTimeMillis;
-        
+
+        this.totalTimePausedMillis += this.game.gameTimeMillis() - this.pauseTimeMillis;
+
         onUnpaused();
     }
 
@@ -163,7 +163,7 @@ public class Pause
         }
 
         @Override
-        protected void tickHandler()
+        protected void animateAndTick()
         {
             // Do nothing
         }

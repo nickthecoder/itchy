@@ -46,7 +46,6 @@ public class ShieldFactory extends Behaviour
                 shield.moveTo(this.getActor().getX(), this.getActor().getY());
                 shield.moveForwards(x * this.spacing, y * this.spacing);
                 shield.setBehaviour(shieldBehaviour);
-                shield.activate();
 
             }
         }

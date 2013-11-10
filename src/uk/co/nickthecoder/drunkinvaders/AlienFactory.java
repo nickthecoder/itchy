@@ -39,9 +39,9 @@ public class AlienFactory extends Behaviour
     private Timer timer;
 
     @Override
-    public void init()
+    public void onBirth()
     {
-        super.init();
+        super.onBirth();
 
         this.aliens = new ArrayList<Alien>(this.alienCount);
         this.timer = Timer.createTimerSeconds(this.delayPerAlien);
@@ -87,7 +87,6 @@ public class AlienFactory extends Behaviour
         this.getActor().getLayer().addTop(alienActor);
 
         alienActor.setBehaviour(alienBehaviour);
-        alienActor.activate();
         alienActor.event("birth");
 
         this.aliens.add(alienBehaviour);

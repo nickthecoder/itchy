@@ -194,15 +194,9 @@ public abstract class ScriptLanguage
 
     public abstract Behaviour createBehaviour( ClassName className );
 
-    public abstract void onAttach( ScriptedBehaviour behaviour );
-
-    public abstract void onDetach( ScriptedBehaviour behaviour );
-
-    public abstract void onActivate( ScriptedBehaviour behaviour );
-
-    public abstract void onDeactivate( ScriptedBehaviour behaviour );
-
-    public abstract void onKill( ScriptedBehaviour behaviour );
+    public abstract void onBirth( ScriptedBehaviour behaviour );
+    
+    public abstract void onDeath( ScriptedBehaviour behaviour );
 
     public abstract boolean onMouseDown( ScriptedBehaviour behaviour, MouseButtonEvent mbe );
 

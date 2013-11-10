@@ -29,7 +29,6 @@ public class Bouncy extends Behaviour
     {
         super.onAttach();
         this.getActor().addTag("bouncy");
-        this.collisionStrategy = DrunkInvaders.game.createCollisionStrategy(this.getActor());
     }
 
     @Override
@@ -37,13 +36,19 @@ public class Bouncy extends Behaviour
     {
         super.onDetach();
         this.getActor().removeTag("bouncy");
-        resetCollisionStrategy();
     }
 
     @Override
-    public void onKill()
+    public void onBirth()
     {
-        super.onKill();
+        super.onBirth();
+        this.collisionStrategy = DrunkInvaders.game.createCollisionStrategy(this.getActor());
+    }
+
+    @Override
+    public void onDeath()
+    {
+        super.onDeath();
         this.resetCollisionStrategy();
     }
 

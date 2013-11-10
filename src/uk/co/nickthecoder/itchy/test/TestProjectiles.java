@@ -6,6 +6,7 @@
 package uk.co.nickthecoder.itchy.test;
 
 import uk.co.nickthecoder.itchy.Behaviour;
+import uk.co.nickthecoder.itchy.NullBehaviour;
 import uk.co.nickthecoder.itchy.extras.Projectile;
 import uk.co.nickthecoder.itchy.util.Property;
 
@@ -60,11 +61,11 @@ public class TestProjectiles extends Behaviour
     public void tick()
     {
         if (this.id == 0) {
-            test0().createActor().activate();
+            test0().createActor();
         } else if (this.id == 1) {
-            test1().createActor().activate();
+            test1().createActor();
         }
-        this.getActor().deactivate();
+        this.getActor().setBehaviour(new NullBehaviour());
     }
 
     private Projectile test0()

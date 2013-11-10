@@ -24,7 +24,7 @@ public abstract class ActorsLayer extends Layer
      */
     protected TreeSet<Actor> actors = new TreeSet<Actor>(new ZOrderComparactor());
     private List<Actor> actorMouseListeners = null;
-    
+
     private MouseListener actorsMouseListener = new ActorsMouseListener();
 
     /**
@@ -116,14 +116,6 @@ public abstract class ActorsLayer extends Layer
         }
     }
 
-    @Override
-    public void deactivateAll()
-    {
-        for (Actor actor : this.getActors()) {
-            actor.deactivate();
-        }
-    }
-
     public void zOrderUp( Actor actor )
     {
         Actor higher = this.actors.higher(actor);
@@ -186,7 +178,7 @@ public abstract class ActorsLayer extends Layer
         @Override
         public boolean onMouseDown( MouseButtonEvent event )
         {
-            if ( mouseOwner == null) {
+            if (ActorsLayer.this.mouseOwner == null) {
                 for (Iterator<Actor> i = ActorsLayer.this.actorMouseListeners.iterator(); i.hasNext();) {
                     Actor actor = i.next();
                     if (actor.getBehaviour() instanceof MouseListener) {
@@ -198,7 +190,7 @@ public abstract class ActorsLayer extends Layer
                     }
                 }
             } else {
-                return mouseOwner.onMouseDown(event);
+                return ActorsLayer.this.mouseOwner.onMouseDown(event);
             }
             return false;
         }
@@ -206,8 +198,8 @@ public abstract class ActorsLayer extends Layer
         @Override
         public boolean onMouseUp( MouseButtonEvent event )
         {
-            if ( mouseOwner == null) {
-    
+            if (ActorsLayer.this.mouseOwner == null) {
+
                 for (Iterator<Actor> i = ActorsLayer.this.actorMouseListeners.iterator(); i.hasNext();) {
                     Actor actor = i.next();
                     if (actor.getBehaviour() instanceof MouseListener) {
@@ -218,9 +210,9 @@ public abstract class ActorsLayer extends Layer
                         i.remove();
                     }
                 }
-                
+
             } else {
-                return mouseOwner.onMouseUp(event);
+                return ActorsLayer.this.mouseOwner.onMouseUp(event);
             }
             return false;
         }
@@ -228,7 +220,7 @@ public abstract class ActorsLayer extends Layer
         @Override
         public boolean onMouseMove( MouseMotionEvent event )
         {
-            if ( mouseOwner == null) {
+            if (ActorsLayer.this.mouseOwner == null) {
 
                 for (Iterator<Actor> i = ActorsLayer.this.actorMouseListeners.iterator(); i.hasNext();) {
                     Actor actor = i.next();
@@ -240,9 +232,9 @@ public abstract class ActorsLayer extends Layer
                         i.remove();
                     }
                 }
-                
+
             } else {
-                return mouseOwner.onMouseMove(event); 
+                return ActorsLayer.this.mouseOwner.onMouseMove(event);
             }
             return false;
         }

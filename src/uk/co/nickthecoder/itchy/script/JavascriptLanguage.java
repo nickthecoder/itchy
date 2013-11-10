@@ -305,59 +305,32 @@ public class JavascriptLanguage extends ScriptLanguage
     }
 
     @Override
-    public void onAttach( ScriptedBehaviour behaviour )
+    public void onBirth( ScriptedBehaviour behaviour )
     {
         try {
             Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
             bindings.put("behaviourScript", behaviour.behaviourScript);
             bindings.put("javaActor", behaviour.getActor());
-            this.engine.eval("behaviourScript.actor = javaActor; behaviourScript.onAttach();");
+            this.engine.eval("behaviourScript.actor = javaActor; behaviourScript.onBirth();");
 
         } catch (ScriptException e) {
-            handleException("Behaviour.onAttach", e);
+            handleException("Behaviour.onBirth", e);
         }
 
     }
 
     @Override
-    public void onDetach( ScriptedBehaviour behaviour )
+    public void onDeath( ScriptedBehaviour behaviour )
     {
         try {
             Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
             bindings.put("behaviourScript", behaviour.behaviourScript);
-            this.engine.eval("behaviourScript.onDetach(); behaviourScript.actor = null;");
+            this.engine.eval("behaviourScript.onDeath();");
 
         } catch (ScriptException e) {
-            handleException("Behaviour.onDetach", e);
+            handleException("Behaviour.onDeath", e);
         }
     }
-
-    @Override
-    public void onActivate( ScriptedBehaviour behaviour )
-    {
-        try {
-            Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
-            bindings.put("behaviourScript", behaviour.behaviourScript);
-            this.engine.eval("behaviourScript.onActivate();");
-
-        } catch (ScriptException e) {
-            handleException("Behaviour.onActivate", e);
-        }
-    }
-
-    @Override
-    public void onDeactivate( ScriptedBehaviour behaviour )
-    {
-        try {
-            Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
-            bindings.put("behaviourScript", behaviour.behaviourScript);
-            this.engine.eval("behaviourScript.onDeactivate();");
-
-        } catch (ScriptException e) {
-            handleException("Behaviour.onDeactivate", e);
-        }
-    }
-
     @Override
     public void tick( ScriptedBehaviour behaviour )
     {
@@ -430,18 +403,6 @@ public class JavascriptLanguage extends ScriptLanguage
         }
     }
 
-    @Override
-    public void onKill( ScriptedBehaviour behaviour )
-    {
-        try {
-            Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
-            bindings.put("behaviourScript", behaviour.behaviourScript);
-            this.engine.eval("behaviourScript.onKill();");
-
-        } catch (ScriptException e) {
-            handleException("Behaviour.onKill", e);
-        }
-    }
 
     // ===== SceneBehaviour ======
 

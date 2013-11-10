@@ -17,9 +17,9 @@ public class NumberValue extends TextValue
     private DecimalFormat format = new DecimalFormat("0");
 
     @Override
-    public void onActivate()
+    public void onBirth()
     {
-        super.onActivate();
+        super.onBirth();
         this.format = new DecimalFormat(this.formatPattern);
     }
 

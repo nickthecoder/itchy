@@ -14,7 +14,7 @@ ${NAME} = Class({
     }
     
     // Other methods include :
-    // onDetach, onActivate, onDeactivate, onKill
+    // onDetach, onKill, onMouseDown, onMouseUp, onMouseMove
 });
 // TODO Define each editable property like so 
 // BehaviourScript.addProperty("${NAME}", "exampleInteger", Integer, "Example Integer");

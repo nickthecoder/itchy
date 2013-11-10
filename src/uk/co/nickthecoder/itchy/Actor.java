@@ -20,6 +20,29 @@ import uk.co.nickthecoder.jame.Surface;
 public class Actor implements PropertySubject<Actor>
 {
 
+    private static Pose startPose( Costume costume, String name )
+    {
+        Pose pose = costume.getPose(name);
+        if (pose != null) {
+            return pose;
+        }
+        pose = costume.getPose("default");
+        if (pose != null) {
+            return pose;
+        }
+
+        // It doesn't have a pose, so it will be a TextPose...
+        String text = costume.getString(name);
+        if (text == null) {
+            text = "?";
+        }
+        Font font = costume.getFont(name);
+        if (font == null) {
+            return ImagePose.getDummyPose();
+        }
+        return new TextPose(text, font, 20);
+    }
+    
     private static int nextId = 1;
 
     public final int id;
@@ -56,29 +79,14 @@ public class Actor implements PropertySubject<Actor>
         this(costume, "default");
     }
 
-    private static Pose startPose( Costume costume, String name )
+    public Actor( Costume costume, String poseName )
     {
-        Pose pose = costume.getPose(name);
-        if (pose != null) {
-            return pose;
-        }
-        pose = costume.getPose("default");
-        if (pose != null) {
-            return pose;
-        }
+        this(startPose(costume, poseName));
 
-        // It doesn't have a pose, so it will be a TextPose...
-        String text = costume.getString(name);
-        if (text == null) {
-            text = "?";
-        }
-        Font font = costume.getFont(name);
-        if (font == null) {
-            return ImagePose.getDummyPose();
-        }
-        return new TextPose(text, font, 20);
+        this.costume = costume;
+        this.setDirection(this.getAppearance().getPose().getDirection());
     }
-
+    
     public Actor( Pose pose )
     {
         this.id = nextId;
@@ -93,14 +101,6 @@ public class Actor implements PropertySubject<Actor>
         this.x = 0;
         this.y = 0;
         this.setDirection(pose.getDirection());
-    }
-
-    public Actor( Costume costume, String poseName )
-    {
-        this(startPose(costume, poseName));
-
-        this.costume = costume;
-        this.setDirection(this.getAppearance().getPose().getDirection());
     }
 
     @Property(label = "Start Event")
@@ -200,7 +200,7 @@ public class Actor implements PropertySubject<Actor>
 
     public void removeAllTags()
     {
-        this.tagMembership.removeAllExcept("active");
+        this.tagMembership.removeAll();
     }
     
     public static Set<Actor> allByTag( String tag )
@@ -419,11 +419,13 @@ public class Actor implements PropertySubject<Actor>
             return;
         }
 
-        if (this.behaviour != null) {
+        if (this.behaviour == null) {
+            Itchy.getGame().add(this);
+        } else {
             this.behaviour.detatch();
         }
 
-        this.behaviour = behaviour;
+        this.behaviour = behaviour == null ? new NullBehaviour() : behaviour;
         behaviour.attach(this);
 
     }
@@ -457,33 +459,6 @@ public class Actor implements PropertySubject<Actor>
     public void activateAfter( final double seconds )
     {
         this.setBehaviour(new DelayedActivation(seconds, this.getBehaviour()));
-        this.activate();
-    }
-
-    public void activate()
-    {
-        if (this.dead) {
-            return;
-        }
-
-        if (!this.active) {
-            this.addTag("active");
-            this.active = true;
-            getBehaviour().onActivate();
-        }
-    }
-
-    /**
-     * Prevents the actors tick method from being called. The actor may still be visible, and be
-     * accessible through tags etc.
-     */
-    public void deactivate()
-    {
-        if (this.active) {
-            this.active = false;
-            this.removeTag("active");
-            getBehaviour().onDeactivate();
-        }
     }
 
     /**
@@ -506,8 +481,7 @@ public class Actor implements PropertySubject<Actor>
     {
         if (!this.dead) {
             this.dead = true;
-            this.deactivate();
-            getBehaviour().onKill();
+            getBehaviour().onDeath();
 
             this.tagMembership.removeAll();
         }
@@ -792,7 +766,9 @@ public class Actor implements PropertySubject<Actor>
 
     public void tick()
     {
-        getBehaviour().tickHandler();
+        if (this.behaviour != null) {
+            this.behaviour.animateAndTick();
+        }
     }
 
     @Override

@@ -29,8 +29,6 @@ public class Scene
 
     public SceneBehaviour sceneBehaviour;
 
-    private List<Actor> activateList;
-
     public Scene()
     {
         this.sceneLayers = new ArrayList<SceneLayer>();
@@ -65,35 +63,18 @@ public class Scene
 
     public void create( ActorsLayer layer, Resources resources, boolean designMode )
     {
-        this.activateList = new ArrayList<Actor>();
-
         for (SceneLayer sceneLayer : this.sceneLayers) {
             sceneLayer.create(layer, resources, designMode);
         }
-
-        for (Actor actor : this.activateList) {
-            actor.activate();
-        }
-        this.activateList.clear();
-        this.activateList = null;
     }
 
     public void create( CompoundLayer layer, Resources resources, boolean designMode )
     {
-        this.activateList = new ArrayList<Actor>();
-
         for (SceneLayer sceneLayer : this.sceneLayers) {
             String name = sceneLayer.name;
 
             sceneLayer.create(findLayer(layer, name), resources, designMode);
         }
-
-        for (Actor actor : this.activateList) {
-            actor.event(actor.getStartEvent());
-            actor.activate();
-        }
-        this.activateList.clear();
-        this.activateList = null;
     }
 
     private ActorsLayer findLayer( CompoundLayer parent, String name )
@@ -210,7 +191,6 @@ public class Scene
 
                 if (!designMode) {
                     if (actor.getActivationDelay() == 0) {
-                        Scene.this.activateList.add(actor);
                     } else if (actor.getActivationDelay() > 0) {
                         actor.activateAfter(actor.getActivationDelay());
                     }

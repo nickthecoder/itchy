@@ -8,6 +8,7 @@ package uk.co.nickthecoder.itchy.extras;
 
 import uk.co.nickthecoder.itchy.Behaviour;
 import uk.co.nickthecoder.itchy.Itchy;
+import uk.co.nickthecoder.itchy.NullBehaviour;
 import uk.co.nickthecoder.itchy.TextPose;
 import uk.co.nickthecoder.itchy.util.BeanHelper;
 import uk.co.nickthecoder.itchy.util.Property;
@@ -19,7 +20,6 @@ import uk.co.nickthecoder.itchy.util.Property;
  */
 public class TextValue extends Behaviour
 {
-    @Property(label = "Acess")
     /**
      * The java bean of of your Game object. For example, if you have a public attribute called "sceneName",
      * or a public method called "getSceneName", then this would value should be "sceneName"
@@ -29,6 +29,7 @@ public class TextValue extends Behaviour
      * so if your SceneBehaviour has an attribute called "for" (or a method called "getFoo"), then you can
      * get to it using : <code>"sceneBehaviour.foo"</code>.
      */
+    @Property(label = "Acess")
     public String access;
 
     /**
@@ -40,13 +41,12 @@ public class TextValue extends Behaviour
     @Property(label = "Error Value")
     public String errorValue = "";
 
-    @Property(label = "Null Value")
     /**
      * What to display if the value is null, the default is an empty string.
      */
+    @Property(label = "Null Value")
     public String nullValue = "";
 
-    @Property(label = "Update Period",hint="seconds. 0 for continuous")
     /**
      * How often to update. The default is zero, which means it is updated every frame. This is fine
      * unless the value take a long time to calculate, in which case, you may want to update it
@@ -55,6 +55,7 @@ public class TextValue extends Behaviour
      * This is handy for values you know won't need updating. The example game Tetra uses a negative
      * update interval for the High Score.
      */
+    @Property(label = "Update Period",hint="seconds. 0 for continuous")
     public double updateInterval;
 
     @Property(label = "Quiet")
@@ -68,8 +69,9 @@ public class TextValue extends Behaviour
     private Timer timer;
     
     @Override
-    public void onActivate()
+    public void onBirth()
     {
+        super.onBirth();
         this.beanHelper = new BeanHelper(Itchy.getGame(), this.access);
         if ( updateInterval > 0 ) {
             timer = Timer.createTimerSeconds( this.updateInterval);
@@ -103,7 +105,7 @@ public class TextValue extends Behaviour
             pose.setText(this.errorValue);
         }
         if ( updateInterval < 0 ) {
-            getActor().deactivate();
+            getActor().setBehaviour(new NullBehaviour());
         }
     }
 

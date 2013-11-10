@@ -582,7 +582,6 @@ public class Explosion extends Companion<Explosion>
             Actor actor = projectile.createActor();
             actor.setHeading(actualHeading);
             actor.moveForwards(this.distance);
-            actor.activate();
 
             this.projectileCounter++;
             if (this.projectileCounter >= this.totalProjectiles) {

@@ -67,11 +67,12 @@ public abstract class Behaviour implements MessageListener, Cloneable, PropertyS
      * Called when the behaviour is first attached to its actor. Override this method to perform one
      * time initialisation.
      */
-    public void init()
+    public void onBirth()
     {
         // Do nothing
     }
 
+    @Override
     public List<AbstractProperty<Behaviour, ?>> getProperties()
     {
         List<AbstractProperty<Behaviour, ?>> result = allProperties.get(this.getClass());
@@ -116,7 +117,7 @@ public abstract class Behaviour implements MessageListener, Cloneable, PropertyS
         this.actor = actor;
 
         if (oldActor == null) {
-            this.init();
+            this.onBirth();
         }
 
         Tag tags = this.getClass().getAnnotation(Tag.class);
@@ -138,7 +139,6 @@ public abstract class Behaviour implements MessageListener, Cloneable, PropertyS
                 getActor().removeTag(name);
             }
         }
-        this.actor = null;
     }
 
     public Actor getActor()
@@ -230,22 +230,20 @@ public abstract class Behaviour implements MessageListener, Cloneable, PropertyS
         onMessage(message);
     }
 
-    public void onKill()
+    public void onDeath()
     {
         resetCollisionStrategy();
     }
 
-    public void onActivate()
-    {
-        // do nothing
-    }
-
-    public void onDeactivate()
-    {
-        // do nothing
-    }
-
-    protected void tickHandler()
+    /**
+     * Called by Actor.tick, once every frame, for every actor in the game. If the actor has an
+     * animation, it plays the next frame. Then calls this.tick which is where the real work is one.
+     * <p>
+     * This method was created so that Pause could make actors animation stop, as well as the
+     * behaviour's tick methods not firing. This is done by creating a PauseBehaviour, which does
+     * nothing in tickHandler.
+     */
+    protected void animateAndTick()
     {
         Animation animation = this.getActor().getAnimation();
         if (animation != null) {

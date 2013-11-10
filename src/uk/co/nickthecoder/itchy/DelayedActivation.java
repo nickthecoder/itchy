@@ -23,11 +23,9 @@ public class DelayedActivation extends Behaviour
     public void tick()
     {
         if (this.delay.isFinished()) {
-            getActor().deactivate();
             getActor().setBehaviour(this.behaviour);
             // Was deactivated and now activated so that the behaviour's onActivate method is called. 
             getActor().event( getActor().getStartEvent() );
-            getActor().activate();
         }
     }
 }

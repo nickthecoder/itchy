@@ -267,8 +267,6 @@ public abstract class Layer implements MouseListener
 
     public abstract void reset();
 
-    public abstract void deactivateAll();
-
     @Override
     public String toString()
     {

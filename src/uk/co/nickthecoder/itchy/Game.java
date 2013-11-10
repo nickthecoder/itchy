@@ -6,6 +6,7 @@
 package uk.co.nickthecoder.itchy;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -49,6 +50,8 @@ public class Game implements InputListener, QuitListener, MessageListener
      * {@link Actor#removeTag(String)}.
      */
     public final TagCollection<Actor> actorTags = new TagCollection<Actor>();
+
+    public List<Actor> actors = new LinkedList<Actor>();
 
     /**
      * Helps to implement a pause feature within your game. Typically, you will pause/unpause from
@@ -177,8 +180,8 @@ public class Game implements InputListener, QuitListener, MessageListener
     }
 
     /**
-     * Called soon after a Game is created and also
-     * when a Game creates another Game, and the second Game ends (reactivating the first one).
+     * Called soon after a Game is created and also when a Game creates another Game, and the second
+     * Game ends (reactivating the first one).
      */
     public void onActivate()
     {
@@ -193,8 +196,8 @@ public class Game implements InputListener, QuitListener, MessageListener
     }
 
     /**
-     * Overridden by sub classes of Game, when they want more than one {@link Layer}.
-     * Called from the end of Game's constructor.
+     * Overridden by sub classes of Game, when they want more than one {@link Layer}. Called from
+     * the end of Game's constructor.
      */
     protected void createLayers()
     {
@@ -217,8 +220,8 @@ public class Game implements InputListener, QuitListener, MessageListener
     }
 
     /**
-     * Typically, this is called immediately the Game object is created, usually from the 
-     * "main" method.
+     * Typically, this is called immediately the Game object is created, usually from the "main"
+     * method.
      * 
      * Do NOT override this method.
      */
@@ -232,8 +235,9 @@ public class Game implements InputListener, QuitListener, MessageListener
     }
 
     /**
-     * The same as {@link #start()}, but named scene is started instead of the default scene.
-     * This can be useful during development to jump to a particular scene.
+     * The same as {@link #start()}, but named scene is started instead of the default scene. This
+     * can be useful during development to jump to a particular scene.
+     * 
      * @param sceneName
      */
     public void start( String sceneName )
@@ -313,7 +317,9 @@ public class Game implements InputListener, QuitListener, MessageListener
 
     /**
      * Returns a lists of all the Actors tagged with a given tag.
-     * @param tag The tag to search for.
+     * 
+     * @param tag
+     *        The tag to search for.
      * @return A set of Actors meeting the criteria. An empty set if no actors meet the criteria.
      * @See {@link Actor#addTag(String)}
      */
@@ -664,6 +670,18 @@ public class Game implements InputListener, QuitListener, MessageListener
         return this.getSceneBehaviour().onMouseMove(mbe);
     }
 
+    public List<Actor> getActors()
+    {
+        return this.actors;
+    }
+    
+    private List<Actor> newActors = new ArrayList<Actor>();
+    
+    void add( Actor actor )
+    {
+        this.newActors.add(actor);
+    }
+    
     /**
      * Override this method to run code once per frame. The default behaviour is to call the current
      * scene's {@link SceneBehaviour}'s tick method and then all of the game's active Actor's tick
@@ -672,10 +690,16 @@ public class Game implements InputListener, QuitListener, MessageListener
     public void tick()
     {
         this.getSceneBehaviour().tick();
-        for (Actor actor : findActorsByTag("active")) {
-            actor.tick();
+        for (Iterator<Actor> i = this.actors.iterator(); i.hasNext();) {
+            Actor actor = i.next();
+            if (actor.isDead()) {
+                i.remove();
+            } else {
+                actor.tick();
+            }
         }
-
+        this.actors.addAll(this.newActors);
+        this.newActors.clear();
     }
 
     /**

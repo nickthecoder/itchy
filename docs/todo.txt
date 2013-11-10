@@ -44,7 +44,6 @@ Website indexer (butchers)
 
 
 
-
 Bed covers
 Glasses
 Vacuum bathroom
@@ -52,12 +51,20 @@ Vacuum bathroom
 TODO
 ====
 
+Create a Behaviour interface, and AbstractBehaviour
+
+Move tags from Actor to Behaviour
+
+Move collision strategy to actor
+
+
 Rename a scene from scene designer does not rename
     and doesn't update the ScenesEditor table
 
 Reloading a SceneBehaviour script causes the properties to double.
 
 Changing SceneBehaviour doesn't update the SceneBehaviourProperty components
+
 
 Create a Compound Behaviour, which has a ClassName array of other Behaviours, or maybe a Map of
     name->ClassName.
@@ -71,6 +78,14 @@ Create a Compound Behaviour, which has a ClassName array of other Behaviours, or
     That's nice because it can fire a change event, which will make the list of properties rebuild.
     We can use CompoundBehaviour in conjunction with ScriptedBehaviour, and therefore no extra
     code for compound js behaviours.
+
+    Problem ?
+    When looking for collisions, it fine using brute force, as we start off by iterating over each Behaviour with that tag.
+    But when using Neighbourhood, we start with the actors. Ok, we can have "hadTag" on Behaviour, and CompoundBehaviour will
+    do the compound thing. 
+
+    Problem ?
+    We only want one collision strategy per Actor, so it can't live on Behaviour any more.
 
     Problem!
         As tags are on Actor, searching for the nearest "shootable" will return an actor, but it's

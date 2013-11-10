@@ -56,16 +56,4 @@ public class TagMembership<M>
             this.tagCollection.remove(tag, this.member);
         }
     }
-
-    public void removeAllExcept( String except )
-    {
-        for (Iterator<String> i = this.tags.iterator(); i.hasNext();) {
-            String tag = i.next();
-            if (!except.equals(tag)) {
-                i.remove();
-                this.tagCollection.remove(tag, this.member);
-            }
-        }
-    }
-
 }

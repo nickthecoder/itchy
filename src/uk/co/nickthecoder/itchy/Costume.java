@@ -59,7 +59,7 @@ public class Costume
         this.fontChoices = new HashMap<String, List<FontResource>>();
         this.animationChoices = new HashMap<String, List<AnimationResource>>();
     }
-
+    
     public ClassName getPropertiesClassName()
     {
         return this.propertiesClassName;

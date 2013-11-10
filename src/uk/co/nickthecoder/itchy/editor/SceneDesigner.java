@@ -1457,7 +1457,6 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.highlightActor.moveTo(this.currentActor);
         this.glassLayer.addTop(this.highlightActor);
         this.highlightActor.setBehaviour(new Follower(this.currentActor));
-        this.highlightActor.activate();
 
         for (ScaleHandleBehaviour be : this.scaleHandles) {
             be.setTarget(this.currentActor);
@@ -1504,7 +1503,6 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.rotateHandle = new RotateHandleBehaviour();
         rotateActor.setBehaviour(this.rotateHandle);
         rotateActor.getAppearance().setAlpha(0);
-        rotateActor.activate();
         this.glassLayer.addTop(rotateActor);
         this.handles.add(this.rotateHandle);
 
@@ -1513,7 +1511,6 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.headingHandle = new HeadingHandleBehaviour();
         headingActor.setBehaviour(this.headingHandle);
         headingActor.getAppearance().setAlpha(0);
-        headingActor.activate();
         this.glassLayer.addTop(headingActor);
         this.handles.add(this.headingHandle);
 
@@ -1524,7 +1521,6 @@ public class SceneDesigner implements MouseListener, KeyListener
                 ScaleHandleBehaviour behaviour = new ScaleHandleBehaviour(dx, dy);
                 scaleHandle.setBehaviour(behaviour);
                 scaleHandle.getAppearance().setAlpha(0);
-                scaleHandle.activate();
 
                 this.scaleHandles.add(behaviour);
                 this.handles.add(behaviour);

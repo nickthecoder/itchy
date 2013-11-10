@@ -380,7 +380,7 @@ public class Tetra extends Game
             .speed(2, 4)
             .fade(3)
             .pose("fragment")
-            .createActor().activate();
+            .createActor();
 
         actor.kill();
     }
@@ -494,7 +494,6 @@ public class Tetra extends Game
             for (int i = 0; i < PIECES; i++) {
                 this.actors[i] = new Actor(Tetra.this.resources.getCostume(names[n]));
                 Tetra.this.mainLayer.addTop(this.actors[i]);
-                this.actors[i].activate();
             }
             update();
 

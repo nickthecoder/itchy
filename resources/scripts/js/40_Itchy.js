@@ -53,16 +53,12 @@ BehaviourScript = Class({
         },
     },
     
+    onBirth : function() {},
+
+    onDeath : function() {},
+
     tick : function() {},
-    
-    onAttach : function() {},
-    
-    onDetach : function() {}, 
-    
-    onActivate : function() {},
-    
-    onDeactivate : function() {},
-    
+        
     onMouseDown: function( mouseEvent ) { return false; },
     
     onMouseUp: function( mouseEvent ) { return false; },
@@ -82,9 +78,7 @@ BehaviourScript = Class({
 
     releaseMouse: function() {
         this.actor.getLayer().releaseMouse( this.behaviour );
-    },
-    
-    onKill : function() {},
+    }
     
 });
 

@@ -35,7 +35,7 @@ public class Shield extends Behaviour implements Shootable
     }
 
     @Override
-    public void onKill()
+    public void onDeath()
     {
         if (this.collisionStrategy != null) {
             this.collisionStrategy.remove();

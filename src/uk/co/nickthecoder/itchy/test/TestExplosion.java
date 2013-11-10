@@ -6,6 +6,7 @@
 package uk.co.nickthecoder.itchy.test;
 
 import uk.co.nickthecoder.itchy.Behaviour;
+import uk.co.nickthecoder.itchy.NullBehaviour;
 import uk.co.nickthecoder.itchy.extras.Explosion;
 import uk.co.nickthecoder.itchy.util.Property;
 
@@ -84,8 +85,8 @@ public class TestExplosion extends Behaviour
     @Override
     public void tick()
     {
-        test0().createActor().activate();
-        this.getActor().deactivate();
+        test0().createActor();
+        this.getActor().setBehaviour(new NullBehaviour());
     }
 
     private Explosion test0()

@@ -82,32 +82,7 @@ public class ScriptedBehaviour extends Behaviour implements MouseListener
     {
         return this.className;
     }
-
-
-    @Override
-    public void onAttach()
-    {
-        this.language.onAttach(this);
-    }
-
-    @Override
-    public void onDetach()
-    {
-        this.language.onDetach(this);
-    }
-
-    @Override
-    public void onActivate()
-    {
-        this.language.onActivate(this);
-    }
-
-    @Override
-    public void onDeactivate()
-    {
-        this.language.onDeactivate(this);
-    }
-
+    
     @Override
     public void onMessage( String message )
     {
@@ -115,9 +90,14 @@ public class ScriptedBehaviour extends Behaviour implements MouseListener
     }
 
     @Override
-    public void onKill()
+    public void onBirth()
     {
-        this.language.onKill(this);
+        this.language.onBirth(this);
+    }
+    @Override
+    public void onDeath()
+    {
+        this.language.onDeath(this);
     }
 
     @Override

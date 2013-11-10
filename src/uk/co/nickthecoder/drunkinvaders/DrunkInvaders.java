@@ -153,7 +153,6 @@ public class DrunkInvaders extends Game
             actor.setBehaviour(this.info);
             actor.moveTo(40, 460);
             this.glassLayer.addTop(actor);
-            actor.activate();
 
         } else {
             this.info.getActor().kill();

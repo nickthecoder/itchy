@@ -190,7 +190,6 @@ public class SceneTransition
             }
         });
         this.actor.setAnimation(this.animation);
-        this.actor.activate();
     }
 
     /**

@@ -87,14 +87,6 @@ public class CompoundLayer extends Layer
             child.reset();
         }        
     }
-    
-    @Override
-    public void deactivateAll()
-    {
-        for (Layer child : this.children) {
-            child.deactivateAll();
-        }
-    }
 
     @Override
     public void destroy()
@@ -105,7 +97,7 @@ public class CompoundLayer extends Layer
         }
         this.clear();
     }
-
+    
     @Override
     public String toString()
     {
@@ -118,5 +110,5 @@ public class CompoundLayer extends Layer
         result.append("}\n");
         return result.toString();
     }
-
+    
 }

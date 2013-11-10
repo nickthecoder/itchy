@@ -29,7 +29,7 @@ public class PickLevel extends Button
     public RGBA shadowColor = new RGBA(0, 0, 0);
 
     @Override
-    public void onActivate()
+    public void onAttach()
     {
         if (DrunkInvaders.game.completedLevel(this.levelNumber)) {
             this.getActor().event("completed");

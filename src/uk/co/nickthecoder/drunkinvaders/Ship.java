@@ -57,9 +57,9 @@ public class Ship extends Bouncy implements Shootable
     private double shieldStrength = 1.0;
 
     @Override
-    public void init()
+    public void onBirth()
     {
-        super.init();
+        super.onBirth();
 
         this.mass = 100000000000.0;
 
@@ -88,7 +88,7 @@ public class Ship extends Bouncy implements Shootable
     }
 
     @Override
-    public void onKill()
+    public void onDeath()
     {
         if (this.collisionStrategy != null) {
             this.collisionStrategy.remove();
@@ -233,7 +233,6 @@ public class Ship extends Bouncy implements Shootable
         bullet.moveForwards(10);
         bullet.setBehaviour(new Bullet());
         bullet.addTag("killable");
-        bullet.activate();
 
         this.recharge = TIMER_DURATION;
     }
@@ -250,7 +249,6 @@ public class Ship extends Bouncy implements Shootable
             .message("death").font("vera", 18).color(SPEECH_COLOR).bubble("speechBubble2")
             .offset(0, 40).margin(10, 10, 20, 10).direction(0)
             .createActor();
-        yell.activate();
         yell.deathEvent(this.getActor().getCostume(), "yell");
 
         new Explosion(this.getActor())
@@ -259,7 +257,7 @@ public class Ship extends Bouncy implements Shootable
             .fade(.7)
             .spin(-0.2, 0.2)
             .pose("fragment")
-            .createActor().activate();
+            .createActor();
 
         new Explosion(this.getActor())
             .projectiles(40)
@@ -267,7 +265,7 @@ public class Ship extends Bouncy implements Shootable
             .speed(1, 3)
             .fade(1.5)
             .pose("pixel")
-            .createActor().activate();
+            .createActor();
 
         this.deathEvent("death");
     }
