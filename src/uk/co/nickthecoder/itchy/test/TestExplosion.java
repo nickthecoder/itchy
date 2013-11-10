@@ -5,12 +5,12 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.test;
 
-import uk.co.nickthecoder.itchy.Behaviour;
+import uk.co.nickthecoder.itchy.AbstractBehaviour;
 import uk.co.nickthecoder.itchy.NullBehaviour;
 import uk.co.nickthecoder.itchy.extras.Explosion;
 import uk.co.nickthecoder.itchy.util.Property;
 
-public class TestExplosion extends Behaviour
+public class TestExplosion extends AbstractBehaviour
 {
     @Property(label = "Test ID")
     public int id;

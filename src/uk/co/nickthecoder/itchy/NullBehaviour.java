@@ -10,7 +10,7 @@ package uk.co.nickthecoder.itchy;
 /**
  * Does nothing - useful for scenery, and other game objects which don't do anything!
  */
-public final class NullBehaviour extends Behaviour
+public final class NullBehaviour extends AbstractBehaviour
 {
 
     /**

@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
+import uk.co.nickthecoder.itchy.AbstractBehaviour;
 import uk.co.nickthecoder.itchy.Behaviour;
 import uk.co.nickthecoder.itchy.MouseListener;
 import uk.co.nickthecoder.itchy.util.AbstractProperty;
@@ -17,7 +18,7 @@ import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 
-public class ScriptedBehaviour extends Behaviour implements MouseListener
+public class ScriptedBehaviour extends AbstractBehaviour implements MouseListener
 {
     private final static HashMap<String, List<AbstractProperty<Behaviour, ?>>> allProperties = new HashMap<String, List<AbstractProperty<Behaviour, ?>>>();
 

@@ -54,7 +54,7 @@ public class BruteForceCollisionStrategy implements CollisionStrategy
     {
         Set<Behaviour> results = new HashSet<Behaviour>();
         for (String tag : includeTags) {
-            for (Behaviour otherBehaviour : Behaviour.allByTag(tag)) {
+            for (Behaviour otherBehaviour : AbstractBehaviour.allByTag(tag)) {
                 Actor other = otherBehaviour.getActor();
                 
                 if ((other != source) && (!exclude(otherBehaviour, excludeTags))) {
@@ -74,7 +74,7 @@ public class BruteForceCollisionStrategy implements CollisionStrategy
     {
         Set<Behaviour> results = new HashSet<Behaviour>();
         for (String tag : includeTags) {
-            for (Behaviour otherBehaviour : Behaviour.allByTag(tag)) {
+            for (Behaviour otherBehaviour : AbstractBehaviour.allByTag(tag)) {
                 Actor other = otherBehaviour.getActor();
 
                 if ((other != source) && (!exclude(otherBehaviour, excludeTags))) {

@@ -148,7 +148,7 @@ public class Pause
     {
     }
 
-    private class PausedBehaviour extends Behaviour
+    private class PausedBehaviour extends AbstractBehaviour
     {
         private Behaviour oldBehaviour;
 
@@ -163,7 +163,7 @@ public class Pause
         }
 
         @Override
-        protected void animateAndTick()
+        public void animateAndTick()
         {
             // Do nothing
         }

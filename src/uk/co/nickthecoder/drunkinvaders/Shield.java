@@ -5,12 +5,12 @@
  ******************************************************************************/
 package uk.co.nickthecoder.drunkinvaders;
 
+import uk.co.nickthecoder.itchy.AbstractBehaviour;
 import uk.co.nickthecoder.itchy.Actor;
-import uk.co.nickthecoder.itchy.Behaviour;
 import uk.co.nickthecoder.itchy.util.Tag;
 
 @Tag(names = { "killable", "shootable" })
-public class Shield extends Behaviour implements Shootable
+public class Shield extends AbstractBehaviour implements Shootable
 {
     public Shield()
     {

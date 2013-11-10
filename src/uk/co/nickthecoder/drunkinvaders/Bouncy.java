@@ -5,11 +5,12 @@
  ******************************************************************************/
 package uk.co.nickthecoder.drunkinvaders;
 
+import uk.co.nickthecoder.itchy.AbstractBehaviour;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Behaviour;
 import uk.co.nickthecoder.itchy.util.Property;
 
-public class Bouncy extends Behaviour
+public class Bouncy extends AbstractBehaviour
 {
     public static final String[] BOUNCY_LIST = new String[] { "bouncy" };
 

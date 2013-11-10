@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import uk.co.nickthecoder.itchy.AbstractBehaviour;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.ActorsLayer;
 import uk.co.nickthecoder.itchy.Appearance;
@@ -1534,7 +1535,7 @@ public class SceneDesigner implements MouseListener, KeyListener
 
     }
 
-    abstract class HandleBehaviour extends Behaviour
+    abstract class HandleBehaviour extends AbstractBehaviour
     {
         Actor target;
 

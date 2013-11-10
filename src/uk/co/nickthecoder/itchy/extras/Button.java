@@ -5,7 +5,7 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.extras;
 
-import uk.co.nickthecoder.itchy.Behaviour;
+import uk.co.nickthecoder.itchy.AbstractBehaviour;
 import uk.co.nickthecoder.itchy.MouseListener;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
@@ -25,7 +25,7 @@ import uk.co.nickthecoder.jame.event.MouseMotionEvent;
  * enabled. i.e. call {@link uk.co.nickthecoder.itchy.ActorsLayer#enableMouseListener} when
  * initialising your Game object.
  */
-public abstract class Button extends Behaviour implements MouseListener
+public abstract class Button extends AbstractBehaviour implements MouseListener
 {
 
     private boolean down = false;

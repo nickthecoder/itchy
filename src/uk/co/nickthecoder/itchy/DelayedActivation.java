@@ -7,7 +7,7 @@ package uk.co.nickthecoder.itchy;
 
 import uk.co.nickthecoder.itchy.extras.Timer;
 
-public class DelayedActivation extends Behaviour
+public class DelayedActivation extends AbstractBehaviour
 {
     private Timer delay;
 

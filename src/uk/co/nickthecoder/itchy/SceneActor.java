@@ -121,7 +121,7 @@ public abstract class SceneActor implements Cloneable
         } else {
 
             try {
-                actualBehaviour = Behaviour.createBehaviour(resources, behaviourClassName);
+                actualBehaviour = AbstractBehaviour.createBehaviour(resources, behaviourClassName);
 
             } catch (Exception e) {
                 e.printStackTrace();

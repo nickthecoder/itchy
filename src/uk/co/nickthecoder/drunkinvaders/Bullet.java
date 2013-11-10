@@ -7,11 +7,12 @@
  ******************************************************************************/
 package uk.co.nickthecoder.drunkinvaders;
 
+import uk.co.nickthecoder.itchy.AbstractBehaviour;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Behaviour;
 import uk.co.nickthecoder.itchy.util.Property;
 
-public class Bullet extends Behaviour implements Shootable
+public class Bullet extends AbstractBehaviour implements Shootable
 {
     @Property(label="Speed")
     public double speed = 5.0;

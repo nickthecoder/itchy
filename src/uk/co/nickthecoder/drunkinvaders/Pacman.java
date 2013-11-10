@@ -7,12 +7,13 @@
  ******************************************************************************/
 package uk.co.nickthecoder.drunkinvaders;
 
+import uk.co.nickthecoder.itchy.AbstractBehaviour;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Behaviour;
 import uk.co.nickthecoder.itchy.util.Tag;
 
 @Tag(names = {"deadly"})
-public class Pacman extends Behaviour
+public class Pacman extends AbstractBehaviour
 {
 
     @Override

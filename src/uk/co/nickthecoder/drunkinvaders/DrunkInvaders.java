@@ -7,6 +7,7 @@ package uk.co.nickthecoder.drunkinvaders;
 
 import java.text.DecimalFormat;
 
+import uk.co.nickthecoder.itchy.AbstractBehaviour;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.ActorCollisionStrategy;
 import uk.co.nickthecoder.itchy.Behaviour;
@@ -137,7 +138,7 @@ public class DrunkInvaders extends Game
 
             final MultiLineTextPose pose = new MultiLineTextPose(this.resources.getFont("vera"), 16);
 
-            this.info = new Behaviour()
+            this.info = new AbstractBehaviour()
             {
                 @Override
                 public void tick()

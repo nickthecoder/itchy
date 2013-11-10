@@ -5,12 +5,12 @@
  ******************************************************************************/
 package uk.co.nickthecoder.drunkinvaders;
 
+import uk.co.nickthecoder.itchy.AbstractBehaviour;
 import uk.co.nickthecoder.itchy.Actor;
-import uk.co.nickthecoder.itchy.Behaviour;
 import uk.co.nickthecoder.itchy.Pose;
 import uk.co.nickthecoder.itchy.util.Property;
 
-public class ShieldFactory extends Behaviour
+public class ShieldFactory extends AbstractBehaviour
 {
     @Property(label = "Width")
     public int width = 6;

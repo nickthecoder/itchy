@@ -55,9 +55,6 @@ Create a Behaviour interface, and AbstractBehaviour
 
 Actor,startEvent isn't elegant - its only used by the editor, so should be on scene actor and sceneactorbehaviour?
 
-Make NullBehaviour have a singleton
-
-
 Rename a scene from scene designer does not rename
     and doesn't update the ScenesEditor table
 

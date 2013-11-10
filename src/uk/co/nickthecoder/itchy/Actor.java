@@ -580,7 +580,7 @@ public class Actor implements PropertySubject<Actor>
         Behaviour closestBehaviour = null;
         double closestDistance = Double.MAX_VALUE;
 
-        for (Behaviour otherBehaviour : Behaviour.allByTag(tag)) {
+        for (Behaviour otherBehaviour : AbstractBehaviour.allByTag(tag)) {
             Actor other = otherBehaviour.getActor();
             double distance = other.distanceTo(x, y);
             if (distance < closestDistance) {
@@ -600,7 +600,7 @@ public class Actor implements PropertySubject<Actor>
         Behaviour closestBehaviour = null;
         double closestDistance = Double.MAX_VALUE;
 
-        for (Behaviour otherBehaviour : Behaviour.allByTag(tag)) {
+        for (Behaviour otherBehaviour : AbstractBehaviour.allByTag(tag)) {
             Actor other = otherBehaviour.getActor();
             if (other != this) {
                 double distance = other.distanceTo(this);

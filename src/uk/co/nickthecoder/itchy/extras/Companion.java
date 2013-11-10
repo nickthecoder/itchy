@@ -5,8 +5,8 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.extras;
 
+import uk.co.nickthecoder.itchy.AbstractBehaviour;
 import uk.co.nickthecoder.itchy.Actor;
-import uk.co.nickthecoder.itchy.Behaviour;
 import uk.co.nickthecoder.itchy.Costume;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Pose;
@@ -20,7 +20,7 @@ import uk.co.nickthecoder.jame.RGBA;
  * Companions will typically share the same {@link Costume} as their source, but will use a
  * different {@link Pose}.
  */
-public abstract class Companion<T extends Companion<T>> extends Behaviour
+public abstract class Companion<T extends Companion<T>> extends AbstractBehaviour
 {
     protected Actor source;
 
@@ -357,7 +357,7 @@ public abstract class Companion<T extends Companion<T>> extends Behaviour
         } else {
             actor.getAppearance().setDirection(actor.getAppearance().getPose().getDirection());
         }
-        
+
         actor.setHeading(this.heading);
         actor.moveTo(this.source);
         actor.moveForwards(this.offsetForwards * this.scale, this.offsetSidewards * this.scale);
