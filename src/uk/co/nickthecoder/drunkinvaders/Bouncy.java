@@ -28,54 +28,54 @@ public class Bouncy extends Behaviour
     public void onAttach()
     {
         super.onAttach();
-        this.getActor().addTag("bouncy");
+        getActor().addTag("bouncy");
     }
 
     @Override
     public void onDetach()
     {
         super.onDetach();
-        this.getActor().removeTag("bouncy");
+        getActor().removeTag("bouncy");
     }
 
     @Override
     public void onBirth()
     {
         super.onBirth();
-        this.collisionStrategy = DrunkInvaders.game.createCollisionStrategy(this.getActor());
+        getActor().setCollisionStrategy(DrunkInvaders.game.createCollisionStrategy(getActor()));
     }
 
     @Override
     public void onDeath()
     {
         super.onDeath();
-        this.resetCollisionStrategy();
+        getActor().resetCollisionStrategy();
     }
 
     @Override
     public void tick()
     {
-        this.getActor().moveBy(this.vx, this.vy);
+        getActor().moveBy(this.vx, this.vy);
 
-        double radius = this.radius * this.getActor().getAppearance().getScale();
+        double radius = this.radius * getActor().getAppearance().getScale();
 
-        if ((this.vy) > 0 && (this.getActor().getY() + radius > 480)) {
+        if ((this.vy) > 0 && (getActor().getY() + radius > 480)) {
             this.vy = -this.vy;
         }
-        if ((this.vx) > 0 && (this.getActor().getX() + radius > 640)) {
+        if ((this.vx) > 0 && (getActor().getX() + radius > 640)) {
             this.vx = -this.vx;
         }
-        if ((this.vy) < 0 && (this.getActor().getY() - radius < 0)) {
+        if ((this.vy) < 0 && (getActor().getY() - radius < 0)) {
             this.vy = -this.vy;
         }
-        if ((this.vx) < 0 && (this.getActor().getX() - radius < 0)) {
+        if ((this.vx) < 0 && (getActor().getX() - radius < 0)) {
             this.vx = -this.vx;
         }
 
-        this.collisionStrategy.update();
+        getActor().getCollisionStrategy().update();
 
-        for (Actor other : pixelOverlap(BOUNCY_LIST)) {
-            collide(this.getActor(), other);
+        for (Actor other : getActor().pixelOverlap(BOUNCY_LIST)) {
+            collide(getActor(), other);
         }
 
     }

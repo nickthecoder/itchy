@@ -100,32 +100,31 @@ public class Projectile extends Companion<Projectile>
     @Override
     public void tick()
     {
-        double ox = this.getActor().getX();
-        double oy = this.getActor().getY();
+        double ox = getActor().getX();
+        double oy = getActor().getY();
 
-        this.getActor().moveBy(this.vx, this.vy);
-        this.getActor().moveForwards(this.speedForwards, this.speedSidewards);
+        getActor().moveBy(this.vx, this.vy);
+        getActor().moveForwards(this.speedForwards, this.speedSidewards);
 
         // Turn the image in the direction of movement.
         if ((this.spin == 0) && this.rotate && (this.gravity != 0)) {
-            double dx = this.getActor().getX() - ox;
-            double dy = this.getActor().getY() - oy;
+            double dx = getActor().getX() - ox;
+            double dy = getActor().getY() - oy;
             double angle = Math.atan2(dy, dx);
-            this.getActor().getAppearance().setDirectionRadians(angle);
+            getActor().getAppearance().setDirectionRadians(angle);
         }
 
         this.vy += this.gravity;
 
-        this.getActor().getAppearance().adjustAlpha(-this.fade);
-        this.getActor().getAppearance().adjustDirection(this.spin);
+        getActor().getAppearance().adjustAlpha(-this.fade);
+        getActor().getAppearance().adjustDirection(this.spin);
 
         if (this.growFactor != 1) {
-            this.getActor().getAppearance().setScale(
-                this.getActor().getAppearance().getScale() * this.growFactor);
+            getActor().getAppearance().setScale(getActor().getAppearance().getScale() * this.growFactor);
         }
 
-        if ((this.lifeTicks-- < 0) || (this.getActor().getAppearance().getAlpha() <= 0)) {
-            this.getActor().kill();
+        if ((this.lifeTicks-- < 0) || (getActor().getAppearance().getAlpha() <= 0)) {
+            getActor().kill();
         }
     }
 

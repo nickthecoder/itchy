@@ -108,7 +108,7 @@ public abstract class ActorsLayer extends Layer
     @Override
     public void clear()
     {
-        for (Actor actor : new ArrayList<Actor>(this.getActors())) {
+        for (Actor actor : new ArrayList<Actor>(getActors())) {
             actor.kill();
         }
         if (this.actorMouseListeners != null) {

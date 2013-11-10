@@ -81,14 +81,14 @@ public class Mothership extends Alien
 
         Costume costume = DrunkInvaders.game.resources.getCostume(this.costumeName);
         Actor alien = new Actor(costume);
-        alien.setDirection(this.getActor().getAppearance().getDirection());
+        alien.setDirection(getActor().getAppearance().getDirection());
         Alien alienBehaviour = new Alien();
         alienBehaviour.fireOnceEvery = this.childFireOnceEvery;
         alien.setBehaviour(alienBehaviour);
 
         alienBehaviour.vx = Util.randomBetween(-0.2, 0.2) + this.vx;
-        alien.moveTo(this.getActor().getX(), this.getActor().getY());
-        if (this.getActor().getY() < 200) {
+        alien.moveTo(getActor().getX(), getActor().getY());
+        if (getActor().getY() < 200) {
             alien.moveForwards(5, 0);
             alienBehaviour.vy = this.vy + 1;
         } else {
@@ -96,7 +96,7 @@ public class Mothership extends Alien
             alienBehaviour.vy = this.vy - 1;
         }
 
-        this.getActor().getLayer().addTop(alien);
+        getActor().getLayer().addTop(alien);
         alien.event("dropped");
     }
 

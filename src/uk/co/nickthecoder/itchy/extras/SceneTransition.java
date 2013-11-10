@@ -162,6 +162,7 @@ public class SceneTransition
         ImagePose pose = new ImagePose(oldImage, 0, 0);
 
         this.actor = new Actor(pose);
+        this.actor.setBehaviour(null);
     }
 
     /**

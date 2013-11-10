@@ -65,7 +65,7 @@ public class TestProjectiles extends Behaviour
         } else if (this.id == 1) {
             test1().createActor();
         }
-        this.getActor().setBehaviour(new NullBehaviour());
+        getActor().setBehaviour(new NullBehaviour());
     }
 
     private Projectile test0()

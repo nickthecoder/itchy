@@ -6,8 +6,8 @@
 package uk.co.nickthecoder.itchy.gui;
 
 import uk.co.nickthecoder.itchy.Actor;
-import uk.co.nickthecoder.itchy.InputListener;
 import uk.co.nickthecoder.itchy.GraphicsContext;
+import uk.co.nickthecoder.itchy.InputListener;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Pose;
 import uk.co.nickthecoder.jame.RGBA;
@@ -275,12 +275,12 @@ public class GuiPose extends RootContainer implements Pose, InputListener
     }
 
     private Component localFocus;
-    
+
     public void show()
     {
         Itchy.getGame().showWindow(this);
-        if ((localFocus != null) && (localFocus.getRoot() == this)) {
-            localFocus.focus();
+        if ((this.localFocus != null) && (this.localFocus.getRoot() == this)) {
+            this.localFocus.focus();
         } else {
             this.focus();
         }
@@ -301,7 +301,7 @@ public class GuiPose extends RootContainer implements Pose, InputListener
     public void destroy()
     {
         this.hide();
-        this.getActor().kill();
+        getActor().kill();
     }
 
     @Override
@@ -327,7 +327,7 @@ public class GuiPose extends RootContainer implements Pose, InputListener
             int dx = event.x - this.dragStartX;
             int dy = event.y - this.dragStartY;
 
-            this.getActor().moveBy(dx, dy);
+            getActor().moveBy(dx, dy);
             // this.dragStartX = event.x;
             // this.dragStartY = event.y;
         }

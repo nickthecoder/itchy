@@ -17,10 +17,9 @@ import uk.co.nickthecoder.jame.event.MouseMotionEvent;
  * <p>
  * The button will fire three events, "mouseDown", "mouseUp" and "click". "mouseDown" is fired when
  * the mouse is pressed within the actor. The "mouseUp" is fired when the mouse moves outside of the
- * actor while the button is still down. "mouseUp" and "click" are fired when the mouse button
- * is released within the button.
- * In addition, events "hoverOver" and "hoverOut" are also fired when the mouse moves over the
- * button without being clicked.
+ * actor while the button is still down. "mouseUp" and "click" are fired when the mouse button is
+ * released within the button. In addition, events "hoverOver" and "hoverOut" are also fired when
+ * the mouse moves over the button without being clicked.
  * <p>
  * For the button to work, the layer that the actor is drawn on must have had its mouse listener
  * enabled. i.e. call {@link uk.co.nickthecoder.itchy.ActorsLayer#enableMouseListener} when
@@ -43,7 +42,7 @@ public abstract class Button extends Behaviour implements MouseListener
     @Override
     public boolean onMouseDown( MouseButtonEvent event )
     {
-        if (this.getActor().hitting(event.x, event.y)) {
+        if (getActor().hitting(event.x, event.y)) {
             onDown();
             this.down = true;
             this.inside = true;
@@ -62,7 +61,7 @@ public abstract class Button extends Behaviour implements MouseListener
             if (this.inside) {
                 onUp();
             }
-            if (this.getActor().hitting(event.x, event.y)) {
+            if (getActor().hitting(event.x, event.y)) {
                 onClick();
             }
             this.down = false;
@@ -74,7 +73,7 @@ public abstract class Button extends Behaviour implements MouseListener
     @Override
     public boolean onMouseMove( MouseMotionEvent event )
     {
-        boolean nowInside = this.getActor().hitting(event.x, event.y);
+        boolean nowInside = getActor().hitting(event.x, event.y);
 
         if (nowInside != this.inside) {
             this.inside = nowInside;

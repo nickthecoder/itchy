@@ -40,10 +40,10 @@ Ship = Class({
         if (this.actor.getY() < -10) this.actor.moveBy(0,620);
         if (this.actor.getY() > 610) this.actor.moveBy(0,-620);
         
-        if ( ! this.behaviour.pixelOverlap("deadly").isEmpty() ) {
+        if ( ! this.actor.pixelOverlap("deadly").isEmpty() ) {
             this.die();
         }
-        var i = this.behaviour.pixelOverlap("shootable").iterator();
+        var i = this.actor.pixelOverlap("shootable").iterator();
         while (i.hasNext()) {
             i.next().getBehaviour().behaviourScript.shot(this);
             this.actor.kill();

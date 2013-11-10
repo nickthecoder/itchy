@@ -1,9 +1,7 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0 which accompanies this
+ * distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.drunkinvaders;
 
@@ -11,7 +9,7 @@ import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Behaviour;
 import uk.co.nickthecoder.itchy.util.Tag;
 
-@Tag(names = {"killable","shootable"})
+@Tag(names = { "killable", "shootable" })
 public class Shield extends Behaviour implements Shootable
 {
     public Shield()
@@ -22,25 +20,16 @@ public class Shield extends Behaviour implements Shootable
     public void onAttach()
     {
         super.onAttach();
-        
-        this.collisionStrategy = DrunkInvaders.game.createCollisionStrategy(this.getActor());
+
+        getActor().setCollisionStrategy(DrunkInvaders.game.createCollisionStrategy(getActor()));
     }
-    
+
     @Override
     public void onDetach()
     {
         super.onDetach();
-        
-        resetCollisionStrategy();
-    }
 
-    @Override
-    public void onDeath()
-    {
-        if (this.collisionStrategy != null) {
-            this.collisionStrategy.remove();
-            this.collisionStrategy = null;
-        }
+        getActor().resetCollisionStrategy();
     }
 
     @Override

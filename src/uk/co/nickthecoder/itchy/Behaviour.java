@@ -8,7 +8,6 @@ package uk.co.nickthecoder.itchy;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
 
 import javax.script.ScriptException;
 
@@ -57,8 +56,6 @@ public abstract class Behaviour implements MessageListener, Cloneable, PropertyS
 
     private Actor actor;
 
-    public CollisionStrategy collisionStrategy = BruteForceCollisionStrategy.singleton;
-
     public Behaviour()
     {
     }
@@ -70,6 +67,10 @@ public abstract class Behaviour implements MessageListener, Cloneable, PropertyS
     public void onBirth()
     {
         // Do nothing
+    }
+
+    public void onDeath()
+    {
     }
 
     @Override
@@ -111,14 +112,8 @@ public abstract class Behaviour implements MessageListener, Cloneable, PropertyS
 
     public void attach( Actor actor )
     {
-        assert ((this.getActor() == null) || (this.getActor() == actor));
-        Actor oldActor = this.actor;
-
+        assert ((getActor() == null) || (getActor() == actor));
         this.actor = actor;
-
-        if (oldActor == null) {
-            this.onBirth();
-        }
 
         Tag tags = this.getClass().getAnnotation(Tag.class);
         if (tags != null) {
@@ -146,60 +141,24 @@ public abstract class Behaviour implements MessageListener, Cloneable, PropertyS
         return this.actor;
     }
 
-    public void resetCollisionStrategy()
-    {
-        this.collisionStrategy.remove();
-        this.collisionStrategy = BruteForceCollisionStrategy.singleton;
-    }
-
-    public Set<Actor> pixelOverlap( String tag )
-    {
-        return this.collisionStrategy.pixelOverlap(this.getActor(), new String[] { tag }, null);
-    }
-
-    public Set<Actor> pixelOverlap( String... tags )
-    {
-        return this.collisionStrategy.pixelOverlap(this.getActor(), tags, null);
-    }
-
-    public Set<Actor> pixelOverlap( String[] including, String[] excluding )
-    {
-        return this.collisionStrategy.pixelOverlap(this.getActor(), including, excluding);
-    }
-
-    public Set<Actor> overlapping( String tag )
-    {
-        return this.collisionStrategy.overlapping(this.getActor(), new String[] { tag }, null);
-    }
-
-    public Set<Actor> overlapping( String... tags )
-    {
-        return this.collisionStrategy.overlapping(this.getActor(), tags, null);
-    }
-
-    public Set<Actor> overlapping( String[] including, String[] excluding )
-    {
-        return this.collisionStrategy.overlapping(this.getActor(), including, excluding);
-    }
-
     public void play( String soundName )
     {
-        this.getActor().play(soundName);
+        getActor().play(soundName);
     }
 
     public void event( String poseName )
     {
-        this.getActor().event(poseName);
+        getActor().event(poseName);
     }
 
     public void endEvent( String poseName )
     {
-        this.getActor().endEvent(poseName);
+        getActor().endEvent(poseName);
     }
 
     public void deathEvent( String poseName )
     {
-        this.getActor().deathEvent(poseName);
+        getActor().deathEvent(poseName);
     }
 
     /**
@@ -230,11 +189,6 @@ public abstract class Behaviour implements MessageListener, Cloneable, PropertyS
         onMessage(message);
     }
 
-    public void onDeath()
-    {
-        resetCollisionStrategy();
-    }
-
     /**
      * Called by Actor.tick, once every frame, for every actor in the game. If the actor has an
      * animation, it plays the next frame. Then calls this.tick which is where the real work is one.
@@ -245,20 +199,20 @@ public abstract class Behaviour implements MessageListener, Cloneable, PropertyS
      */
     protected void animateAndTick()
     {
-        Animation animation = this.getActor().getAnimation();
+        Animation animation = getActor().getAnimation();
         if (animation != null) {
 
-            animation.tick(this.getActor());
+            animation.tick(getActor());
             if (animation.isFinished()) {
-                this.getActor().setAnimation(null);
-                if (this.getActor().isDying()) {
-                    this.getActor().kill();
+                getActor().setAnimation(null);
+                if (getActor().isDying()) {
+                    getActor().kill();
                     return;
                 }
             }
         }
-        if (!this.getActor().isDead()) {
-            this.tick();
+        if (!getActor().isDead()) {
+            tick();
         }
     }
 

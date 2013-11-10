@@ -25,7 +25,7 @@ Player = new Class({
             this.actor.moveTo( x, this.actor.getY() );
             
             // Have we hit anything deadly? (i.e. any actor that has : addTag("deadly") - see Drop.js).
-            if ( this.behaviour.pixelOverlap("deadly").size() > 0 ) {
+            if ( this.actor.pixelOverlap("deadly").size() > 0 ) {
             
                 // Create a skeleton below the sheep, which will become visible when the sheep fades out.
                 new itchy.extras.Follower(this.actor).followRotatation().pose("bones").adjustZOrder(-1).createActor();

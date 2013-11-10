@@ -23,8 +23,8 @@ public class Follower extends Companion<Follower>
     }
 
     /**
-     * Ensures that the follower always have the same direction as the object its following?
-     * When rotate is not called, the Follower's direction will not be changed.
+     * Ensures that the follower always have the same direction as the object its following? When
+     * rotate is not called, the Follower's direction will not be changed.
      */
     public Follower followRotatation()
     {
@@ -40,12 +40,12 @@ public class Follower extends Companion<Follower>
 
     private void follow()
     {
-        this.getActor().moveTo(this.source);
-        this.getActor().moveForwards(this.offsetForwards, this.offsetSidewards);
-        this.getActor().moveBy(this.offsetX, this.offsetY);
-        
+        getActor().moveTo(this.source);
+        getActor().moveForwards(this.offsetForwards, this.offsetSidewards);
+        getActor().moveBy(this.offsetX, this.offsetY);
+
         if (this.followRotatation) {
-            this.getActor().getAppearance().setDirection(this.source.getAppearance().getDirection());
+            getActor().getAppearance().setDirection(this.source.getAppearance().getDirection());
         }
     }
 

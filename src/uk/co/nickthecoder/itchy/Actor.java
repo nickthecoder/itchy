@@ -19,7 +19,8 @@ import uk.co.nickthecoder.jame.Surface;
 
 public class Actor implements PropertySubject<Actor>
 {
-
+    private static NullBehaviour unsedBehaviour = new NullBehaviour();
+    
     private static Pose startPose( Costume costume, String name )
     {
         Pose pose = costume.getPose(name);
@@ -42,7 +43,7 @@ public class Actor implements PropertySubject<Actor>
         }
         return new TextPose(text, font, 20);
     }
-    
+
     private static int nextId = 1;
 
     public final int id;
@@ -74,6 +75,10 @@ public class Actor implements PropertySubject<Actor>
 
     private String startEvent = "default";
 
+    private CollisionStrategy collisionStrategy = BruteForceCollisionStrategy.singleton;
+
+    private boolean fullyCreated = false;
+
     public Actor( Costume costume )
     {
         this(costume, "default");
@@ -86,7 +91,7 @@ public class Actor implements PropertySubject<Actor>
         this.costume = costume;
         this.setDirection(this.getAppearance().getPose().getDirection());
     }
-    
+
     public Actor( Pose pose )
     {
         this.id = nextId;
@@ -96,7 +101,7 @@ public class Actor implements PropertySubject<Actor>
         this.appearance = new Appearance(pose);
         this.appearance.setActor(this);
 
-        this.setBehaviour(new NullBehaviour());
+        this.behaviour = unsedBehaviour;
 
         this.x = 0;
         this.y = 0;
@@ -202,12 +207,11 @@ public class Actor implements PropertySubject<Actor>
     {
         this.tagMembership.removeAll();
     }
-    
+
     public static Set<Actor> allByTag( String tag )
     {
         return Itchy.getGame().findActorsByTag(tag);
     }
-
 
     public boolean getYAxisPointsDown()
     {
@@ -260,13 +264,14 @@ public class Actor implements PropertySubject<Actor>
     void setLayerAttribute( ActorsLayer layer )
     {
         this.layer = layer;
+        checkFullyCreated();
     }
 
     public void setAnimation( Animation animation )
     {
-        setAnimation( animation, AnimationEvent.REPLACE );
+        setAnimation(animation, AnimationEvent.REPLACE);
     }
-    
+
     public void setAnimation( Animation animation, AnimationEvent ae )
     {
         if (animation == null) {
@@ -275,22 +280,22 @@ public class Actor implements PropertySubject<Actor>
         }
 
         Animation newAnimation;
-        
+
         if ((this.animation == null) || (ae == AnimationEvent.REPLACE)) {
             newAnimation = animation.copy();
             newAnimation.start(this);
-                
+
         } else if (ae == AnimationEvent.IGNORE) {
             return;
-            
+
         } else {
-            CompoundAnimation ca = new CompoundAnimation( ae == AnimationEvent.SEQUENCE );
+            CompoundAnimation ca = new CompoundAnimation(ae == AnimationEvent.SEQUENCE);
             ca.add(this.getAnimation());
             ca.add(animation.copy());
             ca.startExceptFirst(this);
             newAnimation = ca;
         }
-        
+
         newAnimation.addMessageListener(getBehaviour());
         this.animation = newAnimation;
     }
@@ -305,18 +310,19 @@ public class Actor implements PropertySubject<Actor>
         this.event(this.costume, eventName, AnimationEvent.REPLACE);
     }
 
-    public void event( String eventName, AnimationEvent ae)
+    public void event( String eventName, AnimationEvent ae )
     {
         this.event(this.costume, eventName, ae);
     }
 
-    public enum AnimationEvent {
+    public enum AnimationEvent
+    {
         REPLACE,
         SEQUENCE,
         PARALLEL,
         IGNORE
     }
-    
+
     public void event( Costume costume, String eventName, AnimationEvent ae )
     {
         if (costume == null) {
@@ -413,21 +419,33 @@ public class Actor implements PropertySubject<Actor>
         return this.appearance.visibleWithin(this.layer.getWorldRectangle());
     }
 
+    private void checkFullyCreated()
+    {
+        if (this.fullyCreated) {
+            return;
+        }
+
+        if ((this.layer != null) && (this.behaviour != unsedBehaviour)) {
+            this.fullyCreated = true;
+            this.behaviour.onBirth();
+            Itchy.getGame().add(this);
+        }
+    }
+
     public final void setBehaviour( Behaviour behaviour )
     {
         if (behaviour == this.behaviour) {
             return;
         }
 
-        if (this.behaviour == null) {
-            Itchy.getGame().add(this);
-        } else {
+        if (this.behaviour != null) {
             this.behaviour.detatch();
         }
 
         this.behaviour = behaviour == null ? new NullBehaviour() : behaviour;
-        behaviour.attach(this);
+        this.behaviour.attach(this);
 
+        checkFullyCreated();
     }
 
     public Behaviour getBehaviour()
@@ -483,6 +501,7 @@ public class Actor implements PropertySubject<Actor>
             this.dead = true;
             getBehaviour().onDeath();
 
+            resetCollisionStrategy();
             this.tagMembership.removeAll();
         }
     }
@@ -708,6 +727,52 @@ public class Actor implements PropertySubject<Actor>
         return this.getAppearance().getSurface()
             .pixelOverlap(other.getAppearance().getSurface(), dx, dy, 64);
 
+    }
+
+    public void resetCollisionStrategy()
+    {
+        this.setCollisionStrategy(null);
+    }
+
+    public CollisionStrategy getCollisionStrategy()
+    {
+        return this.collisionStrategy;
+    }
+
+    public void setCollisionStrategy( CollisionStrategy collisionStrategy )
+    {
+        this.collisionStrategy.remove();
+        this.collisionStrategy = collisionStrategy == null ? BruteForceCollisionStrategy.singleton : collisionStrategy;
+    }
+
+    public Set<Actor> pixelOverlap( String tag )
+    {
+        return this.collisionStrategy.pixelOverlap(this, new String[] { tag }, null);
+    }
+
+    public Set<Actor> pixelOverlap( String... tags )
+    {
+        return this.collisionStrategy.pixelOverlap(this, tags, null);
+    }
+
+    public Set<Actor> pixelOverlap( String[] including, String[] excluding )
+    {
+        return this.collisionStrategy.pixelOverlap(this, including, excluding);
+    }
+
+    public Set<Actor> overlapping( String tag )
+    {
+        return this.collisionStrategy.overlapping(this, new String[] { tag }, null);
+    }
+
+    public Set<Actor> overlapping( String... tags )
+    {
+        return this.collisionStrategy.overlapping(this, tags, null);
+    }
+
+    public Set<Actor> overlapping( String[] including, String[] excluding )
+    {
+        return this.collisionStrategy.overlapping(this, including, excluding);
     }
 
     public void zOrderUp()

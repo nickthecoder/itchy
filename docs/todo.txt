@@ -51,11 +51,13 @@ Vacuum bathroom
 TODO
 ====
 
-Create a Behaviour interface, and AbstractBehaviour
-
 Move tags from Actor to Behaviour
 
-Move collision strategy to actor
+Create a Behaviour interface, and AbstractBehaviour
+
+Actor,startEvent isn't elegant - its only used by the editor, so should be on scene actor and sceneactorbehaviour?
+
+Make NullBehaviour have a singleton
 
 
 Rename a scene from scene designer does not rename
@@ -97,6 +99,11 @@ Create a Compound Behaviour, which has a ClassName array of other Behaviours, or
         Not so fast, how about tags such as "deadly" - yeah that's still ok, one of the Beahviours will
         be deadly, and the rest wont.
 
+Appearance can chop off part of the Pose, useful for the Rod in Thrust - instead of scaling it.
+    Can also use it for a speed guage on Rain
+        Create a general purpose ProgressBar behaviour.
+        Could I use it for the shield indicator in DrunkInvaders instead of the multiple images?
+    Or could create a speed dial, as that just needs the hand to be rotated!
 
 Create an actor from a costume easily.
     Could be on Costume taking no arguments
@@ -104,6 +111,7 @@ Create an actor from a costume easily.
 
 ClassName shouldn't be in script package, should be in itchy package.
 
+check all code for this.[a-z 0-9]*\(, and remove the "this".
 
 What's Next
 ===========

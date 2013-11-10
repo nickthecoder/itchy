@@ -36,7 +36,7 @@ public class Alien extends Bouncy implements Shootable
     {
         super.onBirth();
         DrunkInvaders.game.addAliens(1);
-        new Fragment().actor(this.getActor()).createPoses("fragment");
+        new Fragment().actor(getActor()).createPoses("fragment");
     }
 
     @Override
@@ -54,9 +54,9 @@ public class Alien extends Bouncy implements Shootable
         }
 
         if (DrunkInvaders.game.metronomeCountdown == 1) {
-            if (this.getActor().getAnimation() == null) {
+            if (getActor().getAnimation() == null) {
                 this.tock = !this.tock;
-                this.getActor().event(this.tock ? "tock" : "tick");
+                getActor().event(this.tock ? "tock" : "tick");
             }
         }
 
@@ -66,9 +66,9 @@ public class Alien extends Bouncy implements Shootable
 
         super.tick();
 
-        for (Actor other : pixelOverlap(SHOOTABLE_LIST)) {
-            if ((this.getActor() != other) && (!other.hasTag("bouncy"))) {
-                ((Shootable) other.getBehaviour()).shot(this.getActor());
+        for (Actor other : getActor().pixelOverlap(SHOOTABLE_LIST)) {
+            if ((getActor() != other) && (!other.hasTag("bouncy"))) {
+                ((Shootable) other.getBehaviour()).shot(getActor());
             }
         }
     }
@@ -78,8 +78,8 @@ public class Alien extends Bouncy implements Shootable
         this.event("fire");
 
         Actor bullet = new Actor(DrunkInvaders.game.resources.getCostume("bomb"));
-        bullet.moveTo(this.getActor());
-        bullet.setDirection(this.getActor().getAppearance().getDirection());
+        bullet.moveTo(getActor());
+        bullet.setDirection(getActor().getAppearance().getDirection());
         DrunkInvaders.game.mainLayer.addTop(bullet);
         bullet.moveForwards(10);
         bullet.setBehaviour(new Bullet("killable"));
@@ -89,14 +89,14 @@ public class Alien extends Bouncy implements Shootable
     public void shot( Actor bullet )
     {
 
-        new Explosion(this.getActor())
+        new Explosion(getActor())
             .projectiles(20)
             .fade(1.2)
             .speed(1, 3)
             .pose("fragment")
             .createActor();
 
-        new Explosion(this.getActor())
+        new Explosion(getActor())
             .projectiles(40).projectilesPerTick(10)
             .offsetForwards(-10, 10).offsetSidewards(-10, 10)
             .speed(3, 6)
@@ -104,7 +104,7 @@ public class Alien extends Bouncy implements Shootable
             .pose("pixel")
             .createActor();
 
-        double scale = this.getActor().getAppearance().getScale();
+        double scale = getActor().getAppearance().getScale();
 
         this.shotsRequired--;
         if (this.shotsRequired > 0) {
@@ -113,7 +113,7 @@ public class Alien extends Bouncy implements Shootable
             if (scale > 1) {
                 double newScale = 1 + (scale - 1) * (this.shotsRequired) / (this.shotsRequired + 1);
                 ScaleAnimation scaleAnimation = new ScaleAnimation(10, NumericAnimation.linear, newScale);
-                this.getActor().setAnimation(scaleAnimation);
+                getActor().setAnimation(scaleAnimation);
             }
 
             return;
@@ -124,9 +124,9 @@ public class Alien extends Bouncy implements Shootable
             .bubble("speechBubble")
             .offset(0, 40).direction(0)
             .createActor();
-        yell.deathEvent(this.getActor().getCostume(), "yell");
+        yell.deathEvent(getActor().getCostume(), "yell");
 
-        this.getActor().removeAllTags();
+        getActor().removeAllTags();
         this.deathEvent("death");
 
     }

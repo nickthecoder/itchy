@@ -13,7 +13,7 @@ Bullet = Class({
         if (this.actor.getY() < -10) this.actor.moveBy(0,620);
         if (this.actor.getY() > 610) this.actor.moveBy(0,-620);
         
-        var i = this.behaviour.pixelOverlap("shootable").iterator();
+        var i = this.actor.pixelOverlap("shootable").iterator();
         // Shoot ONE of the rocks that the bullet is touching.
         if (i.hasNext()) {
             i.next().getBehaviour().behaviourScript.shot(this);

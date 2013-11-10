@@ -15,7 +15,7 @@ import uk.co.nickthecoder.itchy.util.Tag;
 import uk.co.nickthecoder.jame.RGBA;
 import uk.co.nickthecoder.jame.event.Keys;
 
-@Tag(names = {"killable"})
+@Tag(names = { "killable" })
 public class Ship extends Bouncy implements Shootable
 {
     private static final int TIMER_DURATION = 40;
@@ -64,15 +64,14 @@ public class Ship extends Bouncy implements Shootable
         this.mass = 100000000000.0;
 
         this.radius = Math.sqrt(
-            (this.getActor().getX() - this.ox) * (this.getActor().getX() - this.ox) +
-                (this.getActor().getY() - this.oy) * (this.getActor().getY() - this.oy));
+            (getActor().getX() - this.ox) * (getActor().getX() - this.ox) + (getActor().getY() - this.oy) * (getActor().getY() - this.oy));
 
-        this.angle = Math.atan2(this.getActor().getY() - this.oy, this.getActor().getX() - this.ox);
-        this.getActor().getAppearance().setDirectionRadians(this.angle);
-        this.turn(0); // calculates the direction
+        this.angle = Math.atan2(getActor().getY() - this.oy, getActor().getX() - this.ox);
+        getActor().getAppearance().setDirectionRadians(this.angle);
+        turn(0); // calculates the direction
 
         // Create the fragments for the explosions when I get shot.
-        new Fragment().actor(this.getActor()).createPoses("fragment");
+        new Fragment().actor(getActor()).createPoses("fragment");
     }
 
     @Override
@@ -87,12 +86,13 @@ public class Ship extends Bouncy implements Shootable
         super.onDetach();
     }
 
+    // TODO Needed?
     @Override
     public void onDeath()
     {
-        if (this.collisionStrategy != null) {
-            this.collisionStrategy.remove();
-            this.collisionStrategy = null;
+        if (getActor().getCollisionStrategy() != null) {
+            getActor().getCollisionStrategy().remove();
+            getActor().setCollisionStrategy(null);
         }
     }
 
@@ -139,12 +139,12 @@ public class Ship extends Bouncy implements Shootable
                 }
             }
 
-            this.collisionStrategy.update();
+            getActor().getCollisionStrategy().update();
 
-            for (Actor other : pixelOverlap(DEADLY_LIST)) {
+            for (Actor other : getActor().pixelOverlap(DEADLY_LIST)) {
                 this.shot(other);
                 if (other.getBehaviour() instanceof Shootable) {
-                    ((Shootable) other.getBehaviour()).shot(this.getActor());
+                    ((Shootable) other.getBehaviour()).shot(getActor());
                 }
                 break;
             }
@@ -155,20 +155,20 @@ public class Ship extends Bouncy implements Shootable
 
     private void turn( double speed )
     {
-        double oldX = this.getActor().getX();
-        double oldY = this.getActor().getY();
-        double oldDirection = this.getActor().getHeading();
+        double oldX = getActor().getX();
+        double oldY = getActor().getY();
+        double oldDirection = getActor().getHeading();
 
         this.angle += speed;
 
-        this.getActor().setDirectionRadians(this.angle);
-        this.getActor().setX(this.radius * Math.cos(this.angle) + this.ox);
-        this.getActor().setY(this.radius * Math.sin(this.angle) + this.oy);
+        getActor().setDirectionRadians(this.angle);
+        getActor().setX(this.radius * Math.cos(this.angle) + this.ox);
+        getActor().setY(this.radius * Math.sin(this.angle) + this.oy);
 
-        if (this.getActor().isOffScreen()) {
+        if (getActor().isOffScreen()) {
             this.angle -= speed;
-            this.getActor().moveTo(oldX, oldY);
-            this.getActor().setDirection(oldDirection);
+            getActor().moveTo(oldX, oldY);
+            getActor().setDirection(oldDirection);
         }
     }
 
@@ -177,7 +177,7 @@ public class Ship extends Bouncy implements Shootable
         long level = Math.round(this.shieldStrength * SHIELD_POSE_COUNT);
         if (level > 0) {
             this.event("shield");
-            this.getActor().addTag("bouncy");
+            getActor().addTag("bouncy");
             long newLevel = Math.round(this.shieldStrength * SHIELD_POSE_COUNT);
             event("shielded" + newLevel);
             this.shielded = true;
@@ -188,7 +188,7 @@ public class Ship extends Bouncy implements Shootable
 
     public void deactivateShield()
     {
-        this.getActor().removeTag("bouncy");
+        getActor().removeTag("bouncy");
         this.event("deshield");
         this.shielded = false;
     }
@@ -227,8 +227,8 @@ public class Ship extends Bouncy implements Shootable
 
         Actor bullet = new Actor(DrunkInvaders.game.resources.getCostume("bullet"));
         this.latestBullet = bullet;
-        bullet.moveTo(this.getActor());
-        bullet.setDirection(this.getActor().getAppearance().getDirection());
+        bullet.moveTo(getActor());
+        bullet.setDirection(getActor().getAppearance().getDirection());
         DrunkInvaders.game.mainLayer.addTop(bullet);
         bullet.moveForwards(10);
         bullet.setBehaviour(new Bullet());
@@ -249,9 +249,9 @@ public class Ship extends Bouncy implements Shootable
             .message("death").font("vera", 18).color(SPEECH_COLOR).bubble("speechBubble2")
             .offset(0, 40).margin(10, 10, 20, 10).direction(0)
             .createActor();
-        yell.deathEvent(this.getActor().getCostume(), "yell");
+        yell.deathEvent(getActor().getCostume(), "yell");
 
-        new Explosion(this.getActor())
+        new Explosion(getActor())
             .projectiles(20)
             .speed(0.3, 0.9)
             .fade(.7)
@@ -259,7 +259,7 @@ public class Ship extends Bouncy implements Shootable
             .pose("fragment")
             .createActor();
 
-        new Explosion(this.getActor())
+        new Explosion(getActor())
             .projectiles(40)
             .offsetForwards(-10, 10).offsetSidewards(-10, 10)
             .speed(1, 3)
@@ -267,6 +267,6 @@ public class Ship extends Bouncy implements Shootable
             .pose("pixel")
             .createActor();
 
-        this.deathEvent("death");
+        deathEvent("death");
     }
 }

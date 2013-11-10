@@ -32,17 +32,16 @@ public class PickLevel extends Button
     public void onAttach()
     {
         if (DrunkInvaders.game.completedLevel(this.levelNumber)) {
-            this.getActor().event("completed");
+            getActor().event("completed");
         }
 
         if (this.font != null) {
             TextPose shadowPose = new TextPose(String.valueOf(this.levelNumber), this.font,
                 this.fontSize, this.shadowColor);
 
-            TextPose textPose = new TextPose(String.valueOf(this.levelNumber), this.font,
-                this.fontSize, this.fontColor);
-            this.getActor().getAppearance().superimpose(shadowPose, 2, 2);
-            this.getActor().getAppearance().superimpose(textPose, 0, 0);
+            TextPose textPose = new TextPose(String.valueOf(this.levelNumber), this.font, this.fontSize, this.fontColor);
+            getActor().getAppearance().superimpose(shadowPose, 2, 2);
+            getActor().getAppearance().superimpose(textPose, 0, 0);
         }
     }
 

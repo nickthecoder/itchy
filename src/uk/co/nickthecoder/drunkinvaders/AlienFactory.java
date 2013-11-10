@@ -42,7 +42,6 @@ public class AlienFactory extends Behaviour
     public void onBirth()
     {
         super.onBirth();
-
         this.aliens = new ArrayList<Alien>(this.alienCount);
         this.timer = Timer.createTimerSeconds(this.delayPerAlien);
     }
@@ -50,7 +49,7 @@ public class AlienFactory extends Behaviour
     @Override
     public void tick()
     {
-        this.getActor().getAppearance().setAlpha(0);
+        getActor().getAppearance().setAlpha(0);
 
         if (this.timer.isFinished()) {
             this.timer.reset();
@@ -61,7 +60,7 @@ public class AlienFactory extends Behaviour
                     ab.vx = Util.randomBetween(2, 2.2);
                     ab.vy = Util.randomBetween(0, 0.6);
                 }
-                this.getActor().kill();
+                getActor().kill();
 
             }
         }
@@ -73,18 +72,17 @@ public class AlienFactory extends Behaviour
         Costume costume = DrunkInvaders.game.resources.getCostume(this.costumeName);
         Actor alienActor = new Actor(costume);
         Appearance alienAppearance = alienActor.getAppearance();
-        Appearance thisAppearance = this.getActor().getAppearance();
+        Appearance thisAppearance = getActor().getAppearance();
 
-        alienActor.setDirection(this.getActor().getAppearance().getDirection() - 90);
+        alienActor.setDirection(getActor().getAppearance().getDirection() - 90);
         alienAppearance.setScale(thisAppearance.getScale());
         alienAppearance.setAlpha(0);
 
         Alien alienBehaviour = new Alien();
         alienBehaviour.fireOnceEvery = this.fireOnceEvery;
 
-        alienActor.moveTo(this.getActor().getX() + this.aliens.size() * this.spacing, this
-            .getActor().getY());
-        this.getActor().getLayer().addTop(alienActor);
+        alienActor.moveTo(getActor().getX() + this.aliens.size() * this.spacing, getActor().getY());
+        getActor().getLayer().addTop(alienActor);
 
         alienActor.setBehaviour(alienBehaviour);
         alienActor.event("birth");

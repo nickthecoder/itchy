@@ -26,9 +26,9 @@ public class TestExplosion extends Behaviour
 
     @Property(label = "Offset Y")
     public double offsetY;
-    
+
     @Property(label = "distance")
-    public double distance;   
+    public double distance;
 
     @Property(label = "Life")
     public double life;
@@ -81,12 +81,11 @@ public class TestExplosion extends Behaviour
     @Property(label = "Delta Z Order")
     public int deltaZ = 0;
 
-    
     @Override
     public void tick()
     {
         test0().createActor();
-        this.getActor().setBehaviour(new NullBehaviour());
+        getActor().setBehaviour(new NullBehaviour());
     }
 
     private Explosion test0()
@@ -95,7 +94,7 @@ public class TestExplosion extends Behaviour
             .distance(this.distance).offset(this.offsetX, this.offsetY)
             .offsetForwards(this.offsetForwards).offsetSidewards(this.offsetSidewards)
             .speed(this.speedForwards, this.speedSidewards).vx(this.vx).vy(this.vy).gravity(this.gravity)
-            .alpha(this.alpha).life(this.life).fade(this.fade).spin(this.spinFrom,this.spinTo).rotate()
+            .alpha(this.alpha).life(this.life).fade(this.fade).spin(this.spinFrom, this.spinTo).rotate()
             .adjustZOrder(this.deltaZ)
             .pose("bomb")
             .projectiles(this.projectiles)
@@ -105,9 +104,7 @@ public class TestExplosion extends Behaviour
             result.projectilesPerTick(this.projectilesPerTick);
         }
 
-
         return result;
     }
-
 
 }

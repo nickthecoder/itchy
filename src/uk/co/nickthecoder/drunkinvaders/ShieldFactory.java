@@ -1,9 +1,7 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0 which accompanies this
+ * distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.drunkinvaders;
 
@@ -14,13 +12,13 @@ import uk.co.nickthecoder.itchy.util.Property;
 
 public class ShieldFactory extends Behaviour
 {
-    @Property(label="Width")
+    @Property(label = "Width")
     public int width = 6;
 
-    @Property(label="Height")
+    @Property(label = "Height")
     public int height = 4;
 
-    @Property(label="Spacing")
+    @Property(label = "Spacing")
     public double spacing = 10;
 
     @Override
@@ -37,20 +35,20 @@ public class ShieldFactory extends Behaviour
                         poseName = "right";
                     }
                 }
-                Pose pose = this.getActor().getCostume().getPose( poseName );                
+                Pose pose = getActor().getCostume().getPose(poseName);
 
                 Actor shield = new Actor(pose);
                 Shield shieldBehaviour = new Shield();
-                shield.getAppearance().setDirection(this.getActor().getAppearance().getDirection());
-                this.getActor().getLayer().addTop(shield);
-                shield.moveTo(this.getActor().getX(), this.getActor().getY());
+                shield.getAppearance().setDirection(getActor().getAppearance().getDirection());
+                getActor().getLayer().addTop(shield);
+                shield.moveTo(getActor().getX(), getActor().getY());
                 shield.moveForwards(x * this.spacing, y * this.spacing);
                 shield.setBehaviour(shieldBehaviour);
 
             }
         }
 
-        this.getActor().kill();
+        getActor().kill();
 
     }
 

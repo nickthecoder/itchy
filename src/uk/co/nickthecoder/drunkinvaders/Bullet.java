@@ -36,14 +36,14 @@ public class Bullet extends Behaviour implements Shootable
     public void onAttach()
     {
         super.onAttach();
-        this.collisionStrategy = DrunkInvaders.game.createCollisionStrategy(this.getActor());
+        getActor().setCollisionStrategy(DrunkInvaders.game.createCollisionStrategy(getActor()));
     }
     
     @Override
     public void onDetach()
     {
         super.onDetach();
-        resetCollisionStrategy();
+        getActor().resetCollisionStrategy();
     }
 
     @Override
@@ -55,17 +55,17 @@ public class Bullet extends Behaviour implements Shootable
     @Override
     public void tick()
     {
-        this.getActor().moveForwards(this.speed);
+        getActor().moveForwards(this.speed);
 
-        if (!this.getActor().isOnScreen()) {
-            this.getActor().kill();
+        if (!getActor().isOnScreen()) {
+            getActor().kill();
         }
 
-        this.collisionStrategy.update();
+        getActor().getCollisionStrategy().update();
 
-        for (Actor other : pixelOverlap(this.targetTagName)) {
-            ((Shootable) other.getBehaviour()).shot(this.getActor());
-            this.getActor().kill();
+        for (Actor other : getActor().pixelOverlap(this.targetTagName)) {
+            ((Shootable) other.getBehaviour()).shot(getActor());
+            getActor().kill();
 
             break;
         }
