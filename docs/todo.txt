@@ -51,8 +51,6 @@ Vacuum bathroom
 TODO
 ====
 
-Create a Behaviour interface, and AbstractBehaviour
-
 Actor,startEvent isn't elegant - its only used by the editor, so should be on scene actor and sceneactorbehaviour?
 
 Rename a scene from scene designer does not rename

@@ -16,18 +16,18 @@ Ship = Class({
     },
     
     tick: function() {
-        if (Itchy.isKeyDown(jame.event.Keys.LEFT)) {
+        if (Itchy.isKeyDown(Keys.LEFT)) {
             this.actor.setDirection(this.actor.getHeading() + this.rotationSpeed);
         }
-        if (Itchy.isKeyDown(jame.event.Keys.RIGHT)) {
+        if (Itchy.isKeyDown(Keys.RIGHT)) {
             this.actor.setDirection(this.actor.getHeading() - this.rotationSpeed);
         }
-        if (Itchy.isKeyDown(jame.event.Keys.UP)) {
+        if (Itchy.isKeyDown(Keys.UP)) {
             var theta = this.actor.getHeadingRadians();
             this.vx += Math.cos(theta) * this.thrust;
             this.vy += Math.sin(theta) * this.thrust;
         }
-        if (Itchy.isKeyDown(jame.event.Keys.SPACE)) {
+        if (Itchy.isKeyDown(Keys.SPACE)) {
             if (this.fireTimer.isFinished()) {
                 this.fire();
                 this.fireTimer.reset();

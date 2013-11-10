@@ -4,9 +4,9 @@ Menu = new Class({
     Extends: SceneBehaviourScript,
     
     onKeyDown: function( event ) {
-        if (event.symbol == jame.event.Keys.RETURN) {
+        if (event.symbol == Keys.RETURN) {
             game.startScene("play");
-        } else if (event.symbol == jame.event.Keys.ESCAPE) {
+        } else if (event.symbol == Keys.ESCAPE) {
             game.startScene("menu");
         }
     }

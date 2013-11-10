@@ -22,8 +22,7 @@ public class CostumeProperties implements PropertySubject<CostumeProperties>
                 return scriptManager.createCostumeProperties(className);
             } else {
                 @SuppressWarnings("unchecked")
-                Class<CostumeProperties> klass = (Class<CostumeProperties>) Class
-                    .forName(className.name);
+                Class<CostumeProperties> klass = (Class<CostumeProperties>) Class.forName(className.name);
                 return klass.newInstance();
             }
         } catch (Exception e) {

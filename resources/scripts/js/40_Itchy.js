@@ -6,6 +6,7 @@ jame=Packages.uk.co.nickthecoder.jame;
 Double = java.lang.Double;
 Integer = java.lang.Integer;
 RGBA = jame.RGBA;
+Keys = jame.event.Keys;
 
 //Objects
 Itchy=itchy.Itchy;
