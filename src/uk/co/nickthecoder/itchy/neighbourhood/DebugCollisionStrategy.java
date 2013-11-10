@@ -12,6 +12,7 @@ import java.util.Set;
 import uk.co.nickthecoder.drunkinvaders.DrunkInvaders;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.ActorCollisionStrategy;
+import uk.co.nickthecoder.itchy.Behaviour;
 
 public class DebugCollisionStrategy extends ActorCollisionStrategy
 {
@@ -28,10 +29,10 @@ public class DebugCollisionStrategy extends ActorCollisionStrategy
     }
 
     @Override
-    public Set<Actor> overlapping( Actor actor, String[] includeTags, String[] excludeTags )
+    public Set<Behaviour> overlapping( Actor actor, String[] includeTags, String[] excludeTags )
     {
-        Set<Actor> results1 = this.strategy1.overlapping(includeTags, excludeTags);
-        Set<Actor> results2 = this.strategy2.overlapping(includeTags, excludeTags);
+        Set<Behaviour> results1 = this.strategy1.overlapping(includeTags, excludeTags);
+        Set<Behaviour> results2 = this.strategy2.overlapping(includeTags, excludeTags);
 
         if (!results1.equals(results2)) {
             System.err.println("Collision failed for " + getActor());
@@ -43,10 +44,10 @@ public class DebugCollisionStrategy extends ActorCollisionStrategy
     }
 
     @Override
-    public Set<Actor> pixelOverlap( Actor actor, String[] includeTags, String[] excludeTags )
+    public Set<Behaviour> pixelOverlap( Actor actor, String[] includeTags, String[] excludeTags )
     {
-        Set<Actor> results1 = this.strategy1.pixelPixelOverlap(includeTags,excludeTags);
-        Set<Actor> results2 = this.strategy2.pixelPixelOverlap(includeTags,excludeTags);
+        Set<Behaviour> results1 = this.strategy1.pixelPixelOverlap(includeTags,excludeTags);
+        Set<Behaviour> results2 = this.strategy2.pixelPixelOverlap(includeTags,excludeTags);
 
         if (!results1.equals(results2)) {
             System.err.println("Pixel Collision failed for " + getActor());

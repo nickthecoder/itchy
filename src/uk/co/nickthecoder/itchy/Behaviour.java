@@ -8,6 +8,7 @@ package uk.co.nickthecoder.itchy;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 import javax.script.ScriptException;
 
@@ -16,6 +17,7 @@ import uk.co.nickthecoder.itchy.util.AbstractProperty;
 import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.itchy.util.PropertySubject;
 import uk.co.nickthecoder.itchy.util.Tag;
+import uk.co.nickthecoder.itchy.util.TagMembership;
 
 public abstract class Behaviour implements MessageListener, Cloneable, PropertySubject<Behaviour>
 {
@@ -37,11 +39,6 @@ public abstract class Behaviour implements MessageListener, Cloneable, PropertyS
         return true;
     }
 
-    public ClassName getClassName()
-    {
-        return new ClassName(this.getClass().getName());
-    }
-
     public static Behaviour createBehaviour( Resources resources, ClassName className )
         throws InstantiationException, IllegalAccessException, ScriptException,
         ClassNotFoundException
@@ -56,8 +53,42 @@ public abstract class Behaviour implements MessageListener, Cloneable, PropertyS
 
     private Actor actor;
 
+    private final TagMembership<Behaviour> tagMembership;
+
     public Behaviour()
     {
+        this.tagMembership = new TagMembership<Behaviour>(Itchy.getGame().behaviourTags, this);
+    }
+
+
+    public boolean hasTag( String name )
+    {
+        return this.tagMembership.hasTag(name);
+    }
+
+    public void addTag( String tag )
+    {
+        this.tagMembership.add(tag);
+    }
+
+    public void removeTag( String tag )
+    {
+        this.tagMembership.remove(tag);
+    }
+
+    public void removeAllTags()
+    {
+        this.tagMembership.removeAll();
+    }
+
+    public static Set<Behaviour> allByTag( String tag )
+    {
+        return Itchy.getGame().findBehaviourByTag(tag);
+    }
+
+    public ClassName getClassName()
+    {
+        return new ClassName(this.getClass().getName());
     }
 
     /**
@@ -73,6 +104,12 @@ public abstract class Behaviour implements MessageListener, Cloneable, PropertyS
     {
     }
 
+    public void die()
+    {
+        onDeath();
+        this.tagMembership.removeAll();
+    }
+    
     @Override
     public List<AbstractProperty<Behaviour, ?>> getProperties()
     {
@@ -118,7 +155,7 @@ public abstract class Behaviour implements MessageListener, Cloneable, PropertyS
         Tag tags = this.getClass().getAnnotation(Tag.class);
         if (tags != null) {
             for (String name : tags.names()) {
-                getActor().addTag(name);
+                addTag(name);
             }
         }
         this.onAttach();
@@ -131,7 +168,7 @@ public abstract class Behaviour implements MessageListener, Cloneable, PropertyS
         Tag tags = this.getClass().getAnnotation(Tag.class);
         if (tags != null) {
             for (String name : tags.names()) {
-                getActor().removeTag(name);
+                removeTag(name);
             }
         }
     }

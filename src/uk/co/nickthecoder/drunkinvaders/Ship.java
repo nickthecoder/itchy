@@ -6,6 +6,7 @@
 package uk.co.nickthecoder.drunkinvaders;
 
 import uk.co.nickthecoder.itchy.Actor;
+import uk.co.nickthecoder.itchy.Behaviour;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.extras.Explosion;
 import uk.co.nickthecoder.itchy.extras.Fragment;
@@ -141,7 +142,8 @@ public class Ship extends Bouncy implements Shootable
 
             getActor().getCollisionStrategy().update();
 
-            for (Actor other : getActor().pixelOverlap(DEADLY_LIST)) {
+            for (Behaviour behaviour : getActor().pixelOverlap(DEADLY_LIST)) {
+                Actor other = behaviour.getActor();
                 this.shot(other);
                 if (other.getBehaviour() instanceof Shootable) {
                     ((Shootable) other.getBehaviour()).shot(getActor());
@@ -177,7 +179,7 @@ public class Ship extends Bouncy implements Shootable
         long level = Math.round(this.shieldStrength * SHIELD_POSE_COUNT);
         if (level > 0) {
             this.event("shield");
-            getActor().addTag("bouncy");
+            addTag("bouncy");
             long newLevel = Math.round(this.shieldStrength * SHIELD_POSE_COUNT);
             event("shielded" + newLevel);
             this.shielded = true;
@@ -188,7 +190,7 @@ public class Ship extends Bouncy implements Shootable
 
     public void deactivateShield()
     {
-        getActor().removeTag("bouncy");
+        removeTag("bouncy");
         this.event("deshield");
         this.shielded = false;
     }
@@ -225,14 +227,14 @@ public class Ship extends Bouncy implements Shootable
 
         this.event("fire");
 
-        Actor bullet = new Actor(DrunkInvaders.game.resources.getCostume("bullet"));
-        this.latestBullet = bullet;
-        bullet.moveTo(getActor());
-        bullet.setDirection(getActor().getAppearance().getDirection());
-        DrunkInvaders.game.mainLayer.addTop(bullet);
-        bullet.moveForwards(10);
-        bullet.setBehaviour(new Bullet());
-        bullet.addTag("killable");
+        Actor bulletActor = new Actor(DrunkInvaders.game.resources.getCostume("bullet"));
+        this.latestBullet = bulletActor;
+        bulletActor.moveTo(getActor());
+        bulletActor.setDirection(getActor().getAppearance().getDirection());
+        DrunkInvaders.game.mainLayer.addTop(bulletActor);
+        bulletActor.moveForwards(10);
+        bulletActor.setBehaviour(new Bullet());
+        bulletActor.getBehaviour().addTag("killable");
 
         this.recharge = TIMER_DURATION;
     }

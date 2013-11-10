@@ -6,6 +6,7 @@
 package uk.co.nickthecoder.drunkinvaders;
 
 import uk.co.nickthecoder.itchy.Actor;
+import uk.co.nickthecoder.itchy.Behaviour;
 import uk.co.nickthecoder.itchy.animation.NumericAnimation;
 import uk.co.nickthecoder.itchy.animation.ScaleAnimation;
 import uk.co.nickthecoder.itchy.extras.Explosion;
@@ -66,8 +67,10 @@ public class Alien extends Bouncy implements Shootable
 
         super.tick();
 
-        for (Actor other : getActor().pixelOverlap(SHOOTABLE_LIST)) {
-            if ((getActor() != other) && (!other.hasTag("bouncy"))) {
+        // This isn't neat - can we have a "killable" tag, which Ship and Shield will both have?
+        for (Behaviour otherBehaviour : getActor().pixelOverlap(SHOOTABLE_LIST)) {
+            Actor other = otherBehaviour.getActor();
+            if ((getActor() != other) && (!otherBehaviour.hasTag("bouncy"))) {
                 ((Shootable) other.getBehaviour()).shot(getActor());
             }
         }
@@ -126,7 +129,7 @@ public class Alien extends Bouncy implements Shootable
             .createActor();
         yell.deathEvent(getActor().getCostume(), "yell");
 
-        getActor().removeAllTags();
+        removeAllTags();
         this.deathEvent("death");
 
     }

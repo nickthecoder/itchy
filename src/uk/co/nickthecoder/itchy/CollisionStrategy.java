@@ -35,8 +35,8 @@ public interface CollisionStrategy
 
     public void remove();
     
-    public Set<Actor> overlapping( Actor actor, String[] includeTags, String[] excludeTags );
+    public Set<Behaviour> overlapping( Actor actor, String[] includeTags, String[] excludeTags );
 
-    public Set<Actor> pixelOverlap( Actor actor, String[] includeTags, String[] excludeTags );
+    public Set<Behaviour> pixelOverlap( Actor actor, String[] includeTags, String[] excludeTags );
 
 }

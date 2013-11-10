@@ -45,7 +45,7 @@ Ship = Class({
         }
         var i = this.actor.pixelOverlap("shootable").iterator();
         while (i.hasNext()) {
-            i.next().getBehaviour().behaviourScript.shot(this);
+            i.next().behaviourScript.shot(this);
             this.actor.kill();
         }
     },

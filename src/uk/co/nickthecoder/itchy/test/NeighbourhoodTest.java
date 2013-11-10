@@ -25,6 +25,7 @@ import org.junit.Test;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Costume;
 import uk.co.nickthecoder.itchy.Itchy;
+import uk.co.nickthecoder.itchy.NullBehaviour;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.neighbourhood.Neighbourhood;
 import uk.co.nickthecoder.itchy.neighbourhood.StandardNeighbourhood;
@@ -95,8 +96,9 @@ public class NeighbourhoodTest
     public SinglePointCollisionStrategy spcs( Neighbourhood nbh, Costume costume, double x, double y )
     {
         Actor actor = new Actor(costume);
+        actor.setBehaviour(new NullBehaviour());
         actor.moveTo(x, y);
-        actor.addTag("all");
+        actor.getBehaviour().addTag("all");
 
         SinglePointCollisionStrategy result = new SinglePointCollisionStrategy(actor, nbh);
         return result;

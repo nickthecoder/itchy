@@ -13,14 +13,13 @@ import uk.co.nickthecoder.itchy.animation.CompoundAnimation;
 import uk.co.nickthecoder.itchy.util.AbstractProperty;
 import uk.co.nickthecoder.itchy.util.Property;
 import uk.co.nickthecoder.itchy.util.PropertySubject;
-import uk.co.nickthecoder.itchy.util.TagMembership;
 import uk.co.nickthecoder.jame.RGBA;
 import uk.co.nickthecoder.jame.Surface;
 
 public class Actor implements PropertySubject<Actor>
 {
     private static NullBehaviour unsedBehaviour = new NullBehaviour();
-    
+
     private static Pose startPose( Costume costume, String name )
     {
         Pose pose = costume.getPose(name);
@@ -60,8 +59,6 @@ public class Actor implements PropertySubject<Actor>
 
     private ActorsLayer layer;
 
-    private final TagMembership<Actor> tagMembership;
-
     private double x;
     private double y;
     private boolean active = false;
@@ -96,7 +93,6 @@ public class Actor implements PropertySubject<Actor>
     {
         this.id = nextId;
         nextId++;
-        this.tagMembership = new TagMembership<Actor>(Itchy.getGame().actorTags, this);
         this.costume = null;
         this.appearance = new Appearance(pose);
         this.appearance.setActor(this);
@@ -186,31 +182,6 @@ public class Actor implements PropertySubject<Actor>
     public void setCostume( Costume costume )
     {
         this.costume = costume;
-    }
-
-    public boolean hasTag( String name )
-    {
-        return this.tagMembership.hasTag(name);
-    }
-
-    public void addTag( String tag )
-    {
-        this.tagMembership.add(tag);
-    }
-
-    public void removeTag( String tag )
-    {
-        this.tagMembership.remove(tag);
-    }
-
-    public void removeAllTags()
-    {
-        this.tagMembership.removeAll();
-    }
-
-    public static Set<Actor> allByTag( String tag )
-    {
-        return Itchy.getGame().findActorsByTag(tag);
     }
 
     public boolean getYAxisPointsDown()
@@ -499,10 +470,9 @@ public class Actor implements PropertySubject<Actor>
     {
         if (!this.dead) {
             this.dead = true;
-            getBehaviour().onDeath();
+            getBehaviour().die();
 
             resetCollisionStrategy();
-            this.tagMembership.removeAll();
         }
     }
 
@@ -605,40 +575,42 @@ public class Actor implements PropertySubject<Actor>
         return this.getAppearance().getWorldRectangle().contains(x, y);
     }
 
-    public static Actor nearest( double x, double y, String tag )
+    public static Behaviour nearest( double x, double y, String tag )
     {
-        Actor closestActor = null;
+        Behaviour closestBehaviour = null;
         double closestDistance = Double.MAX_VALUE;
 
-        for (Actor other : Actor.allByTag(tag)) {
+        for (Behaviour otherBehaviour : Behaviour.allByTag(tag)) {
+            Actor other = otherBehaviour.getActor();
             double distance = other.distanceTo(x, y);
             if (distance < closestDistance) {
                 closestDistance = distance;
-                closestActor = other;
+                closestBehaviour = otherBehaviour;
             }
         }
-        return closestActor;
+        return closestBehaviour;
     }
 
     /**
      * If there are a large number of Actors with this tag, then this will be slow, because unlike
      * overalpping and touching, there is no optimisation based on CollisionStrategy.
      */
-    public Actor nearest( String tag )
+    public Behaviour nearest( String tag )
     {
-        Actor closestActor = null;
+        Behaviour closestBehaviour = null;
         double closestDistance = Double.MAX_VALUE;
 
-        for (Actor other : Actor.allByTag(tag)) {
+        for (Behaviour otherBehaviour : Behaviour.allByTag(tag)) {
+            Actor other = otherBehaviour.getActor();
             if (other != this) {
                 double distance = other.distanceTo(this);
                 if (distance < closestDistance) {
                     closestDistance = distance;
-                    closestActor = other;
+                    closestBehaviour = otherBehaviour;
                 }
             }
         }
-        return closestActor;
+        return closestBehaviour;
     }
 
     public double distanceTo( double x, double y )
@@ -745,32 +717,32 @@ public class Actor implements PropertySubject<Actor>
         this.collisionStrategy = collisionStrategy == null ? BruteForceCollisionStrategy.singleton : collisionStrategy;
     }
 
-    public Set<Actor> pixelOverlap( String tag )
+    public Set<Behaviour> pixelOverlap( String tag )
     {
         return this.collisionStrategy.pixelOverlap(this, new String[] { tag }, null);
     }
 
-    public Set<Actor> pixelOverlap( String... tags )
+    public Set<Behaviour> pixelOverlap( String... tags )
     {
         return this.collisionStrategy.pixelOverlap(this, tags, null);
     }
 
-    public Set<Actor> pixelOverlap( String[] including, String[] excluding )
+    public Set<Behaviour> pixelOverlap( String[] including, String[] excluding )
     {
         return this.collisionStrategy.pixelOverlap(this, including, excluding);
     }
 
-    public Set<Actor> overlapping( String tag )
+    public Set<Behaviour> overlapping( String tag )
     {
         return this.collisionStrategy.overlapping(this, new String[] { tag }, null);
     }
 
-    public Set<Actor> overlapping( String... tags )
+    public Set<Behaviour> overlapping( String... tags )
     {
         return this.collisionStrategy.overlapping(this, tags, null);
     }
 
-    public Set<Actor> overlapping( String[] including, String[] excluding )
+    public Set<Behaviour> overlapping( String[] including, String[] excluding )
     {
         return this.collisionStrategy.overlapping(this, including, excluding);
     }

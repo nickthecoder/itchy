@@ -63,8 +63,8 @@ public class Bullet extends Behaviour implements Shootable
 
         getActor().getCollisionStrategy().update();
 
-        for (Actor other : getActor().pixelOverlap(this.targetTagName)) {
-            ((Shootable) other.getBehaviour()).shot(getActor());
+        for (Behaviour otherBehaviour : getActor().pixelOverlap(this.targetTagName)) {
+            ((Shootable) otherBehaviour).shot(getActor());
             getActor().kill();
 
             break;

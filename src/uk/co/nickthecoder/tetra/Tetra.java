@@ -419,7 +419,8 @@ public class Tetra extends Game
         this.completedLines = 0;
         setLevel(getStartingLevel());
         Actor dummy = new Actor(this.resources.getCostume(names[0]));
-
+        dummy.setBehaviour(null);
+        
         this.grid = new Actor[WIDTH + 2][HEIGHT + 2];
         for (int x = 0; x < WIDTH + 2; x++) {
             for (int y = 0; y < HEIGHT + 2; y++) {
@@ -493,6 +494,7 @@ public class Tetra extends Game
             this.actors = new Actor[PIECES];
             for (int i = 0; i < PIECES; i++) {
                 this.actors[i] = new Actor(Tetra.this.resources.getCostume(names[n]));
+                this.actors[i].setBehaviour(null);
                 Tetra.this.mainLayer.addTop(this.actors[i]);
             }
             update();

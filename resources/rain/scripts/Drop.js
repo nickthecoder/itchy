@@ -9,7 +9,7 @@ Drop = Class({
 
     onBirth: function() {
         // Player checks to see if it has collided with any "deadly" objects.
-        this.actor.addTag("deadly");
+        this.behaviour.addTag("deadly");
         // The speed of each drop is determined by the sceneBehaviour. See Play.js for more.
         this.speed = sceneBehaviourScript.speed;
         // Each type of drop can got down the screen at different speed. The speedFactor is set from

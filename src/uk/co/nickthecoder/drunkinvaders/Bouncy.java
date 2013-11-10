@@ -28,14 +28,14 @@ public class Bouncy extends Behaviour
     public void onAttach()
     {
         super.onAttach();
-        getActor().addTag("bouncy");
+        addTag("bouncy");
     }
 
     @Override
     public void onDetach()
     {
         super.onDetach();
-        getActor().removeTag("bouncy");
+        removeTag("bouncy");
     }
 
     @Override
@@ -74,8 +74,8 @@ public class Bouncy extends Behaviour
 
         getActor().getCollisionStrategy().update();
 
-        for (Actor other : getActor().pixelOverlap(BOUNCY_LIST)) {
-            collide(getActor(), other);
+        for (Behaviour behaviour : getActor().pixelOverlap(BOUNCY_LIST)) {
+            collide(getActor(), behaviour.getActor());
         }
 
     }

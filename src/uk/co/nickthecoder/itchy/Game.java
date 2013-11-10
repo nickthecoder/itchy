@@ -49,7 +49,7 @@ public class Game implements InputListener, QuitListener, MessageListener
      * {@link Actor#hadTag(String)}, {@link Actor#addTag(String)} and
      * {@link Actor#removeTag(String)}.
      */
-    public final TagCollection<Actor> actorTags = new TagCollection<Actor>();
+    public final TagCollection<Behaviour> behaviourTags = new TagCollection<Behaviour>();
 
     public List<Actor> actors = new LinkedList<Actor>();
 
@@ -316,16 +316,16 @@ public class Game implements InputListener, QuitListener, MessageListener
     }
 
     /**
-     * Returns a lists of all the Actors tagged with a given tag.
+     * Returns a lists of all the Behaviours tagged with a given tag.
      * 
      * @param tag
      *        The tag to search for.
-     * @return A set of Actors meeting the criteria. An empty set if no actors meet the criteria.
-     * @See {@link Actor#addTag(String)}
+     * @return A set of Behaviours meeting the criteria. An empty set if no behaviours meet the criteria.
+     * @See {@link Behaviour#addTag(String)}
      */
-    public Set<Actor> findActorsByTag( String tag )
+    public Set<Behaviour> findBehaviourByTag( String tag )
     {
-        return this.actorTags.getTagMembers(tag);
+        return this.behaviourTags.getTagMembers(tag);
     }
 
     /**

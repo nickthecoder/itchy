@@ -9,8 +9,8 @@ Rock = Class({
     },
     
     onBirth: function() {
-        this.actor.addTag("shootable");
-        this.actor.addTag("deadly");
+        this.behaviour.addTag("shootable");
+        this.behaviour.addTag("deadly");
     },
     
     tick: function() {

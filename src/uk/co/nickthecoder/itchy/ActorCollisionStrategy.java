@@ -28,24 +28,24 @@ public abstract class ActorCollisionStrategy implements CollisionStrategy
         return this.actor;
     }
 
-    public Set<Actor> overlapping( String... tags )
+    public Set<Behaviour> overlapping( String... tags )
     {
         return this.overlapping(this.actor, tags, null);
 
     }
 
-    public Set<Actor> pixelOverlap( String... tags )
+    public Set<Behaviour> pixelOverlap( String... tags )
     {
         return this.pixelOverlap(this.actor, tags, null);
     }
 
-    public Set<Actor> overlapping( String[] includeTags, String[] excludeTags )
+    public Set<Behaviour> overlapping( String[] includeTags, String[] excludeTags )
     {
         return this.overlapping(this.actor, includeTags, excludeTags);
 
     }
 
-    public Set<Actor> pixelPixelOverlap( String[] includeTags, String[] excludeTags )
+    public Set<Behaviour> pixelPixelOverlap( String[] includeTags, String[] excludeTags )
     {
         return this.pixelOverlap(this.actor, includeTags, excludeTags);
     }

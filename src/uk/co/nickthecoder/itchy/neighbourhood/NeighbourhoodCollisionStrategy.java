@@ -11,6 +11,7 @@ import java.util.Set;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.ActorCollisionStrategy;
+import uk.co.nickthecoder.itchy.Behaviour;
 import uk.co.nickthecoder.itchy.BruteForceCollisionStrategy;
 import uk.co.nickthecoder.itchy.WorldRectangle;
 
@@ -106,23 +107,24 @@ public class NeighbourhoodCollisionStrategy extends ActorCollisionStrategy
     }
 
     @Override
-    public Set<Actor> overlapping( Actor source, String[] includeTags, String[] excludeTags )
+    public Set<Behaviour> overlapping( Actor source, String[] includeTags, String[] excludeTags )
     {
-        Set<Actor> results = new HashSet<Actor>();
+        Set<Behaviour> results = new HashSet<Behaviour>();
 
         for (Iterator<Square> i = this.neighbourhood.squareIterator(this.topLeft, this.bottomRight); i
             .hasNext();) {
             Square square = i.next();
 
             for (Actor actor : square.getOccupants()) {
+                Behaviour behaviour = actor.getBehaviour();
 
                 if ((actor != source) && (!results.contains(actor))) {
                     for (String includeTag : includeTags) {
-                        if (actor.hasTag(includeTag)) {
-                            if (!BruteForceCollisionStrategy.exclude(actor, excludeTags)) {
+                        if (behaviour.hasTag(includeTag)) {
+                            if (!BruteForceCollisionStrategy.exclude(behaviour, excludeTags)) {
 
                                 if (source.overlapping(actor)) {
-                                    results.add(actor);
+                                    results.add(behaviour);
                                     break;
                                 }
                             }
@@ -136,23 +138,24 @@ public class NeighbourhoodCollisionStrategy extends ActorCollisionStrategy
     }
 
     @Override
-    public Set<Actor> pixelOverlap( Actor source, String[] includeTags, String[] excludeTags )
+    public Set<Behaviour> pixelOverlap( Actor source, String[] includeTags, String[] excludeTags )
     {
-        Set<Actor> results = new HashSet<Actor>();
+        Set<Behaviour> results = new HashSet<Behaviour>();
 
         for (Iterator<Square> i = this.neighbourhood.squareIterator(this.topLeft, this.bottomRight); i
             .hasNext();) {
             Square square = i.next();
 
             for (Actor actor : square.getOccupants()) {
-
+                Behaviour behaviour = actor.getBehaviour();
+                
                 if ((actor != source) && (!results.contains(actor))) {
-                    if (!BruteForceCollisionStrategy.exclude(actor, excludeTags)) {
+                    if (!BruteForceCollisionStrategy.exclude(behaviour, excludeTags)) {
                         for (String includeTag : includeTags) {
-                            if (actor.hasTag(includeTag)) {
+                            if (behaviour.hasTag(includeTag)) {
     
                                 if (source.pixelOverlap(actor)) {
-                                    results.add(actor);
+                                    results.add(behaviour);
                                     break;
                                 }
                             }

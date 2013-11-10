@@ -26,12 +26,12 @@ public class BruteForceCollisionStrategy implements CollisionStrategy
     }
     
     /**
-     * Should the actor be excluded from consideration based on the exclude tags?
-     * @param actor The actor who's tags are to be tested
-     * @param excludeTags The list of tags which will exclude the actor, or null to include all actors.
-     * @return true if the actor is tagged with any one of the excludeTags. 
+     * Should the behaviour be excluded from consideration based on the exclude tags?
+     * @param behaviour The behaviour who's tags are to be tested
+     * @param excludeTags The list of tags which will exclude the behaviour, or null to include all behaviours.
+     * @return true if the behaviour is tagged with any one of the excludeTags. 
      */
-    public static boolean exclude( Actor actor, String[] excludeTags )
+    public static boolean exclude( Behaviour behaviour, String[] excludeTags )
     {
         if (excludeTags == null) {
             return false;
@@ -39,7 +39,7 @@ public class BruteForceCollisionStrategy implements CollisionStrategy
 
         if (excludeTags != null) {
             for (String excludeTag : excludeTags) {
-                if (actor.hasTag(excludeTag)) {
+                if (behaviour.hasTag(excludeTag)) {
                     return true;
                 }
             }
@@ -50,16 +50,17 @@ public class BruteForceCollisionStrategy implements CollisionStrategy
     public static final BruteForceCollisionStrategy singleton = new BruteForceCollisionStrategy();
 
     @Override
-    public Set<Actor> overlapping( Actor source, String[] includeTags, String[] excludeTags )
+    public Set<Behaviour> overlapping( Actor source, String[] includeTags, String[] excludeTags )
     {
-        Set<Actor> results = new HashSet<Actor>();
+        Set<Behaviour> results = new HashSet<Behaviour>();
         for (String tag : includeTags) {
-            for (Actor other : Actor.allByTag(tag)) {
-
-                if ((other != source) && (!exclude(other, excludeTags))) {
+            for (Behaviour otherBehaviour : Behaviour.allByTag(tag)) {
+                Actor other = otherBehaviour.getActor();
+                
+                if ((other != source) && (!exclude(otherBehaviour, excludeTags))) {
                     if (!results.contains(other)) {
                         if (source.overlapping(other)) {
-                            results.add(other);
+                            results.add(otherBehaviour);
                         }
                     }
                 }
@@ -69,16 +70,17 @@ public class BruteForceCollisionStrategy implements CollisionStrategy
     }
 
     @Override
-    public Set<Actor> pixelOverlap( Actor source, String[] includeTags, String[] excludeTags )
+    public Set<Behaviour> pixelOverlap( Actor source, String[] includeTags, String[] excludeTags )
     {
-        Set<Actor> results = new HashSet<Actor>();
+        Set<Behaviour> results = new HashSet<Behaviour>();
         for (String tag : includeTags) {
-            for (Actor other : Actor.allByTag(tag)) {
+            for (Behaviour otherBehaviour : Behaviour.allByTag(tag)) {
+                Actor other = otherBehaviour.getActor();
 
-                if ((other != source) && (!exclude(other, excludeTags))) {
+                if ((other != source) && (!exclude(otherBehaviour, excludeTags))) {
                     if (!results.contains(other)) {
                         if (source.pixelOverlap(other)) {
-                            results.add(other);
+                            results.add(otherBehaviour);
                         }
                     }
                 }
