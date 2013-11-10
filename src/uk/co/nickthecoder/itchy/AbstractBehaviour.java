@@ -70,35 +70,25 @@ public abstract class AbstractBehaviour implements Behaviour
         return this.tagMembership.hasTag(name);
     }
 
-    @Override
     public void addTag( String tag )
     {
         this.tagMembership.add(tag);
     }
 
-    @Override
     public void removeTag( String tag )
     {
         this.tagMembership.remove(tag);
     }
 
-    @Override
     public void removeAllTags()
     {
         this.tagMembership.removeAll();
-    }
-
-    @Override
-    public ClassName getClassName()
-    {
-        return new ClassName(this.getClass().getName());
     }
 
     /**
      * Called when the behaviour is first attached to its actor. Override this method to perform one
      * time initialisation.
      */
-    @Override
     public void onBirth()
     {
         // Do nothing
@@ -107,6 +97,12 @@ public abstract class AbstractBehaviour implements Behaviour
     public void onDeath()
     {
         // Do nothing
+    }
+
+    @Override
+    public void birth()
+    {
+        onBirth();
     }
 
     @Override

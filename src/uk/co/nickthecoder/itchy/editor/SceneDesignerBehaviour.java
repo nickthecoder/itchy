@@ -26,7 +26,7 @@ public class SceneDesignerBehaviour extends AbstractBehaviour
 
     public ClassName getBehaviourClassName()
     {
-        return this.actualBehaviour.getClassName();
+        return ClassName.getClassName(this.actualBehaviour);
     }
 
     @Override

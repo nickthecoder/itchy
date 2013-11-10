@@ -398,7 +398,7 @@ public class Actor implements PropertySubject<Actor>
 
         if ((this.layer != null) && (this.behaviour != unsedBehaviour)) {
             this.fullyCreated = true;
-            this.behaviour.onBirth();
+            this.behaviour.birth();
             Itchy.getGame().add(this);
         }
     }

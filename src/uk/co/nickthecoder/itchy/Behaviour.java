@@ -8,7 +8,6 @@ package uk.co.nickthecoder.itchy;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.util.AbstractProperty;
-import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.itchy.util.PropertySubject;
 
 public interface Behaviour extends MessageListener, Cloneable, PropertySubject<Behaviour>
@@ -17,30 +16,21 @@ public interface Behaviour extends MessageListener, Cloneable, PropertySubject<B
 
     public boolean hasTag( String name );
 
-    public void addTag( String tag );
-
-    public void removeTag( String tag );
-
-    public void removeAllTags();
-
-    public ClassName getClassName();
-
-    public void onBirth();
+    public void birth();
 
     public void die();
-
-    @Override
-    public List<AbstractProperty<Behaviour, ?>> getProperties();
 
     public void attach( Actor actor );
 
     public void detatch();
 
-    @Override
-    public void onMessage( String message );
-
     public void animateAndTick();
 
     public Behaviour clone();
 
+    @Override
+    public void onMessage( String message );
+
+    @Override
+    public List<AbstractProperty<Behaviour, ?>> getProperties();
 }

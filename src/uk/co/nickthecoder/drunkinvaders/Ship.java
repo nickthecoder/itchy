@@ -233,8 +233,9 @@ public class Ship extends Bouncy implements Shootable
         bulletActor.setDirection(getActor().getAppearance().getDirection());
         DrunkInvaders.game.mainLayer.addTop(bulletActor);
         bulletActor.moveForwards(10);
-        bulletActor.setBehaviour(new Bullet());
-        bulletActor.getBehaviour().addTag("killable");
+        Bullet bullet = new Bullet();
+        bullet.addTag("killable");
+        bulletActor.setBehaviour(bullet);
 
         this.recharge = TIMER_DURATION;
     }

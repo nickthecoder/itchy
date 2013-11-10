@@ -78,7 +78,6 @@ public class ScriptedBehaviour extends AbstractBehaviour implements MouseListene
 
     }
 
-    @Override
     public ClassName getClassName()
     {
         return this.className;

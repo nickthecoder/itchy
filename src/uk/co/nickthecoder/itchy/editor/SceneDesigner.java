@@ -609,9 +609,9 @@ public class SceneDesigner implements MouseListener, KeyListener
 
         this.behaviourClassName = new ClassNameBox(
             this.editor.game.getScriptManager(),
-            sdb.actualBehaviour.getClassName(),
+            ClassName.getClassName(sdb.actualBehaviour),
             Behaviour.class
-            );
+        );
 
         this.behaviourClassName.addChangeListener(new ComponentChangeListener() {
 

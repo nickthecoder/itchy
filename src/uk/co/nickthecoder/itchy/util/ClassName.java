@@ -5,7 +5,9 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.util;
 
+import uk.co.nickthecoder.itchy.Behaviour;
 import uk.co.nickthecoder.itchy.script.ScriptManager;
+import uk.co.nickthecoder.itchy.script.ScriptedBehaviour;
 
 /**
  * Holds the name of a class, which the user can set within the editor, used fro Behaviour,
@@ -18,6 +20,15 @@ import uk.co.nickthecoder.itchy.script.ScriptManager;
  */
 public class ClassName
 {
+    public static ClassName getClassName( Behaviour behaviour )
+    {
+        if (behaviour instanceof ScriptedBehaviour) {
+            return ((ScriptedBehaviour) behaviour).getClassName();
+        } else {
+            return new ClassName( behaviour.getClass().getName());
+        }
+    }
+    
     public String name;
 
     public ClassName( String name )
