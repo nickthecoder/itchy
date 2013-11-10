@@ -23,9 +23,6 @@
     <pose name="stars2" filename="images/stars2.jpg"/>
   </poses>
   <sounds>
-    <sound name="hallelujah" filename="sounds/hallelujah.ogg"/>
-    <sound name="hallelujah2" filename="sounds/hallelujah2.ogg"/>
-    <sound name="ohLord" filename="sounds/ohLord.ogg"/>
     <sound name="woo" filename="sounds/woo.ogg"/>
   </sounds>
   <animations>
@@ -71,7 +68,6 @@
     </costume>
     <costume name="editor" defaultZOrder="0" extends="Button" behaviour="uk.co.nickthecoder.itchy.extras.MessageButton">
       <string name="default">Editor</string>
-      <sound name="mouseDown" sound="hallelujah" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND" priority="1"/>
       <font name="default" font="Boycott"/>
     </costume>
     <costume name="play" defaultZOrder="0" extends="Button">

@@ -28,6 +28,7 @@ import uk.co.nickthecoder.itchy.util.NinePatch;
 import uk.co.nickthecoder.itchy.util.PropertySubject;
 import uk.co.nickthecoder.itchy.util.XMLException;
 import uk.co.nickthecoder.itchy.util.XMLTag;
+import uk.co.nickthecoder.jame.JameException;
 import uk.co.nickthecoder.jame.Surface;
 
 public class ResourcesReader
@@ -167,8 +168,12 @@ public class ResourcesReader
             String name = soundTag.getAttribute("name");
             String filename = soundTag.getAttribute("filename");
 
-            SoundResource soundResource = new SoundResource(this.resources, name, filename);
-            this.resources.addSound(soundResource);
+            try {
+                SoundResource soundResource = new SoundResource(this.resources, name, filename);
+                this.resources.addSound(soundResource);
+            } catch (JameException e) {
+                throw new XMLException( "Failed to load sound file : " + filename );
+            }
         }
 
     }
