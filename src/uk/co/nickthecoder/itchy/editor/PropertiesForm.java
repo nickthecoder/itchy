@@ -116,7 +116,6 @@ public class PropertiesForm<S>
      *         If one of the properties couldn't be updated.
      */
     public void update()
-        throws Exception
     {
         // No need to do anything when autoUpdate, as the changes are made as the user makes them
         // (not on "Ok" button).
@@ -126,7 +125,11 @@ public class PropertiesForm<S>
 
         for (AbstractProperty<S, ?> property : this.properties) {
             Component component = this.componentMap.get(property.key);
-            property.update(this.subject, component);
+            try {
+                property.update(this.subject, component);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 

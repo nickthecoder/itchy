@@ -7,33 +7,57 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
+import java.io.File;
+import java.util.List;
+
+import uk.co.nickthecoder.itchy.util.AbstractProperty;
 import uk.co.nickthecoder.itchy.util.NinePatch;
+import uk.co.nickthecoder.itchy.util.Property;
 import uk.co.nickthecoder.jame.JameException;
 import uk.co.nickthecoder.jame.Surface;
 
 public class NinePatchResource extends NamedResource
 {
+    public static List<AbstractProperty<NinePatchResource, ?>> properties = AbstractProperty.findAnnotations(NinePatchResource.class);
+
 
     public static final int THUMBNAIL_WIDTH = 100;
     public static final int THUMBNAIL_HEIGHT = 60;
 
+    @Property(label="Nine Patch", recurse=true)
     public NinePatch ninePatch;
 
-    public String filename;
+    private File file;
 
     private Surface thumbnail;
 
     public NinePatchResource( Resources resources, String name, String filename, NinePatch ninePatch )
     {
         super(resources, name);
-        this.filename = filename;
+        this.file = new File(filename);
         this.ninePatch = ninePatch;
     }
 
     public void setFilename( String filename ) throws JameException
     {
-        this.ninePatch.loadImage(this.resources.resolveFilename(filename));
-        this.filename = filename;
+        setFile( new File(filename) );
+    }
+
+    public String getFilename()
+    {
+        return this.file.getPath();
+    }
+    
+    @Property(label="Filename", aliases="filename")
+    public File getFile()
+    {
+        return this.file;
+    }
+    
+    public void setFile( File file ) throws JameException
+    {
+        this.ninePatch.loadImage(this.resources.resolveFilename(file.getPath()));
+        this.file = file;
     }
 
     public Surface getThumbnail()

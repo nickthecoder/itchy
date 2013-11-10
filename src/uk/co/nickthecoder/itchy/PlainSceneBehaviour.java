@@ -16,7 +16,7 @@ import uk.co.nickthecoder.jame.event.MouseMotionEvent;
  * Does nothing, but it is handy to use as a subclass, rather than creating your own empty methods
  * for those methods that you don't care about.
  */
-public class NullSceneBehaviour implements SceneBehaviour
+public class PlainSceneBehaviour implements SceneBehaviour
 {
     @Override
     public void onActivate()

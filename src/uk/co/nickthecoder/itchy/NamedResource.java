@@ -47,7 +47,7 @@ public class NamedResource
         this.name = newName;
     }
 
-    @Property(label="Name")
+    @Property(label="Name", sortOrder=-10)
     public String getName()
     {
         return this.name;

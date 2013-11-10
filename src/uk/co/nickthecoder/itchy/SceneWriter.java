@@ -46,8 +46,8 @@ public class SceneWriter extends XMLWriter
 
         this.beginTag("scene");
         this.attribute("showMouse", this.scene.showMouse);
-        if ( ! NullSceneBehaviour.class.getName().equals(this.scene.sceneBehaviourName)) {
-            this.attribute("behaviour", this.scene.sceneBehaviourName.name);
+        if ( ! PlainSceneBehaviour.class.getName().equals(this.scene.sceneBehaviourClassName)) {
+            this.attribute("behaviour", this.scene.sceneBehaviourClassName.name);
         }
         
         writeSceneBehaviourProperties();

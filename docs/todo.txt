@@ -1,3 +1,50 @@
+New Server
+==========
+Install debian onto the SSD.
+Create a single partition 90% of the disk.
+
+Get a spare drive, and format it with one large partition and three small ones.
+The small ones will be for swap and /var/log and /tmp
+The large one will be for /gidea (a subset)
+
+Get the nvidia driver working
+    https://wiki.debian.org/NvidiaGraphicsDrivers
+
+Install all of the software onto root partition, except Myth
+
+Make a backup of
+    /gidea/projects
+    /home/nick
+    /home/nalin
+    /gidea/music/ a small subset of default to test only
+    /gidea/images
+
+Set the computer name to be giddydom.healthy
+And have /etc/hosts resolve giddyserv to localhost and old-giddyserv to 192.168.1.2
+
+tar /etc /boot from real giddyserv and copy it over.
+
+Get tomcat and apache working
+
+Backup and copy over the mythdatabase and familyalbum database (others?)
+
+Remove the old / partition from real giddyserv and replace it with SSD
+This also contains /mythdata and /backup
+Mount /giddyserv (raid array).
+
+Install the double DVB card
+Set up Myth - maybe moving the box down stairs for access to the aerial.
+
+Backup the SSD, so that if it fails, I can get back to a good system quickly.
+
+
+Firewall
+Backup scripts
+Website indexer (butchers)
+
+
+
+
 Bed covers
 Glasses
 Vacuum bathroom
@@ -5,21 +52,51 @@ Vacuum bathroom
 TODO
 ====
 
+Rename a scene from scene designer does not rename
+    and doesn't update the ScenesEditor table
+
 Reloading a SceneBehaviour script causes the properties to double.
 
 Changing SceneBehaviour doesn't update the SceneBehaviourProperty components
 
-Wrong classes when you click the ??? classname ... picker button.
+Create a Compound Behaviour, which has a ClassName array of other Behaviours, or maybe a Map of
+    name->ClassName.
+    Properties will be taken from the all of the child behaviour's properties.
+    tick and other methods will call each in child behaviour in turn.
+        Therefore the name->ClassName will need to be ordered, so itsn't a simple Map.
+        
+    This could be so common, perhaps its worth the ClassName or ClassNameProperty to do this.
+    If the selected classname instanceof Multiple, then the ClassNameProperty's Component "..." changes
+    from just picking a class from a list, to picking a list of name->ClassName pairs.
+    That's nice because it can fire a change event, which will make the list of properties rebuild.
+    We can use CompoundBehaviour in conjunction with ScriptedBehaviour, and therefore no extra
+    code for compound js behaviours.
+
+    Problem!
+        As tags are on Actor, searching for the nearest "shootable" will return an actor, but it's
+        behaviour won't be shootable, one of the CompoundBehaviour's will be.
+        Tags MUST be on Behaviour.
+            We first need to remove old "active" tag, as this is an Actor thing, not a Behaviour.
+            Do we need Active at all? The closest I've come to the need for active, is the activate
+            delay, but that's implemented by being active all the time!!!
+        Not so fast, how about tags such as "deadly" - yeah that's still ok, one of the Beahviours will
+        be deadly, and the rest wont.
+
+
+Create an actor from a costume easily.
+    Could be on Costume taking no arguments
+    Could be on Game or Resources taking the costume name.
+
+ClassName shouldn't be in script package, should be in itchy package.
+
 
 What's Next
 ===========
 
-Register the "extras" behaviours.
-
 Add pose and nine patch : try to show the image sub directory if it exists.
     Copy images if outside of the game's directory
         Can do this during SAVE
-
+    
 Create a game from scratch, deliberately making syntax errors in the code.
     Fix any bugs and improve the UI along the way. 
 

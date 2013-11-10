@@ -685,10 +685,6 @@ public class Actor implements PropertySubject<Actor>
      */
     public boolean hitting( int x, int y )
     {
-        if (this.getAppearance().getAlpha() < 1) {
-            return false;
-        }
-
         if (isText()) {
             return this.contains(x, y);
         } else {

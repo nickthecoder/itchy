@@ -1,5 +1,5 @@
 <resources>
-  <game title="It's Gonna Rain" width="800" height="600" initialScene="menu" className="uk.co.nickthecoder.itchy.Game"/>
+  <game className="uk.co.nickthecoder.itchy.Game" height="600" initialScene="menu" title="It's Gonna Rain" width="800"/>
   <fonts>
     <font name="BlackCasper" filename="fonts/BlackCasper/BlackCasper.ttf"/>
     <font name="Boycott" filename="fonts/Boycott/Boycott.ttf"/>
@@ -38,111 +38,111 @@
     <sound name="woo" filename="sounds/woo.ogg"/>
   </sounds>
   <animations>
-    <animation name="buttonDown">
-      <compound sequence="true" loops="1">
-        <scale target="1.5" ticks="5" ease="linear"/>
-      </compound>
-    </animation>
-    <animation name="buttonHoverOut">
-      <compound sequence="true" loops="1">
-        <scale target="1.0" ticks="10" ease="easeInOutCubic"/>
-      </compound>
-    </animation>
-    <animation name="buttonHoverOver">
-      <compound sequence="true" loops="1">
-        <scale target="1.2" ticks="10" ease="linear"/>
-      </compound>
-    </animation>
-    <animation name="buttonUp">
-      <compound sequence="true" loops="1">
-        <scale target="1.0" ticks="10" ease="easeInOutCubic"/>
-      </compound>
-    </animation>
     <animation name="death">
-      <compound sequence="true" loops="1">
-        <compound sequence="false" loops="1">
-          <move dx="0.0" dy="100.0" ticks="50" ease="easeOutQuad"/>
-          <turn turn="90.0" ticks="50" ease="linear"/>
+      <compound loops="1" sequence="true">
+        <compound loops="1" sequence="false">
+          <move ease="easeOutQuad" ticks="50" dx="0.0" dy="100.0"/>
+          <turn ease="linear" ticks="50" turn="90.0"/>
         </compound>
-        <compound sequence="false" loops="1">
-          <move dx="0.0" dy="-60.0" ticks="60" ease="bounce3"/>
-          <turn turn="40.0" ticks="40" ease="linear"/>
+        <compound loops="1" sequence="false">
+          <move ease="bounce3" ticks="60" dx="0.0" dy="-60.0"/>
+          <turn ease="linear" ticks="40" turn="40.0"/>
         </compound>
-        <compound sequence="false" loops="1">
-          <move dx="-20.0" dy="-60.0" ticks="50" ease="easeIn"/>
-          <turn turn="-60.0" ticks="50" ease="easeIn"/>
+        <compound loops="1" sequence="false">
+          <move ease="easeIn" ticks="50" dx="-20.0" dy="-60.0"/>
+          <turn ease="easeIn" ticks="50" turn="-60.0"/>
         </compound>
-        <alpha target="0.0" ticks="200" ease="easeIn"/>
+        <alpha ease="easeIn" target="0.0" ticks="200"/>
+      </compound>
+    </animation>
+    <animation name="hoverOut">
+      <compound loops="1" sequence="true">
+        <scale ease="easeInOutCubic" target="1.0" ticks="10"/>
+      </compound>
+    </animation>
+    <animation name="hoverOver">
+      <compound loops="1" sequence="true">
+        <scale ease="linear" target="1.2" ticks="10"/>
+      </compound>
+    </animation>
+    <animation name="mouseDown">
+      <compound loops="1" sequence="true">
+        <scale ease="linear" target="1.5" ticks="5"/>
+      </compound>
+    </animation>
+    <animation name="mouseUp">
+      <compound loops="1" sequence="true">
+        <scale ease="easeInOutCubic" target="1.0" ticks="10"/>
       </compound>
     </animation>
     <animation name="wally_boo">
-      <compound sequence="true" loops="1">
-        <move dx="-30.0" dy="100.0" ticks="20" ease="easeOutQuad"/>
-        <move dx="-30.0" dy="-100.0" ticks="30" ease="bounce3"/>
+      <compound loops="1" sequence="true">
+        <move ease="easeOutQuad" ticks="20" dx="-30.0" dy="100.0"/>
+        <move ease="bounce3" ticks="30" dx="-30.0" dy="-100.0"/>
       </compound>
     </animation>
     <animation name="wally_walk">
-      <compound sequence="false" loops="1">
-        <move dx="2000.0" dy="0.0" ticks="800" ease="linear"/>
-        <compound sequence="true" loops="0">
-          <move dx="-10.0" dy="20.0" ticks="20" ease="easeInOut"/>
-          <move dx="10.0" dy="-20.0" ticks="15" ease="easeInOut"/>
+      <compound loops="1" sequence="false">
+        <move ease="linear" ticks="800" dx="2000.0" dy="0.0"/>
+        <compound loops="0" sequence="true">
+          <move ease="easeInOut" ticks="20" dx="-10.0" dy="20.0"/>
+          <move ease="easeInOut" ticks="15" dx="10.0" dy="-20.0"/>
         </compound>
       </compound>
     </animation>
     <animation name="wally_walk2">
-      <compound sequence="false" loops="1">
-        <move dx="2000.0" dy="0.0" ticks="800" ease="linear"/>
-        <compound sequence="true" loops="0">
-          <move dx="-5.0" dy="20.0" ticks="10" ease="easeInOutQuad"/>
-          <move dx="5.0" dy="-20.0" ticks="10" ease="easeInOutQuad"/>
+      <compound loops="1" sequence="false">
+        <move ease="linear" ticks="800" dx="2000.0" dy="0.0"/>
+        <compound loops="0" sequence="true">
+          <move ease="easeInOutQuad" ticks="10" dx="-5.0" dy="20.0"/>
+          <move ease="easeInOutQuad" ticks="10" dx="5.0" dy="-20.0"/>
         </compound>
       </compound>
     </animation>
     <animation name="wally_walk3">
-      <compound sequence="true" loops="1">
-        <compound sequence="false" loops="1">
-          <move dx="400.0" dy="0.0" ticks="150" ease="linear"/>
-          <compound sequence="true" loops="5">
-            <move dx="-15.0" dy="20.0" ticks="15" ease="easeInOut"/>
-            <move dx="5.0" dy="-20.0" ticks="15" ease="easeInOut"/>
+      <compound loops="1" sequence="true">
+        <compound loops="1" sequence="false">
+          <move ease="linear" ticks="150" dx="400.0" dy="0.0"/>
+          <compound loops="5" sequence="true">
+            <move ease="easeInOut" ticks="15" dx="-15.0" dy="20.0"/>
+            <move ease="easeInOut" ticks="15" dx="5.0" dy="-20.0"/>
           </compound>
         </compound>
-        <move dx="0.0" dy="0.0" ticks="100" ease="easeInOutQuad"/>
-        <compound sequence="false" loops="1">
-          <move dx="400.0" dy="0.0" ticks="150" ease="linear"/>
-          <compound sequence="true" loops="5">
-            <move dx="-15.0" dy="20.0" ticks="15" ease="easeInOutQuad"/>
-            <move dx="5.0" dy="-20.0" ticks="15" ease="easeInOutQuad"/>
+        <move ease="easeInOutQuad" ticks="100" dx="0.0" dy="0.0"/>
+        <compound loops="1" sequence="false">
+          <move ease="linear" ticks="150" dx="400.0" dy="0.0"/>
+          <compound loops="5" sequence="true">
+            <move ease="easeInOutQuad" ticks="15" dx="-15.0" dy="20.0"/>
+            <move ease="easeInOutQuad" ticks="15" dx="5.0" dy="-20.0"/>
           </compound>
         </compound>
-        <move dx="0.0" dy="0.0" ticks="100" ease="easeInOutQuad"/>
-        <compound sequence="false" loops="1">
-          <move dx="400.0" dy="0.0" ticks="150" ease="linear"/>
-          <compound sequence="true" loops="5">
-            <move dx="-15.0" dy="20.0" ticks="15" ease="easeInOutQuad"/>
-            <move dx="5.0" dy="-20.0" ticks="15" ease="easeInOutQuad"/>
+        <move ease="easeInOutQuad" ticks="100" dx="0.0" dy="0.0"/>
+        <compound loops="1" sequence="false">
+          <move ease="linear" ticks="150" dx="400.0" dy="0.0"/>
+          <compound loops="5" sequence="true">
+            <move ease="easeInOutQuad" ticks="15" dx="-15.0" dy="20.0"/>
+            <move ease="easeInOutQuad" ticks="15" dx="5.0" dy="-20.0"/>
           </compound>
         </compound>
-        <move dx="0.0" dy="0.0" ticks="100" ease="linear"/>
+        <move ease="linear" ticks="100" dx="0.0" dy="0.0"/>
       </compound>
     </animation>
     <animation name="wally_walk4">
-      <compound sequence="true" loops="1">
-        <compound sequence="false" loops="1">
-          <move dx="600.0" dy="-60.0" ticks="224" ease="linear"/>
-          <compound sequence="true" loops="8">
-            <move dx="-15.0" dy="20.0" ticks="14" ease="easeInOut"/>
-            <move dx="5.0" dy="-20.0" ticks="14" ease="easeInOut"/>
+      <compound loops="1" sequence="true">
+        <compound loops="1" sequence="false">
+          <move ease="linear" ticks="224" dx="600.0" dy="-60.0"/>
+          <compound loops="8" sequence="true">
+            <move ease="easeInOut" ticks="14" dx="-15.0" dy="20.0"/>
+            <move ease="easeInOut" ticks="14" dx="5.0" dy="-20.0"/>
           </compound>
         </compound>
-        <move dx="0.0" dy="100.0" ticks="20" ease="easeOutCubic"/>
-        <move dx="0.0" dy="-100.0" ticks="20" ease="easeInQuad"/>
-        <compound sequence="false" loops="1">
-          <move dx="600.0" dy="60.0" ticks="200" ease="linear"/>
-          <compound sequence="true" loops="8">
-            <move dx="-15.0" dy="20.0" ticks="12" ease="easeInOutQuad"/>
-            <move dx="5.0" dy="-20.0" ticks="12" ease="easeInOutQuad"/>
+        <move ease="easeOutCubic" ticks="20" dx="0.0" dy="100.0"/>
+        <move ease="easeInQuad" ticks="20" dx="0.0" dy="-100.0"/>
+        <compound loops="1" sequence="false">
+          <move ease="linear" ticks="200" dx="600.0" dy="60.0"/>
+          <compound loops="8" sequence="true">
+            <move ease="easeInOutQuad" ticks="12" dx="-15.0" dy="20.0"/>
+            <move ease="easeInOutQuad" ticks="12" dx="5.0" dy="-20.0"/>
           </compound>
         </compound>
       </compound>
@@ -154,17 +154,17 @@
     </costume>
     <costume name="button" defaultZOrder="0">
       <string name="default">Button</string>
-      <sound name="hoverOver" sound="drip" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
+      <sound name="hoverOver" sound="drip" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND" priority="1"/>
       <font name="default" font="BlackCasper"/>
-      <animation name="down" animation="buttonDown"/>
-      <animation name="hoverOut" animation="buttonHoverOut"/>
-      <animation name="hoverOver" animation="buttonHoverOver"/>
-      <animation name="up" animation="buttonUp"/>
+      <animation name="hoverOut" animation="hoverOut"/>
+      <animation name="hoverOver" animation="hoverOver"/>
+      <animation name="mouseDown" animation="mouseDown"/>
+      <animation name="mouseUp" animation="mouseUp"/>
     </costume>
     <costume name="drop1" defaultZOrder="0" behaviour="Drop.js" properties="DropProperties.js">
       <pose name="default" pose="drop1"/>
       <pose name="droplet" pose="droplet1"/>
-      <sound name="drip" sound="drip" priority="3" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="PLAY_BOTH"/>
+      <sound name="drip" sound="drip" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="PLAY_BOTH" priority="3"/>
       <properties speedFactor="1.0"/>
     </costume>
     <costume name="drop2" defaultZOrder="0" behaviour="Drop.js" properties="DropProperties.js">
@@ -176,34 +176,34 @@
     <costume name="drop3" defaultZOrder="0" behaviour="Drop.js" properties="DropProperties.js">
       <pose name="default" pose="drop3"/>
       <pose name="droplet" pose="droplet3"/>
-      <sound name="drip" sound="forFortyDays" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="PLAY_BOTH"/>
-      <sound name="drip" sound="hallelujah" priority="2" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="PLAY_BOTH"/>
-      <sound name="drip" sound="hallelujah2" priority="2" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="PLAY_BOTH"/>
-      <sound name="drip" sound="rain" priority="2" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="PLAY_BOTH"/>
-      <sound name="drip" sound="theyDidntBelieveThatItWasGunnaRain" priority="2" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="PLAY_BOTH"/>
-      <sound name="drip" sound="myLordMyLord" priority="2" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="PLAY_BOTH"/>
+      <sound name="drip" sound="forFortyDays" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="PLAY_BOTH" priority="1"/>
+      <sound name="drip" sound="hallelujah" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="PLAY_BOTH" priority="2"/>
+      <sound name="drip" sound="hallelujah2" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="PLAY_BOTH" priority="2"/>
+      <sound name="drip" sound="rain" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="PLAY_BOTH" priority="2"/>
+      <sound name="drip" sound="theyDidntBelieveThatItWasGunnaRain" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="PLAY_BOTH" priority="2"/>
+      <sound name="drip" sound="myLordMyLord" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="PLAY_BOTH" priority="2"/>
       <properties speedFactor="1.2"/>
     </costume>
     <costume name="editor" defaultZOrder="0" extends="button" behaviour="uk.co.nickthecoder.itchy.extras.MessageButton">
       <string name="default">Editor</string>
-      <sound name="click" sound="theyDidntBelieveThatItWasGunnaRain" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
+      <sound name="click" sound="theyDidntBelieveThatItWasGunnaRain" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND" priority="1"/>
       <font name="default" font="Boycott"/>
     </costume>
     <costume name="play" defaultZOrder="0" extends="button" behaviour="uk.co.nickthecoder.itchy.extras.MessageButton">
       <string name="default">play</string>
-      <sound name="click" sound="itBeganToRain" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
+      <sound name="click" sound="itBeganToRain" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND" priority="1"/>
       <font name="default" font="BlackCasper"/>
     </costume>
     <costume name="player" defaultZOrder="0" behaviour="Player.js">
       <pose name="bones" pose="sheepBones"/>
       <pose name="default" pose="sheep"/>
-      <sound name="death" sound="ohLord" priority="3" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
-      <sound name="highScore" sound="woo" priority="2" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
+      <sound name="death" sound="ohLord" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND" priority="3"/>
+      <sound name="highScore" sound="woo" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND" priority="2"/>
       <animation name="death" animation="death"/>
     </costume>
     <costume name="quit" defaultZOrder="0" extends="button" behaviour="uk.co.nickthecoder.itchy.extras.MessageButton">
       <string name="default">Quit</string>
-      <sound name="click" sound="ItAintGunnaRain" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
+      <sound name="click" sound="ItAintGunnaRain" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND" priority="1"/>
       <font name="default" font="Boycott"/>
     </costume>
     <costume name="wally" defaultZOrder="0" behaviour="Wally.js">

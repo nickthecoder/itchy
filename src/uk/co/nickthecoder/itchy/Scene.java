@@ -21,7 +21,7 @@ public class Scene
     public boolean showMouse = true;
 
     @Property(label = "Scene Behaviour", baseClass = SceneBehaviour.class, sortOrder = 90)
-    public ClassName sceneBehaviourName;
+    public ClassName sceneBehaviourClassName;
 
     private List<SceneLayer> sceneLayers;
 
@@ -35,7 +35,7 @@ public class Scene
     {
         this.sceneLayers = new ArrayList<SceneLayer>();
         this.layersMap = new HashMap<String, SceneLayer>();
-        this.sceneBehaviourName = new ClassName(NullSceneBehaviour.class.getName());
+        this.sceneBehaviourClassName = new ClassName(PlainSceneBehaviour.class.getName());
 
         this.createSceneLayer("default");
     }
@@ -140,13 +140,13 @@ public class Scene
     {
         SceneBehaviour result;
 
-        if (StringUtils.isBlank(this.sceneBehaviourName.name)) {
-            result = new NullSceneBehaviour();
+        if (StringUtils.isBlank(this.sceneBehaviourClassName.name)) {
+            result = new PlainSceneBehaviour();
         } else {
-            if (resources.isValidScript(this.sceneBehaviourName)) {
-                result = Resources.getScriptManager().createSceneBehaviour(this.sceneBehaviourName);
+            if (resources.isValidScript(this.sceneBehaviourClassName)) {
+                result = Resources.getScriptManager().createSceneBehaviour(this.sceneBehaviourClassName);
             } else {
-                Class<?> klass = Class.forName(this.sceneBehaviourName.name);
+                Class<?> klass = Class.forName(this.sceneBehaviourClassName.name);
                 result = (SceneBehaviour) klass.newInstance();
             }
         }

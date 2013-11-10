@@ -13,11 +13,14 @@ import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 /**
  * Detects when the mouse is clicked on this behaviour's Actor, and sends a message to the Game.
  * <p>
- * The abstract onClick method is called after the mouseUp event.  
+ * The abstract onClick method is called after the mouseUp event.
  * <p>
- * The button will fire three events, "down", "up" and "click". "down" is fired when the mouse is clicked
- * within the actor. The "up" is fired when the mouse moves outside of the actor while the button is still down.
- * Finally, "up" and "click" are fired when the mouse button is released within the button.
+ * The button will fire three events, "mouseDown", "mouseUp" and "click". "mouseDown" is fired when
+ * the mouse is pressed within the actor. The "mouseUp" is fired when the mouse moves outside of the
+ * actor while the button is still down. "mouseUp" and "click" are fired when the mouse button
+ * is released within the button.
+ * In addition, events "hoverOver" and "hoverOut" are also fired when the mouse moves over the
+ * button without being clicked.
  * <p>
  * For the button to work, the layer that the actor is drawn on must have had its mouse listener
  * enabled. i.e. call {@link uk.co.nickthecoder.itchy.ActorsLayer#enableMouseListener} when
@@ -75,7 +78,7 @@ public abstract class Button extends Behaviour implements MouseListener
 
         if (nowInside != this.inside) {
             this.inside = nowInside;
-            
+
             if (this.down) {
                 if (nowInside) {
                     this.onDown();
@@ -92,26 +95,26 @@ public abstract class Button extends Behaviour implements MouseListener
 
             return true;
         }
-        
+
         return false;
     }
 
     /**
-     * Fires the "down" event
+     * Fires the "mouseDown" event
      */
     protected void onDown()
     {
-        this.event("down");
+        this.event("mouseDown");
     }
-    
+
     /**
      * Fires the "up" event
      */
     protected void onUp()
     {
-        this.event("up");
+        this.event("mouseUp");
     }
-    
+
     /**
      * Fires the "click" event. Override this method, to perform your button's action.
      */
@@ -119,15 +122,15 @@ public abstract class Button extends Behaviour implements MouseListener
     {
         this.event("click");
     }
-    
+
     protected void onHoverOver()
     {
-        this.event("hoverOver");        
+        this.event("hoverOver");
     }
-    
+
     protected void onHoverOut()
     {
-        this.event("hoverOut");        
+        this.event("hoverOut");
     }
 
 }

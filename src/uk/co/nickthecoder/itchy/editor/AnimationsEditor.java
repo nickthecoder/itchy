@@ -9,17 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.AnimationResource;
-import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.animation.Animation;
 import uk.co.nickthecoder.itchy.animation.CompoundAnimation;
 import uk.co.nickthecoder.itchy.animation.FramedAnimation;
-import uk.co.nickthecoder.itchy.gui.AbstractTableListener;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Button;
 import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.Container;
-import uk.co.nickthecoder.itchy.gui.GridLayout;
 import uk.co.nickthecoder.itchy.gui.ImageComponent;
 import uk.co.nickthecoder.itchy.gui.IntegerBox;
 import uk.co.nickthecoder.itchy.gui.Label;
@@ -28,22 +25,17 @@ import uk.co.nickthecoder.itchy.gui.ReflectionTableModelRow;
 import uk.co.nickthecoder.itchy.gui.SimpleTableModel;
 import uk.co.nickthecoder.itchy.gui.SingleColumnRowComparator;
 import uk.co.nickthecoder.itchy.gui.Table;
+import uk.co.nickthecoder.itchy.gui.TableModel;
 import uk.co.nickthecoder.itchy.gui.TableModelColumn;
 import uk.co.nickthecoder.itchy.gui.TableModelRow;
-import uk.co.nickthecoder.itchy.gui.TableRow;
 import uk.co.nickthecoder.itchy.gui.TextBox;
 import uk.co.nickthecoder.itchy.gui.VerticalLayout;
 import uk.co.nickthecoder.itchy.gui.VerticalScroll;
+import uk.co.nickthecoder.itchy.util.AbstractProperty;
 
-public class AnimationsEditor extends SubEditor
+public class AnimationsEditor extends SubEditor<AnimationResource>
 {
-    private TextBox txtName;
-
-    private AnimationResource currentAnimationResource;
-
     private Animation currentAnimation;
-
-    private SimpleTableModel tableModel;
 
     private Container treeContainer;
 
@@ -53,39 +45,21 @@ public class AnimationsEditor extends SubEditor
     }
 
     @Override
-    public Container createPage()
+    public Table createTable()
     {
-        Container form = super.createPage();
-        form.setFill(true, true);
-
         TableModelColumn name = new TableModelColumn("Name", 0, 200);
         name.rowComparator = new SingleColumnRowComparator<String>(0);
 
         List<TableModelColumn> columns = new ArrayList<TableModelColumn>();
         columns.add(name);
 
-        this.tableModel = this.createTableModel();
-        this.table = new Table(this.tableModel, columns);
-        this.table.addTableListener(new AbstractTableListener() {
-            @Override
-            public void onRowPicked( TableRow tableRow )
-            {
-                AnimationsEditor.this.onEdit();
-            }
+        TableModel tableModel = this.createTableModel();
+        Table table = new Table(tableModel, columns);
 
-        });
-
-        this.table.sort(0);
-        this.table.setFill(true, true);
-        this.table.setExpansion(1.0);
-        form.addChild(this.table);
-
-        form.addChild(this.createListButtons());
-
-        return form;
+        return table;
     }
 
-    private SimpleTableModel createTableModel()
+    public SimpleTableModel createTableModel()
     {
         SimpleTableModel model = new SimpleTableModel();
 
@@ -100,23 +74,15 @@ public class AnimationsEditor extends SubEditor
         return model;
     }
 
-    private void rebuildTable()
-    {
-        this.table.setTableModel(this.createTableModel());
-    }
-
     @Override
-    protected void edit( GridLayout grid, Object resource )
+    protected void createForm()
     {
-        this.currentAnimationResource = (AnimationResource) resource;
-        this.currentAnimation = this.currentAnimationResource.animation.copy();
-
-        this.txtName = new TextBox(this.currentAnimationResource.getName());
-        grid.addRow(new Label("Name"), this.txtName);
+        super.createForm();
+        this.currentAnimation = this.currentResource.animation.copy();
 
         this.treeContainer = new Container();
         this.createTree();
-        grid.addRow(new NullComponent(), this.treeContainer);
+        this.form.grid.addRow(new NullComponent(), this.treeContainer);
     }
 
     private void createTree()
@@ -272,48 +238,41 @@ public class AnimationsEditor extends SubEditor
     }
 
     @Override
-    protected void onOk()
+    protected void remove( AnimationResource ar )
     {
-        if (this.adding ||
-            (!this.txtName.getText().equals(this.currentAnimationResource.getName()))) {
-            if (this.editor.resources.getAnimation(this.txtName.getText()) != null) {
-                this.setMessage("That name is already being used.");
-                return;
-            }
-        }
-        this.currentAnimationResource.setName(this.txtName.getText());
-        this.currentAnimationResource.animation = this.currentAnimation;
-
-        if (this.adding) {
-            this.editor.resources.addAnimation(this.currentAnimationResource);
-            this.rebuildTable();
-        } else {
-
-            this.table.updateRow(this.table.getCurrentTableModelRow());
-        }
-
-        Itchy.getGame().hideWindow(this.editWindow);
-    }
-
-    @Override
-    protected void remove( Object resource )
-    {
-        AnimationResource ar = (AnimationResource) resource;
-
         this.editor.resources.removeAnimation(ar.getName());
-        this.rebuildTable();
     }
 
     @Override
     protected void onAdd()
     {
-        this.adding = true;
+        Animation animation = new CompoundAnimation(true);
 
-        this.currentAnimation = new CompoundAnimation(true);
-        this.currentAnimationResource = new AnimationResource(this.editor.resources,
-            "newAnimation", this.currentAnimation);
+        this.edit(new AnimationResource(this.editor.resources, "", animation), true);
+    }
 
-        this.showDetails(this.currentAnimationResource);
+    @Override
+    protected void update() throws MessageException
+    {
+        TextBox name = (TextBox) this.form.getComponent("name");
+        if (this.adding || (!name.getText().equals(this.currentResource.getName()))) {
+
+            if (this.editor.resources.getAnimation(name.getText()) != null) {
+                throw new MessageException("That name is already being used.");
+            }
+        }
+
+        super.update();
+        this.currentResource.animation = this.currentAnimation;
+
+        if (this.adding) {
+            this.editor.resources.addAnimation(this.currentResource);
+        }
+    }
+    @Override
+    protected List<AbstractProperty<AnimationResource, ?>> getProperties()
+    {
+        return AnimationResource.properties;
     }
 
 }

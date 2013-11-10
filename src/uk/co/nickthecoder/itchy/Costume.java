@@ -14,6 +14,7 @@ import java.util.Set;
 import uk.co.nickthecoder.itchy.animation.Animation;
 import uk.co.nickthecoder.itchy.script.ScriptManager;
 import uk.co.nickthecoder.itchy.util.ClassName;
+import uk.co.nickthecoder.itchy.util.Property;
 import uk.co.nickthecoder.jame.Sound;
 
 public class Costume
@@ -21,6 +22,17 @@ public class Costume
     private static final Random random = new Random();
 
     private Costume extendedFrom;
+
+    @Property(label = "Behaviour")
+    public ClassName behaviourClassName = new ClassName(uk.co.nickthecoder.itchy.NullBehaviour.class.getName());
+
+    @Property(label = "Default Z Order")
+    public int defaultZOrder;
+
+    @Property(label = "Properties")
+    private ClassName propertiesClassName = new ClassName(CostumeProperties.class.getName());
+
+    private CostumeProperties properties = new CostumeProperties();
 
     private final HashMap<String, List<AnimationResource>> animationChoices;
 
@@ -31,15 +43,6 @@ public class Costume
     private final HashMap<String, List<PoseResource>> poseChoices;
 
     private final HashMap<String, List<FontResource>> fontChoices;
-
-    private ClassName propertiesClassName = new ClassName(CostumeProperties.class.getName());
-
-    public ClassName behaviourClassName = new ClassName(
-        uk.co.nickthecoder.itchy.NullBehaviour.class.getName());
-
-    private CostumeProperties properties = new CostumeProperties();
-
-    public int defaultZOrder;
 
     public Costume()
     {
@@ -55,6 +58,24 @@ public class Costume
         this.poseChoices = new HashMap<String, List<PoseResource>>();
         this.fontChoices = new HashMap<String, List<FontResource>>();
         this.animationChoices = new HashMap<String, List<AnimationResource>>();
+    }
+
+    public ClassName getPropertiesClassName()
+    {
+        return this.propertiesClassName;
+    }
+
+    public void setPropertiesClassName( ScriptManager scriptManager, ClassName value )
+    {
+        if (!value.equals(this.propertiesClassName)) {
+            this.properties = CostumeProperties.createProperties(scriptManager, value);
+            this.propertiesClassName = value;
+        }
+    }
+
+    public CostumeProperties getProperties()
+    {
+        return this.properties;
     }
 
     public Costume getExtendedFrom()
@@ -138,8 +159,6 @@ public class Costume
     {
         return this.stringChoices.get(name);
     }
-
-
 
     // Pose
 
@@ -332,24 +351,6 @@ public class Costume
     public List<AnimationResource> getAnimationChoices( String name )
     {
         return this.animationChoices.get(name);
-    }
-
-    public ClassName getPropertiesClassName()
-    {
-        return this.propertiesClassName;
-    }
-
-    public void setPropertiesClassName( ScriptManager scriptManager, ClassName value )
-    {
-        if (!value.equals(this.propertiesClassName)) {
-            this.properties = CostumeProperties.createProperties(scriptManager, value);
-            this.propertiesClassName = value;
-        }
-    }
-
-    public CostumeProperties getProperties()
-    {
-        return this.properties;
     }
 
 }

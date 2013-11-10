@@ -118,7 +118,7 @@ public abstract class Behaviour implements MessageListener, Cloneable, PropertyS
         if (oldActor == null) {
             this.init();
         }
-        
+
         Tag tags = this.getClass().getAnnotation(Tag.class);
         if (tags != null) {
             for (String name : tags.names()) {
@@ -138,6 +138,7 @@ public abstract class Behaviour implements MessageListener, Cloneable, PropertyS
                 getActor().removeTag(name);
             }
         }
+        this.actor = null;
     }
 
     public Actor getActor()

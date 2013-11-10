@@ -554,7 +554,7 @@ public class SceneDesigner implements MouseListener, KeyListener
                 // TODO isn't the error style done by ClassNameBox?
                 box.addStyle("error", !ok);
                 if (ok) {
-                    SceneDesigner.this.scene.sceneBehaviourName = box.getClassName();
+                    SceneDesigner.this.scene.sceneBehaviourClassName = box.getClassName();
                     try {
                         SceneDesigner.this.scene.sceneBehaviour =
                             SceneDesigner.this.scene.createSceneBehaviour(
@@ -670,25 +670,26 @@ public class SceneDesigner implements MouseListener, KeyListener
                 SimpleTableModelRow row = new SimpleTableModelRow();
                 row.add(layer);
                 row.add(layer.getName());
+                row.add(layer.minimumAlpha);
                 this.layersTableModel.addRow(row);
             }
         }
 
         List<TableModelColumn> columns = new ArrayList<TableModelColumn>(1);
 
-        TableModelColumn showHideColumn = new TableModelColumn("Show", 0, 70) {
+        TableModelColumn showHideColumn = new TableModelColumn("Dim", 0, 70) {
             public void addPlainCell( Container container, final TableModelRow row )
             {
                 final Layer layer = (Layer) row.getData(0);
-                final CheckBox hideShow = new CheckBox(layer.isVisible());
-                hideShow.addChangeListener(new ComponentChangeListener() {
+                final CheckBox dim = new CheckBox(false);
+                dim.addChangeListener(new ComponentChangeListener() {
                     @Override
                     public void changed()
                     {
-                        layer.setVisible(hideShow.getValue());
+                        layer.maximumAlpha = dim.getValue() ? 80 : 255;
                     }
                 });
-                container.addChild(hideShow);
+                container.addChild(dim);
             }
 
             @Override
@@ -711,6 +712,43 @@ public class SceneDesigner implements MouseListener, KeyListener
 
         TableModelColumn nameColumn = new TableModelColumn("Layer", 1, 300);
         columns.add(nameColumn);
+
+        TableModelColumn minAlphaColumn = new TableModelColumn("Reveal", 2, 100) {
+            public void addPlainCell( Container container, final TableModelRow row )
+            {
+                final Layer layer = (Layer) row.getData(0);
+                final CheckBox check = new CheckBox(layer.minimumAlpha > 0);
+                check.addChangeListener(new ComponentChangeListener() {
+                    @Override
+                    public void changed()
+                    {
+                        try {
+                            layer.minimumAlpha = (check.getValue() ? 200 : 0);
+                        } catch (Exception e) {
+                        }
+                    }
+                });
+                container.addChild(check);
+            }
+
+            @Override
+            public Component createCell( TableModelRow row )
+            {
+                Container container = new Container();
+                container.setXAlignment(0.5);
+                addPlainCell(container, row);
+                return container;
+            };
+
+            @Override
+            public void updateComponent( Component component, TableModelRow row )
+            {
+                Container container = (Container) component;
+                container.clear();
+                addPlainCell(container, row);
+            };
+        };
+        columns.add(minAlphaColumn);
 
         this.layersTable = new Table(this.layersTableModel, columns);
         this.layersTable.setFill(true, true);
@@ -1011,9 +1049,9 @@ public class SceneDesigner implements MouseListener, KeyListener
 
             } else {
 
-                for (Iterator<Actor> i = fromBottom ? this.currentDesignLayer.getActors()
-                    .iterator() : this.currentDesignLayer
-                    .getActors().descendingIterator(); i.hasNext();) {
+                for (Iterator<Actor> i = fromBottom ?
+                    this.currentDesignLayer.getActors().iterator() :
+                    this.currentDesignLayer.getActors().descendingIterator(); i.hasNext();) {
 
                     Actor actor = i.next();
 
@@ -1344,7 +1382,7 @@ public class SceneDesigner implements MouseListener, KeyListener
     {
         Scene scene = new Scene();
 
-        scene.sceneBehaviourName = this.scene.sceneBehaviourName;
+        scene.sceneBehaviourClassName = this.scene.sceneBehaviourClassName;
         scene.sceneBehaviour = this.scene.sceneBehaviour;
 
         for (Layer child : this.designLayers.getChildren()) {

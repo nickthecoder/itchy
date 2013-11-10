@@ -47,8 +47,8 @@ public class SceneReader
     private void readScene( XMLTag sceneTag ) throws Exception
     {
         this.scene.showMouse = sceneTag.getOptionalBooleanAttribute("showMouse", true);
-        this.scene.sceneBehaviourName = new ClassName(sceneTag.getOptionalAttribute("behaviour",
-            NullSceneBehaviour.class.getName()));
+        this.scene.sceneBehaviourClassName = new ClassName(sceneTag.getOptionalAttribute("behaviour",
+            PlainSceneBehaviour.class.getName()));
 
         // For old versions without multiple layers, the actor tags are directly within the scene
         // tag.

@@ -117,8 +117,6 @@ public abstract class Loadable
             return file;
         } else {
             if (file.isAbsolute()) {
-                System.err.println("Warning. Using absolute filenames to load resource : " +
-                    file);
                 return file;
             } else {
                 File result = new File(this.directory, file.getPath());

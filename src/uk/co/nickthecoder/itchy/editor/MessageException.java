@@ -5,20 +5,14 @@
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
-package uk.co.nickthecoder.itchy;
+package uk.co.nickthecoder.itchy.editor;
 
-/**
- * Does nothing - useful for scenery, and other game objects which don't do anything!
- */
-public final class NullBehaviour extends Behaviour
+public class MessageException extends Exception
 {
+    private static final long serialVersionUID = -1793379432118436886L;
 
-    /**
-     * Does nothing
-     */
-    @Override
-    public void tick()
+    public MessageException( String message )
     {
+        super(message);
     }
-
 }

@@ -7,10 +7,16 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
+import java.util.List;
+
 import uk.co.nickthecoder.itchy.animation.Animation;
+import uk.co.nickthecoder.itchy.util.AbstractProperty;
 
 public class AnimationResource extends NamedResource
 {
+
+    public static List<AbstractProperty<AnimationResource, ?>> properties = AbstractProperty.findAnnotations(AnimationResource.class);
+
     public Animation animation;
 
     public AnimationResource( Resources resources, String name, Animation animation )

@@ -17,11 +17,10 @@ public class SceneResource extends Loadable
 
     private Scene scene;
 
-    @Property(label="Name", sortOrder=-1)
+    @Property(label = "Name", sortOrder = -1)
     public String name;
 
     public Resources resources;
-
 
     private static File makeFile( String name )
     {
@@ -50,11 +49,15 @@ public class SceneResource extends Loadable
         this.renameFile(makeFile(newName));
     }
 
-    @Property( label="Scene",recurse=true)
+    @Property(label = "Scene", recurse = true)
     public Scene getScene() throws Exception
     {
         if (this.scene == null) {
-            this.load();
+            if ( this.resolveFile( this.getFile()).exists()) {
+                this.load();
+            } else {
+                this.scene = new Scene();
+            }
         }
         return this.scene;
     }
@@ -72,7 +75,7 @@ public class SceneResource extends Loadable
         } catch (Exception e) {
             this.scene = new Scene();
         }
-        if ( this.scene.sceneBehaviour == null) {
+        if (this.scene.sceneBehaviour == null) {
             this.scene.sceneBehaviour = this.scene.createSceneBehaviour(this.resources);
         }
 

@@ -185,7 +185,6 @@ public class ScriptManager
         throws ScriptException
     {
         ScriptLanguage language = getLanguage(getExtension(className.name));
-        System.out.println("Loading : " + className );
         language.loadScript(className.name);
 
         return language.createCostumeProperties(className);

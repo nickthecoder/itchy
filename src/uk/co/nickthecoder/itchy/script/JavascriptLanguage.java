@@ -16,7 +16,7 @@ import uk.co.nickthecoder.itchy.Game;
 import uk.co.nickthecoder.itchy.GameManager;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.NullBehaviour;
-import uk.co.nickthecoder.itchy.NullSceneBehaviour;
+import uk.co.nickthecoder.itchy.PlainSceneBehaviour;
 import uk.co.nickthecoder.itchy.SceneBehaviour;
 import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
@@ -462,8 +462,8 @@ public class JavascriptLanguage extends ScriptLanguage
         }
 
         if (sceneBehaviour == null) {
-            log("Using NullSceneBehaviour instead.");
-            return new NullSceneBehaviour();
+            log("Using PlainSceneBehaviour instead.");
+            return new PlainSceneBehaviour();
         }
         return sceneBehaviour;
     }

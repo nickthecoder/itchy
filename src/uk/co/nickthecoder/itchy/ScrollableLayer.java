@@ -104,7 +104,7 @@ public class ScrollableLayer extends ActorsLayer
                 continue;
             }
 
-            if (actor.getAppearance().getAlpha() < 2) {
+            if ((actor.getAppearance().getAlpha() < 2) && (this.minimumAlpha < 2)) {
                 continue;
             }
 
@@ -156,6 +156,12 @@ public class ScrollableLayer extends ActorsLayer
                         Rect rect = new Rect(screenX, screenY, width, height);
 
                         int alpha = (int) (actor.getAppearance().getAlpha());
+                        if (alpha < this.minimumAlpha) {
+                            alpha = this.minimumAlpha;
+                        }
+                        if (alpha > this.maximumAlpha) {
+                            alpha = this.maximumAlpha;
+                        }
                         if (alpha >= 255) {
 
                             // Fully opaque (normal behaviour)
@@ -201,9 +207,9 @@ public class ScrollableLayer extends ActorsLayer
     @Override
     public void reset()
     {
-        scrollTo(0,0);
+        scrollTo(0, 0);
     }
-    
+
     @Override
     public void destroy()
     {

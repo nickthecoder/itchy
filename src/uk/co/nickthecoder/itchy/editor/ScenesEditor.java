@@ -8,19 +8,11 @@ package uk.co.nickthecoder.itchy.editor;
 import java.util.ArrayList;
 import java.util.List;
 
-import uk.co.nickthecoder.itchy.Itchy;
-import uk.co.nickthecoder.itchy.NullSceneBehaviour;
-import uk.co.nickthecoder.itchy.Scene;
-import uk.co.nickthecoder.itchy.SceneBehaviour;
 import uk.co.nickthecoder.itchy.SceneResource;
-import uk.co.nickthecoder.itchy.gui.AbstractTableListener;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Button;
-import uk.co.nickthecoder.itchy.gui.CheckBox;
 import uk.co.nickthecoder.itchy.gui.ClassNameBox;
-import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.Container;
-import uk.co.nickthecoder.itchy.gui.GridLayout;
 import uk.co.nickthecoder.itchy.gui.Label;
 import uk.co.nickthecoder.itchy.gui.ReflectionTableModelRow;
 import uk.co.nickthecoder.itchy.gui.SimpleTableModel;
@@ -29,29 +21,20 @@ import uk.co.nickthecoder.itchy.gui.Table;
 import uk.co.nickthecoder.itchy.gui.TableModel;
 import uk.co.nickthecoder.itchy.gui.TableModelColumn;
 import uk.co.nickthecoder.itchy.gui.TableModelRow;
-import uk.co.nickthecoder.itchy.gui.TableRow;
 import uk.co.nickthecoder.itchy.gui.TextBox;
+import uk.co.nickthecoder.itchy.util.AbstractProperty;
 import uk.co.nickthecoder.itchy.util.ClassName;
 
-public class ScenesEditor extends SubEditor
+public class ScenesEditor extends SubEditor<SceneResource>
 {
-    private TextBox txtName;
-
-    private CheckBox checkBoxShowMouse;
-
-    private SceneResource currentSceneResource;
-
     public ScenesEditor( Editor editor )
     {
         super(editor);
     }
 
     @Override
-    public Container createPage()
+    public Table createTable()
     {
-        Container form = super.createPage();
-        form.setFill(true, true);
-
         TableModelColumn name = new TableModelColumn("Name", 0, 200);
         name.rowComparator = new SingleColumnRowComparator<String>(0);
 
@@ -59,38 +42,28 @@ public class ScenesEditor extends SubEditor
         columns.add(name);
 
         TableModel model = this.createTableModel();
-        this.table = new Table(model, columns);
-        this.table.addTableListener(new AbstractTableListener() {
-            @Override
-            public void onRowPicked( TableRow tableRow )
-            {
-                ScenesEditor.this.onDesign();
-            }
-        });
+        Table table = new Table(model, columns);
 
-        this.table.setFill(true, true);
-        this.table.setExpansion(1.0);
-        this.table.sort(0);
+        return table;
+    }
 
-        form.addChild(this.table);
-        form.addChild(this.createListButtons());
+    @Override
+    protected TableModel createTableModel()
+    {
+        SimpleTableModel model = new SimpleTableModel();
 
-        return form;
+        for (String sceneName : this.editor.resources.sceneNames()) {
+            SceneResource sceneResource = this.editor.resources.getSceneResource(sceneName);
+            String[] attributeNames = { "name" };
+            TableModelRow row = new ReflectionTableModelRow<SceneResource>(sceneResource, attributeNames);
+            model.addRow(row);
+        }
+        return model;
     }
 
     @Override
     protected void addListButtons( Container buttons )
     {
-        Button design = new Button(new Label("Design"));
-        design.addActionListener(new ActionListener() {
-            @Override
-            public void action()
-            {
-                ScenesEditor.this.onDesign();
-            }
-        });
-        buttons.addChild(design);
-
         Button duplicate = new Button(new Label("Duplicate"));
         duplicate.addActionListener(new ActionListener() {
             @Override
@@ -104,137 +77,17 @@ public class ScenesEditor extends SubEditor
         super.addListButtons(buttons);
     }
 
-    private TableModel createTableModel()
-    {
-        SimpleTableModel model = new SimpleTableModel();
-
-        for (String sceneName : this.editor.resources.sceneNames()) {
-            SceneResource sceneResource = this.editor.resources.getSceneResource(sceneName);
-            String[] attributeNames = { "name" };
-            TableModelRow row = new ReflectionTableModelRow<SceneResource>(sceneResource,
-                attributeNames);
-            model.addRow(row);
-        }
-        return model;
-    }
-
-    private void rebuildTable()
-    {
-        this.table.setTableModel(this.createTableModel());
-    }
-
-    private ClassNameBox sceneBehaviourName;
 
     @Override
-    protected void edit( GridLayout grid, Object resource )
+    protected void remove( SceneResource sceneResource )
     {
-        this.currentSceneResource = (SceneResource) resource;
-
-        this.txtName = new TextBox(this.currentSceneResource.getName());
-        grid.addRow(new Label("Name"), this.txtName);
-
-        ClassName behaviourName = new ClassName(NullSceneBehaviour.class.getName());
-
-        boolean showMouse = false;
-        try {
-            Scene scene = this.currentSceneResource.getScene();
-            showMouse = scene.showMouse;
-            behaviourName = scene.sceneBehaviourName;
-
-        } catch (Exception e) {
-            // Do nothing
-        }
-
-        this.sceneBehaviourName = new ClassNameBox(
-            this.editor.game.getScriptManager(), behaviourName, SceneBehaviour.class);
-
-        this.sceneBehaviourName.addChangeListener(new ComponentChangeListener() {
-
-            @Override
-            public void changed()
-            {
-                ClassNameBox box = ScenesEditor.this.sceneBehaviourName;
-                String value = box.getClassName().name;
-                boolean ok = ScenesEditor.this.editor.game.resources
-                    .registerSceneBehaviourClassName(value);
-                box.addStyle("error", !ok);
-            }
-        });
-
-        grid.addRow("Scene Behaviour", this.sceneBehaviourName);
-
-        this.checkBoxShowMouse = new CheckBox(showMouse);
-        grid.addRow("Show Mouse", this.checkBoxShowMouse);
-
-    }
-
-    @Override
-    protected void onOk()
-    {
-        if (this.adding || (!this.txtName.getText().equals(this.currentSceneResource.getName()))) {
-            if (getResources().getSceneResource(this.txtName.getText()) != null) {
-                this.setMessage("That name is already being used.");
-                return;
-            }
-        }
-        this.currentSceneResource.rename(this.txtName.getText());
-
-        ClassName className = this.sceneBehaviourName.getClassName();
-        if (!getResources().registerSceneBehaviourClassName(className.name)) {
-            this.setMessage("Invalid Scene Behaviour");
-            return;
-        }
-
-        if (this.adding) {
-            try {
-                this.currentSceneResource.save();
-            } catch (Exception e) {
-                e.printStackTrace();
-                this.setMessage("Failed to create empty scene file");
-                return;
-            }
-
-            this.editor.resources.addScene(this.currentSceneResource);
-            this.rebuildTable();
-
-        } else {
-
-            this.table.updateRow(this.table.getCurrentTableModelRow());
-        }
-
-        try {
-            this.currentSceneResource.getScene().showMouse = this.checkBoxShowMouse.getValue();
-            this.currentSceneResource.getScene().sceneBehaviourName = className;
-            this.currentSceneResource.getScene().sceneBehaviourName =
-                this.sceneBehaviourName.getClassName();
-
-            this.currentSceneResource.save();
-        } catch (Exception e) {
-            e.printStackTrace();
-            this.setMessage("Failed to save scene file");
-            return;
-        }
-
-        Itchy.getGame().hideWindow(this.editWindow);
-
-    }
-
-    @Override
-    protected void remove( Object resource )
-    {
-        SceneResource sceneResource = (SceneResource) resource;
-
         this.editor.resources.removeScene(sceneResource.getName());
-        this.rebuildTable();
-
     }
 
     @Override
     protected void onAdd()
     {
-        this.currentSceneResource = new SceneResource(this.editor.resources, "newScene");
-        this.adding = true;
-        this.showDetails(this.currentSceneResource);
+        this.edit(new SceneResource(this.editor.resources, ""), true);
     }
 
     private void onDuplicate()
@@ -244,39 +97,83 @@ public class ScenesEditor extends SubEditor
         if (row == null) {
             return;
         }
-        SceneResource sceneResource = (SceneResource) row.getData();
-
-        this.currentSceneResource = new SceneResource(this.editor.resources, "newScene");
+        SceneResource oldSceneResource = (SceneResource) row.getData();
+        SceneResource newSceneResource = new SceneResource(this.editor.resources, "newScene");
         try {
-            this.currentSceneResource.setScene(sceneResource.getScene().copy());
+            newSceneResource.setScene(oldSceneResource.getScene().copy());
         } catch (Exception e) {
             e.printStackTrace();
             return;
         }
 
-        this.adding = true;
-        this.showDetails(this.currentSceneResource);
+        this.edit(newSceneResource, true);
     }
 
-    private void onDesign()
+    @Override
+    public void onEdit()
     {
-        ReflectionTableModelRow<?> row = (ReflectionTableModelRow<?>) this.table
-            .getCurrentTableModelRow();
+        ReflectionTableModelRow<?> row = (ReflectionTableModelRow<?>) this.table.getCurrentTableModelRow();
         if (row == null) {
             return;
         }
-        SceneResource sceneResource = (SceneResource) row.getData();
+        design((SceneResource) row.getData());
+    }
 
-        SceneDesigner designer = new SceneDesigner(this.editor, sceneResource);
-        this.editor.mainGuiPose.hide();
-        designer.go();
+    @Override
+    protected void update() throws MessageException
+    {
+        TextBox name = (TextBox) this.form.getComponent("name");
+        ClassNameBox sceneBehaviourClassName = (ClassNameBox) this.form.getComponent("sceneBehaviourClassName");
+
+        if (this.adding || (!name.getText().equals(this.currentResource.getName()))) {
+            if (getResources().getSceneResource(name.getText()) != null) {
+                throw new MessageException("That name is already being used.");
+            }
+        }
+        this.currentResource.rename(name.getText());
+
+        ClassName className = sceneBehaviourClassName.getClassName();
+        if (!getResources().registerSceneBehaviourClassName(className.name)) {
+            throw new MessageException("Invalid Scene Behaviour");
+        }
+
+        if (this.adding) {
+            try {
+                this.currentResource.save();
+            } catch (Exception e) {
+                e.printStackTrace();
+                throw new MessageException("Failed to create empty scene file");
+            }
+
+            this.editor.resources.addScene(this.currentResource);
+        }
+
+        super.update();
+
+        try {
+            this.currentResource.save();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new MessageException("Failed to save scene file");
+        }
     }
 
     public void design( String sceneName )
     {
-        SceneResource sceneResource = this.editor.resources.getSceneResource(sceneName);
+        design(this.editor.resources.getSceneResource(sceneName));
+
+    }
+
+    public void design( SceneResource sceneResource )
+    {
         SceneDesigner designer = new SceneDesigner(this.editor, sceneResource);
         this.editor.mainGuiPose.hide();
         designer.go();
+    }
+
+    @Override
+    protected List<AbstractProperty<SceneResource, ?>> getProperties()
+    {
+        return SceneResource.properties;
     }
 }

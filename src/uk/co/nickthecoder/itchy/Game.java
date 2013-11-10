@@ -149,7 +149,7 @@ public class Game implements InputListener, QuitListener, MessageListener
         this.gameManager = gameManager;
         this.resources = gameManager.resources;
 
-        this.sceneBehaviour = new NullSceneBehaviour();
+        this.sceneBehaviour = new PlainSceneBehaviour();
         this.pause = new Pause(this);
 
         this.mouseListeners = new LinkedList<MouseListener>();

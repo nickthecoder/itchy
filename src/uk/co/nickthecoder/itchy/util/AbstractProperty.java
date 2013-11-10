@@ -5,6 +5,7 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.util;
 
+import java.io.File;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -33,12 +34,11 @@ import uk.co.nickthecoder.jame.RGBA;
  * @param <T>
  *        The type of the property, such as String, Integer, Double etc.
  */
-public abstract class AbstractProperty<S, T> implements Comparable<AbstractProperty<S, T>>
+public abstract class AbstractProperty<S, T> implements Comparable<AbstractProperty<S, ?>>
 {
-
     /**
-     * Uses reflection to looks through all of the fields and methods for "Property" annotions, and
-     * and for each one it finds, it creates the appropriate AbstractProperty and adds it to the
+     * Uses reflection to looks through all of the fields and methods for "Property" annotations,
+     * and and for each one it finds, it creates the appropriate AbstractProperty and adds it to the
      * collection.
      * 
      * @param klass
@@ -159,7 +159,6 @@ public abstract class AbstractProperty<S, T> implements Comparable<AbstractPrope
                 property.addAliases(annotation.aliases());
             }
             collection.add(property);
-            System.out.println("Key : " + property.key + " access : " + property.access);
         }
 
     }
@@ -193,6 +192,9 @@ public abstract class AbstractProperty<S, T> implements Comparable<AbstractPrope
         }
         if (klass == String.class) {
             return new StringProperty<SS>(label, access, key);
+        }
+        if (klass == File.class) {
+            return new FileProperty<SS>(label, access, key);
         }
         if (klass == boolean.class || klass == Boolean.class) {
             return new BooleanProperty<SS>(label, access, key);
@@ -407,7 +409,7 @@ public abstract class AbstractProperty<S, T> implements Comparable<AbstractPrope
     }
 
     @Override
-    public int compareTo( AbstractProperty<S, T> other )
+    public int compareTo( AbstractProperty<S, ?> other )
     {
         int diff = this.sortOrder - other.sortOrder;
         return diff == 0 ? this.label.compareTo(other.label) : diff;

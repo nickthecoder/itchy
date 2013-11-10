@@ -240,7 +240,6 @@ public class Util
 
             } else {
                 String key = line.substring(open + 2, close);
-                System.out.println("Found key : " + key);
                 if (substitutions.containsKey(key)) {
                     out.print(substitutions.get(key));
                 } else {

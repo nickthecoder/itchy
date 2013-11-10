@@ -7,11 +7,11 @@
  ******************************************************************************/
 package uk.co.nickthecoder.drunkinvaders;
 
-import uk.co.nickthecoder.itchy.NullSceneBehaviour;
+import uk.co.nickthecoder.itchy.PlainSceneBehaviour;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.Keys;
 
-public class Levels extends NullSceneBehaviour
+public class Levels extends PlainSceneBehaviour
 {
     
     @Override

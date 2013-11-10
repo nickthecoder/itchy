@@ -12,13 +12,11 @@ import java.util.List;
 
 import uk.co.nickthecoder.itchy.CostumeResource;
 import uk.co.nickthecoder.itchy.ImagePose;
-import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.PoseResource;
-import uk.co.nickthecoder.itchy.gui.AbstractTableListener;
+import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.ClickableContainer;
 import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.Container;
-import uk.co.nickthecoder.itchy.gui.DoubleBox;
 import uk.co.nickthecoder.itchy.gui.FileOpenDialog;
 import uk.co.nickthecoder.itchy.gui.GridLayout;
 import uk.co.nickthecoder.itchy.gui.ImageComponent;
@@ -29,36 +27,19 @@ import uk.co.nickthecoder.itchy.gui.ReflectionTableModelRow;
 import uk.co.nickthecoder.itchy.gui.SimpleTableModel;
 import uk.co.nickthecoder.itchy.gui.SingleColumnRowComparator;
 import uk.co.nickthecoder.itchy.gui.Table;
+import uk.co.nickthecoder.itchy.gui.TableModel;
 import uk.co.nickthecoder.itchy.gui.TableModelColumn;
 import uk.co.nickthecoder.itchy.gui.TableModelRow;
-import uk.co.nickthecoder.itchy.gui.TableRow;
 import uk.co.nickthecoder.itchy.gui.TextBox;
 import uk.co.nickthecoder.itchy.gui.VerticalScroll;
+import uk.co.nickthecoder.itchy.util.AbstractProperty;
 import uk.co.nickthecoder.itchy.util.Util;
 import uk.co.nickthecoder.jame.JameException;
 import uk.co.nickthecoder.jame.Surface;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
-import uk.co.nickthecoder.itchy.gui.ActionListener;
 
-public class PosesEditor extends SubEditor
+public class PosesEditor extends SubEditor<PoseResource>
 {
-
-    private TextBox txtName;
-
-    private FilenameComponent txtFilename;
-
-    private DoubleBox txtDirection;
-
-    private IntegerBox txtOffsetX;
-
-    private IntegerBox txtOffsetY;
-
-    private ImageComponent imgPose;
-
-    private PoseResource currentPoseResource;
-
-    private SimpleTableModel tableModel;
-
     private PickerButton<Filter> filterPickerButton;
 
     public PosesEditor( Editor editor )
@@ -95,11 +76,8 @@ public class PosesEditor extends SubEditor
     }
 
     @Override
-    public Container createPage()
+    public void addHeader( Container page )
     {
-        Container form = super.createPage();
-        form.setFill(true, true);
-
         HashMap<String, Filter> filterMap = new HashMap<String, Filter>();
         Filter all = new Filter() {
             @Override
@@ -115,24 +93,31 @@ public class PosesEditor extends SubEditor
                 return pr.shared;
             }
         };
-        filterMap.put(" All ", all);
-        filterMap.put(" Shared ", shared);
+        filterMap.put(" * All * ", all);
+        filterMap.put(" * Shared * ", shared);
         for (String name : this.editor.resources.costumeNames()) {
             CostumeResource cr = this.editor.resources.getCostumeResource(name);
             Filter filter = new CostumeFilter(cr);
-            filterMap.put("Costume : " + cr.getName(), filter);
+            filterMap.put(cr.getName(), filter);
         }
 
-        this.filterPickerButton = new PickerButton<Filter>("Filter", shared, filterMap);
+        this.filterPickerButton = new PickerButton<Filter>("Filter", all, filterMap);
         this.filterPickerButton.addActionListener(new ActionListener() {
             @Override
             public void action()
             {
                 rebuildTable();
-            }            
+            }
         });
-        form.addChild(filterPickerButton);
-        
+
+        page.addChild(this.filterPickerButton);
+
+    }
+
+    @Override
+    public Table createTable()
+    {
+
         TableModelColumn name = new TableModelColumn("Name", 0, 200);
         name.rowComparator = new SingleColumnRowComparator<String>(0);
 
@@ -152,27 +137,13 @@ public class PosesEditor extends SubEditor
         columns.add(filename);
         columns.add(image);
 
-        this.tableModel = this.createTableModel();
-        this.table = new Table(this.tableModel, columns);
-        this.table.addTableListener(new AbstractTableListener() {
-            @Override
-            public void onRowPicked( TableRow tableRow )
-            {
-                PosesEditor.this.onEdit();
-            }
-        });
+        TableModel tableModel = this.createTableModel();
+        Table table = new Table(tableModel, columns);
 
-        this.table.setFill(true, true);
-        this.table.setExpansion(1.0);
-        form.addChild(this.table);
-        this.table.sort(0);
-
-        form.addChild(this.createListButtons());
-
-        return form;
+        return table;
     }
 
-    private SimpleTableModel createTableModel()
+    protected SimpleTableModel createTableModel()
     {
         SimpleTableModel model = new SimpleTableModel();
 
@@ -188,32 +159,12 @@ public class PosesEditor extends SubEditor
         return model;
     }
 
-    private void rebuildTable()
-    {
-        this.table.setTableModel(this.createTableModel());
-    }
-
     @Override
-    protected void edit( GridLayout grid, Object resource )
+    protected void createForm()
     {
-        this.currentPoseResource = (PoseResource) resource;
-        ImagePose pose = this.currentPoseResource.pose;
+        super.createForm();
 
-        this.txtName = new TextBox(this.currentPoseResource.getName());
-        grid.addRow(new Label("Name"), this.txtName);
-
-        this.txtFilename = new FilenameComponent(this.editor.resources,
-            this.currentPoseResource.filename);
-        grid.addRow(new Label("Filename"), this.txtFilename);
-
-        this.txtDirection = new DoubleBox(pose.getDirection());
-        grid.addRow(new Label("Direction"), this.txtDirection);
-
-        this.txtOffsetX = new IntegerBox(pose.getOffsetX());
-        grid.addRow(new Label("Offset X"), this.txtOffsetX);
-
-        this.txtOffsetY = new IntegerBox(pose.getOffsetY());
-        grid.addRow(new Label("Offset Y"), this.txtOffsetY);
+        GridLayout grid = this.form.grid;
 
         Container imageContainer = new ClickableContainer() {
             @Override
@@ -223,85 +174,57 @@ public class PosesEditor extends SubEditor
                 while (parent != null) {
                     parent = parent.getParent();
                 }
-                PosesEditor.this.txtOffsetX.setValue(e.x);
-                PosesEditor.this.txtOffsetY.setValue(e.y);
+                ((IntegerBox) PosesEditor.this.form.getComponent("offsetX")).setValue(e.x);
+                ((IntegerBox) PosesEditor.this.form.getComponent("offsetY")).setValue(e.y);
             }
         };
-        this.imgPose = new ImageComponent(pose.getSurface());
-        imageContainer.addChild(this.imgPose);
-        this.imgPose.addStyle("checkered");
+        ImagePose pose = this.currentResource.pose;
+        ImageComponent imgPose = new ImageComponent(pose.getSurface());
+        imageContainer.addChild(imgPose);
+        imgPose.addStyle("checkered");
 
         if (pose.getSurface().getHeight() > 130) {
             VerticalScroll scroll = new VerticalScroll(imageContainer);
             scroll.setNaturalHeight(130);
-            grid.addRow(new Label("Image"), scroll);
+            grid.addRow("Image", scroll);
 
         } else {
-            grid.addRow(new Label("Image"), imageContainer);
+            grid.addRow("Image", imageContainer);
         }
-        grid.addRow(new Label(""), new Label("(Click the image to set its offsets)"));
+        grid.addRow("", new Label("(Click the image to set its offsets)"));
 
-        grid.addRow(new Label("Size"), new Label("" + pose.getSurface().getWidth() + "," +
-            pose.getSurface().getHeight()));
+        grid.addRow("Size", new Label("" + pose.getSurface().getWidth() + "," + pose.getSurface().getHeight()));
+
     }
 
     @Override
-    protected void onOk()
+    protected void update() throws MessageException
     {
-        boolean exists = this.editor.resources.fileExists(this.txtFilename.getText());
+        FilenameComponent filename = (FilenameComponent) this.form.getComponent("file");
+        TextBox name = (TextBox) this.form.getComponent("name");
+
+        boolean exists = this.editor.resources.fileExists(filename.getText());
         if (!exists) {
-            this.setMessage("Filename not found");
-            return;
+            throw new MessageException("Filename not found");
         }
 
-        if (this.adding || (!this.txtName.getText().equals(this.currentPoseResource.getName()))) {
-            if (this.editor.resources.getPoseResource(this.txtName.getText()) != null) {
-                this.setMessage("That name is already being used.");
-                return;
+        if (this.adding || (!name.getText().equals(this.currentResource.getName()))) {
+            if (this.editor.resources.getPoseResource(name.getText()) != null) {
+                throw new MessageException("That name is already being used.");
             }
         }
-        this.currentPoseResource.setName(this.txtName.getText());
-        this.currentPoseResource.filename = this.txtFilename.getText();
 
-        try {
-            this.currentPoseResource.pose.setDirection(this.txtDirection.getValue());
-        } catch (Exception e) {
-            this.setMessage("Direction must be a number");
-            return;
-        }
-
-        try {
-            this.currentPoseResource.pose.setOffsetX(Integer.parseInt(this.txtOffsetX.getText()));
-        } catch (Exception e) {
-            this.setMessage("Offset X must be an integer");
-            return;
-        }
-        try {
-            this.currentPoseResource.pose.setOffsetY(Integer.parseInt(this.txtOffsetY.getText()));
-        } catch (Exception e) {
-            this.setMessage("Offset Y must be an integer");
-            return;
-        }
+        super.update();
 
         if (this.adding) {
-            this.editor.resources.addPose(this.currentPoseResource);
-            this.rebuildTable();
-        } else {
-
-            this.table.updateRow(this.table.getCurrentTableModelRow());
+            this.editor.resources.addPose(this.currentResource);
         }
-
-        Itchy.getGame().hideWindow(this.editWindow);
     }
 
     @Override
-    protected void remove( Object resource )
+    protected void remove( PoseResource poseResource )
     {
-        PoseResource poseResource = (PoseResource) resource;
-
         this.editor.resources.removePose(poseResource.getName());
-        this.rebuildTable();
-
     }
 
     @Override
@@ -315,26 +238,32 @@ public class PosesEditor extends SubEditor
             }
         };
         this.openDialog.setDirectory(this.editor.resources.getDirectory());
-        Itchy.getGame().showWindow(this.openDialog);
+        this.openDialog.show();
     }
 
     public void onAdd( File file )
     {
         if (file == null) {
-            Itchy.getGame().hideWindow(this.openDialog);
+            this.openDialog.hide();
+
         } else {
             String filename = this.editor.resources.makeRelativeFilename(file);
             String name = Util.nameFromFilename(filename);
             try {
-                this.currentPoseResource = new PoseResource(this.editor.resources, name, filename);
-                this.adding = true;
-                Itchy.getGame().hideWindow(this.openDialog);
-                this.showDetails(this.currentPoseResource);
+                this.openDialog.hide();
+                this.edit(new PoseResource(this.editor.resources, name, filename), true);
+
             } catch (JameException e) {
                 this.openDialog.setMessage(e.getMessage());
                 return;
             }
         }
+    }
+
+    @Override
+    protected List<AbstractProperty<PoseResource, ?>> getProperties()
+    {
+        return PoseResource.properties;
     }
 
 }

@@ -84,7 +84,7 @@ public class ResourcesWriter extends XMLWriter
 
             this.beginTag("font");
             this.attribute("name", name);
-            this.attribute("filename", fontResource.filename);
+            this.attribute("filename", fontResource.getFilename());
             this.endTag("font");
         }
 
@@ -101,7 +101,7 @@ public class ResourcesWriter extends XMLWriter
             this.beginTag("ninePatch");
 
             this.attribute("name", name);
-            this.attribute("filename", ninePatchResource.filename);
+            this.attribute("filename", ninePatchResource.getFilename());
 
             if (ninePatchResource.ninePatch instanceof NinePatch) {
                 NinePatch patch = (ninePatchResource.ninePatch);
@@ -127,7 +127,7 @@ public class ResourcesWriter extends XMLWriter
 
             this.beginTag("pose");
             this.attribute("name", name);
-            this.attribute("filename", poseResource.filename);
+            this.attribute("filename", poseResource.getFilename());
             if (poseResource.pose.getDirection() != 0) {
                 this.attribute("direction", poseResource.pose.getDirection());
             }
@@ -152,7 +152,7 @@ public class ResourcesWriter extends XMLWriter
 
             this.beginTag("sound");
             this.attribute("name", name);
-            this.attribute("filename", soundResource.filename);
+            this.attribute("filename", soundResource.getFilename());
             this.endTag("sound");
         }
 

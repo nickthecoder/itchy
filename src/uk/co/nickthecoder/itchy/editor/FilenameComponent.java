@@ -1,9 +1,7 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0 which accompanies this
+ * distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.editor;
 
@@ -13,11 +11,11 @@ import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Button;
+import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.Container;
 import uk.co.nickthecoder.itchy.gui.FileOpenDialog;
 import uk.co.nickthecoder.itchy.gui.MessageDialog;
 import uk.co.nickthecoder.itchy.gui.TextBox;
-import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 
 public class FilenameComponent extends Container
 {
@@ -34,32 +32,35 @@ public class FilenameComponent extends Container
     private String preRename;
 
     /**
-     * True if the file must exist - the textbox will have the "error" style if this is set, and
-     * the file does not exist.
+     * True if the file must exist - the textbox will have the "error" style if this is set, and the
+     * file does not exist.
      */
     public boolean mustExist = true;
-    
-    
+
+    public FilenameComponent( Resources resources, File file )
+    {
+        this(resources, file.getPath());
+    }
+
     public FilenameComponent( Resources resources, String filename )
     {
         this.type = "filename";
-        this.addStyle( "combo" );
+        this.addStyle("combo");
 
         this.resources = resources;
 
         this.textBox = new TextBox(filename);
-        this.textBox.addChangeListener( new ComponentChangeListener() {
+        this.textBox.addChangeListener(new ComponentChangeListener() {
 
             @Override
             public void changed()
             {
                 FilenameComponent.this.onChanged();
             }
-            
+
         });
         this.addChild(this.textBox);
 
-        
         Button pick = new Button("...");
         pick.addActionListener(new ActionListener() {
             @Override
@@ -95,6 +96,11 @@ public class FilenameComponent extends Container
         return this.textBox.getText();
     }
 
+    public File getValue()
+    {
+        return new File(this.textBox.getText());
+    }
+
     private void pickFilename()
     {
         this.openDialog = new FileOpenDialog() {
@@ -111,10 +117,10 @@ public class FilenameComponent extends Container
     public void onChanged()
     {
         if (this.mustExist) {
-            this.textBox.addStyle("error", ! resources.fileExists(this.textBox.getText()));
+            this.textBox.addStyle("error", !this.resources.fileExists(this.textBox.getText()));
         }
     }
-    
+
     private void onPickFilename( File file )
     {
         if (file == null) {
@@ -135,6 +141,16 @@ public class FilenameComponent extends Container
             onChanged(); // Re-evaluates the error status
         }
 
+    }
+
+    public void addChangeListener( ComponentChangeListener listener )
+    {
+        this.textBox.addChangeListener(listener);
+    }
+
+    public void removeChangeListener( ComponentChangeListener listener )
+    {
+        this.textBox.removeChangeListener(listener);
     }
 
 }

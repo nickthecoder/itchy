@@ -1,4 +1,4 @@
-<scene showMouse="true" behaviour="uk.co.nickthecoder.itchy.NullSceneBehaviour">
+<scene showMouse="true" behaviour="uk.co.nickthecoder.itchy.PlainSceneBehaviour">
   <properties/>
   <layer name="main">
     <text text="play area!" font="vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="331" y="346" direction="0.0" startEvent="default"/>

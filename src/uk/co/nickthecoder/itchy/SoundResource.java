@@ -7,12 +7,19 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
+import java.io.File;
+import java.util.List;
+
+import uk.co.nickthecoder.itchy.util.AbstractProperty;
+import uk.co.nickthecoder.itchy.util.Property;
 import uk.co.nickthecoder.jame.JameException;
 import uk.co.nickthecoder.jame.Sound;
 
 public class SoundResource extends NamedResource
 {
-    public String filename;
+    public static List<AbstractProperty<SoundResource, ?>> properties = AbstractProperty.findAnnotations(SoundResource.class);
+
+    public File file;
 
     private Sound sound;
 
@@ -20,16 +27,32 @@ public class SoundResource extends NamedResource
     {
         super(resources, name);
         this.sound = new Sound(this.resources.resolveFilename(filename));
-        this.filename = filename;
+        this.file= new File(filename);
+    }
+
+    @Property(label="filename", aliases="filename")
+    public File getFile()
+    {
+        return this.file;
+    }
+
+    public void setFile( File file) throws JameException
+    {
+        this.sound.free();
+        this.sound = new Sound(this.resources.resolveFilename(file.getPath()));
+        this.file = file;
+    }
+
+
+    public String getFilename()
+    {
+        return this.file.getPath();
     }
 
     public void setFilename( String filename ) throws JameException
     {
-        this.sound.free();
-        this.sound = new Sound(this.resources.resolveFilename(filename));
-        this.filename = filename;
+        setFile(new File(filename));
     }
-
     public Sound getSound()
     {
         return this.sound;

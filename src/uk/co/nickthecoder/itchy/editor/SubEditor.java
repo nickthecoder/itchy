@@ -5,22 +5,41 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.editor;
 
-import uk.co.nickthecoder.itchy.Itchy;
+import java.util.List;
+
 import uk.co.nickthecoder.itchy.Resources;
+import uk.co.nickthecoder.itchy.gui.AbstractTableListener;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Button;
 import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.Container;
 import uk.co.nickthecoder.itchy.gui.FileOpenDialog;
-import uk.co.nickthecoder.itchy.gui.GridLayout;
 import uk.co.nickthecoder.itchy.gui.Label;
 import uk.co.nickthecoder.itchy.gui.ReflectionTableModelRow;
 import uk.co.nickthecoder.itchy.gui.Table;
+import uk.co.nickthecoder.itchy.gui.TableModel;
+import uk.co.nickthecoder.itchy.gui.TableRow;
 import uk.co.nickthecoder.itchy.gui.VerticalLayout;
 import uk.co.nickthecoder.itchy.gui.VerticalScroll;
 import uk.co.nickthecoder.itchy.gui.Window;
+import uk.co.nickthecoder.itchy.util.AbstractProperty;
 
-public abstract class SubEditor
+/**
+ * Creates a framework for most of the Notebook pages within the Editor. Each SubEditor has a table
+ * listing a set of resources (e.g. PoseResource or AnimationResource etc). It also has an "Edit"
+ * window where one of the entries in the table can be edited (either by double clicking a table
+ * column, or selecting the column, and then clicking the "Edit" button. The Edit window is used for
+ * both updating and adding.
+ * <p>
+ * The Edit forms are build using a PropertiesForm, which automates much of the GUI work, such as
+ * creating the components and updating the values.
+ * <p>
+ * The Edit pages use a non-autoupdate mechanism, and therefore have Ok and Cancel buttons.
+ * 
+ * @param <S>
+ *        The type of resource (e.g. PoseResource).
+ */
+public abstract class SubEditor<S>
 {
     protected Editor editor;
 
@@ -31,6 +50,10 @@ public abstract class SubEditor
     protected Window editWindow;
 
     protected FileOpenDialog openDialog;
+
+    protected PropertiesForm<S> form;
+
+    protected S currentResource;
 
     /**
      * True iff the currently edited resource isn't in the resources yet, ie we are adding a new
@@ -47,28 +70,85 @@ public abstract class SubEditor
     {
         return this.editor.game.resources;
     }
-    
+
     public Container createPage()
     {
-        Container form = new Container();
-        form.setLayout(new VerticalLayout());
-        form.setFill(true, false);
+        Container page = new Container();
+        page.setLayout(new VerticalLayout());
+        page.setFill(true, true);
 
-        return form;
+        addHeader(page);
+
+        this.table = this.createTable();
+        this.table.addTableListener(new AbstractTableListener() {
+            @Override
+            public void onRowPicked( TableRow tableRow )
+            {
+                onEdit();
+            }
+        });
+
+        this.table.setFill(true, true);
+        this.table.setExpansion(1.0);
+        this.table.sort(0);
+
+        page.addChild(this.table);
+
+        addFooter(page);
+
+        page.addChild(this.createListButtons());
+
+        return page;
     }
 
-    protected Container createListButtons()
+    /**
+     * Override if components are needed above the table.
+     * 
+     * @param page
+     *        The container to place additional component on.
+     */
+    protected void addHeader( Container page )
     {
-        Container buttons = new Container();
-        buttons.addStyle("buttonBar");
-        buttons.setXAlignment(0.5f);
-
-        this.addListButtons(buttons);
-
-        return buttons;
     }
 
-    protected void addListButtons( Container buttons )
+    /**
+     * Override if components are needed below the table.
+     * 
+     * @param page
+     *        The container to place additional component on.
+     */
+    protected void addFooter( Container page )
+    {
+    }
+
+    protected abstract Table createTable();
+
+    protected abstract TableModel createTableModel();
+
+    protected void rebuildTable()
+    {
+        this.table.setTableModel(this.createTableModel());
+    }
+
+    private Container createListButtons()
+    {
+        Container buttonBar = new Container();
+        buttonBar.addStyle("buttonBar");
+        buttonBar.setXAlignment(0.5f);
+
+        this.addListButtons(buttonBar);
+
+        return buttonBar;
+    }
+
+    /**
+     * Adds buttons which appear at the bottom of the page. Edit, Add and Remove are the default
+     * ones.
+     * 
+     * @param buttonBar
+     *        The container which is the parent to the Button components
+     */
+    protected void addListButtons( Container buttonBar )
     {
         Button edit = new Button(new Label("Edit"));
         edit.addActionListener(new ActionListener() {
@@ -78,7 +158,7 @@ public abstract class SubEditor
                 SubEditor.this.onEdit();
             }
         });
-        buttons.addChild(edit);
+        buttonBar.addChild(edit);
 
         Button add = new Button(new Label("Add"));
         add.addActionListener(new ActionListener() {
@@ -88,7 +168,7 @@ public abstract class SubEditor
                 SubEditor.this.onAdd();
             }
         });
-        buttons.addChild(add);
+        buttonBar.addChild(add);
 
         Button remove = new Button(new Label("Remove"));
         remove.addActionListener(new ActionListener() {
@@ -98,11 +178,17 @@ public abstract class SubEditor
                 SubEditor.this.onRemove();
             }
         });
-        buttons.addChild(remove);
+        buttonBar.addChild(remove);
 
     }
 
-    protected void addDetailButtons( Container buttons )
+    /**
+     * Adds buttons which appear at the bottom of the "Edit" window. The defaults are Ok and Cancel.
+     * 
+     * @param buttonBar
+     *        The parent of the Button components.
+     */
+    protected void addDetailButtons( Container buttonBar )
     {
 
         Button ok = new Button(new Label("Ok"));
@@ -113,7 +199,7 @@ public abstract class SubEditor
                 SubEditor.this.onOk();
             }
         });
-        buttons.addChild(ok);
+        buttonBar.addChild(ok);
 
         Button cancel = new Button(new Label("Cancel"));
         cancel.addActionListener(new ActionListener() {
@@ -123,11 +209,17 @@ public abstract class SubEditor
                 SubEditor.this.onCancel();
             }
         });
-        buttons.addChild(cancel);
+        buttonBar.addChild(cancel);
 
     }
 
-    public void setMessage( String message )
+    /**
+     * Adds a message to the Edit window - generally indicating an error.
+     * 
+     * @param message
+     *        The message to be displayed.
+     */
+    protected void setMessage( String message )
     {
         if ((message == null) || (message.equals(""))) {
             this.message.setVisible(false);
@@ -156,10 +248,10 @@ public abstract class SubEditor
         if (this.table.getCurrentTableModelRow() == null) {
             return;
         }
-        ReflectionTableModelRow<?> row = (ReflectionTableModelRow<?>) this.table
-            .getCurrentTableModelRow();
+        @SuppressWarnings("unchecked")
+        ReflectionTableModelRow<S> row = (ReflectionTableModelRow<S>) this.table.getCurrentTableModelRow();
 
-        this.showDetails(row.getData());
+        this.edit(row.getData(), false);
     }
 
     public void onRemove()
@@ -168,30 +260,30 @@ public abstract class SubEditor
         if (this.table.getCurrentTableModelRow() == null) {
             return;
         }
-        ReflectionTableModelRow<?> row = (ReflectionTableModelRow<?>) this.table
-            .getCurrentTableModelRow();
+        @SuppressWarnings("unchecked")
+        ReflectionTableModelRow<S> row = (ReflectionTableModelRow<S>) this.table.getCurrentTableModelRow();
 
-        this.remove(row.getData());
+        remove(row.getData());
+        rebuildTable();
     }
 
-    public void showDetails( Object resource )
+    protected final void edit( S resource, boolean adding )
     {
-        Window window = new Window("Edit");
-        window.clientArea.setFill(true, true);
-        window.clientArea.setLayout(new VerticalLayout());
+        this.adding = adding;
+        this.currentResource = resource;
 
-        Container form = new Container();
-        form.addStyle("form");
-        GridLayout grid = new GridLayout(form, 2);
-        form.setLayout(grid);
-        window.clientArea.addChild(form);
+        this.editWindow = new Window("Edit");
+        this.editWindow.clientArea.setFill(true, true);
+        this.editWindow.clientArea.setLayout(new VerticalLayout());
 
-        this.edit(grid, resource);
+        this.form = new PropertiesForm<S>(this.currentResource, getProperties());
+        createForm();
+        this.editWindow.clientArea.addChild(this.form.container);
 
         this.message = new Label("");
         this.message.addStyle("error");
         this.message.setVisible(false);
-        window.clientArea.addChild(this.message);
+        this.editWindow.clientArea.addChild(this.message);
 
         Container buttons = new Container();
         buttons.addStyle("buttonBar");
@@ -199,22 +291,49 @@ public abstract class SubEditor
 
         this.addDetailButtons(buttons);
 
-        window.clientArea.addChild(buttons);
-
-        Itchy.getGame().showWindow(window);
-        this.editWindow = window;
+        this.editWindow.clientArea.addChild(buttons);
+        this.editWindow.show();
     }
 
-    protected abstract void edit( GridLayout grid, Object resource );
+    protected void createForm()
+    {
+        this.form.createForm();
+    }
 
-    protected abstract void onOk();
+    protected abstract List<AbstractProperty<S, ?>> getProperties();
+
+    protected void update() throws MessageException
+    {
+        try {
+            this.form.update();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new MessageException("Error : " + e.toString());
+        }
+    }
+
+    protected void onOk()
+    {
+        try {
+            update();
+            if (this.adding) {
+                this.rebuildTable();
+            } else {
+                this.table.updateRow(this.table.getCurrentTableModelRow());
+            }
+
+            this.editWindow.hide();
+        } catch (MessageException e) {
+            setMessage(e.getMessage());
+        }
+    }
 
     protected void onCancel()
     {
-        Itchy.getGame().hideWindow(this.editWindow);
+        this.editWindow.hide();
     }
 
-    protected abstract void remove( Object resource );
+    protected abstract void remove( S resource );
 
     protected abstract void onAdd();
 

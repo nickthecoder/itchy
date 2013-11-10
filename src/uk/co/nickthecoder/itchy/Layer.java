@@ -23,6 +23,18 @@ public abstract class Layer implements MouseListener
     protected WorldRectangle worldRect;
 
     /**
+     * Any actors with an alpha less than this will use this as their alpha. Used by the
+     * SceneDesigner to reveal invisible actors.
+     */
+    public int minimumAlpha = 0;
+
+    /**
+     * Any actors with an alpha greater than this will use this as their alpha. Used by the
+     * SceneDesigner to dim the non-active layers.
+     */
+    public int maximumAlpha = 255;
+
+    /**
      * It it the norm in mathematics, for the Y axis to point upwards, but display devices have the
      * Y axis pointing downwards. This boolean lets you choose which of these two conventions you
      * want to use for the world coordinates (i.e. values of {@link Actor.getY()}).

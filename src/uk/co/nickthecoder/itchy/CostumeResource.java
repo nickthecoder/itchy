@@ -7,10 +7,16 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
+import java.util.List;
+
+import uk.co.nickthecoder.itchy.util.AbstractProperty;
 import uk.co.nickthecoder.jame.Surface;
+import uk.co.nickthecoder.itchy.util.Property;
 
 public class CostumeResource extends NamedResource
 {
+    public static List<AbstractProperty<CostumeResource, ?>> properties = AbstractProperty.findAnnotations(CostumeResource.class);
+
     private final Costume costume;
 
     public CostumeResource( Resources resources, String name, Costume costume )
@@ -19,6 +25,7 @@ public class CostumeResource extends NamedResource
         this.costume = costume;
     }
 
+    @Property(label="Costume", recurse=true)
     public Costume getCostume()
     {
         return this.costume;

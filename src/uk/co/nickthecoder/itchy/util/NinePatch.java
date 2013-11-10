@@ -29,20 +29,29 @@ public class NinePatch extends ImageRenderable
         empty, tile, fill
     };
 
+    @Property(label="Margin Top")
     public int marginTop;
+    
+    @Property(label="Margin Right")
     public int marginRight;
+    
+    @Property(label="Margin Bottom")
     public int marginBottom;
+    
+    @Property(label="Margin Left")
     public int marginLeft;
 
     /**
      * How should the middle of the destination image be drawn?
      */
+    @Property(label="Middle Treatment")
     public Middle middle;
 
     /**
-     * If {@link #middle} is <code>Middle.file</code>, then this is the colour used to draw the
+     * If {@link #middle} is <code>Middle.fill</code>, then this is the colour used to draw the
      * middle.
      */
+    @Property(label="Background Colour")
     protected RGBA backgroundColor;
 
     /**
@@ -57,8 +66,7 @@ public class NinePatch extends ImageRenderable
      * @param marginBottom
      * @param marginLeft
      */
-    public NinePatch( Surface surface, int marginTop, int marginRight, int marginBottom,
-        int marginLeft )
+    public NinePatch( Surface surface, int marginTop, int marginRight, int marginBottom, int marginLeft )
     {
         this(surface, marginTop, marginRight, marginBottom, marginLeft, Middle.tile);
     }

@@ -1,4 +1,4 @@
-<scene showMouse="true" behaviour="uk.co.nickthecoder.itchy.NullSceneBehaviour">
+<scene showMouse="true" behaviour="uk.co.nickthecoder.itchy.PlainSceneBehaviour">
   <properties/>
   <layer name="main">
     <actor costume="background" x="320" y="240" direction="0.0" startEvent="default"/>

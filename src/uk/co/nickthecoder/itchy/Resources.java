@@ -89,10 +89,19 @@ public class Resources extends Loadable
         this.sceneBehaviourClassNames = new TreeSet<String>();
         this.gameClassNames = new TreeSet<String>();
 
-        this.registerBehaviourClassName(NullBehaviour.class.getName());
-        this.registerCostumePropertiesClassName(CostumeProperties.class.getName());
-        this.registerSceneBehaviourClassName(NullSceneBehaviour.class.getName());
-        this.registerGameClassName(Game.class.getName());
+        registerBehaviourClassName(uk.co.nickthecoder.itchy.NullBehaviour.class.getName());
+        registerBehaviourClassName(uk.co.nickthecoder.itchy.extras.EditorButton.class.getName());
+        registerBehaviourClassName(uk.co.nickthecoder.itchy.extras.LinkButton.class.getName());
+        registerBehaviourClassName(uk.co.nickthecoder.itchy.extras.MessageButton.class.getName());
+        registerBehaviourClassName(uk.co.nickthecoder.itchy.extras.NumberValue.class.getName());
+        registerBehaviourClassName(uk.co.nickthecoder.itchy.extras.TextValue.class.getName());
+        registerBehaviourClassName(uk.co.nickthecoder.itchy.extras.QuitButton.class.getName());
+
+        registerCostumePropertiesClassName(CostumeProperties.class.getName());
+
+        registerSceneBehaviourClassName(PlainSceneBehaviour.class.getName());
+
+        registerGameClassName(Game.class.getName());
     }
 
     public String getId()
@@ -753,9 +762,9 @@ public class Resources extends Loadable
 
     public boolean isValidScript( ClassName className )
     {
-        return isValidScript( className.name );
+        return isValidScript(className.name);
     }
-    
+
     public boolean isValidScript( String path )
     {
         if (!ScriptManager.isScript(path)) {
@@ -771,7 +780,7 @@ public class Resources extends Loadable
     {
         return Itchy.getGame().getScriptManager();
     }
-    
+
     public Game createGame()
         throws Exception
     {
