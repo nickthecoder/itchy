@@ -1,0 +1,112 @@
+<resources>
+  <game className="uk.co.nickthecoder.itchy.Game" height="600" initialScene="menu" title="There's Too Many Asteroids" width="800"/>
+  <fonts>
+    <font name="BlackCasper" filename="fonts/BlackCasper/BlackCasper.ttf"/>
+    <font name="Boycott" filename="fonts/Boycott/Boycott.ttf"/>
+  </fonts>
+  <ninePatches/>
+  <poses>
+    <pose name="bullet1" filename="images/bullet1.png"/>
+    <pose name="fragment1" filename="images/fragment1.png"/>
+    <pose name="fragment2" filename="images/fragment2.png"/>
+    <pose name="rock1a" filename="images/rock1a.png"/>
+    <pose name="rock1b" filename="images/rock1b.png"/>
+    <pose name="rock1c" filename="images/rock1c.png"/>
+    <pose name="rock2a1" filename="images/rock2a1.png"/>
+    <pose name="rock2a2" filename="images/rock2a2.png"/>
+    <pose name="rock2b1" filename="images/rock2b1.png"/>
+    <pose name="rock2b2" filename="images/rock2b2.png"/>
+    <pose name="rock2c1" filename="images/rock2c1.png"/>
+    <pose name="rock2c2" filename="images/rock2c2.png"/>
+    <pose name="ship1" filename="images/ship1.png" direction="90.0"/>
+    <pose name="stars1" filename="images/stars1.jpg"/>
+    <pose name="stars2" filename="images/stars2.jpg"/>
+  </poses>
+  <sounds>
+    <sound name="hallelujah" filename="sounds/hallelujah.ogg"/>
+    <sound name="hallelujah2" filename="sounds/hallelujah2.ogg"/>
+    <sound name="ohLord" filename="sounds/ohLord.ogg"/>
+    <sound name="woo" filename="sounds/woo.ogg"/>
+  </sounds>
+  <animations>
+    <animation name="bullet">
+      <compound loops="1" sequence="true">
+        <alpha ease="linear" target="255.0" ticks="30"/>
+        <alpha ease="easeOut" target="0.0" ticks="10"/>
+      </compound>
+    </animation>
+    <animation name="hoverOut">
+      <compound loops="1" sequence="true">
+        <scale ease="easeIn" target="1.0" ticks="20"/>
+      </compound>
+    </animation>
+    <animation name="hoverOver">
+      <compound loops="1" sequence="true">
+        <scale ease="easeOut" target="1.2" ticks="10"/>
+      </compound>
+    </animation>
+    <animation name="mouseDown">
+      <compound loops="1" sequence="true">
+        <scale ease="easeOut" target="1.5" ticks="5"/>
+      </compound>
+    </animation>
+    <animation name="mouseUp">
+      <compound loops="1" sequence="true">
+        <scale ease="linear" target="1.0" ticks="20"/>
+      </compound>
+    </animation>
+  </animations>
+  <costumes>
+    <costume name="Button" defaultZOrder="0">
+      <string name="default">Button</string>
+      <font name="default" font="Boycott"/>
+      <animation name="hoverOut" animation="hoverOut"/>
+      <animation name="hoverOver" animation="hoverOver"/>
+      <animation name="mouseDown" animation="mouseDown"/>
+      <animation name="mouseUp" animation="mouseUp"/>
+    </costume>
+    <costume name="bullet" defaultZOrder="0" behaviour="Bullet.js">
+      <pose name="default" pose="bullet1"/>
+      <animation name="death" animation="bullet"/>
+    </costume>
+    <costume name="editor" defaultZOrder="0" extends="Button" behaviour="uk.co.nickthecoder.itchy.extras.MessageButton">
+      <string name="default">Editor</string>
+      <sound name="mouseDown" sound="hallelujah" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND" priority="1"/>
+      <font name="default" font="Boycott"/>
+    </costume>
+    <costume name="play" defaultZOrder="0" extends="Button">
+      <string name="default">play</string>
+      <sound name="click" sound="woo" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND" priority="1"/>
+      <font name="default" font="BlackCasper"/>
+    </costume>
+    <costume name="rock1" defaultZOrder="0" behaviour="Rock.js">
+      <pose name="0" pose="rock1c"/>
+      <pose name="1" pose="rock1b"/>
+      <pose name="default" pose="rock1a"/>
+      <pose name="fragment" pose="fragment1"/>
+    </costume>
+    <costume name="rock2" defaultZOrder="0" behaviour="Rock.js">
+      <pose name="0" pose="rock2c1"/>
+      <pose name="0" pose="rock2c2"/>
+      <pose name="1" pose="rock2b1"/>
+      <pose name="1" pose="rock2b2"/>
+      <pose name="default" pose="rock2a1"/>
+      <pose name="default" pose="rock2a2"/>
+      <pose name="fragment" pose="fragment2"/>
+    </costume>
+    <costume name="ship" defaultZOrder="0" behaviour="Ship.js">
+      <pose name="default" pose="ship1"/>
+    </costume>
+    <costume name="stars1" defaultZOrder="0">
+      <pose name="default" pose="stars1"/>
+    </costume>
+    <costume name="stars2" defaultZOrder="0">
+      <pose name="default" pose="stars2"/>
+    </costume>
+  </costumes>
+  <scenes>
+    <scene name="about"/>
+    <scene name="menu"/>
+    <scene name="play"/>
+  </scenes>
+</resources>

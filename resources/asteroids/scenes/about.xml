@@ -1,0 +1,18 @@
+<scene showMouse="true" behaviour="Menu.js">
+  <properties/>
+  <layer name="main">
+    <actor costume="stars1" x="400" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="1"/>
+    <text text="Back" font="BlackCasper" size="77" color="#ffffff" xAlignment="0.5" yAlignment="0.9" behaviour="uk.co.nickthecoder.itchy.extras.SceneButton" costume="Button" x="405" y="29" direction="0.0" heading="0.0" startEvent="default" zOrder="3">
+      <property name="sceneName" value="menu"/>
+    </text>
+    <text text="Itchy Powered" font="Boycott" size="31" color="#ffffff" xAlignment="0.1" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.LinkButton" costume="Button" x="33" y="36" direction="90.0" heading="0.0" startEvent="default" zOrder="4">
+      <property name="url" value="http://nickthecoder.co.uk/software/view/Itchy"/>
+    </text>
+    <text text="By Nick Robinson" font="BlackCasper" size="32" color="#3981af" xAlignment="0.5" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.LinkButton" costume="Button" x="386" y="435" direction="0.0" heading="0.0" startEvent="default" zOrder="5">
+      <property name="url" value="http://nickthecoder.co.uk/"/>
+    </text>
+    <text text="Asteroids" font="BlackCasper" size="100" color="#3981af" xAlignment="0.5" yAlignment="0.3" behaviour="uk.co.nickthecoder.itchy.extras.LinkButton" costume="Button" x="391" y="549" direction="0.0" heading="0.0" startEvent="default" zOrder="6">
+      <property name="url" value="http://nickthecoder.co.uk/software/view/There's_Too_Many_Asteroids"/>
+    </text>
+  </layer>
+</scene>

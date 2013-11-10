@@ -1,0 +1,22 @@
+<scene showMouse="true" behaviour="Menu.js">
+  <properties/>
+  <layer name="main">
+    <actor costume="stars2" x="400" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="1" alpha="73.0"/>
+    <text text="There's Too Many" font="Boycott" size="76" color="#000000" xAlignment="0.5" yAlignment="0.5" x="414" y="550" direction="0.0" heading="0.0" startEvent="default" zOrder="2"/>
+    <text text="There's Too Many" font="Boycott" size="73" color="#6b6f2e" xAlignment="0.5" yAlignment="0.5" x="413" y="545" direction="0.0" heading="0.0" startEvent="default" zOrder="3"/>
+    <text text="Asteroids" font="Boycott" size="134" color="#3d2b0a" xAlignment="0.5" yAlignment="0.5" x="417" y="454" direction="0.0" heading="0.0" startEvent="default" zOrder="4" alpha="160.0"/>
+    <text text="Asteroids" font="Boycott" size="128" color="#cc9656" xAlignment="0.5" yAlignment="0.5" x="416" y="452" direction="0.0" heading="0.0" startEvent="default" zOrder="5" alpha="121.0"/>
+    <text text="Play" font="BlackCasper" size="58" color="#333364" xAlignment="0.5" yAlignment="0.5" x="380" y="328" direction="0.0" heading="0.0" startEvent="default" zOrder="6"/>
+    <text text="Quit" font="BlackCasper" size="58" color="#333364" xAlignment="0.5" yAlignment="0.5" x="375" y="45" direction="0.0" heading="0.0" startEvent="default" zOrder="7"/>
+    <text text="Editor" font="BlackCasper" size="58" color="#333364" xAlignment="0.5" yAlignment="0.5" x="377" y="171" direction="0.0" heading="0.0" startEvent="default" zOrder="8"/>
+    <text text="About" font="BlackCasper" size="58" color="#333364" xAlignment="0.5" yAlignment="0.5" x="387" y="251" direction="0.0" heading="0.0" startEvent="default" zOrder="9"/>
+    <text text="About" font="BlackCasper" size="47" color="#5d8cc5" xAlignment="0.5" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.SceneButton" costume="Button" x="380" y="254" direction="0.0" heading="0.0" startEvent="default" zOrder="10">
+      <property name="sceneName" value="about"/>
+    </text>
+    <text text="Quit" font="BlackCasper" size="47" color="#5d8cc5" xAlignment="0.5" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.QuitButton" costume="Button" x="374" y="46" direction="0.0" heading="0.0" startEvent="default" zOrder="12"/>
+    <text text="Play" font="BlackCasper" size="47" color="#5d8cc5" xAlignment="0.5" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.SceneButton" costume="play" x="378" y="329" direction="0.0" heading="0.0" startEvent="default" zOrder="13">
+      <property name="sceneName" value="play"/>
+    </text>
+    <text text="Editor" font="BlackCasper" size="47" color="#5d8cc5" xAlignment="0.5" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.EditorButton" costume="editor" x="375" y="173" direction="0.0" heading="0.0" startEvent="default" zOrder="14"/>
+  </layer>
+</scene>
