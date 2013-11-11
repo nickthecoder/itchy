@@ -112,6 +112,10 @@ public class Explosion extends Companion<Explosion>
 
     public String projectileEventName;
 
+    /**
+     * The equivalent of : <code>new Explosion(behaviour.getActor())</code>
+     * @param behaviour
+     */
     public Explosion( Behaviour behaviour )
     {
         this(behaviour.getActor());

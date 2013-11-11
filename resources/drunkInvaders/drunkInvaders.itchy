@@ -1,5 +1,5 @@
 <resources>
-  <game title="Drunk Invaders" width="640" height="480" initialScene="menu" className="uk.co.nickthecoder.drunkinvaders.DrunkInvaders"/>
+  <game className="uk.co.nickthecoder.drunkinvaders.DrunkInvaders" height="480" initialScene="menu" title="Drunk Invaders" width="640"/>
   <fonts>
     <font name="blackCasper" filename="fonts/BlackCasper/BlackCasper.ttf"/>
     <font name="boycott" filename="fonts/Boycott/Boycott.ttf"/>
@@ -66,7 +66,7 @@
   </sounds>
   <animations>
     <animation name="alien1">
-      <compound sequence="true" loops="1">
+      <compound loops="1" sequence="true">
         <frames pingPong="false">
           <frame pose="alien1a" delay="1"/>
           <frame pose="alien1b" delay="1"/>
@@ -74,7 +74,7 @@
       </compound>
     </animation>
     <animation name="alien2">
-      <compound sequence="true" loops="1">
+      <compound loops="1" sequence="true">
         <frames pingPong="false">
           <frame pose="alien2a" delay="1"/>
           <frame pose="alien2b" delay="1"/>
@@ -82,7 +82,7 @@
       </compound>
     </animation>
     <animation name="alien3">
-      <compound sequence="true" loops="1">
+      <compound loops="1" sequence="true">
         <frames pingPong="false">
           <frame pose="alien3a" delay="1"/>
           <frame pose="alien3b" delay="1"/>
@@ -90,13 +90,13 @@
       </compound>
     </animation>
     <animation name="alienYell">
-      <compound sequence="false" loops="1">
-        <alpha target="0.0" ticks="180" ease="linear"/>
-        <turn turn="40.0" ticks="180" ease="linear"/>
+      <compound loops="1" sequence="false">
+        <alpha ease="linear" target="0.0" ticks="180"/>
+        <turn ease="linear" ticks="180" turn="40.0"/>
       </compound>
     </animation>
     <animation name="bomb">
-      <compound sequence="true" loops="0">
+      <compound loops="0" sequence="true">
         <frames pingPong="false">
           <frame pose="bomb1" delay="10"/>
           <frame pose="bomb2" delay="10"/>
@@ -104,51 +104,51 @@
       </compound>
     </animation>
     <animation name="buttonDown">
-      <compound sequence="false" loops="1">
-        <scale target="1.5" ticks="5" ease="easeOutBack"/>
+      <compound loops="1" sequence="false">
+        <scale ease="easeOutBack" target="1.5" ticks="5"/>
       </compound>
     </animation>
     <animation name="buttonHoverOut">
-      <compound sequence="true" loops="1">
-        <scale target="1.0" ticks="5" ease="linear"/>
+      <compound loops="1" sequence="true">
+        <scale ease="linear" target="1.0" ticks="5"/>
       </compound>
     </animation>
     <animation name="buttonHoverOver">
-      <compound sequence="true" loops="1">
-        <scale target="1.2" ticks="5" ease="linear"/>
+      <compound loops="1" sequence="true">
+        <scale ease="linear" target="1.2" ticks="5"/>
       </compound>
     </animation>
     <animation name="buttonUp">
-      <compound sequence="false" loops="1">
-        <scale target="1.0" ticks="10" ease="easeInOutCirc"/>
+      <compound loops="1" sequence="false">
+        <scale ease="easeInOutCirc" target="1.0" ticks="10"/>
       </compound>
     </animation>
     <animation name="deathSpiral">
-      <compound sequence="false" loops="1">
-        <alpha target="0.0" ticks="40" ease="linear"/>
-        <move dx="0.0" dy="100.0" ticks="180" ease="easeOut"/>
+      <compound loops="1" sequence="false">
+        <alpha ease="linear" target="0.0" ticks="40"/>
+        <move ease="easeOut" ticks="180" dx="0.0" dy="100.0"/>
       </compound>
     </animation>
     <animation name="fadeIn">
-      <compound sequence="true" loops="1">
-        <alpha target="0.0" ticks="1" ease="linear"/>
-        <alpha target="255.0" ticks="40" ease="easeOutCirc"/>
+      <compound loops="1" sequence="true">
+        <alpha ease="linear" target="0.0" ticks="1"/>
+        <alpha ease="easeOutCirc" target="255.0" ticks="40"/>
       </compound>
     </animation>
     <animation name="fadeOut">
-      <compound sequence="true" loops="1">
-        <alpha target="0.0" ticks="40" ease="linear"/>
+      <compound loops="1" sequence="true">
+        <alpha ease="linear" target="0.0" ticks="40"/>
       </compound>
     </animation>
     <animation name="grow">
-      <compound sequence="true" loops="1">
-        <scale target="0.1" ticks="1" ease="linear"/>
-        <scale target="1.0" ticks="100" ease="linear"/>
+      <compound loops="1" sequence="true">
+        <scale ease="linear" target="0.1" ticks="1"/>
+        <scale ease="linear" target="1.0" ticks="100"/>
       </compound>
     </animation>
     <animation name="pacman">
-      <compound sequence="false" loops="1">
-        <compound sequence="true" loops="0">
+      <compound loops="1" sequence="false">
+        <compound loops="0" sequence="true">
           <frames pingPong="false">
             <frame pose="pacman1" delay="3"/>
             <frame pose="pacman2" delay="3"/>
@@ -157,27 +157,27 @@
             <frame pose="pacman5" delay="3"/>
           </frames>
         </compound>
-        <compound sequence="true" loops="1">
-          <forwards forwards="400.0" sidewards="0.0" ticks="200" ease="linear"/>
-          <compound sequence="false" loops="1">
-            <forwards forwards="890.0" sidewards="0.0" ticks="360" ease="linear"/>
-            <turn turn="-360.0" ticks="360" ease="linear"/>
+        <compound loops="1" sequence="true">
+          <forwards ease="linear" forwards="400.0" sidewards="0.0" ticks="200"/>
+          <compound loops="1" sequence="false">
+            <forwards ease="linear" forwards="890.0" sidewards="0.0" ticks="360"/>
+            <turn ease="linear" ticks="360" turn="-360.0"/>
           </compound>
-          <forwards forwards="400.0" sidewards="0.0" ticks="200" ease="linear"/>
-          <turn turn="180.0" ticks="10" ease="linear"/>
-          <forwards forwards="400.0" sidewards="0.0" ticks="200" ease="linear"/>
-          <compound sequence="false" loops="1">
-            <forwards forwards="890.0" sidewards="0.0" ticks="360" ease="linear"/>
-            <turn turn="360.0" ticks="360" ease="linear"/>
+          <forwards ease="linear" forwards="400.0" sidewards="0.0" ticks="200"/>
+          <turn ease="linear" ticks="10" turn="180.0"/>
+          <forwards ease="linear" forwards="400.0" sidewards="0.0" ticks="200"/>
+          <compound loops="1" sequence="false">
+            <forwards ease="linear" forwards="890.0" sidewards="0.0" ticks="360"/>
+            <turn ease="linear" ticks="360" turn="360.0"/>
           </compound>
-          <forwards forwards="400.0" sidewards="0.0" ticks="200" ease="linear"/>
+          <forwards ease="linear" forwards="400.0" sidewards="0.0" ticks="200"/>
         </compound>
       </compound>
     </animation>
     <animation name="toHeaven">
-      <compound sequence="false" loops="1">
-        <move dx="0.0" dy="60.0" ticks="120" ease="linear"/>
-        <alpha target="0.0" ticks="120" ease="linear"/>
+      <compound loops="1" sequence="false">
+        <move ease="linear" ticks="120" dx="0.0" dy="60.0"/>
+        <alpha ease="linear" target="0.0" ticks="120"/>
       </compound>
     </animation>
   </animations>
@@ -193,7 +193,7 @@
       <string name="yell">Eeek</string>
       <string name="yell">I'll be back</string>
       <string name="yell">OMG</string>
-      <sound name="shot" sound="shatter" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
+      <sound name="shot" sound="shatter" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="PLAY_BOTH" priority="1"/>
       <font name="speech" font="vera"/>
       <font name="yell" font="vera"/>
       <animation name="birth" animation="fadeIn"/>
@@ -205,31 +205,31 @@
       <pose name="default" pose="alien1a"/>
       <pose name="tick" pose="alien1a"/>
       <pose name="tock" pose="alien1b"/>
-      <sound name="death" sound="ahh1" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
+      <sound name="death" sound="ahh1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND" priority="1"/>
     </costume>
     <costume name="alien2" defaultZOrder="0" extends="alien" behaviour="uk.co.nickthecoder.drunkinvaders.Alien">
       <pose name="default" pose="alien2a"/>
       <pose name="tick" pose="alien2a"/>
       <pose name="tock" pose="alien2b"/>
-      <sound name="death" sound="ahh2" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="STOP_FIRST"/>
+      <sound name="death" sound="ahh2" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="STOP_FIRST" priority="1"/>
     </costume>
     <costume name="alien3" defaultZOrder="0" extends="alien" behaviour="uk.co.nickthecoder.drunkinvaders.Alien">
       <pose name="default" pose="alien3a"/>
       <pose name="tick" pose="alien3a"/>
       <pose name="tock" pose="alien3b"/>
-      <sound name="death" sound="ahh3" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
+      <sound name="death" sound="ahh3" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND" priority="1"/>
     </costume>
     <costume name="bomb" defaultZOrder="0">
       <pose name="default" pose="bomb1"/>
     </costume>
     <costume name="bullet" defaultZOrder="0">
       <pose name="default" pose="bullet"/>
-      <sound name="shot" sound="ricochet" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
+      <sound name="shot" sound="ricochet" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND" priority="1"/>
     </costume>
     <costume name="button" defaultZOrder="0">
       <string name="default">blackCasper</string>
-      <sound name="down" sound="explode" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
-      <sound name="hoverOver" sound="pop" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
+      <sound name="down" sound="explode" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND" priority="1"/>
+      <sound name="hoverOver" sound="pop" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND" priority="1"/>
       <font name="default" font="blackCasper"/>
       <animation name="down" animation="buttonDown"/>
       <animation name="hoverOut" animation="buttonHoverOut"/>
@@ -251,8 +251,8 @@
     <costume name="level" defaultZOrder="0" behaviour="uk.co.nickthecoder.drunkinvaders.PickLevel">
       <pose name="completed" pose="level-completed"/>
       <pose name="default" pose="level"/>
-      <sound name="down" sound="explode" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
-      <sound name="hoverOver" sound="pop" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
+      <sound name="down" sound="explode" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND" priority="1"/>
+      <sound name="hoverOver" sound="pop" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND" priority="1"/>
       <animation name="down" animation="buttonDown"/>
       <animation name="hoverOut" animation="buttonHoverOut"/>
       <animation name="hoverOver" animation="buttonHoverOver"/>
@@ -273,8 +273,8 @@
     <costume name="saucer" defaultZOrder="0" extends="alien" behaviour="uk.co.nickthecoder.drunkinvaders.Mothership">
       <pose name="default" pose="saucer"/>
       <pose name="pixel" pose="redPixel"/>
-      <sound name="death" sound="ahh4" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
-      <sound name="giveBirth" sound="pop" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
+      <sound name="death" sound="ahh4" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND" priority="1"/>
+      <sound name="giveBirth" sound="pop" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND" priority="1"/>
     </costume>
     <costume name="shieldFactory" defaultZOrder="0" behaviour="uk.co.nickthecoder.drunkinvaders.ShieldFactory">
       <pose name="default" pose="shieldFactory"/>
@@ -298,9 +298,9 @@
       <pose name="shielded7" pose="shielded7"/>
       <string name="death">The earth is doomed</string>
       <string name="death">The aliens have won!</string>
-      <sound name="death" sound="explode" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
-      <sound name="deflect" sound="ricochet" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
-      <sound name="fire" sound="fire" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
+      <sound name="death" sound="explode" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND" priority="1"/>
+      <sound name="deflect" sound="ricochet" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND" priority="1"/>
+      <sound name="fire" sound="fire" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND" priority="1"/>
       <font name="speech" font="vera"/>
       <animation name="yell" animation="toHeaven"/>
     </costume>

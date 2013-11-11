@@ -24,7 +24,6 @@ Rock = Class({
     },
     
     shot: function(bullet) {
-        this.actor.deathEvent("explode");
         new itchy.extras.Explosion(this.actor)
             .spread( bullet.actor.getHeading() - 120, bullet.actor.getHeading() + 120 ).randomSpread()
             .speed(5,3,0,0).fade(3).distance(this.generation * 20)
@@ -52,6 +51,7 @@ Rock = Class({
                 actor.moveForwards( this.generation * 20 );
             }
         }
+        this.actor.deathEvent("explode");
     }
 });
 BehaviourScript.addProperty("Rock", "rotationSpeed", Double, "Rotation Speed (Degrees per Tick)");

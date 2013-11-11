@@ -79,18 +79,23 @@ public class Scene
 
     private ActorsLayer findLayer( CompoundLayer parent, String name )
     {
-        Layer best = null;
-
+        ActorsLayer best = null;
+        
         for (Layer childLayer : parent.getChildren()) {
-            if ((childLayer instanceof ActorsLayer) && (!childLayer.locked)) {
-                if (name.equals(childLayer.getName())) {
-                    return (ActorsLayer) childLayer;
+            // TODO using instanceof ActorsLayer
+            if (childLayer instanceof ActorsLayer) {
+                ActorsLayer actorsLayer = (ActorsLayer) childLayer;
+                if (!actorsLayer.isLocked()) {
+                
+                    if (name.equals(childLayer.getName())) {
+                        return (ActorsLayer) childLayer;
+                    }
                 }
-                best = childLayer;
+                best = actorsLayer;
             }
         }
 
-        return (ActorsLayer) best;
+        return best;
     }
 
     public void add( SceneActor sceneActor )

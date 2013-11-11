@@ -86,6 +86,7 @@ public class ScriptedBehaviour extends AbstractBehaviour implements MouseListene
     @Override
     public void onMessage( String message )
     {
+        System.out.println( "ScriptedBehaviour.onMessage " + message );
         this.language.onMessage(this, message);
     }
 

@@ -51,10 +51,15 @@ Ship = Class({
     },
     
     die: function() {
-        this.actor.deathEvent("explode");
         new itchy.extras.Explosion(this.actor)
-            .speed(3,1).fade(3).spin(-5,5).rotate(true).pose("fragment").projectiles(40)
+            .speed(3,1)
+            .fade(3)
+            .spin(-5,5)
+            .rotate(true)
+            .pose("fragment")
+            .projectiles(40)
             .createActor();
+        this.actor.deathEvent("explode");
     },
     
     fire: function() {
@@ -65,15 +70,15 @@ Ship = Class({
         // Oops, this shouldn't be like this look away!... (it should be a simple "create" method call, which doesn't exist yet).
         var actor = new itchy.Actor(game.resources.getCostume("bullet"));
         var behaviour = game.resources.scriptManager.createBehaviour( new itchy.util.ClassName( "Bullet.js" ) );
-        actor.setBehaviour( behaviour );
         this.actor.getLayer().addTop(actor);
+        actor.setBehaviour( behaviour );
         // Ok, the nasty code has gone, you can look again ;-)
 
         behaviour.behaviourScript.speed = this.bulletSpeed;
         actor.setDirection( this.actor.getHeading() );
         actor.moveTo( this.actor );
         actor.moveForwards(40);
-        actor.deathEvent("death");
+        actor.event("default");
     }
     
 });

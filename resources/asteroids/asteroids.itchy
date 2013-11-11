@@ -29,7 +29,7 @@
     <animation name="bullet">
       <compound loops="1" sequence="true">
         <alpha ease="linear" target="255.0" ticks="30"/>
-        <alpha ease="easeOut" target="0.0" ticks="10"/>
+        <alpha ease="easeOut" finishedMessage="die" target="0.0" ticks="10"/>
       </compound>
     </animation>
     <animation name="hoverOut">
@@ -64,7 +64,7 @@
     </costume>
     <costume name="bullet" defaultZOrder="0" behaviour="Bullet.js">
       <pose name="default" pose="bullet1"/>
-      <animation name="death" animation="bullet"/>
+      <animation name="default" animation="bullet"/>
     </costume>
     <costume name="editor" defaultZOrder="0" extends="Button" behaviour="uk.co.nickthecoder.itchy.extras.MessageButton">
       <string name="default">Editor</string>

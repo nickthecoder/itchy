@@ -5,9 +5,7 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 import uk.co.nickthecoder.jame.JameRuntimeException;
 import uk.co.nickthecoder.jame.RGBA;
@@ -15,7 +13,7 @@ import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.Surface;
 import uk.co.nickthecoder.jame.event.MouseEvent;
 
-public class ScrollableLayer extends ActorsLayer
+public class ScrollableLayer extends AbstractActorsLayer
 {
     /**
      * The color to fill the whole area before actors are rendered, or null if no fill should take
@@ -90,11 +88,7 @@ public class ScrollableLayer extends ActorsLayer
 
         // Where is the world's (0,0) on screen (in screen coordinates)?
         int tx = clipLeft - (int) this.worldRect.x;
-        int ty = this.getYAxisPointsDown() ? clipTop - (int) this.worldRect.y : clipTop +
-            clipHeight + (int) this.worldRect.y;
-
-        List<Actor> actors = new ArrayList<Actor>();
-        actors.addAll(this.actors);
+        int ty = this.getYAxisPointsDown() ? clipTop - (int) this.worldRect.y : clipTop + clipHeight + (int) this.worldRect.y;
 
         for (Iterator<Actor> i = this.actors.iterator(); i.hasNext();) {
             Actor actor = i.next();
@@ -210,6 +204,7 @@ public class ScrollableLayer extends ActorsLayer
         scrollTo(0, 0);
     }
 
+    // TODO What is destroy if not clear?
     @Override
     public void destroy()
     {

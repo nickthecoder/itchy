@@ -17,6 +17,7 @@ import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Game;
 import uk.co.nickthecoder.itchy.GameManager;
 import uk.co.nickthecoder.itchy.Launcher;
+import uk.co.nickthecoder.itchy.PlainBehaviour;
 import uk.co.nickthecoder.itchy.ScrollableLayer;
 import uk.co.nickthecoder.itchy.animation.Animation;
 import uk.co.nickthecoder.itchy.extras.Explosion;
@@ -389,6 +390,7 @@ public class Tetra extends Game
     {
         // If its still moving down from a previous explosion, then finish that one before starting
         // a new one.
+        // TODO, could use the new combine animation thingy
         Animation oldAnimation = actor.getAnimation();
         if (oldAnimation != null) {
             while (!oldAnimation.isFinished()) {
@@ -419,7 +421,7 @@ public class Tetra extends Game
         this.completedLines = 0;
         setLevel(getStartingLevel());
         Actor dummy = new Actor(this.resources.getCostume(names[0]));
-        dummy.setBehaviour(null);
+        dummy.setBehaviour(new PlainBehaviour());
         
         this.grid = new Actor[WIDTH + 2][HEIGHT + 2];
         for (int x = 0; x < WIDTH + 2; x++) {
@@ -494,7 +496,7 @@ public class Tetra extends Game
             this.actors = new Actor[PIECES];
             for (int i = 0; i < PIECES; i++) {
                 this.actors[i] = new Actor(Tetra.this.resources.getCostume(names[n]));
-                this.actors[i].setBehaviour(null);
+                this.actors[i].setBehaviour(new PlainBehaviour());
                 Tetra.this.mainLayer.addTop(this.actors[i]);
             }
             update();

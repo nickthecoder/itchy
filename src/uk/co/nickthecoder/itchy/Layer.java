@@ -5,271 +5,38 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.Surface;
-import uk.co.nickthecoder.jame.event.MouseButtonEvent;
-import uk.co.nickthecoder.jame.event.MouseEvent;
-import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 
-public abstract class Layer implements MouseListener
+public interface Layer
 {
-    private String name;
 
-    public final Rect position;
-
-    protected WorldRectangle worldRect;
-
-    /**
-     * Any actors with an alpha less than this will use this as their alpha. Used by the
-     * SceneDesigner to reveal invisible actors.
-     */
-    public int minimumAlpha = 0;
-
-    /**
-     * Any actors with an alpha greater than this will use this as their alpha. Used by the
-     * SceneDesigner to dim the non-active layers.
-     */
-    public int maximumAlpha = 255;
-
-    /**
-     * It it the norm in mathematics, for the Y axis to point upwards, but display devices have the
-     * Y axis pointing downwards. This boolean lets you choose which of these two conventions you
-     * want to use for the world coordinates (i.e. values of {@link Actor.getY()}).
-     */
-    protected boolean yAxisPointsDown = false;
-
-    private boolean visible = true;
-    private boolean removePending = false;
-    protected Layer parent;
-    protected List<MouseListener> mouseListeners;
-
-    /**
-     * Used by the editor - can actors be placed onto this layer? This is handy if you have a layer
-     * for non-game objects, for example a layer for a mini-map, control panel, dash boards etc.
-     */
-    public boolean locked = false;
-
-    public Layer( String name, Rect position )
-    {
-        assert (position != null);
-        this.name = name;
-        this.position = position;
-        this.worldRect = new WorldRectangle(0, 0, position.width, position.height);
-    }
-
-    public String getName()
-    {
-        return this.name;
-    }
+    public String getName();
 
     /**
      * It it the norm in mathematics, for the Y axis to point upwards, but display devices have the
      * Y axis pointing downwards. This boolean lets you choose which of these two conventions you
      * want to use for the world coordinates (i.e. values of Actor.y). Set in the constructor.
      */
-    public boolean getYAxisPointsDown()
-    {
-        return this.yAxisPointsDown;
-    }
+    public boolean getYAxisPointsDown();
 
-    public void setYAxisPointsDown( boolean value )
-    {
-        this.yAxisPointsDown = value;
-    }
+    public WorldRectangle getWorldRectangle();
 
-    public boolean isRemovePending()
-    {
-        return this.removePending;
-    }
+    public void adjustPosition( Rect rect );
 
-    public WorldRectangle getWorldRectangle()
-    {
-        return this.worldRect;
-    }
+    public Layer getParent();
 
-    public void remove()
-    {
-        this.removePending = true;
-        this.visible = false;
-    }
+    public void setParent( Layer parent );
+    
+    public boolean isVisible();
 
-    public boolean isVisible()
-    {
-        return this.visible;
-    }
+    public void render( Rect within, Surface destSurface );
 
-    public void setVisible( boolean visible )
-    {
-        this.visible = visible;
-    }
+    public void clear();
 
-    public Rect getAbsolutePosition()
-    {
-        Rect rect = new Rect(this.position);
-        Layer parent = this.parent;
-        while (parent != null) {
-            parent.adjustPosition(rect);
-            parent = parent.parent;
-        }
-        return rect;
-    }
+    public boolean contains( int x, int y );
 
-    protected void adjustPosition( Rect rect )
-    {
-        rect.x += this.position.x;
-        rect.y += this.position.y;
-    }
+    public void destroy();
 
-    public void render( Rect within, Surface destSurface )
-    {
-        int clipLeft = within.x + this.position.x;
-        int clipTop = within.y + this.position.y;
-        int clipWidth = this.position.width;
-        int clipHeight = this.position.height;
-
-        if (clipLeft + clipWidth > within.x + within.width) {
-            clipWidth = within.x + within.width - clipLeft;
-        }
-        if (clipTop + clipHeight > within.y + within.height) {
-            clipHeight = within.y + within.height - clipTop;
-        }
-        Rect clip = new Rect(clipLeft, clipTop, clipWidth, clipHeight);
-        this.render2(clip, destSurface);
-    }
-
-    protected abstract void render2( Rect clip, Surface destSurface );
-
-    protected abstract void clear();
-
-    public void addMouseListener( MouseListener listener, Game game )
-    {
-        if (this.mouseListeners == null) {
-            this.mouseListeners = new ArrayList<MouseListener>();
-            game.addMouseListener(this);
-        }
-        this.mouseListeners.add(listener);
-    }
-
-    public void removeMouseListener( MouseListener listener, Game game )
-    {
-        this.mouseListeners.remove(listener);
-        if (this.mouseListeners.size() == 0) {
-            this.mouseListeners = null;
-            game.removeMouseListener(this);
-        }
-    }
-
-    protected void adjustMouse( MouseEvent event )
-    {
-        Rect position = this.getAbsolutePosition();
-        event.x -= position.x;
-
-        if (this.yAxisPointsDown) {
-            event.y -= this.position.y;
-        } else {
-            event.y = position.y + this.position.height - event.y;
-        }
-    }
-
-    protected boolean contains( int x, int y )
-    {
-        Rect position = this.getAbsolutePosition();
-        if ((x < position.x) || (y < position.y) || (x > position.x + position.width) ||
-            (y > position.y + position.height)) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public boolean onMouseDown( MouseButtonEvent event )
-    {
-        if (!this.contains(event.x, event.y)) {
-            return false;
-        }
-
-        int tx = event.x;
-        int ty = event.y;
-
-        this.adjustMouse(event);
-
-        try {
-            for (MouseListener listener : this.mouseListeners) {
-                if (listener.onMouseDown(event)) {
-                    return true;
-                }
-            }
-        } finally {
-            event.x = tx;
-            event.y = ty;
-        }
-
-        return false;
-    }
-
-    @Override
-    public boolean onMouseUp( MouseButtonEvent event )
-    {
-        if (!this.contains(event.x, event.y)) {
-            return false;
-        }
-
-        int tx = event.x;
-        int ty = event.y;
-
-        this.adjustMouse(event);
-
-        try {
-            for (MouseListener listener : this.mouseListeners) {
-                if (listener.onMouseUp(event)) {
-                    return true;
-                }
-            }
-        } finally {
-            event.x = tx;
-            event.y = ty;
-        }
-
-        return false;
-    }
-
-    @Override
-    public boolean onMouseMove( MouseMotionEvent event )
-    {
-
-        if (!this.contains(event.x, event.y)) {
-            return false;
-        }
-
-        int tx = event.x;
-        int ty = event.y;
-
-        this.adjustMouse(event);
-
-        try {
-            for (MouseListener listener : this.mouseListeners) {
-                if (listener.onMouseMove(event)) {
-                    return true;
-                }
-            }
-        } finally {
-            event.x = tx;
-            event.y = ty;
-        }
-
-        return false;
-    }
-
-    public abstract void destroy();
-
-    public abstract void reset();
-
-    @Override
-    public String toString()
-    {
-        return this.getClass().getName() + " (" + this.name + ")";
-    }
+    public void reset();
 }

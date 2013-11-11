@@ -19,6 +19,13 @@ Bullet = Class({
             i.next().behaviourScript.shot(this);
             this.actor.kill();
         }
-    }    
+    },
+
+    onMessage: function(message) {
+    	if (message=="die") {
+    		// Sent at the end of the fade out animation. Its the animation that determines the bullets max life span.
+    		this.actor.kill();
+    	}
+    }
 });
 

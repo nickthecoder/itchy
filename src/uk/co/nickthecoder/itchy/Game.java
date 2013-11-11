@@ -76,7 +76,7 @@ public class Game implements InputListener, QuitListener, MessageListener
     /**
      * A special layer which appears above the normal layers, and is used to show pop-up windows.
      */
-    protected ActorsLayer popupLayer;
+    protected ScrollableLayer popupLayer;
 
     /**
      * A list of all the objects that need to know when a mouse is clicked or moved.

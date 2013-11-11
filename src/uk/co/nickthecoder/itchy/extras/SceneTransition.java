@@ -8,6 +8,7 @@ package uk.co.nickthecoder.itchy.extras;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.ImagePose;
 import uk.co.nickthecoder.itchy.Itchy;
+import uk.co.nickthecoder.itchy.PlainBehaviour;
 import uk.co.nickthecoder.itchy.animation.AlphaAnimation;
 import uk.co.nickthecoder.itchy.animation.Animation;
 import uk.co.nickthecoder.itchy.animation.AnimationListener;
@@ -162,7 +163,7 @@ public class SceneTransition
         ImagePose pose = new ImagePose(oldImage, 0, 0);
 
         this.actor = new Actor(pose);
-        this.actor.setBehaviour(null);
+        this.actor.setBehaviour(new PlainBehaviour());
     }
 
     /**

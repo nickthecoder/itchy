@@ -243,19 +243,20 @@ public abstract class AbstractBehaviour implements Behaviour
     @Override
     public void animateAndTick()
     {
-        Animation animation = getActor().getAnimation();
+        Actor actor = getActor();
+        Animation animation = actor.getAnimation();
         if (animation != null) {
 
             animation.tick(getActor());
             if (animation.isFinished()) {
-                getActor().setAnimation(null);
-                if (getActor().isDying()) {
-                    getActor().kill();
+                actor.setAnimation(null);
+                if (actor.isDying()) {
+                    actor.kill();
                     return;
                 }
             }
         }
-        if (!getActor().isDead()) {
+        if ((!actor.isDead()) && (!actor.isDying())) {
             tick();
         }
     }

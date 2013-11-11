@@ -6,7 +6,6 @@
 package uk.co.nickthecoder.itchy;
 
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -14,7 +13,7 @@ import uk.co.nickthecoder.jame.RGBA;
 import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.Surface;
 
-public class CompoundLayer extends Layer
+public class CompoundLayer extends AbstractLayer
 {
     private final LinkedList<Layer> children;
 
@@ -43,15 +42,11 @@ public class CompoundLayer extends Layer
             destSurface.fill(clip, this.backgroundColor);
         }
 
-        for (Iterator<Layer> i = this.children.iterator(); i.hasNext();) {
-            Layer child = i.next();
+        for (Layer child : this.children) {
             if (child.isVisible()) {
 
                 child.render(clip, destSurface);
 
-            }
-            if (child.isRemovePending()) {
-                i.remove();
             }
         }
     }
@@ -59,7 +54,7 @@ public class CompoundLayer extends Layer
     public void add( Layer layer )
     {
         this.children.add(layer);
-        layer.parent = this;
+        layer.setParent(this);
     }
 
     public void remove( Layer layer )
@@ -85,7 +80,7 @@ public class CompoundLayer extends Layer
     {
         for (Layer child : this.children) {
             child.reset();
-        }        
+        }
     }
 
     @Override
@@ -97,7 +92,7 @@ public class CompoundLayer extends Layer
         }
         this.clear();
     }
-    
+
     @Override
     public String toString()
     {
@@ -110,5 +105,5 @@ public class CompoundLayer extends Layer
         result.append("}\n");
         return result.toString();
     }
-    
+
 }

@@ -50,10 +50,6 @@ public class Alien extends Bouncy implements Shootable
     @Override
     public void tick()
     {
-        if (this.getActor().isDying()) {
-            return;
-        }
-
         if (DrunkInvaders.game.metronomeCountdown == 1) {
             if (getActor().getAnimation() == null) {
                 this.tock = !this.tock;
@@ -97,6 +93,7 @@ public class Alien extends Bouncy implements Shootable
             .fade(1.2)
             .speed(1, 3)
             .pose("fragment")
+            .scale(1)
             .createActor();
 
         new Explosion(getActor())
@@ -104,6 +101,7 @@ public class Alien extends Bouncy implements Shootable
             .offsetForwards(-10, 10).offsetSidewards(-10, 10)
             .speed(3, 6)
             .fade(0.5)
+            .scale(1)
             .pose("pixel")
             .createActor();
 

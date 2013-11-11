@@ -373,7 +373,7 @@ public class Actor implements PropertySubject<Actor>
             return true;
         }
 
-        return !this.appearance.getWorldRectangle().within(this.layer.worldRect);
+        return !this.appearance.getWorldRectangle().within(this.layer.getWorldRectangle());
     }
 
     /**
@@ -471,8 +471,11 @@ public class Actor implements PropertySubject<Actor>
         if (!this.dead) {
             this.dead = true;
             getBehaviour().die();
-
             resetCollisionStrategy();
+            
+            if (this.layer != null) {
+                this.layer.remove(this);
+            }
         }
     }
 

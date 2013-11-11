@@ -95,7 +95,7 @@ public class SceneDesigner implements MouseListener, KeyListener
 
     private ScrollableLayer glassLayer;
 
-    private ActorsLayer guiLayer;
+    private ScrollableLayer guiLayer;
 
     private final Rect sceneRect;
 
@@ -181,13 +181,16 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.designLayers = new CompoundLayer("design", rect, this.sceneBackground);
 
         for (Layer gameLayer : Editor.instance.game.getLayers().getChildren()) {
-            if ((gameLayer instanceof
-                ScrollableLayer) && (!gameLayer.locked)) {
+            // TODO Using concreate ScrollableLayer
+            if (gameLayer instanceof ScrollableLayer) {
+                ScrollableLayer scrollableLayer = (ScrollableLayer) gameLayer;
+                if (!scrollableLayer.isLocked()) {
+            
+                    ScrollableLayer designLayer = new ScrollableLayer(scrollableLayer.getName(), rect);
 
-                ScrollableLayer designLayer = new ScrollableLayer(gameLayer.getName(), rect);
-
-                this.designLayers.add(designLayer);
-                this.currentDesignLayer = designLayer;
+                    this.designLayers.add(designLayer);
+                    this.currentDesignLayer = designLayer;
+                }
             }
         }
 
@@ -209,7 +212,8 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.guiLayer.addTop(toolbarActor);
 
         // Can be ANY of the scrolling layers, so I picked the first for convenience.
-        this.designLayers.getChildren().get(0).addMouseListener(this, this.editor);
+        //TODO Casting to a contrete class
+        ((ScrollableLayer) this.designLayers.getChildren().get(0)).addMouseListener(this, this.editor);
         Itchy.getGame().addKeyListener(this);
 
         this.scene.create(this.designLayers, this.editor.resources, true);
@@ -230,7 +234,8 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.editor.getLayers().remove(this.guiLayer);
 
         Itchy.getGame().removeKeyListener(this);
-        this.designLayers.getChildren().get(0).removeMouseListener(this, this.editor);
+        // TODO Casting to a concreate class
+        ((ScrollableLayer) this.designLayers.getChildren().get(0)).removeMouseListener(this, this.editor);
 
         this.toolboxPose.destroy();
         this.toolbarPose.destroy();
@@ -667,11 +672,13 @@ public class SceneDesigner implements MouseListener, KeyListener
     {
         this.layersTableModel = new SimpleTableModel();
         for (Layer layer : this.designLayers.getChildren()) {
-            if (!layer.locked) {
+            //TODO Casting to a concreate class
+            ScrollableLayer actorsLayer = (ScrollableLayer) layer;
+            if (!actorsLayer.isLocked()) {
                 SimpleTableModelRow row = new SimpleTableModelRow();
-                row.add(layer);
-                row.add(layer.getName());
-                row.add(layer.minimumAlpha);
+                row.add(actorsLayer);
+                row.add(actorsLayer.getName());
+                row.add(actorsLayer.minimumAlpha);
                 this.layersTableModel.addRow(row);
             }
         }
@@ -681,7 +688,8 @@ public class SceneDesigner implements MouseListener, KeyListener
         TableModelColumn showHideColumn = new TableModelColumn("Dim", 0, 70) {
             public void addPlainCell( Container container, final TableModelRow row )
             {
-                final Layer layer = (Layer) row.getData(0);
+                // TODO Casting to a concrete class
+                final ScrollableLayer layer = (ScrollableLayer) row.getData(0);
                 final CheckBox dim = new CheckBox(false);
                 dim.addChangeListener(new ComponentChangeListener() {
                     @Override
@@ -717,7 +725,8 @@ public class SceneDesigner implements MouseListener, KeyListener
         TableModelColumn minAlphaColumn = new TableModelColumn("Reveal", 2, 100) {
             public void addPlainCell( Container container, final TableModelRow row )
             {
-                final Layer layer = (Layer) row.getData(0);
+                // TODO Casting to a concrete class
+                final ScrollableLayer layer = (ScrollableLayer) row.getData(0);
                 final CheckBox check = new CheckBox(layer.minimumAlpha > 0);
                 check.addChangeListener(new ComponentChangeListener() {
                     @Override
@@ -1032,7 +1041,8 @@ public class SceneDesigner implements MouseListener, KeyListener
                     this.designLayers.getChildren() :
                     Reversed.list(this.designLayers.getChildren())) {
 
-                    ActorsLayer layer = (ActorsLayer) child;
+                    // TODO Cast to concrete type
+                    ScrollableLayer layer = (ScrollableLayer) child;
 
                     for (Iterator<Actor> i = fromBottom ? layer.getActors().iterator() : layer
                         .getActors().descendingIterator(); i.hasNext();) {
@@ -1387,7 +1397,8 @@ public class SceneDesigner implements MouseListener, KeyListener
         scene.sceneBehaviour = this.scene.sceneBehaviour;
 
         for (Layer child : this.designLayers.getChildren()) {
-            ActorsLayer layer = (ActorsLayer) child;
+            // TODO Cast to concrete type
+            ScrollableLayer layer = (ScrollableLayer) child;
 
             Scene.SceneLayer sceneLayer = scene.createSceneLayer(layer.getName());
 
