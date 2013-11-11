@@ -27,9 +27,9 @@
   </sounds>
   <animations>
     <animation name="bullet">
-      <compound loops="1" sequence="true">
+      <compound finishedMessage="die" loops="1" sequence="true">
         <alpha ease="linear" target="255.0" ticks="30"/>
-        <alpha ease="easeOut" finishedMessage="die" target="0.0" ticks="10"/>
+        <alpha ease="easeOut" target="0.0" ticks="10"/>
       </compound>
     </animation>
     <animation name="hoverOut">

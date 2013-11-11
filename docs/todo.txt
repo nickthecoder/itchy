@@ -51,14 +51,13 @@ Vacuum bathroom
 TODO
 ====
 
-Make Layer an Interface
-    Make ActorsLayer an interface too
-
-    Follow up on the TODOs
-
 Fix animation messages.
     Let the top-most animation have a message, so that its easy to see
     AND/OR have an edit window for Compound animations too (don't toggle).    
+
+Follow up on the TODOs
+
+Tidy up Layer hierarchy
 
 Starting other games and then Asteroids errors.
 

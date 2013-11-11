@@ -41,9 +41,7 @@ public abstract class AbstractAnimation implements Animation, Cloneable
                 listener.finished();
             }
             if (! StringUtils.isBlank(this.finishedMessage)) {
-                System.out.println( "Firing message " + this.finishedMessage );
                 for (MessageListener listener : this.messageListeners) {
-                    System.out.println( "Firing message to " +  listener );
                     listener.onMessage(this.finishedMessage);
                 }
             }

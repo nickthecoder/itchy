@@ -15,11 +15,8 @@ import uk.co.nickthecoder.itchy.animation.FramedAnimation;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Button;
 import uk.co.nickthecoder.itchy.gui.Component;
-import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.Container;
 import uk.co.nickthecoder.itchy.gui.ImageComponent;
-import uk.co.nickthecoder.itchy.gui.IntegerBox;
-import uk.co.nickthecoder.itchy.gui.Label;
 import uk.co.nickthecoder.itchy.gui.NullComponent;
 import uk.co.nickthecoder.itchy.gui.ReflectionTableModelRow;
 import uk.co.nickthecoder.itchy.gui.SimpleTableModel;
@@ -59,6 +56,7 @@ public class AnimationsEditor extends SubEditor<AnimationResource>
         return table;
     }
 
+    @Override
     public SimpleTableModel createTableModel()
     {
         SimpleTableModel model = new SimpleTableModel();
@@ -93,13 +91,28 @@ public class AnimationsEditor extends SubEditor<AnimationResource>
 
     private AnimationEditor createAnimationEditor( Animation animation )
     {
+        AnimationEditor result;
+
         if (animation instanceof FramedAnimation) {
             FramedAnimation framedAnimation = (FramedAnimation) animation;
-            return new FramedAnimationEditor(this.editor, this.editor.resources, framedAnimation);
+            result = new FramedAnimationEditor(this.editor, this.editor.resources, framedAnimation);
+
+        }
+        if (animation instanceof CompoundAnimation) {
+            result = new AnimationEditor(this.editor, animation) {
+                @Override
+                public void onOk()
+                {
+                    super.onOk();
+                    createTree();
+                }
+            };
 
         } else {
-            return new AnimationEditor(this.editor, animation);
+            result = new AnimationEditor(this.editor, animation);
         }
+
+        return result;
     }
 
     private Component createAnimationTree( final Animation animation, final CompoundAnimation parent )
@@ -113,8 +126,7 @@ public class AnimationsEditor extends SubEditor<AnimationResource>
         line.addChild(name);
 
         if ((parent != null) && (parent.children.get(0) != animation)) {
-            Button up = new Button(new ImageComponent(this.editor.getStylesheet().resources.getPose(
-                "icon_up").getSurface()));
+            Button up = new Button(new ImageComponent(this.editor.getStylesheet().resources.getPose("icon_up").getSurface()));
             up.addStyle("compact");
             up.addActionListener(new ActionListener() {
                 @Override
@@ -128,8 +140,7 @@ public class AnimationsEditor extends SubEditor<AnimationResource>
         }
 
         if (parent != null) {
-            Button delete = new Button(new ImageComponent(this.editor.getStylesheet().resources.getPose(
-                "icon_delete").getSurface()));
+            Button delete = new Button(new ImageComponent(this.editor.getStylesheet().resources.getPose("icon_delete").getSurface()));
 
             delete.addStyle("compact");
             delete.addActionListener(new ActionListener() {
@@ -143,17 +154,16 @@ public class AnimationsEditor extends SubEditor<AnimationResource>
             line.addChild(delete);
         }
 
+        name.addActionListener(new ActionListener() {
+            @Override
+            public void action()
+            {
+                AnimationsEditor.this.createAnimationEditor(animation).show();
+            }
+        });
+
         if (animation instanceof CompoundAnimation) {
             final CompoundAnimation ca = (CompoundAnimation) animation;
-
-            name.addActionListener(new ActionListener() {
-                @Override
-                public void action()
-                {
-                    ca.sequence = !ca.sequence;
-                    AnimationsEditor.this.createTree();
-                }
-            });
 
             Container result = new Container();
             result.addChild(line);
@@ -166,23 +176,6 @@ public class AnimationsEditor extends SubEditor<AnimationResource>
             indent.setLayout(new VerticalLayout());
             indent.addStyle("animationIndent");
             result.addChild(indent);
-
-            Container secondLine = new Container();
-            secondLine.addStyle("form");
-            secondLine.addChild(new Label("Loops"));
-            final IntegerBox loops = new IntegerBox(ca.loops);
-            loops.addChangeListener(new ComponentChangeListener() {
-                @Override
-                public void changed()
-                {
-                    try {
-                        ca.loops = loops.getValue();
-                    } catch (Exception e) {
-                    }
-                }
-            });
-            secondLine.addChild(loops);
-            indent.addChild(secondLine);
 
             for (Animation child : ca.children) {
                 indent.addChild(this.createAnimationTree(child, ca));
@@ -208,14 +201,6 @@ public class AnimationsEditor extends SubEditor<AnimationResource>
             return result;
 
         } else {
-
-            name.addActionListener(new ActionListener() {
-                @Override
-                public void action()
-                {
-                    AnimationsEditor.this.createAnimationEditor(animation).show();
-                }
-            });
 
             return line;
         }
@@ -269,6 +254,7 @@ public class AnimationsEditor extends SubEditor<AnimationResource>
             this.editor.resources.addAnimation(this.currentResource);
         }
     }
+
     @Override
     protected List<AbstractProperty<AnimationResource, ?>> getProperties()
     {
