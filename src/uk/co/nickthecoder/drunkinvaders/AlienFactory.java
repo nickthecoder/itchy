@@ -82,7 +82,8 @@ public class AlienFactory extends AbstractBehaviour
         alienBehaviour.fireOnceEvery = this.fireOnceEvery;
 
         alienActor.moveTo(getActor().getX() + this.aliens.size() * this.spacing, getActor().getY());
-        getActor().getLayer().addTop(alienActor);
+        alienActor.setZOrder(getActor().getZOrder());
+        getActor().getStage().add(alienActor);
 
         alienActor.setBehaviour(alienBehaviour);
         alienActor.event("birth");

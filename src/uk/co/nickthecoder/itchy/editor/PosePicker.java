@@ -58,7 +58,7 @@ public abstract class PosePicker extends Window
             @Override
             public void action()
             {
-                PosePicker.this.destroy();
+                PosePicker.this.hide();
             }
 
         });
@@ -110,7 +110,7 @@ public abstract class PosePicker extends Window
             @Override
             public void action()
             {
-                PosePicker.this.destroy();
+                PosePicker.this.hide();
                 PosePicker.this.pick(poseResource);
             }
         });

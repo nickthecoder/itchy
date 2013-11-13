@@ -18,13 +18,10 @@ import uk.co.nickthecoder.itchy.Game;
 import uk.co.nickthecoder.itchy.GameManager;
 import uk.co.nickthecoder.itchy.Launcher;
 import uk.co.nickthecoder.itchy.PlainBehaviour;
-import uk.co.nickthecoder.itchy.ScrollableLayer;
 import uk.co.nickthecoder.itchy.animation.Animation;
 import uk.co.nickthecoder.itchy.extras.Explosion;
 import uk.co.nickthecoder.itchy.extras.Fragment;
 import uk.co.nickthecoder.itchy.extras.Timer;
-import uk.co.nickthecoder.jame.RGBA;
-import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.Sound;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.Keys;
@@ -102,11 +99,6 @@ public class Tetra extends Game
      */
     public Actor[][] grid;
 
-    /**
-     * The layer onto which the Actors are placed.
-     */
-    ScrollableLayer mainLayer;
-
     boolean playing = false;
 
     Timer escapeTimer;
@@ -143,20 +135,9 @@ public class Tetra extends Game
     }
 
     @Override
-    protected void createLayers()
-    {
-        Rect screenRect = new Rect(0, 0, getWidth(), getHeight());
-
-        this.mainLayer = new ScrollableLayer("main", screenRect, new RGBA(0, 0, 0));
-        this.layers.add(this.mainLayer);
-    }
-
-    @Override
     public void onActivate()
     {
         super.onActivate();
-        this.mainLayer.enableMouseListener(this);
-
         this.level = getStartingLevel();
     }
 
@@ -181,7 +162,7 @@ public class Tetra extends Game
     public void tick()
     {
         super.tick();
-        
+
         if (this.escapeTimer != null) {
             if (this.escapeTimer.isFinished()) {
                 this.addKeyListener(this); // See removeKeyListener in onKeyDown
@@ -422,7 +403,7 @@ public class Tetra extends Game
         setLevel(getStartingLevel());
         Actor dummy = new Actor(this.resources.getCostume(names[0]));
         dummy.setBehaviour(new PlainBehaviour());
-        
+
         this.grid = new Actor[WIDTH + 2][HEIGHT + 2];
         for (int x = 0; x < WIDTH + 2; x++) {
             for (int y = 0; y < HEIGHT + 2; y++) {
@@ -497,7 +478,7 @@ public class Tetra extends Game
             for (int i = 0; i < PIECES; i++) {
                 this.actors[i] = new Actor(Tetra.this.resources.getCostume(names[n]));
                 this.actors[i].setBehaviour(new PlainBehaviour());
-                Tetra.this.mainLayer.addTop(this.actors[i]);
+                Tetra.this.mainStage.addTop(this.actors[i]);
             }
             update();
 

@@ -72,7 +72,7 @@ public abstract class PoseOrFontPicker extends PosePicker
             @Override
             public void action()
             {
-                PoseOrFontPicker.this.destroy();
+                PoseOrFontPicker.this.hide();
                 PoseOrFontPicker.this.pick(fontResource);
             }
         });

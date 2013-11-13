@@ -70,7 +70,7 @@ Ship = Class({
         // Oops, this shouldn't be like this look away!... (it should be a simple "create" method call, which doesn't exist yet).
         var actor = new itchy.Actor(game.resources.getCostume("bullet"));
         var behaviour = game.resources.scriptManager.createBehaviour( new itchy.util.ClassName( "Bullet.js" ) );
-        this.actor.getLayer().addTop(actor);
+        this.actor.getStage().addTop(actor);
         actor.setBehaviour( behaviour );
         // Ok, the nasty code has gone, you can look again ;-)
 

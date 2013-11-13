@@ -58,9 +58,10 @@ public class Bullet extends AbstractBehaviour implements Shootable
     {
         getActor().moveForwards(this.speed);
 
-        if (!getActor().isOnScreen()) {
-            getActor().kill();
-        }
+        // TODO Kill the bullet another way
+        //if (!getActor().isOnScreen()) {
+        //    getActor().kill();
+        //}
 
         getActor().getCollisionStrategy().update();
 

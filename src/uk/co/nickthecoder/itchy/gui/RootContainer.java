@@ -10,12 +10,21 @@ import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.Keys;
 import uk.co.nickthecoder.jame.event.ModifierKey;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
+import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 
-public abstract class RootContainer extends Container
+public class RootContainer extends Container
 {
     protected Stylesheet stylesheet;
 
     protected static Component focus;
+
+    private GuiView view;
+
+    public boolean modal = false;
+
+    private Component mouseOwner;
+
+    public boolean draggable = false;
 
     public RootContainer()
     {
@@ -49,13 +58,96 @@ public abstract class RootContainer extends Container
     }
 
     @Override
-    public boolean mouseDown( MouseButtonEvent mbe )
+    public boolean onMouseDown( MouseButtonEvent event )
     {
-        if (super.mouseDown(mbe)) {
-            return true;
+        if (this.mouseOwner == null) {
+            if (super.onMouseDown(event)) {
+                return true;
+            }
+
+        } else {
+            int dx = 0;
+            int dy = 0;
+            try {
+                for (Component component = this.mouseOwner; component != null; component = component.getParent()) {
+                    dx -= component.x;
+                    dy -= component.y;
+                }
+                event.x += dx;
+                event.y += dy;
+                if (this.mouseOwner.onMouseDown(event)) {
+                    return true;
+                }
+
+            } finally {
+                event.x -= dx;
+                event.y -= dy;
+            }
         }
-        this.setFocus(null);
-        return false;
+
+        return contains(event);
+    }
+
+    @Override
+    public boolean onMouseUp( MouseButtonEvent event )
+    {
+        if (this.mouseOwner == null) {
+            if (super.onMouseUp(event)) {
+                return true;
+            }
+
+        } else {
+            int dx = 0;
+            int dy = 0;
+            try {
+                for (Component component = this.mouseOwner; component != null; component = component.getParent()) {
+                    dx -= component.x;
+                    dy -= component.y;
+                }
+                event.x += dx;
+                event.y += dy;
+                if (this.mouseOwner.onMouseUp(event)) {
+                    return true;
+                }
+
+            } finally {
+                event.x -= dx;
+                event.y -= dy;
+            }
+        }
+        
+        return contains(event);
+    }
+
+    @Override
+    public boolean onMouseMove( MouseMotionEvent event )
+    {
+        if (this.mouseOwner == null) {
+            if ( super.onMouseMove(event)) {
+                return true;
+            }
+
+        } else {
+            int dx = 0;
+            int dy = 0;
+            try {
+                for (Component component = this.mouseOwner; component != null; component = component.getParent()) {
+                    dx -= component.x;
+                    dy -= component.y;
+                }
+                event.x += dx;
+                event.y += dy;
+                if ( this.mouseOwner.onMouseMove(event)) {
+                    return true;
+                }
+
+            } finally {
+                event.x -= dx;
+                event.y -= dy;
+            }
+        }
+        
+        return contains(event);
     }
 
     public boolean keyDown( KeyboardEvent ke )
@@ -67,8 +159,7 @@ public abstract class RootContainer extends Container
                 if (RootContainer.focus == null) {
                     this.previousFocus(null, this);
                 } else {
-                    RootContainer.focus.parent.previousFocus(RootContainer.focus,
-                        RootContainer.focus);
+                    RootContainer.focus.parent.previousFocus(RootContainer.focus, RootContainer.focus);
                 }
 
             } else {
@@ -124,8 +215,38 @@ public abstract class RootContainer extends Container
 
     }
 
-    public abstract void captureMouse( Component component );
+    @Override
+    public void invalidate()
+    {
+        if (this.view != null) {
+            this.view.invalidate();
+        }
+    }
 
-    public abstract void releaseMouse( Component component );
+    public void show()
+    {
+        this.view = Itchy.getGame().show(this);
+    }
+
+    public void hide()
+    {
+        Itchy.getGame().hide(this.view);
+    }
+
+    public void captureMouse( Component component )
+    {
+        if (this.view != null) {
+            Itchy.getGame().captureMouse(this.view);
+        }
+        this.mouseOwner = component;
+    }
+
+    public void releaseMouse( Component component )
+    {
+        if (this.view != null) {
+            Itchy.getGame().releaseMouse(this.view);
+        }
+        this.mouseOwner = null;
+    }
 
 }

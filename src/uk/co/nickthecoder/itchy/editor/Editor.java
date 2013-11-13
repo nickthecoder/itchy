@@ -12,10 +12,10 @@ import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Button;
 import uk.co.nickthecoder.itchy.gui.Container;
-import uk.co.nickthecoder.itchy.gui.GuiPose;
 import uk.co.nickthecoder.itchy.gui.Label;
 import uk.co.nickthecoder.itchy.gui.MessageBox;
 import uk.co.nickthecoder.itchy.gui.Notebook;
+import uk.co.nickthecoder.itchy.gui.RootContainer;
 import uk.co.nickthecoder.itchy.gui.Stylesheet;
 import uk.co.nickthecoder.itchy.gui.VerticalLayout;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
@@ -32,7 +32,7 @@ public final class Editor extends Game
 
     public Game game;
 
-    public GuiPose mainGuiPose;
+    public RootContainer root;
 
     // public PreferencesEditor preferencesEditor;
 
@@ -112,21 +112,21 @@ public final class Editor extends Game
 
         Itchy.enableKeyboardRepeat(true);
 
-        this.mainGuiPose = new GuiPose();
-        this.mainGuiPose.setLayout(new VerticalLayout());
-        this.mainGuiPose.setFill(true, true);
-        this.mainGuiPose.addStyle("editor");
+        this.root = new RootContainer();
+        this.root.setLayout(new VerticalLayout());
+        this.root.setFill(true, true);
+        this.root.addStyle("editor");
 
-        this.mainGuiPose.setMinimumWidth(this.getWidth());
-        this.mainGuiPose.setMinimumHeight(this.getHeight());
+        this.root.setMinimumWidth(this.getWidth());
+        this.root.setMinimumHeight(this.getHeight());
 
-        this.mainGuiPose.setMaximumWidth(this.getWidth());
-        this.mainGuiPose.setMaximumHeight(this.getHeight());
+        this.root.setMaximumWidth(this.getWidth());
+        this.root.setMaximumHeight(this.getHeight());
 
-        this.mainGuiPose.show();
+        this.root.show();
 
         Notebook notebook = new Notebook();
-        this.mainGuiPose.addChild(notebook);
+        this.root.addChild(notebook);
         notebook.setFill(true, true);
         notebook.setExpansion(1);
 
@@ -164,10 +164,10 @@ public final class Editor extends Game
                 Editor.this.onSave();
             }
         });
-        this.mainGuiPose.addChild(buttons);
+        this.root.addChild(buttons);
 
-        this.mainGuiPose.setPosition(0, 0, this.getWidth(), this.getHeight());
-        this.mainGuiPose.reStyle(); // MORE needed ?
+        this.root.setPosition(0, 0, this.getWidth(), this.getHeight());
+        this.root.reStyle(); // MORE needed ?
 
         if (this.designSceneName != null) {
             this.scenesEditor.design(this.designSceneName);

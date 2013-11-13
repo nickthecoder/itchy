@@ -10,8 +10,8 @@ import java.util.Arrays;
 
 import uk.co.nickthecoder.itchy.editor.Editor;
 import uk.co.nickthecoder.itchy.gui.Container;
-import uk.co.nickthecoder.itchy.gui.GuiPose;
 import uk.co.nickthecoder.itchy.gui.Notebook;
+import uk.co.nickthecoder.itchy.gui.RootContainer;
 import uk.co.nickthecoder.itchy.gui.Stylesheet;
 import uk.co.nickthecoder.itchy.gui.VerticalLayout;
 import uk.co.nickthecoder.itchy.tools.ForkGame;
@@ -22,7 +22,7 @@ public class Launcher extends Game
 {
     private static final String RULES = "resources" + File.separator + "editor" + File.separator + "style.xml";
 
-    public GuiPose mainGuiPose;
+    public RootContainer root;
 
     public Launcher( GameManager gameManager )
         throws Exception
@@ -42,25 +42,25 @@ public class Launcher extends Game
     {
         Itchy.enableKeyboardRepeat(true);
 
-        this.mainGuiPose = new GuiPose();
-        this.mainGuiPose.addStyle("editor");
+        this.root = new RootContainer();
+        this.root.addStyle("editor");
 
-        this.mainGuiPose.setMinimumWidth(this.getWidth());
-        this.mainGuiPose.setMinimumHeight(this.getHeight());
+        this.root.setMinimumWidth(this.getWidth());
+        this.root.setMinimumHeight(this.getHeight());
 
-        this.mainGuiPose.setMaximumWidth(this.getWidth());
-        this.mainGuiPose.setMaximumHeight(this.getHeight());
+        this.root.setMaximumWidth(this.getWidth());
+        this.root.setMaximumHeight(this.getHeight());
 
         createWindow();
-        this.mainGuiPose.show();
 
+        this.root.show();
     }
 
     private void createWindow()
     {
-        this.mainGuiPose.setLayout(new VerticalLayout());
+        this.root.setLayout(new VerticalLayout());
         Container form = new Container();
-        this.mainGuiPose.addChild(form);
+        this.root.addChild(form);
 
         Notebook notebook = new Notebook();
 
@@ -72,7 +72,7 @@ public class Launcher extends Game
         notebook.addPage(newGameWizard.getName(), newGameWizard.createForm());
         notebook.addPage(forkGame.getName(), forkGame.createForm());
 
-        this.mainGuiPose.addChild(notebook);
+        this.root.addChild(notebook);
 
     }
 
@@ -97,7 +97,7 @@ public class Launcher extends Game
         }
         System.out.println("Loading resources : " + resourcesFile);
         Resources resources = new Resources();
-        resources.load( resourcesFile );
+        resources.load(resourcesFile);
 
         Game game = resources.createGame();
         if ((argv.length == 1) && ("--editor".equals(argv[0]))) {

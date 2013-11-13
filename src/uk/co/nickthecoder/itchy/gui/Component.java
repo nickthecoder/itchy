@@ -550,13 +550,12 @@ public abstract class Component implements Focusable
     }
 
     /**
-     * 
      * @param event
      *        The mouse event, where x and y are relative to the parent container.
      * 
      * @return True is the mouse event has been handled, otherwise false.
      */
-    public boolean testMouseDown( MouseButtonEvent event )
+    public boolean mouseDown( MouseButtonEvent event )
     {
         if (this.contains2(event)) {
 
@@ -566,7 +565,57 @@ public abstract class Component implements Focusable
             event.x -= dx;
             event.y -= dy;
             try {
-                return this.mouseDown(event);
+                return this.onMouseDown(event);
+            } finally {
+                event.x += dx;
+                event.y += dy;
+            }
+        }
+        return false;
+    }
+    
+    /**
+     * @param event
+     *        The mouse event, where x and y are relative to the parent container.
+     * 
+     * @return True is the mouse event has been handled, otherwise false.
+     */
+    public boolean mouseMove( MouseMotionEvent event )
+    {
+        if (this.contains2(event)) {
+
+            int dx = this.x;
+            int dy = this.y;
+
+            event.x -= dx;
+            event.y -= dy;
+            try {
+                return this.onMouseMove(event);
+            } finally {
+                event.x += dx;
+                event.y += dy;
+            }
+        }
+        return false;
+    }
+    
+    /**
+     * @param event
+     *        The mouse event, where x and y are relative to the parent container.
+     * 
+     * @return True is the mouse event has been handled, otherwise false.
+     */
+    public boolean mouseUp( MouseButtonEvent event )
+    {
+        if (this.contains2(event)) {
+
+            int dx = this.x;
+            int dy = this.y;
+
+            event.x -= dx;
+            event.y -= dy;
+            try {
+                return this.onMouseUp(event);
             } finally {
                 event.x += dx;
                 event.y += dy;
@@ -580,7 +629,18 @@ public abstract class Component implements Focusable
      * @param event
      *        The mouse event, where x and y are relative to this component.
      */
-    public boolean mouseDown( MouseButtonEvent event )
+    public boolean onMouseDown( MouseButtonEvent event )
+    {
+        // This base class does nothing.
+        return false;
+    }
+
+    /**
+     * 
+     * @param event
+     *        The mouse event, where x and y are relative to this component.
+     */
+    public boolean onMouseUp( MouseButtonEvent event )
     {
         // This base class does nothing.
         return false;
@@ -590,25 +650,15 @@ public abstract class Component implements Focusable
      * @param event
      *        The mouse event, where x and y are relative to this component.
      */
-    public void mouseMove( MouseMotionEvent event )
+    public boolean onMouseMove( MouseMotionEvent event )
     {
         // This base class does nothing.
-    }
-
-    /**
-     * 
-     * @param event
-     *        The mouse event, where x and y are relative to this component.
-     */
-    public void mouseUp( MouseButtonEvent event )
-    {
-        // This base class does nothing.
+        return false;
     }
 
     public boolean contains( MouseEvent event )
     {
-        return (event.x) >= 0 && (event.y >= 0) && (event.x < this.getWidth()) &&
-            (event.y < this.getHeight());
+        return (event.x) >= 0 && (event.y >= 0) && (event.x < this.getWidth()) && (event.y < this.getHeight());
     }
 
     public boolean contains2( MouseEvent event )

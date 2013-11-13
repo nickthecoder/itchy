@@ -39,7 +39,7 @@ Rock = Class({
                 var actor = new itchy.Actor(this.actor.getCostume(), "" + this.generation);
                 var behaviour = game.resources.scriptManager.createBehaviour( new itchy.util.ClassName( "Rock.js" ) );
                 actor.setBehaviour( behaviour );
-                this.actor.getLayer().addTop(actor);
+                this.actor.getStage().addTop(actor);
                 // Ok, the nasty code has gone, you can look again ;-)
 
                 behaviour.behaviourScript.generation = this.generation;

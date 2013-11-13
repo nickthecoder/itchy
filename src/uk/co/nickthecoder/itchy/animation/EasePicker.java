@@ -54,7 +54,7 @@ public abstract class EasePicker extends Window
             @Override
             public void action()
             {
-                EasePicker.this.destroy();
+                EasePicker.this.hide();
             }
 
         });
@@ -101,7 +101,7 @@ public abstract class EasePicker extends Window
             @Override
             public void action()
             {
-                EasePicker.this.destroy();
+                EasePicker.this.hide();
                 EasePicker.this.pick(ease);
             }
         });

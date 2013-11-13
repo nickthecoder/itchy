@@ -126,7 +126,7 @@ public class IntegerBox extends EntryBox<IntegerBox>
     }
 
     @Override
-    public boolean mouseDown( MouseButtonEvent mbe )
+    public boolean onMouseDown( MouseButtonEvent mbe )
     {
         if (this.hasFocus) {
             if (mbe.button == Event.BUTTON_WHEELUP) {
@@ -141,7 +141,7 @@ public class IntegerBox extends EntryBox<IntegerBox>
             }
         }
 
-        return super.mouseDown(mbe);
+        return super.onMouseDown(mbe);
     }
 
 }

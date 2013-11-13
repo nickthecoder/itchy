@@ -14,7 +14,6 @@ import uk.co.nickthecoder.itchy.Costume;
 import uk.co.nickthecoder.itchy.CostumeProperties;
 import uk.co.nickthecoder.itchy.CostumeResource;
 import uk.co.nickthecoder.itchy.FontResource;
-import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.ManagedSound;
 import uk.co.nickthecoder.itchy.PoseResource;
 import uk.co.nickthecoder.itchy.SoundResource;
@@ -67,7 +66,6 @@ public class CostumesEditor extends SubEditor<CostumeResource>
     private Label labelExtendedFrom;
 
     private Button buttonExtendedFrom;
-
 
     public CostumesEditor( Editor editor )
     {
@@ -124,6 +122,7 @@ public class CostumesEditor extends SubEditor<CostumeResource>
         return table;
     }
 
+    @Override
     protected TableModel createTableModel()
     {
         SimpleTableModel model = new SimpleTableModel();
@@ -699,7 +698,7 @@ public class CostumesEditor extends SubEditor<CostumeResource>
                 public void action()
                 {
                     CostumesEditor.this.onEditEventOk();
-                    window.destroy();
+                    window.hide();
                 }
             });
             Button cancel = new Button(new Label("Cancel"));
@@ -707,7 +706,7 @@ public class CostumesEditor extends SubEditor<CostumeResource>
                 @Override
                 public void action()
                 {
-                    window.destroy();
+                    window.hide();
                 }
             });
             buttons.addChild(ok);
@@ -715,7 +714,7 @@ public class CostumesEditor extends SubEditor<CostumeResource>
 
             window.clientArea.addChild(buttons);
 
-            Itchy.getGame().showWindow(window);
+            window.show();
         }
     }
 

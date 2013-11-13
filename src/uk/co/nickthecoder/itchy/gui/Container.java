@@ -16,6 +16,7 @@ import uk.co.nickthecoder.itchy.GraphicsContext;
 import uk.co.nickthecoder.itchy.util.Reversed;
 import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
+import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 
 public class Container extends Component
 {
@@ -438,7 +439,7 @@ public class Container extends Component
     }
 
     @Override
-    public boolean mouseDown( MouseButtonEvent mbe )
+    public boolean onMouseDown( MouseButtonEvent event )
     {
         ListIterator<Component> i = this.children.listIterator(this.children.size());
         while (i.hasPrevious()) {
@@ -446,7 +447,43 @@ public class Container extends Component
 
             if (child.isVisible()) {
 
-                if (child.testMouseDown(mbe)) {
+                if (child.mouseDown(event)) {
+                    return true;
+                }
+
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean onMouseUp( MouseButtonEvent event )
+    {
+        ListIterator<Component> i = this.children.listIterator(this.children.size());
+        while (i.hasPrevious()) {
+            Component child = i.previous();
+
+            if (child.isVisible()) {
+
+                if (child.mouseUp(event)) {
+                    return true;
+                }
+
+            }
+        }
+        return false;
+    }
+    
+    @Override
+    public boolean onMouseMove( MouseMotionEvent event )
+    {
+        ListIterator<Component> i = this.children.listIterator(this.children.size());
+        while (i.hasPrevious()) {
+            Component child = i.previous();
+
+            if (child.isVisible()) {
+
+                if (child.mouseMove(event)) {
                     return true;
                 }
 

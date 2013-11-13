@@ -61,8 +61,7 @@ public class SceneTransition
      */
     public static Animation slideLeft()
     {
-        return new MoveAnimation(TRANSITION_FRAMES, NumericAnimation.linear, -Itchy.getGame()
-            .getWidth(), 0);
+        return new MoveAnimation(TRANSITION_FRAMES, NumericAnimation.linear, -Itchy.getGame().getWidth(), 0);
     }
 
     /**
@@ -160,7 +159,7 @@ public class SceneTransition
     protected void takeSnapshot()
     {
         Surface oldImage = Itchy.getDisplaySurface().copy();
-        ImagePose pose = new ImagePose(oldImage, 0, 0);
+        ImagePose pose = new ImagePose(oldImage, 0, oldImage.getHeight());
 
         this.actor = new Actor(pose);
         this.actor.setBehaviour(new PlainBehaviour());
@@ -183,7 +182,7 @@ public class SceneTransition
     protected void begin()
     {
         this.actor.moveTo(0, 0);
-        Itchy.getGame().getPopupLayer().addTop(this.actor);
+        Itchy.getGame().getGlassStage().addTop(this.actor);
         this.animation.addAnimationListener(new AnimationListener() {
             @Override
             public void finished()

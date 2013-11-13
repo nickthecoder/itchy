@@ -85,7 +85,7 @@ public abstract class CostumePicker extends Window
             @Override
             public void action()
             {
-                CostumePicker.this.destroy();
+                CostumePicker.this.hide();
                 CostumePicker.this.pick(costumeResource);
             }
         });

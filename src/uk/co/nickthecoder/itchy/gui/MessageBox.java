@@ -45,7 +45,7 @@ public class MessageBox extends Window
 
     protected void onOk()
     {
-        this.destroy();
+        this.hide();
     }
 
 }

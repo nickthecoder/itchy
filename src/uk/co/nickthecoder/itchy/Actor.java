@@ -57,7 +57,7 @@ public class Actor implements PropertySubject<Actor>
 
     private Costume costume;
 
-    private ActorsLayer layer;
+    private Stage stage;
 
     private double x;
     private double y;
@@ -186,10 +186,10 @@ public class Actor implements PropertySubject<Actor>
 
     public boolean getYAxisPointsDown()
     {
-        if (this.layer == null) {
+        if (this.stage == null) {
             return false;
         }
-        return this.layer.getYAxisPointsDown();
+        return this.stage.getYAxisPointsDown();
     }
 
     public double getCornerY()
@@ -207,34 +207,34 @@ public class Actor implements PropertySubject<Actor>
         return this.getX() - this.getAppearance().getOffsetX();
     }
 
-    public ActorsLayer getLayer()
+    public Stage getStage()
     {
-        return this.layer;
+        return this.stage;
     }
 
-    public void removeFromLayer()
+    public void removeFromStage()
     {
-        setLayer(null);
+        setStage(null);
     }
 
-    public void setLayer( ActorsLayer layer )
+    public void setStage( Stage stage )
     {
-        if (this.layer == layer) {
+        if (this.stage == stage) {
             return;
         }
 
-        if (this.layer != null) {
-            this.layer.remove(this);
+        if (this.stage != null) {
+            this.stage.remove(this);
         }
 
-        if (layer != null) {
-            layer.add(this);
+        if (stage != null) {
+            stage.add(this);
         }
     }
 
-    void setLayerAttribute( ActorsLayer layer )
+    void setStageAttribute( Stage stage )
     {
-        this.layer = layer;
+        this.stage = stage;
         checkFullyCreated();
     }
 
@@ -362,41 +362,13 @@ public class Actor implements PropertySubject<Actor>
         return this.y;
     }
 
-    /**
-     * This is NOT the opposite of isOnScreen.
-     * 
-     * @return True is any part of the actor's bounding rectangle is off screen.
-     */
-    public boolean isOffScreen()
-    {
-        if (this.layer == null) {
-            return true;
-        }
-
-        return !this.appearance.getWorldRectangle().within(this.layer.getWorldRectangle());
-    }
-
-    /**
-     * This is NOT the opposite of isOffScreen.
-     * 
-     * @return True if any part of the actor's bounding rectangle is on screen.
-     */
-    public boolean isOnScreen()
-    {
-        if (this.layer == null) {
-            return false;
-        }
-
-        return this.appearance.visibleWithin(this.layer.getWorldRectangle());
-    }
-
     private void checkFullyCreated()
     {
         if (this.fullyCreated) {
             return;
         }
 
-        if ((this.layer != null) && (this.behaviour != unsedBehaviour)) {
+        if ((this.stage != null) && (this.behaviour != unsedBehaviour)) {
             this.fullyCreated = true;
             this.behaviour.birth();
             Itchy.getGame().add(this);
@@ -473,8 +445,8 @@ public class Actor implements PropertySubject<Actor>
             getBehaviour().die();
             resetCollisionStrategy();
             
-            if (this.layer != null) {
-                this.layer.remove(this);
+            if (this.stage != null) {
+                this.stage.remove(this);
             }
         }
     }
@@ -577,7 +549,7 @@ public class Actor implements PropertySubject<Actor>
     {
         return this.getAppearance().getWorldRectangle().contains(x, y);
     }
-
+    
     public static Behaviour nearest( double x, double y, String tag )
     {
         Behaviour closestBehaviour = null;
@@ -750,31 +722,32 @@ public class Actor implements PropertySubject<Actor>
         return this.collisionStrategy.overlapping(this, including, excluding);
     }
 
+    // TODO Should I use these? If so, can I use an interface instead of a concrete class?
     public void zOrderUp()
     {
-        if (this.layer != null) {
-            this.layer.zOrderUp(this);
+        if ((this.stage != null) && (this.stage instanceof ZOrderStage)) {
+            ((ZOrderStage) this.stage).zOrderUp(this);
         }
     }
 
     public void zOrderDown()
     {
-        if (this.layer != null) {
-            this.layer.zOrderDown(this);
+        if ((this.stage != null) && (this.stage instanceof ZOrderStage)) {
+            ((ZOrderStage) this.stage).zOrderDown(this);
         }
     }
 
     public void zOrderTop()
     {
-        if (this.layer != null) {
-            this.layer.addTop(this);
+        if ((this.stage != null) && (this.stage instanceof ZOrderStage)) {
+            ((ZOrderStage) this.stage).addTop(this);
         }
     }
 
     public void zOrderBottom()
     {
-        if (this.layer != null) {
-            this.layer.addBottom(this);
+        if ((this.stage != null) && (this.stage instanceof ZOrderStage)) {
+            ((ZOrderStage) this.stage).addBottom(this);
         }
     }
 
@@ -788,8 +761,8 @@ public class Actor implements PropertySubject<Actor>
     {
         if (this.zOrder != value) {
             this.zOrder = value;
-            if (this.layer != null) {
-                this.layer.add(this);
+            if (this.stage != null) {
+                this.stage.add(this);
             }
         }
     }

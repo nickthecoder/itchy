@@ -37,13 +37,14 @@ public class ShieldFactory extends AbstractBehaviour
                 }
                 Pose pose = getActor().getCostume().getPose(poseName);
 
-                Actor shield = new Actor(pose);
-                Shield shieldBehaviour = new Shield();
-                shield.getAppearance().setDirection(getActor().getAppearance().getDirection());
-                getActor().getLayer().addTop(shield);
-                shield.moveTo(getActor().getX(), getActor().getY());
-                shield.moveForwards(x * this.spacing, y * this.spacing);
-                shield.setBehaviour(shieldBehaviour);
+                Actor shieldActor = new Actor(pose);
+                Shield shield = new Shield();
+                shieldActor.getAppearance().setDirection(getActor().getAppearance().getDirection());
+                shieldActor.setZOrder(getActor().getZOrder() + 1);
+                getActor().getStage().add(shieldActor);
+                shieldActor.moveTo(getActor().getX(), getActor().getY());
+                shieldActor.moveForwards(x * this.spacing, y * this.spacing);
+                shieldActor.setBehaviour(shield);
 
             }
         }

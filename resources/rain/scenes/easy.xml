@@ -5,7 +5,7 @@
     <property name="speedUpAfter" value="12"/>
   </properties>
   <layer name="main">
-    <actor costume="background" x="0" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="1"/>
+    <actor costume="background" x="0" y="603" direction="0.0" heading="0.0" startEvent="default" zOrder="1"/>
     <text text="Easy" font="Boycott" size="72" color="#401c00" xAlignment="0.5" yAlignment="0.5" x="384" y="559" direction="0.0" heading="0.0" startEvent="default" zOrder="2"/>
     <text text="Easy" font="Boycott" size="65" color="#93472e" xAlignment="0.5" yAlignment="0.5" x="382" y="561" direction="0.0" heading="0.0" startEvent="default" zOrder="3"/>
     <text text="Score :" font="Boycott" size="35" color="#000000" xAlignment="0.5" yAlignment="0.5" x="73" y="576" direction="0.0" heading="0.0" startEvent="default" zOrder="4"/>
@@ -51,7 +51,10 @@
       <property name="distance" value="600"/>
     </actor>
     <actor costume="player" x="424" y="14" direction="0.0" heading="0.0" startEvent="default" zOrder="16"/>
-    <actor costume="wally" x="-102" y="247" direction="0.0" heading="0.0" startEvent="default" zOrder="17" scale="1.2092457420924574"/>
+    <actor costume="wally" x="6062" y="263" direction="0.0" heading="0.0" startEvent="default" zOrder="17" scale="1.2092457420924574"/>
     <text text="High Score" font="Boycott" size="35" color="#8f9688" xAlignment="0.5" yAlignment="0.5" x="704" y="570" direction="0.0" heading="0.0" startEvent="default" zOrder="18"/>
+    <text text="Really long text" font="BlackCasper" size="112" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="595" y="174" direction="-91.33221985386966" heading="-87.89858949141913" startEvent="default" zOrder="19"/>
+    <actor costume="background" x="717" y="506" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
+    <actor costume="background" x="-655" y="670" direction="0.0" heading="0.0" startEvent="default" zOrder="21"/>
   </layer>
 </scene>

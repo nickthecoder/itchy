@@ -82,7 +82,7 @@ public class DoubleBox extends EntryBox<DoubleBox>
     }
     
     @Override
-    public boolean mouseDown( MouseButtonEvent mbe )
+    public boolean onMouseDown( MouseButtonEvent mbe )
     {
         if (this.hasFocus) {
 
@@ -104,7 +104,7 @@ public class DoubleBox extends EntryBox<DoubleBox>
             }
         }
 
-        return super.mouseDown(mbe);
+        return super.onMouseDown(mbe);
     }
 
 }

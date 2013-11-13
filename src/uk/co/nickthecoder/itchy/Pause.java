@@ -5,7 +5,6 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
-
 public class Pause
 {
     private final Game game;
@@ -104,9 +103,8 @@ public class Pause
         }
 
         Actor actor = new Actor(costume);
-        ActorsLayer layer = this.game.getPopupLayer();
-        actor.moveTo(layer.getWorldRectangle().width / 2, layer.getWorldRectangle().height / 2);
-        layer.addTop(actor);
+        actor.moveTo(this.game.getWidth() / 2, this.game.getHeight() / 2);
+        this.game.getGlassStage().addTop(actor);
 
         return actor;
     }

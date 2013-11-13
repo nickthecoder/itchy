@@ -61,7 +61,7 @@ public abstract class Picker<T> extends Window
             @Override
             public void action()
             {
-                Picker.this.destroy();
+                Picker.this.hide();
             }
             
         });
@@ -78,7 +78,7 @@ public abstract class Picker<T> extends Window
             @Override
             public void action()
             {
-                Picker.this.destroy();
+                Picker.this.hide();
                 Picker.this.pick(label, object);
             }
         });

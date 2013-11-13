@@ -16,7 +16,9 @@ import uk.co.nickthecoder.itchy.GameManager;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Launcher;
 import uk.co.nickthecoder.itchy.MultiLineTextPose;
-import uk.co.nickthecoder.itchy.ScrollableLayer;
+import uk.co.nickthecoder.itchy.StageView;
+import uk.co.nickthecoder.itchy.WorldRectangle;
+import uk.co.nickthecoder.itchy.ZOrderStage;
 import uk.co.nickthecoder.itchy.animation.Animation;
 import uk.co.nickthecoder.itchy.animation.CompoundAnimation;
 import uk.co.nickthecoder.itchy.extras.SceneTransition;
@@ -33,13 +35,17 @@ public class DrunkInvaders extends Game
 
     public static DrunkInvaders game;
 
-    public ScrollableLayer backgroundLayer;
+    public ZOrderStage backgroundStage;
 
-    public ScrollableLayer mainLayer;
+    public ZOrderStage glassStage;
 
-    public ScrollableLayer glassLayer;
+    public ZOrderStage fadeStage;
 
-    public ScrollableLayer fadeLayer;
+    public StageView backgroundView;
+
+    public StageView glassView;
+
+    public StageView fadeView;
 
     public int metronome;
 
@@ -54,6 +60,8 @@ public class DrunkInvaders extends Game
     private Behaviour info;
 
     public boolean transitioning = false;
+    
+    public WorldRectangle worldBounds;
 
     public DrunkInvaders( GameManager gameManager )
         throws Exception
@@ -66,27 +74,37 @@ public class DrunkInvaders extends Game
     }
 
     @Override
-    public void createLayers()
+    public void createTroupsAndViews()
     {
+        this.worldBounds = new WorldRectangle( 0,0, this.getWidth(), this.getHeight());
+
         Rect screenRect = new Rect(0, 0, getWidth(), getHeight());
 
-        this.mainLayer = new ScrollableLayer("main", screenRect);
-        this.mainLayer.centerOn(320, 240);
-        this.mainLayer.enableMouseListener(this);
+        this.mainStage = new ZOrderStage("main");
+        this.backgroundStage = new ZOrderStage("background");
+        this.glassStage = new ZOrderStage("glass");
+        this.fadeStage = new ZOrderStage("fade");
 
-        this.backgroundLayer = new ScrollableLayer("background", screenRect);
-        this.backgroundLayer.centerOn(320, 240);
+        this.mainView = new StageView(screenRect, this.mainStage);
+        this.mainView.centerOn(320, 240);
+        this.mainView.enableMouseListener(this);
 
-        this.glassLayer = new ScrollableLayer("glass", screenRect);
-        this.fadeLayer = new ScrollableLayer("fade", screenRect);
+        this.backgroundView = new StageView(screenRect, this.backgroundStage);
+        this.backgroundView.centerOn(320, 240);
 
-        this.layers.add(this.backgroundLayer);
-        this.layers.add(this.mainLayer);
-        this.layers.add(this.glassLayer);
-        this.layers.add(this.fadeLayer);
+        this.glassView = new StageView(screenRect, this.glassStage);
+        this.fadeView = new StageView(screenRect, this.fadeStage);
 
-        this.glassLayer.locked = true;
-        this.fadeLayer.locked = true;
+        this.gameViews.add(this.backgroundView);
+        this.gameViews.add(this.mainView);
+        this.gameViews.add(this.glassView);
+        this.gameViews.add(this.fadeView);
+
+        this.stages.add(this.backgroundStage);
+        this.stages.add(this.mainStage);
+
+        this.glassStage.locked = true;
+        this.fadeStage.locked = true;
 
     }
 
@@ -95,7 +113,7 @@ public class DrunkInvaders extends Game
     {
         super.onActivate();
         game = this;
-        
+
         this.metronomeCountdown = 0;
         this.metronome = 20;
     }
@@ -124,7 +142,7 @@ public class DrunkInvaders extends Game
     public void tick()
     {
         super.tick();
-        
+
         if (this.metronomeCountdown == 0) {
             this.metronomeCountdown = this.metronome;
         }
@@ -153,7 +171,7 @@ public class DrunkInvaders extends Game
             Actor actor = new Actor(pose);
             actor.setBehaviour(this.info);
             actor.moveTo(40, 460);
-            this.glassLayer.addTop(actor);
+            this.glassStage.addTop(actor);
 
         } else {
             this.info.getActor().kill();

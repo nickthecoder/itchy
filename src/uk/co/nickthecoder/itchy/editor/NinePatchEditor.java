@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.GraphicsContext;
-import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.NinePatchResource;
 import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
@@ -81,6 +80,7 @@ public class NinePatchEditor extends SubEditor<NinePatchResource>
         return table;
     }
 
+    @Override
     protected TableModel createTableModel()
     {
         SimpleTableModel model = new SimpleTableModel();
@@ -163,7 +163,7 @@ public class NinePatchEditor extends SubEditor<NinePatchResource>
     public void onAdd( File file )
     {
         if (file == null) {
-            Itchy.getGame().hideWindow(this.openDialog);
+            this.openDialog.hide();
         } else {
             String filename = this.editor.resources.makeRelativeFilename(file);
             String name = Util.nameFromFilename(filename);
@@ -208,7 +208,7 @@ public class NinePatchEditor extends SubEditor<NinePatchResource>
         }
 
         @Override
-        public boolean mouseDown( MouseButtonEvent mbe )
+        public boolean onMouseDown( MouseButtonEvent mbe )
         {
             if (mbe.button == 1) {
                 this.backgroundIndex++;
@@ -218,7 +218,7 @@ public class NinePatchEditor extends SubEditor<NinePatchResource>
                 this.invalidate();
                 return true;
             }
-            return super.mouseDown(mbe);
+            return super.onMouseDown(mbe);
         }
 
         private int getMargin( String name )

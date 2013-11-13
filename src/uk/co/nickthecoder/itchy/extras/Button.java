@@ -6,7 +6,8 @@
 package uk.co.nickthecoder.itchy.extras;
 
 import uk.co.nickthecoder.itchy.AbstractBehaviour;
-import uk.co.nickthecoder.itchy.MouseListener;
+import uk.co.nickthecoder.itchy.MouseListenerView;
+import uk.co.nickthecoder.itchy.ViewMouseListener;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 
@@ -22,10 +23,10 @@ import uk.co.nickthecoder.jame.event.MouseMotionEvent;
  * the mouse moves over the button without being clicked.
  * <p>
  * For the button to work, the layer that the actor is drawn on must have had its mouse listener
- * enabled. i.e. call {@link uk.co.nickthecoder.itchy.ActorsLayer#enableMouseListener} when
- * initialising your Game object.
+ * enabled. i.e. call {@link uk.co.nickthecoder.itchy.Stage#enableMouseListener} when initialising
+ * your Game object.
  */
-public abstract class Button extends AbstractBehaviour implements MouseListener
+public abstract class Button extends AbstractBehaviour implements ViewMouseListener
 {
 
     private boolean down = false;
@@ -40,23 +41,23 @@ public abstract class Button extends AbstractBehaviour implements MouseListener
     }
 
     @Override
-    public boolean onMouseDown( MouseButtonEvent event )
+    public boolean onMouseDown( MouseListenerView view, MouseButtonEvent event )
     {
         if (getActor().hitting(event.x, event.y)) {
             onDown();
             this.down = true;
             this.inside = true;
-            getActor().getLayer().captureMouse(this);
+            view.captureMouse(this);
             return true;
         }
         return false;
     }
 
     @Override
-    public boolean onMouseUp( MouseButtonEvent event )
+    public boolean onMouseUp( MouseListenerView view, MouseButtonEvent event )
     {
         if (this.down) {
-            getActor().getLayer().releaseMouse(this);
+            view.releaseMouse(this);
 
             if (this.inside) {
                 onUp();
@@ -71,7 +72,7 @@ public abstract class Button extends AbstractBehaviour implements MouseListener
     }
 
     @Override
-    public boolean onMouseMove( MouseMotionEvent event )
+    public boolean onMouseMove( MouseListenerView view, MouseMotionEvent event )
     {
         boolean nowInside = getActor().hitting(event.x, event.y);
 

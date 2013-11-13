@@ -11,10 +11,9 @@ import java.util.List;
 
 import uk.co.nickthecoder.itchy.AbstractBehaviour;
 import uk.co.nickthecoder.itchy.Actor;
-import uk.co.nickthecoder.itchy.ActorsLayer;
 import uk.co.nickthecoder.itchy.Appearance;
 import uk.co.nickthecoder.itchy.Behaviour;
-import uk.co.nickthecoder.itchy.CompoundLayer;
+import uk.co.nickthecoder.itchy.CompoundView;
 import uk.co.nickthecoder.itchy.Costume;
 import uk.co.nickthecoder.itchy.CostumeResource;
 import uk.co.nickthecoder.itchy.Font;
@@ -22,7 +21,6 @@ import uk.co.nickthecoder.itchy.Game;
 import uk.co.nickthecoder.itchy.ImagePose;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.KeyListener;
-import uk.co.nickthecoder.itchy.Layer;
 import uk.co.nickthecoder.itchy.MouseListener;
 import uk.co.nickthecoder.itchy.NullBehaviour;
 import uk.co.nickthecoder.itchy.Pose;
@@ -30,8 +28,12 @@ import uk.co.nickthecoder.itchy.Scene;
 import uk.co.nickthecoder.itchy.SceneActor;
 import uk.co.nickthecoder.itchy.SceneBehaviour;
 import uk.co.nickthecoder.itchy.SceneResource;
-import uk.co.nickthecoder.itchy.ScrollableLayer;
+import uk.co.nickthecoder.itchy.ScrollableView;
+import uk.co.nickthecoder.itchy.Stage;
+import uk.co.nickthecoder.itchy.StageView;
 import uk.co.nickthecoder.itchy.TextPose;
+import uk.co.nickthecoder.itchy.View;
+import uk.co.nickthecoder.itchy.ZOrderStage;
 import uk.co.nickthecoder.itchy.extras.Follower;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Button;
@@ -42,11 +44,11 @@ import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.Container;
 import uk.co.nickthecoder.itchy.gui.FlowLayout;
-import uk.co.nickthecoder.itchy.gui.GuiPose;
 import uk.co.nickthecoder.itchy.gui.ImageComponent;
 import uk.co.nickthecoder.itchy.gui.Label;
 import uk.co.nickthecoder.itchy.gui.MessageBox;
 import uk.co.nickthecoder.itchy.gui.Notebook;
+import uk.co.nickthecoder.itchy.gui.RootContainer;
 import uk.co.nickthecoder.itchy.gui.SimpleTableModel;
 import uk.co.nickthecoder.itchy.gui.SimpleTableModelRow;
 import uk.co.nickthecoder.itchy.gui.Table;
@@ -61,7 +63,6 @@ import uk.co.nickthecoder.itchy.util.AbstractProperty;
 import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.itchy.util.NinePatch;
 import uk.co.nickthecoder.itchy.util.Reversed;
-import uk.co.nickthecoder.jame.RGBA;
 import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.Surface;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
@@ -89,23 +90,19 @@ public class SceneDesigner implements MouseListener, KeyListener
 
     private Scene scene;
 
-    private CompoundLayer designLayers;
+    private CompoundView<StageView> designViews;
 
-    private ScrollableLayer currentDesignLayer;
+    private StageView currentStageView;
 
-    private ScrollableLayer glassLayer;
+    private ZOrderStage overlayStage;
 
-    private ScrollableLayer guiLayer;
+    private StageView overlayView;
 
     private final Rect sceneRect;
 
-    private final RGBA sceneBackground = new RGBA(0, 0, 0);
+    private RootContainer toolbox;
 
-    private final RGBA guiBackground = null;
-
-    private GuiPose toolboxPose;
-
-    private GuiPose toolbarPose;
+    private RootContainer toolbar;
 
     private ButtonGroup costumeButtonGroup;
 
@@ -176,71 +173,56 @@ public class SceneDesigner implements MouseListener, KeyListener
 
     public void go()
     {
-        Rect rect = new Rect(0, 0, this.editor.getWidth(), this.editor.getHeight());
-
-        this.designLayers = new CompoundLayer("design", rect, this.sceneBackground);
-
-        for (Layer gameLayer : Editor.instance.game.getLayers().getChildren()) {
-            // TODO Using concreate ScrollableLayer
-            if (gameLayer instanceof ScrollableLayer) {
-                ScrollableLayer scrollableLayer = (ScrollableLayer) gameLayer;
-                if (!scrollableLayer.isLocked()) {
-            
-                    ScrollableLayer designLayer = new ScrollableLayer(scrollableLayer.getName(), rect);
-
-                    this.designLayers.add(designLayer);
-                    this.currentDesignLayer = designLayer;
-                }
-            }
-        }
-
-        this.glassLayer = new ScrollableLayer("glass", rect);
-        this.guiLayer = new ScrollableLayer("gui", rect, this.guiBackground);
-        this.guiLayer.setYAxisPointsDown(true);
-
-        this.editor.getLayers().add(this.designLayers);
-        this.editor.getLayers().add(this.glassLayer);
-        this.editor.getLayers().add(this.guiLayer);
+        this.editor.root.hide();
 
         createToolbar();
-        createToolbox();
 
-        Actor toolboxActor = this.toolboxPose.getActor();
-        this.guiLayer.addTop(toolboxActor);
+        Rect editRect = new Rect(0, this.toolbar.getHeight(), this.editor.getWidth(), this.editor.getHeight() - this.toolbar.getHeight());
 
-        Actor toolbarActor = this.toolbarPose.getActor();
-        this.guiLayer.addTop(toolbarActor);
+        this.designViews = new CompoundView<StageView>(editRect);
+        this.editor.getViews().add(this.designViews);
 
-        // Can be ANY of the scrolling layers, so I picked the first for convenience.
-        //TODO Casting to a contrete class
-        ((ScrollableLayer) this.designLayers.getChildren().get(0)).addMouseListener(this, this.editor);
-        Itchy.getGame().addKeyListener(this);
+        for (Stage stage : this.editor.game.getStages()) {
 
-        this.scene.create(this.designLayers, this.editor.resources, true);
+            if (!stage.isLocked()) {
+                this.editor.getStages().add(stage);
+                StageView view = new StageView(editRect, stage);
+                this.designViews.add(view);
+                this.currentStageView = view;
+            }
+        }
+        
+        this.overlayStage = new ZOrderStage("overlay");
+        this.overlayView = new StageView( editRect, this.overlayStage );
+        this.editor.getViews().add(this.overlayView);
+
+        this.editor.addMouseListener(this);
+        this.editor.addKeyListener(this);
+
+        this.scene.create(this.editor, true);
 
         createPageBorder();
         createHandles();
 
+        createToolbox();
+
         setMode(MODE_SELECT);
-        toolboxActor.moveTo(0, this.editor.getHeight() - this.toolboxPose.getHeight());
 
         onCenter();
     }
 
     private void onDone()
     {
-        this.editor.getLayers().remove(this.designLayers);
-        this.editor.getLayers().remove(this.glassLayer);
-        this.editor.getLayers().remove(this.guiLayer);
+        this.editor.getViews().remove(this.designViews);
+
+        this.editor.getStages().clear();
 
         Itchy.getGame().removeKeyListener(this);
-        // TODO Casting to a concreate class
-        ((ScrollableLayer) this.designLayers.getChildren().get(0)).removeMouseListener(this, this.editor);
 
-        this.toolboxPose.destroy();
-        this.toolbarPose.destroy();
+        this.toolbox.hide();
+        this.toolbar.hide();
 
-        this.editor.mainGuiPose.show();
+        this.editor.root.show();
     }
 
     private void createPageBorder()
@@ -255,34 +237,25 @@ public class SceneDesigner implements MouseListener, KeyListener
         newPose.setOffsetY(margin);
 
         Actor actor = new Actor(newPose);
-        this.glassLayer.addTop(actor);
-        if (actor.getYAxisPointsDown()) {
-            actor.moveTo(margin, margin);
-        } else {
-            actor.moveTo(margin, this.sceneRect.height - margin);
-        }
+        this.editor.getGlassStage().addTop(actor);
+        actor.moveTo(margin, this.sceneRect.height - margin);
 
     }
 
     private void createToolbox()
     {
-        this.toolboxPose = new GuiPose() {
-            // Mouse clicks on the toolbox mustn't get propagated to the design area underneigth.
-            @Override
-            public boolean mouseDown( MouseButtonEvent event )
-            {
-                super.mouseDown(event);
-                return true;
-            }
-        };
-        this.toolboxPose.addStyle("toolbox");
-        this.toolboxPose.draggable = true;
+        this.toolbox = new RootContainer();
 
-        this.toolboxPose.setStylesheet(this.editor.getStylesheet());
-        this.toolboxPose.reStyle();
-        this.toolboxPose.forceLayout();
-        this.toolboxPose.setPosition(0, 0, this.editor.getWidth(), 200);
-        this.toolboxPose.addStyle("semi");
+        this.toolbox = new RootContainer();
+        this.toolbox.addStyle("toolbox");
+        this.toolbox.draggable = true;
+        this.toolbox.moveTo(0, this.editor.getHeight() - this.toolbox.getHeight());
+
+        this.toolbox.setStylesheet(this.editor.getStylesheet());
+        this.toolbox.reStyle();
+        this.toolbox.forceLayout();
+        this.toolbox.setPosition(0, 0, this.editor.getWidth(), 200);
+        this.toolbox.addStyle("semi");
 
         Container costumes = new Container();
         costumes.addStyle("costumes");
@@ -326,7 +299,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.toolboxNotebook.addPage(new Label("Behaviour"), behaviourScroll);
         this.toolboxNotebook.addPage(new Label("Layers"), layersScroll);
 
-        this.toolboxPose.setFill(true, true);
+        this.toolbox.setFill(true, true);
         this.toolboxNotebook.setFill(true, true);
         this.toolboxNotebook.setExpansion(1);
         costumes.setExpansion(1);
@@ -334,31 +307,31 @@ public class SceneDesigner implements MouseListener, KeyListener
         costumesScroll.setExpansion(1);
         costumesScroll.setFill(true, true);
 
-        this.toolboxPose.addChild(this.toolboxNotebook);
+        this.toolbox.addChild(this.toolboxNotebook);
+
+        int toolHeight = 200;
+        this.toolbox.setMinimumWidth(this.editor.getWidth());
+        this.toolbox.setMaximumHeight(toolHeight);
+        this.toolbox.setMinimumHeight(toolHeight);
+        this.toolbox.show();
+        this.toolbox.setPosition(0, this.editor.getHeight() - toolHeight, this.editor.getWidth(), toolHeight);
     }
 
     private void createToolbar()
     {
-        this.toolbarPose = new GuiPose() {
-            @Override
-            public boolean mouseDown( MouseButtonEvent event )
-            {
-                // Mouse clicks on the toolbar mustn't get propagated to the design area
-                // underneigth.
-                super.mouseDown(event);
-                return true;
-            }
-        };
+        this.toolbar = new RootContainer();
 
-        this.toolbarPose.addStyle("toolbar");
+        this.toolbar.addStyle("toolbar");
 
-        this.toolbarPose.setStylesheet(this.editor.getStylesheet());
-        this.toolbarPose.reStyle();
-        this.toolbarPose.forceLayout();
+        this.toolbar.setStylesheet(this.editor.getStylesheet());
+        this.toolbar.reStyle();
+        this.toolbar.forceLayout();
 
-        addToolbarButtons(this.toolbarPose);
+        addToolbarButtons(this.toolbar);
 
-        this.toolbarPose.setPosition(0, 0, this.editor.getWidth(), this.toolbarPose.getRequiredHeight());
+        this.toolbar.setMinimumWidth(this.editor.getWidth());
+        this.toolbar.show();
+        this.toolbar.setPosition(0, 0, this.editor.getWidth(), this.toolbar.getRequiredHeight());
     }
 
     public Button createButton( String name, String text )
@@ -616,7 +589,7 @@ public class SceneDesigner implements MouseListener, KeyListener
             this.editor.game.getScriptManager(),
             ClassName.getClassName(sdb.actualBehaviour),
             Behaviour.class
-        );
+            );
 
         this.behaviourClassName.addChangeListener(new ComponentChangeListener() {
 
@@ -671,16 +644,14 @@ public class SceneDesigner implements MouseListener, KeyListener
     private void createLayersTable()
     {
         this.layersTableModel = new SimpleTableModel();
-        for (Layer layer : this.designLayers.getChildren()) {
-            //TODO Casting to a concreate class
-            ScrollableLayer actorsLayer = (ScrollableLayer) layer;
-            if (!actorsLayer.isLocked()) {
-                SimpleTableModelRow row = new SimpleTableModelRow();
-                row.add(actorsLayer);
-                row.add(actorsLayer.getName());
-                row.add(actorsLayer.minimumAlpha);
-                this.layersTableModel.addRow(row);
-            }
+        for (StageView stageView : this.designViews.getChildren()) {
+            Stage stage = stageView.getStage();
+
+            SimpleTableModelRow row = new SimpleTableModelRow();
+            row.add(stageView);
+            row.add(stage.getName());
+            row.add(stageView.minimumAlpha);
+            this.layersTableModel.addRow(row);
         }
 
         List<TableModelColumn> columns = new ArrayList<TableModelColumn>(1);
@@ -688,14 +659,13 @@ public class SceneDesigner implements MouseListener, KeyListener
         TableModelColumn showHideColumn = new TableModelColumn("Dim", 0, 70) {
             public void addPlainCell( Container container, final TableModelRow row )
             {
-                // TODO Casting to a concrete class
-                final ScrollableLayer layer = (ScrollableLayer) row.getData(0);
+                final StageView stageView = (StageView) row.getData(0);
                 final CheckBox dim = new CheckBox(false);
                 dim.addChangeListener(new ComponentChangeListener() {
                     @Override
                     public void changed()
                     {
-                        layer.maximumAlpha = dim.getValue() ? 80 : 255;
+                        stageView.maximumAlpha = dim.getValue() ? 80 : 255;
                     }
                 });
                 container.addChild(dim);
@@ -726,14 +696,14 @@ public class SceneDesigner implements MouseListener, KeyListener
             public void addPlainCell( Container container, final TableModelRow row )
             {
                 // TODO Casting to a concrete class
-                final ScrollableLayer layer = (ScrollableLayer) row.getData(0);
-                final CheckBox check = new CheckBox(layer.minimumAlpha > 0);
+                final StageView stageView = (StageView) row.getData(0);
+                final CheckBox check = new CheckBox(stageView.minimumAlpha > 0);
                 check.addChangeListener(new ComponentChangeListener() {
                     @Override
                     public void changed()
                     {
                         try {
-                            layer.minimumAlpha = (check.getValue() ? 200 : 0);
+                            stageView.minimumAlpha = (check.getValue() ? 200 : 0);
                         } catch (Exception e) {
                         }
                     }
@@ -773,7 +743,7 @@ public class SceneDesigner implements MouseListener, KeyListener
             @Override
             public void onRowSelected( TableRow tableRow )
             {
-                SceneDesigner.this.currentDesignLayer = (ScrollableLayer) tableRow.getTableModelRow().getData(0);
+                SceneDesigner.this.currentStageView = (StageView) tableRow.getTableModelRow().getData(0);
             }
 
             @Override
@@ -785,12 +755,12 @@ public class SceneDesigner implements MouseListener, KeyListener
 
     private void updateLayersTable()
     {
-        String layerName = this.currentActor == null ? "" : this.currentActor.getLayer().getName();
+        String stageName = this.currentActor == null ? "" : this.currentActor.getStage().getName();
 
         for (int i = 0; i < this.layersTableModel.getRowCount(); i++) {
             SimpleTableModelRow row = (SimpleTableModelRow) this.layersTableModel.getRow(i);
             String name = (String) (row.getData(1));
-            if (layerName.equals(name)) {
+            if (stageName.equals(name)) {
                 this.layersTable.selectRow(row);
                 break;
             }
@@ -1037,15 +1007,12 @@ public class SceneDesigner implements MouseListener, KeyListener
 
             if (Itchy.isCtrlDown()) {
 
-                for (Layer child : fromBottom ?
-                    this.designLayers.getChildren() :
-                    Reversed.list(this.designLayers.getChildren())) {
+                for (StageView child : fromBottom ? this.designViews.getChildren() : Reversed.list(this.designViews.getChildren())) {
+                    Stage stage = child.getStage();
 
-                    // TODO Cast to concrete type
-                    ScrollableLayer layer = (ScrollableLayer) child;
-
-                    for (Iterator<Actor> i = fromBottom ? layer.getActors().iterator() : layer
-                        .getActors().descendingIterator(); i.hasNext();) {
+                    for (Iterator<Actor> i = fromBottom ?
+                        stage.getActors().iterator() :
+                        Reversed.list(stage.getActors()).iterator(); i.hasNext();) {
 
                         Actor actor = i.next();
 
@@ -1061,8 +1028,8 @@ public class SceneDesigner implements MouseListener, KeyListener
             } else {
 
                 for (Iterator<Actor> i = fromBottom ?
-                    this.currentDesignLayer.getActors().iterator() :
-                    this.currentDesignLayer.getActors().descendingIterator(); i.hasNext();) {
+                    this.currentStageView.getStage().getActors().iterator() :
+                    Reversed.list(this.currentStageView.getStage().getActors()).iterator(); i.hasNext();) {
 
                     Actor actor = i.next();
 
@@ -1116,10 +1083,15 @@ public class SceneDesigner implements MouseListener, KeyListener
                 actor.setZOrder(this.currentCostume.defaultZOrder);
             }
             // Place on top if no default zOrder defined for the costume.
+            Stage stage = this.currentStageView.getStage();
             if (actor.getZOrder() == 0) {
-                this.currentDesignLayer.addTop(actor);
+                if (stage instanceof ZOrderStage) {
+                    ((ZOrderStage) stage).addTop(actor);
+                } else {
+                    stage.add(actor);
+                }
             } else {
-                this.currentDesignLayer.add(actor);
+                stage.add(actor);
             }
 
             if (!Itchy.isShiftDown()) {
@@ -1224,56 +1196,56 @@ public class SceneDesigner implements MouseListener, KeyListener
 
         this.stampActor.moveTo(-10000, -10000); // Anywhere off screen
         this.stampActor.getAppearance().setAlpha(128);
-        this.glassLayer.addTop(this.stampActor);
+        this.overlayStage.addTop(this.stampActor);
     }
 
     private void deleteStampActor()
     {
         if (this.stampActor != null) {
-            this.glassLayer.remove(this.stampActor);
+            this.overlayStage.remove(this.stampActor);
             this.stampActor = null;
         }
     }
 
     private void scrollBy( int dx, int dy )
     {
-        for (Layer layer : this.designLayers.getChildren()) {
-            ((ScrollableLayer) layer).scrollBy(dx, dy);
+        for (View layer : this.designViews.getChildren()) {
+            ((ScrollableView) layer).scrollBy(dx, dy);
         }
-        this.glassLayer.scrollBy(dx, dy);
+        this.overlayView.scrollBy(dx, dy);
     }
 
     private void onCenter()
     {
         int x = 0;
-        int y = this.sceneRect.height - this.editor.getHeight() + this.toolbarPose.getHeight();
-        for (Layer layer : this.designLayers.getChildren()) {
-            ((ScrollableLayer) layer).scrollTo(x, y);
+        int y = this.sceneRect.height - this.editor.getHeight() + this.toolbar.getHeight();
+        for (StageView stageView : this.designViews.getChildren()) {
+            stageView.scrollTo(x, y);
         }
-        this.glassLayer.scrollTo(x, y);
+        this.overlayView.scrollTo(x, y);
     }
 
-    private ActorsLayer getLayerBelow( ActorsLayer layer )
+    private Stage getStageBelow( Stage stage )
     {
-        Layer result = null;
-        for (Layer tmpLayer : this.designLayers.getChildren()) {
-            if (layer == tmpLayer) {
-                return (ActorsLayer) result;
+        View result = null;
+        for (View tmpStage : this.designViews.getChildren()) {
+            if (stage == tmpStage) {
+                return (Stage) result;
             }
-            result = tmpLayer;
+            result = tmpStage;
         }
 
         return null;
     }
 
-    private ActorsLayer getLayerAbove( ActorsLayer layer )
+    private Stage getStageAbove( Stage stage )
     {
         boolean found = false;
-        for (Layer tmpLayer : this.designLayers.getChildren()) {
+        for (View tmpStage : this.designViews.getChildren()) {
             if (found) {
-                return (ActorsLayer) tmpLayer;
+                return (Stage) tmpStage;
             }
-            if (layer == tmpLayer) {
+            if (stage == tmpStage) {
                 found = true;
             }
         }
@@ -1321,7 +1293,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         if (SceneDesigner.copiedActor != null) {
             Actor actor = SceneDesigner.copiedActor.createActor(this.editor.resources, true);
             actor.moveBy(10, 10);
-            this.currentDesignLayer.addTop(actor);
+            addTop(this.currentStageView.getStage(), actor);
             selectActor(actor);
         }
     }
@@ -1337,11 +1309,11 @@ public class SceneDesigner implements MouseListener, KeyListener
     private void onActorUpLayer()
     {
         if ((this.mode == MODE_SELECT) && (this.currentActor != null)) {
-            ActorsLayer otherLayer = getLayerAbove(this.currentActor.getLayer());
+            Stage otherStage = getStageAbove(this.currentActor.getStage());
 
-            if (otherLayer != null) {
-                this.currentActor.getLayer().remove(this.currentActor);
-                otherLayer.addTop(this.currentActor);
+            if (otherStage != null) {
+                this.currentActor.getStage().remove(this.currentActor);
+                otherStage.add(this.currentActor);
                 updateLayersTable();
             }
         }
@@ -1370,11 +1342,11 @@ public class SceneDesigner implements MouseListener, KeyListener
     private void onActorDownLayer()
     {
         if ((this.mode == MODE_SELECT) && (this.currentActor != null)) {
-            ActorsLayer otherLayer = getLayerBelow(this.currentActor.getLayer());
+            Stage otherStage = getStageBelow(this.currentActor.getStage());
 
-            if (otherLayer != null) {
-                this.currentActor.getLayer().remove(this.currentActor);
-                otherLayer.addTop(this.currentActor);
+            if (otherStage != null) {
+                this.currentActor.getStage().remove(this.currentActor);
+                otherStage.add(this.currentActor);
                 updateLayersTable();
             }
         }
@@ -1396,13 +1368,11 @@ public class SceneDesigner implements MouseListener, KeyListener
         scene.sceneBehaviourClassName = this.scene.sceneBehaviourClassName;
         scene.sceneBehaviour = this.scene.sceneBehaviour;
 
-        for (Layer child : this.designLayers.getChildren()) {
-            // TODO Cast to concrete type
-            ScrollableLayer layer = (ScrollableLayer) child;
+        for (StageView stageView : this.designViews.getChildren()) {
 
-            Scene.SceneLayer sceneLayer = scene.createSceneLayer(layer.getName());
+            Scene.SceneLayer sceneLayer = scene.createSceneLayer(stageView.getStage().getName());
 
-            for (Actor actor : layer.getActors()) {
+            for (Actor actor : stageView.getStage().getActors()) {
                 SceneActor sceneActor = SceneActor.createSceneActor(actor);
                 sceneLayer.add(sceneActor);
             }
@@ -1448,8 +1418,17 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.stampActor = new Actor(pose);
 
         this.stampActor.moveTo(-10000, -10000); // Anywhere off screen
-        this.glassLayer.addTop(this.stampActor);
+        this.overlayStage.addTop(this.stampActor);
 
+    }
+
+    private void addTop( Stage stage, Actor actor )
+    {
+        if (stage instanceof ZOrderStage) {
+            ((ZOrderStage) stage).addTop(actor);
+        } else {
+            stage.add(actor);
+        }
     }
 
     private void createHightlightActor()
@@ -1467,7 +1446,7 @@ public class SceneDesigner implements MouseListener, KeyListener
 
         this.highlightActor = new Actor(newPose);
         this.highlightActor.moveTo(this.currentActor);
-        this.glassLayer.addTop(this.highlightActor);
+        this.overlayStage.addTop(this.highlightActor);
         this.highlightActor.setBehaviour(new Follower(this.currentActor));
 
         for (ScaleHandleBehaviour be : this.scaleHandles) {
@@ -1515,7 +1494,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.rotateHandle = new RotateHandleBehaviour();
         rotateActor.setBehaviour(this.rotateHandle);
         rotateActor.getAppearance().setAlpha(0);
-        this.glassLayer.addTop(rotateActor);
+        this.overlayStage.addTop(rotateActor);
         this.handles.add(this.rotateHandle);
 
         ImagePose headingPose = this.editor.getStylesheet().resources.getPose("headingHandle");
@@ -1523,7 +1502,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.headingHandle = new HeadingHandleBehaviour();
         headingActor.setBehaviour(this.headingHandle);
         headingActor.getAppearance().setAlpha(0);
-        this.glassLayer.addTop(headingActor);
+        this.overlayStage.addTop(headingActor);
         this.handles.add(this.headingHandle);
 
         ImagePose scalePose = this.editor.getStylesheet().resources.getPose("scaleHandle");
@@ -1536,7 +1515,7 @@ public class SceneDesigner implements MouseListener, KeyListener
 
                 this.scaleHandles.add(behaviour);
                 this.handles.add(behaviour);
-                this.glassLayer.addTop(scaleHandle);
+                this.overlayStage.addTop(scaleHandle);
             }
         }
         this.scaleHandles.get(0).opposite = this.scaleHandles.get(3);
@@ -1742,5 +1721,4 @@ public class SceneDesigner implements MouseListener, KeyListener
         }
 
     }
-
 }

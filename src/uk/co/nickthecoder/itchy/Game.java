@@ -14,7 +14,8 @@ import java.util.prefs.Preferences;
 
 import uk.co.nickthecoder.itchy.editor.Editor;
 import uk.co.nickthecoder.itchy.editor.SceneDesigner;
-import uk.co.nickthecoder.itchy.gui.GuiPose;
+import uk.co.nickthecoder.itchy.gui.GuiView;
+import uk.co.nickthecoder.itchy.gui.RootContainer;
 import uk.co.nickthecoder.itchy.gui.Stylesheet;
 import uk.co.nickthecoder.itchy.script.ScriptManager;
 import uk.co.nickthecoder.itchy.util.AutoFlushPreferences;
@@ -60,23 +61,27 @@ public class Game implements InputListener, QuitListener, MessageListener
      */
     public Pause pause;
 
+    public ZOrderStage mainStage;
+
+    public StageView mainView;
+
     /**
      * Holds data about this game that is stored for use then next time the game is run. For
      * example, it can be used to store high scores.
      */
     private AutoFlushPreferences preferences;
 
-    /**
-     * A Game has a set of Layers stacked one on top of another. Actors (the characters within you
-     * game), live on a layer. A simple game may have just one layer, but a more complex game may
-     * have more.
-     */
-    protected CompoundLayer layers;
+    private CompoundView<View> allViews;
 
-    /**
-     * A special layer which appears above the normal layers, and is used to show pop-up windows.
-     */
-    protected ScrollableLayer popupLayer;
+    protected CompoundView<View> gameViews;
+
+    protected List<Stage> stages;
+    
+    protected RGBAView background;
+
+    protected ZOrderStage glassStage;
+
+    protected StageView glassView;
 
     /**
      * A list of all the objects that need to know when a mouse is clicked or moved.
@@ -111,7 +116,7 @@ public class Game implements InputListener, QuitListener, MessageListener
     /**
      * The list of all of the windows current shown.
      */
-    private final List<GuiPose> windows;
+    private final CompoundView<GuiView> windows;
 
     /**
      * The current SceneBehaviour, which was created during {@link #loadScene(String)}
@@ -158,22 +163,47 @@ public class Game implements InputListener, QuitListener, MessageListener
         this.mouseListeners = new LinkedList<MouseListener>();
         this.keyListeners = new LinkedList<KeyListener>();
 
-        this.windows = new ArrayList<GuiPose>();
+        this.stages = new LinkedList<Stage>();
 
         this.addMouseListener(this);
         this.addKeyListener(this);
 
-        Rect screenRect = new Rect(0, 0, getWidth(), getHeight());
+        Rect displayRect = new Rect(0, 0, getWidth(), getHeight());
 
-        this.layers = new CompoundLayer("game", screenRect);
+        this.allViews = new CompoundView<View>(displayRect);
+        
+        //Background
+        this.background = new RGBAView(displayRect, new RGBA(200,50,50));
+        this.allViews.add(this.background);
 
-        this.popupLayer = new ScrollableLayer("popup", screenRect);
-        this.popupLayer.setYAxisPointsDown(true);
-        this.popupLayer.setVisible(true);
+        // Covered by game views
+        this.gameViews = new CompoundView<View>(displayRect);
+        this.allViews.add(this.gameViews);
 
-        createLayers();
+        // Covered by GUI Windows
+        this.windows = new CompoundView<GuiView>(displayRect);
+        this.allViews.add(this.windows);
+        
+        // Covered by the glass view
+        this.glassStage = new ZOrderStage("glass");
+        this.glassView = new StageView(displayRect, this.glassStage);
+        this.allViews.add(this.glassView);
+        
+        this.addMouseListener(this.allViews);
+        
+        createTroupsAndViews();
     }
 
+    public RGBAView gteBackground()
+    {
+        return this.background;
+    }
+    
+    public List<Stage> getStages()
+    {
+        return this.stages;
+    }
+    
     public ScriptManager getScriptManager()
     {
         return this.gameManager.scriptManager;
@@ -196,27 +226,42 @@ public class Game implements InputListener, QuitListener, MessageListener
     }
 
     /**
-     * Overridden by sub classes of Game, when they want more than one {@link Layer}. Called from
-     * the end of Game's constructor.
+     * Overridden by sub classes of Game, when they want more than one {@link View}. Called from the
+     * end of Game's constructor.
      */
-    protected void createLayers()
+    protected void createTroupsAndViews()
     {
         Rect screenRect = new Rect(0, 0, getWidth(), getHeight());
 
-        ScrollableLayer mainLayer = new ScrollableLayer("main", screenRect, RGBA.BLACK);
-        this.layers.add(mainLayer);
+        this.mainStage = new ZOrderStage("main");
+        this.stages.add(this.mainStage);
+        
+        this.mainView = new StageView(screenRect, this.mainStage);
+        this.gameViews.add(this.mainView);
 
-        mainLayer.enableMouseListener(this);
+        this.mainView.enableMouseListener(this);
     }
 
     /**
-     * Removes all actors from all layers, and resets the layers to the origin.
+     * Kills all Actors and resets the layers to the origin.
+     * 
      */
     public void clear()
     {
-        this.layers.clear();
-        this.popupLayer.clear();
-        this.layers.reset();
+        this.gameViews.reset();
+        for (Stage stage : this.stages) {
+            stage.clear();
+        }
+        this.glassStage.clear();
+        this.glassView.reset();
+
+        for (Actor actor : this.actors) {
+            actor.kill();
+        }
+        // We don't just clear the old list, we start from scratch, this is so that Game.tick can
+        // iterate over this.actors
+        // without a concurrent modification exception.
+        this.actors = new LinkedList<Actor>();
     }
 
     /**
@@ -320,7 +365,8 @@ public class Game implements InputListener, QuitListener, MessageListener
      * 
      * @param tag
      *        The tag to search for.
-     * @return A set of Behaviours meeting the criteria. An empty set if no behaviours meet the criteria.
+     * @return A set of Behaviours meeting the criteria. An empty set if no behaviours meet the
+     *         criteria.
      * @See {@link Behaviour#addTag(String)}
      */
     public Set<Behaviour> findBehaviourByTag( String tag )
@@ -335,20 +381,25 @@ public class Game implements InputListener, QuitListener, MessageListener
      * 
      * @return
      */
-    public CompoundLayer getLayers()
+    public CompoundView<View> getViews()
     {
-        return this.layers;
+        return this.gameViews;
     }
 
     /**
-     * The popup layer is a layer draw above all of the game's regular layers. It is useful for
-     * displaying dialog boxes, or other critical information.
-     * 
-     * @return The popup layer.
+     * @return The glass stage are draw above all of the game's regular layers.
      */
-    public ActorsLayer getPopupLayer()
+    public ZOrderStage getGlassStage()
     {
-        return this.popupLayer;
+        return this.glassStage;
+    }
+
+    /**
+     * @return The glass view are draw above all of the game's regular layers.
+     */
+    public StageView getGlassView()
+    {
+        return this.glassView;
     }
 
     /**
@@ -366,15 +417,13 @@ public class Game implements InputListener, QuitListener, MessageListener
     public void render( Surface display )
     {
         Rect screenRect = new Rect(0, 0, getWidth(), getHeight());
-
-        this.layers.render(screenRect, display);
-        this.popupLayer.render(screenRect, display);
+        this.allViews.render(display, screenRect,0,0);
     }
 
     /**
      * Use this to time actual game play, which will exclude time while the game is paused. A single
-     * value from gameTimeMillis is meaningless, it only has meaning when one value is subtracted
-     * from a later value (which will give the number of milliseconds of game time.
+     * value from gameTimeMillis is meaningless, it only hasscreenruler meaning when one value is
+     * subtracted from a later value (which will give the number of milliseconds of game time.
      */
     public long gameTimeMillis()
     {
@@ -457,10 +506,11 @@ public class Game implements InputListener, QuitListener, MessageListener
 
             if (mbe.isPressed()) {
 
+                System.out.println ("Modal Listener " + this.modalListener);
                 if (this.modalListener == null) {
 
-                    for (MouseListener el : this.mouseListeners) {
-                        if (el.onMouseDown(mbe)) {
+                    for (MouseListener ml : this.mouseListeners) {
+                        if (ml.onMouseDown(mbe)) {
                             return;
                         }
                     }
@@ -477,8 +527,8 @@ public class Game implements InputListener, QuitListener, MessageListener
 
                     if (this.modalListener == null) {
 
-                        for (MouseListener el : this.mouseListeners) {
-                            if (el.onMouseUp(mbe)) {
+                        for (MouseListener ml : this.mouseListeners) {
+                            if (ml.onMouseUp(mbe)) {
                                 return;
                             }
                         }
@@ -674,14 +724,14 @@ public class Game implements InputListener, QuitListener, MessageListener
     {
         return this.actors;
     }
-    
+
     private List<Actor> newActors = new ArrayList<Actor>();
-    
+
     void add( Actor actor )
     {
         this.newActors.add(actor);
     }
-    
+
     /**
      * Override this method to run code once per frame. The default behaviour is to call the current
      * scene's {@link SceneBehaviour}'s tick method and then all of the game's active Actor's tick
@@ -734,9 +784,7 @@ public class Game implements InputListener, QuitListener, MessageListener
         if (this.pause.isPaused()) {
             this.pause.unpause();
         }
-
-        this.layers.clear();
-        this.layers.reset();
+        clear();
         this.loadScene(sceneName);
     }
 
@@ -760,7 +808,7 @@ public class Game implements InputListener, QuitListener, MessageListener
 
             this.sceneBehaviour = scene.createSceneBehaviour(this.resources);
             this.sceneBehaviour.onActivate();
-            scene.create(this.layers, this.resources, false);
+            scene.create(this, false);
             showMousePointer(scene.showMouse);
 
         } catch (Exception e) {
@@ -802,44 +850,38 @@ public class Game implements InputListener, QuitListener, MessageListener
         return this.stylesheet;
     }
 
-    public void showWindow( GuiPose window )
+    public GuiView show( RootContainer rootContainer )
     {
-        this.windows.add(window);
+        GuiView view = new GuiView( new Rect(0,0, this.getWidth(), this.getHeight()), rootContainer );
+        
+        this.windows.add(view);
 
-        if (window.getStylesheet() == null) {
-            window.setStylesheet(this.stylesheet);
+        if (rootContainer.getStylesheet() == null) {
+            rootContainer.setStylesheet(this.stylesheet);
         }
-        window.reStyle();
-        window.forceLayout();
-        window.setPosition(0, 0, window.getRequiredWidth(), window.getRequiredHeight());
+        rootContainer.reStyle();
+        rootContainer.forceLayout();
+        rootContainer.setPosition(0, 0, rootContainer.getRequiredWidth(), rootContainer.getRequiredHeight());
 
-        Actor actor = window.getActor();
-
-        actor.moveTo(Math.max(0, (this.popupLayer.position.width - window.getRequiredWidth()) / 2),
-            Math.max(0, (this.popupLayer.position.height - window.getRequiredHeight()) / 2));
-
-        this.popupLayer.addTop(actor);
-
-        if (window.modal) {
-            this.setModalListener(window);
+        if (rootContainer.modal) {
+            this.setModalListener(view);
         }
-        this.addMouseListener(window);
-        this.addKeyListener(window);
+        this.addKeyListener(view);
 
+        return view;
     }
 
-    public void hideWindow( GuiPose window )
+    public void hide( GuiView view )
     {
-        this.removeMouseListener(window);
-        this.removeKeyListener(window);
-        this.popupLayer.remove(window.getActor());
+        this.removeKeyListener(view);
+        
+        this.windows.remove(view);
 
-        this.windows.remove(window);
-
-        if (window.modal) {
-            if (this.windows.size() > 0) {
-                GuiPose topWindow = this.windows.get(this.windows.size() - 1);
-                if (topWindow.modal) {
+        if (view.rootContainer.modal) {
+            if (this.windows.getChildren().size() > 0) {
+                GuiView topWindow = this.windows.getChildren().get(this.windows.getChildren().size() - 1);
+                if (topWindow.rootContainer.modal) {
+                    
                     this.setModalListener(topWindow);
 
                 } else {

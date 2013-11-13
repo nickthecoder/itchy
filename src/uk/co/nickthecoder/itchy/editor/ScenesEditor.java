@@ -167,7 +167,7 @@ public class ScenesEditor extends SubEditor<SceneResource>
     public void design( SceneResource sceneResource )
     {
         SceneDesigner designer = new SceneDesigner(this.editor, sceneResource);
-        this.editor.mainGuiPose.hide();
+        this.editor.root.hide();
         designer.go();
     }
 

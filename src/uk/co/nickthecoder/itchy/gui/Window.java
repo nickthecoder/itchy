@@ -14,7 +14,7 @@ package uk.co.nickthecoder.itchy.gui;
  * are derived from the Game's Stylesheet.
  *
  */
-public class Window extends GuiPose
+public class Window extends RootContainer
 {
     public Container clientArea;
 

@@ -5,7 +5,6 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.editor;
 
-import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.animation.Animation;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Button;
@@ -85,19 +84,19 @@ public class AnimationEditor extends Window
     @Override
     public void show()
     {
-        Itchy.getGame().showWindow(this);
+        this.show();
     }
 
     public void onOk()
     {
         if (this.save()) {
-            Itchy.getGame().hideWindow(this);
+            this.hide();
         }
     }
 
     public void onCancel()
     {
-        Itchy.getGame().hideWindow(this);
+        this.hide();
     }
 
     public boolean save()

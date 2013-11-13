@@ -51,25 +51,43 @@ Vacuum bathroom
 TODO
 ====
 
-Fix animation messages.
-    Let the top-most animation have a message, so that its easy to see
-    AND/OR have an edit window for Compound animations too (don't toggle).    
+Get the SceneDesigner compiling and working.
+
+Create some tests for Views in the tests game.
+    Create a Stage and view in the middle of the screen
+    Add buttons which scroll the view
+    Add a button inside it to test the offset
+    Create a compound view in the middle with other views inside it.
+        Use the same Stage for each of the mini views to test the 1:many Stage->View with mouse listeners and capture mouse.
+
+Add an RGBAView, and set its colour from the scene's new background attribute. Alpha of 0 to turn it off.
+
+
 
 Follow up on the TODOs
 
-Tidy up Layer hierarchy
+Comment View, Stage heirarchies and Component and Container.
 
-Starting other games and then Asteroids errors.
 
-Actor,startEvent isn't elegant - its only used by the editor, so should be on scene actor and sceneactorbehaviour?
+Actor,startEvent isn't elegant - its only used by the editor, so should be on design actor and designactorbehaviour?
 
-Rename a scene from scene designer does not rename
+Update Class diagrams
+
+BUG: Rename a scene from scene designer does not rename
     and doesn't update the ScenesEditor table
 
-Reloading a SceneBehaviour script causes the properties to double.
+BUG: Reloading a SceneBehaviour script causes the properties to double.
 
-Changing SceneBehaviour doesn't update the SceneBehaviourProperty components
+BUG: Changing SceneBehaviour doesn't update the SceneBehaviourProperty components
 
+Create an actor from a costume easily.
+    Could be on Costume taking no arguments
+    Could be on Game or Resources taking the costume name.
+
+check all code for this.[a-z 0-9]*\(, and remove the "this".
+
+BUG SceneDesigner - character animate e.g. Rain Easy screen.
+    Could make DesignActorBehaviour implement Behaviour, and don't do anything with animation???
 
 Create a Compound Behaviour, which has a ClassName array of other Behaviours, or maybe a Map of
     name->ClassName.
@@ -107,14 +125,6 @@ Appearance can chop off part of the Pose, useful for the Rod in Thrust - instead
         Create a general purpose ProgressBar behaviour.
         Could I use it for the shield indicator in DrunkInvaders instead of the multiple images?
     Or could create a speed dial, as that just needs the hand to be rotated!
-
-Create an actor from a costume easily.
-    Could be on Costume taking no arguments
-    Could be on Game or Resources taking the costume name.
-
-ClassName shouldn't be in script package, should be in itchy package.
-
-check all code for this.[a-z 0-9]*\(, and remove the "this".
 
 What's Next
 ===========

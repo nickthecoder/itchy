@@ -61,9 +61,9 @@ public class VerticalScroll extends Container implements Layout
     }
 
     @Override
-    public boolean mouseDown( MouseButtonEvent mbe )
+    public boolean onMouseDown( MouseButtonEvent mbe )
     {
-        if (super.mouseDown(mbe)) {
+        if (super.onMouseDown(mbe)) {
             return true;
         }
 

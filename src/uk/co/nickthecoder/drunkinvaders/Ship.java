@@ -167,7 +167,7 @@ public class Ship extends Bouncy implements Shootable
         getActor().setX(this.radius * Math.cos(this.angle) + this.ox);
         getActor().setY(this.radius * Math.sin(this.angle) + this.oy);
 
-        if (getActor().isOffScreen()) {
+        if (! getActor().getAppearance().getWorldRectangle().within(DrunkInvaders.game.worldBounds)) {
             this.angle -= speed;
             getActor().moveTo(oldX, oldY);
             getActor().setDirection(oldDirection);
@@ -234,7 +234,7 @@ public class Ship extends Bouncy implements Shootable
         Bullet bullet = new Bullet();
         bullet.addTag("killable");
         bulletActor.setBehaviour(bullet);
-        this.getActor().getLayer().add(bulletActor);
+        this.getActor().getStage().add(bulletActor);
         bulletActor.moveForwards(10);
 
         this.recharge = TIMER_DURATION;

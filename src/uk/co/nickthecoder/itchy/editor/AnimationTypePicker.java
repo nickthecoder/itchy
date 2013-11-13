@@ -64,7 +64,7 @@ public abstract class AnimationTypePicker extends Window
             @Override
             public void action()
             {
-                AnimationTypePicker.this.destroy();
+                AnimationTypePicker.this.hide();
                 AnimationTypePicker.this.pick(animation);
             }
         });

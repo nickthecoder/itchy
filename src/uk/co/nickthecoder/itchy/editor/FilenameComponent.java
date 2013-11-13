@@ -7,7 +7,6 @@ package uk.co.nickthecoder.itchy.editor;
 
 import java.io.File;
 
-import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Button;
@@ -111,7 +110,7 @@ public class FilenameComponent extends Container
             }
         };
         this.openDialog.setDirectory(this.resources.getDirectory());
-        Itchy.getGame().showWindow(this.openDialog);
+        this.openDialog.show();
     }
 
     public void onChanged()
@@ -124,11 +123,11 @@ public class FilenameComponent extends Container
     private void onPickFilename( File file )
     {
         if (file == null) {
-            Itchy.getGame().hideWindow(this.openDialog);
+            this.openDialog.hide();
         } else {
             String filename = this.resources.makeRelativeFilename(file);
             this.textBox.setText(filename);
-            Itchy.getGame().hideWindow(this.openDialog);
+            this.openDialog.hide();
         }
     }
 

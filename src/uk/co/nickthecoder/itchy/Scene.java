@@ -61,37 +61,33 @@ public class Scene
         this.layersMap.put(sceneLayer.getName(), sceneLayer);
     }
 
-    public void create( ActorsLayer layer, Resources resources, boolean designMode )
+    public void create( Stage layer, Resources resources, boolean designMode )
     {
         for (SceneLayer sceneLayer : this.sceneLayers) {
             sceneLayer.create(layer, resources, designMode);
         }
     }
 
-    public void create( CompoundLayer layer, Resources resources, boolean designMode )
+    public void create( Game game, boolean designMode )
     {
         for (SceneLayer sceneLayer : this.sceneLayers) {
             String name = sceneLayer.name;
 
-            sceneLayer.create(findLayer(layer, name), resources, designMode);
+            sceneLayer.create( findStage(game, name), game.resources, designMode);
         }
     }
 
-    private ActorsLayer findLayer( CompoundLayer parent, String name )
+    private Stage findStage( Game game, String name )
     {
-        ActorsLayer best = null;
+        Stage best = game.stages.get(0);
         
-        for (Layer childLayer : parent.getChildren()) {
-            // TODO using instanceof ActorsLayer
-            if (childLayer instanceof ActorsLayer) {
-                ActorsLayer actorsLayer = (ActorsLayer) childLayer;
-                if (!actorsLayer.isLocked()) {
+        for (Stage stage : game.stages) {
+            if (!stage.isLocked()) {
                 
-                    if (name.equals(childLayer.getName())) {
-                        return (ActorsLayer) childLayer;
-                    }
+                if (name.equals(stage.getName())) {
+                    return stage;
                 }
-                best = actorsLayer;
+                best = stage;
             }
         }
 
@@ -186,13 +182,12 @@ public class Scene
             return this.sceneActors.size() == 0;
         }
 
-        public void create( ActorsLayer layer, Resources resources, boolean designMode )
+        public void create( Stage stage, Resources resources, boolean designMode )
         {
-            layer.reset();
 
             for (SceneActor sceneActor : this.sceneActors) {
                 Actor actor = sceneActor.createActor(resources, designMode);
-                layer.addTop(actor);
+                stage.add(actor);
 
                 if (!designMode) {
                     if (actor.getActivationDelay() == 0) {

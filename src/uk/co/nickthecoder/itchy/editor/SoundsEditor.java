@@ -9,7 +9,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.SoundResource;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Button;
@@ -77,6 +76,7 @@ public class SoundsEditor extends SubEditor<SoundResource>
         return table;
     }
 
+    @Override
     protected TableModel createTableModel()
     {
         SimpleTableModel model = new SimpleTableModel();
@@ -137,7 +137,7 @@ public class SoundsEditor extends SubEditor<SoundResource>
     public void onAdd( File file )
     {
         if (file == null) {
-            Itchy.getGame().hideWindow(this.openDialog);
+            this.openDialog.hide();
         } else {
             String filename = this.editor.resources.makeRelativeFilename(file);
             String name = Util.nameFromFilename(filename);

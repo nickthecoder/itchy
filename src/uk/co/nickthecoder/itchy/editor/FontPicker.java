@@ -63,7 +63,7 @@ public abstract class FontPicker extends Window
             @Override
             public void action()
             {
-                FontPicker.this.destroy();
+                FontPicker.this.hide();
             }
 
         });
@@ -111,7 +111,7 @@ public abstract class FontPicker extends Window
             @Override
             public void action()
             {
-                FontPicker.this.destroy();
+                FontPicker.this.hide();
                 FontPicker.this.pick(fontResource);
             }
         });

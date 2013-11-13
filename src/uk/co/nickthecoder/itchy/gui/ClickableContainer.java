@@ -16,6 +16,8 @@ public abstract class ClickableContainer extends Container
 {
     protected long clickTimeMillis;
 
+    private boolean dragging = false;
+    
     public ClickableContainer()
     {
         super();
@@ -33,15 +35,18 @@ public abstract class ClickableContainer extends Container
     }
 
     @Override
-    public boolean mouseDown( MouseButtonEvent mbe )
+    public boolean onMouseDown( MouseButtonEvent event )
     {
-        if (super.mouseDown(mbe)) {
+        System.out.println( "ClickableContainer.mouseDown " + event.x + "," + event.y);
+        
+        if (super.onMouseDown(event)) {
             return true;
         }
-        if (mbe.button == 1) {
+        if (event.button == 1) {
             this.getRoot().captureMouse(this);
 
             this.addStyle("down");
+            this.dragging = true;
 
             if (this.focusable) {
                 this.focus();
@@ -52,30 +57,41 @@ public abstract class ClickableContainer extends Container
     }
 
     @Override
-    public void mouseUp( MouseButtonEvent mbe )
+    public boolean onMouseUp( MouseButtonEvent event )
     {
-        this.getRoot().releaseMouse(this);
-
-        this.removeStyle("down");
-        if (this.contains(mbe)) {
-            long now = System.currentTimeMillis();
-            if (now - this.clickTimeMillis < 500) {
-                this.onDoubleClick(mbe);
-            } else {
-                this.onClick(mbe);
+        if (this.dragging) {
+            this.dragging = false;
+            this.getRoot().releaseMouse(this);
+    
+            this.removeStyle("up");
+            if (this.contains(event)) {
+                long now = System.currentTimeMillis();
+                if (now - this.clickTimeMillis < 500) {
+                    this.onDoubleClick(event);
+                } else {
+                    this.onClick(event);
+                }
+                this.clickTimeMillis = now;
             }
-            this.clickTimeMillis = now;
+            
+            return true;
         }
+        return false;
     }
 
     @Override
-    public void mouseMove( MouseMotionEvent mme )
+    public boolean onMouseMove( MouseMotionEvent event )
     {
-        if (this.contains(mme)) {
-            this.addStyle("down");
-        } else {
-            this.removeStyle("down");
+        if (this.dragging) { 
+
+            if (this.contains(event)) {
+                this.addStyle("down");
+            } else {
+                this.removeStyle("down");
+            }
+            return true;
         }
+        return false;
     }
 
     /**

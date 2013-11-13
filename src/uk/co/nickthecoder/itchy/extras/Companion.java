@@ -366,7 +366,7 @@ public abstract class Companion<T extends Companion<T>> extends AbstractBehaviou
         actor.getAppearance().setColorize(this.colorize);
         actor.getAppearance().setAlpha(this.alpha);
 
-        this.source.getLayer().add(actor);
+        this.source.getStage().add(actor);
 
         return actor;
     }
