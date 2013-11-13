@@ -57,6 +57,10 @@ public class RootContainer extends Container
         return this;
     }
 
+    private boolean dragging;
+    private int dragStartX;
+    private int dragStartY;
+
     @Override
     public boolean onMouseDown( MouseButtonEvent event )
     {
@@ -65,11 +69,21 @@ public class RootContainer extends Container
                 return true;
             }
 
+            if (this.draggable && contains(event)) {
+                if ((event.button == 2) || ((event.button == 1) && Itchy.isShiftDown())) {
+                    this.captureMouse(this);
+                    this.dragging = true;
+                    this.dragStartX = event.x;
+                    this.dragStartY = event.y;
+                    return true;
+                }
+            }
+
         } else {
             int dx = 0;
             int dy = 0;
             try {
-                for (Component component = this.mouseOwner; component != null; component = component.getParent()) {
+                for (Component component = this.mouseOwner; component != this; component = component.getParent()) {
                     dx -= component.x;
                     dy -= component.y;
                 }
@@ -91,6 +105,16 @@ public class RootContainer extends Container
     @Override
     public boolean onMouseUp( MouseButtonEvent event )
     {
+        if (this.dragging) {
+            int dx = event.x - this.dragStartX;
+            int dy = event.y - this.dragStartY;
+
+            this.setPosition(this.x + dx, this.y + dy, this.width, this.height);
+            this.dragging = false;
+            this.releaseMouse(this);
+            return true;
+        }
+
         if (this.mouseOwner == null) {
             if (super.onMouseUp(event)) {
                 return true;
@@ -100,7 +124,7 @@ public class RootContainer extends Container
             int dx = 0;
             int dy = 0;
             try {
-                for (Component component = this.mouseOwner; component != null; component = component.getParent()) {
+                for (Component component = this.mouseOwner; component != this; component = component.getParent()) {
                     dx -= component.x;
                     dy -= component.y;
                 }
@@ -115,15 +139,23 @@ public class RootContainer extends Container
                 event.y -= dy;
             }
         }
-        
+
         return contains(event);
     }
 
     @Override
     public boolean onMouseMove( MouseMotionEvent event )
     {
+        if (this.dragging) {
+            int dx = event.x - this.dragStartX;
+            int dy = event.y - this.dragStartY;
+
+            this.setPosition(this.x + dx, this.y + dy, this.width, this.height);
+            return true;
+        }
+
         if (this.mouseOwner == null) {
-            if ( super.onMouseMove(event)) {
+            if (super.onMouseMove(event)) {
                 return true;
             }
 
@@ -131,13 +163,13 @@ public class RootContainer extends Container
             int dx = 0;
             int dy = 0;
             try {
-                for (Component component = this.mouseOwner; component != null; component = component.getParent()) {
+                for (Component component = this.mouseOwner; component != this; component = component.getParent()) {
                     dx -= component.x;
                     dy -= component.y;
                 }
                 event.x += dx;
                 event.y += dy;
-                if ( this.mouseOwner.onMouseMove(event)) {
+                if (this.mouseOwner.onMouseMove(event)) {
                     return true;
                 }
 
@@ -146,7 +178,7 @@ public class RootContainer extends Container
                 event.y -= dy;
             }
         }
-        
+
         return contains(event);
     }
 

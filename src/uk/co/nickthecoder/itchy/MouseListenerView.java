@@ -7,7 +7,7 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
-public interface MouseListenerView extends View
+public interface MouseListenerView extends View, MouseListener
 {
     /**
      * Actors who's Behaviours are MouseListeners can receive mouse events. The events that they

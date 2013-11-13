@@ -28,7 +28,6 @@ import uk.co.nickthecoder.itchy.Scene;
 import uk.co.nickthecoder.itchy.SceneActor;
 import uk.co.nickthecoder.itchy.SceneBehaviour;
 import uk.co.nickthecoder.itchy.SceneResource;
-import uk.co.nickthecoder.itchy.ScrollableView;
 import uk.co.nickthecoder.itchy.Stage;
 import uk.co.nickthecoder.itchy.StageView;
 import uk.co.nickthecoder.itchy.TextPose;
@@ -177,9 +176,11 @@ public class SceneDesigner implements MouseListener, KeyListener
 
         createToolbar();
 
+        Rect wholeRect = new Rect(0, 0, this.editor.getWidth(), this.editor.getHeight());
+        this.designViews = new CompoundView<StageView>(wholeRect);
+
         Rect editRect = new Rect(0, this.toolbar.getHeight(), this.editor.getWidth(), this.editor.getHeight() - this.toolbar.getHeight());
 
-        this.designViews = new CompoundView<StageView>(editRect);
         this.editor.getViews().add(this.designViews);
 
         for (Stage stage : this.editor.game.getStages()) {
@@ -191,9 +192,9 @@ public class SceneDesigner implements MouseListener, KeyListener
                 this.currentStageView = view;
             }
         }
-        
+
         this.overlayStage = new ZOrderStage("overlay");
-        this.overlayView = new StageView( editRect, this.overlayStage );
+        this.overlayView = new StageView(editRect, this.overlayStage);
         this.editor.getViews().add(this.overlayView);
 
         this.editor.addMouseListener(this);
@@ -208,7 +209,7 @@ public class SceneDesigner implements MouseListener, KeyListener
 
         setMode(MODE_SELECT);
 
-        onCenter();
+        onCenter();        
     }
 
     private void onDone()
@@ -237,7 +238,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         newPose.setOffsetY(margin);
 
         Actor actor = new Actor(newPose);
-        this.editor.getGlassStage().addTop(actor);
+        this.overlayStage.addTop(actor);
         actor.moveTo(margin, this.sceneRect.height - margin);
 
     }
@@ -564,9 +565,9 @@ public class SceneDesigner implements MouseListener, KeyListener
 
     private void createActorPage()
     {
+        this.propertiesContainer.clear();
         PropertiesForm<Actor> form = new PropertiesForm<Actor>(this.currentActor, this.currentActor.getProperties());
         form.autoUpdate = true;
-        this.propertiesContainer.clear();
         this.propertiesContainer.addChild(form.createForm());
     }
 
@@ -625,20 +626,19 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.behaviourContainer.addChild(form.createForm());
     }
 
-    private void showProperties()
+    private void updateProperties()
     {
-        createActorPage();
-        createBehaviourPage();
-        createAppearancePage();
-        updateLayersTable();
-    }
-
-    private void hideProperties()
-    {
-        this.propertiesContainer.clear();
-        this.appearanceContainer.clear();
-        this.behaviourContainer.clear();
-        this.actorTextInput = null;
+        if (this.currentActor == null) {
+            this.propertiesContainer.clear();
+            this.appearanceContainer.clear();
+            this.behaviourContainer.clear();
+            this.actorTextInput = null;
+        } else {
+            createActorPage();
+            createBehaviourPage();
+            createAppearancePage();
+            updateLayersTable();
+        }
     }
 
     private void createLayersTable()
@@ -695,7 +695,6 @@ public class SceneDesigner implements MouseListener, KeyListener
         TableModelColumn minAlphaColumn = new TableModelColumn("Reveal", 2, 100) {
             public void addPlainCell( Container container, final TableModelRow row )
             {
-                // TODO Casting to a concrete class
                 final StageView stageView = (StageView) row.getData(0);
                 final CheckBox check = new CheckBox(stageView.minimumAlpha > 0);
                 check.addChangeListener(new ComponentChangeListener() {
@@ -978,6 +977,48 @@ public class SceneDesigner implements MouseListener, KeyListener
     @Override
     public boolean onMouseDown( MouseButtonEvent event )
     {
+        try {
+            if (!this.overlayView.adjustMouse(event)) {
+                return false;
+            }
+            mouseDown(event);
+            return true;
+
+        } finally {
+            this.overlayView.unadjustMouse(event);
+        }
+    }
+    @Override
+    public boolean onMouseUp( MouseButtonEvent event )
+    {
+        try {
+            if (!this.overlayView.adjustMouse(event)) {
+                return false;
+            }
+            mouseUp(event);
+            return true;
+
+        } finally {
+            this.overlayView.unadjustMouse(event);
+        }
+    }
+    @Override
+    public boolean onMouseMove( MouseMotionEvent event )
+    {
+        try {
+            if (!this.overlayView.adjustMouse(event)) {
+                return false;
+            }
+            mouseMove(event);
+            return true;
+
+        } finally {
+            this.overlayView.unadjustMouse(event);
+        }
+    }
+    
+    public boolean mouseDown( MouseButtonEvent event )
+    {
         if ((event.button == 2) || ((event.button == 1) && Itchy.isShiftDown())) {
             setMode(MODE_DRAG_SCROLL);
             beginDrag(event);
@@ -1107,11 +1148,10 @@ public class SceneDesigner implements MouseListener, KeyListener
         return false;
     }
 
-    @Override
-    public boolean onMouseUp( MouseButtonEvent event )
+    public boolean mouseUp( MouseButtonEvent event )
     {
         if ((this.mode == MODE_DRAG_HANDLE) || (this.mode == MODE_DRAG_ACTOR)) {
-            showProperties();
+            updateProperties();
         }
 
         if (this.mode == MODE_DRAG_HANDLE) {
@@ -1128,8 +1168,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         return false;
     }
 
-    @Override
-    public boolean onMouseMove( MouseMotionEvent event )
+    public boolean mouseMove( MouseMotionEvent event )
     {
         int dx = event.x - this.dragStartX;
         int dy = event.y - this.dragStartY;
@@ -1180,11 +1219,9 @@ public class SceneDesigner implements MouseListener, KeyListener
     {
         this.currentActor = actor;
         deleteHighlightActor();
-        hideProperties();
+        updateProperties();
 
         if (actor != null) {
-
-            showProperties();
             createHightlightActor();
         }
     }
@@ -1209,8 +1246,8 @@ public class SceneDesigner implements MouseListener, KeyListener
 
     private void scrollBy( int dx, int dy )
     {
-        for (View layer : this.designViews.getChildren()) {
-            ((ScrollableView) layer).scrollBy(dx, dy);
+        for (StageView view : this.designViews.getChildren()) {
+            view.scrollBy(dx, dy);
         }
         this.overlayView.scrollBy(dx, dy);
     }
@@ -1218,7 +1255,7 @@ public class SceneDesigner implements MouseListener, KeyListener
     private void onCenter()
     {
         int x = 0;
-        int y = this.sceneRect.height - this.editor.getHeight() + this.toolbar.getHeight();
+        int y = this.sceneRect.height - (int) this.overlayView.getVisibleRectangle().height;
         for (StageView stageView : this.designViews.getChildren()) {
             stageView.scrollTo(x, y);
         }

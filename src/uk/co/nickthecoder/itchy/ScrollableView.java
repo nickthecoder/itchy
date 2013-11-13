@@ -5,10 +5,11 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
-import uk.co.nickthecoder.jame.event.MouseEvent;
 
 public interface ScrollableView extends View
 {
+    public WorldRectangle getVisibleRectangle();
+    
     public void ceterOn( Actor actor );
 
     public void centerOn( double x, double y );
@@ -16,7 +17,4 @@ public interface ScrollableView extends View
     public void scrollTo( double x, double y );
 
     public void scrollBy( double dx, double dy );
-
-    public void adjustMouse( MouseEvent event );
-
 }

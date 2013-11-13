@@ -7,7 +7,7 @@ package uk.co.nickthecoder.itchy;
 
 import uk.co.nickthecoder.jame.Rect;
 
-public abstract class AbstractScrollableView extends AbstractView
+public abstract class AbstractScrollableView extends AbstractView implements ScrollableView
 {
     /**
      * The area of the world currently visible within this layer.
@@ -20,29 +20,33 @@ public abstract class AbstractScrollableView extends AbstractView
         this.worldRect = new WorldRectangle(0, 0, position.width, position.height);
     }
 
-    // TODO is this needed?
-    public WorldRectangle getWorldRectangle()
+    @Override
+    public WorldRectangle getVisibleRectangle()
     {
         return this.worldRect;
     }
 
+    @Override
     public void ceterOn( Actor actor )
     {
         this.centerOn(actor.getX(), actor.getY());
     }
 
+    @Override
     public void centerOn( double x, double y )
     {
         this.worldRect.x = x - this.worldRect.width / 2;
         this.worldRect.y = y - this.worldRect.height / 2;
     }
 
+    @Override
     public void scrollTo( double x, double y )
     {
         this.worldRect.x = x;
         this.worldRect.y = y;
     }
 
+    @Override
     public void scrollBy( double dx, double dy )
     {
         this.worldRect.x += dx;

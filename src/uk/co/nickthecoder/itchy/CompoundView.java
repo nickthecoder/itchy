@@ -88,82 +88,45 @@ public class CompoundView<V extends View> extends AbstractView implements Parent
     @Override
     public boolean onMouseDown( MouseButtonEvent event )
     {
-        int tx = event.x;
-        int ty = event.y;
-
-        System.out.println("CompoundView onMouseDown " + this.children.size());
-        try {
-            for (ListIterator<V> i = this.children.listIterator(this.children.size()); i.hasPrevious();) {
-                V view = i.previous();
-                System.out.println("CompoundView onMouseDown checking " + view);
-                if (view instanceof MouseListener) {
-                    event.x = tx - view.getRelativeRect().x;
-                    event.y = ty - view.getRelativeRect().y;
-                    if (((MouseListener) view).onMouseDown(event)) {
-                        return true;
-                    }
+        for (ListIterator<V> i = this.children.listIterator(this.children.size()); i.hasPrevious();) {
+            V view = i.previous();
+            if (view instanceof MouseListener) {
+                if (((MouseListener) view).onMouseDown(event)) {
+                    return true;
                 }
             }
-
-            return false;
-
-        } finally {
-            event.x = tx;
-            event.y = ty;
         }
+
+        return false;
     }
 
     @Override
     public boolean onMouseUp( MouseButtonEvent event )
     {
-        int tx = event.x;
-        int ty = event.y;
+        for (ListIterator<V> i = this.children.listIterator(); i.hasPrevious();) {
 
-        try {
-            for (ListIterator<V> i = this.children.listIterator(); i.hasPrevious();) {
-
-                V view = i.previous();
-                if (view instanceof MouseListener) {
-                    event.x = tx - view.getRelativeRect().x;
-                    event.y = ty - view.getRelativeRect().y;
-                    if (((MouseListener) view).onMouseUp(event)) {
-                        return true;
-                    }
+            V view = i.previous();
+            if (view instanceof MouseListener) {
+                if (((MouseListener) view).onMouseUp(event)) {
+                    return true;
                 }
             }
-
-            return false;
-
-        } finally {
-            event.x = tx;
-            event.y = ty;
         }
+        return false;
     }
 
     @Override
     public boolean onMouseMove( MouseMotionEvent event )
     {
-        int tx = event.x;
-        int ty = event.y;
-
-        try {
-            for (ListIterator<V> i = this.children.listIterator(); i.hasPrevious();) {
-                V view = i.previous();
-                if (view instanceof MouseListener) {
-                    event.x = tx - view.getRelativeRect().x;
-                    event.y = ty - view.getRelativeRect().y;
-                    if (((MouseListener) view).onMouseMove(event)) {
-                        return true;
-                    }
+        for (ListIterator<V> i = this.children.listIterator(); i.hasPrevious();) {
+            V view = i.previous();
+            if (view instanceof MouseListener) {
+                if (((MouseListener) view).onMouseMove(event)) {
+                    return true;
                 }
             }
-
-            return false;
-
-        } finally {
-            event.x = tx;
-            event.y = ty;
         }
-    }
 
+        return false;
+    }
 }

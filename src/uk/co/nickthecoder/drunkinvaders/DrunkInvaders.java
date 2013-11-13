@@ -74,7 +74,7 @@ public class DrunkInvaders extends Game
     }
 
     @Override
-    public void createTroupsAndViews()
+    public void createStagesAndViews()
     {
         this.worldBounds = new WorldRectangle( 0,0, this.getWidth(), this.getHeight());
 

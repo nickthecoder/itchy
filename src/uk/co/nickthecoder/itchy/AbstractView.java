@@ -54,10 +54,6 @@ public abstract class AbstractView implements View
         return getAbsolutePosition().contains(x, y);
     }
 
-    /**
-     * Renders the layer by working out the actual clip for this layer, and then passing control to
-     * render2.
-     */
     @Override
     public void render( Surface destSurface, Rect parentClip, int offsetX, int offsetY )
     {
@@ -84,7 +80,7 @@ public abstract class AbstractView implements View
             newClip.height += bottomDiff;
         }
 
-        render2(destSurface, newClip, offsetX - this.position.x, offsetY - this.position.y);
+        render2(destSurface, newClip, offsetX + this.position.x, offsetY + this.position.y);
 
     }
 

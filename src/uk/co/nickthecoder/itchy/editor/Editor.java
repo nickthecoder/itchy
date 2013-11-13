@@ -81,6 +81,12 @@ public final class Editor extends Game
     }
 
     @Override
+    public void createStagesAndViews()
+    {
+        // Do nothing.
+    }
+
+    @Override
     public void onActivate()
     {
         instance = this;

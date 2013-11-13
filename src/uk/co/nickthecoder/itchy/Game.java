@@ -191,7 +191,7 @@ public class Game implements InputListener, QuitListener, MessageListener
         
         this.addMouseListener(this.allViews);
         
-        createTroupsAndViews();
+        createStagesAndViews();
     }
 
     public RGBAView gteBackground()
@@ -229,7 +229,7 @@ public class Game implements InputListener, QuitListener, MessageListener
      * Overridden by sub classes of Game, when they want more than one {@link View}. Called from the
      * end of Game's constructor.
      */
-    protected void createTroupsAndViews()
+    protected void createStagesAndViews()
     {
         Rect screenRect = new Rect(0, 0, getWidth(), getHeight());
 
@@ -506,19 +506,23 @@ public class Game implements InputListener, QuitListener, MessageListener
 
             if (mbe.isPressed()) {
 
-                System.out.println ("Modal Listener " + this.modalListener);
-                if (this.modalListener == null) {
-
-                    for (MouseListener ml : this.mouseListeners) {
-                        if (ml.onMouseDown(mbe)) {
-                            return;
+                if (this.mouseOwner == null) {
+    
+                    if (this.modalListener == null) {
+    
+                        for (MouseListener ml : this.mouseListeners) {
+                            if (ml.onMouseDown(mbe)) {
+                                return;
+                            }
                         }
+                    } else {
+                        this.modalListener.onMouseDown(mbe);
+                        return;
                     }
                 } else {
-                    this.modalListener.onMouseDown(mbe);
+                    this.mouseOwner.onMouseUp(mbe);
                     return;
                 }
-
             }
 
             if (mbe.isReleased()) {

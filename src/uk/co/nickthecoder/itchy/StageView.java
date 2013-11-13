@@ -31,13 +31,6 @@ public class StageView extends AbstractScrollableView implements StageListener, 
     private List<ViewMouseListener> behaviourMouseListeners = null;
 
     /**
-     * The mouse listener which hears mouse events directly from Game, with x.y coordinates in the
-     * display's coordinates. actorsMouseListener converts those coordinates to those of the world,
-     * and sends the message to the list <code>behaviourMouseListeners</code>
-     */
-    private MouseListener forwardingMouseListener;
-
-    /**
      * The actor that requested to capture the mouse events.
      */
     private ViewMouseListener mouseOwner;
@@ -53,15 +46,12 @@ public class StageView extends AbstractScrollableView implements StageListener, 
     {
         return this.stage;
     }
-    
+
     @Override
     public void render2( Surface destSurface, Rect clip, final int offsetX, final int offsetY )
     {
-        final int clipLeft = clip.x;
-        final int clipTop = clip.y;
-        final int clipWidth = clip.width;
-        final int clipHeight = clip.height;
-
+        // System.out.println( this.stage.getName() + " clip top  "+ clip.y + " clipHeight " + clip.height  + " offsety " + offsetY);
+        
         // Where is the world's (0,0) on screen (in screen coordinates)?
         // TODO I think this is the -ve of what the above comment says.
         int tx = offsetX - (int) this.worldRect.x;
@@ -101,19 +91,19 @@ public class StageView extends AbstractScrollableView implements StageListener, 
                         int shiftY = 0;
 
                         // Clip within the layers positionOnScreen
-                        if (displayAtX < clipLeft) { // left
-                            shiftX = clipLeft - displayAtX;
+                        if (displayAtX < clip.x) { // left
+                            shiftX = clip.x - displayAtX;
                             displayAtX += shiftX;
                         }
-                        if (displayAtY < clipTop) { // top
-                            shiftY = clipTop - displayAtY;
+                        if (displayAtY < clip.y) { // top
+                            shiftY = clip.y - displayAtY;
                             displayAtY += shiftY;
                         }
-                        if (displayAtX + actorSurface.getWidth() > clipLeft + clipWidth) { // right
-                            width -= displayAtX + actorSurface.getWidth() - (clipLeft + clipWidth);
+                        if (displayAtX + actorSurface.getWidth() > clip.x+ clip.width) { // right
+                            width -= displayAtX + actorSurface.getWidth() - (clip.x + clip.width);
                         }
-                        if (displayAtY + actorSurface.getHeight() > clipTop + clipHeight) { // bottom
-                            height -= displayAtY + actorSurface.getHeight() - (clipTop + clipHeight);
+                        if (displayAtY + actorSurface.getHeight() > clip.y + clip.height) { // bottom
+                            height -= displayAtY + actorSurface.getHeight() - (clip.y + clip.height);
                         }
 
                         if ((height > 0) && (width > 0)) {
@@ -163,7 +153,7 @@ public class StageView extends AbstractScrollableView implements StageListener, 
 
                     } catch (JameRuntimeException e) {
                         actor.getAppearance().clearCachedSurface();
-                        System.err.println("WARNING : attempt #" + retry + " failed to blit surface during ScrollableLayer.render");
+                        System.err.println("WARNING : attempt #" + retry + " failed to blit surface during StageView.render");
                         e.printStackTrace();
                     }
                 }
@@ -189,21 +179,10 @@ public class StageView extends AbstractScrollableView implements StageListener, 
         }
     }
 
-    private void adjustMouse( MouseEvent event )
-    {
-        Rect position = this.getAbsolutePosition();
-        event.x -= position.x;
-        event.y = position.y + this.position.height - event.y;
-        // TODO - Need to take the scroll offset into account.
-    }
-
     @Override
     public void enableMouseListener( Game game )
     {
         this.behaviourMouseListeners = new ArrayList<ViewMouseListener>();
-        this.forwardingMouseListener = new ForwardingMouseListener();
-        // TODO Don't do this, implement MouseListener instead.
-        game.addMouseListener(this.forwardingMouseListener);
         // TODO Iterate over all actors, and add them if the behaviours are ViewMouseListeners
     }
 
@@ -212,130 +191,141 @@ public class StageView extends AbstractScrollableView implements StageListener, 
     {
         this.behaviourMouseListeners.clear();
         this.behaviourMouseListeners = null;
-        this.forwardingMouseListener = null;
-        game.removeMouseListener(this.forwardingMouseListener);
     }
 
     @Override
     public void captureMouse( ViewMouseListener owner )
     {
-        if (this.forwardingMouseListener!= null) {
-            this.mouseOwner = owner;
-            Itchy.getGame().captureMouse(this.forwardingMouseListener);
-        } else {
-            throw new RuntimeException( "This StageView has not been enabled as a MouseListener");
-        }
+        this.mouseOwner = owner;
+        Itchy.getGame().captureMouse(this);
     }
 
     @Override
     public void releaseMouse( ViewMouseListener owner )
     {
         this.mouseOwner = null;
-        Itchy.getGame().releaseMouse(this.forwardingMouseListener);
+        Itchy.getGame().releaseMouse(this);
     }
 
-    /**
-     * Converts the mouse event's x,y from device coordinates into world coordinates and then
-     * forwards the MouseEvent to all of the Actors' Behaviours (within this Stage), that implement
-     * MouseListener.
-     */
-    class ForwardingMouseListener implements MouseListener
+    private int oldX;
+    private int oldY;
+
+    public boolean adjustMouse( MouseEvent event )
     {
-        @Override
-        public boolean onMouseDown( MouseButtonEvent event )
-        {
-            if (!contains(event.x, event.y)) {
+        // Store actual x,y so it can be restored by unadjustMouse
+        this.oldX = event.x;
+        this.oldY = event.y;
+        
+        // Calculate the position within the view, with (0,0) as the bottom left of the viewport.
+        Rect rect = getAbsolutePosition();
+        event.x -= rect.x;
+        event.y = rect.y + rect.height - event.y;
+        boolean result = ((event.x >= 0) && (event.x < rect.width) && (event.y >= 0) && (event.y < rect.height));
+
+        // Take scroll into affect.
+        event.x += this.worldRect.x;
+        event.y += this.worldRect.y;
+        
+        return result;
+    }
+
+    public void unadjustMouse( MouseEvent event )
+    {
+        event.x = this.oldX;
+        event.y = this.oldY;
+    }
+
+    @Override
+    public boolean onMouseDown( MouseButtonEvent event )
+    {
+        if (behaviourMouseListeners == null) {
+            return false;
+        }
+        
+        try {
+            if (!adjustMouse(event)) {
                 return false;
             }
 
-            int tx = event.x; // Save the real mouse event coords
-            int ty = event.y;
-
-            adjustMouse(event);
-
-            try {
-
-                if (StageView.this.mouseOwner == null) {
-                    for (ViewMouseListener vml : StageView.this.behaviourMouseListeners) {
-                        if (vml.onMouseDown(StageView.this, event)) {
-                            return true;
-                        }
+            if (this.mouseOwner == null) {
+                for (ViewMouseListener vml : this.behaviourMouseListeners) {
+                    if (vml.onMouseDown(StageView.this, event)) {
+                        return true;
                     }
-                } else {
-                    return StageView.this.mouseOwner.onMouseDown(StageView.this, event);
                 }
-
-            } finally {
-                event.x = tx; // Restore the real mouse event coords
-                event.y = ty;
+            } else {
+                return this.mouseOwner.onMouseDown(StageView.this, event);
             }
 
+        } finally {
+            unadjustMouse(event);
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean onMouseUp( MouseButtonEvent event )
+    {
+        if (behaviourMouseListeners == null) {
             return false;
         }
 
-        @Override
-        public boolean onMouseUp( MouseButtonEvent event )
-        {
-            if (!contains(event.x, event.y)) {
+        try {
+            if (!adjustMouse(event)) {
                 return false;
             }
 
-            int tx = event.x; // Save the real mouse event coords
-            int ty = event.y;
-
-            adjustMouse(event);
-
-            try {
-
-                if (StageView.this.mouseOwner == null) {
-                    for (ViewMouseListener vml : StageView.this.behaviourMouseListeners) {
-                        if (vml.onMouseUp(StageView.this, event)) {
-                            return true;
-                        }
+            if (this.mouseOwner == null) {
+                for (ViewMouseListener vml : this.behaviourMouseListeners) {
+                    if (vml.onMouseUp(StageView.this, event)) {
+                        return true;
                     }
-                } else {
-                    return StageView.this.mouseOwner.onMouseUp(StageView.this, event);
                 }
-
-            } finally {
-                event.x = tx; // Restore the real mouse event coords
-                event.y = ty;
+            } else {
+                return this.mouseOwner.onMouseUp(StageView.this, event);
             }
 
+        } finally {
+            unadjustMouse(event);
+        }
+        return false;
+    }
+
+    @Override
+    public boolean onMouseMove( MouseMotionEvent event )
+    {
+        if (behaviourMouseListeners == null) {
             return false;
         }
 
-        @Override
-        public boolean onMouseMove( MouseMotionEvent event )
-        {
-            if (!contains(event.x, event.y)) {
+        try {
+            if (!adjustMouse(event)) {
                 return false;
             }
 
-            int tx = event.x; // Save the real mouse event coords
-            int ty = event.y;
-
-            adjustMouse(event);
-            try {
-
-                if (StageView.this.mouseOwner == null) {
-                    for (ViewMouseListener vml : StageView.this.behaviourMouseListeners) {
-                        if (vml.onMouseMove(StageView.this, event)) {
-                            return true;
-                        }
+            if (this.mouseOwner == null) {
+                for (ViewMouseListener vml : this.behaviourMouseListeners) {
+                    if (vml.onMouseMove(StageView.this, event)) {
+                        return true;
                     }
-                } else {
-                    return StageView.this.mouseOwner.onMouseMove(StageView.this, event);
                 }
-
-            } finally {
-                event.x = tx; // Restore the real mouse event coords
-                event.y = ty;
+            } else {
+                return this.mouseOwner.onMouseMove(StageView.this, event);
             }
 
-            return false;
-
+        } finally {
+            unadjustMouse(event);
         }
+
+        return false;
+
+    }
+
+    @Override
+    public String toString()
+    {
+        return "StageView of " + this.stage.getName() + " Scroll :" + this.worldRect.x + "," + this.worldRect.y + " @ " + this.position;
     }
 
 }

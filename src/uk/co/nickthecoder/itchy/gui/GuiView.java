@@ -14,6 +14,7 @@ import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.Surface;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
+import uk.co.nickthecoder.jame.event.MouseEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 
 /**
@@ -53,54 +54,65 @@ public class GuiView extends AbstractView implements View, InputListener
         this.invalid = true;
     }
 
+    private int oldX;
+    private int oldY;
+
+    protected boolean adjustMouse( MouseEvent event )
+    {
+        this.oldX = event.x;
+        this.oldY = event.y;
+        Rect rect = getAbsolutePosition();
+        event.x -= rect.x;
+        event.y -= rect.y;
+        return ((event.x >= 0) && (event.x < rect.width) && (event.y >= 0) && (event.y < rect.height));
+    }
+
+    protected void unadjustMouse( MouseEvent event )
+    {
+        event.x = this.oldX;
+        event.y = this.oldY;
+    }
+
     @Override
     public boolean onMouseDown( MouseButtonEvent event )
     {
-        Rect rect = new Rect(getAbsolutePosition());
-
-        event.x -= rect.x;
-        event.y -= rect.y;
         try {
-            // TODO use onMouseDown instead?
+            if (!adjustMouse(event)) {
+                return false;
+            }
             return this.rootContainer.mouseDown(event);
 
         } finally {
-            event.x += rect.x;
-            event.y += rect.y;
+            unadjustMouse(event);
         }
+
     }
 
     @Override
     public boolean onMouseUp( MouseButtonEvent event )
     {
-        Rect rect = new Rect(getAbsolutePosition());
-
-        event.x -= rect.x;
-        event.y -= rect.y;
         try {
-
+            if (!adjustMouse(event)) {
+                return false;
+            }
             return this.rootContainer.mouseUp(event);
 
         } finally {
-            event.x += rect.x;
-            event.y += rect.y;
+            unadjustMouse(event);
         }
     }
 
     @Override
     public boolean onMouseMove( MouseMotionEvent event )
     {
-        Rect rect = new Rect(getAbsolutePosition());
-
-        event.x -= rect.x;
-        event.y -= rect.y;
         try {
-
+            if (!adjustMouse(event)) {
+                return false;
+            }
             return this.rootContainer.mouseMove(event);
 
         } finally {
-            event.x += rect.x;
-            event.y += rect.y;
+            unadjustMouse(event);
         }
     }
 
@@ -113,49 +125,9 @@ public class GuiView extends AbstractView implements View, InputListener
     @Override
     public boolean onKeyUp( KeyboardEvent ke )
     {
+        // TODO Why does the GUI not have key up events?
         return false;
     }
-
-    /*
-    @Override
-    public boolean mouseDown( MouseButtonEvent event )
-    {
-        if (this.draggable) {
-            if ((event.button == 2) || ((event.button == 1) && Itchy.isShiftDown())) {
-                this.captureMouse(this);
-                this.dragging = true;
-                this.dragStartX = event.x;
-                this.dragStartY = event.y;
-                return true;
-            }
-        }
-
-        return super.mouseDown(event);
-    }
-
-    @Override
-    public void mouseMove( MouseMotionEvent event )
-    {
-        if (this.dragging) {
-            int dx = event.x - this.dragStartX;
-            int dy = event.y - this.dragStartY;
-
-            getActor().moveBy(dx, dy);
-            // this.dragStartX = event.x;
-            // this.dragStartY = event.y;
-        }
-    }
-
-    @Override
-    public void mouseUp( MouseButtonEvent event )
-    {
-        if (this.dragging) {
-            this.releaseMouse(this);
-            this.dragging = true;
-        }
-    }
-    */
-
 
     @Override
     public void render2( Surface destSurface, Rect clip, int offsetX, int offsetY )

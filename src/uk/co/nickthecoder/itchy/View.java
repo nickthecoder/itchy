@@ -45,6 +45,9 @@ public interface View
      *        The clip rectangle of the surface on which to draw. For the top-level
      * @param destSurface
      *        The surface to draw on
+     *        
+     * @param offsetX How much to add to X.
+     * @param offsetY How much to add to Y.
      */
     public void render( Surface destSurface, Rect clip, int offsetX, int offsetY );
 

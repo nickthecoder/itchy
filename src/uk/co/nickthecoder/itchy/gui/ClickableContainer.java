@@ -36,9 +36,7 @@ public abstract class ClickableContainer extends Container
 
     @Override
     public boolean onMouseDown( MouseButtonEvent event )
-    {
-        System.out.println( "ClickableContainer.mouseDown " + event.x + "," + event.y);
-        
+    {              
         if (super.onMouseDown(event)) {
             return true;
         }
@@ -63,7 +61,7 @@ public abstract class ClickableContainer extends Container
             this.dragging = false;
             this.getRoot().releaseMouse(this);
     
-            this.removeStyle("up");
+            this.removeStyle("down");
             if (this.contains(event)) {
                 long now = System.currentTimeMillis();
                 if (now - this.clickTimeMillis < 500) {
