@@ -51,7 +51,4 @@ public interface Stage
 
     public void removeStageListener( StageListener listener );
 
-    // TODO This isn't appropriate.
-    public boolean getYAxisPointsDown();
-
 }

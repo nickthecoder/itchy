@@ -24,8 +24,7 @@ public interface Pose extends OffsetSurface
      * instead, draw it pointing up, and set direction to 90 degrees.
      * 
      * @return The direction that the image is pointing in degrees. 0 degrees is to the right, 90
-     *         degrees is straight up (assuming your Y axis points upwards). See ScrollableLayer's
-     *         constructor's yAxisPointsDown parameter.
+     *         degrees is straight up.
      */
     @Property(label = "Direction")
     public double getDirection();

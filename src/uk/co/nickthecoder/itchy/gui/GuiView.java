@@ -156,11 +156,6 @@ public class GuiView extends AbstractView implements View, InputListener
     }
     */
 
-    @Override
-    public boolean getYAxisPointsDown()
-    {
-        return true;
-    }
 
     @Override
     public void render2( Surface destSurface, Rect clip, int offsetX, int offsetY )

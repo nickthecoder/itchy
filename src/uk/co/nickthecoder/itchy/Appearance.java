@@ -355,16 +355,12 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
         // Scale the width and height if needed and center it.
         if (this.worldRectangle == null) {
             this.ensureOk();
-
-            double y;
-
-            if (this.actor.getYAxisPointsDown()) {
-                y = this.actor.getY() - this.offsetY;
-            } else {
-                y = this.actor.getY() + this.offsetY - this.processedSurface.getHeight();
-            }
-            this.worldRectangle = new WorldRectangle(this.actor.getX() - this.offsetX, y,
-                this.processedSurface.getWidth(), this.processedSurface.getHeight());
+            
+            this.worldRectangle = new WorldRectangle(
+                this.actor.getX() - this.offsetX,
+                this.actor.getY() + this.offsetY - this.processedSurface.getHeight(),
+                this.processedSurface.getWidth(),
+                this.processedSurface.getHeight());
         }
         return this.worldRectangle;
     }

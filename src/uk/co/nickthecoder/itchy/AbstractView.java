@@ -10,9 +10,6 @@ import uk.co.nickthecoder.jame.Surface;
 
 public abstract class AbstractView implements View
 {
-    // TODO - Do you want this, if so, shouldn't be public?
-    public boolean yAxisPointsDown = false;
-
     private ParentView<?> parent;
 
     protected Rect position;
@@ -27,12 +24,6 @@ public abstract class AbstractView implements View
     public Rect getRelativeRect()
     {
         return this.position;
-    }
-    
-    @Override
-    public boolean getYAxisPointsDown()
-    {
-        return false;
     }
 
     @Override

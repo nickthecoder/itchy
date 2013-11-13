@@ -10,9 +10,6 @@ import java.util.List;
 
 public abstract class AbstractStage implements Stage
 {
-    // TODO Is this appropriate?
-    public boolean yAxisPointsDown;
-
     public final String name;
 
     /**
@@ -32,12 +29,6 @@ public abstract class AbstractStage implements Stage
     public String getName()
     {
         return this.name;
-    }
-
-    @Override
-    public boolean getYAxisPointsDown()
-    {
-        return this.yAxisPointsDown;
     }
 
     @Override

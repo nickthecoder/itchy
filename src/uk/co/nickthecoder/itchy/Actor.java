@@ -184,22 +184,9 @@ public class Actor implements PropertySubject<Actor>
         this.costume = costume;
     }
 
-    public boolean getYAxisPointsDown()
-    {
-        if (this.stage == null) {
-            return false;
-        }
-        return this.stage.getYAxisPointsDown();
-    }
-
     public double getCornerY()
     {
-        if (this.getYAxisPointsDown()) {
-            return this.getY() - this.getAppearance().getOffsetY();
-        } else {
-            return this.getY() - this.getAppearance().getSurface().getHeight() +
-                this.getAppearance().getOffsetY();
-        }
+        return this.getY() - this.getAppearance().getSurface().getHeight() + this.getAppearance().getOffsetY();
     }
 
     public double getCornerX()
@@ -444,7 +431,7 @@ public class Actor implements PropertySubject<Actor>
             this.dead = true;
             getBehaviour().die();
             resetCollisionStrategy();
-            
+
             if (this.stage != null) {
                 this.stage.remove(this);
             }
@@ -498,12 +485,7 @@ public class Actor implements PropertySubject<Actor>
         double cosa = Math.cos(theta);
         double sina = Math.sin(theta);
 
-        if (this.getYAxisPointsDown()) {
-            this.moveBy((cosa * amount), (-sina * amount));
-        } else {
-            this.moveBy((cosa * amount), (sina * amount));
-        }
-
+        this.moveBy((cosa * amount), (sina * amount));
     }
 
     public void moveForwards( double forward, double sideways )
@@ -512,12 +494,7 @@ public class Actor implements PropertySubject<Actor>
         double cosa = Math.cos(theta);
         double sina = Math.sin(theta);
 
-        if (this.getYAxisPointsDown()) {
-            this.moveBy((cosa * forward) - (sina * sideways), (-sina * forward) - (cosa * sideways));
-        } else {
-            this.moveBy((cosa * forward) - (sina * sideways), (sina * forward) + (cosa * sideways));
-        }
-
+        this.moveBy((cosa * forward) - (sina * sideways), (sina * forward) + (cosa * sideways));
     }
 
     public void moveTowards( Actor actor, double amount )
@@ -549,7 +526,7 @@ public class Actor implements PropertySubject<Actor>
     {
         return this.getAppearance().getWorldRectangle().contains(x, y);
     }
-    
+
     public static Behaviour nearest( double x, double y, String tag )
     {
         Behaviour closestBehaviour = null;
@@ -645,12 +622,7 @@ public class Actor implements PropertySubject<Actor>
             if (surface.hasAlphaChannel()) {
 
                 double px = x - this.getX() + this.getAppearance().getOffsetX();
-                double py;
-                if (this.getYAxisPointsDown()) {
-                    py = y - this.getY() + this.getAppearance().getOffsetY();
-                } else {
-                    py = this.getAppearance().getOffsetY() - y + this.getY();
-                }
+                double py = this.getAppearance().getOffsetY() - y + this.getY();
                 RGBA color = surface.getPixelRGBA((int) px, (int) py);
                 return color.a > alphaThreashold;
 
@@ -664,12 +636,8 @@ public class Actor implements PropertySubject<Actor>
 
     public boolean pixelOverlap( Actor other )
     {
-        int dx = ((int) this.getX() - this.appearance.getOffsetX()) -
-            ((int) (other.getX()) - other.appearance.getOffsetX());
-        int dy = this.getYAxisPointsDown() ? ((int) this.getY() - this.appearance.getOffsetY()) -
-            ((int) (other.getY()) - other.appearance.getOffsetY())
-            : ((int) -this.getY() - this.appearance.getOffsetY()) -
-                ((int) (-other.getY()) - other.appearance.getOffsetY());
+        int dx = ((int) this.getX() - this.appearance.getOffsetX()) - ((int) (other.getX()) - other.appearance.getOffsetX());
+        int dy = ((int) -this.getY() - this.appearance.getOffsetY()) - ((int) (-other.getY()) - other.appearance.getOffsetY());
 
         return this.getAppearance().getSurface()
             .pixelOverlap(other.getAppearance().getSurface(), dx, dy, 64);

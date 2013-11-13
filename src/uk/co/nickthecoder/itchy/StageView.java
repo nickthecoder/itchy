@@ -65,7 +65,7 @@ public class StageView extends AbstractScrollableView implements StageListener, 
         // Where is the world's (0,0) on screen (in screen coordinates)?
         // TODO I think this is the -ve of what the above comment says.
         int tx = offsetX - (int) this.worldRect.x;
-        int ty = this.getYAxisPointsDown() ? offsetY - (int) this.worldRect.y : offsetY + this.position.height + (int) this.worldRect.y;
+        int ty = offsetY + this.position.height + (int) this.worldRect.y;
 
         for (Iterator<Actor> i = this.stage.iterator(); i.hasNext();) {
             Actor actor = i.next();
@@ -91,9 +91,7 @@ public class StageView extends AbstractScrollableView implements StageListener, 
                     // Note the change of sign for "y", because in world
                     // coordinates "down" is negative.
                     int displayAtX = tx + (int) (actor.getX()) - actor.getAppearance().getOffsetX();
-                    int displayAtY = this.getYAxisPointsDown() ?
-                        ty + (int) (actor.getY()) - actor.getAppearance().getOffsetY() :
-                        ty - (int) (actor.getY()) - actor.getAppearance().getOffsetY();
+                    int displayAtY = ty - (int) (actor.getY()) - actor.getAppearance().getOffsetY();
 
                     try {
 
@@ -195,12 +193,7 @@ public class StageView extends AbstractScrollableView implements StageListener, 
     {
         Rect position = this.getAbsolutePosition();
         event.x -= position.x;
-
-        if (this.yAxisPointsDown) {
-            event.y -= this.position.y;
-        } else {
-            event.y = position.y + this.position.height - event.y;
-        }
+        event.y = position.y + this.position.height - event.y;
         // TODO - Need to take the scroll offset into account.
     }
 

@@ -20,14 +20,6 @@ import uk.co.nickthecoder.jame.Surface;
  */
 public interface View
 {
-
-    /**
-     * It it the norm in mathematics, for the Y axis to point upwards, but display devices have the
-     * Y axis pointing downwards. This boolean lets you choose which of these two conventions you
-     * want to use for the world coordinates (i.e. values of Actor.y). Set in the constructor.
-     */
-    public boolean getYAxisPointsDown();
-
     /**
      * Layers can be stacked in a hierarchical manner.
      * 

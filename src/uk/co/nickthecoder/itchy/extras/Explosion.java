@@ -576,11 +576,8 @@ public class Explosion extends Companion<Explosion>
                 double sin = Math.sin(actualHeading / 180.0 * Math.PI);
 
                 projectile.vx += (cos * actualSpeedForwards) - (sin * actualSpeedSidewards);
-                if (getActor().getYAxisPointsDown()) {
-                    projectile.vy += (-sin * actualSpeedForwards) - (cos * actualSpeedSidewards);
-                } else {
-                    projectile.vy += (sin * actualSpeedForwards) + (cos * actualSpeedSidewards);
-                }
+                projectile.vy += (sin * actualSpeedForwards) + (cos * actualSpeedSidewards);
+                
             }
 
             Actor actor = projectile.createActor();
