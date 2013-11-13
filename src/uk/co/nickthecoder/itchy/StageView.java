@@ -174,7 +174,7 @@ public class StageView extends AbstractScrollableView implements StageListener, 
     public void onRemoved( Stage stage, Actor actor )
     {
         Behaviour behaviour = actor.getBehaviour();
-        if (behaviour instanceof ViewMouseListener) {
+        if ((behaviourMouseListeners != null) && (behaviour instanceof ViewMouseListener)) {
             this.behaviourMouseListeners.remove(behaviour);
         }
     }

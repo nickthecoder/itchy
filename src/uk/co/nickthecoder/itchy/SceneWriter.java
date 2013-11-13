@@ -49,6 +49,7 @@ public class SceneWriter extends XMLWriter
         if ( ! PlainSceneBehaviour.class.getName().equals(this.scene.sceneBehaviourClassName)) {
             this.attribute("behaviour", this.scene.sceneBehaviourClassName.name);
         }
+        this.attribute("background", this.scene.backgroundColor.toString());
         
         writeSceneBehaviourProperties();
 

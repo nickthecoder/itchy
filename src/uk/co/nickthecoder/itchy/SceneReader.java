@@ -47,6 +47,13 @@ public class SceneReader
     private void readScene( XMLTag sceneTag ) throws Exception
     {
         this.scene.showMouse = sceneTag.getOptionalBooleanAttribute("showMouse", true);
+        String background = sceneTag.getOptionalAttribute("background",  "#000");
+        try {
+            this.scene.backgroundColor = RGBA.parse(background);
+        } catch (Exception e) {
+            throw new XMLException("Illegal colour : " + background);
+        }
+        
         this.scene.sceneBehaviourClassName = new ClassName(sceneTag.getOptionalAttribute("behaviour",
             PlainSceneBehaviour.class.getName()));
 

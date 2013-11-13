@@ -22,6 +22,11 @@ public class RGBAView extends AbstractView
         this.color = color;
     }
 
+    public boolean isVisible()
+    {
+        return (this.color.a > 0) && super.isVisible();
+    }
+    
     //TODO, if offsetX, offsetY aren't used here, why are they used elsewhere?
     @Override
     public void render2( Surface destSurface, Rect clip, int offsetX, int offsetY )

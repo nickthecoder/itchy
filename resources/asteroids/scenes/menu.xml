@@ -1,4 +1,4 @@
-<scene showMouse="true" behaviour="Menu.js">
+<scene showMouse="true" behaviour="Menu.js" background="#000000ff">
   <properties/>
   <layer name="main">
     <actor costume="stars2" x="400" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="1" alpha="73.0"/>

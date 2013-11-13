@@ -51,8 +51,6 @@ Vacuum bathroom
 TODO
 ====
 
-Get the SceneDesigner compiling and working.
-
 Create some tests for Views in the tests game.
     Create a Stage and view in the middle of the screen
     Add buttons which scroll the view

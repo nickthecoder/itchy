@@ -14,6 +14,7 @@ import uk.co.nickthecoder.itchy.util.AbstractProperty;
 import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.itchy.util.Property;
 import uk.co.nickthecoder.itchy.util.StringUtils;
+import uk.co.nickthecoder.jame.RGBA;
 
 public class Scene
 {
@@ -23,6 +24,9 @@ public class Scene
     @Property(label = "Scene Behaviour", baseClass = SceneBehaviour.class, sortOrder = 90)
     public ClassName sceneBehaviourClassName;
 
+    @Property(label="Background Colour")
+    public RGBA backgroundColor = RGBA.BLACK;
+    
     private List<SceneLayer> sceneLayers;
 
     private HashMap<String, SceneLayer> layersMap;

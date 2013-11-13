@@ -173,7 +173,7 @@ public class Game implements InputListener, QuitListener, MessageListener
         this.allViews = new CompoundView<View>(displayRect);
         
         //Background
-        this.background = new RGBAView(displayRect, new RGBA(200,50,50));
+        this.background = new RGBAView(displayRect, new RGBA(0,0,0));
         this.allViews.add(this.background);
 
         // Covered by game views
@@ -805,10 +805,11 @@ public class Game implements InputListener, QuitListener, MessageListener
                 }
                 return false;
             }
-
+            
             this.sceneBehaviour.onDeactivate();
 
             this.sceneName = sceneName;
+            this.background.color = scene.backgroundColor;
 
             this.sceneBehaviour = scene.createSceneBehaviour(this.resources);
             this.sceneBehaviour.onActivate();
@@ -900,6 +901,7 @@ public class Game implements InputListener, QuitListener, MessageListener
 
     public void startEditor()
     {
+        clear();
         try {
             Editor editor = new Editor(this);
             editor.start();
@@ -910,6 +912,7 @@ public class Game implements InputListener, QuitListener, MessageListener
 
     public void startEditor( String designSceneName )
     {
+        clear();
         try {
             Editor editor = new Editor(this);
             editor.start(designSceneName);

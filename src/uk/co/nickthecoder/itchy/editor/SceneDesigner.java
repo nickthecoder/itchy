@@ -1401,7 +1401,9 @@ public class SceneDesigner implements MouseListener, KeyListener
     private void onSave()
     {
         Scene scene = new Scene();
-
+        scene.backgroundColor = this.scene.backgroundColor; 
+        scene.showMouse = this.scene.showMouse; 
+            
         scene.sceneBehaviourClassName = this.scene.sceneBehaviourClassName;
         scene.sceneBehaviour = this.scene.sceneBehaviour;
 
