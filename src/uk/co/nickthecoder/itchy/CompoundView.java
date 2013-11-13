@@ -103,7 +103,7 @@ public class CompoundView<V extends View> extends AbstractView implements Parent
     @Override
     public boolean onMouseUp( MouseButtonEvent event )
     {
-        for (ListIterator<V> i = this.children.listIterator(); i.hasPrevious();) {
+        for (ListIterator<V> i = this.children.listIterator(this.children.size()); i.hasPrevious();) {
 
             V view = i.previous();
             if (view instanceof MouseListener) {
@@ -118,7 +118,7 @@ public class CompoundView<V extends View> extends AbstractView implements Parent
     @Override
     public boolean onMouseMove( MouseMotionEvent event )
     {
-        for (ListIterator<V> i = this.children.listIterator(); i.hasPrevious();) {
+        for (ListIterator<V> i = this.children.listIterator(this.children.size()); i.hasPrevious();) {
             V view = i.previous();
             if (view instanceof MouseListener) {
                 if (((MouseListener) view).onMouseMove(event)) {

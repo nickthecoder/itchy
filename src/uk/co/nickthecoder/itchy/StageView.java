@@ -16,7 +16,7 @@ import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 
-public class StageView extends AbstractScrollableView implements StageListener, MouseListenerView
+public class StageView extends AbstractScrollableView implements StageListener, MouseListener, MouseListenerView
 {
     private Stage stage;
 

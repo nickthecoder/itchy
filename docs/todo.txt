@@ -58,10 +58,6 @@ Create some tests for Views in the tests game.
     Create a compound view in the middle with other views inside it.
         Use the same Stage for each of the mini views to test the 1:many Stage->View with mouse listeners and capture mouse.
 
-Add an RGBAView, and set its colour from the scene's new background attribute. Alpha of 0 to turn it off.
-
-
-
 Follow up on the TODOs
 
 Comment View, Stage heirarchies and Component and Container.

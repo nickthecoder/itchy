@@ -497,7 +497,6 @@ public class Game implements InputListener, QuitListener, MessageListener
                     this.modalListener.onKeyUp(ke);
                     return;
                 }
-
             }
         }
 
@@ -546,7 +545,6 @@ public class Game implements InputListener, QuitListener, MessageListener
                     return;
                 }
             }
-
         }
 
         if (event instanceof MouseMotionEvent) {
@@ -569,7 +567,6 @@ public class Game implements InputListener, QuitListener, MessageListener
                 this.mouseOwner.onMouseMove(mme);
                 return;
             }
-
         }
     }
 
