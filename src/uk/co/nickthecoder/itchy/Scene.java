@@ -112,6 +112,9 @@ public class Scene
     {
         Scene result = new Scene();
         result.showMouse = this.showMouse;
+        result.backgroundColor = this.backgroundColor;
+        result.sceneBehaviourClassName = this.sceneBehaviourClassName;
+        result.sceneBehaviour = this.sceneBehaviour;
 
         for (SceneLayer sceneLayer : this.sceneLayers) {
             SceneLayer newSceneLayer = sceneLayer.copy();

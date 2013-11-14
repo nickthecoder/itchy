@@ -77,7 +77,6 @@ public class ScenesEditor extends SubEditor<SceneResource>
         super.addListButtons(buttons);
     }
 
-
     @Override
     protected void remove( SceneResource sceneResource )
     {

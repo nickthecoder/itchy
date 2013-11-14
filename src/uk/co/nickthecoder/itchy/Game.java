@@ -780,15 +780,24 @@ public class Game implements InputListener, QuitListener, MessageListener
      * @param sceneName
      *        The name of the scene to load.
      */
-    public void startScene( String sceneName )
+    public boolean startScene( String sceneName )
     {
         if (this.pause.isPaused()) {
             this.pause.unpause();
         }
         clear();
-        this.loadScene(sceneName);
+        return this.loadScene(sceneName);
     }
 
+    public boolean hasScene( String sceneName )
+    {
+        try {
+            return this.resources.getScene(sceneName) != null;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    
     public boolean loadScene( String sceneName )
     {
         try {

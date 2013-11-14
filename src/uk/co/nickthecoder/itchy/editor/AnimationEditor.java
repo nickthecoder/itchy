@@ -81,12 +81,6 @@ public class AnimationEditor extends Window
         return null;
     }
 
-    @Override
-    public void show()
-    {
-        this.show();
-    }
-
     public void onOk()
     {
         if (this.save()) {

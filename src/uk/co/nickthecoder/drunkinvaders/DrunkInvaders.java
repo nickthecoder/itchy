@@ -185,7 +185,7 @@ public class DrunkInvaders extends Game
     }
 
     @Override
-    public void startScene( String sceneName )
+    public boolean startScene( String sceneName )
     {
         this.neighbourhood.clear();
 
@@ -209,7 +209,7 @@ public class DrunkInvaders extends Game
                 .add(SceneTransition.slideLeft())
                 .add(SceneTransition.fade());
         }
-        new SceneTransition(transition).transition(sceneName);
+        return new SceneTransition(transition).transition(sceneName);
     }
 
     @Override

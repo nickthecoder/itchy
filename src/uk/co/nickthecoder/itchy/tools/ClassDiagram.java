@@ -129,7 +129,7 @@ public class ClassDiagram
         for (String line : lines) {
             line = line.trim();
 
-            System.out.println("> " + line);
+            //System.out.println("> " + line);
             String param = "";
             if (line.indexOf(' ') > 0) {
                 param = line.substring(line.indexOf(' ')).trim();
@@ -214,7 +214,7 @@ public class ClassDiagram
 
     private void generate( ClassRequirements classRequirements )
     {
-        System.out.println("Generating : " + classRequirements.klass.getName());
+        // System.out.println("Generating : " + classRequirements.klass.getName());
         String name = classRequirements.klass.getSimpleName();
         String slashName = getSlashName(classRequirements.klass);
 
@@ -272,7 +272,7 @@ public class ClassDiagram
 
         File file = new File(path);
         if (!file.exists()) {
-            System.out.println("File not found: " + file);
+            System.err.println("File not found: " + file);
         } else {
 
             new ClassDiagram(file).generate();
@@ -394,7 +394,7 @@ public class ClassDiagram
 
                     HashMap<String, Method> overloaded = knownMethods.get(methodName);
                     if (overloaded == null) {
-                        System.out.println("Method not found : " + methodName);
+                        error("Method not found : " + methodName);
                     } else {
                         for (Method method : overloaded.values()) {
                             result.add(method);

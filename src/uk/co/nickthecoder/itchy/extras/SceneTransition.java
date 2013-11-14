@@ -199,8 +199,12 @@ public class SceneTransition
      * @param sceneName
      *        The name of the scene to transition to.
      */
-    public void transition( String sceneName )
+    public boolean transition( String sceneName )
     {
+        if ( ! Itchy.getGame().hasScene(sceneName)) {
+            return false;
+        }
+        
         if (currentSceneTransition != null) {
             // We are already in the middle of a different transition. Lets kill that one,
             // and redraw the screen before taking the snapshot.
@@ -217,7 +221,8 @@ public class SceneTransition
             Itchy.getGame().pause.pause(false);
         }
         begin();
-
+        
+        return true;
     }
 
     /**
