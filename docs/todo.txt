@@ -51,6 +51,8 @@ Vacuum bathroom
 TODO
 ====
 
+BUG : Start editor from inside Asteroids, then return to a blank screen.
+
 Test on windows.
 
 PACKAGE !!!

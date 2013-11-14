@@ -140,5 +140,12 @@ public class ZOrderStage extends AbstractStage
         }
 
     }
-
+    
+    public Stage createDesignStage()
+    {
+        ZOrderStage result = (ZOrderStage) super.createDesignStage();
+        result.actors = new TreeSet<Actor>(new ZOrderComparactor());
+        
+        return result;
+    }
 }

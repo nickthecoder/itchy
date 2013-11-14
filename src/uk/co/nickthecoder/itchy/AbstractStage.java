@@ -8,7 +8,7 @@ package uk.co.nickthecoder.itchy;
 import java.util.LinkedList;
 import java.util.List;
 
-public abstract class AbstractStage implements Stage
+public abstract class AbstractStage implements Stage, Cloneable
 {
     public final String name;
 
@@ -68,4 +68,26 @@ public abstract class AbstractStage implements Stage
         this.stageListeners.add(listener);
     }
 
+    
+    /**
+     * Uses the clone methods {@see Cloneable}, to create an identical stage, but without any actors.
+     */
+    public Stage createDesignStage()
+    {
+        return this.clone();
+    }
+    
+    /**
+     * Used by {@link #createDesignStage()}.
+     */
+    public AbstractStage clone()
+    {
+        try {
+            AbstractStage result = (AbstractStage) super.clone();
+            result.stageListeners = new LinkedList<StageListener>();
+            return result;
+        } catch (Exception e) {
+            throw new RuntimeException( e );
+        }
+    }
 }

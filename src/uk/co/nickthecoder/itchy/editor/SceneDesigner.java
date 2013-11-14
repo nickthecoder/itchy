@@ -167,7 +167,6 @@ public class SceneDesigner implements MouseListener, KeyListener
         }
 
         this.costumeButtonGroup = new ButtonGroup();
-
     }
 
     public void go()
@@ -184,10 +183,11 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.editor.getViews().add(this.designViews);
 
         for (Stage stage : this.editor.game.getStages()) {
-
             if (!stage.isLocked()) {
-                this.editor.getStages().add(stage);
-                StageView view = new StageView(editRect, stage);
+                Stage designStage = stage.createDesignStage();
+
+                this.editor.getStages().add(designStage);
+                StageView view = new StageView(editRect, designStage);
                 this.designViews.add(view);
                 this.currentStageView = view;
             }
@@ -214,10 +214,15 @@ public class SceneDesigner implements MouseListener, KeyListener
 
     private void onDone()
     {
-        this.editor.getViews().remove(this.designViews);
-
+        this.editor.clear();
         this.editor.getStages().clear();
-
+        this.overlayStage.clear();
+        
+        this.editor.getViews().remove(this.designViews);
+        this.editor.getViews().remove(this.overlayView);
+        this.editor.removeMouseListener(this);
+        this.editor.removeKeyListener(this);
+        
         Itchy.getGame().removeKeyListener(this);
 
         this.toolbox.hide();

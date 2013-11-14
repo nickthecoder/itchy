@@ -907,7 +907,6 @@ public class Game implements InputListener, QuitListener, MessageListener
 
     public void startEditor()
     {
-        clear();
         try {
             Editor editor = new Editor(this);
             editor.start();
@@ -918,7 +917,6 @@ public class Game implements InputListener, QuitListener, MessageListener
 
     public void startEditor( String designSceneName )
     {
-        clear();
         try {
             Editor editor = new Editor(this);
             editor.start(designSceneName);
