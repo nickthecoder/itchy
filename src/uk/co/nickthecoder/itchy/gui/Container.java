@@ -1,9 +1,7 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0 which accompanies this
+ * distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.gui;
 
@@ -75,7 +73,7 @@ public class Container extends Component
     public void addChild( Component child )
     {
         if (child.parent != null) {
-            throw new RuntimeException( "Component is already within another Container" );
+            throw new RuntimeException("Component is already within another Container");
         }
         this.children.add(child);
         child.parent = this;
@@ -98,14 +96,15 @@ public class Container extends Component
         this.forceLayout();
     }
 
+    @Override
     public void setPosition( int x, int y, int width, int height )
     {
         if ((width != this.width) || (height != this.height)) {
             this.forceLayout();
         }
-        super.setPosition( x, y, width, height );
+        super.setPosition(x, y, width, height);
     }
-    
+
     public void setPaddingTop( int value )
     {
         if (this.paddingTop != value) {
@@ -162,7 +161,7 @@ public class Container extends Component
     {
         return this.xSpacing;
     }
-    
+
     public int getYSpacing()
     {
         return this.ySpacing;
@@ -175,6 +174,7 @@ public class Container extends Component
             this.forceLayout();
         }
     }
+
     public void setYSpacing( int value )
     {
         if (this.ySpacing != value) {
@@ -233,15 +233,15 @@ public class Container extends Component
     }
 
     /**
-     * Used to ensure that the component is visble on screen.
-     * Most containers do nothing, but a scrollable will scroll the client as appropriate, and
-     * Notebooks will select the appropriate tab.
+     * Used to ensure that the component is visble on screen. Most containers do nothing, but a
+     * scrollable will scroll the client as appropriate, and Notebooks will select the appropriate
+     * tab.
      */
     public void ensureVisible( Component child )
     {
         // Does nothing.
     }
-    
+
     boolean previousFocus( Component from, Component stop )
     {
         boolean found = from == null;
@@ -288,6 +288,18 @@ public class Container extends Component
         return false;
     }
 
+    @Override
+    public void focus()
+    {
+        if (this.canFocus()) {
+            super.focus();
+        } else {
+            if (! nextFocus(null, null) ) {
+                super.focus();
+            }
+        }
+    }
+
     boolean nextFocus( Component from, Component stop )
     {
         boolean found = from == null;
@@ -318,7 +330,11 @@ public class Container extends Component
                 found = true;
             }
         }
-
+        
+        if (stop == null) {
+            return false;
+        }
+        
         if (this.parent != null) {
             if (this.parent.nextFocus(this, stop)) {
                 return true;
@@ -420,7 +436,7 @@ public class Container extends Component
         for (Component child : this.children) {
             if (child.isVisible()) {
                 Rect rect = new Rect(child.getX(), child.getY(), child.getWidth(),
-                        child.getHeight());
+                    child.getHeight());
                 GraphicsContext childGc = gc.window(rect);
                 if (!childGc.empty()) {
                     child.render(childGc);
@@ -473,7 +489,7 @@ public class Container extends Component
         }
         return false;
     }
-    
+
     @Override
     public boolean onMouseMove( MouseMotionEvent event )
     {

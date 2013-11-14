@@ -51,6 +51,12 @@ public interface View
      */
     public void render( Surface destSurface, Rect clip, int offsetX, int offsetY );
 
+    
+    /**
+     * @return The position of the view relative to the parent view
+     */
+    public Rect getPosition();
+    
     /**
      * @return The position of this View in display device coordinates, i.e. relative to the top
      *         left of the display.

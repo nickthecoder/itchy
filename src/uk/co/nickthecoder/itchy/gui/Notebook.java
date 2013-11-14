@@ -52,6 +52,21 @@ public class Notebook extends Container
         page.setVisible(selected);
 
     }
+    
+    public int size()
+    {
+        return this.pages.getChildren().size();
+    }
+    
+    public Button getTab( int pageIndex )
+    {
+        return (Tab) this.tabs.getChildren().get(pageIndex);
+    }
+    
+    public Component getPage( int pageIndex )
+    {
+        return this.pages.getChildren().get(pageIndex);
+    }
 
     @Override
     public void ensureVisible( Component component )
@@ -105,7 +120,7 @@ public class Notebook extends Container
         }
     }
 
-    class Tab extends ClickableContainer
+    class Tab extends Button
     {
         private final Component page;
 
@@ -149,9 +164,11 @@ public class Notebook extends Container
         }
 
         @Override
-        public void onClick( MouseButtonEvent e )
+        public void onClick( MouseButtonEvent event )
         {
             Notebook.this.selectPage(this.pageNumber);
+            super.onClick(event);
+            getPage().focus();
         }
     }
 

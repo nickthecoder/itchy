@@ -24,7 +24,7 @@ import uk.co.nickthecoder.itchy.gui.TextBox;
 import uk.co.nickthecoder.itchy.gui.VerticalLayout;
 import uk.co.nickthecoder.itchy.util.Util;
 
-public class NewGameWizard
+public class NewGameWizard implements Page
 {
 
     private TextBox gameIdBox;
@@ -38,21 +38,31 @@ public class NewGameWizard
     {
     }
 
+    @Override
     public String getName()
     {
         return "New Game Wizard";
     }
 
-    public Component createForm()
+    @Override
+    public Component createPage()
     {
         Container result = new Container();
         result.setLayout(new VerticalLayout());
         result.setFill(true, true);
+        result.setXAlignment(0.5);
 
         Container main = new Container();
         result.addChild(main);
-        GridLayout grid = new GridLayout(main, 2);
-        main.setLayout(grid);
+        main.setExpansion(1);
+        main.setYAlignment(0.25);
+
+        Container form = new Container();
+        main.addChild(form);
+        form.setType("form");
+
+        GridLayout grid = new GridLayout(form, 2);
+        form.setLayout(grid);
 
         this.gameIdBox = new TextBox("myGame");
         grid.addRow("Game ID", this.gameIdBox);
@@ -66,8 +76,7 @@ public class NewGameWizard
         this.heightBox = new IntegerBox(600);
         grid.addRow("Height", this.heightBox);
 
-        this.templatePickerButton = new PickerButton<File>("Game Template", null,
-            getGameTemplates());
+        this.templatePickerButton = new PickerButton<File>("Game Template", null, getGameTemplates());
         grid.addRow("Template", this.templatePickerButton);
 
         this.message = new Label("");

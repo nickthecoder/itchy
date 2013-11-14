@@ -1,9 +1,7 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0 which accompanies this
+ * distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.gui;
 
@@ -51,6 +49,7 @@ public abstract class DragableContainer extends ClickableContainer
     public boolean onMouseUp( MouseButtonEvent event )
     {
         if (this.dragging) {
+            this.dragging = false;
             this.getRoot().releaseMouse(this);
             this.drag(event, event.x - this.startX, event.y - this.startY);
             this.endDrag(event, event.x - this.startX, event.y - this.startY);
@@ -60,16 +59,16 @@ public abstract class DragableContainer extends ClickableContainer
         }
     }
 
-    public abstract boolean acceptDrag( MouseButtonEvent e );
+    public abstract boolean acceptDrag( MouseButtonEvent event );
 
-    public abstract void drag( MouseEvent mme, int dx, int dy );
+    public abstract void drag( MouseEvent event, int dx, int dy );
 
     public void endDrag( MouseButtonEvent e, int dx, int dy )
     {
     }
 
     @Override
-    public void onClick( MouseButtonEvent e )
+    public void onClick( MouseButtonEvent event )
     {
     }
 

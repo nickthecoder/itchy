@@ -864,7 +864,7 @@ public class Game implements InputListener, QuitListener, MessageListener
         rootContainer.reStyle();
         rootContainer.forceLayout();
         rootContainer.setPosition(0, 0, rootContainer.getRequiredWidth(), rootContainer.getRequiredHeight());
-
+        
         if (rootContainer.modal) {
             this.setModalListener(view);
         }

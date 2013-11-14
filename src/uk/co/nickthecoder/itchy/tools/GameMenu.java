@@ -15,33 +15,44 @@ import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Button;
 import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.Container;
+import uk.co.nickthecoder.itchy.gui.GridLayout;
 import uk.co.nickthecoder.itchy.gui.VerticalLayout;
 import uk.co.nickthecoder.itchy.gui.VerticalScroll;
 
-public class GameMenu
+public class GameMenu implements Page
 {
 
-    public GameMenu()
-    {
-    }
-
+    @Override
     public String getName()
     {
         return "Game Menu";
     }
 
-    public Component createForm()
+    @Override
+    public Component createPage()
     {
         Container result = new Container();
         result.setLayout(new VerticalLayout());
         result.setFill(true, true);
+        result.setXAlignment(0.5);
 
+        Container main = new Container();
+        result.addChild(main);
+        main.setExpansion(1);
+        main.setYAlignment(0.25);
+        
         Container menu = new Container();
-        menu.setLayout(new VerticalLayout());
+        menu.setFill(true, true);
+        menu.setYAlignment(0.25);
+        GridLayout grid = new GridLayout(menu, 2);
+        menu.setLayout(grid);
         menu.setYSpacing(10);
+        menu.setXSpacing(30);
 
         Container menuScroll = new VerticalScroll(menu);
-        result.addChild(menuScroll);
+        menuScroll.setYAlignment(0.25);
+        menuScroll.setFill(true, true);
+        main.addChild(menuScroll);
 
         File directory = new File(Itchy.getBaseDirectory(), "resources");
 
@@ -50,11 +61,8 @@ public class GameMenu
                 final File resourceFile = new File(dir, dir.getName() + ".itchy");
                 if (resourceFile.exists()) {
 
-                    Container two = new Container();
-                    menu.addChild(two);
-
-                    Button playButton = new Button(dir.getName());
-                    two.addChild(playButton);
+                    Button playButton = new Button("Play " + dir.getName());
+                    playButton.setXAlignment(0.5);
                     playButton.addActionListener(new ActionListener() {
                         @Override
                         public void action()
@@ -63,8 +71,7 @@ public class GameMenu
                         }
                     });
 
-                    Button editButton = new Button("Editor");
-                    two.addChild(editButton);
+                    Button editButton = new Button("Edit");
                     editButton.addActionListener(new ActionListener() {
                         @Override
                         public void action()
@@ -73,6 +80,7 @@ public class GameMenu
                         }
                     });
 
+                    grid.addRow(playButton, editButton);
                 }
             }
         }
@@ -98,7 +106,7 @@ public class GameMenu
         try {
             resources.load(resourceFile);
             Game game = resources.createGame();
-            
+
             Editor editor = new Editor(game);
             editor.start();
 

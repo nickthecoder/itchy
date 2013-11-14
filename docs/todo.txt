@@ -60,12 +60,15 @@ Create some tests for Views in the tests game.
 
 Follow up on the TODOs
 
+Update Class diagrams
+
+Finish the GameMenu (via launcher) - Use a table or grid?
+
 Comment View, Stage heirarchies and Component and Container.
 
 
 Actor,startEvent isn't elegant - its only used by the editor, so should be on design actor and designactorbehaviour?
 
-Update Class diagrams
 
 BUG: Rename a scene from scene designer does not rename
     and doesn't update the ScenesEditor table

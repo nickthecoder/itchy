@@ -38,6 +38,11 @@ public abstract class AbstractView implements View
         this.parent = parent;
     }
 
+    public Rect getPosition()
+    {
+        return this.position;
+    }
+    
     @Override
     public Rect getAbsolutePosition()
     {

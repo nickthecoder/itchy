@@ -6,6 +6,7 @@
 package uk.co.nickthecoder.itchy.gui;
 
 import uk.co.nickthecoder.itchy.Itchy;
+import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.Keys;
 import uk.co.nickthecoder.jame.event.ModifierKey;
@@ -71,7 +72,7 @@ public class RootContainer extends Container
 
             if (this.draggable && contains(event)) {
                 if ((event.button == 2) || ((event.button == 1) && Itchy.isShiftDown())) {
-                    this.captureMouse(this);
+                    captureMouse(this);
                     this.dragging = true;
                     this.dragStartX = event.x;
                     this.dragStartY = event.y;
@@ -258,13 +259,23 @@ public class RootContainer extends Container
     public void show()
     {
         this.view = Itchy.getGame().show(this);
+        center();
+        this.focus();
     }
 
     public void hide()
     {
         Itchy.getGame().hide(this.view);
     }
-
+    
+    public void center()
+    {
+        int width = this.getRequiredWidth();
+        int height = this.getRequiredHeight();
+        Rect position = this.view.getPosition();
+        setPosition((position.width - width) /2, (position.height - height) / 2, width, height);
+    }
+    
     public void captureMouse( Component component )
     {
         if (this.view != null) {

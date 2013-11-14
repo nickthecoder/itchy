@@ -6,9 +6,13 @@
 package uk.co.nickthecoder.itchy;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import uk.co.nickthecoder.itchy.editor.Editor;
+import uk.co.nickthecoder.itchy.gui.ActionListener;
+import uk.co.nickthecoder.itchy.gui.Button;
 import uk.co.nickthecoder.itchy.gui.Container;
 import uk.co.nickthecoder.itchy.gui.Notebook;
 import uk.co.nickthecoder.itchy.gui.RootContainer;
@@ -17,6 +21,7 @@ import uk.co.nickthecoder.itchy.gui.VerticalLayout;
 import uk.co.nickthecoder.itchy.tools.ForkGame;
 import uk.co.nickthecoder.itchy.tools.GameMenu;
 import uk.co.nickthecoder.itchy.tools.NewGameWizard;
+import uk.co.nickthecoder.itchy.tools.Page;
 
 public class Launcher extends Game
 {
@@ -51,6 +56,7 @@ public class Launcher extends Game
         this.root.setMaximumWidth(this.getWidth());
         this.root.setMaximumHeight(this.getHeight());
 
+
         createWindow();
 
         this.root.show();
@@ -59,21 +65,40 @@ public class Launcher extends Game
     private void createWindow()
     {
         this.root.setLayout(new VerticalLayout());
-        Container form = new Container();
-        this.root.addChild(form);
+        this.root.setFill(true, true);
 
         Notebook notebook = new Notebook();
-
-        GameMenu gameMenu = new GameMenu();
-        NewGameWizard newGameWizard = new NewGameWizard();
-        ForkGame forkGame = new ForkGame();
-
-        notebook.addPage(gameMenu.getName(), gameMenu.createForm());
-        notebook.addPage(newGameWizard.getName(), newGameWizard.createForm());
-        notebook.addPage(forkGame.getName(), forkGame.createForm());
-
+        notebook.setFill(true, true);
+        
+        List<Page> pages = new ArrayList<Page>();
+        pages.add( new GameMenu());
+        pages.add( new NewGameWizard());
+        pages.add( new ForkGame());
+        
+        for (Page page : pages) {
+            createNotebookPage( notebook, page );
+        }
+        
         this.root.addChild(notebook);
+    }
+    
+    private void createNotebookPage( Notebook notebook, final Page page )
+    {
+        final Container container = new Container();
+        container.addChild(page.createPage());
+        container.setFill(true, true);
+        notebook.addPage(page.getName(), container);
+        Button button = notebook.getTab(notebook.size()-1);
+        button.addActionListener(new ActionListener() {
 
+            @Override
+            public void action()
+            {
+                container.clear();
+                container.addChild(page.createPage());
+            }
+            
+        });
     }
 
     public static void main( String argv[] ) throws Exception

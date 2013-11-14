@@ -21,26 +21,33 @@ import uk.co.nickthecoder.itchy.gui.TextBox;
 import uk.co.nickthecoder.itchy.gui.VerticalLayout;
 import uk.co.nickthecoder.itchy.util.Util;
 
-public class ForkGame
+public class ForkGame implements Page
 {
+    private TextBox newID;
 
+    @Override
     public String getName()
     {
         return "Fork Game";
     }
-
-    private TextBox newID;
-
     private PickerButton<File> gamePickerButton;
 
-    public Component createForm()
+    @Override
+    public Component createPage()
     {
         Container result = new Container();
         result.setLayout(new VerticalLayout());
         result.setFill(true, true);
+        result.setXAlignment(0.5);
+
+        Container main = new Container();
+        result.addChild(main);
+        main.setExpansion(1);
+        main.setYAlignment(0.25);
 
         Container form = new Container();
-        result.addChild(form);
+        main.addChild(form);
+        form.setType("form");
 
         GridLayout grid = new GridLayout(form, 2);
         form.setLayout(grid);

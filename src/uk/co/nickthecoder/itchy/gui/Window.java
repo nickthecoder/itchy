@@ -1,24 +1,24 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0 which accompanies this
+ * distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.gui;
 
+import uk.co.nickthecoder.jame.event.MouseButtonEvent;
+import uk.co.nickthecoder.jame.event.MouseEvent;
+
 /**
- * A top-level Container, that has the appearance of a Window.
- * It is composed of a title bar and a client area.
- * The appearance of the window, such as the size and colour of the title bar and borders
- * are derived from the Game's Stylesheet.
- *
+ * A top-level Container, that has the appearance of a Window. It is composed of a title bar and a
+ * client area. The appearance of the window, such as the size and colour of the title bar and
+ * borders are derived from the Game's Stylesheet.
+ * 
  */
 public class Window extends RootContainer
 {
     public Container clientArea;
 
-    public Container titleBar;
+    public DragableContainer titleBar;
 
     public Label title;
 
@@ -30,7 +30,21 @@ public class Window extends RootContainer
         this.setLayout(new VerticalLayout());
         this.setFill(true, true);
 
-        this.titleBar = new Container();
+        this.titleBar = new DragableContainer() {
+
+            @Override
+            public boolean acceptDrag( MouseButtonEvent e )
+            {
+                return true;
+            }
+
+            @Override
+            public void drag( MouseEvent event, int dx, int dy )
+            {
+                Window.this.setPosition(Window.this.x + dx, Window.this.y + dy, Window.this.width, Window.this.height);
+            }
+
+        };
         this.titleBar.setType("titleBar");
 
         this.title = new Label(titleString);
@@ -41,13 +55,14 @@ public class Window extends RootContainer
 
         this.addChild(this.titleBar);
         this.addChild(this.clientArea);
+        this.draggable = true;
     }
 
     @Override
     public void ensureLayedOut()
     {
-        this.setPosition(0, 0, this.getRequiredWidth(), this.getRequiredHeight());
+        this.setPosition(this.x, this.y, this.getRequiredWidth(), this.getRequiredHeight());
         super.ensureLayedOut();
     }
-    
+
 }
