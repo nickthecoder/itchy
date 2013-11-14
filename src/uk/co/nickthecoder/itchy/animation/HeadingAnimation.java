@@ -13,45 +13,45 @@ import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.util.AbstractProperty;
 import uk.co.nickthecoder.itchy.util.Property;
 
-public class ForwardsAnimation extends NumericAnimation
+public class HeadingAnimation extends NumericAnimation
 {
     private static final List<AbstractProperty<Animation, ?>> properties =
-        AbstractProperty.<Animation> findAnnotations(ForwardsAnimation.class);
+        AbstractProperty.<Animation> findAnnotations(HeadingAnimation.class);
 
-    @Property(label="Forwards")
-    public double forwards;
 
-    @Property(label="Sidewards", aliases={"sideways"})
-    public double sidewards;
+    /**
+     * The total turn in degrees
+     */
+    @Property(label="Turn")
+    public double turn;
     
-    public ForwardsAnimation()
+    
+    public HeadingAnimation()
     {
-        this(200, NumericAnimation.linear, 0, 0);
+        this(200, linear, 1);
     }
 
-    public ForwardsAnimation( int ticks, Ease ease, double forwards, double sidewards )
+    public HeadingAnimation( int ticks, Ease ease, double turn)
     {
         super(ticks, ease);
-        this.forwards = forwards;
-        this.sidewards = sidewards;
+        this.turn = turn;
     }
-
+    
     @Override
     public List<AbstractProperty<Animation, ?>> getProperties()
     {
         return properties;
     }
-    
+
     @Override
     public String getName()
     {
-        return "Forwards";
+        return "Heading";
     }
-
+    
     @Override
     public void tick( Actor actor, double amount, double delta )
     {
-        actor.moveForwards(this.forwards * delta, this.sidewards * delta);
+        actor.adjustHeading(this.turn * delta );
     }
-
 }

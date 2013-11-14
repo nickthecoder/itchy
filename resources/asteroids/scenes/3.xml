@@ -1,39 +1,22 @@
-<scene showMouse="true" behaviour="uk.co.nickthecoder.itchy.PlainSceneBehaviour" background="#000000ff">
+<scene showMouse="false" behaviour="Play.js" background="#00000000">
   <properties/>
   <layer name="main">
     <actor costume="stars2" x="400" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="0"/>
-    <actor costume="stars2" x="400" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="0"/>
-    <actor costume="ship" x="401" y="305" direction="90.0" heading="90.0" startEvent="default" zOrder="1">
-      <property name="thrust" value="0.3"/>
-      <property name="bulletSpeed" value="14.0"/>
-      <property name="rotationSpeed" value="10.0"/>
-      <property name="firePeriod" value="0.2"/>
-    </actor>
-    <actor costume="ship" x="401" y="305" direction="90.0" heading="90.0" startEvent="default" zOrder="1">
-      <property name="thrust" value="0.3"/>
-      <property name="bulletSpeed" value="14.0"/>
-      <property name="rotationSpeed" value="10.0"/>
-      <property name="firePeriod" value="0.2"/>
-    </actor>
-    <actor costume="rock1" x="122" y="208" direction="0.0" heading="0.0" startEvent="default" zOrder="2">
+    <actor costume="rock1" x="621" y="170" direction="0.0" heading="0.0" startEvent="default" zOrder="2">
       <property name="vy" value="3.0"/>
       <property name="vx" value="4.0"/>
       <property name="rotationSpeed" value="10.0"/>
     </actor>
-    <actor costume="rock1" x="458" y="535" direction="0.0" heading="0.0" startEvent="default" zOrder="3">
-      <property name="vy" value="-4.0"/>
-      <property name="vx" value="1.0"/>
-      <property name="rotationSpeed" value="-3.0"/>
-    </actor>
-    <actor costume="rock1" x="458" y="535" direction="0.0" heading="0.0" startEvent="default" zOrder="3">
-      <property name="vy" value="-4.0"/>
-      <property name="vx" value="1.0"/>
-      <property name="rotationSpeed" value="-3.0"/>
-    </actor>
-    <actor costume="rock2" x="73" y="463" direction="0.0" heading="0.0" startEvent="default" zOrder="4">
+    <actor costume="rock2" x="164" y="428" direction="0.0" heading="0.0" startEvent="default" zOrder="4">
       <property name="vy" value="-2.0"/>
       <property name="vx" value="-3.0"/>
       <property name="rotationSpeed" value="2.0"/>
     </actor>
+    <actor costume="rock2" x="602" y="429" direction="0.0" heading="0.0" startEvent="default" zOrder="5">
+      <property name="vy" value="2.5"/>
+      <property name="vx" value="-3.0"/>
+      <property name="rotationSpeed" value="2.0"/>
+    </actor>
+    <actor costume="ship1" x="378" y="300" direction="90.0" heading="90.0" startEvent="default" zOrder="6"/>
   </layer>
 </scene>

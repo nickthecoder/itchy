@@ -190,6 +190,8 @@ public abstract class ScriptLanguage
 
     public abstract void tick( ScriptedGame game );
 
+    public abstract boolean startScene( ScriptedGame game, String sceneName );
+
     // ===== BEHAVIOUR =====
 
     public abstract Behaviour createBehaviour( ClassName className );

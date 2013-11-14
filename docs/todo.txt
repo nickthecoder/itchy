@@ -51,8 +51,6 @@ Vacuum bathroom
 TODO
 ====
 
-BUG : Start editor from inside Asteroids, then return to a blank screen.
-
 Test on windows.
 
 PACKAGE !!!
@@ -68,15 +66,18 @@ Create some tests for Views in the tests game.
 
 Follow up on the TODOs
 
-BUG: Duplicate scene doesn't copy its scenebehaviour
+Create an isometric stage
 
-
+Create a wrapped StageView (where the x and/or y wrap around)
 
 Create a ScaledStageView.
     Place the StageView's eventual blit into a protected method? wont work as its also scaling the clip area.
     
 How about one that rotates too?
 
+Explanatory games
+    e.g. Showing the different between heading and direction.
+    
 
 Comment View, Stage heirarchies and Component and Container.
 

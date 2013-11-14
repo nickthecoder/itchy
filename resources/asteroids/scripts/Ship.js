@@ -2,26 +2,28 @@ Ship = Class({
     Extends: BehaviourScript,
     
     init: function() {
-        this.rotationSpeed=10;
-        this.thrust=0.6;
-        this.bulletSpeed = 14;
-        this.firePeriod=0.1;
         this.vx=0;
         this.vy=0;
     },
 
     onBirth: function() {
+
+    	this.rotationSpeed = this.getCostumeProperties().rotationSpeed;
+    	this.thrust = this.getCostumeProperties().thrust;
+    	this.firePeriod = this.getCostumeProperties().firePeriod;
+    	
         this.fireTimer = new itchy.extras.Timer.createTimerSeconds(this.firePeriod);        
         new itchy.extras.Fragment().actor(this.actor).pieces(10).createPoses("fragment");
         sceneBehaviourScript.ship = this;
-    	for (var i = 0; i < 3; i ++) {
-    		new itchy.extras.Explosion(this.actor)
-    			.spread(i*120, 360 + i*120)
-    			.vx(this.vx).vy(this.vy)
-    			.distance(20)
-    			.speed(3,0).pose("warp").projectiles(20).projectilesPerTick(1).randomSpread(false).fade(3)
-    			.createActor();
-    	}
+		
+		new itchy.extras.Explosion(this.actor)
+			.distance(-30,-100).direction(0,360).speed(0,0).eventName("warp").projectiles(40)
+			.createActor();
+
+		new itchy.extras.Explosion(this.actor)
+			.distance(-60).direction(0,360).speed(4,2).pose("explosion").fade(3).projectiles(20).randomSpread(false)
+			.createActor();
+	
     },
 
     warp: function() {
@@ -29,9 +31,7 @@ Ship = Class({
     	this.vy = 0;
     	for (var i = 0; i < 3; i ++) {
     		new itchy.extras.Explosion(this.actor)
-    			.spread(i*120, 360 + i*120)
-    			.vx(this.vx).vy(this.vy)
-    			.distance(300)
+    			.spread(i*120, 360 + i*120).vx(this.vx).vy(this.vy).distance(300)
     			.speed(-6,0).pose("warp").projectiles(20).projectilesPerTick(1).randomSpread(false).alpha(0).fade(-3)
     			.createActor();
     	}
@@ -40,10 +40,10 @@ Ship = Class({
     
     tick: function() {
         if (Itchy.isKeyDown(Keys.LEFT)) {
-            this.actor.setDirection(this.actor.getHeading() + this.rotationSpeed);
+            this.actor.adjustDirection( this.rotationSpeed );
         }
         if (Itchy.isKeyDown(Keys.RIGHT)) {
-            this.actor.setDirection(this.actor.getHeading() - this.rotationSpeed);
+            this.actor.adjustDirection( -this.rotationSpeed );
         }
         if (Itchy.isKeyDown(Keys.UP)) {
             var theta = this.actor.getHeadingRadians();
@@ -82,29 +82,19 @@ Ship = Class({
         this.actor.deathEvent("explode");
     },
     
-    fire: function() {    	
-        var theta = this.actor.getHeadingRadians();
-        this.vx -= Math.cos(theta) * this.bulletSpeed / 20;
-        this.vy -= Math.sin(theta) * this.bulletSpeed / 20;
+    fire: function() {
+        var actor = this.actor.createCompanion("bullet");
 
-        // Oops, this shouldn't be like this look away!... (it should be a simple "create" method call, which doesn't exist yet).
-        var actor = new itchy.Actor(game.resources.getCostume("bullet"));
-        var behaviour = game.resources.scriptManager.createBehaviour( new itchy.util.ClassName( "Bullet.js" ) );
-        this.actor.getStage().addTop(actor);
-        actor.setBehaviour( behaviour );
-        // Ok, the nasty code has gone, you can look again ;-)
-
-        behaviour.behaviourScript.speed = this.bulletSpeed;
         actor.setDirection( this.actor.getHeading() );
         actor.moveTo( this.actor );
         actor.moveForwards(40);
-        actor.event("default");
+
+        var impulse = actor.getCostume().getProperties().values.impulse;
+        var theta = this.actor.getHeadingRadians();
+        this.vx -= Math.cos(theta) * impulse;
+        this.vy -= Math.sin(theta) * impulse;
     }
     
     
 });
-BehaviourScript.addProperty("Ship", "rotationSpeed", Double, "Rotation Speed (Deg per Tick)");
-BehaviourScript.addProperty("Ship", "thrust", Double, "Thrust (Pixels per Tick)");
-BehaviourScript.addProperty("Ship", "bulletSpeed", Double, "Bullet Speed (Pixels per Tick)");
-BehaviourScript.addProperty("Ship", "firePeriod", Double, "Fire Period (seconds)");
 

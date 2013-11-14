@@ -2,12 +2,6 @@
   <properties/>
   <layer name="main">
     <actor costume="stars1" x="400" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="0"/>
-    <actor costume="ship" x="400" y="242" direction="90.0" heading="90.0" startEvent="default" zOrder="1">
-      <property name="thrust" value="0.6"/>
-      <property name="bulletSpeed" value="14.0"/>
-      <property name="rotationSpeed" value="10.0"/>
-      <property name="firePeriod" value="0.1"/>
-    </actor>
     <text text="Congratulations, you have completed all of the levels." font="Boycott" size="22" color="#ffffff" xAlignment="0.0" yAlignment="0.5" x="65" y="459" direction="0.0" heading="0.0" startEvent="default" zOrder="3"/>
     <text text="But the fun doesn't have to end." font="Boycott" size="22" color="#ffffff" xAlignment="0.0" yAlignment="0.5" x="69" y="416" direction="0.0" heading="0.0" startEvent="default" zOrder="4"/>
     <text text="Why not create you own levels..." font="Boycott" size="22" color="#ffffff" xAlignment="0.0" yAlignment="0.5" x="71" y="368" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
@@ -17,5 +11,6 @@
     <text text="Click to exit" font="Boycott" size="69" color="#ffffff" xAlignment="0.5" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.SceneButton" costume="Button" x="400" y="116" direction="0.0" heading="0.0" startEvent="default" zOrder="7">
       <property name="sceneName" value="menu"/>
     </text>
+    <actor costume="ship1" x="393" y="283" direction="90.0" heading="90.0" startEvent="default" zOrder="8"/>
   </layer>
 </scene>

@@ -9,6 +9,11 @@ Menu = new Class({
         } else if (event.symbol == Keys.ESCAPE) {
             game.startScene("menu");
         }
-    }
+    },
+    
+    // The menu has flying rocks, but we don't care about them!
+    addRocks:function( diff ) {
+	}
+    
 });
 

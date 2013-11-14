@@ -38,7 +38,10 @@ GameScript = Class({
     
     onMessage: function( message ) {},
     
-    tick: function() {}
+    tick: function() {},
+    
+    startScene: function( sceneName ) { return game.normalStartScene( sceneName ); }
+    
     
 });
 
@@ -79,6 +82,10 @@ BehaviourScript = Class({
 
     releaseMouse: function() {
         this.actor.getLayer().releaseMouse( this.behaviour );
+    },
+    
+    getCostumeProperties: function() {
+        return this.actor.getCostume().getProperties().values;
     }
     
 });

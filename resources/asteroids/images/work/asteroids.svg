@@ -7,6 +7,7 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="744.09448819"
@@ -1055,6 +1056,18 @@
          stdDeviation="18.013654"
          id="feGaussianBlur3955" />
     </filter>
+    <filter
+       inkscape:collect="always"
+       id="filter3954"
+       x="-0.52955466"
+       width="2.0591093"
+       y="-0.52955466"
+       height="2.0591093">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="14.98846"
+         id="feGaussianBlur3956" />
+    </filter>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -1064,8 +1077,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.97159764"
-     inkscape:cx="495.78543"
-     inkscape:cy="329.67375"
+     inkscape:cx="417.56375"
+     inkscape:cy="220.57509"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -1186,6 +1199,13 @@
        inkscape:export-xdpi="30"
        inkscape:export-ydpi="30"
        transform="translate(472.75139,127.27922)" />
+    <image
+       y="445.65088"
+       x="-581.14496"
+       id="image3966"
+       xlink:href="file:///media/home/nick/projects/itchy/resources/asteroids/images/stars2.jpg"
+       height="600"
+       width="800" />
     <path
        style="fill:#b214c5;fill-opacity:1;stroke:none;filter:url(#filter4133)"
        inkscape:transform-center-x="16.706035"
@@ -1278,22 +1298,45 @@
        id="rect3159"
        width="355.5737"
        height="222.23355"
-       x="319.85364"
-       y="956.76245"
+       x="128.41637"
+       y="996.90253"
        rx="0"
-       ry="0" />
-    <path
-       sodipodi:type="arc"
-       style="fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter3953)"
-       id="path3931"
-       sodipodi:cx="659.7381"
-       sodipodi:cy="709.62769"
-       sodipodi:rx="33.964676"
-       sodipodi:ry="33.964676"
-       d="m 693.70277,709.62769 a 33.964676,33.964676 0 1 1 -67.92935,0 33.964676,33.964676 0 1 1 67.92935,0 z"
-       transform="translate(-144.09257,158.50183)"
-       inkscape:export-filename="/media/home/nick/projects/itchy/resources/asteroids/images/warp.png"
+       ry="0"
+       inkscape:export-filename="/media/home/nick/projects/itchy/resources/asteroids/images/rect3159.png"
        inkscape:export-xdpi="30"
        inkscape:export-ydpi="30" />
+    <g
+       id="g3933"
+       transform="translate(-59.695493,-26.760048)"
+       inkscape:export-filename="/media/home/nick/projects/itchy/resources/asteroids/images/warp.png"
+       inkscape:export-xdpi="30"
+       inkscape:export-ydpi="30">
+      <path
+         inkscape:export-ydpi="30"
+         inkscape:export-xdpi="30"
+         inkscape:export-filename="/media/home/nick/projects/itchy/resources/asteroids/images/warp.png"
+         transform="translate(-112.18636,153.35567)"
+         d="m 693.70277,709.62769 a 33.964676,33.964676 0 1 1 -67.92935,0 33.964676,33.964676 0 1 1 67.92935,0 z"
+         sodipodi:ry="33.964676"
+         sodipodi:rx="33.964676"
+         sodipodi:cy="709.62769"
+         sodipodi:cx="659.7381"
+         id="path3931"
+         style="fill:#c7166e;fill-opacity:1;stroke:none;filter:url(#filter3954)"
+         sodipodi:type="arc" />
+      <path
+         sodipodi:type="arc"
+         style="fill:#d47c80;fill-opacity:1;stroke:none;filter:url(#filter3953)"
+         id="path3163"
+         sodipodi:cx="659.7381"
+         sodipodi:cy="709.62769"
+         sodipodi:rx="33.964676"
+         sodipodi:ry="33.964676"
+         d="m 693.70277,709.62769 a 33.964676,33.964676 0 1 1 -67.92935,0 33.964676,33.964676 0 1 1 67.92935,0 z"
+         transform="matrix(0.56002849,0,0,0.56002849,176.02114,466.60086)"
+         inkscape:export-filename="/media/home/nick/projects/itchy/resources/asteroids/images/warp.png"
+         inkscape:export-xdpi="30"
+         inkscape:export-ydpi="30" />
+    </g>
   </g>
 </svg>

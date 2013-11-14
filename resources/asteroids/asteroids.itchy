@@ -1,5 +1,5 @@
 <resources>
-  <game className="uk.co.nickthecoder.itchy.Game" height="600" initialScene="menu" title="There's Too Many Asteroids" width="800"/>
+  <game className="Game.js" height="600" initialScene="menu" title="There's Too Many Asteroids" width="800"/>
   <fonts>
     <font name="BlackCasper" filename="fonts/BlackCasper/BlackCasper.ttf"/>
     <font name="Boycott" filename="fonts/Boycott/Boycott.ttf"/>
@@ -7,6 +7,7 @@
   <ninePatches/>
   <poses>
     <pose name="bullet1" filename="images/bullet1.png"/>
+    <pose name="explosion" filename="images/explosion.png"/>
     <pose name="fragment1" filename="images/fragment1.png"/>
     <pose name="fragment2" filename="images/fragment2.png"/>
     <pose name="rock1a" filename="images/rock1a.png"/>
@@ -27,10 +28,13 @@
     <sound name="woo" filename="sounds/woo.ogg"/>
   </sounds>
   <animations>
-    <animation name="bullet">
-      <compound finishedMessage="die" loops="1" sequence="true">
-        <alpha ease="linear" target="255.0" ticks="30"/>
-        <alpha ease="easeOut" target="0.0" ticks="10"/>
+    <animation name="bullet1">
+      <compound finishedMessage="die" loops="1" sequence="false">
+        <compound loops="1" sequence="true">
+          <alpha ease="linear" target="255.0" ticks="30"/>
+          <alpha ease="linear" target="0.0" ticks="10"/>
+        </compound>
+        <forwards ease="linear" forwards="400.0" sidewards="0.0" ticks="40"/>
       </compound>
     </animation>
     <animation name="fadeIn">
@@ -71,6 +75,18 @@
         <scale ease="linear" target="1.0" ticks="20"/>
       </compound>
     </animation>
+    <animation name="warp">
+      <compound loops="1" sequence="false">
+        <forwards ease="easeOutCubic" forwards="400.0" sidewards="0.0" ticks="200"/>
+        <heading ease="linear" ticks="150" turn="720.0"/>
+        <compound loops="1" sequence="true">
+          <scale ease="easeIn" target="2.0" ticks="100"/>
+          <scale ease="easeOut" target="0.5" ticks="100"/>
+        </compound>
+        <turn ease="easeIn" ticks="200" turn="1800.0"/>
+        <alpha ease="easeIn" target="0.0" ticks="100"/>
+      </compound>
+    </animation>
   </animations>
   <costumes>
     <costume name="Button" defaultZOrder="0">
@@ -81,9 +97,13 @@
       <animation name="mouseDown" animation="mouseDown"/>
       <animation name="mouseUp" animation="mouseUp"/>
     </costume>
-    <costume name="bullet" defaultZOrder="0" behaviour="Bullet.js">
+    <costume name="bullet" defaultZOrder="0" behaviour="Bullet.js" properties="BulletProperties.js">
+      <properties impulse="1.0"/>
+    </costume>
+    <costume name="bullet1" defaultZOrder="0" extends="bullet" behaviour="Bullet.js" properties="BulletProperties.js">
       <pose name="default" pose="bullet1"/>
-      <animation name="default" animation="bullet"/>
+      <animation name="default" animation="bullet1"/>
+      <properties impulse="1.0"/>
     </costume>
     <costume name="editor" defaultZOrder="0" extends="Button" behaviour="uk.co.nickthecoder.itchy.extras.MessageButton">
       <string name="default">Editor</string>
@@ -109,11 +129,18 @@
       <pose name="default" pose="rock2a2"/>
       <pose name="fragment" pose="fragment2"/>
     </costume>
-    <costume name="ship" defaultZOrder="0" behaviour="Ship.js">
-      <pose name="default" pose="ship1"/>
+    <costume name="ship" defaultZOrder="0" behaviour="Ship.js" properties="ShipProperties.js">
+      <pose name="explosion" pose="explosion"/>
       <pose name="warp" pose="warp"/>
+      <string name="bullet">bullet1</string>
       <animation name="default" animation="fadeIn"/>
       <animation name="fade" animation="fadeOut"/>
+      <animation name="warp" animation="warp"/>
+      <properties rotationSpeed="5.0" thrust="0.3" firePeriod="0.2"/>
+    </costume>
+    <costume name="ship1" defaultZOrder="0" extends="ship" behaviour="Ship.js" properties="ShipProperties.js">
+      <pose name="default" pose="ship1"/>
+      <properties rotationSpeed="3.0" thrust="0.3" firePeriod="0.2"/>
     </costume>
     <costume name="stars1" defaultZOrder="0">
       <pose name="default" pose="stars1"/>
@@ -125,6 +152,7 @@
   <scenes>
     <scene name="1"/>
     <scene name="2"/>
+    <scene name="3"/>
     <scene name="about"/>
     <scene name="completed"/>
     <scene name="menu"/>

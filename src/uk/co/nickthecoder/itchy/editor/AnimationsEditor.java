@@ -65,8 +65,7 @@ public class AnimationsEditor extends SubEditor<AnimationResource>
             AnimationResource animationResource = this.editor.resources
                 .getAnimationResource(animationName);
             String[] attributeNames = { "name" };
-            TableModelRow row = new ReflectionTableModelRow<AnimationResource>(animationResource,
-                attributeNames);
+            TableModelRow row = new ReflectionTableModelRow<AnimationResource>(animationResource, attributeNames);
             model.addRow(row);
         }
         return model;

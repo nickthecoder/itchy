@@ -73,6 +73,8 @@ public class Explosion extends Companion<Explosion>
     public double randomVy = 0;
 
     public double distance = 0;
+    
+    public double randomDistance = 0;
 
     public double speedForwards = 0;
 
@@ -210,6 +212,13 @@ public class Explosion extends Companion<Explosion>
     public Explosion distance( double distance )
     {
         this.distance = distance;
+        return this;
+    }
+
+    public Explosion distance( double from, double to )
+    {
+        this.distance = from;
+        this.randomDistance = to - from;
         return this;
     }
 
@@ -582,7 +591,7 @@ public class Explosion extends Companion<Explosion>
 
             Actor actor = projectile.createActor();
             actor.setHeading(actualHeading);
-            actor.moveForwards(this.distance);
+            actor.moveForwards(this.distance + random.nextDouble() * this.randomDistance);
 
             this.projectileCounter++;
             if (this.projectileCounter >= this.totalProjectiles) {

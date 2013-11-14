@@ -16,6 +16,7 @@ import uk.co.nickthecoder.itchy.animation.CompoundAnimation;
 import uk.co.nickthecoder.itchy.animation.ForwardsAnimation;
 import uk.co.nickthecoder.itchy.animation.Frame;
 import uk.co.nickthecoder.itchy.animation.FramedAnimation;
+import uk.co.nickthecoder.itchy.animation.HeadingAnimation;
 import uk.co.nickthecoder.itchy.animation.MoveAnimation;
 import uk.co.nickthecoder.itchy.animation.ScaleAnimation;
 import uk.co.nickthecoder.itchy.animation.TurnAnimation;
@@ -197,6 +198,9 @@ public class ResourcesWriter extends XMLWriter
 
         } else if (animation instanceof TurnAnimation) {
             return "turn";
+
+        } else if (animation instanceof HeadingAnimation) {
+            return "heading";
 
         } else if (animation instanceof ScaleAnimation) {
             return "scale";

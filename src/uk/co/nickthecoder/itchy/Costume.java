@@ -59,7 +59,24 @@ public class Costume
         this.fontChoices = new HashMap<String, List<FontResource>>();
         this.animationChoices = new HashMap<String, List<AnimationResource>>();
     }
-    
+
+    public Actor createActor( String startEvent )
+    {
+        Actor actor = new Actor(this, startEvent);
+        Behaviour behaviour;
+        try {
+            behaviour = AbstractBehaviour.createBehaviour(Itchy.getGame().resources, this.behaviourClassName);
+
+        } catch (Exception e) {
+            behaviour = new PlainBehaviour();
+            e.printStackTrace();
+        }
+        actor.setBehaviour(behaviour);
+        actor.event(startEvent);
+
+        return actor;
+    }
+
     public ClassName getPropertiesClassName()
     {
         return this.propertiesClassName;

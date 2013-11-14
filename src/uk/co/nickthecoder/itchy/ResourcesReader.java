@@ -18,6 +18,7 @@ import uk.co.nickthecoder.itchy.animation.CompoundAnimation;
 import uk.co.nickthecoder.itchy.animation.ForwardsAnimation;
 import uk.co.nickthecoder.itchy.animation.Frame;
 import uk.co.nickthecoder.itchy.animation.FramedAnimation;
+import uk.co.nickthecoder.itchy.animation.HeadingAnimation;
 import uk.co.nickthecoder.itchy.animation.MoveAnimation;
 import uk.co.nickthecoder.itchy.animation.ScaleAnimation;
 import uk.co.nickthecoder.itchy.animation.TurnAnimation;
@@ -194,8 +195,7 @@ public class ResourcesReader
                     "animation tag requires exactly one child (pingPong, frames, sequence, parallel etc)");
             }
 
-            AnimationResource ar = new AnimationResource(this.resources, itemName,
-                dummyAnimation.children.get(0));
+            AnimationResource ar = new AnimationResource(this.resources, itemName, dummyAnimation.children.get(0));
             this.resources.addAnimation(ar);
         }
     }
@@ -214,8 +214,7 @@ public class ResourcesReader
             if (extendsName != null) {
                 Costume base = this.resources.getCostume(extendsName);
                 if (base == null) {
-                    throw new XMLException("Failed to find base costume : " + extendsName +
-                        " for costume : " + costumeName);
+                    throw new XMLException("Failed to find base costume : " + extendsName + " for costume : " + costumeName);
                 }
                 costume.setExtendedFrom(base);
 
@@ -227,8 +226,7 @@ public class ResourcesReader
             if (this.resources.registerBehaviourClassName(behaviourClassName.name)) {
                 costume.behaviourClassName = behaviourClassName;
             } else {
-                throw new XMLException("Expected a subclass of Behaviour : " +
-                    costume.behaviourClassName);
+                throw new XMLException("Expected a subclass of Behaviour : " + costume.behaviourClassName);
             }
 
             ClassName propertiesClassName = new ClassName(
@@ -239,8 +237,7 @@ public class ResourcesReader
                 costume.setPropertiesClassName(this.scriptManager, propertiesClassName);
 
             } else {
-                throw new XMLException("Expected a name of a Properties class : " +
-                    propertiesClassName);
+                throw new XMLException("Expected a name of a Properties class : " + propertiesClassName);
             }
 
             for (Iterator<XMLTag> j = costumeTag.getTags("properties"); j.hasNext();) {
@@ -256,8 +253,7 @@ public class ResourcesReader
                 String poseName = poseTag.getAttribute("pose");
                 PoseResource poseResource = this.resources.getPoseResource(poseName);
                 if (poseResource == null) {
-                    throw new XMLException("Pose : " + poseName + " not found for costume : " +
-                        costumeName);
+                    throw new XMLException("Pose : " + poseName + " not found for costume : " + costumeName);
                 }
                 costume.addPose(itemName, poseResource);
 
@@ -271,8 +267,7 @@ public class ResourcesReader
 
                 SoundResource soundResource = this.resources.getSoundResource(soundName);
                 if (soundResource == null) {
-                    throw new XMLException("Sound : " + soundName + " not found for costume : " +
-                        costumeName);
+                    throw new XMLException("Sound : " + soundName + " not found for costume : " + costumeName);
                 }
                 ManagedSound managedSound = new ManagedSound(soundResource);
                 readProperties(soundTag, managedSound);
@@ -383,6 +378,9 @@ public class ResourcesReader
 
         } else if (tagName.equals("turn")) {
             return new TurnAnimation();
+
+        } else if (tagName.equals("heading")) { 
+            return new HeadingAnimation();
 
         } else if (tagName.equals("scale")) {
             return new ScaleAnimation();

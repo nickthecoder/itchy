@@ -39,11 +39,6 @@ public class ScriptedGame extends Game implements ScriptedObject
         return this.language.getProperty(this.scriptGame, name);
     }
 
-    private void handleException( Exception e )
-    {
-        e.printStackTrace();
-    }
-
     @Override
     public void onActivate()
     {
@@ -54,98 +49,88 @@ public class ScriptedGame extends Game implements ScriptedObject
     @Override
     public void onDeactivate()
     {
-        try {
-            this.language.onDeactivate(this);
-        } catch (Exception e) {
-            handleException(e);
-        }
+        this.language.onDeactivate(this);
+        super.onDeactivate();
     }
 
     @Override
     public boolean onQuit()
     {
-        try {
-            return this.language.onQuit(this);
-        } catch (Exception e) {
-            handleException(e);
-            return super.onQuit();
-        }
+        return this.language.onQuit(this);
     }
 
     @Override
     public boolean onKeyDown( KeyboardEvent ke )
     {
-        try {
-            return this.language.onKeyDown(this, ke);
-        } catch (Exception e) {
-            handleException(e);
-            return false;
+        if (this.language.onKeyDown(this, ke)) {
+            return true;
+        } else {
+            return super.onKeyDown(ke);
         }
     }
 
     @Override
     public boolean onKeyUp( KeyboardEvent ke )
     {
-        try {
-            return this.language.onKeyUp(this, ke);
-        } catch (Exception e) {
-            handleException(e);
-            return false;
+        if (this.language.onKeyUp(this, ke)) {
+            return true;
+        } else {
+            return super.onKeyUp(ke);
         }
     }
 
     @Override
-    public boolean onMouseDown( MouseButtonEvent mbe )
+    public boolean onMouseDown( MouseButtonEvent event )
     {
-        try {
-            return this.language.onMouseDown(this, mbe);
-        } catch (Exception e) {
-            handleException(e);
-            return false;
+        if (this.language.onMouseDown(this, event)) {
+            return true;
+        } else {
+            return super.onMouseDown(event);
         }
     }
 
     @Override
-    public boolean onMouseUp( MouseButtonEvent mbe )
+    public boolean onMouseUp( MouseButtonEvent event )
     {
-        try {
-            return this.language.onMouseUp(this, mbe);
-        } catch (Exception e) {
-            handleException(e);
-            return false;
+        if (this.language.onMouseUp(this, event)) {
+            return true;
+        } else {
+            return super.onMouseUp(event);
         }
     }
 
     @Override
-    public boolean onMouseMove( MouseMotionEvent mme )
+    public boolean onMouseMove( MouseMotionEvent event )
     {
-        try {
-            return this.language.onMouseMove(this, mme);
-        } catch (Exception e) {
-            handleException(e);
-            return false;
+        if (this.language.onMouseMove(this, event)) {
+            return true;
+        } else {
+            return super.onMouseMove(event);
         }
     }
 
     @Override
     public void onMessage( String message )
     {
-        try {
-            this.language.onMessage(this, message);
-        } catch (Exception e) {
-            handleException(e);
-        }
+        this.language.onMessage(this, message);
     }
 
     @Override
     public void tick()
     {
         super.tick();
-        try {
-            this.language.tick(this);
-        } catch (Exception e) {
-            handleException(e);
-        }
+        this.language.tick(this);
+    }
+
+    @Override
+    public boolean startScene( String sceneName )
+    {
+        return this.language.startScene(this, sceneName);
+    }
+
+    public boolean normalStartScene( String sceneName )
+    {
+        return super.startScene(sceneName);
     }
 
 }

@@ -142,6 +142,11 @@ public class Actor implements PropertySubject<Actor>
         return this.heading / 180 * Math.PI;
     }
 
+    public void adjustHeading( double degrees )
+    {
+        this.setHeading(this.heading + degrees);
+    }
+
     /**
      * Sets the heading and the appearance's direction.
      * 
@@ -163,15 +168,21 @@ public class Actor implements PropertySubject<Actor>
         setDirection(radians * 180 / Math.PI);
     }
 
+    public double getDirection()
+    {
+        return this.getAppearance().getDirection();
+    }
+    
     /**
-     * Sets the heading and the appearance's direction.
+     * Adjusts the heading by the given amount, and points the image in that direction too.
      * 
      * @param degrees
+     *        The number of degrees to turn by (positive is anticlockwise).
      */
-    public void setDirection( Actor other )
+    public void adjustDirection( double degrees )
     {
-        getAppearance().setDirection(other);
-        setHeading(getAppearance().getDirection());
+        adjustHeading(degrees);
+        getAppearance().setDirection(this.heading);
     }
 
     public Costume getCostume()
@@ -182,6 +193,21 @@ public class Actor implements PropertySubject<Actor>
     public void setCostume( Costume costume )
     {
         this.costume = costume;
+    }
+
+    public Actor createCompanion( String name )
+    {
+        return createCompanion(name, "default");
+    }
+
+    public Actor createCompanion( String name, String startEvent )
+    {
+        Costume costume = Itchy.getGame().resources.getCompanionCostume(this.costume, name);
+        Actor actor = costume.createActor(startEvent);
+        actor.moveTo(this);
+        getStage().add(actor);
+
+        return actor;
     }
 
     public double getCornerY()
@@ -317,6 +343,14 @@ public class Actor implements PropertySubject<Actor>
         this.deathEvent(this.costume, eventName);
     }
 
+    /**
+     * @return true iff not dying or dead.
+     */
+    public boolean isAlive()
+    {
+        return ! (this.dying || this.dead); 
+    }
+    
     public void deathEvent( Costume costume, String eventName )
     {
         this.dying = true;

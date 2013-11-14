@@ -6,9 +6,8 @@ Bullet = Class({
     },
     
     tick: function() {
-        this.actor.moveForwards(this.speed);
-        
-        if (this.actor.getX() < -10) this.actor.moveBy(820,0);
+    	// The bullet's animation will take care of moving forwards.    	
+    	if (this.actor.getX() < -10) this.actor.moveBy(820,0);
         if (this.actor.getX() > 810) this.actor.moveBy(-820,0);
         if (this.actor.getY() < -10) this.actor.moveBy(0,620);
         if (this.actor.getY() > 610) this.actor.moveBy(0,-620);
@@ -18,7 +17,6 @@ Bullet = Class({
         if (i.hasNext()) {
         	var behaviour = i.next().behaviourScript;
         	if (!behaviour.actor.isDying()) {
-        		stdout.println("Shot " + behaviour + " " + behaviour.actor);
         		behaviour.shot(this);
         		this.actor.kill();
         	}

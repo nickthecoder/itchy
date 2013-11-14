@@ -222,7 +222,7 @@
     <costume name="bomb" defaultZOrder="0">
       <pose name="default" pose="bomb1"/>
     </costume>
-    <costume name="bullet" defaultZOrder="0">
+    <costume name="bullet" defaultZOrder="0" behaviour="uk.co.nickthecoder.drunkinvaders.Bullet">
       <pose name="default" pose="bullet"/>
       <sound name="shot" sound="ricochet" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND" priority="1"/>
     </costume>
@@ -296,6 +296,7 @@
       <pose name="shielded5" pose="shielded5"/>
       <pose name="shielded6" pose="shielded6"/>
       <pose name="shielded7" pose="shielded7"/>
+      <string name="bullet">bullet</string>
       <string name="death">The earth is doomed</string>
       <string name="death">The aliens have won!</string>
       <sound name="death" sound="explode" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND" priority="1"/>

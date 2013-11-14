@@ -13,6 +13,7 @@ import uk.co.nickthecoder.itchy.animation.ColorAnimation;
 import uk.co.nickthecoder.itchy.animation.CompoundAnimation;
 import uk.co.nickthecoder.itchy.animation.ForwardsAnimation;
 import uk.co.nickthecoder.itchy.animation.FramedAnimation;
+import uk.co.nickthecoder.itchy.animation.HeadingAnimation;
 import uk.co.nickthecoder.itchy.animation.MoveAnimation;
 import uk.co.nickthecoder.itchy.animation.ScaleAnimation;
 import uk.co.nickthecoder.itchy.animation.TurnAnimation;
@@ -33,6 +34,7 @@ public abstract class AnimationTypePicker extends Window
         new ForwardsAnimation(),
         new AlphaAnimation(),
         new TurnAnimation(),
+        new HeadingAnimation(),
         new FramedAnimation(),
         new ColorAnimation(),
         new ScaleAnimation() };

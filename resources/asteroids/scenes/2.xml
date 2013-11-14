@@ -1,13 +1,7 @@
-<scene showMouse="false" behaviour="Play.js" background="#000000ff">
+<scene showMouse="false" behaviour="Play.js" background="#00000000">
   <properties/>
   <layer name="main">
     <actor costume="stars2" x="400" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="0"/>
-    <actor costume="ship" x="413" y="313" direction="90.0" heading="90.0" startEvent="default" zOrder="1">
-      <property name="thrust" value="0.3"/>
-      <property name="bulletSpeed" value="14.0"/>
-      <property name="rotationSpeed" value="10.0"/>
-      <property name="firePeriod" value="0.2"/>
-    </actor>
     <actor costume="rock1" x="621" y="170" direction="0.0" heading="0.0" startEvent="default" zOrder="2">
       <property name="vy" value="3.0"/>
       <property name="vx" value="4.0"/>
@@ -18,5 +12,6 @@
       <property name="vx" value="-3.0"/>
       <property name="rotationSpeed" value="2.0"/>
     </actor>
+    <actor costume="ship1" x="375" y="307" direction="90.0" heading="90.0" startEvent="default" zOrder="5"/>
   </layer>
 </scene>

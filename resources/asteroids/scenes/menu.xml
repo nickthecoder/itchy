@@ -1,16 +1,14 @@
 <scene showMouse="true" behaviour="Menu.js" background="#000000ff">
   <properties/>
   <layer name="main">
-    <actor costume="stars2" x="400" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="1" alpha="73.0"/>
-    <text text="There's Too Many" font="Boycott" size="76" color="#000000" xAlignment="0.5" yAlignment="0.5" x="414" y="550" direction="0.0" heading="0.0" startEvent="default" zOrder="2"/>
-    <text text="There's Too Many" font="Boycott" size="73" color="#6b6f2e" xAlignment="0.5" yAlignment="0.5" x="413" y="545" direction="0.0" heading="0.0" startEvent="default" zOrder="3"/>
-    <text text="Asteroids" font="Boycott" size="134" color="#3d2b0a" xAlignment="0.5" yAlignment="0.5" x="417" y="454" direction="0.0" heading="0.0" startEvent="default" zOrder="4" alpha="160.0"/>
-    <text text="Asteroids" font="Boycott" size="128" color="#cc9656" xAlignment="0.5" yAlignment="0.5" x="416" y="452" direction="0.0" heading="0.0" startEvent="default" zOrder="5" alpha="121.0"/>
+    <actor costume="stars2" x="400" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="-10"/>
+    <actor costume="stars2" x="400" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="-10"/>
+    <text text="There's Too Many" font="Boycott" size="76" color="#0a0a0a" xAlignment="0.5" yAlignment="0.5" x="425" y="549" direction="0.0" heading="0.0" startEvent="default" zOrder="1" alpha="160.0"/>
     <text text="Play" font="BlackCasper" size="58" color="#333364" xAlignment="0.5" yAlignment="0.5" x="380" y="328" direction="0.0" heading="0.0" startEvent="default" zOrder="6"/>
     <text text="Quit" font="BlackCasper" size="58" color="#333364" xAlignment="0.5" yAlignment="0.5" x="375" y="45" direction="0.0" heading="0.0" startEvent="default" zOrder="7"/>
     <text text="Editor" font="BlackCasper" size="58" color="#333364" xAlignment="0.5" yAlignment="0.5" x="377" y="171" direction="0.0" heading="0.0" startEvent="default" zOrder="8"/>
     <text text="About" font="BlackCasper" size="58" color="#333364" xAlignment="0.5" yAlignment="0.5" x="387" y="251" direction="0.0" heading="0.0" startEvent="default" zOrder="9"/>
-    <text text="About" font="BlackCasper" size="47" color="#5d8cc5" xAlignment="0.5" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.SceneButton" costume="Button" x="380" y="254" direction="0.0" heading="0.0" startEvent="default" zOrder="10">
+    <text text="About" font="BlackCasper" size="47" color="#5d8cc5" xAlignment="0.5" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.SceneButton" costume="Button" x="380" y="255" direction="0.0" heading="0.0" startEvent="default" zOrder="10">
       <property name="sceneName" value="about"/>
     </text>
     <text text="Quit" font="BlackCasper" size="47" color="#5d8cc5" xAlignment="0.5" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.QuitButton" costume="Button" x="374" y="46" direction="0.0" heading="0.0" startEvent="default" zOrder="12"/>
@@ -18,5 +16,28 @@
       <property name="sceneName" value="1"/>
     </text>
     <text text="Editor" font="BlackCasper" size="47" color="#5d8cc5" xAlignment="0.5" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.EditorButton" costume="editor" x="375" y="173" direction="0.0" heading="0.0" startEvent="default" zOrder="14"/>
+    <actor costume="rock2" x="135" y="404" direction="0.0" heading="0.0" startEvent="default" zOrder="19">
+      <property name="vy" value="2.0"/>
+      <property name="vx" value="3.0"/>
+      <property name="rotationSpeed" value="1.0"/>
+    </actor>
+    <text text="Asteroids" font="Boycott" size="128" color="#ff2e76" xAlignment="0.5" yAlignment="0.5" x="436" y="460" direction="0.0" heading="0.0" startEvent="default" zOrder="20" alpha="115.0"/>
+    <text text="There's Too Many" font="Boycott" size="73" color="#b7af2e" xAlignment="0.5" yAlignment="0.5" x="433" y="558" direction="0.0" heading="0.0" startEvent="default" zOrder="21" alpha="217.0"/>
+    <text text="Asteroids" font="Boycott" size="134" color="#00000a" xAlignment="0.5" yAlignment="0.5" x="444" y="467" direction="0.0" heading="0.0" startEvent="default" zOrder="22" alpha="160.0"/>
+    <actor costume="rock2" x="455" y="278" direction="0.0" heading="0.0" startEvent="default" zOrder="23">
+      <property name="vy" value="-0.3"/>
+      <property name="vx" value="2.0"/>
+      <property name="rotationSpeed" value="-1.3"/>
+    </actor>
+    <actor costume="rock1" x="326" y="261" direction="0.0" heading="0.0" startEvent="default" zOrder="24">
+      <property name="vy" value="-4.5"/>
+      <property name="vx" value="-0.3"/>
+      <property name="rotationSpeed" value="1.5"/>
+    </actor>
+    <actor costume="rock1" x="677" y="336" direction="0.0" heading="0.0" startEvent="default" zOrder="25">
+      <property name="vy" value="2.2"/>
+      <property name="vx" value="1.3"/>
+      <property name="rotationSpeed" value="-0.8"/>
+    </actor>
   </layer>
 </scene>

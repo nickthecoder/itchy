@@ -85,12 +85,12 @@ public class JavascriptLanguage extends ScriptLanguage
         bindings.put("sceneBehaviour", game.getSceneBehaviour());
     }
 
-    public void handleException( ScriptException e )
+    public void handleException( Exception e )
     {
         this.manager.resources.errorLog.log(e.getMessage());
     }
 
-    public void handleException( String activity, ScriptException e )
+    public void handleException( String activity, Exception e )
     {
         this.manager.resources.errorLog.log(activity + " : " + e.getMessage());
     }
@@ -152,7 +152,7 @@ public class JavascriptLanguage extends ScriptLanguage
     public void onDeactivate( ScriptedGame game )
     {
         try {
-            this.engine.eval("gameScript.onDeativate();");
+            this.engine.eval("gameScript.onDeactivate();");
         } catch (ScriptException e) {
             handleException("Game.onDeactivate", e);
         }
@@ -265,9 +265,23 @@ public class JavascriptLanguage extends ScriptLanguage
     {
         try {
             this.engine.eval("gameScript.tick();");
-
+                
         } catch (ScriptException e) {
             handleException("Game.tick", e);
+        }
+    }
+
+    @Override
+    public boolean startScene( ScriptedGame game, String sceneName )
+    {
+        try {
+            Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
+            bindings.put("arg", sceneName);
+            return (boolean) this.engine.eval("gameScript.startScene(arg);");
+
+        } catch (Exception e) {
+            handleException("Game.startScene", e);
+            return false;
         }
     }
 

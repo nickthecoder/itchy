@@ -534,7 +534,7 @@ public class Resources extends Loadable
         Costume result = this.getCostume(costumeName);
         return result;
     }
-
+    
     public Surface getThumbnail( Costume costume )
     {
         CostumeResource resource = this.getCostumeResource(costume);
