@@ -51,6 +51,12 @@ Vacuum bathroom
 TODO
 ====
 
+Test on windows.
+
+PACKAGE !!!
+
+
+
 Create some tests for Views in the tests game.
     Create a Stage and view in the middle of the screen
     Add buttons which scroll the view
@@ -60,12 +66,17 @@ Create some tests for Views in the tests game.
 
 Follow up on the TODOs
 
-Update Class diagrams
+BUG: Duplicate scene doesn't copy its scenebehaviour
 
-Finish the GameMenu (via launcher) - Use a table or grid?
+
+
+Create a ScaledStageView.
+    Place the StageView's eventual blit into a protected method? wont work as its also scaling the clip area.
+    
+How about one that rotates too?
+
 
 Comment View, Stage heirarchies and Component and Container.
-
 
 Actor,startEvent isn't elegant - its only used by the editor, so should be on design actor and designactorbehaviour?
 
