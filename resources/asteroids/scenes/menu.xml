@@ -15,7 +15,7 @@
     </text>
     <text text="Quit" font="BlackCasper" size="47" color="#5d8cc5" xAlignment="0.5" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.QuitButton" costume="Button" x="374" y="46" direction="0.0" heading="0.0" startEvent="default" zOrder="12"/>
     <text text="Play" font="BlackCasper" size="47" color="#5d8cc5" xAlignment="0.5" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.SceneButton" costume="play" x="378" y="329" direction="0.0" heading="0.0" startEvent="default" zOrder="13">
-      <property name="sceneName" value="play"/>
+      <property name="sceneName" value="1"/>
     </text>
     <text text="Editor" font="BlackCasper" size="47" color="#5d8cc5" xAlignment="0.5" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.EditorButton" costume="editor" x="375" y="173" direction="0.0" heading="0.0" startEvent="default" zOrder="14"/>
   </layer>

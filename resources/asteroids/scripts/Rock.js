@@ -11,6 +11,7 @@ Rock = Class({
     onBirth: function() {
         this.behaviour.addTag("shootable");
         this.behaviour.addTag("deadly");
+        sceneBehaviourScript.addRocks(1);
     },
     
     tick: function() {
@@ -34,7 +35,6 @@ Rock = Class({
             this.generation -= 1;
 
             for (var i = 0; i < 3; i ++ ) {
-            
                 // Oh no, more horrible code...
                 var actor = new itchy.Actor(this.actor.getCostume(), "" + this.generation);
                 var behaviour = game.resources.scriptManager.createBehaviour( new itchy.util.ClassName( "Rock.js" ) );
@@ -51,7 +51,9 @@ Rock = Class({
                 actor.moveForwards( this.generation * 20 );
             }
         }
+        sceneBehaviourScript.addRocks(-1);
         this.actor.deathEvent("explode");
+        this.behaviour.removeTag("shootable");
     }
 });
 BehaviourScript.addProperty("Rock", "rotationSpeed", Double, "Rotation Speed (Degrees per Tick)");

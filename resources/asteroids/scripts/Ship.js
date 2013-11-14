@@ -13,6 +13,29 @@ Ship = Class({
     onBirth: function() {
         this.fireTimer = new itchy.extras.Timer.createTimerSeconds(this.firePeriod);        
         new itchy.extras.Fragment().actor(this.actor).pieces(10).createPoses("fragment");
+        sceneBehaviourScript.ship = this;
+    	for (var i = 0; i < 3; i ++) {
+    		new itchy.extras.Explosion(this.actor)
+    			.spread(i*120, 360 + i*120)
+    			.vx(this.vx).vy(this.vy)
+    			.distance(20)
+    			.speed(3,0).pose("warp").projectiles(20).projectilesPerTick(1).randomSpread(false).fade(3)
+    			.createActor();
+    	}
+    },
+
+    warp: function() {
+    	this.vx = 0;
+    	this.vy = 0;
+    	for (var i = 0; i < 3; i ++) {
+    		new itchy.extras.Explosion(this.actor)
+    			.spread(i*120, 360 + i*120)
+    			.vx(this.vx).vy(this.vy)
+    			.distance(300)
+    			.speed(-6,0).pose("warp").projectiles(20).projectilesPerTick(1).randomSpread(false).alpha(0).fade(-3)
+    			.createActor();
+    	}
+    	this.actor.deathEvent("fade");
     },
     
     tick: function() {
@@ -33,6 +56,9 @@ Ship = Class({
                 this.fireTimer.reset();
             }
         }
+        if (Itchy.isKeyDown(Keys.x)) {
+        	sceneBehaviourScript.addRocks(-1);
+        }
         this.actor.moveBy(this.vx, this.vy);
 
         if (this.actor.getX() < -10) this.actor.moveBy(820,0);
@@ -52,17 +78,11 @@ Ship = Class({
     
     die: function() {
         new itchy.extras.Explosion(this.actor)
-            .speed(3,1)
-            .fade(3)
-            .spin(-5,5)
-            .rotate(true)
-            .pose("fragment")
-            .projectiles(40)
-            .createActor();
+            .speed(3,1).fade(3).spin(-5,5).rotate(true).pose("fragment").projectiles(40).createActor();
         this.actor.deathEvent("explode");
     },
     
-    fire: function() {
+    fire: function() {    	
         var theta = this.actor.getHeadingRadians();
         this.vx -= Math.cos(theta) * this.bulletSpeed / 20;
         this.vy -= Math.sin(theta) * this.bulletSpeed / 20;
@@ -80,6 +100,7 @@ Ship = Class({
         actor.moveForwards(40);
         actor.event("default");
     }
+    
     
 });
 BehaviourScript.addProperty("Ship", "rotationSpeed", Double, "Rotation Speed (Deg per Tick)");

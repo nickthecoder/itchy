@@ -1043,6 +1043,18 @@
          in2="result4"
          mode="multiply" />
     </filter>
+    <filter
+       inkscape:collect="always"
+       id="filter3953"
+       x="-0.63643725"
+       width="2.2728745"
+       y="-0.63643725"
+       height="2.2728745">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="18.013654"
+         id="feGaussianBlur3955" />
+    </filter>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -1051,9 +1063,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.49497475"
-     inkscape:cx="396.2132"
-     inkscape:cy="578.58885"
+     inkscape:zoom="0.97159764"
+     inkscape:cx="495.78543"
+     inkscape:cy="329.67375"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -1261,5 +1273,27 @@
        style="fill:#b214c5;fill-opacity:1;stroke:none;filter:url(#filter3936)"
        sodipodi:type="star"
        transform="translate(444.46712,519.2184)" />
+    <rect
+       style="fill:#000000;fill-opacity:1;stroke:none"
+       id="rect3159"
+       width="355.5737"
+       height="222.23355"
+       x="319.85364"
+       y="956.76245"
+       rx="0"
+       ry="0" />
+    <path
+       sodipodi:type="arc"
+       style="fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter3953)"
+       id="path3931"
+       sodipodi:cx="659.7381"
+       sodipodi:cy="709.62769"
+       sodipodi:rx="33.964676"
+       sodipodi:ry="33.964676"
+       d="m 693.70277,709.62769 a 33.964676,33.964676 0 1 1 -67.92935,0 33.964676,33.964676 0 1 1 67.92935,0 z"
+       transform="translate(-144.09257,158.50183)"
+       inkscape:export-filename="/media/home/nick/projects/itchy/resources/asteroids/images/warp.png"
+       inkscape:export-xdpi="30"
+       inkscape:export-ydpi="30" />
   </g>
 </svg>

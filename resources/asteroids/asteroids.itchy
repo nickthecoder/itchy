@@ -21,6 +21,7 @@
     <pose name="ship1" filename="images/ship1.png" direction="90.0"/>
     <pose name="stars1" filename="images/stars1.jpg"/>
     <pose name="stars2" filename="images/stars2.jpg"/>
+    <pose name="warp" filename="images/warp.png"/>
   </poses>
   <sounds>
     <sound name="woo" filename="sounds/woo.ogg"/>
@@ -30,6 +31,24 @@
       <compound finishedMessage="die" loops="1" sequence="true">
         <alpha ease="linear" target="255.0" ticks="30"/>
         <alpha ease="easeOut" target="0.0" ticks="10"/>
+      </compound>
+    </animation>
+    <animation name="fadeIn">
+      <compound loops="1" sequence="true">
+        <compound loops="1" sequence="false">
+          <scale ease="linear" target="0.1" ticks="1"/>
+          <alpha ease="linear" target="1.0" ticks="1"/>
+        </compound>
+        <compound loops="1" sequence="false">
+          <alpha ease="linear" target="255.0" ticks="60"/>
+          <scale ease="linear" target="1.0" ticks="60"/>
+        </compound>
+      </compound>
+    </animation>
+    <animation name="fadeOut">
+      <compound loops="1" sequence="true">
+        <forwards ease="linear" forwards="0.0" sidewards="0.0" ticks="30"/>
+        <alpha ease="linear" target="0.0" ticks="50"/>
       </compound>
     </animation>
     <animation name="hoverOut">
@@ -92,6 +111,9 @@
     </costume>
     <costume name="ship" defaultZOrder="0" behaviour="Ship.js">
       <pose name="default" pose="ship1"/>
+      <pose name="warp" pose="warp"/>
+      <animation name="default" animation="fadeIn"/>
+      <animation name="fade" animation="fadeOut"/>
     </costume>
     <costume name="stars1" defaultZOrder="0">
       <pose name="default" pose="stars1"/>
@@ -101,8 +123,10 @@
     </costume>
   </costumes>
   <scenes>
+    <scene name="1"/>
+    <scene name="2"/>
     <scene name="about"/>
+    <scene name="completed"/>
     <scene name="menu"/>
-    <scene name="play"/>
   </scenes>
 </resources>
