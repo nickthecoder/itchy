@@ -27,7 +27,7 @@ public class CostumeSceneActor extends SceneActor
     {
         String event = designActor ? "default" : this.startEvent;
         Actor actor = new Actor(this.costume, event);
-        if (this.activationDelay==0) {
+        if ((this.activationDelay==0) && (!designActor)) {
             actor.event(event);
         }
         

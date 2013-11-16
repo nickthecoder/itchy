@@ -5,10 +5,10 @@ Play = new Class({
     
     init: function()
     {
-        this.score = 0;
         this.rocks = 0; // count the rocks on the screen, when it goes down to zero, next level!
         this.endTimer = null;
         this.ship = null; // Set by Ship's onBirth.
+        game.loadScene("foreground", true);
     },
     
     onKeyDown: function(ke)
@@ -17,6 +17,10 @@ Play = new Class({
         if (ke.symbol == ke.ESCAPE) {
             game.startScene("menu");
             return true; // Return true to indicate that the key has been processed.
+        }
+        // Play again if dead an return pressed.
+        if ((ke.symbol == ke.RETURN) && (gameScript.lives == 0)) {
+        	gameScript.startGame();
         }
         return false;
     },

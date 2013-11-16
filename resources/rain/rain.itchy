@@ -16,6 +16,7 @@
     <pose name="droplet3" filename="images/droplet3.png"/>
     <pose name="sheep" filename="images/sheep.png" offsetX="25" offsetY="84"/>
     <pose name="sheepBones" filename="images/sheepBones.png" offsetX="25" offsetY="84"/>
+    <pose name="speed" filename="images/speed.png"/>
     <pose name="wally1" filename="images/wally1.png" offsetX="88" offsetY="3"/>
     <pose name="wally2" filename="images/wally2.png" offsetX="112" offsetY="41"/>
     <pose name="wally3" filename="images/wally3.png" offsetX="105" offsetY="41"/>
@@ -147,6 +148,26 @@
         </compound>
       </compound>
     </animation>
+    <animation name="wally_walk5">
+      <compound loops="1" sequence="true">
+        <compound loops="1" sequence="false">
+          <move ease="linear" ticks="240" dx="600.0" dy="0.0"/>
+          <compound loops="12" sequence="true">
+            <move ease="easeInOutQuad" ticks="10" dx="-5.0" dy="20.0"/>
+            <move ease="easeInOutQuad" ticks="10" dx="5.0" dy="-20.0"/>
+          </compound>
+        </compound>
+        <compound loops="1" sequence="false">
+          <move ease="linear" ticks="100" dx="400.0" dy="0.0"/>
+          <turn ease="easeIn" ticks="60" turn="-110.0"/>
+          <move ease="easeIn" ticks="100" dx="0.0" dy="-500.0"/>
+          <compound loops="1" sequence="true">
+            <move ease="easeIn" ticks="50" dx="0.0" dy="50.0"/>
+            <move ease="easeOut" ticks="50" dx="0.0" dy="-50.0"/>
+          </compound>
+        </compound>
+      </compound>
+    </animation>
   </animations>
   <costumes>
     <costume name="background" defaultZOrder="0">
@@ -206,6 +227,9 @@
       <sound name="click" sound="ItAintGunnaRain" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND" priority="1"/>
       <font name="default" font="Boycott"/>
     </costume>
+    <costume name="speed" defaultZOrder="0">
+      <pose name="default" pose="speed"/>
+    </costume>
     <costume name="wally" defaultZOrder="0" behaviour="Wally.js">
       <pose name="default" pose="wally3"/>
       <pose name="default" pose="wally4"/>
@@ -215,6 +239,7 @@
       <pose name="default" pose="wally6"/>
       <pose name="default" pose="wally7"/>
       <animation name="boo" animation="wally_boo"/>
+      <animation name="default" animation="wally_walk5"/>
       <animation name="default" animation="wally_walk4"/>
       <animation name="default" animation="wally_walk"/>
       <animation name="default" animation="wally_walk2"/>

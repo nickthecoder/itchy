@@ -71,7 +71,7 @@ public class RootContainer extends Container
             }
 
             if (this.draggable && contains(event)) {
-                if ((event.button == 2) || ((event.button == 1) && Itchy.isShiftDown())) {
+                if ((event.button == 2) || ((event.button == 1) && Itchy.isAltDown())) {
                     captureMouse(this);
                     this.dragging = true;
                     this.dragStartX = event.x;

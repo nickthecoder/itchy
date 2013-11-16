@@ -96,6 +96,7 @@ public class Resources extends Loadable
         registerBehaviourClassName(uk.co.nickthecoder.itchy.extras.NumberValue.class.getName());
         registerBehaviourClassName(uk.co.nickthecoder.itchy.extras.TextValue.class.getName());
         registerBehaviourClassName(uk.co.nickthecoder.itchy.extras.QuitButton.class.getName());
+        registerBehaviourClassName(uk.co.nickthecoder.itchy.extras.ProgressBar.class.getName());
 
         registerCostumePropertiesClassName(CostumeProperties.class.getName());
 

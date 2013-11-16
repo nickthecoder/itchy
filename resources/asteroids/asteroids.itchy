@@ -10,6 +10,7 @@
     <pose name="explosion" filename="images/explosion.png"/>
     <pose name="fragment1" filename="images/fragment1.png"/>
     <pose name="fragment2" filename="images/fragment2.png"/>
+    <pose name="life1" filename="images/life1.png"/>
     <pose name="rock1a" filename="images/rock1a.png"/>
     <pose name="rock1b" filename="images/rock1b.png"/>
     <pose name="rock1c" filename="images/rock1c.png"/>
@@ -55,6 +56,11 @@
         <alpha ease="linear" target="0.0" ticks="50"/>
       </compound>
     </animation>
+    <animation name="gameOverReveal">
+      <compound loops="1" sequence="true">
+        <alpha ease="easeInOut" target="255.0" ticks="30"/>
+      </compound>
+    </animation>
     <animation name="hoverOut">
       <compound loops="1" sequence="true">
         <scale ease="easeIn" target="1.0" ticks="20"/>
@@ -65,6 +71,18 @@
         <scale ease="easeOut" target="1.2" ticks="10"/>
       </compound>
     </animation>
+    <animation name="lifeAppear">
+      <compound loops="1" sequence="true">
+        <move ease="linear" ticks="0" dx="0.0" dy="120.0"/>
+        <move ease="linear" ticks="30" dx="0.0" dy="-60.0"/>
+        <move ease="bounce2" ticks="30" dx="0.0" dy="-60.0"/>
+      </compound>
+    </animation>
+    <animation name="lifeDisappear">
+      <compound loops="1" sequence="true">
+        <move ease="easeIn" ticks="60" dx="0.0" dy="120.0"/>
+      </compound>
+    </animation>
     <animation name="mouseDown">
       <compound loops="1" sequence="true">
         <scale ease="easeOut" target="1.5" ticks="5"/>
@@ -73,6 +91,12 @@
     <animation name="mouseUp">
       <compound loops="1" sequence="true">
         <scale ease="linear" target="1.0" ticks="20"/>
+      </compound>
+    </animation>
+    <animation name="shipDeath">
+      <compound loops="1" sequence="false">
+        <alpha ease="easeOut" target="0.0" ticks="70"/>
+        <color ease="linear" targetColor="#a50300ff" ticks="100"/>
       </compound>
     </animation>
     <animation name="warp">
@@ -97,37 +121,69 @@
       <animation name="mouseDown" animation="mouseDown"/>
       <animation name="mouseUp" animation="mouseUp"/>
     </costume>
+    <costume name="Game Over" defaultZOrder="0" behaviour="uk.co.nickthecoder.itchy.extras.Tagged">
+      <string name="default">Game Over</string>
+      <font name="default" font="BlackCasper"/>
+      <animation name="reveal" animation="gameOverReveal"/>
+    </costume>
     <costume name="bullet" defaultZOrder="0" behaviour="Bullet.js" properties="BulletProperties.js">
-      <properties impulse="1.0"/>
+      <properties impulse="1.0" strength="1.0"/>
     </costume>
     <costume name="bullet1" defaultZOrder="0" extends="bullet" behaviour="Bullet.js" properties="BulletProperties.js">
       <pose name="default" pose="bullet1"/>
       <animation name="default" animation="bullet1"/>
-      <properties impulse="1.0"/>
+      <properties impulse="1.0" strength="1.0"/>
     </costume>
     <costume name="editor" defaultZOrder="0" extends="Button" behaviour="uk.co.nickthecoder.itchy.extras.MessageButton">
       <string name="default">Editor</string>
       <font name="default" font="Boycott"/>
+    </costume>
+    <costume name="life1" defaultZOrder="0" behaviour="uk.co.nickthecoder.itchy.PlainBehaviour">
+      <pose name="default" pose="life1"/>
+      <animation name="appear" animation="lifeAppear"/>
+      <animation name="disappear" animation="lifeDisappear"/>
     </costume>
     <costume name="play" defaultZOrder="0" extends="Button">
       <string name="default">play</string>
       <sound name="click" sound="woo" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND" priority="1"/>
       <font name="default" font="BlackCasper"/>
     </costume>
-    <costume name="rock1" defaultZOrder="0" behaviour="Rock.js">
-      <pose name="0" pose="rock1c"/>
-      <pose name="1" pose="rock1b"/>
+    <costume name="rock1" defaultZOrder="0" behaviour="Rock.js" properties="RockProperties.js">
       <pose name="default" pose="rock1a"/>
       <pose name="fragment" pose="fragment1"/>
+      <string name="fragment">rock1b</string>
+      <properties pieces="3" points="10" strength="0" hitsRequired="1"/>
     </costume>
-    <costume name="rock2" defaultZOrder="0" behaviour="Rock.js">
-      <pose name="0" pose="rock2c1"/>
-      <pose name="0" pose="rock2c2"/>
-      <pose name="1" pose="rock2b1"/>
-      <pose name="1" pose="rock2b2"/>
+    <costume name="rock1b" defaultZOrder="0" behaviour="Rock.js" properties="RockProperties.js">
+      <pose name="default" pose="rock1b"/>
+      <pose name="fragment" pose="fragment1"/>
+      <string name="fragment">rock1c</string>
+      <properties pieces="2" points="20" strength="0" hitsRequired="1"/>
+    </costume>
+    <costume name="rock1c" defaultZOrder="0" behaviour="Rock.js" properties="RockProperties.js">
+      <pose name="default" pose="rock1c"/>
+      <pose name="fragment" pose="fragment1"/>
+      <properties pieces="0" points="50" strength="0" hitsRequired="1"/>
+    </costume>
+    <costume name="rock2" defaultZOrder="0" behaviour="Rock.js" properties="RockProperties.js">
       <pose name="default" pose="rock2a1"/>
       <pose name="default" pose="rock2a2"/>
       <pose name="fragment" pose="fragment2"/>
+      <string name="fragment">rock2b</string>
+      <properties pieces="3" points="100" strength="0" hitsRequired="3"/>
+    </costume>
+    <costume name="rock2b" defaultZOrder="0" behaviour="Rock.js" properties="RockProperties.js">
+      <pose name="default" pose="rock2b1"/>
+      <pose name="default" pose="rock2b2"/>
+      <pose name="fragment" pose="fragment2"/>
+      <string name="fragment">rock2c</string>
+      <properties pieces="2" points="200" strength="0" hitsRequired="3"/>
+    </costume>
+    <costume name="rock2c" defaultZOrder="0" behaviour="Rock.js" properties="RockProperties.js">
+      <pose name="default" pose="rock2c1"/>
+      <pose name="default" pose="rock2c2"/>
+      <pose name="fragment" pose="fragment2"/>
+      <properties pieces="0" points="400" strength="0" hitsRequired="3"/>
     </costume>
     <costume name="ship" defaultZOrder="0" behaviour="Ship.js" properties="ShipProperties.js">
       <pose name="explosion" pose="explosion"/>
@@ -140,6 +196,8 @@
     </costume>
     <costume name="ship1" defaultZOrder="0" extends="ship" behaviour="Ship.js" properties="ShipProperties.js">
       <pose name="default" pose="ship1"/>
+      <string name="life">life1</string>
+      <animation name="explode" animation="shipDeath"/>
       <properties rotationSpeed="3.0" thrust="0.3" firePeriod="0.2"/>
     </costume>
     <costume name="stars1" defaultZOrder="0">
@@ -155,6 +213,7 @@
     <scene name="3"/>
     <scene name="about"/>
     <scene name="completed"/>
+    <scene name="foreground"/>
     <scene name="menu"/>
   </scenes>
 </resources>

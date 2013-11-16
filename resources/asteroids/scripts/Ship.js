@@ -4,6 +4,8 @@ Ship = Class({
     init: function() {
         this.vx=0;
         this.vy=0;
+        this.lifeIcon = new Array();
+        this.killed = false;
     },
 
     onBirth: function() {
@@ -24,6 +26,15 @@ Ship = Class({
 			.distance(-60).direction(0,360).speed(4,2).pose("explosion").fade(3).projectiles(20).randomSpread(false)
 			.createActor();
 	
+		for (var i = 0; i < gameScript.lives; i ++ ) {
+			var actor = this.actor.createCompanion("life");
+			actor.moveTo( 30 + i * 40 , 560 );
+			if (game.getSceneName() == "1") {
+				actor.event("appear");
+			}
+			this.lifeIcon[i] = actor;
+		}
+	
     },
 
     warp: function() {
@@ -39,6 +50,7 @@ Ship = Class({
     },
     
     tick: function() {
+
         if (Itchy.isKeyDown(Keys.LEFT)) {
             this.actor.adjustDirection( this.rotationSpeed );
         }
@@ -56,15 +68,13 @@ Ship = Class({
                 this.fireTimer.reset();
             }
         }
-        if (Itchy.isKeyDown(Keys.x)) {
-        	sceneBehaviourScript.addRocks(-1);
-        }
         this.actor.moveBy(this.vx, this.vy);
 
         if (this.actor.getX() < -10) this.actor.moveBy(820,0);
         if (this.actor.getX() > 810) this.actor.moveBy(-820,0);
         if (this.actor.getY() < -10) this.actor.moveBy(0,620);
         if (this.actor.getY() > 610) this.actor.moveBy(0,-620);
+
         
         if ( ! this.actor.pixelOverlap("deadly").isEmpty() ) {
             this.die();
@@ -72,14 +82,38 @@ Ship = Class({
         var i = this.actor.pixelOverlap("shootable").iterator();
         while (i.hasNext()) {
             i.next().behaviourScript.shot(this);
-            this.actor.kill();
         }
+        
+        // For debugging.
+        if (Itchy.isKeyDown(Keys.x)) {
+        	sceneBehaviourScript.addRocks(-1);
+        }
+        
     },
     
     die: function() {
+   	
         new itchy.extras.Explosion(this.actor)
             .speed(3,1).fade(3).spin(-5,5).rotate(true).pose("fragment").projectiles(40).createActor();
+        
+        gameScript.lives -= 1;
+        this.killed = true;
+
+        this.lifeIcon[gameScript.lives].event("disappear");
         this.actor.deathEvent("explode");
+    },
+    
+    onDeath: function() {
+    	if (this.killed) {
+    		if (gameScript.lives > 0) {
+    			game.startScene(game.getSceneName());
+	    	} else {
+	    		for ( var i = itchy.AbstractBehaviour.allByTag( "gameOver" ).iterator(); i.hasNext();) {
+	    			var gameOver = i.next();
+	    			gameOver.event("reveal");
+	    		}
+	    	}
+    	}
     },
     
     fire: function() {

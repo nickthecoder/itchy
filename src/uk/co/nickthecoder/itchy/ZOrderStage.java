@@ -47,13 +47,15 @@ public class ZOrderStage extends AbstractStage
     @Override
     public void add( Actor actor )
     {
-        actor.removeFromStage();
+        if (actor.getStage() != null ) {
+            actor.getStage().remove(actor);
+        }
         actor.setStageAttribute(this);
         this.actors.add(actor);
 
         super.add(actor);
     }
-
+    
     @Override
     public void remove( Actor actor )
     {
@@ -138,7 +140,6 @@ public class ZOrderStage extends AbstractStage
                 return a.getZOrder() - b.getZOrder();
             }
         }
-
     }
     
     public Stage createDesignStage()

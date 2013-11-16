@@ -51,11 +51,13 @@ Vacuum bathroom
 TODO
 ====
 
+Asteroids
+    Test strength - create a hard rock, which can't be destroyed by the puny bullets.
+    Multiple guns
+
 Test on windows.
 
 PACKAGE !!!
-
-
 
 Create some tests for Views in the tests game.
     Create a Stage and view in the middle of the screen
@@ -73,6 +75,29 @@ Create a wrapped StageView (where the x and/or y wrap around)
 Create a ScaledStageView.
     Place the StageView's eventual blit into a protected method? wont work as its also scaling the clip area.
     
+Can I split Game into two parts, one which is fixed (like Actor), and another which is an interface (like Behaviour)?
+    Lets call them Game and Director (for the interface).
+    Director has :
+        attach(Game), createStageAndView?, onActivate, onDeactivate, startScene, onMouseXXX, onKeyXXX
+
+    Game has the rest, and calls the director's methods.
+
+    What about scene transition?
+        Currently I override startScene, and mess around
+        Put startScene,testScene into Director and a sub class will deal with SceneTransition?
+
+    Pause?
+        SceneTransition uses it, as well as Game.gameTimeMillis, and therefore many extras.
+        So it stays on Game.
+    
+    Tricky for Editor?
+    
+Rename Behaviour to Role
+
+Rename SceneBehaviour to SceneDirector / Director / AssistantDirector?
+
+Duplicate Animation
+
 How about one that rotates too?
 
 Explanatory games
@@ -139,6 +164,12 @@ Appearance can chop off part of the Pose, useful for the Rod in Thrust - instead
 
 What's Next
 ===========
+
+Create a dedicated pinkwino instance for Itchy
+    Editor tips.
+    Middle button to drag view.
+    Ctrl to select from any layer
+    Shift to select from below the current object 
 
 Add pose and nine patch : try to show the image sub directory if it exists.
     Copy images if outside of the game's directory

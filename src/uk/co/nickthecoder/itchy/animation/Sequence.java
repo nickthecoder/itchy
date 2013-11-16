@@ -25,10 +25,15 @@ public class Sequence implements SequenceOrParallel
     @Override
     public void start( Actor actor )
     {
-        this.index = 0;
-        this.currentAnimation = this.compoundAnimation.children.get(this.index);
-        if ( this.currentAnimation != null ) {
-            this.currentAnimation.start(actor);
+        for (this.index = 0; this.index < this.compoundAnimation.children.size(); this.index ++ ) {
+
+            this.currentAnimation = this.compoundAnimation.children.get(this.index);
+            if ( this.currentAnimation != null ) {
+                this.currentAnimation.start(actor);
+            }
+            if (! this.currentAnimation.isFinished()) {
+                break;
+            }
         }
     }
 

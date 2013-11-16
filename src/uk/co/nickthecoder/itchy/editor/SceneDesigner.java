@@ -1022,9 +1022,25 @@ public class SceneDesigner implements MouseListener, KeyListener
         }
     }
     
+    private int previousClickX;
+    private int previousClickY;
+    
+    private boolean isNearClick( MouseEvent event )
+    {
+        boolean result = (event.x - previousClickX) * (event.x - previousClickX) +
+            (event.y - previousClickY) * (event.y - previousClickY) < 10;
+        
+        previousClickX = event.x;
+        previousClickY = event.y;
+        
+        return result;
+    }
+    
     public boolean mouseDown( MouseButtonEvent event )
     {
-        if ((event.button == 2) || ((event.button == 1) && Itchy.isShiftDown())) {
+        boolean isNearClick = isNearClick( event );
+        
+        if ((event.button == 2) || ((event.button == 1) && Itchy.isAltDown())) {
             setMode(MODE_DRAG_SCROLL);
             beginDrag(event);
             return true;
@@ -1049,41 +1065,53 @@ public class SceneDesigner implements MouseListener, KeyListener
                 }
             }
 
-            boolean fromBottom = false; // Itchy.isShiftDown();
-
+            // Has the user repeatedly clicked to find the object BELOW the currently selected one?
+            // (or ABOVE, if shift is held down).
+            boolean searching = isNearClick && Itchy.isShiftDown() &&
+                (this.currentActor!= null) && (this.currentActor.hitting(event.x,  event.y)); 
+                
             if (Itchy.isCtrlDown()) {
-
-                for (StageView child : fromBottom ? this.designViews.getChildren() : Reversed.list(this.designViews.getChildren())) {
+                // Look at ALL stages, not only the current one.
+                
+                for (StageView child : Reversed.list(this.designViews.getChildren())) {
                     Stage stage = child.getStage();
 
-                    for (Iterator<Actor> i = fromBottom ?
-                        stage.getActors().iterator() :
-                        Reversed.list(stage.getActors()).iterator(); i.hasNext();) {
+                    for (Iterator<Actor> i = Reversed.list(stage.getActors()).iterator(); i.hasNext();) {
 
                         Actor actor = i.next();
 
                         if (actor.hitting(event.x, event.y)) {
-                            selectActor(actor);
-                            setMode(MODE_DRAG_ACTOR);
-                            beginDrag(event);
-                            return true;
+                            if (searching) {
+                                if (actor == this.currentActor) {
+                                    searching = false;
+                                }
+                            } else {
+                                selectActor(actor);
+                                setMode(MODE_DRAG_ACTOR);
+                                beginDrag(event);
+                                return true;
+                            }
                         }
                     }
                 }
 
             } else {
 
-                for (Iterator<Actor> i = fromBottom ?
-                    this.currentStageView.getStage().getActors().iterator() :
-                    Reversed.list(this.currentStageView.getStage().getActors()).iterator(); i.hasNext();) {
+                for (Iterator<Actor> i = Reversed.list(this.currentStageView.getStage().getActors()).iterator(); i.hasNext();) {
 
                     Actor actor = i.next();
 
                     if (actor.hitting(event.x, event.y)) {
-                        selectActor(actor);
-                        setMode(MODE_DRAG_ACTOR);
-                        beginDrag(event);
-                        return true;
+                        if (searching) {
+                            if (actor == this.currentActor) {
+                                searching = false;
+                            }
+                        } else {
+                            selectActor(actor);
+                            setMode(MODE_DRAG_ACTOR);
+                            beginDrag(event);
+                            return true;
+                        }
                     }
                 }
             }

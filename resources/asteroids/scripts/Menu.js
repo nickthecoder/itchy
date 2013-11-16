@@ -5,7 +5,7 @@ Menu = new Class({
     
     onKeyDown: function( event ) {
         if (event.symbol == Keys.RETURN) {
-            game.startScene("1");
+            gameScript.startGame();
         } else if (event.symbol == Keys.ESCAPE) {
             game.startScene("menu");
         }

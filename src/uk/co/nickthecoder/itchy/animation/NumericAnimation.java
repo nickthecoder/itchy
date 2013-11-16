@@ -141,6 +141,9 @@ public abstract class NumericAnimation extends AbstractAnimation
     {
         this.previous = 0;
         this.currentFrame = 0;
+        if (this.ticks == 0) {
+            this.tick( actor, 1, 1);
+        }
     }
 
     @Override

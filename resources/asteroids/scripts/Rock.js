@@ -5,7 +5,7 @@ Rock = Class({
         this.rotationSpeed = 0;
         this.vx = 0;
         this.vy = 0;
-        this.generation = 2;
+        this.hits = 0;
     },
     
     onBirth: function() {
@@ -25,31 +25,36 @@ Rock = Class({
     },
     
     shot: function(bullet) {
+    	// Small bullets have NO effect on strong rocks.
+    	if (bullet.getCostumeProperties().strength < this.getCostumeProperties().strength) {
+    		return;
+    	}
+    	
+    	this.hits += bullet.getCostumeProperties().strength;
+    	// Have we hit the rock enough times?
+    	if ( this.hits < this.getCostumeProperties().hitsRequired) {
+    		return;
+    	}
+    	
+    	gameScript.addPoints(this.getCostumeProperties().points);
+    	
         new itchy.extras.Explosion(this.actor)
             .spread( bullet.actor.getHeading() - 120, bullet.actor.getHeading() + 120 ).randomSpread()
-            .speed(5,3,0,0).fade(3).distance(this.generation * 20)
-            .rotate(true).pose("fragment").projectiles(5 + this.generation * 3)
+            .speed(5,3,0,0).fade(3).distance(40)
+            .rotate(true).pose("fragment").projectiles(8	)
             .createActor();
+
+        var pieces = this.getCostumeProperties().pieces;
+        for (var i = 0; i < pieces; i ++ ) {
+            var actor = this.actor.createCompanion("fragment");
+            var behaviour = actor.getBehaviour().behaviourScript;
             
-        if (this.generation > 0) {
-            this.generation -= 1;
-
-            for (var i = 0; i < 3; i ++ ) {
-                // Oh no, more horrible code...
-                var actor = new itchy.Actor(this.actor.getCostume(), "" + this.generation);
-                var behaviour = game.resources.scriptManager.createBehaviour( new itchy.util.ClassName( "Rock.js" ) );
-                actor.setBehaviour( behaviour );
-                this.actor.getStage().addTop(actor);
-                // Ok, the nasty code has gone, you can look again ;-)
-
-                behaviour.behaviourScript.generation = this.generation;
-                behaviour.behaviourScript.rotationSpeed = 3 * i - this.rotationSpeed;
-                behaviour.behaviourScript.vx = itchy.util.Util.randomBetween( -4, 4 );
-                behaviour.behaviourScript.vy = itchy.util.Util.randomBetween( -4, 4 );
-                actor.setDirection( this.actor.getHeading() + i * 120 );
-                actor.moveTo(this.actor);
-                actor.moveForwards( this.generation * 20 );
-            }
+            behaviour.rotationSpeed = 3 * i - this.rotationSpeed;
+            behaviour.vx = itchy.util.Util.randomBetween( -4, 4 );
+            behaviour.vy = itchy.util.Util.randomBetween( -4, 4 );
+            
+            actor.setDirection( this.actor.getHeading() + i * 120 );
+            actor.moveForwards( 40 );
         }
         sceneBehaviourScript.addRocks(-1);
         this.actor.deathEvent("explode");

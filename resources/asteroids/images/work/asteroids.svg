@@ -7,7 +7,6 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="744.09448819"
@@ -1046,27 +1045,63 @@
     </filter>
     <filter
        inkscape:collect="always"
-       id="filter3953"
-       x="-0.63643725"
-       width="2.2728745"
-       y="-0.63643725"
-       height="2.2728745">
+       id="filter4096"
+       x="-0.19692706"
+       width="1.3938541"
+       y="-0.19180442"
+       height="1.3836088">
       <feGaussianBlur
          inkscape:collect="always"
-         stdDeviation="18.013654"
-         id="feGaussianBlur3955" />
+         stdDeviation="8.5051278"
+         id="feGaussianBlur4098" />
     </filter>
     <filter
        inkscape:collect="always"
-       id="filter3954"
-       x="-0.52955466"
-       width="2.0591093"
-       y="-0.52955466"
-       height="2.0591093">
+       id="filter4132"
+       x="-0.1296706"
+       width="1.2593412"
+       y="-0.14305061"
+       height="1.2861012">
       <feGaussianBlur
          inkscape:collect="always"
-         stdDeviation="14.98846"
-         id="feGaussianBlur3956" />
+         stdDeviation="6.9295876"
+         id="feGaussianBlur4134" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       id="filter4136"
+       x="-0.10156705"
+       width="1.2031341"
+       y="-0.11278524"
+       height="1.2255705">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="4.9204073"
+         id="feGaussianBlur4138" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       id="filter4144"
+       x="-0.16995554"
+       width="1.3399111"
+       y="-0.16066963"
+       height="1.3213393">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="4.3467695"
+         id="feGaussianBlur4146" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       id="filter4156"
+       x="-0.26720648"
+       width="1.534413"
+       y="-0.26720648"
+       height="1.534413">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="9.0751183"
+         id="feGaussianBlur4158" />
     </filter>
   </defs>
   <sodipodi:namedview
@@ -1076,9 +1111,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.97159764"
-     inkscape:cx="417.56375"
-     inkscape:cy="220.57509"
+     inkscape:zoom="0.24289941"
+     inkscape:cx="483.92586"
+     inkscape:cy="84.232995"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -1199,13 +1234,6 @@
        inkscape:export-xdpi="30"
        inkscape:export-ydpi="30"
        transform="translate(472.75139,127.27922)" />
-    <image
-       y="445.65088"
-       x="-581.14496"
-       id="image3966"
-       xlink:href="file:///media/home/nick/projects/itchy/resources/asteroids/images/stars2.jpg"
-       height="600"
-       width="800" />
     <path
        style="fill:#b214c5;fill-opacity:1;stroke:none;filter:url(#filter4133)"
        inkscape:transform-center-x="16.706035"
@@ -1298,8 +1326,8 @@
        id="rect3159"
        width="355.5737"
        height="222.23355"
-       x="128.41637"
-       y="996.90253"
+       x="338.37982"
+       y="1042.1887"
        rx="0"
        ry="0"
        inkscape:export-filename="/media/home/nick/projects/itchy/resources/asteroids/images/rect3159.png"
@@ -1307,36 +1335,121 @@
        inkscape:export-ydpi="30" />
     <g
        id="g3933"
-       transform="translate(-59.695493,-26.760048)"
+       transform="translate(47.74897,-14.671546)"
        inkscape:export-filename="/media/home/nick/projects/itchy/resources/asteroids/images/warp.png"
        inkscape:export-xdpi="30"
        inkscape:export-ydpi="30">
       <path
-         inkscape:export-ydpi="30"
+         sodipodi:type="star"
+         style="opacity:0.85185182;fill:#222277;fill-opacity:1;stroke:none;filter:url(#filter4132)"
+         id="path4100"
+         sodipodi:sides="3"
+         sodipodi:cx="-193.58878"
+         sodipodi:cy="963.57336"
+         sodipodi:r1="74.290352"
+         sodipodi:r2="31.314283"
+         sodipodi:arg1="0.60430551"
+         sodipodi:arg2="1.6515031"
+         inkscape:flatsided="false"
+         inkscape:rounded="0"
+         inkscape:randomized="0"
+         d="m -132.45548,1005.7845 -63.65783,-10.99878 -64.59799,0.62509 41.3541,-49.62993 31.75765,-56.25605 22.30373,60.62867 z"
+         transform="translate(764.57786,-88.458604)"
+         inkscape:transform-center-x="2.9946123"
+         inkscape:transform-center-y="-15.918723" />
+      <path
+         sodipodi:type="star"
+         style="opacity:0.85185182;fill:#3d1f5d;fill-opacity:1;stroke:none;filter:url(#filter4096)"
+         id="path4076"
+         sodipodi:sides="3"
+         sodipodi:cx="-192.13322"
+         sodipodi:cy="963.57336"
+         sodipodi:r1="62.859074"
+         sodipodi:r2="26.495861"
+         sodipodi:arg1="0.8345389"
+         sodipodi:arg2="1.8817364"
+         inkscape:flatsided="false"
+         inkscape:rounded="0"
+         inkscape:randomized="0"
+         d="m -149.92214,1010.1511 -50.31759,-21.35245 -53.33656,-11.95829 43.65058,-32.90008 37.02446,-40.21167 6.66702,54.25255 z"
+         transform="matrix(0.6594895,0,0,0.6594895,722.44335,216.35936)"
+         inkscape:transform-center-x="6.3416415"
+         inkscape:transform-center-y="-4.3747211" />
+      <path
+         sodipodi:type="star"
+         style="opacity:0.85185182;fill:#0d0c2b;fill-opacity:1;stroke:none;filter:url(#filter4136)"
+         id="path4066"
+         sodipodi:sides="3"
+         sodipodi:cx="-165.93324"
+         sodipodi:cy="975.21777"
+         sodipodi:r1="67.286942"
+         sodipodi:r2="28.362263"
+         sodipodi:arg1="0.67811931"
+         sodipodi:arg2="0.67943868"
+         inkscape:flatsided="false"
+         inkscape:rounded="0"
+         inkscape:randomized="0"
+         d="m -113.53327,1017.4289 -30.33624,-24.38952 -84.81959,6.45255 36.29002,-14.07721 36.82173,-76.68219 -5.95379,38.46669 z"
+         transform="matrix(0.57221943,0.82010056,-0.82010056,0.57221943,1468.6271,456.06923)"
+         inkscape:transform-center-x="-2.3165725"
+         inkscape:transform-center-y="14.775649"
          inkscape:export-xdpi="30"
-         inkscape:export-filename="/media/home/nick/projects/itchy/resources/asteroids/images/warp.png"
-         transform="translate(-112.18636,153.35567)"
-         d="m 693.70277,709.62769 a 33.964676,33.964676 0 1 1 -67.92935,0 33.964676,33.964676 0 1 1 67.92935,0 z"
-         sodipodi:ry="33.964676"
-         sodipodi:rx="33.964676"
-         sodipodi:cy="709.62769"
-         sodipodi:cx="659.7381"
-         id="path3931"
-         style="fill:#c7166e;fill-opacity:1;stroke:none;filter:url(#filter3954)"
+         inkscape:export-ydpi="30"
+         inkscape:export-filename="/media/home/nick/projects/itchy/resources/asteroids/images/warp.png" />
+      <path
+         sodipodi:type="star"
+         style="opacity:0.85185182;fill:#4846c8;fill-opacity:1;stroke:none;filter:url(#filter4144)"
+         id="path4078"
+         sodipodi:sides="3"
+         sodipodi:cx="-180.48878"
+         sodipodi:cy="962.1178"
+         sodipodi:r1="37.956223"
+         sodipodi:r2="15.999009"
+         sodipodi:arg1="0.56672922"
+         sodipodi:arg2="1.6139268"
+         inkscape:flatsided="false"
+         inkscape:rounded="0"
+         inkscape:randomized="0"
+         d="m -148.46658,982.49556 -32.71204,-4.39363 -32.96893,1.55903 20.16102,-26.13264 15.13431,-29.33145 12.55101,30.52627 z"
+         transform="matrix(0.91737315,-0.39802827,0.39802827,0.91737315,321.59236,-92.445917)"
+         inkscape:transform-center-x="-6.7961336"
+         inkscape:transform-center-y="-2.9741412" />
+    </g>
+    <g
+       id="g4164"
+       transform="translate(209.2571,-354.56285)"
+       inkscape:export-filename="/media/home/nick/projects/itchy/resources/asteroids/images/explosion.png"
+       inkscape:export-xdpi="30"
+       inkscape:export-ydpi="30">
+      <path
+         d="m 270.73318,1202.2843 c 0,22.5087 -18.24688,40.7555 -40.75553,40.7555 -22.50866,0 -40.75554,-18.2468 -40.75554,-40.7555 0,-22.5087 18.24688,-40.7555 40.75554,-40.7555 22.50865,0 40.75553,18.2468 40.75553,40.7555 z"
+         sodipodi:ry="40.755531"
+         sodipodi:rx="40.755531"
+         sodipodi:cy="1202.2843"
+         sodipodi:cx="229.97765"
+         id="path4150"
+         style="fill:#ff1b00;fill-opacity:1;stroke:none;filter:url(#filter4156)"
          sodipodi:type="arc" />
       <path
+         transform="matrix(0.72069354,0,0,0.72069354,64.234242,335.80577)"
          sodipodi:type="arc"
-         style="fill:#d47c80;fill-opacity:1;stroke:none;filter:url(#filter3953)"
-         id="path3163"
-         sodipodi:cx="659.7381"
-         sodipodi:cy="709.62769"
-         sodipodi:rx="33.964676"
-         sodipodi:ry="33.964676"
-         d="m 693.70277,709.62769 a 33.964676,33.964676 0 1 1 -67.92935,0 33.964676,33.964676 0 1 1 67.92935,0 z"
-         transform="matrix(0.56002849,0,0,0.56002849,176.02114,466.60086)"
-         inkscape:export-filename="/media/home/nick/projects/itchy/resources/asteroids/images/warp.png"
-         inkscape:export-xdpi="30"
-         inkscape:export-ydpi="30" />
+         style="fill:#ffd200;fill-opacity:1;stroke:none;filter:url(#filter4156)"
+         id="path4160"
+         sodipodi:cx="229.97765"
+         sodipodi:cy="1202.2843"
+         sodipodi:rx="40.755531"
+         sodipodi:ry="40.755531"
+         d="m 270.73318,1202.2843 c 0,22.5087 -18.24688,40.7555 -40.75553,40.7555 -22.50866,0 -40.75554,-18.2468 -40.75554,-40.7555 0,-22.5087 18.24688,-40.7555 40.75554,-40.7555 22.50865,0 40.75553,18.2468 40.75553,40.7555 z" />
+      <path
+         d="m 270.73318,1202.2843 c 0,22.5087 -18.24688,40.7555 -40.75553,40.7555 -22.50866,0 -40.75554,-18.2468 -40.75554,-40.7555 0,-22.5087 18.24688,-40.7555 40.75554,-40.7555 22.50865,0 40.75553,18.2468 40.75553,40.7555 z"
+         sodipodi:ry="40.755531"
+         sodipodi:rx="40.755531"
+         sodipodi:cy="1202.2843"
+         sodipodi:cx="229.97765"
+         id="path4162"
+         style="fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter4156)"
+         sodipodi:type="arc"
+         transform="matrix(0.46466262,0,0,0.46466262,123.11563,643.62773)" />
     </g>
   </g>
 </svg>

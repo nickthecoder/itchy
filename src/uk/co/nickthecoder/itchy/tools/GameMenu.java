@@ -37,6 +37,7 @@ public class GameMenu implements Page
         result.setXAlignment(0.5);
 
         Container main = new Container();
+        main.setFill(true,true);
         result.addChild(main);
         main.setExpansion(1);
         main.setYAlignment(0.25);

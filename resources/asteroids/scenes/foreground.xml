@@ -1,0 +1,19 @@
+<scene showMouse="false" behaviour="uk.co.nickthecoder.itchy.PlainSceneBehaviour" background="#00000000">
+  <properties/>
+  <layer name="main">
+    <text text="Game Over" font="BlackCasper" size="103" color="#230009" xAlignment="0.5" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.Tagged" costume="Game Over" x="419" y="336" direction="0.0" heading="0.0" startEvent="default" zOrder="99" alpha="0.0">
+      <property name="tag" value="gameOver"/>
+    </text>
+    <text text="000000" font="BlackCasper" size="49" color="#ffffff" xAlignment="0.5" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.NumberValue" x="710" y="565" direction="0.0" heading="0.0" startEvent="default" zOrder="100" alpha="116.0">
+      <property name="formatPattern" value="00000"/>
+      <property name="nullValue" value="??"/>
+      <property name="errorValue" value="?"/>
+      <property name="quiet" value="false"/>
+      <property name="updateInterval" value="0.0"/>
+      <property name="access" value="gameScript.score"/>
+    </text>
+    <text text="Game Over" font="BlackCasper" size="94" color="#7a0007" xAlignment="0.5" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.Tagged" costume="Game Over" x="419" y="334" direction="0.0" heading="0.0" startEvent="default" zOrder="100" alpha="0.0">
+      <property name="tag" value="gameOver"/>
+    </text>
+  </layer>
+</scene>

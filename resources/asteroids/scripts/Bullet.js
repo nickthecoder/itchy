@@ -4,7 +4,7 @@ Bullet = Class({
     init: function() {
         this.speed = 1;
     },
-    
+
     tick: function() {
     	// The bullet's animation will take care of moving forwards.    	
     	if (this.actor.getX() < -10) this.actor.moveBy(820,0);

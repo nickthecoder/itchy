@@ -17,26 +17,26 @@ public class ScriptedGame extends Game implements ScriptedObject
 {
     private ScriptLanguage language;
 
-    public Object scriptGame;
+    public Object gameScript;
 
     public ScriptedGame( GameManager gameManager, ScriptLanguage language, Object scriptInstance )
     {
         super(gameManager);
         this.language = language;
-        this.scriptGame = scriptInstance;
+        this.gameScript = scriptInstance;
     }
 
     @Override
     public Object getScriptedObject()
     {
-        return this.scriptGame;
+        return this.gameScript;
     }
 
     @Override
     public Object getProperty( String name )
         throws ScriptException
     {
-        return this.language.getProperty(this.scriptGame, name);
+        return this.language.getProperty(this.gameScript, name);
     }
 
     @Override

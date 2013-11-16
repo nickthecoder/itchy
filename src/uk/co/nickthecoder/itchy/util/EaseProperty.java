@@ -35,7 +35,6 @@ public class EaseProperty<S> extends AbstractProperty<S, Ease>
     public Component createComponent( final S subject, boolean autoUpdate )
     {
         final EasePickerButton button = new EasePickerButton(getSafeValue(subject));
-        System.out.println("Autoupdate? " + autoUpdate);
 
         if (autoUpdate) {
             button.addChangeListener(new ComponentChangeListener() {

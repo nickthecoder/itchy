@@ -295,6 +295,16 @@ public class Itchy
         return keyboardState[Keys.LCTRL] || keyboardState[Keys.RCTRL];
     }
 
+
+    /**
+     * Tests state of either control keys A convenience method, the same as isKeyDown( Keys.LALT )
+     * || isKeyDown( Keys.RALT )
+     */
+    public static boolean isAltDown()
+    {
+        return keyboardState[Keys.LALT] || keyboardState[Keys.RALT];
+    }
+
     /**
      * Tests state of either meta keys A convenience method, the same as isKeyDown( Keys.LMETA ) ||
      * isKeyDown( Keys.RMETA )
@@ -321,6 +331,7 @@ public class Itchy
 
             if (ke.isPressed()) {
                 int key = ke.symbol;
+                
                 if ((key > 0) && (key < keyboardState.length)) {
                     keyboardState[key] = true;
                 }

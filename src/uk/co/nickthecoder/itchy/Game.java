@@ -194,7 +194,7 @@ public class Game implements InputListener, QuitListener, MessageListener
         createStagesAndViews();
     }
 
-    public RGBAView gteBackground()
+    public RGBAView getBackground()
     {
         return this.background;
     }
@@ -797,8 +797,13 @@ public class Game implements InputListener, QuitListener, MessageListener
             return false;
         }
     }
-    
+
     public boolean loadScene( String sceneName )
+    {
+        return loadScene(sceneName, false);
+    }
+
+    public boolean loadScene( String sceneName, boolean loadOnly )
     {
         try {
             Scene scene = this.resources.getScene(sceneName);
@@ -811,27 +816,33 @@ public class Game implements InputListener, QuitListener, MessageListener
                 }
                 return false;
             }
+
+            if (!loadOnly) {
+
+                this.sceneBehaviour.onDeactivate();
+                
+                showMousePointer(scene.showMouse);
+                this.sceneName = sceneName;
+                this.background.color = scene.backgroundColor;
+                this.sceneBehaviour = scene.createSceneBehaviour(this.resources);
+                
+                this.sceneBehaviour.onActivate();
+            }
             
-            this.sceneBehaviour.onDeactivate();
-
-            this.sceneName = sceneName;
-            this.background.color = scene.backgroundColor;
-
-            this.sceneBehaviour = scene.createSceneBehaviour(this.resources);
-            this.sceneBehaviour.onActivate();
             scene.create(this, false);
-            showMousePointer(scene.showMouse);
-
+            
+            if (!loadOnly) {                    
+                Itchy.frameRate.reset();
+            }
+            
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
 
-        // System.out.println( "Resetting frame rate" );
-        Itchy.frameRate.reset();
         return true;
     }
-
+    
     public String getSceneName()
     {
         return this.sceneName;

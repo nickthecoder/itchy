@@ -16,7 +16,9 @@ import uk.co.nickthecoder.itchy.util.PropertySubject;
 import uk.co.nickthecoder.itchy.util.RGBAProperty;
 import uk.co.nickthecoder.itchy.util.StringProperty;
 import uk.co.nickthecoder.jame.RGBA;
+import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.Surface;
+import uk.co.nickthecoder.jame.Surface.BlendMode;
 
 public final class Appearance implements OffsetSurface, PropertySubject<Appearance>
 {
@@ -78,6 +80,11 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
      */
     @Property(label = "Colourise")
     private RGBA colorize;
+    
+    /**
+     * The clipping area in pixels measured from the top left of the image.
+     */
+    private Rect clip;
 
     public Appearance( Pose pose )
     {
@@ -221,6 +228,17 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
         this.setScale(this.scale * scale);
     }
 
+    public void setClip( Rect clip )
+    {
+        this.clip = clip;
+        this.clearCachedSurface();
+    }
+    
+    public Rect getClip()
+    {
+        return this.clip;
+    }
+    
     public boolean visibleWithin( WorldRectangle worldRect )
     {
         return this.getWorldRectangle().overlaps(worldRect);
@@ -260,7 +278,20 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
             if (scale < 0) {
                 scale = 0;
             }
-
+            
+            if (this.clip != null) {
+                Rect rect = new Rect( 0,0, newSurface.getWidth(), newSurface.getHeight());
+                rect = this.clip.intersection(rect);
+                if ( (rect.width < 0) || (rect.height < 0)) {
+                    newSurface = new Surface(1,1,true);
+                } else {
+                    Surface old = newSurface;
+                    newSurface = new Surface( rect.width, rect.height, true);
+                    old.blit(rect,newSurface,0,0, BlendMode.COMPOSITE);
+                    // TODO change offset.
+                }
+            }
+            
             double dirDiff = this.direction - this.pose.getDirection();
             if ((dirDiff != 0)) { // && (this.rotationType ==
                                   // ROTATION_FULL ) ) {

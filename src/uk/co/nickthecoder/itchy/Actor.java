@@ -351,6 +351,7 @@ public class Actor implements PropertySubject<Actor>
         return ! (this.dying || this.dead); 
     }
     
+    //TODO If an actor wants to use a different costume, then set it first!
     public void deathEvent( Costume costume, String eventName )
     {
         this.dying = true;
@@ -762,9 +763,13 @@ public class Actor implements PropertySubject<Actor>
     public void setZOrder( int value )
     {
         if (this.zOrder != value) {
-            this.zOrder = value;
             if (this.stage != null) {
-                this.stage.add(this);
+                Stage stage = this.stage;
+                stage.remove(this);
+                this.zOrder = value;
+                stage.add(this);
+            } else {
+                this.zOrder = value;
             }
         }
     }
