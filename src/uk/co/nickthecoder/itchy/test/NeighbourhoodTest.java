@@ -20,11 +20,11 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import uk.co.nickthecoder.itchy.AbstractBehaviour;
+import uk.co.nickthecoder.itchy.AbstractRole;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Costume;
 import uk.co.nickthecoder.itchy.Itchy;
-import uk.co.nickthecoder.itchy.PlainBehaviour;
+import uk.co.nickthecoder.itchy.PlainRole;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.neighbourhood.Neighbourhood;
 import uk.co.nickthecoder.itchy.neighbourhood.SinglePointCollisionStrategy;
@@ -95,10 +95,10 @@ public class NeighbourhoodTest
     public SinglePointCollisionStrategy spcs( Neighbourhood nbh, Costume costume, double x, double y )
     {
         Actor actor = new Actor(costume);
-        AbstractBehaviour behaviour = new PlainBehaviour();
-        actor.setBehaviour(behaviour);
+        AbstractRole role = new PlainRole();
+        actor.setRole(role);
         actor.moveTo(x, y); 
-        behaviour.addTag("all");
+        role.addTag("all");
 
         SinglePointCollisionStrategy result = new SinglePointCollisionStrategy(actor, nbh);
         return result;

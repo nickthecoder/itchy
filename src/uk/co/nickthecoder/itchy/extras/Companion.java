@@ -5,7 +5,7 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.extras;
 
-import uk.co.nickthecoder.itchy.AbstractBehaviour;
+import uk.co.nickthecoder.itchy.AbstractRole;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Costume;
 import uk.co.nickthecoder.itchy.Itchy;
@@ -13,14 +13,14 @@ import uk.co.nickthecoder.itchy.Pose;
 import uk.co.nickthecoder.jame.RGBA;
 
 /**
- * Companions are spawned by other Behaviours, for example a ship could fire a bullet (in this case
+ * Companions are spawned by other Roles, for example a ship could fire a bullet (in this case
  * the Companion would be a {@link Projectile}). Another example is a Speech bubble, in which case
  * use {@link Follower}. {@link Explosion} is also a Companion, which creates a set of Projectiles.
  * <p>
  * Companions will typically share the same {@link Costume} as their source, but will use a
  * different {@link Pose}.
  */
-public abstract class Companion<T extends Companion<T>> extends AbstractBehaviour
+public abstract class Companion<T extends Companion<T>> extends AbstractRole
 {
     protected Actor source;
 
@@ -250,7 +250,7 @@ public abstract class Companion<T extends Companion<T>> extends AbstractBehaviou
     }
 
     /**
-     * Determines if the Actor's image should be rotate. The default behaviour is for the image NOT
+     * Determines if the Actor's image should be rotate. The default role is for the image NOT
      * to be rotated.
      * 
      * @param value
@@ -350,7 +350,7 @@ public abstract class Companion<T extends Companion<T>> extends AbstractBehaviou
             actor.event(this.eventName);
         }
 
-        actor.setBehaviour(this);
+        actor.setRole(this);
         actor.setZOrder(this.zOrder);
         if (this.rotate) {
             actor.getAppearance().setDirection(this.direction);

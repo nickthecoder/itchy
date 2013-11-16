@@ -6,9 +6,9 @@
 
 package uk.co.nickthecoder.itchy.extras;
 
-import uk.co.nickthecoder.itchy.AbstractBehaviour;
+import uk.co.nickthecoder.itchy.AbstractRole;
 import uk.co.nickthecoder.itchy.Itchy;
-import uk.co.nickthecoder.itchy.NullBehaviour;
+import uk.co.nickthecoder.itchy.NullRole;
 import uk.co.nickthecoder.itchy.TextPose;
 import uk.co.nickthecoder.itchy.util.BeanHelper;
 import uk.co.nickthecoder.itchy.util.Property;
@@ -18,7 +18,7 @@ import uk.co.nickthecoder.itchy.util.Property;
  * 
  * Uses any JavaBean style properties from your Game object.
  */
-public class TextValue extends AbstractBehaviour
+public class TextValue extends AbstractRole
 {
     /**
      * The java bean of of your Game object. For example, if you have a public attribute called
@@ -104,7 +104,7 @@ public class TextValue extends AbstractBehaviour
             pose.setText(this.errorValue);
         }
         if (this.updateInterval < 0) {
-            getActor().setBehaviour(new NullBehaviour());
+            getActor().setRole(new NullRole());
         }
     }
 

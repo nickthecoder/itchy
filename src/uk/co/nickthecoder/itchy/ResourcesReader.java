@@ -220,13 +220,13 @@ public class ResourcesReader
 
             }
 
-            ClassName behaviourClassName = new ClassName(costumeTag.getOptionalAttribute(
-                "behaviour", NullBehaviour.class.getName()));
+            ClassName roleClassName = new ClassName(costumeTag.getOptionalAttribute(
+                "role", NullRole.class.getName()));
 
-            if (this.resources.registerBehaviourClassName(behaviourClassName.name)) {
-                costume.behaviourClassName = behaviourClassName;
+            if (this.resources.registerRoleClassName(roleClassName.name)) {
+                costume.roleClassName = roleClassName;
             } else {
-                throw new XMLException("Expected a subclass of Behaviour : " + costume.behaviourClassName);
+                throw new XMLException("Expected a subclass of Role : " + costume.roleClassName);
             }
 
             ClassName propertiesClassName = new ClassName(

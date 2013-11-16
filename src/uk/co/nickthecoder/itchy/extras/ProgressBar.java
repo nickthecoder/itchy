@@ -5,14 +5,14 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.extras;
 
-import uk.co.nickthecoder.itchy.AbstractBehaviour;
+import uk.co.nickthecoder.itchy.AbstractRole;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.util.BeanHelper;
 import uk.co.nickthecoder.itchy.util.Property;
 import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.Surface;
 
-public class ProgressBar extends AbstractBehaviour
+public class ProgressBar extends AbstractRole
 {
     @Property(label = "From")
     public double from = 0;

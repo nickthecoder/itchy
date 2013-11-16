@@ -84,7 +84,7 @@ public class Mothership extends Alien
         alienActor.setDirection(getActor().getAppearance().getDirection());
         Alien alien = new Alien();
         alien.fireOnceEvery = this.childFireOnceEvery;
-        alienActor.setBehaviour(alien);
+        alienActor.setRole(alien);
 
         alien.vx = Util.randomBetween(-0.2, 0.2) + this.vx;
         alienActor.moveTo(getActor().getX(), getActor().getY());

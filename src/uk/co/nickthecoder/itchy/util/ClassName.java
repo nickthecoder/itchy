@@ -5,12 +5,12 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.util;
 
-import uk.co.nickthecoder.itchy.Behaviour;
+import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.script.ScriptManager;
-import uk.co.nickthecoder.itchy.script.ScriptedBehaviour;
+import uk.co.nickthecoder.itchy.script.ScriptedRole;
 
 /**
- * Holds the name of a class, which the user can set within the editor, used fro Behaviour,
+ * Holds the name of a class, which the user can set within the editor, used fro Role,
  * SceneDirector and Game.
  * 
  * The class name can either be a regular Java class (in which case the name will be a fully
@@ -20,12 +20,12 @@ import uk.co.nickthecoder.itchy.script.ScriptedBehaviour;
  */
 public class ClassName
 {
-    public static ClassName getClassName( Behaviour behaviour )
+    public static ClassName getClassName( Role role )
     {
-        if (behaviour instanceof ScriptedBehaviour) {
-            return ((ScriptedBehaviour) behaviour).getClassName();
+        if (role instanceof ScriptedRole) {
+            return ((ScriptedRole) role).getClassName();
         } else {
-            return new ClassName( behaviour.getClass().getName());
+            return new ClassName( role.getClass().getName());
         }
     }
     

@@ -10,7 +10,7 @@ import java.util.List;
 import uk.co.nickthecoder.itchy.util.AbstractProperty;
 import uk.co.nickthecoder.itchy.util.PropertySubject;
 
-public interface Behaviour extends MessageListener, Cloneable, PropertySubject<Behaviour>
+public interface Role extends MessageListener, Cloneable, PropertySubject<Role>
 {
     public Actor getActor();
 
@@ -26,11 +26,11 @@ public interface Behaviour extends MessageListener, Cloneable, PropertySubject<B
 
     public void animateAndTick();
 
-    public Behaviour clone();
+    public Role clone();
 
     @Override
     public void onMessage( String message );
 
     @Override
-    public List<AbstractProperty<Behaviour, ?>> getProperties();
+    public List<AbstractProperty<Role, ?>> getProperties();
 }

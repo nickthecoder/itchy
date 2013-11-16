@@ -11,7 +11,7 @@ import java.util.HashMap;
 
 import javax.script.ScriptException;
 
-import uk.co.nickthecoder.itchy.Behaviour;
+import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.CostumeProperties;
 import uk.co.nickthecoder.itchy.Director;
 import uk.co.nickthecoder.itchy.Resources;
@@ -21,7 +21,7 @@ import uk.co.nickthecoder.itchy.util.ClassName;
 /**
  * Allows games to use script languages, such as javascript, for their game logic.
  * 
- * Subclasses of Behaviour, SceneDirector, CostumeProperties and Game can all be coded in a
+ * Subclasses of Role, SceneDirector, CostumeProperties and Game can all be coded in a
  * scripting language.
  * 
  * All scripts are read from a "scripts" folder relative to the game's resources file. (i.e.
@@ -161,13 +161,13 @@ public class ScriptManager
         return language.createDirector(className);
     }
 
-    public Behaviour createBehaviour( ClassName className )
+    public Role createRole( ClassName className )
         throws ScriptException
     {
         ScriptLanguage language = getLanguage(getExtension(className.name));
         language.loadScript(className.name);
 
-        return language.createBehaviour(className);
+        return language.createRole(className);
     }
 
     public SceneDirector createSceneDirector( ClassName className )

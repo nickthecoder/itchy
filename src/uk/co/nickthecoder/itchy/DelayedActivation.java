@@ -7,24 +7,24 @@ package uk.co.nickthecoder.itchy;
 
 import uk.co.nickthecoder.itchy.extras.Timer;
 
-public class DelayedActivation extends AbstractBehaviour
+public class DelayedActivation extends AbstractRole
 {
     private Timer delay;
 
-    private Behaviour behaviour;
+    private Role role;
 
-    public DelayedActivation( double seconds, Behaviour behaviour )
+    public DelayedActivation( double seconds, Role role )
     {
         this.delay = Timer.createTimerSeconds(seconds);
-        this.behaviour = behaviour;
+        this.role = role;
     }
 
     @Override
     public void tick()
     {
         if (this.delay.isFinished()) {
-            getActor().setBehaviour(this.behaviour);
-            // Was deactivated and now activated so that the behaviour's onActivate method is called. 
+            getActor().setRole(this.role);
+            // Was deactivated and now activated so that the role's onActivate method is called. 
             getActor().event( getActor().getStartEvent() );
         }
     }

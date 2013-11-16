@@ -6,7 +6,7 @@
 package uk.co.nickthecoder.itchy.extras;
 
 import uk.co.nickthecoder.itchy.Actor;
-import uk.co.nickthecoder.itchy.Behaviour;
+import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.Font;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Pose;
@@ -32,7 +32,7 @@ public class Talk extends Follower
     private int marginBottom = 0;
     private int marginLeft = 0;
 
-    public Talk( Behaviour following )
+    public Talk( Role following )
     {
         this(following.getActor());
     }

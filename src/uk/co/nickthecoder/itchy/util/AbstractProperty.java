@@ -27,10 +27,10 @@ import uk.co.nickthecoder.jame.RGBA;
  * 
  * For Itchy Gurus only!
  * 
- * Currently, Actor and Behaviour have properties which can be edited within the SceneDesigner
+ * Currently, Actor and Role have properties which can be edited within the SceneDesigner
  * 
  * @param <S>
- *        The property's subject, such as Actor, Behaviour, GameBehaviour etc.
+ *        The property's subject, such as Actor, Role, GameRole etc.
  * @param <T>
  *        The type of the property, such as String, Integer, Double etc.
  */
@@ -236,7 +236,7 @@ public abstract class AbstractProperty<S, T> implements Comparable<AbstractPrope
     public String hint;
 
     /**
-     * Describes how to get/set the attribute, using JavaBean rules. For example, if a Behaviour has
+     * Describes how to get/set the attribute, using JavaBean rules. For example, if a Role has
      * a Property with an access of "radius", then getValue will look for a public attribute called
      * "radius", if this isn't found, then it will look for a method called "getRadius", taking no
      * arguments.

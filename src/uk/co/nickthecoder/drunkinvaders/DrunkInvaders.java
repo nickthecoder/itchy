@@ -8,11 +8,11 @@ package uk.co.nickthecoder.drunkinvaders;
 import java.text.DecimalFormat;
 import java.util.List;
 
-import uk.co.nickthecoder.itchy.AbstractBehaviour;
+import uk.co.nickthecoder.itchy.AbstractRole;
 import uk.co.nickthecoder.itchy.AbstractDirector;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.ActorCollisionStrategy;
-import uk.co.nickthecoder.itchy.Behaviour;
+import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.CompoundView;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Launcher;
@@ -60,7 +60,7 @@ public class DrunkInvaders extends AbstractDirector
 
     private Neighbourhood neighbourhood;
 
-    private Behaviour info;
+    private Role info;
 
     public boolean transitioning = false;
 
@@ -155,7 +155,7 @@ public class DrunkInvaders extends AbstractDirector
 
             final MultiLineTextPose pose = new MultiLineTextPose(this.game.resources.getDefaultFont(), 16);
 
-            this.info = new AbstractBehaviour()
+            this.info = new AbstractRole()
             {
                 @Override
                 public void tick()
@@ -168,7 +168,7 @@ public class DrunkInvaders extends AbstractDirector
             };
             pose.setAlignment(0, 0);
             Actor actor = new Actor(pose);
-            actor.setBehaviour(this.info);
+            actor.setRole(this.info);
             actor.moveTo(40, 460);
             this.glassStage.addTop(actor);
 

@@ -1,15 +1,15 @@
 Drop = Class({
-    Extends: BehaviourScript,
+    Extends: RoleScript,
 
     init: function() {
         // This is the default height that the drop will return to, after it hits the floor.
-        // Each Drop can have it own height set within the Scene Designer - the "Behaviours" section.
+        // Each Drop can have it own height set within the Scene Designer - the "Roles" section.
         this.distance = 600;
     },
 
     onBirth: function() {
         // Player checks to see if it has collided with any "deadly" objects.
-        this.behaviour.addTag("deadly");
+        this.role.addTag("deadly");
         // The speed of each drop is determined by the sceneDirector. See Play.js for more.
         this.speed = sceneDirectorScript.speed;
         // Each type of drop can got down the screen at different speed. The speedFactor is set from
@@ -44,12 +44,12 @@ Drop = Class({
     }
 });
 // Define the properties of a Drop.
-// The properties can be editted in the Scene Designer within the "Behaviour" section.
+// The properties can be editted in the Scene Designer within the "Role" section.
 // Every single drop can have its own "distance"
 
 // The height to restart from after hitting the ground.
 // If every drop has the same "distance", then the Y spacing will remain the same for the whole game.
 // But if some restart higher than others, then the Y spacing will vary. Sometimes, lots of drops will have
 // a similar "Y" value, which makes finding a safe gap for the sheep difficult.
-BehaviourScript.addProperty("Drop", "distance", Integer, "Distance", 600); 
+RoleScript.addProperty("Drop", "distance", Integer, "Distance", 600); 
 

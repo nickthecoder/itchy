@@ -7,12 +7,12 @@
  ******************************************************************************/
 package uk.co.nickthecoder.drunkinvaders;
 
-import uk.co.nickthecoder.itchy.AbstractBehaviour;
+import uk.co.nickthecoder.itchy.AbstractRole;
 import uk.co.nickthecoder.itchy.Actor;
-import uk.co.nickthecoder.itchy.Behaviour;
+import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.util.Property;
 
-public class Bullet extends AbstractBehaviour implements Shootable
+public class Bullet extends AbstractRole implements Shootable
 {
     @Property(label="Speed")
     public double speed = 5.0;
@@ -65,8 +65,8 @@ public class Bullet extends AbstractBehaviour implements Shootable
 
         getActor().getCollisionStrategy().update();
 
-        for (Behaviour otherBehaviour : getActor().pixelOverlap(this.targetTagName)) {
-            ((Shootable) otherBehaviour).shot(getActor());
+        for (Role otherRole : getActor().pixelOverlap(this.targetTagName)) {
+            ((Shootable) otherRole).shot(getActor());
             getActor().kill();
 
             break;

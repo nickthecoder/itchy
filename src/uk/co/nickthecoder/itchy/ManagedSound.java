@@ -16,7 +16,7 @@ public class ManagedSound implements PropertySubject<ManagedSound>
     private static final List<AbstractProperty<ManagedSound, ?>> properties =
         AbstractProperty.<ManagedSound> findAnnotations(ManagedSound.class);
 
-    public enum MultipleBehaviour {
+    public enum MultipleRole {
         PLAY_BOTH, STOP_FIRST, FADE_FIRST, IGNORE_SECOND
     };
 
@@ -50,8 +50,8 @@ public class ManagedSound implements PropertySubject<ManagedSound>
      * What happens if the same sound is played more than once, so that they would overlap?
      * Either both are allowed to play, or the first is stopped, or the second is ignored.
      */
-    @Property(label="Multiple Behaviour")
-    public MultipleBehaviour multipleBehaviour = MultipleBehaviour.IGNORE_SECOND;
+    @Property(label="Multiple Role")
+    public MultipleRole multipleRole = MultipleRole.IGNORE_SECOND;
     
 
     public ManagedSound( SoundResource soundResource )

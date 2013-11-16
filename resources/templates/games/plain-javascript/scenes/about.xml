@@ -1,8 +1,8 @@
-<scene showMouse="true" behaviour="uk.co.nickthecoder.itchy.PlainSceneDirector">
+<scene showMouse="true" role="uk.co.nickthecoder.itchy.PlainSceneDirector">
   <properties/>
   <layer name="main">
     <text text="Title" font="veraBold" size="46" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="383" y="546" direction="0.0" startEvent="default"/>
-    <text text="Back to Menu" font="veraBold" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.SceneButton" x="372" y="47" direction="0.0" startEvent="default">
+    <text text="Back to Menu" font="veraBold" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.extras.SceneButton" x="372" y="47" direction="0.0" startEvent="default">
       <property name="sceneName" value="menu"/>
     </text>
   </layer>

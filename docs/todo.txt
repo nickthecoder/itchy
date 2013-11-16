@@ -4,8 +4,6 @@ TODO
 
 Rename Behaviour to Role
 
-Rename SceneBehaviour to SceneDirector / AssistantDirector / Plot?
-
 Follow up on the TODOs
 
 Test on windows.

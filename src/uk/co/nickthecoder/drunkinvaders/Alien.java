@@ -6,7 +6,7 @@
 package uk.co.nickthecoder.drunkinvaders;
 
 import uk.co.nickthecoder.itchy.Actor;
-import uk.co.nickthecoder.itchy.Behaviour;
+import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.animation.NumericAnimation;
 import uk.co.nickthecoder.itchy.animation.ScaleAnimation;
 import uk.co.nickthecoder.itchy.extras.Explosion;
@@ -64,10 +64,10 @@ public class Alien extends Bouncy implements Shootable
         super.tick();
 
         // This isn't neat - can we have a "killable" tag, which Ship and Shield will both have?
-        for (Behaviour otherBehaviour : getActor().pixelOverlap(SHOOTABLE_LIST)) {
-            Actor other = otherBehaviour.getActor();
-            if ((getActor() != other) && (!otherBehaviour.hasTag("bouncy"))) {
-                ((Shootable) other.getBehaviour()).shot(getActor());
+        for (Role otherRole : getActor().pixelOverlap(SHOOTABLE_LIST)) {
+            Actor other = otherRole.getActor();
+            if ((getActor() != other) && (!otherRole.hasTag("bouncy"))) {
+                ((Shootable) other.getRole()).shot(getActor());
             }
         }
     }
@@ -81,7 +81,7 @@ public class Alien extends Bouncy implements Shootable
         bullet.setDirection(getActor().getAppearance().getDirection());
         DrunkInvaders.director.mainStage.addTop(bullet);
         bullet.moveForwards(10);
-        bullet.setBehaviour(new Bullet("killable"));
+        bullet.setRole(new Bullet("killable"));
     }
 
     @Override

@@ -13,7 +13,7 @@ import uk.co.nickthecoder.itchy.util.AbstractProperty;
 /**
  * Does nothing - useful for scenery, and other game objects which don't do anything!
  */
-public final class NullBehaviour implements Behaviour
+public final class NullRole implements Role
 {
     private Actor actor;
 
@@ -61,16 +61,16 @@ public final class NullBehaviour implements Behaviour
     }
 
     @Override
-    public List<AbstractProperty<Behaviour, ?>> getProperties()
+    public List<AbstractProperty<Role, ?>> getProperties()
     {
         return Collections.emptyList();
     }
 
     @Override
-    public Behaviour clone()
+    public Role clone()
     {
         try {
-            return (Behaviour) super.clone();
+            return (Role) super.clone();
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
             return null;

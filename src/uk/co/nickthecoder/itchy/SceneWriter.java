@@ -47,7 +47,7 @@ public class SceneWriter extends XMLWriter
         this.beginTag("scene");
         this.attribute("showMouse", this.scene.showMouse);
         if ( ! PlainSceneDirector.class.getName().equals(this.scene.sceneDirectorClassName)) {
-            this.attribute("behaviour", this.scene.sceneDirectorClassName.name);
+            this.attribute("role", this.scene.sceneDirectorClassName.name);
         }
         this.attribute("background", this.scene.backgroundColor.toString());
         
@@ -98,9 +98,9 @@ public class SceneWriter extends XMLWriter
                 this.beginTag("actor");
                 this.attribute("costume", this.sceneResource.resources.getCostumeName(csa.costume));
 
-                if ((csa.costume.behaviourClassName == null) ||
-                        (!csa.costume.behaviourClassName.name.equals(csa.behaviourClassName.name))) {
-                    this.attribute("behaviour", sceneActor.behaviourClassName.name);
+                if ((csa.costume.roleClassName == null) ||
+                        (!csa.costume.roleClassName.name.equals(csa.roleClassName.name))) {
+                    this.attribute("role", sceneActor.roleClassName.name);
                 }
                 this.writeSceneActorAttributes(sceneActor);
 
@@ -115,8 +115,8 @@ public class SceneWriter extends XMLWriter
                 this.attribute("color", tsa.color.getRGBCode());
                 this.attribute("xAlignment", tsa.xAlignment);
                 this.attribute("yAlignment", tsa.yAlignment);
-                if (!NullBehaviour.class.getName().equals(sceneActor.behaviourClassName.name)) {
-                    this.attribute("behaviour", sceneActor.behaviourClassName.name);
+                if (!NullRole.class.getName().equals(sceneActor.roleClassName.name)) {
+                    this.attribute("role", sceneActor.roleClassName.name);
                 }
                 if ( tsa.costume != null) {
                     this.attribute("costume", this.sceneResource.resources.getCostumeName(tsa.costume));

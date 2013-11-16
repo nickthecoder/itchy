@@ -1,5 +1,5 @@
 Bullet = Class({
-    Extends: BehaviourScript,
+    Extends: RoleScript,
     
     init: function() {
         this.speed = 1;
@@ -15,9 +15,9 @@ Bullet = Class({
         var i = this.actor.pixelOverlap("shootable").iterator();
         // Shoot ONE of the rocks that the bullet is touching.
         if (i.hasNext()) {
-        	var behaviour = i.next().behaviourScript;
-        	if (!behaviour.actor.isDying()) {
-        		behaviour.shot(this);
+        	var role = i.next().roleScript;
+        	if (!role.actor.isDying()) {
+        		role.shot(this);
         		this.actor.kill();
         	}
         }

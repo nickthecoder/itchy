@@ -16,7 +16,7 @@ import java.util.Random;
 import uk.co.nickthecoder.itchy.AbstractDirector;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Launcher;
-import uk.co.nickthecoder.itchy.PlainBehaviour;
+import uk.co.nickthecoder.itchy.PlainRole;
 import uk.co.nickthecoder.itchy.animation.Animation;
 import uk.co.nickthecoder.itchy.extras.Explosion;
 import uk.co.nickthecoder.itchy.extras.Fragment;
@@ -396,7 +396,7 @@ public class Tetra extends AbstractDirector
         this.completedLines = 0;
         setLevel(getStartingLevel());
         Actor dummy = new Actor(this.game.resources.getCostume(names[0]));
-        dummy.setBehaviour(new PlainBehaviour());
+        dummy.setRole(new PlainRole());
 
         this.grid = new Actor[WIDTH + 2][HEIGHT + 2];
         for (int x = 0; x < WIDTH + 2; x++) {
@@ -471,7 +471,7 @@ public class Tetra extends AbstractDirector
             this.actors = new Actor[PIECES];
             for (int i = 0; i < PIECES; i++) {
                 this.actors[i] = new Actor(Tetra.this.game.resources.getCostume(names[n]));
-                this.actors[i].setBehaviour(new PlainBehaviour());
+                this.actors[i].setRole(new PlainRole());
                 Tetra.this.mainStage.addTop(this.actors[i]);
             }
             update();

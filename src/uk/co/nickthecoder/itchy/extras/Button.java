@@ -5,14 +5,14 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.extras;
 
-import uk.co.nickthecoder.itchy.AbstractBehaviour;
+import uk.co.nickthecoder.itchy.AbstractRole;
 import uk.co.nickthecoder.itchy.MouseListenerView;
 import uk.co.nickthecoder.itchy.ViewMouseListener;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 
 /**
- * Detects when the mouse is clicked on this behaviour's Actor, and sends a message to the Game.
+ * Detects when the mouse is clicked on this role's Actor, and sends a message to the Game.
  * <p>
  * The abstract onClick method is called after the mouseUp event.
  * <p>
@@ -26,7 +26,7 @@ import uk.co.nickthecoder.jame.event.MouseMotionEvent;
  * enabled. i.e. call {@link uk.co.nickthecoder.itchy.Stage#enableMouseListener} when initialising
  * your Game object.
  */
-public abstract class Button extends AbstractBehaviour implements ViewMouseListener
+public abstract class Button extends AbstractRole implements ViewMouseListener
 {
 
     private boolean down = false;

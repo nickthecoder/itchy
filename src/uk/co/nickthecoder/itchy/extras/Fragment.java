@@ -27,9 +27,9 @@ import uk.co.nickthecoder.jame.Surface;
  * you will still only have the fragments from the first call.
  * 
  * This algorithm is inefficient (in memory, and speed), so ideally don't use it while the game is playing.
- * Instead, call it during a Behaviour's init method.
+ * Instead, call it during a Role's init method.
  * 
- * This class is often used in conjunction with ExplosionBehaviour, to produce an explosion with the
+ * This class is often used in conjunction with ExplosionRole, to produce an explosion with the
  * pieces of the actor flying apart in different directions.
  */
 public class Fragment

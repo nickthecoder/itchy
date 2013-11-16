@@ -12,7 +12,7 @@ import java.util.Set;
 
 import javax.script.ScriptException;
 
-import uk.co.nickthecoder.itchy.Behaviour;
+import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.CostumeProperties;
 import uk.co.nickthecoder.itchy.Director;
 import uk.co.nickthecoder.itchy.Itchy;
@@ -135,8 +135,8 @@ public class ClassNameBox extends Container
 
     public Set<String> getKnownNames( Resources resources )
     {
-        if (this.baseClass == Behaviour.class) {
-            return resources.getBehaviourClassNames();
+        if (this.baseClass == Role.class) {
+            return resources.getRoleClassNames();
         } else if (this.baseClass == SceneDirector.class) {
             return resources.getSceneDirectorClassNames();
         } else if (this.baseClass == Director.class) {
@@ -150,8 +150,8 @@ public class ClassNameBox extends Container
 
     public String getBaseName()
     {
-        if (this.baseClass == Behaviour.class) {
-            return "Behaviour";
+        if (this.baseClass == Role.class) {
+            return "Role";
         } else if (this.baseClass == SceneDirector.class) {
             return "SceneDirector";
         } else if (this.baseClass == Director.class) {

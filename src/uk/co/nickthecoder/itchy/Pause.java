@@ -81,7 +81,7 @@ public class Pause
 
         for (Actor actor : this.game.getActors()) {
             if (pauseActor(actor)) {
-                actor.setBehaviour(new PausedBehaviour(actor.getBehaviour()));
+                actor.setRole(new PausedRole(actor.getRole()));
             }
         }
 
@@ -123,8 +123,8 @@ public class Pause
         this.paused = false;
 
         for (Actor actor : this.game.getActors()) {
-            if (actor.getBehaviour() instanceof PausedBehaviour) {
-                ((PausedBehaviour) actor.getBehaviour()).unpause();
+            if (actor.getRole() instanceof PausedRole) {
+                ((PausedRole) actor.getRole()).unpause();
             }
         }
 
@@ -146,18 +146,18 @@ public class Pause
     {
     }
 
-    private class PausedBehaviour extends AbstractBehaviour
+    private class PausedRole extends AbstractRole
     {
-        private Behaviour oldBehaviour;
+        private Role oldRole;
 
-        public PausedBehaviour( Behaviour oldBehaviour )
+        public PausedRole( Role oldRole )
         {
-            this.oldBehaviour = oldBehaviour;
+            this.oldRole = oldRole;
         }
 
         public void unpause()
         {
-            getActor().setBehaviour(this.oldBehaviour);
+            getActor().setRole(this.oldRole);
         }
 
         @Override

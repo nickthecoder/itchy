@@ -1,6 +1,6 @@
 Player = new Class({
 
-    Extends: BehaviourScript,
+    Extends: RoleScript,
     
     onBirth: function() {
         // When the game starts tell "Play.js" we are alive and well, the game is on!

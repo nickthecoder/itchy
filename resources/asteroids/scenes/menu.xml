@@ -1,4 +1,4 @@
-<scene showMouse="true" behaviour="Menu.js" background="#000000ff">
+<scene showMouse="true" role="Menu.js" background="#000000ff">
   <properties/>
   <layer name="main">
     <actor costume="stars2" x="400" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="0"/>
@@ -31,13 +31,13 @@
     <text text="Quit" font="BlackCasper" size="58" color="#333364" xAlignment="0.5" yAlignment="0.5" x="375" y="45" direction="0.0" heading="0.0" startEvent="default" zOrder="50"/>
     <text text="Editor" font="BlackCasper" size="58" color="#333364" xAlignment="0.5" yAlignment="0.5" x="377" y="171" direction="0.0" heading="0.0" startEvent="default" zOrder="50"/>
     <text text="About" font="BlackCasper" size="58" color="#333364" xAlignment="0.5" yAlignment="0.5" x="387" y="251" direction="0.0" heading="0.0" startEvent="default" zOrder="50"/>
-    <text text="About" font="BlackCasper" size="47" color="#5d8cc5" xAlignment="0.5" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.SceneButton" costume="Button" x="380" y="255" direction="0.0" heading="0.0" startEvent="default" zOrder="60">
+    <text text="About" font="BlackCasper" size="47" color="#5d8cc5" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.extras.SceneButton" costume="Button" x="380" y="255" direction="0.0" heading="0.0" startEvent="default" zOrder="60">
       <property name="sceneName" value="about"/>
     </text>
-    <text text="Quit" font="BlackCasper" size="47" color="#5d8cc5" xAlignment="0.5" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.QuitButton" costume="Button" x="374" y="47" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
-    <text text="Play" font="BlackCasper" size="47" color="#5d8cc5" xAlignment="0.5" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.MessageButton" costume="play" x="378" y="329" direction="0.0" heading="0.0" startEvent="default" zOrder="60">
+    <text text="Quit" font="BlackCasper" size="47" color="#5d8cc5" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.extras.QuitButton" costume="Button" x="374" y="47" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
+    <text text="Play" font="BlackCasper" size="47" color="#5d8cc5" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.extras.MessageButton" costume="play" x="378" y="329" direction="0.0" heading="0.0" startEvent="default" zOrder="60">
       <property name="message" value="start"/>
     </text>
-    <text text="Editor" font="BlackCasper" size="47" color="#5d8cc5" xAlignment="0.5" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.EditorButton" costume="editor" x="375" y="173" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
+    <text text="Editor" font="BlackCasper" size="47" color="#5d8cc5" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.extras.EditorButton" costume="editor" x="375" y="173" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
   </layer>
 </scene>

@@ -6,13 +6,13 @@
 package uk.co.nickthecoder.itchy.extras;
 
 import uk.co.nickthecoder.itchy.Actor;
-import uk.co.nickthecoder.itchy.Behaviour;
+import uk.co.nickthecoder.itchy.Role;
 
 public class Follower extends Companion<Follower>
 {
     private boolean followRotatation = false;;
 
-    public Follower( Behaviour following )
+    public Follower( Role following )
     {
         this(following.getActor());
     }

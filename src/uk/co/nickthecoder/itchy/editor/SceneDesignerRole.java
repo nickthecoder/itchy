@@ -9,24 +9,24 @@ package uk.co.nickthecoder.itchy.editor;
 
 import javax.script.ScriptException;
 
-import uk.co.nickthecoder.itchy.AbstractBehaviour;
-import uk.co.nickthecoder.itchy.Behaviour;
+import uk.co.nickthecoder.itchy.AbstractRole;
+import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.util.ClassName;
 
-public class SceneDesignerBehaviour extends AbstractBehaviour
+public class SceneDesignerRole extends AbstractRole
 {
-    public Behaviour actualBehaviour;
+    public Role actualRole;
 
-    public void setBehaviourClassName( Resources resources, ClassName className ) throws ClassNotFoundException,
+    public void setRoleClassName( Resources resources, ClassName className ) throws ClassNotFoundException,
         InstantiationException, IllegalAccessException, ScriptException
     {
-        this.actualBehaviour = AbstractBehaviour.createBehaviour(resources, className);
+        this.actualRole = AbstractRole.createRole(resources, className);
     }
 
-    public ClassName getBehaviourClassName()
+    public ClassName getRoleClassName()
     {
-        return ClassName.getClassName(this.actualBehaviour);
+        return ClassName.getClassName(this.actualRole);
     }
 
     @Override

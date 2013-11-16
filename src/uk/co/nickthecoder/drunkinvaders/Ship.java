@@ -6,7 +6,7 @@
 package uk.co.nickthecoder.drunkinvaders;
 
 import uk.co.nickthecoder.itchy.Actor;
-import uk.co.nickthecoder.itchy.Behaviour;
+import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.extras.Explosion;
 import uk.co.nickthecoder.itchy.extras.Fragment;
@@ -142,11 +142,11 @@ public class Ship extends Bouncy implements Shootable
 
             getActor().getCollisionStrategy().update();
 
-            for (Behaviour behaviour : getActor().pixelOverlap(DEADLY_LIST)) {
-                Actor other = behaviour.getActor();
+            for (Role role : getActor().pixelOverlap(DEADLY_LIST)) {
+                Actor other = role.getActor();
                 this.shot(other);
-                if (other.getBehaviour() instanceof Shootable) {
-                    ((Shootable) other.getBehaviour()).shot(getActor());
+                if (other.getRole() instanceof Shootable) {
+                    ((Shootable) other.getRole()).shot(getActor());
                 }
                 break;
             }
@@ -230,7 +230,7 @@ public class Ship extends Bouncy implements Shootable
         Actor bulletActor = getActor().createCompanion("bullet");
         this.latestBullet = bulletActor;
         bulletActor.setDirection(getActor().getAppearance().getDirection());
-        Bullet bullet = (Bullet) bulletActor.getBehaviour();
+        Bullet bullet = (Bullet) bulletActor.getRole();
         bullet.addTag("killable");
         bulletActor.moveForwards(10);
 

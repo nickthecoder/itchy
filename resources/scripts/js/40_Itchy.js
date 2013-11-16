@@ -48,13 +48,13 @@ DirectorScript = Class({
     
 });
 
-BehaviourScript = Class({
+RoleScript = Class({
 
     Class: {
     
         addProperty: function( className, propertyName, klass, label ) {
             if (klass == String) klass = java.lang.String;
-            itchy.script.ScriptedBehaviour.addProperty(
+            itchy.script.ScriptedRole.addProperty(
                 className, propertyName, label, klass
             );
         },
@@ -74,9 +74,9 @@ BehaviourScript = Class({
     
     isMouseListener: function() {
         return
-            (this.onMouseDown != BehaviourScript.prototype.onMouseDown) ||
-            (this.onMouseUp != BehaviourScript.prototype.onMouseUp) ||
-            (this.onMouseMove != BehaviourScript.prototype.onMouseMove)
+            (this.onMouseDown != RoleScript.prototype.onMouseDown) ||
+            (this.onMouseUp != RoleScript.prototype.onMouseUp) ||
+            (this.onMouseMove != RoleScript.prototype.onMouseMove)
     },
     
     getCostumeProperties: function() {

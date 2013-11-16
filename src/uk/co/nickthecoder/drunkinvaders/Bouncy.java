@@ -5,12 +5,12 @@
  ******************************************************************************/
 package uk.co.nickthecoder.drunkinvaders;
 
-import uk.co.nickthecoder.itchy.AbstractBehaviour;
+import uk.co.nickthecoder.itchy.AbstractRole;
 import uk.co.nickthecoder.itchy.Actor;
-import uk.co.nickthecoder.itchy.Behaviour;
+import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.util.Property;
 
-public class Bouncy extends AbstractBehaviour
+public class Bouncy extends AbstractRole
 {
     public static final String[] BOUNCY_LIST = new String[] { "bouncy" };
 
@@ -75,16 +75,16 @@ public class Bouncy extends AbstractBehaviour
 
         getActor().getCollisionStrategy().update();
 
-        for (Behaviour behaviour : getActor().pixelOverlap(BOUNCY_LIST)) {
-            collide(getActor(), behaviour.getActor());
+        for (Role role : getActor().pixelOverlap(BOUNCY_LIST)) {
+            collide(getActor(), role.getActor());
         }
 
     }
 
     public static void collide( Actor a, Actor b )
     {
-        Bouncy bba = (Bouncy) a.getBehaviour();
-        Bouncy bbb = (Bouncy) b.getBehaviour();
+        Bouncy bba = (Bouncy) a.getRole();
+        Bouncy bbb = (Bouncy) b.getRole();
 
         double dx = a.getX() - b.getX();
         double dy = a.getY() - b.getY();
@@ -122,8 +122,8 @@ public class Bouncy extends AbstractBehaviour
     public static void collideOld( Actor a, Actor b )
     {
 
-        Bouncy bba = (Bouncy) a.getBehaviour();
-        Bouncy bbb = (Bouncy) b.getBehaviour();
+        Bouncy bba = (Bouncy) a.getRole();
+        Bouncy bbb = (Bouncy) b.getRole();
 
         double dx = a.getX() - b.getX();
         double dy = a.getY() - b.getY();

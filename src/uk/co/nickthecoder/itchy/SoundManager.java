@@ -48,7 +48,7 @@ public class SoundManager
     
     public void play( Actor actor, String eventName, ManagedSound ms )
     {
-        if ( ms.multipleBehaviour != ManagedSound.MultipleBehaviour.PLAY_BOTH ) {
+        if ( ms.multipleRole != ManagedSound.MultipleRole.PLAY_BOTH ) {
             // If this sound is already playing, then we can't play both of them
 
             for (Iterator<SoundEntry> i = this.soundEntries.iterator(); i.hasNext();) {
@@ -58,10 +58,10 @@ public class SoundManager
                     // The sound is already playing.
                     
                     if ( actor == entry.actor ) {
-                        if ( ms.multipleBehaviour == ManagedSound.MultipleBehaviour.IGNORE_SECOND ) {
+                        if ( ms.multipleRole == ManagedSound.MultipleRole.IGNORE_SECOND ) {
                             return;
                         
-                        } else if ( ms.multipleBehaviour == ManagedSound.MultipleBehaviour.FADE_FIRST ) {
+                        } else if ( ms.multipleRole == ManagedSound.MultipleRole.FADE_FIRST ) {
                             entry.fadeOut();
                         
                         } else { // Must be STOP_FIRST

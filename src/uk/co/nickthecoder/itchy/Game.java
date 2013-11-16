@@ -52,7 +52,7 @@ public class Game
      * {@link Actor#hadTag(String)}, {@link Actor#addTag(String)} and
      * {@link Actor#removeTag(String)}.
      */
-    public final TagCollection<Behaviour> behaviourTags = new TagCollection<Behaviour>();
+    public final TagCollection<Role> roleTags = new TagCollection<Role>();
 
     public List<Actor> actors = new LinkedList<Actor>();
 
@@ -383,17 +383,17 @@ public class Game
     }
 
     /**
-     * Returns a lists of all the Behaviours tagged with a given tag.
+     * Returns a lists of all the Roles tagged with a given tag.
      * 
      * @param tag
      *        The tag to search for.
-     * @return A set of Behaviours meeting the criteria. An empty set if no behaviours meet the
+     * @return A set of Roles meeting the criteria. An empty set if no roles meet the
      *         criteria.
-     * @See {@link Behaviour#addTag(String)}
+     * @See {@link Role#addTag(String)}
      */
-    public Set<Behaviour> findBehaviourByTag( String tag )
+    public Set<Role> findRoleByTag( String tag )
     {
-        return this.behaviourTags.getTagMembers(tag);
+        return this.roleTags.getTagMembers(tag);
     }
 
     /**

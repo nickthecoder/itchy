@@ -1,5 +1,5 @@
 Wally = Class({
-    Extends: BehaviourScript,
+    Extends: RoleScript,
 
     // Poke (mouse click) the wally walking across out view, to make him/her jump.   
     onMouseDown: function(view, event) {

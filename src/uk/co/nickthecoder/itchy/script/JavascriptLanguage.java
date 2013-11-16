@@ -10,13 +10,13 @@ import javax.script.ScriptContext;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
-import uk.co.nickthecoder.itchy.Behaviour;
+import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.CostumeProperties;
 import uk.co.nickthecoder.itchy.Director;
 import uk.co.nickthecoder.itchy.Game;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.MouseListenerView;
-import uk.co.nickthecoder.itchy.NullBehaviour;
+import uk.co.nickthecoder.itchy.NullRole;
 import uk.co.nickthecoder.itchy.PlainDirector;
 import uk.co.nickthecoder.itchy.PlainSceneDirector;
 import uk.co.nickthecoder.itchy.SceneDirector;
@@ -300,139 +300,139 @@ public class JavascriptLanguage extends ScriptLanguage
         }
     }
 
-    // ===== Behaviour ======
+    // ===== Role ======
 
     @Override
-    public Behaviour createBehaviour( ClassName className )
+    public Role createRole( ClassName className )
     {
         ensureGlobals();
 
-        ScriptedBehaviour behaviour = null;
+        ScriptedRole role = null;
 
         try {
             String name = ScriptManager.getName(className);
             this.manager.loadScript(className.name);
 
-            Object behaviourScript = this.engine.eval("new " + name + "();");
+            Object roleScript = this.engine.eval("new " + name + "();");
 
-            behaviour = new ScriptedBehaviour(className, this, behaviourScript);
+            role = new ScriptedRole(className, this, roleScript);
 
             Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
-            bindings.put("behaviourScript", behaviourScript);
-            bindings.put("behaviour", behaviour);
-            this.engine.eval("behaviourScript.behaviour = behaviour;");
+            bindings.put("roleScript", roleScript);
+            bindings.put("role", role);
+            this.engine.eval("roleScript.role = role;");
 
         } catch (ScriptException e) {
-            handleException("creating Behaviour " + className.name, e);
+            handleException("creating Role " + className.name, e);
         }
 
-        if (behaviour == null) {
-            log("Using NullBehaviour instead.");
-            return new NullBehaviour();
+        if (role == null) {
+            log("Using NullRole instead.");
+            return new NullRole();
         }
-        return behaviour;
+        return role;
     }
 
     @Override
-    public void onBirth( ScriptedBehaviour behaviour )
+    public void onBirth( ScriptedRole role )
     {
         try {
             Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
-            bindings.put("behaviourScript", behaviour.behaviourScript);
-            bindings.put("javaActor", behaviour.getActor());
-            this.engine.eval("behaviourScript.actor = javaActor; behaviourScript.onBirth();");
+            bindings.put("roleScript", role.roleScript);
+            bindings.put("javaActor", role.getActor());
+            this.engine.eval("roleScript.actor = javaActor; roleScript.onBirth();");
 
         } catch (ScriptException e) {
-            handleException("Behaviour.onBirth", e);
+            handleException("Role.onBirth", e);
         }
 
     }
 
     @Override
-    public void onDeath( ScriptedBehaviour behaviour )
+    public void onDeath( ScriptedRole role )
     {
         try {
             Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
-            bindings.put("behaviourScript", behaviour.behaviourScript);
-            this.engine.eval("behaviourScript.onDeath();");
+            bindings.put("roleScript", role.roleScript);
+            this.engine.eval("roleScript.onDeath();");
 
         } catch (ScriptException e) {
-            handleException("Behaviour.onDeath", e);
-        }
-    }
-
-    @Override
-    public void tick( ScriptedBehaviour behaviour )
-    {
-        try {
-            Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
-            bindings.put("behaviourScript", behaviour.behaviourScript);
-            this.engine.eval("behaviourScript.tick();");
-
-        } catch (ScriptException e) {
-            handleException("Behaviour.tick", e);
+            handleException("Role.onDeath", e);
         }
     }
 
     @Override
-    public boolean onMouseDown( ScriptedBehaviour behaviour, MouseListenerView view, MouseButtonEvent event )
+    public void tick( ScriptedRole role )
     {
         try {
             Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
-            bindings.put("behaviourScript", behaviour.behaviourScript);
+            bindings.put("roleScript", role.roleScript);
+            this.engine.eval("roleScript.tick();");
+
+        } catch (ScriptException e) {
+            handleException("Role.tick", e);
+        }
+    }
+
+    @Override
+    public boolean onMouseDown( ScriptedRole role, MouseListenerView view, MouseButtonEvent event )
+    {
+        try {
+            Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
+            bindings.put("roleScript", role.roleScript);
             bindings.put("arg1", event);
             bindings.put("arg2", event);
-            return this.eventResult(this.engine.eval("behaviourScript.onMouseDown(arg1,arg2);"));
+            return this.eventResult(this.engine.eval("roleScript.onMouseDown(arg1,arg2);"));
 
         } catch (ScriptException e) {
-            handleException("Behaviour.onMessage", e);
+            handleException("Role.onMessage", e);
             return false;
         }
     }
 
     @Override
-    public boolean onMouseUp( ScriptedBehaviour behaviour,  MouseListenerView view, MouseButtonEvent event )
+    public boolean onMouseUp( ScriptedRole role,  MouseListenerView view, MouseButtonEvent event )
     {
         try {
             Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
-            bindings.put("behaviourScript", behaviour.behaviourScript);
+            bindings.put("roleScript", role.roleScript);
             bindings.put("arg1", view);
             bindings.put("arg2", event);
-            return this.eventResult(this.engine.eval("behaviourScript.onMouseUp(arg1,arg2);"));
+            return this.eventResult(this.engine.eval("roleScript.onMouseUp(arg1,arg2);"));
 
         } catch (ScriptException e) {
-            handleException("Behaviour.onMessage", e);
+            handleException("Role.onMessage", e);
             return false;
         }
     }
 
     @Override
-    public boolean onMouseMove( ScriptedBehaviour behaviour,  MouseListenerView view, MouseMotionEvent event )
+    public boolean onMouseMove( ScriptedRole role,  MouseListenerView view, MouseMotionEvent event )
     {
         try {
             Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
-            bindings.put("behaviourScript", behaviour.behaviourScript);
+            bindings.put("roleScript", role.roleScript);
             bindings.put("arg1", view);
             bindings.put("arg2", event);
-            return this.eventResult(this.engine.eval("behaviourScript.onMouseMove(arg1,arg2);"));
+            return this.eventResult(this.engine.eval("roleScript.onMouseMove(arg1,arg2);"));
 
         } catch (ScriptException e) {
-            handleException("Behaviour.onMessage", e);
+            handleException("Role.onMessage", e);
             return false;
         }
     }
 
     @Override
-    public void onMessage( ScriptedBehaviour behaviour, String message )
+    public void onMessage( ScriptedRole role, String message )
     {
         try {
             Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
-            bindings.put("behaviourScript", behaviour.behaviourScript);
+            bindings.put("roleScript", role.roleScript);
             bindings.put("message", message);
-            this.engine.eval("behaviourScript.onMessage(message);");
+            this.engine.eval("roleScript.onMessage(message);");
 
         } catch (ScriptException e) {
-            handleException("Behaviour.onMessage", e);
+            handleException("Role.onMessage", e);
         }
     }
 
@@ -478,7 +478,7 @@ public class JavascriptLanguage extends ScriptLanguage
     }
 
     @Override
-    public void onDeactivate( ScriptedSceneDirector behaviour )
+    public void onDeactivate( ScriptedSceneDirector role )
     {
         try {
             this.engine.eval("sceneDirectorScript.onDeactivate();");
@@ -489,7 +489,7 @@ public class JavascriptLanguage extends ScriptLanguage
     }
 
     @Override
-    public void tick( ScriptedSceneDirector behaviour )
+    public void tick( ScriptedSceneDirector role )
     {
         try {
             this.engine.eval("sceneDirectorScript.tick();");
@@ -500,7 +500,7 @@ public class JavascriptLanguage extends ScriptLanguage
     }
 
     @Override
-    public boolean onMouseDown( ScriptedSceneDirector behaviour, MouseButtonEvent mbe )
+    public boolean onMouseDown( ScriptedSceneDirector role, MouseButtonEvent mbe )
     {
         try {
             Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
@@ -514,7 +514,7 @@ public class JavascriptLanguage extends ScriptLanguage
     }
 
     @Override
-    public boolean onMouseUp( ScriptedSceneDirector behaviour, MouseButtonEvent mbe )
+    public boolean onMouseUp( ScriptedSceneDirector role, MouseButtonEvent mbe )
     {
         try {
             Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
@@ -528,7 +528,7 @@ public class JavascriptLanguage extends ScriptLanguage
     }
 
     @Override
-    public boolean onMouseMove( ScriptedSceneDirector behaviour, MouseMotionEvent mme )
+    public boolean onMouseMove( ScriptedSceneDirector role, MouseMotionEvent mme )
     {
         try {
             Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
@@ -542,7 +542,7 @@ public class JavascriptLanguage extends ScriptLanguage
     }
 
     @Override
-    public boolean onKeyDown( ScriptedSceneDirector behaviour, KeyboardEvent ke )
+    public boolean onKeyDown( ScriptedSceneDirector role, KeyboardEvent ke )
     {
         try {
             Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
@@ -556,7 +556,7 @@ public class JavascriptLanguage extends ScriptLanguage
     }
 
     @Override
-    public boolean onKeyUp( ScriptedSceneDirector behaviour, KeyboardEvent ke )
+    public boolean onKeyUp( ScriptedSceneDirector role, KeyboardEvent ke )
     {
         try {
             Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
@@ -570,7 +570,7 @@ public class JavascriptLanguage extends ScriptLanguage
     }
 
     @Override
-    public void onMessage( ScriptedSceneDirector behaviour, String message )
+    public void onMessage( ScriptedSceneDirector role, String message )
     {
         try {
             Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);

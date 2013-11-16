@@ -15,7 +15,7 @@ public class MessageButton extends Button
 {
     /**
      * The message that is sent to the Game when the button is clicked. This is set from the
-     * "Behaviour" tab of the Scene Designer.
+     * "Role" tab of the Scene Designer.
      */
     @Property(label = "Message")
     public String message = "none";

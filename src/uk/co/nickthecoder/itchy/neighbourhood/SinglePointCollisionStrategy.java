@@ -12,7 +12,7 @@ import java.util.Set;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.ActorCollisionStrategy;
-import uk.co.nickthecoder.itchy.Behaviour;
+import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.BruteForceCollisionStrategy;
 
 /**
@@ -70,22 +70,22 @@ public class SinglePointCollisionStrategy extends ActorCollisionStrategy
     }
 
     @Override
-    public Set<Behaviour> overlapping( Actor source, String[] includeTags, String[] excludeTags )
+    public Set<Role> overlapping( Actor source, String[] includeTags, String[] excludeTags )
     {
-        Set<Behaviour> results = new HashSet<Behaviour>();
+        Set<Role> results = new HashSet<Role>();
 
         for (Square square : this.neighbourhoodSquare.getNeighbouringSquares()) {
             for (Actor actor : square.getOccupants()) {
-                Behaviour behaviour = actor.getBehaviour();
+                Role role = actor.getRole();
                 
                 if ((actor != source) && (!results.contains(actor))) {
-                    if (!BruteForceCollisionStrategy.exclude(behaviour, excludeTags)) {
+                    if (!BruteForceCollisionStrategy.exclude(role, excludeTags)) {
                         for (String includeTag : includeTags) {
-                            if (behaviour.hasTag(includeTag)) {
+                            if (role.hasTag(includeTag)) {
     
                                 if (source.overlapping(actor)) {
-                                    // TODO - Won't work if it is a compound behaviour
-                                    results.add(behaviour);
+                                    // TODO - Won't work if it is a compound role
+                                    results.add(role);
                                     break;
                                 }
                             }
@@ -99,23 +99,23 @@ public class SinglePointCollisionStrategy extends ActorCollisionStrategy
     }
 
     @Override
-    public Set<Behaviour> pixelOverlap( Actor source, String[] includeTags, String[] excludeTags )
+    public Set<Role> pixelOverlap( Actor source, String[] includeTags, String[] excludeTags )
     {
-        Set<Behaviour> results = new HashSet<Behaviour>();
+        Set<Role> results = new HashSet<Role>();
 
         for (Square square : this.neighbourhoodSquare.getNeighbouringSquares()) {
 
             for (Actor actor : square.getOccupants()) {
-                Behaviour behaviour = actor.getBehaviour();
+                Role role = actor.getRole();
                 
                 if ((actor != source) && (!results.contains(actor))) {
-                    if (!BruteForceCollisionStrategy.exclude(behaviour, excludeTags)) {
+                    if (!BruteForceCollisionStrategy.exclude(role, excludeTags)) {
                         for (String includeTag : includeTags) {
-                            if (behaviour.hasTag(includeTag)) {
+                            if (role.hasTag(includeTag)) {
     
                                 if (source.pixelOverlap(actor)) {
-                                    // TODO - Won't work if it is a compound behaviour
-                                    results.add(behaviour);
+                                    // TODO - Won't work if it is a compound role
+                                    results.add(role);
                                     break;
                                 }
                             }

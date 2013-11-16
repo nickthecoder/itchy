@@ -10,8 +10,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-import uk.co.nickthecoder.itchy.AbstractBehaviour;
-import uk.co.nickthecoder.itchy.Behaviour;
+import uk.co.nickthecoder.itchy.AbstractRole;
+import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.MouseListenerView;
 import uk.co.nickthecoder.itchy.ViewMouseListener;
 import uk.co.nickthecoder.itchy.util.AbstractProperty;
@@ -19,59 +19,59 @@ import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 
-public class ScriptedBehaviour extends AbstractBehaviour implements ViewMouseListener
+public class ScriptedRole extends AbstractRole implements ViewMouseListener
 {
-    private final static HashMap<String, List<AbstractProperty<Behaviour, ?>>> allProperties = new HashMap<String, List<AbstractProperty<Behaviour, ?>>>();
+    private final static HashMap<String, List<AbstractProperty<Role, ?>>> allProperties = new HashMap<String, List<AbstractProperty<Role, ?>>>();
 
     private ClassName className;
 
     private ScriptLanguage language;
 
-    public final Object behaviourScript;
+    public final Object roleScript;
 
     public final ScriptProperties propertyValues;
 
-    public ScriptedBehaviour( ClassName className, ScriptLanguage language, Object scriptInstance )
+    public ScriptedRole( ClassName className, ScriptLanguage language, Object scriptInstance )
     {
         this.className = className;
         this.language = language;
-        this.behaviourScript = scriptInstance;
+        this.roleScript = scriptInstance;
         this.propertyValues = new ScriptProperties(this.language, scriptInstance);
     }
 
     @Override
-    public List<AbstractProperty<Behaviour, ?>> getProperties()
+    public List<AbstractProperty<Role, ?>> getProperties()
     {
         String name = ScriptManager.getName(this.className);
 
-        List<AbstractProperty<Behaviour, ?>> result = allProperties.get(name);
+        List<AbstractProperty<Role, ?>> result = allProperties.get(name);
         if (result == null) {
-            result = new ArrayList<AbstractProperty<Behaviour, ?>>();
+            result = new ArrayList<AbstractProperty<Role, ?>>();
             allProperties.put(name, result);
         }
         return result;
     }
 
     public static void addProperty(
-        String behaviourName, String propertyName, String label, Class<?> klass )
+        String roleName, String propertyName, String label, Class<?> klass )
     {
-        List<AbstractProperty<Behaviour, ?>> properties = allProperties.get(behaviourName);
+        List<AbstractProperty<Role, ?>> properties = allProperties.get(roleName);
 
         if (properties == null) {
-            properties = new ArrayList<AbstractProperty<Behaviour, ?>>();
-            allProperties.put(behaviourName, properties);
+            properties = new ArrayList<AbstractProperty<Role, ?>>();
+            allProperties.put(roleName, properties);
 
         } else {
             // If the property was previously defined, remove it.
-            for (Iterator<AbstractProperty<Behaviour, ?>> i = properties.iterator(); i.hasNext();) {
-                AbstractProperty<Behaviour, ?> property = i.next();
+            for (Iterator<AbstractProperty<Role, ?>> i = properties.iterator(); i.hasNext();) {
+                AbstractProperty<Role, ?> property = i.next();
                 if (property.key.equals(propertyName)) {
                     i.remove();
                 }
             }
         }
 
-        AbstractProperty<Behaviour, ?> property = AbstractProperty.createProperty(
+        AbstractProperty<Role, ?> property = AbstractProperty.createProperty(
             klass, "propertyValues." + propertyName, propertyName, label, true, false, true);
         if (property != null) {
             properties.add(property);

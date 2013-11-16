@@ -1,4 +1,4 @@
-<scene showMouse="true" behaviour="uk.co.nickthecoder.drunkinvaders.About">
+<scene showMouse="true" role="uk.co.nickthecoder.drunkinvaders.About">
   <properties/>
   <layer name="background">
     <actor costume="earth" x="0" y="0" direction="0.0" heading="0.0" startEvent="default" zOrder="1"/>
@@ -9,10 +9,10 @@
     <text text="Version 0.1" font="vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="323" y="402" direction="0.0" heading="0.0" startEvent="default" zOrder="4"/>
     <text text="Inspired and helped by Simon Lucas" font="vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="324" y="296" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
     <text text="©2012" font="vera" size="14" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="500" y="445" direction="0.0" heading="0.0" startEvent="default" zOrder="6"/>
-    <text text="BACK" font="blackCasper" size="60" color="#000000" xAlignment="0.5" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.SceneButton" costume="button" x="326" y="41" direction="0.0" heading="0.0" startEvent="default" zOrder="7">
+    <text text="BACK" font="blackCasper" size="60" color="#000000" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.extras.SceneButton" costume="button" x="326" y="41" direction="0.0" heading="0.0" startEvent="default" zOrder="7">
       <property name="sceneName" value="menu"/>
     </text>
-    <text text="Reset" font="veraBold" size="20" color="#ffffff" xAlignment="0.5" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.MessageButton" costume="button" x="68" y="24" direction="0.0" heading="0.0" startEvent="default" zOrder="8" colorize="#000000ff">
+    <text text="Reset" font="veraBold" size="20" color="#ffffff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.extras.MessageButton" costume="button" x="68" y="24" direction="0.0" heading="0.0" startEvent="default" zOrder="8" colorize="#000000ff">
       <property name="message" value="reset"/>
     </text>
   </layer>

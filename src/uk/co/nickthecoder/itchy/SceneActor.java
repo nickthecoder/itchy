@@ -7,7 +7,7 @@ package uk.co.nickthecoder.itchy;
 
 import java.util.HashMap;
 
-import uk.co.nickthecoder.itchy.editor.SceneDesignerBehaviour;
+import uk.co.nickthecoder.itchy.editor.SceneDesignerRole;
 import uk.co.nickthecoder.itchy.util.AbstractProperty;
 import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.itchy.util.StringUtils;
@@ -42,7 +42,7 @@ public abstract class SceneActor implements Cloneable
     
     public String startEvent = "default";
 
-    public ClassName behaviourClassName;
+    public ClassName roleClassName;
 
     public RGBA colorize;
 
@@ -64,16 +64,16 @@ public abstract class SceneActor implements Cloneable
         this.heading = actor.getHeading();
         this.zOrder = actor.getZOrder();
         this.scale = actor.getAppearance().getScale();
-        this.behaviourClassName = ((SceneDesignerBehaviour) actor.getBehaviour()).getBehaviourClassName();
+        this.roleClassName = ((SceneDesignerRole) actor.getRole()).getRoleClassName();
         this.colorize = actor.getAppearance().getColorize() == null ? null : new RGBA(actor.getAppearance().getColorize());
         this.activationDelay = actor.getActivationDelay();
         this.startEvent = actor.getStartEvent();
 
-        Behaviour actualBehaviour = ((SceneDesignerBehaviour) actor.getBehaviour()).actualBehaviour;
+        Role actualRole = ((SceneDesignerRole) actor.getRole()).actualRole;
 
-        for (AbstractProperty<Behaviour, ?> property : actualBehaviour.getProperties()) {
+        for (AbstractProperty<Role, ?> property : actualRole.getProperties()) {
             try {
-                Object value = property.getValue(actualBehaviour);
+                Object value = property.getValue(actualRole);
                 this.customProperties.put(property.key, value);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -90,36 +90,36 @@ public abstract class SceneActor implements Cloneable
         actor.setHeading(this.heading);
         actor.getAppearance().setScale(this.scale);
         actor.getAppearance().setColorize(this.colorize == null ? null : new RGBA(this.colorize));
-        ClassName behaviourClassName = this.behaviourClassName;
+        ClassName roleClassName = this.roleClassName;
         actor.setActivationDelay(this.activationDelay);
 
-        if (behaviourClassName == null) {
+        if (roleClassName == null) {
             if (actor.getCostume() == null) {
-                behaviourClassName = new ClassName(NullBehaviour.class.getName());
+                roleClassName = new ClassName(NullRole.class.getName());
             } else {
-                behaviourClassName = actor.getCostume().behaviourClassName;
+                roleClassName = actor.getCostume().roleClassName;
             }
         }
 
-        Behaviour actualBehaviour;
+        Role actualRole;
 
         if (designMode) {
 
-            SceneDesignerBehaviour behaviour = new SceneDesignerBehaviour();
-            actor.setBehaviour(behaviour);
+            SceneDesignerRole role = new SceneDesignerRole();
+            actor.setRole(role);
 
             try {
-                behaviour.setBehaviourClassName(resources, behaviourClassName);
+                role.setRoleClassName(resources, roleClassName);
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
-            actualBehaviour = behaviour.actualBehaviour;
+            actualRole = role.actualRole;
 
         } else {
 
             try {
-                actualBehaviour = AbstractBehaviour.createBehaviour(resources, behaviourClassName);
+                actualRole = AbstractRole.createRole(resources, roleClassName);
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -127,11 +127,11 @@ public abstract class SceneActor implements Cloneable
             }
         }
 
-        for (AbstractProperty<Behaviour, ?> property : actualBehaviour.getProperties()) {
+        for (AbstractProperty<Role, ?> property : actualRole.getProperties()) {
             Object value = this.customProperties.get(property.key);
             if (value != null) {
                 try {
-                    property.setValue(actualBehaviour, value);
+                    property.setValue(actualRole, value);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -139,7 +139,7 @@ public abstract class SceneActor implements Cloneable
         }
 
         if (!designMode) {
-            actor.setBehaviour(actualBehaviour);
+            actor.setRole(actualRole);
         }
 
     }
@@ -198,7 +198,7 @@ public abstract class SceneActor implements Cloneable
         if (!StringUtils.equals(this.startEvent, other.startEvent)) {
             return false;
         }
-        if (!StringUtils.equals(this.behaviourClassName, other.behaviourClassName)) {
+        if (!StringUtils.equals(this.roleClassName, other.roleClassName)) {
             return false;
         }
         if (!StringUtils.equals(this.colorize, other.colorize)) {

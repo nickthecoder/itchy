@@ -6,7 +6,7 @@
 package uk.co.nickthecoder.itchy.extras;
 
 import uk.co.nickthecoder.itchy.Actor;
-import uk.co.nickthecoder.itchy.Behaviour;
+import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.Itchy;
 
 public class Projectile extends Companion<Projectile>
@@ -31,7 +31,7 @@ public class Projectile extends Companion<Projectile>
 
     public int lifeTicks;
 
-    public Projectile( Behaviour source )
+    public Projectile( Role source )
     {
         this(source.getActor());
     }

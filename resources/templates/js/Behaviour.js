@@ -1,12 +1,12 @@
 ${NAME} = Class({
-    Extends: BehaviourScript,
+    Extends: RoleScript,
     
     init: function() {
         // TODO Initialise your object. Note you can't access this.actor yet.
     },
     
     onAttach: function() {
-        // TODO This behaviour is now attached to an actor, i.e. this.actor is now available.
+        // TODO This role is now attached to an actor, i.e. this.actor is now available.
     },
     
     tick: function() {
@@ -17,9 +17,9 @@ ${NAME} = Class({
     // onDetach, onKill, onMouseDown, onMouseUp, onMouseMove
 });
 // TODO Define each editable property like so 
-// BehaviourScript.addProperty("${NAME}", "exampleInteger", Integer, "Example Integer");
-// BehaviourScript.addProperty("${NAME}", "exampleDouble", Double, "Example Double");
-// BehaviourScript.addProperty("${NAME}", "exampleString", String, "Example String");
-// BehaviourScript.addProperty("${NAME}", "exampleColour", RGBA, "Example Colour");
+// RoleScript.addProperty("${NAME}", "exampleInteger", Integer, "Example Integer");
+// RoleScript.addProperty("${NAME}", "exampleDouble", Double, "Example Double");
+// RoleScript.addProperty("${NAME}", "exampleString", String, "Example String");
+// RoleScript.addProperty("${NAME}", "exampleColour", RGBA, "Example Colour");
 // Each property should be initialised to a default value in the "init" method.
 

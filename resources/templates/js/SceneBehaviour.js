@@ -13,7 +13,7 @@ ${NAME} = Class({
     },
     
     tick: function() {
-        // TODO Called 50 times a second, but is often not needed, as your Actors' Behaviours will do most of the work.
+        // TODO Called 50 times a second, but is often not needed, as your Actors' Roles will do most of the work.
     }
     
     // Other methods include :

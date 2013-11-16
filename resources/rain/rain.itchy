@@ -175,62 +175,62 @@
     </costume>
     <costume name="button" defaultZOrder="0">
       <string name="default">Button</string>
-      <sound name="hoverOver" sound="drip" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND" priority="1"/>
+      <sound name="hoverOver" sound="drip" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
       <font name="default" font="BlackCasper"/>
       <animation name="hoverOut" animation="hoverOut"/>
       <animation name="hoverOver" animation="hoverOver"/>
       <animation name="mouseDown" animation="mouseDown"/>
       <animation name="mouseUp" animation="mouseUp"/>
     </costume>
-    <costume name="drop1" defaultZOrder="0" behaviour="Drop.js" properties="DropProperties.js">
+    <costume name="drop1" defaultZOrder="0" role="Drop.js" properties="DropProperties.js">
       <pose name="default" pose="drop1"/>
       <pose name="droplet" pose="droplet1"/>
-      <sound name="drip" sound="drip" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="PLAY_BOTH" priority="3"/>
+      <sound name="drip" sound="drip" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="PLAY_BOTH" priority="3"/>
       <properties speedFactor="1.0"/>
     </costume>
-    <costume name="drop2" defaultZOrder="0" behaviour="Drop.js" properties="DropProperties.js">
+    <costume name="drop2" defaultZOrder="0" role="Drop.js" properties="DropProperties.js">
       <pose name="default" pose="drop2"/>
       <pose name="default" pose="drop2b"/>
       <pose name="droplet" pose="droplet2"/>
       <properties speedFactor="0.75"/>
     </costume>
-    <costume name="drop3" defaultZOrder="0" behaviour="Drop.js" properties="DropProperties.js">
+    <costume name="drop3" defaultZOrder="0" role="Drop.js" properties="DropProperties.js">
       <pose name="default" pose="drop3"/>
       <pose name="droplet" pose="droplet3"/>
-      <sound name="drip" sound="forFortyDays" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="PLAY_BOTH" priority="1"/>
-      <sound name="drip" sound="hallelujah" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="PLAY_BOTH" priority="2"/>
-      <sound name="drip" sound="hallelujah2" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="PLAY_BOTH" priority="2"/>
-      <sound name="drip" sound="rain" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="PLAY_BOTH" priority="2"/>
-      <sound name="drip" sound="theyDidntBelieveThatItWasGunnaRain" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="PLAY_BOTH" priority="2"/>
-      <sound name="drip" sound="myLordMyLord" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="PLAY_BOTH" priority="2"/>
+      <sound name="drip" sound="forFortyDays" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="PLAY_BOTH" priority="1"/>
+      <sound name="drip" sound="hallelujah" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="PLAY_BOTH" priority="2"/>
+      <sound name="drip" sound="hallelujah2" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="PLAY_BOTH" priority="2"/>
+      <sound name="drip" sound="rain" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="PLAY_BOTH" priority="2"/>
+      <sound name="drip" sound="theyDidntBelieveThatItWasGunnaRain" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="PLAY_BOTH" priority="2"/>
+      <sound name="drip" sound="myLordMyLord" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="PLAY_BOTH" priority="2"/>
       <properties speedFactor="1.2"/>
     </costume>
-    <costume name="editor" defaultZOrder="0" extends="button" behaviour="uk.co.nickthecoder.itchy.extras.MessageButton">
+    <costume name="editor" defaultZOrder="0" extends="button" role="uk.co.nickthecoder.itchy.extras.MessageButton">
       <string name="default">Editor</string>
-      <sound name="click" sound="theyDidntBelieveThatItWasGunnaRain" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND" priority="1"/>
+      <sound name="click" sound="theyDidntBelieveThatItWasGunnaRain" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
       <font name="default" font="Boycott"/>
     </costume>
-    <costume name="play" defaultZOrder="0" extends="button" behaviour="uk.co.nickthecoder.itchy.extras.MessageButton">
+    <costume name="play" defaultZOrder="0" extends="button" role="uk.co.nickthecoder.itchy.extras.MessageButton">
       <string name="default">play</string>
-      <sound name="click" sound="itBeganToRain" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND" priority="1"/>
+      <sound name="click" sound="itBeganToRain" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
       <font name="default" font="BlackCasper"/>
     </costume>
-    <costume name="player" defaultZOrder="0" behaviour="Player.js">
+    <costume name="player" defaultZOrder="0" role="Player.js">
       <pose name="bones" pose="sheepBones"/>
       <pose name="default" pose="sheep"/>
-      <sound name="death" sound="ohLord" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND" priority="3"/>
-      <sound name="highScore" sound="woo" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND" priority="2"/>
+      <sound name="death" sound="ohLord" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="3"/>
+      <sound name="highScore" sound="woo" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="2"/>
       <animation name="death" animation="death"/>
     </costume>
-    <costume name="quit" defaultZOrder="0" extends="button" behaviour="uk.co.nickthecoder.itchy.extras.MessageButton">
+    <costume name="quit" defaultZOrder="0" extends="button" role="uk.co.nickthecoder.itchy.extras.MessageButton">
       <string name="default">Quit</string>
-      <sound name="click" sound="ItAintGunnaRain" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND" priority="1"/>
+      <sound name="click" sound="ItAintGunnaRain" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
       <font name="default" font="Boycott"/>
     </costume>
     <costume name="speed" defaultZOrder="0">
       <pose name="default" pose="speed"/>
     </costume>
-    <costume name="wally" defaultZOrder="0" behaviour="Wally.js">
+    <costume name="wally" defaultZOrder="0" role="Wally.js">
       <pose name="default" pose="wally3"/>
       <pose name="default" pose="wally4"/>
       <pose name="default" pose="wally5"/>

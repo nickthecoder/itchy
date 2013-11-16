@@ -7,13 +7,13 @@
  ******************************************************************************/
 package uk.co.nickthecoder.drunkinvaders;
 
-import uk.co.nickthecoder.itchy.AbstractBehaviour;
+import uk.co.nickthecoder.itchy.AbstractRole;
 import uk.co.nickthecoder.itchy.Actor;
-import uk.co.nickthecoder.itchy.Behaviour;
+import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.util.Tag;
 
 @Tag(names = {"deadly"})
-public class Pacman extends AbstractBehaviour
+public class Pacman extends AbstractRole
 {
 
     @Override
@@ -36,11 +36,11 @@ public class Pacman extends AbstractBehaviour
     {
         getActor().getCollisionStrategy().update();
         
-        for (Behaviour behaviour : getActor().pixelOverlap(Alien.SHOOTABLE_LIST)) {
-            Actor other = behaviour.getActor();
+        for (Role role : getActor().pixelOverlap(Alien.SHOOTABLE_LIST)) {
+            Actor other = role.getActor();
             
-            if ((getActor() != other) && (!behaviour.hasTag("bouncy"))) {
-                ((Shootable) other.getBehaviour()).shot(getActor());
+            if ((getActor() != other) && (!role.hasTag("bouncy"))) {
+                ((Shootable) other.getRole()).shot(getActor());
             }
         }
     }

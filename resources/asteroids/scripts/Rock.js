@@ -1,5 +1,5 @@
 Rock = Class({
-    Extends: BehaviourScript,
+    Extends: RoleScript,
     
     init: function() {
         this.rotationSpeed = 0;
@@ -9,8 +9,8 @@ Rock = Class({
     },
     
     onBirth: function() {
-        this.behaviour.addTag("shootable");
-        this.behaviour.addTag("deadly");
+        this.role.addTag("shootable");
+        this.role.addTag("deadly");
         sceneDirectorScript.addRocks(1);
     },
     
@@ -47,21 +47,21 @@ Rock = Class({
         var pieces = this.getCostumeProperties().pieces;
         for (var i = 0; i < pieces; i ++ ) {
             var actor = this.actor.createCompanion("fragment");
-            var behaviour = actor.getBehaviour().behaviourScript;
+            var role = actor.getRole().roleScript;
             
-            behaviour.rotationSpeed = 3 * i - this.rotationSpeed;
-            behaviour.vx = itchy.util.Util.randomBetween( -4, 4 );
-            behaviour.vy = itchy.util.Util.randomBetween( -4, 4 );
+            role.rotationSpeed = 3 * i - this.rotationSpeed;
+            role.vx = itchy.util.Util.randomBetween( -4, 4 );
+            role.vy = itchy.util.Util.randomBetween( -4, 4 );
             
             actor.setDirection( this.actor.getHeading() + i * 120 );
             actor.moveForwards( 40 );
         }
         sceneDirectorScript.addRocks(-1);
         this.actor.deathEvent("explode");
-        this.behaviour.removeTag("shootable");
+        this.role.removeTag("shootable");
     }
 });
-BehaviourScript.addProperty("Rock", "rotationSpeed", Double, "Rotation Speed (Degrees per Tick)");
-BehaviourScript.addProperty("Rock", "vx", Double, "X Velocity");
-BehaviourScript.addProperty("Rock", "vy", Double, "Y Velocity");
+RoleScript.addProperty("Rock", "rotationSpeed", Double, "Rotation Speed (Degrees per Tick)");
+RoleScript.addProperty("Rock", "vx", Double, "X Velocity");
+RoleScript.addProperty("Rock", "vy", Double, "Y Velocity");
 

@@ -5,12 +5,12 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.test;
 
-import uk.co.nickthecoder.itchy.AbstractBehaviour;
-import uk.co.nickthecoder.itchy.NullBehaviour;
+import uk.co.nickthecoder.itchy.AbstractRole;
+import uk.co.nickthecoder.itchy.NullRole;
 import uk.co.nickthecoder.itchy.extras.Projectile;
 import uk.co.nickthecoder.itchy.util.Property;
 
-public class TestProjectiles extends AbstractBehaviour
+public class TestProjectiles extends AbstractRole
 {
     @Property(label = "Test ID")
     public int id;
@@ -65,7 +65,7 @@ public class TestProjectiles extends AbstractBehaviour
         } else if (this.id == 1) {
             test1().createActor();
         }
-        getActor().setBehaviour(new NullBehaviour());
+        getActor().setRole(new NullRole());
     }
 
     private Projectile test0()

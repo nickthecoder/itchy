@@ -316,8 +316,8 @@ public class ResourcesWriter extends XMLWriter
         if (baseName != null) {
             this.attribute("extends", baseName);
         }
-        if (!NullBehaviour.class.getName().equals(simpleCostume.behaviourClassName.name)) {
-            this.attribute("behaviour", simpleCostume.behaviourClassName.name);
+        if (!NullRole.class.getName().equals(simpleCostume.roleClassName.name)) {
+            this.attribute("role", simpleCostume.roleClassName.name);
         }
 
         if (CostumeProperties.class != simpleCostume.getProperties().getClass()) {

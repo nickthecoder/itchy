@@ -133,7 +133,7 @@ public class ScenesEditor extends SubEditor<SceneResource>
 
         ClassName className = sceneDirectorClassName.getClassName();
         if (!getResources().registerSceneDirectorClassName(className.name)) {
-            throw new MessageException("Invalid Scene Behaviour");
+            throw new MessageException("Invalid Scene Role");
         }
 
         if (this.adding) {

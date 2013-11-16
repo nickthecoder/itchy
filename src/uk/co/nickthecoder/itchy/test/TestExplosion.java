@@ -5,12 +5,12 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.test;
 
-import uk.co.nickthecoder.itchy.AbstractBehaviour;
-import uk.co.nickthecoder.itchy.NullBehaviour;
+import uk.co.nickthecoder.itchy.AbstractRole;
+import uk.co.nickthecoder.itchy.NullRole;
 import uk.co.nickthecoder.itchy.extras.Explosion;
 import uk.co.nickthecoder.itchy.util.Property;
 
-public class TestExplosion extends AbstractBehaviour
+public class TestExplosion extends AbstractRole
 {
     @Property(label = "Test ID")
     public int id;
@@ -85,7 +85,7 @@ public class TestExplosion extends AbstractBehaviour
     public void tick()
     {
         test0().createActor();
-        getActor().setBehaviour(new NullBehaviour());
+        getActor().setRole(new NullRole());
     }
 
     private Explosion test0()

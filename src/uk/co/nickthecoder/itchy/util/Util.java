@@ -55,7 +55,7 @@ public class Util
      * </pre>
      * 
      * This method assumes it is being called once every frame. For example, you could call it
-     * from a Behaviour's tick method.
+     * from a Role's tick method.
      */
     public static boolean randomOnceEvery( double seconds )
     {

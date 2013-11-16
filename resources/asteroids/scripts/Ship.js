@@ -1,5 +1,5 @@
 Ship = Class({
-    Extends: BehaviourScript,
+    Extends: RoleScript,
     
     init: function() {
         this.vx=0;
@@ -81,7 +81,7 @@ Ship = Class({
         }
         var i = this.actor.pixelOverlap("shootable").iterator();
         while (i.hasNext()) {
-            i.next().behaviourScript.shot(this);
+            i.next().roleScript.shot(this);
         }
         
         // For debugging.
@@ -108,7 +108,7 @@ Ship = Class({
     		if (directorScript.lives > 0) {
     			game.startScene(game.getSceneName());
 	    	} else {
-	    		for ( var i = itchy.AbstractBehaviour.allByTag( "gameOver" ).iterator(); i.hasNext();) {
+	    		for ( var i = itchy.AbstractRole.allByTag( "gameOver" ).iterator(); i.hasNext();) {
 	    			var gameOver = i.next();
 	    			gameOver.event("reveal");
 	    		}

@@ -1,4 +1,4 @@
-<scene showMouse="false" behaviour="uk.co.nickthecoder.drunkinvaders.Level">
+<scene showMouse="false" role="uk.co.nickthecoder.drunkinvaders.Level">
   <layer name="background">
     <actor costume="earth1" x="320" y="240" direction="0.0" startEvent="default"/>
   </layer>

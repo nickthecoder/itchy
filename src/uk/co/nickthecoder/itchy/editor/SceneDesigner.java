@@ -9,10 +9,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import uk.co.nickthecoder.itchy.AbstractBehaviour;
+import uk.co.nickthecoder.itchy.AbstractRole;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Appearance;
-import uk.co.nickthecoder.itchy.Behaviour;
+import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.CompoundView;
 import uk.co.nickthecoder.itchy.Costume;
 import uk.co.nickthecoder.itchy.CostumeResource;
@@ -22,7 +22,7 @@ import uk.co.nickthecoder.itchy.ImagePose;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.KeyListener;
 import uk.co.nickthecoder.itchy.MouseListener;
-import uk.co.nickthecoder.itchy.NullBehaviour;
+import uk.co.nickthecoder.itchy.NullRole;
 import uk.co.nickthecoder.itchy.Pose;
 import uk.co.nickthecoder.itchy.Scene;
 import uk.co.nickthecoder.itchy.SceneActor;
@@ -111,7 +111,7 @@ public class SceneDesigner implements MouseListener, KeyListener
 
     private Container propertiesContainer;
 
-    private Container behaviourContainer;
+    private Container roleContainer;
 
     private Container appearanceContainer;
 
@@ -132,19 +132,19 @@ public class SceneDesigner implements MouseListener, KeyListener
 
     private Actor stampActor;
 
-    private RotateHandleBehaviour rotateHandle;
-    private HeadingHandleBehaviour headingHandle;
+    private RotateHandleRole rotateHandle;
+    private HeadingHandleRole headingHandle;
 
-    private final List<ScaleHandleBehaviour> scaleHandles = new ArrayList<ScaleHandleBehaviour>();
-    private final List<HandleBehaviour> handles = new ArrayList<HandleBehaviour>();
+    private final List<ScaleHandleRole> scaleHandles = new ArrayList<ScaleHandleRole>();
+    private final List<HandleRole> handles = new ArrayList<HandleRole>();
 
-    private HandleBehaviour currentHandleBehaviour;
+    private HandleRole currentHandleRole;
 
     private Table layersTable;
 
     private SimpleTableModel layersTableModel;
 
-    private ClassNameBox behaviourClassName;
+    private ClassNameBox roleClassName;
 
     /**
      * When a text actor is the current actor, then this will be the TextBox that you enter the
@@ -279,8 +279,8 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.appearanceContainer = new Container();
         VerticalScroll appearanceScroll = new VerticalScroll(this.appearanceContainer);
 
-        this.behaviourContainer = new Container();
-        VerticalScroll behaviourScroll = new VerticalScroll(this.behaviourContainer);
+        this.roleContainer = new Container();
+        VerticalScroll roleScroll = new VerticalScroll(this.roleContainer);
 
         this.layersContainer = new Container();
         VerticalScroll layersScroll = new VerticalScroll(this.layersContainer);
@@ -302,7 +302,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.toolboxNotebook.addPage(new Label("Costumes"), costumesScroll);
         this.toolboxNotebook.addPage(new Label("Actor"), propertiesScroll);
         this.toolboxNotebook.addPage(new Label("Appearance"), appearanceScroll);
-        this.toolboxNotebook.addPage(new Label("Behaviour"), behaviourScroll);
+        this.toolboxNotebook.addPage(new Label("Role"), roleScroll);
         this.toolboxNotebook.addPage(new Label("Layers"), layersScroll);
 
         this.toolbox.setFill(true, true);
@@ -587,48 +587,48 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.actorTextInput = form.getComponent("pose.text");
     }
 
-    private void createBehaviourPage()
+    private void createRolePage()
     {
-        SceneDesignerBehaviour sdb = (SceneDesignerBehaviour) this.currentActor.getBehaviour();
+        SceneDesignerRole sdb = (SceneDesignerRole) this.currentActor.getRole();
 
-        this.behaviourClassName = new ClassNameBox(
+        this.roleClassName = new ClassNameBox(
             this.editor.game.getScriptManager(),
-            ClassName.getClassName(sdb.actualBehaviour),
-            Behaviour.class
+            ClassName.getClassName(sdb.actualRole),
+            Role.class
             );
 
-        this.behaviourClassName.addChangeListener(new ComponentChangeListener() {
+        this.roleClassName.addChangeListener(new ComponentChangeListener() {
 
             @Override
             public void changed()
             {
-                ClassName className = SceneDesigner.this.behaviourClassName.getClassName();
-                SceneDesignerBehaviour sdb = (SceneDesignerBehaviour) SceneDesigner.this.currentActor.getBehaviour();
+                ClassName className = SceneDesigner.this.roleClassName.getClassName();
+                SceneDesignerRole sdb = (SceneDesignerRole) SceneDesigner.this.currentActor.getRole();
                 try {
-                    sdb.setBehaviourClassName(SceneDesigner.this.editor.resources, className);
-                    SceneDesigner.this.createBehaviourProperties();
-                    SceneDesigner.this.editor.game.resources.registerBehaviourClassName(className.name);
-                    SceneDesigner.this.behaviourClassName.removeStyle("error");
+                    sdb.setRoleClassName(SceneDesigner.this.editor.resources, className);
+                    SceneDesigner.this.createRoleProperties();
+                    SceneDesigner.this.editor.game.resources.registerRoleClassName(className.name);
+                    SceneDesigner.this.roleClassName.removeStyle("error");
 
                 } catch (Exception e) {
-                    SceneDesigner.this.behaviourClassName.addStyle("error");
+                    SceneDesigner.this.roleClassName.addStyle("error");
                 }
             }
         });
 
-        createBehaviourProperties();
+        createRoleProperties();
     }
 
-    private void createBehaviourProperties()
+    private void createRoleProperties()
     {
-        this.behaviourClassName.remove();
+        this.roleClassName.remove();
 
-        Behaviour behaviour = ((SceneDesignerBehaviour) this.currentActor.getBehaviour()).actualBehaviour;
-        PropertiesForm<Behaviour> form = new PropertiesForm<Behaviour>(behaviour, behaviour.getProperties());
+        Role role = ((SceneDesignerRole) this.currentActor.getRole()).actualRole;
+        PropertiesForm<Role> form = new PropertiesForm<Role>(role, role.getProperties());
         form.autoUpdate = true;
-        this.behaviourContainer.clear();
-        form.grid.addRow("Behaviour", this.behaviourClassName);
-        this.behaviourContainer.addChild(form.createForm());
+        this.roleContainer.clear();
+        form.grid.addRow("Role", this.roleClassName);
+        this.roleContainer.addChild(form.createForm());
     }
 
     private void updateProperties()
@@ -636,11 +636,11 @@ public class SceneDesigner implements MouseListener, KeyListener
         if (this.currentActor == null) {
             this.propertiesContainer.clear();
             this.appearanceContainer.clear();
-            this.behaviourContainer.clear();
+            this.roleContainer.clear();
             this.actorTextInput = null;
         } else {
             createActorPage();
-            createBehaviourPage();
+            createRolePage();
             createAppearancePage();
             updateLayersTable();
         }
@@ -1052,13 +1052,13 @@ public class SceneDesigner implements MouseListener, KeyListener
 
         if (this.mode == MODE_SELECT) {
 
-            for (HandleBehaviour handleBehaviour : this.handles) {
-                Actor actor = handleBehaviour.getActor();
+            for (HandleRole handleRole : this.handles) {
+                Actor actor = handleRole.getActor();
 
                 if (actor.hitting(event.x, event.y)) {
                     beginDrag(event);
-                    handleBehaviour.dragStart();
-                    this.currentHandleBehaviour = handleBehaviour;
+                    handleRole.dragStart();
+                    this.currentHandleRole = handleRole;
                     setMode(MODE_DRAG_HANDLE);
                     this.hideHighlightActor();
                     return true;
@@ -1124,35 +1124,35 @@ public class SceneDesigner implements MouseListener, KeyListener
         if (this.mode == MODE_STAMP_COSTUME) {
             Actor actor;
 
-            SceneDesignerBehaviour behaviour = new SceneDesignerBehaviour();
-            ClassName behaviourClassName;
+            SceneDesignerRole role = new SceneDesignerRole();
+            ClassName roleClassName;
 
             if (this.stampActor.getAppearance().getPose() instanceof TextPose) {
                 actor = new Actor(this.stampActor.getAppearance().getPose());
                 if (this.stampActor.getCostume() != null) {
                     actor.setCostume(this.stampActor.getCostume());
-                    behaviourClassName = this.stampActor.getCostume().behaviourClassName;
+                    roleClassName = this.stampActor.getCostume().roleClassName;
                 } else {
-                    behaviourClassName = new ClassName(NullBehaviour.class.getName());
+                    roleClassName = new ClassName(NullRole.class.getName());
                 }
 
             } else {
                 actor = new Actor(this.currentCostume);
-                behaviourClassName = this.stampActor.getCostume().behaviourClassName;
+                roleClassName = this.stampActor.getCostume().roleClassName;
             }
 
             try {
-                behaviour.setBehaviourClassName(this.editor.resources, behaviourClassName);
+                role.setRoleClassName(this.editor.resources, roleClassName);
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
             if (!this.stampActor.isText()) {
-                setDefaultProperties(behaviour.actualBehaviour, this.currentCostume);
+                setDefaultProperties(role.actualRole, this.currentCostume);
             }
 
             actor.moveTo(event.x, event.y);
-            actor.setBehaviour(behaviour);
+            actor.setRole(role);
             if (this.currentCostume != null) {
                 actor.setZOrder(this.currentCostume.defaultZOrder);
             }
@@ -1188,8 +1188,8 @@ public class SceneDesigner implements MouseListener, KeyListener
         }
 
         if (this.mode == MODE_DRAG_HANDLE) {
-            this.currentHandleBehaviour.dragEnd();
-            this.currentHandleBehaviour = null;
+            this.currentHandleRole.dragEnd();
+            this.currentHandleRole = null;
             setMode(MODE_SELECT);
             selectActor(this.currentActor);
         }
@@ -1220,7 +1220,7 @@ public class SceneDesigner implements MouseListener, KeyListener
             beginDrag(event);
 
         } else if (this.mode == MODE_DRAG_HANDLE) {
-            this.currentHandleBehaviour.moveBy(dx, dy);
+            this.currentHandleRole.moveBy(dx, dy);
             beginDrag(event);
 
         }
@@ -1234,13 +1234,13 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.dragStartY = event.y;
     }
 
-    private void setDefaultProperties( Behaviour behaviour, Costume costume )
+    private void setDefaultProperties( Role role, Costume costume )
     {
-        for (AbstractProperty<Behaviour, ?> property : behaviour.getProperties()) {
+        for (AbstractProperty<Role, ?> property : role.getProperties()) {
             try {
                 String stringValue = costume.getString(property.access);
                 if (stringValue != null) {
-                    property.setValueByString(behaviour, stringValue);
+                    property.setValueByString(role, stringValue);
                 }
             } catch (Exception e) {
                 // Do nothing
@@ -1519,9 +1519,9 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.highlightActor = new Actor(newPose);
         this.highlightActor.moveTo(this.currentActor);
         this.overlayStage.addTop(this.highlightActor);
-        this.highlightActor.setBehaviour(new Follower(this.currentActor));
+        this.highlightActor.setRole(new Follower(this.currentActor));
 
-        for (ScaleHandleBehaviour be : this.scaleHandles) {
+        for (ScaleHandleRole be : this.scaleHandles) {
             be.setTarget(this.currentActor);
             be.getActor().getAppearance().setAlpha(255);
         }
@@ -1535,7 +1535,7 @@ public class SceneDesigner implements MouseListener, KeyListener
 
     private void hideHighlightActor()
     {
-        for (ScaleHandleBehaviour be : this.scaleHandles) {
+        for (ScaleHandleRole be : this.scaleHandles) {
             be.getActor().getAppearance().setAlpha(0);
         }
         // this.rotateHandle.getActor().getAppearance().setAlpha(0);
@@ -1551,7 +1551,7 @@ public class SceneDesigner implements MouseListener, KeyListener
             this.highlightActor.kill();
             this.highlightActor = null;
         }
-        for (ScaleHandleBehaviour be : this.scaleHandles) {
+        for (ScaleHandleRole be : this.scaleHandles) {
             be.setTarget(null);
         }
         this.rotateHandle.setTarget(null);
@@ -1563,16 +1563,16 @@ public class SceneDesigner implements MouseListener, KeyListener
 
         ImagePose rotatePose = this.editor.getStylesheet().resources.getPose("rotateHandle");
         Actor rotateActor = new Actor(rotatePose);
-        this.rotateHandle = new RotateHandleBehaviour();
-        rotateActor.setBehaviour(this.rotateHandle);
+        this.rotateHandle = new RotateHandleRole();
+        rotateActor.setRole(this.rotateHandle);
         rotateActor.getAppearance().setAlpha(0);
         this.overlayStage.addTop(rotateActor);
         this.handles.add(this.rotateHandle);
 
         ImagePose headingPose = this.editor.getStylesheet().resources.getPose("headingHandle");
         Actor headingActor = new Actor(headingPose);
-        this.headingHandle = new HeadingHandleBehaviour();
-        headingActor.setBehaviour(this.headingHandle);
+        this.headingHandle = new HeadingHandleRole();
+        headingActor.setRole(this.headingHandle);
         headingActor.getAppearance().setAlpha(0);
         this.overlayStage.addTop(headingActor);
         this.handles.add(this.headingHandle);
@@ -1581,12 +1581,12 @@ public class SceneDesigner implements MouseListener, KeyListener
         for (int dx = -1; dx < 2; dx += 2) {
             for (int dy = -1; dy < 2; dy += 2) {
                 Actor scaleHandle = new Actor(scalePose);
-                ScaleHandleBehaviour behaviour = new ScaleHandleBehaviour(dx, dy);
-                scaleHandle.setBehaviour(behaviour);
+                ScaleHandleRole role = new ScaleHandleRole(dx, dy);
+                scaleHandle.setRole(role);
                 scaleHandle.getAppearance().setAlpha(0);
 
-                this.scaleHandles.add(behaviour);
-                this.handles.add(behaviour);
+                this.scaleHandles.add(role);
+                this.handles.add(role);
                 this.overlayStage.addTop(scaleHandle);
             }
         }
@@ -1597,7 +1597,7 @@ public class SceneDesigner implements MouseListener, KeyListener
 
     }
 
-    abstract class HandleBehaviour extends AbstractBehaviour
+    abstract class HandleRole extends AbstractRole
     {
         Actor target;
 
@@ -1634,16 +1634,16 @@ public class SceneDesigner implements MouseListener, KeyListener
         }
     }
 
-    class ScaleHandleBehaviour extends HandleBehaviour
+    class ScaleHandleRole extends HandleRole
     {
         int cornerX;
         int cornerY;
         double startScale;
         double startTargetX;
         double startTargetY;
-        ScaleHandleBehaviour opposite;
+        ScaleHandleRole opposite;
 
-        public ScaleHandleBehaviour( int dx, int dy )
+        public ScaleHandleRole( int dx, int dy )
         {
             this.cornerX = dx;
             this.cornerY = dy;
@@ -1729,7 +1729,7 @@ public class SceneDesigner implements MouseListener, KeyListener
 
     }
 
-    class RotateHandleBehaviour extends HandleBehaviour
+    class RotateHandleRole extends HandleRole
     {
         @Override
         public void moveBy( int dx, int dy )
@@ -1763,7 +1763,7 @@ public class SceneDesigner implements MouseListener, KeyListener
 
     }
 
-    class HeadingHandleBehaviour extends HandleBehaviour
+    class HeadingHandleRole extends HandleRole
     {
         @Override
         public void moveBy( int dx, int dy )

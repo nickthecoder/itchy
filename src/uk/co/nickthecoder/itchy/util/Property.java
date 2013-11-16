@@ -10,10 +10,10 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import uk.co.nickthecoder.itchy.Behaviour;
+import uk.co.nickthecoder.itchy.Role;
 
 /**
- * Annotate Behaviour's sub-class's attributes with '@Property(label="whatever")', to make that
+ * Annotate Role's sub-class's attributes with '@Property(label="whatever")', to make that
  * field available within the scene editor.
  * 
  */
@@ -35,5 +35,5 @@ public @interface Property {
 
     boolean alpha() default true; // Only used for RGBA properties
 
-    Class<?> baseClass() default Behaviour.class; // Only used for ClassName properties
+    Class<?> baseClass() default Role.class; // Only used for ClassName properties
 }

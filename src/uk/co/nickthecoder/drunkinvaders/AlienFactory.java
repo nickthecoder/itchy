@@ -8,7 +8,7 @@ package uk.co.nickthecoder.drunkinvaders;
 import java.util.ArrayList;
 import java.util.List;
 
-import uk.co.nickthecoder.itchy.AbstractBehaviour;
+import uk.co.nickthecoder.itchy.AbstractRole;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Appearance;
 import uk.co.nickthecoder.itchy.Costume;
@@ -16,7 +16,7 @@ import uk.co.nickthecoder.itchy.extras.Timer;
 import uk.co.nickthecoder.itchy.util.Property;
 import uk.co.nickthecoder.itchy.util.Util;
 
-public class AlienFactory extends AbstractBehaviour
+public class AlienFactory extends AbstractRole
 {
 
     @Property(label = "Costume")
@@ -78,17 +78,17 @@ public class AlienFactory extends AbstractBehaviour
         alienAppearance.setScale(thisAppearance.getScale());
         alienAppearance.setAlpha(0);
 
-        Alien alienBehaviour = new Alien();
-        alienBehaviour.fireOnceEvery = this.fireOnceEvery;
+        Alien alienRole = new Alien();
+        alienRole.fireOnceEvery = this.fireOnceEvery;
 
         alienActor.moveTo(getActor().getX() + this.aliens.size() * this.spacing, getActor().getY());
         alienActor.setZOrder(getActor().getZOrder());
         getActor().getStage().add(alienActor);
 
-        alienActor.setBehaviour(alienBehaviour);
+        alienActor.setRole(alienRole);
         alienActor.event("birth");
 
-        this.aliens.add(alienBehaviour);
+        this.aliens.add(alienRole);
     }
 
 }

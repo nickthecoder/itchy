@@ -23,8 +23,8 @@ public class Costume
 
     private Costume extendedFrom;
 
-    @Property(label = "Behaviour")
-    public ClassName behaviourClassName = new ClassName(uk.co.nickthecoder.itchy.NullBehaviour.class.getName());
+    @Property(label = "Role")
+    public ClassName roleClassName = new ClassName(uk.co.nickthecoder.itchy.NullRole.class.getName());
 
     @Property(label = "Default Z Order")
     public int defaultZOrder;
@@ -63,15 +63,15 @@ public class Costume
     public Actor createActor( String startEvent )
     {
         Actor actor = new Actor(this, startEvent);
-        Behaviour behaviour;
+        Role role;
         try {
-            behaviour = AbstractBehaviour.createBehaviour(Itchy.getGame().resources, this.behaviourClassName);
+            role = AbstractRole.createRole(Itchy.getGame().resources, this.roleClassName);
 
         } catch (Exception e) {
-            behaviour = new PlainBehaviour();
+            role = new PlainRole();
             e.printStackTrace();
         }
-        actor.setBehaviour(behaviour);
+        actor.setRole(role);
         actor.event(startEvent);
 
         return actor;

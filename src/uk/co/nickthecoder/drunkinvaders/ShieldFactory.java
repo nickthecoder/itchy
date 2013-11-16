@@ -5,12 +5,12 @@
  ******************************************************************************/
 package uk.co.nickthecoder.drunkinvaders;
 
-import uk.co.nickthecoder.itchy.AbstractBehaviour;
+import uk.co.nickthecoder.itchy.AbstractRole;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Pose;
 import uk.co.nickthecoder.itchy.util.Property;
 
-public class ShieldFactory extends AbstractBehaviour
+public class ShieldFactory extends AbstractRole
 {
     @Property(label = "Width")
     public int width = 6;
@@ -44,7 +44,7 @@ public class ShieldFactory extends AbstractBehaviour
                 getActor().getStage().add(shieldActor);
                 shieldActor.moveTo(getActor().getX(), getActor().getY());
                 shieldActor.moveForwards(x * this.spacing, y * this.spacing);
-                shieldActor.setBehaviour(shield);
+                shieldActor.setRole(shield);
 
             }
         }

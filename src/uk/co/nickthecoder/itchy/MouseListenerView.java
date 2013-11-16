@@ -11,7 +11,7 @@ package uk.co.nickthecoder.itchy;
 public interface MouseListenerView extends View, MouseListener
 {
     /**
-     * Actors who's Behaviours are MouseListeners can receive mouse events. The events that they
+     * Actors who's Roles are MouseListeners can receive mouse events. The events that they
      * will receive have been adjusted, so that the x and y coordinates are their world coordinates.
      * 
      * @param game

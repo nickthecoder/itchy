@@ -1,7 +1,7 @@
-<scene showMouse="true" behaviour="uk.co.nickthecoder.itchy.PlainSceneDirector">
+<scene showMouse="true" role="uk.co.nickthecoder.itchy.PlainSceneDirector">
   <properties/>
   <layer name="main">
-    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestExplosion" x="74" y="510" direction="-90.0" heading="-90.0" startEvent="default" zOrder="0">
+    <actor costume="alien" role="uk.co.nickthecoder.itchy.test.TestExplosion" x="74" y="510" direction="-90.0" heading="-90.0" startEvent="default" zOrder="0">
       <property name="fade" value="0.7"/>
       <property name="spinFrom" value="0.0"/>
       <property name="projectiles" value="10"/>
@@ -26,7 +26,7 @@
       <property name="spreadTo" value="360.0"/>
       <property name="gravity" value="0.0"/>
     </actor>
-    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestExplosion" x="173" y="511" direction="-90.0" heading="-90.0" startEvent="default" zOrder="1">
+    <actor costume="alien" role="uk.co.nickthecoder.itchy.test.TestExplosion" x="173" y="511" direction="-90.0" heading="-90.0" startEvent="default" zOrder="1">
       <property name="fade" value="0.7"/>
       <property name="spinFrom" value="0.0"/>
       <property name="projectiles" value="10"/>
@@ -51,13 +51,13 @@
       <property name="spreadTo" value="360.0"/>
       <property name="gravity" value="0.0"/>
     </actor>
-    <text text="Go!" font="vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.SceneButton" x="107" y="587" direction="0.0" heading="0.0" startEvent="default" zOrder="2">
+    <text text="Go!" font="vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.extras.SceneButton" x="107" y="587" direction="0.0" heading="0.0" startEvent="default" zOrder="2">
       <property name="sceneName" value="explosions"/>
     </text>
-    <text text="Menu" font="vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.SceneButton" x="35" y="585" direction="0.0" heading="0.0" startEvent="default" zOrder="3">
+    <text text="Menu" font="vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.extras.SceneButton" x="35" y="585" direction="0.0" heading="0.0" startEvent="default" zOrder="3">
       <property name="sceneName" value="menu"/>
     </text>
-    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestExplosion" x="584" y="520" direction="-90.0" heading="-90.0" startEvent="default" zOrder="4">
+    <actor costume="alien" role="uk.co.nickthecoder.itchy.test.TestExplosion" x="584" y="520" direction="-90.0" heading="-90.0" startEvent="default" zOrder="4">
       <property name="fade" value="0.7"/>
       <property name="spinFrom" value="0.0"/>
       <property name="projectiles" value="10"/>
@@ -82,7 +82,7 @@
       <property name="spreadTo" value="360.0"/>
       <property name="gravity" value="0.0"/>
     </actor>
-    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestExplosion" x="593" y="450" direction="-90.0" heading="-90.0" startEvent="default" zOrder="5">
+    <actor costume="alien" role="uk.co.nickthecoder.itchy.test.TestExplosion" x="593" y="450" direction="-90.0" heading="-90.0" startEvent="default" zOrder="5">
       <property name="fade" value="0.7"/>
       <property name="spinFrom" value="0.0"/>
       <property name="projectiles" value="10"/>
@@ -107,7 +107,7 @@
       <property name="spreadTo" value="360.0"/>
       <property name="gravity" value="0.0"/>
     </actor>
-    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestExplosion" x="488" y="450" direction="-115.84724539498697" heading="-115.84724539498697" startEvent="default" zOrder="6">
+    <actor costume="alien" role="uk.co.nickthecoder.itchy.test.TestExplosion" x="488" y="450" direction="-115.84724539498697" heading="-115.84724539498697" startEvent="default" zOrder="6">
       <property name="fade" value="0.7"/>
       <property name="spinFrom" value="0.0"/>
       <property name="projectiles" value="10"/>
@@ -132,7 +132,7 @@
       <property name="spreadTo" value="360.0"/>
       <property name="gravity" value="0.0"/>
     </actor>
-    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestExplosion" x="674" y="520" direction="-31.924639012371056" heading="-31.924639012371056" startEvent="default" zOrder="7">
+    <actor costume="alien" role="uk.co.nickthecoder.itchy.test.TestExplosion" x="674" y="520" direction="-31.924639012371056" heading="-31.924639012371056" startEvent="default" zOrder="7">
       <property name="fade" value="0.7"/>
       <property name="spinFrom" value="0.0"/>
       <property name="projectiles" value="10"/>
@@ -157,7 +157,7 @@
       <property name="spreadTo" value="360.0"/>
       <property name="gravity" value="0.0"/>
     </actor>
-    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestExplosion" x="681" y="450" direction="-59.88358179758398" heading="-59.88358179758398" startEvent="default" zOrder="8">
+    <actor costume="alien" role="uk.co.nickthecoder.itchy.test.TestExplosion" x="681" y="450" direction="-59.88358179758398" heading="-59.88358179758398" startEvent="default" zOrder="8">
       <property name="fade" value="0.7"/>
       <property name="spinFrom" value="0.0"/>
       <property name="projectiles" value="10"/>
@@ -182,7 +182,7 @@
       <property name="spreadTo" value="360.0"/>
       <property name="gravity" value="0.0"/>
     </actor>
-    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestExplosion" x="486" y="520" direction="-140.0705601860458" heading="-140.0705601860458" startEvent="default" zOrder="9">
+    <actor costume="alien" role="uk.co.nickthecoder.itchy.test.TestExplosion" x="486" y="520" direction="-140.0705601860458" heading="-140.0705601860458" startEvent="default" zOrder="9">
       <property name="fade" value="0.7"/>
       <property name="spinFrom" value="0.0"/>
       <property name="projectiles" value="10"/>
@@ -211,7 +211,7 @@
     <text text="forwards" font="vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="375" y="450" direction="0.0" heading="0.0" startEvent="default" zOrder="11"/>
     <text text="random" font="vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="80" y="551" direction="0.0" heading="0.0" startEvent="default" zOrder="12"/>
     <text text="even" font="vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="176" y="552" direction="0.0" heading="0.0" startEvent="default" zOrder="13"/>
-    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestExplosion" x="46" y="316" direction="0.0" heading="0.0" startEvent="default" zOrder="14">
+    <actor costume="alien" role="uk.co.nickthecoder.itchy.test.TestExplosion" x="46" y="316" direction="0.0" heading="0.0" startEvent="default" zOrder="14">
       <property name="fade" value="0.7"/>
       <property name="spinFrom" value="0.0"/>
       <property name="projectiles" value="10"/>
@@ -236,7 +236,7 @@
       <property name="spreadTo" value="30.0"/>
       <property name="gravity" value="0.0"/>
     </actor>
-    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestExplosion" x="42" y="199" direction="28.072486935852954" heading="28.072486935852954" startEvent="default" zOrder="15">
+    <actor costume="alien" role="uk.co.nickthecoder.itchy.test.TestExplosion" x="42" y="199" direction="28.072486935852954" heading="28.072486935852954" startEvent="default" zOrder="15">
       <property name="fade" value="0.7"/>
       <property name="spinFrom" value="0.0"/>
       <property name="projectiles" value="10"/>
@@ -261,7 +261,7 @@
       <property name="spreadTo" value="60.0"/>
       <property name="gravity" value="-0.02"/>
     </actor>
-    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestExplosion" x="54" y="262" direction="0.0" heading="0.0" startEvent="default" zOrder="16">
+    <actor costume="alien" role="uk.co.nickthecoder.itchy.test.TestExplosion" x="54" y="262" direction="0.0" heading="0.0" startEvent="default" zOrder="16">
       <property name="fade" value="0.7"/>
       <property name="spinFrom" value="0.0"/>
       <property name="projectiles" value="10"/>
@@ -286,7 +286,7 @@
       <property name="spreadTo" value="30.0"/>
       <property name="gravity" value="0.0"/>
     </actor>
-    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestExplosion" x="386" y="354" direction="-87.39743779750019" heading="-87.39743779750019" startEvent="default" zOrder="17">
+    <actor costume="alien" role="uk.co.nickthecoder.itchy.test.TestExplosion" x="386" y="354" direction="-87.39743779750019" heading="-87.39743779750019" startEvent="default" zOrder="17">
       <property name="fade" value="2.0"/>
       <property name="spinFrom" value="0.0"/>
       <property name="projectiles" value="990"/>
@@ -311,7 +311,7 @@
       <property name="spreadTo" value="30000.0"/>
       <property name="gravity" value="-0.02"/>
     </actor>
-    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestExplosion" x="564" y="353" direction="-87.39743779750019" heading="-87.39743779750019" startEvent="default" zOrder="18">
+    <actor costume="alien" role="uk.co.nickthecoder.itchy.test.TestExplosion" x="564" y="353" direction="-87.39743779750019" heading="-87.39743779750019" startEvent="default" zOrder="18">
       <property name="fade" value="2.0"/>
       <property name="spinFrom" value="0.0"/>
       <property name="projectiles" value="600"/>
@@ -336,7 +336,7 @@
       <property name="spreadTo" value="30000.0"/>
       <property name="gravity" value="-0.02"/>
     </actor>
-    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestExplosion" x="308" y="354" direction="-90.0" heading="-90.0" startEvent="default" zOrder="19">
+    <actor costume="alien" role="uk.co.nickthecoder.itchy.test.TestExplosion" x="308" y="354" direction="-90.0" heading="-90.0" startEvent="default" zOrder="19">
       <property name="fade" value="1.0"/>
       <property name="spinFrom" value="0.0"/>
       <property name="projectiles" value="10"/>
@@ -361,7 +361,7 @@
       <property name="spreadTo" value="360.0"/>
       <property name="gravity" value="0.0"/>
     </actor>
-    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestExplosion" x="76" y="428" direction="-90.0" heading="-90.0" startEvent="default" zOrder="20">
+    <actor costume="alien" role="uk.co.nickthecoder.itchy.test.TestExplosion" x="76" y="428" direction="-90.0" heading="-90.0" startEvent="default" zOrder="20">
       <property name="fade" value="0.7"/>
       <property name="spinFrom" value="-3.0"/>
       <property name="projectiles" value="10"/>
@@ -386,7 +386,7 @@
       <property name="spreadTo" value="360.0"/>
       <property name="gravity" value="0.0"/>
     </actor>
-    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestExplosion" x="174" y="427" direction="-90.0" heading="-90.0" startEvent="default" zOrder="21">
+    <actor costume="alien" role="uk.co.nickthecoder.itchy.test.TestExplosion" x="174" y="427" direction="-90.0" heading="-90.0" startEvent="default" zOrder="21">
       <property name="fade" value="0.7"/>
       <property name="spinFrom" value="3.0"/>
       <property name="projectiles" value="10"/>
@@ -411,7 +411,7 @@
       <property name="spreadTo" value="360.0"/>
       <property name="gravity" value="0.0"/>
     </actor>
-    <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestExplosion" x="669" y="266" direction="-90.0" heading="-90.0" startEvent="default" zOrder="22">
+    <actor costume="alien" role="uk.co.nickthecoder.itchy.test.TestExplosion" x="669" y="266" direction="-90.0" heading="-90.0" startEvent="default" zOrder="22">
       <property name="fade" value="0.7"/>
       <property name="spinFrom" value="0.0"/>
       <property name="projectiles" value="10"/>

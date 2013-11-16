@@ -13,7 +13,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /**
- * Annotate a sub class of Behaviour, and it will automatically add these tags to the behaviour's
+ * Annotate a sub class of Role, and it will automatically add these tags to the role's
  * Actor.
  */
 @Retention(RetentionPolicy.RUNTIME)

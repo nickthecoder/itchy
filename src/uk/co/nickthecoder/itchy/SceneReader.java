@@ -11,7 +11,7 @@ import java.io.InputStreamReader;
 import java.util.Iterator;
 import java.util.List;
 
-import uk.co.nickthecoder.itchy.editor.SceneDesignerBehaviour;
+import uk.co.nickthecoder.itchy.editor.SceneDesignerRole;
 import uk.co.nickthecoder.itchy.util.AbstractProperty;
 import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.itchy.util.XMLException;
@@ -54,7 +54,7 @@ public class SceneReader
             throw new XMLException("Illegal colour : " + background);
         }
         
-        this.scene.sceneDirectorClassName = new ClassName(sceneTag.getOptionalAttribute("behaviour",
+        this.scene.sceneDirectorClassName = new ClassName(sceneTag.getOptionalAttribute("role",
             PlainSceneDirector.class.getName()));
 
         // For old versions without multiple layers, the actor tags are directly within the scene
@@ -131,7 +131,7 @@ public class SceneReader
         }
 
         CostumeSceneActor sceneActor = new CostumeSceneActor(costume);
-        sceneActor.behaviourClassName = costume.behaviourClassName;
+        sceneActor.roleClassName = costume.roleClassName;
         this.readSceneActorAttributes(actorTag, sceneActor);
 
         sceneLayer.add(sceneActor);
@@ -149,7 +149,7 @@ public class SceneReader
         }
 
         TextSceneActor sceneActor = new TextSceneActor(font, fontSize, text);
-        sceneActor.behaviourClassName = new ClassName(NullBehaviour.class.getName());
+        sceneActor.roleClassName = new ClassName(NullRole.class.getName());
 
         String costumeName = textTag.getOptionalAttribute("costume", null);
         if (costumeName != null) {
@@ -205,11 +205,11 @@ public class SceneReader
             }
         }
 
-        if (actorTag.hasAttribute("behaviour")) {
-            ClassName className = new ClassName(actorTag.getAttribute("behaviour"));
+        if (actorTag.hasAttribute("role")) {
+            ClassName className = new ClassName(actorTag.getAttribute("role"));
 
-            if (this.resources.registerBehaviourClassName(className.name)) {
-                sceneActor.behaviourClassName = className;
+            if (this.resources.registerRoleClassName(className.name)) {
+                sceneActor.roleClassName = className;
             }
         }
 
@@ -227,16 +227,16 @@ public class SceneReader
     private void setProperty( SceneActor sceneActor, Actor actor, String name, String value )
         throws Exception
     {
-        SceneDesignerBehaviour sdb = (SceneDesignerBehaviour) actor.getBehaviour();
+        SceneDesignerRole sdb = (SceneDesignerRole) actor.getRole();
 
-        for (AbstractProperty<Behaviour, ?> property : sdb.actualBehaviour.getProperties()) {
+        for (AbstractProperty<Role, ?> property : sdb.actualRole.getProperties()) {
             if (property.key.equals(name)) {
                 sceneActor.customProperties.put(property.key, property.parse(value));
                 return;
             }
         }
 
-        for (AbstractProperty<Behaviour, ?> property : sdb.actualBehaviour.getProperties()) {
+        for (AbstractProperty<Role, ?> property : sdb.actualRole.getProperties()) {
             for (String alias : property.aliases) {
                 if (alias.equals(name)) {
                     sceneActor.customProperties.put(property.key, property.parse(value));

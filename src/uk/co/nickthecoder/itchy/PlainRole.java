@@ -7,7 +7,7 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
-public class PlainBehaviour extends AbstractBehaviour
+public class PlainRole extends AbstractRole
 {
     public void tick()
     {

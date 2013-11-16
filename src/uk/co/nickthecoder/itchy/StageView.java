@@ -25,10 +25,10 @@ public class StageView extends AbstractScrollableView implements StageListener, 
     public int maximumAlpha = 255;
 
     /**
-     * A list of Behaviours of Actors on this view's Stage, who implements ViewMouseListener. They
+     * A list of Roles of Actors on this view's Stage, who implements ViewMouseListener. They
      * are expecting to hear events with their x,y coordinates adjusted to their world coordinates.
      */
-    private List<ViewMouseListener> behaviourMouseListeners = null;
+    private List<ViewMouseListener> roleMouseListeners = null;
 
     /**
      * The actor that requested to capture the mouse events.
@@ -120,7 +120,7 @@ public class StageView extends AbstractScrollableView implements StageListener, 
                             }
                             if (alpha >= 255) {
 
-                                // Fully opaque (normal behaviour)
+                                // Fully opaque (normal role)
                                 actorSurface.blit(srcRect, destSurface, rect);
 
                             } else {
@@ -164,18 +164,18 @@ public class StageView extends AbstractScrollableView implements StageListener, 
     @Override
     public void onAdded( Stage stage, Actor actor )
     {
-        Behaviour behaviour = actor.getBehaviour();
-        if (behaviour instanceof ViewMouseListener) {
-            this.behaviourMouseListeners.add((ViewMouseListener) behaviour);
+        Role role = actor.getRole();
+        if (role instanceof ViewMouseListener) {
+            this.roleMouseListeners.add((ViewMouseListener) role);
         }
     }
 
     @Override
     public void onRemoved( Stage stage, Actor actor )
     {
-        Behaviour behaviour = actor.getBehaviour();
-        if ((behaviourMouseListeners != null) && (behaviour instanceof ViewMouseListener)) {
-            this.behaviourMouseListeners.remove(behaviour);
+        Role role = actor.getRole();
+        if ((roleMouseListeners != null) && (role instanceof ViewMouseListener)) {
+            this.roleMouseListeners.remove(role);
         }
     }
 
@@ -183,15 +183,15 @@ public class StageView extends AbstractScrollableView implements StageListener, 
     @Override
     public void enableMouseListener( Game game )
     {
-        this.behaviourMouseListeners = new ArrayList<ViewMouseListener>();
-        // TODO Iterate over all actors, and add them if the behaviours are ViewMouseListeners
+        this.roleMouseListeners = new ArrayList<ViewMouseListener>();
+        // TODO Iterate over all actors, and add them if the roles are ViewMouseListeners
     }
 
     @Override
     public void disableMouseListener( Game game )
     {
-        this.behaviourMouseListeners.clear();
-        this.behaviourMouseListeners = null;
+        this.roleMouseListeners.clear();
+        this.roleMouseListeners = null;
     }
 
     @Override
@@ -239,7 +239,7 @@ public class StageView extends AbstractScrollableView implements StageListener, 
     @Override
     public boolean onMouseDown( MouseButtonEvent event )
     {
-        if (behaviourMouseListeners == null) {
+        if (roleMouseListeners == null) {
             return false;
         }
         
@@ -249,7 +249,7 @@ public class StageView extends AbstractScrollableView implements StageListener, 
             }
 
             if (this.mouseOwner == null) {
-                for (ViewMouseListener vml : this.behaviourMouseListeners) {
+                for (ViewMouseListener vml : this.roleMouseListeners) {
                     if (vml.onMouseDown(StageView.this, event)) {
                         return true;
                     }
@@ -268,7 +268,7 @@ public class StageView extends AbstractScrollableView implements StageListener, 
     @Override
     public boolean onMouseUp( MouseButtonEvent event )
     {
-        if (behaviourMouseListeners == null) {
+        if (roleMouseListeners == null) {
             return false;
         }
 
@@ -278,7 +278,7 @@ public class StageView extends AbstractScrollableView implements StageListener, 
             }
 
             if (this.mouseOwner == null) {
-                for (ViewMouseListener vml : this.behaviourMouseListeners) {
+                for (ViewMouseListener vml : this.roleMouseListeners) {
                     if (vml.onMouseUp(StageView.this, event)) {
                         return true;
                     }
@@ -296,7 +296,7 @@ public class StageView extends AbstractScrollableView implements StageListener, 
     @Override
     public boolean onMouseMove( MouseMotionEvent event )
     {
-        if (behaviourMouseListeners == null) {
+        if (roleMouseListeners == null) {
             return false;
         }
 
@@ -306,7 +306,7 @@ public class StageView extends AbstractScrollableView implements StageListener, 
             }
 
             if (this.mouseOwner == null) {
-                for (ViewMouseListener vml : this.behaviourMouseListeners) {
+                for (ViewMouseListener vml : this.roleMouseListeners) {
                     if (vml.onMouseMove(StageView.this, event)) {
                         return true;
                     }

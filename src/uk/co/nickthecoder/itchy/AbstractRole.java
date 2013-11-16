@@ -18,13 +18,13 @@ import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.itchy.util.Tag;
 import uk.co.nickthecoder.itchy.util.TagMembership;
 
-public abstract class AbstractBehaviour implements Behaviour
+public abstract class AbstractRole implements Role
 {
-    private final static HashMap<Class<?>, List<AbstractProperty<Behaviour, ?>>> allProperties = new HashMap<Class<?>, List<AbstractProperty<Behaviour, ?>>>();
+    private final static HashMap<Class<?>, List<AbstractProperty<Role, ?>>> allProperties = new HashMap<Class<?>, List<AbstractProperty<Role, ?>>>();
 
-    public static Set<Behaviour> allByTag( String tag )
+    public static Set<Role> allByTag( String tag )
     {
-        return Itchy.getGame().findBehaviourByTag(tag);
+        return Itchy.getGame().findRoleByTag(tag);
     }
 
     public static boolean isValidClassName( Resources resources, ClassName className )
@@ -33,7 +33,7 @@ public abstract class AbstractBehaviour implements Behaviour
             return true;
         }
         try {
-            Class.forName(className.name).asSubclass(Behaviour.class);
+            Class.forName(className.name).asSubclass(Role.class);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -43,25 +43,25 @@ public abstract class AbstractBehaviour implements Behaviour
         return true;
     }
 
-    public static Behaviour createBehaviour( Resources resources, ClassName className )
+    public static Role createRole( Resources resources, ClassName className )
         throws InstantiationException, IllegalAccessException, ScriptException,
         ClassNotFoundException
     {
         if (resources.isValidScript(className)) {
-            return Resources.getScriptManager().createBehaviour(className);
+            return Resources.getScriptManager().createRole(className);
         } else {
             Class<?> klass = Class.forName(className.name);
-            return (Behaviour) klass.newInstance();
+            return (Role) klass.newInstance();
         }
     }
 
     private Actor actor;
 
-    private final TagMembership<Behaviour> tagMembership;
+    private final TagMembership<Role> tagMembership;
 
-    public AbstractBehaviour()
+    public AbstractRole()
     {
-        this.tagMembership = new TagMembership<Behaviour>(Itchy.getGame().behaviourTags, this);
+        this.tagMembership = new TagMembership<Role>(Itchy.getGame().roleTags, this);
     }
 
     @Override
@@ -86,7 +86,7 @@ public abstract class AbstractBehaviour implements Behaviour
     }
 
     /**
-     * Called when the behaviour is first attached to its actor. Override this method to perform one
+     * Called when the role is first attached to its actor. Override this method to perform one
      * time initialisation.
      */
     public void onBirth()
@@ -113,11 +113,11 @@ public abstract class AbstractBehaviour implements Behaviour
     }
 
     @Override
-    public List<AbstractProperty<Behaviour, ?>> getProperties()
+    public List<AbstractProperty<Role, ?>> getProperties()
     {
-        List<AbstractProperty<Behaviour, ?>> result = allProperties.get(this.getClass());
+        List<AbstractProperty<Role, ?>> result = allProperties.get(this.getClass());
         if (result == null) {
-            result = new ArrayList<AbstractProperty<Behaviour, ?>>();
+            result = new ArrayList<AbstractProperty<Role, ?>>();
             allProperties.put(this.getClass(), result);
             this.addProperties();
         }
@@ -127,14 +127,14 @@ public abstract class AbstractBehaviour implements Behaviour
     /**
      * For Itchy Gurus Only.
      * 
-     * Allows a behaviour to manually add a property, which will appear in the GUI scene editor.
-     * Most behaviour's won't need this, instead they will use a '@Property(label="Whatever")'
+     * Allows a role to manually add a property, which will appear in the GUI scene editor.
+     * Most role's won't need this, instead they will use a '@Property(label="Whatever")'
      * annotation above the field.
      * 
      * Must only be called from within addProperties to ensure that the property won't be added
      * twice.
      */
-    protected void addProperty( AbstractProperty<Behaviour, ?> property )
+    protected void addProperty( AbstractProperty<Role, ?> property )
     {
         allProperties.get(this.getClass()).add(property);
     }
@@ -204,9 +204,9 @@ public abstract class AbstractBehaviour implements Behaviour
     }
 
     /**
-     * Called when the Behaviour is first attached to its actor. For most behaviours, this will be
+     * Called when the Role is first attached to its actor. For most roles, this will be
      * when the actor is first created. You may override this method to do one-time initialisation.
-     * Use this instead of a Constructor, because the behaviour will not be fully formed in the
+     * Use this instead of a Constructor, because the role will not be fully formed in the
      * constructor - it won't be attached to its Actor yet.
      * 
      * Consider using onActivated for game logic, and in particular, never use sleep or delay from
@@ -237,7 +237,7 @@ public abstract class AbstractBehaviour implements Behaviour
      * animation, it plays the next frame. Then calls this.tick which is where the real work is one.
      * <p>
      * This method was created so that Pause could make actors animation stop, as well as the
-     * behaviour's tick methods not firing. This is done by creating a PauseBehaviour, which does
+     * role's tick methods not firing. This is done by creating a PauseRole, which does
      * nothing in tickHandler.
      */
     @Override
@@ -264,10 +264,10 @@ public abstract class AbstractBehaviour implements Behaviour
     public abstract void tick();
 
     @Override
-    public Behaviour clone()
+    public Role clone()
     {
         try {
-            AbstractBehaviour result = (AbstractBehaviour) super.clone();
+            AbstractRole result = (AbstractRole) super.clone();
             result.actor = null;
 
             return result;

@@ -48,7 +48,7 @@ public abstract class AbstractDirector implements Director
     }
 
     /**
-     * The default behaviour is to do nothing more than forward the event to the current scene's
+     * The default role is to do nothing more than forward the event to the current scene's
      * {@link SceneDirector}.
      */
     @Override
@@ -58,7 +58,7 @@ public abstract class AbstractDirector implements Director
     }
 
     /**
-     * The default behaviour is to do nothing more than forward the event to the current scene's
+     * The default role is to do nothing more than forward the event to the current scene's
      * {@link SceneDirector}.
      */
     @Override
@@ -68,7 +68,7 @@ public abstract class AbstractDirector implements Director
     }
 
     /**
-     * The default behaviour is to do nothing more than forward the event to the current scene's
+     * The default role is to do nothing more than forward the event to the current scene's
      * {@link SceneDirector}.
      */
     @Override
@@ -93,7 +93,7 @@ public abstract class AbstractDirector implements Director
      * instead, each Actor uses : Itchy.isKeyDown( ... ). onKeyDown and onKeyUp are useful for
      * typing.
      * 
-     * The default behaviour is to do nothing more than forward the event to the current scene's
+     * The default role is to do nothing more than forward the event to the current scene's
      * {@link SceneDirector}.
      */
     @Override
@@ -104,7 +104,7 @@ public abstract class AbstractDirector implements Director
 
     /**
      * Called when the application has been asked to quit, such as when Alt-F4 is pressed, or the
-     * window's close button is pressed. The default behaviour is to terminate the application.
+     * window's close button is pressed. The default role is to terminate the application.
      */
     @Override
     public boolean onQuit()
@@ -149,7 +149,7 @@ public abstract class AbstractDirector implements Director
     }
 
     /**
-     * The default behaviour is to do nothing more than forward the message to the current scene's
+     * The default role is to do nothing more than forward the message to the current scene's
      * {@link SceneDirector}.
      */
     @Override

@@ -5,7 +5,7 @@ Play = new Class({
     
     init: function()
     {
-        this.player = null; // The sheep's behaviour. Set from Player.js
+        this.player = null; // The sheep's role. Set from Player.js
         this.score = 0;
         
         // Each level (easy,medium,hard) has different values for each of the following.

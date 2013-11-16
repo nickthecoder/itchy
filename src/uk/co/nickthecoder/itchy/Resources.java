@@ -56,7 +56,7 @@ public class Resources extends Loadable
 
     private final HashMap<String, CostumeResource> costumes;
 
-    private TreeSet<String> behaviourClassNames;
+    private TreeSet<String> roleClassNames;
 
     private TreeSet<String> costumePropertiesClassNames;
 
@@ -82,19 +82,19 @@ public class Resources extends Loadable
         this.costumes = new HashMap<String, CostumeResource>();
         this.animations = new HashMap<String, AnimationResource>();
 
-        this.behaviourClassNames = new TreeSet<String>();
+        this.roleClassNames = new TreeSet<String>();
         this.costumePropertiesClassNames = new TreeSet<String>();
         this.sceneDirectorClassNames = new TreeSet<String>();
         this.gameClassNames = new TreeSet<String>();
 
-        registerBehaviourClassName(uk.co.nickthecoder.itchy.NullBehaviour.class.getName());
-        registerBehaviourClassName(uk.co.nickthecoder.itchy.extras.EditorButton.class.getName());
-        registerBehaviourClassName(uk.co.nickthecoder.itchy.extras.LinkButton.class.getName());
-        registerBehaviourClassName(uk.co.nickthecoder.itchy.extras.MessageButton.class.getName());
-        registerBehaviourClassName(uk.co.nickthecoder.itchy.extras.NumberValue.class.getName());
-        registerBehaviourClassName(uk.co.nickthecoder.itchy.extras.TextValue.class.getName());
-        registerBehaviourClassName(uk.co.nickthecoder.itchy.extras.QuitButton.class.getName());
-        registerBehaviourClassName(uk.co.nickthecoder.itchy.extras.ProgressBar.class.getName());
+        registerRoleClassName(uk.co.nickthecoder.itchy.NullRole.class.getName());
+        registerRoleClassName(uk.co.nickthecoder.itchy.extras.EditorButton.class.getName());
+        registerRoleClassName(uk.co.nickthecoder.itchy.extras.LinkButton.class.getName());
+        registerRoleClassName(uk.co.nickthecoder.itchy.extras.MessageButton.class.getName());
+        registerRoleClassName(uk.co.nickthecoder.itchy.extras.NumberValue.class.getName());
+        registerRoleClassName(uk.co.nickthecoder.itchy.extras.TextValue.class.getName());
+        registerRoleClassName(uk.co.nickthecoder.itchy.extras.QuitButton.class.getName());
+        registerRoleClassName(uk.co.nickthecoder.itchy.extras.ProgressBar.class.getName());
 
         registerCostumePropertiesClassName(CostumeProperties.class.getName());
 
@@ -438,7 +438,7 @@ public class Resources extends Loadable
     public void addCostume( CostumeResource resource )
     {
         this.costumes.put(resource.name, resource);
-        this.registerBehaviourClassName(resource.getCostume().behaviourClassName.name);
+        this.registerRoleClassName(resource.getCostume().roleClassName.name);
         this.registerCostumePropertiesClassName(resource.getCostume().getPropertiesClassName().name);
     }
 
@@ -652,10 +652,10 @@ public class Resources extends Loadable
         this.scenes.put(name, sceneResource);
     }
 
-    public boolean registerBehaviourClassName( String className )
+    public boolean registerRoleClassName( String className )
     {
         try {
-            if (this.behaviourClassNames.contains(className)) {
+            if (this.roleClassNames.contains(className)) {
                 return true;
             }
 
@@ -664,10 +664,10 @@ public class Resources extends Loadable
             } else {
                 // Ensure the class exists, and is the correct type.
                 Class<?> klass = Class.forName(className);
-                klass.asSubclass(Behaviour.class);
+                klass.asSubclass(Role.class);
             }
 
-            this.behaviourClassNames.add(className);
+            this.roleClassNames.add(className);
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -739,9 +739,9 @@ public class Resources extends Loadable
         return false;
     }
 
-    public Set<String> getBehaviourClassNames()
+    public Set<String> getRoleClassNames()
     {
-        return this.behaviourClassNames;
+        return this.roleClassNames;
     }
 
     public Set<String> getCostumePropertiesClassNames()

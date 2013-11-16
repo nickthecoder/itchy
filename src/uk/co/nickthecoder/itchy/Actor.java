@@ -18,7 +18,7 @@ import uk.co.nickthecoder.jame.Surface;
 
 public class Actor implements PropertySubject<Actor>
 {
-    private static NullBehaviour unsedBehaviour = new NullBehaviour();
+    private static NullRole unsedRole = new NullRole();
 
     private static Pose startPose( Costume costume, String name )
     {
@@ -49,7 +49,7 @@ public class Actor implements PropertySubject<Actor>
 
     private static List<AbstractProperty<Actor, ?>> properties = AbstractProperty.findAnnotations(Actor.class);
 
-    Behaviour behaviour;
+    Role role;
 
     private Animation animation;
 
@@ -97,7 +97,7 @@ public class Actor implements PropertySubject<Actor>
         this.appearance = new Appearance(pose);
         this.appearance.setActor(this);
 
-        this.behaviour = unsedBehaviour;
+        this.role = unsedRole;
 
         this.x = 0;
         this.y = 0;
@@ -280,7 +280,7 @@ public class Actor implements PropertySubject<Actor>
             newAnimation = ca;
         }
 
-        newAnimation.addMessageListener(getBehaviour());
+        newAnimation.addMessageListener(getRole());
         this.animation = newAnimation;
     }
 
@@ -390,32 +390,32 @@ public class Actor implements PropertySubject<Actor>
             return;
         }
 
-        if ((this.stage != null) && (this.behaviour != unsedBehaviour)) {
+        if ((this.stage != null) && (this.role != unsedRole)) {
             this.fullyCreated = true;
-            this.behaviour.birth();
+            this.role.birth();
             Itchy.getGame().add(this);
         }
     }
 
-    public final void setBehaviour( Behaviour behaviour )
+    public final void setRole( Role role )
     {
-        if (behaviour == this.behaviour) {
+        if (role == this.role) {
             return;
         }
 
-        if (this.behaviour != null) {
-            this.behaviour.detatch();
+        if (this.role != null) {
+            this.role.detatch();
         }
 
-        this.behaviour = behaviour == null ? new NullBehaviour() : behaviour;
-        this.behaviour.attach(this);
+        this.role = role == null ? new NullRole() : role;
+        this.role.attach(this);
 
         checkFullyCreated();
     }
 
-    public Behaviour getBehaviour()
+    public Role getRole()
     {
-        return this.behaviour;
+        return this.role;
     }
 
     public Appearance getAppearance()
@@ -441,7 +441,7 @@ public class Actor implements PropertySubject<Actor>
 
     public void activateAfter( final double seconds )
     {
-        this.setBehaviour(new DelayedActivation(seconds, this.getBehaviour()));
+        this.setRole(new DelayedActivation(seconds, this.getRole()));
     }
 
     /**
@@ -464,7 +464,7 @@ public class Actor implements PropertySubject<Actor>
     {
         if (!this.dead) {
             this.dead = true;
-            getBehaviour().die();
+            getRole().die();
             resetCollisionStrategy();
 
             if (this.stage != null) {
@@ -562,42 +562,42 @@ public class Actor implements PropertySubject<Actor>
         return this.getAppearance().getWorldRectangle().contains(x, y);
     }
 
-    public static Behaviour nearest( double x, double y, String tag )
+    public static Role nearest( double x, double y, String tag )
     {
-        Behaviour closestBehaviour = null;
+        Role closestRole = null;
         double closestDistance = Double.MAX_VALUE;
 
-        for (Behaviour otherBehaviour : AbstractBehaviour.allByTag(tag)) {
-            Actor other = otherBehaviour.getActor();
+        for (Role otherRole : AbstractRole.allByTag(tag)) {
+            Actor other = otherRole.getActor();
             double distance = other.distanceTo(x, y);
             if (distance < closestDistance) {
                 closestDistance = distance;
-                closestBehaviour = otherBehaviour;
+                closestRole = otherRole;
             }
         }
-        return closestBehaviour;
+        return closestRole;
     }
 
     /**
      * If there are a large number of Actors with this tag, then this will be slow, because unlike
      * overalpping and touching, there is no optimisation based on CollisionStrategy.
      */
-    public Behaviour nearest( String tag )
+    public Role nearest( String tag )
     {
-        Behaviour closestBehaviour = null;
+        Role closestRole = null;
         double closestDistance = Double.MAX_VALUE;
 
-        for (Behaviour otherBehaviour : AbstractBehaviour.allByTag(tag)) {
-            Actor other = otherBehaviour.getActor();
+        for (Role otherRole : AbstractRole.allByTag(tag)) {
+            Actor other = otherRole.getActor();
             if (other != this) {
                 double distance = other.distanceTo(this);
                 if (distance < closestDistance) {
                     closestDistance = distance;
-                    closestBehaviour = otherBehaviour;
+                    closestRole = otherRole;
                 }
             }
         }
-        return closestBehaviour;
+        return closestRole;
     }
 
     public double distanceTo( double x, double y )
@@ -695,32 +695,32 @@ public class Actor implements PropertySubject<Actor>
         this.collisionStrategy = collisionStrategy == null ? BruteForceCollisionStrategy.singleton : collisionStrategy;
     }
 
-    public Set<Behaviour> pixelOverlap( String tag )
+    public Set<Role> pixelOverlap( String tag )
     {
         return this.collisionStrategy.pixelOverlap(this, new String[] { tag }, null);
     }
 
-    public Set<Behaviour> pixelOverlap( String... tags )
+    public Set<Role> pixelOverlap( String... tags )
     {
         return this.collisionStrategy.pixelOverlap(this, tags, null);
     }
 
-    public Set<Behaviour> pixelOverlap( String[] including, String[] excluding )
+    public Set<Role> pixelOverlap( String[] including, String[] excluding )
     {
         return this.collisionStrategy.pixelOverlap(this, including, excluding);
     }
 
-    public Set<Behaviour> overlapping( String tag )
+    public Set<Role> overlapping( String tag )
     {
         return this.collisionStrategy.overlapping(this, new String[] { tag }, null);
     }
 
-    public Set<Behaviour> overlapping( String... tags )
+    public Set<Role> overlapping( String... tags )
     {
         return this.collisionStrategy.overlapping(this, tags, null);
     }
 
-    public Set<Behaviour> overlapping( String[] including, String[] excluding )
+    public Set<Role> overlapping( String[] including, String[] excluding )
     {
         return this.collisionStrategy.overlapping(this, including, excluding);
     }
@@ -786,8 +786,8 @@ public class Actor implements PropertySubject<Actor>
 
     public void tick()
     {
-        if (this.behaviour != null) {
-            this.behaviour.animateAndTick();
+        if (this.role != null) {
+            this.role.animateAndTick();
         }
     }
 
@@ -797,7 +797,7 @@ public class Actor implements PropertySubject<Actor>
         return "Actor #" + this.id + " @ " + getX() + "," + getY() +
             " size(" + this.getAppearance().getWidth() + "," + this.getAppearance().getHeight() +
             ") " +
-            (getBehaviour() == null ? "" : "(" + getBehaviour().getClass().getName() + ")");
+            (getRole() == null ? "" : "(" + getRole().getClass().getName() + ")");
     }
 
     @Override

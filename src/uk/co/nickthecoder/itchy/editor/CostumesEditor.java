@@ -777,7 +777,7 @@ public class CostumesEditor extends SubEditor<CostumeResource>
     protected void update() throws MessageException
     {
         TextBox name = (TextBox) this.form.getComponent("name");
-        ClassNameBox behaviour = (ClassNameBox) this.form.getComponent("behaviourClassName");
+        ClassNameBox role = (ClassNameBox) this.form.getComponent("roleClassName");
 
         if (this.adding || (!name.getText().equals(this.currentResource.getName()))) {
             if (this.editor.resources.getCostumeResource(name.getText()) != null) {
@@ -785,8 +785,8 @@ public class CostumesEditor extends SubEditor<CostumeResource>
             }
         }
 
-        if (!this.editor.resources.registerBehaviourClassName(behaviour.getClassName().name)) {
-            throw new MessageException("Not a valid behaviour class name");
+        if (!this.editor.resources.registerRoleClassName(role.getClassName().name)) {
+            throw new MessageException("Not a valid role class name");
         }
 
         if (!this.editor.resources.registerCostumePropertiesClassName(

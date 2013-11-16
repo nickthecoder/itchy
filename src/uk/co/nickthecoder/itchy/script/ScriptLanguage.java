@@ -21,7 +21,7 @@ import javax.script.ScriptContext;
 import javax.script.ScriptEngine;
 import javax.script.ScriptException;
 
-import uk.co.nickthecoder.itchy.Behaviour;
+import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.CostumeProperties;
 import uk.co.nickthecoder.itchy.Director;
 import uk.co.nickthecoder.itchy.Itchy;
@@ -196,43 +196,43 @@ public abstract class ScriptLanguage
 
     // ===== BEHAVIOUR =====
 
-    public abstract Behaviour createBehaviour( ClassName className );
+    public abstract Role createRole( ClassName className );
 
-    public abstract void onBirth( ScriptedBehaviour behaviour );
+    public abstract void onBirth( ScriptedRole role );
 
-    public abstract void onDeath( ScriptedBehaviour behaviour );
+    public abstract void onDeath( ScriptedRole role );
 
-    public abstract boolean onMouseDown( ScriptedBehaviour behaviour, MouseListenerView view, MouseButtonEvent mbe );
+    public abstract boolean onMouseDown( ScriptedRole role, MouseListenerView view, MouseButtonEvent mbe );
 
-    public abstract boolean onMouseUp( ScriptedBehaviour behaviour, MouseListenerView view, MouseButtonEvent mbe );
+    public abstract boolean onMouseUp( ScriptedRole role, MouseListenerView view, MouseButtonEvent mbe );
 
-    public abstract boolean onMouseMove( ScriptedBehaviour behaviour, MouseListenerView view, MouseMotionEvent mbe );
+    public abstract boolean onMouseMove( ScriptedRole role, MouseListenerView view, MouseMotionEvent mbe );
 
-    public abstract void onMessage( ScriptedBehaviour behaviour, String message );
+    public abstract void onMessage( ScriptedRole role, String message );
 
-    public abstract void tick( ScriptedBehaviour behaviour );
+    public abstract void tick( ScriptedRole role );
 
     // ===== SCENE BEHAVIOUR =====
 
     public abstract SceneDirector createSceneDirector( ClassName className );
 
-    public abstract void onActivate( ScriptedSceneDirector behaviour );
+    public abstract void onActivate( ScriptedSceneDirector role );
 
-    public abstract void onDeactivate( ScriptedSceneDirector behaviour );
+    public abstract void onDeactivate( ScriptedSceneDirector role );
 
-    public abstract void tick( ScriptedSceneDirector behaviour );
+    public abstract void tick( ScriptedSceneDirector role );
 
-    public abstract boolean onMouseDown( ScriptedSceneDirector behaviour, MouseButtonEvent mbe );
+    public abstract boolean onMouseDown( ScriptedSceneDirector role, MouseButtonEvent mbe );
 
-    public abstract boolean onMouseUp( ScriptedSceneDirector behaviour, MouseButtonEvent mbe );
+    public abstract boolean onMouseUp( ScriptedSceneDirector role, MouseButtonEvent mbe );
 
-    public abstract boolean onMouseMove( ScriptedSceneDirector behaviour, MouseMotionEvent mme );
+    public abstract boolean onMouseMove( ScriptedSceneDirector role, MouseMotionEvent mme );
 
-    public abstract boolean onKeyDown( ScriptedSceneDirector behaviour, KeyboardEvent ke );
+    public abstract boolean onKeyDown( ScriptedSceneDirector role, KeyboardEvent ke );
 
-    public abstract boolean onKeyUp( ScriptedSceneDirector behaviour, KeyboardEvent ke );
+    public abstract boolean onKeyUp( ScriptedSceneDirector role, KeyboardEvent ke );
 
-    public abstract void onMessage( ScriptedSceneDirector behaviour, String message );
+    public abstract void onMessage( ScriptedSceneDirector role, String message );
 
     // ====== COSTUME PROPERTIES =====
 

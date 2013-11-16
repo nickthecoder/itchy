@@ -8,7 +8,7 @@ package uk.co.nickthecoder.itchy.extras;
 import java.util.Random;
 
 import uk.co.nickthecoder.itchy.Actor;
-import uk.co.nickthecoder.itchy.Behaviour;
+import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.Itchy;
 
 /**
@@ -115,12 +115,12 @@ public class Explosion extends Companion<Explosion>
     public String projectileEventName;
 
     /**
-     * The equivalent of : <code>new Explosion(behaviour.getActor())</code>
-     * @param behaviour
+     * The equivalent of : <code>new Explosion(role.getActor())</code>
+     * @param role
      */
-    public Explosion( Behaviour behaviour )
+    public Explosion( Role role )
     {
-        this(behaviour.getActor());
+        this(role.getActor());
     }
 
     /**
@@ -147,7 +147,7 @@ public class Explosion extends Companion<Explosion>
      * 
      * @param poseName
      *        The name of the pose with the actor's costume.
-     * @return A new actor, which has an Explosion Behaviour, has been added to the same layer as
+     * @return A new actor, which has an Explosion Role, has been added to the same layer as
      *         the actor in the constructor, but has not been activated yet.
      */
     @Override
