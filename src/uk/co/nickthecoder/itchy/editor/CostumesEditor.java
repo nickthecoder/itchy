@@ -250,7 +250,7 @@ public class CostumesEditor extends SubEditor<CostumeResource>
                 CostumesEditor.this.propertiesClassName.addStyle("error");
 
                 if (CostumesEditor.this.editor.resources
-                    .registerSceneBehaviourClassName(className.name)) {
+                    .registerSceneDirectorClassName(className.name)) {
 
                     costume.setPropertiesClassName(
                         CostumesEditor.this.editor.game.getScriptManager(),

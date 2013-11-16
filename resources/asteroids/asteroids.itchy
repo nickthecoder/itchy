@@ -1,5 +1,5 @@
 <resources>
-  <game className="Game.js" height="600" initialScene="menu" title="There's Too Many Asteroids" width="800"/>
+  <game className="Director.js" height="600" initialScene="menu" title="There's Too Many Asteroids" width="800"/>
   <fonts>
     <font name="BlackCasper" filename="fonts/BlackCasper/BlackCasper.ttf"/>
     <font name="Boycott" filename="fonts/Boycott/Boycott.ttf"/>

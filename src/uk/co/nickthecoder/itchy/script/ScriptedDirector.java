@@ -7,36 +7,51 @@ package uk.co.nickthecoder.itchy.script;
 
 import javax.script.ScriptException;
 
-import uk.co.nickthecoder.itchy.Game;
-import uk.co.nickthecoder.itchy.GameManager;
+import uk.co.nickthecoder.itchy.AbstractDirector;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 
-public class ScriptedGame extends Game implements ScriptedObject
+public class ScriptedDirector extends AbstractDirector implements ScriptedObject
 {
     private ScriptLanguage language;
 
-    public Object gameScript;
+    public Object directorScript;
 
-    public ScriptedGame( GameManager gameManager, ScriptLanguage language, Object scriptInstance )
+    public ScriptedDirector( ScriptLanguage language, Object scriptInstance )
     {
-        super(gameManager);
+        super();
         this.language = language;
-        this.gameScript = scriptInstance;
+        this.directorScript = scriptInstance;
     }
 
     @Override
     public Object getScriptedObject()
     {
-        return this.gameScript;
+        return this.directorScript;
     }
 
     @Override
     public Object getProperty( String name )
         throws ScriptException
     {
-        return this.language.getProperty(this.gameScript, name);
+        return this.language.getProperty(this.directorScript, name);
+    }
+
+    /**
+     * The javascript base class DirectorScript calls this as its default implementation.
+     * The game write can choose to call super to get the default views and stages.
+     * Or they can not call super, and create there own stages and views.
+     */
+    public void defaultOnStarted()
+    {
+        super.onStarted();
+    }
+
+    @Override
+    public void onStarted()
+    {
+        this.language.onStarted(this);
     }
 
     @Override
@@ -122,15 +137,16 @@ public class ScriptedGame extends Game implements ScriptedObject
         this.language.tick(this);
     }
 
+
+    public boolean defaultStartScene( String sceneName )
+    {
+        return super.startScene(sceneName);
+    }
+
     @Override
     public boolean startScene( String sceneName )
     {
         return this.language.startScene(this, sceneName);
-    }
-
-    public boolean normalStartScene( String sceneName )
-    {
-        return super.startScene(sceneName);
     }
 
 }

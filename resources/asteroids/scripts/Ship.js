@@ -16,7 +16,7 @@ Ship = Class({
     	
         this.fireTimer = new itchy.extras.Timer.createTimerSeconds(this.firePeriod);        
         new itchy.extras.Fragment().actor(this.actor).pieces(10).createPoses("fragment");
-        sceneBehaviourScript.ship = this;
+        sceneDirectorScript.ship = this;
 		
 		new itchy.extras.Explosion(this.actor)
 			.distance(-30,-100).direction(0,360).speed(0,0).eventName("warp").projectiles(40)
@@ -26,7 +26,7 @@ Ship = Class({
 			.distance(-60).direction(0,360).speed(4,2).pose("explosion").fade(3).projectiles(20).randomSpread(false)
 			.createActor();
 	
-		for (var i = 0; i < gameScript.lives; i ++ ) {
+		for (var i = 0; i < directorScript.lives; i ++ ) {
 			var actor = this.actor.createCompanion("life");
 			actor.moveTo( 30 + i * 40 , 560 );
 			if (game.getSceneName() == "1") {
@@ -86,7 +86,7 @@ Ship = Class({
         
         // For debugging.
         if (Itchy.isKeyDown(Keys.x)) {
-        	sceneBehaviourScript.addRocks(-1);
+        	sceneDirectorScript.addRocks(-1);
         }
         
     },
@@ -96,16 +96,16 @@ Ship = Class({
         new itchy.extras.Explosion(this.actor)
             .speed(3,1).fade(3).spin(-5,5).rotate(true).pose("fragment").projectiles(40).createActor();
         
-        gameScript.lives -= 1;
+        directorScript.lives -= 1;
         this.killed = true;
 
-        this.lifeIcon[gameScript.lives].event("disappear");
+        this.lifeIcon[directorScript.lives].event("disappear");
         this.actor.deathEvent("explode");
     },
     
     onDeath: function() {
     	if (this.killed) {
-    		if (gameScript.lives > 0) {
+    		if (directorScript.lives > 0) {
     			game.startScene(game.getSceneName());
 	    	} else {
 	    		for ( var i = itchy.AbstractBehaviour.allByTag( "gameOver" ).iterator(); i.hasNext();) {

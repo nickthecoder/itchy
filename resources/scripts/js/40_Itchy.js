@@ -2,7 +2,7 @@
 itchy=Packages.uk.co.nickthecoder.itchy;
 jame=Packages.uk.co.nickthecoder.jame;
 
-// Import types - Used when adding properties.
+// Import types
 Double = java.lang.Double;
 Integer = java.lang.Integer;
 RGBA = jame.RGBA;
@@ -11,14 +11,17 @@ Keys = jame.event.Keys;
 //Objects
 Itchy=itchy.Itchy;
 game = null;
-gameScript = null;
-sceneBehaviour = null;
-sceneBehaviourScript = null;
+director = null;
+directorScript = null;
+sceneDirector = null;
+sceneDirectorScript = null;
 
 
-GameScript = Class({
+DirectorScript = Class({
 
     getInitialSceneName: function() { return "start" },
+    
+    onStarted: function() { director.defaultOnStarted(); },
     
     onActivate: function() {},
     
@@ -40,7 +43,7 @@ GameScript = Class({
     
     tick: function() {},
     
-    startScene: function( sceneName ) { return game.normalStartScene( sceneName ); }
+    startScene: function( sceneName ) { return director.defaultStartScene( sceneName ); }
     
     
 });
@@ -63,25 +66,17 @@ BehaviourScript = Class({
 
     tick : function() {},
         
-    onMouseDown: function( mouseEvent ) { return false; },
+    onMouseDown: function( view, mouseEvent ) { return false; },
     
-    onMouseUp: function( mouseEvent ) { return false; },
+    onMouseUp: function( view, mouseEvent ) { return false; },
     
-    onMouseMove: function( mouseEvent ) { return false; },
+    onMouseMove: function( view, mouseEvent ) { return false; },
     
     isMouseListener: function() {
         return
             (this.onMouseDown != BehaviourScript.prototype.onMouseDown) ||
             (this.onMouseUp != BehaviourScript.prototype.onMouseUp) ||
             (this.onMouseMove != BehaviourScript.prototype.onMouseMove)
-    },
-    
-    captureMouse: function() {
-        this.actor.getLayer().captureMouse( this.behaviour );
-    },
-
-    releaseMouse: function() {
-        this.actor.getLayer().releaseMouse( this.behaviour );
     },
     
     getCostumeProperties: function() {
@@ -91,13 +86,13 @@ BehaviourScript = Class({
 });
 
 
-SceneBehaviourScript = Class({
+SceneDirectorScript = Class({
 
     Class: {
     
         addProperty: function( className, propertyName, klass, label ) {
             if (klass == String) klass = java.lang.String;
-            itchy.script.ScriptedSceneBehaviour.addProperty(
+            itchy.script.ScriptedSceneDirector.addProperty(
                 className, propertyName, label, klass
             );
         },

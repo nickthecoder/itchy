@@ -15,7 +15,7 @@
       <property name="errorValue" value="Err"/>
       <property name="quiet" value="false"/>
       <property name="updateInterval" value="0.1"/>
-      <property name="access" value="sceneBehaviour.sceneBehaviourScript.score"/>
+      <property name="access" value="sceneDirector.sceneDirectorScript.score"/>
     </text>
     <text text="0000" font="Boycott" size="32" color="#93190e" xAlignment="0.0" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.NumberValue" x="675" y="532" direction="0.0" heading="0.0" startEvent="default" zOrder="6">
       <property name="formatPattern" value="0000"/>
@@ -23,7 +23,7 @@
       <property name="errorValue" value="Err"/>
       <property name="quiet" value="false"/>
       <property name="updateInterval" value="-1.0"/>
-      <property name="access" value="sceneBehaviour.sceneBehaviourScript.highScore"/>
+      <property name="access" value="sceneDirector.sceneDirectorScript.highScore"/>
     </text>
     <text text="Top" font="BlackCasper" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="0" y="1200" direction="0.0" heading="0.0" startEvent="default" zOrder="7"/>
     <actor costume="drop1" x="91" y="639" direction="0.0" heading="0.0" startEvent="default" zOrder="8">
@@ -67,7 +67,7 @@
       <property name="updatePeriod" value="1.0"/>
       <property name="horizontal" value="true"/>
       <property name="from" value="0.0"/>
-      <property name="access" value="sceneBehaviour.sceneBehaviourScript.speed"/>
+      <property name="access" value="sceneDirector.sceneDirectorScript.speed"/>
     </actor>
   </layer>
 </scene>

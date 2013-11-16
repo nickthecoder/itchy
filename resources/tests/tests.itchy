@@ -1,5 +1,5 @@
 <resources>
-  <game title="Tests" width="800" height="600" initialScene="menu" className="uk.co.nickthecoder.itchy.Game"/>
+  <game title="Tests" width="800" height="600" initialScene="menu" className="uk.co.nickthecoder.itchy.PlainDirector"/>
   <fonts>
     <font name="vera" filename="fonts/Vera/Vera.ttf"/>
   </fonts>

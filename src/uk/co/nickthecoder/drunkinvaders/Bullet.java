@@ -37,7 +37,7 @@ public class Bullet extends AbstractBehaviour implements Shootable
     public void onAttach()
     {
         super.onAttach();
-        getActor().setCollisionStrategy(DrunkInvaders.game.createCollisionStrategy(getActor()));
+        getActor().setCollisionStrategy(DrunkInvaders.director.createCollisionStrategy(getActor()));
     }
     
     @Override

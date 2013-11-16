@@ -1,7 +1,7 @@
-// The SceneBehaviourScript while playing the game - there is a different SceneBehaviourScript for the menus (Menu.js)
+// The SceneDirectorScript while playing the game - there is a different SceneDirectorScript for the menus (Menu.js)
 Play = new Class({
 
-    Extends: SceneBehaviourScript,
+    Extends: SceneDirectorScript,
     
     init: function()
     {
@@ -19,8 +19,8 @@ Play = new Class({
             return true; // Return true to indicate that the key has been processed.
         }
         // Play again if dead an return pressed.
-        if ((ke.symbol == ke.RETURN) && (gameScript.lives == 0)) {
-        	gameScript.startGame();
+        if ((ke.symbol == ke.RETURN) && (directorScript.lives == 0)) {
+        	directorScript.startGame();
         }
         return false;
     },

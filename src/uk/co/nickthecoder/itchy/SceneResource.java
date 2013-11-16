@@ -75,8 +75,8 @@ public class SceneResource extends Loadable
         } catch (Exception e) {
             this.scene = new Scene();
         }
-        if (this.scene.sceneBehaviour == null) {
-            this.scene.sceneBehaviour = this.scene.createSceneBehaviour(this.resources);
+        if (this.scene.sceneDirector == null) {
+            this.scene.sceneDirector = this.scene.createSceneDirector(this.resources);
         }
 
         SceneWriter sceneWriter = new SceneWriter(this);

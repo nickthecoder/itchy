@@ -1,4 +1,4 @@
-<scene showMouse="true" behaviour="uk.co.nickthecoder.itchy.PlainSceneBehaviour">
+<scene showMouse="true" behaviour="uk.co.nickthecoder.itchy.PlainSceneDirector">
   <properties/>
   <layer name="main">
     <text text="1) Animation Profiles" font="vera" size="22" color="#ffffff" xAlignment="0.0" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.SceneButton" x="30" y="520" direction="0.0" heading="0.0" startEvent="default" zOrder="1">

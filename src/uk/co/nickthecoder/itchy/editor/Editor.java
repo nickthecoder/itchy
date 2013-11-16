@@ -9,6 +9,7 @@ import java.io.File;
 
 import uk.co.nickthecoder.itchy.Game;
 import uk.co.nickthecoder.itchy.Itchy;
+import uk.co.nickthecoder.itchy.PlainDirector;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Button;
 import uk.co.nickthecoder.itchy.gui.Container;
@@ -18,8 +19,6 @@ import uk.co.nickthecoder.itchy.gui.Notebook;
 import uk.co.nickthecoder.itchy.gui.RootContainer;
 import uk.co.nickthecoder.itchy.gui.Stylesheet;
 import uk.co.nickthecoder.itchy.gui.VerticalLayout;
-import uk.co.nickthecoder.jame.event.KeyboardEvent;
-import uk.co.nickthecoder.jame.event.Keys;
 
 public final class Editor extends Game
 {
@@ -56,10 +55,11 @@ public final class Editor extends Game
 
     public Editor( Game game ) throws Exception
     {
-        super(game.gameManager);
+        super(game.resources);
 
         this.game = game;
         instance = this;
+        setDirector(new PlainDirector());
         this.preferences = new EditorPreferences();
 
         this.gameInfoEditor = new GameInfoEditor(this);
@@ -78,12 +78,6 @@ public final class Editor extends Game
             System.err.println("Failed to load stylesheet : " + RULES);
             e.printStackTrace();
         }
-    }
-
-    @Override
-    public void createStagesAndViews()
-    {
-        // Do nothing.
     }
 
     @Override
@@ -193,25 +187,10 @@ public final class Editor extends Game
     }
 
     @Override
-    public boolean onKeyDown( KeyboardEvent ke )
-    {
-        if (ke.symbol == Keys.F1) {
-            this.debug();
-            return true;
-        }
-        return false;
-    }
-
-    @Override
     public void start( String sceneName )
     {
         this.designSceneName = sceneName;
         this.start();
-    }
-
-    public void debug()
-    {
-        getStylesheet().debug();
     }
 
 }

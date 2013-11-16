@@ -23,43 +23,44 @@ import uk.co.nickthecoder.itchy.tools.GameMenu;
 import uk.co.nickthecoder.itchy.tools.NewGameWizard;
 import uk.co.nickthecoder.itchy.tools.Page;
 
-public class Launcher extends Game
+public class Launcher extends AbstractDirector
 {
     private static final String RULES = "resources" + File.separator + "editor" + File.separator + "style.xml";
 
     public RootContainer root;
 
-    public Launcher( GameManager gameManager )
-        throws Exception
+    public void onStarted()
     {
-        super(gameManager);
-
+        super.onStarted();
+        
+        System.out.println( "Starting Launcher" );
+        Itchy.enableKeyboardRepeat(true);
+        
         try {
-            setStylesheet(new Stylesheet(new File(Itchy.getBaseDirectory(), RULES)));
+            game.setStylesheet(new Stylesheet(new File(Itchy.getBaseDirectory(), RULES)));
         } catch (Exception e) {
             System.err.println("Failed to load stylesheet : " + RULES);
             e.printStackTrace();
         }
+
+        System.out.println( "Creating Laucher window" );
+        this.root = new RootContainer();
+        this.root.addStyle("editor");
+
+        this.root.setMinimumWidth(this.game.getWidth());
+        this.root.setMinimumHeight(this.game.getHeight());
+
+        this.root.setMaximumWidth(this.game.getWidth());
+        this.root.setMaximumHeight(this.game.getHeight());
+
+        createWindow();
+
+        this.root.show();
     }
 
     @Override
     public void onActivate()
     {
-        Itchy.enableKeyboardRepeat(true);
-
-        this.root = new RootContainer();
-        this.root.addStyle("editor");
-
-        this.root.setMinimumWidth(this.getWidth());
-        this.root.setMinimumHeight(this.getHeight());
-
-        this.root.setMaximumWidth(this.getWidth());
-        this.root.setMaximumHeight(this.getHeight());
-
-
-        createWindow();
-
-        this.root.show();
     }
 
     private void createWindow()

@@ -6,17 +6,20 @@
 package uk.co.nickthecoder.drunkinvaders;
 
 import java.text.DecimalFormat;
+import java.util.List;
 
 import uk.co.nickthecoder.itchy.AbstractBehaviour;
+import uk.co.nickthecoder.itchy.AbstractDirector;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.ActorCollisionStrategy;
 import uk.co.nickthecoder.itchy.Behaviour;
-import uk.co.nickthecoder.itchy.Game;
-import uk.co.nickthecoder.itchy.GameManager;
+import uk.co.nickthecoder.itchy.CompoundView;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Launcher;
 import uk.co.nickthecoder.itchy.MultiLineTextPose;
+import uk.co.nickthecoder.itchy.Stage;
 import uk.co.nickthecoder.itchy.StageView;
+import uk.co.nickthecoder.itchy.View;
 import uk.co.nickthecoder.itchy.WorldRectangle;
 import uk.co.nickthecoder.itchy.ZOrderStage;
 import uk.co.nickthecoder.itchy.animation.Animation;
@@ -29,11 +32,11 @@ import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.Keys;
 
-public class DrunkInvaders extends Game
+public class DrunkInvaders extends AbstractDirector
 {
     public static final int NEIGHBOURHOOD_SQUARE_SIZE = 60;
 
-    public static DrunkInvaders game;
+    public static DrunkInvaders director;
 
     public ZOrderStage backgroundStage;
 
@@ -60,25 +63,19 @@ public class DrunkInvaders extends Game
     private Behaviour info;
 
     public boolean transitioning = false;
-    
+
     public WorldRectangle worldBounds;
 
-    public DrunkInvaders( GameManager gameManager )
-        throws Exception
+    @Override
+    public void onStarted()
     {
-        super(gameManager);
+        director = this;
 
-        game = this;
         this.neighbourhood = new StandardNeighbourhood(NEIGHBOURHOOD_SQUARE_SIZE);
 
-    }
+        this.worldBounds = new WorldRectangle(0, 0, this.game.getWidth(), this.game.getHeight());
 
-    @Override
-    public void createStagesAndViews()
-    {
-        this.worldBounds = new WorldRectangle( 0,0, this.getWidth(), this.getHeight());
-
-        Rect screenRect = new Rect(0, 0, getWidth(), getHeight());
+        Rect screenRect = new Rect(0, 0, this.game.getWidth(), this.game.getHeight());
 
         this.mainStage = new ZOrderStage("main");
         this.backgroundStage = new ZOrderStage("background");
@@ -87,7 +84,7 @@ public class DrunkInvaders extends Game
 
         this.mainView = new StageView(screenRect, this.mainStage);
         this.mainView.centerOn(320, 240);
-        this.mainView.enableMouseListener(this);
+        this.mainView.enableMouseListener(this.game);
 
         this.backgroundView = new StageView(screenRect, this.backgroundStage);
         this.backgroundView.centerOn(320, 240);
@@ -95,13 +92,15 @@ public class DrunkInvaders extends Game
         this.glassView = new StageView(screenRect, this.glassStage);
         this.fadeView = new StageView(screenRect, this.fadeStage);
 
-        this.gameViews.add(this.backgroundView);
-        this.gameViews.add(this.mainView);
-        this.gameViews.add(this.glassView);
-        this.gameViews.add(this.fadeView);
+        CompoundView<View> views = this.game.getGameViews();
+        views.add(this.backgroundView);
+        views.add(this.mainView);
+        views.add(this.glassView);
+        views.add(this.fadeView);
 
-        this.stages.add(this.backgroundStage);
-        this.stages.add(this.mainStage);
+        List<Stage> stages = this.game.getStages();
+        stages.add(this.backgroundStage);
+        stages.add(this.mainStage);
 
         this.glassStage.locked = true;
         this.fadeStage.locked = true;
@@ -112,7 +111,7 @@ public class DrunkInvaders extends Game
     public void onActivate()
     {
         super.onActivate();
-        game = this;
+        director = this;
 
         this.metronomeCountdown = 0;
         this.metronome = 20;
@@ -154,7 +153,7 @@ public class DrunkInvaders extends Game
     {
         if (this.info == null) {
 
-            final MultiLineTextPose pose = new MultiLineTextPose(this.resources.getFont("vera"), 16);
+            final MultiLineTextPose pose = new MultiLineTextPose(this.game.resources.getDefaultFont(), 16);
 
             this.info = new AbstractBehaviour()
             {
@@ -216,13 +215,13 @@ public class DrunkInvaders extends Game
     public void onMessage( String message )
     {
         if ("editor".equals(message)) {
-            startEditor();
+            this.game.startEditor();
 
         } else if ("quit".equals(message)) {
-            end();
+            this.game.end();
 
         } else if ("reset".equals(message)) {
-            this.getPreferences().clear();
+            this.game.getPreferences().clear();
 
         } else if (message == SceneTransition.COMPLETE) {
             this.transitioning = false;
@@ -239,7 +238,7 @@ public class DrunkInvaders extends Game
         }
 
         if (this.aliensRemaining == 0) {
-            getPreferences().putBoolean("completedLevel" + this.levelNumber, true);
+            this.game.getPreferences().putBoolean("completedLevel" + this.levelNumber, true);
 
             this.levelNumber += 1;
             this.play();
@@ -249,7 +248,7 @@ public class DrunkInvaders extends Game
 
     public boolean completedLevel( int level )
     {
-        return getPreferences().getBoolean("completedLevel" + level, false);
+        return this.game.getPreferences().getBoolean("completedLevel" + level, false);
     }
 
     public void play( int levelNumber )

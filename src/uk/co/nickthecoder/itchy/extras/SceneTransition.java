@@ -237,7 +237,7 @@ public class SceneTransition
         if (this.pause) {
             Itchy.getGame().pause.unpause();
         }
-        Itchy.getGame().onMessage(COMPLETE);
+        Itchy.getGame().getDirector().onMessage(COMPLETE);
     }
 
 }

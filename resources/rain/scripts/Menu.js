@@ -1,7 +1,7 @@
-// The SceneBehaviourScript for the main "menu" scene, and the "about" scene.
+// The SceneDirectorScript for the main "menu" scene, and the "about" scene.
 Menu = new Class({
 
-    Extends: SceneBehaviourScript,
+    Extends: SceneDirectorScript,
     
     onMessage: function( message ) {
         if (message == "editor") {

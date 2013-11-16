@@ -34,4 +34,8 @@ public class RGBAView extends AbstractView
         destSurface.fill(clip, this.color);
     }
 
+    public String toString()
+    {
+        return "RGBAView " + this.color;
+    }
 }

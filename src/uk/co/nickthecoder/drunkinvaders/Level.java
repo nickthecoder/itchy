@@ -7,23 +7,23 @@
  ******************************************************************************/
 package uk.co.nickthecoder.drunkinvaders;
 
-import uk.co.nickthecoder.itchy.PlainSceneBehaviour;
+import uk.co.nickthecoder.itchy.PlainSceneDirector;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.Keys;
 
-public class Level extends PlainSceneBehaviour
+public class Level extends PlainSceneDirector
 {
     
     @Override
     public boolean onKeyDown( KeyboardEvent ke )
     {
         if (ke.symbol == Keys.ESCAPE) {
-            DrunkInvaders.game.startScene("menu");
+            DrunkInvaders.director.startScene("menu");
             return true;
         }
     
         if (ke.symbol == Keys.p) {
-            DrunkInvaders.game.pause.togglePause();
+            DrunkInvaders.director.getGame().pause.togglePause();
             return true;
         }
         

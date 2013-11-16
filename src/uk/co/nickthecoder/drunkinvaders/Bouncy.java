@@ -43,7 +43,7 @@ public class Bouncy extends AbstractBehaviour
     public void onBirth()
     {
         super.onBirth();
-        getActor().setCollisionStrategy(DrunkInvaders.game.createCollisionStrategy(getActor()));
+        getActor().setCollisionStrategy(DrunkInvaders.director.createCollisionStrategy(getActor()));
     }
 
     @Override

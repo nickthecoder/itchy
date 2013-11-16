@@ -14,10 +14,10 @@ import javax.script.ScriptException;
 
 import uk.co.nickthecoder.itchy.Behaviour;
 import uk.co.nickthecoder.itchy.CostumeProperties;
-import uk.co.nickthecoder.itchy.Game;
+import uk.co.nickthecoder.itchy.Director;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Resources;
-import uk.co.nickthecoder.itchy.SceneBehaviour;
+import uk.co.nickthecoder.itchy.SceneDirector;
 import uk.co.nickthecoder.itchy.editor.ComboBox;
 import uk.co.nickthecoder.itchy.script.ScriptLanguage;
 import uk.co.nickthecoder.itchy.script.ScriptManager;
@@ -137,10 +137,10 @@ public class ClassNameBox extends Container
     {
         if (this.baseClass == Behaviour.class) {
             return resources.getBehaviourClassNames();
-        } else if (this.baseClass == SceneBehaviour.class) {
-            return resources.getSceneBehaviourClassNames();
-        } else if (this.baseClass == Game.class) {
-            return resources.getGameClassNames();
+        } else if (this.baseClass == SceneDirector.class) {
+            return resources.getSceneDirectorClassNames();
+        } else if (this.baseClass == Director.class) {
+            return resources.getDirectorClassNames();
         } else if (this.baseClass == CostumeProperties.class) {
             return resources.getCostumePropertiesClassNames();
         } else {
@@ -152,10 +152,10 @@ public class ClassNameBox extends Container
     {
         if (this.baseClass == Behaviour.class) {
             return "Behaviour";
-        } else if (this.baseClass == SceneBehaviour.class) {
-            return "SceneBehaviour";
-        } else if (this.baseClass == Game.class) {
-            return "Game";
+        } else if (this.baseClass == SceneDirector.class) {
+            return "SceneDirector";
+        } else if (this.baseClass == Director.class) {
+            return "Director";
         } else if (this.baseClass == CostumeProperties.class) {
             return "CostumeProperties";
         } else {

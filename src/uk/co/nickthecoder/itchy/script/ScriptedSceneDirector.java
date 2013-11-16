@@ -11,71 +11,71 @@ import java.util.List;
 
 import javax.script.ScriptException;
 
-import uk.co.nickthecoder.itchy.SceneBehaviour;
+import uk.co.nickthecoder.itchy.SceneDirector;
 import uk.co.nickthecoder.itchy.util.AbstractProperty;
 import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 
-public class ScriptedSceneBehaviour implements SceneBehaviour, ScriptedObject
+public class ScriptedSceneDirector implements SceneDirector, ScriptedObject
 {
-    private final static HashMap<String, List<AbstractProperty<SceneBehaviour, ?>>> allProperties = new HashMap<String, List<AbstractProperty<SceneBehaviour, ?>>>();
+    private final static HashMap<String, List<AbstractProperty<SceneDirector, ?>>> allProperties = new HashMap<String, List<AbstractProperty<SceneDirector, ?>>>();
 
     private ClassName className;
 
     private ScriptLanguage language;
 
-    public final Object sceneBehaviourScript;
+    public final Object sceneDirectorScript;
 
     public final ScriptProperties propertyValues;
 
-    public ScriptedSceneBehaviour( ClassName className, ScriptLanguage language,
+    public ScriptedSceneDirector( ClassName className, ScriptLanguage language,
         Object scriptInstance )
     {
         this.className = className;
         this.language = language;
-        this.sceneBehaviourScript = scriptInstance;
+        this.sceneDirectorScript = scriptInstance;
         this.propertyValues = new ScriptProperties(language, scriptInstance);
     }
 
     @Override
     public Object getScriptedObject()
     {
-        return this.sceneBehaviourScript;
+        return this.sceneDirectorScript;
     }
 
     @Override
     public Object getProperty( String name )
         throws ScriptException
     {
-        return this.language.getProperty(this.sceneBehaviourScript, name);
+        return this.language.getProperty(this.sceneDirectorScript, name);
     }
 
     @Override
-    public List<AbstractProperty<SceneBehaviour, ?>> getProperties()
+    public List<AbstractProperty<SceneDirector, ?>> getProperties()
     {
         String name = ScriptManager.getName(this.className);
 
-        List<AbstractProperty<SceneBehaviour, ?>> result = allProperties.get(name);
+        List<AbstractProperty<SceneDirector, ?>> result = allProperties.get(name);
         if (result == null) {
-            result = new ArrayList<AbstractProperty<SceneBehaviour, ?>>();
+            result = new ArrayList<AbstractProperty<SceneDirector, ?>>();
             allProperties.put(name, result);
         }
         return result;
     }
 
     public static void addProperty(
-        String sceneBehaviourName, String propertyName, String label, Class<?> klass )
+        String sceneDirectorName, String propertyName, String label, Class<?> klass )
     {
-        List<AbstractProperty<SceneBehaviour, ?>> properties = allProperties
-            .get(sceneBehaviourName);
+        List<AbstractProperty<SceneDirector, ?>> properties = allProperties
+            .get(sceneDirectorName);
         if (properties == null) {
-            properties = new ArrayList<AbstractProperty<SceneBehaviour, ?>>();
-            allProperties.put(sceneBehaviourName, properties);
+            properties = new ArrayList<AbstractProperty<SceneDirector, ?>>();
+            allProperties.put(sceneDirectorName, properties);
         }
 
-        AbstractProperty<SceneBehaviour, ?> property = AbstractProperty.createProperty(
+        AbstractProperty<SceneDirector, ?> property = AbstractProperty.createProperty(
             klass, "propertyValues." + propertyName, propertyName, label, true, false, true);
         if (property != null) {
             properties.add(property);

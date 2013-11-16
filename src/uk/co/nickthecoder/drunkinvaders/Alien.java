@@ -36,7 +36,7 @@ public class Alien extends Bouncy implements Shootable
     public void onBirth()
     {
         super.onBirth();
-        DrunkInvaders.game.addAliens(1);
+        DrunkInvaders.director.addAliens(1);
         new Fragment().actor(getActor()).createPoses("fragment");
     }
 
@@ -44,13 +44,13 @@ public class Alien extends Bouncy implements Shootable
     public void onDeath()
     {
         super.onDeath();
-        DrunkInvaders.game.addAliens(-1);
+        DrunkInvaders.director.addAliens(-1);
     }
 
     @Override
     public void tick()
     {
-        if (DrunkInvaders.game.metronomeCountdown == 1) {
+        if (DrunkInvaders.director.metronomeCountdown == 1) {
             if (getActor().getAnimation() == null) {
                 this.tock = !this.tock;
                 getActor().event(this.tock ? "tock" : "tick");
@@ -76,10 +76,10 @@ public class Alien extends Bouncy implements Shootable
     {
         this.event("fire");
 
-        Actor bullet = new Actor(DrunkInvaders.game.resources.getCostume("bomb"));
+        Actor bullet = new Actor(DrunkInvaders.director.getGame().resources.getCostume("bomb"));
         bullet.moveTo(getActor());
         bullet.setDirection(getActor().getAppearance().getDirection());
-        DrunkInvaders.game.mainStage.addTop(bullet);
+        DrunkInvaders.director.mainStage.addTop(bullet);
         bullet.moveForwards(10);
         bullet.setBehaviour(new Bullet("killable"));
     }

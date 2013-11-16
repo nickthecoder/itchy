@@ -4,14 +4,14 @@ Player = new Class({
     
     onBirth: function() {
         // When the game starts tell "Play.js" we are alive and well, the game is on!
-        sceneBehaviourScript.player = this;
-        // BTW, sceneBehaviourScript.player is set to null, when the game ends.
+        sceneDirectorScript.player = this;
+        // BTW, sceneDirectorScript.player is set to null, when the game ends.
     },
     
     tick: function() {
     
         // Don't do anything when we are dead.
-        if (sceneBehaviourScript.isPlaying()) {
+        if (sceneDirectorScript.isPlaying()) {
         
             // Get the X position of the mouse pointer, and then make sure that x isn't too far left or right.
             var x = Itchy.getMouseX();
@@ -33,7 +33,7 @@ Player = new Class({
                 // Plays a sound, and starts an animation.
                 this.actor.deathEvent("death");
                 
-                sceneBehaviourScript.end();
+                sceneDirectorScript.end();
             }
         }
     }

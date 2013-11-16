@@ -26,8 +26,8 @@ public class TextValue extends AbstractBehaviour
      * "sceneName" (not getSceneName).
      * 
      * You can traverse from one object to another. For example, Game has a methods called
-     * getSceneBehaviour, so if your SceneBehaviour has an attribute called "for" (or a method
-     * called "getFoo"), then you can get to it using : <code>"sceneBehaviour.foo"</code>.
+     * getSceneDirector, so if your SceneDirector has an attribute called "for" (or a method
+     * called "getFoo"), then you can get to it using : <code>"sceneDirector.foo"</code>.
      */
     @Property(label = "Acess")
     public String access;

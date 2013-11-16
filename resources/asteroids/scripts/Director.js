@@ -1,6 +1,6 @@
-Game = Class({
+Director = Class({
 
-    Extends: GameScript,
+    Extends: DirectorScript,
     
     init: function() {
     	this.score = 0;
@@ -8,7 +8,7 @@ Game = Class({
     },
     
     startScene: function( sceneName ) {
-    	if (sceneName == "menu" && game.sceneName == "menu") {
+    	if (sceneName == "menu" && game.getSceneName() == "menu") {
     		return true;
     	}
 		var transition = itchy.extras.SceneTransition.fade();

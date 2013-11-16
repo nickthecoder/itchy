@@ -10,8 +10,8 @@ Drop = Class({
     onBirth: function() {
         // Player checks to see if it has collided with any "deadly" objects.
         this.behaviour.addTag("deadly");
-        // The speed of each drop is determined by the sceneBehaviour. See Play.js for more.
-        this.speed = sceneBehaviourScript.speed;
+        // The speed of each drop is determined by the sceneDirector. See Play.js for more.
+        this.speed = sceneDirectorScript.speed;
         // Each type of drop can got down the screen at different speed. The speedFactor is set from
         // the editor's "Costumes" page, in the "Properties" section.
         this.speedFactor = this.actor.getCostume().getProperties().values.speedFactor;
@@ -32,13 +32,13 @@ Drop = Class({
                 .pose("droplet").createActor();
             
             // Blue drops make a "drop" sound, gold drops say a random phrase.
-            if (sceneBehaviourScript.isPlaying()) {
+            if (sceneDirectorScript.isPlaying()) {
                 this.actor.event("drip");
             }
             // Move above the top of the screen, with a random X value, and the latest speed.
             var x = random.nextInt(Itchy.getGame().getWidth());
             this.actor.moveTo( x, this.actor.getY() + this.distance );
-            this.speed = sceneBehaviourScript.speed * this.speedFactor;
+            this.speed = sceneDirectorScript.speed * this.speedFactor;
             
         }
     }

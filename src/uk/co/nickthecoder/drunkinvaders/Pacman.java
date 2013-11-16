@@ -21,7 +21,7 @@ public class Pacman extends AbstractBehaviour
     {
         super.onAttach();
         
-        getActor().setCollisionStrategy(DrunkInvaders.game.createCollisionStrategy(getActor()));
+        getActor().setCollisionStrategy(DrunkInvaders.director.createCollisionStrategy(getActor()));
     }
     @Override
     public void onDetach()

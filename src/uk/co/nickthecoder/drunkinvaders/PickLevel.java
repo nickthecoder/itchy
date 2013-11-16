@@ -31,7 +31,7 @@ public class PickLevel extends Button
     @Override
     public void onAttach()
     {
-        if (DrunkInvaders.game.completedLevel(this.levelNumber)) {
+        if (DrunkInvaders.director.completedLevel(this.levelNumber)) {
             getActor().event("completed");
         }
 
@@ -48,6 +48,6 @@ public class PickLevel extends Button
     @Override
     public void onClick()
     {
-        DrunkInvaders.game.play(this.levelNumber);
+        DrunkInvaders.director.play(this.levelNumber);
     }
 }

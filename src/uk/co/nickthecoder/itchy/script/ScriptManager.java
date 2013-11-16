@@ -13,16 +13,15 @@ import javax.script.ScriptException;
 
 import uk.co.nickthecoder.itchy.Behaviour;
 import uk.co.nickthecoder.itchy.CostumeProperties;
-import uk.co.nickthecoder.itchy.Game;
-import uk.co.nickthecoder.itchy.GameManager;
+import uk.co.nickthecoder.itchy.Director;
 import uk.co.nickthecoder.itchy.Resources;
-import uk.co.nickthecoder.itchy.SceneBehaviour;
+import uk.co.nickthecoder.itchy.SceneDirector;
 import uk.co.nickthecoder.itchy.util.ClassName;
 
 /**
  * Allows games to use script languages, such as javascript, for their game logic.
  * 
- * Subclasses of Behaviour, SceneBehaviour, CostumeProperties and Game can all be coded in a
+ * Subclasses of Behaviour, SceneDirector, CostumeProperties and Game can all be coded in a
  * scripting language.
  * 
  * All scripts are read from a "scripts" folder relative to the game's resources file. (i.e.
@@ -34,7 +33,7 @@ import uk.co.nickthecoder.itchy.util.ClassName;
 public class ScriptManager
 {
     public Resources resources;
-    
+
     private static HashMap<String, Class<ScriptLanguage>> languageClassMap = new HashMap<String, Class<ScriptLanguage>>();
 
     private HashMap<String, ScriptLanguage> languages = new HashMap<String, ScriptLanguage>();
@@ -44,8 +43,7 @@ public class ScriptManager
     {
         this.resources = resources;
 
-        registerLanguage("js",
-            (Class<ScriptLanguage>) (JavascriptLanguage.class.asSubclass(ScriptLanguage.class)));
+        registerLanguage("js", (Class<ScriptLanguage>) (JavascriptLanguage.class.asSubclass(ScriptLanguage.class)));
     }
 
     public static void registerLanguage( String extension, Class<ScriptLanguage> class1 )
@@ -55,7 +53,7 @@ public class ScriptManager
 
     public ScriptLanguage getLanguage( ClassName className )
     {
-        return getLanguage( getExtension( className.name ));
+        return getLanguage(getExtension(className.name));
     }
 
     public ScriptLanguage getLanguage( String extension )
@@ -111,10 +109,10 @@ public class ScriptManager
         }
         return false;
     }
-    
+
     public static boolean isScript( ClassName className )
     {
-        return isScript( className.name );
+        return isScript(className.name);
     }
 
     public File getScript( String filename )
@@ -128,7 +126,7 @@ public class ScriptManager
     {
         return isValidScript(className.name);
     }
-    
+
     public boolean isValidScript( String name )
     {
 
@@ -151,16 +149,16 @@ public class ScriptManager
     public boolean createScript( String templateName, ClassName className )
     {
         ScriptLanguage language = getLanguage(getExtension(className.name));
-        return language.createScript(templateName, className);        
+        return language.createScript(templateName, className);
     }
-    
-    public Game createGame( GameManager gameManager, ClassName className )
+
+    public Director createDirector( ClassName className )
         throws ScriptException
     {
         ScriptLanguage language = getLanguage(getExtension(className.name));
         language.loadScript(className.name);
 
-        return language.createGame(gameManager, className);
+        return language.createDirector(className);
     }
 
     public Behaviour createBehaviour( ClassName className )
@@ -172,15 +170,15 @@ public class ScriptManager
         return language.createBehaviour(className);
     }
 
-    public SceneBehaviour createSceneBehaviour( ClassName className )
+    public SceneDirector createSceneDirector( ClassName className )
         throws ScriptException
     {
         ScriptLanguage language = getLanguage(getExtension(className.name));
         language.loadScript(className.name);
 
-        return language.createSceneBehaviour(className);
+        return language.createSceneDirector(className);
     }
-    
+
     public CostumeProperties createCostumeProperties( ClassName className )
         throws ScriptException
     {
@@ -189,6 +187,5 @@ public class ScriptManager
 
         return language.createCostumeProperties(className);
     }
-    
-    
+
 }

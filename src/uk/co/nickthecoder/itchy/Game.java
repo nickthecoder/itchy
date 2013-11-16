@@ -19,6 +19,7 @@ import uk.co.nickthecoder.itchy.gui.RootContainer;
 import uk.co.nickthecoder.itchy.gui.Stylesheet;
 import uk.co.nickthecoder.itchy.script.ScriptManager;
 import uk.co.nickthecoder.itchy.util.AutoFlushPreferences;
+import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.itchy.util.StringUtils;
 import uk.co.nickthecoder.itchy.util.TagCollection;
 import uk.co.nickthecoder.jame.RGBA;
@@ -31,13 +32,14 @@ import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 import uk.co.nickthecoder.jame.event.QuitEvent;
 
-public class Game implements InputListener, QuitListener, MessageListener
+public class Game
 {
     /**
      * Used internally when creating the Game object, and when using scripted game code, rather than
      * Java code.
      */
-    public final GameManager gameManager;
+
+    protected Director director;
 
     /**
      * Holds all of the images, sounds, fonts, animations costumes etc used by this game.
@@ -56,14 +58,10 @@ public class Game implements InputListener, QuitListener, MessageListener
 
     /**
      * Helps to implement a pause feature within your game. Typically, you will pause/unpause from
-     * your game's {@link SceneBehaviour#onKeyDown(KeyboardEvent)} :
+     * your game's {@link SceneDirector#onKeyDown(KeyboardEvent)} :
      * <code>myGame.pause.togglePause();</code>
      */
     public Pause pause;
-
-    public ZOrderStage mainStage;
-
-    public StageView mainView;
 
     /**
      * Holds data about this game that is stored for use then next time the game is run. For
@@ -76,7 +74,7 @@ public class Game implements InputListener, QuitListener, MessageListener
     protected CompoundView<View> gameViews;
 
     protected List<Stage> stages;
-    
+
     protected RGBAView background;
 
     protected ZOrderStage glassStage;
@@ -119,9 +117,9 @@ public class Game implements InputListener, QuitListener, MessageListener
     private final CompoundView<GuiView> windows;
 
     /**
-     * The current SceneBehaviour, which was created during {@link #loadScene(String)}
+     * The current SceneDirector, which was created during {@link #loadScene(String)}
      */
-    private SceneBehaviour sceneBehaviour;
+    private SceneDirector sceneDirector;
 
     /**
      * The name of the current scene, i.e. the last one started using {@link #startScene(String)}
@@ -139,9 +137,11 @@ public class Game implements InputListener, QuitListener, MessageListener
      */
     private Stylesheet stylesheet;
 
+    public final ScriptManager scriptManager;
+
     /**
      * Keeps a record of if the current scene should show the mouse pointer. This is needed so that
-     * the moue can be shown/hidden when one Game ends and the previous one is re-activated.
+     * the mouse can be shown/hidden when one Game ends and the previous one is re-activated.
      */
     private boolean showMousePointer = true;
 
@@ -152,12 +152,12 @@ public class Game implements InputListener, QuitListener, MessageListener
      * 
      * @param gameManager
      */
-    public Game( GameManager gameManager )
+    public Game( Resources resources )
     {
-        this.gameManager = gameManager;
-        this.resources = gameManager.resources;
+        this.resources = resources;
+        this.scriptManager = new ScriptManager( resources );
 
-        this.sceneBehaviour = new PlainSceneBehaviour();
+        this.sceneDirector = new PlainSceneDirector();
         this.pause = new Pause(this);
 
         this.mouseListeners = new LinkedList<MouseListener>();
@@ -165,48 +165,83 @@ public class Game implements InputListener, QuitListener, MessageListener
 
         this.stages = new LinkedList<Stage>();
 
-        this.addMouseListener(this);
-        this.addKeyListener(this);
-
         Rect displayRect = new Rect(0, 0, getWidth(), getHeight());
 
-        this.allViews = new CompoundView<View>(displayRect);
-        
-        //Background
-        this.background = new RGBAView(displayRect, new RGBA(0,0,0));
+        this.allViews = new CompoundView<View>("allViews", displayRect);
+
+        // Background
+        this.background = new RGBAView(displayRect, new RGBA(0, 0, 0));
         this.allViews.add(this.background);
 
         // Covered by game views
-        this.gameViews = new CompoundView<View>(displayRect);
+        this.gameViews = new CompoundView<View>("gameViews", displayRect);
         this.allViews.add(this.gameViews);
 
         // Covered by GUI Windows
-        this.windows = new CompoundView<GuiView>(displayRect);
+        this.windows = new CompoundView<GuiView>("windows", displayRect);
         this.allViews.add(this.windows);
-        
+
         // Covered by the glass view
         this.glassStage = new ZOrderStage("glass");
         this.glassView = new StageView(displayRect, this.glassStage);
         this.allViews.add(this.glassView);
-        
+
         this.addMouseListener(this.allViews);
+
+    }
+
+    protected void setDirector( Director director )
+    {
+        this.director = director;
+        this.director.attach(this);
+
+        this.addMouseListener(this.director);
+        this.addKeyListener(this.director);
+    }
+    
+    void createDirector( ClassName className )
+    {
+        Director director;
+
+        try {
+            if (this.resources.isValidScript(this.resources.gameInfo.directorClassName.name)) {
+                director = this.scriptManager.createDirector(this.resources.gameInfo.directorClassName);
         
-        createStagesAndViews();
+            } else {
+                Class<?> klass = Class.forName(this.resources.gameInfo.directorClassName.name);
+                director = (Director) klass.newInstance();
+            }
+        } catch (Exception e) {
+            System.err.println( "Failed to create director, using a PlainDirector instead");
+            director = new PlainDirector();
+            e.printStackTrace();
+        }
+        this.setDirector(director);
+    }
+    
+    public Director getDirector()
+    {
+        return this.director;
     }
 
     public RGBAView getBackground()
     {
         return this.background;
     }
+
+    public CompoundView<View> getGameViews()
+    {
+        return this.gameViews;
+    }
     
     public List<Stage> getStages()
     {
         return this.stages;
     }
-    
+
     public ScriptManager getScriptManager()
     {
-        return this.gameManager.scriptManager;
+        return this.scriptManager;
     }
 
     /**
@@ -215,7 +250,8 @@ public class Game implements InputListener, QuitListener, MessageListener
      */
     public void onActivate()
     {
-        showMousePointer(this.showMousePointer);
+        this.showMousePointer(this.showMousePointer);
+        this.director.onActivate();
     }
 
     /**
@@ -223,24 +259,9 @@ public class Game implements InputListener, QuitListener, MessageListener
      */
     public void onDeactivate()
     {
+        this.director.onDeactivate();
     }
 
-    /**
-     * Overridden by sub classes of Game, when they want more than one {@link View}. Called from the
-     * end of Game's constructor.
-     */
-    protected void createStagesAndViews()
-    {
-        Rect screenRect = new Rect(0, 0, getWidth(), getHeight());
-
-        this.mainStage = new ZOrderStage("main");
-        this.stages.add(this.mainStage);
-        
-        this.mainView = new StageView(screenRect, this.mainStage);
-        this.gameViews.add(this.mainView);
-
-        this.mainView.enableMouseListener(this);
-    }
 
     /**
      * Kills all Actors and resets the layers to the origin.
@@ -273,6 +294,7 @@ public class Game implements InputListener, QuitListener, MessageListener
     public void start()
     {
         Itchy.startGame(this);
+        this.director.onStarted();
         if (!StringUtils.isBlank(this.resources.gameInfo.initialScene)) {
             startScene(this.resources.gameInfo.initialScene);
         }
@@ -288,12 +310,13 @@ public class Game implements InputListener, QuitListener, MessageListener
     public void start( String sceneName )
     {
         Itchy.startGame(this);
+        this.director.onStarted();
 
         if (!StringUtils.isBlank(sceneName)) {
             clear();
             startScene(sceneName);
         }
-
+        
         Itchy.mainLoop();
     }
 
@@ -348,8 +371,7 @@ public class Game implements InputListener, QuitListener, MessageListener
     }
 
     /**
-     * Gets the root node for this game. The default implementation uses the path based on the
-     * Game's class name, and the game's ID. Note, unlike {@link #getPreferences()}, the return
+     * Gets the root node for this game. Note, unlike {@link #getPreferences()}, the return
      * Preferences are not AutoFlushPreferences, you will need to call 'flush' to commit each of the
      * changes.
      * 
@@ -357,7 +379,7 @@ public class Game implements InputListener, QuitListener, MessageListener
      */
     protected Preferences getPreferenceNode()
     {
-        return Preferences.userNodeForPackage(this.getClass()).node(this.resources.getId());
+        return this.director.getPreferenceNode();
     }
 
     /**
@@ -417,7 +439,7 @@ public class Game implements InputListener, QuitListener, MessageListener
     public void render( Surface display )
     {
         Rect screenRect = new Rect(0, 0, getWidth(), getHeight());
-        this.allViews.render(display, screenRect,0,0);
+        this.allViews.render(display, screenRect, 0, 0);
     }
 
     /**
@@ -446,7 +468,7 @@ public class Game implements InputListener, QuitListener, MessageListener
     void processEvent( Event event )
     {
         if (event instanceof QuitEvent) {
-            if (this.onQuit()) {
+            if (this.director.onQuit()) {
                 return;
             }
             Itchy.terminate();
@@ -506,9 +528,9 @@ public class Game implements InputListener, QuitListener, MessageListener
             if (mbe.isPressed()) {
 
                 if (this.mouseOwner == null) {
-    
+
                     if (this.modalListener == null) {
-    
+
                         for (MouseListener ml : this.mouseListeners) {
                             if (ml.onMouseDown(mbe)) {
                                 return;
@@ -655,72 +677,6 @@ public class Game implements InputListener, QuitListener, MessageListener
         return this.resources.gameInfo.title;
     }
 
-    /**
-     * Called when the application has been asked to quit, such as when Alt-F4 is pressed, or the
-     * window's close button is pressed. The default behaviour is to terminate the application.
-     */
-    @Override
-    public boolean onQuit()
-    {
-        Itchy.terminate();
-        return true;
-    }
-
-    /**
-     * Called when a button is pressed. Most games don't use onKeyDown or onKeyUp during game play,
-     * instead, each Actor uses : Itchy.isKeyDown( ... ). onKeyDown and onKeyUp are useful for
-     * typing, not for game play.
-     */
-    @Override
-    public boolean onKeyDown( KeyboardEvent ke )
-    {
-        return this.getSceneBehaviour().onKeyDown(ke);
-    }
-
-    /**
-     * Called when a button is pressed. Most games don't use onKeyDown or onKeyUp during game play,
-     * instead, each Actor uses : Itchy.isKeyDown( ... ). onKeyDown and onKeyUp are useful for
-     * typing.
-     * 
-     * The default behaviour is to do nothing more than forward the event to the current scene's
-     * {@link SceneBehaviour}.
-     */
-    @Override
-    public boolean onKeyUp( KeyboardEvent ke )
-    {
-        return this.getSceneBehaviour().onKeyUp(ke);
-    }
-
-    /**
-     * The default behaviour is to do nothing more than forward the event to the current scene's
-     * {@link SceneBehaviour}.
-     */
-    @Override
-    public boolean onMouseDown( MouseButtonEvent mbe )
-    {
-        return this.getSceneBehaviour().onMouseDown(mbe);
-    }
-
-    /**
-     * The default behaviour is to do nothing more than forward the event to the current scene's
-     * {@link SceneBehaviour}.
-     */
-    @Override
-    public boolean onMouseUp( MouseButtonEvent mbe )
-    {
-        return this.getSceneBehaviour().onMouseDown(mbe);
-    }
-
-    /**
-     * The default behaviour is to do nothing more than forward the event to the current scene's
-     * {@link SceneBehaviour}.
-     */
-    @Override
-    public boolean onMouseMove( MouseMotionEvent mbe )
-    {
-        return this.getSceneBehaviour().onMouseMove(mbe);
-    }
-
     public List<Actor> getActors()
     {
         return this.actors;
@@ -734,14 +690,13 @@ public class Game implements InputListener, QuitListener, MessageListener
     }
 
     /**
-     * Override this method to run code once per frame. The default behaviour is to call the current
-     * scene's {@link SceneBehaviour}'s tick method and then all of the game's active Actor's tick
-     * methods.
      */
     public void tick()
     {
-        this.getSceneBehaviour().tick();
-        for (Iterator<Actor> i = this.actors.iterator(); i.hasNext();) {
+        this.director.tick();
+        
+        this.getSceneDirector().tick();
+        for (Iterator<Actor> i = this.getActors().iterator(); i.hasNext();) {
             Actor actor = i.next();
             if (actor.isDead()) {
                 i.remove();
@@ -753,40 +708,23 @@ public class Game implements InputListener, QuitListener, MessageListener
         this.newActors.clear();
     }
 
+
+
+    public SceneDirector getSceneDirector()
+    {
+        return this.sceneDirector;
+    }
+    
     /**
-     * The default behaviour is to do nothing more than forward the message to the current scene's
-     * {@link SceneBehaviour}.
-     */
-    @Override
-    public void onMessage( String message )
-    {
-        this.getSceneBehaviour().onMessage(message);
-    }
-
-    public SceneBehaviour getSceneBehaviour()
-    {
-        return this.sceneBehaviour;
-    }
-
-    public void showMousePointer( boolean value )
-    {
-        this.showMousePointer = value;
-        uk.co.nickthecoder.jame.Video.showMousePointer(value);
-    }
-
-    /**
-     * Clears and resets the layers, and then loads the specified scene.
+     * Asks the Director to start the scene. The director will (probably) un-pause the game, clear
+     * the game of all Actors, and then load the scene.
      * 
      * @param sceneName
-     *        The name of the scene to load.
+     *        The name of the scene to start.
      */
     public boolean startScene( String sceneName )
     {
-        if (this.pause.isPaused()) {
-            this.pause.unpause();
-        }
-        clear();
-        return this.loadScene(sceneName);
+        return this.director.startScene(sceneName);
     }
 
     public boolean hasScene( String sceneName )
@@ -819,22 +757,22 @@ public class Game implements InputListener, QuitListener, MessageListener
 
             if (!loadOnly) {
 
-                this.sceneBehaviour.onDeactivate();
-                
-                showMousePointer(scene.showMouse);
+                this.sceneDirector.onDeactivate();
+
                 this.sceneName = sceneName;
                 this.background.color = scene.backgroundColor;
-                this.sceneBehaviour = scene.createSceneBehaviour(this.resources);
-                
-                this.sceneBehaviour.onActivate();
+                this.showMousePointer( scene.showMouse );
+                this.sceneDirector = scene.createSceneDirector(this.resources);
+
+                this.sceneDirector.onActivate();
             }
-            
+
             scene.create(this, false);
-            
-            if (!loadOnly) {                    
+
+            if (!loadOnly) {
                 Itchy.frameRate.reset();
             }
-            
+
         } catch (Exception e) {
             e.printStackTrace();
             return false;
@@ -842,10 +780,16 @@ public class Game implements InputListener, QuitListener, MessageListener
 
         return true;
     }
-    
+
     public String getSceneName()
     {
         return this.sceneName;
+    }
+
+    public void showMousePointer( boolean value )
+    {
+        this.showMousePointer = value;
+        uk.co.nickthecoder.jame.Video.showMousePointer(value);
     }
 
     /**
@@ -874,8 +818,8 @@ public class Game implements InputListener, QuitListener, MessageListener
 
     public GuiView show( RootContainer rootContainer )
     {
-        GuiView view = new GuiView( new Rect(0,0, this.getWidth(), this.getHeight()), rootContainer );
-        
+        GuiView view = new GuiView(new Rect(0, 0, this.getWidth(), this.getHeight()), rootContainer);
+
         this.windows.add(view);
 
         if (rootContainer.getStylesheet() == null) {
@@ -884,7 +828,7 @@ public class Game implements InputListener, QuitListener, MessageListener
         rootContainer.reStyle();
         rootContainer.forceLayout();
         rootContainer.setPosition(0, 0, rootContainer.getRequiredWidth(), rootContainer.getRequiredHeight());
-        
+
         if (rootContainer.modal) {
             this.setModalListener(view);
         }
@@ -896,14 +840,14 @@ public class Game implements InputListener, QuitListener, MessageListener
     public void hide( GuiView view )
     {
         this.removeKeyListener(view);
-        
+
         this.windows.remove(view);
 
         if (view.rootContainer.modal) {
             if (this.windows.getChildren().size() > 0) {
                 GuiView topWindow = this.windows.getChildren().get(this.windows.getChildren().size() - 1);
                 if (topWindow.rootContainer.modal) {
-                    
+
                     this.setModalListener(topWindow);
 
                 } else {

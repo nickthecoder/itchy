@@ -11,7 +11,7 @@ Rock = Class({
     onBirth: function() {
         this.behaviour.addTag("shootable");
         this.behaviour.addTag("deadly");
-        sceneBehaviourScript.addRocks(1);
+        sceneDirectorScript.addRocks(1);
     },
     
     tick: function() {
@@ -36,7 +36,7 @@ Rock = Class({
     		return;
     	}
     	
-    	gameScript.addPoints(this.getCostumeProperties().points);
+    	directorScript.addPoints(this.getCostumeProperties().points);
     	
         new itchy.extras.Explosion(this.actor)
             .spread( bullet.actor.getHeading() - 120, bullet.actor.getHeading() + 120 ).randomSpread()
@@ -56,7 +56,7 @@ Rock = Class({
             actor.setDirection( this.actor.getHeading() + i * 120 );
             actor.moveForwards( 40 );
         }
-        sceneBehaviourScript.addRocks(-1);
+        sceneDirectorScript.addRocks(-1);
         this.actor.deathEvent("explode");
         this.behaviour.removeTag("shootable");
     }

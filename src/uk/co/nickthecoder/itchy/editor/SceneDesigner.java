@@ -26,7 +26,7 @@ import uk.co.nickthecoder.itchy.NullBehaviour;
 import uk.co.nickthecoder.itchy.Pose;
 import uk.co.nickthecoder.itchy.Scene;
 import uk.co.nickthecoder.itchy.SceneActor;
-import uk.co.nickthecoder.itchy.SceneBehaviour;
+import uk.co.nickthecoder.itchy.SceneDirector;
 import uk.co.nickthecoder.itchy.SceneResource;
 import uk.co.nickthecoder.itchy.Stage;
 import uk.co.nickthecoder.itchy.StageView;
@@ -176,7 +176,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         createToolbar();
 
         Rect wholeRect = new Rect(0, 0, this.editor.getWidth(), this.editor.getHeight());
-        this.designViews = new CompoundView<StageView>(wholeRect);
+        this.designViews = new CompoundView<StageView>("designViews", wholeRect);
 
         Rect editRect = new Rect(0, this.toolbar.getHeight(), this.editor.getWidth(), this.editor.getHeight() - this.toolbar.getHeight());
 
@@ -288,7 +288,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.sceneDetailsContainer = new Container();
         this.scenePropertiesContainer = new Container();
         this.createScenePage();
-        this.createSceneBehaviourProperties();
+        this.createSceneDirectorProperties();
         Container sceneDetails1 = new Container();
         sceneDetails1.setLayout(new VerticalLayout());
         sceneDetails1.addChild(this.sceneDetailsContainer);
@@ -519,7 +519,7 @@ public class SceneDesigner implements MouseListener, KeyListener
 
     private PropertiesForm<SceneResource> sceneForm;
 
-    private ClassNameBox sceneBehaviourName;
+    private ClassNameBox sceneDirectorName;
 
     private void createScenePage()
     {
@@ -528,21 +528,21 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.sceneDetailsContainer.clear();
         this.sceneDetailsContainer.addChild(this.sceneForm.createForm());
 
-        this.sceneBehaviourName = (ClassNameBox) this.sceneForm.getComponent("scene.sceneBehaviourName");
-        this.sceneForm.addComponentChangeListener("scene.sceneBehaviourName", new ComponentChangeListener() {
+        this.sceneDirectorName = (ClassNameBox) this.sceneForm.getComponent("scene.sceneDirectorName");
+        this.sceneForm.addComponentChangeListener("scene.sceneDirectorName", new ComponentChangeListener() {
             @Override
             public void changed()
             {
-                ClassNameBox box = SceneDesigner.this.sceneBehaviourName;
+                ClassNameBox box = SceneDesigner.this.sceneDirectorName;
                 String value = box.getClassName().name;
-                boolean ok = SceneDesigner.this.editor.game.resources.registerSceneBehaviourClassName(value);
+                boolean ok = SceneDesigner.this.editor.game.resources.registerSceneDirectorClassName(value);
                 // TODO isn't the error style done by ClassNameBox?
                 box.addStyle("error", !ok);
                 if (ok) {
-                    SceneDesigner.this.scene.sceneBehaviourClassName = box.getClassName();
+                    SceneDesigner.this.scene.sceneDirectorClassName = box.getClassName();
                     try {
-                        SceneDesigner.this.scene.sceneBehaviour =
-                            SceneDesigner.this.scene.createSceneBehaviour(
+                        SceneDesigner.this.scene.sceneDirector =
+                            SceneDesigner.this.scene.createSceneDirector(
                                 SceneDesigner.this.editor.resources
                                 );
 
@@ -550,17 +550,17 @@ public class SceneDesigner implements MouseListener, KeyListener
                         e.printStackTrace();
                         return;
                     }
-                    createSceneBehaviourProperties();
+                    createSceneDirectorProperties();
                 }
             }
         });
 
     }
 
-    private void createSceneBehaviourProperties()
+    private void createSceneDirectorProperties()
     {
-        PropertiesForm<SceneBehaviour> form = new PropertiesForm<SceneBehaviour>(this.scene.sceneBehaviour,
-            this.scene.sceneBehaviour.getProperties());
+        PropertiesForm<SceneDirector> form = new PropertiesForm<SceneDirector>(this.scene.sceneDirector,
+            this.scene.sceneDirector.getProperties());
         form.autoUpdate = true;
         this.sceneForm.grid.ungroup();
         form.grid.groupWith(this.sceneForm.grid);
@@ -1437,8 +1437,8 @@ public class SceneDesigner implements MouseListener, KeyListener
         scene.backgroundColor = this.scene.backgroundColor; 
         scene.showMouse = this.scene.showMouse; 
             
-        scene.sceneBehaviourClassName = this.scene.sceneBehaviourClassName;
-        scene.sceneBehaviour = this.scene.sceneBehaviour;
+        scene.sceneDirectorClassName = this.scene.sceneDirectorClassName;
+        scene.sceneDirector = this.scene.sceneDirector;
 
         for (StageView stageView : this.designViews.getChildren()) {
 

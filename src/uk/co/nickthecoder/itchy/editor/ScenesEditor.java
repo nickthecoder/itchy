@@ -122,7 +122,7 @@ public class ScenesEditor extends SubEditor<SceneResource>
     protected void update() throws MessageException
     {
         TextBox name = (TextBox) this.form.getComponent("name");
-        ClassNameBox sceneBehaviourClassName = (ClassNameBox) this.form.getComponent("sceneBehaviourClassName");
+        ClassNameBox sceneDirectorClassName = (ClassNameBox) this.form.getComponent("sceneDirectorClassName");
 
         if (this.adding || (!name.getText().equals(this.currentResource.getName()))) {
             if (getResources().getSceneResource(name.getText()) != null) {
@@ -131,8 +131,8 @@ public class ScenesEditor extends SubEditor<SceneResource>
         }
         this.currentResource.rename(name.getText());
 
-        ClassName className = sceneBehaviourClassName.getClassName();
-        if (!getResources().registerSceneBehaviourClassName(className.name)) {
+        ClassName className = sceneDirectorClassName.getClassName();
+        if (!getResources().registerSceneDirectorClassName(className.name)) {
             throw new MessageException("Invalid Scene Behaviour");
         }
 

@@ -1,4 +1,4 @@
-<scene showMouse="true" behaviour="uk.co.nickthecoder.itchy.PlainSceneBehaviour">
+<scene showMouse="true" behaviour="uk.co.nickthecoder.itchy.PlainSceneDirector">
   <properties/>
   <layer name="main">
     <text text="Title" font="veraBold" size="46" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="383" y="546" direction="0.0" startEvent="default"/>

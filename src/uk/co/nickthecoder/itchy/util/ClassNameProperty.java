@@ -14,7 +14,7 @@ import uk.co.nickthecoder.itchy.script.ScriptManager;
 public class ClassNameProperty<S> extends AbstractProperty<S, ClassName>
 {
     /**
-     * The required type for the property, either Behaviour, SceneBehaviour, CostumeProperty or
+     * The required type for the property, either Behaviour, SceneDirector, CostumeProperty or
      * Game.
      */
     private Class<?> baseClass;

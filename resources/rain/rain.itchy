@@ -1,5 +1,5 @@
 <resources>
-  <game className="uk.co.nickthecoder.itchy.Game" height="600" initialScene="menu" title="It's Gonna Rain" width="800"/>
+  <game className="uk.co.nickthecoder.itchy.PlainDirector" height="600" initialScene="menu" title="It's Gonna Rain" width="800"/>
   <fonts>
     <font name="BlackCasper" filename="fonts/BlackCasper/BlackCasper.ttf"/>
     <font name="Boycott" filename="fonts/Boycott/Boycott.ttf"/>

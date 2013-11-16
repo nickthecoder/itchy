@@ -23,10 +23,10 @@ import javax.script.ScriptException;
 
 import uk.co.nickthecoder.itchy.Behaviour;
 import uk.co.nickthecoder.itchy.CostumeProperties;
-import uk.co.nickthecoder.itchy.Game;
-import uk.co.nickthecoder.itchy.GameManager;
+import uk.co.nickthecoder.itchy.Director;
 import uk.co.nickthecoder.itchy.Itchy;
-import uk.co.nickthecoder.itchy.SceneBehaviour;
+import uk.co.nickthecoder.itchy.MouseListenerView;
+import uk.co.nickthecoder.itchy.SceneDirector;
 import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.itchy.util.Util;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
@@ -166,45 +166,47 @@ public abstract class ScriptLanguage
     public abstract Object putProperty( Object inst, String name, Object value )
         throws ScriptException;
 
-    // ===== GAME =====
+    // ===== DIRECTOR =====
 
-    public abstract Game createGame( GameManager gameManager, ClassName className );
+    public abstract Director createDirector( ClassName className );
 
-    public abstract void onActivate( ScriptedGame game );
+    public abstract void onStarted( ScriptedDirector director );
+    
+    public abstract void onActivate( ScriptedDirector director );
 
-    public abstract void onDeactivate( ScriptedGame game );
+    public abstract void onDeactivate( ScriptedDirector director );
 
-    public abstract boolean onQuit( ScriptedGame game );
+    public abstract boolean onQuit( ScriptedDirector director );
 
-    public abstract boolean onKeyDown( ScriptedGame game, KeyboardEvent ke );
+    public abstract boolean onKeyDown( ScriptedDirector director, KeyboardEvent ke );
 
-    public abstract boolean onKeyUp( ScriptedGame game, KeyboardEvent ke );
+    public abstract boolean onKeyUp( ScriptedDirector director, KeyboardEvent ke );
 
-    public abstract boolean onMouseDown( ScriptedGame game, MouseButtonEvent mbe );
+    public abstract boolean onMouseDown( ScriptedDirector director, MouseButtonEvent mbe );
 
-    public abstract boolean onMouseUp( ScriptedGame game, MouseButtonEvent mbe );
+    public abstract boolean onMouseUp( ScriptedDirector director, MouseButtonEvent mbe );
 
-    public abstract boolean onMouseMove( ScriptedGame game, MouseMotionEvent mme );
+    public abstract boolean onMouseMove( ScriptedDirector director, MouseMotionEvent mme );
 
-    public abstract void onMessage( ScriptedGame game, String message );
+    public abstract void onMessage( ScriptedDirector director, String message );
 
-    public abstract void tick( ScriptedGame game );
+    public abstract void tick( ScriptedDirector director );
 
-    public abstract boolean startScene( ScriptedGame game, String sceneName );
+    public abstract boolean startScene( ScriptedDirector director, String sceneName );
 
     // ===== BEHAVIOUR =====
 
     public abstract Behaviour createBehaviour( ClassName className );
 
     public abstract void onBirth( ScriptedBehaviour behaviour );
-    
+
     public abstract void onDeath( ScriptedBehaviour behaviour );
 
-    public abstract boolean onMouseDown( ScriptedBehaviour behaviour, MouseButtonEvent mbe );
+    public abstract boolean onMouseDown( ScriptedBehaviour behaviour, MouseListenerView view, MouseButtonEvent mbe );
 
-    public abstract boolean onMouseUp( ScriptedBehaviour behaviour, MouseButtonEvent mbe );
+    public abstract boolean onMouseUp( ScriptedBehaviour behaviour, MouseListenerView view, MouseButtonEvent mbe );
 
-    public abstract boolean onMouseMove( ScriptedBehaviour behaviour, MouseMotionEvent mbe );
+    public abstract boolean onMouseMove( ScriptedBehaviour behaviour, MouseListenerView view, MouseMotionEvent mbe );
 
     public abstract void onMessage( ScriptedBehaviour behaviour, String message );
 
@@ -212,25 +214,25 @@ public abstract class ScriptLanguage
 
     // ===== SCENE BEHAVIOUR =====
 
-    public abstract SceneBehaviour createSceneBehaviour( ClassName className );
+    public abstract SceneDirector createSceneDirector( ClassName className );
 
-    public abstract void onActivate( ScriptedSceneBehaviour behaviour );
+    public abstract void onActivate( ScriptedSceneDirector behaviour );
 
-    public abstract void onDeactivate( ScriptedSceneBehaviour behaviour );
+    public abstract void onDeactivate( ScriptedSceneDirector behaviour );
 
-    public abstract void tick( ScriptedSceneBehaviour behaviour );
+    public abstract void tick( ScriptedSceneDirector behaviour );
 
-    public abstract boolean onMouseDown( ScriptedSceneBehaviour behaviour, MouseButtonEvent mbe );
+    public abstract boolean onMouseDown( ScriptedSceneDirector behaviour, MouseButtonEvent mbe );
 
-    public abstract boolean onMouseUp( ScriptedSceneBehaviour behaviour, MouseButtonEvent mbe );
+    public abstract boolean onMouseUp( ScriptedSceneDirector behaviour, MouseButtonEvent mbe );
 
-    public abstract boolean onMouseMove( ScriptedSceneBehaviour behaviour, MouseMotionEvent mme );
+    public abstract boolean onMouseMove( ScriptedSceneDirector behaviour, MouseMotionEvent mme );
 
-    public abstract boolean onKeyDown( ScriptedSceneBehaviour behaviour, KeyboardEvent ke );
+    public abstract boolean onKeyDown( ScriptedSceneDirector behaviour, KeyboardEvent ke );
 
-    public abstract boolean onKeyUp( ScriptedSceneBehaviour behaviour, KeyboardEvent ke );
+    public abstract boolean onKeyUp( ScriptedSceneDirector behaviour, KeyboardEvent ke );
 
-    public abstract void onMessage( ScriptedSceneBehaviour behaviour, String message );
+    public abstract void onMessage( ScriptedSceneDirector behaviour, String message );
 
     // ====== COSTUME PROPERTIES =====
 

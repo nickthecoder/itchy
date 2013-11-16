@@ -179,6 +179,7 @@ public class StageView extends AbstractScrollableView implements StageListener, 
         }
     }
 
+    // TODO SHould this take a Game?
     @Override
     public void enableMouseListener( Game game )
     {
@@ -325,7 +326,7 @@ public class StageView extends AbstractScrollableView implements StageListener, 
     @Override
     public String toString()
     {
-        return "StageView of " + this.stage.getName() + " Scroll :" + this.worldRect.x + "," + this.worldRect.y + " @ " + this.position;
+        return "StageView " + this.stage.getName();
     }
 
 }

@@ -1,5 +1,5 @@
 ${NAME} = Class({
-    Extends: SceneBehaviourScript,
+    Extends: SceneDirectorScript,
     
     init: function() {
         // TODO Perform simple initialisation here.
@@ -20,10 +20,10 @@ ${NAME} = Class({
     // onMouseDown, onMouseUp, onMouseMove, onKeyDown, onKeyUp, onMessage
 });
 // TODO Define each editable property like so :
-// SceneBehaviourScript.addProperty("${NAME}", "exampleInteger", Integer, "Example Integer");
-// SceneBehaviourScript.addProperty("${NAME}", "exampleDouble", Double, "Example Double");
-// SceneBehaviourScript.addProperty("${NAME}", "exampleString", String, "Example String");
-// SceneBehaviourScript.addProperty("${NAME}", "exampleColour", RGBA, "Example Colour");
+// SceneDirectorScript.addProperty("${NAME}", "exampleInteger", Integer, "Example Integer");
+// SceneDirectorScript.addProperty("${NAME}", "exampleDouble", Double, "Example Double");
+// SceneDirectorScript.addProperty("${NAME}", "exampleString", String, "Example String");
+// SceneDirectorScript.addProperty("${NAME}", "exampleColour", RGBA, "Example Colour");
 // NOTE : You must initialise each property to a default value in the 'init' method.
 
-// NOTE. You can access this object from your other scripts using the global variable : 'sceneBehaviourScript'.
+// NOTE. You can access this object from your other scripts using the global variable : 'sceneDirectorScript'.

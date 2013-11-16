@@ -19,9 +19,12 @@ public class CompoundView<V extends View> extends AbstractView implements Parent
 {
     private final LinkedList<V> children;
 
-    public CompoundView( Rect position )
+    public String name;
+
+    public CompoundView( String name, Rect position )
     {
         super(position);
+        this.name = name;
         this.children = new LinkedList<V>();
     }
 
@@ -128,5 +131,18 @@ public class CompoundView<V extends View> extends AbstractView implements Parent
         }
 
         return false;
+    }
+
+    @Override
+    public String toString()
+    {
+        StringBuffer result = new StringBuffer();
+        result.append("CompoundView ").append(this.name).append(" ( ");
+        for (V view : this.children) {
+            result.append(view).append(", ");
+        }
+        result.append(" )");
+
+        return result.toString();
     }
 }

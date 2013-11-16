@@ -21,7 +21,7 @@ public class Shield extends AbstractBehaviour implements Shootable
     {
         super.onAttach();
 
-        getActor().setCollisionStrategy(DrunkInvaders.game.createCollisionStrategy(getActor()));
+        getActor().setCollisionStrategy(DrunkInvaders.director.createCollisionStrategy(getActor()));
     }
 
     @Override

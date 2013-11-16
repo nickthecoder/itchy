@@ -12,12 +12,14 @@ import javax.script.ScriptException;
 
 import uk.co.nickthecoder.itchy.Behaviour;
 import uk.co.nickthecoder.itchy.CostumeProperties;
+import uk.co.nickthecoder.itchy.Director;
 import uk.co.nickthecoder.itchy.Game;
-import uk.co.nickthecoder.itchy.GameManager;
 import uk.co.nickthecoder.itchy.Itchy;
+import uk.co.nickthecoder.itchy.MouseListenerView;
 import uk.co.nickthecoder.itchy.NullBehaviour;
-import uk.co.nickthecoder.itchy.PlainSceneBehaviour;
-import uk.co.nickthecoder.itchy.SceneBehaviour;
+import uk.co.nickthecoder.itchy.PlainDirector;
+import uk.co.nickthecoder.itchy.PlainSceneDirector;
+import uk.co.nickthecoder.itchy.SceneDirector;
 import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
@@ -82,7 +84,8 @@ public class JavascriptLanguage extends ScriptLanguage
         Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
         Game game = Itchy.getGame();
         bindings.put("game", game);
-        bindings.put("sceneBehaviour", game.getSceneBehaviour());
+        bindings.put("director", game.getDirector());
+        bindings.put("sceneDirector", game.getSceneDirector());
     }
 
     public void handleException( Exception e )
@@ -109,178 +112,190 @@ public class JavascriptLanguage extends ScriptLanguage
         }
     }
 
-    // ===== GAME ======
+    // ===== DIRECTOR ======
 
     @Override
-    public Game createGame( GameManager gameManager, ClassName className )
+    public Director createDirector( ClassName className )
     {
+        ensureGlobals();
+
         String name = ScriptManager.getName(className);
-        ScriptedGame game = null;
+        ScriptedDirector director = null;
 
         try {
-            Object gameScript = this.engine.eval("new " + name + "();");
+            Object directorScript = this.engine.eval("new " + name + "();");
 
-            game = new ScriptedGame(gameManager, this, gameScript);
+            director = new ScriptedDirector(this, directorScript);
 
             Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
-            bindings.put("gameScript", gameScript);
-            bindings.put("game", game);
-            this.engine.eval("gameScript.game = game;");
+            bindings.put("directorScript", directorScript);
+            bindings.put("director", director);
+            this.engine.eval("directorScript.director = director;");
 
         } catch (ScriptException e) {
-            handleException("Creating Game", e);
+            handleException("Creating Director", e);
         }
 
-        if (game == null) {
-            log("Game not created. Using a default Game instead.");
-            return new Game(gameManager);
+        if (director == null) {
+            log("Game not created. Using a PlainDirector instead.");
+            return new PlainDirector();
         }
-        return game;
+        return director;
     }
 
     @Override
-    public void onActivate( ScriptedGame game )
+    public void onStarted( ScriptedDirector director )
     {
         try {
-            this.engine.eval("gameScript.onActivate();");
+            this.engine.eval("directorScript.onStarted();");
         } catch (ScriptException e) {
-            handleException("Game.onActivate", e);
+            handleException("Director.onStarted", e);
+        }
+    }
+    
+    @Override
+    public void onActivate( ScriptedDirector director )
+    {
+        try {
+            this.engine.eval("directorScript.onActivate();");
+        } catch (ScriptException e) {
+            handleException("Director.onActivate", e);
         }
     }
 
     @Override
-    public void onDeactivate( ScriptedGame game )
+    public void onDeactivate( ScriptedDirector director )
     {
         try {
-            this.engine.eval("gameScript.onDeactivate();");
+            this.engine.eval("directorScript.onDeactivate();");
         } catch (ScriptException e) {
-            handleException("Game.onDeactivate", e);
+            handleException("Director.onDeactivate", e);
         }
     }
 
     @Override
-    public boolean onQuit( ScriptedGame game )
+    public boolean onQuit( ScriptedDirector director )
     {
         try {
-            return eventResult(this.engine.eval("gameScript.onQuit();"));
+            return eventResult(this.engine.eval("directorScript.onQuit();"));
 
         } catch (ScriptException e) {
-            handleException("Game.onQuit", e);
+            handleException("Director.onQuit", e);
             Itchy.terminate();
             return true;
         }
     }
 
     @Override
-    public boolean onKeyDown( ScriptedGame game, KeyboardEvent ke )
+    public boolean onKeyDown( ScriptedDirector director, KeyboardEvent event )
     {
         try {
             Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
-            bindings.put("arg", ke);
+            bindings.put("arg", event);
 
-            return eventResult(this.engine.eval("gameScript.onKeyDown( arg );"));
+            return eventResult(this.engine.eval("directorScript.onKeyDown( arg );"));
 
         } catch (ScriptException e) {
-            handleException("Game.onKeyDown", e);
+            handleException("Director.onKeyDown", e);
             return false;
         }
     }
 
     @Override
-    public boolean onKeyUp( ScriptedGame game, KeyboardEvent ke )
+    public boolean onKeyUp( ScriptedDirector director, KeyboardEvent event )
     {
         try {
             Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
-            bindings.put("arg", ke);
+            bindings.put("arg", event);
 
-            return eventResult(this.engine.eval("gameScript.onKeyUp( arg );"));
+            return eventResult(this.engine.eval("directorScript.onKeyUp( arg );"));
 
         } catch (ScriptException e) {
-            handleException("Game.onKeyUp", e);
+            handleException("Director.onKeyUp", e);
             return false;
         }
     }
 
     @Override
-    public boolean onMouseDown( ScriptedGame game, MouseButtonEvent mbe )
+    public boolean onMouseDown( ScriptedDirector director, MouseButtonEvent event )
     {
         try {
             Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
-            bindings.put("arg", mbe);
+            bindings.put("arg", event);
 
-            return eventResult(this.engine.eval("gameScript.onMouseDown( arg );"));
+            return eventResult(this.engine.eval("directorScript.onMouseDown( arg );"));
 
         } catch (ScriptException e) {
-            handleException("Game.onMouseDown", e);
+            handleException("Director.onMouseDown", e);
             return false;
         }
     }
 
     @Override
-    public boolean onMouseUp( ScriptedGame game, MouseButtonEvent mbe )
+    public boolean onMouseUp( ScriptedDirector director, MouseButtonEvent event )
     {
         try {
             Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
-            bindings.put("arg", mbe);
+            bindings.put("arg", event);
 
-            return eventResult(this.engine.eval("gameScript.onMouseUp( arg );"));
+            return eventResult(this.engine.eval("directorScript.onMouseUp( arg );"));
 
         } catch (ScriptException e) {
-            handleException("Game.onMouseUp", e);
+            handleException("Director.onMouseUp", e);
             return false;
         }
     }
 
     @Override
-    public boolean onMouseMove( ScriptedGame game, MouseMotionEvent mme )
+    public boolean onMouseMove( ScriptedDirector director, MouseMotionEvent event )
     {
         try {
             Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
-            bindings.put("arg", mme);
+            bindings.put("arg", event);
 
-            return eventResult(this.engine.eval("gameScript.onMouseMove( arg );"));
+            return eventResult(this.engine.eval("directorScript.onMouseMove( arg );"));
 
         } catch (ScriptException e) {
-            handleException("Game.onMouseUp", e);
+            handleException("Director.onMouseUp", e);
             return false;
         }
     }
 
     @Override
-    public void onMessage( ScriptedGame game, String message )
+    public void onMessage( ScriptedDirector director, String message )
     {
         try {
             Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
             bindings.put("arg", message);
 
-            this.engine.eval("gameScript.onMessage( arg );");
+            this.engine.eval("directorScript.onMessage( arg );");
 
         } catch (ScriptException e) {
-            handleException("Game.onMessage", e);
+            handleException("Director.onMessage", e);
         }
     }
 
     @Override
-    public void tick( ScriptedGame game )
+    public void tick( ScriptedDirector director )
     {
         try {
-            this.engine.eval("gameScript.tick();");
-                
+            this.engine.eval("directorScript.tick();");
+
         } catch (ScriptException e) {
-            handleException("Game.tick", e);
+            handleException("Director.tick", e);
         }
     }
 
     @Override
-    public boolean startScene( ScriptedGame game, String sceneName )
+    public boolean startScene( ScriptedDirector director, String sceneName )
     {
         try {
             Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
             bindings.put("arg", sceneName);
-            return (boolean) this.engine.eval("gameScript.startScene(arg);");
+            return (boolean) this.engine.eval("directorScript.startScene(arg);");
 
         } catch (Exception e) {
-            handleException("Game.startScene", e);
+            handleException("Director.startScene", e);
             return false;
         }
     }
@@ -345,6 +360,7 @@ public class JavascriptLanguage extends ScriptLanguage
             handleException("Behaviour.onDeath", e);
         }
     }
+
     @Override
     public void tick( ScriptedBehaviour behaviour )
     {
@@ -359,13 +375,14 @@ public class JavascriptLanguage extends ScriptLanguage
     }
 
     @Override
-    public boolean onMouseDown( ScriptedBehaviour behaviour, MouseButtonEvent mbe )
+    public boolean onMouseDown( ScriptedBehaviour behaviour, MouseListenerView view, MouseButtonEvent event )
     {
         try {
             Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
             bindings.put("behaviourScript", behaviour.behaviourScript);
-            bindings.put("arg", mbe);
-            return this.eventResult(this.engine.eval("behaviourScript.onMouseDown(arg);"));
+            bindings.put("arg1", event);
+            bindings.put("arg2", event);
+            return this.eventResult(this.engine.eval("behaviourScript.onMouseDown(arg1,arg2);"));
 
         } catch (ScriptException e) {
             handleException("Behaviour.onMessage", e);
@@ -374,13 +391,14 @@ public class JavascriptLanguage extends ScriptLanguage
     }
 
     @Override
-    public boolean onMouseUp( ScriptedBehaviour behaviour, MouseButtonEvent mbe )
+    public boolean onMouseUp( ScriptedBehaviour behaviour,  MouseListenerView view, MouseButtonEvent event )
     {
         try {
             Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
             bindings.put("behaviourScript", behaviour.behaviourScript);
-            bindings.put("arg", mbe);
-            return this.eventResult(this.engine.eval("behaviourScript.onMouseUp(arg);"));
+            bindings.put("arg1", view);
+            bindings.put("arg2", event);
+            return this.eventResult(this.engine.eval("behaviourScript.onMouseUp(arg1,arg2);"));
 
         } catch (ScriptException e) {
             handleException("Behaviour.onMessage", e);
@@ -389,20 +407,21 @@ public class JavascriptLanguage extends ScriptLanguage
     }
 
     @Override
-    public boolean onMouseMove( ScriptedBehaviour behaviour, MouseMotionEvent mme )
+    public boolean onMouseMove( ScriptedBehaviour behaviour,  MouseListenerView view, MouseMotionEvent event )
     {
         try {
             Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
             bindings.put("behaviourScript", behaviour.behaviourScript);
-            bindings.put("arg", mme);
-            return this.eventResult(this.engine.eval("behaviourScript.onMouseMove(arg);"));
+            bindings.put("arg1", view);
+            bindings.put("arg2", event);
+            return this.eventResult(this.engine.eval("behaviourScript.onMouseMove(arg1,arg2);"));
 
         } catch (ScriptException e) {
             handleException("Behaviour.onMessage", e);
             return false;
         }
     }
-    
+
     @Override
     public void onMessage( ScriptedBehaviour behaviour, String message )
     {
@@ -417,150 +436,149 @@ public class JavascriptLanguage extends ScriptLanguage
         }
     }
 
-
-    // ===== SceneBehaviour ======
+    // ===== SceneDirector ======
 
     @Override
-    public SceneBehaviour createSceneBehaviour( ClassName className )
+    public SceneDirector createSceneDirector( ClassName className )
     {
-        ScriptedSceneBehaviour sceneBehaviour = null;
+        ScriptedSceneDirector sceneDirector = null;
 
         try {
             ensureGlobals();
 
             String name = ScriptManager.getName(className);
-            Object sceneBehaviourScript = this.engine.eval("new " + name + "();");
-            sceneBehaviour = new ScriptedSceneBehaviour(className, this, sceneBehaviourScript);
+            Object sceneDirectorScript = this.engine.eval("new " + name + "();");
+            sceneDirector = new ScriptedSceneDirector(className, this, sceneDirectorScript);
 
         } catch (ScriptException e) {
-            handleException("creating SceneBehaviour " + className.name, e);
+            handleException("creating SceneDirector " + className.name, e);
         }
 
-        if (sceneBehaviour == null) {
-            log("Using PlainSceneBehaviour instead.");
-            return new PlainSceneBehaviour();
+        if (sceneDirector == null) {
+            log("Using PlainSceneDirector instead.");
+            return new PlainSceneDirector();
         }
-        return sceneBehaviour;
+        return sceneDirector;
     }
 
     @Override
-    public void onActivate( ScriptedSceneBehaviour sceneBehaviour )
+    public void onActivate( ScriptedSceneDirector sceneDirector )
     {
         try {
             Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
-            bindings.put("sceneBehaviourScript", sceneBehaviour.sceneBehaviourScript);
-            bindings.put("sceneBehaviour", sceneBehaviour);
-            this.engine.eval("sceneBehaviourScript.sceneBehaviour = sceneBehaviour;");
+            bindings.put("sceneDirectorScript", sceneDirector.sceneDirectorScript);
+            bindings.put("sceneDirector", sceneDirector);
+            this.engine.eval("sceneDirectorScript.sceneDirector = sceneDirector;");
 
-            this.engine.eval("sceneBehaviourScript.onActivate();");
+            this.engine.eval("sceneDirectorScript.onActivate();");
 
         } catch (ScriptException e) {
-            handleException("SceneBehaviour.onActivate", e);
+            handleException("SceneDirector.onActivate", e);
         }
     }
 
     @Override
-    public void onDeactivate( ScriptedSceneBehaviour behaviour )
+    public void onDeactivate( ScriptedSceneDirector behaviour )
     {
         try {
-            this.engine.eval("sceneBehaviourScript.onDeactivate();");
+            this.engine.eval("sceneDirectorScript.onDeactivate();");
 
         } catch (ScriptException e) {
-            handleException("SceneBehaviour.onDeactivate", e);
+            handleException("SceneDirector.onDeactivate", e);
         }
     }
 
     @Override
-    public void tick( ScriptedSceneBehaviour behaviour )
+    public void tick( ScriptedSceneDirector behaviour )
     {
         try {
-            this.engine.eval("sceneBehaviourScript.tick();");
+            this.engine.eval("sceneDirectorScript.tick();");
 
         } catch (ScriptException e) {
-            handleException("SceneBehaviour.tick", e);
+            handleException("SceneDirector.tick", e);
         }
     }
 
     @Override
-    public boolean onMouseDown( ScriptedSceneBehaviour behaviour, MouseButtonEvent mbe )
+    public boolean onMouseDown( ScriptedSceneDirector behaviour, MouseButtonEvent mbe )
     {
         try {
             Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
             bindings.put("arg", mbe);
-            return eventResult(this.engine.eval("sceneBehaviourScript.onMouseDown(arg);"));
+            return eventResult(this.engine.eval("sceneDirectorScript.onMouseDown(arg);"));
 
         } catch (ScriptException e) {
-            handleException("SceneBehaviour.onMouseDown", e);
+            handleException("SceneDirector.onMouseDown", e);
             return false;
         }
     }
 
     @Override
-    public boolean onMouseUp( ScriptedSceneBehaviour behaviour, MouseButtonEvent mbe )
+    public boolean onMouseUp( ScriptedSceneDirector behaviour, MouseButtonEvent mbe )
     {
         try {
             Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
             bindings.put("arg", mbe);
-            return eventResult(this.engine.eval("sceneBehaviourScript.onMouseUp(arg);"));
+            return eventResult(this.engine.eval("sceneDirectorScript.onMouseUp(arg);"));
 
         } catch (ScriptException e) {
-            handleException("SceneBehaviour.onMouseUp", e);
+            handleException("SceneDirector.onMouseUp", e);
             return false;
         }
     }
 
     @Override
-    public boolean onMouseMove( ScriptedSceneBehaviour behaviour, MouseMotionEvent mme )
+    public boolean onMouseMove( ScriptedSceneDirector behaviour, MouseMotionEvent mme )
     {
         try {
             Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
             bindings.put("arg", mme);
-            return eventResult(this.engine.eval("sceneBehaviourScript.onMouseMove(arg);"));
+            return eventResult(this.engine.eval("sceneDirectorScript.onMouseMove(arg);"));
 
         } catch (ScriptException e) {
-            handleException("SceneBehaviour.onMouseMove", e);
+            handleException("SceneDirector.onMouseMove", e);
             return false;
         }
     }
 
     @Override
-    public boolean onKeyDown( ScriptedSceneBehaviour behaviour, KeyboardEvent ke )
+    public boolean onKeyDown( ScriptedSceneDirector behaviour, KeyboardEvent ke )
     {
         try {
             Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
             bindings.put("arg", ke);
-            return eventResult(this.engine.eval("sceneBehaviourScript.onKeyDown(arg);"));
+            return eventResult(this.engine.eval("sceneDirectorScript.onKeyDown(arg);"));
 
         } catch (ScriptException e) {
-            handleException("SceneBehaviour.onKeyDown", e);
+            handleException("SceneDirector.onKeyDown", e);
             return false;
         }
     }
 
     @Override
-    public boolean onKeyUp( ScriptedSceneBehaviour behaviour, KeyboardEvent ke )
+    public boolean onKeyUp( ScriptedSceneDirector behaviour, KeyboardEvent ke )
     {
         try {
             Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
             bindings.put("arg", ke);
-            return eventResult(this.engine.eval("sceneBehaviourScript.onKeyUp(arg);"));
+            return eventResult(this.engine.eval("sceneDirectorScript.onKeyUp(arg);"));
 
         } catch (ScriptException e) {
-            handleException("SceneBehaviour.onKeyUp", e);
+            handleException("SceneDirector.onKeyUp", e);
             return false;
         }
     }
 
     @Override
-    public void onMessage( ScriptedSceneBehaviour behaviour, String message )
+    public void onMessage( ScriptedSceneDirector behaviour, String message )
     {
         try {
             Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
             bindings.put("arg", message);
-            this.engine.eval("sceneBehaviourScript.onMessage(arg);");
+            this.engine.eval("sceneDirectorScript.onMessage(arg);");
 
         } catch (ScriptException e) {
-            handleException("SceneBehaviour.onMessage", e);
+            handleException("SceneDirector.onMessage", e);
         }
     }
 
@@ -591,6 +609,5 @@ public class JavascriptLanguage extends ScriptLanguage
         }
         return costumeProperties;
     }
-
 
 }

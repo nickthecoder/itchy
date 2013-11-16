@@ -1,63 +1,35 @@
-New Server
-==========
-Install debian onto the SSD.
-Create a single partition 90% of the disk.
-
-Get a spare drive, and format it with one large partition and three small ones.
-The small ones will be for swap and /var/log and /tmp
-The large one will be for /gidea (a subset)
-
-Get the nvidia driver working
-    https://wiki.debian.org/NvidiaGraphicsDrivers
-
-Install all of the software onto root partition, except Myth
-
-Make a backup of
-    /gidea/projects
-    /home/nick
-    /home/nalin
-    /gidea/music/ a small subset of default to test only
-    /gidea/images
-
-Set the computer name to be giddydom.healthy
-And have /etc/hosts resolve giddyserv to localhost and old-giddyserv to 192.168.1.2
-
-tar /etc /boot from real giddyserv and copy it over.
-
-Get tomcat and apache working
-
-Backup and copy over the mythdatabase and familyalbum database (others?)
-
-Remove the old / partition from real giddyserv and replace it with SSD
-This also contains /mythdata and /backup
-Mount /giddyserv (raid array).
-
-Install the double DVB card
-Set up Myth - maybe moving the box down stairs for access to the aerial.
-
-Backup the SSD, so that if it fails, I can get back to a good system quickly.
-
-
-Firewall
-Backup scripts
-Website indexer (butchers)
-
-
-
-Bed covers
-Glasses
-Vacuum bathroom
-
+    
 TODO
 ====
 
-Asteroids
-    Test strength - create a hard rock, which can't be destroyed by the puny bullets.
-    Multiple guns
+Rename Behaviour to Role
+
+Rename SceneBehaviour to SceneDirector / AssistantDirector / Plot?
+
+Follow up on the TODOs
 
 Test on windows.
 
 PACKAGE !!!
+
+
+
+
+
+Asteroids
+    Test strength - create a hard rock, which can't be destroyed by the puny bullets.
+    Multiple guns
+    Create "pickups" including a better gun.
+        Ship will have a "bulletName", if set, then it uses it directly to get the bullet costume, otherwise it uses the
+            existing "companion" feature.
+
+I've exposed a generic Game.getGameViews (returns CompoundView<View>).
+Should Game have addStage, rather than letting the list be added to directly?
+
+Which scripted methods should call Super, which calls a defaultOnXXX, instead of super always being called from the ScriptedXXX methods.
+    This would let the game writer take full control if they want.
+    
+
 
 Create some tests for Views in the tests game.
     Create a Stage and view in the middle of the screen
@@ -66,47 +38,20 @@ Create some tests for Views in the tests game.
     Create a compound view in the middle with other views inside it.
         Use the same Stage for each of the mini views to test the 1:many Stage->View with mouse listeners and capture mouse.
 
-Follow up on the TODOs
-
 Create an isometric stage
 
 Create a wrapped StageView (where the x and/or y wrap around)
 
 Create a ScaledStageView.
     Place the StageView's eventual blit into a protected method? wont work as its also scaling the clip area.
-    
-Can I split Game into two parts, one which is fixed (like Actor), and another which is an interface (like Behaviour)?
-    Lets call them Game and Director (for the interface).
-    Director has :
-        attach(Game), createStageAndView?, onActivate, onDeactivate, startScene, onMouseXXX, onKeyXXX
-
-    Game has the rest, and calls the director's methods.
-
-    What about scene transition?
-        Currently I override startScene, and mess around
-        Put startScene,testScene into Director and a sub class will deal with SceneTransition?
-
-    Pause?
-        SceneTransition uses it, as well as Game.gameTimeMillis, and therefore many extras.
-        So it stays on Game.
-    
-    Tricky for Editor?
-    
-Rename Behaviour to Role
-
-Rename SceneBehaviour to SceneDirector / Director / AssistantDirector?
 
 Duplicate Animation
-
-How about one that rotates too?
 
 Explanatory games
     e.g. Showing the different between heading and direction.
     
 
-Comment View, Stage heirarchies and Component and Container.
-
-Actor,startEvent isn't elegant - its only used by the editor, so should be on design actor and designactorbehaviour?
+Actor.startEvent isn't elegant - its only used by the editor, so should be on design actor and designactorbehaviour?
 
 
 BUG: Rename a scene from scene designer does not rename
@@ -116,14 +61,7 @@ BUG: Reloading a SceneBehaviour script causes the properties to double.
 
 BUG: Changing SceneBehaviour doesn't update the SceneBehaviourProperty components
 
-Create an actor from a costume easily.
-    Could be on Costume taking no arguments
-    Could be on Game or Resources taking the costume name.
-
 check all code for this.[a-z 0-9]*\(, and remove the "this".
-
-BUG SceneDesigner - character animate e.g. Rain Easy screen.
-    Could make DesignActorBehaviour implement Behaviour, and don't do anything with animation???
 
 Create a Compound Behaviour, which has a ClassName array of other Behaviours, or maybe a Map of
     name->ClassName.
@@ -155,12 +93,6 @@ Create a Compound Behaviour, which has a ClassName array of other Behaviours, or
             delay, but that's implemented by being active all the time!!!
         Not so fast, how about tags such as "deadly" - yeah that's still ok, one of the Beahviours will
         be deadly, and the rest wont.
-
-Appearance can chop off part of the Pose, useful for the Rod in Thrust - instead of scaling it.
-    Can also use it for a speed guage on Rain
-        Create a general purpose ProgressBar behaviour.
-        Could I use it for the shield indicator in DrunkInvaders instead of the multiple images?
-    Or could create a speed dial, as that just needs the hand to be rotated!
 
 What's Next
 ===========
@@ -273,3 +205,78 @@ Appearance optimised so that it doesn't need to re-render the appearance to get 
     When asked for its worldRect, if cached, returned that, other wise if direction == 0, return pose.rectangle * scale, otherwise return maximum rect * scale   
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+New Server
+==========
+Install debian onto the SSD.
+Create a single partition 90% of the disk.
+
+Get a spare drive, and format it with one large partition and three small ones.
+The small ones will be for swap and /var/log and /tmp
+The large one will be for /gidea (a subset)
+
+Get the nvidia driver working
+    https://wiki.debian.org/NvidiaGraphicsDrivers
+
+Install all of the software onto root partition, except Myth
+
+Make a backup of
+    /gidea/projects
+    /home/nick
+    /home/nalin
+    /gidea/music/ a small subset of default to test only
+    /gidea/images
+
+Set the computer name to be giddydom.healthy
+And have /etc/hosts resolve giddyserv to localhost and old-giddyserv to 192.168.1.2
+
+tar /etc /boot from real giddyserv and copy it over.
+
+Get tomcat and apache working
+
+Backup and copy over the mythdatabase and familyalbum database (others?)
+
+Remove the old / partition from real giddyserv and replace it with SSD
+This also contains /mythdata and /backup
+Mount /giddyserv (raid array).
+
+Install the double DVB card
+Set up Myth - maybe moving the box down stairs for access to the aerial.
+
+Backup the SSD, so that if it fails, I can get back to a good system quickly.
+
+
+Firewall
+Backup scripts
+Website indexer (butchers)
+
+
+
+Bed covers
+Glasses
+Vacuum bathroom

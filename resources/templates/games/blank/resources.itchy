@@ -1,5 +1,5 @@
 <resources>
-  <game title="${TITLE}" width="${WIDTH}" height="${HEIGHT}" iconFilename="icon.bmp" className="uk.co.nickthecoder.itchy.Game"/>
+  <game title="${TITLE}" width="${WIDTH}" height="${HEIGHT}" iconFilename="icon.bmp" className="uk.co.nickthecoder.itchy.PlainDirector"/>
   <fonts>
   </fonts>
   <ninePatches/>

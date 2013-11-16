@@ -42,8 +42,6 @@ public class Resources extends Loadable
 
     public final GameInfo gameInfo;
 
-    public ScriptManager scriptManagerX;
-
     private final HashMap<String, SoundResource> sounds;
 
     private final HashMap<String, FontResource> fonts;
@@ -62,7 +60,7 @@ public class Resources extends Loadable
 
     private TreeSet<String> costumePropertiesClassNames;
 
-    private TreeSet<String> sceneBehaviourClassNames;
+    private TreeSet<String> sceneDirectorClassNames;
 
     private TreeSet<String> gameClassNames;
 
@@ -86,7 +84,7 @@ public class Resources extends Loadable
 
         this.behaviourClassNames = new TreeSet<String>();
         this.costumePropertiesClassNames = new TreeSet<String>();
-        this.sceneBehaviourClassNames = new TreeSet<String>();
+        this.sceneDirectorClassNames = new TreeSet<String>();
         this.gameClassNames = new TreeSet<String>();
 
         registerBehaviourClassName(uk.co.nickthecoder.itchy.NullBehaviour.class.getName());
@@ -100,9 +98,9 @@ public class Resources extends Loadable
 
         registerCostumePropertiesClassName(CostumeProperties.class.getName());
 
-        registerSceneBehaviourClassName(PlainSceneBehaviour.class.getName());
+        registerSceneDirectorClassName(PlainSceneDirector.class.getName());
 
-        registerGameClassName(Game.class.getName());
+        registerDirectorClassName(PlainDirector.class.getName());
     }
 
     public String getId()
@@ -699,19 +697,19 @@ public class Resources extends Loadable
         return true;
     }
 
-    public boolean registerSceneBehaviourClassName( String className )
+    public boolean registerSceneDirectorClassName( String className )
     {
         try {
-            if (this.sceneBehaviourClassNames.contains(className)) {
+            if (this.sceneDirectorClassNames.contains(className)) {
                 return true;
             }
             if (isValidScript(className)) {
                 // Do nothing
             } else {
                 Class<?> klass = Class.forName(className);
-                klass.asSubclass(SceneBehaviour.class);
+                klass.asSubclass(SceneDirector.class);
             }
-            this.sceneBehaviourClassNames.add(className);
+            this.sceneDirectorClassNames.add(className);
             return true;
 
         } catch (Exception e) {
@@ -720,7 +718,7 @@ public class Resources extends Loadable
         return false;
     }
 
-    public boolean registerGameClassName( String className )
+    public boolean registerDirectorClassName( String className )
     {
         try {
             if (this.gameClassNames.contains(className)) {
@@ -730,7 +728,7 @@ public class Resources extends Loadable
                 // Do nothing
             } else {
                 Class<?> klass = Class.forName(className);
-                klass.asSubclass(Game.class);
+                klass.asSubclass(Director.class);
             }
             this.gameClassNames.add(className);
             return true;
@@ -751,12 +749,12 @@ public class Resources extends Loadable
         return this.costumePropertiesClassNames;
     }
 
-    public Set<String> getSceneBehaviourClassNames()
+    public Set<String> getSceneDirectorClassNames()
     {
-        return this.sceneBehaviourClassNames;
+        return this.sceneDirectorClassNames;
     }
 
-    public Set<String> getGameClassNames()
+    public Set<String> getDirectorClassNames()
     {
         return this.gameClassNames;
     }
@@ -785,7 +783,9 @@ public class Resources extends Loadable
     public Game createGame()
         throws Exception
     {
-        return new GameManager(this).createGame();
+        Game result = new Game(this);
+        result.createDirector(this.gameInfo.directorClassName);
+        return result;
     }
 
 }

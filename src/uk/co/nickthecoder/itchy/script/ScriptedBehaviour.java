@@ -12,13 +12,14 @@ import java.util.List;
 
 import uk.co.nickthecoder.itchy.AbstractBehaviour;
 import uk.co.nickthecoder.itchy.Behaviour;
-import uk.co.nickthecoder.itchy.MouseListener;
+import uk.co.nickthecoder.itchy.MouseListenerView;
+import uk.co.nickthecoder.itchy.ViewMouseListener;
 import uk.co.nickthecoder.itchy.util.AbstractProperty;
 import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 
-public class ScriptedBehaviour extends AbstractBehaviour implements MouseListener
+public class ScriptedBehaviour extends AbstractBehaviour implements ViewMouseListener
 {
     private final static HashMap<String, List<AbstractProperty<Behaviour, ?>>> allProperties = new HashMap<String, List<AbstractProperty<Behaviour, ?>>>();
 
@@ -82,7 +83,7 @@ public class ScriptedBehaviour extends AbstractBehaviour implements MouseListene
     {
         return this.className;
     }
-    
+
     @Override
     public void onMessage( String message )
     {
@@ -94,6 +95,7 @@ public class ScriptedBehaviour extends AbstractBehaviour implements MouseListene
     {
         this.language.onBirth(this);
     }
+
     @Override
     public void onDeath()
     {
@@ -107,21 +109,21 @@ public class ScriptedBehaviour extends AbstractBehaviour implements MouseListene
     }
 
     @Override
-    public boolean onMouseDown( MouseButtonEvent mbe )
+    public boolean onMouseDown( MouseListenerView view, MouseButtonEvent event )
     {
-        return this.language.onMouseDown(this, mbe);
+        return this.language.onMouseDown(this, view, event);
     }
 
     @Override
-    public boolean onMouseUp( MouseButtonEvent mbe )
+    public boolean onMouseUp( MouseListenerView view, MouseButtonEvent event )
     {
-        return this.language.onMouseUp(this, mbe);
+        return this.language.onMouseUp(this, view, event);
     }
 
     @Override
-    public boolean onMouseMove( MouseMotionEvent mbe )
+    public boolean onMouseMove( MouseListenerView view, MouseMotionEvent event )
     {
-        return this.language.onMouseMove(this, mbe);
+        return this.language.onMouseMove(this, view, event);
     }
 
 }

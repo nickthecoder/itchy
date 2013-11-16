@@ -21,8 +21,8 @@ public class Scene
     @Property(label = "Show Mouse")
     public boolean showMouse = true;
 
-    @Property(label = "Scene Behaviour", baseClass = SceneBehaviour.class, sortOrder = 90)
-    public ClassName sceneBehaviourClassName;
+    @Property(label = "Scene Behaviour", baseClass = SceneDirector.class, sortOrder = 90)
+    public ClassName sceneDirectorClassName;
 
     @Property(label="Background Colour")
     public RGBA backgroundColor = RGBA.BLACK;
@@ -31,13 +31,13 @@ public class Scene
 
     private HashMap<String, SceneLayer> layersMap;
 
-    public SceneBehaviour sceneBehaviour;
+    public SceneDirector sceneDirector;
 
     public Scene()
     {
         this.sceneLayers = new ArrayList<SceneLayer>();
         this.layersMap = new HashMap<String, SceneLayer>();
-        this.sceneBehaviourClassName = new ClassName(PlainSceneBehaviour.class.getName());
+        this.sceneDirectorClassName = new ClassName(PlainSceneDirector.class.getName());
 
         this.createSceneLayer("default");
     }
@@ -113,8 +113,8 @@ public class Scene
         Scene result = new Scene();
         result.showMouse = this.showMouse;
         result.backgroundColor = this.backgroundColor;
-        result.sceneBehaviourClassName = this.sceneBehaviourClassName;
-        result.sceneBehaviour = this.sceneBehaviour;
+        result.sceneDirectorClassName = this.sceneDirectorClassName;
+        result.sceneDirector = this.sceneDirector;
 
         for (SceneLayer sceneLayer : this.sceneLayers) {
             SceneLayer newSceneLayer = sceneLayer.copy();
@@ -124,25 +124,25 @@ public class Scene
         return result;
     }
 
-    public SceneBehaviour createSceneBehaviour( Resources resources )
+    public SceneDirector createSceneDirector( Resources resources )
         throws Exception
     {
-        SceneBehaviour result;
+        SceneDirector result;
 
-        if (StringUtils.isBlank(this.sceneBehaviourClassName.name)) {
-            result = new PlainSceneBehaviour();
+        if (StringUtils.isBlank(this.sceneDirectorClassName.name)) {
+            result = new PlainSceneDirector();
         } else {
-            if (resources.isValidScript(this.sceneBehaviourClassName)) {
-                result = Resources.getScriptManager().createSceneBehaviour(this.sceneBehaviourClassName);
+            if (resources.isValidScript(this.sceneDirectorClassName)) {
+                result = Resources.getScriptManager().createSceneDirector(this.sceneDirectorClassName);
             } else {
-                Class<?> klass = Class.forName(this.sceneBehaviourClassName.name);
-                result = (SceneBehaviour) klass.newInstance();
+                Class<?> klass = Class.forName(this.sceneDirectorClassName.name);
+                result = (SceneDirector) klass.newInstance();
             }
         }
-        // Copy the sceneBehaviour properties
-        if (this.sceneBehaviour != null) {
-            for (AbstractProperty<SceneBehaviour, ?> property : result.getProperties()) {
-                property.setValue(result, property.getValue(this.sceneBehaviour));
+        // Copy the sceneDirector properties
+        if (this.sceneDirector != null) {
+            for (AbstractProperty<SceneDirector, ?> property : result.getProperties()) {
+                property.setValue(result, property.getValue(this.sceneDirector));
             }
         }
         return result;

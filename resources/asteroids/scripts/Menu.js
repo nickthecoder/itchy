@@ -1,11 +1,11 @@
-// The SceneBehaviourScript for the main "menu" scene, and the "about" scene.
+// The SceneDirectorScript for the main "menu" scene, and the "about" scene.
 Menu = new Class({
 
-    Extends: SceneBehaviourScript,
+    Extends: SceneDirectorScript,
     
     onKeyDown: function( event ) {
         if (event.symbol == Keys.RETURN) {
-            gameScript.startGame();
+            directorScript.startGame();
         } else if (event.symbol == Keys.ESCAPE) {
             game.startScene("menu");
         }

@@ -18,7 +18,7 @@
       <property name="nullValue" value=""/>
       <property name="errorValue" value=""/>
       <property name="updateInterval" value="0"/>
-      <property name="access" value="level"/>
+      <property name="access" value="director.level"/>
     </text>
     <text text=">" font="Boycott" size="40" color="#ffffff" behaviour="uk.co.nickthecoder.itchy.extras.MessageButton" x="442" y="218" direction="90.0" startEvent="default">
       <property name="message" value="levelUp"/>

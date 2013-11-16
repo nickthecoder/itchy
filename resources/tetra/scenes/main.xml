@@ -1,4 +1,4 @@
-<scene showMouse="true" behaviour="uk.co.nickthecoder.itchy.PlainSceneBehaviour">
+<scene showMouse="true" behaviour="uk.co.nickthecoder.itchy.PlainSceneDirector">
   <properties/>
   <layer name="main">
     <actor costume="background" x="320" y="240" direction="0.0" startEvent="default"/>
@@ -14,14 +14,14 @@
       <property name="errorValue" value="?"/>
       <property name="quiet" value="true"/>
       <property name="updateInterval" value="0"/>
-      <property name="access" value="score"/>
+      <property name="access" value="director.score"/>
     </text>
     <text text="01" font="Boycott" size="40" color="#ffffff" xAlignment="0.5" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.TextValue" x="511" y="209" direction="0.0" startEvent="default">
       <property name="nullValue" value="null"/>
       <property name="errorValue" value="?"/>
       <property name="quiet" value="true"/>
       <property name="updateInterval" value="0"/>
-      <property name="access" value="level"/>
+      <property name="access" value="director.level"/>
     </text>
     <text text="Level" font="Boycott" size="40" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="511" y="254" direction="0.0" startEvent="default"/>
     <actor costume="board" x="164" y="228" direction="0.0" startEvent="default"/>
@@ -31,7 +31,7 @@
       <property name="errorValue" value=""/>
       <property name="quiet" value="false"/>
       <property name="updateInterval" value="0"/>
-      <property name="access" value="completedLines"/>
+      <property name="access" value="director.completedLines"/>
     </text>
     <text text="High Score" font="Boycott" size="30" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="509" y="94" direction="0.0" startEvent="default"/>
     <text text="0000000" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" behaviour="uk.co.nickthecoder.itchy.extras.NumberValue" x="511" y="64" direction="0.0" startEvent="default">
@@ -40,7 +40,7 @@
       <property name="errorValue" value="???"/>
       <property name="quiet" value="true"/>
       <property name="updateInterval" value="-1"/>
-      <property name="access" value="highScore"/>
+      <property name="access" value="director.highScore"/>
     </text>
   </layer>
 </scene>

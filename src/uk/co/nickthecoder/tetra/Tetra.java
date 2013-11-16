@@ -13,9 +13,8 @@ package uk.co.nickthecoder.tetra;
 import java.awt.Point;
 import java.util.Random;
 
+import uk.co.nickthecoder.itchy.AbstractDirector;
 import uk.co.nickthecoder.itchy.Actor;
-import uk.co.nickthecoder.itchy.Game;
-import uk.co.nickthecoder.itchy.GameManager;
 import uk.co.nickthecoder.itchy.Launcher;
 import uk.co.nickthecoder.itchy.PlainBehaviour;
 import uk.co.nickthecoder.itchy.animation.Animation;
@@ -26,13 +25,13 @@ import uk.co.nickthecoder.jame.Sound;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.Keys;
 
-public class Tetra extends Game
+public class Tetra extends AbstractDirector
 {
     /**
      * A static reference to the Tetris object, which makes it easy for external classes to interact
      * with the game.
      */
-    public static Tetra game;
+    public static Tetra director;
 
     /**
      * The size of a tetris square
@@ -129,11 +128,6 @@ public class Tetra extends Game
      */
     public int completedLines;
 
-    public Tetra( GameManager gameManager ) throws Exception
-    {
-        super(gameManager);
-    }
-
     @Override
     public void onActivate()
     {
@@ -145,7 +139,7 @@ public class Tetra extends Game
     public void onMessage( String message )
     {
         if (message.equals("quit")) {
-            this.end();
+            this.game.end();
         }
         if (message.equals("play")) {
             this.play();
@@ -165,7 +159,7 @@ public class Tetra extends Game
 
         if (this.escapeTimer != null) {
             if (this.escapeTimer.isFinished()) {
-                this.addKeyListener(this); // See removeKeyListener in onKeyDown
+                this.game.addKeyListener(this); // See removeKeyListener in onKeyDown
                 this.level = getStartingLevel();
                 startScene("menu");
                 this.escapeTimer = null;
@@ -206,7 +200,7 @@ public class Tetra extends Game
         }
 
         if (ke.symbol == Keys.F12) {
-            startEditor();
+            this.game.startEditor();
         }
 
         if (ke.symbol == Keys.F1) {
@@ -217,9 +211,9 @@ public class Tetra extends Game
             chooseLevel(ke.symbol - Keys.KEY_0);
         }
 
-        if ((ke.symbol == Keys.ESCAPE) && (this.getSceneName().equals("main"))) {
+        if ((ke.symbol == Keys.ESCAPE) && (this.game.getSceneName().equals("main"))) {
             gameOver();
-            this.resources.getSound("shatter").play();
+            this.game.resources.getSound("shatter").play();
             for (int x = 1; x <= WIDTH; x++) {
                 for (int y = 1; y <= HEIGHT; y++) {
                     Actor actor = this.grid[x][y];
@@ -230,7 +224,7 @@ public class Tetra extends Game
                 }
             }
             // Ignore all key presses will the escape time has elapsed.
-            this.removeKeyListener(this);
+            this.game.removeKeyListener(this);
             this.escapeTimer = Timer.createTimerSeconds(2);
         }
 
@@ -266,7 +260,7 @@ public class Tetra extends Game
             return;
         }
 
-        getPreferences().putInt("startingLevel", level);
+        this.game.getPreferences().putInt("startingLevel", level);
         if (!this.playing || this.level < level) {
             setLevel(level);
         }
@@ -274,7 +268,7 @@ public class Tetra extends Game
 
     public int getStartingLevel()
     {
-        return getPreferences().getInt("startingLevel", 1);
+        return this.game.getPreferences().getInt("startingLevel", 1);
     }
 
     public void clearLines()
@@ -304,11 +298,11 @@ public class Tetra extends Game
 
         Sound sound = null;
         if (destroyed == 4) {
-            sound = this.resources.getSound("explode");
+            sound = this.game.resources.getSound("explode");
         } else if (destroyed == 0) {
-            sound = this.resources.getSound("pop");
+            sound = this.game.resources.getSound("pop");
         } else {
-            sound = this.resources.getSound("shatter");
+            sound = this.game.resources.getSound("shatter");
         }
         if (sound != null) {
             sound.play();
@@ -389,7 +383,7 @@ public class Tetra extends Game
                 kill(actor);
             }
 
-            this.resources.getSound("shatter").play();
+            this.game.resources.getSound("shatter").play();
         }
         this.playing = false;
         this.piece = null;
@@ -401,7 +395,7 @@ public class Tetra extends Game
         this.score = 0;
         this.completedLines = 0;
         setLevel(getStartingLevel());
-        Actor dummy = new Actor(this.resources.getCostume(names[0]));
+        Actor dummy = new Actor(this.game.resources.getCostume(names[0]));
         dummy.setBehaviour(new PlainBehaviour());
 
         this.grid = new Actor[WIDTH + 2][HEIGHT + 2];
@@ -425,13 +419,13 @@ public class Tetra extends Game
 
     public int getHighScore()
     {
-        return getPreferences().getInt("highScore", 0);
+        return this.game.getPreferences().getInt("highScore", 0);
     }
 
     public void setHighScore( int value )
     {
         if (value > getHighScore()) {
-            getPreferences().putInt("highScore", value);
+            this.game.getPreferences().putInt("highScore", value);
         }
     }
 
@@ -476,7 +470,7 @@ public class Tetra extends Game
             }
             this.actors = new Actor[PIECES];
             for (int i = 0; i < PIECES; i++) {
-                this.actors[i] = new Actor(Tetra.this.resources.getCostume(names[n]));
+                this.actors[i] = new Actor(Tetra.this.game.resources.getCostume(names[n]));
                 this.actors[i].setBehaviour(new PlainBehaviour());
                 Tetra.this.mainStage.addTop(this.actors[i]);
             }

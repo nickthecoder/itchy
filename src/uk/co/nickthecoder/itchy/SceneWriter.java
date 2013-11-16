@@ -46,12 +46,12 @@ public class SceneWriter extends XMLWriter
 
         this.beginTag("scene");
         this.attribute("showMouse", this.scene.showMouse);
-        if ( ! PlainSceneBehaviour.class.getName().equals(this.scene.sceneBehaviourClassName)) {
-            this.attribute("behaviour", this.scene.sceneBehaviourClassName.name);
+        if ( ! PlainSceneDirector.class.getName().equals(this.scene.sceneDirectorClassName)) {
+            this.attribute("behaviour", this.scene.sceneDirectorClassName.name);
         }
         this.attribute("background", this.scene.backgroundColor.toString());
         
-        writeSceneBehaviourProperties();
+        writeSceneDirectorProperties();
 
         for ( Scene.SceneLayer sceneLayer : this.scene.getSceneLayers() ) {
             
@@ -69,19 +69,19 @@ public class SceneWriter extends XMLWriter
         this.endTag("scene");
     }
 
-    private void writeSceneBehaviourProperties()
+    private void writeSceneDirectorProperties()
         throws XMLException
     {
             
         this.beginTag("properties");
-        for ( AbstractProperty<SceneBehaviour,?> property : this.scene.sceneBehaviour.getProperties()) {
+        for ( AbstractProperty<SceneDirector,?> property : this.scene.sceneDirector.getProperties()) {
             try {
                 this.beginTag("property");
                 this.attribute("name", property.key);
-                this.attribute("value", property.getStringValue(this.scene.sceneBehaviour));
+                this.attribute("value", property.getStringValue(this.scene.sceneDirector));
                 this.endTag("property");
             } catch (Exception e) {
-                throw new XMLException("Failed to write sceneBehaviour property : " + property.key);
+                throw new XMLException("Failed to write sceneDirector property : " + property.key);
             }
         }
          

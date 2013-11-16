@@ -79,7 +79,7 @@ public class Mothership extends Alien
     {
         this.event("giveBirth");
 
-        Costume costume = DrunkInvaders.game.resources.getCostume(this.costumeName);
+        Costume costume = DrunkInvaders.director.getGame().resources.getCostume(this.costumeName);
         Actor alienActor = new Actor(costume);
         alienActor.setDirection(getActor().getAppearance().getDirection());
         Alien alien = new Alien();

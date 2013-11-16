@@ -54,14 +54,14 @@ public class SceneReader
             throw new XMLException("Illegal colour : " + background);
         }
         
-        this.scene.sceneBehaviourClassName = new ClassName(sceneTag.getOptionalAttribute("behaviour",
-            PlainSceneBehaviour.class.getName()));
+        this.scene.sceneDirectorClassName = new ClassName(sceneTag.getOptionalAttribute("behaviour",
+            PlainSceneDirector.class.getName()));
 
         // For old versions without multiple layers, the actor tags are directly within the scene
         // tag.
         readLayer(sceneTag, this.scene.getDefaultSceneLayer());
 
-        this.scene.sceneBehaviour = this.scene.createSceneBehaviour(this.resources);
+        this.scene.sceneDirector = this.scene.createSceneDirector(this.resources);
         
         for (Iterator<XMLTag> i = sceneTag.getTags("properties"); i.hasNext();) {
             XMLTag propertiesTag = i.next();
@@ -83,25 +83,25 @@ public class SceneReader
     private void readProperties( XMLTag propertiesTag )
         throws Exception
     {
-        List<AbstractProperty<SceneBehaviour,?>> properties = this.scene.sceneBehaviour.getProperties();
+        List<AbstractProperty<SceneDirector,?>> properties = this.scene.sceneDirector.getProperties();
         
         for (Iterator<XMLTag> i = propertiesTag.getTags("property"); i.hasNext();) {
             XMLTag propertyTag = i.next();
             String name = propertyTag.getAttribute("name");
             String value = propertyTag.getAttribute("value");
             
-            AbstractProperty<SceneBehaviour,?> property = findProperty( properties, name );
+            AbstractProperty<SceneDirector,?> property = findProperty( properties, name );
             if ( property == null) {
-                throw new Exception( "Didn't find SceneBehaviour property : " + name );
+                throw new Exception( "Didn't find SceneDirector property : " + name );
             }
-            property.setValueByString(this.scene.sceneBehaviour, value);
+            property.setValueByString(this.scene.sceneDirector, value);
         }
         
     }
     
-    private AbstractProperty<SceneBehaviour,?> findProperty(List<AbstractProperty<SceneBehaviour,?>> properties, String name )
+    private AbstractProperty<SceneDirector,?> findProperty(List<AbstractProperty<SceneDirector,?>> properties, String name )
     {
-        for (AbstractProperty<SceneBehaviour,?> property : properties) {
+        for (AbstractProperty<SceneDirector,?> property : properties) {
             if ( property.key.equals( name ) ) {
                 return property;
             }

@@ -1,7 +1,7 @@
-// The SceneBehaviourScript while playing the game - there is a different SceneBehaviourScript for the menus (Menu.js)
+// The SceneDirectorScript while playing the game - there is a different SceneDirectorScript for the menus (Menu.js)
 Play = new Class({
 
-    Extends: SceneBehaviourScript,
+    Extends: SceneDirectorScript,
     
     init: function()
     {
@@ -85,7 +85,7 @@ Play = new Class({
 // Define the scene's properties. These properties can then be editted within the Scene Designer,
 // within the "Scene" section. Each scene has its own values,
 // i.e. scene "easy" will have a different "speed" to scene "hard".
-SceneBehaviourScript.addProperty("Play", "speed", Integer, "Speed"); // The initial speed
-SceneBehaviourScript.addProperty("Play", "maxSpeed", Integer, "Maximum Speed"); // The maximum speed
-SceneBehaviourScript.addProperty("Play", "speedUpAfter", Integer, "Speed Up After"); // The time in seconds till we increase the speed.
+SceneDirectorScript.addProperty("Play", "speed", Integer, "Speed"); // The initial speed
+SceneDirectorScript.addProperty("Play", "maxSpeed", Integer, "Maximum Speed"); // The maximum speed
+SceneDirectorScript.addProperty("Play", "speedUpAfter", Integer, "Speed Up After"); // The time in seconds till we increase the speed.
 

@@ -1,4 +1,4 @@
-<scene showMouse="true" behaviour="uk.co.nickthecoder.itchy.PlainSceneBehaviour">
+<scene showMouse="true" behaviour="uk.co.nickthecoder.itchy.PlainSceneDirector">
   <properties/>
   <layer name="main">
     <actor costume="alien" behaviour="uk.co.nickthecoder.itchy.test.TestExplosion" x="74" y="510" direction="-90.0" heading="-90.0" startEvent="default" zOrder="0">

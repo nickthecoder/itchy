@@ -11,7 +11,7 @@ import uk.co.nickthecoder.itchy.script.ScriptedBehaviour;
 
 /**
  * Holds the name of a class, which the user can set within the editor, used fro Behaviour,
- * SceneBehaviour and Game.
+ * SceneDirector and Game.
  * 
  * The class name can either be a regular Java class (in which case the name will be a fully
  * qualified java class name), or a scripted class (in which case the name will be the filename of

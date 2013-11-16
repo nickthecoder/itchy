@@ -5,32 +5,32 @@
  ******************************************************************************/
 package uk.co.nickthecoder.drunkinvaders;
 
-import uk.co.nickthecoder.itchy.PlainSceneBehaviour;
+import uk.co.nickthecoder.itchy.PlainSceneDirector;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.Keys;
 
-public class Menu extends PlainSceneBehaviour
+public class Menu extends PlainSceneDirector
 {
 
     @Override
     public boolean onKeyDown( KeyboardEvent ke )
     {
         if (ke.symbol == Keys.ESCAPE) {
-            DrunkInvaders.game.end();
+            DrunkInvaders.director.getGame().end();
             return true;
         }
 
         if ((ke.symbol == Keys.p) || (ke.symbol == Keys.RETURN)) {
-            DrunkInvaders.game.startScene("levels");
+            DrunkInvaders.director.startScene("levels");
             return true;
         }
 
         if ((ke.symbol == Keys.a) || (ke.symbol == Keys.c)) {
-            DrunkInvaders.game.startScene("about");
+            DrunkInvaders.director.startScene("about");
         }
 
         if ((ke.symbol == Keys.F12) || (ke.symbol == Keys.e)) {
-            DrunkInvaders.game.startEditor();
+            DrunkInvaders.director.getGame().startEditor();
         }
 
         return false;

@@ -167,7 +167,7 @@ public class Ship extends Bouncy implements Shootable
         getActor().setX(this.radius * Math.cos(this.angle) + this.ox);
         getActor().setY(this.radius * Math.sin(this.angle) + this.oy);
 
-        if (! getActor().getAppearance().getWorldRectangle().within(DrunkInvaders.game.worldBounds)) {
+        if (! getActor().getAppearance().getWorldRectangle().within(DrunkInvaders.director.worldBounds)) {
             this.angle -= speed;
             getActor().moveTo(oldX, oldY);
             getActor().setDirection(oldDirection);

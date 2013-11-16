@@ -7,13 +7,27 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
-import uk.co.nickthecoder.itchy.util.PropertySubject;
+import java.util.prefs.Preferences;
 
-public interface SceneBehaviour extends MouseListener, KeyListener, MessageListener, PropertySubject<SceneBehaviour>
+public interface Director extends InputListener, QuitListener, MessageListener
 {
-    public void onActivate();
+    public void attach( Game game );
+    
+    public void onStarted();
 
+    public void onActivate();
+    
     public void onDeactivate();
+
+    public boolean startScene( String sceneName );
     
     public void tick();
+    
+    /**
+     * Gets the root node for this game.
+     * 
+     * @return The top level preferences node for this game.
+     */
+    public Preferences getPreferenceNode();
+
 }

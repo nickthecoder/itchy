@@ -23,7 +23,7 @@ public class MessageButton extends Button
     @Override
     protected void onClick()
     {
-        Itchy.getGame().onMessage(this.message);
+        Itchy.getGame().getDirector().onMessage(this.message);
     }
 
 }

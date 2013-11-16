@@ -26,15 +26,15 @@ public class GameInfo implements PropertySubject<GameInfo>
     @Property(label = "Initial Scene")
     public String initialScene;
     
-    @Property(label = "Class Name", baseClass = Game.class)
-    public ClassName className;
+    @Property(label = "Class Name", baseClass = Director.class, aliases={"className"})
+    public ClassName directorClassName;
 
     public GameInfo()
     {
         this.title = "Itchy Game";
         this.width = 800;
         this.height = 600;
-        this.className = new ClassName(Game.class.getName());
+        this.directorClassName = new ClassName(PlainDirector.class.getName());
         this.initialScene = "";
     }
 
