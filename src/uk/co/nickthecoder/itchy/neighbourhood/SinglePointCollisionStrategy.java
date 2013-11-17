@@ -84,7 +84,6 @@ public class SinglePointCollisionStrategy extends ActorCollisionStrategy
                             if (role.hasTag(includeTag)) {
     
                                 if (source.overlapping(actor)) {
-                                    // TODO - Won't work if it is a compound role
                                     results.add(role);
                                     break;
                                 }
@@ -114,7 +113,6 @@ public class SinglePointCollisionStrategy extends ActorCollisionStrategy
                             if (role.hasTag(includeTag)) {
     
                                 if (source.pixelOverlap(actor)) {
-                                    // TODO - Won't work if it is a compound role
                                     results.add(role);
                                     break;
                                 }

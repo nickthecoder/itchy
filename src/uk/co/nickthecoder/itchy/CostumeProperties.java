@@ -18,7 +18,6 @@ public class CostumeProperties implements PropertySubject<CostumeProperties>
     {
         try {
             if (ScriptManager.isScript(className)) {
-                //TODO Wrong game!
                 return scriptManager.createCostumeProperties(className);
             } else {
                 @SuppressWarnings("unchecked")

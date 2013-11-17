@@ -61,7 +61,6 @@ function Class( attributes )
     return result;
 }
 
-// A global used by Class.creatOverride, and any methods which want to call their parent class's implementation.
 var Super = undefined;
 
 // Wraps an instance method in a closure, so that it can call "Super", which will be the parent class's
@@ -73,11 +72,12 @@ Class.createOverride = function( klass, name )
     
     var func = function() {
         var me = this;
+        var oldSuper = Super;
         try {
             Super = function() { superMethod.apply( me, arguments ); };
             return thisMethod.apply( this, arguments );
         } finally {
-            Super = undefined;
+            Super = oldSuper;
         }
     }
     // Makes dumping objects more readable, by hiding this wrapper.

@@ -87,16 +87,6 @@ public class Ship extends Bouncy implements Shootable
         super.onDetach();
     }
 
-    // TODO Needed?
-    @Override
-    public void onDeath()
-    {
-        if (getActor().getCollisionStrategy() != null) {
-            getActor().getCollisionStrategy().remove();
-            getActor().setCollisionStrategy(null);
-        }
-    }
-
     @Override
     public void tick()
     {
@@ -249,7 +239,8 @@ public class Ship extends Bouncy implements Shootable
             .message("death").font("vera", 18).color(SPEECH_COLOR).bubble("speechBubble2")
             .offset(0, 40).margin(10, 10, 20, 10).direction(0)
             .createActor();
-        yell.deathEvent(getActor().getCostume(), "yell");
+        yell.setCostume(getActor().getCostume());
+        yell.deathEvent("yell");
 
         new Explosion(getActor())
             .projectiles(20)

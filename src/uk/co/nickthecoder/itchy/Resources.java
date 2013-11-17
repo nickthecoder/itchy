@@ -40,6 +40,8 @@ public class Resources extends Loadable
         return new File(directory, directory.getName() + ".itchy");
     }
 
+    private Game game;
+    
     public final GameInfo gameInfo;
 
     private final HashMap<String, SoundResource> sounds;
@@ -101,6 +103,8 @@ public class Resources extends Loadable
         registerSceneDirectorClassName(PlainSceneDirector.class.getName());
 
         registerDirectorClassName(PlainDirector.class.getName());
+
+        this.game = new Game(this);
     }
 
     public String getId()
@@ -119,6 +123,8 @@ public class Resources extends Loadable
     {
         ResourcesReader loader = new ResourcesReader(this);
         loader.load(getFilename());
+
+        this.game.createDirector(this.gameInfo.directorClassName);
     }
 
     @Override
@@ -774,18 +780,10 @@ public class Resources extends Loadable
         return (file.exists());
     }
 
-    // TODO Replace this with a good solution
-    public static ScriptManager getScriptManager()
-    {
-        return Itchy.getGame().getScriptManager();
-    }
 
-    public Game createGame()
-        throws Exception
+    public Game getGame()
     {
-        Game result = new Game(this);
-        result.createDirector(this.gameInfo.directorClassName);
-        return result;
+        return this.game;
     }
 
 }

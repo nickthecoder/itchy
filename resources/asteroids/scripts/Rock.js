@@ -1,10 +1,11 @@
+import("Moving.js")
+
 Rock = Class({
-    Extends: RoleScript,
+    Extends: Moving,
     
     init: function() {
+    	Super();
         this.rotationSpeed = 0;
-        this.vx = 0;
-        this.vy = 0;
         this.hits = 0;
     },
     
@@ -15,13 +16,9 @@ Rock = Class({
     },
     
     tick: function() {
-        this.actor.moveBy(this.vx, this.vy);
+    	Super();
+    	
         this.actor.getAppearance().adjustDirection(this.rotationSpeed);
-        
-        if (this.actor.getX() < -10) this.actor.moveBy(820,0);
-        if (this.actor.getX() > 810) this.actor.moveBy(-820,0);
-        if (this.actor.getY() < -10) this.actor.moveBy(0,620);
-        if (this.actor.getY() > 610) this.actor.moveBy(0,-620);
     },
     
     shot: function(bullet) {

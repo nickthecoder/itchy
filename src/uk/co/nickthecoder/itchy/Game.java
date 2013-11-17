@@ -155,7 +155,7 @@ public class Game
     public Game( Resources resources )
     {
         this.resources = resources;
-        this.scriptManager = new ScriptManager( resources );
+        this.scriptManager = new ScriptManager(resources);
 
         this.sceneDirector = new PlainSceneDirector();
         this.pause = new Pause(this);
@@ -198,7 +198,7 @@ public class Game
         this.addMouseListener(this.director);
         this.addKeyListener(this.director);
     }
-    
+
     void createDirector( ClassName className )
     {
         Director director;
@@ -206,19 +206,19 @@ public class Game
         try {
             if (this.resources.isValidScript(this.resources.gameInfo.directorClassName.name)) {
                 director = this.scriptManager.createDirector(this.resources.gameInfo.directorClassName);
-        
+
             } else {
                 Class<?> klass = Class.forName(this.resources.gameInfo.directorClassName.name);
                 director = (Director) klass.newInstance();
             }
         } catch (Exception e) {
-            System.err.println( "Failed to create director, using a PlainDirector instead");
+            System.err.println("Failed to create director, using a PlainDirector instead");
             director = new PlainDirector();
             e.printStackTrace();
         }
         this.setDirector(director);
     }
-    
+
     public Director getDirector()
     {
         return this.director;
@@ -233,7 +233,7 @@ public class Game
     {
         return this.gameViews;
     }
-    
+
     public List<Stage> getStages()
     {
         return this.stages;
@@ -262,19 +262,17 @@ public class Game
         this.director.onDeactivate();
     }
 
-
     /**
      * Kills all Actors and resets the layers to the origin.
      * 
      */
     public void clear()
     {
-        this.gameViews.reset();
+        this.allViews.reset();
         for (Stage stage : this.stages) {
             stage.clear();
         }
         this.glassStage.clear();
-        this.glassView.reset();
 
         for (Actor actor : this.actors) {
             actor.kill();
@@ -316,8 +314,42 @@ public class Game
             clear();
             startScene(sceneName);
         }
-        
+
         Itchy.mainLoop();
+    }
+
+    public void startEditor()
+    {
+        // If the editor has been started without the game being started (i.e. directly from the
+        // launcher) then we need to start the game, so that it creates its layers and views.
+        // For the scene designer to copy.
+        if (this.stages.size() == 0) {
+            this.director.onStarted();
+        }
+        
+        try {
+            Editor editor = new Editor(this);
+            editor.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void startEditor( String designSceneName )
+    {
+        // If the editor has been started without the game being started (i.e. directly from the
+        // launcher) then we need to start the game, so that it creates its layers and views.
+        // For the scene designer to copy.
+        if (this.stages.size() == 0) {
+            this.director.onStarted();
+        }
+
+        try {
+            Editor editor = new Editor(this);
+            editor.start(designSceneName);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -387,8 +419,7 @@ public class Game
      * 
      * @param tag
      *        The tag to search for.
-     * @return A set of Roles meeting the criteria. An empty set if no roles meet the
-     *         criteria.
+     * @return A set of Roles meeting the criteria. An empty set if no roles meet the criteria.
      * @See {@link Role#addTag(String)}
      */
     public Set<Role> findRoleByTag( String tag )
@@ -694,7 +725,7 @@ public class Game
     public void tick()
     {
         this.director.tick();
-        
+
         this.getSceneDirector().tick();
         for (Iterator<Actor> i = this.getActors().iterator(); i.hasNext();) {
             Actor actor = i.next();
@@ -708,13 +739,11 @@ public class Game
         this.newActors.clear();
     }
 
-
-
     public SceneDirector getSceneDirector()
     {
         return this.sceneDirector;
     }
-    
+
     /**
      * Asks the Director to start the scene. The director will (probably) un-pause the game, clear
      * the game of all Actors, and then load the scene.
@@ -761,7 +790,7 @@ public class Game
 
                 this.sceneName = sceneName;
                 this.background.color = scene.backgroundColor;
-                this.showMousePointer( scene.showMouse );
+                this.showMousePointer(scene.showMouse);
                 this.sceneDirector = scene.createSceneDirector(this.resources);
 
                 this.sceneDirector.onActivate();
@@ -858,26 +887,6 @@ public class Game
             }
         }
 
-    }
-
-    public void startEditor()
-    {
-        try {
-            Editor editor = new Editor(this);
-            editor.start();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void startEditor( String designSceneName )
-    {
-        try {
-            Editor editor = new Editor(this);
-            editor.start(designSceneName);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     @Override

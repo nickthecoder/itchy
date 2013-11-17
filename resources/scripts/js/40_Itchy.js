@@ -16,6 +16,11 @@ directorScript = null;
 sceneDirector = null;
 sceneDirectorScript = null;
 
+// Import a new script.
+function import( filename )
+{
+    javascriptLanguage.manager.loadScript( filename );
+}
 
 DirectorScript = Class({
 

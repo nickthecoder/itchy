@@ -1,11 +1,11 @@
+import("Moving.js")
+
 Ship = Class({
-    Extends: RoleScript,
+    Extends: Moving,
     
     init: function() {
-        this.vx=0;
-        this.vy=0;
+    	Super();
         this.lifeIcon = new Array();
-        this.killed = false;
     },
 
     onBirth: function() {
@@ -68,13 +68,8 @@ Ship = Class({
                 this.fireTimer.reset();
             }
         }
-        this.actor.moveBy(this.vx, this.vy);
-
-        if (this.actor.getX() < -10) this.actor.moveBy(820,0);
-        if (this.actor.getX() > 810) this.actor.moveBy(-820,0);
-        if (this.actor.getY() < -10) this.actor.moveBy(0,620);
-        if (this.actor.getY() > 610) this.actor.moveBy(0,-620);
-
+        // Move and wrap from one edge of the world to the opposite.
+        Super();
         
         if ( ! this.actor.pixelOverlap("deadly").isEmpty() ) {
             this.die();
@@ -97,22 +92,21 @@ Ship = Class({
             .speed(3,1).fade(3).spin(-5,5).rotate(true).pose("fragment").projectiles(40).createActor();
         
         directorScript.lives -= 1;
-        this.killed = true;
 
         this.lifeIcon[directorScript.lives].event("disappear");
-        this.actor.deathEvent("explode");
+        this.actor.deathEvent("explode"); // Note, this animation must send an "exploded" message at the end.
     },
     
-    onDeath: function() {
-    	if (this.killed) {
-    		if (directorScript.lives > 0) {
-    			game.startScene(game.getSceneName());
+    onMessage: function( message ) {
+    	if (message == "exploded") {
+			if (directorScript.lives > 0) {
+				game.startScene(game.getSceneName());
 	    	} else {
 	    		for ( var i = itchy.AbstractRole.allByTag( "gameOver" ).iterator(); i.hasNext();) {
 	    			var gameOver = i.next();
 	    			gameOver.event("reveal");
 	    		}
-	    	}
+    		}
     	}
     },
     

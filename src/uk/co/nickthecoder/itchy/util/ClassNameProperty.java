@@ -5,7 +5,7 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.util;
 
-import uk.co.nickthecoder.itchy.Resources;
+import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.gui.ClassNameBox;
 import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
@@ -14,8 +14,7 @@ import uk.co.nickthecoder.itchy.script.ScriptManager;
 public class ClassNameProperty<S> extends AbstractProperty<S, ClassName>
 {
     /**
-     * The required type for the property, either Role, SceneDirector, CostumeProperty or
-     * Game.
+     * The required type for the property, either Role, SceneDirector, CostumeProperty or Game.
      */
     private Class<?> baseClass;
 
@@ -35,7 +34,7 @@ public class ClassNameProperty<S> extends AbstractProperty<S, ClassName>
     public Component createComponent( final S subject, boolean autoUpdate )
     {
         ClassName className = this.getSafeValue(subject);
-        ScriptManager scriptManager = Resources.getScriptManager();
+        ScriptManager scriptManager = Itchy.getGame().getScriptManager();
 
         final ClassNameBox classNameBox = new ClassNameBox(scriptManager, className, this.baseClass);
 

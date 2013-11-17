@@ -7,6 +7,7 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="744.09448819"
@@ -1103,6 +1104,18 @@
          stdDeviation="9.0751183"
          id="feGaussianBlur4158" />
     </filter>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath3965">
+      <rect
+         style="fill:#441010;fill-opacity:1;stroke:#3f3450;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         id="rect3967"
+         width="102.92326"
+         height="104.98173"
+         x="-38.591534"
+         y="-149.88289"
+         transform="matrix(0.77678143,0.62977028,-0.62977028,0.77678143,0,0)" />
+    </clipPath>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -1111,9 +1124,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.24289941"
-     inkscape:cx="483.92586"
-     inkscape:cy="84.232995"
+     inkscape:zoom="1"
+     inkscape:cx="49.73463"
+     inkscape:cy="976.32638"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -1450,6 +1463,74 @@
          style="fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter4156)"
          sodipodi:type="arc"
          transform="matrix(0.46466262,0,0,0.46466262,123.11563,643.62773)" />
+    </g>
+    <g
+       id="g3986"
+       inkscape:export-filename="/media/home/nick/projects/itchy/resources/asteroids/icon32.png"
+       inkscape:export-xdpi="28.799999"
+       inkscape:export-ydpi="28.799999"
+       style="stroke:#000000;stroke-opacity:1">
+      <rect
+         y="-121.18027"
+         x="22.619547"
+         height="99.047142"
+         width="99.047142"
+         id="rect3185"
+         style="fill:#441010;fill-opacity:1;stroke:#000000;stroke-width:0.95285827000000001;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+      <path
+         transform="matrix(0.77678143,-0.62977028,0.62977028,0.77678143,52.992846,26.141549)"
+         sodipodi:nodetypes="ccccccc"
+         inkscape:connector-curvature="0"
+         id="path3179"
+         d="m 99.423953,-18.852567 -30.80505,-24.25354 -35.72708,-3.13908 16.09487,-40.87795 28.07596,-29.595723 16.73048,45.938613 z"
+         inkscape:transform-center-y="-7.8455016"
+         inkscape:transform-center-x="-16.812316"
+         style="fill:#b214c5;fill-opacity:1;stroke:#000000;filter:url(#filter4043);stroke-opacity:1"
+         inkscape:export-filename="/home/nick/projects/itchy/resources/asteroids/icon32.png"
+         inkscape:export-xdpi="29.209999"
+         inkscape:export-ydpi="29.209999"
+         clip-path="url(#clipPath3965)" />
+    </g>
+    <use
+       x="0"
+       y="0"
+       xlink:href="#path3179"
+       inkscape:transform-center-x="-16.812316"
+       inkscape:transform-center-y="-7.8455016"
+       id="use3183"
+       transform="translate(165.57431,3.5444451)"
+       width="744.09448"
+       height="1052.3622"
+       inkscape:export-filename="/media/home/nick/projects/itchy/resources/asteroids/icon.png"
+       inkscape:export-xdpi="58.41"
+       inkscape:export-ydpi="58.41" />
+    <g
+       inkscape:export-ydpi="28.799999"
+       inkscape:export-xdpi="28.799999"
+       inkscape:export-filename="/media/home/nick/projects/itchy/resources/asteroids/icon32.png"
+       id="g3187"
+       transform="translate(284,7)"
+       style="stroke:none">
+      <rect
+         style="fill:#441010;fill-opacity:0.02183407;stroke:none"
+         id="rect3189"
+         width="99.047142"
+         height="99.047142"
+         x="22.619547"
+         y="-121.18027" />
+      <path
+         clip-path="url(#clipPath3965)"
+         inkscape:export-ydpi="29.209999"
+         inkscape:export-xdpi="29.209999"
+         inkscape:export-filename="/home/nick/projects/itchy/resources/asteroids/icon32.png"
+         style="fill:#b214c5;fill-opacity:1;stroke:none;filter:url(#filter4043)"
+         inkscape:transform-center-x="-16.812316"
+         inkscape:transform-center-y="-7.8455016"
+         d="m 99.423953,-18.852567 -30.80505,-24.25354 -35.72708,-3.13908 16.09487,-40.87795 28.07596,-29.595723 16.73048,45.938613 z"
+         id="path3191"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="ccccccc"
+         transform="matrix(0.77678143,-0.62977028,0.62977028,0.77678143,52.992846,26.141549)" />
     </g>
   </g>
 </svg>

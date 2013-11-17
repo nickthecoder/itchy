@@ -133,7 +133,7 @@ public class Scene
             result = new PlainSceneDirector();
         } else {
             if (resources.isValidScript(this.sceneDirectorClassName)) {
-                result = Resources.getScriptManager().createSceneDirector(this.sceneDirectorClassName);
+                result = Itchy.getGame().getScriptManager().createSceneDirector(this.sceneDirectorClassName);
             } else {
                 Class<?> klass = Class.forName(this.sceneDirectorClassName.name);
                 result = (SceneDirector) klass.newInstance();

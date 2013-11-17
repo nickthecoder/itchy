@@ -48,7 +48,7 @@ public abstract class AbstractRole implements Role
         ClassNotFoundException
     {
         if (resources.isValidScript(className)) {
-            return Resources.getScriptManager().createRole(className);
+            return resources.getGame().getScriptManager().createRole(className);
         } else {
             Class<?> klass = Class.forName(className.name);
             return (Role) klass.newInstance();
@@ -224,12 +224,6 @@ public abstract class AbstractRole implements Role
     public void onMessage( String message )
     {
         // do nothing
-    }
-
-    // TODO Remove?
-    public void sendMessage( String message )
-    {
-        onMessage(message);
     }
 
     /**

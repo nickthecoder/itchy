@@ -93,8 +93,7 @@ public class Itchy
         if (baseDirectory == null) {
             String basePath = System.getProperty("itchy.base");
             if (basePath == null) {
-                System.err
-                    .println("itchy.base not set. Defaulting to the current directory.");
+                System.err.println("itchy.base not set. Defaulting to the current directory.");
                 basePath = ".";
             }
             baseDirectory = new File(basePath);

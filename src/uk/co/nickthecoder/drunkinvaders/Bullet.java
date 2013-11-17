@@ -58,10 +58,9 @@ public class Bullet extends AbstractRole implements Shootable
     {
         getActor().moveForwards(this.speed);
 
-        // TODO Kill the bullet another way
-        //if (!getActor().isOnScreen()) {
-        //    getActor().kill();
-        //}
+        if (!DrunkInvaders.director.mainView.getVisibleRectangle().overlaps(getActor().getAppearance().getWorldRectangle())) {
+            getActor().kill();
+        }
 
         getActor().getCollisionStrategy().update();
 

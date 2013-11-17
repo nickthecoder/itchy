@@ -82,7 +82,8 @@ public class JavascriptLanguage extends ScriptLanguage
     public void ensureGlobals()
     {
         Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
-        Game game = Itchy.getGame();
+        Game game = this.manager.resources.getGame();
+        bindings.put("javascriptLanguage", this);
         bindings.put("game", game);
         bindings.put("director", game.getDirector());
         bindings.put("sceneDirector", game.getSceneDirector());

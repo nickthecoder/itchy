@@ -10,14 +10,16 @@ import java.io.File;
 import uk.co.nickthecoder.itchy.Game;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Resources;
-import uk.co.nickthecoder.itchy.editor.Editor;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Button;
 import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.Container;
 import uk.co.nickthecoder.itchy.gui.GridLayout;
+import uk.co.nickthecoder.itchy.gui.Label;
 import uk.co.nickthecoder.itchy.gui.VerticalLayout;
 import uk.co.nickthecoder.itchy.gui.VerticalScroll;
+import uk.co.nickthecoder.itchy.gui.ImageComponent;
+import uk.co.nickthecoder.jame.Surface;
 
 public class GameMenu implements Page
 {
@@ -37,11 +39,11 @@ public class GameMenu implements Page
         result.setXAlignment(0.5);
 
         Container main = new Container();
-        main.setFill(true,true);
+        main.setFill(true, true);
         result.addChild(main);
         main.setExpansion(1);
         main.setYAlignment(0.25);
-        
+
         Container menu = new Container();
         menu.setFill(true, true);
         menu.setYAlignment(0.25);
@@ -56,14 +58,35 @@ public class GameMenu implements Page
         main.addChild(menuScroll);
 
         File directory = new File(Itchy.getBaseDirectory(), "resources");
-
+        File defaultImageFile = new File( directory, "icon32.png" );
+        
         for (File dir : directory.listFiles()) {
             if (dir.isDirectory()) {
                 final File resourceFile = new File(dir, dir.getName() + ".itchy");
                 if (resourceFile.exists()) {
 
-                    Button playButton = new Button("Play " + dir.getName());
+                    Container combo = new Container();
+                    combo.setType( "comboBox");
+                    combo.addStyle("combo");
+                    combo.setFill(true, true);
+
+                    Button playButton = new Button();
+
+                    File imageFile = new File( dir, "icon32.png" );
+                    try {
+                        Surface image = new Surface( (imageFile.exists() ? imageFile : defaultImageFile).getPath());
+                        ImageComponent icon = new ImageComponent( image );
+                        playButton.addChild(icon);
+                    } catch (Exception e) {
+                        // Do nothing
+                        e.printStackTrace();
+                    }
+                    playButton.addChild( new Label( dir.getName() ));
+                    playButton.setFill(true, true);
                     playButton.setXAlignment(0.5);
+                    playButton.setYAlignment(0.5);
+                    playButton.setXSpacing(5);
+                    playButton.setExpansion(1.0);
                     playButton.addActionListener(new ActionListener() {
                         @Override
                         public void action()
@@ -80,11 +103,15 @@ public class GameMenu implements Page
                             editGame(resourceFile);
                         }
                     });
+                    combo.addChild(playButton);
+                    combo.addChild(editButton);
 
-                    grid.addRow(playButton, editButton);
+                    //grid.addRow(playButton, editButton);
+                    grid.addChild(combo);
                 }
             }
         }
+        grid.endRow();
 
         return result;
     }
@@ -95,7 +122,7 @@ public class GameMenu implements Page
         try {
             resources.load(resourceFile);
 
-            resources.createGame().start();
+            resources.getGame().start();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -106,10 +133,9 @@ public class GameMenu implements Page
         Resources resources = new Resources();
         try {
             resources.load(resourceFile);
-            Game game = resources.createGame();
+            Game game = resources.getGame();
 
-            Editor editor = new Editor(game);
-            editor.start();
+            game.startEditor();
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -68,18 +68,24 @@ public abstract class AbstractStage implements Stage, Cloneable
         this.stageListeners.add(listener);
     }
 
-    
     /**
-     * Uses the clone methods {@see Cloneable}, to create an identical stage, but without any actors.
+     * Uses the clone methods {@see Cloneable}, to create an identical stage, but without any
+     * actors.
      */
+    @Override
     public Stage createDesignStage()
     {
-        return this.clone();
+        if (this.locked) {
+            return null;
+        } else {
+            return this.clone();
+        }
     }
-    
+
     /**
      * Used by {@link #createDesignStage()}.
      */
+    @Override
     public AbstractStage clone()
     {
         try {
@@ -87,7 +93,7 @@ public abstract class AbstractStage implements Stage, Cloneable
             result.stageListeners = new LinkedList<StageListener>();
             return result;
         } catch (Exception e) {
-            throw new RuntimeException( e );
+            throw new RuntimeException(e);
         }
     }
 }

@@ -338,11 +338,6 @@ public class Actor implements PropertySubject<Actor>
         Itchy.soundManager.end(this, eventName);
     }
 
-    public void deathEvent( String eventName )
-    {
-        this.deathEvent(this.costume, eventName);
-    }
-
     /**
      * @return true iff not dying or dead.
      */
@@ -351,12 +346,11 @@ public class Actor implements PropertySubject<Actor>
         return ! (this.dying || this.dead); 
     }
     
-    //TODO If an actor wants to use a different costume, then set it first!
-    public void deathEvent( Costume costume, String eventName )
+    public void deathEvent( String eventName )
     {
         this.dying = true;
         this.event(costume, eventName, AnimationEvent.REPLACE);
-        if ((costume == null) || (costume.getAnimation(eventName) == null)) {
+        if ((this.costume == null) || (this.costume.getAnimation(eventName) == null)) {
             this.kill();
         }
     }
@@ -723,35 +717,6 @@ public class Actor implements PropertySubject<Actor>
     public Set<Role> overlapping( String[] including, String[] excluding )
     {
         return this.collisionStrategy.overlapping(this, including, excluding);
-    }
-
-    // TODO Should I use these? If so, can I use an interface instead of a concrete class?
-    public void zOrderUp()
-    {
-        if ((this.stage != null) && (this.stage instanceof ZOrderStage)) {
-            ((ZOrderStage) this.stage).zOrderUp(this);
-        }
-    }
-
-    public void zOrderDown()
-    {
-        if ((this.stage != null) && (this.stage instanceof ZOrderStage)) {
-            ((ZOrderStage) this.stage).zOrderDown(this);
-        }
-    }
-
-    public void zOrderTop()
-    {
-        if ((this.stage != null) && (this.stage instanceof ZOrderStage)) {
-            ((ZOrderStage) this.stage).addTop(this);
-        }
-    }
-
-    public void zOrderBottom()
-    {
-        if ((this.stage != null) && (this.stage instanceof ZOrderStage)) {
-            ((ZOrderStage) this.stage).addBottom(this);
-        }
     }
 
     @Property(label = "Z Order")

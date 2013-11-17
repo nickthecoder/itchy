@@ -11,7 +11,6 @@ import java.util.HashMap;
 import uk.co.nickthecoder.itchy.Game;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Resources;
-import uk.co.nickthecoder.itchy.editor.Editor;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Button;
 import uk.co.nickthecoder.itchy.gui.Component;
@@ -177,7 +176,7 @@ public class NewGameWizard implements Page
         Resources resources = new Resources();
         try {
             resources.load(getResources());
-            Game game = resources.createGame();
+            Game game = resources.getGame();
             game.start();
 
         } catch (Exception e) {
@@ -191,9 +190,9 @@ public class NewGameWizard implements Page
         Resources resources = new Resources();
         try {
             resources.load(getResources());
-            Game game = resources.createGame();
-            Editor editor = new Editor(game);
-            Itchy.startGame(editor);
+            Game game = resources.getGame();
+
+            game.startEditor();
 
         } catch (Exception e) {
             e.printStackTrace();

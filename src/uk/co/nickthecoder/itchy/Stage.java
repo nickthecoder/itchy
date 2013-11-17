@@ -18,7 +18,6 @@ public interface Stage
     /**
      * @return True if this layer shouldn't be edited within the SceneDesigner.
      */
-    // TODO - remove this if/when we have a createDeisgnLayer.
     public boolean isLocked();
 
     public Iterator<Actor> iterator();

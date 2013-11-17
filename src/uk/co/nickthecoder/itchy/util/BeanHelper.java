@@ -94,11 +94,6 @@ public class BeanHelper
     {
         int dot = attributeName.indexOf(".");
 
-        // TODO Remove
-        if(attributeName.equals("file")) {
-            System.out.println("Looking for file attribute");
-        }
-        
         if (dot > 0) {
 
             Object subject2 = getProperty(subject, attributeName.substring(0, dot));

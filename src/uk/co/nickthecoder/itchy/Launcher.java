@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import uk.co.nickthecoder.itchy.editor.Editor;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Button;
 import uk.co.nickthecoder.itchy.gui.Container;
@@ -29,21 +28,22 @@ public class Launcher extends AbstractDirector
 
     public RootContainer root;
 
+    @Override
     public void onStarted()
     {
         super.onStarted();
-        
-        System.out.println( "Starting Launcher" );
+
+        System.out.println("Starting Launcher");
         Itchy.enableKeyboardRepeat(true);
-        
+
         try {
-            game.setStylesheet(new Stylesheet(new File(Itchy.getBaseDirectory(), RULES)));
+            this.game.setStylesheet(new Stylesheet(new File(Itchy.getBaseDirectory(), RULES)));
         } catch (Exception e) {
             System.err.println("Failed to load stylesheet : " + RULES);
             e.printStackTrace();
         }
 
-        System.out.println( "Creating Laucher window" );
+        System.out.println("Creating Laucher window");
         this.root = new RootContainer();
         this.root.addStyle("editor");
 
@@ -70,26 +70,26 @@ public class Launcher extends AbstractDirector
 
         Notebook notebook = new Notebook();
         notebook.setFill(true, true);
-        
+
         List<Page> pages = new ArrayList<Page>();
-        pages.add( new GameMenu());
-        pages.add( new NewGameWizard());
-        pages.add( new ForkGame());
-        
+        pages.add(new GameMenu());
+        pages.add(new NewGameWizard());
+        pages.add(new ForkGame());
+
         for (Page page : pages) {
-            createNotebookPage( notebook, page );
+            createNotebookPage(notebook, page);
         }
-        
+
         this.root.addChild(notebook);
     }
-    
+
     private void createNotebookPage( Notebook notebook, final Page page )
     {
         final Container container = new Container();
         container.addChild(page.createPage());
         container.setFill(true, true);
         notebook.addPage(page.getName(), container);
-        Button button = notebook.getTab(notebook.size()-1);
+        Button button = notebook.getTab(notebook.size() - 1);
         button.addActionListener(new ActionListener() {
 
             @Override
@@ -98,7 +98,7 @@ public class Launcher extends AbstractDirector
                 container.clear();
                 container.addChild(page.createPage());
             }
-            
+
         });
     }
 
@@ -125,11 +125,10 @@ public class Launcher extends AbstractDirector
         Resources resources = new Resources();
         resources.load(resourcesFile);
 
-        Game game = resources.createGame();
+        Game game = resources.getGame();
         if ((argv.length == 1) && ("--editor".equals(argv[0]))) {
 
-            Editor editor = new Editor(game);
-            editor.start();
+            game.startEditor();
 
         } else {
             game.start();

@@ -105,6 +105,14 @@ public final class Editor extends Game
         return 720;
     }
 
+
+    @Override
+    public void start( String sceneName )
+    {
+        this.designSceneName = sceneName;
+        this.start();
+    }
+    
     @Override
     public void start()
     {
@@ -186,11 +194,5 @@ public final class Editor extends Game
         }
     }
 
-    @Override
-    public void start( String sceneName )
-    {
-        this.designSceneName = sceneName;
-        this.start();
-    }
 
 }

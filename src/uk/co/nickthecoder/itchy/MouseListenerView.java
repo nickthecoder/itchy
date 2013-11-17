@@ -7,7 +7,6 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
-//TODO Is this right???
 public interface MouseListenerView extends View, MouseListener
 {
     /**

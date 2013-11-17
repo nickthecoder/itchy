@@ -125,7 +125,8 @@ public class Alien extends Bouncy implements Shootable
             .bubble("speechBubble")
             .offset(0, 40).direction(0)
             .createActor();
-        yell.deathEvent(getActor().getCostume(), "yell");
+        yell.setCostume(getActor().getCostume());
+        yell.deathEvent("yell");
 
         removeAllTags();
         this.deathEvent("death");

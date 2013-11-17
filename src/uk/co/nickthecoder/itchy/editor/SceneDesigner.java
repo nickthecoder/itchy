@@ -182,7 +182,9 @@ public class SceneDesigner implements MouseListener, KeyListener
 
         this.editor.getViews().add(this.designViews);
 
+        System.out.println("Creating Stages for Scene Designer");
         for (Stage stage : this.editor.game.getStages()) {
+            System.out.println( stage + " locked ? " + stage.isLocked() );
             if (!stage.isLocked()) {
                 Stage designStage = stage.createDesignStage();
 
@@ -1326,28 +1328,30 @@ public class SceneDesigner implements MouseListener, KeyListener
     private void onActorUp()
     {
         if ((this.mode == MODE_SELECT) && (this.currentActor != null)) {
-            this.currentActor.zOrderUp();
+            if (this.currentActor.getStage() instanceof ZOrderStage) {
+                ((ZOrderStage) (this.currentActor.getStage())).zOrderUp(this.currentActor);
+            }
         }
     }
 
     private void onActorDown()
     {
         if ((this.mode == MODE_SELECT) && (this.currentActor != null)) {
-            this.currentActor.zOrderDown();
+            ((ZOrderStage) (this.currentActor.getStage())).zOrderDown(this.currentActor);
         }
     }
 
     private void onActorTop()
     {
         if ((this.mode == MODE_SELECT) && (this.currentActor != null)) {
-            this.currentActor.zOrderTop();
+            ((ZOrderStage) (this.currentActor.getStage())).addBottom(this.currentActor);
         }
     }
 
     private void onActorBottom()
     {
         if ((this.mode == MODE_SELECT) && (this.currentActor != null)) {
-            this.currentActor.zOrderBottom();
+            ((ZOrderStage) (this.currentActor.getStage())).addTop(this.currentActor);
         }
     }
 
@@ -1463,7 +1467,7 @@ public class SceneDesigner implements MouseListener, KeyListener
     {
         try {
 
-            Game game = this.editor.game.resources.createGame();
+            Game game = this.editor.game.resources.getGame();
             game.testScene(this.sceneResource.name);
 
         } catch (Exception e) {

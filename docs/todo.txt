@@ -2,15 +2,43 @@
 TODO
 ====
 
-Rename Behaviour to Role
-
 Follow up on the TODOs
 
-Test on windows.
+Create some tests for Views in the tests game.
+    Create a Stage and view in the middle of the screen
+    Add buttons which scroll the view
+    Add a button inside it to test the offset
+    Create a compound view in the middle with other views inside it.
+        Use the same Stage for each of the mini views to test the 1:many Stage->View with mouse listeners and capture mouse.
+
+I've exposed a generic Game.getGameViews (returns CompoundView<View>).
+Should Game have addStage, rather than letting the list be added to directly?
+
+Which scripted methods should call Super, which calls a defaultOnXXX, instead of super always being called from the ScriptedXXX methods.
+    This would let the game writer take full control if they want.
+    
 
 PACKAGE !!!
 
+Test on windows.
 
+Send to Asul
+
+
+
+
+
+Actor.startEvent isn't elegant - its only used by the editor, so should be on design actor and designactorbehaviour?
+
+
+BUG: Rename a scene from scene designer does not rename
+    and doesn't update the ScenesEditor table
+
+BUG: Reloading a SceneBehaviour script causes the properties to double.
+
+BUG: Changing SceneBehaviour doesn't update the SceneBehaviourProperty components
+
+Don't call onMouseMove for every damn object - especially scripted ones.
 
 
 
@@ -21,20 +49,6 @@ Asteroids
         Ship will have a "bulletName", if set, then it uses it directly to get the bullet costume, otherwise it uses the
             existing "companion" feature.
 
-I've exposed a generic Game.getGameViews (returns CompoundView<View>).
-Should Game have addStage, rather than letting the list be added to directly?
-
-Which scripted methods should call Super, which calls a defaultOnXXX, instead of super always being called from the ScriptedXXX methods.
-    This would let the game writer take full control if they want.
-    
-
-
-Create some tests for Views in the tests game.
-    Create a Stage and view in the middle of the screen
-    Add buttons which scroll the view
-    Add a button inside it to test the offset
-    Create a compound view in the middle with other views inside it.
-        Use the same Stage for each of the mini views to test the 1:many Stage->View with mouse listeners and capture mouse.
 
 Create an isometric stage
 
@@ -48,17 +62,6 @@ Duplicate Animation
 Explanatory games
     e.g. Showing the different between heading and direction.
     
-
-Actor.startEvent isn't elegant - its only used by the editor, so should be on design actor and designactorbehaviour?
-
-
-BUG: Rename a scene from scene designer does not rename
-    and doesn't update the ScenesEditor table
-
-BUG: Reloading a SceneBehaviour script causes the properties to double.
-
-BUG: Changing SceneBehaviour doesn't update the SceneBehaviourProperty components
-
 check all code for this.[a-z 0-9]*\(, and remove the "this".
 
 Create a Compound Behaviour, which has a ClassName array of other Behaviours, or maybe a Map of
@@ -96,10 +99,13 @@ What's Next
 ===========
 
 Create a dedicated pinkwino instance for Itchy
-    Editor tips.
-    Middle button to drag view.
-    Ctrl to select from any layer
-    Shift to select from below the current object 
+
+    Editor Tips
+        Middle button to drag view.
+        Ctrl to select from any layer
+        Shift to select from below the current object 
+
+    Class Overview
 
 Add pose and nine patch : try to show the image sub directory if it exists.
     Copy images if outside of the game's directory
