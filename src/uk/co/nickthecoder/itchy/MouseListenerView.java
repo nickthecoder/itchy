@@ -26,7 +26,7 @@ public interface MouseListenerView extends View, MouseListener
 
     /**
      * One of the actors within the layer can capture the mouse, so that no other listeners will
-     * hear the mouse events, until {@link #releaseMouse(MouseListener)} is called. This is useful
+     * hear the mouse events, until {@link #releaseMouse(ViewMouseListener)} is called. This is useful
      * when a mouse drag is initiated.
      * 
      * @param owner
@@ -37,7 +37,7 @@ public interface MouseListenerView extends View, MouseListener
     public void captureMouse( ViewMouseListener owner );
 
     /**
-     * Called after {@link #captureMouse(MouseListener)} to allow other to hear mouse events once
+     * Called after {@link #captureMouse(ViewMouseListener)} to allow other to hear mouse events once
      * again.
      * 
      * @param owner

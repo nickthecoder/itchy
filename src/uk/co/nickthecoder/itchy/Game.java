@@ -14,12 +14,12 @@ import java.util.prefs.Preferences;
 
 import uk.co.nickthecoder.itchy.editor.Editor;
 import uk.co.nickthecoder.itchy.editor.SceneDesigner;
+import uk.co.nickthecoder.itchy.extras.SceneTransition;
 import uk.co.nickthecoder.itchy.gui.GuiView;
 import uk.co.nickthecoder.itchy.gui.RootContainer;
 import uk.co.nickthecoder.itchy.gui.Stylesheet;
 import uk.co.nickthecoder.itchy.script.ScriptManager;
 import uk.co.nickthecoder.itchy.util.AutoFlushPreferences;
-import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.itchy.util.StringUtils;
 import uk.co.nickthecoder.itchy.util.TagCollection;
 import uk.co.nickthecoder.jame.RGBA;
@@ -38,7 +38,6 @@ public class Game
      * Used internally when creating the Game object, and when using scripted game code, rather than
      * Java code.
      */
-
     protected Director director;
 
     /**
@@ -48,14 +47,16 @@ public class Game
 
     /**
      * Holds the tag information for all of the Actors used within this game. This isn't typically
-     * used directly, but instead used via {@link Actor#allByTag(String)},
-     * {@link Actor#hadTag(String)}, {@link Actor#addTag(String)} and
-     * {@link Actor#removeTag(String)}.
+     * used directly, but instead used via {@link AbstractRole#allByTag(String)},
+     * {@link AbstractRole#hasTag(String)}, {@link AbstractRole#addTag(String)} and
+     * {@link AbstractRole#removeTag(String)}.
      */
     public final TagCollection<Role> roleTags = new TagCollection<Role>();
 
+    // TODO Public?
     public List<Actor> actors = new LinkedList<Actor>();
 
+    // TODO Public? Make Pause an interface?
     /**
      * Helps to implement a pause feature within your game. Typically, you will pause/unpause from
      * your game's {@link SceneDirector#onKeyDown(KeyboardEvent)} :
@@ -114,7 +115,7 @@ public class Game
     /**
      * The list of all of the windows current shown.
      */
-    private final CompoundView<GuiView> windows;
+    private CompoundView<GuiView> windows;
 
     /**
      * The current SceneDirector, which was created during {@link #loadScene(String)}
@@ -145,29 +146,24 @@ public class Game
      */
     private boolean showMousePointer = true;
 
-    /**
-     * Game should have only this constructor, it is called dynamically after the Game's resources
-     * have been loaded. The class name determining which sub-class of Game should be created is
-     * included in the resources file.
-     * 
-     * @param gameManager
-     */
     public Game( Resources resources )
     {
         this.resources = resources;
-        this.scriptManager = new ScriptManager(resources);
+        this.scriptManager = resources.scriptManager;
 
         this.sceneDirector = new PlainSceneDirector();
         this.pause = new Pause(this);
 
         this.mouseListeners = new LinkedList<MouseListener>();
         this.keyListeners = new LinkedList<KeyListener>();
+    }
 
-        this.stages = new LinkedList<Stage>();
-
+    public void init()
+    {
         Rect displayRect = new Rect(0, 0, getWidth(), getHeight());
 
         this.allViews = new CompoundView<View>("allViews", displayRect);
+        this.stages = new LinkedList<Stage>();
 
         // Background
         this.background = new RGBAView(displayRect, new RGBA(0, 0, 0));
@@ -190,33 +186,14 @@ public class Game
 
     }
 
-    protected void setDirector( Director director )
+    public void setDirector( Director director )
     {
+        assert( director == null );
         this.director = director;
         this.director.attach(this);
 
         this.addMouseListener(this.director);
         this.addKeyListener(this.director);
-    }
-
-    void createDirector( ClassName className )
-    {
-        Director director;
-
-        try {
-            if (this.resources.isValidScript(this.resources.gameInfo.directorClassName.name)) {
-                director = this.scriptManager.createDirector(this.resources.gameInfo.directorClassName);
-
-            } else {
-                Class<?> klass = Class.forName(this.resources.gameInfo.directorClassName.name);
-                director = (Director) klass.newInstance();
-            }
-        } catch (Exception e) {
-            System.err.println("Failed to create director, using a PlainDirector instead");
-            director = new PlainDirector();
-            e.printStackTrace();
-        }
-        this.setDirector(director);
     }
 
     public Director getDirector()
@@ -286,15 +263,13 @@ public class Game
     /**
      * Typically, this is called immediately the Game object is created, usually from the "main"
      * method.
-     * 
-     * Do NOT override this method.
      */
     public void start()
     {
         Itchy.startGame(this);
         this.director.onStarted();
-        if (!StringUtils.isBlank(this.resources.gameInfo.initialScene)) {
-            startScene(this.resources.gameInfo.initialScene);
+        if (!StringUtils.isBlank(this.resources.getGameInfo().initialScene)) {
+            startScene(this.resources.getGameInfo().initialScene);
         }
         Itchy.mainLoop();
     }
@@ -323,10 +298,10 @@ public class Game
         // If the editor has been started without the game being started (i.e. directly from the
         // launcher) then we need to start the game, so that it creates its layers and views.
         // For the scene designer to copy.
-        if (this.stages.size() == 0) {
+        if ((this.stages == null) || (this.stages.size() == 0)) {
             this.director.onStarted();
         }
-        
+
         try {
             Editor editor = new Editor(this);
             editor.start();
@@ -340,7 +315,7 @@ public class Game
         // If the editor has been started without the game being started (i.e. directly from the
         // launcher) then we need to start the game, so that it creates its layers and views.
         // For the scene designer to copy.
-        if (this.stages.size() == 0) {
+        if ((this.stages == null) || (this.stages.size() == 0)) {
             this.director.onStarted();
         }
 
@@ -373,9 +348,9 @@ public class Game
     }
 
     /**
-     * The flip side of {@link testScene(String)}, will return to the scene designer.
+     * The flip side of {@link #testScene(String)}, will return to the scene designer.
      * 
-     * Very similar to {@link #end}.
+     * Very similar to {@link #end()}.
      */
     public void endTest()
     {
@@ -420,7 +395,7 @@ public class Game
      * @param tag
      *        The tag to search for.
      * @return A set of Roles meeting the criteria. An empty set if no roles meet the criteria.
-     * @See {@link Role#addTag(String)}
+     * @see AbstractRole#addTag(String)
      */
     public Set<Role> findRoleByTag( String tag )
     {
@@ -431,8 +406,6 @@ public class Game
      * Get the top-level CompoundLayer, which holds all of the sub-layers. The sub-layers are the
      * ones that Actors will be added to. Note that the pop-up layer is NOT part of the hierarchy,
      * it is above all these.
-     * 
-     * @return
      */
     public CompoundView<View> getViews()
     {
@@ -460,8 +433,8 @@ public class Game
      * 
      * Itchy will call this from inside the game loop, so there is normally no need for you to call
      * it explicitly. You may call this with a surface of your creation to obtain a screenshot of
-     * the game. {@link uk.co.nikthecoder.extras.SceneTransition} takes screenshots in this manner,
-     * which are then slid, or faded from view.
+     * the game. {@link SceneTransition} takes screenshots in this manner, which are then slid, or
+     * faded from view.
      * 
      * @param display
      *        The surface to draw onto. This will normally be the display surface, but can be any
@@ -645,7 +618,7 @@ public class Game
 
     /**
      * Prevents mouse events going to any other MouseListeners, other than the one specified, until
-     * {@link #releaseMouse(EventListener)} is called.
+     * {@link #releaseMouse(MouseListener)} is called.
      * 
      */
     public void captureMouse( MouseListener owner )
@@ -655,7 +628,7 @@ public class Game
     }
 
     /**
-     * The flip side of {@link #captureMouse(InputListener)}. MouseListeners will receive mouse
+     * The flip side of {@link #captureMouse(MouseListener)}. MouseListeners will receive mouse
      * events as normal.
      * 
      * @param owner
@@ -687,7 +660,7 @@ public class Game
      */
     public int getWidth()
     {
-        return this.resources.gameInfo.width;
+        return this.resources.getGameInfo().width;
     }
 
     /**
@@ -696,7 +669,7 @@ public class Game
      */
     public int getHeight()
     {
-        return this.resources.gameInfo.height;
+        return this.resources.getGameInfo().height;
     }
 
     /**
@@ -705,7 +678,7 @@ public class Game
      */
     public String getTitle()
     {
-        return this.resources.gameInfo.title;
+        return this.resources.getGameInfo().title;
     }
 
     public List<Actor> getActors()

@@ -8,9 +8,12 @@ Play = new Class({
         this.rocks = 0; // count the rocks on the screen, when it goes down to zero, next level!
         this.endTimer = null;
         this.ship = null; // Set by Ship's onBirth.
-        game.loadScene("foreground", true);
     },
     
+    onActivate: function() {
+        game.loadScene("foreground", true);
+    },
+
     onKeyDown: function(ke)
     {
         // Escape key takes us back to the menu.

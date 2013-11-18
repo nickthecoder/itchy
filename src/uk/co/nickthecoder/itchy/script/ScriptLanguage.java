@@ -141,7 +141,7 @@ public abstract class ScriptLanguage
         try {
             Reader reader = new InputStreamReader(new FileInputStream(file));
             if (this.engine instanceof Compilable) {
-                System.out.println("Compiling script : " + file);
+                System.out.println( "Compiling script : " + file);
                 Compilable compilable = (Compilable) this.engine;
                 compilable.compile(reader).eval();
             } else {

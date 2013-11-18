@@ -103,10 +103,11 @@ public class ClassNameBox extends Container
 
     private void update()
     {
-        this.comboBox.removeStyle("error");
         this.errorText.setVisible(false);
 
         this.value.name = this.comboBox.getText();
+        this.comboBox.addStyle("error", !isValid());
+
         boolean isValidScript = this.scriptManager.isValidScript(this.value);
         this.editButtonLabel.setText(isValidScript ? "Edit" : "Create");
 
@@ -125,6 +126,25 @@ public class ClassNameBox extends Container
                 this.errorText.setVisible(true);
             }
 
+        }
+    }
+    
+    private boolean isValid()
+    {
+        if ( this.value.isScript()) {
+            return  this.scriptManager.isValidScript(this.value);
+        } else {
+            try {
+                Class<?> klass = Class.forName(this.value.name);
+                if (klass == null) {
+                    return false;
+                }
+                klass.asSubclass(this.baseClass);
+                
+                return true;
+            } catch (Exception e) {
+                return false;
+            }
         }
     }
 
@@ -170,15 +190,14 @@ public class ClassNameBox extends Container
             String baseName = getBaseName();
             if (baseName != null) {
                 this.scriptManager.createScript(baseName, this.value);
+                update();
             }
         }
 
         File file = this.scriptManager.getScript(this.value.name);
-        // String textEditor = Editor.singleton.preferences.textEditor;
 
         try {
             Desktop.getDesktop().open(file);
-            // Runtime.getRuntime().exec(new String[] { textEditor, file.getPath() });
         } catch (Exception e) {
             e.printStackTrace();
         }

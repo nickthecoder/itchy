@@ -21,7 +21,7 @@ public class Scene
     @Property(label = "Show Mouse")
     public boolean showMouse = true;
 
-    @Property(label = "Scene Role", baseClass = SceneDirector.class, sortOrder = 90)
+    @Property(label = "Scene Director", baseClass = SceneDirector.class, sortOrder = 90)
     public ClassName sceneDirectorClassName;
 
     @Property(label="Background Colour")

@@ -123,8 +123,8 @@ public class Itchy
 
     private static void setScreenMode( Resources resources )
     {
-        setScreenMode(resources.gameInfo.title, resources,
-            resources.gameInfo.width, resources.gameInfo.height);
+        setScreenMode(resources.getGameInfo().title, resources,
+            resources.getGameInfo().width, resources.getGameInfo().height);
     }
 
     private static void setScreenMode( String title, Resources resources, int width, int height )

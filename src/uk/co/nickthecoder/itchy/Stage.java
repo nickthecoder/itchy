@@ -54,8 +54,6 @@ public interface Stage
      * Used by the SceneDesigner to create the stages where Actors are edited. Most stages will just
      * create another instance of themselves, but some may have different role during the
      * design compared to during actual game play.
-     * 
-     * @return
      */
     public Stage createDesignStage();
 }

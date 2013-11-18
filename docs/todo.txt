@@ -2,18 +2,6 @@
 TODO
 ====
     
-Follow up on the TODOs
-
-Create some tests for Views in the tests game.
-    Create a Stage and view in the middle of the screen
-    Add buttons which scroll the view
-    Add a button inside it to test the offset
-    Create a compound view in the middle with other views inside it.
-        Use the same Stage for each of the mini views to test the 1:many Stage->View with mouse listeners and capture mouse.
-
-I've exposed a generic Game.getGameViews (returns CompoundView<View>).
-Should Game have addStage, rather than letting the list be added to directly?
-
 PACKAGE !!!
 
 Test on windows.
@@ -22,7 +10,19 @@ Send to Asul
 
 
 
+Follow up on the TODOs
 
+I've exposed a generic Game.getGameViews (returns CompoundView<View>).
+Should Game have addStage, rather than letting the list be added to directly?
+
+Update class diagrams
+
+Create some tests for Views in the tests game.
+    Create a Stage and view in the middle of the screen
+    Add buttons which scroll the view
+    Add a button inside it to test the offset
+    Create a compound view in the middle with other views inside it.
+        Use the same Stage for each of the mini views to test the 1:many Stage->View with mouse listeners and capture mouse.
 
 BUG: Rename a scene from scene designer does not rename
     and doesn't update the ScenesEditor table
@@ -30,9 +30,6 @@ BUG: Rename a scene from scene designer does not rename
 BUG: Reloading a SceneBehaviour script causes the properties to double.
 
 BUG: Changing SceneBehaviour doesn't update the SceneBehaviourProperty components
-
-Don't call onMouseMove for every damn object - especially scripted ones.
-
 
 
 Asteroids
@@ -50,7 +47,11 @@ Create a wrapped StageView (where the x and/or y wrap around)
 Create a ScaledStageView.
     Place the StageView's eventual blit into a protected method? wont work as its also scaling the clip area.
 
-Duplicate Animation
+"Duplicate" button in Animation editor
+
+Drag and drop to move and reorder animation in the editor.
+
+
 
 Explanatory games
     e.g. Showing the different between heading and direction.

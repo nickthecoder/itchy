@@ -379,8 +379,6 @@ public abstract class AbstractProperty<S, T> implements Comparable<AbstractPrope
      * Checks if the entered value is valid, and if so, returns null, otherwise it returns the error
      * message explaining what if wrong with the entered value.
      * 
-     * @param subject
-     *        The object who's property is being edited.
      * @param component
      *        The component created via {@link #createComponent(Object, boolean)}
      * @return Null if there is no error, otherwise a descriptive error message.

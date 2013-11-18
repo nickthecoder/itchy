@@ -29,7 +29,7 @@ public final class Editor extends Game
 
     public EditorPreferences preferences;
 
-    public Game game;
+    private Game game;
 
     public RootContainer root;
 
@@ -56,10 +56,12 @@ public final class Editor extends Game
     public Editor( Game game ) throws Exception
     {
         super(game.resources);
-
         this.game = game;
         instance = this;
         setDirector(new PlainDirector());
+
+        this.init();
+
         this.preferences = new EditorPreferences();
 
         this.gameInfoEditor = new GameInfoEditor(this);
@@ -78,6 +80,11 @@ public final class Editor extends Game
             System.err.println("Failed to load stylesheet : " + RULES);
             e.printStackTrace();
         }
+    }
+
+    public Game getGame()
+    {
+        return this.game;
     }
 
     @Override
@@ -105,14 +112,13 @@ public final class Editor extends Game
         return 720;
     }
 
-
     @Override
     public void start( String sceneName )
     {
         this.designSceneName = sceneName;
         this.start();
     }
-    
+
     @Override
     public void start()
     {
@@ -193,6 +199,5 @@ public final class Editor extends Game
             e.printStackTrace();
         }
     }
-
 
 }

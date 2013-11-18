@@ -23,8 +23,9 @@ import uk.co.nickthecoder.jame.event.MouseMotionEvent;
  * the mouse moves over the button without being clicked.
  * <p>
  * For the button to work, the layer that the actor is drawn on must have had its mouse listener
- * enabled. i.e. call {@link uk.co.nickthecoder.itchy.Stage#enableMouseListener} when initialising
- * your Game object.
+ * enabled. i.e. call
+ * {@link uk.co.nickthecoder.itchy.StageView#enableMouseListener(uk.co.nickthecoder.itchy.Game)}
+ * when initialising your Game object.
  */
 public abstract class Button extends AbstractRole implements ViewMouseListener
 {
@@ -120,7 +121,7 @@ public abstract class Button extends AbstractRole implements ViewMouseListener
     {
         return true;
     }
-    
+
     /**
      * Fires the "click" event. Override this method, to perform your button's action.
      */

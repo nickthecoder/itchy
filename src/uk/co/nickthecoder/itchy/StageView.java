@@ -54,7 +54,6 @@ public class StageView extends AbstractScrollableView implements StageListener, 
         // clip.height + " offsety " + offsetY);
 
         // Where is the world's (0,0) on screen (in screen coordinates)?
-        // TODO I think this is the -ve of what the above comment says.
         int tx = offsetX - (int) this.worldRect.x;
         int ty = offsetY + this.position.height + (int) this.worldRect.y;
 

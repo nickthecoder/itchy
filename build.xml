@@ -13,6 +13,9 @@
     
     <!-- build -->
     <target name="build">
+
+    	<buildnumber/>
+
         <mkdir dir="build"/>
         <mkdir dir="lib"/>
         <javac
@@ -67,12 +70,10 @@
         </delete>
     </target>
 
-
-    <!-- publish : Used to create zip files of the source and binaries -->
-    <target name="package" depends="clean,build,javadoc">
-
-        <jar jarfile="docs/itchy-win32.zip">
-            <fileset dir=".">
+    <target name="zipWin32">
+        <zip destfile="docs/itchy-win32.zip">
+        	<zipfileset dir="." prefix="itchy">    
+                <include name="build.number"/>
                 <include name="lib/*.jar"/>
                 <include name="launch.vbs"/>
                 <include name="lib/native/win32/*.dll"/>
@@ -84,29 +85,14 @@
                 <include name="resources/**/*.ttf"/>
                 <include name="resources/**/*.ogg"/>
                 <include name="resources/**/*.itchy"/>
-            </fileset>
-        </jar>
+    		</zipfileset>
+        </zip>
+	</target>
 
-        <tar destfile="docs/itchy-linux.tar.gz" compression="gzip">
-            <fileset dir=".">
-                <include name="lib/*.jar"/>
-                <include name="launch"/>
-                <include name="lib/native/i686/*.so"/>
-                <include name="lib/native/x86_64/*.so"/>
-                <include name="resources/**/*.xml"/>
-                <include name="resources/**/*.js"/> 
-                <include name="resources/**/*.png"/>
-                <include name="resources/**/*.jpg"/>
-                <include name="resources/**/*.bmp"/>
-                <include name="resources/**/*.ttf"/>
-                <include name="resources/**/*.ogg"/>
-                <include name="resources/**/*.itchy"/>
-                <include name="resources/**/*.desktop"/>
-            </fileset>
-        </tar>
-
-        <jar jarfile="docs/itchy-src.zip">
-            <fileset dir=".">
+    <target name="zipSrc">
+        <zip destfile="docs/itchy-src.zip">
+            <zipfileset dir="." prefix="itchy-src">
+                <include name="build.number"/>
                 <include name="launch.vbs"/>
                 <include name="launch"/>
                 <include name="src/**/*.java"/>
@@ -123,15 +109,36 @@
                 <include name="resources/**/*.ogg"/>
                 <include name="resources/**/*.itchy"/>
                 <include name="resources/**/*.desktop"/>
-            </fileset>
-        </jar>
-
+            </zipfileset>
+        </zip>
+	</target>
+    	
+	<target name="gzipLinux">
+        <tar destfile="docs/itchy-linux.tar.gz" compression="gzip">
+            <tarfileset dir="." prefix="itchy">
+                <include name="build.number"/>
+                <include name="lib/*.jar"/>
+                <include name="launch"/>
+                <include name="lib/native/i686/*.so"/>
+                <include name="lib/native/x86_64/*.so"/>
+                <include name="resources/**/*.xml"/>
+                <include name="resources/**/*.js"/> 
+                <include name="resources/**/*.png"/>
+                <include name="resources/**/*.jpg"/>
+                <include name="resources/**/*.bmp"/>
+                <include name="resources/**/*.ttf"/>
+                <include name="resources/**/*.ogg"/>
+                <include name="resources/**/*.itchy"/>
+                <include name="resources/**/*.desktop"/>
+            </tarfileset>
+        </tar>
     </target>
+	
+    <!-- publish : Used to create zip files of the source and binaries -->
+    <target name="package" depends="clean,build,javadoc,zipWin32,zipSrc,gzipLinux"/>
 
     <!-- publish : Copies it to my web server's public directory -->
     <target name="publish" depends="package">
-
-        <buildnumber/>
 
         <mkdir dir="${publish.dir}"/>
         <delete>

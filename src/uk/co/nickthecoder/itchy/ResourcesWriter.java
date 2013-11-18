@@ -72,7 +72,7 @@ public class ResourcesWriter extends XMLWriter
     private void writeGame() throws XMLException
     {
         this.beginTag("game");
-        this.writeProperties(resources.gameInfo);
+        this.writeProperties(resources.getGameInfo());
         this.endTag("game");
     }
     

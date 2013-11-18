@@ -36,6 +36,7 @@ public class GridLayout implements Layout
         this.columnCount = columns;
         this.group = new HashSet<GridLayout>();
         this.group.add(this);
+        container.setLayout(this);
     }
 
     /**
@@ -260,6 +261,7 @@ public class GridLayout implements Layout
                 i++;
             }
             y += maxHeightInc + container.getYSpacing();
+            
         }
     }
 

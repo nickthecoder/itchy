@@ -226,7 +226,10 @@ public class RootContainer extends Container
         if (RootContainer.focus != null) {
             RootContainer.focus.hasFocus = false;
             RootContainer.focus.removeStyle("focus");
-            RootContainer.focus.getRoot().removeStyle("focus");
+            Container oldRoot = RootContainer.focus.getRoot();
+            if (oldRoot != null) {
+                oldRoot.removeStyle("focus");
+            }
             RootContainer.focus.onFocus(false);
         }
         RootContainer.focus = component;

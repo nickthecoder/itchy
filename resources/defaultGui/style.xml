@@ -20,7 +20,7 @@
     <rule criteria="button label" font="bold" color="#c6c1b8" />
     
 
-    <rule criteria="slider" background="slider" paddingLeft="4" paddingRight="4" width="100" height="40"/>
+    <rule criteria="slider" background="slider" paddingLeft="4" paddingRight="4" width="100" height="22"/>
     <rule criteria="slider .knob" image="sliderKnob" />
     <rule criteria="slider.focus .knob" image="sliderKnob-focus" />
     

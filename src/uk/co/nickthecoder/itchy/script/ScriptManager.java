@@ -98,23 +98,23 @@ public class ScriptManager
         }
     }
 
-    public static boolean isScript( String filename )
+    public static boolean isScript( ClassName className )
     {
-        String extension = getExtension(filename);
+        String extension = getExtension(className.name);
 
         for (String registeredExtension : languageClassMap.keySet()) {
             if (extension.equals(registeredExtension)) {
-                return true;
+                return isValidName( getName(className) );
             }
         }
         return false;
     }
 
-    public static boolean isScript( ClassName className )
+    public static boolean isValidName(String name)
     {
-        return isScript(className.name);
+        return name.matches("[a-zA-Z0-9]*");
     }
-
+    
     public File getScript( String filename )
     {
         File relative = new File(new File("scripts"), filename);

@@ -8,16 +8,6 @@ package uk.co.nickthecoder.itchy;
 import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.Surface;
 
-/**
- * Think of Layers as transparent pieces of plastic, which can be stacked stacked together to form
- * the image on the screen.
- * <p>
- * Layers are stacked together by using a {@link CompoundView} (Game's {@link Game#gameViews}
- * attribute). A layer is rendered (drawn), by placing {@link Actor} objects onto a
- * {@link ActorLayer}. A simple game will use just one {@link ScrollableView}, in which case, the
- * creating of the layer is done automatically by Game. However, if you want to use more than one
- * layer, then override Game's {@link createLayers()} method.
- */
 public interface View
 {
     /**
@@ -41,7 +31,7 @@ public interface View
      * the game, you could render to a surface which you created, and then save that surface to
      * disk.
      * 
-     * @param within
+     * @param clip
      *        The clip rectangle of the surface on which to draw. For the top-level
      * @param destSurface
      *        The surface to draw on

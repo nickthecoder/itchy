@@ -43,5 +43,24 @@ public class GameInfo implements PropertySubject<GameInfo>
     {
         return AbstractProperty.findAnnotations(this.getClass());
     }
+    
+    public Director createDirector( Resources resources )
+    {
+        Director director;
 
+        try {
+            if (resources.isValidScript(this.directorClassName.name)) {
+                director = resources.scriptManager.createDirector(resources.getGameInfo().directorClassName);
+
+            } else {
+                Class<?> klass = Class.forName(resources.getGameInfo().directorClassName.name);
+                director = (Director) klass.newInstance();
+            }
+        } catch (Exception e) {
+            System.err.println("Failed to create director, using a PlainDirector instead");
+            director = new PlainDirector();
+            e.printStackTrace();
+        }
+        return director;
+    }
 }

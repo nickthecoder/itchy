@@ -69,18 +69,26 @@ public class RGBAPicker extends Window
         createButtonBar();
     }
 
+    private GridLayout rgbGrid;
+    private GridLayout rgbaGrid;
+
     private final void createRGBForm()
     {
         Container rgbForm = new Container();
+        rgbForm.setYAlignment(0.5);
+        rgbForm.setFill(true, false);
+        rgbForm.setXSpacing(10);
+        rgbForm.setYSpacing(4);
+
         this.color = null;
         try {
             this.color = RGBA.parse(this.target.getText());
         } catch (Exception e) {
         }
-        if ( this.color == null) {
+        if (this.color == null) {
             this.color = RGBA.WHITE;
         }
-        
+
         this.red = new IntegerBox(this.color.r, 3).range(0, 255);
         this.green = new IntegerBox(this.color.g, 3).range(0, 255);
         this.blue = new IntegerBox(this.color.b, 3).range(0, 255);
@@ -89,11 +97,15 @@ public class RGBAPicker extends Window
         this.greenSlider = new Slider(this.color.g).range(0, 255).link(this.green);
         this.blueSlider = new Slider(this.color.b).range(0, 255).link(this.blue);
 
-        GridLayout rgbLayout = new GridLayout(rgbForm, 3);
-        rgbForm.setLayout(rgbLayout);
-        rgbLayout.addRow("Red", this.redSlider, this.red);
-        rgbLayout.addRow("Green", this.greenSlider, this.green);
-        rgbLayout.addRow("Blue", this.blueSlider, this.blue);
+        this.redSlider.setExpansion(1);
+        this.greenSlider.setExpansion(1);
+        this.blueSlider.setExpansion(1);
+
+        this.rgbGrid = new GridLayout(rgbForm, 3);
+        rgbForm.setLayout(this.rgbGrid);
+        this.rgbGrid.addRow("Red", this.redSlider, this.red);
+        this.rgbGrid.addRow("Green", this.greenSlider, this.green);
+        this.rgbGrid.addRow("Blue", this.blueSlider, this.blue);
 
         this.red.addChangeListener(this.rgbChange);
         this.green.addChangeListener(this.rgbChange);
@@ -105,14 +117,21 @@ public class RGBAPicker extends Window
     private void createLowerForm()
     {
         Container rgbaForm = new Container();
-        GridLayout rgbaLayout = new GridLayout(rgbaForm, 3);
-        rgbaForm.setLayout(rgbaLayout);
+        rgbaForm.setYAlignment(0.5);
+        rgbaForm.setFill(true, false);
+
+        this.rgbaGrid = new GridLayout(rgbaForm, 3);
+        rgbaForm.setLayout(this.rgbaGrid);
+        rgbaForm.setXSpacing(10);
+        rgbaForm.setYSpacing(4);
+        this.rgbaGrid.groupWith(this.rgbGrid);
 
         this.alpha = new IntegerBox(this.color.a, 3);
         this.alpha.addChangeListener(this.rgbChange);
         this.alphaSlider = new Slider(this.color.a).range(0, 255).link(this.alpha);
+        this.alphaSlider.setExpansion(1);
         if (this.includeAlpha) {
-            rgbaLayout.addRow("Alpha", this.alphaSlider, this.alpha);
+            this.rgbaGrid.addRow("Alpha", this.alphaSlider, this.alpha);
         }
 
         this.rgbaText = new TextBox("");
@@ -128,7 +147,7 @@ public class RGBAPicker extends Window
 
         this.swatch = new Swatch(200, 30);
 
-        rgbaLayout.addRow(this.includeAlpha ? "RGBA" : "RGB", this.rgbaText, null);
+        this.rgbaGrid.addRow(this.includeAlpha ? "RGBA" : "RGB", this.rgbaText, null);
 
         this.clientArea.addChild(rgbaForm);
         this.clientArea.addChild(this.swatch);
@@ -203,7 +222,7 @@ public class RGBAPicker extends Window
                     this.color.getRGBCode());
             }
 
-            this.swatch.setSwatchColor(color);
+            this.swatch.setSwatchColor(this.color);
 
         } catch (Exception e) {
             // Do nothing

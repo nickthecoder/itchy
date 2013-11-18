@@ -9,7 +9,7 @@
 <!-- Tag, Scene, SceneResource -->
 <!--GENERATE
 
-CLASS uk.co.nickthecoder.itchy.Behaviour
+CLASS uk.co.nickthecoder.itchy.Role
     X 318
     Y 0
 METHODS
@@ -56,13 +56,13 @@ CLASS uk.co.nickthecoder.drunkinvaders.ShieldFactory
 
 
 
-CLASS uk.co.nickthecoder.itchy.SceneBehaviour
+CLASS uk.co.nickthecoder.itchy.SceneDirector
     X 600
     Y 242
 METHODS
 FIELDS
 
-CLASS uk.co.nickthecoder.itchy.PlainSceneBehaviour
+CLASS uk.co.nickthecoder.itchy.PlainSceneDirector
     X 590
     Y 340
 METHODS
@@ -87,8 +87,14 @@ CLASS uk.co.nickthecoder.drunkinvaders.Menu
 
 
 CLASS uk.co.nickthecoder.itchy.Game
-    X 476
-    Y 639
+    X 430
+    Y 700
+METHODS
+FIELDS
+
+CLASS uk.co.nickthecoder.itchy.Director
+    X 516
+    Y 587
 METHODS
 FIELDS
 
@@ -155,9 +161,27 @@ CLASS uk.co.nickthecoder.drunkinvaders.DrunkInvaders
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!--BEGIN_CONTENT-->
-<div id="Behaviour" class="box" style="left:318px;top:0px;">
-  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/Behaviour.html">Behaviour</a></div>
+<div id="Role" class="box" style="left:318px;top:0px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/Role.html">Role</a></div>
   <div class="content">
   </div>
 </div>
@@ -223,7 +247,6 @@ CLASS uk.co.nickthecoder.drunkinvaders.DrunkInvaders
       <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Ship.html#fire()">fire</a></li>
       <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Ship.html#onAttach()">onAttach</a></li>
       <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Ship.html#onBirth()">onBirth</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Ship.html#onDeath()">onDeath</a></li>
       <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Ship.html#onDetach()">onDetach</a></li>
       <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Ship.html#shot(uk.co.nickthecoder.itchy.Actor)">shot</a></li>
       <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Ship.html#tick()">tick</a></li>
@@ -306,13 +329,13 @@ CLASS uk.co.nickthecoder.drunkinvaders.DrunkInvaders
     </ul>
   </div>
 </div>
-<div id="SceneBehaviour" class="box" style="left:600px;top:242px;">
-  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/SceneBehaviour.html">SceneBehaviour</a></div>
+<div id="SceneDirector" class="box" style="left:600px;top:242px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/SceneDirector.html">SceneDirector</a></div>
   <div class="content">
   </div>
 </div>
-<div id="PlainSceneBehaviour" class="box" style="left:590px;top:340px;">
-  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/PlainSceneBehaviour.html">PlainSceneBehaviour</a></div>
+<div id="PlainSceneDirector" class="box" style="left:590px;top:340px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/PlainSceneDirector.html">PlainSceneDirector</a></div>
   <div class="content">
   </div>
 </div>
@@ -348,8 +371,13 @@ CLASS uk.co.nickthecoder.drunkinvaders.DrunkInvaders
     </ul>
   </div>
 </div>
-<div id="Game" class="box" style="left:476px;top:639px;">
+<div id="Game" class="box" style="left:430px;top:700px;">
   <div class="title"><a href="../api/uk/co/nickthecoder/itchy/Game.html">Game</a></div>
+  <div class="content">
+  </div>
+</div>
+<div id="Director" class="box" style="left:516px;top:587px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/Director.html">Director</a></div>
   <div class="content">
   </div>
 </div>
@@ -360,11 +388,7 @@ CLASS uk.co.nickthecoder.drunkinvaders.DrunkInvaders
       <li class="public final static"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#NEIGHBOURHOOD_SQUARE_SIZE">NEIGHBOURHOOD_SQUARE_SIZE</a></li>
       <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#backgroundStage">backgroundStage</a></li>
       <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#backgroundView">backgroundView</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#fadeStage">fadeStage</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#fadeView">fadeView</a></li>
-      <li class="public static"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#game">game</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#glassStage">glassStage</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#glassView">glassView</a></li>
+      <li class="public static"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#director">director</a></li>
       <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#metronome">metronome</a></li>
       <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#metronomeCountdown">metronomeCountdown</a></li>
       <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#transitioning">transitioning</a></li>
@@ -374,15 +398,15 @@ CLASS uk.co.nickthecoder.drunkinvaders.DrunkInvaders
       <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#addAliens(int)">addAliens</a></li>
       <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#completedLevel(int)">completedLevel</a></li>
       <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#createCollisionStrategy(uk.co.nickthecoder.itchy.Actor)">createCollisionStrategy</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#createStagesAndViews()">createStagesAndViews</a></li>
       <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#debug()">debug</a></li>
       <li class="public static"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#main(java.lang.String[])">main</a></li>
       <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#onActivate()">onActivate</a></li>
       <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#onKeyDown(uk.co.nickthecoder.jame.event.KeyboardEvent)">onKeyDown</a></li>
       <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#onKeyUp(uk.co.nickthecoder.jame.event.KeyboardEvent)">onKeyUp</a></li>
       <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#onMessage(java.lang.String)">onMessage</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#play()">play</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#onStarted()">onStarted</a></li>
       <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#play(int)">play</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#play()">play</a></li>
       <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#startScene(java.lang.String)">startScene</a></li>
       <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#tick()">tick</a></li>
       <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#toggleInfo()">toggleInfo</a></li>
@@ -403,27 +427,28 @@ function drawConnections()
     clear();
     ctx.font = "7pt Verdana";
 
-    connect( "Bullet", "Behaviour", "", extendsEnd );
-    connect( "Bouncy", "Behaviour", "", extendsEnd );
-    connect( "Shield", "Behaviour", "", extendsEnd );
-    connect( "ShieldFactory", "Behaviour", "", extendsEnd );
+    connect( "Bullet", "Role", "", extendsEnd );
+    connect( "Bouncy", "Role", "", extendsEnd );
+    connect( "Shield", "Role", "", extendsEnd );
+    connect( "ShieldFactory", "Role", "", extendsEnd );
     connect( "Ship", "Bouncy", "", extendsEnd );
-    connect( "AlienFactory", "Behaviour", "", extendsEnd );
+    connect( "AlienFactory", "Role", "", extendsEnd );
     connect( "Alien", "Bouncy", "", extendsEnd );
     connect( "Mothership", "Alien", "", extendsEnd );
  
-    connect( "PlainSceneBehaviour", "SceneBehaviour", "", implementsEnd );
-    connect( "About", "PlainSceneBehaviour", "", extendsEnd );
-    connect( "Menu", "PlainSceneBehaviour", "", extendsEnd );
-    connect( "Level", "PlainSceneBehaviour", "", extendsEnd );
-    connect( "Levels", "PlainSceneBehaviour", "", extendsEnd );
+    connect( "PlainSceneDirector", "SceneDirector", "", implementsEnd );
+    connect( "About", "PlainSceneDirector", "", extendsEnd );
+    connect( "Menu", "PlainSceneDirector", "", extendsEnd );
+    connect( "Level", "PlainSceneDirector", "", extendsEnd );
+    connect( "Levels", "PlainSceneDirector", "", extendsEnd );
 
     connect( "Alien", "Shootable", "", implementsEnd );
     connect( "Bullet", "Shootable", "", implementsEnd );
     connect( "Shield", "Shootable", "", implementsEnd );
     connect( "Ship", "Shootable", "", implementsEnd );
 
-    connect( "DrunkInvaders", "Game", "", extendsEnd );
+    connect( "DrunkInvaders", "Director", "", implementsEnd );
+    connect( "Game", "Director", "getDirector" );
 }
 
 $(function() {

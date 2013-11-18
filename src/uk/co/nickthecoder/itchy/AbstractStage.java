@@ -69,7 +69,7 @@ public abstract class AbstractStage implements Stage, Cloneable
     }
 
     /**
-     * Uses the clone methods {@see Cloneable}, to create an identical stage, but without any
+     * Uses the clone method, to create an identical stage, but without any
      * actors.
      */
     @Override

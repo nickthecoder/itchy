@@ -161,7 +161,7 @@ public class Actor implements PropertySubject<Actor>
     /**
      * Sets the heading and the appearance's direction.
      * 
-     * @param degrees
+     * @param radians The new heading in radians
      */
     public void setDirectionRadians( double radians )
     {

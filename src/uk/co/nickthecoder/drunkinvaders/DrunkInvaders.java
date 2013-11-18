@@ -40,15 +40,7 @@ public class DrunkInvaders extends AbstractDirector
 
     public ZOrderStage backgroundStage;
 
-    public ZOrderStage glassStage;
-
-    public ZOrderStage fadeStage;
-
     public StageView backgroundView;
-
-    public StageView glassView;
-
-    public StageView fadeView;
 
     public int metronome;
 
@@ -79,9 +71,7 @@ public class DrunkInvaders extends AbstractDirector
 
         this.mainStage = new ZOrderStage("main");
         this.backgroundStage = new ZOrderStage("background");
-        this.glassStage = new ZOrderStage("glass");
-        this.fadeStage = new ZOrderStage("fade");
-
+        
         this.mainView = new StageView(screenRect, this.mainStage);
         this.mainView.centerOn(320, 240);
         this.mainView.enableMouseListener(this.game);
@@ -89,21 +79,16 @@ public class DrunkInvaders extends AbstractDirector
         this.backgroundView = new StageView(screenRect, this.backgroundStage);
         this.backgroundView.centerOn(320, 240);
 
-        this.glassView = new StageView(screenRect, this.glassStage);
-        this.fadeView = new StageView(screenRect, this.fadeStage);
-
         CompoundView<View> views = this.game.getGameViews();
         views.add(this.backgroundView);
         views.add(this.mainView);
-        views.add(this.glassView);
-        views.add(this.fadeView);
-
+        
         List<Stage> stages = this.game.getStages();
         stages.add(this.backgroundStage);
         stages.add(this.mainStage);
 
-        this.glassStage.locked = true;
-        this.fadeStage.locked = true;
+        // this.glassStage.locked = true;
+        //this.fadeStage.locked = true;
 
     }
 
@@ -170,7 +155,7 @@ public class DrunkInvaders extends AbstractDirector
             Actor actor = new Actor(pose);
             actor.setRole(this.info);
             actor.moveTo(40, 460);
-            this.glassStage.addTop(actor);
+            this.getGame().getGlassStage().addTop(actor);
 
         } else {
             this.info.getActor().kill();

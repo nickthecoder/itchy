@@ -19,7 +19,7 @@ public class GameInfoEditor
 
     public Container createPage()
     {
-        GameInfo gameInfo = this.editor.game.resources.gameInfo;
+        GameInfo gameInfo = this.editor.resources.getGameInfo();
 
         PropertiesForm<GameInfo> form = new PropertiesForm<GameInfo>(gameInfo, gameInfo.getProperties());
         form.autoUpdate = true;

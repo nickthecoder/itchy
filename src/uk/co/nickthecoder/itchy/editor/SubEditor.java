@@ -68,7 +68,7 @@ public abstract class SubEditor<S>
 
     public Resources getResources()
     {
-        return this.editor.game.resources;
+        return this.editor.resources;
     }
 
     public Container createPage()

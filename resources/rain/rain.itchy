@@ -1,5 +1,5 @@
 <resources>
-  <game className="uk.co.nickthecoder.itchy.PlainDirector" height="600" initialScene="menu" title="It's Gonna Rain" width="800"/>
+  <game directorClassName="uk.co.nickthecoder.itchy.PlainDirector" height="600" initialScene="menu" title="It's Gonna Rain" width="800"/>
   <fonts>
     <font name="BlackCasper" filename="fonts/BlackCasper/BlackCasper.ttf"/>
     <font name="Boycott" filename="fonts/Boycott/Boycott.ttf"/>
@@ -16,7 +16,8 @@
     <pose name="droplet3" filename="images/droplet3.png"/>
     <pose name="sheep" filename="images/sheep.png" offsetX="25" offsetY="84"/>
     <pose name="sheepBones" filename="images/sheepBones.png" offsetX="25" offsetY="84"/>
-    <pose name="speed" filename="images/speed.png"/>
+    <pose name="speed" filename="images/speedH.png"/>
+    <pose name="speedV" filename="images/speedV.png"/>
     <pose name="wally1" filename="images/wally1.png" offsetX="88" offsetY="3"/>
     <pose name="wally2" filename="images/wally2.png" offsetX="112" offsetY="41"/>
     <pose name="wally3" filename="images/wally3.png" offsetX="105" offsetY="41"/>
@@ -229,6 +230,9 @@
     </costume>
     <costume name="speed" defaultZOrder="0">
       <pose name="default" pose="speed"/>
+    </costume>
+    <costume name="speedV" defaultZOrder="0" role="uk.co.nickthecoder.itchy.extras.ProgressBar">
+      <pose name="default" pose="speedV"/>
     </costume>
     <costume name="wally" defaultZOrder="0" role="Wally.js">
       <pose name="default" pose="wally3"/>

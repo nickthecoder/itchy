@@ -14,6 +14,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import uk.co.nickthecoder.itchy.animation.Animation;
+import uk.co.nickthecoder.itchy.extras.Companion;
 import uk.co.nickthecoder.itchy.script.ScriptManager;
 import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.itchy.util.NinePatch;
@@ -24,7 +25,6 @@ import uk.co.nickthecoder.jame.Surface;
 
 public class Resources extends Loadable
 {
-
     public static List<String> sortNames( Set<String> set )
     {
         if (set == null) {
@@ -40,9 +40,11 @@ public class Resources extends Loadable
         return new File(directory, directory.getName() + ".itchy");
     }
 
-    private Game game;
-    
-    public final GameInfo gameInfo;
+    public final Game game;
+
+    public final ScriptManager scriptManager;
+
+    private GameInfo gameInfo;
 
     private final HashMap<String, SoundResource> sounds;
 
@@ -71,8 +73,7 @@ public class Resources extends Loadable
     public Resources()
     {
         super();
-
-        this.gameInfo = new GameInfo();
+        this.scriptManager = new ScriptManager(this);
         this.errorLog = new ErrorLog();
 
         this.sounds = new HashMap<String, SoundResource>();
@@ -118,13 +119,25 @@ public class Resources extends Loadable
         }
     }
 
+    public GameInfo getGameInfo()
+    {
+        return this.gameInfo;
+    }
+
+    public void setGameInfo( GameInfo gameInfo )
+    {
+        assert (this.gameInfo == null);
+        this.gameInfo = gameInfo;
+        this.game.init();
+    }
+
     @Override
     public void load() throws Exception
     {
         ResourcesReader loader = new ResourcesReader(this);
         loader.load(getFilename());
 
-        this.game.createDirector(this.gameInfo.directorClassName);
+        this.game.setDirector(this.gameInfo.createDirector(this));
     }
 
     @Override
@@ -504,8 +517,8 @@ public class Resources extends Loadable
      * appropriate bullet costume for a ship :
      * <code>resources.getCompananionCostume( myShipActor.getCostume(), "bullet" )</code>
      * <p>
-     * This can be useful when using {@link Compananion#costume(Costume)}; for example we may create
-     * a bullet like so : <code> 
+     * This can be useful when using {@link Companion#costume(Costume)}; for example we may create a
+     * bullet like so : <code> 
      * <pre>
      * new Projectile()
      *     .costume( Itchy.getGame().resources.getCompanionCostume( getActor().getCostume(), "bullet" )
@@ -539,7 +552,7 @@ public class Resources extends Loadable
         Costume result = this.getCostume(costumeName);
         return result;
     }
-    
+
     public Surface getThumbnail( Costume costume )
     {
         CostumeResource resource = this.getCostumeResource(costume);
@@ -765,21 +778,20 @@ public class Resources extends Loadable
         return this.gameClassNames;
     }
 
-    public boolean isValidScript( ClassName className )
-    {
-        return isValidScript(className.name);
-    }
-
     public boolean isValidScript( String path )
     {
-        if (!ScriptManager.isScript(path)) {
+        return isValidScript(new ClassName(path));
+    }
+
+    public boolean isValidScript( ClassName className )
+    {
+        if (!ScriptManager.isScript(className)) {
             return false;
         }
 
-        File file = new File(resolveFilename("scripts" + File.separator + path));
+        File file = new File(resolveFilename("scripts" + File.separator + className.name));
         return (file.exists());
     }
-
 
     public Game getGame()
     {

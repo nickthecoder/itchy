@@ -182,7 +182,7 @@ public abstract class Companion<T extends Companion<T>> extends AbstractRole
 
     /**
      * Offsets the companion relative to its source. The source's heading is not used. Can be used
-     * in conjunction with {@link #offsetForwards(double) and {@link #offsetSidewards(double)}
+     * in conjunction with {@link #offsetForwards(double)} and {@link #offsetSidewards(double)}
      * 
      * @param x
      *        The amount to offset left/right
@@ -198,7 +198,7 @@ public abstract class Companion<T extends Companion<T>> extends AbstractRole
     }
 
     /**
-     * @param value
+     * @param forwards
      *        How far forwards/backwards to move from the source actor. Can be used in conjunction
      *        with {@link #offset(double, double)} and {@link #offsetSidewards(double)}.
      * @return this
@@ -210,7 +210,7 @@ public abstract class Companion<T extends Companion<T>> extends AbstractRole
     }
 
     /**
-     * @param value
+     * @param sidewards
      *        How far sidewards to move from the source actor. Can be used in conjunction with
      *        {@link #offset(double, double)} and {@link #offsetForwards(double)}.
      * @return this
@@ -226,7 +226,7 @@ public abstract class Companion<T extends Companion<T>> extends AbstractRole
      * 
      * @param degrees
      *        The angle in derees.
-     * @return
+     * @return this
      */
     public T direction( double degrees )
     {
@@ -241,7 +241,7 @@ public abstract class Companion<T extends Companion<T>> extends AbstractRole
      * 
      * @param degrees
      *        The actor's heading in degrees
-     * @return
+     * @return this
      */
     public T heading( double degrees )
     {
@@ -265,7 +265,7 @@ public abstract class Companion<T extends Companion<T>> extends AbstractRole
 
 /**
      * The Actor's image will be rotated to point in the same direction as the source actor, or
-     * it can be overridden by {@link #direction(double)
+     * it can be overridden by {@link #direction(double)}
      * 
      * @return this
      */
@@ -295,7 +295,7 @@ public abstract class Companion<T extends Companion<T>> extends AbstractRole
      * ABOVE the source actor.
      * 
      * @param delta
-     * @return
+     * @return this
      */
     public T adjustZOrder( int delta )
     {

@@ -233,7 +233,7 @@ public class CostumesEditor extends SubEditor<CostumeResource>
 
         propertiesPage.setLayout(new VerticalLayout());
 
-        this.propertiesClassName = new ClassNameBox(this.editor.game.getScriptManager(),
+        this.propertiesClassName = new ClassNameBox(this.editor.getScriptManager(),
             costume.getPropertiesClassName(), CostumeProperties.class);
 
         this.propertiesClassName.addChangeListener(new ComponentChangeListener() {
@@ -252,9 +252,7 @@ public class CostumesEditor extends SubEditor<CostumeResource>
                 if (CostumesEditor.this.editor.resources
                     .registerSceneDirectorClassName(className.name)) {
 
-                    costume.setPropertiesClassName(
-                        CostumesEditor.this.editor.game.getScriptManager(),
-                        className);
+                    costume.setPropertiesClassName(CostumesEditor.this.editor.getScriptManager(), className);
 
                     createPropertiesGrid();
                     CostumesEditor.this.propertiesClassName.removeStyle("error");
@@ -278,7 +276,7 @@ public class CostumesEditor extends SubEditor<CostumeResource>
         if (!this.currentResource.getCostume().getPropertiesClassName().name.equals(
             this.propertiesClassName.getClassName().name)) {
 
-            properties = CostumeProperties.createProperties(this.editor.game.getScriptManager(),
+            properties = CostumeProperties.createProperties(this.editor.getScriptManager(),
                 this.propertiesClassName.getClassName());
         }
 

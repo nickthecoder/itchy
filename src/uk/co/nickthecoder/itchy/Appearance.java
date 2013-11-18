@@ -288,7 +288,8 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
                     Surface old = newSurface;
                     newSurface = new Surface( rect.width, rect.height, true);
                     old.blit(rect,newSurface,0,0, BlendMode.COMPOSITE);
-                    // TODO change offset.
+                    offsetY -= rect.y;
+                    offsetX -= rect.x;
                 }
             }
             

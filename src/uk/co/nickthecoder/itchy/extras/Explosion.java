@@ -8,8 +8,8 @@ package uk.co.nickthecoder.itchy.extras;
 import java.util.Random;
 
 import uk.co.nickthecoder.itchy.Actor;
-import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.Itchy;
+import uk.co.nickthecoder.itchy.Role;
 
 /**
  * Creates many particles from a central point, spreading outwards. This is typically used when an
@@ -73,7 +73,7 @@ public class Explosion extends Companion<Explosion>
     public double randomVy = 0;
 
     public double distance = 0;
-    
+
     public double randomDistance = 0;
 
     public double speedForwards = 0;
@@ -116,6 +116,7 @@ public class Explosion extends Companion<Explosion>
 
     /**
      * The equivalent of : <code>new Explosion(role.getActor())</code>
+     * 
      * @param role
      */
     public Explosion( Role role )
@@ -136,19 +137,10 @@ public class Explosion extends Companion<Explosion>
     }
 
     /**
-     * Creates the explosion actor using a pose from the costume of the actor given in the
-     * constructor. This allows the exploding projectiles to look different from the actor that
-     * created the explosion.
+     * Creates the explosion actor.
      * 
-     * Note that if the costume has multiple poses with the same pose name, then a random one is
-     * chosen for each projectile. This is very handy if you want to mimic an object breaking apart
-     * into pieces. You can either draw each fragment yourself, or use {@link Fragment} to cut your
-     * image into pieces automatically.
-     * 
-     * @param poseName
-     *        The name of the pose with the actor's costume.
-     * @return A new actor, which has an Explosion Role, has been added to the same layer as
-     *         the actor in the constructor, but has not been activated yet.
+     * @return A new actor, which has an Explosion Role, has been added to the same layer as the
+     *         actor in the constructor, but has not been activated yet.
      */
     @Override
     public Actor createActor()
@@ -361,8 +353,10 @@ public class Explosion extends Companion<Explosion>
      * carry on the exploding actor's momentum, and use speed to define how fast the projectiles
      * move away from the centre of the explosion.
      * 
-     * @param value
+     * @param forwards
      *        The speed away from the centre of the explosion in pixels per frame.
+     * @param sidewards
+     *        The speed sidewards from the centre of the explosion in pixels per frame.
      * @return this
      */
     public Explosion speed( double forwards, double sidewards )
@@ -371,16 +365,11 @@ public class Explosion extends Companion<Explosion>
     }
 
     /**
-     * Randomly choose a speed within a given range. See {@link #speed(double)} for more details.
+     * Randomly choose a speed within a given range. See {@link #speed(double,double)} for more details.
      * 
-     * @param from
-     *        The minimum speed
-     * @param to
-     *        The maximum speed
      * @return this
      */
-    public Explosion speed( double minForwards, double maxForwards, double minSidewards,
-        double maxSidewards )
+    public Explosion speed( double minForwards, double maxForwards, double minSidewards, double maxSidewards )
     {
         this.speedForwards = minForwards;
         this.randomSpeedForwards = maxForwards - minForwards;
@@ -586,7 +575,7 @@ public class Explosion extends Companion<Explosion>
 
                 projectile.vx += (cos * actualSpeedForwards) - (sin * actualSpeedSidewards);
                 projectile.vy += (sin * actualSpeedForwards) + (cos * actualSpeedSidewards);
-                
+
             }
 
             Actor actor = projectile.createActor();

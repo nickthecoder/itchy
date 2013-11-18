@@ -2,12 +2,13 @@ ${NAME} = Class({
     Extends: SceneDirectorScript,
     
     init: function() {
-        // TODO Perform simple initialisation here.
+        // TODO Perform SIMPLE initialisation here (don't call any methods).
         // At this stage, none of the Actors exist, and the scene's properties haven't been set.
+    	// If you want to do stuff when the scene begins use onActivate.
     },
     
     onActivate: function() {
-        // TODO Called when the scene is about to start. There is also a onDeactivate method.
+        // TODO Called when the scene is about to start. There is also an onDeactivate method.
         // The Actors now exist, and the scene's properties have been set.
         // Use this for more complex initialisation.
     },

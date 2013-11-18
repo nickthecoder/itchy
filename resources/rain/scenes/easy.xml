@@ -53,10 +53,10 @@
     <actor costume="player" x="424" y="14" direction="0.0" heading="0.0" startEvent="default" zOrder="16"/>
     <actor costume="wally" x="-112" y="263" direction="0.0" heading="0.0" startEvent="default" zOrder="17" scale="1.2092457420924574" activationDelay="15.0"/>
     <text text="High Score" font="Boycott" size="35" color="#8f9688" xAlignment="0.5" yAlignment="0.5" x="704" y="570" direction="0.0" heading="0.0" startEvent="default" zOrder="18"/>
-    <actor costume="speed" role="uk.co.nickthecoder.itchy.extras.ProgressBar" x="74" y="507" direction="0.0" heading="0.0" startEvent="default" zOrder="20">
+    <actor costume="speedV" x="21" y="367" direction="0.0" heading="0.0" startEvent="default" zOrder="21">
       <property name="to" value="15.0"/>
       <property name="updatePeriod" value="1.0"/>
-      <property name="horizontal" value="true"/>
+      <property name="horizontal" value="false"/>
       <property name="from" value="0.0"/>
       <property name="access" value="sceneDirector.sceneDirectorScript.speed"/>
     </actor>

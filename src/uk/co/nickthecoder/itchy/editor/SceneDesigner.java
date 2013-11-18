@@ -156,7 +156,7 @@ public class SceneDesigner implements MouseListener, KeyListener
     public SceneDesigner( Editor editor, SceneResource sceneResource )
     {
         this.editor = editor;
-        this.sceneRect = new Rect(0, 0, editor.game.getWidth(), editor.game.getHeight());
+        this.sceneRect = new Rect(0, 0, editor.getGame().getWidth(), editor.getGame().getHeight());
         this.sceneResource = sceneResource;
         try {
             this.scene = this.sceneResource.getScene();
@@ -183,7 +183,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.editor.getViews().add(this.designViews);
 
         System.out.println("Creating Stages for Scene Designer");
-        for (Stage stage : this.editor.game.getStages()) {
+        for (Stage stage : this.editor.getGame().getStages()) {
             System.out.println( stage + " locked ? " + stage.isLocked() );
             if (!stage.isLocked()) {
                 Stage designStage = stage.createDesignStage();
@@ -537,7 +537,7 @@ public class SceneDesigner implements MouseListener, KeyListener
             {
                 ClassNameBox box = SceneDesigner.this.sceneDirectorName;
                 String value = box.getClassName().name;
-                boolean ok = SceneDesigner.this.editor.game.resources.registerSceneDirectorClassName(value);
+                boolean ok = SceneDesigner.this.editor.resources.registerSceneDirectorClassName(value);
                 // TODO isn't the error style done by ClassNameBox?
                 box.addStyle("error", !ok);
                 if (ok) {
@@ -594,7 +594,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         SceneDesignerRole sdb = (SceneDesignerRole) this.currentActor.getRole();
 
         this.roleClassName = new ClassNameBox(
-            this.editor.game.getScriptManager(),
+            this.editor.getScriptManager(),
             ClassName.getClassName(sdb.actualRole),
             Role.class
             );
@@ -609,7 +609,7 @@ public class SceneDesigner implements MouseListener, KeyListener
                 try {
                     sdb.setRoleClassName(SceneDesigner.this.editor.resources, className);
                     SceneDesigner.this.createRoleProperties();
-                    SceneDesigner.this.editor.game.resources.registerRoleClassName(className.name);
+                    SceneDesigner.this.editor.resources.registerRoleClassName(className.name);
                     SceneDesigner.this.roleClassName.removeStyle("error");
 
                 } catch (Exception e) {
@@ -1467,7 +1467,10 @@ public class SceneDesigner implements MouseListener, KeyListener
     {
         try {
 
-            Game game = this.editor.game.resources.getGame();
+            Game game = new Game(this.editor.resources);
+            game.init();
+            game.setDirector( this.editor.resources.getGameInfo().createDirector(this.editor.resources));
+            
             game.testScene(this.sceneResource.name);
 
         } catch (Exception e) {

@@ -26,9 +26,9 @@ public class ProgressBar extends AbstractRole
     @Property(label = "Update Period")
     public double updatePeriod = 0.0;
 
-    @Property(label="Horizontal")
+    @Property(label = "Horizontal")
     public boolean horizontal = true;
-    
+
     private Timer timer;
 
     private BeanHelper beanHelper;
@@ -71,10 +71,11 @@ public class ProgressBar extends AbstractRole
         double ratio = (value - this.from) / (this.to - this.from);
 
         Rect rect;
-        if ( horizontal ) {
-            rect = new Rect(0,0, (int) (ratio * surface.getWidth()), surface.getHeight());
+        if (this.horizontal) {
+            rect = new Rect(0, 0, (int) (ratio * surface.getWidth()), surface.getHeight());
         } else {
-            rect = new Rect(0,0, surface.getWidth(), (int) (ratio * surface.getHeight()));
+            int amount = (int) (ratio * surface.getHeight());
+            rect = new Rect(0, surface.getHeight() - amount, surface.getWidth(), amount);
         }
 
         getActor().getAppearance().setClip(rect);

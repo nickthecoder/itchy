@@ -101,7 +101,9 @@ public class ResourcesReader
 
     private void readGame( XMLTag gameTag ) throws Exception
     {
-        this.readProperties(gameTag, this.resources.gameInfo);
+        GameInfo gameInfo = new GameInfo();
+        this.readProperties(gameTag, gameInfo);
+        this.resources.setGameInfo(gameInfo);
         Itchy.init(this.resources);
     }
 
