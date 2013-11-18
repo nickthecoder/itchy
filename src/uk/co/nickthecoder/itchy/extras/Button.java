@@ -115,6 +115,12 @@ public abstract class Button extends AbstractRole implements ViewMouseListener
         this.event("mouseUp");
     }
 
+    @Override
+    public boolean isMouseListener()
+    {
+        return true;
+    }
+    
     /**
      * Fires the "click" event. Override this method, to perform your button's action.
      */

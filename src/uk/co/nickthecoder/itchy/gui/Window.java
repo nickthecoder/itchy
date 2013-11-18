@@ -5,6 +5,7 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.gui;
 
+import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseEvent;
 
@@ -29,6 +30,8 @@ public class Window extends RootContainer
         this.setType("window");
         this.setLayout(new VerticalLayout());
         this.setFill(true, true);
+        this.setMaximumWidth(Itchy.getGame().getWidth());
+        this.setMaximumHeight(Itchy.getGame().getHeight());
 
         this.titleBar = new DragableContainer() {
 

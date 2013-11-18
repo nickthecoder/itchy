@@ -32,7 +32,7 @@ public class ImageComponent extends SurfaceComponent
 
     public ImageComponent( Surface surface )
     {
-        this.plainSurface = surface;
+        this.plainSurface = (surface == null) ? getDummySurface() : surface;
     }
 
     @Override
@@ -43,7 +43,7 @@ public class ImageComponent extends SurfaceComponent
 
     public void setImage( Surface surface )
     {
-        this.plainSurface = surface;
+        this.plainSurface = (surface == null) ? getDummySurface() : surface;
         if (this.parent != null) {
             this.parent.forceLayout();
         }

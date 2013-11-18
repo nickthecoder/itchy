@@ -16,7 +16,7 @@ public class GridLayout implements Layout
 
     private final int columnCount;
 
-    private int[] widths;
+    private int[] widthsInc;
 
     private final List<Component[]> rows;
 
@@ -30,7 +30,7 @@ public class GridLayout implements Layout
     {
         container.addStyle("grid");
         this.rows = new ArrayList<Component[]>();
-        this.widths = new int[columns];
+        this.widthsInc = new int[columns];
 
         this.container = container;
         this.columnCount = columns;
@@ -180,44 +180,42 @@ public class GridLayout implements Layout
     @Override
     public void calculateRequirements( Container container )
     {
-        int requiredWidth = 0;
+        int requiredWidthInc = 0;
         int requiredHeight = 0;
 
         for (int i = 0; i < this.columnCount; i++) {
 
-            int maxWidth = 0;
+            int maxWidthInc = 0;
             for (GridLayout grid : this.group) {
                 for (Component[] row : grid.rows) {
 
                     Component component = row[i];
-                    int width = component.getRequiredWidth() + component.getMarginLeft() +
-                        component.getMarginRight();
-                    if (width > maxWidth) {
-                        maxWidth = width;
+                    int widthInc = component.getRequiredWidth() + component.getMarginLeft() + component.getMarginRight();
+                    if (widthInc > maxWidthInc) {
+                        maxWidthInc = widthInc;
                     }
                 }
             }
 
-            this.widths[i] = maxWidth;
-            requiredWidth += maxWidth;
+            this.widthsInc[i] = maxWidthInc;
+            requiredWidthInc += maxWidthInc;
 
         }
-        requiredWidth += container.getXSpacing() * (this.columnCount - 1);
-        requiredWidth += container.getPaddingLeft() + container.getPaddingRight();
+        requiredWidthInc += container.getXSpacing() * (this.columnCount - 1);
+        requiredWidthInc += container.getPaddingLeft() + container.getPaddingRight();
 
-        container.setNaturalWidth(requiredWidth);
+        container.setNaturalWidth(requiredWidthInc);
 
         for (Component[] row : this.rows) {
 
-            int maxHeight = 0;
+            int maxHeightInc = 0;
             for (Component component : row) {
-                int height = component.getRequiredHeight() + component.getMarginTop() +
-                    component.getMarginBottom();
-                if (height > maxHeight) {
-                    maxHeight = height;
+                int heightInc = component.getRequiredHeight() + component.getMarginTop() + component.getMarginBottom();
+                if (heightInc > maxHeightInc) {
+                    maxHeightInc = heightInc;
                 }
             }
-            requiredHeight += maxHeight;
+            requiredHeight += maxHeightInc;
         }
 
         requiredHeight += container.getYSpacing() * (this.rows.size() - 1);
@@ -233,33 +231,35 @@ public class GridLayout implements Layout
         int y = container.getPaddingTop();
 
         for (Component[] row : this.rows) {
-
             int x = container.getPaddingLeft();
 
-            int maxHeight = 0;
-            for (Component component : row) {
-                int height = component.getRequiredHeight() + component.getMarginTop() + component.getMarginBottom();
-                if (height > maxHeight) {
-                    maxHeight = height;
+            int maxHeightInc = 0;
+            for (Component component : row ) {
+                int heightInc = component.getRequiredHeight() + component.getMarginTop() + component.getMarginBottom();
+                if (heightInc > maxHeightInc) {
+                    maxHeightInc = heightInc;
                 }
             }
 
             int i = 0;
             for (Component component : row) {
-                int height = component.getRequiredHeight();
-                int width = container.getFillX() ? this.widths[i] : component.getRequiredWidth();
+                
+                int height = container.getFillY() ?
+                    maxHeightInc - component.getMarginTop() - component.getMarginBottom() :
+                    component.getRequiredHeight();
+                    
+                int width = container.getFillX() ?
+                    this.widthsInc[i] - component.getMarginLeft() - component.getMarginRight() :
+                    component.getRequiredWidth();
 
-                int heightInc = height + component.getMarginTop() + component.getMarginBottom();
-                if (heightInc > maxHeight) {
-                    maxHeight = heightInc;
-                }
-                int centerY = maxHeight - (component.getRequiredHeight() + component.getMarginTop() + component.getMarginBottom());
-                component.setPosition(x + component.getMarginLeft(), y + centerY / 2, width, height);
+                int yDiff = maxHeightInc - (height + component.getMarginTop() + component.getMarginBottom());
+                int extraY = (int) (yDiff * container.getYAlignment());
+                component.setPosition(x + component.getMarginLeft(), y + component.getMarginTop() + extraY, width, height);
 
-                x += component.getMarginLeft() + this.widths[i] + component.getMarginRight() + container.getXSpacing();
+                x += this.widthsInc[i] + container.getXSpacing();
                 i++;
             }
-            y += maxHeight + container.getYSpacing();
+            y += maxHeightInc + container.getYSpacing();
         }
     }
 

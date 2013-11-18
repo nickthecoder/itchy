@@ -1,4 +1,4 @@
-//Package aliases
+// Package aliases
 itchy=Packages.uk.co.nickthecoder.itchy;
 jame=Packages.uk.co.nickthecoder.jame;
 
@@ -8,7 +8,7 @@ Integer = java.lang.Integer;
 RGBA = jame.RGBA;
 Keys = jame.event.Keys;
 
-//Objects
+// Objects
 Itchy=itchy.Itchy;
 game = null;
 director = null;
@@ -19,36 +19,34 @@ sceneDirectorScript = null;
 // Import a new script.
 function import( filename )
 {
-    javascriptLanguage.manager.loadScript( filename );
+    Itchy.getGame().scriptManager.loadScript( filename );
 }
 
 DirectorScript = Class({
-
-    getInitialSceneName: function() { return "start" },
     
-    onStarted: function() { director.defaultOnStarted(); },
+    onStarted: function() { director.superOnStarted(); },
     
-    onActivate: function() {},
+    onActivate: function() { director.superOnActivate(); },
     
-    onDeactivate: function() {},
+    onDeactivate: function() { director.superOnDeactivate(); },
             
-    onQuit: function() { return false; },
+    onQuit: function() { return director.super.onQuit(); },
     
-    onKeyDown: function( keyEvent ) { return false; },
+    onKeyDown: function( event ) { return director.superOnKeyDown(event); },
     
-    onKeyUp: function( keyEvent ) { return false; },
+    onKeyUp: function( event ) { return director.superOnKeyUp(event); },
     
-    onMouseDown: function( mouseEvent ) { return false; },
+    onMouseDown: function( event ) { return director.superOnMouseDown(event); },
     
-    onMouseUp: function( mouseEvent ) { return false; },
+    onMouseUp: function( event ) { return director.superOnMouseUp(event); },
     
-    onMouseMove: function( mouseEvent ) { return false; },
+    onMouseMove: function( event ) { return director.superOnMouseMove(event); },
     
-    onMessage: function( message ) {},
+    onMessage: function( message ) { director.superOnMessage(message) },
     
-    tick: function() {},
+    tick: function() { director.superTick(); },
     
-    startScene: function( sceneName ) { return director.defaultStartScene( sceneName ); }
+    startScene: function( sceneName ) { return director.superStartScene( sceneName ); }
     
     
 });
@@ -65,23 +63,22 @@ RoleScript = Class({
         },
     },
     
-    onBirth : function() {},
+    onBirth : function() { this.role.superOnBirth(); },
 
-    onDeath : function() {},
+    onDeath : function() { this.role.superOnDeath(); },
 
-    tick : function() {},
+    tick : function() { this.role.superTick(); },
         
-    onMouseDown: function( view, mouseEvent ) { return false; },
+    onMouseDown: function( view, event ) { return false; },
     
-    onMouseUp: function( view, mouseEvent ) { return false; },
+    onMouseUp: function( view, event ) { return false; },
     
-    onMouseMove: function( view, mouseEvent ) { return false; },
-    
-    isMouseListener: function() {
-        return
-            (this.onMouseDown != RoleScript.prototype.onMouseDown) ||
-            (this.onMouseUp != RoleScript.prototype.onMouseUp) ||
-            (this.onMouseMove != RoleScript.prototype.onMouseMove)
+    onMouseMove: function( view, event ) { return false; },
+
+    isMouseListener: function() {        
+        return (this.onMouseDown != RoleScript.prototype.onMouseDown) ||
+               (this.onMouseUp != RoleScript.prototype.onMouseUp) ||
+               (this.onMouseMove != RoleScript.prototype.onMouseMove);
     },
     
     getCostumeProperties: function() {

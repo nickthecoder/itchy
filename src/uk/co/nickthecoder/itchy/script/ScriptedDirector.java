@@ -43,7 +43,7 @@ public class ScriptedDirector extends AbstractDirector implements ScriptedObject
      * The game write can choose to call super to get the default views and stages.
      * Or they can not call super, and create there own stages and views.
      */
-    public void defaultOnStarted()
+    public void superOnStarted()
     {
         super.onStarted();
     }
@@ -54,36 +54,59 @@ public class ScriptedDirector extends AbstractDirector implements ScriptedObject
         this.language.onStarted(this);
     }
 
+    public void superOnActivate()
+    {
+        super.onActivate();
+    }
+    
     @Override
     public void onActivate()
     {
-        super.onActivate();
         this.language.onActivate(this);
     }
 
+    public void superOnDeactivate()
+    {
+        super.onActivate();
+    }
+    
     @Override
     public void onDeactivate()
     {
         this.language.onDeactivate(this);
-        super.onDeactivate();
     }
 
+    public void superOnQuit()
+    {
+        super.onQuit();
+    }
+    
     @Override
     public boolean onQuit()
     {
         return this.language.onQuit(this);
     }
 
-    @Override
-    public boolean onKeyDown( KeyboardEvent ke )
+    public boolean superOnKeyDown( KeyboardEvent event )
     {
-        if (this.language.onKeyDown(this, ke)) {
+        return super.onKeyDown(event);
+    }
+    
+    @Override
+    public boolean onKeyDown( KeyboardEvent event )
+    {
+        if (this.language.onKeyDown(this, event)) {
             return true;
         } else {
-            return super.onKeyDown(ke);
+            return super.onKeyDown(event);
         }
     }
 
+    public boolean superOnKeyUp( KeyboardEvent event )
+    {
+        return super.onKeyUp(event);
+    }
+    
     @Override
     public boolean onKeyUp( KeyboardEvent ke )
     {
@@ -94,6 +117,11 @@ public class ScriptedDirector extends AbstractDirector implements ScriptedObject
         }
     }
 
+    public boolean superOnMouseDown( MouseButtonEvent event )
+    {
+        return super.onMouseDown(event);
+    }
+    
     @Override
     public boolean onMouseDown( MouseButtonEvent event )
     {
@@ -104,24 +132,31 @@ public class ScriptedDirector extends AbstractDirector implements ScriptedObject
         }
     }
 
+    public boolean superOnMouseUp( MouseButtonEvent event )
+    {
+        return super.onMouseUp(event);
+    }
+    
     @Override
     public boolean onMouseUp( MouseButtonEvent event )
     {
-        if (this.language.onMouseUp(this, event)) {
-            return true;
-        } else {
-            return super.onMouseUp(event);
-        }
+        return this.language.onMouseUp(this, event);
     }
 
+    public boolean superOnMouseMove( MouseMotionEvent event )
+    {
+        return super.onMouseMove(event);
+    }
+    
     @Override
     public boolean onMouseMove( MouseMotionEvent event )
     {
-        if (this.language.onMouseMove(this, event)) {
-            return true;
-        } else {
-            return super.onMouseMove(event);
-        }
+        return this.language.onMouseMove(this, event);
+    }
+    
+    public void superOnMessage( String message )
+    {
+        super.onMessage(message);
     }
 
     @Override
@@ -129,16 +164,20 @@ public class ScriptedDirector extends AbstractDirector implements ScriptedObject
     {
         this.language.onMessage(this, message);
     }
-
+    
+    public void superTick()
+    {
+        super.tick();
+    }
+    
     @Override
     public void tick()
     {
-        super.tick();
         this.language.tick(this);
     }
 
 
-    public boolean defaultStartScene( String sceneName )
+    public boolean superStartScene( String sceneName )
     {
         return super.startScene(sceneName);
     }

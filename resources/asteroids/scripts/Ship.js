@@ -94,7 +94,7 @@ Ship = Class({
         directorScript.lives -= 1;
 
         this.lifeIcon[directorScript.lives].event("disappear");
-        this.actor.deathEvent("explode"); // Note, this animation must send an "exploded" message at the end.
+        this.actor.deathEvent("explode", "exploded");
     },
     
     onMessage: function( message ) {

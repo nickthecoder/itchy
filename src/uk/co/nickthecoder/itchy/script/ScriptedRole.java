@@ -30,13 +30,16 @@ public class ScriptedRole extends AbstractRole implements ViewMouseListener
     public final Object roleScript;
 
     public final ScriptProperties propertyValues;
-
+    
+    public final boolean isMouseListener;
+    
     public ScriptedRole( ClassName className, ScriptLanguage language, Object scriptInstance )
     {
         this.className = className;
         this.language = language;
         this.roleScript = scriptInstance;
         this.propertyValues = new ScriptProperties(this.language, scriptInstance);
+        this.isMouseListener = this.language.isMouseListener(this);
     }
 
     @Override
@@ -84,10 +87,20 @@ public class ScriptedRole extends AbstractRole implements ViewMouseListener
         return this.className;
     }
 
+    public void superOnMessage( String message )
+    {
+        super.onMessage(message);
+    }
+    
     @Override
     public void onMessage( String message )
     {
         this.language.onMessage(this, message);
+    }
+    
+    public void superOnBirth()
+    {
+        super.onBirth();
     }
 
     @Override
@@ -96,24 +109,34 @@ public class ScriptedRole extends AbstractRole implements ViewMouseListener
         this.language.onBirth(this);
     }
 
+    public void superOnDeath()
+    {
+        super.onDeath();
+    }
+
     @Override
     public void onDeath()
     {
         this.language.onDeath(this);
     }
 
+    public void superTick()
+    {
+        super.tick();
+    }
+    
     @Override
     public void tick()
     {
         this.language.tick(this);
     }
-
+    
     @Override
     public boolean onMouseDown( MouseListenerView view, MouseButtonEvent event )
     {
         return this.language.onMouseDown(this, view, event);
     }
-
+    
     @Override
     public boolean onMouseUp( MouseListenerView view, MouseButtonEvent event )
     {
@@ -125,5 +148,9 @@ public class ScriptedRole extends AbstractRole implements ViewMouseListener
     {
         return this.language.onMouseMove(this, view, event);
     }
-
+    
+    public boolean isMouseListener()
+    {
+        return this.isMouseListener;
+    }
 }

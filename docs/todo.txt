@@ -1,7 +1,7 @@
     
 TODO
 ====
-
+    
 Follow up on the TODOs
 
 Create some tests for Views in the tests game.
@@ -14,10 +14,6 @@ Create some tests for Views in the tests game.
 I've exposed a generic Game.getGameViews (returns CompoundView<View>).
 Should Game have addStage, rather than letting the list be added to directly?
 
-Which scripted methods should call Super, which calls a defaultOnXXX, instead of super always being called from the ScriptedXXX methods.
-    This would let the game writer take full control if they want.
-    
-
 PACKAGE !!!
 
 Test on windows.
@@ -26,9 +22,6 @@ Send to Asul
 
 
 
-
-
-Actor.startEvent isn't elegant - its only used by the editor, so should be on design actor and designactorbehaviour?
 
 
 BUG: Rename a scene from scene designer does not rename

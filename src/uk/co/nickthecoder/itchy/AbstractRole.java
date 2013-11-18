@@ -255,7 +255,9 @@ public abstract class AbstractRole implements Role
         }
     }
 
-    public abstract void tick();
+    public void tick()
+    {
+    }
 
     @Override
     public Role clone()

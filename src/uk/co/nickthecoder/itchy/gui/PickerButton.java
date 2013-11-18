@@ -15,15 +15,15 @@ import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 
 public class PickerButton<T> extends Button
 {
-    private final HashMap<String, T> hashMap;
+    protected final HashMap<String, T> hashMap;
 
-    private final Label label;
+    protected final Label label;
 
-    private T value;
+    protected T value;
 
-    private final String title;
+    protected final String title;
     
-    private final List<ComponentChangeListener> changeListeners;
+    protected final List<ComponentChangeListener> changeListeners;
 
 
     public PickerButton( String title, T current, HashMap<String, T> hashMap )
@@ -73,7 +73,6 @@ public class PickerButton<T> extends Button
                 PickerButton.this.label.setText(label);
                 PickerButton.this.value = object;
                 fireChangeEvent();
-                PickerButton.super.onClick(e);
             }
         };
         picker.show();

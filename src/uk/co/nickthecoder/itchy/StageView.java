@@ -162,7 +162,10 @@ public class StageView extends AbstractScrollableView implements StageListener, 
     {
         Role role = actor.getRole();
         if (role instanceof ViewMouseListener) {
-            this.roleMouseListeners.add((ViewMouseListener) role);
+            ViewMouseListener listener = ((ViewMouseListener) role);
+            if (listener.isMouseListener()) {
+                this.roleMouseListeners.add(listener);
+            }
         }
     }
 
@@ -171,7 +174,10 @@ public class StageView extends AbstractScrollableView implements StageListener, 
     {
         Role role = actor.getRole();
         if ((this.roleMouseListeners != null) && (role instanceof ViewMouseListener)) {
-            this.roleMouseListeners.remove(role);
+            ViewMouseListener listener = ((ViewMouseListener) role);
+            if (listener.isMouseListener()) {
+                this.roleMouseListeners.remove(role);
+            }
         }
     }
 

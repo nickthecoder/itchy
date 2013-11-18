@@ -91,6 +91,9 @@ public class Container extends Component
 
     public void clear()
     {
+        for (Component child: this.children){
+            child.parent = null;
+        }
         this.children.clear();
         this.invalidate();
         this.forceLayout();

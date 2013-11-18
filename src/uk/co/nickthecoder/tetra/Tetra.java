@@ -15,9 +15,9 @@ import java.util.Random;
 
 import uk.co.nickthecoder.itchy.AbstractDirector;
 import uk.co.nickthecoder.itchy.Actor;
+import uk.co.nickthecoder.itchy.Actor.AnimationEvent;
 import uk.co.nickthecoder.itchy.Launcher;
 import uk.co.nickthecoder.itchy.PlainRole;
-import uk.co.nickthecoder.itchy.animation.Animation;
 import uk.co.nickthecoder.itchy.extras.Explosion;
 import uk.co.nickthecoder.itchy.extras.Fragment;
 import uk.co.nickthecoder.itchy.extras.Timer;
@@ -363,17 +363,7 @@ public class Tetra extends AbstractDirector
 
     private void moveDown( Actor actor, int lines )
     {
-        // If its still moving down from a previous explosion, then finish that one before starting
-        // a new one.
-        // TODO, could use the new combine animation thingy
-        Animation oldAnimation = actor.getAnimation();
-        if (oldAnimation != null) {
-            while (!oldAnimation.isFinished()) {
-                oldAnimation.tick(actor);
-            }
-        }
-
-        actor.event("moveDown" + lines);
+        actor.event("moveDown" + lines, AnimationEvent.SEQUENCE);
     }
 
     private void gameOver()

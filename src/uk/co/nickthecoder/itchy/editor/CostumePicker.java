@@ -47,7 +47,7 @@ public abstract class CostumePicker extends Window
 
     private void createCostumes( Container container )
     {
-        GridLayout gridLayout = new GridLayout(container, 5);
+        GridLayout gridLayout = new GridLayout(container, 6);
         container.addStyle("pickGrid");
         container.setLayout(gridLayout);
 

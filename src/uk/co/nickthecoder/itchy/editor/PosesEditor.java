@@ -10,12 +10,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import uk.co.nickthecoder.itchy.Costume;
 import uk.co.nickthecoder.itchy.CostumeResource;
 import uk.co.nickthecoder.itchy.ImagePose;
 import uk.co.nickthecoder.itchy.PoseResource;
-import uk.co.nickthecoder.itchy.gui.ActionListener;
+import uk.co.nickthecoder.itchy.Thumbnailed;
 import uk.co.nickthecoder.itchy.gui.ClickableContainer;
 import uk.co.nickthecoder.itchy.gui.Component;
+import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.Container;
 import uk.co.nickthecoder.itchy.gui.FileOpenDialog;
 import uk.co.nickthecoder.itchy.gui.GridLayout;
@@ -31,6 +33,7 @@ import uk.co.nickthecoder.itchy.gui.TableModel;
 import uk.co.nickthecoder.itchy.gui.TableModelColumn;
 import uk.co.nickthecoder.itchy.gui.TableModelRow;
 import uk.co.nickthecoder.itchy.gui.TextBox;
+import uk.co.nickthecoder.itchy.gui.ThumbnailedPickerButton;
 import uk.co.nickthecoder.itchy.gui.VerticalScroll;
 import uk.co.nickthecoder.itchy.util.AbstractProperty;
 import uk.co.nickthecoder.itchy.util.Util;
@@ -47,34 +50,6 @@ public class PosesEditor extends SubEditor<PoseResource>
         super(editor);
     }
 
-    interface Filter
-    {
-        boolean accept( PoseResource pr );
-    }
-
-    class CostumeFilter implements Filter
-    {
-        CostumeResource costumeResource;
-
-        CostumeFilter( CostumeResource costumeResource )
-        {
-            this.costumeResource = costumeResource;
-        }
-
-        @Override
-        public boolean accept( PoseResource pr )
-        {
-            for (String eventName : this.costumeResource.getCostume().getPoseNames()) {
-                for (PoseResource other : this.costumeResource.getCostume().getPoseChoices(eventName)) {
-                    if (pr == other) {
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
-    }
-
     @Override
     public void addHeader( Container page )
     {
@@ -85,12 +60,24 @@ public class PosesEditor extends SubEditor<PoseResource>
             {
                 return true;
             }
+
+            @Override
+            public Surface getThumbnail()
+            {
+                return null;
+            }
         };
         Filter shared = new Filter() {
             @Override
             public boolean accept( PoseResource pr )
             {
                 return pr.shared;
+            }
+
+            @Override
+            public Surface getThumbnail()
+            {
+                return null;
             }
         };
         filterMap.put(" * All * ", all);
@@ -101,10 +88,10 @@ public class PosesEditor extends SubEditor<PoseResource>
             filterMap.put(cr.getName(), filter);
         }
 
-        this.filterPickerButton = new PickerButton<Filter>("Filter", all, filterMap);
-        this.filterPickerButton.addActionListener(new ActionListener() {
+        this.filterPickerButton = new ThumbnailedPickerButton<Filter>("Filter", all, filterMap);
+        this.filterPickerButton.addChangeListener(new ComponentChangeListener() {
             @Override
-            public void action()
+            public void changed()
             {
                 rebuildTable();
             }
@@ -143,6 +130,7 @@ public class PosesEditor extends SubEditor<PoseResource>
         return table;
     }
 
+    @Override
     protected SimpleTableModel createTableModel()
     {
         SimpleTableModel model = new SimpleTableModel();
@@ -264,6 +252,45 @@ public class PosesEditor extends SubEditor<PoseResource>
     protected List<AbstractProperty<PoseResource, ?>> getProperties()
     {
         return PoseResource.properties;
+    }
+
+    interface Filter extends Thumbnailed
+    {
+        boolean accept( PoseResource pr );
+
+    }
+
+    class CostumeFilter implements Filter
+    {
+        CostumeResource costumeResource;
+
+        CostumeFilter( CostumeResource costumeResource )
+        {
+            this.costumeResource = costumeResource;
+        }
+
+        @Override
+        public boolean accept( PoseResource poseResource )
+        {
+            Costume costume = this.costumeResource.getCostume();
+            while (costume != null) {
+                for (String eventName : costume.getPoseNames()) {
+                    for (PoseResource other : costume.getPoseChoices(eventName)) {
+                        if (poseResource == other) {
+                            return true;
+                        }
+                    }
+                }
+                costume = costume.getExtendedFrom();
+            }
+            return false;
+        }
+
+        @Override
+        public Surface getThumbnail()
+        {
+            return this.costumeResource.getThumbnail();
+        }
     }
 
 }

@@ -35,11 +35,11 @@ public class GameMenu implements Page
     {
         Container result = new Container();
         result.setLayout(new VerticalLayout());
-        result.setFill(true, true);
+        result.setFill(false, true);
         result.setXAlignment(0.5);
 
         Container main = new Container();
-        main.setFill(true, true);
+        main.setFill(false, true);
         result.addChild(main);
         main.setExpansion(1);
         main.setYAlignment(0.25);

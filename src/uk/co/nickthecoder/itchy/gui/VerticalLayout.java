@@ -58,16 +58,14 @@ public class VerticalLayout implements Layout
     {
         int y = container.getPaddingTop();
 
-        int spacing = container.getYSpacing();
-
         int extraHeight = container.getHeight() - container.getNaturalHeight();
 
         if (!container.getFillY()) {
             y += extraHeight * container.getYAlignment();
             extraHeight = 0;
         }
-        int xSpace = container.getWidth() - container.getPaddingLeft() -
-                container.getPaddingRight();
+        
+        int xSpace = container.getWidth() - container.getPaddingLeft() - container.getPaddingRight();
 
         List<Component> children = container.getChildren();
 
@@ -75,21 +73,24 @@ public class VerticalLayout implements Layout
 
             if (child.isVisible()) {
 
-                int width = container.getFillX() ? container.getWidth() -
-                        container.getPaddingLeft() - container.getPaddingRight() -
-                        child.getMarginLeft() - child.getMarginRight() : child.getRequiredWidth();
+                int width = container.getFillX() ?
+                    xSpace - child.getMarginLeft() - child.getMarginRight() :
+                    child.getRequiredWidth();
 
-                double expansionRatio = (this.sumExpansion == 0) ? 1.0 / children.size() : child
-                        .getExpansion() / this.sumExpansion;
+                double expansionRatio = (this.sumExpansion == 0) ? 
+                    1.0 / children.size() :
+                    child.getExpansion() / this.sumExpansion;
+                    
                 int singleExtraHeight = (int) (extraHeight * expansionRatio);
                 int height = child.getRequiredHeight() + singleExtraHeight;
 
-                int tx = (int) (container.getXAlignment() * (xSpace - child.getRequiredWidth()) +
-                        container.getPaddingLeft() + child.getMarginLeft());
+                int xDiff = xSpace - (width + child.getMarginLeft() + child.getMarginRight());
+                
+                int x = (int) (container.getXAlignment() * xDiff) + container.getPaddingLeft() + child.getMarginLeft();
 
-                child.setPosition(tx, y + child.getMarginTop(), width, height);
+                child.setPosition(x, y + child.getMarginTop(), width, height);
 
-                y += child.getMarginTop() + height + child.getMarginBottom() + spacing;
+                y += child.getMarginTop() + height + child.getMarginBottom() + container.getYSpacing();
 
             }
         }

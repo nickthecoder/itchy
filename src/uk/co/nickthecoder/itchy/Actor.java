@@ -172,7 +172,7 @@ public class Actor implements PropertySubject<Actor>
     {
         return this.getAppearance().getDirection();
     }
-    
+
     /**
      * Adjusts the heading by the given amount, and points the image in that direction too.
      * 
@@ -289,16 +289,6 @@ public class Actor implements PropertySubject<Actor>
         return this.animation;
     }
 
-    public void event( String eventName )
-    {
-        this.event(this.costume, eventName, AnimationEvent.REPLACE);
-    }
-
-    public void event( String eventName, AnimationEvent ae )
-    {
-        this.event(this.costume, eventName, ae);
-    }
-
     public enum AnimationEvent
     {
         REPLACE,
@@ -307,23 +297,60 @@ public class Actor implements PropertySubject<Actor>
         IGNORE
     }
 
-    public void event( Costume costume, String eventName, AnimationEvent ae )
+    public void event( String eventName )
     {
-        if (costume == null) {
+        this.event(eventName, AnimationEvent.REPLACE);
+    }
+
+    public void event( String eventName, String message )
+    {
+        this.event(eventName, AnimationEvent.REPLACE, message);
+    }
+
+    public void event( String eventName, AnimationEvent ae )
+    {
+        this.event(eventName, ae, null);
+    }
+
+    public void event( String eventName, AnimationEvent ae, String message )
+    {
+        if (this.costume == null) {
             return;
         }
-        Pose pose = costume.getPose(eventName);
+        Pose pose = this.costume.getPose(eventName);
         if (pose != null) {
             this.appearance.setPose(pose);
             this.setAnimation(null);
         }
 
-        Animation animation = costume.getAnimation(eventName);
+        Animation animation = this.costume.getAnimation(eventName);
+        if ((message != null) && (animation != null)) {
+            animation.setFinishedMessage(message);
+        }
         this.setAnimation(animation, ae);
 
-        ManagedSound cs = costume.getCostumeSound(eventName);
+        ManagedSound cs = this.costume.getCostumeSound(eventName);
         if (cs != null) {
             Itchy.soundManager.play(this, eventName, cs);
+        }
+    }
+
+    public void deathEvent( String eventName )
+    {
+        deathEvent(eventName, AnimationEvent.REPLACE, null);
+    }
+
+    public void deathEvent( String eventName, String message )
+    {
+        deathEvent(eventName, AnimationEvent.REPLACE, message);
+    }
+
+    public void deathEvent( String eventName, AnimationEvent ae, String message )
+    {
+        this.dying = true;
+        this.event(eventName, ae, message);
+        if ((this.costume == null) || (this.costume.getAnimation(eventName) == null)) {
+            this.kill();
         }
     }
 
@@ -343,27 +370,7 @@ public class Actor implements PropertySubject<Actor>
      */
     public boolean isAlive()
     {
-        return ! (this.dying || this.dead); 
-    }
-    
-    public void deathEvent( String eventName )
-    {
-        this.dying = true;
-        this.event(costume, eventName, AnimationEvent.REPLACE);
-        if ((this.costume == null) || (this.costume.getAnimation(eventName) == null)) {
-            this.kill();
-        }
-    }
-
-    public void deathAnimation( String animationName )
-    {
-        Animation animation = Itchy.getResources().getAnimation(animationName);
-        if (animation == null) {
-            this.kill();
-        } else {
-            this.dying = true;
-            this.setAnimation(animation);
-        }
+        return !(this.dying || this.dead);
     }
 
     @Property(label = "X")

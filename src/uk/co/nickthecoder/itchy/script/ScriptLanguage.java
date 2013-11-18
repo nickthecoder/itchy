@@ -194,7 +194,7 @@ public abstract class ScriptLanguage
 
     public abstract boolean startScene( ScriptedDirector director, String sceneName );
 
-    // ===== BEHAVIOUR =====
+    // ===== ROLE =====
 
     public abstract Role createRole( ClassName className );
 
@@ -212,7 +212,9 @@ public abstract class ScriptLanguage
 
     public abstract void tick( ScriptedRole role );
 
-    // ===== SCENE BEHAVIOUR =====
+    public abstract boolean isMouseListener( ScriptedRole role );
+    
+    // ===== SCENE DIRECTOR=====
 
     public abstract SceneDirector createSceneDirector( ClassName className );
 

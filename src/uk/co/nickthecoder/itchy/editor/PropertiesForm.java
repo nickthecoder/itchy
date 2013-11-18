@@ -42,6 +42,7 @@ public class PropertiesForm<S>
 
         this.container = new Container();
         this.container.setType("form");
+        this.container.setYAlignment(0.5);
         this.grid = new GridLayout(this.container, 2);
         this.container.setLayout(this.grid);
     }

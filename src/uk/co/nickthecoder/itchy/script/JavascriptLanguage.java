@@ -83,7 +83,6 @@ public class JavascriptLanguage extends ScriptLanguage
     {
         Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
         Game game = this.manager.resources.getGame();
-        bindings.put("javascriptLanguage", this);
         bindings.put("game", game);
         bindings.put("director", game.getDirector());
         bindings.put("sceneDirector", game.getSceneDirector());
@@ -424,6 +423,20 @@ public class JavascriptLanguage extends ScriptLanguage
     }
 
     @Override
+    public boolean isMouseListener( ScriptedRole role )
+    {
+        try {
+            Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
+            bindings.put("roleScript", role.roleScript);
+            return (boolean) this.engine.eval("roleScript.isMouseListener();");
+
+        } catch (ScriptException e) {
+            handleException("Role.onMessage", e);
+            return false;
+        }
+    }
+    
+    @Override
     public void onMessage( ScriptedRole role, String message )
     {
         try {
@@ -610,5 +623,6 @@ public class JavascriptLanguage extends ScriptLanguage
         }
         return costumeProperties;
     }
+
 
 }

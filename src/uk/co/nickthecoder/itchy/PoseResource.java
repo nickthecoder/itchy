@@ -13,7 +13,7 @@ import uk.co.nickthecoder.itchy.util.Property;
 import uk.co.nickthecoder.jame.JameException;
 import uk.co.nickthecoder.jame.Surface;
 
-public class PoseResource extends NamedResource
+public class PoseResource extends NamedResource implements Thumbnailed
 {
     public static List<AbstractProperty<PoseResource, ?>> properties = AbstractProperty.findAnnotations(PoseResource.class);
 

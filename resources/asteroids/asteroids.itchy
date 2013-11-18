@@ -94,7 +94,7 @@
       </compound>
     </animation>
     <animation name="shipDeath">
-      <compound finishedMessage="exploded" loops="1" sequence="false">
+      <compound loops="1" sequence="false">
         <alpha ease="easeOut" target="0.0" ticks="70"/>
         <color ease="linear" targetColor="#a50300ff" ticks="100"/>
       </compound>
