@@ -14,14 +14,14 @@ java -Ditchy.base="${BASE}" -Djava.library.path="${NATIVE_DIR}" -classpath "${CL
 #
 # Register ".itchy" files, so that games can be run by double clicking their ".itchy" file.
 #
-if [[ "${BASE}/resources/launcher/template.desktop" -nt "${BASE}/resources/launcher/nickthecoder-itchy.desktop" ]]; then
+if [[ "${BASE}/resources/Launcher/template.desktop" -nt "${BASE}/resources/Launcher/nickthecoder-itchy.desktop" ]]; then
     echo "Registering .itchy files"
     COMMAND="java -Ditchy.base=\"${BASE}\" -Djava.library.path=\"${NATIVE_DIR}\" -classpath \"${CLASSPATH}\" \"${MAIN}\""
-    cp "${BASE}/resources/launcher/template.desktop" "${BASE}/resources/launcher/nickthecoder-itchy.desktop" > /dev/null 2>&1
-    echo "Icon=${BASE}/resources/icon32.png" >> "${BASE}/resources/launcher/nickthecoder-itchy.desktop"
-    echo "Exec=${COMMAND} %u" >> "${BASE}/resources/launcher/nickthecoder-itchy.desktop"
+    cp "${BASE}/resources/Launcher/template.desktop" "${BASE}/resources/Launcher/nickthecoder-itchy.desktop" > /dev/null 2>&1
+    echo "Icon=${BASE}/resources/icon32.png" >> "${BASE}/resources/Launcher/nickthecoder-itchy.desktop"
+    echo "Exec=${COMMAND} %u" >> "${BASE}/resources/Launcher/nickthecoder-itchy.desktop"
     xdg-icon-resource install --mode user --context mimetypes --size 32 "${BASE}/resources/icon32.png" application-x-itchy  > /dev/null 2>&1
-    xdg-mime install --mode user "${BASE}/resources/launcher/nickthecoder-itchy.xml" > /dev/null 2>&1
-    xdg-desktop-menu install --mode user "${BASE}/resources/launcher/nickthecoder-itchy.desktop" > /dev/null 2>&1
+    xdg-mime install --mode user "${BASE}/resources/Launcher/nickthecoder-itchy.xml" > /dev/null 2>&1
+    xdg-desktop-menu install --mode user "${BASE}/resources/Launcher/nickthecoder-itchy.desktop" > /dev/null 2>&1
     xdg-mime default nickthecoder.itchy.desktop application/x-itchy  > /dev/null 2>&1
 fi
