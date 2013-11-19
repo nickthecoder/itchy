@@ -534,8 +534,7 @@ public class SceneDesigner implements MouseListener, KeyListener
             public void changed()
             {
                 ClassNameBox box = SceneDesigner.this.sceneDirectorName;
-                String value = box.getClassName().name;
-                boolean ok = SceneDesigner.this.editor.resources.registerSceneDirectorClassName(value);
+                boolean ok = SceneDesigner.this.editor.resources.checkClassName(box.getClassName());
                 // TODO isn't the error style done by ClassNameBox?
                 box.addStyle("error", !ok);
                 if (ok) {
@@ -632,11 +631,7 @@ public class SceneDesigner implements MouseListener, KeyListener
     {
         SceneDesignerRole sdb = (SceneDesignerRole) this.currentActor.getRole();
 
-        this.roleClassName = new ClassNameBox(
-            this.editor.getScriptManager(),
-            ClassName.getClassName(sdb.actualRole),
-            Role.class
-            );
+        this.roleClassName = new ClassNameBox( this.editor.getScriptManager(), Actor.getRoleClassName(sdb.actualRole), Role.class );
 
         this.roleClassName.addChangeListener(new ComponentChangeListener() {
 
@@ -648,7 +643,7 @@ public class SceneDesigner implements MouseListener, KeyListener
                 try {
                     sdb.setRoleClassName(SceneDesigner.this.editor.resources, className);
                     SceneDesigner.this.createRoleProperties();
-                    SceneDesigner.this.editor.resources.registerRoleClassName(className.name);
+                    SceneDesigner.this.editor.resources.checkClassName(className);
                     SceneDesigner.this.roleClassName.removeStyle("error");
 
                 } catch (Exception e) {
@@ -1172,7 +1167,7 @@ public class SceneDesigner implements MouseListener, KeyListener
                     actor.setCostume(this.stampActor.getCostume());
                     roleClassName = this.stampActor.getCostume().roleClassName;
                 } else {
-                    roleClassName = new ClassName(NullRole.class.getName());
+                    roleClassName = new ClassName(Role.class, NullRole.class.getName());
                 }
 
             } else {

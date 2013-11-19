@@ -8,6 +8,7 @@ package uk.co.nickthecoder.itchy.script;
 import javax.script.ScriptException;
 
 import uk.co.nickthecoder.itchy.AbstractDirector;
+import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
@@ -16,15 +17,23 @@ public class ScriptedDirector extends AbstractDirector implements ScriptedObject
 {
     private ScriptLanguage language;
 
+    private ClassName className;
+
     public Object directorScript;
 
-    public ScriptedDirector( ScriptLanguage language, Object scriptInstance )
+    public ScriptedDirector( ClassName className, ScriptLanguage language, Object scriptInstance )
     {
         super();
+        this.className = className;
         this.language = language;
         this.directorScript = scriptInstance;
     }
 
+    public ClassName getClassName()
+    {
+        return this.className;
+    }
+    
     @Override
     public Object getScriptedObject()
     {

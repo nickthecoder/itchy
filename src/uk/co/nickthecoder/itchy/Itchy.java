@@ -1,13 +1,13 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0 which accompanies this
- * distribution, and is available at http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
 import java.io.File;
 import java.util.Stack;
 
+import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.jame.Audio;
 import uk.co.nickthecoder.jame.Events;
 import uk.co.nickthecoder.jame.Surface;
@@ -18,32 +18,28 @@ import uk.co.nickthecoder.jame.event.Keys;
 import uk.co.nickthecoder.jame.event.MouseEvent;
 
 /**
- * The is the overall manager of the Itchy game engine. There is only one instance
- * (Itchy.singleton).
+ * The is the overall manager of the Itchy game engine. There is only one instance (Itchy.singleton).
  * 
- * The init method should be called as soon as possible, ideally right at the top of your program's
- * main method.
+ * The init method should be called as soon as possible, ideally right at the top of your program's main method.
  * 
  * General notes about Itchy :
  * 
- * Itchy works with two types of coordinates; pixel coordinates, and world coordinates. World
- * coordinates are used to keep track of Actors' positions, and are stored in doubles. Pixel
- * coordinates are stored as integers and are used when dealing with the low-level processing of
+ * Itchy works with two types of coordinates; pixel coordinates, and world coordinates. World coordinates are used to keep track of Actors'
+ * positions, and are stored in doubles. Pixel coordinates are stored as integers and are used when dealing with the low-level processing of
  * images.
  */
 public class Itchy
 {
 
     /**
-     * This is the highest SDL key sym which can be checked using isKeyDown(). The highest key sym
-     * is currently 321, and I'm using 400, which leaves plenty of room for additional keys to be
-     * added in the future.
+     * This is the highest SDL key sym which can be checked using isKeyDown(). The highest key sym is currently 321, and I'm using 400,
+     * which leaves plenty of room for additional keys to be added in the future.
      */
     private static int KEYBOARD_STATE_SIZE = 400;
 
     /**
-     * Holds a boolean for each key. On key pressed events sets the appropriate boolean, and key
-     * released events reset the boolean. Uses the Keys values to index the array.
+     * Holds a boolean for each key. On key pressed events sets the appropriate boolean, and key released events reset the boolean. Uses the
+     * Keys values to index the array.
      */
     private static boolean[] keyboardState;
 
@@ -71,6 +67,29 @@ public class Itchy
     private static boolean initialised = false;
 
     private static File baseDirectory;
+
+    public static final Registry registry = new Registry();
+
+    static {
+        System.out.println( "Registering standard ClassNames");
+        
+        registry.add(new ClassName(Director.class, PlainDirector.class.getName()));
+
+        registry.add(new ClassName(SceneDirector.class, PlainSceneDirector.class.getName()));
+
+        registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.NullRole.class.getName()));
+        registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.extras.EditorButton.class.getName()));
+        registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.extras.LinkButton.class.getName()));
+        registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.extras.MessageButton.class.getName()));
+        registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.extras.NumberValue.class.getName()));
+        registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.extras.TextValue.class.getName()));
+        registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.extras.QuitButton.class.getName()));
+        registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.extras.ProgressBar.class.getName()));
+
+        registry.add(new ClassName(CostumeProperties.class, CostumeProperties.class.getName()));
+
+        System.out.println( "Registered standard ClassNames");
+    }
 
     public static void init( Resources resources ) throws Exception
     {
@@ -194,8 +213,8 @@ public class Itchy
     }
 
     /**
-     * Indicates that the main loop should end. Note the game does not end immediately, it only sets
-     * a flag, which will cause the main loop to end after the current frame has been processed.
+     * Indicates that the main loop should end. Note the game does not end immediately, it only sets a flag, which will cause the main loop
+     * to end after the current frame has been processed.
      */
     public static void terminate()
     {
@@ -277,8 +296,7 @@ public class Itchy
     }
 
     /**
-     * Tests state of either shift keys A convenience method, the same as isKeyDown( Keys.LSHIFT )
-     * || isKeyDown( Keys.RSHIFT )
+     * Tests state of either shift keys A convenience method, the same as isKeyDown( Keys.LSHIFT ) || isKeyDown( Keys.RSHIFT )
      */
     public static boolean isShiftDown()
     {
@@ -286,18 +304,15 @@ public class Itchy
     }
 
     /**
-     * Tests state of either control keys A convenience method, the same as isKeyDown( Keys.LCTRL )
-     * || isKeyDown( Keys.RCTRL )
+     * Tests state of either control keys A convenience method, the same as isKeyDown( Keys.LCTRL ) || isKeyDown( Keys.RCTRL )
      */
     public static boolean isCtrlDown()
     {
         return keyboardState[Keys.LCTRL] || keyboardState[Keys.RCTRL];
     }
 
-
     /**
-     * Tests state of either control keys A convenience method, the same as isKeyDown( Keys.LALT )
-     * || isKeyDown( Keys.RALT )
+     * Tests state of either control keys A convenience method, the same as isKeyDown( Keys.LALT ) || isKeyDown( Keys.RALT )
      */
     public static boolean isAltDown()
     {
@@ -305,8 +320,7 @@ public class Itchy
     }
 
     /**
-     * Tests state of either meta keys A convenience method, the same as isKeyDown( Keys.LMETA ) ||
-     * isKeyDown( Keys.RMETA )
+     * Tests state of either meta keys A convenience method, the same as isKeyDown( Keys.LMETA ) || isKeyDown( Keys.RMETA )
      */
     public static boolean isMetaDown()
     {
@@ -314,8 +328,7 @@ public class Itchy
     }
 
     /**
-     * Tests state of either super keys A convenience method, the same as isKeyDown( Keys.LSUPER )
-     * || isKeyDown( Keys.RSUPER )
+     * Tests state of either super keys A convenience method, the same as isKeyDown( Keys.LSUPER ) || isKeyDown( Keys.RSUPER )
      */
     public static boolean isSuperDown()
     {
@@ -330,7 +343,7 @@ public class Itchy
 
             if (ke.isPressed()) {
                 int key = ke.symbol;
-                
+
                 if ((key > 0) && (key < keyboardState.length)) {
                     keyboardState[key] = true;
                 }
@@ -342,7 +355,7 @@ public class Itchy
                     keyboardState[key] = false;
                 }
             }
-            
+
         } else if (event instanceof MouseEvent) {
             MouseEvent me = (MouseEvent) event;
 

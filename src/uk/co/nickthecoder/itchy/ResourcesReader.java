@@ -104,6 +104,7 @@ public class ResourcesReader
         GameInfo gameInfo = new GameInfo();
         this.readProperties(gameTag, gameInfo);
         this.resources.setGameInfo(gameInfo);
+        this.resources.registry.add(gameInfo.directorClassName);
         Itchy.init(this.resources);
     }
 
@@ -222,20 +223,19 @@ public class ResourcesReader
 
             }
 
-            ClassName roleClassName = new ClassName(costumeTag.getOptionalAttribute(
-                "role", NullRole.class.getName()));
+            String roleName = costumeTag.getOptionalAttribute("role", NullRole.class.getName());
+            ClassName roleClassName = new ClassName( Role.class, roleName );
 
-            if (this.resources.registerRoleClassName(roleClassName.name)) {
+            if (this.resources.checkClassName(roleClassName)) {
                 costume.roleClassName = roleClassName;
             } else {
                 throw new XMLException("Expected a subclass of Role : " + costume.roleClassName);
             }
 
-            ClassName propertiesClassName = new ClassName(
-                costumeTag.getOptionalAttribute("properties",
-                    CostumeProperties.class.getName()));
+            String propertiesName = costumeTag.getOptionalAttribute("properties", CostumeProperties.class.getName());
+            ClassName propertiesClassName = new ClassName( CostumeProperties.class, propertiesName);
             
-            if (this.resources.registerCostumePropertiesClassName(propertiesClassName.name)) {
+            if (this.resources.checkClassName(propertiesClassName)) {
                 costume.setPropertiesClassName(this.scriptManager, propertiesClassName);
 
             } else {

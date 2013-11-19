@@ -34,7 +34,7 @@ public class GameInfo implements PropertySubject<GameInfo>
         this.title = "Itchy Game";
         this.width = 800;
         this.height = 600;
-        this.directorClassName = new ClassName(PlainDirector.class.getName());
+        this.directorClassName = new ClassName(Director.class, PlainDirector.class.getName());
         this.initialScene = "";
     }
 

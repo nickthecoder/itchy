@@ -37,7 +37,7 @@ public class Scene
     {
         this.sceneLayers = new ArrayList<SceneLayer>();
         this.layersMap = new HashMap<String, SceneLayer>();
-        this.sceneDirectorClassName = new ClassName(PlainSceneDirector.class.getName());
+        this.sceneDirectorClassName = new ClassName(SceneDirector.class, PlainSceneDirector.class.getName());
 
         this.createSceneLayer("default");
     }

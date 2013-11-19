@@ -1,7 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0 which accompanies this
- * distribution, and is available at http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.script;
 
@@ -10,7 +9,6 @@ import javax.script.ScriptContext;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
-import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.CostumeProperties;
 import uk.co.nickthecoder.itchy.Director;
 import uk.co.nickthecoder.itchy.Game;
@@ -19,6 +17,7 @@ import uk.co.nickthecoder.itchy.MouseListenerView;
 import uk.co.nickthecoder.itchy.NullRole;
 import uk.co.nickthecoder.itchy.PlainDirector;
 import uk.co.nickthecoder.itchy.PlainSceneDirector;
+import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.SceneDirector;
 import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
@@ -125,7 +124,7 @@ public class JavascriptLanguage extends ScriptLanguage
         try {
             Object directorScript = this.engine.eval("new " + name + "();");
 
-            director = new ScriptedDirector(this, directorScript);
+            director = new ScriptedDirector(className, this, directorScript);
 
             Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
             bindings.put("directorScript", directorScript);
@@ -152,7 +151,7 @@ public class JavascriptLanguage extends ScriptLanguage
             handleException("Director.onStarted", e);
         }
     }
-    
+
     @Override
     public void onActivate( ScriptedDirector director )
     {
@@ -391,7 +390,7 @@ public class JavascriptLanguage extends ScriptLanguage
     }
 
     @Override
-    public boolean onMouseUp( ScriptedRole role,  MouseListenerView view, MouseButtonEvent event )
+    public boolean onMouseUp( ScriptedRole role, MouseListenerView view, MouseButtonEvent event )
     {
         try {
             Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
@@ -407,7 +406,7 @@ public class JavascriptLanguage extends ScriptLanguage
     }
 
     @Override
-    public boolean onMouseMove( ScriptedRole role,  MouseListenerView view, MouseMotionEvent event )
+    public boolean onMouseMove( ScriptedRole role, MouseListenerView view, MouseMotionEvent event )
     {
         try {
             Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
@@ -435,7 +434,7 @@ public class JavascriptLanguage extends ScriptLanguage
             return false;
         }
     }
-    
+
     @Override
     public void onMessage( ScriptedRole role, String message )
     {
@@ -623,6 +622,5 @@ public class JavascriptLanguage extends ScriptLanguage
         }
         return costumeProperties;
     }
-
 
 }

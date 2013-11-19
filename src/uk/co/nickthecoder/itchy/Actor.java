@@ -1,7 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0 which accompanies this
- * distribution, and is available at http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
@@ -10,7 +9,9 @@ import java.util.Set;
 
 import uk.co.nickthecoder.itchy.animation.Animation;
 import uk.co.nickthecoder.itchy.animation.CompoundAnimation;
+import uk.co.nickthecoder.itchy.script.ScriptedRole;
 import uk.co.nickthecoder.itchy.util.AbstractProperty;
+import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.itchy.util.Property;
 import uk.co.nickthecoder.itchy.util.PropertySubject;
 import uk.co.nickthecoder.jame.RGBA;
@@ -116,8 +117,7 @@ public class Actor implements PropertySubject<Actor>
     }
 
     /**
-     * Sets the heading that the actor is travelling in. It does NOT affect the rotation of the
-     * actor's image.
+     * Sets the heading that the actor is travelling in. It does NOT affect the rotation of the actor's image.
      * 
      * @param degrees
      */
@@ -161,7 +161,8 @@ public class Actor implements PropertySubject<Actor>
     /**
      * Sets the heading and the appearance's direction.
      * 
-     * @param radians The new heading in radians
+     * @param radians
+     *        The new heading in radians
      */
     public void setDirectionRadians( double radians )
     {
@@ -355,8 +356,7 @@ public class Actor implements PropertySubject<Actor>
     }
 
     /**
-     * Will fade out or stop sounds corresponding to the given even name. Future versions of Itchy
-     * may also stop corresponding animations.
+     * Will fade out or stop sounds corresponding to the given even name. Future versions of Itchy may also stop corresponding animations.
      * 
      * @param eventName
      */
@@ -419,6 +419,20 @@ public class Actor implements PropertySubject<Actor>
         return this.role;
     }
 
+    public ClassName getRoleClassName()
+    {
+        return getRoleClassName(this.role);
+    }
+
+    public static ClassName getRoleClassName( Role role )
+    {
+        if (role instanceof ScriptedRole) {
+            return ((ScriptedRole) role).getClassName();
+        } else {
+            return new ClassName(Role.class, role.getClass().getName());
+        }
+    }
+
     public Appearance getAppearance()
     {
         return this.appearance;
@@ -454,12 +468,10 @@ public class Actor implements PropertySubject<Actor>
     }
 
     /**
-     * Called when the actor is no longer wanted. It will be removed from its Layer (during the next
-     * frame rendering), and therefore will not be visible. It will be deactivated (i.e. its tick
-     * method won't be called any more) It will have all of its tags removed.
+     * Called when the actor is no longer wanted. It will be removed from its Layer (during the next frame rendering), and therefore will
+     * not be visible. It will be deactivated (i.e. its tick method won't be called any more) It will have all of its tags removed.
      * 
-     * Note, you must not try to resurrect an Actor once it has been killed, instead create a new
-     * Actor.
+     * Note, you must not try to resurrect an Actor once it has been killed, instead create a new Actor.
      */
     public void kill()
     {
@@ -580,8 +592,8 @@ public class Actor implements PropertySubject<Actor>
     }
 
     /**
-     * If there are a large number of Actors with this tag, then this will be slow, because unlike
-     * overalpping and touching, there is no optimisation based on CollisionStrategy.
+     * If there are a large number of Actors with this tag, then this will be slow, because unlike overalpping and touching, there is no
+     * optimisation based on CollisionStrategy.
      */
     public Role nearest( String tag )
     {
@@ -631,8 +643,8 @@ public class Actor implements PropertySubject<Actor>
     }
 
     /**
-     * For an Actor displaying text, this is the same as the method 'contains', but for other actors
-     * (displaying an image), it is the same as the method 'pixelOverlap'.
+     * For an Actor displaying text, this is the same as the method 'contains', but for other actors (displaying an image), it is the same
+     * as the method 'pixelOverlap'.
      * 
      * This should be used whenever you want to know if the mouse is clicking the actor.
      */

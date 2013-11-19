@@ -1,7 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0 which accompanies this
- * distribution, and is available at http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.script;
 
@@ -11,24 +10,23 @@ import java.util.HashMap;
 
 import javax.script.ScriptException;
 
-import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.CostumeProperties;
 import uk.co.nickthecoder.itchy.Director;
 import uk.co.nickthecoder.itchy.Resources;
+import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.SceneDirector;
 import uk.co.nickthecoder.itchy.util.ClassName;
 
 /**
  * Allows games to use script languages, such as javascript, for their game logic.
  * 
- * Subclasses of Role, SceneDirector, CostumeProperties and Game can all be coded in a
- * scripting language.
+ * Subclasses of Role, SceneDirector, CostumeProperties and Game can all be coded in a scripting language.
  * 
- * All scripts are read from a "scripts" folder relative to the game's resources file. (i.e.
- * resources/MY_GAME/scripts/). No further sub-directories are supported.
+ * All scripts are read from a "scripts" folder relative to the game's resources file. (i.e. resources/MY_GAME/scripts/). No further
+ * sub-directories are supported.
  * 
- * At present, only Javascript is supported, but it should be simple to add others by subclassing
- * ScriptLanguage and calling ScriptManager.registerLanguage.
+ * At present, only Javascript is supported, but it should be simple to add others by subclassing ScriptLanguage and calling
+ * ScriptManager.registerLanguage.
  */
 public class ScriptManager
 {
@@ -80,11 +78,16 @@ public class ScriptManager
      */
     public static String getName( ClassName className )
     {
-        int dot = className.name.lastIndexOf('.');
+        return getName(className.name);
+    }
+
+    public static String getName( String filename )
+    {
+        int dot = filename.lastIndexOf('.');
         if (dot >= 0) {
-            return className.name.substring(0, dot);
+            return filename.substring(0, dot);
         } else {
-            return className.name;
+            return filename;
         }
     }
 
@@ -100,21 +103,26 @@ public class ScriptManager
 
     public static boolean isScript( ClassName className )
     {
-        String extension = getExtension(className.name);
+        return isScript(className.name);
+    }
+
+    public static boolean isScript( String name )
+    {
+        String extension = getExtension(name);
 
         for (String registeredExtension : languageClassMap.keySet()) {
             if (extension.equals(registeredExtension)) {
-                return isValidName( getName(className) );
+                return isValidName(getName(name));
             }
         }
         return false;
     }
 
-    public static boolean isValidName(String name)
+    public static boolean isValidName( String name )
     {
         return name.matches("[a-zA-Z0-9]*");
     }
-    
+
     public File getScript( String filename )
     {
         File relative = new File(new File("scripts"), filename);

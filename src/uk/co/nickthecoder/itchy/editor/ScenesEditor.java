@@ -132,7 +132,7 @@ public class ScenesEditor extends SubEditor<SceneResource>
         this.currentResource.rename(name.getText());
 
         ClassName className = sceneDirectorClassName.getClassName();
-        if (!getResources().registerSceneDirectorClassName(className.name)) {
+        if (!getResources().checkClassName(className)) {
             throw new MessageException("Invalid Scene Role");
         }
 

@@ -27,7 +27,7 @@ public class ClassNameProperty<S> extends AbstractProperty<S, ClassName>
     @Override
     public ClassName getDefaultValue()
     {
-        return new ClassName("");
+        return new ClassName(this.baseClass, "");
     }
 
     @Override
@@ -79,7 +79,7 @@ public class ClassNameProperty<S> extends AbstractProperty<S, ClassName>
     @Override
     public ClassName parse( String value )
     {
-        return new ClassName(value);
+        return new ClassName(this.baseClass, value);
     }
 
     @Override

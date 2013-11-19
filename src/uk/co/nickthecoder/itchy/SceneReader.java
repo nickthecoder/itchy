@@ -54,8 +54,8 @@ public class SceneReader
             throw new XMLException("Illegal colour : " + background);
         }
         
-        this.scene.sceneDirectorClassName = new ClassName(sceneTag.getOptionalAttribute("role",
-            PlainSceneDirector.class.getName()));
+        String sceneDirectorName = sceneTag.getOptionalAttribute("role", PlainSceneDirector.class.getName());
+        this.scene.sceneDirectorClassName = new ClassName(SceneDirector.class, sceneDirectorName );
 
         // For old versions without multiple layers, the actor tags are directly within the scene
         // tag.
@@ -149,7 +149,7 @@ public class SceneReader
         }
 
         TextSceneActor sceneActor = new TextSceneActor(font, fontSize, text);
-        sceneActor.roleClassName = new ClassName(NullRole.class.getName());
+        sceneActor.roleClassName = new ClassName(Role.class, NullRole.class.getName());
 
         String costumeName = textTag.getOptionalAttribute("costume", null);
         if (costumeName != null) {
@@ -206,9 +206,9 @@ public class SceneReader
         }
 
         if (actorTag.hasAttribute("role")) {
-            ClassName className = new ClassName(actorTag.getAttribute("role"));
+            ClassName className = new ClassName(Role.class, actorTag.getAttribute("role"));
 
-            if (this.resources.registerRoleClassName(className.name)) {
+            if (this.resources.checkClassName(className)) {
                 sceneActor.roleClassName = className;
             }
         }

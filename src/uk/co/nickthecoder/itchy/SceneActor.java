@@ -96,7 +96,7 @@ public abstract class SceneActor implements Cloneable
 
         if (roleClassName == null) {
             if (actor.getCostume() == null) {
-                roleClassName = new ClassName(NullRole.class.getName());
+                roleClassName = new ClassName(Role.class, NullRole.class.getName());
             } else {
                 roleClassName = actor.getCostume().roleClassName;
             }

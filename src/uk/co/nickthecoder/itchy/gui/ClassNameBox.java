@@ -1,24 +1,20 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0 which accompanies this
- * distribution, and is available at http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.gui;
 
 import java.awt.Desktop;
 import java.io.File;
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.script.ScriptException;
 
-import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.CostumeProperties;
 import uk.co.nickthecoder.itchy.Director;
-import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Resources;
+import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.SceneDirector;
-import uk.co.nickthecoder.itchy.editor.ComboBox;
 import uk.co.nickthecoder.itchy.script.ScriptLanguage;
 import uk.co.nickthecoder.itchy.script.ScriptManager;
 import uk.co.nickthecoder.itchy.util.ClassName;
@@ -28,7 +24,8 @@ public class ClassNameBox extends Container
 
     private ScriptManager scriptManager;
 
-    private ComboBox comboBox;
+    // private ComboBox comboBox;
+    private TextBox textBox;
 
     private Button editButton;
 
@@ -42,7 +39,7 @@ public class ClassNameBox extends Container
 
     private Class<?> baseClass;
 
-    public ClassNameBox( ScriptManager scriptManager, ClassName className, Class<?> baseClass )
+    public ClassNameBox( final ScriptManager scriptManager, ClassName className, final Class<?> baseClass )
     {
         super();
 
@@ -50,29 +47,34 @@ public class ClassNameBox extends Container
         this.setLayout(new VerticalLayout());
 
         this.scriptManager = scriptManager;
-        this.value = new ClassName(className.name);
+        this.value = new ClassName(baseClass, className.name);
         this.baseClass = baseClass;
 
-        this.comboBox = new ComboBox(
-            className.name,
-            getKnownNames(Itchy.getGame().resources));
+        Container main = new Container();
+        this.addChild(main);
+        main.type = "comboBox";
+        main.addStyle("combo");
+        
+        this.textBox = new TextBox(className.name);
+        main.addChild(this.textBox);
+
+        Button pick = new Button("...");
+        main.addChild(pick);
 
         this.editButtonLabel = new Label("Edit");
         this.editButton = new Button(this.editButtonLabel);
+        main.addChild(this.editButton);
 
         this.reloadButton = new Button("Reload");
-
-        this.addChild(this.comboBox);
-        // this.addChild(this.editButton);
-        this.comboBox.addChild(this.editButton);
-        this.comboBox.addChild(this.reloadButton);
+        main.addChild(this.reloadButton);
 
         this.errorText = new Label("");
         this.addChild(this.errorText);
+
         this.errorText.addStyle("error");
         this.errorText.setVisible(false);
 
-        this.comboBox.addChangeListener(new ComponentChangeListener() {
+        this.textBox.addChangeListener(new ComponentChangeListener() {
 
             @Override
             public void changed()
@@ -80,6 +82,27 @@ public class ClassNameBox extends Container
                 update();
             }
 
+        });
+
+        pick.addActionListener(new ActionListener() {
+            @Override
+            public void action()
+            {
+                final ClassNamePicker picker = new ClassNamePicker(
+                    "Choose a class",
+                    baseClass,
+                    scriptManager.resources.registry.getClassNames(baseClass),
+                    ClassNameBox.this.textBox.getText()) {
+
+                    @Override
+                    public void pick( String value )
+                    {
+                        ClassNameBox.this.textBox.setText(value);
+                    }
+
+                };
+                picker.show();
+            }
         });
 
         this.editButton.addActionListener(new ActionListener() {
@@ -105,8 +128,8 @@ public class ClassNameBox extends Container
     {
         this.errorText.setVisible(false);
 
-        this.value.name = this.comboBox.getText();
-        this.comboBox.addStyle("error", !isValid());
+        this.value.name = this.textBox.getText();
+        this.textBox.addStyle("error", !isValid());
 
         boolean isValidScript = this.scriptManager.isValidScript(this.value);
         this.editButtonLabel.setText(isValidScript ? "Edit" : "Create");
@@ -120,7 +143,7 @@ public class ClassNameBox extends Container
                 this.scriptManager.loadScript(getClassName().name);
             } catch (ScriptException e) {
                 this.scriptManager.resources.errorLog.log(e.getMessage());
-                this.comboBox.addStyle("error");
+                this.textBox.addStyle("error");
                 ScriptLanguage language = this.scriptManager.getLanguage(getClassName());
                 this.errorText.setText(language.simpleMessage(e, false));
                 this.errorText.setVisible(true);
@@ -128,11 +151,11 @@ public class ClassNameBox extends Container
 
         }
     }
-    
+
     private boolean isValid()
     {
-        if ( this.value.isScript()) {
-            return  this.scriptManager.isValidScript(this.value);
+        if (this.value.isScript()) {
+            return this.scriptManager.isValidScript(this.value);
         } else {
             try {
                 Class<?> klass = Class.forName(this.value.name);
@@ -140,7 +163,7 @@ public class ClassNameBox extends Container
                     return false;
                 }
                 klass.asSubclass(this.baseClass);
-                
+
                 return true;
             } catch (Exception e) {
                 return false;
@@ -155,17 +178,7 @@ public class ClassNameBox extends Container
 
     public Set<String> getKnownNames( Resources resources )
     {
-        if (this.baseClass == Role.class) {
-            return resources.getRoleClassNames();
-        } else if (this.baseClass == SceneDirector.class) {
-            return resources.getSceneDirectorClassNames();
-        } else if (this.baseClass == Director.class) {
-            return resources.getDirectorClassNames();
-        } else if (this.baseClass == CostumeProperties.class) {
-            return resources.getCostumePropertiesClassNames();
-        } else {
-            return new HashSet<String>();
-        }
+        return resources.registry.getClassNames(this.baseClass);
     }
 
     public String getBaseName()
@@ -210,17 +223,17 @@ public class ClassNameBox extends Container
 
     public void addChangeListener( ComponentChangeListener ccl )
     {
-        this.comboBox.addChangeListener(ccl);
+        this.textBox.addChangeListener(ccl);
     }
 
     public void removeChangeListener( ComponentChangeListener ccl )
     {
-        this.comboBox.removeChangeListener(ccl);
+        this.textBox.removeChangeListener(ccl);
     }
 
     public void fireChangeEvent()
     {
-        this.comboBox.fireChangeEvent();
+        this.textBox.fireChangeEvent();
     }
 
 }

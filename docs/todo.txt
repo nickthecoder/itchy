@@ -8,8 +8,14 @@ Test on windows.
 
 Send to Asul
 
+Automate the load/save/list of animation types. I.e. once registered, no need for special code in read, writer or editor.
+
 Clip Animation
     Swipe the game over menus items as they appear. 
+Delay Animation
+
+Sort out direction and heading animations names
+    Turn, Turn To, Head, Head To ?
 
 Compound Role
     the editor knows about the interface, and adds a table under the Role ClassName.

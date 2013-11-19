@@ -1,7 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0 which accompanies this
- * distribution, and is available at http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
@@ -11,7 +10,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
-import java.util.TreeSet;
 
 import uk.co.nickthecoder.itchy.animation.Animation;
 import uk.co.nickthecoder.itchy.extras.Companion;
@@ -60,15 +58,9 @@ public class Resources extends Loadable
 
     private final HashMap<String, CostumeResource> costumes;
 
-    private TreeSet<String> roleClassNames;
-
-    private TreeSet<String> costumePropertiesClassNames;
-
-    private TreeSet<String> sceneDirectorClassNames;
-
-    private TreeSet<String> gameClassNames;
-
     public ErrorLog errorLog;
+
+    public final Registry registry = new Registry(Itchy.registry);
 
     public Resources()
     {
@@ -84,26 +76,6 @@ public class Resources extends Loadable
         this.poses = new HashMap<String, PoseResource>();
         this.costumes = new HashMap<String, CostumeResource>();
         this.animations = new HashMap<String, AnimationResource>();
-
-        this.roleClassNames = new TreeSet<String>();
-        this.costumePropertiesClassNames = new TreeSet<String>();
-        this.sceneDirectorClassNames = new TreeSet<String>();
-        this.gameClassNames = new TreeSet<String>();
-
-        registerRoleClassName(uk.co.nickthecoder.itchy.NullRole.class.getName());
-        registerRoleClassName(uk.co.nickthecoder.itchy.extras.EditorButton.class.getName());
-        registerRoleClassName(uk.co.nickthecoder.itchy.extras.LinkButton.class.getName());
-        registerRoleClassName(uk.co.nickthecoder.itchy.extras.MessageButton.class.getName());
-        registerRoleClassName(uk.co.nickthecoder.itchy.extras.NumberValue.class.getName());
-        registerRoleClassName(uk.co.nickthecoder.itchy.extras.TextValue.class.getName());
-        registerRoleClassName(uk.co.nickthecoder.itchy.extras.QuitButton.class.getName());
-        registerRoleClassName(uk.co.nickthecoder.itchy.extras.ProgressBar.class.getName());
-
-        registerCostumePropertiesClassName(CostumeProperties.class.getName());
-
-        registerSceneDirectorClassName(PlainSceneDirector.class.getName());
-
-        registerDirectorClassName(PlainDirector.class.getName());
 
         this.game = new Game(this);
     }
@@ -457,8 +429,8 @@ public class Resources extends Loadable
     public void addCostume( CostumeResource resource )
     {
         this.costumes.put(resource.name, resource);
-        this.registerRoleClassName(resource.getCostume().roleClassName.name);
-        this.registerCostumePropertiesClassName(resource.getCostume().getPropertiesClassName().name);
+        this.registry.add(resource.getCostume().roleClassName);
+        this.registry.add(resource.getCostume().getPropertiesClassName());
     }
 
     public void removeCostume( String name )
@@ -511,14 +483,11 @@ public class Resources extends Loadable
     /**
      * Looks for a named string, and then uses that to search for another costume.
      * <p>
-     * For example, create two ship costumes named bigShip and smallShip, and two bullets named
-     * redBullet and greenBullet. Now create a string within the bigShip : "bullet" -> "redBullet",
-     * and another within the small ship : "bullet" -> "greenBullet". Now we can get a get the
-     * appropriate bullet costume for a ship :
-     * <code>resources.getCompananionCostume( myShipActor.getCostume(), "bullet" )</code>
+     * For example, create two ship costumes named bigShip and smallShip, and two bullets named redBullet and greenBullet. Now create a
+     * string within the bigShip : "bullet" -> "redBullet", and another within the small ship : "bullet" -> "greenBullet". Now we can get a
+     * get the appropriate bullet costume for a ship : <code>resources.getCompananionCostume( myShipActor.getCostume(), "bullet" )</code>
      * <p>
-     * This can be useful when using {@link Companion#costume(Costume)}; for example we may create a
-     * bullet like so : <code> 
+     * This can be useful when using {@link Companion#costume(Costume)}; for example we may create a bullet like so : <code> 
      * <pre>
      * new Projectile()
      *     .costume( Itchy.getGame().resources.getCompanionCostume( getActor().getCostume(), "bullet" )
@@ -528,18 +497,16 @@ public class Resources extends Loadable
      * </pre>
      * </code>
      * <p>
-     * Note, you will probably use a sub-class of Projectile, as you'll want it to check for
-     * collisions etc.
+     * Note, you will probably use a sub-class of Projectile, as you'll want it to check for collisions etc.
      * <p>
-     * By creating multiple strings all named "bullet" within a ship's costume, the code above will
-     * randomly pick from the named costumes.
+     * By creating multiple strings all named "bullet" within a ship's costume, the code above will randomly pick from the named costumes.
      * 
      * 
      * @param sourceCostume
      *        The costume who's strings are search to find the name of another costume.
      * @param name
-     *        The name of the String to look up, which is then used as a costume name. Note, this is
-     *        NOT a costume name, it is the name of a String.
+     *        The name of the String to look up, which is then used as a costume name. Note, this is NOT a costume name, it is the name of a
+     *        String.
      * @return The costume that you were searching for, or null if none was found.
      */
     public Costume getCompanionCostume( Costume sourceCostume, String name )
@@ -671,116 +638,10 @@ public class Resources extends Loadable
         this.scenes.put(name, sceneResource);
     }
 
-    public boolean registerRoleClassName( String className )
-    {
-        try {
-            if (this.roleClassNames.contains(className)) {
-                return true;
-            }
-
-            if (isValidScript(className)) {
-                // Do nothing
-            } else {
-                // Ensure the class exists, and is the correct type.
-                Class<?> klass = Class.forName(className);
-                klass.asSubclass(Role.class);
-            }
-
-            this.roleClassNames.add(className);
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    public boolean registerCostumePropertiesClassName( String className )
-    {
-        if (this.costumePropertiesClassNames.contains(className)) {
-            return true;
-        }
-        if (isValidScript(className)) {
-            // Do nothing
-        } else {
-
-            try {
-                Class<?> klass = Class.forName(className);
-                klass.asSubclass(CostumeProperties.class);
-
-            } catch (Exception e) {
-                return false;
-            }
-
-        }
-        this.costumePropertiesClassNames.add(className);
-        return true;
-    }
-
-    public boolean registerSceneDirectorClassName( String className )
-    {
-        try {
-            if (this.sceneDirectorClassNames.contains(className)) {
-                return true;
-            }
-            if (isValidScript(className)) {
-                // Do nothing
-            } else {
-                Class<?> klass = Class.forName(className);
-                klass.asSubclass(SceneDirector.class);
-            }
-            this.sceneDirectorClassNames.add(className);
-            return true;
-
-        } catch (Exception e) {
-            // Do nothing
-        }
-        return false;
-    }
-
-    public boolean registerDirectorClassName( String className )
-    {
-        try {
-            if (this.gameClassNames.contains(className)) {
-                return true;
-            }
-            if (isValidScript(className)) {
-                // Do nothing
-            } else {
-                Class<?> klass = Class.forName(className);
-                klass.asSubclass(Director.class);
-            }
-            this.gameClassNames.add(className);
-            return true;
-
-        } catch (Exception e) {
-            // Do nothing
-        }
-        return false;
-    }
-
-    public Set<String> getRoleClassNames()
-    {
-        return this.roleClassNames;
-    }
-
-    public Set<String> getCostumePropertiesClassNames()
-    {
-        return this.costumePropertiesClassNames;
-    }
-
-    public Set<String> getSceneDirectorClassNames()
-    {
-        return this.sceneDirectorClassNames;
-    }
-
-    public Set<String> getDirectorClassNames()
-    {
-        return this.gameClassNames;
-    }
-
     public boolean isValidScript( String path )
     {
-        return isValidScript(new ClassName(path));
+        // TODO Hmm, don't like this.
+        return isValidScript(new ClassName(Object.class, path));
     }
 
     public boolean isValidScript( ClassName className )
@@ -793,6 +654,27 @@ public class Resources extends Loadable
         return (file.exists());
     }
 
+    public boolean checkClassName( ClassName className )
+    {
+        try {
+            if (isValidScript(className)) {
+                // Do nothing
+            } else {
+                Class<?> klass = Class.forName(className.name);
+                if (klass == null) {
+                    return false;
+                }
+                klass.asSubclass(className.baseClass);
+            }
+        } catch (Exception e) {
+            return false;
+        }
+        
+        System.out.println( "Adding to resources registry : " + className );
+        registry.add(className);
+        return true;
+    }
+    
     public Game getGame()
     {
         return this.game;
