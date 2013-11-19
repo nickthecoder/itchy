@@ -28,7 +28,7 @@ public class TurnAnimation extends NumericAnimation
     
     public TurnAnimation()
     {
-        this(200, linear, 1);
+        this(200, Eases.linear, 1);
     }
 
     public TurnAnimation( int ticks, Ease ease, double turn)

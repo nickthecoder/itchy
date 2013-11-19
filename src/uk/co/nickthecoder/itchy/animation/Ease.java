@@ -12,6 +12,11 @@ import uk.co.nickthecoder.jame.Surface;
 public interface Ease
 {
     public double amount( double amount );
+
+    /**
+     * Get the ease's name as registered in Itchy.registry.
+     */
+    public String getName();
     
     public Surface getThumbnail();
 }

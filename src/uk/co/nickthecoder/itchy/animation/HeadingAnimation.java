@@ -28,7 +28,7 @@ public class HeadingAnimation extends NumericAnimation
     
     public HeadingAnimation()
     {
-        this(200, linear, 1);
+        this(200, Eases.linear, 1);
     }
 
     public HeadingAnimation( int ticks, Ease ease, double turn)

@@ -1,13 +1,13 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0 which accompanies this
- * distribution, and is available at http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.animation;
 
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Button;
@@ -27,16 +27,17 @@ public abstract class EasePicker extends Window
     {
         this(null);
     }
-    
-    public EasePicker(Ease defaultEase)
+
+    public EasePicker( Ease defaultEase )
     {
         super("Ease Picker");
 
         this.clientArea.setLayout(new VerticalLayout());
         this.clientArea.setFill(true, false);
-        
+
         Container container = new Container();
         VerticalScroll vs = new VerticalScroll(container);
+        vs.setNaturalHeight(500);
 
         Component focus = this.createEases(container, defaultEase);
         this.clientArea.addChild(vs);
@@ -46,7 +47,6 @@ public abstract class EasePicker extends Window
         buttons.addStyle("buttonBar");
         buttons.setLayout(new HorizontalLayout());
         buttons.setXAlignment(0.5f);
-        
 
         Button cancel = new Button("Cancel");
         cancel.addActionListener(new ActionListener() {
@@ -60,8 +60,8 @@ public abstract class EasePicker extends Window
         });
         buttons.addChild(cancel);
         this.clientArea.addChild(buttons);
-        
-        if (focus!=null) {
+
+        if (focus != null) {
             focus.focus();
         }
     }
@@ -69,12 +69,12 @@ public abstract class EasePicker extends Window
     private Component createEases( Container container, Ease defaultEase )
     {
         Component focus = null;
-        
-        GridLayout gridLayout = new GridLayout(container, 5);
+
+        GridLayout gridLayout = new GridLayout(container, 7);
         container.setLayout(gridLayout);
         container.addStyle("pickGrid");
 
-        HashMap<String, Ease> map = NumericAnimation.getEases();
+        Map<String, Ease> map = Itchy.registry.getEases();
         List<String> orderedNames = Resources.sortNames(map.keySet());
 
         for (String name : orderedNames) {
@@ -87,7 +87,7 @@ public abstract class EasePicker extends Window
             gridLayout.addChild(component);
         }
         gridLayout.endRow();
-        
+
         return focus;
     }
 

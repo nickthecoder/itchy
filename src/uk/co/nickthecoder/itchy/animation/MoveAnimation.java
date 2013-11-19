@@ -30,7 +30,7 @@ public class MoveAnimation extends NumericAnimation
 
     public MoveAnimation()
     {
-        this(200, NumericAnimation.linear, 0, 0);
+        this(200, Eases.linear, 0, 0);
     }
 
     public MoveAnimation( int ticks, Ease ease, double dx, double dy )

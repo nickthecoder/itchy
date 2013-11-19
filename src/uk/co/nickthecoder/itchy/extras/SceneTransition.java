@@ -1,7 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0 which accompanies this
- * distribution, and is available at http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.extras;
 
@@ -12,17 +11,16 @@ import uk.co.nickthecoder.itchy.PlainRole;
 import uk.co.nickthecoder.itchy.animation.AlphaAnimation;
 import uk.co.nickthecoder.itchy.animation.Animation;
 import uk.co.nickthecoder.itchy.animation.AnimationListener;
+import uk.co.nickthecoder.itchy.animation.Eases;
 import uk.co.nickthecoder.itchy.animation.MoveAnimation;
-import uk.co.nickthecoder.itchy.animation.NumericAnimation;
 import uk.co.nickthecoder.jame.Surface;
 
 /**
  * Transitions from one scene to another.
  * 
- * It works by taking a snapshot of the current screen, then loading the new
- * {@link uk.co.nickthecoder.itchy.Scene} (which will kill all Actors from the previous scene). It
- * then places the snapshot above the new scene, so the new scene can't be seen. Finally the
- * snapshot is animated, such that it gradually reveals the new scene.
+ * It works by taking a snapshot of the current screen, then loading the new {@link uk.co.nickthecoder.itchy.Scene} (which will kill all
+ * Actors from the previous scene). It then places the snapshot above the new scene, so the new scene can't be seen. Finally the snapshot is
+ * animated, such that it gradually reveals the new scene.
  * 
  * The default animation is a fade (changing the snapshot's alpha from 255 to 0).
  * 
@@ -42,8 +40,8 @@ import uk.co.nickthecoder.jame.Surface;
  * </code>
  * </pre>
  * 
- * The {@link uk.co.nickthecoder.itchy.Game} object will receive a message :
- * <code>SceneTransition.COMPLETE</code> when the transition has finished.
+ * The {@link uk.co.nickthecoder.itchy.Game} object will receive a message : <code>SceneTransition.COMPLETE</code> when the transition has
+ * finished.
  */
 public class SceneTransition
 {
@@ -61,7 +59,7 @@ public class SceneTransition
      */
     public static Animation slideLeft()
     {
-        return new MoveAnimation(TRANSITION_FRAMES, NumericAnimation.linear, -Itchy.getGame().getWidth(), 0);
+        return new MoveAnimation(TRANSITION_FRAMES, Eases.linear, -Itchy.getGame().getWidth(), 0);
     }
 
     /**
@@ -72,7 +70,7 @@ public class SceneTransition
     public static Animation slideRight()
     {
         return new MoveAnimation(
-            TRANSITION_FRAMES, NumericAnimation.linear, Itchy.getGame().getWidth(), 0);
+            TRANSITION_FRAMES, Eases.linear, Itchy.getGame().getWidth(), 0);
     }
 
     /**
@@ -83,7 +81,7 @@ public class SceneTransition
     public static Animation slideUp()
     {
         return new MoveAnimation(
-            TRANSITION_FRAMES, NumericAnimation.linear, 0, Itchy.getGame().getHeight());
+            TRANSITION_FRAMES, Eases.linear, 0, Itchy.getGame().getHeight());
     }
 
     /**
@@ -94,7 +92,7 @@ public class SceneTransition
     public static Animation slideDown()
     {
         return new MoveAnimation(
-            TRANSITION_FRAMES, NumericAnimation.linear, 0, -Itchy.getGame().getHeight());
+            TRANSITION_FRAMES, Eases.linear, 0, -Itchy.getGame().getHeight());
     }
 
     /**
@@ -104,7 +102,7 @@ public class SceneTransition
      */
     public static Animation fade()
     {
-        return new AlphaAnimation(TRANSITION_FRAMES, NumericAnimation.easeInCirc, 0);
+        return new AlphaAnimation(TRANSITION_FRAMES, Eases.easeInCirc, 0);
     }
 
     private static SceneTransition currentSceneTransition = null;
@@ -128,9 +126,8 @@ public class SceneTransition
     }
 
     /**
-     * When value = true, the game will be paused while the scene transition takes place. This may
-     * cause problems if any of your game code relies on the elapsed time since the start of the
-     * scene.
+     * When value = true, the game will be paused while the scene transition takes place. This may cause problems if any of your game code
+     * relies on the elapsed time since the start of the scene.
      * 
      * @param value
      */
@@ -140,8 +137,8 @@ public class SceneTransition
     }
 
     /**
-     * The game will be paused while the scene transition takes place. This may cause problems if
-     * any of your game code relies on the elapsed time since the start of the scene.
+     * The game will be paused while the scene transition takes place. This may cause problems if any of your game code relies on the
+     * elapsed time since the start of the scene.
      * 
      * @return this
      */
@@ -166,8 +163,8 @@ public class SceneTransition
     }
 
     /**
-     * Calls Game.clear to immediately kill the actors on all of the layers.
-     * You can override this method if you need to keep some of the actors alive.
+     * Calls Game.clear to immediately kill the actors on all of the layers. You can override this method if you need to keep some of the
+     * actors alive.
      */
     protected void clear()
     {
@@ -175,9 +172,8 @@ public class SceneTransition
     }
 
     /**
-     * Begins the transition by creating an Actor with the snapshot of the old scene, and then
-     * setting its animation to that used in the SceneTransition constructor.
-     * {@link #onAnimationComplete} will be called when the animation finishes.
+     * Begins the transition by creating an Actor with the snapshot of the old scene, and then setting its animation to that used in the
+     * SceneTransition constructor. {@link #onAnimationComplete} will be called when the animation finishes.
      */
     protected void begin()
     {
@@ -201,10 +197,10 @@ public class SceneTransition
      */
     public boolean transition( String sceneName )
     {
-        if ( ! Itchy.getGame().hasScene(sceneName)) {
+        if (!Itchy.getGame().hasScene(sceneName)) {
             return false;
         }
-        
+
         if (currentSceneTransition != null) {
             // We are already in the middle of a different transition. Lets kill that one,
             // and redraw the screen before taking the snapshot.
@@ -221,13 +217,12 @@ public class SceneTransition
             Itchy.getGame().pause.pause(false);
         }
         begin();
-        
+
         return true;
     }
 
     /**
-     * Kills the snapshot actor and sends the message <code>FilmTransition.COMPLETE</code> to the
-     * Game.
+     * Kills the snapshot actor and sends the message <code>FilmTransition.COMPLETE</code> to the Game.
      */
     protected void onAnimationComplete()
     {

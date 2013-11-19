@@ -1,14 +1,13 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0 which accompanies this
- * distribution, and is available at http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.util;
 
+import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.animation.Ease;
 import uk.co.nickthecoder.itchy.animation.EasePickerButton;
 import uk.co.nickthecoder.itchy.animation.LinearEase;
-import uk.co.nickthecoder.itchy.animation.NumericAnimation;
 import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 
@@ -69,7 +68,7 @@ public class EaseProperty<S> extends AbstractProperty<S, Ease>
     @Override
     public Ease parse( String value )
     {
-        Ease ease = NumericAnimation.getEase(value);
+        Ease ease = Itchy.registry.getEase(value);
         if (ease == null) {
             throw new RuntimeException("Named Ease not found : " + value);
         }
@@ -83,7 +82,7 @@ public class EaseProperty<S> extends AbstractProperty<S, Ease>
         if (ease == null) {
             return null;
         } else {
-            return NumericAnimation.getEaseName(ease);
+            return ease.getName();
         }
     }
 

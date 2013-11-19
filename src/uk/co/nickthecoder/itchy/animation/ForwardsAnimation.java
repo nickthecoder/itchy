@@ -26,7 +26,7 @@ public class ForwardsAnimation extends NumericAnimation
     
     public ForwardsAnimation()
     {
-        this(200, NumericAnimation.linear, 0, 0);
+        this(200, Eases.linear, 0, 0);
     }
 
     public ForwardsAnimation( int ticks, Ease ease, double forwards, double sidewards )

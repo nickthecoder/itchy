@@ -7,6 +7,7 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.animation;
 
+import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.jame.RGBA;
 import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.Surface;
@@ -28,6 +29,11 @@ public abstract class AbstractEase implements Ease
             this.thumbnail = generateThumbnail();
         }
         return this.thumbnail;
+    }
+    
+    public String getName()
+    {
+        return Itchy.registry.getEaseName(this);
     }
 
     /**

@@ -31,7 +31,7 @@ public class EasePickerButton extends Button implements ActionListener
         this.setLayout(new VerticalLayout());
         this.setXAlignment(0.5f);
 
-        this.label = new Label(NumericAnimation.getEaseName(ease));
+        this.label = new Label(ease.getName());
         this.img = new ImageComponent(ease.getThumbnail());
 
         this.addChild(this.img);
@@ -49,7 +49,7 @@ public class EasePickerButton extends Button implements ActionListener
     public void setValue( Ease ease )
     {
         this.ease = ease;
-        this.label.setText(NumericAnimation.getEaseName(ease));
+        this.label.setText(ease.getName());
         this.img.setImage(ease.getThumbnail());
 
         for (ComponentChangeListener listener : this.changeListeners) {

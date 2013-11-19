@@ -6,16 +6,20 @@ package uk.co.nickthecoder.itchy;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
+import uk.co.nickthecoder.itchy.animation.Ease;
 import uk.co.nickthecoder.itchy.util.ClassName;
 
 public class Registry
 {
     private Registry parent;
 
-    private HashMap<Class<?>, Set<String>> classNames;
+    private Map<Class<?>, Set<String>> classNames;
+
+    private Map<String, Ease> eases;
 
     public Registry()
     {
@@ -26,6 +30,7 @@ public class Registry
     {
         this.parent = parent;
         this.classNames = new HashMap<Class<?>, Set<String>>();
+        this.eases = new HashMap<String, Ease>();
     }
 
     public boolean contains( ClassName className )
@@ -105,8 +110,29 @@ public class Registry
     {
     }
 
-    public void registerEase()
+    public void add( String name, Ease ease )
     {
+        this.eases.put(name, ease);
+    }
+
+    public Ease getEase( String name )
+    {
+        return this.eases.get(name);
+    }
+
+    public String getEaseName( Ease ease )
+    {
+        for (String name : this.eases.keySet()) {
+            if (this.eases.get(name) == ease) {
+                return name;
+            }
+        }
+        return null;
+    }
+
+    public Map<String, Ease> getEases()
+    {
+        return Collections.unmodifiableMap(this.eases);
     }
 
 }

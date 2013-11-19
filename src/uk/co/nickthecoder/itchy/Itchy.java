@@ -7,6 +7,7 @@ package uk.co.nickthecoder.itchy;
 import java.io.File;
 import java.util.Stack;
 
+import uk.co.nickthecoder.itchy.animation.Eases;
 import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.jame.Audio;
 import uk.co.nickthecoder.jame.Events;
@@ -88,7 +89,9 @@ public class Itchy
 
         registry.add(new ClassName(CostumeProperties.class, CostumeProperties.class.getName()));
 
-        System.out.println( "Registered standard ClassNames");
+        System.out.println( "Registering Eases");
+        
+        Eases.registerEases();
     }
 
     public static void init( Resources resources ) throws Exception

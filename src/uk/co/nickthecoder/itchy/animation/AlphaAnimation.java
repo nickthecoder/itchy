@@ -26,7 +26,7 @@ public class AlphaAnimation extends NumericAnimation
 
     public AlphaAnimation()
     {
-        this(200, linear, 255);
+        this(200, Eases.linear, 255);
     }
 
     public AlphaAnimation( int ticks, Ease ease, double target )

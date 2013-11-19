@@ -26,7 +26,7 @@ public class ScaleAnimation extends NumericAnimation
 
     public ScaleAnimation()
     {
-        this(200, linear, 1);
+        this(200, Eases.linear, 1);
     }
 
     public ScaleAnimation( int ticks, Ease ease, double target )

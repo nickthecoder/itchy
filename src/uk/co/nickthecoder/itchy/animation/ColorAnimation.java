@@ -27,7 +27,7 @@ public class ColorAnimation extends NumericAnimation
 
     public ColorAnimation()
     {
-        this(200, linear, RGBA.WHITE);
+        this(200, Eases.linear, RGBA.WHITE);
     }
     
     public ColorAnimation(int ticks, Ease ease, RGBA color)
