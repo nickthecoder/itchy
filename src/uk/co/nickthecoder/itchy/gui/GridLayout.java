@@ -37,6 +37,7 @@ public class GridLayout implements Layout
         this.group = new HashSet<GridLayout>();
         this.group.add(this);
         container.setLayout(this);
+        container.setYAlignment(0.5);
     }
 
     /**
@@ -66,6 +67,9 @@ public class GridLayout implements Layout
                 member.container.forceLayout();
             }
         }
+
+        container.setXSpacing(other.container.getXSpacing());
+        container.setYSpacing(other.container.getYSpacing());
     }
 
     public void ungroup()

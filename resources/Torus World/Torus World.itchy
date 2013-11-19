@@ -1,8 +1,10 @@
 <resources>
-  <game directorClassName="Director.js" height="600" initialScene="menu" title="There's Too Many Asteroids" width="800"/>
+  <game directorClassName="Director.js" height="600" initialScene="menu" title="Torus World" width="800"/>
   <fonts>
     <font name="BlackCasper" filename="fonts/BlackCasper/BlackCasper.ttf"/>
     <font name="Boycott" filename="fonts/Boycott/Boycott.ttf"/>
+    <font name="Vera" filename="fonts/Vera/Vera.ttf"/>
+    <font name="VeraBold" filename="fonts/Vera/VeraBd.ttf"/>
   </fonts>
   <ninePatches/>
   <poses>
@@ -49,6 +51,14 @@
           <alpha ease="linear" target="0.0" ticks="10"/>
         </compound>
         <forwards ease="linear" forwards="400.0" sidewards="0.0" ticks="40"/>
+      </compound>
+    </animation>
+    <animation name="buttonFadeIn">
+      <compound loops="1" sequence="true">
+        <scale ease="linear" target="0.1" ticks="0"/>
+        <compound loops="1" sequence="false">
+          <scale ease="easeOutBack" target="1.0" ticks="60"/>
+        </compound>
       </compound>
     </animation>
     <animation name="fadeIn">
@@ -129,9 +139,10 @@
     <costume name="Button" defaultZOrder="0">
       <string name="default">Button</string>
       <sound name="click" sound="missile" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
+      <sound name="fadeIn" sound="ricochet" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="PLAY_BOTH" priority="1"/>
       <sound name="hoverOver" sound="ding" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="PLAY_BOTH" priority="1"/>
       <font name="default" font="Boycott"/>
-      <animation name="fadeIn" animation="fadeIn"/>
+      <animation name="fadeIn" animation="buttonFadeIn"/>
       <animation name="hoverOut" animation="hoverOut"/>
       <animation name="hoverOver" animation="hoverOver"/>
       <animation name="mouseDown" animation="mouseDown"/>

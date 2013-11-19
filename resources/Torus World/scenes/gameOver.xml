@@ -10,13 +10,13 @@
     <text text="Game Over" font="BlackCasper" size="94" color="#7a0007" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.extras.Tagged" costume="Game Over" x="416" y="432" direction="0.0" heading="0.0" startEvent="fadeIn" zOrder="100" alpha="0.0">
       <property name="tag" value="gameOver"/>
     </text>
-    <text text="Continue" font="Boycott" size="60" color="#ffffff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.extras.MessageButton" costume="Button" x="403" y="310" direction="0.0" heading="0.0" startEvent="fadeIn" zOrder="101" alpha="0.0">
+    <text text="Continue" font="Boycott" size="60" color="#ffffff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.extras.MessageButton" costume="Button" x="403" y="310" direction="0.0" heading="0.0" startEvent="fadeIn" zOrder="101" activationDelay="0.3">
       <property name="message" value="continue"/>
     </text>
-    <text text="Restart" font="Boycott" size="60" color="#ffffff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.extras.MessageButton" costume="Button" x="400" y="229" direction="0.0" heading="0.0" startEvent="fadeIn" zOrder="102" alpha="0.0">
+    <text text="Restart" font="Boycott" size="60" color="#ffffff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.extras.MessageButton" costume="Button" x="401" y="229" direction="0.0" heading="0.0" startEvent="fadeIn" zOrder="102" activationDelay="0.6">
       <property name="message" value="start"/>
     </text>
-    <text text="Menu" font="Boycott" size="60" color="#ffffff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.extras.SceneButton" costume="Button" x="400" y="148" direction="0.0" heading="0.0" startEvent="fadeIn" zOrder="103" alpha="0.0">
+    <text text="Menu" font="Boycott" size="60" color="#ffffff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.extras.SceneButton" costume="Button" x="400" y="148" direction="0.0" heading="0.0" startEvent="fadeIn" zOrder="103" activationDelay="0.9">
       <property name="sceneName" value="menu"/>
     </text>
   </layer>

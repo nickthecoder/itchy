@@ -1,8 +1,7 @@
 <scene showMouse="true" role="Menu.js" background="#000000ff">
   <properties/>
   <layer name="main">
-    <actor costume="stars1" x="400" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="1"/>
-    <text text="Back" font="BlackCasper" size="77" color="#ffffff" xAlignment="0.5" yAlignment="0.9" role="uk.co.nickthecoder.itchy.extras.SceneButton" costume="Button" x="405" y="29" direction="0.0" heading="0.0" startEvent="default" zOrder="3">
+    <text text="Back" font="BlackCasper" size="77" color="#ffffff" xAlignment="0.5" yAlignment="0.9" role="uk.co.nickthecoder.itchy.extras.SceneButton" costume="Button" x="405" y="39" direction="0.0" heading="0.0" startEvent="fadeIn" zOrder="3">
       <property name="sceneName" value="menu"/>
     </text>
     <text text="Itchy Powered" font="Boycott" size="31" color="#ffffff" xAlignment="0.1" yAlignment="0.5" role="uk.co.nickthecoder.itchy.extras.LinkButton" costume="Button" x="33" y="36" direction="90.0" heading="0.0" startEvent="default" zOrder="4">
@@ -11,8 +10,21 @@
     <text text="By Nick Robinson" font="BlackCasper" size="32" color="#3981af" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.extras.LinkButton" costume="Button" x="386" y="435" direction="0.0" heading="0.0" startEvent="default" zOrder="5">
       <property name="url" value="http://nickthecoder.co.uk/"/>
     </text>
-    <text text="Asteroids" font="BlackCasper" size="100" color="#3981af" xAlignment="0.5" yAlignment="0.3" role="uk.co.nickthecoder.itchy.extras.LinkButton" costume="Button" x="391" y="549" direction="0.0" heading="0.0" startEvent="default" zOrder="6">
-      <property name="url" value="http://nickthecoder.co.uk/software/view/There's_Too_Many_Asteroids"/>
+    <text text="Torus World" font="BlackCasper" size="100" color="#3981af" xAlignment="0.5" yAlignment="0.3" role="uk.co.nickthecoder.itchy.extras.LinkButton" costume="Button" x="400" y="545" direction="0.0" heading="0.0" startEvent="default" zOrder="6">
+      <property name="url" value="http://nickthecoder.co.uk/software/view/Torus%20World"/>
+    </text>
+    <text text="Did you know..." font="VeraBold" size="22" color="#ffffff" xAlignment="0.0" yAlignment="0.5" x="76" y="390" direction="0.0" heading="0.0" startEvent="default" zOrder="7"/>
+    <text text="The asteroid belt is" font="Vera" size="22" color="#ffffff" xAlignment="0.0" yAlignment="0.5" x="126" y="342" direction="0.0" heading="0.0" startEvent="default" zOrder="8"/>
+    <text text="Mostly Empty" font="VeraBold" size="22" color="#3d40c4" xAlignment="0.0" yAlignment="0.5" role="uk.co.nickthecoder.itchy.extras.LinkButton" costume="Button" x="344" y="343" direction="0.0" heading="0.0" startEvent="default" zOrder="9">
+      <property name="url" value="http://en.wikipedia.org/wiki/Asteroid_belt#Characteristics"/>
+    </text>
+    <text text="Joining the edges of a rectangle" font="Vera" size="22" color="#ffffff" xAlignment="0.0" yAlignment="0.5" x="125" y="307" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
+    <text text="Makes a Torus" font="VeraBold" size="22" color="#3d40c4" xAlignment="0.0" yAlignment="0.5" role="uk.co.nickthecoder.itchy.extras.LinkButton" costume="Button" x="483" y="308" direction="0.0" heading="0.0" startEvent="default" zOrder="11">
+      <property name="url" value="http://en.wikipedia.org/wiki/File:Torus_from_rectangle.gif"/>
+    </text>
+    <text text="Angles of a triangle " font="Vera" size="22" color="#ffffff" xAlignment="0.0" yAlignment="0.5" x="127" y="269" direction="0.0" heading="0.0" startEvent="default" zOrder="12"/>
+    <text text="Don't add up to 180 degrees" font="VeraBold" size="22" color="#3d40c4" xAlignment="0.0" yAlignment="0.5" role="uk.co.nickthecoder.itchy.extras.LinkButton" costume="Button" x="350" y="269" direction="0.0" heading="0.0" startEvent="default" zOrder="13">
+      <property name="url" value="http://soler7.com/IFAQ/NonEuclideanGeometryNotes.html"/>
     </text>
   </layer>
 </scene>

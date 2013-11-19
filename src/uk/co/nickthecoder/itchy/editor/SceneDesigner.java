@@ -1,18 +1,15 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0 which accompanies this
- * distribution, and is available at http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.editor;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.AbstractRole;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Appearance;
-import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.CompoundView;
 import uk.co.nickthecoder.itchy.Costume;
 import uk.co.nickthecoder.itchy.CostumeResource;
@@ -24,6 +21,7 @@ import uk.co.nickthecoder.itchy.KeyListener;
 import uk.co.nickthecoder.itchy.MouseListener;
 import uk.co.nickthecoder.itchy.NullRole;
 import uk.co.nickthecoder.itchy.Pose;
+import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.Scene;
 import uk.co.nickthecoder.itchy.SceneActor;
 import uk.co.nickthecoder.itchy.SceneDirector;
@@ -43,6 +41,7 @@ import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.Container;
 import uk.co.nickthecoder.itchy.gui.FlowLayout;
+import uk.co.nickthecoder.itchy.gui.GridLayout;
 import uk.co.nickthecoder.itchy.gui.ImageComponent;
 import uk.co.nickthecoder.itchy.gui.Label;
 import uk.co.nickthecoder.itchy.gui.MessageBox;
@@ -147,9 +146,8 @@ public class SceneDesigner implements MouseListener, KeyListener
     private ClassNameBox roleClassName;
 
     /**
-     * When a text actor is the current actor, then this will be the TextBox that you enter the
-     * Actor's text. This field is used to set the focus on it whenever a new text is added, and
-     * when a shortcut is used (F8).
+     * When a text actor is the current actor, then this will be the TextBox that you enter the Actor's text. This field is used to set the
+     * focus on it whenever a new text is added, and when a shortcut is used (F8).
      */
     private Component actorTextInput;
 
@@ -184,7 +182,7 @@ public class SceneDesigner implements MouseListener, KeyListener
 
         System.out.println("Creating Stages for Scene Designer");
         for (Stage stage : this.editor.getGame().getStages()) {
-            System.out.println( stage + " locked ? " + stage.isLocked() );
+            System.out.println(stage + " locked ? " + stage.isLocked());
             if (!stage.isLocked()) {
                 Stage designStage = stage.createDesignStage();
 
@@ -211,7 +209,7 @@ public class SceneDesigner implements MouseListener, KeyListener
 
         setMode(MODE_SELECT);
 
-        onCenter();        
+        onCenter();
     }
 
     private void onDone()
@@ -219,12 +217,12 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.editor.clear();
         this.editor.getStages().clear();
         this.overlayStage.clear();
-        
+
         this.editor.getViews().remove(this.designViews);
         this.editor.getViews().remove(this.overlayView);
         this.editor.removeMouseListener(this);
         this.editor.removeKeyListener(this);
-        
+
         Itchy.getGame().removeKeyListener(this);
 
         this.toolbox.hide();
@@ -584,7 +582,48 @@ public class SceneDesigner implements MouseListener, KeyListener
         PropertiesForm<Appearance> form = new PropertiesForm<Appearance>(appearance, appearance.getProperties());
         form.autoUpdate = true;
         this.appearanceContainer.clear();
-        this.appearanceContainer.addChild(form.createForm());
+
+        Costume costume = this.currentActor.getCostume();
+        Container container = new Container();
+        container.setType("form");
+        GridLayout grid = new GridLayout(container, 2);
+        grid.groupWith(form.grid);
+        final Label label = new Label((costume == null) ? "None" : this.editor.resources.getCostumeName(costume));
+        final Button button = new Button(label);
+        grid.addRow("Costume", button);
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void action()
+            {
+                CostumePicker picker = new CostumePicker(SceneDesigner.this.editor.resources, "none") {
+                    @Override
+                    public void pick( CostumeResource costumeResource )
+                    {
+                        if (costumeResource == null) {
+                            if (SceneDesigner.this.currentActor.getAppearance().getPose() instanceof ImagePose) {
+                                return; // Image poses must use a costume (only text poses don't need a costume)
+                            }
+                            label.setText("None");
+                            SceneDesigner.this.currentActor.setCostume(null);
+                        } else {
+                            label.setText(costumeResource.getName());
+                            SceneDesigner.this.currentActor.setCostume(costumeResource.getCostume());
+                            Pose pose = costumeResource.getCostume().getPose(SceneDesigner.this.currentActor.getStartEvent());
+                            if (pose != null) {
+                                SceneDesigner.this.currentActor.getAppearance().setPose(pose);
+                            }
+                        }
+                    }
+                };
+                picker.show();
+            }
+        });
+
+        Component theRest = form.createForm();
+
+        this.appearanceContainer.setLayout(new VerticalLayout());
+        this.appearanceContainer.addChild(container);
+        this.appearanceContainer.addChild(theRest);
 
         this.actorTextInput = form.getComponent("pose.text");
     }
@@ -995,6 +1034,7 @@ public class SceneDesigner implements MouseListener, KeyListener
             this.overlayView.unadjustMouse(event);
         }
     }
+
     @Override
     public boolean onMouseUp( MouseButtonEvent event )
     {
@@ -1009,6 +1049,7 @@ public class SceneDesigner implements MouseListener, KeyListener
             this.overlayView.unadjustMouse(event);
         }
     }
+
     @Override
     public boolean onMouseMove( MouseMotionEvent event )
     {
@@ -1023,25 +1064,25 @@ public class SceneDesigner implements MouseListener, KeyListener
             this.overlayView.unadjustMouse(event);
         }
     }
-    
+
     private int previousClickX;
     private int previousClickY;
-    
+
     private boolean isNearClick( MouseEvent event )
     {
-        boolean result = (event.x - previousClickX) * (event.x - previousClickX) +
-            (event.y - previousClickY) * (event.y - previousClickY) < 10;
-        
-        previousClickX = event.x;
-        previousClickY = event.y;
-        
+        boolean result = (event.x - this.previousClickX) * (event.x - this.previousClickX) +
+            (event.y - this.previousClickY) * (event.y - this.previousClickY) < 10;
+
+        this.previousClickX = event.x;
+        this.previousClickY = event.y;
+
         return result;
     }
-    
+
     public boolean mouseDown( MouseButtonEvent event )
     {
-        boolean isNearClick = isNearClick( event );
-        
+        boolean isNearClick = isNearClick(event);
+
         if ((event.button == 2) || ((event.button == 1) && Itchy.isAltDown())) {
             setMode(MODE_DRAG_SCROLL);
             beginDrag(event);
@@ -1070,17 +1111,15 @@ public class SceneDesigner implements MouseListener, KeyListener
             // Has the user repeatedly clicked to find the object BELOW the currently selected one?
             // (or ABOVE, if shift is held down).
             boolean searching = isNearClick && Itchy.isShiftDown() &&
-                (this.currentActor!= null) && (this.currentActor.hitting(event.x,  event.y)); 
-                
+                (this.currentActor != null) && (this.currentActor.hitting(event.x, event.y));
+
             if (Itchy.isCtrlDown()) {
                 // Look at ALL stages, not only the current one.
-                
+
                 for (StageView child : Reversed.list(this.designViews.getChildren())) {
                     Stage stage = child.getStage();
 
-                    for (Iterator<Actor> i = Reversed.list(stage.getActors()).iterator(); i.hasNext();) {
-
-                        Actor actor = i.next();
+                    for (Actor actor : Reversed.list(stage.getActors())) {
 
                         if (actor.hitting(event.x, event.y)) {
                             if (searching) {
@@ -1099,9 +1138,7 @@ public class SceneDesigner implements MouseListener, KeyListener
 
             } else {
 
-                for (Iterator<Actor> i = Reversed.list(this.currentStageView.getStage().getActors()).iterator(); i.hasNext();) {
-
-                    Actor actor = i.next();
+                for (Actor actor : Reversed.list(this.currentStageView.getStage().getActors())) {
 
                     if (actor.hitting(event.x, event.y)) {
                         if (searching) {
@@ -1438,9 +1475,9 @@ public class SceneDesigner implements MouseListener, KeyListener
     private void onSave()
     {
         Scene scene = new Scene();
-        scene.backgroundColor = this.scene.backgroundColor; 
-        scene.showMouse = this.scene.showMouse; 
-            
+        scene.backgroundColor = this.scene.backgroundColor;
+        scene.showMouse = this.scene.showMouse;
+
         scene.sceneDirectorClassName = this.scene.sceneDirectorClassName;
         scene.sceneDirector = this.scene.sceneDirector;
 
@@ -1469,8 +1506,8 @@ public class SceneDesigner implements MouseListener, KeyListener
 
             Game game = new Game(this.editor.resources);
             game.init();
-            game.setDirector( this.editor.resources.getGameInfo().createDirector(this.editor.resources));
-            
+            game.setDirector(this.editor.resources.getGameInfo().createDirector(this.editor.resources));
+
             game.testScene(this.sceneResource.name);
 
         } catch (Exception e) {

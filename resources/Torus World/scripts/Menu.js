@@ -6,8 +6,13 @@ Menu = new Class({
     onKeyDown: function( event ) {
         if (event.symbol == Keys.RETURN) {
             directorScript.startGame();
+            
         } else if (event.symbol == Keys.ESCAPE) {
             game.startScene("menu");
+            
+        } else if (event.symbol == Keys.a) {
+        	stdout.println("About...");
+        	game.startScene("about");
         }
     },
     

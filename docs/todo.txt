@@ -19,9 +19,6 @@ Same feature for SceneDirector.
 
 Follow up on the TODOs
 
-Non-Euclidian
-Torus World
-
 MousePointer
     Graphic - Shows a pose at that point
     Spark - Creates explosion while the mouse is down

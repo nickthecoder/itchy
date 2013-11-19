@@ -95,11 +95,7 @@ public class ScriptedDirector extends AbstractDirector implements ScriptedObject
     @Override
     public boolean onKeyDown( KeyboardEvent event )
     {
-        if (this.language.onKeyDown(this, event)) {
-            return true;
-        } else {
-            return super.onKeyDown(event);
-        }
+        return this.language.onKeyDown(this, event);
     }
 
     public boolean superOnKeyUp( KeyboardEvent event )
@@ -110,11 +106,7 @@ public class ScriptedDirector extends AbstractDirector implements ScriptedObject
     @Override
     public boolean onKeyUp( KeyboardEvent ke )
     {
-        if (this.language.onKeyUp(this, ke)) {
-            return true;
-        } else {
-            return super.onKeyUp(ke);
-        }
+        return this.language.onKeyUp(this, ke);
     }
 
     public boolean superOnMouseDown( MouseButtonEvent event )

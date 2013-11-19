@@ -30,7 +30,7 @@ DirectorScript = Class({
     
     onDeactivate: function() { director.superOnDeactivate(); },
             
-    onQuit: function() { return director.super.onQuit(); },
+    onQuit: function() { return director.superOnQuit(); },
     
     onKeyDown: function( event ) { return director.superOnKeyDown(event); },
     
