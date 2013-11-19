@@ -110,7 +110,7 @@ public class Launcher extends AbstractDirector
 
         String name;
         if (argv.length == 0) {
-            name = "launcher";
+            name = "Launcher";
         } else {
             name = argv[0];
             argv = Arrays.copyOfRange(argv, 1, argv.length);

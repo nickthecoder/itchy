@@ -1,0 +1,15 @@
+#!/usr/bin/env xdg-open
+
+[Desktop Entry]
+Name=Itchy
+Comment=Itchy Game Engine
+Encoding=UTF-8
+X-MultipleArgs=false
+Type=Application
+Terminal=false
+StartupWMClass=Itchy-bin
+StartupNotify=true
+MimeType=application/x-itchy;
+
+Icon=/media/home/nick/projects/itchy/resources/icon32.png
+Exec=java -Ditchy.base="/media/home/nick/projects/itchy" -Djava.library.path="/media/home/nick/projects/itchy/lib/native/x86_64" -classpath "/media/home/nick/projects/itchy/lib/itchy.jar:/media/home/nick/projects/itchy/lib/jame.jar" "uk.co.nickthecoder.itchy.Launcher" %u

@@ -19,6 +19,15 @@ Same feature for SceneDirector.
 
 Follow up on the TODOs
 
+Non-Euclidian
+Torus World
+
+MousePointer
+    Graphic - Shows a pose at that point
+    Spark - Creates explosion while the mouse is down
+    Trail - Remembers where the mouse has been, and sends out particles along a curve connecting those points.
+
+
 I've exposed a generic Game.getGameViews (returns CompoundView<View>).
 Should Game have addStage, rather than letting the list be added to directly?
 
