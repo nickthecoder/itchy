@@ -23,14 +23,18 @@ Director = Class({
 
     onMessage: function(message) {
     	if (message == "start") {
-    		this.startGame();
+    		this.startGame("1");
+    	}
+    	
+    	if (message == "continue") {
+    		this.startGame(game.getSceneName());
     	}
     },
     
-    startGame: function() {
+    startGame: function(sceneName) {
 		this.score = 0;
 		this.lives = 3;
-		this.startScene("1");    	
+		this.startScene(sceneName);    	
     },
     
     addPoints: function( points ) {

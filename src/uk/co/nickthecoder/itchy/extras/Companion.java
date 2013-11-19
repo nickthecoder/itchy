@@ -122,7 +122,7 @@ public abstract class Companion<T extends Companion<T>> extends AbstractRole
      * @throws NullPointerException
      *         if the costume is not found.
      */
-    public T companionCostume( String companionType )
+    public T companion( String companionType )
     {
         Costume costume = Itchy.getGame().resources.getCompanionCostume(
             this.source.getCostume(),

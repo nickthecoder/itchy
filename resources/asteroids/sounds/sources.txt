@@ -1,0 +1,71 @@
+Here are the attributions for each sound sample used.
+All sounds have been resampled to 22050Hz
+Each sample has :
+
+* Its original name
+* A url of the original file
+* The role of the sound sample
+* A short description of any modifications I made to the original sample
+* The name of the file as used in the game
+
+
+33245__ljudman__grenade.wav
+http://www.freesound.org/samplesViewSingle.php?id=33245
+A Shootble dying
+Removed the short silence at the beginning
+explode.ogg
+
+27568__suonho__MemoryMoon_space_blaster_plays.wav
+http://www.freesound.org/samplesViewSingle.php?id=27568
+Ball going into the Gate
+warp.ogg
+
+45656__csengeri__tuzijatek.wav
+http://www.freesound.org/samplesViewSingle.php?id=45656
+Used the 2nd noise, trimmed, and faded out the end to make it very short.
+Ship firing a bullet
+fire.ogg
+
+22456__nathanshadow__Thruster_Level_III.aif
+http://www.freesound.org/samplesViewSingle.php?id=22456
+When the ship's thrusters are fired
+thrust.ogg
+
+22456__nathanshadow__Thruster_Level_III.aif
+http://www.freesound.org/samplesViewSingle.php?id=22456
+When the ship turns left or right.
+Changed the pitch and decreased the volume a lot.
+rotate.ogg
+
+74395__Benboncan__Ricochet_3.wav
+http://www.freesound.org/samplesViewSingle.php?id=74395
+Bullets hitting scenery
+ricochet.ogg
+
+12654__mich3d__Drop_Slow_Long_01.wav
+http://www.freesound.org/samplesViewSingle.php?id=12654
+Cut just a single drip from the middle
+drip.ogg
+
+18380__inferno__hvrl.wav
+http://www.freesound.org/samplesViewSingle.php?id=18380
+Lauch of a missile
+missile.ogg
+
+31652__ERH__kadel_3.wav
+http://www.freesound.org/samplesViewSingle.php?id=31652
+When the ball has travelled through the gate.
+ballCollected.ogg
+
+
+29594__ERH__choir_c.wav
+http://www.freesound.org/samplesViewSingle.php?id=29594
+Chopped the end to make a little shorter
+Gate open for a ship to move through.
+gateOpen.ogg
+
+39320__the-bizniss__glass-d.wav
+http://www.freesound.org/people/THE_bizniss/sounds/39320/
+ding.ogg
+
+

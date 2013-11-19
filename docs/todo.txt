@@ -8,7 +8,14 @@ Test on windows.
 
 Send to Asul
 
+Clip Animation
+    Swipe the game over menus items as they appear. 
 
+Compound Role
+    the editor knows about the interface, and adds a table under the Role ClassName.
+    The currently selected role's properties are shown on the right of the table.
+    This can be in ADDITION to the CompoundRole's properties.
+Same feature for SceneDirector.
 
 Follow up on the TODOs
 
@@ -31,6 +38,13 @@ BUG: Reloading a SceneBehaviour script causes the properties to double.
 
 BUG: Changing SceneBehaviour doesn't update the SceneBehaviourProperty components
 
+Animation test
+    Test and edit are done in the same full screen editor - like scene designer.
+    Add: Pick a pose, then place it on the world.
+    A large time-line pane shows an overview of the animation. Dragging controls will change the tick or loops of the animation.
+        Can fill the whole page, with the animation on top of it.
+    Click at a point in the time-line to show that frame.
+    Save the pose and start x,y, direction, heading with each animation ("test" tag)
 
 Asteroids
     Test strength - create a hard rock, which can't be destroyed by the puny bullets.

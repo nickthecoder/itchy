@@ -14,17 +14,21 @@ Play = new Class({
         game.loadScene("foreground", true);
     },
 
-    onKeyDown: function(ke)
+    onKeyDown: function(event)
     {
         // Escape key takes us back to the menu.
-        if (ke.symbol == ke.ESCAPE) {
+        if (event.symbol == event.ESCAPE) {
             game.startScene("menu");
             return true; // Return true to indicate that the key has been processed.
         }
         // Play again if dead an return pressed.
-        if ((ke.symbol == ke.RETURN) && (directorScript.lives == 0)) {
+        if ((event.symbol == event.RETURN) && (directorScript.lives == 0)) {
         	directorScript.startGame();
         }
+    
+    	if ((event.symbol > event.KEY_0) && (event.symbol <= event.KEY_9)) {
+    		game.startScene( "" + (event.symbol - event.KEY_0) );
+    	}
         return false;
     },
     

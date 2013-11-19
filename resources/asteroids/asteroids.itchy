@@ -7,10 +7,12 @@
   <ninePatches/>
   <poses>
     <pose name="bullet1" filename="images/bullet1.png"/>
+    <pose name="bullet2" filename="images/bullet2.png"/>
     <pose name="explosion" filename="images/explosion.png"/>
     <pose name="fragment1" filename="images/fragment1.png"/>
     <pose name="fragment2" filename="images/fragment2.png"/>
     <pose name="life1" filename="images/life1.png"/>
+    <pose name="life2" filename="images/life2.png" direction="90.0"/>
     <pose name="rock1a" filename="images/rock1a.png"/>
     <pose name="rock1b" filename="images/rock1b.png"/>
     <pose name="rock1c" filename="images/rock1c.png"/>
@@ -21,11 +23,22 @@
     <pose name="rock2c1" filename="images/rock2c1.png"/>
     <pose name="rock2c2" filename="images/rock2c2.png"/>
     <pose name="ship1" filename="images/ship1.png" direction="90.0"/>
+    <pose name="ship2" filename="images/ship2.png" direction="90.0"/>
     <pose name="stars1" filename="images/stars1.jpg"/>
     <pose name="stars2" filename="images/stars2.jpg"/>
     <pose name="warp" filename="images/warp.png"/>
   </poses>
   <sounds>
+    <sound name="ding" filename="sounds/ding.ogg"/>
+    <sound name="explode" filename="sounds/explode.ogg"/>
+    <sound name="explode-medium" filename="sounds/explode-medium.ogg"/>
+    <sound name="explode-quiet" filename="sounds/explode-quiet.ogg"/>
+    <sound name="fire" filename="sounds/fire.ogg"/>
+    <sound name="missile" filename="sounds/missile.ogg"/>
+    <sound name="mystic" filename="sounds/mystic.ogg"/>
+    <sound name="ricochet" filename="sounds/ricochet.ogg"/>
+    <sound name="thrust2" filename="sounds/thrust2.ogg"/>
+    <sound name="warp" filename="sounds/warp.ogg"/>
     <sound name="woo" filename="sounds/woo.ogg"/>
   </sounds>
   <animations>
@@ -94,7 +107,7 @@
       </compound>
     </animation>
     <animation name="shipDeath">
-      <compound loops="1" sequence="false">
+      <compound finishedMessage="exploded" loops="1" sequence="false">
         <alpha ease="easeOut" target="0.0" ticks="70"/>
         <color ease="linear" targetColor="#a50300ff" ticks="100"/>
       </compound>
@@ -115,7 +128,10 @@
   <costumes>
     <costume name="Button" defaultZOrder="0">
       <string name="default">Button</string>
+      <sound name="click" sound="missile" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
+      <sound name="hoverOver" sound="ding" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="PLAY_BOTH" priority="1"/>
       <font name="default" font="Boycott"/>
+      <animation name="fadeIn" animation="fadeIn"/>
       <animation name="hoverOut" animation="hoverOut"/>
       <animation name="hoverOver" animation="hoverOver"/>
       <animation name="mouseDown" animation="mouseDown"/>
@@ -124,81 +140,109 @@
     <costume name="Game Over" defaultZOrder="0" role="uk.co.nickthecoder.itchy.extras.Tagged">
       <string name="default">Game Over</string>
       <font name="default" font="BlackCasper"/>
-      <animation name="reveal" animation="gameOverReveal"/>
+      <animation name="fadeIn" animation="gameOverReveal"/>
     </costume>
     <costume name="bullet" defaultZOrder="0" role="Bullet.js" properties="BulletProperties.js">
+      <sound name="default" sound="fire" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
       <properties impulse="1.0" strength="1.0"/>
     </costume>
     <costume name="bullet1" defaultZOrder="0" extends="bullet" role="Bullet.js" properties="BulletProperties.js">
       <pose name="default" pose="bullet1"/>
       <animation name="default" animation="bullet1"/>
-      <properties impulse="1.0" strength="1.0"/>
+      <properties impulse="0.1" strength="1.0"/>
     </costume>
-    <costume name="editor" defaultZOrder="0" extends="Button" role="uk.co.nickthecoder.itchy.extras.MessageButton">
+    <costume name="bullet2" defaultZOrder="0" extends="bullet" role="Bullet.js" properties="BulletProperties.js">
+      <pose name="default" pose="bullet2"/>
+      <sound name="default" sound="missile" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
+      <animation name="default" animation="bullet1"/>
+      <properties impulse="1.0" strength="2.0"/>
+    </costume>
+    <costume name="editor" defaultZOrder="0" extends="Button" role="uk.co.nickthecoder.itchy.extras.EditorButton">
       <string name="default">Editor</string>
       <font name="default" font="Boycott"/>
+    </costume>
+    <costume name="explosion" defaultZOrder="0" role="uk.co.nickthecoder.itchy.PlainRole">
+      <pose name="default" pose="explosion"/>
     </costume>
     <costume name="life1" defaultZOrder="0" role="uk.co.nickthecoder.itchy.PlainRole">
       <pose name="default" pose="life1"/>
       <animation name="appear" animation="lifeAppear"/>
       <animation name="disappear" animation="lifeDisappear"/>
     </costume>
-    <costume name="play" defaultZOrder="0" extends="Button">
+    <costume name="life2" defaultZOrder="0" role="uk.co.nickthecoder.itchy.PlainRole">
+      <pose name="default" pose="life2"/>
+    </costume>
+    <costume name="play" defaultZOrder="0" extends="Button" role="uk.co.nickthecoder.itchy.extras.MessageButton">
       <string name="default">play</string>
-      <sound name="click" sound="woo" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
       <font name="default" font="BlackCasper"/>
     </costume>
-    <costume name="rock1" defaultZOrder="0" role="Rock.js" properties="RockProperties.js">
+    <costume name="rock" defaultZOrder="0" role="uk.co.nickthecoder.itchy.PlainRole">
+      <sound name="explode" sound="explode-medium" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="PLAY_BOTH" priority="1"/>
+      <sound name="hit" sound="ricochet" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
+      <sound name="ricochet" sound="ricochet" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="PLAY_BOTH" priority="1"/>
+    </costume>
+    <costume name="rock1" defaultZOrder="0" extends="rock" role="Rock.js" properties="RockProperties.js">
       <pose name="default" pose="rock1a"/>
       <pose name="fragment" pose="fragment1"/>
       <string name="fragment">rock1b</string>
-      <properties pieces="3" points="10" strength="0" hitsRequired="1"/>
+      <properties pieces="3" points="10" strength="1" hitsRequired="1"/>
     </costume>
-    <costume name="rock1b" defaultZOrder="0" role="Rock.js" properties="RockProperties.js">
+    <costume name="rock1b" defaultZOrder="0" extends="rock" role="Rock.js" properties="RockProperties.js">
       <pose name="default" pose="rock1b"/>
       <pose name="fragment" pose="fragment1"/>
       <string name="fragment">rock1c</string>
-      <properties pieces="2" points="20" strength="0" hitsRequired="1"/>
+      <properties pieces="2" points="20" strength="1" hitsRequired="1"/>
     </costume>
-    <costume name="rock1c" defaultZOrder="0" role="Rock.js" properties="RockProperties.js">
+    <costume name="rock1c" defaultZOrder="0" extends="rock" role="Rock.js" properties="RockProperties.js">
       <pose name="default" pose="rock1c"/>
       <pose name="fragment" pose="fragment1"/>
-      <properties pieces="0" points="50" strength="0" hitsRequired="1"/>
+      <sound name="explode" sound="explode-quiet" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="PLAY_BOTH" priority="1"/>
+      <properties pieces="0" points="50" strength="1" hitsRequired="1"/>
     </costume>
-    <costume name="rock2" defaultZOrder="0" role="Rock.js" properties="RockProperties.js">
+    <costume name="rock2" defaultZOrder="0" extends="rock" role="Rock.js" properties="RockProperties.js">
       <pose name="default" pose="rock2a1"/>
       <pose name="default" pose="rock2a2"/>
       <pose name="fragment" pose="fragment2"/>
       <string name="fragment">rock2b</string>
-      <properties pieces="3" points="100" strength="0" hitsRequired="3"/>
+      <properties pieces="3" points="100" strength="1" hitsRequired="3"/>
     </costume>
-    <costume name="rock2b" defaultZOrder="0" role="Rock.js" properties="RockProperties.js">
+    <costume name="rock2b" defaultZOrder="0" extends="rock" role="Rock.js" properties="RockProperties.js">
       <pose name="default" pose="rock2b1"/>
       <pose name="default" pose="rock2b2"/>
       <pose name="fragment" pose="fragment2"/>
       <string name="fragment">rock2c</string>
-      <properties pieces="2" points="200" strength="0" hitsRequired="3"/>
+      <properties pieces="2" points="200" strength="1" hitsRequired="2"/>
     </costume>
-    <costume name="rock2c" defaultZOrder="0" role="Rock.js" properties="RockProperties.js">
+    <costume name="rock2c" defaultZOrder="0" extends="rock" role="Rock.js" properties="RockProperties.js">
       <pose name="default" pose="rock2c1"/>
       <pose name="default" pose="rock2c2"/>
       <pose name="fragment" pose="fragment2"/>
-      <properties pieces="0" points="400" strength="0" hitsRequired="3"/>
+      <sound name="explode" sound="explode-quiet" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="PLAY_BOTH" priority="1"/>
+      <properties pieces="0" points="400" strength="1" hitsRequired="2"/>
     </costume>
     <costume name="ship" defaultZOrder="0" role="Ship.js" properties="ShipProperties.js">
-      <pose name="explosion" pose="explosion"/>
-      <pose name="warp" pose="warp"/>
       <string name="bullet">bullet1</string>
+      <string name="explosion">explosion</string>
+      <string name="warp">warp</string>
+      <sound name="default" sound="mystic" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
+      <sound name="explode" sound="explode" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
+      <sound name="fade" sound="warp" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
+      <sound name="warp" sound="warp" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
       <animation name="default" animation="fadeIn"/>
+      <animation name="explode" animation="shipDeath"/>
       <animation name="fade" animation="fadeOut"/>
-      <animation name="warp" animation="warp"/>
       <properties rotationSpeed="5.0" thrust="0.3" firePeriod="0.2"/>
     </costume>
     <costume name="ship1" defaultZOrder="0" extends="ship" role="Ship.js" properties="ShipProperties.js">
       <pose name="default" pose="ship1"/>
       <string name="life">life1</string>
-      <animation name="explode" animation="shipDeath"/>
       <properties rotationSpeed="3.0" thrust="0.3" firePeriod="0.2"/>
+    </costume>
+    <costume name="ship2" defaultZOrder="0" extends="ship" role="Ship.js" properties="ShipProperties.js">
+      <pose name="default" pose="ship2"/>
+      <string name="bullet">bullet2</string>
+      <string name="life">life2</string>
+      <properties rotationSpeed="2.0" thrust="0.3" firePeriod="0.3"/>
     </costume>
     <costume name="stars1" defaultZOrder="0">
       <pose name="default" pose="stars1"/>
@@ -206,14 +250,20 @@
     <costume name="stars2" defaultZOrder="0">
       <pose name="default" pose="stars2"/>
     </costume>
+    <costume name="warp" defaultZOrder="0" role="uk.co.nickthecoder.itchy.PlainRole">
+      <pose name="default" pose="warp"/>
+      <animation name="default" animation="warp"/>
+    </costume>
   </costumes>
   <scenes>
     <scene name="1"/>
     <scene name="2"/>
     <scene name="3"/>
+    <scene name="4"/>
     <scene name="about"/>
     <scene name="completed"/>
     <scene name="foreground"/>
+    <scene name="gameOver"/>
     <scene name="menu"/>
   </scenes>
 </resources>

@@ -31,7 +31,6 @@ public class CostumeSceneActor extends SceneActor
             actor.event(event);
         }
         
-        actor.setStartEvent(this.startEvent);
         this.updateActor(actor, resources, designActor);
         
         return actor;

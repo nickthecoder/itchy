@@ -24,15 +24,18 @@ Rock = Class({
     shot: function(bullet) {
     	// Small bullets have NO effect on strong rocks.
     	if (bullet.getCostumeProperties().strength < this.getCostumeProperties().strength) {
+    		this.actor.event("ricochet");
     		return;
     	}
     	
     	this.hits += bullet.getCostumeProperties().strength;
     	// Have we hit the rock enough times?
     	if ( this.hits < this.getCostumeProperties().hitsRequired) {
+    		this.actor.event("hit");
     		return;
     	}
     	
+		this.actor.event("explode");
     	directorScript.addPoints(this.getCostumeProperties().points);
     	
         new itchy.extras.Explosion(this.actor)

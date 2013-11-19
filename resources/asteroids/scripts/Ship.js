@@ -19,11 +19,12 @@ Ship = Class({
         sceneDirectorScript.ship = this;
 		
 		new itchy.extras.Explosion(this.actor)
-			.distance(-30,-100).direction(0,360).speed(0,0).eventName("warp").projectiles(40)
+			.companion("warp").eventName("default").distance(-30,-100).direction(0,360).speed(0,0).projectiles(40)
 			.createActor();
 
 		new itchy.extras.Explosion(this.actor)
-			.distance(-60).direction(0,360).speed(4,2).pose("explosion").fade(3).projectiles(20).randomSpread(false)
+			.companion("explosion")
+			.distance(-60).direction(0,360).speed(4,2).fade(3).projectiles(20).randomSpread(false)
 			.createActor();
 	
 		for (var i = 0; i < directorScript.lives; i ++ ) {
@@ -42,8 +43,9 @@ Ship = Class({
     	this.vy = 0;
     	for (var i = 0; i < 3; i ++) {
     		new itchy.extras.Explosion(this.actor)
+    			.companion("warp")
     			.spread(i*120, 360 + i*120).vx(this.vx).vy(this.vy).distance(300)
-    			.speed(-6,0).pose("warp").projectiles(20).projectilesPerTick(1).randomSpread(false).alpha(0).fade(-3)
+    			.speed(-6,0).projectiles(20).projectilesPerTick(1).randomSpread(false).alpha(0).fade(-3)
     			.createActor();
     	}
     	this.actor.deathEvent("fade");
@@ -102,10 +104,8 @@ Ship = Class({
 			if (directorScript.lives > 0) {
 				game.startScene(game.getSceneName());
 	    	} else {
-	    		for ( var i = itchy.AbstractRole.allByTag( "gameOver" ).iterator(); i.hasNext();) {
-	    			var gameOver = i.next();
-	    			gameOver.event("reveal");
-	    		}
+	    		game.showMousePointer(true);
+	            game.loadScene("gameOver", true);	    		
     		}
     	}
     },

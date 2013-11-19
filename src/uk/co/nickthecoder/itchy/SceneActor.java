@@ -83,6 +83,7 @@ public abstract class SceneActor implements Cloneable
 
     protected void updateActor( Actor actor, Resources resources, boolean designMode )
     {
+        actor.setStartEvent(this.startEvent);
         actor.moveTo(this.x, this.y);
         actor.setZOrder(this.zOrder);
         actor.getAppearance().setAlpha(this.alpha);
