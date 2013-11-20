@@ -7,9 +7,10 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
+import uk.co.nickthecoder.itchy.util.Named;
 import uk.co.nickthecoder.itchy.util.Property;
 
-public class NamedResource
+public class NamedResource implements Named
 {
     protected Resources resources;
 

@@ -12,6 +12,7 @@ import java.util.Set;
 
 import javax.script.ScriptException;
 
+import uk.co.nickthecoder.itchy.Actor.AnimationEvent;
 import uk.co.nickthecoder.itchy.animation.Animation;
 import uk.co.nickthecoder.itchy.util.AbstractProperty;
 import uk.co.nickthecoder.itchy.util.ClassName;
@@ -188,6 +189,11 @@ public abstract class AbstractRole implements Role
         getActor().play(soundName);
     }
 
+    public void event( String eventName, AnimationEvent ae )
+    {
+        getActor().event(eventName, ae);
+
+    }
     public void event( String poseName )
     {
         getActor().event(poseName);

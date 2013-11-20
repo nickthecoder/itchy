@@ -10,8 +10,10 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
+import uk.co.nickthecoder.itchy.animation.Animation;
 import uk.co.nickthecoder.itchy.animation.Ease;
 import uk.co.nickthecoder.itchy.util.ClassName;
+import uk.co.nickthecoder.itchy.util.NamedComparator;
 
 public class Registry
 {
@@ -20,6 +22,10 @@ public class Registry
     private Map<Class<?>, Set<String>> classNames;
 
     private Map<String, Ease> eases;
+
+    private Map<String, Animation> animationsByName;
+
+    private Map<String, Animation> animationsByTagName;
 
     public Registry()
     {
@@ -31,6 +37,8 @@ public class Registry
         this.parent = parent;
         this.classNames = new HashMap<Class<?>, Set<String>>();
         this.eases = new HashMap<String, Ease>();
+        this.animationsByName = new HashMap<String, Animation>();
+        this.animationsByTagName = new HashMap<String, Animation>();
     }
 
     public boolean contains( ClassName className )
@@ -106,8 +114,45 @@ public class Registry
         return getClassNames(Director.class);
     }
 
-    public void registerAnimation()
+    public void add( Animation animation )
     {
+        this.animationsByName.put(animation.getName(), animation);
+        this.animationsByTagName.put(animation.getTagName(), animation);
+    }
+
+    public Animation getAnimationByName( String name )
+    {
+        Animation result = this.animationsByName.get(name);
+        if (result == null) {
+            return null;
+        }
+        return result.copy();
+    }
+
+    public Animation getAnimationByTagName( String name )
+    {
+        Animation result = this.animationsByTagName.get(name);
+        if (result == null) {
+            return null;
+        }
+        return result.copy();
+    }
+
+    public Map<String, Animation> getAnimationsByName()
+    {
+        return Collections.unmodifiableMap(this.animationsByName);
+    }
+
+    public Map<String, Animation> getAnimationsByTagName()
+    {
+        return Collections.unmodifiableMap(this.animationsByTagName);
+    }
+
+    public Set<Animation> getAnimations()
+    {
+        TreeSet<Animation> result = new TreeSet<Animation>(new NamedComparator());
+        result.addAll(this.animationsByName.values());
+        return result;
     }
 
     public void add( String name, Ease ease )

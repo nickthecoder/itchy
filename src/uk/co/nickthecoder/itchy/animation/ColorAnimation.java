@@ -41,11 +41,17 @@ public class ColorAnimation extends NumericAnimation
     {
         return properties;
     }
-    
+
     @Override
     public String getName()
     {
-        return "Color";
+        return "Colour";
+    }
+    
+    @Override
+    public String getTagName()
+    {
+        return "color";
     }
 
     @Override

@@ -50,7 +50,7 @@ public class CompoundAnimation extends AbstractAnimation
     {
         return this.sequence ? "Sequence" : "Parallel";
     }
-
+    
     public CompoundAnimation add( Animation child )
     {
         this.addAnimation(child);

@@ -1,6 +1,18 @@
 <resources>
   
     <poses>
+        <pose name="animation-alpha" filename="images/animation-alpha.png" />                
+        <pose name="animation-clip" filename="images/animation-clip.png" />                
+        <pose name="animation-color" filename="images/animation-color.png" />                
+        <pose name="animation-delay" filename="images/animation-delay.png" />                
+        <pose name="animation-forwards" filename="images/animation-forwards.png" />                
+        <pose name="animation-frames" filename="images/animation-frames.png" />                
+        <pose name="animation-heading" filename="images/animation-heading.png" />                
+        <pose name="animation-move" filename="images/animation-move.png" />                
+        <pose name="animation-parallel" filename="images/animation-parallel.png" />                
+        <pose name="animation-scale" filename="images/animation-scale.png" />                
+        <pose name="animation-sequence" filename="images/animation-sequence.png" />                
+        <pose name="animation-turn" filename="images/animation-turn.png" />                
         <pose name="icon_exit" filename="images/exit.png" />                
         <pose name="icon_unscale" filename="images/unscale.png" />                
         <pose name="icon_unrotate" filename="images/unrotate.png" />                

@@ -1,7 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0 which accompanies this
- * distribution, and is available at http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
@@ -11,17 +10,10 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.util.Iterator;
 
-import uk.co.nickthecoder.itchy.animation.AlphaAnimation;
 import uk.co.nickthecoder.itchy.animation.Animation;
-import uk.co.nickthecoder.itchy.animation.ColorAnimation;
 import uk.co.nickthecoder.itchy.animation.CompoundAnimation;
-import uk.co.nickthecoder.itchy.animation.ForwardsAnimation;
 import uk.co.nickthecoder.itchy.animation.Frame;
 import uk.co.nickthecoder.itchy.animation.FramedAnimation;
-import uk.co.nickthecoder.itchy.animation.HeadingAnimation;
-import uk.co.nickthecoder.itchy.animation.MoveAnimation;
-import uk.co.nickthecoder.itchy.animation.ScaleAnimation;
-import uk.co.nickthecoder.itchy.animation.TurnAnimation;
 import uk.co.nickthecoder.itchy.script.ScriptManager;
 import uk.co.nickthecoder.itchy.util.AbstractProperty;
 import uk.co.nickthecoder.itchy.util.ClassName;
@@ -45,7 +37,7 @@ public class ResourcesReader
     public ResourcesReader( Resources resources )
     {
         this.resources = resources;
-        this.scriptManager = new ScriptManager(resources );
+        this.scriptManager = new ScriptManager(resources);
     }
 
     public void load( String filename ) throws Exception
@@ -176,7 +168,7 @@ public class ResourcesReader
                 SoundResource soundResource = new SoundResource(this.resources, name, filename);
                 this.resources.addSound(soundResource);
             } catch (JameException e) {
-                throw new XMLException( "Failed to load sound file : " + filename );
+                throw new XMLException("Failed to load sound file : " + filename);
             }
         }
 
@@ -195,7 +187,7 @@ public class ResourcesReader
             // But only one animation can be named
             if (dummyAnimation.children.size() != 1) {
                 throw new XMLException(
-                    "animation tag requires exactly one child (pingPong, frames, sequence, parallel etc)");
+                    "animation tag requires exactly one child");
             }
 
             AnimationResource ar = new AnimationResource(this.resources, itemName, dummyAnimation.children.get(0));
@@ -224,7 +216,7 @@ public class ResourcesReader
             }
 
             String roleName = costumeTag.getOptionalAttribute("role", NullRole.class.getName());
-            ClassName roleClassName = new ClassName( Role.class, roleName );
+            ClassName roleClassName = new ClassName(Role.class, roleName);
 
             if (this.resources.checkClassName(roleClassName)) {
                 costume.roleClassName = roleClassName;
@@ -233,8 +225,8 @@ public class ResourcesReader
             }
 
             String propertiesName = costumeTag.getOptionalAttribute("properties", CostumeProperties.class.getName());
-            ClassName propertiesClassName = new ClassName( CostumeProperties.class, propertiesName);
-            
+            ClassName propertiesClassName = new ClassName(CostumeProperties.class, propertiesName);
+
             if (this.resources.checkClassName(propertiesClassName)) {
                 costume.setPropertiesClassName(this.scriptManager, propertiesClassName);
 
@@ -354,46 +346,57 @@ public class ResourcesReader
     public Animation createAnimation( String tagName )
         throws XMLException
     {
-        if (tagName.equals("compound")) {
+        if (tagName == "compound") {
             return new CompoundAnimation(true);
-
-        } else if (tagName.equals("parallel")) {
-            return new CompoundAnimation(false);
-
-        } else if (tagName.equals("sequence")) {
-            return new CompoundAnimation(true);
-
-        } else if (tagName.equals("pingPong")) {
-            return new FramedAnimation();
-
-        } else if (tagName.equals("frames")) {
-            return new FramedAnimation();
-
-        } else if (tagName.equals("move")) {
-            return new MoveAnimation();
-
-        } else if (tagName.equals("forwards")) {
-            return new ForwardsAnimation();
-
-        } else if (tagName.equals("alpha")) {
-            return new AlphaAnimation();
-
-        } else if (tagName.equals("turn")) {
-            return new TurnAnimation();
-
-        } else if (tagName.equals("heading")) { 
-            return new HeadingAnimation();
-
-        } else if (tagName.equals("scale")) {
-            return new ScaleAnimation();
-
-        } else if (tagName.equals("color")) {
-            return new ColorAnimation();
-
-        } else {
+        }
+        Animation animation = Itchy.registry.getAnimationByTagName(tagName);
+        if (animation == null) {
             throw new XMLException("Unknown animation : " + tagName);
         }
+        return animation;
     }
+
+    /*
+    if (tagName.equals("compound")) {
+        return new CompoundAnimation(true);
+
+    } else if (tagName.equals("parallel")) {
+        return new CompoundAnimation(false);
+
+    } else if (tagName.equals("sequence")) {
+        return new CompoundAnimation(true);
+
+    } else if (tagName.equals("pingPong")) {
+        return new FramedAnimation();
+
+    } else if (tagName.equals("frames")) {
+        return new FramedAnimation();
+
+    } else if (tagName.equals("move")) {
+        return new MoveAnimation();
+
+    } else if (tagName.equals("forwards")) {
+        return new ForwardsAnimation();
+
+    } else if (tagName.equals("alpha")) {
+        return new AlphaAnimation();
+
+    } else if (tagName.equals("turn")) {
+        return new TurnAnimation();
+
+    } else if (tagName.equals("heading")) { 
+        return new HeadingAnimation();
+
+    } else if (tagName.equals("scale")) {
+        return new ScaleAnimation();
+
+    } else if (tagName.equals("color")) {
+        return new ColorAnimation();
+
+    } else {
+        throw new XMLException("Unknown animation : " + tagName);
+    }
+    */
 
     private <S extends PropertySubject<S>> void readProperties( XMLTag tag, S subject )
         throws XMLException

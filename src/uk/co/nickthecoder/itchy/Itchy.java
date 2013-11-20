@@ -7,6 +7,7 @@ package uk.co.nickthecoder.itchy;
 import java.io.File;
 import java.util.Stack;
 
+import uk.co.nickthecoder.itchy.animation.Animations;
 import uk.co.nickthecoder.itchy.animation.Eases;
 import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.jame.Audio;
@@ -92,6 +93,10 @@ public class Itchy
         System.out.println( "Registering Eases");
         
         Eases.registerEases();
+
+        System.out.println( "Registering Animation Types");
+        
+        Animations.registerAnimations();
     }
 
     public static void init( Resources resources ) throws Exception

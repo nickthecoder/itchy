@@ -1,7 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0 which accompanies this
- * distribution, and is available at http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
@@ -9,17 +8,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import uk.co.nickthecoder.itchy.animation.AlphaAnimation;
 import uk.co.nickthecoder.itchy.animation.Animation;
-import uk.co.nickthecoder.itchy.animation.ColorAnimation;
 import uk.co.nickthecoder.itchy.animation.CompoundAnimation;
-import uk.co.nickthecoder.itchy.animation.ForwardsAnimation;
 import uk.co.nickthecoder.itchy.animation.Frame;
 import uk.co.nickthecoder.itchy.animation.FramedAnimation;
-import uk.co.nickthecoder.itchy.animation.HeadingAnimation;
-import uk.co.nickthecoder.itchy.animation.MoveAnimation;
-import uk.co.nickthecoder.itchy.animation.ScaleAnimation;
-import uk.co.nickthecoder.itchy.animation.TurnAnimation;
 import uk.co.nickthecoder.itchy.util.AbstractProperty;
 import uk.co.nickthecoder.itchy.util.NinePatch;
 import uk.co.nickthecoder.itchy.util.PropertySubject;
@@ -72,10 +64,10 @@ public class ResourcesWriter extends XMLWriter
     private void writeGame() throws XMLException
     {
         this.beginTag("game");
-        this.writeProperties(resources.getGameInfo());
+        this.writeProperties(this.resources.getGameInfo());
         this.endTag("game");
     }
-    
+
     private void writeFonts() throws XMLException
     {
         this.beginTag("fonts");
@@ -181,6 +173,8 @@ public class ResourcesWriter extends XMLWriter
     private String getAnimationTagName( Animation animation )
         throws XMLException
     {
+        return animation.getTagName();
+        /*
         if (animation instanceof CompoundAnimation) {
             return "compound";
 
@@ -211,9 +205,10 @@ public class ResourcesWriter extends XMLWriter
         } else {
             throw new XMLException("Unknown animation : " + animation.getClass().getName());
         }
+        */
     }
 
-    private <S extends PropertySubject<S>> void writeProperties(S subject )
+    private <S extends PropertySubject<S>> void writeProperties( S subject )
         throws XMLException
     {
         for (AbstractProperty<S, ?> property : subject.getProperties()) {
@@ -362,7 +357,7 @@ public class ResourcesWriter extends XMLWriter
                 // For example Fragment, generates poses, which are added to a costume, but should
                 // be
                 // ignore when saving the resources.
-                if ( ! poseResource.isAnonymous() ) {
+                if (!poseResource.isAnonymous()) {
 
                     this.beginTag("pose");
                     this.attribute("name", name);
