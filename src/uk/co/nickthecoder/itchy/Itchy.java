@@ -90,6 +90,13 @@ public class Itchy
 
         registry.add(new ClassName(CostumeProperties.class, CostumeProperties.class.getName()));
 
+        System.out.println( "Registering Makeup");
+
+        registry.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.NullMakeup.class.getName()));
+        registry.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.extras.TextShadow.class.getName()));
+        registry.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.extras.Shadow.class.getName()));
+        registry.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.extras.Scale.class.getName()));
+        
         System.out.println( "Registering Eases");
         
         Eases.registerEases();

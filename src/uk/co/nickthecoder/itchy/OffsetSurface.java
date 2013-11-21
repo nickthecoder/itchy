@@ -20,5 +20,10 @@ public interface OffsetSurface
     public int getOffsetY();
 
     public Surface getSurface();
+    
+    /**
+     * @return true iff the surface should not be freed, because it is shared by another entity.
+     */
+    public boolean isShared();
 
 }

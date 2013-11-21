@@ -111,8 +111,6 @@ public class SceneTransition
 
     private Actor actor;
 
-    private boolean pause = false;
-
     public SceneTransition()
     {
         // Default transition is a fade out over 100 frames.
@@ -126,17 +124,6 @@ public class SceneTransition
     }
 
     /**
-     * When value = true, the game will be paused while the scene transition takes place. This may cause problems if any of your game code
-     * relies on the elapsed time since the start of the scene.
-     * 
-     * @param value
-     */
-    public void setPause( boolean value )
-    {
-        this.pause = value;
-    }
-
-    /**
      * The game will be paused while the scene transition takes place. This may cause problems if any of your game code relies on the
      * elapsed time since the start of the scene.
      * 
@@ -144,7 +131,6 @@ public class SceneTransition
      */
     public SceneTransition pause()
     {
-        setPause(true);
         return this;
     }
 
@@ -213,9 +199,7 @@ public class SceneTransition
         clear();
 
         Itchy.getGame().loadScene(sceneName);
-        if (this.pause) {
-            Itchy.getGame().pause.pause(false);
-        }
+
         begin();
 
         return true;
@@ -229,9 +213,6 @@ public class SceneTransition
         currentSceneTransition = null;
 
         this.actor.kill();
-        if (this.pause) {
-            Itchy.getGame().pause.unpause();
-        }
         Itchy.getGame().getDirector().onMessage(COMPLETE);
     }
 

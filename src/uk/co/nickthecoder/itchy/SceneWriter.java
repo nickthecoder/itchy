@@ -1,9 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
@@ -46,25 +43,24 @@ public class SceneWriter extends XMLWriter
 
         this.beginTag("scene");
         this.attribute("showMouse", this.scene.showMouse);
-        if ( ! PlainSceneDirector.class.getName().equals(this.scene.sceneDirectorClassName)) {
+        if (!PlainSceneDirector.class.getName().equals(this.scene.sceneDirectorClassName)) {
             this.attribute("role", this.scene.sceneDirectorClassName.name);
         }
         this.attribute("background", this.scene.backgroundColor.toString());
-        
+
         writeSceneDirectorProperties();
 
-        for ( Scene.SceneLayer sceneLayer : this.scene.getSceneLayers() ) {
-            
-            if ( !sceneLayer.isEmpty() ) {
+        for (Scene.SceneLayer sceneLayer : this.scene.getSceneLayers()) {
+
+            if (!sceneLayer.isEmpty()) {
                 this.beginTag("layer");
-                this.attribute("name",sceneLayer.name);
-                
+                this.attribute("name", sceneLayer.name);
+
                 this.writeActors(sceneLayer);
-    
+
                 this.endTag("layer");
             }
-        }            
-
+        }
 
         this.endTag("scene");
     }
@@ -72,9 +68,9 @@ public class SceneWriter extends XMLWriter
     private void writeSceneDirectorProperties()
         throws XMLException
     {
-            
+
         this.beginTag("properties");
-        for ( AbstractProperty<SceneDirector,?> property : this.scene.sceneDirector.getProperties()) {
+        for (AbstractProperty<SceneDirector, ?> property : this.scene.sceneDirector.getProperties()) {
             try {
                 this.beginTag("property");
                 this.attribute("name", property.key);
@@ -84,11 +80,11 @@ public class SceneWriter extends XMLWriter
                 throw new XMLException("Failed to write sceneDirector property : " + property.key);
             }
         }
-         
+
         this.endTag("properties");
     }
-    
-    private void writeActors(Scene.SceneLayer sceneLayer) throws XMLException
+
+    private void writeActors( Scene.SceneLayer sceneLayer ) throws XMLException
     {
         for (SceneActor sceneActor : sceneLayer.getSceneActors()) {
 
@@ -99,10 +95,12 @@ public class SceneWriter extends XMLWriter
                 this.attribute("costume", this.sceneResource.resources.getCostumeName(csa.costume));
 
                 if ((csa.costume.roleClassName == null) ||
-                        (!csa.costume.roleClassName.name.equals(csa.roleClassName.name))) {
+                    (!csa.costume.roleClassName.name.equals(csa.roleClassName.name))) {
                     this.attribute("role", sceneActor.roleClassName.name);
                 }
                 this.writeSceneActorAttributes(sceneActor);
+
+                this.writeMakeupAttributes(sceneActor);
 
                 this.endTag("actor");
 
@@ -118,11 +116,13 @@ public class SceneWriter extends XMLWriter
                 if (!NullRole.class.getName().equals(sceneActor.roleClassName.name)) {
                     this.attribute("role", sceneActor.roleClassName.name);
                 }
-                if ( tsa.costume != null) {
+                if (tsa.costume != null) {
                     this.attribute("costume", this.sceneResource.resources.getCostumeName(tsa.costume));
                 }
 
                 this.writeSceneActorAttributes(sceneActor);
+
+                this.writeMakeupAttributes(sceneActor);
 
                 this.endTag("text");
             }
@@ -171,9 +171,31 @@ public class SceneWriter extends XMLWriter
 
     }
 
+    private void writeMakeupAttributes( SceneActor sceneActor ) throws XMLException
+    {
+        if (sceneActor.makeupClassName.name.equals( NullMakeup.class.getName())) {
+            return;
+        }
+        this.beginTag("makeup");
+        this.attribute("classname", sceneActor.makeupClassName.name);
+
+        for (String key : sceneActor.makeupProperties.keySet()) {
+            Object value = sceneActor.makeupProperties.get(key);
+
+            String stringValue = this.getPropertyValue(value);
+            if (stringValue != null) {
+                this.beginTag("property");
+                this.attribute("name", key);
+                this.attribute("value", stringValue);
+                this.endTag("property");
+            }
+        }
+        this.endTag("makeup");
+    }
+
     private String getPropertyValue( Object value )
     {
-        if ((value instanceof String) || (value instanceof Boolean)  || (value instanceof Double) || (value instanceof Integer)) {
+        if ((value instanceof String) || (value instanceof Boolean) || (value instanceof Double) || (value instanceof Integer)) {
             return String.valueOf(value);
 
         } else if (value instanceof RGBA) {

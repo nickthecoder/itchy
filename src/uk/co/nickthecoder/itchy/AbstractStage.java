@@ -44,6 +44,14 @@ public abstract class AbstractStage implements Stage, Cloneable
             listener.onAdded(this, actor);
         }
     }
+    
+    @Override
+    public void changedRole( Actor actor )
+    {
+        for (StageListener listener : this.stageListeners) {
+            listener.onChangedRole(this, actor);
+        }
+    }
 
     @Override
     public void remove( Actor actor )

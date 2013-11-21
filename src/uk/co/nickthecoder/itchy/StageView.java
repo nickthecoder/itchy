@@ -1,13 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0 which accompanies this
- * distribution, and is available at http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
+import java.util.Set;
 
 import uk.co.nickthecoder.jame.JameRuntimeException;
 import uk.co.nickthecoder.jame.Rect;
@@ -25,10 +24,10 @@ public class StageView extends AbstractScrollableView implements StageListener, 
     public int maximumAlpha = 255;
 
     /**
-     * A list of Roles of Actors on this view's Stage, who implements ViewMouseListener. They are
-     * expecting to hear events with their x,y coordinates adjusted to their world coordinates.
+     * A list of Roles of Actors on this view's Stage, who implements ViewMouseListener. They are expecting to hear events with their x,y
+     * coordinates adjusted to their world coordinates.
      */
-    private List<ViewMouseListener> roleMouseListeners = null;
+    private Set<ViewMouseListener> roleMouseListeners = null;
 
     /**
      * The actor that requested to capture the mouse events.
@@ -144,7 +143,7 @@ public class StageView extends AbstractScrollableView implements StageListener, 
                             }
 
                         }
-                        
+
                     }
 
                 } catch (JameRuntimeException e) {
@@ -158,6 +157,18 @@ public class StageView extends AbstractScrollableView implements StageListener, 
 
     @Override
     public void onAdded( Stage stage, Actor actor )
+    {
+        Role role = actor.getRole();
+        if (role instanceof ViewMouseListener) {
+            ViewMouseListener listener = ((ViewMouseListener) role);
+            if (listener.isMouseListener()) {
+                this.roleMouseListeners.add(listener);
+            }
+        }
+    }
+
+    @Override
+    public void onChangedRole( Stage stage, Actor actor )
     {
         Role role = actor.getRole();
         if (role instanceof ViewMouseListener) {
@@ -183,7 +194,7 @@ public class StageView extends AbstractScrollableView implements StageListener, 
     @Override
     public void enableMouseListener( Game game )
     {
-        this.roleMouseListeners = new ArrayList<ViewMouseListener>();
+        this.roleMouseListeners = new HashSet<ViewMouseListener>();
         // TODO Iterate over all actors, and add them if the roles are ViewMouseListeners
     }
 

@@ -142,4 +142,10 @@ public class MultiLineTextPose extends AbstractTextPose
         return this.surface.getHeight();
     }
 
+    @Override
+    public boolean isShared()
+    {
+        return true;
+    }
+
 }

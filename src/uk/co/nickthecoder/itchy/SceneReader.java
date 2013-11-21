@@ -1,7 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0 which accompanies this
- * distribution, and is available at http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
@@ -47,28 +46,27 @@ public class SceneReader
     private void readScene( XMLTag sceneTag ) throws Exception
     {
         this.scene.showMouse = sceneTag.getOptionalBooleanAttribute("showMouse", true);
-        String background = sceneTag.getOptionalAttribute("background",  "#000");
+        String background = sceneTag.getOptionalAttribute("background", "#000");
         try {
             this.scene.backgroundColor = RGBA.parse(background);
         } catch (Exception e) {
             throw new XMLException("Illegal colour : " + background);
         }
-        
+
         String sceneDirectorName = sceneTag.getOptionalAttribute("role", PlainSceneDirector.class.getName());
-        this.scene.sceneDirectorClassName = new ClassName(SceneDirector.class, sceneDirectorName );
+        this.scene.sceneDirectorClassName = new ClassName(SceneDirector.class, sceneDirectorName);
 
         // For old versions without multiple layers, the actor tags are directly within the scene
         // tag.
         readLayer(sceneTag, this.scene.getDefaultSceneLayer());
 
         this.scene.sceneDirector = this.scene.createSceneDirector(this.resources);
-        
+
         for (Iterator<XMLTag> i = sceneTag.getTags("properties"); i.hasNext();) {
             XMLTag propertiesTag = i.next();
             this.readProperties(propertiesTag);
         }
-        
-        
+
         // For new versions, the scene tag has a set of layer tags, and the layer tags have the
         // actors.
         for (Iterator<XMLTag> i = sceneTag.getTags("layer"); i.hasNext();) {
@@ -83,33 +81,32 @@ public class SceneReader
     private void readProperties( XMLTag propertiesTag )
         throws Exception
     {
-        List<AbstractProperty<SceneDirector,?>> properties = this.scene.sceneDirector.getProperties();
-        
+        List<AbstractProperty<SceneDirector, ?>> properties = this.scene.sceneDirector.getProperties();
+
         for (Iterator<XMLTag> i = propertiesTag.getTags("property"); i.hasNext();) {
             XMLTag propertyTag = i.next();
             String name = propertyTag.getAttribute("name");
             String value = propertyTag.getAttribute("value");
-            
-            AbstractProperty<SceneDirector,?> property = findProperty( properties, name );
-            if ( property == null) {
-                throw new Exception( "Didn't find SceneDirector property : " + name );
+
+            AbstractProperty<SceneDirector, ?> property = findProperty(properties, name);
+            if (property == null) {
+                throw new Exception("Didn't find SceneDirector property : " + name);
             }
             property.setValueByString(this.scene.sceneDirector, value);
         }
-        
+
     }
-    
-    private AbstractProperty<SceneDirector,?> findProperty(List<AbstractProperty<SceneDirector,?>> properties, String name )
+
+    private AbstractProperty<SceneDirector, ?> findProperty( List<AbstractProperty<SceneDirector, ?>> properties, String name )
     {
-        for (AbstractProperty<SceneDirector,?> property : properties) {
-            if ( property.key.equals( name ) ) {
+        for (AbstractProperty<SceneDirector, ?> property : properties) {
+            if (property.key.equals(name)) {
                 return property;
             }
         }
         return null;
     }
 
-    
     private void readLayer( XMLTag parentTag, Scene.SceneLayer sceneLayer ) throws Exception
     {
         for (Iterator<XMLTag> i = parentTag.getTags(); i.hasNext();) {
@@ -134,7 +131,51 @@ public class SceneReader
         sceneActor.roleClassName = costume.roleClassName;
         this.readSceneActorAttributes(actorTag, sceneActor);
 
+        try {
+            XMLTag makeupTag = actorTag.getTag("makeup");
+            this.readMakeup(makeupTag, sceneActor);
+        } catch (Exception e) {
+            // Do nothing
+        }
+
         sceneLayer.add(sceneActor);
+    }
+
+    private void readMakeup( XMLTag makeupTag, SceneActor sceneActor )
+        throws Exception
+    {
+        ClassName className = new ClassName(Makeup.class, makeupTag.getAttribute("classname"));
+        sceneActor.makeupClassName = className;
+        Makeup makeup = Appearance.createMakeup(className);
+
+        for (Iterator<XMLTag> i = makeupTag.getTags("property"); i.hasNext();) {
+            XMLTag tag = i.next();
+
+            String name = tag.getAttribute("name");
+            String value = tag.getAttribute("value");
+            setMakeupProperty(sceneActor, makeup, name, value);
+        }
+    }
+
+    private void setMakeupProperty( SceneActor sceneActor, Makeup makeup, String name, String value )
+        throws Exception
+    {
+        for (AbstractProperty<Makeup, ?> property : makeup.getProperties()) {
+            if (property.key.equals(name)) {
+                sceneActor.makeupProperties.put(property.key, property.parse(value));
+                return;
+            }
+        }
+
+        for (AbstractProperty<Makeup, ?> property : makeup.getProperties()) {
+            for (String alias : property.aliases) {
+                if (alias.equals(name)) {
+                    sceneActor.makeupProperties.put(property.key, property.parse(value));
+                    return;
+                }
+            }
+        }
+        System.err.println("Ignoring unknown makeup property : " + name);
     }
 
     private void readText( XMLTag textTag, Scene.SceneLayer sceneLayer ) throws Exception
@@ -173,23 +214,30 @@ public class SceneReader
 
         this.readSceneActorAttributes(textTag, sceneActor);
 
+        try {
+            XMLTag makeupTag = textTag.getTag("makeup");
+            this.readMakeup(makeupTag, sceneActor);
+        } catch (Exception e) {
+            // Do nothing
+        }
+        
         sceneLayer.add(sceneActor);
     }
 
     /**
-     * For backwards compatibility, if the zOrder isn't specified, then the default zOrder
-     * increases by 1 for each actor read. Therefore, the actors will have increasing zOrders.
+     * For backwards compatibility, if the zOrder isn't specified, then the default zOrder increases by 1 for each actor read. Therefore,
+     * the actors will have increasing zOrders.
      */
     private int defaultZOrder = 0;
-    
+
     private void readSceneActorAttributes( XMLTag actorTag, SceneActor sceneActor )
         throws Exception
     {
-        defaultZOrder += 1;
-        
+        this.defaultZOrder += 1;
+
         sceneActor.x = actorTag.getIntAttribute("x");
         sceneActor.y = actorTag.getIntAttribute("y");
-        sceneActor.zOrder = actorTag.getOptionalIntAttribute("zOrder", defaultZOrder);
+        sceneActor.zOrder = actorTag.getOptionalIntAttribute("zOrder", this.defaultZOrder);
         sceneActor.alpha = actorTag.getOptionalDoubleAttribute("alpha", 255);
         sceneActor.direction = actorTag.getOptionalDoubleAttribute("direction", 0);
         sceneActor.heading = actorTag.getOptionalDoubleAttribute("heading", sceneActor.direction);

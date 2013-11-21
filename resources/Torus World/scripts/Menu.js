@@ -15,7 +15,6 @@ Menu = new Class({
             game.startScene("menu");
             
         } else if (event.symbol == Keys.a) {
-        	stdout.println("About...");
         	game.startScene("about");
         }
     },

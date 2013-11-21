@@ -88,4 +88,10 @@ public class TextPose extends AbstractTextPose
     {
         setYAlignment( this.getTrueTypeFont().getAscent() / (double) this.getTrueTypeFont().getHeight() );
     }
+
+    @Override
+    public boolean isShared()
+    {
+        return true;
+    }
 }

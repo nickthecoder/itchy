@@ -6,23 +6,34 @@ PACKAGE !!!
 
 Test on windows.
 
-Mouse pointers don't work when a button has captured the mouse.
-    Create a special Mouse class, which Game has.
-    It stores if the mouse should be on/off/special
-    Create an interface for MousePointer? Or just pass it the role?
-    MousePointer can be a MouseListener, and GlassLayer doesn't need to be mouse enabled, as the events will go direct, no via a view.
-    
-I need the buttons to have a shadow.
-    Create a "Makeup" interface, on appearance, which alters the image.
-        e.g. Drop shadow, Blur, Noise, Frame (nine-path), Compound, convolution matrix.
-    Later, an animation may use the PostProcessing to do even funkier animations.
+Glitter - sprinkle poses randomly. use getpixel.
+Alphatextshadow - like pause ?
+Textured - a texture applied over the non-transparent parts of the image - useful for text.
+    Has a X or Y offset to change the pattern from grid into brick.
+    Has x,y to state where the tiles start from - not always top left of the image to be textured.
+Compound
 
-Redo main menu, completion and game over. All need to look as good as Pause.
+link animations
 
 Some costumes begin with a capital, others don't.
 
+Crash on setting text colour to blank text.
 
 Send to Asul
+
+Simple convolution filter
+    Filters don't need to be square.
+    Create empty space around the image. Later give option of duping the image's edge.
+    Apply the convolution matrix.
+        For RGB, just apply the matrix to each channel in turn.
+        For RGBA we'd need to change the final DIVIDE to discount transparent pixels. i.e divide by sub of matrix * alphas.
+        Apply the matrix to alpha as normal.
+        
+Look at rotozoom, and try to implement a generic transformation matrix???
+
+Cache the results of Makeup on Appearance.
+    If we apply Makeup first (do clipping afterwards), then we only re-apply makeup if the pose has changed.
+    Don't forget to free the cache when possible.
 
 BlitModes on Pose, so a "spotlight" can ADD
 

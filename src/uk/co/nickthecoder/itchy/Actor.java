@@ -412,6 +412,10 @@ public class Actor implements PropertySubject<Actor>
         this.role = role == null ? new NullRole() : role;
         this.role.attach(this);
 
+        if (this.stage != null) {
+            this.stage.changedRole(this);
+        }
+        
         checkFullyCreated();
     }
 
@@ -453,11 +457,6 @@ public class Actor implements PropertySubject<Actor>
     public double getActivationDelay()
     {
         return this.activationDelay;
-    }
-
-    public void activateAfter( final double seconds )
-    {
-        this.setRole(new DelayedActivation(seconds, this.getRole()));
     }
 
     /**

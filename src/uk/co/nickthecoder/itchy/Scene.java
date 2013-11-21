@@ -195,13 +195,6 @@ public class Scene
             for (SceneActor sceneActor : this.sceneActors) {
                 Actor actor = sceneActor.createActor(resources, designMode);
                 stage.add(actor);
-
-                if (!designMode) {
-                    if (actor.getActivationDelay() == 0) {
-                    } else if (actor.getActivationDelay() > 0) {
-                        actor.activateAfter(actor.getActivationDelay());
-                    }
-                }
             }
         }
 

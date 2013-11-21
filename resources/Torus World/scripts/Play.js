@@ -32,15 +32,6 @@ Play = new Class({
     	
     	if (event.symbol == event.p) {
     		game.pause.togglePause();
-    		if (game.pause.isPaused()) {
-    			game.loadScene("pause",true);
-    		} else {
-    			var i;
-    			for (i = game.findRoleByTag("pause").iterator(); i.hasNext();) {
-    				var actor = i.next().getActor();
-    				actor.deathEvent("unpause");
-    			}    			
-    		}
     	}
     	
         return false;

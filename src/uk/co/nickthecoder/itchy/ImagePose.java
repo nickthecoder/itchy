@@ -133,4 +133,10 @@ public class ImagePose implements Pose
     {
     }
 
+    @Override
+    public boolean isShared()
+    {
+        return true;
+    }
+
 }

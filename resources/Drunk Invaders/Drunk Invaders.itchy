@@ -1,5 +1,5 @@
 <resources>
-  <game className="uk.co.nickthecoder.drunkinvaders.DrunkInvaders" height="480" initialScene="menu" title="Drunk Invaders" width="640"/>
+  <game directorClassName="uk.co.nickthecoder.drunkinvaders.DrunkInvaders" height="480" initialScene="menu" title="Drunk Invaders" width="640"/>
   <fonts>
     <font name="blackCasper" filename="fonts/BlackCasper/BlackCasper.ttf"/>
     <font name="boycott" filename="fonts/Boycott/Boycott.ttf"/>
@@ -66,119 +66,101 @@
   </sounds>
   <animations>
     <animation name="alien1">
-      <compound loops="1" sequence="true">
-        <frames pingPong="false">
-          <frame pose="alien1a" delay="1"/>
-          <frame pose="alien1b" delay="1"/>
-        </frames>
-      </compound>
+      <sequence loops="1" sequence="true">
+        <frames pingPong="false"/>
+      </sequence>
     </animation>
     <animation name="alien2">
-      <compound loops="1" sequence="true">
-        <frames pingPong="false">
-          <frame pose="alien2a" delay="1"/>
-          <frame pose="alien2b" delay="1"/>
-        </frames>
-      </compound>
+      <sequence loops="1" sequence="true">
+        <frames pingPong="false"/>
+      </sequence>
     </animation>
     <animation name="alien3">
-      <compound loops="1" sequence="true">
-        <frames pingPong="false">
-          <frame pose="alien3a" delay="1"/>
-          <frame pose="alien3b" delay="1"/>
-        </frames>
-      </compound>
+      <sequence loops="1" sequence="true">
+        <frames pingPong="false"/>
+      </sequence>
     </animation>
     <animation name="alienYell">
-      <compound loops="1" sequence="false">
+      <parallel loops="1" sequence="false">
         <alpha ease="linear" target="0.0" ticks="180"/>
-        <turn ease="linear" ticks="180" turn="40.0"/>
-      </compound>
+        <turn ease="linear" headingToo="false" ticks="180" turn="40.0"/>
+      </parallel>
     </animation>
     <animation name="bomb">
-      <compound loops="0" sequence="true">
-        <frames pingPong="false">
-          <frame pose="bomb1" delay="10"/>
-          <frame pose="bomb2" delay="10"/>
-        </frames>
-      </compound>
+      <sequence loops="0" sequence="true">
+        <frames pingPong="false"/>
+      </sequence>
     </animation>
     <animation name="buttonDown">
-      <compound loops="1" sequence="false">
+      <parallel loops="1" sequence="false">
         <scale ease="easeOutBack" target="1.5" ticks="5"/>
-      </compound>
+      </parallel>
     </animation>
     <animation name="buttonHoverOut">
-      <compound loops="1" sequence="true">
+      <sequence loops="1" sequence="true">
         <scale ease="linear" target="1.0" ticks="5"/>
-      </compound>
+      </sequence>
     </animation>
     <animation name="buttonHoverOver">
-      <compound loops="1" sequence="true">
+      <sequence loops="1" sequence="true">
         <scale ease="linear" target="1.2" ticks="5"/>
-      </compound>
+      </sequence>
     </animation>
     <animation name="buttonUp">
-      <compound loops="1" sequence="false">
+      <parallel loops="1" sequence="false">
         <scale ease="easeInOutCirc" target="1.0" ticks="10"/>
-      </compound>
+      </parallel>
     </animation>
     <animation name="deathSpiral">
-      <compound loops="1" sequence="false">
+      <parallel loops="1" sequence="false">
         <alpha ease="linear" target="0.0" ticks="40"/>
         <move ease="easeOut" ticks="180" dx="0.0" dy="100.0"/>
-      </compound>
+      </parallel>
     </animation>
     <animation name="fadeIn">
-      <compound loops="1" sequence="true">
+      <sequence loops="1" sequence="true">
         <alpha ease="linear" target="0.0" ticks="1"/>
         <alpha ease="easeOutCirc" target="255.0" ticks="40"/>
-      </compound>
+      </sequence>
     </animation>
     <animation name="fadeOut">
-      <compound loops="1" sequence="true">
+      <sequence loops="1" sequence="true">
         <alpha ease="linear" target="0.0" ticks="40"/>
-      </compound>
+      </sequence>
     </animation>
     <animation name="grow">
-      <compound loops="1" sequence="true">
+      <sequence loops="1" sequence="true">
         <scale ease="linear" target="0.1" ticks="1"/>
         <scale ease="linear" target="1.0" ticks="100"/>
-      </compound>
+      </sequence>
     </animation>
     <animation name="pacman">
-      <compound loops="1" sequence="false">
-        <compound loops="0" sequence="true">
-          <frames pingPong="false">
-            <frame pose="pacman1" delay="3"/>
-            <frame pose="pacman2" delay="3"/>
-            <frame pose="pacman3" delay="3"/>
-            <frame pose="pacman4" delay="3"/>
-            <frame pose="pacman5" delay="3"/>
-          </frames>
-        </compound>
-        <compound loops="1" sequence="true">
+      <parallel loops="1" sequence="false">
+        <sequence loops="0" sequence="true">
+          <frames pingPong="false"/>
+        </sequence>
+        <sequence loops="1" sequence="true">
           <forwards ease="linear" forwards="400.0" sidewards="0.0" ticks="200"/>
-          <compound loops="1" sequence="false">
+          <parallel loops="1" sequence="false">
             <forwards ease="linear" forwards="890.0" sidewards="0.0" ticks="360"/>
-            <turn ease="linear" ticks="360" turn="-360.0"/>
-          </compound>
+            <turn ease="linear" headingToo="false" ticks="360" turn="-360.0"/>
+          </parallel>
           <forwards ease="linear" forwards="400.0" sidewards="0.0" ticks="200"/>
-          <turn ease="linear" ticks="10" turn="180.0"/>
+          <turn ease="linear" headingToo="false" ticks="10" turn="180.0"/>
           <forwards ease="linear" forwards="400.0" sidewards="0.0" ticks="200"/>
-          <compound loops="1" sequence="false">
+          <parallel loops="1" sequence="false">
             <forwards ease="linear" forwards="890.0" sidewards="0.0" ticks="360"/>
-            <turn ease="linear" ticks="360" turn="360.0"/>
-          </compound>
+            <turn ease="linear" headingToo="false" ticks="360" turn="360.0"/>
+          </parallel>
           <forwards ease="linear" forwards="400.0" sidewards="0.0" ticks="200"/>
-        </compound>
-      </compound>
+        </sequence>
+      </parallel>
     </animation>
     <animation name="toHeaven">
-      <compound loops="1" sequence="false">
+      <parallel loops="1" sequence="false">
         <move ease="linear" ticks="120" dx="0.0" dy="60.0"/>
         <alpha ease="linear" target="0.0" ticks="120"/>
-      </compound>
+      </parallel>
     </animation>
   </animations>
   <costumes>
@@ -330,5 +312,6 @@
     <scene name="level99"/>
     <scene name="levels"/>
     <scene name="menu"/>
+    <scene name="pause"/>
   </scenes>
 </resources>

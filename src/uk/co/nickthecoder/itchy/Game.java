@@ -57,7 +57,6 @@ public class Game
     // TODO Public?
     public List<Actor> actors = new LinkedList<Actor>();
 
-    // TODO Public? Make Pause an interface?
     /**
      * Helps to implement a pause feature within your game. Typically, you will pause/unpause from
      * your game's {@link SceneDirector#onKeyDown(KeyboardEvent)} :
@@ -149,10 +148,12 @@ public class Game
         this.scriptManager = resources.scriptManager;
 
         this.sceneDirector = new PlainSceneDirector();
-        this.pause = new Pause(this);
+        this.pause = new SimplePause(this);
 
         this.mouseListeners = new LinkedList<MouseListener>();
         this.keyListeners = new LinkedList<KeyListener>();
+
+        this.pause = new SimplePause(this);
     }
 
     public void init()

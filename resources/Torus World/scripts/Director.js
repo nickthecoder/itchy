@@ -8,6 +8,7 @@ Director = Class({
     },
     
     startScene: function( sceneName ) {
+    	stdout.println("Starting scene : " + sceneName );
     	if (game.pause.isPaused()) {
             game.pause.unpause();
         }

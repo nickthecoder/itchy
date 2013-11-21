@@ -7,17 +7,30 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
-public interface StageListener
-{
-    /**
-     * An Actor was added to the Stage.
-     */
-    public void onAdded( Stage stage, Actor actor );
+import java.util.Collections;
+import java.util.List;
 
-    public void onChangedRole( Stage stage, Actor actor );
-    
-    /**
-     * An Actor was remove from the Stage.
-     */
-    public void onRemoved( Stage stage, Actor actor );
+import uk.co.nickthecoder.itchy.util.AbstractProperty;
+
+public class NullMakeup implements Makeup
+{
+
+    @Override
+    public List<AbstractProperty<Makeup, ?>> getProperties()
+    {
+        return Collections.emptyList();
+    }
+
+    @Override
+    public OffsetSurface apply( OffsetSurface src )
+    {
+        return src;
+    }
+
+    @Override
+    public int getChangeId()
+    {
+        return 0;
+    }
+
 }

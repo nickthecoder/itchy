@@ -31,7 +31,7 @@ public class ManagedSound implements PropertySubject<ManagedSound>
      * high priority sounds will cause low priority sounds to end abruptly. If there are no low priority
      * sounds, then new sounds won't play when the limit is exceeded.
      */
-    @Property(label="Priority")
+    @Property(label="Priority", hint="0=lowest")
     public int priority = 1;
 
     /**

@@ -13,7 +13,7 @@ public class DelayedActivation extends AbstractRole
     private Role role;
 
     private double alpha;
-    
+
     public DelayedActivation( double seconds, Role role )
     {
         this.delay = Timer.createTimerSeconds(seconds);
@@ -21,7 +21,7 @@ public class DelayedActivation extends AbstractRole
     }
 
     @Override
-    public void onAttach()
+    public void onBirth()
     {
         this.alpha = getActor().getAppearance().getAlpha();
         getActor().getAppearance().setAlpha(0);
@@ -32,6 +32,7 @@ public class DelayedActivation extends AbstractRole
     {
         if (this.delay.isFinished()) {
             getActor().setRole(this.role);
+            this.role.birth();
             // Was deactivated and now activated so that the role's onActivate method is called.
             getActor().getAppearance().setAlpha(this.alpha);
             getActor().event(getActor().getStartEvent());

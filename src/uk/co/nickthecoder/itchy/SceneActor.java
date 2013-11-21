@@ -44,15 +44,20 @@ public abstract class SceneActor implements Cloneable
 
     public ClassName roleClassName;
 
+    public ClassName makeupClassName;
+
     public RGBA colorize;
 
     public double activationDelay;
 
     public HashMap<String, Object> customProperties = new HashMap<String, Object>();
 
+    public HashMap<String, Object> makeupProperties = new HashMap<String, Object>();
+
     protected SceneActor()
     {
         this.alpha = 255;
+        this.makeupClassName = new ClassName(Makeup.class, NullMakeup.class.getName());
     }
 
     protected SceneActor( Actor actor )
@@ -65,6 +70,7 @@ public abstract class SceneActor implements Cloneable
         this.zOrder = actor.getZOrder();
         this.scale = actor.getAppearance().getScale();
         this.roleClassName = ((SceneDesignerRole) actor.getRole()).getRoleClassName();
+        this.makeupClassName = actor.getAppearance().getMakeupClassName();
         this.colorize = actor.getAppearance().getColorize() == null ? null : new RGBA(actor.getAppearance().getColorize());
         this.activationDelay = actor.getActivationDelay();
         this.startEvent = actor.getStartEvent();
@@ -75,6 +81,16 @@ public abstract class SceneActor implements Cloneable
             try {
                 Object value = property.getValue(actualRole);
                 this.customProperties.put(property.key, value);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        Makeup makeup = actor.getAppearance().getMakeup();
+        for (AbstractProperty<Makeup, ?> property : makeup.getProperties()) {
+            try {
+                Object value = property.getValue(makeup);
+                this.makeupProperties.put(property.key, value);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -93,6 +109,8 @@ public abstract class SceneActor implements Cloneable
         actor.getAppearance().setColorize(this.colorize == null ? null : new RGBA(this.colorize));
         ClassName roleClassName = this.roleClassName;
         actor.setActivationDelay(this.activationDelay);
+        actor.getAppearance().setMakeup(this.makeupClassName);
+        
         
         if ((this.activationDelay==0) && (!designMode)) {
             actor.event(this.startEvent);
@@ -143,7 +161,23 @@ public abstract class SceneActor implements Cloneable
             }
         }
 
+        Makeup makeup = actor.getAppearance().getMakeup();
+
+        for (AbstractProperty<Makeup, ?> property : makeup.getProperties()) {
+            Object value = this.makeupProperties.get(property.key);
+            if (value != null) {
+                try {
+                    property.setValue(makeup, value);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
         if (!designMode) {
+            if (this.activationDelay > 0) {
+                actualRole = new DelayedActivation(this.activationDelay,actualRole);
+            }
             actor.setRole(actualRole);
         }
 

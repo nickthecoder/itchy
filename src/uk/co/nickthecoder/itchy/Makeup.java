@@ -7,17 +7,11 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
-public interface StageListener
-{
-    /**
-     * An Actor was added to the Stage.
-     */
-    public void onAdded( Stage stage, Actor actor );
+import uk.co.nickthecoder.itchy.util.PropertySubject;
 
-    public void onChangedRole( Stage stage, Actor actor );
+public interface Makeup extends PropertySubject<Makeup>
+{
+    public OffsetSurface apply( OffsetSurface src );
     
-    /**
-     * An Actor was remove from the Stage.
-     */
-    public void onRemoved( Stage stage, Actor actor );
+    public int getChangeId();
 }

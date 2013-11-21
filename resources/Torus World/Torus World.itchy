@@ -59,12 +59,34 @@
         <forwards ease="linear" forwards="400.0" sidewards="0.0" ticks="40"/>
       </parallel>
     </animation>
+    <animation name="buttonDown">
+      <sequence loops="1" sequence="true">
+        <scale ease="easeOutBack" target="2.0" ticks="20"/>
+      </sequence>
+    </animation>
     <animation name="buttonFadeIn">
       <sequence loops="1" sequence="true">
         <scale ease="linear" target="0.1" ticks="0"/>
         <parallel loops="1" sequence="false">
           <scale ease="easeOutBack" target="1.0" ticks="60"/>
         </parallel>
+      </sequence>
+    </animation>
+    <animation name="buttonHoverOut">
+      <parallel loops="1" sequence="false">
+        <turnto direction="0.0" ease="linear" longWay="false" ticks="10"/>
+        <scale ease="linear" target="1.0" ticks="10"/>
+      </parallel>
+    </animation>
+    <animation name="buttonHoverOver">
+      <parallel loops="1" sequence="false">
+        <turnto direction="0.0" ease="easeOutBack" longWay="true" ticks="30"/>
+        <scale ease="easeOutBack" target="1.5" ticks="30"/>
+      </parallel>
+    </animation>
+    <animation name="buttonUp">
+      <sequence loops="1" sequence="true">
+        <scale ease="linear" target="1.0" ticks="10"/>
       </sequence>
     </animation>
     <animation name="fadeIn">
@@ -88,7 +110,7 @@
     <animation name="gameOverReveal">
       <sequence loops="1" sequence="true">
         <alpha ease="linear" target="0.0" ticks="0"/>
-        <alpha ease="easeInOut" target="255.0" ticks="30"/>
+        <alpha ease="easeInOut" target="148.0" ticks="30"/>
       </sequence>
     </animation>
     <animation name="hoverOut">
@@ -113,6 +135,26 @@
     <animation name="lifeDisappear">
       <sequence loops="1" sequence="true">
         <move ease="easeIn" ticks="60" dx="0.0" dy="120.0"/>
+      </sequence>
+    </animation>
+    <animation name="linkDown">
+      <sequence loops="1" sequence="true">
+        <scale ease="easeOutBack" target="1.2" ticks="20"/>
+      </sequence>
+    </animation>
+    <animation name="linkHoverOut">
+      <parallel loops="1" sequence="false">
+        <scale ease="linear" target="1.0" ticks="10"/>
+      </parallel>
+    </animation>
+    <animation name="linkHoverOver">
+      <parallel loops="1" sequence="false">
+        <scale ease="linear" target="1.1" ticks="20"/>
+      </parallel>
+    </animation>
+    <animation name="linkUp">
+      <sequence loops="1" sequence="true">
+        <scale ease="linear" target="1.0" ticks="10"/>
       </sequence>
     </animation>
     <animation name="mouseDown">
@@ -158,14 +200,13 @@
     <costume name="Button" defaultZOrder="0">
       <string name="default">Button</string>
       <sound name="click" sound="missile" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
-      <sound name="fadeIn" sound="ricochet" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="PLAY_BOTH" priority="1"/>
       <sound name="hoverOver" sound="ding" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="PLAY_BOTH" priority="1"/>
       <font name="default" font="Boycott"/>
       <animation name="fadeIn" animation="buttonFadeIn"/>
-      <animation name="hoverOut" animation="hoverOut"/>
-      <animation name="hoverOver" animation="hoverOver"/>
-      <animation name="mouseDown" animation="mouseDown"/>
-      <animation name="mouseUp" animation="mouseUp"/>
+      <animation name="hoverOut" animation="buttonHoverOut"/>
+      <animation name="hoverOver" animation="buttonHoverOver"/>
+      <animation name="mouseDown" animation="buttonDown"/>
+      <animation name="mouseUp" animation="buttonUp"/>
     </costume>
     <costume name="Game Over" defaultZOrder="0" role="uk.co.nickthecoder.itchy.extras.Tagged">
       <string name="default">Game Over</string>
@@ -206,6 +247,14 @@
     </costume>
     <costume name="life2" defaultZOrder="0" role="uk.co.nickthecoder.itchy.PlainRole">
       <pose name="default" pose="life2"/>
+    </costume>
+    <costume name="link" defaultZOrder="0" extends="Button" role="uk.co.nickthecoder.itchy.extras.LinkButton">
+      <string name="default">Link</string>
+      <font name="default" font="VeraBold"/>
+      <animation name="hoverOut" animation="linkHoverOut"/>
+      <animation name="hoverOver" animation="linkHoverOver"/>
+      <animation name="mouseDown" animation="linkDown"/>
+      <animation name="mouseUp" animation="linkUp"/>
     </costume>
     <costume name="mouse" defaultZOrder="0">
       <pose name="default" pose="mouse"/>
@@ -273,8 +322,8 @@
       <string name="bullet">bullet1</string>
       <string name="explosion">explosion</string>
       <string name="warp">warp</string>
-      <sound name="default" sound="mystic" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
-      <sound name="explode" sound="explode" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
+      <sound name="default" sound="mystic" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="STOP_FIRST" priority="0"/>
+      <sound name="explode" sound="explode" fadeOutSeconds="3.0" fadeOnDeath="false" multipleRole="PLAY_BOTH" priority="1"/>
       <sound name="fade" sound="warp" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
       <sound name="warp" sound="warp" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
       <animation name="default" animation="fadeIn"/>

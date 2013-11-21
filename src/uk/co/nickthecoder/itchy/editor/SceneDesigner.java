@@ -18,6 +18,7 @@ import uk.co.nickthecoder.itchy.Game;
 import uk.co.nickthecoder.itchy.ImagePose;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.KeyListener;
+import uk.co.nickthecoder.itchy.Makeup;
 import uk.co.nickthecoder.itchy.MouseListener;
 import uk.co.nickthecoder.itchy.NullRole;
 import uk.co.nickthecoder.itchy.Pose;
@@ -119,6 +120,8 @@ public class SceneDesigner implements MouseListener, KeyListener
     private Container sceneDetailsContainer;
 
     private Container scenePropertiesContainer;
+
+    private Container makeupContainer;
 
     private int mode = MODE_SELECT;
 
@@ -285,6 +288,9 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.layersContainer = new Container();
         VerticalScroll layersScroll = new VerticalScroll(this.layersContainer);
 
+        this.makeupContainer = new Container();
+        VerticalScroll makeupScroll = new VerticalScroll(this.makeupContainer);
+
         this.sceneDetailsContainer = new Container();
         this.scenePropertiesContainer = new Container();
         this.createScenePage();
@@ -302,6 +308,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.toolboxNotebook.addPage(new Label("Costumes"), costumesScroll);
         this.toolboxNotebook.addPage(new Label("Actor"), propertiesScroll);
         this.toolboxNotebook.addPage(new Label("Appearance"), appearanceScroll);
+        this.toolboxNotebook.addPage(new Label("Makeup"), makeupScroll);
         this.toolboxNotebook.addPage(new Label("Role"), roleScroll);
         this.toolboxNotebook.addPage(new Label("Layers"), layersScroll);
 
@@ -666,6 +673,49 @@ public class SceneDesigner implements MouseListener, KeyListener
         form.grid.addRow("Role", this.roleClassName);
         this.roleContainer.addChild(form.createForm());
     }
+    
+    private ClassNameBox makeupClassName;
+    
+    private void createMakeupPage()
+    {
+        Makeup makeup = this.currentActor.getAppearance().getMakeup();
+
+        this.makeupClassName = new ClassNameBox( this.editor.getScriptManager(), Appearance.getMakeupClassName(makeup), Makeup.class );
+        this.makeupClassName.addChangeListener(new ComponentChangeListener() {
+            
+            @Override
+            public void changed()
+            {
+                ClassName className = SceneDesigner.this.makeupClassName.getClassName();
+
+                boolean ok = SceneDesigner.this.editor.resources.checkClassName(className);
+                if (ok) {
+                    try {
+                        SceneDesigner.this.currentActor.getAppearance().setMakeup( className );
+                    
+                        SceneDesigner.this.createMakeupProperties();
+                        SceneDesigner.this.makeupClassName.removeStyle("error");
+
+                    } catch (Exception e) {
+                        SceneDesigner.this.makeupClassName.addStyle("error");
+                    }
+                }
+            }
+        });
+        
+        createMakeupProperties();
+    }
+
+    private void createMakeupProperties()
+    {
+        Makeup makeup = this.currentActor.getAppearance().getMakeup();
+        this.makeupClassName.remove();
+        PropertiesForm<Makeup> form = new PropertiesForm<Makeup>(makeup, makeup.getProperties());
+        form.autoUpdate = true;
+        this.makeupContainer.clear();
+        form.grid.addRow("Makeup", this.makeupClassName);
+        this.makeupContainer.addChild(form.createForm());
+    }
 
     private void updateProperties()
     {
@@ -674,10 +724,12 @@ public class SceneDesigner implements MouseListener, KeyListener
             this.appearanceContainer.clear();
             this.roleContainer.clear();
             this.actorTextInput = null;
+            this.makeupContainer.clear();
         } else {
             createActorPage();
             createRolePage();
             createAppearancePage();
+            createMakeupPage();
             updateLayersTable();
         }
     }

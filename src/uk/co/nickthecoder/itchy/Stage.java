@@ -32,6 +32,8 @@ public interface Stage
      */
     public void add( Actor actor );
 
+    public void changedRole( Actor actor );
+
     /**
      * Removes the actor from the layer. This is automatically called when an actor is killed,
      * however, if you call this directly, then it is possible for an Actor to continue to live
