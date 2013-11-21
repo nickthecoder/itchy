@@ -10,31 +10,31 @@ import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.util.AbstractProperty;
 import uk.co.nickthecoder.itchy.util.Property;
 
-public class TurnToAnimation extends NumericAnimation
+public class HeadToAnimation extends NumericAnimation
 {
     private static final List<AbstractProperty<Animation, ?>> properties =
-        AbstractProperty.<Animation> findAnnotations(TurnToAnimation.class);
+        AbstractProperty.<Animation> findAnnotations(HeadToAnimation.class);
 
     /**
      * The total turn in degrees
      */
-    @Property(label = "Direction")
-    public double direction;
+    @Property(label = "Heading")
+    public double heading;
 
     @Property(label = "Long Way Round")
     public boolean longWay = false;
 
     private double turn;
 
-    public TurnToAnimation()
+    public HeadToAnimation()
     {
         this(200, Eases.linear, 0);
     }
 
-    public TurnToAnimation( int ticks, Ease ease, double direction )
+    public HeadToAnimation( int ticks, Ease ease, double heading )
     {
         super(ticks, ease);
-        this.direction = direction;
+        this.heading = heading;
     }
 
     @Override
@@ -46,14 +46,14 @@ public class TurnToAnimation extends NumericAnimation
     @Override
     public String getName()
     {
-        return "Turn To";
+        return "Head To";
     }
 
     @Override
     public void start( Actor actor )
     {
         super.start(actor);
-        this.turn = ((this.direction - actor.getAppearance().getDirection()) % 360 + 360) % 360;
+        this.turn = ((this.heading - actor.getHeading()) % 360 + 360) % 360;
         // Now 0..360
 
         if (this.longWay) {
@@ -70,7 +70,7 @@ public class TurnToAnimation extends NumericAnimation
     @Override
     public void tick( Actor actor, double amount, double delta )
     {
-        actor.getAppearance().adjustDirection(this.turn * delta);
+        actor.adjustHeading(this.turn * delta);
     }
 
 }

@@ -113,6 +113,8 @@ public class Explosion extends Companion<Explosion>
     public double randomOffsetSidewards = 0;
 
     public String projectileEventName;
+    
+    public boolean follow = false;;
 
     /**
      * The equivalent of : <code>new Explosion(role.getActor())</code>
@@ -180,6 +182,12 @@ public class Explosion extends Companion<Explosion>
         return this;
     }
 
+    public Explosion forever()
+    {
+        this.totalProjectiles = Integer.MAX_VALUE;
+        return this;
+    }
+    
     /**
      * @param value
      *        The number of projectiles to be created each frame. For an explosion, you probably
@@ -214,6 +222,12 @@ public class Explosion extends Companion<Explosion>
         return this;
     }
 
+    public Explosion follow()
+    {
+        this.follow = true;
+        return this;
+    }
+    
     /**
      * @param value
      *        The amount of change to the projectiles' Y velocity each frame. A value of around -0.2
@@ -529,6 +543,11 @@ public class Explosion extends Companion<Explosion>
     @Override
     public void tick()
     {
+        if (this.follow) {
+            getActor().moveTo(this.parent);
+            getActor().moveBy(this.offsetX,  this.offsetY);
+        }
+        
         for (int i = 0; i < this.countPerTick; i++) {
 
             Projectile projectile = new Projectile(getActor());

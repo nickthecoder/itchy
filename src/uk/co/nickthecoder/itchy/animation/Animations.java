@@ -11,13 +11,14 @@ public class Animations
     public static void registerAnimations()
     {
         Itchy.registry.add(new AlphaAnimation());
+        Itchy.registry.add(new ClipAnimation());
         Itchy.registry.add(new ColorAnimation());
         Itchy.registry.add(new CompoundAnimation(true));
         Itchy.registry.add(new CompoundAnimation(false));
         Itchy.registry.add(new DelayAnimation());
         Itchy.registry.add(new ForwardsAnimation());
         Itchy.registry.add(new FramedAnimation());
-        Itchy.registry.add(new HeadingAnimation());
+        Itchy.registry.add(new HeadAnimation());
         Itchy.registry.add(new MoveAnimation());
         Itchy.registry.add(new TurnAnimation());
         Itchy.registry.add(new TurnToAnimation());

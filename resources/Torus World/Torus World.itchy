@@ -15,6 +15,7 @@
     <pose name="fragment2" filename="images/fragment2.png"/>
     <pose name="life1" filename="images/life1.png"/>
     <pose name="life2" filename="images/life2.png" direction="90.0"/>
+    <pose name="mouse" filename="images/mouse.png" offsetX="0" offsetY="0"/>
     <pose name="rock1a" filename="images/rock1a.png"/>
     <pose name="rock1b" filename="images/rock1b.png"/>
     <pose name="rock1c" filename="images/rock1c.png"/>
@@ -26,6 +27,11 @@
     <pose name="rock2c2" filename="images/rock2c2.png"/>
     <pose name="ship1" filename="images/ship1.png" direction="90.0"/>
     <pose name="ship2" filename="images/ship2.png" direction="90.0"/>
+    <pose name="spark1" filename="images/spark1.png"/>
+    <pose name="spark2" filename="images/spark2.png"/>
+    <pose name="spark3" filename="images/spark3.png"/>
+    <pose name="spark4" filename="images/spark4.png"/>
+    <pose name="spark5" filename="images/spark5.png"/>
     <pose name="stars1" filename="images/stars1.jpg"/>
     <pose name="stars2" filename="images/stars2.jpg"/>
     <pose name="warp" filename="images/warp.png"/>
@@ -45,94 +51,107 @@
   </sounds>
   <animations>
     <animation name="bullet1">
-      <compound finishedMessage="die" loops="1" sequence="false">
-        <compound loops="1" sequence="true">
+      <parallel finishedMessage="die" loops="1" sequence="false">
+        <sequence loops="1" sequence="true">
           <alpha ease="linear" target="255.0" ticks="30"/>
           <alpha ease="linear" target="0.0" ticks="10"/>
-        </compound>
+        </sequence>
         <forwards ease="linear" forwards="400.0" sidewards="0.0" ticks="40"/>
-      </compound>
+      </parallel>
     </animation>
     <animation name="buttonFadeIn">
-      <compound loops="1" sequence="true">
+      <sequence loops="1" sequence="true">
         <scale ease="linear" target="0.1" ticks="0"/>
-        <compound loops="1" sequence="false">
+        <parallel loops="1" sequence="false">
           <scale ease="easeOutBack" target="1.0" ticks="60"/>
-        </compound>
-      </compound>
+        </parallel>
+      </sequence>
     </animation>
     <animation name="fadeIn">
-      <compound loops="1" sequence="true">
-        <compound loops="1" sequence="false">
+      <sequence loops="1" sequence="true">
+        <parallel loops="1" sequence="false">
           <scale ease="linear" target="0.1" ticks="1"/>
           <alpha ease="linear" target="1.0" ticks="1"/>
-        </compound>
-        <compound loops="1" sequence="false">
+        </parallel>
+        <parallel loops="1" sequence="false">
           <alpha ease="linear" target="255.0" ticks="60"/>
           <scale ease="linear" target="1.0" ticks="60"/>
-        </compound>
-      </compound>
+        </parallel>
+      </sequence>
     </animation>
     <animation name="fadeOut">
-      <compound loops="1" sequence="true">
+      <sequence loops="1" sequence="true">
         <forwards ease="linear" forwards="0.0" sidewards="0.0" ticks="30"/>
         <alpha ease="linear" target="0.0" ticks="50"/>
-      </compound>
+      </sequence>
     </animation>
     <animation name="gameOverReveal">
-      <compound loops="1" sequence="true">
+      <sequence loops="1" sequence="true">
+        <alpha ease="linear" target="0.0" ticks="0"/>
         <alpha ease="easeInOut" target="255.0" ticks="30"/>
-      </compound>
+      </sequence>
     </animation>
     <animation name="hoverOut">
-      <compound loops="1" sequence="true">
-        <scale ease="easeIn" target="1.0" ticks="20"/>
-      </compound>
+      <parallel loops="1" sequence="false">
+        <scale ease="linear" target="1.0" ticks="10"/>
+        <color ease="linear" targetColor="#231a9eff" ticks="10"/>
+      </parallel>
     </animation>
     <animation name="hoverOver">
-      <compound loops="1" sequence="true">
-        <scale ease="easeOut" target="1.2" ticks="10"/>
-      </compound>
+      <parallel loops="1" sequence="false">
+        <color ease="easeOutCubic" targetColor="#8300dbff" ticks="30"/>
+        <scale ease="linear" target="1.0" ticks="10"/>
+      </parallel>
     </animation>
     <animation name="lifeAppear">
-      <compound loops="1" sequence="true">
+      <sequence loops="1" sequence="true">
         <move ease="linear" ticks="0" dx="0.0" dy="120.0"/>
         <move ease="linear" ticks="30" dx="0.0" dy="-60.0"/>
         <move ease="bounce2" ticks="30" dx="0.0" dy="-60.0"/>
-      </compound>
+      </sequence>
     </animation>
     <animation name="lifeDisappear">
-      <compound loops="1" sequence="true">
+      <sequence loops="1" sequence="true">
         <move ease="easeIn" ticks="60" dx="0.0" dy="120.0"/>
-      </compound>
+      </sequence>
     </animation>
     <animation name="mouseDown">
-      <compound loops="1" sequence="true">
+      <sequence loops="1" sequence="true">
         <scale ease="easeOut" target="1.5" ticks="5"/>
-      </compound>
+      </sequence>
     </animation>
     <animation name="mouseUp">
-      <compound loops="1" sequence="true">
+      <sequence loops="1" sequence="true">
         <scale ease="linear" target="1.0" ticks="20"/>
-      </compound>
+      </sequence>
+    </animation>
+    <animation name="pauseReveal">
+      <sequence loops="1" sequence="true">
+        <alpha ease="linear" target="0.0" ticks="0"/>
+        <scale ease="linear" target="0.1" ticks="0"/>
+        <parallel loops="1" sequence="false">
+          <alpha ease="easeOutBack" target="128.0" ticks="30"/>
+          <scale ease="easeOutBack" target="1.0" ticks="30"/>
+        </parallel>
+      </sequence>
     </animation>
     <animation name="shipDeath">
-      <compound finishedMessage="exploded" loops="1" sequence="false">
+      <parallel finishedMessage="exploded" loops="1" sequence="false">
         <alpha ease="easeOut" target="0.0" ticks="70"/>
         <color ease="linear" targetColor="#a50300ff" ticks="100"/>
-      </compound>
+      </parallel>
     </animation>
     <animation name="warp">
-      <compound loops="1" sequence="false">
+      <parallel loops="1" sequence="false">
         <forwards ease="easeOutCubic" forwards="400.0" sidewards="0.0" ticks="200"/>
-        <heading ease="linear" ticks="150" turn="720.0"/>
-        <compound loops="1" sequence="true">
+        <head directionToo="false" ease="linear" ticks="150" turn="720.0"/>
+        <sequence loops="1" sequence="true">
           <scale ease="easeIn" target="2.0" ticks="100"/>
           <scale ease="easeOut" target="0.5" ticks="100"/>
-        </compound>
-        <turn ease="easeIn" ticks="200" turn="1800.0"/>
+        </sequence>
+        <turn ease="easeIn" headingToo="false" ticks="200" turn="1800.0"/>
         <alpha ease="easeIn" target="0.0" ticks="100"/>
-      </compound>
+      </parallel>
     </animation>
   </animations>
   <costumes>
@@ -152,6 +171,11 @@
       <string name="default">Game Over</string>
       <font name="default" font="BlackCasper"/>
       <animation name="fadeIn" animation="gameOverReveal"/>
+    </costume>
+    <costume name="Pause" defaultZOrder="0" role="uk.co.nickthecoder.itchy.PlainRole">
+      <string name="default">Pause</string>
+      <font name="default" font="Vera"/>
+      <animation name="default" animation="pauseReveal"/>
     </costume>
     <costume name="bullet" defaultZOrder="0" role="Bullet.js" properties="BulletProperties.js">
       <sound name="default" sound="fire" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
@@ -182,6 +206,14 @@
     </costume>
     <costume name="life2" defaultZOrder="0" role="uk.co.nickthecoder.itchy.PlainRole">
       <pose name="default" pose="life2"/>
+    </costume>
+    <costume name="mouse" defaultZOrder="0">
+      <pose name="default" pose="mouse"/>
+      <pose name="spark" pose="spark1"/>
+      <pose name="spark" pose="spark2"/>
+      <pose name="spark" pose="spark3"/>
+      <pose name="spark" pose="spark4"/>
+      <pose name="spark" pose="spark5"/>
     </costume>
     <costume name="play" defaultZOrder="0" extends="Button" role="uk.co.nickthecoder.itchy.extras.MessageButton">
       <string name="default">play</string>
@@ -232,6 +264,12 @@
       <properties pieces="0" points="400" strength="1" hitsRequired="2"/>
     </costume>
     <costume name="ship" defaultZOrder="0" role="Ship.js" properties="ShipProperties.js">
+      <pose name="spark" pose="spark2"/>
+      <pose name="spark" pose="spark3"/>
+      <pose name="spark" pose="spark4"/>
+      <pose name="spark" pose="spark4"/>
+      <pose name="spark" pose="spark5"/>
+      <pose name="spark1" pose="spark1"/>
       <string name="bullet">bullet1</string>
       <string name="explosion">explosion</string>
       <string name="warp">warp</string>
@@ -276,5 +314,6 @@
     <scene name="foreground"/>
     <scene name="gameOver"/>
     <scene name="menu"/>
+    <scene name="pause"/>
   </scenes>
 </resources>

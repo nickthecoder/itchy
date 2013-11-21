@@ -3,6 +3,10 @@ Menu = new Class({
 
     Extends: SceneDirectorScript,
     
+    onActivate: function() {
+    	directorScript.showFancyMouse();
+    },
+    
     onKeyDown: function( event ) {
         if (event.symbol == Keys.RETURN) {
             directorScript.startGame();
@@ -16,7 +20,7 @@ Menu = new Class({
         }
     },
     
-    // The menu has flying rocks, but we don't care about them!
+    // The menu has flying rocks, but we don't care about them, so do nothing.
     addRocks:function( diff ) {
 	}
     

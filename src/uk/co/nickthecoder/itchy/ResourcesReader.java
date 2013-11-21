@@ -356,48 +356,6 @@ public class ResourcesReader
         return animation;
     }
 
-    /*
-    if (tagName.equals("compound")) {
-        return new CompoundAnimation(true);
-
-    } else if (tagName.equals("parallel")) {
-        return new CompoundAnimation(false);
-
-    } else if (tagName.equals("sequence")) {
-        return new CompoundAnimation(true);
-
-    } else if (tagName.equals("pingPong")) {
-        return new FramedAnimation();
-
-    } else if (tagName.equals("frames")) {
-        return new FramedAnimation();
-
-    } else if (tagName.equals("move")) {
-        return new MoveAnimation();
-
-    } else if (tagName.equals("forwards")) {
-        return new ForwardsAnimation();
-
-    } else if (tagName.equals("alpha")) {
-        return new AlphaAnimation();
-
-    } else if (tagName.equals("turn")) {
-        return new TurnAnimation();
-
-    } else if (tagName.equals("heading")) { 
-        return new HeadingAnimation();
-
-    } else if (tagName.equals("scale")) {
-        return new ScaleAnimation();
-
-    } else if (tagName.equals("color")) {
-        return new ColorAnimation();
-
-    } else {
-        throw new XMLException("Unknown animation : " + tagName);
-    }
-    */
-
     private <S extends PropertySubject<S>> void readProperties( XMLTag tag, S subject )
         throws XMLException
     {

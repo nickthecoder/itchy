@@ -40,6 +40,8 @@ public abstract class Companion<T extends Companion<T>> extends AbstractRole
 
     public double offsetY = 0;
 
+    public Actor parent;
+    
     public Pose pose;
 
     public Costume costume;
@@ -62,6 +64,7 @@ public abstract class Companion<T extends Companion<T>> extends AbstractRole
 
     public Companion( Actor actor )
     {
+        this.parent = actor;
         this.source = actor;
         this.costume = this.source.getCostume();
         this.zOrder = this.source.getZOrder();

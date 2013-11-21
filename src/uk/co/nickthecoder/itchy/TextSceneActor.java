@@ -56,9 +56,6 @@ public class TextSceneActor extends SceneActor
         Actor actor = new Actor(pose);
         if (this.costume != null) {
             actor.setCostume(this.costume);
-            if ((this.activationDelay==0) && (!designActor)) {
-                actor.event(this.startEvent);
-            }
         }
 
         this.updateActor(actor, resources, designActor);

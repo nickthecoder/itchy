@@ -25,6 +25,8 @@ public class TurnAnimation extends NumericAnimation
     @Property(label="Turn")
     public double turn;
     
+    @Property(label="Heading Too")
+    public boolean headingToo;
     
     public TurnAnimation()
     {
@@ -52,7 +54,11 @@ public class TurnAnimation extends NumericAnimation
     @Override
     public void tick( Actor actor, double amount, double delta )
     {
-        actor.getAppearance().adjustDirection(this.turn * delta );
+        double turnage = this.turn * delta;
+        actor.getAppearance().adjustDirection( turnage );
+        if (headingToo) {
+            actor.adjustDirection(turnage);
+        }
     }
 
 }

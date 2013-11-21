@@ -8,6 +8,9 @@ Director = Class({
     },
     
     startScene: function( sceneName ) {
+    	if (game.pause.isPaused()) {
+            game.pause.unpause();
+        }
     	if (sceneName == "menu" && game.getSceneName() == "menu") {
     		return true;
     	}
@@ -39,6 +42,15 @@ Director = Class({
     
     addPoints: function( points ) {
     	this.score += points;
+    },
+    
+    showFancyMouse: function() {
+    	var mousePointer = new itchy.extras.SimpleMousePointer("mouse");
+    	game.mouse.setMousePointer( mousePointer );
+    	new itchy.extras.Explosion(mousePointer.getActor())
+    		.forever().follow().offset(40,-33).projectilesPerTick(1).spread(-20,-80).distance(10)
+    		.randomSpread().speed(1,2,0,0).fade(3).pose("spark")
+    		.createActor();
     }
     
 });

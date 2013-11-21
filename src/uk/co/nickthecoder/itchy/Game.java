@@ -15,6 +15,7 @@ import java.util.prefs.Preferences;
 import uk.co.nickthecoder.itchy.editor.Editor;
 import uk.co.nickthecoder.itchy.editor.SceneDesigner;
 import uk.co.nickthecoder.itchy.extras.SceneTransition;
+import uk.co.nickthecoder.itchy.extras.SimpleMouse;
 import uk.co.nickthecoder.itchy.gui.GuiView;
 import uk.co.nickthecoder.itchy.gui.RootContainer;
 import uk.co.nickthecoder.itchy.gui.Stylesheet;
@@ -139,12 +140,8 @@ public class Game
     private Stylesheet stylesheet;
 
     public final ScriptManager scriptManager;
-
-    /**
-     * Keeps a record of if the current scene should show the mouse pointer. This is needed so that
-     * the mouse can be shown/hidden when one Game ends and the previous one is re-activated.
-     */
-    private boolean showMousePointer = true;
+    
+    public Mouse mouse = new SimpleMouse();
 
     public Game( Resources resources )
     {
@@ -180,6 +177,7 @@ public class Game
         // Covered by the glass view
         this.glassStage = new ZOrderStage("glass");
         this.glassView = new StageView(displayRect, this.glassStage);
+        this.glassView.enableMouseListener(this);
         this.allViews.add(this.glassView);
 
         this.addMouseListener(this.allViews);
@@ -227,7 +225,7 @@ public class Game
      */
     public void onActivate()
     {
-        this.showMousePointer(this.showMousePointer);
+        this.mouse.onActivate();
         this.director.onActivate();
     }
 
@@ -448,7 +446,7 @@ public class Game
 
     /**
      * Use this to time actual game play, which will exclude time while the game is paused. A single
-     * value from gameTimeMillis is meaningless, it only hasscreenruler meaning when one value is
+     * value from gameTimeMillis is meaningless, it only hasr meaning when one value is
      * subtracted from a later value (which will give the number of milliseconds of game time.
      */
     public long gameTimeMillis()
@@ -530,7 +528,10 @@ public class Game
             MouseButtonEvent mbe = (MouseButtonEvent) event;
 
             if (mbe.isPressed()) {
-
+                if (this.mouse.getMousePointer() != null) {
+                    this.mouse.getMousePointer().onMouseDown(mbe);
+                }
+                
                 if (this.mouseOwner == null) {
 
                     if (this.modalListener == null) {
@@ -551,6 +552,10 @@ public class Game
             }
 
             if (mbe.isReleased()) {
+                
+                if (this.mouse.getMousePointer() != null) {
+                    this.mouse.getMousePointer().onMouseUp(mbe);
+                }
 
                 if (this.mouseOwner == null) {
 
@@ -575,6 +580,11 @@ public class Game
 
         if (event instanceof MouseMotionEvent) {
             MouseMotionEvent mme = (MouseMotionEvent) event;
+            
+            if (this.mouse.getMousePointer() != null) {
+                this.mouse.getMousePointer().onMouseMove(mme);
+            }
+
             if (this.mouseOwner == null) {
 
                 if (this.modalListener == null) {
@@ -763,7 +773,7 @@ public class Game
 
                 this.sceneName = sceneName;
                 this.background.color = scene.backgroundColor;
-                this.showMousePointer(scene.showMouse);
+                this.mouse.showRegularMousePointer(scene.showMouse);
                 this.sceneDirector = scene.createSceneDirector(this.resources);
 
                 this.sceneDirector.onActivate();
@@ -786,12 +796,6 @@ public class Game
     public String getSceneName()
     {
         return this.sceneName;
-    }
-
-    public void showMousePointer( boolean value )
-    {
-        this.showMousePointer = value;
-        uk.co.nickthecoder.jame.Video.showMousePointer(value);
     }
 
     /**

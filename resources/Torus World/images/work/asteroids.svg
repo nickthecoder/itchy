@@ -2787,6 +2787,86 @@
        id="linearGradient4323"
        xlink:href="#linearGradient4589-0"
        inkscape:collect="always" />
+    <filter
+       id="filter4298"
+       inkscape:label="Metallized ridge"
+       inkscape:menu="Ridges"
+       inkscape:menu-tooltip="Gel Ridge metallized at its top"
+       height="2"
+       y="-0.5"
+       width="2"
+       x="-0.5"
+       color-interpolation-filters="sRGB">
+      <feGaussianBlur
+         id="feGaussianBlur4300"
+         stdDeviation="1"
+         result="result1" />
+      <feGaussianBlur
+         id="feGaussianBlur4302"
+         stdDeviation="8"
+         result="result6"
+         in="result1" />
+      <feComposite
+         id="feComposite4304"
+         in2="result1"
+         operator="atop"
+         in="result6"
+         result="result8" />
+      <feComposite
+         id="feComposite4306"
+         in2="result8"
+         operator="xor"
+         result="fbSourceGraphic"
+         in="result6" />
+      <feColorMatrix
+         id="feColorMatrix4308"
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 2 0 " />
+      <feGaussianBlur
+         id="feGaussianBlur4310"
+         result="result0"
+         in="fbSourceGraphicAlpha"
+         stdDeviation="2.5" />
+      <feSpecularLighting
+         id="feSpecularLighting4312"
+         specularExponent="35"
+         specularConstant="1"
+         surfaceScale="4"
+         lighting-color="rgb(255,255,255)"
+         result="result1"
+         in="result0">
+        <fePointLight
+           id="fePointLight4314"
+           z="20000"
+           y="-10000"
+           x="-5000" />
+      </feSpecularLighting>
+      <feComposite
+         id="feComposite4316"
+         in2="fbSourceGraphicAlpha"
+         operator="in"
+         result="result2"
+         in="result1" />
+      <feComposite
+         id="feComposite4318"
+         in2="result2"
+         k3="1"
+         k2="1"
+         operator="arithmetic"
+         result="result4"
+         in="fbSourceGraphic" />
+      <feComposite
+         id="feComposite4320"
+         in2="result4"
+         operator="atop"
+         in="result9"
+         result="result91" />
+      <feBlend
+         id="feBlend4322"
+         in2="result91"
+         mode="multiply" />
+    </filter>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -2795,9 +2875,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.70710678"
-     inkscape:cx="127.33526"
-     inkscape:cy="592.28475"
+     inkscape:zoom="1.4142136"
+     inkscape:cx="315.73667"
+     inkscape:cy="143.09323"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -3333,5 +3413,110 @@
          d="m 596.25374,60.739591 -10.25305,17.677669 0,13.43503 10.6066,-11.667262 z"
          style="fill:url(#linearGradient4151);fill-opacity:1;stroke:none" />
     </g>
+    <path
+       sodipodi:type="star"
+       style="fill:#1909df;fill-opacity:1;stroke:none;filter:url(#filter4298)"
+       id="path3516"
+       sodipodi:sides="5"
+       sodipodi:cx="298.39905"
+       sodipodi:cy="923.66876"
+       sodipodi:r1="16.124516"
+       sodipodi:r2="6.4403086"
+       sodipodi:arg1="0.66104317"
+       sodipodi:arg2="1.2893617"
+       inkscape:flatsided="false"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="m 311.12697,933.56826 -10.93923,-3.71256 -7.27053,8.97715 0.15045,-11.55107 -10.78449,-4.14059 11.03221,-3.42639 0.60534,-11.53618 6.66783,9.43344 11.15862,-2.98916 -6.91126,9.25658 z"
+       inkscape:transform-center-x="1.1046265"
+       inkscape:transform-center-y="-3.0364782"
+       transform="translate(-101.82338,56.568543)"
+       inkscape:export-filename="/media/home/nick/projects/itchy/resources/Torus World/images/spark1.png"
+       inkscape:export-xdpi="60.18745"
+       inkscape:export-ydpi="60.18745" />
+    <path
+       inkscape:transform-center-y="-1.521511"
+       inkscape:transform-center-x="-3.1115329"
+       d="m 311.12697,933.56826 -10.93923,-3.71256 -7.27053,8.97715 0.15045,-11.55107 -10.78449,-4.14059 11.03221,-3.42639 0.60534,-11.53618 6.66783,9.43344 11.15862,-2.98916 -6.91126,9.25658 z"
+       inkscape:randomized="0"
+       inkscape:rounded="0"
+       inkscape:flatsided="false"
+       sodipodi:arg2="1.2893617"
+       sodipodi:arg1="0.66104317"
+       sodipodi:r2="6.4403086"
+       sodipodi:r1="16.124516"
+       sodipodi:cy="923.66876"
+       sodipodi:cx="298.39905"
+       sodipodi:sides="5"
+       id="path4324"
+       style="fill:#5ca9f4;fill-opacity:1;stroke:none;filter:url(#filter4298)"
+       sodipodi:type="star"
+       transform="matrix(0.76694605,0.64171159,-0.64171159,0.76694605,642.13056,85.438581)"
+       inkscape:export-filename="/media/home/nick/projects/itchy/resources/Torus World/images/spark2.png"
+       inkscape:export-xdpi="60.18745"
+       inkscape:export-ydpi="60.18745" />
+    <path
+       transform="matrix(0.42356216,0.90586705,-0.90586705,0.42356216,1069.8614,319.89852)"
+       sodipodi:type="star"
+       style="fill:#f3f45c;fill-opacity:1;stroke:none;filter:url(#filter4298)"
+       id="path4326"
+       sodipodi:sides="5"
+       sodipodi:cx="298.39905"
+       sodipodi:cy="923.66876"
+       sodipodi:r1="16.124516"
+       sodipodi:r2="6.4403086"
+       sodipodi:arg1="0.66104317"
+       sodipodi:arg2="1.2893617"
+       inkscape:flatsided="false"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="m 311.12697,933.56826 -10.93923,-3.71256 -7.27053,8.97715 0.15045,-11.55107 -10.78449,-4.14059 11.03221,-3.42639 0.60534,-11.53618 6.66783,9.43344 11.15862,-2.98916 -6.91126,9.25658 z"
+       inkscape:transform-center-x="-1.6160008"
+       inkscape:transform-center-y="-0.51384305"
+       inkscape:export-filename="/media/home/nick/projects/itchy/resources/Torus World/images/spark3.png"
+       inkscape:export-xdpi="60.18745"
+       inkscape:export-ydpi="60.18745" />
+    <path
+       inkscape:transform-center-y="-1.2666404"
+       inkscape:transform-center-x="-2.6543294"
+       d="m 311.12697,933.56826 -10.93923,-3.71256 -7.27053,8.97715 0.15045,-11.55107 -10.78449,-4.14059 11.03221,-3.42639 0.60534,-11.53618 6.66783,9.43344 11.15862,-2.98916 -6.91126,9.25658 z"
+       inkscape:randomized="0"
+       inkscape:rounded="0"
+       inkscape:flatsided="false"
+       sodipodi:arg2="1.2893617"
+       sodipodi:arg1="0.66104317"
+       sodipodi:r2="6.4403086"
+       sodipodi:r1="16.124516"
+       sodipodi:cy="923.66876"
+       sodipodi:cx="298.39905"
+       sodipodi:sides="5"
+       id="path4328"
+       style="fill:#ee8713;fill-opacity:1;stroke:none;filter:url(#filter4298)"
+       sodipodi:type="star"
+       transform="matrix(0.07925167,0.99685465,-0.99685465,0.07925167,1336.007,612.49862)"
+       inkscape:export-filename="/media/home/nick/projects/itchy/resources/Torus World/images/spark4.png"
+       inkscape:export-xdpi="60.18745"
+       inkscape:export-ydpi="60.18745" />
+    <path
+       transform="matrix(0.2036145,0.97905115,-0.97905115,0.2036145,1369.4105,502.57878)"
+       sodipodi:type="star"
+       style="fill:#ee131e;fill-opacity:1;stroke:none;filter:url(#filter4298)"
+       id="path4330"
+       sodipodi:sides="5"
+       sodipodi:cx="298.39905"
+       sodipodi:cy="923.66876"
+       sodipodi:r1="16.124516"
+       sodipodi:r2="6.4403086"
+       sodipodi:arg1="0.66104317"
+       sodipodi:arg2="1.2893617"
+       inkscape:flatsided="false"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="m 311.12697,933.56826 -10.93923,-3.71256 -7.27053,8.97715 0.15045,-11.55107 -10.78449,-4.14059 11.03221,-3.42639 0.60534,-11.53618 6.66783,9.43344 11.15862,-2.98916 -6.91126,9.25658 z"
+       inkscape:transform-center-x="-2.0156768"
+       inkscape:transform-center-y="-1.0160485"
+       inkscape:export-filename="/media/home/nick/projects/itchy/resources/Torus World/images/spark5.png"
+       inkscape:export-xdpi="60.18745"
+       inkscape:export-ydpi="60.18745" />
   </g>
 </svg>

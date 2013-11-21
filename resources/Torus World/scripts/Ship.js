@@ -63,6 +63,12 @@ Ship = Class({
             var theta = this.actor.getHeadingRadians();
             this.vx += Math.cos(theta) * this.thrust;
             this.vy += Math.sin(theta) * this.thrust;
+            var heading = this.actor.getDirection();
+        	new itchy.extras.Explosion(this.actor)
+    			.projectiles(4).follow().projectilesPerTick(1)
+    			.spread(heading+160, heading+200).distance(40)
+    			.randomSpread().speed(1,2,0,0).fade(3).pose("spark")
+    			.createActor();
         }
         if (Itchy.isKeyDown(Keys.SPACE)) {
             if (this.fireTimer.isFinished()) {
@@ -104,7 +110,7 @@ Ship = Class({
 			if (directorScript.lives > 0) {
 				game.startScene(game.getSceneName());
 	    	} else {
-	    		game.showMousePointer(true);
+	    		directorScript.showFancyMouse();
 	            game.loadScene("gameOver", true);	    		
     		}
     	}

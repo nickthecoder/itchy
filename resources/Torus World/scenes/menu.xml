@@ -1,24 +1,22 @@
-<scene showMouse="true" role="Menu.js" background="#000000ff">
+<scene showMouse="false" role="Menu.js" background="#000000ff">
   <properties/>
   <layer name="main">
-    <actor costume="stars2" x="400" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="0"/>
-    <actor costume="stars2" x="400" y="301" direction="0.0" heading="0.0" startEvent="default" zOrder="0"/>
-    <text text="Asteroids in Non-Euclidian Space" font="Boycott" size="43" color="#000000" xAlignment="0.5" yAlignment="0.5" x="404" y="440" direction="0.0" heading="0.0" startEvent="default" zOrder="1"/>
-    <text text="Asteroids in Non-Euclidian Space" font="Boycott" size="43" color="#290000" xAlignment="0.5" yAlignment="0.5" x="405" y="438" direction="0.0" heading="0.0" startEvent="default" zOrder="2"/>
-    <text text="World" font="Boycott" size="134" color="#00000a" xAlignment="0.5" yAlignment="0.5" x="594" y="518" direction="0.0" heading="0.0" startEvent="default" zOrder="9" alpha="160.0"/>
-    <text text="Torus" font="Boycott" size="134" color="#00000a" xAlignment="0.5" yAlignment="0.5" x="196" y="521" direction="0.0" heading="0.0" startEvent="default" zOrder="9" alpha="160.0"/>
-    <text text="Torus World" font="Boycott" size="128" color="#ff2e76" xAlignment="0.5" yAlignment="0.5" x="406" y="528" direction="0.0" heading="0.0" startEvent="default" zOrder="11" alpha="115.0"/>
-    <actor costume="rock2" x="135" y="404" direction="0.0" heading="0.0" startEvent="default" zOrder="30">
+    <actor costume="stars2" x="400" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="0" alpha="143.0"/>
+    <text text="Asteroids in Non-Euclidian Space" font="Boycott" size="43" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="407" y="449" direction="0.0" heading="0.0" startEvent="default" zOrder="1" alpha="128.0"/>
+    <text text="Asteroids in Non-Euclidian Space" font="Boycott" size="43" color="#000000" xAlignment="0.5" yAlignment="0.5" x="406" y="448" direction="0.0" heading="0.0" startEvent="default" zOrder="2" alpha="128.0"/>
+    <text text="Torus World" font="Boycott" size="128" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="402" y="529" direction="0.0" heading="0.0" startEvent="default" zOrder="9" alpha="128.0"/>
+    <text text="Torus World" font="Boycott" size="128" color="#000000" xAlignment="0.5" yAlignment="0.5" x="401" y="528" direction="0.0" heading="0.0" startEvent="default" zOrder="11" alpha="115.0"/>
+    <actor costume="rock2" x="136" y="351" direction="0.0" heading="0.0" startEvent="default" zOrder="30">
       <property name="vy" value="2.0"/>
       <property name="vx" value="3.0"/>
       <property name="rotationSpeed" value="1.0"/>
     </actor>
-    <actor costume="rock2" x="455" y="278" direction="0.0" heading="0.0" startEvent="default" zOrder="30">
+    <actor costume="rock2" x="669" y="229" direction="0.0" heading="0.0" startEvent="default" zOrder="30">
       <property name="vy" value="-0.3"/>
       <property name="vx" value="2.0"/>
       <property name="rotationSpeed" value="-1.3"/>
     </actor>
-    <actor costume="rock1" x="326" y="261" direction="0.0" heading="0.0" startEvent="default" zOrder="30">
+    <actor costume="rock1" x="93" y="221" direction="0.0" heading="0.0" startEvent="default" zOrder="30">
       <property name="vy" value="-4.5"/>
       <property name="vx" value="-0.3"/>
       <property name="rotationSpeed" value="1.5"/>
@@ -28,17 +26,17 @@
       <property name="vx" value="1.3"/>
       <property name="rotationSpeed" value="-0.8"/>
     </actor>
-    <text text="Play" font="BlackCasper" size="58" color="#333364" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.PlainRole" costume="Button" x="380" y="328" direction="0.0" heading="0.0" startEvent="fadeIn" zOrder="50"/>
-    <text text="Quit" font="BlackCasper" size="58" color="#333364" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.PlainRole" costume="Button" x="375" y="45" direction="0.0" heading="0.0" startEvent="fadeIn" zOrder="50" activationDelay="0.9"/>
-    <text text="Editor" font="BlackCasper" size="58" color="#333364" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.PlainRole" costume="Button" x="377" y="171" direction="0.0" heading="0.0" startEvent="fadeIn" zOrder="50" activationDelay="0.6"/>
-    <text text="About" font="BlackCasper" size="58" color="#333364" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.PlainRole" costume="Button" x="387" y="251" direction="0.0" heading="0.0" startEvent="fadeIn" zOrder="50" activationDelay="0.3"/>
-    <text text="About" font="BlackCasper" size="47" color="#5d8cc5" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.extras.SceneButton" costume="Button" x="380" y="255" direction="0.0" heading="0.0" startEvent="fadeIn" zOrder="60" activationDelay="0.3">
+    <text text="Play" font="BlackCasper" size="70" color="#ffffff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.PlainRole" costume="Button" x="401" y="343" direction="0.0" heading="0.0" startEvent="fadeIn" zOrder="50" alpha="128.0"/>
+    <text text="Quit" font="BlackCasper" size="70" color="#ffffff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.PlainRole" costume="Button" x="402" y="37" direction="0.0" heading="0.0" startEvent="fadeIn" zOrder="50" alpha="128.0" activationDelay="0.9"/>
+    <text text="Editor" font="BlackCasper" size="70" color="#ffffff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.PlainRole" costume="Button" x="397" y="165" direction="0.0" heading="0.0" startEvent="fadeIn" zOrder="50" alpha="128.0" activationDelay="0.6"/>
+    <text text="About" font="BlackCasper" size="70" color="#ffffff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.PlainRole" costume="Button" x="402" y="250" direction="0.0" heading="0.0" startEvent="fadeIn" zOrder="50" alpha="128.0" activationDelay="0.3"/>
+    <text text="About" font="BlackCasper" size="70" color="#262392" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.extras.SceneButton" costume="Button" x="404" y="251" direction="0.0" heading="0.0" startEvent="fadeIn" zOrder="60" alpha="128.0" activationDelay="0.3">
       <property name="sceneName" value="about"/>
     </text>
-    <text text="Quit" font="BlackCasper" size="47" color="#5d8cc5" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.extras.QuitButton" costume="Button" x="374" y="47" direction="0.0" heading="0.0" startEvent="fadeIn" zOrder="60" activationDelay="0.9"/>
-    <text text="Play" font="BlackCasper" size="47" color="#5d8cc5" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.extras.MessageButton" costume="play" x="379" y="329" direction="0.0" heading="0.0" startEvent="fadeIn" zOrder="60">
+    <text text="Quit" font="BlackCasper" size="70" color="#262392" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.extras.QuitButton" costume="Button" x="400" y="35" direction="0.0" heading="0.0" startEvent="fadeIn" zOrder="60" alpha="128.0" activationDelay="0.9"/>
+    <text text="Play" font="BlackCasper" size="70" color="#262392" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.extras.MessageButton" costume="play" x="400" y="342" direction="0.0" heading="0.0" startEvent="fadeIn" zOrder="60" alpha="128.0">
       <property name="message" value="start"/>
     </text>
-    <text text="Editor" font="BlackCasper" size="47" color="#5d8cc5" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.extras.EditorButton" costume="editor" x="375" y="172" direction="0.0" heading="0.0" startEvent="fadeIn" zOrder="60" activationDelay="0.6"/>
+    <text text="Editor" font="BlackCasper" size="70" color="#262392" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.extras.EditorButton" costume="editor" x="399" y="166" direction="0.0" heading="0.0" startEvent="fadeIn" zOrder="60" alpha="128.0" activationDelay="0.6"/>
   </layer>
 </scene>

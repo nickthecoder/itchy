@@ -174,38 +174,6 @@ public class ResourcesWriter extends XMLWriter
         throws XMLException
     {
         return animation.getTagName();
-        /*
-        if (animation instanceof CompoundAnimation) {
-            return "compound";
-
-        } else if (animation instanceof FramedAnimation) {
-            return "frames";
-
-        } else if (animation instanceof MoveAnimation) {
-            return "move";
-
-        } else if (animation instanceof ForwardsAnimation) {
-            return "forwards";
-
-        } else if (animation instanceof AlphaAnimation) {
-            return "alpha";
-
-        } else if (animation instanceof TurnAnimation) {
-            return "turn";
-
-        } else if (animation instanceof HeadingAnimation) {
-            return "heading";
-
-        } else if (animation instanceof ScaleAnimation) {
-            return "scale";
-
-        } else if (animation instanceof ColorAnimation) {
-            return "color";
-
-        } else {
-            throw new XMLException("Unknown animation : " + animation.getClass().getName());
-        }
-        */
     }
 
     private <S extends PropertySubject<S>> void writeProperties( S subject )

@@ -93,7 +93,11 @@ public abstract class SceneActor implements Cloneable
         actor.getAppearance().setColorize(this.colorize == null ? null : new RGBA(this.colorize));
         ClassName roleClassName = this.roleClassName;
         actor.setActivationDelay(this.activationDelay);
-
+        
+        if ((this.activationDelay==0) && (!designMode)) {
+            actor.event(this.startEvent);
+        }
+        
         if (roleClassName == null) {
             if (actor.getCostume() == null) {
                 roleClassName = new ClassName(Role.class, NullRole.class.getName());

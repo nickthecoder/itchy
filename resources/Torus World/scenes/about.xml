@@ -1,16 +1,23 @@
-<scene showMouse="true" role="Menu.js" background="#000000ff">
+<scene showMouse="false" role="Menu.js" background="#000000ff">
   <properties/>
   <layer name="main">
+    <actor costume="stars1" x="400" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="0" alpha="128.0"/>
     <text text="Back" font="BlackCasper" size="77" color="#ffffff" xAlignment="0.5" yAlignment="0.9" role="uk.co.nickthecoder.itchy.extras.SceneButton" costume="Button" x="405" y="39" direction="0.0" heading="0.0" startEvent="fadeIn" zOrder="3">
       <property name="sceneName" value="menu"/>
     </text>
     <text text="Itchy Powered" font="Boycott" size="31" color="#ffffff" xAlignment="0.1" yAlignment="0.5" role="uk.co.nickthecoder.itchy.extras.LinkButton" costume="Button" x="33" y="36" direction="90.0" heading="0.0" startEvent="default" zOrder="4">
       <property name="url" value="http://nickthecoder.co.uk/software/view/Itchy"/>
     </text>
-    <text text="By Nick Robinson" font="BlackCasper" size="32" color="#3981af" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.extras.LinkButton" costume="Button" x="386" y="435" direction="0.0" heading="0.0" startEvent="default" zOrder="5">
+    <text text="By Nick Robinson" font="BlackCasper" size="40" color="#ffffff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.extras.LinkButton" costume="Button" x="400" y="447" direction="0.0" heading="0.0" startEvent="default" zOrder="4" alpha="128.0">
       <property name="url" value="http://nickthecoder.co.uk/"/>
     </text>
-    <text text="Torus World" font="BlackCasper" size="100" color="#3981af" xAlignment="0.5" yAlignment="0.3" role="uk.co.nickthecoder.itchy.extras.LinkButton" costume="Button" x="400" y="545" direction="0.0" heading="0.0" startEvent="default" zOrder="6">
+    <text text="By Nick Robinson" font="BlackCasper" size="40" color="#0843ff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.extras.LinkButton" costume="Button" x="399" y="446" direction="0.0" heading="0.0" startEvent="default" zOrder="5" alpha="128.0">
+      <property name="url" value="http://nickthecoder.co.uk/"/>
+    </text>
+    <text text="Torus World" font="BlackCasper" size="100" color="#ffffff" xAlignment="0.5" yAlignment="0.3" role="uk.co.nickthecoder.itchy.extras.LinkButton" costume="Button" x="403" y="551" direction="0.0" heading="0.0" startEvent="default" zOrder="5" alpha="128.0">
+      <property name="url" value="http://nickthecoder.co.uk/software/view/Torus%20World"/>
+    </text>
+    <text text="Torus World" font="BlackCasper" size="100" color="#0843ff" xAlignment="0.5" yAlignment="0.3" role="uk.co.nickthecoder.itchy.extras.LinkButton" costume="Button" x="401" y="550" direction="0.0" heading="0.0" startEvent="default" zOrder="6" alpha="128.0">
       <property name="url" value="http://nickthecoder.co.uk/software/view/Torus%20World"/>
     </text>
     <text text="Did you know..." font="VeraBold" size="22" color="#ffffff" xAlignment="0.0" yAlignment="0.5" x="76" y="390" direction="0.0" heading="0.0" startEvent="default" zOrder="7"/>

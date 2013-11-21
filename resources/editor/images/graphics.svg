@@ -1248,12 +1248,12 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.4"
-     inkscape:cx="189.17948"
-     inkscape:cy="131.67227"
+     inkscape:zoom="3.959798"
+     inkscape:cx="380.17864"
+     inkscape:cy="141.96261"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
-     showgrid="true"
+     showgrid="false"
      inkscape:window-width="1280"
      inkscape:window-height="747"
      inkscape:window-x="0"
@@ -2375,15 +2375,15 @@
     <rect
        ry="4.999939"
        rx="4.999939"
-       y="853.79077"
-       x="11.428569"
+       y="802.36218"
+       x="10"
        height="38.57143"
        width="38.57143"
        id="rect4135"
-       style="fill:#ffffff;stroke:#ffaf00;stroke-width:3;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;fill-opacity:1" />
+       style="fill:#ffffff;fill-opacity:1;stroke:#ffaf00;stroke-width:3;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
     <g
        id="g4156"
-       transform="translate(176.42857,-51.428571)"
+       transform="translate(202.02117,-53.651438)"
        style="fill:#ffffff;fill-opacity:1"
        inkscape:export-filename="/media/home/nick/projects/itchy/resources/editor/images/animation-move.png"
        inkscape:export-xdpi="90"
@@ -2396,9 +2396,9 @@
          height="38.57143"
          width="38.57143"
          id="rect4138"
-         style="fill:#ffffff;stroke:#ffaf00;stroke-width:3;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;fill-opacity:1" />
+         style="fill:#ffffff;fill-opacity:1;stroke:#ffaf00;stroke-width:3;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
       <rect
-         style="fill:#ffffff;stroke:#ffaf00;stroke-width:3;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;fill-opacity:1"
+         style="fill:#ffffff;fill-opacity:1;stroke:#ffaf00;stroke-width:3;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
          id="rect4140"
          width="38.57143"
          height="38.57143"
@@ -2409,13 +2409,13 @@
     </g>
     <g
        id="g4148"
-       transform="translate(0,-15)"
+       transform="translate(210.88894,-17.22288)"
        style="fill:#ffffff;fill-opacity:1"
        inkscape:export-filename="/media/home/nick/projects/itchy/resources/editor/images/animation-scale.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90">
       <rect
-         style="fill:#ffffff;stroke:#ffaf00;stroke-width:3;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;fill-opacity:1"
+         style="fill:#ffffff;fill-opacity:1;stroke:#ffaf00;stroke-width:3;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
          id="rect4142"
          width="38.57143"
          height="38.57143"
@@ -2431,102 +2431,14 @@
          height="26.642122"
          width="26.642122"
          id="rect4144"
-         style="fill:#ffffff;stroke:#ffaf00;stroke-width:3;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;fill-opacity:1" />
-    </g>
-    <g
-       id="g4152"
-       inkscape:export-filename="/media/home/nick/projects/itchy/resources/editor/images/animation-turn.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90">
-      <rect
-         transform="matrix(0.94682464,0.32175007,-0.32175007,0.94682464,0,0)"
-         style="fill:#ffffff;stroke:#ffaf00;stroke-width:3;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;fill-opacity:1"
-         id="rect4131"
-         width="38.57143"
-         height="38.57143"
-         x="396.00754"
-         y="765.47125"
-         rx="4.999939"
-         ry="4.999939" />
-    </g>
-    <path
-       style="fill:none;stroke:#ffaf00;stroke-width:3;stroke-miterlimit:4;stroke-opacity:1"
-       d="m 333.57149,863.79069 0,13.57155 c 0,2.76997 -2.22997,4.99994 -4.99994,4.99994 l -28.57155,0 c -2.76997,0 -4.99994,-2.22997 -4.99994,-4.99994 l 0,-13.57155"
-       id="rect4162"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cssssc"
-       inkscape:export-filename="/media/home/nick/projects/itchy/resources/editor/images/animation-clip.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90" />
-    <g
-       style="fill:#ffffff;fill-opacity:1"
-       id="g4396"
-       transform="matrix(0,-1,1,0,-882.36218,1082.3622)">
-      <rect
-         style="fill:#ffffff;fill-opacity:1;stroke:#ffaf00;stroke-width:3;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-         id="rect4187"
-         width="9.9999828"
-         height="10.000003"
-         x="150.00002"
-         y="917.36218"
-         rx="4.999939"
-         ry="4.4642859" />
-      <rect
-         ry="4.4642859"
-         rx="4.999939"
-         y="907.36218"
-         x="150.00002"
-         height="10.000003"
-         width="9.9999828"
-         id="rect4392"
-         style="fill:#ffffff;fill-opacity:1;stroke:#ffaf00;stroke-width:3;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-      <rect
-         style="fill:#ffffff;fill-opacity:1;stroke:#ffaf00;stroke-width:3;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-         id="rect4394"
-         width="9.9999828"
-         height="10.000003"
-         x="150.00002"
-         y="927.36218"
-         rx="4.999939"
-         ry="4.4642859" />
-    </g>
-    <g
-       style="fill:#ffffff;fill-opacity:1"
-       transform="matrix(-1,0,0,-1,235.00002,1849.7244)"
-       id="g4401">
-      <rect
-         ry="4.4642859"
-         rx="4.999939"
-         y="917.36218"
-         x="150.00002"
-         height="10.000003"
-         width="9.9999828"
-         id="rect4403"
-         style="fill:#ffffff;fill-opacity:1;stroke:#ffaf00;stroke-width:3;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-      <rect
-         style="fill:#ffffff;fill-opacity:1;stroke:#ffaf00;stroke-width:3;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-         id="rect4405"
-         width="9.9999828"
-         height="10.000003"
-         x="150.00002"
-         y="907.36218"
-         rx="4.999939"
-         ry="4.4642859" />
-      <rect
-         ry="4.4642859"
-         rx="4.999939"
-         y="927.36218"
-         x="150.00002"
-         height="10.000003"
-         width="9.9999828"
-         id="rect4407"
          style="fill:#ffffff;fill-opacity:1;stroke:#ffaf00;stroke-width:3;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
     </g>
     <g
        id="g4777"
        inkscape:export-filename="/media/home/nick/projects/itchy/resources/editor/images/animation-alpha.png"
        inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90">
+       inkscape:export-ydpi="90"
+       transform="translate(11.219574,-5.0799966)">
       <rect
          ry="4.999939"
          rx="4.999939"
@@ -2541,13 +2453,14 @@
          inkscape:connector-curvature="0"
          id="path4213"
          d="m 95.892859,869.1479 c -10,10e-6 -10,15 -20,15 -10,0 -10,-15 0,-15 10,0 10,15 20,15"
-         style="fill:none;fill-opacity:1;stroke:#ffaf00;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+         style="fill:none;stroke:#ffaf00;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
     </g>
     <g
        id="g4622"
        inkscape:export-filename="/media/home/nick/projects/itchy/resources/editor/images/animation-heading.png"
        inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90">
+       inkscape:export-ydpi="90"
+       transform="translate(103.95505,-57.544281)">
       <path
          sodipodi:type="arc"
          style="fill:#ffffff;fill-opacity:1;stroke:#ffaf00;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
@@ -2556,7 +2469,7 @@
          sodipodi:cy="944.86218"
          sodipodi:rx="15"
          sodipodi:ry="15"
-         d="m 272.5,944.86218 a 15,15 0 1 1 -30,0 15,15 0 1 1 30,0 z"
+         d="m 272.5,944.86218 c 0,8.28427 -6.71573,15 -15,15 -8.28427,0 -15,-6.71573 -15,-15 0,-8.28427 6.71573,-15 15,-15 8.28427,0 15,6.71573 15,15 z"
          transform="translate(-17.5,-12.5)" />
       <g
          style="fill:#ffffff;fill-opacity:1;stroke:#ffaf00;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
@@ -2636,7 +2549,7 @@
     <g
        style="fill:#ffffff;fill-opacity:1;stroke:#ffaf00;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        id="g4504"
-       transform="matrix(0,-1,1,0,-707.36218,1122.3622)"
+       transform="matrix(0,-1,1,0,-660.36218,1108.3622)"
        inkscape:export-filename="/media/home/nick/projects/itchy/resources/editor/images/animation-sequence.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90">
@@ -2710,7 +2623,7 @@
     <g
        style="fill:#ffffff;fill-opacity:1;stroke:#ffaf00;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        id="g4517"
-       transform="matrix(0,-1,1,0,-622.36218,1062.3622)"
+       transform="matrix(0,-1,1,0,-598.36218,1073.3622)"
        inkscape:export-filename="/media/home/nick/projects/itchy/resources/editor/images/animation-parallel.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90">
@@ -2797,7 +2710,8 @@
        id="g4614"
        inkscape:export-filename="/media/home/nick/projects/itchy/resources/editor/images/animation-forwards.png"
        inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90">
+       inkscape:export-ydpi="90"
+       transform="translate(294.0741,-60.794287)">
       <rect
          ry="4.074028"
          rx="4.074028"
@@ -2806,7 +2720,7 @@
          height="31.4286"
          width="31.4286"
          id="rect4197"
-         style="fill:#ffffff;stroke:#ffaf00;stroke-width:3;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;fill-opacity:1" />
+         style="fill:#ffffff;fill-opacity:1;stroke:#ffaf00;stroke-width:3;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
       <rect
          style="fill:#ffffff;fill-opacity:1;stroke:#ffaf00;stroke-width:3;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
          id="rect4372"
@@ -2818,21 +2732,21 @@
          ry="4.074028" />
       <g
          transform="matrix(0.81481554,0,0,0.81481554,24.036893,172.659)"
-         style="stroke:#ffaf00;stroke-width:3.68181490999999994;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;fill:#ffffff;fill-opacity:1"
+         style="fill:#ffffff;fill-opacity:1;stroke:#ffaf00;stroke-width:3.68181491;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
          id="g4208">
         <path
            sodipodi:nodetypes="cc"
-           style="fill:#ffffff;stroke:#ffaf00;stroke-width:3.68181490999999994;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;fill-opacity:1"
+           style="fill:#ffffff;fill-opacity:1;stroke:#ffaf00;stroke-width:3.68181491;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
            d="m 181.78571,932.36218 18.21429,0"
            id="path4201"
            inkscape:connector-curvature="0" />
         <path
-           style="fill:#ffffff;stroke:#ffaf00;stroke-width:3.68181490999999994;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;fill-opacity:1"
+           style="fill:#ffffff;fill-opacity:1;stroke:#ffaf00;stroke-width:3.68181491;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
            d="m 200,932.36218 -10,10 z"
            id="path4203"
            inkscape:connector-curvature="0" />
         <path
-           style="fill:#ffffff;stroke:#ffaf00;stroke-width:3.68181490999999994;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;fill-opacity:1"
+           style="fill:#ffffff;fill-opacity:1;stroke:#ffaf00;stroke-width:3.68181491;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
            d="m 200,932.36218 -10,-10"
            id="path4206"
            inkscape:connector-curvature="0" />
@@ -2840,7 +2754,7 @@
     </g>
     <g
        id="g4638"
-       transform="translate(45,0)"
+       transform="translate(50,121)"
        inkscape:export-filename="/media/home/nick/projects/itchy/resources/editor/images/animation-delay.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90">
@@ -2854,7 +2768,7 @@
            sodipodi:cy="944.86218"
            sodipodi:rx="20"
            sodipodi:ry="20"
-           d="m 277.5,944.86218 a 20,20 0 1 1 -40,0 20,20 0 1 1 40,0 z"
+           d="m 277.5,944.86218 c 0,11.0457 -8.95431,20 -20,20 -11.04569,0 -20,-8.9543 -20,-20 0,-11.04569 8.95431,-20 20,-20 11.04569,0 20,8.95431 20,20 z"
            transform="translate(-267.5,-122.5)" />
         <path
            style="fill:#ffffff;fill-opacity:1;stroke:#ffaf00;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
@@ -2874,7 +2788,8 @@
        id="g4692"
        inkscape:export-filename="/media/home/nick/projects/itchy/resources/editor/images/animation-color.png"
        inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90">
+       inkscape:export-ydpi="90"
+       transform="translate(192.35714,123.35715)">
       <image
          y="800.84692"
          x="88.484772"
@@ -2897,18 +2812,9 @@
            sodipodi:type="arc" />
       </g>
     </g>
-    <rect
-       style="fill:#ffffff;fill-opacity:1;stroke:#ffaf00;stroke-width:3;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-       id="rect4697"
-       width="38.57143"
-       height="38.57143"
-       x="256.42856"
-       y="972.36218"
-       rx="4.999939"
-       ry="4.999939" />
     <g
        id="g4740"
-       transform="translate(0,-1.9999974)"
+       transform="translate(-116.5,24.500002)"
        inkscape:export-filename="/media/home/nick/projects/itchy/resources/editor/images/animation-frames.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90">
@@ -2997,6 +2903,283 @@
            style="fill:#ffffff;fill-opacity:1;stroke:#ffaf00;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
            sodipodi:nodetypes="cc" />
       </g>
+    </g>
+    <g
+       id="g4812"
+       inkscape:export-filename="/media/home/nick/projects/itchy/resources/editor/images/animation-turnto.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       transform="translate(-58.841268,-123.29427)">
+      <g
+         id="g4823"
+         inkscape:export-filename="/media/home/nick/projects/itchy/resources/editor/images/animation-turnto.png"
+         inkscape:export-xdpi="90"
+         inkscape:export-ydpi="90"
+         transform="translate(0,4.9999826)">
+        <rect
+           style="fill:#ffffff;fill-opacity:1;stroke:#ffaf00;stroke-width:3;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+           id="rect4697"
+           width="38.57143"
+           height="38.57143"
+           x="506.81964"
+           y="865.35944"
+           rx="4.999939"
+           ry="4.999939"
+           transform="matrix(0.96500547,0.26222974,-0.26222974,0.96500547,0,0)" />
+        <g
+           transform="matrix(0.94875578,-0.31601023,0.31601023,0.94875578,-363.22195,235.64678)"
+           id="g4919-1"
+           style="stroke:#ff1e00;stroke-opacity:1">
+          <g
+             style="fill:#ffffff;fill-opacity:1;stroke:#ff1e00;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+             id="g4320-1-4"
+             transform="matrix(0.53996785,-0.84168564,0.84168564,0.53996785,-532.94487,567.86662)">
+            <path
+               inkscape:connector-curvature="0"
+               id="path4201-8-6-8"
+               d="m 198.00002,952.36218 5,-5"
+               style="fill:#ffffff;fill-opacity:1;stroke:#ff1e00;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+               sodipodi:nodetypes="cc" />
+            <path
+               sodipodi:nodetypes="cc"
+               inkscape:connector-curvature="0"
+               id="path4206-2-6-3"
+               d="m 203.00002,947.36218 -15,0"
+               style="fill:#ffffff;fill-opacity:1;stroke:#ff1e00;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+            <path
+               sodipodi:nodetypes="cc"
+               inkscape:connector-curvature="0"
+               id="path4206-2-4-1-2"
+               d="m 203.00002,947.36218 -5,-5"
+               style="fill:#ffffff;fill-opacity:1;stroke:#ff1e00;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+          </g>
+          <path
+             sodipodi:type="arc"
+             style="fill:none;stroke:#ff1e00;stroke-width:6.06154013;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+             id="path4917-1"
+             sodipodi:cx="345"
+             sodipodi:cy="937.36218"
+             sodipodi:rx="5"
+             sodipodi:ry="5"
+             d="m 350,937.36218 c 0,2.76143 -2.23858,5 -5,5 -2.76142,0 -5,-2.23857 -5,-5 0,-2.76142 2.23858,-5 5,-5 2.76142,0 5,2.23858 5,5 z"
+             transform="matrix(0.49492373,0,0,0.49492373,195.21198,457.52949)" />
+        </g>
+        <path
+           sodipodi:nodetypes="cc"
+           inkscape:connector-curvature="0"
+           id="path4819"
+           d="m 275.05076,965.64517 0,52.47463"
+           style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+        <path
+           style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           d="m 301.21195,993.87741 -51.21195,0"
+           id="path4821"
+           inkscape:connector-curvature="0"
+           sodipodi:nodetypes="cc" />
+      </g>
+    </g>
+    <g
+       id="g4878"
+       inkscape:export-filename="/media/home/nick/projects/itchy/resources/editor/images/animation-clip.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <path
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/media/home/nick/projects/itchy/resources/editor/images/animation-clip.png"
+         sodipodi:nodetypes="cssssc"
+         inkscape:connector-curvature="0"
+         id="rect4162"
+         d="m 260,932.36218 0,13.5715 c 0,2.77 -2.22997,5 -4.99994,5 l -28.57155,0 c -2.76997,0 -4.99994,-2.23 -4.99994,-5 l 0,-13.5715"
+         style="fill:#ffffff;fill-opacity:1;stroke:#ffaf00;stroke-width:3;stroke-miterlimit:4;stroke-opacity:1" />
+      <rect
+         ry="0"
+         rx="0"
+         y="932.36218"
+         x="217"
+         height="25"
+         width="48"
+         id="rect4876"
+         style="fill:none;stroke:#000000;stroke-opacity:1" />
+    </g>
+    <g
+       id="g4926"
+       transform="translate(-1.0101525,25.001275)"
+       inkscape:export-filename="/media/home/nick/projects/itchy/resources/editor/images/animation-head.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <rect
+         ry="4.999939"
+         rx="4.999939"
+         y="898.79077"
+         x="351.42856"
+         height="38.57143"
+         width="38.57143"
+         id="rect4882"
+         style="fill:#ffffff;fill-opacity:1;stroke:#ffaf00;stroke-width:3;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+      <g
+         transform="matrix(0.98613746,0.16593046,-0.16593046,0.98613746,166.75079,-54.421973)"
+         id="g4919">
+        <g
+           style="fill:#ffffff;fill-opacity:1;stroke:#1300ff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+           id="g4320-1"
+           transform="matrix(0.53996785,-0.84168564,0.84168564,0.53996785,-532.94487,567.86662)">
+          <path
+             inkscape:connector-curvature="0"
+             id="path4201-8-6"
+             d="m 198.00002,952.36218 5,-5"
+             style="fill:#ffffff;fill-opacity:1;stroke:#1300ff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+             sodipodi:nodetypes="cc" />
+          <path
+             sodipodi:nodetypes="cc"
+             inkscape:connector-curvature="0"
+             id="path4206-2-6"
+             d="m 203.00002,947.36218 -15,0"
+             style="fill:#ffffff;fill-opacity:1;stroke:#1300ff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+          <path
+             sodipodi:nodetypes="cc"
+             inkscape:connector-curvature="0"
+             id="path4206-2-4-1"
+             d="m 203.00002,947.36218 -5,-5"
+             style="fill:#ffffff;fill-opacity:1;stroke:#1300ff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+        </g>
+        <path
+           sodipodi:type="arc"
+           style="fill:none;stroke:#1300ff;stroke-width:6.06154013;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+           id="path4917"
+           sodipodi:cx="345"
+           sodipodi:cy="937.36218"
+           sodipodi:rx="5"
+           sodipodi:ry="5"
+           d="m 350,937.36218 c 0,2.76143 -2.23858,5 -5,5 -2.76142,0 -5,-2.23857 -5,-5 0,-2.76142 2.23858,-5 5,-5 2.76142,0 5,2.23858 5,5 z"
+           transform="matrix(0.49492373,0,0,0.49492373,195.21198,457.52949)" />
+      </g>
+    </g>
+    <g
+       id="g5051"
+       inkscape:export-filename="/media/home/nick/projects/itchy/resources/editor/images/animation-turn.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <g
+         transform="translate(15.29631,-5.0799654)"
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/media/home/nick/projects/itchy/resources/editor/images/animation-turn.png"
+         id="g4152">
+        <rect
+           ry="4.999939"
+           rx="4.999939"
+           y="765.47125"
+           x="396.00754"
+           height="38.57143"
+           width="38.57143"
+           id="rect4131"
+           style="fill:#ffffff;fill-opacity:1;stroke:#ffaf00;stroke-width:3;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+           transform="matrix(0.94682464,0.32175007,-0.32175007,0.94682464,0,0)" />
+      </g>
+      <g
+         style="stroke:#ff1e00;stroke-opacity:1"
+         id="g4919-1-2"
+         transform="matrix(0.96436266,-0.26458393,0.26458393,0.96436266,-441.07203,82.752822)">
+        <g
+           transform="matrix(0.53996785,-0.84168564,0.84168564,0.53996785,-532.94487,567.86662)"
+           id="g4320-1-4-2"
+           style="fill:#ffffff;fill-opacity:1;stroke:#ff1e00;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none">
+          <path
+             sodipodi:nodetypes="cc"
+             style="fill:#ffffff;fill-opacity:1;stroke:#ff1e00;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+             d="m 198.00002,952.36218 5,-5"
+             id="path4201-8-6-8-1"
+             inkscape:connector-curvature="0" />
+          <path
+             style="fill:#ffffff;fill-opacity:1;stroke:#ff1e00;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+             d="m 203.00002,947.36218 -15,0"
+             id="path4206-2-6-3-8"
+             inkscape:connector-curvature="0"
+             sodipodi:nodetypes="cc" />
+          <path
+             style="fill:#ffffff;fill-opacity:1;stroke:#ff1e00;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+             d="m 203.00002,947.36218 -5,-5"
+             id="path4206-2-4-1-2-8"
+             inkscape:connector-curvature="0"
+             sodipodi:nodetypes="cc" />
+        </g>
+        <path
+           transform="matrix(0.49492373,0,0,0.49492373,195.21198,457.52949)"
+           d="m 350,937.36218 c 0,2.76143 -2.23858,5 -5,5 -2.76142,0 -5,-2.23857 -5,-5 0,-2.76142 2.23858,-5 5,-5 2.76142,0 5,2.23858 5,5 z"
+           sodipodi:ry="5"
+           sodipodi:rx="5"
+           sodipodi:cy="937.36218"
+           sodipodi:cx="345"
+           id="path4917-1-1"
+           style="fill:none;stroke:#ff1e00;stroke-width:6.06154013;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+           sodipodi:type="arc" />
+      </g>
+    </g>
+    <g
+       id="g5082"
+       transform="translate(58.083771,25.253813)"
+       inkscape:export-filename="/media/home/nick/projects/itchy/resources/editor/images/animation-headto.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <rect
+         style="fill:#ffffff;fill-opacity:1;stroke:#ffaf00;stroke-width:3;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         id="rect5084"
+         width="38.57143"
+         height="38.57143"
+         x="351.42856"
+         y="898.79077"
+         rx="4.999939"
+         ry="4.999939" />
+      <g
+         id="g5086"
+         transform="matrix(0.98613746,0.16593046,-0.16593046,0.98613746,166.75079,-54.421973)">
+        <g
+           transform="matrix(0.53996785,-0.84168564,0.84168564,0.53996785,-532.94487,567.86662)"
+           id="g5088"
+           style="fill:#ffffff;fill-opacity:1;stroke:#1300ff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none">
+          <path
+             sodipodi:nodetypes="cc"
+             style="fill:#ffffff;fill-opacity:1;stroke:#1300ff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+             d="m 198.00002,952.36218 5,-5"
+             id="path5090"
+             inkscape:connector-curvature="0" />
+          <path
+             style="fill:#ffffff;fill-opacity:1;stroke:#1300ff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+             d="m 203.00002,947.36218 -15,0"
+             id="path5092"
+             inkscape:connector-curvature="0"
+             sodipodi:nodetypes="cc" />
+          <path
+             style="fill:#ffffff;fill-opacity:1;stroke:#1300ff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+             d="m 203.00002,947.36218 -5,-5"
+             id="path5094"
+             inkscape:connector-curvature="0"
+             sodipodi:nodetypes="cc" />
+        </g>
+        <path
+           transform="matrix(0.49492373,0,0,0.49492373,195.21198,457.52949)"
+           d="m 350,937.36218 c 0,2.76143 -2.23858,5 -5,5 -2.76142,0 -5,-2.23857 -5,-5 0,-2.76142 2.23858,-5 5,-5 2.76142,0 5,2.23858 5,5 z"
+           sodipodi:ry="5"
+           sodipodi:rx="5"
+           sodipodi:cy="937.36218"
+           sodipodi:cx="345"
+           id="path5096"
+           style="fill:none;stroke:#1300ff;stroke-width:6.06154013;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+           sodipodi:type="arc" />
+      </g>
+      <path
+         style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 369.41315,892.02712 0,52.47463"
+         id="path5098"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="cc" />
+      <path
+         sodipodi:nodetypes="cc"
+         inkscape:connector-curvature="0"
+         id="path5100"
+         d="m 395.57434,920.25936 -51.21195,0"
+         style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
     </g>
   </g>
 </svg>

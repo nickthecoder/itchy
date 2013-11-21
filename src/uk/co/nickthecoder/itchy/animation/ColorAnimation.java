@@ -57,6 +57,7 @@ public class ColorAnimation extends NumericAnimation
     @Override
     public void start( Actor actor )
     {
+        super.start(actor);
         if (actor.getAppearance().getPose() instanceof TextPose) {
             this.startColor = ((TextPose) actor.getAppearance().getPose()).getColor();
         } else {

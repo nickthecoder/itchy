@@ -6,16 +6,32 @@ PACKAGE !!!
 
 Test on windows.
 
+Mouse pointers don't work when a button has captured the mouse.
+    Create a special Mouse class, which Game has.
+    It stores if the mouse should be on/off/special
+    Create an interface for MousePointer? Or just pass it the role?
+    MousePointer can be a MouseListener, and GlassLayer doesn't need to be mouse enabled, as the events will go direct, no via a view.
+    
+I need the buttons to have a shadow.
+    Create a "Makeup" interface, on appearance, which alters the image.
+        e.g. Drop shadow, Blur, Noise, Frame (nine-path), Compound, convolution matrix.
+    Later, an animation may use the PostProcessing to do even funkier animations.
+
+Redo main menu, completion and game over. All need to look as good as Pause.
+
+Some costumes begin with a capital, others don't.
+
+
 Send to Asul
 
-Automate the load/save/list of animation types. I.e. once registered, no need for special code in read, writer or editor.
+BlitModes on Pose, so a "spotlight" can ADD
 
 Clip Animation
-    Swipe the game over menus items as they appear. 
-Delay Animation
+    Test
+Test other animations not on the animations test page.
 
-Sort out direction and heading animations names
-    Turn, Turn To, Head, Head To ?
+Try the FLA files from Glitch
+    http://www.glitchthegame.com/public-domain-game-art/
 
 Compound Role
     the editor knows about the interface, and adds a table under the Role ClassName.
@@ -24,11 +40,6 @@ Compound Role
 Same feature for SceneDirector.
 
 Follow up on the TODOs
-
-MousePointer
-    Graphic - Shows a pose at that point
-    Spark - Creates explosion while the mouse is down
-    Trail - Remembers where the mouse has been, and sends out particles along a curve connecting those points.
 
 
 I've exposed a generic Game.getGameViews (returns CompoundView<View>).

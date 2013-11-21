@@ -321,6 +321,7 @@ public class Actor implements PropertySubject<Actor>
         Pose pose = this.costume.getPose(eventName);
         if (pose != null) {
             this.appearance.setPose(pose);
+            // TODO Why is this here?
             this.setAnimation(null);
         }
 
