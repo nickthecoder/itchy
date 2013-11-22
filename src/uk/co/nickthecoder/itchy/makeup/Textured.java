@@ -2,7 +2,7 @@
  * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
  * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
-package uk.co.nickthecoder.itchy.extras;
+package uk.co.nickthecoder.itchy.makeup;
 
 import java.util.List;
 
@@ -79,7 +79,6 @@ public class Textured implements Makeup
             return src;
         }
         
-
         Surface texture = this.pose.getSurface();
         int textureWidth = texture.getWidth();
         int textureHeight = texture.getHeight();
@@ -104,6 +103,7 @@ public class Textured implements Makeup
 
         Surface result = src.getSurface().copy();
         tiledSurface.blit(result);
+        tiledSurface.free();
 
         return new SimpleOffsetSurface(result, src.getOffsetX(), src.getOffsetY());
     }

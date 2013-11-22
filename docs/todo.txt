@@ -11,9 +11,8 @@ Alphatextshadow - like pause ?
 Textured - a texture applied over the non-transparent parts of the image - useful for text.
     Has a X or Y offset to change the pattern from grid into brick.
     Has x,y to state where the tiles start from - not always top left of the image to be textured.
-Compound
-
-Some costumes begin with a capital, others don't.
+Compound - Need an editor!
+    Maybe I should think bigger and have a fully pipeline - multiple inputs (poses and flat colour)
 
 Crash on setting text colour to blank text.
 

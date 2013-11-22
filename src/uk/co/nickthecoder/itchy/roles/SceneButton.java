@@ -5,20 +5,25 @@
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
-package uk.co.nickthecoder.itchy.extras;
+package uk.co.nickthecoder.itchy.roles;
 
 import uk.co.nickthecoder.itchy.Itchy;
+import uk.co.nickthecoder.itchy.util.Property;;
 
 /**
- * When clicked, the game will end.
+ * When clicked, this button will start a given scene. The scene is given by the sceneName
+ * property, which can be editted within the Scene Designer.
  */
-public class QuitButton extends Button
+public class SceneButton extends Button
 {
+    @Property(label="Scene Name")
+    public String sceneName;
+
     @Override
     protected void onClick()
     {
         super.onClick();
-        Itchy.getGame().end();
+        Itchy.getGame().startScene( this.sceneName );
     }
 
 }

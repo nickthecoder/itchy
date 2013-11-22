@@ -210,7 +210,7 @@
       <animation name="mouseDown" animation="buttonDown"/>
       <animation name="mouseUp" animation="buttonUp"/>
     </costume>
-    <costume name="gameOver" defaultZOrder="0" role="uk.co.nickthecoder.itchy.extras.Tagged">
+    <costume name="gameOver" defaultZOrder="0" role="uk.co.nickthecoder.itchy.roles.Tagged">
       <string name="default">Game Over</string>
       <font name="default" font="BlackCasper"/>
       <animation name="fadeIn" animation="gameOverReveal"/>
@@ -235,7 +235,7 @@
       <animation name="default" animation="bullet1"/>
       <properties impulse="1.0" strength="2.0"/>
     </costume>
-    <costume name="editor" defaultZOrder="0" extends="button" role="uk.co.nickthecoder.itchy.extras.EditorButton">
+    <costume name="editor" defaultZOrder="0" extends="button" role="uk.co.nickthecoder.itchy.roles.EditorButton">
       <string name="default">Editor</string>
       <font name="default" font="Boycott"/>
     </costume>
@@ -250,7 +250,7 @@
     <costume name="life2" defaultZOrder="0" role="uk.co.nickthecoder.itchy.PlainRole">
       <pose name="default" pose="life2"/>
     </costume>
-    <costume name="link" defaultZOrder="0" extends="button" role="uk.co.nickthecoder.itchy.extras.LinkButton">
+    <costume name="link" defaultZOrder="0" extends="button" role="uk.co.nickthecoder.itchy.roles.LinkButton">
       <string name="default">Link</string>
       <font name="default" font="VeraBold"/>
       <animation name="hoverOut" animation="linkHoverOut"/>
@@ -266,7 +266,7 @@
       <pose name="spark" pose="spark4"/>
       <pose name="spark" pose="spark5"/>
     </costume>
-    <costume name="play" defaultZOrder="0" extends="button" role="uk.co.nickthecoder.itchy.extras.MessageButton">
+    <costume name="play" defaultZOrder="0" extends="button" role="uk.co.nickthecoder.itchy.roles.MessageButton">
       <string name="default">play</string>
       <font name="default" font="BlackCasper"/>
     </costume>

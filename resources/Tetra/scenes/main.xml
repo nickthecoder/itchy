@@ -8,7 +8,7 @@
     <text text="Tetra" font="Boycott" size="70" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="510" y="427" direction="0.0" startEvent="default"/>
     <text text="Score" font="Boycott" size="40" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="511" y="352" direction="0.0" startEvent="default"/>
     <text text="High Score" font="Boycott" size="30" color="#000000" xAlignment="0.5" yAlignment="0.5" x="512" y="91" direction="0.0" startEvent="default"/>
-    <text text="0000000" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.extras.NumberValue" x="511" y="309" direction="0.0" startEvent="default">
+    <text text="0000000" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.roles.NumberValue" x="511" y="309" direction="0.0" startEvent="default">
       <property name="formatPattern" value="0000000"/>
       <property name="nullValue" value="null"/>
       <property name="errorValue" value="?"/>
@@ -16,7 +16,7 @@
       <property name="updateInterval" value="0"/>
       <property name="access" value="director.score"/>
     </text>
-    <text text="01" font="Boycott" size="40" color="#ffffff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.extras.TextValue" x="511" y="209" direction="0.0" startEvent="default">
+    <text text="01" font="Boycott" size="40" color="#ffffff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.roles.TextValue" x="511" y="209" direction="0.0" startEvent="default">
       <property name="nullValue" value="null"/>
       <property name="errorValue" value="?"/>
       <property name="quiet" value="true"/>
@@ -26,7 +26,7 @@
     <text text="Level" font="Boycott" size="40" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="511" y="254" direction="0.0" startEvent="default"/>
     <actor costume="board" x="164" y="228" direction="0.0" startEvent="default"/>
     <text text="Lines :" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="499" y="156" direction="0.0" startEvent="default"/>
-    <text text="0" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.extras.TextValue" x="538" y="155" direction="0.0" startEvent="default">
+    <text text="0" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.roles.TextValue" x="538" y="155" direction="0.0" startEvent="default">
       <property name="nullValue" value=""/>
       <property name="errorValue" value=""/>
       <property name="quiet" value="false"/>
@@ -34,7 +34,7 @@
       <property name="access" value="director.completedLines"/>
     </text>
     <text text="High Score" font="Boycott" size="30" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="509" y="94" direction="0.0" startEvent="default"/>
-    <text text="0000000" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.extras.NumberValue" x="511" y="64" direction="0.0" startEvent="default">
+    <text text="0000000" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.roles.NumberValue" x="511" y="64" direction="0.0" startEvent="default">
       <property name="formatPattern" value="0000000"/>
       <property name="nullValue" value="null"/>
       <property name="errorValue" value="???"/>

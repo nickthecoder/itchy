@@ -18,10 +18,10 @@
       <property name="spin" value="0.0"/>
       <property name="gravity" value="0.0"/>
     </actor>
-    <text text="Menu" font="vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.extras.SceneButton" x="712" y="47" direction="0.0" heading="0.0" startEvent="default" zOrder="1">
+    <text text="Menu" font="vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.roles.SceneButton" x="712" y="47" direction="0.0" heading="0.0" startEvent="default" zOrder="1">
       <property name="sceneName" value="menu"/>
     </text>
-    <text text="Go!" font="vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.extras.SceneButton" x="708" y="21" direction="0.0" heading="0.0" startEvent="default" zOrder="2">
+    <text text="Go!" font="vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.roles.SceneButton" x="708" y="21" direction="0.0" heading="0.0" startEvent="default" zOrder="2">
       <property name="sceneName" value="projectiles"/>
     </text>
     <actor costume="alien" role="uk.co.nickthecoder.itchy.test.TestProjectiles" x="69" y="543" direction="-90.0" heading="-90.0" startEvent="default" zOrder="3">

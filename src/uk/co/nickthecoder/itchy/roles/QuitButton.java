@@ -5,9 +5,20 @@
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
-package uk.co.nickthecoder.itchy.extras;
+package uk.co.nickthecoder.itchy.roles;
 
-public class MouseFizz
+import uk.co.nickthecoder.itchy.Itchy;
+
+/**
+ * When clicked, the game will end.
+ */
+public class QuitButton extends Button
 {
+    @Override
+    protected void onClick()
+    {
+        super.onClick();
+        Itchy.getGame().end();
+    }
 
 }

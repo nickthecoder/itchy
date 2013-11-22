@@ -7,7 +7,7 @@ package uk.co.nickthecoder.drunkinvaders;
 
 import uk.co.nickthecoder.itchy.Font;
 import uk.co.nickthecoder.itchy.TextPose;
-import uk.co.nickthecoder.itchy.extras.Button;
+import uk.co.nickthecoder.itchy.roles.Button;
 import uk.co.nickthecoder.itchy.util.Property;
 import uk.co.nickthecoder.jame.RGBA;
 

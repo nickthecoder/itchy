@@ -46,6 +46,8 @@
 
             <package name="uk.co.nickthecoder.itchy"/>
             <package name="uk.co.nickthecoder.itchy.animation"/>
+            <package name="uk.co.nickthecoder.itchy.roles"/>
+            <package name="uk.co.nickthecoder.itchy.makeup"/>
             <package name="uk.co.nickthecoder.itchy.extras"/>
             <package name="uk.co.nickthecoder.itchy.gui"/>
             <package name="uk.co.nickthecoder.itchy.neighbourhood"/>

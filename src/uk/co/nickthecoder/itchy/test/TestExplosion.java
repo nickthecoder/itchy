@@ -7,7 +7,7 @@ package uk.co.nickthecoder.itchy.test;
 
 import uk.co.nickthecoder.itchy.AbstractRole;
 import uk.co.nickthecoder.itchy.NullRole;
-import uk.co.nickthecoder.itchy.extras.Explosion;
+import uk.co.nickthecoder.itchy.roles.Explosion;
 import uk.co.nickthecoder.itchy.util.Property;
 
 public class TestExplosion extends AbstractRole

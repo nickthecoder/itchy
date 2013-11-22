@@ -24,10 +24,10 @@
       <property name="spreadTo" value="360.0"/>
       <property name="gravity" value="0.0"/>
     </actor>
-    <text text="Menu" font="vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.extras.SceneButton" x="44" y="582" direction="0.0" heading="0.0" startEvent="default" zOrder="3">
+    <text text="Menu" font="vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.roles.SceneButton" x="44" y="582" direction="0.0" heading="0.0" startEvent="default" zOrder="3">
       <property name="sceneName" value="menu"/>
     </text>
-    <text text="Go!" font="vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.extras.SceneButton" x="114" y="581" direction="0.0" heading="0.0" startEvent="default" zOrder="4">
+    <text text="Go!" font="vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.roles.SceneButton" x="114" y="581" direction="0.0" heading="0.0" startEvent="default" zOrder="4">
       <property name="sceneName" value="playground"/>
     </text>
     <actor costume="alien" role="uk.co.nickthecoder.itchy.test.TestExplosion" x="72" y="346" direction="-90.0" heading="-90.0" startEvent="default" zOrder="5">

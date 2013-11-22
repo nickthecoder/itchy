@@ -47,10 +47,10 @@
     <text text="bounce" font="vera" size="14" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="629" y="37" direction="0.0" heading="0.0" startEvent="default" zOrder="44"/>
     <text text="bounce2" font="vera" size="14" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="677" y="52" direction="0.0" heading="0.0" startEvent="default" zOrder="45"/>
     <text text="bounce3" font="vera" size="14" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="747" y="35" direction="0.0" heading="0.0" startEvent="default" zOrder="46"/>
-    <text text="Menu" font="vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.extras.SceneButton" x="741" y="291" direction="0.0" heading="0.0" startEvent="default" zOrder="47">
+    <text text="Menu" font="vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.roles.SceneButton" x="741" y="291" direction="0.0" heading="0.0" startEvent="default" zOrder="47">
       <property name="sceneName" value="menu"/>
     </text>
-    <text text="Go!" font="vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.extras.SceneButton" x="742" y="257" direction="0.0" heading="0.0" startEvent="default" zOrder="48">
+    <text text="Go!" font="vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.roles.SceneButton" x="742" y="257" direction="0.0" heading="0.0" startEvent="default" zOrder="48">
       <property name="sceneName" value="profiles"/>
     </text>
     <actor costume="line" x="313" y="365" direction="0.0" heading="0.0" startEvent="default" zOrder="49"/>

@@ -80,23 +80,23 @@ public class Itchy
         registry.add(new ClassName(SceneDirector.class, PlainSceneDirector.class.getName()));
 
         registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.NullRole.class.getName()));
-        registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.extras.EditorButton.class.getName()));
-        registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.extras.LinkButton.class.getName()));
-        registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.extras.MessageButton.class.getName()));
-        registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.extras.NumberValue.class.getName()));
-        registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.extras.TextValue.class.getName()));
-        registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.extras.QuitButton.class.getName()));
-        registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.extras.ProgressBar.class.getName()));
+        registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.roles.EditorButton.class.getName()));
+        registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.roles.LinkButton.class.getName()));
+        registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.roles.MessageButton.class.getName()));
+        registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.roles.NumberValue.class.getName()));
+        registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.roles.TextValue.class.getName()));
+        registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.roles.QuitButton.class.getName()));
+        registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.roles.ProgressBar.class.getName()));
 
         registry.add(new ClassName(CostumeProperties.class, CostumeProperties.class.getName()));
 
         System.out.println( "Registering Makeup");
 
         registry.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.NullMakeup.class.getName()));
-        registry.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.extras.TextShadow.class.getName()));
-        registry.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.extras.Shadow.class.getName()));
-        registry.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.extras.Scale.class.getName()));
-        registry.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.extras.Textured.class.getName()));
+        registry.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.makeup.TextShadow.class.getName()));
+        registry.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.makeup.Shadow.class.getName()));
+        registry.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.makeup.Scale.class.getName()));
+        registry.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.makeup.Textured.class.getName()));
         
         System.out.println( "Registering Eases");
         

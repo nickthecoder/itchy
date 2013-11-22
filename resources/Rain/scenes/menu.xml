@@ -8,26 +8,26 @@
     <text text="Rain" font="Boycott" size="128" color="#cc9656" xAlignment="0.5" yAlignment="0.5" x="167" y="449" direction="0.0" heading="0.0" startEvent="default" zOrder="5" alpha="121.0"/>
     <text text="Easy" font="BlackCasper" size="58" color="#333364" xAlignment="0.5" yAlignment="0.5" x="162" y="327" direction="0.0" heading="0.0" startEvent="default" zOrder="6"/>
     <text text="Medium" font="BlackCasper" size="54" color="#333364" xAlignment="0.5" yAlignment="0.5" x="174" y="246" direction="0.0" heading="0.0" startEvent="default" zOrder="7"/>
-    <text text="Easy" font="BlackCasper" size="51" color="#5d8cc5" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.extras.SceneButton" costume="play" x="160" y="329" direction="0.0" heading="0.0" startEvent="default" zOrder="8">
+    <text text="Easy" font="BlackCasper" size="51" color="#5d8cc5" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.roles.SceneButton" costume="play" x="160" y="329" direction="0.0" heading="0.0" startEvent="default" zOrder="8">
       <property name="sceneName" value="easy"/>
     </text>
     <text text="Hard" font="BlackCasper" size="61" color="#333364" xAlignment="0.5" yAlignment="0.5" x="162" y="170" direction="0.0" heading="0.0" startEvent="default" zOrder="9"/>
     <text text="Quit" font="Boycott" size="41" color="#333364" xAlignment="0.5" yAlignment="0.5" x="738" y="36" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
-    <text text="Medium" font="BlackCasper" size="46" color="#5d8cc5" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.extras.SceneButton" costume="play" x="170" y="248" direction="0.0" heading="0.0" startEvent="default" zOrder="11">
+    <text text="Medium" font="BlackCasper" size="46" color="#5d8cc5" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.roles.SceneButton" costume="play" x="170" y="248" direction="0.0" heading="0.0" startEvent="default" zOrder="11">
       <property name="sceneName" value="medium"/>
     </text>
     <text text="Editor" font="Boycott" size="40" color="#333364" xAlignment="0.5" yAlignment="0.5" x="227" y="39" direction="0.0" heading="0.0" startEvent="default" zOrder="12"/>
-    <text text="Hard" font="BlackCasper" size="53" color="#5d8cc5" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.extras.SceneButton" costume="play" x="160" y="170" direction="0.0" heading="0.0" startEvent="default" zOrder="13">
+    <text text="Hard" font="BlackCasper" size="53" color="#5d8cc5" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.roles.SceneButton" costume="play" x="160" y="170" direction="0.0" heading="0.0" startEvent="default" zOrder="13">
       <property name="sceneName" value="hard"/>
     </text>
-    <text text="Quit" font="Boycott" size="35" color="#5d8cc5" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.extras.MessageButton" costume="quit" x="736" y="35" direction="0.0" heading="0.0" startEvent="default" zOrder="14">
+    <text text="Quit" font="Boycott" size="35" color="#5d8cc5" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.roles.MessageButton" costume="quit" x="736" y="35" direction="0.0" heading="0.0" startEvent="default" zOrder="14">
       <property name="message" value="quit"/>
     </text>
     <text text="About" font="Boycott" size="41" color="#333364" xAlignment="0.5" yAlignment="0.5" x="83" y="38" direction="0.0" heading="0.0" startEvent="default" zOrder="15"/>
-    <text text="EDITOR" font="Boycott" size="37" color="#5d8cc5" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.extras.MessageButton" costume="editor" x="227" y="39" direction="0.0" heading="0.0" startEvent="default" zOrder="16">
+    <text text="EDITOR" font="Boycott" size="37" color="#5d8cc5" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.roles.MessageButton" costume="editor" x="227" y="39" direction="0.0" heading="0.0" startEvent="default" zOrder="16">
       <property name="message" value="editor"/>
     </text>
-    <text text="About" font="Boycott" size="35" color="#5d8cc5" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.extras.SceneButton" costume="quit" x="79" y="39" direction="0.0" heading="0.0" startEvent="default" zOrder="17">
+    <text text="About" font="Boycott" size="35" color="#5d8cc5" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.roles.SceneButton" costume="quit" x="79" y="39" direction="0.0" heading="0.0" startEvent="default" zOrder="17">
       <property name="sceneName" value="about"/>
     </text>
   </layer>

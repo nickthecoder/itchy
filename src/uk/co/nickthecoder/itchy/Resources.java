@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Set;
 
 import uk.co.nickthecoder.itchy.animation.Animation;
-import uk.co.nickthecoder.itchy.extras.Companion;
+import uk.co.nickthecoder.itchy.roles.Companion;
 import uk.co.nickthecoder.itchy.script.ScriptManager;
 import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.itchy.util.NinePatch;

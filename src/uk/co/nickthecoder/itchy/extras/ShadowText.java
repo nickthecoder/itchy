@@ -10,8 +10,11 @@ import uk.co.nickthecoder.itchy.Font;
 import uk.co.nickthecoder.itchy.ImagePose;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.TextPose;
+import uk.co.nickthecoder.itchy.roles.Follower;
+import uk.co.nickthecoder.itchy.roles.Projectile;
 import uk.co.nickthecoder.jame.RGBA;
 
+// TODO Replace this with regular text with Makeup.
 public class ShadowText
 {
     public String text;

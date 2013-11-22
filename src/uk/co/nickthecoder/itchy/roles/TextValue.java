@@ -4,12 +4,13 @@
  * distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 
-package uk.co.nickthecoder.itchy.extras;
+package uk.co.nickthecoder.itchy.roles;
 
 import uk.co.nickthecoder.itchy.AbstractRole;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.NullRole;
 import uk.co.nickthecoder.itchy.TextPose;
+import uk.co.nickthecoder.itchy.extras.Timer;
 import uk.co.nickthecoder.itchy.util.BeanHelper;
 import uk.co.nickthecoder.itchy.util.Property;
 

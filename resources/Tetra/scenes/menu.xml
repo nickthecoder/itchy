@@ -7,23 +7,23 @@
     <actor costume="button" x="443" y="218" direction="0.0" startEvent="default">
       <property name="message" value="levelUp"/>
     </actor>
-    <text text="Play" font="Boycott" size="40" color="#ffffff" role="uk.co.nickthecoder.itchy.extras.MessageButton" x="311" y="260" direction="0.0" startEvent="default">
+    <text text="Play" font="Boycott" size="40" color="#ffffff" role="uk.co.nickthecoder.itchy.roles.MessageButton" x="311" y="260" direction="0.0" startEvent="default">
       <property name="message" value="play"/>
     </text>
-    <text text="quit" font="Boycott" size="40" color="#ffffff" role="uk.co.nickthecoder.itchy.extras.MessageButton" x="311" y="65" direction="0.0" startEvent="default">
+    <text text="quit" font="Boycott" size="40" color="#ffffff" role="uk.co.nickthecoder.itchy.roles.MessageButton" x="311" y="65" direction="0.0" startEvent="default">
       <property name="message" value="quit"/>
     </text>
     <text text="Level" font="Boycott" size="40" color="#ffffff" x="312" y="194" direction="0.0" startEvent="default"/>
-    <text text="1" font="Boycott" size="40" color="#ffffff" role="uk.co.nickthecoder.itchy.extras.TextValue" x="404" y="195" direction="0.0" startEvent="default">
+    <text text="1" font="Boycott" size="40" color="#ffffff" role="uk.co.nickthecoder.itchy.roles.TextValue" x="404" y="195" direction="0.0" startEvent="default">
       <property name="nullValue" value=""/>
       <property name="errorValue" value=""/>
       <property name="updateInterval" value="0"/>
       <property name="access" value="director.level"/>
     </text>
-    <text text=">" font="Boycott" size="40" color="#ffffff" role="uk.co.nickthecoder.itchy.extras.MessageButton" x="442" y="218" direction="90.0" startEvent="default">
+    <text text=">" font="Boycott" size="40" color="#ffffff" role="uk.co.nickthecoder.itchy.roles.MessageButton" x="442" y="218" direction="90.0" startEvent="default">
       <property name="message" value="levelUp"/>
     </text>
-    <text text=">" font="Boycott" size="40" color="#ffffff" role="uk.co.nickthecoder.itchy.extras.MessageButton" x="442" y="173" direction="-90.0" startEvent="default">
+    <text text=">" font="Boycott" size="40" color="#ffffff" role="uk.co.nickthecoder.itchy.roles.MessageButton" x="442" y="173" direction="-90.0" startEvent="default">
       <property name="message" value="levelDown"/>
     </text>
     <actor costume="blue" x="88" y="439" direction="0.0" startEvent="default"/>
