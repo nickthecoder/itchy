@@ -36,7 +36,7 @@
       <property name="vx" value="1.3"/>
       <property name="rotationSpeed" value="-0.8"/>
     </actor>
-    <text text="Quit" font="BlackCasper" size="60" color="#5a72ff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.extras.QuitButton" costume="Button" x="720" y="56" direction="0.0" heading="0.0" startEvent="fadeIn" zOrder="60" alpha="150.0" activationDelay="0.7">
+    <text text="Quit" font="BlackCasper" size="60" color="#5a72ff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.extras.QuitButton" costume="button" x="720" y="56" direction="0.0" heading="0.0" startEvent="fadeIn" zOrder="60" alpha="150.0" activationDelay="0.7">
       <makeup classname="uk.co.nickthecoder.itchy.extras.TextShadow">
         <property name="dx" value="1"/>
         <property name="dy" value="2"/>
@@ -58,7 +58,7 @@
         <property name="color" value="#ffffffff"/>
       </makeup>
     </text>
-    <text text="About" font="BlackCasper" size="60" color="#5572ff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.extras.SceneButton" costume="Button" x="400" y="60" direction="0.0" heading="0.0" startEvent="fadeIn" zOrder="61" alpha="150.0" activationDelay="0.5">
+    <text text="About" font="BlackCasper" size="60" color="#5572ff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.extras.SceneButton" costume="button" x="400" y="60" direction="0.0" heading="0.0" startEvent="fadeIn" zOrder="61" alpha="150.0" activationDelay="0.5">
       <property name="sceneName" value="about"/>
       <makeup classname="uk.co.nickthecoder.itchy.extras.TextShadow">
         <property name="dx" value="1"/>
