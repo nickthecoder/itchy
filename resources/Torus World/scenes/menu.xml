@@ -3,17 +3,17 @@
   <layer name="main">
     <actor costume="stars2" x="400" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="0"/>
     <text text="Asteroids in Non-Euclidian Space" font="Boycott" size="50" color="#b2c166" xAlignment="0.5" yAlignment="0.5" x="408" y="434" direction="0.0" heading="0.0" startEvent="default" zOrder="1" alpha="191.0">
-      <makeup classname="uk.co.nickthecoder.itchy.extras.TextShadow">
-        <property name="dx" value="2"/>
-        <property name="dy" value="2"/>
-        <property name="color" value="#ffffffff"/>
+      <makeup classname="uk.co.nickthecoder.itchy.extras.Textured">
+        <property name="poseName" value="texture1"/>
+        <property name="y" value="0"/>
+        <property name="x" value="0"/>
       </makeup>
     </text>
     <text text="Torus World" font="BlackCasper" size="128" color="#d526db" xAlignment="0.5" yAlignment="0.5" x="408" y="514" direction="0.0" heading="0.0" startEvent="default" zOrder="9" alpha="168.0">
-      <makeup classname="uk.co.nickthecoder.itchy.extras.TextShadow">
-        <property name="dx" value="2"/>
-        <property name="dy" value="2"/>
-        <property name="color" value="#ffffffff"/>
+      <makeup classname="uk.co.nickthecoder.itchy.extras.Textured">
+        <property name="poseName" value="texture1"/>
+        <property name="y" value="0"/>
+        <property name="x" value="1"/>
       </makeup>
     </text>
     <actor costume="rock2" x="136" y="351" direction="0.0" heading="0.0" startEvent="default" zOrder="30">

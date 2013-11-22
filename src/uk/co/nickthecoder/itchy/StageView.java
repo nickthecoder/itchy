@@ -8,7 +8,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-import uk.co.nickthecoder.jame.JameRuntimeException;
 import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.Surface;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
@@ -57,29 +56,30 @@ public class StageView extends AbstractScrollableView implements StageListener, 
         int ty = offsetY + this.position.height + (int) this.worldRect.y;
 
         for (Iterator<Actor> i = this.stage.iterator(); i.hasNext();) {
-            Actor actor = i.next();
 
-            if (actor.isDead()) {
-                i.remove();
-                continue;
-            }
+            try {
 
-            if ((actor.getAppearance().getAlpha() < 2) && (this.minimumAlpha < 2)) {
-                continue;
-            }
+                Actor actor = i.next();
 
-            if (actor.getAppearance().visibleWithin(this.worldRect)) {
+                if (actor.isDead()) {
+                    i.remove();
+                    continue;
+                }
 
-                // Ensures the surface has been rendered, and offset_x,y are now valid.
-                Surface actorSurface = actor.getSurface();
+                if ((actor.getAppearance().getAlpha() < 2) && (this.minimumAlpha < 2)) {
+                    continue;
+                }
 
-                // Top left of where the actor needs to be placed on the screen.
-                // Note the change of sign for "y", because in world
-                // coordinates "down" is negative.
-                int displayAtX = tx + (int) (actor.getX()) - actor.getAppearance().getOffsetX();
-                int displayAtY = ty - (int) (actor.getY()) - actor.getAppearance().getOffsetY();
+                if (actor.getAppearance().visibleWithin(this.worldRect)) {
 
-                try {
+                    // Ensures the surface has been rendered, and offset_x,y are now valid.
+                    Surface actorSurface = actor.getSurface();
+
+                    // Top left of where the actor needs to be placed on the screen.
+                    // Note the change of sign for "y", because in world
+                    // coordinates "down" is negative.
+                    int displayAtX = tx + (int) (actor.getX()) - actor.getAppearance().getOffsetX();
+                    int displayAtY = ty - (int) (actor.getY()) - actor.getAppearance().getOffsetY();
 
                     int width = actorSurface.getWidth();
                     int height = actorSurface.getHeight();
@@ -146,11 +146,10 @@ public class StageView extends AbstractScrollableView implements StageListener, 
 
                     }
 
-                } catch (JameRuntimeException e) {
-                    actor.getAppearance().clearCachedSurface();
-                    System.err.println("WARNING : failed to blit surface during StageView.render");
-                    e.printStackTrace();
                 }
+
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
     }

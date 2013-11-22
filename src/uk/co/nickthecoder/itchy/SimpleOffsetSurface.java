@@ -53,7 +53,7 @@ public class SimpleOffsetSurface implements OffsetSurface
     @Override
     public boolean isShared()
     {
-        return this.isShared();
+        return this.shared;
     }
 
 }

@@ -13,8 +13,6 @@ Textured - a texture applied over the non-transparent parts of the image - usefu
     Has x,y to state where the tiles start from - not always top left of the image to be textured.
 Compound
 
-link animations
-
 Some costumes begin with a capital, others don't.
 
 Crash on setting text colour to blank text.

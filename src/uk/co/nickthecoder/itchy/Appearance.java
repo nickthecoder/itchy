@@ -30,8 +30,7 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
 
     private static List<AbstractProperty<Appearance, ?>> createTextProperties()
     {
-        List<AbstractProperty<Appearance, ?>> result =
-            new ArrayList<AbstractProperty<Appearance, ?>>(normalProperties);
+        List<AbstractProperty<Appearance, ?>> result = new ArrayList<AbstractProperty<Appearance, ?>>(normalProperties);
 
         result.add(new FontProperty<Appearance>("Font", "pose.font"));
         result.add(new DoubleProperty<Appearance>("Font Size", "pose.fontSize"));
@@ -60,7 +59,7 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
     private Makeup makeup = new NullMakeup();
 
     private int previousMakeupId;
-    
+
     /**
      * A scale factor. A value of 1 leaves the appearance unchanged, less than 1 shrinks, greater than 1 scales.
      */
@@ -139,12 +138,12 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
             return new NullMakeup();
         }
     }
-    
+
     public void setMakeup( ClassName className )
     {
         this.setMakeup(createMakeup(className));
     }
-    
+
     public void setMakeup( Makeup makeup )
     {
         this.clearCachedSurface();
@@ -299,29 +298,24 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
         }
     }
 
-    private Makeup clipper = new Makeup() {
+    private Makeup clipper = new Makeup()
+    {
 
         @Override
         public OffsetSurface apply( OffsetSurface os )
         {
-            OffsetSurface result;
-
             Rect rect = new Rect(0, 0, os.getSurface().getWidth(), os.getSurface().getHeight());
             rect = Appearance.this.clip.intersection(rect);
+            
             if ((rect.width < 0) || (rect.height < 0)) {
-                result = new SimpleOffsetSurface(new Surface(1, 1, true), 0, 0);
+                return new SimpleOffsetSurface(new Surface(1, 1, true), 0, 0);
 
             } else {
                 Surface clippedSurface = new Surface(rect.width, rect.height, true);
                 os.getSurface().blit(rect, clippedSurface, 0, 0, BlendMode.COMPOSITE);
 
-                result = new SimpleOffsetSurface(clippedSurface, os.getOffsetX() - rect.x, os.getOffsetY() - rect.y);
+                return new SimpleOffsetSurface(clippedSurface, os.getOffsetX() - rect.x, os.getOffsetY() - rect.y);
             }
-
-            if (!os.isShared()) {
-                os.getSurface().free();
-            }
-            return result;
         }
 
         @Override
@@ -355,7 +349,8 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
     public static OffsetSurface applyMakeup( Makeup makeup, OffsetSurface src )
     {
         OffsetSurface result = makeup.apply(src);
-        if (!src.isShared()) {
+        if ((result.getSurface() != src.getSurface()) && !src.isShared()) {
+            System.out.println("Want to free " + src.getClass());
             src.getSurface().free();
         }
         return result;
@@ -376,11 +371,12 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
 
             if (this.clip != null) {
                 processing = applyMakeup(this.clipper, processing);
+                System.out.println( "Clipped from " + this.pose.getSurface().getHeight() + " to " + processing.getSurface().getHeight());
             }
 
             processing = applyMakeup(this.makeup, processing);
             this.previousMakeupId = this.makeup.getChangeId();
-            
+
             Surface newSurface = processing.getSurface();
             int offsetX = processing.getOffsetX();
             int offsetY = processing.getOffsetY();
@@ -450,6 +446,7 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
         } catch (Exception e) {
             e.printStackTrace();
         }
+        
     }
 
     @Override

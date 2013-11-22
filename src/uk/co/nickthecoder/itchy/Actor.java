@@ -771,7 +771,11 @@ public class Actor implements PropertySubject<Actor>
     public void tick()
     {
         if (this.role != null) {
-            this.role.animateAndTick();
+            try {
+               this.role.animateAndTick();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 

@@ -34,6 +34,8 @@
     <pose name="spark5" filename="images/spark5.png"/>
     <pose name="stars1" filename="images/stars1.jpg"/>
     <pose name="stars2" filename="images/stars2.jpg"/>
+    <pose name="texture1" filename="images/texture1.jpg"/>
+    <pose name="texture2" filename="images/texture2.jpg"/>
     <pose name="warp" filename="images/warp.png"/>
   </poses>
   <sounds>
