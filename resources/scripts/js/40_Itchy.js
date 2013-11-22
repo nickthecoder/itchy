@@ -48,7 +48,6 @@ DirectorScript = Class({
     
     startScene: function( sceneName ) { return director.superStartScene( sceneName ); }
     
-    
 });
 
 RoleScript = Class({

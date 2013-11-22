@@ -18,11 +18,11 @@ Ship = Class({
         new itchy.extras.Fragment().actor(this.actor).pieces(10).createPoses("fragment");
         sceneDirectorScript.ship = this;
 		
-		new itchy.extras.Explosion(this.actor)
+		new itchy.role.Explosion(this.actor)
 			.companion("warp").eventName("default").distance(-30,-100).direction(0,360).speed(0,0).projectiles(40)
 			.createActor();
 
-		new itchy.extras.Explosion(this.actor)
+		new itchy.role.Explosion(this.actor)
 			.companion("explosion")
 			.distance(-60).direction(0,360).speed(4,2).fade(3).projectiles(20).randomSpread(false)
 			.createActor();
@@ -42,7 +42,7 @@ Ship = Class({
     	this.vx = 0;
     	this.vy = 0;
     	for (var i = 0; i < 3; i ++) {
-    		new itchy.extras.Explosion(this.actor)
+    		new itchy.role.Explosion(this.actor)
     			.companion("warp")
     			.spread(i*120, 360 + i*120).vx(this.vx).vy(this.vy).distance(300)
     			.speed(-6,0).projectiles(20).projectilesPerTick(1).randomSpread(false).alpha(0).fade(-3)
@@ -64,7 +64,7 @@ Ship = Class({
             this.vx += Math.cos(theta) * this.thrust;
             this.vy += Math.sin(theta) * this.thrust;
             var heading = this.actor.getDirection();
-        	new itchy.extras.Explosion(this.actor)
+        	new itchy.role.Explosion(this.actor)
     			.projectiles(4).follow().projectilesPerTick(1)
     			.spread(heading+160, heading+200).distance(40)
     			.randomSpread().speed(1,2,0,0).fade(3).pose("spark")
@@ -96,7 +96,7 @@ Ship = Class({
     
     die: function() {
    	
-        new itchy.extras.Explosion(this.actor)
+        new itchy.role.Explosion(this.actor)
             .speed(3,1).fade(3).spin(-5,5).rotate(true).pose("fragment").projectiles(40).createActor();
         
         directorScript.lives -= 1;

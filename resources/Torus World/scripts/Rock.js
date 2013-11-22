@@ -38,7 +38,7 @@ Rock = Class({
 		this.actor.event("explode");
     	directorScript.addPoints(this.getCostumeProperties().points);
     	
-        new itchy.extras.Explosion(this.actor)
+        new itchy.role.Explosion(this.actor)
             .spread( bullet.actor.getHeading() - 120, bullet.actor.getHeading() + 120 ).randomSpread()
             .speed(5,3,0,0).fade(3).distance(40)
             .rotate(true).pose("fragment").projectiles(8	)

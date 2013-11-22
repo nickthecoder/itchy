@@ -139,6 +139,7 @@ public class Talk extends Follower
         Frame frame = new Frame(this.marginTop, this.marginRight, this.marginBottom, this.marginLeft);
         frame.setNinePatchName(this.bubbleName);
         result.getAppearance().setMakeup(frame);
+        // result.getAppearance().fixAppearance();
 
         result.setZOrder(this.source.getZOrder());
 

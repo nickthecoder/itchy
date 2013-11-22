@@ -5,9 +5,9 @@
 package uk.co.nickthecoder.itchy;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
+import uk.co.nickthecoder.itchy.makeup.DynamicMakeup;
 import uk.co.nickthecoder.itchy.makeup.Makeup;
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
 import uk.co.nickthecoder.itchy.property.DoubleProperty;
@@ -299,15 +299,19 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
         }
     }
 
-    private Makeup clipper = new Makeup()
+    private Makeup clipper = new DynamicMakeup()
     {
 
         @Override
         public OffsetSurface apply( OffsetSurface os )
         {
+            if (Appearance.this.clip == null) {
+                return os;
+            }
+
             Rect rect = new Rect(0, 0, os.getSurface().getWidth(), os.getSurface().getHeight());
             rect = Appearance.this.clip.intersection(rect);
-            
+
             if ((rect.width < 0) || (rect.height < 0)) {
                 return new SimpleOffsetSurface(new Surface(1, 1, true), 0, 0);
 
@@ -318,17 +322,94 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
                 return new SimpleOffsetSurface(clippedSurface, os.getOffsetX() - rect.x, os.getOffsetY() - rect.y);
             }
         }
+    };
 
+    private Makeup rotoZoom = new DynamicMakeup()
+    {
         @Override
-        public List<AbstractProperty<Makeup, ?>> getProperties()
+        public OffsetSurface apply( OffsetSurface os )
         {
-            return Collections.emptyList();
+            double dirDiff = Appearance.this.direction - Appearance.this.pose.getDirection();
+            if (((int) dirDiff) == 0) {
+                return Appearance.this.scaler.apply(os);
+            }
+
+            // The rotation will increase the size of the image (as the source is rectangular, not circular).
+            // We will recalculate the new offset relative to the center of the surface.
+            double odx = os.getOffsetX() - os.getSurface().getWidth() / 2.0;
+            double ody = os.getOffsetY() - os.getSurface().getHeight() / 2.0;
+
+            Surface rotated = os.getSurface().rotoZoom(dirDiff, Appearance.this.scale, true);
+
+            double dirRadians = dirDiff / 180.0 * Math.PI;
+            double cosa = Math.cos(-dirRadians);
+            double sina = Math.sin(-dirRadians);
+            double ndy = odx * sina + ody * cosa;
+            double ndx = odx * cosa - ody * sina;
+
+            return new SimpleOffsetSurface(
+                rotated,
+                (int) (os.getSurface().getWidth() / 2.0 + ndx * Appearance.this.scale),
+                (int) (os.getSurface().getHeight() / 2.0 + ndy * Appearance.this.scale)
+            );
+        }
+    };
+
+    private Makeup scaler = new DynamicMakeup()
+    {
+        @Override
+        public OffsetSurface apply( OffsetSurface os )
+        {
+            double scale = Appearance.this.scale;
+            
+            if (scale == 1.0) {
+                return os;
+            }
+
+            if (scale <= 0) {
+                return new SimpleOffsetSurface( new Surface(1,1,true), 0, 0);
+            }
+
+            Appearance.this.offsetX *= scale;
+            Appearance.this.offsetY *= scale;
+            int width = (int) (os.getSurface().getWidth() * scale);
+            int height = (int) (os.getSurface().getHeight() * scale);
+
+            if (width <= 0) {
+                width = 1;
+            }
+            if (height <= 0) {
+                height = 1;
+            }
+            Surface scaled = os.getSurface().zoom(scale, scale, true);
+
+            return new SimpleOffsetSurface(
+                scaled,
+                (int) (os.getOffsetX() * scale),
+                (int) (os.getOffsetY() * scale));
         }
 
+    };
+
+    private Makeup colorizer = new DynamicMakeup()
+    {
         @Override
-        public int getChangeId()
+        public OffsetSurface apply( OffsetSurface os )
         {
-            return 0;
+            if (Appearance.this.colorize == null) {
+                return os;
+            }
+
+            Surface colorSurface = new Surface(os.getSurface().getWidth(), os.getSurface().getHeight(), true);
+            Surface result = os.getSurface();
+            // if (os.isShared()) {
+            result = result.copy();
+            // }
+            colorSurface.fill(Appearance.this.colorize);
+            colorSurface.blit(result);
+            colorSurface.free();
+
+            return new SimpleOffsetSurface(result, os.getOffsetX(), os.getOffsetY());
         }
     };
 
@@ -350,104 +431,40 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
     public static OffsetSurface applyMakeup( Makeup makeup, OffsetSurface src )
     {
         OffsetSurface result = makeup.apply(src);
-        if ((result.getSurface() != src.getSurface()) && !src.isShared()) {
-            System.out.println("Want to free " + src.getClass());
+
+        if ((!src.isShared()) && (src.getSurface() != result.getSurface())) {
             src.getSurface().free();
         }
         return result;
     }
 
+    private OffsetSurface processing;
+    
     private void processSurface()
     {
-        OffsetSurface processing = this.pose;
+        processing = this.pose;
 
         try {
 
-            this.dynamicSurface = false;
-
-            double scale = this.scale;
-            if (scale < 0) {
-                scale = 0;
-            }
-
-            if (this.clip != null) {
-                processing = applyMakeup(this.clipper, processing);
-                System.out.println( "Clipped from " + this.pose.getSurface().getHeight() + " to " + processing.getSurface().getHeight());
-            }
-
+            processing = applyMakeup(this.clipper, processing);
             processing = applyMakeup(this.makeup, processing);
             this.previousMakeupId = this.makeup.getChangeId();
 
-            Surface newSurface = processing.getSurface();
-            int offsetX = processing.getOffsetX();
-            int offsetY = processing.getOffsetY();
+            processing = applyMakeup(this.rotoZoom, processing);
+            processing = applyMakeup(this.colorizer, processing);
 
-            double dirDiff = this.direction - this.pose.getDirection();
-            if ((dirDiff != 0)) {
+            this.offsetX = processing.getOffsetX();
+            this.offsetY = processing.getOffsetY();
+            this.processedSurface = processing.getSurface();
 
-                // The rotation will increase the size of the image (as the source is rectangular, not circular).
-                // We will recalculate the new offset relative to the center of the surface.
-                double odx = offsetX - newSurface.getWidth() / 2.0;
-                double ody = offsetY - newSurface.getHeight() / 2.0;
-
-                newSurface = newSurface.rotoZoom(dirDiff, scale, true);
-                this.dynamicSurface = true;
-
-                double dirRadians = dirDiff / 180.0 * Math.PI;
-                double cosa = Math.cos(-dirRadians);
-                double sina = Math.sin(-dirRadians);
-                double ndy = odx * sina + ody * cosa;
-                double ndx = odx * cosa - ody * sina;
-
-                offsetX = (int) (newSurface.getWidth() / 2.0 + ndx * scale);
-                offsetY = (int) (newSurface.getHeight() / 2.0 + ndy * scale);
-
-            } else {
-
-                if (scale != 1.0) {
-
-                    offsetX *= scale;
-                    offsetY *= scale;
-                    int width = (int) (newSurface.getWidth() * scale);
-                    int height = (int) (newSurface.getHeight() * scale);
-
-                    if (width <= 0) {
-                        width = 1;
-                    }
-                    if (height <= 0) {
-                        height = 1;
-                    }
-
-                    newSurface = newSurface.zoom(scale, scale, true);
-                    this.dynamicSurface = true;
-
-                }
-            }
-
-            if (this.colorize != null) {
-
-                Surface colorSurface = new Surface(newSurface.getWidth(), newSurface.getHeight(),
-                    true);
-                // if ( newSurface == pose.getSurface() ) {
-                if (!this.dynamicSurface) {
-                    newSurface = newSurface.copy();
-                    this.dynamicSurface = true;
-                }
-                colorSurface.fill(this.colorize);
-                colorSurface.blit(newSurface);
-
-            }
-
-            this.offsetX = offsetX;
-            this.offsetY = offsetY;
-            this.processedSurface = newSurface;
+            this.dynamicSurface = !processing.isShared();
 
             this.pose.used();
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
     }
 
     @Override
@@ -507,6 +524,26 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
         } else {
             return normalProperties;
         }
+    }
+
+    /**
+     * Takes a snapshot of how the actor looks right now, and uses it as their pose. Resets the Makeup to NullMakeup, as the makeup is not
+     * "baked-into" the pose itself.
+     * <p>
+     * This can be used for efficiency; if the appearance has complex makeup, then the makeup would normally be applied every time the actor
+     * is rotated, colourised, scaled etc. If you fix the appearance, then the makeup is only applied once.
+     * <p>
+     * This can also be used to create particular effects. For example, if the actor is rotated, and you use clip, then the clip is usually
+     * done before the rotation. However, if you fix the appearance, and then clip, the clip will apply to the rotated image.
+     * <p>
+     * Note: If an actor changes pose, then the results of the fixed makeup will be lost.
+     */
+    public void fixAppearance()
+    {
+        ImagePose pose = new ImagePose(getSurface(), getOffsetX(), getOffsetY());
+        pose.setDirection(getDirection());
+        setPose(pose);
+        setMakeup(new NullMakeup());
     }
 
     @Override

@@ -57,9 +57,9 @@ public class StageView extends AbstractScrollableView implements StageListener, 
 
         for (Iterator<Actor> i = this.stage.iterator(); i.hasNext();) {
 
+            Actor actor = i.next();
+            
             try {
-
-                Actor actor = i.next();
 
                 if (actor.isDead()) {
                     i.remove();
@@ -150,6 +150,12 @@ public class StageView extends AbstractScrollableView implements StageListener, 
 
             } catch (Exception e) {
                 e.printStackTrace();
+                try {
+                    // actor.kill();
+                    System.err.println( "Failed to render " + actor );
+                } catch (Exception e2) {
+                    // Do nothing
+                }
             }
         }
     }

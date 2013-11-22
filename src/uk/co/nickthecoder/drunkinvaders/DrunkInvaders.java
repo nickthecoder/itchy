@@ -29,6 +29,7 @@ import uk.co.nickthecoder.itchy.neighbourhood.Neighbourhood;
 import uk.co.nickthecoder.itchy.neighbourhood.NeighbourhoodCollisionStrategy;
 import uk.co.nickthecoder.itchy.neighbourhood.StandardNeighbourhood;
 import uk.co.nickthecoder.jame.Rect;
+import uk.co.nickthecoder.jame.Surface;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.Keys;
 
@@ -146,9 +147,12 @@ public class DrunkInvaders extends AbstractDirector
                 public void tick()
                 {
                     pose.setText(
-                        "Aliens Remaining : " + DrunkInvaders.this.aliensRemaining + "\n" +
-                            "Dropped Frames   : " + Itchy.frameRate.getDroppedFrames()
-                        );
+                        "Aliens Remaining     : " + DrunkInvaders.this.aliensRemaining + "\n" +
+                        "Dropped Frames       : " + Itchy.frameRate.getDroppedFrames() + "\n" +
+                        "Surfaces Created     : " + Surface.totalCreated() + "\n" +
+                        "Surfaces Existing    : " + Surface.totalExisting() + "\n" +
+                        "Surfaces Freed by GC : " + Surface.totalFreedByGC()
+                    );
                 }
             };
             pose.setAlignment(0, 0);
@@ -255,7 +259,7 @@ public class DrunkInvaders extends AbstractDirector
 
     public static void main( String argv[] ) throws Exception
     {
-        Launcher.main(new String[] { "drunkInvaders" });
+        Launcher.main(new String[] { "Drunk Invaders" });
     }
 
 }

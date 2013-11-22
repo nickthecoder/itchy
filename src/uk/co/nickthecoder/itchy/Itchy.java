@@ -98,6 +98,7 @@ public class Itchy
         registry.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.makeup.Shadow.class.getName()));
         registry.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.makeup.Scale.class.getName()));
         registry.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.makeup.Textured.class.getName()));
+        registry.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.makeup.Frame.class.getName()));
         
         System.out.println( "Registering Eases");
         
@@ -167,14 +168,22 @@ public class Itchy
     {
         Video.setWindowTitle(title);
 
-        // Load the 32x32 image, and then try to load the higher res image - not caring if it fails.
-        // According to the SDL1.2 docs, windows MUST be given a 32x32 image.
+        // According to the SDL1.2 docs, windows MUST be given a 32x32 image. How very quaint (windows is shite).
+        // For good looking OSes, we should try to use a bigger icon if there is one.
+        // Note that these must be bmp (yuck!), and not png, because it uses SDL_LoadBMP. Annoying!
         String filename32 = resources.resolveFilename("icon32.bmp");
         String filename = resources.resolveFilename("icon.bmp");
 
+        if (System.getProperty("os.name").startsWith("Windows")) {
+            filename = filename32;
+        }
+        
         try {
-            Video.setWindowIcon(filename32);
-            Video.setWindowIcon(filename);
+            if (new File(filename).exists()) {
+                Video.setWindowIcon(filename);
+            } else if (new File(filename32).exists()) {
+                Video.setWindowIcon(filename32);
+            }
         } catch (Exception e) {
             // Do nothing
         }

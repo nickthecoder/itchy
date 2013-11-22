@@ -89,7 +89,7 @@ public class Alien extends Bouncy implements Shootable
 
         new Explosion(getActor())
             .projectiles(20)
-            .fade(1.2)
+            .fade(5)
             .speed(1, 3)
             .pose("fragment")
             .scale(1)
@@ -99,7 +99,7 @@ public class Alien extends Bouncy implements Shootable
             .projectiles(40).projectilesPerTick(10)
             .offsetForwards(-10, 10).offsetSidewards(-10, 10)
             .speed(3, 6)
-            .fade(0.5)
+            .fade(8)
             .scale(1)
             .pose("pixel")
             .createActor();

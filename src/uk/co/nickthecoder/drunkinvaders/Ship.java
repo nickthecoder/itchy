@@ -245,7 +245,7 @@ public class Ship extends Bouncy implements Shootable
         new Explosion(getActor())
             .projectiles(20)
             .speed(0.3, 0.9)
-            .fade(.7)
+            .fade(2)
             .spin(-0.2, 0.2)
             .pose("fragment")
             .createActor();
@@ -254,7 +254,7 @@ public class Ship extends Bouncy implements Shootable
             .projectiles(40)
             .offsetForwards(-10, 10).offsetSidewards(-10, 10)
             .speed(1, 3)
-            .fade(1.5)
+            .fade(2)
             .pose("pixel")
             .createActor();
 

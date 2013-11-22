@@ -2,6 +2,10 @@
 TODO
 ====
     
+DrunkInv surface count going up too quickly - Possibly dead aliens still being rendered (still in neighbourhood)
+    Create stats for Actor and Role similar to the Surface stats?
+    
+
 PACKAGE !!!
 
 Test on windows.

@@ -783,6 +783,12 @@ public class Actor implements PropertySubject<Actor>
     @Override
     public String toString()
     {
+        return "Actor #" + this.id + " @ " + getX() + "," + getY() + " " + 
+            (getRole() == null ? "" : "(" + getRole().getClass().getName() + ")");
+    }
+
+    public String info()
+    {
         return "Actor #" + this.id + " @ " + getX() + "," + getY() +
             " size(" + this.getAppearance().getWidth() + "," + this.getAppearance().getHeight() +
             ") " +
