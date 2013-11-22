@@ -8,7 +8,6 @@ package uk.co.nickthecoder.itchy.role;
 
 import uk.co.nickthecoder.itchy.AbstractRole;
 import uk.co.nickthecoder.itchy.Itchy;
-import uk.co.nickthecoder.itchy.NullRole;
 import uk.co.nickthecoder.itchy.TextPose;
 import uk.co.nickthecoder.itchy.extras.Timer;
 import uk.co.nickthecoder.itchy.property.Property;

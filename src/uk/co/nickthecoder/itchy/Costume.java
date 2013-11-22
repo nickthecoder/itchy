@@ -24,7 +24,7 @@ public class Costume
     private Costume extendedFrom;
 
     @Property(label = "Role")
-    public ClassName roleClassName = new ClassName( Role.class, uk.co.nickthecoder.itchy.NullRole.class.getName());
+    public ClassName roleClassName = new ClassName( Role.class, uk.co.nickthecoder.itchy.role.NullRole.class.getName());
 
     @Property(label = "Default Z Order")
     public int defaultZOrder;
