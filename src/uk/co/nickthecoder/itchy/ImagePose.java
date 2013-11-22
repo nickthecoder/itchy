@@ -123,20 +123,16 @@ public class ImagePose implements Pose
     }
 
     @Override
-    public boolean changedSinceLastUsed()
-    {
-        return false;
-    }
-
-    @Override
-    public void used()
-    {
-    }
-
-    @Override
     public boolean isShared()
     {
         return true;
+    }
+
+    @Override
+    public int getChangeId()
+    {
+        // As images poses don't change, we can return a constant.
+        return 0;
     }
 
 }

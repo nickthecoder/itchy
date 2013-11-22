@@ -15,8 +15,6 @@ public class TextPose extends AbstractTextPose
 {
     private Surface surface;
 
-    private boolean changed = false;
-
     
     public TextPose( String text, Font font, double fontSize )
     {
@@ -31,7 +29,7 @@ public class TextPose extends AbstractTextPose
     
     protected void clearSurfaceCache()
     {
-        this.changed = true;
+        super.clearSurfaceCache();
 
         if (this.surface != null) {
             this.surface.free();
@@ -52,18 +50,6 @@ public class TextPose extends AbstractTextPose
     {
         this.ensureCached();
         return this.surface;
-    }
-
-    @Override
-    public boolean changedSinceLastUsed()
-    {
-        return this.changed;
-    }
-
-    @Override
-    public void used()
-    {
-        this.changed = false;
     }
 
     @Override

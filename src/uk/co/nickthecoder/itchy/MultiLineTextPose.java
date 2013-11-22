@@ -16,8 +16,6 @@ public class MultiLineTextPose extends AbstractTextPose
 {
     private Surface surface;
 
-    private boolean changed = false;
-
     private boolean fixedSize = false;
 
     private int fixedWidth;
@@ -37,7 +35,7 @@ public class MultiLineTextPose extends AbstractTextPose
     @Override
     protected void clearSurfaceCache()
     {
-        this.changed = true;
+        super.clearSurfaceCache();
 
         if (this.surface != null) {
             this.surface.free();
@@ -88,18 +86,6 @@ public class MultiLineTextPose extends AbstractTextPose
     {
         this.ensureCached();
         return this.surface;
-    }
-
-    @Override
-    public boolean changedSinceLastUsed()
-    {
-        return this.changed;
-    }
-
-    @Override
-    public void used()
-    {
-        this.changed = false;
     }
 
     public void autoSize()

@@ -5,6 +5,9 @@ TODO
 DrunkInv surface count going up too quickly - Possibly dead aliens still being rendered (still in neighbourhood)
     Create stats for Actor and Role similar to the Surface stats?
     
+Makeup and Pose both need to keep inform Appearance that they have changed since Appearance last
+used their image, but solve it in different ways. Pose should do it the same way as Makeup.
+
 
 PACKAGE !!!
 

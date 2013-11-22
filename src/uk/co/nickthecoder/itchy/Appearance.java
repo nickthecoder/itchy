@@ -44,11 +44,7 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
     }
 
     private Actor actor;
-
-    private Surface processedSurface;
-
-    private boolean dynamicSurface;
-
+    
     private Pose pose;
 
     private int offsetX;
@@ -59,7 +55,7 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
 
     private Makeup makeup = new NullMakeup();
 
-    private int previousMakeupId;
+    private int previousMakeupChangeId;
 
     /**
      * A scale factor. A value of 1 leaves the appearance unchanged, less than 1 shrinks, greater than 1 scales.
@@ -93,7 +89,7 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
     public Appearance( Pose pose )
     {
         this.pose = pose;
-        this.processedSurface = null;
+        this.processing = null;
 
         this.direction = 0;
         this.scale = 1;
@@ -278,23 +274,22 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
 
     public void clearCachedSurface()
     {
-        if (this.dynamicSurface) {
-            this.processedSurface.free();
-            this.dynamicSurface = false;
+        if ((this.processing != null) && (!this.processing.isShared())) {
+            this.processing.getSurface().free();
         }
-        this.processedSurface = null;
+        this.processing = null;
         this.worldRectangle = null;
     }
 
     private void ensureOk()
     {
-        if (this.makeup.getChangeId() != this.previousMakeupId) {
+        if (this.makeup.getChangeId() != this.previousMakeupChangeId) {
             this.clearCachedSurface();
         }
-        if (this.pose.changedSinceLastUsed()) {
+        if (this.pose.getChangeId() != this.previousPoseChangeId) {
             this.clearCachedSurface();
         }
-        if (this.processedSurface == null) {
+        if (this.processing == null) {
             this.processSurface();
         }
     }
@@ -440,26 +435,24 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
 
     private OffsetSurface processing;
     
+    private int previousPoseChangeId = -1;
+    
     private void processSurface()
     {
         processing = this.pose;
-
+        this.previousPoseChangeId = this.pose.getChangeId();
+        
         try {
 
             processing = applyMakeup(this.clipper, processing);
             processing = applyMakeup(this.makeup, processing);
-            this.previousMakeupId = this.makeup.getChangeId();
+            this.previousMakeupChangeId = this.makeup.getChangeId();
 
             processing = applyMakeup(this.rotoZoom, processing);
             processing = applyMakeup(this.colorizer, processing);
 
             this.offsetX = processing.getOffsetX();
             this.offsetY = processing.getOffsetY();
-            this.processedSurface = processing.getSurface();
-
-            this.dynamicSurface = !processing.isShared();
-
-            this.pose.used();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -471,7 +464,7 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
     public Surface getSurface()
     {
         this.ensureOk();
-        return this.processedSurface;
+        return this.processing.getSurface();
     }
 
     public void onMoved()
@@ -494,9 +487,9 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
 
             this.worldRectangle = new WorldRectangle(
                 this.actor.getX() - this.offsetX,
-                this.actor.getY() + this.offsetY - this.processedSurface.getHeight(),
-                this.processedSurface.getWidth(),
-                this.processedSurface.getHeight());
+                this.actor.getY() + this.offsetY - this.processing.getSurface().getHeight(),
+                this.processing.getSurface().getWidth(),
+                this.processing.getSurface().getHeight());
         }
         return this.worldRectangle;
     }

@@ -30,22 +30,13 @@ public interface Pose extends OffsetSurface
     public double getDirection();
 
     /**
-     * Called by Appearance to ensure that its surface is up to date. Most types of Pose will be
-     * static (i.e. once they are created, they remain the same), and therefore, they will always
-     * return false. For those type of Pose which are NOT static, then they can only be used by a
-     * single Appearance.
-     * 
-     * @return true iff the pose has changed since the last time validate was called.
+     * Appearance needs to know if a Pose has changed since it last rendered it to the screen,
+     * because it's processed verion of the pose isn't suitable if the pose itself has changed.
+     * Therefore, each time a Pose changes, it should increase its identifier. Appearance will
+     * compare the id it got last time with the latest one, and throw away its processed image
+     * if they differ.
      */
-    public boolean changedSinceLastUsed();
-
-    /**
-     * Called by Appearance after it has used the results from Pose.getSurface. After used is
-     * called, then changedSinceLastUsed will return false until the Pose changes. Note that
-     * ImagePoses should never change, so changedSinceLastUsed always returns false, and "used" is a
-     * no-op.
-     */
-    public void used();
+    public int getChangeId();
 
     @Override
     @Property(label = "Offset X")
