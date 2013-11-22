@@ -12,7 +12,7 @@ import java.util.List;
 import javax.script.ScriptException;
 
 import uk.co.nickthecoder.itchy.SceneDirector;
-import uk.co.nickthecoder.itchy.util.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.AbstractProperty;
 import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;

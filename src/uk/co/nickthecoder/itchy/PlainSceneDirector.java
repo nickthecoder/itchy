@@ -7,7 +7,7 @@ package uk.co.nickthecoder.itchy;
 
 import java.util.List;
 
-import uk.co.nickthecoder.itchy.util.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.AbstractProperty;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;

@@ -22,7 +22,7 @@ import uk.co.nickthecoder.itchy.gui.TableRow;
 import uk.co.nickthecoder.itchy.gui.VerticalLayout;
 import uk.co.nickthecoder.itchy.gui.VerticalScroll;
 import uk.co.nickthecoder.itchy.gui.Window;
-import uk.co.nickthecoder.itchy.util.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.AbstractProperty;
 
 /**
  * Creates a framework for most of the Notebook pages within the Editor. Each SubEditor has a table

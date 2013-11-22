@@ -10,8 +10,8 @@ package uk.co.nickthecoder.itchy;
 import java.io.File;
 import java.util.List;
 
-import uk.co.nickthecoder.itchy.util.AbstractProperty;
-import uk.co.nickthecoder.itchy.util.Property;
+import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.jame.JameException;
 import uk.co.nickthecoder.jame.Sound;
 

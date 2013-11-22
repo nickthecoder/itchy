@@ -9,9 +9,9 @@ package uk.co.nickthecoder.itchy;
 
 import java.util.List;
 
-import uk.co.nickthecoder.itchy.util.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.jame.Surface;
-import uk.co.nickthecoder.itchy.util.Property;
 
 public class CostumeResource extends NamedResource
 {

@@ -20,7 +20,7 @@ import uk.co.nickthecoder.itchy.Launcher;
 import uk.co.nickthecoder.itchy.PlainRole;
 import uk.co.nickthecoder.itchy.extras.Fragment;
 import uk.co.nickthecoder.itchy.extras.Timer;
-import uk.co.nickthecoder.itchy.roles.Explosion;
+import uk.co.nickthecoder.itchy.role.Explosion;
 import uk.co.nickthecoder.jame.Sound;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.Keys;

@@ -6,12 +6,11 @@ package uk.co.nickthecoder.itchy.makeup;
 
 import java.util.List;
 
-import uk.co.nickthecoder.itchy.Makeup;
 import uk.co.nickthecoder.itchy.OffsetSurface;
 import uk.co.nickthecoder.itchy.SimpleOffsetSurface;
 import uk.co.nickthecoder.itchy.TextPose;
-import uk.co.nickthecoder.itchy.util.AbstractProperty;
-import uk.co.nickthecoder.itchy.util.Property;
+import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.jame.RGBA;
 import uk.co.nickthecoder.jame.Surface;
 import uk.co.nickthecoder.jame.Surface.BlendMode;

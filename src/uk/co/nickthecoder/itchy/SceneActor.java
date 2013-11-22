@@ -8,7 +8,8 @@ package uk.co.nickthecoder.itchy;
 import java.util.HashMap;
 
 import uk.co.nickthecoder.itchy.editor.SceneDesignerRole;
-import uk.co.nickthecoder.itchy.util.AbstractProperty;
+import uk.co.nickthecoder.itchy.makeup.Makeup;
+import uk.co.nickthecoder.itchy.property.AbstractProperty;
 import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.itchy.util.StringUtils;
 import uk.co.nickthecoder.jame.RGBA;

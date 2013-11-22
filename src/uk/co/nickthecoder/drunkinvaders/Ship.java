@@ -9,9 +9,9 @@ import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.extras.Fragment;
-import uk.co.nickthecoder.itchy.roles.Explosion;
-import uk.co.nickthecoder.itchy.roles.Talk;
-import uk.co.nickthecoder.itchy.util.Property;
+import uk.co.nickthecoder.itchy.property.Property;
+import uk.co.nickthecoder.itchy.role.Explosion;
+import uk.co.nickthecoder.itchy.role.Talk;
 import uk.co.nickthecoder.itchy.util.Tag;
 import uk.co.nickthecoder.jame.RGBA;
 import uk.co.nickthecoder.jame.event.Keys;
@@ -236,7 +236,7 @@ public class Ship extends Bouncy implements Shootable
         }
 
         Actor yell = new Talk(this)
-            .message("death").font("vera", 18).color(SPEECH_COLOR).bubble("speechBubble2")
+            .eventName("death").color(SPEECH_COLOR).bubble("speechBubble2")
             .offset(0, 40).margin(10, 10, 20, 10).direction(0)
             .createActor();
         yell.setCostume(getActor().getCostume());

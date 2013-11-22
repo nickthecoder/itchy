@@ -172,8 +172,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="20" language="java" name="uk.co.nickthecoder.itchy.roles.Projectile" project="itchy" 
-    file="/itchy/src/uk/co/nickthecoder/itchy/roles/Projectile.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="20" language="java" name="uk.co.nickthecoder.itchy.role.Projectile" project="itchy" 
+    file="/itchy/src/uk/co/nickthecoder/itchy/role/Projectile.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="337" y="1243"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
@@ -181,8 +181,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="21" language="java" name="uk.co.nickthecoder.itchy.roles.Explosion" project="itchy" 
-    file="/itchy/src/uk/co/nickthecoder/itchy/roles/Explosion.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="21" language="java" name="uk.co.nickthecoder.itchy.role.Explosion" project="itchy" 
+    file="/itchy/src/uk/co/nickthecoder/itchy/role/Explosion.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="180" y="1398"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      

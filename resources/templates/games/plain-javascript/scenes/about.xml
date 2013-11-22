@@ -2,7 +2,7 @@
   <properties/>
   <layer name="main">
     <text text="Title" font="veraBold" size="46" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="383" y="546" direction="0.0" startEvent="default"/>
-    <text text="Back to Menu" font="veraBold" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.roles.SceneButton" x="372" y="47" direction="0.0" startEvent="default">
+    <text text="Back to Menu" font="veraBold" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.SceneButton" x="372" y="47" direction="0.0" startEvent="default">
       <property name="sceneName" value="menu"/>
     </text>
   </layer>

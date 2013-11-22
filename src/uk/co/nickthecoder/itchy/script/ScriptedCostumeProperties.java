@@ -11,7 +11,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.CostumeProperties;
-import uk.co.nickthecoder.itchy.util.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.AbstractProperty;
 import uk.co.nickthecoder.itchy.util.ClassName;
 
 public class ScriptedCostumeProperties extends CostumeProperties

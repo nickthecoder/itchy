@@ -5,7 +5,7 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
-import uk.co.nickthecoder.itchy.util.Property;
+import uk.co.nickthecoder.itchy.property.Property;
 
 /**
  * A Pose is a single image used by an Actor's Appearance. A Pose consists of a single Surface,

@@ -7,8 +7,8 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
+import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.util.Named;
-import uk.co.nickthecoder.itchy.util.Property;
 
 public class NamedResource implements Named
 {

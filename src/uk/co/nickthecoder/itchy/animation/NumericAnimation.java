@@ -6,7 +6,7 @@ package uk.co.nickthecoder.itchy.animation;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Itchy;
-import uk.co.nickthecoder.itchy.util.Property;
+import uk.co.nickthecoder.itchy.property.Property;
 
 public abstract class NumericAnimation extends AbstractAnimation
 {

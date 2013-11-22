@@ -9,6 +9,7 @@ import java.util.Stack;
 
 import uk.co.nickthecoder.itchy.animation.Animations;
 import uk.co.nickthecoder.itchy.animation.Eases;
+import uk.co.nickthecoder.itchy.makeup.Makeup;
 import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.jame.Audio;
 import uk.co.nickthecoder.jame.Events;
@@ -80,13 +81,13 @@ public class Itchy
         registry.add(new ClassName(SceneDirector.class, PlainSceneDirector.class.getName()));
 
         registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.NullRole.class.getName()));
-        registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.roles.EditorButton.class.getName()));
-        registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.roles.LinkButton.class.getName()));
-        registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.roles.MessageButton.class.getName()));
-        registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.roles.NumberValue.class.getName()));
-        registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.roles.TextValue.class.getName()));
-        registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.roles.QuitButton.class.getName()));
-        registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.roles.ProgressBar.class.getName()));
+        registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.role.EditorButton.class.getName()));
+        registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.role.LinkButton.class.getName()));
+        registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.role.MessageButton.class.getName()));
+        registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.role.NumberValue.class.getName()));
+        registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.role.TextValue.class.getName()));
+        registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.role.QuitButton.class.getName()));
+        registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.role.ProgressBar.class.getName()));
 
         registry.add(new ClassName(CostumeProperties.class, CostumeProperties.class.getName()));
 

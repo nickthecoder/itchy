@@ -12,8 +12,8 @@ import java.util.List;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.MessageListener;
-import uk.co.nickthecoder.itchy.util.AbstractProperty;
-import uk.co.nickthecoder.itchy.util.Property;
+import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 
 public class CompoundAnimation extends AbstractAnimation
 {

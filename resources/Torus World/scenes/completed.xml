@@ -5,10 +5,10 @@
     <text text="Congratulations, you have completed all of the levels." font="Boycott" size="22" color="#ffffff" xAlignment="0.0" yAlignment="0.5" x="65" y="459" direction="0.0" heading="0.0" startEvent="default" zOrder="3"/>
     <text text="But the fun doesn't have to end." font="Boycott" size="22" color="#ffffff" xAlignment="0.0" yAlignment="0.5" x="69" y="416" direction="0.0" heading="0.0" startEvent="default" zOrder="4"/>
     <text text="Why not create you own levels..." font="Boycott" size="22" color="#ffffff" xAlignment="0.0" yAlignment="0.5" x="71" y="368" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <text text="Learn More" font="Boycott" size="22" color="#5659ff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.roles.LinkButton" costume="link" x="503" y="367" direction="0.0" heading="0.0" startEvent="default" zOrder="6">
+    <text text="Learn More" font="Boycott" size="22" color="#5659ff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.LinkButton" costume="link" x="503" y="367" direction="0.0" heading="0.0" startEvent="default" zOrder="6">
       <property name="url" value="http://nickthecoder.co.uk/software/view/Torus_World"/>
     </text>
-    <text text="Exit" font="Boycott" size="69" color="#ffffff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.roles.SceneButton" costume="button" x="400" y="116" direction="0.0" heading="0.0" startEvent="default" zOrder="7">
+    <text text="Exit" font="Boycott" size="69" color="#ffffff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.SceneButton" costume="button" x="400" y="116" direction="0.0" heading="0.0" startEvent="default" zOrder="7">
       <property name="sceneName" value="menu"/>
     </text>
   </layer>

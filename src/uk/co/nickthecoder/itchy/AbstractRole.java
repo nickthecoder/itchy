@@ -14,7 +14,7 @@ import javax.script.ScriptException;
 
 import uk.co.nickthecoder.itchy.Actor.AnimationEvent;
 import uk.co.nickthecoder.itchy.animation.Animation;
-import uk.co.nickthecoder.itchy.util.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.AbstractProperty;
 import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.itchy.util.Tag;
 import uk.co.nickthecoder.itchy.util.TagMembership;

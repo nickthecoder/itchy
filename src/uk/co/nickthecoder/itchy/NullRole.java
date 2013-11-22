@@ -8,7 +8,7 @@ package uk.co.nickthecoder.itchy;
 import java.util.Collections;
 import java.util.List;
 
-import uk.co.nickthecoder.itchy.util.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.AbstractProperty;
 
 /**
  * Does nothing - useful for scenery, and other game objects which don't do anything!

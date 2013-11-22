@@ -9,7 +9,7 @@
     <text text="Easy" font="Boycott" size="72" color="#401c00" xAlignment="0.5" yAlignment="0.5" x="384" y="559" direction="0.0" heading="0.0" startEvent="default" zOrder="2"/>
     <text text="Easy" font="Boycott" size="65" color="#93472e" xAlignment="0.5" yAlignment="0.5" x="382" y="561" direction="0.0" heading="0.0" startEvent="default" zOrder="3"/>
     <text text="Score :" font="Boycott" size="35" color="#000000" xAlignment="0.5" yAlignment="0.5" x="73" y="576" direction="0.0" heading="0.0" startEvent="default" zOrder="4"/>
-    <text text="0000" font="Boycott" size="32" color="#93190e" xAlignment="0.0" yAlignment="0.5" role="uk.co.nickthecoder.itchy.roles.NumberValue" x="31" y="538" direction="0.0" heading="0.0" startEvent="default" zOrder="5">
+    <text text="0000" font="Boycott" size="32" color="#93190e" xAlignment="0.0" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.NumberValue" x="31" y="538" direction="0.0" heading="0.0" startEvent="default" zOrder="5">
       <property name="formatPattern" value="0000"/>
       <property name="nullValue" value="null"/>
       <property name="errorValue" value="Err"/>
@@ -17,7 +17,7 @@
       <property name="updateInterval" value="0.1"/>
       <property name="access" value="sceneDirector.sceneDirectorScript.score"/>
     </text>
-    <text text="0000" font="Boycott" size="32" color="#93190e" xAlignment="0.0" yAlignment="0.5" role="uk.co.nickthecoder.itchy.roles.NumberValue" x="675" y="530" direction="0.0" heading="0.0" startEvent="default" zOrder="6">
+    <text text="0000" font="Boycott" size="32" color="#93190e" xAlignment="0.0" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.NumberValue" x="675" y="530" direction="0.0" heading="0.0" startEvent="default" zOrder="6">
       <property name="formatPattern" value="0000"/>
       <property name="nullValue" value="Null"/>
       <property name="errorValue" value="Err"/>

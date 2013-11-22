@@ -7,9 +7,9 @@ package uk.co.nickthecoder.itchy;
 
 import java.util.List;
 
-import uk.co.nickthecoder.itchy.util.AbstractProperty;
-import uk.co.nickthecoder.itchy.util.Property;
-import uk.co.nickthecoder.itchy.util.PropertySubject;
+import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.Property;
+import uk.co.nickthecoder.itchy.property.PropertySubject;
 
 public class ManagedSound implements PropertySubject<ManagedSound>
 {

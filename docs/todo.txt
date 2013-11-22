@@ -6,17 +6,27 @@ PACKAGE !!!
 
 Test on windows.
 
-Glitter - sprinkle poses randomly. use getpixel.
-Alphatextshadow - like pause ?
-Textured - a texture applied over the non-transparent parts of the image - useful for text.
-    Has a X or Y offset to change the pattern from grid into brick.
-    Has x,y to state where the tiles start from - not always top left of the image to be textured.
-Compound - Need an editor!
-    Maybe I should think bigger and have a fully pipeline - multiple inputs (poses and flat colour)
+Update class diagrams (moved extras classes)
 
-Crash on setting text colour to blank text.
+Follow up on the TODOs
+
+I've exposed a generic Game.getGameViews (returns CompoundView<View>).
+Should Game have addStage, rather than letting the list be added to directly?
+
+Is the list of Stages ok?
+
+Fix makeup - creates a new pose from the processed one.
+    Replace border pose decorator. and pose decorator
+    
 
 Send to Asul
+
+Compound Makeup - Need an editor!
+    Maybe I should think bigger and have a full pipeline - multiple inputs (poses and flat colour)
+
+Glitter Makeup - sprinkle poses randomly. use getpixel.
+Decoration - Adds a Pose to a given place relative to the actor's x,y.
+Frame - Adds a nine patch.
 
 Simple convolution filter
     Filters don't need to be square.
@@ -26,6 +36,8 @@ Simple convolution filter
         For RGBA we'd need to change the final DIVIDE to discount transparent pixels. i.e divide by sub of matrix * alphas.
         Apply the matrix to alpha as normal.
         
+   Many things just need the alpha channel convolved?
+           
 Look at rotozoom, and try to implement a generic transformation matrix???
 
 Cache the results of Makeup on Appearance.
@@ -46,14 +58,6 @@ Compound Role
     The currently selected role's properties are shown on the right of the table.
     This can be in ADDITION to the CompoundRole's properties.
 Same feature for SceneDirector.
-
-Follow up on the TODOs
-
-
-I've exposed a generic Game.getGameViews (returns CompoundView<View>).
-Should Game have addStage, rather than letting the list be added to directly?
-
-Update class diagrams
 
 Create some tests for Views in the tests game.
     Create a Stage and view in the middle of the screen

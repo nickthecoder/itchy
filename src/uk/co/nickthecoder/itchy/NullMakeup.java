@@ -10,7 +10,8 @@ package uk.co.nickthecoder.itchy;
 import java.util.Collections;
 import java.util.List;
 
-import uk.co.nickthecoder.itchy.util.AbstractProperty;
+import uk.co.nickthecoder.itchy.makeup.Makeup;
+import uk.co.nickthecoder.itchy.property.AbstractProperty;
 
 public class NullMakeup implements Makeup
 {

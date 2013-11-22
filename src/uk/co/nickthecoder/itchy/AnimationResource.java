@@ -10,7 +10,7 @@ package uk.co.nickthecoder.itchy;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.animation.Animation;
-import uk.co.nickthecoder.itchy.util.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.AbstractProperty;
 
 public class AnimationResource extends NamedResource
 {

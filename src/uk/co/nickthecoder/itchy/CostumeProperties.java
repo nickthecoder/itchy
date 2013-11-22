@@ -7,10 +7,10 @@ package uk.co.nickthecoder.itchy;
 
 import java.util.List;
 
+import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.PropertySubject;
 import uk.co.nickthecoder.itchy.script.ScriptManager;
-import uk.co.nickthecoder.itchy.util.AbstractProperty;
 import uk.co.nickthecoder.itchy.util.ClassName;
-import uk.co.nickthecoder.itchy.util.PropertySubject;
 
 public class CostumeProperties implements PropertySubject<CostumeProperties>
 {

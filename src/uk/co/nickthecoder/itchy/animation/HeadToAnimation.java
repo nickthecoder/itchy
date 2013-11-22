@@ -7,8 +7,8 @@ package uk.co.nickthecoder.itchy.animation;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.Actor;
-import uk.co.nickthecoder.itchy.util.AbstractProperty;
-import uk.co.nickthecoder.itchy.util.Property;
+import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 
 public class HeadToAnimation extends NumericAnimation
 {

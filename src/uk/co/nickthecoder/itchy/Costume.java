@@ -12,9 +12,9 @@ import java.util.Random;
 import java.util.Set;
 
 import uk.co.nickthecoder.itchy.animation.Animation;
+import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.script.ScriptManager;
 import uk.co.nickthecoder.itchy.util.ClassName;
-import uk.co.nickthecoder.itchy.util.Property;
 import uk.co.nickthecoder.jame.Sound;
 
 public class Costume

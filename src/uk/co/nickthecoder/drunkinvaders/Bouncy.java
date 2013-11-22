@@ -8,7 +8,7 @@ package uk.co.nickthecoder.drunkinvaders;
 import uk.co.nickthecoder.itchy.AbstractRole;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Role;
-import uk.co.nickthecoder.itchy.util.Property;
+import uk.co.nickthecoder.itchy.property.Property;
 
 public class Bouncy extends AbstractRole
 {

@@ -7,8 +7,8 @@ package uk.co.nickthecoder.drunkinvaders;
 
 import uk.co.nickthecoder.itchy.Font;
 import uk.co.nickthecoder.itchy.TextPose;
-import uk.co.nickthecoder.itchy.roles.Button;
-import uk.co.nickthecoder.itchy.util.Property;
+import uk.co.nickthecoder.itchy.property.Property;
+import uk.co.nickthecoder.itchy.role.Button;
 import uk.co.nickthecoder.jame.RGBA;
 
 public class PickLevel extends Button

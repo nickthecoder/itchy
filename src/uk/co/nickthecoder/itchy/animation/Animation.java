@@ -11,10 +11,10 @@ import java.util.List;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.MessageListener;
-import uk.co.nickthecoder.itchy.util.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.Property;
+import uk.co.nickthecoder.itchy.property.PropertySubject;
 import uk.co.nickthecoder.itchy.util.Named;
-import uk.co.nickthecoder.itchy.util.Property;
-import uk.co.nickthecoder.itchy.util.PropertySubject;
 
 public interface Animation extends Cloneable, PropertySubject<Animation>, Named
 {

@@ -1,4 +1,4 @@
-<scene showMouse="true" role="uk.co.nickthecoder.drunkinvaders.Menu">
+<scene showMouse="true" role="uk.co.nickthecoder.drunkinvaders.Menu" background="#000000ff">
   <properties/>
   <layer name="background">
     <actor costume="earth" x="0" y="0" direction="0.0" heading="0.0" startEvent="default" zOrder="1"/>
@@ -6,17 +6,17 @@
   <layer name="main">
     <actor costume="alien3" role="uk.co.nickthecoder.itchy.NullRole" x="163" y="365" direction="-90.0" heading="-90.0" startEvent="default" zOrder="2" colorize="#00ff0022" scale="6.107142857142857"/>
     <actor costume="ship" role="uk.co.nickthecoder.itchy.NullRole" x="198" y="85" direction="93.94518622903759" heading="93.94518622903759" startEvent="default" zOrder="3"/>
-    <actor costume="bullet" x="193" y="139" direction="95.90614111377052" heading="95.90614111377052" startEvent="default" zOrder="4"/>
+    <actor costume="bullet" role="uk.co.nickthecoder.itchy.NullRole" x="193" y="139" direction="95.90614111377052" heading="95.90614111377052" startEvent="default" zOrder="4"/>
     <text text="Drunk" font="boycott" size="86" color="#cc2222" xAlignment="0.5" yAlignment="0.5" x="475" y="407" direction="7.594643368591445" heading="7.594643368591445" startEvent="default" zOrder="5"/>
     <text text="Invaders" font="boycott" size="61" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="486" y="331" direction="2.160560963458598" heading="2.160560963458598" startEvent="default" zOrder="6"/>
     <actor costume="bomb" x="181" y="234" direction="-90.0" heading="-90.0" startEvent="default" zOrder="7" scale="3.5"/>
-    <text text="About" font="blackCasper" size="46" color="#ffffff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.roles.SceneButton" costume="button" x="323" y="100" direction="0.0" heading="0.0" startEvent="default" zOrder="8">
+    <text text="About" font="blackCasper" size="46" color="#ffffff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.SceneButton" costume="button" x="323" y="100" direction="0.0" heading="0.0" startEvent="default" zOrder="8">
       <property name="sceneName" value="about"/>
     </text>
-    <text text="Editor" font="blackCasper" size="46" color="#ffffff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.roles.EditorButton" costume="button" x="321" y="162" direction="0.0" heading="0.0" startEvent="default" zOrder="9"/>
-    <text text="Play" font="blackCasper" size="46" color="#ffffff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.roles.SceneButton" costume="button" x="320" y="223" direction="0.0" heading="0.0" startEvent="default" zOrder="10">
+    <text text="Editor" font="blackCasper" size="46" color="#ffffff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.EditorButton" costume="button" x="321" y="162" direction="0.0" heading="0.0" startEvent="default" zOrder="9"/>
+    <text text="Play" font="blackCasper" size="46" color="#ffffff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.SceneButton" costume="button" x="320" y="223" direction="0.0" heading="0.0" startEvent="default" zOrder="10">
       <property name="sceneName" value="levels"/>
     </text>
-    <text text="Quit" font="blackCasper" size="68" color="#000000" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.roles.QuitButton" costume="button" x="321" y="25" direction="0.0" heading="0.0" startEvent="default" zOrder="11"/>
+    <text text="Quit" font="blackCasper" size="68" color="#000000" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.QuitButton" costume="button" x="321" y="25" direction="0.0" heading="0.0" startEvent="default" zOrder="11"/>
   </layer>
 </scene>

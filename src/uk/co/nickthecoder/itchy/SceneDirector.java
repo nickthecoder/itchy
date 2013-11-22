@@ -7,7 +7,7 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
-import uk.co.nickthecoder.itchy.util.PropertySubject;
+import uk.co.nickthecoder.itchy.property.PropertySubject;
 
 public interface SceneDirector extends MouseListener, KeyListener, MessageListener, PropertySubject<SceneDirector>
 {

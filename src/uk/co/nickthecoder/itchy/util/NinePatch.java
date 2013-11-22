@@ -5,6 +5,7 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.util;
 
+import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.jame.RGBA;
 import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.Surface;

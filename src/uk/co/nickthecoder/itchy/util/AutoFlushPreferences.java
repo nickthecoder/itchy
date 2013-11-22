@@ -13,6 +13,8 @@ import java.util.prefs.NodeChangeListener;
 import java.util.prefs.PreferenceChangeListener;
 import java.util.prefs.Preferences;
 
+import uk.co.nickthecoder.itchy.property.AbstractProperty;
+
 /**
  * Works in the same way as {@link java.util.prefs.Preferences}, but there is no need to
  * {@link #flush()} as this is done for every write. This makes it less efficient, but easier to

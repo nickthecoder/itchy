@@ -7,8 +7,8 @@ package uk.co.nickthecoder.itchy;
 
 import java.util.List;
 
-import uk.co.nickthecoder.itchy.util.AbstractProperty;
-import uk.co.nickthecoder.itchy.util.PropertySubject;
+import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.PropertySubject;
 
 public interface Role extends MessageListener, Cloneable, PropertySubject<Role>
 {

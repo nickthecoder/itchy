@@ -13,7 +13,7 @@ import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Appearance;
 import uk.co.nickthecoder.itchy.Costume;
 import uk.co.nickthecoder.itchy.extras.Timer;
-import uk.co.nickthecoder.itchy.util.Property;
+import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.util.Util;
 
 public class AlienFactory extends AbstractRole

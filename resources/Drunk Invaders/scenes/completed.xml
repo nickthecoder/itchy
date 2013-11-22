@@ -7,7 +7,7 @@
     <text text="Well Done" font="boycott" size="111" color="#22bb22" xAlignment="0.5" yAlignment="0.5" x="322" y="404" direction="0.0" startEvent="default"/>
     <text text="The world is safe" font="vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="319" y="108" direction="0.0" startEvent="default"/>
     <text text="The aliens are dead" font="vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="320" y="80" direction="0.0" startEvent="default"/>
-    <text text="MENU" font="blackCasper" size="53" color="#000000" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.roles.SceneButton" x="320" y="24" direction="0.0" startEvent="default">
+    <text text="MENU" font="blackCasper" size="53" color="#000000" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.SceneButton" x="320" y="24" direction="0.0" startEvent="default">
       <property name="sceneName" value="menu"/>
     </text>
     <actor costume="shieldFactory" x="183" y="202" direction="89.29168795888526" startEvent="default">

@@ -14,7 +14,7 @@ import uk.co.nickthecoder.itchy.AbstractRole;
 import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.MouseListenerView;
 import uk.co.nickthecoder.itchy.ViewMouseListener;
-import uk.co.nickthecoder.itchy.util.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.AbstractProperty;
 import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;

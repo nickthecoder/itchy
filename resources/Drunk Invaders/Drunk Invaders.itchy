@@ -285,6 +285,7 @@
       <sound name="deflect" sound="ricochet" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
       <sound name="fire" sound="fire" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
       <font name="speech" font="vera"/>
+      <font name="death" font="veraBold"/>
       <animation name="yell" animation="toHeaven"/>
     </costume>
     <costume name="ship-won" defaultZOrder="0" extends="ship" role="uk.co.nickthecoder.drunkinvaders.Ship">

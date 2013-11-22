@@ -5,8 +5,8 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.editor;
 
-import uk.co.nickthecoder.itchy.util.AbstractProperty;
-import uk.co.nickthecoder.itchy.util.Property;
+import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 
 public class EditorPreferences
 {
