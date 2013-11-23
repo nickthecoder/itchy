@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.makeup.Makeup;
+import uk.co.nickthecoder.itchy.makeup.TransformationData;
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
 
 public class NullMakeup implements Makeup
@@ -32,6 +33,11 @@ public class NullMakeup implements Makeup
     public int getChangeId()
     {
         return 0;
+    }
+
+    @Override
+    public void applyGeometry( TransformationData src )
+    {   
     }
 
 }

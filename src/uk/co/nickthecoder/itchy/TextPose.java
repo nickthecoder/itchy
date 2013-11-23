@@ -27,9 +27,9 @@ public class TextPose extends AbstractTextPose
         this.setText( text );
     }
     
-    protected void clearSurfaceCache()
+    protected void changedImage()
     {
-        super.clearSurfaceCache();
+        super.changedImage();
 
         if (this.surface != null) {
             this.surface.free();
@@ -80,4 +80,5 @@ public class TextPose extends AbstractTextPose
     {
         return true;
     }
+
 }

@@ -135,4 +135,9 @@ public class ImagePose implements Pose
         return 0;
     }
 
+    @Override
+    public void attach( Appearance appearance )
+    {       
+    }
+
 }

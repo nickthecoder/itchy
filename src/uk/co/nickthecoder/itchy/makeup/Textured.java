@@ -108,6 +108,11 @@ public class Textured implements Makeup
     }
 
     @Override
+    public void applyGeometry( TransformationData src )
+    {
+    }
+
+    @Override
     public List<AbstractProperty<Makeup, ?>> getProperties()
     {
         return properties;

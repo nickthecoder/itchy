@@ -8,7 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.makeup.DynamicMakeup;
+import uk.co.nickthecoder.itchy.makeup.ForwardingMakeup;
 import uk.co.nickthecoder.itchy.makeup.Makeup;
+import uk.co.nickthecoder.itchy.makeup.MakeupPipeline;
+import uk.co.nickthecoder.itchy.makeup.TransformationData;
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
 import uk.co.nickthecoder.itchy.property.DoubleProperty;
 import uk.co.nickthecoder.itchy.property.FontProperty;
@@ -44,18 +47,10 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
     }
 
     private Actor actor;
-    
+
     private Pose pose;
 
-    private int offsetX;
-
-    private int offsetY;
-
     private WorldRectangle worldRectangle;
-
-    private Makeup makeup = new NullMakeup();
-
-    private int previousMakeupChangeId;
 
     /**
      * A scale factor. A value of 1 leaves the appearance unchanged, less than 1 shrinks, greater than 1 scales.
@@ -86,26 +81,73 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
      */
     private Rect clip;
 
+    /**
+     * Contains a cached Surface and the offset x,y after applying the transformations in the pipeline. If there are no transformations,
+     * then this will be Pose itself.
+     */
+    private OffsetSurface processedSurface;
+
+    /**
+     * We need to know if our processed surface was generated from the pose's current surface (which might change). We do this by asking
+     * pose for a change ID when we process the surface. Later, we ask for the change ID again, and if it is the same, then we know that the
+     * cached processed surface was generated from the pose's current surface.
+     */
+    private int previousPoseChangeId = -1;
+
+    /**
+     * We need to know if the cached image in processedSurface is valid. i.e. we need to know if the transformations (Makeup) have changed
+     * since we last created the surface. We do this by asking the pipe line for a change id when we process the image. We then ask the
+     * pipeline for the id again, and if it is the same, then our cached surface is valid, so doesn't need to be recreated.
+     */
+    private int previousPipelineChangeId;
+
+    /**
+     * The pose can be transformed in many ways before appearing on the screen. Possible transformations include scaling, rotating,
+     * colouring and applying arbitrary Makeup, such as a Shadow. The pipeline is an ordered list of transformations (Makeup), which are
+     * applied in sequence.
+     * <p>
+     * The pipeline is usually made up of the following items :
+     * <p>
+     * {@link #clipMakeup}, {@link #normalMakeup}, {@link #rotateAndScaleMakeup} and {@link #colorizeMakeup}.
+     * <p>
+     * Advanced game writers may choose to alter this pipeline. For example, you may want to apply the clip after the normalMakeup, (in
+     * which case, you would remove it from the list, and then add it at index #1).
+     * <p>
+     * Another example: If your game is on a hex grid, you might want your actors to rotate in jumps of 60 degrees. In which case, you would
+     * replace the rotateAndScaleMakeup with a customised version.
+     * <p>
+     * Note that {@link #normalMakeup} is NOT the same as {@link getMakeup()}. normalMakeup is a wrapper around the result of getMakeup().
+     * This lets you call setMakeup(x), without having to remove the old makeup from the pipeline, and adding the new one back into the
+     * correct place.
+     * <p>
+     * rotateAndScaleMakeup is a single item because scale and rotate are done in a single operation. however, if no rotation is needed,
+     * then rotateAndScaleMakeup will use {@link #scaleMakeup} to perform the transformation.
+     */
+    public final MakeupPipeline pipeline;
+
     public Appearance( Pose pose )
     {
         this.pose = pose;
-        this.processing = null;
+        this.processedSurface = null;
 
         this.direction = 0;
         this.scale = 1;
         this.alpha = 255;
         this.colorize = null;
         this.worldRectangle = null;
+
+        this.pipeline = new MakeupPipeline();
+        this.pipeline.add(this.clipMakeup);
+        this.pipeline.add(this.normalMakeup);
+        this.pipeline.add(this.rotateAndScaleMakeup);
+        this.pipeline.add(this.colorizeMakeup);
+        pose.attach(this);
     }
 
     void setActor( Actor actor )
     {
         assert this.actor == null : "An Appearance cannot be shared by more than one Actor";
         this.actor = actor;
-
-        this.worldRectangle = new WorldRectangle(this.actor.getX() - this.pose.getOffsetX(),
-            this.actor.getY() - this.pose.getOffsetY(), this.pose.getSurface().getWidth(),
-            this.pose.getSurface().getHeight());
     }
 
     public Actor getActor()
@@ -120,7 +162,8 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
 
     public void setPose( Pose pose )
     {
-        this.clearCachedSurface();
+        pose.attach(this);
+        invalidateShape();
         this.pose = pose;
     }
 
@@ -143,27 +186,27 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
 
     public void setMakeup( Makeup makeup )
     {
-        this.clearCachedSurface();
-        this.makeup = makeup;
+        this.normalMakeup.setMakeup(makeup);
+        invalidateShape();
     }
 
     public Makeup getMakeup()
     {
-        return this.makeup;
+        return this.normalMakeup.getMakeup();
     }
 
     @Override
     public int getOffsetX()
     {
         this.ensureOk();
-        return this.offsetX;
+        return this.processedSurface.getOffsetX();
     }
 
     @Override
     public int getOffsetY()
     {
         this.ensureOk();
-        return this.offsetY;
+        return this.processedSurface.getOffsetY();
     }
 
     @Property(label = "Alpha")
@@ -176,7 +219,6 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
     {
         if (this.alpha != alpha) {
             this.alpha = alpha;
-            this.clearCachedSurface();
         }
     }
 
@@ -194,7 +236,8 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
     public void setColorize( RGBA color )
     {
         this.colorize = color;
-        this.clearCachedSurface();
+        this.colorizeMakeup.changed();
+        invalidateShape();
     }
 
     @Property(label = "Direction")
@@ -212,7 +255,8 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
     {
         if (this.direction != degrees) {
             this.direction = degrees;
-            this.clearCachedSurface();
+            this.rotateAndScaleMakeup.changed();
+            invalidateShape();
         }
     }
 
@@ -223,8 +267,7 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
 
     public void adjustDirection( double degrees )
     {
-        this.direction += degrees;
-        this.clearCachedSurface();
+        setDirection(this.direction + degrees);
     }
 
     public void setDirectionRadians( double radians )
@@ -242,7 +285,9 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
     {
         if (this.scale != value) {
             this.scale = value;
-            this.clearCachedSurface();
+            this.rotateAndScaleMakeup.changed();
+            this.scaleMakeup.changed();
+            invalidateShape();
         }
     }
 
@@ -259,7 +304,7 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
     public void setClip( Rect clip )
     {
         this.clip = clip;
-        this.clearCachedSurface();
+        invalidateShape();
     }
 
     public Rect getClip()
@@ -272,29 +317,41 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
         return this.getWorldRectangle().overlaps(worldRect);
     }
 
-    public void clearCachedSurface()
+    public void invalidateShape()
     {
-        if ((this.processing != null) && (!this.processing.isShared())) {
-            this.processing.getSurface().free();
+        if ((this.processedSurface != null) && (!this.processedSurface.isShared())) {
+            this.processedSurface.getSurface().free();
         }
-        this.processing = null;
+        this.processedSurface = null;
+        this.worldRectangle = null;
+//
+//        if (this.pose instanceof TextPose) {
+//            TextPose tp = (TextPose) this.pose;
+//            System.out.println(tp.getText() + " World rect : " + this.getWorldRectangle());
+//        }
+    }
+
+    public void invalidatePosition()
+    {
         this.worldRectangle = null;
     }
 
     private void ensureOk()
     {
-        if (this.makeup.getChangeId() != this.previousMakeupChangeId) {
-            this.clearCachedSurface();
+        if (this.pipeline.getChangeId() != this.previousPipelineChangeId) {
+            this.invalidateShape();
         }
         if (this.pose.getChangeId() != this.previousPoseChangeId) {
-            this.clearCachedSurface();
+            this.invalidateShape();
         }
-        if (this.processing == null) {
+        if (this.processedSurface == null) {
             this.processSurface();
         }
     }
 
-    private Makeup clipper = new DynamicMakeup()
+    public final ForwardingMakeup normalMakeup = new ForwardingMakeup(new NullMakeup());
+
+    public final DynamicMakeup clipMakeup = new DynamicMakeup()
     {
 
         @Override
@@ -317,20 +374,37 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
                 return new SimpleOffsetSurface(clippedSurface, os.getOffsetX() - rect.x, os.getOffsetY() - rect.y);
             }
         }
+
+        @Override
+        public void applyGeometry( TransformationData src )
+        {
+            if (Appearance.this.clip == null) {
+                return;
+            }
+            Rect rect = new Rect(0, 0, src.width, src.height);
+            rect = Appearance.this.clip.intersection(rect);
+
+            if ((rect.width < 0) || (rect.height < 0)) {
+                src.set(1, 1, 0, 0);
+
+            } else {
+                src.set(rect.width, rect.height, src.offsetX - rect.x, src.offsetY - rect.y);
+            }
+        }
+
     };
 
-    private Makeup rotoZoom = new DynamicMakeup()
+    public final DynamicMakeup rotateAndScaleMakeup = new DynamicMakeup()
     {
         @Override
         public OffsetSurface apply( OffsetSurface os )
         {
             double dirDiff = Appearance.this.direction - Appearance.this.pose.getDirection();
             if (((int) dirDiff) == 0) {
-                return Appearance.this.scaler.apply(os);
+                return Appearance.this.scaleMakeup.apply(os);
             }
 
-            // The rotation will increase the size of the image (as the source is rectangular, not circular).
-            // We will recalculate the new offset relative to the center of the surface.
+            // Find out where the old offset was relative to the CENTER of the image.
             double odx = os.getOffsetX() - os.getSurface().getWidth() / 2.0;
             double ody = os.getOffsetY() - os.getSurface().getHeight() / 2.0;
 
@@ -339,43 +413,63 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
             double dirRadians = dirDiff / 180.0 * Math.PI;
             double cosa = Math.cos(-dirRadians);
             double sina = Math.sin(-dirRadians);
+            // Calculate were (odx,ody) is using the new coordinate system.
             double ndy = odx * sina + ody * cosa;
             double ndx = odx * cosa - ody * sina;
 
             return new SimpleOffsetSurface(
                 rotated,
-                (int) (os.getSurface().getWidth() / 2.0 + ndx * Appearance.this.scale),
-                (int) (os.getSurface().getHeight() / 2.0 + ndy * Appearance.this.scale)
+                (int) (rotated.getWidth() / 2.0 + ndx * Appearance.this.scale),
+                (int) (rotated.getHeight() / 2.0 + ndy * Appearance.this.scale)
             );
+        }
+
+        @Override
+        public void applyGeometry( TransformationData os )
+        {
+            double dirDiff = Appearance.this.direction - Appearance.this.pose.getDirection();
+            if (((int) dirDiff) == 0) {
+                Appearance.this.scaleMakeup.applyGeometry(os);
+                return;
+            }
+
+            // Find out where the old offset was relative to the CENTER of the image.
+            double odx = os.offsetX - os.width / 2.0;
+            double ody = os.offsetY - os.height / 2.0;
+
+            double dirRadians = dirDiff / 180.0 * Math.PI;
+            double cosa = Math.cos(-dirRadians);
+            double sina = Math.sin(-dirRadians);
+
+            // Calculate were (odx,ody) is using the new coordinate system.
+            double ndy = odx * sina + ody * cosa;
+            double ndx = odx * cosa - ody * sina;
+
+            int width = (int) (Math.round(Math.abs(os.width * cosa) + Math.abs(os.height * sina)) * Appearance.this.scale);
+            int height = (int) (Math.round(Math.abs(os.height * cosa) + Math.abs(os.width * sina)) * Appearance.this.scale);
+            os.set(width,
+                height,
+                (int) (width / 2.0 + ndx * Appearance.this.scale),
+                (int) (height / 2.0 + ndy * Appearance.this.scale)
+                );
         }
     };
 
-    private Makeup scaler = new DynamicMakeup()
+    public final DynamicMakeup scaleMakeup = new DynamicMakeup()
     {
         @Override
         public OffsetSurface apply( OffsetSurface os )
         {
             double scale = Appearance.this.scale;
-            
+
             if (scale == 1.0) {
                 return os;
             }
 
             if (scale <= 0) {
-                return new SimpleOffsetSurface( new Surface(1,1,true), 0, 0);
+                return new SimpleOffsetSurface(new Surface(1, 1, true), 0, 0);
             }
 
-            Appearance.this.offsetX *= scale;
-            Appearance.this.offsetY *= scale;
-            int width = (int) (os.getSurface().getWidth() * scale);
-            int height = (int) (os.getSurface().getHeight() * scale);
-
-            if (width <= 0) {
-                width = 1;
-            }
-            if (height <= 0) {
-                height = 1;
-            }
             Surface scaled = os.getSurface().zoom(scale, scale, true);
 
             return new SimpleOffsetSurface(
@@ -384,9 +478,28 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
                 (int) (os.getOffsetY() * scale));
         }
 
+        @Override
+        public void applyGeometry( TransformationData src )
+        {
+            double scale = Appearance.this.scale;
+
+            if (scale == 1.0) {
+                return;
+            }
+
+            if (scale <= 0) {
+                src.set(1, 1, 0, 0);
+                return;
+            }
+
+            int width = (int) (src.width * scale);
+            int height = (int) (src.height * scale);
+            src.set(width, height, (int) (src.offsetX * scale), (int) (src.offsetY * scale));
+        }
+
     };
 
-    private Makeup colorizer = new DynamicMakeup()
+    public final DynamicMakeup colorizeMakeup = new DynamicMakeup()
     {
         @Override
         public OffsetSurface apply( OffsetSurface os )
@@ -406,11 +519,16 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
 
             return new SimpleOffsetSurface(result, os.getOffsetX(), os.getOffsetY());
         }
+
+        @Override
+        public void applyGeometry( TransformationData src )
+        {
+        }
     };
 
     public ClassName getMakeupClassName()
     {
-        return getMakeupClassName(this.makeup);
+        return getMakeupClassName(this.normalMakeup.getMakeup());
     }
 
     public static ClassName getMakeupClassName( Makeup makeup )
@@ -423,73 +541,45 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
         // }
     }
 
-    public static OffsetSurface applyMakeup( Makeup makeup, OffsetSurface src )
-    {
-        OffsetSurface result = makeup.apply(src);
-
-        if ((!src.isShared()) && (src.getSurface() != result.getSurface())) {
-            src.getSurface().free();
-        }
-        return result;
-    }
-
-    private OffsetSurface processing;
-    
-    private int previousPoseChangeId = -1;
-    
     private void processSurface()
     {
-        processing = this.pose;
         this.previousPoseChangeId = this.pose.getChangeId();
-        
-        try {
+        this.previousPipelineChangeId = this.pipeline.getChangeId();
 
-            processing = applyMakeup(this.clipper, processing);
-            processing = applyMakeup(this.makeup, processing);
-            this.previousMakeupChangeId = this.makeup.getChangeId();
-
-            processing = applyMakeup(this.rotoZoom, processing);
-            processing = applyMakeup(this.colorizer, processing);
-
-            this.offsetX = processing.getOffsetX();
-            this.offsetY = processing.getOffsetY();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+        this.processedSurface = this.pipeline.apply(this.pose);
     }
 
     @Override
     public Surface getSurface()
     {
         this.ensureOk();
-        return this.processing.getSurface();
-    }
-
-    public void onMoved()
-    {
-        this.worldRectangle = null;
+        return this.processedSurface.getSurface();
     }
 
     public WorldRectangle getWorldRectangle()
     {
-        // MORE Calc the rectangle without needing to redraw the surface
-        // If available, give the surface's rectangle
-        // otherwise
-        // if rotated
-        // calculate the radius of the bounding circle for width and height
-        // otherwise
-        // use the base surfaces for the width and height
-        // Scale the width and height if needed and center it.
         if (this.worldRectangle == null) {
-            this.ensureOk();
 
-            this.worldRectangle = new WorldRectangle(
-                this.actor.getX() - this.offsetX,
-                this.actor.getY() + this.offsetY - this.processing.getSurface().getHeight(),
-                this.processing.getSurface().getWidth(),
-                this.processing.getSurface().getHeight());
+            if (this.processedSurface == null) {
+
+                TransformationData data = new TransformationData();
+                data.set(this.pose.getSurface().getWidth(), this.pose.getSurface().getHeight(),
+                    this.pose.getOffsetX(), this.pose.getOffsetY());
+                this.pipeline.applyGeometry(data);
+                this.worldRectangle = new WorldRectangle(
+                    this.actor.getX() - data.offsetX,
+                    this.actor.getY() - data.offsetY,
+                    data.width,
+                    data.height
+                    );
+
+            } else {
+                this.worldRectangle = new WorldRectangle(
+                    this.actor.getX() - this.processedSurface.getOffsetX(),
+                    this.actor.getY() + this.processedSurface.getOffsetY() - this.processedSurface.getSurface().getHeight(),
+                    this.processedSurface.getSurface().getWidth(),
+                    this.processedSurface.getSurface().getHeight());
+            }
         }
         return this.worldRectangle;
     }

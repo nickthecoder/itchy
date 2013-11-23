@@ -12,7 +12,18 @@ import uk.co.nickthecoder.itchy.property.PropertySubject;
 
 public interface Makeup extends PropertySubject<Makeup>
 {
+    /**
+     * Transform the source surface, which may or may not change the offsets
+     * @param src The source to be transformed.
+     */
     public OffsetSurface apply( OffsetSurface src );
+    
+    /**
+     * Updates the geometric that would occur if this makeup would actually be applied.
+     * @param src
+     * @return If the geometry is unchanged, then will be the save as the source.
+     */
+    public void applyGeometry( TransformationData src );
     
     public int getChangeId();
 }

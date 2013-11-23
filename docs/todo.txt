@@ -1,13 +1,13 @@
     
 TODO
 ====
-    
-DrunkInv surface count going up too quickly - Possibly dead aliens still being rendered (still in neighbourhood)
-    Create stats for Actor and Role similar to the Surface stats?
-    
-Makeup and Pose both need to keep inform Appearance that they have changed since Appearance last
-used their image, but solve it in different ways. Pose should do it the same way as Makeup.
 
+To fix the problem with appearance.getWorldRectangle needing rendering images, each Makeup must be able to calc the size and offset as if
+it were applied.
+Either introduce a new method, and have each makeup return a rect and offset.
+OR Create create a DummySurface class which has the same methods, but which all do nothing. We'd need "new" taken care of...
+
+Optimise Explosion by using fixAppearance for projectiles which are turned, but won't rotate.
 
 PACKAGE !!!
 
@@ -22,15 +22,9 @@ Should Game have addStage, rather than letting the list be added to directly?
 
 Is the list of Stages ok?
 
-Fix makeup - creates a new pose from the processed one.
-    Replace border pose decorator. and pose decorator
-    
-
 Send to Asul
 
-Compound Makeup - Need an editor!
-    Maybe I should think bigger and have a full pipeline - multiple inputs (poses and flat colour)
-
+Allow Compound makeups
 Glitter Makeup - sprinkle poses randomly. use getpixel.
 Decoration - Adds a Pose to a given place relative to the actor's x,y.
 Frame - Adds a nine patch.

@@ -16,6 +16,7 @@ import uk.co.nickthecoder.jame.Surface;
 import uk.co.nickthecoder.jame.Surface.BlendMode;
 import uk.co.nickthecoder.jame.TrueTypeFont;
 
+// TODO Wouldn't Shadow be quicker than this?
 public class TextShadow implements Makeup
 {
     private static final List<AbstractProperty<Makeup, ?>> properties =
@@ -97,6 +98,16 @@ public class TextShadow implements Makeup
         return src;
     }
 
+    @Override
+    public void applyGeometry( TransformationData src )
+    {
+        src.set(
+            src.width + this.dx,
+            src.height + this.dy,
+            src.offsetX + (this.dx > 0 ? this.dx : 0),
+            src.offsetY + (this.dy > 0 ? this.dy : 0));
+    }
+    
     @Override
     public List<AbstractProperty<Makeup, ?>> getProperties()
     {

@@ -136,4 +136,18 @@ public class Frame implements Makeup
         return new SimpleOffsetSurface(surface, src.getOffsetX() + this.borderLeft, src.getOffsetY() + this.borderTop);
     }
 
+    @Override
+    public void applyGeometry( TransformationData src )
+    {
+        if (this.ninePatch == null) {
+            return;
+        }
+
+        src.set(
+            src.width + this.borderLeft + this.borderRight,
+            src.height + this.borderTop + this.borderTop,
+            src.offsetX + this.borderLeft,
+            src.offsetY + this.borderTop );
+    }
+
 }

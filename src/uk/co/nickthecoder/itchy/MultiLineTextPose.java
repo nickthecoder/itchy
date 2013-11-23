@@ -33,9 +33,9 @@ public class MultiLineTextPose extends AbstractTextPose
     }
 
     @Override
-    protected void clearSurfaceCache()
+    protected void changedImage()
     {
-        super.clearSurfaceCache();
+        super.changedImage();
 
         if (this.surface != null) {
             this.surface.free();

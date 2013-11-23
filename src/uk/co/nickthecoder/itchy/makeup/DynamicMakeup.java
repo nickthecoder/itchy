@@ -18,7 +18,8 @@ import uk.co.nickthecoder.itchy.property.AbstractProperty;
  */
 public abstract class DynamicMakeup implements Makeup
 {
-
+    protected int changeId = 1;
+    
     @Override
     public List<AbstractProperty<Makeup, ?>> getProperties()
     {
@@ -28,7 +29,12 @@ public abstract class DynamicMakeup implements Makeup
     @Override
     public int getChangeId()
     {
-        return 0;
+        return this.changeId;
+    }
+    
+    public void changed()
+    {
+        this.changeId ++;
     }
 
     @Override

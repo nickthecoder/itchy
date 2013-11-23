@@ -500,13 +500,13 @@ public class Actor implements PropertySubject<Actor>
     public void setX( double x )
     {
         this.x = x;
-        this.appearance.onMoved();
+        this.appearance.invalidatePosition();
     }
 
     public void setY( double y )
     {
         this.y = y;
-        this.appearance.onMoved();
+        this.appearance.invalidatePosition();
     }
 
     public void moveTo( Actor other )
@@ -518,14 +518,14 @@ public class Actor implements PropertySubject<Actor>
     {
         this.x = x;
         this.y = y;
-        this.appearance.onMoved();
+        this.appearance.invalidatePosition();
     }
 
     public void moveBy( double x, double y )
     {
         this.x += x;
         this.y += y;
-        this.appearance.onMoved();
+        this.appearance.invalidatePosition();
     }
 
     public void moveForwards( double amount )

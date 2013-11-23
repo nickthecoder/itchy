@@ -46,4 +46,5 @@ public interface Pose extends OffsetSurface
     @Property(label = "Offset Y")
     public int getOffsetY();
 
+    public void attach(Appearance appearance);
 }

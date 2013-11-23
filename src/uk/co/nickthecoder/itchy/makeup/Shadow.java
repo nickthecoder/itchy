@@ -101,6 +101,16 @@ public class Shadow implements Makeup
     }
 
     @Override
+    public void applyGeometry( TransformationData src )
+    {
+        src.set(
+            src.width + this.dx,
+            src.height + this.dy,
+            src.offsetX + (this.dx > 0 ? this.dx : 0),
+            src.offsetY + (this.dy > 0 ? this.dy : 0));
+    }
+
+    @Override
     public List<AbstractProperty<Makeup, ?>> getProperties()
     {
         return properties;

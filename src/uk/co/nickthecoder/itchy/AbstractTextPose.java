@@ -27,6 +27,8 @@ public abstract class AbstractTextPose implements Pose
     private String text = "";
 
     protected int changeId = 0;
+    
+    protected Appearance appearance;
 
     public AbstractTextPose( Font font, double fontSize )
     {
@@ -50,7 +52,7 @@ public abstract class AbstractTextPose implements Pose
     {
         if (!this.text.equals(text)) {
             this.text = text;
-            this.clearSurfaceCache();
+            changedShape();
         }
     }
 
@@ -64,7 +66,7 @@ public abstract class AbstractTextPose implements Pose
         if (this.font != font) {
             this.font = font;
             this.ttf = null;
-            this.clearSurfaceCache();
+            changedShape();
         }
     }
 
@@ -89,7 +91,7 @@ public abstract class AbstractTextPose implements Pose
     {
         if ((int) this.fontSize != (int) fontSize) {
             this.ttf = null;
-            this.clearSurfaceCache();
+            changedShape();
         }
         this.fontSize = fontSize;
     }
@@ -102,7 +104,7 @@ public abstract class AbstractTextPose implements Pose
     public void setColor( RGBA color )
     {
         this.color = color;
-        this.clearSurfaceCache();
+        changedImage();
     }
 
     /*
@@ -127,6 +129,7 @@ public abstract class AbstractTextPose implements Pose
         }
         this.xAlignment = xAlignment;
         this.changeId += 1;
+        changedShape();
     }
 
     public double getYAlignment()
@@ -141,6 +144,7 @@ public abstract class AbstractTextPose implements Pose
         }
         this.yAlignment = yAlignment;
         this.changeId += 1;
+        changedShape();
     }
 
     public void setAlignment( double x, double y )
@@ -171,7 +175,16 @@ public abstract class AbstractTextPose implements Pose
 
     public abstract int getHeight();
 
-    protected void clearSurfaceCache()
+    protected void changedShape()
+    {
+        this.changedImage();
+        if (this.appearance != null) {
+            this.appearance.invalidateShape();
+        }
+    }
+
+    
+    protected void changedImage()
     {
         this.changeId++;
     }
@@ -183,5 +196,11 @@ public abstract class AbstractTextPose implements Pose
     public int getChangeId()
     {
         return this.changeId;
+    }
+
+    @Override
+    public void attach( Appearance appearance )
+    {
+        this.appearance = appearance;
     }
 }
