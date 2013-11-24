@@ -10,15 +10,23 @@ package uk.co.nickthecoder.itchy.makeup;
 import java.util.Collections;
 import java.util.List;
 
+import uk.co.nickthecoder.itchy.Appearance;
 import uk.co.nickthecoder.itchy.OffsetSurface;
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
 
 /**
  * Used internally by Appearance, has no properties, and always returns the same change id.
  */
-public abstract class DynamicMakeup implements Makeup
+public abstract class BuiltInMakeup implements Makeup
 {
     protected int changeId = 1;
+    
+    protected Appearance appearance;
+    
+    public BuiltInMakeup( Appearance appearance )
+    {
+        this.appearance = appearance;
+    }
     
     @Override
     public List<AbstractProperty<Makeup, ?>> getProperties()

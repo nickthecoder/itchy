@@ -1,7 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0 which accompanies this
- * distribution, and is available at http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
@@ -33,89 +32,104 @@ import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 import uk.co.nickthecoder.jame.event.QuitEvent;
 
+/**
+ * Game is one of the core classes within Itchy, it is the cenral point around which all the other pieces work. As a games designer, you do
+ * not create a Game object directly, it is created automatically when the {@link Resources} are loaded.
+ * <p>
+ * A game consists of a set of {@link Stage} objects (typically {@link ZOrderStage}), and on each Stage, there live a set of {@link Actor}
+ * objects. The Actors are things like spaceships, bullets and even the scenery. How the actors move and interact is defined by their
+ * {@link Role}. Most of you game's code will probably be a type of Role.
+ * <p>
+ * A game needs to display the stage and its actors on the screen, and that is done via a {@link View} (a {@link StageView} in fact). Each
+ * stage normally has one view, but there could be more. For example, you could split the screen down the middle for a two player game, and
+ * there would be one Stage with two Views of it (one for each player).
+ * <p>
+ * The Game, in partnership with its {@link Director}, is responsible for coordinating all of these pieces. Each frame (sixty times a
+ * second), the game's {@link #tick()} method is called. This will call every Actor's Role's {@link Role#tick()} method, and it is the
+ * Role's tick method that moves actors. The {@link SceneDesigner}'s tick method is also called once every frame.
+ * <p>
+ * After all the ticking has taken place, its time to draw to the screen. Every View is rendered (drawn), and what you see on the screen is
+ * the combination of all of the views. You can think of views as a stack of transparent plastic stacked one on top of another. Each view
+ * may have only a small part of the final picture.
+ * <p>
+ */
 public class Game
 {
-    /**
-     * Used internally when creating the Game object, and when using scripted game code, rather than
-     * Java code.
-     */
-    protected Director director;
-
     /**
      * Holds all of the images, sounds, fonts, animations costumes etc used by this game.
      */
     public final Resources resources;
 
     /**
-     * Holds the tag information for all of the Actors used within this game. This isn't typically
-     * used directly, but instead used via {@link AbstractRole#allByTag(String)},
-     * {@link AbstractRole#hasTag(String)}, {@link AbstractRole#addTag(String)} and
+     * The overall controller of the game, but ironically, it often has very little to do, as most of the game logic is inside each Actor's
+     * {@link Role}. Also, each scene can have its own {@link SceneDirector} which controls a single scene. This leaves very little for
+     * Director to do in most cases.
+     */
+    private Director director;
+
+    /**
+     * Holds the tag information for all of the Actors used within this game. This isn't typically used directly, but instead used via
+     * {@link AbstractRole#allByTag(String)}, {@link AbstractRole#hasTag(String)}, {@link AbstractRole#addTag(String)} and
      * {@link AbstractRole#removeTag(String)}.
      */
     public final TagCollection<Role> roleTags = new TagCollection<Role>();
 
-    // TODO Public?
-    public List<Actor> actors = new LinkedList<Actor>();
+    private List<Actor> actors = new LinkedList<Actor>();
 
     /**
-     * Helps to implement a pause feature within your game. Typically, you will pause/unpause from
-     * your game's {@link SceneDirector#onKeyDown(KeyboardEvent)} :
-     * <code>myGame.pause.togglePause();</code>
+     * Helps to implement a pause feature within your game. Typically, you will pause/unpause from your game's
+     * {@link SceneDirector#onKeyDown(KeyboardEvent)}
      */
     public Pause pause;
 
     /**
-     * Holds data about this game that is stored for use then next time the game is run. For
-     * example, it can be used to store high scores.
+     * Holds data about this game that is stored for use then next time the game is run. For example, it can be used to store high scores.
      */
     private AutoFlushPreferences preferences;
 
-    private CompoundView<View> allViews;
+    private CompoundView allViews;
 
-    protected CompoundView<View> gameViews;
+    private CompoundView gameViews;
 
-    protected List<Stage> stages;
+    private List<Stage> stages;
 
-    protected RGBAView background;
+    private RGBAView background;
 
-    protected ZOrderStage glassStage;
+    private ZOrderStage glassStage;
 
-    protected StageView glassView;
+    private StageView glassView;
 
     /**
      * A list of all the objects that need to know when a mouse is clicked or moved.
      */
-    protected List<MouseListener> mouseListeners;
+    private List<MouseListener> mouseListeners;
 
     /**
      * A list of all the objects that need to know when a key is pressed.
      */
-    protected List<KeyListener> keyListeners;
+    private List<KeyListener> keyListeners;
 
     /**
-     * The mouse can be captured for a period of time, which ensures mouse events are only sent to
-     * itself. For example, if you are dragging an object, you may not want any other objects from
-     * receiving the mouse-move event.
+     * The mouse can be captured for a period of time, which ensures mouse events are only sent to itself. For example, if you are dragging
+     * an object, you may not want any other objects from receiving the mouse-move event.
      */
     private MouseListener mouseOwner;
 
     /**
-     * The modalListener is give all mouse and keyboard events, and no other listeners hear about
-     * them. This is used for a "modal" popup window. i.e. a window which takes over the whole game,
-     * and doesn't let the user do anything else until it is dismissed.
+     * The modalListener is give all mouse and keyboard events, and no other listeners hear about them. This is used for a "modal" popup
+     * window. i.e. a window which takes over the whole game, and doesn't let the user do anything else until it is dismissed.
      */
     private InputListener modalListener;
 
     /**
-     * Which component has the focus - used within the GUI subsystem to highlight a single gui
-     * component.
+     * Which component has the focus - used within the GUI subsystem to highlight a single gui component.
      */
     private Focusable keyboardFocus;
 
     /**
-     * The list of all of the windows current shown.
+     * The list of all of the windows currently shown.
      */
-    private CompoundView<GuiView> windows;
+    private GenericCompoundView<GuiView> windows;
 
     /**
      * The current SceneDirector, which was created during {@link #loadScene(String)}
@@ -130,18 +144,33 @@ public class Game
     /**
      * Set when the game is run from the {@link SceneDesigner}.
      */
-    protected boolean testing;
+    private boolean testing;
 
     /**
-     * Defines how GUI components look, such as the images/textures used for the controls, their
-     * margins etc.
+     * Defines how GUI components look, such as the images/textures used for the controls, their margins etc.
      */
     private Stylesheet stylesheet;
 
+    /**
+     * As a game designer, you don't need to know HOW your javascript code is compiled and executed, ScriptManager takes care of that for
+     * you. You can safely ignore this unless you want to help improve Itchy itself.
+     */
     public final ScriptManager scriptManager;
-    
+
+    /**
+     * Controls how the mouse pointer appears while inside the game window. It could be hidden (useful for games which don't use a mouse),
+     * appear as a regular mouse pointer, or look a bit more flashy. The mouse is given special status, as its MousePointer always receives
+     * mouse events, event if something else has captured the mouse.
+     */
     public Mouse mouse = new SimpleMouse();
 
+    /**
+     * Game constructor called when the resources are being loaded. Note that not much initialisation can take place yet, as vital
+     * information is missing. For example, the games width and height are unknown. The {@link #init()} method will be called later, to
+     * complete the initialisation.
+     * 
+     * @param resources
+     */
     public Game( Resources resources )
     {
         this.resources = resources;
@@ -156,23 +185,28 @@ public class Game
         this.pause = new SimplePause(this);
     }
 
+    /**
+     * Called just once, soon after the Game is created. Its called as soon as the GameInfo has been read from the resources file. This is
+     * where most of Game's initialisation occurs; it couldn't take place in Game's constructor, because vital information wasn't available
+     * at that time (e.g. the game's width and height weren't known then.
+     */
     public void init()
     {
         Rect displayRect = new Rect(0, 0, getWidth(), getHeight());
 
-        this.allViews = new CompoundView<View>("allViews", displayRect);
+        this.allViews = new CompoundView("allViews", displayRect);
         this.stages = new LinkedList<Stage>();
 
-        // Background
+        // Background view
         this.background = new RGBAView(displayRect, new RGBA(0, 0, 0));
         this.allViews.add(this.background);
 
         // Covered by game views
-        this.gameViews = new CompoundView<View>("gameViews", displayRect);
+        this.gameViews = new CompoundView("gameViews", displayRect);
         this.allViews.add(this.gameViews);
 
         // Covered by GUI Windows
-        this.windows = new CompoundView<GuiView>("windows", displayRect);
+        this.windows = new GenericCompoundView<GuiView>("windows", displayRect);
         this.allViews.add(this.windows);
 
         // Covered by the glass view
@@ -182,12 +216,16 @@ public class Game
         this.allViews.add(this.glassView);
 
         this.addMouseListener(this.allViews);
-
     }
 
+    /**
+     * Called only once, after the resources have been loaded. Do not change directors during the game. Instead, if you want different
+     * behaviour for different parts of the game, then use different SceneDirectors to code each part of the game.
+     * 
+     * @param director
+     */
     public void setDirector( Director director )
     {
-        assert( director == null );
         this.director = director;
         this.director.attach(this);
 
@@ -205,7 +243,7 @@ public class Game
         return this.background;
     }
 
-    public CompoundView<View> getGameViews()
+    public CompoundView getGameViews()
     {
         return this.gameViews;
     }
@@ -221,8 +259,7 @@ public class Game
     }
 
     /**
-     * Called soon after a Game is created and also when a Game creates another Game, and the second
-     * Game ends (reactivating the first one).
+     * Called soon after a Game is created and also when a Game creates another Game, and the second Game ends (reactivating the first one).
      */
     public void onActivate()
     {
@@ -260,8 +297,7 @@ public class Game
     }
 
     /**
-     * Typically, this is called immediately the Game object is created, usually from the "main"
-     * method.
+     * Typically, this is called immediately the Game object is created, usually from the "main" method.
      */
     public void start()
     {
@@ -274,8 +310,8 @@ public class Game
     }
 
     /**
-     * The same as {@link #start()}, but named scene is started instead of the default scene. This
-     * can be useful during development to jump to a particular scene.
+     * The same as {@link #start()}, but named scene is started instead of the default scene. This can be useful during development to jump
+     * to a particular scene.
      * 
      * @param sceneName
      */
@@ -327,9 +363,8 @@ public class Game
     }
 
     /**
-     * Called by the SceneDesigner, to test a single scene. Essentially the same as
-     * {@link #start(String)}, but also sets the boolean <code>testing</code>, so that the game
-     * knows its in testing mode.
+     * Called by the SceneDesigner, to test a single scene. Essentially the same as {@link #start(String)}, but also sets the boolean
+     * <code>testing</code>, so that the game knows its in testing mode.
      * 
      * @param sceneName
      *        The name of the scene to play.
@@ -360,13 +395,11 @@ public class Game
     }
 
     /**
-     * Preferences contain permanently stored data (i.e. its still there when you wuit the game and
-     * restart it days later). The data is stored in a hierarchy of nodes. Each node has a set of
-     * name/value pairs, just like HashMap. Each node can also have named sub-nodes (which gives it
-     * the hierarchical structure).
+     * Preferences contain permanently stored data (i.e. its still there when you wuit the game and restart it days later). The data is
+     * stored in a hierarchy of nodes. Each node has a set of name/value pairs, just like HashMap. Each node can also have named sub-nodes
+     * (which gives it the hierarchical structure).
      * 
-     * @return The top level node preferences for this game. The path of this node is determined by
-     *         {@link #getPreferenceNode()}.
+     * @return The top level node preferences for this game. The path of this node is determined by {@link #getPreferenceNode()}.
      */
     public AutoFlushPreferences getPreferences()
     {
@@ -377,9 +410,8 @@ public class Game
     }
 
     /**
-     * Gets the root node for this game. Note, unlike {@link #getPreferences()}, the return
-     * Preferences are not AutoFlushPreferences, you will need to call 'flush' to commit each of the
-     * changes.
+     * Gets the root node for this game. Note, unlike {@link #getPreferences()}, the return Preferences are not AutoFlushPreferences, you
+     * will need to call 'flush' to commit each of the changes.
      * 
      * @return The top level preferences node for this game.
      */
@@ -402,17 +434,20 @@ public class Game
     }
 
     /**
-     * Get the top-level CompoundLayer, which holds all of the sub-layers. The sub-layers are the
-     * ones that Actors will be added to. Note that the pop-up layer is NOT part of the hierarchy,
-     * it is above all these.
+     * Returns the views that are under your control. Add to this compound view from your Director's onStarted method. This CompoundView
+     * does not include the background view ({@link #getBackground()}), nor any pop-up windows, nor the glass view ({@link #getGlassView()}
+     * ), which is the top most view.
      */
-    public CompoundView<View> getViews()
+    public CompoundView getViews()
     {
         return this.gameViews;
     }
 
     /**
-     * @return The glass stage are draw above all of the game's regular layers.
+     * The glass stage is used when you want something that absolutely must be above the regular game views. For example, you could use this
+     * to add some debugging information, such as the frames per second. You shouldn't use it for regular actors.
+     * 
+     * @return The glass stage, who's view is draw above all of the game's regular views.
      */
     public ZOrderStage getGlassStage()
     {
@@ -420,7 +455,7 @@ public class Game
     }
 
     /**
-     * @return The glass view are draw above all of the game's regular layers.
+     * The glass view is drawn above all of the game's regular views. It is a view of the stage returned by {@link #getGlassStage()}.
      */
     public StageView getGlassView()
     {
@@ -428,16 +463,14 @@ public class Game
     }
 
     /**
-     * Renders all of the layers (including the popup layer) to the display surface.
+     * Renders all of the views to the display surface.
      * 
-     * Itchy will call this from inside the game loop, so there is normally no need for you to call
-     * it explicitly. You may call this with a surface of your creation to obtain a screenshot of
-     * the game. {@link SceneTransition} takes screenshots in this manner, which are then slid, or
-     * faded from view.
+     * Itchy will call this from inside the game loop, so there is normally no need for you to call it explicitly. However, you may call
+     * this with a surface of your creation to obtain a screenshot of the game. {@link SceneTransition} takes screenshots in this manner,
+     * which are then slid, or faded from view.
      * 
      * @param display
-     *        The surface to draw onto. This will normally be the display surface, but can be any
-     *        surface.
+     *        The surface to draw onto. This will normally be the display surface, but can be any surface.
      */
     public void render( Surface display )
     {
@@ -446,9 +479,9 @@ public class Game
     }
 
     /**
-     * Use this to time actual game play, which will exclude time while the game is paused. A single
-     * value from gameTimeMillis is meaningless, it only hasr meaning when one value is
-     * subtracted from a later value (which will give the number of milliseconds of game time.
+     * Use this to time actual game play, which will exclude time while the game is paused. A single value from gameTimeMillis is
+     * meaningless, it only has meaning when one value is subtracted from a later value (which will give the number of milliseconds of game
+     * elapse time.
      */
     public long gameTimeMillis()
     {
@@ -460,10 +493,7 @@ public class Game
     }
 
     /**
-     * Itchy passes every event through the current game's processEvent method. You shouldn't call
-     * this method directly, or override it. If you need to handle events at the Game level, then
-     * override onKeyDown, onKeyUp, onMouseMove, onMouseDown, onMouseUp etc, and leave this method
-     * well alone!
+     * Itchy passes every event through the current game's processEvent method. You should NOT call this method directly.
      * 
      * @param event
      *        The event that needs to be handled.
@@ -532,7 +562,7 @@ public class Game
                 if (this.mouse.getMousePointer() != null) {
                     this.mouse.getMousePointer().onMouseDown(mbe);
                 }
-                
+
                 if (this.mouseOwner == null) {
 
                     if (this.modalListener == null) {
@@ -553,7 +583,7 @@ public class Game
             }
 
             if (mbe.isReleased()) {
-                
+
                 if (this.mouse.getMousePointer() != null) {
                     this.mouse.getMousePointer().onMouseUp(mbe);
                 }
@@ -581,7 +611,7 @@ public class Game
 
         if (event instanceof MouseMotionEvent) {
             MouseMotionEvent mme = (MouseMotionEvent) event;
-            
+
             if (this.mouse.getMousePointer() != null) {
                 this.mouse.getMousePointer().onMouseMove(mme);
             }
@@ -628,8 +658,8 @@ public class Game
     }
 
     /**
-     * Prevents mouse events going to any other MouseListeners, other than the one specified, until
-     * {@link #releaseMouse(MouseListener)} is called.
+     * Prevents mouse events going to any other MouseListeners, other than the one specified, until {@link #releaseMouse(MouseListener)} is
+     * called.
      * 
      */
     public void captureMouse( MouseListener owner )
@@ -639,8 +669,7 @@ public class Game
     }
 
     /**
-     * The flip side of {@link #captureMouse(MouseListener)}. MouseListeners will receive mouse
-     * events as normal.
+     * The flip side of {@link #captureMouse(MouseListener)}. MouseListeners will receive mouse events as normal.
      * 
      * @param owner
      */
@@ -656,9 +685,8 @@ public class Game
     }
 
     /**
-     * Used when a single entity believes it deserves first priority to all key strokes. In
-     * particular, this is used by GUI components, which accept keyboard input when they have the
-     * focus.
+     * Used when a single entity believes it deserves first priority to all key strokes. In particular, this is used by GUI components,
+     * which accept keyboard input when they have the focus.
      */
     public void setFocus( Focusable focus )
     {
@@ -666,8 +694,8 @@ public class Game
     }
 
     /**
-     * @return The width of the Game's display in pixels, taken from the {@link GameInfo}, which is
-     *         stored in the game's {@link Resources} file.
+     * @return The width of the Game's display in pixels, taken from the {@link GameInfo}, which is stored in the game's {@link Resources}
+     *         file.
      */
     public int getWidth()
     {
@@ -675,8 +703,8 @@ public class Game
     }
 
     /**
-     * @return The height of the Game's display in pixels, taken from the {@link GameInfo}, which is
-     *         stored in the game's {@link Resources} file.
+     * @return The height of the Game's display in pixels, taken from the {@link GameInfo}, which is stored in the game's {@link Resources}
+     *         file.
      */
     public int getHeight()
     {
@@ -684,8 +712,8 @@ public class Game
     }
 
     /**
-     * @return The title of the Game, as it should appear in the window's title bar. This is taken
-     *         from the {@link GameInfo}, which is stored in the game's {@link Resources} file.
+     * @return The title of the Game, as it should appear in the window's title bar. This is taken from the {@link GameInfo}, which is
+     *         stored in the game's {@link Resources} file.
      */
     public String getTitle()
     {
@@ -729,8 +757,8 @@ public class Game
     }
 
     /**
-     * Asks the Director to start the scene. The director will (probably) un-pause the game, clear
-     * the game of all Actors, and then load the scene.
+     * Asks the Director to start the scene. The director will (probably) un-pause the game, clear the game of all Actors, and then load the
+     * scene.
      * 
      * @param sceneName
      *        The name of the scene to start.
@@ -800,10 +828,9 @@ public class Game
     }
 
     /**
-     * Called to end the game, which will usually end the whole program. The program will not end,
-     * if one Game creates and runs another Game, and then this second Game ends, in this case, the
-     * first Game will take back control, and the program will continue. Note that the Editor is a
-     * Game, so when the Editor ends, this is exactly what is happens.
+     * Called to end the game, which will usually end the whole program. The program will not end, if one Game creates and runs another
+     * Game, and then this second Game ends, in this case, the first Game will take back control, and the program will continue. Note that
+     * the Editor is a Game, so when the Editor ends, this is exactly what is happens.
      * 
      * You may override end, as long as you call super.end() at the end of your overridden method.
      */

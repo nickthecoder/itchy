@@ -7,7 +7,11 @@ package uk.co.nickthecoder.itchy;
 import java.util.ArrayList;
 import java.util.List;
 
-import uk.co.nickthecoder.itchy.makeup.DynamicMakeup;
+import uk.co.nickthecoder.itchy.makeup.BuiltInClip;
+import uk.co.nickthecoder.itchy.makeup.BuiltInColorize;
+import uk.co.nickthecoder.itchy.makeup.BuiltInMakeup;
+import uk.co.nickthecoder.itchy.makeup.BuiltInRotoZoom;
+import uk.co.nickthecoder.itchy.makeup.BuiltInScale;
 import uk.co.nickthecoder.itchy.makeup.ForwardingMakeup;
 import uk.co.nickthecoder.itchy.makeup.Makeup;
 import uk.co.nickthecoder.itchy.makeup.MakeupPipeline;
@@ -23,7 +27,6 @@ import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.jame.RGBA;
 import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.Surface;
-import uk.co.nickthecoder.jame.Surface.BlendMode;
 
 public final class Appearance implements OffsetSurface, PropertySubject<Appearance>
 {
@@ -124,6 +127,16 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
      * then rotateAndScaleMakeup will use {@link #scaleMakeup} to perform the transformation.
      */
     public final MakeupPipeline pipeline;
+
+    public final ForwardingMakeup normalMakeup = new ForwardingMakeup(new NullMakeup());
+
+    public final BuiltInMakeup clipMakeup = new BuiltInClip(this);
+
+    public final BuiltInMakeup rotateAndScaleMakeup = new BuiltInRotoZoom(this);
+
+    public final BuiltInMakeup scaleMakeup = new BuiltInScale(this);
+
+    public final BuiltInMakeup colorizeMakeup = new BuiltInColorize(this);
 
     public Appearance( Pose pose )
     {
@@ -324,11 +337,7 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
         }
         this.processedSurface = null;
         this.worldRectangle = null;
-//
-//        if (this.pose instanceof TextPose) {
-//            TextPose tp = (TextPose) this.pose;
-//            System.out.println(tp.getText() + " World rect : " + this.getWorldRectangle());
-//        }
+
     }
 
     public void invalidatePosition()
@@ -348,183 +357,6 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
             this.processSurface();
         }
     }
-
-    public final ForwardingMakeup normalMakeup = new ForwardingMakeup(new NullMakeup());
-
-    public final DynamicMakeup clipMakeup = new DynamicMakeup()
-    {
-
-        @Override
-        public OffsetSurface apply( OffsetSurface os )
-        {
-            if (Appearance.this.clip == null) {
-                return os;
-            }
-
-            Rect rect = new Rect(0, 0, os.getSurface().getWidth(), os.getSurface().getHeight());
-            rect = Appearance.this.clip.intersection(rect);
-
-            if ((rect.width < 0) || (rect.height < 0)) {
-                return new SimpleOffsetSurface(new Surface(1, 1, true), 0, 0);
-
-            } else {
-                Surface clippedSurface = new Surface(rect.width, rect.height, true);
-                os.getSurface().blit(rect, clippedSurface, 0, 0, BlendMode.COMPOSITE);
-
-                return new SimpleOffsetSurface(clippedSurface, os.getOffsetX() - rect.x, os.getOffsetY() - rect.y);
-            }
-        }
-
-        @Override
-        public void applyGeometry( TransformationData src )
-        {
-            if (Appearance.this.clip == null) {
-                return;
-            }
-            Rect rect = new Rect(0, 0, src.width, src.height);
-            rect = Appearance.this.clip.intersection(rect);
-
-            if ((rect.width < 0) || (rect.height < 0)) {
-                src.set(1, 1, 0, 0);
-
-            } else {
-                src.set(rect.width, rect.height, src.offsetX - rect.x, src.offsetY - rect.y);
-            }
-        }
-
-    };
-
-    public final DynamicMakeup rotateAndScaleMakeup = new DynamicMakeup()
-    {
-        @Override
-        public OffsetSurface apply( OffsetSurface os )
-        {
-            double dirDiff = Appearance.this.direction - Appearance.this.pose.getDirection();
-            if (((int) dirDiff) == 0) {
-                return Appearance.this.scaleMakeup.apply(os);
-            }
-
-            // Find out where the old offset was relative to the CENTER of the image.
-            double odx = os.getOffsetX() - os.getSurface().getWidth() / 2.0;
-            double ody = os.getOffsetY() - os.getSurface().getHeight() / 2.0;
-
-            Surface rotated = os.getSurface().rotoZoom(dirDiff, Appearance.this.scale, true);
-
-            double dirRadians = dirDiff / 180.0 * Math.PI;
-            double cosa = Math.cos(-dirRadians);
-            double sina = Math.sin(-dirRadians);
-            // Calculate were (odx,ody) is using the new coordinate system.
-            double ndy = odx * sina + ody * cosa;
-            double ndx = odx * cosa - ody * sina;
-
-            return new SimpleOffsetSurface(
-                rotated,
-                (int) (rotated.getWidth() / 2.0 + ndx * Appearance.this.scale),
-                (int) (rotated.getHeight() / 2.0 + ndy * Appearance.this.scale)
-            );
-        }
-
-        @Override
-        public void applyGeometry( TransformationData os )
-        {
-            double dirDiff = Appearance.this.direction - Appearance.this.pose.getDirection();
-            if (((int) dirDiff) == 0) {
-                Appearance.this.scaleMakeup.applyGeometry(os);
-                return;
-            }
-
-            // Find out where the old offset was relative to the CENTER of the image.
-            double odx = os.offsetX - os.width / 2.0;
-            double ody = os.offsetY - os.height / 2.0;
-
-            double dirRadians = dirDiff / 180.0 * Math.PI;
-            double cosa = Math.cos(-dirRadians);
-            double sina = Math.sin(-dirRadians);
-
-            // Calculate were (odx,ody) is using the new coordinate system.
-            double ndy = odx * sina + ody * cosa;
-            double ndx = odx * cosa - ody * sina;
-
-            int width = (int) (Math.round(Math.abs(os.width * cosa) + Math.abs(os.height * sina)) * Appearance.this.scale);
-            int height = (int) (Math.round(Math.abs(os.height * cosa) + Math.abs(os.width * sina)) * Appearance.this.scale);
-            os.set(width,
-                height,
-                (int) (width / 2.0 + ndx * Appearance.this.scale),
-                (int) (height / 2.0 + ndy * Appearance.this.scale)
-                );
-        }
-    };
-
-    public final DynamicMakeup scaleMakeup = new DynamicMakeup()
-    {
-        @Override
-        public OffsetSurface apply( OffsetSurface os )
-        {
-            double scale = Appearance.this.scale;
-
-            if (scale == 1.0) {
-                return os;
-            }
-
-            if (scale <= 0) {
-                return new SimpleOffsetSurface(new Surface(1, 1, true), 0, 0);
-            }
-
-            Surface scaled = os.getSurface().zoom(scale, scale, true);
-
-            return new SimpleOffsetSurface(
-                scaled,
-                (int) (os.getOffsetX() * scale),
-                (int) (os.getOffsetY() * scale));
-        }
-
-        @Override
-        public void applyGeometry( TransformationData src )
-        {
-            double scale = Appearance.this.scale;
-
-            if (scale == 1.0) {
-                return;
-            }
-
-            if (scale <= 0) {
-                src.set(1, 1, 0, 0);
-                return;
-            }
-
-            int width = (int) (src.width * scale);
-            int height = (int) (src.height * scale);
-            src.set(width, height, (int) (src.offsetX * scale), (int) (src.offsetY * scale));
-        }
-
-    };
-
-    public final DynamicMakeup colorizeMakeup = new DynamicMakeup()
-    {
-        @Override
-        public OffsetSurface apply( OffsetSurface os )
-        {
-            if (Appearance.this.colorize == null) {
-                return os;
-            }
-
-            Surface colorSurface = new Surface(os.getSurface().getWidth(), os.getSurface().getHeight(), true);
-            Surface result = os.getSurface();
-            // if (os.isShared()) {
-            result = result.copy();
-            // }
-            colorSurface.fill(Appearance.this.colorize);
-            colorSurface.blit(result);
-            colorSurface.free();
-
-            return new SimpleOffsetSurface(result, os.getOffsetX(), os.getOffsetY());
-        }
-
-        @Override
-        public void applyGeometry( TransformationData src )
-        {
-        }
-    };
 
     public ClassName getMakeupClassName()
     {

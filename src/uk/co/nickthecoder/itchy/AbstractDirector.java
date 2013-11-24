@@ -39,10 +39,10 @@ public abstract class AbstractDirector implements Director
         Rect screenRect = new Rect(0, 0, this.game.getWidth(), this.game.getHeight());
 
         this.mainStage = new ZOrderStage("main");
-        this.game.stages.add(this.mainStage);
+        this.game.getStages().add(this.mainStage);
 
         this.mainView = new StageView(screenRect, this.mainStage);
-        this.game.gameViews.add(this.mainView);
+        this.game.getGameViews().add(this.mainView);
 
         this.mainView.enableMouseListener(this.game);
     }

@@ -316,15 +316,16 @@ public class Resources extends Loadable
     }
 
     /**
-     * @return The default font. At the moment this is a randomly picked font!
+     * @return The default font. At the moment this is a randomly picked font! Null if there are no fonts.
      */
     public Font getDefaultFont()
     {
-        FontResource fr = this.fonts.values().iterator().next();
-        if (fr == null) {
+        try {
+            FontResource fr = this.fonts.values().iterator().next();
+            return fr.font;
+        } catch (Exception e) {
             return null;
         }
-        return fr.font;
     }
 
     // Poses

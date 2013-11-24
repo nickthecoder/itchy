@@ -10,7 +10,7 @@ import java.util.List;
 import uk.co.nickthecoder.itchy.AbstractRole;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Appearance;
-import uk.co.nickthecoder.itchy.CompoundView;
+import uk.co.nickthecoder.itchy.GenericCompoundView;
 import uk.co.nickthecoder.itchy.Costume;
 import uk.co.nickthecoder.itchy.CostumeResource;
 import uk.co.nickthecoder.itchy.Font;
@@ -89,7 +89,7 @@ public class SceneDesigner implements MouseListener, KeyListener
 
     private Scene scene;
 
-    private CompoundView<StageView> designViews;
+    private GenericCompoundView<StageView> designViews;
 
     private StageView currentStageView;
 
@@ -177,7 +177,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         createToolbar();
 
         Rect wholeRect = new Rect(0, 0, this.editor.getWidth(), this.editor.getHeight());
-        this.designViews = new CompoundView<StageView>("designViews", wholeRect);
+        this.designViews = new GenericCompoundView<StageView>("designViews", wholeRect);
 
         Rect editRect = new Rect(0, this.toolbar.getHeight(), this.editor.getWidth(), this.editor.getHeight() - this.toolbar.getHeight());
 

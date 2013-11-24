@@ -13,7 +13,7 @@ import uk.co.nickthecoder.itchy.AbstractDirector;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.ActorCollisionStrategy;
 import uk.co.nickthecoder.itchy.Role;
-import uk.co.nickthecoder.itchy.CompoundView;
+import uk.co.nickthecoder.itchy.GenericCompoundView;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Launcher;
 import uk.co.nickthecoder.itchy.MultiLineTextPose;
@@ -80,7 +80,7 @@ public class DrunkInvaders extends AbstractDirector
         this.backgroundView = new StageView(screenRect, this.backgroundStage);
         this.backgroundView.centerOn(320, 240);
 
-        CompoundView<View> views = this.game.getGameViews();
+        GenericCompoundView<View> views = this.game.getGameViews();
         views.add(this.backgroundView);
         views.add(this.mainView);
         

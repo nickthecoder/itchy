@@ -83,9 +83,9 @@ public class Scene
 
     private Stage findStage( Game game, String name )
     {
-        Stage best = game.stages.get(0);
+        Stage best = game.getStages().get(0);
         
-        for (Stage stage : game.stages) {
+        for (Stage stage : game.getStages()) {
             if (!stage.isLocked()) {
                 
                 if (name.equals(stage.getName())) {

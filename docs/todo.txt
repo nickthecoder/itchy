@@ -2,10 +2,10 @@
 TODO
 ====
 
-To fix the problem with appearance.getWorldRectangle needing rendering images, each Makeup must be able to calc the size and offset as if
-it were applied.
-Either introduce a new method, and have each makeup return a rect and offset.
-OR Create create a DummySurface class which has the same methods, but which all do nothing. We'd need "new" taken care of...
+Need to allow Makeup appear at any stage in the pipeline from the editor. e.g. a Decoration which should not be rotated with the actor.
+Or a clip done at the end.
+    A tick box "Advanced" will reveal a Compound Makeup as a table, with the standard items as well as the current Makeup if its not Null. 
+
 
 Optimise Explosion by using fixAppearance for projectiles which are turned, but won't rotate.
 
@@ -17,17 +17,12 @@ Update class diagrams (moved extras classes)
 
 Follow up on the TODOs
 
-I've exposed a generic Game.getGameViews (returns CompoundView<View>).
-Should Game have addStage, rather than letting the list be added to directly?
-
-Is the list of Stages ok?
-
 Send to Asul
 
 Allow Compound makeups
 Glitter Makeup - sprinkle poses randomly. use getpixel.
+Sparkle, as glitter, but with animated parts which appear/disappear.
 Decoration - Adds a Pose to a given place relative to the actor's x,y.
-Frame - Adds a nine patch.
 
 Simple convolution filter
     Filters don't need to be square.
