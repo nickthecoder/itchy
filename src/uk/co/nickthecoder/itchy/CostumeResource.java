@@ -17,7 +17,7 @@ public class CostumeResource extends NamedResource
 {
     public static List<AbstractProperty<CostumeResource, ?>> properties = AbstractProperty.findAnnotations(CostumeResource.class);
 
-    private final Costume costume;
+    private Costume costume;
 
     public CostumeResource( Resources resources, String name, Costume costume )
     {
@@ -29,6 +29,11 @@ public class CostumeResource extends NamedResource
     public Costume getCostume()
     {
         return this.costume;
+    }
+    
+    public void setCostume( Costume costume )
+    {
+        this.costume = costume;
     }
     
     public String getExtendedFromName()

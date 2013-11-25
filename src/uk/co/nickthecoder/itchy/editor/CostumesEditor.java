@@ -144,7 +144,6 @@ public class CostumesEditor extends SubEditor<CostumeResource>
     @Override
     protected void createForm()
     {
-
         super.createForm();
 
         final Costume costume = this.currentResource.getCostume();
@@ -270,6 +269,26 @@ public class CostumesEditor extends SubEditor<CostumeResource>
         propertiesPage.addChild(this.propertiesContainer);
         createPropertiesGrid();
 
+    }
+
+    private Costume clonedCostume;
+
+    @Override
+    protected void onCancel()
+    {
+        super.onCancel();
+        if (!this.adding) {
+            this.currentResource.setCostume(this.clonedCostume);
+        }
+    }
+
+    @Override
+    protected void edit( CostumeResource resource, boolean adding )
+    {
+        super.edit(resource, adding);
+        if (! adding) {
+            this.clonedCostume = resource.getCostume().copy(this.editor.resources);
+        }
     }
 
     private void createPropertiesGrid()
@@ -835,38 +854,38 @@ public class CostumesEditor extends SubEditor<CostumeResource>
         }
 
     }
-    
+
     private boolean usedInScenes( CostumeResource costumeResource )
     {
         StringList list = new StringList();
-        
-        MessageBox messageBox = new MessageBox( "Checking All Scenes", "This may take a while" );
+
+        MessageBox messageBox = new MessageBox("Checking All Scenes", "This may take a while");
         messageBox.showNow();
-        
+
         try {
             Resources resources = this.editor.resources;
-            for ( String sceneName : resources.sceneNames()) {
+            for (String sceneName : resources.sceneNames()) {
                 try {
                     SceneResource sr = resources.getSceneResource(sceneName);
                     Scene scene = sr.loadScene();
                     if (scene.uses(costumeResource)) {
-                        list.add( sceneName );
+                        list.add(sceneName);
                     }
                     sr.unloadScene();
-                } catch( Exception e) {
-                    list.add( sceneName+ " (failed to load)");
+                } catch (Exception e) {
+                    list.add(sceneName + " (failed to load)");
                 }
             }
-            
+
         } finally {
             messageBox.hide();
         }
-        
+
         if (!list.isEmpty()) {
-            new MessageBox( "Cannot Delete. Used in scenes...", list.toString()).show();
+            new MessageBox("Cannot Delete. Used in scenes...", list.toString()).show();
         }
-        
-        return ! list.isEmpty();
+
+        return !list.isEmpty();
     }
 
     @Override
@@ -892,6 +911,7 @@ public class CostumesEditor extends SubEditor<CostumeResource>
     {
         Costume costume = new Costume();
         costume.addPose("default", poseResource);
+
         this.edit(new CostumeResource(this.editor.resources, poseResource.getName(), costume), true);
     }
 
@@ -902,7 +922,6 @@ public class CostumesEditor extends SubEditor<CostumeResource>
         costume.addString("default", fontResource.getName());
 
         this.edit(new CostumeResource(this.editor.resources, fontResource.getName(), costume), true);
-
     }
 
     @Override

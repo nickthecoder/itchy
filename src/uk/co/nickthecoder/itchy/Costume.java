@@ -1,7 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0 which accompanies this
- * distribution, and is available at http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
@@ -12,37 +11,38 @@ import java.util.Random;
 import java.util.Set;
 
 import uk.co.nickthecoder.itchy.animation.Animation;
+import uk.co.nickthecoder.itchy.property.AbstractProperty;
 import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.script.ScriptManager;
 import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.jame.Sound;
 
-public class Costume
+public class Costume implements Cloneable
 {
     private static final Random random = new Random();
 
     private Costume extendedFrom;
 
     @Property(label = "Role")
-    public ClassName roleClassName = new ClassName( Role.class, uk.co.nickthecoder.itchy.role.NullRole.class.getName());
+    public ClassName roleClassName = new ClassName(Role.class, uk.co.nickthecoder.itchy.role.NullRole.class.getName());
 
     @Property(label = "Default Z Order")
     public int defaultZOrder;
 
     @Property(label = "Properties")
-    private ClassName propertiesClassName = new ClassName( CostumeProperties.class, CostumeProperties.class.getName());
+    private ClassName propertiesClassName = new ClassName(CostumeProperties.class, CostumeProperties.class.getName());
 
     private CostumeProperties properties = new CostumeProperties();
 
-    private final HashMap<String, List<AnimationResource>> animationChoices;
+    private HashMap<String, List<AnimationResource>> animationChoices;
 
-    private final HashMap<String, List<String>> stringChoices;
+    private HashMap<String, List<String>> stringChoices;
 
-    private final HashMap<String, List<ManagedSound>> soundChoices;
+    private HashMap<String, List<ManagedSound>> soundChoices;
 
-    private final HashMap<String, List<PoseResource>> poseChoices;
+    private HashMap<String, List<PoseResource>> poseChoices;
 
-    private final HashMap<String, List<FontResource>> fontChoices;
+    private HashMap<String, List<FontResource>> fontChoices;
 
     public Costume()
     {
@@ -370,4 +370,63 @@ public class Costume
         return this.animationChoices.get(name);
     }
 
+    public Costume copy( Resources resource )
+    {
+        try {
+            Costume result = (Costume) super.clone();
+
+            result.roleClassName = new ClassName(this.roleClassName.baseClass, this.roleClassName.name);
+
+            // Need to reset the name before setting it to ensure a NEW property is created.
+            result.setPropertiesClassName(resource.scriptManager,
+                new ClassName( this.propertiesClassName.baseClass, CostumeProperties.class.getName()));
+            result.setPropertiesClassName(resource.scriptManager,
+                new ClassName(this.propertiesClassName.baseClass, this.propertiesClassName.name));
+            
+            for (AbstractProperty<CostumeProperties, ?> property : this.getProperties().getProperties()) {
+                Object value = property.getValue(this.properties);
+                property.setValue(result.properties, value);
+            }
+
+            result.animationChoices = new HashMap<String, List<AnimationResource>>();
+            for (String eventName : this.animationChoices.keySet()) {
+                List<AnimationResource> list = new ArrayList<AnimationResource>();
+                list.addAll(this.animationChoices.get(eventName));
+                result.animationChoices.put(eventName, list);
+            }
+
+            result.stringChoices = new HashMap<String, List<String>>();
+            for (String eventName : this.stringChoices.keySet()) {
+                List<String> list = new ArrayList<String>();
+                list.addAll(this.stringChoices.get(eventName));
+                result.stringChoices.put(eventName, list);
+            }
+
+            result.soundChoices = new HashMap<String, List<ManagedSound>>();
+            for (String eventName : this.soundChoices.keySet()) {
+                List<ManagedSound> list = new ArrayList<ManagedSound>();
+                list.addAll(this.soundChoices.get(eventName));
+                result.soundChoices.put(eventName, list);
+            }
+
+            result.poseChoices = new HashMap<String, List<PoseResource>>();
+            for (String eventName : this.poseChoices.keySet()) {
+                List<PoseResource> list = new ArrayList<PoseResource>();
+                list.addAll(this.poseChoices.get(eventName));
+                result.poseChoices.put(eventName, list);
+            }
+
+            result.fontChoices = new HashMap<String, List<FontResource>>();
+            for (String eventName : this.fontChoices.keySet()) {
+                List<FontResource> list = new ArrayList<FontResource>();
+                list.addAll(this.fontChoices.get(eventName));
+                result.fontChoices.put(eventName, list);
+            }
+
+            return result;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

@@ -69,13 +69,11 @@ public class SceneResource extends Loadable
     @Override
     public void load() throws Exception
     {
-        if (this.scene == null) {
-            if (this.resolveFile(this.getFile()).exists()) {
-                SceneReader sceneReader = new SceneReader(this.resources);
-                this.scene = sceneReader.load(getFilename());
-            } else {
-                this.scene = new Scene();
-            }
+        if (this.resolveFile(this.getFile()).exists()) {
+            SceneReader sceneReader = new SceneReader(this.resources);
+            this.scene = sceneReader.load(getFilename());
+        } else {
+            this.scene = new Scene();
         }
     }
 

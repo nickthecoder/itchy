@@ -267,7 +267,7 @@ public abstract class SubEditor<S>
         rebuildTable();
     }
 
-    protected final void edit( S resource, boolean adding )
+    protected void edit( S resource, boolean adding )
     {
         this.adding = adding;
         this.currentResource = resource;

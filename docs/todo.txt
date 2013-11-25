@@ -6,10 +6,6 @@ Bread, lasagne.
 Bugs
 ====
 
-Costumes are updated even when cancel is pressed (need to COPY the costume?)
-    This would break Scene.uses, as it check costume identity ==
-    CostumesEditor needs to copy the costume so that cancel works.
-
 BUG: Rename a scene from scene designer does not rename
     and doesn't update the ScenesEditor table
 
