@@ -16,6 +16,7 @@ import uk.co.nickthecoder.itchy.gui.Button;
 import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.Container;
 import uk.co.nickthecoder.itchy.gui.GridLayout;
+import uk.co.nickthecoder.itchy.gui.MessageBox;
 import uk.co.nickthecoder.itchy.gui.PickerButton;
 import uk.co.nickthecoder.itchy.gui.TextBox;
 import uk.co.nickthecoder.itchy.gui.VerticalLayout;
@@ -99,10 +100,13 @@ public class ForkGame implements Page
 
     private void copy()
     {
-        File fromDir = this.gamePickerButton.getValue();
-        File toDir = new File(fromDir.getParentFile(), this.newID.getText());
+        MessageBox messageBox = new MessageBox( "Copying", "This may take a few seconds.");
+        messageBox.showNow();
 
         try {
+            File fromDir = this.gamePickerButton.getValue();
+            File toDir = new File(fromDir.getParentFile(), this.newID.getText());
+
             Util.copyDirectory(fromDir, toDir);
 
             File oldResource = new File(toDir, Resources.getResourceFileFromDirectory(fromDir)
@@ -113,6 +117,10 @@ public class ForkGame implements Page
 
         } catch (IOException e) {
             e.printStackTrace();
+
+        } finally {
+        
+            messageBox.hide();
         }
 
     }

@@ -1,4 +1,22 @@
 
+Washing, Hoover, Washing up, Hat, Hair
+Bread, lasagne.
+
+
+Bugs
+====
+
+On Remove, there is no check that the resource isn't being used by something else.
+    Easy pose, animation, sound..., but tricky for costume, as they could be used in any scene
+
+Costumes are updated even when cancel is pressed (need to COPY the costume?)
+    CostumesEditor needs to copy the costume so that cancel works.
+
+BUG: Rename a scene from scene designer does not rename
+    and doesn't update the ScenesEditor table
+
+BUG: Reloading a SceneBehaviour script causes the properties to double.
+
 TODO
 ====
 
@@ -6,19 +24,12 @@ Need to allow Makeup appear at any stage in the pipeline from the editor. e.g. a
 Or a clip done at the end.
     A tick box "Advanced" will reveal a Compound Makeup as a table, with the standard items as well as the current Makeup if its not Null. 
 
-
-Optimise Explosion by using fixAppearance for projectiles which are turned, but won't rotate.
-
-PACKAGE !!!
-
-Test on windows.
-
 Tiled background - instead of a RGBA, specify a Pose, and tile it in a Grid.
     More generic - Create a BackgroundView interface
     RGBABackground
-    Grid, BrickH, BrickV, TileH, TileV (spacing can be different to the image size)
+    Tile, BrickH, BrickV, TileH, TileV (spacing can be different to the image size)
 
-Not that these are the same features that the Textured Makeup could use.
+Note that these are the same features that the Textured Makeup could use.
     For that matter, there could be a new Makeup called BackgroundMakeup, which places a background behind the actor.
     A Background and Frame would work nicely to create a mug-shot.
 
@@ -30,8 +41,6 @@ There are non-visual Makeups
 Texture should use the pose's offsetX,Y as its start point, not 0,0
 
 Explosion and Projectile don't work very well with text - See Gate.collected.
-
-GUIView.keyUp does nothing - is this ok?
 
 When a costume has a font, it should inclue the colour and size too.
     And alignment?
@@ -49,47 +58,29 @@ Costume editor to have filters on event name and resource type.
 
 Update class diagrams (moved extras classes)
 
-Follow up on the TODOs
-
 Send to Asul
+    package, test on windows. 
 
 EntryBox is firing change events for arrow keys.
-
-Joystick input devices.
 
 Scripted Makeup
     Appearance.getMakeupClassName
     Appearance.createMakeup
+    Create Tests
 
 Allow Compound makeups
 Glitter Makeup - sprinkle poses randomly. use getpixel.
-Sparkle, as glitter, but with animated parts which appear/disappear.
 Decoration - Adds a Pose to a given place relative to the actor's x,y.
-
-Simple convolution filter
-    Filters don't need to be square.
-    Create empty space around the image. Later give option of duping the image's edge.
-    Apply the convolution matrix.
-        For RGB, just apply the matrix to each channel in turn.
-        For RGBA we'd need to change the final DIVIDE to discount transparent pixels. i.e divide by sub of matrix * alphas.
-        Apply the matrix to alpha as normal.
-        
-   Many things just need the alpha channel convolved?
-           
-Look at rotozoom, and try to implement a generic transformation matrix???
+Underscore - used for text poses to place a line under the text. Use "_" to create the line,  or Surface.fill. 
+    Use it on link text when compound makeup is available.
 
 Cache the results of Makeup on Appearance.
     If we apply Makeup first (do clipping afterwards), then we only re-apply makeup if the pose has changed.
     Don't forget to free the cache when possible.
 
-BlitModes on Pose, so a "spotlight" can ADD
-
-Clip Animation
-    Test
 Test other animations not on the animations test page.
-
-Try the FLA files from Glitch
-    http://www.glitchthegame.com/public-domain-game-art/
+    Clip, heading, heading to, turn to,
+    Heading pointer Makeup?? Nah, just use a follower.
 
 Compound Role
     the editor knows about the interface, and adds a table under the Role ClassName.
@@ -104,93 +95,53 @@ Create some tests for Views in the tests game.
     Create a compound view in the middle with other views inside it.
         Use the same Stage for each of the mini views to test the 1:many Stage->View with mouse listeners and capture mouse.
 
-BUG: Rename a scene from scene designer does not rename
-    and doesn't update the ScenesEditor table
+Companion string names wont be renamed when a costume is renamed.
+    Create a first class citizen "CompanionCostume"
+    Get rid of old string based code.
 
-BUG: Reloading a SceneBehaviour script causes the properties to double.
+Later
+=====
 
-BUG: Changing SceneBehaviour doesn't update the SceneBehaviourProperty components
+GUIView.keyUp does nothing - is this ok?
 
-Animation test
+Joystick input devices.
+
+Multiline Text from the editor? Will need a text area component!
+
+Read a file and display it on the screen
+    In one multiline text
+    In separate lines, with each delayed - use animations too.
+    Markdown syntax - for links at least.
+
+Optimise Explosion by using fixAppearance for projectiles which are turned, but won't rotate.
+    maybe just add a fix boolean, and leave it up to the user to do it.
+
+check all code for this.[a-z 0-9]*\(, and remove the "this".
+
+Create a Compound Role, which has a ClassName array of other Roles
+    It has one AbstractProperty, who's Component is a table with Add/Remove Up/Down buttons, and clicking on any row show the
+    properties for that row.
+        Get this working for Role, and maybe it could be made generic for Makeup too.
+    
+Add pose and nine patch : try to show the image sub directory if it exists.
+    Copy images if outside of the game's directory
+        Can do this during SAVE
+
+BlitModes on Pose, so a "spotlight" can ADD
+
+"Duplicate" button in Animation editor - maybe on Costume too.
+
+Drag and drop to move and reorder animation in the editor.
+    Replace the whole AnimationEditor with a timeline, where sequence are arranged left to right and parallel are stacked top to bottom.
     Test and edit are done in the same full screen editor - like scene designer.
     Add: Pick a pose, then place it on the world.
     A large time-line pane shows an overview of the animation. Dragging controls will change the tick or loops of the animation.
         Can fill the whole page, with the animation on top of it.
     Click at a point in the time-line to show that frame.
     Save the pose and start x,y, direction, heading with each animation ("test" tag)
-
-Asteroids
-    Test strength - create a hard rock, which can't be destroyed by the puny bullets.
-    Multiple guns
-    Create "pickups" including a better gun.
-        Ship will have a "bulletName", if set, then it uses it directly to get the bullet costume, otherwise it uses the
-            existing "companion" feature.
-
-
-Create an isometric stage
-
-Create a wrapped StageView (where the x and/or y wrap around)
-
-Create a ScaledStageView.
-    Place the StageView's eventual blit into a protected method? wont work as its also scaling the clip area.
-
-"Duplicate" button in Animation editor
-
-Drag and drop to move and reorder animation in the editor.
-
-
-
+    
 Explanatory games
     e.g. Showing the different between heading and direction.
-    
-check all code for this.[a-z 0-9]*\(, and remove the "this".
-
-Create a Compound Behaviour, which has a ClassName array of other Behaviours, or maybe a Map of
-    name->ClassName.
-    Properties will be taken from the all of the child behaviour's properties.
-    tick and other methods will call each in child behaviour in turn.
-        Therefore the name->ClassName will need to be ordered, so itsn't a simple Map.
-        
-    This could be so common, perhaps its worth the ClassName or ClassNameProperty to do this.
-    If the selected classname instanceof Multiple, then the ClassNameProperty's Component "..." changes
-    from just picking a class from a list, to picking a list of name->ClassName pairs.
-    That's nice because it can fire a change event, which will make the list of properties rebuild.
-    We can use CompoundBehaviour in conjunction with ScriptedBehaviour, and therefore no extra
-    code for compound js behaviours.
-
-    Problem ?
-    When looking for collisions, it fine using brute force, as we start off by iterating over each Behaviour with that tag.
-    But when using Neighbourhood, we start with the actors. Ok, we can have "hadTag" on Behaviour, and CompoundBehaviour will
-    do the compound thing. 
-
-    Problem ?
-    We only want one collision strategy per Actor, so it can't live on Behaviour any more.
-
-    Problem!
-        As tags are on Actor, searching for the nearest "shootable" will return an actor, but it's
-        behaviour won't be shootable, one of the CompoundBehaviour's will be.
-        Tags MUST be on Behaviour.
-            We first need to remove old "active" tag, as this is an Actor thing, not a Behaviour.
-            Do we need Active at all? The closest I've come to the need for active, is the activate
-            delay, but that's implemented by being active all the time!!!
-        Not so fast, how about tags such as "deadly" - yeah that's still ok, one of the Beahviours will
-        be deadly, and the rest wont.
-
-What's Next
-===========
-
-Create a dedicated pinkwino instance for Itchy
-
-    Editor Tips
-        Middle button to drag view.
-        Ctrl to select from any layer
-        Shift to select from below the current object 
-
-    Class Overview
-
-Add pose and nine patch : try to show the image sub directory if it exists.
-    Copy images if outside of the game's directory
-        Can do this during SAVE
     
 Create a game from scratch, deliberately making syntax errors in the code.
     Fix any bugs and improve the UI along the way. 
@@ -208,26 +159,43 @@ Check that a broken script doesn't cause problems :
     SceneBehaviour in designer
     Game
 
-Bugs
-====
-
-On Remove, there is no check that the resource isn't being used by something else.
-    Easy pose, animation, sound..., but tricky for costume, as they could be used in any scene
-
-Renaming a costume will cause scenes that use it to fail.
-
-Costumes are updated even when cancel is pressed (need to COPY the costume?)
-    CostumesEditor needs to copy the costume so that cancel works.
-
 Later
 =====
 
+Simple convolution filter
+    Filters don't need to be square.
+    Create empty space around the image. Later give option of duping the image's edge.
+    Apply the convolution matrix.
+        For RGB, just apply the matrix to each channel in turn.
+        For RGBA we'd need to change the final DIVIDE to discount transparent pixels. i.e divide by sub of matrix * alphas.
+        Apply the matrix to alpha as normal.
+        
+   Many things just need the alpha channel convolved?
+           
+Look at rotozoom, and try to implement a generic affine transformation matrix???
+    Calc size of dest
+    Calc pos of corners
+    Bresinem walk from translated top left to bottom left.
+        Bres walk across the "row"
+        Copy pixel.
+    That only leaves the problem of blending.
+        Instead of choosing one src pixel, we consider the rectangle from the source
+            Where the rect is large, average multiple pixels
+            Where the rect is small (less than 2x2 pixels), average parts of each pixel.
+
 Should poses and animations be owned by Resources, or by Costume? Some are used by only one, and therefore is annoying to be in a
 big horrible unorganised list.
-    When editing a pose it has a "shared" tick box, which just toggles
-    When listing Poses shows : all, shared or a single costume's. (via a picker button).
-    Pose names are still unique, but default to costumeName.generatedName when first added via a costume and just generatedName otherwise.     
-    If an unshared pose is removed from its costume, then it is deleted.
+    When editing a pose it has a "shared" tick box, which just toggles.
+        Defaults to true when adding a pose via PosesEditor
+        Defaults to false when adding via the CostumesEditor (if that gets written).
+        When a pose is used by a second costume, it is also changed to true (must be done post-save).
+    When listing Poses shows : all, shared or a single costume's. (via a picker button). Defaults to shared.
+    Animation names are still unique, but default to costumename.x when added via costumeseditor. 
+    If an unshared pose is removed from its costume, then it is deleted - only acceptable if shared is hidden from the user.
+    CostumesEditor needs Add -> Pose, New Pose, Animation, New Animation etc.
+    
+    The "shared" tick box currently is useless, so either use it, or remove it.
+    Add an "unused" filter, which lists poses not used by a Costume, and let them be deleted manually.
     
 Same pattern for sounds and animations, not for font or nine patches.
 

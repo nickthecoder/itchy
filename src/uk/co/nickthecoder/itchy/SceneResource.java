@@ -62,6 +62,11 @@ public class SceneResource extends Loadable
         return this.scene;
     }
 
+    public void uncacheScene()
+    {
+        this.scene = null;
+    }
+    
     public void setScene( Scene scene )
     {
         this.scene = scene;

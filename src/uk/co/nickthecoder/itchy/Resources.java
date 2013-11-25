@@ -58,6 +58,8 @@ public class Resources extends Loadable
 
     private final HashMap<String, CostumeResource> costumes;
 
+    private HashMap<String, String> renamedCostumes;
+
     public ErrorLog errorLog;
 
     public final Registry registry = new Registry(Itchy.registry);
@@ -76,6 +78,8 @@ public class Resources extends Loadable
         this.poses = new HashMap<String, PoseResource>();
         this.costumes = new HashMap<String, CostumeResource>();
         this.animations = new HashMap<String, AnimationResource>();
+
+        this.renamedCostumes = new HashMap<String, String>();
 
         this.game = new Game(this);
     }
@@ -439,6 +443,16 @@ public class Resources extends Loadable
         this.costumes.remove(name);
     }
 
+    /**
+     * Used while loading a resource - if a costume has been renamed since the scene was last saved, then we need to translate from
+     * the old name to the new name before getting the costume.
+     */
+    public String getNewCostumeName( String name )
+    {
+        String origName = this.renamedCostumes.get(name);
+        return origName == null ? name : origName;
+    }
+    
     public Costume getCostume( String name )
     {
         CostumeResource resource = this.costumes.get(name);
@@ -475,10 +489,23 @@ public class Resources extends Loadable
         return null;
     }
 
-    void rename2( CostumeResource costumeResource, String name )
+    void rename2( CostumeResource costumeResource, String newName )
     {
-        this.costumes.remove(costumeResource.getName());
-        this.costumes.put(name, costumeResource);
+        String oldName = costumeResource.getName();
+        String origName = oldName;
+        
+        // If the costume has been renamed already, we want to map from the ORIGINAL name, not the intermediate name (oldName).
+        for ( String name : this.renamedCostumes.keySet()) {
+            if ( this.renamedCostumes.get(name).equals(oldName)) {
+                origName = name;
+                break;
+            }
+        }
+        
+        this.renamedCostumes.put( origName, newName );
+
+        this.costumes.remove(oldName);
+        this.costumes.put(newName, costumeResource);
     }
 
     /**
@@ -651,7 +678,7 @@ public class Resources extends Loadable
 
     public boolean isValidScript( ClassName className )
     {
-        return isValidScript( className.name );
+        return isValidScript(className.name);
     }
 
     public boolean checkClassName( ClassName className )
@@ -669,15 +696,32 @@ public class Resources extends Loadable
         } catch (Exception e) {
             return false;
         }
-        
-        System.out.println( "Adding to resources registry : " + className );
-        registry.add(className);
+
+        System.out.println("Adding to resources registry : " + className);
+        this.registry.add(className);
         return true;
     }
-    
+
     public Game getGame()
     {
         return this.game;
+    }
+
+    public boolean renamesPending()
+    {
+        return !this.renamedCostumes.isEmpty();
+    }
+
+    public void loadSaveAllScenes()
+        throws Exception
+    {
+        for (String sceneName : this.sceneNames()) {
+            SceneResource sceneResource = this.getSceneResource(sceneName);
+            sceneResource.load();
+            sceneResource.save();
+            sceneResource.uncacheScene();
+        }
+        this.renamedCostumes.clear();
     }
 
 }

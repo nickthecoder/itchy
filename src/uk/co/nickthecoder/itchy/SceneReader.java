@@ -124,6 +124,7 @@ public class SceneReader
     private void readActor( XMLTag actorTag, Scene.SceneLayer sceneLayer ) throws Exception
     {
         String costumeName = actorTag.getAttribute("costume");
+        costumeName = this.resources.getNewCostumeName(costumeName);
         Costume costume = this.resources.getCostume(costumeName);
         if (costume == null) {
             throw new XMLException("Costume not found : " + costumeName);
@@ -195,6 +196,7 @@ public class SceneReader
         sceneActor.roleClassName = new ClassName(Role.class, NullRole.class.getName());
 
         String costumeName = textTag.getOptionalAttribute("costume", null);
+        costumeName = resources.getNewCostumeName(costumeName);
         if (costumeName != null) {
             Costume costume = this.resources.getCostume(costumeName);
             if (costume == null) {

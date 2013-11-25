@@ -1,7 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0 which accompanies this
- * distribution, and is available at http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.editor;
 
@@ -192,11 +191,26 @@ public final class Editor extends Game
 
     private void onSave()
     {
+        MessageBox messageBox = null;
         try {
             this.resources.save();
+            if (this.resources.renamesPending()) {
+                messageBox = new MessageBox("Renaming costumes", "This may take a little while");
+                messageBox.showNow();
+            }
+            if (this.resources.renamesPending()) {
+                this.resources.loadSaveAllScenes();
+            }
+            messageBox.hide();
+
         } catch (Exception e) {
             new MessageBox("Save Failed", e.getMessage()).show();
             e.printStackTrace();
+
+        } finally {
+            if (messageBox != null) {
+                messageBox.hide();
+            }
         }
     }
 

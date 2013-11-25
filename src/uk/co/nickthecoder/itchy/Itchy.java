@@ -291,7 +291,7 @@ public class Itchy
         return Video.getDisplaySurface();
     }
 
-    private static void doRedraw()
+    public static void doRedraw()
     {
         currentGame.render(Video.getDisplaySurface());
         Video.flip();

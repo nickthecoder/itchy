@@ -265,6 +265,12 @@ public class RootContainer extends Container
         center();
         this.focus();
     }
+    
+    public void showNow()
+    {
+        show();
+        Itchy.doRedraw();
+    }
 
     public void hide()
     {
