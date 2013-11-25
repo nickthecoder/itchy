@@ -168,14 +168,8 @@ public abstract class AbstractRole implements Role
     @Override
     public void detatch()
     {
+        this.tagMembership.removeAll();
         onDetach();
-
-        Tag tags = this.getClass().getAnnotation(Tag.class);
-        if (tags != null) {
-            for (String name : tags.names()) {
-                removeTag(name);
-            }
-        }
     }
 
     @Override

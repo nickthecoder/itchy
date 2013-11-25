@@ -639,20 +639,19 @@ public class Resources extends Loadable
         this.scenes.put(name, sceneResource);
     }
 
-    public boolean isValidScript( String path )
+    public boolean isValidScript( String name )
     {
-        // TODO Hmm, don't like this.
-        return isValidScript(new ClassName(Object.class, path));
+        if (!ScriptManager.isScript(name)) {
+            return false;
+        }
+
+        File file = new File(resolveFilename("scripts" + File.separator + name));
+        return (file.exists());
     }
 
     public boolean isValidScript( ClassName className )
     {
-        if (!ScriptManager.isScript(className)) {
-            return false;
-        }
-
-        File file = new File(resolveFilename("scripts" + File.separator + className.name));
-        return (file.exists());
+        return isValidScript( className.name );
     }
 
     public boolean checkClassName( ClassName className )

@@ -10,11 +10,11 @@ import java.util.List;
 import uk.co.nickthecoder.itchy.AbstractRole;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Appearance;
-import uk.co.nickthecoder.itchy.GenericCompoundView;
 import uk.co.nickthecoder.itchy.Costume;
 import uk.co.nickthecoder.itchy.CostumeResource;
 import uk.co.nickthecoder.itchy.Font;
 import uk.co.nickthecoder.itchy.Game;
+import uk.co.nickthecoder.itchy.GenericCompoundView;
 import uk.co.nickthecoder.itchy.ImagePose;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.KeyListener;
@@ -535,22 +535,18 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.sceneDetailsContainer.clear();
         this.sceneDetailsContainer.addChild(this.sceneForm.createForm());
 
-        this.sceneDirectorName = (ClassNameBox) this.sceneForm.getComponent("scene.sceneDirectorName");
-        this.sceneForm.addComponentChangeListener("scene.sceneDirectorName", new ComponentChangeListener() {
+        this.sceneDirectorName = (ClassNameBox) this.sceneForm.getComponent("sceneDirectorClassName");
+        this.sceneForm.addComponentChangeListener("sceneDirectorClassName", new ComponentChangeListener() {
             @Override
             public void changed()
             {
                 ClassNameBox box = SceneDesigner.this.sceneDirectorName;
                 boolean ok = SceneDesigner.this.editor.resources.checkClassName(box.getClassName());
-                // TODO isn't the error style done by ClassNameBox?
-                box.addStyle("error", !ok);
                 if (ok) {
                     SceneDesigner.this.scene.sceneDirectorClassName = box.getClassName();
                     try {
-                        SceneDesigner.this.scene.sceneDirector =
-                            SceneDesigner.this.scene.createSceneDirector(
-                                SceneDesigner.this.editor.resources
-                                );
+                        SceneDesigner.this.scene.sceneDirector = SceneDesigner.this.scene.createSceneDirector(
+                            SceneDesigner.this.editor.resources);
 
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -567,6 +563,7 @@ public class SceneDesigner implements MouseListener, KeyListener
     {
         PropertiesForm<SceneDirector> form = new PropertiesForm<SceneDirector>(this.scene.sceneDirector,
             this.scene.sceneDirector.getProperties());
+        
         form.autoUpdate = true;
         this.sceneForm.grid.ungroup();
         form.grid.groupWith(this.sceneForm.grid);
@@ -638,7 +635,7 @@ public class SceneDesigner implements MouseListener, KeyListener
     {
         SceneDesignerRole sdb = (SceneDesignerRole) this.currentActor.getRole();
 
-        this.roleClassName = new ClassNameBox( this.editor.getScriptManager(), Actor.getRoleClassName(sdb.actualRole), Role.class );
+        this.roleClassName = new ClassNameBox(this.editor.getScriptManager(), Actor.getRoleClassName(sdb.actualRole), Role.class);
 
         this.roleClassName.addChangeListener(new ComponentChangeListener() {
 
@@ -673,16 +670,16 @@ public class SceneDesigner implements MouseListener, KeyListener
         form.grid.addRow("Role", this.roleClassName);
         this.roleContainer.addChild(form.createForm());
     }
-    
+
     private ClassNameBox makeupClassName;
-    
+
     private void createMakeupPage()
     {
         Makeup makeup = this.currentActor.getAppearance().getMakeup();
 
-        this.makeupClassName = new ClassNameBox( this.editor.getScriptManager(), Appearance.getMakeupClassName(makeup), Makeup.class );
+        this.makeupClassName = new ClassNameBox(this.editor.getScriptManager(), Appearance.getMakeupClassName(makeup), Makeup.class);
         this.makeupClassName.addChangeListener(new ComponentChangeListener() {
-            
+
             @Override
             public void changed()
             {
@@ -691,8 +688,8 @@ public class SceneDesigner implements MouseListener, KeyListener
                 boolean ok = SceneDesigner.this.editor.resources.checkClassName(className);
                 if (ok) {
                     try {
-                        SceneDesigner.this.currentActor.getAppearance().setMakeup( className );
-                    
+                        SceneDesigner.this.currentActor.getAppearance().setMakeup(className);
+
                         SceneDesigner.this.createMakeupProperties();
                         SceneDesigner.this.makeupClassName.removeStyle("error");
 
@@ -702,7 +699,7 @@ public class SceneDesigner implements MouseListener, KeyListener
                 }
             }
         });
-        
+
         createMakeupProperties();
     }
 

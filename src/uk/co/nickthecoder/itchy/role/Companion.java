@@ -10,6 +10,7 @@ import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Costume;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Pose;
+import uk.co.nickthecoder.itchy.TextPose;
 import uk.co.nickthecoder.jame.RGBA;
 
 /**
@@ -61,6 +62,12 @@ public abstract class Companion<T extends Companion<T>> extends AbstractRole
     public boolean rotate = false;
 
     public RGBA colorize;
+    
+    public String text;
+    
+    public int fontSize = 20; // Arbitrary default size.
+
+    public RGBA color;
 
     public Companion( Actor actor )
     {
@@ -180,6 +187,33 @@ public abstract class Companion<T extends Companion<T>> extends AbstractRole
     public T eventName( String eventName )
     {
         this.eventName = eventName;
+        return this.me;
+    }
+
+    /**
+     * When the Pose is a TextPose, then use this text
+    */
+    public T text(String text)
+    {
+        this.text = text;
+        return this.me;
+    }
+
+    /**
+     * When the Pose is a TextPose, then use this font size
+    */
+    public T fontSize(int fontSize)
+    {
+        this.fontSize = fontSize;
+        return this.me;
+    }
+
+    /**
+     * When the Pose is a TextPose, then use this colour
+    */
+    public T color(RGBA color)
+    {
+        this.color = color;
         return this.me;
     }
 
@@ -347,6 +381,16 @@ public abstract class Companion<T extends Companion<T>> extends AbstractRole
         Actor actor = new Actor(this.costume);
         if (this.pose != null) {
             actor.getAppearance().setPose(this.pose);
+        }
+        if (this.text!= null) {
+            if (actor.getAppearance().getPose() instanceof TextPose) {
+                TextPose textPose =(TextPose) (actor.getAppearance().getPose()); 
+                textPose.setText(this.text);
+                textPose.setFontSize(this.fontSize);
+                if (this.color != null) {
+                    textPose.setColor(this.color);
+                }
+            }
         }
 
         if (this.eventName != null) {

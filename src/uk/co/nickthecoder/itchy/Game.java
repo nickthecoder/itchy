@@ -33,7 +33,7 @@ import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 import uk.co.nickthecoder.jame.event.QuitEvent;
 
 /**
- * Game is one of the core classes within Itchy, it is the cenral point around which all the other pieces work. As a games designer, you do
+ * Game is one of the core classes within Itchy, it is the central point around which all the other pieces work. As a games designer, you do
  * not create a Game object directly, it is created automatically when the {@link Resources} are loaded.
  * <p>
  * A game consists of a set of {@link Stage} objects (typically {@link ZOrderStage}), and on each Stage, there live a set of {@link Actor}
@@ -49,8 +49,8 @@ import uk.co.nickthecoder.jame.event.QuitEvent;
  * Role's tick method that moves actors. The {@link SceneDesigner}'s tick method is also called once every frame.
  * <p>
  * After all the ticking has taken place, its time to draw to the screen. Every View is rendered (drawn), and what you see on the screen is
- * the combination of all of the views. You can think of views as a stack of transparent plastic stacked one on top of another. Each view
- * may have only a small part of the final picture.
+ * the combination of all of the views. You can think of views as a stack of transparent plastic sheets stacked one on top of another. Each
+ * view may have only a small part of the final picture.
  * <p>
  */
 public class Game

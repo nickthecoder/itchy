@@ -598,6 +598,10 @@ public class Explosion extends Companion<Explosion>
             }
 
             Actor actor = projectile.createActor();
+            if (this.pose != null) {
+                actor.getAppearance().setPose(pose);
+            }
+
             actor.setHeading(actualHeading);
             actor.moveForwards(this.distance + random.nextDouble() * this.randomDistance);
 

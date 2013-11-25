@@ -1,4 +1,4 @@
-    
+
 TODO
 ====
 
@@ -13,11 +13,46 @@ PACKAGE !!!
 
 Test on windows.
 
+Tiled background - instead of a RGBA, specify a Pose, and tile it in a Grid.
+    More generic - Create a BackgroundView interface
+    RGBABackground
+    Grid, BrickH, BrickV, TileH, TileV (spacing can be different to the image size)
+
+Not that these are the same features that the Textured Makeup could use.
+    For that matter, there could be a new Makeup called BackgroundMakeup, which places a background behind the actor.
+    A Background and Frame would work nicely to create a mug-shot.
+
+There are non-visual Makeups
+    Size (makes the appearance the given size without scaling
+    Margin as above, but adds a given amount, rather than a set overall size.
+    AlterOffset - useful for changing the rotation point.
+
+Texture should use the pose's offsetX,Y as its start point, not 0,0
+
+Explosion and Porjectile don't work very well with text - See Gate.collected.
+
+Should Costumes have Makeup? If each jewel is given a Sparkle makeup, does it make sense to apply it to every jewel in the scene?
+    No. A diamond costume would specify a standard makeup, which can be overridden if needed.
+    Have a reset button to revert to the costume's makeup, or default makeup if it has none.
+    Costumes' makeup just like animations - based on events, and can have multiple options picked a random.
+
+Costume editor to have filters on event name and resource type.
+    i.e. show all Animations, or show all "death" events, or show all "death" Animations or show everything. 
+    Should the filters stay as you flick from one Costume to another - Yes, probably.
+
 Update class diagrams (moved extras classes)
 
 Follow up on the TODOs
 
 Send to Asul
+
+EntryBox is firing change events for arrow keys.
+
+Joystick input devices.
+
+Scripted Makeup
+    Appearance.getMakeupClassName
+    Appearance.createMakeup
 
 Allow Compound makeups
 Glitter Makeup - sprinkle poses randomly. use getpixel.

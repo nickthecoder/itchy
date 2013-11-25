@@ -182,7 +182,6 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
 
     public static Makeup createMakeup( ClassName className )
     {
-        // TODO Implement ScriptedMakeup
         try {
             return (Makeup) Class.forName(className.name).newInstance();
         } catch (Exception e) {
@@ -365,7 +364,6 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
 
     public static ClassName getMakeupClassName( Makeup makeup )
     {
-        // TODO Allow for scripted makeup.
         // if (role instanceof ScriptedMakup) {
         // return ((ScriptedMakeup) makeup).getClassName();
         // } else {
@@ -455,7 +453,7 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
      */
     public void fixAppearance()
     {
-        ImagePose pose = new ImagePose(getSurface(), getOffsetX(), getOffsetY());
+        ImagePose pose = new ImagePose(getSurface().copy(), getOffsetX(), getOffsetY());
         pose.setDirection(getDirection());
         setPose(pose);
         setMakeup(new NullMakeup());

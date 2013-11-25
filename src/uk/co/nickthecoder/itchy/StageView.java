@@ -200,7 +200,6 @@ public class StageView extends AbstractScrollableView implements StageListener, 
     public void enableMouseListener( Game game )
     {
         this.roleMouseListeners = new HashSet<ViewMouseListener>();
-        // TODO Iterate over all actors, and add them if the roles are ViewMouseListeners
     }
 
     @Override
@@ -254,7 +253,7 @@ public class StageView extends AbstractScrollableView implements StageListener, 
 
     @Override
     public boolean onMouseDown( MouseButtonEvent event )
-    {
+    {   
         if (this.roleMouseListeners == null) {
             return false;
         }

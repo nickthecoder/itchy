@@ -68,6 +68,19 @@ public class Shadow implements Makeup
     {
         return this.seq;
     }
+    
+    public Shadow offset( int dx, int y)
+    {
+        setDx( dx );
+        setDy( dy );
+        return this;
+    }
+
+    public Shadow color( RGBA color )
+    {
+        setColor(color);
+        return this;
+    }
 
     @Override
     public OffsetSurface apply( OffsetSurface src )
