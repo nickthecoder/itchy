@@ -13,6 +13,7 @@ import uk.co.nickthecoder.itchy.CostumeResource;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.FontResource;
 import uk.co.nickthecoder.itchy.Scene;
+import uk.co.nickthecoder.itchy.SceneResource;
 import uk.co.nickthecoder.itchy.gui.FileOpenDialog;
 import uk.co.nickthecoder.itchy.gui.MessageBox;
 import uk.co.nickthecoder.itchy.gui.ReflectionTableModelRow;
@@ -104,10 +105,12 @@ public class FontsEditor extends SubEditor<FontResource>
             Resources resources = this.editor.resources;
             for ( String sceneName : resources.sceneNames()) {
                 try {
-                    Scene scene = resources.getScene(sceneName);
+                    SceneResource sr = resources.getSceneResource(sceneName);
+                    Scene scene = sr.loadScene();
                     if (scene.uses(fontResource)) {
                         list.add( sceneName );
                     }
+                    sr.unloadScene();
                 } catch( Exception e) {
                     list.add( sceneName+ " (failed to load)");
                 }

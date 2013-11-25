@@ -1,7 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0 which accompanies this
- * distribution, and is available at http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
@@ -52,21 +51,34 @@ public class SceneResource extends Loadable
     @Property(label = "Scene", recurse = true)
     public Scene getScene() throws Exception
     {
+        this.load();
+        return this.scene;
+    }
+
+    public void unloadScene()
+    {
+        this.scene = null;
+    }
+
+    public Scene loadScene() throws Exception
+    {
+        load();
+        return this.scene;
+    }
+    
+    @Override
+    public void load() throws Exception
+    {
         if (this.scene == null) {
-            if ( this.resolveFile( this.getFile()).exists()) {
-                this.load();
+            if (this.resolveFile(this.getFile()).exists()) {
+                SceneReader sceneReader = new SceneReader(this.resources);
+                this.scene = sceneReader.load(getFilename());
             } else {
                 this.scene = new Scene();
             }
         }
-        return this.scene;
     }
 
-    public void uncacheScene()
-    {
-        this.scene = null;
-    }
-    
     public void setScene( Scene scene )
     {
         this.scene = scene;
@@ -75,11 +87,10 @@ public class SceneResource extends Loadable
     @Override
     protected void actualSave( File file ) throws Exception
     {
-        try {
-            this.getScene();
-        } catch (Exception e) {
-            this.scene = new Scene();
+        if ( this.scene == null ) {
+            this.load();
         }
+
         if (this.scene.sceneDirector == null) {
             this.scene.sceneDirector = this.scene.createSceneDirector(this.resources);
         }
@@ -125,13 +136,6 @@ public class SceneResource extends Loadable
             }
 
         }
-    }
-
-    @Override
-    public void load() throws Exception
-    {
-        SceneReader sceneReader = new SceneReader(this.resources);
-        this.scene = sceneReader.load(getFilename());
     }
 
 }

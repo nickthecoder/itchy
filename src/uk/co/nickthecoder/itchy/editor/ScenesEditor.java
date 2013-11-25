@@ -99,7 +99,8 @@ public class ScenesEditor extends SubEditor<SceneResource>
         SceneResource oldSceneResource = (SceneResource) row.getData();
         SceneResource newSceneResource = new SceneResource(this.editor.resources, "newScene");
         try {
-            newSceneResource.setScene(oldSceneResource.getScene().copy());
+            newSceneResource.setScene(oldSceneResource.loadScene().copy());
+            oldSceneResource.unloadScene();
         } catch (Exception e) {
             e.printStackTrace();
             return;

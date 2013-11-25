@@ -39,9 +39,8 @@ public class SceneWriter extends XMLWriter
         try {
             this.scene = this.sceneResource.getScene();
         } catch (Exception e) {
-            throw new XMLException("Failed to get scene");
+            throw new XMLException("Failed to get the scene");
         }
-
         this.beginTag("scene");
         this.attribute("showMouse", this.scene.showMouse);
         if (!PlainSceneDirector.class.getName().equals(this.scene.sceneDirectorClassName)) {
@@ -174,7 +173,7 @@ public class SceneWriter extends XMLWriter
 
     private void writeMakeupAttributes( SceneActor sceneActor ) throws XMLException
     {
-        if (sceneActor.makeupClassName.name.equals( NullMakeup.class.getName())) {
+        if (sceneActor.makeupClassName.name.equals(NullMakeup.class.getName())) {
             return;
         }
         this.beginTag("makeup");

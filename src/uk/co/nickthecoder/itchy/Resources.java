@@ -649,10 +649,11 @@ public class Resources extends Loadable
         return this.scenes.get(name);
     }
 
-    public Scene getScene( String name ) throws Exception
+    // TODO Rename if I want it, delete otherwise.
+    public Scene loadSceneXXX( String name ) throws Exception
     {
         SceneResource resource = this.scenes.get(name);
-        return resource == null ? null : resource.getScene();
+        return resource == null ? null : resource.loadScene();
     }
 
     public List<String> sceneNames()
@@ -719,7 +720,7 @@ public class Resources extends Loadable
             SceneResource sceneResource = this.getSceneResource(sceneName);
             sceneResource.load();
             sceneResource.save();
-            sceneResource.uncacheScene();
+            sceneResource.unloadScene();
         }
         this.renamedCostumes.clear();
     }

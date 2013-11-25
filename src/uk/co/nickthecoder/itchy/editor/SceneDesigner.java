@@ -160,7 +160,8 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.sceneRect = new Rect(0, 0, editor.getGame().getWidth(), editor.getGame().getHeight());
         this.sceneResource = sceneResource;
         try {
-            this.scene = this.sceneResource.getScene();
+            this.scene = this.sceneResource.loadScene();
+            this.sceneResource.unloadScene();
         } catch (Exception e) {
             e.printStackTrace();
             onDone();

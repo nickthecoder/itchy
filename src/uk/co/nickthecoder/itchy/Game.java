@@ -771,7 +771,7 @@ public class Game
     public boolean hasScene( String sceneName )
     {
         try {
-            return this.resources.getScene(sceneName) != null;
+            return this.resources.getSceneResource(sceneName) != null;
         } catch (Exception e) {
             return false;
         }
@@ -784,8 +784,9 @@ public class Game
 
     public boolean loadScene( String sceneName, boolean loadOnly )
     {
+        SceneResource sceneResource = this.resources.getSceneResource(sceneName);
         try {
-            Scene scene = this.resources.getScene(sceneName);
+            Scene scene = sceneResource.loadScene();
             if (scene == null) {
                 System.err.println("Scene not found : " + sceneName);
                 try {
@@ -817,6 +818,8 @@ public class Game
         } catch (Exception e) {
             e.printStackTrace();
             return false;
+        } finally {
+            sceneResource.unloadScene();
         }
 
         return true;
