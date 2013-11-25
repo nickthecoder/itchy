@@ -1,0 +1,6 @@
+<scene showMouse="true" role="uk.co.nickthecoder.itchy.PlainSceneDirector" background="#000000ff">
+  <properties/>
+  <layer name="main">
+    <text text="Hello World" font="Boycott" size="71" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="397" y="346" direction="0.0" heading="0.0" startEvent="default" zOrder="0"/>
+  </layer>
+</scene>

@@ -1,0 +1,14 @@
+<resources>
+  <game directorClassName="uk.co.nickthecoder.itchy.PlainDirector" height="600" initialScene="start" title="Hello World" width="800"/>
+  <fonts>
+    <font name="Boycott" filename="fonts/Boycott.ttf"/>
+  </fonts>
+  <ninePatches/>
+  <poses/>
+  <sounds/>
+  <animations/>
+  <costumes/>
+  <scenes>
+    <scene name="start"/>
+  </scenes>
+</resources>
