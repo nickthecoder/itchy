@@ -67,7 +67,7 @@ Ship = Class({
         	new itchy.role.Explosion(this.actor)
     			.projectiles(4).follow().projectilesPerTick(1)
     			.spread(heading+160, heading+200).distance(40)
-    			.randomSpread().speed(1,2,0,0).fade(3).pose("spark")
+    			.randomSpread().speed(1,2,0,0).fade(3).eventName("spark")
     			.createActor();
         }
         if (Itchy.isKeyDown(Keys.SPACE)) {

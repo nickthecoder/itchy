@@ -29,7 +29,14 @@ There are non-visual Makeups
 
 Texture should use the pose's offsetX,Y as its start point, not 0,0
 
-Explosion and Porjectile don't work very well with text - See Gate.collected.
+Explosion and Projectile don't work very well with text - See Gate.collected.
+
+GUIView.keyUp does nothing - is this ok?
+
+When a costume has a font, it should inclue the colour and size too.
+    And alignment?
+    Companion would need a fontsize and color attributes???
+    Talk should be simpler to use too.
 
 Should Costumes have Makeup? If each jewel is given a Sparkle makeup, does it make sense to apply it to every jewel in the scene?
     No. A diamond costume would specify a standard makeup, which can be overridden if needed.

@@ -50,7 +50,7 @@ Director = Class({
     	game.mouse.setMousePointer( mousePointer );
     	new itchy.role.Explosion(mousePointer.getActor())
     		.forever().follow().offset(40,-33).projectilesPerTick(1).spread(-20,-80).distance(10)
-    		.randomSpread().speed(1,2,0,0).fade(3).pose("spark")
+    		.randomSpread().speed(1,2,0,0).fade(3).eventName("spark")
     		.createActor();
     }
     

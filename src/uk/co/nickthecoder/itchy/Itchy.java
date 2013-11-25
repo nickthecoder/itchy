@@ -94,7 +94,6 @@ public class Itchy
         System.out.println( "Registering Makeup");
 
         registry.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.NullMakeup.class.getName()));
-        registry.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.makeup.TextShadow.class.getName()));
         registry.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.makeup.Shadow.class.getName()));
         registry.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.makeup.Scale.class.getName()));
         registry.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.makeup.Textured.class.getName()));

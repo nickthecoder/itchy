@@ -125,7 +125,6 @@ public class GuiView extends AbstractView implements View, InputListener
     @Override
     public boolean onKeyUp( KeyboardEvent ke )
     {
-        // TODO Why does the GUI not have key up events?
         return false;
     }
 

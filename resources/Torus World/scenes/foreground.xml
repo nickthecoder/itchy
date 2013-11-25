@@ -8,7 +8,7 @@
       <property name="quiet" value="false"/>
       <property name="updateInterval" value="0.0"/>
       <property name="access" value="director.directorScript.score"/>
-      <makeup classname="uk.co.nickthecoder.itchy.makeup.TextShadow">
+      <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="1"/>
         <property name="dy" value="2"/>
         <property name="color" value="#ffffffff"/>
