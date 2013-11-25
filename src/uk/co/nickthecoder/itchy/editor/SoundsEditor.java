@@ -1,7 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0 which accompanies this
- * distribution, and is available at http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.editor;
 
@@ -21,6 +20,7 @@ import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.Container;
 import uk.co.nickthecoder.itchy.gui.FileOpenDialog;
+import uk.co.nickthecoder.itchy.gui.MessageBox;
 import uk.co.nickthecoder.itchy.gui.PickerButton;
 import uk.co.nickthecoder.itchy.gui.ReflectionTableModelRow;
 import uk.co.nickthecoder.itchy.gui.SimpleTableModel;
@@ -32,6 +32,7 @@ import uk.co.nickthecoder.itchy.gui.TableModelRow;
 import uk.co.nickthecoder.itchy.gui.TextBox;
 import uk.co.nickthecoder.itchy.gui.ThumbnailedPickerButton;
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.util.StringList;
 import uk.co.nickthecoder.itchy.util.Util;
 import uk.co.nickthecoder.jame.JameException;
 import uk.co.nickthecoder.jame.Surface;
@@ -173,7 +174,25 @@ public class SoundsEditor extends SubEditor<SoundResource>
     @Override
     protected void remove( SoundResource soundResource )
     {
-        this.editor.resources.removeSound(soundResource.getName());
+        StringList usedBy = new StringList();
+
+        for (String costumeName : this.editor.resources.costumeNames()) {
+            CostumeResource cr = this.editor.resources.getCostumeResource(costumeName);
+            Costume costume = cr.getCostume();
+            for (String resourceName : costume.getSoundNames()) {
+                for (ManagedSound managedSound : costume.getSoundChoices(resourceName)) {
+                    if (managedSound.soundResource == soundResource) {
+                        usedBy.add(costumeName);
+                    }
+                }
+            }
+        }
+        if (usedBy.isEmpty()) {
+            this.editor.resources.removeSound(soundResource.getName());
+        } else {
+            new MessageBox("Cannot Delete. Used by Costumes...", usedBy.toString()).show();
+        }
+
     }
 
     @Override

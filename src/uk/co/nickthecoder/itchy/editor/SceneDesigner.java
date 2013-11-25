@@ -1540,7 +1540,7 @@ public class SceneDesigner implements MouseListener, KeyListener
             this.sceneResource.save();
         } catch (Exception e) {
             e.printStackTrace();
-            MessageBox.show("Error", "Save failed.");
+            new MessageBox("Error", "Save failed.").show();
         }
     }
 

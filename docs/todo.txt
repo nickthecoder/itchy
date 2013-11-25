@@ -6,9 +6,6 @@ Bread, lasagne.
 Bugs
 ====
 
-On Remove, there is no check that the resource isn't being used by something else.
-    Easy pose, animation, sound..., but tricky for costume, as they could be used in any scene
-
 Costumes are updated even when cancel is pressed (need to COPY the costume?)
     CostumesEditor needs to copy the costume so that cancel works.
 

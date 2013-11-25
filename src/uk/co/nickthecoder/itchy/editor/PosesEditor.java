@@ -1,7 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0 which accompanies this
- * distribution, and is available at http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.editor;
 
@@ -24,6 +23,7 @@ import uk.co.nickthecoder.itchy.gui.GridLayout;
 import uk.co.nickthecoder.itchy.gui.ImageComponent;
 import uk.co.nickthecoder.itchy.gui.IntegerBox;
 import uk.co.nickthecoder.itchy.gui.Label;
+import uk.co.nickthecoder.itchy.gui.MessageBox;
 import uk.co.nickthecoder.itchy.gui.PickerButton;
 import uk.co.nickthecoder.itchy.gui.ReflectionTableModelRow;
 import uk.co.nickthecoder.itchy.gui.SimpleTableModel;
@@ -36,6 +36,7 @@ import uk.co.nickthecoder.itchy.gui.TextBox;
 import uk.co.nickthecoder.itchy.gui.ThumbnailedPickerButton;
 import uk.co.nickthecoder.itchy.gui.VerticalScroll;
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.util.StringList;
 import uk.co.nickthecoder.itchy.util.Util;
 import uk.co.nickthecoder.jame.JameException;
 import uk.co.nickthecoder.jame.Surface;
@@ -212,7 +213,24 @@ public class PosesEditor extends SubEditor<PoseResource>
     @Override
     protected void remove( PoseResource poseResource )
     {
-        this.editor.resources.removePose(poseResource.getName());
+        StringList usedBy = new StringList();
+
+        for (String costumeName : this.editor.resources.costumeNames()) {
+            CostumeResource cr = this.editor.resources.getCostumeResource(costumeName);
+            Costume costume = cr.getCostume();
+            for (String resourceName : costume.getPoseNames()) {
+                for (PoseResource resource : costume.getPoseChoices(resourceName)) {
+                    if (resource == poseResource) {
+                        usedBy.add(costumeName);
+                    }
+                }
+            }
+        }
+        if (usedBy.isEmpty()) {
+            this.editor.resources.removePose(poseResource.getName());
+        } else {
+            new MessageBox("Cannot Delete. Used by Costumes...", usedBy.toString()).show();
+        }
     }
 
     @Override

@@ -22,6 +22,7 @@ import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.Container;
 import uk.co.nickthecoder.itchy.gui.ImageComponent;
+import uk.co.nickthecoder.itchy.gui.MessageBox;
 import uk.co.nickthecoder.itchy.gui.NullComponent;
 import uk.co.nickthecoder.itchy.gui.PickerButton;
 import uk.co.nickthecoder.itchy.gui.ReflectionTableModelRow;
@@ -36,6 +37,7 @@ import uk.co.nickthecoder.itchy.gui.ThumbnailedPickerButton;
 import uk.co.nickthecoder.itchy.gui.VerticalLayout;
 import uk.co.nickthecoder.itchy.gui.VerticalScroll;
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.util.StringList;
 import uk.co.nickthecoder.jame.Surface;
 
 public class AnimationsEditor extends SubEditor<AnimationResource>
@@ -280,7 +282,24 @@ public class AnimationsEditor extends SubEditor<AnimationResource>
     @Override
     protected void remove( AnimationResource ar )
     {
-        this.editor.resources.removeAnimation(ar.getName());
+        StringList usedBy = new StringList();
+        
+        for (String costumeName : this.editor.resources.costumeNames()) {
+            CostumeResource cr = this.editor.resources.getCostumeResource(costumeName);
+            Costume costume = cr.getCostume();
+            for ( String resourceName : costume.getAnimationNames() ) {
+                for ( AnimationResource resource : costume.getAnimationChoices(resourceName)) {
+                    if (resource == ar) {
+                        usedBy.add( costumeName );
+                    }
+                }
+            }
+        }
+        if ( usedBy.isEmpty()) {
+            this.editor.resources.removeAnimation(ar.getName());
+        } else {
+            new MessageBox( "Cannot Delete. Used by Costumes...", usedBy.toString() ).show();
+        }
     }
 
     @Override

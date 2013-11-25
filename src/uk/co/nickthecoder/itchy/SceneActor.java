@@ -28,6 +28,8 @@ public abstract class SceneActor implements Cloneable
         }
     }
 
+    public Costume costume;
+    
     public int x;
 
     public int y;

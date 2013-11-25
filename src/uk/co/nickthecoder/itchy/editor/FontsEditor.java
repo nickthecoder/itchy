@@ -1,7 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0 which accompanies this
- * distribution, and is available at http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.editor;
 
@@ -9,8 +8,13 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import uk.co.nickthecoder.itchy.Costume;
+import uk.co.nickthecoder.itchy.CostumeResource;
+import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.FontResource;
+import uk.co.nickthecoder.itchy.Scene;
 import uk.co.nickthecoder.itchy.gui.FileOpenDialog;
+import uk.co.nickthecoder.itchy.gui.MessageBox;
 import uk.co.nickthecoder.itchy.gui.ReflectionTableModelRow;
 import uk.co.nickthecoder.itchy.gui.SimpleTableModel;
 import uk.co.nickthecoder.itchy.gui.SingleColumnRowComparator;
@@ -20,6 +24,7 @@ import uk.co.nickthecoder.itchy.gui.TableModelColumn;
 import uk.co.nickthecoder.itchy.gui.TableModelRow;
 import uk.co.nickthecoder.itchy.gui.TextBox;
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.util.StringList;
 import uk.co.nickthecoder.itchy.util.Util;
 
 public class FontsEditor extends SubEditor<FontResource>
@@ -66,7 +71,57 @@ public class FontsEditor extends SubEditor<FontResource>
     @Override
     protected void remove( FontResource fontResource )
     {
-        this.editor.resources.removeFont(fontResource.getName());
+        StringList usedBy = new StringList();
+
+        for (String costumeName : this.editor.resources.costumeNames()) {
+            CostumeResource cr = this.editor.resources.getCostumeResource(costumeName);
+            Costume costume = cr.getCostume();
+            for (String resourceName : costume.getFontNames()) {
+                for (FontResource resource : costume.getFontChoices(resourceName)) {
+                    if (resource == fontResource) {
+                        usedBy.add(costumeName);
+                    }
+                }
+            }
+        }
+        if (usedBy.isEmpty()) {
+            if ( ! usedInScenes( fontResource ) ) { 
+                this.editor.resources.removeFont(fontResource.getName());
+            }
+        } else {
+            new MessageBox("Cannot Delete. Used by Costumes...", usedBy.toString()).show();
+        }
+    }
+    
+    private boolean usedInScenes( FontResource fontResource )
+    {
+        StringList list = new StringList();
+        
+        MessageBox messageBox = new MessageBox( "Checking All Scenes", "This may take a while" );
+        messageBox.showNow();
+        
+        try {
+            Resources resources = this.editor.resources;
+            for ( String sceneName : resources.sceneNames()) {
+                try {
+                    Scene scene = resources.getScene(sceneName);
+                    if (scene.uses(fontResource)) {
+                        list.add( sceneName );
+                    }
+                } catch( Exception e) {
+                    list.add( sceneName+ " (failed to load)");
+                }
+            }
+            
+        } finally {
+            messageBox.hide();
+        }
+        
+        if (!list.isEmpty()) {
+            new MessageBox( "Cannot Delete. Used in scenes...", list.toString()).show();
+        }
+        
+        return ! list.isEmpty();
     }
 
     @Override

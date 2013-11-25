@@ -201,10 +201,9 @@ public final class Editor extends Game
             if (this.resources.renamesPending()) {
                 this.resources.loadSaveAllScenes();
             }
-            messageBox.hide();
 
         } catch (Exception e) {
-            new MessageBox("Save Failed", e.getMessage()).show();
+            new MessageBox("Save Failed", e).show();
             e.printStackTrace();
 
         } finally {

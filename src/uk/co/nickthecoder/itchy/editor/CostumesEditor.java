@@ -15,6 +15,8 @@ import uk.co.nickthecoder.itchy.CostumeResource;
 import uk.co.nickthecoder.itchy.FontResource;
 import uk.co.nickthecoder.itchy.ManagedSound;
 import uk.co.nickthecoder.itchy.PoseResource;
+import uk.co.nickthecoder.itchy.Resources;
+import uk.co.nickthecoder.itchy.Scene;
 import uk.co.nickthecoder.itchy.SoundResource;
 import uk.co.nickthecoder.itchy.gui.AbstractTableListener;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
@@ -26,6 +28,7 @@ import uk.co.nickthecoder.itchy.gui.Container;
 import uk.co.nickthecoder.itchy.gui.GridLayout;
 import uk.co.nickthecoder.itchy.gui.ImageComponent;
 import uk.co.nickthecoder.itchy.gui.Label;
+import uk.co.nickthecoder.itchy.gui.MessageBox;
 import uk.co.nickthecoder.itchy.gui.Notebook;
 import uk.co.nickthecoder.itchy.gui.Picker;
 import uk.co.nickthecoder.itchy.gui.PickerButton;
@@ -43,6 +46,7 @@ import uk.co.nickthecoder.itchy.gui.VerticalLayout;
 import uk.co.nickthecoder.itchy.gui.Window;
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
 import uk.co.nickthecoder.itchy.util.ClassName;
+import uk.co.nickthecoder.itchy.util.StringList;
 import uk.co.nickthecoder.jame.Surface;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 
@@ -825,7 +829,41 @@ public class CostumesEditor extends SubEditor<CostumeResource>
     @Override
     protected void remove( CostumeResource costumeResource )
     {
-        this.editor.resources.removeCostume(costumeResource.getName());
+        if (!usedInScenes(costumeResource)) {
+            this.editor.resources.removeCostume(costumeResource.getName());
+        }
+
+    }
+    
+    private boolean usedInScenes( CostumeResource costumeResource )
+    {
+        StringList list = new StringList();
+        
+        MessageBox messageBox = new MessageBox( "Checking All Scenes", "This may take a while" );
+        messageBox.showNow();
+        
+        try {
+            Resources resources = this.editor.resources;
+            for ( String sceneName : resources.sceneNames()) {
+                try {
+                    Scene scene = resources.getScene(sceneName);
+                    if (scene.uses(costumeResource)) {
+                        list.add( sceneName );
+                    }
+                } catch( Exception e) {
+                    list.add( sceneName+ " (failed to load)");
+                }
+            }
+            
+        } finally {
+            messageBox.hide();
+        }
+        
+        if (!list.isEmpty()) {
+            new MessageBox( "Cannot Delete. Used in scenes...", list.toString()).show();
+        }
+        
+        return ! list.isEmpty();
     }
 
     @Override

@@ -21,8 +21,6 @@ public class TextSceneActor extends SceneActor
 
     public double yAlignment;
 
-    public Costume costume;
-
     protected TextSceneActor( Actor actor )
     {
         super(actor);

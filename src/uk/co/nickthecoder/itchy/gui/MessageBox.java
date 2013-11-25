@@ -9,11 +9,6 @@ package uk.co.nickthecoder.itchy.gui;
 
 public class MessageBox extends Window
 {
-    public static void show( String title, String message )
-    {
-        MessageBox messageBox = new MessageBox(title, message);
-        messageBox.show();
-    }
 
     public MessageBox( String title, String message )
     {
@@ -30,6 +25,11 @@ public class MessageBox extends Window
 
     }
 
+    public MessageBox( String title, Exception exception )
+    {
+        this(title, exception.getMessage() == null ? "" : exception.getMessage() );
+    }
+    
     protected void createButtons( Container buttons )
     {
         Button ok = new Button("Ok");

@@ -9,8 +9,6 @@ package uk.co.nickthecoder.itchy;
 
 public class CostumeSceneActor extends SceneActor
 {
-    public Costume costume;
-
     public CostumeSceneActor( Costume costume )
     {
         this.costume = costume;

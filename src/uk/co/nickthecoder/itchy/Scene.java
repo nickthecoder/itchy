@@ -148,6 +148,26 @@ public class Scene
         return result;
     }
 
+    public boolean uses( FontResource fontResource )
+    {
+        for (SceneLayer layer : this.sceneLayers) {
+            if ( layer.uses( fontResource )) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public boolean uses( CostumeResource costumeResource )
+    {
+        for (SceneLayer layer : this.sceneLayers) {
+            if ( layer.uses( costumeResource )) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
     public class SceneLayer
     {
         String name;
@@ -191,13 +211,33 @@ public class Scene
 
         public void create( Stage stage, Resources resources, boolean designMode )
         {
-
             for (SceneActor sceneActor : this.sceneActors) {
                 Actor actor = sceneActor.createActor(resources, designMode);
                 stage.add(actor);
             }
         }
 
+        public boolean uses( FontResource fontResource )
+        {
+            for (SceneActor sceneActor : this.sceneActors) {
+                if (sceneActor instanceof TextSceneActor) {
+                    if (((TextSceneActor) sceneActor).font == fontResource.font) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+        
+        public boolean uses( CostumeResource costumeResource )
+        {
+            for (SceneActor sceneActor : this.sceneActors) {
+                if (sceneActor.costume == costumeResource.getCostume()) {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 
 }
