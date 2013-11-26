@@ -38,8 +38,6 @@ public class Scene
         this.sceneLayers = new ArrayList<SceneLayer>();
         this.layersMap = new HashMap<String, SceneLayer>();
         this.sceneDirectorClassName = new ClassName(SceneDirector.class, PlainSceneDirector.class.getName());
-
-        this.createSceneLayer("default");
     }
 
     public List<SceneLayer> getSceneLayers()
@@ -65,6 +63,14 @@ public class Scene
         this.layersMap.put(sceneLayer.getName(), sceneLayer);
     }
 
+    public void clear()
+    {
+        for (SceneLayer sceneLayer : this.sceneLayers) {
+            sceneLayer.clear();
+        }
+        this.sceneLayers.clear();
+    }
+    
     public void create( Stage layer, Resources resources, boolean designMode )
     {
         for (SceneLayer sceneLayer : this.sceneLayers) {
@@ -168,6 +174,14 @@ public class Scene
         return false;
     }
     
+    public void debug()
+    {
+        System.err.println("Scene");
+        for (SceneLayer layer : this.sceneLayers) {
+            System.err.println( "Layer : " + layer.name + " Actors " + layer.sceneActors.size() );
+        }
+    }
+    
     public class SceneLayer
     {
         String name;
@@ -195,6 +209,11 @@ public class Scene
             return Collections.unmodifiableList(this.sceneActors);
         }
 
+        public void clear()
+        {
+            this.sceneActors.clear();
+        }
+        
         public SceneLayer copy()
         {
             SceneLayer result = new SceneLayer(this.name);

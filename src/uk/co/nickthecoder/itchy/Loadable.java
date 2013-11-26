@@ -162,7 +162,7 @@ public abstract class Loadable
     public void ensure( Object a, Object b, String reason ) throws Exception
     {
         if (!a.equals(b)) {
-            throw new Exception(reason);
+            throw new Exception(reason + " " + a + " ---vs--- " + b );
         }
     }
 

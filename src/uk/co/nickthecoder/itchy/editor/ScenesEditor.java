@@ -130,7 +130,12 @@ public class ScenesEditor extends SubEditor<SceneResource>
                 throw new MessageException("That name is already being used.");
             }
         }
-        this.currentResource.rename(name.getText());
+        try {
+            this.currentResource.rename(name.getText());
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new MessageException("Failed to rename the scene file.");
+        }
 
         ClassName className = sceneDirectorClassName.getClassName();
         if (!getResources().checkClassName(className)) {
@@ -164,6 +169,11 @@ public class ScenesEditor extends SubEditor<SceneResource>
 
     }
 
+    public void refresh()
+    {
+        this.rebuildTable();
+    }
+    
     public void design( SceneResource sceneResource )
     {
         SceneDesigner designer = new SceneDesigner(this.editor, sceneResource);

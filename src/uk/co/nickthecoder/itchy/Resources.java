@@ -649,13 +649,6 @@ public class Resources extends Loadable
         return this.scenes.get(name);
     }
 
-    // TODO Rename if I want it, delete otherwise.
-    public Scene loadSceneXXX( String name ) throws Exception
-    {
-        SceneResource resource = this.scenes.get(name);
-        return resource == null ? null : resource.loadScene();
-    }
-
     public List<String> sceneNames()
     {
         return sortNames(this.scenes.keySet());
@@ -698,7 +691,6 @@ public class Resources extends Loadable
             return false;
         }
 
-        System.out.println("Adding to resources registry : " + className);
         this.registry.add(className);
         return true;
     }

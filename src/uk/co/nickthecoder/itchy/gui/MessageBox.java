@@ -10,6 +10,12 @@ package uk.co.nickthecoder.itchy.gui;
 public class MessageBox extends Window
 {
 
+
+    public MessageBox( String title, Exception exception )
+    {
+        this(title, exception.getMessage() == null ? "" : exception.getMessage() );
+    }
+    
     public MessageBox( String title, String message )
     {
         super(title);
@@ -19,33 +25,24 @@ public class MessageBox extends Window
         Container buttons = new Container();
         buttons.addStyle("buttonBar");
 
-        this.createButtons(buttons);
-
         this.clientArea.addChild(buttons);
 
-    }
-
-    public MessageBox( String title, Exception exception )
-    {
-        this(title, exception.getMessage() == null ? "" : exception.getMessage() );
-    }
-    
-    protected void createButtons( Container buttons )
-    {
         Button ok = new Button("Ok");
         ok.addActionListener(new ActionListener() {
             @Override
             public void action()
             {
-                MessageBox.this.onOk();
+                if (MessageBox.this.onOk()) {
+                    hide();
+                }
             }
         });
         buttons.addChild(ok);
     }
 
-    protected void onOk()
+    protected boolean onOk()
     {
-        this.hide();
+        return true;
     }
 
 }

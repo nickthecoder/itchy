@@ -1,18 +1,26 @@
-
 Washing, Hoover, Washing up, Hat, Hair
+Hot X
+
 Bread, lasagne.
 
 
 Bugs
 ====
 
-BUG: Rename a scene from scene designer does not rename
-    and doesn't update the ScenesEditor table
-
 BUG: Reloading a SceneBehaviour script causes the properties to double.
 
 TODO
 ====
+
+Undo/Redo in the editor.
+    Move actor using mouse
+    Key/button:
+        Zorder, cut / paste
+    Add actor
+    Classname change
+        Need to keep the old instance/ old instance's properties.
+    PropertiesForm change
+        Name of the form, name of the field, old text new text
 
 Need to allow Makeup appear at any stage in the pipeline from the editor. e.g. a Decoration which should not be rotated with the actor.
 Or a clip done at the end.

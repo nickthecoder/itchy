@@ -41,17 +41,39 @@ public class SceneResource extends Loadable
         return this.name;
     }
 
-    public void rename( String newName )
+    public boolean canRenameTo( String newName )
     {
+        File file = makeFile(newName);
+        File resolvedFile = this.resources.resolveFile(file);
+        if (resolvedFile.equals(this.getFile())) {
+            return true;
+        }
+        if (resolvedFile.exists()) {
+            return false;
+        }
+        return true;
+    }
+    
+    public void rename( String newName ) throws Exception
+    {
+        File file = makeFile(newName);
+        File resolvedFile = this.resources.resolveFile(file);
+        if (!this.name.equals(newName)) {
+            if (resolvedFile.exists()) {
+                throw new Exception("File already exists");
+            }
+            this.renameFile(file);
+        }
         this.resources.renameResource(this, newName);
         this.name = newName;
-        this.renameFile(makeFile(newName));
     }
 
     @Property(label = "Scene", recurse = true)
     public Scene getScene() throws Exception
     {
-        this.load();
+        if (this.scene == null) {
+            this.load();
+        }
         return this.scene;
     }
 
@@ -65,7 +87,7 @@ public class SceneResource extends Loadable
         load();
         return this.scene;
     }
-    
+
     @Override
     public void load() throws Exception
     {
@@ -85,7 +107,7 @@ public class SceneResource extends Loadable
     @Override
     protected void actualSave( File file ) throws Exception
     {
-        if ( this.scene == null ) {
+        if (this.scene == null) {
             this.load();
         }
 
@@ -120,7 +142,7 @@ public class SceneResource extends Loadable
                 }
             }
             i++;
-            ensure(oldSceneLayer.name, newSceneLayer.name, "Different layer name");
+            ensure(oldSceneLayer.name, newSceneLayer.name, "Different stage name");
 
             List<SceneActor> newSceneActors = newSceneLayer.getSceneActors();
             ensure(newSceneActors.size() == oldSceneLayer.getSceneActors().size(),

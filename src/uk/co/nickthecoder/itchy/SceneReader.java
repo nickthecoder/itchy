@@ -31,7 +31,7 @@ public class SceneReader
     }
 
     public Scene load( String filename ) throws Exception
-    {
+    {   
         BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(
             filename)));
         this.scene = new Scene();
@@ -58,10 +58,6 @@ public class SceneReader
         String sceneDirectorName = sceneTag.getOptionalAttribute("role", PlainSceneDirector.class.getName());
         this.scene.sceneDirectorClassName = new ClassName(SceneDirector.class, sceneDirectorName);
 
-        // For old versions without multiple layers, the actor tags are directly within the scene
-        // tag.
-        readLayer(sceneTag, this.scene.getDefaultSceneLayer());
-
         this.scene.sceneDirector = this.scene.createSceneDirector(this.resources);
 
         for (Iterator<XMLTag> i = sceneTag.getTags("properties"); i.hasNext();) {
@@ -69,8 +65,6 @@ public class SceneReader
             this.readProperties(propertiesTag);
         }
 
-        // For new versions, the scene tag has a set of layer tags, and the layer tags have the
-        // actors.
         for (Iterator<XMLTag> i = sceneTag.getTags("layer"); i.hasNext();) {
             XMLTag layerTag = i.next();
             String name = layerTag.getAttribute("name");

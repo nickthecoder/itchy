@@ -44,6 +44,7 @@ import uk.co.nickthecoder.itchy.gui.ImageComponent;
 import uk.co.nickthecoder.itchy.gui.Label;
 import uk.co.nickthecoder.itchy.gui.MessageBox;
 import uk.co.nickthecoder.itchy.gui.Notebook;
+import uk.co.nickthecoder.itchy.gui.QuestionBox;
 import uk.co.nickthecoder.itchy.gui.RootContainer;
 import uk.co.nickthecoder.itchy.gui.SimpleTableModel;
 import uk.co.nickthecoder.itchy.gui.SimpleTableModelRow;
@@ -52,6 +53,7 @@ import uk.co.nickthecoder.itchy.gui.TableListener;
 import uk.co.nickthecoder.itchy.gui.TableModelColumn;
 import uk.co.nickthecoder.itchy.gui.TableModelRow;
 import uk.co.nickthecoder.itchy.gui.TableRow;
+import uk.co.nickthecoder.itchy.gui.TextBox;
 import uk.co.nickthecoder.itchy.gui.ToggleButton;
 import uk.co.nickthecoder.itchy.gui.VerticalLayout;
 import uk.co.nickthecoder.itchy.gui.VerticalScroll;
@@ -149,6 +151,11 @@ public class SceneDesigner implements MouseListener, KeyListener
     private ClassNameBox roleClassName;
 
     /**
+     * Has anything changed since onSave was last called?
+     */
+    private boolean changed = false;
+
+    /**
      * When a text actor is the current actor, then this will be the TextBox that you enter the Actor's text. This field is used to set the
      * focus on it whenever a new text is added, and when a shortcut is used (F8).
      */
@@ -161,10 +168,9 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.sceneResource = sceneResource;
         try {
             this.scene = this.sceneResource.loadScene();
-            this.sceneResource.unloadScene();
         } catch (Exception e) {
             e.printStackTrace();
-            onDone();
+            exit();
             return;
         }
 
@@ -184,9 +190,7 @@ public class SceneDesigner implements MouseListener, KeyListener
 
         this.editor.getViews().add(this.designViews);
 
-        System.out.println("Creating Stages for Scene Designer");
         for (Stage stage : this.editor.getGame().getStages()) {
-            System.out.println(stage + " locked ? " + stage.isLocked());
             if (!stage.isLocked()) {
                 Stage designStage = stage.createDesignStage();
 
@@ -218,6 +222,35 @@ public class SceneDesigner implements MouseListener, KeyListener
 
     private void onDone()
     {
+        if (this.changed) {
+            QuestionBox question = new QuestionBox("Save", "Do you want save?") {
+                @Override
+                public boolean onOk()
+                {
+                    onSave();
+                    exit();
+                    return true;
+                }
+
+                @Override
+                public boolean onCancel()
+                {
+                    exit();
+                    return true;
+                }
+            };
+            question.okLabel.setText("Save");
+            question.cancelLabel.setText("Discard Changes");
+            question.show();
+
+        } else {
+            exit();
+        }
+    }
+
+    private void exit()
+    {
+        this.sceneResource.name = this.oldSceneName;
         this.editor.clear();
         this.editor.getStages().clear();
         this.overlayStage.clear();
@@ -233,6 +266,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.toolbar.hide();
 
         this.editor.root.show();
+        this.editor.scenesEditor.refresh();
     }
 
     private void createPageBorder()
@@ -529,12 +563,28 @@ public class SceneDesigner implements MouseListener, KeyListener
 
     private ClassNameBox sceneDirectorName;
 
+    private String oldSceneName;
+
+    private TextBox sceneNameBox;
+
     private void createScenePage()
     {
         this.sceneForm = new PropertiesForm<SceneResource>(this.sceneResource, SceneResource.properties);
         this.sceneForm.autoUpdate = true;
         this.sceneDetailsContainer.clear();
         this.sceneDetailsContainer.addChild(this.sceneForm.createForm());
+
+        this.sceneNameBox = (TextBox) this.sceneForm.getComponent("name");
+
+        this.oldSceneName = this.sceneResource.name;
+
+        this.sceneForm.addComponentChangeListener("name", new ComponentChangeListener() {
+            @Override
+            public void changed()
+            {
+                onSceneNameChanged(SceneDesigner.this.sceneNameBox);
+            }
+        });
 
         this.sceneDirectorName = (ClassNameBox) this.sceneForm.getComponent("sceneDirectorClassName");
         this.sceneForm.addComponentChangeListener("sceneDirectorClassName", new ComponentChangeListener() {
@@ -560,11 +610,16 @@ public class SceneDesigner implements MouseListener, KeyListener
 
     }
 
+    private void onSceneNameChanged( TextBox textBox )
+    {
+        this.sceneNameBox.addStyle("error", !this.sceneResource.canRenameTo(textBox.getText()));
+    }
+
     private void createSceneDirectorProperties()
     {
         PropertiesForm<SceneDirector> form = new PropertiesForm<SceneDirector>(this.scene.sceneDirector,
             this.scene.sceneDirector.getProperties());
-        
+
         form.autoUpdate = true;
         this.sceneForm.grid.ungroup();
         form.grid.groupWith(this.sceneForm.grid);
@@ -1258,6 +1313,7 @@ public class SceneDesigner implements MouseListener, KeyListener
 
                 onEditText();
             }
+            this.changed = true;
 
             return true;
         }
@@ -1301,10 +1357,12 @@ public class SceneDesigner implements MouseListener, KeyListener
 
         } else if (this.mode == MODE_DRAG_ACTOR) {
             this.currentActor.moveBy(dx, dy);
+            this.changed = true;
             beginDrag(event);
 
         } else if (this.mode == MODE_DRAG_HANDLE) {
             this.currentHandleRole.moveBy(dx, dy);
+            this.changed = true;
             beginDrag(event);
 
         }
@@ -1519,16 +1577,11 @@ public class SceneDesigner implements MouseListener, KeyListener
 
     private void onSave()
     {
-        Scene scene = new Scene();
-        scene.backgroundColor = this.scene.backgroundColor;
-        scene.showMouse = this.scene.showMouse;
-
-        scene.sceneDirectorClassName = this.scene.sceneDirectorClassName;
-        scene.sceneDirector = this.scene.sceneDirector;
-
+        this.scene.clear();
         for (StageView stageView : this.designViews.getChildren()) {
 
-            Scene.SceneLayer sceneLayer = scene.createSceneLayer(stageView.getStage().getName());
+            Scene.SceneLayer sceneLayer = this.scene.createSceneLayer(stageView.getStage().getName());
+            System.out.println("Adding scene layer " + sceneLayer.getName());
 
             for (Actor actor : stageView.getStage().getActors()) {
                 SceneActor sceneActor = SceneActor.createSceneActor(actor);
@@ -1536,9 +1589,21 @@ public class SceneDesigner implements MouseListener, KeyListener
             }
         }
 
-        this.sceneResource.setScene(scene);
         try {
+            // Rename the scene first if needed.
+            if (!this.sceneResource.name.equals(this.oldSceneName)) {
+                String newName = this.sceneResource.name;
+                this.sceneResource.name = this.oldSceneName;
+                this.sceneResource.rename(newName);
+                this.oldSceneName = newName;
+            }
+
+            this.sceneResource.setScene(this.scene);
+
             this.sceneResource.save();
+            this.editor.resources.save();
+            this.changed = false;
+
         } catch (Exception e) {
             e.printStackTrace();
             new MessageBox("Error", "Save failed.").show();
