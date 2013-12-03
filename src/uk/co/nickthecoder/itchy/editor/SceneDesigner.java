@@ -155,6 +155,8 @@ public class SceneDesigner implements MouseListener, KeyListener
      */
     private boolean changed = false;
 
+    final UndoList undoList;
+
     /**
      * When a text actor is the current actor, then this will be the TextBox that you enter the Actor's text. This field is used to set the
      * focus on it whenever a new text is added, and when a shortcut is used (F8).
@@ -163,6 +165,7 @@ public class SceneDesigner implements MouseListener, KeyListener
 
     public SceneDesigner( Editor editor, SceneResource sceneResource )
     {
+        this.undoList = new UndoList();
         this.editor = editor;
         this.sceneRect = new Rect(0, 0, editor.getGame().getWidth(), editor.getGame().getHeight());
         this.sceneResource = sceneResource;
@@ -559,7 +562,7 @@ public class SceneDesigner implements MouseListener, KeyListener
 
     }
 
-    private PropertiesForm<SceneResource> sceneForm;
+    private SceneDesignerPropertiesForm<SceneResource> sceneForm;
 
     private ClassNameBox sceneDirectorName;
 
@@ -569,7 +572,7 @@ public class SceneDesigner implements MouseListener, KeyListener
 
     private void createScenePage()
     {
-        this.sceneForm = new PropertiesForm<SceneResource>(this.sceneResource, SceneResource.properties);
+        this.sceneForm = new SceneDesignerPropertiesForm<SceneResource>("scene", this, this.sceneResource, SceneResource.properties);
         this.sceneForm.autoUpdate = true;
         this.sceneDetailsContainer.clear();
         this.sceneDetailsContainer.addChild(this.sceneForm.createForm());
@@ -615,38 +618,44 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.sceneNameBox.addStyle("error", !this.sceneResource.canRenameTo(textBox.getText()));
     }
 
+    private SceneDesignerPropertiesForm<SceneDirector> sceneDirectorPropertiesForm;
+
     private void createSceneDirectorProperties()
     {
-        PropertiesForm<SceneDirector> form = new PropertiesForm<SceneDirector>(this.scene.sceneDirector,
+        this.sceneDirectorPropertiesForm = new SceneDesignerPropertiesForm<SceneDirector>("sceneDirector", this, this.scene.sceneDirector,
             this.scene.sceneDirector.getProperties());
 
-        form.autoUpdate = true;
+        this.sceneDirectorPropertiesForm.autoUpdate = true;
         this.sceneForm.grid.ungroup();
-        form.grid.groupWith(this.sceneForm.grid);
+        this.sceneDirectorPropertiesForm.grid.groupWith(this.sceneForm.grid);
         this.scenePropertiesContainer.clear();
-        this.scenePropertiesContainer.addChild(form.createForm());
+        this.scenePropertiesContainer.addChild(this.sceneDirectorPropertiesForm.createForm());
     }
+
+    private SceneDesignerPropertiesForm<Actor> actorPropertiesForm;
 
     private void createActorPage()
     {
         this.propertiesContainer.clear();
-        PropertiesForm<Actor> form = new PropertiesForm<Actor>(this.currentActor, this.currentActor.getProperties());
-        form.autoUpdate = true;
-        this.propertiesContainer.addChild(form.createForm());
+        this.actorPropertiesForm = new SceneDesignerPropertiesForm<Actor>("actor", this, this.currentActor, this.currentActor.getProperties());
+        this.actorPropertiesForm.autoUpdate = true;
+        this.propertiesContainer.addChild(this.actorPropertiesForm.createForm());
     }
+
+    private SceneDesignerPropertiesForm<Appearance> appearancePropertiesForm;
 
     private void createAppearancePage()
     {
         Appearance appearance = this.currentActor.getAppearance();
-        PropertiesForm<Appearance> form = new PropertiesForm<Appearance>(appearance, appearance.getProperties());
-        form.autoUpdate = true;
+        this.appearancePropertiesForm = new SceneDesignerPropertiesForm<Appearance>("appearance", this, appearance, appearance.getProperties());
+        this.appearancePropertiesForm.autoUpdate = true;
         this.appearanceContainer.clear();
 
         Costume costume = this.currentActor.getCostume();
         Container container = new Container();
         container.setType("form");
         GridLayout grid = new GridLayout(container, 2);
-        grid.groupWith(form.grid);
+        grid.groupWith(this.appearancePropertiesForm.grid);
         final Label label = new Label((costume == null) ? "None" : this.editor.resources.getCostumeName(costume));
         final Button button = new Button(label);
         grid.addRow("Costume", button);
@@ -678,13 +687,13 @@ public class SceneDesigner implements MouseListener, KeyListener
             }
         });
 
-        Component theRest = form.createForm();
+        Component theRest = this.appearancePropertiesForm.createForm();
 
         this.appearanceContainer.setLayout(new VerticalLayout());
         this.appearanceContainer.addChild(container);
         this.appearanceContainer.addChild(theRest);
 
-        this.actorTextInput = form.getComponent("pose.text");
+        this.actorTextInput = this.appearancePropertiesForm.getComponent("pose.text");
     }
 
     private void createRolePage()
@@ -715,16 +724,18 @@ public class SceneDesigner implements MouseListener, KeyListener
         createRoleProperties();
     }
 
+    private SceneDesignerPropertiesForm<Role> rolePropertiesForm;
+
     private void createRoleProperties()
     {
         this.roleClassName.remove();
 
         Role role = ((SceneDesignerRole) this.currentActor.getRole()).actualRole;
-        PropertiesForm<Role> form = new PropertiesForm<Role>(role, role.getProperties());
-        form.autoUpdate = true;
+        this.rolePropertiesForm = new SceneDesignerPropertiesForm<Role>("role", this, role, role.getProperties());
+        this.rolePropertiesForm.autoUpdate = true;
         this.roleContainer.clear();
-        form.grid.addRow("Role", this.roleClassName);
-        this.roleContainer.addChild(form.createForm());
+        this.rolePropertiesForm.grid.addRow("Role", this.roleClassName);
+        this.roleContainer.addChild(this.rolePropertiesForm.createForm());
     }
 
     private ClassNameBox makeupClassName;
@@ -759,15 +770,17 @@ public class SceneDesigner implements MouseListener, KeyListener
         createMakeupProperties();
     }
 
+    private SceneDesignerPropertiesForm<Makeup> makeupPropertiesForm;
+
     private void createMakeupProperties()
     {
         Makeup makeup = this.currentActor.getAppearance().getMakeup();
         this.makeupClassName.remove();
-        PropertiesForm<Makeup> form = new PropertiesForm<Makeup>(makeup, makeup.getProperties());
-        form.autoUpdate = true;
+        this.makeupPropertiesForm = new SceneDesignerPropertiesForm<Makeup>("makeup", this, makeup, makeup.getProperties());
+        this.makeupPropertiesForm.autoUpdate = true;
         this.makeupContainer.clear();
-        form.grid.addRow("Makeup", this.makeupClassName);
-        this.makeupContainer.addChild(form.createForm());
+        this.makeupPropertiesForm.grid.addRow("Makeup", this.makeupClassName);
+        this.makeupContainer.addChild(this.makeupPropertiesForm.createForm());
     }
 
     private void updateProperties()
@@ -778,6 +791,12 @@ public class SceneDesigner implements MouseListener, KeyListener
             this.roleContainer.clear();
             this.actorTextInput = null;
             this.makeupContainer.clear();
+            
+            this.actorPropertiesForm = null;
+            this.appearancePropertiesForm = null;
+            this.rolePropertiesForm = null;
+            this.makeupPropertiesForm = null;
+            
         } else {
             createActorPage();
             createRolePage();
@@ -931,6 +950,31 @@ public class SceneDesigner implements MouseListener, KeyListener
         }
     }
 
+    @SuppressWarnings("rawtypes")
+    public SceneDesignerPropertiesForm getForm( String formName )
+    {
+        if ("scene".equals(formName)) {
+            return this.sceneForm;
+
+        } else if ("sceneDirector".equals(formName)) {
+            return this.sceneDirectorPropertiesForm;
+
+        } else if ("actor".equals(formName)) {
+            return this.actorPropertiesForm;
+
+        } else if ("appearance".equals(formName)) {
+            return this.appearancePropertiesForm;
+
+        } else if ("role".equals(formName)) {
+            return this.rolePropertiesForm;
+
+        } else if ("makeup".equals(formName)) {
+            return this.makeupPropertiesForm;
+
+        }
+        return null;
+    }
+
     private void setMode( int mode )
     {
         if (mode == this.mode) {
@@ -969,6 +1013,17 @@ public class SceneDesigner implements MouseListener, KeyListener
 
             if (event.symbol == Keys.s) {
                 onSave();
+                return true;
+            } else if (event.symbol == Keys.z) {
+                if (Itchy.isShiftDown()) {
+                    this.undoList.redo();
+                } else {
+                    this.undoList.undo();
+                }
+                return true;
+
+            } else if (event.symbol == Keys.y) {
+                this.undoList.redo();
                 return true;
 
             } else if (event.symbol == Keys.w) {
@@ -1356,7 +1411,9 @@ public class SceneDesigner implements MouseListener, KeyListener
             return true;
 
         } else if (this.mode == MODE_DRAG_ACTOR) {
-            this.currentActor.moveBy(dx, dy);
+            if ((dx != 0) || (dy != 0)) {
+                this.undoList.apply(new UndoMoveActor(this.currentActor, dx, dy));
+            }
             this.changed = true;
             beginDrag(event);
 
@@ -1390,7 +1447,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         }
     }
 
-    private void selectActor( Actor actor )
+    public void selectActor( Actor actor )
     {
         this.currentActor = actor;
         deleteHighlightActor();
@@ -1399,6 +1456,11 @@ public class SceneDesigner implements MouseListener, KeyListener
         if (actor != null) {
             createHightlightActor();
         }
+    }
+    
+    public Actor getCurrentActor()
+    {
+        return this.currentActor;
     }
 
     private void createStampActor()
@@ -1808,8 +1870,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         {
             super.dragStart();
             if (this.target.getAppearance().getPose() instanceof TextPose) {
-                this.startScale = ((TextPose) (this.target.getAppearance().getPose()))
-                    .getFontSize();
+                this.startScale = ((TextPose) (this.target.getAppearance().getPose())).getFontSize();
             } else {
                 this.startScale = this.target.getAppearance().getScale();
             }
@@ -1841,43 +1902,48 @@ public class SceneDesigner implements MouseListener, KeyListener
         public void moveBy( int dx, int dy )
         {
             assert (this.target != null);
-
-            double ratioX = (this.target.getX() - this.opposite.getActor().getX()) /
-                (getActor().getX() - this.opposite.getActor().getX());
-            double ratioY = (this.target.getY() - this.opposite.getActor().getY()) /
-                (getActor().getY() - this.opposite.getActor().getY());
-
-            super.moveBy(dx, dy);
-
-            Actor other = Itchy.isCtrlDown() ? this.target : this.opposite.getActor();
-
-            double scaleX = (other.getX() - getActor().getX()) / (other.getX() - this.startX);
-            double scaleY = (other.getY() - getActor().getY()) / (other.getY() - this.startY);
-            double scale = Math.min(scaleX, scaleY);
-
-            if (!Itchy.isCtrlDown()) {
-                this.target.moveBy(dx * ratioX, dy * ratioY);
-            }
-
-            if (this.target.getAppearance().getPose() instanceof TextPose) {
-                TextPose pose = (TextPose) this.target.getAppearance().getPose();
-                double newFontSize = this.startScale * scale;
-                if (newFontSize < 5) {
-                    super.moveBy(-dx, -dy);
-                    return;
+            UndoScaleActor undo = new UndoScaleActor(this.target);
+            try {
+    
+                double ratioX = (this.target.getX() - this.opposite.getActor().getX()) /
+                    (getActor().getX() - this.opposite.getActor().getX());
+                double ratioY = (this.target.getY() - this.opposite.getActor().getY()) /
+                    (getActor().getY() - this.opposite.getActor().getY());
+    
+                super.moveBy(dx, dy);
+    
+                Actor other = Itchy.isCtrlDown() ? this.target : this.opposite.getActor();
+    
+                double scaleX = (other.getX() - getActor().getX()) / (other.getX() - this.startX);
+                double scaleY = (other.getY() - getActor().getY()) / (other.getY() - this.startY);
+                double scale = Math.min(scaleX, scaleY);
+    
+                if (!Itchy.isCtrlDown()) {
+                    this.target.moveBy(dx * ratioX, dy * ratioY);
                 }
-                pose.setFontSize(newFontSize);
-            } else {
-                double newScale = this.startScale * scale;
-                double width = getActor().getAppearance().getPose().getSurface().getWidth() *
-                    newScale;
-                double height = getActor().getAppearance().getPose().getSurface().getHeight() *
-                    newScale;
-                if ((width < 4) || (height < 4)) {
-                    super.moveBy(-dx, -dy);
-                    return;
+    
+                if (this.target.getAppearance().getPose() instanceof TextPose) {
+                    TextPose pose = (TextPose) this.target.getAppearance().getPose();
+                    double newFontSize = this.startScale * scale;
+                    if (newFontSize < 5) {
+                        super.moveBy(-dx, -dy);
+                        return;
+                    }
+                    pose.setFontSize(newFontSize);
+                } else {
+                    double newScale = this.startScale * scale;
+                    double width = getActor().getAppearance().getPose().getSurface().getWidth() *
+                        newScale;
+                    double height = getActor().getAppearance().getPose().getSurface().getHeight() *
+                        newScale;
+                    if ((width < 4) || (height < 4)) {
+                        super.moveBy(-dx, -dy);
+                        return;
+                    }
+                    this.target.getAppearance().setScale(this.startScale * scale);
                 }
-                this.target.getAppearance().setScale(this.startScale * scale);
+            } finally {
+                undo.end(SceneDesigner.this.undoList);
             }
         }
 
@@ -1888,17 +1954,23 @@ public class SceneDesigner implements MouseListener, KeyListener
         @Override
         public void moveBy( int dx, int dy )
         {
-            super.moveBy(dx, dy);
-
-            double tx = getActor().getX() - this.target.getX();
-            double ty = getActor().getY() - this.target.getY();
-
-            double angleRadians = Math.atan2(ty, tx);
-            double headingDiff = this.target.getHeading() - this.target.getAppearance().getDirection();
-            getActor().setDirectionRadians(angleRadians);
-
-            this.target.getAppearance().setDirectionRadians(angleRadians);
-            this.target.setHeading(this.target.getAppearance().getDirection() + headingDiff);
+            UndoRotateActor undo = new UndoRotateActor( this.target );
+            try {
+                super.moveBy(dx, dy);
+    
+                double tx = getActor().getX() - this.target.getX();
+                double ty = getActor().getY() - this.target.getY();
+    
+                double angleRadians = Math.atan2(ty, tx);
+                double headingDiff = this.target.getHeading() - this.target.getAppearance().getDirection();
+                getActor().setDirectionRadians(angleRadians);
+    
+                this.target.getAppearance().setDirectionRadians(angleRadians);
+                this.target.setHeading(this.target.getAppearance().getDirection() + headingDiff);
+            
+            } finally {
+                undo.end(undoList);
+            }
         }
 
         @Override
@@ -1922,14 +1994,21 @@ public class SceneDesigner implements MouseListener, KeyListener
         @Override
         public void moveBy( int dx, int dy )
         {
-            super.moveBy(dx, dy);
-
-            double tx = getActor().getX() - this.target.getX();
-            double ty = getActor().getY() - this.target.getY();
-
-            double angle = Math.atan2(ty, tx);
-            getActor().getAppearance().setDirectionRadians(angle);
-            this.target.setHeadingRadians(angle);
+            UndoRotateActor undo = new UndoRotateActor( this.target );
+            try {
+    
+                super.moveBy(dx, dy);
+    
+                double tx = getActor().getX() - this.target.getX();
+                double ty = getActor().getY() - this.target.getY();
+    
+                double angle = Math.atan2(ty, tx);
+                getActor().getAppearance().setDirectionRadians(angle);
+                this.target.setHeadingRadians(angle);
+                
+            } finally {
+                undo.end(undoList);
+            }
         }
 
         @Override

@@ -69,6 +69,15 @@ public class EnumProperty<S, E extends Enum<?>> extends AbstractProperty<S, E>
 
         setValue(subject, button.getValue());
     }
+    
+    @Override
+    public void refresh( S subject, Component component ) throws Exception
+    {
+        @SuppressWarnings("unchecked")
+        EnumPickerButton<E> button = (EnumPickerButton<E>) component;
+
+        button.setValue(getValue(subject));
+    }
 
     @Override
     public E parse( String value )

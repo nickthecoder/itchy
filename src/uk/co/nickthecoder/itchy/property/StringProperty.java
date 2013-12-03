@@ -66,6 +66,13 @@ public class StringProperty<S> extends AbstractProperty<S, String>
             throw e;
         }
     }
+    
+    @Override
+    public void refresh( S subject, Component component ) throws Exception
+    {
+        TextBox textBox = (TextBox) component;
+        textBox.setText(this.getValue(subject));
+    }
 
     @Override
     public String parse( String value )

@@ -77,6 +77,13 @@ public class RGBAProperty<S> extends AbstractProperty<S, RGBA>
     }
 
     @Override
+    public void refresh( S subject, Component component ) throws Exception
+    {
+        RGBABox rgbaBox = (RGBABox) component;
+        rgbaBox.setValue(this.getValue(subject) );
+    }
+
+    @Override
     public RGBA parse( String value )
     {
         try {

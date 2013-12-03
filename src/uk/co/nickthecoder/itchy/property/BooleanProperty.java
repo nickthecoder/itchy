@@ -68,6 +68,13 @@ public class BooleanProperty<S> extends AbstractProperty<S, Boolean>
             checkBox.addStyle("error");
         }
     }
+    
+    @Override
+    public void refresh( S subject, Component component ) throws Exception
+    {
+        CheckBox checkBox = (CheckBox) component;
+        checkBox.setValue(this.getValue(subject));
+    }
 
     @Override
     public Boolean parse( String value )

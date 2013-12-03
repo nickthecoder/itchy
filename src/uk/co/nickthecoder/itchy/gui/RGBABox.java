@@ -58,6 +58,11 @@ public class RGBABox extends Container
     {
         return RGBA.parse(this.textBox.getText(), this.allowNull, this.includeAlpha);
     }
+    
+    public void setValue( RGBA value )
+    {
+        this.textBox.setText( this.includeAlpha ? value.getRGBACode() : value.getRGBCode() );
+    }
 
     public void addChangeListener( ComponentChangeListener ccl )
     {

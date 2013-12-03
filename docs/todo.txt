@@ -1,8 +1,18 @@
-Washing, Hoover, Washing up, Hat, Hair
-Hot X
+Washing,
+Hot X buns
 
 Bread, lasagne.
 
+Undo/Redo
+
+    Trouble with null/blank values for colorize.
+
+    Cut actor
+    Classname changes
+    Paste an Actor
+    Any other fields which don't use propertiesforms    
+
+    Toolbar buttons
 
 Bugs
 ====
@@ -12,16 +22,25 @@ BUG: Reloading a SceneBehaviour script causes the properties to double.
 TODO
 ====
 
-Undo/Redo in the editor.
-    Move actor using mouse
-    Key/button:
-        Zorder, cut / paste
-    Add actor
-    Classname change
-        Need to keep the old instance/ old instance's properties.
-    PropertiesForm change
-        Name of the form, name of the field, old text new text
+Dynamic class loader for game jar files, which live in resources/foo/lib/ or ./lib when outside of itchy's resources directory.
 
+Make Text Costumes real costumes - Don't use the "Text" tool.
+    Include font size and colour?
+    Thumbnail to include the colour and the text "Abc".
+    Don't add a String to the costume when creating it.
+    Try to rationalise Actor's constructor - can I force it to have a Costume now?
+        Actor(Costume, String poseName = "default" ) i.e. just two constructors.
+        If a Pose is found use it, else if a Font is found use that, otherwise use a dummy 1x1 surface, and issue a warning.
+    During load - if it finds a "text", then generate a costume which is used by later "text" actors.
+
+Hover over button for tooltips.
+    If a component has a tooltip, then for all mousemove events, if inside, tell Game that a tooltip is available.
+    Game remembers the time, and the tooltip factory
+    Inside tick, if the tooltip delay has passed without any other mouse moves, then tell tooltip factory to create the rootwindow.
+    Game destroys the tooltip window on the next mousemove/up/down.
+    TooltipFactory interface : public Component createTooltip();
+    Create tooltips of Costumes tab - with the name of the costume.
+    
 Need to allow Makeup appear at any stage in the pipeline from the editor. e.g. a Decoration which should not be rotated with the actor.
 Or a clip done at the end.
     A tick box "Advanced" will reveal a Compound Makeup as a table, with the standard items as well as the current Makeup if its not Null. 

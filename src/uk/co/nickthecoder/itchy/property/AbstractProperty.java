@@ -379,6 +379,14 @@ public abstract class AbstractProperty<S, T> implements Comparable<AbstractPrope
     public abstract void update( S subject, Component component ) throws Exception;
 
     /**
+     * Refreshes the component based on the state of the subject.
+     * @param subject
+     * @param component
+     * @throws Exception
+     */
+    public abstract void refresh( S subject, Component component ) throws Exception;
+
+       /**
      * Checks if the entered value is valid, and if so, returns null, otherwise it returns the error
      * message explaining what if wrong with the entered value.
      * 

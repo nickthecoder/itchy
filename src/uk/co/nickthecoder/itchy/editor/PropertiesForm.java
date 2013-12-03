@@ -30,7 +30,7 @@ public class PropertiesForm<S>
     public GridLayout grid;
 
     public boolean autoUpdate;
-
+    
     private Map<String, Component> componentMap;
 
     List<AbstractProperty<S, ?>> properties;
@@ -52,7 +52,7 @@ public class PropertiesForm<S>
         this.componentMap = new HashMap<String, Component>();
 
         for (AbstractProperty<S, ?> property : this.properties) {
-            Component component = property.createComponent(this.subject, this.autoUpdate);
+            Component component = createComponent(property);
             this.componentMap.put(property.key, component);
             this.grid.addRow(property.label, hint(component, property.hint));
         }
@@ -60,6 +60,11 @@ public class PropertiesForm<S>
         return this.container;
     }
 
+    protected Component createComponent( AbstractProperty<S,?> property )
+    {
+        return property.createComponent(this.subject, this.autoUpdate);
+    }
+    
     /**
      * Takes an input component, and adds a optional hint text to its right.
      * 

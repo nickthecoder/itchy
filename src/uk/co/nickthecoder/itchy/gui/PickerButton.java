@@ -39,12 +39,7 @@ public class PickerButton<T> extends Button
 
         String labelString = "<select>";
         if (current != null) {
-            for (String key : hashMap.keySet()) {
-                if (current.equals(hashMap.get(key))) {
-                    labelString = key;
-                    break;
-                }
-            }
+            labelString = getLabelString( current );
         }
 
         this.label = new Label(labelString);
@@ -52,7 +47,16 @@ public class PickerButton<T> extends Button
 
         this.changeListeners = new ArrayList<ComponentChangeListener>();
     }
-
+    
+    private String getLabelString( T value )
+    {
+        for (String key : hashMap.keySet()) {
+            if (value.equals(hashMap.get(key))) {
+                return key;
+            }
+        }  
+        return "<select>";
+    }
     public void addChangeListener( ComponentChangeListener listener )
     {
         this.changeListeners.add(listener);
@@ -88,5 +92,11 @@ public class PickerButton<T> extends Button
     public T getValue()
     {
         return this.value;
+    }
+
+    public void setValue( T value )
+    {
+        this.label.setText(getLabelString( value ));
+        this.value = value;
     }
 }

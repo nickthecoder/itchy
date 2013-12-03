@@ -78,6 +78,14 @@ public class ClassNameProperty<S> extends AbstractProperty<S, ClassName>
     }
 
     @Override
+    public void refresh( S subject, Component component ) throws Exception
+    {
+        ClassNameBox classNameBox = (ClassNameBox) component;
+
+        classNameBox.setClassName( this.getValue(subject));
+    }
+
+    @Override
     public ClassName parse( String value )
     {
         return new ClassName(this.baseClass, value);

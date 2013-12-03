@@ -220,6 +220,12 @@ public class ClassNameBox extends Container
     {
         return this.value;
     }
+    
+    public void setClassName( ClassName value )
+    {
+        this.value = value;
+        this.textBox.setText(value.name);
+    }
 
     public void addChangeListener( ComponentChangeListener ccl )
     {

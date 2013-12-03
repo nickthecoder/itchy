@@ -74,6 +74,13 @@ public class FileProperty<S> extends AbstractProperty<S, File>
     }
 
     @Override
+    public void refresh( S subject, Component component ) throws Exception
+    {
+        FilenameComponent filenameComponent = (FilenameComponent) component;
+        filenameComponent.setText( getValue(subject).getPath() );
+    }
+
+    @Override
     public File parse( String value )
     {
         return new File(value);

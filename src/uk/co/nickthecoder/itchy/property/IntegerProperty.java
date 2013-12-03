@@ -91,6 +91,13 @@ public class IntegerProperty<S> extends AbstractProperty<S, Integer>
             integerBox.addStyle("error");
         }
     }
+    
+    @Override
+    public void refresh( S subject, Component component ) throws Exception
+    {
+        IntegerBox integerBox = (IntegerBox) component;
+        integerBox.setValue(this.getValue(subject));
+    }
 
     @Override
     public Integer parse( String value )

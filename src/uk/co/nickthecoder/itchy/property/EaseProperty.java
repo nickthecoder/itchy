@@ -66,6 +66,13 @@ public class EaseProperty<S> extends AbstractProperty<S, Ease>
     }
 
     @Override
+    public void refresh( S subject, Component component ) throws Exception
+    {
+        EasePickerButton button = (EasePickerButton) component;
+        button.setValue(getValue(subject));
+    }
+
+    @Override
     public Ease parse( String value )
     {
         Ease ease = Itchy.registry.getEase(value);
