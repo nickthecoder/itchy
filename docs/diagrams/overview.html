@@ -178,6 +178,8 @@ FIELDS
       <li class="public">tick</li>
       <li class="public">onBirth</li>
       <li class="public">onDeath</li>
+      <li class="public">onAttach</li>
+      <li class="public">onDetach</li>
       <li class="public">onKeyDown</li>
       <li class="public">onKeyUp</li>
       <li class="public">onMouseDown</li>
@@ -262,6 +264,20 @@ FIELDS
   <div class="content">
   </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -428,16 +444,16 @@ FIELDS
       <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#moveTo(uk.co.nickthecoder.itchy.Actor)">moveTo</a></li>
       <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#moveTo(double, double)">moveTo</a></li>
       <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#moveTowards(uk.co.nickthecoder.itchy.Actor, double)">moveTowards</a></li>
-      <li class="public static"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#nearest(double, double, java.lang.String)">nearest</a></li>
       <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#nearest(java.lang.String)">nearest</a></li>
+      <li class="public static"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#nearest(double, double, java.lang.String)">nearest</a></li>
       <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#overlapping(java.lang.String[], java.lang.String[])">overlapping</a></li>
       <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#overlapping(uk.co.nickthecoder.itchy.Actor)">overlapping</a></li>
       <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#overlapping(java.lang.String[])">overlapping</a></li>
       <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#overlapping(java.lang.String)">overlapping</a></li>
       <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#pixelOverlap(java.lang.String[], java.lang.String[])">pixelOverlap</a></li>
       <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#pixelOverlap(uk.co.nickthecoder.itchy.Actor)">pixelOverlap</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#pixelOverlap(int, int)">pixelOverlap</a></li>
       <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#pixelOverlap(java.lang.String[])">pixelOverlap</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#pixelOverlap(int, int)">pixelOverlap</a></li>
       <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#pixelOverlap(int, int, int)">pixelOverlap</a></li>
       <li class="public"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#pixelOverlap(java.lang.String)">pixelOverlap</a></li>
       <li class="public final"><a href="../api/uk/co/nickthecoder/itchy/Actor.html#setRole(uk.co.nickthecoder.itchy.Role)">setRole</a></li>
@@ -564,7 +580,7 @@ function drawConnections()
     connect2( "SceneDirectorScript", "SceneDirector", "sceneDirector", "sceneDirectorScript" );
     connect( "RoleScript", "Actor", "actor" );
     connect( "RoleScript", "CostumePropertiesScript", "getCostumeProperties" );
-    connect2( "Director", "Game", "game", "directorScript" );
+    connect( "Game", "Director", "getDirector" );
     connect2( "DirectorScript", "Director", "director", "directorScript" );
     connect( "Actor", "Stage", "getStage" );
     connect( "Stage", "Game", "stages", compositionEnd );

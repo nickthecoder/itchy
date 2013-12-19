@@ -414,7 +414,7 @@ public class Actor implements PropertySubject<Actor>
         if (this.stage != null) {
             this.stage.changedRole(this);
         }
-        
+
         checkFullyCreated();
     }
 
@@ -771,7 +771,7 @@ public class Actor implements PropertySubject<Actor>
     {
         if (this.role != null) {
             try {
-               this.role.animateAndTick();
+                this.role.animateAndTick();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -781,7 +781,7 @@ public class Actor implements PropertySubject<Actor>
     @Override
     public String toString()
     {
-        return "Actor #" + this.id + " @ " + getX() + "," + getY() + " " + 
+        return "Actor #" + this.id + " @ " + getX() + "," + getY() + " " +
             (getRole() == null ? "" : "(" + getRole().getClass().getName() + ")");
     }
 

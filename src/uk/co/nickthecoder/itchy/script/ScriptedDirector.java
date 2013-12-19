@@ -1,7 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0 which accompanies this
- * distribution, and is available at http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.script;
 
@@ -33,7 +32,7 @@ public class ScriptedDirector extends AbstractDirector implements ScriptedObject
     {
         return this.className;
     }
-    
+
     @Override
     public Object getScriptedObject()
     {
@@ -48,9 +47,8 @@ public class ScriptedDirector extends AbstractDirector implements ScriptedObject
     }
 
     /**
-     * The javascript base class DirectorScript calls this as its default implementation.
-     * The game write can choose to call super to get the default views and stages.
-     * Or they can not call super, and create there own stages and views.
+     * The javascript base class DirectorScript calls this as its default implementation. The game write can choose to call super to get the
+     * default views and stages. Or they can not call super, and create there own stages and views.
      */
     public void superOnStarted()
     {
@@ -67,7 +65,7 @@ public class ScriptedDirector extends AbstractDirector implements ScriptedObject
     {
         super.onActivate();
     }
-    
+
     @Override
     public void onActivate()
     {
@@ -78,7 +76,7 @@ public class ScriptedDirector extends AbstractDirector implements ScriptedObject
     {
         super.onActivate();
     }
-    
+
     @Override
     public void onDeactivate()
     {
@@ -89,7 +87,7 @@ public class ScriptedDirector extends AbstractDirector implements ScriptedObject
     {
         super.onQuit();
     }
-    
+
     @Override
     public boolean onQuit()
     {
@@ -100,7 +98,7 @@ public class ScriptedDirector extends AbstractDirector implements ScriptedObject
     {
         return super.onKeyDown(event);
     }
-    
+
     @Override
     public boolean onKeyDown( KeyboardEvent event )
     {
@@ -111,7 +109,7 @@ public class ScriptedDirector extends AbstractDirector implements ScriptedObject
     {
         return super.onKeyUp(event);
     }
-    
+
     @Override
     public boolean onKeyUp( KeyboardEvent ke )
     {
@@ -122,7 +120,7 @@ public class ScriptedDirector extends AbstractDirector implements ScriptedObject
     {
         return super.onMouseDown(event);
     }
-    
+
     @Override
     public boolean onMouseDown( MouseButtonEvent event )
     {
@@ -137,7 +135,7 @@ public class ScriptedDirector extends AbstractDirector implements ScriptedObject
     {
         return super.onMouseUp(event);
     }
-    
+
     @Override
     public boolean onMouseUp( MouseButtonEvent event )
     {
@@ -148,13 +146,13 @@ public class ScriptedDirector extends AbstractDirector implements ScriptedObject
     {
         return super.onMouseMove(event);
     }
-    
+
     @Override
     public boolean onMouseMove( MouseMotionEvent event )
     {
         return this.language.onMouseMove(this, event);
     }
-    
+
     public void superOnMessage( String message )
     {
         super.onMessage(message);
@@ -165,18 +163,17 @@ public class ScriptedDirector extends AbstractDirector implements ScriptedObject
     {
         this.language.onMessage(this, message);
     }
-    
+
     public void superTick()
     {
         super.tick();
     }
-    
+
     @Override
     public void tick()
     {
         this.language.tick(this);
     }
-
 
     public boolean superStartScene( String sceneName )
     {

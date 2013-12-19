@@ -1,9 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.animation;
 
@@ -20,7 +17,7 @@ public class FramedAnimation extends AbstractAnimation
     private static final List<AbstractProperty<Animation, ?>> properties =
         AbstractProperty.<Animation> findAnnotations(FramedAnimation.class);
 
-    @Property(label="Ping Pong")
+    @Property(label = "Ping Pong")
     public boolean pingPong;
 
     List<Frame> frames;
@@ -38,7 +35,7 @@ public class FramedAnimation extends AbstractAnimation
     {
         return properties;
     }
-    
+
     public void addFrame( Frame frame )
     {
         this.frames.add(frame);
@@ -80,14 +77,14 @@ public class FramedAnimation extends AbstractAnimation
         this.direction = 1;
         useFrame(actor);
     }
-    
-    private void useFrame(Actor actor)
+
+    private void useFrame( Actor actor )
     {
         Frame frame = this.frames.get(this.frameIndex);
         actor.getAppearance().setPose(frame.getPose());
         this.delay = frame.getDelay();
     }
-    
+
     @Override
     public void tick( Actor actor )
     {
@@ -102,7 +99,7 @@ public class FramedAnimation extends AbstractAnimation
             this.frameIndex = this.frames.size() - 2;
             this.direction = -1;
         }
-        
+
         if (this.isFinished()) {
             super.tick(actor);
         } else {

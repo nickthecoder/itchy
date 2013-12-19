@@ -15,7 +15,7 @@ public class SimpleOffsetSurface implements OffsetSurface
     public Surface surface;
 
     public boolean shared;
-    
+
     public SimpleOffsetSurface( OffsetSurface other )
     {
         this.offsetX = other.getOffsetX();
@@ -23,15 +23,15 @@ public class SimpleOffsetSurface implements OffsetSurface
         this.surface = other.getSurface();
         this.shared = other.isShared();
     }
-    
-    public SimpleOffsetSurface( Surface surface, int x, int y)
+
+    public SimpleOffsetSurface( Surface surface, int x, int y )
     {
         this.offsetX = x;
         this.offsetY = y;
         this.surface = surface;
-        shared = false;
+        this.shared = false;
     }
-    
+
     @Override
     public int getOffsetX()
     {

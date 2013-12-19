@@ -1,7 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0 which accompanies this
- * distribution, and is available at http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.editor;
 
@@ -25,14 +24,12 @@ public class FilenameComponent extends Container
     private FileOpenDialog openDialog;
 
     /**
-     * Used to hold the filename before it was changed, so that the rename button knows what to
-     * rename from.
+     * Used to hold the filename before it was changed, so that the rename button knows what to rename from.
      */
     private String preRename;
 
     /**
-     * True if the file must exist - the textbox will have the "error" style if this is set, and the
-     * file does not exist.
+     * True if the file must exist - the textbox will have the "error" style if this is set, and the file does not exist.
      */
     public boolean mustExist = true;
 

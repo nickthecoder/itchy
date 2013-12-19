@@ -637,7 +637,8 @@ public class SceneDesigner implements MouseListener, KeyListener
     private void createActorPage()
     {
         this.propertiesContainer.clear();
-        this.actorPropertiesForm = new SceneDesignerPropertiesForm<Actor>("actor", this, this.currentActor, this.currentActor.getProperties());
+        this.actorPropertiesForm = new SceneDesignerPropertiesForm<Actor>("actor", this, this.currentActor,
+            this.currentActor.getProperties());
         this.actorPropertiesForm.autoUpdate = true;
         this.propertiesContainer.addChild(this.actorPropertiesForm.createForm());
     }
@@ -647,7 +648,8 @@ public class SceneDesigner implements MouseListener, KeyListener
     private void createAppearancePage()
     {
         Appearance appearance = this.currentActor.getAppearance();
-        this.appearancePropertiesForm = new SceneDesignerPropertiesForm<Appearance>("appearance", this, appearance, appearance.getProperties());
+        this.appearancePropertiesForm = new SceneDesignerPropertiesForm<Appearance>("appearance", this, appearance,
+            appearance.getProperties());
         this.appearancePropertiesForm.autoUpdate = true;
         this.appearanceContainer.clear();
 
@@ -791,12 +793,12 @@ public class SceneDesigner implements MouseListener, KeyListener
             this.roleContainer.clear();
             this.actorTextInput = null;
             this.makeupContainer.clear();
-            
+
             this.actorPropertiesForm = null;
             this.appearancePropertiesForm = null;
             this.rolePropertiesForm = null;
             this.makeupPropertiesForm = null;
-            
+
         } else {
             createActorPage();
             createRolePage();
@@ -1457,7 +1459,7 @@ public class SceneDesigner implements MouseListener, KeyListener
             createHightlightActor();
         }
     }
-    
+
     public Actor getCurrentActor()
     {
         return this.currentActor;
@@ -1904,24 +1906,24 @@ public class SceneDesigner implements MouseListener, KeyListener
             assert (this.target != null);
             UndoScaleActor undo = new UndoScaleActor(this.target);
             try {
-    
+
                 double ratioX = (this.target.getX() - this.opposite.getActor().getX()) /
                     (getActor().getX() - this.opposite.getActor().getX());
                 double ratioY = (this.target.getY() - this.opposite.getActor().getY()) /
                     (getActor().getY() - this.opposite.getActor().getY());
-    
+
                 super.moveBy(dx, dy);
-    
+
                 Actor other = Itchy.isCtrlDown() ? this.target : this.opposite.getActor();
-    
+
                 double scaleX = (other.getX() - getActor().getX()) / (other.getX() - this.startX);
                 double scaleY = (other.getY() - getActor().getY()) / (other.getY() - this.startY);
                 double scale = Math.min(scaleX, scaleY);
-    
+
                 if (!Itchy.isCtrlDown()) {
                     this.target.moveBy(dx * ratioX, dy * ratioY);
                 }
-    
+
                 if (this.target.getAppearance().getPose() instanceof TextPose) {
                     TextPose pose = (TextPose) this.target.getAppearance().getPose();
                     double newFontSize = this.startScale * scale;
@@ -1954,22 +1956,22 @@ public class SceneDesigner implements MouseListener, KeyListener
         @Override
         public void moveBy( int dx, int dy )
         {
-            UndoRotateActor undo = new UndoRotateActor( this.target );
+            UndoRotateActor undo = new UndoRotateActor(this.target);
             try {
                 super.moveBy(dx, dy);
-    
+
                 double tx = getActor().getX() - this.target.getX();
                 double ty = getActor().getY() - this.target.getY();
-    
+
                 double angleRadians = Math.atan2(ty, tx);
                 double headingDiff = this.target.getHeading() - this.target.getAppearance().getDirection();
                 getActor().setDirectionRadians(angleRadians);
-    
+
                 this.target.getAppearance().setDirectionRadians(angleRadians);
                 this.target.setHeading(this.target.getAppearance().getDirection() + headingDiff);
-            
+
             } finally {
-                undo.end(undoList);
+                undo.end(SceneDesigner.this.undoList);
             }
         }
 
@@ -1994,20 +1996,20 @@ public class SceneDesigner implements MouseListener, KeyListener
         @Override
         public void moveBy( int dx, int dy )
         {
-            UndoRotateActor undo = new UndoRotateActor( this.target );
+            UndoRotateActor undo = new UndoRotateActor(this.target);
             try {
-    
+
                 super.moveBy(dx, dy);
-    
+
                 double tx = getActor().getX() - this.target.getX();
                 double ty = getActor().getY() - this.target.getY();
-    
+
                 double angle = Math.atan2(ty, tx);
                 getActor().getAppearance().setDirectionRadians(angle);
                 this.target.setHeadingRadians(angle);
-                
+
             } finally {
-                undo.end(undoList);
+                undo.end(SceneDesigner.this.undoList);
             }
         }
 

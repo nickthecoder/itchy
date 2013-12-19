@@ -1,7 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0 which accompanies this
- * distribution, and is available at http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
@@ -25,8 +24,8 @@ public class GameInfo implements PropertySubject<GameInfo>
 
     @Property(label = "Initial Scene")
     public String initialScene;
-    
-    @Property(label = "Class Name", baseClass = Director.class, aliases={"className"})
+
+    @Property(label = "Class Name", baseClass = Director.class, aliases = { "className" })
     public ClassName directorClassName;
 
     public GameInfo()
@@ -43,7 +42,7 @@ public class GameInfo implements PropertySubject<GameInfo>
     {
         return AbstractProperty.findAnnotations(this.getClass());
     }
-    
+
     public Director createDirector( Resources resources )
     {
         Director director;

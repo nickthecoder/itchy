@@ -1,9 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.animation;
 
@@ -55,7 +52,7 @@ public class Eases
         .addEase(easeInQuad, 0.1, 1)
         .addEase(easeOutQuad, 0.05, 0.99)
         .addEase(easeInQuad, 0.05, 1);
-    
+
     public static void registerEases()
     {
         Itchy.registry.add("linear", linear);

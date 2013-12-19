@@ -8,11 +8,15 @@ Rock = Class({
         this.rotationSpeed = 0;
         this.hits = 0;
     },
-    
+
     onBirth: function() {
+        sceneDirectorScript.addRocks(1);
+    },
+        
+    onAttach: function() {
+        Super();
         this.role.addTag("shootable");
         this.role.addTag("deadly");
-        sceneDirectorScript.addRocks(1);
     },
     
     tick: function() {

@@ -1,7 +1,5 @@
-Washing,
-Hot X buns
+Print CD and burn it.
 
-Bread, lasagne.
 
 Undo/Redo
 
@@ -14,10 +12,26 @@ Undo/Redo
 
     Toolbar buttons
 
+Save and restore the tags of paused actors?
+    A boolean can turn this behaviour off.
+
+Update the Role.js template to include onAttach
+
+When a js file imports another, remember the dependency, so that the dependant classes get re-loaded if the dependecy is reloaded.
+    e.g. If Moving.js is changed then Rock.js, Ship.js etc are reloaded.
+    Think about circular dependencies. 
+    When a script is asked if it needs reloading :
+        Create a set of its script and all of its dependencies (recursively)
+        Find the latest timestamp
+        Check its load timestamp with the latest timestamp, and if its older, then re-load.
+        Short-circuit if the 1st level depenencies is empty.
+
 Bugs
 ====
 
 BUG: Reloading a SceneBehaviour script causes the properties to double.
+
+Drunk Invaders overlays the next level over the first some times.
 
 TODO
 ====
@@ -349,8 +363,3 @@ Firewall
 Backup scripts
 Website indexer (butchers)
 
-
-
-Bed covers
-Glasses
-Vacuum bathroom

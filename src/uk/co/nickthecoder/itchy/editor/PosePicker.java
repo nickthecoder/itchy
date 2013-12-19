@@ -1,7 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0 which accompanies this
- * distribution, and is available at http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.editor;
 
@@ -24,7 +23,7 @@ public abstract class PosePicker extends Window
     protected final Resources resources;
 
     private PoseResource defaultPoseResource;
-    
+
     public PosePicker( Resources resources )
     {
         this(resources, null);
@@ -73,8 +72,8 @@ public abstract class PosePicker extends Window
     protected Component createChoices( Container parent )
     {
         Container container = new Container();
-        parent.addChild( container );
-        
+        parent.addChild(container);
+
         Component focus = null;
 
         GridLayout gridLayout = new GridLayout(container, 5);
@@ -85,7 +84,7 @@ public abstract class PosePicker extends Window
             PoseResource poseResource = this.resources.getPoseResource(name);
 
             Component component = this.createPoseButton(poseResource);
-            if (poseResource == defaultPoseResource) {
+            if (poseResource == this.defaultPoseResource) {
                 focus = component;
             }
 

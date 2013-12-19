@@ -1,9 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.animation;
 
@@ -20,19 +17,19 @@ public class ColorAnimation extends NumericAnimation
     private static final List<AbstractProperty<Animation, ?>> properties =
         AbstractProperty.<Animation> findAnnotations(ColorAnimation.class);
 
-    @Property(label="Target Color")
+    @Property(label = "Target Color")
     public RGBA targetColor;
-    
+
     private RGBA startColor;
 
     public ColorAnimation()
     {
         this(200, Eases.linear, RGBA.WHITE);
     }
-    
-    public ColorAnimation(int ticks, Ease ease, RGBA color)
+
+    public ColorAnimation( int ticks, Ease ease, RGBA color )
     {
-        super(ticks,ease);
+        super(ticks, ease);
         this.targetColor = color;
     }
 
@@ -47,7 +44,7 @@ public class ColorAnimation extends NumericAnimation
     {
         return "Colour";
     }
-    
+
     @Override
     public String getTagName()
     {
@@ -63,8 +60,8 @@ public class ColorAnimation extends NumericAnimation
         } else {
             this.startColor = actor.getAppearance().getColorize();
         }
-        
-        if ( this.startColor == null ) {
+
+        if (this.startColor == null) {
             this.startColor = RGBA.WHITE;
         }
     }
@@ -78,7 +75,7 @@ public class ColorAnimation extends NumericAnimation
         double alpha = this.startColor.a + (this.targetColor.a - this.startColor.a) * amount;
 
         RGBA color = new RGBA((int) red, (int) green, (int) blue, (int) alpha);
-        
+
         if (actor.getAppearance().getPose() instanceof TextPose) {
             ((TextPose) actor.getAppearance().getPose()).setColor(color);
         } else {

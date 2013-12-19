@@ -26,8 +26,8 @@ public class StringList
             this.buffer.append(this.separator);
         }
         this.buffer.append(item.toString());
-        isEmpty = false;
-        
+        this.isEmpty = false;
+
         return this;
     }
 

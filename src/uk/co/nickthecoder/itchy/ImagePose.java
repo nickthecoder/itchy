@@ -1,9 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
@@ -20,10 +17,10 @@ public class ImagePose implements Pose
         int top = Math.max(above.getOffsetY() - below.getOffsetX() + dy, 0);
 
         int right = Math.max(above.getSurface().getWidth() - above.getOffsetX() -
-                (below.getSurface().getWidth() - below.getOffsetX()) + dx, 0);
+            (below.getSurface().getWidth() - below.getOffsetX()) + dx, 0);
 
         int bottom = Math.max(above.getSurface().getHeight() - above.getOffsetY() -
-                (below.getSurface().getHeight() - below.getOffsetY()) + dy, 0);
+            (below.getSurface().getHeight() - below.getOffsetY()) + dy, 0);
 
         int width = below.getSurface().getWidth() + left + right;
         int height = below.getSurface().getHeight() + top + bottom;
@@ -33,7 +30,7 @@ public class ImagePose implements Pose
         below.getSurface().blit(surface, left, top, Surface.BlendMode.COMPOSITE);
 
         above.getSurface().blit(surface, left + below.getOffsetX() - above.getOffsetX() + dx,
-                top + below.getOffsetY() - above.getOffsetY() + dy, Surface.BlendMode.COMPOSITE);
+            top + below.getOffsetY() - above.getOffsetY() + dy, Surface.BlendMode.COMPOSITE);
 
         ImagePose pose = new ImagePose(surface, left + below.getOffsetX(), top + below.getOffsetY());
 
@@ -43,7 +40,7 @@ public class ImagePose implements Pose
     private int offsetX;
     private int offsetY;
     private double direction;
-    
+
     private final Surface surface;
 
     private static Surface loadSurface( String filename ) throws JameException
@@ -109,7 +106,7 @@ public class ImagePose implements Pose
     {
         this.offsetY = value;
     }
-    
+
     @Override
     public double getDirection()
     {
@@ -137,7 +134,7 @@ public class ImagePose implements Pose
 
     @Override
     public void attach( Appearance appearance )
-    {       
+    {
     }
 
 }

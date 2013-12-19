@@ -1,7 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0 which accompanies this
- * distribution, and is available at http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 
 package uk.co.nickthecoder.itchy.role;
@@ -21,22 +20,19 @@ import uk.co.nickthecoder.itchy.util.BeanHelper;
 public class TextValue extends AbstractRole
 {
     /**
-     * The java bean of of your Game object. For example, if you have a public attribute called
-     * "sceneName", or a public method called "getSceneName", then this would value should be
-     * "sceneName" (not getSceneName).
+     * The java bean of of your Game object. For example, if you have a public attribute called "sceneName", or a public method called
+     * "getSceneName", then this would value should be "sceneName" (not getSceneName).
      * 
-     * You can traverse from one object to another. For example, Game has a methods called
-     * getSceneDirector, so if your SceneDirector has an attribute called "for" (or a method
-     * called "getFoo"), then you can get to it using : <code>"sceneDirector.foo"</code>.
+     * You can traverse from one object to another. For example, Game has a methods called getSceneDirector, so if your SceneDirector has an
+     * attribute called "for" (or a method called "getFoo"), then you can get to it using : <code>"sceneDirector.foo"</code>.
      */
     @Property(label = "Acess")
     public String access;
 
     /**
-     * What to display if the retrieving the value results in an Exception being thrown. The default
-     * is an empty string, which can be confusing if {@link #access} is wrong, because you then get
-     * nothing displayed! However, in this case, you should see a stack track in System.err, unless
-     * you have turned it off using the {@link #quiet} attribute.
+     * What to display if the retrieving the value results in an Exception being thrown. The default is an empty string, which can be
+     * confusing if {@link #access} is wrong, because you then get nothing displayed! However, in this case, you should see a stack track in
+     * System.err, unless you have turned it off using the {@link #quiet} attribute.
      */
     @Property(label = "Error Value")
     public String errorValue = "";
@@ -48,11 +44,10 @@ public class TextValue extends AbstractRole
     public String nullValue = "";
 
     /**
-     * How often to update. The default is zero, which means it is updated every frame. This is fine
-     * unless the value take a long time to calculate, in which case, you may want to update it less
-     * frequently. A negative value means it will only retrieve the value when the actor is first
-     * activated. This is handy for values you know won't need updating. The example game Tetra uses
-     * a negative update interval for the High Score.
+     * How often to update. The default is zero, which means it is updated every frame. This is fine unless the value take a long time to
+     * calculate, in which case, you may want to update it less frequently. A negative value means it will only retrieve the value when the
+     * actor is first activated. This is handy for values you know won't need updating. The example game Tetra uses a negative update
+     * interval for the High Score.
      */
     @Property(label = "Update Period", hint = "seconds. 0 for continuous")
     public double updateInterval;

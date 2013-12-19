@@ -1,9 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.neighbourhood;
 
@@ -17,25 +14,26 @@ public interface Neighbourhood
     public abstract double getSquareSize();
 
     /**
-     * Looks for a NeighbourhoodSquare within the neighbourhood. If a square at the given
-     * coordinates hasn't been created yet, then that square is created.
+     * Looks for a NeighbourhoodSquare within the neighbourhood. If a square at the given coordinates hasn't been created yet, then that
+     * square is created.
      * 
      * @return The square at the given coordinate
      */
     public abstract Square getSquare( double x, double y );
 
     /**
-     * Iterates over the set of squares contained by the rectangle defined by the top left and
-     * bottom right squares.
+     * Iterates over the set of squares contained by the rectangle defined by the top left and bottom right squares.
+     * 
      * @param topLeft
-     * @param bottomRight Note, the iteration INCLUDES this square, and others in its row and column.
-     *      This is different to most range tests, where the "to" is usually exclusive.
+     * @param bottomRight
+     *        Note, the iteration INCLUDES this square, and others in its row and column. This is different to most range tests, where the
+     *        "to" is usually exclusive.
      */
     public abstract Iterator<Square> squareIterator( Square topLeft, Square bottomRight );
 
     /**
-     * Looks for a NeighbourhoodSquare within this neighbourhood. If a square at the given
-     * coordinates hasn't been created yet, then null is returned.
+     * Looks for a NeighbourhoodSquare within this neighbourhood. If a square at the given coordinates hasn't been created yet, then null is
+     * returned.
      */
     public abstract Square getExistingSquare( double x, double y );
 

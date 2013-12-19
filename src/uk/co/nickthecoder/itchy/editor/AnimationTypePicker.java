@@ -27,7 +27,7 @@ public abstract class AnimationTypePicker extends Window
         Container container = new Container();
         container.setXSpacing(10);
         container.setYSpacing(10);
-        GridLayout grid = new GridLayout( container, 5 );
+        GridLayout grid = new GridLayout(container, 5);
 
         for (Animation animation : Itchy.registry.getAnimations()) {
 
@@ -36,7 +36,7 @@ public abstract class AnimationTypePicker extends Window
             grid.addChild(component);
         }
         grid.endRow();
-        
+
         VerticalScroll vs = new VerticalScroll(container);
         this.clientArea.addChild(vs);
     }
@@ -46,8 +46,8 @@ public abstract class AnimationTypePicker extends Window
         Container container = new Container();
         container.setLayout(new VerticalLayout());
         container.setXAlignment(0.5);
-        
-        Container center = new Container();        
+
+        Container center = new Container();
         center.setXAlignment(0.5);
         center.setYAlignment(0.5);
         center.setMinimumWidth(64);
@@ -60,7 +60,7 @@ public abstract class AnimationTypePicker extends Window
         center.addChild(img);
         Button button = new Button(center);
         container.addChild(button);
-        
+
         container.addChild(new Label(animation.getName()));
 
         button.addActionListener(new ActionListener() {
@@ -71,7 +71,7 @@ public abstract class AnimationTypePicker extends Window
                 AnimationTypePicker.this.pick(animation);
             }
         });
-        
+
         return container;
     }
 

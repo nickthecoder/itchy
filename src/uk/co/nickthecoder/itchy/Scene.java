@@ -1,7 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0 which accompanies this
- * distribution, and is available at http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
@@ -24,9 +23,9 @@ public class Scene
     @Property(label = "Scene Director", baseClass = SceneDirector.class, sortOrder = 90)
     public ClassName sceneDirectorClassName;
 
-    @Property(label="Background Colour")
+    @Property(label = "Background Colour")
     public RGBA backgroundColor = RGBA.BLACK;
-    
+
     private List<SceneLayer> sceneLayers;
 
     private HashMap<String, SceneLayer> layersMap;
@@ -70,7 +69,7 @@ public class Scene
         }
         this.sceneLayers.clear();
     }
-    
+
     public void create( Stage layer, Resources resources, boolean designMode )
     {
         for (SceneLayer sceneLayer : this.sceneLayers) {
@@ -83,17 +82,17 @@ public class Scene
         for (SceneLayer sceneLayer : this.sceneLayers) {
             String name = sceneLayer.name;
 
-            sceneLayer.create( findStage(game, name), game.resources, designMode);
+            sceneLayer.create(findStage(game, name), game.resources, designMode);
         }
     }
 
     private Stage findStage( Game game, String name )
     {
         Stage best = game.getStages().get(0);
-        
+
         for (Stage stage : game.getStages()) {
             if (!stage.isLocked()) {
-                
+
                 if (name.equals(stage.getName())) {
                     return stage;
                 }
@@ -157,31 +156,31 @@ public class Scene
     public boolean uses( FontResource fontResource )
     {
         for (SceneLayer layer : this.sceneLayers) {
-            if ( layer.uses( fontResource )) {
+            if (layer.uses(fontResource)) {
                 return true;
             }
         }
         return false;
     }
-    
+
     public boolean uses( CostumeResource costumeResource )
     {
         for (SceneLayer layer : this.sceneLayers) {
-            if ( layer.uses( costumeResource )) {
+            if (layer.uses(costumeResource)) {
                 return true;
             }
         }
         return false;
     }
-    
+
     public void debug()
     {
         System.err.println("Scene");
         for (SceneLayer layer : this.sceneLayers) {
-            System.err.println( "Layer : " + layer.name + " Actors " + layer.sceneActors.size() );
+            System.err.println("Layer : " + layer.name + " Actors " + layer.sceneActors.size());
         }
     }
-    
+
     public class SceneLayer
     {
         String name;
@@ -213,7 +212,7 @@ public class Scene
         {
             this.sceneActors.clear();
         }
-        
+
         public SceneLayer copy()
         {
             SceneLayer result = new SceneLayer(this.name);
@@ -247,7 +246,7 @@ public class Scene
             }
             return false;
         }
-        
+
         public boolean uses( CostumeResource costumeResource )
         {
             for (SceneActor sceneActor : this.sceneActors) {

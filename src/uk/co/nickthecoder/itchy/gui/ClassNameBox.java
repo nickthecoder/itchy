@@ -54,7 +54,7 @@ public class ClassNameBox extends Container
         this.addChild(main);
         main.type = "comboBox";
         main.addStyle("combo");
-        
+
         this.textBox = new TextBox(className.name);
         main.addChild(this.textBox);
 
@@ -220,7 +220,7 @@ public class ClassNameBox extends Container
     {
         return this.value;
     }
-    
+
     public void setClassName( ClassName value )
     {
         this.value = value;

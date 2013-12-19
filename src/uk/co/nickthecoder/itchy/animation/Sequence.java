@@ -1,9 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.animation;
 
@@ -25,14 +22,14 @@ public class Sequence implements SequenceOrParallel
     @Override
     public void start( Actor actor )
     {
-       for (this.index = 0; this.index < this.compoundAnimation.children.size(); this.index ++ ) {
+        for (this.index = 0; this.index < this.compoundAnimation.children.size(); this.index++) {
 
             this.currentAnimation = this.compoundAnimation.children.get(this.index);
-            if ( this.currentAnimation == null ) {
+            if (this.currentAnimation == null) {
                 return;
             }
             this.currentAnimation.start(actor);
-            if (! this.currentAnimation.isFinished()) {
+            if (!this.currentAnimation.isFinished()) {
                 break;
             }
         }

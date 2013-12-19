@@ -1,9 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.gui;
 
@@ -40,7 +37,7 @@ public class Table extends Container
     public Table( TableModel model, List<TableModelColumn> columns )
     {
         this.setType("table");
-        
+
         this.focusable = true;
 
         this.model = model;
@@ -193,9 +190,8 @@ public class Table extends Container
     }
 
     /**
-     * Called when a row have been picked. This is either when a row has been double clicked, or it
-     * has been selected, and then activated with SPACE or RETURN. If you wish to use this, then it
-     * is normal to create an anonymous sub class, and override this method.
+     * Called when a row have been picked. This is either when a row has been double clicked, or it has been selected, and then activated
+     * with SPACE or RETURN. If you wish to use this, then it is normal to create an anonymous sub class, and override this method.
      */
     void pickRow( TableRow row )
     {

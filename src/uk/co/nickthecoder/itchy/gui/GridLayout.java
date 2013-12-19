@@ -1,7 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0 which accompanies this
- * distribution, and is available at http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.gui;
 
@@ -41,11 +40,10 @@ public class GridLayout implements Layout
     }
 
     /**
-     * Groups a GridLayout to another GridLayout such that their columns line up. The number of
-     * columns must be the same in both, and this GridLayout must not already be grouped.
+     * Groups a GridLayout to another GridLayout such that their columns line up. The number of columns must be the same in both, and this
+     * GridLayout must not already be grouped.
      * <p>
-     * More than 2 GridLayouts can be grouped together, just group a third one to either of the
-     * other two (not both!)
+     * More than 2 GridLayouts can be grouped together, just group a third one to either of the other two (not both!)
      * 
      * @param other
      */
@@ -68,8 +66,8 @@ public class GridLayout implements Layout
             }
         }
 
-        container.setXSpacing(other.container.getXSpacing());
-        container.setYSpacing(other.container.getYSpacing());
+        this.container.setXSpacing(other.container.getXSpacing());
+        this.container.setYSpacing(other.container.getYSpacing());
     }
 
     public void ungroup()
@@ -239,7 +237,7 @@ public class GridLayout implements Layout
             int x = container.getPaddingLeft();
 
             int maxHeightInc = 0;
-            for (Component component : row ) {
+            for (Component component : row) {
                 int heightInc = component.getRequiredHeight() + component.getMarginTop() + component.getMarginBottom();
                 if (heightInc > maxHeightInc) {
                     maxHeightInc = heightInc;
@@ -248,11 +246,11 @@ public class GridLayout implements Layout
 
             int i = 0;
             for (Component component : row) {
-                
+
                 int height = container.getFillY() ?
                     maxHeightInc - component.getMarginTop() - component.getMarginBottom() :
                     component.getRequiredHeight();
-                    
+
                 int width = container.getFillX() ?
                     this.widthsInc[i] - component.getMarginLeft() - component.getMarginRight() :
                     component.getRequiredWidth();
@@ -265,7 +263,7 @@ public class GridLayout implements Layout
                 i++;
             }
             y += maxHeightInc + container.getYSpacing();
-            
+
         }
     }
 

@@ -286,7 +286,7 @@ public class CostumesEditor extends SubEditor<CostumeResource>
     protected void edit( CostumeResource resource, boolean adding )
     {
         super.edit(resource, adding);
-        if (! adding) {
+        if (!adding) {
             this.clonedCostume = resource.getCostume().copy(this.editor.resources);
         }
     }

@@ -1,7 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0 which accompanies this
- * distribution, and is available at http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.property;
 
@@ -25,8 +24,8 @@ import uk.co.nickthecoder.itchy.util.StringUtils;
 import uk.co.nickthecoder.jame.RGBA;
 
 /**
- * Holds meta data about a property, which makes dealing with properties much simpler, as much of
- * the work can be automated, rather than handling each property on an individual basis.
+ * Holds meta data about a property, which makes dealing with properties much simpler, as much of the work can be automated, rather than
+ * handling each property on an individual basis.
  * 
  * For Itchy Gurus only!
  * 
@@ -40,13 +39,11 @@ import uk.co.nickthecoder.jame.RGBA;
 public abstract class AbstractProperty<S, T> implements Comparable<AbstractProperty<S, ?>>
 {
     /**
-     * Uses reflection to looks through all of the fields and methods for "Property" annotations,
-     * and and for each one it finds, it creates the appropriate AbstractProperty and adds it to the
-     * collection.
+     * Uses reflection to looks through all of the fields and methods for "Property" annotations, and and for each one it finds, it creates
+     * the appropriate AbstractProperty and adds it to the collection.
      * 
      * @param klass
-     *        The class who to scan for Property annotations return A list of newly created
-     *        AbstractProperty instances.
+     *        The class who to scan for Property annotations return A list of newly created AbstractProperty instances.
      */
     public static <SS> List<AbstractProperty<SS, ?>> findAnnotations( Class<? extends SS> klass )
     {
@@ -58,15 +55,13 @@ public abstract class AbstractProperty<S, T> implements Comparable<AbstractPrope
     }
 
     /**
-     * Uses reflection to looks through all of the fields and methods for "Property" annotions, and
-     * and for each one it finds, it creates the appropriate AbstractProperty and adds it to the
-     * collection.
+     * Uses reflection to looks through all of the fields and methods for "Property" annotions, and and for each one it finds, it creates
+     * the appropriate AbstractProperty and adds it to the collection.
      * 
      * @param klass
      *        The class who to scan for Property annotations
      * @param collection
-     *        Where to add the newly created AbstractProperty instances. This is usually an empty
-     *        list.
+     *        Where to add the newly created AbstractProperty instances. This is usually an empty list.
      */
     public static <SS> void addProperties( Class<? extends SS> klass, Collection<AbstractProperty<SS, ?>> collection )
     {
@@ -233,26 +228,22 @@ public abstract class AbstractProperty<S, T> implements Comparable<AbstractPrope
     public String label;
 
     /**
-     * Green text to the right of the component giving a very brief information about the field. For
-     * example, units (seconds, degrees etc).
+     * Green text to the right of the component giving a very brief information about the field. For example, units (seconds, degrees etc).
      */
     public String hint;
 
     /**
-     * Describes how to get/set the attribute, using JavaBean rules. For example, if a Role has
-     * a Property with an access of "radius", then getValue will look for a public attribute called
-     * "radius", if this isn't found, then it will look for a method called "getRadius", taking no
-     * arguments.
+     * Describes how to get/set the attribute, using JavaBean rules. For example, if a Role has a Property with an access of "radius", then
+     * getValue will look for a public attribute called "radius", if this isn't found, then it will look for a method called "getRadius",
+     * taking no arguments.
      * 
-     * You can use "." to chain multiple bean accesses together, for example an access of
-     * "foo.radius" will look for an attribute "foo" or a method "getFoo", and use its result to
-     * look for an attribute called "radius" or a method called "getRadius".
+     * You can use "." to chain multiple bean accesses together, for example an access of "foo.radius" will look for an attribute "foo" or a
+     * method "getFoo", and use its result to look for an attribute called "radius" or a method called "getRadius".
      */
     public String access;
 
     /**
-     * When loading/saving the property value, this is the name used. For example, a key of "radius"
-     * may be saved like so :
+     * When loading/saving the property value, this is the name used. For example, a key of "radius" may be saved like so :
      * 
      * <pre>
      * <property name="radius" value="1.0"/>
@@ -264,14 +255,13 @@ public abstract class AbstractProperty<S, T> implements Comparable<AbstractPrope
      * <example radius="1.0"/>
      * </pre>
      * 
-     * The default is for the key to be the same as 'access', but this may not be desirable in some
-     * circumstances.
+     * The default is for the key to be the same as 'access', but this may not be desirable in some circumstances.
      */
     public String key;
 
     /**
-     * An alternative names for this property. This is used so that properties can be renamed, and
-     * loading from a file which uses the old name will still work.
+     * An alternative names for this property. This is used so that properties can be renamed, and loading from a file which uses the old
+     * name will still work.
      */
     public Set<String> aliases;
 
@@ -329,9 +319,8 @@ public abstract class AbstractProperty<S, T> implements Comparable<AbstractPrope
     }
 
     /**
-     * Sets the value using a String as the value, which is needed when the property is being read
-     * from a file. The method 'parse' is used to convert the String into an object of the
-     * appropriate type.
+     * Sets the value using a String as the value, which is needed when the property is being read from a file. The method 'parse' is used
+     * to convert the String into an object of the appropriate type.
      * 
      * @param subject
      * @param value
@@ -345,17 +334,16 @@ public abstract class AbstractProperty<S, T> implements Comparable<AbstractPrope
     /**
      * Creates a GUI component suitable for getting input from the end user.
      * 
-     * Each subclass will return a different form of Component, for example a StringProperty wil
-     * return a TextBox, and a BooleanProperty will return a CheckBox.
+     * Each subclass will return a different form of Component, for example a StringProperty wil return a TextBox, and a BooleanProperty
+     * will return a CheckBox.
      * 
      * @param subject
      * @param autoUpdate
-     *        If true, then the subject is updated whenever the component is changed (i.e. when text
-     *        is typed into the text box, or when a checkbox is clicked etc).
+     *        If true, then the subject is updated whenever the component is changed (i.e. when text is typed into the text box, or when a
+     *        checkbox is clicked etc).
      * 
-     * @return A component which allows the user to change this property's value. It could be a
-     *         simple component, such as a TextBox, or a Container containing multiple child
-     *         Components.
+     * @return A component which allows the user to change this property's value. It could be a simple component, such as a TextBox, or a
+     *         Container containing multiple child Components.
      * 
      * @throws Exception
      */
@@ -364,31 +352,30 @@ public abstract class AbstractProperty<S, T> implements Comparable<AbstractPrope
     public abstract void addChangeListener( Component component, ComponentChangeListener listener );
 
     /**
-     * Updates the subject based on the state of the Component. This is used when the Components are
-     * created with an autoUpdate of false, in which case the subect's attributes are updated when
-     * the "Ok" button is clicked, rather than while the user is editing the TextBox (or other
-     * Component).
+     * Updates the subject based on the state of the Component. This is used when the Components are created with an autoUpdate of false, in
+     * which case the subect's attributes are updated when the "Ok" button is clicked, rather than while the user is editing the TextBox (or
+     * other Component).
      * 
      * @param subject
      *        The subject who's attribute is to be updated.
      * @param component
-     *        The GUI Component, which must be the same one that was created by the createComponent
-     *        method.
+     *        The GUI Component, which must be the same one that was created by the createComponent method.
      * @throws Exception
      */
     public abstract void update( S subject, Component component ) throws Exception;
 
     /**
      * Refreshes the component based on the state of the subject.
+     * 
      * @param subject
      * @param component
      * @throws Exception
      */
     public abstract void refresh( S subject, Component component ) throws Exception;
 
-       /**
-     * Checks if the entered value is valid, and if so, returns null, otherwise it returns the error
-     * message explaining what if wrong with the entered value.
+    /**
+     * Checks if the entered value is valid, and if so, returns null, otherwise it returns the error message explaining what if wrong with
+     * the entered value.
      * 
      * @param component
      *        The component created via {@link #createComponent(Object, boolean)}
@@ -397,13 +384,12 @@ public abstract class AbstractProperty<S, T> implements Comparable<AbstractPrope
     public abstract String getErrorText( Component component );
 
     /**
-     * Converts a String representation of the properties value into the appropriate. For example,
-     * an IntegerProperty will use Integer.parseInt to return an Integer object.
+     * Converts a String representation of the properties value into the appropriate. For example, an IntegerProperty will use
+     * Integer.parseInt to return an Integer object.
      * 
      * @param stringValue
      *        The string representation of the value
-     * @return The actual value, for example, if this is a RGBAProperty, then the return value will
-     *         be a RGBA object.
+     * @return The actual value, for example, if this is a RGBAProperty, then the return value will be a RGBA object.
      */
     public abstract T parse( String stringValue );
 

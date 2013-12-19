@@ -1,7 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0 which accompanies this
- * distribution, and is available at http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
@@ -17,8 +16,8 @@ public abstract class Loadable
     private File directory;
 
     /**
-     * The name of the resource. This is usually RELATIVE to this.directory, but can be absolute,
-     * but will issue warnings that the resource is being loaded from an absolute path.
+     * The name of the resource. This is usually RELATIVE to this.directory, but can be absolute, but will issue warnings that the resource
+     * is being loaded from an absolute path.
      */
     private File file;
 
@@ -40,7 +39,7 @@ public abstract class Loadable
         this.file = file;
     }
 
-    public void load(File file ) throws Exception
+    public void load( File file ) throws Exception
     {
         this.directory = file.getAbsoluteFile().getParentFile();
         this.file = new File(file.getName());
@@ -72,9 +71,9 @@ public abstract class Loadable
     public void setFile( File file )
     {
         this.directory = file.getParentFile();
-        this.file = new File( file.getName() );
+        this.file = new File(file.getName());
     }
-    
+
     public File getFile()
     {
         return resolveFile(this.file);
@@ -97,6 +96,7 @@ public abstract class Loadable
 
     /**
      * Renames a file using names relative to this directory.
+     * 
      * @return true if the rename succeeded.
      */
     public boolean renameFile( String oldName, String newName )
@@ -162,7 +162,7 @@ public abstract class Loadable
     public void ensure( Object a, Object b, String reason ) throws Exception
     {
         if (!a.equals(b)) {
-            throw new Exception(reason + " " + a + " ---vs--- " + b );
+            throw new Exception(reason + " " + a + " ---vs--- " + b);
         }
     }
 

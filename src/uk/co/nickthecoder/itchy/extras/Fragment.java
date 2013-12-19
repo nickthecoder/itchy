@@ -1,9 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.extras;
 
@@ -19,18 +16,17 @@ import uk.co.nickthecoder.itchy.PoseResource;
 import uk.co.nickthecoder.jame.Surface;
 
 /**
- * Fragments an actor's pose in lots of random shaped pieces. The pieces are added to the actor's
- * costume with the given pose name. The recommended name to use is "fragment", but you can choose
- * any name you like.
+ * Fragments an actor's pose in lots of random shaped pieces. The pieces are added to the actor's costume with the given pose name. The
+ * recommended name to use is "fragment", but you can choose any name you like.
  * 
- * The fragments are only created once, so if you call fragment twice, with the same pose name, then
- * you will still only have the fragments from the first call.
+ * The fragments are only created once, so if you call fragment twice, with the same pose name, then you will still only have the fragments
+ * from the first call.
  * 
- * This algorithm is inefficient (in memory, and speed), so ideally don't use it while the game is playing.
- * Instead, call it during a Role's init method.
+ * This algorithm is inefficient (in memory, and speed), so ideally don't use it while the game is playing. Instead, call it during a Role's
+ * init method.
  * 
- * This class is often used in conjunction with ExplosionRole, to produce an explosion with the
- * pieces of the actor flying apart in different directions.
+ * This class is often used in conjunction with ExplosionRole, to produce an explosion with the pieces of the actor flying apart in
+ * different directions.
  */
 public class Fragment
 {
@@ -79,10 +75,14 @@ public class Fragment
     }
 
     /**
-     * This is the work horse. 
-     * @param costume The costume used as the source of the pose, and the destination of the fragments
-     * @param srcPose The name of the pose to use as the source
-     * @param destPose The name of the poses which are created.
+     * This is the work horse.
+     * 
+     * @param costume
+     *        The costume used as the source of the pose, and the destination of the fragments
+     * @param srcPose
+     *        The name of the pose to use as the source
+     * @param destPose
+     *        The name of the poses which are created.
      */
     private void fragment( Costume costume, String srcPose, String destPose )
     {
@@ -120,7 +120,7 @@ public class Fragment
                 this.pieces[i].surface,
                 pose.getOffsetX(),
                 pose.getOffsetY());
-            
+
             newPose.setDirection(pose.getDirection());
             costume.addPose(destPose, new PoseResource(newPose));
         }
@@ -136,13 +136,11 @@ public class Fragment
         this.pieces[owner].setOwner(x, y);
     }
 
-    
     /**
-     * Inner class Piece, is one fragment of the larger image.
-     * Each piece has its own surface which is the same size as the original image. This surface starts
-     * off completely transparent, and then one pixel is chosen as the seed point for this fragment.
-     * The seed pixel is set to the same as the original image. As the piece grows, more pixels are
-     * set until every pixel on the origianal image has been copied to one of the pieces.
+     * Inner class Piece, is one fragment of the larger image. Each piece has its own surface which is the same size as the original image.
+     * This surface starts off completely transparent, and then one pixel is chosen as the seed point for this fragment. The seed pixel is
+     * set to the same as the original image. As the piece grows, more pixels are set until every pixel on the origianal image has been
+     * copied to one of the pieces.
      */
     class Piece
     {

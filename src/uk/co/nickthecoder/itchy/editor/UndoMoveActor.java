@@ -36,7 +36,7 @@ public final class UndoMoveActor implements Undo
     @Override
     public boolean merge( Undo o )
     {
-        if ( o instanceof UndoMoveActor ) {
+        if (o instanceof UndoMoveActor) {
             UndoMoveActor other = (UndoMoveActor) o;
             if (this.actor == other.actor) {
                 this.dx += other.dx;

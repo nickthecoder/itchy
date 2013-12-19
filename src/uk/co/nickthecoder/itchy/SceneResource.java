@@ -53,7 +53,7 @@ public class SceneResource extends Loadable
         }
         return true;
     }
-    
+
     public void rename( String newName ) throws Exception
     {
         File file = makeFile(newName);

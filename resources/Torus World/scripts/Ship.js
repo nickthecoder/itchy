@@ -15,18 +15,24 @@ Ship = Class({
     	this.firePeriod = this.getCostumeProperties().firePeriod;
     	
         this.fireTimer = new itchy.extras.Timer.createTimerSeconds(this.firePeriod);        
+
+        // Cut the ship into 3 large pieces, and call these poses "part"
+        new itchy.extras.Fragment().actor(this.actor).pieces(3).createPoses("part");
+        // Cut the ship again, this time into 10 pieces, and call these poses "fragment".
         new itchy.extras.Fragment().actor(this.actor).pieces(10).createPoses("fragment");
+        // These are use together when the ship explodes in the "die" method.
+
         sceneDirectorScript.ship = this;
 		
 		new itchy.role.Explosion(this.actor)
 			.companion("warp").eventName("default").distance(-30,-100).direction(0,360).speed(0,0).projectiles(40)
 			.createActor();
 
-		new itchy.role.Explosion(this.actor)
-			.companion("explosion")
-			.distance(-60).direction(0,360).speed(4,2).fade(3).projectiles(20).randomSpread(false)
-			.createActor();
-	
+		//new itchy.role.Explosion(this.actor)
+		//	.companion("explosion")
+		//	.distance(-60).direction(0,360).speed(4,2).fade(3).projectiles(20).randomSpread(false)
+		//	.createActor();
+
 		for (var i = 0; i < directorScript.lives; i ++ ) {
 			var actor = this.actor.createCompanion("life");
 			actor.moveTo( 30 + i * 40 , 560 );
@@ -35,7 +41,7 @@ Ship = Class({
 			}
 			this.lifeIcon[i] = actor;
 		}
-	
+
     },
 
     warp: function() {
@@ -50,7 +56,7 @@ Ship = Class({
     	}
     	this.actor.deathEvent("fade");
     },
-    
+
     tick: function() {
 
         if (Itchy.isKeyDown(Keys.LEFT)) {
@@ -86,7 +92,7 @@ Ship = Class({
         while (i.hasNext()) {
             i.next().roleScript.shot(this);
         }
-        
+
         // For debugging.
         if (Itchy.isKeyDown(Keys.x)) {
         	sceneDirectorScript.addRocks(-1);
@@ -96,8 +102,12 @@ Ship = Class({
     
     die: function() {
    	
+   	    // Use the "fragment" and "part" poses created in onBirth to explode the ship in all directions.
+   	    // The large "part" pieces move slowly, and the smaller "fragment" pieces move quickly.
         new itchy.role.Explosion(this.actor)
-            .speed(3,1).fade(3).spin(-5,5).rotate(true).pose("fragment").projectiles(40).createActor();
+            .speed(0.5,0,1,0).fade(3).spin(-1,1).rotate(true).eventName("part").projectiles(4).createActor();
+        new itchy.role.Explosion(this.actor)
+            .speed(1.5,0,4,0).fade(3).spin(-1,1).rotate(true).eventName("fragment").projectiles(20).createActor();
         
         directorScript.lives -= 1;
 

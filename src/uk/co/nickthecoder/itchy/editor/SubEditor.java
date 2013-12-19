@@ -1,7 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0 which accompanies this
- * distribution, and is available at http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.editor;
 
@@ -25,14 +24,13 @@ import uk.co.nickthecoder.itchy.gui.Window;
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
 
 /**
- * Creates a framework for most of the Notebook pages within the Editor. Each SubEditor has a table
- * listing a set of resources (e.g. PoseResource or AnimationResource etc). It also has an "Edit"
- * window where one of the entries in the table can be edited (either by double clicking a table
- * column, or selecting the column, and then clicking the "Edit" button. The Edit window is used for
- * both updating and adding.
+ * Creates a framework for most of the Notebook pages within the Editor. Each SubEditor has a table listing a set of resources (e.g.
+ * PoseResource or AnimationResource etc). It also has an "Edit" window where one of the entries in the table can be edited (either by
+ * double clicking a table column, or selecting the column, and then clicking the "Edit" button. The Edit window is used for both updating
+ * and adding.
  * <p>
- * The Edit forms are build using a PropertiesForm, which automates much of the GUI work, such as
- * creating the components and updating the values.
+ * The Edit forms are build using a PropertiesForm, which automates much of the GUI work, such as creating the components and updating the
+ * values.
  * <p>
  * The Edit pages use a non-autoupdate mechanism, and therefore have Ok and Cancel buttons.
  * 
@@ -56,8 +54,7 @@ public abstract class SubEditor<S>
     protected S currentResource;
 
     /**
-     * True iff the currently edited resource isn't in the resources yet, ie we are adding a new
-     * record.
+     * True iff the currently edited resource isn't in the resources yet, ie we are adding a new record.
      */
     protected boolean adding;
 
@@ -142,8 +139,7 @@ public abstract class SubEditor<S>
     }
 
     /**
-     * Adds buttons which appear at the bottom of the page. Edit, Add and Remove are the default
-     * ones.
+     * Adds buttons which appear at the bottom of the page. Edit, Add and Remove are the default ones.
      * 
      * @param buttonBar
      *        The container which is the parent to the Button components

@@ -1,7 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0 which accompanies this
- * distribution, and is available at http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
@@ -12,16 +11,14 @@ import java.util.List;
 import java.util.TreeSet;
 
 /**
- * Uses the Z Order attribute on Actor to order the actors front to back. The actor's with the lower
- * Z Order are below those with a higher Z Order. If two actors share the same Z Order, then the
- * newest Actor will be above.
+ * Uses the Z Order attribute on Actor to order the actors front to back. The actor's with the lower Z Order are below those with a higher Z
+ * Order. If two actors share the same Z Order, then the newest Actor will be above.
  */
 public class ZOrderStage extends AbstractStage
 {
     /**
-     * The list of actors visible on this layer. The order of the list is the order they will be
-     * drawn, and therefore determines the z-order. The first item is drawn first, and is therefore
-     * bottom-most.
+     * The list of actors visible on this layer. The order of the list is the order they will be drawn, and therefore determines the
+     * z-order. The first item is drawn first, and is therefore bottom-most.
      */
     protected TreeSet<Actor> actors = new TreeSet<Actor>(new ZOrderComparactor());
 
@@ -47,7 +44,7 @@ public class ZOrderStage extends AbstractStage
     @Override
     public void add( Actor actor )
     {
-        if (actor.getStage() != null ) {
+        if (actor.getStage() != null) {
             actor.getStage().remove(actor);
         }
         actor.setStageAttribute(this);
@@ -55,7 +52,7 @@ public class ZOrderStage extends AbstractStage
 
         super.add(actor);
     }
-    
+
     @Override
     public void remove( Actor actor )
     {
@@ -141,12 +138,13 @@ public class ZOrderStage extends AbstractStage
             }
         }
     }
-    
+
+    @Override
     public Stage createDesignStage()
     {
         ZOrderStage result = (ZOrderStage) super.createDesignStage();
         result.actors = new TreeSet<Actor>(new ZOrderComparactor());
-        
+
         return result;
     }
 }

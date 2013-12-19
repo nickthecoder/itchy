@@ -1,9 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.gui;
 
@@ -17,7 +14,7 @@ public abstract class ClickableContainer extends Container
     protected long clickTimeMillis;
 
     private boolean dragging = false;
-    
+
     public ClickableContainer()
     {
         super();
@@ -36,7 +33,7 @@ public abstract class ClickableContainer extends Container
 
     @Override
     public boolean onMouseDown( MouseButtonEvent event )
-    {              
+    {
         if (super.onMouseDown(event)) {
             return true;
         }
@@ -60,7 +57,7 @@ public abstract class ClickableContainer extends Container
         if (this.dragging) {
             this.dragging = false;
             this.getRoot().releaseMouse(this);
-    
+
             this.removeStyle("down");
             if (this.contains(event)) {
                 long now = System.currentTimeMillis();
@@ -71,7 +68,7 @@ public abstract class ClickableContainer extends Container
                 }
                 this.clickTimeMillis = now;
             }
-            
+
             return true;
         }
         return false;
@@ -80,7 +77,7 @@ public abstract class ClickableContainer extends Container
     @Override
     public boolean onMouseMove( MouseMotionEvent event )
     {
-        if (this.dragging) { 
+        if (this.dragging) {
 
             if (this.contains(event)) {
                 this.addStyle("down");
@@ -95,8 +92,8 @@ public abstract class ClickableContainer extends Container
     /**
      * 
      * @param mbe
-     *        The mouse button event which caused this onClick, or null if the onClick was called
-     *        via other means, such as a keyboard shortcut.
+     *        The mouse button event which caused this onClick, or null if the onClick was called via other means, such as a keyboard
+     *        shortcut.
      */
     public abstract void onClick( MouseButtonEvent mbe );
 

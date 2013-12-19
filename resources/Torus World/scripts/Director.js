@@ -36,6 +36,9 @@ Director = Class({
     },
     
     startGame: function(sceneName) {
+        if (!sceneName) {
+            sceneName = "1";
+        }
 		this.score = 0;
 		this.lives = 3;
 		this.startScene(sceneName);    	

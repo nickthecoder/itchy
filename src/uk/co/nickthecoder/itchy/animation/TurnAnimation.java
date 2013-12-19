@@ -1,9 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.animation;
 
@@ -18,27 +15,26 @@ public class TurnAnimation extends NumericAnimation
     private static final List<AbstractProperty<Animation, ?>> properties =
         AbstractProperty.<Animation> findAnnotations(TurnAnimation.class);
 
-
     /**
      * The total turn in degrees
      */
-    @Property(label="Turn")
+    @Property(label = "Turn")
     public double turn;
-    
-    @Property(label="Heading Too")
+
+    @Property(label = "Heading Too")
     public boolean headingToo;
-    
+
     public TurnAnimation()
     {
         this(200, Eases.linear, 1);
     }
 
-    public TurnAnimation( int ticks, Ease ease, double turn)
+    public TurnAnimation( int ticks, Ease ease, double turn )
     {
         super(ticks, ease);
         this.turn = turn;
     }
-    
+
     @Override
     public List<AbstractProperty<Animation, ?>> getProperties()
     {
@@ -50,13 +46,13 @@ public class TurnAnimation extends NumericAnimation
     {
         return "Turn";
     }
-    
+
     @Override
     public void tick( Actor actor, double amount, double delta )
     {
         double turnage = this.turn * delta;
-        actor.getAppearance().adjustDirection( turnage );
-        if (headingToo) {
+        actor.getAppearance().adjustDirection(turnage);
+        if (this.headingToo) {
             actor.adjustDirection(turnage);
         }
     }

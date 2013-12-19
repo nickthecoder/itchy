@@ -93,7 +93,7 @@ public class SimplePause implements Pause
 
         try {
             // Note, that the pause scene is not unloaded.
-            Scene scene = this.game.resources.getSceneResource(pauseSceneName).loadScene();
+            Scene scene = this.game.resources.getSceneResource(this.pauseSceneName).loadScene();
             scene.create(this.stage, this.game.resources, false);
         } catch (Exception e) {
             System.out.println("Failed to load pause scene : " + this.pauseSceneName);
@@ -101,7 +101,7 @@ public class SimplePause implements Pause
         }
 
         this.stageView = new StageView(rect, this.stage);
-        this.game.getGameViews().add(stageView);
+        this.game.getGameViews().add(this.stageView);
 
     }
 
@@ -123,7 +123,7 @@ public class SimplePause implements Pause
         this.stage.clear();
         this.stage = null;
         this.stageView = null;
-        
+
         if (this.paused == false) {
             return;
         }

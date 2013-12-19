@@ -1,7 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0 which accompanies this
- * distribution, and is available at http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
@@ -21,10 +20,10 @@ public interface ParentView<V extends View> extends View
     public void remove( V view );
 
     public List<V> getChildren();
-    
+
     /**
-     * Adjusts the given rectangle, so that 'rect' in the child layer's coordinates now becomes
-     * valid in this layer's coordinates.
+     * Adjusts the given rectangle, so that 'rect' in the child layer's coordinates now becomes valid in this layer's coordinates.
+     * 
      * @param rect
      */
     public void adjustChildRect( Rect rect );

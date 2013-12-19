@@ -27,7 +27,7 @@ public abstract class AbstractTextPose implements Pose
     private String text = "";
 
     protected int changeId = 0;
-    
+
     protected Appearance appearance;
 
     public AbstractTextPose( Font font, double fontSize )
@@ -183,7 +183,6 @@ public abstract class AbstractTextPose implements Pose
         }
     }
 
-    
     protected void changedImage()
     {
         this.changeId++;

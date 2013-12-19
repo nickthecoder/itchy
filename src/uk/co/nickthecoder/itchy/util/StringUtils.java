@@ -1,9 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.util;
 
@@ -27,13 +24,13 @@ public class StringUtils
 
     public static boolean equals( Object a, Object b )
     {
-        if ( a == null ) {
+        if (a == null) {
             return b == null;
         } else {
             return a.equals(b);
         }
     }
-    
+
     public static boolean isBlank( String string )
     {
         return isEmpty(string);
@@ -67,11 +64,9 @@ public class StringUtils
     }
 
     /**
-     * Looks for all occurances of <i>search</i> and replaces them with <i>replace</i> within the
-     * string <i>value</i>. <br>
+     * Looks for all occurances of <i>search</i> and replaces them with <i>replace</i> within the string <i>value</i>. <br>
      * <br>
-     * Returns the same string if no replacements were needed, otherwise returns a new string with
-     * the appropriate replacements.
+     * Returns the same string if no replacements were needed, otherwise returns a new string with the appropriate replacements.
      */
 
     public static String searchAndReplace( String value, String search, String replace )
@@ -100,8 +95,8 @@ public class StringUtils
     }
 
     /**
-     * Returns the first part of the string, up until (but not including) the first new line. If
-     * there is no new line, then the original string is returned.
+     * Returns the first part of the string, up until (but not including) the first new line. If there is no new line, then the original
+     * string is returned.
      */
     public static String firstLine( String string )
     {
@@ -118,9 +113,8 @@ public class StringUtils
     }
 
     /**
-     * Returns the first part of the string, up until (but not including) the first new line,
-     * follwoed by three dots. If there is no new line, then the original string is returned,
-     * without any dots.
+     * Returns the first part of the string, up until (but not including) the first new line, follwoed by three dots. If there is no new
+     * line, then the original string is returned, without any dots.
      */
     public static String firstLineDotDotDot( String string )
     {

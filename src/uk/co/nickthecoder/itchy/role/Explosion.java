@@ -1,7 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0 which accompanies this
- * distribution, and is available at http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.role;
 
@@ -12,11 +11,10 @@ import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Role;
 
 /**
- * Creates many particles from a central point, spreading outwards. This is typically used when an
- * actor is destroyed.
+ * Creates many particles from a central point, spreading outwards. This is typically used when an actor is destroyed.
  * 
- * Many of the methods return itself, which is designed to make setting up the explosion easier. For
- * example, this code snippet taken from "It's Gonna Rain" calls many methods :
+ * Many of the methods return itself, which is designed to make setting up the explosion easier. For example, this code snippet taken from
+ * "It's Gonna Rain" calls many methods :
  * 
  * <pre>
  * <code>
@@ -41,8 +39,7 @@ import uk.co.nickthecoder.itchy.Role;
  * </code>
  * </pre>
  * 
- * Note that the createActor method returns an Actor (not the Explosion), and therefore must be
- * last.
+ * Note that the createActor method returns an Actor (not the Explosion), and therefore must be last.
  */
 public class Explosion extends Companion<Explosion>
 {
@@ -113,7 +110,7 @@ public class Explosion extends Companion<Explosion>
     public double randomOffsetSidewards = 0;
 
     public String projectileEventName;
-    
+
     public boolean follow = false;;
 
     /**
@@ -141,8 +138,8 @@ public class Explosion extends Companion<Explosion>
     /**
      * Creates the explosion actor.
      * 
-     * @return A new actor, which has an Explosion Role, has been added to the same layer as the
-     *         actor in the constructor, but has not been activated yet.
+     * @return A new actor, which has an Explosion Role, has been added to the same layer as the actor in the constructor, but has not been
+     *         activated yet.
      */
     @Override
     public Actor createActor()
@@ -155,9 +152,9 @@ public class Explosion extends Companion<Explosion>
     }
 
     /**
-     * The projectiles will fire this event when each Projectile's Actor is created. The event can
-     * select a Pose, an Animation, and can play a sound. If you only want to select a pose, then
-     * use {@link #pose(String)}. It will not fire the event when the Explosion's actor is created.
+     * The projectiles will fire this event when each Projectile's Actor is created. The event can select a Pose, an Animation, and can play
+     * a sound. If you only want to select a pose, then use {@link #pose(String)}. It will not fire the event when the Explosion's actor is
+     * created.
      * 
      * @param eventName
      *        The name of the event to fire when the actor is created.
@@ -187,11 +184,11 @@ public class Explosion extends Companion<Explosion>
         this.totalProjectiles = Integer.MAX_VALUE;
         return this;
     }
-    
+
     /**
      * @param value
-     *        The number of projectiles to be created each frame. For an explosion, you probably
-     *        want all of the projectiles to be created simultaneously, so don't call this method.
+     *        The number of projectiles to be created each frame. For an explosion, you probably want all of the projectiles to be created
+     *        simultaneously, so don't call this method.
      * @return this
      */
     public Explosion projectilesPerTick( int value )
@@ -201,10 +198,8 @@ public class Explosion extends Companion<Explosion>
     }
 
     /**
-     * The radius of the explosion at time zero. Note, that this is different to
-     * {@link #offsetForwards(double)}, because offsetForwards move the centre of the explosion
-     * forwards, whereas 'distance' moves each Projectile forwards relative to the centre of the
-     * explosion.
+     * The radius of the explosion at time zero. Note, that this is different to {@link #offsetForwards(double)}, because offsetForwards
+     * move the centre of the explosion forwards, whereas 'distance' moves each Projectile forwards relative to the centre of the explosion.
      * 
      * @param distance
      * @return this
@@ -227,11 +222,10 @@ public class Explosion extends Companion<Explosion>
         this.follow = true;
         return this;
     }
-    
+
     /**
      * @param value
-     *        The amount of change to the projectiles' Y velocity each frame. A value of around -0.2
-     *        gives a pleasing effect.
+     *        The amount of change to the projectiles' Y velocity each frame. A value of around -0.2 gives a pleasing effect.
      * @return this
      */
     public Explosion gravity( double value )
@@ -251,9 +245,8 @@ public class Explosion extends Companion<Explosion>
     }
 
     /**
-     * Randomly spin the projectiles. Note that the spin is calculated once for each projectile. It
-     * is typical to use <code>spin( -N, N )</code> so that the projectiles, where N defines the
-     * maximum speed of rotation.
+     * Randomly spin the projectiles. Note that the spin is calculated once for each projectile. It is typical to use
+     * <code>spin( -N, N )</code> so that the projectiles, where N defines the maximum speed of rotation.
      * 
      * @param from
      *        The lowest number of degrees to turn the projectiles each frame.
@@ -269,13 +262,11 @@ public class Explosion extends Companion<Explosion>
     }
 
     /**
-     * A constant X velocity for all projectiles. Note, this can be used in conjunction with speed,
-     * the projectiles' velocities will be the sum of their speed in the direction of their heading,
-     * and their (vx,vy) velocity.
+     * A constant X velocity for all projectiles. Note, this can be used in conjunction with speed, the projectiles' velocities will be the
+     * sum of their speed in the direction of their heading, and their (vx,vy) velocity.
      * 
      * @param value
-     *        The initial X velocity of each projectile. Use this if you want to carry the momentum
-     *        of the exploding actor.
+     *        The initial X velocity of each projectile. Use this if you want to carry the momentum of the exploding actor.
      * 
      * @return this
      */
@@ -285,9 +276,8 @@ public class Explosion extends Companion<Explosion>
     }
 
     /**
-     * A random X velocity for each projectile in a given range. Note, this can be used in
-     * conjunction with speed, the projectiles' velocities will be the sum of their speed in the
-     * direction of their heading, and their (vx,vy) velocity.
+     * A random X velocity for each projectile in a given range. Note, this can be used in conjunction with speed, the projectiles'
+     * velocities will be the sum of their speed in the direction of their heading, and their (vx,vy) velocity.
      * 
      * @param from
      *        The lowest X velocity in pixels per tick.
@@ -321,9 +311,8 @@ public class Explosion extends Companion<Explosion>
     }
 
     /**
-     * Each projectile is points in a random direction within the given range. Note, if this method
-     * is not called, but {@link #rotate} is called, then the projectiles will point in the same
-     * direction as their heading.
+     * Each projectile is points in a random direction within the given range. Note, if this method is not called, but {@link #rotate} is
+     * called, then the projectiles will point in the same direction as their heading.
      * 
      * @param from
      *        The minimum direction in degrees
@@ -359,13 +348,11 @@ public class Explosion extends Companion<Explosion>
     }
 
     /**
-     * Defines the speed of each Projectile. This is used in conjunction with
-     * {@link #heading(double)}.
+     * Defines the speed of each Projectile. This is used in conjunction with {@link #heading(double)}.
      * 
-     * Note that the velocity of the Projectile can also be set using {@link #vx(double)} and
-     * {@link #vy(double)}. Both can be used at the same time. For example, you can use vx and vy to
-     * carry on the exploding actor's momentum, and use speed to define how fast the projectiles
-     * move away from the centre of the explosion.
+     * Note that the velocity of the Projectile can also be set using {@link #vx(double)} and {@link #vy(double)}. Both can be used at the
+     * same time. For example, you can use vx and vy to carry on the exploding actor's momentum, and use speed to define how fast the
+     * projectiles move away from the centre of the explosion.
      * 
      * @param forwards
      *        The speed away from the centre of the explosion in pixels per frame.
@@ -422,11 +409,11 @@ public class Explosion extends Companion<Explosion>
     }
 
     /**
-     * Randomly picks the amount to fade each Projectile each frame. The amount is calculated once
-     * per Projectile, so each Projectile fades by a constant amount.
+     * Randomly picks the amount to fade each Projectile each frame. The amount is calculated once per Projectile, so each Projectile fades
+     * by a constant amount.
      * 
-     * Negative values means the projectile will become less faded (i.e. become more opaque).
-     * Therefore the values will almost always be positive.
+     * Negative values means the projectile will become less faded (i.e. become more opaque). Therefore the values will almost always be
+     * positive.
      * 
      * @param from
      *        The smallest amount of fade (-255 to 255)
@@ -459,8 +446,8 @@ public class Explosion extends Companion<Explosion>
 
     /**
      * @param value
-     *        The amount the Projectile should grow each frame. i.e. the amount its scale is
-     *        multiplied by each frame. each frame. Should be close to 1.0.
+     *        The amount the Projectile should grow each frame. i.e. the amount its scale is multiplied by each frame. each frame. Should be
+     *        close to 1.0.
      * @return this
      */
     public Explosion grow( double value )
@@ -485,9 +472,8 @@ public class Explosion extends Companion<Explosion>
     }
 
     /**
-     * Note, if you use {@link #fade}, then the actor will die when completely faded, or when its
-     * life runs out, whichever is soonest. So if you want a long fade with no abrupt end, you can
-     * set life to a large number, and let the fade kill the Projectile.
+     * Note, if you use {@link #fade}, then the actor will die when completely faded, or when its life runs out, whichever is soonest. So if
+     * you want a long fade with no abrupt end, you can set life to a large number, and let the fade kill the Projectile.
      * 
      * @param seconds
      *        The number of seconds that each of projectile lasts for.
@@ -537,17 +523,17 @@ public class Explosion extends Companion<Explosion>
     }
 
     /**
-     * Creates the Projectile objects and then dies. Unless projectilesPerClick is called, this will
-     * only tick once, creating all of the Projectiles in one go.
+     * Creates the Projectile objects and then dies. Unless projectilesPerClick is called, this will only tick once, creating all of the
+     * Projectiles in one go.
      */
     @Override
     public void tick()
     {
         if (this.follow) {
             getActor().moveTo(this.parent);
-            getActor().moveBy(this.offsetX,  this.offsetY);
+            getActor().moveBy(this.offsetX, this.offsetY);
         }
-        
+
         for (int i = 0; i < this.countPerTick; i++) {
 
             Projectile projectile = new Projectile(getActor());
@@ -599,7 +585,7 @@ public class Explosion extends Companion<Explosion>
 
             Actor actor = projectile.createActor();
             if (this.pose != null) {
-                actor.getAppearance().setPose(pose);
+                actor.getAppearance().setPose(this.pose);
             }
 
             actor.setHeading(actualHeading);

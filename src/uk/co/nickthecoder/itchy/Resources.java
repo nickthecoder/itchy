@@ -444,15 +444,15 @@ public class Resources extends Loadable
     }
 
     /**
-     * Used while loading a resource - if a costume has been renamed since the scene was last saved, then we need to translate from
-     * the old name to the new name before getting the costume.
+     * Used while loading a resource - if a costume has been renamed since the scene was last saved, then we need to translate from the old
+     * name to the new name before getting the costume.
      */
     public String getNewCostumeName( String name )
     {
         String origName = this.renamedCostumes.get(name);
         return origName == null ? name : origName;
     }
-    
+
     public Costume getCostume( String name )
     {
         CostumeResource resource = this.costumes.get(name);
@@ -493,16 +493,16 @@ public class Resources extends Loadable
     {
         String oldName = costumeResource.getName();
         String origName = oldName;
-        
+
         // If the costume has been renamed already, we want to map from the ORIGINAL name, not the intermediate name (oldName).
-        for ( String name : this.renamedCostumes.keySet()) {
-            if ( this.renamedCostumes.get(name).equals(oldName)) {
+        for (String name : this.renamedCostumes.keySet()) {
+            if (this.renamedCostumes.get(name).equals(oldName)) {
                 origName = name;
                 break;
             }
         }
-        
-        this.renamedCostumes.put( origName, newName );
+
+        this.renamedCostumes.put(origName, newName);
 
         this.costumes.remove(oldName);
         this.costumes.put(newName, costumeResource);

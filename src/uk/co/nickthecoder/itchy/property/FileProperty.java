@@ -1,9 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.property;
 
@@ -36,7 +33,7 @@ public class FileProperty<S> extends AbstractProperty<S, File>
     @Override
     public Component createComponent( final S subject, boolean autoUpdate )
     {
-        final FilenameComponent box = new FilenameComponent( Itchy.getGame().resources, this.getSafeValue(subject));
+        final FilenameComponent box = new FilenameComponent(Itchy.getGame().resources, this.getSafeValue(subject));
         if (autoUpdate) {
             box.addChangeListener(new ComponentChangeListener() {
                 @Override
@@ -77,7 +74,7 @@ public class FileProperty<S> extends AbstractProperty<S, File>
     public void refresh( S subject, Component component ) throws Exception
     {
         FilenameComponent filenameComponent = (FilenameComponent) component;
-        filenameComponent.setText( getValue(subject).getPath() );
+        filenameComponent.setText(getValue(subject).getPath());
     }
 
     @Override

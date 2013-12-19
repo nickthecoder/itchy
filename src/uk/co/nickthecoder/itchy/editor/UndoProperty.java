@@ -25,14 +25,14 @@ public class UndoProperty<S> extends AbstractUndoProperty<S>
     {
         return this.sceneDesigner.getForm(this.formName);
     }
-    
+
     @Override
     public boolean merge( Undo o )
     {
         if (o.getClass() == UndoProperty.class) {
             @SuppressWarnings("unchecked")
             UndoProperty<S> other = (UndoProperty<S>) o;
-            if ((other.formName.equals( this.formName )) && (this.property.key.equals(other.property.key))) {
+            if ((other.formName.equals(this.formName)) && (this.property.key.equals(other.property.key))) {
                 this.newValue = other.newValue;
                 return true;
             }

@@ -1,9 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.util;
 
@@ -52,8 +49,8 @@ public class XMLTag
     }
 
     /**
-     * Returns the string value of a content-only tag, ie a tag which has a text body, no attributes
-     * and no sub-tags. The html title tag is an example of a content-only tag.
+     * Returns the string value of a content-only tag, ie a tag which has a text body, no attributes and no sub-tags. The html title tag is
+     * an example of a content-only tag.
      */
     public String getOptionalContent( String tagName, String defaultValue ) throws XMLException
     {
@@ -116,7 +113,7 @@ public class XMLTag
 
         if (tagList.size() < minimum) {
             throw new XMLException("Expeceted at least " + minimum + " tags, but found only " +
-                    tagList.size());
+                tagList.size());
         }
 
         return tagList.iterator();
@@ -128,12 +125,12 @@ public class XMLTag
 
         if (tagList.size() < minimum) {
             throw new XMLException("Expeceted at least " + minimum + " tags, but found only " +
-                    tagList.size());
+                tagList.size());
         }
 
         if (tagList.size() > maximum) {
             throw new XMLException("Expeceted at most " + maximum + " tags, but found " +
-                    tagList.size());
+                tagList.size());
         }
 
         return tagList.iterator();
@@ -221,7 +218,7 @@ public class XMLTag
 
         } else {
             throw new XMLException("Expected a boolean attribute named '" + attributeName +
-                    "', but found '" + value + "'");
+                "', but found '" + value + "'");
         }
 
     }
@@ -245,7 +242,7 @@ public class XMLTag
 
         } catch (Exception e) {
             throw new XMLException("Expected an integer attribute named '" + attributeName +
-                    "', but found '" + value + "'");
+                "', but found '" + value + "'");
         }
     }
 
@@ -268,7 +265,7 @@ public class XMLTag
 
         } catch (Exception e) {
             throw new XMLException("Expected a float attribute named '" + attributeName +
-                    "', but found '" + value + "'");
+                "', but found '" + value + "'");
         }
     }
 
@@ -291,7 +288,7 @@ public class XMLTag
 
         } catch (Exception e) {
             throw new XMLException("Expected a double attribute named '" + attributeName +
-                    "', but found '" + value + "'");
+                "', but found '" + value + "'");
         }
     }
 
@@ -306,8 +303,8 @@ public class XMLTag
     }
 
     /**
-     * Throws an exception if any attribute have not been read, or if any sub-tags have not been
-     * read. Currently not implemented, so does nothing.
+     * Throws an exception if any attribute have not been read, or if any sub-tags have not been read. Currently not implemented, so does
+     * nothing.
      */
     public void assertAllUsed()
     {
@@ -319,7 +316,7 @@ public class XMLTag
 
         if (tagList.size() > 1) {
             throw new XMLException("Expected only one '" + tagName + "' tags, but found " +
-                    tagList.size());
+                tagList.size());
 
         } else if (tagList.size() < 1) {
             throw new XMLException("Expected a '" + tagName + "' tag.");

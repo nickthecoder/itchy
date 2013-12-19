@@ -1,7 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0 which accompanies this
- * distribution, and is available at http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.gui;
 
@@ -38,9 +37,9 @@ public class Notebook extends Container
 
     public void addPage( String label, Component page )
     {
-        addPage( new Label(label),page);
+        addPage(new Label(label), page);
     }
-    
+
     public void addPage( Component label, Component page )
     {
         Tab tab = new Tab(label, page, this.tabs.getChildren().size());
@@ -52,17 +51,17 @@ public class Notebook extends Container
         page.setVisible(selected);
 
     }
-    
+
     public int size()
     {
         return this.pages.getChildren().size();
     }
-    
+
     public Button getTab( int pageIndex )
     {
         return (Tab) this.tabs.getChildren().get(pageIndex);
     }
-    
+
     public Component getPage( int pageIndex )
     {
         return this.pages.getChildren().get(pageIndex);
@@ -87,8 +86,8 @@ public class Notebook extends Container
     }
 
     /**
-     * Reverses the normal order of rendering, so that the tabs are blitted after the pages. This
-     * allows the tabs to slightly overlap the pages, if the notebook has a negative spacing.
+     * Reverses the normal order of rendering, so that the tabs are blitted after the pages. This allows the tabs to slightly overlap the
+     * pages, if the notebook has a negative spacing.
      */
     @Override
     public void render( GraphicsContext gc )

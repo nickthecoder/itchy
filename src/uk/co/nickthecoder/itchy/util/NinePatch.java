@@ -1,7 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0 which accompanies this
- * distribution, and is available at http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.util;
 
@@ -11,14 +10,12 @@ import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.Surface;
 
 /**
- * Divide an image into a 3x3 grid, and you have nine patches, which can be used to draw a larger
- * image. Imagine we have an image of a plain button background, and we want to draw a much larger
- * button.
+ * Divide an image into a 3x3 grid, and you have nine patches, which can be used to draw a larger image. Imagine we have an image of a plain
+ * button background, and we want to draw a much larger button.
  * 
- * Take the corners, and copy them into the corners of the destination image. Now take each side,
- * and copy it multiple times so that it reaches from one corner to the other. We are just left with
- * the centre to complete the final image. We could tile the source's centre into the destination
- * centre, but for some images, a flat fill is all that's needed.
+ * Take the corners, and copy them into the corners of the destination image. Now take each side, and copy it multiple times so that it
+ * reaches from one corner to the other. We are just left with the centre to complete the final image. We could tile the source's centre
+ * into the destination centre, but for some images, a flat fill is all that's needed.
  */
 public class NinePatch extends ImageRenderable
 {
@@ -30,38 +27,35 @@ public class NinePatch extends ImageRenderable
         empty, tile, fill
     };
 
-    @Property(label="Margin Top")
+    @Property(label = "Margin Top")
     public int marginTop;
-    
-    @Property(label="Margin Right")
+
+    @Property(label = "Margin Right")
     public int marginRight;
-    
-    @Property(label="Margin Bottom")
+
+    @Property(label = "Margin Bottom")
     public int marginBottom;
-    
-    @Property(label="Margin Left")
+
+    @Property(label = "Margin Left")
     public int marginLeft;
 
     /**
      * How should the middle of the destination image be drawn?
      */
-    @Property(label="Middle Treatment")
+    @Property(label = "Middle Treatment")
     public Middle middle;
 
     /**
-     * If {@link #middle} is <code>Middle.fill</code>, then this is the colour used to draw the
-     * middle.
+     * If {@link #middle} is <code>Middle.fill</code>, then this is the colour used to draw the middle.
      */
-    @Property(label="Background Colour")
+    @Property(label = "Background Colour")
     protected RGBA backgroundColor;
 
     /**
-     * Creates a nine patch with the desired margins, with the default middle of
-     * <code>Middle.file</code>.
+     * Creates a nine patch with the desired margins, with the default middle of <code>Middle.file</code>.
      * 
      * @param surface
-     *        The source image for the NinePatch. The fill colour is taken from centre pixel of the
-     *        source surfaces middle patch.
+     *        The source image for the NinePatch. The fill colour is taken from centre pixel of the source surfaces middle patch.
      * @param marginTop
      * @param marginRight
      * @param marginBottom
@@ -79,8 +73,7 @@ public class NinePatch extends ImageRenderable
      * @param marginBottom
      * @param marginLeft
      * @param middle
-     *        If using <code>Middle.fill</code>, then the fill colour is taken from the centre of
-     *        the source image's middle patch.
+     *        If using <code>Middle.fill</code>, then the fill colour is taken from the centre of the source image's middle patch.
      */
     public NinePatch( Surface surface, int marginTop, int marginRight, int marginBottom,
         int marginLeft, Middle middle )

@@ -82,7 +82,7 @@
     </animation>
     <animation name="buttonHoverOver">
       <parallel loops="1" sequence="false">
-        <turnto direction="0.0" ease="easeOutBack" longWay="true" ticks="30"/>
+        <turnto direction="0.0" ease="easeInOutCirc" longWay="true" ticks="30"/>
         <scale ease="easeOutBack" target="1.5" ticks="30"/>
       </parallel>
     </animation>
@@ -98,7 +98,7 @@
           <alpha ease="linear" target="1.0" ticks="1"/>
         </parallel>
         <parallel loops="1" sequence="false">
-          <alpha ease="linear" target="255.0" ticks="60"/>
+          <alpha ease="linear" target="255.0" ticks="120"/>
           <scale ease="linear" target="1.0" ticks="60"/>
         </parallel>
       </sequence>
@@ -350,7 +350,7 @@
       <string name="explosion">explosion</string>
       <string name="warp">warp</string>
       <sound name="default" sound="mystic" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="STOP_FIRST" priority="0"/>
-      <sound name="explode" sound="explode" fadeOutSeconds="3.0" fadeOnDeath="false" multipleRole="PLAY_BOTH" priority="1"/>
+      <sound name="explode" sound="explode" fadeOutSeconds="3.0" fadeOnDeath="false" multipleRole="PLAY_BOTH" priority="10"/>
       <sound name="fade" sound="warp" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
       <sound name="warp" sound="warp" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
       <animation name="default" animation="fadeIn"/>

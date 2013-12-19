@@ -379,10 +379,10 @@ public class Costume implements Cloneable
 
             // Need to reset the name before setting it to ensure a NEW property is created.
             result.setPropertiesClassName(resource.scriptManager,
-                new ClassName( this.propertiesClassName.baseClass, CostumeProperties.class.getName()));
+                new ClassName(this.propertiesClassName.baseClass, CostumeProperties.class.getName()));
             result.setPropertiesClassName(resource.scriptManager,
                 new ClassName(this.propertiesClassName.baseClass, this.propertiesClassName.name));
-            
+
             for (AbstractProperty<CostumeProperties, ?> property : this.getProperties().getProperties()) {
                 Object value = property.getValue(this.properties);
                 property.setValue(result.properties, value);

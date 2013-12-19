@@ -1,9 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
@@ -27,22 +24,21 @@ public class SoundResource extends NamedResource
     {
         super(resources, name);
         this.sound = new Sound(this.resources.resolveFilename(filename));
-        this.file= new File(filename);
+        this.file = new File(filename);
     }
 
-    @Property(label="filename", aliases="filename")
+    @Property(label = "filename", aliases = "filename")
     public File getFile()
     {
         return this.file;
     }
 
-    public void setFile( File file) throws JameException
+    public void setFile( File file ) throws JameException
     {
         this.sound.free();
         this.sound = new Sound(this.resources.resolveFilename(file.getPath()));
         this.file = file;
     }
-
 
     public String getFilename()
     {
@@ -53,6 +49,7 @@ public class SoundResource extends NamedResource
     {
         setFile(new File(filename));
     }
+
     public Sound getSound()
     {
         return this.sound;

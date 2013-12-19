@@ -61,7 +61,7 @@ public class SceneDesignerPropertiesForm<S> extends PropertiesForm<S>
 
                             Undo undo = new UndoActorProperty<S>(
                                 SceneDesignerPropertiesForm.this.sceneDesigner, SceneDesignerPropertiesForm.this.name,
-                                sceneDesigner.getCurrentActor(), property, oldValue, newValue);
+                                SceneDesignerPropertiesForm.this.sceneDesigner.getCurrentActor(), property, oldValue, newValue);
 
                             SceneDesignerPropertiesForm.this.sceneDesigner.undoList.add(undo);
                         }

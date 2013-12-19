@@ -1,7 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0 which accompanies this
- * distribution, and is available at http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.drunkinvaders;
 
@@ -12,7 +11,7 @@ import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.util.Tag;
 import uk.co.nickthecoder.itchy.util.Util;
 
-@Tag(names = {"deadly","shootable"})
+@Tag(names = { "deadly", "shootable" })
 public class Mothership extends Alien
 {
     public static final String[] SHOOTABLE_LIST = new String[] { "shootable" };
@@ -54,7 +53,7 @@ public class Mothership extends Alien
         super.onBirth();
         this.firstBornTimer = Timer.createTimerSeconds(this.firstBornDelay);
     }
-    
+
     @Override
     public void tick()
     {

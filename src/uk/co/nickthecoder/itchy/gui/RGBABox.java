@@ -1,7 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0 which accompanies this
- * distribution, and is available at http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.gui;
 
@@ -58,10 +57,10 @@ public class RGBABox extends Container
     {
         return RGBA.parse(this.textBox.getText(), this.allowNull, this.includeAlpha);
     }
-    
+
     public void setValue( RGBA value )
     {
-        this.textBox.setText( this.includeAlpha ? value.getRGBACode() : value.getRGBCode() );
+        this.textBox.setText(this.includeAlpha ? value.getRGBACode() : value.getRGBCode());
     }
 
     public void addChangeListener( ComponentChangeListener ccl )

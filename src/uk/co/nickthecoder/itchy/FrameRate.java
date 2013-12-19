@@ -1,14 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0 which accompanies this
- * distribution, and is available at http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
 /**
- * Keeps the frame rate at a constant value, so that each Actor's tick is for a known, and
- * consistent time interval. The default frame rate is 60fps, but this can be changed by the game
- * designer by :
+ * Keeps the frame rate at a constant value, so that each Actor's tick is for a known, and consistent time interval. The default frame rate
+ * is 60fps, but this can be changed by the game designer by :
  * 
  * <pre>
  * <code>
@@ -39,9 +37,8 @@ public abstract class FrameRate
     private int sequentialDroppedFrames = 0;
 
     /**
-     * The amount of time away from the perfect frame rate. A negative number means we are ahead of
-     * schedule. A positive number means we are lagging, the time taken was more than the required
-     * period.
+     * The amount of time away from the perfect frame rate. A negative number means we are ahead of schedule. A positive number means we are
+     * lagging, the time taken was more than the required period.
      */
     private int errorNanos;
 
@@ -60,17 +57,15 @@ public abstract class FrameRate
         setRequiredRate(framesPerSecond);
     }
 
-    
     public void reset()
     {
         this.errorNanos = 0;
         this.droppedFrames = 0;
         this.sequentialDroppedFrames = 0;
     }
-    
+
     /**
-     * Set the required frame rate. The default is 60, and if you want to change it, do so once in
-     * your game's constructor.
+     * Set the required frame rate. The default is 60, and if you want to change it, do so once in your game's constructor.
      * 
      * @param value
      *        the required frame rate in frames per second.
@@ -107,7 +102,7 @@ public abstract class FrameRate
             if (this.errorNanos > this.requiredPeriodNanos) {
                 this.sequentialDroppedFrames++;
                 // Hard dropping a frame. Is this good?
-                this.errorNanos  = 0;
+                this.errorNanos = 0;
 
                 if (this.sequentialDroppedFrames >= this.droppedFramesLimit) {
                     System.err.println("Maximum frame skipping, cannot maintain frame rate.");

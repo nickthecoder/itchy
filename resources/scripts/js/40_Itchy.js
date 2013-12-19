@@ -63,6 +63,10 @@ RoleScript = Class({
     },
     
     onBirth : function() { this.role.superOnBirth(); },
+    
+    onAttach : function() { this.role.superOnAttach(); },
+
+    onDetach : function() { this.role.superOnDetach(); },
 
     onDeath : function() { this.role.superOnDeath(); },
 

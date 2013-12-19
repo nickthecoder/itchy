@@ -1,7 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0 which accompanies this
- * distribution, and is available at http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
@@ -87,8 +86,7 @@ public abstract class AbstractRole implements Role
     }
 
     /**
-     * Called when the role is first attached to its actor. Override this method to perform one
-     * time initialisation.
+     * Called when the role is first attached to its actor. Override this method to perform one time initialisation.
      */
     public void onBirth()
     {
@@ -128,12 +126,10 @@ public abstract class AbstractRole implements Role
     /**
      * For Itchy Gurus Only.
      * 
-     * Allows a role to manually add a property, which will appear in the GUI scene editor.
-     * Most role's won't need this, instead they will use a '@Property(label="Whatever")'
-     * annotation above the field.
+     * Allows a role to manually add a property, which will appear in the GUI scene editor. Most role's won't need this, instead they will
+     * use a '@Property(label="Whatever")' annotation above the field.
      * 
-     * Must only be called from within addProperties to ensure that the property won't be added
-     * twice.
+     * Must only be called from within addProperties to ensure that the property won't be added twice.
      */
     protected void addProperty( AbstractProperty<Role, ?> property )
     {
@@ -188,6 +184,7 @@ public abstract class AbstractRole implements Role
         getActor().event(eventName, ae);
 
     }
+
     public void event( String poseName )
     {
         getActor().event(poseName);
@@ -204,13 +201,12 @@ public abstract class AbstractRole implements Role
     }
 
     /**
-     * Called when the Role is first attached to its actor. For most roles, this will be
-     * when the actor is first created. You may override this method to do one-time initialisation.
-     * Use this instead of a Constructor, because the role will not be fully formed in the
+     * Called when the Role is first attached to its actor. For most roles, this will be when the actor is first created. You may override
+     * this method to do one-time initialisation. Use this instead of a Constructor, because the role will not be fully formed in the
      * constructor - it won't be attached to its Actor yet.
      * 
-     * Consider using onActivated for game logic, and in particular, never use sleep or delay from
-     * within onAttach - weird things will happen!
+     * Consider using onActivated for game logic, and in particular, never use sleep or delay from within onAttach - weird things will
+     * happen!
      */
     public void onAttach()
     {
@@ -227,12 +223,11 @@ public abstract class AbstractRole implements Role
     }
 
     /**
-     * Called by Actor.tick, once every frame, for every actor in the game. If the actor has an
-     * animation, it plays the next frame. Then calls this.tick which is where the real work is one.
+     * Called by Actor.tick, once every frame, for every actor in the game. If the actor has an animation, it plays the next frame. Then
+     * calls this.tick which is where the real work is one.
      * <p>
-     * This method was created so that Pause could make actors animation stop, as well as the
-     * role's tick methods not firing. This is done by creating a PauseRole, which does
-     * nothing in tickHandler.
+     * This method was created so that Pause could make actors animation stop, as well as the role's tick methods not firing. This is done
+     * by creating a PauseRole, which does nothing in tickHandler.
      */
     @Override
     public void animateAndTick()

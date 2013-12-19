@@ -1,7 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0 which accompanies this
- * distribution, and is available at http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.script;
 
@@ -21,7 +20,7 @@ public class ScriptedCostumeProperties extends CostumeProperties
     public final ScriptProperties propertyValues;
 
     private ClassName className;
-    
+
     public final Object values;
 
     public static void addProperty(
@@ -33,9 +32,9 @@ public class ScriptedCostumeProperties extends CostumeProperties
             allProperties.put(name, properties);
         } else {
             // If the property was previously defined, remove it.
-            for ( Iterator<AbstractProperty<CostumeProperties,?>> i = properties.iterator(); i.hasNext(); ) {
-                AbstractProperty<CostumeProperties,?> property = i.next();
-                if (property.key.equals( propertyName )) {
+            for (Iterator<AbstractProperty<CostumeProperties, ?>> i = properties.iterator(); i.hasNext();) {
+                AbstractProperty<CostumeProperties, ?> property = i.next();
+                if (property.key.equals(propertyName)) {
                     i.remove();
                 }
             }

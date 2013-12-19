@@ -5,14 +5,19 @@ ${NAME} = Class({
         // TODO Initialise your object. Note you can't access this.actor yet.
     },
     
-    onAttach: function() {
-        // TODO This role is now attached to an actor, i.e. this.actor is now available.
+    onBirth: function() {
+        // Called soon after the actor is created and after it has been placed on a Stage.
     },
-    
+
+    onAttach: function() {
+        // TODO This role is now attached to an actor. Similar to onBirth, but if an Actor changes Roles, then onBirth will only be
+        // called once, whereas onAttach is called when the Actor's role is first set, and also whenever it is changed to a different Role.
+    },
+
     tick: function() {
         // TODO Called 50 times a second, and is where all the good stuff belongs!
     }
-    
+
     // Other methods include :
     // onDetach, onKill, onMouseDown, onMouseUp, onMouseMove
 });

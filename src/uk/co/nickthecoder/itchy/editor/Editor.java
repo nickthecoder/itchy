@@ -92,7 +92,7 @@ public final class Editor extends Game
         instance = this;
         super.onActivate();
     }
-    
+
     @Override
     public String getTitle()
     {

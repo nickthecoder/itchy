@@ -10,8 +10,8 @@ import java.util.List;
 
 import uk.co.nickthecoder.itchy.Costume;
 import uk.co.nickthecoder.itchy.CostumeResource;
-import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.FontResource;
+import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.Scene;
 import uk.co.nickthecoder.itchy.SceneResource;
 import uk.co.nickthecoder.itchy.gui.FileOpenDialog;
@@ -86,45 +86,45 @@ public class FontsEditor extends SubEditor<FontResource>
             }
         }
         if (usedBy.isEmpty()) {
-            if ( ! usedInScenes( fontResource ) ) { 
+            if (!usedInScenes(fontResource)) {
                 this.editor.resources.removeFont(fontResource.getName());
             }
         } else {
             new MessageBox("Cannot Delete. Used by Costumes...", usedBy.toString()).show();
         }
     }
-    
+
     private boolean usedInScenes( FontResource fontResource )
     {
         StringList list = new StringList();
-        
-        MessageBox messageBox = new MessageBox( "Checking All Scenes", "This may take a while" );
+
+        MessageBox messageBox = new MessageBox("Checking All Scenes", "This may take a while");
         messageBox.showNow();
-        
+
         try {
             Resources resources = this.editor.resources;
-            for ( String sceneName : resources.sceneNames()) {
+            for (String sceneName : resources.sceneNames()) {
                 try {
                     SceneResource sr = resources.getSceneResource(sceneName);
                     Scene scene = sr.loadScene();
                     if (scene.uses(fontResource)) {
-                        list.add( sceneName );
+                        list.add(sceneName);
                     }
                     sr.unloadScene();
-                } catch( Exception e) {
-                    list.add( sceneName+ " (failed to load)");
+                } catch (Exception e) {
+                    list.add(sceneName + " (failed to load)");
                 }
             }
-            
+
         } finally {
             messageBox.hide();
         }
-        
+
         if (!list.isEmpty()) {
-            new MessageBox( "Cannot Delete. Used in scenes...", list.toString()).show();
+            new MessageBox("Cannot Delete. Used in scenes...", list.toString()).show();
         }
-        
-        return ! list.isEmpty();
+
+        return !list.isEmpty();
     }
 
     @Override

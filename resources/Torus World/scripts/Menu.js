@@ -9,6 +9,7 @@ Menu = new Class({
     
     onKeyDown: function( event ) {
         if (event.symbol == Keys.RETURN) {
+            stdout.println("Return pressed");
             directorScript.startGame();
             
         } else if (event.symbol == Keys.ESCAPE) {

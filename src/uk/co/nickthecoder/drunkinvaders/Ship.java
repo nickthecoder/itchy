@@ -1,13 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0 which accompanies this
- * distribution, and is available at http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.drunkinvaders;
 
 import uk.co.nickthecoder.itchy.Actor;
-import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.Itchy;
+import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.extras.Fragment;
 import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.role.Explosion;
@@ -157,7 +156,7 @@ public class Ship extends Bouncy implements Shootable
         getActor().setX(this.radius * Math.cos(this.angle) + this.ox);
         getActor().setY(this.radius * Math.sin(this.angle) + this.oy);
 
-        if (! getActor().getAppearance().getWorldRectangle().within(DrunkInvaders.director.worldBounds)) {
+        if (!getActor().getAppearance().getWorldRectangle().within(DrunkInvaders.director.worldBounds)) {
             this.angle -= speed;
             getActor().moveTo(oldX, oldY);
             getActor().setDirection(oldDirection);

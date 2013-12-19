@@ -1,7 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0 which accompanies this
- * distribution, and is available at http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
@@ -48,8 +47,7 @@ public abstract class AbstractDirector implements Director
     }
 
     /**
-     * The default role is to do nothing more than forward the event to the current scene's
-     * {@link SceneDirector}.
+     * The default role is to do nothing more than forward the event to the current scene's {@link SceneDirector}.
      */
     @Override
     public boolean onMouseDown( MouseButtonEvent event )
@@ -58,8 +56,7 @@ public abstract class AbstractDirector implements Director
     }
 
     /**
-     * The default role is to do nothing more than forward the event to the current scene's
-     * {@link SceneDirector}.
+     * The default role is to do nothing more than forward the event to the current scene's {@link SceneDirector}.
      */
     @Override
     public boolean onMouseUp( MouseButtonEvent event )
@@ -68,8 +65,7 @@ public abstract class AbstractDirector implements Director
     }
 
     /**
-     * The default role is to do nothing more than forward the event to the current scene's
-     * {@link SceneDirector}.
+     * The default role is to do nothing more than forward the event to the current scene's {@link SceneDirector}.
      */
     @Override
     public boolean onMouseMove( MouseMotionEvent event )
@@ -78,9 +74,8 @@ public abstract class AbstractDirector implements Director
     }
 
     /**
-     * Called when a button is pressed. Most games don't use onKeyDown or onKeyUp during game play,
-     * instead, each Actor uses : Itchy.isKeyDown( ... ). onKeyDown and onKeyUp are useful for
-     * typing, not for game play.
+     * Called when a button is pressed. Most games don't use onKeyDown or onKeyUp during game play, instead, each Actor uses :
+     * Itchy.isKeyDown( ... ). onKeyDown and onKeyUp are useful for typing, not for game play.
      */
     @Override
     public boolean onKeyDown( KeyboardEvent event )
@@ -89,12 +84,10 @@ public abstract class AbstractDirector implements Director
     }
 
     /**
-     * Called when a button is pressed. Most games don't use onKeyDown or onKeyUp during game play,
-     * instead, each Actor uses : Itchy.isKeyDown( ... ). onKeyDown and onKeyUp are useful for
-     * typing.
+     * Called when a button is pressed. Most games don't use onKeyDown or onKeyUp during game play, instead, each Actor uses :
+     * Itchy.isKeyDown( ... ). onKeyDown and onKeyUp are useful for typing.
      * 
-     * The default role is to do nothing more than forward the event to the current scene's
-     * {@link SceneDirector}.
+     * The default role is to do nothing more than forward the event to the current scene's {@link SceneDirector}.
      */
     @Override
     public boolean onKeyUp( KeyboardEvent ke )
@@ -103,8 +96,8 @@ public abstract class AbstractDirector implements Director
     }
 
     /**
-     * Called when the application has been asked to quit, such as when Alt-F4 is pressed, or the
-     * window's close button is pressed. The default role is to terminate the application.
+     * Called when the application has been asked to quit, such as when Alt-F4 is pressed, or the window's close button is pressed. The
+     * default role is to terminate the application.
      */
     @Override
     public boolean onQuit()
@@ -116,7 +109,7 @@ public abstract class AbstractDirector implements Director
     @Override
     public void onActivate()
     {
-        //Do nothing
+        // Do nothing
     }
 
     @Override
@@ -134,23 +127,22 @@ public abstract class AbstractDirector implements Director
         this.game.clear();
         return this.game.loadScene(sceneName);
     }
-    
+
     /**
-     * Gets the root node for this game. The default implementation uses the path based on the
-     * Directors class name, and the game's ID. Note, unlike {@link Game#getPreferences()}, the returned
-     * Preferences are not AutoFlushPreferences, you will need to call 'flush' to commit each of the
-     * changes.
+     * Gets the root node for this game. The default implementation uses the path based on the Directors class name, and the game's ID.
+     * Note, unlike {@link Game#getPreferences()}, the returned Preferences are not AutoFlushPreferences, you will need to call 'flush' to
+     * commit each of the changes.
      * 
      * @return The top level preferences node for this game.
      */
+    @Override
     public Preferences getPreferenceNode()
     {
         return Preferences.userNodeForPackage(this.getClass()).node(this.game.resources.getId());
     }
 
     /**
-     * The default role is to do nothing more than forward the message to the current scene's
-     * {@link SceneDirector}.
+     * The default role is to do nothing more than forward the message to the current scene's {@link SceneDirector}.
      */
     @Override
     public void onMessage( String message )

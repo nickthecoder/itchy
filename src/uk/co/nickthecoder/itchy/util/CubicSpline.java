@@ -1,7 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0 which accompanies this
- * distribution, and is available at http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.util;
 
@@ -11,9 +10,8 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * This isn't designed to DRAW curves, its designed to move Actors in a curved path, visiting a
- * number of fixed points along the way. You add each point using the addPoint method, then you
- * calculate the spline, and then you iterate over it.
+ * This isn't designed to DRAW curves, its designed to move Actors in a curved path, visiting a number of fixed points along the way. You
+ * add each point using the addPoint method, then you calculate the spline, and then you iterate over it.
  */
 public class CubicSpline
 {
@@ -22,9 +20,9 @@ public class CubicSpline
 
     private Cubic[] xCubics;
     private Cubic[] yCubics;
-    
+
     public int steps = 10;
-    
+
     public CubicSpline()
     {
         this.xs = new ArrayList<Float>();
@@ -33,9 +31,9 @@ public class CubicSpline
 
     public void add( double x, double y )
     {
-        add( (float) x, (float) y );
+        add((float) x, (float) y);
     }
-    
+
     public void add( float x, float y )
     {
         this.xs.add(x);
@@ -44,51 +42,51 @@ public class CubicSpline
 
     private void calculate()
     {
-        xCubics = calculateNaturalCubic( xs );
-        yCubics = calculateNaturalCubic( ys );
+        this.xCubics = calculateNaturalCubic(this.xs);
+        this.yCubics = calculateNaturalCubic(this.ys);
     }
-    
+
     public Iterator<Point2D.Float> iterate()
     {
-        if ( xCubics == null ) {
-            calculate(); 
+        if (this.xCubics == null) {
+            calculate();
         }
-        
+
         return new Iterator<Point2D.Float>() {
 
             int segment = 0;
             int step = 0;
-            
+
             @Override
             public boolean hasNext()
             {
-                return segment < xCubics.length;
+                return this.segment < CubicSpline.this.xCubics.length;
             }
 
             @Override
             public java.awt.geom.Point2D.Float next()
             {
                 Point2D.Float result = new Point2D.Float(
-                    xCubics[segment].eval( step/(float) steps),
-                    yCubics[segment].eval( step/(float) steps));
-                
-                step += 1;
-                if (step > steps) {
-                    segment +=1;
-                    step = 0;
+                    CubicSpline.this.xCubics[this.segment].eval(this.step / (float) CubicSpline.this.steps),
+                    CubicSpline.this.yCubics[this.segment].eval(this.step / (float) CubicSpline.this.steps));
+
+                this.step += 1;
+                if (this.step > CubicSpline.this.steps) {
+                    this.segment += 1;
+                    this.step = 0;
                 }
-                
+
                 return result;
             }
 
             @Override
             public void remove()
-            {               
+            {
             }
-            
+
         };
     }
-    
+
     public static Cubic[] calculateNaturalCubic( List<Float> values )
     {
         float[] array = new float[values.size()];

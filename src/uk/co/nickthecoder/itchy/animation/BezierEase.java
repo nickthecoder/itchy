@@ -1,10 +1,9 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0 which accompanies this
- * distribution, and is available at http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  * 
- * This code is derived from nsSMILKeySpline.cpp, part of the Mozilla code base. Written by Brian
- * Birtles <birtles@gmail.com> It was licensed under the GPL 2.0.
+ * This code is derived from nsSMILKeySpline.cpp, part of the Mozilla code base. Written by Brian Birtles <birtles@gmail.com> It was
+ * licensed under the GPL 2.0.
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.animation;
 

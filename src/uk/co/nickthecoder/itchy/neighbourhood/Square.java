@@ -1,9 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.neighbourhood;
 
@@ -53,8 +50,8 @@ public class Square
 
                 } else {
                     Square neighbour = this.neighbourhood.getExistingSquare(this.ox + dx *
-                            this.neighbourhood.getSquareSize(),
-                            this.oy + dy * this.neighbourhood.getSquareSize());
+                        this.neighbourhood.getSquareSize(),
+                        this.oy + dy * this.neighbourhood.getSquareSize());
 
                     if (neighbour == this) {
                         System.err.println("2 Places " + this + " dx,dy : " + dx + "," + dy);
@@ -68,7 +65,7 @@ public class Square
                             System.err.println("Incorrect neightbour");
                             System.err.println(this + "->" + dx + "," + dy + " -> " + neighbour);
                             System.err.println(this.ox + " vs " +
-                                    (neighbour.ox - dx * this.neighbourhood.getSquareSize()));
+                                (neighbour.ox - dx * this.neighbourhood.getSquareSize()));
                             throw new RuntimeException("Incorrect x neighbour");
                         }
 
@@ -91,12 +88,14 @@ public class Square
 
     public double getX()
     {
-        return ox;
+        return this.ox;
     }
+
     public double getY()
     {
-        return oy;
+        return this.oy;
     }
+
     public void add( Actor actor )
     {
         this.occupants.add(actor);

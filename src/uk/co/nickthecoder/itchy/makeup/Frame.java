@@ -147,7 +147,7 @@ public class Frame implements Makeup
             src.width + this.borderLeft + this.borderRight,
             src.height + this.borderTop + this.borderTop,
             src.offsetX + this.borderLeft,
-            src.offsetY + this.borderTop );
+            src.offsetY + this.borderTop);
     }
 
 }

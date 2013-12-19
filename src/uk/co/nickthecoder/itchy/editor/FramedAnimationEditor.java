@@ -1,9 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.editor;
 
@@ -15,9 +12,9 @@ import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.animation.Frame;
 import uk.co.nickthecoder.itchy.animation.FramedAnimation;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
-import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.Button;
 import uk.co.nickthecoder.itchy.gui.Component;
+import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.Container;
 import uk.co.nickthecoder.itchy.gui.GridLayout;
 import uk.co.nickthecoder.itchy.gui.ImageComponent;
@@ -54,7 +51,7 @@ public class FramedAnimationEditor extends AnimationEditor
                     public void pick( PoseResource poseResource )
                     {
                         FramedAnimationEditor.this.frames.add(new Frame(poseResource.getName(),
-                                poseResource.pose));
+                            poseResource.pose));
                         FramedAnimationEditor.this.rebuildFrames();
                     }
                 };
@@ -107,14 +104,14 @@ public class FramedAnimationEditor extends AnimationEditor
         image = img;
         final IntegerBox delay = new IntegerBox(frame.getDelay());
         delay.minimumValue = 1;
-        
+
         delay.addChangeListener(new ComponentChangeListener() {
             @Override
             public void changed()
             {
                 frame.setDelay(delay.getSafeValue(1));
             }
-            
+
         });
 
         Button up = null;
@@ -135,7 +132,7 @@ public class FramedAnimationEditor extends AnimationEditor
         }
 
         Button delete = new Button(new ImageComponent(this.editor.getStylesheet().resources.getPose(
-                "icon_delete").getSurface()));
+            "icon_delete").getSurface()));
         delete.addActionListener(new ActionListener() {
             @Override
             public void action()
@@ -153,7 +150,7 @@ public class FramedAnimationEditor extends AnimationEditor
     public boolean save()
     {
         super.save();
-        
+
         FramedAnimation framedAnimation = (FramedAnimation) this.animation;
         framedAnimation.replaceFrames(this.frames);
 

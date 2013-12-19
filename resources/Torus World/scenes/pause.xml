@@ -4,7 +4,7 @@
     <text text="Pause" font="BlackCasper" size="128" color="#ffffff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.Tagged" costume="pause" x="395" y="346" direction="0.0" heading="0.0" startEvent="default" zOrder="-1">
       <property name="tag" value="pause"/>
     </text>
-    <text text="Pause" font="BlackCasper" size="128" color="#ffffff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.PlainRole" costume="Pause" x="395" y="346" direction="0.0" heading="0.0" startEvent="default" zOrder="999"/>
-    <text text="Pause" font="BlackCasper" size="128" color="#203ae4" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.PlainRole" costume="Pause" x="393" y="345" direction="0.0" heading="0.0" startEvent="default" zOrder="1000"/>
+    <text text="Pause" font="BlackCasper" size="128" color="#ffffff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.PlainRole" costume="pause" x="395" y="346" direction="0.0" heading="0.0" startEvent="default" zOrder="999"/>
+    <text text="Pause" font="BlackCasper" size="128" color="#203ae4" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.PlainRole" costume="pause" x="393" y="345" direction="0.0" heading="0.0" startEvent="default" zOrder="1000"/>
   </layer>
 </scene>

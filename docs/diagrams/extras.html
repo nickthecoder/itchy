@@ -10,75 +10,84 @@
 <!--GENERATE
 
 CLASS uk.co.nickthecoder.itchy.Role
-    X 410
+    X 325
     Y 0
 METHODS
 FIELDS
 
-CLASS uk.co.nickthecoder.itchy.extras.Explosion
+CLASS uk.co.nickthecoder.itchy.AbstractRole
+    X 430
+    Y 0
+METHODS
+FIELDS
+
+CLASS uk.co.nickthecoder.itchy.role.Explosion
+    X 848
+    Y 127
+
+CLASS uk.co.nickthecoder.itchy.role.Companion
+    X 718
+    Y 10
+
+
+CLASS uk.co.nickthecoder.itchy.role.Follower
+    X 567
+    Y 261
+    
+CLASS uk.co.nickthecoder.itchy.role.Talk
+    X 576
+    Y 387
+    
+CLASS uk.co.nickthecoder.itchy.role.Projectile
+    X 618
+    Y 624
+
+CLASS uk.co.nickthecoder.itchy.role.Button
+    X 151
+    Y 74
+
+CLASS uk.co.nickthecoder.itchy.role.MessageButton
+    X 134
+    Y 273
+
+CLASS uk.co.nickthecoder.itchy.role.SceneButton
+    X 265
+    Y 273
+
+CLASS uk.co.nickthecoder.itchy.role.LinkButton
+    X 17
+    Y 265
+
+CLASS uk.co.nickthecoder.itchy.role.QuitButton
     X 10
-    Y 100
+    Y 85
 
-CLASS uk.co.nickthecoder.itchy.extras.Projectile
-    X 184
-    Y 100
+CLASS uk.co.nickthecoder.itchy.role.EditorButton
+    X 6
+    Y 150
 
-CLASS uk.co.nickthecoder.itchy.extras.ShadowText
-    X 184
-    Y 445
 
-CLASS uk.co.nickthecoder.itchy.extras.Button
-    X 397
-    Y 100
+CLASS uk.co.nickthecoder.itchy.role.TextValue
+    X 414
+    Y 120
 
-CLASS uk.co.nickthecoder.itchy.extras.MessageButton
-    X 286
-    Y 325
-
-CLASS uk.co.nickthecoder.itchy.extras.SceneButton
-    X 413
-    Y 325
-
-CLASS uk.co.nickthecoder.itchy.extras.LinkButton
-    X 511
-    Y 325
-
-CLASS uk.co.nickthecoder.itchy.extras.QuitButton
-    X 534
-    Y 190
-
-CLASS uk.co.nickthecoder.itchy.extras.EditorButton
-    X 534
-    Y 264
-
-CLASS uk.co.nickthecoder.itchy.extras.Follower
-    X 632
-    Y 100
-
-CLASS uk.co.nickthecoder.itchy.extras.TextValue
-    X 786
-    Y 100
-
-CLASS uk.co.nickthecoder.itchy.extras.NumberValue
-    X 783
+CLASS uk.co.nickthecoder.itchy.role.NumberValue
+    X 414
     Y 324
     
     
 CLASS uk.co.nickthecoder.itchy.extras.Fragment
-    X 400
-    Y 650
+    X 28
+    Y 625
  
 CLASS uk.co.nickthecoder.itchy.extras.Timer
-    X 545
-    Y 650
+    X 140
+    Y 625
  
 CLASS uk.co.nickthecoder.itchy.extras.SceneTransition
-    X 725
-    Y 650
+    X 278
+    Y 625
  
-CLASS uk.co.nickthecoder.itchy.extras.Talk
-    X 640
-    Y 322
  
  
  
@@ -149,247 +158,303 @@ CLASS uk.co.nickthecoder.itchy.extras.Talk
 
 
 
+
+
+
+
+
+
+
+
+
 <!--BEGIN_CONTENT-->
-<div id="Role" class="box" style="left:410px;top:0px;">
+<div id="Role" class="box" style="left:325px;top:0px;">
   <div class="title"><a href="../api/uk/co/nickthecoder/itchy/Role.html">Role</a></div>
   <div class="content">
   </div>
 </div>
-<div id="Explosion" class="box" style="left:10px;top:100px;">
-  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/extras/Explosion.html">Explosion</a></div>
+<div id="AbstractRole" class="box" style="left:430px;top:0px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/AbstractRole.html">AbstractRole</a></div>
+  <div class="content">
+  </div>
+</div>
+<div id="Explosion" class="box" style="left:848px;top:127px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html">Explosion</a></div>
   <div class="content">
     <ul class="fields">
-      <li class="public final static"><a href="../api/uk/co/nickthecoder/itchy/extras/Explosion.html#DEFAULT_LIFE_SECONDS">DEFAULT_LIFE_SECONDS</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Explosion.html#countPerTick">countPerTick</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Explosion.html#distance">distance</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Explosion.html#fade">fade</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Explosion.html#gravity">gravity</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Explosion.html#growFactor">growFactor</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Explosion.html#lifeTicks">lifeTicks</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Explosion.html#projectileCounter">projectileCounter</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Explosion.html#projectileEventName">projectileEventName</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Explosion.html#randomAlpha">randomAlpha</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Explosion.html#randomDirection">randomDirection</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Explosion.html#randomDistance">randomDistance</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Explosion.html#randomFade">randomFade</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Explosion.html#randomGrowFactor">randomGrowFactor</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Explosion.html#randomLifeTicks">randomLifeTicks</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Explosion.html#randomOffsetForwards">randomOffsetForwards</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Explosion.html#randomOffsetSidewards">randomOffsetSidewards</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Explosion.html#randomScale">randomScale</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Explosion.html#randomSpeedForwards">randomSpeedForwards</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Explosion.html#randomSpeedSidewards">randomSpeedSidewards</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Explosion.html#randomSpin">randomSpin</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Explosion.html#randomSpread">randomSpread</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Explosion.html#randomVx">randomVx</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Explosion.html#randomVy">randomVy</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Explosion.html#speedForwards">speedForwards</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Explosion.html#speedSidewards">speedSidewards</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Explosion.html#spin">spin</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Explosion.html#spreadFrom">spreadFrom</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Explosion.html#spreadTo">spreadTo</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Explosion.html#totalProjectiles">totalProjectiles</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Explosion.html#vx">vx</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Explosion.html#vy">vy</a></li>
+      <li class="public final static"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#DEFAULT_LIFE_SECONDS">DEFAULT_LIFE_SECONDS</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#countPerTick">countPerTick</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#distance">distance</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#fade">fade</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#follow">follow</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#gravity">gravity</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#growFactor">growFactor</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#lifeTicks">lifeTicks</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#projectileCounter">projectileCounter</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#projectileEventName">projectileEventName</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#randomAlpha">randomAlpha</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#randomDirection">randomDirection</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#randomDistance">randomDistance</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#randomFade">randomFade</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#randomGrowFactor">randomGrowFactor</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#randomLifeTicks">randomLifeTicks</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#randomOffsetForwards">randomOffsetForwards</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#randomOffsetSidewards">randomOffsetSidewards</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#randomScale">randomScale</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#randomSpeedForwards">randomSpeedForwards</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#randomSpeedSidewards">randomSpeedSidewards</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#randomSpin">randomSpin</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#randomSpread">randomSpread</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#randomVx">randomVx</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#randomVy">randomVy</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#speedForwards">speedForwards</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#speedSidewards">speedSidewards</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#spin">spin</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#spreadFrom">spreadFrom</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#spreadTo">spreadTo</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#totalProjectiles">totalProjectiles</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#vx">vx</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#vy">vy</a></li>
     </ul>
     <ul class="methods">
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Explosion.html#alpha(int, int)">alpha</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Explosion.html#createActor()">createActor</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Explosion.html#direction(double, double)">direction</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Explosion.html#distance(double)">distance</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Explosion.html#distance(double, double)">distance</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Explosion.html#eventName(java.lang.String)">eventName</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Explosion.html#eventName(java.lang.String)">eventName</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Explosion.html#fade(double, double)">fade</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Explosion.html#fade(double)">fade</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Explosion.html#gravity(double)">gravity</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Explosion.html#grow(double)">grow</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Explosion.html#grow(double, double)">grow</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Explosion.html#life(double, double)">life</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Explosion.html#life(double)">life</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Explosion.html#offsetForwards(double, double)">offsetForwards</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Explosion.html#offsetSidewards(double, double)">offsetSidewards</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Explosion.html#pose(java.lang.String)">pose</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Explosion.html#pose(java.lang.String)">pose</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Explosion.html#projectiles(int)">projectiles</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Explosion.html#projectilesPerTick(int)">projectilesPerTick</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Explosion.html#randomSpread(boolean)">randomSpread</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Explosion.html#randomSpread()">randomSpread</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Explosion.html#scale(double, double)">scale</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Explosion.html#speed(double, double)">speed</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Explosion.html#speed(double, double, double, double)">speed</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Explosion.html#spin(double, double)">spin</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Explosion.html#spin(double)">spin</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Explosion.html#spread(double, double)">spread</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Explosion.html#tick()">tick</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Explosion.html#vx(double, double)">vx</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Explosion.html#vx(double)">vx</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Explosion.html#vy(double)">vy</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Explosion.html#vy(double, double)">vy</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#alpha(int, int)">alpha</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#createActor()">createActor</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#direction(double, double)">direction</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#distance(double)">distance</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#distance(double, double)">distance</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#eventName(java.lang.String)">eventName</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#eventName(java.lang.String)">eventName</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#fade(double)">fade</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#fade(double, double)">fade</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#follow()">follow</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#forever()">forever</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#gravity(double)">gravity</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#grow(double, double)">grow</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#grow(double)">grow</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#life(double, double)">life</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#life(double)">life</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#offsetForwards(double, double)">offsetForwards</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#offsetSidewards(double, double)">offsetSidewards</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#pose(java.lang.String)">pose</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#pose(java.lang.String)">pose</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#projectiles(int)">projectiles</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#projectilesPerTick(int)">projectilesPerTick</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#randomSpread()">randomSpread</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#randomSpread(boolean)">randomSpread</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#scale(double, double)">scale</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#speed(double, double, double, double)">speed</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#speed(double, double)">speed</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#spin(double, double)">spin</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#spin(double)">spin</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#spread(double, double)">spread</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#tick()">tick</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#vx(double, double)">vx</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#vx(double)">vx</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#vy(double, double)">vy</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Explosion.html#vy(double)">vy</a></li>
     </ul>
   </div>
 </div>
-<div id="Projectile" class="box" style="left:184px;top:100px;">
-  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/extras/Projectile.html">Projectile</a></div>
+<div id="Companion" class="box" style="left:718px;top:10px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/role/Companion.html">Companion</a></div>
   <div class="content">
     <ul class="fields">
-      <li class="public final static"><a href="../api/uk/co/nickthecoder/itchy/extras/Projectile.html#DEFAULT_LIFE_SECONDS">DEFAULT_LIFE_SECONDS</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Projectile.html#fade">fade</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Projectile.html#gravity">gravity</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Projectile.html#growFactor">growFactor</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Projectile.html#lifeTicks">lifeTicks</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Projectile.html#speedForwards">speedForwards</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Projectile.html#speedSidewards">speedSidewards</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Projectile.html#spin">spin</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Projectile.html#vx">vx</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Projectile.html#vy">vy</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Companion.html#alpha">alpha</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Companion.html#colorize">colorize</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Companion.html#costume">costume</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Companion.html#direction">direction</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Companion.html#eventName">eventName</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Companion.html#heading">heading</a></li>
+      <li class="protected"><a href="../api/uk/co/nickthecoder/itchy/role/Companion.html#me">me</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Companion.html#offsetForwards">offsetForwards</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Companion.html#offsetSidewards">offsetSidewards</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Companion.html#offsetX">offsetX</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Companion.html#offsetY">offsetY</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Companion.html#parent">parent</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Companion.html#pose">pose</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Companion.html#rotate">rotate</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Companion.html#scale">scale</a></li>
+      <li class="protected"><a href="../api/uk/co/nickthecoder/itchy/role/Companion.html#source">source</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Companion.html#zOrder">zOrder</a></li>
     </ul>
     <ul class="methods">
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Projectile.html#fade(double)">fade</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Projectile.html#gravity(double)">gravity</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Projectile.html#growFactor(double)">growFactor</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Projectile.html#life(double)">life</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Projectile.html#speed(double)">speed</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Projectile.html#speed(double, double)">speed</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Projectile.html#spin(double)">spin</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Projectile.html#tick()">tick</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Projectile.html#vx(double)">vx</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Projectile.html#vy(double)">vy</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Companion.html#adjustZOrder(int)">adjustZOrder</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Companion.html#alpha(double)">alpha</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Companion.html#colorize(uk.co.nickthecoder.jame.RGBA)">colorize</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Companion.html#companion(java.lang.String)">companion</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Companion.html#costume(java.lang.String)">costume</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Companion.html#costume(uk.co.nickthecoder.itchy.Costume)">costume</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Companion.html#createActor()">createActor</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Companion.html#direction(double)">direction</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Companion.html#eventName(java.lang.String)">eventName</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Companion.html#heading(double)">heading</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Companion.html#offset(double, double)">offset</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Companion.html#offsetForwards(double)">offsetForwards</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Companion.html#offsetSidewards(double)">offsetSidewards</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Companion.html#pose(java.lang.String)">pose</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Companion.html#pose(uk.co.nickthecoder.itchy.Pose)">pose</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Companion.html#rotate()">rotate</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Companion.html#rotate(boolean)">rotate</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Companion.html#scale(double)">scale</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Companion.html#zOrder(int)">zOrder</a></li>
     </ul>
   </div>
 </div>
-<div id="ShadowText" class="box" style="left:184px;top:445px;">
-  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/extras/ShadowText.html">ShadowText</a></div>
+<div id="Follower" class="box" style="left:567px;top:261px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/role/Follower.html">Follower</a></div>
+  <div class="content">
+    <ul class="methods">
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Follower.html#createActor()">createActor</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Follower.html#followRotatation()">followRotatation</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Follower.html#tick()">tick</a></li>
+    </ul>
+  </div>
+</div>
+<div id="Talk" class="box" style="left:576px;top:387px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/role/Talk.html">Talk</a></div>
+  <div class="content">
+    <ul class="methods">
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Talk.html#bubble(java.lang.String)">bubble</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Talk.html#color(uk.co.nickthecoder.jame.RGBA)">color</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Talk.html#createActor()">createActor</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Talk.html#eventName(java.lang.String)">eventName</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Talk.html#eventName(java.lang.String)">eventName</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Talk.html#font(uk.co.nickthecoder.itchy.Font, int)">font</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Talk.html#font(java.lang.String, int)">font</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Talk.html#margin(int, int, int, int)">margin</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Talk.html#margin(int, int)">margin</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Talk.html#margin(int)">margin</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Talk.html#offset(double, double)">offset</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Talk.html#offset(double, double)">offset</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Talk.html#text(java.lang.String)">text</a></li>
+    </ul>
+  </div>
+</div>
+<div id="Projectile" class="box" style="left:618px;top:624px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/role/Projectile.html">Projectile</a></div>
   <div class="content">
     <ul class="fields">
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/ShadowText.html#color">color</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/ShadowText.html#font">font</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/ShadowText.html#fontSize">fontSize</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/ShadowText.html#shadow">shadow</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/ShadowText.html#shadowOffsetX">shadowOffsetX</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/ShadowText.html#shadowOffsetY">shadowOffsetY</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/ShadowText.html#text">text</a></li>
+      <li class="public final static"><a href="../api/uk/co/nickthecoder/itchy/role/Projectile.html#DEFAULT_LIFE_SECONDS">DEFAULT_LIFE_SECONDS</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Projectile.html#fade">fade</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Projectile.html#gravity">gravity</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Projectile.html#growFactor">growFactor</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Projectile.html#lifeTicks">lifeTicks</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Projectile.html#speedForwards">speedForwards</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Projectile.html#speedSidewards">speedSidewards</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Projectile.html#spin">spin</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Projectile.html#vx">vx</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Projectile.html#vy">vy</a></li>
     </ul>
     <ul class="methods">
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/ShadowText.html#color(uk.co.nickthecoder.jame.RGBA)">color</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/ShadowText.html#createPose()">createPose</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/ShadowText.html#follow(uk.co.nickthecoder.itchy.Actor)">follow</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/ShadowText.html#font(uk.co.nickthecoder.itchy.Font)">font</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/ShadowText.html#font(java.lang.String)">font</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/ShadowText.html#fontSize(int)">fontSize</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/ShadowText.html#projectile(uk.co.nickthecoder.itchy.Actor)">projectile</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/ShadowText.html#shadow(uk.co.nickthecoder.jame.RGBA)">shadow</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/ShadowText.html#shadowOffset(int, int)">shadowOffset</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/ShadowText.html#text(java.lang.String)">text</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Projectile.html#fade(double)">fade</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Projectile.html#gravity(double)">gravity</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Projectile.html#growFactor(double)">growFactor</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Projectile.html#life(double)">life</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Projectile.html#speed(double)">speed</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Projectile.html#speed(double, double)">speed</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Projectile.html#spin(double)">spin</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Projectile.html#tick()">tick</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Projectile.html#vx(double)">vx</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Projectile.html#vy(double)">vy</a></li>
     </ul>
   </div>
 </div>
-<div id="Button" class="box" style="left:397px;top:100px;">
-  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/extras/Button.html">Button</a></div>
+<div id="Button" class="box" style="left:151px;top:74px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/role/Button.html">Button</a></div>
   <div class="content">
     <ul class="methods">
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Button.html#isMouseListener()">isMouseListener</a></li>
-      <li class="protected"><a href="../api/uk/co/nickthecoder/itchy/extras/Button.html#onClick()">onClick</a></li>
-      <li class="protected"><a href="../api/uk/co/nickthecoder/itchy/extras/Button.html#onDown()">onDown</a></li>
-      <li class="protected"><a href="../api/uk/co/nickthecoder/itchy/extras/Button.html#onHoverOut()">onHoverOut</a></li>
-      <li class="protected"><a href="../api/uk/co/nickthecoder/itchy/extras/Button.html#onHoverOver()">onHoverOver</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Button.html#onMouseDown(uk.co.nickthecoder.itchy.MouseListenerView, uk.co.nickthecoder.jame.event.MouseButtonEvent)">onMouseDown</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Button.html#onMouseMove(uk.co.nickthecoder.itchy.MouseListenerView, uk.co.nickthecoder.jame.event.MouseMotionEvent)">onMouseMove</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Button.html#onMouseUp(uk.co.nickthecoder.itchy.MouseListenerView, uk.co.nickthecoder.jame.event.MouseButtonEvent)">onMouseUp</a></li>
-      <li class="protected"><a href="../api/uk/co/nickthecoder/itchy/extras/Button.html#onUp()">onUp</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Button.html#tick()">tick</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Button.html#isMouseListener()">isMouseListener</a></li>
+      <li class="protected"><a href="../api/uk/co/nickthecoder/itchy/role/Button.html#onClick()">onClick</a></li>
+      <li class="protected"><a href="../api/uk/co/nickthecoder/itchy/role/Button.html#onDown()">onDown</a></li>
+      <li class="protected"><a href="../api/uk/co/nickthecoder/itchy/role/Button.html#onHoverOut()">onHoverOut</a></li>
+      <li class="protected"><a href="../api/uk/co/nickthecoder/itchy/role/Button.html#onHoverOver()">onHoverOver</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Button.html#onMouseDown(uk.co.nickthecoder.itchy.MouseListenerView, uk.co.nickthecoder.jame.event.MouseButtonEvent)">onMouseDown</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Button.html#onMouseMove(uk.co.nickthecoder.itchy.MouseListenerView, uk.co.nickthecoder.jame.event.MouseMotionEvent)">onMouseMove</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Button.html#onMouseUp(uk.co.nickthecoder.itchy.MouseListenerView, uk.co.nickthecoder.jame.event.MouseButtonEvent)">onMouseUp</a></li>
+      <li class="protected"><a href="../api/uk/co/nickthecoder/itchy/role/Button.html#onUp()">onUp</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/Button.html#tick()">tick</a></li>
     </ul>
   </div>
 </div>
-<div id="MessageButton" class="box" style="left:286px;top:325px;">
-  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/extras/MessageButton.html">MessageButton</a></div>
-  <div class="content">
-    <ul class="fields">
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/MessageButton.html#message">message</a></li>
-    </ul>
-    <ul class="methods">
-      <li class="protected"><a href="../api/uk/co/nickthecoder/itchy/extras/MessageButton.html#onClick()">onClick</a></li>
-    </ul>
-  </div>
-</div>
-<div id="SceneButton" class="box" style="left:413px;top:325px;">
-  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/extras/SceneButton.html">SceneButton</a></div>
+<div id="MessageButton" class="box" style="left:134px;top:273px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/role/MessageButton.html">MessageButton</a></div>
   <div class="content">
     <ul class="fields">
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/SceneButton.html#sceneName">sceneName</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/MessageButton.html#message">message</a></li>
     </ul>
     <ul class="methods">
-      <li class="protected"><a href="../api/uk/co/nickthecoder/itchy/extras/SceneButton.html#onClick()">onClick</a></li>
+      <li class="protected"><a href="../api/uk/co/nickthecoder/itchy/role/MessageButton.html#onClick()">onClick</a></li>
     </ul>
   </div>
 </div>
-<div id="LinkButton" class="box" style="left:511px;top:325px;">
-  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/extras/LinkButton.html">LinkButton</a></div>
+<div id="SceneButton" class="box" style="left:265px;top:273px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/role/SceneButton.html">SceneButton</a></div>
   <div class="content">
     <ul class="fields">
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/LinkButton.html#url">url</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/SceneButton.html#sceneName">sceneName</a></li>
     </ul>
     <ul class="methods">
-      <li class="protected"><a href="../api/uk/co/nickthecoder/itchy/extras/LinkButton.html#onClick()">onClick</a></li>
+      <li class="protected"><a href="../api/uk/co/nickthecoder/itchy/role/SceneButton.html#onClick()">onClick</a></li>
     </ul>
   </div>
 </div>
-<div id="QuitButton" class="box" style="left:534px;top:190px;">
-  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/extras/QuitButton.html">QuitButton</a></div>
-  <div class="content">
-    <ul class="methods">
-      <li class="protected"><a href="../api/uk/co/nickthecoder/itchy/extras/QuitButton.html#onClick()">onClick</a></li>
-    </ul>
-  </div>
-</div>
-<div id="EditorButton" class="box" style="left:534px;top:264px;">
-  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/extras/EditorButton.html">EditorButton</a></div>
-  <div class="content">
-    <ul class="methods">
-      <li class="protected"><a href="../api/uk/co/nickthecoder/itchy/extras/EditorButton.html#onClick()">onClick</a></li>
-    </ul>
-  </div>
-</div>
-<div id="Follower" class="box" style="left:632px;top:100px;">
-  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/extras/Follower.html">Follower</a></div>
-  <div class="content">
-    <ul class="methods">
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Follower.html#createActor()">createActor</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Follower.html#followRotatation()">followRotatation</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Follower.html#tick()">tick</a></li>
-    </ul>
-  </div>
-</div>
-<div id="TextValue" class="box" style="left:786px;top:100px;">
-  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/extras/TextValue.html">TextValue</a></div>
+<div id="LinkButton" class="box" style="left:17px;top:265px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/role/LinkButton.html">LinkButton</a></div>
   <div class="content">
     <ul class="fields">
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/TextValue.html#access">access</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/TextValue.html#errorValue">errorValue</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/TextValue.html#nullValue">nullValue</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/TextValue.html#quiet">quiet</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/TextValue.html#updateInterval">updateInterval</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/LinkButton.html#url">url</a></li>
     </ul>
     <ul class="methods">
-      <li class="protected"><a href="../api/uk/co/nickthecoder/itchy/extras/TextValue.html#formatValue(java.lang.Object)">formatValue</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/TextValue.html#onBirth()">onBirth</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/TextValue.html#tick()">tick</a></li>
+      <li class="protected"><a href="../api/uk/co/nickthecoder/itchy/role/LinkButton.html#onClick()">onClick</a></li>
     </ul>
   </div>
 </div>
-<div id="NumberValue" class="box" style="left:783px;top:324px;">
-  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/extras/NumberValue.html">NumberValue</a></div>
+<div id="QuitButton" class="box" style="left:10px;top:85px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/role/QuitButton.html">QuitButton</a></div>
+  <div class="content">
+    <ul class="methods">
+      <li class="protected"><a href="../api/uk/co/nickthecoder/itchy/role/QuitButton.html#onClick()">onClick</a></li>
+    </ul>
+  </div>
+</div>
+<div id="EditorButton" class="box" style="left:6px;top:150px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/role/EditorButton.html">EditorButton</a></div>
+  <div class="content">
+    <ul class="methods">
+      <li class="protected"><a href="../api/uk/co/nickthecoder/itchy/role/EditorButton.html#onClick()">onClick</a></li>
+    </ul>
+  </div>
+</div>
+<div id="TextValue" class="box" style="left:414px;top:120px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/role/TextValue.html">TextValue</a></div>
   <div class="content">
     <ul class="fields">
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/NumberValue.html#formatPattern">formatPattern</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/TextValue.html#access">access</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/TextValue.html#errorValue">errorValue</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/TextValue.html#nullValue">nullValue</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/TextValue.html#quiet">quiet</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/TextValue.html#updateInterval">updateInterval</a></li>
     </ul>
     <ul class="methods">
-      <li class="protected"><a href="../api/uk/co/nickthecoder/itchy/extras/NumberValue.html#formatValue(java.lang.Object)">formatValue</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/NumberValue.html#onBirth()">onBirth</a></li>
+      <li class="protected"><a href="../api/uk/co/nickthecoder/itchy/role/TextValue.html#formatValue(java.lang.Object)">formatValue</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/TextValue.html#onBirth()">onBirth</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/TextValue.html#tick()">tick</a></li>
     </ul>
   </div>
 </div>
-<div id="Fragment" class="box" style="left:400px;top:650px;">
+<div id="NumberValue" class="box" style="left:414px;top:324px;">
+  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/role/NumberValue.html">NumberValue</a></div>
+  <div class="content">
+    <ul class="fields">
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/NumberValue.html#formatPattern">formatPattern</a></li>
+    </ul>
+    <ul class="methods">
+      <li class="protected"><a href="../api/uk/co/nickthecoder/itchy/role/NumberValue.html#formatValue(java.lang.Object)">formatValue</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/role/NumberValue.html#onBirth()">onBirth</a></li>
+    </ul>
+  </div>
+</div>
+<div id="Fragment" class="box" style="left:28px;top:625px;">
   <div class="title"><a href="../api/uk/co/nickthecoder/itchy/extras/Fragment.html">Fragment</a></div>
   <div class="content">
     <ul class="methods">
@@ -400,7 +465,7 @@ CLASS uk.co.nickthecoder.itchy.extras.Talk
     </ul>
   </div>
 </div>
-<div id="Timer" class="box" style="left:545px;top:650px;">
+<div id="Timer" class="box" style="left:140px;top:625px;">
   <div class="title"><a href="../api/uk/co/nickthecoder/itchy/extras/Timer.html">Timer</a></div>
   <div class="content">
     <ul class="fields">
@@ -421,7 +486,7 @@ CLASS uk.co.nickthecoder.itchy.extras.Talk
     </ul>
   </div>
 </div>
-<div id="SceneTransition" class="box" style="left:725px;top:650px;">
+<div id="SceneTransition" class="box" style="left:278px;top:625px;">
   <div class="title"><a href="../api/uk/co/nickthecoder/itchy/extras/SceneTransition.html">SceneTransition</a></div>
   <div class="content">
     <ul class="fields">
@@ -435,37 +500,12 @@ CLASS uk.co.nickthecoder.itchy.extras.Talk
       <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/SceneTransition.html#getAnimation()">getAnimation</a></li>
       <li class="protected"><a href="../api/uk/co/nickthecoder/itchy/extras/SceneTransition.html#onAnimationComplete()">onAnimationComplete</a></li>
       <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/SceneTransition.html#pause()">pause</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/SceneTransition.html#setPause(boolean)">setPause</a></li>
       <li class="public static"><a href="../api/uk/co/nickthecoder/itchy/extras/SceneTransition.html#slideDown()">slideDown</a></li>
       <li class="public static"><a href="../api/uk/co/nickthecoder/itchy/extras/SceneTransition.html#slideLeft()">slideLeft</a></li>
       <li class="public static"><a href="../api/uk/co/nickthecoder/itchy/extras/SceneTransition.html#slideRight()">slideRight</a></li>
       <li class="public static"><a href="../api/uk/co/nickthecoder/itchy/extras/SceneTransition.html#slideUp()">slideUp</a></li>
       <li class="protected"><a href="../api/uk/co/nickthecoder/itchy/extras/SceneTransition.html#takeSnapshot()">takeSnapshot</a></li>
       <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/SceneTransition.html#transition(java.lang.String)">transition</a></li>
-    </ul>
-  </div>
-</div>
-<div id="Talk" class="box" style="left:640px;top:322px;">
-  <div class="title"><a href="../api/uk/co/nickthecoder/itchy/extras/Talk.html">Talk</a></div>
-  <div class="content">
-    <ul class="methods">
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Talk.html#bubble(java.lang.String)">bubble</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Talk.html#color(uk.co.nickthecoder.jame.RGBA)">color</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Talk.html#createActor()">createActor</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Talk.html#eventName(java.lang.String)">eventName</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Talk.html#eventName(java.lang.String)">eventName</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Talk.html#font(java.lang.String)">font</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Talk.html#font(uk.co.nickthecoder.itchy.Font, int)">font</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Talk.html#font(uk.co.nickthecoder.itchy.Font)">font</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Talk.html#font(java.lang.String, int)">font</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Talk.html#fontSize(int)">fontSize</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Talk.html#margin(int, int)">margin</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Talk.html#margin(int)">margin</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Talk.html#margin(int, int, int, int)">margin</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Talk.html#message(java.lang.String)">message</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Talk.html#offset(double, double)">offset</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Talk.html#offset(double, double)">offset</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/itchy/extras/Talk.html#text(java.lang.String)">text</a></li>
     </ul>
   </div>
 </div>
@@ -482,18 +522,19 @@ function drawConnections()
 {
     clear();
     ctx.font = "7pt Verdana";
-    connect( "Explosion", "Role", "", extendsEnd );
-    connect( "Projectile", "Role", "", extendsEnd );
-    connect( "ShadowText", "Projectile", "", extendsEnd );
-    connect( "Button", "Role", "", extendsEnd );
+    connect( "Explosion", "Companion", "", extendsEnd );
+    connect( "Projectile", "Companion", "", extendsEnd );
+    connect( "AbstractRole", "Role", "", extendsEnd );
+    connect( "Companion", "AbstractRole", "", extendsEnd );
+    connect( "Button", "AbstractRole", "", extendsEnd );
     connect( "MessageButton", "Button", "", extendsEnd );
     connect( "LinkButton", "Button", "", extendsEnd );
     connect( "SceneButton", "Button", "", extendsEnd );
     connect( "QuitButton", "Button", "", extendsEnd );
     connect( "EditorButton", "Button", "", extendsEnd );
-    connect( "Follower", "Role", "", extendsEnd );
+    connect( "Follower", "Companion", "", extendsEnd );
     connect( "Talk", "Follower", "", extendsEnd );
-    connect( "TextValue", "Role", "", extendsEnd );
+    connect( "TextValue", "AbstractRole", "", extendsEnd );
     connect( "NumberValue", "TextValue", "", extendsEnd );
 
 }

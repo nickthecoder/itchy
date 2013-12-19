@@ -1,9 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.drunkinvaders;
 
@@ -14,14 +11,12 @@ import uk.co.nickthecoder.itchy.property.Property;
 
 public class Bullet extends AbstractRole implements Shootable
 {
-    @Property(label="Speed")
+    @Property(label = "Speed")
     public double speed = 5.0;
 
-    @Property(label="Target Tag")
+    @Property(label = "Target Tag")
     public String targetTagName;
 
-    
-    
     public Bullet()
     {
         this("shootable");
@@ -39,7 +34,7 @@ public class Bullet extends AbstractRole implements Shootable
         super.onAttach();
         getActor().setCollisionStrategy(DrunkInvaders.director.createCollisionStrategy(getActor()));
     }
-    
+
     @Override
     public void onDetach()
     {

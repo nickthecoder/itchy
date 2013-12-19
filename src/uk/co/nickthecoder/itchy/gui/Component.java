@@ -1,7 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0 which accompanies this
- * distribution, and is available at http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.gui;
 
@@ -321,8 +320,8 @@ public abstract class Component implements Focusable
     }
 
     /**
-     * Gets the required width of the component, and is based entirely on this component. It cannot
-     * be dependent on the parent's width, because that would lead to a circular dependency.
+     * Gets the required width of the component, and is based entirely on this component. It cannot be dependent on the parent's width,
+     * because that would lead to a circular dependency.
      * 
      * @return The required width of the component
      */
@@ -414,8 +413,8 @@ public abstract class Component implements Focusable
     }
 
     /**
-     * Called by the parent's layout during the layout phase. If the parent has a free-layout, then
-     * the position and size of children can be set arbitrarily by the application designer.
+     * Called by the parent's layout during the layout phase. If the parent has a free-layout, then the position and size of children can be
+     * set arbitrarily by the application designer.
      */
     public void setPosition( int x, int y, int width, int height )
     {
@@ -573,7 +572,7 @@ public abstract class Component implements Focusable
         }
         return false;
     }
-    
+
     /**
      * @param event
      *        The mouse event, where x and y are relative to the parent container.
@@ -598,7 +597,7 @@ public abstract class Component implements Focusable
         }
         return false;
     }
-    
+
     /**
      * @param event
      *        The mouse event, where x and y are relative to the parent container.

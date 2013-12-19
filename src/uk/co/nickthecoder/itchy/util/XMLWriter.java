@@ -1,9 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.util;
 
@@ -14,8 +11,7 @@ import java.io.PrintWriter;
 public class XMLWriter
 {
     /**
-     * A large number of spaces, a substring of which are placed at the beginning of the xml lines,
-     * to indent them.
+     * A large number of spaces, a substring of which are placed at the beginning of the xml lines, to indent them.
      */
     private static String INDENTATION = "                                                          ";
 
@@ -24,8 +20,8 @@ public class XMLWriter
     private PrintWriter writer;
 
     /**
-     * The number of spaces which cause the xml to be indented. This is increase each time a tag is
-     * opened, and descreased each time a tag is closed.
+     * The number of spaces which cause the xml to be indented. This is increase each time a tag is opened, and descreased each time a tag
+     * is closed.
      */
     private int indentSize;
 

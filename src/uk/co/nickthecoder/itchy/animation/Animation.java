@@ -1,9 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.animation;
 
@@ -18,8 +15,10 @@ import uk.co.nickthecoder.itchy.util.Named;
 
 public interface Animation extends Cloneable, PropertySubject<Animation>, Named
 {
-    public List<AbstractProperty<Animation,?>> getProperties();
-    
+    @Override
+    public List<AbstractProperty<Animation, ?>> getProperties();
+
+    @Override
     public String getName();
 
     public String getTagName();
@@ -37,14 +36,14 @@ public interface Animation extends Cloneable, PropertySubject<Animation>, Named
     public void addAnimationListener( AnimationListener listener );
 
     public void removeAnimationListener( AnimationListener listener );
-    
+
     public void addMessageListener( MessageListener listener );
 
     public void removeMessageListener( MessageListener listener );
 
-    @Property(label="Finished Message")
+    @Property(label = "Finished Message")
     public String getFinishedMessage();
-    
+
     public void setFinishedMessage( String message );
-    
+
 }

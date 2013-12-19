@@ -1,7 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0 which accompanies this
- * distribution, and is available at http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.script;
 
@@ -21,11 +20,11 @@ import javax.script.ScriptContext;
 import javax.script.ScriptEngine;
 import javax.script.ScriptException;
 
-import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.CostumeProperties;
 import uk.co.nickthecoder.itchy.Director;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.MouseListenerView;
+import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.SceneDirector;
 import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.itchy.util.Util;
@@ -141,7 +140,7 @@ public abstract class ScriptLanguage
         try {
             Reader reader = new InputStreamReader(new FileInputStream(file));
             if (this.engine instanceof Compilable) {
-                System.out.println( "Compiling script : " + file);
+                System.out.println("Compiling script : " + file);
                 Compilable compilable = (Compilable) this.engine;
                 compilable.compile(reader).eval();
             } else {
@@ -171,7 +170,7 @@ public abstract class ScriptLanguage
     public abstract Director createDirector( ClassName className );
 
     public abstract void onStarted( ScriptedDirector director );
-    
+
     public abstract void onActivate( ScriptedDirector director );
 
     public abstract void onDeactivate( ScriptedDirector director );
@@ -201,7 +200,11 @@ public abstract class ScriptLanguage
     public abstract void onBirth( ScriptedRole role );
 
     public abstract void onDeath( ScriptedRole role );
-
+    
+    public abstract void onAttach( ScriptedRole role );
+    
+    public abstract void onDetach( ScriptedRole role );
+    
     public abstract boolean onMouseDown( ScriptedRole role, MouseListenerView view, MouseButtonEvent mbe );
 
     public abstract boolean onMouseUp( ScriptedRole role, MouseListenerView view, MouseButtonEvent mbe );
@@ -213,7 +216,7 @@ public abstract class ScriptLanguage
     public abstract void tick( ScriptedRole role );
 
     public abstract boolean isMouseListener( ScriptedRole role );
-    
+
     // ===== SCENE DIRECTOR=====
 
     public abstract SceneDirector createSceneDirector( ClassName className );

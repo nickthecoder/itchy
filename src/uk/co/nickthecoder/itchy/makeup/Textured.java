@@ -77,7 +77,7 @@ public class Textured implements Makeup
         if (this.pose == null) {
             return src;
         }
-        
+
         Surface texture = this.pose.getSurface();
         int textureWidth = texture.getWidth();
         int textureHeight = texture.getHeight();
@@ -85,7 +85,7 @@ public class Textured implements Makeup
         int bottom = src.getSurface().getHeight();
         int right = src.getSurface().getWidth();
 
-        Surface tiledSurface = new Surface( right, bottom, true );
+        Surface tiledSurface = new Surface(right, bottom, true);
 
         int y = this.y > 0 ? (this.y % textureHeight) - textureHeight : 0;
 

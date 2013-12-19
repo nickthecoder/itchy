@@ -1,9 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.script;
 
@@ -15,10 +12,10 @@ import javax.script.ScriptException;
 
 /**
  * Allows a script to hold properties, which can be edited with the scene designer.
- *
- * The properties are held in the script's object, but appear as a Map 
+ * 
+ * The properties are held in the script's object, but appear as a Map
  */
-public class ScriptProperties implements Map<String,Object>
+public class ScriptProperties implements Map<String, Object>
 {
     private static final String NOT_IMPLEMENTED = "Not implemented";
 
@@ -36,7 +33,7 @@ public class ScriptProperties implements Map<String,Object>
     public Object get( Object name )
     {
         try {
-            return this.language.getProperty(inst, name.toString());
+            return this.language.getProperty(this.inst, name.toString());
         } catch (ScriptException e) {
             e.printStackTrace();
             return null;
@@ -48,14 +45,13 @@ public class ScriptProperties implements Map<String,Object>
     {
         Object oldValue = this.get(key);
         try {
-            this.language.putProperty(inst, key, value);
+            this.language.putProperty(this.inst, key, value);
         } catch (ScriptException e) {
             e.printStackTrace();
         }
         return oldValue;
     }
 
-    
     @Override
     public void clear()
     {
@@ -73,7 +69,6 @@ public class ScriptProperties implements Map<String,Object>
     {
         throw new RuntimeException(NOT_IMPLEMENTED);
     }
-
 
     @Override
     public boolean isEmpty()

@@ -1,13 +1,11 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0 which accompanies this
- * distribution, and is available at http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.tetra;
 
 /*
- * Thanks to Colin Fahey, for an excellent guide to all things tetrisy :
- * http://www.colinfahey.com/tetris/
+ * Thanks to Colin Fahey, for an excellent guide to all things tetrisy : http://www.colinfahey.com/tetris/
  */
 
 import java.awt.Point;
@@ -28,8 +26,7 @@ import uk.co.nickthecoder.jame.event.Keys;
 public class Tetra extends AbstractDirector
 {
     /**
-     * A static reference to the Tetris object, which makes it easy for external classes to interact
-     * with the game.
+     * A static reference to the Tetris object, which makes it easy for external classes to interact with the game.
      */
     public static Tetra director;
 
@@ -75,11 +72,10 @@ public class Tetra extends AbstractDirector
         1, 0, 0, 1, 0, -1, 0, 1, -1, 0 };
 
     /**
-     * The data for each of the tetris shapes. Each array holds a list of offsets from the tetris
-     * shapes central square. The x and y coordinates are mushed together into a single array i.e.
-     * x1a,y1a, x1b,y1b, x1c,y1c, x2a,y2a, x2b,y2b x2c, y2c, etc. The central square isn't included,
-     * so there are (x,y) pairs in groups of three (as a tetris shape has four squares), and there
-     * are 4 lots of these, one for each possible rotation.
+     * The data for each of the tetris shapes. Each array holds a list of offsets from the tetris shapes central square. The x and y
+     * coordinates are mushed together into a single array i.e. x1a,y1a, x1b,y1b, x1c,y1c, x2a,y2a, x2b,y2b x2c, y2c, etc. The central
+     * square isn't included, so there are (x,y) pairs in groups of three (as a tetris shape has four squares), and there are 4 lots of
+     * these, one for each possible rotation.
      */
     private static final int[][] data = new int[][] { cyan, yellow, green, red, orange, blue,
         purple };
@@ -91,10 +87,9 @@ public class Tetra extends AbstractDirector
         "orange", "blue", "purple" };
 
     /**
-     * An array of size WIDTH +2, HEIGHT + 2, representing the pieces fixed on the tetris playing
-     * area. It does not hold the piece currently falling, only the pieces that have already fallen.
-     * Each entry in the grid is null if it is empty, or contains an Actor. The actor is how the
-     * pieces are visible on the screen.
+     * An array of size WIDTH +2, HEIGHT + 2, representing the pieces fixed on the tetris playing area. It does not hold the piece currently
+     * falling, only the pieces that have already fallen. Each entry in the grid is null if it is empty, or contains an Actor. The actor is
+     * how the pieces are visible on the screen.
      */
     public Actor[][] grid;
 
@@ -103,8 +98,8 @@ public class Tetra extends AbstractDirector
     Timer escapeTimer;
 
     /**
-     * A countdown timer, which regulates the speed of the game. The speed is changed in setLevel,
-     * which is increased by one for each ten lines removed.
+     * A countdown timer, which regulates the speed of the game. The speed is changed in setLevel, which is increased by one for each ten
+     * lines removed.
      */
     Timer timer;
 

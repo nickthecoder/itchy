@@ -1,7 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0 which accompanies this
- * distribution, and is available at http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.editor;
 
@@ -18,8 +17,7 @@ import uk.co.nickthecoder.itchy.property.AbstractProperty;
 import uk.co.nickthecoder.itchy.util.StringUtils;
 
 /**
- * Uses an object's properties to build a form, validates it, and updates the subject with the newly
- * entered values.
+ * Uses an object's properties to build a form, validates it, and updates the subject with the newly entered values.
  */
 public class PropertiesForm<S>
 {
@@ -30,7 +28,7 @@ public class PropertiesForm<S>
     public GridLayout grid;
 
     public boolean autoUpdate;
-    
+
     private Map<String, Component> componentMap;
 
     List<AbstractProperty<S, ?>> properties;
@@ -60,11 +58,11 @@ public class PropertiesForm<S>
         return this.container;
     }
 
-    protected Component createComponent( AbstractProperty<S,?> property )
+    protected Component createComponent( AbstractProperty<S, ?> property )
     {
         return property.createComponent(this.subject, this.autoUpdate);
     }
-    
+
     /**
      * Takes an input component, and adds a optional hint text to its right.
      * 
@@ -72,8 +70,7 @@ public class PropertiesForm<S>
      *        The input component
      * @param hint
      *        The optional hint (may be null or blank).
-     * @return If the hint is blank, then 'input' is returned, otherwise a Container containing
-     *         'input' and the hint as a Label.
+     * @return If the hint is blank, then 'input' is returned, otherwise a Container containing 'input' and the hint as a Label.
      */
     private static Component hint( Component input, String hint )
     {
@@ -99,8 +96,7 @@ public class PropertiesForm<S>
     }
 
     /**
-     * @return An error message is one or more properties have been entered incorrectly. Null if all
-     *         properties are ok.
+     * @return An error message is one or more properties have been entered incorrectly. Null if all properties are ok.
      */
     public String getErrorMessage()
     {
@@ -115,8 +111,7 @@ public class PropertiesForm<S>
     }
 
     /**
-     * Updates the subject with the values entered by the user. No need to call this when using
-     * autoUpdate=true.
+     * Updates the subject with the values entered by the user. No need to call this when using autoUpdate=true.
      * 
      * @throws Exception
      *         If one of the properties couldn't be updated.

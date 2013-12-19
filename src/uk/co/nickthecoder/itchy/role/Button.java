@@ -1,7 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0 which accompanies this
- * distribution, and is available at http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.role;
 
@@ -16,16 +15,13 @@ import uk.co.nickthecoder.jame.event.MouseMotionEvent;
  * <p>
  * The abstract onClick method is called after the mouseUp event.
  * <p>
- * The button will fire three events, "mouseDown", "mouseUp" and "click". "mouseDown" is fired when
- * the mouse is pressed within the actor. The "mouseUp" is fired when the mouse moves outside of the
- * actor while the button is still down. "mouseUp" and "click" are fired when the mouse button is
- * released within the button. In addition, events "hoverOver" and "hoverOut" are also fired when
- * the mouse moves over the button without being clicked.
+ * The button will fire three events, "mouseDown", "mouseUp" and "click". "mouseDown" is fired when the mouse is pressed within the actor.
+ * The "mouseUp" is fired when the mouse moves outside of the actor while the button is still down. "mouseUp" and "click" are fired when the
+ * mouse button is released within the button. In addition, events "hoverOver" and "hoverOut" are also fired when the mouse moves over the
+ * button without being clicked.
  * <p>
- * For the button to work, the layer that the actor is drawn on must have had its mouse listener
- * enabled. i.e. call
- * {@link uk.co.nickthecoder.itchy.StageView#enableMouseListener(uk.co.nickthecoder.itchy.Game)}
- * when initialising your Game object.
+ * For the button to work, the layer that the actor is drawn on must have had its mouse listener enabled. i.e. call
+ * {@link uk.co.nickthecoder.itchy.StageView#enableMouseListener(uk.co.nickthecoder.itchy.Game)} when initialising your Game object.
  */
 public abstract class Button extends AbstractRole implements ViewMouseListener
 {

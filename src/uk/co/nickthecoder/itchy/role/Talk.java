@@ -40,6 +40,7 @@ public class Talk extends Follower
         super(following);
     }
 
+    @Override
     public Talk text( String text )
     {
         this.text = text;
@@ -85,6 +86,7 @@ public class Talk extends Follower
         return this;
     }
 
+    @Override
     public Talk color( RGBA color )
     {
         this.color = color;

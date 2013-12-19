@@ -1,7 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0 which accompanies this
- * distribution, and is available at http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.neighbourhood;
 
@@ -11,33 +10,28 @@ import java.util.Set;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.ActorCollisionStrategy;
-import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.BruteForceCollisionStrategy;
+import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.WorldRectangle;
 
 /**
- * Uses a Neighbourhood to optimise Actor's overlapping and pixelOverlap methods. This strategy uses a
- * grid based neighbourhood. It is designed to be used for objects larger than a single square. It
- * can be mixed and matched with SinglePointCollisionStrategy.
+ * Uses a Neighbourhood to optimise Actor's overlapping and pixelOverlap methods. This strategy uses a grid based neighbourhood. It is
+ * designed to be used for objects larger than a single square. It can be mixed and matched with SinglePointCollisionStrategy.
  * 
- * During simple tests, this performed equally to SinglePointCollisionStrategy, and as it doesn't
- * have the restrictions that SinglePointCollisionStrategy has, then this class is preferable.
+ * During simple tests, this performed equally to SinglePointCollisionStrategy, and as it doesn't have the restrictions that
+ * SinglePointCollisionStrategy has, then this class is preferable.
  * 
- * Adds the actor to all of the neighbourhood squares within its bounding rectangle. To test for
- * collisions, iterate through all of these squares, comparing with each of the the squares
- * occupants. Note that if another actor shares two or more squares, then the collision test will be
- * made two or more times. This is an acceptable overhread, only because this strategy is expected
- * to be used rarely for moving objects. If this assumption isn't true, then its worth creating a
- * new strategy which keeps track of which actors have already been tested to prevent duplicate
- * collision tests.
+ * Adds the actor to all of the neighbourhood squares within its bounding rectangle. To test for collisions, iterate through all of these
+ * squares, comparing with each of the the squares occupants. Note that if another actor shares two or more squares, then the collision test
+ * will be made two or more times. This is an acceptable overhread, only because this strategy is expected to be used rarely for moving
+ * objects. If this assumption isn't true, then its worth creating a new strategy which keeps track of which actors have already been tested
+ * to prevent duplicate collision tests.
  * 
- * Note. If combined with SinglePointCollisionStrategy, then actors using this strategy must be
- * passive (they never test for collision, only the other actor tests for collision). i.e.
- * MultiplsSquareCollisionStrategy.pixelOverlap is never called. This is needed because SinglPoint only
- * track a single square, and tests all surrounding squares, whereas MultiplSquare tracks all
- * (partially) occupied squares, and only considers them. So if a MultiSquare actor tests for
- * collision with a SinglePoint, it may miss it if the single point is outside the square occupied
- * by the tester, but the actors nevertheless overlap.
+ * Note. If combined with SinglePointCollisionStrategy, then actors using this strategy must be passive (they never test for collision, only
+ * the other actor tests for collision). i.e. MultiplsSquareCollisionStrategy.pixelOverlap is never called. This is needed because
+ * SinglPoint only track a single square, and tests all surrounding squares, whereas MultiplSquare tracks all (partially) occupied squares,
+ * and only considers them. So if a MultiSquare actor tests for collision with a SinglePoint, it may miss it if the single point is outside
+ * the square occupied by the tester, but the actors nevertheless overlap.
  */
 
 /*
@@ -148,12 +142,12 @@ public class NeighbourhoodCollisionStrategy extends ActorCollisionStrategy
 
             for (Actor actor : square.getOccupants()) {
                 Role role = actor.getRole();
-                
+
                 if ((actor != source) && (!results.contains(actor))) {
                     if (!BruteForceCollisionStrategy.exclude(role, excludeTags)) {
                         for (String includeTag : includeTags) {
                             if (role.hasTag(includeTag)) {
-    
+
                                 if (source.pixelOverlap(actor)) {
                                     results.add(role);
                                     break;

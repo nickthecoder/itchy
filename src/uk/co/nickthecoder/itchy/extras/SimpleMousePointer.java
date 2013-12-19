@@ -22,7 +22,7 @@ public class SimpleMousePointer implements MousePointer
     {
         this(costumeName, "default");
     }
-    
+
     public SimpleMousePointer( String costumeName, String startEvent )
     {
         Game game = Itchy.getGame();
@@ -31,7 +31,7 @@ public class SimpleMousePointer implements MousePointer
         this.actor.setRole(createRole());
         game.getGlassStage().add(this.actor);
         this.actor.event(startEvent);
-        
+
         game.getGlassStage().add(this.actor);
     }
 
@@ -58,7 +58,7 @@ public class SimpleMousePointer implements MousePointer
     {
         return new PlainRole();
     }
-    
+
     @Override
     public Actor getActor()
     {

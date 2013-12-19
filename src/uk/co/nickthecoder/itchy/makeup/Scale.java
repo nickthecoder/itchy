@@ -72,7 +72,7 @@ public class Scale implements Makeup
     {
         src.set(
             (int) (src.width * this.scaleX), (int) (src.height * this.scaleY),
-            (int) (src.offsetX * this.scaleX), (int) (src.offsetY * scaleY));
+            (int) (src.offsetX * this.scaleX), (int) (src.offsetY * this.scaleY));
     }
 
 }

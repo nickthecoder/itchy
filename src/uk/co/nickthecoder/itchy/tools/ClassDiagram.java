@@ -1,7 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0 which accompanies this
- * distribution, and is available at http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.tools;
 
@@ -21,10 +20,9 @@ import java.util.Set;
 import uk.co.nickthecoder.itchy.util.Util;
 
 /**
- * Creates a HTML5 class diagram from a specially crafted html pro-forma. Its designed to create
- * semi-automated class diagrams, which link to the javadocs, and also allow part of the diagram to
- * be fully hand-crafted. This allowed me to combine Java and Javascript classes on a single
- * diagram.
+ * Creates a HTML5 class diagram from a specially crafted html pro-forma. Its designed to create semi-automated class diagrams, which link
+ * to the javadocs, and also allow part of the diagram to be fully hand-crafted. This allowed me to combine Java and Javascript classes on a
+ * single diagram.
  * <p>
  * Reads a html file and looks for a special section looking like :
  * 
@@ -43,8 +41,7 @@ import uk.co.nickthecoder.itchy.util.Util;
  * </pre>
  * </code>
  * 
- * There can be as many "CLASS" sections as you wish. Note, you can use the "CLASS" tag for
- * interfaces too.
+ * There can be as many "CLASS" sections as you wish. Note, you can use the "CLASS" tag for interfaces too.
  * <p>
  * Each field and method will be checked using reflection.
  * <p>
@@ -55,14 +52,12 @@ import uk.co.nickthecoder.itchy.util.Util;
  * </pre>
  * </code>
  * 
- * The generated code will include links to the API documentation, which is assumed to be at
- * "../api/" relative to the html file.
+ * The generated code will include links to the API documentation, which is assumed to be at "../api/" relative to the html file.
  * 
  * Assuming no errors are thrown, the original pro-forma document is replaced by the generated code.
  * 
  * <h2>Known Bugs</h2>
- * Methods which take varargs don't link to the API documentation correctly. The API uses "...", but
- * the generated code uses "[]".
+ * Methods which take varargs don't link to the API documentation correctly. The API uses "...", but the generated code uses "[]".
  */
 public class ClassDiagram
 {
@@ -129,7 +124,7 @@ public class ClassDiagram
         for (String line : lines) {
             line = line.trim();
 
-            //System.out.println("> " + line);
+            // System.out.println("> " + line);
             String param = "";
             if (line.indexOf(' ') > 0) {
                 param = line.substring(line.indexOf(' ')).trim();
@@ -257,11 +252,12 @@ public class ClassDiagram
         this.writer.println("</div>");
 
     }
+
     void foo()
     {
-    
+
     }
-    
+
     /**
      * Usage : ClassDiagram HTML_TEMPLATE
      */

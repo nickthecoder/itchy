@@ -15,7 +15,7 @@ public class BuiltInColorize extends BuiltInMakeup
     {
         super(appearance);
     }
-    
+
     @Override
     public OffsetSurface apply( OffsetSurface os )
     {

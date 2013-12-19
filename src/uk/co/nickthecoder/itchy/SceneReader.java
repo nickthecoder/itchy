@@ -31,7 +31,7 @@ public class SceneReader
     }
 
     public Scene load( String filename ) throws Exception
-    {   
+    {
         BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(
             filename)));
         this.scene = new Scene();
@@ -190,7 +190,7 @@ public class SceneReader
         sceneActor.roleClassName = new ClassName(Role.class, NullRole.class.getName());
 
         String costumeName = textTag.getOptionalAttribute("costume", null);
-        costumeName = resources.getNewCostumeName(costumeName);
+        costumeName = this.resources.getNewCostumeName(costumeName);
         if (costumeName != null) {
             Costume costume = this.resources.getCostume(costumeName);
             if (costume == null) {
@@ -218,7 +218,7 @@ public class SceneReader
         } catch (Exception e) {
             // Do nothing
         }
-        
+
         sceneLayer.add(sceneActor);
     }
 

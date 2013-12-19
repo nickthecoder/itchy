@@ -1,7 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0 which accompanies this
- * distribution, and is available at http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.util;
 
@@ -16,9 +15,8 @@ import java.util.prefs.Preferences;
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
 
 /**
- * Works in the same way as {@link java.util.prefs.Preferences}, but there is no need to
- * {@link #flush()} as this is done for every write. This makes it less efficient, but easier to
- * use. If you want to write large amounts of data, consider using
+ * Works in the same way as {@link java.util.prefs.Preferences}, but there is no need to {@link #flush()} as this is done for every write.
+ * This makes it less efficient, but easier to use. If you want to write large amounts of data, consider using
  * {@link java.util.prefs.Preferences} directly.
  */
 public class AutoFlushPreferences extends Preferences

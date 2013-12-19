@@ -9,7 +9,7 @@ import uk.co.nickthecoder.itchy.property.AbstractProperty;
 public abstract class AbstractUndoProperty<S> implements Undo
 {
     protected AbstractProperty<S, ?> property;
-    
+
     protected String oldValue;
 
     protected String newValue;
@@ -19,7 +19,7 @@ public abstract class AbstractUndoProperty<S> implements Undo
         this.property = property;
         this.oldValue = oldValue;
         this.newValue = newValue;
-        System.out.println("UndoProperty " + property.key + " " + oldValue + "->" + newValue );
+        System.out.println("UndoProperty " + property.key + " " + oldValue + "->" + newValue);
     }
 
     @Override
@@ -29,7 +29,7 @@ public abstract class AbstractUndoProperty<S> implements Undo
             SceneDesignerPropertiesForm<S> form = getForm();
             System.out.println("Undo " + form.getSubject() + " " + this.property.key + " = " + this.oldValue);
             this.property.setValueByString(form.subject, this.oldValue);
-            getForm().refresh( this.property );
+            getForm().refresh(this.property);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -53,6 +53,6 @@ public abstract class AbstractUndoProperty<S> implements Undo
     {
         return false;
     }
-    
+
     public abstract SceneDesignerPropertiesForm<S> getForm();
 }

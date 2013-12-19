@@ -361,6 +361,36 @@ public class JavascriptLanguage extends ScriptLanguage
     }
 
     @Override
+    public void onAttach( ScriptedRole role )
+    {
+        try {
+            Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
+            bindings.put("roleScript", role.roleScript);
+            bindings.put("javaActor", role.getActor());
+            this.engine.eval("roleScript.actor = javaActor; roleScript.onAttach();");
+
+        } catch (ScriptException e) {
+            handleException("Role.onAttach", e);
+        }
+
+    }
+
+    @Override
+    public void onDetach( ScriptedRole role )
+    {
+        try {
+            Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
+            bindings.put("roleScript", role.roleScript);
+            bindings.put("javaActor", role.getActor());
+            this.engine.eval("roleScript.actor = javaActor; roleScript.onDetach();");
+
+        } catch (ScriptException e) {
+            handleException("Role.onDetach", e);
+        }
+
+    }
+    
+    @Override
     public void tick( ScriptedRole role )
     {
         try {

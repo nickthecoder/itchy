@@ -1,7 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0 which accompanies this
- * distribution, and is available at http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.tools;
 
@@ -31,6 +30,7 @@ public class ForkGame implements Page
     {
         return "Fork Game";
     }
+
     private PickerButton<File> gamePickerButton;
 
     @Override
@@ -100,7 +100,7 @@ public class ForkGame implements Page
 
     private void copy()
     {
-        MessageBox messageBox = new MessageBox( "Copying", "This may take a few seconds.");
+        MessageBox messageBox = new MessageBox("Copying", "This may take a few seconds.");
         messageBox.showNow();
 
         try {
@@ -119,7 +119,7 @@ public class ForkGame implements Page
             e.printStackTrace();
 
         } finally {
-        
+
             messageBox.hide();
         }
 

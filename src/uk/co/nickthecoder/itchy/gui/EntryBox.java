@@ -1,9 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.gui;
 
@@ -166,7 +163,7 @@ public class EntryBox<E extends EntryBox<?>> extends ClickableContainer implemen
                                            // it twice!
                 this.caretIndex--;
                 this.setEntryText(this.label.getText().substring(0, pos - 1) +
-                        this.label.getText().substring(pos));
+                    this.label.getText().substring(pos));
             }
             return true;
         }
@@ -174,7 +171,7 @@ public class EntryBox<E extends EntryBox<?>> extends ClickableContainer implemen
         if (ke.symbol == Keys.DELETE) {
             if (this.caretIndex < this.label.getText().length()) {
                 this.setEntryText(this.label.getText().substring(0, this.caretIndex) +
-                        this.label.getText().substring(this.caretIndex + 1));
+                    this.label.getText().substring(this.caretIndex + 1));
             }
             return true;
         }
@@ -186,7 +183,7 @@ public class EntryBox<E extends EntryBox<?>> extends ClickableContainer implemen
                 String str = (String) clipboard.getData(DataFlavor.stringFlavor);
 
                 this.setEntryText(this.label.getText().substring(0, this.caretIndex) + str +
-                        this.label.getText().substring(this.caretIndex));
+                    this.label.getText().substring(this.caretIndex));
 
                 this.caretIndex += str.length();
 
@@ -200,7 +197,7 @@ public class EntryBox<E extends EntryBox<?>> extends ClickableContainer implemen
 
         if ((ke.c >= 32)) {
             if (this.setEntryText(this.label.getText().substring(0, this.caretIndex) + ke.c +
-                    this.label.getText().substring(this.caretIndex))) {
+                this.label.getText().substring(this.caretIndex))) {
                 this.caretIndex++;
             }
             return true;
@@ -225,8 +222,7 @@ public class EntryBox<E extends EntryBox<?>> extends ClickableContainer implemen
     /**
      * 
      * @param text
-     * @return true if the change was allowed (sub classes of TextBox, such as IntegerBox may
-     *         prevent arbitrary text)
+     * @return true if the change was allowed (sub classes of TextBox, such as IntegerBox may prevent arbitrary text)
      */
     protected boolean setEntryText( String text )
     {
@@ -245,12 +241,12 @@ public class EntryBox<E extends EntryBox<?>> extends ClickableContainer implemen
 
         fireChangeEvent();
     }
-    
+
     public void fireChangeEvent()
     {
         for (ComponentChangeListener listener : this.changeListeners) {
             listener.changed();
-        } 
+        }
     }
 
     public String getText()
@@ -273,10 +269,10 @@ public class EntryBox<E extends EntryBox<?>> extends ClickableContainer implemen
         }
 
         this.setNaturalWidth(this.boxWidthPixels + this.getPaddingLeft() + this.getPaddingRight());
-        
+
         this.setNaturalHeight(
             this.label.getRequiredHeight() + this.label.getMarginTop() +
-            this.label.getMarginBottom() + this.getPaddingTop() + this.getPaddingBottom());
+                this.label.getMarginBottom() + this.getPaddingTop() + this.getPaddingBottom());
     }
 
     @Override
@@ -286,15 +282,15 @@ public class EntryBox<E extends EntryBox<?>> extends ClickableContainer implemen
         int height = this.label.getRequiredHeight();
 
         int caretX = 0;
-        
+
         try {
             String text = this.label.getText().substring(0, this.caretIndex);
             Surface surface = this.label.getFont().getSize(this.label.getFontSize())
-                    .renderBlended(text, ANY_COLOR);
-            
+                .renderBlended(text, ANY_COLOR);
+
             caretX = surface.getWidth();
             surface.free();
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -304,7 +300,7 @@ public class EntryBox<E extends EntryBox<?>> extends ClickableContainer implemen
             this.getPaddingTop() + this.label.getMarginTop(),
             width,
             height);
-        
+
         this.caret.setPosition(
             this.getPaddingLeft() + this.caret.getMarginLeft() + caretX,
             this.getPaddingTop() + this.caret.getPaddingTop(),

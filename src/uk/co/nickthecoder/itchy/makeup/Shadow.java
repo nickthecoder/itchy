@@ -68,11 +68,11 @@ public class Shadow implements Makeup
     {
         return this.seq;
     }
-    
-    public Shadow offset( int dx, int y)
+
+    public Shadow offset( int dx, int y )
     {
-        setDx( dx );
-        setDy( dy );
+        setDx(dx);
+        setDy(this.dy);
         return this;
     }
 
@@ -99,14 +99,14 @@ public class Shadow implements Makeup
         colorSurface.fill(this.color);
 
         Surface shadow;
-        if ( src.isShared() ) {
+        if (src.isShared()) {
             shadow = src.getSurface().copy();
         } else {
             shadow = src.getSurface();
         }
         colorSurface.blit(shadow);
         colorSurface.free();
-        
+
         shadow.blit(combined, shadowX, shadowY, BlendMode.COMPOSITE);
         src.getSurface().blit(combined, srcX, srcY, BlendMode.COMPOSITE);
 

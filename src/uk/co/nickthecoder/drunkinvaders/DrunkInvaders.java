@@ -1,22 +1,21 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0 which accompanies this
- * distribution, and is available at http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.drunkinvaders;
 
 import java.text.DecimalFormat;
 import java.util.List;
 
-import uk.co.nickthecoder.itchy.AbstractRole;
 import uk.co.nickthecoder.itchy.AbstractDirector;
+import uk.co.nickthecoder.itchy.AbstractRole;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.ActorCollisionStrategy;
-import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.GenericCompoundView;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Launcher;
 import uk.co.nickthecoder.itchy.MultiLineTextPose;
+import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.Stage;
 import uk.co.nickthecoder.itchy.StageView;
 import uk.co.nickthecoder.itchy.View;
@@ -72,7 +71,7 @@ public class DrunkInvaders extends AbstractDirector
 
         this.mainStage = new ZOrderStage("main");
         this.backgroundStage = new ZOrderStage("background");
-        
+
         this.mainView = new StageView(screenRect, this.mainStage);
         this.mainView.centerOn(320, 240);
         this.mainView.enableMouseListener(this.game);
@@ -83,13 +82,13 @@ public class DrunkInvaders extends AbstractDirector
         GenericCompoundView<View> views = this.game.getGameViews();
         views.add(this.backgroundView);
         views.add(this.mainView);
-        
+
         List<Stage> stages = this.game.getStages();
         stages.add(this.backgroundStage);
         stages.add(this.mainStage);
 
         // this.glassStage.locked = true;
-        //this.fadeStage.locked = true;
+        // this.fadeStage.locked = true;
 
     }
 
@@ -148,11 +147,11 @@ public class DrunkInvaders extends AbstractDirector
                 {
                     pose.setText(
                         "Aliens Remaining     : " + DrunkInvaders.this.aliensRemaining + "\n" +
-                        "Dropped Frames       : " + Itchy.frameRate.getDroppedFrames() + "\n" +
-                        "Surfaces Created     : " + Surface.totalCreated() + "\n" +
-                        "Surfaces Existing    : " + Surface.totalExisting() + "\n" +
-                        "Surfaces Freed by GC : " + Surface.totalFreedByGC()
-                    );
+                            "Dropped Frames       : " + Itchy.frameRate.getDroppedFrames() + "\n" +
+                            "Surfaces Created     : " + Surface.totalCreated() + "\n" +
+                            "Surfaces Existing    : " + Surface.totalExisting() + "\n" +
+                            "Surfaces Freed by GC : " + Surface.totalFreedByGC()
+                        );
                 }
             };
             pose.setAlignment(0, 0);

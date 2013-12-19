@@ -1,9 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.gui;
 
@@ -22,14 +19,13 @@ public class PickerButton<T> extends Button
     protected T value;
 
     protected final String title;
-    
-    protected final List<ComponentChangeListener> changeListeners;
 
+    protected final List<ComponentChangeListener> changeListeners;
 
     public PickerButton( String title, T current, HashMap<String, T> hashMap )
     {
         super();
-        
+
         this.title = title;
 
         this.hashMap = hashMap;
@@ -39,7 +35,7 @@ public class PickerButton<T> extends Button
 
         String labelString = "<select>";
         if (current != null) {
-            labelString = getLabelString( current );
+            labelString = getLabelString(current);
         }
 
         this.label = new Label(labelString);
@@ -47,16 +43,17 @@ public class PickerButton<T> extends Button
 
         this.changeListeners = new ArrayList<ComponentChangeListener>();
     }
-    
+
     private String getLabelString( T value )
     {
-        for (String key : hashMap.keySet()) {
-            if (value.equals(hashMap.get(key))) {
+        for (String key : this.hashMap.keySet()) {
+            if (value.equals(this.hashMap.get(key))) {
                 return key;
             }
-        }  
+        }
         return "<select>";
     }
+
     public void addChangeListener( ComponentChangeListener listener )
     {
         this.changeListeners.add(listener);
@@ -66,10 +63,10 @@ public class PickerButton<T> extends Button
     {
         this.changeListeners.remove(listener);
     }
-    
+
     @Override
     public void onClick( final MouseButtonEvent e )
-    {        
+    {
         Picker<T> picker = new Picker<T>(this.title, this.hashMap, this.getValue()) {
             @Override
             public void pick( String label, T object )
@@ -81,12 +78,12 @@ public class PickerButton<T> extends Button
         };
         picker.show();
     }
-    
+
     public void fireChangeEvent()
     {
         for (ComponentChangeListener listener : this.changeListeners) {
             listener.changed();
-        } 
+        }
     }
 
     public T getValue()
@@ -96,7 +93,7 @@ public class PickerButton<T> extends Button
 
     public void setValue( T value )
     {
-        this.label.setText(getLabelString( value ));
+        this.label.setText(getLabelString(value));
         this.value = value;
     }
 }

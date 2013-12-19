@@ -28,6 +28,7 @@ public class SimpleMouse implements Mouse
         this.mousePointer = mousePointer;
     }
 
+    @Override
     public MousePointer getMousePointer()
     {
         return this.mousePointer;
@@ -39,12 +40,14 @@ public class SimpleMouse implements Mouse
         return this.regularMousePointer;
     }
 
+    @Override
     public void showRegularMousePointer( boolean value )
     {
         this.regularMousePointer = value;
         Video.showMousePointer(value);
     }
-    
+
+    @Override
     public void onActivate()
     {
         Video.showMousePointer(this.regularMousePointer);
