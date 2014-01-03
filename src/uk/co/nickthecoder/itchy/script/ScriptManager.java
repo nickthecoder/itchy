@@ -12,6 +12,7 @@ import javax.script.ScriptException;
 
 import uk.co.nickthecoder.itchy.CostumeProperties;
 import uk.co.nickthecoder.itchy.Director;
+import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.SceneDirector;
@@ -42,6 +43,7 @@ public class ScriptManager
         this.resources = resources;
 
         registerLanguage("js", (Class<ScriptLanguage>) (JavascriptLanguage.class.asSubclass(ScriptLanguage.class)));
+        registerLanguage("py", (Class<ScriptLanguage>) (PythonLanguage.class.asSubclass(ScriptLanguage.class)));
     }
 
     public static void registerLanguage( String extension, Class<ScriptLanguage> class1 )
@@ -60,6 +62,10 @@ public class ScriptManager
         if (result == null) {
 
             Class<ScriptLanguage> klass = languageClassMap.get(extension);
+            if (klass == null) {
+                return null;
+            }
+
             try {
                 Constructor<ScriptLanguage> constructor = klass.getConstructor(ScriptManager.class);
                 result = constructor.newInstance(this);
@@ -123,6 +129,23 @@ public class ScriptManager
         return name.matches("[a-zA-Z0-9]*");
     }
 
+    public File getScriptDirectory()
+    {
+        File relative = new File("scripts");
+        File absolute = this.resources.resolveFile(relative);
+        return absolute;
+    }
+    
+    public File getIncludeDirectory( ScriptLanguage language )
+    {
+        // resources/scripts/${LANGUAGE-EXTENSION}/
+        File directory = new File(Itchy.getResourcesDirectory(),
+            "scripts" + File.separator + language.getExtension());
+        
+        return directory;
+    }
+
+    
     public File getScript( String filename )
     {
         File relative = new File(new File("scripts"), filename);
@@ -132,16 +155,13 @@ public class ScriptManager
 
     public boolean isValidScript( ClassName className )
     {
-        return isValidScript(className.name);
-    }
-
-    public boolean isValidScript( String name )
-    {
-
-        if (name.endsWith(".js")) {
-            if (getScript(name).exists()) {
-                return true;
-            }
+        ScriptLanguage language = getLanguage( className );
+        if (language == null) {
+            return false;
+        }
+        
+        if (getScript(className.name).exists()) {
+            return true;
         }
 
         return false;
@@ -151,7 +171,16 @@ public class ScriptManager
         throws ScriptException
     {
         ScriptLanguage language = getLanguage(getExtension(filename));
-        language.loadScript(filename);
+        language.loadScript(filename);        
+    }
+    
+    public void loadScript( ClassName className )
+        throws ScriptException
+    {
+        String filename = className.name;
+        
+        ScriptLanguage language = getLanguage(getExtension(filename));
+        language.loadScript(className);
     }
 
     public boolean createScript( String templateName, ClassName className )
@@ -164,7 +193,6 @@ public class ScriptManager
         throws ScriptException
     {
         ScriptLanguage language = getLanguage(getExtension(className.name));
-        language.loadScript(className.name);
 
         return language.createDirector(className);
     }
@@ -173,7 +201,6 @@ public class ScriptManager
         throws ScriptException
     {
         ScriptLanguage language = getLanguage(getExtension(className.name));
-        language.loadScript(className.name);
 
         return language.createRole(className);
     }
@@ -182,7 +209,6 @@ public class ScriptManager
         throws ScriptException
     {
         ScriptLanguage language = getLanguage(getExtension(className.name));
-        language.loadScript(className.name);
 
         return language.createSceneDirector(className);
     }
@@ -191,9 +217,30 @@ public class ScriptManager
         throws ScriptException
     {
         ScriptLanguage language = getLanguage(getExtension(className.name));
-        language.loadScript(className.name);
 
         return language.createCostumeProperties(className);
+    }
+
+    public Object getProperty( Object inst, String name ) throws ScriptException
+    {
+        for (ScriptLanguage language : this.languages.values()) {
+            if (language.isInstance( inst )) {
+                Object result = language.getProperty(inst, name);
+                return result;
+            }
+        }
+        throw new ScriptException( "Not a scripted instance" );
+    }
+
+    public void putProperty( Object inst, String name, Object value ) throws ScriptException
+    {
+        for (ScriptLanguage language : this.languages.values()) {
+            if (language.isInstance( inst )) {
+                language.putProperty(inst, name, value);
+                return;
+            }
+        }
+        throw new ScriptException( "Not a scripted instance" );
     }
 
 }

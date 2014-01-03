@@ -13,7 +13,6 @@ import uk.co.nickthecoder.itchy.property.AbstractProperty;
 import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.PropertySubject;
 import uk.co.nickthecoder.itchy.role.NullRole;
-import uk.co.nickthecoder.itchy.script.ScriptedRole;
 import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.jame.RGBA;
 import uk.co.nickthecoder.jame.Surface;
@@ -428,13 +427,10 @@ public class Actor implements PropertySubject<Actor>
         return getRoleClassName(this.role);
     }
 
+    // TODO No longer needed
     public static ClassName getRoleClassName( Role role )
     {
-        if (role instanceof ScriptedRole) {
-            return ((ScriptedRole) role).getClassName();
-        } else {
-            return new ClassName(Role.class, role.getClass().getName());
-        }
+        return role.getClassName();
     }
 
     public Appearance getAppearance()

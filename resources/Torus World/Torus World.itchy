@@ -295,7 +295,7 @@
       <string name="default">play</string>
       <font name="default" font="Vera"/>
     </costume>
-    <costume name="rock" defaultZOrder="0" role="uk.co.nickthecoder.itchy.PlainRole">
+    <costume name="rock" defaultZOrder="0" role="Rock.js">
       <sound name="explode" sound="explode-medium" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="PLAY_BOTH" priority="1"/>
       <sound name="hit" sound="ricochet" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
       <sound name="ricochet" sound="ricochet" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="PLAY_BOTH" priority="1"/>

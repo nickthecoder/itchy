@@ -13,16 +13,16 @@
       <property name="formatPattern" value="0000"/>
       <property name="nullValue" value="null"/>
       <property name="errorValue" value="Err"/>
-      <property name="quiet" value="false"/>
       <property name="updateInterval" value="0.1"/>
+      <property name="quiet" value="false"/>
       <property name="access" value="sceneDirector.sceneDirectorScript.score"/>
     </text>
     <text text="0000" font="Boycott" size="32" color="#93190e" xAlignment="0.0" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.NumberValue" x="675" y="530" direction="0.0" heading="0.0" startEvent="default" zOrder="6">
       <property name="formatPattern" value="0000"/>
       <property name="nullValue" value="Null"/>
       <property name="errorValue" value="Err"/>
-      <property name="quiet" value="false"/>
       <property name="updateInterval" value="-1.0"/>
+      <property name="quiet" value="false"/>
       <property name="access" value="sceneDirector.sceneDirectorScript.highScore"/>
     </text>
     <text text="Top" font="BlackCasper" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="0" y="1200" direction="0.0" heading="0.0" startEvent="default" zOrder="7"/>

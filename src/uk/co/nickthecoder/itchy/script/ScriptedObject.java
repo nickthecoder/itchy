@@ -11,4 +11,7 @@ public interface ScriptedObject
     Object getScriptedObject();
 
     Object getProperty( String name ) throws ScriptException;
+    
+    ScriptLanguage getLanguage();
+
 }

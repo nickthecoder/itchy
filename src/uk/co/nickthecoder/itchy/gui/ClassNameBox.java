@@ -140,7 +140,7 @@ public class ClassNameBox extends Container
         if (isValidScript) {
 
             try {
-                this.scriptManager.loadScript(getClassName().name);
+                this.scriptManager.loadScript(getClassName());
             } catch (ScriptException e) {
                 this.scriptManager.resources.errorLog.log(e.getMessage());
                 this.textBox.addStyle("error");

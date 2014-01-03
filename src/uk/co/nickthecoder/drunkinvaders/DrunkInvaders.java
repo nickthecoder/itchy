@@ -176,7 +176,7 @@ public class DrunkInvaders extends AbstractDirector
     {
         this.neighbourhood.clear();
 
-        this.transitioning = true;
+        System.out.println("Transition start for " + sceneName );
         Animation transition = new CompoundAnimation(false)
             .add(SceneTransition.slideUp())
             .add(SceneTransition.fade());
@@ -196,7 +196,12 @@ public class DrunkInvaders extends AbstractDirector
                 .add(SceneTransition.slideLeft())
                 .add(SceneTransition.fade());
         }
-        return new SceneTransition(transition).transition(sceneName);
+        this.transitioning = true;
+        System.out.println( "Alien count pre  trans : " + this.aliensRemaining );
+        boolean result = new SceneTransition(transition).transition(sceneName);
+        System.out.println( "Alien count post trans : " + this.aliensRemaining );
+        this.transitioning = true;
+        return result;
     }
 
     @Override
@@ -213,24 +218,15 @@ public class DrunkInvaders extends AbstractDirector
 
         } else if (message == SceneTransition.COMPLETE) {
             this.transitioning = false;
+            System.out.println("Transition end" );
+
         }
     }
 
     public void addAliens( int n )
     {
-        this.aliensRemaining += n;
-
-        // We only care when the last alien was killed during play, not when fading the scene out.
-        if (this.transitioning) {
-            return;
-        }
-
-        if (this.aliensRemaining == 0) {
-            this.game.getPreferences().putBoolean("completedLevel" + this.levelNumber, true);
-
-            this.levelNumber += 1;
-            this.play();
-
+        if (this.game.getSceneDirector() instanceof PlaySceneDirector ) {
+            ((PlaySceneDirector) (this.game.getSceneDirector())).addAliens( n );
         }
     }
 

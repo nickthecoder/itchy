@@ -14,13 +14,13 @@ import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 
 public class ScriptedDirector extends AbstractDirector implements ScriptedObject
 {
-    private ScriptLanguage language;
+    private ShimmedScriptLanguage language;
 
     private ClassName className;
 
     public Object directorScript;
 
-    public ScriptedDirector( ClassName className, ScriptLanguage language, Object scriptInstance )
+    public ScriptedDirector( ClassName className, ShimmedScriptLanguage language, Object scriptInstance )
     {
         super();
         this.className = className;
@@ -31,6 +31,12 @@ public class ScriptedDirector extends AbstractDirector implements ScriptedObject
     public ClassName getClassName()
     {
         return this.className;
+    }
+
+    @Override
+    public ScriptLanguage getLanguage()
+    {
+        return this.language;
     }
 
     @Override

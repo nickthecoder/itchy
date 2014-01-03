@@ -15,16 +15,24 @@ ${NAME} = Class({
     },
 
     tick: function() {
-        // TODO Called 50 times a second, and is where all the good stuff belongs!
+        // TODO Called 60 times a second, and is where all the good stuff belongs!
+    },
+    
+    // Boiler plate code - no need to alter it.
+    getProperties: function() {
+        return ${NAME}.properties;
     }
 
     // Other methods include :
     // onDetach, onKill, onMouseDown, onMouseUp, onMouseMove
 });
-// TODO Define each editable property like so 
-// RoleScript.addProperty("${NAME}", "exampleInteger", Integer, "Example Integer");
-// RoleScript.addProperty("${NAME}", "exampleDouble", Double, "Example Double");
-// RoleScript.addProperty("${NAME}", "exampleString", String, "Example String");
-// RoleScript.addProperty("${NAME}", "exampleColour", RGBA, "Example Colour");
+
+${NAME}.properties = new java.util.LinkedList();
+// TODO Define each editable property like so :
+// ${NAME}.properties.add( new itchy.property.StringProperty( "My String", "myString" ) );
+// ${NAME}.properties.add( new itchy.property.IntegerProperty( "My Integer", "myInteger" ) );
+// ${NAME}.properties.add( new itchy.property.DoubleProperty( "My Double", "myDouble" ) );
+// ${NAME}.properties.add( new itchy.property.BooleanProperty( "My Boolean", "myBoolean" ) );
+// ${NAME}.properties.add( new itchy.property.RGBAProperty( "My Colour", "myColor", false, false ) );
 // Each property should be initialised to a default value in the "init" method.
 

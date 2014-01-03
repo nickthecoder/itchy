@@ -55,6 +55,7 @@ Director = Class({
     		.forever().follow().offset(40,-33).projectilesPerTick(1).spread(-20,-80).distance(10)
     		.randomSpread().speed(1,2,0,0).fade(3).eventName("spark")
     		.createActor();
+		new itchy.role.OnionSkin(mousePointer.getActor()).alpha(128).fade(3).every(1).createActor();
     }
     
 });

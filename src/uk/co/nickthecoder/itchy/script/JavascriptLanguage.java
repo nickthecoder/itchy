@@ -24,7 +24,7 @@ import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 
-public class JavascriptLanguage extends ScriptLanguage
+public class JavascriptLanguage extends ShimmedScriptLanguage
 {
     public JavascriptLanguage( ScriptManager manager )
     {
@@ -41,6 +41,7 @@ public class JavascriptLanguage extends ScriptLanguage
     public void initialise()
     {
         this.engine = new ScriptEngineManager().getEngineByName("javascript");
+        super.initialise();
     }
 
     @Override
@@ -60,26 +61,10 @@ public class JavascriptLanguage extends ScriptLanguage
         return message;
     }
 
-    @Override
-    public Object getProperty( Object inst, String name ) throws ScriptException
-    {
-        Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
-        bindings.put("inst", inst);
-        Object result = this.engine.eval("inst." + name + ";");
-        return result;
-    }
-
-    @Override
-    public Object putProperty( Object inst, String name, Object value ) throws ScriptException
-    {
-        Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
-        bindings.put("inst", inst);
-        bindings.put("value", value);
-        return this.engine.eval("inst." + name + " = value;");
-    }
-
     public void ensureGlobals()
+        throws ScriptException
     {
+        ensureInitialised();
         Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
         Game game = this.manager.resources.getGame();
         bindings.put("game", game);
@@ -87,41 +72,20 @@ public class JavascriptLanguage extends ScriptLanguage
         bindings.put("sceneDirector", game.getSceneDirector());
     }
 
-    public void handleException( Exception e )
-    {
-        this.manager.resources.errorLog.log(e.getMessage());
-    }
-
-    public void handleException( String activity, Exception e )
-    {
-        this.manager.resources.errorLog.log(activity + " : " + e.getMessage());
-    }
-
-    public void log( String message )
-    {
-        this.manager.resources.errorLog.log(message);
-    }
-
-    public boolean eventResult( Object result )
-    {
-        try {
-            return (boolean) result;
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
     // ===== DIRECTOR ======
 
     @Override
     public Director createDirector( ClassName className )
     {
-        ensureGlobals();
 
-        String name = ScriptManager.getName(className);
         ScriptedDirector director = null;
-
+        
         try {
+            ensureGlobals();
+            this.manager.loadScript(className);
+
+            String name = ScriptManager.getName(className);
+
             Object directorScript = this.engine.eval("new " + name + "();");
 
             director = new ScriptedDirector(className, this, directorScript);
@@ -130,6 +94,7 @@ public class JavascriptLanguage extends ScriptLanguage
             bindings.put("directorScript", directorScript);
             bindings.put("director", director);
             this.engine.eval("directorScript.director = director;");
+
 
         } catch (ScriptException e) {
             handleException("Creating Director", e);
@@ -304,13 +269,12 @@ public class JavascriptLanguage extends ScriptLanguage
     @Override
     public Role createRole( ClassName className )
     {
-        ensureGlobals();
-
         ScriptedRole role = null;
 
         try {
+            ensureGlobals();
             String name = ScriptManager.getName(className);
-            this.manager.loadScript(className.name);
+            this.manager.loadScript(className);
 
             Object roleScript = this.engine.eval("new " + name + "();");
 
@@ -488,6 +452,7 @@ public class JavascriptLanguage extends ScriptLanguage
 
         try {
             ensureGlobals();
+            this.manager.loadScript(className);
 
             String name = ScriptManager.getName(className);
             Object sceneDirectorScript = this.engine.eval("new " + name + "();");
@@ -633,6 +598,7 @@ public class JavascriptLanguage extends ScriptLanguage
         ScriptedCostumeProperties costumeProperties = null;
         try {
             ensureGlobals();
+            this.manager.loadScript(className);
 
             String name = ScriptManager.getName(className);
 

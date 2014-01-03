@@ -23,7 +23,7 @@ public class ScriptProperties implements Map<String, Object>
 
     private final Object inst;
 
-    public ScriptProperties( ScriptLanguage language, Object inst )
+    public ScriptProperties( ShimmedScriptLanguage language, Object inst )
     {
         this.language = language;
         this.inst = inst;

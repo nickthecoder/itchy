@@ -79,7 +79,8 @@ public class Alien extends Bouncy implements Shootable
         bullet.moveTo(getActor());
         bullet.setDirection(getActor().getAppearance().getDirection());
         DrunkInvaders.director.mainStage.addTop(bullet);
-        bullet.moveForwards(10);
+        bullet.moveForwards(15 * getActor().getAppearance().getScale());
+        bullet.getAppearance().setScale(getActor().getAppearance().getScale());
         bullet.setRole(new Bullet("killable"));
     }
 
@@ -89,19 +90,21 @@ public class Alien extends Bouncy implements Shootable
 
         new Explosion(getActor())
             .projectiles(20)
-            .fade(5)
-            .speed(1, 3)
-            .pose("fragment")
+            .fade(3)
+            .speed(1, 3, 0, 0)
+            .eventName("fragment")
+            .distance(10 * getActor().getAppearance().getScale())
             .scale(1)
             .createActor();
 
         new Explosion(getActor())
             .projectiles(40).projectilesPerTick(10)
             .offsetForwards(-10, 10).offsetSidewards(-10, 10)
-            .speed(3, 6)
-            .fade(8)
+            .distance(10 * getActor().getAppearance().getScale())
+            .speed(5,9,0,0)
+            .fade(3)
             .scale(1)
-            .pose("pixel")
+            .eventName("pixel")
             .createActor();
 
         double scale = getActor().getAppearance().getScale();

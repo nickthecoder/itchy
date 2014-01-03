@@ -1,6 +1,3 @@
-Print CD and burn it.
-
-
 Undo/Redo
 
     Trouble with null/blank values for colorize.
@@ -17,6 +14,8 @@ Save and restore the tags of paused actors?
 
 Update the Role.js template to include onAttach
 
+Fluent allowNull and includeAlpha for AbstractProperty and RGBAProperty
+
 When a js file imports another, remember the dependency, so that the dependant classes get re-loaded if the dependecy is reloaded.
     e.g. If Moving.js is changed then Rock.js, Ship.js etc are reloaded.
     Think about circular dependencies. 
@@ -26,12 +25,31 @@ When a js file imports another, remember the dependency, so that the dependant c
         Check its load timestamp with the latest timestamp, and if its older, then re-load.
         Short-circuit if the 1st level depenencies is empty.
 
+Make the Role interface the actual useful thing i.e. remove as much as possible from AbstractRole.
+
+For JS, remove properties when reloading.
+    Nah, just implement properties the same way as Python does it, and get rid of the cruft,
+    including the Map interface bodge.
+
+Surface.copy to use setEnableAlpha(false) rather than composite.
+    Is there a bug in setAlpha? If not, where is it?
+
+Drunk Invaders doesn't go to next level.
+
+All classes which have fluent API, create a subclass with just the fluent api,
+    and leave the main class without the fluent methods???
+
+Allow creation of new Role objects from Javascript i.e. create a ScriptedRole and the script in one go.
+    Constructor takes the ScriptedRole, or creates it if undefined.
+    Use the same pattern to create View and Stage objects too, so that a TorusView can be created.
+    Create TorusView and TorusCollisionStrategy
+
+
 Bugs
 ====
 
 BUG: Reloading a SceneBehaviour script causes the properties to double.
-
-Drunk Invaders overlays the next level over the first some times.
+    Do Properties like Python scripts do them, removing the buggy, crufty code, including the Map bodge.
 
 TODO
 ====
@@ -63,6 +81,11 @@ Tiled background - instead of a RGBA, specify a Pose, and tile it in a Grid.
     More generic - Create a BackgroundView interface
     RGBABackground
     Tile, BrickH, BrickV, TileH, TileV (spacing can be different to the image size)
+
+Create a Javascript wrapper for View, and use it to implement scrolling on Torus World.
+    Will then need to implement a good collision detection too.
+        Translate the current object right or left and also up or down, so four tests in total.
+        Update, and then use the wrapped collision strategy, which could be brute force or neighbourhood.
 
 Note that these are the same features that the Textured Makeup could use.
     For that matter, there could be a new Makeup called BackgroundMakeup, which places a background behind the actor.

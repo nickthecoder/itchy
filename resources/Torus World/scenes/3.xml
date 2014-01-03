@@ -12,11 +12,11 @@
       <property name="vx" value="-3.0"/>
       <property name="rotationSpeed" value="2.0"/>
     </actor>
-    <actor costume="ship1" x="378" y="300" direction="90.0" heading="90.0" startEvent="default" zOrder="6"/>
     <actor costume="rock1" x="720" y="455" direction="0.0" heading="0.0" startEvent="default" zOrder="7">
       <property name="vy" value="7.0"/>
       <property name="vx" value="-3.0"/>
       <property name="rotationSpeed" value="-0.4"/>
     </actor>
+    <actor costume="ship1" x="378" y="300" direction="90.0" heading="90.0" startEvent="default" zOrder="10"/>
   </layer>
 </scene>

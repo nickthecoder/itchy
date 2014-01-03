@@ -1,3 +1,4 @@
+stdout.println( "Loading Rock.js");
 import("Moving.js")
 
 Rock = Class({

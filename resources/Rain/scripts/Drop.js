@@ -41,8 +41,15 @@ Drop = Class({
             this.speed = sceneDirectorScript.speed * this.speedFactor;
             
         }
+    },
+
+    // Boiler plate code - no need to alter it.
+    getProperties: function() {
+        return ${NAME}.properties;
     }
+
 });
+
 // Define the properties of a Drop.
 // The properties can be editted in the Scene Designer within the "Role" section.
 // Every single drop can have its own "distance"
@@ -51,5 +58,7 @@ Drop = Class({
 // If every drop has the same "distance", then the Y spacing will remain the same for the whole game.
 // But if some restart higher than others, then the Y spacing will vary. Sometimes, lots of drops will have
 // a similar "Y" value, which makes finding a safe gap for the sheep difficult.
-RoleScript.addProperty("Drop", "distance", Integer, "Distance", 600); 
+
+Drop.properties = new java.util.LinkedList();
+Drop.properties.add( new itchy.property.StringProperty( "Distance", "distance" ) );
 

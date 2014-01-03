@@ -11,10 +11,13 @@ import java.util.Map;
 
 import javax.script.ScriptException;
 
+import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.script.ScriptedObject;
 
 /**
- * 
+ * Allows Java Bean style getting and setting of attributes, using reflection.
+ * As well as the usual Java Bean get/set, this class also supports getting and setting attributes
+ * from scripted languages' objects via ScriptManager's getProperty and setProperty methods.
  */
 public class BeanHelper
 {
@@ -60,6 +63,15 @@ public class BeanHelper
                     return map.get(attributeName);
                 }
 
+                // It isn't a java field, or a getXXX method, or a map
+                // Maybe "subject" is a SCRIPTED object, and therefore doesn't follow java's bean conventions.
+                try {
+                    Object result = Itchy.getGame().getScriptManager().getProperty(subject, attributeName);
+                    return result;
+                } catch ( Exception e2 ) {
+                    // We'll throw e, rather than e2, so do nothing here.
+                }
+                
                 throw e;
             }
         }
@@ -141,6 +153,16 @@ public class BeanHelper
                     Map<String, Object> map = (Map<String, Object>) subject;
                     map.put(attributeName, value);
                 } else {
+                    
+                    // It isn't a java field, or a setXXX method, or a map
+                    // Maybe "subject" is a SCRIPTED object, and therefore doesn't follow java's bean conventions.
+                    try {
+                        Itchy.getGame().getScriptManager().putProperty(subject, attributeName, value);
+                        return;
+                    } catch ( Exception e2 ) {
+                        // We'll throw e, rather than e2, so do nothing here.
+                    }
+                    
                     throw e;
                 }
             }

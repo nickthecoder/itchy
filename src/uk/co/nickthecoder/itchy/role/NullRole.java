@@ -10,6 +10,7 @@ import java.util.List;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.util.ClassName;
 
 /**
  * Does nothing - useful for scenery, and other game objects which don't do anything!
@@ -22,6 +23,11 @@ public final class NullRole implements Role
     public Actor getActor()
     {
         return this.actor;
+    }
+    
+    public ClassName getClassName()
+    {
+        return new ClassName( Role.class, this.getClass().getName() );
     }
 
     @Override

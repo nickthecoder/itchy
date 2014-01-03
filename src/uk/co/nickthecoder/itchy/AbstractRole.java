@@ -64,6 +64,11 @@ public abstract class AbstractRole implements Role
         this.tagMembership = new TagMembership<Role>(Itchy.getGame().roleTags, this);
     }
 
+    public ClassName getClassName()
+    {
+        return new ClassName( Role.class, this.getClass().getName() );
+    }
+
     @Override
     public boolean hasTag( String name )
     {

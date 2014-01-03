@@ -23,13 +23,13 @@ public class ScriptedSceneDirector implements SceneDirector, ScriptedObject
 
     private ClassName className;
 
-    private ScriptLanguage language;
+    private ShimmedScriptLanguage language;
 
     public final Object sceneDirectorScript;
 
     public final ScriptProperties propertyValues;
 
-    public ScriptedSceneDirector( ClassName className, ScriptLanguage language,
+    public ScriptedSceneDirector( ClassName className, ShimmedScriptLanguage language,
         Object scriptInstance )
     {
         this.className = className;
@@ -42,6 +42,12 @@ public class ScriptedSceneDirector implements SceneDirector, ScriptedObject
     public Object getScriptedObject()
     {
         return this.sceneDirectorScript;
+    }
+
+    @Override
+    public ScriptLanguage getLanguage()
+    {
+        return this.language;
     }
 
     @Override

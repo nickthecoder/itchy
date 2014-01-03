@@ -9,6 +9,7 @@ Ship = Class({
     },
 
     onBirth: function() {
+        new itchy.role.OnionSkin( this.actor ).alpha(128).every(5).fade(3).createActor();
 
     	this.rotationSpeed = this.getCostumeProperties().rotationSpeed;
     	this.thrust = this.getCostumeProperties().thrust;
@@ -25,7 +26,8 @@ Ship = Class({
         sceneDirectorScript.ship = this;
 		
 		new itchy.role.Explosion(this.actor)
-			.companion("warp").eventName("default").distance(-30,-100).direction(0,360).speed(0,0).projectiles(40)
+			.companion("warp").eventName("default").distance(30,-80).spread(0,360).spread(0,360).randomSpread(false)
+			.speed(0,0).projectiles(40)
 			.createActor();
 
 		//new itchy.role.Explosion(this.actor)

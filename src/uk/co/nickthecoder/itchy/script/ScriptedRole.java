@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.script.ScriptException;
+
 import uk.co.nickthecoder.itchy.AbstractRole;
 import uk.co.nickthecoder.itchy.MouseListenerView;
 import uk.co.nickthecoder.itchy.Role;
@@ -18,13 +20,13 @@ import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 
-public class ScriptedRole extends AbstractRole implements ViewMouseListener
+public class ScriptedRole extends AbstractRole implements ScriptedObject, ViewMouseListener
 {
     private final static HashMap<String, List<AbstractProperty<Role, ?>>> allProperties = new HashMap<String, List<AbstractProperty<Role, ?>>>();
 
     private ClassName className;
 
-    private ScriptLanguage language;
+    private ShimmedScriptLanguage language;
 
     public final Object roleScript;
 
@@ -32,13 +34,19 @@ public class ScriptedRole extends AbstractRole implements ViewMouseListener
 
     public final boolean isMouseListener;
 
-    public ScriptedRole( ClassName className, ScriptLanguage language, Object scriptInstance )
+    public ScriptedRole( ClassName className, ShimmedScriptLanguage language, Object scriptInstance )
     {
         this.className = className;
         this.language = language;
         this.roleScript = scriptInstance;
         this.propertyValues = new ScriptProperties(this.language, scriptInstance);
         this.isMouseListener = this.language.isMouseListener(this);
+    }
+
+    @Override
+    public ScriptLanguage getLanguage()
+    {
+        return this.language;
     }
 
     @Override
@@ -81,6 +89,7 @@ public class ScriptedRole extends AbstractRole implements ViewMouseListener
 
     }
 
+    @Override
     public ClassName getClassName()
     {
         return this.className;
@@ -174,5 +183,19 @@ public class ScriptedRole extends AbstractRole implements ViewMouseListener
     public boolean isMouseListener()
     {
         return this.isMouseListener;
+    }
+
+    @Override
+    public Object getScriptedObject()
+    {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Object getProperty( String name ) throws ScriptException
+    {
+        // TODO Auto-generated method stub
+        return null;
     }
 }

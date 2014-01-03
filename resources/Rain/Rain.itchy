@@ -41,133 +41,133 @@
   </sounds>
   <animations>
     <animation name="death">
-      <compound loops="1" sequence="true">
-        <compound loops="1" sequence="false">
+      <sequence loops="1" sequence="true">
+        <parallel loops="1" sequence="false">
           <move ease="easeOutQuad" ticks="50" dx="0.0" dy="100.0"/>
-          <turn ease="linear" ticks="50" turn="90.0"/>
-        </compound>
-        <compound loops="1" sequence="false">
+          <turn ease="linear" headingToo="false" ticks="50" turn="90.0"/>
+        </parallel>
+        <parallel loops="1" sequence="false">
           <move ease="bounce3" ticks="60" dx="0.0" dy="-60.0"/>
-          <turn ease="linear" ticks="40" turn="40.0"/>
-        </compound>
-        <compound loops="1" sequence="false">
+          <turn ease="linear" headingToo="false" ticks="40" turn="40.0"/>
+        </parallel>
+        <parallel loops="1" sequence="false">
           <move ease="easeIn" ticks="50" dx="-20.0" dy="-60.0"/>
-          <turn ease="easeIn" ticks="50" turn="-60.0"/>
-        </compound>
+          <turn ease="easeIn" headingToo="false" ticks="50" turn="-60.0"/>
+        </parallel>
         <alpha ease="easeIn" target="0.0" ticks="200"/>
-      </compound>
+      </sequence>
     </animation>
     <animation name="hoverOut">
-      <compound loops="1" sequence="true">
+      <sequence loops="1" sequence="true">
         <scale ease="easeInOutCubic" target="1.0" ticks="10"/>
-      </compound>
+      </sequence>
     </animation>
     <animation name="hoverOver">
-      <compound loops="1" sequence="true">
+      <sequence loops="1" sequence="true">
         <scale ease="linear" target="1.2" ticks="10"/>
-      </compound>
+      </sequence>
     </animation>
     <animation name="mouseDown">
-      <compound loops="1" sequence="true">
+      <sequence loops="1" sequence="true">
         <scale ease="linear" target="1.5" ticks="5"/>
-      </compound>
+      </sequence>
     </animation>
     <animation name="mouseUp">
-      <compound loops="1" sequence="true">
+      <sequence loops="1" sequence="true">
         <scale ease="easeInOutCubic" target="1.0" ticks="10"/>
-      </compound>
+      </sequence>
     </animation>
     <animation name="wally_boo">
-      <compound loops="1" sequence="true">
+      <sequence loops="1" sequence="true">
         <move ease="easeOutQuad" ticks="20" dx="-30.0" dy="100.0"/>
         <move ease="bounce3" ticks="30" dx="-30.0" dy="-100.0"/>
-      </compound>
+      </sequence>
     </animation>
     <animation name="wally_walk">
-      <compound loops="1" sequence="false">
+      <parallel loops="1" sequence="false">
         <move ease="linear" ticks="800" dx="2000.0" dy="0.0"/>
-        <compound loops="0" sequence="true">
+        <sequence loops="0" sequence="true">
           <move ease="easeInOut" ticks="20" dx="-10.0" dy="20.0"/>
           <move ease="easeInOut" ticks="15" dx="10.0" dy="-20.0"/>
-        </compound>
-      </compound>
+        </sequence>
+      </parallel>
     </animation>
     <animation name="wally_walk2">
-      <compound loops="1" sequence="false">
+      <parallel loops="1" sequence="false">
         <move ease="linear" ticks="800" dx="2000.0" dy="0.0"/>
-        <compound loops="0" sequence="true">
+        <sequence loops="0" sequence="true">
           <move ease="easeInOutQuad" ticks="10" dx="-5.0" dy="20.0"/>
           <move ease="easeInOutQuad" ticks="10" dx="5.0" dy="-20.0"/>
-        </compound>
-      </compound>
+        </sequence>
+      </parallel>
     </animation>
     <animation name="wally_walk3">
-      <compound loops="1" sequence="true">
-        <compound loops="1" sequence="false">
+      <sequence loops="1" sequence="true">
+        <parallel loops="1" sequence="false">
           <move ease="linear" ticks="150" dx="400.0" dy="0.0"/>
-          <compound loops="5" sequence="true">
+          <sequence loops="5" sequence="true">
             <move ease="easeInOut" ticks="15" dx="-15.0" dy="20.0"/>
             <move ease="easeInOut" ticks="15" dx="5.0" dy="-20.0"/>
-          </compound>
-        </compound>
+          </sequence>
+        </parallel>
         <move ease="easeInOutQuad" ticks="100" dx="0.0" dy="0.0"/>
-        <compound loops="1" sequence="false">
+        <parallel loops="1" sequence="false">
           <move ease="linear" ticks="150" dx="400.0" dy="0.0"/>
-          <compound loops="5" sequence="true">
+          <sequence loops="5" sequence="true">
             <move ease="easeInOutQuad" ticks="15" dx="-15.0" dy="20.0"/>
             <move ease="easeInOutQuad" ticks="15" dx="5.0" dy="-20.0"/>
-          </compound>
-        </compound>
+          </sequence>
+        </parallel>
         <move ease="easeInOutQuad" ticks="100" dx="0.0" dy="0.0"/>
-        <compound loops="1" sequence="false">
+        <parallel loops="1" sequence="false">
           <move ease="linear" ticks="150" dx="400.0" dy="0.0"/>
-          <compound loops="5" sequence="true">
+          <sequence loops="5" sequence="true">
             <move ease="easeInOutQuad" ticks="15" dx="-15.0" dy="20.0"/>
             <move ease="easeInOutQuad" ticks="15" dx="5.0" dy="-20.0"/>
-          </compound>
-        </compound>
+          </sequence>
+        </parallel>
         <move ease="linear" ticks="100" dx="0.0" dy="0.0"/>
-      </compound>
+      </sequence>
     </animation>
     <animation name="wally_walk4">
-      <compound loops="1" sequence="true">
-        <compound loops="1" sequence="false">
+      <sequence loops="1" sequence="true">
+        <parallel loops="1" sequence="false">
           <move ease="linear" ticks="224" dx="600.0" dy="-60.0"/>
-          <compound loops="8" sequence="true">
+          <sequence loops="8" sequence="true">
             <move ease="easeInOut" ticks="14" dx="-15.0" dy="20.0"/>
             <move ease="easeInOut" ticks="14" dx="5.0" dy="-20.0"/>
-          </compound>
-        </compound>
+          </sequence>
+        </parallel>
         <move ease="easeOutCubic" ticks="20" dx="0.0" dy="100.0"/>
         <move ease="easeInQuad" ticks="20" dx="0.0" dy="-100.0"/>
-        <compound loops="1" sequence="false">
+        <parallel loops="1" sequence="false">
           <move ease="linear" ticks="200" dx="600.0" dy="60.0"/>
-          <compound loops="8" sequence="true">
+          <sequence loops="8" sequence="true">
             <move ease="easeInOutQuad" ticks="12" dx="-15.0" dy="20.0"/>
             <move ease="easeInOutQuad" ticks="12" dx="5.0" dy="-20.0"/>
-          </compound>
-        </compound>
-      </compound>
+          </sequence>
+        </parallel>
+      </sequence>
     </animation>
     <animation name="wally_walk5">
-      <compound loops="1" sequence="true">
-        <compound loops="1" sequence="false">
+      <sequence loops="1" sequence="true">
+        <parallel loops="1" sequence="false">
           <move ease="linear" ticks="240" dx="600.0" dy="0.0"/>
-          <compound loops="12" sequence="true">
+          <sequence loops="12" sequence="true">
             <move ease="easeInOutQuad" ticks="10" dx="-5.0" dy="20.0"/>
             <move ease="easeInOutQuad" ticks="10" dx="5.0" dy="-20.0"/>
-          </compound>
-        </compound>
-        <compound loops="1" sequence="false">
+          </sequence>
+        </parallel>
+        <parallel loops="1" sequence="false">
           <move ease="linear" ticks="100" dx="400.0" dy="0.0"/>
-          <turn ease="easeIn" ticks="60" turn="-110.0"/>
+          <turn ease="easeIn" headingToo="false" ticks="60" turn="-110.0"/>
           <move ease="easeIn" ticks="100" dx="0.0" dy="-500.0"/>
-          <compound loops="1" sequence="true">
+          <sequence loops="1" sequence="true">
             <move ease="easeIn" ticks="50" dx="0.0" dy="50.0"/>
             <move ease="easeOut" ticks="50" dx="0.0" dy="-50.0"/>
-          </compound>
-        </compound>
-      </compound>
+          </sequence>
+        </parallel>
+      </sequence>
     </animation>
   </animations>
   <costumes>

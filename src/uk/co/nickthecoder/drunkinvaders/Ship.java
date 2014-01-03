@@ -10,6 +10,7 @@ import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.extras.Fragment;
 import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.role.Explosion;
+import uk.co.nickthecoder.itchy.role.OnionSkin;
 import uk.co.nickthecoder.itchy.role.Talk;
 import uk.co.nickthecoder.itchy.util.Tag;
 import uk.co.nickthecoder.jame.RGBA;
@@ -61,6 +62,7 @@ public class Ship extends Bouncy implements Shootable
     {
         super.onBirth();
 
+        new OnionSkin( this ).alpha(128).createActor();
         this.mass = 100000000000.0;
 
         this.radius = Math.sqrt(
@@ -243,18 +245,18 @@ public class Ship extends Bouncy implements Shootable
 
         new Explosion(getActor())
             .projectiles(20)
-            .speed(0.3, 0.9)
+            .speed(0.3, 0.9,0,0)
             .fade(2)
             .spin(-0.2, 0.2)
-            .pose("fragment")
+            .eventName("fragment")
             .createActor();
 
         new Explosion(getActor())
             .projectiles(40)
             .offsetForwards(-10, 10).offsetSidewards(-10, 10)
-            .speed(1, 3)
+            .speed(1, 3,0,0)
             .fade(2)
-            .pose("pixel")
+            .eventName("pixel")
             .createActor();
 
         deathEvent("death");

@@ -7,6 +7,6 @@
       <property name="vx" value="1.0"/>
       <property name="rotationSpeed" value="-3.0"/>
     </actor>
-    <actor costume="ship1" x="387" y="303" direction="90.0" heading="90.0" startEvent="default" zOrder="0"/>
+    <actor costume="ship1" x="387" y="303" direction="90.0" heading="90.0" startEvent="default" zOrder="10"/>
   </layer>
 </scene>

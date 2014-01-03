@@ -49,7 +49,7 @@ public class ScriptedCostumeProperties extends CostumeProperties
 
     }
 
-    public ScriptedCostumeProperties( ClassName className, ScriptLanguage language,
+    public ScriptedCostumeProperties( ClassName className, ShimmedScriptLanguage language,
         Object scriptInstance )
     {
         this.className = className;

@@ -1,3 +1,4 @@
+stdout.println( "Loading Moving.js");
 Moving = Class({
     Extends: RoleScript,
     

@@ -9,6 +9,7 @@ import java.util.List;
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
 import uk.co.nickthecoder.itchy.property.PropertySubject;
 import uk.co.nickthecoder.itchy.script.ScriptedRole;
+import uk.co.nickthecoder.itchy.util.ClassName;
 
 /**
  * Determines the how an Actor behaves, including how it moves and interacts with other Actors. Role is arguably the most important part of
@@ -39,6 +40,8 @@ public interface Role extends MessageListener, Cloneable, PropertySubject<Role>
     public void animateAndTick();
 
     public Role clone();
+
+    public ClassName getClassName();
 
     @Override
     public void onMessage( String message );
