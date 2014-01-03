@@ -84,6 +84,7 @@ public class Costume implements Cloneable
 
     public void setPropertiesClassName( ScriptManager scriptManager, ClassName value )
     {
+        System.out.println( "Costume setPropertiesClassName" );
         if (!value.equals(this.propertiesClassName)) {
             this.properties = CostumeProperties.createProperties(scriptManager, value);
             this.propertiesClassName = value;

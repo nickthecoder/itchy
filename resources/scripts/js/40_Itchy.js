@@ -51,16 +51,6 @@ DirectorScript = Class({
 });
 
 RoleScript = Class({
-
-    Class: {
-    
-        addProperty: function( className, propertyName, klass, label ) {
-            if (klass == String) klass = java.lang.String;
-            itchy.script.ScriptedRole.addProperty(
-                className, propertyName, label, klass
-            );
-        },
-    },
     
     onBirth : function() { this.role.superOnBirth(); },
     
@@ -85,23 +75,16 @@ RoleScript = Class({
     },
     
     getCostumeProperties: function() {
-        return this.actor.getCostume().getProperties().values;
-    }
-    
+        return this.actor.getCostume().getProperties().costumePropertiesScript;
+    },
+        
+    getProperties: function() { return new java.util.ArrayList(); }
+
 });
 
 
 SceneDirectorScript = Class({
 
-    Class: {
-    
-        addProperty: function( className, propertyName, klass, label ) {
-            if (klass == String) klass = java.lang.String;
-            itchy.script.ScriptedSceneDirector.addProperty(
-                className, propertyName, label, klass
-            );
-        },
-    },
     onActivate: function() {},
     
     onDeactivate: function() {},
@@ -118,7 +101,9 @@ SceneDirectorScript = Class({
     
     onKeyUp: function( keyboardEvent ) { return false; },
 
-    onMessage: function( message ) {}
+    onMessage: function( message ) {},
+    
+    getProperties: function() { return new java.util.ArrayList(); }
 
 });
 
@@ -126,15 +111,8 @@ SceneDirectorScript = Class({
 
 CostumePropertiesScript = Class({
 
-    Class: {
-    
-        addProperty: function( className, propertyName, klass, label ) {
-            if (klass == String) klass = java.lang.String;
-            itchy.script.ScriptedCostumeProperties.addProperty(
-                className, propertyName, label, klass
-            );
-        },
-    }
+    getProperties: function() { return new java.util.ArrayList(); }
+
 });
 
 

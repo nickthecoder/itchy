@@ -4,10 +4,14 @@ BulletProperties = Class({
     init: function() {
     	this.impulse = 1;
     	this.strength = 1;
+    },
+
+    getProperties: function() {
+        return BulletProperties.properties;
     }
-    
 });
-// TODO Define each property like so 
-CostumePropertiesScript.addProperty("BulletProperties", "impulse", Double, "Impulse (recoils the ship)");
-CostumePropertiesScript.addProperty("BulletProperties", "strength", Double, "Strength");
+
+BulletProperties.properties = new java.util.ArrayList();
+BulletProperties.properties.add( new itchy.property.DoubleProperty( "Impulse (recoils the ship)", "impulse" ) );
+BulletProperties.properties.add( new itchy.property.DoubleProperty( "Strength", "strength" ) );
 

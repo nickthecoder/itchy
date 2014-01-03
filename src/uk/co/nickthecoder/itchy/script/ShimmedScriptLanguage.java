@@ -4,7 +4,13 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.script;
 
+import java.util.List;
+
+import uk.co.nickthecoder.itchy.CostumeProperties;
 import uk.co.nickthecoder.itchy.MouseListenerView;
+import uk.co.nickthecoder.itchy.Role;
+import uk.co.nickthecoder.itchy.SceneDirector;
+import uk.co.nickthecoder.itchy.property.AbstractProperty;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
@@ -21,14 +27,17 @@ public abstract class ShimmedScriptLanguage extends StandardScriptLanguage
         super(manager);
     }
 
+    @Override
     public boolean isInstance( Object instance )
     {
-        if ( instance instanceof ScriptedObject) {
-            return ((ScriptedObject) instance).getLanguage() == this;
+        if (instance instanceof ScriptedObject) {
+            // BUG ? When in the editor we get a different JavascriptLangauge instances, so we compare extensions rather than
+            // getLanguage() == this.
+            return ((ScriptedObject) instance).getLanguage().getExtension() == this.getExtension();
         }
         return false;
     }
-    
+
     // ===== DIRECTOR =====
 
     public abstract void onStarted( ScriptedDirector director );
@@ -57,6 +66,8 @@ public abstract class ShimmedScriptLanguage extends StandardScriptLanguage
 
     // ===== ROLE =====
 
+    public abstract List<AbstractProperty<Role, ?>> getProperties( ScriptedRole scriptedRole );
+
     public abstract void onBirth( ScriptedRole role );
 
     public abstract void onDeath( ScriptedRole role );
@@ -79,6 +90,8 @@ public abstract class ShimmedScriptLanguage extends StandardScriptLanguage
 
     // ===== SCENE DIRECTOR=====
 
+    public abstract List<AbstractProperty<SceneDirector, ?>> getProperties( ScriptedSceneDirector scriptedSceneDirector );
+
     public abstract void onActivate( ScriptedSceneDirector role );
 
     public abstract void onDeactivate( ScriptedSceneDirector role );
@@ -98,5 +111,7 @@ public abstract class ShimmedScriptLanguage extends StandardScriptLanguage
     public abstract void onMessage( ScriptedSceneDirector role, String message );
 
     // ====== COSTUME PROPERTIES =====
+
+    public abstract List<AbstractProperty<CostumeProperties, ?>> getProperties( ScriptedCostumeProperties scriptedCostumeProperties );
 
 }

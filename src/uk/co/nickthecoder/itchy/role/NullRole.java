@@ -6,6 +6,7 @@ package uk.co.nickthecoder.itchy.role;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Role;
@@ -19,21 +20,36 @@ public final class NullRole implements Role
 {
     private Actor actor;
 
+    private static final Set<String> noTags = Collections.emptySet();
+
     @Override
     public Actor getActor()
     {
         return this.actor;
     }
-    
+
+    @Override
     public ClassName getClassName()
     {
-        return new ClassName( Role.class, this.getClass().getName() );
+        return new ClassName(Role.class, this.getClass().getName());
+    }
+
+    @Override
+    public void addTag( String name )
+    {
+        // Do nothing
     }
 
     @Override
     public boolean hasTag( String name )
     {
         return false;
+    }
+
+    @Override
+    public Set<String> getTags()
+    {
+        return noTags;
     }
 
     @Override
@@ -83,4 +99,5 @@ public final class NullRole implements Role
             return null;
         }
     }
+
 }

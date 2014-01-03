@@ -57,24 +57,6 @@ public abstract class StandardScriptLanguage extends ScriptLanguage
         }
     }
 
-    @Override
-    public Object getProperty( Object inst, String name ) throws ScriptException
-    {
-        Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
-        bindings.put("inst", inst);
-        Object result = this.engine.eval("inst." + name + ";");
-        return result;
-    }
-
-    @Override
-    public void putProperty( Object inst, String name, Object value ) throws ScriptException
-    {
-        Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
-        bindings.put("inst", inst);
-        bindings.put("value", value);
-        this.engine.eval("inst." + name + " = value;");
-    }
-
     public boolean eventResult( Object result )
     {
         try {

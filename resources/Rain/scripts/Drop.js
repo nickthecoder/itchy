@@ -14,7 +14,7 @@ Drop = Class({
         this.speed = sceneDirectorScript.speed;
         // Each type of drop can got down the screen at different speed. The speedFactor is set from
         // the editor's "Costumes" page, in the "Properties" section.
-        this.speedFactor = this.actor.getCostume().getProperties().values.speedFactor;
+        this.speedFactor = this.actor.getCostume().getProperties().costumePropertiesScript.speedFactor;
         this.speed *= this.speedFactor;
     },
 
@@ -45,7 +45,7 @@ Drop = Class({
 
     // Boiler plate code - no need to alter it.
     getProperties: function() {
-        return ${NAME}.properties;
+        return Drop.properties;
     }
 
 });
@@ -60,5 +60,5 @@ Drop = Class({
 // a similar "Y" value, which makes finding a safe gap for the sheep difficult.
 
 Drop.properties = new java.util.LinkedList();
-Drop.properties.add( new itchy.property.StringProperty( "Distance", "distance" ) );
+Drop.properties.add( new itchy.property.IntegerProperty( "Distance", "distance" ) );
 

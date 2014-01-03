@@ -54,6 +54,7 @@ public class Itchy
 
     private static Game currentGame;
 
+    private static Game loadingGame;
     /**
      * If one game calls another game, and then exists, this is how we return to the previous game.
      */
@@ -144,7 +145,11 @@ public class Itchy
 
     public static Game getGame()
     {
-        return currentGame;
+        if ( loadingGame != null ) {
+            return loadingGame;
+        } else {
+            return currentGame;
+        }
     }
 
     public static Resources getResources()
@@ -196,6 +201,7 @@ public class Itchy
 
     public static void startGame( Game game )
     {
+        loadingGame = null;
         if (currentGame != null) {
             currentGame.onDeactivate();
             gameStack.push(currentGame);
@@ -205,6 +211,11 @@ public class Itchy
         setScreenMode(currentGame);
     }
 
+    public static void loadingGame( Game game )
+    {
+        loadingGame = game;
+    }
+    
     public static void mainLoop()
     {
         try {

@@ -78,14 +78,20 @@ Play = new Class({
         // so the high score will still be there when we play the game weeks or months later.
         if (this.score > this.highScore) {
             game.getPreferences().putInt( game.getSceneName() + ".highScore", this.score );
-        }       
-
+        }
+    },
+  
+    // Boiler plate code - no need to alter it.
+    getProperties: function() {
+        return Play.properties;
     }
+
 });
 // Define the scene's properties. These properties can then be editted within the Scene Designer,
 // within the "Scene" section. Each scene has its own values,
 // i.e. scene "easy" will have a different "speed" to scene "hard".
-SceneDirectorScript.addProperty("Play", "speed", Integer, "Speed"); // The initial speed
-SceneDirectorScript.addProperty("Play", "maxSpeed", Integer, "Maximum Speed"); // The maximum speed
-SceneDirectorScript.addProperty("Play", "speedUpAfter", Integer, "Speed Up After"); // The time in seconds till we increase the speed.
+Play.properties = new java.util.ArrayList();
+Play.properties.add( new itchy.property.IntegerProperty("Speed", "speed" ));
+Play.properties.add( new itchy.property.IntegerProperty("Maximum Speed", "maxSpeed" ));
+Play.properties.add( new itchy.property.IntegerProperty("Speed Up After", "speedUpAfter" ));
 

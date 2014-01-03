@@ -12,7 +12,6 @@ import java.util.Map;
 import javax.script.ScriptException;
 
 import uk.co.nickthecoder.itchy.Itchy;
-import uk.co.nickthecoder.itchy.script.ScriptedObject;
 
 /**
  * Allows Java Bean style getting and setting of attributes, using reflection.
@@ -30,12 +29,6 @@ public class BeanHelper
         if (dot > 0) {
 
             Object subject2 = getProperty(subject, attributeName.substring(0, dot));
-
-            if (subject instanceof ScriptedObject) {
-                if (((ScriptedObject) subject).getScriptedObject() == subject2) {
-                    return ((ScriptedObject) subject).getProperty(attributeName.substring(dot + 1));
-                }
-            }
 
             return getProperty(subject2, attributeName.substring(dot + 1));
 
@@ -148,6 +141,7 @@ public class BeanHelper
                 // Field field = subject.getClass().getDeclaredField( attributeName );
                 field.set(subject, value);
             } catch (NoSuchFieldException e) {
+                
                 if (subject instanceof Map<?, ?>) {
                     @SuppressWarnings("unchecked")
                     Map<String, Object> map = (Map<String, Object>) subject;

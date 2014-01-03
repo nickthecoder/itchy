@@ -4,6 +4,7 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.util;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -52,5 +53,10 @@ public class TagMembership<M>
             i.remove();
             this.tagCollection.remove(tag, this.member);
         }
+    }
+    
+    public Set<String> getTags()
+    {
+        return Collections.unmodifiableSet(this.tags);
     }
 }

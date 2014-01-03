@@ -4,70 +4,49 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.script;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.CostumeProperties;
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
 import uk.co.nickthecoder.itchy.util.ClassName;
 
-public class ScriptedCostumeProperties extends CostumeProperties
+public class ScriptedCostumeProperties extends CostumeProperties implements ScriptedObject
 {
-    private final static HashMap<String, List<AbstractProperty<CostumeProperties, ?>>> allProperties = new HashMap<String, List<AbstractProperty<CostumeProperties, ?>>>();
-
-    public final ScriptProperties propertyValues;
+    private ShimmedScriptLanguage language;
 
     private ClassName className;
 
-    public final Object values;
-
-    public static void addProperty(
-        String name, String propertyName, String label, Class<?> klass )
-    {
-        List<AbstractProperty<CostumeProperties, ?>> properties = allProperties.get(name);
-        if (properties == null) {
-            properties = new ArrayList<AbstractProperty<CostumeProperties, ?>>();
-            allProperties.put(name, properties);
-        } else {
-            // If the property was previously defined, remove it.
-            for (Iterator<AbstractProperty<CostumeProperties, ?>> i = properties.iterator(); i.hasNext();) {
-                AbstractProperty<CostumeProperties, ?> property = i.next();
-                if (property.key.equals(propertyName)) {
-                    i.remove();
-                }
-            }
-
-        }
-
-        AbstractProperty<CostumeProperties, ?> property = AbstractProperty.createProperty(
-            klass, "propertyValues." + propertyName, propertyName, label, true, false, true);
-        if (property != null) {
-            properties.add(property);
-        }
-
-    }
+    public final Object costumePropertiesScript;
 
     public ScriptedCostumeProperties( ClassName className, ShimmedScriptLanguage language,
         Object scriptInstance )
     {
+        this.language = language;
         this.className = className;
-        this.propertyValues = new ScriptProperties(language, scriptInstance);
-        this.values = scriptInstance;
+        this.costumePropertiesScript = scriptInstance;
+    }
+
+    @Override
+    public ClassName getClassName()
+    {
+        return this.className;
     }
 
     @Override
     public List<AbstractProperty<CostumeProperties, ?>> getProperties()
     {
-        String name = ScriptManager.getName(this.className);
-
-        List<AbstractProperty<CostumeProperties, ?>> result = allProperties.get(name);
-        if (result == null) {
-            result = new ArrayList<AbstractProperty<CostumeProperties, ?>>();
-            allProperties.put(name, result);
-        }
-        return result;
+        return this.language.getProperties(this);
     }
 
+    @Override
+    public Object getScriptedObject()
+    {
+        return this.costumePropertiesScript;
+    }
+
+    @Override
+    public ScriptLanguage getLanguage()
+    {
+        return this.language;
+    }
 }

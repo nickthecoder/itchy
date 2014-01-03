@@ -4,6 +4,9 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import uk.co.nickthecoder.jame.Rect;
 
 public class SimplePause implements Pause
@@ -142,15 +145,21 @@ public class SimplePause implements Pause
     private class PausedRole extends AbstractRole
     {
         private Role oldRole;
+        
+        private Set<String> oldTags;
 
         public PausedRole( Role oldRole )
         {
             this.oldRole = oldRole;
+            this.oldTags = new HashSet<String>(oldRole.getTags());
         }
 
         public void unpause()
         {
             getActor().setRole(this.oldRole);
+            for (String tag : this.oldTags) {
+                getActor().getRole().addTag( tag );
+            }
         }
 
         @Override

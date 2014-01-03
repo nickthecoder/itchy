@@ -110,10 +110,12 @@ public class Resources extends Loadable
     @Override
     public void load() throws Exception
     {
+        Itchy.loadingGame(this.game);
         ResourcesReader loader = new ResourcesReader(this);
         loader.load(getFilename());
 
         this.game.setDirector(this.gameInfo.createDirector(this));
+        Itchy.loadingGame(null);
     }
 
     @Override

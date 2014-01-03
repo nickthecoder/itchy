@@ -4,14 +4,11 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.script;
 
-import javax.script.ScriptException;
 
 public interface ScriptedObject
 {
     Object getScriptedObject();
 
-    Object getProperty( String name ) throws ScriptException;
-    
     ScriptLanguage getLanguage();
 
 }

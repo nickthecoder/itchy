@@ -48,4 +48,9 @@ public class CostumeProperties implements PropertySubject<CostumeProperties>
     {
         return AbstractProperty.findAnnotations(this.getClass());
     }
+    
+    public ClassName getClassName()
+    {
+        return new ClassName( CostumeProperties.class, this.getClass().getName() );
+    }
 }

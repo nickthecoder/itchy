@@ -4,12 +4,7 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.script;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-
-import javax.script.ScriptException;
 
 import uk.co.nickthecoder.itchy.AbstractRole;
 import uk.co.nickthecoder.itchy.MouseListenerView;
@@ -22,15 +17,11 @@ import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 
 public class ScriptedRole extends AbstractRole implements ScriptedObject, ViewMouseListener
 {
-    private final static HashMap<String, List<AbstractProperty<Role, ?>>> allProperties = new HashMap<String, List<AbstractProperty<Role, ?>>>();
-
     private ClassName className;
 
     private ShimmedScriptLanguage language;
 
     public final Object roleScript;
-
-    public final ScriptProperties propertyValues;
 
     public final boolean isMouseListener;
 
@@ -39,7 +30,6 @@ public class ScriptedRole extends AbstractRole implements ScriptedObject, ViewMo
         this.className = className;
         this.language = language;
         this.roleScript = scriptInstance;
-        this.propertyValues = new ScriptProperties(this.language, scriptInstance);
         this.isMouseListener = this.language.isMouseListener(this);
     }
 
@@ -52,41 +42,7 @@ public class ScriptedRole extends AbstractRole implements ScriptedObject, ViewMo
     @Override
     public List<AbstractProperty<Role, ?>> getProperties()
     {
-        String name = ScriptManager.getName(this.className);
-
-        List<AbstractProperty<Role, ?>> result = allProperties.get(name);
-        if (result == null) {
-            result = new ArrayList<AbstractProperty<Role, ?>>();
-            allProperties.put(name, result);
-        }
-        return result;
-    }
-
-    public static void addProperty(
-        String roleName, String propertyName, String label, Class<?> klass )
-    {
-        List<AbstractProperty<Role, ?>> properties = allProperties.get(roleName);
-
-        if (properties == null) {
-            properties = new ArrayList<AbstractProperty<Role, ?>>();
-            allProperties.put(roleName, properties);
-
-        } else {
-            // If the property was previously defined, remove it.
-            for (Iterator<AbstractProperty<Role, ?>> i = properties.iterator(); i.hasNext();) {
-                AbstractProperty<Role, ?> property = i.next();
-                if (property.key.equals(propertyName)) {
-                    i.remove();
-                }
-            }
-        }
-
-        AbstractProperty<Role, ?> property = AbstractProperty.createProperty(
-            klass, "propertyValues." + propertyName, propertyName, label, true, false, true);
-        if (property != null) {
-            properties.add(property);
-        }
-
+        return this.language.getProperties(this);
     }
 
     @Override
@@ -188,14 +144,6 @@ public class ScriptedRole extends AbstractRole implements ScriptedObject, ViewMo
     @Override
     public Object getScriptedObject()
     {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public Object getProperty( String name ) throws ScriptException
-    {
-        // TODO Auto-generated method stub
-        return null;
+        return this.roleScript;
     }
 }

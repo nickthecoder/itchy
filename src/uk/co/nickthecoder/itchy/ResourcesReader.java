@@ -38,7 +38,7 @@ public class ResourcesReader
     public ResourcesReader( Resources resources )
     {
         this.resources = resources;
-        this.scriptManager = new ScriptManager(resources);
+        this.scriptManager = resources.scriptManager;
     }
 
     public void load( String filename ) throws Exception
@@ -375,6 +375,7 @@ public class ResourcesReader
                 try {
                     property.setValueByString(subject, value);
                 } catch (Exception e) {
+                    e.printStackTrace();
                     throw new XMLException("Failed to parse property : '" + property.key +
                         "'. value : '" + value + "'");
                 }

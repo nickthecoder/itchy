@@ -27,7 +27,7 @@ ${NAME} = Class({
     // onDetach, onKill, onMouseDown, onMouseUp, onMouseMove
 });
 
-${NAME}.properties = new java.util.LinkedList();
+${NAME}.properties = new java.util.ArrayList();
 // TODO Define each editable property like so :
 // ${NAME}.properties.add( new itchy.property.StringProperty( "My String", "myString" ) );
 // ${NAME}.properties.add( new itchy.property.IntegerProperty( "My Integer", "myInteger" ) );

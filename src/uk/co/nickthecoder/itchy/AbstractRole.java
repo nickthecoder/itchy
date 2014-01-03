@@ -84,7 +84,13 @@ public abstract class AbstractRole implements Role
     {
         this.tagMembership.remove(tag);
     }
-
+    
+    @Override
+    public Set<String> getTags()
+    {
+        return this.tagMembership.getTags();
+    }
+    
     public void removeAllTags()
     {
         this.tagMembership.removeAll();

@@ -4,6 +4,9 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.script;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.script.Bindings;
 import javax.script.ScriptContext;
 import javax.script.ScriptEngineManager;
@@ -20,6 +23,7 @@ import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.SceneDirector;
 import uk.co.nickthecoder.itchy.role.NullRole;
 import uk.co.nickthecoder.itchy.util.ClassName;
+import uk.co.nickthecoder.itchy.property.AbstractProperty;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
@@ -72,6 +76,38 @@ public class JavascriptLanguage extends ShimmedScriptLanguage
         bindings.put("sceneDirector", game.getSceneDirector());
     }
 
+    @Override
+    public Object getProperty( Object wrapper, String name ) throws ScriptException
+    {
+        System.out.println( "JS getProperty " + name );
+        try {
+            Object inst = ((ScriptedObject) wrapper).getScriptedObject();
+            Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
+            bindings.put("inst", inst);
+            System.out.println( "Inspecting " + inst );
+            Object result = this.engine.eval("inst." + name + ";");
+            return result;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
+    @Override
+    public void putProperty( Object wrapper, String name, Object value ) throws ScriptException
+    {
+        try {
+            Object inst = ((ScriptedObject) wrapper).getScriptedObject();
+            Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
+            bindings.put("inst", inst);
+            bindings.put("value", value);
+            this.engine.eval("inst." + name + " = value;");
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
+        }
+    }
+    
     // ===== DIRECTOR ======
 
     @Override
@@ -296,6 +332,19 @@ public class JavascriptLanguage extends ShimmedScriptLanguage
         return role;
     }
 
+    @SuppressWarnings("unchecked")
+    public List<AbstractProperty<Role,?>> getProperties( ScriptedRole scriptedRole )
+    {
+        try {
+            Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
+            bindings.put("roleScript", scriptedRole.roleScript);
+            return (List<AbstractProperty<Role,?>>) this.engine.eval("roleScript.getProperties();");
+        } catch (ScriptException e) {
+            handleException("Director.onStarted", e);
+            return new ArrayList<AbstractProperty<Role,?>>();
+        }
+    }
+    
     @Override
     public void onBirth( ScriptedRole role )
     {
@@ -469,6 +518,19 @@ public class JavascriptLanguage extends ShimmedScriptLanguage
         return sceneDirector;
     }
 
+    @SuppressWarnings("unchecked")
+    public List<AbstractProperty<SceneDirector,?>> getProperties( ScriptedSceneDirector sceneDirector )
+    {
+        try {
+            Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
+            bindings.put("sceneDirectorScript", sceneDirector.sceneDirectorScript);
+            return (List<AbstractProperty<SceneDirector,?>>) this.engine.eval("sceneDirectorScript.getProperties();");
+        } catch (ScriptException e) {
+            handleException("SceneDirectory.getProperties", e);
+            return new ArrayList<AbstractProperty<SceneDirector,?>>();
+        }
+    }
+    
     @Override
     public void onActivate( ScriptedSceneDirector sceneDirector )
     {
@@ -619,4 +681,16 @@ public class JavascriptLanguage extends ShimmedScriptLanguage
         return costumeProperties;
     }
 
+    @SuppressWarnings("unchecked")
+    public List<AbstractProperty<CostumeProperties,?>> getProperties( ScriptedCostumeProperties costumeProperties )
+    {
+        try {
+            Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
+            bindings.put("costumePropertiesScript", costumeProperties.costumePropertiesScript);
+            return (List<AbstractProperty<CostumeProperties,?>>) this.engine.eval("costumePropertiesScript.getProperties();");
+        } catch (ScriptException e) {
+            handleException("CostumeProperties.getProperties", e);
+            return new ArrayList<AbstractProperty<CostumeProperties,?>>();
+        }
+    }
 }

@@ -135,10 +135,11 @@ Ship = Class({
         actor.moveTo( this.actor );
         actor.moveForwards(40);
 
-        var impulse = actor.getCostume().getProperties().values.impulse;
+        var impulse = actor.getRole().roleScript.getCostumeProperties().impulse;
         var theta = this.actor.getHeadingRadians();
         this.vx -= Math.cos(theta) * impulse;
         this.vy -= Math.sin(theta) * impulse;
+        stdout.println( "Impulse : " + impulse );
     }
     
     

@@ -1,3 +1,7 @@
+TorusW to use new style properties.
+
+CostumeProperties getClassName isn't being used, so how does it work out the ClassName?
+
 Undo/Redo
 
     Trouble with null/blank values for colorize.
@@ -27,10 +31,6 @@ When a js file imports another, remember the dependency, so that the dependant c
 
 Make the Role interface the actual useful thing i.e. remove as much as possible from AbstractRole.
 
-For JS, remove properties when reloading.
-    Nah, just implement properties the same way as Python does it, and get rid of the cruft,
-    including the Map interface bodge.
-
 Surface.copy to use setEnableAlpha(false) rather than composite.
     Is there a bug in setAlpha? If not, where is it?
 
@@ -48,8 +48,6 @@ Allow creation of new Role objects from Javascript i.e. create a ScriptedRole an
 Bugs
 ====
 
-BUG: Reloading a SceneBehaviour script causes the properties to double.
-    Do Properties like Python scripts do them, removing the buggy, crufty code, including the Map bodge.
 
 TODO
 ====

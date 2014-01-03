@@ -6,8 +6,15 @@ DropProperties = Class({
     
     init: function() {
         this.speedFactor = 1;
-    }
+    },
     
+    
+    // Boiler plate code - no need to alter it.
+    getProperties: function() {
+        return DropProperties.properties;
+    }
+
 });
-CostumePropertiesScript.addProperty("DropProperties", "speedFactor", Double, "Speed Factor");
+DropProperties.properties = new java.util.ArrayList();
+DropProperties.properties.add( new itchy.property.DoubleProperty("Speed Factor", "speedFactor") );
 

@@ -4,11 +4,7 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.script;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-
-import javax.script.ScriptException;
 
 import uk.co.nickthecoder.itchy.SceneDirector;
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
@@ -19,15 +15,11 @@ import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 
 public class ScriptedSceneDirector implements SceneDirector, ScriptedObject
 {
-    private final static HashMap<String, List<AbstractProperty<SceneDirector, ?>>> allProperties = new HashMap<String, List<AbstractProperty<SceneDirector, ?>>>();
-
     private ClassName className;
 
     private ShimmedScriptLanguage language;
 
     public final Object sceneDirectorScript;
-
-    public final ScriptProperties propertyValues;
 
     public ScriptedSceneDirector( ClassName className, ShimmedScriptLanguage language,
         Object scriptInstance )
@@ -35,7 +27,6 @@ public class ScriptedSceneDirector implements SceneDirector, ScriptedObject
         this.className = className;
         this.language = language;
         this.sceneDirectorScript = scriptInstance;
-        this.propertyValues = new ScriptProperties(language, scriptInstance);
     }
 
     @Override
@@ -51,40 +42,9 @@ public class ScriptedSceneDirector implements SceneDirector, ScriptedObject
     }
 
     @Override
-    public Object getProperty( String name )
-        throws ScriptException
-    {
-        return this.language.getProperty(this.sceneDirectorScript, name);
-    }
-
-    @Override
     public List<AbstractProperty<SceneDirector, ?>> getProperties()
     {
-        String name = ScriptManager.getName(this.className);
-
-        List<AbstractProperty<SceneDirector, ?>> result = allProperties.get(name);
-        if (result == null) {
-            result = new ArrayList<AbstractProperty<SceneDirector, ?>>();
-            allProperties.put(name, result);
-        }
-        return result;
-    }
-
-    public static void addProperty(
-        String sceneDirectorName, String propertyName, String label, Class<?> klass )
-    {
-        List<AbstractProperty<SceneDirector, ?>> properties = allProperties
-            .get(sceneDirectorName);
-        if (properties == null) {
-            properties = new ArrayList<AbstractProperty<SceneDirector, ?>>();
-            allProperties.put(sceneDirectorName, properties);
-        }
-
-        AbstractProperty<SceneDirector, ?> property = AbstractProperty.createProperty(
-            klass, "propertyValues." + propertyName, propertyName, label, true, false, true);
-        if (property != null) {
-            properties.add(property);
-        }
+        return this.language.getProperties(this);
     }
 
     public ClassName getClassName()

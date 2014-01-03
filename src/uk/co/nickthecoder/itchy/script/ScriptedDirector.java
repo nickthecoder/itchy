@@ -4,8 +4,6 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.script;
 
-import javax.script.ScriptException;
-
 import uk.co.nickthecoder.itchy.AbstractDirector;
 import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
@@ -43,13 +41,6 @@ public class ScriptedDirector extends AbstractDirector implements ScriptedObject
     public Object getScriptedObject()
     {
         return this.directorScript;
-    }
-
-    @Override
-    public Object getProperty( String name )
-        throws ScriptException
-    {
-        return this.language.getProperty(this.directorScript, name);
     }
 
     /**
