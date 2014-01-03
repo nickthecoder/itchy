@@ -221,22 +221,22 @@ public class ScriptManager
         return language.createCostumeProperties(className);
     }
 
-    public Object getProperty( Object inst, String name ) throws ScriptException
+    public Object getAttribute( Object inst, String name ) throws ScriptException
     {
         for (ScriptLanguage language : this.languages.values()) {
             if (language.isInstance( inst )) {
-                Object result = language.getProperty(inst, name);
+                Object result = language.getAttribute(inst, name);
                 return result;
             }
         }
         throw new ScriptException( "Not a scripted instance" );
     }
 
-    public void putProperty( Object inst, String name, Object value ) throws ScriptException
+    public void setAttribute( Object inst, String name, Object value ) throws ScriptException
     {
         for (ScriptLanguage language : this.languages.values()) {
             if (language.isInstance( inst )) {
-                language.putProperty(inst, name, value);
+                language.setAttribute(inst, name, value);
                 return;
             }
         }

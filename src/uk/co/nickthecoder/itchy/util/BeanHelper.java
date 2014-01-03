@@ -59,7 +59,7 @@ public class BeanHelper
                 // It isn't a java field, or a getXXX method, or a map
                 // Maybe "subject" is a SCRIPTED object, and therefore doesn't follow java's bean conventions.
                 try {
-                    Object result = Itchy.getGame().getScriptManager().getProperty(subject, attributeName);
+                    Object result = Itchy.getGame().getScriptManager().getAttribute(subject, attributeName);
                     return result;
                 } catch ( Exception e2 ) {
                     // We'll throw e, rather than e2, so do nothing here.
@@ -151,7 +151,7 @@ public class BeanHelper
                     // It isn't a java field, or a setXXX method, or a map
                     // Maybe "subject" is a SCRIPTED object, and therefore doesn't follow java's bean conventions.
                     try {
-                        Itchy.getGame().getScriptManager().putProperty(subject, attributeName, value);
+                        Itchy.getGame().getScriptManager().setAttribute(subject, attributeName, value);
                         return;
                     } catch ( Exception e2 ) {
                         // We'll throw e, rather than e2, so do nothing here.

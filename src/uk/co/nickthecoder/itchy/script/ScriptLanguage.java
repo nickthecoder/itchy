@@ -116,10 +116,10 @@ public abstract class ScriptLanguage
      */
     public abstract boolean isInstance( Object inst );
 
-    public abstract Object getProperty( Object inst, String name )
+    public abstract Object getAttribute( Object inst, String name )
         throws ScriptException;
 
-    public abstract void putProperty( Object inst, String name, Object value )
+    public abstract void setAttribute( Object inst, String name, Object value )
         throws ScriptException;
 
     // ===== DIRECTOR =====

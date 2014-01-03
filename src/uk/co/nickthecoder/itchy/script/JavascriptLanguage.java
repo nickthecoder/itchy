@@ -77,7 +77,7 @@ public class JavascriptLanguage extends ShimmedScriptLanguage
     }
 
     @Override
-    public Object getProperty( Object wrapper, String name ) throws ScriptException
+    public Object getAttribute( Object wrapper, String name ) throws ScriptException
     {
         try {
             Object inst = ((ScriptedObject) wrapper).getScriptedObject();
@@ -92,7 +92,7 @@ public class JavascriptLanguage extends ShimmedScriptLanguage
     }
 
     @Override
-    public void putProperty( Object wrapper, String name, Object value ) throws ScriptException
+    public void setAttribute( Object wrapper, String name, Object value ) throws ScriptException
     {
         try {
             Object inst = ((ScriptedObject) wrapper).getScriptedObject();

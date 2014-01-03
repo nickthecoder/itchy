@@ -85,7 +85,7 @@ public class PythonLanguage extends ScriptLanguage
     }
 
     @Override
-    public Object getProperty( Object inst, String name ) throws ScriptException
+    public Object getAttribute( Object inst, String name ) throws ScriptException
     {
         try {
             this.interpreter.set("__inst", inst);
@@ -105,7 +105,7 @@ public class PythonLanguage extends ScriptLanguage
     }
 
     @Override
-    public void putProperty( Object inst, String name, Object value ) throws ScriptException
+    public void setAttribute( Object inst, String name, Object value ) throws ScriptException
     {
         try {
             this.interpreter.set("__inst", inst);
