@@ -16,5 +16,5 @@ DropProperties = Class({
 
 });
 DropProperties.properties = new java.util.ArrayList();
-DropProperties.properties.add( new itchy.property.DoubleProperty("Speed Factor", "speedFactor") );
+DropProperties.properties.add( new itchy.property.DoubleProperty("speedFactor") );
 

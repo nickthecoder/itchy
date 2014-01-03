@@ -14,14 +14,9 @@ import uk.co.nickthecoder.itchy.gui.TextBox;
 
 public class FileProperty<S> extends AbstractProperty<S, File>
 {
-    public FileProperty( String label, String access, String key )
+    public FileProperty( String key )
     {
-        super(label, access, key);
-    }
-
-    public FileProperty( String label, String access )
-    {
-        super(label, access);
+        super(key);
     }
 
     @Override

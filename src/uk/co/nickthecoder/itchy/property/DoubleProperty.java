@@ -11,14 +11,9 @@ import uk.co.nickthecoder.itchy.util.BeanHelper;
 
 public class DoubleProperty<S> extends AbstractProperty<S, Double>
 {
-    public DoubleProperty( String label, String access, String key )
+    public DoubleProperty( String key )
     {
-        super(label, access, key);
-    }
-
-    public DoubleProperty( String label, String access )
-    {
-        super(label, access);
+        super(key);
     }
 
     @Override

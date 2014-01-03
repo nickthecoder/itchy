@@ -79,12 +79,10 @@ public class JavascriptLanguage extends ShimmedScriptLanguage
     @Override
     public Object getProperty( Object wrapper, String name ) throws ScriptException
     {
-        System.out.println( "JS getProperty " + name );
         try {
             Object inst = ((ScriptedObject) wrapper).getScriptedObject();
             Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
             bindings.put("inst", inst);
-            System.out.println( "Inspecting " + inst );
             Object result = this.engine.eval("inst." + name + ";");
             return result;
         } catch (Exception e) {

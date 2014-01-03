@@ -58,7 +58,6 @@ public class ScriptManager
 
     public ScriptLanguage getLanguage( String extension )
     {
-        System.out.println( "SM.getLanguage " + extension );
         ScriptLanguage result = this.languages.get(extension);
         if (result == null) {
 
@@ -70,7 +69,6 @@ public class ScriptManager
             try {
                 Constructor<ScriptLanguage> constructor = klass.getConstructor(ScriptManager.class);
                 result = constructor.newInstance(this);
-                System.out.println( "SM.getLanguage added " + extension );
                 this.languages.put(extension, result);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -225,11 +223,8 @@ public class ScriptManager
 
     public Object getProperty( Object inst, String name ) throws ScriptException
     {
-        System.out.println( "SM getProperty " + name + " of  " + inst.getClass().getName());
         for (ScriptLanguage language : this.languages.values()) {
-            System.out.println( "Try " + language.getExtension() );
             if (language.isInstance( inst )) {
-                System.out.println( "SM using" + language.getExtension() );
                 Object result = language.getProperty(inst, name);
                 return result;
             }
@@ -239,11 +234,8 @@ public class ScriptManager
 
     public void putProperty( Object inst, String name, Object value ) throws ScriptException
     {
-        System.out.println( "SM putProperty " + name + " of  " + inst.getClass().getName());
         for (ScriptLanguage language : this.languages.values()) {
-            System.out.println( "Try " + language.getExtension() );
             if (language.isInstance( inst )) {
-                System.out.println( "SM using" + language.getExtension() );
                 language.putProperty(inst, name, value);
                 return;
             }

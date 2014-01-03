@@ -18,12 +18,12 @@ public class ClassNameProperty<S> extends AbstractProperty<S, ClassName>
      */
     private Class<?> baseClass;
 
-    public ClassNameProperty( Class<?> klass, String label, String access, String key )
+    public ClassNameProperty( Class<?>klass, String key )
     {
-        super(label, access, key);
+        super(key);
         this.baseClass = klass;
     }
-
+    
     @Override
     public ClassName getDefaultValue()
     {

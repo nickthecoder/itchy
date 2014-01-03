@@ -39,12 +39,12 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
     {
         List<AbstractProperty<Appearance, ?>> result = new ArrayList<AbstractProperty<Appearance, ?>>(normalProperties);
 
-        result.add(new FontProperty<Appearance>("Font", "pose.font"));
-        result.add(new DoubleProperty<Appearance>("Font Size", "pose.fontSize"));
-        result.add(new StringProperty<Appearance>("Text", "pose.text"));
-        result.add(new RGBAProperty<Appearance>("Text Color", "pose.color", false, false));
-        result.add(new DoubleProperty<Appearance>("X Alignment", "pose.xAlignment"));
-        result.add(new DoubleProperty<Appearance>("Y Alignment", "pose.yAlignment"));
+        result.add(new FontProperty<Appearance>("pose.font").label("Font"));
+        result.add(new DoubleProperty<Appearance>("pose.fontSize").label("Font Size"));
+        result.add(new StringProperty<Appearance>("pose.text").label("Text"));
+        result.add(new RGBAProperty<Appearance>("pose.color").label("Text Color"));
+        result.add(new DoubleProperty<Appearance>("pose.xAlignment").label("X Alignment"));
+        result.add(new DoubleProperty<Appearance>("pose.yAlignment").label("Y Alignment"));
 
         return result;
     }

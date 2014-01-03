@@ -13,6 +13,8 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import uk.co.nickthecoder.itchy.Font;
 import uk.co.nickthecoder.itchy.animation.Ease;
@@ -120,20 +122,27 @@ public abstract class AbstractProperty<S, T> implements Comparable<AbstractPrope
 
         if (klass == ClassName.class) {
             try {
-                result = new ClassNameProperty<SS>(annotation.baseClass(), annotation.label(), access, key);
+                result = new ClassNameProperty<SS>(annotation.baseClass(), key);
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
         } else {
-
-            result = createPropertyPrivate(
-                klass, access, key, annotation.label(), annotation.allowNull(), annotation.recurse(), annotation.alpha());
+            result = createProperty(klass, key);
         }
 
         if (result != null) {
+            result.access = access;
+            result.label = annotation.label();
             result.hint = annotation.hint();
             result.sortOrder = annotation.sortOrder();
+            result.addAliases(annotation.aliases());
+        }
+
+        if (result instanceof RGBAProperty) {
+            RGBAProperty<?> property = (RGBAProperty<?>) result;
+            property.allowNull(annotation.allowNull());
+            property.includeAlpha(annotation.alpha());
         }
 
         return result;
@@ -147,8 +156,7 @@ public abstract class AbstractProperty<S, T> implements Comparable<AbstractPrope
             addProperties(klass, prefix + name + ".", collection);
 
         } else {
-            AbstractProperty<SS, ?> property = createProperty(klass,
-                prefix + name, name, annotation);
+            AbstractProperty<SS, ?> property = createProperty(klass, prefix + name, name, annotation);
 
             if (property != null) {
                 property.sortOrder = annotation.sortOrder();
@@ -161,62 +169,40 @@ public abstract class AbstractProperty<S, T> implements Comparable<AbstractPrope
 
     }
 
-    public static <SS> AbstractProperty<SS, ?> createProperty(
-        Class<?> klass, String access, String key, String label, boolean allowNull,
-        boolean recurse, boolean alpha )
-    {
-        AbstractProperty<SS, ?> result;
-        if (label.matches(".* \\(.*\\)")) {
-            String hint = label.replaceAll(".* \\((.*)\\)", "$1");
-            label = label.replaceAll(" \\(.*\\)", "");
-            result = createPropertyPrivate(klass, access, key, label, allowNull, recurse, alpha);
-            result.hint = hint;
-        } else {
-            result = createPropertyPrivate(klass, access, key, label, allowNull, recurse, alpha);
-        }
-
-        return result;
-    }
-
-    private static <SS> AbstractProperty<SS, ?> createPropertyPrivate(
-        Class<?> klass, String access, String key, String label, boolean allowNull,
-        boolean recurse, boolean alpha )
+    private static <SS> AbstractProperty<SS, ?> createProperty( Class<?> klass, String key )
     {
         if (klass == int.class || klass == Integer.class) {
-            return new IntegerProperty<SS>(label, access, key);
+            return new IntegerProperty<SS>(key);
         }
         if (klass == double.class || klass == Double.class) {
-            return new DoubleProperty<SS>(label, access, key);
-        }
-        if (klass == String.class) {
-            return new StringProperty<SS>(label, access, key);
-        }
-        if (klass == File.class) {
-            return new FileProperty<SS>(label, access, key);
+            return new DoubleProperty<SS>(key);
         }
         if (klass == boolean.class || klass == Boolean.class) {
-            return new BooleanProperty<SS>(label, access, key);
+            return new BooleanProperty<SS>(key);
+        }
+        if (klass == String.class) {
+            return new StringProperty<SS>(key);
+        }
+        if (klass == File.class) {
+            return new FileProperty<SS>(key);
         }
         if (klass == RGBA.class) {
-            return new RGBAProperty<SS>(label, access, key, allowNull, alpha);
+            return new RGBAProperty<SS>(key);
         }
         if (klass == Font.class) {
-            return new FontProperty<SS>(label, access, key);
+            return new FontProperty<SS>(key);
         }
         if (klass == Ease.class) {
-            return new EaseProperty<SS>(label, access, key);
+            return new EaseProperty<SS>(key);
         }
         if (Enum.class.isAssignableFrom(klass)) {
 
             @SuppressWarnings("unchecked")
-            AbstractProperty<SS, Enum<?>> result = new EnumProperty<SS, Enum<?>>(label, access,
-                key,
-                (Class<Enum<?>>) klass);
+            AbstractProperty<SS, Enum<?>> result = new EnumProperty<SS, Enum<?>>(key, (Class<Enum<?>>) klass);
             return result;
         }
 
         System.err.println("Unexpected property : " + klass.getName() + "#" + key);
-
         return null;
     }
 
@@ -265,17 +251,21 @@ public abstract class AbstractProperty<S, T> implements Comparable<AbstractPrope
      */
     public Set<String> aliases;
 
-    public AbstractProperty( String label, String access, String key )
+    private static String labelFromKey( String key )
     {
-        this.label = label;
-        this.access = access;
-        this.key = key;
-        this.aliases = new HashSet<String>();
+        key = key.substring(0, 1).toUpperCase() + key.substring(1);
+        Pattern pattern = Pattern.compile("([A-Z])");
+        Matcher matcher = pattern.matcher(key);
+        return matcher.replaceAll(" $1").trim();
+        // return key.replaceAll("[A-Z]", " \\1").trim();
     }
 
-    public AbstractProperty( String label, String access )
+    public AbstractProperty( String key )
     {
-        this(label, access, access);
+        this.label = labelFromKey(key);
+        this.key = key;
+        this.access = key;
+        this.aliases = new HashSet<String>();
     }
 
     public void addAliases( String[] values )
@@ -408,6 +398,42 @@ public abstract class AbstractProperty<S, T> implements Comparable<AbstractPrope
     {
         int diff = this.sortOrder - other.sortOrder;
         return diff == 0 ? this.label.compareTo(other.label) : diff;
+    }
+
+    /**
+     * A Fluent setter for the label
+     * 
+     * @param label
+     * @return this
+     */
+    public AbstractProperty<S, T> label( String label )
+    {
+        this.label = label;
+        return this;
+    }
+
+    /**
+     * A Fluent setter for access
+     * 
+     * @param access
+     * @return this
+     */
+    public AbstractProperty<S, T> access( String access )
+    {
+        this.access = access;
+        return this;
+    }
+
+    /**
+     * A Fluent setter for hint
+     * 
+     * @param access
+     * @return this
+     */
+    public AbstractProperty<S, T> hint( String access )
+    {
+        this.hint = access;
+        return this;
     }
 
 }

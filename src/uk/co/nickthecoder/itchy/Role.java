@@ -11,7 +11,6 @@ import uk.co.nickthecoder.itchy.property.AbstractProperty;
 import uk.co.nickthecoder.itchy.property.PropertySubject;
 import uk.co.nickthecoder.itchy.script.ScriptedRole;
 import uk.co.nickthecoder.itchy.util.ClassName;
-import uk.co.nickthecoder.itchy.util.TagMembership;
 
 /**
  * Determines the how an Actor behaves, including how it moves and interacts with other Actors. Role is arguably the most important part of
@@ -30,7 +29,7 @@ public interface Role extends MessageListener, Cloneable, PropertySubject<Role>
     public Actor getActor();
 
     public void addTag( String tag );
-    
+
     public boolean hasTag( String name );
 
     public Set<String> getTags();

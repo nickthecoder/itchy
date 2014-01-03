@@ -12,15 +12,9 @@ public class EnumProperty<S, E extends Enum<?>> extends AbstractProperty<S, E>
 {
     private Class<E> klass;
 
-    public EnumProperty( String label, String access, String key, Class<E> klass )
+    public EnumProperty( String key, Class<E> klass )
     {
-        super(label, access, key);
-        this.klass = klass;
-    }
-
-    public EnumProperty( String label, String access, Class<E> klass )
-    {
-        super(label, access);
+        super(key);
         this.klass = klass;
     }
 

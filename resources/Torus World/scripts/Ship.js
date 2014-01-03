@@ -139,7 +139,6 @@ Ship = Class({
         var theta = this.actor.getHeadingRadians();
         this.vx -= Math.cos(theta) * impulse;
         this.vy -= Math.sin(theta) * impulse;
-        stdout.println( "Impulse : " + impulse );
     }
     
     

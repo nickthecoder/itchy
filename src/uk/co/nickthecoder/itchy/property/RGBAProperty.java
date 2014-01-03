@@ -11,22 +11,15 @@ import uk.co.nickthecoder.jame.RGBA;
 
 public class RGBAProperty<S> extends AbstractProperty<S, RGBA>
 {
-    private final boolean allowNull;
+    private boolean allowNull;
 
-    private final boolean includeAlpha;
-
-    public RGBAProperty( String label, String access, String key, boolean allowNull, boolean includeAlpha )
+    private boolean includeAlpha;
+    
+    public RGBAProperty( String key )
     {
-        super(label, access, key);
-        this.allowNull = allowNull;
-        this.includeAlpha = includeAlpha;
-    }
-
-    public RGBAProperty( String label, String access, boolean allowNull, boolean includeAlpha )
-    {
-        super(label, access);
-        this.allowNull = allowNull;
-        this.includeAlpha = includeAlpha;
+        super(key);
+        this.allowNull = false;
+        this.includeAlpha = false;
     }
 
     @Override
@@ -101,6 +94,40 @@ public class RGBAProperty<S> extends AbstractProperty<S, RGBA>
             return "Not a valid colour";
         }
         return null;
+    }
+
+    // Fluent API boilerplate
+    @Override
+    public RGBAProperty<S> label( String label )
+    {
+        super.label(label);
+        return this;
+    }
+
+    @Override
+    public RGBAProperty<S> access( String access )
+    {
+        super.access(access);
+        return this;
+    }
+
+    @Override
+    public RGBAProperty<S> hint( String hint )
+    {
+        super.hint(hint);
+        return this;
+    }
+
+    public RGBAProperty<S> allowNull( boolean value )
+    {
+        this.allowNull = value;
+        return this;
+    }
+    
+    public RGBAProperty<S> includeAlpha( boolean value )
+    {
+        this.includeAlpha = value;
+        return this;
     }
 
 }

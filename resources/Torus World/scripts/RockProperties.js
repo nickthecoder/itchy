@@ -14,7 +14,8 @@ RockProperties = Class({
 });
 
 RockProperties.properties = new java.util.ArrayList();
-RockProperties.properties.add( new itchy.property.IntegerProperty( "Pieces","pieces" ) );
-RockProperties.properties.add( new itchy.property.IntegerProperty( "Points", "points" ) );
-RockProperties.properties.add( new itchy.property.IntegerProperty( "Strength", "strength" ) );
-RockProperties.properties.add( new itchy.property.IntegerProperty( "Hits Required", "hitsRequired" ) );
+RockProperties.properties.add( new itchy.property.IntegerProperty("pieces") );
+RockProperties.properties.add( new itchy.property.IntegerProperty("points") );
+RockProperties.properties.add( new itchy.property.IntegerProperty("strength") );
+RockProperties.properties.add( new itchy.property.IntegerProperty("hitsRequired") );
+

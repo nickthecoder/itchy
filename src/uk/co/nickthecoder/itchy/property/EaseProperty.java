@@ -13,15 +13,9 @@ import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 
 public class EaseProperty<S> extends AbstractProperty<S, Ease>
 {
-
-    public EaseProperty( String label, String access, String key )
+    public EaseProperty( String key)
     {
-        super(label, access, key);
-    }
-
-    public EaseProperty( String label, String access )
-    {
-        super(label, access);
+        super(key);
     }
 
     @Override

@@ -60,5 +60,5 @@ Drop = Class({
 // a similar "Y" value, which makes finding a safe gap for the sheep difficult.
 
 Drop.properties = new java.util.LinkedList();
-Drop.properties.add( new itchy.property.IntegerProperty( "Distance", "distance" ) );
+Drop.properties.add( new itchy.property.IntegerProperty("distance") );
 

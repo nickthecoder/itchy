@@ -13,7 +13,7 @@ ShipProperties = Class({
 });
 
 ShipProperties.properties = new java.util.ArrayList();
-ShipProperties.properties.add( new itchy.property.DoubleProperty( "rotationSpeed", "Rotation Speed" ) );
-ShipProperties.properties.add( new itchy.property.DoubleProperty( "Thrust", "thrust" ) );
-ShipProperties.properties.add( new itchy.property.DoubleProperty( "Fire Period","firePeriod") );
+ShipProperties.properties.add( new itchy.property.DoubleProperty("rotationSpeed") );
+ShipProperties.properties.add( new itchy.property.DoubleProperty("thrust") );
+ShipProperties.properties.add( new itchy.property.DoubleProperty("firePeriod") );
 

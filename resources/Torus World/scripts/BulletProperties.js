@@ -12,6 +12,6 @@ BulletProperties = Class({
 });
 
 BulletProperties.properties = new java.util.ArrayList();
-BulletProperties.properties.add( new itchy.property.DoubleProperty( "Impulse (recoils the ship)", "impulse" ) );
-BulletProperties.properties.add( new itchy.property.DoubleProperty( "Strength", "strength" ) );
+BulletProperties.properties.add( new itchy.property.DoubleProperty("impulse").hint("recoils the ship") );
+BulletProperties.properties.add( new itchy.property.DoubleProperty("strength") );
 

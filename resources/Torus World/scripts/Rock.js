@@ -50,7 +50,6 @@ Rock = Class({
             .createActor();
 
         var pieces = this.getCostumeProperties().pieces;
-        stdout.println( "Rock pieces " + pieces );
         for (var i = 0; i < pieces; i ++ ) {
             var actor = this.actor.createCompanion("fragment");
             var role = actor.getRole().roleScript;
@@ -73,10 +72,10 @@ Rock = Class({
 });
 
 Rock.properties = new java.util.ArrayList();
-Rock.properties.add( new itchy.property.DoubleProperty( "Impulse (recoils the ship)", "impulse" ) );
-Rock.properties.add( new itchy.property.DoubleProperty( "Strength", "strength") );
+Rock.properties.add( new itchy.property.DoubleProperty("impulse").hint("recoils the ship") );
+Rock.properties.add( new itchy.property.DoubleProperty("strength") );
 
-Rock.properties.add( new itchy.property.DoubleProperty( "Rotation Speed (Degrees per Tick)", "rotationSpeed" ) );
-Rock.properties.add( new itchy.property.DoubleProperty( "X Velocity", "vx" ) );
-Rock.properties.add( new itchy.property.DoubleProperty( "Y Velocity", "vy" ) );
+Rock.properties.add( new itchy.property.DoubleProperty("rotationSpeed").hint("Degrees per Tick)") );
+Rock.properties.add( new itchy.property.DoubleProperty("vx").label("X Velocity") );
+Rock.properties.add( new itchy.property.DoubleProperty("vy").label("Y Velocity") );
 

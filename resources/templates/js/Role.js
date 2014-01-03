@@ -29,10 +29,10 @@ ${NAME} = Class({
 
 ${NAME}.properties = new java.util.ArrayList();
 // TODO Define each editable property like so :
-// ${NAME}.properties.add( new itchy.property.StringProperty( "My String", "myString" ) );
-// ${NAME}.properties.add( new itchy.property.IntegerProperty( "My Integer", "myInteger" ) );
-// ${NAME}.properties.add( new itchy.property.DoubleProperty( "My Double", "myDouble" ) );
-// ${NAME}.properties.add( new itchy.property.BooleanProperty( "My Boolean", "myBoolean" ) );
-// ${NAME}.properties.add( new itchy.property.RGBAProperty( "My Colour", "myColor", false, false ) );
+// ${NAME}.properties.add( new itchy.property.StringProperty("myString").label("My String") );
+// ${NAME}.properties.add( new itchy.property.IntegerProperty("myInteger").label("My Integer") );
+// ${NAME}.properties.add( new itchy.property.DoubleProperty("myDouble").label("My Double") );
+// ${NAME}.properties.add( new itchy.property.BooleanProperty("myBoolean").label("My Boolean") );
+// ${NAME}.properties.add( new itchy.property.RGBAProperty("myColor").label("My Colour") );
 // Each property should be initialised to a default value in the "init" method.
 

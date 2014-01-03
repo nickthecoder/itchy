@@ -91,7 +91,7 @@ Play = new Class({
 // within the "Scene" section. Each scene has its own values,
 // i.e. scene "easy" will have a different "speed" to scene "hard".
 Play.properties = new java.util.ArrayList();
-Play.properties.add( new itchy.property.IntegerProperty("Speed", "speed" ));
-Play.properties.add( new itchy.property.IntegerProperty("Maximum Speed", "maxSpeed" ));
-Play.properties.add( new itchy.property.IntegerProperty("Speed Up After", "speedUpAfter" ));
+Play.properties.add( new itchy.property.IntegerProperty("speed") );
+Play.properties.add( new itchy.property.IntegerProperty("maxSpeed").label("Maximum Speed") );
+Play.properties.add( new itchy.property.IntegerProperty("speedUpAfter") );
 

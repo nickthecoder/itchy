@@ -11,14 +11,9 @@ import uk.co.nickthecoder.itchy.util.BeanHelper;
 
 public class IntegerProperty<S> extends AbstractProperty<S, Integer>
 {
-    public IntegerProperty( String label, String access, String key )
+    public IntegerProperty( String key)
     {
-        super(label, access, key);
-    }
-
-    public IntegerProperty( String label, String access )
-    {
-        super(label, access);
+        super(key);
     }
 
     @Override

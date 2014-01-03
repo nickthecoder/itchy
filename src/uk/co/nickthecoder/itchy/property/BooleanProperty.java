@@ -10,6 +10,7 @@ import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 
 public class BooleanProperty<S> extends AbstractProperty<S, Boolean>
 {
+    /*
     public BooleanProperty( String label, String access, String key )
     {
         super(label, access, key);
@@ -18,6 +19,11 @@ public class BooleanProperty<S> extends AbstractProperty<S, Boolean>
     public BooleanProperty( String label, String access )
     {
         super(label, access);
+    }
+    */
+    public BooleanProperty( String key )
+    {
+        super(key);
     }
 
     @Override

@@ -13,15 +13,10 @@ import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 
 public class FontProperty<S> extends AbstractProperty<S, Font>
-{
-    public FontProperty( String label, String access )
+{   
+    public FontProperty( String key)
     {
-        super(label, access);
-    }
-
-    public FontProperty( String label, String access, String key )
-    {
-        super(label, access, key);
+        super(key);
     }
 
     @Override

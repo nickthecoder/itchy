@@ -1,7 +1,3 @@
-TorusW to use new style properties.
-
-CostumeProperties getClassName isn't being used, so how does it work out the ClassName?
-
 Undo/Redo
 
     Trouble with null/blank values for colorize.
@@ -12,13 +8,6 @@ Undo/Redo
     Any other fields which don't use propertiesforms    
 
     Toolbar buttons
-
-Save and restore the tags of paused actors?
-    A boolean can turn this behaviour off.
-
-Update the Role.js template to include onAttach
-
-Fluent allowNull and includeAlpha for AbstractProperty and RGBAProperty
 
 When a js file imports another, remember the dependency, so that the dependant classes get re-loaded if the dependecy is reloaded.
     e.g. If Moving.js is changed then Rock.js, Ship.js etc are reloaded.
@@ -48,6 +37,7 @@ Allow creation of new Role objects from Javascript i.e. create a ScriptedRole an
 Bugs
 ====
 
+When testing a Rain scene, it doesn't use the normal high scores - is it using the editor's preferences?
 
 TODO
 ====

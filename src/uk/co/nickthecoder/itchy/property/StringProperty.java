@@ -10,14 +10,9 @@ import uk.co.nickthecoder.itchy.gui.TextBox;
 
 public class StringProperty<S> extends AbstractProperty<S, String>
 {
-    public StringProperty( String label, String access, String key )
+    public StringProperty( String key )
     {
-        super(label, access, key);
-    }
-
-    public StringProperty( String label, String access )
-    {
-        super(label, access);
+        super(key);
     }
 
     @Override
