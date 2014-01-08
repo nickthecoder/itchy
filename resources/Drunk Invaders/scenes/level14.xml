@@ -1,0 +1,5 @@
+<scene showMouse="false" role="uk.co.nickthecoder.itchy.extras.RedirectSceneDirector" background="#000000ff">
+  <properties>
+    <property name="redirectSceneName" value="completed"/>
+  </properties>
+</scene>
