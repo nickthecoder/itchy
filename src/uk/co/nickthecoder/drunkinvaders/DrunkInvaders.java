@@ -46,7 +46,6 @@ public class DrunkInvaders extends AbstractDirector
 
     public int metronomeCountdown;
 
-    private int aliensRemaining;
 
     private int levelNumber = 1;
 
@@ -145,8 +144,12 @@ public class DrunkInvaders extends AbstractDirector
                 @Override
                 public void tick()
                 {
+                    int aliensRemaining = 0;
+                    if  (game.getSceneDirector() instanceof Level) {
+                        aliensRemaining = ((Level) game.getSceneDirector()).getAliensRemaining();
+                    }
                     pose.setText(
-                        "Aliens Remaining     : " + DrunkInvaders.this.aliensRemaining + "\n" +
+                        "Aliens Remaining     : " + aliensRemaining + "\n" +
                             "Dropped Frames       : " + Itchy.frameRate.getDroppedFrames() + "\n" +
                             "Surfaces Created     : " + Surface.totalCreated() + "\n" +
                             "Surfaces Existing    : " + Surface.totalExisting() + "\n" +
@@ -170,6 +173,15 @@ public class DrunkInvaders extends AbstractDirector
     {
         return new NeighbourhoodCollisionStrategy(actor, this.neighbourhood);
     }
+
+    public void nextLevel()
+    {
+        this.game.getPreferences().putBoolean("completedLevel" + this.levelNumber, true);
+
+        this.levelNumber += 1;
+        play();
+    }
+
 
     @Override
     public boolean startScene( String sceneName )
@@ -197,9 +209,7 @@ public class DrunkInvaders extends AbstractDirector
                 .add(SceneTransition.fade());
         }
         this.transitioning = true;
-        System.out.println( "Alien count pre  trans : " + this.aliensRemaining );
         boolean result = new SceneTransition(transition).transition(sceneName);
-        System.out.println( "Alien count post trans : " + this.aliensRemaining );
         this.transitioning = true;
         return result;
     }
@@ -225,8 +235,8 @@ public class DrunkInvaders extends AbstractDirector
 
     public void addAliens( int n )
     {
-        if (this.game.getSceneDirector() instanceof PlaySceneDirector ) {
-            ((PlaySceneDirector) (this.game.getSceneDirector())).addAliens( n );
+        if (this.game.getSceneDirector() instanceof Level ) {
+            ((Level) (this.game.getSceneDirector())).addAliens( n );
         }
     }
 

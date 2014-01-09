@@ -1,5 +1,8 @@
+from uk.co.nickthecoder.itchy import Role
 from uk.co.nickthecoder.itchy import AbstractRole
 from uk.co.nickthecoder.itchy.util import ClassName
+
+from java.util import ArrayList
 
 # TODO If your Role uses properties, you'll need to import on or more of these...
 # from uk.co.nickthecoder.itchy.property import StringProperty

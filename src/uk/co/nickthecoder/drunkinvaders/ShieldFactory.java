@@ -38,7 +38,7 @@ public class ShieldFactory extends AbstractRole
 
                 Actor shieldActor = new Actor(pose);
                 Shield shield = new Shield();
-                shieldActor.getAppearance().setDirection(getActor().getAppearance().getDirection());
+                shieldActor.setDirection(getActor().getAppearance().getDirection());
                 shieldActor.setZOrder(getActor().getZOrder() + 1);
                 getActor().getStage().add(shieldActor);
                 shieldActor.moveTo(getActor().getX(), getActor().getY());

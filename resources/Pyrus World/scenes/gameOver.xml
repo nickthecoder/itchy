@@ -1,0 +1,22 @@
+<scene showMouse="false" role="uk.co.nickthecoder.itchy.PlainSceneDirector" background="#00000000">
+  <properties/>
+  <layer name="main">
+    <text text="Game Over" font="Boycott" size="94" color="#5d89ff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.Tagged" costume="gameOver" x="400" y="456" direction="0.0" heading="0.0" startEvent="fadeIn" zOrder="100" alpha="200.0">
+      <property name="tag" value="gameOver"/>
+      <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
+        <property name="dx" value="1"/>
+        <property name="dy" value="2"/>
+        <property name="color" value="#ffffffff"/>
+      </makeup>
+    </text>
+    <text text="Continue" font="Boycott" size="50" color="#ffffff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.MessageButton" costume="button" x="400" y="317" direction="0.0" heading="0.0" startEvent="fadeIn" zOrder="101" activationDelay="0.3">
+      <property name="message" value="continue"/>
+    </text>
+    <text text="Restart" font="Boycott" size="50" color="#ffffff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.MessageButton" costume="button" x="401" y="229" direction="0.0" heading="0.0" startEvent="fadeIn" zOrder="102" activationDelay="0.6">
+      <property name="message" value="start"/>
+    </text>
+    <text text="Menu" font="Boycott" size="50" color="#ffffff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.SceneButton" costume="button" x="400" y="148" direction="0.0" heading="0.0" startEvent="fadeIn" zOrder="103" activationDelay="0.9">
+      <property name="sceneName" value="menu"/>
+    </text>
+  </layer>
+</scene>

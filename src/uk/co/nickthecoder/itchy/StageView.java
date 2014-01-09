@@ -48,9 +48,6 @@ public class StageView extends AbstractScrollableView implements StageListener, 
     @Override
     public void render2( Surface destSurface, Rect clip, final int offsetX, final int offsetY )
     {
-        // System.out.println( this.stage.getName() + " clip top  "+ clip.y + " clipHeight " +
-        // clip.height + " offsety " + offsetY);
-
         // Where is the world's (0,0) on screen (in screen coordinates)?
         int tx = offsetX - (int) this.worldRect.x;
         int ty = offsetY + this.position.height + (int) this.worldRect.y;
@@ -66,88 +63,13 @@ public class StageView extends AbstractScrollableView implements StageListener, 
                     continue;
                 }
 
+                // Don't render actors that are invisible (or very nearly invisible)
                 if ((actor.getAppearance().getAlpha() < 2) && (this.minimumAlpha < 2)) {
                     continue;
                 }
 
-                if (actor.getAppearance().visibleWithin(this.worldRect)) {
-
-                    // Ensures the surface has been rendered, and offset_x,y are now valid.
-                    Surface actorSurface = actor.getSurface();
-
-                    // Top left of where the actor needs to be placed on the screen.
-                    // Note the change of sign for "y", because in world
-                    // coordinates "down" is negative.
-                    int displayAtX = tx + (int) (actor.getX()) - actor.getAppearance().getOffsetX();
-                    int displayAtY = ty - (int) (actor.getY()) - actor.getAppearance().getOffsetY();
-
-                    int width = actorSurface.getWidth();
-                    int height = actorSurface.getHeight();
-                    int shiftX = 0;
-                    int shiftY = 0;
-
-                    // Clip within the layers positionOnScreen
-                    if (displayAtX < clip.x) { // left
-                        shiftX = clip.x - displayAtX;
-                        displayAtX += shiftX;
-                    }
-                    if (displayAtY < clip.y) { // top
-                        shiftY = clip.y - displayAtY;
-                        displayAtY += shiftY;
-                    }
-                    if (displayAtX + actorSurface.getWidth() > clip.x + clip.width) { // right
-                        width -= displayAtX + actorSurface.getWidth() - (clip.x + clip.width);
-                    }
-                    if (displayAtY + actorSurface.getHeight() > clip.y + clip.height) { // bottom
-                        height -= displayAtY + actorSurface.getHeight() - (clip.y + clip.height);
-                    }
-
-                    if ((height > 0) && (width > 0)) {
-
-                        Rect srcRect = new Rect(shiftX, shiftY, width, height);
-                        Rect rect = new Rect(displayAtX, displayAtY, width, height);
-
-                        int alpha = (int) (actor.getAppearance().getAlpha());
-                        if (alpha < this.minimumAlpha) {
-                            alpha = this.minimumAlpha;
-                        }
-                        if (alpha > this.maximumAlpha) {
-                            alpha = this.maximumAlpha;
-                        }
-                        if (alpha >= 255) {
-
-                            // Fully opaque (normal role)
-                            actorSurface.blit(srcRect, destSurface, rect);
-
-                        } else {
-
-                            if (alpha > 0 /* totally transparent */) {
-
-                                // Semi-transparent
-                                // Create a temp surface, and blit the current
-                                // contents of the screen onto it
-                                Surface tempSurface = new Surface(width, height, false);
-                                Rect tempRect = new Rect(0, 0, width, height);
-                                destSurface.blit(rect, tempSurface, tempRect);
-
-                                // Now blit the actor onto it
-                                Rect tempRect2 = new Rect(shiftX, shiftY, width, height);
-                                actorSurface.blit(tempRect2, tempSurface, tempRect);
-
-                                // Now blit the temp surface onto the screen,
-                                // with the correct amount of alpha
-                                tempSurface.setPerSurfaceAlpha(alpha);
-                                tempSurface.blit(destSurface, displayAtX, displayAtY);
-
-                                tempSurface.free();
-                            }
-
-                        }
-
-                    }
-
-                }
-
+                render( destSurface, clip, tx, ty, actor );
+                
             } catch (Exception e) {
                 e.printStackTrace();
                 try {
@@ -160,6 +82,88 @@ public class StageView extends AbstractScrollableView implements StageListener, 
         }
     }
 
+    protected void render(Surface destSurface, Rect clip, int tx, int ty, Actor actor)
+    {
+
+        if (actor.getAppearance().visibleWithin(this.worldRect)) {
+
+            // Ensures the surface has been rendered, and offset_x,y are now valid.
+            Surface actorSurface = actor.getSurface();
+
+            // Top left of where the actor needs to be placed on the screen.
+            // Note the change of sign for "y", because in world
+            // coordinates "down" is negative.
+            int displayAtX = tx + (int) (actor.getX()) - actor.getAppearance().getOffsetX();
+            int displayAtY = ty - (int) (actor.getY()) - actor.getAppearance().getOffsetY();
+
+            int width = actorSurface.getWidth();
+            int height = actorSurface.getHeight();
+            int shiftX = 0;
+            int shiftY = 0;
+
+            // Clip within the layers positionOnScreen
+            if (displayAtX < clip.x) { // left
+                shiftX = clip.x - displayAtX;
+                displayAtX += shiftX;
+            }
+            if (displayAtY < clip.y) { // top
+                shiftY = clip.y - displayAtY;
+                displayAtY += shiftY;
+            }
+            if (displayAtX + actorSurface.getWidth() > clip.x + clip.width) { // right
+                width -= displayAtX + actorSurface.getWidth() - (clip.x + clip.width);
+            }
+            if (displayAtY + actorSurface.getHeight() > clip.y + clip.height) { // bottom
+                height -= displayAtY + actorSurface.getHeight() - (clip.y + clip.height);
+            }
+
+            if ((height > 0) && (width > 0)) {
+
+                Rect srcRect = new Rect(shiftX, shiftY, width, height);
+                Rect rect = new Rect(displayAtX, displayAtY, width, height);
+
+                int alpha = (int) (actor.getAppearance().getAlpha());
+                if (alpha < this.minimumAlpha) {
+                    alpha = this.minimumAlpha;
+                }
+                if (alpha > this.maximumAlpha) {
+                    alpha = this.maximumAlpha;
+                }
+                if (alpha >= 255) {
+
+                    // Fully opaque (normal role)
+                    actorSurface.blit(srcRect, destSurface, rect);
+
+                } else {
+
+                    if (alpha > 0 /* totally transparent */) {
+
+                        // Semi-transparent
+                        // Create a temp surface, and blit the current
+                        // contents of the screen onto it
+                        Surface tempSurface = new Surface(width, height, false);
+                        Rect tempRect = new Rect(0, 0, width, height);
+                        destSurface.blit(rect, tempSurface, tempRect);
+
+                        // Now blit the actor onto it
+                        Rect tempRect2 = new Rect(shiftX, shiftY, width, height);
+                        actorSurface.blit(tempRect2, tempSurface, tempRect);
+
+                        // Now blit the temp surface onto the screen,
+                        // with the correct amount of alpha
+                        tempSurface.setPerSurfaceAlpha(alpha);
+                        tempSurface.blit(destSurface, displayAtX, displayAtY);
+
+                        tempSurface.free();
+                    }
+
+                }
+
+            }
+        }
+
+    }
+        
     @Override
     public void onAdded( Stage stage, Actor actor )
     {

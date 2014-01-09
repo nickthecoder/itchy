@@ -1,9 +1,10 @@
-<scene showMouse="false" role="uk.co.nickthecoder.drunkinvaders.Level">
+<scene showMouse="false" role="uk.co.nickthecoder.drunkinvaders.Level" background="#000000ff">
+  <properties/>
   <layer name="background">
-    <actor costume="earth" x="0" y="0" direction="0.0" startEvent="default"/>
+    <actor costume="earth" x="0" y="0" direction="0.0" heading="0.0" startEvent="default" zOrder="1"/>
   </layer>
   <layer name="main">
-    <actor costume="ship" x="321" y="61" direction="90.0" startEvent="default">
+    <actor costume="ship" x="321" y="61" direction="90.0" heading="90.0" startEvent="default" zOrder="2">
       <property name="mass" value="1.0"/>
       <property name="vy" value="0.0"/>
       <property name="vx" value="0.0"/>
@@ -13,17 +14,17 @@
       <property name="shieldDischargeRate" value="0.01"/>
       <property name="oy" value="-1300.0"/>
     </actor>
-    <actor costume="shieldFactory" x="113" y="78" direction="7.594643368591445" startEvent="default">
+    <actor costume="shieldFactory" x="113" y="78" direction="7.594643368591445" heading="7.594643368591445" startEvent="default" zOrder="3">
       <property name="height" value="4"/>
       <property name="width" value="6"/>
       <property name="spacing" value="10.0"/>
     </actor>
-    <actor costume="shieldFactory" x="432" y="82" direction="-8.130102354155978" startEvent="default">
+    <actor costume="shieldFactory" x="432" y="82" direction="-8.130102354155978" heading="-8.130102354155978" startEvent="default" zOrder="4">
       <property name="height" value="4"/>
       <property name="width" value="6"/>
       <property name="spacing" value="10.0"/>
     </actor>
-    <actor costume="saucer" x="688" y="451" direction="-90.0" startEvent="default">
+    <actor costume="saucer" x="688" y="451" direction="-90.0" heading="-90.0" startEvent="default" zOrder="5">
       <property name="mass" value="1.0"/>
       <property name="fireOnceEvery" value="1.0"/>
       <property name="childrenCount" value="15"/>

@@ -164,6 +164,9 @@ public class AnimationsEditor extends SubEditor<AnimationResource>
                 }
             };
 
+        } else if (animation instanceof FramedAnimation) {
+            result = new FramedAnimationEditor(this.editor,this.getResources(),(FramedAnimation) animation);
+            
         } else {
             result = new AnimationEditor(this.editor, animation);
         }

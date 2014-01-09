@@ -7,7 +7,6 @@ package uk.co.nickthecoder.itchy.editor;
 import javax.script.ScriptException;
 
 import uk.co.nickthecoder.itchy.AbstractRole;
-import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.util.ClassName;
@@ -24,7 +23,7 @@ public class SceneDesignerRole extends AbstractRole
 
     public ClassName getRoleClassName()
     {
-        return Actor.getRoleClassName(this.actualRole);
+        return this.actualRole.getClassName();
     }
 
     @Override

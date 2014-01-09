@@ -114,6 +114,7 @@ public class FramedAnimation extends AbstractAnimation
             FramedAnimation result = (FramedAnimation) super.clone();
 
             result.frames = new ArrayList<Frame>();
+            result.readOnlyFrames = Collections.unmodifiableList(result.frames);
             for (Frame frame : this.frames) {
                 result.frames.add(frame.copy());
             }

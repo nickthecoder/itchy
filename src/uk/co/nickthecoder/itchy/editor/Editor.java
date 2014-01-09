@@ -203,8 +203,8 @@ public final class Editor extends Game
             }
 
         } catch (Exception e) {
-            new MessageBox("Save Failed", e).show();
             e.printStackTrace();
+            new MessageBox("Save Failed", e).show();
 
         } finally {
             if (messageBox != null) {

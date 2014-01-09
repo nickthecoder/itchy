@@ -84,10 +84,11 @@ public class Actor implements PropertySubject<Actor>
 
     public Actor( Costume costume, String poseName )
     {
+        // Note, that we only set the pose based on poseName, we do NOT set the animation, or
+        // play a sound. If an event should be played on birth, then it must be done explicitly
+        // by calling theActor.event(eventName) after theActor has been created.
         this(startPose(costume, poseName));
-
         this.costume = costume;
-        this.setDirection(this.getAppearance().getPose().getDirection());
     }
 
     public Actor( Pose pose )
@@ -424,13 +425,7 @@ public class Actor implements PropertySubject<Actor>
 
     public ClassName getRoleClassName()
     {
-        return getRoleClassName(this.role);
-    }
-
-    // TODO No longer needed
-    public static ClassName getRoleClassName( Role role )
-    {
-        return role.getClassName();
+        return this.role.getClassName();
     }
 
     public Appearance getAppearance()

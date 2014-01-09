@@ -47,16 +47,14 @@ Ship = Class({
     },
 
     warp: function() {
-    	this.vx = 0;
-    	this.vy = 0;
     	for (var i = 0; i < 3; i ++) {
     		new itchy.role.Explosion(this.actor)
     			.companion("warp")
-    			.spread(i*120, 360 + i*120).vx(this.vx).vy(this.vy).distance(300)
+    			.spread(i*120, 360 + i*120).vx(this.vx).vy(this.vy).distance(100)
     			.speed(-6,0).projectiles(20).projectilesPerTick(1).randomSpread(false).alpha(0).fade(-3)
     			.createActor();
     	}
-    	this.actor.deathEvent("fade");
+    	this.actor.event("fade");
     },
 
     tick: function() {
@@ -89,10 +87,6 @@ Ship = Class({
         
         if ( ! this.actor.pixelOverlap("deadly").isEmpty() ) {
             this.die();
-        }
-        var i = this.actor.pixelOverlap("shootable").iterator();
-        while (i.hasNext()) {
-            i.next().roleScript.shot(this);
         }
 
         // For debugging.

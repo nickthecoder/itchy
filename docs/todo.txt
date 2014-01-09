@@ -1,3 +1,10 @@
+
+Save an animation with delay/frames = 0 fails, but the error message throws an exception!!! - possibly Label's font not set
+    Catch the exception rather than let it crash the system
+    Fix the exception
+
+---
+
 Undo/Redo
 
     Trouble with null/blank values for colorize.
@@ -9,24 +16,7 @@ Undo/Redo
 
     Toolbar buttons
 
-When a js file imports another, remember the dependency, so that the dependant classes get re-loaded if the dependecy is reloaded.
-    e.g. If Moving.js is changed then Rock.js, Ship.js etc are reloaded.
-    Think about circular dependencies. 
-    When a script is asked if it needs reloading :
-        Create a set of its script and all of its dependencies (recursively)
-        Find the latest timestamp
-        Check its load timestamp with the latest timestamp, and if its older, then re-load.
-        Short-circuit if the 1st level depenencies is empty.
-
 Make the Role interface the actual useful thing i.e. remove as much as possible from AbstractRole.
-
-Surface.copy to use setEnableAlpha(false) rather than composite.
-    Is there a bug in setAlpha? If not, where is it?
-
-Drunk Invaders doesn't go to next level.
-
-All classes which have fluent API, create a subclass with just the fluent api,
-    and leave the main class without the fluent methods???
 
 Allow creation of new Role objects from Javascript i.e. create a ScriptedRole and the script in one go.
     Constructor takes the ScriptedRole, or creates it if undefined.
@@ -38,6 +28,9 @@ Bugs
 ====
 
 When testing a Rain scene, it doesn't use the normal high scores - is it using the editor's preferences?
+
+Surface.copy to use setEnableAlpha(false) rather than composite.
+    Is there a bug in setAlpha? If not, where is it?
 
 TODO
 ====
@@ -88,7 +81,7 @@ Texture should use the pose's offsetX,Y as its start point, not 0,0
 
 Explosion and Projectile don't work very well with text - See Gate.collected.
 
-When a costume has a font, it should inclue the colour and size too.
+When a costume has a font, it should include the colour and size too.
     And alignment?
     Companion would need a fontsize and color attributes???
     Talk should be simpler to use too.
@@ -101,8 +94,6 @@ Should Costumes have Makeup? If each jewel is given a Sparkle makeup, does it ma
 Costume editor to have filters on event name and resource type.
     i.e. show all Animations, or show all "death" events, or show all "death" Animations or show everything. 
     Should the filters stay as you flick from one Costume to another - Yes, probably.
-
-Update class diagrams (moved extras classes)
 
 Send to Asul
     package, test on windows. 
@@ -126,7 +117,6 @@ Cache the results of Makeup on Appearance.
 
 Test other animations not on the animations test page.
     Clip, heading, heading to, turn to,
-    Heading pointer Makeup?? Nah, just use a follower.
 
 Compound Role
     the editor knows about the interface, and adds a table under the Role ClassName.
@@ -147,6 +137,18 @@ Companion string names wont be renamed when a costume is renamed.
 
 Later
 =====
+
+Use JBox2D : http://www.jbox2d.org/
+
+
+When a js file imports another, remember the dependency, so that the dependent classes get re-loaded if the dependecy is reloaded.
+    e.g. If Moving.js is changed then Rock.js, Ship.js etc are reloaded.
+    Think about circular dependencies. 
+    When a script is asked if it needs reloading :
+        Create a set of its script and all of its dependencies (recursively)
+        Find the latest timestamp
+        Check its load timestamp with the latest timestamp, and if its older, then re-load.
+        Short-circuit if the 1st level depenencies is empty.
 
 GUIView.keyUp does nothing - is this ok?
 
@@ -188,22 +190,11 @@ Drag and drop to move and reorder animation in the editor.
     
 Explanatory games
     e.g. Showing the different between heading and direction.
-    
-Create a game from scratch, deliberately making syntax errors in the code.
-    Fix any bugs and improve the UI along the way. 
 
 Catch all ScriptExceptions
     Report them to ScriptErrorLog, which will also write to stderr (not as a stack trace)
     An icon on the popup Layer shows when a new error has occurred. Click to open the log viewer.
         "Clear" button will remove the icon from the popup layer. 
-
-Check that a broken script doesn't cause problems :
-    Costume Properties
-    Behaviour in editor
-    Behaviour in designer
-    SceneBehaviour in editor
-    SceneBehaviour in designer
-    Game
 
 Later
 =====

@@ -702,7 +702,7 @@ public class SceneDesigner implements MouseListener, KeyListener
     {
         SceneDesignerRole sdb = (SceneDesignerRole) this.currentActor.getRole();
 
-        this.roleClassName = new ClassNameBox(this.editor.getScriptManager(), Actor.getRoleClassName(sdb.actualRole), Role.class);
+        this.roleClassName = new ClassNameBox(this.editor.getScriptManager(), sdb.actualRole.getClassName(), Role.class);
 
         this.roleClassName.addChangeListener(new ComponentChangeListener() {
 

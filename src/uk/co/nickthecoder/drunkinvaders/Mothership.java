@@ -87,13 +87,17 @@ public class Mothership extends Alien
 
         alien.vx = Util.randomBetween(-0.2, 0.2) + this.vx;
         alienActor.moveTo(getActor().getX(), getActor().getY());
+        System.out.println( "Was " + alienActor.getX() + "," + alienActor.getY());
         if (getActor().getY() < 200) {
-            alienActor.moveForwards(5, 0);
+            alienActor.moveBy(0, 10);
             alien.vy = this.vy + 1;
         } else {
-            alienActor.moveForwards(-5, 0);
+            alienActor.moveBy(0, -10);
             alien.vy = this.vy - 1;
         }
+        System.out.println( "Now" + alienActor.getX() + "," + alienActor.getY());
+
+        System.out.println("child vy " + alien.vy );
 
         alienActor.setZOrder(getActor().getZOrder());
         getActor().getStage().add(alienActor);

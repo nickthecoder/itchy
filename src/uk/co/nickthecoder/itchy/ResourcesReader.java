@@ -394,7 +394,7 @@ public class ResourcesReader
 
             int delay = frameTag.getOptionalIntAttribute("delay", 1);
             if (delay < 1) {
-                throw new XMLException("Delay must be greater than 1");
+                throw new XMLException("Delay must be greater than 0");
             }
             String poseName = frameTag.getAttribute("pose");
             Pose pose = this.resources.getPose(poseName);

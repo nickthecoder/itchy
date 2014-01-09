@@ -105,8 +105,7 @@
     </animation>
     <animation name="fadeOut">
       <sequence loops="1" sequence="true">
-        <forwards ease="linear" forwards="0.0" sidewards="0.0" ticks="30"/>
-        <alpha ease="linear" target="0.0" ticks="50"/>
+        <alpha ease="linear" target="0.0" ticks="20"/>
       </sequence>
     </animation>
     <animation name="gameOverReveal">

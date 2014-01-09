@@ -55,7 +55,6 @@ public class Alien extends Bouncy implements Shootable
                 getActor().event(this.tock ? "tock" : "tick");
             }
         }
-
         if (Util.randomOnceEvery(this.fireOnceEvery)) {
             this.fire();
         }
@@ -73,12 +72,18 @@ public class Alien extends Bouncy implements Shootable
 
     public void fire()
     {
+        if (getActor().getAnimation() != null) {
+            // Can't fire while the alien is growing from the mothership.
+            return;
+        }
         this.event("fire");
 
         Actor bullet = new Actor(DrunkInvaders.director.getGame().resources.getCostume("bomb"));
+        bullet.event("default");
         bullet.moveTo(getActor());
         bullet.setDirection(getActor().getAppearance().getDirection());
         DrunkInvaders.director.mainStage.addTop(bullet);
+        // Scaled up aliens have scaled up bullets
         bullet.moveForwards(15 * getActor().getAppearance().getScale());
         bullet.getAppearance().setScale(getActor().getAppearance().getScale());
         bullet.setRole(new Bullet("killable"));

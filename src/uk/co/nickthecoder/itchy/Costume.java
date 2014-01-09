@@ -430,4 +430,14 @@ public class Costume implements Cloneable
             return null;
         }
     }
+    
+    public String toString()
+    {
+        try {
+            CostumeResource cr = Itchy.getGame().resources.getCostumeResource(this);
+            return "Costume " + cr.getName();
+        } catch (Exception e) {
+            return "Costume (not named in resources)";
+        }
+    }
 }

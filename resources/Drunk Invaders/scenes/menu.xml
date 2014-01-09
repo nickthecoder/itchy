@@ -6,7 +6,7 @@
   <layer name="main">
     <actor costume="alien3" x="163" y="365" direction="-90.0" heading="-90.0" startEvent="default" zOrder="2" colorize="#00ff0022" scale="6.107142857142857">
       <property name="mass" value="1.0"/>
-      <property name="fireOnceEvery" value="3.0"/>
+      <property name="fireOnceEvery" value="15.0"/>
       <property name="vy" value="0.0"/>
       <property name="vx" value="0.0"/>
       <property name="shotsRequired" value="100"/>

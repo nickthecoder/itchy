@@ -42,7 +42,7 @@ Play = new Class({
     	this.rocks += diff;
     	if (this.rocks == 0) {
 			if ((this.ship != null) && (this.ship.actor.isAlive())) {
-    			this.endTimer= new itchy.extras.Timer.createTimerSeconds(3);
+    			this.endTimer = new itchy.extras.Timer.createTimerSeconds(3);
     			this.ship.warp();
     	    }
     	}
