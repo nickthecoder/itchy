@@ -5,9 +5,23 @@
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
-package uk.co.nickthecoder.itchy;
+package uk.co.nickthecoder.itchy.collision;
 
-public interface CollisionTest
+import uk.co.nickthecoder.itchy.Actor;
+
+public class BoundingBoxCollisionTest implements CollisionTest
 {
-    public boolean collided( Actor a, Actor b );
+    public static final BoundingBoxCollisionTest instance = new BoundingBoxCollisionTest();
+    
+    private BoundingBoxCollisionTest()
+    {
+    }
+    
+    @Override
+    public boolean collided( Actor a, Actor b )
+    {
+        return a.overlapping(b);
+    }
+
 }
+

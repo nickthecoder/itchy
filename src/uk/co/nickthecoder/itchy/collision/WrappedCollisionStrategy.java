@@ -5,9 +5,13 @@
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
-package uk.co.nickthecoder.itchy;
+package uk.co.nickthecoder.itchy.collision;
 
 import java.util.Set;
+
+import uk.co.nickthecoder.itchy.Actor;
+import uk.co.nickthecoder.itchy.Role;
+import uk.co.nickthecoder.itchy.Wrapped;
 
 /**
  * Checks for collisions within a world where the left edge is joined to the right,

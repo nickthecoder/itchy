@@ -5,7 +5,9 @@
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
-package uk.co.nickthecoder.itchy;
+package uk.co.nickthecoder.itchy.collision;
+
+import uk.co.nickthecoder.itchy.Actor;
 
 public class PixelCollisionTest implements CollisionTest
 {

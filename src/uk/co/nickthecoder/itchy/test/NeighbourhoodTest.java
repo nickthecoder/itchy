@@ -25,10 +25,10 @@ import uk.co.nickthecoder.itchy.Costume;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.PlainRole;
 import uk.co.nickthecoder.itchy.Resources;
-import uk.co.nickthecoder.itchy.neighbourhood.Neighbourhood;
-import uk.co.nickthecoder.itchy.neighbourhood.SinglePointCollisionStrategy;
-import uk.co.nickthecoder.itchy.neighbourhood.Square;
-import uk.co.nickthecoder.itchy.neighbourhood.StandardNeighbourhood;
+import uk.co.nickthecoder.itchy.collision.Neighbourhood;
+import uk.co.nickthecoder.itchy.collision.SinglePointCollisionStrategy;
+import uk.co.nickthecoder.itchy.collision.Square;
+import uk.co.nickthecoder.itchy.collision.StandardNeighbourhood;
 import uk.co.nickthecoder.jame.Video;
 
 public class NeighbourhoodTest

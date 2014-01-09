@@ -9,6 +9,8 @@ import java.util.Set;
 
 import uk.co.nickthecoder.itchy.animation.Animation;
 import uk.co.nickthecoder.itchy.animation.CompoundAnimation;
+import uk.co.nickthecoder.itchy.collision.BruteForceCollisionStrategy;
+import uk.co.nickthecoder.itchy.collision.CollisionStrategy;
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
 import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.PropertySubject;
