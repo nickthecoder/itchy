@@ -53,7 +53,7 @@ class Director(AbstractDirector) :
             self.getGame().pause.unpause()
             
         if sceneName == "menu" and self.getGame().getSceneName() == "menu" :
-            return true;
+            return True;
         
         transition = SceneTransition.fade();
         if self.getGame().getSceneName() == "menu" :

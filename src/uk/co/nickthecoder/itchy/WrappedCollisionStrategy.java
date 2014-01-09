@@ -34,82 +34,50 @@ public class WrappedCollisionStrategy implements CollisionStrategy
         this.wrappedCollisionStrategy = cs;
     }
 
+
+    private static final String[] EMPTY = {};
+    
     @Override
-    public Set<Role> overlapping( Actor actor, String[] includeTags, String[] excludeTags )
+    public Set<Role> collisions( Actor actor, String... includeTags )
+    {
+        return collisions(actor, includeTags, EMPTY );
+    }
+    
+    @Override
+    public Set<Role> collisions( Actor actor, String[] includeTags, String[] excludeTags )
     {
         wrapped.normalise(actor);
 
-        Set<Role> result = overlapping2( actor, includeTags, excludeTags );
+        Set<Role> result = collisions2( actor, includeTags, excludeTags );
         
         if (wrapped.overlappingLeft(actor)) {
             actor.setX( actor.getX() + wrapped.getWidth() );
-            result.addAll( overlapping2(actor, includeTags, excludeTags) );
+            result.addAll( collisions2(actor, includeTags, excludeTags) );
             actor.setX( actor.getX() - wrapped.getWidth() );
         }
         
         if (wrapped.overlappingRight(actor)) {
             actor.setX( actor.getX() - wrapped.getWidth() );
-            result.addAll( overlapping2(actor, includeTags, excludeTags) );   
+            result.addAll( collisions2(actor, includeTags, excludeTags) );   
             actor.setX( actor.getX() + wrapped.getWidth() );
         }
         
         return result;
     }
     
-    public Set<Role> overlapping2( Actor actor, String[] includeTags, String[] excludeTags )
+    public Set<Role> collisions2( Actor actor, String[] includeTags, String[] excludeTags )
     {
-        Set<Role> result = wrappedCollisionStrategy.overlapping( actor, includeTags, excludeTags );
+        Set<Role> result = wrappedCollisionStrategy.collisions( actor, includeTags, excludeTags );
         
         if (wrapped.overlappingBottom(actor)) {
             actor.setY( actor.getY() + wrapped.getHeight() );
-            result.addAll( wrappedCollisionStrategy.overlapping(actor, includeTags, excludeTags) );            
-            actor.setY( actor.getY() - wrapped.getHeight() );
-        }
-        
-        if (wrapped.overlappingTop(actor)) {
-            actor.setY( actor.getY() - wrapped.getHeight() );
-            result.addAll( wrappedCollisionStrategy.overlapping(actor, includeTags, excludeTags) );            
-            actor.setY( actor.getY() - wrapped.getHeight() );
-        }
-        
-        return result;
-    }
-
-    @Override
-    public Set<Role> pixelOverlap( Actor actor, String[] includeTags, String[] excludeTags )
-    {
-        wrapped.normalise(actor);
-
-        Set<Role> result = pixelOverlap2( actor, includeTags, excludeTags );
-        
-        if (wrapped.overlappingLeft(actor)) {
-            actor.setX( actor.getX() + wrapped.getWidth() );
-            result.addAll( pixelOverlap2(actor, includeTags, excludeTags) );
-            actor.setX( actor.getX() - wrapped.getWidth() );
-        }
-        
-        if (wrapped.overlappingRight(actor)) {
-            actor.setX( actor.getX() - wrapped.getWidth() );
-            result.addAll( pixelOverlap2(actor, includeTags, excludeTags) );   
-            actor.setX( actor.getX() + wrapped.getWidth() );
-        }
-        
-        return result;
-    }
-    
-    public Set<Role> pixelOverlap2( Actor actor, String[] includeTags, String[] excludeTags )
-    {
-        Set<Role> result = wrappedCollisionStrategy.overlapping( actor, includeTags, excludeTags );
-        
-        if (wrapped.overlappingBottom(actor)) {
-            actor.setY( actor.getY() + wrapped.getHeight() );
-            result.addAll( wrappedCollisionStrategy.pixelOverlap(actor, includeTags, excludeTags) );            
+            result.addAll( wrappedCollisionStrategy.collisions(actor, includeTags, excludeTags) );            
             actor.setY( actor.getY() - wrapped.getHeight() );
         }
 
         if (wrapped.overlappingTop(actor)) {
             actor.setY( actor.getY() - wrapped.getHeight() );
-            result.addAll( wrappedCollisionStrategy.pixelOverlap(actor, includeTags, excludeTags) );            
+            result.addAll( wrappedCollisionStrategy.collisions(actor, includeTags, excludeTags) );            
             actor.setY( actor.getY() - wrapped.getHeight() );
         }
         

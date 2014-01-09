@@ -28,8 +28,8 @@ public interface CollisionStrategy
 
     public void remove();
 
-    public Set<Role> overlapping( Actor actor, String[] includeTags, String[] excludeTags );
-
-    public Set<Role> pixelOverlap( Actor actor, String[] includeTags, String[] excludeTags );
+    public Set<Role> collisions( Actor actor, String... includeTags );
+    
+    public Set<Role> collisions( Actor actor, String[] includeTags, String[] excludeTags );
 
 }

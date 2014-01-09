@@ -25,26 +25,20 @@ public class DebugCollisionStrategy extends ActorCollisionStrategy
         this.strategy2 = b;
     }
 
-    @Override
-    public Set<Role> overlapping( Actor actor, String[] includeTags, String[] excludeTags )
-    {
-        Set<Role> results1 = this.strategy1.overlapping(includeTags, excludeTags);
-        Set<Role> results2 = this.strategy2.overlapping(includeTags, excludeTags);
 
-        if (!results1.equals(results2)) {
-            System.err.println("Collision failed for " + getActor());
-            System.err.println("Results1 : " + results1);
-            System.err.println("Results2 : " + results2);
-            DrunkInvaders.director.debug();
-        }
-        return results1;
+    private static final String[] EMPTY = {};
+    
+    @Override
+    public Set<Role> collisions( Actor actor, String... includeTags )
+    {
+        return collisions(actor, includeTags, EMPTY );
     }
-
+    
     @Override
-    public Set<Role> pixelOverlap( Actor actor, String[] includeTags, String[] excludeTags )
+    public Set<Role> collisions( Actor actor, String[] includeTags, String[] excludeTags )
     {
-        Set<Role> results1 = this.strategy1.pixelPixelOverlap(includeTags, excludeTags);
-        Set<Role> results2 = this.strategy2.pixelPixelOverlap(includeTags, excludeTags);
+        Set<Role> results1 = this.strategy1.collisions(includeTags, excludeTags);
+        Set<Role> results2 = this.strategy2.collisions(includeTags, excludeTags);
 
         if (!results1.equals(results2)) {
             System.err.println("Pixel Collision failed for " + getActor());

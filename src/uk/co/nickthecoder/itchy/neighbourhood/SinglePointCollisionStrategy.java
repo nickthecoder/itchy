@@ -10,6 +10,8 @@ import java.util.Set;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.ActorCollisionStrategy;
 import uk.co.nickthecoder.itchy.BruteForceCollisionStrategy;
+import uk.co.nickthecoder.itchy.CollisionTest;
+import uk.co.nickthecoder.itchy.PixelCollisionTest;
 import uk.co.nickthecoder.itchy.Role;
 
 /**
@@ -26,11 +28,18 @@ import uk.co.nickthecoder.itchy.Role;
 
 public class SinglePointCollisionStrategy extends ActorCollisionStrategy
 {
+    protected CollisionTest collisionTest;
+
     private Neighbourhood neighbourhood;
 
     private Square neighbourhoodSquare;
 
     public SinglePointCollisionStrategy( Actor actor, Neighbourhood neighbourhood )
+    {
+        this(PixelCollisionTest.instance, actor, neighbourhood);
+    }
+
+    public SinglePointCollisionStrategy( CollisionTest collisionTest, Actor actor, Neighbourhood neighbourhood )
     {
         super(actor);
         this.neighbourhood = neighbourhood;
@@ -64,36 +73,16 @@ public class SinglePointCollisionStrategy extends ActorCollisionStrategy
         }
     }
 
+    private static final String[] EMPTY = {};
+    
     @Override
-    public Set<Role> overlapping( Actor source, String[] includeTags, String[] excludeTags )
+    public Set<Role> collisions( Actor actor, String... includeTags )
     {
-        Set<Role> results = new HashSet<Role>();
-
-        for (Square square : this.neighbourhoodSquare.getNeighbouringSquares()) {
-            for (Actor actor : square.getOccupants()) {
-                Role role = actor.getRole();
-
-                if ((actor != source) && (!results.contains(actor))) {
-                    if (!BruteForceCollisionStrategy.exclude(role, excludeTags)) {
-                        for (String includeTag : includeTags) {
-                            if (role.hasTag(includeTag)) {
-
-                                if (source.overlapping(actor)) {
-                                    results.add(role);
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        return results;
+        return collisions(actor, includeTags, EMPTY );
     }
-
+    
     @Override
-    public Set<Role> pixelOverlap( Actor source, String[] includeTags, String[] excludeTags )
+    public Set<Role> collisions( Actor source, String[] includeTags, String[] excludeTags )
     {
         Set<Role> results = new HashSet<Role>();
 
@@ -107,7 +96,7 @@ public class SinglePointCollisionStrategy extends ActorCollisionStrategy
                         for (String includeTag : includeTags) {
                             if (role.hasTag(includeTag)) {
 
-                                if (source.pixelOverlap(actor)) {
+                                if (this.collisionTest.collided(source, actor)) {
                                     results.add(role);
                                     break;
                                 }

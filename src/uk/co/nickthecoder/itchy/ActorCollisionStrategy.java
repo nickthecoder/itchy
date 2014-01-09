@@ -13,7 +13,6 @@ import java.util.Set;
  */
 public abstract class ActorCollisionStrategy implements CollisionStrategy
 {
-
     protected Actor actor;
 
     public ActorCollisionStrategy( Actor actor )
@@ -26,26 +25,14 @@ public abstract class ActorCollisionStrategy implements CollisionStrategy
         return this.actor;
     }
 
-    public Set<Role> overlapping( String... tags )
+    public Set<Role> collisions( String... tags )
     {
-        return this.overlapping(this.actor, tags, null);
-
+        return this.collisions(this.actor, tags, null);
     }
 
-    public Set<Role> pixelOverlap( String... tags )
+    public Set<Role> collisions( String[] includeTags, String[] excludeTags )
     {
-        return this.pixelOverlap(this.actor, tags, null);
-    }
-
-    public Set<Role> overlapping( String[] includeTags, String[] excludeTags )
-    {
-        return this.overlapping(this.actor, includeTags, excludeTags);
-
-    }
-
-    public Set<Role> pixelPixelOverlap( String[] includeTags, String[] excludeTags )
-    {
-        return this.pixelOverlap(this.actor, includeTags, excludeTags);
+        return this.collisions(this.actor, includeTags, excludeTags);
     }
 
     @Override

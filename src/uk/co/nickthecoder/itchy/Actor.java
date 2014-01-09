@@ -73,7 +73,7 @@ public class Actor implements PropertySubject<Actor>
 
     private String startEvent = "default";
 
-    private CollisionStrategy collisionStrategy = BruteForceCollisionStrategy.singleton;
+    private CollisionStrategy collisionStrategy = BruteForceCollisionStrategy.pixelCollision;
 
     private boolean fullyCreated = false;
 
@@ -695,37 +695,22 @@ public class Actor implements PropertySubject<Actor>
     public void setCollisionStrategy( CollisionStrategy collisionStrategy )
     {
         this.collisionStrategy.remove();
-        this.collisionStrategy = collisionStrategy == null ? BruteForceCollisionStrategy.singleton : collisionStrategy;
+        this.collisionStrategy = collisionStrategy == null ? BruteForceCollisionStrategy.pixelCollision : collisionStrategy;
     }
 
     public Set<Role> pixelOverlap( String tag )
     {
-        return this.collisionStrategy.pixelOverlap(this, new String[] { tag }, null);
+        return this.collisionStrategy.collisions(this, new String[] { tag }, null);
     }
 
     public Set<Role> pixelOverlap( String... tags )
     {
-        return this.collisionStrategy.pixelOverlap(this, tags, null);
+        return this.collisionStrategy.collisions(this, tags, null);
     }
 
     public Set<Role> pixelOverlap( String[] including, String[] excluding )
     {
-        return this.collisionStrategy.pixelOverlap(this, including, excluding);
-    }
-
-    public Set<Role> overlapping( String tag )
-    {
-        return this.collisionStrategy.overlapping(this, new String[] { tag }, null);
-    }
-
-    public Set<Role> overlapping( String... tags )
-    {
-        return this.collisionStrategy.overlapping(this, tags, null);
-    }
-
-    public Set<Role> overlapping( String[] including, String[] excluding )
-    {
-        return this.collisionStrategy.overlapping(this, including, excluding);
+        return this.collisionStrategy.collisions(this, including, excluding);
     }
 
     @Property(label = "Z Order")

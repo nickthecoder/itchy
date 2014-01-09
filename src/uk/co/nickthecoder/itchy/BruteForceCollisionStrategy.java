@@ -13,6 +13,20 @@ import java.util.Set;
 
 public class BruteForceCollisionStrategy implements CollisionStrategy
 {
+    public static final BruteForceCollisionStrategy pixelCollision = new BruteForceCollisionStrategy();
+    
+    private CollisionTest collisionTest;
+    
+    public BruteForceCollisionStrategy()
+    {
+        this( PixelCollisionTest.instance );
+    }
+    
+    public BruteForceCollisionStrategy( CollisionTest ct )
+    {
+        this.collisionTest = ct;
+    }
+    
     @Override
     public void update()
     {
@@ -50,10 +64,16 @@ public class BruteForceCollisionStrategy implements CollisionStrategy
         return false;
     }
 
-    public static final BruteForceCollisionStrategy singleton = new BruteForceCollisionStrategy();
-
+    private static final String[] EMPTY = {};
+    
     @Override
-    public Set<Role> overlapping( Actor source, String[] includeTags, String[] excludeTags )
+    public Set<Role> collisions( Actor actor, String... includeTags )
+    {
+        return collisions(actor, includeTags, EMPTY );
+    }
+    
+    @Override
+    public Set<Role> collisions( Actor source, String[] includeTags, String[] excludeTags )
     {
         Set<Role> results = new HashSet<Role>();
         for (String tag : includeTags) {
@@ -62,7 +82,7 @@ public class BruteForceCollisionStrategy implements CollisionStrategy
 
                 if ((other != source) && (!exclude(otherRole, excludeTags))) {
                     if (!results.contains(other)) {
-                        if (source.overlapping(other)) {
+                        if (this.collisionTest.collided(source,other)) {
                             results.add(otherRole);
                         }
                     }
@@ -72,24 +92,5 @@ public class BruteForceCollisionStrategy implements CollisionStrategy
         return results;
     }
 
-    @Override
-    public Set<Role> pixelOverlap( Actor source, String[] includeTags, String[] excludeTags )
-    {
-        Set<Role> results = new HashSet<Role>();
-        for (String tag : includeTags) {
-            for (Role otherRole : AbstractRole.allByTag(tag)) {
-                Actor other = otherRole.getActor();
-
-                if ((other != source) && (!exclude(otherRole, excludeTags))) {
-                    if (!results.contains(other)) {
-                        if (source.pixelOverlap(other)) {
-                            results.add(otherRole);
-                        }
-                    }
-                }
-            }
-        }
-        return results;
-    }
 
 }
