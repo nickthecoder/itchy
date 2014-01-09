@@ -45,6 +45,7 @@ class Ship(Moving) :
 
         for i in range( 0, Itchy.getGame().getDirector().lives ) :
             actor = self.getActor().createCompanion("life")
+            Itchy.getGame().getDirector().hudStage.add(actor)
             actor.moveTo( 30 + i * 40 , 560 )
             if Itchy.getGame().getSceneName() == "1" :
                 actor.event("appear");

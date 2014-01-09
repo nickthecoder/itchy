@@ -511,21 +511,22 @@ public class SceneDesigner implements MouseListener, KeyListener
         toolbar.addChild(actorBottom);
 
         Button actorUpLayer = createButton("moveUpLayer", "Up a Layer");
-        actorBottom.addActionListener(new ActionListener() {
+        actorUpLayer.addActionListener(new ActionListener() {
             @Override
             public void action()
             {
-                onActorUpLayer();
+                System.out.println("upLayer.action");
+                onActorUpStage();
             }
         });
         toolbar.addChild(actorUpLayer);
 
         Button actorDownLayer = createButton("moveDownLayer", "Down a Layer");
-        actorBottom.addActionListener(new ActionListener() {
+        actorDownLayer.addActionListener(new ActionListener() {
             @Override
             public void action()
             {
-                onActorDownLayer();
+                onActorDownStage();
             }
         });
         toolbar.addChild(actorDownLayer);
@@ -1084,11 +1085,11 @@ public class SceneDesigner implements MouseListener, KeyListener
                 return true;
 
             } else if (event.symbol == Keys.PAGEUP) {
-                onActorUpLayer();
+                onActorUpStage();
                 return true;
 
             } else if (event.symbol == Keys.PAGEDOWN) {
-                onActorDownLayer();
+                onActorDownStage();
                 return true;
 
             } else if (event.symbol == Keys.o) {
@@ -1503,12 +1504,14 @@ public class SceneDesigner implements MouseListener, KeyListener
 
     private Stage getStageBelow( Stage stage )
     {
-        View result = null;
-        for (View tmpStage : this.designViews.getChildren()) {
-            if (stage == tmpStage) {
-                return (Stage) result;
+        Stage result = null;
+        for (View view : this.designViews.getChildren()) {
+            if (view instanceof StageView) {
+                if (((StageView)view).getStage() == stage) {
+                    return result;
+                }
+                result = ((StageView)view).getStage();
             }
-            result = tmpStage;
         }
 
         return null;
@@ -1517,12 +1520,15 @@ public class SceneDesigner implements MouseListener, KeyListener
     private Stage getStageAbove( Stage stage )
     {
         boolean found = false;
-        for (View tmpStage : this.designViews.getChildren()) {
-            if (found) {
-                return (Stage) tmpStage;
-            }
-            if (stage == tmpStage) {
-                found = true;
+        for (View view : this.designViews.getChildren()) {
+            if (view instanceof StageView) {
+                if (found) {
+                    return ((StageView) view).getStage();
+                }
+            
+                if (stage == ((StageView) view).getStage()) {
+                    found = true;
+                }
             }
         }
 
@@ -1584,10 +1590,25 @@ public class SceneDesigner implements MouseListener, KeyListener
         }
     }
 
-    private void onActorUpLayer()
+    private void onActorUpStage()
     {
         if ((this.mode == MODE_SELECT) && (this.currentActor != null)) {
             Stage otherStage = getStageAbove(this.currentActor.getStage());
+            System.out.println("Moving from stage " + this.currentActor.getStage() + " to " + otherStage);
+
+            if (otherStage != null) {
+                this.currentActor.getStage().remove(this.currentActor);
+                otherStage.add(this.currentActor);
+                updateLayersTable();
+            }
+        }
+    }
+
+    private void onActorDownStage()
+    {
+        if ((this.mode == MODE_SELECT) && (this.currentActor != null)) {
+            Stage otherStage = getStageBelow(this.currentActor.getStage());
+            System.out.println("Moving from stage " + this.currentActor.getStage() + " to " + otherStage);
 
             if (otherStage != null) {
                 this.currentActor.getStage().remove(this.currentActor);
@@ -1614,19 +1635,6 @@ public class SceneDesigner implements MouseListener, KeyListener
         if ((this.mode == MODE_SELECT) && (this.currentActor != null)) {
             this.currentActor.getAppearance().setScale(1);
             selectActor(this.currentActor);
-        }
-    }
-
-    private void onActorDownLayer()
-    {
-        if ((this.mode == MODE_SELECT) && (this.currentActor != null)) {
-            Stage otherStage = getStageBelow(this.currentActor.getStage());
-
-            if (otherStage != null) {
-                this.currentActor.getStage().remove(this.currentActor);
-                otherStage.add(this.currentActor);
-                updateLayersTable();
-            }
         }
     }
 
