@@ -8,7 +8,6 @@ import java.text.DecimalFormat;
 import java.text.Format;
 
 import uk.co.nickthecoder.itchy.Itchy;
-import uk.co.nickthecoder.jame.event.Event;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.Keys;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
@@ -90,11 +89,11 @@ public class DoubleBox extends EntryBox<DoubleBox>
                 amount = 0.1;
             }
 
-            if (mbe.button == Event.BUTTON_WHEELUP) {
+            if (mbe.button == MouseButtonEvent.BUTTON_WHEELUP) {
                 this.adjust(amount);
                 return true;
 
-            } else if (mbe.button == Event.BUTTON_WHEELDOWN) {
+            } else if (mbe.button == MouseButtonEvent.BUTTON_WHEELDOWN) {
                 this.adjust(-amount);
                 return true;
             }

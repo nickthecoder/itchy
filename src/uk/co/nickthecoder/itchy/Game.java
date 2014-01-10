@@ -31,6 +31,7 @@ import uk.co.nickthecoder.jame.event.Keys;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 import uk.co.nickthecoder.jame.event.QuitEvent;
+import uk.co.nickthecoder.jame.event.WindowEvent;
 
 /**
  * Game is one of the core classes within Itchy, it is the central point around which all the other pieces work. As a games designer, you do
@@ -505,9 +506,8 @@ public class Game
                 return;
             }
             Itchy.terminate();
-        }
 
-        if (event instanceof KeyboardEvent) {
+        } else if (event instanceof KeyboardEvent) {
             KeyboardEvent ke = (KeyboardEvent) event;
 
             if (ke.isPressed()) {
@@ -553,9 +553,9 @@ public class Game
                     return;
                 }
             }
-        }
 
-        if (event instanceof MouseButtonEvent) {
+        } else if (event instanceof MouseButtonEvent) {
+
             MouseButtonEvent mbe = (MouseButtonEvent) event;
 
             if (mbe.isPressed()) {
@@ -607,9 +607,9 @@ public class Game
                     return;
                 }
             }
-        }
 
-        if (event instanceof MouseMotionEvent) {
+        } else if (event instanceof MouseMotionEvent) {
+
             MouseMotionEvent mme = (MouseMotionEvent) event;
 
             if (this.mouse.getMousePointer() != null) {
@@ -634,6 +634,20 @@ public class Game
                 this.mouseOwner.onMouseMove(mme);
                 return;
             }
+        } else if ( event instanceof WindowEvent ) {
+            
+            WindowEvent we = (WindowEvent) event;
+            if (this.director.onWindowEvent( we )) {
+                return;
+            }
+            // If the director hasn't handled mouse focus, then hide fancy mouse pointers when the
+            // mouse leaves the window, and show it when it returns.
+            if (we.lostMouseFocus()) {
+                this.mouse.onLostMouseFocus();
+            } else if (we.gainedMouseFocus()) {
+                this.mouse.onGainedMouseFocus();
+            }
+            return;
         }
     }
 

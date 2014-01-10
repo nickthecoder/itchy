@@ -6,6 +6,7 @@ package uk.co.nickthecoder.itchy.extras;
 
 import uk.co.nickthecoder.itchy.Mouse;
 import uk.co.nickthecoder.itchy.MousePointer;
+import uk.co.nickthecoder.itchy.Stage;
 import uk.co.nickthecoder.jame.Video;
 
 /**
@@ -45,11 +46,34 @@ public class SimpleMouse implements Mouse
     {
         this.regularMousePointer = value;
         Video.showMousePointer(value);
+        if (value && this.mousePointer != null) {
+            this.mousePointer.getActor().kill();
+            this.mousePointer = null;
+        }
     }
 
     @Override
     public void onActivate()
     {
         Video.showMousePointer(this.regularMousePointer);
+    }
+
+    private Stage mouseStage;
+    
+    @Override
+    public void onGainedMouseFocus()
+    {
+        if ((this.mousePointer != null) && (this.mousePointer.getActor() != null)) {
+            this.mousePointer.getActor().setStage(this.mouseStage);
+        }
+    }
+
+    @Override
+    public void onLostMouseFocus()
+    {
+        if ((this.mousePointer != null) && (this.mousePointer.getActor() != null)) {
+            this.mouseStage = this.mousePointer.getActor().getStage();
+            this.mousePointer.getActor().setStage(null);
+        }        
     }
 }

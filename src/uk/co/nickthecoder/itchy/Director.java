@@ -6,7 +6,7 @@ package uk.co.nickthecoder.itchy;
 
 import java.util.prefs.Preferences;
 
-public interface Director extends InputListener, QuitListener, MessageListener
+public interface Director extends InputListener, QuitListener, MessageListener, WindowListener
 {
     public void attach( Game game );
 

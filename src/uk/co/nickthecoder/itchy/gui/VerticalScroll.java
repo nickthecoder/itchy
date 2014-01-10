@@ -6,7 +6,6 @@ package uk.co.nickthecoder.itchy.gui;
 
 import uk.co.nickthecoder.itchy.GraphicsContext;
 import uk.co.nickthecoder.jame.Rect;
-import uk.co.nickthecoder.jame.event.Event;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.Keys;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
@@ -66,10 +65,10 @@ public class VerticalScroll extends Container implements Layout
             return true;
         }
 
-        if (mbe.button == Event.BUTTON_WHEELUP) {
+        if (mbe.button == MouseButtonEvent.BUTTON_WHEELUP) {
             this.scrollBy(-50);
             return true;
-        } else if (mbe.button == Event.BUTTON_WHEELDOWN) {
+        } else if (mbe.button == MouseButtonEvent.BUTTON_WHEELDOWN) {
             this.scrollBy(50);
             return true;
         }

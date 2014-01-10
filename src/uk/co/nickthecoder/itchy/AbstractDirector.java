@@ -10,6 +10,7 @@ import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
+import uk.co.nickthecoder.jame.event.WindowEvent;
 
 public abstract class AbstractDirector implements Director
 {
@@ -104,6 +105,12 @@ public abstract class AbstractDirector implements Director
     {
         Itchy.terminate();
         return true;
+    }
+    
+    public boolean onWindowEvent( WindowEvent event )
+    {
+        // Do nothing
+        return false;
     }
 
     @Override

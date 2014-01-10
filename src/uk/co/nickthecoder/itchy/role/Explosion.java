@@ -111,7 +111,9 @@ public class Explosion extends Companion<Explosion>
 
     public String projectileEventName;
 
-    public boolean follow = false;;
+    public boolean follow = false;
+    
+    public boolean dependent = false;
 
     /**
      * The equivalent of : <code>new Explosion(role.getActor())</code>
@@ -522,6 +524,18 @@ public class Explosion extends Companion<Explosion>
         return this;
     }
 
+    public Explosion dependent()
+    {
+        this.dependent = true;
+        return this;
+    }
+
+    public Explosion dependent( boolean value )
+    {
+        this.dependent = value;
+        return this;
+    }
+
     /**
      * Creates the Projectile objects and then dies. Unless projectilesPerClick is called, this will only tick once, creating all of the
      * Projectiles in one go.
@@ -529,6 +543,11 @@ public class Explosion extends Companion<Explosion>
     @Override
     public void tick()
     {
+        if (dependent && this.source.isDead()) {
+            this.getActor().kill();
+            return;
+        }
+
         if (this.follow) {
             getActor().moveTo(this.parent);
             getActor().moveBy(this.offsetX, this.offsetY);

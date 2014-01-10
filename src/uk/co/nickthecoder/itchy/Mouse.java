@@ -15,4 +15,8 @@ public interface Mouse
     public void showRegularMousePointer( boolean value );
 
     public void onActivate();
+    
+    public void onGainedMouseFocus();
+    
+    public void onLostMouseFocus();
 }

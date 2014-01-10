@@ -79,13 +79,22 @@ class Director(AbstractDirector) :
 
     def addPoints(self, points ) :
         self.score += points;
-    
+
+    def onWindowEvent(self, event) :
+        if event.lostMouseFocus() :
+            self.getGame().mouse.showRegularMousePointer( True )
+            return True
+        elif event.gainedMouseFocus() :
+            self.showFancyMouse()
+            return True
+        return False
+
     def showFancyMouse(self) :
         print "Showing fancy mouse"
         mousePointer = SimpleMousePointer("mouse");
         self.getGame().mouse.setMousePointer( mousePointer );
         
-        Explosion(mousePointer.getActor()).forever().follow().offset(40,-33).projectilesPerTick(1) \
+        Explosion(mousePointer.getActor()).dependent().forever().follow().offset(40,-33).projectilesPerTick(1) \
             .spread(-20,-80).distance(10).randomSpread().speed(1,2,0,0).fade(3).eventName("spark") \
             .createActor()
         OnionSkin(mousePointer.getActor()).alpha(128).fade(3).every(1).createActor()
