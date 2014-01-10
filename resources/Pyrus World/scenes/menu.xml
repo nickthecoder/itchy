@@ -22,6 +22,12 @@
       <property name="vx" value="1.3"/>
       <property name="rotationSpeed" value="-0.8"/>
     </actor>
+    <actor costume="rock0a" x="571" y="192" direction="0.0" heading="0.0" startEvent="default" zOrder="62">
+      <property name="vy" value="-0.4"/>
+      <property name="vx" value="0.8"/>
+      <property name="strength" value="0.0"/>
+      <property name="rotationSpeed" value="0.0"/>
+    </actor>
   </layer>
   <layer name="hud">
     <text text="Torus World" font="BlackCasper" size="128" color="#d526db" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.PlainRole" costume="title" x="408" y="511" direction="0.0" heading="0.0" startEvent="slideInDown" zOrder="1" alpha="168.0" activationDelay="0.3">
@@ -41,31 +47,31 @@
     <text text="Quit" font="BlackCasper" size="60" color="#5a72ff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.QuitButton" costume="button" x="720" y="56" direction="0.0" heading="0.0" startEvent="fadeIn" zOrder="60" alpha="150.0" activationDelay="1.0">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="1"/>
-        <property name="color" value="#ffffffff"/>
         <property name="dy" value="2"/>
+        <property name="color" value="#ffffffff"/>
       </makeup>
     </text>
     <text text="Play" font="BlackCasper" size="103" color="#5a72ff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.MessageButton" costume="play" x="395" y="285" direction="0.0" heading="0.0" startEvent="fadeIn" zOrder="60" alpha="150.0" activationDelay="0.5">
       <property name="message" value="start"/>
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="1"/>
-        <property name="color" value="#ffffffff"/>
         <property name="dy" value="2"/>
+        <property name="color" value="#ffffffff"/>
       </makeup>
     </text>
     <text text="Editor" font="BlackCasper" size="60" color="#5a72ff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.EditorButton" costume="editor" x="103" y="60" direction="0.0" heading="0.0" startEvent="fadeIn" zOrder="60" alpha="128.0" activationDelay="1.0">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="1"/>
-        <property name="color" value="#ffffffff"/>
         <property name="dy" value="2"/>
+        <property name="color" value="#ffffffff"/>
       </makeup>
     </text>
     <text text="About" font="BlackCasper" size="60" color="#5572ff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.SceneButton" costume="button" x="400" y="60" direction="0.0" heading="0.0" startEvent="fadeIn" zOrder="61" alpha="150.0" activationDelay="0.8">
       <property name="sceneName" value="about"/>
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="1"/>
-        <property name="color" value="#ffffffff"/>
         <property name="dy" value="1"/>
+        <property name="color" value="#ffffffff"/>
       </makeup>
     </text>
   </layer>

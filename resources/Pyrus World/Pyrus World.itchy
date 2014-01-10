@@ -16,6 +16,11 @@
     <pose name="life1" filename="images/life1.png"/>
     <pose name="life2" filename="images/life2.png" direction="90.0"/>
     <pose name="mouse" filename="images/mouse.png" offsetX="0" offsetY="0"/>
+    <pose name="rock0a" filename="images/rock0a.png"/>
+    <pose name="rock0b1" filename="images/rock0b1.png"/>
+    <pose name="rock0b2" filename="images/rock0b2.png"/>
+    <pose name="rock0c1" filename="images/rock0c1.png"/>
+    <pose name="rock0c2" filename="images/rock0c2.png"/>
     <pose name="rock1a" filename="images/rock1a.png"/>
     <pose name="rock1b" filename="images/rock1b.png"/>
     <pose name="rock1c" filename="images/rock1c.png"/>
@@ -300,6 +305,25 @@
       <sound name="explode" sound="explode-medium" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="PLAY_BOTH" priority="1"/>
       <sound name="hit" sound="ricochet" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
       <sound name="ricochet" sound="ricochet" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="PLAY_BOTH" priority="1"/>
+    </costume>
+    <costume name="rock0a" defaultZOrder="0" extends="rock" role="rock.py" properties="rockProperties.py">
+      <pose name="default" pose="rock0a"/>
+      <pose name="fragment" pose="fragment1"/>
+      <string name="fragment">rock0b</string>
+      <properties pieces="2" points="10" strength="0" hitsRequired="1"/>
+    </costume>
+    <costume name="rock0b" defaultZOrder="0" extends="rock" role="rock.py" properties="rockProperties.py">
+      <pose name="default" pose="rock0b1"/>
+      <pose name="default" pose="rock0b2"/>
+      <pose name="fragment" pose="fragment1"/>
+      <string name="fragment">rock0c</string>
+      <properties pieces="2" points="10" strength="0" hitsRequired="1"/>
+    </costume>
+    <costume name="rock0c" defaultZOrder="0" extends="rock" role="rock.py" properties="rockProperties.py">
+      <pose name="default" pose="rock0c1"/>
+      <pose name="default" pose="rock0c2"/>
+      <pose name="fragment" pose="fragment1"/>
+      <properties pieces="0" points="10" strength="0" hitsRequired="1"/>
     </costume>
     <costume name="rock1" defaultZOrder="0" extends="rock" role="rock.py" properties="rockProperties.py">
       <pose name="default" pose="rock1a"/>

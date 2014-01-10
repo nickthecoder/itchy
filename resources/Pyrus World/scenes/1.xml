@@ -7,6 +7,11 @@
       <property name="vx" value="1.0"/>
       <property name="rotationSpeed" value="-3.0"/>
     </actor>
+    <actor costume="rock0a" x="603" y="440" direction="0.0" heading="0.0" startEvent="default" zOrder="0">
+      <property name="vy" value="0.8"/>
+      <property name="vx" value="0.5"/>
+      <property name="rotationSpeed" value="0.0"/>
+    </actor>
     <actor costume="ship1" x="387" y="303" direction="90.0" heading="90.0" startEvent="default" zOrder="10"/>
   </layer>
 </scene>
