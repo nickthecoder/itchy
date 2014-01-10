@@ -58,6 +58,11 @@ Play = new Class({
     			game.startScene("completed");
     		}
     	}
+    },
+    
+    getCollisionStrategy: function( actor )
+    {
+        return directorScript.collisionStrategy;
     }
     
 });

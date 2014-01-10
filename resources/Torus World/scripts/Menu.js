@@ -15,6 +15,9 @@ Menu = new Class({
         } else if (event.symbol == Keys.ESCAPE) {
             game.startScene("menu");
             
+        } else if (event.symbol == Keys.t) {
+            game.startScene("testEdgeCollisions");
+            
         } else if (event.symbol == Keys.a) {
         	game.startScene("about");
         }

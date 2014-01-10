@@ -6,10 +6,12 @@ package uk.co.nickthecoder.itchy.script;
 
 import java.util.List;
 
+import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.CostumeProperties;
 import uk.co.nickthecoder.itchy.MouseListenerView;
 import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.SceneDirector;
+import uk.co.nickthecoder.itchy.collision.CollisionStrategy;
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
@@ -109,6 +111,8 @@ public abstract class ShimmedScriptLanguage extends StandardScriptLanguage
     public abstract boolean onKeyUp( ScriptedSceneDirector role, KeyboardEvent ke );
 
     public abstract void onMessage( ScriptedSceneDirector role, String message );
+
+    public abstract CollisionStrategy getCollisionStrategy( ScriptedSceneDirector sceneDirector, Actor actor );
 
     // ====== COSTUME PROPERTIES =====
 

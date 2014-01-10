@@ -16,22 +16,6 @@ public class Shield extends AbstractRole implements Shootable
     }
 
     @Override
-    public void onAttach()
-    {
-        super.onAttach();
-
-        getActor().setCollisionStrategy(DrunkInvaders.director.createCollisionStrategy(getActor()));
-    }
-
-    @Override
-    public void onDetach()
-    {
-        super.onDetach();
-
-        getActor().resetCollisionStrategy();
-    }
-
-    @Override
     public void shot( Actor by )
     {
         this.deathEvent("shot");

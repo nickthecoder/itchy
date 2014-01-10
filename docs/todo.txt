@@ -1,3 +1,6 @@
+Test new CollisionStrategy at the edges of the screen.
+
+Turn of FancyMouse when the mouse leaves the window.
 
 Save an animation with delay/frames = 0 fails, but the error message throws an exception!!! - possibly Label's font not set
     Catch the exception rather than let it crash the system

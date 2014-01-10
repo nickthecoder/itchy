@@ -29,20 +29,6 @@ public class Bullet extends AbstractRole implements Shootable
     }
 
     @Override
-    public void onAttach()
-    {
-        super.onAttach();
-        getActor().setCollisionStrategy(DrunkInvaders.director.createCollisionStrategy(getActor()));
-    }
-
-    @Override
-    public void onDetach()
-    {
-        super.onDetach();
-        getActor().resetCollisionStrategy();
-    }
-
-    @Override
     public void shot( Actor by )
     {
         this.deathEvent("shot");
@@ -57,9 +43,9 @@ public class Bullet extends AbstractRole implements Shootable
             getActor().kill();
         }
 
-        getActor().getCollisionStrategy().update();
+        getCollisionStrategy().update();
 
-        for (Role otherRole : getActor().pixelOverlap(this.targetTagName)) {
+        for (Role otherRole : getCollisionStrategy().collisions(getActor(),this.targetTagName)) {
             ((Shootable) otherRole).shot(getActor());
             getActor().kill();
 

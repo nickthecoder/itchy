@@ -5,12 +5,9 @@
 package uk.co.nickthecoder.itchy;
 
 import java.util.List;
-import java.util.Set;
 
 import uk.co.nickthecoder.itchy.animation.Animation;
 import uk.co.nickthecoder.itchy.animation.CompoundAnimation;
-import uk.co.nickthecoder.itchy.collision.BruteForceCollisionStrategy;
-import uk.co.nickthecoder.itchy.collision.CollisionStrategy;
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
 import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.PropertySubject;
@@ -74,8 +71,6 @@ public class Actor implements PropertySubject<Actor>
     private double activationDelay;
 
     private String startEvent = "default";
-
-    private CollisionStrategy collisionStrategy = BruteForceCollisionStrategy.pixelCollision;
 
     private boolean fullyCreated = false;
 
@@ -470,7 +465,6 @@ public class Actor implements PropertySubject<Actor>
         if (!this.dead) {
             this.dead = true;
             getRole().die();
-            resetCollisionStrategy();
 
             if (this.stage != null) {
                 this.stage.remove(this);
@@ -682,37 +676,6 @@ public class Actor implements PropertySubject<Actor>
         return this.getAppearance().getSurface()
             .pixelOverlap(other.getAppearance().getSurface(), dx, dy, 64);
 
-    }
-
-    public void resetCollisionStrategy()
-    {
-        this.setCollisionStrategy(null);
-    }
-
-    public CollisionStrategy getCollisionStrategy()
-    {
-        return this.collisionStrategy;
-    }
-
-    public void setCollisionStrategy( CollisionStrategy collisionStrategy )
-    {
-        this.collisionStrategy.remove();
-        this.collisionStrategy = collisionStrategy == null ? BruteForceCollisionStrategy.pixelCollision : collisionStrategy;
-    }
-
-    public Set<Role> pixelOverlap( String tag )
-    {
-        return this.collisionStrategy.collisions(this, new String[] { tag }, null);
-    }
-
-    public Set<Role> pixelOverlap( String... tags )
-    {
-        return this.collisionStrategy.collisions(this, tags, null);
-    }
-
-    public Set<Role> pixelOverlap( String[] including, String[] excluding )
-    {
-        return this.collisionStrategy.collisions(this, including, excluding);
     }
 
     @Property(label = "Z Order")

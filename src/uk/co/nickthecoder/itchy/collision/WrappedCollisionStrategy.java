@@ -82,7 +82,7 @@ public class WrappedCollisionStrategy implements CollisionStrategy
         if (wrapped.overlappingTop(actor)) {
             actor.setY( actor.getY() - wrapped.getHeight() );
             result.addAll( wrappedCollisionStrategy.collisions(actor, includeTags, excludeTags) );            
-            actor.setY( actor.getY() - wrapped.getHeight() );
+            actor.setY( actor.getY() + wrapped.getHeight() );
         }
         
         return result;

@@ -10,6 +10,8 @@ import java.util.Set;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Role;
+import uk.co.nickthecoder.itchy.collision.BruteForceCollisionStrategy;
+import uk.co.nickthecoder.itchy.collision.CollisionStrategy;
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
 import uk.co.nickthecoder.itchy.util.ClassName;
 
@@ -98,6 +100,12 @@ public final class NullRole implements Role
             e.printStackTrace();
             return null;
         }
+    }
+
+    @Override
+    public CollisionStrategy getCollisionStrategy()
+    {
+        return BruteForceCollisionStrategy.pixelCollision;
     }
 
 }

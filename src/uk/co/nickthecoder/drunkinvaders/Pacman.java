@@ -12,29 +12,12 @@ import uk.co.nickthecoder.itchy.util.Tag;
 @Tag(names = { "deadly" })
 public class Pacman extends AbstractRole
 {
-
-    @Override
-    public void onAttach()
-    {
-        super.onAttach();
-
-        getActor().setCollisionStrategy(DrunkInvaders.director.createCollisionStrategy(getActor()));
-    }
-
-    @Override
-    public void onDetach()
-    {
-        super.onDetach();
-
-        getActor().resetCollisionStrategy();
-    }
-
     @Override
     public void tick()
     {
-        getActor().getCollisionStrategy().update();
+        getCollisionStrategy().update();
 
-        for (Role role : getActor().pixelOverlap(Alien.SHOOTABLE_LIST)) {
+        for (Role role : getCollisionStrategy().collisions(getActor(),Alien.SHOOTABLE_LIST)) {
             Actor other = role.getActor();
 
             if ((getActor() != other) && (!role.hasTag("bouncy"))) {

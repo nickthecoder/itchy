@@ -4,7 +4,10 @@
  ******************************************************************************/
 package uk.co.nickthecoder.drunkinvaders;
 
+import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.PlainSceneDirector;
+import uk.co.nickthecoder.itchy.collision.CollisionStrategy;
+import uk.co.nickthecoder.itchy.collision.NeighbourhoodCollisionStrategy;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.Keys;
 import uk.co.nickthecoder.jame.event.ModifierKey;
@@ -14,12 +17,12 @@ public class Level extends PlainSceneDirector
     private int aliensRemaining;
 
     public boolean ending = false;
-    
+
     public int getAliensRemaining()
     {
-        return aliensRemaining;
+        return this.aliensRemaining;
     }
-    
+
     public void addAliens( int n )
     {
         this.aliensRemaining += n;
@@ -30,12 +33,12 @@ public class Level extends PlainSceneDirector
         }
 
         if (this.aliensRemaining == 0) {
-            System.out.println( "No aliens remain. Starting next level" );
+            System.out.println("No aliens remain. Starting next level");
             this.ending = true;
             DrunkInvaders.director.nextLevel();
         }
     }
-    
+
     @Override
     public boolean onKeyDown( KeyboardEvent ke )
     {
@@ -49,12 +52,18 @@ public class Level extends PlainSceneDirector
             DrunkInvaders.director.getGame().pause.togglePause();
             return true;
         }
-        
+
         if ((ke.symbol == Keys.n) && (ke.modifier(ModifierKey.CTRL))) {
-            addAliens( -1 );
+            addAliens(-1);
         }
 
         return false;
+    }
+
+    @Override
+    public CollisionStrategy getCollisionStrategy( Actor actor )
+    {
+        return new NeighbourhoodCollisionStrategy(actor, DrunkInvaders.director.neighbourhood);
     }
 
 }

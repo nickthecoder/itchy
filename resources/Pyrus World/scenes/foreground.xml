@@ -5,13 +5,13 @@
       <property name="formatPattern" value="00000"/>
       <property name="nullValue" value="??"/>
       <property name="errorValue" value="?"/>
-      <property name="quiet" value="false"/>
       <property name="updateInterval" value="0.0"/>
+      <property name="quiet" value="false"/>
       <property name="access" value="director.score"/>
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="1"/>
-        <property name="dy" value="2"/>
         <property name="color" value="#ffffffff"/>
+        <property name="dy" value="2"/>
       </makeup>
     </text>
   </layer>

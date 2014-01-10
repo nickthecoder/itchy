@@ -90,7 +90,7 @@ class Ship(Moving) :
         # Move and wrap from one edge of the world to the opposite.
         Moving.tick(self)
         
-        if not Itchy.getGame().getDirector().collisionStrategy.collisions(self.getActor(),"deadly").isEmpty() :
+        if not self.getCollisionStrategy().collisions(self.getActor(),"deadly").isEmpty() :
             self.explode();
 
         # For debugging.

@@ -6,7 +6,9 @@ package uk.co.nickthecoder.itchy.script;
 
 import java.util.List;
 
+import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.SceneDirector;
+import uk.co.nickthecoder.itchy.collision.CollisionStrategy;
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
 import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
@@ -104,6 +106,12 @@ public class ScriptedSceneDirector implements SceneDirector, ScriptedObject
     public void onMessage( String message )
     {
         this.language.onMessage(this, message);
+    }
+
+    @Override
+    public CollisionStrategy getCollisionStrategy( Actor actor )
+    {
+        return this.language.getCollisionStrategy( this, actor);
     }
 
 }

@@ -104,6 +104,8 @@ SceneDirectorScript = Class({
 
     onMessage: function( message ) {},
     
+    getCollisionStrategy: function( actor ) { return  itchy.collision.BruteForceCollisionStrategy.pixelCollision; },
+    
     getProperties: function() { return new java.util.ArrayList(); }
 
 });

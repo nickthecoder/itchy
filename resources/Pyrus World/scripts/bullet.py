@@ -21,8 +21,7 @@ class Bullet(Moving) :
     def tick(self) :
     	Moving.tick(self)
         
-        i = Itchy.getGame().getDirector().collisionStrategy.collisions(self.getActor(),"shootable").iterator()
-        # i = self.getActor().pixelOverlap("shootable").iterator();
+        i = self.getCollisionStrategy().collisions(self.getActor(),"shootable").iterator()
         # Shoot ONE of the rocks that the bullet is touching.
         if i.hasNext() :
         	role = i.next()

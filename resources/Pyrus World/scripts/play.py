@@ -54,6 +54,9 @@ class Play(PlainSceneDirector) :
             else :
                 self.game.startScene("completed")   
     
+    def getCollisionStrategy(self,actor) :
+        return self.game.getDirector().collisionStrategy;
+    
     # Boiler plate code - no need to change this
     def getProperties(self):
         return properties

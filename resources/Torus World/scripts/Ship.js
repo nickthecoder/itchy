@@ -8,7 +8,13 @@ Ship = Class({
         this.lifeIcon = new Array();
     },
 
+    onAttach: function() {
+        Super();
+        this.role.addTag("ship");
+    },
+    
     onBirth: function() {
+
         new itchy.role.OnionSkin( this.actor ).alpha(128).every(5).fade(3).createActor();
 
     	this.rotationSpeed = this.getCostumeProperties().rotationSpeed;
@@ -81,7 +87,7 @@ Ship = Class({
         // Move and wrap from one edge of the world to the opposite.
         Super();
         
-        if ( ! directorScript.collisionStrategy.collisions(this.actor,["deadly"]).isEmpty() ) {
+        if ( ! this.role.getCollisionStrategy().collisions(this.actor,["deadly"]).isEmpty() ) {
             this.die();
         }
 

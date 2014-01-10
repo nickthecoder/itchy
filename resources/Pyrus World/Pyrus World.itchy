@@ -261,12 +261,14 @@
       <font name="default" font="Vera"/>
       <animation name="fadeIn" animation="gameOverReveal"/>
     </costume>
-    <costume name="life1" defaultZOrder="0" role="uk.co.nickthecoder.itchy.PlainRole">
-      <pose name="default" pose="life1"/>
+    <costume name="life" defaultZOrder="0">
       <animation name="appear" animation="lifeAppear"/>
       <animation name="disappear" animation="lifeDisappear"/>
     </costume>
-    <costume name="life2" defaultZOrder="0" role="uk.co.nickthecoder.itchy.PlainRole">
+    <costume name="life1" defaultZOrder="0" extends="life" role="uk.co.nickthecoder.itchy.PlainRole">
+      <pose name="default" pose="life1"/>
+    </costume>
+    <costume name="life2" defaultZOrder="0" extends="life" role="uk.co.nickthecoder.itchy.PlainRole">
       <pose name="default" pose="life2"/>
     </costume>
     <costume name="link" defaultZOrder="0" extends="button" role="uk.co.nickthecoder.itchy.role.LinkButton">

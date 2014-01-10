@@ -62,7 +62,7 @@ public class Alien extends Bouncy implements Shootable
         super.tick();
 
         // This isn't neat - can we have a "killable" tag, which Ship and Shield will both have?
-        for (Role otherRole : getActor().pixelOverlap(SHOOTABLE_LIST)) {
+        for (Role otherRole : getCollisionStrategy().collisions(this.getActor(), SHOOTABLE_LIST)) {
             Actor other = otherRole.getActor();
             if ((getActor() != other) && (!otherRole.hasTag("bouncy"))) {
                 ((Shootable) other.getRole()).shot(getActor());

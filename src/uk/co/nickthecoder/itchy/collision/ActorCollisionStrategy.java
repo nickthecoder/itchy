@@ -38,12 +38,10 @@ public abstract class ActorCollisionStrategy implements CollisionStrategy
         return this.collisions(this.actor, includeTags, excludeTags);
     }
 
-    @Override
     public void update()
     {
     }
 
-    @Override
     public void remove()
     {
     }

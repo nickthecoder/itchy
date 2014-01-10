@@ -49,7 +49,7 @@ public class DrunkInvaders extends AbstractDirector
 
     private int levelNumber = 1;
 
-    private Neighbourhood neighbourhood;
+    Neighbourhood neighbourhood;
 
     private Role info;
 

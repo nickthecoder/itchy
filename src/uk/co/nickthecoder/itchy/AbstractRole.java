@@ -13,6 +13,8 @@ import javax.script.ScriptException;
 
 import uk.co.nickthecoder.itchy.Actor.AnimationEvent;
 import uk.co.nickthecoder.itchy.animation.Animation;
+import uk.co.nickthecoder.itchy.collision.BruteForceCollisionStrategy;
+import uk.co.nickthecoder.itchy.collision.CollisionStrategy;
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
 import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.itchy.util.Tag;
@@ -21,6 +23,8 @@ import uk.co.nickthecoder.itchy.util.TagMembership;
 public abstract class AbstractRole implements Role
 {
     private final static HashMap<Class<?>, List<AbstractProperty<Role, ?>>> allProperties = new HashMap<Class<?>, List<AbstractProperty<Role, ?>>>();
+
+    private CollisionStrategy collisionStrategy = BruteForceCollisionStrategy.pixelCollision;
 
     public static Set<Role> allByTag( String tag )
     {
@@ -64,6 +68,11 @@ public abstract class AbstractRole implements Role
         this.tagMembership = new TagMembership<Role>(Itchy.getGame().roleTags, this);
     }
 
+    public CollisionStrategy getCollisionStrategy()
+    {
+        return this.collisionStrategy;
+    }
+    
     public ClassName getClassName()
     {
         return new ClassName( Role.class, this.getClass().getName() );
@@ -112,6 +121,7 @@ public abstract class AbstractRole implements Role
     @Override
     public void birth()
     {
+        this.collisionStrategy = Itchy.getGame().getSceneDirector().getCollisionStrategy(this.getActor());
         onBirth();
     }
 
@@ -119,6 +129,7 @@ public abstract class AbstractRole implements Role
     public void die()
     {
         onDeath();
+        this.collisionStrategy.remove();
         this.tagMembership.removeAll();
     }
 

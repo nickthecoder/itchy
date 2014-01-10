@@ -12,6 +12,7 @@ import javax.script.ScriptContext;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
+import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.CostumeProperties;
 import uk.co.nickthecoder.itchy.Director;
 import uk.co.nickthecoder.itchy.Game;
@@ -23,6 +24,8 @@ import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.SceneDirector;
 import uk.co.nickthecoder.itchy.role.NullRole;
 import uk.co.nickthecoder.itchy.util.ClassName;
+import uk.co.nickthecoder.itchy.collision.BruteForceCollisionStrategy;
+import uk.co.nickthecoder.itchy.collision.CollisionStrategy;
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
@@ -546,7 +549,7 @@ public class JavascriptLanguage extends ShimmedScriptLanguage
     }
 
     @Override
-    public void onDeactivate( ScriptedSceneDirector role )
+    public void onDeactivate( ScriptedSceneDirector sceneDirector )
     {
         try {
             this.engine.eval("sceneDirectorScript.onDeactivate();");
@@ -557,7 +560,7 @@ public class JavascriptLanguage extends ShimmedScriptLanguage
     }
 
     @Override
-    public void tick( ScriptedSceneDirector role )
+    public void tick( ScriptedSceneDirector sceneDirector )
     {
         try {
             this.engine.eval("sceneDirectorScript.tick();");
@@ -568,7 +571,7 @@ public class JavascriptLanguage extends ShimmedScriptLanguage
     }
 
     @Override
-    public boolean onMouseDown( ScriptedSceneDirector role, MouseButtonEvent mbe )
+    public boolean onMouseDown( ScriptedSceneDirector sceneDirector, MouseButtonEvent mbe )
     {
         try {
             Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
@@ -582,7 +585,7 @@ public class JavascriptLanguage extends ShimmedScriptLanguage
     }
 
     @Override
-    public boolean onMouseUp( ScriptedSceneDirector role, MouseButtonEvent mbe )
+    public boolean onMouseUp( ScriptedSceneDirector sceneDirector, MouseButtonEvent mbe )
     {
         try {
             Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
@@ -596,7 +599,7 @@ public class JavascriptLanguage extends ShimmedScriptLanguage
     }
 
     @Override
-    public boolean onMouseMove( ScriptedSceneDirector role, MouseMotionEvent mme )
+    public boolean onMouseMove( ScriptedSceneDirector sceneDirector, MouseMotionEvent mme )
     {
         try {
             Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
@@ -610,7 +613,7 @@ public class JavascriptLanguage extends ShimmedScriptLanguage
     }
 
     @Override
-    public boolean onKeyDown( ScriptedSceneDirector role, KeyboardEvent ke )
+    public boolean onKeyDown( ScriptedSceneDirector sceneDirector, KeyboardEvent ke )
     {
         try {
             Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
@@ -624,7 +627,7 @@ public class JavascriptLanguage extends ShimmedScriptLanguage
     }
 
     @Override
-    public boolean onKeyUp( ScriptedSceneDirector role, KeyboardEvent ke )
+    public boolean onKeyUp( ScriptedSceneDirector sceneDirector, KeyboardEvent ke )
     {
         try {
             Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
@@ -638,7 +641,7 @@ public class JavascriptLanguage extends ShimmedScriptLanguage
     }
 
     @Override
-    public void onMessage( ScriptedSceneDirector role, String message )
+    public void onMessage( ScriptedSceneDirector sceneDirector, String message )
     {
         try {
             Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
@@ -647,6 +650,20 @@ public class JavascriptLanguage extends ShimmedScriptLanguage
 
         } catch (ScriptException e) {
             handleException("SceneDirector.onMessage", e);
+        }
+    }
+    
+    @Override
+    public CollisionStrategy getCollisionStrategy( ScriptedSceneDirector sceneDirector, Actor actor )
+    {
+        try {
+            Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
+            bindings.put("arg", actor);
+            return (CollisionStrategy) this.engine.eval("sceneDirectorScript.getCollisionStrategy(arg);");
+
+        } catch (ScriptException e) {
+            handleException("SceneDirector.getCollisionStrategy", e);
+            return BruteForceCollisionStrategy.pixelCollision;
         }
     }
 
@@ -691,4 +708,5 @@ public class JavascriptLanguage extends ShimmedScriptLanguage
             return new ArrayList<AbstractProperty<CostumeProperties,?>>();
         }
     }
+
 }

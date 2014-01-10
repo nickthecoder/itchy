@@ -4,6 +4,7 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
+import uk.co.nickthecoder.itchy.collision.CollisionStrategy;
 import uk.co.nickthecoder.itchy.property.PropertySubject;
 
 public interface SceneDirector extends MouseListener, KeyListener, MessageListener, PropertySubject<SceneDirector>
@@ -13,4 +14,6 @@ public interface SceneDirector extends MouseListener, KeyListener, MessageListen
     public void onDeactivate();
 
     public void tick();
+    
+    public CollisionStrategy getCollisionStrategy( Actor actor );
 }

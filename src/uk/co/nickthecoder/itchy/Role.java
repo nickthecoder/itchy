@@ -7,6 +7,7 @@ package uk.co.nickthecoder.itchy;
 import java.util.List;
 import java.util.Set;
 
+import uk.co.nickthecoder.itchy.collision.CollisionStrategy;
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
 import uk.co.nickthecoder.itchy.property.PropertySubject;
 import uk.co.nickthecoder.itchy.script.ScriptedRole;
@@ -33,6 +34,8 @@ public interface Role extends MessageListener, Cloneable, PropertySubject<Role>
     public boolean hasTag( String name );
 
     public Set<String> getTags();
+
+    public CollisionStrategy getCollisionStrategy();
 
     public void birth();
 

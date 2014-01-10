@@ -6,6 +6,8 @@ package uk.co.nickthecoder.itchy;
 
 import java.util.List;
 
+import uk.co.nickthecoder.itchy.collision.BruteForceCollisionStrategy;
+import uk.co.nickthecoder.itchy.collision.CollisionStrategy;
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
@@ -73,6 +75,12 @@ public class PlainSceneDirector implements SceneDirector
         Class<? extends SceneDirector> klass = this.getClass().asSubclass(SceneDirector.class);
 
         return AbstractProperty.findAnnotations(klass);
+    }
+
+    @Override
+    public CollisionStrategy getCollisionStrategy( Actor actor )
+    {
+        return BruteForceCollisionStrategy.pixelCollision;
     }
 
 }

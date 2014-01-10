@@ -39,20 +39,6 @@ public class Bouncy extends AbstractRole
     }
 
     @Override
-    public void onBirth()
-    {
-        super.onBirth();
-        getActor().setCollisionStrategy(DrunkInvaders.director.createCollisionStrategy(getActor()));
-    }
-
-    @Override
-    public void onDeath()
-    {
-        super.onDeath();
-        getActor().resetCollisionStrategy();
-    }
-
-    @Override
     public void tick()
     {
         getActor().moveBy(this.vx, this.vy);
@@ -72,9 +58,9 @@ public class Bouncy extends AbstractRole
             this.vx = -this.vx;
         }
 
-        getActor().getCollisionStrategy().update();
+        getCollisionStrategy().update();
 
-        for (Role role : getActor().pixelOverlap(BOUNCY_LIST)) {
+        for (Role role : getCollisionStrategy().collisions(getActor(), BOUNCY_LIST)) {
             collide(getActor(), role.getActor());
         }
 
