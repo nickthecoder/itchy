@@ -1,6 +1,6 @@
 <scene showMouse="false" role="uk.co.nickthecoder.itchy.PlainSceneDirector" background="#00000000">
   <properties/>
-  <layer name="main">
+  <layer name="hud">
     <text text="Game Over" font="Boycott" size="94" color="#5d89ff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.Tagged" costume="gameOver" x="400" y="456" direction="0.0" heading="0.0" startEvent="fadeIn" zOrder="100" alpha="200.0">
       <property name="tag" value="gameOver"/>
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">

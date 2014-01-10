@@ -10,8 +10,9 @@ Bullet = Class({
 
     tick: function() {
     	Super();
-        
-        var i = this.actor.pixelOverlap("shootable").iterator();
+    	
+        var i = directorScript.collisionStrategy.collisions(this.actor,["shootable"]).iterator();
+        //var i = this.actor.pixelOverlap("shootable").iterator();
         // Shoot ONE of the rocks that the bullet is touching.
         if (i.hasNext()) {
         	var role = i.next().roleScript;

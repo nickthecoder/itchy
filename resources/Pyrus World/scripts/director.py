@@ -1,14 +1,14 @@
 from uk.co.nickthecoder.itchy import Itchy
 from uk.co.nickthecoder.itchy import AbstractDirector
-from uk.co.nickthecoder.itchy.util import ClassName
-from uk.co.nickthecoder.itchy import ZOrderStage
 from uk.co.nickthecoder.itchy import StageView
 from uk.co.nickthecoder.itchy import WrappedStageView
-from uk.co.nickthecoder.itchy import WrappedCollisionStrategy
+from uk.co.nickthecoder.itchy import ZOrderStage
+from uk.co.nickthecoder.itchy.collision import WrappedCollisionStrategy
 from uk.co.nickthecoder.itchy.extras import SceneTransition
 from uk.co.nickthecoder.itchy.extras import SimpleMousePointer
 from uk.co.nickthecoder.itchy.role import Explosion
 from uk.co.nickthecoder.itchy.role import OnionSkin
+from uk.co.nickthecoder.itchy.util import ClassName
 
 from uk.co.nickthecoder.jame import Rect
 
@@ -26,22 +26,22 @@ class Director(AbstractDirector) :
 
         screenRect = Rect(0, 0, self.game.getWidth(), self.game.getHeight())
 
-        self.mainStage = ZOrderStage("main");
-        self.game.getStages().add(self.mainStage);
+        self.mainStage = ZOrderStage("main")
+        self.game.getStages().add(self.mainStage)
 
         # We need a separate view for the "lives" in the top left, because we don't want those to
         # wrap round to the bottom of the screen.
-        self.hudStage = ZOrderStage("hud");
-        self.game.getStages().add(self.hudStage);
+        self.hudStage = ZOrderStage("hud")
+        self.game.getStages().add(self.hudStage)
 
-        self.mainView = WrappedStageView(screenRect, self.mainStage);
+        self.mainView = WrappedStageView(screenRect, self.mainStage)
         self.mainView.wrap( self.game.getHeight(), self.game.getWidth(), 0, 0 )
-        self.game.getGameViews().add(self.mainView);
+        self.game.getGameViews().add(self.mainView)
 
-        self.hudView = StageView(screenRect, self.hudStage);
-        self.game.getGameViews().add(self.hudView);        
+        self.hudView = StageView(screenRect, self.hudStage)
+        self.game.getGameViews().add(self.hudView)
 
-        self.hudView.enableMouseListener(self.game);
+        self.hudView.enableMouseListener(self.game)
         self.collisionStrategy = WrappedCollisionStrategy( self.mainView )
 
     def tick(self) :

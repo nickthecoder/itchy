@@ -7,6 +7,7 @@ Double = java.lang.Double;
 Integer = java.lang.Integer;
 RGBA = jame.RGBA;
 Keys = jame.event.Keys;
+Rect = jame.Rect;
 
 // Objects
 Itchy=itchy.Itchy;

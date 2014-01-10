@@ -1,3 +1,8 @@
+ZOrderStage = itchy.ZOrderStage;
+WrappedCollisionStrategy = itchy.collision.WrappedCollisionStrategy;
+WrappedStageView = itchy.WrappedStageView;
+StageView = itchy.StageView;
+
 Director = Class({
 
     Extends: DirectorScript,
@@ -5,6 +10,31 @@ Director = Class({
     init: function() {
     	this.score = 0;
     	this.lives = 0;
+    },
+    
+    onStarted:function() {
+        // Don't create default stages and views, because we want to use a special WrappedStageView
+        stdout.println( "Creating custom stages and views" );
+
+        var screenRect = Rect(0, 0, game.getWidth(), game.getHeight());
+
+        this.mainStage = ZOrderStage("main");
+        game.getStages().add(this.mainStage);
+
+        // We need a separate view for the "lives" in the top left, because we don't want those to
+        // wrap round to the bottom of the screen.
+        this.hudStage = ZOrderStage("hud");
+        game.getStages().add(this.hudStage);
+
+        this.mainView = WrappedStageView(screenRect, this.mainStage);
+        this.mainView.wrap( game.getHeight(), game.getWidth(), 0, 0 );
+        game.getGameViews().add(this.mainView);
+
+        this.hudView = StageView(screenRect, this.hudStage);
+        game.getGameViews().add(this.hudView);        
+
+        this.hudView.enableMouseListener(game);
+        this.collisionStrategy = WrappedCollisionStrategy( this.mainView );
     },
     
     startScene: function( sceneName ) {

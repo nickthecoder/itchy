@@ -1,8 +1,4 @@
 
-Refactor collision strategy so that it only has one "collision" method, and then use a "CollisionTest" inteface
-
-Wrapped world in JS version of Torus World.
-
 Save an animation with delay/frames = 0 fails, but the error message throws an exception!!! - possibly Label's font not set
     Catch the exception rather than let it crash the system
     Fix the exception

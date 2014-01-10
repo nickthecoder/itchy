@@ -29,15 +29,11 @@ Ship = Class({
 			.companion("warp").eventName("default").distance(30,-80).spread(0,360).spread(0,360).randomSpread(false)
 			.speed(0,0).projectiles(40)
 			.createActor();
-
-		//new itchy.role.Explosion(this.actor)
-		//	.companion("explosion")
-		//	.distance(-60).direction(0,360).speed(4,2).fade(3).projectiles(20).randomSpread(false)
-		//	.createActor();
-
+			
 		for (var i = 0; i < directorScript.lives; i ++ ) {
 			var actor = this.actor.createCompanion("life");
 			actor.moveTo( 30 + i * 40 , 560 );
+            directorScript.hudStage.add(actor);
 			if (game.getSceneName() == "1") {
 				actor.event("appear");
 			}
@@ -54,7 +50,7 @@ Ship = Class({
     			.speed(-6,0).projectiles(20).projectilesPerTick(1).randomSpread(false).alpha(0).fade(-3)
     			.createActor();
     	}
-    	this.actor.event("fade");
+    	this.actor.deathEvent("fade");
     },
 
     tick: function() {
@@ -85,7 +81,7 @@ Ship = Class({
         // Move and wrap from one edge of the world to the opposite.
         Super();
         
-        if ( ! this.actor.pixelOverlap("deadly").isEmpty() ) {
+        if ( ! directorScript.collisionStrategy.collisions(this.actor,["deadly"]).isEmpty() ) {
             this.die();
         }
 
