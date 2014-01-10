@@ -21,6 +21,8 @@ class Rock(Moving) :
 
     def __init__(self) :
         Moving.__init__(self)
+        self.impulse = 0;
+        self.strength = 1;
         self.rotationSpeed = 0
         self.hits = 0;
         

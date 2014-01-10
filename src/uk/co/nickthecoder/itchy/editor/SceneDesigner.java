@@ -1507,10 +1507,10 @@ public class SceneDesigner implements MouseListener, KeyListener
         Stage result = null;
         for (View view : this.designViews.getChildren()) {
             if (view instanceof StageView) {
-                if (((StageView)view).getStage() == stage) {
+                if (((StageView) view).getStage() == stage) {
                     return result;
                 }
-                result = ((StageView)view).getStage();
+                result = ((StageView) view).getStage();
             }
         }
 
@@ -1525,7 +1525,7 @@ public class SceneDesigner implements MouseListener, KeyListener
                 if (found) {
                     return ((StageView) view).getStage();
                 }
-            
+
                 if (stage == ((StageView) view).getStage()) {
                     found = true;
                 }
@@ -1568,7 +1568,7 @@ public class SceneDesigner implements MouseListener, KeyListener
     private void onCopy()
     {
         if ((this.mode == MODE_SELECT) && (this.currentActor != null)) {
-            SceneDesigner.copiedActor = SceneActor.createSceneActor(this.currentActor);
+            copiedActor = SceneActor.createSceneActor(this.currentActor);
         }
     }
 

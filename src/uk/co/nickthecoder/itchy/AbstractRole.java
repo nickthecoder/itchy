@@ -119,14 +119,14 @@ public abstract class AbstractRole implements Role
     }
 
     @Override
-    public void birth()
+    public void born()
     {
         this.collisionStrategy = Itchy.getGame().getSceneDirector().getCollisionStrategy(this.getActor());
         onBirth();
     }
 
     @Override
-    public void die()
+    public void killed()
     {
         onDeath();
         this.collisionStrategy.remove();
@@ -169,7 +169,7 @@ public abstract class AbstractRole implements Role
     }
 
     @Override
-    public void attach( Actor actor )
+    public void attached( Actor actor )
     {
         assert ((getActor() == null) || (getActor() == actor));
         this.actor = actor;
@@ -184,7 +184,7 @@ public abstract class AbstractRole implements Role
     }
 
     @Override
-    public void detatch()
+    public void detatched()
     {
         this.tagMembership.removeAll();
         onDetach();
@@ -274,21 +274,6 @@ public abstract class AbstractRole implements Role
 
     public void tick()
     {
-    }
-
-    @Override
-    public Role clone()
-    {
-        try {
-            AbstractRole result = (AbstractRole) super.clone();
-            result.actor = null;
-
-            return result;
-
-        } catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-            return null;
-        }
     }
 
 }

@@ -32,8 +32,10 @@ public class DelayedActivation extends AbstractRole
     {
         if (this.delay.isFinished()) {
             getActor().setRole(this.role);
-            this.role.birth();
-            // Was deactivated and now activated so that the role's onActivate method is called.
+            // The normal way that role.birth is called happened to this DelayedActivation,
+            // but we want it to be called for the actual role as well...
+            this.role.born();
+            
             getActor().getAppearance().setAlpha(this.alpha);
             getActor().event(getActor().getStartEvent());
         }

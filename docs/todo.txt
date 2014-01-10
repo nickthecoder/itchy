@@ -1,6 +1,9 @@
 Rebuild Jame on i686 and win32
 
 
+Make the Role interface the actual useful thing i.e. remove as much as possible from AbstractRole.
+
+
 Save an animation with delay/frames = 0 fails, but the error message throws an exception!!! - possibly Label's font not set
     Catch the exception rather than let it crash the system
     Fix the exception
@@ -18,7 +21,6 @@ Undo/Redo
 
     Toolbar buttons
 
-Make the Role interface the actual useful thing i.e. remove as much as possible from AbstractRole.
 
 Allow creation of new Role objects from Javascript i.e. create a ScriptedRole and the script in one go.
     Constructor takes the ScriptedRole, or creates it if undefined.

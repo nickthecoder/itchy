@@ -55,23 +55,23 @@ public final class NullRole implements Role
     }
 
     @Override
-    public void birth()
+    public void born()
     {
     }
 
     @Override
-    public void die()
+    public void killed()
     {
     }
 
     @Override
-    public void attach( Actor actor )
+    public void attached( Actor actor )
     {
         this.actor = actor;
     }
 
     @Override
-    public void detatch()
+    public void detatched()
     {
     }
 

@@ -65,6 +65,8 @@ public abstract class SceneActor implements Cloneable
 
     protected SceneActor( Actor actor )
     {
+        Role actualRole = ((SceneDesignerRole) actor.getRole()).actualRole;
+
         this.x = (int) actor.getX();
         this.y = (int) actor.getY();
         this.alpha = actor.getAppearance().getAlpha();
@@ -72,13 +74,11 @@ public abstract class SceneActor implements Cloneable
         this.heading = actor.getHeading();
         this.zOrder = actor.getZOrder();
         this.scale = actor.getAppearance().getScale();
-        this.roleClassName = ((SceneDesignerRole) actor.getRole()).getRoleClassName();
+        this.roleClassName = new ClassName(Role.class, actualRole.getClassName().name);
         this.makeupClassName = actor.getAppearance().getMakeupClassName();
         this.colorize = actor.getAppearance().getColorize() == null ? null : new RGBA(actor.getAppearance().getColorize());
         this.activationDelay = actor.getActivationDelay();
         this.startEvent = actor.getStartEvent();
-
-        Role actualRole = ((SceneDesignerRole) actor.getRole()).actualRole;
 
         for (AbstractProperty<Role, ?> property : actualRole.getProperties()) {
             try {
@@ -88,7 +88,7 @@ public abstract class SceneActor implements Cloneable
                 e.printStackTrace();
             }
         }
-
+        
         Makeup makeup = actor.getAppearance().getMakeup();
         for (AbstractProperty<Makeup, ?> property : makeup.getProperties()) {
             try {

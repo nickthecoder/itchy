@@ -390,7 +390,7 @@ public class Actor implements PropertySubject<Actor>
 
         if ((this.stage != null) && (this.role != unsedRole)) {
             this.fullyCreated = true;
-            this.role.birth();
+            this.role.born();
             Itchy.getGame().add(this);
         }
     }
@@ -402,11 +402,11 @@ public class Actor implements PropertySubject<Actor>
         }
 
         if (this.role != null) {
-            this.role.detatch();
+            this.role.detatched();
         }
 
         this.role = role == null ? new NullRole() : role;
-        this.role.attach(this);
+        this.role.attached(this);
 
         if (this.stage != null) {
             this.stage.changedRole(this);
@@ -464,7 +464,7 @@ public class Actor implements PropertySubject<Actor>
     {
         if (!this.dead) {
             this.dead = true;
-            getRole().die();
+            getRole().killed();
 
             if (this.stage != null) {
                 this.stage.remove(this);
