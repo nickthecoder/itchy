@@ -79,7 +79,7 @@ public class Ship extends Bouncy implements Shootable
     @Override
     public void onAttach()
     {
-        super.onAttach();
+        // Do NOT call super, as we don't want to be bouncy while the shields are off.
     }
 
     @Override
