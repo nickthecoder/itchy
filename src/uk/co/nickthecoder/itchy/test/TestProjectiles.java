@@ -6,7 +6,7 @@ package uk.co.nickthecoder.itchy.test;
 
 import uk.co.nickthecoder.itchy.AbstractRole;
 import uk.co.nickthecoder.itchy.property.Property;
-import uk.co.nickthecoder.itchy.role.NullRole;
+import uk.co.nickthecoder.itchy.role.PlainRole;
 import uk.co.nickthecoder.itchy.role.Projectile;
 
 public class TestProjectiles extends AbstractRole
@@ -64,7 +64,7 @@ public class TestProjectiles extends AbstractRole
         } else if (this.id == 1) {
             test1().createActor();
         }
-        getActor().setRole(new NullRole());
+        getActor().setRole(new PlainRole());
     }
 
     private Projectile test0()

@@ -60,7 +60,7 @@ import uk.co.nickthecoder.itchy.gui.VerticalScroll;
 import uk.co.nickthecoder.itchy.makeup.Makeup;
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
 import uk.co.nickthecoder.itchy.role.Follower;
-import uk.co.nickthecoder.itchy.role.NullRole;
+import uk.co.nickthecoder.itchy.role.PlainRole;
 import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.itchy.util.NinePatch;
 import uk.co.nickthecoder.itchy.util.Reversed;
@@ -1330,7 +1330,7 @@ public class SceneDesigner implements MouseListener, KeyListener
                     actor.setCostume(this.stampActor.getCostume());
                     roleClassName = this.stampActor.getCostume().roleClassName;
                 } else {
-                    roleClassName = new ClassName(Role.class, NullRole.class.getName());
+                    roleClassName = new ClassName(Role.class, PlainRole.class.getName());
                 }
 
             } else {

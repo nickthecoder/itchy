@@ -263,7 +263,7 @@
       <string name="default">Editor</string>
       <font name="default" font="Vera"/>
     </costume>
-    <costume name="explosion" defaultZOrder="0" role="uk.co.nickthecoder.itchy.PlainRole">
+    <costume name="explosion" defaultZOrder="0" role="uk.co.nickthecoder.itchy.role.PlainRole">
       <pose name="default" pose="explosion"/>
     </costume>
     <costume name="gameOver" defaultZOrder="0" role="uk.co.nickthecoder.itchy.role.Tagged">
@@ -275,10 +275,10 @@
       <animation name="appear" animation="lifeAppear"/>
       <animation name="disappear" animation="lifeDisappear"/>
     </costume>
-    <costume name="life1" defaultZOrder="0" extends="life" role="uk.co.nickthecoder.itchy.PlainRole">
+    <costume name="life1" defaultZOrder="0" extends="life" role="uk.co.nickthecoder.itchy.role.PlainRole">
       <pose name="default" pose="life1"/>
     </costume>
-    <costume name="life2" defaultZOrder="0" extends="life" role="uk.co.nickthecoder.itchy.PlainRole">
+    <costume name="life2" defaultZOrder="0" extends="life" role="uk.co.nickthecoder.itchy.role.PlainRole">
       <pose name="default" pose="life2"/>
     </costume>
     <costume name="link" defaultZOrder="0" extends="button" role="uk.co.nickthecoder.itchy.role.LinkButton">
@@ -297,7 +297,7 @@
       <pose name="spark" pose="spark4"/>
       <pose name="spark" pose="spark5"/>
     </costume>
-    <costume name="pause" defaultZOrder="0" role="uk.co.nickthecoder.itchy.PlainRole">
+    <costume name="pause" defaultZOrder="0" role="uk.co.nickthecoder.itchy.role.PlainRole">
       <string name="default">Pause</string>
       <font name="default" font="Vera"/>
       <animation name="default" animation="pauseReveal"/>
@@ -386,7 +386,7 @@
     <costume name="stars2" defaultZOrder="0">
       <pose name="default" pose="stars2"/>
     </costume>
-    <costume name="warp" defaultZOrder="0" role="uk.co.nickthecoder.itchy.PlainRole">
+    <costume name="warp" defaultZOrder="0" role="uk.co.nickthecoder.itchy.role.PlainRole">
       <pose name="default" pose="warp"/>
       <animation name="default" animation="warp"/>
     </costume>

@@ -13,7 +13,7 @@ import java.util.List;
 import uk.co.nickthecoder.itchy.editor.SceneDesignerRole;
 import uk.co.nickthecoder.itchy.makeup.Makeup;
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
-import uk.co.nickthecoder.itchy.role.NullRole;
+import uk.co.nickthecoder.itchy.role.PlainRole;
 import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.itchy.util.XMLException;
 import uk.co.nickthecoder.itchy.util.XMLTag;
@@ -187,7 +187,7 @@ public class SceneReader
         }
 
         TextSceneActor sceneActor = new TextSceneActor(font, fontSize, text);
-        sceneActor.roleClassName = new ClassName(Role.class, NullRole.class.getName());
+        sceneActor.roleClassName = new ClassName(Role.class, PlainRole.class.getName());
 
         String costumeName = textTag.getOptionalAttribute("costume", null);
         costumeName = this.resources.getNewCostumeName(costumeName);

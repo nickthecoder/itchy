@@ -7,12 +7,12 @@ package uk.co.nickthecoder.itchy.extras;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.ImagePose;
 import uk.co.nickthecoder.itchy.Itchy;
-import uk.co.nickthecoder.itchy.PlainRole;
 import uk.co.nickthecoder.itchy.animation.AlphaAnimation;
 import uk.co.nickthecoder.itchy.animation.Animation;
 import uk.co.nickthecoder.itchy.animation.AnimationListener;
 import uk.co.nickthecoder.itchy.animation.Eases;
 import uk.co.nickthecoder.itchy.animation.MoveAnimation;
+import uk.co.nickthecoder.itchy.role.PlainRole;
 import uk.co.nickthecoder.jame.Surface;
 
 /**

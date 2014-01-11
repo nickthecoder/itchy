@@ -16,34 +16,34 @@
     <text text="easeInBack" font="vera" size="14" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="363" y="31" direction="0.0" heading="0.0" startEvent="default" zOrder="13"/>
     <text text="linear" font="vera" size="14" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="517" y="32" direction="0.0" heading="0.0" startEvent="default" zOrder="14"/>
     <text text="easeOutBack" font="vera" size="14" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="333" y="564" direction="0.0" heading="0.0" startEvent="default" zOrder="15"/>
-    <actor costume="alien1b" role="uk.co.nickthecoder.itchy.PlainRole" x="30" y="83" direction="-90.0" heading="-90.0" startEvent="easeIn" zOrder="16"/>
-    <actor costume="alien2a" role="uk.co.nickthecoder.itchy.PlainRole" x="87" y="83" direction="-90.0" heading="-90.0" startEvent="easeInCirc" zOrder="17"/>
-    <actor costume="alien2b" role="uk.co.nickthecoder.itchy.PlainRole" x="157" y="84" direction="-90.0" heading="-90.0" startEvent="easeInCubic" zOrder="18"/>
-    <actor costume="alien3a" role="uk.co.nickthecoder.itchy.PlainRole" x="288" y="83" direction="-90.0" heading="-90.0" startEvent="easeInExpo" zOrder="19"/>
-    <actor costume="alien3b" role="uk.co.nickthecoder.itchy.PlainRole" x="229" y="84" direction="-90.0" heading="-90.0" startEvent="easeInQuad" zOrder="20"/>
-    <actor costume="alien1a" role="uk.co.nickthecoder.itchy.PlainRole" x="353" y="84" direction="-90.0" heading="-90.0" startEvent="easeInBack" zOrder="21"/>
-    <actor costume="alien3b" role="uk.co.nickthecoder.itchy.PlainRole" x="508" y="85" direction="-90.0" heading="-90.0" startEvent="linear" zOrder="22"/>
-    <actor costume="alien3a" role="uk.co.nickthecoder.itchy.PlainRole" x="574" y="85" direction="-90.0" heading="-90.0" startEvent="ease" zOrder="23"/>
-    <actor costume="alien1b" role="uk.co.nickthecoder.itchy.PlainRole" x="28" y="384" direction="-90.0" heading="-90.0" startEvent="easeOut" zOrder="24"/>
-    <actor costume="alien2a" role="uk.co.nickthecoder.itchy.PlainRole" x="85" y="384" direction="-90.0" heading="-90.0" startEvent="easeOutCirc" zOrder="25"/>
-    <actor costume="alien2b" role="uk.co.nickthecoder.itchy.PlainRole" x="145" y="384" direction="-90.0" heading="-90.0" startEvent="easeOutCubic" zOrder="26"/>
-    <actor costume="alien3a" role="uk.co.nickthecoder.itchy.PlainRole" x="285" y="385" direction="-90.0" heading="-90.0" startEvent="easeOutExpo" zOrder="27"/>
-    <actor costume="alien3b" role="uk.co.nickthecoder.itchy.PlainRole" x="205" y="385" direction="-90.0" heading="-90.0" startEvent="easeOutQuad" zOrder="28"/>
-    <actor costume="alien1a" role="uk.co.nickthecoder.itchy.PlainRole" x="349" y="385" direction="-90.0" heading="-90.0" startEvent="easeOutBack" zOrder="29"/>
-    <actor costume="alien2a" role="uk.co.nickthecoder.itchy.PlainRole" x="483" y="385" direction="-90.0" heading="-90.0" startEvent="easeInOutCirc" zOrder="30"/>
-    <actor costume="alien1b" role="uk.co.nickthecoder.itchy.PlainRole" x="432" y="385" direction="-90.0" heading="-90.0" startEvent="easeInOut" zOrder="31"/>
-    <actor costume="alien2b" role="uk.co.nickthecoder.itchy.PlainRole" x="538" y="385" direction="-90.0" heading="-90.0" startEvent="easeInOutCubic" zOrder="32"/>
-    <actor costume="alien3a" role="uk.co.nickthecoder.itchy.PlainRole" x="593" y="385" direction="-90.0" heading="-90.0" startEvent="easeInOutQuad" zOrder="33"/>
-    <actor costume="alien3b" role="uk.co.nickthecoder.itchy.PlainRole" x="654" y="385" direction="-90.0" heading="-90.0" startEvent="easeInOutExpo" zOrder="34"/>
-    <actor costume="alien1a" role="uk.co.nickthecoder.itchy.PlainRole" x="712" y="385" direction="-90.0" heading="-90.0" startEvent="easeInOutBack" zOrder="35"/>
+    <actor costume="alien1b" role="uk.co.nickthecoder.itchy.role.PlainRole" x="30" y="83" direction="-90.0" heading="-90.0" startEvent="easeIn" zOrder="16"/>
+    <actor costume="alien2a" role="uk.co.nickthecoder.itchy.role.PlainRole" x="87" y="83" direction="-90.0" heading="-90.0" startEvent="easeInCirc" zOrder="17"/>
+    <actor costume="alien2b" role="uk.co.nickthecoder.itchy.role.PlainRole" x="157" y="84" direction="-90.0" heading="-90.0" startEvent="easeInCubic" zOrder="18"/>
+    <actor costume="alien3a" role="uk.co.nickthecoder.itchy.role.PlainRole" x="288" y="83" direction="-90.0" heading="-90.0" startEvent="easeInExpo" zOrder="19"/>
+    <actor costume="alien3b" role="uk.co.nickthecoder.itchy.role.PlainRole" x="229" y="84" direction="-90.0" heading="-90.0" startEvent="easeInQuad" zOrder="20"/>
+    <actor costume="alien1a" role="uk.co.nickthecoder.itchy.role.PlainRole" x="353" y="84" direction="-90.0" heading="-90.0" startEvent="easeInBack" zOrder="21"/>
+    <actor costume="alien3b" role="uk.co.nickthecoder.itchy.role.PlainRole" x="508" y="85" direction="-90.0" heading="-90.0" startEvent="linear" zOrder="22"/>
+    <actor costume="alien3a" role="uk.co.nickthecoder.itchy.role.PlainRole" x="574" y="85" direction="-90.0" heading="-90.0" startEvent="ease" zOrder="23"/>
+    <actor costume="alien1b" role="uk.co.nickthecoder.itchy.role.PlainRole" x="28" y="384" direction="-90.0" heading="-90.0" startEvent="easeOut" zOrder="24"/>
+    <actor costume="alien2a" role="uk.co.nickthecoder.itchy.role.PlainRole" x="85" y="384" direction="-90.0" heading="-90.0" startEvent="easeOutCirc" zOrder="25"/>
+    <actor costume="alien2b" role="uk.co.nickthecoder.itchy.role.PlainRole" x="145" y="384" direction="-90.0" heading="-90.0" startEvent="easeOutCubic" zOrder="26"/>
+    <actor costume="alien3a" role="uk.co.nickthecoder.itchy.role.PlainRole" x="285" y="385" direction="-90.0" heading="-90.0" startEvent="easeOutExpo" zOrder="27"/>
+    <actor costume="alien3b" role="uk.co.nickthecoder.itchy.role.PlainRole" x="205" y="385" direction="-90.0" heading="-90.0" startEvent="easeOutQuad" zOrder="28"/>
+    <actor costume="alien1a" role="uk.co.nickthecoder.itchy.role.PlainRole" x="349" y="385" direction="-90.0" heading="-90.0" startEvent="easeOutBack" zOrder="29"/>
+    <actor costume="alien2a" role="uk.co.nickthecoder.itchy.role.PlainRole" x="483" y="385" direction="-90.0" heading="-90.0" startEvent="easeInOutCirc" zOrder="30"/>
+    <actor costume="alien1b" role="uk.co.nickthecoder.itchy.role.PlainRole" x="432" y="385" direction="-90.0" heading="-90.0" startEvent="easeInOut" zOrder="31"/>
+    <actor costume="alien2b" role="uk.co.nickthecoder.itchy.role.PlainRole" x="538" y="385" direction="-90.0" heading="-90.0" startEvent="easeInOutCubic" zOrder="32"/>
+    <actor costume="alien3a" role="uk.co.nickthecoder.itchy.role.PlainRole" x="593" y="385" direction="-90.0" heading="-90.0" startEvent="easeInOutQuad" zOrder="33"/>
+    <actor costume="alien3b" role="uk.co.nickthecoder.itchy.role.PlainRole" x="654" y="385" direction="-90.0" heading="-90.0" startEvent="easeInOutExpo" zOrder="34"/>
+    <actor costume="alien1a" role="uk.co.nickthecoder.itchy.role.PlainRole" x="712" y="385" direction="-90.0" heading="-90.0" startEvent="easeInOutBack" zOrder="35"/>
     <text text="easeInOutCirc" font="vera" size="14" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="469" y="572" direction="0.0" heading="0.0" startEvent="default" zOrder="36"/>
     <text text="easeInOutCubic" font="vera" size="14" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="529" y="557" direction="0.0" heading="0.0" startEvent="default" zOrder="37"/>
     <text text="easeInOutQuad" font="vera" size="14" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="593" y="586" direction="0.0" heading="0.0" startEvent="default" zOrder="38"/>
     <text text="easeInOutExpo" font="vera" size="14" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="656" y="570" direction="0.0" heading="0.0" startEvent="default" zOrder="39"/>
     <text text="easeInOutBack" font="vera" size="14" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="712" y="551" direction="0.0" heading="0.0" startEvent="default" zOrder="40"/>
-    <actor costume="alien1a" role="uk.co.nickthecoder.itchy.PlainRole" x="637" y="85" direction="-90.0" heading="-90.0" startEvent="bounce" zOrder="41"/>
-    <actor costume="alien1b" role="uk.co.nickthecoder.itchy.PlainRole" x="685" y="85" direction="-90.0" heading="-90.0" startEvent="bounce2" zOrder="42"/>
-    <actor costume="alien2a" role="uk.co.nickthecoder.itchy.PlainRole" x="746" y="85" direction="-90.0" heading="-90.0" startEvent="bounce3" zOrder="43"/>
+    <actor costume="alien1a" role="uk.co.nickthecoder.itchy.role.PlainRole" x="637" y="85" direction="-90.0" heading="-90.0" startEvent="bounce" zOrder="41"/>
+    <actor costume="alien1b" role="uk.co.nickthecoder.itchy.role.PlainRole" x="685" y="85" direction="-90.0" heading="-90.0" startEvent="bounce2" zOrder="42"/>
+    <actor costume="alien2a" role="uk.co.nickthecoder.itchy.role.PlainRole" x="746" y="85" direction="-90.0" heading="-90.0" startEvent="bounce3" zOrder="43"/>
     <text text="bounce" font="vera" size="14" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="629" y="37" direction="0.0" heading="0.0" startEvent="default" zOrder="44"/>
     <text text="bounce2" font="vera" size="14" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="677" y="52" direction="0.0" heading="0.0" startEvent="default" zOrder="45"/>
     <text text="bounce3" font="vera" size="14" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="747" y="35" direction="0.0" heading="0.0" startEvent="default" zOrder="46"/>

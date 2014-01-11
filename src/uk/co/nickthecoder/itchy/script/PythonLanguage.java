@@ -21,10 +21,10 @@ import uk.co.nickthecoder.itchy.CostumeProperties;
 import uk.co.nickthecoder.itchy.Director;
 import uk.co.nickthecoder.itchy.Game;
 import uk.co.nickthecoder.itchy.PlainDirector;
-import uk.co.nickthecoder.itchy.PlainRole;
 import uk.co.nickthecoder.itchy.PlainSceneDirector;
 import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.SceneDirector;
+import uk.co.nickthecoder.itchy.role.PlainRole;
 import uk.co.nickthecoder.itchy.util.ClassName;
 
 public class PythonLanguage extends ScriptLanguage

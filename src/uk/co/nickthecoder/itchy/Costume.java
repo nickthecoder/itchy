@@ -13,6 +13,7 @@ import java.util.Set;
 import uk.co.nickthecoder.itchy.animation.Animation;
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
 import uk.co.nickthecoder.itchy.property.Property;
+import uk.co.nickthecoder.itchy.role.PlainRole;
 import uk.co.nickthecoder.itchy.script.ScriptManager;
 import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.jame.Sound;
@@ -24,7 +25,7 @@ public class Costume implements Cloneable
     private Costume extendedFrom;
 
     @Property(label = "Role")
-    public ClassName roleClassName = new ClassName(Role.class, uk.co.nickthecoder.itchy.role.NullRole.class.getName());
+    public ClassName roleClassName = new ClassName(Role.class, uk.co.nickthecoder.itchy.role.PlainRole.class.getName());
 
     @Property(label = "Default Z Order")
     public int defaultZOrder;

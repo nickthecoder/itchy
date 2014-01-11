@@ -99,7 +99,7 @@ public class TextValue extends AbstractRole
             pose.setText(this.errorValue);
         }
         if (this.updateInterval < 0) {
-            getActor().setRole(new NullRole());
+            getActor().setRole(new PlainRole());
         }
     }
 

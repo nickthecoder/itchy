@@ -22,7 +22,7 @@ import uk.co.nickthecoder.itchy.PlainDirector;
 import uk.co.nickthecoder.itchy.PlainSceneDirector;
 import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.SceneDirector;
-import uk.co.nickthecoder.itchy.role.NullRole;
+import uk.co.nickthecoder.itchy.role.PlainRole;
 import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.itchy.collision.BruteForceCollisionStrategy;
 import uk.co.nickthecoder.itchy.collision.CollisionStrategy;
@@ -327,8 +327,8 @@ public class JavascriptLanguage extends ShimmedScriptLanguage
         }
 
         if (role == null) {
-            log("Using NullRole instead.");
-            return new NullRole();
+            log("Using PlainRole instead.");
+            return new PlainRole();
         }
         return role;
     }

@@ -5,7 +5,7 @@
 package uk.co.nickthecoder.itchy;
 
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
-import uk.co.nickthecoder.itchy.role.NullRole;
+import uk.co.nickthecoder.itchy.role.PlainRole;
 import uk.co.nickthecoder.itchy.util.XMLException;
 import uk.co.nickthecoder.itchy.util.XMLWriter;
 import uk.co.nickthecoder.jame.RGBA;
@@ -113,7 +113,7 @@ public class SceneWriter extends XMLWriter
                 this.attribute("color", tsa.color.getRGBCode());
                 this.attribute("xAlignment", tsa.xAlignment);
                 this.attribute("yAlignment", tsa.yAlignment);
-                if (!NullRole.class.getName().equals(sceneActor.roleClassName.name)) {
+                if (!PlainRole.class.getName().equals(sceneActor.roleClassName.name)) {
                     this.attribute("role", sceneActor.roleClassName.name);
                 }
                 if (tsa.costume != null) {

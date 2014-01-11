@@ -6,7 +6,6 @@ package uk.co.nickthecoder.itchy.role;
 
 import uk.co.nickthecoder.itchy.AbstractRole;
 import uk.co.nickthecoder.itchy.Actor;
-import uk.co.nickthecoder.itchy.PlainRole;
 import uk.co.nickthecoder.itchy.property.Property;
 
 /**

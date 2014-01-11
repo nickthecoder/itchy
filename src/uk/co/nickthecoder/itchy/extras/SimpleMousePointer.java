@@ -9,8 +9,8 @@ import uk.co.nickthecoder.itchy.Costume;
 import uk.co.nickthecoder.itchy.Game;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.MousePointer;
-import uk.co.nickthecoder.itchy.PlainRole;
 import uk.co.nickthecoder.itchy.Role;
+import uk.co.nickthecoder.itchy.role.PlainRole;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 

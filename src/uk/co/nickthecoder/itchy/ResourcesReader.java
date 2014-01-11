@@ -16,7 +16,7 @@ import uk.co.nickthecoder.itchy.animation.Frame;
 import uk.co.nickthecoder.itchy.animation.FramedAnimation;
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
 import uk.co.nickthecoder.itchy.property.PropertySubject;
-import uk.co.nickthecoder.itchy.role.NullRole;
+import uk.co.nickthecoder.itchy.role.PlainRole;
 import uk.co.nickthecoder.itchy.script.ScriptManager;
 import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.itchy.util.NinePatch;
@@ -216,7 +216,7 @@ public class ResourcesReader
 
             }
 
-            String roleName = costumeTag.getOptionalAttribute("role", NullRole.class.getName());
+            String roleName = costumeTag.getOptionalAttribute("role", PlainRole.class.getName());
             ClassName roleClassName = new ClassName(Role.class, roleName);
 
             if (this.resources.checkClassName(roleClassName)) {

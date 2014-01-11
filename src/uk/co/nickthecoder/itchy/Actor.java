@@ -11,14 +11,14 @@ import uk.co.nickthecoder.itchy.animation.CompoundAnimation;
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
 import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.PropertySubject;
-import uk.co.nickthecoder.itchy.role.NullRole;
+import uk.co.nickthecoder.itchy.role.PlainRole;
 import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.jame.RGBA;
 import uk.co.nickthecoder.jame.Surface;
 
 public class Actor implements PropertySubject<Actor>
 {
-    private static NullRole unsedRole = new NullRole();
+    private static PlainRole unsedRole = new PlainRole();
 
     private static Pose startPose( Costume costume, String name )
     {
@@ -405,7 +405,7 @@ public class Actor implements PropertySubject<Actor>
             this.role.detatched();
         }
 
-        this.role = role == null ? new NullRole() : role;
+        this.role = role == null ? new PlainRole() : role;
         this.role.attached(this);
 
         if (this.stage != null) {

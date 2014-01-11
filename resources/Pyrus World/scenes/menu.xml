@@ -30,14 +30,14 @@
     </actor>
   </layer>
   <layer name="hud">
-    <text text="Torus World" font="BlackCasper" size="128" color="#d526db" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.PlainRole" costume="title" x="408" y="511" direction="0.0" heading="0.0" startEvent="slideInDown" zOrder="1" alpha="168.0" activationDelay="0.3">
+    <text text="Torus World" font="BlackCasper" size="128" color="#d526db" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.PlainRole" costume="title" x="408" y="511" direction="0.0" heading="0.0" startEvent="slideInDown" zOrder="1" alpha="168.0" activationDelay="0.3">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Textured">
         <property name="poseName" value="texture1"/>
         <property name="y" value="0"/>
         <property name="x" value="1"/>
       </makeup>
     </text>
-    <text text="Asteroids in Non-Euclidian Space" font="Boycott" size="50" color="#b2c166" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.PlainRole" costume="title" x="408" y="435" direction="0.0" heading="0.0" startEvent="slideInDown" zOrder="1" alpha="191.0" activationDelay="0.3">
+    <text text="Asteroids in Non-Euclidian Space" font="Boycott" size="50" color="#b2c166" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.PlainRole" costume="title" x="408" y="435" direction="0.0" heading="0.0" startEvent="slideInDown" zOrder="1" alpha="191.0" activationDelay="0.3">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Textured">
         <property name="poseName" value="texture1"/>
         <property name="y" value="0"/>

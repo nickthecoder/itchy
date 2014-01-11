@@ -23,12 +23,12 @@ import uk.co.nickthecoder.itchy.AbstractRole;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Costume;
 import uk.co.nickthecoder.itchy.Itchy;
-import uk.co.nickthecoder.itchy.PlainRole;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.collision.Neighbourhood;
 import uk.co.nickthecoder.itchy.collision.SinglePointCollisionStrategy;
 import uk.co.nickthecoder.itchy.collision.Square;
 import uk.co.nickthecoder.itchy.collision.StandardNeighbourhood;
+import uk.co.nickthecoder.itchy.role.PlainRole;
 import uk.co.nickthecoder.jame.Video;
 
 public class NeighbourhoodTest

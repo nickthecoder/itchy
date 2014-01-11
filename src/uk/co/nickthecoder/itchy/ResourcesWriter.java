@@ -14,7 +14,7 @@ import uk.co.nickthecoder.itchy.animation.Frame;
 import uk.co.nickthecoder.itchy.animation.FramedAnimation;
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
 import uk.co.nickthecoder.itchy.property.PropertySubject;
-import uk.co.nickthecoder.itchy.role.NullRole;
+import uk.co.nickthecoder.itchy.role.PlainRole;
 import uk.co.nickthecoder.itchy.util.NinePatch;
 import uk.co.nickthecoder.itchy.util.StringUtils;
 import uk.co.nickthecoder.itchy.util.XMLException;
@@ -280,7 +280,7 @@ public class ResourcesWriter extends XMLWriter
         if (baseName != null) {
             this.attribute("extends", baseName);
         }
-        if (!NullRole.class.getName().equals(simpleCostume.roleClassName.name)) {
+        if (!PlainRole.class.getName().equals(simpleCostume.roleClassName.name)) {
             this.attribute("role", simpleCostume.roleClassName.name);
         }
 

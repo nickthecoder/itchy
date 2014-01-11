@@ -32,7 +32,7 @@
       </makeup>
     </text>
     <text text="Did you know..." font="VeraBold" size="22" color="#ffffff" xAlignment="0.0" yAlignment="0.5" x="76" y="390" direction="0.0" heading="0.0" startEvent="default" zOrder="7"/>
-    <text text="The asteroid belt is" font="Vera" size="22" color="#ffffff" xAlignment="0.0" yAlignment="0.5" role="uk.co.nickthecoder.itchy.PlainRole" costume="title" x="126" y="342" direction="0.0" heading="0.0" startEvent="slideInRight" zOrder="8"/>
+    <text text="The asteroid belt is" font="Vera" size="22" color="#ffffff" xAlignment="0.0" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.PlainRole" costume="title" x="126" y="342" direction="0.0" heading="0.0" startEvent="slideInRight" zOrder="8"/>
     <text text="Mostly Empty" font="VeraBold" size="22" color="#3344cc" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.LinkButton" costume="link" x="424" y="342" direction="0.0" heading="0.0" startEvent="slideInLeft" zOrder="9">
       <property name="url" value="http://en.wikipedia.org/wiki/Asteroid_belt#Characteristics"/>
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
@@ -41,7 +41,7 @@
         <property name="color" value="#8888ffff"/>
       </makeup>
     </text>
-    <text text="Joining the edges of a rectangle" font="Vera" size="22" color="#ffffff" xAlignment="0.0" yAlignment="0.5" role="uk.co.nickthecoder.itchy.PlainRole" costume="title" x="125" y="307" direction="0.0" heading="0.0" startEvent="slideInRight" zOrder="10" activationDelay="0.2"/>
+    <text text="Joining the edges of a rectangle" font="Vera" size="22" color="#ffffff" xAlignment="0.0" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.PlainRole" costume="title" x="125" y="307" direction="0.0" heading="0.0" startEvent="slideInRight" zOrder="10" activationDelay="0.2"/>
     <text text="Makes a Torus" font="VeraBold" size="22" color="#3344cc" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.LinkButton" costume="link" x="571" y="308" direction="0.0" heading="0.0" startEvent="slideInLeft" zOrder="11" activationDelay="0.2">
       <property name="url" value="http://en.wikipedia.org/wiki/File:Torus_from_rectangle.gif"/>
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
@@ -50,7 +50,7 @@
         <property name="color" value="#8888ffff"/>
       </makeup>
     </text>
-    <text text="Angles of a triangle " font="Vera" size="22" color="#ffffff" xAlignment="0.0" yAlignment="0.5" role="uk.co.nickthecoder.itchy.PlainRole" costume="title" x="127" y="269" direction="0.0" heading="0.0" startEvent="slideInRight" zOrder="12" activationDelay="0.4"/>
+    <text text="Angles of a triangle " font="Vera" size="22" color="#ffffff" xAlignment="0.0" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.PlainRole" costume="title" x="127" y="269" direction="0.0" heading="0.0" startEvent="slideInRight" zOrder="12" activationDelay="0.4"/>
     <text text="Don't add up to 180 degrees" font="VeraBold" size="22" color="#3344cc" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.LinkButton" costume="link" x="525" y="270" direction="0.0" heading="0.0" startEvent="slideInLeft" zOrder="13" activationDelay="0.4">
       <property name="url" value="http://soler7.com/IFAQ/NonEuclideanGeometryNotes.html"/>
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
