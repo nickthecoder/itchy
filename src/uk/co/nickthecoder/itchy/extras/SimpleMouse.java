@@ -59,12 +59,14 @@ public class SimpleMouse implements Mouse
     }
 
     private Stage mouseStage;
-    
+
     @Override
     public void onGainedMouseFocus()
     {
         if ((this.mousePointer != null) && (this.mousePointer.getActor() != null)) {
-            this.mousePointer.getActor().setStage(this.mouseStage);
+            if (this.mousePointer.getActor().getStage() == null) {
+                this.mousePointer.getActor().setStage(this.mouseStage);
+            }
         }
     }
 
@@ -74,6 +76,6 @@ public class SimpleMouse implements Mouse
         if ((this.mousePointer != null) && (this.mousePointer.getActor() != null)) {
             this.mouseStage = this.mousePointer.getActor().getStage();
             this.mousePointer.getActor().setStage(null);
-        }        
+        }
     }
 }

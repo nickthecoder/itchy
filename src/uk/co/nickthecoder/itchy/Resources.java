@@ -84,6 +84,33 @@ public class Resources extends Loadable
         this.game = new Game(this);
     }
 
+    /**
+     * Used by the SceneDesigner when testing a scene. It creates a duplicate set of resources, so that
+     * a new Game can run the test, leaving the state of the old Game untouched. This is important when
+     * the editor is launched from within the game.
+     */
+    public Resources copy()
+    {
+        Resources result = new Resources();
+        result.sounds.putAll(this.sounds);
+        result.fonts.putAll(this.fonts);
+        result.ninePatches.putAll(this.ninePatches);
+        result.scenes.putAll(this.scenes);
+        result.poses.putAll(this.poses);
+        result.costumes.putAll(this.costumes);
+        result.animations.putAll(this.animations);
+        result.renamedCostumes.putAll(this.renamedCostumes);
+        
+        result.setFile(this.getFile());
+        
+        Itchy.loadingGame(result.game);
+        result.setGameInfo(this.gameInfo);
+        result.game.setDirector(result.getGameInfo().createDirector(result));
+        Itchy.loadingGame(null);
+        
+        return result;
+    }
+    
     public String getId()
     {
         String name = this.getFile().getName();

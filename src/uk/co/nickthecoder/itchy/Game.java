@@ -174,6 +174,9 @@ public class Game
      */
     public Game( Resources resources )
     {
+        if ( (!(this instanceof Editor)) && (resources.game != null)) {
+            throw new RuntimeException("Attempted to create more than one game sharing a single resources file");
+        }
         this.resources = resources;
         this.scriptManager = resources.scriptManager;
 
@@ -373,7 +376,7 @@ public class Game
     public void testScene( String sceneName )
     {
         try {
-            System.err.println("Starting Test");
+            System.err.println("Starting Test " + this + " scene " + sceneName);
             this.testing = true;
             start(sceneName);
 
@@ -634,10 +637,10 @@ public class Game
                 this.mouseOwner.onMouseMove(mme);
                 return;
             }
-        } else if ( event instanceof WindowEvent ) {
-            
+        } else if (event instanceof WindowEvent) {
+
             WindowEvent we = (WindowEvent) event;
-            if (this.director.onWindowEvent( we )) {
+            if (this.director.onWindowEvent(we)) {
                 return;
             }
             // If the director hasn't handled mouse focus, then hide fancy mouse pointers when the
@@ -911,10 +914,10 @@ public class Game
 
     }
 
-    @Override
-    public String toString()
-    {
-        return this.getClass().getName() + " Resources " + this.resources;
-    }
+//    @Override
+//    public String toString()
+//    {
+//        return this.getClass().getName() + " Resources " + this.resources;
+//    }
 
 }

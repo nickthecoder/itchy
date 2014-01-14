@@ -20,6 +20,7 @@ import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.KeyListener;
 import uk.co.nickthecoder.itchy.MouseListener;
 import uk.co.nickthecoder.itchy.Pose;
+import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.Scene;
 import uk.co.nickthecoder.itchy.SceneActor;
@@ -1686,10 +1687,14 @@ public class SceneDesigner implements MouseListener, KeyListener
     {
         try {
 
-            Game game = new Game(this.editor.resources);
-            game.init();
-            game.setDirector(this.editor.resources.getGameInfo().createDirector(this.editor.resources));
-
+            //Game game = new Game(this.editor.resources);
+            // Game game = this.editor.resources.game;
+            Resources duplicate = this.editor.resources.copy();
+            Game game = duplicate.game;
+            
+            System.out.println("SceneDesigner. Testing game : " + game );
+            //game.init();
+            // game.setDirector(this.editor.resources.getGameInfo().createDirector(this.editor.resources));
             game.testScene(this.sceneResource.name);
 
         } catch (Exception e) {

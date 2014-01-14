@@ -14,7 +14,7 @@ Director = Class({
     
     onStarted:function() {
         // Don't create default stages and views, because we want to use a special WrappedStageView
-        stdout.println( "Creating custom stages and views" );
+        stdout.println( "Creating custom stages and views. " + game );
 
         var screenRect = Rect(0, 0, game.getWidth(), game.getHeight());
 

@@ -1,5 +1,6 @@
 Rebuild Jame on i686 and win32
 
+Test JS torus world crashes. The game instances are different.
 
 Save an animation with delay/frames = 0 fails, but the error message throws an exception!!! - possibly Label's font not set
     Catch the exception rather than let it crash the system
