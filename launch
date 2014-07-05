@@ -6,7 +6,7 @@ BASE=`pwd -P`
 popd > /dev/null
 
 NATIVE_DIR=${BASE}/lib/native/`uname -m`
-CLASSPATH=${BASE}/lib/itchy.jar:${BASE}/lib/jame.jar
+CLASSPATH=${BASE}/lib/itchy.jar:${BASE}/lib/jame.jar:${BASE}/lib/jython-2.5.3.jar
 MAIN=uk.co.nickthecoder.itchy.Launcher
 
 java -Ditchy.base="${BASE}" -Djava.library.path="${NATIVE_DIR}" -classpath "${CLASSPATH}" "${MAIN}" "$@"
