@@ -444,12 +444,18 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
      * "baked-into" the pose itself.
      * <p>
      * This can be used for efficiency; if the appearance has complex makeup, then the makeup would normally be applied every time the actor
-     * is rotated, colourised, scaled etc. If you fix the appearance, then the makeup is only applied once.
+     * is rotated, colorized, scaled etc. If you fix the appearance, then the makeup is only applied once.
      * <p>
      * This can also be used to create particular effects. For example, if the actor is rotated, and you use clip, then the clip is usually
      * done before the rotation. However, if you fix the appearance, and then clip, the clip will apply to the rotated image.
      * <p>
      * Note: If an actor changes pose, then the results of the fixed makeup will be lost.
+     * 
+     * TODO BUG? Doesn't look right, as the scale, rotation, colorize and makeup will be applied, but
+     * only the makeup is removed, so the others will be applied twice. This should probably be replaced
+     * with "fixMakeup", which renders the makeup, and then nulls it out, and by "snapshot", which
+     * returns the current image including scale, rotation etc, which could then be used as the basis
+     * for other kind of processing, but leaves this completely appearance unchanged. 
      */
     public void fixAppearance()
     {
