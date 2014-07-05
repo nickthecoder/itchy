@@ -1,7 +1,5 @@
 Rebuild Jame on i686 and win32
 
-Test JS torus world crashes. The game instances are different.
-
 Save an animation with delay/frames = 0 fails, but the error message throws an exception!!! - possibly Label's font not set
     Catch the exception rather than let it crash the system
     Fix the exception
@@ -318,52 +316,4 @@ Appearance optimised so that it doesn't need to re-render the appearance to get 
 
 
 
-
-
-
-
-
-New Server
-==========
-Install debian onto the SSD.
-Create a single partition 90% of the disk.
-
-Get a spare drive, and format it with one large partition and three small ones.
-The small ones will be for swap and /var/log and /tmp
-The large one will be for /gidea (a subset)
-
-Get the nvidia driver working
-    https://wiki.debian.org/NvidiaGraphicsDrivers
-
-Install all of the software onto root partition, except Myth
-
-Make a backup of
-    /gidea/projects
-    /home/nick
-    /home/nalin
-    /gidea/music/ a small subset of default to test only
-    /gidea/images
-
-Set the computer name to be giddydom.healthy
-And have /etc/hosts resolve giddyserv to localhost and old-giddyserv to 192.168.1.2
-
-tar /etc /boot from real giddyserv and copy it over.
-
-Get tomcat and apache working
-
-Backup and copy over the mythdatabase and familyalbum database (others?)
-
-Remove the old / partition from real giddyserv and replace it with SSD
-This also contains /mythdata and /backup
-Mount /giddyserv (raid array).
-
-Install the double DVB card
-Set up Myth - maybe moving the box down stairs for access to the aerial.
-
-Backup the SSD, so that if it fails, I can get back to a good system quickly.
-
-
-Firewall
-Backup scripts
-Website indexer (butchers)
 

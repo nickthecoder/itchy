@@ -7,7 +7,4 @@ It is designed to be fast, using SDL as its low level graphics API, via a java w
 
 To run the example games :
 
-./launch rain
-./launch tetra
-./launch drunkInvaders
-
+./launch
