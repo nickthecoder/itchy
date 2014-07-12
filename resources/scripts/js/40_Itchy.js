@@ -119,5 +119,13 @@ CostumePropertiesScript = Class({
 });
 
 
+StageConstraint = Class({
+
+    constrainX: function( x, y ) { return x; },
+    
+    constrainY: function( x, y ) { return y; }
+
+});
+
     
 

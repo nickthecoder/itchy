@@ -118,4 +118,9 @@ public abstract class ShimmedScriptLanguage extends StandardScriptLanguage
 
     public abstract List<AbstractProperty<CostumeProperties, ?>> getProperties( ScriptedCostumeProperties scriptedCostumeProperties );
 
+    // ====== STAGE CONSTRAINT ====
+    
+    public abstract double constrainX( ScriptedStageConstraint stageConstraint, double x, double y );
+
+    public abstract double constrainY( ScriptedStageConstraint stageConstraint, double x, double y );
 }

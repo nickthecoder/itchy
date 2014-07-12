@@ -27,6 +27,7 @@ import uk.co.nickthecoder.itchy.SceneActor;
 import uk.co.nickthecoder.itchy.SceneDirector;
 import uk.co.nickthecoder.itchy.SceneResource;
 import uk.co.nickthecoder.itchy.Stage;
+import uk.co.nickthecoder.itchy.StageConstraint;
 import uk.co.nickthecoder.itchy.StageView;
 import uk.co.nickthecoder.itchy.TextPose;
 import uk.co.nickthecoder.itchy.View;
@@ -1169,7 +1170,11 @@ public class SceneDesigner implements MouseListener, KeyListener
     private void moveActor( int dx, int dy )
     {
         if (this.currentActor != null) {
-            this.currentActor.moveBy(dx, dy);
+            double x = this.currentActor.getX() + dx;
+            double y = this.currentActor.getY() + dy;
+
+            StageConstraint sc = this.currentStageView.getStage().getStageConstraint();
+            this.currentActor.moveTo(sc.constrainX(x, y), sc.constrainY(x, y));
         }
     }
 
@@ -1244,7 +1249,7 @@ public class SceneDesigner implements MouseListener, KeyListener
 
         if ((event.button == 2) || ((event.button == 1) && Itchy.isAltDown())) {
             setMode(MODE_DRAG_SCROLL);
-            beginDrag(event);
+            beginDrag(event.x, event.y);
             return true;
         }
 
@@ -1258,7 +1263,7 @@ public class SceneDesigner implements MouseListener, KeyListener
                 Actor actor = handleRole.getActor();
 
                 if (actor.hitting(event.x, event.y)) {
-                    beginDrag(event);
+                    beginDrag(event.x, event.y);
                     handleRole.dragStart();
                     this.currentHandleRole = handleRole;
                     setMode(MODE_DRAG_HANDLE);
@@ -1288,7 +1293,7 @@ public class SceneDesigner implements MouseListener, KeyListener
                             } else {
                                 selectActor(actor);
                                 setMode(MODE_DRAG_ACTOR);
-                                beginDrag(event);
+                                beginDrag(event.x, event.y);
                                 return true;
                             }
                         }
@@ -1307,7 +1312,7 @@ public class SceneDesigner implements MouseListener, KeyListener
                         } else {
                             selectActor(actor);
                             setMode(MODE_DRAG_ACTOR);
-                            beginDrag(event);
+                            beginDrag(event.x, event.y);
                             return true;
                         }
                     }
@@ -1349,7 +1354,9 @@ public class SceneDesigner implements MouseListener, KeyListener
                 setDefaultProperties(role.actualRole, this.currentCostume);
             }
 
-            actor.moveTo(event.x, event.y);
+            StageConstraint sc = this.currentStageView.getStage().getStageConstraint();
+
+            actor.moveTo(sc.constrainX(event.x, event.y), sc.constrainY(event.x, event.y));
             actor.setRole(role);
             if (this.currentCostume != null) {
                 actor.setZOrder(this.currentCostume.defaultZOrder);
@@ -1406,7 +1413,13 @@ public class SceneDesigner implements MouseListener, KeyListener
         int dy = event.y - this.dragStartY;
 
         if (this.mode == MODE_STAMP_COSTUME) {
-            this.stampActor.moveTo(event.x, event.y);
+
+            StageConstraint sc = this.currentStageView.getStage().getStageConstraint();
+
+            double newX = sc.constrainX(event.x, event.y);
+            double newY = sc.constrainY(event.x, event.y);
+
+            this.stampActor.moveTo(newX, newY);
 
             return true;
 
@@ -1415,26 +1428,40 @@ public class SceneDesigner implements MouseListener, KeyListener
             return true;
 
         } else if (this.mode == MODE_DRAG_ACTOR) {
-            if ((dx != 0) || (dy != 0)) {
-                this.undoList.apply(new UndoMoveActor(this.currentActor, dx, dy));
+
+            StageConstraint sc = this.currentStageView.getStage().getStageConstraint();
+
+            double reqX = this.currentActor.getX() + dx;
+            double reqY = this.currentActor.getY() + dy;
+
+            double newX = sc.constrainX(reqX, reqY);
+            double newY = sc.constrainY(reqX, reqY);
+
+            if ((newX != this.currentActor.getX()) || (newY != this.currentActor.getY())) {
+                this.undoList.apply(
+                    new UndoMoveActor(
+                        this.currentActor,
+                        newX - this.currentActor.getX(),
+                        newY - this.currentActor.getY()
+                    ));
+                this.changed = true;
+                beginDrag((int) (event.x + newX - reqX), (int) (event.y + newY - reqY));
             }
-            this.changed = true;
-            beginDrag(event);
 
         } else if (this.mode == MODE_DRAG_HANDLE) {
             this.currentHandleRole.moveBy(dx, dy);
             this.changed = true;
-            beginDrag(event);
+            beginDrag(event.x, event.y);
 
         }
 
         return false;
     }
 
-    private void beginDrag( MouseEvent event )
+    private void beginDrag( int x, int y )
     {
-        this.dragStartX = event.x;
-        this.dragStartY = event.y;
+        this.dragStartX = x;
+        this.dragStartY = y;
     }
 
     private void setDefaultProperties( Role role, Costume costume )
@@ -1687,13 +1714,13 @@ public class SceneDesigner implements MouseListener, KeyListener
     {
         try {
 
-            //Game game = new Game(this.editor.resources);
+            // Game game = new Game(this.editor.resources);
             // Game game = this.editor.resources.game;
             Resources duplicate = this.editor.resources.copy();
             Game game = duplicate.game;
-            
-            System.out.println("SceneDesigner. Testing game : " + game );
-            //game.init();
+
+            System.out.println("SceneDesigner. Testing game : " + game);
+            // game.init();
             // game.setDirector(this.editor.resources.getGameInfo().createDirector(this.editor.resources));
             game.testScene(this.sceneResource.name);
 

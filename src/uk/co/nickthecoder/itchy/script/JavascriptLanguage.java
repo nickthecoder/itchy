@@ -709,4 +709,39 @@ public class JavascriptLanguage extends ShimmedScriptLanguage
         }
     }
 
+
+    // ===== StageConstraint ======
+    
+    @Override
+    public double constrainX( ScriptedStageConstraint stageConstraint, double x, double y )
+    {
+        try {
+            Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
+            bindings.put("ssc", stageConstraint);
+            bindings.put("x", x);
+            bindings.put("y", x);
+            return (Double) this.engine.eval("ssc.onconstrainX(x,y);");
+
+        } catch (ScriptException e) {
+            handleException("StageConstraint.constrainX", e);
+            return x;
+        } 
+    }
+
+    @Override
+    public double constrainY( ScriptedStageConstraint stageConstraint, double x, double y )
+    {
+        try {
+            Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
+            bindings.put("ssc", stageConstraint);
+            bindings.put("x", x);
+            bindings.put("y", x);
+            return (Double) this.engine.eval("ssc.onconstrainY(x,y);");
+
+        } catch (ScriptException e) {
+            handleException("StageConstraint.constrainX", e);
+            return x;
+        } 
+    }
 }
+
