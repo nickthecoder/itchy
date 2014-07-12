@@ -3,9 +3,9 @@ ${NAME} = Class({
     Extends: DirectorScript,
 
     onStarted: function() {
-    	// TODO Super will create a default stage and view. Omit this if you want to create your own stages and views instead.
-    	Super();
-    	// TODO Initialise your object.
+        // TODO Super will create a default stage and view. Omit this if you want to create your own stages and views instead.
+        Super();
+        // TODO Initialise your object.
     },
     
     tick: function() {

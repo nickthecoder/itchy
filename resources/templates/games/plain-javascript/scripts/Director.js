@@ -3,9 +3,9 @@ Director = Class({
     Extends: DirectorScript,
 
     onStarted: function() {
-    	// Call Super, to create a default stage and view, which takes up the whole screen.
-    	Super();
-    	// TODO initialise your object.
+        // Call Super, to create a default stage and view, which takes up the whole screen.
+        Super();
+        // TODO initialise your object.
     },
 
     tick: function() {
