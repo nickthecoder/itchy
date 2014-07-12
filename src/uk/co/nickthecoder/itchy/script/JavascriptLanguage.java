@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.script.Bindings;
 import javax.script.ScriptContext;
+import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
@@ -45,10 +46,9 @@ public class JavascriptLanguage extends ShimmedScriptLanguage
     }
 
     @Override
-    public void initialise()
+    public ScriptEngine createEngine()
     {
-        this.engine = new ScriptEngineManager().getEngineByName("javascript");
-        super.initialise();
+        return new ScriptEngineManager().getEngineByName("javascript");
     }
 
     @Override
@@ -71,7 +71,6 @@ public class JavascriptLanguage extends ShimmedScriptLanguage
     public void ensureGlobals()
         throws ScriptException
     {
-        ensureInitialised();
         Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
         Game game = this.manager.resources.getGame();
         bindings.put("game", game);

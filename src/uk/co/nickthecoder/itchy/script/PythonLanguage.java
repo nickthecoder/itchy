@@ -63,7 +63,6 @@ public class PythonLanguage extends ScriptLanguage
     public void loadScript( ClassName className )
         throws ScriptException
     {
-        ensureInitialised();
         String moduleName = ScriptManager.getName(className);
         String klassName = moduleName.substring(0, 1).toUpperCase() + moduleName.substring(1);
 
@@ -120,7 +119,6 @@ public class PythonLanguage extends ScriptLanguage
     private void ensureGlobals()
         throws ScriptException
     {
-        ensureInitialised();
         Game game = this.manager.resources.getGame();
         this.interpreter.set("game", game);
         this.interpreter.set("director", game.getDirector());

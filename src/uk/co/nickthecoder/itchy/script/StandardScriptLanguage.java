@@ -32,6 +32,8 @@ public abstract class StandardScriptLanguage extends ScriptLanguage
     @Override
     protected void initialise()
     {
+        this.engine = createEngine();
+        
         Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
         bindings.put("scriptLanguage", this);
         bindings.put("scriptEngine", this.engine);
@@ -54,6 +56,8 @@ public abstract class StandardScriptLanguage extends ScriptLanguage
         }
 
     }
+    
+    abstract protected ScriptEngine createEngine();
 
     public boolean eventResult( Object result )
     {
@@ -68,7 +72,6 @@ public abstract class StandardScriptLanguage extends ScriptLanguage
     protected void loadScript( ClassName className )
         throws ScriptException
     {
-        ensureInitialised();
         File file = this.manager.getScript(className.name);
         loadScript(file);
     }
@@ -77,7 +80,6 @@ public abstract class StandardScriptLanguage extends ScriptLanguage
     protected void loadScript( String filename )
         throws ScriptException
     {
-        ensureInitialised();
         File file = this.manager.getScript(filename);
         loadScript(file);
     }

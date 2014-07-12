@@ -21,9 +21,7 @@ import uk.co.nickthecoder.itchy.util.Util;
 
 public abstract class ScriptLanguage
 {
-    public ScriptManager manager;
-
-    private boolean initialised = false;
+    public final ScriptManager manager;
 
     protected HashMap<File, Long> lastLoadedMap;
 
@@ -31,8 +29,11 @@ public abstract class ScriptLanguage
     {
         this.manager = manager;
         this.lastLoadedMap = new HashMap<File, Long>();
+        
+        //TODO if this works, then I don't need ensureInitialise
+        initialise();
     }
-
+    
     protected abstract void initialise();
 
     public abstract String getExtension();
@@ -43,14 +44,6 @@ public abstract class ScriptLanguage
     protected abstract void loadScript( String filename )
         throws ScriptException;
 
-    protected void ensureInitialised()
-        throws ScriptException
-    {
-        if (!this.initialised) {
-            this.initialised = true;
-            initialise();
-        }
-    }
 
     public void handleException( Exception e )
     {
