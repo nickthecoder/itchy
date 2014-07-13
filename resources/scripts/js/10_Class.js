@@ -3,31 +3,34 @@ function Class( attributes )
     // The Class object that's to be created.
     var result;
     
+    // Each class has a special "Parent" attribute, which will lead up the chain to "Object".
+    // Object itself doesn't have a "Parent" attribute.
+    var parent = Object;
+    if ( attributes.Extends ) {
+        parent = attributes.Extends;
+    }
     // This will be run when "new" is called, and will call the special "init" method if it has one.
     result = function() {
         // Constructor
-        this.Class = result;
+        this.Class = result.Class;
         if (this.init) {
             this.init.apply(this,arguments);
         }
     };
+    result.Parent = parent;
     
-    // Each class has a special "Parent" attribute, which will lead up the chain to "Object".
-    // Object itself doesn not have a "Parent" attribute.
-    if ( attributes.Extends ) {
-        result.Parent = attributes.Extends;
-    } else {
-        result.Parent = Object;
-    }
-
-    // Create a hash for the class methods    
-    result.__proto__ = {};
     
     // Instance methods will inherit the parent class's instance methods
-    result.prototype.__proto__ = result.Parent.prototype;
-    // Class methods will inherit the  base class's class methods
-    result.__proto__.__proto__ = result.Parent.__proto__;
-    
+    result.prototype = new result.Parent();
+
+    // Create the Class object containing class methods and class variable.
+    // The Class object can be accessed using myInstance.Class, or MyConstructorFunction.Class 
+    var konstructor = function() {};
+    konstructor.prototype = result.Parent.Class;
+    result.Class = new konstructor();
+    result.Class.Parent = result.Parent.Class;
+
+
     // Loop over all attributes passed, (the instance methods and the special values 'Extends' and 'Class')
     for (item in attributes ) {
         var value = attributes[item];
@@ -41,19 +44,23 @@ function Class( attributes )
             // Add class methods to the class object.
             for (classItem in value) {
                 var classValue = value[classItem];
-                result.__proto__[classItem] = classValue;
+                result.Class[classItem] = classValue;
             }
-        
+
         } else {
         
             // Add the instance method to the class's prototype.
             if (typeof(value) == 'function') {
+                // TODO Can this be tidied up, its setting the same thing twice???
                 result.prototype[item] = value;
                 if ((superValue) && (value !== superValue)) {
                     result.prototype[item] = Class.createOverride( result, item );
                 }
             } else {
-                throw "Unexpected non-function attribute : " + item;
+                // Non function attributes are assumed to be class variables.
+                // Instance variables are defined using this.blah = value in the "init" method
+                // (or in fact any other method).
+                result.Class[item] = value;
             }
         }
     }
@@ -67,7 +74,7 @@ var Super = undefined;
 // implementation of that method.
 Class.createOverride = function( klass, name )
 {
-    var superMethod = klass.prototype.__proto__[name];
+    var superMethod = klass.Parent.prototype[name];
     var thisMethod = klass.prototype[name];
     
     var func = function() {
@@ -87,3 +94,5 @@ Class.createOverride = function( klass, name )
     return func;
 }
 
+// Create an empty Class definition for the topmost Class in the hierarchy.
+Object.Class = new function() {};
