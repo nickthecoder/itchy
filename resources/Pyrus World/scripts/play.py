@@ -10,12 +10,12 @@ properties = ArrayList()
 class Play(PlainSceneDirector) :
 
     def __init__(self) :
+        self.game = Itchy.getGame()
         self.rocks = 0 # count the rocks on the screen, when it goes down to zero, next level!
         self.endTimer = None
         self.ship = None # Set by Ship's onBirth.
 
     def onActivate(self) :
-        self.game = Itchy.getGame()
         self.game.loadScene("foreground", True)
 
     def onKeyDown(self, event) :

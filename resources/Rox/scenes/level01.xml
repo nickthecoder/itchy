@@ -1,0 +1,22 @@
+<scene showMouse="true" role="Level.js" background="#000000ff">
+  <properties/>
+  <layer name="grid">
+    <actor costume="alien3" x="450" y="250" direction="0.0" heading="0.0" startEvent="default" zOrder="2"/>
+    <actor costume="alien2" x="450" y="350" direction="0.0" heading="0.0" startEvent="default" zOrder="3"/>
+    <actor costume="alien2" x="400" y="350" direction="0.0" heading="0.0" startEvent="default" zOrder="4"/>
+    <actor costume="alien2" x="500" y="350" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="alien2" x="550" y="350" direction="0.0" heading="0.0" startEvent="default" zOrder="6"/>
+    <actor costume="alien2" x="550" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="7"/>
+    <actor costume="alien2" x="550" y="250" direction="0.0" heading="0.0" startEvent="default" zOrder="8"/>
+    <actor costume="alien2" x="550" y="200" direction="0.0" heading="0.0" startEvent="default" zOrder="9"/>
+    <actor costume="alien2" x="500" y="200" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
+    <actor costume="alien2" x="450" y="200" direction="0.0" heading="0.0" startEvent="default" zOrder="11"/>
+    <actor costume="alien2" x="400" y="200" direction="0.0" heading="0.0" startEvent="default" zOrder="12"/>
+    <actor costume="alien2" x="400" y="250" direction="0.0" heading="0.0" startEvent="default" zOrder="13"/>
+    <actor costume="alien2" x="400" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="14"/>
+    <actor costume="alien3" x="450" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="15"/>
+    <actor costume="alien3" x="500" y="250" direction="0.0" heading="0.0" startEvent="default" zOrder="16"/>
+    <actor costume="alien3" x="500" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="17"/>
+    <actor costume="alien1" x="350" y="250" direction="0.0" heading="0.0" startEvent="default" zOrder="55"/>
+  </layer>
+</scene>

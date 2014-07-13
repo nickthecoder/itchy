@@ -96,6 +96,8 @@ public abstract class StandardScriptLanguage extends ScriptLanguage
                 return;
             }
         }
+        
+        this.lastLoadedMap.put(file, new Date().getTime());
 
         try {
             Reader reader = new InputStreamReader(new FileInputStream(file));
@@ -109,10 +111,11 @@ public abstract class StandardScriptLanguage extends ScriptLanguage
             }
         } catch (IOException e) {
             e.printStackTrace();
+            this.lastLoadedMap.remove(file);
+
             throw new ScriptException("IOException loading " + file);
         }
 
-        this.lastLoadedMap.put(file, new Date().getTime());
     }
 
 }

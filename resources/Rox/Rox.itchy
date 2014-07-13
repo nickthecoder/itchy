@@ -1,0 +1,29 @@
+<resources>
+  <game directorClassName="Director.js" height="600" initialScene="level01" title="Rox" width="800"/>
+  <fonts>
+    <font name="Boycott" filename="fonts/Boycott/Boycott.ttf"/>
+  </fonts>
+  <ninePatches/>
+  <poses>
+    <pose name="alien1a" filename="images/alien1a.png"/>
+    <pose name="alien2a" filename="images/alien2a.png"/>
+    <pose name="alien3a" filename="images/alien3a.png"/>
+  </poses>
+  <sounds/>
+  <animations/>
+  <costumes>
+    <costume name="alien1" defaultZOrder="0" role="Player.js">
+      <pose name="default" pose="alien1a"/>
+    </costume>
+    <costume name="alien2" defaultZOrder="0" role="Soft.js">
+      <pose name="default" pose="alien2a"/>
+    </costume>
+    <costume name="alien3" defaultZOrder="0" role="Soft.js">
+      <pose name="default" pose="alien3a"/>
+    </costume>
+  </costumes>
+  <scenes>
+    <scene name="level01"/>
+    <scene name="menu"/>
+  </scenes>
+</resources>

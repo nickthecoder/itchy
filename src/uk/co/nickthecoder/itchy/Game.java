@@ -823,12 +823,12 @@ public class Game
                 this.mouse.showRegularMousePointer(scene.showMouse);
                 this.sceneDirector = scene.createSceneDirector(this.resources);
 
-                this.sceneDirector.onActivate();
             }
 
             scene.create(this, false);
 
             if (!loadOnly) {
+                this.sceneDirector.onActivate();
                 Itchy.frameRate.reset();
             }
 
