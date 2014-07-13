@@ -1,31 +1,86 @@
-function Class( attributes )
-{
-    // The Class object that's to be created.
-    var result;
+/*
+
+Usage :
+To create a class definition :
+
+MyClass = Class({
+    init: function() {
+        // Called as part of : new MyClass();
+    },
     
-    // Each class has a special "Parent" attribute, which will lead up the chain to "Object".
-    // Object itself doesn't have a "Parent" attribute.
-    var parent = Object;
-    if ( attributes.Extends ) {
-        parent = attributes.Extends;
+    method1: function() {
+    },
+    
+    method2etc: function() {
     }
-    // This will be run when "new" is called, and will call the special "init" method if it has one.
-    result = function() {
+});
+
+To define a sub-class :
+
+MySubClass = Class({
+    Extends: MyClass,
+    
+    init: function() {
+        Super(); // Calls the base class's init method.
+        // More initialisation
+    },
+    
+    method1: function() {
+        Super(); // Calls the base class's method1.
+        // added functionality
+    }
+});
+
+To create class methods, and class variables :
+
+Foo = Class({
+    
+    Class: {
+        title: "Example class variable",
+        
+        cm: function() {
+            // An example class method
+            var t = "Wow " + this.title;
+            // Note that "this" is the Class Foo, not an instance of Foo. 
+        }
+    },
+
+    bar: function() {
+        var t1 = this.Class.title;
+        // Or alternately
+        var t2 = Foo.Class.title;
+        
+        this.Class.cm();
+        Foo.Class.cm();
+    }
+});
+
+*/
+  
+
+function Class( attributes )
+{    
+    // This is the constructor function that will be run when "new" is called.
+    // It calls the special "init" method if there is one defined.
+    var result = function() {
         // Constructor
         this.Class = result.Class;
         if (this.init) {
             this.init.apply(this,arguments);
         }
     };
-    result.Parent = parent;
     
-    
+    // Each class has a special "Parent" attribute, which will lead up the chain of inherrited constructors.
+    // till it gets to "Object".
+    result.Parent = attributes.Extends ? attributes.Extends : Object;    
+
     // Instance methods will inherit the parent class's instance methods
     result.prototype = new result.Parent();
 
     // Create the Class object containing class methods and class variable.
-    // The Class object can be accessed using myInstance.Class, or MyConstructorFunction.Class 
+    // The Class object can be accessed using myInstance.Class, or MyConstructorFunction.Class
     var konstructor = function() {};
+    // The class methods are inherited from the base classes class methods. 
     konstructor.prototype = result.Parent.Class;
     result.Class = new konstructor();
     result.Class.Parent = result.Parent.Class;
@@ -41,7 +96,7 @@ function Class( attributes )
             
         } else if (item == 'Class') {
 
-            // Add class methods to the class object.
+            // Add class methods and class variables to the class object.
             for (classItem in value) {
                 var classValue = value[classItem];
                 result.Class[classItem] = classValue;
@@ -51,15 +106,14 @@ function Class( attributes )
         
             // Add the instance method to the class's prototype.
             if (typeof(value) == 'function') {
-                // TODO Can this be tidied up, its setting the same thing twice???
                 result.prototype[item] = value;
                 if ((superValue) && (value !== superValue)) {
+                    // Note that the previously set value to result.prototype[item] is used within the
+                    // createOverride method, so BOTH assignments are needed.
                     result.prototype[item] = Class.createOverride( result, item );
                 }
             } else {
                 // Non function attributes are assumed to be class variables.
-                // Instance variables are defined using this.blah = value in the "init" method
-                // (or in fact any other method).
                 result.Class[item] = value;
             }
         }
@@ -95,4 +149,4 @@ Class.createOverride = function( klass, name )
 }
 
 // Create an empty Class definition for the topmost Class in the hierarchy.
-Object.Class = new function() {};
+Object.Class = new Object();
