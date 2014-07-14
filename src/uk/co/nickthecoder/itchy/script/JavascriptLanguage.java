@@ -76,6 +76,7 @@ public class JavascriptLanguage extends ShimmedScriptLanguage
         bindings.put("game", game);
         bindings.put("director", game.getDirector());
         bindings.put("sceneDirector", game.getSceneDirector());
+        bindings.put("language", this);
     }
 
     @Override
@@ -302,7 +303,11 @@ public class JavascriptLanguage extends ShimmedScriptLanguage
 
     // ===== Role ======
 
-    @Override
+    public Role createRole( String name )
+    {
+        return this.createRole( new ClassName( Role.class, name + ".js") );
+    }
+
     public Role createRole( ClassName className )
     {
         ScriptedRole role = null;

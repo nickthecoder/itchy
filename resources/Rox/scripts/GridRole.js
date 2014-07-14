@@ -1,4 +1,3 @@
-import("Grid.js");
 
 GridRole = Class({
     Extends: RoleScript,
@@ -24,16 +23,17 @@ GridRole = Class({
             if ( ! this.squashed ) {
                 if (this.between >= this.square.grid.squareSize / 2) {
                     this.squashed = true;
-                    var squashing = this.look( this.dx, this.dy );
-                    stdout.println("Squashing : " + squashing.Class.roleName );
+                    var squashing = this.findLocalRole( this.dx, this.dy );
                     squashing.onInvaded( this );
                 }
             }
                         
+            this.actor.moveBy( this.dx * this.speed, this.dy * this.speed );
+
             if (this.between >= this.square.grid.squareSize) {
                 // Correct for any overshoot
                 var overshoot = this.between - this.square.grid.squareSize;
-                this.actor.moveBy( this.dx * overshoot, this.dy * overshoot );
+                this.actor.moveBy( this.dx * - overshoot, this.dy * - overshoot );
                 
                 // Stop the movement and occupy the new square.
                 var dx = this.dx; // Remember the direction I was travelling as its needed after dx,dy are reset.
@@ -43,10 +43,23 @@ GridRole = Class({
                 this.dy = 0;
                 this.occupySquare( this.findLocalSquare( dx, dy ) );
                 this.onArrived(dx, dy);
-            } else {
-                this.actor.moveBy( this.dx * this.speed, this.dy * this.speed );
             }
         }  
+    },
+    
+    // Tidy up when dead. Make sure that the square I'm occupying and the square I'm entring no longer
+    // reference me.
+    onDeath: function() {
+        if ( this.isMoving() ) {
+            var sqaure = this.findLocalSquare( this.dx, this.dy );
+            if ( square && square.entrant == this ) {
+                square.entrant = null;
+            }
+        }
+        if ( this.square ) {
+            this.square.occupant = EmptyGridRole.instance;
+        }
+        this.actor.kill();
     },
     
     occupySquare: function( newSquare ) {
@@ -92,35 +105,110 @@ GridRole = Class({
         return this.square.grid.getSquare(x, y);
     },
     
+    // Finds the square
+    findLocalRole: function( dx, dy ) {
+        var x = this.square.x + dx;
+        var y = this.square.y + dy;
+        return this.square.grid.getGridRole(x, y);
+    },
+    
     // Finds the GridRole in the given direction. If this lands us outside the whole grid, then a global "edge"
     // is returned, which is solid and unchanging. If there is nothing at that position, then a global "empty"
     // is returned.
     // When objects are moving between squares, the result is a little more complex.
-    // If the occupant is leaving, and will be gone by the time I could enter, then don't return the occupant, 
-    // and instead return the entrant. If there is no entrant, then use the global EmptyGridRole.instance.
-    look: function( dx, dy ) {   
-        var occupier = this.square.grid.getGridRole( this.square.x + dx, this.square.y + dy );
+    // If there is an entrant, then return that, not the occupier (which will move out, or be squashed).
+    // However, if the occupant is leaving, and will be gone by the time I could enter, then don't return the occupant, 
+    // and instead the global EmptyGridRole.instance.
+    look: function( dx, dy, speed ) {
+        this.debug( "Look " + dx + "," + dy );
+        if (!speed) {
+            speed = this.speed;
+        }
+        
+        var square = this.findLocalSquare(dx, dy);
+        // If there is an object entering, then this is the one we care about.
+        var entrant = (square == null) ? null : square.entrant;
+        this.debug( "Square : " + square + " entrant : " + entrant );
+        if (entrant != null) {
+            this.debug( "Using entrant because there is one" );
+            return entrant;
+        }
+        
+        var occupier = this.findLocalRole( dx, dy );
         if ( ! occupier.isMoving() ) {
+            this.debug( "Using occupier because not moving" );
             return occupier;
         }
         
         // Calculate how long (in frames) it will take for the occupant to leave the square, and
         // for me to enter the square.
         var willLeaveTicks = (this.square.grid.squareSize - occupier.between) / occupier.speed;
-        var willEnterTicks = this.square.grid.squareSize / this.speed;
+        var willEnterTicks = this.square.grid.squareSize / speed;
+
+        // this.debug( "Will leave : " + willLeaveTicks + " vs will enter : " + willEnterTicks );
 
         // If it will leave before I get half way, then ignore it.
-        if (willLeaveTicks > willEnterTicks/2) {
-            var entrant = this.square.grid.getSquare(x,y).entrant;
-            if (entrant == null) {
-                return EmptyGridRole.instance;
-            } else {
-                return entrant;
-            }
+        if (willLeaveTicks < willEnterTicks ) {
+            this.debug( "Using EMPTY because the occupier will move out" );
+            return EmptyGridRole.instance;
         }
+        this.debug( "Using occupier because it isn't moving fast enough to ignore" );
         return occupier;
     },
+    
+    debug: function( message ) {
+        return;
+        if ( (this.square.x == 1) && (this.square.y == 1) ) {
+            stdout.println( message );
+        }
+    },
+    
+    lookEast: function(speed) {
+        return this.look( 1, 0, speed );
+    },
+    
+    lookSouth: function(speed) {
+        return this.look( 0,-1, speed );
+    },
+    
+    lookWest: function(speed) {
+        return this.look( -1, 0, speed );
+    },
+    
+    lookNorth: function(speed) {
+        return this.look( 0, 1, speed );
+    },
+    
+    lookSouthEast: function(speed) {
+        return this.look( 1, -1, speed );
+    },
+    
+    lookSouthWest: function(speed) {
+        return this.look( -1,-1 );
+    },
+    
+    lookNorthWest: function(speed) {
+        return this.look( -1, 1, speed );
+    },
+    
+    lookNorthEast: function(speed) {
+        return this.look( 1, 1, speed );
+    },
+    
+    
 
+    move: function(dx, dy) {
+        if (this.isMoving()) {
+            out.println( "Already moving. Ignored");
+        } else {
+            this.squashed = false;
+            this.dx = dx;
+            this.dy = dy;
+            this.between = 0;
+            this.findLocalSquare( dx, dy ).entrant = this;
+        }
+    },
+    
     moveEast: function() {
         this.move( 1, 0 );
     },
@@ -137,16 +225,6 @@ GridRole = Class({
         this.move( 0, 1 );
     },
     
-    move: function(dx, dy) {
-        if (this.isMoving()) {
-            out.println( "Already moving. Ignored");
-        } else {
-            this.squashed = false;
-            this.dx = dx;
-            this.dy = dy;
-            this.between = 0;
-        }
-    },
 
     pushed: function(pusher, dx, dy, force) {
         // Default is to be immovable.
@@ -175,6 +253,7 @@ GridRole = Class({
     
 });
 
+import("Grid.js");
 import("EmptyGridRole.js");
 
 GridRole.properties = new java.util.ArrayList();

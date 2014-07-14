@@ -18,7 +18,7 @@
     <costume name="alien2" defaultZOrder="0" role="Soft.js">
       <pose name="default" pose="alien2a"/>
     </costume>
-    <costume name="alien3" defaultZOrder="0" role="Soft.js">
+    <costume name="alien3" defaultZOrder="0" role="Rock.js">
       <pose name="default" pose="alien3a"/>
     </costume>
   </costumes>

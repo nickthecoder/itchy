@@ -6,6 +6,11 @@ Soft = Class({
     
     roleName: "Soft",
     
+    onAttach: function() {
+        Super();
+        this.role.addTag("soft");
+    },
+    
     pushed: function(pusher, dx, dy, force) {
         return true;
     },
