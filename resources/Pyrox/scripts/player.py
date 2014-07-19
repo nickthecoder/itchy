@@ -1,9 +1,10 @@
 from uk.co.nickthecoder.itchy import Itchy
+from uk.co.nickthecoder.itchy import Input
 from uk.co.nickthecoder.itchy import Role
 from uk.co.nickthecoder.itchy import AbstractRole
 from uk.co.nickthecoder.itchy.util import ClassName
 
-from uk.co.nickthecoder.jame.event import Keys
+
 
 from java.util import ArrayList
 
@@ -17,7 +18,11 @@ class Player(GridRole) :
     def __init__(self) :   
         super(Player, self).__init__()
         self.roleName = "Player"
-    
+        self.inputLeft = Input.find("left")
+        self.inputRight = Input.find("right")
+        self.inputUp = Input.find("up")
+        self.inputDown = Input.find("down")
+
     def onAttach( self ) :
         super(Player, self).onAttach()
         self.speed = 6
@@ -32,15 +37,19 @@ class Player(GridRole) :
 
         if (self.isMoving()) :
             pass
+            
         else :
             
-            if (Itchy.isKeyDown(Keys.LEFT)) :
+            if self.inputLeft.pressed() :
                 self.attemptToMove( -1, 0 )
-            elif (Itchy.isKeyDown(Keys.RIGHT)) :
+            
+            elif self.inputRight.pressed() :
                 self.attemptToMove( 1, 0 )
-            elif (Itchy.isKeyDown(Keys.UP)) :
+            
+            elif self.inputUp.pressed() :
                 self.attemptToMove( 0, 1 )
-            elif (Itchy.isKeyDown(Keys.DOWN)) :
+                
+            elif self.inputDown.pressed() :
                 self.attemptToMove( 0, -1 )
 
         super(Player, self).tick()

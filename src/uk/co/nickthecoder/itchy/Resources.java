@@ -58,6 +58,8 @@ public class Resources extends Loadable
 
     private final HashMap<String, CostumeResource> costumes;
 
+    private final HashMap<String, InputResource> inputs;
+
     private HashMap<String, String> renamedCostumes;
 
     public ErrorLog errorLog;
@@ -78,7 +80,8 @@ public class Resources extends Loadable
         this.poses = new HashMap<String, PoseResource>();
         this.costumes = new HashMap<String, CostumeResource>();
         this.animations = new HashMap<String, AnimationResource>();
-
+        this.inputs = new HashMap<String, InputResource>();
+        
         this.renamedCostumes = new HashMap<String, String>();
 
         this.game = new Game(this);
@@ -659,6 +662,50 @@ public class Resources extends Loadable
     {
         this.animations.remove(animationResource.getName());
         this.animations.put(name, animationResource);
+    }
+
+    // Inputs
+
+    public void addInput( InputResource ir )
+    {
+        this.inputs.put(ir.getName(), ir);
+    }
+
+    public void removeInput( String name )
+    {
+        this.inputs.remove(name);
+    }
+
+    public Input getInput( String name )
+    {
+        InputResource resource = this.inputs.get(name);
+        return resource == null ? null : resource.getInput();
+    }
+
+    public InputResource getInputResource( String name )
+    {
+        return this.inputs.get(name);
+    }
+
+    public List<String> inputNames()
+    {
+        return sortNames(this.inputs.keySet());
+    }
+
+    public String getInputName( Input input)
+    {
+        for (String name : this.inputNames()) {
+            if (this.getInput(name) == input) {
+                return name;
+            }
+        }
+        return null;
+    }
+
+    void rename2( InputResource inputResource, String name )
+    {
+        this.inputs.remove(inputResource.getName());
+        this.inputs.put(name, inputResource);
     }
 
     // Scenes

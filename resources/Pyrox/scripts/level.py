@@ -1,9 +1,9 @@
 from uk.co.nickthecoder.itchy import Itchy
 from uk.co.nickthecoder.itchy import PlainSceneDirector
 from uk.co.nickthecoder.itchy import AbstractRole
+from uk.co.nickthecoder.itchy import Input
 from uk.co.nickthecoder.itchy.util import ClassName
 
-from uk.co.nickthecoder.jame.event import Keys
 
 import math
 
@@ -17,6 +17,8 @@ properties = ArrayList()
 class Level(PlainSceneDirector) :
 
     def __init__(self) :
+        self.inputRestart = Input.find("restart")
+        self.inputQuit = Input.find("quit")
         self.collectablesRemaining = 0
 
     def onActivate( self ) :
@@ -73,11 +75,12 @@ class Level(PlainSceneDirector) :
 
     def tick(self) :
 
-        if Itchy.isKeyDown(Keys.F5) :
+        if self.inputRestart.pressed() :
             Itchy.getGame().startScene( Itchy.getGame().getSceneName() )
 
-        if Itchy.isKeyDown(Keys.ESCAPE) :
+        if self.inputQuit.pressed() :
             Itchy.getGame().startScene( "menu" )
+        
         
     # When the number of collectables remaining is zero, tell all gates to open.
     def collected( self, amount ) :

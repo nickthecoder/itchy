@@ -125,4 +125,14 @@
     <scene name="tutorial-rocks2"/>
     <scene name="tutorial-template"/>
   </scenes>
+  <inputs>
+    <input name="down" keys="DOWN,PERIOD"/>
+    <input name="editor" keys="ctrl+F12"/>
+    <input name="left" keys="LEFT,z"/>
+    <input name="quit" keys="ESCAPE"/>
+    <input name="restart" keys="F5"/>
+    <input name="right" keys="RIGHT,x"/>
+    <input name="test" keys="ctrl+F11"/>
+    <input name="up" keys="UP,SEMICOLON"/>
+  </inputs>
 </resources>

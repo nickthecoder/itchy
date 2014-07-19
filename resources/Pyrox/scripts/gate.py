@@ -26,9 +26,7 @@ class Gate(GridRole) :
         self.addTag("gate")
             
     def onInvaded( self, invader ) :
-        print "Adding preference :",  Itchy.getGame().getSceneName()
         Itchy.getGame().getPreferences().node("completed").putBoolean( Itchy.getGame().getSceneName(), True )
-        print "Pref : ", Itchy.getGame().getPreferences().node("completed").getBoolean( "level-rocksAndCoins", False )
         Itchy.getGame().startScene( self.scene )
         
     def onMessage( self, message ) :

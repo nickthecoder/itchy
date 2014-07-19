@@ -4,9 +4,10 @@ from uk.co.nickthecoder.itchy import Itchy
 from uk.co.nickthecoder.itchy import StageView
 from uk.co.nickthecoder.itchy import ZOrderStage
 from uk.co.nickthecoder.itchy import GridStageConstraint
+from uk.co.nickthecoder.itchy import Input
 
 from uk.co.nickthecoder.jame import Rect
-from uk.co.nickthecoder.jame.event import Keys
+
 
 from java.util import ArrayList
 
@@ -14,6 +15,8 @@ class Director(AbstractDirector) :
 
     def __init__(self) :
         self.squareSize = 60
+        self.inputEditor = Input.find( "editor" )
+        self.inputTest = Input.find( "test" )
 
     
     def onStarted( self ) :
@@ -40,10 +43,10 @@ class Director(AbstractDirector) :
     
     def tick(self) :
     
-        if Itchy.isKeyDown( Keys.F11 ) :
+        if self.inputTest.pressed() :
             Itchy.getGame().startScene( "test" )
 
-        if Itchy.isKeyDown( Keys.F12 ) :
+        if self.inputEditor.pressed() :
             sceneName = Itchy.getGame().getSceneName()
             if sceneName == "menu" :
                 Itchy.getGame().startEditor()
