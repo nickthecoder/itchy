@@ -4,6 +4,8 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
+import java.util.Iterator;
+
 public class GridStageConstraint implements StageConstraint
 {
     private int boxWidth;
@@ -18,13 +20,26 @@ public class GridStageConstraint implements StageConstraint
     @Override
     public double constrainX( double requestedX, double requestedY )
     {
-        return (((int) requestedX + this.boxWidth / 2) / this.boxWidth) * this.boxWidth;
+        return (int) Math.floor((requestedX + this.boxWidth / 2) / this.boxWidth) * this.boxWidth;
     }
 
     @Override
     public double constrainY( double requestedX, double requestedY )
     {
-        return (((int) requestedY + this.boxHeight / 2) / this.boxHeight) * this.boxHeight;
+        return (int) Math.floor((requestedY + this.boxHeight / 2) / this.boxHeight) * this.boxHeight;
+    }
+
+    @Override
+    public void added( Actor actor )
+    {
+        Stage stage = actor.getStage();
+        for ( Iterator<Actor> i = stage.iterator(); i.hasNext();) {
+            Actor other = i.next();
+            
+            if ( (other != actor) && (other.getX() == actor.getX()) && (other.getY() == actor.getY()) ) {
+                i.remove();
+            }
+        }
     }
 
 }

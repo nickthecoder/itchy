@@ -26,7 +26,7 @@ public abstract class AbstractScrollableView extends AbstractView implements Scr
     }
 
     @Override
-    public void ceterOn( Actor actor )
+    public void centerOn( Actor actor )
     {
         this.centerOn(actor.getX(), actor.getY());
     }

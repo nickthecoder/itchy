@@ -17,4 +17,6 @@ public interface StageConstraint
 {
     public double constrainX( double requestedX, double requestedY );
     public double constrainY( double requestedX, double requestedY );
+    
+    public void added( Actor actor );
 }

@@ -6,7 +6,8 @@ GridRole = Class({
         
     init: function() {
         // TODO Initialise your object. Note you can't access this.actor yet.
-        this.speed = directorScript.squareSize; // Number of pixels to move per tick when dx or dy are non zero.
+        this.currentSpeed = 0; // Number of pixels to move per tick when dx or dy are non zero.
+        this.speed = 4; // The default speed for this object.
         this.dx = 0; // -1, 0 or 1 depending on direction of travel
         this.dy = 0; // -1, 0 or 1 depending on direction of travel.
         this.between = 0; // Distance travelled between squares (0..squareSize)
@@ -18,7 +19,7 @@ GridRole = Class({
 
         if ( (this.dx != 0) || (this.dy != 0) ) {
 
-            this.between += this.speed;
+            this.between += this.currentSpeed;
 
             if ( ! this.squashed ) {
                 if (this.between >= this.square.grid.squareSize / 2) {
@@ -28,7 +29,7 @@ GridRole = Class({
                 }
             }
                         
-            this.actor.moveBy( this.dx * this.speed, this.dy * this.speed );
+            this.actor.moveBy( this.dx * this.currentSpeed, this.dy * this.currentSpeed );
 
             if (this.between >= this.square.grid.squareSize) {
                 // Correct for any overshoot
@@ -52,7 +53,7 @@ GridRole = Class({
     onDeath: function() {
         if ( this.isMoving() ) {
             var sqaure = this.findLocalSquare( this.dx, this.dy );
-            if ( square && square.entrant == this ) {
+            if ( square && (square.entrant == this) ) {
                 square.entrant = null;
             }
         }
@@ -122,7 +123,7 @@ GridRole = Class({
     look: function( dx, dy, speed ) {
         this.debug( "Look " + dx + "," + dy );
         if (!speed) {
-            speed = this.speed;
+            currentSpeed = this.speed;
         }
         
         var square = this.findLocalSquare(dx, dy);
@@ -195,12 +196,11 @@ GridRole = Class({
         return this.look( 1, 1, speed );
     },
     
-    
-
-    move: function(dx, dy) {
+    move: function(dx, dy,speed) {
         if (this.isMoving()) {
-            out.println( "Already moving. Ignored");
+            stdout.println( "Already moving. Ignored");
         } else {
+            this.currentSpeed = speed ? speed : this.speed;
             this.squashed = false;
             this.dx = dx;
             this.dy = dy;
@@ -226,7 +226,7 @@ GridRole = Class({
     },
     
 
-    pushed: function(pusher, dx, dy, force) {
+    shove: function(pusher, dx, dy, speed, force) {
         // Default is to be immovable.
         return false;
     },
@@ -249,10 +249,24 @@ GridRole = Class({
     // Called when a GridRole is halfway through encrouching into my teritory.
     onInvaded: function( invader ) {
         // Do nothing
+    },
+    
+    Class: {
+    
+        NORTH_SOUTH: ["S", "", "N"],
+        EAST_WEST: ["E", "", "W"],
+        
+        getDirectionAbreviation: function( dx, dy ) {
+            return this.NORTH_SOUTH[dx + 1] + this.EAST_WEST[dy + 1];
+        },
     }
     
 });
 
+
+
+
+    
 import("Grid.js");
 import("EmptyGridRole.js");
 

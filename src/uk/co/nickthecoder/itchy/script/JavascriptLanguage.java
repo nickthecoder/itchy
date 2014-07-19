@@ -747,5 +747,19 @@ public class JavascriptLanguage extends ShimmedScriptLanguage
             return x;
         } 
     }
+    
+    public void added(ScriptedStageConstraint stageConstraint, Actor actor)
+    {
+        try {
+            Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
+            bindings.put("ssc", stageConstraint);
+            bindings.put("actor", actor);
+            this.engine.eval("ssc.added(actor);");
+
+        } catch (ScriptException e) {
+            handleException("StageConstraint.added", e);
+        } 
+        
+    }
 }
 

@@ -519,7 +519,7 @@ public class Explosion extends Companion<Explosion>
     @Override
     public Explosion pose( String poseName )
     {
-        super.pose(poseName);
+        //super.pose(poseName);
         this.poseName = poseName;
         return this;
     }

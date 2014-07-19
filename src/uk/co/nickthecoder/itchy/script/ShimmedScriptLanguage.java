@@ -123,4 +123,7 @@ public abstract class ShimmedScriptLanguage extends StandardScriptLanguage
     public abstract double constrainX( ScriptedStageConstraint stageConstraint, double x, double y );
 
     public abstract double constrainY( ScriptedStageConstraint stageConstraint, double x, double y );
+    
+    public abstract void added( ScriptedStageConstraint stageConstraint, Actor actor );
+
 }

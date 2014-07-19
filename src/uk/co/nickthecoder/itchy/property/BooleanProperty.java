@@ -35,7 +35,7 @@ public class BooleanProperty<S> extends AbstractProperty<S, Boolean>
     @Override
     public Component createComponent( final S subject, boolean autoUpdate )
     {
-        boolean value = this.getSafeValue(subject) == true;
+        boolean value = (this.getSafeValue(subject) == true);
         final CheckBox checkBox = new CheckBox(value);
 
         if (autoUpdate) {

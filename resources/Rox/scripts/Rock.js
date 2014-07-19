@@ -47,13 +47,42 @@ Rock = Class({
         }
     },
     
+    shove: function(pusher, dx, dy, speed, force) {
+        if (this.isMoving()) {
+            return false;
+        }
+        
+        if (dy != 0) {
+            return false;
+        }
+        
+        if (force < 4) {
+            return false;
+        }
+        
+        var forward = this.look(dx, dy);
+        if (forward.isMoving()) {
+            return false;
+        }
+        
+        if ( forward.role.hasTag("squash" + GridRole.Class.getDirectionAbreviation(dx, dy) ) ) {
+            pusher.move(dx,dy,speed);
+            this.move(dx, dy,speed);
+            return true;
+        }
+        
+        return false;
+    },
+    
     onInvading: function() {
     },
     
-    onArrived: function(invader, dx, dy ) {
-        var south = this.lookSouth();
-        if (south.role.hasTag("hittable")) {
-            south.onHit( this );
+    onArrived: function( dx, dy ) {
+        if (dy == -1) {
+            var south = this.lookSouth();
+            if (south.role.hasTag("hittable")) {
+                south.onHit( this );
+            }
         }
     }
     

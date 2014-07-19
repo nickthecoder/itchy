@@ -1262,7 +1262,7 @@ public class SceneDesigner implements MouseListener, KeyListener
             for (HandleRole handleRole : this.handles) {
                 Actor actor = handleRole.getActor();
 
-                if (actor.hitting(event.x, event.y)) {
+                if (actor.hitting(event.x, event.y) && (actor.getAppearance().getAlpha() > 0)) {
                     beginDrag(event.x, event.y);
                     handleRole.dragStart();
                     this.currentHandleRole = handleRole;
@@ -1372,6 +1372,9 @@ public class SceneDesigner implements MouseListener, KeyListener
             } else {
                 stage.add(actor);
             }
+            
+            // TODO, When stamping an actor implements undo/red, then the StageConstraint will have to implement it too.
+            sc.added(actor);
 
             if (!Itchy.isShiftDown()) {
                 setMode(MODE_SELECT);
@@ -1996,6 +1999,10 @@ public class SceneDesigner implements MouseListener, KeyListener
         @Override
         public void moveBy( int dx, int dy )
         {
+            if (this.target == null) {
+                return;
+            }
+            
             UndoRotateActor undo = new UndoRotateActor(this.target);
             try {
                 super.moveBy(dx, dy);

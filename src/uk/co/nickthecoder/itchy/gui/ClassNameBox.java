@@ -147,6 +147,9 @@ public class ClassNameBox extends Container
                 ScriptLanguage language = this.scriptManager.getLanguage(getClassName());
                 this.errorText.setText(language.simpleMessage(e, false));
                 this.errorText.setVisible(true);
+            } catch (Exception e) {
+                e.printStackTrace();
+                throw e;
             }
 
         }

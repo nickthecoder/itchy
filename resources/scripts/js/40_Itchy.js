@@ -84,7 +84,7 @@ RoleScript = Class({
     Class: {
         create: function( name ) {
             var role = language.createRole( name );
-            return role.roleScript;
+            //return role.roleScript;
         }
     }
 });

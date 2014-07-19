@@ -8,7 +8,7 @@ public interface ScrollableView extends View
 {
     public WorldRectangle getVisibleRectangle();
 
-    public void ceterOn( Actor actor );
+    public void centerOn( Actor actor );
 
     public void centerOn( double x, double y );
 

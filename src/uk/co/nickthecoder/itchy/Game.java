@@ -222,6 +222,11 @@ public class Game
         this.addMouseListener(this.allViews);
     }
 
+    public FrameRate getFrameRate()
+    {
+        return Itchy.frameRate;
+    }
+    
     /**
      * Called only once, after the resources have been loaded. Do not change directors during the game. Instead, if you want different
      * behaviour for different parts of the game, then use different SceneDirectors to code each part of the game.

@@ -4,7 +4,7 @@ Director = Class({
 
     init: function() {
         // Super();
-        this.squareSize = 50;
+        this.squareSize = 60;
     },
     
     onStarted: function() {
@@ -20,6 +20,11 @@ Director = Class({
       game.getStages().add(this.gridStage);
       this.gridView = new itchy.StageView(screenRect, this.gridStage);
       game.getGameViews().add(this.gridView);
+
+      this.glassStage = new itchy.ZOrderStage("glass");
+      game.getStages().add(this.glassStage);
+      this.glassView = new itchy.StageView(screenRect, this.glassStage);
+      game.getGameViews().add(this.glassView);
 
       this.gridStage.setStageConstraint( new itchy.GridStageConstraint( this.squareSize, this.squareSize ) );      
     },

@@ -226,6 +226,16 @@ public class Itchy
         } catch (Exception e) {
             System.err.println("Mainloop Failed");
             e.printStackTrace();
+            if (e instanceof org.python.core.PySyntaxError) {
+                for (StackTraceElement ste : e.getStackTrace()) {
+                    if (ste.getClassName().startsWith("org.python")) {
+                        // Ignored
+                    } else {
+                        System.err.println( ste );
+                    }
+                }
+                System.err.println( "Python script exception!" );
+            }
         }
     }
 

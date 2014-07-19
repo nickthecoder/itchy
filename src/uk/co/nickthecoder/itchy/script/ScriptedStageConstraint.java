@@ -4,6 +4,7 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.script;
 
+import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.StageConstraint;
 import uk.co.nickthecoder.itchy.util.ClassName;
 
@@ -42,12 +43,19 @@ public class ScriptedStageConstraint implements ScriptedObject, StageConstraint
     @Override
     public double constrainX( double requestedX, double requestedY )
     {
-        return this.language.constrainX( this, requestedX, requestedY );
+        return this.language.constrainX(this, requestedX, requestedY);
     }
 
     @Override
     public double constrainY( double requestedX, double requestedY )
     {
-        return this.language.constrainY( this, requestedX, requestedY );
+        return this.language.constrainY(this, requestedX, requestedY);
     }
+
+    @Override
+    public void added( Actor actor )
+    {
+        this.language.added(this, actor);
+    }
+
 }

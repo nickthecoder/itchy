@@ -4,6 +4,7 @@ Level = Class({
     Extends: SceneDirectorScript,
     
     init: function() {
+        this.collectablesRemaining = 0;
     },
     
     onActivate: function() {
@@ -49,7 +50,7 @@ Level = Class({
         var i = stage.iterator();
         while (i.hasNext()) {
             var actor = i.next();
-            if (actor.role.roleScript.placeOnGrid) { // Only GridRole instances (and subclasses) are added to the grid.
+            if ( (actor.role.roleScript) && (actor.role.roleScript.placeOnGrid) ) { // Only GridRole instances (and subclasses) are added to the grid.
                 actor.role.roleScript.placeOnGrid( this.grid );
             } else {
                 stdout.println( "Skipping non-GridRole object : " + actor.toString() );

@@ -8,15 +8,19 @@ Player = Class({
     
     onAttach: function() {
         Super();
+        this.speed = 6;
+        directorScript.gridView.centerOn(this.actor);
         this.role.addTag("hittable");
+        this.role.addTag("player");
     },
 
     tick: function() {
     
-        if (!this.isMoving()) {
+        directorScript.gridView.centerOn(this.actor);
 
-            // TODO Make this a property???
-            this.speed = 3;
+        if (this.isMoving()) {
+
+        } else {
             
             if (Itchy.isKeyDown(Keys.LEFT)) {
                 this.attemptToMove( -1, 0, "W" );
@@ -33,17 +37,13 @@ Player = Class({
     },
     
     attemptToMove: function( dx, dy, dir ) {
-        if (this.canMove(dx, dy, dir)) {
-            this.move(dx, dy);
-        }
-    },
-    
-    canMove: function( dx, dy, dir ) {
         var obj = this.look( dx, dy );
         if (obj.role.hasTag( "soft" ) || obj.role.hasTag( "squash" + dir )) {
-            return true;
+            this.move(dx, dy);
+            return;
         }
-        // TODO or try pushing.
+
+        obj.shove(this, dx, dy, this.speed, 4);
     },
     
     onInvading: function() {
