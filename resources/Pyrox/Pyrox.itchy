@@ -1,0 +1,128 @@
+<resources>
+  <game directorClassName="director.py" height="600" initialScene="menu" title="Rox" width="800"/>
+  <fonts>
+    <font name="Boycott" filename="fonts/Boycott/Boycott.ttf"/>
+  </fonts>
+  <ninePatches/>
+  <poses>
+    <pose name="alien1a" filename="images/alien1a.png"/>
+    <pose name="arrow2" filename="images/arrow2.png" offsetX="0" offsetY="29"/>
+    <pose name="arrowCurved" filename="images/arrowCurved.png" offsetX="60" offsetY="5"/>
+    <pose name="arrowCurved2" filename="images/arrowCurved2.png" offsetX="6" offsetY="7"/>
+    <pose name="arrowKeys" filename="images/arrowKeys.png"/>
+    <pose name="baloon" filename="images/baloon.png"/>
+    <pose name="chair" filename="images/chair.png"/>
+    <pose name="coin" filename="images/coin.png"/>
+    <pose name="gateClosed" filename="images/gateClosed.png"/>
+    <pose name="gateOpen" filename="images/gateOpen.png"/>
+    <pose name="keyEscape" filename="images/keyEscape.png"/>
+    <pose name="keyF5" filename="images/keyF5.png"/>
+    <pose name="portcullis" filename="images/portcullis.png" offsetY="30"/>
+    <pose name="rock" filename="images/rock.png"/>
+    <pose name="soil" filename="images/soil.png"/>
+    <pose name="stamp" filename="images/stamp.png"/>
+    <pose name="table" filename="images/table.png"/>
+    <pose name="wall" filename="images/wall.png"/>
+    <pose name="wallNE" filename="images/wallNE.png"/>
+    <pose name="wallNW" filename="images/wallNW.png"/>
+    <pose name="wallSE" filename="images/wallSE.png"/>
+    <pose name="wallSW" filename="images/wallSW.png"/>
+  </poses>
+  <sounds/>
+  <animations/>
+  <costumes>
+    <costume name="arrow2" defaultZOrder="0">
+      <pose name="default" pose="arrow2"/>
+    </costume>
+    <costume name="arrowCurved" defaultZOrder="0">
+      <pose name="default" pose="arrowCurved"/>
+    </costume>
+    <costume name="arrowCurved2" defaultZOrder="0">
+      <pose name="default" pose="arrowCurved2"/>
+    </costume>
+    <costume name="arrowKeys" defaultZOrder="0">
+      <pose name="default" pose="arrowKeys"/>
+    </costume>
+    <costume name="baloon" defaultZOrder="0" role="balloon.py">
+      <pose name="default" pose="baloon"/>
+    </costume>
+    <costume name="chair" defaultZOrder="0" role="chair.py">
+      <pose name="default" pose="chair"/>
+    </costume>
+    <costume name="coin" defaultZOrder="0" role="collectable.py" properties="roundProperties.py">
+      <pose name="default" pose="coin"/>
+      <properties roundedNE="true" roundedSE="true" roundedSW="true" roundedNW="true"/>
+    </costume>
+    <costume name="gate" defaultZOrder="0" role="gate.py">
+      <pose name="default" pose="gateClosed"/>
+      <pose name="open" pose="gateOpen"/>
+    </costume>
+    <costume name="keyEscape" defaultZOrder="0">
+      <pose name="default" pose="keyEscape"/>
+    </costume>
+    <costume name="keyF5" defaultZOrder="0">
+      <pose name="default" pose="keyF5"/>
+    </costume>
+    <costume name="player" defaultZOrder="0" role="player.py">
+      <pose name="default" pose="alien1a"/>
+    </costume>
+    <costume name="portcullis" defaultZOrder="0" role="portcullis.py">
+      <pose name="close" pose="wall"/>
+      <pose name="default" pose="portcullis"/>
+    </costume>
+    <costume name="rock" defaultZOrder="0" role="rock.py">
+      <pose name="default" pose="rock"/>
+    </costume>
+    <costume name="soil" defaultZOrder="0" role="soft.py">
+      <pose name="default" pose="soil"/>
+    </costume>
+    <costume name="stamp" defaultZOrder="0" role="collectable.py" properties="roundProperties.py">
+      <pose name="default" pose="stamp"/>
+      <properties roundedNE="false" roundedSE="false" roundedSW="false" roundedNW="false"/>
+    </costume>
+    <costume name="table" defaultZOrder="0" role="table.py">
+      <pose name="default" pose="table"/>
+    </costume>
+    <costume name="wall" defaultZOrder="0" role="wall.py" properties="roundProperties.py">
+      <pose name="default" pose="wall"/>
+      <properties roundedNE="false" roundedSE="false" roundedSW="false" roundedNW="false"/>
+    </costume>
+    <costume name="wallNE" defaultZOrder="0" role="wall.py" properties="roundProperties.py">
+      <pose name="default" pose="wallNE"/>
+      <properties roundedNE="true" roundedSE="false" roundedSW="false" roundedNW="false"/>
+    </costume>
+    <costume name="wallNW" defaultZOrder="0" role="wall.py" properties="roundProperties.py">
+      <pose name="default" pose="wallNW"/>
+      <properties roundedNE="false" roundedSE="false" roundedSW="false" roundedNW="true"/>
+    </costume>
+    <costume name="wallSE" defaultZOrder="0" role="wall.py" properties="roundProperties.py">
+      <pose name="default" pose="wallSE"/>
+      <properties roundedNE="false" roundedSE="true" roundedSW="false" roundedNW="false"/>
+    </costume>
+    <costume name="wallSW" defaultZOrder="0" role="wall.py" properties="roundProperties.py">
+      <pose name="default" pose="wallSW"/>
+      <properties roundedNE="false" roundedSE="false" roundedSW="true" roundedNW="false"/>
+    </costume>
+    <costume name="warp" defaultZOrder="0" role="warp.py">
+      <pose name="close" pose="gateClosed"/>
+      <pose name="default" pose="gateOpen"/>
+    </costume>
+  </costumes>
+  <scenes>
+    <scene name="glass"/>
+    <scene name="level-rocksAndCoins"/>
+    <scene name="level-startSimple"/>
+    <scene name="level-template"/>
+    <scene name="level-theCircuit"/>
+    <scene name="level-theSecondCircuit"/>
+    <scene name="menu"/>
+    <scene name="play"/>
+    <scene name="test"/>
+    <scene name="tutorial"/>
+    <scene name="tutorial-balloons"/>
+    <scene name="tutorial-keys"/>
+    <scene name="tutorial-rocks"/>
+    <scene name="tutorial-rocks2"/>
+    <scene name="tutorial-template"/>
+  </scenes>
+</resources>
