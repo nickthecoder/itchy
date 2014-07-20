@@ -15,6 +15,12 @@ Ship = Class({
 
     onBirth : function() {
 
+        this.inputLeft = itchy.Input.find("left")
+        this.inputRight = itchy.Input.find("right")
+        this.inputThrust = itchy.Input.find("thrust")
+        this.inputFire = itchy.Input.find("fire")
+        this.inputCheat = itchy.Input.find("cheat")
+        
         new itchy.role.OnionSkin(this.actor).alpha(128).every(5).fade(3).createActor();
 
         this.rotationSpeed = this.getCostumeProperties().rotationSpeed;
@@ -63,13 +69,13 @@ Ship = Class({
 
     tick : function() {
 
-        if (Itchy.isKeyDown(Keys.LEFT)) {
+        if (this.inputLeft.pressed()) {
             this.actor.adjustDirection(this.rotationSpeed);
         }
-        if (Itchy.isKeyDown(Keys.RIGHT)) {
+        if (this.inputRight.pressed()) {
             this.actor.adjustDirection(-this.rotationSpeed);
         }
-        if (Itchy.isKeyDown(Keys.UP)) {
+        if (this.inputThrust.pressed()) {
             var theta = this.actor.getHeadingRadians();
             this.vx += Math.cos(theta) * this.thrust;
             this.vy += Math.sin(theta) * this.thrust;
@@ -79,7 +85,7 @@ Ship = Class({
                 .distance(40).randomSpread().speed(1, 2, 0, 0).fade(3)
                 .eventName("spark").createActor();
         }
-        if (Itchy.isKeyDown(Keys.SPACE)) {
+        if (this.inputFire.pressed()) {
             if (this.fireTimer.isFinished()) {
                 this.fire();
                 this.fireTimer.reset();
@@ -93,7 +99,7 @@ Ship = Class({
         }
 
         // For debugging.
-        if (Itchy.isKeyDown(Keys.x)) {
+        if (this.inputCheat.pressed()) {
             sceneDirectorScript.addRocks(-1);
         }
 

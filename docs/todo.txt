@@ -1,9 +1,7 @@
 Create Rox game.
 
     Inputs
-        Use in other games Rox, Rain, Pyrus World, Torus World, Tetra, DrunkInvaders 
         Use in iThrust
-        Search for events.Keys to ensure nothing else is using the old way.
 
     Need a consistent order of ticks - top left to bottom right (or similar).
         Each stage should be asked to tick in turn, and the GridStage can do it based on its grid, and then remaining actors which aren't on the grid.

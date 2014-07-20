@@ -258,4 +258,8 @@
     <scene name="medium"/>
     <scene name="menu"/>
   </scenes>
+  <inputs>
+    <input name="exit" keys="ESCAPE"/>
+    <input name="restart" keys="RETURN,KP_ENTER"/>
+  </inputs>
 </resources>

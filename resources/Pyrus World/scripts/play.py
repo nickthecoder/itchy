@@ -1,4 +1,5 @@
 from uk.co.nickthecoder.itchy import Itchy
+from uk.co.nickthecoder.itchy import Input
 from uk.co.nickthecoder.itchy import PlainSceneDirector
 from uk.co.nickthecoder.itchy.util import ClassName
 from uk.co.nickthecoder.itchy.extras import Timer
@@ -16,22 +17,31 @@ class Play(PlainSceneDirector) :
         self.ship = None # Set by Ship's onBirth.
 
     def onActivate(self) :
+    
+        self.inputExit = Input.find("exit")
+        self.inputPause = Input.find("pause")
+        self.inputRestart = Input.find("restart")
+        self.inputContinue = Input.find("continue")
+
         self.game.loadScene("foreground", True)
 
     def onKeyDown(self, event) :
+    
         # Escape key takes us back to the menu.
-        if event.symbol == event.ESCAPE :
+        if self.inputExit.matches(event) :
             self.game.startScene("menu")
             return True; # Return true to indicate that the key has been processed.
 
-        # Play again if dead an return pressed.
-        if event.symbol == event.RETURN and Itchy.getGame().getDirector().lives == 0 :
-            self.game.getDirector().startGame()
-    
-        if event.symbol > event.KEY_0 and event.symbol <= event.KEY_9 :
-            self.game.startScene( str(event.symbol - event.KEY_0) )
+        if Itchy.getGame().getDirector().lives == 0 :
         
-        if event.symbol == event.p :
+            # Play again if dead an return pressed.
+            if self.inputRestart.matches(event) :
+                self.game.getDirector().startGame()
+
+            if self.inputContinue.matches(event) :
+                self.game.getDirector().startGame(self.game.getSceneName())
+    
+        if self.inputPause.matches(event) :
             self.game.pause.togglePause()
         
         return False

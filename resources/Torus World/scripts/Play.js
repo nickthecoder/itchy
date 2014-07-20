@@ -11,26 +11,32 @@ Play = new Class({
     },
 
     onActivate : function() {
+        this.inputExit = itchy.Input.find( "exit" )
+        this.inputRestart = itchy.Input.find( "restart" )
+        this.inputContinue = itchy.Input.find( "continue" )
+        this.inputPause = itchy.Input.find( "pause" )
+    
         game.loadScene("foreground", true);
     },
 
     onKeyDown : function(event) {
         // Escape key takes us back to the menu.
-        if (event.symbol == event.ESCAPE) {
-            game.startScene("menu");
-            return true; // Return true to indicate that the key has been
-                            // processed.
+        if (this.inputExit.matches(event)) {
+            directorScript.startScene("menu");
+            return true; // Return true to indicate that the key has been processed.
         }
         // Play again if dead an return pressed.
-        if ((event.symbol == event.RETURN) && (directorScript.lives == 0)) {
-            directorScript.startGame();
+        if (directorScript.lives == 0) {
+        
+            if (this.inputContinue.matches(event)) {
+                directorScript.startGame(game.getSceneName());
+            }
+            if (this.inputRestart.matches(event)) {
+                directorScript.startGame();
+            }
         }
-
-        if ((event.symbol > event.KEY_0) && (event.symbol <= event.KEY_9)) {
-            game.startScene("" + (event.symbol - event.KEY_0));
-        }
-
-        if (event.symbol == event.p) {
+        
+        if (this.inputPause.matches(event)) {
             game.pause.togglePause();
         }
 

@@ -404,4 +404,18 @@
     <scene name="pause"/>
     <scene name="testEdgeCollisions"/>
   </scenes>
+  <inputs>
+    <input name="about" keys="a"/>
+    <input name="cheat" keys="ctrl+alt+c"/>
+    <input name="continue" keys="c"/>
+    <input name="editor" keys="F12"/>
+    <input name="exit" keys="ESCAPE"/>
+    <input name="fire" keys="SPACE,RETURN"/>
+    <input name="left" keys="LEFT,z"/>
+    <input name="pause" keys="p,PAUSE"/>
+    <input name="restart" keys="r"/>
+    <input name="right" keys="x,RIGHT"/>
+    <input name="start" keys="RETURN,KP_ENTER"/>
+    <input name="thrust" keys="SEMICOLON,UP"/>
+  </inputs>
 </resources>

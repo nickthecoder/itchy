@@ -21,7 +21,7 @@ class Level(PlainSceneDirector) :
         self.inputToggleInfo = Input.find("toggleInfo")
         
         self.collectablesRemaining = 0
-        self.showInfo = False
+        self.showInfo = True
 
     def onActivate( self ) :
         
@@ -29,7 +29,9 @@ class Level(PlainSceneDirector) :
         Itchy.getGame().loadScene("glass", True)
         
         self.droppedFramesRole = Itchy.getGame().findRoleById("droppedFrames")
-        
+
+        self.toggleInfo()
+                
         # Calculate the size of the grid needed to fit all of the actors
         stage = Itchy.getGame().getDirector().gridStage
 

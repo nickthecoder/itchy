@@ -4,22 +4,32 @@
  ******************************************************************************/
 package uk.co.nickthecoder.drunkinvaders;
 
+import uk.co.nickthecoder.itchy.Input;
 import uk.co.nickthecoder.itchy.PlainSceneDirector;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
-import uk.co.nickthecoder.jame.event.Keys;
 
 public class Levels extends PlainSceneDirector
 {
+    protected Input inputExit;
+
+    protected Input inputPlay;
+
+    @Override
+    public void onActivate()
+    {
+        this.inputExit = Input.find("exit");
+        this.inputPlay = Input.find("play");
+    }
 
     @Override
     public boolean onKeyDown( KeyboardEvent ke )
     {
-        if (ke.symbol == Keys.ESCAPE) {
+        if (this.inputExit.matches(ke)) {
             DrunkInvaders.director.startScene("menu");
             return true;
         }
 
-        if (ke.symbol == Keys.RETURN) {
+        if (this.inputPlay.matches(ke)) {
             DrunkInvaders.director.play();
             return true;
         }

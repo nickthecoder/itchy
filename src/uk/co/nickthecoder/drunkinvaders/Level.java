@@ -5,12 +5,11 @@
 package uk.co.nickthecoder.drunkinvaders;
 
 import uk.co.nickthecoder.itchy.Actor;
+import uk.co.nickthecoder.itchy.Input;
 import uk.co.nickthecoder.itchy.PlainSceneDirector;
 import uk.co.nickthecoder.itchy.collision.CollisionStrategy;
 import uk.co.nickthecoder.itchy.collision.NeighbourhoodCollisionStrategy;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
-import uk.co.nickthecoder.jame.event.Keys;
-import uk.co.nickthecoder.jame.event.ModifierKey;
 
 public class Level extends PlainSceneDirector
 {
@@ -18,9 +17,24 @@ public class Level extends PlainSceneDirector
 
     public boolean ending = false;
 
+    protected Input inputExit;
+
+    protected Input inputPause;
+
+    protected Input inputCheat;
+
     public int getAliensRemaining()
     {
         return this.aliensRemaining;
+    }
+
+    @Override
+    public void onActivate()
+    {
+        super.onActivate();
+        this.inputExit = Input.find("exit");
+        this.inputPause = Input.find("pause");
+        this.inputCheat = Input.find("cheat");
     }
 
     public void addAliens( int n )
@@ -42,18 +56,19 @@ public class Level extends PlainSceneDirector
     @Override
     public boolean onKeyDown( KeyboardEvent ke )
     {
-        if (ke.symbol == Keys.ESCAPE) {
+        if (this.inputExit.matches(ke)) {
             this.ending = true;
             DrunkInvaders.director.startScene("menu");
             return true;
         }
 
-        if (ke.symbol == Keys.p) {
+        if (this.inputPause.matches(ke)) {
             DrunkInvaders.director.getGame().pause.togglePause();
             return true;
         }
 
-        if ((ke.symbol == Keys.n) && (ke.modifier(ModifierKey.CTRL))) {
+        if (this.inputCheat.matches(ke)) {
+            System.out.println("Cheat!");
             addAliens(-1);
         }
 

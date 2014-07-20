@@ -4,12 +4,29 @@
  ******************************************************************************/
 package uk.co.nickthecoder.drunkinvaders;
 
+import uk.co.nickthecoder.itchy.Input;
 import uk.co.nickthecoder.itchy.PlainSceneDirector;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.Keys;
 
 public class Menu extends PlainSceneDirector
 {
+    protected Input inputExit;
+
+    protected Input inputPlay;
+
+    protected Input inputAbout;
+
+    protected Input inputEditor;
+
+    @Override
+    public void onActivate()
+    {
+        this.inputExit = Input.find("exit");
+        this.inputPlay = Input.find("play");
+        this.inputAbout = Input.find("about");
+        this.inputEditor = Input.find("editor");
+    }
 
     @Override
     public boolean onKeyDown( KeyboardEvent ke )
