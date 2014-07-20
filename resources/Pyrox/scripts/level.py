@@ -69,8 +69,11 @@ class Level(PlainSceneDirector) :
         while (i.hasNext()) :
             actor = i.next()
             role = actor.getRole()
-            if isinstance( role, GridRole ) and not role.getActor().isDead():
-                role.placeOnGrid( self.grid )
+            if isinstance( role, GridRole ) :
+                if not role.getActor().isDead() :
+                    role.placeOnGrid( self.grid )
+            else :
+                print "Skipped non-GridRole object :", role
 
 
     def tick(self) :

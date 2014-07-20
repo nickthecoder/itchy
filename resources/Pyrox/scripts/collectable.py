@@ -13,15 +13,11 @@ properties = ArrayList()
 class Collectable(GridRole) :
 
     def onBirth(self) :
+        super(Collectable,self).onBirth()
         Itchy.getGame().getSceneDirector().collectablesRemaining += 1
-    
-    
-    def onAttach( self ) :
-        super(Collectable,self).onAttach()
         self.addTag("soft")
         
-        self.getActor().getCostume().getProperties().roundCorners(self)
-
+        self.getActor().getCostume().getProperties().update(self)
 
     def onInvaded( self, invader ) :
         if (invader.hasTag("player")) :

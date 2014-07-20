@@ -1,6 +1,8 @@
 from uk.co.nickthecoder.itchy import Role
 from uk.co.nickthecoder.itchy import AbstractRole
 from uk.co.nickthecoder.itchy.util import ClassName
+from uk.co.nickthecoder.itchy.extras import Fragment
+from uk.co.nickthecoder.itchy.role import Explosion
 
 from java.util import ArrayList
 
@@ -20,6 +22,10 @@ class GridRole(AbstractRole) :
         self.between = 0 # Distance travelled between squares (0..squareSize)
         self.squashed = False # Set to false when started to move and set to true just before onInvaded is called.
         
+    def onBirth( self ) :
+        Fragment().actor(self.actor).pieces( 10 ).createPoses( "fragment" )
+        self.addTag( "explodable" )
+    
     def onAttach( self ) :
         pass
         
@@ -187,7 +193,18 @@ class GridRole(AbstractRole) :
     
     def isMoving( self ) :
         return (self.dx != 0) or (self.dy != 0)
+
+    def explode( self ) :
     
+        Explosion(self.actor) \
+            .projectiles(10) \
+            .gravity(-0.2).fade(0.9, 3.5).speed(0.1, 1.5).vy(5) \
+            .pose("fragment") \
+            .createActor() \
+
+        self.actor.kill()
+
+
     
     # Called after the object has finished travelling from one square to another.
     # dx,dy : The direction the invader was travelling ) {

@@ -47,19 +47,64 @@
     <actor costume="wallNE" x="780" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="41"/>
     <actor costume="wallSE" x="780" y="0" direction="0.0" heading="0.0" startEvent="default" zOrder="42"/>
     <actor costume="wallSW" x="0" y="0" direction="0.0" heading="0.0" startEvent="default" zOrder="43"/>
-    <actor costume="chair" x="360" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="44"/>
-    <actor costume="player" x="240" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="45"/>
+    <actor costume="player" x="600" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="45"/>
     <actor costume="chair" x="540" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="46"/>
-    <actor costume="chair" x="120" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="47"/>
-    <actor costume="chair" x="120" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="48"/>
-    <actor costume="chair" x="420" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="49"/>
-    <actor costume="chair" x="540" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="50"/>
-    <actor costume="soil" x="600" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="51"/>
-    <actor costume="rock" x="540" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="52"/>
-    <actor costume="rock" x="240" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="53"/>
-    <actor costume="table" x="180" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="54"/>
-    <actor costume="table" x="480" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="55"/>
+    <actor costume="rock" x="720" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="52"/>
+    <actor costume="rock" x="240" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="53"/>
     <actor costume="table" x="660" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="56"/>
-    <actor costume="table" x="300" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="57"/>
+    <actor costume="coin" x="120" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="62"/>
+    <actor costume="rock" x="180" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="63"/>
+    <actor costume="wall" x="300" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="64"/>
+    <actor costume="soil" x="360" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="65"/>
+    <actor costume="stamp" x="480" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="66"/>
+    <actor costume="chair" x="660" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="68"/>
+    <actor costume="soil" x="240" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="69"/>
+    <actor costume="rock" x="60" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="70"/>
+    <actor costume="soil" x="60" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="71"/>
+    <actor costume="rock" x="420" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="72"/>
+    <actor costume="rock" x="600" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="73"/>
+    <actor costume="soil" x="420" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="74"/>
+    <actor costume="soil" x="600" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="75"/>
+    <actor costume="rock" x="720" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="77"/>
+    <actor costume="soil" x="720" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="78"/>
+    <actor costume="grenade" x="60" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="79"/>
+    <actor costume="grenade" x="240" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="80"/>
+    <actor costume="grenade" x="420" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="81"/>
+    <actor costume="grenade" x="600" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="82"/>
+    <actor costume="grenade" x="720" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="84"/>
+    <actor costume="grenade" x="120" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="85"/>
+    <actor costume="grenade" x="120" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="86"/>
+    <actor costume="grenade" x="180" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="88"/>
+    <actor costume="grenade" x="360" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="89"/>
+    <actor costume="grenade" x="420" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="grenade" x="420" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="91"/>
+    <actor costume="grenade" x="540" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="93"/>
+    <actor costume="grenade" x="720" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="94"/>
+    <actor costume="soil" x="240" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="95"/>
+    <actor costume="soil" x="120" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="96"/>
+    <actor costume="soil" x="180" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="97"/>
+    <actor costume="soil" x="360" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="98"/>
+    <actor costume="soil" x="300" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="99"/>
+    <actor costume="soil" x="360" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="100"/>
+    <actor costume="soil" x="420" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="101"/>
+    <actor costume="soil" x="480" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="102"/>
+    <actor costume="soil" x="540" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="103"/>
+    <actor costume="soil" x="600" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="104"/>
+    <actor costume="soil" x="660" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="105"/>
+    <actor costume="concrete" x="540" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="106"/>
+    <actor costume="grenade2" x="480" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="107"/>
+    <actor costume="grenade2" x="180" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="108"/>
+    <actor costume="rock" x="180" y="540" direction="0.0" heading="0.0" startEvent="default" zOrder="109"/>
+    <actor costume="rock" x="360" y="540" direction="0.0" heading="0.0" startEvent="default" zOrder="110"/>
+    <actor costume="soil" x="180" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="111"/>
+    <actor costume="rock" x="60" y="540" direction="0.0" heading="0.0" startEvent="default" zOrder="112"/>
+    <actor costume="rock" x="300" y="540" direction="0.0" heading="0.0" startEvent="default" zOrder="113"/>
+    <actor costume="soil" x="60" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="114"/>
+    <actor costume="soil" x="660" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="115"/>
+    <actor costume="soil" x="720" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="116"/>
+    <actor costume="soil" x="300" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="117"/>
+    <actor costume="soil" x="60" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="118"/>
+    <actor costume="soil" x="240" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="119"/>
+    <actor costume="soil" x="240" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="121"/>
   </layer>
 </scene>

@@ -264,6 +264,7 @@ public class Actor implements PropertySubject<Actor>
 
         Animation newAnimation;
 
+        // What do we do when an animation is in progress. Either replace it, ignore the new animation or merge them sequentially.
         if ((this.animation == null) || (ae == AnimationEvent.REPLACE)) {
             newAnimation = animation.copy();
             newAnimation.start(this);
@@ -272,6 +273,7 @@ public class Actor implements PropertySubject<Actor>
             return;
 
         } else {
+            // Start the new animation after the old one has finished.
             CompoundAnimation ca = new CompoundAnimation(ae == AnimationEvent.SEQUENCE);
             ca.add(this.getAnimation());
             ca.add(animation.copy());

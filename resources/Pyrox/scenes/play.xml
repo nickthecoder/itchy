@@ -45,8 +45,8 @@
     <text text="The Circuit" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="660" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="44">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="dy" value="-1"/>
         <property name="color" value="#000000ff"/>
+        <property name="dy" value="-1"/>
       </makeup>
     </text>
     <actor costume="wall" x="420" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="45"/>
@@ -97,15 +97,15 @@
     <text text="Rock and Coins" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="420" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="83">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="dy" value="-1"/>
         <property name="color" value="#000000ff"/>
+        <property name="dy" value="-1"/>
       </makeup>
     </text>
     <text text="Start Simple" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="180" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="84">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="dy" value="-1"/>
         <property name="color" value="#000000ff"/>
+        <property name="dy" value="-1"/>
       </makeup>
     </text>
     <actor costume="warp" x="180" y="540" direction="0.0" heading="0.0" startEvent="default" zOrder="85">
@@ -114,8 +114,8 @@
     <text text="The 2nd Circuit" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="900" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="86">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="dy" value="-1"/>
         <property name="color" value="#000000ff"/>
+        <property name="dy" value="-1"/>
       </makeup>
     </text>
     <actor costume="warp" x="900" y="540" direction="0.0" heading="0.0" startEvent="default" zOrder="87">

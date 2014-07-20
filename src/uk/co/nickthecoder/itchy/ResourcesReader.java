@@ -57,11 +57,15 @@ public class ResourcesReader
 
     private void readResources( XMLTag resourcesTag ) throws Exception
     {
+
+        for (Iterator<XMLTag> i = resourcesTag.getTags("inputs"); i.hasNext();) {
+            XMLTag inputsTag = i.next();
+            this.readInputs(inputsTag);
+        }
         for (Iterator<XMLTag> i = resourcesTag.getTags("game"); i.hasNext();) {
             XMLTag gameTag = i.next();
             this.readGame(gameTag);
         }
-
         for (Iterator<XMLTag> i = resourcesTag.getTags("fonts"); i.hasNext();) {
             XMLTag fontsTag = i.next();
             this.readFonts(fontsTag);
@@ -89,10 +93,6 @@ public class ResourcesReader
         for (Iterator<XMLTag> i = resourcesTag.getTags("scenes"); i.hasNext();) {
             XMLTag scenesTag = i.next();
             this.readScenes(scenesTag);
-        }
-        for (Iterator<XMLTag> i = resourcesTag.getTags("inputs"); i.hasNext();) {
-            XMLTag inputsTag = i.next();
-            this.readInputs(inputsTag);
         }
     }
 

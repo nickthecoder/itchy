@@ -94,6 +94,15 @@ public abstract class AbstractRole implements Role
         this.tagMembership.remove(tag);
     }
     
+    public void tag( String name, boolean value )
+    {
+        if (value) {
+            this.addTag(name);
+        } else {
+            this.removeTag(name);
+        }
+    }
+    
     @Override
     public Set<String> getTags()
     {

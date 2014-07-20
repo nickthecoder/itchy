@@ -70,7 +70,8 @@ class Player(GridRole) :
         pass
 
     def onHit( self, hitter ) :
-        self.actor.kill()
+        if hitter.hasTag("heavy") :
+            self.actor.kill()
 
 
     # TODO Other methods include :

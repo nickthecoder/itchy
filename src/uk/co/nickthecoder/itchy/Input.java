@@ -26,7 +26,12 @@ public class Input
 
     public static Input find( String name )
     {
-        return Itchy.getGame().resources.getInput(name);
+        Input result = Itchy.getGame().resources.getInput(name);
+        if (result == null) {
+            System.err.println( "Didn't find Input : " + name + " in " + Itchy.getGame().resources.getFilename() );
+            return new Input();
+        }
+        return result;
     }
 
     public Input()

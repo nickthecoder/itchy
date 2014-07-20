@@ -6,6 +6,7 @@
   <ninePatches/>
   <poses>
     <pose name="alien1a" filename="images/alien1a.png"/>
+    <pose name="arrow" filename="images/arrow.png" offsetX="7"/>
     <pose name="arrow2" filename="images/arrow2.png" offsetX="0" offsetY="29"/>
     <pose name="arrowCurved" filename="images/arrowCurved.png" offsetX="60" offsetY="5"/>
     <pose name="arrowCurved2" filename="images/arrowCurved2.png" offsetX="6" offsetY="7"/>
@@ -13,8 +14,19 @@
     <pose name="baloon" filename="images/baloon.png"/>
     <pose name="chair" filename="images/chair.png"/>
     <pose name="coin" filename="images/coin.png"/>
+    <pose name="concrete1" filename="images/concrete1.png"/>
+    <pose name="concrete2" filename="images/concrete2.png"/>
+    <pose name="explosion01" filename="images/explosion01.png"/>
+    <pose name="explosion02" filename="images/explosion02.png"/>
+    <pose name="explosion03" filename="images/explosion03.png"/>
+    <pose name="explosion04" filename="images/explosion04.png"/>
+    <pose name="explosion05" filename="images/explosion05.png"/>
+    <pose name="explosion06" filename="images/explosion06.png"/>
+    <pose name="explosion07" filename="images/explosion07.png"/>
     <pose name="gateClosed" filename="images/gateClosed.png"/>
     <pose name="gateOpen" filename="images/gateOpen.png"/>
+    <pose name="grenade" filename="images/grenade.png"/>
+    <pose name="grenade2" filename="images/grenade2.png"/>
     <pose name="keyEscape" filename="images/keyEscape.png"/>
     <pose name="keyF5" filename="images/keyF5.png"/>
     <pose name="portcullis" filename="images/portcullis.png" offsetY="30"/>
@@ -29,8 +41,38 @@
     <pose name="wallSW" filename="images/wallSW.png"/>
   </poses>
   <sounds/>
-  <animations/>
+  <animations>
+    <animation name="explosion">
+      <sequence loops="1" sequence="true">
+        <frames pingPong="false">
+          <frame pose="explosion01" delay="5"/>
+          <frame pose="explosion02" delay="5"/>
+          <frame pose="explosion03" delay="5"/>
+          <frame pose="explosion04" delay="5"/>
+          <frame pose="explosion05" delay="5"/>
+          <frame pose="explosion06" delay="5"/>
+          <frame pose="explosion07" delay="1"/>
+        </frames>
+        <sequence loops="1" sequence="true">
+          <alpha ease="linear" target="0.0" ticks="3"/>
+        </sequence>
+      </sequence>
+    </animation>
+    <animation name="grenade-rollAnticlockwise">
+      <sequence finishedMessage="turned" loops="1" sequence="true">
+        <turn ease="linear" headingToo="false" ticks="10" turn="90.0"/>
+      </sequence>
+    </animation>
+    <animation name="grenade-rollClockwise">
+      <sequence finishedMessage="turned" loops="1" sequence="true">
+        <turn ease="linear" headingToo="false" ticks="10" turn="-90.0"/>
+      </sequence>
+    </animation>
+  </animations>
   <costumes>
+    <costume name="arrow" defaultZOrder="0">
+      <pose name="default" pose="arrow"/>
+    </costume>
     <costume name="arrow2" defaultZOrder="0">
       <pose name="default" pose="arrow2"/>
     </costume>
@@ -53,9 +95,28 @@
       <pose name="default" pose="coin"/>
       <properties roundedNE="true" roundedSE="true" roundedSW="true" roundedNW="true"/>
     </costume>
+    <costume name="concrete" defaultZOrder="0" role="wall.py" properties="wallProperties.py">
+      <pose name="default" pose="concrete1"/>
+      <pose name="default" pose="concrete2"/>
+      <properties roundedNE="false" roundedSE="false" roundedSW="false" roundedNW="false" canExplode="false"/>
+    </costume>
+    <costume name="explosion" defaultZOrder="0">
+      <pose name="default" pose="explosion01"/>
+      <animation name="default" animation="explosion"/>
+    </costume>
     <costume name="gate" defaultZOrder="0" role="gate.py">
       <pose name="default" pose="gateClosed"/>
       <pose name="open" pose="gateOpen"/>
+    </costume>
+    <costume name="grenade" defaultZOrder="0" role="grenade.py" properties="grenadeProperties.py">
+      <pose name="default" pose="grenade"/>
+      <animation name="rollAnticlockwise" animation="grenade-rollAnticlockwise"/>
+      <animation name="rollClockwise" animation="grenade-rollClockwise"/>
+      <properties fallen="false"/>
+    </costume>
+    <costume name="grenade2" defaultZOrder="0" extends="grenade" role="grenade.py" properties="grenadeProperties.py">
+      <pose name="default" pose="grenade2"/>
+      <properties fallen="true"/>
     </costume>
     <costume name="keyEscape" defaultZOrder="0">
       <pose name="default" pose="keyEscape"/>
@@ -83,25 +144,25 @@
     <costume name="table" defaultZOrder="0" role="table.py">
       <pose name="default" pose="table"/>
     </costume>
-    <costume name="wall" defaultZOrder="0" role="wall.py" properties="roundProperties.py">
+    <costume name="wall" defaultZOrder="0" role="wall.py" properties="wallProperties.py">
       <pose name="default" pose="wall"/>
-      <properties roundedNE="false" roundedSE="false" roundedSW="false" roundedNW="false"/>
+      <properties roundedNE="false" roundedSE="false" roundedSW="false" roundedNW="false" canExplode="true"/>
     </costume>
-    <costume name="wallNE" defaultZOrder="0" role="wall.py" properties="roundProperties.py">
+    <costume name="wallNE" defaultZOrder="0" role="wall.py" properties="wallProperties.py">
       <pose name="default" pose="wallNE"/>
-      <properties roundedNE="true" roundedSE="false" roundedSW="false" roundedNW="false"/>
+      <properties roundedNE="true" roundedSE="false" roundedSW="false" roundedNW="false" canExplode="true"/>
     </costume>
-    <costume name="wallNW" defaultZOrder="0" role="wall.py" properties="roundProperties.py">
+    <costume name="wallNW" defaultZOrder="0" role="wall.py" properties="wallProperties.py">
       <pose name="default" pose="wallNW"/>
-      <properties roundedNE="false" roundedSE="false" roundedSW="false" roundedNW="true"/>
+      <properties roundedNE="false" roundedSE="false" roundedSW="false" roundedNW="true" canExplode="true"/>
     </costume>
-    <costume name="wallSE" defaultZOrder="0" role="wall.py" properties="roundProperties.py">
+    <costume name="wallSE" defaultZOrder="0" role="wall.py" properties="wallProperties.py">
       <pose name="default" pose="wallSE"/>
-      <properties roundedNE="false" roundedSE="true" roundedSW="false" roundedNW="false"/>
+      <properties roundedNE="false" roundedSE="true" roundedSW="false" roundedNW="false" canExplode="true"/>
     </costume>
-    <costume name="wallSW" defaultZOrder="0" role="wall.py" properties="roundProperties.py">
+    <costume name="wallSW" defaultZOrder="0" role="wall.py" properties="wallProperties.py">
       <pose name="default" pose="wallSW"/>
-      <properties roundedNE="false" roundedSE="false" roundedSW="true" roundedNW="false"/>
+      <properties roundedNE="false" roundedSE="false" roundedSW="true" roundedNW="false" canExplode="true"/>
     </costume>
     <costume name="warp" defaultZOrder="0" role="warp.py">
       <pose name="close" pose="gateClosed"/>
@@ -110,8 +171,15 @@
   </costumes>
   <scenes>
     <scene name="glass"/>
+    <scene name="level-chairs"/>
+    <scene name="level-doubleBang"/>
+    <scene name="level-fallenGrenades"/>
+    <scene name="level-grenades"/>
     <scene name="level-rocksAndCoins"/>
+    <scene name="level-rollGrenades"/>
+    <scene name="level-rollingGrenades"/>
     <scene name="level-startSimple"/>
+    <scene name="level-tables"/>
     <scene name="level-template"/>
     <scene name="level-theCircuit"/>
     <scene name="level-theSecondCircuit"/>

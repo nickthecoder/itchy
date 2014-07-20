@@ -10,10 +10,10 @@ properties = ArrayList()
 
 class Wall(GridRole) :
 
-    def onAttach( self ) :
-        super(Wall,self).onAttach()
+    def onBirth( self ) :
+        super(Wall,self).onBirth()
         
-        self.getActor().getCostume().getProperties().roundCorners(self)
+        self.getActor().getCostume().getProperties().update(self)
 
     # TODO Other methods include :
     # onDetach, onKill, onMouseDown, onMouseUp, onMouseMove

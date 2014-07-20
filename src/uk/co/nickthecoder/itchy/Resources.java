@@ -102,6 +102,7 @@ public class Resources extends Loadable
         result.poses.putAll(this.poses);
         result.costumes.putAll(this.costumes);
         result.animations.putAll(this.animations);
+        result.inputs.putAll(this.inputs);
         result.renamedCostumes.putAll(this.renamedCostumes);
         
         result.setFile(this.getFile());

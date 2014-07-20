@@ -6,6 +6,7 @@ class Empty(GridRole) :
 
     def __init__( self ) :
         super(Empty,self).__init__()
+
         self.addTag("soft")
         self.addTag("squashE")
         self.addTag("squashS")

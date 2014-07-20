@@ -18,24 +18,18 @@ properties.add( BooleanProperty( "roundedNW" ).label( "Rounded NW" ) )
 class RoundProperties(CostumeProperties) :
 
     def __init__(self) :
+
         self.roundedNE = False
         self.roundedSE = False
         self.roundedSW = False
         self.roundedNW = False
 
-    def roundCorners(self, role) :
-    
-        if self.roundedNE :
-            role.addTag("roundedNE")
+    def update(self, role) :
 
-        if self.roundedSE :
-            role.addTag("roundedSE")
-
-        if self.roundedSW :
-            role.addTag("roundedSW")
-
-        if self.roundedNW :
-            role.addTag("roundedNW")
+        role.tag("roundedNE", self.roundedNE)
+        role.tag("roundedSE", self.roundedSE)
+        role.tag("roundedSW", self.roundedSW)
+        role.tag("roundedNW", self.roundedNW)
 
     # Boiler plate code - no need to change this
     def getProperties(self):
