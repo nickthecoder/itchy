@@ -7,6 +7,8 @@ package uk.co.nickthecoder.itchy;
 import java.util.ArrayList;
 import java.util.List;
 
+import uk.co.nickthecoder.jame.event.KeyboardEvent;
+
 /**
  * The set of keys and joystick events which can be used as input for a particular task. For example, to fire a weapon, you could define
  * multiple keys, and multiple joystick buttons, all of which will cause the weapon to fire. Each player can then choose which they find
@@ -66,6 +68,16 @@ public class Input
         this.asString = keys;
     }
 
+    public boolean matches( KeyboardEvent ke )
+    {
+        for (KeyInput keyInput : this.keys) {
+            if (keyInput.matches(ke)) {
+                return true;
+            }
+        }
+        return false;        
+    }
+    
     public boolean pressed()
     {
         for (KeyInput keyInput : this.keys) {

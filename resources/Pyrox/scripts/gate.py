@@ -27,7 +27,7 @@ class Gate(GridRole) :
             
     def onInvaded( self, invader ) :
         Itchy.getGame().getPreferences().node("completed").putBoolean( Itchy.getGame().getSceneName(), True )
-        Itchy.getGame().startScene( self.scene )
+        Itchy.getGame().getDirector().returnToGateRoom( self.scene )
         
     def onMessage( self, message ) :
         if (message == "open") :

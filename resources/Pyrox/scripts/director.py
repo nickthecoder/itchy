@@ -14,12 +14,18 @@ from java.util import ArrayList
 class Director(AbstractDirector) :
 
     def __init__(self) :
+        
         self.squareSize = 60
+        
         self.inputEditor = Input.find( "editor" )
         self.inputTest = Input.find( "test" )
+        self.inputRestart = Input.find("restart")
+        self.inputQuit = Input.find("quit")
 
+        self.previousSceneName = ""
     
     def onStarted( self ) :
+    
         screenRect = Rect(0, 0, self.game.getWidth(), self.game.getHeight())
 
         self.plainStage = ZOrderStage("plain")
@@ -40,21 +46,33 @@ class Director(AbstractDirector) :
 
         self.gridStage.setStageConstraint( GridStageConstraint( self.squareSize, self.squareSize ) )      
 
+    def returnToGateRoom( self, warpRoom ) :
+        
+        self.previousSceneName = Itchy.getGame().getSceneName()
+        Itchy().getGame().startScene( warpRoom )
+
+        
+    def onKeyDown(self,kevent) :
     
-    def tick(self) :
-    
-        if self.inputTest.pressed() :
+        if self.inputTest.matches(kevent) :
             Itchy.getGame().startScene( "test" )
 
-        if self.inputEditor.pressed() :
+        if self.inputEditor.matches(kevent) :
             sceneName = Itchy.getGame().getSceneName()
             if sceneName == "menu" :
                 Itchy.getGame().startEditor()
             else :
                 Itchy.getGame().startEditor( sceneName )
     
-    # TODO Other methods include :
-    # onStarted, onMouseDown, onMouseUp, onMouseMove, onKeyDown, onKeyUp, onQuit, onMessage
+        if self.inputRestart.matches(kevent) :
+            Itchy.getGame().startScene( Itchy.getGame().getSceneName() )
+
+        if self.inputQuit.matches(kevent) :
+            Itchy.getGame().startScene( "menu" )
+
+        # Call the base class. Note that super(Director,self).onKeyDown(kevent) throws an exception :-(        
+        AbstractDirector.onKeyDown(self, kevent)
+
 
     # Boiler plate code - no need to change this
     def getClassName(self):

@@ -17,14 +17,18 @@ properties = ArrayList()
 class Level(PlainSceneDirector) :
 
     def __init__(self) :
-        self.inputRestart = Input.find("restart")
-        self.inputQuit = Input.find("quit")
+    
+        self.inputToggleInfo = Input.find("toggleInfo")
+        
         self.collectablesRemaining = 0
+        self.showInfo = False
 
     def onActivate( self ) :
         
         # Load the glass stage on top of the current scene.
         Itchy.getGame().loadScene("glass", True)
+        
+        self.droppedFramesRole = Itchy.getGame().findRoleById("droppedFrames")
         
         # Calculate the size of the grid needed to fit all of the actors
         stage = Itchy.getGame().getDirector().gridStage
@@ -76,14 +80,19 @@ class Level(PlainSceneDirector) :
                 print "Skipped non-GridRole object :", role
 
 
-    def tick(self) :
-
-        if self.inputRestart.pressed() :
-            Itchy.getGame().startScene( Itchy.getGame().getSceneName() )
-
-        if self.inputQuit.pressed() :
-            Itchy.getGame().startScene( "menu" )
+    def onKeyDown(self, kevent) :
+    
+        if self.inputToggleInfo.matches(kevent) :
+            self.toggleInfo()
         
+
+    def toggleInfo( self ) :
+
+        self.showInfo = not self.showInfo
+        alpha = 255 if self.showInfo else 0
+        
+        if self.droppedFramesRole :
+            self.droppedFramesRole.getActor().getAppearance().setAlpha( alpha )
         
     # When the number of collectables remaining is zero, tell all gates to open.
     def collected( self, amount ) :
@@ -92,7 +101,7 @@ class Level(PlainSceneDirector) :
 
             for gate in AbstractRole.allByTag( "gate" ) :
                 gate.onMessage("open")
-        
+
     # TODO Other methods include :
     # onActivate, onDeactivate(), onMouseDown, onMouseUp, onMouseMove, onKeyDown, onKeyUp, onMessage
     

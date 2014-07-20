@@ -442,6 +442,24 @@ public class Game
         return this.roleTags.getTagMembers(tag);
     }
 
+    
+    public Role findRoleById( String id )
+    {
+        if (id == null) {
+            return null;
+        }
+        
+        for (Stage stage : this.getStages()) {
+            for(Actor actor : stage.getActors()) {
+                Role role = actor.getRole();
+                if (id.equals( role.getId() )) {
+                    return role;
+                }
+            }
+        }
+        return null;
+    }
+    
     /**
      * Returns the views that are under your control. Add to this compound view from your Director's onStarted method. This CompoundView
      * does not include the background view ({@link #getBackground()}), nor any pop-up windows, nor the glass view ({@link #getGlassView()}

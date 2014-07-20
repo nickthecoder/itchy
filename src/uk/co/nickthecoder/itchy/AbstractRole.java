@@ -16,6 +16,7 @@ import uk.co.nickthecoder.itchy.animation.Animation;
 import uk.co.nickthecoder.itchy.collision.BruteForceCollisionStrategy;
 import uk.co.nickthecoder.itchy.collision.CollisionStrategy;
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.itchy.util.Tag;
 import uk.co.nickthecoder.itchy.util.TagMembership;
@@ -26,6 +27,8 @@ public abstract class AbstractRole implements Role
 
     private CollisionStrategy collisionStrategy = BruteForceCollisionStrategy.pixelCollision;
 
+    private String id;
+    
     public static Set<Role> allByTag( String tag )
     {
         return Itchy.getGame().findRoleByTag(tag);
@@ -68,6 +71,22 @@ public abstract class AbstractRole implements Role
         this.tagMembership = new TagMembership<Role>(Itchy.getGame().roleTags, this);
     }
 
+    public String getId()
+    {
+        return this.id;
+    }
+    
+    public void setId( String id )
+    {
+        if (id != null) {
+            id = id.trim();
+            if ("".equals(id)) {
+                id = null;
+            }
+        }
+        this.id = id;
+    }
+    
     public CollisionStrategy getCollisionStrategy()
     {
         return this.collisionStrategy;

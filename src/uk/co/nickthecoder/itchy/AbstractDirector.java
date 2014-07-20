@@ -12,7 +12,7 @@ import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 import uk.co.nickthecoder.jame.event.WindowEvent;
 
-public abstract class AbstractDirector implements Director
+public class AbstractDirector implements Director
 {
     protected Game game;
 

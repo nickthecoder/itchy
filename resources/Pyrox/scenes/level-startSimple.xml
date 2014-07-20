@@ -114,7 +114,7 @@
     <actor costume="wall" x="480" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="147"/>
     <actor costume="wall" x="420" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="148"/>
     <actor costume="gate" x="600" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="149">
-      <property name="scene" value="level-rocksAndCoins"/>
+      <property name="scene" value="warpRoom"/>
     </actor>
     <actor costume="coin" x="360" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="150"/>
     <actor costume="rock" x="540" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="151"/>

@@ -151,6 +151,8 @@ public class SceneDesigner implements MouseListener, KeyListener
     private SimpleTableModel layersTableModel;
 
     private ClassNameBox roleClassName;
+    
+    private TextBox roleId;
 
     /**
      * Has anything changed since onSave was last called?
@@ -726,6 +728,22 @@ public class SceneDesigner implements MouseListener, KeyListener
             }
         });
 
+        Role role = ((SceneDesignerRole) SceneDesigner.this.currentActor.getRole()).actualRole;
+
+        this.roleId = new TextBox( role.getId() );
+        
+        this.roleId.addChangeListener(new ComponentChangeListener() {
+            
+            @Override
+            public void changed()
+            {
+                Role role = ((SceneDesignerRole) SceneDesigner.this.currentActor.getRole()).actualRole;
+                if (role != null) {
+                    role.setId( SceneDesigner.this.roleId.getText() );
+                }
+            }
+        });
+
         createRoleProperties();
     }
 
@@ -734,12 +752,15 @@ public class SceneDesigner implements MouseListener, KeyListener
     private void createRoleProperties()
     {
         this.roleClassName.remove();
-
+        this.roleId.remove();
+        
         Role role = ((SceneDesignerRole) this.currentActor.getRole()).actualRole;
         this.rolePropertiesForm = new SceneDesignerPropertiesForm<Role>("role", this, role, role.getProperties());
         this.rolePropertiesForm.autoUpdate = true;
         this.roleContainer.clear();
+        this.rolePropertiesForm.grid.addRow("ID", this.roleId);
         this.rolePropertiesForm.grid.addRow("Role", this.roleClassName);
+        
         this.roleContainer.addChild(this.rolePropertiesForm.createForm());
     }
 

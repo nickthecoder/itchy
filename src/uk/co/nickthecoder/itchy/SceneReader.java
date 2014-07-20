@@ -233,6 +233,7 @@ public class SceneReader
     {
         this.defaultZOrder += 1;
 
+        sceneActor.id = actorTag.getOptionalAttribute("id",  null);
         sceneActor.x = actorTag.getIntAttribute("x");
         sceneActor.y = actorTag.getIntAttribute("y");
         sceneActor.zOrder = actorTag.getOptionalIntAttribute("zOrder", this.defaultZOrder);

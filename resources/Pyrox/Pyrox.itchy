@@ -184,7 +184,6 @@
     <scene name="level-theCircuit"/>
     <scene name="level-theSecondCircuit"/>
     <scene name="menu"/>
-    <scene name="play"/>
     <scene name="test"/>
     <scene name="tutorial"/>
     <scene name="tutorial-balloons"/>
@@ -192,6 +191,7 @@
     <scene name="tutorial-rocks"/>
     <scene name="tutorial-rocks2"/>
     <scene name="tutorial-template"/>
+    <scene name="warpRoom"/>
   </scenes>
   <inputs>
     <input name="down" keys="DOWN,PERIOD"/>
@@ -201,6 +201,7 @@
     <input name="restart" keys="F5"/>
     <input name="right" keys="RIGHT,x"/>
     <input name="test" keys="ctrl+F11"/>
+    <input name="toggleInfo" keys="F1"/>
     <input name="up" keys="UP,SEMICOLON"/>
   </inputs>
 </resources>

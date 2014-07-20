@@ -4,7 +4,9 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
+import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.KeysEnum;
+import uk.co.nickthecoder.jame.event.ModifierKey;
 
 public class KeyInput
 {
@@ -87,7 +89,31 @@ public class KeyInput
 
         return buffer.toString();
     }
-    
+
+    public boolean matches(KeyboardEvent ke)
+    {
+        if (ke.isPressed() && (ke.symbol == this.key.value)) {
+            if (this.ctrlModifier != (ke.modifier(ModifierKey.LCTRL) || ke.modifier(ModifierKey.RCTRL))) {
+                return false;
+            }
+            if (this.shiftModifier != (ke.modifier(ModifierKey.LSHIFT) || ke.modifier(ModifierKey.RSHIFT))) {
+                return false;
+            }
+            if (this.metaModifier != (ke.modifier(ModifierKey.LMETA) || ke.modifier(ModifierKey.RMETA))) {
+                return false;
+            }
+            // TODO Hmm, there is no super modifier. If so, then we should remove it from Input too.
+            //if (this.superModifier != (ke.modifier(ModifierKey.) || ke.modifier(ModifierKey.RSUPER))) {
+            //    return false;
+            //}
+            if (this.altModifier != (ke.modifier(ModifierKey.LALT) || ke.modifier(ModifierKey.RALT))) {
+                return false;
+            }
+            return true;
+        }
+        return false;
+    }
+
     public boolean pressed()
     {
         if ( ! Itchy.isKeyDown(this.key.value) ) {

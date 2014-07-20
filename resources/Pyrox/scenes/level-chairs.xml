@@ -33,7 +33,7 @@
     <actor costume="wallSE" x="900" y="0" direction="0.0" heading="0.0" startEvent="default" zOrder="39"/>
     <actor costume="wallNW" x="-60" y="780" direction="0.0" heading="0.0" startEvent="default" zOrder="41"/>
     <actor costume="gate" x="420" y="-120" direction="0.0" heading="0.0" startEvent="default" zOrder="54">
-      <property name="scene" value="level-template"/>
+      <property name="scene" value="warpRoom"/>
     </actor>
     <actor costume="wall" x="660" y="720" direction="0.0" heading="0.0" startEvent="default" zOrder="55"/>
     <actor costume="wall" x="720" y="720" direction="0.0" heading="0.0" startEvent="default" zOrder="56"/>

@@ -52,11 +52,10 @@
     <actor costume="rock" x="720" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="52"/>
     <actor costume="rock" x="240" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="53"/>
     <actor costume="table" x="660" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="56"/>
-    <actor costume="coin" x="120" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="62"/>
     <actor costume="rock" x="180" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="63"/>
     <actor costume="wall" x="300" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="64"/>
     <actor costume="soil" x="360" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="65"/>
-    <actor costume="stamp" x="480" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="66"/>
+    <actor costume="stamp" x="600" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="66"/>
     <actor costume="chair" x="660" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="68"/>
     <actor costume="soil" x="240" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="69"/>
     <actor costume="rock" x="60" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="70"/>
@@ -106,5 +105,8 @@
     <actor costume="soil" x="60" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="118"/>
     <actor costume="soil" x="240" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="119"/>
     <actor costume="soil" x="240" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="121"/>
+    <actor costume="gate" x="600" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="122">
+      <property name="scene" value="warpRoom"/>
+    </actor>
   </layer>
 </scene>
