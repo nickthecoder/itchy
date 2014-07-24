@@ -32,6 +32,8 @@ public interface Stage
      */
     public void add( Actor actor );
 
+    public void tick();
+    
     public void changedRole( Actor actor );
 
     /**

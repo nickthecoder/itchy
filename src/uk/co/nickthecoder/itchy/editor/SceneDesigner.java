@@ -151,7 +151,7 @@ public class SceneDesigner implements MouseListener, KeyListener
     private SimpleTableModel layersTableModel;
 
     private ClassNameBox roleClassName;
-    
+
     private TextBox roleId;
 
     /**
@@ -209,6 +209,8 @@ public class SceneDesigner implements MouseListener, KeyListener
         }
 
         this.overlayStage = new ZOrderStage("overlay");
+        this.editor.getStages().add(this.overlayStage);
+        
         this.overlayView = new StageView(editRect, this.overlayStage);
         this.editor.getViews().add(this.overlayView);
 
@@ -262,6 +264,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.editor.getStages().clear();
         this.overlayStage.clear();
 
+        this.editor.getStages().remove(this.overlayStage);
         this.editor.getViews().remove(this.designViews);
         this.editor.getViews().remove(this.overlayView);
         this.editor.removeMouseListener(this);
@@ -288,6 +291,8 @@ public class SceneDesigner implements MouseListener, KeyListener
         newPose.setOffsetY(margin);
 
         Actor actor = new Actor(newPose);
+        Role role = new PlainRole();
+        actor.setRole(role);
         this.overlayStage.addTop(actor);
         actor.moveTo(margin, this.sceneRect.height - margin);
 
@@ -730,16 +735,16 @@ public class SceneDesigner implements MouseListener, KeyListener
 
         Role role = ((SceneDesignerRole) SceneDesigner.this.currentActor.getRole()).actualRole;
 
-        this.roleId = new TextBox( role.getId() );
-        
+        this.roleId = new TextBox(role.getId());
+
         this.roleId.addChangeListener(new ComponentChangeListener() {
-            
+
             @Override
             public void changed()
             {
                 Role role = ((SceneDesignerRole) SceneDesigner.this.currentActor.getRole()).actualRole;
                 if (role != null) {
-                    role.setId( SceneDesigner.this.roleId.getText() );
+                    role.setId(SceneDesigner.this.roleId.getText());
                 }
             }
         });
@@ -753,14 +758,14 @@ public class SceneDesigner implements MouseListener, KeyListener
     {
         this.roleClassName.remove();
         this.roleId.remove();
-        
+
         Role role = ((SceneDesignerRole) this.currentActor.getRole()).actualRole;
         this.rolePropertiesForm = new SceneDesignerPropertiesForm<Role>("role", this, role, role.getProperties());
         this.rolePropertiesForm.autoUpdate = true;
         this.roleContainer.clear();
         this.rolePropertiesForm.grid.addRow("ID", this.roleId);
         this.rolePropertiesForm.grid.addRow("Role", this.roleClassName);
-        
+
         this.roleContainer.addChild(this.rolePropertiesForm.createForm());
     }
 
@@ -1393,7 +1398,7 @@ public class SceneDesigner implements MouseListener, KeyListener
             } else {
                 stage.add(actor);
             }
-            
+
             // TODO, When stamping an actor implements undo/red, then the StageConstraint will have to implement it too.
             sc.added(actor);
 
@@ -2023,7 +2028,7 @@ public class SceneDesigner implements MouseListener, KeyListener
             if (this.target == null) {
                 return;
             }
-            
+
             UndoRotateActor undo = new UndoRotateActor(this.target);
             try {
                 super.moveBy(dx, dy);

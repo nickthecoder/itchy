@@ -5,6 +5,7 @@
 package uk.co.nickthecoder.itchy;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 import uk.co.nickthecoder.jame.Rect;
@@ -85,7 +86,9 @@ public class SimplePause implements Pause
         this.pauseTimeMillis = this.game.gameTimeMillis();
         this.paused = true;
 
-        for (Actor actor : this.game.getActors()) {
+        for (Iterator<Actor> i = this.game.getActors(); i.hasNext();) {
+            Actor actor = i.next();
+            
             if (pauseActor(actor)) {
                 actor.setRole(new PausedRole(actor.getRole()));
             }
@@ -133,7 +136,9 @@ public class SimplePause implements Pause
 
         this.paused = false;
 
-        for (Actor actor : this.game.getActors()) {
+        for (Iterator<Actor> i = this.game.getActors(); i.hasNext();) {
+            Actor actor = i.next();
+            
             if (actor.getRole() instanceof PausedRole) {
                 ((PausedRole) actor.getRole()).unpause();
             }

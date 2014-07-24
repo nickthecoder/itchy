@@ -37,27 +37,27 @@
     <actor costume="wallSE" x="900" y="0" direction="0.0" heading="0.0" startEvent="default" zOrder="39"/>
     <actor costume="wallSW" x="0" y="0" direction="0.0" heading="0.0" startEvent="default" zOrder="40"/>
     <actor costume="wallNW" x="0" y="720" direction="0.0" heading="0.0" startEvent="default" zOrder="41"/>
-    <actor costume="gate" x="720" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="54">
-      <property name="scene" value="warpRoom"/>
-    </actor>
     <actor costume="wall" x="660" y="720" direction="0.0" heading="0.0" startEvent="default" zOrder="55"/>
     <actor costume="wall" x="720" y="720" direction="0.0" heading="0.0" startEvent="default" zOrder="56"/>
     <actor costume="wall" x="780" y="720" direction="0.0" heading="0.0" startEvent="default" zOrder="57"/>
     <actor costume="wall" x="0" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="58"/>
     <actor costume="wall" x="900" y="660" direction="0.0" heading="0.0" startEvent="default" zOrder="59"/>
     <actor costume="wall" x="900" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
-    <actor costume="wall" x="900" y="540" direction="0.0" heading="0.0" startEvent="default" zOrder="61"/>
-    <actor costume="wall" x="900" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="62"/>
+    <actor costume="wall" x="900" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="61"/>
     <actor costume="wall" x="900" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="63"/>
     <actor costume="wall" x="900" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="64"/>
     <actor costume="wall" x="900" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="65"/>
-    <actor costume="wall" x="840" y="720" direction="0.0" heading="0.0" startEvent="default" zOrder="66"/>
-    <actor costume="wallNE" x="900" y="720" direction="0.0" heading="0.0" startEvent="default" zOrder="67"/>
     <actor costume="wall" x="900" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="68"/>
     <actor costume="wall" x="900" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="69"/>
     <actor costume="wall" x="900" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="70"/>
     <actor costume="wall" x="900" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="71"/>
     <actor costume="wall" x="480" y="0" direction="0.0" heading="0.0" startEvent="default" zOrder="72"/>
-    <actor costume="player" x="120" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="73"/>
+    <actor costume="player" x="720" y="660" direction="0.0" heading="0.0" startEvent="default" zOrder="73"/>
+    <actor costume="wall" x="840" y="720" direction="0.0" heading="0.0" startEvent="default" zOrder="86"/>
+    <actor costume="wall" x="900" y="540" direction="0.0" heading="0.0" startEvent="default" zOrder="88"/>
+    <actor costume="wallNE" x="900" y="720" direction="0.0" heading="0.0" startEvent="default" zOrder="127"/>
+    <actor costume="gate" x="720" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="128">
+      <property name="scene" value="play"/>
+    </actor>
   </layer>
 </scene>

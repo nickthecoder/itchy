@@ -21,7 +21,7 @@ public class ZOrderStage extends AbstractStage
      * z-order. The first item is drawn first, and is therefore bottom-most.
      */
     protected TreeSet<Actor> actors = new TreeSet<Actor>(new ZOrderComparactor());
-
+    
     public ZOrderStage( String name )
     {
         super(name);
@@ -147,4 +147,33 @@ public class ZOrderStage extends AbstractStage
 
         return result;
     }
+
+    private List<Actor> tempList = new ArrayList<Actor>();
+    
+    @Override
+    public void tick()
+    {
+        this.tempList.addAll( this.actors );
+        
+        for (Actor actor : this.tempList ) {
+            
+            if (actor.isDead()) {
+                this.actors.remove(actor);
+            } else {
+                this.singleTick(actor);
+            }
+        }
+        
+        this.tempList.clear();
+    }
+    
+    /**
+     * If subclasses want to perform different behaviour for a single actor's tick, then
+     * this method can be overridden.
+     */
+    protected void singleTick(Actor actor)
+    {
+        actor.tick();        
+    }
+
 }

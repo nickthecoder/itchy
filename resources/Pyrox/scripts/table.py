@@ -6,10 +6,11 @@ from java.util import ArrayList
 
 import gridRole
 from gridRole import GridRole
+from movable import Movable
 
 properties = ArrayList()
 
-class Table(GridRole) :
+class Table(Movable) :
 
     def canShove( self, pusher, dx, dy, speed, force) :
     

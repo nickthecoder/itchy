@@ -8,8 +8,9 @@ from uk.co.nickthecoder.itchy import Input
 
 from uk.co.nickthecoder.jame import Rect
 
-
 from java.util import ArrayList
+
+from gridStage import GridStage
 
 class Director(AbstractDirector) :
 
@@ -34,7 +35,7 @@ class Director(AbstractDirector) :
         self.game.getGameViews().add(self.plainView)
         self.plainView.enableMouseListener(self.game)
 
-        self.gridStage = ZOrderStage("grid")
+        self.gridStage = GridStage( "grid" ) # ZOrderStage("grid")
         self.game.getStages().add(self.gridStage)
         self.gridView = StageView(screenRect, self.gridStage)
         self.game.getGameViews().add(self.gridView)

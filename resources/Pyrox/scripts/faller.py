@@ -4,12 +4,13 @@ from uk.co.nickthecoder.itchy.util import ClassName
 
 import gridRole
 from gridRole import GridRole
+from movable import Movable
 
 from java.util import ArrayList
 
 properties = ArrayList()
 
-class Faller(GridRole) :
+class Faller(Movable) :
 
     def onBirth( self ) :
         super(Faller,self).onBirth()
@@ -35,8 +36,9 @@ class Faller(GridRole) :
     def makeAMove( self ) :
     
         self.pushed = False
-        
+                            
         south = self.lookSouth()
+        
         if (south.hasTag("squashS")) :
             self.moveSouth()
             return
@@ -45,13 +47,14 @@ class Faller(GridRole) :
             return
         
         if (south.hasTag("roundedNE")) :
-            if (self.lookEast().isEmpty() and self.lookSouthEast().hasTag("squashS")) :
+            if (self.lookEast().isEmpty() and self.lookSouthEast(self.speed/2).hasTag("squashS")) :
                 self.getActor().event("rollClockwise")
                 self.moveEast()
                 return
 
+
         if (south.hasTag("roundedNW")) :
-            if (self.lookWest().isEmpty() and self.lookSouthWest().hasTag("squashS")) :
+            if (self.lookWest().isEmpty() and self.lookSouthWest(self.speed/2).hasTag("squashS")) :
                 self.getActor().event("rollAnticlockwise")
                 self.moveWest()
                 return
@@ -64,9 +67,20 @@ class Faller(GridRole) :
         if (force < self.weight) :
             return False
 
-        south = self.lookSouth()
-        if south.hasTag("squashS") and self.pushed :
-            return False
+        # Will be move by ourselves (falling or rolling), if so, don't let us be pushed.
+        if self.pushed :
+            south = self.lookSouth()
+            if south.hasTag("squashS") :
+                return False
+
+            if (south.hasTag("roundedNE")) :
+                if (self.lookEast().isEmpty() and self.lookSouthEast(self.speed/2).hasTag("squashS")) :
+                    return False
+
+            if (south.hasTag("roundedNW")) :
+                if (self.lookWest().isEmpty() and self.lookSouthWest(self.speed/2).hasTag("squashS")) :
+                    return False
+
   
         forward = self.look(dx, dy)
         if forward.isMoving() :

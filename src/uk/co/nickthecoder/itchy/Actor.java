@@ -18,8 +18,6 @@ import uk.co.nickthecoder.jame.Surface;
 
 public class Actor implements PropertySubject<Actor>
 {
-    private static PlainRole unsedRole = new PlainRole();
-
     private static Pose startPose( Costume costume, String name )
     {
         Pose pose = costume.getPose(name);
@@ -96,7 +94,7 @@ public class Actor implements PropertySubject<Actor>
         this.appearance = new Appearance(pose);
         this.appearance.setActor(this);
 
-        this.role = unsedRole;
+        this.role = null;
 
         this.x = 0;
         this.y = 0;
@@ -390,10 +388,9 @@ public class Actor implements PropertySubject<Actor>
             return;
         }
 
-        if ((this.stage != null) && (this.role != unsedRole)) {
+        if ((this.stage != null) && (this.role != null)) {
             this.fullyCreated = true;
             this.role.born();
-            Itchy.getGame().add(this);
         }
     }
 
@@ -466,8 +463,10 @@ public class Actor implements PropertySubject<Actor>
     {
         if (!this.dead) {
             this.dead = true;
-            getRole().killed();
-
+            if (this.role != null) {
+                this.role.killed();
+            }
+            
             if (this.stage != null) {
                 this.stage.remove(this);
             }

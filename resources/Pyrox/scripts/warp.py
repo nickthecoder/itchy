@@ -1,6 +1,7 @@
 from uk.co.nickthecoder.itchy import Itchy
 from uk.co.nickthecoder.itchy import Role
 from uk.co.nickthecoder.itchy import AbstractRole
+from uk.co.nickthecoder.itchy.role import PlainRole
 from uk.co.nickthecoder.itchy.util import ClassName
 
 from java.util import ArrayList
@@ -25,17 +26,20 @@ class Warp(GridRole) :
         
     def onBirth(self) :
         self.addTag("soft")
-        if Itchy.getGame().getDirector().previousSceneName == self.scene :
-            print "Moving player to this warp"
-            player = Itchy.getGame().findRoleById("player")
-            if player :
-                x = self.getActor().getX() + self.exitX * Itchy.getGame().getDirector().squareSize
-                y = self.getActor().getY() + self.exitY * Itchy.getGame().getDirector().squareSize
-                player.getActor().moveTo( x, y )
+        self.addTag("warp")
+        
+        if self.isCompleted() :
+            self.getActor().event("completed")
+
+        if not Itchy.getGame().resources.getSceneResource(self.scene) :
+            self.getActor().event("closed")
+            self.getActor().setRole( PlainRole() )
 
     def onInvaded( self, invader ) :
         Itchy.getGame().startScene( self.scene )
 
+    def isCompleted(self):
+        return Itchy.getGame().getPreferences().node("completed").getBoolean( self.scene, False )
 
     # TODO Other methods include :
     # onDetach, onKill, onMouseDown, onMouseUp, onMouseMove

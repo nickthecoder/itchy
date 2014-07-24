@@ -2,15 +2,18 @@
   <game directorClassName="director.py" height="600" initialScene="menu" title="Rox" width="800"/>
   <fonts>
     <font name="Boycott" filename="fonts/Boycott/Boycott.ttf"/>
+    <font name="Vera" filename="fonts/Vera/Vera.ttf"/>
   </fonts>
-  <ninePatches/>
+  <ninePatches>
+    <ninePatch name="talk" filename="images/bubble.png" top="20" right="54" bottom="50" left="20"/>
+  </ninePatches>
   <poses>
     <pose name="alien1a" filename="images/alien1a.png"/>
     <pose name="arrow" filename="images/arrow.png" offsetX="7"/>
     <pose name="arrow2" filename="images/arrow2.png" offsetX="0" offsetY="29"/>
     <pose name="arrowCurved" filename="images/arrowCurved.png" offsetX="60" offsetY="5"/>
     <pose name="arrowCurved2" filename="images/arrowCurved2.png" offsetX="6" offsetY="7"/>
-    <pose name="arrowKeys" filename="images/arrowKeys.png"/>
+    <pose name="arrowKeys" filename="images/arrowKeys.png" offsetY="65"/>
     <pose name="baloon" filename="images/baloon.png"/>
     <pose name="chair" filename="images/chair.png"/>
     <pose name="coin" filename="images/coin.png"/>
@@ -24,13 +27,17 @@
     <pose name="explosion06" filename="images/explosion06.png"/>
     <pose name="explosion07" filename="images/explosion07.png"/>
     <pose name="gateClosed" filename="images/gateClosed.png"/>
+    <pose name="gateCompleted" filename="images/gateCompleted.png"/>
     <pose name="gateOpen" filename="images/gateOpen.png"/>
+    <pose name="gatePending" filename="images/gatePending.png"/>
     <pose name="grenade" filename="images/grenade.png"/>
     <pose name="grenade2" filename="images/grenade2.png"/>
+    <pose name="hint" filename="images/hint.png"/>
     <pose name="keyEscape" filename="images/keyEscape.png"/>
     <pose name="keyF5" filename="images/keyF5.png"/>
     <pose name="portcullis" filename="images/portcullis.png" offsetY="30"/>
     <pose name="rock" filename="images/rock.png"/>
+    <pose name="scroll" filename="images/scroll.png"/>
     <pose name="soil" filename="images/soil.png"/>
     <pose name="stamp" filename="images/stamp.png"/>
     <pose name="table" filename="images/table.png"/>
@@ -66,6 +73,41 @@
     <animation name="grenade-rollClockwise">
       <sequence finishedMessage="turned" loops="1" sequence="true">
         <turn ease="linear" headingToo="false" ticks="10" turn="-90.0"/>
+      </sequence>
+    </animation>
+    <animation name="hint-death">
+      <sequence loops="1" sequence="true">
+        <alpha ease="linear" target="0.0" ticks="30"/>
+      </sequence>
+    </animation>
+    <animation name="player-hit">
+      <sequence loops="1" sequence="true">
+        <parallel loops="1" sequence="false">
+          <move ease="easeIn" ticks="100" dx="0.0" dy="200.0"/>
+          <alpha ease="default" target="128.0" ticks="40"/>
+          <scale ease="easeOut" target="0.75" ticks="100"/>
+          <sequence loops="1" sequence="true">
+            <move ease="easeOut" ticks="10" dx="-30.0" dy="0.0"/>
+            <move ease="easeIn" ticks="10" dx="30.0" dy="0.0"/>
+            <move ease="easeOut" ticks="10" dx="20.0" dy="0.0"/>
+            <move ease="easeIn" ticks="10" dx="-20.0" dy="0.0"/>
+            <move ease="easeOut" ticks="10" dx="-10.0" dy="0.0"/>
+            <move ease="easeIn" ticks="10" dx="10.0" dy="0.0"/>
+            <move ease="easeOut" ticks="10" dx="5.0" dy="0.0"/>
+            <move ease="easeIn" ticks="10" dx="-5.0" dy="0.0"/>
+          </sequence>
+        </parallel>
+        <parallel loops="1" sequence="false">
+          <scale ease="easeOutBack" target="3.0" ticks="100"/>
+          <alpha ease="easeOut" target="0.0" ticks="100"/>
+        </parallel>
+      </sequence>
+    </animation>
+    <animation name="talk-fade">
+      <sequence loops="1" sequence="true">
+        <alpha ease="linear" target="200.0" ticks="1"/>
+        <forwards ease="linear" forwards="0.0" sidewards="0.0" ticks="200"/>
+        <alpha ease="default" target="0.0" ticks="60"/>
       </sequence>
     </animation>
   </animations>
@@ -118,6 +160,10 @@
       <pose name="default" pose="grenade2"/>
       <properties fallen="true"/>
     </costume>
+    <costume name="hint" defaultZOrder="0" role="hint.py">
+      <pose name="default" pose="hint"/>
+      <animation name="death" animation="hint-death"/>
+    </costume>
     <costume name="keyEscape" defaultZOrder="0">
       <pose name="default" pose="keyEscape"/>
     </costume>
@@ -126,6 +172,8 @@
     </costume>
     <costume name="player" defaultZOrder="0" role="player.py">
       <pose name="default" pose="alien1a"/>
+      <animation name="hit" animation="player-hit"/>
+      <animation name="talk-fade" animation="talk-fade"/>
     </costume>
     <costume name="portcullis" defaultZOrder="0" role="portcullis.py">
       <pose name="close" pose="wall"/>
@@ -133,6 +181,9 @@
     </costume>
     <costume name="rock" defaultZOrder="0" role="rock.py">
       <pose name="default" pose="rock"/>
+    </costume>
+    <costume name="scroll" defaultZOrder="0">
+      <pose name="default" pose="scroll"/>
     </costume>
     <costume name="soil" defaultZOrder="0" role="soft.py">
       <pose name="default" pose="soil"/>
@@ -165,12 +216,19 @@
       <properties roundedNE="false" roundedSE="false" roundedSW="true" roundedNW="false" canExplode="true"/>
     </costume>
     <costume name="warp" defaultZOrder="0" role="warp.py">
-      <pose name="close" pose="gateClosed"/>
-      <pose name="default" pose="gateOpen"/>
+      <pose name="closed" pose="gateClosed"/>
+      <pose name="completed" pose="gateCompleted"/>
+      <pose name="default" pose="gatePending"/>
     </costume>
   </costumes>
   <scenes>
+    <scene name="balloons"/>
     <scene name="glass"/>
+    <scene name="grenades"/>
+    <scene name="grenades2"/>
+    <scene name="grenades3"/>
+    <scene name="grenades4"/>
+    <scene name="intro"/>
     <scene name="level-chairs"/>
     <scene name="level-doubleBang"/>
     <scene name="level-fallenGrenades"/>
@@ -182,8 +240,15 @@
     <scene name="level-tables"/>
     <scene name="level-template"/>
     <scene name="level-theCircuit"/>
-    <scene name="level-theSecondCircuit"/>
     <scene name="menu"/>
+    <scene name="play"/>
+    <scene name="rocks"/>
+    <scene name="rocks2"/>
+    <scene name="rocks3"/>
+    <scene name="rocks4"/>
+    <scene name="rocks5"/>
+    <scene name="rocks6"/>
+    <scene name="rocks7"/>
     <scene name="test"/>
     <scene name="tutorial"/>
     <scene name="tutorial-balloons"/>
@@ -197,9 +262,15 @@
     <input name="down" keys="DOWN,PERIOD"/>
     <input name="editor" keys="ctrl+F12"/>
     <input name="left" keys="LEFT,z"/>
+    <input name="play" keys="RETURN,KP_ENTER,p"/>
     <input name="quit" keys="ESCAPE"/>
     <input name="restart" keys="F5"/>
     <input name="right" keys="RIGHT,x"/>
+    <input name="scrollDown" keys="PAGEDOWN,KP2"/>
+    <input name="scrollLeft" keys="HOME,KP4"/>
+    <input name="scrollReset" keys="o,KP5"/>
+    <input name="scrollRight" keys="END,KP6"/>
+    <input name="scrollUp" keys="PAGEUP,KP8"/>
     <input name="test" keys="ctrl+F11"/>
     <input name="toggleInfo" keys="F1"/>
     <input name="up" keys="UP,SEMICOLON"/>

@@ -69,6 +69,7 @@ class Level(PlainSceneDirector) :
         down = math.floor( (maxY - minY) / squareSize) + 1
         
         self.grid = Grid( squareSize, across, down, minX, minY )
+        Itchy.getGame().getDirector().gridStage.grid = self.grid
         
         # Add all of the GridRoles to the grid
         i = stage.iterator()
@@ -81,6 +82,12 @@ class Level(PlainSceneDirector) :
             else :
                 print "Skipped non-GridRole object :", role
 
+        # Now that the scene has loaded, let the player find the position it should start in
+        # This is used on the "play" scene, to allow the player to start near to the gate he
+        # has just completed.
+        player = Itchy.getGame().findRoleById("player")
+        if player :
+            player.getReady()
 
     def onKeyDown(self, kevent) :
     
