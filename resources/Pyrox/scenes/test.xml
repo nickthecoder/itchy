@@ -68,7 +68,7 @@
       <property name="exitY" value="-1"/>
       <property name="scene" value="test5"/>
     </actor>
-    <text text="Blank" font="Vera" size="22" color="#ffffff" xAlignment="0.0" yAlignment="0.5" x="600" y="480" direction="90.0" heading="0.0" startEvent="default" zOrder="240"/>
+    <text text="Squash" font="Vera" size="22" color="#ffffff" xAlignment="0.0" yAlignment="0.5" x="600" y="480" direction="90.0" heading="0.0" startEvent="default" zOrder="240"/>
     <actor costume="warp" x="840" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="241">
       <property name="exitX" value="0"/>
       <property name="exitY" value="-1"/>

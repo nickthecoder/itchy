@@ -25,7 +25,10 @@ class Test(AbstractRole) :
         print "Test @ ", self.actor.getX(), self.actor.getY()
         role = square.occupant
 
-        return self.test( "class", self.expectedClass, role.__class__.__name__ )
+        if role is None :
+            return self.test( "class", self.expectedClass, "Empty" )
+        else :
+            return self.test( "class", self.expectedClass, role.__class__.__name__ )
                 
     def test( self, waffle, expected, found ) :
     

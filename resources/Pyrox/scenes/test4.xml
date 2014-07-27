@@ -91,7 +91,7 @@
     <actor costume="rock" x="720" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="99"/>
     <actor costume="rock" x="540" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="100"/>
     <actor costume="autoPilot" x="120" y="660" direction="0.0" heading="0.0" startEvent="default" zOrder="101">
-      <property name="moves" value="lurrrrdlrrurrdrurrrrdurrrduullllllllllll.uuululurrrrrrrr-r"/>
+      <property name="moves" value="lurrrrdlrrurrdrurrrrdurrrduullllllllllll.uuululurrruuuulllllllllurrrddddrrrrrd-r"/>
       <property name="autoTest" value="true"/>
       <property name="killOnPressed" value="true"/>
     </actor>
@@ -135,6 +135,18 @@
     <actor costume="rock" x="540" y="780" direction="0.0" heading="0.0" startEvent="default" zOrder="146"/>
     <actor costume="soil" x="360" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="147"/>
     <actor costume="stamp" x="720" y="660" direction="0.0" heading="0.0" startEvent="default" zOrder="148"/>
+    <actor costume="wallNW" x="300" y="840" direction="0.0" heading="0.0" startEvent="default" zOrder="149"/>
+    <actor costume="grenade" x="360" y="900" direction="0.0" heading="0.0" startEvent="default" zOrder="151"/>
+    <actor costume="wall" x="180" y="780" direction="0.0" heading="0.0" startEvent="default" zOrder="152"/>
+    <actor costume="wall" x="300" y="780" direction="0.0" heading="0.0" startEvent="default" zOrder="153"/>
+    <actor costume="wall" x="240" y="780" direction="0.0" heading="0.0" startEvent="default" zOrder="154"/>
+    <actor costume="wall" x="240" y="720" direction="0.0" heading="0.0" startEvent="default" zOrder="155"/>
+    <actor costume="wall" x="300" y="720" direction="0.0" heading="0.0" startEvent="default" zOrder="156"/>
+    <actor costume="wall" x="180" y="720" direction="0.0" heading="0.0" startEvent="default" zOrder="157"/>
+    <actor costume="wall" x="360" y="840" direction="0.0" heading="0.0" startEvent="default" zOrder="158"/>
+    <actor costume="rock" x="240" y="1020" direction="0.0" heading="0.0" startEvent="default" zOrder="159"/>
+    <actor costume="soil" x="240" y="960" direction="0.0" heading="0.0" startEvent="default" zOrder="160"/>
+    <actor costume="wall" x="180" y="900" direction="0.0" heading="0.0" startEvent="default" zOrder="161"/>
   </layer>
   <layer name="test">
     <actor costume="test" x="300" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="1">
@@ -202,6 +214,12 @@
     </actor>
     <actor costume="test" x="540" y="540" direction="0.0" heading="0.0" startEvent="default" zOrder="27">
       <property name="expectedClass" value="Rock"/>
+    </actor>
+    <actor costume="test" x="300" y="840" direction="0.0" heading="0.0" startEvent="default" zOrder="28">
+      <property name="expectedClass" value="Wall"/>
+    </actor>
+    <actor costume="test" x="240" y="780" direction="0.0" heading="0.0" startEvent="default" zOrder="29">
+      <property name="expectedClass" value="Empty"/>
     </actor>
   </layer>
 </scene>

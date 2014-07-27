@@ -48,13 +48,11 @@
     <actor costume="wall" x="900" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="62"/>
     <actor costume="wall" x="900" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="63"/>
     <actor costume="wall" x="960" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="64"/>
-    <actor costume="wall" x="960" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="65"/>
     <actor costume="wall" x="840" y="720" direction="0.0" heading="0.0" startEvent="default" zOrder="66"/>
     <actor costume="wallNE" x="900" y="720" direction="0.0" heading="0.0" startEvent="default" zOrder="67"/>
     <actor costume="wall" x="900" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="68"/>
     <actor costume="wall" x="900" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="69"/>
-    <actor costume="wall" x="960" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="70"/>
-    <actor costume="wall" x="960" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="71"/>
+    <actor costume="wall" x="1020" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="71"/>
     <actor costume="table" x="120" y="540" direction="0.0" heading="0.0" startEvent="default" zOrder="74"/>
     <actor costume="wall" x="180" y="660" direction="0.0" heading="0.0" startEvent="default" zOrder="77"/>
     <actor costume="wall" x="120" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="78"/>
@@ -133,7 +131,7 @@
     <actor costume="rock" x="120" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="158"/>
     <actor costume="stamp" x="120" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="159"/>
     <actor costume="wallSW" x="360" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="161"/>
-    <actor costume="player" x="840" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="165"/>
+    <actor costume="player" x="60" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="165"/>
     <actor costume="wall" x="780" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="166"/>
     <actor costume="wall" x="480" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="167"/>
     <actor costume="wall" x="240" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="168"/>
@@ -142,6 +140,15 @@
     </actor>
     <actor costume="hint" x="840" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="170">
       <property name="hint" value="You can use just one table\nto transport a grenade"/>
+    </actor>
+    <actor costume="wallNE" x="1020" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="171"/>
+    <actor costume="wallSE" x="1020" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="172"/>
+    <actor costume="wallSW" x="960" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="173"/>
+    <actor costume="wallNW" x="960" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="174"/>
+    <actor costume="autoPilot" x="960" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="175">
+      <property name="moves" value="lll-u-rll-"/>
+      <property name="autoTest" value="false"/>
+      <property name="killOnPressed" value="true"/>
     </actor>
   </layer>
 </scene>

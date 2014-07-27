@@ -2,22 +2,22 @@ from uk.co.nickthecoder.itchy import Role
 from uk.co.nickthecoder.itchy import AbstractRole
 from uk.co.nickthecoder.itchy.util import ClassName
 
-from gridRole import GridRole
-
 from java.util import ArrayList
+
+from gridRole import GridRole
 
 properties = ArrayList()
 
-class Soft(GridRole) :
-    
-    def onAttach( self ) :
-        super(Soft,self).onAttach()
-        self.addTag("soft")
-    
-    def onInvaded( self, invader ) :
-        super(Soft,self).onInvaded(invader)
-        self.explode()
+class Squash(GridRole) :
         
+    def onBirth(self):
+        super(Squash,self).onBirth()
+        self.actor.costume.properties.update(self)
+        
+    def onInvaded(self,invader):
+        super(Squash,self).onInvaded(invader)
+        self.actor.event("fade")
+    
     # TODO Other methods include :
     # onDetach, onKill, onMouseDown, onMouseUp, onMouseMove
 

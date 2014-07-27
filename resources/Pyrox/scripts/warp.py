@@ -36,6 +36,7 @@ class Warp(GridRole) :
             self.getActor().setRole( PlainRole() )
 
     def onInvaded( self, invader ) :
+        super(Warp,self).onInvaded(invader)
         Itchy.getGame().startScene( self.scene )
 
     def isCompleted(self):

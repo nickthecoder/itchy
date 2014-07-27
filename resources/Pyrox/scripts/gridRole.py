@@ -72,7 +72,7 @@ class GridRole(AbstractRole) :
     # If there is an entrant, then return that, not the occupier (which will move out, or be squashed).
     # However, if the occupant is leaving, and will be gone by the time I could enter, then don't return the occupant, 
     # and instead the global EmptyGridRole.instance.
-    def look( self, dx, dy, speed=None, debug=False ) :
+    def look( self, dx, dy, speed=None ) :
 
         if speed is None :
             speed = self.speed
@@ -81,14 +81,10 @@ class GridRole(AbstractRole) :
         # If there is an object entering, then this is the one we care about.
         entrant = None if (square is None) else square.entrant
         if entrant :
-            if debug :
-                print "Entrant"
             return entrant
         
         occupier = self.findLocalRole( dx, dy )
         if not occupier.isMoving() :
-            if debug :
-                print "Stationary occupant"
             return occupier
         
         # Calculate how long (in frames) it will take for the occupant to leave the square, and
@@ -96,17 +92,10 @@ class GridRole(AbstractRole) :
         willLeaveTicks = (self.square.grid.squareSize - occupier.between) / occupier.speed
         willEnterTicks = self.square.grid.squareSize / speed
 
-        if debug:
-            print "WillLeave ", willLeaveTicks, "WillEnter", willEnterTicks
-            
         # If it will leave before I get half way, then ignore it.
         if willLeaveTicks < willEnterTicks :
-            if debug :
-                print "Empty"
             return self.square.grid.getEmpty()
 
-        if debug :
-            print "Occupier moving out"
         return occupier
         
     def lookEast(self, speed=None) :
@@ -157,8 +146,7 @@ class GridRole(AbstractRole) :
 
     # Called when a GridRole is halfway through encrouching into my teritory.
     def onInvaded( self, invader ) :
-        # Do nothing    
-        pass
+        self.removeFromGrid()
         
     # Tidy up when dead. Make sure that the square I'm occupying and the square I'm entring no longer
     # reference me.
@@ -173,12 +161,11 @@ class GridRole(AbstractRole) :
                 
         if self.square :
             self.square.occupant = None
-            
+
         self.square = None
         self.dx = 0
         self.dy = 0
-
-        
+                
     # TODO Other methods include :
     # onDetach, onKill, onMouseDown, onMouseUp, onMouseMove
 

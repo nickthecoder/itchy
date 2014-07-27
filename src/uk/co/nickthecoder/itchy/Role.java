@@ -80,6 +80,14 @@ public interface Role extends MessageListener, Cloneable, PropertySubject<Role>
     void born();
 
     /**
+     * Called while starting a new scene, after all of the actors have been created and added to the grid,
+     * and just before the sceneDirector's onActivate method is called.
+     * <p>
+     * Should only be called internally by Itchy.
+     */
+    void sceneCreated();
+    
+    /**
      * Called when the role's actor is killed ie from {@link Actor#kill()}.
      * <p>
      * Should only be called internally by Itchy.

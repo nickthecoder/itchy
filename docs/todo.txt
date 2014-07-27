@@ -1,18 +1,35 @@
-
 PyRox
 
     Create more levels
+        Balloon 4,5,6
+        Cars 2,3,4,5,6
+        Furniture 4,5
+        Grenades 5,6
+        Extras
     
     More characters :
+        One way and two way streets - can only be squashed in certain directions.
+        
         Machines - convert rocks to balloons etc
+            Has 4 costume properties : N,S,E,W. The values are NSEW
+                Same value or blank -> do nothing. Otherwise create the appropriate object in the given direction, destroying the old one.
+            Rock, Car, Balloon have tag "transformable". Use this in Machine.onHit (Machine is "hittable").
+             
         Local worm hole
         Keys and whatever they unlock
             local worm holes (padlock symbol in front of a closed gate)
-            
-        Sideways runner that can explode grenades
+        
         Eggs - hatches into ??? when dropped
         More than one Player, Tab to cycle through them.
             Weaker than the normal one - can't lift or push rocks.
+
+
+Add onSceneCreated to class diagram(s)
+    Add support for it in Javascript (and other standard languages)
+    Add to js and python templates
+
+Why have a Role interface if everything will end up using AbstractRole?
+    Talk to Simon about it.
 
 Rox Later
 

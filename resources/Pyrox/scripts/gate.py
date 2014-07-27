@@ -26,6 +26,7 @@ class Gate(GridRole) :
         self.addTag("gate")
             
     def onInvaded( self, invader ) :
+        super(Gate,self).onInvaded(invader)
         Itchy.getGame().getPreferences().node("completed").putBoolean( Itchy.getGame().getSceneName(), True )
         Itchy.getGame().getDirector().returnToGateRoom( self.scene )
         

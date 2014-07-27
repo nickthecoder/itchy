@@ -42,6 +42,12 @@
     <pose name="rock" filename="images/rock.png"/>
     <pose name="scroll" filename="images/scroll.png"/>
     <pose name="soil" filename="images/soil.png"/>
+    <pose name="squashE" filename="images/squashE.png"/>
+    <pose name="squashEW" filename="images/squashEW.png"/>
+    <pose name="squashN" filename="images/squashN.png"/>
+    <pose name="squashNS" filename="images/squashNS.png"/>
+    <pose name="squashS" filename="images/squashS.png"/>
+    <pose name="squashW" filename="images/squashW.png"/>
     <pose name="stamp" filename="images/stamp.png"/>
     <pose name="table" filename="images/table.png"/>
     <pose name="test" filename="images/test.png"/>
@@ -108,6 +114,12 @@
           <alpha ease="easeOut" target="0.0" ticks="100"/>
         </parallel>
       </sequence>
+    </animation>
+    <animation name="squash-fade">
+      <parallel loops="1" sequence="false">
+        <alpha ease="easeInOut" target="0.0" ticks="100"/>
+        <scale ease="easeInOut" target="0.3" ticks="100"/>
+      </parallel>
     </animation>
     <animation name="talk-fade">
       <sequence loops="1" sequence="true">
@@ -187,7 +199,7 @@
     <costume name="keyF5" defaultZOrder="0">
       <pose name="default" pose="keyF5"/>
     </costume>
-    <costume name="player" defaultZOrder="0" role="player.py">
+    <costume name="player" defaultZOrder="100" role="player.py">
       <pose name="default" pose="alien1a"/>
       <animation name="hit" animation="player-hit"/>
       <animation name="talk-fade" animation="talk-fade"/>
@@ -204,6 +216,31 @@
     </costume>
     <costume name="soil" defaultZOrder="0" role="soft.py">
       <pose name="default" pose="soil"/>
+    </costume>
+    <costume name="squashE" defaultZOrder="-10" role="squash.py" properties="squashProperties.py">
+      <pose name="default" pose="squashE"/>
+      <animation name="fade" animation="squash-fade"/>
+      <properties squashN="false" squashE="true" squashS="false" squashW="false"/>
+    </costume>
+    <costume name="squashEW" defaultZOrder="-10" extends="squashE" role="squash.py" properties="squashProperties.py">
+      <pose name="default" pose="squashEW"/>
+      <properties squashN="false" squashE="true" squashS="false" squashW="true"/>
+    </costume>
+    <costume name="squashN" defaultZOrder="-10" extends="squashE" role="squash.py" properties="squashProperties.py">
+      <pose name="default" pose="squashN"/>
+      <properties squashN="true" squashE="false" squashS="false" squashW="false"/>
+    </costume>
+    <costume name="squashNS" defaultZOrder="-10" extends="squashE" role="squash.py" properties="squashProperties.py">
+      <pose name="default" pose="squashNS"/>
+      <properties squashN="true" squashE="false" squashS="true" squashW="false"/>
+    </costume>
+    <costume name="squashS" defaultZOrder="-10" extends="squashE" role="squash.py" properties="squashProperties.py">
+      <pose name="default" pose="squashS"/>
+      <properties squashN="false" squashE="false" squashS="true" squashW="false"/>
+    </costume>
+    <costume name="squashW" defaultZOrder="-10" extends="squashE" role="squash.py" properties="squashProperties.py">
+      <pose name="default" pose="squashW"/>
+      <properties squashN="false" squashE="false" squashS="false" squashW="true"/>
     </costume>
     <costume name="stamp" defaultZOrder="0" role="collectable.py" properties="roundProperties.py">
       <pose name="default" pose="stamp"/>
@@ -273,6 +310,7 @@
     <scene name="test3"/>
     <scene name="test4"/>
     <scene name="test5"/>
+    <scene name="test6"/>
   </scenes>
   <inputs>
     <input name="down" keys="DOWN,PERIOD"/>

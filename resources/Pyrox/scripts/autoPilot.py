@@ -32,10 +32,16 @@ class AutoPilot(GridRole) :
         super(AutoPilot,self).onBirth()
         self.addTag("autoPilot")
         self.moves = self.moves.replace("-", "          ")
+
+    def onSceneCreated(self) :
         if self.autoTest :
             self.run()
 
     def run(self) :
+
+        # The extra collectable will be gained if no tests fail
+        # This will prevent the gate opening if a test fails, and therefore remain on this level.
+        Itchy.getGame().getSceneDirector().collected(-1) 
 
         self.testing = True
         for player in Itchy.getGame().findRoleByTag("player") :
@@ -69,6 +75,7 @@ class AutoPilot(GridRole) :
             if self.movesIndex >= len( self.moves ) -1 and self.testing :
                 if self.testing :
                     self.runTests()
+                    self.testing = False
                         
             if self.movesIndex >= len( self.moves ) :
 
@@ -85,7 +92,6 @@ class AutoPilot(GridRole) :
     
         Itchy.getGame().director.testView.setVisible(True)
         print "Running tests"
-        Itchy.getGame().getSceneDirector().collected(-1) # The extra collectable will be gained if no tests fail
         count = 0
         fails = 0
         for test in Itchy.getGame().findRoleByTag("test") :

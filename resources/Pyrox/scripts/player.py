@@ -42,8 +42,10 @@ class Player(Movable) :
         
         self.talkActor = None
 
-    def onAttach( self ) :
-    
+    def onBirth( self ) :
+        super(Player, self).onBirth()
+
+    def onAttach( self ) :    
         super(Player, self).onAttach()
         self.speed = 6
         Itchy.getGame().getDirector().gridView.centerOn(self.actor)

@@ -819,6 +819,11 @@ public class Game
             scene.create(this, false);
 
             if (!loadOnly) {
+                for (Stage stage : this.stages ) {
+                    for (Actor actor : stage.getActors()) {
+                        actor.getRole().sceneCreated();
+                    }
+                }
                 this.sceneDirector.onActivate();
                 Itchy.frameRate.reset();
             }

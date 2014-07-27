@@ -145,6 +145,11 @@ public abstract class AbstractRole implements Role
         // Do nothing
     }
 
+    public void onSceneCreated()
+    {
+        // Do nothing
+    }
+    
     public void onDeath()
     {
         // Do nothing
@@ -155,6 +160,11 @@ public abstract class AbstractRole implements Role
     {
         this.collisionStrategy = Itchy.getGame().getSceneDirector().getCollisionStrategy(this.getActor());
         onBirth();
+    }
+    
+    public void sceneCreated()
+    {
+        this.onSceneCreated();
     }
 
     @Override
