@@ -19,11 +19,15 @@ class Collectable(GridRole) :
         
         self.getActor().getCostume().getProperties().update(self)
 
+
     def onInvaded( self, invader ) :
+        super(Collectable,self).onInvaded(invader)
+        
         if (invader.hasTag("player")) :
             Itchy.getGame().getSceneDirector().collected(1)
-
-        self.actor.kill()
+            self.actor.deathEvent("collected")
+        else :
+            self.explode()
 
 
     # TODO Other methods include :

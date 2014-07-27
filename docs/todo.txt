@@ -1,14 +1,20 @@
+Renaming Costumes is being called when it doesn't need to be.
+
+Costumes to have an order, so that common costumes are on the two two rows.
+
+
 PyRox
+
+    Why does the car not work as before? Are the speeds the same as they were?
 
     Create more levels
         Balloon 4,5,6
         Cars 2,3,4,5,6
         Furniture 4,5
         Grenades 5,6
-        Extras
-    
+        Extras 1 = One/Two Way
+        
     More characters :
-        One way and two way streets - can only be squashed in certain directions.
         
         Machines - convert rocks to balloons etc
             Has 4 costume properties : N,S,E,W. The values are NSEW

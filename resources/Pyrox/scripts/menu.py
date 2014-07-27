@@ -5,22 +5,22 @@ from uk.co.nickthecoder.itchy.util import ClassName
 
 from java.util import ArrayList
 
+from level import Level
+
 properties = ArrayList()
 
-class Menu(PlainSceneDirector) :
+class Menu(Level) :
 
-    def __init__(self) :
-        pass
-    
-    def tick(self) :
-        pass
-        
     def onActivate(self) :
+        super(Menu,self).onActivate()
         self.inputPlay = Input.find("play")
         
     def onKeyDown(self,ke):
+
         if self.inputPlay.matches(ke) :
             Itchy.getGame().startScene("play")
+
+        super(Menu,self).onKeyDown(ke)
     
     # Boiler plate code - no need to change this
     def getProperties(self):

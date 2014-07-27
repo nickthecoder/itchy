@@ -92,8 +92,10 @@ RoleScript = Class({
 
 SceneDirectorScript = Class({
 
-    onActivate: function() {},
+    onLoaded: function() {},
     
+    onActivate: function() {},
+        
     onDeactivate: function() {},
     
     tick: function() {},

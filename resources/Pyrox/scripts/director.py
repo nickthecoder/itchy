@@ -83,7 +83,13 @@ class Director(AbstractDirector) :
             Itchy.getGame().startScene( Itchy.getGame().getSceneName() )
 
         if self.inputQuit.matches(kevent) :
-            Itchy.getGame().startScene( "menu" )
+            scene = Itchy.getGame().sceneName
+            if scene == "menu" :
+                Itchy.terminate()
+            elif scene == "play" :
+                Itchy.getGame().startScene("menu")
+            else :
+                Itchy.getGame().startScene( "play" )
 
         if self.inputReset.matches(kevent) :
             Itchy.getGame().getPreferences().removeNode()

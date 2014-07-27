@@ -5,6 +5,7 @@
 package uk.co.nickthecoder.itchy.editor;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.AbstractRole;
@@ -210,7 +211,7 @@ public class SceneDesigner implements MouseListener, KeyListener
 
         this.overlayStage = new ZOrderStage("overlay");
         this.editor.getStages().add(this.overlayStage);
-        
+
         this.overlayView = new StageView(editRect, this.overlayStage);
         this.editor.getViews().add(this.overlayView);
 
@@ -317,8 +318,9 @@ public class SceneDesigner implements MouseListener, KeyListener
         costumes.addStyle("costumes");
         costumes.setLayout(new FlowLayout());
 
-        for (String name : this.editor.resources.costumeNames()) {
-            CostumeResource costumeResource = this.editor.resources.getCostumeResource(name);
+        List<CostumeResource> costumeResources = getCostumeResources();
+
+        for (CostumeResource costumeResource : costumeResources) {
             this.addCostumeButton(costumes, costumeResource);
         }
         VerticalScroll costumesScroll = new VerticalScroll(costumes);
@@ -375,6 +377,19 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.toolbox.setMinimumHeight(toolHeight);
         this.toolbox.show();
         this.toolbox.setPosition(0, this.editor.getHeight() - toolHeight, this.editor.getWidth(), toolHeight);
+    }
+
+    private List<CostumeResource> getCostumeResources()
+    {
+        List<CostumeResource> result = new ArrayList<CostumeResource>();
+        for (String name : this.editor.resources.costumeNames()) {
+            CostumeResource costumeResource = this.editor.resources.getCostumeResource(name);
+            result.add(costumeResource);
+        }
+
+        Collections.sort(result, CostumeResource.orderComparator);
+
+        return result;
     }
 
     private void createToolbar()
@@ -1131,6 +1146,9 @@ public class SceneDesigner implements MouseListener, KeyListener
             } else if (event.symbol == Keys.s) {
                 onSave();
                 return true;
+            } else if (event.symbol == Keys.HASH) {
+                onResetZOrders();
+                return true;
             }
 
         } else {
@@ -1684,6 +1702,21 @@ public class SceneDesigner implements MouseListener, KeyListener
             }
             this.currentActor.setDirection(direction);
             selectActor(this.currentActor);
+        }
+    }
+
+    private void onResetZOrders()
+    {
+        for (StageView child : this.designViews.getChildren()) {
+            Stage stage = child.getStage();
+
+            for (Actor actor : stage.getActors()) {
+                if ((actor.getCostume() != null) && (actor.getCostume().defaultZOrder != 0)) {
+                    if (actor.getZOrder() != actor.getCostume().defaultZOrder) {
+                        actor.setZOrder(actor.getCostume().defaultZOrder);
+                    }
+                }
+            }
         }
     }
 

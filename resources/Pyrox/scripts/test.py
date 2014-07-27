@@ -22,8 +22,7 @@ class Test(AbstractRole) :
     
         grid = Itchy.getGame().sceneDirector.grid
         square = grid.getSquareByPixel( self.actor.getX(), self.actor.getY() )
-        print "Test @ ", self.actor.getX(), self.actor.getY()
-        role = square.occupant
+        role = grid.getGridRole(square.x,square.y)
 
         if role is None :
             return self.test( "class", self.expectedClass, "Empty" )

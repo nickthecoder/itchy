@@ -54,6 +54,7 @@ class Player(Movable) :
 
     # Called by Level to let me find the "warp" of the scene that's just been completed.
     def getReady( self ) :
+    
         for warp in Itchy.getGame().findRoleByTag("warp") :
             director = Itchy.getGame().getDirector()
             if director.previousSceneName == warp.scene :

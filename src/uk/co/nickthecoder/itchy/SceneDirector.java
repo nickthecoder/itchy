@@ -9,6 +9,17 @@ import uk.co.nickthecoder.itchy.property.PropertySubject;
 
 public interface SceneDirector extends MouseListener, KeyListener, MessageListener, PropertySubject<SceneDirector>
 {
+    /**
+     * Called after the scene has been loaded, and all of the actor's have been added to the stages.
+     * At this stage, none of the actor's have had their onSceneCreated called.
+     */
+    public void onLoaded();
+    
+
+    /**
+     * Called after the scene has been loaded, and all of the actor's have been added to the stages, and all roles
+     * have had their onSceneCreated called.
+     */
     public void onActivate();
 
     public void onDeactivate();

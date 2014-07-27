@@ -245,7 +245,8 @@ public class ResourcesWriter extends XMLWriter
 
     private void writeCostume( String name ) throws XMLException
     {
-        Costume costume = this.resources.getCostume(name);
+        CostumeResource cr = this.resources.getCostumeResource(name);
+        Costume costume = cr.getCostume();
         String baseName = null;
 
         Costume extendedCostume = costume.getExtendedFrom();
@@ -260,16 +261,18 @@ public class ResourcesWriter extends XMLWriter
                 this.writeCostume(baseName);
             }
 
-            this.writeCostume(costume, name, baseName);
+            this.writeCostume(cr, name, baseName);
 
         } else {
-            this.writeCostume(costume, name, null);
+            this.writeCostume(cr, name, null);
         }
     }
 
-    private void writeCostume( Costume simpleCostume, String name, String baseName )
+    private void writeCostume( CostumeResource cr, String name, String baseName )
         throws XMLException
     {
+        Costume simpleCostume = cr.getCostume();
+        
         if (this.writtenCostumeName.contains(name)) {
             return;
         }
@@ -277,6 +280,7 @@ public class ResourcesWriter extends XMLWriter
         this.beginTag("costume");
         this.attribute("name", name);
         this.attribute("defaultZOrder", simpleCostume.defaultZOrder);
+        this.attribute("order", cr.getOrder());
 
         if (baseName != null) {
             this.attribute("extends", baseName);

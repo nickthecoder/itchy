@@ -94,23 +94,25 @@ public abstract class ShimmedScriptLanguage extends StandardScriptLanguage
 
     public abstract List<AbstractProperty<SceneDirector, ?>> getProperties( ScriptedSceneDirector scriptedSceneDirector );
 
-    public abstract void onActivate( ScriptedSceneDirector role );
+    public abstract void onLoaded( ScriptedSceneDirector sceneDirector );
 
-    public abstract void onDeactivate( ScriptedSceneDirector role );
+    public abstract void onActivate( ScriptedSceneDirector sceneDirector );
 
-    public abstract void tick( ScriptedSceneDirector role );
+    public abstract void onDeactivate( ScriptedSceneDirector sceneDirector );
 
-    public abstract boolean onMouseDown( ScriptedSceneDirector role, MouseButtonEvent mbe );
+    public abstract void tick( ScriptedSceneDirector sceneDirector );
 
-    public abstract boolean onMouseUp( ScriptedSceneDirector role, MouseButtonEvent mbe );
+    public abstract boolean onMouseDown( ScriptedSceneDirector sceneDirector, MouseButtonEvent mbe );
 
-    public abstract boolean onMouseMove( ScriptedSceneDirector role, MouseMotionEvent mme );
+    public abstract boolean onMouseUp( ScriptedSceneDirector sceneDirector, MouseButtonEvent mbe );
 
-    public abstract boolean onKeyDown( ScriptedSceneDirector role, KeyboardEvent ke );
+    public abstract boolean onMouseMove( ScriptedSceneDirector sceneDirector, MouseMotionEvent mme );
 
-    public abstract boolean onKeyUp( ScriptedSceneDirector role, KeyboardEvent ke );
+    public abstract boolean onKeyDown( ScriptedSceneDirector sceneDirector, KeyboardEvent ke );
 
-    public abstract void onMessage( ScriptedSceneDirector role, String message );
+    public abstract boolean onKeyUp( ScriptedSceneDirector sceneDirector, KeyboardEvent ke );
+
+    public abstract void onMessage( ScriptedSceneDirector sceneDirector, String message );
 
     public abstract CollisionStrategy getCollisionStrategy( ScriptedSceneDirector sceneDirector, Actor actor );
 

@@ -60,7 +60,10 @@ class Grid(object) :
             return self.outOfBounds
 
         if square.occupant is None :
-            return self.empty
+            if square.alternateOccupant is None :
+                return self.empty
+            else :
+                return square.alternateOccupant
             
         return square.occupant
 

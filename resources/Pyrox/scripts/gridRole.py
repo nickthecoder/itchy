@@ -72,6 +72,8 @@ class GridRole(AbstractRole) :
     # If there is an entrant, then return that, not the occupier (which will move out, or be squashed).
     # However, if the occupant is leaving, and will be gone by the time I could enter, then don't return the occupant, 
     # and instead the global EmptyGridRole.instance.
+    # In addition, each square has an alternateOccupant, and this is returned, when otherwise the result would have
+    # been Empty.
     def look( self, dx, dy, speed=None ) :
 
         if speed is None :
@@ -160,12 +162,28 @@ class GridRole(AbstractRole) :
                 square.entrant = None
                 
         if self.square :
-            self.square.occupant = None
+            if self.square.occupant == self :
+                self.square.occupant = None
+            elif self.square.alternateOccupant == self :
+                self.square.alternateOccupant = None
 
         self.square = None
         self.dx = 0
         self.dy = 0
-                
+
+    # Each square has an alternative occupant, so that two roles can share the same square.
+    # This methods downgrades a role from being the normal occupant to the alternate occupant.
+    # Must NOT be used for movable objects
+    def makeAlternateOccupant( self ) :
+        if self.square.occupant != self :
+            return
+
+        if self.square.alternateOccupant :
+            self.square.alternateOccupant.removeFromGrid()        
+        
+        self.square.alternateOccupant = self;
+    
+    
     # TODO Other methods include :
     # onDetach, onKill, onMouseDown, onMouseUp, onMouseMove
 

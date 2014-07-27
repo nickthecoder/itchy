@@ -17,10 +17,11 @@ class Car(Faller) :
         # -1 for left, 1 for right
         self.direction = 1
         self.driveSpeed  = 8
-        self.rolls = False
+
                         
     def onBirth(self):
         super(Car,self).onBirth()
+        self.rolls = False
         self.actor.costume.properties.update(self)
 
         self.squash = "squashE" if self.direction == 1 else "squashW"

@@ -5,6 +5,7 @@
 package uk.co.nickthecoder.itchy.editor;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
@@ -45,6 +46,7 @@ import uk.co.nickthecoder.itchy.gui.TableRow;
 import uk.co.nickthecoder.itchy.gui.TextBox;
 import uk.co.nickthecoder.itchy.gui.VerticalLayout;
 import uk.co.nickthecoder.itchy.gui.Window;
+import uk.co.nickthecoder.itchy.gui.WrappedRowComparator;
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
 import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.itchy.util.StringList;
@@ -76,12 +78,13 @@ public class CostumesEditor extends SubEditor<CostumeResource>
         super(editor);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public Table createTable()
     {
         TableModelColumn name = new TableModelColumn("Name", 0, 200);
         name.rowComparator = new SingleColumnRowComparator<String>(0);
-
+        
         TableModelColumn extendedFrom = new TableModelColumn("Extends", 2, 200);
         extendedFrom.rowComparator = new SingleColumnRowComparator<String>(2);
 
@@ -115,8 +118,16 @@ public class CostumesEditor extends SubEditor<CostumeResource>
             }
         };
 
+        TableModelColumn order = new TableModelColumn("Order", 3, 80);
+        // Allow sorting by the costume resources's order, and then its name.
+        @SuppressWarnings("rawtypes")
+        Comparator comparator = (Comparator) (CostumeResource.orderComparator);
+        order.rowComparator = new WrappedRowComparator(4, comparator );
+
+
         List<TableModelColumn> columns = new ArrayList<TableModelColumn>();
         columns.add(name);
+        columns.add(order);
         columns.add(extendedFrom);
         columns.add(image);
 
@@ -131,11 +142,10 @@ public class CostumesEditor extends SubEditor<CostumeResource>
     {
         SimpleTableModel model = new SimpleTableModel();
 
-        String[] attributeNames = { "name", "costume", "extendedFromName" };
+        String[] attributeNames = { "name", "costume", "extendedFromName", "order", null };
         for (String costumeName : this.editor.resources.costumeNames()) {
             CostumeResource costumeResource = this.editor.resources.getCostumeResource(costumeName);
-            TableModelRow row = new ReflectionTableModelRow<CostumeResource>(costumeResource,
-                attributeNames);
+            TableModelRow row = new ReflectionTableModelRow<CostumeResource>(costumeResource, attributeNames);
             model.addRow(row);
         }
         return model;

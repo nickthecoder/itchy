@@ -1,40 +1,40 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * Copyright (c) 2014 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
  * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.gui;
 
 import java.util.Comparator;
 
-public class SingleColumnRowComparator<T> implements Comparator<TableModelRow>
+public class WrappedRowComparator implements Comparator<TableModelRow>
 {
     private final int columnIndex;
-   
-    public SingleColumnRowComparator( int columnIndex )
+
+    private Comparator<Object> comparator;
+
+    public WrappedRowComparator( int columnIndex, Comparator<Object> comparator )
     {
         this.columnIndex = columnIndex;
+        this.comparator = comparator;
     }
 
     @Override
     public int compare( TableModelRow a, TableModelRow b )
     {
-        @SuppressWarnings("unchecked")
-        Comparable<T> ca = (Comparable<T>) a.getData(this.columnIndex);
+        Object objA = a.getData(this.columnIndex);
+        Object objB = b.getData(this.columnIndex);
 
-        @SuppressWarnings("unchecked")
-        T cb = (T) b.getData(this.columnIndex);
-
-        if (ca == null) {
-            if (cb == null) {
+        if (objA == null) {
+            if (objB == null) {
                 return 0;
             } else {
                 return 1;
             }
         } else {
-            if (cb == null) {
+            if (objB == null) {
                 return -1;
             }
-            return ca.compareTo(cb);
+            return this.comparator.compare(objA, objB);
         }
     }
 

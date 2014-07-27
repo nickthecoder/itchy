@@ -20,6 +20,11 @@ import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 public class PlainSceneDirector implements SceneDirector
 {
     @Override
+    public void onLoaded()
+    {
+    }
+
+    @Override
     public void onActivate()
     {
     }

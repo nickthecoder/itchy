@@ -13,10 +13,17 @@ class Squash(GridRole) :
     def onBirth(self):
         super(Squash,self).onBirth()
         self.actor.costume.properties.update(self)
+
+
+    def onSceneCreated(self) :
+        if self.permanent :
+            self.makeAlternateOccupant()
         
+                
     def onInvaded(self,invader):
-        super(Squash,self).onInvaded(invader)
-        self.actor.event("fade")
+        if not self.permanent :
+            self.removeFromGrid()
+            self.actor.event("fade")
     
     # TODO Other methods include :
     # onDetach, onKill, onMouseDown, onMouseUp, onMouseMove

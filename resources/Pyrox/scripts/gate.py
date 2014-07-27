@@ -17,19 +17,27 @@ class Gate(GridRole) :
     def __init__(self) :
         super(Gate,self).__init__()
         self.scene = "menu"
-        
+        self.exiting = False # Set in onInvaded, then used in onDeath to start the new scene
+
     def onBirth(self) :
         self.addTag("roundedNE")
         self.addTag("roundedSE")
         self.addTag("roundedSW")
         self.addTag("roundedNW")
         self.addTag("gate")
-            
+
     def onInvaded( self, invader ) :
         super(Gate,self).onInvaded(invader)
+        self.actor.deathEvent("exit")
+        self.exiting = True
+        invader.event("exit")
         Itchy.getGame().getPreferences().node("completed").putBoolean( Itchy.getGame().getSceneName(), True )
-        Itchy.getGame().getDirector().returnToGateRoom( self.scene )
+
+    def onDeath( self ) :
+        if self.exiting :
+            Itchy.getGame().getDirector().returnToGateRoom( self.scene )
         
+
     def onMessage( self, message ) :
         if (message == "open") :
             self.getActor().event("open")

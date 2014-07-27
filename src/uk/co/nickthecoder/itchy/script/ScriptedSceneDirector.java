@@ -55,6 +55,12 @@ public class ScriptedSceneDirector implements SceneDirector, ScriptedObject
     }
 
     @Override
+    public void onLoaded()
+    {
+        this.language.onLoaded(this);
+    }
+
+    @Override
     public void onActivate()
     {
         this.language.onActivate(this);

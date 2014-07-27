@@ -23,11 +23,11 @@ import uk.co.nickthecoder.itchy.PlainDirector;
 import uk.co.nickthecoder.itchy.PlainSceneDirector;
 import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.SceneDirector;
-import uk.co.nickthecoder.itchy.role.PlainRole;
-import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.itchy.collision.BruteForceCollisionStrategy;
 import uk.co.nickthecoder.itchy.collision.CollisionStrategy;
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.role.PlainRole;
+import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
@@ -108,7 +108,7 @@ public class JavascriptLanguage extends ShimmedScriptLanguage
             throw e;
         }
     }
-    
+
     // ===== DIRECTOR ======
 
     @Override
@@ -116,7 +116,7 @@ public class JavascriptLanguage extends ShimmedScriptLanguage
     {
 
         ScriptedDirector director = null;
-        
+
         try {
             ensureGlobals();
             this.manager.loadScript(className);
@@ -131,7 +131,6 @@ public class JavascriptLanguage extends ShimmedScriptLanguage
             bindings.put("directorScript", directorScript);
             bindings.put("director", director);
             this.engine.eval("directorScript.director = director;");
-
 
         } catch (ScriptException e) {
             handleException("Creating Director", e);
@@ -305,9 +304,10 @@ public class JavascriptLanguage extends ShimmedScriptLanguage
 
     public Role createRole( String name )
     {
-        return this.createRole( new ClassName( Role.class, name + ".js") );
+        return this.createRole(new ClassName(Role.class, name + ".js"));
     }
 
+    @Override
     public Role createRole( ClassName className )
     {
         ScriptedRole role = null;
@@ -337,19 +337,20 @@ public class JavascriptLanguage extends ShimmedScriptLanguage
         return role;
     }
 
+    @Override
     @SuppressWarnings("unchecked")
-    public List<AbstractProperty<Role,?>> getProperties( ScriptedRole scriptedRole )
+    public List<AbstractProperty<Role, ?>> getProperties( ScriptedRole scriptedRole )
     {
         try {
             Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
             bindings.put("roleScript", scriptedRole.roleScript);
-            return (List<AbstractProperty<Role,?>>) this.engine.eval("roleScript.getProperties();");
+            return (List<AbstractProperty<Role, ?>>) this.engine.eval("roleScript.getProperties();");
         } catch (ScriptException e) {
             handleException("Director.onStarted", e);
-            return new ArrayList<AbstractProperty<Role,?>>();
+            return new ArrayList<AbstractProperty<Role, ?>>();
         }
     }
-    
+
     @Override
     public void onBirth( ScriptedRole role )
     {
@@ -407,7 +408,7 @@ public class JavascriptLanguage extends ShimmedScriptLanguage
         }
 
     }
-    
+
     @Override
     public void tick( ScriptedRole role )
     {
@@ -523,19 +524,36 @@ public class JavascriptLanguage extends ShimmedScriptLanguage
         return sceneDirector;
     }
 
+    @Override
     @SuppressWarnings("unchecked")
-    public List<AbstractProperty<SceneDirector,?>> getProperties( ScriptedSceneDirector sceneDirector )
+    public List<AbstractProperty<SceneDirector, ?>> getProperties( ScriptedSceneDirector sceneDirector )
     {
         try {
             Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
             bindings.put("sceneDirectorScript", sceneDirector.sceneDirectorScript);
-            return (List<AbstractProperty<SceneDirector,?>>) this.engine.eval("sceneDirectorScript.getProperties();");
+            return (List<AbstractProperty<SceneDirector, ?>>) this.engine.eval("sceneDirectorScript.getProperties();");
         } catch (ScriptException e) {
             handleException("SceneDirectory.getProperties", e);
-            return new ArrayList<AbstractProperty<SceneDirector,?>>();
+            return new ArrayList<AbstractProperty<SceneDirector, ?>>();
         }
     }
-    
+
+    @Override
+    public void onLoaded( ScriptedSceneDirector sceneDirector )
+    {
+        try {
+            Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
+            bindings.put("sceneDirectorScript", sceneDirector.sceneDirectorScript);
+            bindings.put("sceneDirector", sceneDirector);
+            this.engine.eval("sceneDirectorScript.sceneDirector = sceneDirector;");
+
+            this.engine.eval("sceneDirectorScript.onActivate();");
+
+        } catch (ScriptException e) {
+            handleException("SceneDirector.onActivate", e);
+        }
+    }
+
     @Override
     public void onActivate( ScriptedSceneDirector sceneDirector )
     {
@@ -656,7 +674,7 @@ public class JavascriptLanguage extends ShimmedScriptLanguage
             handleException("SceneDirector.onMessage", e);
         }
     }
-    
+
     @Override
     public CollisionStrategy getCollisionStrategy( ScriptedSceneDirector sceneDirector, Actor actor )
     {
@@ -700,22 +718,22 @@ public class JavascriptLanguage extends ShimmedScriptLanguage
         return costumeProperties;
     }
 
+    @Override
     @SuppressWarnings("unchecked")
-    public List<AbstractProperty<CostumeProperties,?>> getProperties( ScriptedCostumeProperties costumeProperties )
+    public List<AbstractProperty<CostumeProperties, ?>> getProperties( ScriptedCostumeProperties costumeProperties )
     {
         try {
             Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
             bindings.put("costumePropertiesScript", costumeProperties.costumePropertiesScript);
-            return (List<AbstractProperty<CostumeProperties,?>>) this.engine.eval("costumePropertiesScript.getProperties();");
+            return (List<AbstractProperty<CostumeProperties, ?>>) this.engine.eval("costumePropertiesScript.getProperties();");
         } catch (ScriptException e) {
             handleException("CostumeProperties.getProperties", e);
-            return new ArrayList<AbstractProperty<CostumeProperties,?>>();
+            return new ArrayList<AbstractProperty<CostumeProperties, ?>>();
         }
     }
 
-
     // ===== StageConstraint ======
-    
+
     @Override
     public double constrainX( ScriptedStageConstraint stageConstraint, double x, double y )
     {
@@ -729,7 +747,7 @@ public class JavascriptLanguage extends ShimmedScriptLanguage
         } catch (ScriptException e) {
             handleException("StageConstraint.constrainX", e);
             return x;
-        } 
+        }
     }
 
     @Override
@@ -745,10 +763,11 @@ public class JavascriptLanguage extends ShimmedScriptLanguage
         } catch (ScriptException e) {
             handleException("StageConstraint.constrainX", e);
             return x;
-        } 
+        }
     }
-    
-    public void added(ScriptedStageConstraint stageConstraint, Actor actor)
+
+    @Override
+    public void added( ScriptedStageConstraint stageConstraint, Actor actor )
     {
         try {
             Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
@@ -758,8 +777,7 @@ public class JavascriptLanguage extends ShimmedScriptLanguage
 
         } catch (ScriptException e) {
             handleException("StageConstraint.added", e);
-        } 
-        
+        }
+
     }
 }
-

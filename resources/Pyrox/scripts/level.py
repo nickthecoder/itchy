@@ -25,18 +25,25 @@ class Level(PlainSceneDirector) :
         self.player = None
 
     def onActivate( self ) :
-        
+
         # Used to tick first, before all the other grid items
         for self.player in Itchy.getGame().findRoleByTag("player") :
             pass
-        
-        # Load the glass stage on top of the current scene.
-        Itchy.getGame().loadScene("glass", True)
-        
         self.droppedFramesRole = Itchy.getGame().findRoleById("droppedFrames")
 
         self.toggleInfo()
                 
+        # Now that the scene has loaded, let the player find the position it should start in
+        # This is used on the "play" scene, to allow the player to start near to the gate he
+        # has just completed.
+        if self.player :
+            self.player.getReady()
+    
+    def onLoaded( self ) :
+        
+        # Load the glass stage on top of the current scene.
+        Itchy.getGame().loadScene("glass", True)
+        
         # Calculate the size of the grid needed to fit all of the actors
         stage = Itchy.getGame().getDirector().gridStage
 
@@ -85,12 +92,6 @@ class Level(PlainSceneDirector) :
                 if not role.getActor().isDead() :
                     role.placeOnGrid( self.grid )
 
-        # Now that the scene has loaded, let the player find the position it should start in
-        # This is used on the "play" scene, to allow the player to start near to the gate he
-        # has just completed.
-        player = Itchy.getGame().findRoleById("player")
-        if player :
-            player.getReady()
 
     def tick(self) :
 

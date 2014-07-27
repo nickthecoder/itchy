@@ -4,6 +4,7 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
+import java.util.Comparator;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
@@ -16,10 +17,26 @@ public class CostumeResource extends NamedResource
 
     private Costume costume;
 
+    private int order;
+    
+    public static final Comparator<CostumeResource> orderComparator = new Comparator<CostumeResource>() {
+
+        @Override
+        public int compare( CostumeResource a, CostumeResource b )
+        {
+            if (a.getOrder() != b.getOrder()) {
+                return a.getOrder() - b.getOrder();
+            } else {
+                return a.getName().compareTo(b.getName());
+            }
+        }
+    };
+        
     public CostumeResource( Resources resources, String name, Costume costume )
     {
         super(resources, name);
         this.costume = costume;
+        this.order = 10;
     }
 
     @Property(label = "Costume", recurse = true)
@@ -33,6 +50,17 @@ public class CostumeResource extends NamedResource
         this.costume = costume;
     }
 
+    @Property(label = "Order" )
+    public int getOrder()
+    {
+        return this.order;
+    }
+    
+    public void setOrder( int order )
+    {
+        this.order = order;
+    }
+    
     public String getExtendedFromName()
     {
         Costume base = this.costume.getExtendedFrom();

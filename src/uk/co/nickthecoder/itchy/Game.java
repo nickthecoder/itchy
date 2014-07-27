@@ -819,6 +819,7 @@ public class Game
             scene.create(this, false);
 
             if (!loadOnly) {
+                this.sceneDirector.onLoaded();
                 for (Stage stage : this.stages ) {
                     for (Actor actor : stage.getActors()) {
                         actor.getRole().sceneCreated();

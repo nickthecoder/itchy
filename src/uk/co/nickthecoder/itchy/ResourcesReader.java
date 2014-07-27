@@ -209,6 +209,7 @@ public class ResourcesReader
 
             Costume costume = new Costume();
 
+            int order = costumeTag.getOptionalIntAttribute("order", 0);
             costume.defaultZOrder = costumeTag.getOptionalIntAttribute("defaultZOrder", 0);
             String extendsName = costumeTag.getOptionalAttribute("extends", null);
             if (extendsName != null) {
@@ -313,6 +314,7 @@ public class ResourcesReader
             }
 
             CostumeResource resource = new CostumeResource(this.resources, costumeName, costume);
+            resource.setOrder(order);
             this.resources.addCostume(resource);
 
         }

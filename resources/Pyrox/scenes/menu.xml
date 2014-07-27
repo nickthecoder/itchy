@@ -1,27 +1,109 @@
 <scene showMouse="true" role="menu.py" background="#000000ff">
   <properties/>
   <layer name="plain">
-    <text text="Pyrox" font="Boycott" size="222" color="#ff7e1a" xAlignment="0.5" yAlignment="0.5" x="416" y="449" direction="0.0" heading="0.0" startEvent="default" zOrder="-1">
+    <text text="Pyrox" font="Boycott" size="222" color="#ff7e1a" xAlignment="0.5" yAlignment="0.5" x="420" y="400" direction="0.0" heading="0.0" startEvent="default" zOrder="-1">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="10"/>
-        <property name="dy" value="-6"/>
         <property name="color" value="#0098ffff"/>
+        <property name="dy" value="-6"/>
       </makeup>
     </text>
-    <text text="Play" font="Boycott" size="150" color="#49ff46" xAlignment="0.0" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.SceneButton" x="245" y="317" direction="0.0" heading="0.0" startEvent="default" zOrder="0">
-      <property name="sceneName" value="play"/>
-      <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
-        <property name="dx" value="4"/>
-        <property name="dy" value="-4"/>
-        <property name="color" value="#d500dbff"/>
-      </makeup>
-    </text>
-    <text text="Quit" font="Boycott" size="60" color="#c72b1a" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.QuitButton" x="408" y="85" direction="0.0" heading="0.0" startEvent="default" zOrder="1">
-      <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
-        <property name="dx" value="3"/>
-        <property name="dy" value="-3"/>
-        <property name="color" value="#ffff00ff"/>
-      </makeup>
-    </text>
+  </layer>
+  <layer name="grid">
+    <actor costume="wall" x="0" y="540" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="0" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="0" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="60" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="120" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="180" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="240" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="300" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="360" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="420" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="480" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="540" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="600" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="660" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="720" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="780" y="540" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="0" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="0" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wallNW" x="0" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="0" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="0" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="0" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="0" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wallSW" x="0" y="0" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="60" y="0" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="120" y="0" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="180" y="0" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="240" y="0" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="300" y="0" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="360" y="0" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="420" y="0" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="480" y="0" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="540" y="0" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="600" y="0" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="660" y="0" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="720" y="0" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="780" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wallSE" x="780" y="0" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="780" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="780" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="780" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="780" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="780" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="780" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="780" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wallNE" x="780" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="autoPilot" x="-60" y="-60" direction="0.0" heading="0.0" startEvent="default" zOrder="10" alpha="1.0">
+      <property name="moves" value="--------lllluuuurdddruuurdddruuurdddruuurdddruuurdddllllld--r"/>
+      <property name="autoTest" value="true"/>
+      <property name="killOnPressed" value="true"/>
+    </actor>
+    <actor costume="gate" x="420" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="40">
+      <property name="scene" value="play"/>
+    </actor>
+    <actor costume="coin" x="120" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
+    <actor costume="coin" x="120" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
+    <actor costume="coin" x="180" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
+    <actor costume="coin" x="180" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
+    <actor costume="coin" x="360" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
+    <actor costume="coin" x="120" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
+    <actor costume="coin" x="180" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
+    <actor costume="coin" x="180" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
+    <actor costume="coin" x="120" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
+    <actor costume="coin" x="420" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
+    <actor costume="stamp" x="240" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
+    <actor costume="stamp" x="240" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
+    <actor costume="stamp" x="300" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
+    <actor costume="stamp" x="240" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
+    <actor costume="stamp" x="300" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
+    <actor costume="stamp" x="300" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
+    <actor costume="stamp" x="300" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
+    <actor costume="stamp" x="540" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
+    <actor costume="stamp" x="480" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
+    <actor costume="stamp" x="240" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
+    <actor costume="coin" x="360" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
+    <actor costume="coin" x="360" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
+    <actor costume="coin" x="360" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
+    <actor costume="coin" x="420" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
+    <actor costume="coin" x="420" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
+    <actor costume="coin" x="420" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
+    <actor costume="coin" x="600" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
+    <actor costume="coin" x="660" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
+    <actor costume="coin" x="660" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
+    <actor costume="coin" x="660" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
+    <actor costume="coin" x="600" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
+    <actor costume="coin" x="600" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
+    <actor costume="coin" x="600" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
+    <actor costume="coin" x="660" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
+    <actor costume="stamp" x="480" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
+    <actor costume="stamp" x="540" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
+    <actor costume="stamp" x="540" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
+    <actor costume="stamp" x="480" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
+    <actor costume="stamp" x="480" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
+    <actor costume="stamp" x="540" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
+    <actor costume="player" x="360" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="100"/>
   </layer>
 </scene>

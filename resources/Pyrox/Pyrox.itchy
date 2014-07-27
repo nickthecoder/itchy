@@ -30,7 +30,6 @@
     <pose name="explosion06" filename="images/explosion06.png"/>
     <pose name="explosion07" filename="images/explosion07.png"/>
     <pose name="gateClosed" filename="images/gateClosed.png"/>
-    <pose name="gateCompleted" filename="images/gateCompleted.png"/>
     <pose name="gateOpen" filename="images/gateOpen.png"/>
     <pose name="gatePending" filename="images/gatePending.png"/>
     <pose name="grenade" filename="images/grenade.png"/>
@@ -43,11 +42,17 @@
     <pose name="scroll" filename="images/scroll.png"/>
     <pose name="soil" filename="images/soil.png"/>
     <pose name="squashE" filename="images/squashE.png"/>
+    <pose name="squashEP" filename="images/squashEP.png"/>
     <pose name="squashEW" filename="images/squashEW.png"/>
+    <pose name="squashEWP" filename="images/squashEWP.png"/>
     <pose name="squashN" filename="images/squashN.png"/>
+    <pose name="squashNP" filename="images/squashNP.png"/>
     <pose name="squashNS" filename="images/squashNS.png"/>
+    <pose name="squashNSP" filename="images/squashNSP.png"/>
     <pose name="squashS" filename="images/squashS.png"/>
+    <pose name="squashSP" filename="images/squashSP.png"/>
     <pose name="squashW" filename="images/squashW.png"/>
+    <pose name="squashWP" filename="images/squashWP.png"/>
     <pose name="stamp" filename="images/stamp.png"/>
     <pose name="table" filename="images/table.png"/>
     <pose name="test" filename="images/test.png"/>
@@ -61,6 +66,14 @@
   </poses>
   <sounds/>
   <animations>
+    <animation name="collectable-collected">
+      <parallel loops="1" sequence="false">
+        <alpha ease="easeIn" target="0.0" ticks="80"/>
+        <scale ease="easeInCubic" target="5.0" ticks="70"/>
+        <move ease="linear" ticks="70" dx="200.0" dy="0.0"/>
+        <move ease="easeOutQuad" ticks="70" dx="0.0" dy="200.0"/>
+      </parallel>
+    </animation>
     <animation name="explosion">
       <sequence loops="1" sequence="true">
         <frames pingPong="false">
@@ -77,6 +90,24 @@
         </sequence>
       </sequence>
     </animation>
+    <animation name="gate-exit">
+      <sequence loops="1" sequence="true">
+        <frames pingPong="false">
+          <frame pose="gateOpen" delay="1"/>
+        </frames>
+        <scale ease="easeInOut" target="3.0" ticks="30"/>
+        <scale ease="easeInOut" target="1.0" ticks="30"/>
+      </sequence>
+    </animation>
+    <animation name="gate-open">
+      <sequence loops="1" sequence="true">
+        <frames pingPong="false">
+          <frame pose="gatePending" delay="1"/>
+        </frames>
+        <scale ease="easeInOut" target="3.0" ticks="10"/>
+        <scale ease="easeInOut" target="1.0" ticks="30"/>
+      </sequence>
+    </animation>
     <animation name="grenade-rollAnticlockwise">
       <sequence finishedMessage="turned" loops="1" sequence="true">
         <turn ease="linear" headingToo="false" ticks="10" turn="90.0"/>
@@ -91,6 +122,12 @@
       <sequence loops="1" sequence="true">
         <alpha ease="linear" target="0.0" ticks="30"/>
       </sequence>
+    </animation>
+    <animation name="player-exit">
+      <parallel loops="1" sequence="false">
+        <alpha ease="easeIn" target="0.0" ticks="60"/>
+        <scale ease="easeIn" target="3.0" ticks="60"/>
+      </parallel>
     </animation>
     <animation name="player-hit">
       <sequence loops="1" sequence="true">
@@ -130,153 +167,181 @@
     </animation>
   </animations>
   <costumes>
-    <costume name="arrow" defaultZOrder="0">
+    <costume name="arrow" defaultZOrder="50" order="90">
       <pose name="default" pose="arrow"/>
     </costume>
-    <costume name="arrow2" defaultZOrder="0">
+    <costume name="arrow2" defaultZOrder="50" order="90">
       <pose name="default" pose="arrow2"/>
     </costume>
-    <costume name="arrowCurved" defaultZOrder="0">
+    <costume name="arrowCurved" defaultZOrder="50" order="90">
       <pose name="default" pose="arrowCurved"/>
     </costume>
-    <costume name="arrowCurved2" defaultZOrder="0">
+    <costume name="arrowCurved2" defaultZOrder="50" order="90">
       <pose name="default" pose="arrowCurved2"/>
     </costume>
-    <costume name="arrowKeys" defaultZOrder="0">
+    <costume name="arrowKeys" defaultZOrder="50" order="90">
       <pose name="default" pose="arrowKeys"/>
     </costume>
-    <costume name="autoPilot" defaultZOrder="0" role="autoPilot.py">
+    <costume name="autoPilot" defaultZOrder="10" order="40" role="autoPilot.py">
       <pose name="default" pose="autoPilot"/>
     </costume>
-    <costume name="baloon" defaultZOrder="0" role="balloon.py">
+    <costume name="baloon" defaultZOrder="20" order="10" role="balloon.py">
       <pose name="default" pose="baloon"/>
     </costume>
-    <costume name="carL" defaultZOrder="0" role="car.py" properties="carProperties.py">
+    <costume name="carL" defaultZOrder="20" order="20" role="car.py" properties="carProperties.py">
       <pose name="default" pose="carL"/>
       <properties roundedNE="false" roundedSE="false" roundedSW="false" roundedNW="false" headingLeft="true"/>
     </costume>
-    <costume name="carR" defaultZOrder="0" role="car.py" properties="carProperties.py">
+    <costume name="carR" defaultZOrder="20" order="20" role="car.py" properties="carProperties.py">
       <pose name="default" pose="carR"/>
       <properties roundedNE="false" roundedSE="false" roundedSW="false" roundedNW="false" headingLeft="false"/>
     </costume>
-    <costume name="chair" defaultZOrder="0" role="chair.py">
+    <costume name="chair" defaultZOrder="20" order="30" role="chair.py">
       <pose name="default" pose="chair"/>
     </costume>
-    <costume name="coin" defaultZOrder="0" role="collectable.py" properties="roundProperties.py">
+    <costume name="coin" defaultZOrder="60" order="10" role="collectable.py" properties="roundProperties.py">
       <pose name="default" pose="coin"/>
+      <animation name="collected" animation="collectable-collected"/>
       <properties roundedNE="true" roundedSE="true" roundedSW="true" roundedNW="true"/>
     </costume>
-    <costume name="concrete" defaultZOrder="0" role="wall.py" properties="wallProperties.py">
+    <costume name="concrete" defaultZOrder="5" order="30" role="wall.py" properties="wallProperties.py">
       <pose name="default" pose="concrete1"/>
       <pose name="default" pose="concrete2"/>
       <properties roundedNE="false" roundedSE="false" roundedSW="false" roundedNW="false" canExplode="false"/>
     </costume>
-    <costume name="explosion" defaultZOrder="0">
+    <costume name="explosion" defaultZOrder="60" order="100">
       <pose name="default" pose="explosion01"/>
       <animation name="default" animation="explosion"/>
     </costume>
-    <costume name="gate" defaultZOrder="0" role="gate.py">
+    <costume name="gate" defaultZOrder="40" order="20" role="gate.py">
       <pose name="default" pose="gateClosed"/>
-      <pose name="open" pose="gateOpen"/>
+      <animation name="exit" animation="gate-exit"/>
+      <animation name="open" animation="gate-open"/>
     </costume>
-    <costume name="grenade" defaultZOrder="0" role="grenade.py" properties="grenadeProperties.py">
+    <costume name="grenade" defaultZOrder="20" order="20" role="grenade.py" properties="grenadeProperties.py">
       <pose name="default" pose="grenade"/>
       <animation name="rollAnticlockwise" animation="grenade-rollAnticlockwise"/>
       <animation name="rollClockwise" animation="grenade-rollClockwise"/>
       <properties fallen="false"/>
     </costume>
-    <costume name="grenade2" defaultZOrder="0" extends="grenade" role="grenade.py" properties="grenadeProperties.py">
+    <costume name="grenade2" defaultZOrder="20" order="20" extends="grenade" role="grenade.py" properties="grenadeProperties.py">
       <pose name="default" pose="grenade2"/>
       <properties fallen="true"/>
     </costume>
-    <costume name="hint" defaultZOrder="0" role="hint.py">
+    <costume name="hint" defaultZOrder="10" order="30" role="hint.py">
       <pose name="default" pose="hint"/>
       <animation name="death" animation="hint-death"/>
     </costume>
-    <costume name="keyEscape" defaultZOrder="0">
+    <costume name="keyEscape" defaultZOrder="50" order="90">
       <pose name="default" pose="keyEscape"/>
     </costume>
-    <costume name="keyF5" defaultZOrder="0">
+    <costume name="keyF5" defaultZOrder="50" order="90">
       <pose name="default" pose="keyF5"/>
     </costume>
-    <costume name="player" defaultZOrder="100" role="player.py">
+    <costume name="player" defaultZOrder="100" order="10" role="player.py">
       <pose name="default" pose="alien1a"/>
+      <animation name="exit" animation="player-exit"/>
       <animation name="hit" animation="player-hit"/>
       <animation name="talk-fade" animation="talk-fade"/>
     </costume>
-    <costume name="portcullis" defaultZOrder="0" role="portcullis.py">
+    <costume name="portcullis" defaultZOrder="10" order="30" role="portcullis.py">
       <pose name="close" pose="wall"/>
       <pose name="default" pose="portcullis"/>
     </costume>
-    <costume name="rock" defaultZOrder="0" role="rock.py">
+    <costume name="rock" defaultZOrder="20" order="10" role="rock.py">
       <pose name="default" pose="rock"/>
     </costume>
-    <costume name="scroll" defaultZOrder="0">
+    <costume name="scroll" defaultZOrder="50" order="90">
       <pose name="default" pose="scroll"/>
     </costume>
-    <costume name="soil" defaultZOrder="0" role="soft.py">
+    <costume name="soil" defaultZOrder="10" order="10" role="soft.py">
       <pose name="default" pose="soil"/>
     </costume>
-    <costume name="squashE" defaultZOrder="-10" role="squash.py" properties="squashProperties.py">
+    <costume name="squashE" defaultZOrder="10" order="30" role="squash.py" properties="squashProperties.py">
       <pose name="default" pose="squashE"/>
       <animation name="fade" animation="squash-fade"/>
-      <properties squashN="false" squashE="true" squashS="false" squashW="false"/>
+      <properties squashN="false" squashE="true" squashS="false" squashW="false" permanent="false"/>
     </costume>
-    <costume name="squashEW" defaultZOrder="-10" extends="squashE" role="squash.py" properties="squashProperties.py">
+    <costume name="squashEP" defaultZOrder="10" order="40" role="squash.py" properties="squashProperties.py">
+      <pose name="default" pose="squashEP"/>
+      <properties squashN="false" squashE="true" squashS="false" squashW="false" permanent="true"/>
+    </costume>
+    <costume name="squashEW" defaultZOrder="10" order="30" extends="squashE" role="squash.py" properties="squashProperties.py">
       <pose name="default" pose="squashEW"/>
-      <properties squashN="false" squashE="true" squashS="false" squashW="true"/>
+      <properties squashN="false" squashE="true" squashS="false" squashW="true" permanent="false"/>
     </costume>
-    <costume name="squashN" defaultZOrder="-10" extends="squashE" role="squash.py" properties="squashProperties.py">
+    <costume name="squashEWP" defaultZOrder="10" order="40" role="squash.py" properties="squashProperties.py">
+      <pose name="default" pose="squashEWP"/>
+      <properties squashN="false" squashE="true" squashS="false" squashW="true" permanent="true"/>
+    </costume>
+    <costume name="squashN" defaultZOrder="10" order="30" extends="squashE" role="squash.py" properties="squashProperties.py">
       <pose name="default" pose="squashN"/>
-      <properties squashN="true" squashE="false" squashS="false" squashW="false"/>
+      <properties squashN="true" squashE="false" squashS="false" squashW="false" permanent="false"/>
     </costume>
-    <costume name="squashNS" defaultZOrder="-10" extends="squashE" role="squash.py" properties="squashProperties.py">
+    <costume name="squashNP" defaultZOrder="10" order="40" role="squash.py" properties="squashProperties.py">
+      <pose name="default" pose="squashNP"/>
+      <properties squashN="true" squashE="false" squashS="false" squashW="false" permanent="true"/>
+    </costume>
+    <costume name="squashNS" defaultZOrder="10" order="30" extends="squashE" role="squash.py" properties="squashProperties.py">
       <pose name="default" pose="squashNS"/>
-      <properties squashN="true" squashE="false" squashS="true" squashW="false"/>
+      <properties squashN="true" squashE="false" squashS="true" squashW="false" permanent="false"/>
     </costume>
-    <costume name="squashS" defaultZOrder="-10" extends="squashE" role="squash.py" properties="squashProperties.py">
+    <costume name="squashNSP" defaultZOrder="10" order="40" role="squash.py" properties="squashProperties.py">
+      <pose name="default" pose="squashNSP"/>
+      <properties squashN="true" squashE="false" squashS="true" squashW="false" permanent="true"/>
+    </costume>
+    <costume name="squashS" defaultZOrder="10" order="30" extends="squashE" role="squash.py" properties="squashProperties.py">
       <pose name="default" pose="squashS"/>
-      <properties squashN="false" squashE="false" squashS="true" squashW="false"/>
+      <properties squashN="false" squashE="false" squashS="true" squashW="false" permanent="false"/>
     </costume>
-    <costume name="squashW" defaultZOrder="-10" extends="squashE" role="squash.py" properties="squashProperties.py">
+    <costume name="squashSP" defaultZOrder="10" order="40" role="squash.py" properties="squashProperties.py">
+      <pose name="default" pose="squashSP"/>
+      <properties squashN="false" squashE="false" squashS="true" squashW="false" permanent="true"/>
+    </costume>
+    <costume name="squashW" defaultZOrder="10" order="30" extends="squashE" role="squash.py" properties="squashProperties.py">
       <pose name="default" pose="squashW"/>
-      <properties squashN="false" squashE="false" squashS="false" squashW="true"/>
+      <properties squashN="false" squashE="false" squashS="false" squashW="true" permanent="false"/>
     </costume>
-    <costume name="stamp" defaultZOrder="0" role="collectable.py" properties="roundProperties.py">
+    <costume name="squashWP" defaultZOrder="10" order="40" role="squash.py" properties="squashProperties.py">
+      <pose name="default" pose="squashWP"/>
+      <properties squashN="false" squashE="false" squashS="false" squashW="true" permanent="true"/>
+    </costume>
+    <costume name="stamp" defaultZOrder="60" order="10" role="collectable.py" properties="roundProperties.py">
       <pose name="default" pose="stamp"/>
+      <animation name="collected" animation="collectable-collected"/>
       <properties roundedNE="false" roundedSE="false" roundedSW="false" roundedNW="false"/>
     </costume>
-    <costume name="table" defaultZOrder="0" role="table.py">
+    <costume name="table" defaultZOrder="10" order="20" role="table.py">
       <pose name="default" pose="table"/>
     </costume>
-    <costume name="test" defaultZOrder="0" role="test.py">
+    <costume name="test" defaultZOrder="50" order="90" role="test.py">
       <pose name="default" pose="test"/>
       <pose name="fail" pose="testN"/>
       <pose name="pass" pose="textY"/>
     </costume>
-    <costume name="wall" defaultZOrder="0" role="wall.py" properties="wallProperties.py">
+    <costume name="wall" defaultZOrder="5" order="10" role="wall.py" properties="wallProperties.py">
       <pose name="default" pose="wall"/>
       <properties roundedNE="false" roundedSE="false" roundedSW="false" roundedNW="false" canExplode="true"/>
     </costume>
-    <costume name="wallNE" defaultZOrder="0" role="wall.py" properties="wallProperties.py">
+    <costume name="wallNE" defaultZOrder="5" order="10" role="wall.py" properties="wallProperties.py">
       <pose name="default" pose="wallNE"/>
       <properties roundedNE="true" roundedSE="false" roundedSW="false" roundedNW="false" canExplode="true"/>
     </costume>
-    <costume name="wallNW" defaultZOrder="0" role="wall.py" properties="wallProperties.py">
+    <costume name="wallNW" defaultZOrder="5" order="10" role="wall.py" properties="wallProperties.py">
       <pose name="default" pose="wallNW"/>
       <properties roundedNE="false" roundedSE="false" roundedSW="false" roundedNW="true" canExplode="true"/>
     </costume>
-    <costume name="wallSE" defaultZOrder="0" role="wall.py" properties="wallProperties.py">
+    <costume name="wallSE" defaultZOrder="5" order="10" role="wall.py" properties="wallProperties.py">
       <pose name="default" pose="wallSE"/>
       <properties roundedNE="false" roundedSE="true" roundedSW="false" roundedNW="false" canExplode="true"/>
     </costume>
-    <costume name="wallSW" defaultZOrder="0" role="wall.py" properties="wallProperties.py">
+    <costume name="wallSW" defaultZOrder="5" order="10" role="wall.py" properties="wallProperties.py">
       <pose name="default" pose="wallSW"/>
       <properties roundedNE="false" roundedSE="false" roundedSW="true" roundedNW="false" canExplode="true"/>
     </costume>
-    <costume name="warp" defaultZOrder="0" role="warp.py">
+    <costume name="warp" defaultZOrder="40" order="20" role="warp.py">
       <pose name="closed" pose="gateClosed"/>
-      <pose name="completed" pose="gateCompleted"/>
+      <pose name="completed" pose="gateOpen"/>
       <pose name="default" pose="gatePending"/>
     </costume>
   </costumes>
@@ -311,6 +376,7 @@
     <scene name="test4"/>
     <scene name="test5"/>
     <scene name="test6"/>
+    <scene name="test7"/>
   </scenes>
   <inputs>
     <input name="down" keys="DOWN,PERIOD"/>
