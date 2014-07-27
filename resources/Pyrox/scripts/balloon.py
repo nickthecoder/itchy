@@ -37,8 +37,11 @@ class Balloon(Movable) :
         north = self.lookNorth()
         
         if north.hasTag("squashN") :
-            self.moveNorth()
-            return
+            # Don't move north, if something can fall into that spot.
+            north2 = self.look(0,2)
+            if north2.isMoving() or not north2.hasTag("faller") :
+                self.moveNorth()
+                return
             
         if north.hasTag("roundedSE") :
             if self.lookEast().isEmpty() and self.lookNorthEast(self.speed/2).hasTag("squashN") :

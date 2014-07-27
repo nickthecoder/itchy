@@ -8,7 +8,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
-import java.util.prefs.Preferences;
 
 import uk.co.nickthecoder.itchy.editor.Editor;
 import uk.co.nickthecoder.itchy.editor.SceneDesigner;
@@ -403,29 +402,18 @@ public class Game
     }
 
     /**
-     * Preferences contain permanently stored data (i.e. its still there when you wuit the game and restart it days later). The data is
+     * Preferences contain permanently stored data (i.e. its still there when you quit the game and restart it days later). The data is
      * stored in a hierarchy of nodes. Each node has a set of name/value pairs, just like HashMap. Each node can also have named sub-nodes
      * (which gives it the hierarchical structure).
      * 
-     * @return The top level node preferences for this game. The path of this node is determined by {@link #getPreferenceNode()}.
+     * @return The top level node preferences for this game. The path of this node is determined by {@link Director#getPreferenceNode()}.
      */
     public AutoFlushPreferences getPreferences()
     {
         if (this.preferences == null) {
-            this.preferences = new AutoFlushPreferences(getPreferenceNode());
+            this.preferences = new AutoFlushPreferences(this.director.getPreferenceNode());
         }
         return this.preferences;
-    }
-
-    /**
-     * Gets the root node for this game. Note, unlike {@link #getPreferences()}, the return Preferences are not AutoFlushPreferences, you
-     * will need to call 'flush' to commit each of the changes.
-     * 
-     * @return The top level preferences node for this game.
-     */
-    protected Preferences getPreferenceNode()
-    {
-        return this.director.getPreferenceNode();
     }
 
     /**
@@ -771,7 +759,6 @@ public class Game
         this.glassStage.tick();
     }
 
-    
     public SceneDirector getSceneDirector()
     {
         return this.sceneDirector;
@@ -928,50 +915,50 @@ public class Game
     {
         return new AllActorsIterator();
     };
-    
+
     class AllActorsIterator implements Iterator<Actor>
     {
         private Actor next;
-        
+
         public Iterator<Stage> stageIterator;
-        
+
         public Iterator<Actor> actorIterator;
-        
+
         public AllActorsIterator()
         {
-            stageIterator = Game.this.stages.iterator();
-            if ( stageIterator.hasNext() ) {
-                actorIterator = stageIterator.next().iterator();
+            this.stageIterator = Game.this.stages.iterator();
+            if (this.stageIterator.hasNext()) {
+                this.actorIterator = this.stageIterator.next().iterator();
             }
             advance();
         }
-        
+
         private void advance()
         {
-            if (actorIterator.hasNext() ) {
-                next = actorIterator.next();
+            if (this.actorIterator.hasNext()) {
+                this.next = this.actorIterator.next();
             } else {
-                while (stageIterator.hasNext()) {
-                    actorIterator = stageIterator.next().iterator();
-                    if (actorIterator.hasNext()) {
-                        next = actorIterator.next();
+                while (this.stageIterator.hasNext()) {
+                    this.actorIterator = this.stageIterator.next().iterator();
+                    if (this.actorIterator.hasNext()) {
+                        this.next = this.actorIterator.next();
                         return;
                     }
                 }
             }
-            next = null;
+            this.next = null;
         }
-        
+
         @Override
         public boolean hasNext()
         {
-            return next != null;
+            return this.next != null;
         }
 
         @Override
         public Actor next()
         {
-            Actor result = next;
+            Actor result = this.next;
             advance();
             return result;
         }
@@ -979,9 +966,9 @@ public class Game
         @Override
         public void remove()
         {
-            actorIterator.remove();
+            this.actorIterator.remove();
         }
-        
+
     }
 
 }

@@ -12,14 +12,24 @@ class GridStage(ZOrderStage) :
 
     # In this strategy game, we want PREDICTABLE behaviour, and the standard ZOrderStage doesn't give us that.
     # In ZOrderStage, the ticks are done in z-order, but we can't SEE the z-order. Instead, we shall ensure
-    # that the ticks happen from the top left to the bottom right of the grid. Nice and predictable.
+    # that the ticks happen from the TOP LEFT to the bottom right of the grid. Nice and predictable.
     # Note that this stage can also house actors not within the grid, and we must call their ticks too.
     def tick(self) :
     
+        # It is possible for the grid to change during this method (when transitioning from one
+        # scene to another), so don't use self.grid later than this, to avoid using the wrong one.
+        grid = self.grid
+        
         if self.grid :
-            for row in self.grid.squares :
-                for square in row :
+            
+            for ty in range( 0, self.grid.down ) :
+                y = grid.down - 1 - ty  # From top downwards
+
+                for x in range( 0, grid.across ) :
+                
+                    square = grid.squares[x][y]
                     role = square.occupant
+                    
                     if role :
                         actor = role.getActor()
                         if role.movedForward :

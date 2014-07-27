@@ -4,7 +4,6 @@ from uk.co.nickthecoder.itchy import AbstractRole
 from uk.co.nickthecoder.itchy import Input
 from uk.co.nickthecoder.itchy.util import ClassName
 
-
 import math
 
 from java.util import ArrayList
@@ -19,11 +18,17 @@ class Level(PlainSceneDirector) :
     def __init__(self) :
     
         self.inputToggleInfo = Input.find("toggleInfo")
+        self.inputTest = Input.find("runTests")
         
         self.collectablesRemaining = 0
         self.showInfo = True
+        self.player = None
 
     def onActivate( self ) :
+        
+        # Used to tick first, before all the other grid items
+        for self.player in Itchy.getGame().findRoleByTag("player") :
+            pass
         
         # Load the glass stage on top of the current scene.
         Itchy.getGame().loadScene("glass", True)
@@ -79,8 +84,6 @@ class Level(PlainSceneDirector) :
             if isinstance( role, GridRole ) :
                 if not role.getActor().isDead() :
                     role.placeOnGrid( self.grid )
-            else :
-                print "Skipped non-GridRole object :", role
 
         # Now that the scene has loaded, let the player find the position it should start in
         # This is used on the "play" scene, to allow the player to start near to the gate he
@@ -89,12 +92,30 @@ class Level(PlainSceneDirector) :
         if player :
             player.getReady()
 
+    def tick(self) :
+
+        if self.player :
+            if self.player.actor.isDead() or self.player.actor.isDying() :
+                self.player = None
+            else :
+                self.player.playerTick()
+                
+        PlainSceneDirector.tick(self)
+        
+        
     def onKeyDown(self, kevent) :
     
         if self.inputToggleInfo.matches(kevent) :
             self.toggleInfo()
-        
-
+    
+        if self.inputTest.matches(kevent) :
+            self.runTests()
+            
+    def runTests(self) :
+    
+        for autoPilot in Itchy.getGame().findRoleByTag("autoPilot") :
+            autoPilot.run()
+    
     def toggleInfo( self ) :
 
         self.showInfo = not self.showInfo

@@ -20,8 +20,6 @@ class Grenade(Faller) :
         super(Grenade,self).onBirth()
         self.getActor().getCostume().getProperties().update(self)
         
-        self.speed = 12
-        
         self.addTag("hittable")
         
         self.addTag( "roundedNE" )
@@ -29,7 +27,12 @@ class Grenade(Faller) :
         self.addTag( "roundedSW" )
         self.addTag( "roundedNW" )
 
-    def onHit( self, hitter ) :
+    def onHit( self, hitter, dx, dy ) :
+        if dy == -1 :
+            south = self.lookSouth()
+            if south.isEmpty() :
+                return # Don't explode as se are falling, so not really hit.
+                
         if hitter.hasTag("explosionTrigger") :
             hitter.explode()
             self.explode()

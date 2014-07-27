@@ -241,8 +241,16 @@ public class AutoFlushPreferences extends Preferences
     @Override
     public void removeNode() throws BackingStoreException
     {
+        Preferences parent = this.wrapped.parent();
+        String name = this.wrapped.name();
+
         this.wrapped.removeNode();
         this.flush();
+
+        // When deleting a node, we want to be able to recreate the node without having to create a new
+        // AutoFlushPreferences object. Without this, we get an error if we try to read from this node
+        // after removing it.
+        this.wrapped = parent.node(name);
     }
 
     @Override

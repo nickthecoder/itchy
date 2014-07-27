@@ -15,7 +15,6 @@ class Rock(Faller) :
         super(Rock,self).onBirth()
         
         # TODO Make self a property???
-        self.speed = 16
         self.weight = 4
 
         self.addTag( "roundedNE" )
@@ -24,7 +23,7 @@ class Rock(Faller) :
         self.addTag( "roundedNW" )
         
         self.addTag( "explosionTrigger" )
-        self.addTag( "heavy" );
+        self.addTag( "deadly" );
           
     def onInvading( self ) :
         pass

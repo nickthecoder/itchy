@@ -14,6 +14,7 @@ class Faller(Movable) :
 
     def onBirth( self ) :
         super(Faller,self).onBirth()
+        self.speed = 12
         # Keep note if the faller was just pushed, or if its had a time to move on its own / been idle.
         # Used to determin if the faller can be pushed if there is clear air below it.
         self.pushed = False
@@ -23,6 +24,7 @@ class Faller(Movable) :
         
         # Does this object roll off of rounded objects?
         self.rolls = True
+        self.addTag("faller")
             
     def tick( self ) :
     
@@ -72,14 +74,20 @@ class Faller(Movable) :
             south = self.lookSouth()
             if south.hasTag("squashS") :
                 return False
+                
+            if self.rolls :
 
-            if (south.hasTag("roundedNE")) :
-                if (self.lookEast().isEmpty() and self.lookSouthEast(self.speed/2).hasTag("squashS")) :
+                # Don't roll over moving objects.
+                if south.isMoving() :
                     return False
 
-            if (south.hasTag("roundedNW")) :
-                if (self.lookWest().isEmpty() and self.lookSouthWest(self.speed/2).hasTag("squashS")) :
-                    return False
+                if (south.hasTag("roundedNE")) :
+                    if (self.lookEast().isEmpty() and self.lookSouthEast(self.speed/2).hasTag("squashS")) :
+                        return False
+
+                if (south.hasTag("roundedNW")) :
+                    if (self.lookWest().isEmpty() and self.lookSouthWest(self.speed/2).hasTag("squashS")) :
+                        return False
 
   
         forward = self.look(dx, dy)
@@ -102,7 +110,7 @@ class Faller(Movable) :
         if (dy == -1) :
             south = self.lookSouth()
             if (south.hasTag("hittable")) :
-                south.onHit( self )
+                south.onHit( self, dx, dy )
 
 
 

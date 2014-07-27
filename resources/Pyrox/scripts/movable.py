@@ -49,7 +49,7 @@ class Movable(GridRole) :
                 self.dy = 0
                 self.occupySquare( self.findLocalSquare( dx, dy ) )
                 self.onArrived(dx, dy)
-                if dx > 0 or dy > 0 :
+                if dx > 0 or dy < 0 :
                     self.movedForward = True
     
     

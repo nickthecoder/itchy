@@ -14,7 +14,10 @@
     <pose name="arrowCurved" filename="images/arrowCurved.png" offsetX="60" offsetY="5"/>
     <pose name="arrowCurved2" filename="images/arrowCurved2.png" offsetX="6" offsetY="7"/>
     <pose name="arrowKeys" filename="images/arrowKeys.png" offsetY="65"/>
+    <pose name="autoPilot" filename="images/autoPilot.png"/>
     <pose name="baloon" filename="images/baloon.png"/>
+    <pose name="carL" filename="images/carL.png"/>
+    <pose name="carR" filename="images/carR.png"/>
     <pose name="chair" filename="images/chair.png"/>
     <pose name="coin" filename="images/coin.png"/>
     <pose name="concrete1" filename="images/concrete1.png"/>
@@ -35,12 +38,15 @@
     <pose name="hint" filename="images/hint.png"/>
     <pose name="keyEscape" filename="images/keyEscape.png"/>
     <pose name="keyF5" filename="images/keyF5.png"/>
-    <pose name="portcullis" filename="images/portcullis.png" offsetY="30"/>
+    <pose name="portcullis" filename="images/portcullis.png"/>
     <pose name="rock" filename="images/rock.png"/>
     <pose name="scroll" filename="images/scroll.png"/>
     <pose name="soil" filename="images/soil.png"/>
     <pose name="stamp" filename="images/stamp.png"/>
     <pose name="table" filename="images/table.png"/>
+    <pose name="test" filename="images/test.png"/>
+    <pose name="testN" filename="images/testN.png"/>
+    <pose name="textY" filename="images/testY.png"/>
     <pose name="wall" filename="images/wall.png"/>
     <pose name="wallNE" filename="images/wallNE.png"/>
     <pose name="wallNW" filename="images/wallNW.png"/>
@@ -127,8 +133,19 @@
     <costume name="arrowKeys" defaultZOrder="0">
       <pose name="default" pose="arrowKeys"/>
     </costume>
+    <costume name="autoPilot" defaultZOrder="0" role="autoPilot.py">
+      <pose name="default" pose="autoPilot"/>
+    </costume>
     <costume name="baloon" defaultZOrder="0" role="balloon.py">
       <pose name="default" pose="baloon"/>
+    </costume>
+    <costume name="carL" defaultZOrder="0" role="car.py" properties="carProperties.py">
+      <pose name="default" pose="carL"/>
+      <properties roundedNE="false" roundedSE="false" roundedSW="false" roundedNW="false" headingLeft="true"/>
+    </costume>
+    <costume name="carR" defaultZOrder="0" role="car.py" properties="carProperties.py">
+      <pose name="default" pose="carR"/>
+      <properties roundedNE="false" roundedSE="false" roundedSW="false" roundedNW="false" headingLeft="false"/>
     </costume>
     <costume name="chair" defaultZOrder="0" role="chair.py">
       <pose name="default" pose="chair"/>
@@ -195,6 +212,11 @@
     <costume name="table" defaultZOrder="0" role="table.py">
       <pose name="default" pose="table"/>
     </costume>
+    <costume name="test" defaultZOrder="0" role="test.py">
+      <pose name="default" pose="test"/>
+      <pose name="fail" pose="testN"/>
+      <pose name="pass" pose="textY"/>
+    </costume>
     <costume name="wall" defaultZOrder="0" role="wall.py" properties="wallProperties.py">
       <pose name="default" pose="wall"/>
       <properties roundedNE="false" roundedSE="false" roundedSW="false" roundedNW="false" canExplode="true"/>
@@ -223,23 +245,18 @@
   </costumes>
   <scenes>
     <scene name="balloons"/>
+    <scene name="balloons2"/>
+    <scene name="balloons3"/>
+    <scene name="cars"/>
+    <scene name="furniture"/>
+    <scene name="furniture2"/>
     <scene name="glass"/>
     <scene name="grenades"/>
     <scene name="grenades2"/>
     <scene name="grenades3"/>
     <scene name="grenades4"/>
     <scene name="intro"/>
-    <scene name="level-chairs"/>
-    <scene name="level-doubleBang"/>
-    <scene name="level-fallenGrenades"/>
-    <scene name="level-grenades"/>
-    <scene name="level-rocksAndCoins"/>
-    <scene name="level-rollGrenades"/>
-    <scene name="level-rollingGrenades"/>
-    <scene name="level-startSimple"/>
-    <scene name="level-tables"/>
     <scene name="level-template"/>
-    <scene name="level-theCircuit"/>
     <scene name="menu"/>
     <scene name="play"/>
     <scene name="rocks"/>
@@ -249,14 +266,13 @@
     <scene name="rocks5"/>
     <scene name="rocks6"/>
     <scene name="rocks7"/>
+    <scene name="rocks8"/>
     <scene name="test"/>
-    <scene name="tutorial"/>
-    <scene name="tutorial-balloons"/>
-    <scene name="tutorial-keys"/>
-    <scene name="tutorial-rocks"/>
-    <scene name="tutorial-rocks2"/>
-    <scene name="tutorial-template"/>
-    <scene name="warpRoom"/>
+    <scene name="test-template"/>
+    <scene name="test2"/>
+    <scene name="test3"/>
+    <scene name="test4"/>
+    <scene name="test5"/>
   </scenes>
   <inputs>
     <input name="down" keys="DOWN,PERIOD"/>
@@ -264,13 +280,15 @@
     <input name="left" keys="LEFT,z"/>
     <input name="play" keys="RETURN,KP_ENTER,p"/>
     <input name="quit" keys="ESCAPE"/>
+    <input name="reset" keys="shift+ctrl+r"/>
     <input name="restart" keys="F5"/>
     <input name="right" keys="RIGHT,x"/>
-    <input name="scrollDown" keys="PAGEDOWN,KP2"/>
-    <input name="scrollLeft" keys="HOME,KP4"/>
-    <input name="scrollReset" keys="o,KP5"/>
-    <input name="scrollRight" keys="END,KP6"/>
-    <input name="scrollUp" keys="PAGEUP,KP8"/>
+    <input name="runTests" keys="ctrl+r"/>
+    <input name="scrollDown" keys="PAGEDOWN,KP2,ctrl+DOWN"/>
+    <input name="scrollLeft" keys="HOME,KP4,ctrl+LEFT"/>
+    <input name="scrollReset" keys="o,KP5,ctrl+RETURN"/>
+    <input name="scrollRight" keys="END,KP6,ctrl+RIGHT"/>
+    <input name="scrollUp" keys="PAGEUP,KP8,ctrl+UP"/>
     <input name="test" keys="ctrl+F11"/>
     <input name="toggleInfo" keys="F1"/>
     <input name="up" keys="UP,SEMICOLON"/>

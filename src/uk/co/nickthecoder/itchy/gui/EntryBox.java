@@ -34,6 +34,12 @@ public class EntryBox<E extends EntryBox<?>> extends ClickableContainer implemen
     protected int boxWidth;
 
     private int caretIndex;
+    
+    /**
+     * The amount the text is scrolled left/right to ensure that the caret is visible.
+     */
+    private int scroll = 0;
+
 
     private final List<ComponentChangeListener> changeListeners;
 
@@ -105,7 +111,7 @@ public class EntryBox<E extends EntryBox<?>> extends ClickableContainer implemen
                 Surface surface = ttf.renderBlended(text, ANY_COLOR);
                 int width = surface.getWidth();
                 surface.free();
-                if (width > ke.x) {
+                if (width > ke.x - this.scroll) {
                     this.setCaretPosition(index - 1);
                     return;
                 }
@@ -274,7 +280,7 @@ public class EntryBox<E extends EntryBox<?>> extends ClickableContainer implemen
             this.label.getRequiredHeight() + this.label.getMarginTop() +
                 this.label.getMarginBottom() + this.getPaddingTop() + this.getPaddingBottom());
     }
-
+    
     @Override
     public void layout( Container c )
     {
@@ -295,17 +301,44 @@ public class EntryBox<E extends EntryBox<?>> extends ClickableContainer implemen
             e.printStackTrace();
         }
 
+        int caretWidth = this.caret.getRequiredWidth();
+        int caretTotalX = this.scroll + this.getPaddingLeft() + this.caret.getMarginLeft() + caretX;
+
+        // We will jump the scroll by half the width of the textbox.
+        while (caretTotalX + caretWidth > width) {
+            this.scroll -= width / 2;
+            caretTotalX = this.scroll + this.getPaddingLeft() + this.caret.getMarginLeft() + caretX;
+        }
+        
+        while (caretTotalX < 0) {
+            this.scroll += width / 2;
+            if (this.scroll > 0) {
+                this.scroll = 0;
+            }
+            caretTotalX = this.scroll + this.getPaddingLeft() + this.caret.getMarginLeft() + caretX;
+        }
+
+        if (this.scroll < 0) {
+            // Now lets check that we aren't too far 
+            int right = this.scroll + this.label.getMarginLeft() + this.label.getNaturalWidth() + this.label.getMarginRight();
+            if (right < width ) {
+                this.scroll += width - right;
+                caretTotalX = this.scroll + this.getPaddingLeft() + this.caret.getMarginLeft() + caretX;
+            }
+        }
+            
+        this.caret.setPosition(
+            caretTotalX,
+            this.getPaddingTop() + this.caret.getPaddingTop(),
+            caretWidth,
+            height - this.caret.getPaddingTop() - this.caret.getPaddingBottom());
+
         this.label.setPosition(
-            this.getPaddingLeft() + this.label.getMarginLeft(),
+            this.scroll + this.getPaddingLeft() + this.label.getMarginLeft(),
             this.getPaddingTop() + this.label.getMarginTop(),
-            width,
+            this.label.getNaturalWidth(),
             height);
 
-        this.caret.setPosition(
-            this.getPaddingLeft() + this.caret.getMarginLeft() + caretX,
-            this.getPaddingTop() + this.caret.getPaddingTop(),
-            this.caret.getRequiredWidth(),
-            height - this.caret.getPaddingTop() - this.caret.getPaddingBottom());
     }
 
 }

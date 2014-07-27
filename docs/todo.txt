@@ -3,8 +3,6 @@ PyRox
 
     Create more levels
     
-    Rename warp and gate to wormHole and exit
-
     More characters :
         Machines - convert rocks to balloons etc
         Local worm hole
@@ -15,11 +13,6 @@ PyRox
         Eggs - hatches into ??? when dropped
         More than one Player, Tab to cycle through them.
             Weaker than the normal one - can't lift or push rocks.
-
-    Remove the old warpRoom, and the old tutorial-* and level-*
-
-    Remove Rox from Itchy
-        Maybe create a milestone or something in git, so that I can get it back easily.    
 
 Rox Later
 

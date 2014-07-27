@@ -16,7 +16,7 @@ class GridRole(AbstractRole) :
         self.square = None
         self.speed = 4 # The default speed for this object.
         
-        # Used by moving objects. When they move right or up, this is set to true, which prevents the gridStage
+        # Used by moving objects. When they move right or down, this is set to true, which prevents the gridStage
         # from calling their tick method twice in one game tick. (Once for their old grid position, and once for
         # their new position).
         # It is reset by gridStage.

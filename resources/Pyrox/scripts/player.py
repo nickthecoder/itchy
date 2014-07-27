@@ -78,7 +78,11 @@ class Player(Movable) :
         self.talkActor.event("talk-fade")
                         
             
-    def tick( self ) :
+    # The player's tick is special - it is called before all other objects on the grid.
+    # This is so that it is easier to predict what will happen objects near us.
+    # For example, we don't want objects to the left to act different to those to the right
+    # just because our tick happens before one and after the other.
+    def playerTick( self ) :
         
         if self.scrollResetting :
             self.resetScroll()
@@ -112,12 +116,10 @@ class Player(Movable) :
             elif self.inputDown.pressed() :
                 self.attemptToMove( 0, -1 )
 
-
-        super(Player, self).tick()
-        
         tx = self.actor.getX() + self.scrollOffsetX
         ty = self.actor.getY() + self.scrollOffsetY
-        Itchy.getGame().getDirector().gridView.centerOn( tx, ty )
+        
+        Itchy.getGame().getDirector().centerOn( tx, ty )
     
     def resetScroll( self ) :
         
@@ -180,8 +182,8 @@ class Player(Movable) :
     def onInvading( self ) :
         pass
 
-    def onHit( self, hitter ) :
-        if hitter.hasTag("heavy") :
+    def onHit( self, hitter, dx, dy ) :
+        if hitter.hasTag("deadly") :
         
             Explosion(self.actor) \
                 .gravity(-0.1) \

@@ -18,8 +18,8 @@ class Grid(object) :
         self.squares = []
 
         self.squareSize = squareSize # The size of a square in pixels. Only squares supported, not rectangles.
-        self.across = across # The grid is self number of squares across
-        self.down = down # The grid is self number of squares down.
+        self.across = int(across) # The grid is self number of squares across
+        self.down = int(down) # The grid is self number of squares down.
         self.offsetX = offsetX # An offset for the pixel position of the bottom left of the grid.
         self.offsetY = offsetY
         

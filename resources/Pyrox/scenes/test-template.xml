@@ -1,0 +1,19 @@
+<scene showMouse="false" role="level.py" background="#0b0000ff">
+  <properties/>
+  <layer name="grid">
+    <actor costume="player" x="420" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="0"/>
+    <actor costume="wall" x="420" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="2"/>
+    <actor costume="wall" x="480" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="3"/>
+    <actor costume="wall" x="540" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="4"/>
+    <actor costume="wall" x="300" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="360" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="6"/>
+    <actor costume="gate" x="540" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="7">
+      <property name="scene" value="test"/>
+    </actor>
+    <actor costume="autoPilot" x="420" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="8">
+      <property name="moves" value=""/>
+      <property name="autoTest" value="true"/>
+      <property name="killOnPressed" value="true"/>
+    </actor>
+  </layer>
+</scene>

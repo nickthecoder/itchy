@@ -22,7 +22,8 @@ class Director(AbstractDirector) :
         self.inputTest = Input.find( "test" )
         self.inputRestart = Input.find("restart")
         self.inputQuit = Input.find("quit")
-
+        self.inputReset = Input.find("reset")
+        
         self.previousSceneName = ""
     
     def onStarted( self ) :
@@ -35,10 +36,16 @@ class Director(AbstractDirector) :
         self.game.getGameViews().add(self.plainView)
         self.plainView.enableMouseListener(self.game)
 
-        self.gridStage = GridStage( "grid" ) # ZOrderStage("grid")
+        self.gridStage = GridStage( "grid" )
         self.game.getStages().add(self.gridStage)
         self.gridView = StageView(screenRect, self.gridStage)
         self.game.getGameViews().add(self.gridView)
+
+        self.testStage = ZOrderStage( "test" )
+        self.game.getStages().add(self.testStage)
+        self.testView = StageView(screenRect, self.testStage)
+        self.game.getGameViews().add(self.testView)
+        self.testView.setVisible( False )
 
         self.glassStage = ZOrderStage("glass")
         self.game.getStages().add(self.glassStage)
@@ -46,7 +53,14 @@ class Director(AbstractDirector) :
         self.game.getGameViews().add(self.glassView)
 
         self.gridStage.setStageConstraint( GridStageConstraint( self.squareSize, self.squareSize ) )      
+        self.testStage.setStageConstraint( GridStageConstraint( self.squareSize, self.squareSize ) )      
 
+
+    def centerOn( self, x, y ) :
+        self.plainView.centerOn( x, y )
+        self.gridView.centerOn( x, y )
+        self.testView.centerOn( x, y )
+    
     def returnToGateRoom( self, warpRoom ) :
         
         self.previousSceneName = Itchy.getGame().getSceneName()
@@ -71,6 +85,9 @@ class Director(AbstractDirector) :
         if self.inputQuit.matches(kevent) :
             Itchy.getGame().startScene( "menu" )
 
+        if self.inputReset.matches(kevent) :
+            Itchy.getGame().getPreferences().removeNode()
+        
         # Call the base class. Note that super(Director,self).onKeyDown(kevent) throws an exception :-(        
         AbstractDirector.onKeyDown(self, kevent)
 
