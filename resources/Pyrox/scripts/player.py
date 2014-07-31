@@ -80,12 +80,17 @@ class Player(Movable) :
         self.talkActor.setCostume( self.getActor().getCostume() )
         self.talkActor.event("talk-fade")
                         
-            
+
+    def tick(self) :
+        pass
+
     # The player's tick is special - it is called before all other objects on the grid.
     # This is so that it is easier to predict what will happen objects near us.
     # For example, we don't want objects to the left to act different to those to the right
     # just because our tick happens before one and after the other.
     def playerTick( self ) :
+        self.movedForward = False
+        super(Player,self).tick()
         
         if self.scrollResetting :
             self.resetScroll()
@@ -102,7 +107,7 @@ class Player(Movable) :
         else :
             self.scrollSpeed = self.defaultScrollSpeed
             
-        if (self.isMoving()) :
+        if (self.isMoving() or self.square is None) :
             pass
             
         else :

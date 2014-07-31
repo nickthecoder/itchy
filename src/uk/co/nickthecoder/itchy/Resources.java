@@ -524,6 +524,10 @@ public class Resources extends Loadable
 
     void rename2( CostumeResource costumeResource, String newName )
     {
+        if (costumeResource.getName().equals(newName)) {
+            return;
+        }
+         
         String oldName = costumeResource.getName();
         String origName = oldName;
 

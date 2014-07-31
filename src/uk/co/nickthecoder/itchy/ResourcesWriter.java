@@ -254,7 +254,7 @@ public class ResourcesWriter extends XMLWriter
 
             baseName = this.resources.getCostumeName(extendedCostume);
             if (baseName == null) {
-                throw new XMLException("Extended Costume not found : " + extendedCostume);
+                throw new XMLException("Extended Costume not found : " + baseName);
             }
 
             if (!this.writtenCostumeName.contains(baseName)) {

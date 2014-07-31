@@ -31,7 +31,7 @@ class Grenade(Faller) :
         if dy == -1 :
             south = self.lookSouth()
             if south.isEmpty() :
-                return # Don't explode as se are falling, so not really hit.
+                return # Don't explode as we are falling, so not really hit.
                 
         if hitter.hasTag("explosionTrigger") :
             hitter.explode()

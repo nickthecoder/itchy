@@ -63,12 +63,9 @@
     <actor costume="wall" x="-120" y="-240" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
     <actor costume="wall" x="-120" y="-180" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
     <actor costume="wall" x="-60" y="-420" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="0" y="-420" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
     <actor costume="wall" x="60" y="-420" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
     <actor costume="wall" x="120" y="-300" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
     <actor costume="wall" x="120" y="-240" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wallSE" x="120" y="-420" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wallSW" x="-120" y="-420" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
     <actor costume="wall" x="600" y="-300" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
     <actor costume="wall" x="540" y="-300" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
     <actor costume="wall" x="600" y="-120" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
@@ -348,6 +345,49 @@
     <actor costume="wallSW" x="-1320" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
     <actor costume="wallNE" x="-1080" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
     <actor costume="wallNE" x="-1320" y="540" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="-120" y="-420" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="-120" y="-480" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="-120" y="-600" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="-120" y="-660" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="-60" y="-660" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="60" y="-660" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="120" y="-660" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="120" y="-600" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="120" y="-480" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="120" y="-420" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="180" y="-480" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="240" y="-480" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="300" y="-480" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="360" y="-540" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="360" y="-600" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="360" y="-660" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="300" y="-720" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="240" y="-720" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="180" y="-720" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="120" y="-720" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="-180" y="-480" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="-240" y="-480" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="-300" y="-480" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="-120" y="-720" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="-180" y="-720" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="-240" y="-720" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="-300" y="-720" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="-360" y="-540" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="-360" y="-660" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="-360" y="-600" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="-120" y="-780" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="120" y="-780" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="120" y="-840" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="-120" y="-840" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="-60" y="-900" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="0" y="-900" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="60" y="-900" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wallSE" x="120" y="-900" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wallSE" x="360" y="-720" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wallSW" x="-120" y="-900" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wallSW" x="-360" y="-720" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wallNW" x="-360" y="-480" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wallNE" x="360" y="-480" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
     <actor costume="portcullis" x="-120" y="-60" direction="0.0" heading="0.0" startEvent="default" zOrder="10">
       <property name="text" value=""/>
       <property name="requires" value="intro"/>
@@ -433,12 +473,12 @@
       <property name="requires" value="balloons2"/>
     </actor>
     <actor costume="portcullis" x="-840" y="-240" direction="0.0" heading="0.0" startEvent="default" zOrder="10">
-      <property name="text" value="Balloons(3)"/>
-      <property name="requires" value="balloons3"/>
+      <property name="text" value="Balloons(3) and Extras(2)"/>
+      <property name="requires" value="balloons3,extras2"/>
     </actor>
     <actor costume="portcullis" x="-1080" y="-300" direction="0.0" heading="0.0" startEvent="default" zOrder="10">
-      <property name="text" value="Balloons(4)"/>
-      <property name="requires" value="balloons4"/>
+      <property name="text" value="Balloons(4) and Extras(3)"/>
+      <property name="requires" value="balloons4,extras3"/>
     </actor>
     <actor costume="portcullis" x="0" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="10">
       <property name="text" value="Furniture"/>
@@ -457,28 +497,44 @@
       <property name="requires" value="furniture4"/>
     </actor>
     <actor costume="portcullis" x="-360" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="10">
-      <property name="text" value="Cars"/>
-      <property name="requires" value="cars"/>
+      <property name="text" value="Vehicles and Extras"/>
+      <property name="requires" value="vehicles,extras"/>
     </actor>
     <actor costume="portcullis" x="-600" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="10">
-      <property name="text" value="Cars(2)"/>
-      <property name="requires" value="cars2"/>
+      <property name="text" value="Vehicles(2)"/>
+      <property name="requires" value="vehicles2"/>
     </actor>
     <actor costume="portcullis" x="-840" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="10">
-      <property name="text" value="Cars(3)"/>
-      <property name="requires" value="cars3"/>
+      <property name="text" value="Vehicles(3)"/>
+      <property name="requires" value="vehicles3"/>
     </actor>
     <actor costume="portcullis" x="1620" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="10">
       <property name="text" value="Rocks(8)"/>
       <property name="requires" value="rocks8"/>
     </actor>
     <actor costume="portcullis" x="-1320" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="10">
-      <property name="text" value="Cars(5)"/>
-      <property name="requires" value="cars5"/>
+      <property name="text" value="Vehicles(5)"/>
+      <property name="requires" value="vehicles5"/>
     </actor>
     <actor costume="portcullis" x="-1080" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="10">
-      <property name="text" value="Cars(4)"/>
-      <property name="requires" value="cars4"/>
+      <property name="text" value="Vehicles(4)"/>
+      <property name="requires" value="vehicles4"/>
+    </actor>
+    <actor costume="portcullis" x="0" y="-420" direction="0.0" heading="0.0" startEvent="default" zOrder="10">
+      <property name="text" value="Extras"/>
+      <property name="requires" value="extras"/>
+    </actor>
+    <actor costume="portcullis" x="-120" y="-540" direction="0.0" heading="0.0" startEvent="default" zOrder="10">
+      <property name="text" value="Extras(2)"/>
+      <property name="requires" value="extras2"/>
+    </actor>
+    <actor costume="portcullis" x="0" y="-660" direction="0.0" heading="0.0" startEvent="default" zOrder="10">
+      <property name="text" value="Extras(2)"/>
+      <property name="requires" value="extras2"/>
+    </actor>
+    <actor costume="portcullis" x="120" y="-540" direction="0.0" heading="0.0" startEvent="default" zOrder="10">
+      <property name="text" value="Extras(2)"/>
+      <property name="requires" value="extras2"/>
     </actor>
     <actor costume="warp" x="-1200" y="-360" direction="0.0" heading="0.0" startEvent="default" zOrder="40">
       <property name="exitX" value="-1"/>
@@ -513,7 +569,7 @@
     <actor costume="warp" x="-240" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="40">
       <property name="exitX" value="-1"/>
       <property name="exitY" value="0"/>
-      <property name="scene" value="cars"/>
+      <property name="scene" value="vehicles"/>
     </actor>
     <actor costume="warp" x="0" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="40">
       <property name="exitX" value="0"/>
@@ -613,17 +669,17 @@
     <actor costume="warp" x="-480" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="40">
       <property name="exitX" value="-1"/>
       <property name="exitY" value="0"/>
-      <property name="scene" value="cars2"/>
+      <property name="scene" value="vehicles2"/>
     </actor>
     <actor costume="warp" x="-720" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="40">
       <property name="exitX" value="-1"/>
       <property name="exitY" value="0"/>
-      <property name="scene" value="cars3"/>
+      <property name="scene" value="vehicles3"/>
     </actor>
     <actor costume="warp" x="-960" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="40">
       <property name="exitX" value="-1"/>
       <property name="exitY" value="0"/>
-      <property name="scene" value="cars4"/>
+      <property name="scene" value="vehicles4"/>
     </actor>
     <actor costume="warp" x="1620" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="40">
       <property name="exitX" value="0"/>
@@ -633,237 +689,285 @@
     <actor costume="warp" x="-1200" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="40">
       <property name="exitX" value="-1"/>
       <property name="exitY" value="0"/>
-      <property name="scene" value="cars5"/>
+      <property name="scene" value="vehicles5"/>
     </actor>
     <actor costume="warp" x="-1440" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="40">
       <property name="exitX" value="-1"/>
       <property name="exitY" value="0"/>
-      <property name="scene" value="cars6"/>
+      <property name="scene" value="vehicles6"/>
     </actor>
     <actor costume="arrowKeys" x="0" y="16" direction="0.0" heading="0.0" startEvent="default" zOrder="50"/>
     <actor costume="player" id="player" x="0" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="100"/>
     <text text="Intro" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="0" y="-60" direction="0.0" heading="0.0" startEvent="default" zOrder="192">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
     <text text="Extras" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="0" y="-300" direction="0.0" heading="0.0" startEvent="default" zOrder="226">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
     <text text="Balloons" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="-240" y="-120" direction="0.0" heading="0.0" startEvent="default" zOrder="233">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
     <text text="Grenades" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="240" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="234">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
     <text text="Rocks" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="240" y="-120" direction="0.0" heading="0.0" startEvent="default" zOrder="237">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
-    <text text="Cars" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="-240" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="260">
+    <text text="Vehicles" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="-240" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="260">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
     <text text="Furniture" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="0" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="261">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
     <text text="2" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="480" y="-180" direction="0.0" heading="0.0" startEvent="default" zOrder="464">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
     <text text="3" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="720" y="-240" direction="0.0" heading="0.0" startEvent="default" zOrder="465">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
     <text text="4" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="960" y="-300" direction="0.0" heading="0.0" startEvent="default" zOrder="466">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
     <text text="5" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="1200" y="-360" direction="0.0" heading="0.0" startEvent="default" zOrder="467">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
     <text text="6" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="1440" y="-420" direction="0.0" heading="0.0" startEvent="default" zOrder="468">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
     <text text="7" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="1560" y="-180" direction="0.0" heading="0.0" startEvent="default" zOrder="469">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
     <text text="2" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="480" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="470">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
     <text text="3" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="720" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="471">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
     <text text="4" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="960" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="472">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
     <text text="5" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="1200" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="473">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
     <text text="6" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="1440" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="474">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
     <text text="2" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="-480" y="-180" direction="0.0" heading="0.0" startEvent="default" zOrder="535">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
     <text text="3" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="-720" y="-240" direction="0.0" heading="0.0" startEvent="default" zOrder="536">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
     <text text="4" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="-960" y="-300" direction="0.0" heading="0.0" startEvent="default" zOrder="537">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
     <text text="5" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="-1200" y="-360" direction="0.0" heading="0.0" startEvent="default" zOrder="538">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
     <text text="2" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="0" y="540" direction="0.0" heading="0.0" startEvent="default" zOrder="570">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
     <text text="3" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="-240" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="572">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
     <text text="4" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="240" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="600">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
     <text text="5" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="0" y="780" direction="0.0" heading="0.0" startEvent="default" zOrder="620">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
     <text text="2" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="-480" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="668">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
     <text text="3" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="-720" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="669">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
     <text text="4" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="-960" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="670">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
     <text text="8" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="1620" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="687">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
     <text text="5" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="-1200" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="724">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
     <text text="6" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="-1440" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="726">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
+      </makeup>
+    </text>
+    <actor costume="warp" x="0" y="-780" direction="0.0" heading="0.0" startEvent="default" zOrder="727">
+      <property name="exitX" value="0"/>
+      <property name="exitY" value="-1"/>
+      <property name="scene" value="extras5"/>
+    </actor>
+    <actor costume="warp" x="240" y="-600" direction="0.0" heading="0.0" startEvent="default" zOrder="728">
+      <property name="exitX" value="0"/>
+      <property name="exitY" value="-1"/>
+      <property name="scene" value="extras4"/>
+    </actor>
+    <actor costume="warp" x="0" y="-540" direction="0.0" heading="0.0" startEvent="default" zOrder="729">
+      <property name="exitX" value="0"/>
+      <property name="exitY" value="-1"/>
+      <property name="scene" value="extras2"/>
+    </actor>
+    <actor costume="warp" x="-240" y="-600" direction="0.0" heading="0.0" startEvent="default" zOrder="730">
+      <property name="exitX" value="0"/>
+      <property name="exitY" value="-1"/>
+      <property name="scene" value="extras3"/>
+    </actor>
+    <text text="2" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="0" y="-540" direction="0.0" heading="0.0" startEvent="default" zOrder="731">
+      <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
+        <property name="dx" value="2"/>
+        <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
+      </makeup>
+    </text>
+    <text text="5" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="0" y="-780" direction="0.0" heading="0.0" startEvent="default" zOrder="732">
+      <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
+        <property name="dx" value="2"/>
+        <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
+      </makeup>
+    </text>
+    <text text="4" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="240" y="-600" direction="0.0" heading="0.0" startEvent="default" zOrder="733">
+      <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
+        <property name="dx" value="2"/>
+        <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
+      </makeup>
+    </text>
+    <text text="3" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="-240" y="-600" direction="0.0" heading="0.0" startEvent="default" zOrder="734">
+      <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
+        <property name="dx" value="2"/>
+        <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
   </layer>

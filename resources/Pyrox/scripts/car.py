@@ -56,7 +56,7 @@ class Car(Faller) :
             forward = self.look( self.direction, 0 )
             if forward.hasTag(self.squash) :
                 return False
-                
+
         forward = self.look(dx, dy)
         if forward.isMoving() :
             return False

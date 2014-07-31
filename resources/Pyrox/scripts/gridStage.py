@@ -35,10 +35,11 @@ class GridStage(ZOrderStage) :
                         if role.movedForward :
                             role.movedForward = False
                         else :
-                            if actor.isDead() :
-                                self.remove(actor)
-                            else :
-                                actor.tick();
+                            if actor :
+                                if actor.isDead() :
+                                    self.remove(actor)
+                                else :
+                                    actor.tick();
 
                     # If an invader has nabbed a square, before the actor has finished moving out of the square,
                     # then we must ensure that it gets it tick called by calling it from the square it is entering.

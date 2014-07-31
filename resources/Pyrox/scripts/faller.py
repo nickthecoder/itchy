@@ -14,7 +14,7 @@ class Faller(Movable) :
 
     def onBirth( self ) :
         super(Faller,self).onBirth()
-        self.speed = 12
+        self.speed = 10
         # Keep note if the faller was just pushed, or if its had a time to move on its own / been idle.
         # Used to determin if the faller can be pushed if there is clear air below it.
         self.pushed = False
@@ -69,7 +69,9 @@ class Faller(Movable) :
         if (force < self.weight) :
             return False
 
-        # Will be move by ourselves (falling or rolling), if so, don't let us be pushed.
+        # If we've been pushed, then check to see if we can fall under gravity, if so, we can't be pushed.
+        # If we haven't been pushed, then we ignore the fact that we can drop, and allow ourselves to be pushed.
+        # This allows things to push pushed ONCE (i.e. across just ONE square) before gravity causes us to fall.
         if self.pushed :
             south = self.lookSouth()
             if south.hasTag("squashS") :

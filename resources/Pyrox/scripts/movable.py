@@ -24,6 +24,9 @@ class Movable(GridRole) :
         
     def tick(self):
 
+        if self.square is None :
+            return
+
         if (self.dx != 0) or (self.dy != 0 ) :
 
             self.between += self.currentSpeed
@@ -33,13 +36,20 @@ class Movable(GridRole) :
                     self.squashed = True
                     squashing = self.findLocalRole( self.dx, self.dy )
                     squashing.onInvaded( self )
+                    # Squashing something may have caused us to die, and therefore removed from the grid.
+                    # Just return, because the following code assumes we ARE on the grid.
+                    if self.square is None :
+                        return
                         
-            self.getActor().moveBy( self.dx * self.currentSpeed, self.dy * self.currentSpeed )
+            actor = self.actor
+            if actor :
+                actor.moveBy( self.dx * self.currentSpeed, self.dy * self.currentSpeed )
 
             if self.between >= self.square.grid.squareSize :
                 # Correct for any overshoot
                 overshoot = self.between - self.square.grid.squareSize
-                self.getActor().moveBy( self.dx * - overshoot, self.dy * - overshoot )
+                if actor :
+                    actor.moveBy( self.dx * - overshoot, self.dy * - overshoot )
                 
                 # Stop the movement and occupy the new square.
                 dx = self.dx # Remember the direction I was travelling as its needed after dx,dy are reset.
@@ -114,20 +124,7 @@ class Movable(GridRole) :
     def onInvaded( self, invader ) :
         # Do nothing    
         pass
-        
-    # Tidy up when dead. Make sure that the square I'm occupying and the square I'm entring no longer
-    # reference me.
-    def onDeath( self ) :
-        if self.isMoving() :
-            square = self.findLocalSquare( self.dx, self.dy )
-            if square and (square.entrant == self) :
-                square.entrant = None
-                
-        if self.square :
-            self.square.occupant = None
 
-        self.actor.kill()
-        
     # TODO Other methods include :
     # onDetach, onKill, onMouseDown, onMouseUp, onMouseMove
 

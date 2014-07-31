@@ -5,16 +5,21 @@ from java.util import ArrayList
 
 from uk.co.nickthecoder.itchy.property import BooleanProperty
 
+from roundProperties import RoundProperties
+import roundProperties
+
 properties = ArrayList()
+properties.addAll( roundProperties.properties )
 properties.add( BooleanProperty( "squashN" ) )
 properties.add( BooleanProperty( "squashE" ) )
 properties.add( BooleanProperty( "squashS" ) )
 properties.add( BooleanProperty( "squashW" ) )
 properties.add( BooleanProperty( "permanent" ) )
 
-class SquashProperties(CostumeProperties) :
+class SquashProperties(RoundProperties) :
 
     def __init__(self) :
+        super(SquashProperties,self).__init__()
         self.squashN = False
         self.squashE = False
         self.squashS = False
@@ -22,6 +27,8 @@ class SquashProperties(CostumeProperties) :
         self.permanent = False
         
     def update( self, role ) :
+        super(SquashProperties,self).update(role)
+        
         role.tag( "squashN", self.squashN )
         role.tag( "squashE", self.squashE )
         role.tag( "squashS", self.squashS )

@@ -1,40 +1,81 @@
-Renaming Costumes is being called when it doesn't need to be.
-
-Costumes to have an order, so that common costumes are on the two two rows.
-
 
 PyRox
 
-    Why does the car not work as before? Are the speeds the same as they were?
-
     Create more levels
-        Balloon 4,5,6
-        Cars 2,3,4,5,6
+        Balloon 6
+        Vehicles 3,4,5,6
         Furniture 4,5
         Grenades 5,6
-        Extras 1 = One/Two Way
+        Extra 3,4,5
+
+    Record keystrokes (autopilot can do it)
+        Need to compress dead time. save it as a number into the string.
+        Create a structure RecordInput with origInput, letter, autopilot
+
+    Big extend Movable, with the extra stuff to ensure that BigHelper is called when needed.
+        onDeath disconnects BigHelper, and kills all bigPaddings
+        move : super.move(); bigHelper.movePaddings()
         
+    BigHelper
+        main : a GridRole object that is the controller for all the others.
+        paddings : Array of BigPadding(GridRole) objects
+        facing : Array of BigPadding/main objects to check when looking north.
+            [dx+1][dy+1][n], but exclude for dx,dy == 0,0
+
+        add : dx,dy,excludeTags=None (returns the created BigPadding object). Copies all main's tags to paddings except those listed.
+        done() : method, calculates facing array. 
+        
+        canMove( dx, dy, speed=None ) : calls haveTag( "squash" + ?, dx, dy )
+        canShove : Calls main's mainCanShove???, then check if leading spaces are squashable or can be shoved themselves??? 
+        canIShove( dx, dy, speed, force ) : call each neighbour's canShove with main as the pusher
+        
+        haveTag( tag, dx, dy ) : checks if all paddings/main has the given tag
+        withTag( tag, dx, dy ) : returns all those with a given tag - use it for hitting, collectables etc.
+        movePaddings
+
+
+
     More characters :
+
+        Bean Pole - a 1x2 player
+        Fat Man - a 2x1 player
+        Giant - a 2x2 player (Normal player is called titch)
         
+        Big Rock (2x2) Rolls when sitting half and half on solid/empty
+            If we have a giant player too, then it could lift two rocks side by side, as long as they couldn't roll off.
+            
         Machines - convert rocks to balloons etc
             Has 4 costume properties : N,S,E,W. The values are NSEW
                 Same value or blank -> do nothing. Otherwise create the appropriate object in the given direction, destroying the old one.
             Rock, Car, Balloon have tag "transformable". Use this in Machine.onHit (Machine is "hittable").
              
         Local worm hole
+            Use it to create a waterfall of rocks
+            
         Keys and whatever they unlock
-            local worm holes (padlock symbol in front of a closed gate)
         
-        Eggs - hatches into ??? when dropped
+        Eggs - hatches into ??? when dropped. ??? is killed when hit, or when exploded, and counts as a collectable.
+            If randomness is used for the movement, then use a predictable random number???
         More than one Player, Tab to cycle through them.
             Weaker than the normal one - can't lift or push rocks.
 
+        Water
+            Each cube has a pressure.
+            Can be the alternateOccupant
+            Empty left or right or below, then spill half of my pressure.
+            Average the pressure left/right
+            Average the pressure below and above, but weight the average so that below has more pressure, and above has less.
+            If pressure <= 0 die.
+            If pressure > full and above is empty, then share pressure (but never enough to leave me less than full).
+            If pressure >= "full", then use 100% blue, otherwise use a partially full square.
+            If I share my square with something else, then add 80% full to my pressure when working stuff out???
+    
 
 Add onSceneCreated to class diagram(s)
-    Add support for it in Javascript (and other standard languages)
     Add to js and python templates
 
 Why have a Role interface if everything will end up using AbstractRole?
+    Why does Role have "birth" and yet everything uses onBirth() ? Ditto with other events.
     Talk to Simon about it.
 
 Rox Later

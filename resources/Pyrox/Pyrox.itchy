@@ -37,6 +37,8 @@
     <pose name="hint" filename="images/hint.png"/>
     <pose name="keyEscape" filename="images/keyEscape.png"/>
     <pose name="keyF5" filename="images/keyF5.png"/>
+    <pose name="planeL" filename="images/planeL.png" offsetX="30"/>
+    <pose name="planeR" filename="images/planeR.png" offsetX="90"/>
     <pose name="portcullis" filename="images/portcullis.png"/>
     <pose name="rock" filename="images/rock.png"/>
     <pose name="scroll" filename="images/scroll.png"/>
@@ -238,6 +240,14 @@
     <costume name="keyF5" defaultZOrder="50" order="90">
       <pose name="default" pose="keyF5"/>
     </costume>
+    <costume name="planeL" defaultZOrder="0" order="10" role="plane.py" properties="planeProperties.py">
+      <pose name="default" pose="planeL"/>
+      <properties headingLeft="true"/>
+    </costume>
+    <costume name="planeR" defaultZOrder="0" order="10" role="plane.py" properties="planeProperties.py">
+      <pose name="default" pose="planeR"/>
+      <properties headingLeft="false"/>
+    </costume>
     <costume name="player" defaultZOrder="100" order="10" role="player.py">
       <pose name="default" pose="alien1a"/>
       <animation name="exit" animation="player-exit"/>
@@ -260,51 +270,51 @@
     <costume name="squashE" defaultZOrder="10" order="30" role="squash.py" properties="squashProperties.py">
       <pose name="default" pose="squashE"/>
       <animation name="fade" animation="squash-fade"/>
-      <properties squashN="false" squashE="true" squashS="false" squashW="false" permanent="false"/>
+      <properties roundedNE="false" roundedSE="false" roundedSW="false" roundedNW="false" squashN="false" squashE="true" squashS="false" squashW="false" permanent="false"/>
     </costume>
     <costume name="squashEP" defaultZOrder="10" order="40" role="squash.py" properties="squashProperties.py">
       <pose name="default" pose="squashEP"/>
-      <properties squashN="false" squashE="true" squashS="false" squashW="false" permanent="true"/>
+      <properties roundedNE="true" roundedSE="true" roundedSW="true" roundedNW="true" squashN="false" squashE="true" squashS="false" squashW="false" permanent="true"/>
     </costume>
     <costume name="squashEW" defaultZOrder="10" order="30" extends="squashE" role="squash.py" properties="squashProperties.py">
       <pose name="default" pose="squashEW"/>
-      <properties squashN="false" squashE="true" squashS="false" squashW="true" permanent="false"/>
+      <properties roundedNE="false" roundedSE="false" roundedSW="false" roundedNW="false" squashN="false" squashE="true" squashS="false" squashW="true" permanent="false"/>
     </costume>
     <costume name="squashEWP" defaultZOrder="10" order="40" role="squash.py" properties="squashProperties.py">
       <pose name="default" pose="squashEWP"/>
-      <properties squashN="false" squashE="true" squashS="false" squashW="true" permanent="true"/>
+      <properties roundedNE="true" roundedSE="true" roundedSW="true" roundedNW="true" squashN="false" squashE="true" squashS="false" squashW="true" permanent="true"/>
     </costume>
     <costume name="squashN" defaultZOrder="10" order="30" extends="squashE" role="squash.py" properties="squashProperties.py">
       <pose name="default" pose="squashN"/>
-      <properties squashN="true" squashE="false" squashS="false" squashW="false" permanent="false"/>
+      <properties roundedNE="false" roundedSE="false" roundedSW="false" roundedNW="false" squashN="true" squashE="false" squashS="false" squashW="false" permanent="false"/>
     </costume>
     <costume name="squashNP" defaultZOrder="10" order="40" role="squash.py" properties="squashProperties.py">
       <pose name="default" pose="squashNP"/>
-      <properties squashN="true" squashE="false" squashS="false" squashW="false" permanent="true"/>
+      <properties roundedNE="true" roundedSE="true" roundedSW="true" roundedNW="true" squashN="true" squashE="false" squashS="false" squashW="false" permanent="true"/>
     </costume>
     <costume name="squashNS" defaultZOrder="10" order="30" extends="squashE" role="squash.py" properties="squashProperties.py">
       <pose name="default" pose="squashNS"/>
-      <properties squashN="true" squashE="false" squashS="true" squashW="false" permanent="false"/>
+      <properties roundedNE="false" roundedSE="false" roundedSW="false" roundedNW="false" squashN="true" squashE="false" squashS="true" squashW="false" permanent="false"/>
     </costume>
     <costume name="squashNSP" defaultZOrder="10" order="40" role="squash.py" properties="squashProperties.py">
       <pose name="default" pose="squashNSP"/>
-      <properties squashN="true" squashE="false" squashS="true" squashW="false" permanent="true"/>
+      <properties roundedNE="true" roundedSE="true" roundedSW="true" roundedNW="true" squashN="true" squashE="false" squashS="true" squashW="false" permanent="true"/>
     </costume>
     <costume name="squashS" defaultZOrder="10" order="30" extends="squashE" role="squash.py" properties="squashProperties.py">
       <pose name="default" pose="squashS"/>
-      <properties squashN="false" squashE="false" squashS="true" squashW="false" permanent="false"/>
+      <properties roundedNE="false" roundedSE="false" roundedSW="false" roundedNW="false" squashN="false" squashE="false" squashS="true" squashW="false" permanent="false"/>
     </costume>
     <costume name="squashSP" defaultZOrder="10" order="40" role="squash.py" properties="squashProperties.py">
       <pose name="default" pose="squashSP"/>
-      <properties squashN="false" squashE="false" squashS="true" squashW="false" permanent="true"/>
+      <properties roundedNE="true" roundedSE="true" roundedSW="true" roundedNW="true" squashN="false" squashE="false" squashS="true" squashW="false" permanent="true"/>
     </costume>
     <costume name="squashW" defaultZOrder="10" order="30" extends="squashE" role="squash.py" properties="squashProperties.py">
       <pose name="default" pose="squashW"/>
-      <properties squashN="false" squashE="false" squashS="false" squashW="true" permanent="false"/>
+      <properties roundedNE="false" roundedSE="false" roundedSW="false" roundedNW="false" squashN="false" squashE="false" squashS="false" squashW="true" permanent="false"/>
     </costume>
     <costume name="squashWP" defaultZOrder="10" order="40" role="squash.py" properties="squashProperties.py">
       <pose name="default" pose="squashWP"/>
-      <properties squashN="false" squashE="false" squashS="false" squashW="true" permanent="true"/>
+      <properties roundedNE="true" roundedSE="true" roundedSW="true" roundedNW="true" squashN="false" squashE="false" squashS="false" squashW="true" permanent="true"/>
     </costume>
     <costume name="stamp" defaultZOrder="60" order="10" role="collectable.py" properties="roundProperties.py">
       <pose name="default" pose="stamp"/>
@@ -349,7 +359,10 @@
     <scene name="balloons"/>
     <scene name="balloons2"/>
     <scene name="balloons3"/>
-    <scene name="cars"/>
+    <scene name="balloons4"/>
+    <scene name="balloons5"/>
+    <scene name="extras"/>
+    <scene name="extras2"/>
     <scene name="furniture"/>
     <scene name="furniture2"/>
     <scene name="glass"/>
@@ -377,6 +390,9 @@
     <scene name="test5"/>
     <scene name="test6"/>
     <scene name="test7"/>
+    <scene name="test8"/>
+    <scene name="vehicles"/>
+    <scene name="vehicles2"/>
   </scenes>
   <inputs>
     <input name="down" keys="DOWN,PERIOD"/>

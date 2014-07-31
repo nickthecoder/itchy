@@ -96,7 +96,10 @@ class GridRole(AbstractRole) :
 
         # If it will leave before I get half way, then ignore it.
         if willLeaveTicks < willEnterTicks :
-            return self.square.grid.getEmpty()
+            if square.alternateOccupant :
+                return square.alternateOccupant
+            else :
+                return square.grid.getEmpty()
 
         return occupier
         
@@ -153,6 +156,7 @@ class GridRole(AbstractRole) :
     # Tidy up when dead. Make sure that the square I'm occupying and the square I'm entring no longer
     # reference me.
     def onDeath( self ) :
+            
         self.removeFromGrid()
     
     def removeFromGrid( self ) :
@@ -175,8 +179,10 @@ class GridRole(AbstractRole) :
     # This methods downgrades a role from being the normal occupant to the alternate occupant.
     # Must NOT be used for movable objects
     def makeAlternateOccupant( self ) :
+    
         if self.square.occupant != self :
             return
+        self.square.occupant = None
 
         if self.square.alternateOccupant :
             self.square.alternateOccupant.removeFromGrid()        
