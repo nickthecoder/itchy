@@ -243,10 +243,14 @@ public abstract class AbstractRole implements Role
         getActor().play(soundName);
     }
 
-    public void event( String eventName, AnimationEvent ae )
+    public void event( String eventName, String message, AnimationEvent ae )
     {
-        getActor().event(eventName, ae);
+        getActor().event(eventName, message, ae);
+    }
 
+    public void event( String eventName, String message )
+    {
+        getActor().event(eventName, message );
     }
 
     public void event( String poseName )

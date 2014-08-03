@@ -14,7 +14,6 @@ class Rock(Faller) :
     def onBirth( self ) :
         super(Rock,self).onBirth()
         
-        # TODO Make self a property???
         self.weight = 4
 
         self.addTag( "roundedNE" )

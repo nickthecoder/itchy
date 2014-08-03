@@ -225,10 +225,10 @@
     <actor costume="rock" x="180" y="-180" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
     <actor costume="carR" x="120" y="-240" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
     <actor costume="rock" x="480" y="-180" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
-    <actor costume="baloon" x="660" y="-180" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
+    <actor costume="balloon" x="660" y="-180" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
     <actor costume="carL" x="720" y="-120" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
     <actor costume="carR" x="840" y="-120" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
-    <actor costume="baloon" x="900" y="-180" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
+    <actor costume="balloon" x="900" y="-180" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
     <actor costume="gate" x="960" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="40">
       <property name="scene" value="play"/>
     </actor>

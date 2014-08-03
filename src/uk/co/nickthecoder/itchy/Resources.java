@@ -81,16 +81,15 @@ public class Resources extends Loadable
         this.costumes = new HashMap<String, CostumeResource>();
         this.animations = new HashMap<String, AnimationResource>();
         this.inputs = new HashMap<String, InputResource>();
-        
+
         this.renamedCostumes = new HashMap<String, String>();
 
         this.game = new Game(this);
     }
 
     /**
-     * Used by the SceneDesigner when testing a scene. It creates a duplicate set of resources, so that
-     * a new Game can run the test, leaving the state of the old Game untouched. This is important when
-     * the editor is launched from within the game.
+     * Used by the SceneDesigner when testing a scene. It creates a duplicate set of resources, so that a new Game can run the test, leaving
+     * the state of the old Game untouched. This is important when the editor is launched from within the game.
      */
     public Resources copy()
     {
@@ -104,17 +103,17 @@ public class Resources extends Loadable
         result.animations.putAll(this.animations);
         result.inputs.putAll(this.inputs);
         result.renamedCostumes.putAll(this.renamedCostumes);
-        
+
         result.setFile(this.getFile());
-        
+
         Itchy.loadingGame(result.game);
         result.setGameInfo(this.gameInfo);
         result.game.setDirector(result.getGameInfo().createDirector(result));
         Itchy.loadingGame(null);
-        
+
         return result;
     }
-    
+
     public String getId()
     {
         String name = this.getFile().getName();
@@ -527,7 +526,7 @@ public class Resources extends Loadable
         if (costumeResource.getName().equals(newName)) {
             return;
         }
-         
+
         String oldName = costumeResource.getName();
         String origName = oldName;
 
@@ -625,6 +624,32 @@ public class Resources extends Loadable
         }
     }
 
+    /**
+     * Creates the role object defined by a costume. If the costume is badly defined, then null is returned.
+     */
+    public Role createRole( Costume costume )
+    {
+        try {
+            return AbstractRole.createRole(this, costume.roleClassName);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    
+    /**
+     * Creates an Actor based on a Costume, and places it on a stage.
+     */
+    public Actor createActor( Costume costume, Stage stage )
+    {
+        Role role = this.createRole(costume);
+        Actor actor = new Actor( costume );
+        actor.setRole(role);
+        actor.setZOrder( costume.defaultZOrder );
+        stage.add(actor);
+        
+        return actor;
+    }
+
     // Animations
 
     public void addAnimation( AnimationResource ar )
@@ -697,7 +722,7 @@ public class Resources extends Loadable
         return sortNames(this.inputs.keySet());
     }
 
-    public String getInputName( Input input)
+    public String getInputName( Input input )
     {
         for (String name : this.inputNames()) {
             if (this.getInput(name) == input) {

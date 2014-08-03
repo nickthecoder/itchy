@@ -20,15 +20,18 @@ class Level(PlainSceneDirector) :
         self.inputToggleInfo = Input.find("toggleInfo")
         self.inputTest = Input.find("runTests")
         
+        self.inputNextPlayer = Input.find("nextPlayer")
+                
         self.collectablesRemaining = 0
         self.showInfo = True
         self.player = None
 
     def onActivate( self ) :
 
-        # Used to tick first, before all the other grid items
-        for self.player in Itchy.getGame().findRoleByTag("player") :
-            pass
+        for player in Itchy.getGame().findRoleByTag("player") :
+            if self.player is None or player.awake :
+                self.player = player
+        
         self.droppedFramesRole = Itchy.getGame().findRoleById("droppedFrames")
 
         self.toggleInfo()
@@ -36,9 +39,14 @@ class Level(PlainSceneDirector) :
         # Now that the scene has loaded, let the player find the position it should start in
         # This is used on the "play" scene, to allow the player to start near to the gate he
         # has just completed.
-        if self.player :
-            self.player.getReady()
+        # If there are more than one player, then the others will go to sleep.
+        for player in Itchy.getGame().findRoleByTag("player") :
+            player.getReady( player == self.player )
     
+        for portcullis in Itchy.getGame().findRoleByTag("portcullis") :
+            portcullis.getReady(self.player)
+            
+            
     def onLoaded( self ) :
         
         # Load the glass stage on top of the current scene.
@@ -96,10 +104,7 @@ class Level(PlainSceneDirector) :
     def tick(self) :
 
         if self.player :
-            if self.player.actor.isDead() or self.player.actor.isDying() :
-                self.player = None
-            else :
-                self.player.playerTick()
+            self.player.playerTick()
                 
         PlainSceneDirector.tick(self)
         
@@ -112,6 +117,42 @@ class Level(PlainSceneDirector) :
         if self.inputTest.matches(kevent) :
             self.runTests()
             
+        if self.inputNextPlayer.matches(kevent) :
+            self.wakeNextPlayer()
+            
+            
+    def playerDied( self, player ) :
+        if self.player is player :
+            self.wakeNextPlayer()
+
+
+    def wakeNextPlayer(self) :
+        
+        previous = None
+        for player in Itchy.getGame().findRoleByTag("player") :
+                
+            if player is self.player and previous is not None :
+                self.wakePlayer( previous )
+                return
+
+            if player.actor.isDying() or player.actor.isDead() :
+                pass
+            else :
+                previous = player
+
+        self.wakePlayer(previous)
+        
+    def wakePlayer( self, player ) :
+        if player is None :
+            # All players are dead!
+            return
+            
+        if player is not self.player :
+            self.player.sleep()
+            self.player = player
+            self.player.wake()
+
+
     def runTests(self) :
     
         for autoPilot in Itchy.getGame().findRoleByTag("autoPilot") :

@@ -1,4 +1,9 @@
+Bugs
 
+    Make bees deadly
+
+    is onInvading ever used?
+    
 PyRox
 
     Create more levels
@@ -15,7 +20,7 @@ PyRox
     Big extend Movable, with the extra stuff to ensure that BigHelper is called when needed.
         onDeath disconnects BigHelper, and kills all bigPaddings
         move : super.move(); bigHelper.movePaddings()
-        
+
     BigHelper
         main : a GridRole object that is the controller for all the others.
         paddings : Array of BigPadding(GridRole) objects
@@ -37,27 +42,19 @@ PyRox
 
     More characters :
 
+        Weaker player - can't lift or push rocks.
+
         Bean Pole - a 1x2 player
         Fat Man - a 2x1 player
         Giant - a 2x2 player (Normal player is called titch)
         
         Big Rock (2x2) Rolls when sitting half and half on solid/empty
             If we have a giant player too, then it could lift two rocks side by side, as long as they couldn't roll off.
-            
-        Machines - convert rocks to balloons etc
-            Has 4 costume properties : N,S,E,W. The values are NSEW
-                Same value or blank -> do nothing. Otherwise create the appropriate object in the given direction, destroying the old one.
-            Rock, Car, Balloon have tag "transformable". Use this in Machine.onHit (Machine is "hittable").
-             
-        Local worm hole
-            Use it to create a waterfall of rocks
-            
-        Keys and whatever they unlock
+
         
         Eggs - hatches into ??? when dropped. ??? is killed when hit, or when exploded, and counts as a collectable.
             If randomness is used for the movement, then use a predictable random number???
-        More than one Player, Tab to cycle through them.
-            Weaker than the normal one - can't lift or push rocks.
+
 
         Water
             Each cube has a pressure.
@@ -69,6 +66,12 @@ PyRox
             If pressure > full and above is empty, then share pressure (but never enough to leave me less than full).
             If pressure >= "full", then use 100% blue, otherwise use a partially full square.
             If I share my square with something else, then add 80% full to my pressure when working stuff out???
+
+
+    Saloon Sally - Tables with/without gold on them
+        https://www.youtube.com/watch?v=4tnB9tR3ykM
+
+    "Cavern" style levels
     
 
 Add onSceneCreated to class diagram(s)

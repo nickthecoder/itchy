@@ -17,6 +17,9 @@ class Table(Movable) :
         if self.isMoving() :
             return False
           
+        if force < 4 :
+            return False
+
         forward = self.look(dx, dy)
         if forward.isMoving() :
             return False

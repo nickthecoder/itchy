@@ -18,9 +18,12 @@ class Squash(GridRole) :
     def onSceneCreated(self) :
         if self.permanent :
             self.makeAlternateOccupant()
-        
-                
-    def onInvaded(self,invader):
+
+
+    def onInvaded( self, invader ) :
+        pass
+
+    def onHalfInvaded(self,invader):
         if not self.permanent :
             self.removeFromGrid()
             self.actor.event("fade")

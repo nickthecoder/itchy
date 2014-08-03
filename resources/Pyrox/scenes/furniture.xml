@@ -139,15 +139,15 @@
     <text text="Lift the grenade up" font="Boycott" size="22" color="#66b549" xAlignment="0.5" yAlignment="0.5" x="720" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="126">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="1"/>
-        <property name="color" value="#204311ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#204311ff"/>
       </makeup>
     </text>
     <text text="then shuffle it back onto the table" font="Boycott" size="22" color="#66b549" xAlignment="0.5" yAlignment="0.5" x="720" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="128">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="1"/>
-        <property name="color" value="#204311ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#204311ff"/>
       </makeup>
     </text>
   </layer>

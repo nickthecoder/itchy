@@ -57,9 +57,22 @@ class Director(AbstractDirector) :
 
 
     def centerOn( self, x, y ) :
-        self.plainView.centerOn( x, y )
-        self.gridView.centerOn( x, y )
-        self.testView.centerOn( x, y )
+        self.centerViewOn( self.plainView, x, y )
+        self.centerViewOn( self.gridView, x, y )
+        self.centerViewOn( self.testView, x, y )
+
+    # Centers the view on the given coordinate, not straight away, but if called every frame, then
+    # it will slowly home in on the required position.
+    def centerViewOn( self, view, x, y ) :
+        rect = view.getVisibleRectangle()
+        reqX = x - rect.width / 2
+        reqY = y - rect.height / 2
+        
+        weight = 20 # A higher number will add more lag, i.e. slower to home in on the new center
+        newX = (rect.x * weight + reqX) / (weight + 1) # Weighted average of the required and current positions.
+        newY = (rect.y * weight + reqY) / (weight + 1)
+        
+        view.scrollTo( newX, newY );
     
     def returnToGateRoom( self, warpRoom ) :
         

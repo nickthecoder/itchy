@@ -256,13 +256,20 @@ public class Actor implements PropertySubject<Actor>
     public void setAnimation( Animation animation, AnimationEvent ae )
     {
         if (animation == null) {
-            this.animation = null;
-            return;
+            if (ae == AnimationEvent.REPLACE) {
+                // If we are trying to REPLACE the old animation with null, then stop the old animation if there is one.
+                this.animation = null;
+                return;
+            } else {
+                // If we are trying to merge the old animation with null, then just let the old animation continue.
+                // We also do nothing when ae==IGNORE
+                return;
+            }
         }
 
         Animation newAnimation;
 
-        // What do we do when an animation is in progress. Either replace it, ignore the new animation or merge them sequentially.
+        // What do we do when an animation is in progress. Either replace it, ignore the new animation or merge them.
         if ((this.animation == null) || (ae == AnimationEvent.REPLACE)) {
             newAnimation = animation.copy();
             newAnimation.start(this);
@@ -271,7 +278,7 @@ public class Actor implements PropertySubject<Actor>
             return;
 
         } else {
-            // Start the new animation after the old one has finished.
+            // Merge the two animations (either in sequence or in parallel, depending on "ae")
             CompoundAnimation ca = new CompoundAnimation(ae == AnimationEvent.SEQUENCE);
             ca.add(this.getAnimation());
             ca.add(animation.copy());
@@ -281,6 +288,7 @@ public class Actor implements PropertySubject<Actor>
 
         newAnimation.addMessageListener(getRole());
         this.animation = newAnimation;
+        this.animation.tick(this);
     }
 
     public Animation getAnimation()
@@ -298,20 +306,15 @@ public class Actor implements PropertySubject<Actor>
 
     public void event( String eventName )
     {
-        this.event(eventName, AnimationEvent.REPLACE);
+        this.event(eventName, null, AnimationEvent.REPLACE);
     }
 
     public void event( String eventName, String message )
     {
-        this.event(eventName, AnimationEvent.REPLACE, message);
+        this.event(eventName, message, AnimationEvent.REPLACE);
     }
 
-    public void event( String eventName, AnimationEvent ae )
-    {
-        this.event(eventName, ae, null);
-    }
-
-    public void event( String eventName, AnimationEvent ae, String message )
+    public void event( String eventName, String message, AnimationEvent ae  )
     {
         if (this.costume == null) {
             return;
@@ -322,7 +325,12 @@ public class Actor implements PropertySubject<Actor>
         }
 
         Animation animation = this.costume.getAnimation(eventName);
-        if ((message != null) && (animation != null)) {
+        if (animation == null) {
+            // If there is no animation, but a completion message is specified, then send the message straight away.
+            if (message != null) {
+                this.getRole().onMessage(message);
+            }
+        } else {
             animation.setFinishedMessage(message);
         }
         this.setAnimation(animation, ae);
@@ -335,18 +343,18 @@ public class Actor implements PropertySubject<Actor>
 
     public void deathEvent( String eventName )
     {
-        deathEvent(eventName, AnimationEvent.REPLACE, null);
+        deathEvent(eventName, null, AnimationEvent.REPLACE);
     }
 
     public void deathEvent( String eventName, String message )
     {
-        deathEvent(eventName, AnimationEvent.REPLACE, message);
+        deathEvent(eventName, message, AnimationEvent.REPLACE);
     }
 
-    public void deathEvent( String eventName, AnimationEvent ae, String message )
+    public void deathEvent( String eventName, String message, AnimationEvent ae )
     {
         this.dying = true;
-        this.event(eventName, ae, message);
+        this.event(eventName, message, ae);
         if ((this.costume == null) || (this.costume.getAnimation(eventName) == null)) {
             this.kill();
         }

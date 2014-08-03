@@ -3,9 +3,10 @@ from uk.co.nickthecoder.itchy import Role
 from uk.co.nickthecoder.itchy import AbstractRole
 from uk.co.nickthecoder.itchy.util import ClassName
 
-from gridRole import GridRole
-
 from java.util import ArrayList
+
+from gridRole import GridRole
+from roundProperties import RoundProperties
 
 
 properties = ArrayList()
@@ -17,12 +18,13 @@ class Collectable(GridRole) :
         Itchy.getGame().getSceneDirector().collectablesRemaining += 1
         self.addTag("soft")
         
-        self.getActor().getCostume().getProperties().update(self)
+        if isinstance(self.actor.costume.properties, RoundProperties) :
+            self.actor.costume.properties.update(self)
 
 
-    def onInvaded( self, invader ) :
-        super(Collectable,self).onInvaded(invader)
-        
+    def onHalfInvaded( self, invader ) :
+        super(Collectable,self).onHalfInvaded(invader)
+
         if (invader.hasTag("player")) :
             Itchy.getGame().getSceneDirector().collected(1)
             self.actor.deathEvent("collected")

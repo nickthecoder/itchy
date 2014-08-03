@@ -97,6 +97,12 @@
     <actor costume="wall" x="1260" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
     <actor costume="wallNW" x="180" y="780" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
     <actor costume="wall" x="120" y="720" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="120" y="0" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="0" y="0" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="-60" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="-60" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="0" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="-60" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
     <actor costume="soil" x="900" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
     <actor costume="soil" x="1080" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
     <actor costume="autoPilot" x="120" y="660" direction="0.0" heading="0.0" startEvent="default" zOrder="10">
@@ -118,7 +124,7 @@
     <actor costume="rock" x="180" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
     <actor costume="rock" x="360" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
     <actor costume="grenade2" x="300" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
-    <actor costume="baloon" x="300" y="0" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
+    <actor costume="balloon" x="300" y="0" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
     <actor costume="carR" x="0" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
     <actor costume="carR" x="60" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
     <actor costume="grenade2" x="480" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
@@ -129,10 +135,10 @@
     <actor costume="rock" x="900" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
     <actor costume="rock" x="720" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
     <actor costume="rock" x="540" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
-    <actor costume="baloon" x="540" y="0" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
-    <actor costume="baloon" x="1080" y="0" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
-    <actor costume="baloon" x="660" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
-    <actor costume="baloon" x="780" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
+    <actor costume="balloon" x="540" y="0" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
+    <actor costume="balloon" x="1080" y="0" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
+    <actor costume="balloon" x="660" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
+    <actor costume="balloon" x="780" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
     <actor costume="rock" x="840" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
     <actor costume="rock" x="960" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
     <actor costume="grenade" x="120" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
@@ -159,12 +165,6 @@
     <actor costume="player" x="240" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="100"/>
   </layer>
   <layer name="test">
-    <actor costume="wall" x="120" y="0" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="0" y="0" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="-60" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="-60" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="0" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="-60" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
     <actor costume="test" x="300" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="50">
       <property name="expectedClass" value="Balloon"/>
     </actor>

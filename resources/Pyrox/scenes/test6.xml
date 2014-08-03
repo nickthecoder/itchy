@@ -78,7 +78,7 @@
     <actor costume="wall" x="1140" y="540" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
     <actor costume="wall" x="1140" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
     <actor costume="autoPilot" x="540" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="10">
-      <property name="moves" value="lluurrrddlddlrrddrrrrrrrrrrrrrrrruuuuuuuuuudddddddllluuuuuuuuuuuull-l"/>
+      <property name="moves" value="lluurrrddlddlrrddrrrrrrrrrrrrrrrruuuuuuuuuddddddddllluuuuuuuuuuuuuull-l"/>
       <property name="autoTest" value="true"/>
       <property name="killOnPressed" value="true"/>
     </actor>
@@ -117,8 +117,8 @@
     <actor costume="squashEP" x="600" y="-60" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
     <actor costume="squashSP" x="840" y="-60" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
     <actor costume="squashNSP" x="960" y="-60" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
-    <actor costume="baloon" x="360" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
-    <actor costume="baloon" x="480" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
+    <actor costume="balloon" x="360" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
+    <actor costume="balloon" x="480" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
     <actor costume="rock" x="540" y="0" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
     <actor costume="rock" x="900" y="0" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
     <actor costume="carL" x="780" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>

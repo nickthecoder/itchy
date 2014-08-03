@@ -45,17 +45,14 @@ class Car(Faller) :
             
     def canShove( self, pusher, dx, dy, speed, force) :
     
-        if self.isMoving() :
-            return False
-
         if (force < 4) :
             return False
 
-        # Will be move by ourselves (falling or rolling), if so, don't let us be pushed.
-        if self.pushed :
-            forward = self.look( self.direction, 0 )
-            if forward.hasTag(self.squash) :
-                return False
+        self.jumpIfNearlyMoved()
+            
+        if self.isMoving() :
+            return False
+
 
         forward = self.look(dx, dy)
         if forward.isMoving() :
@@ -63,11 +60,6 @@ class Car(Faller) :
 
         if forward.hasTag("squash" + gridRole.getDirectionAbreviation(dx, dy) ) :
             return True
-
-    def shove( self, pusher, dx, dy, speed ) :
-        self.pushed = True
-        super(Car,self).shove(pusher, dx, dy, speed)
-    
          
     def onArrived( self, dx, dy ) :
         # Don't hit things when I've been pushed, only when I've fallen or driven forwards.

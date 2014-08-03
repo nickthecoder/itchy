@@ -384,7 +384,7 @@ public class Tetra extends AbstractDirector
 
     private void moveDown( Actor actor, int lines )
     {
-        actor.event("moveDown" + lines, AnimationEvent.SEQUENCE);
+        actor.event("moveDown" + lines, null, AnimationEvent.SEQUENCE);
     }
 
     private void gameOver()

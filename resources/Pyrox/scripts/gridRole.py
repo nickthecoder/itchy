@@ -3,6 +3,7 @@ from uk.co.nickthecoder.itchy import AbstractRole
 from uk.co.nickthecoder.itchy.util import ClassName
 from uk.co.nickthecoder.itchy.extras import Fragment
 from uk.co.nickthecoder.itchy.role import Explosion
+from uk.co.nickthecoder.itchy.role import Talk
 
 from java.util import ArrayList
 
@@ -16,12 +17,13 @@ class GridRole(AbstractRole) :
         self.square = None
         self.speed = 4 # The default speed for this object.
         
-        # Used by moving objects. When they move right or down, this is set to true, which prevents the gridStage
-        # from calling their tick method twice in one game tick. (Once for their old grid position, and once for
-        # their new position).
-        # It is reset by gridStage.
-        self.movedForward = False
+        # Each GridRole object knows when its tick was last called. Used by GridStage to ensure it
+        # doesn't tick a role more than once per frame.
+        self.latestTick = -1
         
+        self.idle = True
+        self.talkActor = None
+                
     def onBirth( self ) :
         Fragment().actor(self.actor).pieces( 10 ).createPoses( "fragment" )
         self.addTag( "explodable" )
@@ -30,6 +32,21 @@ class GridRole(AbstractRole) :
         pass
         
         
+    def talk( self, message ) :
+        if self.talkActor :
+            self.talkActor.kill()
+
+        message = message.replace("\\n","\n")
+
+        self.talkActor = Talk(self) \
+            .bubble("talk").font("Vera", 14).margin(15, 10, 45, 10).offset(0,60).text(message) \
+            .createActor()
+
+        self.talkActor.getStage().addTop(self.talkActor)
+        self.talkActor.setCostume( self.getActor().getCostume() )
+        self.talkActor.event("talk-fade")
+                        
+
     def moveTo( self, x, y ) :
    
         grid = self.square.grid if self.square else None
@@ -47,10 +64,13 @@ class GridRole(AbstractRole) :
         self.square = grid.getSquareByPixel( self.getActor().getX(), self.getActor().getY() )
         if self.square != None :
             self.square.occupant = self
+            self.onPlacedOnGrid()
         else :
             print "Failed to find square! ", self.actor.getX(), ",", self.actor.getY()
             self.getActor().getAppearance().setAlpha( 128 )
 
+    def onPlacedOnGrid( self ) :
+        pass
     
     # Finds the square
     def findLocalSquare( self, dx, dy ) :
@@ -85,6 +105,9 @@ class GridRole(AbstractRole) :
         if entrant :
             return entrant
         
+        if square and square.ignoreOccupant and square.alternateOccupant :
+            return square.alternateOccupant
+            
         occupier = self.findLocalRole( dx, dy )
         if not occupier.isMoving() :
             return occupier
@@ -144,12 +167,18 @@ class GridRole(AbstractRole) :
             .projectiles(10) \
             .gravity(-0.2).fade(0.9, 3.5).speed(0.1, 1.5).vy(5) \
             .pose("fragment") \
-            .createActor() \
+            .createActor()
 
         self.actor.deathEvent("explode")
 
 
     # Called when a GridRole is halfway through encrouching into my teritory.
+    def onHalfInvaded( self, invader ) :
+        pass
+                
+    # Called when a GridRole is just about to take over my square.
+    # The only way to prevent me being booted out is to override this method, and remove the invader
+    # from the grid instead.
     def onInvaded( self, invader ) :
         self.removeFromGrid()
         
@@ -170,6 +199,7 @@ class GridRole(AbstractRole) :
                 self.square.occupant = None
             elif self.square.alternateOccupant == self :
                 self.square.alternateOccupant = None
+                self.square.ignoreOccupant = False
 
         self.square = None
         self.dx = 0
@@ -178,7 +208,7 @@ class GridRole(AbstractRole) :
     # Each square has an alternative occupant, so that two roles can share the same square.
     # This methods downgrades a role from being the normal occupant to the alternate occupant.
     # Must NOT be used for movable objects
-    def makeAlternateOccupant( self ) :
+    def makeAlternateOccupant( self, useOnLook=False ) :
     
         if self.square.occupant != self :
             return
@@ -188,6 +218,7 @@ class GridRole(AbstractRole) :
             self.square.alternateOccupant.removeFromGrid()        
         
         self.square.alternateOccupant = self;
+        self.square.ignoreOccupant = useOnLook
     
     
     # TODO Other methods include :

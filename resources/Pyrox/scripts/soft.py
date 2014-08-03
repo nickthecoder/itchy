@@ -14,8 +14,8 @@ class Soft(GridRole) :
         super(Soft,self).onAttach()
         self.addTag("soft")
     
-    def onInvaded( self, invader ) :
-        super(Soft,self).onInvaded(invader)
+    def onHalfInvaded( self, invader ) :
+        super(Soft,self).onHalfInvaded(invader)
         self.explode()
         
     # TODO Other methods include :

@@ -4,8 +4,8 @@
     <text text="Pyrox" font="Boycott" size="222" color="#ff7e1a" xAlignment="0.5" yAlignment="0.5" x="420" y="400" direction="0.0" heading="0.0" startEvent="default" zOrder="-1">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="10"/>
-        <property name="color" value="#0098ffff"/>
         <property name="dy" value="-6"/>
+        <property name="color" value="#0098ffff"/>
       </makeup>
     </text>
   </layer>

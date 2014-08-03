@@ -23,52 +23,60 @@ class Movable(GridRole) :
         
         
     def tick(self):
-
         if self.square is None :
             return
 
+        self.idle = True
         if (self.dx != 0) or (self.dy != 0 ) :
 
-            self.between += self.currentSpeed
+            self.tickMove()
+            
+    def tickMove(self) :
+        
+        self.between += self.currentSpeed
 
-            if not self.squashed :
-                if self.between >= self.square.grid.squareSize / 2 :
-                    self.squashed = True
-                    squashing = self.findLocalRole( self.dx, self.dy )
-                    squashing.onInvaded( self )
-                    # Squashing something may have caused us to die, and therefore removed from the grid.
-                    # Just return, because the following code assumes we ARE on the grid.
-                    if self.square is None :
-                        return
-                        
-            actor = self.actor
+        actor = self.actor
+        if actor :
+            actor.moveBy( self.dx * self.currentSpeed, self.dy * self.currentSpeed )
+
+        if not self.squashed :
+            if self.between >= self.square.grid.squareSize / 2 :
+                self.squashed = True
+                squashing = self.findLocalRole( self.dx, self.dy )
+                squashing.onHalfInvaded( self )
+                # Squashing something may have caused us to die, and therefore removed from the grid.
+                # Just return, because the following code assumes we ARE on the grid.
+                if self.square is None :
+                    return
+
+        if self.between >= self.square.grid.squareSize :
+            # Correct for any overshoot
+            overshoot = self.between - self.square.grid.squareSize
             if actor :
-                actor.moveBy( self.dx * self.currentSpeed, self.dy * self.currentSpeed )
+                actor.moveBy( self.dx * - overshoot, self.dy * - overshoot )
+            
+            squashing = self.findLocalRole( self.dx, self.dy )
+            squashing.onInvaded( self )
 
-            if self.between >= self.square.grid.squareSize :
-                # Correct for any overshoot
-                overshoot = self.between - self.square.grid.squareSize
-                if actor :
-                    actor.moveBy( self.dx * - overshoot, self.dy * - overshoot )
-                
-                # Stop the movement and occupy the new square.
-                dx = self.dx # Remember the direction I was travelling as its needed after dx,dy are reset.
-                dy = self.dy
-                self.between = 0
-                self.dx = 0
-                self.dy = 0
+            # Stop the movement and occupy the new square.
+            dx = self.dx # Remember the direction I was travelling as its needed after dx,dy are reset.
+            dy = self.dy
+            self.between = 0
+            self.dx = 0
+            self.dy = 0
+
+            # We may have been removed from the grid inside onInvaded, if so, skip the remainder.
+            if self.square is not None :
                 self.occupySquare( self.findLocalSquare( dx, dy ) )
                 self.onArrived(dx, dy)
-                if dx > 0 or dy < 0 :
-                    self.movedForward = True
-    
+   
     
     def occupySquare( self, newSquare ) :
         # It is possible for another GridRole to have occupied my old square before I have completely vacated it,
         # in which case, do not interfer. Otherwise, reset the occupant to the global "Empty" object.
         if self.square.occupant == self :
             self.square.occupant = None
-        
+
         if newSquare is None :
             self.actor.kill()
         else :
@@ -80,16 +88,23 @@ class Movable(GridRole) :
  
 
     def move( self, dx, dy,speed=None) :
-    
+
+        self.idle = False
+
         if self.isMoving() :
-            print( "Already moving. Ignored")
-        else :
-            self.currentSpeed = speed if speed else self.speed
-            self.squashed = False
-            self.dx = dx
-            self.dy = dy
-            self.between = 0
-            self.findLocalSquare( dx, dy ).entrant = self
+            if self.between + self.currentSpeed >= self.square.grid.squareSize :
+                # print "Forcing an extra tickMove in for", self
+                self.tickMove()
+            else :
+                print "Already moving. Ignored.", self
+                return
+                
+        self.currentSpeed = speed if speed else self.speed
+        self.squashed = False
+        self.dx = dx
+        self.dy = dy
+        self.between = 0
+        self.findLocalSquare( dx, dy ).entrant = self
      
     
     def moveEast( self ) :
@@ -113,7 +128,10 @@ class Movable(GridRole) :
     def isMoving( self ) :
         return (self.dx != 0) or (self.dy != 0)
 
-    
+    def jumpIfNearlyMoved( self ) :
+        if self.isMoving() and self.between + self.currentSpeed >= self.square.grid.squareSize :
+            self.tickMove()
+
     # Called after the object has finished travelling from one square to another.
     # dx,dy : The direction the invader was travelling ) {
     def onArrived( self, dx, dy ) :
@@ -121,8 +139,15 @@ class Movable(GridRole) :
         pass
            
     # Called when a GridRole is halfway through encrouching into my teritory.
-    def onInvaded( self, invader ) :
+    def onInvading( self, invader ) :
         # Do nothing    
+        pass
+
+    # Called when a GridRole has been invaded.
+    # At this stage, the invader still has its own square, and self has its square.
+    # but unless onInvaded removes invader from the grid, then invader will take over the square.
+    def onInvaded( self, invader ) :
+        # Do nothing
         pass
 
     # TODO Other methods include :

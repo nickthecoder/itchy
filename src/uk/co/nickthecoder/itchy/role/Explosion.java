@@ -54,6 +54,8 @@ public class Explosion extends Companion<Explosion>
     public int projectileCounter = 0;
 
     public int countPerTick = 1000;
+    
+    public int skipTicks = 0;
 
     public double gravity = 0;
 
@@ -115,6 +117,9 @@ public class Explosion extends Companion<Explosion>
     
     public boolean dependent = false;
 
+
+    private int toSkip = 0;
+    
     /**
      * The equivalent of : <code>new Explosion(role.getActor())</code>
      * 
@@ -198,6 +203,20 @@ public class Explosion extends Companion<Explosion>
         this.countPerTick = value;
         return this;
     }
+    
+    /**
+     * @param value
+     *        Skips N ticks between creating projectiles. You can think of this as the opposite of projectilesPerTick, but
+     *        they can be used together. For example, new Explosion(foo).projectilesPerTick(2).everyNTicks(10).projectiles(20)
+     *        will create 2 projectiles, then wait 10 ticks, then create another 2, then wait another 10 etc.
+     * @return this
+     */
+    public Explosion slow( int value )
+    {
+        this.skipTicks = value;
+        return this;
+    }
+    
 
     /**
      * The radius of the explosion at time zero. Note, that this is different to {@link #offsetForwards(double)}, because offsetForwards
@@ -543,6 +562,14 @@ public class Explosion extends Companion<Explosion>
     @Override
     public void tick()
     {
+        if (this.skipTicks > 0) {
+            this.toSkip -= 1;
+            if (this.toSkip >= 0) {
+                return;
+            }
+            this.toSkip = this.skipTicks;
+        }
+        
         if (dependent && this.source.isDead()) {
             this.getActor().kill();
             return;

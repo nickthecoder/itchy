@@ -3,8 +3,9 @@ from uk.co.nickthecoder.itchy import Input
 from uk.co.nickthecoder.itchy import Role
 from uk.co.nickthecoder.itchy import AbstractRole
 from uk.co.nickthecoder.itchy.util import ClassName
-from uk.co.nickthecoder.itchy.role import Talk
 from uk.co.nickthecoder.itchy.role import Explosion
+
+from uk.co.nickthecoder.itchy.property import BooleanProperty
 
 from java.util import ArrayList
 
@@ -13,12 +14,15 @@ import gridRole
 from movable import Movable
 
 properties = ArrayList()
+properties.add( BooleanProperty( "awake" ) )
 
 class Player(Movable) :
 
     def __init__(self) :
     
         super(Player, self).__init__()
+
+        self.awake = True
 
         self.inputLeft = Input.find("left")
         self.inputRight = Input.find("right")
@@ -30,7 +34,7 @@ class Player(Movable) :
         self.inputScrollUp = Input.find("scrollUp")
         self.inputScrollDown = Input.find("scrollDown")
         self.inputScrollReset = Input.find("scrollReset")
-        
+                
         self.scrollOffsetX = 0
         self.scrollOffsetY = 0
         self.maxScrollX = 400
@@ -40,7 +44,8 @@ class Player(Movable) :
         self.scrollSpeed = 1
         self.defaultScrollSpeed = 1
         
-        self.talkActor = None
+        self.sleepyZ = None 
+        
 
     def onBirth( self ) :
         super(Player, self).onBirth()
@@ -51,36 +56,23 @@ class Player(Movable) :
         Itchy.getGame().getDirector().gridView.centerOn(self.actor)
         self.addTag("hittable")
         self.addTag("player")
-
+        self.addTag("digger") # Allows me to dig hard soil. See class Hard
+        
     # Called by Level to let me find the "warp" of the scene that's just been completed.
-    def getReady( self ) :
+    def getReady( self, wake ) :
     
-        for warp in Itchy.getGame().findRoleByTag("warp") :
-            director = Itchy.getGame().getDirector()
-            if director.previousSceneName == warp.scene :
-                x = warp.getActor().getX() + warp.exitX * director.squareSize
-                y = warp.getActor().getY() + warp.exitY * director.squareSize
-                self.moveTo( x, y )
-                break
-                
-        for portcullis in Itchy.getGame().findRoleByTag("portcullis") :
-            portcullis.getReady(self)
-            
-    def talk( self, message ) :
-        if self.talkActor :
-            self.talkActor.kill()
-            
-        message = message.replace("\\n","\n")
-
-        self.talkActor = Talk(self) \
-            .bubble("talk").font("Vera", 14).margin(15, 10, 45, 10).offset(0,60).text(message) \
-            .createActor()
-
-        self.talkActor.getStage().addTop(self.talkActor)
-        self.talkActor.setCostume( self.getActor().getCostume() )
-        self.talkActor.event("talk-fade")
-                        
-
+        if wake :
+            for warp in Itchy.getGame().findRoleByTag("warp") :
+                director = Itchy.getGame().getDirector()
+                if director.previousSceneName == warp.scene :
+                    x = warp.getActor().getX() + warp.exitX * director.squareSize
+                    y = warp.getActor().getY() + warp.exitY * director.squareSize
+                    self.moveTo( x, y )
+                    break
+                    
+        else :
+            self.sleep()
+        
     def tick(self) :
         pass
 
@@ -89,8 +81,7 @@ class Player(Movable) :
     # For example, we don't want objects to the left to act different to those to the right
     # just because our tick happens before one and after the other.
     def playerTick( self ) :
-        self.movedForward = False
-        super(Player,self).tick()
+
         
         if self.scrollResetting :
             self.resetScroll()
@@ -124,11 +115,34 @@ class Player(Movable) :
             elif self.inputDown.pressed() :
                 self.attemptToMove( 0, -1 )
 
+
+        super(Player,self).tick()
+        
         tx = self.actor.getX() + self.scrollOffsetX
         ty = self.actor.getY() + self.scrollOffsetY
         
         Itchy.getGame().getDirector().centerOn( tx, ty )
     
+    def sleep( self ) :
+        self.event("sleep")
+        self.awake = False
+        self.sleepyZ = Explosion(self).pose("z") \
+            .offsetForwards( 10,10 ).offsetSidewards( 20,20 ) \
+            .vy(0.6, 1.2).vx(0.2,0.3).gravity(-0.01) \
+            .fade( 2 ) \
+            .projectilesPerTick(1).slow(50).forever() \
+            .createActor()
+        
+    def wake( self ) :
+        self.killZs()
+        self.event("wake")
+        self.awake = True
+        
+    def killZs( self ) :
+        if self.sleepyZ :
+            self.sleepyZ.kill()
+            self.sleepyZ = None
+            
     def resetScroll( self ) :
         
         if self.scrollOffsetX < 0 :
@@ -183,14 +197,22 @@ class Player(Movable) :
             return
 
         if obj.canShove(self,dx,dy,self.speed, 4) :
+            # TODO self.pushed = True
             obj.shove(self, dx, dy, self.speed)
             self.move(dx, dy)
-    
-    
+            return
+                    
     def onInvading( self ) :
         pass
 
+    def onDeath( self ) :
+    
+        Itchy.getGame().sceneDirector.playerDied( self )
+        self.killZs()
+        super(Player,self).onDeath()
+
     def onHit( self, hitter, dx, dy ) :
+        
         if hitter.hasTag("deadly") :
         
             Explosion(self.actor) \
@@ -199,7 +221,7 @@ class Player(Movable) :
                 .fade(0.9, 3.5).vx(3,5).vy(-0.4,0.4) \
                 .pose("fragment") \
                 .createActor()
-                
+
             Explosion(self.actor) \
                 .gravity(-0.1) \
                 .projectiles(5) \
@@ -207,6 +229,7 @@ class Player(Movable) :
                 .pose("fragment") \
                 .createActor()
 
+            self.killZs()
             self.actor.deathEvent("hit")
             self.removeFromGrid()
 
@@ -221,5 +244,4 @@ class Player(Movable) :
     # Boiler plate code - no need to change this
     def getClassName(self):
         return ClassName( Role, self.__module__ + ".py" )
-
 

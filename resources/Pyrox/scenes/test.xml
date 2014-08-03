@@ -1,58 +1,55 @@
 <scene showMouse="false" role="level.py" background="#2e0000ff">
   <properties/>
   <layer name="grid">
-    <actor costume="wall" x="60" y="540" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="720" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
     <actor costume="wall" x="720" y="780" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
     <actor costume="wall" x="660" y="780" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
     <actor costume="wall" x="600" y="780" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
     <actor costume="wall" x="540" y="780" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="420" y="780" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="480" y="780" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="120" y="780" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="60" y="780" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="-120" y="720" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="-120" y="660" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="0" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="0" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="60" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="120" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="240" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="780" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="300" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="180" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="-120" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="660" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="540" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="600" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="480" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="420" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="360" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="180" y="780" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="240" y="780" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="300" y="780" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="360" y="780" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="780" y="780" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="0" y="780" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="60" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="60" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="120" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="180" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="240" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="360" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="300" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="-120" y="780" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="120" y="900" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="60" y="900" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
     <actor costume="wall" x="-60" y="780" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="-120" y="540" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="-60" y="540" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="0" y="540" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="soil" x="-60" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
-    <actor costume="soil" x="-60" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
-    <actor costume="soil" x="0" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
-    <actor costume="soil" x="60" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
-    <actor costume="soil" x="-60" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
-    <actor costume="soil" x="0" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
-    <actor costume="grenade2" x="0" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
+    <actor costume="wall" x="180" y="900" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="240" y="900" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="300" y="900" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="300" y="780" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="780" y="780" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="0" y="900" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="-60" y="900" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="420" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="480" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="600" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="660" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="720" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="780" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="540" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="300" y="840" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="0" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="180" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="60" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="0" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="120" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="180" y="540" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wallNE" x="180" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="240" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wallNE" x="300" y="660" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wallSW" x="120" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="300" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="180" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="soil" x="600" y="720" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
+    <actor costume="soil" x="660" y="720" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
+    <actor costume="soil" x="540" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
+    <actor costume="soil" x="540" y="660" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
+    <actor costume="soil" x="540" y="720" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
+    <actor costume="soil2" x="-120" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
+    <actor costume="soil2" x="-120" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
+    <actor costume="soil2" x="-120" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
+    <actor costume="soil2" x="-120" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
+    <actor costume="soil2" x="-60" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
+    <actor costume="soil" x="-180" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
+    <actor costume="soil" x="-180" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
+    <actor costume="soil" x="-180" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
+    <actor costume="soil" x="-180" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
+    <actor costume="planeR" x="-60" y="840" direction="0.0" heading="0.0" startEvent="default" zOrder="30"/>
     <actor costume="warp" x="420" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="40">
       <property name="exitX" value="0"/>
       <property name="exitY" value="-1"/>
@@ -93,22 +90,36 @@
       <property name="exitY" value="-1"/>
       <property name="scene" value="test6"/>
     </actor>
-    <actor costume="gate" x="540" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="40">
+    <actor costume="gate" x="660" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="40">
       <property name="scene" value="menu"/>
     </actor>
-    <actor costume="player" x="180" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="100"/>
-    <text text="Testing Playground" font="Vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="180" y="540" direction="0.0" heading="0.0" startEvent="default" zOrder="212"/>
+    <actor costume="player" x="60" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="100">
+      <property name="awake" value="true"/>
+    </actor>
     <text text="2 Rocks and Balloons" font="Vera" size="22" color="#ffffff" xAlignment="0.0" yAlignment="0.5" x="420" y="480" direction="90.0" heading="0.0" startEvent="default" zOrder="213"/>
     <text text="Enter a test level." font="Vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="540" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="226"/>
-    <text text="Output is in the console." font="Vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="540" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="228"/>
     <text text="It will continue to the end, or until a test fails." font="Vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="540" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="229"/>
     <text text="3 Cars" font="Vera" size="22" color="#ffffff" xAlignment="0.0" yAlignment="0.5" x="480" y="480" direction="90.0" heading="0.0" startEvent="default" zOrder="235"/>
     <text text="4 Grenades" font="Vera" size="22" color="#ffffff" xAlignment="0.0" yAlignment="0.5" x="540" y="480" direction="90.0" heading="0.0" startEvent="default" zOrder="236"/>
     <text text="5 One Way" font="Vera" size="22" color="#ffffff" xAlignment="0.0" yAlignment="0.5" x="600" y="480" direction="90.0" heading="0.0" startEvent="default" zOrder="240"/>
     <text text="9 Blank" font="Vera" size="22" color="#ffffff" xAlignment="0.0" yAlignment="0.5" x="840" y="480" direction="90.0" heading="0.0" startEvent="default" zOrder="245"/>
-    <text text="8 Blank" font="Vera" size="22" color="#ffffff" xAlignment="0.0" yAlignment="0.5" x="780" y="480" direction="90.0" heading="0.0" startEvent="default" zOrder="246"/>
+    <text text="8 Machines" font="Vera" size="22" color="#ffffff" xAlignment="0.0" yAlignment="0.5" x="780" y="480" direction="90.0" heading="0.0" startEvent="default" zOrder="246"/>
     <text text="7 Planes" font="Vera" size="22" color="#ffffff" xAlignment="0.0" yAlignment="0.5" x="720" y="480" direction="90.0" heading="0.0" startEvent="default" zOrder="247"/>
     <text text="6 One Way (Perm)" font="Vera" size="22" color="#ffffff" xAlignment="0.0" yAlignment="0.5" x="660" y="480" direction="90.0" heading="0.0" startEvent="default" zOrder="248"/>
-    <actor costume="planeL" x="420" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="249"/>
+    <actor costume="warp" x="420" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="249">
+      <property name="exitX" value="0"/>
+      <property name="exitY" value="-1"/>
+      <property name="scene" value="bug-00001"/>
+    </actor>
+    <text text="Bugs" font="Vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="420" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="250">
+      <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
+        <property name="dx" value="1"/>
+        <property name="dy" value="1"/>
+        <property name="color" value="#000000ff"/>
+      </makeup>
+    </text>
+    <actor costume="behive" x="120" y="840" direction="0.0" heading="0.0" startEvent="default" zOrder="251">
+      <property name="bees" value="3"/>
+    </actor>
   </layer>
 </scene>

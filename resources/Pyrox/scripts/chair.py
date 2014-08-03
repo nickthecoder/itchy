@@ -16,7 +16,10 @@ class Chair(Movable) :
     
         if self.isMoving() :
             return False
-          
+        
+        if force < 4 :
+            return False
+            
         forward = self.look(dx, dy)
         if forward.isMoving() :
             return False
@@ -31,9 +34,9 @@ class Chair(Movable) :
         self.speed = speed
 
 
-    # Continue moving in the direction it wa pushed until it hit something.
+    # Continue moving in the direction I was pushed until I hit something.
     def onArrived( self, dx, dy ) :
-        if self.canShove( self, dx, dy, self.speed, 1 ) :
+        if self.canShove( self, dx, dy, self.speed, 4 ) :
             self.move( dx, dy )
 
     # TODO Other methods include :

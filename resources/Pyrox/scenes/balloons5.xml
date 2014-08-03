@@ -102,34 +102,34 @@
       <property name="hint" value="There's a lot of coins and balloons.\nPerhaps I should move some out of the way."/>
     </actor>
     <actor costume="squashN" x="60" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
-    <actor costume="baloon" x="120" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
-    <actor costume="baloon" x="240" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
+    <actor costume="balloon" x="120" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
+    <actor costume="balloon" x="240" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
     <actor costume="rock" x="120" y="540" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
     <actor costume="carR" x="0" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
-    <actor costume="baloon" x="420" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
-    <actor costume="baloon" x="480" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
-    <actor costume="baloon" x="360" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
-    <actor costume="baloon" x="420" y="540" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
-    <actor costume="baloon" x="480" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
-    <actor costume="baloon" x="540" y="540" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
-    <actor costume="baloon" x="480" y="660" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
-    <actor costume="baloon" x="300" y="660" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
-    <actor costume="baloon" x="300" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
-    <actor costume="baloon" x="240" y="540" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
-    <actor costume="baloon" x="240" y="660" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
-    <actor costume="baloon" x="600" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
-    <actor costume="baloon" x="600" y="660" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
-    <actor costume="baloon" x="600" y="540" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
-    <actor costume="baloon" x="720" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
-    <actor costume="baloon" x="780" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
-    <actor costume="baloon" x="780" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
-    <actor costume="baloon" x="840" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
-    <actor costume="baloon" x="840" y="540" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
-    <actor costume="baloon" x="780" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
-    <actor costume="baloon" x="780" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
-    <actor costume="baloon" x="840" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
-    <actor costume="baloon" x="840" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
-    <actor costume="baloon" x="840" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
+    <actor costume="balloon" x="420" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
+    <actor costume="balloon" x="480" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
+    <actor costume="balloon" x="360" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
+    <actor costume="balloon" x="420" y="540" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
+    <actor costume="balloon" x="480" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
+    <actor costume="balloon" x="540" y="540" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
+    <actor costume="balloon" x="480" y="660" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
+    <actor costume="balloon" x="300" y="660" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
+    <actor costume="balloon" x="300" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
+    <actor costume="balloon" x="240" y="540" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
+    <actor costume="balloon" x="240" y="660" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
+    <actor costume="balloon" x="600" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
+    <actor costume="balloon" x="600" y="660" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
+    <actor costume="balloon" x="600" y="540" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
+    <actor costume="balloon" x="720" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
+    <actor costume="balloon" x="780" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
+    <actor costume="balloon" x="780" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
+    <actor costume="balloon" x="840" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
+    <actor costume="balloon" x="840" y="540" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
+    <actor costume="balloon" x="780" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
+    <actor costume="balloon" x="780" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
+    <actor costume="balloon" x="840" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
+    <actor costume="balloon" x="840" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
+    <actor costume="balloon" x="840" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
     <actor costume="gate" x="780" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="40">
       <property name="scene" value="play"/>
     </actor>

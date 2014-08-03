@@ -67,6 +67,7 @@ class Grenade(Faller) :
     def onMessage( self, message ) :
         # Called from the grenade's turning animations
         if message == "turned" :
+            print "turned"
             self.fallen = not self.fallen
             
     

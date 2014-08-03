@@ -9,6 +9,9 @@ class GridStage(ZOrderStage) :
     def __init__(self, name) :
         ZOrderStage.__init__(self, name)
         self.grid = None
+        # Used to ensure that each GridRole is never ticked twice in one frame.
+        # Each GridRole has a "lastTicked", and if this is == this.tickCount, then don't tick.
+        self.tickCount = 0
 
     # In this strategy game, we want PREDICTABLE behaviour, and the standard ZOrderStage doesn't give us that.
     # In ZOrderStage, the ticks are done in z-order, but we can't SEE the z-order. Instead, we shall ensure
@@ -16,6 +19,8 @@ class GridStage(ZOrderStage) :
     # Note that this stage can also house actors not within the grid, and we must call their ticks too.
     def tick(self) :
     
+        self.tickCount += 1
+        
         # It is possible for the grid to change during this method (when transitioning from one
         # scene to another), so don't use self.grid later than this, to avoid using the wrong one.
         grid = self.grid
@@ -28,27 +33,36 @@ class GridStage(ZOrderStage) :
                 for x in range( 0, grid.across ) :
                 
                     square = grid.squares[x][y]
-                    role = square.occupant
-                    
-                    if role :
-                        actor = role.getActor()
-                        if role.movedForward :
-                            role.movedForward = False
-                        else :
-                            if actor :
-                                if actor.isDead() :
-                                    self.remove(actor)
-                                else :
-                                    actor.tick();
+
+                    self.tickRole(square.occupant)
+                    self.tickRole(square.alternateOccupant)                    
 
                     # If an invader has nabbed a square, before the actor has finished moving out of the square,
-                    # then we must ensure that it gets it tick called by calling it from the square it is entering.
+                    # then we must ensure that it gets its tick called by calling it from the square it is entering.
+                    
+                    # TODO and square.entrant.square 
                     if square.entrant and square.entrant.square.occupant != square.entrant :
-                        square.entrant.getActor().tick();
-
+                        if square.entrant.actor :
+                            self.tickRole( square.entrant )
+                                
 
         ZOrderStage.tick(self)
-            
+
+    def tickRole(self, role ) :
+
+        if role :
+
+            if role.latestTick != self.tickCount :
+                role.latestTick = self.tickCount
+
+                actor = role.getActor()
+                if actor :
+                    if actor.isDead() :
+                        self.remove(actor)
+                    else :
+                        actor.tick();
+        
+        
     def singleTick(self, actor) :
         role = actor.role
         if not isinstance(role, GridRole ):
