@@ -137,11 +137,6 @@ class Movable(GridRole) :
     def onArrived( self, dx, dy ) :
         # Do nothing.
         pass
-           
-    # Called when a GridRole is halfway through encrouching into my teritory.
-    def onInvading( self, invader ) :
-        # Do nothing    
-        pass
 
     # Called when a GridRole has been invaded.
     # At this stage, the invader still has its own square, and self has its square.

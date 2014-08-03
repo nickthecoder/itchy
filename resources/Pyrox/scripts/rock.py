@@ -23,10 +23,6 @@ class Rock(Faller) :
         
         self.addTag( "explosionTrigger" )
         self.addTag( "deadly" );
-          
-    def onInvading( self ) :
-        pass
-    
 
 
     # TODO Other methods include :

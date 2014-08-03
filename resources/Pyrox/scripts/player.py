@@ -16,6 +16,12 @@ from movable import Movable
 properties = ArrayList()
 properties.add( BooleanProperty( "awake" ) )
 
+# The main character in the game, i.e. the one that the user is in controll of.
+# There is usually just one Player in a Scene, but it is possible to have more, in which case,
+# Level controls which Player is awake, and which are sent to sleep.
+#
+# The views are centered on the (awake) Player, but this can be offset somewhat using Home/End/PgUp/PgDn.
+#
 class Player(Movable) :
 
     def __init__(self) :
@@ -98,23 +104,12 @@ class Player(Movable) :
         else :
             self.scrollSpeed = self.defaultScrollSpeed
             
-        if (self.isMoving() or self.square is None) :
+        if self.isMoving() or self.square is None :
             pass
-            
+
         else :
             
-            if self.inputLeft.pressed() :
-                self.attemptToMove( -1, 0 )
-            
-            elif self.inputRight.pressed() :
-                self.attemptToMove( 1, 0 )
-            
-            elif self.inputUp.pressed() :
-                self.attemptToMove( 0, 1 )
-                
-            elif self.inputDown.pressed() :
-                self.attemptToMove( 0, -1 )
-
+            self.movements()
 
         super(Player,self).tick()
         
@@ -122,6 +117,23 @@ class Player(Movable) :
         ty = self.actor.getY() + self.scrollOffsetY
         
         Itchy.getGame().getDirector().centerOn( tx, ty )
+
+
+    def movements(self) :
+
+        if self.inputLeft.pressed() and self.attemptToMove( -1, 0 ) :
+            return
+        
+        elif self.inputRight.pressed() and self.attemptToMove( 1, 0 ) :
+            return
+            
+        elif self.inputUp.pressed() and self.attemptToMove( 0, 1 ) :
+            return
+            
+        elif self.inputDown.pressed() and self.attemptToMove( 0, -1 ) :
+            return
+            
+
     
     def sleep( self ) :
         self.event("sleep")
@@ -194,16 +206,20 @@ class Player(Movable) :
         obj = self.look( dx, dy )
         if (obj.hasTag( "soft" ) or obj.hasTag( "squash" + gridRole.getDirectionAbreviation(dx,dy) )) :
             self.move(dx, dy)
-            return
+            return True
 
         if obj.canShove(self,dx,dy,self.speed, 4) :
-            # TODO self.pushed = True
             obj.shove(self, dx, dy, self.speed)
             self.move(dx, dy)
-            return
-                    
-    def onInvading( self ) :
-        pass
+            return True
+        return False
+       
+    def move( self, dx, dy, speed=None ) :
+        super(Player,self).move(dx, dy, speed )
+        if dy == 0 :
+            self.actor.event( "move-" + ("L" if dx == -1 else "R" ) )
+        else :
+            self.actor.event( "move-" + ("U" if dy ==  1 else "D" ) )
 
     def onDeath( self ) :
     
@@ -233,9 +249,6 @@ class Player(Movable) :
             self.actor.deathEvent("hit")
             self.removeFromGrid()
 
-
-    # TODO Other methods include :
-    # onDetach, onKill, onMouseDown, onMouseUp, onMouseMove
 
     # Boiler plate code - no need to change this
     def getProperties(self):

@@ -9,6 +9,8 @@ from level import Level
 
 properties = ArrayList()
 
+# Used only for the Scene "menu", and allows the "play" Scene to be started without by pressing Enter.
+# Otherwise, it behaves just like a normal Level.
 class Menu(Level) :
 
     def onActivate(self) :

@@ -8,30 +8,54 @@ import math
 
 from java.util import ArrayList
 
-from gridRole import GridRole
 from grid import Grid
+from gridRole import GridRole
+from macroRecorder import MacroRecorder
+from macroPlayback import MacroPlayback
 
 properties = ArrayList()
 
+# Globals used to allow the user to save and restore their location. Its done using MacroRecorder
+recordedInput = ""
+replayInput = False
+
+# The SceneDirector used by all of the play levels.
+#
+# After a scene has loaded, places all GridRole objects into a Grid. Without this grid,
+# objects wouldn't be able to look around them, and react with each other.
+#
+# Keeps track of the number of collectables remaining.
+#
+# When there are more than one Player in a Scene, this controls which one is awake and
+# which are sent to sleep.
+#
+# 
 class Level(PlainSceneDirector) :
 
     def __init__(self) :
     
         self.inputToggleInfo = Input.find("toggleInfo")
         self.inputTest = Input.find("runTests")
-        
+
+        # Record and playback the player's moves using the MacroRecorder and MacroPlayback
+        self.inputSave = Input.find("save")
+        self.inputLoad = Input.find("load")
+                
         self.inputNextPlayer = Input.find("nextPlayer")
                 
         self.collectablesRemaining = 0
         self.showInfo = True
         self.player = None
+        
+        self.macroRecorder = None
+        self.macroPlayback = None
 
     def onActivate( self ) :
 
         for player in Itchy.getGame().findRoleByTag("player") :
             if self.player is None or player.awake :
                 self.player = player
-        
+
         self.droppedFramesRole = Itchy.getGame().findRoleById("droppedFrames")
 
         self.toggleInfo()
@@ -46,7 +70,17 @@ class Level(PlainSceneDirector) :
         for portcullis in Itchy.getGame().findRoleByTag("portcullis") :
             portcullis.getReady(self.player)
             
-            
+        self.macroRecorder = MacroRecorder()
+        self.macroRecorder.startRecording()
+
+        global replayInput
+        global recordedInput
+        if replayInput :
+            replayInput = False
+            self.macroRecorder.recorded = recordedInput
+            self.macroPlayback = MacroPlayback( recordedInput )
+
+        
     def onLoaded( self ) :
         
         # Load the glass stage on top of the current scene.
@@ -100,14 +134,17 @@ class Level(PlainSceneDirector) :
                 if not role.getActor().isDead() :
                     role.placeOnGrid( self.grid )
 
-
     def tick(self) :
 
         if self.player :
             self.player.playerTick()
                 
         PlainSceneDirector.tick(self)
+
+        if self.macroPlayback :
+            self.macroPlayback.tick()
         
+        self.macroRecorder.tick()
         
     def onKeyDown(self, kevent) :
     
@@ -119,6 +156,12 @@ class Level(PlainSceneDirector) :
             
         if self.inputNextPlayer.matches(kevent) :
             self.wakeNextPlayer()
+            
+        if self.inputSave.matches(kevent) :
+            self.saveGame()
+            
+        if self.inputLoad.matches(kevent) :
+            self.loadGame()
             
             
     def playerDied( self, player ) :
@@ -152,6 +195,18 @@ class Level(PlainSceneDirector) :
             self.player = player
             self.player.wake()
 
+
+    def saveGame(self) :
+        global recordedInput
+        recordedInput = self.macroRecorder.getRecording()
+        print "Recorded: ", recordedInput
+
+
+    def loadGame(self) :
+        global replayInput
+        replayInput = True
+        Itchy.getGame().startScene(Itchy.getGame().sceneName)
+        
 
     def runTests(self) :
     

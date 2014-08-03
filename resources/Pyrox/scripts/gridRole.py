@@ -220,6 +220,15 @@ class GridRole(AbstractRole) :
         self.square.alternateOccupant = self;
         self.square.ignoreOccupant = useOnLook
     
+    def unmakeAlternateOccupant( self ) :
+        if self.square.alternateOccupant != self :
+            print "Not an alternateOccupant!"
+            return
+        if self.square.occupant != None :
+            print "Not empty"
+            return
+        self.square.alternateOccupant = None
+        self.square.occupant = self
     
     # TODO Other methods include :
     # onDetach, onKill, onMouseDown, onMouseUp, onMouseMove

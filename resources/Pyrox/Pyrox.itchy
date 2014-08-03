@@ -8,7 +8,6 @@
     <ninePatch name="talk" filename="images/bubble.png" top="20" right="54" bottom="50" left="20"/>
   </ninePatches>
   <poses>
-    <pose name="alien1a" filename="images/alien1a.png"/>
     <pose name="arrow" filename="images/arrow.png" offsetX="7"/>
     <pose name="arrow2" filename="images/arrow2.png" offsetX="0" offsetY="29"/>
     <pose name="arrowCurved" filename="images/arrowCurved.png" offsetX="60" offsetY="5"/>
@@ -70,6 +69,28 @@
     <pose name="planeL" filename="images/planeL.png" offsetX="30"/>
     <pose name="planeR" filename="images/planeR.png" offsetX="90"/>
     <pose name="portcullis" filename="images/portcullis.png"/>
+    <pose name="pumpkin1" filename="images/pumpkin1.png"/>
+    <pose name="pumpkin2" filename="images/pumpkin2.png"/>
+    <pose name="pumpkin3" filename="images/pumpkin3.png"/>
+    <pose name="pumpkin4" filename="images/pumpkin4.png"/>
+    <pose name="pumpkin5" filename="images/pumpkin5.png"/>
+    <pose name="pumpkin6" filename="images/pumpkin6.png"/>
+    <pose name="pumpkin7" filename="images/pumpkin7.png"/>
+    <pose name="robotD1" filename="images/robotD1.png"/>
+    <pose name="robotD2" filename="images/robotD2.png"/>
+    <pose name="robotD3" filename="images/robotD3.png"/>
+    <pose name="robotD4" filename="images/robotD4.png"/>
+    <pose name="robotL1" filename="images/robotL1.png"/>
+    <pose name="robotL2" filename="images/robotL2.png"/>
+    <pose name="robotL3" filename="images/robotL3.png"/>
+    <pose name="robotL4" filename="images/robotL4.png"/>
+    <pose name="robotR1" filename="images/robotR1.png"/>
+    <pose name="robotR2" filename="images/robotR2.png"/>
+    <pose name="robotR3" filename="images/robotR3.png"/>
+    <pose name="robotR4" filename="images/robotR4.png"/>
+    <pose name="robotU1" filename="images/robotU1.png"/>
+    <pose name="robotU2" filename="images/robotU2.png"/>
+    <pose name="robotU3" filename="images/robotU3.png"/>
     <pose name="rock" filename="images/rock.png"/>
     <pose name="safe" filename="images/safe.png"/>
     <pose name="safeOpen" filename="images/safeOpen.png"/>
@@ -240,10 +261,24 @@
             <move ease="easeOut" ticks="10" dx="5.0" dy="0.0"/>
             <move ease="easeIn" ticks="10" dx="-5.0" dy="0.0"/>
           </sequence>
+          <sequence loops="7" sequence="true">
+            <frames pingPong="false">
+              <frame pose="robotR3" delay="4"/>
+              <frame pose="robotL3" delay="4"/>
+              <frame pose="robotD2" delay="4"/>
+            </frames>
+          </sequence>
         </parallel>
         <parallel loops="1" sequence="false">
           <scale ease="easeOutBack" target="3.0" ticks="100"/>
           <alpha ease="easeOut" target="0.0" ticks="100"/>
+          <sequence loops="10" sequence="true">
+            <frames pingPong="false">
+              <frame pose="robotR2" delay="6"/>
+              <frame pose="robotL2" delay="6"/>
+              <frame pose="robotD2" delay="6"/>
+            </frames>
+          </sequence>
         </parallel>
       </sequence>
     </animation>
@@ -258,6 +293,61 @@
         <turnto direction="0.0" ease="easeInOut" longWay="false" ticks="30"/>
         <alpha ease="easeInOut" target="255.0" ticks="30"/>
       </parallel>
+    </animation>
+    <animation name="pumpkin-pollinate">
+      <sequence finishedMessage="pollinated" loops="1" sequence="true">
+        <frames pingPong="false">
+          <frame pose="pumpkin1" delay="30"/>
+          <frame pose="pumpkin2" delay="10"/>
+          <frame pose="pumpkin3" delay="10"/>
+          <frame pose="pumpkin4" delay="10"/>
+          <frame pose="pumpkin5" delay="10"/>
+          <frame pose="pumpkin6" delay="10"/>
+          <frame pose="pumpkin7" delay="1"/>
+        </frames>
+      </sequence>
+    </animation>
+    <animation name="robot-D">
+      <sequence loops="1" sequence="true">
+        <frames pingPong="false">
+          <frame pose="robotD1" delay="3"/>
+          <frame pose="robotD2" delay="3"/>
+          <frame pose="robotD3" delay="3"/>
+          <frame pose="robotD4" delay="3"/>
+        </frames>
+      </sequence>
+    </animation>
+    <animation name="robot-L">
+      <sequence loops="1" sequence="true">
+        <frames pingPong="false">
+          <frame pose="robotL1" delay="3"/>
+          <frame pose="robotL2" delay="3"/>
+          <frame pose="robotL3" delay="3"/>
+          <frame pose="robotL4" delay="3"/>
+        </frames>
+      </sequence>
+    </animation>
+    <animation name="robot-R">
+      <sequence loops="1" sequence="true">
+        <frames pingPong="false">
+          <frame pose="robotR1" delay="3"/>
+          <frame pose="robotR2" delay="3"/>
+          <frame pose="robotR3" delay="3"/>
+          <frame pose="robotR4" delay="3"/>
+        </frames>
+      </sequence>
+    </animation>
+    <animation name="robot-U">
+      <sequence loops="1" sequence="true">
+        <frames pingPong="false">
+          <frame pose="robotU1" delay="2"/>
+          <frame pose="robotU2" delay="2"/>
+          <frame pose="robotU3" delay="2"/>
+          <frame pose="robotU2" delay="2"/>
+          <frame pose="robotU1" delay="2"/>
+          <frame pose="robotR1" delay="1"/>
+        </frames>
+      </sequence>
     </animation>
     <animation name="safe-open">
       <sequence finishedMessage="open" loops="1" sequence="true">
@@ -485,15 +575,22 @@
       <properties headingLeft="false"/>
     </costume>
     <costume name="player" defaultZOrder="100" order="10" role="player.py">
-      <pose name="default" pose="alien1a"/>
+      <pose name="default" pose="robotR1"/>
       <pose name="z" pose="z1"/>
       <pose name="z" pose="z2"/>
       <pose name="z" pose="z4"/>
       <pose name="z" pose="z3"/>
       <pose name="z" pose="z5"/>
       <pose name="z" pose="z6"/>
+      <string name="honey">Yummy, Honey</string>
+      <string name="honey">Ooo, sweet sticky goodness</string>
+      <string name="honey">Honey's nice, but I prefer jam</string>
       <animation name="exit" animation="player-exit"/>
       <animation name="hit" animation="player-hit"/>
+      <animation name="move-D" animation="robot-D"/>
+      <animation name="move-L" animation="robot-L"/>
+      <animation name="move-R" animation="robot-R"/>
+      <animation name="move-U" animation="robot-U"/>
       <animation name="sleep" animation="player-sleep"/>
       <animation name="talk-fade" animation="talk-fade"/>
       <animation name="wake" animation="player-wake"/>
@@ -501,6 +598,10 @@
     <costume name="portcullis" defaultZOrder="10" order="30" role="portcullis.py">
       <pose name="close" pose="wall"/>
       <pose name="default" pose="portcullis"/>
+    </costume>
+    <costume name="pumpkin" defaultZOrder="30" order="30" role="pumpkin.py">
+      <pose name="default" pose="pumpkin1"/>
+      <animation name="pollinate" animation="pumpkin-pollinate"/>
     </costume>
     <costume name="rock" defaultZOrder="20" order="10" role="rock.py">
       <pose name="default" pose="rock"/>
@@ -653,6 +754,7 @@
     <input name="down" keys="DOWN,PERIOD"/>
     <input name="editor" keys="ctrl+F12"/>
     <input name="left" keys="LEFT,z"/>
+    <input name="load" keys="ctrl+l"/>
     <input name="nextPlayer" keys="TAB"/>
     <input name="play" keys="RETURN,KP_ENTER,p"/>
     <input name="quit" keys="ESCAPE"/>
@@ -660,6 +762,7 @@
     <input name="restart" keys="F5"/>
     <input name="right" keys="RIGHT,x"/>
     <input name="runTests" keys="ctrl+r"/>
+    <input name="save" keys="ctrl+s"/>
     <input name="scrollDown" keys="PAGEDOWN,KP2,ctrl+DOWN"/>
     <input name="scrollLeft" keys="HOME,KP4,ctrl+LEFT"/>
     <input name="scrollReset" keys="o,KP5,ctrl+RETURN"/>

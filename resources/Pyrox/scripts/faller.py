@@ -85,9 +85,6 @@ class Faller(Movable) :
             return True
 
         return False
-        
-    def onInvading( self ) :
-        pass
     
     def onArrived( self, dx, dy ) :
         if (dy == -1) :

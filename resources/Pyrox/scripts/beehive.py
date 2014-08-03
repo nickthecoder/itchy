@@ -71,6 +71,7 @@ class Beehive(Faller) :
 
             if (invader.hasTag("player")) :
                 Itchy.getGame().getSceneDirector().collected(1)
+                invader.talk( invader.actor.costume.getString("honey", "Yum, Honey" ) )
                 self.removeFromGrid()
                 self.actor.deathEvent("collected")
             else :

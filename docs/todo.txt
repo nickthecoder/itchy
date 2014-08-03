@@ -1,8 +1,4 @@
 Bugs
-
-    Make bees deadly
-
-    is onInvading ever used?
     
 PyRox
 
@@ -12,10 +8,6 @@ PyRox
         Furniture 4,5
         Grenades 5,6
         Extra 3,4,5
-
-    Record keystrokes (autopilot can do it)
-        Need to compress dead time. save it as a number into the string.
-        Create a structure RecordInput with origInput, letter, autopilot
 
     Big extend Movable, with the extra stuff to ensure that BigHelper is called when needed.
         onDeath disconnects BigHelper, and kills all bigPaddings
@@ -50,12 +42,7 @@ PyRox
         
         Big Rock (2x2) Rolls when sitting half and half on solid/empty
             If we have a giant player too, then it could lift two rocks side by side, as long as they couldn't roll off.
-
         
-        Eggs - hatches into ??? when dropped. ??? is killed when hit, or when exploded, and counts as a collectable.
-            If randomness is used for the movement, then use a predictable random number???
-
-
         Water
             Each cube has a pressure.
             Can be the alternateOccupant
@@ -73,6 +60,15 @@ PyRox
 
     "Cavern" style levels
     
+    
+Sprite Sheet Pose
+    Allow multiple poses to be loaded from one image, and define the rectangle of each sub-image.
+
+Group Costumes on the SceneDesigner's toolbox, so that similar costumes can be displayed as a single item.
+Clicking it reveals a popup, where the actual Costume can be selected.
+Use this for Pyrox's machines, one way streets, and maybe even the walls.
+    A costume can have a "Group Leader" field, which is the name of the Costume that is displayed as the
+    main icon in the scene design toolbox.
 
 Add onSceneCreated to class diagram(s)
     Add to js and python templates

@@ -18,6 +18,11 @@ class Bee(Movable) :
         self.direction = -1
         self.initialTimer = Timer.createTimerSeconds(0.4)
 
+    def onBirth(self) :
+        super(Bee,self).onBirth()
+        self.addTag("pollinator")
+        self.addTag("deadly")
+        
     def tick( self ) :
         if self.initialTimer is None or self.initialTimer.isFinished() :
             self.initialTimer = None
@@ -46,7 +51,7 @@ class Bee(Movable) :
 
     def tryToMove( self, dx, dy ) :
         forward = self.look(dx, dy)
-        if forward.isEmpty() or forward.hasTag("player") :
+        if self.canMove( forward ) :
             self.move(dx, dy)
             if dx != 0 :
                 self.event( "left" if dx == -1 else "right" )
@@ -55,6 +60,14 @@ class Bee(Movable) :
             return True
             
         return False
+        
+    def canMove(self, forward ) :
+        if forward.hasTag("player") :
+            forward.onHit( self, 0, 0 )
+            return True
+            
+        return forward.isEmpty() or forward.hasTag("flower")
+    
 
     # TODO Other methods include :
     # onDetach, onKill, onMouseDown, onMouseUp, onMouseMove
