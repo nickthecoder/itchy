@@ -13,21 +13,24 @@ import uk.co.nickthecoder.itchy.util.ClassName;
 
 public class GameInfo implements PropertySubject<GameInfo>
 {
-    @Property(label = "Title")
+    @Property(label = "Title", sortOrder=10)
     public String title;
 
-    @Property(label = "Width")
+    @Property(label = "Width", sortOrder=20)
     public int width;
 
-    @Property(label = "Height")
+    @Property(label = "Height", sortOrder=21)
     public int height;
 
-    @Property(label = "Initial Scene")
+    @Property(label = "Initial Scene", sortOrder=30)
     public String initialScene;
 
-    @Property(label = "Class Name", baseClass = Director.class, aliases = { "className" })
+    @Property(label = "Class Name", baseClass = Director.class, aliases = { "className" }, sortOrder=40)
     public ClassName directorClassName;
 
+    @Property(label = "Author(s)", multiLine=true, sortOrder=90)
+    public String authors;
+    
     public GameInfo()
     {
         this.title = "Itchy Game";
@@ -35,6 +38,7 @@ public class GameInfo implements PropertySubject<GameInfo>
         this.height = 600;
         this.directorClassName = new ClassName(Director.class, PlainDirector.class.getName());
         this.initialScene = "";
+        this.authors = "Nick\nThe\nCoder\n";
     }
 
     @Override

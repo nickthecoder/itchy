@@ -7,7 +7,7 @@ from java.util import ArrayList
 from uk.co.nickthecoder.itchy.property import StringProperty
 
 properties = ArrayList()
-properties.add( StringProperty( "hint" ) )
+properties.add( StringProperty( "hint" ).multiLine() )
 
 class Hint(AbstractRole) :
 

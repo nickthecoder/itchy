@@ -139,6 +139,10 @@ public abstract class AbstractProperty<S, T> implements Comparable<AbstractPrope
             result.addAliases(annotation.aliases());
         }
 
+        if (result instanceof StringProperty) {
+            StringProperty<?> property = (StringProperty<?>) result;
+            property.multiLine(annotation.multiLine());
+        }
         if (result instanceof RGBAProperty) {
             RGBAProperty<?> property = (RGBAProperty<?>) result;
             property.allowNull(annotation.allowNull());

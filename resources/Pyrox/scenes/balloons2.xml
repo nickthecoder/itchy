@@ -145,6 +145,16 @@
     <actor costume="coin" x="60" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
     <actor costume="coin" x="60" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
     <actor costume="coin" x="360" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
-    <actor costume="player" x="780" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="100"/>
+    <actor costume="player" x="780" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="100">
+      <property name="awake" value="true"/>
+    </actor>
+  </layer>
+  <layer name="glass">
+    <actor costume="sledge" x="984" y="67" direction="0.0" heading="0.0" startEvent="default" zOrder="90">
+      <property name="text" value="Look at all those coins.\nI'm going to be rich!&#xA;Coins, coins,\nI want more coins.&#xA;This looks easy, but it's harder than I thought.&#xA;Don't sit around thinking.\nDO something!&#xA;"/>
+      <property name="initialDelay" value="0.5"/>
+      <property name="loop" value="false"/>
+      <property name="period" value="15.0"/>
+    </actor>
   </layer>
 </scene>

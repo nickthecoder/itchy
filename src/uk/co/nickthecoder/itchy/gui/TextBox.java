@@ -4,7 +4,7 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.gui;
 
-public class TextBox extends EntryBox<TextBox>
+public class TextBox extends EntryBox<TextBox> implements TextWidget
 {
     public TextBox( String text )
     {

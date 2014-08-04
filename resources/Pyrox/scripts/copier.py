@@ -43,7 +43,7 @@ class Copier(GridRole) :
             self.copies -= 1
             if self.copies < 0 :
                 self.waitTillEmpty = True
-                self.talk("Paper Tray Empty")
+                self.talk("_empty")
             else :
                 self.copying = north.actor.costume
                 self.event("scan", "copied")
@@ -59,8 +59,8 @@ class Copier(GridRole) :
                 actor.role.placeOnGrid( self.square.grid )
                 actor.role.move(self.dx, self.dy, self.speed)
             else :
-                self.talk("Paper Jam")
-                
+                self.talk("_jam")
+
             self.copying = False
             self.waitTillEmpty = True
 

@@ -59,7 +59,6 @@ class Player(Movable) :
     def onAttach( self ) :    
         super(Player, self).onAttach()
         self.speed = 6
-        Itchy.getGame().getDirector().gridView.centerOn(self.actor)
         self.addTag("hittable")
         self.addTag("player")
         self.addTag("digger") # Allows me to dig hard soil. See class Hard

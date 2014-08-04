@@ -31,6 +31,8 @@ public @interface Property {
 
     boolean allowNull() default false;
 
+    boolean multiLine() default false; // Only used for StringProperty
+    
     boolean alpha() default true; // Only used for RGBA properties
 
     Class<?> baseClass() default Role.class; // Only used for ClassName properties

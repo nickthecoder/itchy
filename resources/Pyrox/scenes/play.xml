@@ -541,7 +541,7 @@
       <property name="exitY" value="0"/>
       <property name="scene" value="balloons5"/>
     </actor>
-    <actor costume="warp" x="0" y="-60" direction="0.0" heading="0.0" startEvent="default" zOrder="40">
+    <actor costume="warp" x="0" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="40">
       <property name="exitX" value="1"/>
       <property name="exitY" value="0"/>
       <property name="scene" value="intro"/>
@@ -696,230 +696,231 @@
       <property name="exitY" value="0"/>
       <property name="scene" value="vehicles6"/>
     </actor>
-    <actor costume="arrowKeys" x="0" y="16" direction="0.0" heading="0.0" startEvent="default" zOrder="50"/>
-    <actor costume="player" id="player" x="0" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="100"/>
-    <text text="Intro" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="0" y="-60" direction="0.0" heading="0.0" startEvent="default" zOrder="192">
+    <actor costume="player" id="player" x="0" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="100">
+      <property name="awake" value="true"/>
+    </actor>
+    <text text="Intro" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="0" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="192">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
     <text text="Extras" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="0" y="-300" direction="0.0" heading="0.0" startEvent="default" zOrder="226">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
     <text text="Balloons" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="-240" y="-120" direction="0.0" heading="0.0" startEvent="default" zOrder="233">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
     <text text="Grenades" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="240" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="234">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
     <text text="Rocks" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="240" y="-120" direction="0.0" heading="0.0" startEvent="default" zOrder="237">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
     <text text="Vehicles" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="-240" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="260">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
     <text text="Furniture" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="0" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="261">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
     <text text="2" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="480" y="-180" direction="0.0" heading="0.0" startEvent="default" zOrder="464">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
     <text text="3" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="720" y="-240" direction="0.0" heading="0.0" startEvent="default" zOrder="465">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
     <text text="4" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="960" y="-300" direction="0.0" heading="0.0" startEvent="default" zOrder="466">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
     <text text="5" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="1200" y="-360" direction="0.0" heading="0.0" startEvent="default" zOrder="467">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
     <text text="6" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="1440" y="-420" direction="0.0" heading="0.0" startEvent="default" zOrder="468">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
     <text text="7" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="1560" y="-180" direction="0.0" heading="0.0" startEvent="default" zOrder="469">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
     <text text="2" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="480" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="470">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
     <text text="3" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="720" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="471">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
     <text text="4" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="960" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="472">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
     <text text="5" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="1200" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="473">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
     <text text="6" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="1440" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="474">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
     <text text="2" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="-480" y="-180" direction="0.0" heading="0.0" startEvent="default" zOrder="535">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
     <text text="3" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="-720" y="-240" direction="0.0" heading="0.0" startEvent="default" zOrder="536">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
     <text text="4" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="-960" y="-300" direction="0.0" heading="0.0" startEvent="default" zOrder="537">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
     <text text="5" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="-1200" y="-360" direction="0.0" heading="0.0" startEvent="default" zOrder="538">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
     <text text="2" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="0" y="540" direction="0.0" heading="0.0" startEvent="default" zOrder="570">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
     <text text="3" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="-240" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="572">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
     <text text="4" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="240" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="600">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
     <text text="5" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="0" y="780" direction="0.0" heading="0.0" startEvent="default" zOrder="620">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
     <text text="2" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="-480" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="668">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
     <text text="3" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="-720" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="669">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
     <text text="4" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="-960" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="670">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
     <text text="8" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="1620" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="687">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
     <text text="5" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="-1200" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="724">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
     <text text="6" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="-1440" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="726">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
     <actor costume="warp" x="0" y="-780" direction="0.0" heading="0.0" startEvent="default" zOrder="727">
@@ -945,30 +946,49 @@
     <text text="2" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="0" y="-540" direction="0.0" heading="0.0" startEvent="default" zOrder="731">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
     <text text="5" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="0" y="-780" direction="0.0" heading="0.0" startEvent="default" zOrder="732">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
     <text text="4" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="240" y="-600" direction="0.0" heading="0.0" startEvent="default" zOrder="733">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
     <text text="3" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="-240" y="-600" direction="0.0" heading="0.0" startEvent="default" zOrder="734">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="2"/>
-        <property name="color" value="#000000ff"/>
         <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
       </makeup>
     </text>
+    <actor costume="warp" x="0" y="-60" direction="0.0" heading="0.0" startEvent="default" zOrder="736">
+      <property name="exitX" value="1"/>
+      <property name="exitY" value="0"/>
+      <property name="scene" value="credits"/>
+    </actor>
+    <text text="Credits" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="0" y="-60" direction="0.0" heading="0.0" startEvent="default" zOrder="737">
+      <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
+        <property name="dx" value="2"/>
+        <property name="dy" value="-1"/>
+        <property name="color" value="#000000ff"/>
+      </makeup>
+    </text>
+  </layer>
+  <layer name="test">
+    <actor costume="sledge" x="0" y="0" direction="0.0" heading="0.0" startEvent="default" zOrder="90">
+      <property name="text" value="Use the arrow keys\nto enter one of the gates.&#xA;What are you waiting for?&#xA;Oh come on,\npick a gate.&#xA;Are you still there?&#xA;"/>
+      <property name="loop" value="true"/>
+      <property name="period" value="30"/>
+    </actor>
   </layer>
 </scene>

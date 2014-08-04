@@ -13,7 +13,15 @@ import uk.co.nickthecoder.itchy.SimpleOffsetSurface;
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
 import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.jame.Surface;
+import uk.co.nickthecoder.jame.Surface.BlendMode;
 
+/**
+ * Takes a pose as a texture, and draws it on top of the source image, such that the source image's alpha remains unchanged,
+ * but the RGB is replaced by the texutre's.
+ * 
+ * Note, if the pose texture has an alpha channel, then the source image's RGB will show through wherever the texture is
+ * transparent.
+ */
 public class Textured implements Makeup
 {
     private static final List<AbstractProperty<Makeup, ?>> properties =
@@ -61,8 +69,10 @@ public class Textured implements Makeup
 
     public void setPoseName( String poseName )
     {
+        this.seq++;
         this.poseName = poseName;
         this.pose = Itchy.getGame().resources.getPose(poseName);
+        System.out.println("Loaded pose " + this.poseName + " = " + this.pose);
     }
 
     @Override
@@ -78,7 +88,9 @@ public class Textured implements Makeup
             return src;
         }
 
+        boolean rebuiltTexture = false;
         Surface texture = this.pose.getSurface();
+
         int textureWidth = texture.getWidth();
         int textureHeight = texture.getHeight();
 
@@ -93,11 +105,19 @@ public class Textured implements Makeup
             int x = this.x > 0 ? (this.x % textureWidth) - textureWidth : 0;
             while (x < right) {
 
-                texture.blit(tiledSurface, x, y);
+                if (texture.hasAlphaChannel()) {
+                    texture.blit(tiledSurface, x, y, BlendMode.COMPOSITE);
+                } else {
+                    texture.blit(tiledSurface, x, y);
+                }
 
                 x += textureWidth;
             }
             y += textureHeight;
+        }
+
+        if (rebuiltTexture) {
+            texture.free();
         }
 
         Surface result = src.getSurface().copy();

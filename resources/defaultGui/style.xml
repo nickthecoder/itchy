@@ -63,6 +63,13 @@
     <rule criteria="textBox.focus label" color="#eac328"/>
     <rule criteria="textBox.error" background="text-error" />
     <rule criteria="textBox.error label"  color="#000" />
+
+    <rule criteria="textArea" background="text" padding="10" />
+    <rule criteria="textArea.focus" background="text-focus"/>
+    <rule criteria="textArea.focus label" color="#eac328"/>
+    <rule criteria="textArea.error" background="text-error" />
+    <rule criteria="textArea.error label"  color="#000" />
+
     <rule criteria="comboBox.error textBox" background="text-error" />
     <rule criteria="comboBox.error textBox label" color="#000" />
     <rule criteria="caret" background="caret" marginLeft="-6" paddingTop="-10" paddingBottom="-10" paddingLeft="12" />

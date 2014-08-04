@@ -108,6 +108,7 @@ public class XMLWriter
             value = StringUtils.searchAndReplace(value, "&", "&amp;");
             value = StringUtils.searchAndReplace(value, "\"", "&quot;");
             value = StringUtils.searchAndReplace(value, "<", "&lt;");
+            value = StringUtils.searchAndReplace(value, "\n", "&#xA;");
         }
 
         if (this.completedOpenTag) {

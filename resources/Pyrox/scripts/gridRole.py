@@ -36,7 +36,10 @@ class GridRole(AbstractRole) :
         if self.talkActor :
             self.talkActor.kill()
 
-        message = message.replace("\\n","\n")
+        if message.startswith( "_"  ) :
+            message = self.actor.costume.getString( message[1:], message[1:] )
+        else :
+            message = message.replace("\\n","\n")
 
         self.talkActor = Talk(self) \
             .bubble("talk").font("Vera", 14).margin(15, 10, 45, 10).offset(0,60).text(message) \
@@ -229,9 +232,7 @@ class GridRole(AbstractRole) :
             return
         self.square.alternateOccupant = None
         self.square.occupant = self
-    
-    # TODO Other methods include :
-    # onDetach, onKill, onMouseDown, onMouseUp, onMouseMove
+
 
     # Boiler plate code - no need to change this
     def getProperties(self):

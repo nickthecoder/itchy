@@ -80,6 +80,17 @@ public class Container extends Component
         child.reStyle();
     }
 
+    public void addChild( int index, Component child )
+    {
+        if (child.parent != null) {
+            throw new RuntimeException("Component is already within another Container");
+        }
+        this.children.add(index, child);
+        child.parent = this;
+        this.forceLayout();
+        child.reStyle();
+    }
+
     public void removeChild( Component child )
     {
         assert (child.parent == this);

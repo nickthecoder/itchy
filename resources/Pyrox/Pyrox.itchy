@@ -1,5 +1,5 @@
 <resources>
-  <game directorClassName="director.py" height="600" initialScene="menu" title="Rox" width="800"/>
+  <game title="Rox" width="800" height="600" initialScene="menu" directorClassName="director.py" authors="Nick Robinson. nickthecoder@gmail.com&#xA;"/>
   <fonts>
     <font name="Boycott" filename="fonts/Boycott/Boycott.ttf"/>
     <font name="Vera" filename="fonts/Vera/Vera.ttf"/>
@@ -95,6 +95,7 @@
     <pose name="safe" filename="images/safe.png"/>
     <pose name="safeOpen" filename="images/safeOpen.png"/>
     <pose name="scroll" filename="images/scroll.png"/>
+    <pose name="sledge" filename="images/sledge.png"/>
     <pose name="soil" filename="images/soil.png"/>
     <pose name="soil2" filename="images/soil2.png"/>
     <pose name="squashE" filename="images/squashE.png"/>
@@ -437,6 +438,12 @@
     <costume name="copier" defaultZOrder="90" order="40" role="copier.py">
       <pose name="default" pose="copier"/>
       <pose name="light" pose="copierLight"/>
+      <string name="empty">The paper tray is empty</string>
+      <string name="empty">No more copies today</string>
+      <string name="empty">The machine is empty</string>
+      <string name="jam">Hey! Paper jam!</string>
+      <string name="jam">The exit chute is blocked</string>
+      <string name="jam">Get that thing out of the way</string>
       <animation name="scan" animation="copier-scan"/>
       <animation name="talk-fade" animation="talk-fade"/>
     </costume>
@@ -598,6 +605,7 @@
     <costume name="portcullis" defaultZOrder="10" order="30" role="portcullis.py">
       <pose name="close" pose="wall"/>
       <pose name="default" pose="portcullis"/>
+      <string name="requires">You need to complete these levels :</string>
     </costume>
     <costume name="pumpkin" defaultZOrder="30" order="30" role="pumpkin.py">
       <pose name="default" pose="pumpkin1"/>
@@ -613,6 +621,9 @@
     </costume>
     <costume name="scroll" defaultZOrder="50" order="90">
       <pose name="default" pose="scroll"/>
+    </costume>
+    <costume name="sledge" defaultZOrder="90" order="40" role="sledger.py">
+      <pose name="default" pose="sledge"/>
     </costume>
     <costume name="soil" defaultZOrder="10" order="10" role="soft.py">
       <pose name="default" pose="soil"/>
@@ -716,6 +727,7 @@
     <scene name="balloons4"/>
     <scene name="balloons5"/>
     <scene name="bug-00001"/>
+    <scene name="credits"/>
     <scene name="extras"/>
     <scene name="extras2"/>
     <scene name="furniture"/>

@@ -90,11 +90,7 @@ public class EntryBox<E extends EntryBox<?>> extends ClickableContainer implemen
     {
         this.boxWidth = value;
     }
-
-    public void onClick()
-    {
-    }
-
+    
     @Override
     public void onClick( MouseButtonEvent ke )
     {

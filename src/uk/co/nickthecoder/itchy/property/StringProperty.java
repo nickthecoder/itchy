@@ -6,10 +6,14 @@ package uk.co.nickthecoder.itchy.property;
 
 import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
+import uk.co.nickthecoder.itchy.gui.TextArea;
 import uk.co.nickthecoder.itchy.gui.TextBox;
+import uk.co.nickthecoder.itchy.gui.TextWidget;
 
 public class StringProperty<S> extends AbstractProperty<S, String>
 {
+    private boolean multiLine = false;
+    
     public StringProperty( String key )
     {
         super(key);
@@ -21,42 +25,76 @@ public class StringProperty<S> extends AbstractProperty<S, String>
         return "";
     }
 
+    /**
+     * A fluent way to set the multiLine attribute to true
+     * @return
+     */
+    public StringProperty<S> multiLine()
+    {
+        this.multiLine = true;
+        return this;
+    }
+    
+    /**
+     * A fluent way to set the multiLine attribute
+     * @return
+     */
+    public StringProperty<S> multiLine(boolean value)
+    {
+        this.multiLine = value;
+        return this;
+    }
+    
     @Override
     public Component createComponent( final S subject, boolean autoUpdate )
     {
-        final TextBox box = new TextBox(this.getSafeValue(subject));
+        if (this.multiLine) {
+        
+            TextArea textArea = new TextArea(this.getSafeValue(subject));
+            this.addChangeListener(textArea, subject, autoUpdate);
+            return textArea;
+            
+        } else {
+            
+            TextBox box = new TextBox(this.getSafeValue(subject));
+            this.addChangeListener(box, subject, autoUpdate);
+            return box;
+        }
+    }
+
+    private void addChangeListener( final TextWidget widget, final S subject, boolean autoUpdate )
+    {
         if (autoUpdate) {
-            box.addChangeListener(new ComponentChangeListener() {
+            widget.addChangeListener(new ComponentChangeListener() {
                 @Override
                 public void changed()
                 {
                     try {
-                        StringProperty.this.update(subject, box);
+                        StringProperty.this.update(subject, (Component) widget);
                     } catch (Exception e) {
                         // Do nothing
                     }
                 }
             });
         }
-        return box;
     }
 
     @Override
     public void addChangeListener( Component component, ComponentChangeListener listener )
     {
-        TextBox textBox = (TextBox) component;
-        textBox.addChangeListener(listener);
+        TextWidget textWidget = (TextWidget) component;
+        textWidget.addChangeListener(listener);
     }
 
     @Override
     public void update( S subject, Component component ) throws Exception
     {
-        TextBox textBox = (TextBox) component;
+        TextWidget textWidget = (TextWidget) component;
         try {
-            this.setValue(subject, textBox.getText());
-            textBox.removeStyle("error");
+            this.setValue(subject, textWidget.getText());
+            textWidget.removeStyle("error");
         } catch (Exception e) {
-            textBox.addStyle("error");
+            textWidget.addStyle("error");
             throw e;
         }
     }

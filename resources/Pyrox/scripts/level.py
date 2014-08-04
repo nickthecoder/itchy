@@ -56,6 +56,12 @@ class Level(PlainSceneDirector) :
             if self.player is None or player.awake :
                 self.player = player
 
+        if self.player :
+            director = Itchy.getGame().director
+            director.gridView.centerOn(self.player.actor)
+            director.testView.centerOn(self.player.actor)
+            director.plainView.centerOn(self.player.actor)
+
         self.droppedFramesRole = Itchy.getGame().findRoleById("droppedFrames")
 
         self.toggleInfo()

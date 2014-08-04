@@ -44,11 +44,11 @@ class Portcullis(GridRole) :
                 return False
 
         return True
-        
+
     def canShove(self,shover, dx, dy, speed, force ) :
         if shover.hasTag("player") :
             req = self.requires if self.text == "" else self.text
-            shover.talk( "Requires :\n" + req )
+            shover.talk( self.actor.costume.getString("requires") + "\n" + req )
     
     
     # TODO Other methods include :

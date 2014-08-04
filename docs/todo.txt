@@ -1,6 +1,11 @@
+Multi-line text on Hint
+
+
 Bugs
     
 PyRox
+
+    Add sledging to existing scenes    
 
     Create more levels
         Balloon 6
@@ -59,7 +64,11 @@ PyRox
         https://www.youtube.com/watch?v=4tnB9tR3ykM
 
     "Cavern" style levels
+
+
     
+Lazy loading of some poses (If each contributor has their own picture, don't want to load them all, unless
+the player visits their page).
     
 Sprite Sheet Pose
     Allow multiple poses to be loaded from one image, and define the rectangle of each sub-image.

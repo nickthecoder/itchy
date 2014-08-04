@@ -102,7 +102,7 @@
     <actor costume="wallSE" x="600" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
     <actor costume="wallSW" x="480" y="-180" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
     <actor costume="wallSE" x="600" y="-180" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="hint" x="120" y="660" direction="0.0" heading="0.0" startEvent="default" zOrder="10">
+    <actor costume="hint" x="240" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="10">
       <property name="hint" value="You can push lots of\nballoons at the same time"/>
     </actor>
     <actor costume="hint" x="240" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="10">
@@ -187,6 +187,16 @@
     <actor costume="coin" x="60" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
     <actor costume="coin" x="120" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
     <actor costume="coin" x="60" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
-    <actor costume="player" x="60" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="100"/>
+    <actor costume="player" x="60" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="100">
+      <property name="awake" value="true"/>
+    </actor>
+  </layer>
+  <layer name="glass">
+    <actor costume="sledge" x="-75" y="656" direction="0.0" heading="0.0" startEvent="default" zOrder="90">
+      <property name="text" value="Oh look,\npretty balloons.&#xA;"/>
+      <property name="initialDelay" value="0.5"/>
+      <property name="loop" value="false"/>
+      <property name="period" value="30.0"/>
+    </actor>
   </layer>
 </scene>
