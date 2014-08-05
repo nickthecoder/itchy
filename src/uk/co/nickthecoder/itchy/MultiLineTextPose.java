@@ -29,6 +29,11 @@ public class MultiLineTextPose extends AbstractTextPose
         super(font, fontSize, color);
     }
 
+    public MultiLineTextPose( TextStyle textStyle )
+    {
+        super( textStyle );
+    }
+
     @Override
     protected void changedImage()
     {

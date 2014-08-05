@@ -1,8 +1,6 @@
 from uk.co.nickthecoder.itchy import CostumeProperties
 from uk.co.nickthecoder.itchy.util import ClassName
 
-from java.util import ArrayList
-
 # TODO You'll need to import one or more of these...
 # from uk.co.nickthecoder.itchy.property import StringProperty
 # from uk.co.nickthecoder.itchy.property import IntegerProperty
@@ -10,15 +8,17 @@ from java.util import ArrayList
 # from uk.co.nickthecoder.itchy.property import DoubleProperty
 # from uk.co.nickthecoder.itchy.property import RGBAProperty
 
+from java.util import ArrayList
+
 properties = ArrayList()
-# TODO declare properties here. Note that you must also initialise them in __init__
-# properties.add( StringProperty( "My String", "myString" ) )
-# properties.add( IntegerProperty( "My Integer", "myInteger" ) )
-# properties.add( DoubleProperty( "My Double", "myDouble" ) )
-# properties.add( BooleanProperty( "My Boolean", "myBoolean" ) )
-# properties.add( RGBAProperty( "My Colour", "myColor", false, false ) )
-# properties.add( RGBAProperty( "My Transparent Colour", "myOtherColor", false, true ) )
-        
+# TODO declare poroperties here. Note that you must also initialise them in __init__
+# properties.add( StringProperty( "myString" ) )
+# properties.add( IntegerProperty( "myInteger" ) )
+# properties.add( DoubleProperty( "myDouble" ) )
+# properties.add( BooleanProperty( "myBoolean" ) )
+# properties.add( RGBAProperty( "myColor" ).label( "My Colour" ) )
+# properties.add( RGBAProperty( "myOtherColor" ).allowNull().includeAlpha() )
+  
 class ${Name}(CostumeProperties) :
 
     def __init__(self) :
@@ -26,6 +26,8 @@ class ${Name}(CostumeProperties) :
         # self.myString = "Default Value"
         # self.myInteger = 0
         pass
+
+
 
     # Boiler plate code - no need to change this
     def getProperties(self):

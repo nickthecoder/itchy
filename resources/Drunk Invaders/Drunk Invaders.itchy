@@ -1,5 +1,5 @@
 <resources>
-  <game directorClassName="uk.co.nickthecoder.drunkinvaders.DrunkInvaders" height="480" initialScene="menu" title="Drunk Invaders" width="640"/>
+  <game title="Drunk Invaders" width="640" height="480" initialScene="menu" directorClassName="uk.co.nickthecoder.drunkinvaders.DrunkInvaders" authors="Nick&#xA;The&#xA;Coder&#xA;"/>
   <fonts>
     <font name="blackCasper" filename="fonts/BlackCasper/BlackCasper.ttf"/>
     <font name="boycott" filename="fonts/Boycott/Boycott.ttf"/>
@@ -176,80 +176,80 @@
     </animation>
     <animation name="toHeaven">
       <parallel loops="1" sequence="false">
-        <move ease="linear" ticks="120" dx="0.0" dy="60.0"/>
-        <alpha ease="linear" target="0.0" ticks="120"/>
+        <move ease="easeOutBack" ticks="400" dx="0.0" dy="60.0"/>
+        <alpha ease="easeInOut" target="0.0" ticks="400"/>
       </parallel>
     </animation>
   </animations>
   <costumes>
-    <costume name="alien" defaultZOrder="0">
+    <costume name="alien" defaultZOrder="0" order="0">
       <pose name="pixel" pose="pixel"/>
-      <string name="yell">I iz Ded</string>
-      <string name="yell">Shit!</string>
-      <string name="yell">Ow!</string>
-      <string name="yell">Ouchy!</string>
-      <string name="yell">You git</string>
-      <string name="yell">U Kill Me</string>
-      <string name="yell">Eeek</string>
-      <string name="yell">I'll be back</string>
-      <string name="yell">OMG</string>
+      <string name="death">I iz Ded</string>
+      <string name="death">Shit!</string>
+      <string name="death">Ouchy!</string>
+      <string name="death">Ow!</string>
+      <string name="death">You git</string>
+      <string name="death">U Kill Me</string>
+      <string name="death">Eeek</string>
+      <string name="death">I'll be back</string>
+      <string name="death">OMG</string>
+      <string name="yell">speechBubble</string>
       <sound name="shot" sound="shatter" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="PLAY_BOTH" priority="1"/>
-      <font name="speech" font="vera"/>
-      <font name="yell" font="vera"/>
+      <font name="yell" font="vera" marginBottom="24" color="#000037ff" fontSize="14" marginLeft="12" marginRight="12" marginTop="12"/>
       <animation name="birth" animation="fadeIn"/>
       <animation name="death" animation="deathSpiral"/>
       <animation name="dropped" animation="grow"/>
       <animation name="yell" animation="alienYell"/>
     </costume>
-    <costume name="alien1" defaultZOrder="0" extends="alien" role="uk.co.nickthecoder.drunkinvaders.Alien">
+    <costume name="alien1" defaultZOrder="0" order="0" extends="alien" role="uk.co.nickthecoder.drunkinvaders.Alien">
       <pose name="default" pose="alien1a"/>
       <pose name="tick" pose="alien1a"/>
       <pose name="tock" pose="alien1b"/>
       <sound name="death" sound="ahh1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
     </costume>
-    <costume name="alien2" defaultZOrder="0" extends="alien" role="uk.co.nickthecoder.drunkinvaders.Alien">
+    <costume name="alien2" defaultZOrder="0" order="0" extends="alien" role="uk.co.nickthecoder.drunkinvaders.Alien">
       <pose name="default" pose="alien2a"/>
       <pose name="tick" pose="alien2a"/>
       <pose name="tock" pose="alien2b"/>
       <sound name="death" sound="ahh2" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="STOP_FIRST" priority="1"/>
     </costume>
-    <costume name="alien3" defaultZOrder="0" extends="alien" role="uk.co.nickthecoder.drunkinvaders.Alien">
+    <costume name="alien3" defaultZOrder="0" order="0" extends="alien" role="uk.co.nickthecoder.drunkinvaders.Alien">
       <pose name="default" pose="alien3a"/>
       <pose name="tick" pose="alien3a"/>
       <pose name="tock" pose="alien3b"/>
       <sound name="death" sound="ahh3" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
     </costume>
-    <costume name="bomb" defaultZOrder="0">
+    <costume name="bomb" defaultZOrder="0" order="0">
       <pose name="default" pose="bomb1"/>
       <animation name="default" animation="bomb"/>
     </costume>
-    <costume name="bullet" defaultZOrder="0" role="uk.co.nickthecoder.drunkinvaders.Bullet">
+    <costume name="bullet" defaultZOrder="0" order="0" role="uk.co.nickthecoder.drunkinvaders.Bullet">
       <pose name="default" pose="bullet"/>
       <sound name="shot" sound="ricochet" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
     </costume>
-    <costume name="button" defaultZOrder="0">
+    <costume name="button" defaultZOrder="0" order="0">
       <string name="default">blackCasper</string>
       <sound name="down" sound="explode" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
       <sound name="hoverOver" sound="pop" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
-      <font name="default" font="blackCasper"/>
+      <font name="default" font="blackCasper" marginBottom="0" color="#ffffffff" fontSize="14" marginLeft="0" marginRight="0" marginTop="0"/>
       <animation name="down" animation="buttonDown"/>
       <animation name="hoverOut" animation="buttonHoverOut"/>
       <animation name="hoverOver" animation="buttonHoverOver"/>
       <animation name="up" animation="buttonUp"/>
     </costume>
-    <costume name="earth" defaultZOrder="0">
+    <costume name="earth" defaultZOrder="0" order="0">
       <pose name="default" pose="earth"/>
     </costume>
-    <costume name="earth1" defaultZOrder="0">
+    <costume name="earth1" defaultZOrder="0" order="0">
       <pose name="default" pose="earth1"/>
     </costume>
-    <costume name="earth3" defaultZOrder="0">
+    <costume name="earth3" defaultZOrder="0" order="0">
       <pose name="default" pose="earth3"/>
     </costume>
-    <costume name="factory" defaultZOrder="0" role="uk.co.nickthecoder.drunkinvaders.AlienFactory">
+    <costume name="factory" defaultZOrder="0" order="0" role="uk.co.nickthecoder.drunkinvaders.AlienFactory">
       <pose name="default" pose="factory"/>
     </costume>
-    <costume name="level" defaultZOrder="0" role="uk.co.nickthecoder.drunkinvaders.PickLevel">
+    <costume name="level" defaultZOrder="0" order="0" role="uk.co.nickthecoder.drunkinvaders.PickLevel">
       <pose name="completed" pose="level-completed"/>
       <pose name="default" pose="level"/>
       <sound name="down" sound="explode" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
@@ -259,31 +259,31 @@
       <animation name="hoverOver" animation="buttonHoverOver"/>
       <animation name="up" animation="buttonUp"/>
     </costume>
-    <costume name="moon" defaultZOrder="0">
+    <costume name="moon" defaultZOrder="0" order="0">
       <pose name="default" pose="moon"/>
     </costume>
-    <costume name="pacman1" defaultZOrder="0" role="uk.co.nickthecoder.drunkinvaders.Pacman">
+    <costume name="pacman1" defaultZOrder="0" order="0" role="uk.co.nickthecoder.drunkinvaders.Pacman">
       <pose name="default" pose="pacman1"/>
       <animation name="default" animation="pacman"/>
     </costume>
-    <costume name="paused" defaultZOrder="0">
+    <costume name="paused" defaultZOrder="0" order="0">
       <pose name="default" pose="paused"/>
       <animation name="pause" animation="fadeIn"/>
       <animation name="unpause" animation="fadeOut"/>
     </costume>
-    <costume name="saucer" defaultZOrder="0" extends="alien" role="uk.co.nickthecoder.drunkinvaders.Mothership">
+    <costume name="saucer" defaultZOrder="0" order="0" extends="alien" role="uk.co.nickthecoder.drunkinvaders.Mothership">
       <pose name="default" pose="saucer"/>
       <pose name="pixel" pose="redPixel"/>
       <sound name="death" sound="ahh4" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
       <sound name="giveBirth" sound="pop" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
     </costume>
-    <costume name="shieldFactory" defaultZOrder="0" role="uk.co.nickthecoder.drunkinvaders.ShieldFactory">
+    <costume name="shieldFactory" defaultZOrder="0" order="0" role="uk.co.nickthecoder.drunkinvaders.ShieldFactory">
       <pose name="default" pose="shieldFactory"/>
       <pose name="full" pose="shield"/>
       <pose name="left" pose="shield-l"/>
       <pose name="right" pose="shield-r"/>
     </costume>
-    <costume name="ship" defaultZOrder="0" role="uk.co.nickthecoder.drunkinvaders.Ship">
+    <costume name="ship" defaultZOrder="0" order="0" role="uk.co.nickthecoder.drunkinvaders.Ship">
       <pose name="charged" pose="ship"/>
       <pose name="default" pose="ship"/>
       <pose name="deshield" pose="ship"/>
@@ -300,14 +300,14 @@
       <string name="bullet">bullet</string>
       <string name="death">The earth is doomed</string>
       <string name="death">The aliens have won!</string>
+      <string name="shout">speechBubble2</string>
       <sound name="death" sound="explode" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
       <sound name="deflect" sound="ricochet" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
       <sound name="fire" sound="fire" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
-      <font name="speech" font="vera"/>
-      <font name="death" font="veraBold"/>
-      <animation name="yell" animation="toHeaven"/>
+      <font name="shout" font="vera" marginBottom="26" color="#003700ff" fontSize="18" marginLeft="14" marginRight="14" marginTop="12"/>
+      <animation name="shout" animation="toHeaven"/>
     </costume>
-    <costume name="ship-won" defaultZOrder="0" extends="ship" role="uk.co.nickthecoder.drunkinvaders.Ship">
+    <costume name="ship-won" defaultZOrder="0" order="0" extends="ship" role="uk.co.nickthecoder.drunkinvaders.Ship">
       <pose name="default" pose="ship2"/>
       <string name="death">Are you kidding me?</string>
       <string name="death">Failed at the last hurdle!</string>

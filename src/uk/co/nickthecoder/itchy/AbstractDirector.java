@@ -34,8 +34,6 @@ public class AbstractDirector implements Director
     @Override
     public void onStarted()
     {
-        System.out.println("Creating default stages and views");
-
         Rect screenRect = new Rect(0, 0, this.game.getWidth(), this.game.getHeight());
 
         this.mainStage = new ZOrderStage("main");

@@ -92,6 +92,16 @@ public class NinePatch extends ImageRenderable
         this.backgroundColor = surface.getPixelRGBA(midX, midY);
     }
 
+    public int getMinimumWidth()
+    {
+        return this.marginLeft + this.marginRight;
+    }
+    
+    public int getMinimumHeight()
+    {
+        return this.marginTop + this.marginBottom;
+    }
+    
     public int getMarginTop()
     {
         return this.marginTop;

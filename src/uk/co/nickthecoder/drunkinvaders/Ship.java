@@ -13,7 +13,6 @@ import uk.co.nickthecoder.itchy.role.Explosion;
 import uk.co.nickthecoder.itchy.role.OnionSkin;
 import uk.co.nickthecoder.itchy.role.Talk;
 import uk.co.nickthecoder.itchy.util.Tag;
-import uk.co.nickthecoder.jame.RGBA;
 
 @Tag(names = { "killable" })
 public class Ship extends Bouncy implements Shootable
@@ -21,8 +20,6 @@ public class Ship extends Bouncy implements Shootable
     private static final int TIMER_DURATION = 40;
 
     private static final int SHIELD_POSE_COUNT = 7;
-
-    private static RGBA SPEECH_COLOR = new RGBA(0, 0, 0);
 
     public static final String[] DEADLY_LIST = new String[] { "deadly" };
 
@@ -249,11 +246,11 @@ public class Ship extends Bouncy implements Shootable
         }
 
         Actor yell = new Talk(this)
-            .eventName("death").color(SPEECH_COLOR).bubble("speechBubble2")
-            .offset(0, 40).margin(10, 10, 20, 10).direction(0)
+            .eventName("death").style("shout")
+            .offset(0, 60).alignment(0.5, 0).direction(0)
             .createActor();
         yell.setCostume(getActor().getCostume());
-        yell.deathEvent("yell");
+        yell.deathEvent("shout");
 
         new Explosion(getActor())
             .projectiles(20)

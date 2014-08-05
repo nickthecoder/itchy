@@ -12,6 +12,10 @@ public class TextPose extends AbstractTextPose
 {
     private Surface surface;
 
+    public TextPose( String text, TextStyle style )
+    {
+        this(text, style.fontResource.font, style.fontSize, style.color );
+    }
     public TextPose( String text, Font font, double fontSize )
     {
         this(text, font, fontSize, new RGBA(255, 255, 255));

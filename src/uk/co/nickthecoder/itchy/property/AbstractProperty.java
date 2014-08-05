@@ -400,6 +400,10 @@ public abstract class AbstractProperty<S, T> implements Comparable<AbstractPrope
     @Override
     public int compareTo( AbstractProperty<S, ?> other )
     {
+        if ( other == null) {
+            return -1;
+        }
+        
         int diff = this.sortOrder - other.sortOrder;
         return diff == 0 ? this.label.compareTo(other.label) : diff;
     }

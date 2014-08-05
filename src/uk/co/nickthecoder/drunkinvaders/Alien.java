@@ -14,13 +14,10 @@ import uk.co.nickthecoder.itchy.role.Explosion;
 import uk.co.nickthecoder.itchy.role.Talk;
 import uk.co.nickthecoder.itchy.util.Tag;
 import uk.co.nickthecoder.itchy.util.Util;
-import uk.co.nickthecoder.jame.RGBA;
 
 @Tag(names = { "deadly", "shootable" })
 public class Alien extends Bouncy implements Shootable
 {
-    private static RGBA SPEECH_COLOR = new RGBA(0, 0, 0);
-
     public static final String[] SHOOTABLE_LIST = new String[] { "shootable" };
 
     @Property(label = "Fire Every (s)")
@@ -106,7 +103,7 @@ public class Alien extends Bouncy implements Shootable
             .projectiles(40).projectilesPerTick(10)
             .offsetForwards(-10, 10).offsetSidewards(-10, 10)
             .distance(10 * getActor().getAppearance().getScale())
-            .speed(5,9,0,0)
+            .speed(5, 9, 0, 0)
             .fade(3)
             .scale(1)
             .eventName("pixel")
@@ -128,8 +125,7 @@ public class Alien extends Bouncy implements Shootable
         }
 
         Actor yell = new Talk(this)
-            .eventName("yell").color(SPEECH_COLOR).margin(10, 10, 20, 10)
-            .bubble("speechBubble")
+            .eventName("death").style("yell")
             .offset(0, 40).direction(0)
             .createActor();
         yell.setCostume(getActor().getCostume());

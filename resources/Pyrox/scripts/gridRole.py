@@ -23,14 +23,17 @@ class GridRole(AbstractRole) :
         
         self.idle = True
         self.talkActor = None
-                
+
+        self.talkX = 70
+        self.talkY = 10        
+
+
     def onBirth( self ) :
         Fragment().actor(self.actor).pieces( 10 ).createPoses( "fragment" )
         self.addTag( "explodable" )
     
     def onAttach( self ) :
         pass
-        
         
     def talk( self, message ) :
         if self.talkActor :
@@ -41,14 +44,20 @@ class GridRole(AbstractRole) :
         else :
             message = message.replace("\\n","\n")
 
-        self.talkActor = Talk(self) \
-            .bubble("talk").font("Vera", 14).margin(15, 10, 45, 10).offset(0,60).text(message) \
-            .createActor()
-
+        talk = Talk(self) \
+            .style("talk-style") \
+            .offset(self.talkX, self.talkY).alignment( 1, 1 ) \
+            .text(message)
+        self.adjustTalk( talk );
+        
+        self.talkActor = talk.createActor()
+        
         self.talkActor.getStage().addTop(self.talkActor)
         self.talkActor.setCostume( self.getActor().getCostume() )
         self.talkActor.event("talk-fade")
-                        
+               
+    def adjustTalk( self, talk ) :
+        pass;
 
     def moveTo( self, x, y ) :
    
@@ -164,6 +173,9 @@ class GridRole(AbstractRole) :
     def isMoving( self ) :
         return False
 
+    def onExplode( self ) :
+        self.explode()
+
     def explode( self ) :        
     
         Explosion(self.actor) \
@@ -241,6 +253,13 @@ class GridRole(AbstractRole) :
     # Boiler plate code - no need to change this
     def getClassName(self):
         return ClassName( Role, self.__module__ + ".py" )
+
+
+    def toString(self) :
+        return self.__str__()
+        
+    def __str__(self) :
+        return self.__class__.__name__ + " @ " + str(self.square.x) + "," + str(self.square.y)
 
 
 def getDirectionAbreviation( dx, dy ) :

@@ -58,7 +58,7 @@ public class IntegerProperty<S> extends AbstractProperty<S, Integer>
             return result.intValue();
         } catch (Exception e) {
             if (value == null) {
-                System.out.println("Expected Integer but found null");
+                System.err.println("Expected Integer but found null");
                 return 0;
             }
             System.err.println("Expected Integer but found : " + value + " : " + value.getClass().getName());

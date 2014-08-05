@@ -9,7 +9,10 @@ import uk.co.nickthecoder.itchy.Role;
 
 public class Follower extends Companion<Follower>
 {
-    private boolean followRotatation = false;;
+    private boolean followRotatation = false;
+    
+    private boolean stop = false;
+    
 
     public Follower( Role following )
     {
@@ -30,11 +33,19 @@ public class Follower extends Companion<Follower>
         this.followRotatation = true;
         return this;
     }
+    
+    public Follower stop()
+    {
+        this.stop = true;
+        return this;
+    }
 
     @Override
     public void tick()
     {
-        follow();
+        if (!this.stop) {
+            follow();
+        }
     }
 
     private void follow()

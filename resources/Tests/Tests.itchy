@@ -1,5 +1,5 @@
 <resources>
-  <game directorClassName="uk.co.nickthecoder.itchy.PlainDirector" height="600" initialScene="menu" title="Tests" width="800"/>
+  <game title="Tests" width="800" height="600" initialScene="menu" directorClassName="uk.co.nickthecoder.itchy.PlainDirector"/>
   <fonts>
     <font name="vera" filename="fonts/Vera/Vera.ttf"/>
   </fonts>
@@ -19,7 +19,10 @@
   <animations>
     <animation name="bomb">
       <sequence loops="0" sequence="true">
-        <frames pingPong="false"/>
+        <frames pingPong="false">
+          <frame pose="bomb1" delay="1"/>
+          <frame pose="bomb2" delay="1"/>
+        </frames>
       </sequence>
     </animation>
     <animation name="bounce">
@@ -282,7 +285,7 @@
     </animation>
   </animations>
   <costumes>
-    <costume name="alien" defaultZOrder="0">
+    <costume name="alien" defaultZOrder="0" order="0">
       <pose name="bomb" pose="bomb1"/>
       <pose name="default" pose="alien1a"/>
       <animation name="bomb" animation="bomb"/>
@@ -310,29 +313,29 @@
       <animation name="easeOutQuad" animation="easeOutQuad"/>
       <animation name="linear" animation="linear"/>
     </costume>
-    <costume name="alien1a" defaultZOrder="0" extends="alien">
+    <costume name="alien1a" defaultZOrder="0" order="0" extends="alien">
       <pose name="default" pose="alien1a"/>
     </costume>
-    <costume name="alien1b" defaultZOrder="0" extends="alien">
+    <costume name="alien1b" defaultZOrder="0" order="0" extends="alien">
       <pose name="default" pose="alien1b"/>
     </costume>
-    <costume name="alien2a" defaultZOrder="0" extends="alien">
+    <costume name="alien2a" defaultZOrder="0" order="0" extends="alien">
       <pose name="default" pose="alien2a"/>
     </costume>
-    <costume name="alien2b" defaultZOrder="0" extends="alien">
+    <costume name="alien2b" defaultZOrder="0" order="0" extends="alien">
       <pose name="default" pose="alien2b"/>
     </costume>
-    <costume name="alien3a" defaultZOrder="0" extends="alien">
+    <costume name="alien3a" defaultZOrder="0" order="0" extends="alien">
       <pose name="default" pose="alien3a"/>
     </costume>
-    <costume name="alien3b" defaultZOrder="0" extends="alien">
+    <costume name="alien3b" defaultZOrder="0" order="0" extends="alien">
       <pose name="default" pose="alien3b"/>
     </costume>
-    <costume name="bomb" defaultZOrder="0">
+    <costume name="bomb" defaultZOrder="0" order="0">
       <pose name="default" pose="bomb1"/>
       <animation name="default" animation="bomb"/>
     </costume>
-    <costume name="line" defaultZOrder="0">
+    <costume name="line" defaultZOrder="0" order="0">
       <pose name="default" pose="line"/>
     </costume>
   </costumes>
@@ -343,4 +346,5 @@
     <scene name="profiles"/>
     <scene name="projectiles"/>
   </scenes>
+  <inputs/>
 </resources>

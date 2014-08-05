@@ -23,7 +23,7 @@ public abstract class Companion<T extends Companion<T>> extends AbstractRole
 {
     protected Actor source;
 
-    // Yes this is horrible, but using "me" means just one SuppressWarning, rather than in every
+    // Yes this looks horrible, but using "me" means just one SuppressWarning, rather than in every
     // method.
     // Please tell me if there is a better way to accomplish the same ends.
     // i.e. Have Companion methods return the correct type T, where T will be the subclass

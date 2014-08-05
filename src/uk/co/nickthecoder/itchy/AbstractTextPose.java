@@ -30,9 +30,16 @@ public abstract class AbstractTextPose implements Pose
 
     protected Appearance appearance;
 
+
+    public AbstractTextPose( TextStyle textStyle )
+    {
+        this.font = textStyle.fontResource.font;
+        this.fontSize = textStyle.fontSize;
+        this.color = textStyle.color;
+    }
+    
     public AbstractTextPose( Font font, double fontSize )
     {
-        // Make RGBA immutable, so we can have static final WHITE.
         this(font, fontSize, new RGBA(255, 255, 255));
     }
 

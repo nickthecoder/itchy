@@ -18,7 +18,7 @@ class Copier(GridRole) :
 
     def __init__(self) :
         super(Copier,self).__init__()
-        self.copies = 10
+        self.copies = 3
         self.dx = 1
         self.dy = 0
         self.copying = None
@@ -40,8 +40,7 @@ class Copier(GridRole) :
             return
 
         if (not north.isEmpty()) and (not north.hasTag("player")) :
-            self.copies -= 1
-            if self.copies < 0 :
+            if self.copies <= 0 :
                 self.waitTillEmpty = True
                 self.talk("_empty")
             else :
@@ -51,7 +50,10 @@ class Copier(GridRole) :
     
     def onMessage(self, message) :
         if message == "copied" :
+
             if self.look(self.dx, self.dy).isEmpty() :
+                self.copies -= 1
+
                 squareSize = self.square.grid.squareSize
                 self.event("copied")
                 actor = Itchy.getGame().resources.createActor( self.copying, self.actor.stage )
@@ -64,6 +66,8 @@ class Copier(GridRole) :
             self.copying = False
             self.waitTillEmpty = True
 
+    def adjustTalk(self, talk) :
+        talk.stop().offset(0,0).alignment(0.5,0.5);
 
     # TODO Other methods include :
     # onDetach, onKill, onMouseDown, onMouseUp, onMouseMove

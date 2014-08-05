@@ -72,7 +72,6 @@ public class Textured implements Makeup
         this.seq++;
         this.poseName = poseName;
         this.pose = Itchy.getGame().resources.getPose(poseName);
-        System.out.println("Loaded pose " + this.poseName + " = " + this.pose);
     }
 
     @Override

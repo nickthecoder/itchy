@@ -103,10 +103,6 @@ public class Launcher extends AbstractDirector
 
     public static void main( String argv[] ) throws Exception
     {
-        for (String arg : argv) {
-            System.out.println(arg);
-        }
-
         String name;
         if (argv.length == 0) {
             name = "Launcher";
@@ -120,7 +116,6 @@ public class Launcher extends AbstractDirector
         } else {
             resourcesFile = new File(Itchy.getBaseDirectory(), "resources" + File.separator + name + File.separator + name + ".itchy");
         }
-        System.out.println("Loading resources : " + resourcesFile);
         Resources resources = new Resources();
         resources.load(resourcesFile);
 

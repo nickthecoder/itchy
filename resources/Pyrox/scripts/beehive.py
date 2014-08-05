@@ -27,7 +27,7 @@ class Beehive(Faller) :
         self.detached = False
         self.emitTimer = None
         self.randomSeed = 0
-                
+
     def onBirth(self) :
         super(Beehive,self).onBirth()
         Itchy.getGame().getSceneDirector().collectablesRemaining += 1
@@ -45,7 +45,6 @@ class Beehive(Faller) :
         self.addTag( "roundedNW" )
 
 
-        
     def makeAMove(self) :
         if self.detached :
             super(Beehive,self).makeAMove()
@@ -62,8 +61,11 @@ class Beehive(Faller) :
 
     def detach(self) :
         self.detached = True
-        self.addTag("soft")
-        self.emitTimer = Timer.createTimerSeconds(0.5)
+        if (self.bees == 0) :
+            self.addTag("soft")
+        else :
+            self.emitTimer = Timer.createTimerSeconds(0.5)
+        
 
 
     def onHalfInvaded( self, invader ) :
@@ -90,6 +92,8 @@ class Beehive(Faller) :
                         self.emitTimer.reset()
                     else :
                         self.emitTimer = None
+                        self.addTag("soft")
+
 
     def emitBee(self) :
         direction = 1 # TODO Random 1 or -1

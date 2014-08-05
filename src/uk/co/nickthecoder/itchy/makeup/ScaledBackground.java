@@ -8,16 +8,16 @@ import java.util.List;
 
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.OffsetSurface;
+import uk.co.nickthecoder.itchy.Pose;
 import uk.co.nickthecoder.itchy.SimpleOffsetSurface;
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
 import uk.co.nickthecoder.itchy.property.Property;
-import uk.co.nickthecoder.itchy.util.NinePatch;
 import uk.co.nickthecoder.jame.Surface;
 
-public class Frame implements Makeup
+public class ScaledBackground implements Makeup
 {
     private static final List<AbstractProperty<Makeup, ?>> properties =
-        AbstractProperty.<Makeup> findAnnotations(Frame.class);
+        AbstractProperty.<Makeup> findAnnotations(ScaledBackground.class);
 
     private int borderTop;
 
@@ -27,9 +27,9 @@ public class Frame implements Makeup
 
     private int borderLeft;
 
-    private String ninePatchName;
+    private String poseName;
 
-    private NinePatch ninePatch;
+    private Pose pose;
 
     private int seq = 0;
 
@@ -39,11 +39,11 @@ public class Frame implements Makeup
         return properties;
     }
 
-    public Frame()
+    public ScaledBackground()
     {
     }
 
-    public Frame( int top, int right, int bottom, int left )
+    public ScaledBackground( int top, int right, int bottom, int left )
     {
         this.borderTop = top;
         this.borderBottom = bottom;
@@ -105,64 +105,58 @@ public class Frame implements Makeup
         this.borderLeft = borderLeft;
     }
 
-    @Property(label = "Nine Patch Name")
-    public String getNinePatchName()
+    @Property(label = "Pose Name")
+    public String getPoseName()
     {
-        return this.ninePatchName;
+        return this.poseName;
     }
 
-    public void setNinePatchName( String ninePatchName )
+    public void setPoseName( String poseName )
     {
         this.seq++;
-        this.ninePatchName = ninePatchName;
-        this.ninePatch = Itchy.getGame().resources.getNinePatch(ninePatchName);
+        this.poseName = poseName;
+        this.pose = Itchy.getGame().resources.getPose(this.poseName);
     }
 
-    public void setNinePatch( NinePatch ninePatch )
+    public void setPose( Pose pose )
     {
-        this.ninePatch = ninePatch;
+        this.seq++;
+        this.pose = pose;
     }
     
     @Override
     public OffsetSurface apply( OffsetSurface src )
     {
-        if (this.ninePatch == null) {
+        if (this.pose == null) {
             return src;
         }
 
         Surface srcSurface = src.getSurface();
-
-        int width = srcSurface.getWidth() + this.borderLeft + this.borderRight;
-        int height = srcSurface.getHeight() + this.borderTop + this.borderBottom;
+        Surface background = this.pose.getSurface();
         
-        // Sometimes, the contents won't be big enough for the frame to be fully drawn.
-        // If so, we render the whole frame, and place the contents in the middle
-        int offsetX = 0;
-        int offsetY = 0;
-        int minFrameWidth = this.ninePatch.getMinimumWidth();
-        int minFrameHeight = this.ninePatch.getMinimumHeight();
-        
-        if (width < minFrameWidth) {
-            offsetX = (minFrameWidth - width) / 2;
-            width = minFrameWidth;
-        }
-        if (height < minFrameHeight) {
-            offsetY = (minFrameHeight - height) / 2;
-            height = minFrameHeight;
-        }
-        
-        Surface surface = new Surface(width, height, true);
+        // Find the amount of space in the background image once we have removed the borders
+        int remainingWidth = background.getWidth() - this.borderLeft - this.borderRight;
+        int remainingHeight = background.getHeight() - this.borderTop - this.borderBottom;
 
-        this.ninePatch.render(surface);
-        srcSurface.blit(surface, this.borderLeft + offsetX, this.borderTop + offsetY);
+        // How much do we need to scale the background image, so that its remaining part (excluding borders) will fit the source image.
+        double scaleX = ((double) srcSurface.getWidth()) / ((double) remainingWidth);
+        double scaleY = ((double) srcSurface.getHeight()) / ((double) remainingHeight);
+        
+        // We also need to scale the top and left border by the same amount.
+        int scaledMarginX = (int) (this.borderLeft * scaleX);
+        int scaledMarginY = (int) (this.borderTop * scaleY);
+        
+        Surface zoomedBackground = background.zoom(scaleX, scaleY, true);
+        
+        srcSurface.blit(zoomedBackground, scaledMarginX, scaledMarginY);
 
-        return new SimpleOffsetSurface(surface, src.getOffsetX() + this.borderLeft, src.getOffsetY() + this.borderTop);
+        return new SimpleOffsetSurface(zoomedBackground, src.getOffsetX() + scaledMarginX, src.getOffsetY() + scaledMarginY);
     }
 
     @Override
     public void applyGeometry( TransformationData src )
     {
-        if (this.ninePatch == null) {
+        if (this.pose == null) {
             return;
         }
 

@@ -36,7 +36,6 @@ public class UndoList
             this.undoing = true;
             try {
                 this.index--;
-                System.out.println("Undo " + this.list.get(this.index));
                 this.list.get(this.index).undo();
             } finally {
                 this.undoing = false;
@@ -49,7 +48,6 @@ public class UndoList
         if (canRedo()) {
             this.undoing = true;
             try {
-                System.out.println("Redo " + this.list.get(this.index));
                 this.list.get(this.index).redo();
                 this.index++;
             } finally {
@@ -78,19 +76,16 @@ public class UndoList
         long time = System.currentTimeMillis();
         if (canUndo() && (time - this.lastAddTime < MERGE_WINDOW)) {
             if (this.list.get(this.index - 1).merge(undo)) {
-                System.out.println("Merged");
                 // Merged with the previous one, so no need to add to the list, or change index.
                 return;
             }
         }
         while (this.list.size() > this.index) {
             this.list.remove(this.list.size() - 1);
-            System.out.println("Removed item");
         }
         this.list.add(undo);
         this.index = this.list.size();
         this.lastAddTime = time;
-        System.out.println("Added");
     }
 
     public void apply( Undo undo )

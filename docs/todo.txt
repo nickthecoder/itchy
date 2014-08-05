@@ -1,9 +1,18 @@
-Multi-line text on Hint
-
+Check other games to see if they still work.
 
 Bugs
-    
+
+
+
 PyRox
+
+    Remove "TODO"s
+
+    Place Sledgers in key places, so that the sledging can be targeted to a given area.
+        e.g. "Have you met by brother?"
+            Then when he enters the room... "We look alike\nDon't we."
+        Sledgers to have optional roleIDs, so the correct player will speak.
+        Sledger and Hint to use rectangles, not pixel detection.
 
     Add sledging to existing scenes    
 
@@ -14,36 +23,9 @@ PyRox
         Grenades 5,6
         Extra 3,4,5
 
-    Big extend Movable, with the extra stuff to ensure that BigHelper is called when needed.
-        onDeath disconnects BigHelper, and kills all bigPaddings
-        move : super.move(); bigHelper.movePaddings()
-
-    BigHelper
-        main : a GridRole object that is the controller for all the others.
-        paddings : Array of BigPadding(GridRole) objects
-        facing : Array of BigPadding/main objects to check when looking north.
-            [dx+1][dy+1][n], but exclude for dx,dy == 0,0
-
-        add : dx,dy,excludeTags=None (returns the created BigPadding object). Copies all main's tags to paddings except those listed.
-        done() : method, calculates facing array. 
-        
-        canMove( dx, dy, speed=None ) : calls haveTag( "squash" + ?, dx, dy )
-        canShove : Calls main's mainCanShove???, then check if leading spaces are squashable or can be shoved themselves??? 
-        canIShove( dx, dy, speed, force ) : call each neighbour's canShove with main as the pusher
-        
-        haveTag( tag, dx, dy ) : checks if all paddings/main has the given tag
-        withTag( tag, dx, dy ) : returns all those with a given tag - use it for hitting, collectables etc.
-        movePaddings
-
-
-
     More characters :
 
         Weaker player - can't lift or push rocks.
-
-        Bean Pole - a 1x2 player
-        Fat Man - a 2x1 player
-        Giant - a 2x2 player (Normal player is called titch)
         
         Big Rock (2x2) Rolls when sitting half and half on solid/empty
             If we have a giant player too, then it could lift two rocks side by side, as long as they couldn't roll off.
@@ -65,6 +47,14 @@ PyRox
 
     "Cavern" style levels
 
+    Copy bees!
+    Trick level - you have to copy a bee hive.
+
+Animations are too complex "Parallel" etc. Instead, when replacing an animation,
+fast-forward the old one. Including calling the appropriate messages!
+
+
+Look at companion, it has font, font size and color. Why ????
 
     
 Lazy loading of some poses (If each contributor has their own picture, don't want to load them all, unless
@@ -87,6 +77,10 @@ Why have a Role interface if everything will end up using AbstractRole?
     Talk to Simon about it.
 
 Rox Later
+
+    NinePatches (and Poses etc) to have properties, which can be used in game code.
+        For example a bubble can specify the text margins, and even the font and font size.
+        
 
     Zoom in/out : Scale all GridRole objects. Care needed if/when creating new objects.
 

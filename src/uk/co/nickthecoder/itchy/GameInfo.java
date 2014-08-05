@@ -38,7 +38,7 @@ public class GameInfo implements PropertySubject<GameInfo>
         this.height = 600;
         this.directorClassName = new ClassName(Director.class, PlainDirector.class.getName());
         this.initialScene = "";
-        this.authors = "Nick\nThe\nCoder\n";
+        this.authors = "";
     }
 
     @Override

@@ -14,6 +14,7 @@ class ${Name}(AbstractDirector) :
         # It is often better to put game logic in SceneDirector subclasses, rather than Director subclasses.
         pass
     
+    
     # TODO Other methods include :
     # onStarted, onMouseDown, onMouseUp, onMouseMove, onKeyDown, onKeyUp, onQuit, onMessage
 

@@ -14,6 +14,7 @@ import uk.co.nickthecoder.itchy.FontResource;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.Scene;
 import uk.co.nickthecoder.itchy.SceneResource;
+import uk.co.nickthecoder.itchy.TextStyle;
 import uk.co.nickthecoder.itchy.gui.FileOpenDialog;
 import uk.co.nickthecoder.itchy.gui.MessageBox;
 import uk.co.nickthecoder.itchy.gui.ReflectionTableModelRow;
@@ -77,9 +78,9 @@ public class FontsEditor extends SubEditor<FontResource>
         for (String costumeName : this.editor.resources.costumeNames()) {
             CostumeResource cr = this.editor.resources.getCostumeResource(costumeName);
             Costume costume = cr.getCostume();
-            for (String resourceName : costume.getFontNames()) {
-                for (FontResource resource : costume.getFontChoices(resourceName)) {
-                    if (resource == fontResource) {
+            for (String resourceName : costume.getTextStyleNames()) {
+                for (TextStyle ts : costume.getTextStyleChoices(resourceName)) {
+                    if (ts.fontResource == fontResource) {
                         usedBy.add(costumeName);
                     }
                 }

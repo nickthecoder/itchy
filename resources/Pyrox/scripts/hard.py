@@ -36,7 +36,7 @@ class Hard(GridRole) :
             if self.remaining <= 0 :
                 self.actor.kill()
 
-        return False
+        return self.remaining == 0
 
     
     # TODO Other methods include :

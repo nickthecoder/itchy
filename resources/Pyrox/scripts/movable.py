@@ -14,7 +14,7 @@ properties = ArrayList()
 class Movable(GridRole) :
 
     def __init__(self) :
-        super(Movable, self).__init__()
+        GridRole.__init__(self)
         self.currentSpeed = 0 # Number of pixels to move per tick when dx or dy are non zero.
         self.dx = 0 # -1, 0 or 1 depending on direction of travel
         self.dy = 0 # -1, 0 or 1 depending on direction of travel.

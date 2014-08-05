@@ -284,17 +284,31 @@ public class ResourcesReader
             }
 
             for (Iterator<XMLTag> j = costumeTag.getTags("font"); j.hasNext();) {
-                XMLTag stringTag = j.next();
+                XMLTag fontTag = j.next();
 
-                String itemName = stringTag.getAttribute("name");
-                String fontName = stringTag.getAttribute("font");
+                String itemName = fontTag.getAttribute("name");
+                String fontName = fontTag.getAttribute("font");
 
                 FontResource fontResource = this.resources.getFontResource(fontName);
                 if (fontResource == null) {
-                    throw new XMLException("Font : " + fontName + " not found for costume : " +
-                        costumeName);
+                    throw new XMLException("Font : " + fontName + " not found for costume : " + costumeName);
                 }
-                costume.addFont(itemName, fontResource);
+                TextStyle textStyle = new TextStyle(fontResource, 14);
+                this.readProperties(fontTag, textStyle);
+                /*
+                int fontSize = stringTag.getOptionalIntAttribute("fontSize", 14);
+                TextStyle textStyle = new TextStyle( fontResource, fontSize );
+                
+                RGBA color = RGBA.WHITE;
+                String colorText = stringTag.getOptionalAttribute("color", "#ffffffff");
+                try {
+                    color = RGBA.parse( colorText );
+                } catch (Exception e) {
+                    System.err.println( "Ignored badly formed color : " + colorText );
+                }
+                textStyle.color = color;
+                */
+                costume.addTextStyle(itemName, textStyle);
             }
 
             for (Iterator<XMLTag> j = costumeTag.getTags("animation"); j.hasNext();) {
@@ -447,10 +461,10 @@ public class ResourcesReader
 
             String name = inputTag.getAttribute("name");
             String keys = inputTag.getOptionalAttribute("keys", "");
-            
+
             Input input = new Input();
             input.parseKeys(keys);
-            
+
             InputResource inputResource = new InputResource(this.resources, name, input);
             this.resources.addInput(inputResource);
         }

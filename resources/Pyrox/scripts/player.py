@@ -1,7 +1,7 @@
 from uk.co.nickthecoder.itchy import Itchy
 from uk.co.nickthecoder.itchy import Input
 from uk.co.nickthecoder.itchy import Role
-from uk.co.nickthecoder.itchy import AbstractRole
+from uk.co.nickthecoder.itchy import Actor
 from uk.co.nickthecoder.itchy.util import ClassName
 from uk.co.nickthecoder.itchy.role import Explosion
 
@@ -11,7 +11,7 @@ from java.util import ArrayList
 
 from gridRole import GridRole
 import gridRole
-from movable import Movable
+from big import Big
 
 properties = ArrayList()
 properties.add( BooleanProperty( "awake" ) )
@@ -22,11 +22,10 @@ properties.add( BooleanProperty( "awake" ) )
 #
 # The views are centered on the (awake) Player, but this can be offset somewhat using Home/End/PgUp/PgDn.
 #
-class Player(Movable) :
+class Player(Big) :
 
     def __init__(self) :
-    
-        super(Player, self).__init__()
+        Big.__init__(self)
 
         self.awake = True
 
@@ -54,15 +53,26 @@ class Player(Movable) :
         
 
     def onBirth( self ) :
-        super(Player, self).onBirth()
+        Big.onBirth(self)
 
-    def onAttach( self ) :    
-        super(Player, self).onAttach()
+        cp = self.actor.costume.properties
+        self.talkX = cp.talkX
+        self.talkY = cp.talkY
+        
         self.speed = 6
-        self.addTag("hittable")
         self.addTag("player")
         self.addTag("digger") # Allows me to dig hard soil. See class Hard
+
+    def onPlacedOnGrid(self) :
+        Big.onPlacedOnGrid(self)
+
+        # My costume properties should be BigProperties (or something compatable).
+        self.actor.costume.properties.createParts( self )
+        self.calculateLeadingEdges()
+
+        self.allAddTag("hittable")
         
+            
     # Called by Level to let me find the "warp" of the scene that's just been completed.
     def getReady( self, wake ) :
     
@@ -110,7 +120,7 @@ class Player(Movable) :
             
             self.movements()
 
-        super(Player,self).tick()
+        Big.tick(self)
         
         tx = self.actor.getX() + self.scrollOffsetX
         ty = self.actor.getY() + self.scrollOffsetY
@@ -137,8 +147,10 @@ class Player(Movable) :
     def sleep( self ) :
         self.event("sleep")
         self.awake = False
+        x = self.talkX - 40
+        y = self.talkY + 20
         self.sleepyZ = Explosion(self).pose("z") \
-            .offsetForwards( 10,10 ).offsetSidewards( 20,20 ) \
+            .offsetForwards( x,x ).offsetSidewards( y,y ) \
             .vy(0.6, 1.2).vx(0.2,0.3).gravity(-0.01) \
             .fade( 2 ) \
             .projectilesPerTick(1).slow(50).forever() \
@@ -202,29 +214,27 @@ class Player(Movable) :
     
     
     def attemptToMove( self, dx, dy ) :
-        obj = self.look( dx, dy )
-        if (obj.hasTag( "soft" ) or obj.hasTag( "squash" + gridRole.getDirectionAbreviation(dx,dy) )) :
-            self.move(dx, dy)
-            return True
 
-        if obj.canShove(self,dx,dy,self.speed, 4) :
-            obj.shove(self, dx, dy, self.speed)
+        squashTags = ["soft","squash" + gridRole.getDirectionAbreviation(dx,dy)]        
+        if self.canShoveNeigbours( dx, dy, self.speed, 4, squashTags ) :
+            self.shoveNeighbours( dx, dy, self.speed, squashTags )
             self.move(dx, dy)
             return True
+        
         return False
        
     def move( self, dx, dy, speed=None ) :
-        super(Player,self).move(dx, dy, speed )
+        Big.move(self,dx, dy, speed )
         if dy == 0 :
-            self.actor.event( "move-" + ("L" if dx == -1 else "R" ) )
+            self.actor.event( "move-" + ("L" if dx == -1 else "R" ), None, Actor.AnimationEvent.PARALLEL )
         else :
-            self.actor.event( "move-" + ("U" if dy ==  1 else "D" ) )
+            self.actor.event( "move-" + ("U" if dy ==  1 else "D" ), None, Actor.AnimationEvent.PARALLEL )
 
     def onDeath( self ) :
     
         Itchy.getGame().sceneDirector.playerDied( self )
         self.killZs()
-        super(Player,self).onDeath()
+        Big.onDeath(self)
 
     def onHit( self, hitter, dx, dy ) :
         

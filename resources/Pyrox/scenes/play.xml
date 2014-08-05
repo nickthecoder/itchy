@@ -654,7 +654,7 @@
     <actor costume="warp" x="-240" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="40">
       <property name="exitX" value="1"/>
       <property name="exitY" value="0"/>
-      <property name="scene" value="furniture"/>
+      <property name="scene" value="furniture3"/>
     </actor>
     <actor costume="warp" x="240" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="40">
       <property name="exitX" value="-1"/>
@@ -987,8 +987,9 @@
   <layer name="test">
     <actor costume="sledge" x="0" y="0" direction="0.0" heading="0.0" startEvent="default" zOrder="90">
       <property name="text" value="Use the arrow keys\nto enter one of the gates.&#xA;What are you waiting for?&#xA;Oh come on,\npick a gate.&#xA;Are you still there?&#xA;"/>
+      <property name="initialDelay" value="0.5"/>
       <property name="loop" value="true"/>
-      <property name="period" value="30"/>
+      <property name="period" value="30.0"/>
     </actor>
   </layer>
 </scene>

@@ -539,7 +539,6 @@ public class SceneDesigner implements MouseListener, KeyListener
             @Override
             public void action()
             {
-                System.out.println("upLayer.action");
                 onActorUpStage();
             }
         });
@@ -1669,7 +1668,6 @@ public class SceneDesigner implements MouseListener, KeyListener
     {
         if ((this.mode == MODE_SELECT) && (this.currentActor != null)) {
             Stage otherStage = getStageAbove(this.currentActor.getStage());
-            System.out.println("Moving from stage " + this.currentActor.getStage() + " to " + otherStage);
 
             if (otherStage != null) {
                 this.currentActor.getStage().remove(this.currentActor);
@@ -1683,7 +1681,6 @@ public class SceneDesigner implements MouseListener, KeyListener
     {
         if ((this.mode == MODE_SELECT) && (this.currentActor != null)) {
             Stage otherStage = getStageBelow(this.currentActor.getStage());
-            System.out.println("Moving from stage " + this.currentActor.getStage() + " to " + otherStage);
 
             if (otherStage != null) {
                 this.currentActor.getStage().remove(this.currentActor);
@@ -1743,7 +1740,6 @@ public class SceneDesigner implements MouseListener, KeyListener
         for (StageView stageView : this.designViews.getChildren()) {
 
             Scene.SceneLayer sceneLayer = this.scene.createSceneLayer(stageView.getStage().getName());
-            System.out.println("Adding scene layer " + sceneLayer.getName());
 
             for (Actor actor : stageView.getStage().getActors()) {
                 SceneActor sceneActor = SceneActor.createSceneActor(actor);
@@ -1776,14 +1772,9 @@ public class SceneDesigner implements MouseListener, KeyListener
     {
         try {
 
-            // Game game = new Game(this.editor.resources);
-            // Game game = this.editor.resources.game;
             Resources duplicate = this.editor.resources.copy();
             Game game = duplicate.game;
 
-            System.out.println("SceneDesigner. Testing game : " + game);
-            // game.init();
-            // game.setDirector(this.editor.resources.getGameInfo().createDirector(this.editor.resources));
             game.testScene(this.sceneResource.name);
 
         } catch (Exception e) {

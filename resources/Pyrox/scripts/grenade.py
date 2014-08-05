@@ -34,10 +34,10 @@ class Grenade(Faller) :
                 return # Don't explode as we are falling, so not really hit.
                 
         if hitter.hasTag("explosionTrigger") :
-            hitter.explode()
-            self.explode()
+            hitter.onExplode()
+            self.onExplode()
 
-    def explode( self ) :
+    def onExplode( self ) :
         
         if self.fallen :
             a = self.lookNorth()
@@ -56,24 +56,20 @@ class Grenade(Faller) :
                 .vx(-3, 3).vy( -0.5, 0.5 ) \
                 .createActor()
 
-        super(Grenade,self).explode()
+        self.explode()
                 
         if a.hasTag("explodable") :
-            a.explode()
+            a.onExplode()
 
         if b.hasTag("explodable") :
-            b.explode()
+            b.onExplode()
 
     def onMessage( self, message ) :
         # Called from the grenade's turning animations
         if message == "turned" :
-            print "turned"
             self.fallen = not self.fallen
-            
-    
-    # TODO Other methods include :
-    # onDetach, onKill, onMouseDown, onMouseUp, onMouseMove
 
+            
     # Boiler plate code - no need to change this
     def getProperties(self):
         return properties

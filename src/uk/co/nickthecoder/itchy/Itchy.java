@@ -75,8 +75,6 @@ public class Itchy
     public static final Registry registry = new Registry();
 
     static {
-        System.out.println("Registering standard ClassNames");
-
         registry.add(new ClassName(Director.class, PlainDirector.class.getName()));
 
         registry.add(new ClassName(SceneDirector.class, PlainSceneDirector.class.getName()));
@@ -92,19 +90,14 @@ public class Itchy
 
         registry.add(new ClassName(CostumeProperties.class, CostumeProperties.class.getName()));
 
-        System.out.println("Registering Makeup");
-
         registry.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.NullMakeup.class.getName()));
         registry.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.makeup.Shadow.class.getName()));
         registry.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.makeup.Scale.class.getName()));
         registry.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.makeup.Textured.class.getName()));
         registry.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.makeup.Frame.class.getName()));
-
-        System.out.println("Registering Eases");
+        registry.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.makeup.ScaledBackground.class.getName()));
 
         Eases.registerEases();
-
-        System.out.println("Registering Animation Types");
 
         Animations.registerAnimations();
     }

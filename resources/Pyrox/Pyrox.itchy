@@ -2,10 +2,13 @@
   <game title="Rox" width="800" height="600" initialScene="menu" directorClassName="director.py" authors="Nick Robinson. nickthecoder@gmail.com&#xA;"/>
   <fonts>
     <font name="Boycott" filename="fonts/Boycott/Boycott.ttf"/>
+    <font name="Comic" filename="fonts/bubblegum-sans/BubblegumSans-Regular.otf"/>
+    <font name="Computer" filename="fonts/dot_matrix/DOTMATRI.TTF"/>
     <font name="Vera" filename="fonts/Vera/Vera.ttf"/>
   </fonts>
   <ninePatches>
-    <ninePatch name="talk" filename="images/bubble.png" top="20" right="54" bottom="50" left="20"/>
+    <ninePatch name="bubble" filename="images/bubble.png" top="20" right="60" bottom="78" left="20"/>
+    <ninePatch name="bubble2" filename="images/bubble2.png" top="5" right="5" bottom="5" left="5"/>
   </ninePatches>
   <poses>
     <pose name="arrow" filename="images/arrow.png" offsetX="7"/>
@@ -14,7 +17,8 @@
     <pose name="arrowCurved2" filename="images/arrowCurved2.png" offsetX="6" offsetY="7"/>
     <pose name="arrowKeys" filename="images/arrowKeys.png" offsetY="65"/>
     <pose name="autoPilot" filename="images/autoPilot.png"/>
-    <pose name="baloon" filename="images/baloon.png"/>
+    <pose name="balloon" filename="images/balloon.png"/>
+    <pose name="beanPole" filename="images/beanPole.png" offsetY="90"/>
     <pose name="beeL1" filename="images/beeL1.png"/>
     <pose name="beeR1" filename="images/beeR1.png"/>
     <pose name="behive" filename="images/behive.png"/>
@@ -38,6 +42,7 @@
     <pose name="gateLocal" filename="images/gateLocal.png"/>
     <pose name="gateOpen" filename="images/gateOpen.png"/>
     <pose name="gatePending" filename="images/gatePending.png"/>
+    <pose name="giant" filename="images/giant.png" offsetX="30" offsetY="90"/>
     <pose name="grenade" filename="images/grenade.png"/>
     <pose name="grenade2" filename="images/grenade2.png"/>
     <pose name="hint" filename="images/hint.png"/>
@@ -120,6 +125,7 @@
     <pose name="wallNW" filename="images/wallNW.png"/>
     <pose name="wallSE" filename="images/wallSE.png"/>
     <pose name="wallSW" filename="images/wallSW.png"/>
+    <pose name="wideLoad" filename="images/wideLoad.png" offsetX="30"/>
     <pose name="z1" filename="images/z1.png" offsetX="7" offsetY="7"/>
     <pose name="z2" filename="images/z2.png"/>
     <pose name="z3" filename="images/z3.png"/>
@@ -177,6 +183,24 @@
           <frame pose="copierScanning" delay="60"/>
           <frame pose="copier" delay="1"/>
         </frames>
+      </sequence>
+    </animation>
+    <animation name="copier-talk-fade">
+      <sequence loops="1" sequence="true">
+        <parallel loops="1" sequence="false">
+          <move ease="linear" ticks="1" dx="10.0" dy="10.0"/>
+          <scale ease="linear" target="0.02" ticks="1"/>
+        </parallel>
+        <parallel loops="1" sequence="false">
+          <scale ease="easeInOut" target="1.0" ticks="30"/>
+          <move ease="easeInBack" ticks="30" dx="0.0" dy="-90.0"/>
+        </parallel>
+        <delay ticks="60.0"/>
+        <parallel loops="1" sequence="false">
+          <alpha ease="easeInOut" target="0.0" ticks="30"/>
+          <scale ease="easeInOut" target="0.02" ticks="15"/>
+          <move ease="easeOutBack" ticks="30" dx="0.0" dy="90.0"/>
+        </parallel>
       </sequence>
     </animation>
     <animation name="explosion">
@@ -240,6 +264,9 @@
         <scale ease="easeInOut" target="1.0" ticks="10"/>
       </parallel>
     </animation>
+    <animation name="none">
+      <sequence loops="1" sequence="true"/>
+    </animation>
     <animation name="player-exit">
       <parallel loops="1" sequence="false">
         <alpha ease="easeIn" target="0.0" ticks="60"/>
@@ -285,14 +312,17 @@
     </animation>
     <animation name="player-sleep">
       <parallel loops="1" sequence="false">
-        <turnto direction="90.0" ease="easeInOut" longWay="false" ticks="30"/>
-        <alpha ease="linear" target="128.0" ticks="30"/>
+        <alpha ease="easeInOut" target="200.0" ticks="120"/>
+        <color ease="easeInOut" targetColor="#4c5252b5" ticks="120"/>
       </parallel>
     </animation>
     <animation name="player-wake">
       <parallel loops="1" sequence="false">
-        <turnto direction="0.0" ease="easeInOut" longWay="false" ticks="30"/>
-        <alpha ease="easeInOut" target="255.0" ticks="30"/>
+        <alpha ease="easeInOut" target="255.0" ticks="120"/>
+        <sequence loops="1" sequence="true">
+          <color ease="easeInOut" targetColor="#ffffff80" ticks="10"/>
+          <color ease="easeOut" targetColor="#7b786f00" ticks="110"/>
+        </sequence>
       </parallel>
     </animation>
     <animation name="pumpkin-pollinate">
@@ -399,7 +429,30 @@
       <pose name="default" pose="autoPilot"/>
     </costume>
     <costume name="balloon" defaultZOrder="20" order="10" role="balloon.py">
-      <pose name="default" pose="baloon"/>
+      <pose name="default" pose="balloon"/>
+    </costume>
+    <costume name="player-base" defaultZOrder="100" order="99" role="player.py" properties="bigProperties.py">
+      <pose name="z" pose="z1"/>
+      <pose name="z" pose="z2"/>
+      <pose name="z" pose="z4"/>
+      <pose name="z" pose="z3"/>
+      <pose name="z" pose="z5"/>
+      <pose name="z" pose="z6"/>
+      <string name="honey">Yummy, Honey</string>
+      <string name="honey">Ooo, sweet sticky goodness</string>
+      <string name="honey">Honey's nice, but I prefer jam</string>
+      <string name="talk-style">bubble</string>
+      <font name="talk-style" font="Comic" marginBottom="65" color="#000000ff" fontSize="24" marginLeft="10" marginRight="10" marginTop="15"/>
+      <animation name="exit" animation="player-exit"/>
+      <animation name="hit" animation="player-hit"/>
+      <animation name="sleep" animation="player-sleep"/>
+      <animation name="talk-fade" animation="talk-fade"/>
+      <animation name="wake" animation="player-wake"/>
+      <properties width="1" height="1" talkX="70" talkY="10"/>
+    </costume>
+    <costume name="beanPole" defaultZOrder="100" order="12" extends="player-base" role="player.py" properties="bigProperties.py">
+      <pose name="default" pose="beanPole"/>
+      <properties width="1" height="2" talkX="70" talkY="60"/>
     </costume>
     <costume name="bee" defaultZOrder="80" order="90" role="bee.py">
       <pose name="default" pose="beeL1"/>
@@ -444,8 +497,10 @@
       <string name="jam">Hey! Paper jam!</string>
       <string name="jam">The exit chute is blocked</string>
       <string name="jam">Get that thing out of the way</string>
+      <string name="talk-style">bubble2</string>
+      <font name="talk-style" font="Computer" marginBottom="10" color="#172975ff" fontSize="26" marginLeft="10" marginRight="10" marginTop="10"/>
       <animation name="scan" animation="copier-scan"/>
-      <animation name="talk-fade" animation="talk-fade"/>
+      <animation name="talk-fade" animation="copier-talk-fade"/>
     </costume>
     <costume name="explosion" defaultZOrder="60" order="100">
       <pose name="default" pose="explosion01"/>
@@ -455,6 +510,10 @@
       <pose name="default" pose="gateClosed"/>
       <animation name="exit" animation="gate-exit"/>
       <animation name="open" animation="gate-open"/>
+    </costume>
+    <costume name="giant" defaultZOrder="100" order="12" extends="player-base" role="player.py" properties="bigProperties.py">
+      <pose name="default" pose="giant"/>
+      <properties width="2" height="2" talkX="120" talkY="60"/>
     </costume>
     <costume name="grenade" defaultZOrder="20" order="20" role="grenade.py" properties="grenadeProperties.py">
       <pose name="default" pose="grenade"/>
@@ -581,26 +640,13 @@
       <pose name="default" pose="planeR"/>
       <properties headingLeft="false"/>
     </costume>
-    <costume name="player" defaultZOrder="100" order="10" role="player.py">
+    <costume name="player" defaultZOrder="100" order="11" extends="player-base" role="player.py" properties="bigProperties.py">
       <pose name="default" pose="robotR1"/>
-      <pose name="z" pose="z1"/>
-      <pose name="z" pose="z2"/>
-      <pose name="z" pose="z4"/>
-      <pose name="z" pose="z3"/>
-      <pose name="z" pose="z5"/>
-      <pose name="z" pose="z6"/>
-      <string name="honey">Yummy, Honey</string>
-      <string name="honey">Ooo, sweet sticky goodness</string>
-      <string name="honey">Honey's nice, but I prefer jam</string>
-      <animation name="exit" animation="player-exit"/>
-      <animation name="hit" animation="player-hit"/>
       <animation name="move-D" animation="robot-D"/>
       <animation name="move-L" animation="robot-L"/>
       <animation name="move-R" animation="robot-R"/>
       <animation name="move-U" animation="robot-U"/>
-      <animation name="sleep" animation="player-sleep"/>
-      <animation name="talk-fade" animation="talk-fade"/>
-      <animation name="wake" animation="player-wake"/>
+      <properties width="1" height="1" talkX="70" talkY="10"/>
     </costume>
     <costume name="portcullis" defaultZOrder="10" order="30" role="portcullis.py">
       <pose name="close" pose="wall"/>
@@ -718,6 +764,10 @@
       <pose name="closed" pose="gateClosed"/>
       <pose name="completed" pose="gateOpen"/>
       <pose name="default" pose="gatePending"/>
+    </costume>
+    <costume name="wideLoad" defaultZOrder="100" order="12" extends="player-base" role="player.py" properties="bigProperties.py">
+      <pose name="default" pose="wideLoad"/>
+      <properties width="2" height="1" talkX="120" talkY="10"/>
     </costume>
   </costumes>
   <scenes>

@@ -72,9 +72,7 @@ public class Registry
 
     public Set<String> getClassNames( Class<?> baseClass )
     {
-        if (baseClass == Role.class) {
-            System.out.println("Asking for roles");
-        }
+
         Set<String> set = this.classNames.get(baseClass);
         if (set == null) {
             if (this.parent == null) {

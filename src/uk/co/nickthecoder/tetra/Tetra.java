@@ -442,14 +442,14 @@ public class Tetra extends AbstractDirector
 
     public void debug()
     {
-        System.out.println();
+        System.err.println();
         for (int y = HEIGHT + 1; y >= 0; y--) {
             for (int x = 0; x < WIDTH + 2; x++) {
                 System.out.print(this.grid[x][y] == null ? " " : "X");
             }
-            System.out.println();
+            System.err.println();
         }
-        System.out.println();
+        System.err.println();
     }
 
     public class Piece

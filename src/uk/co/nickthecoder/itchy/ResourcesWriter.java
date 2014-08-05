@@ -381,14 +381,20 @@ public class ResourcesWriter extends XMLWriter
     private void writeCostumeFonts( Costume costume ) throws XMLException
     {
 
-        for (String name : costume.getFontNames()) {
+        for (String name : costume.getTextStyleNames()) {
 
-            for (FontResource fontResource : costume.getFontChoices(name)) {
+            for (TextStyle textStyle : costume.getTextStyleChoices(name)) {
                 this.beginTag("font");
                 this.attribute("name", name);
 
-                this.attribute("font", fontResource.name);
+                this.attribute("font", textStyle.fontResource.name);
+                /*
+                this.attribute("fontSize", textStyle.fontSize);
 
+                this.attribute("color", textStyle.color.getRGBACode());
+                 */
+                this.writeProperties(textStyle);
+                
                 this.endTag("font");
             }
         }

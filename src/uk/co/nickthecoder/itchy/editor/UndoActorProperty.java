@@ -21,7 +21,6 @@ public class UndoActorProperty<S> extends UndoProperty<S>
     @Override
     public void undo()
     {
-        System.out.println("Undo Select Actor " + this.actor);
         this.sceneDesigner.selectActor(this.actor);
         super.undo();
     }
@@ -29,7 +28,6 @@ public class UndoActorProperty<S> extends UndoProperty<S>
     @Override
     public void redo()
     {
-        System.out.println("Redo Select Actor " + this.actor);
         this.sceneDesigner.selectActor(this.actor);
         super.undo();
     }

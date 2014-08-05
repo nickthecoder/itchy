@@ -43,7 +43,7 @@ public class Costume implements Cloneable
 
     private HashMap<String, List<PoseResource>> poseChoices;
 
-    private HashMap<String, List<FontResource>> fontChoices;
+    private HashMap<String, List<TextStyle>> textStyleChoices;
 
     public Costume()
     {
@@ -57,7 +57,7 @@ public class Costume implements Cloneable
         this.stringChoices = new HashMap<String, List<String>>();
         this.soundChoices = new HashMap<String, List<ManagedSound>>();
         this.poseChoices = new HashMap<String, List<PoseResource>>();
-        this.fontChoices = new HashMap<String, List<FontResource>>();
+        this.textStyleChoices = new HashMap<String, List<TextStyle>>();
         this.animationChoices = new HashMap<String, List<AnimationResource>>();
     }
 
@@ -106,9 +106,9 @@ public class Costume implements Cloneable
         this.extendedFrom = costume;
     }
 
-    public Set<String> getFontNames()
+    public Set<String> getTextStyleNames()
     {
-        return this.fontChoices.keySet();
+        return this.textStyleChoices.keySet();
     }
 
     public List<String> getStringNames()
@@ -284,47 +284,49 @@ public class Costume implements Cloneable
         return this.soundChoices.get(name);
     }
 
-    // Font
+    // TextStyle
 
-    public void addFont( String name, FontResource fontResource )
+    public void addTextStyle( String name, TextStyle textStyle )
     {
-        List<FontResource> choices = this.fontChoices.get(name);
+        List<TextStyle> choices = this.textStyleChoices.get(name);
         if (choices == null) {
-            choices = new ArrayList<FontResource>();
-            this.fontChoices.put(name, choices);
+            choices = new ArrayList<TextStyle>();
+            this.textStyleChoices.put(name, choices);
         }
-        choices.add(fontResource);
+        choices.add(textStyle);
     }
 
-    public void removeFont( String name, FontResource value )
+    public void removeTextStyle( String name, TextStyle value )
     {
-        List<FontResource> choices = this.fontChoices.get(name);
+        List<TextStyle> choices = this.textStyleChoices.get(name);
         assert (choices.contains(value));
         choices.remove(value);
     }
 
-    public FontResource getFontResource( String name )
+    public TextStyle getTextStyle( String name )
     {
-        List<FontResource> choices = this.fontChoices.get(name);
+        List<TextStyle> choices = this.textStyleChoices.get(name);
         if ((choices == null) || (choices.size() == 0)) {
             if (this.extendedFrom != null) {
-                return this.extendedFrom.getFontResource(name);
+                return this.extendedFrom.getTextStyle(name);
             }
             return null;
         }
-        FontResource fontResource = choices.get(random.nextInt(choices.size()));
-        return fontResource;
+        TextStyle textStyle = choices.get(random.nextInt(choices.size()));
+        return textStyle;
     }
 
+    /*
     public Font getFont( String name )
     {
         FontResource resource = this.getFontResource(name);
         return resource == null ? null : resource.font;
     }
-
-    public List<FontResource> getFontChoices( String name )
+    */
+    
+    public List<TextStyle> getTextStyleChoices( String name )
     {
-        return this.fontChoices.get(name);
+        return this.textStyleChoices.get(name);
     }
 
     // Animation
@@ -417,11 +419,11 @@ public class Costume implements Cloneable
                 result.poseChoices.put(eventName, list);
             }
 
-            result.fontChoices = new HashMap<String, List<FontResource>>();
-            for (String eventName : this.fontChoices.keySet()) {
-                List<FontResource> list = new ArrayList<FontResource>();
-                list.addAll(this.fontChoices.get(eventName));
-                result.fontChoices.put(eventName, list);
+            result.textStyleChoices = new HashMap<String, List<TextStyle>>();
+            for (String eventName : this.textStyleChoices.keySet()) {
+                List<TextStyle> list = new ArrayList<TextStyle>();
+                list.addAll(this.textStyleChoices.get(eventName));
+                result.textStyleChoices.put(eventName, list);
             }
 
             return result;

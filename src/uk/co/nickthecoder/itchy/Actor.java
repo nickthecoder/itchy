@@ -34,11 +34,11 @@ public class Actor implements PropertySubject<Actor>
         if (text == null) {
             text = "?";
         }
-        Font font = costume.getFont(name);
-        if (font == null) {
+        TextStyle textStyle = costume.getTextStyle(name);
+        if (textStyle == null) {
             return ImagePose.getDummyPose();
         }
-        return new TextPose(text, font, 20);
+        return new TextPose(text, textStyle);
     }
 
     private static int nextId = 1;

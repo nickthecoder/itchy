@@ -20,6 +20,7 @@ import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.Scene;
 import uk.co.nickthecoder.itchy.SceneResource;
 import uk.co.nickthecoder.itchy.SoundResource;
+import uk.co.nickthecoder.itchy.TextStyle;
 import uk.co.nickthecoder.itchy.gui.AbstractTableListener;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Button;
@@ -84,7 +85,7 @@ public class CostumesEditor extends SubEditor<CostumeResource>
     {
         TableModelColumn name = new TableModelColumn("Name", 0, 200);
         name.rowComparator = new SingleColumnRowComparator<String>(0);
-        
+
         TableModelColumn extendedFrom = new TableModelColumn("Extends", 2, 200);
         extendedFrom.rowComparator = new SingleColumnRowComparator<String>(2);
 
@@ -121,9 +122,8 @@ public class CostumesEditor extends SubEditor<CostumeResource>
         TableModelColumn order = new TableModelColumn("Order", 3, 80);
         // Allow sorting by the costume resources's order, and then its name.
         @SuppressWarnings("rawtypes")
-        Comparator comparator = (Comparator) (CostumeResource.orderComparator);
-        order.rowComparator = new WrappedRowComparator(4, comparator );
-
+        Comparator comparator = (CostumeResource.orderComparator);
+        order.rowComparator = new WrappedRowComparator(4, comparator);
 
         List<TableModelColumn> columns = new ArrayList<TableModelColumn>();
         columns.add(name);
@@ -288,7 +288,24 @@ public class CostumesEditor extends SubEditor<CostumeResource>
     {
         super.onCancel();
         if (!this.adding) {
+            swapExtendedFrom(this.currentResource.getCostume(), this.clonedCostume);
             this.currentResource.setCostume(this.clonedCostume);
+        }
+    }
+
+    /**
+     * When we cancel an edit, the changes are discarded by replacing the costume with a clone made before the changes were made. However,
+     * if there are other costumes which extend from the edited costume, then their link to the correct costume will be broken. This method
+     * fixes that.
+     */
+    private void swapExtendedFrom( Costume oldCostume, Costume newCostume )
+    {
+        Resources resources = this.editor.resources;
+        for (String name : resources.costumeNames()) {
+            Costume costume = resources.getCostume(name);
+            if (costume.getExtendedFrom() == oldCostume) {
+                costume.setExtendedFrom(newCostume);
+            }
         }
     }
 
@@ -438,14 +455,14 @@ public class CostumesEditor extends SubEditor<CostumeResource>
                 model.addRow(row);
             }
         }
-        for (String name : costume.getFontNames()) {
-            for (FontResource fontResource : costume.getFontChoices(name)) {
+        for (String name : costume.getTextStyleNames()) {
+            for (TextStyle textStyle : costume.getTextStyleChoices(name)) {
 
                 SimpleTableModelRow row = new SimpleTableModelRow();
                 row.add(name);
                 row.add("Font");
-                row.add(fontResource.getName());
-                row.add(fontResource);
+                row.add(textStyle.fontResource.getName());
+                row.add(textStyle);
 
                 model.addRow(row);
             }
@@ -474,7 +491,7 @@ public class CostumesEditor extends SubEditor<CostumeResource>
         pickList.put("Pose", PoseResource.class);
         pickList.put("Animation", AnimationResource.class);
         pickList.put("Sound", ManagedSound.class);
-        pickList.put("Font", FontResource.class);
+        pickList.put("Font", TextStyle.class);
 
         Picker<Class<?>> picker = new Picker<Class<?>>("Which Type?", pickList) {
             @Override
@@ -492,8 +509,8 @@ public class CostumesEditor extends SubEditor<CostumeResource>
                 } else if (picked == ManagedSound.class) {
                     CostumesEditor.this.onAddSound();
 
-                } else if (picked == FontResource.class) {
-                    CostumesEditor.this.onAddFont();
+                } else if (picked == TextStyle.class) {
+                    CostumesEditor.this.onAddTextStyle();
                 }
 
             }
@@ -585,16 +602,17 @@ public class CostumesEditor extends SubEditor<CostumeResource>
         picker.show();
     }
 
-    private void onAddFont()
+    private void onAddTextStyle()
     {
         FontPicker picker = new FontPicker(this.editor.resources) {
             @Override
             public void pick( FontResource fontResource )
             {
                 Costume costume = CostumesEditor.this.currentResource.getCostume();
-                costume.addFont(NEW_EVENT_NAME, fontResource);
+                TextStyle textStyle = new TextStyle( fontResource, 14 );
+                costume.addTextStyle(NEW_EVENT_NAME, textStyle);
                 CostumesEditor.this.rebuildEventTable();
-                selectEventTableRow(NEW_EVENT_NAME, fontResource);
+                selectEventTableRow(NEW_EVENT_NAME, textStyle);
                 onEditEvent();
             }
         };
@@ -621,8 +639,8 @@ public class CostumesEditor extends SubEditor<CostumeResource>
             } else if (data instanceof AnimationResource) {
                 costume.removeAnimation(name, (AnimationResource) data);
 
-            } else if (data instanceof FontResource) {
-                costume.removeFont(name, (FontResource) data);
+            } else if (data instanceof TextStyle) {
+                costume.removeTextStyle(name, (TextStyle) data);
 
             } else if (data instanceof ManagedSound) {
                 costume.removeSound(name, (ManagedSound) data);
@@ -648,6 +666,9 @@ public class CostumesEditor extends SubEditor<CostumeResource>
     private PickerButton<SoundResource> eventSoundPickerButton;
 
     private ManagedSound eventManagedSound;
+    
+    private TextStyle eventTextStyle;
+    
 
     private void onEditEvent()
     {
@@ -683,10 +704,19 @@ public class CostumesEditor extends SubEditor<CostumeResource>
                     (PoseResource) data);
                 grid.addRow("Pose", this.eventPosePickerButton);
 
-            } else if (data instanceof FontResource) {
-                this.eventFontPickerButton = new FontPickerButton(this.getResources(),
-                    (FontResource) data);
+            } else if (data instanceof TextStyle) {
+                this.eventTextStyle = (TextStyle) data;
+                this.eventFontPickerButton = new FontPickerButton(this.getResources(), this.eventTextStyle.fontResource);
                 grid.addRow("Font", this.eventFontPickerButton);
+                
+                for (AbstractProperty<TextStyle, ?> property : this.eventTextStyle.getProperties()) {
+                    try {
+                        Component component = property.createComponent(this.eventTextStyle, true);
+                        grid.addRow(property.label, component);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
 
             } else if (data instanceof AnimationResource) {
                 this.eventAnimationPickerButton = new PickerButton<AnimationResource>(
@@ -704,11 +734,9 @@ public class CostumesEditor extends SubEditor<CostumeResource>
                     createSoundsHashMap());
                 grid.addRow("Sound", this.eventSoundPickerButton);
 
-                for (AbstractProperty<ManagedSound, ?> property : this.eventManagedSound
-                    .getProperties()) {
+                for (AbstractProperty<ManagedSound, ?> property : this.eventManagedSound.getProperties()) {
                     try {
-                        Component component = property
-                            .createComponent(this.eventManagedSound, true);
+                        Component component = property.createComponent(this.eventManagedSound, true);
                         grid.addRow(property.label, component);
                     } catch (Exception e) {
                     }
@@ -750,6 +778,7 @@ public class CostumesEditor extends SubEditor<CostumeResource>
 
     private void onEditEventOk()
     {
+       
         Costume costume = this.currentResource.getCostume();
         TableModelRow row = this.eventsTable.getCurrentTableModelRow();
 
@@ -766,8 +795,9 @@ public class CostumesEditor extends SubEditor<CostumeResource>
             } else if (data instanceof PoseResource) {
                 costume.addPose(name, this.eventPosePickerButton.getValue());
 
-            } else if (data instanceof FontResource) {
-                costume.addFont(name, this.eventFontPickerButton.getValue());
+            } else if (data instanceof TextStyle) {
+                this.eventTextStyle.fontResource = this.eventFontPickerButton.getValue();
+                costume.addTextStyle(name, this.eventTextStyle);
 
             } else if (data instanceof AnimationResource) {
                 costume.addAnimation(name, this.eventAnimationPickerButton.getValue());
@@ -901,6 +931,7 @@ public class CostumesEditor extends SubEditor<CostumeResource>
     @Override
     protected void onAdd()
     {
+        System.out.println("Is CostumeEditor.onAdd this still used?"); // TODO
         PoseOrFontPicker picker = new PoseOrFontPicker(this.editor.resources) {
             @Override
             public void pick( PoseResource poseResource )
@@ -911,7 +942,7 @@ public class CostumesEditor extends SubEditor<CostumeResource>
             @Override
             public void pick( FontResource fontResource )
             {
-                CostumesEditor.this.add(fontResource);
+                //CostumesEditor.this.add(fontResource);
             }
         };
         picker.show();
@@ -925,14 +956,16 @@ public class CostumesEditor extends SubEditor<CostumeResource>
         this.edit(new CostumeResource(this.editor.resources, poseResource.getName(), costume), true);
     }
 
-    private void add( FontResource fontResource )
-    {
-        Costume costume = new Costume();
-        costume.addFont("default", fontResource);
-        costume.addString("default", fontResource.getName());
-
-        this.edit(new CostumeResource(this.editor.resources, fontResource.getName(), costume), true);
-    }
+//    private void add( TextStyle textStyle )
+//    {
+//        Costume costume = new Costume();
+//        costume.addTextStyle("default", textStyle);
+//        
+//        // TODO What is this doing?
+//        // costume.addString("default", textStyle.fontResource.getName());
+//
+//        this.edit(new CostumeResource(this.editor.resources, textStyle.fontResource.getName(), costume), true);
+//    }
 
     @Override
     protected List<AbstractProperty<CostumeResource, ?>> getProperties()

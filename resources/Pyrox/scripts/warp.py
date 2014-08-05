@@ -28,6 +28,12 @@ class Warp(GridRole) :
         self.addTag("soft")
         self.addTag("warp")
         
+        self.addTag("roundedNW")
+        self.addTag("roundedNE")
+        self.addTag("roundedSW")
+        self.addTag("roundedSE")
+
+        
         if self.isCompleted() :
             self.getActor().event("completed")
 

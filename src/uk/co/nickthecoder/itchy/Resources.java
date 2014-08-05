@@ -17,7 +17,6 @@ import uk.co.nickthecoder.itchy.script.ScriptManager;
 import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.itchy.util.NinePatch;
 import uk.co.nickthecoder.jame.JameException;
-import uk.co.nickthecoder.jame.RGBA;
 import uk.co.nickthecoder.jame.Sound;
 import uk.co.nickthecoder.jame.Surface;
 
@@ -354,6 +353,19 @@ public class Resources extends Loadable
     /**
      * @return The default font. At the moment this is a randomly picked font! Null if there are no fonts.
      */
+    public FontResource getDefaultFontResource()
+    {
+        try {
+            FontResource fr = this.fonts.values().iterator().next();
+            return fr;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    /**
+     * @return The default font. At the moment this is a randomly picked font! Null if there are no fonts.
+     */
     public Font getDefaultFont()
     {
         try {
@@ -600,14 +612,11 @@ public class Resources extends Loadable
 
             String text = resource.getCostume().getString("default");
             if (text != null) {
-                Font font = resource.getCostume().getFont("default");
-                if (font == null) {
-                    font = this.getDefaultFont();
+                TextStyle textStyle = resource.getCostume().getTextStyle("default");
+                if (textStyle == null) {
+                    textStyle = new TextStyle(this.getDefaultFontResource(), 12);
                 }
-                if (font == null) {
-                    return null;
-                }
-                return this.getThumbnail(font, text);
+                return this.getThumbnail(textStyle, text);
             }
 
             return null;
@@ -615,10 +624,15 @@ public class Resources extends Loadable
         return this.getThumbnail(pose);
     }
 
-    public Surface getThumbnail( Font font, String text )
+    public Surface getThumbnail( TextStyle textStyle, String text )
     {
+        int fontSize = textStyle.fontSize;
+        if (fontSize > 30) {
+            fontSize = 30;
+        }
+
         try {
-            return font.getSize(16).renderBlended(text, RGBA.BLACK);
+            return textStyle.fontResource.font.getSize(fontSize).renderBlended(text, textStyle.color);
         } catch (JameException e) {
             return null;
         }
@@ -635,18 +649,18 @@ public class Resources extends Loadable
             return null;
         }
     }
-    
+
     /**
      * Creates an Actor based on a Costume, and places it on a stage.
      */
     public Actor createActor( Costume costume, Stage stage )
     {
         Role role = this.createRole(costume);
-        Actor actor = new Actor( costume );
+        Actor actor = new Actor(costume);
         actor.setRole(role);
-        actor.setZOrder( costume.defaultZOrder );
+        actor.setZOrder(costume.defaultZOrder);
         stage.add(actor);
-        
+
         return actor;
     }
 
