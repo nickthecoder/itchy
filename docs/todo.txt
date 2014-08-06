@@ -1,4 +1,3 @@
-Check other games to see if they still work.
 
 Bugs
 
@@ -28,7 +27,6 @@ PyRox
         Weaker player - can't lift or push rocks.
         
         Big Rock (2x2) Rolls when sitting half and half on solid/empty
-            If we have a giant player too, then it could lift two rocks side by side, as long as they couldn't roll off.
         
         Water
             Each cube has a pressure.
@@ -49,9 +47,6 @@ PyRox
 
     Copy bees!
     Trick level - you have to copy a bee hive.
-
-Animations are too complex "Parallel" etc. Instead, when replacing an animation,
-fast-forward the old one. Including calling the appropriate messages!
 
 
 Look at companion, it has font, font size and color. Why ????

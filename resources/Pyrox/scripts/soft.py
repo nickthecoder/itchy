@@ -18,9 +18,7 @@ class Soft(GridRole) :
         super(Soft,self).onHalfInvaded(invader)
         self.explode()
         
-    # TODO Other methods include :
-    # onDetach, onKill, onMouseDown, onMouseUp, onMouseMove
-
+        
     # Boiler plate code - no need to change this
     def getProperties(self):
         return properties

@@ -57,6 +57,12 @@ public abstract class NumericAnimation extends AbstractAnimation
         super.tick(actor);
     }
 
+    public void fastForward( Actor actor )
+    {
+        this.currentFrame = this.ticks -1;
+        this.tick(actor);
+    }
+    
     @Override
     public boolean isFinished()
     {

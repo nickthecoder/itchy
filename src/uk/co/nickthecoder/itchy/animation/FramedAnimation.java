@@ -107,6 +107,29 @@ public class FramedAnimation extends AbstractAnimation
         }
     }
 
+    public void fastForward( Actor actor ) 
+    {
+        if (this.pingPong) {
+            this.frameIndex = 0;
+            this.useFrame(actor);
+            this.frameIndex --;
+        } else {
+            this.frameIndex = this.frames.size() - 1;
+            this.useFrame(actor);
+            this.frameIndex ++;
+        }
+
+        this.delay = 0;
+        this.fireFinished(actor);
+    }
+
+
+    @Override
+    public boolean isFinished()
+    {
+        return (this.frameIndex < 0) || (this.frameIndex >= this.frames.size());
+    }
+    
     @Override
     public Animation clone()
     {
@@ -124,12 +147,6 @@ public class FramedAnimation extends AbstractAnimation
             e.printStackTrace();
             return null;
         }
-    }
-
-    @Override
-    public boolean isFinished()
-    {
-        return (this.frameIndex < 0) || (this.frameIndex >= this.frames.size());
     }
 
 }

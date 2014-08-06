@@ -9,7 +9,6 @@ from gridRole import GridRole
 from java.util import ArrayList
 
 properties = ArrayList()
-# TODO declare properties here. Note that you must also initialise them in __init__
 properties.add( BooleanProperty( "roundedNE" ).label( "Rounded NE" ) )
 properties.add( BooleanProperty( "roundedSE" ).label( "Rounded SE" ) )
 properties.add( BooleanProperty( "roundedSW" ).label( "Rounded SW" ) )
@@ -30,6 +29,7 @@ class RoundProperties(CostumeProperties) :
         role.tag("roundedSE", self.roundedSE)
         role.tag("roundedSW", self.roundedSW)
         role.tag("roundedNW", self.roundedNW)
+
 
     # Boiler plate code - no need to change this
     def getProperties(self):

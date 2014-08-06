@@ -133,6 +133,15 @@ public class CompoundAnimation extends AbstractAnimation
         super.tick(actor);
     }
 
+    public void fastForward( Actor actor )
+    {
+        for ( Animation animation : this.children ) {
+            animation.fastForward(actor);
+        }
+        this.loopsRemaining = 0;
+        this.fireFinished(actor);
+    }
+    
     @Override
     public Animation clone() throws CloneNotSupportedException
     {

@@ -27,6 +27,11 @@ public interface Animation extends Cloneable, PropertySubject<Animation>, Named
 
     public void tick( Actor actor );
 
+    /**
+     * Perform the last part of the animation. If it is a compound, then fast forward each part.
+     */
+    public void fastForward( Actor actor );
+    
     public boolean isFinished();
 
     public Object clone() throws CloneNotSupportedException;

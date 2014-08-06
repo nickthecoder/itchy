@@ -255,9 +255,13 @@ public class Actor implements PropertySubject<Actor>
 
     public void setAnimation( Animation animation, AnimationEvent ae )
     {
+        
         if (animation == null) {
             if (ae == AnimationEvent.REPLACE) {
                 // If we are trying to REPLACE the old animation with null, then stop the old animation if there is one.
+                if ( (this.animation != null) && ( ! this.animation.isFinished()) ) {
+                    this.animation.fastForward(this);
+                }
                 this.animation = null;
                 return;
             } else {
@@ -274,6 +278,10 @@ public class Actor implements PropertySubject<Actor>
             newAnimation = animation.copy();
             newAnimation.start(this);
 
+            if ( (this.animation != null) && ( ! this.animation.isFinished()) ) {
+                this.animation.fastForward(this);
+            }
+            
         } else if (ae == AnimationEvent.IGNORE) {
             return;
 

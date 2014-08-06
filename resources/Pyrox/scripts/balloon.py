@@ -83,9 +83,6 @@ class Balloon(Movable) :
         super(Balloon,self).shove( pusher, dx, dy, speed )
 
 
-    # TODO Other methods include :
-    # onDetach, onKill, onMouseDown, onMouseUp, onMouseMove
-
     # Boiler plate code - no need to change this
     def getProperties(self):
         return properties

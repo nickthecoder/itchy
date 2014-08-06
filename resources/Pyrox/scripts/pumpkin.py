@@ -50,9 +50,7 @@ class Pumpkin(Collectable) :
                 self.addTag( "roundedSW" )
                 self.addTag( "roundedNW" )
         
-    # TODO Other methods include :
-    # onDetach, onKill, onMouseDown, onMouseUp, onMouseMove
-
+        
     # Boiler plate code - no need to change this
     def getProperties(self):
         return properties

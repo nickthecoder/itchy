@@ -51,9 +51,6 @@ class Portcullis(GridRole) :
             shover.talk( self.actor.costume.getString("requires") + "\n" + req )
     
     
-    # TODO Other methods include :
-    # onDetach, onKill, onMouseDown, onMouseUp, onMouseMove
-
     # Boiler plate code - no need to change this
     def getProperties(self):
         return properties

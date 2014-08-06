@@ -195,7 +195,7 @@
           <scale ease="easeInOut" target="1.0" ticks="30"/>
           <move ease="easeInBack" ticks="30" dx="0.0" dy="-90.0"/>
         </parallel>
-        <delay ticks="60.0"/>
+        <delay ticks="60"/>
         <parallel loops="1" sequence="false">
           <alpha ease="easeInOut" target="0.0" ticks="30"/>
           <scale ease="easeInOut" target="0.02" ticks="15"/>
@@ -631,6 +631,10 @@
     <costume name="machineWS2" defaultZOrder="90" order="47" role="machine.py" properties="machineProperties.py">
       <pose name="default" pose="machineWS2"/>
       <properties fromCostume="planeL" toCostume="rock" enters="W" exits="S" offsetX="1" offsetY="0"/>
+    </costume>
+    <costume name="plainPlayer" defaultZOrder="100" order="1" role="player.py" properties="bigProperties.py">
+      <pose name="default" pose="robotU2"/>
+      <properties width="1" height="1" talkX="70" talkY="10"/>
     </costume>
     <costume name="planeL" defaultZOrder="30" order="10" role="plane.py" properties="planeProperties.py">
       <pose name="default" pose="planeL"/>

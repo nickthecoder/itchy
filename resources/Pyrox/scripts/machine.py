@@ -91,9 +91,6 @@ class Machine(GridRole) :
             self.pregnant = True
             self.pulled = False
         
-    
-    # TODO Other methods include :
-    # onDetach, onKill, onMouseDown, onMouseUp, onMouseMove
 
     # Boiler plate code - no need to change this
     def getProperties(self):

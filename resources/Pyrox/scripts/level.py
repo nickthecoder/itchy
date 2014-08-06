@@ -235,9 +235,7 @@ class Level(PlainSceneDirector) :
             for gate in AbstractRole.allByTag( "gate" ) :
                 gate.onMessage("open")
 
-    # TODO Other methods include :
-    # onActivate, onDeactivate(), onMouseDown, onMouseUp, onMouseMove, onKeyDown, onKeyUp, onMessage
-    
+
     # Boiler plate code - no need to change this
     def getProperties(self):
         return properties

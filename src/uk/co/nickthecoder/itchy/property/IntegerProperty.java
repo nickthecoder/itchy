@@ -95,7 +95,11 @@ public class IntegerProperty<S> extends AbstractProperty<S, Integer>
     @Override
     public Integer parse( String value )
     {
-        return Integer.parseInt(value);
+        try {
+            return Integer.parseInt(value);
+        } catch (NumberFormatException e) {
+            return (int) Float.parseFloat(value);
+        }
     }
 
     @Override

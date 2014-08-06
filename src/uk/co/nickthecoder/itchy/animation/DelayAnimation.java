@@ -17,7 +17,7 @@ public class DelayAnimation extends AbstractAnimation
         AbstractProperty.<Animation> findAnnotations(DelayAnimation.class);
 
     @Property(label = "ticks")
-    public double ticks;
+    public int ticks;
 
     protected int currentFrame;
 
@@ -45,6 +45,12 @@ public class DelayAnimation extends AbstractAnimation
         this.currentFrame++;
     }
 
+    public void fastForward(Actor actor)
+    {
+        this.currentFrame = this.ticks;
+        this.fireFinished(actor);
+    }
+    
     @Override
     public boolean isFinished()
     {

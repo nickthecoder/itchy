@@ -10,7 +10,6 @@ from roundProperties import RoundProperties
 from java.util import ArrayList
 
 properties = ArrayList()
-# TODO declare properties here. Note that you must also initialise them in __init__
 properties.addAll( roundProperties.properties )
 properties.add( BooleanProperty( "canExplode" ).label( "Can Explode" ) )
 
@@ -24,6 +23,7 @@ class WallProperties(RoundProperties) :
         super(WallProperties,self).update(role)
         
         role.tag( "explodable", self.canExplode )
+
 
     # Boiler plate code - no need to change this
     def getProperties(self):

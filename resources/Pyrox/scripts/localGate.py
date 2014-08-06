@@ -68,8 +68,6 @@ class LocalGate(GridRole) :
                 invader.moveTo(destination.actor.x, destination.actor.y)
                 self.event("jumped") # Makes another sound effect  
 
-    # TODO Other methods include :
-    # onDetach, onKill, onMouseDown, onMouseUp, onMouseMove
 
     # Boiler plate code - no need to change this
     def getProperties(self):

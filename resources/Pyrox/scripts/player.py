@@ -226,9 +226,9 @@ class Player(Big) :
     def move( self, dx, dy, speed=None ) :
         Big.move(self,dx, dy, speed )
         if dy == 0 :
-            self.actor.event( "move-" + ("L" if dx == -1 else "R" ), None, Actor.AnimationEvent.PARALLEL )
+            self.actor.event( "move-" + ("L" if dx == -1 else "R" ) )
         else :
-            self.actor.event( "move-" + ("U" if dy ==  1 else "D" ), None, Actor.AnimationEvent.PARALLEL )
+            self.actor.event( "move-" + ("U" if dy ==  1 else "D" ) )
 
     def onDeath( self ) :
     

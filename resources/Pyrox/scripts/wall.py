@@ -15,8 +15,6 @@ class Wall(GridRole) :
         
         self.getActor().getCostume().getProperties().update(self)
 
-    # TODO Other methods include :
-    # onDetach, onKill, onMouseDown, onMouseUp, onMouseMove
 
     # Boiler plate code - no need to change this
     def getProperties(self):

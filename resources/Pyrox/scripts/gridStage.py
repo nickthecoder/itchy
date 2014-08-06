@@ -39,8 +39,6 @@ class GridStage(ZOrderStage) :
 
                     # If an invader has nabbed a square, before the actor has finished moving out of the square,
                     # then we must ensure that it gets its tick called by calling it from the square it is entering.
-                    
-                    # TODO and square.entrant.square 
                     if square.entrant and square.entrant.square.occupant != square.entrant :
                         if square.entrant.actor :
                             self.tickRole( square.entrant )

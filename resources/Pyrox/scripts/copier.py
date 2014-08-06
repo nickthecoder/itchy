@@ -69,8 +69,6 @@ class Copier(GridRole) :
     def adjustTalk(self, talk) :
         talk.stop().offset(0,0).alignment(0.5,0.5);
 
-    # TODO Other methods include :
-    # onDetach, onKill, onMouseDown, onMouseUp, onMouseMove
 
     # Boiler plate code - no need to change this
     def getProperties(self):

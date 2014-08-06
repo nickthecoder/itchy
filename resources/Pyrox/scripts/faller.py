@@ -56,14 +56,14 @@ class Faller(Movable) :
             if (self.lookEast().isEmpty() and self.lookSouthEast(self.speed/2).hasTag("squashS")) :
                 # The animation must be done in parallel with existing animations, because rolling off
                 # of something straight after exiting a localGate needs the localGate's exit animation to complete
-                self.getActor().event("rollClockwise", "turned", Actor.AnimationEvent.PARALLEL)
+                self.getActor().event("rollClockwise", "turned")
                 self.moveEast()
                 return
 
 
         if (south.hasTag("roundedNW")) :
             if (self.lookWest().isEmpty() and self.lookSouthWest(self.speed/2).hasTag("squashS")) :
-                self.getActor().event("rollAnticlockwise", "turned", Actor.AnimationEvent.PARALLEL)
+                self.getActor().event("rollAnticlockwise", "turned")
                 self.moveWest()
                 return
         
@@ -92,10 +92,6 @@ class Faller(Movable) :
             if (south.hasTag("hittable")) :
                 south.onHit( self, dx, dy )
 
-
-
-    # TODO Other methods include :
-    # onDetach, onKill, onMouseDown, onMouseUp, onMouseMove
 
     # Boiler plate code - no need to change this
     def getProperties(self):

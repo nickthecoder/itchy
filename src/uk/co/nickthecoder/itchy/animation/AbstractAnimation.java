@@ -39,15 +39,21 @@ public abstract class AbstractAnimation implements Animation, Cloneable
     public void tick( Actor actor )
     {
         if (this.isFinished()) {
-            for (AnimationListener listener : this.listeners) {
-                listener.finished();
-            }
-            if (!StringUtils.isBlank(this.finishedMessage)) {
-                for (MessageListener listener : this.messageListeners) {
-                    listener.onMessage(this.finishedMessage);
-                }
-            }
+            fireFinished(actor);
         }
+    }
+
+    protected void fireFinished( Actor actor )
+    {
+        
+        for (AnimationListener listener : this.listeners) {
+            listener.finished();
+        }
+        if (!StringUtils.isBlank(this.finishedMessage)) {
+            for (MessageListener listener : this.messageListeners) {
+                listener.onMessage(this.finishedMessage);
+            }
+        }        
     }
 
     @Override
