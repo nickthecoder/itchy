@@ -823,6 +823,7 @@
     <scene name="furniture"/>
     <scene name="furniture2"/>
     <scene name="glass"/>
+    <scene name="glass-empty"/>
     <scene name="grenades"/>
     <scene name="grenades2"/>
     <scene name="grenades3"/>

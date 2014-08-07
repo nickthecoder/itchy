@@ -396,6 +396,7 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
                 data.set(this.pose.getSurface().getWidth(), this.pose.getSurface().getHeight(),
                     this.pose.getOffsetX(), this.pose.getOffsetY());
                 this.pipeline.applyGeometry(data);
+                
                 this.worldRectangle = new WorldRectangle(
                     this.actor.getX() - data.offsetX,
                     this.actor.getY() - data.offsetY,
@@ -451,7 +452,7 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
      * <p>
      * Note: If an actor changes pose, then the results of the fixed makeup will be lost.
      * 
-     * TODO BUG? Doesn't look right, as the scale, rotation, colorize and makeup will be applied, but
+     * TO DO BUG? Doesn't look right, as the scale, rotation, colorize and makeup will be applied, but
      * only the makeup is removed, so the others will be applied twice. This should probably be replaced
      * with "fixMakeup", which renders the makeup, and then nulls it out, and by "snapshot", which
      * returns the current image including scale, rotation etc, which could then be used as the basis

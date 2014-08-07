@@ -102,7 +102,7 @@ public class KeyInput
             if (this.metaModifier != (ke.modifier(ModifierKey.LMETA) || ke.modifier(ModifierKey.RMETA))) {
                 return false;
             }
-            // TODO Hmm, there is no super modifier. If so, then we should remove it from Input too.
+            // TO DO Hmm, there is no super modifier. If so, then we should remove it from Input too.
             //if (this.superModifier != (ke.modifier(ModifierKey.) || ke.modifier(ModifierKey.RSUPER))) {
             //    return false;
             //}

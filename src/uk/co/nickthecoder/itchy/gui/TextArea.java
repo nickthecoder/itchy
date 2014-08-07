@@ -112,7 +112,7 @@ public class TextArea extends ClickableContainer implements Layout, KeyListener,
             label.setExpansion(1.0);
         }
 
-        // TODO Do something better than set it to zero?
+        // TO DO Do something better than set it to zero?
         this.caretIndex = 0;
         this.update();
 
@@ -159,7 +159,7 @@ public class TextArea extends ClickableContainer implements Layout, KeyListener,
 
     private int getLineNumber( MouseEvent e )
     {
-        // TODO Work out which is the right label based on the y coordinate.
+        // TO DO Work out which is the right label based on the y coordinate.
         return 0;
     }
 

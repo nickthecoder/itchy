@@ -30,7 +30,7 @@ public abstract class ScriptLanguage
         this.manager = manager;
         this.lastLoadedMap = new HashMap<File, Long>();
         
-        //TODO if this works, then I don't need ensureInitialise
+        //TO DO if this works, then I don't need ensureInitialise
         initialise();
     }
     

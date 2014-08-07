@@ -3,6 +3,10 @@ Bugs
     Labels on test page are not shown until FULLY on screen.
         To do with rotation and lazy eval of surface. Once drawn, they work fine.
 
+    BuiltInRotoZoom.applyGeometry isn't working when the Pose's offset isn't in the middle of the image.
+        So text aligned using 0.5 will work, but with 0, it won't.
+        Manually calculate what it is doing, and the problem will become apparent.
+
 PyRox
 
     Create a wooden beehive - Flat on the bottom.

@@ -931,7 +931,7 @@ public class CostumesEditor extends SubEditor<CostumeResource>
     @Override
     protected void onAdd()
     {
-        System.out.println("Is CostumeEditor.onAdd this still used?"); // TODO
+        System.out.println("Is CostumeEditor.onAdd this still used?"); // TO DO
         PoseOrFontPicker picker = new PoseOrFontPicker(this.editor.resources) {
             @Override
             public void pick( PoseResource poseResource )
@@ -955,17 +955,6 @@ public class CostumesEditor extends SubEditor<CostumeResource>
 
         this.edit(new CostumeResource(this.editor.resources, poseResource.getName(), costume), true);
     }
-
-//    private void add( TextStyle textStyle )
-//    {
-//        Costume costume = new Costume();
-//        costume.addTextStyle("default", textStyle);
-//        
-//        // TODO What is this doing?
-//        // costume.addString("default", textStyle.fontResource.getName());
-//
-//        this.edit(new CostumeResource(this.editor.resources, textStyle.fontResource.getName(), costume), true);
-//    }
 
     @Override
     protected List<AbstractProperty<CostumeResource, ?>> getProperties()

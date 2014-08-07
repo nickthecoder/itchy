@@ -1416,7 +1416,7 @@ public class SceneDesigner implements MouseListener, KeyListener
                 stage.add(actor);
             }
 
-            // TODO, When stamping an actor implements undo/red, then the StageConstraint will have to implement it too.
+            // TO  DO, When stamping an actor implements undo/red, then the StageConstraint will have to implement it too.
             sc.added(actor);
 
             if (!Itchy.isShiftDown()) {
