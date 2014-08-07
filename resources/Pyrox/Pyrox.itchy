@@ -19,25 +19,25 @@
     <pose name="autoPilot" filename="images/autoPilot.png"/>
     <pose name="balloon" filename="images/balloon.png"/>
     <pose name="beanPole" filename="images/beanPole.png" offsetY="90"/>
-    <pose name="beeL1" filename="images/beeL1.png"/>
-    <pose name="beeR1" filename="images/beeR1.png"/>
+    <pose name="bee-E1" filename="images/bee-E1.png"/>
+    <pose name="bee-W1" filename="images/bee-W1.png"/>
     <pose name="behive" filename="images/behive.png"/>
-    <pose name="carL" filename="images/carL.png"/>
-    <pose name="carR" filename="images/carR.png"/>
+    <pose name="car-L" filename="images/car-L.png"/>
+    <pose name="car-R" filename="images/car-R.png"/>
     <pose name="chair" filename="images/chair.png"/>
     <pose name="coin" filename="images/coin.png"/>
-    <pose name="concrete1" filename="images/concrete1.png"/>
-    <pose name="concrete2" filename="images/concrete2.png"/>
+    <pose name="concrete-1" filename="images/concrete-1.png"/>
+    <pose name="concrete-2" filename="images/concrete-2.png"/>
     <pose name="copier" filename="images/copier.png"/>
     <pose name="copierLight" filename="images/copierLight.png" offsetX="35" offsetY="20"/>
     <pose name="copierScanning" filename="images/copierScanning.png"/>
-    <pose name="explosion01" filename="images/explosion01.png"/>
-    <pose name="explosion02" filename="images/explosion02.png"/>
-    <pose name="explosion03" filename="images/explosion03.png"/>
-    <pose name="explosion04" filename="images/explosion04.png"/>
-    <pose name="explosion05" filename="images/explosion05.png"/>
-    <pose name="explosion06" filename="images/explosion06.png"/>
-    <pose name="explosion07" filename="images/explosion07.png"/>
+    <pose name="explosion-01" filename="images/explosion-01.png"/>
+    <pose name="explosion-02" filename="images/explosion-02.png"/>
+    <pose name="explosion-03" filename="images/explosion-03.png"/>
+    <pose name="explosion-04" filename="images/explosion-04.png"/>
+    <pose name="explosion-05" filename="images/explosion-05.png"/>
+    <pose name="explosion-06" filename="images/explosion-06.png"/>
+    <pose name="explosion-07" filename="images/explosion-07.png"/>
     <pose name="gateClosed" filename="images/gateClosed.png"/>
     <pose name="gateLocal" filename="images/gateLocal.png"/>
     <pose name="gateOpen" filename="images/gateOpen.png"/>
@@ -49,53 +49,53 @@
     <pose name="key" filename="images/key.png"/>
     <pose name="keyEscape" filename="images/keyEscape.png"/>
     <pose name="keyF5" filename="images/keyF5.png"/>
-    <pose name="machineEN" filename="images/machineEN.png"/>
-    <pose name="machineEN2" filename="images/machineEN2.png" offsetX="90"/>
-    <pose name="machineES" filename="images/machineES.png"/>
-    <pose name="machineES2" filename="images/machineES2.png" offsetX="90"/>
-    <pose name="machineEW" filename="images/machineEW.png"/>
-    <pose name="machineEW2" filename="images/machineEW2.png" offsetX="90"/>
-    <pose name="machineNE" filename="images/machineNE.png"/>
-    <pose name="machineNE2" filename="images/machineNE2.png" offsetX="90"/>
-    <pose name="machineNS" filename="images/machineNS.png"/>
-    <pose name="machineNW" filename="images/machineNW.png"/>
-    <pose name="machineNW2" filename="images/machineNW2.png" offsetX="30"/>
-    <pose name="machineSE" filename="images/machineSE.png"/>
-    <pose name="machineSE2" filename="images/machineSE2.png" offsetX="90"/>
-    <pose name="machineSN" filename="images/machineSN.png"/>
-    <pose name="machineSW" filename="images/machineSW.png"/>
-    <pose name="machineSW2" filename="images/machineSW2.png" offsetX="30"/>
-    <pose name="machineWE" filename="images/machineWE.png"/>
-    <pose name="machineWE2" filename="images/machineWE2.png" offsetX="30"/>
-    <pose name="machineWN" filename="images/machineWN.png"/>
-    <pose name="machineWN2" filename="images/machineWN2.png" offsetX="30"/>
-    <pose name="machineWS" filename="images/machineWS.png"/>
-    <pose name="machineWS2" filename="images/machineWS2.png" offsetX="30"/>
-    <pose name="planeL" filename="images/planeL.png" offsetX="30"/>
-    <pose name="planeR" filename="images/planeR.png" offsetX="90"/>
+    <pose name="machine-EN" filename="images/machine-EN.png"/>
+    <pose name="machine-EN2" filename="images/machine-EN2.png" offsetX="90"/>
+    <pose name="machine-ES" filename="images/machine-ES.png"/>
+    <pose name="machine-ES2" filename="images/machine-ES2.png" offsetX="90"/>
+    <pose name="machine-EW" filename="images/machine-EW.png"/>
+    <pose name="machine-EW2" filename="images/machine-EW2.png" offsetX="90"/>
+    <pose name="machine-NE" filename="images/machine-NE.png"/>
+    <pose name="machine-NE2" filename="images/machine-NE2.png" offsetX="90"/>
+    <pose name="machine-NS" filename="images/machine-NS.png"/>
+    <pose name="machine-NW" filename="images/machine-NW.png"/>
+    <pose name="machine-NW2" filename="images/machine-NW2.png" offsetX="30"/>
+    <pose name="machine-SE" filename="images/machine-SE.png"/>
+    <pose name="machine-SE2" filename="images/machine-SE2.png" offsetX="90"/>
+    <pose name="machine-SN" filename="images/machine-SN.png"/>
+    <pose name="machine-SW" filename="images/machine-SW.png"/>
+    <pose name="machine-SW2" filename="images/machine-SW2.png" offsetX="30"/>
+    <pose name="machine-WE" filename="images/machine-WE.png"/>
+    <pose name="machine-WE2" filename="images/machine-WE2.png" offsetX="30"/>
+    <pose name="machine-WN" filename="images/machine-WN.png"/>
+    <pose name="machine-WN2" filename="images/machine-WN2.png" offsetX="30"/>
+    <pose name="machine-WS" filename="images/machine-WS.png"/>
+    <pose name="machine-WS2" filename="images/machine-WS2.png" offsetX="30"/>
+    <pose name="plane-E" filename="images/plane-E.png" offsetX="90"/>
+    <pose name="plane-W" filename="images/plane-W.png" offsetX="30"/>
     <pose name="portcullis" filename="images/portcullis.png"/>
-    <pose name="pumpkin1" filename="images/pumpkin1.png"/>
-    <pose name="pumpkin2" filename="images/pumpkin2.png"/>
-    <pose name="pumpkin3" filename="images/pumpkin3.png"/>
-    <pose name="pumpkin4" filename="images/pumpkin4.png"/>
-    <pose name="pumpkin5" filename="images/pumpkin5.png"/>
-    <pose name="pumpkin6" filename="images/pumpkin6.png"/>
-    <pose name="pumpkin7" filename="images/pumpkin7.png"/>
-    <pose name="robotD1" filename="images/robotD1.png"/>
-    <pose name="robotD2" filename="images/robotD2.png"/>
-    <pose name="robotD3" filename="images/robotD3.png"/>
-    <pose name="robotD4" filename="images/robotD4.png"/>
-    <pose name="robotL1" filename="images/robotL1.png"/>
-    <pose name="robotL2" filename="images/robotL2.png"/>
-    <pose name="robotL3" filename="images/robotL3.png"/>
-    <pose name="robotL4" filename="images/robotL4.png"/>
-    <pose name="robotR1" filename="images/robotR1.png"/>
-    <pose name="robotR2" filename="images/robotR2.png"/>
-    <pose name="robotR3" filename="images/robotR3.png"/>
-    <pose name="robotR4" filename="images/robotR4.png"/>
-    <pose name="robotU1" filename="images/robotU1.png"/>
-    <pose name="robotU2" filename="images/robotU2.png"/>
-    <pose name="robotU3" filename="images/robotU3.png"/>
+    <pose name="pumpkin-1" filename="images/pumpkin-1.png"/>
+    <pose name="pumpkin-2" filename="images/pumpkin-2.png"/>
+    <pose name="pumpkin-3" filename="images/pumpkin-3.png"/>
+    <pose name="pumpkin-4" filename="images/pumpkin-4.png"/>
+    <pose name="pumpkin-5" filename="images/pumpkin-5.png"/>
+    <pose name="pumpkin-6" filename="images/pumpkin-6.png"/>
+    <pose name="pumpkin-7" filename="images/pumpkin-7.png"/>
+    <pose name="robot-E1" filename="images/robot-E1.png"/>
+    <pose name="robot-E2" filename="images/robot-E2.png"/>
+    <pose name="robot-E3" filename="images/robot-E3.png"/>
+    <pose name="robot-E4" filename="images/robot-E4.png"/>
+    <pose name="robot-N1" filename="images/robot-N1.png"/>
+    <pose name="robot-N2" filename="images/robot-N2.png"/>
+    <pose name="robot-N3" filename="images/robot-N3.png"/>
+    <pose name="robot-S1" filename="images/robot-S1.png"/>
+    <pose name="robot-S2" filename="images/robot-S2.png"/>
+    <pose name="robot-S3" filename="images/robot-S3.png"/>
+    <pose name="robot-S4" filename="images/robot-S4.png"/>
+    <pose name="robot-W1" filename="images/robot-W1.png"/>
+    <pose name="robot-W2" filename="images/robot-W2.png"/>
+    <pose name="robot-W3" filename="images/robot-W3.png"/>
+    <pose name="robot-W4" filename="images/robot-W4.png"/>
     <pose name="rock" filename="images/rock.png"/>
     <pose name="safe" filename="images/safe.png"/>
     <pose name="safeOpen" filename="images/safeOpen.png"/>
@@ -103,28 +103,28 @@
     <pose name="sledge" filename="images/sledge.png"/>
     <pose name="soil" filename="images/soil.png"/>
     <pose name="soil2" filename="images/soil2.png"/>
-    <pose name="squashE" filename="images/squashE.png"/>
-    <pose name="squashEP" filename="images/squashEP.png"/>
-    <pose name="squashEW" filename="images/squashEW.png"/>
-    <pose name="squashEWP" filename="images/squashEWP.png"/>
-    <pose name="squashN" filename="images/squashN.png"/>
-    <pose name="squashNP" filename="images/squashNP.png"/>
-    <pose name="squashNS" filename="images/squashNS.png"/>
-    <pose name="squashNSP" filename="images/squashNSP.png"/>
-    <pose name="squashS" filename="images/squashS.png"/>
-    <pose name="squashSP" filename="images/squashSP.png"/>
-    <pose name="squashW" filename="images/squashW.png"/>
-    <pose name="squashWP" filename="images/squashWP.png"/>
+    <pose name="squash-E" filename="images/squash-E.png"/>
+    <pose name="squash-EP" filename="images/squash-EP.png"/>
+    <pose name="squash-EW" filename="images/squash-EW.png"/>
+    <pose name="squash-EWP" filename="images/squash-EWP.png"/>
+    <pose name="squash-N" filename="images/squash-N.png"/>
+    <pose name="squash-NP" filename="images/squash-NP.png"/>
+    <pose name="squash-NS" filename="images/squash-NS.png"/>
+    <pose name="squash-NSP" filename="images/squash-NSP.png"/>
+    <pose name="squash-S" filename="images/squash-S.png"/>
+    <pose name="squash-SP" filename="images/squash-SP.png"/>
+    <pose name="squash-W" filename="images/squash-W.png"/>
+    <pose name="squash-WP" filename="images/squash-WP.png"/>
     <pose name="stamp" filename="images/stamp.png"/>
     <pose name="table" filename="images/table.png"/>
     <pose name="test" filename="images/test.png"/>
     <pose name="testN" filename="images/testN.png"/>
     <pose name="textY" filename="images/testY.png"/>
     <pose name="wall" filename="images/wall.png"/>
-    <pose name="wallNE" filename="images/wallNE.png"/>
-    <pose name="wallNW" filename="images/wallNW.png"/>
-    <pose name="wallSE" filename="images/wallSE.png"/>
-    <pose name="wallSW" filename="images/wallSW.png"/>
+    <pose name="wall-NE" filename="images/wall-NE.png"/>
+    <pose name="wall-NW" filename="images/wall-NW.png"/>
+    <pose name="wall-SE" filename="images/wall-SE.png"/>
+    <pose name="wall-SW" filename="images/wall-SW.png"/>
     <pose name="wideLoad" filename="images/wideLoad.png" offsetX="30"/>
     <pose name="z1" filename="images/z1.png" offsetX="7" offsetY="7"/>
     <pose name="z2" filename="images/z2.png"/>
@@ -142,7 +142,7 @@
           <alpha ease="linear" target="128.0" ticks="1"/>
           <scale ease="linear" target="0.1" ticks="1"/>
           <frames pingPong="false">
-            <frame pose="beeR1" delay="1"/>
+            <frame pose="bee-E1" delay="1"/>
           </frames>
         </parallel>
         <parallel loops="1" sequence="false">
@@ -153,13 +153,13 @@
       </sequence>
     </animation>
     <animation name="bee-escapeN">
-      <sequence loops="1" sequence="true">
+      <sequence finishedMessage="go" loops="1" sequence="true">
         <parallel loops="1" sequence="false">
           <move ease="linear" ticks="1" dx="0.0" dy="-60.0"/>
           <alpha ease="linear" target="128.0" ticks="1"/>
           <scale ease="linear" target="0.1" ticks="1"/>
           <frames pingPong="false">
-            <frame pose="beeR1" delay="1"/>
+            <frame pose="bee-E1" delay="1"/>
           </frames>
         </parallel>
         <parallel loops="1" sequence="false">
@@ -170,13 +170,13 @@
       </sequence>
     </animation>
     <animation name="bee-escapeS">
-      <sequence loops="1" sequence="true">
+      <sequence finishedMessage="go" loops="1" sequence="true">
         <parallel loops="1" sequence="false">
           <move ease="linear" ticks="1" dx="0.0" dy="60.0"/>
           <alpha ease="linear" target="128.0" ticks="1"/>
           <scale ease="linear" target="0.1" ticks="1"/>
           <frames pingPong="false">
-            <frame pose="beeR1" delay="1"/>
+            <frame pose="bee-E1" delay="1"/>
           </frames>
         </parallel>
         <parallel loops="1" sequence="false">
@@ -193,7 +193,7 @@
           <alpha ease="linear" target="128.0" ticks="1"/>
           <move ease="linear" ticks="1" dx="60.0" dy="0.0"/>
           <frames pingPong="false">
-            <frame pose="beeL1" delay="1"/>
+            <frame pose="bee-W1" delay="1"/>
           </frames>
         </parallel>
         <parallel loops="1" sequence="false">
@@ -240,13 +240,13 @@
     <animation name="explosion">
       <sequence loops="1" sequence="true">
         <frames pingPong="false">
-          <frame pose="explosion01" delay="5"/>
-          <frame pose="explosion02" delay="5"/>
-          <frame pose="explosion03" delay="5"/>
-          <frame pose="explosion04" delay="5"/>
-          <frame pose="explosion05" delay="5"/>
-          <frame pose="explosion06" delay="5"/>
-          <frame pose="explosion07" delay="1"/>
+          <frame pose="explosion-01" delay="5"/>
+          <frame pose="explosion-02" delay="5"/>
+          <frame pose="explosion-03" delay="5"/>
+          <frame pose="explosion-04" delay="5"/>
+          <frame pose="explosion-05" delay="5"/>
+          <frame pose="explosion-06" delay="5"/>
+          <frame pose="explosion-07" delay="1"/>
         </frames>
         <sequence loops="1" sequence="true">
           <alpha ease="linear" target="0.0" ticks="3"/>
@@ -325,9 +325,9 @@
           </sequence>
           <sequence loops="7" sequence="true">
             <frames pingPong="false">
-              <frame pose="robotR3" delay="4"/>
-              <frame pose="robotL3" delay="4"/>
-              <frame pose="robotD2" delay="4"/>
+              <frame pose="robot-E3" delay="4"/>
+              <frame pose="robot-W3" delay="4"/>
+              <frame pose="robot-S2" delay="4"/>
             </frames>
           </sequence>
         </parallel>
@@ -336,9 +336,9 @@
           <alpha ease="easeOut" target="0.0" ticks="100"/>
           <sequence loops="10" sequence="true">
             <frames pingPong="false">
-              <frame pose="robotR2" delay="6"/>
-              <frame pose="robotL2" delay="6"/>
-              <frame pose="robotD2" delay="6"/>
+              <frame pose="robot-E2" delay="6"/>
+              <frame pose="robot-W2" delay="6"/>
+              <frame pose="robot-S2" delay="6"/>
             </frames>
           </sequence>
         </parallel>
@@ -362,55 +362,55 @@
     <animation name="pumpkin-pollinate">
       <sequence finishedMessage="pollinated" loops="1" sequence="true">
         <frames pingPong="false">
-          <frame pose="pumpkin1" delay="30"/>
-          <frame pose="pumpkin2" delay="10"/>
-          <frame pose="pumpkin3" delay="10"/>
-          <frame pose="pumpkin4" delay="10"/>
-          <frame pose="pumpkin5" delay="10"/>
-          <frame pose="pumpkin6" delay="10"/>
-          <frame pose="pumpkin7" delay="1"/>
+          <frame pose="pumpkin-1" delay="30"/>
+          <frame pose="pumpkin-2" delay="10"/>
+          <frame pose="pumpkin-3" delay="10"/>
+          <frame pose="pumpkin-4" delay="10"/>
+          <frame pose="pumpkin-5" delay="10"/>
+          <frame pose="pumpkin-6" delay="10"/>
+          <frame pose="pumpkin-7" delay="1"/>
         </frames>
       </sequence>
     </animation>
     <animation name="robot-D">
       <sequence loops="1" sequence="true">
         <frames pingPong="false">
-          <frame pose="robotD1" delay="3"/>
-          <frame pose="robotD2" delay="3"/>
-          <frame pose="robotD3" delay="3"/>
-          <frame pose="robotD4" delay="3"/>
+          <frame pose="robot-S1" delay="3"/>
+          <frame pose="robot-S2" delay="3"/>
+          <frame pose="robot-S3" delay="3"/>
+          <frame pose="robot-S4" delay="3"/>
         </frames>
       </sequence>
     </animation>
     <animation name="robot-L">
       <sequence loops="1" sequence="true">
         <frames pingPong="false">
-          <frame pose="robotL1" delay="3"/>
-          <frame pose="robotL2" delay="3"/>
-          <frame pose="robotL3" delay="3"/>
-          <frame pose="robotL4" delay="3"/>
+          <frame pose="robot-W1" delay="3"/>
+          <frame pose="robot-W2" delay="3"/>
+          <frame pose="robot-W3" delay="3"/>
+          <frame pose="robot-W4" delay="3"/>
         </frames>
       </sequence>
     </animation>
     <animation name="robot-R">
       <sequence loops="1" sequence="true">
         <frames pingPong="false">
-          <frame pose="robotR1" delay="3"/>
-          <frame pose="robotR2" delay="3"/>
-          <frame pose="robotR3" delay="3"/>
-          <frame pose="robotR4" delay="3"/>
+          <frame pose="robot-E1" delay="3"/>
+          <frame pose="robot-E2" delay="3"/>
+          <frame pose="robot-E3" delay="3"/>
+          <frame pose="robot-E4" delay="3"/>
         </frames>
       </sequence>
     </animation>
     <animation name="robot-U">
       <sequence loops="1" sequence="true">
         <frames pingPong="false">
-          <frame pose="robotU1" delay="2"/>
-          <frame pose="robotU2" delay="2"/>
-          <frame pose="robotU3" delay="2"/>
-          <frame pose="robotU2" delay="2"/>
-          <frame pose="robotU1" delay="2"/>
-          <frame pose="robotR1" delay="1"/>
+          <frame pose="robot-N1" delay="2"/>
+          <frame pose="robot-N2" delay="2"/>
+          <frame pose="robot-N3" delay="2"/>
+          <frame pose="robot-N2" delay="2"/>
+          <frame pose="robot-N1" delay="2"/>
+          <frame pose="robot-E1" delay="1"/>
         </frames>
       </sequence>
     </animation>
@@ -489,9 +489,9 @@
       <properties width="1" height="2" talkX="70" talkY="60"/>
     </costume>
     <costume name="bee" defaultZOrder="80" order="90" role="bee.py">
-      <pose name="default" pose="beeL1"/>
-      <pose name="left" pose="beeL1"/>
-      <pose name="right" pose="beeR1"/>
+      <pose name="default" pose="bee-W1"/>
+      <pose name="face-E" pose="bee-E1"/>
+      <pose name="face-W" pose="bee-W1"/>
       <animation name="escapeE" animation="bee-escapeE"/>
       <animation name="escapeN" animation="bee-escapeN"/>
       <animation name="escapeS" animation="bee-escapeS"/>
@@ -504,11 +504,11 @@
       <animation name="rollClockwise" animation="grenade-rollClockwise"/>
     </costume>
     <costume name="carL" defaultZOrder="20" order="20" role="car.py" properties="carProperties.py">
-      <pose name="default" pose="carL"/>
+      <pose name="default" pose="car-L"/>
       <properties roundedNE="false" roundedSE="false" roundedSW="false" roundedNW="false" headingLeft="true"/>
     </costume>
     <costume name="carR" defaultZOrder="20" order="20" role="car.py" properties="carProperties.py">
-      <pose name="default" pose="carR"/>
+      <pose name="default" pose="car-R"/>
       <properties roundedNE="false" roundedSE="false" roundedSW="false" roundedNW="false" headingLeft="false"/>
     </costume>
     <costume name="chair" defaultZOrder="20" order="30" role="chair.py">
@@ -520,8 +520,8 @@
       <properties roundedNE="true" roundedSE="true" roundedSW="true" roundedNW="true"/>
     </costume>
     <costume name="concrete" defaultZOrder="5" order="30" role="wall.py" properties="wallProperties.py">
-      <pose name="default" pose="concrete1"/>
-      <pose name="default" pose="concrete2"/>
+      <pose name="default" pose="concrete-1"/>
+      <pose name="default" pose="concrete-2"/>
       <properties roundedNE="false" roundedSE="false" roundedSW="false" roundedNW="false" canExplode="false"/>
     </costume>
     <costume name="copier" defaultZOrder="90" order="40" role="copier.py">
@@ -539,7 +539,7 @@
       <animation name="talk-fade" animation="copier-talk-fade"/>
     </costume>
     <costume name="explosion" defaultZOrder="60" order="100">
-      <pose name="default" pose="explosion01"/>
+      <pose name="default" pose="explosion-01"/>
       <animation name="default" animation="explosion"/>
     </costume>
     <costume name="gate" defaultZOrder="40" order="20" role="gate.py">
@@ -581,107 +581,107 @@
       <animation name="exit" animation="localGate-exit"/>
     </costume>
     <costume name="machineEN" defaultZOrder="90" order="45" role="machine.py" properties="machineProperties.py">
-      <pose name="default" pose="machineEN"/>
+      <pose name="default" pose="machine-EN"/>
       <properties fromCostume="carR" toCostume="balloon" enters="E" exits="N" offsetX="0" offsetY="0"/>
     </costume>
     <costume name="machineEN2" defaultZOrder="90" order="47" role="machine.py" properties="machineProperties.py">
-      <pose name="default" pose="machineEN2"/>
+      <pose name="default" pose="machine-EN2"/>
       <properties fromCostume="planeR" toCostume="balloon" enters="E" exits="N" offsetX="-1" offsetY="0"/>
     </costume>
     <costume name="machineES" defaultZOrder="90" order="44" role="machine.py" properties="machineProperties.py">
-      <pose name="default" pose="machineES"/>
+      <pose name="default" pose="machine-ES"/>
       <properties fromCostume="carR" toCostume="rock" enters="E" exits="S" offsetX="0" offsetY="0"/>
     </costume>
     <costume name="machineES2" defaultZOrder="90" order="46" role="machine.py" properties="machineProperties.py">
-      <pose name="default" pose="machineES2"/>
+      <pose name="default" pose="machine-ES2"/>
       <properties fromCostume="planeR" toCostume="rock" enters="E" exits="S" offsetX="-1" offsetY="0"/>
     </costume>
     <costume name="machineEW" defaultZOrder="90" order="41" role="machine.py" properties="machineProperties.py">
-      <pose name="default" pose="machineEW"/>
+      <pose name="default" pose="machine-EW"/>
       <properties fromCostume="carR" toCostume="carL" enters="E" exits="W" offsetX="0" offsetY="0"/>
     </costume>
     <costume name="machineEW2" defaultZOrder="90" order="48" role="machine.py" properties="machineProperties.py">
-      <pose name="default" pose="machineEW2"/>
+      <pose name="default" pose="machine-EW2"/>
       <properties fromCostume="planeR" toCostume="planeL" enters="E" exits="W" offsetX="-1" offsetY="0"/>
     </costume>
     <costume name="machineNE" defaultZOrder="90" order="44" role="machine.py" properties="machineProperties.py">
-      <pose name="default" pose="machineNE"/>
+      <pose name="default" pose="machine-NE"/>
       <properties fromCostume="balloon" toCostume="carR" enters="N" exits="E" offsetX="0" offsetY="0"/>
     </costume>
     <costume name="machineNE2" defaultZOrder="90" order="46" role="machine.py" properties="machineProperties.py">
-      <pose name="default" pose="machineNE2"/>
+      <pose name="default" pose="machine-NE2"/>
       <properties fromCostume="balloon" toCostume="planeR" enters="N" exits="E" offsetX="0" offsetY="0"/>
     </costume>
     <costume name="machineNS" defaultZOrder="90" order="42" role="machine.py" properties="machineProperties.py">
-      <pose name="default" pose="machineNS"/>
+      <pose name="default" pose="machine-NS"/>
       <properties fromCostume="balloon" toCostume="rock" enters="N" exits="S" offsetX="0" offsetY="0"/>
     </costume>
     <costume name="machineNW" defaultZOrder="90" order="45" role="machine.py" properties="machineProperties.py">
-      <pose name="default" pose="machineNW"/>
+      <pose name="default" pose="machine-NW"/>
       <properties fromCostume="balloon" toCostume="carL" enters="N" exits="W" offsetX="0" offsetY="0"/>
     </costume>
     <costume name="machineNW2" defaultZOrder="90" order="47" role="machine.py" properties="machineProperties.py">
-      <pose name="default" pose="machineNW2"/>
+      <pose name="default" pose="machine-NW2"/>
       <properties fromCostume="balloon" toCostume="planeL" enters="N" exits="W" offsetX="0" offsetY="0"/>
     </costume>
     <costume name="machineSE" defaultZOrder="90" order="45" role="machine.py" properties="machineProperties.py">
-      <pose name="default" pose="machineSE"/>
+      <pose name="default" pose="machine-SE"/>
       <properties fromCostume="rock" toCostume="carR" enters="S" exits="E" offsetX="0" offsetY="0"/>
     </costume>
     <costume name="machineSE2" defaultZOrder="90" order="47" role="machine.py" properties="machineProperties.py">
-      <pose name="default" pose="machineSE2"/>
+      <pose name="default" pose="machine-SE2"/>
       <properties fromCostume="rock" toCostume="planeR" enters="S" exits="E" offsetX="0" offsetY="0"/>
     </costume>
     <costume name="machineSN" defaultZOrder="90" order="42" role="machine.py" properties="machineProperties.py">
-      <pose name="default" pose="machineSN"/>
+      <pose name="default" pose="machine-SN"/>
       <properties fromCostume="rock" toCostume="balloon" enters="S" exits="N" offsetX="0" offsetY="0"/>
     </costume>
     <costume name="machineSW" defaultZOrder="90" order="44" role="machine.py" properties="machineProperties.py">
-      <pose name="default" pose="machineSW"/>
+      <pose name="default" pose="machine-SW"/>
       <properties fromCostume="rock" toCostume="carL" enters="S" exits="W" offsetX="0" offsetY="0"/>
     </costume>
     <costume name="machineSW2" defaultZOrder="90" order="46" role="machine.py" properties="machineProperties.py">
-      <pose name="default" pose="machineSW2"/>
+      <pose name="default" pose="machine-SW2"/>
       <properties fromCostume="rock" toCostume="planeL" enters="S" exits="W" offsetX="0" offsetY="0"/>
     </costume>
     <costume name="machineWE" defaultZOrder="90" order="41" role="machine.py" properties="machineProperties.py">
-      <pose name="default" pose="machineWE"/>
+      <pose name="default" pose="machine-WE"/>
       <properties fromCostume="carL" toCostume="carR" enters="W" exits="E" offsetX="0" offsetY="0"/>
     </costume>
     <costume name="machineWE2" defaultZOrder="90" order="48" role="machine.py" properties="machineProperties.py">
-      <pose name="default" pose="machineWE2"/>
+      <pose name="default" pose="machine-WE2"/>
       <properties fromCostume="planeL" toCostume="planeR" enters="W" exits="E" offsetX="1" offsetY="0"/>
     </costume>
     <costume name="machineWN" defaultZOrder="90" order="44" role="machine.py" properties="machineProperties.py">
-      <pose name="default" pose="machineWN"/>
+      <pose name="default" pose="machine-WN"/>
       <properties fromCostume="carL" toCostume="balloon" enters="W" exits="N" offsetX="0" offsetY="0"/>
     </costume>
     <costume name="machineWN2" defaultZOrder="90" order="46" role="machine.py" properties="machineProperties.py">
-      <pose name="default" pose="machineWN2"/>
+      <pose name="default" pose="machine-WN2"/>
       <properties fromCostume="planeL" toCostume="balloon" enters="W" exits="N" offsetX="1" offsetY="0"/>
     </costume>
     <costume name="machineWS" defaultZOrder="90" order="45" role="machine.py" properties="machineProperties.py">
-      <pose name="default" pose="machineWS"/>
+      <pose name="default" pose="machine-WS"/>
       <properties fromCostume="carL" toCostume="rock" enters="W" exits="S" offsetX="0" offsetY="0"/>
     </costume>
     <costume name="machineWS2" defaultZOrder="90" order="47" role="machine.py" properties="machineProperties.py">
-      <pose name="default" pose="machineWS2"/>
+      <pose name="default" pose="machine-WS2"/>
       <properties fromCostume="planeL" toCostume="rock" enters="W" exits="S" offsetX="1" offsetY="0"/>
     </costume>
     <costume name="plainPlayer" defaultZOrder="100" order="1" role="player.py" properties="bigProperties.py">
-      <pose name="default" pose="robotU2"/>
+      <pose name="default" pose="robot-N2"/>
       <properties width="1" height="1" talkX="70" talkY="10"/>
     </costume>
     <costume name="planeL" defaultZOrder="30" order="10" role="plane.py" properties="planeProperties.py">
-      <pose name="default" pose="planeL"/>
+      <pose name="default" pose="plane-W"/>
       <properties headingLeft="true"/>
     </costume>
     <costume name="planeR" defaultZOrder="30" order="10" role="plane.py" properties="planeProperties.py">
-      <pose name="default" pose="planeR"/>
+      <pose name="default" pose="plane-E"/>
       <properties headingLeft="false"/>
     </costume>
     <costume name="player" defaultZOrder="100" order="11" extends="player-base" role="player.py" properties="bigProperties.py">
-      <pose name="default" pose="robotR1"/>
+      <pose name="default" pose="robot-E1"/>
       <animation name="move-D" animation="robot-D"/>
       <animation name="move-L" animation="robot-L"/>
       <animation name="move-R" animation="robot-R"/>
@@ -694,7 +694,7 @@
       <string name="requires">You need to complete these levels :</string>
     </costume>
     <costume name="pumpkin" defaultZOrder="30" order="30" role="pumpkin.py">
-      <pose name="default" pose="pumpkin1"/>
+      <pose name="default" pose="pumpkin-1"/>
       <animation name="pollinate" animation="pumpkin-pollinate"/>
     </costume>
     <costume name="rock" defaultZOrder="20" order="10" role="rock.py">
@@ -719,52 +719,52 @@
       <animation name="dig" animation="soil2-dig"/>
     </costume>
     <costume name="squashE" defaultZOrder="10" order="30" role="squash.py" properties="squashProperties.py">
-      <pose name="default" pose="squashE"/>
+      <pose name="default" pose="squash-E"/>
       <animation name="fade" animation="squash-fade"/>
       <properties roundedNE="false" roundedSE="false" roundedSW="false" roundedNW="false" squashN="false" squashE="true" squashS="false" squashW="false" permanent="false"/>
     </costume>
     <costume name="squashEP" defaultZOrder="10" order="40" role="squash.py" properties="squashProperties.py">
-      <pose name="default" pose="squashEP"/>
+      <pose name="default" pose="squash-EP"/>
       <properties roundedNE="true" roundedSE="true" roundedSW="true" roundedNW="true" squashN="false" squashE="true" squashS="false" squashW="false" permanent="true"/>
     </costume>
     <costume name="squashEW" defaultZOrder="10" order="30" extends="squashE" role="squash.py" properties="squashProperties.py">
-      <pose name="default" pose="squashEW"/>
+      <pose name="default" pose="squash-EW"/>
       <properties roundedNE="false" roundedSE="false" roundedSW="false" roundedNW="false" squashN="false" squashE="true" squashS="false" squashW="true" permanent="false"/>
     </costume>
     <costume name="squashEWP" defaultZOrder="10" order="40" role="squash.py" properties="squashProperties.py">
-      <pose name="default" pose="squashEWP"/>
+      <pose name="default" pose="squash-EWP"/>
       <properties roundedNE="true" roundedSE="true" roundedSW="true" roundedNW="true" squashN="false" squashE="true" squashS="false" squashW="true" permanent="true"/>
     </costume>
     <costume name="squashN" defaultZOrder="10" order="30" extends="squashE" role="squash.py" properties="squashProperties.py">
-      <pose name="default" pose="squashN"/>
+      <pose name="default" pose="squash-N"/>
       <properties roundedNE="false" roundedSE="false" roundedSW="false" roundedNW="false" squashN="true" squashE="false" squashS="false" squashW="false" permanent="false"/>
     </costume>
     <costume name="squashNP" defaultZOrder="10" order="40" role="squash.py" properties="squashProperties.py">
-      <pose name="default" pose="squashNP"/>
+      <pose name="default" pose="squash-NP"/>
       <properties roundedNE="true" roundedSE="true" roundedSW="true" roundedNW="true" squashN="true" squashE="false" squashS="false" squashW="false" permanent="true"/>
     </costume>
     <costume name="squashNS" defaultZOrder="10" order="30" extends="squashE" role="squash.py" properties="squashProperties.py">
-      <pose name="default" pose="squashNS"/>
+      <pose name="default" pose="squash-NS"/>
       <properties roundedNE="false" roundedSE="false" roundedSW="false" roundedNW="false" squashN="true" squashE="false" squashS="true" squashW="false" permanent="false"/>
     </costume>
     <costume name="squashNSP" defaultZOrder="10" order="40" role="squash.py" properties="squashProperties.py">
-      <pose name="default" pose="squashNSP"/>
+      <pose name="default" pose="squash-NSP"/>
       <properties roundedNE="true" roundedSE="true" roundedSW="true" roundedNW="true" squashN="true" squashE="false" squashS="true" squashW="false" permanent="true"/>
     </costume>
     <costume name="squashS" defaultZOrder="10" order="30" extends="squashE" role="squash.py" properties="squashProperties.py">
-      <pose name="default" pose="squashS"/>
+      <pose name="default" pose="squash-S"/>
       <properties roundedNE="false" roundedSE="false" roundedSW="false" roundedNW="false" squashN="false" squashE="false" squashS="true" squashW="false" permanent="false"/>
     </costume>
     <costume name="squashSP" defaultZOrder="10" order="40" role="squash.py" properties="squashProperties.py">
-      <pose name="default" pose="squashSP"/>
+      <pose name="default" pose="squash-SP"/>
       <properties roundedNE="true" roundedSE="true" roundedSW="true" roundedNW="true" squashN="false" squashE="false" squashS="true" squashW="false" permanent="true"/>
     </costume>
     <costume name="squashW" defaultZOrder="10" order="30" extends="squashE" role="squash.py" properties="squashProperties.py">
-      <pose name="default" pose="squashW"/>
+      <pose name="default" pose="squash-W"/>
       <properties roundedNE="false" roundedSE="false" roundedSW="false" roundedNW="false" squashN="false" squashE="false" squashS="false" squashW="true" permanent="false"/>
     </costume>
     <costume name="squashWP" defaultZOrder="10" order="40" role="squash.py" properties="squashProperties.py">
-      <pose name="default" pose="squashWP"/>
+      <pose name="default" pose="squash-WP"/>
       <properties roundedNE="true" roundedSE="true" roundedSW="true" roundedNW="true" squashN="false" squashE="false" squashS="false" squashW="true" permanent="true"/>
     </costume>
     <costume name="stamp" defaultZOrder="60" order="10" role="collectable.py" properties="roundProperties.py">
@@ -785,19 +785,19 @@
       <properties roundedNE="false" roundedSE="false" roundedSW="false" roundedNW="false" canExplode="true"/>
     </costume>
     <costume name="wallNE" defaultZOrder="5" order="10" role="wall.py" properties="wallProperties.py">
-      <pose name="default" pose="wallNE"/>
+      <pose name="default" pose="wall-NE"/>
       <properties roundedNE="true" roundedSE="false" roundedSW="false" roundedNW="false" canExplode="true"/>
     </costume>
     <costume name="wallNW" defaultZOrder="5" order="10" role="wall.py" properties="wallProperties.py">
-      <pose name="default" pose="wallNW"/>
+      <pose name="default" pose="wall-NW"/>
       <properties roundedNE="false" roundedSE="false" roundedSW="false" roundedNW="true" canExplode="true"/>
     </costume>
     <costume name="wallSE" defaultZOrder="5" order="10" role="wall.py" properties="wallProperties.py">
-      <pose name="default" pose="wallSE"/>
+      <pose name="default" pose="wall-SE"/>
       <properties roundedNE="false" roundedSE="true" roundedSW="false" roundedNW="false" canExplode="true"/>
     </costume>
     <costume name="wallSW" defaultZOrder="5" order="10" role="wall.py" properties="wallProperties.py">
-      <pose name="default" pose="wallSW"/>
+      <pose name="default" pose="wall-SW"/>
       <properties roundedNE="false" roundedSE="false" roundedSW="true" roundedNW="false" canExplode="true"/>
     </costume>
     <costume name="warp" defaultZOrder="40" order="20" role="warp.py">

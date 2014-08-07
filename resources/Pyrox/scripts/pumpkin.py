@@ -13,7 +13,7 @@ class Pumpkin(Collectable) :
     def onBirth(self) :
         super(Pumpkin,self).onBirth()
         self.removeTag("soft")
-        self.addTag("flower")
+        self.addTag("enemySoft")
         self.pollinated = False
         self.fixed = False
 
@@ -22,7 +22,7 @@ class Pumpkin(Collectable) :
         self.makeAlternateOccupant()
 
     def onHalfInvaded( self, invader ) :
-        if invader.hasTag("pollinator") :
+        if invader.hasTag("bee") :
             self.pollinate()
         else :
             super(Pumpkin,self).onHalfInvaded(invader)
@@ -32,7 +32,7 @@ class Pumpkin(Collectable) :
         
     def pollinate(self) :
         self.event("pollinate", "pollinated")
-        self.removeTag("flower")
+        self.removeTag("enemySoft")
         
     def onMessage(self, message) :
         if message == "pollinated" :
@@ -41,7 +41,7 @@ class Pumpkin(Collectable) :
     def tick(self) :
         
         if self.pollinated and not self.fixed :
-            if self.look(0,0) is self :
+            if self.look(0,0).role is self :
                 self.unmakeAlternateOccupant()
                 self.fixed = True
                 self.addTag("soft")

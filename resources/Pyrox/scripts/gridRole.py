@@ -15,6 +15,9 @@ class GridRole(AbstractRole) :
 
     def __init__(self) :
         self.square = None
+        self.role = self # So that the look method can return a GridRole or a Comound, and both have a "role" attribute.
+        self.alternateRole = None # Same reason as self.role. This should always be None
+        
         self.speed = 4 # The default speed for this object.
         
         # Each GridRole object knows when its tick was last called. Used by GridStage to ensure it
@@ -106,6 +109,9 @@ class GridRole(AbstractRole) :
     # and instead the global EmptyGridRole.instance.
     # In addition, each square has an alternateOccupant, and this is returned, when otherwise the result would have
     # been Empty.
+    # One final, and tricky complication, a square can have an occupant and an alternateOccupant. If both are found,
+    # then instead of a GridRole and Compound is returned. Therefore you cannot assume the result from look is a
+    # role, if you want the role, add ".role". e.g. : foo.look( 1,0 ).role.onExplode()
     def look( self, dx, dy, speed=None ) :
 
         if speed is None :
@@ -117,20 +123,23 @@ class GridRole(AbstractRole) :
         if entrant :
             return entrant
         
-        if square and square.ignoreOccupant and square.alternateOccupant :
-            return square.alternateOccupant
+        if square and square.alternateOccupant :
+            return square.getOccupant()
+             
             
         occupier = self.findLocalRole( dx, dy )
         if not occupier.isMoving() :
             return occupier
-        
+
         # Calculate how long (in frames) it will take for the occupant to leave the square, and
         # for me to enter the square.
         willLeaveTicks = (self.square.grid.squareSize - occupier.between) / occupier.speed
         willEnterTicks = self.square.grid.squareSize / speed
 
+        isOpposite = dx == -occupier.dx and dy == -occupier.dy
+        
         # If it will leave before I get half way, then ignore it.
-        if willLeaveTicks < willEnterTicks :
+        if willLeaveTicks < willEnterTicks and not isOpposite :
             if square.alternateOccupant :
                 return square.alternateOccupant
             else :
@@ -172,6 +181,9 @@ class GridRole(AbstractRole) :
         # Default is to be immovable.
         return False
 
+    def shove( self, pusher, dx, dy, speed ) :
+        pass
+        
     def isEmpty( self ) :
         return False
     
@@ -219,7 +231,6 @@ class GridRole(AbstractRole) :
                 self.square.occupant = None
             elif self.square.alternateOccupant == self :
                 self.square.alternateOccupant = None
-                self.square.ignoreOccupant = False
 
         self.square = None
         self.dx = 0
@@ -228,7 +239,7 @@ class GridRole(AbstractRole) :
     # Each square has an alternative occupant, so that two roles can share the same square.
     # This methods downgrades a role from being the normal occupant to the alternate occupant.
     # Must NOT be used for movable objects
-    def makeAlternateOccupant( self, useOnLook=False ) :
+    def makeAlternateOccupant( self ) :
     
         if self.square.occupant != self :
             return
@@ -238,7 +249,6 @@ class GridRole(AbstractRole) :
             self.square.alternateOccupant.removeFromGrid()        
         
         self.square.alternateOccupant = self;
-        self.square.ignoreOccupant = useOnLook
     
     def unmakeAlternateOccupant( self ) :
         if self.square.alternateOccupant != self :
@@ -252,11 +262,11 @@ class GridRole(AbstractRole) :
 
 
     @staticmethod
-    def getDirectionAbreviation( direction ) :
+    def getDirectionAbbreviation( direction ) :
         return [ "E","N","W","S" ][ direction ]
 
     @staticmethod
-    def getCompassAbreviation( dx, dy ) :
+    def getCompassAbbreviation( dx, dy ) :
         return ["W", "", "E" ][dx + 1] + ["S", "", "N"][dy + 1]
 
     @staticmethod

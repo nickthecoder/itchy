@@ -106,7 +106,6 @@ public class TextArea extends ClickableContainer implements Layout, KeyListener,
         this.labels.clear();
 
         for (String line : lines) {
-            System.out.println( "Adding label : " + line );
             Label label = new Label(line);
             this.labels.add(label);
             this.labelsContainer.addChild(label);
@@ -115,9 +114,6 @@ public class TextArea extends ClickableContainer implements Layout, KeyListener,
 
         // TODO Do something better than set it to zero?
         this.caretIndex = 0;
-        // if (this.caretIndex > text.length()) {
-        // this.caretIndex = text.length();
-        // }
         this.update();
 
     }

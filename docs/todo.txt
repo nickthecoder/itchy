@@ -1,13 +1,11 @@
 Bugs
 
-
-Make Bees move through soil
-    Make soil and hard soil alternate occupants, with override.
-    Need a new tag, as soft is used by collectables and soil.
-        Current test is player or flower or Empty.
-        Replace with enemySoft ???
+    Labels on test page are not shown until FULLY on screen.
+        To do with rotation and lazy eval of surface. Once drawn, they work fine.
 
 PyRox
+
+    Create a wooden beehive - Flat on the bottom.
 
     Place Sledgers in key places, so that the sledging can be targeted to a given area.
         e.g. "Have you met by brother?"

@@ -21,14 +21,16 @@ class Bee(Movable) :
     def __init__(self) :
         super(Bee,self).__init__()
         self.randomSeed = 0
-        self.initialTimer = Timer.createTimerSeconds(0.4)
         self.logic = 0
         self.direction = 1
         self.random = None
+        self.wait = False
+        self.jammedCount = 0 # How many clicks I've been stuck because of another bee getting in the way.
 
     def onBirth(self) :
         super(Bee,self).onBirth()
-        self.addTag("pollinator")
+        self.addTag("bee")
+        self.addTag("enemy")
         self.addTag("deadly")
         self.addTag("soft")
         if self.random is None :
@@ -38,82 +40,80 @@ class Bee(Movable) :
                 self.random = Random( self.randomSeed )
         
     def tick( self ) :
-        if self.initialTimer is None or self.initialTimer.isFinished() :
-            self.initialTimer = None
-                
-            Movable.tick(self)
 
-            if not self.isMoving() :
-            
-                if self.logic == 1 :
-                    self.moveRound( 1 )
-                elif self.logic == 2 :
-                    self.moveRound( -1 )
-                else :
-                    self.makeRandomMove()
+        Movable.tick(self)
+
+        if self.wait :
+            return
+
+        if not self.isMoving() :
+        
+            if self.logic == 1 :
+                self.moveRound( 1 )
+            elif self.logic == 2 :
+                self.moveRound( -1 )
+            else :
+                self.moveRandom()
             
     def changeDirection( self, delta ) :
-        self.direction += delta
-        if self.direction < 0 :
-            self.direction += 4
-        elif self.direction > 3 :
-            self.direction -= 4;
-   
+        self.direction = (self.direction + delta) % 4
+
+
     def moveRound( self, delta ) :
 
         # Look left first, then forwards, then right and then behind
         # Note if delta is -1, then it is right, forwards, left, behind.
         self.changeDirection( -delta )  
         for i in range( 0, 4 ) :
-            if self.moveForwards() :
+            if self.tryToMoveForwards() :
                 return
             self.changeDirection( delta )
            
     
-    def moveForwards( self ) :
+    def moveRandom(self) :
     
-        forward = self.lookDirection( self.direction )
-        if self.canMove(forward) :
+        if self.random.nextInt( 20 ) == 0 :
+            self.changeDirection(-1)
+
+        elif self.random.nextInt( 20 ) == 0 :
+            self.changeDirection(1)
+
+        if not self.tryToMoveForwards() :
+            self.changeDirection(self.direction + self.random.nextInt(3) + 1)
+            
+        self.tryToMoveForwards()
+        # We only have two goes at moving forward!
+
+    def tryToMoveForwards( self ) :
+    
+        forward = self.canMove()
+        if forward :
             self.moveDirection( self.direction )
+            self.jammedCount = 0
             return True
-            
+
+        elif self.lookDirection( self.direction ).hasTag("bee") :
+            # If another bee is right in front of us, don't move. This will prevent bees moving
+            # disrupting their (anti-)clockwise pattern.
+            self.jammedCount += 1
+            if self.jammedCount > 60 :
+                self.jammedCount = 0
+                return False
+            return True 
+
         return False
 
-    def makeRandomMove(self) :
-    
-        if self.random.nextInt( 20 ) == 1 :
-            if self.tryToMove( 0, -1 ) :
-                return
-                
-        if self.random.nextInt( 20 ) == 1 :
-            if self.tryToMove( 0, 1 ) :
-                return
+    def onMessage( self, message ) :
+        if message == "go" :
+            self.wait = False
         
-        if self.random.nextInt( 20 ) == 1 :
-            self.direction = -self.direction
-
-        if not self.tryToMove( self.direction, 0 ) :
-            self.direction = -self.direction
-            self.tryToMove( self.direction, 0 )
-
-    def tryToMove( self, dx, dy ) :
-        forward = self.look(dx, dy)
-        if self.canMove( forward ) :
-            self.move(dx, dy)
-            if dx != 0 :
-                self.event( "left" if dx == -1 else "right" )
-            else :
-                self.event( "up" if dy == 1 else "down" )
+    def canMove(self) :
+        self.event( "face-" + self.getDirectionAbbreviation(self.direction) )
+        forward = self.lookDirection( self.direction )
+        if forward.hasTag("enemySoft") :
             return True
             
-        return False
-        
-    def canMove(self, forward ) :
-        if forward.hasTag("player") :
-            return True
-
-        return forward.isEmpty() or forward.hasTag("flower")
-    
+        return forward.hasTag("squash" + self.getDirectionAbbreviation(self.direction))
 
     # Boiler plate code - no need to change this
     def getProperties(self):

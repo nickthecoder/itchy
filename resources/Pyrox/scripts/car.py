@@ -57,13 +57,13 @@ class Car(Faller) :
         if forward.isMoving() :
             return False
 
-        if forward.hasTag("squash" + self.getCompassAbreviation(dx, dy) ) :
+        if forward.hasTag("squash" + self.getCompassAbbreviation(dx, dy) ) :
             return True
          
     def onArrived( self, dx, dy ) :
         # Don't hit things when I've been pushed, only when I've fallen or driven forwards.
         if dx == self.direction or dy == -1 :
-            forward = self.look(dx,dy)
+            forward = self.look(dx,dy).role
             if (forward.hasTag("hittable")) :
                 forward.onHit( self, dx, dy )
 

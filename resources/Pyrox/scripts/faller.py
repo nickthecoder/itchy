@@ -80,14 +80,14 @@ class Faller(Movable) :
         if forward.isMoving() :
             return False
 
-        if forward.hasTag("squash" + self.getCompassAbreviation(dx, dy) ) :
+        if forward.hasTag("squash" + self.getCompassAbbreviation(dx, dy) ) :
             return True
 
         return False
     
     def onArrived( self, dx, dy ) :
         if (dy == -1) :
-            south = self.lookSouth()
+            south = self.lookSouth().role
             if (south.hasTag("hittable")) :
                 south.onHit( self, dx, dy )
 

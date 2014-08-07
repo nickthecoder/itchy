@@ -40,7 +40,7 @@ class Machine(GridRole) :
                 dummy = Dummy(self, 1, 0)
     
         if dummy :
-            dummy.makeAlternateOccupant(True)        
+            dummy.makeAlternateOccupant()        
 
         
     def tick(self) :
@@ -65,12 +65,10 @@ class Machine(GridRole) :
         if self.square.occupant is not None or self.square.entrant is not None :
             return
         
-        # Note, we use findLocalSquare, rather than look, because look would return our
-        # dummy, which is an alternateOccupant at the same location, with ignoreOccupant=True.    
-        self.considerPulling( self.findLocalSquare(-self.fromDX, -self.fromDY ).occupant )
+        self.considerPulling( self.look(-self.fromDX, -self.fromDY ).role )
         
         if self.offsetX != 0 or self.offsetY != 0 :
-            self.considerPulling( self.look( -self.fromDX + self.offsetX, -self.fromDY + self.offsetY ) ) 
+            self.considerPulling( self.look( -self.fromDX + self.offsetX, -self.fromDY + self.offsetY ).role ) 
             
     def considerPulling( self, thing ) :
     

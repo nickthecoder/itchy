@@ -37,7 +37,6 @@
     <actor costume="wall" x="480" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
     <actor costume="wall" x="540" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
     <actor costume="wall" x="600" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="660" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
     <actor costume="wall" x="840" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
     <actor costume="wall" x="780" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
     <actor costume="wallNE" x="1020" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
@@ -50,7 +49,6 @@
     <actor costume="wall" x="1080" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
     <actor costume="wall" x="1140" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
     <actor costume="wall" x="1200" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="1140" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
     <actor costume="wall" x="1140" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
     <actor costume="wall" x="1200" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
     <actor costume="wall" x="1200" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
@@ -103,6 +101,12 @@
     <actor costume="wall" x="-60" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
     <actor costume="wall" x="0" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
     <actor costume="wall" x="-60" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="1140" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="600" y="0" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="600" y="-60" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="660" y="-60" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="720" y="-60" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="720" y="0" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
     <actor costume="soil" x="900" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
     <actor costume="soil" x="1080" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
     <actor costume="autoPilot" x="120" y="660" direction="0.0" heading="0.0" startEvent="default" zOrder="10">
@@ -120,6 +124,9 @@
     <actor costume="soil" x="600" y="720" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
     <actor costume="soil" x="360" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
     <actor costume="soil" x="240" y="960" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
+    <actor costume="squashS" x="720" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
+    <actor costume="squashNP" x="660" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
+    <actor costume="squashNP" x="660" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
     <actor costume="grenade" x="120" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
     <actor costume="rock" x="180" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
     <actor costume="rock" x="360" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
@@ -137,7 +144,6 @@
     <actor costume="rock" x="540" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
     <actor costume="balloon" x="540" y="0" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
     <actor costume="balloon" x="1080" y="0" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
-    <actor costume="balloon" x="660" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
     <actor costume="balloon" x="780" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
     <actor costume="rock" x="840" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
     <actor costume="rock" x="960" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
@@ -162,7 +168,14 @@
       <property name="scene" value="test5"/>
     </actor>
     <actor costume="stamp" x="720" y="660" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
-    <actor costume="player" x="240" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="100"/>
+    <actor costume="bee" x="660" y="0" direction="0.0" heading="0.0" startEvent="default" zOrder="80">
+      <property name="randomSeed" value="0"/>
+      <property name="direction" value="North"/>
+      <property name="logic" value="Random"/>
+    </actor>
+    <actor costume="player" x="240" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="100">
+      <property name="awake" value="true"/>
+    </actor>
   </layer>
   <layer name="test">
     <actor costume="test" x="300" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="50">
@@ -195,9 +208,6 @@
     <actor costume="test" x="780" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="50">
       <property name="expectedClass" value="Balloon"/>
     </actor>
-    <actor costume="test" x="660" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="50">
-      <property name="expectedClass" value="Balloon"/>
-    </actor>
     <actor costume="test" x="540" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="50">
       <property name="expectedClass" value="Balloon"/>
     </actor>
@@ -205,9 +215,6 @@
       <property name="expectedClass" value="Balloon"/>
     </actor>
     <actor costume="test" x="1020" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="50">
-      <property name="expectedClass" value="Wall"/>
-    </actor>
-    <actor costume="test" x="1140" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="50">
       <property name="expectedClass" value="Wall"/>
     </actor>
     <actor costume="test" x="240" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="50">
@@ -239,6 +246,18 @@
     </actor>
     <actor costume="test" x="120" y="780" direction="0.0" heading="0.0" startEvent="default" zOrder="53">
       <property name="expectedClass" value="Rock"/>
+    </actor>
+    <actor costume="test" x="1140" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="54">
+      <property name="expectedClass" value="Wall"/>
+    </actor>
+    <actor costume="test" x="660" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="55">
+      <property name="expectedClass" value="Empty"/>
+    </actor>
+    <actor costume="test" x="660" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="56">
+      <property name="expectedClass" value="Squash"/>
+    </actor>
+    <actor costume="test" x="660" y="0" direction="0.0" heading="0.0" startEvent="default" zOrder="57">
+      <property name="expectedClass" value="Empty"/>
     </actor>
   </layer>
 </scene>

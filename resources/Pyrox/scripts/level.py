@@ -150,7 +150,8 @@ class Level(PlainSceneDirector) :
         if self.macroPlayback :
             self.macroPlayback.tick()
         
-        self.macroRecorder.tick()
+        if self.macroRecorder :
+            self.macroRecorder.tick()
         
     def onKeyDown(self, kevent) :
     

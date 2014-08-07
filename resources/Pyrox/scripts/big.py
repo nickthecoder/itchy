@@ -45,12 +45,12 @@ class Big(Movable) :
     def findLeadingEdges( self, dx, dy ) :
         result = []
 
-        neighbour = self.look( dx, dy )
+        neighbour = self.look( dx, dy ).role
         if not self.isPartOfMe( neighbour ) :
             result.append(self)
 
         for part in self.parts :
-            neighbour = part.look( dx, dy )
+            neighbour = part.look( dx, dy ).role
             if not self.isPartOfMe( neighbour ) :
                 result.append(part)
                 
@@ -114,7 +114,7 @@ class Big(Movable) :
         # one cannot, because canShove can have side effects - like pushing a button. See class "Hard"
         result = True
         for edge in self.getLeadingEdges(dx, dy) :
-            neighbour = edge.look( dx, dy )
+            neighbour = edge.look( dx, dy ).role
             if not self.hasAnyTag( neighbour, squashTags ) :
                 if not neighbour.canShove(self,dx, dy, speed, force) :
                     result = False

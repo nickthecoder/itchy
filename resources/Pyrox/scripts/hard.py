@@ -19,13 +19,12 @@ class Hard(GridRole) :
         super(Hard,self).onBirth()
         self.remaining = self.hardness
 
-
     def canShove( self, pusher, dx, dy, speed, force ) :
     
         if pusher.hasTag("digger") and not self.actor.isDying() :
             
             self.actor.appearance.alpha -= 128 / self.hardness
-            
+
             Explosion(self.actor) \
                 .projectiles(1) \
                 .gravity(-0.2).fade(0.9, 3.5).speed(0.1, 1.5).vy(5) \

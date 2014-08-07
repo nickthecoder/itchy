@@ -5,6 +5,8 @@ from uk.co.nickthecoder.itchy.util import ClassName
 from uk.co.nickthecoder.itchy.extras import Timer
 
 from uk.co.nickthecoder.itchy.property import IntegerProperty
+from uk.co.nickthecoder.itchy.property import DoubleProperty
+from uk.co.nickthecoder.itchy.property import ChoiceProperty
 
 from java.util import ArrayList
 from java.util import Random
@@ -15,6 +17,7 @@ properties = ArrayList()
 properties.add( IntegerProperty( "bees" ) )
 properties.add( ChoiceProperty( "beeLogic" ).add("Random", 0).add("Clockwise", 1).add("Anticlockwise", 2) )
 properties.add( ChoiceProperty( "beeDirection" ).add("Random", -1).add("North", 1).add("East", 0).add("South", 3).add("West",2) )
+properties.add( DoubleProperty( "spawnPeriod" ).hint("seconds") )
 properties.add( IntegerProperty( "randomSeed" ) )
 
 # Initially attached to something, and therefore won't fall or roll.
@@ -30,6 +33,7 @@ class Beehive(Faller) :
         self.beeLogic = 0
         self.beeDirection = 0
         self.randomSeed = 0
+        self.spawnPeriod = 1
 
         self.detached = False
         self.emitTimer = None
@@ -70,7 +74,7 @@ class Beehive(Faller) :
         if (self.bees == 0) :
             self.addTag("soft")
         else :
-            self.emitTimer = Timer.createTimerSeconds(0.5)
+            self.emitTimer = Timer.createTimerSeconds(self.spawnPeriod)
         
 
 
@@ -91,14 +95,15 @@ class Beehive(Faller) :
         
         if self.emitTimer :
             if self.emitTimer.isFinished() :
-            
-                if self.emitBee() :
-                    self.bees -= 1
-                    if self.bees > 0 :
-                        self.emitTimer.reset()
-                    else :
-                        self.emitTimer = None
-                        self.addTag("soft")
+                if ! not self.isMoving() :
+                
+                    if self.emitBee() :
+                        self.bees -= 1
+                        if self.bees > 0 :
+                            self.emitTimer.reset()
+                        else :
+                            self.emitTimer = None
+                            self.addTag("soft")
 
 
     def emitBee(self) :
@@ -113,22 +118,36 @@ class Beehive(Faller) :
         return False
             
     def emitBeeDirection(self, direction) :
-    
-        outside = self.lookDirection( direction )
-        if outside.isEmpty() :
 
+        dx = self.getDeltaX( direction )
+        dy  = self.getDeltaY( direction )
+
+        outside = self.look( dx, dy, 100 ) # Look VERY fast
+        
+        if outside.hasTag("enemySoft") :
             resources = Itchy.getGame().resources
+            squareSize = self.square.grid.squareSize
+            
             costume = resources.getCostume("bee")
-            bee = resources.createActor( costume, self.actor.stage )
-            bee.moveTo( self.actor.x + self.square.grid.squareSize * direction, self.actor.y )
-            bee.role.placeOnGrid( self.square.grid )
-            bee.event( "escape" + ( self.getDirectionAbreviation(direction) ) )
+            
+            beeActor = resources.createActor( costume, self.actor.stage )
+            beeActor.moveTo( self.actor.x + squareSize * dx, self.actor.y + squareSize * dy )
+            
+            bee = beeActor.role
+            bee.placeOnGrid( self.square.grid )
             bee.logic = self.beeLogic
-            
-            bee.role.random = self.random
-            
+            bee.direction = self.beeDirection
+            bee.random = self.random
+
+            bee.wait = True # Wait for the "go" message, from the escape animation
+            # Note, the order is important. This event will change the x,y, so must be after placeOnGrid.
+            beeActor.event( "escape" + ( self.getDirectionAbbreviation(direction) ), "go" )
+                        
             return True
 
+        else :
+            self.beeDirection = (self.beeDirection + 1) % 4
+            
         return False
 
 

@@ -64,7 +64,7 @@ class Balloon(Movable) :
         if forward.isMoving() :
             return False
             
-        if forward.hasTag("squash" + self.getCompassAbreviation(dx, dy)) :
+        if forward.hasTag("squash" + self.getCompassAbbreviation(dx, dy)) :
             return True
 
         if forward.canShove(self, dx, dy, speed, 1) :
@@ -76,7 +76,7 @@ class Balloon(Movable) :
         
         forward = self.look(dx, dy)
         
-        if not forward.hasTag("squash" + self.getCompassAbreviation(dx, dy)) :
+        if not forward.hasTag("squash" + self.getCompassAbbreviation(dx, dy)) :
             forward.shove( self, dx, dy, speed )
             
         super(Balloon,self).shove( pusher, dx, dy, speed )

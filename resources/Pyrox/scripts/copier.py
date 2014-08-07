@@ -26,10 +26,10 @@ class Copier(GridRole) :
         self.speed = 4 # Speed to eject the copy
 
     def onPlacedOnGrid(self) :
-        self.makeAlternateOccupant(True)
+        self.makeAlternateOccupant()
     
     def tick(self):
-        north = self.lookNorth()
+        north = self.lookNorth().role
 
         if self.copying :
             return

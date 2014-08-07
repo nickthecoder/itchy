@@ -15,7 +15,7 @@ class Squash(GridRole) :
         self.actor.costume.properties.update(self)
 
 
-    def onSceneCreated(self) :
+    def onPlacedOnGrid(self) :
         if self.permanent :
             self.makeAlternateOccupant()
 
@@ -28,7 +28,9 @@ class Squash(GridRole) :
             self.removeFromGrid()
             self.actor.event("fade")
     
-    
+    def shove( self, pusher, dx, dy, speed ) :
+        pass
+        
     # Boiler plate code - no need to change this
     def getProperties(self):
         return properties

@@ -51,8 +51,12 @@ public class PoseResource extends NamedResource implements Thumbnailed
 
     public void setFile( File file ) throws JameException
     {
-        this.pose = new ImagePose(this.resources.resolveFilename(file.getPath()));
-        this.file = file;
+        if (! file.equals(this.file)) { 
+            this.pose.load( this.resources.resolveFilename(file.getPath()) );
+            this.thumbnail = null;
+            // this.pose = new ImagePose(this.resources.resolveFilename(file.getPath()));
+            this.file = file;
+        }
     }
 
     public String getFilename()

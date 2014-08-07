@@ -30,7 +30,7 @@ class Grenade(Faller) :
     def onHit( self, hitter, dx, dy ) :
         if dy == -1 :
             south = self.lookSouth()
-            if south.isEmpty() :
+            if south.isEmpty() or south.hasTag("squashS") :
                 return # Don't explode as we are falling, so not really hit.
                 
         if hitter.hasTag("explosionTrigger") :
@@ -58,11 +58,18 @@ class Grenade(Faller) :
 
         self.explode()
                 
-        if a.hasTag("explodable") :
-            a.onExplode()
+        if a.role.hasTag("explodable") :
+            a.role.onExplode()
+            
+        if a.alternateRole and a.alternateRole.hasTag("explodable") :
+            a.alternateRole.onExplode()
+            
+        if b.role.hasTag("explodable") :
+            b.role.onExplode()
 
-        if b.hasTag("explodable") :
-            b.onExplode()
+        if b.alternateRole and b.alternateRole.hasTag("explodable") :
+            b.alternateRole.onExplode()
+            
 
     def onMessage( self, message ) :
         # Called from the grenade's turning animations

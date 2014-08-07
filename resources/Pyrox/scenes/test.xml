@@ -4,15 +4,14 @@
     <actor costume="wall" x="720" y="780" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
     <actor costume="wall" x="660" y="780" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
     <actor costume="wall" x="600" y="780" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="540" y="780" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="600" y="840" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
     <actor costume="wall" x="120" y="900" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="60" y="900" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
     <actor costume="wall" x="180" y="900" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="240" y="900" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="300" y="900" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="180" y="960" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="-420" y="900" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
     <actor costume="wall" x="780" y="780" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="0" y="900" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="-60" y="900" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="-120" y="900" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="-180" y="900" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
     <actor costume="wall" x="420" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
     <actor costume="wall" x="480" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
     <actor costume="wall" x="600" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
@@ -28,20 +27,92 @@
     <actor costume="wall" x="180" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
     <actor costume="wall" x="240" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
     <actor costume="wall" x="120" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="soil" x="600" y="720" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
+    <actor costume="wall" x="-120" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="-180" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="-120" y="660" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="-60" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="-60" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="-120" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="-180" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="-240" y="780" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="-240" y="720" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="-240" y="660" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="-120" y="720" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="-240" y="900" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="-240" y="960" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="-240" y="1020" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="-120" y="1080" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="-240" y="1080" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="-60" y="1080" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="-60" y="900" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="360" y="720" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="300" y="720" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="240" y="720" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="180" y="720" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="180" y="780" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="420" y="720" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="540" y="720" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="540" y="840" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="480" y="840" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="420" y="840" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="300" y="840" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="240" y="840" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="180" y="840" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="540" y="660" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="540" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="480" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="420" y="660" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="420" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
     <actor costume="soil" x="660" y="720" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
-    <actor costume="soil" x="540" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
-    <actor costume="soil" x="540" y="660" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
-    <actor costume="soil" x="540" y="720" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
-    <actor costume="soil2" x="-120" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
-    <actor costume="soil2" x="-120" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
-    <actor costume="soil2" x="-120" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
-    <actor costume="soil2" x="-120" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
-    <actor costume="soil2" x="-60" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
-    <actor costume="soil" x="-180" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
-    <actor costume="soil" x="-180" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
-    <actor costume="soil" x="-180" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
-    <actor costume="soil" x="-180" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
+    <actor costume="soil" x="300" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
+    <actor costume="soil" x="300" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
+    <actor costume="soil2" x="60" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
+    <actor costume="soil" x="-180" y="720" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
+    <actor costume="soil" x="-180" y="660" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
+    <actor costume="soil" x="-180" y="960" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
+    <actor costume="soil" x="-120" y="960" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
+    <actor costume="soil" x="-180" y="1080" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
+    <actor costume="soil" x="-180" y="1140" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
+    <actor costume="soil" x="360" y="780" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
+    <actor costume="squashEW" x="360" y="900" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
+    <actor costume="soil" x="300" y="960" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
+    <actor costume="soil" x="420" y="960" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
+    <actor costume="rock" x="360" y="960" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
+    <actor costume="behive" x="-60" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="30">
+      <property name="randomSeed" value="0"/>
+      <property name="beeDirection" value="West"/>
+      <property name="bees" value="3"/>
+      <property name="beeLogic" value="Anticlockwise"/>
+      <property name="spawnPeriod" value="1.0"/>
+    </actor>
+    <actor costume="behive" x="-60" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="30">
+      <property name="randomSeed" value="0"/>
+      <property name="beeDirection" value="East"/>
+      <property name="bees" value="3"/>
+      <property name="beeLogic" value="Clockwise"/>
+      <property name="spawnPeriod" value="1.0"/>
+    </actor>
+    <actor costume="behive" x="120" y="840" direction="0.0" heading="0.0" startEvent="default" zOrder="30">
+      <property name="randomSeed" value="0"/>
+      <property name="beeDirection" value="East"/>
+      <property name="bees" value="3"/>
+      <property name="beeLogic" value="Random"/>
+      <property name="spawnPeriod" value="1.0"/>
+    </actor>
+    <actor costume="behive" x="-120" y="1020" direction="0.0" heading="0.0" startEvent="default" zOrder="30">
+      <property name="randomSeed" value="0"/>
+      <property name="beeDirection" value="North"/>
+      <property name="bees" value="3"/>
+      <property name="beeLogic" value="Anticlockwise"/>
+      <property name="spawnPeriod" value="1.0"/>
+    </actor>
+    <actor costume="behive" x="300" y="900" direction="0.0" heading="0.0" startEvent="default" zOrder="30">
+      <property name="randomSeed" value="0"/>
+      <property name="beeDirection" value="South"/>
+      <property name="bees" value="1"/>
+      <property name="beeLogic" value="Clockwise"/>
+      <property name="spawnPeriod" value="1.0"/>
+    </actor>
     <actor costume="warp" x="420" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="40">
       <property name="exitX" value="0"/>
       <property name="exitY" value="-1"/>
@@ -85,14 +156,6 @@
     <actor costume="gate" x="660" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="40">
       <property name="scene" value="menu"/>
     </actor>
-    <text text="newText" font="Computer" size="50" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="-140" y="589" direction="0.0" heading="0.0" startEvent="default" zOrder="60">
-      <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
-        <property name="dx" value="4"/>
-        <property name="dy" value="4"/>
-        <property name="color" value="#950000ff"/>
-      </makeup>
-    </text>
-    <text text="round 1" font="Computer" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="300" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="80"/>
     <actor costume="bee" x="180" y="660" direction="0.0" heading="0.0" startEvent="default" zOrder="80">
       <property name="randomSeed" value="0"/>
       <property name="direction" value="West"/>
@@ -103,7 +166,17 @@
       <property name="direction" value="West"/>
       <property name="logic" value="Clockwise"/>
     </actor>
-    <actor costume="plainPlayer" x="0" y="660" direction="0.0" heading="0.0" startEvent="default" zOrder="100">
+    <actor costume="bee" x="-120" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="80">
+      <property name="randomSeed" value="0"/>
+      <property name="direction" value="West"/>
+      <property name="logic" value="Clockwise"/>
+    </actor>
+    <actor costume="bee" x="480" y="720" direction="0.0" heading="0.0" startEvent="default" zOrder="80">
+      <property name="randomSeed" value="0"/>
+      <property name="direction" value="South"/>
+      <property name="logic" value="Clockwise"/>
+    </actor>
+    <actor costume="plainPlayer" x="240" y="900" direction="0.0" heading="0.0" startEvent="default" zOrder="100">
       <property name="awake" value="true"/>
     </actor>
     <text text="2 Rocks and Balloons" font="Vera" size="22" color="#ffffff" xAlignment="0.0" yAlignment="0.5" x="420" y="480" direction="90.0" heading="0.0" startEvent="default" zOrder="213"/>
@@ -128,8 +201,6 @@
         <property name="color" value="#000000ff"/>
       </makeup>
     </text>
-    <text text="round 2" font="Computer" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="300" y="540" direction="0.0" heading="0.0" startEvent="default" zOrder="253"/>
-    <text text="random" font="Computer" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="300" y="780" direction="0.0" heading="0.0" startEvent="default" zOrder="254"/>
     <actor costume="bee" x="180" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="255">
       <property name="randomSeed" value="0"/>
       <property name="direction" value="East"/>
@@ -140,9 +211,16 @@
       <property name="direction" value="East"/>
       <property name="logic" value="Anticlockwise"/>
     </actor>
+    <actor costume="behive" x="-120" y="780" direction="0.0" heading="0.0" startEvent="default" zOrder="257">
+      <property name="randomSeed" value="0"/>
+      <property name="beeDirection" value="South"/>
+      <property name="bees" value="3"/>
+      <property name="beeLogic" value="Clockwise"/>
+      <property name="spawnPeriod" value="1.0"/>
+    </actor>
   </layer>
   <layer name="glass">
-    <actor costume="sledge" x="-52" y="682" direction="0.0" heading="0.0" startEvent="default" zOrder="90">
+    <actor costume="sledge" x="48" y="767" direction="0.0" heading="0.0" startEvent="default" zOrder="90">
       <property name="text" value="Hi&#xA;A\nB\nC\nD\nE&#xA;Is it working\n yet?&#xA;Are you sure you\n can code in Python?&#xA;I don't think\n it's working.&#xA;Are you really\n a programmer?&#xA;It's broken again,\nor it soon will be!"/>
       <property name="initialDelay" value="100.5"/>
       <property name="loop" value="false"/>

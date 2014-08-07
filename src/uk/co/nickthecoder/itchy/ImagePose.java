@@ -41,7 +41,7 @@ public class ImagePose implements Pose
     private int offsetY;
     private double direction;
 
-    private final Surface surface;
+    private Surface surface;
 
     private static Surface loadSurface( String filename ) throws JameException
     {
@@ -80,6 +80,12 @@ public class ImagePose implements Pose
         this.direction = 0;
     }
 
+    void load( String filename )
+        throws JameException
+    {
+        this.surface = new Surface(filename);
+    }
+    
     public void setDirection( double direction )
     {
         this.direction = direction;

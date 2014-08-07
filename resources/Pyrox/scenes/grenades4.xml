@@ -95,7 +95,7 @@
     <actor costume="wallSE" x="300" y="720" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
     <actor costume="wallSW" x="240" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
     <actor costume="hint" x="420" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="10">
-      <property name="hint" value="Missing a grenade?\nGet one from a previous room!"/>
+      <property name="hint" value="Missing a grenade?\nGet one from a room!"/>
     </actor>
     <actor costume="grenade" x="660" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
     <actor costume="grenade" x="720" y="660" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
@@ -150,6 +150,8 @@
     <actor costume="coin" x="180" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
     <actor costume="coin" x="780" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
     <actor costume="coin" x="60" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
-    <actor costume="player" x="660" y="540" direction="0.0" heading="0.0" startEvent="default" zOrder="100"/>
+    <actor costume="player" x="660" y="540" direction="0.0" heading="0.0" startEvent="default" zOrder="100">
+      <property name="awake" value="true"/>
+    </actor>
   </layer>
 </scene>

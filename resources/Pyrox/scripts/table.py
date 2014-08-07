@@ -23,7 +23,7 @@ class Table(Movable) :
         if forward.isMoving() :
             return False
 
-        if forward.hasTag("squash" + self.getCompassAbreviation(dx, dy) ) :
+        if forward.hasTag("squash" + self.getCompassAbbreviation(dx, dy) ) :
             return True
 
         return False

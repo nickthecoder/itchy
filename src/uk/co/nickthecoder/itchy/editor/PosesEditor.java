@@ -168,6 +168,7 @@ public class PosesEditor extends SubEditor<PoseResource>
             }
         };
         ImagePose pose = this.currentResource.pose;
+        
         ImageComponent imgPose = new ImageComponent(pose.getSurface());
         imageContainer.addChild(imgPose);
         imgPose.addStyle("checkered");
@@ -204,7 +205,7 @@ public class PosesEditor extends SubEditor<PoseResource>
         }
 
         super.update();
-
+        
         if (this.adding) {
             this.editor.resources.addPose(this.currentResource);
         }

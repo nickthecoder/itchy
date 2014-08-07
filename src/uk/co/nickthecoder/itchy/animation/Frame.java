@@ -11,22 +11,14 @@ import uk.co.nickthecoder.itchy.Pose;
  */
 public class Frame implements Cloneable
 {
-    private final String poseName;
-
     private final Pose pose;
 
     private int delay;
 
     public Frame( String poseName, Pose pose )
     {
-        this.poseName = poseName;
         this.pose = pose;
         this.delay = 1;
-    }
-
-    public String getPoseName()
-    {
-        return this.poseName;
     }
 
     public Pose getPose()

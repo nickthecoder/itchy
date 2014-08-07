@@ -60,6 +60,7 @@ class Player(Big) :
         
         self.speed = 6
         self.addTag("player")
+        self.addTag("enemySoft")
         self.addTag("digger") # Allows me to dig hard soil. See class Hard
 
     def onPlacedOnGrid(self) :
@@ -114,7 +115,7 @@ class Player(Big) :
         if self.square is None :
             return
             
-        for evil in self.getCollisionStrategy().collisions(self.getActor(),["deadly"]) :
+        for evil in self.getCollisionStrategy().collisions(self.getActor(),["enemy"]) :
             self.killMe( evil )
             return
 
@@ -215,7 +216,7 @@ class Player(Big) :
     
     def attemptToMove( self, dx, dy ) :
 
-        squashTags = ["soft","squash" + self.getCompassAbreviation(dx,dy)]        
+        squashTags = ["soft","squash" + self.getCompassAbbreviation(dx,dy)]        
         if self.canShoveNeigbours( dx, dy, self.speed, 4, squashTags ) :
             self.shoveNeighbours( dx, dy, self.speed, squashTags )
             self.move(dx, dy)

@@ -70,7 +70,7 @@ class Plane(Movable) :
         if forward.isMoving() :
             return False
 
-        squashD = "squash" + self.getCompassAbreviation(dx, dy)
+        squashD = "squash" + self.getCompassAbbreviation(dx, dy)
         if forward.hasTag( squashD ) :
             if dy != 0 :
                 dummyForward = self.dummy.look(dx,dy)
@@ -87,8 +87,8 @@ class Plane(Movable) :
         # Don't hit things when I've been pushed, only when I've driven forwards.
         if dx == self.direction :
             forward = self.look(dx,dy)
-            if (forward.hasTag("hittable")) :
-                forward.onHit( self, dx, dy )
+            if (forward.role.hasTag("hittable")) :
+                forward.role.onHit( self, dx, dy )
 
     def onDeath(self) :
         if self.dummy :

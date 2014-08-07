@@ -13,11 +13,18 @@ class Soft(GridRole) :
     def onAttach( self ) :
         super(Soft,self).onAttach()
         self.addTag("soft")
-    
+        self.addTag("enemySoft")
+
+    def onPlacedOnGrid( self ) :
+        self.makeAlternateOccupant()
+
     def onHalfInvaded( self, invader ) :
-        super(Soft,self).onHalfInvaded(invader)
-        self.explode()
+        if not invader.hasTag("bee") :
+            super(Soft,self).onHalfInvaded(invader)
+            self.explode()
         
+    def onInvaded( self, invader ) :
+        pass
         
     # Boiler plate code - no need to change this
     def getProperties(self):
