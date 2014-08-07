@@ -10,7 +10,6 @@ import java.io.InputStreamReader;
 import java.util.Iterator;
 import java.util.List;
 
-import uk.co.nickthecoder.itchy.editor.SceneDesignerRole;
 import uk.co.nickthecoder.itchy.makeup.Makeup;
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
 import uk.co.nickthecoder.itchy.role.PlainRole;
@@ -157,24 +156,10 @@ public class SceneReader
     private void setMakeupProperty( SceneActor sceneActor, Makeup makeup, String name, String value )
         throws Exception
     {
-        for (AbstractProperty<Makeup, ?> property : makeup.getProperties()) {
-            if (property.key.equals(name)) {
-                sceneActor.makeupProperties.put(property.key, property.parse(value));
-                return;
-            }
-        }
-
-        for (AbstractProperty<Makeup, ?> property : makeup.getProperties()) {
-            for (String alias : property.aliases) {
-                if (alias.equals(name)) {
-                    sceneActor.makeupProperties.put(property.key, property.parse(value));
-                    return;
-                }
-            }
-        }
-        System.err.println("Ignoring unknown makeup property : " + name);
+        sceneActor.makeupPropertyStrings.put(name, value);
     }
 
+    
     private void readText( XMLTag textTag, Scene.SceneLayer sceneLayer ) throws Exception
     {
         String fontName = textTag.getAttribute("font");
@@ -233,7 +218,7 @@ public class SceneReader
     {
         this.defaultZOrder += 1;
 
-        sceneActor.id = actorTag.getOptionalAttribute("id",  null);
+        sceneActor.id = actorTag.getOptionalAttribute("id", null);
         sceneActor.x = actorTag.getIntAttribute("x");
         sceneActor.y = actorTag.getIntAttribute("y");
         sceneActor.zOrder = actorTag.getOptionalIntAttribute("zOrder", this.defaultZOrder);
@@ -274,24 +259,7 @@ public class SceneReader
     private void setProperty( SceneActor sceneActor, Actor actor, String name, String value )
         throws Exception
     {
-        SceneDesignerRole sdb = (SceneDesignerRole) actor.getRole();
-
-        for (AbstractProperty<Role, ?> property : sdb.actualRole.getProperties()) {
-            if (property.key.equals(name)) {
-                sceneActor.customProperties.put(property.key, property.parse(value));
-                return;
-            }
-        }
-
-        for (AbstractProperty<Role, ?> property : sdb.actualRole.getProperties()) {
-            for (String alias : property.aliases) {
-                if (alias.equals(name)) {
-                    sceneActor.customProperties.put(property.key, property.parse(value));
-                    return;
-                }
-            }
-        }
-        System.err.println("Ignoring unknown property : " + name);
+        sceneActor.customPropertyStrings.put(name, value);
     }
 
 }

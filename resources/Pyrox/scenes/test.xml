@@ -85,7 +85,24 @@
     <actor costume="gate" x="660" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="40">
       <property name="scene" value="menu"/>
     </actor>
+    <text text="newText" font="Computer" size="50" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="-140" y="589" direction="0.0" heading="0.0" startEvent="default" zOrder="60">
+      <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
+        <property name="dx" value="4"/>
+        <property name="dy" value="4"/>
+        <property name="color" value="#950000ff"/>
+      </makeup>
+    </text>
     <text text="round 1" font="Computer" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="300" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="80"/>
+    <actor costume="bee" x="180" y="660" direction="0.0" heading="0.0" startEvent="default" zOrder="80">
+      <property name="randomSeed" value="0"/>
+      <property name="direction" value="West"/>
+      <property name="logic" value="Anticlockwise"/>
+    </actor>
+    <actor costume="bee" x="180" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="80">
+      <property name="randomSeed" value="0"/>
+      <property name="direction" value="West"/>
+      <property name="logic" value="Clockwise"/>
+    </actor>
     <actor costume="plainPlayer" x="0" y="660" direction="0.0" heading="0.0" startEvent="default" zOrder="100">
       <property name="awake" value="true"/>
     </actor>
@@ -113,6 +130,16 @@
     </text>
     <text text="round 2" font="Computer" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="300" y="540" direction="0.0" heading="0.0" startEvent="default" zOrder="253"/>
     <text text="random" font="Computer" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="300" y="780" direction="0.0" heading="0.0" startEvent="default" zOrder="254"/>
+    <actor costume="bee" x="180" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="255">
+      <property name="randomSeed" value="0"/>
+      <property name="direction" value="East"/>
+      <property name="logic" value="Clockwise"/>
+    </actor>
+    <actor costume="bee" x="180" y="540" direction="0.0" heading="0.0" startEvent="default" zOrder="256">
+      <property name="randomSeed" value="0"/>
+      <property name="direction" value="East"/>
+      <property name="logic" value="Anticlockwise"/>
+    </actor>
   </layer>
   <layer name="glass">
     <actor costume="sledge" x="-52" y="682" direction="0.0" heading="0.0" startEvent="default" zOrder="90">

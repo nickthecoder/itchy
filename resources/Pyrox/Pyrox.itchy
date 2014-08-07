@@ -135,24 +135,7 @@
   </poses>
   <sounds/>
   <animations>
-    <animation name="bee-escapeL">
-      <sequence loops="1" sequence="true">
-        <parallel loops="1" sequence="false">
-          <scale ease="linear" target="0.1" ticks="1"/>
-          <alpha ease="linear" target="128.0" ticks="1"/>
-          <move ease="linear" ticks="1" dx="60.0" dy="0.0"/>
-          <frames pingPong="false">
-            <frame pose="beeL1" delay="1"/>
-          </frames>
-        </parallel>
-        <parallel loops="1" sequence="false">
-          <scale ease="easeInOut" target="1.0" ticks="30"/>
-          <alpha ease="easeInOut" target="255.0" ticks="15"/>
-          <move ease="easeInOut" ticks="30" dx="-60.0" dy="0.0"/>
-        </parallel>
-      </sequence>
-    </animation>
-    <animation name="bee-escapeR">
+    <animation name="bee-escapeE">
       <sequence loops="1" sequence="true">
         <parallel loops="1" sequence="false">
           <move ease="linear" ticks="1" dx="-60.0" dy="0.0"/>
@@ -166,6 +149,57 @@
           <alpha ease="easeInOut" target="255.0" ticks="15"/>
           <scale ease="linear" target="1.0" ticks="30"/>
           <move ease="easeInOut" ticks="30" dx="60.0" dy="0.0"/>
+        </parallel>
+      </sequence>
+    </animation>
+    <animation name="bee-escapeN">
+      <sequence loops="1" sequence="true">
+        <parallel loops="1" sequence="false">
+          <move ease="linear" ticks="1" dx="0.0" dy="-60.0"/>
+          <alpha ease="linear" target="128.0" ticks="1"/>
+          <scale ease="linear" target="0.1" ticks="1"/>
+          <frames pingPong="false">
+            <frame pose="beeR1" delay="1"/>
+          </frames>
+        </parallel>
+        <parallel loops="1" sequence="false">
+          <alpha ease="easeInOut" target="255.0" ticks="15"/>
+          <scale ease="linear" target="1.0" ticks="30"/>
+          <move ease="easeInOut" ticks="30" dx="0.0" dy="60.0"/>
+        </parallel>
+      </sequence>
+    </animation>
+    <animation name="bee-escapeS">
+      <sequence loops="1" sequence="true">
+        <parallel loops="1" sequence="false">
+          <move ease="linear" ticks="1" dx="0.0" dy="60.0"/>
+          <alpha ease="linear" target="128.0" ticks="1"/>
+          <scale ease="linear" target="0.1" ticks="1"/>
+          <frames pingPong="false">
+            <frame pose="beeR1" delay="1"/>
+          </frames>
+        </parallel>
+        <parallel loops="1" sequence="false">
+          <alpha ease="easeInOut" target="255.0" ticks="15"/>
+          <scale ease="linear" target="1.0" ticks="30"/>
+          <move ease="easeInOut" ticks="30" dx="0.0" dy="-60.0"/>
+        </parallel>
+      </sequence>
+    </animation>
+    <animation name="bee-escapeW">
+      <sequence loops="1" sequence="true">
+        <parallel loops="1" sequence="false">
+          <scale ease="linear" target="0.1" ticks="1"/>
+          <alpha ease="linear" target="128.0" ticks="1"/>
+          <move ease="linear" ticks="1" dx="60.0" dy="0.0"/>
+          <frames pingPong="false">
+            <frame pose="beeL1" delay="1"/>
+          </frames>
+        </parallel>
+        <parallel loops="1" sequence="false">
+          <scale ease="easeInOut" target="1.0" ticks="30"/>
+          <alpha ease="easeInOut" target="255.0" ticks="15"/>
+          <move ease="easeInOut" ticks="30" dx="-60.0" dy="0.0"/>
         </parallel>
       </sequence>
     </animation>
@@ -458,8 +492,10 @@
       <pose name="default" pose="beeL1"/>
       <pose name="left" pose="beeL1"/>
       <pose name="right" pose="beeR1"/>
-      <animation name="escapeL" animation="bee-escapeL"/>
-      <animation name="escapeR" animation="bee-escapeR"/>
+      <animation name="escapeE" animation="bee-escapeE"/>
+      <animation name="escapeN" animation="bee-escapeN"/>
+      <animation name="escapeS" animation="bee-escapeS"/>
+      <animation name="escapeW" animation="bee-escapeW"/>
     </costume>
     <costume name="behive" defaultZOrder="30" order="40" role="beehive.py">
       <pose name="default" pose="behive"/>

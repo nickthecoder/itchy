@@ -6,7 +6,6 @@ from java.util import ArrayList
 
 from movable import Movable
 from dummy import Dummy
-import gridRole
 
 properties = ArrayList()
 
@@ -71,7 +70,7 @@ class Plane(Movable) :
         if forward.isMoving() :
             return False
 
-        squashD = "squash" + gridRole.getDirectionAbreviation(dx, dy)
+        squashD = "squash" + self.getCompassAbreviation(dx, dy)
         if forward.hasTag( squashD ) :
             if dy != 0 :
                 dummyForward = self.dummy.look(dx,dy)

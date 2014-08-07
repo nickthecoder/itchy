@@ -93,13 +93,11 @@ public class ChoiceProperty<S, T> extends AbstractProperty<S, T>
     @Override
     public String getStringValue( S subject ) throws Exception
     {
-        System.out.println( "Choice Property string value" );
         T result = getValue(subject);
 
         for (String key : this.map.keySet()) {
             T value = this.map.get(key);
             if (value.equals(result)) {
-                System.out.println( "Found key : " + key );
                 return key;
             }
         }

@@ -1,12 +1,11 @@
 Bugs
 
 
-
-ChoiceProperty
-    String -> Object
-    Like EnumProperty, but can have arbitrary data.
-    Can use Picker
-    Use it for Bee's logic and Beehive's direction and beeLogic.
+Make Bees move through soil
+    Make soil and hard soil alternate occupants, with override.
+    Need a new tag, as soft is used by collectables and soil.
+        Current test is player or flower or Empty.
+        Replace with enemySoft ???
 
 PyRox
 

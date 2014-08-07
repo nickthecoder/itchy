@@ -56,9 +56,9 @@ public abstract class SceneActor implements Cloneable
 
     public double activationDelay;
 
-    public Map<String, Object> customProperties = new HashMap<String, Object>();
+    public Map<String, String> customPropertyStrings = new HashMap<String, String>();
 
-    public Map<String, Object> makeupProperties = new HashMap<String, Object>();
+    public Map<String, String> makeupPropertyStrings = new HashMap<String, String>();
 
     protected SceneActor()
     {
@@ -86,8 +86,8 @@ public abstract class SceneActor implements Cloneable
 
         for (AbstractProperty<Role, ?> property : actualRole.getProperties()) {
             try {
-                Object value = property.getValue(actualRole);
-                this.customProperties.put(property.key, value);
+                String value = property.getStringValue(actualRole);
+                this.customPropertyStrings.put(property.key, value);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -96,8 +96,8 @@ public abstract class SceneActor implements Cloneable
         Makeup makeup = actor.getAppearance().getMakeup();
         for (AbstractProperty<Makeup, ?> property : makeup.getProperties()) {
             try {
-                Object value = property.getValue(makeup);
-                this.makeupProperties.put(property.key, value);
+                String value = property.getStringValue(makeup);
+                this.makeupPropertyStrings.put(property.key, value);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -158,10 +158,10 @@ public abstract class SceneActor implements Cloneable
         }
 
         for (AbstractProperty<Role, ?> property : actualRole.getProperties()) {
-            Object value = this.customProperties.get(property.key);
+            String value = this.customPropertyStrings.get(property.key);
             if (value != null) {
                 try {
-                    property.setValue(actualRole, value);
+                    property.setValueByString(actualRole, value);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -171,10 +171,10 @@ public abstract class SceneActor implements Cloneable
         Makeup makeup = actor.getAppearance().getMakeup();
 
         for (AbstractProperty<Makeup, ?> property : makeup.getProperties()) {
-            Object value = this.makeupProperties.get(property.key);
+            String value = this.makeupPropertyStrings.get(property.key);
             if (value != null) {
                 try {
-                    property.setValue(makeup, value);
+                    property.setValueByString(makeup, value);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -200,9 +200,9 @@ public abstract class SceneActor implements Cloneable
     {
         SceneActor result = (SceneActor) super.clone();
 
-        result.customProperties = new HashMap<String, Object>();
-        for (String key : this.customProperties.keySet()) {
-            result.customProperties.put(key, this.customProperties.get(key));
+        result.customPropertyStrings = new HashMap<String, String>();
+        for (String key : this.customPropertyStrings.keySet()) {
+            result.customPropertyStrings.put(key, this.customPropertyStrings.get(key));
         }
 
         return result;
@@ -254,7 +254,7 @@ public abstract class SceneActor implements Cloneable
             return false;
         }
 
-        return this.customProperties.equals(other.customProperties);
+        return this.customPropertyStrings.equals(other.customPropertyStrings);
     }
 
 }

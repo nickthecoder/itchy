@@ -7,7 +7,6 @@ from uk.co.nickthecoder.itchy.role import Explosion
 from java.util import ArrayList
 
 from gridRole import GridRole
-import gridRole
 
 properties = ArrayList()
 
@@ -109,8 +108,8 @@ class Movable(GridRole) :
     
     def moveDirection(self, direction, speed=None) :
 
-        dx = gridRole.deltaX[direction]
-        dy = gridRole.deltaY[direction]
+        dx = self.getDeltaX(direction)
+        dy = self.getDeltaY(direction)
         
         self.move( dx, dy, speed )
 
@@ -160,10 +159,6 @@ class Movable(GridRole) :
     # Boiler plate code - no need to change this
     def getClassName(self):
         return ClassName( Role, self.__module__ + ".py" )
-
-
-def getDirectionAbreviation( dx, dy ) :
-    return ["W", "", "E" ][dx + 1] + ["S", "", "N"][dy + 1]
 
 
 

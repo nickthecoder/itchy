@@ -4,7 +4,6 @@ from uk.co.nickthecoder.itchy.util import ClassName
 
 from java.util import ArrayList
 
-import gridRole
 from gridRole import GridRole
 from movable import Movable
 
@@ -65,7 +64,7 @@ class Balloon(Movable) :
         if forward.isMoving() :
             return False
             
-        if forward.hasTag("squash" + gridRole.getDirectionAbreviation(dx, dy)) :
+        if forward.hasTag("squash" + self.getCompassAbreviation(dx, dy)) :
             return True
 
         if forward.canShove(self, dx, dy, speed, 1) :
@@ -77,7 +76,7 @@ class Balloon(Movable) :
         
         forward = self.look(dx, dy)
         
-        if not forward.hasTag("squash" + gridRole.getDirectionAbreviation(dx, dy)) :
+        if not forward.hasTag("squash" + self.getCompassAbreviation(dx, dy)) :
             forward.shove( self, dx, dy, speed )
             
         super(Balloon,self).shove( pusher, dx, dy, speed )

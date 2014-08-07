@@ -140,10 +140,7 @@ class GridRole(AbstractRole) :
         
     def lookDirection(self, direction, speed=None) :
 
-        global deltaX
-        global deltaY
-        
-        return self.look( deltaX[direction], deltaY[direction], speed )
+        return self.look( self.getDeltaX(direction), self.getDeltaY(direction), speed )
 
 
     def lookEast(self, speed=None) :
@@ -254,6 +251,23 @@ class GridRole(AbstractRole) :
         self.square.occupant = self
 
 
+    @staticmethod
+    def getDirectionAbreviation( direction ) :
+        return [ "E","N","W","S" ][ direction ]
+
+    @staticmethod
+    def getCompassAbreviation( dx, dy ) :
+        return ["W", "", "E" ][dx + 1] + ["S", "", "N"][dy + 1]
+
+    @staticmethod
+    def getDeltaX( direction ) :
+        return [1,0,-1,0][direction]
+
+    @staticmethod
+    def getDeltaY( direction ) :
+        return [0,1,0,-1][direction]
+
+
     # Boiler plate code - no need to change this
     def getProperties(self):
         return properties
@@ -268,16 +282,6 @@ class GridRole(AbstractRole) :
         
     def __str__(self) :
         return self.__class__.__name__ + " @ " + str(self.square.x) + "," + str(self.square.y)
-
-
-deltaY = [0,1,0,-1]
-deltaX = [1,0,-1,0]
-directionAbreviations = [ "E","N","W","S" ] # The order is from 0 degrees going anticlockwise (i.e. +ve angles).
-
-def getDirectionAbreviation( dx, dy ) :
-    return ["W", "", "E" ][dx + 1] + ["S", "", "N"][dy + 1]
-
-
 
     
 

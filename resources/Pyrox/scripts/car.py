@@ -6,7 +6,6 @@ from java.util import ArrayList
 
 from faller import Faller
 from movable import Movable
-import gridRole
 
 properties = ArrayList()
 
@@ -58,7 +57,7 @@ class Car(Faller) :
         if forward.isMoving() :
             return False
 
-        if forward.hasTag("squash" + gridRole.getDirectionAbreviation(dx, dy) ) :
+        if forward.hasTag("squash" + self.getCompassAbreviation(dx, dy) ) :
             return True
          
     def onArrived( self, dx, dy ) :

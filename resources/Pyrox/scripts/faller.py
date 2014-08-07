@@ -3,7 +3,6 @@ from uk.co.nickthecoder.itchy import AbstractRole
 from uk.co.nickthecoder.itchy import Actor
 from uk.co.nickthecoder.itchy.util import ClassName
 
-import gridRole
 from gridRole import GridRole
 from movable import Movable
 
@@ -81,7 +80,7 @@ class Faller(Movable) :
         if forward.isMoving() :
             return False
 
-        if forward.hasTag("squash" + gridRole.getDirectionAbreviation(dx, dy) ) :
+        if forward.hasTag("squash" + self.getCompassAbreviation(dx, dy) ) :
             return True
 
         return False

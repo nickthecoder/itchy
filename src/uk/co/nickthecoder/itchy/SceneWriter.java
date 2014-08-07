@@ -8,7 +8,6 @@ import uk.co.nickthecoder.itchy.property.AbstractProperty;
 import uk.co.nickthecoder.itchy.role.PlainRole;
 import uk.co.nickthecoder.itchy.util.XMLException;
 import uk.co.nickthecoder.itchy.util.XMLWriter;
-import uk.co.nickthecoder.jame.RGBA;
 
 public class SceneWriter extends XMLWriter
 {
@@ -135,7 +134,7 @@ public class SceneWriter extends XMLWriter
     private void writeSceneActorAttributes( SceneActor sceneActor ) throws XMLException
     {
         if (sceneActor.id != null) {
-            this.attribute("id",sceneActor.id);
+            this.attribute("id", sceneActor.id);
         }
         this.attribute("x", sceneActor.x);
         this.attribute("y", sceneActor.y);
@@ -143,7 +142,7 @@ public class SceneWriter extends XMLWriter
         this.attribute("heading", sceneActor.heading);
         this.attribute("startEvent", sceneActor.startEvent);
         this.attribute("zOrder", sceneActor.zOrder);
-        
+
         if (sceneActor.alpha != 255) {
             this.attribute("alpha", sceneActor.alpha);
         }
@@ -160,14 +159,13 @@ public class SceneWriter extends XMLWriter
             this.attribute("activationDelay", sceneActor.activationDelay);
         }
 
-        for (String key : sceneActor.customProperties.keySet()) {
-            Object value = sceneActor.customProperties.get(key);
+        for (String key : sceneActor.customPropertyStrings.keySet()) {
+            String value = sceneActor.customPropertyStrings.get(key);
 
-            String stringValue = this.getPropertyValue(value);
-            if (stringValue != null) {
+            if (value != null) {
                 this.beginTag("property");
                 this.attribute("name", key);
-                this.attribute("value", stringValue);
+                this.attribute("value", value);
                 this.endTag("property");
             }
         }
@@ -182,35 +180,17 @@ public class SceneWriter extends XMLWriter
         this.beginTag("makeup");
         this.attribute("classname", sceneActor.makeupClassName.name);
 
-        for (String key : sceneActor.makeupProperties.keySet()) {
-            Object value = sceneActor.makeupProperties.get(key);
+        for (String key : sceneActor.makeupPropertyStrings.keySet()) {
+            String value = sceneActor.makeupPropertyStrings.get(key);
 
-            String stringValue = this.getPropertyValue(value);
-            if (stringValue != null) {
+            if (value != null) {
                 this.beginTag("property");
                 this.attribute("name", key);
-                this.attribute("value", stringValue);
+                this.attribute("value", value);
                 this.endTag("property");
             }
         }
         this.endTag("makeup");
     }
 
-    private String getPropertyValue( Object value )
-    {
-        if ((value instanceof String) || (value instanceof Boolean) || (value instanceof Double) || (value instanceof Integer)) {
-            return String.valueOf(value);
-
-        } else if (value instanceof RGBA) {
-            return ((RGBA) value).getRGBACode();
-
-        } else if (value instanceof Font) {
-
-            Font font = (Font) value;
-            String fontName = this.sceneResource.resources.getFontName(font);
-            return fontName;
-        }
-
-        return null;
-    }
 }

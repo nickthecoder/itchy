@@ -4,7 +4,6 @@ from uk.co.nickthecoder.itchy.util import ClassName
 
 from java.util import ArrayList
 
-import gridRole
 from gridRole import GridRole
 from movable import Movable
 
@@ -24,7 +23,7 @@ class Table(Movable) :
         if forward.isMoving() :
             return False
 
-        if forward.hasTag("squash" + gridRole.getDirectionAbreviation(dx, dy) ) :
+        if forward.hasTag("squash" + self.getCompassAbreviation(dx, dy) ) :
             return True
 
         return False

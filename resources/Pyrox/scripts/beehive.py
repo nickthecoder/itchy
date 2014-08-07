@@ -13,8 +13,8 @@ from faller import Faller
 
 properties = ArrayList()
 properties.add( IntegerProperty( "bees" ) )
-properties.add( IntegerProperty( "exitDirection" ).hint( "-1 or 1 or 0=random" ) )
-properties.add( IntegerProperty( "beeLogic" ).hint( "0..2" ) )
+properties.add( ChoiceProperty( "beeLogic" ).add("Random", 0).add("Clockwise", 1).add("Anticlockwise", 2) )
+properties.add( ChoiceProperty( "beeDirection" ).add("Random", -1).add("North", 1).add("East", 0).add("South", 3).add("West",2) )
 properties.add( IntegerProperty( "randomSeed" ) )
 
 # Initially attached to something, and therefore won't fall or roll.
@@ -25,12 +25,14 @@ class Beehive(Faller) :
 
     def __init__(self) :
         super(Beehive,self).__init__()
+
         self.bees = 3
+        self.beeLogic = 0
+        self.beeDirection = 0
+        self.randomSeed = 0
+
         self.detached = False
         self.emitTimer = None
-        self.randomSeed = 0
-        self.exitDirection = 0
-        self.beeLogic = "a"
 
     def onBirth(self) :
         super(Beehive,self).onBirth()
@@ -100,22 +102,19 @@ class Beehive(Faller) :
 
 
     def emitBee(self) :
-        if self.exitDirection == 0 :
-            self.exitDirection = self.random(2) * 2 - 1
+        if self.beeDirection == -1 :
+            direction = self.random.nextInt(4)
         else :
-            direction = self.exitDirection
+            direction = self.beeDirection
 
         if self.emitBeeDirection(direction) :
             return True
             
-        if self.exitDirection == 0 :
-            return self.emitBeeDirection(-direction)
-
         return False
             
     def emitBeeDirection(self, direction) :
     
-        outside = self.look( direction, 0 )
+        outside = self.lookDirection( direction )
         if outside.isEmpty() :
 
             resources = Itchy.getGame().resources
@@ -123,7 +122,7 @@ class Beehive(Faller) :
             bee = resources.createActor( costume, self.actor.stage )
             bee.moveTo( self.actor.x + self.square.grid.squareSize * direction, self.actor.y )
             bee.role.placeOnGrid( self.square.grid )
-            bee.event( "escape" + ("L" if direction == -1 else "R" ) )
+            bee.event( "escape" + ( self.getDirectionAbreviation(direction) ) )
             bee.logic = self.beeLogic
             
             bee.role.random = self.random

@@ -10,7 +10,6 @@ from uk.co.nickthecoder.itchy.property import BooleanProperty
 from java.util import ArrayList
 
 from gridRole import GridRole
-import gridRole
 from big import Big
 
 properties = ArrayList()
@@ -216,7 +215,7 @@ class Player(Big) :
     
     def attemptToMove( self, dx, dy ) :
 
-        squashTags = ["soft","squash" + gridRole.getDirectionAbreviation(dx,dy)]        
+        squashTags = ["soft","squash" + self.getCompassAbreviation(dx,dy)]        
         if self.canShoveNeigbours( dx, dy, self.speed, 4, squashTags ) :
             self.shoveNeighbours( dx, dy, self.speed, squashTags )
             self.move(dx, dy)
@@ -238,14 +237,12 @@ class Player(Big) :
             self.killMe( hitter )
 
     def killMe( self, other=None ) :
-        print "killMe"
         Explosion(self.actor) \
             .gravity(-0.1) \
             .projectiles(5) \
             .fade(0.9, 3.5).vx(3,5).vy(-0.4,0.4) \
             .pose("fragment") \
             .createActor()
-        print "killMe 2"
 
         Explosion(self.actor) \
             .gravity(-0.1) \
@@ -254,16 +251,12 @@ class Player(Big) :
             .pose("fragment") \
             .createActor()
 
-        print "killMe 3"        
 
         self.killZs()
         # TODO Use different events depending on the hitter - rocks squash, bees sting,
         # so use different animations and sound effects.
-        print "killMe 4"
         self.removeFromGrid()
-        print "killMe 5"
         self.actor.deathEvent("hit")
-        print "killMe 6"
 
 
     def killZs( self ) :
@@ -273,12 +266,10 @@ class Player(Big) :
             
 
     def onDeath( self ) :
-        print "player onDeath"
         Itchy.getGame().sceneDirector.playerDied( self )
         self.killZs()
-        print "calling player onDeath"
         Big.onDeath(self)
-        print "player end onDeath"
+
 
 
     # Boiler plate code - no need to change this

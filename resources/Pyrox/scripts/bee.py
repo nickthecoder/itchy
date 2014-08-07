@@ -13,22 +13,29 @@ from movable import Movable
 
 properties = ArrayList()
 properties.add( ChoiceProperty( "logic" ).add("Random", 0).add("Clockwise", 1).add("Anticlockwise", 2) )
+properties.add( ChoiceProperty( "direction" ).add("North", 1).add("East", 0).add("South", 3).add("West",2) )
+properties.add( IntegerProperty( "randomSeed" ) )
 
 class Bee(Movable) :
 
     def __init__(self) :
         super(Bee,self).__init__()
-        self.random = Random()
-        self.direction = -1
+        self.randomSeed = 0
         self.initialTimer = Timer.createTimerSeconds(0.4)
         self.logic = 0
         self.direction = 1
+        self.random = None
 
     def onBirth(self) :
         super(Bee,self).onBirth()
         self.addTag("pollinator")
         self.addTag("deadly")
         self.addTag("soft")
+        if self.random is None :
+            if self.randomSeed == 0 :
+                self.random = Random()
+            else :
+                self.random = Random( self.randomSeed )
         
     def tick( self ) :
         if self.initialTimer is None or self.initialTimer.isFinished() :
