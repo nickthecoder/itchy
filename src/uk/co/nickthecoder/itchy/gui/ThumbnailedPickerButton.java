@@ -45,7 +45,7 @@ public class ThumbnailedPickerButton<T extends Thumbnailed> extends PickerButton
     @Override
     public void onClick( final MouseButtonEvent e )
     {
-        ThumbnailedPicker<T> picker = new ThumbnailedPicker<T>(this.title, this.hashMap, this.getValue()) {
+        ThumbnailedPicker<T> picker = new ThumbnailedPicker<T>(this.title, this.map, this.getValue()) {
             @Override
             public void pick( String label, T object )
             {

@@ -6,16 +6,16 @@ package uk.co.nickthecoder.itchy.gui;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.Map;
 
 public abstract class Picker<T> extends Window
 {
-    public Picker( String title, HashMap<String, T> hashmap )
+    public Picker( String title, Map<String, T> map )
     {
-        this(title, hashmap, null);
+        this(title, map, null);
     }
 
-    public Picker( String title, HashMap<String, T> hashmap, T selected )
+    public Picker( String title, Map<String, T> map, T selected )
     {
         super(title);
 
@@ -30,12 +30,12 @@ public abstract class Picker<T> extends Window
         VerticalScroll vs = new VerticalScroll(container);
         this.clientArea.addChild(vs);
 
-        ArrayList<String> keys = new ArrayList<String>(hashmap.keySet());
+        ArrayList<String> keys = new ArrayList<String>(map.keySet());
         Collections.sort(keys);
 
         for (String key : keys) {
 
-            T object = hashmap.get(key);
+            T object = map.get(key);
 
             Component component = this.createButton(key, object);
             container.addChild(component);

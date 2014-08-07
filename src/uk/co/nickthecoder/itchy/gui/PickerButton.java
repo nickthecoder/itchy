@@ -5,14 +5,14 @@
 package uk.co.nickthecoder.itchy.gui;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 
 public class PickerButton<T> extends Button
 {
-    protected final HashMap<String, T> hashMap;
+    protected final Map<String, T> map;
 
     protected final Label label;
 
@@ -22,13 +22,13 @@ public class PickerButton<T> extends Button
 
     protected final List<ComponentChangeListener> changeListeners;
 
-    public PickerButton( String title, T current, HashMap<String, T> hashMap )
+    public PickerButton( String title, T current, Map<String, T> map )
     {
         super();
 
         this.title = title;
 
-        this.hashMap = hashMap;
+        this.map = map;
         this.addStyle("pickerButton");
         this.value = current;
         this.focusable = true;
@@ -46,8 +46,8 @@ public class PickerButton<T> extends Button
 
     private String getLabelString( T value )
     {
-        for (String key : this.hashMap.keySet()) {
-            if (value.equals(this.hashMap.get(key))) {
+        for (String key : this.map.keySet()) {
+            if (value.equals(this.map.get(key))) {
                 return key;
             }
         }
@@ -67,7 +67,7 @@ public class PickerButton<T> extends Button
     @Override
     public void onClick( final MouseButtonEvent e )
     {
-        Picker<T> picker = new Picker<T>(this.title, this.hashMap, this.getValue()) {
+        Picker<T> picker = new Picker<T>(this.title, this.map, this.getValue()) {
             @Override
             public void pick( String label, T object )
             {

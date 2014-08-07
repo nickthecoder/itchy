@@ -6,19 +6,19 @@ package uk.co.nickthecoder.itchy.gui;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.Map;
 
 import uk.co.nickthecoder.itchy.Thumbnailed;
 import uk.co.nickthecoder.jame.Surface;
 
 public abstract class ThumbnailedPicker<T extends Thumbnailed> extends Window
 {
-    public ThumbnailedPicker( String title, HashMap<String, T> hashmap )
+    public ThumbnailedPicker( String title, Map<String, T> map )
     {
-        this(title, hashmap, null);
+        this(title, map, null);
     }
 
-    public ThumbnailedPicker( String title, HashMap<String, T> hashmap, T selected )
+    public ThumbnailedPicker( String title, Map<String, T> map, T selected )
     {
         super(title);
 
@@ -36,12 +36,12 @@ public abstract class ThumbnailedPicker<T extends Thumbnailed> extends Window
         VerticalScroll vs = new VerticalScroll(container);
         this.clientArea.addChild(vs);
 
-        ArrayList<String> keys = new ArrayList<String>(hashmap.keySet());
+        ArrayList<String> keys = new ArrayList<String>(map.keySet());
         Collections.sort(keys);
 
         for (String key : keys) {
 
-            T object = hashmap.get(key);
+            T object = map.get(key);
 
             Component component = this.createButton(key, object);
             grid.addChild(component);

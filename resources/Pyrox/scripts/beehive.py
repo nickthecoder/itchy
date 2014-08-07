@@ -13,6 +13,8 @@ from faller import Faller
 
 properties = ArrayList()
 properties.add( IntegerProperty( "bees" ) )
+properties.add( IntegerProperty( "exitDirection" ).hint( "-1 or 1 or 0=random" ) )
+properties.add( IntegerProperty( "beeLogic" ).hint( "0..2" ) )
 properties.add( IntegerProperty( "randomSeed" ) )
 
 # Initially attached to something, and therefore won't fall or roll.
@@ -27,6 +29,8 @@ class Beehive(Faller) :
         self.detached = False
         self.emitTimer = None
         self.randomSeed = 0
+        self.exitDirection = 0
+        self.beeLogic = "a"
 
     def onBirth(self) :
         super(Beehive,self).onBirth()
@@ -96,12 +100,17 @@ class Beehive(Faller) :
 
 
     def emitBee(self) :
-        direction = 1 # TODO Random 1 or -1
+        if self.exitDirection == 0 :
+            self.exitDirection = self.random(2) * 2 - 1
+        else :
+            direction = self.exitDirection
 
         if self.emitBeeDirection(direction) :
             return True
-        #else :
-        #    return self.emitBeeDirection(-direction)
+            
+        if self.exitDirection == 0 :
+            return self.emitBeeDirection(-direction)
+
         return False
             
     def emitBeeDirection(self, direction) :
@@ -115,7 +124,8 @@ class Beehive(Faller) :
             bee.moveTo( self.actor.x + self.square.grid.squareSize * direction, self.actor.y )
             bee.role.placeOnGrid( self.square.grid )
             bee.event( "escape" + ("L" if direction == -1 else "R" ) )
-
+            bee.logic = self.beeLogic
+            
             bee.role.random = self.random
             
             return True

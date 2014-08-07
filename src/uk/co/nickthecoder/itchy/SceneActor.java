@@ -5,6 +5,7 @@
 package uk.co.nickthecoder.itchy;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import uk.co.nickthecoder.itchy.editor.SceneDesignerRole;
 import uk.co.nickthecoder.itchy.makeup.Makeup;
@@ -55,9 +56,9 @@ public abstract class SceneActor implements Cloneable
 
     public double activationDelay;
 
-    public HashMap<String, Object> customProperties = new HashMap<String, Object>();
+    public Map<String, Object> customProperties = new HashMap<String, Object>();
 
-    public HashMap<String, Object> makeupProperties = new HashMap<String, Object>();
+    public Map<String, Object> makeupProperties = new HashMap<String, Object>();
 
     protected SceneActor()
     {

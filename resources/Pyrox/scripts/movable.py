@@ -107,6 +107,13 @@ class Movable(GridRole) :
         self.findLocalSquare( dx, dy ).entrant = self
      
     
+    def moveDirection(self, direction, speed=None) :
+
+        dx = gridRole.deltaX[direction]
+        dy = gridRole.deltaY[direction]
+        
+        self.move( dx, dy, speed )
+
     def moveEast( self ) :
         self.move( 1, 0 )
     

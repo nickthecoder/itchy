@@ -1,11 +1,14 @@
-
 Bugs
 
 
 
-PyRox
+ChoiceProperty
+    String -> Object
+    Like EnumProperty, but can have arbitrary data.
+    Can use Picker
+    Use it for Bee's logic and Beehive's direction and beeLogic.
 
-    Remove "TODO"s
+PyRox
 
     Place Sledgers in key places, so that the sledging can be targeted to a given area.
         e.g. "Have you met by brother?"
@@ -71,11 +74,8 @@ Why have a Role interface if everything will end up using AbstractRole?
     Why does Role have "birth" and yet everything uses onBirth() ? Ditto with other events.
     Talk to Simon about it.
 
-Rox Later
 
-    NinePatches (and Poses etc) to have properties, which can be used in game code.
-        For example a bubble can specify the text margins, and even the font and font size.
-        
+Pyrox Later
 
     Zoom in/out : Scale all GridRole objects. Care needed if/when creating new objects.
 

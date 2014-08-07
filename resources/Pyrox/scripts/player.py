@@ -97,7 +97,6 @@ class Player(Big) :
     # just because our tick happens before one and after the other.
     def playerTick( self ) :
 
-        
         if self.scrollResetting :
             self.resetScroll()
         elif self.inputScrollReset.pressed() :
@@ -112,12 +111,18 @@ class Player(Big) :
             self.scroll( 0, -1 )
         else :
             self.scrollSpeed = self.defaultScrollSpeed
+
+        if self.square is None :
+            return
             
-        if self.isMoving() or self.square is None :
+        for evil in self.getCollisionStrategy().collisions(self.getActor(),["deadly"]) :
+            self.killMe( evil )
+            return
+
+        if self.isMoving() :
             pass
 
         else :
-            
             self.movements()
 
         Big.tick(self)
@@ -161,10 +166,6 @@ class Player(Big) :
         self.event("wake")
         self.awake = True
         
-    def killZs( self ) :
-        if self.sleepyZ :
-            self.sleepyZ.kill()
-            self.sleepyZ = None
             
     def resetScroll( self ) :
         
@@ -222,7 +223,7 @@ class Player(Big) :
             return True
         
         return False
-       
+
     def move( self, dx, dy, speed=None ) :
         Big.move(self,dx, dy, speed )
         if dy == 0 :
@@ -230,33 +231,54 @@ class Player(Big) :
         else :
             self.actor.event( "move-" + ("U" if dy ==  1 else "D" ) )
 
-    def onDeath( self ) :
-    
-        Itchy.getGame().sceneDirector.playerDied( self )
-        self.killZs()
-        Big.onDeath(self)
 
     def onHit( self, hitter, dx, dy ) :
         
         if hitter.hasTag("deadly") :
-        
-            Explosion(self.actor) \
-                .gravity(-0.1) \
-                .projectiles(5) \
-                .fade(0.9, 3.5).vx(3,5).vy(-0.4,0.4) \
-                .pose("fragment") \
-                .createActor()
+            self.killMe( hitter )
 
-            Explosion(self.actor) \
-                .gravity(-0.1) \
-                .projectiles(5) \
-                .fade(0.9, 3.5).vx(-3,-5).vy(-0.4,0.4) \
-                .pose("fragment") \
-                .createActor()
+    def killMe( self, other=None ) :
+        print "killMe"
+        Explosion(self.actor) \
+            .gravity(-0.1) \
+            .projectiles(5) \
+            .fade(0.9, 3.5).vx(3,5).vy(-0.4,0.4) \
+            .pose("fragment") \
+            .createActor()
+        print "killMe 2"
 
-            self.killZs()
-            self.actor.deathEvent("hit")
-            self.removeFromGrid()
+        Explosion(self.actor) \
+            .gravity(-0.1) \
+            .projectiles(5) \
+            .fade(0.9, 3.5).vx(-3,-5).vy(-0.4,0.4) \
+            .pose("fragment") \
+            .createActor()
+
+        print "killMe 3"        
+
+        self.killZs()
+        # TODO Use different events depending on the hitter - rocks squash, bees sting,
+        # so use different animations and sound effects.
+        print "killMe 4"
+        self.removeFromGrid()
+        print "killMe 5"
+        self.actor.deathEvent("hit")
+        print "killMe 6"
+
+
+    def killZs( self ) :
+        if self.sleepyZ :
+            self.sleepyZ.kill()
+            self.sleepyZ = None
+            
+
+    def onDeath( self ) :
+        print "player onDeath"
+        Itchy.getGame().sceneDirector.playerDied( self )
+        self.killZs()
+        print "calling player onDeath"
+        Big.onDeath(self)
+        print "player end onDeath"
 
 
     # Boiler plate code - no need to change this
