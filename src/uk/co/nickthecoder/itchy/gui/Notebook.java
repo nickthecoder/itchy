@@ -35,12 +35,12 @@ public class Notebook extends Container
         this.type = "notebook";
     }
 
-    public void addPage( String label, Component page )
+    public Tab addPage( String label, Component page )
     {
-        addPage(new Label(label), page);
+        return addPage(new Label(label), page);
     }
 
-    public void addPage( Component label, Component page )
+    public Tab addPage( Component label, Component page )
     {
         Tab tab = new Tab(label, page, this.tabs.getChildren().size());
         this.tabs.addChild(tab);
@@ -50,6 +50,7 @@ public class Notebook extends Container
         tab.setSelected(selected);
         page.setVisible(selected);
 
+        return tab;
     }
 
     public int size()
@@ -119,7 +120,7 @@ public class Notebook extends Container
         }
     }
 
-    class Tab extends Button
+    public class Tab extends Button
     {
         private final Component page;
 
@@ -130,6 +131,7 @@ public class Notebook extends Container
         Tab( Component label, Component page, int pageNumber )
         {
             this.addChild(label);
+            // this.tooltip = "Page " + pageNumber; // TODO REMOVE
             this.page = page;
             this.type = "tab";
             this.focusable = true;

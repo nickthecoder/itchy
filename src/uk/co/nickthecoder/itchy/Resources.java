@@ -614,7 +614,7 @@ public class Resources extends Loadable
             if (text != null) {
                 TextStyle textStyle = resource.getCostume().getTextStyle("default");
                 if (textStyle == null) {
-                    textStyle = new TextStyle(this.getDefaultFontResource(), 12);
+                    textStyle = new TextStyle(this.getDefaultFontResource().font, 12);
                 }
                 return this.getThumbnail(textStyle, text);
             }
@@ -632,7 +632,7 @@ public class Resources extends Loadable
         }
 
         try {
-            return textStyle.fontResource.font.getSize(fontSize).renderBlended(text, textStyle.color);
+            return textStyle.font.getSize(fontSize).renderBlended(text, textStyle.color);
         } catch (JameException e) {
             return null;
         }

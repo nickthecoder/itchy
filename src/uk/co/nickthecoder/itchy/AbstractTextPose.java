@@ -33,7 +33,7 @@ public abstract class AbstractTextPose implements Pose
 
     public AbstractTextPose( TextStyle textStyle )
     {
-        this.font = textStyle.fontResource.font;
+        this.font = textStyle.font;
         this.fontSize = textStyle.fontSize;
         this.color = textStyle.color;
     }

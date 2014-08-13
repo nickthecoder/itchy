@@ -44,7 +44,7 @@ public class Talk extends Follower
 
     private final void createTextStyle()
     {
-        this.textStyle = new TextStyle(Itchy.getResources().getDefaultFontResource(), 14);
+        this.textStyle = new TextStyle(Itchy.getResources().getDefaultFontResource().font, 14);
     }
 
     @Override
@@ -56,8 +56,7 @@ public class Talk extends Follower
 
     public Talk font( String fontName, int fontSize )
     {
-        FontResource fontResource = Itchy.getResources().getFontResource(fontName);
-        this.textStyle.fontResource= fontResource;
+        this.textStyle.font = Itchy.getResources().getFont( fontName );
         this.fontSize = fontSize;
         return this;
     }
@@ -184,7 +183,7 @@ public class Talk extends Follower
     {
         if (this.textStyle == null) {
             FontResource fontResource = Itchy.getResources().getDefaultFontResource();
-            this.textStyle = new TextStyle(fontResource, 14);
+            this.textStyle = new TextStyle(fontResource.font, 14);
         }
 
         AbstractTextPose pose;

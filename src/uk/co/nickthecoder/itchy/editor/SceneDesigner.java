@@ -43,6 +43,7 @@ import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.Container;
 import uk.co.nickthecoder.itchy.gui.FlowLayout;
 import uk.co.nickthecoder.itchy.gui.GridLayout;
+import uk.co.nickthecoder.itchy.gui.GuiView;
 import uk.co.nickthecoder.itchy.gui.ImageComponent;
 import uk.co.nickthecoder.itchy.gui.Label;
 import uk.co.nickthecoder.itchy.gui.MessageBox;
@@ -306,7 +307,6 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.toolbox = new RootContainer();
         this.toolbox.addStyle("toolbox");
         this.toolbox.draggable = true;
-        this.toolbox.moveTo(0, this.editor.getHeight() - this.toolbox.getHeight());
 
         this.toolbox.setStylesheet(this.editor.getStylesheet());
         this.toolbox.reStyle();
@@ -353,13 +353,13 @@ public class SceneDesigner implements MouseListener, KeyListener
         createLayersTable();
 
         this.toolboxNotebook = new Notebook();
-        this.toolboxNotebook.addPage(new Label("Scene"), sceneDetailsScroll);
-        this.toolboxNotebook.addPage(new Label("Costumes"), costumesScroll);
-        this.toolboxNotebook.addPage(new Label("Actor"), propertiesScroll);
-        this.toolboxNotebook.addPage(new Label("Appearance"), appearanceScroll);
-        this.toolboxNotebook.addPage(new Label("Makeup"), makeupScroll);
-        this.toolboxNotebook.addPage(new Label("Role"), roleScroll);
-        this.toolboxNotebook.addPage(new Label("Layers"), layersScroll);
+        this.toolboxNotebook.addPage(new Label("Scene"), sceneDetailsScroll).setTooltip("ctrl+1");
+        this.toolboxNotebook.addPage(new Label("Costumes"), costumesScroll).setTooltip("ctrl+2");
+        this.toolboxNotebook.addPage(new Label("Actor"), propertiesScroll).setTooltip("ctrl+3");
+        this.toolboxNotebook.addPage(new Label("Appearance"), appearanceScroll).setTooltip("ctrl+4");
+        this.toolboxNotebook.addPage(new Label("Makeup"), makeupScroll).setTooltip("ctrl+5");
+        this.toolboxNotebook.addPage(new Label("Role"), roleScroll).setTooltip("ctrl+6");
+        this.toolboxNotebook.addPage(new Label("Layers"), layersScroll).setTooltip("ctrl+7");
 
         this.toolbox.setFill(true, true);
         this.toolboxNotebook.setFill(true, true);
@@ -375,8 +375,11 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.toolbox.setMinimumWidth(this.editor.getWidth());
         this.toolbox.setMaximumHeight(toolHeight);
         this.toolbox.setMinimumHeight(toolHeight);
-        this.toolbox.show();
-        this.toolbox.setPosition(0, this.editor.getHeight() - toolHeight, this.editor.getWidth(), toolHeight);
+        //this.toolbox.show();
+        //this.toolbox.setPosition(0, this.editor.getHeight() - toolHeight, this.editor.getWidth(), toolHeight);
+        Rect rect = new Rect( 0, this.editor.getHeight() - toolHeight, this.editor.getWidth(), toolHeight );
+        GuiView view = new GuiView( rect, this.toolbox );
+        Itchy.getGame().show(view);
     }
 
     private List<CostumeResource> getCostumeResources()
@@ -431,6 +434,7 @@ public class SceneDesigner implements MouseListener, KeyListener
                 onDone();
             }
         });
+        exit.setTooltip("Exit (ctrl+W)");
         toolbar.addChild(exit);
 
         Button save = createButton("save", "Save");
@@ -441,6 +445,7 @@ public class SceneDesigner implements MouseListener, KeyListener
                 onSave();
             }
         });
+        save.setTooltip("Save (ctrl+S)");
         toolbar.addChild(save);
 
         Button test = createButton("test", "Test");
@@ -451,6 +456,7 @@ public class SceneDesigner implements MouseListener, KeyListener
                 onTest();
             }
         });
+        test.setTooltip("Test (F12)");
         toolbar.addChild(test);
 
         Button home = createButton("center", "Center");
@@ -461,6 +467,7 @@ public class SceneDesigner implements MouseListener, KeyListener
                 onCenter();
             }
         });
+        home.setTooltip("Center View (ctrl+Home)");
         toolbar.addChild(home);
 
         Button cut = createButton("cut", "Cut");
@@ -472,6 +479,7 @@ public class SceneDesigner implements MouseListener, KeyListener
                 onActorDelete();
             }
         });
+        cut.setTooltip("Cut (ctrl+X)");
         toolbar.addChild(cut);
 
         Button copy = createButton("copy", "Copy");
@@ -482,6 +490,7 @@ public class SceneDesigner implements MouseListener, KeyListener
                 onCopy();
             }
         });
+        copy.setTooltip("Copy (ctrl+C)");
         toolbar.addChild(copy);
 
         Button paste = createButton("paste", "Paste");
@@ -492,6 +501,7 @@ public class SceneDesigner implements MouseListener, KeyListener
                 onPaste();
             }
         });
+        paste.setTooltip("Paste (ctrl+V)");
         toolbar.addChild(paste);
 
         Button actorUp = createButton("up", "Up");
@@ -502,6 +512,7 @@ public class SceneDesigner implements MouseListener, KeyListener
                 onActorUp();
             }
         });
+        actorUp.setTooltip("Up the Z-Order (PageUp)");
         toolbar.addChild(actorUp);
 
         Button actorDown = createButton("down", "Down");
@@ -512,6 +523,7 @@ public class SceneDesigner implements MouseListener, KeyListener
                 onActorDown();
             }
         });
+        actorDown.setTooltip("Down the Z-Order (PageDown)");
         toolbar.addChild(actorDown);
 
         Button actorTop = createButton("top", "Top");
@@ -522,6 +534,7 @@ public class SceneDesigner implements MouseListener, KeyListener
                 onActorTop();
             }
         });
+        actorTop.setTooltip("Top of the Z-Order (Home)");
         toolbar.addChild(actorTop);
 
         Button actorBottom = createButton("bottom", "Bottom");
@@ -532,6 +545,7 @@ public class SceneDesigner implements MouseListener, KeyListener
                 onActorBottom();
             }
         });
+        actorBottom.setTooltip("Bottom of the Z-Order (End)");
         toolbar.addChild(actorBottom);
 
         Button actorUpLayer = createButton("moveUpLayer", "Up a Layer");
@@ -542,6 +556,7 @@ public class SceneDesigner implements MouseListener, KeyListener
                 onActorUpStage();
             }
         });
+        actorUpLayer.setTooltip("Move actor up a layer (ctrl+PageUp)");
         toolbar.addChild(actorUpLayer);
 
         Button actorDownLayer = createButton("moveDownLayer", "Down a Layer");
@@ -552,6 +567,7 @@ public class SceneDesigner implements MouseListener, KeyListener
                 onActorDownStage();
             }
         });
+        actorDownLayer.setTooltip("Move actor down a layer (ctrl+PageDown)");
         toolbar.addChild(actorDownLayer);
 
         Button actorUnrotate = createButton("unrotate", "Unrotate");
@@ -562,6 +578,7 @@ public class SceneDesigner implements MouseListener, KeyListener
                 onActorUnrotate();
             }
         });
+        actorUnrotate.setTooltip("Reset rotation (ctrl+o)");
         toolbar.addChild(actorUnrotate);
 
         Button actorUnscale = createButton("unscale", "Scale = 1");
@@ -572,6 +589,7 @@ public class SceneDesigner implements MouseListener, KeyListener
                 onActorUnscale();
             }
         });
+        actorUnscale.setTooltip("Reset scale (ctrl+0)");
         toolbar.addChild(actorUnscale);
 
         Button textButton = createButton("text", "Text");
@@ -582,6 +600,7 @@ public class SceneDesigner implements MouseListener, KeyListener
                 onText();
             }
         });
+        textButton.setTooltip( "Add Text" );
         toolbar.addChild(textButton);
 
     }
@@ -1106,20 +1125,8 @@ public class SceneDesigner implements MouseListener, KeyListener
             } else if (event.symbol == Keys.DELETE) {
                 onActorDelete();
                 return true;
-            } else if (event.symbol == Keys.KEY_1) {
-                this.toolboxNotebook.selectPage(0);
-                return true;
-
-            } else if (event.symbol == Keys.KEY_2) {
-                this.toolboxNotebook.selectPage(1);
-                return true;
-
-            } else if (event.symbol == Keys.KEY_3) {
-                this.toolboxNotebook.selectPage(2);
-                return true;
-
-            } else if (event.symbol == Keys.KEY_4) {
-                this.toolboxNotebook.selectPage(3);
+            } else if ( (event.symbol >= Keys.KEY_1) && (event.symbol <= Keys.KEY_7) ) {
+                this.toolboxNotebook.selectPage(event.symbol - Keys.KEY_1);
                 return true;
 
             } else if (event.symbol == Keys.HOME) {
@@ -1141,10 +1148,7 @@ public class SceneDesigner implements MouseListener, KeyListener
             } else if (event.symbol == Keys.KEY_0) {
                 onActorUnscale();
                 return true;
-
-            } else if (event.symbol == Keys.s) {
-                onSave();
-                return true;
+                
             } else if (event.symbol == Keys.HASH) {
                 onResetZOrders();
                 return true;
@@ -1533,6 +1537,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         if (actor != null) {
             createHightlightActor();
         }
+        this.toolbox.focus(); // Remove focus from any text boxes
     }
 
     public Actor getCurrentActor()
@@ -1704,13 +1709,16 @@ public class SceneDesigner implements MouseListener, KeyListener
 
     private void onResetZOrders()
     {
+        System.out.println("Reset Z-Orders");
         for (StageView child : this.designViews.getChildren()) {
             Stage stage = child.getStage();
 
             for (Actor actor : stage.getActors()) {
                 if ((actor.getCostume() != null) && (actor.getCostume().defaultZOrder != 0)) {
                     if (actor.getZOrder() != actor.getCostume().defaultZOrder) {
+                        System.out.println( "Changing zorder from " + actor.getZOrder() + " to  " + actor.getCostume().defaultZOrder );
                         actor.setZOrder(actor.getCostume().defaultZOrder);
+                        System.out.println( "Now : " + actor.getZOrder() );
                     }
                 }
             }

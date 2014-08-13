@@ -134,7 +134,7 @@ public class ImagePose implements Pose
     @Override
     public int getChangeId()
     {
-        // As images poses don't change, we can return a constant.
+        // As image poses don't change, we can return a constant.
         return 0;
     }
 

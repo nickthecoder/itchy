@@ -12,8 +12,10 @@
       <property name="killOnPressed" value="true"/>
     </actor>
     <actor costume="gate" x="540" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="40">
-      <property name="scene" value="test"/>
+      <property name="scene" value="test010"/>
     </actor>
-    <actor costume="player" x="420" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="100"/>
+    <actor costume="player" x="420" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="100">
+      <property name="awake" value="true"/>
+    </actor>
   </layer>
 </scene>

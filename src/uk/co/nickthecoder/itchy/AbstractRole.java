@@ -301,13 +301,9 @@ public abstract class AbstractRole implements Role
     public void animateAndTick()
     {
         Actor actor = getActor();
-//        if (actor == null) {
-//            System.err.println( "Role ticking without an actor : " + this );
-//            return;
-//        }
+
         Animation animation = actor.getAnimation();
         if (animation != null) {
-
             animation.tick(getActor());
             if (animation.isFinished()) {
                 actor.setAnimation(null);

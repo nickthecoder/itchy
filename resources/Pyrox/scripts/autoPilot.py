@@ -8,6 +8,7 @@ from java.util import ArrayList
 
 from uk.co.nickthecoder.itchy.property import StringProperty
 from uk.co.nickthecoder.itchy.property import BooleanProperty
+from uk.co.nickthecoder.itchy.property import IntegerProperty
 
 from gridRole import GridRole
 

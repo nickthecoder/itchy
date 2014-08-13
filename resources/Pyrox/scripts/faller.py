@@ -89,6 +89,7 @@ class Faller(Movable) :
         if (dy == -1) :
             south = self.lookSouth().role
             if (south.hasTag("hittable")) :
+                print "Rock arrived, and has hit"
                 south.onHit( self, dx, dy )
 
 

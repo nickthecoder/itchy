@@ -57,10 +57,15 @@ public class GameMenu implements Page
         main.addChild(menuScroll);
 
         File directory = new File(Itchy.getBaseDirectory(), "resources");
-        File defaultImageFile = new File(directory, "icon32.png");
+        File defaultImageFile = new File(directory, "defaultGui/images/unknown32.png");
 
         for (File dir : directory.listFiles()) {
             if (dir.isDirectory()) {
+                
+                if (ignore(dir)) {
+                    continue;
+                }
+                
                 final File resourceFile = new File(dir, dir.getName() + ".itchy");
                 if (resourceFile.exists()) {
 
@@ -115,6 +120,14 @@ public class GameMenu implements Page
         return result;
     }
 
+    private boolean ignore(File dir)
+    {
+        if (dir.getName().equals("Launcher")) {
+            return true;
+        }
+        return false;
+    }
+    
     private void launchGame( File resourceFile )
     {
         Resources resources = new Resources();

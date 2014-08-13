@@ -15,6 +15,7 @@ from faller import Faller
 
 properties = ArrayList()
 properties.add( IntegerProperty( "bees" ) )
+properties.add( IntegerProperty( "requiredPollen" ) )
 properties.add( ChoiceProperty( "beeLogic" ).add("Random", 0).add("Clockwise", 1).add("Anticlockwise", 2) )
 properties.add( ChoiceProperty( "beeDirection" ).add("Random", -1).add("North", 1).add("East", 0).add("South", 3).add("West",2) )
 properties.add( DoubleProperty( "spawnPeriod" ).hint("seconds") )
@@ -30,6 +31,7 @@ class Beehive(Faller) :
         super(Beehive,self).__init__()
 
         self.bees = 3
+        self.requiredPollen = 0
         self.beeLogic = 0
         self.beeDirection = 0
         self.randomSeed = 0
@@ -37,23 +39,24 @@ class Beehive(Faller) :
 
         self.detached = False
         self.emitTimer = None
+        self.pollen = 0 # Bees will add pollen if they visit a flower (Pumpkin) and then return here.
 
     def onBirth(self) :
         super(Beehive,self).onBirth()
         Itchy.getGame().getSceneDirector().collectablesRemaining += 1
         self.addTag("hittable")
-
+        self.addTag("beehive")
+        
         # If the seed is zero, then start with a random seed, otherwise be predictable
         if self.randomSeed == 0 :
             self.random = Random()
         else :
             self.random = Random(self.randomSeed)
 
-        self.addTag( "roundedNE" )
-        self.addTag( "roundedSE" )
-        self.addTag( "roundedSW" )
-        self.addTag( "roundedNW" )
-
+        self.actor.costume.properties.update(self) # Its a roundedProperties
+        self.rolls = self.hasTag("roundedSE")
+        self.detached = not self.rolls # The round hive is not detatched, the square one is.
+            
 
     def makeAMove(self) :
         if self.detached :
@@ -71,14 +74,18 @@ class Beehive(Faller) :
 
     def detach(self) :
         self.detached = True
-        if (self.bees == 0) :
-            self.addTag("soft")
+        if self.bees == 0 :
+            if self.requiredPollen <= self.pollen :
+                self.addTag("soft")
         else :
             self.emitTimer = Timer.createTimerSeconds(self.spawnPeriod)
         
 
 
     def onHalfInvaded( self, invader ) :
+        if self.isMoving() :
+            return
+            
         if self.bees == 0 :
 
             if (invader.hasTag("player")) :
@@ -86,13 +93,18 @@ class Beehive(Faller) :
                 invader.talk( "_honey" )
                 self.removeFromGrid()
                 self.actor.deathEvent("collected")
-            else :
-                self.explode()
 
+
+    def canShove( self, pusher, dx, dy, speed, force) :
+    
+        if self.requiredPollen > self.pollen and pusher.hasTag("player" ) :
+            pusher.talk( "_collectPollen" )
+            
+        return Faller.canShove( self, pusher, dx, dy, speed, force )
 
     def tick(self) :
         super(Beehive,self).tick()
-        
+
         if self.emitTimer :
             if self.emitTimer.isFinished() :
                 if ! not self.isMoving() :
@@ -103,7 +115,8 @@ class Beehive(Faller) :
                             self.emitTimer.reset()
                         else :
                             self.emitTimer = None
-                            self.addTag("soft")
+                            if self.requiredPollen <= self.pollen :
+                                self.addTag("soft")
 
 
     def emitBee(self) :
@@ -136,12 +149,13 @@ class Beehive(Faller) :
             bee = beeActor.role
             bee.placeOnGrid( self.square.grid )
             bee.logic = self.beeLogic
-            bee.direction = self.beeDirection
+            delta = 1 if self.beeLogic == 2 else -1
+            bee.direction = (self.beeDirection + delta) % 4
             bee.random = self.random
 
-            bee.wait = True # Wait for the "go" message, from the escape animation
+            bee.pause = True # Wait for the "unpause" message, from the escape animation
             # Note, the order is important. This event will change the x,y, so must be after placeOnGrid.
-            beeActor.event( "escape" + ( self.getDirectionAbbreviation(direction) ), "go" )
+            beeActor.event( "escape" + ( self.getDirectionAbbreviation(direction) ), "unpause" )
                         
             return True
 
@@ -150,6 +164,16 @@ class Beehive(Faller) :
             
         return False
 
+
+    def addPollen(self, amount) :
+        if self.pollen >= self.requiredPollen :
+            return False
+            
+        self.pollen += amount
+        if self.requiredPollen <= self.pollen :
+            self.addTag("soft")
+
+        return True
 
     # Boiler plate code - no need to change this
     def getProperties(self):

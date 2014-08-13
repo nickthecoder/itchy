@@ -13,4 +13,17 @@ public class NullRenderer implements Renderable
     public void render( Surface surface )
     {
     }
+
+    @Override
+    public int getMinimumWidth()
+    {
+        return 0;
+    }
+
+    @Override
+    public int getMinimumHeight()
+    {
+        return 0;
+    }
+   
 }

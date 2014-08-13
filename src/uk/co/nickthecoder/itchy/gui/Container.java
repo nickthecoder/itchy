@@ -13,6 +13,7 @@ import uk.co.nickthecoder.itchy.GraphicsContext;
 import uk.co.nickthecoder.itchy.util.Reversed;
 import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
+import uk.co.nickthecoder.jame.event.MouseEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 
 public class Container extends Component
@@ -518,5 +519,38 @@ public class Container extends Component
         }
         return false;
     }
-
+    /**
+     * Return the lowest level component at the given coordinates.  
+     * @param x
+     * @param y
+     * @return Null if (x,y) is not within this RootContainer, otherwise, the lowest level component containing (x,y).
+     * If there is no lower level component, then this RootContainer is returned. 
+     */
+    public Component getComponent( MouseEvent me )
+    {
+        int origX = me.x;
+        int origY = me.y;
+        
+        try {
+            if ( this.contains( me ) ) {
+                for ( Component child : this.getChildren()) {
+                    me.x = origX - child.x;
+                    me.y = origY - child.y;
+                    Component temp = child.getComponent( me );
+                    if (temp != null) {
+                        return temp;
+                    }
+                }
+                
+                return this;
+            }
+            
+        } finally {
+            me.x = origX;
+            me.y = origY;
+        }
+        
+        return null;
+    }
+    
 }

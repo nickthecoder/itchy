@@ -6,7 +6,6 @@ package uk.co.nickthecoder.itchy;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.gui.ActionListener;
@@ -101,31 +100,69 @@ public class Launcher extends AbstractDirector
         });
     }
 
+    private static void printUsage()
+    {
+        System.out.println("Usage : ");
+        System.out.println("Launcher [--editor] [--scene=SCENE_NAME] [GAME_NAME]");
+        System.out.println("");
+    }
+
     public static void main( String argv[] ) throws Exception
     {
-        String name;
-        if (argv.length == 0) {
-            name = "Launcher";
-        } else {
-            name = argv[0];
-            argv = Arrays.copyOfRange(argv, 1, argv.length);
+        boolean editor = false;
+        String sceneName = null;
+        String gameName = null;
+
+        for (int i = 0; i < argv.length; i++) {
+            String arg = argv[i];
+
+            if (arg.equals("--editor")) {
+                editor = true;
+            } else if (arg.equals("--scene")) {
+                i++;
+                sceneName = argv[i];
+            } else if (arg.startsWith("--scene=")) {
+                sceneName = arg.substring(8);
+            } else if (arg.equals("--help") || arg.equals("-h")) {
+                printUsage();
+                System.exit(0);
+            } else {
+                if (gameName == null) {
+                    gameName = arg;
+                } else {
+                    System.err.println("Ignoring command line argument : " + arg);
+                }
+            }
         }
 
-        File resourcesFile = new File(name);
+        if (gameName == null) {
+            gameName = "Launcher";
+        }
+
+        File resourcesFile = new File(gameName);
         if (resourcesFile.exists() && (resourcesFile.isFile())) {
         } else {
-            resourcesFile = new File(Itchy.getBaseDirectory(), "resources" + File.separator + name + File.separator + name + ".itchy");
+            resourcesFile = new File(Itchy.getBaseDirectory(), "resources" + File.separator + gameName + File.separator + gameName +
+                ".itchy");
         }
         Resources resources = new Resources();
         resources.load(resourcesFile);
 
         Game game = resources.getGame();
-        if ((argv.length == 1) && ("--editor".equals(argv[0]))) {
 
-            game.startEditor();
+        if (editor) {
+            if (sceneName == null) {
+                game.startEditor();
+            } else {
+                game.startEditor(sceneName);
+            }
 
         } else {
-            game.start();
+            if (sceneName == null) {
+                game.start();
+            } else {
+                game.start(sceneName);
+            }
         }
 
     }

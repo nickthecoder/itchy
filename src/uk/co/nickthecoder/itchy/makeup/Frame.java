@@ -8,10 +8,10 @@ import java.util.List;
 
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.OffsetSurface;
+import uk.co.nickthecoder.itchy.Renderable;
 import uk.co.nickthecoder.itchy.SimpleOffsetSurface;
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
 import uk.co.nickthecoder.itchy.property.Property;
-import uk.co.nickthecoder.itchy.util.NinePatch;
 import uk.co.nickthecoder.jame.Surface;
 
 public class Frame implements Makeup
@@ -29,7 +29,7 @@ public class Frame implements Makeup
 
     private String ninePatchName;
 
-    private NinePatch ninePatch;
+    private Renderable ninePatch;
 
     private int seq = 0;
 
@@ -118,11 +118,11 @@ public class Frame implements Makeup
         this.ninePatch = Itchy.getGame().resources.getNinePatch(ninePatchName);
     }
 
-    public void setNinePatch( NinePatch ninePatch )
+    public void setNinePatch( Renderable ninePatch )
     {
         this.ninePatch = ninePatch;
     }
-    
+
     @Override
     public OffsetSurface apply( OffsetSurface src )
     {
@@ -134,14 +134,14 @@ public class Frame implements Makeup
 
         int width = srcSurface.getWidth() + this.borderLeft + this.borderRight;
         int height = srcSurface.getHeight() + this.borderTop + this.borderBottom;
-        
+
         // Sometimes, the contents won't be big enough for the frame to be fully drawn.
         // If so, we render the whole frame, and place the contents in the middle
         int offsetX = 0;
         int offsetY = 0;
         int minFrameWidth = this.ninePatch.getMinimumWidth();
         int minFrameHeight = this.ninePatch.getMinimumHeight();
-        
+
         if (width < minFrameWidth) {
             offsetX = (minFrameWidth - width) / 2;
             width = minFrameWidth;
@@ -150,7 +150,7 @@ public class Frame implements Makeup
             offsetY = (minFrameHeight - height) / 2;
             height = minFrameHeight;
         }
-        
+
         Surface surface = new Surface(width, height, true);
 
         this.ninePatch.render(surface);

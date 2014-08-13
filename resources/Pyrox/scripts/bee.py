@@ -24,8 +24,9 @@ class Bee(Movable) :
         self.logic = 0
         self.direction = 1
         self.random = None
-        self.wait = False
         self.jammedCount = 0 # How many clicks I've been stuck because of another bee getting in the way.
+        self.pollinated = False
+        self.pause = False # Pause while pollinating a flower.
 
     def onBirth(self) :
         super(Bee,self).onBirth()
@@ -43,15 +44,13 @@ class Bee(Movable) :
 
         Movable.tick(self)
 
-        if self.wait :
+        if self.pause :
             return
 
         if not self.isMoving() :
         
-            if self.logic == 1 :
-                self.moveRound( 1 )
-            elif self.logic == 2 :
-                self.moveRound( -1 )
+            if self.logic == 1 or self.logic == 2 :
+                self.moveRound()
             else :
                 self.moveRandom()
             
@@ -59,15 +58,23 @@ class Bee(Movable) :
         self.direction = (self.direction + delta) % 4
 
 
-    def moveRound( self, delta ) :
+    def moveRound( self ) :
 
-        # Look left first, then forwards, then right and then behind
-        # Note if delta is -1, then it is right, forwards, left, behind.
-        self.changeDirection( -delta )  
-        for i in range( 0, 4 ) :
-            if self.tryToMoveForwards() :
-                return
-            self.changeDirection( delta )
+        delta = 1 if self.logic == 1 else -1
+        if self.tryToMoveForwards() :
+            self.changeDirection( -delta )  
+            return
+        else :
+            if self.lookDirection( self.direction, 100 ).hasTag("bee") :
+                # If another bee is right in front of us, don't move. This will prevent bees moving
+                # disrupting their (anti-)clockwise pattern.
+                self.jammedCount += 1
+                if self.jammedCount > 60 :
+                    self.jammedCount = 0
+                    self.logic = 3 - self.logic # Reverse direction Clockwise <-> Anticlockwise
+                    self.changeDirection( -delta )
+            else :
+                self.changeDirection( delta )
            
     
     def moveRandom(self) :
@@ -87,32 +94,41 @@ class Bee(Movable) :
     def tryToMoveForwards( self ) :
     
         forward = self.canMove()
+
         if forward :
             self.moveDirection( self.direction )
             self.jammedCount = 0
             return True
 
-        elif self.lookDirection( self.direction ).hasTag("bee") :
-            # If another bee is right in front of us, don't move. This will prevent bees moving
-            # disrupting their (anti-)clockwise pattern.
-            self.jammedCount += 1
-            if self.jammedCount > 60 :
-                self.jammedCount = 0
-                return False
-            return True 
-
-        return False
+        return
 
     def onMessage( self, message ) :
-        if message == "go" :
-            self.wait = False
+        if message == "enteredHive" :
+            self.actor.kill()
         
+        elif message == "unpause" :
+            self.pause = False
+            
+
     def canMove(self) :
+    
         self.event( "face-" + self.getDirectionAbbreviation(self.direction) )
-        forward = self.lookDirection( self.direction )
+        forward = self.lookDirection( self.direction, 100 )
         if forward.hasTag("enemySoft") :
             return True
+
+        if (not self.pollinated) and forward.hasTag("flower") :
+            self.pollinated = True
+            self.event( "pollinate", "unpause" )
+            self.pause = True
+            return True
             
+        if self.pollinated and forward.hasTag("beehive") :
+            if forward.role.addPollen(1) :
+                self.speed = 1 # Slow down to enter the hive.
+                self.event( "enterHive", "enteredHive" ) # The bee must die before it hits the hive.
+                return True
+   
         return forward.hasTag("squash" + self.getDirectionAbbreviation(self.direction))
 
     # Boiler plate code - no need to change this

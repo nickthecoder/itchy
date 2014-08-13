@@ -64,6 +64,8 @@ public abstract class Component implements Focusable
     protected boolean focusable = false;
 
     boolean hasFocus = false;
+    
+    protected String tooltip = null;
 
     public Component()
     {
@@ -655,16 +657,48 @@ public abstract class Component implements Focusable
         return false;
     }
 
+    /**
+     * Given an event whose x,y are relative to this Component, check if the event is within this Component.
+     * @param event
+     * @return
+     */
     public boolean contains( MouseEvent event )
     {
         return (event.x) >= 0 && (event.y >= 0) && (event.x < this.getWidth()) && (event.y < this.getHeight());
     }
 
+    /**
+     * Given an event whose x,y are relative to my parent Container, check if the event is within this Component.
+     * @param event
+     * @return
+     */
     public boolean contains2( MouseEvent event )
     {
         return (event.x) >= this.getX() && (event.y >= this.getY()) &&
             (event.x < this.getX() + this.getWidth()) &&
             (event.y < this.getY() + this.getHeight());
+    }
+
+    /**
+     * Return this, if the event is within this component, otherwise null  
+     */
+    public Component getComponent( MouseEvent me )
+    {
+        if ( this.contains( me ) ) {                
+            return this;
+        }
+        
+        return null;
+    }
+    
+    public String getTooltip()
+    {
+        return this.tooltip;
+    }
+    
+    public void setTooltip( String tooltip )
+    {
+        this.tooltip = tooltip;
     }
 
     @Override

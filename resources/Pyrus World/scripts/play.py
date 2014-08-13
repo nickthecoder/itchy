@@ -49,7 +49,6 @@ class Play(PlainSceneDirector) :
     def addRocks(self, diff) :
 
         self.rocks += diff
-        print "Rocks remaining : ", self.rocks
         if self.rocks == 0 :
             if self.ship != None and self.ship.getActor().isAlive() :
                 self.endTimer = Timer.createTimerSeconds(3);

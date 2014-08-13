@@ -1,64 +1,40 @@
 Bugs
 
-    Labels on test page are not shown until FULLY on screen.
-        To do with rotation and lazy eval of surface. Once drawn, they work fine.
-
-    BuiltInRotoZoom.applyGeometry isn't working when the Pose's offset isn't in the middle of the image.
-        So text aligned using 0.5 will work, but with 0, it won't.
-        Manually calculate what it is doing, and the problem will become apparent.
-
-PyRox
-
-    Create a wooden beehive - Flat on the bottom.
-
-    Place Sledgers in key places, so that the sledging can be targeted to a given area.
-        e.g. "Have you met by brother?"
-            Then when he enters the room... "We look alike\nDon't we."
-        Sledgers to have optional roleIDs, so the correct player will speak.
-        Sledger and Hint to use rectangles, not pixel detection.
-
-    Add sledging to existing scenes    
-
-    Create more levels
-        Balloon 6
-        Vehicles 3,4,5,6
-        Furniture 4,5
-        Grenades 5,6
-        Extra 3,4,5
-
-    More characters :
-
-        Weaker player - can't lift or push rocks.
-        
-        Big Rock (2x2) Rolls when sitting half and half on solid/empty
-        
-        Water
-            Each cube has a pressure.
-            Can be the alternateOccupant
-            Empty left or right or below, then spill half of my pressure.
-            Average the pressure left/right
-            Average the pressure below and above, but weight the average so that below has more pressure, and above has less.
-            If pressure <= 0 die.
-            If pressure > full and above is empty, then share pressure (but never enough to leave me less than full).
-            If pressure >= "full", then use 100% blue, otherwise use a partially full square.
-            If I share my square with something else, then add 80% full to my pressure when working stuff out???
+    ZOrder buttons work the wrong way round ?
 
 
-    Saloon Sally - Tables with/without gold on them
-        https://www.youtube.com/watch?v=4tnB9tR3ykM
-
-    "Cavern" style levels
-
-    Copy bees!
-    Trick level - you have to copy a bee hive.
+Tooltips
 
 
 Look at companion, it has font, font size and color. Why ????
 
-    
+Makeup has a Pose name for Textured, and ScaledBackground. Can I use a PoseResourceProperty?
+Appearance has a FontProperty - but the getStringValue isnt' overriden to find the font's name - not good!
+    Also, should Appearance have a TextStyle now?
+
+What are XXX and XXXResource ? Why use one rather than another?
+    Initialy, Actor only had a Pose, and in fact, its constructor still takes a Pose (which it shouldn't?)
+
+
+SceneDesigner for Text
+    In the toolbox, if a Costume has no "default" pose, but does have a "default" TextStyle, then it is text.
+    Actor should only have a Constructor which takes a Costume. Make Costume mandatory.
+        We can have a helper method, which takes an arbitary pose, and creates a costume.
+    Don't have a "Text" tool??
+    When loading, existing text won't have a costume, in which case, create a costume for each
+        Font (or maybe font,font-size combo).
+    The thumbnail should have the font-size in the bottom right if its bigger than the thumbnail can display.
+        Using an Editor's font, because we want a plain, consistant font.
+    Attributes for a single actor can be overridden, such as color, alignment.
+    When saving an actor, only save the attributes which differ from the costume's style.
+    Have a "Reset to Costume Defaults", and a "Apply to Costume" buttons.
+
+
+
 Lazy loading of some poses (If each contributor has their own picture, don't want to load them all, unless
 the player visits their page).
-    
+    Create LazyLoadImagePose?? Relationship to ImagePose??
+
 Sprite Sheet Pose
     Allow multiple poses to be loaded from one image, and define the rectangle of each sub-image.
 

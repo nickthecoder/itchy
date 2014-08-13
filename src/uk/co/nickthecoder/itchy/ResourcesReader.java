@@ -293,7 +293,7 @@ public class ResourcesReader
                 if (fontResource == null) {
                     throw new XMLException("Font : " + fontName + " not found for costume : " + costumeName);
                 }
-                TextStyle textStyle = new TextStyle(fontResource, 14);
+                TextStyle textStyle = new TextStyle(fontResource.font, 14);
                 this.readProperties(fontTag, textStyle);
                 /*
                 int fontSize = stringTag.getOptionalIntAttribute("fontSize", 14);

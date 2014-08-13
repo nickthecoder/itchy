@@ -55,7 +55,7 @@ public class TurnToAnimation extends NumericAnimation
         super.start(actor);
         this.turn = ((this.direction - actor.getAppearance().getDirection()) % 360 + 360) % 360;
         // Now 0..360
-
+        
         if (this.longWay) {
             if (this.turn < 180) {
                 this.turn -= 360;

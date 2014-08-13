@@ -44,6 +44,7 @@ import uk.co.nickthecoder.itchy.gui.TableModel;
 import uk.co.nickthecoder.itchy.gui.TableModelColumn;
 import uk.co.nickthecoder.itchy.gui.TableModelRow;
 import uk.co.nickthecoder.itchy.gui.TableRow;
+import uk.co.nickthecoder.itchy.gui.TextArea;
 import uk.co.nickthecoder.itchy.gui.TextBox;
 import uk.co.nickthecoder.itchy.gui.VerticalLayout;
 import uk.co.nickthecoder.itchy.gui.Window;
@@ -458,10 +459,11 @@ public class CostumesEditor extends SubEditor<CostumeResource>
         for (String name : costume.getTextStyleNames()) {
             for (TextStyle textStyle : costume.getTextStyleChoices(name)) {
 
+                FontResource fr = this.getResources().getFontResource(textStyle.font);
                 SimpleTableModelRow row = new SimpleTableModelRow();
                 row.add(name);
                 row.add("Font");
-                row.add(textStyle.fontResource.getName());
+                row.add(fr == null ? "?" : fr.getName());
                 row.add(textStyle);
 
                 model.addRow(row);
@@ -609,7 +611,7 @@ public class CostumesEditor extends SubEditor<CostumeResource>
             public void pick( FontResource fontResource )
             {
                 Costume costume = CostumesEditor.this.currentResource.getCostume();
-                TextStyle textStyle = new TextStyle( fontResource, 14 );
+                TextStyle textStyle = new TextStyle( fontResource.font, 14 );
                 costume.addTextStyle(NEW_EVENT_NAME, textStyle);
                 CostumesEditor.this.rebuildEventTable();
                 selectEventTableRow(NEW_EVENT_NAME, textStyle);
@@ -655,7 +657,7 @@ public class CostumesEditor extends SubEditor<CostumeResource>
 
     private TextBox txtEventName;
 
-    private TextBox txtEventString;
+    private TextArea txtEventString;
 
     private PosePickerButton eventPosePickerButton;
 
@@ -696,7 +698,7 @@ public class CostumesEditor extends SubEditor<CostumeResource>
             grid.addRow("Event Name", this.txtEventName);
 
             if (data instanceof String) {
-                this.txtEventString = new TextBox((String) data);
+                this.txtEventString = new TextArea((String) data);
                 grid.addRow("String", this.txtEventString);
 
             } else if (data instanceof PoseResource) {
@@ -706,7 +708,8 @@ public class CostumesEditor extends SubEditor<CostumeResource>
 
             } else if (data instanceof TextStyle) {
                 this.eventTextStyle = (TextStyle) data;
-                this.eventFontPickerButton = new FontPickerButton(this.getResources(), this.eventTextStyle.fontResource);
+                FontResource fr = this.getResources().getFontResource(this.eventTextStyle.font);
+                this.eventFontPickerButton = new FontPickerButton(this.getResources(), fr);
                 grid.addRow("Font", this.eventFontPickerButton);
                 
                 for (AbstractProperty<TextStyle, ?> property : this.eventTextStyle.getProperties()) {
@@ -796,7 +799,7 @@ public class CostumesEditor extends SubEditor<CostumeResource>
                 costume.addPose(name, this.eventPosePickerButton.getValue());
 
             } else if (data instanceof TextStyle) {
-                this.eventTextStyle.fontResource = this.eventFontPickerButton.getValue();
+                this.eventTextStyle.font = this.eventFontPickerButton.getValue().font;
                 costume.addTextStyle(name, this.eventTextStyle);
 
             } else if (data instanceof AnimationResource) {

@@ -56,6 +56,8 @@
 
         <ninePatch name="scrollerV" filename="images/scrollerV.png" top="14" right="5" bottom="14" left="5"  middle="fill" />                
 
+        <ninePatch name="tooltip" filename="images/tooltip.png" top="5" right="5" bottom="5" left="5"  middle="fill" />                
+
     </ninePatches>
 
 </resources>

@@ -36,4 +36,9 @@ public class Font
         this.sizes.put(key, ttf);
         return ttf;
     }
+    
+    public String getFilename()
+    {
+        return this.filename;
+    }
 }

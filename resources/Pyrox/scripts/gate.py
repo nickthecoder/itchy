@@ -8,9 +8,11 @@ from java.util import ArrayList
 from gridRole import GridRole
 
 from uk.co.nickthecoder.itchy.property import StringProperty
+from uk.co.nickthecoder.itchy.property import IntegerProperty
 
 properties = ArrayList()
 properties.add( StringProperty( "scene" ) )
+properties.add( IntegerProperty( "spare" ).label("Spare Collectables" ) )
 
 class Gate(GridRole) :
 
@@ -18,6 +20,7 @@ class Gate(GridRole) :
         super(Gate,self).__init__()
         self.scene = "menu"
         self.exiting = False # Set in onInvaded, then used in onDeath to start the new scene
+        self.spare = 0
 
     def onBirth(self) :
         self.addTag("roundedNE")
@@ -25,6 +28,10 @@ class Gate(GridRole) :
         self.addTag("roundedSW")
         self.addTag("roundedNW")
         self.addTag("gate")
+        
+    def onPlacedOnGrid(self) :
+        super(Gate,self).onPlacedOnGrid()
+        Itchy.getGame().getSceneDirector().collected( self.spare )
 
     def onInvaded( self, invader ) :
         super(Gate,self).onInvaded(invader)

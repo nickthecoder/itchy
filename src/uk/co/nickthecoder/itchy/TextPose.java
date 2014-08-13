@@ -14,7 +14,7 @@ public class TextPose extends AbstractTextPose
 
     public TextPose( String text, TextStyle style )
     {
-        this(text, style.fontResource.font, style.fontSize, style.color );
+        this(text, style.font, style.fontSize, style.color );
     }
     public TextPose( String text, Font font, double fontSize )
     {

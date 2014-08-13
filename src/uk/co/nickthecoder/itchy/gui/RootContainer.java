@@ -18,7 +18,7 @@ public class RootContainer extends Container
 
     protected static Component focus;
 
-    private GuiView view;
+    protected GuiView view;
 
     public boolean modal = false;
 
@@ -79,7 +79,7 @@ public class RootContainer extends Container
                 }
             }
 
-        } else {
+        } else if (this.mouseOwner != this) {
             int dx = 0;
             int dy = 0;
             try {
@@ -149,8 +149,16 @@ public class RootContainer extends Container
         if (this.dragging) {
             int dx = event.x - this.dragStartX;
             int dy = event.y - this.dragStartY;
-
-            this.setPosition(this.x + dx, this.y + dy, this.width, this.height);
+            
+            // Do we adjust the RootContainer's position, or the GuiView's position?
+            // Change the view if the root container fits exactly within the view, otherwise change the root container.  
+            Rect viewRect = this.view.getPosition();
+            if ( (this.width == viewRect.width) && (this.height == viewRect.height) ) {
+                viewRect.x += dx;
+                viewRect.y += dy;
+            } else {
+                this.setPosition(this.x + dx, this.y + dy, this.width, this.height);
+            }
             return true;
         }
 

@@ -6,6 +6,8 @@
     <rule criteria="label" font="regular" fontSize="14" color="#c6c1b8" />
     <rule criteria=".bold" font="bold"/>
     
+    <rule criteria=".tooltip" font="regular" fontSize="16" color="#c6c1b8" background="tooltip" marginTop="6" marginBottom="6" marginLeft="10" marginRight="10"/>
+    
     <rule criteria="titleBar" background="titleBar" paddingTop="16" paddingBottom="6" paddingLeft="20" paddingRight="20" />
     <rule criteria=".focus * titleBar" background="titleBar-focus" />
     <rule criteria="titleBar *" color="#c6c1b8" font="bold" fontSize="16" /> 

@@ -32,7 +32,7 @@ class Grenade(Faller) :
             south = self.lookSouth()
             if south.isEmpty() or south.hasTag("squashS") :
                 return # Don't explode as we are falling, so not really hit.
-                
+
         if hitter.hasTag("explosionTrigger") :
             hitter.onExplode()
             self.onExplode()

@@ -20,7 +20,7 @@ public class TextStyle implements PropertySubject<TextStyle>
     private static final List<AbstractProperty<TextStyle, ?>> properties =
         AbstractProperty.<TextStyle> findAnnotations(TextStyle.class);
 
-    public FontResource fontResource;
+    public Font font;
 
     @Property(label = "Font Size")
     public int fontSize;
@@ -40,19 +40,30 @@ public class TextStyle implements PropertySubject<TextStyle>
     @Property(label = "Left Margin")
     public int marginLeft = 0;
     
-    public TextStyle( FontResource fontResource, int fontSize )
+    public TextStyle( Font font, int fontSize )
     {
-        this.fontResource = fontResource;
+        this.font = font;
         this.fontSize = fontSize;
     }
 
+    public void setMargins( int margin )
+    {
+        this.setMargins( margin, margin );
+    }
+    
+    public void setMargins( int topBottom, int leftRight )
+    {
+        this.marginTop = this.marginBottom = topBottom;
+        this.marginLeft = this.marginRight = leftRight;
+    }
+    
     public String toString()
     {
-        if (this.fontResource == null) {
+        if (this.font == null) {
             return "TextStyle : null";
         }
 
-        return "TextStyle : " + this.fontResource.name + "(" + this.fontSize + ")" + this.color.toString();
+        return "TextStyle : " + this.font.getFilename() + "(" + this.fontSize + ")" + this.color.toString();
     }
     
     @Override

@@ -387,7 +387,8 @@ public class ResourcesWriter extends XMLWriter
                 this.beginTag("font");
                 this.attribute("name", name);
 
-                this.attribute("font", textStyle.fontResource.name);
+                FontResource fr = this.resources.getFontResource(textStyle.font);
+                this.attribute("font", fr.name);
                 /*
                 this.attribute("fontSize", textStyle.fontSize);
 

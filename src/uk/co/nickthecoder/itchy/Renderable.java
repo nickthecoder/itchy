@@ -9,4 +9,8 @@ import uk.co.nickthecoder.jame.Surface;
 public interface Renderable
 {
     public void render( Surface surface );
+    
+    public int getMinimumWidth();
+    
+    public int getMinimumHeight();
 }

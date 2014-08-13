@@ -13,7 +13,7 @@ class Pumpkin(Collectable) :
     def onBirth(self) :
         super(Pumpkin,self).onBirth()
         self.removeTag("soft")
-        self.addTag("enemySoft")
+        self.addTag("flower")
         self.pollinated = False
         self.fixed = False
 

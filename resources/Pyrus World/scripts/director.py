@@ -90,7 +90,6 @@ class Director(AbstractDirector) :
         return False
 
     def showFancyMouse(self) :
-        print "Showing fancy mouse"
         mousePointer = SimpleMousePointer("mouse");
         self.getGame().mouse.setMousePointer( mousePointer );
         

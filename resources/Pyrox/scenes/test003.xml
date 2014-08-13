@@ -127,9 +127,11 @@
     <actor costume="carR" x="420" y="780" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
     <actor costume="carL" x="720" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
     <actor costume="gate" x="960" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="40">
-      <property name="scene" value="test4"/>
+      <property name="scene" value="test004"/>
     </actor>
-    <actor costume="player" x="360" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="100"/>
+    <actor costume="player" x="360" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="100">
+      <property name="awake" value="true"/>
+    </actor>
   </layer>
   <layer name="test">
     <actor costume="test" x="240" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="50">

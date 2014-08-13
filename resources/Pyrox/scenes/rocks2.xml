@@ -125,6 +125,7 @@
     <actor costume="wall" x="480" y="660" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
     <actor costume="wall" x="480" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
     <actor costume="wall" x="600" y="660" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="wall" x="540" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
     <actor costume="hint" x="60" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="10">
       <property name="hint" value="Shuffle all of the rocks to the left.\nMove right, then quickly left"/>
     </actor>
@@ -143,8 +144,8 @@
     <actor costume="hint" x="360" y="0" direction="0.0" heading="0.0" startEvent="default" zOrder="10">
       <property name="hint" value="Push the controller and I'll\nshow you how to shuffle rocks."/>
     </actor>
-    <actor costume="autoPilot" x="540" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="10">
-      <property name="moves" value="lllluulrrr"/>
+    <actor costume="autoPilot" x="540" y="540" direction="0.0" heading="0.0" startEvent="default" zOrder="10">
+      <property name="moves" value="-u-ullllluu--lr"/>
       <property name="autoTest" value="false"/>
       <property name="killOnPressed" value="true"/>
     </actor>
@@ -170,6 +171,7 @@
     <actor costume="rock" x="780" y="720" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
     <actor costume="rock" x="360" y="-60" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
     <actor costume="gate" x="240" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="40">
+      <property name="spare" value="0"/>
       <property name="scene" value="play"/>
     </actor>
     <actor costume="stamp" x="300" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
@@ -177,6 +179,8 @@
     <actor costume="stamp" x="420" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
     <actor costume="stamp" x="360" y="-120" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
     <actor costume="stamp" x="300" y="660" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
-    <actor costume="player" x="180" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="100"/>
+    <actor costume="player" x="180" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="100">
+      <property name="awake" value="true"/>
+    </actor>
   </layer>
 </scene>

@@ -142,6 +142,8 @@
     <actor costume="stamp" x="780" y="540" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
     <actor costume="coin" x="840" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
     <actor costume="coin" x="780" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
-    <actor costume="player" x="60" y="540" direction="0.0" heading="0.0" startEvent="default" zOrder="100"/>
+    <actor costume="player" x="60" y="540" direction="0.0" heading="0.0" startEvent="default" zOrder="100">
+      <property name="awake" value="true"/>
+    </actor>
   </layer>
 </scene>

@@ -233,11 +233,12 @@ class Player(Big) :
 
 
     def onHit( self, hitter, dx, dy ) :
-        
+        print "Player onHit"
         if hitter.hasTag("deadly") :
             self.killMe( hitter )
 
     def killMe( self, other=None ) :
+        print "Player.killMe"
         Explosion(self.actor) \
             .gravity(-0.1) \
             .projectiles(5) \

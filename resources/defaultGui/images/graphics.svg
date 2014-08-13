@@ -1853,6 +1853,46 @@
        fx="74.242386"
        fy="940.59442"
        r="15" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient8053"
+       id="linearGradient4252"
+       x1="45.006973"
+       y1="371.3689"
+       x2="52.790176"
+       y2="371.3689"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(2.1437121,0,0,2.1437121,87.64554,-354.73911)" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient8053"
+       id="linearGradient4261"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(2.1437121,0,0,2.1437121,65.422184,-316.35331)"
+       x1="45.006973"
+       y1="371.3689"
+       x2="52.790176"
+       y2="371.3689" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient8053"
+       id="linearGradient4266"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(2.0300246,0,0,2.0300246,78.362931,-273.45047)"
+       x1="45.006973"
+       y1="371.3689"
+       x2="52.790176"
+       y2="371.3689" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient8053"
+       id="linearGradient4273"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.6170474,0,0,1.6170474,98.556929,-120.08356)"
+       x1="48.701511"
+       y1="363.45203"
+       x2="49.095638"
+       y2="379.63763" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -1861,17 +1901,19 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.979899"
-     inkscape:cx="415.75638"
-     inkscape:cy="122.12425"
+     inkscape:zoom="5.6"
+     inkscape:cx="155.84504"
+     inkscape:cy="556.16105"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
-     showgrid="true"
+     showgrid="false"
      inkscape:window-width="1280"
      inkscape:window-height="747"
      inkscape:window-x="0"
      inkscape:window-y="27"
-     inkscape:window-maximized="1">
+     inkscape:window-maximized="1"
+     showguides="true"
+     inkscape:guide-bbox="true">
     <inkscape:grid
        type="xygrid"
        id="grid5155" />
@@ -1892,7 +1934,7 @@
      inkscape:groupmode="layer"
      id="layer4"
      inkscape:label="Background"
-     style="display:inline"
+     style="display:none"
      sodipodi:insensitive="true">
     <rect
        style="fill:url(#pattern16385);fill-opacity:1;stroke:none;display:inline"
@@ -2002,7 +2044,7 @@
          sodipodi:role="line"
          id="tspan5324"
          x="1020.2541"
-         y="519.00165"></tspan></text>
+         y="519.00165" /></text>
     <text
        sodipodi:linespacing="125%"
        id="text5337"
@@ -2741,7 +2783,7 @@
          height="90"
          width="185"
          id="rect7342"
-         style="fill:#000000;fill-opacity:0.29383885999999998;stroke:#18120f;display:inline;stroke-opacity:1"
+         style="fill:#000000;fill-opacity:0.29383886;stroke:#18120f;stroke-opacity:1;display:inline"
          inkscape:label="background" />
     </g>
     <g
@@ -3019,7 +3061,7 @@
            sodipodi:role="line"
            id="tspan5037"
            x="68.571426"
-           y="941.64789"></tspan></text>
+           y="941.64789" /></text>
     </g>
     <path
        transform="translate(220,-530)"
@@ -3233,10 +3275,7 @@
        y="932.50507"
        x="144.42859"
        id="image5282"
-       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAABHNCSVQICAgIfAhkiAAAACxJREFU
-KJFjnDp16n8GHODUqVO4pBiYcMoQAKMa8QAWfEFuZmZGfRtHNeIBAGceCDqs+1MGAAAAAElFTkSu
-QmCC
-"
+       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAABHNCSVQICAgIfAhkiAAAACxJREFU KJFjnDp16n8GHODUqVO4pBiYcMoQAKMa8QAWfEFuZmZGfRtHNeIBAGceCDqs+1MGAAAAAElFTkSu QmCC "
        height="14"
        width="14" />
     <g
@@ -3268,6 +3307,36 @@ QmCC
        transform="translate(335,540)"
        width="744.09448"
        height="1052.3622" />
+    <g
+       id="g4268"
+       transform="translate(-8.0357143,4.2857143)"
+       inkscape:export-filename="/home/nick/projects/itchy/resources/defaultGui/images/unknown32.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <rect
+         ry="0"
+         y="464.65396"
+         x="163.27951"
+         height="31.567177"
+         width="28.697432"
+         id="rect4254"
+         style="opacity:0.11111109;fill:#f4f4f4;fill-opacity:0.00392157;stroke:none" />
+      <text
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/nick/projects/itchy/resources/defaultGui/images/unknown.png"
+         sodipodi:linespacing="125%"
+         id="text3474"
+         y="492.43909"
+         x="169.01399"
+         style="font-size:32.3409462px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:url(#linearGradient4273);fill-opacity:1;stroke:none;font-family:Sans"
+         xml:space="preserve"><tspan
+           style="fill:url(#linearGradient4273);fill-opacity:1"
+           y="492.43909"
+           x="169.01399"
+           id="tspan3476"
+           sodipodi:role="line">?</tspan></text>
+    </g>
   </g>
   <g
      inkscape:groupmode="layer"

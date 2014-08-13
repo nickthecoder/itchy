@@ -184,11 +184,8 @@ public class EntryBox<E extends EntryBox<?>> extends ClickableContainer implemen
                 Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
                 String str = (String) clipboard.getData(DataFlavor.stringFlavor);
 
-                this.setEntryText(this.label.getText().substring(0, this.caretIndex) + str +
-                    this.label.getText().substring(this.caretIndex));
-
-                this.caretIndex += str.length();
-
+                insert( str );
+                
             } catch (UnsupportedFlavorException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -198,14 +195,34 @@ public class EntryBox<E extends EntryBox<?>> extends ClickableContainer implemen
         }
 
         if ((ke.c >= 32)) {
-            if (this.setEntryText(this.label.getText().substring(0, this.caretIndex) + ke.c +
-                this.label.getText().substring(this.caretIndex))) {
-                this.caretIndex++;
-            }
+            insert( ke.c );
             return true;
         }
 
         return super.onKeyDown(ke);
+    }
+    
+
+    private boolean insert( char text )
+    {
+        return insert( Character.toString(text) );
+    }
+    
+    private boolean insert( String text )
+    {
+        String old = this.label.getText();
+        String newString;
+        if (this.caretIndex >= old.length()) {
+            newString = old + text;
+        } else {
+            newString = old.substring(0,this.caretIndex) + text + old.substring(this.caretIndex);
+        }
+        boolean result = this.setEntryText(newString);
+        if (result) {
+            this.caretIndex += text.length();
+        }
+        return result;
+        
     }
 
     @Override

@@ -21,7 +21,8 @@
     <pose name="beanPole" filename="images/beanPole.png" offsetY="90"/>
     <pose name="bee-E1" filename="images/bee-E1.png"/>
     <pose name="bee-W1" filename="images/bee-W1.png"/>
-    <pose name="behive" filename="images/behive.png"/>
+    <pose name="beehive" filename="images/beehive.png"/>
+    <pose name="beehive2" filename="images/beehive2.png"/>
     <pose name="car-L" filename="images/car-L.png"/>
     <pose name="car-R" filename="images/car-R.png"/>
     <pose name="chair" filename="images/chair.png"/>
@@ -135,8 +136,13 @@
   </poses>
   <sounds/>
   <animations>
+    <animation name="bee-enterHive">
+      <sequence finishedMessage="enteredHive" loops="1" sequence="true">
+        <scale ease="easeInOut" target="0.5" ticks="45"/>
+      </sequence>
+    </animation>
     <animation name="bee-escapeE">
-      <sequence loops="1" sequence="true">
+      <sequence finishedMessage="unpause" loops="1" sequence="true">
         <parallel loops="1" sequence="false">
           <move ease="linear" ticks="1" dx="-60.0" dy="0.0"/>
           <alpha ease="linear" target="128.0" ticks="1"/>
@@ -153,7 +159,7 @@
       </sequence>
     </animation>
     <animation name="bee-escapeN">
-      <sequence finishedMessage="go" loops="1" sequence="true">
+      <sequence finishedMessage="unpause" loops="1" sequence="true">
         <parallel loops="1" sequence="false">
           <move ease="linear" ticks="1" dx="0.0" dy="-60.0"/>
           <alpha ease="linear" target="128.0" ticks="1"/>
@@ -187,7 +193,7 @@
       </sequence>
     </animation>
     <animation name="bee-escapeW">
-      <sequence loops="1" sequence="true">
+      <sequence finishedMessage="unpause" loops="1" sequence="true">
         <parallel loops="1" sequence="false">
           <scale ease="linear" target="0.1" ticks="1"/>
           <alpha ease="linear" target="128.0" ticks="1"/>
@@ -200,6 +206,17 @@
           <scale ease="easeInOut" target="1.0" ticks="30"/>
           <alpha ease="easeInOut" target="255.0" ticks="15"/>
           <move ease="easeInOut" ticks="30" dx="-60.0" dy="0.0"/>
+        </parallel>
+      </sequence>
+    </animation>
+    <animation name="bee-pollinate">
+      <sequence finishedMessage="unpause" loops="1" sequence="true">
+        <parallel loops="1" sequence="false">
+          <scale ease="easeInOut" target="0.5" ticks="60"/>
+        </parallel>
+        <delay ticks="30"/>
+        <parallel loops="1" sequence="false">
+          <scale ease="linear" target="1.0" ticks="15"/>
         </parallel>
       </sequence>
     </animation>
@@ -269,16 +286,6 @@
         </frames>
         <scale ease="easeInOut" target="3.0" ticks="10"/>
         <scale ease="easeInOut" target="1.0" ticks="30"/>
-      </sequence>
-    </animation>
-    <animation name="grenade-rollAnticlockwise">
-      <sequence finishedMessage="turned" loops="1" sequence="true">
-        <turn ease="linear" headingToo="false" ticks="10" turn="90.0"/>
-      </sequence>
-    </animation>
-    <animation name="grenade-rollClockwise">
-      <sequence finishedMessage="turned" loops="1" sequence="true">
-        <turn ease="linear" headingToo="false" ticks="10" turn="-90.0"/>
       </sequence>
     </animation>
     <animation name="hint-death">
@@ -361,6 +368,7 @@
     </animation>
     <animation name="pumpkin-pollinate">
       <sequence finishedMessage="pollinated" loops="1" sequence="true">
+        <delay ticks="120"/>
         <frames pingPong="false">
           <frame pose="pumpkin-1" delay="30"/>
           <frame pose="pumpkin-2" delay="10"/>
@@ -412,6 +420,16 @@
           <frame pose="robot-N1" delay="2"/>
           <frame pose="robot-E1" delay="1"/>
         </frames>
+      </sequence>
+    </animation>
+    <animation name="rollAnticlockwise">
+      <sequence finishedMessage="turned" loops="1" sequence="true">
+        <turn ease="linear" headingToo="false" ticks="10" turn="90.0"/>
+      </sequence>
+    </animation>
+    <animation name="rollClockwise">
+      <sequence finishedMessage="turned" loops="1" sequence="true">
+        <turn ease="linear" headingToo="false" ticks="10" turn="-90.0"/>
       </sequence>
     </animation>
     <animation name="safe-open">
@@ -472,6 +490,8 @@
       <pose name="z" pose="z3"/>
       <pose name="z" pose="z5"/>
       <pose name="z" pose="z6"/>
+      <string name="collectPollen">The bees must collect pollen and nectar
+before we can harvest the honey.</string>
       <string name="honey">Yummy, Honey</string>
       <string name="honey">Ooo, sweet sticky goodness</string>
       <string name="honey">Honey's nice, but I prefer jam</string>
@@ -492,16 +512,25 @@
       <pose name="default" pose="bee-W1"/>
       <pose name="face-E" pose="bee-E1"/>
       <pose name="face-W" pose="bee-W1"/>
+      <animation name="enterHive" animation="bee-enterHive"/>
       <animation name="escapeE" animation="bee-escapeE"/>
       <animation name="escapeN" animation="bee-escapeN"/>
       <animation name="escapeS" animation="bee-escapeS"/>
       <animation name="escapeW" animation="bee-escapeW"/>
+      <animation name="pollinate" animation="bee-pollinate"/>
     </costume>
-    <costume name="behive" defaultZOrder="30" order="40" role="beehive.py">
-      <pose name="default" pose="behive"/>
+    <costume name="beehive2" defaultZOrder="30" order="40" role="beehive.py" properties="roundProperties.py">
+      <pose name="default" pose="beehive2"/>
+      <properties roundedNE="true" roundedSE="false" roundedSW="false" roundedNW="true"/>
+    </costume>
+    <costume name="roll" defaultZOrder="0" order="90">
+      <animation name="rollAnticlockwise" animation="rollAnticlockwise"/>
+      <animation name="rollClockwise" animation="rollClockwise"/>
+    </costume>
+    <costume name="behive" defaultZOrder="30" order="40" extends="roll" role="beehive.py" properties="roundProperties.py">
+      <pose name="default" pose="beehive"/>
       <animation name="collected" animation="collectable-collected"/>
-      <animation name="rollAnticlockwise" animation="grenade-rollAnticlockwise"/>
-      <animation name="rollClockwise" animation="grenade-rollClockwise"/>
+      <properties roundedNE="true" roundedSE="true" roundedSW="true" roundedNW="true"/>
     </costume>
     <costume name="carL" defaultZOrder="20" order="20" role="car.py" properties="carProperties.py">
       <pose name="default" pose="car-L"/>
@@ -551,13 +580,11 @@
       <pose name="default" pose="giant"/>
       <properties width="2" height="2" talkX="120" talkY="60"/>
     </costume>
-    <costume name="grenade" defaultZOrder="20" order="20" role="grenade.py" properties="grenadeProperties.py">
+    <costume name="grenade" defaultZOrder="20" order="20" extends="roll" role="grenade.py" properties="grenadeProperties.py">
       <pose name="default" pose="grenade"/>
-      <animation name="rollAnticlockwise" animation="grenade-rollAnticlockwise"/>
-      <animation name="rollClockwise" animation="grenade-rollClockwise"/>
       <properties fallen="false"/>
     </costume>
-    <costume name="grenade2" defaultZOrder="20" order="20" extends="grenade" role="grenade.py" properties="grenadeProperties.py">
+    <costume name="grenade2" defaultZOrder="20" order="20" extends="roll" role="grenade.py" properties="grenadeProperties.py">
       <pose name="default" pose="grenade2"/>
       <properties fallen="true"/>
     </costume>
@@ -812,8 +839,13 @@
   </costumes>
   <scenes>
     <scene name="balloons"/>
+    <scene name="balloons1a"/>
+    <scene name="balloons1b"/>
+    <scene name="balloons1c"/>
     <scene name="balloons2"/>
+    <scene name="balloons2a"/>
     <scene name="balloons3"/>
+    <scene name="balloons3a"/>
     <scene name="balloons4"/>
     <scene name="balloons5"/>
     <scene name="bug-00001"/>
@@ -833,6 +865,10 @@
     <scene name="menu"/>
     <scene name="play"/>
     <scene name="rocks"/>
+    <scene name="rocks1a"/>
+    <scene name="rocks1b"/>
+    <scene name="rocks1c"/>
+    <scene name="rocks1d"/>
     <scene name="rocks2"/>
     <scene name="rocks3"/>
     <scene name="rocks4"/>
@@ -842,14 +878,15 @@
     <scene name="rocks8"/>
     <scene name="test"/>
     <scene name="test-template"/>
-    <scene name="test2"/>
-    <scene name="test3"/>
-    <scene name="test4"/>
-    <scene name="test5"/>
-    <scene name="test6"/>
-    <scene name="test7"/>
-    <scene name="test8"/>
-    <scene name="test9"/>
+    <scene name="test002"/>
+    <scene name="test003"/>
+    <scene name="test004"/>
+    <scene name="test005"/>
+    <scene name="test006"/>
+    <scene name="test007"/>
+    <scene name="test008"/>
+    <scene name="test009"/>
+    <scene name="test010"/>
     <scene name="vehicles"/>
     <scene name="vehicles2"/>
   </scenes>

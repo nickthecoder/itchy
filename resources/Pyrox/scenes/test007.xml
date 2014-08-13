@@ -71,12 +71,14 @@
     <actor costume="rock" x="-360" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
     <actor costume="rock" x="-420" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
     <actor costume="gate" x="-60" y="780" direction="0.0" heading="0.0" startEvent="default" zOrder="40">
-      <property name="scene" value="test8"/>
+      <property name="scene" value="test008"/>
     </actor>
     <actor costume="planeL" x="540" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="59"/>
     <actor costume="planeL" x="720" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
     <actor costume="planeR" x="-300" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="61"/>
-    <actor costume="player" x="240" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="100"/>
+    <actor costume="player" x="240" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="100">
+      <property name="awake" value="true"/>
+    </actor>
     <actor costume="planeR" x="-120" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="106"/>
     <actor costume="planeR" x="300" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="107"/>
     <actor costume="planeR" x="300" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="108"/>

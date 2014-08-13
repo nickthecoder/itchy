@@ -870,26 +870,35 @@ public class Game
     public GuiView show( RootContainer rootContainer )
     {
         GuiView view = new GuiView(new Rect(0, 0, this.getWidth(), this.getHeight()), rootContainer);
+        this.show( view );
+      
+        return view;
+    }
+    
+    public void show( GuiView view )
+    {
+        view.setVisible(true);
 
         this.windows.add(view);
 
-        if (rootContainer.getStylesheet() == null) {
-            rootContainer.setStylesheet(this.stylesheet);
+        if (view.rootContainer.getStylesheet() == null) {
+            view.rootContainer.setStylesheet(this.stylesheet);
         }
-        rootContainer.reStyle();
-        rootContainer.forceLayout();
-        rootContainer.setPosition(0, 0, rootContainer.getRequiredWidth(), rootContainer.getRequiredHeight());
+        view.rootContainer.reStyle();
+        view.rootContainer.forceLayout();
+        // rootContainer.setPosition(0, 0, rootContainer.getRequiredWidth(), rootContainer.getRequiredHeight());
 
-        if (rootContainer.modal) {
+        if (view.rootContainer.modal) {
             this.setModalListener(view);
         }
         this.addKeyListener(view);
-
-        return view;
+        
     }
 
     public void hide( GuiView view )
     {
+        view.setVisible(false);
+        
         this.removeKeyListener(view);
 
         this.windows.remove(view);

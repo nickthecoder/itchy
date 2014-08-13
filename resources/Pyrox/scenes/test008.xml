@@ -99,7 +99,7 @@
     <actor costume="planeL" x="-360" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="30"/>
     <actor costume="planeR" x="-420" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="30"/>
     <actor costume="gate" x="-600" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="40">
-      <property name="scene" value="test9"/>
+      <property name="scene" value="test009"/>
     </actor>
     <actor costume="machineEW" x="180" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
     <actor costume="machineWE" x="300" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
@@ -127,7 +127,9 @@
     <actor costume="machineNW2" x="-360" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
     <actor costume="machineSE2" x="-480" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
     <actor costume="machineWS2" x="-600" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
-    <actor costume="player" x="-660" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="100"/>
+    <actor costume="player" x="-660" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="100">
+      <property name="awake" value="true"/>
+    </actor>
   </layer>
   <layer name="test">
     <actor costume="test" x="240" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="50">
