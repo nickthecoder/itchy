@@ -119,13 +119,28 @@ public class NinePatchEditor extends SubEditor<NinePatchResource>
     @Override
     protected void update() throws MessageException
     {
-        FilenameComponent filename = (FilenameComponent) this.form.getComponent("file");
+        FilenameComponent filenameComponent = (FilenameComponent) this.form.getComponent("file");
+        File file = filenameComponent.getValue();
         TextBox name = (TextBox) this.form.getComponent("name");
 
-        boolean exists = this.editor.resources.fileExists(filename.getText());
+        boolean exists = this.editor.resources.fileExists(file.getPath());
         if (!exists) {
             throw new MessageException("Filename not found");
         }
+        
+        if (!this.editor.resources.fileIsWithin(file)) {
+            File newFile = new File(getImageDirectory(), file.getName());
+            if (newFile.exists()) {
+                throw new MessageException("File is outside of this game's resource directory.");
+            }
+            try {
+                Util.copyFile(this.editor.resources.resolveFile(file), newFile);
+                filenameComponent.setText(this.editor.resources.makeRelativeFilename(newFile));
+            } catch (Exception e) {
+                throw new MessageException("Failed to copy image into the resources directory");
+            }
+        }
+        
         if (this.adding || (!name.getText().equals(this.currentResource.getName()))) {
             if (this.editor.resources.getNinePatchResource(name.getText()) != null) {
                 throw new MessageException("That name is already being used.");
@@ -155,7 +170,7 @@ public class NinePatchEditor extends SubEditor<NinePatchResource>
                 NinePatchEditor.this.onAdd(file);
             }
         };
-        this.openDialog.setDirectory(this.editor.resources.getDirectory());
+        this.openDialog.setDirectory(getImageDirectory());
         this.openDialog.show();
     }
 
@@ -178,6 +193,17 @@ public class NinePatchEditor extends SubEditor<NinePatchResource>
         }
     }
 
+    public File getImageDirectory()
+    {
+        File dir = this.editor.resources.getDirectory();
+        File imageDir = new File(dir, "images");
+        if (imageDir.exists()) {
+            return imageDir;
+        } else {
+            return dir;
+        }
+    }
+    
     public class ExplodedImage extends Component
     {
         private final Surface surface;
