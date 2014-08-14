@@ -64,14 +64,7 @@ public class SoundsEditor extends SubEditor<SoundResource>
             }
         };
         filterMap.put(" * All * ", all);
-//        Filter shared = new Filter() {
-//            @Override
-//            public boolean accept( AnimationResource ar )
-//            {
-//                return ar.shared;
-//            }
-//        };
-//        filterMap.put(" * Shared * ", shared);
+
         for (String name : this.editor.resources.costumeNames()) {
             CostumeResource cr = this.editor.resources.getCostumeResource(name);
             Filter filter = new CostumeFilter(cr);
@@ -151,12 +144,27 @@ public class SoundsEditor extends SubEditor<SoundResource>
     @Override
     protected void update() throws MessageException
     {
-        FilenameComponent filename = (FilenameComponent) this.form.getComponent("file");
+        FilenameComponent filenameComponent = (FilenameComponent) this.form.getComponent("file");
+        File file = filenameComponent.getValue();
         TextBox name = (TextBox) this.form.getComponent("name");
 
-        boolean exists = this.editor.resources.fileExists(filename.getText());
+        boolean exists = this.editor.resources.fileExists(file.getPath());
         if (!exists) {
             throw new MessageException("Filename not found");
+        }
+        
+
+        if (!this.editor.resources.fileIsWithin(file)) {
+            File newFile = new File(getSoundsDirectory(), file.getName());
+            if (newFile.exists()) {
+                throw new MessageException("File is outside of this game's resource directory.");
+            }
+            try {
+                Util.copyFile(this.editor.resources.resolveFile(file), newFile);
+                filenameComponent.setText(this.editor.resources.makeRelativeFilename(newFile));
+            } catch (Exception e) {
+                throw new MessageException("Failed to copy image into the resources directory");
+            }
         }
         if (this.adding || (!name.getText().equals(this.currentResource.getName()))) {
             if (this.editor.resources.getSoundResource(name.getText()) != null) {
@@ -205,7 +213,7 @@ public class SoundsEditor extends SubEditor<SoundResource>
                 SoundsEditor.this.onAdd(file);
             }
         };
-        this.openDialog.setDirectory(this.editor.resources.getDirectory());
+        this.openDialog.setDirectory(getSoundsDirectory());
         this.openDialog.show();
     }
 
@@ -224,6 +232,17 @@ public class SoundsEditor extends SubEditor<SoundResource>
                 this.openDialog.setMessage(e.getMessage());
                 return;
             }
+        }
+    }
+
+    public File getSoundsDirectory()
+    {
+        File dir = this.editor.resources.getDirectory();
+        File soundsDir = new File(dir, "sounds");
+        if (soundsDir.exists()) {
+            return soundsDir;
+        } else {
+            return dir;
         }
     }
 
