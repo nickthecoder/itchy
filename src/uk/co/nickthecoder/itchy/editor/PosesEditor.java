@@ -191,21 +191,21 @@ public class PosesEditor extends SubEditor<PoseResource>
     protected void update() throws MessageException
     {
         FilenameComponent filenameComponent = (FilenameComponent) this.form.getComponent("file");
-        File filename = filenameComponent.getValue();
+        File file = filenameComponent.getValue();
         TextBox name = (TextBox) this.form.getComponent("name");
 
-        boolean exists = this.editor.resources.fileExists(filename.getPath());
+        boolean exists = this.editor.resources.fileExists(file.getPath());
         if (!exists) {
             throw new MessageException("File not found");
         }
 
-        if (!this.editor.resources.fileIsWithin(filename)) {
-            File newFile = new File(getImageDirectory(), filename.getName());
+        if (!this.editor.resources.fileIsWithin(file)) {
+            File newFile = new File(getImageDirectory(), file.getName());
             if (newFile.exists()) {
                 throw new MessageException("File is outside of this game's resource directory.");
             }
             try {
-                Util.copyFile(this.editor.resources.resolveFile(filename), newFile);
+                Util.copyFile(this.editor.resources.resolveFile(file), newFile);
                 filenameComponent.setText(this.editor.resources.makeRelativeFilename(newFile));
             } catch (Exception e) {
                 throw new MessageException("Failed to copy image into the resources directory");

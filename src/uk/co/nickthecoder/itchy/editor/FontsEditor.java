@@ -139,7 +139,7 @@ public class FontsEditor extends SubEditor<FontResource>
             }
         };
 
-        this.openDialog.setDirectory(this.editor.resources.getDirectory());
+        this.openDialog.setDirectory(getFontsDirectory());
         this.openDialog.show();
     }
 
@@ -171,13 +171,28 @@ public class FontsEditor extends SubEditor<FontResource>
     @Override
     protected void update() throws MessageException
     {
-        FilenameComponent filename = (FilenameComponent) this.form.getComponent("file");
+        FilenameComponent filenameComponent = (FilenameComponent) this.form.getComponent("file");
+        File file = filenameComponent.getValue();
         TextBox name = (TextBox) this.form.getComponent("name");
 
-        boolean exists = this.editor.resources.fileExists(filename.getText());
+        boolean exists = this.editor.resources.fileExists(file.getPath());
         if (!exists) {
-            throw new MessageException("Filename not found");
+            throw new MessageException("File not found");
         }
+
+        if (!this.editor.resources.fileIsWithin(file)) {
+            File newFile = new File(getFontsDirectory(), file.getName());
+            if (newFile.exists()) {
+                throw new MessageException("File is outside of this game's resource directory.");
+            }
+            try {
+                Util.copyFile(this.editor.resources.resolveFile(file), newFile);
+                filenameComponent.setText(this.editor.resources.makeRelativeFilename(newFile));
+            } catch (Exception e) {
+                throw new MessageException("Failed to copy image into the resources directory");
+            }
+        }
+
         if (this.adding || (!name.getText().equals(this.currentResource.getName()))) {
             if (this.editor.resources.getFontResource(name.getText()) != null) {
                 throw new MessageException("That name is already being used.");
@@ -190,6 +205,18 @@ public class FontsEditor extends SubEditor<FontResource>
             this.editor.resources.addFont(this.currentResource);
         }
     }
+
+    public File getFontsDirectory()
+    {
+        File dir = this.editor.resources.getDirectory();
+        File fontsDir = new File(dir, "fonts");
+        if (fontsDir.exists()) {
+            return fontsDir;
+        } else {
+            return dir;
+        }
+    }
+
 
     @Override
     protected List<AbstractProperty<FontResource, ?>> getProperties()
