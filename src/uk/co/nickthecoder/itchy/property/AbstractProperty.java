@@ -17,6 +17,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import uk.co.nickthecoder.itchy.Font;
+import uk.co.nickthecoder.itchy.Pose;
 import uk.co.nickthecoder.itchy.animation.Ease;
 import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
@@ -198,6 +199,9 @@ public abstract class AbstractProperty<S, T> implements Comparable<AbstractPrope
         }
         if (klass == Ease.class) {
             return new EaseProperty<SS>(key);
+        }
+        if (klass == Pose.class) {
+            return new PoseProperty<SS>(key);
         }
         if (Enum.class.isAssignableFrom(klass)) {
 

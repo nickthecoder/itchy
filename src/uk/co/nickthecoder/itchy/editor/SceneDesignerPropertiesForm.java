@@ -11,6 +11,7 @@ import java.util.Map;
 import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.util.StringUtils;
 
 public class SceneDesignerPropertiesForm<S> extends PropertiesForm<S>
 {
@@ -57,7 +58,7 @@ public class SceneDesignerPropertiesForm<S> extends PropertiesForm<S>
                         String newValue = property.getStringValue(SceneDesignerPropertiesForm.this.subject);
                         String oldValue = SceneDesignerPropertiesForm.this.oldValues.get(property.key);
                         SceneDesignerPropertiesForm.this.oldValues.put(property.key, newValue);
-                        if (!newValue.equals(oldValue)) {
+                        if (! StringUtils.equals(newValue,oldValue)) {
 
                             Undo undo = new UndoActorProperty<S>(
                                 SceneDesignerPropertiesForm.this.sceneDesigner, SceneDesignerPropertiesForm.this.name,

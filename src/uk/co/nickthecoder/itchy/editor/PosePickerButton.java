@@ -15,6 +15,7 @@ import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.ImageComponent;
 import uk.co.nickthecoder.itchy.gui.Label;
 import uk.co.nickthecoder.itchy.gui.VerticalLayout;
+import uk.co.nickthecoder.jame.Surface;
 
 public class PosePickerButton extends Button implements ActionListener
 {
@@ -34,8 +35,14 @@ public class PosePickerButton extends Button implements ActionListener
         this.layout = new VerticalLayout();
         this.setXAlignment(0.5f);
 
-        this.img = new ImageComponent(poseResource.getThumbnail());
-        this.label = new Label(poseResource.getName());
+        if (poseResource == null) {
+            Surface surface = new Surface(1, 1, true);
+            this.img = new ImageComponent(surface);
+            this.label = new Label("<none>");
+        } else {
+            this.img = new ImageComponent(poseResource.getThumbnail());
+            this.label = new Label(poseResource.getName());
+        }
         this.addChild(this.img);
         this.addChild(this.label);
 

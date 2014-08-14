@@ -1,19 +1,13 @@
+Compile jame on pi
+
 Bugs
 
     ZOrder buttons work the wrong way round ?
 
 
-Tooltips
-
-
 Look at companion, it has font, font size and color. Why ????
 
-Makeup has a Pose name for Textured, and ScaledBackground. Can I use a PoseResourceProperty?
-Appearance has a FontProperty - but the getStringValue isnt' overriden to find the font's name - not good!
-    Also, should Appearance have a TextStyle now?
-
-What are XXX and XXXResource ? Why use one rather than another?
-    Initialy, Actor only had a Pose, and in fact, its constructor still takes a Pose (which it shouldn't?)
+Should TextPose have a TextStyle, rather than individual attributes?
 
 
 SceneDesigner for Text
@@ -30,11 +24,6 @@ SceneDesigner for Text
     Have a "Reset to Costume Defaults", and a "Apply to Costume" buttons.
 
 
-
-Lazy loading of some poses (If each contributor has their own picture, don't want to load them all, unless
-the player visits their page).
-    Create LazyLoadImagePose?? Relationship to ImagePose??
-
 Sprite Sheet Pose
     Allow multiple poses to be loaded from one image, and define the rectangle of each sub-image.
 
@@ -44,6 +33,8 @@ Use this for Pyrox's machines, one way streets, and maybe even the walls.
     A costume can have a "Group Leader" field, which is the name of the Costume that is displayed as the
     main icon in the scene design toolbox.
 
+SceneDesigner : select groups of actors, and move/delete them together.
+
 Add onSceneCreated to class diagram(s)
     Add to js and python templates
 
@@ -51,30 +42,6 @@ Why have a Role interface if everything will end up using AbstractRole?
     Why does Role have "birth" and yet everything uses onBirth() ? Ditto with other events.
     Talk to Simon about it.
 
-
-Pyrox Later
-
-    Zoom in/out : Scale all GridRole objects. Care needed if/when creating new objects.
-
-    Have a music layer, which has notes at each point. When an object moves over it, call that note's event to play the note.
-        When a player stays one square, continue to play the square's note(s)
-            The player has events, and the squares have event names. Use animations to control the sequence of notes played?
-                Use the player's animations, but animate the Note object so that it doesn't interfere with the player's normal animation.
-        Can have a high tempo piece whenever you hover on a "dangerous" or important square.
-        Different characters will play different samples (but of the same basic note).
-        The "correct" way through the puzzle should always sound harmonious
-        Have set riffs, which can be played in different keys.
-            While moving across a same-key field, it will sound like "Bah-Bah-Bah-Bah" for each square walked.
-            Then when you stand still, the riff continues "Bah-da-da-da-Bah-da-da".
-        Some square are silent.
-        The square knows the name of the note, but the level know the instrument to use. The sample to use if "$instrument-$note".
-        Some music squares can change the instrument too. From and To at choke points
-        Use the editor's strings to define the riffs??
-        Would be nice to have a visual representation of the music squares values.
-            Use Makeup to achieve this?
-            Can use colour to denote the note - hue for A-G and saturation/brightness for the octave. Background pattern for the instrument.
-        Put the music in the grid at the same time as the GridRoles.
-        Use classic songs for some obvious-ish pathways.
 
 Inputs
     Use in iThrust
@@ -94,6 +61,13 @@ Why isn't "iterator" method seen on Stage class on overview class diagram?
 SceneButton not in the list of Roles when starting a new project.
     
 No error message when there are no fonts, and the user tries to add text to the scene design.
+
+
+
+Lazy loading of some poses (If each contributor has their own picture, don't want to load them all, unless
+the player visits their page).
+    Create LazyLoadImagePose?? Relationship to ImagePose??
+    Just add a "lazy" attribute to ImagePose
 
 ---
 
@@ -129,21 +103,12 @@ TODO
 Dynamic class loader for game jar files, which live in resources/foo/lib/ or ./lib when outside of itchy's resources directory.
 
 Make Text Costumes real costumes - Don't use the "Text" tool.
-    Include font size and colour?
     Thumbnail to include the colour and the text "Abc".
     Don't add a String to the costume when creating it.
     Try to rationalise Actor's constructor - can I force it to have a Costume now?
         Actor(Costume, String poseName = "default" ) i.e. just two constructors.
         If a Pose is found use it, else if a Font is found use that, otherwise use a dummy 1x1 surface, and issue a warning.
     During load - if it finds a "text", then generate a costume which is used by later "text" actors.
-
-Hover over button for tooltips.
-    If a component has a tooltip, then for all mousemove events, if inside, tell Game that a tooltip is available.
-    Game remembers the time, and the tooltip factory
-    Inside tick, if the tooltip delay has passed without any other mouse moves, then tell tooltip factory to create the rootwindow.
-    Game destroys the tooltip window on the next mousemove/up/down.
-    TooltipFactory interface : public Component createTooltip();
-    Create tooltips of Costumes tab - with the name of the costume.
     
 Need to allow Makeup appear at any stage in the pipeline from the editor. e.g. a Decoration which should not be rotated with the actor.
 Or a clip done at the end.
@@ -154,28 +119,12 @@ Tiled background - instead of a RGBA, specify a Pose, and tile it in a Grid.
     RGBABackground
     Tile, BrickH, BrickV, TileH, TileV (spacing can be different to the image size)
 
-Create a Javascript wrapper for View, and use it to implement scrolling on Torus World.
-    Will then need to implement a good collision detection too.
-        Translate the current object right or left and also up or down, so four tests in total.
-        Update, and then use the wrapped collision strategy, which could be brute force or neighbourhood.
-
-Note that these are the same features that the Textured Makeup could use.
-    For that matter, there could be a new Makeup called BackgroundMakeup, which places a background behind the actor.
-    A Background and Frame would work nicely to create a mug-shot.
-
-There are non-visual Makeups
+Non-visual Makeups - maybe only useful when chaining makeups
     Size (makes the appearance the given size without scaling
     Margin as above, but adds a given amount, rather than a set overall size.
     AlterOffset - useful for changing the rotation point.
 
-Texture should use the pose's offsetX,Y as its start point, not 0,0
-
 Explosion and Projectile don't work very well with text - See Gate.collected.
-
-When a costume has a font, it should include the colour and size too.
-    And alignment?
-    Companion would need a fontsize and color attributes???
-    Talk should be simpler to use too.
 
 Should Costumes have Makeup? If each jewel is given a Sparkle makeup, does it make sense to apply it to every jewel in the scene?
     No. A diamond costume would specify a standard makeup, which can be overridden if needed.
@@ -186,41 +135,13 @@ Costume editor to have filters on event name and resource type.
     i.e. show all Animations, or show all "death" events, or show all "death" Animations or show everything. 
     Should the filters stay as you flick from one Costume to another - Yes, probably.
 
-Send to Asul
-    package, test on windows. 
-
 EntryBox is firing change events for arrow keys.
-
-Scripted Makeup
-    Appearance.getMakeupClassName
-    Appearance.createMakeup
-    Create Tests
 
 Allow Compound makeups
 Glitter Makeup - sprinkle poses randomly. use getpixel.
 Decoration - Adds a Pose to a given place relative to the actor's x,y.
 Underscore - used for text poses to place a line under the text. Use "_" to create the line,  or Surface.fill. 
     Use it on link text when compound makeup is available.
-
-Cache the results of Makeup on Appearance.
-    If we apply Makeup first (do clipping afterwards), then we only re-apply makeup if the pose has changed.
-    Don't forget to free the cache when possible.
-
-Test other animations not on the animations test page.
-    Clip, heading, heading to, turn to,
-
-Compound Role
-    the editor knows about the interface, and adds a table under the Role ClassName.
-    The currently selected role's properties are shown on the right of the table.
-    This can be in ADDITION to the CompoundRole's properties.
-Same feature for SceneDirector.
-
-Create some tests for Views in the tests game.
-    Create a Stage and view in the middle of the screen
-    Add buttons which scroll the view
-    Add a button inside it to test the offset
-    Create a compound view in the middle with other views inside it.
-        Use the same Stage for each of the mini views to test the 1:many Stage->View with mouse listeners and capture mouse.
 
 Companion string names wont be renamed when a costume is renamed.
     Create a first class citizen "CompanionCostume"
@@ -245,13 +166,6 @@ GUIView.keyUp does nothing - is this ok?
 
 Joystick input devices.
 
-Multiline Text from the editor? Will need a text area component!
-
-Read a file and display it on the screen
-    In one multiline text
-    In separate lines, with each delayed - use animations too.
-    Markdown syntax - for links at least.
-
 Optimise Explosion by using fixAppearance for projectiles which are turned, but won't rotate.
     maybe just add a fix boolean, and leave it up to the user to do it.
 
@@ -262,10 +176,6 @@ Create a Compound Role, which has a ClassName array of other Roles
     properties for that row.
         Get this working for Role, and maybe it could be made generic for Makeup too.
     
-Add pose and nine patch : try to show the image sub directory if it exists.
-    Copy images if outside of the game's directory
-        Can do this during SAVE
-
 BlitModes on Pose, so a "spotlight" can ADD
 
 "Duplicate" button in Animation editor - maybe on Costume too.
@@ -295,7 +205,7 @@ Simple convolution filter
     Create empty space around the image. Later give option of duping the image's edge.
     Apply the convolution matrix.
         For RGB, just apply the matrix to each channel in turn.
-        For RGBA we'd need to change the final DIVIDE to discount transparent pixels. i.e divide by sub of matrix * alphas.
+        For RGBA we'd need to change the final DIVIDE to discount transparent pixels. i.e divide by sum of matrix * alphas.
         Apply the matrix to alpha as normal.
         
    Many things just need the alpha channel convolved?
@@ -327,16 +237,14 @@ big horrible unorganised list.
     
 Same pattern for sounds and animations, not for font or nine patches.
 
-Make the Costumes tab first (or second).
-
 
 How about a Scripts tab
     List all scripts double click to edit.
     Show errors / Clear errors
 
 A Gallery
-    Import poses, costumes, fonts, animations etc from a set of "games" in the gallery, or from any
-    other game's resources.
+    Import poses, costumes, fonts, animations etc from another game.
+    Create a game just for this purpose.
 
 Is the special Map needed which allows scripted Costume properties to be retrieved from BeanHelper
     Now we have ScriptedObject, isn't it better to have it done that way?
@@ -345,15 +253,8 @@ Is the special Map needed which allows scripted Costume properties to be retriev
 Scripted Behaviours can't detect MouseEvents.
     The whole Layer as a MouseListener needs looking at.
 
-"include" javascript function, which includes another script file.
-
-Copy the arm binary
-    Test Itchy on Pi
-
 Text Costumes.
     Buttons can have sounds and animations
-
-Compile on raspPi?
 
 Get Thrust to run via "launch" without the resource symlinks to itchy.
     Need thrusts jar file to be in a lib directory within its resources, and for the jar to be loaded

@@ -51,6 +51,11 @@ public class PoseResource extends NamedResource implements Thumbnailed
 
     public void setFile( File file ) throws JameException
     {
+        if (file.isAbsolute()) {
+            // Lets try to make file relative to the resources directory.
+            file = new File( this.resources.makeRelativeFilename(file) );
+        }
+        
         if (! file.equals(this.file)) { 
             this.pose.load( this.resources.resolveFilename(file.getPath()) );
             this.thumbnail = null;

@@ -109,32 +109,20 @@ public class BeanHelper
                 attributeName.substring(1);
 
             // Look for a method called setXXX first
-            if ((klass == null) && (value == null)) {
-                // Damn, we don't know the class of the parameter, and its null, so look for ANY
-                // method, which takes a single object as its parameter.
-
-                for (Method method : subject.getClass().getMethods()) {
-                    if (method.getName().equals(methodName)) {
-                        if (method.getParameterTypes().length == 1) {
+            for (Method method : subject.getClass().getMethods()) {
+                if (method.getName().equals(methodName)) {
+                    if (method.getParameterTypes().length == 1) {
+                        try {
                             method.invoke(subject, value);
                             return;
+                        } catch (IllegalAccessException e1) {
+                        } catch (IllegalArgumentException e2) {
+                        } catch (InvocationTargetException e3) {
                         }
                     }
                 }
-
-            } else {
-                Class<?>[] argTypes = new Class<?>[1];
-                argTypes[0] = klass;
-
-                try {
-                    Method method = subject.getClass().getMethod(methodName, argTypes);
-
-                    method.invoke(subject, value);
-                    return;
-
-                } catch (NoSuchMethodException e) {
-                }
             }
+
 
             try {
                 Field field = subject.getClass().getField(attributeName);

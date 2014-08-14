@@ -1009,6 +1009,7 @@ public class SceneDesigner implements MouseListener, KeyListener
                     onSelectCostume(costumeResource);
                 }
             });
+            button.setTooltip(costumeResource.getName());
             this.costumeButtonGroup.add(button);
             container.addChild(button);
         }
@@ -1709,16 +1710,13 @@ public class SceneDesigner implements MouseListener, KeyListener
 
     private void onResetZOrders()
     {
-        System.out.println("Reset Z-Orders");
         for (StageView child : this.designViews.getChildren()) {
             Stage stage = child.getStage();
 
             for (Actor actor : stage.getActors()) {
                 if ((actor.getCostume() != null) && (actor.getCostume().defaultZOrder != 0)) {
                     if (actor.getZOrder() != actor.getCostume().defaultZOrder) {
-                        System.out.println( "Changing zorder from " + actor.getZOrder() + " to  " + actor.getCostume().defaultZOrder );
                         actor.setZOrder(actor.getCostume().defaultZOrder);
-                        System.out.println( "Now : " + actor.getZOrder() );
                     }
                 }
             }

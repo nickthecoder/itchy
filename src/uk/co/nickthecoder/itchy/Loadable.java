@@ -68,6 +68,21 @@ public abstract class Loadable
         return this.directory;
     }
 
+    /**
+     * @return true iff file is within the directory.
+     */
+    public boolean fileIsWithin( File file )
+    {
+        try {
+            String dirStr = getDirectory().getCanonicalPath();
+            String fileStr = resolveFile(file).getCanonicalPath();
+
+            return fileStr.startsWith(dirStr);
+        } catch( Exception e ) {
+            return false;
+        }
+    }
+    
     public void setFile( File file )
     {
         this.directory = file.getParentFile();
@@ -106,6 +121,8 @@ public abstract class Loadable
         return file.renameTo(dest);
     }
 
+    
+    
     public String getFilename()
     {
         return resolveFile(this.file).getPath();

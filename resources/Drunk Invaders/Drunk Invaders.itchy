@@ -1,5 +1,5 @@
 <resources>
-  <game title="Drunk Invaders" width="640" height="480" initialScene="menu" directorClassName="uk.co.nickthecoder.drunkinvaders.DrunkInvaders" authors="Nick&#xA;The&#xA;Coder&#xA;"/>
+  <game title="Drunk Invaders" width="640" height="480" initialScene="menu" directorClassName="uk.co.nickthecoder.drunkinvaders.DrunkInvaders" authors="Nick TheCoder"/>
   <fonts>
     <font name="blackCasper" filename="fonts/BlackCasper/BlackCasper.ttf"/>
     <font name="boycott" filename="fonts/Boycott/Boycott.ttf"/>

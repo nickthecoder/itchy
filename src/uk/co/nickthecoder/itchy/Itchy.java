@@ -95,6 +95,7 @@ public class Itchy
         registry.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.makeup.Scale.class.getName()));
         registry.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.makeup.Textured.class.getName()));
         registry.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.makeup.Frame.class.getName()));
+        registry.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.makeup.SimpleFrame.class.getName()));
         registry.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.makeup.ScaledBackground.class.getName()));
 
         Eases.registerEases();

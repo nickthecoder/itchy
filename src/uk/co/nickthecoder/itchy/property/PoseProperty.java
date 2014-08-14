@@ -4,23 +4,23 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.property;
 
-import uk.co.nickthecoder.itchy.Font;
-import uk.co.nickthecoder.itchy.FontResource;
 import uk.co.nickthecoder.itchy.Itchy;
+import uk.co.nickthecoder.itchy.Pose;
+import uk.co.nickthecoder.itchy.PoseResource;
 import uk.co.nickthecoder.itchy.Resources;
-import uk.co.nickthecoder.itchy.editor.FontPickerButton;
+import uk.co.nickthecoder.itchy.editor.PosePickerButton;
 import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 
-public class FontProperty<S> extends AbstractProperty<S, Font>
+public class PoseProperty<S> extends AbstractProperty<S, Pose>
 {
-    public FontProperty( String key )
+    public PoseProperty( String key )
     {
         super(key);
     }
 
     @Override
-    public Font getDefaultValue()
+    public Pose getDefaultValue()
     {
         return null;
     }
@@ -30,10 +30,10 @@ public class FontProperty<S> extends AbstractProperty<S, Font>
     {
         Resources resources = Itchy.getGame().resources;
 
-        FontResource fontResource = resources.getFontResource(this.getSafeValue(subject));
+        PoseResource poseResource = resources.getPoseResource(this.getSafeValue(subject));
 
-        final FontPickerButton pickerButton = new FontPickerButton(resources, fontResource);
-        pickerButton.setCompact(true);
+        final PosePickerButton pickerButton = new PosePickerButton(resources, poseResource);
+        // pickerButton.setCompact(true);
 
         if (autoUpdate) {
 
@@ -43,7 +43,7 @@ public class FontProperty<S> extends AbstractProperty<S, Font>
                 public void changed()
                 {
                     try {
-                        FontProperty.this.update(subject, pickerButton);
+                        PoseProperty.this.update(subject, pickerButton);
                     } catch (Exception e) {
                         // Do nothing
                     }
@@ -57,16 +57,16 @@ public class FontProperty<S> extends AbstractProperty<S, Font>
     @Override
     public void addChangeListener( Component component, ComponentChangeListener listener )
     {
-        FontPickerButton button = (FontPickerButton) component;
+        PosePickerButton button = (PosePickerButton) component;
         button.addChangeListener(listener);
     }
 
     @Override
     public void update( S subject, Component component ) throws Exception
     {
-        FontPickerButton pickerButton = (FontPickerButton) component;
+        PosePickerButton pickerButton = (PosePickerButton) component;
         try {
-            this.setValue(subject, pickerButton.getValue().font);
+            this.setValue(subject, pickerButton.getValue().pose);
             pickerButton.removeStyle("error");
         } catch (Exception e) {
             pickerButton.addStyle("error");
@@ -76,20 +76,20 @@ public class FontProperty<S> extends AbstractProperty<S, Font>
     @Override
     public void refresh( S subject, Component component ) throws Exception
     {
-        FontPickerButton pickerButton = (FontPickerButton) component;
+        PosePickerButton pickerButton = (PosePickerButton) component;
         Resources resources = Itchy.getGame().resources;
-        Font font = this.getValue(subject);
-        FontResource fontResource = resources.getFontResource(font);
+        Pose pose = this.getValue(subject);
+        PoseResource fontResource = resources.getPoseResource(pose);
         pickerButton.setValue(fontResource);
     }
 
     @Override
-    public Font parse( String value )
+    public Pose parse( String value )
     {
         if ("".equals(value) || (value == null)) {
             return null;
         }
-        Font result = Itchy.getGame().resources.getFont(value);
+        Pose result = Itchy.getGame().resources.getPose(value);
         if (result == null) {
             throw new NullPointerException();
         }
@@ -99,14 +99,14 @@ public class FontProperty<S> extends AbstractProperty<S, Font>
     @Override
     public String getStringValue( S subject ) throws Exception
     {
-        Font value = this.getValue(subject);
+        Pose value = this.getValue(subject);
 
-        FontResource fr = Itchy.getGame().resources.getFontResource(value);
-        if (fr == null) {
-            System.err.println("FontProperty not found.");
+        PoseResource pr = Itchy.getGame().resources.getPoseResource(value);
+        if (pr == null) {
+            System.err.println("PoseProperty not found.");
             return "";
         }
-        return fr.getName();
+        return pr.getName();
     }
 
     @Override

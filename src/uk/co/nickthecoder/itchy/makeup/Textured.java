@@ -6,9 +6,8 @@ package uk.co.nickthecoder.itchy.makeup;
 
 import java.util.List;
 
-import uk.co.nickthecoder.itchy.ImagePose;
-import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.OffsetSurface;
+import uk.co.nickthecoder.itchy.Pose;
 import uk.co.nickthecoder.itchy.SimpleOffsetSurface;
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
 import uk.co.nickthecoder.itchy.property.Property;
@@ -16,11 +15,10 @@ import uk.co.nickthecoder.jame.Surface;
 import uk.co.nickthecoder.jame.Surface.BlendMode;
 
 /**
- * Takes a pose as a texture, and draws it on top of the source image, such that the source image's alpha remains unchanged,
- * but the RGB is replaced by the texutre's.
+ * Takes a pose as a texture, and draws it on top of the source image, such that the source image's alpha remains unchanged, but the RGB is
+ * replaced by the texutre's.
  * 
- * Note, if the pose texture has an alpha channel, then the source image's RGB will show through wherever the texture is
- * transparent.
+ * Note, if the pose texture has an alpha channel, then the source image's RGB will show through wherever the texture is transparent.
  */
 public class Textured implements Makeup
 {
@@ -31,9 +29,7 @@ public class Textured implements Makeup
 
     private int y;
 
-    private String poseName = null;
-
-    private ImagePose pose;
+    private Pose pose;
 
     private int seq = 0;
 
@@ -61,17 +57,16 @@ public class Textured implements Makeup
         this.y = y;
     }
 
-    @Property(label = "Pose Name", allowNull = false)
-    public String getPoseName()
+    @Property(label = "Pose", aliases={"poseName"})
+    public Pose getPose()
     {
-        return this.poseName;
+        return this.pose;
     }
 
-    public void setPoseName( String poseName )
+    public void setPose( Pose pose )
     {
-        this.seq++;
-        this.poseName = poseName;
-        this.pose = Itchy.getGame().resources.getPose(poseName);
+        this.pose = pose;
+        this.seq ++;
     }
 
     @Override

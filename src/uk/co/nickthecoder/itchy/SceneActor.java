@@ -159,6 +159,14 @@ public abstract class SceneActor implements Cloneable
 
         for (AbstractProperty<Role, ?> property : actualRole.getProperties()) {
             String value = this.customPropertyStrings.get(property.key);
+            if ( value == null ) {
+                for (String alias : property.aliases) {
+                    value = this.customPropertyStrings.get(alias);
+                    if (value != null) {
+                        break;
+                    }
+                }
+            }
             if (value != null) {
                 try {
                     property.setValueByString(actualRole, value);
@@ -172,6 +180,14 @@ public abstract class SceneActor implements Cloneable
 
         for (AbstractProperty<Makeup, ?> property : makeup.getProperties()) {
             String value = this.makeupPropertyStrings.get(property.key);
+            if ( value == null ) {
+                for (String alias : property.aliases) {
+                    value = this.makeupPropertyStrings.get(alias);
+                    if (value != null) {
+                        break;
+                    }
+                }
+            }
             if (value != null) {
                 try {
                     property.setValueByString(makeup, value);

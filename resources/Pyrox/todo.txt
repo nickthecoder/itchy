@@ -1,0 +1,105 @@
+Scenes :
+    Rocks - simple moving and pushing
+    2 - Shuffle rocks, more than one rock in a column
+    3 - A rock field. Easy up, hard down.
+    4 - Another rock field. Make this 3a
+    5 - The circuit.
+    6 - Four rooms - the order is important!
+    7 - Many rooms, including a rock field.
+    8 - One large rock field.
+
+    Balloons - dead easy!
+    2 - A little tricky
+    3 - Two tricky fields (stamps and coins - both upwards)
+    4 - Three fields - hard
+    
+Need :
+    More simple rocks1 and 2
+    
+    A new balloons1, that you can't do wrong!
+    More balloons1 - essentially dead easy
+    
+    More balloons2 - minimal thought
+
+    Balloon 6
+    Vehicles 3,4,5,6
+    Furniture 4,5
+    Grenades 5,6
+    Extra 3,4,5
+
+Add tests pages for each object.
+    Chair, table
+    Key, Gate
+    Soil, Hard
+    Wide player, tall player, giant.
+
+Place Sledgers in key places, so that the sledging can be targeted to a given area.
+    e.g. "Have you met by brother?"
+        Then when he enters the room... "We look alike Don't we."
+    Sledgers to have optional roleIDs, so the correct player will speak.
+    Each line can be prefixed by #ID:
+        If the role is not found, then the conversation stops (player is dead).
+        Would need to scroll to that player if its not on screen.
+
+    Sledger and Hint to use rectangles, not pixel detection.
+
+Add sledging to existing scenes    
+
+Map
+    Each costume to have a mini-icon, which is auto-generated if none is given.
+    Displayed as a pop-up in the middle of the screen, with the grid centered.
+        If the grid is bigger than the display, then center the "scroll position" near(er) the middle.
+    Actor's x,y is not used, nor its current image, just the grid's x,y and the custumes "map" pose.
+    The background background is partially transparent. A Nine-patch ??
+        Map Background could be a SceneDirector property.
+
+
+
+Weaker player - can't lift or push rocks.
+    
+Add a Beekeeper tag (and beekeeper outfit ), to make player immune to bees.
+    Something to pick up.
+    
+Big Rock (2x2) Rolls when sitting half and half on solid/empty
+
+Water
+    Each cube has a pressure.
+    Can be the alternateOccupant
+    Empty left or right or below, then spill half of my pressure.
+    Average the pressure left/right
+    Average the pressure below and above, but weight the average so that below has more pressure, and above has less.
+    If pressure <= 0 die.
+    If pressure > full and above is empty, then share pressure (but never enough to leave me less than full).
+    If pressure >= "full", then use 100% blue, otherwise use a partially full square.
+    If I share my square with something else, then add 80% full to my pressure when working stuff out???
+
+
+Saloon Sally - Tables with/without gold on them
+    https://www.youtube.com/watch?v=4tnB9tR3ykM
+
+"Cavern" style levels
+    Need new bad guys.
+
+Copy bees!
+Trick level - you have to copy a bee hive.
+
+Have a music layer, which has notes at each point. When an object moves over it, call that note's event to play the note.
+    When a player stays one square, continue to play the square's note(s)
+        The player has events, and the squares have event names. Use animations to control the sequence of notes played?
+            Use the player's animations, but animate the Note object so that it doesn't interfere with the player's normal animation.
+    Can have a high tempo piece whenever you hover on a "dangerous" or important square.
+    Different characters will play different samples (but of the same basic note).
+    The "correct" way through the puzzle should always sound harmonious
+    Have set riffs, which can be played in different keys.
+        While moving across a same-key field, it will sound like "Bah-Bah-Bah-Bah" for each square walked.
+        Then when you stand still, the riff continues "Bah-da-da-da-Bah-da-da".
+    Some square are silent.
+    The square knows the name of the note, but the level know the instrument to use. The sample to use if "$instrument-$note".
+    Some music squares can change the instrument too. From and To at choke points
+    Use the editor's strings to define the riffs??
+    Would be nice to have a visual representation of the music squares values.
+        Use Makeup to achieve this?
+        Can use colour to denote the note - hue for A-G and saturation/brightness for the octave. Background pattern for the instrument.
+    Put the music in the grid at the same time as the GridRoles.
+    Use classic songs for some obvious-ish pathways.
+

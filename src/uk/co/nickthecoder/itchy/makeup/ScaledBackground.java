@@ -6,7 +6,6 @@ package uk.co.nickthecoder.itchy.makeup;
 
 import java.util.List;
 
-import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.OffsetSurface;
 import uk.co.nickthecoder.itchy.Pose;
 import uk.co.nickthecoder.itchy.SimpleOffsetSurface;
@@ -26,8 +25,6 @@ public class ScaledBackground implements Makeup
     private int borderBottom;
 
     private int borderLeft;
-
-    private String poseName;
 
     private Pose pose;
 
@@ -105,17 +102,10 @@ public class ScaledBackground implements Makeup
         this.borderLeft = borderLeft;
     }
 
-    @Property(label = "Pose Name")
-    public String getPoseName()
+    @Property(label = "Pose", aliases = { "poseName" })
+    public Pose getPose()
     {
-        return this.poseName;
-    }
-
-    public void setPoseName( String poseName )
-    {
-        this.seq++;
-        this.poseName = poseName;
-        this.pose = Itchy.getGame().resources.getPose(this.poseName);
+        return this.pose;
     }
 
     public void setPose( Pose pose )
@@ -123,7 +113,8 @@ public class ScaledBackground implements Makeup
         this.seq++;
         this.pose = pose;
     }
-    
+
+
     @Override
     public OffsetSurface apply( OffsetSurface src )
     {
@@ -133,7 +124,7 @@ public class ScaledBackground implements Makeup
 
         Surface srcSurface = src.getSurface();
         Surface background = this.pose.getSurface();
-        
+
         // Find the amount of space in the background image once we have removed the borders
         int remainingWidth = background.getWidth() - this.borderLeft - this.borderRight;
         int remainingHeight = background.getHeight() - this.borderTop - this.borderBottom;
@@ -141,13 +132,13 @@ public class ScaledBackground implements Makeup
         // How much do we need to scale the background image, so that its remaining part (excluding borders) will fit the source image.
         double scaleX = ((double) srcSurface.getWidth()) / ((double) remainingWidth);
         double scaleY = ((double) srcSurface.getHeight()) / ((double) remainingHeight);
-        
+
         // We also need to scale the top and left border by the same amount.
         int scaledMarginX = (int) (this.borderLeft * scaleX);
         int scaledMarginY = (int) (this.borderTop * scaleY);
-        
+
         Surface zoomedBackground = background.zoom(scaleX, scaleY, true);
-        
+
         srcSurface.blit(zoomedBackground, scaledMarginX, scaledMarginY);
 
         return new SimpleOffsetSurface(zoomedBackground, src.getOffsetX() + scaledMarginX, src.getOffsetY() + scaledMarginY);

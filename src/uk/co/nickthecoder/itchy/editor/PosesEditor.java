@@ -168,7 +168,7 @@ public class PosesEditor extends SubEditor<PoseResource>
             }
         };
         ImagePose pose = this.currentResource.pose;
-        
+
         ImageComponent imgPose = new ImageComponent(pose.getSurface());
         imageContainer.addChild(imgPose);
         imgPose.addStyle("checkered");
@@ -190,12 +190,26 @@ public class PosesEditor extends SubEditor<PoseResource>
     @Override
     protected void update() throws MessageException
     {
-        FilenameComponent filename = (FilenameComponent) this.form.getComponent("file");
+        FilenameComponent filenameComponent = (FilenameComponent) this.form.getComponent("file");
+        File filename = filenameComponent.getValue();
         TextBox name = (TextBox) this.form.getComponent("name");
 
-        boolean exists = this.editor.resources.fileExists(filename.getText());
+        boolean exists = this.editor.resources.fileExists(filename.getPath());
         if (!exists) {
-            throw new MessageException("Filename not found");
+            throw new MessageException("File not found");
+        }
+
+        if (!this.editor.resources.fileIsWithin(filename)) {
+            File newFile = new File(getImageDirectory(), filename.getName());
+            if (newFile.exists()) {
+                throw new MessageException("File is outside of this game's resource directory.");
+            }
+            try {
+                Util.copyFile(this.editor.resources.resolveFile(filename), newFile);
+                filenameComponent.setText(this.editor.resources.makeRelativeFilename(newFile));
+            } catch (Exception e) {
+                throw new MessageException("Failed to copy image into the resources directory");
+            }
         }
 
         if (this.adding || (!name.getText().equals(this.currentResource.getName()))) {
@@ -205,7 +219,7 @@ public class PosesEditor extends SubEditor<PoseResource>
         }
 
         super.update();
-        
+
         if (this.adding) {
             this.editor.resources.addPose(this.currentResource);
         }
@@ -244,8 +258,19 @@ public class PosesEditor extends SubEditor<PoseResource>
                 PosesEditor.this.onAdd(file);
             }
         };
-        this.openDialog.setDirectory(this.editor.resources.getDirectory());
+        this.openDialog.setDirectory(getImageDirectory());
         this.openDialog.show();
+    }
+
+    public File getImageDirectory()
+    {
+        File dir = this.editor.resources.getDirectory();
+        File imageDir = new File(dir, "images");
+        if (imageDir.exists()) {
+            return imageDir;
+        } else {
+            return dir;
+        }
     }
 
     public void onAdd( File file )

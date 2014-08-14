@@ -1893,6 +1893,45 @@
        y1="363.45203"
        x2="49.095638"
        y2="379.63763" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#g-highlight"
+       id="linearGradient3496"
+       gradientUnits="userSpaceOnUse"
+       x1="20"
+       y1="47.362183"
+       x2="20"
+       y2="22.362183" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#g-lowlightt"
+       id="linearGradient3498"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(30,-189.72436)"
+       x1="15"
+       y1="77.362175"
+       x2="15"
+       y2="42.362179" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#g-button"
+       id="linearGradient5001"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(5,0)"
+       x1="45"
+       y1="117.36218"
+       x2="45"
+       y2="162.36218" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#g-highlight"
+       id="linearGradient5003"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(5,0)"
+       x1="55"
+       y1="117.36218"
+       x2="55"
+       y2="162.36218" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -1901,9 +1940,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="5.6"
-     inkscape:cx="155.84504"
-     inkscape:cy="556.16105"
+     inkscape:zoom="2.8"
+     inkscape:cx="195.20806"
+     inkscape:cy="646.97059"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -3336,6 +3375,48 @@
            x="169.01399"
            id="tspan3476"
            sodipodi:role="line">?</tspan></text>
+    </g>
+    <g
+       id="g4990"
+       inkscape:label="button"
+       transform="translate(139.64286,301.78571)"
+       style="opacity:0.93415638"
+       inkscape:export-filename="/home/nick/projects/itchy/resources/defaultGui/images/tooltip.png"
+       inkscape:export-xdpi="63.529999"
+       inkscape:export-ydpi="63.529999">
+      <rect
+         rx="5"
+         ry="5"
+         y="117.36218"
+         x="30"
+         height="45"
+         width="45"
+         id="rect4992"
+         style="fill:url(#linearGradient5001);fill-opacity:1;stroke:none"
+         inkscape:label="background" />
+      <rect
+         clip-path="url(#clipPath7246)"
+         style="fill:none;stroke:url(#linearGradient5003)"
+         id="rect4995"
+         width="45"
+         height="45"
+         x="30"
+         y="117.36218"
+         ry="5"
+         rx="5"
+         inkscape:label="highlight" />
+      <rect
+         inkscape:label="background"
+         style="fill:#000000;fill-opacity:0.69868994;stroke:none"
+         id="rect4997"
+         width="45"
+         height="45"
+         x="30"
+         y="117.36218"
+         ry="5"
+         rx="5"
+         inkscape:export-xdpi="63.529999"
+         inkscape:export-ydpi="63.529999" />
     </g>
   </g>
   <g

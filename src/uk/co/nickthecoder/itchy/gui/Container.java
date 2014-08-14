@@ -534,11 +534,13 @@ public class Container extends Component
         try {
             if ( this.contains( me ) ) {
                 for ( Component child : this.getChildren()) {
-                    me.x = origX - child.x;
-                    me.y = origY - child.y;
-                    Component temp = child.getComponent( me );
-                    if (temp != null) {
-                        return temp;
+                    if (child.isVisible()) {
+                        me.x = origX - child.x;
+                        me.y = origY - child.y;
+                        Component temp = child.getComponent( me );
+                        if (temp != null) {
+                            return temp;
+                        }
                     }
                 }
                 
