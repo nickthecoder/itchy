@@ -1620,6 +1620,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         if ((this.mode == MODE_SELECT) && (this.currentActor != null)) {
             if (this.currentActor.getStage() instanceof ZOrderStage) {
                 ((ZOrderStage) (this.currentActor.getStage())).zOrderUp(this.currentActor);
+                updateProperties();
             }
         }
     }
@@ -1628,20 +1629,23 @@ public class SceneDesigner implements MouseListener, KeyListener
     {
         if ((this.mode == MODE_SELECT) && (this.currentActor != null)) {
             ((ZOrderStage) (this.currentActor.getStage())).zOrderDown(this.currentActor);
+            updateProperties();
         }
     }
 
     private void onActorTop()
     {
         if ((this.mode == MODE_SELECT) && (this.currentActor != null)) {
-            ((ZOrderStage) (this.currentActor.getStage())).addBottom(this.currentActor);
+            ((ZOrderStage) (this.currentActor.getStage())).addTop(this.currentActor);
+            updateProperties();
         }
     }
 
     private void onActorBottom()
     {
         if ((this.mode == MODE_SELECT) && (this.currentActor != null)) {
-            ((ZOrderStage) (this.currentActor.getStage())).addTop(this.currentActor);
+            ((ZOrderStage) (this.currentActor.getStage())).addBottom(this.currentActor);
+            updateProperties();
         }
     }
 

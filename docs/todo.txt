@@ -1,14 +1,46 @@
-Compile jame on pi
+Rebuild Jame on i686 and win32, arm32
+    Package jame and itchy
 
 Bugs
 
-    ZOrder buttons work the wrong way round ?
+Inputs
+    Use in iThrust
 
+No error message when there are no fonts, and the user tries to add text to the scene design.
+
+
+Add onSceneCreated to class diagram(s)
+    Add to js and python templates
+Why isn't "iterator" method seen on Stage class on overview class diagram?
+    Actor.kill not on diagram.
+    
+
+See KeyInput - there is no super modifier, therefore KeyInput should not have it either.
 
 Look at companion, it has font, font size and color. Why ????
 
+
+Save an animation with delay/frames = 0 fails, but the error message throws an exception!!! - possibly Label's font not set
+    Catch the exception rather than let it crash the system
+    Fix the exception
+
 Should TextPose have a TextStyle, rather than individual attributes?
 
+Why have a Role interface if everything will end up using AbstractRole?
+    Why does Role have "birth" and yet everything uses onBirth() ? Ditto with other events.
+    Talk to Simon about it.
+
+
+Undo/Redo
+
+    Trouble with null/blank values for colorize.
+
+    Cut actor
+    Classname changes
+    Paste an Actor
+    Any other fields which don't use propertiesforms    
+
+    Toolbar buttons
 
 SceneDesigner for Text
     In the toolbox, if a Costume has no "default" pose, but does have a "default" TextStyle, then it is text.
@@ -28,40 +60,12 @@ Sprite Sheet Pose
     Allow multiple poses to be loaded from one image, and define the rectangle of each sub-image.
 
 Group Costumes on the SceneDesigner's toolbox, so that similar costumes can be displayed as a single item.
-Clicking it reveals a popup, where the actual Costume can be selected.
-Use this for Pyrox's machines, one way streets, and maybe even the walls.
-    A costume can have a "Group Leader" field, which is the name of the Costume that is displayed as the
-    main icon in the scene design toolbox.
+    Clicking it reveals a popup, where the actual Costume can be selected.
+    Use this for Pyrox's machines, one way streets, and maybe even the walls.
+        A costume can have a "Group Leader" field, which is the name of the Costume that is displayed as the
+        main icon in the scene design toolbox. Similar impl as "costume base"
 
 SceneDesigner : select groups of actors, and move/delete them together.
-
-Add onSceneCreated to class diagram(s)
-    Add to js and python templates
-
-Why have a Role interface if everything will end up using AbstractRole?
-    Why does Role have "birth" and yet everything uses onBirth() ? Ditto with other events.
-    Talk to Simon about it.
-
-
-Inputs
-    Use in iThrust
-
-See KeyInput - there is no super modifier, therefore KeyInput should not have it either.
-
-Rebuild Jame on i686 and win32
-
-Save an animation with delay/frames = 0 fails, but the error message throws an exception!!! - possibly Label's font not set
-    Catch the exception rather than let it crash the system
-    Fix the exception
-
-
-Why isn't "iterator" method seen on Stage class on overview class diagram?
-    Actor.kill not on diagram.
-
-SceneButton not in the list of Roles when starting a new project.
-    
-No error message when there are no fonts, and the user tries to add text to the scene design.
-
 
 
 Lazy loading of some poses (If each contributor has their own picture, don't want to load them all, unless
@@ -69,36 +73,15 @@ the player visits their page).
     Create LazyLoadImagePose?? Relationship to ImagePose??
     Just add a "lazy" attribute to ImagePose
 
----
-
-Undo/Redo
-
-    Trouble with null/blank values for colorize.
-
-    Cut actor
-    Classname changes
-    Paste an Actor
-    Any other fields which don't use propertiesforms    
-
-    Toolbar buttons
-
-
 Allow creation of new Role objects from Javascript i.e. create a ScriptedRole and the script in one go.
     Constructor takes the ScriptedRole, or creates it if undefined.
     Use the same pattern to create View and Stage objects too, so that a TorusView can be created.
     Create TorusView and TorusCollisionStrategy
 
 
-Bugs
-====
 
-When testing a Rain scene, it doesn't use the normal high scores - is it using the editor's preferences?
-
-Surface.copy to use setEnableAlpha(false) rather than composite.
-    Is there a bug in setAlpha? If not, where is it?
-
-TODO
-====
+Unordered
+=========
 
 Dynamic class loader for game jar files, which live in resources/foo/lib/ or ./lib when outside of itchy's resources directory.
 
@@ -197,8 +180,8 @@ Catch all ScriptExceptions
     An icon on the popup Layer shows when a new error has occurred. Click to open the log viewer.
         "Clear" button will remove the icon from the popup layer. 
 
-Later
-=====
+Much Later
+==========
 
 Simple convolution filter
     Filters don't need to be square.
@@ -269,10 +252,6 @@ Component : Override all rules. Currently only Font can be overridden.
     Allow to be reset to default (i.e. be restyled). 
 
 Create a game which uses the GUI        
-
-The Behaviours should have the tags, because its them that have the Interface.
-Also, I could change the behaviour, and the tags would magically vanish (without the "removeAll"!
-Don't use tags for "active".
 
 Container.render should get the NinePatches to render directly onto the gc, not via a temp surface.
 RenderableInterface is rubbish. NinePatches should be told where and how large to draw themselves

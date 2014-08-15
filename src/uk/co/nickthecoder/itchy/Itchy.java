@@ -87,6 +87,7 @@ public class Itchy
         registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.role.TextValue.class.getName()));
         registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.role.QuitButton.class.getName()));
         registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.role.ProgressBar.class.getName()));
+        registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.role.SceneButton.class.getName()));
 
         registry.add(new ClassName(CostumeProperties.class, CostumeProperties.class.getName()));
 

@@ -705,13 +705,13 @@ public class Actor implements PropertySubject<Actor>
     public void setZOrder( int value )
     {
         if (this.zOrder != value) {
-            if (this.stage != null) {
+            if (this.stage == null) {
+                this.zOrder = value;
+            } else {
                 Stage stage = this.stage;
                 stage.remove(this);
                 this.zOrder = value;
                 stage.add(this);
-            } else {
-                this.zOrder = value;
             }
         }
     }

@@ -40,6 +40,14 @@ public class ZOrderStage extends AbstractStage
         result.addAll(this.actors);
         return result;
     }
+    
+    @Override
+    public void clear()
+    {
+        for (Actor actor : new ArrayList<Actor>(getActors())) {
+            actor.kill();
+        }
+    }
 
     @Override
     public void add( Actor actor )
@@ -50,8 +58,8 @@ public class ZOrderStage extends AbstractStage
         actor.setStageAttribute(this);
         this.actors.add(actor);
 
-        super.add(actor);
-    }
+        super.add(actor);        
+    }    
 
     @Override
     public void remove( Actor actor )
@@ -100,18 +108,11 @@ public class ZOrderStage extends AbstractStage
         this.add(actor);
     }
 
-    @Override
-    public void clear()
-    {
-        for (Actor actor : new ArrayList<Actor>(getActors())) {
-            actor.kill();
-        }
-    }
-
     public void zOrderUp( Actor actor )
     {
         Actor higher = this.actors.higher(actor);
         if (higher != null) {
+            actor.removeFromStage();
             actor.setZOrderAttribute(higher.getZOrder() + 1);
             this.add(actor);
         }
@@ -121,6 +122,7 @@ public class ZOrderStage extends AbstractStage
     {
         Actor lower = this.actors.lower(actor);
         if (lower != null) {
+            actor.removeFromStage();
             actor.setZOrderAttribute(lower.getZOrder() - 1);
             this.add(actor);
         }
