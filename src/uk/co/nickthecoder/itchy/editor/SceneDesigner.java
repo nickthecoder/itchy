@@ -32,6 +32,7 @@ import uk.co.nickthecoder.itchy.StageConstraint;
 import uk.co.nickthecoder.itchy.StageView;
 import uk.co.nickthecoder.itchy.TextPose;
 import uk.co.nickthecoder.itchy.View;
+import uk.co.nickthecoder.itchy.ZOrderStageInterface;
 import uk.co.nickthecoder.itchy.ZOrderStage;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Button;
@@ -1412,8 +1413,8 @@ public class SceneDesigner implements MouseListener, KeyListener
             // Place on top if no default zOrder defined for the costume.
             Stage stage = this.currentStageView.getStage();
             if (actor.getZOrder() == 0) {
-                if (stage instanceof ZOrderStage) {
-                    ((ZOrderStage) stage).addTop(actor);
+                if (stage instanceof ZOrderStageInterface) {
+                    ((ZOrderStageInterface) stage).addTop(actor);
                 } else {
                     stage.add(actor);
                 }
@@ -1618,9 +1619,9 @@ public class SceneDesigner implements MouseListener, KeyListener
     private void onActorUp()
     {
         if ((this.mode == MODE_SELECT) && (this.currentActor != null)) {
-            if (this.currentActor.getStage() instanceof ZOrderStage) {
-                ((ZOrderStage) (this.currentActor.getStage())).zOrderUp(this.currentActor);
-                updateProperties();
+            Stage stage = this.currentActor.getStage();
+            if (stage instanceof ZOrderStageInterface) {
+                ((ZOrderStageInterface) (stage)).zOrderUp(this.currentActor);
             }
         }
     }
@@ -1628,7 +1629,10 @@ public class SceneDesigner implements MouseListener, KeyListener
     private void onActorDown()
     {
         if ((this.mode == MODE_SELECT) && (this.currentActor != null)) {
-            ((ZOrderStage) (this.currentActor.getStage())).zOrderDown(this.currentActor);
+            Stage stage = this.currentActor.getStage();
+            if (stage instanceof ZOrderStageInterface) {
+                ((ZOrderStageInterface) (stage)).zOrderDown(this.currentActor);
+            }
             updateProperties();
         }
     }
@@ -1636,7 +1640,10 @@ public class SceneDesigner implements MouseListener, KeyListener
     private void onActorTop()
     {
         if ((this.mode == MODE_SELECT) && (this.currentActor != null)) {
-            ((ZOrderStage) (this.currentActor.getStage())).addTop(this.currentActor);
+            Stage stage = this.currentActor.getStage();
+            if (stage instanceof ZOrderStageInterface) {
+                ((ZOrderStageInterface) (stage)).addTop(this.currentActor);
+            }
             updateProperties();
         }
     }
@@ -1644,7 +1651,10 @@ public class SceneDesigner implements MouseListener, KeyListener
     private void onActorBottom()
     {
         if ((this.mode == MODE_SELECT) && (this.currentActor != null)) {
-            ((ZOrderStage) (this.currentActor.getStage())).addBottom(this.currentActor);
+            Stage stage = this.currentActor.getStage();
+            if (stage instanceof ZOrderStageInterface) {
+                ((ZOrderStageInterface) (stage)).addBottom(this.currentActor);
+            }
             updateProperties();
         }
     }
@@ -1817,8 +1827,8 @@ public class SceneDesigner implements MouseListener, KeyListener
 
     private void addTop( Stage stage, Actor actor )
     {
-        if (stage instanceof ZOrderStage) {
-            ((ZOrderStage) stage).addTop(actor);
+        if (stage instanceof ZOrderStageInterface) {
+            ((ZOrderStageInterface) stage).addTop(actor);
         } else {
             stage.add(actor);
         }

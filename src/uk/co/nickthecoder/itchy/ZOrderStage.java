@@ -14,7 +14,7 @@ import java.util.TreeSet;
  * Uses the Z Order attribute on Actor to order the actors front to back. The actor's with the lower Z Order are below those with a higher Z
  * Order. If two actors share the same Z Order, then the newest Actor will be above.
  */
-public class ZOrderStage extends AbstractStage
+public class ZOrderStage extends AbstractStage implements ZOrderStageInterface
 {
     /**
      * The list of actors visible on this layer. The order of the list is the order they will be drawn, and therefore determines the
