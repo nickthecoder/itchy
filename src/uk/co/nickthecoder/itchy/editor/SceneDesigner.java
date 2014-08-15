@@ -1806,6 +1806,7 @@ public class SceneDesigner implements MouseListener, KeyListener
     {
         Font font = this.editor.resources.getDefaultFont();
         if (font == null) {
+            new MessageBox("Cannot add text without a font", "Exit the scene designer, and add a font to your game.").show();
             return;
         }
         String text = "newText";

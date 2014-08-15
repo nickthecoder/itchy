@@ -6,8 +6,6 @@ Bugs
 Inputs
     Use in iThrust
 
-No error message when there are no fonts, and the user tries to add text to the scene design.
-
 
 Add onSceneCreated to class diagram(s)
     Add to js and python templates
