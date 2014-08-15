@@ -51,7 +51,6 @@ public abstract class KeyInputPicker extends Window
                 keyInput.shiftModifier = KeyInputPicker.this.shift.getValue();
                 keyInput.altModifier = KeyInputPicker.this.alt.getValue();
                 keyInput.metaModifier = KeyInputPicker.this.meta.getValue();
-                keyInput.superModifier = KeyInputPicker.this.supr.getValue();
                 
                 KeyInputPicker.this.pick(keyInput);
             }
@@ -287,10 +286,6 @@ public abstract class KeyInputPicker extends Window
         this.meta = new CheckBox();
         modifiers.addChild(makeModifier(this.meta, "meta"));
 
-        this.supr = new CheckBox();
-        modifiers.addChild(makeModifier(this.supr, "super"));
-
-
         return result;
     }
 
@@ -308,7 +303,6 @@ public abstract class KeyInputPicker extends Window
     public CheckBox ctrl;
     public CheckBox shift;
     public CheckBox alt;
-    public CheckBox supr;
     public CheckBox meta;
     
     protected Component createKeyButton( ButtonGroup buttonGroup, final KeysEnum key )

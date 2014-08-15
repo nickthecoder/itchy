@@ -24,10 +24,14 @@ public class BuiltInColorize extends BuiltInMakeup
         }
 
         Surface colorSurface = new Surface(os.getSurface().getWidth(), os.getSurface().getHeight(), true);
-        Surface result = os.getSurface();
-        // if (os.isShared()) {
-        result = result.copy();
-        // }
+        Surface result;
+        
+        if (os.isShared()) {
+            result = os.getSurface().copy();
+        } else {
+            // Should be able to avoid the above copy if os is not shared.
+            result = os.getSurface();
+        }
         colorSurface.fill(this.appearance.getColorize());
         colorSurface.blit(result);
         colorSurface.free();

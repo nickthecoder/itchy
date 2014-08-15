@@ -1,10 +1,12 @@
+Bugs
+
+
+See KeyInput - there is no super modifier, therefore KeyInput should not have it either.
+
+
 Rebuild Jame on i686 and win32, arm32
     Package jame and itchy
 
-Bugs
-
-Inputs
-    Use in iThrust
 
 
 Add onSceneCreated to class diagram(s)
@@ -12,8 +14,6 @@ Add onSceneCreated to class diagram(s)
 Why isn't "iterator" method seen on Stage class on overview class diagram?
     Actor.kill not on diagram.
     
-
-See KeyInput - there is no super modifier, therefore KeyInput should not have it either.
 
 Look at companion, it has font, font size and color. Why ????
 

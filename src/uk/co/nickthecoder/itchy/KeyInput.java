@@ -17,7 +17,6 @@ public class KeyInput
     public boolean shiftModifier;
     public boolean metaModifier;
     public boolean altModifier;
-    public boolean superModifier;
 
     public static KeyInput parseKeyInput( String str )
         throws Exception
@@ -38,10 +37,8 @@ public class KeyInput
             } else if (part.equals("alt")) {
                 result.altModifier = true;
 
-            } else if (part.equals("super")) {
-                result.superModifier = true;
             } else {
-                throw new Exception("Expected shift,meta,alt or super, but found : " + part);
+                throw new Exception("Expected shift,meta, or alt, but found : " + part);
             }
 
         }
@@ -81,9 +78,6 @@ public class KeyInput
         if (this.altModifier) {
             buffer.append("alt+");
         }
-        if (this.superModifier) {
-            buffer.append("super+");
-        }
 
         buffer.append(this.key.name());
 
@@ -102,10 +96,6 @@ public class KeyInput
             if (this.metaModifier != (ke.modifier(ModifierKey.LMETA) || ke.modifier(ModifierKey.RMETA))) {
                 return false;
             }
-            // TO DO Hmm, there is no super modifier. If so, then we should remove it from Input too.
-            //if (this.superModifier != (ke.modifier(ModifierKey.) || ke.modifier(ModifierKey.RSUPER))) {
-            //    return false;
-            //}
             if (this.altModifier != (ke.modifier(ModifierKey.LALT) || ke.modifier(ModifierKey.RALT))) {
                 return false;
             }
@@ -127,9 +117,6 @@ public class KeyInput
             return false;
         }
         if (this.altModifier && ! Itchy.isAltDown()) {
-            return false;
-        }
-        if (this.superModifier && ! Itchy.isSuperDown()) {
             return false;
         }
         if (this.metaModifier && ! Itchy.isMetaDown()) {

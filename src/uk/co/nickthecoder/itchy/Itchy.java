@@ -368,14 +368,6 @@ public class Itchy
         return keyboardState[Keys.LMETA] || keyboardState[Keys.RMETA];
     }
 
-    /**
-     * Tests state of either super keys A convenience method, the same as isKeyDown( Keys.LSUPER ) || isKeyDown( Keys.RSUPER )
-     */
-    public static boolean isSuperDown()
-    {
-        return keyboardState[Keys.LSUPER] || keyboardState[Keys.RSUPER];
-    }
-
     private static void processEvent( Event event )
     {
 
