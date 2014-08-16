@@ -19,9 +19,6 @@ public interface Makeup extends PropertySubject<Makeup>
 
     /**
      * Updates the geometric that would occur if this makeup would actually be applied.
-     * 
-     * @param src
-     * @return If the geometry is unchanged, then will be the save as the source.
      */
     public void applyGeometry( TransformationData src );
 

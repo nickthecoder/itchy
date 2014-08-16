@@ -119,7 +119,7 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
      * Another example: If your game is on a hex grid, you might want your actors to rotate in jumps of 60 degrees. In which case, you would
      * replace the rotateAndScaleMakeup with a customised version.
      * <p>
-     * Note that {@link #normalMakeup} is NOT the same as {@link getMakeup()}. normalMakeup is a wrapper around the result of getMakeup().
+     * Note that {@link #normalMakeup} is NOT the same as {@link #getMakeup()}. normalMakeup is a wrapper around the result of getMakeup().
      * This lets you call setMakeup(x), without having to remove the old makeup from the pipeline, and adding the new one back into the
      * correct place.
      * <p>

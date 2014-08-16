@@ -44,7 +44,7 @@ import uk.co.nickthecoder.jame.event.WindowEvent;
  * there would be one Stage with two Views of it (one for each player).
  * <p>
  * The Game, in partnership with its {@link Director}, is responsible for coordinating all of these pieces. Each frame (sixty times a
- * second), the game's {@link #tick()} method is called. This will call every Actor's Role's {@link Role#tick()} method, and it is the
+ * second), the game's {@link #tick()} method is called. This will call every Actor's Role's {@link Role#animateAndTick()} method, and it is the
  * Role's tick method that moves actors. The {@link SceneDesigner}'s tick method is also called once every frame.
  * <p>
  * After all the ticking has taken place, its time to draw to the screen. Every View is rendered (drawn), and what you see on the screen is

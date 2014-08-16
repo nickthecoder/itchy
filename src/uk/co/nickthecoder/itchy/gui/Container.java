@@ -521,8 +521,6 @@ public class Container extends Component
     }
     /**
      * Return the lowest level component at the given coordinates.  
-     * @param x
-     * @param y
      * @return Null if (x,y) is not within this RootContainer, otherwise, the lowest level component containing (x,y).
      * If there is no lower level component, then this RootContainer is returned. 
      */

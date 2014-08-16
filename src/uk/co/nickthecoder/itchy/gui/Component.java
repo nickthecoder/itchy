@@ -660,7 +660,7 @@ public abstract class Component implements Focusable
     /**
      * Given an event whose x,y are relative to this Component, check if the event is within this Component.
      * @param event
-     * @return
+     * @return true iff the mouse event took place within the component.
      */
     public boolean contains( MouseEvent event )
     {
@@ -670,7 +670,7 @@ public abstract class Component implements Focusable
     /**
      * Given an event whose x,y are relative to my parent Container, check if the event is within this Component.
      * @param event
-     * @return
+     * @return true iff the mouse event took place within this Component.
      */
     public boolean contains2( MouseEvent event )
     {

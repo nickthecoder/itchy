@@ -51,15 +51,15 @@ public interface Role extends MessageListener, Cloneable, PropertySubject<Role>
     public Set<String> getTags();
 
     /**
-     * Each role can optionally have an ID which is set in the scene designer. Game code can then search for a particular role
-     * using Game.findRoleById.
+     * Each role can optionally have an ID which is set in the scene designer. Game code can then search for a particular role using
+     * Game.findRoleById.
      * 
      * @return The id for this role, or null if it has no id.
      */
-    public String getId(); 
-    
+    public String getId();
+
     public void setId( String id );
-    
+
     /**
      * The collision strategy is usually determined by {@link SceneDirector#getCollisionStrategy(Actor)}, when the Role is {@link #born},
      * but individual roles are free to ignore this, and choose their own collision strategy. The default strategy is to compare this role's
@@ -67,7 +67,7 @@ public interface Role extends MessageListener, Cloneable, PropertySubject<Role>
      * simple to use, but will be very inefficient if there are large numbers of actors to test against.
      * 
      * @return The collision strategy used by this Role. It may be shared by many roles, or unique to one role.
-     * @see {@link CollisionStrategy} for details of how to check for collisions.
+     * @see CollisionStrategy CollisionStrategy
      */
     public CollisionStrategy getCollisionStrategy();
 
@@ -80,13 +80,13 @@ public interface Role extends MessageListener, Cloneable, PropertySubject<Role>
     void born();
 
     /**
-     * Called while starting a new scene, after all of the actors have been created and added to the grid,
-     * and just before the sceneDirector's onActivate method is called.
+     * Called while starting a new scene, after all of the actors have been created and added to the grid, and just before the
+     * sceneDirector's onActivate method is called.
      * <p>
      * Should only be called internally by Itchy.
      */
     void sceneCreated();
-    
+
     /**
      * Called when the role's actor is killed ie from {@link Actor#kill()}.
      * <p>
@@ -129,7 +129,7 @@ public interface Role extends MessageListener, Cloneable, PropertySubject<Role>
      * obj.getClass().getName(), however, for scripted role's it will be a string which identifies the name of the script. This will include
      * the script's suffix. e.g. "Alien.js".
      * 
-     * @return
+     * @return The ClassName for this Role.
      */
     public ClassName getClassName();
 

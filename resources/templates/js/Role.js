@@ -24,7 +24,7 @@ ${NAME} = Class({
     }
 
     // Other methods include :
-    // onDetach, onKill, onMouseDown, onMouseUp, onMouseMove
+    // onSceneCreated, onDetach, onKill, onMouseDown, onMouseUp, onMouseMove
 });
 
 ${NAME}.properties = new java.util.ArrayList();

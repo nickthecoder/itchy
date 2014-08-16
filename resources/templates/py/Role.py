@@ -38,7 +38,7 @@ class ${Name}(AbstractRole) :
 
 
     # TODO Other methods include :
-    # onDetach, onKill, onMouseDown, onMouseUp, onMouseMove
+    # onSceneCreated, onDetach, onKill, onMouseDown, onMouseUp, onMouseMove
 
     # Boiler plate code - no need to change this
     def getProperties(self):
