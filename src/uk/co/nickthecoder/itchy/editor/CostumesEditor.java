@@ -459,7 +459,7 @@ public class CostumesEditor extends SubEditor<CostumeResource>
         for (String name : costume.getTextStyleNames()) {
             for (TextStyle textStyle : costume.getTextStyleChoices(name)) {
 
-                FontResource fr = this.getResources().getFontResource(textStyle.font);
+                FontResource fr = this.getResources().getFontResource(textStyle.getFont());
                 SimpleTableModelRow row = new SimpleTableModelRow();
                 row.add(name);
                 row.add("Font");
@@ -708,7 +708,7 @@ public class CostumesEditor extends SubEditor<CostumeResource>
 
             } else if (data instanceof TextStyle) {
                 this.eventTextStyle = (TextStyle) data;
-                FontResource fr = this.getResources().getFontResource(this.eventTextStyle.font);
+                FontResource fr = this.getResources().getFontResource(this.eventTextStyle.getFont());
                 this.eventFontPickerButton = new FontPickerButton(this.getResources(), fr);
                 grid.addRow("Font", this.eventFontPickerButton);
                 
@@ -799,7 +799,7 @@ public class CostumesEditor extends SubEditor<CostumeResource>
                 costume.addPose(name, this.eventPosePickerButton.getValue());
 
             } else if (data instanceof TextStyle) {
-                this.eventTextStyle.font = this.eventFontPickerButton.getValue().font;
+                this.eventTextStyle.setFont( this.eventFontPickerButton.getValue().font );
                 costume.addTextStyle(name, this.eventTextStyle);
 
             } else if (data instanceof AnimationResource) {

@@ -9,7 +9,6 @@ import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Costume;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Pose;
-import uk.co.nickthecoder.itchy.TextPose;
 import uk.co.nickthecoder.jame.RGBA;
 
 /**
@@ -53,12 +52,6 @@ public abstract class Companion extends AbstractRole
 
     public RGBA colorize;
 
-    public String text;
-
-    public int fontSize = 20; // Arbitrary default size.
-
-    public RGBA color;
-
     public Companion( Actor actor )
     {
         this.parent = actor;
@@ -70,7 +63,6 @@ public abstract class Companion extends AbstractRole
         this.heading = this.source.getHeading();
         this.colorize = this.source.getAppearance().getColorize();
     }
-
 
     public void setPose( String poseName )
     {
@@ -87,16 +79,6 @@ public abstract class Companion extends AbstractRole
         Actor actor = new Actor(this.costume);
         if (this.pose != null) {
             actor.getAppearance().setPose(this.pose);
-        }
-        if (this.text != null) {
-            if (actor.getAppearance().getPose() instanceof TextPose) {
-                TextPose textPose = (TextPose) (actor.getAppearance().getPose());
-                textPose.setText(this.text);
-                textPose.setFontSize(this.fontSize);
-                if (this.color != null) {
-                    textPose.setColor(this.color);
-                }
-            }
         }
 
         if (this.eventName != null) {
@@ -132,8 +114,9 @@ public abstract class Companion extends AbstractRole
 
         public C getCompanion()
         {
-            return companion;
+            return this.companion;
         }
+
         /**
          * The Companion can have a different costume to the source actor's costume. For simple Companions, this is not needed. However, if
          * the Companion has many Poses, sounds or animations, it may be better for it to have its own costume rather than share the
@@ -235,33 +218,6 @@ public abstract class Companion extends AbstractRole
         public B eventName( String eventName )
         {
             this.companion.eventName = eventName;
-            return getThis();
-        }
-
-        /**
-         * When the Pose is a TextPose, then use this text
-         */
-        public B text( String text )
-        {
-            this.companion.text = text;
-            return getThis();
-        }
-
-        /**
-         * When the Pose is a TextPose, then use this font size
-         */
-        public B fontSize( int fontSize )
-        {
-            this.companion.fontSize = fontSize;
-            return getThis();
-        }
-
-        /**
-         * When the Pose is a TextPose, then use this colour
-         */
-        public B color( RGBA color )
-        {
-            this.companion.color = color;
             return getThis();
         }
 

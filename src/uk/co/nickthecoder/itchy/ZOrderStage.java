@@ -52,13 +52,11 @@ public class ZOrderStage extends AbstractStage implements ZOrderStageInterface
     @Override
     public void add( Actor actor )
     {
-        if (actor.getStage() != null) {
-            actor.getStage().remove(actor);
-        }
-        actor.setStageAttribute(this);
+        actor.removeFromStage();
         this.actors.add(actor);
 
         super.add(actor);        
+        actor.setStageAttribute(this);
     }    
 
     @Override

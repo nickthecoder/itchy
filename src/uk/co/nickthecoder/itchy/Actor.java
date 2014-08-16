@@ -242,8 +242,22 @@ public class Actor implements PropertySubject<Actor>
         }
     }
 
+    /**
+     * Called by a Stage, AFTER the actor is added to their collection. The order is vital to ensure that the stage and the actor
+     * are fully formed when onBirth is called.
+     * Also called with a null value just BEFORE the actor is removed from a stage's collection. This order isn't so important.
+     * @param stage
+     */
     void setStageAttribute( Stage stage )
     {
+        /*
+        // Stages should always add the actor to their collection before calling setStageAttribute
+        if (stage != null) {
+            if (!stage.getActors().contains(this)) {
+                throw new RuntimeException( "Setting stage attribute for a stage which doesn't contain me.");
+            }
+        }
+        */
         this.stage = stage;
         checkFullyCreated();
     }

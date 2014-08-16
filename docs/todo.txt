@@ -1,9 +1,21 @@
 Bugs
-   
-Change Companion hierarchy to have Builder classes with the fluent stuff in them.
+
+    ithrust 2nd level collision detection of ship fails.
+    
     
 Look at companion, it has font, font size and color. Why ????
+    Check sub classes for get/set for font colour size etc.
+    Check sub classes for margins???
+    WTF is the "companion" method. Gate uses it to 
 
+Talk and TalkProjectile
+    Talk doesn't have "fade", which is the only reason that Gate uses TalkProjectile (it doesn't move!!!)
+    Should talk use animations to fade and die or a constant, hard-wired fade? 
+
+Thrust goes too fast sometimes.
+
+Put builders on extras class diagram. the roles are shown without their attributes
+   
 Change all "copy" methods to clone.
 
 Save an animation with delay/frames = 0 fails, but the error message throws an exception!!! - possibly Label's font not set

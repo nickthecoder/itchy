@@ -18,7 +18,7 @@ import uk.co.nickthecoder.itchy.makeup.ScaledBackground;
 import uk.co.nickthecoder.itchy.util.NinePatch;
 import uk.co.nickthecoder.jame.RGBA;
 
-public class Talk extends Follower
+public class TalkProjectile extends Projectile
 {
     public String text = "";
 
@@ -26,7 +26,7 @@ public class Talk extends Follower
 
     public TextStyle textStyle;
 
-    public Talk( Actor following )
+    public TalkProjectile( Actor following )
     {
         super(following);
         createTextStyle();
@@ -89,8 +89,8 @@ public class Talk extends Follower
         return result;
     }
 
-    public static abstract class AbstractTalkBuilder<C extends Talk, B extends AbstractTalkBuilder<C, B>>
-        extends AbstractFollowerBuilder<C, B>
+    public static abstract class AbstractTalkProjectileBuilder<C extends TalkProjectile, B extends AbstractTalkProjectileBuilder<C, B>>
+        extends AbstractProjectileBuilder<C, B>
     {
         public B text( String text )
         {

@@ -80,7 +80,7 @@ public class FontsEditor extends SubEditor<FontResource>
             Costume costume = cr.getCostume();
             for (String resourceName : costume.getTextStyleNames()) {
                 for (TextStyle ts : costume.getTextStyleChoices(resourceName)) {
-                    if (ts.font == fontResource.font) {
+                    if (ts.getFont() == fontResource.font) {
                         usedBy.add(costumeName);
                     }
                 }
