@@ -26,7 +26,7 @@ Drop = Class({
         if ( this.actor.getY() < 0) {
 
             // Create a splash - lots of tiny water droplets (which aren't deadly)
-            new itchy.role.Explosion(this.actor)
+            new itchy.role.ExplosionBuilder(this.actor)
                 .projectiles(5).gravity(-0.2)
                 .fade(0.9, 3.5).speed(-1.5, 1.5).vy(5,8)
                 .pose("droplet").createActor();

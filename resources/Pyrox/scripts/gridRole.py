@@ -2,8 +2,8 @@ from uk.co.nickthecoder.itchy import Role
 from uk.co.nickthecoder.itchy import AbstractRole
 from uk.co.nickthecoder.itchy.util import ClassName
 from uk.co.nickthecoder.itchy.extras import Fragment
-from uk.co.nickthecoder.itchy.role import Explosion
-from uk.co.nickthecoder.itchy.role import Talk
+from uk.co.nickthecoder.itchy.role import ExplosionBuilder
+from uk.co.nickthecoder.itchy.role import TalkBuilder
 
 from java.util import ArrayList
 
@@ -47,7 +47,7 @@ class GridRole(AbstractRole) :
         else :
             message = message.replace("\\n","\n")
 
-        talk = Talk(self) \
+        talk = TalkBuilder(self.actor) \
             .style("talk-style") \
             .offset(self.talkX, self.talkY).alignment( 1, 1 ) \
             .text(message)
@@ -59,7 +59,7 @@ class GridRole(AbstractRole) :
         self.talkActor.setCostume( self.getActor().getCostume() )
         self.talkActor.event("talk-fade")
                
-    def adjustTalk( self, talk ) :
+    def adjustTalk( self, talkBuilder ) :
         pass;
 
     def moveTo( self, x, y ) :
@@ -195,7 +195,7 @@ class GridRole(AbstractRole) :
 
     def explode( self ) :        
     
-        Explosion(self.actor) \
+        ExplosionBuilder(self.actor) \
             .projectiles(10) \
             .gravity(-0.2).fade(0.9, 3.5).speed(0.1, 1.5).vy(5) \
             .pose("fragment") \

@@ -1,7 +1,7 @@
 from uk.co.nickthecoder.itchy import Role
 from uk.co.nickthecoder.itchy import AbstractRole
 from uk.co.nickthecoder.itchy.util import ClassName
-from uk.co.nickthecoder.itchy.role import Explosion
+from uk.co.nickthecoder.itchy.role import ExplosionBuilder
 
 from java.util import ArrayList
 
@@ -42,7 +42,7 @@ class Grenade(Faller) :
         if self.fallen :
             a = self.lookNorth()
             b = self.lookSouth()
-            Explosion(self.actor) \
+            ExplosionBuilder(self.actor) \
                 .costume("explosion").eventName("default") \
                 .projectiles(10).projectilesPerTick(1) \
                 .vy(-3, 3).vx( -0.5, 0.5 ) \
@@ -50,7 +50,7 @@ class Grenade(Faller) :
         else :
             a = self.lookEast()
             b = self.lookWest()
-            Explosion(self.actor) \
+            ExplosionBuilder(self.actor) \
                 .costume("explosion").eventName("default") \
                 .projectiles(10).projectilesPerTick(1) \
                 .vx(-3, 3).vy( -0.5, 0.5 ) \

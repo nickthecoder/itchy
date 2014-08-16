@@ -21,7 +21,8 @@ Ship = Class({
         this.inputFire = itchy.Input.find("fire")
         this.inputCheat = itchy.Input.find("cheat")
         
-        new itchy.role.OnionSkin(this.actor).alpha(128).every(5).fade(3).createActor();
+        new itchy.role.OnionSkinBuilder(this.actor)
+            .alpha(128).every(5).fade(3).createActor();
 
         this.rotationSpeed = this.getCostumeProperties().rotationSpeed;
         this.thrust = this.getCostumeProperties().thrust;
@@ -38,7 +39,7 @@ Ship = Class({
 
         sceneDirectorScript.ship = this;
 
-        new itchy.role.Explosion(this.actor)
+        new itchy.role.ExplosionBuilder(this.actor)
             .companion("warp").eventName("default")
             .distance(30, -80).spread(0, 360).spread(0, 360)
             .randomSpread(false).speed(0, 0).projectiles(40)
@@ -58,7 +59,8 @@ Ship = Class({
 
     warp : function() {
         for ( var i = 0; i < 3; i++) {
-            new itchy.role.Explosion(this.actor).companion("warp")
+            new itchy.role.ExplosionBuilder(this.actor)
+                .companion("warp")
                 .spread(i * 120, 360 + i * 120).vx(this.vx).vy(this.vy).distance(100)
                 .speed(-6, 0).projectiles(20).projectilesPerTick(1).randomSpread(false)
                 .alpha(0).fade(-3)
@@ -80,7 +82,7 @@ Ship = Class({
             this.vx += Math.cos(theta) * this.thrust;
             this.vy += Math.sin(theta) * this.thrust;
             var heading = this.actor.getDirection();
-            new itchy.role.Explosion(this.actor)
+            new itchy.role.ExplosionBuilder(this.actor)
                 .projectiles(4).follow().projectilesPerTick(1).spread(heading + 160, heading + 200)
                 .distance(40).randomSpread().speed(1, 2, 0, 0).fade(3)
                 .eventName("spark").createActor();
@@ -111,11 +113,11 @@ Ship = Class({
         // ship in all directions.
         // The large "part" pieces move slowly, and the smaller "fragment"
         // pieces move quickly.
-        new itchy.role.Explosion(this.actor)
+        new itchy.role.ExplosionBuilder(this.actor)
             .speed(0.5, 0, 1, 0).fade(3).spin(-1, 1).rotate(true).eventName("part").projectiles(4)
             .createActor();
         
-        new itchy.role.Explosion(this.actor)
+        new itchy.role.ExplosionBuilder(this.actor)
             .speed(1.5, 0, 4, 0).fade(3).spin(-1, 1).rotate(true).eventName("fragment").projectiles(20)
             .createActor();
 

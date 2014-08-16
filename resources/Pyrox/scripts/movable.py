@@ -2,7 +2,6 @@ from uk.co.nickthecoder.itchy import Role
 from uk.co.nickthecoder.itchy import AbstractRole
 from uk.co.nickthecoder.itchy.util import ClassName
 from uk.co.nickthecoder.itchy.extras import Fragment
-from uk.co.nickthecoder.itchy.role import Explosion
 
 from java.util import ArrayList
 

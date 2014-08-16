@@ -7,7 +7,7 @@ package uk.co.nickthecoder.itchy.test;
 import uk.co.nickthecoder.itchy.AbstractRole;
 import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.role.PlainRole;
-import uk.co.nickthecoder.itchy.role.Projectile;
+import uk.co.nickthecoder.itchy.role.ProjectileBuilder;
 
 public class TestProjectiles extends AbstractRole
 {
@@ -67,9 +67,9 @@ public class TestProjectiles extends AbstractRole
         getActor().setRole(new PlainRole());
     }
 
-    private Projectile test0()
+    private ProjectileBuilder test0()
     {
-        return new Projectile(this)
+        return new ProjectileBuilder(getActor())
             .offset(this.offsetX, this.offsetY)
             .offsetForwards(this.offsetForwards).offsetSidewards(this.offsetSidewards)
             .alpha(this.alpha)
@@ -78,7 +78,7 @@ public class TestProjectiles extends AbstractRole
             .fade(this.fade).growFactor(this.growFactor).eventName("bomb");
     }
 
-    private Projectile test1()
+    private ProjectileBuilder test1()
     {
         return test0().rotate(true);
     }

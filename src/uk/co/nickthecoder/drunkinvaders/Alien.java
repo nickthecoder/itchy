@@ -10,8 +10,8 @@ import uk.co.nickthecoder.itchy.animation.Eases;
 import uk.co.nickthecoder.itchy.animation.ScaleAnimation;
 import uk.co.nickthecoder.itchy.extras.Fragment;
 import uk.co.nickthecoder.itchy.property.Property;
-import uk.co.nickthecoder.itchy.role.Explosion;
-import uk.co.nickthecoder.itchy.role.Talk;
+import uk.co.nickthecoder.itchy.role.ExplosionBuilder;
+import uk.co.nickthecoder.itchy.role.TalkBuilder;
 import uk.co.nickthecoder.itchy.util.Tag;
 import uk.co.nickthecoder.itchy.util.Util;
 
@@ -90,7 +90,7 @@ public class Alien extends Bouncy implements Shootable
     public void shot( Actor bullet )
     {
 
-        new Explosion(getActor())
+        new ExplosionBuilder(getActor())
             .projectiles(20)
             .fade(3)
             .speed(1, 3, 0, 0)
@@ -99,7 +99,7 @@ public class Alien extends Bouncy implements Shootable
             .scale(1)
             .createActor();
 
-        new Explosion(getActor())
+        new ExplosionBuilder(getActor())
             .projectiles(40).projectilesPerTick(10)
             .offsetForwards(-10, 10).offsetSidewards(-10, 10)
             .distance(10 * getActor().getAppearance().getScale())
@@ -124,7 +124,7 @@ public class Alien extends Bouncy implements Shootable
             return;
         }
 
-        Actor yell = new Talk(this)
+        Actor yell = new TalkBuilder(getActor())
             .eventName("death").style("yell")
             .offset(0, 40).direction(0)
             .createActor();

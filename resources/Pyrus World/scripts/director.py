@@ -6,8 +6,8 @@ from uk.co.nickthecoder.itchy import ZOrderStage
 from uk.co.nickthecoder.itchy.collision import WrappedCollisionStrategy
 from uk.co.nickthecoder.itchy.extras import SceneTransition
 from uk.co.nickthecoder.itchy.extras import SimpleMousePointer
-from uk.co.nickthecoder.itchy.role import Explosion
-from uk.co.nickthecoder.itchy.role import OnionSkin
+from uk.co.nickthecoder.itchy.role import ExplosionBuilder
+from uk.co.nickthecoder.itchy.role import OnionSkinBuilder
 from uk.co.nickthecoder.itchy.util import ClassName
 
 from uk.co.nickthecoder.jame import Rect
@@ -93,10 +93,13 @@ class Director(AbstractDirector) :
         mousePointer = SimpleMousePointer("mouse");
         self.getGame().mouse.setMousePointer( mousePointer );
         
-        Explosion(mousePointer.getActor()).dependent().forever().follow().offset(40,-33).projectilesPerTick(1) \
+        ExplosionBuilder(mousePointer.getActor()) \
+            .dependent().forever().follow().offset(40,-33).projectilesPerTick(1) \
             .spread(-20,-80).distance(10).randomSpread().speed(1,2,0,0).fade(3).eventName("spark") \
             .createActor()
-        OnionSkin(mousePointer.getActor()).alpha(128).fade(3).every(1).createActor()
+            
+        OnionSkinBuilder(mousePointer.getActor()) \
+            .alpha(128).fade(3).every(1).createActor()
 
     # Boiler plate code - no need to change this
     def getClassName(self):

@@ -4,8 +4,8 @@ from uk.co.nickthecoder.itchy import Itchy
 from uk.co.nickthecoder.itchy import Input
 from uk.co.nickthecoder.itchy import Role
 from uk.co.nickthecoder.itchy.util import ClassName
-from uk.co.nickthecoder.itchy.role import OnionSkin
-from uk.co.nickthecoder.itchy.role import Explosion
+from uk.co.nickthecoder.itchy.role import OnionSkinBuilder
+from uk.co.nickthecoder.itchy.role import ExplosionBuilder
 from uk.co.nickthecoder.itchy.extras import Timer
 from uk.co.nickthecoder.itchy.extras import Fragment
 
@@ -30,7 +30,8 @@ class Ship(Moving) :
         self.inputCheat = Input.find("cheat")
     
     
-        OnionSkin( self.getActor() ).alpha(128).every(5).fade(3).createActor();
+        OnionSkinBuilder( self.getActor() ) \
+            .alpha(128).every(5).fade(3).createActor();
 
         self.rotationSpeed = self.getActor().getCostume().getProperties().rotationSpeed;
         self.thrust = self.getActor().getCostume().getProperties().thrust;
@@ -46,7 +47,7 @@ class Ship(Moving) :
 
         Itchy.getGame().getSceneDirector().ship = self;
         
-        Explosion(self.getActor()) \
+        ExplosionBuilder(self.getActor()) \
             .companion("warp").eventName("default").distance(30,-80).spread(0,360).spread(0,360).randomSpread(False) \
             .speed(0,0).projectiles(40) \
             .createActor();
@@ -63,7 +64,7 @@ class Ship(Moving) :
     def warp(self) :
     
         for i in range( 0, 3 ) :
-            Explosion(self.getActor()) \
+            ExplosionBuilder(self.getActor()) \
                 .companion("warp") \
                 .spread(i*120, 360 + i*120).vx(self.vx).vy(self.vy).distance(100) \
                 .speed(-6,0).projectiles(20).projectilesPerTick(1).randomSpread(False).alpha(0).fade(-3) \
@@ -85,7 +86,7 @@ class Ship(Moving) :
             self.vy += math.sin(theta) * self.thrust
             heading = self.getActor().getDirection()
             
-            Explosion(self.getActor()) \
+            ExplosionBuilder(self.getActor()) \
                 .projectiles(4).follow().projectilesPerTick(1) \
                 .spread(heading+160, heading+200).distance(40) \
                 .randomSpread().speed(1,2,0,0).fade(3).eventName("spark") \
@@ -110,9 +111,10 @@ class Ship(Moving) :
        
        # Use the "fragment" and "part" poses created in onBirth to explode the ship in all directions.
        # The large "part" pieces move slowly, and the smaller "fragment" pieces move quickly.
-        Explosion(self.getActor()) \
+        ExplosionBuilder(self.getActor()) \
             .speed(0.5,0,1,0).fade(3).spin(-1,1).rotate(True).eventName("part").projectiles(4).createActor()
-        Explosion(self.getActor()) \
+            
+        ExplosionBuilder(self.getActor()) \
             .speed(1.5,0,4,0).fade(3).spin(-1,1).rotate(True).eventName("fragment").projectiles(20).createActor()
         
         Itchy.getGame().getDirector().lives -= 1

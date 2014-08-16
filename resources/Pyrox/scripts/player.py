@@ -3,7 +3,7 @@ from uk.co.nickthecoder.itchy import Input
 from uk.co.nickthecoder.itchy import Role
 from uk.co.nickthecoder.itchy import Actor
 from uk.co.nickthecoder.itchy.util import ClassName
-from uk.co.nickthecoder.itchy.role import Explosion
+from uk.co.nickthecoder.itchy.role import ExplosionBuilder
 
 from uk.co.nickthecoder.itchy.property import BooleanProperty
 
@@ -154,7 +154,7 @@ class Player(Big) :
         self.awake = False
         x = self.talkX - 40
         y = self.talkY + 20
-        self.sleepyZ = Explosion(self).pose("z") \
+        self.sleepyZ = ExplosionBuilder(self).pose("z") \
             .offsetForwards( x,x ).offsetSidewards( y,y ) \
             .vy(0.6, 1.2).vx(0.2,0.3).gravity(-0.01) \
             .fade( 2 ) \
@@ -239,14 +239,14 @@ class Player(Big) :
 
     def killMe( self, other=None ) :
         print "Player.killMe"
-        Explosion(self.actor) \
+        ExplosionBuilder(self.actor) \
             .gravity(-0.1) \
             .projectiles(5) \
             .fade(0.9, 3.5).vx(3,5).vy(-0.4,0.4) \
             .pose("fragment") \
             .createActor()
 
-        Explosion(self.actor) \
+        ExplosionBuilder(self.actor) \
             .gravity(-0.1) \
             .projectiles(5) \
             .fade(0.9, 3.5).vx(-3,-5).vy(-0.4,0.4) \

@@ -94,11 +94,14 @@ Director = Class({
     showFancyMouse : function() {
         var mousePointer = new itchy.extras.SimpleMousePointer("mouse");
         game.mouse.setMousePointer(mousePointer);
-        new itchy.role.Explosion(mousePointer.getActor())
+        
+        new itchy.role.ExplosionBuilder(mousePointer.getActor())
             .dependent().forever().follow().offset(40, -33)
             .projectilesPerTick(1).spread(-20,-80).distance(10).randomSpread()
             .speed(1, 2, 0, 0).fade(3).eventName("spark").createActor();
-        new itchy.role.OnionSkin(mousePointer.getActor()).alpha(128).fade(3).every(1).createActor();
+        
+        new itchy.role.OnionSkinBuilder(mousePointer.getActor())
+            .alpha(128).fade(3).every(1).createActor();
     }
 
 });

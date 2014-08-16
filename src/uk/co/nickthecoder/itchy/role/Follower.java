@@ -7,12 +7,11 @@ package uk.co.nickthecoder.itchy.role;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Role;
 
-public class Follower extends Companion<Follower>
+public class Follower extends Companion
 {
-    private boolean followRotatation = false;
-    
-    private boolean stop = false;
-    
+    public boolean followRotatation = false;
+
+    public boolean stop = false;
 
     public Follower( Role following )
     {
@@ -22,22 +21,6 @@ public class Follower extends Companion<Follower>
     public Follower( Actor following )
     {
         super(following);
-    }
-
-    /**
-     * Ensures that the follower always have the same direction as the object its following? When rotate is not called, the Follower's
-     * direction will not be changed.
-     */
-    public Follower followRotatation()
-    {
-        this.followRotatation = true;
-        return this;
-    }
-    
-    public Follower stop()
-    {
-        this.stop = true;
-        return this;
     }
 
     @Override
@@ -65,6 +48,26 @@ public class Follower extends Companion<Follower>
         Actor result = super.createActor();
         follow();
         return result;
+    }
+
+    public static abstract class AbstractFollowerBuilder<C extends Follower, B extends AbstractFollowerBuilder<C, B>>
+        extends Companion.AbstractCompanionBuilder<C, B>
+    {
+        /**
+         * Ensures that the follower always have the same direction as the object its following? When rotate is not called, the Follower's
+         * direction will not be changed.
+         */
+        public B followRotatation()
+        {
+            this.companion.followRotatation = true;
+            return getThis();
+        }
+
+        public B stop()
+        {
+            this.companion.stop = true;
+            return getThis();
+        }
     }
 
 }

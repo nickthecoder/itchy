@@ -18,7 +18,7 @@ import uk.co.nickthecoder.itchy.Input;
 import uk.co.nickthecoder.itchy.Launcher;
 import uk.co.nickthecoder.itchy.extras.Fragment;
 import uk.co.nickthecoder.itchy.extras.Timer;
-import uk.co.nickthecoder.itchy.role.Explosion;
+import uk.co.nickthecoder.itchy.role.ExplosionBuilder;
 import uk.co.nickthecoder.itchy.role.PlainRole;
 import uk.co.nickthecoder.jame.Sound;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
@@ -125,27 +125,27 @@ public class Tetra extends AbstractDirector
     public int completedLines;
 
     private Input inputLeft;
-    
+
     private Input inputRight;
-    
+
     private Input inputRotate;
-    
+
     private Input inputDrop;
-    
+
     private Input inputExit;
-    
+
     private Input inputPlay;
-    
+
     private Input inputEditor;
 
     private Input inputDebug;
-    
+
     @Override
     public void onActivate()
     {
         super.onActivate();
         this.level = getStartingLevel();
-        
+
         this.inputLeft = Input.find("left");
         this.inputRight = Input.find("right");
         this.inputRotate = Input.find("rotate");
@@ -372,7 +372,7 @@ public class Tetra extends AbstractDirector
             .actor(actor)
             .createPoses("fragment");
 
-        new Explosion(actor)
+        new ExplosionBuilder(actor)
             .projectiles(5)
             .speed(2, 4)
             .fade(3)

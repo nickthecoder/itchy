@@ -3,7 +3,7 @@ from uk.co.nickthecoder.itchy import Role
 from uk.co.nickthecoder.itchy.util import ClassName
 from uk.co.nickthecoder.itchy.property import DoubleProperty
 from uk.co.nickthecoder.itchy.util import Util
-from uk.co.nickthecoder.itchy.role import Explosion
+from uk.co.nickthecoder.itchy.role import ExplosionBuilder
 
 from java.util import ArrayList
 
@@ -53,7 +53,7 @@ class Rock(Moving) :
 		self.getActor().event("explode")
     	Itchy.getGame().getDirector().addPoints(self.getActor().getCostume().getProperties().points)
     	
-        Explosion(self.getActor()) \
+        ExplosionBuilder(self.getActor()) \
             .spread( bullet.actor.getHeading() - 120, bullet.actor.getHeading() + 120 ).randomSpread() \
             .speed(5,3,0,0).fade(3).distance(40) \
             .rotate(True).pose("fragment").projectiles(8) \

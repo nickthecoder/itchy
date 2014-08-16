@@ -1,9 +1,10 @@
 Bugs
    
 Change Companion hierarchy to have Builder classes with the fluent stuff in them.
-
+    
 Look at companion, it has font, font size and color. Why ????
 
+Change all "copy" methods to clone.
 
 Save an animation with delay/frames = 0 fails, but the error message throws an exception!!! - possibly Label's font not set
     Catch the exception rather than let it crash the system

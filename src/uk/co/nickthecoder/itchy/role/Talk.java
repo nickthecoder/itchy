@@ -21,14 +21,14 @@ import uk.co.nickthecoder.jame.RGBA;
 
 public class Talk extends Follower
 {
-    private String text = "";
+    public String text = "";
 
-    private String bubbleName = "speechBubble";
+    public String bubbleName = "speechBubble";
 
-    private TextStyle textStyle;
-    
-    private double xAlignment = 0;
-    private double yAlignment = 0;
+    public TextStyle textStyle;
+
+    public double xAlignment = 0;
+    public double yAlignment = 0;
 
     public Talk( Role following )
     {
@@ -48,137 +48,6 @@ public class Talk extends Follower
     }
 
     @Override
-    public Talk text( String text )
-    {
-        this.text = text;
-        return this;
-    }
-
-    public Talk font( String fontName, int fontSize )
-    {
-        this.textStyle.font = Itchy.getResources().getFont( fontName );
-        this.fontSize = fontSize;
-        return this;
-    }
-
-    public Talk textStyle( TextStyle textStyle )
-    {
-        this.textStyle = textStyle;
-        return this;
-    }
-
-    public Talk textStyle( String textStyleName )
-    {
-        this.textStyle = this.source.getCostume().getTextStyle(textStyleName);
-        return this;
-    }
-
-    public Talk style( String style )
-    {
-        this.textStyle(style);
-
-        // MORE - We are using STRINGS to redirect to a Pose or a NinePatch, but what we should be doing is
-        // let the Costume have the Pose or NinePatch. But Costumes don't have NinePatch events at the moment.
-        // Also it may be confusing to have an event called "talk" with a Pose, because we want that pose to be used for
-        // the speech bubble, not to change the actor's pose! So we'd need two event names.
-        String name = this.source.getCostume().getString(style);
-        if (name == null) {
-            name = style;
-        }
-        this.bubble(name);
-
-        return this;
-    }
-
-    @Override
-    public Talk eventName( String eventName )
-    {
-        super.eventName(eventName);
-
-        String text = this.source.getCostume().getString(eventName);
-        if (text == null) {
-            this.text = eventName;
-        } else {
-            this.text = text;
-        }
-
-        return this;
-    }
-
-    public Talk bubble( String name )
-    {
-        this.bubbleName = name;
-        return this;
-    }
-
-    public Talk alignment( double x, double y )
-    {
-        this.xAlignment = x;
-        this.yAlignment = y;
-        return this;
-    }
-
-    @Override
-    public Talk color( RGBA color )
-    {
-        this.color = color;
-        return this;
-    }
-
-    /**
-     * Sets the margins of the text within the bubble.
-     * 
-     * @param margin
-     *        The margin of top,left,bottom and right.
-     * @return this
-     */
-    public Talk margin( int margin )
-    {
-        this.textStyle.marginTop = margin;
-        this.textStyle.marginRight = margin;
-        this.textStyle.marginBottom = margin;
-        this.textStyle.marginLeft = margin;
-        return this;
-    }
-
-    /**
-     * Sets the margins of the text within the bubble.
-     * 
-     * @param topBottom
-     *        The margin of top and bottom.
-     * @return this
-     */
-    public Talk margin( int topBottom, int leftRight )
-    {
-        this.textStyle.marginTop = topBottom;
-        this.textStyle.marginRight = leftRight;
-        this.textStyle.marginBottom = topBottom;
-        this.textStyle.marginLeft = leftRight;
-        return this;
-    }
-
-    /**
-     * Sets the margins of the text within the bubble.
-     * 
-     * @return this
-     */
-    public Talk margin( int top, int right, int bottom, int left )
-    {
-        this.textStyle.marginTop = top;
-        this.textStyle.marginRight = right;
-        this.textStyle.marginBottom = bottom;
-        this.textStyle.marginLeft = left;
-        return this;
-    }
-
-    @Override
-    public Talk offset( double x, double y )
-    {
-        super.offset(x, y);
-        return this;
-    }
-
-    @Override
     public Actor createActor()
     {
         if (this.textStyle == null) {
@@ -193,7 +62,7 @@ public class Talk extends Follower
         } else {
             pose = new TextPose(this.text, this.textStyle);
         }
-        pose(pose);
+        this.pose = pose;
 
         Actor result = super.createActor();
 
@@ -227,4 +96,142 @@ public class Talk extends Follower
 
         return result;
     }
+
+    public static abstract class AbstractTalkBuilder<C extends Talk, B extends AbstractTalkBuilder<C, B>>
+        extends AbstractFollowerBuilder<C, B>
+    {
+
+        @Override
+        public B text( String text )
+        {
+            this.companion.text = text;
+            return getThis();
+        }
+
+        public B font( String fontName, int fontSize )
+        {
+            this.companion.textStyle.font = Itchy.getResources().getFont(fontName);
+            this.companion.fontSize = fontSize;
+            return getThis();
+        }
+
+        public B textStyle( TextStyle textStyle )
+        {
+            this.companion.textStyle = textStyle;
+            return getThis();
+        }
+
+        public B textStyle( String textStyleName )
+        {
+            this.companion.textStyle = this.companion.source.getCostume().getTextStyle(textStyleName);
+            return getThis();
+        }
+
+        public B style( String style )
+        {
+            this.textStyle(style);
+
+            // MORE - We are using STRINGS to redirect to a Pose or a NinePatch, but what we should be doing is
+            // let the Costume have the Pose or NinePatch. But Costumes don't have NinePatch events at the moment.
+            // Also it may be confusing to have an event called "talk" with a Pose, because we want that pose to be used for
+            // the speech bubble, not to change the actor's pose! So we'd need two event names.
+            String name = this.companion.source.getCostume().getString(style);
+            if (name == null) {
+                name = style;
+            }
+            this.bubble(name);
+
+            return getThis();
+        }
+
+        @Override
+        public B eventName( String eventName )
+        {
+            super.eventName(eventName);
+
+            String text = this.companion.source.getCostume().getString(eventName);
+            if (text == null) {
+                this.companion.text = eventName;
+            } else {
+                this.companion.text = text;
+            }
+
+            return getThis();
+        }
+
+        public B bubble( String name )
+        {
+            this.companion.bubbleName = name;
+            return getThis();
+        }
+
+        public B alignment( double x, double y )
+        {
+            this.companion.xAlignment = x;
+            this.companion.yAlignment = y;
+            return getThis();
+        }
+
+        @Override
+        public B color( RGBA color )
+        {
+            this.companion.color = color;
+            return getThis();
+        }
+
+        /**
+         * Sets the margins of the text within the bubble.
+         * 
+         * @param margin
+         *        The margin of top,left,bottom and right.
+         * @return this
+         */
+        public B margin( int margin )
+        {
+            this.companion.textStyle.marginTop = margin;
+            this.companion.textStyle.marginRight = margin;
+            this.companion.textStyle.marginBottom = margin;
+            this.companion.textStyle.marginLeft = margin;
+            return getThis();
+        }
+
+        /**
+         * Sets the margins of the text within the bubble.
+         * 
+         * @param topBottom
+         *        The margin of top and bottom.
+         * @return this
+         */
+        public B margin( int topBottom, int leftRight )
+        {
+            this.companion.textStyle.marginTop = topBottom;
+            this.companion.textStyle.marginRight = leftRight;
+            this.companion.textStyle.marginBottom = topBottom;
+            this.companion.textStyle.marginLeft = leftRight;
+            return getThis();
+        }
+
+        /**
+         * Sets the margins of the text within the bubble.
+         * 
+         * @return this
+         */
+        public B margin( int top, int right, int bottom, int left )
+        {
+            this.companion.textStyle.marginTop = top;
+            this.companion.textStyle.marginRight = right;
+            this.companion.textStyle.marginBottom = bottom;
+            this.companion.textStyle.marginLeft = left;
+            return getThis();
+        }
+
+        @Override
+        public B offset( double x, double y )
+        {
+            super.offset(x, y);
+            return getThis();
+        }
+
+    }
+    
 }

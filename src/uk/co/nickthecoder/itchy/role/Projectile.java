@@ -8,7 +8,7 @@ import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Role;
 
-public class Projectile extends Companion<Projectile>
+public class Projectile extends Companion
 {
     public static final double DEFAULT_LIFE_SECONDS = 6;
 
@@ -41,61 +41,6 @@ public class Projectile extends Companion<Projectile>
         this.lifeTicks = (int) (DEFAULT_LIFE_SECONDS * Itchy.frameRate.getRequiredRate());
     }
 
-    public Projectile speed( double value )
-    {
-        this.speedForwards = value;
-        return this;
-    }
-
-    public Projectile speed( double forwards, double sidewards )
-    {
-        this.speedForwards = forwards;
-        this.speedSidewards = sidewards;
-        return this;
-    }
-
-    public Projectile vx( double value )
-    {
-        this.vx = value;
-        return this;
-    }
-
-    public Projectile vy( double value )
-    {
-        this.vy = value;
-        return this;
-    }
-
-    public Projectile gravity( double value )
-    {
-        this.gravity = value;
-        return this;
-    }
-
-    public Projectile spin( double value )
-    {
-        this.spin = value;
-        return this;
-    }
-
-    public Projectile fade( double value )
-    {
-        this.fade = value;
-        return this;
-    }
-
-    public Projectile growFactor( double value )
-    {
-        this.growFactor = value;
-        return this;
-    }
-
-    public Projectile life( double seconds )
-    {
-        this.lifeTicks = (int) (Itchy.frameRate.getRequiredRate() * seconds);
-        return this;
-    }
-
     @Override
     public void tick()
     {
@@ -125,6 +70,72 @@ public class Projectile extends Companion<Projectile>
         if ((this.lifeTicks-- < 0) || (getActor().getAppearance().getAlpha() <= 0)) {
             getActor().kill();
         }
+    }
+
+    public static abstract class AbstractProjectileBuilder<C extends Projectile, B extends AbstractProjectileBuilder<C, B>>
+        extends AbstractCompanionBuilder<C, B>
+    {
+
+        public B speed( double value )
+        {
+            this.companion.speedForwards = value;
+            return getThis();
+        }
+
+        public B speed( double forwards, double sidewards )
+        {
+            this.companion.speedForwards = forwards;
+            this.companion.speedSidewards = sidewards;
+            return getThis();
+        }
+
+        public B vx( double value )
+        {
+            this.companion.vx = value;
+            return getThis();
+        }
+
+        public B vy( double value )
+        {
+            this.companion.vy = value;
+            return getThis();
+        }
+
+        public B gravity( double value )
+        {
+            this.companion.gravity = value;
+            return getThis();
+        }
+
+        public B spin( double value )
+        {
+            this.companion.spin = value;
+            return getThis();
+        }
+
+        public B fade( double value )
+        {
+            this.companion.fade = value;
+            return getThis();
+        }
+
+        public B growFactor( double value )
+        {
+            this.companion.growFactor = value;
+            return getThis();
+        }
+
+        public B life( double seconds )
+        {
+            this.companion.lifeTicks = (int) (Itchy.frameRate.getRequiredRate() * seconds);
+            return getThis();
+        }
+
+    }
+
+    public static ProjectileBuilder builder(Actor actor)
+    {
+        return new ProjectileBuilder(actor);
     }
 
 }

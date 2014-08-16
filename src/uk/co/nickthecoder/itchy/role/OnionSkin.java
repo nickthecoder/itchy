@@ -21,7 +21,7 @@ import uk.co.nickthecoder.jame.Surface;
  * This is named after the stop frame animation technique, where a thin pieces of paper are stacked, with each piece of paper holding one
  * frame, but the paper is so thin, that the layers below can still be seen.
  */
-public class OnionSkin extends Companion<OnionSkin>
+public class OnionSkin extends Companion
 {
     public static String ONION_SKIN_DEATH = "onionSkinDeath";
 
@@ -36,22 +36,6 @@ public class OnionSkin extends Companion<OnionSkin>
         super(following);
     }
 
-    public OnionSkin( Role following )
-    {
-        this(following.getActor());
-    }
-
-    public OnionSkin every( int every )
-    {
-        this.every = every;
-        return this;
-    }
-
-    public OnionSkin fade( double fade )
-    {
-        this.fade = fade;
-        return this;
-    }
 
     @Override
     public void tick()
@@ -75,7 +59,7 @@ public class OnionSkin extends Companion<OnionSkin>
     {
         Appearance appearance = this.source.getAppearance();
         Surface newSurface = appearance.getSurface().copy();
-        
+
         ImagePose pose = new ImagePose(newSurface, appearance.getOffsetX(), appearance.getOffsetY());
         pose.setDirection(this.source.getDirection());
 
@@ -106,6 +90,24 @@ public class OnionSkin extends Companion<OnionSkin>
             } else {
                 getActor().getAppearance().setAlpha(alpha);
             }
+        }
+    }
+    
+
+    public static abstract class AbstractOnionSkinBuilder<C extends OnionSkin, B extends AbstractOnionSkinBuilder<C, B>>
+        extends Companion.AbstractCompanionBuilder<C, B>
+    {
+
+        public B every( int every )
+        {
+            this.companion.every = every;
+            return getThis();
+        }
+
+        public B fade( double fade )
+        {
+            this.companion.fade = fade;
+            return getThis();
         }
     }
 }

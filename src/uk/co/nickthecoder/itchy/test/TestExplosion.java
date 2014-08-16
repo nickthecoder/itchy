@@ -7,6 +7,7 @@ package uk.co.nickthecoder.itchy.test;
 import uk.co.nickthecoder.itchy.AbstractRole;
 import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.role.Explosion;
+import uk.co.nickthecoder.itchy.role.ExplosionBuilder;
 import uk.co.nickthecoder.itchy.role.PlainRole;
 
 public class TestExplosion extends AbstractRole
@@ -89,7 +90,7 @@ public class TestExplosion extends AbstractRole
 
     private Explosion test0()
     {
-        Explosion result = new Explosion(this)
+        ExplosionBuilder result = new ExplosionBuilder(getActor())
             .distance(this.distance).offset(this.offsetX, this.offsetY)
             .offsetForwards(this.offsetForwards).offsetSidewards(this.offsetSidewards)
             .speed(this.speedForwards, this.speedSidewards).vx(this.vx).vy(this.vy).gravity(this.gravity)
@@ -103,7 +104,7 @@ public class TestExplosion extends AbstractRole
             result.projectilesPerTick(this.projectilesPerTick);
         }
 
-        return result;
+        return result.getCompanion();
     }
 
 }
