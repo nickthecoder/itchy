@@ -14,7 +14,7 @@ import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.PropertySubject;
 import uk.co.nickthecoder.jame.RGBA;
 
-public class TextStyle implements PropertySubject<TextStyle>
+public class TextStyle implements PropertySubject<TextStyle>, Cloneable
 {
 
     private static final List<AbstractProperty<TextStyle, ?>> properties =
@@ -70,6 +70,17 @@ public class TextStyle implements PropertySubject<TextStyle>
     public List<AbstractProperty<TextStyle, ?>> getProperties()
     {
         return properties;
+    }
+    
+    public TextStyle clone()
+    {
+        try {
+            TextStyle result = (TextStyle) super.clone();
+            return result;
+        } catch (CloneNotSupportedException e) {
+            // I hate CloneNotSupportedExceptions!
+            throw new RuntimeException(e);
+        }
     }
 
 }

@@ -1,11 +1,6 @@
 Bugs
-    
-    
-Rebuild Jame on i686 and win32, arm32
-    Package jame and itchy
-
-
-
+   
+Change Companion hierarchy to have Builder classes with the fluent stuff in them.
 
 Look at companion, it has font, font size and color. Why ????
 
@@ -19,6 +14,10 @@ Should TextPose have a TextStyle, rather than individual attributes?
 Why have a Role interface if everything will end up using AbstractRole?
     Why does Role have "birth" and yet everything uses onBirth() ? Ditto with other events.
     Talk to Simon about it.
+
+Rebuild Jame on i686, amd64, win32, arm32
+    Package jame and itchy
+
 
 
 Undo/Redo

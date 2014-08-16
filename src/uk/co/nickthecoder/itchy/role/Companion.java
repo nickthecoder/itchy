@@ -360,7 +360,7 @@ public abstract class Companion<T extends Companion<T>> extends AbstractRole
     }
 
     /**
-     * Creates a new Actor on the same layer as the source actor. The actor has NOT been activated, but will be visible.
+     * Creates a new Actor on the same stage as the source actor.
      * 
      * @return A new actor.
      */

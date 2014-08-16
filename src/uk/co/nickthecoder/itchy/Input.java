@@ -14,11 +14,10 @@ import uk.co.nickthecoder.jame.event.KeyboardEvent;
  * multiple keys, and multiple joystick buttons, all of which will cause the weapon to fire. Each player can then choose which they find
  * most comfortable.
  * 
- * You typically use the Editor, to define each of the Inputs, and then you game code just needs to find it (typically in a constructor),
- * and then check the Input.pressed (typically in a tick method).
+ * You typically use the Editor, to define each of the Inputs, and then you game code just needs to find it, using {@#find(String)}
+ * and then check the {@#pressed} (typically in a tick method).
  * 
- * Note, only keyboard input i implemented at present.
- * 
+ * Note, only keyboard input is implemented at present, but other input devices such as mouse and joystick will be added later.
  */
 public class Input
 {
@@ -26,6 +25,11 @@ public class Input
 
     private String asString = null;
 
+    /**
+     * Finds the Input from the current game's resources
+     * @param name The name of the Input to search for.
+     * @return The named input, or a dummy input if the named one was not found.
+     */
     public static Input find( String name )
     {
         Input result = Itchy.getGame().resources.getInput(name);
@@ -41,6 +45,12 @@ public class Input
         this.keys = new ArrayList<KeyInput>();
     }
 
+    /**
+     * Builds a string representation of the set of keys for this input.
+     * The format is comma separated list of : [ctrl+][shift+][meta+][alt+]KEY_NAME.
+     * Used when saving the resources file.
+     * @return The string representation of the set of keys for this input.
+     */
     public String getKeys()
     {
         if (this.asString == null) {
@@ -55,6 +65,12 @@ public class Input
         return this.asString;
     }
 
+    /**
+     * Parses a String representation of the input keys, replacing any existing input keys.
+     * This is used when loading a resources file. 
+     * @param keys
+     * @throws Exception
+     */
     public void parseKeys( String keys )
         throws Exception
     {
@@ -68,6 +84,11 @@ public class Input
         this.asString = keys;
     }
 
+    /**
+     * @param ke
+     * @return true iff the keyboard event matches one of this Input's key combinations.
+     * Use this from your game code's onKeyDown method.
+     */
     public boolean matches( KeyboardEvent ke )
     {
         for (KeyInput keyInput : this.keys) {
@@ -78,6 +99,10 @@ public class Input
         return false;        
     }
     
+    /**
+     * Tests each of this Input's possible triggers, and returns true if any of then are currently pressed.
+     * @return true iff any of this Input's triggers are pressed.
+     */
     public boolean pressed()
     {
         for (KeyInput keyInput : this.keys) {
