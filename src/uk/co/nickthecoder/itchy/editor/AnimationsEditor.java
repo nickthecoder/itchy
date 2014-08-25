@@ -17,8 +17,9 @@ import uk.co.nickthecoder.itchy.animation.CompoundAnimation;
 import uk.co.nickthecoder.itchy.animation.FramedAnimation;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Button;
-import uk.co.nickthecoder.itchy.gui.Component;
+import uk.co.nickthecoder.itchy.gui.AbstractComponent;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
+import uk.co.nickthecoder.itchy.gui.PlainContainer;
 import uk.co.nickthecoder.itchy.gui.Container;
 import uk.co.nickthecoder.itchy.gui.ImageComponent;
 import uk.co.nickthecoder.itchy.gui.MessageBox;
@@ -43,7 +44,7 @@ public class AnimationsEditor extends SubEditor<AnimationResource>
 {
     private Animation currentAnimation;
 
-    private Container treeContainer;
+    private PlainContainer treeContainer;
 
     private PickerButton<Filter> filterPickerButton;
 
@@ -134,7 +135,7 @@ public class AnimationsEditor extends SubEditor<AnimationResource>
         super.createForm();
         this.currentAnimation = this.currentResource.animation.copy();
 
-        this.treeContainer = new Container();
+        this.treeContainer = new PlainContainer();
         this.createTree();
         this.form.grid.addRow(new NullComponent(), this.treeContainer);
     }
@@ -174,10 +175,10 @@ public class AnimationsEditor extends SubEditor<AnimationResource>
         return result;
     }
 
-    private Component createAnimationTree( final Animation animation, final CompoundAnimation parent )
+    private AbstractComponent createAnimationTree( final Animation animation, final CompoundAnimation parent )
     {
 
-        Container line = new Container();
+        PlainContainer line = new PlainContainer();
         line.setFill(true, false);
 
         Button name = new Button(animation.getName());
@@ -224,13 +225,13 @@ public class AnimationsEditor extends SubEditor<AnimationResource>
         if (animation instanceof CompoundAnimation) {
             final CompoundAnimation ca = (CompoundAnimation) animation;
 
-            Container result = new Container();
+            PlainContainer result = new PlainContainer();
             result.addChild(line);
             result.setLayout(new VerticalLayout());
             result.addStyle("panel");
             result.setFill(true, false);
 
-            Container indent = new Container();
+            PlainContainer indent = new PlainContainer();
             indent.setFill(true, false);
             indent.setLayout(new VerticalLayout());
             indent.addStyle("animationIndent");

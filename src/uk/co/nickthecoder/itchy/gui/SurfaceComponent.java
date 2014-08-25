@@ -7,7 +7,7 @@ package uk.co.nickthecoder.itchy.gui;
 import uk.co.nickthecoder.itchy.GraphicsContext;
 import uk.co.nickthecoder.jame.Surface;
 
-public abstract class SurfaceComponent extends Component
+public abstract class SurfaceComponent extends AbstractComponent
 {
     protected Surface plainSurface;
 
@@ -42,7 +42,7 @@ public abstract class SurfaceComponent extends Component
     }
 
     @Override
-    protected void render( GraphicsContext gc )
+    public void render( GraphicsContext gc )
     {
         super.render(gc);
         Surface plainSurface = this.getPlainSurface();

@@ -15,11 +15,12 @@ import uk.co.nickthecoder.itchy.ImagePose;
 import uk.co.nickthecoder.itchy.PoseResource;
 import uk.co.nickthecoder.itchy.Thumbnailed;
 import uk.co.nickthecoder.itchy.gui.ClickableContainer;
-import uk.co.nickthecoder.itchy.gui.Component;
+import uk.co.nickthecoder.itchy.gui.AbstractComponent;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
-import uk.co.nickthecoder.itchy.gui.Container;
+import uk.co.nickthecoder.itchy.gui.PlainContainer;
 import uk.co.nickthecoder.itchy.gui.FileOpenDialog;
 import uk.co.nickthecoder.itchy.gui.GridLayout;
+import uk.co.nickthecoder.itchy.gui.Container;
 import uk.co.nickthecoder.itchy.gui.ImageComponent;
 import uk.co.nickthecoder.itchy.gui.IntegerBox;
 import uk.co.nickthecoder.itchy.gui.Label;
@@ -114,7 +115,7 @@ public class PosesEditor extends SubEditor<PoseResource>
 
         TableModelColumn image = new TableModelColumn("Image", 2, 100) {
             @Override
-            public Component createCell( TableModelRow row )
+            public AbstractComponent createCell( TableModelRow row )
             {
                 return new ImageComponent((Surface) (row.getData(this.index)));
             }
@@ -140,8 +141,7 @@ public class PosesEditor extends SubEditor<PoseResource>
             PoseResource poseResource = this.editor.resources.getPoseResource(poseName);
             if (this.filterPickerButton.getValue().accept(poseResource)) {
                 String[] attributeNames = { "name", "filename", "thumbnail" };
-                TableModelRow row = new ReflectionTableModelRow<PoseResource>(poseResource,
-                    attributeNames);
+                TableModelRow row = new ReflectionTableModelRow<PoseResource>(poseResource, attributeNames);
                 model.addRow(row);
             }
         }
@@ -155,7 +155,7 @@ public class PosesEditor extends SubEditor<PoseResource>
 
         GridLayout grid = this.form.grid;
 
-        Container imageContainer = new ClickableContainer() {
+        PlainContainer imageContainer = new ClickableContainer() {
             @Override
             public void onClick( MouseButtonEvent e )
             {

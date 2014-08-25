@@ -17,7 +17,7 @@ public class RowLayout implements Layout
     }
 
     @Override
-    public void calculateRequirements( Container container )
+    public void calculateRequirements( PlainContainer container )
     {
         int width = 0;
         int height = 0;
@@ -38,7 +38,7 @@ public class RowLayout implements Layout
     }
 
     @Override
-    public void layout( Container container )
+    public void layout( PlainContainer container )
     {
         int c = 0;
         int x = container.getPaddingLeft();

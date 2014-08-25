@@ -6,9 +6,10 @@ package uk.co.nickthecoder.itchy.editor;
 
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Button;
+import uk.co.nickthecoder.itchy.gui.PlainContainer;
+import uk.co.nickthecoder.itchy.gui.GridLayout;
 import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.Container;
-import uk.co.nickthecoder.itchy.gui.GridLayout;
 import uk.co.nickthecoder.itchy.gui.VerticalLayout;
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
 
@@ -23,18 +24,17 @@ public class PreferencesEditor
 
     public Container createPage()
     {
-        Container page = new Container();
+        Container page = new PlainContainer();
         page.setLayout(new VerticalLayout());
         page.setFill(true, false);
 
-        Container form = new Container();
+        PlainContainer form = new PlainContainer();
         GridLayout grid = new GridLayout(form, 2);
         form.setLayout(grid);
 
         EditorPreferences editorPreferences = this.editor.preferences;
 
-        for (AbstractProperty<EditorPreferences, ?> property : AbstractProperty
-            .findAnnotations(EditorPreferences.class)) {
+        for (AbstractProperty<EditorPreferences, ?> property : AbstractProperty.findAnnotations(EditorPreferences.class)) {
             try {
                 Component component = property.createComponent(editorPreferences, true);
                 grid.addRow(property.label, component);
@@ -42,7 +42,7 @@ public class PreferencesEditor
             }
         }
 
-        Container buttonBar = new Container();
+        PlainContainer buttonBar = new PlainContainer();
         Button save = new Button("Save");
         save.addActionListener(new ActionListener() {
 

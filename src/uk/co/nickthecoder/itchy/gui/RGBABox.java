@@ -6,7 +6,7 @@ package uk.co.nickthecoder.itchy.gui;
 
 import uk.co.nickthecoder.jame.RGBA;
 
-public class RGBABox extends Container
+public class RGBABox extends PlainContainer
 {
     private TextBox textBox;
 

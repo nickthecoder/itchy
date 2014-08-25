@@ -25,7 +25,7 @@ public class Button extends ClickableContainer
         this(new Label(text));
     }
 
-    public Button( Component child )
+    public Button( AbstractComponent child )
     {
         this();
 

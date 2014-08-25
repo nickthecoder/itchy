@@ -9,7 +9,7 @@ import java.util.List;
 public class FlowLayout implements Layout
 {
     @Override
-    public void calculateRequirements( Container container )
+    public void calculateRequirements( PlainContainer container )
     {
         int maxHeight = 0;
 
@@ -18,8 +18,7 @@ public class FlowLayout implements Layout
         for (Component child : children) {
             if (child.isVisible()) {
 
-                int tempHeight = child.getRequiredHeight() + child.getMarginTop() +
-                    child.getMarginBottom();
+                int tempHeight = child.getRequiredHeight() + child.getMarginTop() + child.getMarginBottom();
                 if (tempHeight > maxHeight) {
                     maxHeight = tempHeight;
                 }
@@ -28,12 +27,11 @@ public class FlowLayout implements Layout
 
         container.setNaturalWidth(100); // requiredSum + container.getPaddingLeft() +
                                         // container.getPaddingRight() );
-        container.setNaturalHeight(maxHeight + container.getPaddingTop() +
-            container.getPaddingBottom());
+        container.setNaturalHeight(maxHeight + container.getPaddingTop() + container.getPaddingBottom());
     }
 
     @Override
-    public void layout( Container container )
+    public void layout( PlainContainer container )
     {
         int left = container.getPaddingLeft();
         int right = container.getWidth() - container.getPaddingRight();

@@ -27,7 +27,7 @@ public class EntryBox<E extends EntryBox<?>> extends ClickableContainer implemen
 
     private final Label label;
 
-    private final Container caret;
+    private final PlainContainer caret;
 
     private int boxWidthPixels;
 
@@ -54,7 +54,7 @@ public class EntryBox<E extends EntryBox<?>> extends ClickableContainer implemen
         this.addChild(this.label);
         this.label.setExpansion(1.0);
 
-        this.caret = new Container();
+        this.caret = new PlainContainer();
         this.caret.setType("caret");
         this.addChild(this.caret);
 
@@ -274,7 +274,7 @@ public class EntryBox<E extends EntryBox<?>> extends ClickableContainer implemen
     }
 
     @Override
-    public void calculateRequirements( Container c )
+    public void calculateRequirements( PlainContainer c )
     {
         try {
             TrueTypeFont ttf = this.label.getFont().getSize(this.label.getFontSize());
@@ -295,7 +295,7 @@ public class EntryBox<E extends EntryBox<?>> extends ClickableContainer implemen
     }
     
     @Override
-    public void layout( Container c )
+    public void layout( PlainContainer c )
     {
         int width = this.boxWidthPixels;
         int height = this.label.getRequiredHeight();

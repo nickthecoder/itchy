@@ -28,7 +28,7 @@ public class TextArea extends ClickableContainer implements Layout, KeyListener,
 
     private List<Label> labels;
 
-    private final Container caret;
+    private final PlainContainer caret;
 
     private int boxWidthPixels;
 
@@ -49,7 +49,7 @@ public class TextArea extends ClickableContainer implements Layout, KeyListener,
 
     private int scrollY = 0;
 
-    private Container labelsContainer;
+    private PlainContainer labelsContainer;
 
     private final List<ComponentChangeListener> changeListeners;
 
@@ -58,18 +58,18 @@ public class TextArea extends ClickableContainer implements Layout, KeyListener,
         if (str == null) {
             str = "";
         }
-        
+
         this.setType("textArea");
         this.setLayout(this);
 
-        this.labelsContainer = new Container();
+        this.labelsContainer = new PlainContainer();
         this.addChild(this.labelsContainer);
-        
+
         this.labelsContainer.setLayout(new VerticalLayout());
 
         this.labels = new ArrayList<Label>();
 
-        this.caret = new Container();
+        this.caret = new PlainContainer();
         this.caret.setType("caret");
         this.addChild(this.caret);
 
@@ -94,12 +94,12 @@ public class TextArea extends ClickableContainer implements Layout, KeyListener,
         if (text == null) {
             text = "";
         }
-                
+
         String[] lines = text.split("\n");
         if (lines.length == 0) {
-            lines = new String[] {""};
+            lines = new String[] { "" };
         }
-        
+
         for (Label label : this.labels) {
             label.remove();
         }
@@ -239,15 +239,15 @@ public class TextArea extends ClickableContainer implements Layout, KeyListener,
 
         if (ke.symbol == Keys.UP) {
             if (this.currentLine > 0) {
-                this.currentLine --;
+                this.currentLine--;
                 this.update();
             }
             return true;
         }
 
         if (ke.symbol == Keys.DOWN) {
-            if (this.currentLine < this.labels.size() -1) {
-                this.currentLine ++;
+            if (this.currentLine < this.labels.size() - 1) {
+                this.currentLine++;
                 this.update();
             }
             return true;
@@ -266,12 +266,11 @@ public class TextArea extends ClickableContainer implements Layout, KeyListener,
             this.update();
             return true;
         }
-        
+
         if (ke.symbol == Keys.BACKSPACE) {
             if (this.caretIndex > 0) {
                 int pos = this.caretIndex;
-                label.setText(label.getText().substring(0, pos - 1) +
-                    label.getText().substring(pos));
+                label.setText(label.getText().substring(0, pos - 1) + label.getText().substring(pos));
                 this.caretIndex--;
                 this.update();
             } else {
@@ -285,12 +284,11 @@ public class TextArea extends ClickableContainer implements Layout, KeyListener,
 
         if (ke.symbol == Keys.DELETE) {
             if (this.caretIndex < label.getText().length()) {
-                label.setText(label.getText().substring(0, this.caretIndex) +
-                    label.getText().substring(this.caretIndex + 1));
+                label.setText(label.getText().substring(0, this.caretIndex) + label.getText().substring(this.caretIndex + 1));
                 this.update();
             } else {
-                if (this.currentLine < this.labels.size() -1) {
-                    this.currentLine ++;
+                if (this.currentLine < this.labels.size() - 1) {
+                    this.currentLine++;
                     this.mergeLines();
                     this.update();
                 }
@@ -304,8 +302,7 @@ public class TextArea extends ClickableContainer implements Layout, KeyListener,
                 Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
                 String str = (String) clipboard.getData(DataFlavor.stringFlavor);
 
-                this.setText(label.getText().substring(0, this.caretIndex) + str +
-                    label.getText().substring(this.caretIndex));
+                this.setText(label.getText().substring(0, this.caretIndex) + str + label.getText().substring(this.caretIndex));
 
                 this.caretIndex += str.length();
 
@@ -318,8 +315,7 @@ public class TextArea extends ClickableContainer implements Layout, KeyListener,
         }
 
         if ((ke.c >= 32)) {
-            label.setText(label.getText().substring(0, this.caretIndex) + ke.c +
-                label.getText().substring(this.caretIndex));
+            label.setText(label.getText().substring(0, this.caretIndex) + ke.c + label.getText().substring(this.caretIndex));
             this.caretIndex++;
             return true;
         }
@@ -332,20 +328,19 @@ public class TextArea extends ClickableContainer implements Layout, KeyListener,
         Label label = this.getCurrentLabel();
         String old = label.getText();
         String partA = old.substring(0, this.caretIndex);
-        
+
         String partB = this.caretIndex >= old.length() ? "" : old.substring(this.caretIndex);
-        
+
         label.setText(partA);
-        Label newLabel = new Label( partB );
-        
+        Label newLabel = new Label(partB);
+
         this.labels.add(this.currentLine + 1, newLabel);
         this.labelsContainer.addChild(this.currentLine + 1, newLabel);
 
-        this.currentLine ++;
+        this.currentLine++;
         this.caretIndex = 0;
     }
-    
-    
+
     private void mergeLines()
     {
         Label label1 = this.labels.get(this.currentLine - 1);
@@ -353,13 +348,13 @@ public class TextArea extends ClickableContainer implements Layout, KeyListener,
 
         this.caretIndex = label1.getText().length();
 
-        label1.setText( label1.getText() + label2.getText() );
+        label1.setText(label1.getText() + label2.getText());
         label2.remove();
         this.labels.remove(this.currentLine);
-        this.currentLine --;
+        this.currentLine--;
         this.update();
     }
-    
+
     @Override
     public boolean onKeyUp( KeyboardEvent ke )
     {
@@ -393,7 +388,7 @@ public class TextArea extends ClickableContainer implements Layout, KeyListener,
     }
 
     @Override
-    public void calculateRequirements( Container c )
+    public void calculateRequirements( PlainContainer c )
     {
         int maxWidth = 0;
         for (Label label : this.labels) {
@@ -409,7 +404,7 @@ public class TextArea extends ClickableContainer implements Layout, KeyListener,
                 this.boxHeightPixels = 0;
             } else {
                 TrueTypeFont ttf = this.labels.get(0).getFont().getSize(this.labels.get(0).getFontSize());
-    
+
                 Surface surface = ttf.renderBlended("M", ANY_COLOR);
                 this.boxWidthPixels = surface.getWidth() * this.boxWidth;
                 this.boxHeightPixels = surface.getHeight() * this.boxHeight;
@@ -426,29 +421,27 @@ public class TextArea extends ClickableContainer implements Layout, KeyListener,
     }
 
     @Override
-    public void layout( Container c )
-    {        
+    public void layout( PlainContainer c )
+    {
         int width = this.boxWidthPixels;
         int height = this.boxHeightPixels;
 
         int lineHeight = this.boxHeightPixels / this.boxHeight;
-        if (this.labels.size() > 0 ) {
+        if (this.labels.size() > 0) {
             Label label = this.labels.get(0);
             lineHeight = label.getNaturalHeight() + label.getMarginTop() + label.getMarginBottom();
         }
-                
-        
+
         int caretX = 0;
 
         Label label = getCurrentLabel();
 
         try {
             String text = label.getText();
-            if (text.length() > this.caretIndex){
+            if (text.length() > this.caretIndex) {
                 text = text.substring(0, this.caretIndex);
             }
-            Surface surface = label.getFont().getSize(label.getFontSize())
-                .renderBlended(text, ANY_COLOR);
+            Surface surface = label.getFont().getSize(label.getFontSize()).renderBlended(text, ANY_COLOR);
 
             caretX = surface.getWidth();
             surface.free();
@@ -482,30 +475,22 @@ public class TextArea extends ClickableContainer implements Layout, KeyListener,
                 caretTotalX = this.scrollX + this.getPaddingLeft() + this.caret.getMarginLeft() + caretX;
             }
         }
-        
+
         int caretHeight = lineHeight - this.caret.getPaddingTop() - this.caret.getPaddingBottom();
         int caretY = this.getPaddingTop() + this.caret.getPaddingTop() + this.currentLine * lineHeight + this.scrollY;
         if (caretY < 0) {
             this.scrollY -= caretY;
         }
-        
+
         if (caretY + caretHeight > height) {
             this.scrollY -= (caretY + caretHeight) - height;
         }
         caretY = this.getPaddingTop() + this.caret.getPaddingTop() + this.currentLine * lineHeight + this.scrollY;
-        
-        this.caret.setPosition(
-            caretTotalX,
-            caretY,
-            caretWidth,
-            caretHeight);
 
+        this.caret.setPosition(caretTotalX, caretY, caretWidth, caretHeight);
 
-        this.labelsContainer.setPosition(
-            this.scrollX + this.getPaddingLeft() + this.labelsContainer.getMarginLeft(),
-            this.scrollY + this.getPaddingTop() + this.labelsContainer.getMarginTop(),
-            width,
-            this.labelsContainer.getNaturalHeight());
+        this.labelsContainer.setPosition(this.scrollX + this.getPaddingLeft() + this.labelsContainer.getMarginLeft(),
+            this.scrollY + this.getPaddingTop() + this.labelsContainer.getMarginTop(), width, this.labelsContainer.getNaturalHeight());
 
     }
 

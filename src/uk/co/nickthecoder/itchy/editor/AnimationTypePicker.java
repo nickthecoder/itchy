@@ -9,8 +9,8 @@ import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.animation.Animation;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Button;
-import uk.co.nickthecoder.itchy.gui.Component;
-import uk.co.nickthecoder.itchy.gui.Container;
+import uk.co.nickthecoder.itchy.gui.AbstractComponent;
+import uk.co.nickthecoder.itchy.gui.PlainContainer;
 import uk.co.nickthecoder.itchy.gui.GridLayout;
 import uk.co.nickthecoder.itchy.gui.ImageComponent;
 import uk.co.nickthecoder.itchy.gui.Label;
@@ -24,14 +24,14 @@ public abstract class AnimationTypePicker extends Window
     {
         super("Pick an Animation Type");
 
-        Container container = new Container();
+        PlainContainer container = new PlainContainer();
         container.setXSpacing(10);
         container.setYSpacing(10);
         GridLayout grid = new GridLayout(container, 5);
 
         for (Animation animation : Itchy.registry.getAnimations()) {
 
-            Component component = this.createButton(animation);
+            AbstractComponent component = this.createButton(animation);
 
             grid.addChild(component);
         }
@@ -41,13 +41,13 @@ public abstract class AnimationTypePicker extends Window
         this.clientArea.addChild(vs);
     }
 
-    private Component createButton( final Animation animation )
+    private AbstractComponent createButton( final Animation animation )
     {
-        Container container = new Container();
+        PlainContainer container = new PlainContainer();
         container.setLayout(new VerticalLayout());
         container.setXAlignment(0.5);
 
-        Container center = new Container();
+        PlainContainer center = new PlainContainer();
         center.setXAlignment(0.5);
         center.setYAlignment(0.5);
         center.setMinimumWidth(64);

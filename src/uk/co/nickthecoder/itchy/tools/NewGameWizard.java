@@ -12,9 +12,9 @@ import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Button;
-import uk.co.nickthecoder.itchy.gui.Component;
-import uk.co.nickthecoder.itchy.gui.Container;
+import uk.co.nickthecoder.itchy.gui.PlainContainer;
 import uk.co.nickthecoder.itchy.gui.GridLayout;
+import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.IntegerBox;
 import uk.co.nickthecoder.itchy.gui.Label;
 import uk.co.nickthecoder.itchy.gui.PickerButton;
@@ -45,17 +45,17 @@ public class NewGameWizard implements Page
     @Override
     public Component createPage()
     {
-        Container result = new Container();
+        PlainContainer result = new PlainContainer();
         result.setLayout(new VerticalLayout());
         result.setFill(true, true);
         result.setXAlignment(0.5);
 
-        Container main = new Container();
+        PlainContainer main = new PlainContainer();
         result.addChild(main);
         main.setExpansion(1);
         main.setYAlignment(0.25);
 
-        Container form = new Container();
+        PlainContainer form = new PlainContainer();
         main.addChild(form);
         form.setType("form");
 
@@ -80,7 +80,7 @@ public class NewGameWizard implements Page
         this.message = new Label("");
         result.addChild(this.message);
 
-        Container buttonBar = new Container();
+        PlainContainer buttonBar = new PlainContainer();
         result.addChild(buttonBar);
         buttonBar.addStyle("buttonBar");
 

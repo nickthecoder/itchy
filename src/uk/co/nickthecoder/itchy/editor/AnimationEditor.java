@@ -7,9 +7,11 @@ package uk.co.nickthecoder.itchy.editor;
 import uk.co.nickthecoder.itchy.animation.Animation;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Button;
+import uk.co.nickthecoder.itchy.gui.AbstractComponent;
+import uk.co.nickthecoder.itchy.gui.PlainContainer;
+import uk.co.nickthecoder.itchy.gui.GridLayout;
 import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.Container;
-import uk.co.nickthecoder.itchy.gui.GridLayout;
 import uk.co.nickthecoder.itchy.gui.VerticalLayout;
 import uk.co.nickthecoder.itchy.gui.Window;
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
@@ -29,7 +31,7 @@ public class AnimationEditor extends Window
         this.clientArea.setLayout(new VerticalLayout());
         this.clientArea.setFill(true, false);
 
-        Container form = new Container();
+        PlainContainer form = new PlainContainer();
         GridLayout grid = new GridLayout(form, 2);
         form.setLayout(grid);
         form.addStyle("form");
@@ -39,12 +41,12 @@ public class AnimationEditor extends Window
             this.clientArea.addChild(form);
         }
 
-        Component extra = this.createExtra();
+        AbstractComponent extra = this.createExtra();
         if (extra != null) {
             this.clientArea.addChild(extra);
         }
 
-        Container buttonBar = new Container();
+        PlainContainer buttonBar = new PlainContainer();
         buttonBar.setXAlignment(0.5f);
         buttonBar.addStyle("buttonBar");
         this.createButtons(buttonBar);
@@ -75,7 +77,7 @@ public class AnimationEditor extends Window
         }
     }
 
-    public Component createExtra()
+    public AbstractComponent createExtra()
     {
         return null;
     }

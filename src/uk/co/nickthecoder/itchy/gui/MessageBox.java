@@ -18,7 +18,7 @@ public class MessageBox extends Window
 
         this.clientArea.addChild(new Label(message));
         this.clientArea.setLayout(new VerticalLayout());
-        Container buttons = new Container();
+        PlainContainer buttons = new PlainContainer();
         buttons.addStyle("buttonBar");
 
         this.clientArea.addChild(buttons);

@@ -26,7 +26,7 @@ public class Stylesheet extends Loadable
         this.load();
     }
 
-    public void style( Component component )
+    public void style( AbstractComponent component )
     {
 
         StyleRule accumalator = new StyleRule(null);

@@ -12,7 +12,7 @@ public class ToggleButton extends Button
 
     ButtonGroup buttonGroup;
 
-    public ToggleButton( Component component )
+    public ToggleButton( AbstractComponent component )
     {
         super(component);
         this.addStyle("toggle");

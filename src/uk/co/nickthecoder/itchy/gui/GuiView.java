@@ -201,7 +201,7 @@ public class GuiView extends AbstractView implements View, InputListener
         }
 
         while (tooltipComponent.getTooltip() == null) {
-            tooltipComponent = tooltipComponent.parent;
+            tooltipComponent = tooltipComponent.getParent();
             if (tooltipComponent == null) {
                 return;
             }
@@ -236,8 +236,8 @@ public class GuiView extends AbstractView implements View, InputListener
                 frame.setNinePatch(dummy.background);
                 this.tooltipMakeup = frame;
             } else {
-                this.tooltipMakeup = new SimpleFrame(new RGBA(128, 128, 128, 200), new RGBA(160, 160, 160, 200), 2,
-                    dummy.getMarginTop(), dummy.getMarginRight(), dummy.getMarginBottom(), dummy.getMarginLeft());
+                this.tooltipMakeup = new SimpleFrame(new RGBA(128, 128, 128, 200), new RGBA(160, 160, 160, 200), 2, dummy.getMarginTop(),
+                    dummy.getMarginRight(), dummy.getMarginBottom(), dummy.getMarginLeft());
             }
         }
         if (this.tooltipMakeup == null) {

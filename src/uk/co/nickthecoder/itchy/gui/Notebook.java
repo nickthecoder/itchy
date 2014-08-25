@@ -8,20 +8,20 @@ import uk.co.nickthecoder.itchy.GraphicsContext;
 import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 
-public class Notebook extends Container
+public class Notebook extends PlainContainer
 {
-    private final Container tabs;
+    private final PlainContainer tabs;
 
-    private final Container pages;
+    private final PlainContainer pages;
 
     public Notebook()
     {
         super();
 
-        this.tabs = new Container();
+        this.tabs = new PlainContainer();
         this.tabs.type = "notebookTabs";
 
-        this.pages = new Container();
+        this.pages = new PlainContainer();
 
         this.pages.setLayout(new OverlappingLayout());
         this.pages.type = "notebookPages";
@@ -95,12 +95,10 @@ public class Notebook extends Container
     {
         this.renderBackground(gc);
 
-        Rect rect = new Rect(this.pages.getX(), this.pages.getY(), this.pages.getWidth(),
-            this.pages.getHeight());
+        Rect rect = new Rect(this.pages.getX(), this.pages.getY(), this.pages.getWidth(), this.pages.getHeight());
         this.pages.render(gc.window(rect));
 
-        rect = new Rect(this.tabs.getX(), this.tabs.getY(), this.tabs.getWidth(),
-            this.tabs.getHeight());
+        rect = new Rect(this.tabs.getX(), this.tabs.getY(), this.tabs.getWidth(), this.tabs.getHeight());
         this.tabs.render(gc.window(rect));
 
     }

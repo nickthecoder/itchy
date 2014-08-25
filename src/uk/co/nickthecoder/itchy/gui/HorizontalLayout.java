@@ -19,7 +19,7 @@ public class HorizontalLayout implements Layout
     }
 
     @Override
-    public void calculateRequirements( Container container )
+    public void calculateRequirements( PlainContainer container )
     {
         this.requiredSum = 0;
         this.sumExpansion = 0;
@@ -50,7 +50,7 @@ public class HorizontalLayout implements Layout
     }
 
     @Override
-    public void layout( Container container )
+    public void layout( PlainContainer container )
     {
         int x = container.getPaddingLeft();
         int spacing = container.getXSpacing();
@@ -68,19 +68,16 @@ public class HorizontalLayout implements Layout
 
             if (child.isVisible()) {
 
-                int height = container.getFillY() ? container.getHeight() -
-                    container.getPaddingTop() - container.getPaddingBottom() -
+                int height = container.getFillY() ? container.getHeight() - container.getPaddingTop() - container.getPaddingBottom() -
                     child.getMarginTop() - child.getMarginBottom() : child.getRequiredHeight();
 
-                double expansionRatio = (this.sumExpansion == 0) ?
-                    1.0 / children.size() :
-                    child.getExpansion() / this.sumExpansion;
+                double expansionRatio = (this.sumExpansion == 0) ? 1.0 / children.size() : child.getExpansion() / this.sumExpansion;
 
                 int singleExtraWidth = (int) (extraWidth * expansionRatio);
                 int width = child.getRequiredWidth() + singleExtraWidth;
 
-                int ty = (int) (container.getYAlignment() * (ySpace - child.getRequiredHeight()) +
-                    container.getPaddingTop() + child.getMarginTop());
+                int ty = (int) (container.getYAlignment() * (ySpace - child.getRequiredHeight()) + container.getPaddingTop() + child
+                    .getMarginTop());
 
                 child.setPosition(x + child.getMarginLeft(), ty, width, height);
 

@@ -9,7 +9,7 @@ import java.util.List;
 public class OverlappingLayout implements Layout
 {
     @Override
-    public void calculateRequirements( Container container )
+    public void calculateRequirements( PlainContainer container )
     {
         int width = 0;
         int height = 0;
@@ -26,20 +26,17 @@ public class OverlappingLayout implements Layout
         }
 
         container.setNaturalWidth(width + container.getPaddingLeft() + container.getPaddingRight());
-        container.setNaturalHeight(height + container.getPaddingTop() +
-            container.getPaddingBottom());
+        container.setNaturalHeight(height + container.getPaddingTop() + container.getPaddingBottom());
 
     }
 
     @Override
-    public void layout( Container container )
+    public void layout( PlainContainer container )
     {
         List<Component> children = container.getChildren();
 
-        int fullWidth = container.getWidth() - container.getPaddingLeft() -
-            container.getPaddingRight();
-        int fullHeight = container.getHeight() - container.getPaddingTop() -
-            container.getPaddingBottom();
+        int fullWidth = container.getWidth() - container.getPaddingLeft() - container.getPaddingRight();
+        int fullHeight = container.getHeight() - container.getPaddingTop() - container.getPaddingBottom();
 
         for (Component child : children) {
             int width = fullWidth;

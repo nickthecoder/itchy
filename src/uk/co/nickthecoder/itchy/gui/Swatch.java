@@ -7,7 +7,7 @@ package uk.co.nickthecoder.itchy.gui;
 import uk.co.nickthecoder.jame.RGBA;
 import uk.co.nickthecoder.jame.Surface;
 
-public class Swatch extends Container
+public class Swatch extends PlainContainer
 {
     private Surface opaqueSwatch;
 

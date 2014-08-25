@@ -11,9 +11,9 @@ import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Button;
-import uk.co.nickthecoder.itchy.gui.Component;
-import uk.co.nickthecoder.itchy.gui.Container;
+import uk.co.nickthecoder.itchy.gui.PlainContainer;
 import uk.co.nickthecoder.itchy.gui.GridLayout;
+import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.ImageComponent;
 import uk.co.nickthecoder.itchy.gui.Label;
 import uk.co.nickthecoder.itchy.gui.VerticalLayout;
@@ -32,18 +32,18 @@ public class GameMenu implements Page
     @Override
     public Component createPage()
     {
-        Container result = new Container();
+        PlainContainer result = new PlainContainer();
         result.setLayout(new VerticalLayout());
         result.setFill(false, true);
         result.setXAlignment(0.5);
 
-        Container main = new Container();
+        PlainContainer main = new PlainContainer();
         main.setFill(false, true);
         result.addChild(main);
         main.setExpansion(1);
         main.setYAlignment(0.25);
 
-        Container menu = new Container();
+        PlainContainer menu = new PlainContainer();
         menu.setFill(true, true);
         menu.setYAlignment(0.25);
         GridLayout grid = new GridLayout(menu, 2);
@@ -51,7 +51,7 @@ public class GameMenu implements Page
         menu.setYSpacing(10);
         menu.setXSpacing(30);
 
-        Container menuScroll = new VerticalScroll(menu);
+        PlainContainer menuScroll = new VerticalScroll(menu);
         menuScroll.setYAlignment(0.25);
         menuScroll.setFill(true, true);
         main.addChild(menuScroll);
@@ -69,7 +69,7 @@ public class GameMenu implements Page
                 final File resourceFile = new File(dir, dir.getName() + ".itchy");
                 if (resourceFile.exists()) {
 
-                    Container combo = new Container();
+                    PlainContainer combo = new PlainContainer();
                     combo.setType("comboBox");
                     combo.addStyle("combo");
                     combo.setFill(true, true);

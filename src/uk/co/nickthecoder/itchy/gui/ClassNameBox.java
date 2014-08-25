@@ -19,7 +19,7 @@ import uk.co.nickthecoder.itchy.script.ScriptLanguage;
 import uk.co.nickthecoder.itchy.script.ScriptManager;
 import uk.co.nickthecoder.itchy.util.ClassName;
 
-public class ClassNameBox extends Container
+public class ClassNameBox extends PlainContainer
 {
 
     private ScriptManager scriptManager;
@@ -50,7 +50,7 @@ public class ClassNameBox extends Container
         this.value = new ClassName(baseClass, className.name);
         this.baseClass = baseClass;
 
-        Container main = new Container();
+        PlainContainer main = new PlainContainer();
         this.addChild(main);
         main.type = "comboBox";
         main.addStyle("combo");

@@ -113,7 +113,7 @@ public class Slider extends DragableContainer implements Layout
     }
 
     @Override
-    public void calculateRequirements( Container container )
+    public void calculateRequirements( PlainContainer container )
     {
     }
 
@@ -124,7 +124,7 @@ public class Slider extends DragableContainer implements Layout
     }
 
     @Override
-    public void layout( Container container )
+    public void layout( PlainContainer container )
     {
         int x = (int) ((this.value - this.from) / (this.to - this.from) * getKnobRange());
 

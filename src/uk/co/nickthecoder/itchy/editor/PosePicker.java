@@ -8,10 +8,12 @@ import uk.co.nickthecoder.itchy.PoseResource;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Button;
-import uk.co.nickthecoder.itchy.gui.Component;
-import uk.co.nickthecoder.itchy.gui.Container;
+import uk.co.nickthecoder.itchy.gui.AbstractComponent;
+import uk.co.nickthecoder.itchy.gui.PlainContainer;
 import uk.co.nickthecoder.itchy.gui.GridLayout;
 import uk.co.nickthecoder.itchy.gui.HorizontalLayout;
+import uk.co.nickthecoder.itchy.gui.Component;
+import uk.co.nickthecoder.itchy.gui.Container;
 import uk.co.nickthecoder.itchy.gui.ImageComponent;
 import uk.co.nickthecoder.itchy.gui.Label;
 import uk.co.nickthecoder.itchy.gui.VerticalLayout;
@@ -38,7 +40,7 @@ public abstract class PosePicker extends Window
         this.clientArea.setLayout(new VerticalLayout());
         this.clientArea.setFill(true, false);
 
-        Container container = new Container();
+        PlainContainer container = new PlainContainer();
         container.setLayout(new VerticalLayout());
         VerticalScroll vs = new VerticalScroll(container);
 
@@ -46,7 +48,7 @@ public abstract class PosePicker extends Window
         this.clientArea.addChild(vs);
         this.clientArea.addStyle("vScrolled");
 
-        Container buttons = new Container();
+        PlainContainer buttons = new PlainContainer();
         buttons.addStyle("buttonBar");
         buttons.setLayout(new HorizontalLayout());
         buttons.setXAlignment(0.5f);
@@ -71,7 +73,7 @@ public abstract class PosePicker extends Window
 
     protected Component createChoices( Container parent )
     {
-        Container container = new Container();
+        PlainContainer container = new PlainContainer();
         parent.addChild(container);
 
         Component focus = null;
@@ -83,7 +85,7 @@ public abstract class PosePicker extends Window
         for (String name : this.resources.poseNames()) {
             PoseResource poseResource = this.resources.getPoseResource(name);
 
-            Component component = this.createPoseButton(poseResource);
+            AbstractComponent component = this.createPoseButton(poseResource);
             if (poseResource == this.defaultPoseResource) {
                 focus = component;
             }
@@ -95,10 +97,10 @@ public abstract class PosePicker extends Window
         return focus;
     }
 
-    private Component createPoseButton( final PoseResource poseResource )
+    private AbstractComponent createPoseButton( final PoseResource poseResource )
     {
         // final Pose pose = poseResource.pose;
-        Container container = new Container();
+        PlainContainer container = new PlainContainer();
 
         container.setLayout(new VerticalLayout());
         container.setXAlignment(0.5f);

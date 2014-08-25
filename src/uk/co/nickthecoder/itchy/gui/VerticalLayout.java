@@ -19,7 +19,7 @@ public class VerticalLayout implements Layout
     }
 
     @Override
-    public void calculateRequirements( Container container )
+    public void calculateRequirements( PlainContainer container )
     {
         this.requiredSum = 0;
         this.sumExpansion = 0;
@@ -30,11 +30,9 @@ public class VerticalLayout implements Layout
         for (Component child : children) {
             if (child.isVisible()) {
 
-                this.requiredSum += child.getRequiredHeight() + child.getMarginTop() +
-                    child.getMarginBottom();
+                this.requiredSum += child.getRequiredHeight() + child.getMarginTop() + child.getMarginBottom();
                 this.sumExpansion += child.getExpansion();
-                int tempWidth = child.getRequiredWidth() + child.getMarginLeft() +
-                    child.getMarginRight();
+                int tempWidth = child.getRequiredWidth() + child.getMarginLeft() + child.getMarginRight();
                 if (tempWidth > this.maxWidth) {
                     this.maxWidth = tempWidth;
                 }
@@ -43,15 +41,13 @@ public class VerticalLayout implements Layout
 
         this.requiredSum += container.getYSpacing() * (children.size() - 1);
 
-        container.setNaturalHeight(this.requiredSum + container.getPaddingTop() +
-            container.getPaddingBottom());
-        container.setNaturalWidth(this.maxWidth + container.getPaddingLeft() +
-            container.getPaddingRight());
+        container.setNaturalHeight(this.requiredSum + container.getPaddingTop() + container.getPaddingBottom());
+        container.setNaturalWidth(this.maxWidth + container.getPaddingLeft() + container.getPaddingRight());
 
     }
 
     @Override
-    public void layout( Container container )
+    public void layout( PlainContainer container )
     {
         int y = container.getPaddingTop();
 
@@ -70,13 +66,9 @@ public class VerticalLayout implements Layout
 
             if (child.isVisible()) {
 
-                int width = container.getFillX() ?
-                    xSpace - child.getMarginLeft() - child.getMarginRight() :
-                    child.getRequiredWidth();
+                int width = container.getFillX() ? xSpace - child.getMarginLeft() - child.getMarginRight() : child.getRequiredWidth();
 
-                double expansionRatio = (this.sumExpansion == 0) ?
-                    1.0 / children.size() :
-                    child.getExpansion() / this.sumExpansion;
+                double expansionRatio = (this.sumExpansion == 0) ? 1.0 / children.size() : child.getExpansion() / this.sumExpansion;
 
                 int singleExtraHeight = (int) (extraHeight * expansionRatio);
                 int height = child.getRequiredHeight() + singleExtraHeight;

@@ -6,8 +6,8 @@ package uk.co.nickthecoder.itchy.property;
 
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.gui.ClassNameBox;
-import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
+import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.script.ScriptManager;
 import uk.co.nickthecoder.itchy.util.ClassName;
 

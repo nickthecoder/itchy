@@ -9,8 +9,8 @@ import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Button;
 import uk.co.nickthecoder.itchy.gui.ButtonGroup;
 import uk.co.nickthecoder.itchy.gui.CheckBox;
-import uk.co.nickthecoder.itchy.gui.Component;
-import uk.co.nickthecoder.itchy.gui.Container;
+import uk.co.nickthecoder.itchy.gui.AbstractComponent;
+import uk.co.nickthecoder.itchy.gui.PlainContainer;
 import uk.co.nickthecoder.itchy.gui.HorizontalLayout;
 import uk.co.nickthecoder.itchy.gui.Label;
 import uk.co.nickthecoder.itchy.gui.ToggleButton;
@@ -28,7 +28,7 @@ public abstract class KeyInputPicker extends Window
         
         this.clientArea.setLayout(new VerticalLayout());
         
-        Container buttons = new Container();
+        PlainContainer buttons = new PlainContainer();
         buttons.addStyle("buttonBar");
         buttons.setLayout(new HorizontalLayout());
         buttons.setXAlignment(0.5f);
@@ -232,13 +232,13 @@ public abstract class KeyInputPicker extends Window
         this.main, this.middle, this.keypad
     };
 
-    protected Container createForm()
+    protected PlainContainer createForm()
     {        
-        Container result = new Container();
+        PlainContainer result = new PlainContainer();
         result.setLayout( new VerticalLayout() );
         result.setYSpacing(20);
         
-        Container keyboardContainer = new Container();
+        PlainContainer keyboardContainer = new PlainContainer();
         result.addChild(keyboardContainer);
         keyboardContainer.setLayout(new HorizontalLayout());
         keyboardContainer.setXSpacing(20);
@@ -246,12 +246,12 @@ public abstract class KeyInputPicker extends Window
         ButtonGroup buttonGroup = new ButtonGroup();
 
         for (KeysEnum[][] s : this.keyboard) {
-            Container section = new Container();
+            PlainContainer section = new PlainContainer();
             section.setLayout(new VerticalLayout());
             keyboardContainer.addChild(section);
 
             for (KeysEnum[] r : s) {
-                Container row = new Container();
+                PlainContainer row = new PlainContainer();
                 if (r.length == 0) {
                     row.setMinimumHeight(20); // Arbitrary spacing
                 } else {
@@ -259,7 +259,7 @@ public abstract class KeyInputPicker extends Window
                     row.setLayout(new HorizontalLayout());
     
                     for (KeysEnum key : r) {
-                        Component button = createKeyButton(buttonGroup, key);
+                        AbstractComponent button = createKeyButton(buttonGroup, key);
                         row.addChild(button);
                     }
                 }
@@ -267,7 +267,7 @@ public abstract class KeyInputPicker extends Window
             }
         }
         
-        Container modifiers = new Container();
+        PlainContainer modifiers = new PlainContainer();
         modifiers.setXSpacing( 40 );
         result.addChild(modifiers);
         modifiers.setYAlignment(0.5);
@@ -289,9 +289,9 @@ public abstract class KeyInputPicker extends Window
         return result;
     }
 
-    protected Component makeModifier( Component component, String label )
+    protected AbstractComponent makeModifier( AbstractComponent component, String label )
     {
-        Container container = new Container();
+        PlainContainer container = new PlainContainer();
         container.setLayout(new HorizontalLayout());
         container.setXSpacing(10);
         container.setYAlignment(0.5);
@@ -305,7 +305,7 @@ public abstract class KeyInputPicker extends Window
     public CheckBox alt;
     public CheckBox meta;
     
-    protected Component createKeyButton( ButtonGroup buttonGroup, final KeysEnum key )
+    protected AbstractComponent createKeyButton( ButtonGroup buttonGroup, final KeysEnum key )
     {
         ToggleButton button = new ToggleButton(key.label);
         buttonGroup.add(button);

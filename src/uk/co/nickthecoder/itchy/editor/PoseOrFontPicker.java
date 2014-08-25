@@ -9,9 +9,11 @@ import uk.co.nickthecoder.itchy.PoseResource;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Button;
+import uk.co.nickthecoder.itchy.gui.AbstractComponent;
+import uk.co.nickthecoder.itchy.gui.PlainContainer;
+import uk.co.nickthecoder.itchy.gui.GridLayout;
 import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.Container;
-import uk.co.nickthecoder.itchy.gui.GridLayout;
 import uk.co.nickthecoder.itchy.gui.Label;
 import uk.co.nickthecoder.itchy.gui.VerticalLayout;
 
@@ -36,7 +38,7 @@ public abstract class PoseOrFontPicker extends PosePicker
     {
         super.createChoices(parent);
 
-        Container container = new Container();
+        PlainContainer container = new PlainContainer();
         parent.addChild(container);
 
         Component focus = null;
@@ -48,7 +50,7 @@ public abstract class PoseOrFontPicker extends PosePicker
         for (String name : this.resources.fontNames()) {
             FontResource fontResource = this.resources.getFontResource(name);
 
-            Component component = this.createFontButton(fontResource);
+            AbstractComponent component = this.createFontButton(fontResource);
 
             gridLayout.addChild(component);
         }
@@ -57,10 +59,10 @@ public abstract class PoseOrFontPicker extends PosePicker
         return focus;
     }
 
-    private Component createFontButton( final FontResource fontResource )
+    private AbstractComponent createFontButton( final FontResource fontResource )
     {
         // final Pose pose = poseResource.pose;
-        Container container = new Container();
+        PlainContainer container = new PlainContainer();
 
         container.setLayout(new VerticalLayout());
         container.setXAlignment(0.5f);

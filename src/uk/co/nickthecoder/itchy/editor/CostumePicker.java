@@ -8,8 +8,8 @@ import uk.co.nickthecoder.itchy.CostumeResource;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Button;
-import uk.co.nickthecoder.itchy.gui.Component;
-import uk.co.nickthecoder.itchy.gui.Container;
+import uk.co.nickthecoder.itchy.gui.AbstractComponent;
+import uk.co.nickthecoder.itchy.gui.PlainContainer;
 import uk.co.nickthecoder.itchy.gui.GridLayout;
 import uk.co.nickthecoder.itchy.gui.ImageComponent;
 import uk.co.nickthecoder.itchy.gui.Label;
@@ -35,14 +35,14 @@ public abstract class CostumePicker extends Window
         this.nullText = nullText;
         this.resources = resources;
 
-        Container container = new Container();
+        PlainContainer container = new PlainContainer();
         VerticalScroll vs = new VerticalScroll(container);
 
         this.createCostumes(container);
         this.clientArea.addChild(vs);
     }
 
-    private void createCostumes( Container container )
+    private void createCostumes( PlainContainer container )
     {
         GridLayout gridLayout = new GridLayout(container, 6);
         container.addStyle("pickGrid");
@@ -55,17 +55,17 @@ public abstract class CostumePicker extends Window
         for (String name : this.resources.costumeNames()) {
             CostumeResource costumeResource = this.resources.getCostumeResource(name);
 
-            Component component = this.createButton(costumeResource);
+            AbstractComponent component = this.createButton(costumeResource);
 
             gridLayout.addChild(component);
         }
         gridLayout.endRow();
     }
 
-    private Component createButton( final CostumeResource costumeResource )
+    private AbstractComponent createButton( final CostumeResource costumeResource )
     {
         // final Pose pose = poseResource.pose;
-        Container container = new Container();
+        PlainContainer container = new PlainContainer();
         container.setLayout(new VerticalLayout());
         container.setXAlignment(0.5f);
 

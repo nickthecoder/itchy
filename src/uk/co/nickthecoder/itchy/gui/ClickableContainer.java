@@ -9,7 +9,7 @@ import uk.co.nickthecoder.jame.event.Keys;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 
-public abstract class ClickableContainer extends Container
+public abstract class ClickableContainer extends PlainContainer
 {
     protected long clickTimeMillis;
 

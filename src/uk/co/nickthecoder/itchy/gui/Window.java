@@ -15,7 +15,7 @@ import uk.co.nickthecoder.jame.event.MouseEvent;
  */
 public class Window extends RootContainer
 {
-    public Container clientArea;
+    public PlainContainer clientArea;
 
     public DragableContainer titleBar;
 
@@ -51,7 +51,7 @@ public class Window extends RootContainer
         this.title = new Label(titleString);
         this.titleBar.addChild(this.title);
 
-        this.clientArea = new Container();
+        this.clientArea = new PlainContainer();
         this.clientArea.setType("clientArea");
 
         this.addChild(this.titleBar);

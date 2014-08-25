@@ -4,7 +4,7 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.gui;
 
-public class NullComponent extends Component
+public class NullComponent extends AbstractComponent
 {
 
     @Override

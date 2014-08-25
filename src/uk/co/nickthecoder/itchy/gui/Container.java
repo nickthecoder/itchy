@@ -1,556 +1,101 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
- * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2014 Nick Robinson
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.gui;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.ListIterator;
 
 import uk.co.nickthecoder.itchy.GraphicsContext;
-import uk.co.nickthecoder.itchy.util.Reversed;
-import uk.co.nickthecoder.jame.Rect;
-import uk.co.nickthecoder.jame.event.MouseButtonEvent;
-import uk.co.nickthecoder.jame.event.MouseEvent;
-import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 
-public class Container extends Component
+public interface Container extends Component
 {
-    public static final int NOT_SET = -1;
 
-    protected Layout layout;
+    public List<Component> getChildren();
 
-    private boolean layedOut;
+    public void addChild( Component child );
 
-    private boolean requirementsCalculated;
+    public void addChild( int index, Component child );
 
-    private final List<Component> children;
+    public void removeChild( Component child );
 
-    private final List<Component> readOnlyChildren;
+    public void clear();
 
-    private double xAlignment = 0;
+    public void setPaddingTop( int value );
 
-    private double yAlignment = 0;
+    public void setPaddingRight( int value );
 
-    private int naturalWidth;
-    private int naturalHeight;
+    public void setPaddingBottom( int value );
 
-    private int paddingTop;
-    private int paddingRight;
-    private int paddingBottom;
-    private int paddingLeft;
+    public void setPaddingLeft( int value );
 
-    private int xSpacing = 0;
-    private int ySpacing = 0;
+    public int getPaddingTop();
 
-    private boolean fillX;
+    public int getPaddingRight();
 
-    private boolean fillY;
+    public int getPaddingBottom();
 
-    public Container()
-    {
-        super();
+    public int getPaddingLeft();
 
-        this.layedOut = false;
-        this.requirementsCalculated = false;
+    public int getXSpacing();
 
-        this.naturalWidth = NOT_SET;
-        this.naturalHeight = NOT_SET;
+    public int getYSpacing();
 
-        this.children = new ArrayList<Component>();
-        this.readOnlyChildren = Collections.unmodifiableList(this.children);
-        this.layout = new HorizontalLayout();
-        this.type = "container";
-    }
+    public void setXSpacing( int value );
 
-    public List<Component> getChildren()
-    {
-        return this.readOnlyChildren;
-    }
+    public void setYSpacing( int value );
 
-    public void addChild( Component child )
-    {
-        if (child.parent != null) {
-            throw new RuntimeException("Component is already within another Container");
-        }
-        this.children.add(child);
-        child.parent = this;
-        this.forceLayout();
-        child.reStyle();
-    }
+    public void setLayout( Layout layout );
 
-    public void addChild( int index, Component child )
-    {
-        if (child.parent != null) {
-            throw new RuntimeException("Component is already within another Container");
-        }
-        this.children.add(index, child);
-        child.parent = this;
-        this.forceLayout();
-        child.reStyle();
-    }
+    public void setXAlignment( double value );
 
-    public void removeChild( Component child )
-    {
-        assert (child.parent == this);
-        this.children.remove(child);
-        child.parent = null;
-        this.forceLayout();
-    }
+    public double getXAlignment();
 
-    public void clear()
-    {
-        for (Component child : this.children) {
-            child.parent = null;
-        }
-        this.children.clear();
-        this.invalidate();
-        this.forceLayout();
-    }
+    public double getYAlignment();
 
-    @Override
-    public void setPosition( int x, int y, int width, int height )
-    {
-        if ((width != this.width) || (height != this.height)) {
-            this.forceLayout();
-        }
-        super.setPosition(x, y, width, height);
-    }
+    public void setYAlignment( double value );
 
-    public void setPaddingTop( int value )
-    {
-        if (this.paddingTop != value) {
-            this.paddingTop = value;
-            this.forceLayout();
-        }
-    }
+    public void ensureLayedOut();
 
-    public void setPaddingRight( int value )
-    {
-        if (this.paddingRight != value) {
-            this.paddingRight = value;
-            this.forceLayout();
-        }
-    }
-
-    public void setPaddingBottom( int value )
-    {
-        if (this.paddingBottom != value) {
-            this.paddingBottom = value;
-            this.forceLayout();
-        }
-    }
-
-    public void setPaddingLeft( int value )
-    {
-        if (this.paddingLeft != value) {
-            this.paddingLeft = value;
-            this.forceLayout();
-        }
-    }
-
-    public int getPaddingTop()
-    {
-        return this.paddingTop;
-    }
-
-    public int getPaddingRight()
-    {
-        return this.paddingRight;
-    }
-
-    public int getPaddingBottom()
-    {
-        return this.paddingBottom;
-    }
-
-    public int getPaddingLeft()
-    {
-        return this.paddingLeft;
-    }
-
-    public int getXSpacing()
-    {
-        return this.xSpacing;
-    }
-
-    public int getYSpacing()
-    {
-        return this.ySpacing;
-    }
-
-    public void setXSpacing( int value )
-    {
-        if (this.xSpacing != value) {
-            this.xSpacing = value;
-            this.forceLayout();
-        }
-    }
-
-    public void setYSpacing( int value )
-    {
-        if (this.ySpacing != value) {
-            this.ySpacing = value;
-            this.forceLayout();
-        }
-    }
-
-    public void setLayout( Layout layout )
-    {
-        this.layout = layout;
-        this.forceLayout();
-    }
-
-    public void setXAlignment( double value )
-    {
-        this.xAlignment = value;
-        this.forceLayout();
-    }
-
-    public double getXAlignment()
-    {
-        return this.xAlignment;
-    }
-
-    public double getYAlignment()
-    {
-        return this.yAlignment;
-    }
-
-    public void setYAlignment( double value )
-    {
-        this.yAlignment = value;
-        this.forceLayout();
-    }
-
-    public void ensureLayedOut()
-    {
-        if (!this.layedOut) {
-            if (this.layout != null) {
-                this.layout.calculateRequirements(this);
-                this.layout.layout(this);
-            }
-            this.requirementsCalculated = true;
-            this.layedOut = true;
-        }
-    }
-
-    public void forceLayout()
-    {
-        this.requirementsCalculated = false;
-        this.layedOut = false;
-        if (this.parent != null) {
-            this.parent.forceLayout();
-        }
-    }
+    public void forceLayout();
 
     /**
      * Used to ensure that the component is visble on screen. Most containers do nothing, but a scrollable will scroll the client as
      * appropriate, and Notebooks will select the appropriate tab.
      */
-    public void ensureVisible( Component child )
-    {
-        // Does nothing.
-    }
-
-    boolean previousFocus( Component from, Component stop )
-    {
-        boolean found = from == null;
-
-        for (Component child : Reversed.list(this.children)) {
-
-            if (found) {
-
-                if (child == stop) {
-                    return true;
-                }
-
-                if (child.isVisible()) {
-
-                    if (child.canFocus()) {
-                        child.focus();
-                        return true;
-                    }
-                    if (child instanceof Container) {
-                        Container container = (Container) child;
-                        if (container.previousFocus(null, stop)) {
-                            return true;
-                        }
-                    }
-                }
-            }
-            if (child == from) {
-                found = true;
-            }
-        }
-
-        if (this.parent != null) {
-            if (this.parent.previousFocus(this, stop)) {
-                return true;
-            }
-        }
-
-        if (from != null) {
-
-            return this.previousFocus(null, stop);
-
-        }
-
-        return false;
-    }
+    public void ensureVisible( Component child );
 
     @Override
-    public void focus()
-    {
-        if (this.canFocus()) {
-            super.focus();
-        } else {
-            if (!nextFocus(null, null)) {
-                super.focus();
-            }
-        }
-    }
-
-    boolean nextFocus( Component from, Component stop )
-    {
-        boolean found = from == null;
-
-        for (Component child : this.children) {
-
-            if (found) {
-
-                if (child == stop) {
-                    return true;
-                }
-
-                if (child.isVisible()) {
-
-                    if (child.canFocus()) {
-                        child.focus();
-                        return true;
-                    }
-                    if (child instanceof Container) {
-                        Container container = (Container) child;
-                        if (container.nextFocus(null, stop)) {
-                            return true;
-                        }
-                    }
-                }
-            }
-            if (child == from) {
-                found = true;
-            }
-        }
-
-        if (stop == null) {
-            return false;
-        }
-
-        if (this.parent != null) {
-            if (this.parent.nextFocus(this, stop)) {
-                return true;
-            }
-        }
-
-        if (from != null) {
-
-            return this.nextFocus(null, stop);
-
-        }
-
-        return false;
-
-    }
-
-    private void ensureRequirementsCalculated()
-    {
-        if (!this.requirementsCalculated) {
-            this.layout.calculateRequirements(this);
-        }
-        this.requirementsCalculated = true;
-    }
+    public void focus();
 
     @Override
-    public int getNaturalWidth()
-    {
-        this.ensureRequirementsCalculated();
-        return this.naturalWidth;
-    }
+    public int getNaturalWidth();
 
     @Override
-    public int getNaturalHeight()
-    {
-        this.ensureRequirementsCalculated();
-        return this.naturalHeight;
-    }
+    public int getNaturalHeight();
 
     /**
      * @return True iff the child components should expand to fill the containers full width
      */
-    public boolean getFillX()
-    {
-        return this.fillX;
-    }
+    public boolean getFillX();
 
     /**
      * @return True iff the child components should expand to fill the containers full height
      */
-    public boolean getFillY()
-    {
-        return this.fillY;
-    }
+    public boolean getFillY();
 
     /**
      * Used to determine if child components should expand to fill this containers full width and height.
      */
-    public void setFill( boolean x, boolean y )
-    {
-        this.fillX = x;
-        this.fillY = y;
-        this.forceLayout();
-    }
+    public void setFill( boolean x, boolean y );
 
-    /**
-     * Set by the containers layout during calculateRequirements
-     */
-    void setNaturalWidth( int width )
-    {
-        if (width != this.naturalWidth) {
-            this.naturalWidth = width;
-            if (this.parent != null) {
-                this.parent.forceLayout();
-            }
-        }
-    }
+    public void render( GraphicsContext gc );
 
-    /**
-     * Set by the containers layout during calculateRequirements
-     */
-    void setNaturalHeight( int height )
-    {
-        if (height != this.naturalHeight) {
-            this.naturalHeight = height;
-            if (this.parent != null) {
-                this.parent.forceLayout();
-            }
-        }
-    }
+    public boolean nextFocus( Component from, Component stop );
 
-    @Override
-    public void render( GraphicsContext gc )
-    {
-        this.ensureLayedOut();
+    public boolean previousFocus( Component from, Component stop );
 
-        super.render(gc);
-
-        for (Component child : this.children) {
-            if (child.isVisible()) {
-                Rect rect = new Rect(child.getX(), child.getY(), child.getWidth(),
-                    child.getHeight());
-                GraphicsContext childGc = gc.window(rect);
-                if (!childGc.empty()) {
-                    child.render(childGc);
-                }
-            }
-        }
-    }
-
-    @Override
-    public void reStyle()
-    {
-        super.reStyle();
-        for (Component child : this.children) {
-            child.reStyle();
-        }
-    }
-
-    @Override
-    public boolean onMouseDown( MouseButtonEvent event )
-    {
-        ListIterator<Component> i = this.children.listIterator(this.children.size());
-        while (i.hasPrevious()) {
-            Component child = i.previous();
-
-            if (child.isVisible()) {
-
-                if (child.mouseDown(event)) {
-                    return true;
-                }
-
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean onMouseUp( MouseButtonEvent event )
-    {
-        ListIterator<Component> i = this.children.listIterator(this.children.size());
-        while (i.hasPrevious()) {
-            Component child = i.previous();
-
-            if (child.isVisible()) {
-
-                if (child.mouseUp(event)) {
-                    return true;
-                }
-
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean onMouseMove( MouseMotionEvent event )
-    {
-        ListIterator<Component> i = this.children.listIterator(this.children.size());
-        while (i.hasPrevious()) {
-            Component child = i.previous();
-
-            if (child.isVisible()) {
-
-                if (child.mouseMove(event)) {
-                    return true;
-                }
-
-            }
-        }
-        return false;
-    }
-    /**
-     * Return the lowest level component at the given coordinates.  
-     * @return Null if (x,y) is not within this RootContainer, otherwise, the lowest level component containing (x,y).
-     * If there is no lower level component, then this RootContainer is returned. 
-     */
-    public Component getComponent( MouseEvent me )
-    {
-        int origX = me.x;
-        int origY = me.y;
-        
-        try {
-            if ( this.contains( me ) ) {
-                for ( Component child : this.getChildren()) {
-                    if (child.isVisible()) {
-                        me.x = origX - child.x;
-                        me.y = origY - child.y;
-                        Component temp = child.getComponent( me );
-                        if (temp != null) {
-                            return temp;
-                        }
-                    }
-                }
-                
-                return this;
-            }
-            
-        } finally {
-            me.x = origX;
-            me.y = origY;
-        }
-        
-        return null;
-    }
-    
 }

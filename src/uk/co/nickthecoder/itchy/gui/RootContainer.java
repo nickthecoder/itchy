@@ -12,17 +12,17 @@ import uk.co.nickthecoder.jame.event.ModifierKey;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 
-public class RootContainer extends Container
+public class RootContainer extends PlainContainer
 {
     protected Stylesheet stylesheet;
 
-    protected static Component focus;
+    protected static AbstractComponent focus;
 
     protected GuiView view;
 
     public boolean modal = false;
 
-    private Component mouseOwner;
+    private AbstractComponent mouseOwner;
 
     public boolean draggable = false;
 
@@ -33,7 +33,7 @@ public class RootContainer extends Container
         this.stylesheet = Itchy.getGame().getStylesheet();
     }
 
-    public void style( Component component )
+    public void style( AbstractComponent component )
     {
         if (this.stylesheet != null) {
             this.stylesheet.style(component);
@@ -84,8 +84,8 @@ public class RootContainer extends Container
             int dy = 0;
             try {
                 for (Component component = this.mouseOwner; component != this; component = component.getParent()) {
-                    dx -= component.x;
-                    dy -= component.y;
+                    dx -= component.getX();
+                    dy -= component.getY();
                 }
                 event.x += dx;
                 event.y += dy;
@@ -125,8 +125,8 @@ public class RootContainer extends Container
             int dy = 0;
             try {
                 for (Component component = this.mouseOwner; component != this; component = component.getParent()) {
-                    dx -= component.x;
-                    dy -= component.y;
+                    dx -= component.getX();
+                    dy -= component.getY();
                 }
                 event.x += dx;
                 event.y += dy;
@@ -149,11 +149,11 @@ public class RootContainer extends Container
         if (this.dragging) {
             int dx = event.x - this.dragStartX;
             int dy = event.y - this.dragStartY;
-            
+
             // Do we adjust the RootContainer's position, or the GuiView's position?
-            // Change the view if the root container fits exactly within the view, otherwise change the root container.  
+            // Change the view if the root container fits exactly within the view, otherwise change the root container.
             Rect viewRect = this.view.getPosition();
-            if ( (this.width == viewRect.width) && (this.height == viewRect.height) ) {
+            if ((this.width == viewRect.width) && (this.height == viewRect.height)) {
                 viewRect.x += dx;
                 viewRect.y += dy;
             } else {
@@ -172,8 +172,8 @@ public class RootContainer extends Container
             int dy = 0;
             try {
                 for (Component component = this.mouseOwner; component != this; component = component.getParent()) {
-                    dx -= component.x;
-                    dy -= component.y;
+                    dx -= component.getX();
+                    dy -= component.getY();
                 }
                 event.x += dx;
                 event.y += dy;
@@ -223,7 +223,7 @@ public class RootContainer extends Container
         this.nextFocus(null, this);
     }
 
-    public void setFocus( Component component )
+    public void setFocus( AbstractComponent component )
     {
         Itchy.getGame().setFocus(component);
 
@@ -233,7 +233,7 @@ public class RootContainer extends Container
         if (RootContainer.focus != null) {
             RootContainer.focus.hasFocus = false;
             RootContainer.focus.removeStyle("focus");
-            Container oldRoot = RootContainer.focus.getRoot();
+            PlainContainer oldRoot = RootContainer.focus.getRoot();
             if (oldRoot != null) {
                 oldRoot.removeStyle("focus");
             }
@@ -292,7 +292,7 @@ public class RootContainer extends Container
         setPosition((position.width - width) / 2, (position.height - height) / 2, width, height);
     }
 
-    public void captureMouse( Component component )
+    public void captureMouse( AbstractComponent component )
     {
         if (this.view != null) {
             Itchy.getGame().captureMouse(this.view);

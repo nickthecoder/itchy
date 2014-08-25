@@ -1,325 +1,93 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
- * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2014 Nick Robinson
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.gui;
 
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-import uk.co.nickthecoder.itchy.Focusable;
 import uk.co.nickthecoder.itchy.Font;
 import uk.co.nickthecoder.itchy.GraphicsContext;
 import uk.co.nickthecoder.itchy.Renderable;
 import uk.co.nickthecoder.jame.RGBA;
 import uk.co.nickthecoder.jame.Rect;
-import uk.co.nickthecoder.jame.Surface;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 
-public abstract class Component implements Focusable
+public interface Component
 {
-    Container parent;
 
-    private double expansion;
+    public String getType();
 
-    private int marginTop = 0;
-    private int marginRight = 0;
-    private int marginBottom = 0;
-    private int marginLeft = 0;
+    public void setType( String type );
 
-    protected int x;
+    public Container getParent();
 
-    protected int y;
+    public void setParent( Container parent );
 
-    protected int width;
+    public RootContainer getRoot();
 
-    protected int height;
+    public Set<String> getStyles();
 
-    protected int minimumWidth = Integer.MIN_VALUE;
-    protected int minimumHeight = Integer.MIN_VALUE;
+    public void addStyle( String style, boolean test );
 
-    protected int maximumWidth = Integer.MAX_VALUE;
-    protected int maximumHeight = Integer.MAX_VALUE;
+    public void addStyle( String style );
 
-    protected Surface surface;
+    public void removeStyle( String style );
 
-    private boolean visible;
+    public void reStyle();
 
-    private final Set<String> styles;
+    public void remove();
 
-    private Font font;
+    public boolean onKeyDown( KeyboardEvent ke );
 
-    private int fontSize;
+    public boolean onKeyUp( KeyboardEvent ke );
 
-    private RGBA color;
+    public boolean canFocus();
 
-    protected Renderable background;
+    public void focus();
 
-    protected String type;
+    public void lostFocus();
 
-    protected boolean focusable = false;
+    public void onFocus( boolean focus );
 
-    boolean hasFocus = false;
-    
-    protected String tooltip = null;
+    public double getExpansion();
 
-    public Component()
-    {
-        this.x = 0;
-        this.y = 0;
-        this.width = 0;
-        this.height = 0;
-        this.expansion = 0;
-        this.parent = null;
-        this.visible = true;
-        this.styles = new HashSet<String>();
-        this.type = "component";
-    }
+    public void setExpansion( double value );
 
-    public String getType()
-    {
-        return this.type;
-    }
+    public boolean isVisible();
 
-    public void setType( String type )
-    {
-        this.type = type;
-        this.reStyle();
-    }
+    public void setVisible( boolean value );
 
-    public RootContainer getRoot()
-    {
-        if (this.parent == null) {
-            return null;
-        }
-        return this.parent.getRoot();
-    }
+    public int getMarginTop();
 
-    public Set<String> getStyles()
-    {
-        return this.styles;
-    }
+    public int getMarginLeft();
 
-    public void addStyle( String style, boolean test )
-    {
-        if (test) {
-            this.addStyle(style);
-        } else {
-            this.removeStyle(style);
-        }
-    }
+    public int getMarginBottom();
 
-    public void addStyle( String style )
-    {
-        if (!this.styles.contains(style)) {
-            this.styles.add(style);
-            this.reStyle();
-        }
-    }
+    public int getMarginRight();
 
-    public void removeStyle( String style )
-    {
-        if (this.styles.contains(style)) {
-            this.styles.remove(style);
-            this.reStyle();
-        }
-    }
+    public void setMarginTop( int value );
 
-    public void reStyle()
-    {
-        try {
-            RootContainer root = this.getRoot();
-            if (root != null) {
-                root.style(this);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+    public void setMarginRight( int value );
 
-    public Container getParent()
-    {
-        return this.parent;
-    }
+    public void setMarginBottom( int value );
 
-    public void remove()
-    {
-        if (this.parent != null) {
-            this.getParent().removeChild(this);
-        }
-    }
+    public void setMarginLeft( int value );
 
-    @Override
-    public boolean onKeyDown( KeyboardEvent ke )
-    {
-        return false;
-    }
+    public void setMinimumWidth( int value );
 
-    @Override
-    public boolean onKeyUp( KeyboardEvent ke )
-    {
-        return false;
-    }
+    public void setMinimumHeight( int value );
 
-    public boolean canFocus()
-    {
-        return this.focusable;
-    }
+    public void setMaximumWidth( int value );
 
-    public void focus()
-    {
-        RootContainer root = this.getRoot();
-        if (root != null) {
-            root.setFocus(this);
-        }
-    }
-
-    @Override
-    public void lostFocus()
-    {
-        RootContainer root = this.getRoot();
-        if (root != null) {
-            root.setFocus(null);
-        }
-    }
-
-    public void onFocus( boolean focus )
-    {
-    }
-
-    public double getExpansion()
-    {
-        return this.expansion;
-    }
-
-    public void setExpansion( double value )
-    {
-        if (value != this.expansion) {
-            this.expansion = value;
-
-            this.invalidate();
-            if (this.parent != null) {
-                this.parent.forceLayout();
-            }
-        }
-    }
-
-    public boolean isVisible()
-    {
-        return this.visible;
-    }
-
-    public void setVisible( boolean value )
-    {
-        this.visible = value;
-        if (this.parent != null) {
-            this.parent.forceLayout();
-        }
-    }
-
-    public int getMarginTop()
-    {
-        return this.marginTop;
-    }
-
-    public int getMarginLeft()
-    {
-        return this.marginLeft;
-    }
-
-    public int getMarginBottom()
-    {
-        return this.marginBottom;
-    }
-
-    public int getMarginRight()
-    {
-        return this.marginRight;
-    }
-
-    public void setMarginTop( int value )
-    {
-        if (this.marginTop != value) {
-            this.marginTop = value;
-            if (this.parent != null) {
-                this.parent.forceLayout();
-            }
-        }
-    }
-
-    public void setMarginRight( int value )
-    {
-        if (this.marginRight != value) {
-            this.marginRight = value;
-            if (this.parent != null) {
-                this.parent.forceLayout();
-            }
-        }
-    }
-
-    public void setMarginBottom( int value )
-    {
-        if (this.marginBottom != value) {
-            this.marginBottom = value;
-            if (this.parent != null) {
-                this.parent.forceLayout();
-            }
-        }
-    }
-
-    public void setMarginLeft( int value )
-    {
-        if (this.marginLeft != value) {
-            this.marginLeft = value;
-            if (this.parent != null) {
-                this.parent.forceLayout();
-            }
-        }
-    }
-
-    public void setMinimumWidth( int value )
-    {
-        if (this.minimumWidth != value) {
-            this.minimumWidth = value;
-            if (this.parent != null) {
-                this.parent.forceLayout();
-            }
-        }
-    }
-
-    public void setMinimumHeight( int value )
-    {
-        if (this.minimumHeight != value) {
-            this.minimumHeight = value;
-            if (this.parent != null) {
-                this.parent.forceLayout();
-            }
-        }
-    }
-
-    public void setMaximumWidth( int value )
-    {
-        if (this.maximumWidth != value) {
-            this.maximumWidth = value;
-            if (this.parent != null) {
-                this.parent.forceLayout();
-            }
-        }
-    }
-
-    public void setMaximumHeight( int value )
-    {
-        if (this.maximumHeight != value) {
-            this.maximumHeight = value;
-            if (this.parent != null) {
-                this.parent.forceLayout();
-            }
-        }
-    }
+    public void setMaximumHeight( int value );
 
     /**
      * Gets the required width of the component, and is based entirely on this component. It cannot be dependent on the parent's width,
@@ -327,228 +95,53 @@ public abstract class Component implements Focusable
      * 
      * @return The required width of the component
      */
-    public abstract int getNaturalWidth();
+    public int getNaturalWidth();
 
-    public abstract int getNaturalHeight();
+    public int getNaturalHeight();
 
-    public int getRequiredWidth()
-    {
-        return Math.min(this.maximumWidth, Math.max(this.minimumWidth, this.getNaturalWidth()));
-    }
+    public int getRequiredWidth();
 
-    public int getRequiredHeight()
-    {
-        return Math.min(this.maximumHeight, Math.max(this.minimumHeight, this.getNaturalHeight()));
-    }
+    public int getRequiredHeight();
 
-    public Font getFont()
-    {
-        return this.font;
-    }
+    public Font getFont();
 
-    private boolean overrideFontRule;
+    public void setFont( Font font );
 
-    void setFontFromRule( Font font )
-    {
-        if (!this.overrideFontRule) {
-            setFont(font);
-            this.overrideFontRule = false;
-        }
-    }
+    public int getFontSize();
 
-    public void setFont( Font font )
-    {
-        if (this.font != font) {
-            this.font = font;
-            if (this.parent != null) {
-                this.parent.forceLayout();
-            }
-        }
-        this.overrideFontRule = true;
-    }
+    public void setFontSize( int fontSize );
 
-    public int getFontSize()
-    {
-        return this.fontSize;
-    }
+    public int getX();
 
-    public void setFontSize( int fontSize )
-    {
-        if (this.fontSize != fontSize) {
-            this.fontSize = fontSize;
-            if (this.parent != null) {
-                this.parent.forceLayout();
-            }
-        }
-    }
+    public int getY();
 
-    public int getX()
-    {
-        if (this.parent != null) {
-            this.parent.ensureLayedOut();
-        }
-        return this.x;
-    }
+    public int getWidth();
 
-    public int getY()
-    {
-        if (this.parent != null) {
-            this.parent.ensureLayedOut();
-        }
-        return this.y;
-    }
-
-    public int getWidth()
-    {
-        if (this.parent != null) {
-            this.parent.ensureLayedOut();
-        }
-        return this.width;
-    }
-
-    public int getHeight()
-    {
-        if (this.parent != null) {
-            this.parent.ensureLayedOut();
-        }
-        return this.height;
-    }
+    public int getHeight();
 
     /**
      * Called by the parent's layout during the layout phase. If the parent has a free-layout, then the position and size of children can be
      * set arbitrarily by the application designer.
      */
-    public void setPosition( int x, int y, int width, int height )
-    {
-        if ((this.x != x) || (this.y != y) || (this.width != width) || (this.height != height)) {
-            this.x = x;
-            this.y = y;
-            this.width = width;
-            this.height = height;
-            this.invalidate();
-        }
-    }
+    public void setPosition( int x, int y, int width, int height );
 
-    public void moveTo( int x, int y )
-    {
-        if ((this.x != x) || (this.y != y)) {
-            this.x = x;
-            this.y = y;
-            this.invalidate();
-        }
-    }
+    public void moveTo( int x, int y );
 
-    public void invalidate()
-    {
-        RootContainer root = this.getRoot();
-        if (root != null) {
-            root.invalidate();
-        }
-    }
+    public void invalidate();
 
-    protected void render( GraphicsContext gc )
-    {
-        this.renderBackground(gc);
-    }
+    public void setBackground( Renderable background );
 
-    protected void renderBackground( GraphicsContext gc )
-    {
-        if (this.background != null) {
-            Surface surface = new Surface(this.getWidth(), this.getHeight(), true);
-            this.background.render(surface);
-            gc.blit(surface, 0, 0, Surface.BlendMode.COMPOSITE);
-            surface.free();
-        }
-    }
+    public void setColor( RGBA color );
 
-    public void setBackground( Renderable background )
-    {
-        if (this.background != background) {
-            this.background = background;
-            this.invalidate();
-        }
-    }
+    public RGBA getColor();
 
-    public void setColor( RGBA color )
-    {
-        this.color = color;
-        this.invalidate();
-    }
+    public boolean hasAncestor( String type );
 
-    public RGBA getColor()
-    {
-        return this.color;
-    }
+    public boolean hasAncestorStyle( String style );
 
-    public boolean hasAncestor( String type )
-    {
-        for (Iterator<Container> i = this.getAncestors(); i.hasNext();) {
-            Component ancestor = i.next();
+    public Rect getAbsolutePosition();
 
-            if (type.equals(ancestor.getType())) {
-                return true;
-            }
-        }
-        return false;
-
-    }
-
-    public boolean hasAncestorStyle( String style )
-    {
-        for (Iterator<Container> i = this.getAncestors(); i.hasNext();) {
-            Component ancestor = i.next();
-
-            if (ancestor.getStyles().contains(style)) {
-                return true;
-            }
-        }
-        return false;
-
-    }
-
-    public Rect getAbsolutePosition()
-    {
-        Rect rect = new Rect(this.x, this.y, this.getWidth(), this.getHeight());
-
-        Container parent = this.parent;
-        while (parent != null) {
-            rect.x += parent.getX();
-            rect.y += parent.getY();
-
-            parent = parent.getParent();
-        }
-
-        return rect;
-    }
-
-    public Iterator<Container> getAncestors()
-    {
-        return new AncestorIterator();
-    }
-
-    public class AncestorIterator implements Iterator<Container>
-    {
-        private Container nextAncestor = Component.this.parent;
-
-        @Override
-        public boolean hasNext()
-        {
-            return (this.nextAncestor != null) && (this.nextAncestor.parent != null);
-        }
-
-        @Override
-        public void remove()
-        {
-        }
-
-        @Override
-        public Container next()
-        {
-            Container result = this.nextAncestor;
-            this.nextAncestor = this.nextAncestor.getParent();
-            return result;
-        }
-    }
+    public Iterator<Container> getAncestors();
 
     /**
      * @param event
@@ -556,24 +149,7 @@ public abstract class Component implements Focusable
      * 
      * @return True is the mouse event has been handled, otherwise false.
      */
-    public boolean mouseDown( MouseButtonEvent event )
-    {
-        if (this.contains2(event)) {
-
-            int dx = this.x;
-            int dy = this.y;
-
-            event.x -= dx;
-            event.y -= dy;
-            try {
-                return this.onMouseDown(event);
-            } finally {
-                event.x += dx;
-                event.y += dy;
-            }
-        }
-        return false;
-    }
+    public boolean mouseDown( MouseButtonEvent event );
 
     /**
      * @param event
@@ -581,24 +157,7 @@ public abstract class Component implements Focusable
      * 
      * @return True is the mouse event has been handled, otherwise false.
      */
-    public boolean mouseMove( MouseMotionEvent event )
-    {
-        if (this.contains2(event)) {
-
-            int dx = this.x;
-            int dy = this.y;
-
-            event.x -= dx;
-            event.y -= dy;
-            try {
-                return this.onMouseMove(event);
-            } finally {
-                event.x += dx;
-                event.y += dy;
-            }
-        }
-        return false;
-    }
+    public boolean mouseMove( MouseMotionEvent event );
 
     /**
      * @param event
@@ -606,106 +165,53 @@ public abstract class Component implements Focusable
      * 
      * @return True is the mouse event has been handled, otherwise false.
      */
-    public boolean mouseUp( MouseButtonEvent event )
-    {
-        if (this.contains2(event)) {
-
-            int dx = this.x;
-            int dy = this.y;
-
-            event.x -= dx;
-            event.y -= dy;
-            try {
-                return this.onMouseUp(event);
-            } finally {
-                event.x += dx;
-                event.y += dy;
-            }
-        }
-        return false;
-    }
+    public boolean mouseUp( MouseButtonEvent event );
 
     /**
      * 
      * @param event
      *        The mouse event, where x and y are relative to this component.
      */
-    public boolean onMouseDown( MouseButtonEvent event )
-    {
-        // This base class does nothing.
-        return false;
-    }
+    public boolean onMouseDown( MouseButtonEvent event );
 
     /**
      * 
      * @param event
      *        The mouse event, where x and y are relative to this component.
      */
-    public boolean onMouseUp( MouseButtonEvent event )
-    {
-        // This base class does nothing.
-        return false;
-    }
+    public boolean onMouseUp( MouseButtonEvent event );
 
     /**
      * @param event
      *        The mouse event, where x and y are relative to this component.
      */
-    public boolean onMouseMove( MouseMotionEvent event )
-    {
-        // This base class does nothing.
-        return false;
-    }
+    public boolean onMouseMove( MouseMotionEvent event );
 
     /**
      * Given an event whose x,y are relative to this Component, check if the event is within this Component.
+     * 
      * @param event
      * @return true iff the mouse event took place within the component.
      */
-    public boolean contains( MouseEvent event )
-    {
-        return (event.x) >= 0 && (event.y >= 0) && (event.x < this.getWidth()) && (event.y < this.getHeight());
-    }
+    public boolean contains( MouseEvent event );
 
     /**
      * Given an event whose x,y are relative to my parent Container, check if the event is within this Component.
+     * 
      * @param event
      * @return true iff the mouse event took place within this Component.
      */
-    public boolean contains2( MouseEvent event )
-    {
-        return (event.x) >= this.getX() && (event.y >= this.getY()) &&
-            (event.x < this.getX() + this.getWidth()) &&
-            (event.y < this.getY() + this.getHeight());
-    }
+    public boolean contains2( MouseEvent event );
 
     /**
-     * Return this, if the event is within this component, otherwise null  
+     * Return this, if the event is within this component, otherwise null
      */
-    public Component getComponent( MouseEvent me )
-    {
-        if ( this.contains( me ) ) {                
-            return this;
-        }
-        
-        return null;
-    }
-    
-    public String getTooltip()
-    {
-        return this.tooltip;
-    }
-    
-    public void setTooltip( String tooltip )
-    {
-        this.tooltip = tooltip;
-    }
+    public Component getComponent( MouseEvent me );
 
-    @Override
-    public String toString()
-    {
-        return this.getClass().getName() + " Type: " + this.type + " Styles: " + this.styles
-            + " (" + this.x + "," + this.y + ") - (" + this.width + "," + this.height + ")";
-    }
+    public String getTooltip();
+
+    public void setTooltip( String tooltip );
+
+    public void render( GraphicsContext gc );
 
 }

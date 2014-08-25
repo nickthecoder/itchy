@@ -12,8 +12,9 @@ import uk.co.nickthecoder.itchy.InputResource;
 import uk.co.nickthecoder.itchy.KeyInput;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Button;
-import uk.co.nickthecoder.itchy.gui.Container;
+import uk.co.nickthecoder.itchy.gui.PlainContainer;
 import uk.co.nickthecoder.itchy.gui.GridLayout;
+import uk.co.nickthecoder.itchy.gui.Container;
 import uk.co.nickthecoder.itchy.gui.ReflectionTableModelRow;
 import uk.co.nickthecoder.itchy.gui.SimpleTableModel;
 import uk.co.nickthecoder.itchy.gui.SingleColumnRowComparator;
@@ -79,7 +80,7 @@ public class InputsEditor extends SubEditor<InputResource>
 
         GridLayout grid = this.form.grid;
 
-        Container container = new Container();
+        PlainContainer container = new PlainContainer();
         container.addStyle("combo");
         this.keysText = new TextBox( this.currentResource.getInput().getKeys() );
         Button keysButton = new Button("+");

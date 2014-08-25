@@ -10,11 +10,11 @@ import java.util.HashMap;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Button;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
-import uk.co.nickthecoder.itchy.gui.Container;
+import uk.co.nickthecoder.itchy.gui.PlainContainer;
 import uk.co.nickthecoder.itchy.gui.Picker;
 import uk.co.nickthecoder.itchy.gui.TextBox;
 
-public class ComboBox extends Container
+public class ComboBox extends PlainContainer
 {
     private TextBox name;
 

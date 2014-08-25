@@ -4,8 +4,8 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.property;
 
-import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
+import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.IntegerBox;
 import uk.co.nickthecoder.itchy.util.BeanHelper;
 

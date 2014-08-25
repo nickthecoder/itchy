@@ -13,10 +13,11 @@ import uk.co.nickthecoder.itchy.animation.Frame;
 import uk.co.nickthecoder.itchy.animation.FramedAnimation;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Button;
-import uk.co.nickthecoder.itchy.gui.Component;
+import uk.co.nickthecoder.itchy.gui.AbstractComponent;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
-import uk.co.nickthecoder.itchy.gui.Container;
+import uk.co.nickthecoder.itchy.gui.PlainContainer;
 import uk.co.nickthecoder.itchy.gui.GridLayout;
+import uk.co.nickthecoder.itchy.gui.Container;
 import uk.co.nickthecoder.itchy.gui.ImageComponent;
 import uk.co.nickthecoder.itchy.gui.IntegerBox;
 import uk.co.nickthecoder.itchy.gui.Label;
@@ -28,7 +29,7 @@ public class FramedAnimationEditor extends AnimationEditor
 
     private List<Frame> frames;
 
-    private Container framesContainer;
+    private PlainContainer framesContainer;
 
     private GridLayout framesGrid;
 
@@ -65,11 +66,11 @@ public class FramedAnimationEditor extends AnimationEditor
     }
 
     @Override
-    public Component createExtra()
+    public AbstractComponent createExtra()
     {
         this.frames = new ArrayList<Frame>(((FramedAnimation) this.animation).getFrames());
 
-        this.framesContainer = new Container();
+        this.framesContainer = new PlainContainer();
         this.framesContainer.addStyle("form");
         this.framesGrid = new GridLayout(this.framesContainer, 4);
 
@@ -99,7 +100,7 @@ public class FramedAnimationEditor extends AnimationEditor
 
     private void rebuildFrame( final int i, final Frame frame )
     {
-        Component image;
+        AbstractComponent image;
         ImageComponent img = new ImageComponent(frame.getPose().getSurface());
         image = img;
         final IntegerBox delay = new IntegerBox(frame.getDelay());

@@ -8,9 +8,11 @@ import uk.co.nickthecoder.itchy.FontResource;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Button;
+import uk.co.nickthecoder.itchy.gui.AbstractComponent;
+import uk.co.nickthecoder.itchy.gui.PlainContainer;
+import uk.co.nickthecoder.itchy.gui.HorizontalLayout;
 import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.Container;
-import uk.co.nickthecoder.itchy.gui.HorizontalLayout;
 import uk.co.nickthecoder.itchy.gui.Label;
 import uk.co.nickthecoder.itchy.gui.VerticalLayout;
 import uk.co.nickthecoder.itchy.gui.VerticalScroll;
@@ -42,7 +44,7 @@ public abstract class FontPicker extends Window
         this.clientArea.setLayout(new VerticalLayout());
         this.clientArea.setXAlignment(0.5f);
 
-        Container container = new Container();
+        PlainContainer container = new PlainContainer();
         container.setFill(true, false);
         VerticalScroll vs = new VerticalScroll(container);
         vs.setNaturalHeight(400);
@@ -51,7 +53,7 @@ public abstract class FontPicker extends Window
         this.clientArea.addChild(vs);
         this.clientArea.addStyle("vScrolled");
 
-        Container buttons = new Container();
+        PlainContainer buttons = new PlainContainer();
         buttons.addStyle("buttonBar");
         buttons.setLayout(new HorizontalLayout());
         buttons.setXAlignment(0.5f);
@@ -83,7 +85,7 @@ public abstract class FontPicker extends Window
             FontResource fontResource = this.resources.getFontResource(name);
 
             try {
-                Component component = this.createButton(fontResource);
+                AbstractComponent component = this.createButton(fontResource);
 
                 container.addChild(component);
                 if (fontResource == initialValue) {
@@ -96,7 +98,7 @@ public abstract class FontPicker extends Window
         return focus;
     }
 
-    private Component createButton( final FontResource fontResource )
+    private AbstractComponent createButton( final FontResource fontResource )
         throws JameException
     {
         Button button = new Button();

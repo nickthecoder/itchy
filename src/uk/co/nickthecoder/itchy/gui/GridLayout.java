@@ -25,7 +25,7 @@ public class GridLayout implements Layout
 
     private Set<GridLayout> group;
 
-    public GridLayout( Container container, int columns )
+    public GridLayout( PlainContainer container, int columns )
     {
         container.addStyle("grid");
         this.rows = new ArrayList<Component[]>();
@@ -148,7 +148,7 @@ public class GridLayout implements Layout
     public void addChild( Component component )
     {
         if (this.currentRow == null) {
-            this.currentRow = new Component[this.columnCount];
+            this.currentRow = new AbstractComponent[this.columnCount];
             for (int i = 0; i < this.columnCount; i++) {
                 this.currentRow[i] = new NullComponent();
             }
@@ -181,7 +181,7 @@ public class GridLayout implements Layout
     * independently, even though it should be possible to calculate them only once.
     */
     @Override
-    public void calculateRequirements( Container container )
+    public void calculateRequirements( PlainContainer container )
     {
         int requiredWidthInc = 0;
         int requiredHeight = 0;
@@ -228,7 +228,7 @@ public class GridLayout implements Layout
     }
 
     @Override
-    public void layout( Container container )
+    public void layout( PlainContainer container )
     {
 
         int y = container.getPaddingTop();
@@ -247,13 +247,11 @@ public class GridLayout implements Layout
             int i = 0;
             for (Component component : row) {
 
-                int height = container.getFillY() ?
-                    maxHeightInc - component.getMarginTop() - component.getMarginBottom() :
-                    component.getRequiredHeight();
+                int height = container.getFillY() ? maxHeightInc - component.getMarginTop() - component.getMarginBottom() : component
+                    .getRequiredHeight();
 
-                int width = container.getFillX() ?
-                    this.widthsInc[i] - component.getMarginLeft() - component.getMarginRight() :
-                    component.getRequiredWidth();
+                int width = container.getFillX() ? this.widthsInc[i] - component.getMarginLeft() - component.getMarginRight() : component
+                    .getRequiredWidth();
 
                 int yDiff = maxHeightInc - (height + component.getMarginTop() + component.getMarginBottom());
                 int extraY = (int) (yDiff * container.getYAlignment());

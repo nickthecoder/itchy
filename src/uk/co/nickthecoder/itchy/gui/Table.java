@@ -12,15 +12,15 @@ import uk.co.nickthecoder.itchy.util.ReverseComparator;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.Keys;
 
-public class Table extends Container
+public class Table extends PlainContainer
 {
     private TableModel model;
 
     private final List<TableModelColumn> columns;
 
-    private final Container headings;
+    private final PlainContainer headings;
 
-    private final Container rows;
+    private final PlainContainer rows;
 
     private final RowLayout rowLayout;
 
@@ -47,12 +47,12 @@ public class Table extends Container
 
         this.rowLayout = new RowLayout(this.columns);
 
-        this.headings = new Container();
+        this.headings = new PlainContainer();
         this.headings.setType("tableHeadings");
         this.headings.setLayout(this.rowLayout);
         // this.headings.setFill( true, true );
 
-        this.rows = new Container();
+        this.rows = new PlainContainer();
         this.rows.setLayout(new VerticalLayout());
         this.rows.setFill(true, true);
 
@@ -62,7 +62,7 @@ public class Table extends Container
         this.setFill(false, true); // MORE ???
 
         for (int i = 0; i < this.columns.size(); i++) {
-            Component heading = this.createHeading(i);
+            AbstractComponent heading = this.createHeading(i);
             this.headings.addChild(heading);
         }
 
@@ -72,11 +72,11 @@ public class Table extends Container
         this.reset();
     }
 
-    private Component createHeading( final int columnIndex )
+    private AbstractComponent createHeading( final int columnIndex )
     {
         TableModelColumn column = this.columns.get(columnIndex);
 
-        Component heading;
+        AbstractComponent heading;
         Comparator<TableModelRow> comparator = column.rowComparator;
 
         if (comparator != null) {
@@ -130,13 +130,13 @@ public class Table extends Container
 
     private void addRow( TableModelRow row )
     {
-        Container rowContainer = new TableRow(this, row, this.rows.getChildren().size());
+        PlainContainer rowContainer = new TableRow(this, row, this.rows.getChildren().size());
         rowContainer.setType("tableRow");
         rowContainer.setLayout(this.rowLayout);
 
         boolean first = true;
         for (TableModelColumn column : this.columns) {
-            Component cell = column.createCell(row);
+            AbstractComponent cell = column.createCell(row);
             cell.addStyle("cell");
             rowContainer.addChild(cell);
             if (first) {

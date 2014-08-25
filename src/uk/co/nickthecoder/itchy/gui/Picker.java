@@ -22,7 +22,7 @@ public abstract class Picker<T> extends Window
         this.clientArea.setFill(true, false);
         this.clientArea.setLayout(new VerticalLayout());
 
-        Container container = new Container();
+        PlainContainer container = new PlainContainer();
         container.setLayout(new VerticalLayout());
         container.setFill(true, true);
         container.addStyle("picker");
@@ -40,15 +40,14 @@ public abstract class Picker<T> extends Window
             Component component = this.createButton(key, object);
             container.addChild(component);
 
-            if (((object == null) && (selected == null)) ||
-                ((object != null) && object.equals(selected))) {
+            if (((object == null) && (selected == null)) || ((object != null) && object.equals(selected))) {
                 // component.addStyle("selected");
                 component.focus();
             }
 
         }
 
-        Container buttons = new Container();
+        PlainContainer buttons = new PlainContainer();
         buttons.addStyle("buttonBar");
         buttons.setLayout(new HorizontalLayout());
         buttons.setXAlignment(0.5f);

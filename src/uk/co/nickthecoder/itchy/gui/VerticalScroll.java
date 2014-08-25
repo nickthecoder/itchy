@@ -11,15 +11,15 @@ import uk.co.nickthecoder.jame.event.Keys;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseEvent;
 
-public class VerticalScroll extends Container implements Layout
+public class VerticalScroll extends PlainContainer implements Layout
 {
-    protected Component child;
+    protected AbstractComponent child;
 
     private final Scrollbar scrollbar;
 
     private int scroll = 0;
 
-    public VerticalScroll( Component child )
+    public VerticalScroll( AbstractComponent child )
     {
         this.setType("vScroll");
 
@@ -129,7 +129,7 @@ public class VerticalScroll extends Container implements Layout
     }
 
     @Override
-    public void calculateRequirements( Container me )
+    public void calculateRequirements( PlainContainer me )
     {
         int width = this.child.getRequiredWidth() + this.getPaddingLeft() + this.getPaddingRight() +
             this.child.getMarginLeft() + this.child.getMarginRight();
@@ -138,7 +138,7 @@ public class VerticalScroll extends Container implements Layout
     }
 
     @Override
-    public void layout( Container me )
+    public void layout( PlainContainer me )
     {
         int width = this.getFillX() ? this.getWidth() - this.getPaddingLeft() -
             this.getPaddingRight() - this.child.getMarginLeft() - this.child.getMarginRight()
@@ -186,7 +186,7 @@ public class VerticalScroll extends Container implements Layout
 
     public class Scrollbar extends DragableContainer implements Layout
     {
-        Container scroller;
+        PlainContainer scroller;
 
         private int dragY;
 
@@ -196,7 +196,7 @@ public class VerticalScroll extends Container implements Layout
             this.setType("scrollbar");
             this.setLayout(this);
 
-            this.scroller = new Container();
+            this.scroller = new PlainContainer();
             this.scroller.setType("scroller");
             this.addChild(this.scroller);
 
@@ -205,7 +205,7 @@ public class VerticalScroll extends Container implements Layout
         }
 
         @Override
-        public void calculateRequirements( Container me )
+        public void calculateRequirements( PlainContainer me )
         {
             int height = VerticalScroll.this.getHeight() - this.getMarginTop() -
                 this.getMarginBottom();
@@ -242,7 +242,7 @@ public class VerticalScroll extends Container implements Layout
         }
 
         @Override
-        public void layout( Container me )
+        public void layout( PlainContainer me )
         {
             int scrollBarHeight = Scrollbar.this.getHeight();
             int clientHeight = VerticalScroll.this.getHeight(); // VerticalScroll.this.clientHeight;

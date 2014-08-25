@@ -13,7 +13,7 @@ public class MessageDialog extends Window
 
         this.clientArea.addChild(new Label(message));
 
-        Container buttons = new Container();
+        PlainContainer buttons = new PlainContainer();
         buttons.addStyle("buttonBar");
         this.clientArea.addChild(buttons);
 

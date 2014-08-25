@@ -11,7 +11,7 @@ import java.util.List;
 
 import uk.co.nickthecoder.itchy.GraphicsContext;
 import uk.co.nickthecoder.itchy.NinePatchResource;
-import uk.co.nickthecoder.itchy.gui.Component;
+import uk.co.nickthecoder.itchy.gui.AbstractComponent;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.FileOpenDialog;
 import uk.co.nickthecoder.itchy.gui.ImageComponent;
@@ -62,7 +62,7 @@ public class NinePatchEditor extends SubEditor<NinePatchResource>
 
         TableModelColumn imageColumn = new TableModelColumn("Image", 2, 200) {
             @Override
-            public Component createCell( TableModelRow row )
+            public AbstractComponent createCell( TableModelRow row )
             {
                 return new ImageComponent((Surface) (row.getData(this.index)));
             }
@@ -204,7 +204,7 @@ public class NinePatchEditor extends SubEditor<NinePatchResource>
         }
     }
     
-    public class ExplodedImage extends Component
+    public class ExplodedImage extends AbstractComponent
     {
         private final Surface surface;
 

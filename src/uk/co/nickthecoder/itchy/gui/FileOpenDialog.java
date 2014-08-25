@@ -11,7 +11,7 @@ import java.util.List;
 
 public class FileOpenDialog extends Window
 {
-    private Container ancestors;
+    private PlainContainer ancestors;
 
     private File directory;
 
@@ -27,7 +27,7 @@ public class FileOpenDialog extends Window
         this.clientArea.setLayout(new VerticalLayout());
         this.clientArea.setFill(true, true);
 
-        this.ancestors = new Container();
+        this.ancestors = new PlainContainer();
         this.ancestors.addStyle("combo");
         this.clientArea.addChild(this.ancestors);
 
@@ -56,7 +56,7 @@ public class FileOpenDialog extends Window
         this.message.addStyle("error");
         this.clientArea.addChild(this.message);
 
-        Container buttonBar = new Container();
+        PlainContainer buttonBar = new PlainContainer();
         buttonBar.addStyle("buttonBar");
         buttonBar.setXAlignment(0.5f);
         this.clientArea.addChild(buttonBar);

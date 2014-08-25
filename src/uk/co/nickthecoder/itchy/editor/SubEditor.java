@@ -10,9 +10,11 @@ import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.gui.AbstractTableListener;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Button;
+import uk.co.nickthecoder.itchy.gui.AbstractComponent;
+import uk.co.nickthecoder.itchy.gui.PlainContainer;
+import uk.co.nickthecoder.itchy.gui.FileOpenDialog;
 import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.Container;
-import uk.co.nickthecoder.itchy.gui.FileOpenDialog;
 import uk.co.nickthecoder.itchy.gui.Label;
 import uk.co.nickthecoder.itchy.gui.ReflectionTableModelRow;
 import uk.co.nickthecoder.itchy.gui.Table;
@@ -70,7 +72,7 @@ public abstract class SubEditor<S>
 
     public Container createPage()
     {
-        Container page = new Container();
+        Container page = new PlainContainer();
         page.setLayout(new VerticalLayout());
         page.setFill(true, true);
 
@@ -129,7 +131,7 @@ public abstract class SubEditor<S>
 
     private Container createListButtons()
     {
-        Container buttonBar = new Container();
+        PlainContainer buttonBar = new PlainContainer();
         buttonBar.addStyle("buttonBar");
         buttonBar.setXAlignment(0.5f);
 
@@ -225,9 +227,9 @@ public abstract class SubEditor<S>
         }
     }
 
-    public Component addOptionalScrollbars( Component component, int maxWidth, int maxHeight )
+    public Component addOptionalScrollbars( AbstractComponent component, int maxWidth, int maxHeight )
     {
-        Component result = component;
+        AbstractComponent result = component;
 
         if (component.getRequiredHeight() > maxHeight) {
             VerticalScroll vs = new VerticalScroll(result);
@@ -281,7 +283,7 @@ public abstract class SubEditor<S>
         this.message.setVisible(false);
         this.editWindow.clientArea.addChild(this.message);
 
-        Container buttons = new Container();
+        PlainContainer buttons = new PlainContainer();
         buttons.addStyle("buttonBar");
         buttons.setXAlignment(0.5f);
 

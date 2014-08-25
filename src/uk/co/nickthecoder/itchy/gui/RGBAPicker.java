@@ -73,7 +73,7 @@ public class RGBAPicker extends Window
 
     private final void createRGBForm()
     {
-        Container rgbForm = new Container();
+        PlainContainer rgbForm = new PlainContainer();
         rgbForm.setYAlignment(0.5);
         rgbForm.setFill(true, false);
         rgbForm.setXSpacing(10);
@@ -115,7 +115,7 @@ public class RGBAPicker extends Window
 
     private void createLowerForm()
     {
-        Container rgbaForm = new Container();
+        PlainContainer rgbaForm = new PlainContainer();
         rgbaForm.setYAlignment(0.5);
         rgbaForm.setFill(true, false);
 
@@ -156,7 +156,7 @@ public class RGBAPicker extends Window
 
     private final void createButtonBar()
     {
-        Container buttonBar = new Container();
+        PlainContainer buttonBar = new PlainContainer();
         buttonBar.addStyle("buttonBar");
         buttonBar.setXAlignment(0.5f);
 

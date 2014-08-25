@@ -16,10 +16,11 @@ import uk.co.nickthecoder.itchy.SoundResource;
 import uk.co.nickthecoder.itchy.Thumbnailed;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Button;
-import uk.co.nickthecoder.itchy.gui.Component;
+import uk.co.nickthecoder.itchy.gui.AbstractComponent;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
-import uk.co.nickthecoder.itchy.gui.Container;
+import uk.co.nickthecoder.itchy.gui.PlainContainer;
 import uk.co.nickthecoder.itchy.gui.FileOpenDialog;
+import uk.co.nickthecoder.itchy.gui.Container;
 import uk.co.nickthecoder.itchy.gui.MessageBox;
 import uk.co.nickthecoder.itchy.gui.PickerButton;
 import uk.co.nickthecoder.itchy.gui.ReflectionTableModelRow;
@@ -95,9 +96,9 @@ public class SoundsEditor extends SubEditor<SoundResource>
 
         TableModelColumn play = new TableModelColumn("Play", 1, 100) {
             @Override
-            public Component createCell( final TableModelRow row )
+            public AbstractComponent createCell( final TableModelRow row )
             {
-                Container container = new Container();
+                PlainContainer container = new PlainContainer();
 
                 Button button = new Button("Play");
                 button.addActionListener(new ActionListener() {

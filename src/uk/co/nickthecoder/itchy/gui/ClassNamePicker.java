@@ -13,7 +13,7 @@ public abstract class ClassNamePicker extends Window
 {
     private HashMap<String, GridLayout> sections = new HashMap<String, GridLayout>();
 
-    private Container main;
+    private PlainContainer main;
 
     private GridLayout previousGrid;
 
@@ -24,7 +24,7 @@ public abstract class ClassNamePicker extends Window
         this.clientArea.setFill(true, false);
         this.clientArea.setLayout(new VerticalLayout());
 
-        this.main = new Container();
+        this.main = new PlainContainer();
         this.main.setLayout(new VerticalLayout());
         this.main.setFill(true, false);
         this.main.setYSpacing(10);
@@ -42,7 +42,7 @@ public abstract class ClassNamePicker extends Window
 
         }
 
-        Container buttons = new Container();
+        PlainContainer buttons = new PlainContainer();
         buttons.addStyle("buttonBar");
         buttons.setLayout(new HorizontalLayout());
         buttons.setXAlignment(0.5f);
@@ -84,7 +84,7 @@ public abstract class ClassNamePicker extends Window
 
         GridLayout grid = this.sections.get(packageName);
         if (grid == null) {
-            Container headingAndBody = new Container();
+            PlainContainer headingAndBody = new PlainContainer();
             headingAndBody.addStyle("panel");
 
             headingAndBody.setLayout(new VerticalLayout());
@@ -93,7 +93,7 @@ public abstract class ClassNamePicker extends Window
             headingAndBody.addChild(packageLabel);
             headingAndBody.setYSpacing(5);
 
-            Container body = new Container();
+            PlainContainer body = new PlainContainer();
             body.setFill(true, false);
             body.setXSpacing(5);
             body.setYSpacing(5);

@@ -8,10 +8,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
-import uk.co.nickthecoder.itchy.gui.Container;
+import uk.co.nickthecoder.itchy.gui.PlainContainer;
 import uk.co.nickthecoder.itchy.gui.GridLayout;
+import uk.co.nickthecoder.itchy.gui.Component;
+import uk.co.nickthecoder.itchy.gui.Container;
 import uk.co.nickthecoder.itchy.gui.Label;
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
 import uk.co.nickthecoder.itchy.util.StringUtils;
@@ -23,7 +24,7 @@ public class PropertiesForm<S>
 {
     public S subject;
 
-    public Container container;
+    public PlainContainer container;
 
     public GridLayout grid;
 
@@ -38,7 +39,7 @@ public class PropertiesForm<S>
         this.subject = subject;
         this.properties = properties;
 
-        this.container = new Container();
+        this.container = new PlainContainer();
         this.container.setType("form");
         this.container.setYAlignment(0.5);
         this.grid = new GridLayout(this.container, 2);
@@ -77,7 +78,7 @@ public class PropertiesForm<S>
         if (StringUtils.isBlank(hint)) {
             return input;
         } else {
-            Container container = new Container();
+            PlainContainer container = new PlainContainer();
             container.setYAlignment(0.5);
             container.addChild(input);
             Label label = new Label(hint);

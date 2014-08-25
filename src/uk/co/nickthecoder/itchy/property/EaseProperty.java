@@ -8,8 +8,8 @@ import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.animation.Ease;
 import uk.co.nickthecoder.itchy.animation.EasePickerButton;
 import uk.co.nickthecoder.itchy.animation.LinearEase;
-import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
+import uk.co.nickthecoder.itchy.gui.Component;
 
 public class EaseProperty<S> extends AbstractProperty<S, Ease>
 {

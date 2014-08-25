@@ -25,10 +25,12 @@ import uk.co.nickthecoder.itchy.gui.AbstractTableListener;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Button;
 import uk.co.nickthecoder.itchy.gui.ClassNameBox;
-import uk.co.nickthecoder.itchy.gui.Component;
+import uk.co.nickthecoder.itchy.gui.AbstractComponent;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
-import uk.co.nickthecoder.itchy.gui.Container;
+import uk.co.nickthecoder.itchy.gui.PlainContainer;
 import uk.co.nickthecoder.itchy.gui.GridLayout;
+import uk.co.nickthecoder.itchy.gui.Component;
+import uk.co.nickthecoder.itchy.gui.Container;
 import uk.co.nickthecoder.itchy.gui.ImageComponent;
 import uk.co.nickthecoder.itchy.gui.Label;
 import uk.co.nickthecoder.itchy.gui.MessageBox;
@@ -69,7 +71,7 @@ public class CostumesEditor extends SubEditor<CostumeResource>
 
     private SimpleTableModel eventsTableModel;
 
-    private Container propertiesContainer;
+    private PlainContainer propertiesContainer;
 
     private Label labelExtendedFrom;
 
@@ -91,7 +93,7 @@ public class CostumesEditor extends SubEditor<CostumeResource>
         extendedFrom.rowComparator = new SingleColumnRowComparator<String>(2);
 
         TableModelColumn image = new TableModelColumn("\"default\" Pose", 1, 150) {
-            public Component createLabelOrImage( TableModelRow row )
+            public AbstractComponent createLabelOrImage( TableModelRow row )
             {
                 Costume costume = (Costume) row.getData(this.index);
 
@@ -104,9 +106,9 @@ public class CostumesEditor extends SubEditor<CostumeResource>
             }
 
             @Override
-            public Component createCell( TableModelRow row )
+            public AbstractComponent createCell( TableModelRow row )
             {
-                Container container = new Container();
+                PlainContainer container = new PlainContainer();
                 container.addChild(this.createLabelOrImage(row));
                 return container;
             }
@@ -166,14 +168,11 @@ public class CostumesEditor extends SubEditor<CostumeResource>
             @Override
             public void onClick( MouseButtonEvent e )
             {
-                CostumePicker picker = new CostumePicker(CostumesEditor.this.editor.resources,
-                    "None") {
+                CostumePicker picker = new CostumePicker(CostumesEditor.this.editor.resources, "None") {
                     @Override
                     public void pick( CostumeResource costumeResource )
                     {
-                        CostumesEditor.this.labelExtendedFrom
-                            .setText(costumeResource == null ? "None" : costumeResource
-                                .getName());
+                        CostumesEditor.this.labelExtendedFrom.setText(costumeResource == null ? "None" : costumeResource.getName());
                     }
                 };
                 picker.show();
@@ -181,19 +180,19 @@ public class CostumesEditor extends SubEditor<CostumeResource>
         };
         this.form.grid.addRow("Extends", this.buttonExtendedFrom);
 
-        Container all = new Container();
+        Container all = new PlainContainer();
         all.setLayout(new VerticalLayout());
         this.notebook = new Notebook();
 
-        Container eventsPage = new Container();
-        Container propertiesPage = new Container();
+        PlainContainer eventsPage = new PlainContainer();
+        PlainContainer propertiesPage = new PlainContainer();
         this.notebook.addPage("Events", eventsPage);
         this.notebook.addPage("Properties", propertiesPage);
 
         this.form.grid.addRow("", this.notebook);
 
         eventsPage.setLayout(new VerticalLayout());
-        Container eventsTableSection = new Container();
+        PlainContainer eventsTableSection = new PlainContainer();
 
         this.eventsTable = this.createEventsTable();
         this.eventsTable.addTableListener(new AbstractTableListener() {
@@ -207,7 +206,7 @@ public class CostumesEditor extends SubEditor<CostumeResource>
         this.eventsTable.sort(0);
         eventsTableSection.addChild(this.eventsTable);
         eventsPage.addChild(eventsTableSection);
-        Container eventsTableButtons = new Container();
+        PlainContainer eventsTableButtons = new PlainContainer();
         eventsTableButtons.setLayout(new VerticalLayout());
         eventsTableButtons.setYAlignment(0.5f);
         eventsTableSection.setFill(true, true);
@@ -247,8 +246,8 @@ public class CostumesEditor extends SubEditor<CostumeResource>
 
         propertiesPage.setLayout(new VerticalLayout());
 
-        this.propertiesClassName = new ClassNameBox(this.editor.getScriptManager(),
-            costume.getPropertiesClassName(), CostumeProperties.class);
+        this.propertiesClassName = new ClassNameBox(this.editor.getScriptManager(), costume.getPropertiesClassName(),
+            CostumeProperties.class);
 
         this.propertiesClassName.addChangeListener(new ComponentChangeListener() {
 
@@ -276,7 +275,7 @@ public class CostumesEditor extends SubEditor<CostumeResource>
         });
 
         propertiesPage.addChild(this.propertiesClassName);
-        this.propertiesContainer = new Container();
+        this.propertiesContainer = new PlainContainer();
         propertiesPage.addChild(this.propertiesContainer);
         createPropertiesGrid();
 
@@ -323,11 +322,9 @@ public class CostumesEditor extends SubEditor<CostumeResource>
     {
         CostumeProperties properties = this.currentResource.getCostume().getProperties();
 
-        if (!this.currentResource.getCostume().getPropertiesClassName().name.equals(
-            this.propertiesClassName.getClassName().name)) {
+        if (!this.currentResource.getCostume().getPropertiesClassName().name.equals(this.propertiesClassName.getClassName().name)) {
 
-            properties = CostumeProperties.createProperties(this.editor.getScriptManager(),
-                this.propertiesClassName.getClassName());
+            properties = CostumeProperties.createProperties(this.editor.getScriptManager(), this.propertiesClassName.getClassName());
         }
 
         GridLayout grid = new GridLayout(this.propertiesContainer, 2);
@@ -340,8 +337,7 @@ public class CostumesEditor extends SubEditor<CostumeResource>
                 grid.addRow(property.label, component);
 
             } catch (Exception e) {
-                System.err.println("Failed to create component for Costume Property : " +
-                    property.key);
+                System.err.println("Failed to create component for Costume Property : " + property.key);
                 e.printStackTrace();
             }
 
@@ -385,9 +381,9 @@ public class CostumesEditor extends SubEditor<CostumeResource>
             }
 
             @Override
-            public Component createCell( TableModelRow row )
+            public AbstractComponent createCell( TableModelRow row )
             {
-                Container container = new Container();
+                PlainContainer container = new PlainContainer();
                 this.addPlainCell(container, row);
                 return container;
             };
@@ -567,8 +563,7 @@ public class CostumesEditor extends SubEditor<CostumeResource>
 
     private void onAddAnimation()
     {
-        Picker<AnimationResource> picker = new Picker<AnimationResource>("Pick an Animation",
-            createAnimationsHashMap()) {
+        Picker<AnimationResource> picker = new Picker<AnimationResource>("Pick an Animation", createAnimationsHashMap()) {
 
             @Override
             public void pick( String label, AnimationResource animationResource )
@@ -586,8 +581,7 @@ public class CostumesEditor extends SubEditor<CostumeResource>
 
     private void onAddSound()
     {
-        Picker<SoundResource> picker = new Picker<SoundResource>("Pick a Sound",
-            createSoundsHashMap()) {
+        Picker<SoundResource> picker = new Picker<SoundResource>("Pick a Sound", createSoundsHashMap()) {
 
             @Override
             public void pick( String label, SoundResource soundResource )
@@ -611,7 +605,7 @@ public class CostumesEditor extends SubEditor<CostumeResource>
             public void pick( FontResource fontResource )
             {
                 Costume costume = CostumesEditor.this.currentResource.getCostume();
-                TextStyle textStyle = new TextStyle( fontResource.font, 14 );
+                TextStyle textStyle = new TextStyle(fontResource.font, 14);
                 costume.addTextStyle(NEW_EVENT_NAME, textStyle);
                 CostumesEditor.this.rebuildEventTable();
                 selectEventTableRow(NEW_EVENT_NAME, textStyle);
@@ -668,9 +662,8 @@ public class CostumesEditor extends SubEditor<CostumeResource>
     private PickerButton<SoundResource> eventSoundPickerButton;
 
     private ManagedSound eventManagedSound;
-    
+
     private TextStyle eventTextStyle;
-    
 
     private void onEditEvent()
     {
@@ -688,7 +681,7 @@ public class CostumesEditor extends SubEditor<CostumeResource>
             window.clientArea.setFill(true, true);
             window.clientArea.setLayout(new VerticalLayout());
 
-            Container form = new Container();
+            PlainContainer form = new PlainContainer();
             form.addStyle("form");
             GridLayout grid = new GridLayout(form, 2);
             form.setLayout(grid);
@@ -702,8 +695,7 @@ public class CostumesEditor extends SubEditor<CostumeResource>
                 grid.addRow("String", this.txtEventString);
 
             } else if (data instanceof PoseResource) {
-                this.eventPosePickerButton = new PosePickerButton(this.getResources(),
-                    (PoseResource) data);
+                this.eventPosePickerButton = new PosePickerButton(this.getResources(), (PoseResource) data);
                 grid.addRow("Pose", this.eventPosePickerButton);
 
             } else if (data instanceof TextStyle) {
@@ -711,7 +703,7 @@ public class CostumesEditor extends SubEditor<CostumeResource>
                 FontResource fr = this.getResources().getFontResource(this.eventTextStyle.getFont());
                 this.eventFontPickerButton = new FontPickerButton(this.getResources(), fr);
                 grid.addRow("Font", this.eventFontPickerButton);
-                
+
                 for (AbstractProperty<TextStyle, ?> property : this.eventTextStyle.getProperties()) {
                     try {
                         Component component = property.createComponent(this.eventTextStyle, true);
@@ -722,18 +714,14 @@ public class CostumesEditor extends SubEditor<CostumeResource>
                 }
 
             } else if (data instanceof AnimationResource) {
-                this.eventAnimationPickerButton = new PickerButton<AnimationResource>(
-                    "Pick an Animation",
-                    (AnimationResource) data,
+                this.eventAnimationPickerButton = new PickerButton<AnimationResource>("Pick an Animation", (AnimationResource) data,
                     createAnimationsHashMap());
                 grid.addRow("Animation", this.eventAnimationPickerButton);
 
             } else if (data instanceof ManagedSound) {
 
                 this.eventManagedSound = (ManagedSound) data;
-                this.eventSoundPickerButton = new PickerButton<SoundResource>(
-                    "Pick a Sound",
-                    this.eventManagedSound.soundResource,
+                this.eventSoundPickerButton = new PickerButton<SoundResource>("Pick a Sound", this.eventManagedSound.soundResource,
                     createSoundsHashMap());
                 grid.addRow("Sound", this.eventSoundPickerButton);
 
@@ -749,7 +737,7 @@ public class CostumesEditor extends SubEditor<CostumeResource>
                 System.err.println("Unexpected type in onEditEvent : " + data.getClass().getName());
             }
 
-            Container buttons = new Container();
+            PlainContainer buttons = new PlainContainer();
             buttons.addStyle("buttonBar");
             buttons.setXAlignment(0.5f);
 
@@ -781,7 +769,7 @@ public class CostumesEditor extends SubEditor<CostumeResource>
 
     private void onEditEventOk()
     {
-       
+
         Costume costume = this.currentResource.getCostume();
         TableModelRow row = this.eventsTable.getCurrentTableModelRow();
 
@@ -799,7 +787,7 @@ public class CostumesEditor extends SubEditor<CostumeResource>
                 costume.addPose(name, this.eventPosePickerButton.getValue());
 
             } else if (data instanceof TextStyle) {
-                this.eventTextStyle.setFont( this.eventFontPickerButton.getValue().font );
+                this.eventTextStyle.setFont(this.eventFontPickerButton.getValue().font);
                 costume.addTextStyle(name, this.eventTextStyle);
 
             } else if (data instanceof AnimationResource) {
@@ -810,8 +798,7 @@ public class CostumesEditor extends SubEditor<CostumeResource>
                 costume.addSound(name, this.eventManagedSound);
 
             } else {
-                System.err.println("Unexpected type in onEditEventOk : " +
-                    data.getClass().getName());
+                System.err.println("Unexpected type in onEditEventOk : " + data.getClass().getName());
             }
         }
 
@@ -945,7 +932,7 @@ public class CostumesEditor extends SubEditor<CostumeResource>
             @Override
             public void pick( FontResource fontResource )
             {
-                //CostumesEditor.this.add(fontResource);
+                // CostumesEditor.this.add(fontResource);
             }
         };
         picker.show();

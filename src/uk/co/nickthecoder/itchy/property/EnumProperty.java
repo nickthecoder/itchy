@@ -4,9 +4,9 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.property;
 
-import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.EnumPickerButton;
+import uk.co.nickthecoder.itchy.gui.Component;
 
 public class EnumProperty<S, E extends Enum<?>> extends AbstractProperty<S, E>
 {

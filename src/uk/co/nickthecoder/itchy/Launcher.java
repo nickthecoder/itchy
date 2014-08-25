@@ -10,7 +10,7 @@ import java.util.List;
 
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Button;
-import uk.co.nickthecoder.itchy.gui.Container;
+import uk.co.nickthecoder.itchy.gui.PlainContainer;
 import uk.co.nickthecoder.itchy.gui.Notebook;
 import uk.co.nickthecoder.itchy.gui.RootContainer;
 import uk.co.nickthecoder.itchy.gui.Stylesheet;
@@ -83,7 +83,7 @@ public class Launcher extends AbstractDirector
 
     private void createNotebookPage( Notebook notebook, final Page page )
     {
-        final Container container = new Container();
+        final PlainContainer container = new PlainContainer();
         container.addChild(page.createPage());
         container.setFill(true, true);
         notebook.addPage(page.getName(), container);

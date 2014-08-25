@@ -38,7 +38,7 @@ public class TableModelColumn
         return this.width;
     }
 
-    public Component createCell( TableModelRow row )
+    public AbstractComponent createCell( TableModelRow row )
     {
         Object data = row.getData(this.index);
         if (data == null) {

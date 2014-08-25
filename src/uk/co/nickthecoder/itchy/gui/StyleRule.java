@@ -109,7 +109,7 @@ public class StyleRule
         return true;
     }
 
-    public void apply( Component component )
+    public void apply( AbstractComponent component )
     {
         if (this.marginTop != NOT_SET) {
             component.setMarginTop(this.marginTop);
@@ -137,7 +137,7 @@ public class StyleRule
             component.setMaximumHeight(this.maximumHeight);
         }
 
-        if (component instanceof Container) {
+        if (component instanceof PlainContainer) {
             Container container = (Container) component;
 
             if (this.xSpacing != NOT_SET) {

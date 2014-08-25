@@ -32,19 +32,21 @@ import uk.co.nickthecoder.itchy.StageConstraint;
 import uk.co.nickthecoder.itchy.StageView;
 import uk.co.nickthecoder.itchy.TextPose;
 import uk.co.nickthecoder.itchy.View;
-import uk.co.nickthecoder.itchy.ZOrderStageInterface;
 import uk.co.nickthecoder.itchy.ZOrderStage;
+import uk.co.nickthecoder.itchy.ZOrderStageInterface;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Button;
 import uk.co.nickthecoder.itchy.gui.ButtonGroup;
 import uk.co.nickthecoder.itchy.gui.CheckBox;
 import uk.co.nickthecoder.itchy.gui.ClassNameBox;
-import uk.co.nickthecoder.itchy.gui.Component;
+import uk.co.nickthecoder.itchy.gui.AbstractComponent;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
-import uk.co.nickthecoder.itchy.gui.Container;
+import uk.co.nickthecoder.itchy.gui.PlainContainer;
 import uk.co.nickthecoder.itchy.gui.FlowLayout;
 import uk.co.nickthecoder.itchy.gui.GridLayout;
 import uk.co.nickthecoder.itchy.gui.GuiView;
+import uk.co.nickthecoder.itchy.gui.Component;
+import uk.co.nickthecoder.itchy.gui.Container;
 import uk.co.nickthecoder.itchy.gui.ImageComponent;
 import uk.co.nickthecoder.itchy.gui.Label;
 import uk.co.nickthecoder.itchy.gui.MessageBox;
@@ -116,19 +118,19 @@ public class SceneDesigner implements MouseListener, KeyListener
 
     private Notebook toolboxNotebook;
 
-    private Container propertiesContainer;
+    private PlainContainer propertiesContainer;
 
-    private Container roleContainer;
+    private PlainContainer roleContainer;
 
-    private Container appearanceContainer;
+    private PlainContainer appearanceContainer;
 
-    private Container layersContainer;
+    private PlainContainer layersContainer;
 
-    private Container sceneDetailsContainer;
+    private PlainContainer sceneDetailsContainer;
 
-    private Container scenePropertiesContainer;
+    private PlainContainer scenePropertiesContainer;
 
-    private Container makeupContainer;
+    private PlainContainer makeupContainer;
 
     private int mode = MODE_SELECT;
 
@@ -286,8 +288,7 @@ public class SceneDesigner implements MouseListener, KeyListener
     {
         int margin = 0;
         NinePatch ninePatch = this.editor.getStylesheet().resources.getNinePatch("pageBorder");
-        Surface newSurface = ninePatch.createSurface(this.sceneRect.width + margin * 2,
-            this.sceneRect.height + margin * 2);
+        Surface newSurface = ninePatch.createSurface(this.sceneRect.width + margin * 2, this.sceneRect.height + margin * 2);
 
         ImagePose newPose = new ImagePose(newSurface);
         newPose.setOffsetX(margin);
@@ -315,7 +316,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.toolbox.setPosition(0, 0, this.editor.getWidth(), 200);
         this.toolbox.addStyle("semi");
 
-        Container costumes = new Container();
+        PlainContainer costumes = new PlainContainer();
         costumes.addStyle("costumes");
         costumes.setLayout(new FlowLayout());
 
@@ -326,26 +327,26 @@ public class SceneDesigner implements MouseListener, KeyListener
         }
         VerticalScroll costumesScroll = new VerticalScroll(costumes);
 
-        this.propertiesContainer = new Container();
+        this.propertiesContainer = new PlainContainer();
         VerticalScroll propertiesScroll = new VerticalScroll(this.propertiesContainer);
 
-        this.appearanceContainer = new Container();
+        this.appearanceContainer = new PlainContainer();
         VerticalScroll appearanceScroll = new VerticalScroll(this.appearanceContainer);
 
-        this.roleContainer = new Container();
+        this.roleContainer = new PlainContainer();
         VerticalScroll roleScroll = new VerticalScroll(this.roleContainer);
 
-        this.layersContainer = new Container();
+        this.layersContainer = new PlainContainer();
         VerticalScroll layersScroll = new VerticalScroll(this.layersContainer);
 
-        this.makeupContainer = new Container();
+        this.makeupContainer = new PlainContainer();
         VerticalScroll makeupScroll = new VerticalScroll(this.makeupContainer);
 
-        this.sceneDetailsContainer = new Container();
-        this.scenePropertiesContainer = new Container();
+        this.sceneDetailsContainer = new PlainContainer();
+        this.scenePropertiesContainer = new PlainContainer();
         this.createScenePage();
         this.createSceneDirectorProperties();
-        Container sceneDetails1 = new Container();
+        PlainContainer sceneDetails1 = new PlainContainer();
         sceneDetails1.setLayout(new VerticalLayout());
         sceneDetails1.addChild(this.sceneDetailsContainer);
         sceneDetails1.addChild(this.scenePropertiesContainer);
@@ -376,10 +377,10 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.toolbox.setMinimumWidth(this.editor.getWidth());
         this.toolbox.setMaximumHeight(toolHeight);
         this.toolbox.setMinimumHeight(toolHeight);
-        //this.toolbox.show();
-        //this.toolbox.setPosition(0, this.editor.getHeight() - toolHeight, this.editor.getWidth(), toolHeight);
-        Rect rect = new Rect( 0, this.editor.getHeight() - toolHeight, this.editor.getWidth(), toolHeight );
-        GuiView view = new GuiView( rect, this.toolbox );
+        // this.toolbox.show();
+        // this.toolbox.setPosition(0, this.editor.getHeight() - toolHeight, this.editor.getWidth(), toolHeight);
+        Rect rect = new Rect(0, this.editor.getHeight() - toolHeight, this.editor.getWidth(), toolHeight);
+        GuiView view = new GuiView(rect, this.toolbox);
         Itchy.getGame().show(view);
     }
 
@@ -601,7 +602,7 @@ public class SceneDesigner implements MouseListener, KeyListener
                 onText();
             }
         });
-        textButton.setTooltip( "Add Text" );
+        textButton.setTooltip("Add Text");
         toolbar.addChild(textButton);
 
     }
@@ -643,8 +644,8 @@ public class SceneDesigner implements MouseListener, KeyListener
                 if (ok) {
                     SceneDesigner.this.scene.sceneDirectorClassName = box.getClassName();
                     try {
-                        SceneDesigner.this.scene.sceneDirector = SceneDesigner.this.scene.createSceneDirector(
-                            SceneDesigner.this.editor.resources);
+                        SceneDesigner.this.scene.sceneDirector = SceneDesigner.this.scene
+                            .createSceneDirector(SceneDesigner.this.editor.resources);
 
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -698,7 +699,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.appearanceContainer.clear();
 
         Costume costume = this.currentActor.getCostume();
-        Container container = new Container();
+        PlainContainer container = new PlainContainer();
         container.setType("form");
         GridLayout grid = new GridLayout(container, 2);
         grid.groupWith(this.appearancePropertiesForm.grid);
@@ -902,9 +903,9 @@ public class SceneDesigner implements MouseListener, KeyListener
             }
 
             @Override
-            public Component createCell( TableModelRow row )
+            public AbstractComponent createCell( TableModelRow row )
             {
-                Container container = new Container();
+                PlainContainer container = new PlainContainer();
                 addPlainCell(container, row);
                 return container;
             };
@@ -941,9 +942,9 @@ public class SceneDesigner implements MouseListener, KeyListener
             }
 
             @Override
-            public Component createCell( TableModelRow row )
+            public AbstractComponent createCell( TableModelRow row )
             {
-                Container container = new Container();
+                PlainContainer container = new PlainContainer();
                 container.setXAlignment(0.5);
                 addPlainCell(container, row);
                 return container;
@@ -1127,7 +1128,7 @@ public class SceneDesigner implements MouseListener, KeyListener
             } else if (event.symbol == Keys.DELETE) {
                 onActorDelete();
                 return true;
-            } else if ( (event.symbol >= Keys.KEY_1) && (event.symbol <= Keys.KEY_7) ) {
+            } else if ((event.symbol >= Keys.KEY_1) && (event.symbol <= Keys.KEY_7)) {
                 this.toolboxNotebook.selectPage(event.symbol - Keys.KEY_1);
                 return true;
 
@@ -1150,7 +1151,7 @@ public class SceneDesigner implements MouseListener, KeyListener
             } else if (event.symbol == Keys.KEY_0) {
                 onActorUnscale();
                 return true;
-                
+
             } else if (event.symbol == Keys.HASH) {
                 onResetZOrders();
                 return true;
@@ -1283,8 +1284,8 @@ public class SceneDesigner implements MouseListener, KeyListener
 
     private boolean isNearClick( MouseEvent event )
     {
-        boolean result = (event.x - this.previousClickX) * (event.x - this.previousClickX) +
-            (event.y - this.previousClickY) * (event.y - this.previousClickY) < 10;
+        boolean result = (event.x - this.previousClickX) * (event.x - this.previousClickX) + (event.y - this.previousClickY) *
+            (event.y - this.previousClickY) < 10;
 
         this.previousClickX = event.x;
         this.previousClickY = event.y;
@@ -1323,8 +1324,8 @@ public class SceneDesigner implements MouseListener, KeyListener
 
             // Has the user repeatedly clicked to find the object BELOW the currently selected one?
             // (or ABOVE, if shift is held down).
-            boolean searching = isNearClick && Itchy.isShiftDown() &&
-                (this.currentActor != null) && (this.currentActor.hitting(event.x, event.y));
+            boolean searching = isNearClick && Itchy.isShiftDown() && (this.currentActor != null) &&
+                (this.currentActor.hitting(event.x, event.y));
 
             if (Itchy.isCtrlDown()) {
                 // Look at ALL stages, not only the current one.
@@ -1422,7 +1423,7 @@ public class SceneDesigner implements MouseListener, KeyListener
                 stage.add(actor);
             }
 
-            // TO  DO, When stamping an actor implements undo/red, then the StageConstraint will have to implement it too.
+            // TO DO, When stamping an actor implements undo/red, then the StageConstraint will have to implement it too.
             sc.added(actor);
 
             if (!Itchy.isShiftDown()) {
@@ -1490,12 +1491,7 @@ public class SceneDesigner implements MouseListener, KeyListener
             double newY = sc.constrainY(reqX, reqY);
 
             if ((newX != this.currentActor.getX()) || (newY != this.currentActor.getY())) {
-                this.undoList.apply(
-                    new UndoMoveActor(
-                        this.currentActor,
-                        newX - this.currentActor.getX(),
-                        newY - this.currentActor.getY()
-                    ));
+                this.undoList.apply(new UndoMoveActor(this.currentActor, newX - this.currentActor.getX(), newY - this.currentActor.getY()));
                 this.changed = true;
                 beginDrag((int) (event.x + newX - reqX), (int) (event.y + newY - reqY));
             }
@@ -1841,8 +1837,7 @@ public class SceneDesigner implements MouseListener, KeyListener
 
         int margin = 10;
         NinePatch ninePatch = this.editor.getStylesheet().resources.getNinePatch("highlight");
-        Surface newSurface = ninePatch.createSurface(actorSurface.getWidth() + margin * 2,
-            actorSurface.getHeight() + margin * 2);
+        Surface newSurface = ninePatch.createSurface(actorSurface.getWidth() + margin * 2, actorSurface.getHeight() + margin * 2);
 
         ImagePose newPose = new ImagePose(newSurface);
         newPose.setOffsetX(this.currentActor.getAppearance().getOffsetX() + margin);
@@ -2048,10 +2043,8 @@ public class SceneDesigner implements MouseListener, KeyListener
                     pose.setFontSize(newFontSize);
                 } else {
                     double newScale = this.startScale * scale;
-                    double width = getActor().getAppearance().getPose().getSurface().getWidth() *
-                        newScale;
-                    double height = getActor().getAppearance().getPose().getSurface().getHeight() *
-                        newScale;
+                    double width = getActor().getAppearance().getPose().getSurface().getWidth() * newScale;
+                    double height = getActor().getAppearance().getPose().getSurface().getHeight() * newScale;
                     if ((width < 4) || (height < 4)) {
                         super.moveBy(-dx, -dy);
                         return;

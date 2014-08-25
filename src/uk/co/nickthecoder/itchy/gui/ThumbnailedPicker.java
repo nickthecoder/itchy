@@ -25,7 +25,7 @@ public abstract class ThumbnailedPicker<T extends Thumbnailed> extends Window
         this.clientArea.setFill(true, false);
         this.clientArea.setLayout(new VerticalLayout());
 
-        Container container = new Container();
+        PlainContainer container = new PlainContainer();
         container.setFill(true, true);
         GridLayout grid = new GridLayout(container, 6);
         container.setLayout(grid);
@@ -46,8 +46,7 @@ public abstract class ThumbnailedPicker<T extends Thumbnailed> extends Window
             Component component = this.createButton(key, object);
             grid.addChild(component);
 
-            if (((object == null) && (selected == null)) ||
-                ((object != null) && object.equals(selected))) {
+            if (((object == null) && (selected == null)) || ((object != null) && object.equals(selected))) {
                 // component.addStyle("selected");
                 component.focus();
             }
@@ -55,7 +54,7 @@ public abstract class ThumbnailedPicker<T extends Thumbnailed> extends Window
         }
         grid.endRow();
 
-        Container buttons = new Container();
+        PlainContainer buttons = new PlainContainer();
         buttons.addStyle("buttonBar");
         buttons.setLayout(new HorizontalLayout());
         buttons.setXAlignment(0.5f);
@@ -76,7 +75,7 @@ public abstract class ThumbnailedPicker<T extends Thumbnailed> extends Window
 
     private Component createButton( final String label, final T object )
     {
-        Container container = new Container();
+        PlainContainer container = new PlainContainer();
         container.setLayout(new VerticalLayout());
         container.setXAlignment(0.5);
         container.setYAlignment(1);

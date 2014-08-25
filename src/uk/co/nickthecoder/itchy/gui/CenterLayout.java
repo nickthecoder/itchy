@@ -10,7 +10,7 @@ public class CenterLayout implements Layout
 {
 
     @Override
-    public void calculateRequirements( Container container )
+    public void calculateRequirements( PlainContainer container )
     {
         int width = 0;
         int height = 0;
@@ -27,12 +27,11 @@ public class CenterLayout implements Layout
         }
 
         container.setNaturalWidth(width + container.getPaddingLeft() + container.getPaddingRight());
-        container.setNaturalHeight(height + container.getPaddingTop() +
-            container.getPaddingBottom());
+        container.setNaturalHeight(height + container.getPaddingTop() + container.getPaddingBottom());
     }
 
     @Override
-    public void layout( Container container )
+    public void layout( PlainContainer container )
     {
         int midX = container.getWidth() / 2;
         int midY = container.getHeight() / 2;
