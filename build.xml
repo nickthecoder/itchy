@@ -30,7 +30,7 @@
     <!-- Generate javadocs -->
     <target name="javadoc" depends="build">
         <copy file="docs/stylesheet.css" todir="docs/api/" />
-        <javadoc sourcepath="src" classpathref="project.class.path" access="protected" destdir="docs/api" windowtitle="Itchy">
+        <javadoc additionalparam="-title Itchy -overwriteresources -usecookies" sourcepath="src" doclet="uk.co.nickthecoder.prioritydoc.PriorityDoc" docletpath="lib/javadoc/prioritydoc.jar:lib/javadoc/freemarker-2.3.20.jar" classpathref="project.class.path" destdir="docs/api">
 
             <package name="uk.co.nickthecoder.itchy" />
             <package name="uk.co.nickthecoder.itchy.animation" />
@@ -41,10 +41,10 @@
             <package name="uk.co.nickthecoder.itchy.neighbourhood" />
             <package name="uk.co.nickthecoder.itchy.script" />
             <package name="uk.co.nickthecoder.itchy.util" />
+            <package name="uk.co.nickthecoder.itchy.property" />
 
             <link packagelistloc="http://nickthecoder.co.uk/public/jame/api/package-list" href="http://nickthecoder.co.uk/public/jame/api/" />
             <link packagelistloc="http://docs.oracle.com/javase/7/docs/api/package-list" href="http://docs.oracle.com/javase/7/docs/api/" />
-
         </javadoc>
         <exec executable="docs/diagrams/generateClassDiagrams.sh" />
     </target>
@@ -54,6 +54,7 @@
         <delete includeEmptyDirs="true">
             <fileset dir=".">
                 <include name="lib/itchy.jar" />
+                <include name="docs/api/uk/**" />
                 <include name="build/**" />
                 <exclude name="build" />
             </fileset>

@@ -1,21 +1,28 @@
 Bugs
 
     ithrust 2nd level collision detection of ship fails.
-    
-    
+
+Why Can't Component be an interface (even if its not used?)
+Rename one of the Button classes. ButtonRole
+
+Companion hierarchy.
+    Z-Order - Is the default behaviour sensible now that Costumes have default Z-Orders?
+        If we ever select a different Costume (i.e. "companion" method) then we should use that costume's z-order if it has one.
+
+    Are the builders doing more than they should? Any processing should be done in Companion, not in the XXXBuilder
+
 Look at companion, it has font, font size and color. Why ????
-    Check sub classes for get/set for font colour size etc.
+    Check sub classes for get/set for font colour size etc. I think this is done now???
     Check sub classes for margins???
-    WTF is the "companion" method. Gate uses it to 
 
 Talk and TalkProjectile
     Talk doesn't have "fade", which is the only reason that Gate uses TalkProjectile (it doesn't move!!!)
-    Should talk use animations to fade and die or a constant, hard-wired fade? 
-
-Thrust goes too fast sometimes.
+    Should talk use animations to fade and die or a constant, hard-wired fade?
+    Do we need Talk.stop now that we have TalkProjectile? It was originally there, so that it wouldn't follow!
 
 Put builders on extras class diagram. the roles are shown without their attributes
-   
+    Can the javadocs be coerced into showing the inherited methods?
+
 Change all "copy" methods to clone.
 
 Save an animation with delay/frames = 0 fails, but the error message throws an exception!!! - possibly Label's font not set
@@ -31,6 +38,43 @@ Why have a Role interface if everything will end up using AbstractRole?
 Rebuild Jame on i686, amd64, win32, arm32
     Package jame and itchy
 
+Use Groovy as a scripting language.
+    If Eclipse can correctly do syntax highlighting, auto-completion and pop-up documentation, then it should probably be the scripting
+        language of choice!!!
+    Create a wizard/simple instruction to setup an Eclipse workspace with Itchy's stuff in it, and the resources directory ready to be
+        edited.
+
+Created simplified documentation from javadocs.
+    Only document key classes.
+    Include all methods even if they are inherited from a base class.
+    Format in a more human readable form - expandable sections rather than a list with the details underneath.
+    Don't use tables
+    Choose which methods/attributes to hide/show. Either list the ones to hide or the ones to include.
+        Probably use "exclude" mostly, so that new methods/attributes will be included by default.
+        Public methods are shown by default, others are hidden by default.
+    Maybe include *all* classes, but categorise them as "core", "outer-core", "peripheral" and "hidden"
+    Maybe include *all* methods too, but filter some out by default. Add "NN methods hidden. Show..."
+    Don't make "extends" and "implements" too important. Most of the time we want to USE the class, not know how it is built.
+    Combine the class diagrams with these docs.
+
+    Methods shown simply as : (note that the parameters don't show their type)
+        myMethod( param1Name, param2Name ) -> ReturnType
+    When expanded, it changes to :
+        public ReturnType myMethod( Type1 param1Name, Type2 param2Name )
+
+    Never display fully qualify the types, you can see their type by hovering over it, or clicking.
+
+
+    How do I define a method's importance? Add an annotation or a javadoc tag, on each method.
+    But how important is that method on a sub-class? e.g. "setLayout" is quite important for a Component,
+    but not at all important for a JButton. (as it turns out, setLayout is overridden in AbstractButton, but pretend it isn't!).
+    So how do we say that setLayout is now unimportant for JButton? Some methods will remain important on their sub-classes,
+    and others will become less relevant.
+
+        Promote and demote tags at the class level? e.g.
+        @demote * // Will demote all inherited methods
+        @demote setLayout // Will demote the setLayout inherited methods.
+        Optional int before the list of methods
 
 
 Undo/Redo
@@ -40,7 +84,7 @@ Undo/Redo
     Cut actor
     Classname changes
     Paste an Actor
-    Any other fields which don't use propertiesforms    
+    Any other fields which don't use propertiesforms
 
     Toolbar buttons
 
@@ -94,10 +138,10 @@ Make Text Costumes real costumes - Don't use the "Text" tool.
         Actor(Costume, String poseName = "default" ) i.e. just two constructors.
         If a Pose is found use it, else if a Font is found use that, otherwise use a dummy 1x1 surface, and issue a warning.
     During load - if it finds a "text", then generate a costume which is used by later "text" actors.
-    
+
 Need to allow Makeup appear at any stage in the pipeline from the editor. e.g. a Decoration which should not be rotated with the actor.
 Or a clip done at the end.
-    A tick box "Advanced" will reveal a Compound Makeup as a table, with the standard items as well as the current Makeup if its not Null. 
+    A tick box "Advanced" will reveal a Compound Makeup as a table, with the standard items as well as the current Makeup if its not Null.
 
 Tiled background - instead of a RGBA, specify a Pose, and tile it in a Grid.
     More generic - Create a BackgroundView interface
@@ -117,7 +161,7 @@ Should Costumes have Makeup? If each jewel is given a Sparkle makeup, does it ma
     Costumes' makeup just like animations - based on events, and can have multiple options picked a random.
 
 Costume editor to have filters on event name and resource type.
-    i.e. show all Animations, or show all "death" events, or show all "death" Animations or show everything. 
+    i.e. show all Animations, or show all "death" events, or show all "death" Animations or show everything.
     Should the filters stay as you flick from one Costume to another - Yes, probably.
 
 EntryBox is firing change events for arrow keys.
@@ -125,7 +169,7 @@ EntryBox is firing change events for arrow keys.
 Allow Compound makeups
 Glitter Makeup - sprinkle poses randomly. use getpixel.
 Decoration - Adds a Pose to a given place relative to the actor's x,y.
-Underscore - used for text poses to place a line under the text. Use "_" to create the line,  or Surface.fill. 
+Underscore - used for text poses to place a line under the text. Use "_" to create the line,  or Surface.fill.
     Use it on link text when compound makeup is available.
 
 Companion string names wont be renamed when a costume is renamed.
@@ -140,7 +184,7 @@ Use JBox2D : http://www.jbox2d.org/
 
 When a js file imports another, remember the dependency, so that the dependent classes get re-loaded if the dependecy is reloaded.
     e.g. If Moving.js is changed then Rock.js, Ship.js etc are reloaded.
-    Think about circular dependencies. 
+    Think about circular dependencies.
     When a script is asked if it needs reloading :
         Create a set of its script and all of its dependencies (recursively)
         Find the latest timestamp
@@ -160,7 +204,7 @@ Create a Compound Role, which has a ClassName array of other Roles
     It has one AbstractProperty, who's Component is a table with Add/Remove Up/Down buttons, and clicking on any row show the
     properties for that row.
         Get this working for Role, and maybe it could be made generic for Makeup too.
-    
+
 BlitModes on Pose, so a "spotlight" can ADD
 
 "Duplicate" button in Animation editor - maybe on Costume too.
@@ -173,14 +217,14 @@ Drag and drop to move and reorder animation in the editor.
         Can fill the whole page, with the animation on top of it.
     Click at a point in the time-line to show that frame.
     Save the pose and start x,y, direction, heading with each animation ("test" tag)
-    
+
 Explanatory games
     e.g. Showing the different between heading and direction.
 
 Catch all ScriptExceptions
     Report them to ScriptErrorLog, which will also write to stderr (not as a stack trace)
     An icon on the popup Layer shows when a new error has occurred. Click to open the log viewer.
-        "Clear" button will remove the icon from the popup layer. 
+        "Clear" button will remove the icon from the popup layer.
 
 Much Later
 ==========
@@ -192,9 +236,9 @@ Simple convolution filter
         For RGB, just apply the matrix to each channel in turn.
         For RGBA we'd need to change the final DIVIDE to discount transparent pixels. i.e divide by sum of matrix * alphas.
         Apply the matrix to alpha as normal.
-        
+
    Many things just need the alpha channel convolved?
-           
+
 Look at rotozoom, and try to implement a generic affine transformation matrix???
     Calc size of dest
     Calc pos of corners
@@ -213,13 +257,13 @@ big horrible unorganised list.
         Defaults to false when adding via the CostumesEditor (if that gets written).
         When a pose is used by a second costume, it is also changed to true (must be done post-save).
     When listing Poses shows : all, shared or a single costume's. (via a picker button). Defaults to shared.
-    Animation names are still unique, but default to costumename.x when added via costumeseditor. 
+    Animation names are still unique, but default to costumename.x when added via costumeseditor.
     If an unshared pose is removed from its costume, then it is deleted - only acceptable if shared is hidden from the user.
     CostumesEditor needs Add -> Pose, New Pose, Animation, New Animation etc.
-    
+
     The "shared" tick box currently is useless, so either use it, or remove it.
     Add an "unused" filter, which lists poses not used by a Costume, and let them be deleted manually.
-    
+
 Same pattern for sounds and animations, not for font or nine patches.
 
 
@@ -250,10 +294,10 @@ Water looks naff
 
 The stars on Drunk Invaders backgrounds should have more variation (alpha and slight colour - maybe size too).
 
-Component : Override all rules. Currently only Font can be overridden.  
-    Allow to be reset to default (i.e. be restyled). 
+Component : Override all rules. Currently only Font can be overridden.
+    Allow to be reset to default (i.e. be restyled).
 
-Create a game which uses the GUI        
+Create a game which uses the GUI
 
 Container.render should get the NinePatches to render directly onto the gc, not via a temp surface.
 RenderableInterface is rubbish. NinePatches should be told where and how large to draw themselves
@@ -265,7 +309,7 @@ then pop the context.
 
 Appearance optimised so that it doesn't need to re-render the appearance to get the worldRectangle
     Maybe calculate the maximum rectangle for the Pose for any rotation
-    When asked for its worldRect, if cached, returned that, other wise if direction == 0, return pose.rectangle * scale, otherwise return maximum rect * scale   
+    When asked for its worldRect, if cached, returned that, other wise if direction == 0, return pose.rectangle * scale, otherwise return maximum rect * scale
 
 
 

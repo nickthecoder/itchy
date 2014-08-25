@@ -1,6 +1,9 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
- * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.role;
 
@@ -13,33 +16,6 @@ import uk.co.nickthecoder.itchy.Role;
 /**
  * Creates many particles from a central point, spreading outwards. This is typically used when an actor is destroyed.
  * 
- * Many of the methods return itself, which is designed to make setting up the explosion easier. For example, this code snippet taken from
- * "It's Gonna Rain" calls many methods :
- * 
- * <pre>
- * <code>
- * new Explosion(actor)
- *     .projectiles(10).gravity(-0.2).fade(0.9, 3.5).speed(0.1, 1.5).vy(5)
- *     .pose("droplet").createActor().activate(); 
- * </code>
- * </pre>
- * 
- * And is the same as this long winded form :
- * 
- * <pre>
- * <code>
- * Explosion explosion = new itchy.extras.Explosion(actor);
- * explosion.projectiles(10);
- * explosion.gravity(-0.2);
- * explosion.fade(0.9, 3.5);
- * explosion.speed(0.1, 1.5);
- * explosion.vy(5);
- * explosion.pose("droplet");
- * explosion.createActor().activate();
- * </code>
- * </pre>
- * 
- * Note that the createActor method returns an Actor (not the Explosion), and therefore must be last.
  */
 public class Explosion extends Companion
 {
@@ -219,8 +195,8 @@ public class Explosion extends Companion
             projectileBuilder.offsetSidewards(random.nextDouble() * this.randomOffsetSidewards);
 
             // Do speed and randomSpeed
-            if ((this.speedForwards != 0) || (this.speedSidewards != 0) ||
-                (this.randomSpeedForwards != 0) || (this.randomSpeedSidewards != 0)) {
+            if ((this.speedForwards != 0) || (this.speedSidewards != 0) || (this.randomSpeedForwards != 0) ||
+                (this.randomSpeedSidewards != 0)) {
 
                 double actualSpeedForwards = this.speedForwards + random.nextDouble() * this.randomSpeedForwards;
                 double actualSpeedSidewards = this.speedSidewards + random.nextDouble() * this.randomSpeedSidewards;
@@ -250,8 +226,8 @@ public class Explosion extends Companion
         }
     }
 
-    public static abstract class AbstractExplosionBuilder<C extends Explosion, B extends AbstractExplosionBuilder<C, B>>
-        extends AbstractCompanionBuilder<C, B>
+    public static abstract class AbstractExplosionBuilder<C extends Explosion, B extends AbstractExplosionBuilder<C, B>> extends
+        AbstractCompanionBuilder<C, B>
     {
         /**
          * The projectiles will fire this event when each Projectile's Actor is created. The event can select a Pose, an Animation, and can
