@@ -2,9 +2,17 @@ Bugs
 
     ithrust 2nd level collision detection of ship fails.
 
-Why Can't Component be an interface (even if its not used?)
 Rename one of the Button classes. ButtonRole
 
+CollisionStrategy
+	Decide whether actor or role has one. Actor???
+	Don't call it directory from game code, call it via actor.
+	Have it create an iterator of possible actors rather than actors that ARE matching
+		So BruteForce will return ALL actors (excluding self)
+		Clever ones will only return those from overlapping squares.
+		Actor will then do the overlapping/colliding test.
+	Maybe also add a find nearest? Nbh will look in current square, then in surrounding squares and outwards.
+	
 Companion hierarchy.
     Z-Order - Is the default behaviour sensible now that Costumes have default Z-Orders?
         If we ever select a different Costume (i.e. "companion" method) then we should use that costume's z-order if it has one.
@@ -23,7 +31,13 @@ Talk and TalkProjectile
 Put builders on extras class diagram. the roles are shown without their attributes
     Can the javadocs be coerced into showing the inherited methods?
 
-Change all "copy" methods to clone.
+Change all "copy" methods to clone???
+
+Use gradle instead of ant?
+    Use it in jame first???
+
+Try to use eclipse as the editor for a project not hosted within the itchy project.
+    Maybe move rox out of itchy.
 
 Save an animation with delay/frames = 0 fails, but the error message throws an exception!!! - possibly Label's font not set
     Catch the exception rather than let it crash the system
@@ -33,7 +47,8 @@ Should TextPose have a TextStyle, rather than individual attributes?
 
 Why have a Role interface if everything will end up using AbstractRole?
     Why does Role have "birth" and yet everything uses onBirth() ? Ditto with other events.
-    Talk to Simon about it.
+    At least make Role have the methods that people will actually use ie. onBirth rather than birth.
+    Actor could have any boilerplate code that is currently in AbstractRole.
 
 Rebuild Jame on i686, amd64, win32, arm32
     Package jame and itchy

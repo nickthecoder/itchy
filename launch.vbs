@@ -55,7 +55,7 @@ strPath = Wscript.ScriptFullName
 Set objFile = objFSO.GetFile(strPath)
 strFolder = objFSO.GetParentFolderName(objFile) 
 
-strCP = strFolder + "\lib\jame.jar;" + strFolder + "\lib\itchy.jar;" + strFolder + "\lib\jython-2.5.3.jar"
+strCP = strFolder + "\lib\jame.jar;" + strFolder + "\lib\itchy.jar;" + strFolder + "\lib\jython-2.5.3.jar;" + strFolder + "\lib\groovy-all-2.3.6.jar"
 
 strExplorerCommand = "explorer.exe /e," & strFolder
 

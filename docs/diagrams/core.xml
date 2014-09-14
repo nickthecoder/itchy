@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram title="Icthy Core" output="core.html" width="1200" height="2200">
+
+    <class name="uk.co.nickthecoder.itchy.Itchy" x="20" y="80"/>
+    <class name="uk.co.nickthecoder.itchy.Game" x="280" y="27"/>
+    <class name="uk.co.nickthecoder.itchy.Actor" x="1038" y="21"/>
+    <class name="uk.co.nickthecoder.itchy.Role" x="852" y="753"/>
+    <class name="uk.co.nickthecoder.itchy.AbstractRole" x="950" y="850"/>
+
+    <class name="uk.co.nickthecoder.itchy.AbstractView" x="950" y="850"/>
+    <class name="uk.co.nickthecoder.itchy.StageView" x="950" y="850"/>
+
+    <association from="uk.co.nickthecoder.itchy.Itchy" to="uk.co.nickthecoder.itchy.Game" toLabel="getGame" />
+    <association from="uk.co.nickthecoder.itchy.Actor" to="uk.co.nickthecoder.itchy.Role" toLabel="getRole" fromLabel="getActor"/>
+
+    <realization from="uk.co.nickthecoder.itchy.Role" to="uk.co.nickthecoder.itchy.AbstractRole"/>
+
+    <generalization from="uk.co.nickthecoder.itchy.AbstractView" to="uk.co.nickthecoder.itchy.StageView"/>
+
+</diagram>

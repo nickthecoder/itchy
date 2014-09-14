@@ -496,7 +496,7 @@ before we can harvest the honey.</string>
       <string name="honey">Ooo, sweet sticky goodness</string>
       <string name="honey">Honey's nice, but I prefer jam</string>
       <string name="talk-style">bubble</string>
-      <font name="talk-style" font="Comic" marginBottom="65" color="#000000ff" fontSize="24" marginLeft="10" marginRight="10" marginTop="15"/>
+      <font name="talk-style" font="Comic" fontSize="24" color="#000000ff" xAlignment="1.0" yAlignment="1.0" marginTop="15" marginRight="10" marginBottom="65" marginLeft="10"/>
       <animation name="exit" animation="player-exit"/>
       <animation name="hit" animation="player-hit"/>
       <animation name="sleep" animation="player-sleep"/>
@@ -563,7 +563,7 @@ before we can harvest the honey.</string>
       <string name="jam">The exit chute is blocked</string>
       <string name="jam">Get that thing out of the way</string>
       <string name="talk-style">bubble2</string>
-      <font name="talk-style" font="Computer" marginBottom="10" color="#172975ff" fontSize="26" marginLeft="10" marginRight="10" marginTop="10"/>
+      <font name="talk-style" font="Computer" fontSize="26" color="#172975ff" xAlignment="0.5" yAlignment="0.5" marginTop="10" marginRight="10" marginBottom="10" marginLeft="10"/>
       <animation name="scan" animation="copier-scan"/>
       <animation name="talk-fade" animation="copier-talk-fade"/>
     </costume>
@@ -862,6 +862,7 @@ before we can harvest the honey.</string>
     <scene name="grenades4"/>
     <scene name="intro"/>
     <scene name="level-template"/>
+    <scene name="matthew"/>
     <scene name="menu"/>
     <scene name="play"/>
     <scene name="rocks"/>

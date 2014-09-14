@@ -126,8 +126,8 @@ public interface Role extends MessageListener, Cloneable, PropertySubject<Role>
 
     /**
      * Used internally name the class for this Role. For a regular Java object, it will be the object's class name as returned by
-     * obj.getClass().getName(), however, for scripted role's it will be a string which identifies the name of the script. This will include
-     * the script's suffix. e.g. "Alien.js".
+     * obj.getClass().getName(), however, for scripted role's it will be a string which identifies the filename of the script. This will include
+     * the script's suffix. e.g. "Alien.py".
      * 
      * @return The ClassName for this Role.
      */
@@ -138,7 +138,7 @@ public interface Role extends MessageListener, Cloneable, PropertySubject<Role>
      * the {@link Property} annotation. For scripted Roles, the list of properties has to be built manually.
      * <p>
      * In an ideal world, this would be a class method, but as Java doesn't have class methods, we are stuck with an instance method (static
-     * methods don't give enough flexibility for this probllem). If you want to find the properties for a given Role sub-class, create an
+     * methods don't give enough flexibility for this problem). If you want to find the properties for a given Role sub-class, create an
      * instance and then call getProperties.
      */
     @Override

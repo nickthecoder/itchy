@@ -44,6 +44,7 @@ public class ScriptManager
 
         registerLanguage("js", (Class<ScriptLanguage>) (JavascriptLanguage.class.asSubclass(ScriptLanguage.class)));
         registerLanguage("py", (Class<ScriptLanguage>) (PythonLanguage.class.asSubclass(ScriptLanguage.class)));
+        registerLanguage("groovy", (Class<ScriptLanguage>) (GroovyLanguage.class.asSubclass(ScriptLanguage.class)));
     }
 
     public static void registerLanguage( String extension, Class<ScriptLanguage> class1 )
