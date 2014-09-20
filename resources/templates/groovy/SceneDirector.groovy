@@ -25,8 +25,6 @@ public class ${Name} extends PlainSceneDirector
     public ${Name}()
     {
         // TODO Initialise your object.
-        // self.myString = "Default Value"
-        // self.myInteger = 0
     }
         
     public void tick()
@@ -38,13 +36,13 @@ public class ${Name} extends PlainSceneDirector
     // onActivate, onDeactivate(), onMouseDown, onMouseUp, onMouseMove, onKeyDown, onKeyUp, onMessage
     
     // Boiler plate code - no need to change this
-    public ArrayList getProperties(self)
+    public ArrayList getProperties()
     {
         return properties
     }
     
     // Boiler plate code - no need to change this
-    public ClassName getClassName(self)
+    public ClassName getClassName()
     {
         return new ClassName( CostumeProperties, "${NAME}.groovy" )
     }

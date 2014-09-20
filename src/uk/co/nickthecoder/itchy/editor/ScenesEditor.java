@@ -162,22 +162,22 @@ public class ScenesEditor extends SubEditor<SceneResource>
         }
     }
 
-    public void design( String sceneName )
-    {
-        design(this.editor.resources.getSceneResource(sceneName));
-
-    }
-
     public void refresh()
     {
         this.rebuildTable();
     }
+    
+    public void design( String sceneName )
+        {
+            design(this.editor.resources.getSceneResource(sceneName));
+    
+    }
 
     public void design( SceneResource sceneResource )
     {
-        SceneDesigner designer = new SceneDesigner(this.editor, sceneResource);
+        this.editor.sceneDesigner = new SceneDesigner(this.editor, sceneResource);
         this.editor.root.hide();
-        designer.go();
+        this.editor.sceneDesigner.go();
     }
 
     @Override

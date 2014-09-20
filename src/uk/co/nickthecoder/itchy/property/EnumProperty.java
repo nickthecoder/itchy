@@ -83,6 +83,7 @@ public class EnumProperty<S, E extends Enum<?>> extends AbstractProperty<S, E>
         return null;
     }
 
+    
     @Override
     public String getStringValue( S subject ) throws Exception
     {

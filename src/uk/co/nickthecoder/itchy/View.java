@@ -46,6 +46,8 @@ public interface View
      */
     public Rect getPosition();
 
+    public void setPosition(Rect rect);
+    
     /**
      * @return The position of this View in display device coordinates, i.e. relative to the top left of the display.
      */

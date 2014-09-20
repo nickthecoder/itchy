@@ -29,6 +29,7 @@ import uk.co.nickthecoder.jame.event.Keys;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 import uk.co.nickthecoder.jame.event.QuitEvent;
+import uk.co.nickthecoder.jame.event.ResizeEvent;
 import uk.co.nickthecoder.jame.event.WindowEvent;
 
 /**
@@ -281,6 +282,14 @@ public class Game
     {
         this.director.onDeactivate();
     }
+    
+    public void resize( int width, int height )
+    {
+		Itchy.resizeScreen( width, height );
+		Rect rect = new Rect( 0,0, width, height ); 
+		this.allViews.setPosition( rect );
+		this.windows.setPosition( rect );
+    }
 
     /**
      * Kills all Actors and resets the layers to the origin.
@@ -518,7 +527,12 @@ public class Game
                 return;
             }
             Itchy.terminate();
-
+            
+        } else if (event instanceof ResizeEvent) {
+    		ResizeEvent re = (ResizeEvent) event;
+    		
+        	this.director.onResize( re.width, re.height );
+        	
         } else if (event instanceof KeyboardEvent) {
             KeyboardEvent ke = (KeyboardEvent) event;
 
@@ -744,6 +758,11 @@ public class Game
     public String getTitle()
     {
         return this.resources.getGameInfo().title;
+    }
+    
+    public boolean isResizable()
+    {
+    	return this.resources.getGameInfo().resizable;
     }
 
     /**

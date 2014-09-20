@@ -44,6 +44,11 @@ public abstract class AbstractView implements View
         return this.position;
     }
 
+    public void setPosition( Rect rect )
+    {
+    	this.position = rect;
+    }
+    
     @Override
     public Rect getAbsolutePosition()
     {

@@ -40,6 +40,11 @@
     <sound name="woo" filename="sounds/woo.ogg"/>
   </sounds>
   <animations>
+    <animation name="aTest">
+      <sequence loops="1" sequence="true">
+        <forwards customAngle="0.0" ease="linear" forwards="0.0" sidewards="0.0" ticks="200" using="HEADING"/>
+      </sequence>
+    </animation>
     <animation name="death">
       <sequence loops="1" sequence="true">
         <parallel loops="1" sequence="false">

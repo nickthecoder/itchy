@@ -30,7 +30,7 @@
     <!-- Generate javadocs -->
     <target name="javadoc" depends="build">
         <copy file="docs/stylesheet.css" todir="docs/api/" />
-        <javadoc additionalparam="-title Itchy -overwriteresources -usecookies" sourcepath="src" doclet="uk.co.nickthecoder.prioritydoc.PriorityDoc" docletpath="lib/javadoc/prioritydoc.jar:lib/javadoc/freemarker-2.3.20.jar" classpathref="project.class.path" destdir="docs/api">
+        <javadoc additionalparam="-title Itchy -overwriteresources -usecookies" sourcepath="src" doclet="uk.co.nickthecoder.prioritydoc.PriorityDoc" docletpath="lib/javadoc/prioritydoc-0.1.jar:lib/javadoc/freemarker-2.3.20.jar" classpathref="project.class.path" destdir="docs/api">
 
             <package name="uk.co.nickthecoder.itchy" />
             <package name="uk.co.nickthecoder.itchy.animation" />

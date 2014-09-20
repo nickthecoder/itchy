@@ -1,18 +1,76 @@
+Resize Editor windows
+	SceneDesigner doesn't resize correctly
+	Enter SceneDesigner then back to Editor, resize doesn't work.
+
+
 Bugs
 
+	GroovyRain z-order of wally and player are wrong. 
     ithrust 2nd level collision detection of ship fails.
+    
+    RootContainers sometimes have a view which is bigger than the rootContainer, and rootContainer is not at 0,0 of the view.
+    Editor's root container is one - and any others that use "center".
+    	Need RootContainers to change their view's position when they change size.
+
+Editor to be as large as possible
+	Allow maximise/restore?
+	Jame doesn't have this functionality.
+	Jame to add SDL_RESIZABLE functionality.
+		See : http://www.libsdl.org/release/SDL-1.2.15/docs/html/sdlsetvideomode.html
+		Will need a new Event class. :-(
+	GameInfo to have a "resizable" and Director to have onDisplayResize(width, height)
+		AbstractDirector to call Video.setMode and guess the new sizes for its views.
+			Sub classes can replace this method if they need something more specific.
+
 
 Rename one of the Button classes. ButtonRole
 
+Look at groovy and python game code, and try to simplify it.
+	Auto import itchy.* - also jame.* and/or jame.event.* ?
+	Make properties easy
+	Make CostumeProperties easier - Can we replace it with a simple HashMap? CostumeProperties never have any processing in them.
+
+
 CollisionStrategy
-	Decide whether actor or role has one. Actor???
-	Don't call it directory from game code, call it via actor.
+	Decide whether actor or role has one.
+	Don't call it directly from game code, call it via actor, or via role???
 	Have it create an iterator of possible actors rather than actors that ARE matching
 		So BruteForce will return ALL actors (excluding self)
 		Clever ones will only return those from overlapping squares.
 		Actor will then do the overlapping/colliding test.
 	Maybe also add a find nearest? Nbh will look in current square, then in surrounding squares and outwards.
-	
+
+Show a list of the Stages / Actors in a tree structure within the editor
+
+Generic Hierarchy Node/ParentNode interface. Actors and Stages will be ParentNodes
+	This allows for composite objects.
+	For example the drunk invaders speech bubbles are children of the main actor
+	How should transformations of the parent affect the children?
+		Does a rotation rotate the speech bubble around the center of the alien, and should the bubble also rotate?
+	The child actor has a PositionRelationship
+		The default is class "Glued", which follows the rotations, translations and scales
+		Or could be Follow, which ignores scales and rotations
+	This will make Follower redundant. Good!
+	Will we need more animation types, to move relative to the parent.
+		MoveForwards :
+			forwards (pixels)
+			sideways (pixels)
+			using "direction", "heading", "fromParent", "custom angle" (enum)
+			custom angle (degrees)
+				Maybe "custom angle" is added to direction/heading/fromParent for maximum flexibility
+			When "fromParent", should the angle be calculated once per frame, or only at the start of the animation?
+				Each frame - making it consistent with direction/heading, which may be updated each frame.
+
+	While I'm at it, why can't GUI components use the same hierarchy.
+		This will allow a GUI to be built using the editor!		
+		GUIVIew will be just another ParentNode	
+		Grids won't work well, because the children are added via the LayoutManager, not the Container.
+			Will just have to add extra glue
+			Will also need extra NullComponents added manually when there are empty gaps in the grid.
+			More glue needed to allow for components to be moved around.
+				In fact, this will force GridLayouts to use the parent container's collection of children, rather than its own. 
+
+
 Companion hierarchy.
     Z-Order - Is the default behaviour sensible now that Costumes have default Z-Orders?
         If we ever select a different Costume (i.e. "companion" method) then we should use that costume's z-order if it has one.
@@ -28,8 +86,7 @@ Talk and TalkProjectile
     Should talk use animations to fade and die or a constant, hard-wired fade?
     Do we need Talk.stop now that we have TalkProjectile? It was originally there, so that it wouldn't follow!
 
-Put builders on extras class diagram. the roles are shown without their attributes
-    Can the javadocs be coerced into showing the inherited methods?
+Put builders on extras class diagram.
 
 Change all "copy" methods to clone???
 
@@ -52,44 +109,6 @@ Why have a Role interface if everything will end up using AbstractRole?
 
 Rebuild Jame on i686, amd64, win32, arm32
     Package jame and itchy
-
-Use Groovy as a scripting language.
-    If Eclipse can correctly do syntax highlighting, auto-completion and pop-up documentation, then it should probably be the scripting
-        language of choice!!!
-    Create a wizard/simple instruction to setup an Eclipse workspace with Itchy's stuff in it, and the resources directory ready to be
-        edited.
-
-Created simplified documentation from javadocs.
-    Only document key classes.
-    Include all methods even if they are inherited from a base class.
-    Format in a more human readable form - expandable sections rather than a list with the details underneath.
-    Don't use tables
-    Choose which methods/attributes to hide/show. Either list the ones to hide or the ones to include.
-        Probably use "exclude" mostly, so that new methods/attributes will be included by default.
-        Public methods are shown by default, others are hidden by default.
-    Maybe include *all* classes, but categorise them as "core", "outer-core", "peripheral" and "hidden"
-    Maybe include *all* methods too, but filter some out by default. Add "NN methods hidden. Show..."
-    Don't make "extends" and "implements" too important. Most of the time we want to USE the class, not know how it is built.
-    Combine the class diagrams with these docs.
-
-    Methods shown simply as : (note that the parameters don't show their type)
-        myMethod( param1Name, param2Name ) -> ReturnType
-    When expanded, it changes to :
-        public ReturnType myMethod( Type1 param1Name, Type2 param2Name )
-
-    Never display fully qualify the types, you can see their type by hovering over it, or clicking.
-
-
-    How do I define a method's importance? Add an annotation or a javadoc tag, on each method.
-    But how important is that method on a sub-class? e.g. "setLayout" is quite important for a Component,
-    but not at all important for a JButton. (as it turns out, setLayout is overridden in AbstractButton, but pretend it isn't!).
-    So how do we say that setLayout is now unimportant for JButton? Some methods will remain important on their sub-classes,
-    and others will become less relevant.
-
-        Promote and demote tags at the class level? e.g.
-        @demote * // Will demote all inherited methods
-        @demote setLayout // Will demote the setLayout inherited methods.
-        Optional int before the list of methods
 
 
 Undo/Redo
@@ -129,18 +148,6 @@ Group Costumes on the SceneDesigner's toolbox, so that similar costumes can be d
 SceneDesigner : select groups of actors, and move/delete them together.
 
 
-Lazy loading of some poses (If each contributor has their own picture, don't want to load them all, unless
-the player visits their page).
-    Create LazyLoadImagePose?? Relationship to ImagePose??
-    Just add a "lazy" attribute to ImagePose
-
-Allow creation of new Role objects from Javascript i.e. create a ScriptedRole and the script in one go.
-    Constructor takes the ScriptedRole, or creates it if undefined.
-    Use the same pattern to create View and Stage objects too, so that a TorusView can be created.
-    Create TorusView and TorusCollisionStrategy
-
-
-
 Unordered
 =========
 
@@ -162,11 +169,6 @@ Tiled background - instead of a RGBA, specify a Pose, and tile it in a Grid.
     More generic - Create a BackgroundView interface
     RGBABackground
     Tile, BrickH, BrickV, TileH, TileV (spacing can be different to the image size)
-
-Non-visual Makeups - maybe only useful when chaining makeups
-    Size (makes the appearance the given size without scaling
-    Margin as above, but adds a given amount, rather than a set overall size.
-    AlterOffset - useful for changing the rotation point.
 
 Explosion and Projectile don't work very well with text - See Gate.collected.
 
@@ -195,16 +197,6 @@ Later
 =====
 
 Use JBox2D : http://www.jbox2d.org/
-
-
-When a js file imports another, remember the dependency, so that the dependent classes get re-loaded if the dependecy is reloaded.
-    e.g. If Moving.js is changed then Rock.js, Ship.js etc are reloaded.
-    Think about circular dependencies.
-    When a script is asked if it needs reloading :
-        Create a set of its script and all of its dependencies (recursively)
-        Find the latest timestamp
-        Check its load timestamp with the latest timestamp, and if its older, then re-load.
-        Short-circuit if the 1st level depenencies is empty.
 
 GUIView.keyUp does nothing - is this ok?
 
@@ -301,11 +293,12 @@ Text Costumes.
     Buttons can have sounds and animations
 
 Get Thrust to run via "launch" without the resource symlinks to itchy.
-    Need thrusts jar file to be in a lib directory within its resources, and for the jar to be loaded
+    Need thrust's jar file to be in a lib directory within its resources, and for the jar to be loaded
     after java has started.
 
-Bucket to be more transparent
-Water looks naff
+iThrust
+	Bucket to be more transparent
+	Water looks naff
 
 The stars on Drunk Invaders backgrounds should have more variation (alpha and slight colour - maybe size too).
 

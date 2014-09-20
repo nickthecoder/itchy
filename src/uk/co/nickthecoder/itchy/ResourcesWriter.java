@@ -190,6 +190,7 @@ public class ResourcesWriter extends XMLWriter
                 }
 
             } catch (Exception e) {
+            	e.printStackTrace();
                 throw new XMLException("Failed to write property : " + property.key);
             }
 

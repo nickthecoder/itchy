@@ -34,13 +34,13 @@ public class ${Name} extends CostumeProperties
 
 
     // Boiler plate code - no need to change this
-    public ArrayList getProperties(self)
+    public ArrayList getProperties()
     {
         return properties;
     }
     
     // Boiler plate code - no need to change this
-    public ClassName getClassName(self)
+    public ClassName getClassName()
     {
         return ClassName( CostumeProperties, "${NAME}.groovy" );
     }

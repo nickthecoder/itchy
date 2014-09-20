@@ -266,6 +266,7 @@ public class SceneDesigner implements MouseListener, KeyListener
     {
         this.sceneResource.name = this.oldSceneName;
         this.editor.clear();
+        this.editor.sceneDesigner = null;
         this.editor.getStages().clear();
         this.overlayStage.clear();
 
@@ -283,7 +284,33 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.editor.root.show();
         this.editor.scenesEditor.refresh();
     }
+    
+    public void resize( int width, int height )
+    {
+        Rect editRect = new Rect(0, this.toolbar.getHeight(), width, height - this.toolbar.getHeight());
 
+        this.overlayView.setPosition( editRect );
+    	this.designViews.setPosition( editRect );
+    	for ( StageView view : this.designViews.getChildren()) {
+    		view.setPosition( editRect );
+    	}
+    	this.overlayView.setPosition( editRect );
+
+    	Rect old = this.toolbox.getView().getPosition();
+    	int y = old.y;
+    	if ( y + old.height > height ) {
+    		y = height - old.height;
+    	}
+    	Rect rect = new Rect( old.x, y, width, old.height );
+    	this.toolbox.getView().setPosition( rect );
+    	
+    	this.toolbar.getView().setPosition( new Rect( 0,0, width, this.toolbar.getHeight()));
+    	
+        this.toolbar.setPosition(0, 0, width, this.toolbar.getHeight());
+        this.toolbox.setPosition(0, 0, width, this.toolbox.getHeight());
+
+    }
+    
     private void createPageBorder()
     {
         int margin = 0;

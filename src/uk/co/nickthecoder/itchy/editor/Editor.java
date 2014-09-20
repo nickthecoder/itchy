@@ -50,6 +50,8 @@ public final class Editor extends Game
 
     public ScenesEditor scenesEditor;
     
+    public SceneDesigner sceneDesigner;
+    
     public InputsEditor inputsEditor;
 
     private String designSceneName = null;
@@ -101,6 +103,12 @@ public final class Editor extends Game
     public String getTitle()
     {
         return "Itchy Editor : " + this.game.getTitle();
+    }
+    
+    @Override
+	public boolean isResizable()
+    {
+    	return true;
     }
 
     @Override
@@ -190,7 +198,7 @@ public final class Editor extends Game
         if (this.designSceneName != null) {
             this.scenesEditor.design(this.designSceneName);
         }
-
+ 
         Itchy.mainLoop();
     }
 
@@ -215,6 +223,17 @@ public final class Editor extends Game
             if (messageBox != null) {
                 messageBox.hide();
             }
+        }
+    }
+
+    public void resize( int width, int height )
+    {
+    	super.resize( width, height );
+        root.setPosition(0, 0, width, height);
+
+        root.resizeView();
+        if ( sceneDesigner != null) {
+        	sceneDesigner.resize( width,  height );
         }
     }
 

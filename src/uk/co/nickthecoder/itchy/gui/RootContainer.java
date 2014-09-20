@@ -56,6 +56,11 @@ public class RootContainer extends PlainContainer
     {
         return this;
     }
+    
+    public GuiView getView()
+    {
+    	return this.view;
+    }
 
     private boolean dragging;
     private int dragStartX;
@@ -290,6 +295,12 @@ public class RootContainer extends PlainContainer
         int height = this.getRequiredHeight();
         Rect position = this.view.getPosition();
         setPosition((position.width - width) / 2, (position.height - height) / 2, width, height);
+    }
+    
+    public void resizeView()
+    {
+    	Rect viewRect = this.view.getPosition();
+    	this.view.setPosition( new Rect( viewRect.x, viewRect.y, this.getWidth(), this.getHeight() ) );
     }
 
     public void captureMouse( AbstractComponent component )

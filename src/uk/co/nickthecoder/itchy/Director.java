@@ -16,6 +16,8 @@ public interface Director extends InputListener, QuitListener, MessageListener, 
 
     public void onDeactivate();
 
+    public void onResize( int width, int height );
+
     public boolean startScene( String sceneName );
 
     public void tick();

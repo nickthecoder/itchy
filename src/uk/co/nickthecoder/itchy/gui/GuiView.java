@@ -64,6 +64,13 @@ public class GuiView extends AbstractView implements View, InputListener
         this.rootContainer = rootContainer;
         this.rootContainer.view = this;
     }
+    
+    @Override
+	public void setPosition( Rect position )
+    {
+    	super.setPosition( position );
+    	this.surface = null;
+    }
 
     public Surface getSurface()
     {

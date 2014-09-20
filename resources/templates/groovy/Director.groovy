@@ -1,25 +1,25 @@
-from uk.co.nickthecoder.itchy import AbstractDirector
-from uk.co.nickthecoder.itchy.util import ClassName
+import uk.co.nickthecoder.itchy.Director
+import uk.co.nickthecoder.itchy.AbstractDirector
+import uk.co.nickthecoder.itchy.util.ClassName
 
-from java.util import ArrayList
+public class ${Name} extends AbstractDirector
+{    
+    // Constructor
+    public ${Name}()
+    {
+    }
+        
+    public void tick()
+    {
+        // TODO Called 60 times a second
+    }
 
-class ${Name}(AbstractDirector) :
 
-    def __init__(self) :
-        # TODO Initialise your object.
-        pass
+    // Boiler plate code - no need to change this
+    public ClassName getClassName()
+    {
+        return new ClassName( Director, "${NAME}.groovy" )
+    }
 
-    def tick(self) :
-        # TODO Called 60 times a second.
-        # It is often better to put game logic in SceneDirector subclasses, rather than Director subclasses.
-        pass
-    
-    
-    # TODO Other methods include :
-    # onStarted, onMouseDown, onMouseUp, onMouseMove, onKeyDown, onKeyUp, onQuit, onMessage
-
-    # Boiler plate code - no need to change this
-    def getClassName(self):
-        return ClassName( CostumeProperties, self.__module__ + ".py" )
-
+}
 

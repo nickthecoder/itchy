@@ -27,7 +27,7 @@ public class StringProperty<S> extends AbstractProperty<S, String>
 
     /**
      * A fluent way to set the multiLine attribute to true
-     * @return
+     * @return this
      */
     public StringProperty<S> multiLine()
     {
@@ -37,7 +37,7 @@ public class StringProperty<S> extends AbstractProperty<S, String>
     
     /**
      * A fluent way to set the multiLine attribute
-     * @return
+     * @return this
      */
     public StringProperty<S> multiLine(boolean value)
     {

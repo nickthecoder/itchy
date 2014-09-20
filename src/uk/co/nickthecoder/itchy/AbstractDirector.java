@@ -105,7 +105,8 @@ public class AbstractDirector implements Director
         return true;
     }
     
-    public boolean onWindowEvent( WindowEvent event )
+    @Override
+	public boolean onWindowEvent( WindowEvent event )
     {
         // Do nothing
         return false;
@@ -123,6 +124,17 @@ public class AbstractDirector implements Director
         // Does nothing
     }
 
+    @Override
+	public void onResize( int width, int height )
+    {
+    	try {
+    		this.game.resize( width, height );
+    		
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    	}
+    }
+    
     @Override
     public boolean startScene( String sceneName )
     {

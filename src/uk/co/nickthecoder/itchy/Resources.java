@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Set;
 
 import uk.co.nickthecoder.itchy.animation.Animation;
-import uk.co.nickthecoder.itchy.role.Companion;
 import uk.co.nickthecoder.itchy.script.ScriptManager;
 import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.itchy.util.NinePatch;
@@ -563,20 +562,7 @@ public class Resources extends Loadable
      * string within the bigShip : "bullet" -> "redBullet", and another within the small ship : "bullet" -> "greenBullet". Now we can get a
      * get the appropriate bullet costume for a ship : <code>resources.getCompananionCostume( myShipActor.getCostume(), "bullet" )</code>
      * <p>
-     * This can be useful when using {@link Companion#costume(Costume)}; for example we may create a bullet like so : <code> 
-     * <pre>
-     * new Projectile()
-     *     .costume( Itchy.getGame().resources.getCompanionCostume( getActor().getCostume(), "bullet" )
-     *     .offsetForwards(20)
-     *     .speed(5)
-     *     .createActor().activate();
-     * </pre>
-     * </code>
-     * <p>
-     * Note, you will probably use a sub-class of Projectile, as you'll want it to check for collisions etc.
-     * <p>
      * By creating multiple strings all named "bullet" within a ship's costume, the code above will randomly pick from the named costumes.
-     * 
      * 
      * @param sourceCostume
      *        The costume who's strings are search to find the name of another costume.

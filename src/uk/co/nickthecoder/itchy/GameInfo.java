@@ -31,11 +31,15 @@ public class GameInfo implements PropertySubject<GameInfo>
     @Property(label = "Author(s)", multiLine=true, sortOrder=90)
     public String authors;
     
+    @Property(label = "Resizable")
+    public boolean resizable;
+    
     public GameInfo()
     {
         this.title = "Itchy Game";
         this.width = 800;
         this.height = 600;
+        this.resizable = false;
         this.directorClassName = new ClassName(Director.class, PlainDirector.class.getName());
         this.initialScene = "";
         this.authors = "";

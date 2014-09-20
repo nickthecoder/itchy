@@ -21,6 +21,19 @@ public class ForwardsAnimation extends NumericAnimation
     @Property(label = "Sidewards", aliases = { "sideways" })
     public double sidewards;
 
+    public static enum Using
+    {
+    	HEADING,
+    	DIRECTION,
+    	CUSTOM_ANGLE
+    }
+    
+    @Property(label = "Using")
+    public Using using = Using.HEADING;
+    
+    @Property(label = "Custom Angle", hint="degrees")
+    public double customAngle = 0;
+    
     public ForwardsAnimation()
     {
         this(200, Eases.linear, 0, 0);
@@ -48,7 +61,14 @@ public class ForwardsAnimation extends NumericAnimation
     @Override
     public void tick( Actor actor, double amount, double delta )
     {
-        actor.moveForwards(this.forwards * delta, this.sidewards * delta);
+    	double degrees = this.customAngle;
+    	if (this.using == Using.HEADING) {
+    		degrees += actor.getHeading();
+    	} else if ( this.using == Using.DIRECTION) {
+    		degrees += actor.getDirection();
+    	}
+    	
+        actor.moveAngle(degrees, this.forwards * delta, this.sidewards * delta);
     }
 
 }

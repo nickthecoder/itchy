@@ -152,18 +152,27 @@ public class Itchy
         return currentGame.resources;
     }
 
-    private static void setScreenMode( Game game )
-    {
-        setScreenMode(game.getTitle(), game.resources, game.getWidth(), game.getHeight());
-    }
-
     private static void setScreenMode( Resources resources )
     {
         setScreenMode(resources.getGameInfo().title, resources,
-            resources.getGameInfo().width, resources.getGameInfo().height);
+                resources.getGameInfo().width, resources.getGameInfo().height, resources.getGameInfo().resizable );
+    	
+    }
+    
+    private static void setScreenMode( Game game )
+    {
+        setScreenMode(game.getTitle(), game.resources,
+                game.getWidth(), game.getHeight(), game.isResizable() );
+    }
+    
+    public static void resizeScreen( int width, int height )
+    {
+    	Game game = currentGame;
+    	
+        setScreenMode( game.getTitle(), game.resources,  width, height, game.isResizable() );
     }
 
-    private static void setScreenMode( String title, Resources resources, int width, int height )
+    private static void setScreenMode( String title, Resources resources, int width, int height, boolean resizable )
     {
         Video.setWindowTitle(title);
 
@@ -188,12 +197,16 @@ public class Itchy
         }
 
         try {
-            Video.setMode(width, height);
+        	int flags = Video.SWSURFACE | Video.DOUBLEBUF;
+        	if ( resizable ) {
+        		flags = flags | Video.RESIZABLE;
+        	}
+            Video.setMode(width, height, 32, flags);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
+    
     public static void startGame( Game game )
     {
         loadingGame = null;

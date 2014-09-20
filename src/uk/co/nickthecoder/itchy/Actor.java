@@ -556,7 +556,21 @@ public class Actor implements PropertySubject<Actor>
 
     public void moveForwards( double forward, double sideways )
     {
-        double theta = this.getHeadingRadians();
+    	this.moveAngle( this.getHeading(), forward, sideways);
+    }
+
+    public void moveAngle( double degrees, double amount )
+    {
+        double theta = degrees / 180 * Math.PI;
+        double cosa = Math.cos(theta);
+        double sina = Math.sin(theta);
+
+        this.moveBy((cosa * amount), (sina * amount));
+    }
+
+    public void moveAngle( double degrees, double forward, double sideways )
+    {
+    	double theta = degrees / 180 * Math.PI;
         double cosa = Math.cos(theta);
         double sina = Math.sin(theta);
 
