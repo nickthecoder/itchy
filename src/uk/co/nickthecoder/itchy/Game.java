@@ -288,6 +288,7 @@ public class Game
 		Itchy.resizeScreen( width, height );
 		Rect rect = new Rect( 0,0, width, height ); 
 		this.allViews.setPosition( rect );
+    	this.gameViews.setPosition( rect );
 		this.windows.setPosition( rect );
     }
 

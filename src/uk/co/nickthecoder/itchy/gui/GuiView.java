@@ -69,6 +69,7 @@ public class GuiView extends AbstractView implements View, InputListener
 	public void setPosition( Rect position )
     {
     	super.setPosition( position );
+    	this.invalid = true;
     	this.surface = null;
     }
 

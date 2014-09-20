@@ -231,6 +231,8 @@ public class SceneDesigner implements MouseListener, KeyListener
 
         setMode(MODE_SELECT);
 
+        Surface screen = Itchy.getDisplaySurface();
+        resize( screen.getWidth(), screen.getHeight() );
         onCenter();
     }
 
@@ -290,11 +292,13 @@ public class SceneDesigner implements MouseListener, KeyListener
         Rect editRect = new Rect(0, this.toolbar.getHeight(), width, height - this.toolbar.getHeight());
 
         this.overlayView.setPosition( editRect );
-    	this.designViews.setPosition( editRect );
+    	this.designViews.setPosition( new Rect(0,0,width, height) );
     	for ( StageView view : this.designViews.getChildren()) {
     		view.setPosition( editRect );
     	}
-    	this.overlayView.setPosition( editRect );
+    	//System.out.println( "Design Views " + designViews.getPosition() );
+    	//System.out.println( "Design Views parent " + designViews.getParent().getPosition() );
+    	//System.out.println( "Design Views parent parent " + designViews.getParent().getParent().getPosition() );
 
     	Rect old = this.toolbox.getView().getPosition();
     	int y = old.y;
@@ -303,7 +307,6 @@ public class SceneDesigner implements MouseListener, KeyListener
     	}
     	Rect rect = new Rect( old.x, y, width, old.height );
     	this.toolbox.getView().setPosition( rect );
-    	
     	this.toolbar.getView().setPosition( new Rect( 0,0, width, this.toolbar.getHeight()));
     	
         this.toolbar.setPosition(0, 0, width, this.toolbar.getHeight());
