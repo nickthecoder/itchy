@@ -21,15 +21,10 @@ import uk.co.nickthecoder.jame.event.Keys;
 import uk.co.nickthecoder.jame.event.MouseEvent;
 
 /**
- * The is the overall manager of the Itchy game engine. There is only one instance (Itchy.singleton).
+ * The top-level manager of the game engine.
+ * It only has static methods.
+ * Manages the game loop, including the redrawing of the screen, and dispatching events.
  * 
- * The init method should be called as soon as possible, ideally right at the top of your program's main method.
- * 
- * General notes about Itchy :
- * 
- * Itchy works with two types of coordinates; pixel coordinates, and world coordinates. World coordinates are used to keep track of Actors'
- * positions, and are stored in doubles. Pixel coordinates are stored as integers and are used when dealing with the low-level processing of
- * images.
  */
 public class Itchy
 {
@@ -60,18 +55,35 @@ public class Itchy
      */
     private static Stack<Game> gameStack = new Stack<Game>();
 
-    public static int keyboardRepeatDelay = Events.DEFAULT_REPEAT_DELAY;
-
-    public static int keyboardRepeatInterval = Events.DEFAULT_REPEAT_INTERVAL;
-
-    public static FrameRate frameRate = createFrameRate();
-
-    public static SoundManager soundManager;
-
     private static boolean initialised = false;
 
     private static File baseDirectory;
 
+    
+    public static int keyboardRepeatDelay = Events.DEFAULT_REPEAT_DELAY;
+
+    public static int keyboardRepeatInterval = Events.DEFAULT_REPEAT_INTERVAL;
+
+    /**
+     * The FrameRate is in charge of ensuring that the game runs at the correct speed, redrawing the screen at regular intervals
+     * and decides what to do when the required frame rate cannot be maintained.
+     * 
+     * Most games can leave this alone, but advanced programmers may want to create a new implementation of FrameRate,
+     * and therefore having more control over the frame rate. 
+     */
+    public static FrameRate frameRate = new SimpleFrameRate();
+
+    /**
+     * SoundManager is a thin layer over Jame's sound system adding some extra features; the option to end sounds when its Actor is killed,
+     * as well as choosing what to do when a single sound is asked to play more than once simultaneously.
+     *  
+     * Most games can leave this alone.
+     */
+    public static SoundManager soundManager;
+
+    /**
+     * A registry of known classes/scripts (Roles, SceneDirectors, Directors) as well as Animations, Makeup and Eases.
+     */
     public static final Registry registry = new Registry();
 
     static {
@@ -104,6 +116,14 @@ public class Itchy
         Animations.registerAnimations();
     }
 
+    /**
+     * This is called automatically when the game's ".itchy" file is being loaded (because it gets the game's width and height from
+     * this file).
+     * As this is called automatically, you don't need to worry about it.
+     * 
+     * @param resources Uses the resource's GameInfo to set the screen size.
+     * @throws Exception
+     */
     public static void init( Resources resources ) throws Exception
     {
         if (initialised) {
@@ -120,6 +140,25 @@ public class Itchy
         initialised = true;
     }
 
+    /**
+     * Most games don't have resizable windows, so this method isn't used much.
+     * Note, this only changes the size of the screen, it does not change the sizes of the {@link View}s.
+     * @param width The new width of the screen in pixels.
+     * @param height The new height of the screen in pixels.
+     */
+    public static void resizeScreen( int width, int height )
+    {
+    	Game game = currentGame;
+    	
+        setScreenMode( game.getTitle(), game.resources,  width, height, game.isResizable() );
+    }
+    
+    /**
+     * Gets Itchy's base directory - it is the directory which has the "resources" sub-directory, and its used to find all of the games'
+     * resources.
+     * Most of the time this will be the current directory, but if you set the system property "itchy.base", then it will use that instead. 
+     * @return The system property "itchy.base" if it is set, otherwise the current directory (".").
+     */
     public static File getBaseDirectory()
     {
         if (baseDirectory == null) {
@@ -133,11 +172,17 @@ public class Itchy
         return baseDirectory;
     }
 
+    /**
+     * @return The "resources" directory.
+     */
     public static File getResourcesDirectory()
     {
         return new File(getBaseDirectory(), "resources");
     }
 
+    /**
+     * @return The currently active game.
+     */
     public static Game getGame()
     {
         if ( loadingGame != null ) {
@@ -147,6 +192,10 @@ public class Itchy
         }
     }
 
+    /**
+     * @return The resource of the current game.
+     */
+    // TODO Should this be getGame().resources instead? Or in fact, remove this method?
     public static Resources getResources()
     {
         return currentGame.resources;
@@ -165,12 +214,6 @@ public class Itchy
                 game.getWidth(), game.getHeight(), game.isResizable() );
     }
     
-    public static void resizeScreen( int width, int height )
-    {
-    	Game game = currentGame;
-    	
-        setScreenMode( game.getTitle(), game.resources,  width, height, game.isResizable() );
-    }
 
     private static void setScreenMode( String title, Resources resources, int width, int height, boolean resizable )
     {
@@ -205,6 +248,17 @@ public class Itchy
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    
+    public void setFrameRate( FrameRate newFrameRate )
+    {
+    	if ( running ) {
+    		frameRate.end();
+    	}
+		frameRate = newFrameRate;
+    	if ( running ) {
+    		frameRate.loop();
+    	}
     }
     
     public static void startGame( Game game )
@@ -273,34 +327,11 @@ public class Itchy
     public static void terminate()
     {
         System.out.println("Terminating itchy");
+        frameRate.end();
         running = false;
     }
 
-    private static FrameRate createFrameRate()
-    {
-        return new FrameRate() {
-
-            @Override
-            public boolean isRunning()
-            {
-                return Itchy.running;
-            }
-
-            @Override
-            public void doGameLogic()
-            {
-                Itchy.doGameLogic();
-            }
-
-            @Override
-            public void doRedraw()
-            {
-                Itchy.doRedraw();
-            }
-        };
-    }
-
-    private static void doGameLogic()
+    public static void doGameLogic()
     {
         while (true) {
             Event event = Events.poll();
@@ -324,10 +355,6 @@ public class Itchy
     {
         currentGame.render(Video.getDisplaySurface());
         Video.flip();
-    }
-
-    public static void endOfFrame()
-    {
     }
 
     public static boolean isRunning()
@@ -422,4 +449,11 @@ public class Itchy
         return mouseY;
     }
 
+    /**
+     * Prevent people creating instances of Itchy - it only has static methods.
+     */
+    private Itchy()
+    {
+    }
+    
 }

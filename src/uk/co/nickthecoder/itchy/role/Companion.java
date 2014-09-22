@@ -9,6 +9,7 @@ import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Costume;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Pose;
+import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.jame.RGBA;
 
 /**
@@ -111,12 +112,17 @@ public abstract class Companion extends AbstractRole
         protected C companion;
 
         protected abstract B getThis();
-
+        
         public C getCompanion()
         {
             return this.companion;
         }
 
+        public Role getRole()
+        {
+        	return getCompanion();
+        }
+        
         /**
          * The Companion can have a different costume to the source actor's costume. For simple Companions, this is not needed. However, if
          * the Companion has many Poses, sounds or animations, it may be better for it to have its own costume rather than share the

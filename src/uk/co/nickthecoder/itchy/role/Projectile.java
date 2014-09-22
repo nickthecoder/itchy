@@ -38,7 +38,7 @@ public class Projectile extends Companion
     public Projectile( Actor source )
     {
         super(source);
-        this.lifeTicks = (int) (DEFAULT_LIFE_SECONDS * Itchy.frameRate.getRequiredRate());
+        this.lifeTicks = (int) (DEFAULT_LIFE_SECONDS * Itchy.frameRate.getFrameRate());
     }
 
     @Override
@@ -71,6 +71,18 @@ public class Projectile extends Companion
             getActor().kill();
         }
     }
+    
+    public void setSpeed( double value )
+    {
+    	this.speedForwards = value;
+    	this.speedSidewards = 0;
+    }
+
+    public void setSpeed( double forwards, double sidewards )
+    {
+    	this.speedForwards = forwards;
+    	this.speedForwards = sidewards;
+    }
 
     public static abstract class AbstractProjectileBuilder<C extends Projectile, B extends AbstractProjectileBuilder<C, B>>
         extends AbstractCompanionBuilder<C, B>
@@ -78,14 +90,13 @@ public class Projectile extends Companion
 
         public B speed( double value )
         {
-            this.companion.speedForwards = value;
+            this.companion.setSpeed(value);
             return getThis();
         }
 
         public B speed( double forwards, double sidewards )
         {
-            this.companion.speedForwards = forwards;
-            this.companion.speedSidewards = sidewards;
+            this.companion.setSpeed(forwards, sidewards);
             return getThis();
         }
 
@@ -127,7 +138,7 @@ public class Projectile extends Companion
 
         public B life( double seconds )
         {
-            this.companion.lifeTicks = (int) (Itchy.frameRate.getRequiredRate() * seconds);
+            this.companion.lifeTicks = (int) (Itchy.frameRate.getFrameRate() * seconds);
             return getThis();
         }
 
