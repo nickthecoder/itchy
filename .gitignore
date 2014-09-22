@@ -3,6 +3,7 @@
 /.project
 /.classpath
 /.settings
+/.gradle
 /publish
 /docs/api
 /build
@@ -27,4 +28,5 @@
 /docs/diagrams/overview-thumbnail.png
 /docs/diagrams/overview.png
 /resources/Launcher/nickthecoder-itchy.desktop
+/resources/Pyrox/images/work/
 

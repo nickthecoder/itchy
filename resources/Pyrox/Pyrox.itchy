@@ -1,5 +1,5 @@
 <resources>
-  <game title="Rox" width="800" height="600" initialScene="menu" directorClassName="director.py" authors="Nick Robinson. nickthecoder@gmail.com&#xA;"/>
+  <game resizable="false" title="Rox" width="800" height="600" initialScene="menu" directorClassName="director.py" authors="Nick Robinson. nickthecoder@gmail.com&#xA;"/>
   <fonts>
     <font name="Boycott" filename="fonts/Boycott/Boycott.ttf"/>
     <font name="Comic" filename="fonts/bubblegum-sans/BubblegumSans-Regular.otf"/>
@@ -456,7 +456,7 @@
     <animation name="talk-fade">
       <sequence loops="1" sequence="true">
         <alpha ease="linear" target="200.0" ticks="1"/>
-        <forwards ease="linear" forwards="0.0" sidewards="0.0" ticks="200"/>
+        <forwards customAngle="0.0" ease="linear" forwards="0.0" sidewards="0.0" ticks="200" using="HEADING"/>
         <alpha ease="default" target="0.0" ticks="60"/>
       </sequence>
     </animation>
@@ -862,7 +862,6 @@ before we can harvest the honey.</string>
     <scene name="grenades4"/>
     <scene name="intro"/>
     <scene name="level-template"/>
-    <scene name="matthew"/>
     <scene name="menu"/>
     <scene name="play"/>
     <scene name="rocks"/>
