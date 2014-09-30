@@ -159,12 +159,13 @@ public class SimpleFrameRate implements FrameRate
 
     public void doGameLogic()
     {
-        Itchy.doGameLogic();
+    	Itchy.processEvents();
+        Itchy.tick();
     }
 
     public void doRedraw()
     {
-        Itchy.doRedraw();
+        Itchy.render();
     }
 
 }

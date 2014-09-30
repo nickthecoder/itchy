@@ -38,7 +38,7 @@ import uk.co.nickthecoder.jame.event.WindowEvent;
  * <p>
  * A game consists of a set of {@link Stage} objects (typically {@link ZOrderStage}), and on each Stage, there live a set of {@link Actor}
  * objects. The Actors are things like spaceships, bullets and even the scenery. How the actors move and interact is defined by their
- * {@link Role}. Most of you game's code will probably be a type of Role.
+ * {@link Role}. Most of your game's code will probably be a type of Role.
  * <p>
  * A game needs to display the stage and its actors on the screen, and that is done via a {@link View} (a {@link StageView} in fact). Each
  * stage normally has one view, but there could be more. For example, you could split the screen down the middle for a two player game, and
@@ -64,6 +64,7 @@ public class Game
      * The overall controller of the game, but ironically, it often has very little to do, as most of the game logic is inside each Actor's
      * {@link Role}. Also, each scene can have its own {@link SceneDirector} which controls a single scene. This leaves very little for
      * Director to do in most cases.
+     * The director is set from the "Info" tab in the {@link Editor}.
      */
     private Director director;
 
@@ -73,8 +74,6 @@ public class Game
      * {@link AbstractRole#removeTag(String)}.
      */
     public final TagCollection<Role> roleTags = new TagCollection<Role>();
-
-    private List<Actor> actors = new LinkedList<Actor>();
 
     /**
      * Helps to implement a pause feature within your game. Typically, you will pause/unpause from your game's
@@ -87,17 +86,42 @@ public class Game
      */
     private AutoFlushPreferences preferences;
 
+    /**
+     * A tree structure of all the views.
+     */
     private CompoundView allViews;
 
+    /**
+     * A sub-tree of {@link #allViews}, which excludes some special views which a game should not tamper with.
+     */
     private CompoundView gameViews;
 
+    /**
+     * A list of all the stages used by this game.
+     */
     private List<Stage> stages;
 
+    /**
+     * The whole screen is filled with a solid colour when being redrawn.
+     * The colour is taken from the "Scene" tab of the {@link SceneEditor}
+     */
     private RGBAView background;
 
+    /**
+     * A special stage which is at the front of the z-order (i.e. always visible).
+     * It can be used for generic tools, not specific to a game, for example, it can be use to display a "Pause" message.
+     */
     private ZOrderStage glassStage;
 
+    /**
+     * The view for the {@link #glassStage}
+     */
     private StageView glassView;
+
+    /**
+     * The list of all of the windows currently shown.
+     */
+    private GenericCompoundView<GuiView> windows;
 
     /**
      * A list of all the objects that need to know when a mouse is clicked or moved.
@@ -127,11 +151,6 @@ public class Game
     private Focusable keyboardFocus;
 
     /**
-     * The list of all of the windows currently shown.
-     */
-    private GenericCompoundView<GuiView> windows;
-
-    /**
      * The current SceneDirector, which was created during {@link #loadScene(String)}
      */
     private SceneDirector sceneDirector;
@@ -152,15 +171,15 @@ public class Game
     private Stylesheet stylesheet;
 
     /**
-     * As a game designer, you don't need to know HOW your javascript code is compiled and executed, ScriptManager takes care of that for
-     * you. You can safely ignore this unless you want to help improve Itchy itself.
+     * As a game designer, you don't need to know HOW your scripts are compiled and executed, ScriptManager takes care of that for
+     * you. Game writers can safely ignore this.
      */
     public final ScriptManager scriptManager;
 
     /**
      * Controls how the mouse pointer appears while inside the game window. It could be hidden (useful for games which don't use a mouse),
      * appear as a regular mouse pointer, or look a bit more flashy. The mouse is given special status, as its MousePointer always receives
-     * mouse events, event if something else has captured the mouse.
+     * mouse events, even if something else has captured the mouse.
      */
     public Mouse mouse = new SimpleMouse();
 
@@ -169,7 +188,7 @@ public class Game
      * information is missing. For example, the games width and height are unknown. The {@link #init()} method will be called later, to
      * complete the initialisation.
      * 
-     * @param resources
+     * @param resources The resources being loaded. Note, the resources will NOT be fully loaded yet.
      */
     public Game( Resources resources )
     {
@@ -179,12 +198,12 @@ public class Game
         this.resources = resources;
         this.scriptManager = resources.scriptManager;
 
-        this.sceneDirector = new PlainSceneDirector();
-        this.pause = new SimplePause(this);
 
         this.mouseListeners = new LinkedList<MouseListener>();
         this.keyListeners = new LinkedList<KeyListener>();
 
+        // Sensible defaults, which can be replaced in the init() method.
+        this.sceneDirector = new PlainSceneDirector();
         this.pause = new SimplePause(this);
     }
 
@@ -288,6 +307,7 @@ public class Game
 		Itchy.resizeScreen( width, height );
 		Rect rect = new Rect( 0,0, width, height ); 
 		this.allViews.setPosition( rect );
+		this.background.setPosition( rect );
     	this.gameViews.setPosition( rect );
 		this.windows.setPosition( rect );
     }
@@ -303,14 +323,6 @@ public class Game
             stage.clear();
         }
         this.glassStage.clear();
-
-        for (Actor actor : this.actors) {
-            actor.kill();
-        }
-        // We don't just clear the old list, we start from scratch, this is so that Game.tick can
-        // iterate over this.actors
-        // without a concurrent modification exception.
-        this.actors = new LinkedList<Actor>();
     }
 
     /**
@@ -940,17 +952,19 @@ public class Game
 
     }
 
-//    @Override
-//    public String toString()
-//    {
-//        return this.getClass().getName() + " Resources " + this.resources;
-//    }
-
+    /**
+     * Iterator of all actors on all stages.
+     * The order is defined by the order of the stages in the game's list of stages ({@link #stages}), and by the
+     * order of the actors with each stage.
+     * 
+     * @return An iterator of all actors on all stages
+     */
     public Iterator<Actor> getActors()
     {
         return new AllActorsIterator();
-    };
+    }
 
+    
     class AllActorsIterator implements Iterator<Actor>
     {
         private Actor next;

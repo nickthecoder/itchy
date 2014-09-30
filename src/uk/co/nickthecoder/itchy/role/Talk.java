@@ -35,14 +35,14 @@ public class Talk extends Follower
 
     private final void createTextStyle()
     {
-        this.textStyle = new TextStyle(Itchy.getResources().getDefaultFontResource().font, 14);
+        this.textStyle = new TextStyle(Itchy.getGame().resources.getDefaultFontResource().font, 14);
     }
 
     @Override
     public Actor createActor()
     {
         if (this.textStyle == null) {
-            FontResource fontResource = Itchy.getResources().getDefaultFontResource();
+            FontResource fontResource = Itchy.getGame().resources.getDefaultFontResource();
             this.textStyle = new TextStyle(fontResource.font, 14);
         }
 
@@ -109,7 +109,7 @@ public class Talk extends Follower
 
         public B font( String fontName, int fontSize )
         {
-            this.companion.textStyle.setFont(Itchy.getResources().getFont(fontName));
+            this.companion.textStyle.setFont(Itchy.getGame().resources.getFont(fontName));
             this.companion.textStyle.fontSize = fontSize;
             return getThis();
         }

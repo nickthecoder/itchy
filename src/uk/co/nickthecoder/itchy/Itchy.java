@@ -192,26 +192,16 @@ public class Itchy
         }
     }
 
-    /**
-     * @return The resource of the current game.
-     */
-    // TODO Should this be getGame().resources instead? Or in fact, remove this method?
-    public static Resources getResources()
-    {
-        return currentGame.resources;
-    }
 
     private static void setScreenMode( Resources resources )
     {
-        setScreenMode(resources.getGameInfo().title, resources,
-                resources.getGameInfo().width, resources.getGameInfo().height, resources.getGameInfo().resizable );
-    	
+    	GameInfo gameInfo = resources.getGameInfo();
+        setScreenMode(gameInfo.title, resources, gameInfo.width, gameInfo.height, gameInfo.resizable );
     }
     
     private static void setScreenMode( Game game )
     {
-        setScreenMode(game.getTitle(), game.resources,
-                game.getWidth(), game.getHeight(), game.isResizable() );
+        setScreenMode(game.getTitle(), game.resources, game.getWidth(), game.getHeight(), game.isResizable() );
     }
     
 
@@ -278,12 +268,18 @@ public class Itchy
         loadingGame = game;
     }
     
+    /**
+     * Should be called once from the program's entry point (static void main method; usually from {@link Launcher}).
+     * To exit from the mainLoop, call {@link #terminate()}.
+     */
     public static void mainLoop()
     {
         try {
             if (!running) {
                 running = true;
-                frameRate.loop();
+                while (running) {
+                	frameRate.loop();
+                }
             }
         } catch (Exception e) {
             System.err.println("Mainloop Failed");
@@ -331,7 +327,10 @@ public class Itchy
         running = false;
     }
 
-    public static void doGameLogic()
+    /**
+     * Processes events (such as key strokes and mouse), called once per frame from {@link FrameRate}'s loop.
+     */
+    public static void processEvents()
     {
         while (true) {
             Event event = Events.poll();
@@ -341,7 +340,15 @@ public class Itchy
                 processEvent(event);
             }
         }
-
+        
+    }
+    
+    /**
+     * Called once per frame from {@link FrameRate}'s loop. Calls tick on the soundManager, and the current game.
+     * (This will in turn call the tick of the Director, the SceneDirector and all Actor's roles.
+     */
+    public static void tick()
+    {
         soundManager.tick();
         currentGame.tick();
     }
@@ -351,17 +358,27 @@ public class Itchy
         return Video.getDisplaySurface();
     }
 
-    public static void doRedraw()
+    /**
+     * Renders (draws) the whole screen, and then flips the double buffer, so that the newly rendered screen is visible.
+     */
+    public static void render()
     {
         currentGame.render(Video.getDisplaySurface());
         Video.flip();
     }
 
+    /** Is itchy still running?
+     * 
+     * @return False if Itchy should exit at the end of the current frame. True otherwise.
+     */
     public static boolean isRunning()
     {
         return running;
     }
 
+    /**
+     * Should holding down a key cause repeated events, or just a single one?
+     */
     public static void enableKeyboardRepeat( boolean value )
     {
         if (value) {
@@ -377,7 +394,8 @@ public class Itchy
     }
 
     /**
-     * Tests state of either shift keys A convenience method, the same as isKeyDown( Keys.LSHIFT ) || isKeyDown( Keys.RSHIFT )
+     * Tests state of either shift keys.
+     * A convenience method, the same as <code>isKeyDown( Keys.LSHIFT ) || isKeyDown( Keys.RSHIFT )</code>
      */
     public static boolean isShiftDown()
     {
@@ -385,7 +403,8 @@ public class Itchy
     }
 
     /**
-     * Tests state of either control keys A convenience method, the same as isKeyDown( Keys.LCTRL ) || isKeyDown( Keys.RCTRL )
+     * Tests state of either control keys.
+     * A convenience method, the same as <code>isKeyDown( Keys.LCTRL ) || isKeyDown( Keys.RCTRL )</code>
      */
     public static boolean isCtrlDown()
     {
@@ -393,7 +412,8 @@ public class Itchy
     }
 
     /**
-     * Tests state of either control keys A convenience method, the same as isKeyDown( Keys.LALT ) || isKeyDown( Keys.RALT )
+     * Tests state of either control keys.
+     * A convenience method, the same as <code>isKeyDown( Keys.LALT ) || isKeyDown( Keys.RALT )</code>
      */
     public static boolean isAltDown()
     {
@@ -401,13 +421,18 @@ public class Itchy
     }
 
     /**
-     * Tests state of either meta keys A convenience method, the same as isKeyDown( Keys.LMETA ) || isKeyDown( Keys.RMETA )
+     * Tests state of either meta keys.
+     * A convenience method, the same as <code>isKeyDown( Keys.LMETA ) || isKeyDown( Keys.RMETA )</code>
      */
     public static boolean isMetaDown()
     {
         return keyboardState[Keys.LMETA] || keyboardState[Keys.RMETA];
     }
 
+    /**
+     * Processes a single event. Called from {@link #processEvents}.
+     * @param event
+     */
     private static void processEvent( Event event )
     {
 
@@ -439,11 +464,21 @@ public class Itchy
         currentGame.processEvent(event);
     }
 
+    /**
+     * Taken from the last MouseEvent
+     * 0 is the left edge of the screen.
+     * @return The x position of the mouse in pixels.
+     */
     public static int getMouseX()
     {
         return mouseX;
     }
 
+    /**
+     * Taken from the last MouseEvent
+     * 0 is the top edge of the screen.
+     * @return The y position of the mouse in pixels.
+     */
     public static int getMouseY()
     {
         return mouseY;

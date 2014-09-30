@@ -2,7 +2,6 @@ Resize Editor windows
 	SceneDesigner doesn't resize correctly
 	Enter SceneDesigner then back to Editor, resize doesn't work.
 
-
 Bugs
 
 	GroovyRain z-order of wally and player are wrong. 
@@ -12,35 +11,10 @@ Bugs
     Editor's root container is one - and any others that use "center".
     	Need RootContainers to change their view's position when they change size.
 
-Editor to be as large as possible
-	Allow maximise/restore?
-	Jame doesn't have this functionality.
-	Jame to add SDL_RESIZABLE functionality.
-		See : http://www.libsdl.org/release/SDL-1.2.15/docs/html/sdlsetvideomode.html
-		Will need a new Event class. :-(
-	GameInfo to have a "resizable" and Director to have onDisplayResize(width, height)
-		AbstractDirector to call Video.setMode and guess the new sizes for its views.
-			Sub classes can replace this method if they need something more specific.
-
-
-Rename one of the Button classes. ButtonRole
-
-Look at groovy and python game code, and try to simplify it.
-	Auto import itchy.* - also jame.* and/or jame.event.* ?
-	Make properties easy
-	Make CostumeProperties easier - Can we replace it with a simple HashMap? CostumeProperties never have any processing in them.
-
-
-CollisionStrategy
-	Decide whether actor or role has one.
-	Don't call it directly from game code, call it via actor, or via role???
-	Have it create an iterator of possible actors rather than actors that ARE matching
-		So BruteForce will return ALL actors (excluding self)
-		Clever ones will only return those from overlapping squares.
-		Actor will then do the overlapping/colliding test.
-	Maybe also add a find nearest? Nbh will look in current square, then in surrounding squares and outwards.
-
-Show a list of the Stages / Actors in a tree structure within the editor
+Create Node interface
+	Stage and Actor implement it
+	Create RootNode too, which only allows Stages as children.
+	Create Tree Component and use it to show the Node hierarchy.
 
 Generic Hierarchy Node/ParentNode interface. Actors and Stages will be ParentNodes
 	This allows for composite objects.
@@ -69,6 +43,24 @@ Generic Hierarchy Node/ParentNode interface. Actors and Stages will be ParentNod
 			Will also need extra NullComponents added manually when there are empty gaps in the grid.
 			More glue needed to allow for components to be moved around.
 				In fact, this will force GridLayouts to use the parent container's collection of children, rather than its own. 
+
+
+Rename one of the Button classes. ButtonRole
+
+Look at groovy and python game code, and try to simplify it.
+	Auto import itchy.* - also jame.* and/or jame.event.* ?
+	Make properties easy
+	Make CostumeProperties easier - Can we replace it with a simple HashMap? CostumeProperties never have any processing in them.
+
+
+CollisionStrategy
+	Decide whether actor or role has one.
+	Don't call it directly from game code, call it via actor, or via role???
+	Have it create an iterator of possible actors rather than actors that ARE matching
+		So BruteForce will return ALL actors (excluding self)
+		Clever ones will only return those from overlapping squares.
+		Actor will then do the overlapping/colliding test.
+	Maybe also add a find nearest? Nbh will look in current square, then in surrounding squares and outwards.
 
 
 Companion hierarchy.

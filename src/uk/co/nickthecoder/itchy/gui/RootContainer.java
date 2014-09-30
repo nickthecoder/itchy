@@ -281,7 +281,7 @@ public class RootContainer extends PlainContainer
     public void showNow()
     {
         show();
-        Itchy.doRedraw();
+        Itchy.render();
     }
 
     public void hide()

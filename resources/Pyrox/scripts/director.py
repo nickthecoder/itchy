@@ -77,7 +77,7 @@ class Director(AbstractDirector) :
     def returnToGateRoom( self, warpRoom ) :
         
         self.previousSceneName = Itchy.getGame().getSceneName()
-        Itchy().getGame().startScene( warpRoom )
+        Itchy.getGame().startScene( warpRoom )
 
         
     def onKeyDown(self,kevent) :
