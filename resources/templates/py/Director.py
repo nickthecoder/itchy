@@ -1,4 +1,4 @@
-from uk.co.nickthecoder.itchy import AbstractDirector
+from uk.co.nickthecoder.itchy import Director, AbstractDirector
 from uk.co.nickthecoder.itchy.util import ClassName
 
 from java.util import ArrayList
@@ -19,6 +19,6 @@ class ${Name}(AbstractDirector) :
 
     # Boiler plate code - no need to change this
     def getClassName(self):
-        return ClassName( CostumeProperties, self.__module__ + ".py" )
+        return ClassName( Director, self.__module__ + ".py" )
 
 

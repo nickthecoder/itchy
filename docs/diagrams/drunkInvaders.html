@@ -195,6 +195,7 @@ CLASS uk.co.nickthecoder.drunkinvaders.DrunkInvaders
 
 
 
+
 <!--BEGIN_CONTENT-->
 <div id="Role" class="box" style="left:318px;top:0px;">
   <div class="title"><a href="../api/uk/co/nickthecoder/itchy/Role.html">Role</a></div>
@@ -217,8 +218,6 @@ CLASS uk.co.nickthecoder.drunkinvaders.DrunkInvaders
       <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Bullet.html#targetTagName">targetTagName</a></li>
     </ul>
     <ul class="methods">
-      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Bullet.html#onAttach()">onAttach</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Bullet.html#onDetach()">onDetach</a></li>
       <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Bullet.html#shot(uk.co.nickthecoder.itchy.Actor)">shot</a></li>
       <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Bullet.html#tick()">tick</a></li>
     </ul>
@@ -238,8 +237,6 @@ CLASS uk.co.nickthecoder.drunkinvaders.DrunkInvaders
       <li class="public static"><a href="../api/uk/co/nickthecoder/drunkinvaders/Bouncy.html#collide(uk.co.nickthecoder.itchy.Actor, uk.co.nickthecoder.itchy.Actor)">collide</a></li>
       <li class="public static"><a href="../api/uk/co/nickthecoder/drunkinvaders/Bouncy.html#collideOld(uk.co.nickthecoder.itchy.Actor, uk.co.nickthecoder.itchy.Actor)">collideOld</a></li>
       <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Bouncy.html#onAttach()">onAttach</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Bouncy.html#onBirth()">onBirth</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Bouncy.html#onDeath()">onDeath</a></li>
       <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Bouncy.html#onDetach()">onDetach</a></li>
       <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Bouncy.html#tick()">tick</a></li>
     </ul>
@@ -325,8 +322,6 @@ CLASS uk.co.nickthecoder.drunkinvaders.DrunkInvaders
   <div class="title"><a href="../api/uk/co/nickthecoder/drunkinvaders/Shield.html">Shield</a></div>
   <div class="content">
     <ul class="methods">
-      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Shield.html#onAttach()">onAttach</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Shield.html#onDetach()">onDetach</a></li>
       <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Shield.html#shot(uk.co.nickthecoder.itchy.Actor)">shot</a></li>
       <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Shield.html#tick()">tick</a></li>
     </ul>
@@ -366,7 +361,13 @@ CLASS uk.co.nickthecoder.drunkinvaders.DrunkInvaders
 <div id="Level" class="box" style="left:550px;top:480px;">
   <div class="title"><a href="../api/uk/co/nickthecoder/drunkinvaders/Level.html">Level</a></div>
   <div class="content">
+    <ul class="fields">
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Level.html#ending">ending</a></li>
+    </ul>
     <ul class="methods">
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Level.html#addAliens(int)">addAliens</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Level.html#getAliensRemaining()">getAliensRemaining</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Level.html#getCollisionStrategy(uk.co.nickthecoder.itchy.Actor)">getCollisionStrategy</a></li>
       <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/Level.html#onKeyDown(uk.co.nickthecoder.jame.event.KeyboardEvent)">onKeyDown</a></li>
     </ul>
   </div>
@@ -416,13 +417,14 @@ CLASS uk.co.nickthecoder.drunkinvaders.DrunkInvaders
       <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#createCollisionStrategy(uk.co.nickthecoder.itchy.Actor)">createCollisionStrategy</a></li>
       <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#debug()">debug</a></li>
       <li class="public static"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#main(java.lang.String[])">main</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#nextLevel()">nextLevel</a></li>
       <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#onActivate()">onActivate</a></li>
       <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#onKeyDown(uk.co.nickthecoder.jame.event.KeyboardEvent)">onKeyDown</a></li>
       <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#onKeyUp(uk.co.nickthecoder.jame.event.KeyboardEvent)">onKeyUp</a></li>
       <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#onMessage(java.lang.String)">onMessage</a></li>
       <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#onStarted()">onStarted</a></li>
-      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#play(int)">play</a></li>
       <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#play()">play</a></li>
+      <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#play(int)">play</a></li>
       <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#startScene(java.lang.String)">startScene</a></li>
       <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#tick()">tick</a></li>
       <li class="public"><a href="../api/uk/co/nickthecoder/drunkinvaders/DrunkInvaders.html#toggleInfo()">toggleInfo</a></li>
