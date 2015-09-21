@@ -58,6 +58,7 @@ public class ResourcesWriter extends XMLWriter
         this.writeAnimations();
         this.writeCostumes();
         this.writeScenes();
+        this.writeInputs();
 
         this.endTag("resources");
     }
@@ -420,6 +421,23 @@ public class ResourcesWriter extends XMLWriter
         }
 
         this.endTag("scenes");
+    }
+
+    private void writeInputs() throws XMLException
+    {
+        this.beginTag("inputs");
+
+        for (String name : this.resources.inputNames()) {
+            InputResource inputResource = this.resources.getInputResource(name);
+            Input input = inputResource.getInput();
+            
+            this.beginTag("input");
+            this.attribute("name", name);
+            this.attribute("keys", input.getKeys());
+            this.endTag("input");
+        }
+
+        this.endTag("inputs");
     }
 
 }

@@ -26,6 +26,8 @@ public abstract class AbstractRole implements Role
 
     private CollisionStrategy collisionStrategy = BruteForceCollisionStrategy.pixelCollision;
 
+    private String id;
+
     public static Set<Role> allByTag( String tag )
     {
         return Itchy.getGame().findRoleByTag(tag);
@@ -68,14 +70,34 @@ public abstract class AbstractRole implements Role
         this.tagMembership = new TagMembership<Role>(Itchy.getGame().roleTags, this);
     }
 
+    @Override
+    public String getId()
+    {
+        return this.id;
+    }
+
+    @Override
+    public void setId( String id )
+    {
+        if (id != null) {
+            id = id.trim();
+            if ("".equals(id)) {
+                id = null;
+            }
+        }
+        this.id = id;
+    }
+
+    @Override
     public CollisionStrategy getCollisionStrategy()
     {
         return this.collisionStrategy;
     }
-    
+
+    @Override
     public ClassName getClassName()
     {
-        return new ClassName( Role.class, this.getClass().getName() );
+        return new ClassName(Role.class, this.getClass().getName());
     }
 
     @Override
@@ -84,6 +106,7 @@ public abstract class AbstractRole implements Role
         return this.tagMembership.hasTag(name);
     }
 
+    @Override
     public void addTag( String tag )
     {
         this.tagMembership.add(tag);
@@ -93,13 +116,22 @@ public abstract class AbstractRole implements Role
     {
         this.tagMembership.remove(tag);
     }
-    
+
+    public void tag( String name, boolean value )
+    {
+        if (value) {
+            this.addTag(name);
+        } else {
+            this.removeTag(name);
+        }
+    }
+
     @Override
     public Set<String> getTags()
     {
         return this.tagMembership.getTags();
     }
-    
+
     public void removeAllTags()
     {
         this.tagMembership.removeAll();
@@ -255,6 +287,10 @@ public abstract class AbstractRole implements Role
     public void animateAndTick()
     {
         Actor actor = getActor();
+//        if (actor == null) {
+//            System.err.println( "Role ticking without an actor : " + this );
+//            return;
+//        }
         Animation animation = actor.getAnimation();
         if (animation != null) {
 

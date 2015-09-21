@@ -14,6 +14,7 @@ import java.util.Random;
 import uk.co.nickthecoder.itchy.AbstractDirector;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Actor.AnimationEvent;
+import uk.co.nickthecoder.itchy.Input;
 import uk.co.nickthecoder.itchy.Launcher;
 import uk.co.nickthecoder.itchy.extras.Fragment;
 import uk.co.nickthecoder.itchy.extras.Timer;
@@ -123,11 +124,36 @@ public class Tetra extends AbstractDirector
      */
     public int completedLines;
 
+    private Input inputLeft;
+    
+    private Input inputRight;
+    
+    private Input inputRotate;
+    
+    private Input inputDrop;
+    
+    private Input inputExit;
+    
+    private Input inputPlay;
+    
+    private Input inputEditor;
+
+    private Input inputDebug;
+    
     @Override
     public void onActivate()
     {
         super.onActivate();
         this.level = getStartingLevel();
+        
+        this.inputLeft = Input.find("left");
+        this.inputRight = Input.find("right");
+        this.inputRotate = Input.find("rotate");
+        this.inputDrop = Input.find("drop");
+        this.inputExit = Input.find("exit");
+        this.inputPlay = Input.find("play");
+        this.inputEditor = Input.find("editor");
+        this.inputDebug = Input.find("debug");
     }
 
     @Override
@@ -194,11 +220,11 @@ public class Tetra extends AbstractDirector
             return false;
         }
 
-        if (ke.symbol == Keys.F12) {
+        if (this.inputEditor.matches(ke)) {
             this.game.startEditor();
         }
 
-        if (ke.symbol == Keys.F1) {
+        if (this.inputDebug.matches(ke)) {
             debug();
         }
 
@@ -206,7 +232,7 @@ public class Tetra extends AbstractDirector
             chooseLevel(ke.symbol - Keys.KEY_0);
         }
 
-        if ((ke.symbol == Keys.ESCAPE) && (this.game.getSceneName().equals("main"))) {
+        if ((this.inputExit.matches(ke)) && (this.game.getSceneName().equals("main"))) {
             gameOver();
             this.game.resources.getSound("shatter").play();
             for (int x = 1; x <= WIDTH; x++) {
@@ -224,21 +250,21 @@ public class Tetra extends AbstractDirector
         }
 
         if (!this.playing) {
-            if (ke.symbol == Keys.RETURN) {
+            if (this.inputPlay.matches(ke)) {
                 onMessage("play");
             }
         } else {
             if (this.piece != null) {
-                if ((ke.symbol == Keys.DOWN) || (ke.symbol == Keys.SPACE)) {
+                if (this.inputDrop.matches(ke)) {
                     this.piece.drop();
                 }
-                if (ke.symbol == Keys.UP) {
+                if (this.inputRotate.matches(ke)) {
                     this.piece.rotate();
                 }
-                if (ke.symbol == Keys.LEFT) {
+                if (this.inputLeft.matches(ke)) {
                     this.piece.slide(-1);
                 }
-                if (ke.symbol == Keys.RIGHT) {
+                if (this.inputRight.matches(ke)) {
                     this.piece.slide(1);
                 }
             }

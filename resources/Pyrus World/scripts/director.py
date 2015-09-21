@@ -48,7 +48,7 @@ class Director(AbstractDirector) :
         pass
       
     def startScene(self, sceneName) :
-        print "Starting scene : ", sceneName
+
         if self.getGame().pause.isPaused() :
             self.getGame().pause.unpause()
             

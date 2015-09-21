@@ -5,7 +5,7 @@
 package uk.co.nickthecoder.drunkinvaders;
 
 import uk.co.nickthecoder.itchy.Actor;
-import uk.co.nickthecoder.itchy.Itchy;
+import uk.co.nickthecoder.itchy.Input;
 import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.extras.Fragment;
 import uk.co.nickthecoder.itchy.property.Property;
@@ -14,7 +14,6 @@ import uk.co.nickthecoder.itchy.role.OnionSkin;
 import uk.co.nickthecoder.itchy.role.Talk;
 import uk.co.nickthecoder.itchy.util.Tag;
 import uk.co.nickthecoder.jame.RGBA;
-import uk.co.nickthecoder.jame.event.Keys;
 
 @Tag(names = { "killable" })
 public class Ship extends Bouncy implements Shootable
@@ -57,12 +56,20 @@ public class Ship extends Bouncy implements Shootable
      */
     private double shieldStrength = 1.0;
 
+    protected Input inputLeft;
+
+    protected Input inputRight;
+
+    protected Input inputShield;
+
+    protected Input inputFire;
+
     @Override
     public void onBirth()
     {
         super.onBirth();
 
-        new OnionSkin( this ).alpha(128).createActor();
+        new OnionSkin(this).alpha(128).createActor();
         this.mass = 100000000000.0;
 
         this.radius = Math.sqrt(
@@ -74,6 +81,11 @@ public class Ship extends Bouncy implements Shootable
 
         // Create the fragments for the explosions when I get shot.
         new Fragment().actor(getActor()).createPoses("fragment");
+
+        this.inputLeft = Input.find("left");
+        this.inputRight = Input.find("right");
+        this.inputShield = Input.find("shield");
+        this.inputFire = Input.find("fire");
     }
 
     @Override
@@ -92,7 +104,7 @@ public class Ship extends Bouncy implements Shootable
     public void tick()
     {
 
-        if (Itchy.isKeyDown(Keys.LSHIFT) || Itchy.isKeyDown(Keys.RSHIFT)) {
+        if (this.inputShield.pressed()) {
             if (!this.shielded) {
                 activateShield();
             }
@@ -110,10 +122,10 @@ public class Ship extends Bouncy implements Shootable
 
             chargeShield();
 
-            if (Itchy.isKeyDown(Keys.LEFT)) {
+            if (this.inputLeft.pressed()) {
                 this.turn(this.rotationSpeed);
             }
-            if (Itchy.isKeyDown(Keys.RIGHT)) {
+            if (this.inputRight.pressed()) {
                 this.turn(-this.rotationSpeed);
             }
 
@@ -126,14 +138,14 @@ public class Ship extends Bouncy implements Shootable
                 }
             } else {
 
-                if (Itchy.isKeyDown(Keys.SPACE)) {
+                if (this.inputFire.pressed()) {
                     this.fire();
                 }
             }
 
             getCollisionStrategy().update();
 
-            for (Role role : getCollisionStrategy().collisions(getActor(),DEADLY_LIST)) {
+            for (Role role : getCollisionStrategy().collisions(getActor(), DEADLY_LIST)) {
                 Actor other = role.getActor();
                 this.shot(other);
                 if (other.getRole() instanceof Shootable) {
@@ -245,7 +257,7 @@ public class Ship extends Bouncy implements Shootable
 
         new Explosion(getActor())
             .projectiles(20)
-            .speed(0.3, 0.9,0,0)
+            .speed(0.3, 0.9, 0, 0)
             .fade(2)
             .spin(-0.2, 0.2)
             .eventName("fragment")
@@ -254,7 +266,7 @@ public class Ship extends Bouncy implements Shootable
         new Explosion(getActor())
             .projectiles(40)
             .offsetForwards(-10, 10).offsetSidewards(-10, 10)
-            .speed(1, 3,0,0)
+            .speed(1, 3, 0, 0)
             .fade(2)
             .eventName("pixel")
             .createActor();

@@ -1,31 +1,35 @@
 // The SceneDirectorScript for the main "menu" scene, and the "about" scene.
 Menu = new Class({
 
-    Extends: SceneDirectorScript,
-    
-    onActivate: function() {
-    	directorScript.showFancyMouse();
+    Extends : SceneDirectorScript,
+
+    onActivate : function() {
+        directorScript.showFancyMouse();
+
+        this.inputStart = itchy.Input.find( "start" )
+        this.inputExit = itchy.Input.find( "exit" )
+        this.inputAbout = itchy.Input.find( "about" )
+        this.inputEditor = itchy.Input.find( "editor" )
     },
+
+    onKeyDown : function(event) {
     
-    onKeyDown: function( event ) {
-        if (event.symbol == Keys.RETURN) {
-            stdout.println("Return pressed");
+        if (this.inputStart.matches(event)) {
             directorScript.startGame();
-            
-        } else if (event.symbol == Keys.ESCAPE) {
+
+        } else if (this.inputExit.matches(event)) {
             game.startScene("menu");
-            
-        } else if (event.symbol == Keys.t) {
-            game.startScene("testEdgeCollisions");
-            
-        } else if (event.symbol == Keys.a) {
-        	game.startScene("about");
+
+        } else if (this.inputAbout.matches(event)) {
+            game.startScene("about");
+
+        } else if (this.inputEditor.matches(event)) {
+            game.startEditor();
         }
     },
-    
-    // The menu has flying rocks, but we don't care about them, so do nothing.
-    addRocks:function( diff ) {
-	}
-    
-});
 
+    // The menu has flying rocks, but we don't care about them, so do nothing.
+    addRocks : function(diff) {
+    }
+
+});

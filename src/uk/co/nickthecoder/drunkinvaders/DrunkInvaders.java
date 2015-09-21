@@ -11,6 +11,7 @@ import uk.co.nickthecoder.itchy.AbstractDirector;
 import uk.co.nickthecoder.itchy.AbstractRole;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.GenericCompoundView;
+import uk.co.nickthecoder.itchy.Input;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Launcher;
 import uk.co.nickthecoder.itchy.MultiLineTextPose;
@@ -30,7 +31,6 @@ import uk.co.nickthecoder.itchy.extras.SceneTransition;
 import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.Surface;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
-import uk.co.nickthecoder.jame.event.Keys;
 
 public class DrunkInvaders extends AbstractDirector
 {
@@ -46,7 +46,6 @@ public class DrunkInvaders extends AbstractDirector
 
     public int metronomeCountdown;
 
-
     private int levelNumber = 1;
 
     Neighbourhood neighbourhood;
@@ -56,6 +55,10 @@ public class DrunkInvaders extends AbstractDirector
     public boolean transitioning = false;
 
     public WorldRectangle worldBounds;
+
+    protected Input inputDebug;
+
+    protected Input inputToggleInfo;
 
     @Override
     public void onStarted()
@@ -99,26 +102,23 @@ public class DrunkInvaders extends AbstractDirector
 
         this.metronomeCountdown = 0;
         this.metronome = 20;
+
+        this.inputDebug = Input.find("debug");
+        this.inputToggleInfo = Input.find("toggleInfo");
     }
 
     @Override
     public boolean onKeyDown( KeyboardEvent ke )
     {
-        if (ke.symbol == Keys.F1) {
+        if (this.inputDebug.matches(ke)) {
             debug();
         }
 
-        if (ke.symbol == Keys.F2) {
+        if (this.inputToggleInfo.matches(ke)) {
             toggleInfo();
         }
 
         return super.onKeyDown(ke);
-    }
-
-    @Override
-    public boolean onKeyUp( KeyboardEvent ke )
-    {
-        return false;
     }
 
     @Override
@@ -145,8 +145,8 @@ public class DrunkInvaders extends AbstractDirector
                 public void tick()
                 {
                     int aliensRemaining = 0;
-                    if  (game.getSceneDirector() instanceof Level) {
-                        aliensRemaining = ((Level) game.getSceneDirector()).getAliensRemaining();
+                    if (DrunkInvaders.this.game.getSceneDirector() instanceof Level) {
+                        aliensRemaining = ((Level) DrunkInvaders.this.game.getSceneDirector()).getAliensRemaining();
                     }
                     pose.setText(
                         "Aliens Remaining     : " + aliensRemaining + "\n" +
@@ -182,13 +182,12 @@ public class DrunkInvaders extends AbstractDirector
         play();
     }
 
-
     @Override
     public boolean startScene( String sceneName )
     {
         this.neighbourhood.clear();
 
-        System.out.println("Transition start for " + sceneName );
+        System.out.println("Transition start for " + sceneName);
         Animation transition = new CompoundAnimation(false)
             .add(SceneTransition.slideUp())
             .add(SceneTransition.fade());
@@ -228,15 +227,15 @@ public class DrunkInvaders extends AbstractDirector
 
         } else if (message == SceneTransition.COMPLETE) {
             this.transitioning = false;
-            System.out.println("Transition end" );
+            System.out.println("Transition end");
 
         }
     }
 
     public void addAliens( int n )
     {
-        if (this.game.getSceneDirector() instanceof Level ) {
-            ((Level) (this.game.getSceneDirector())).addAliens( n );
+        if (this.game.getSceneDirector() instanceof Level) {
+            ((Level) (this.game.getSceneDirector())).addAliens(n);
         }
     }
 

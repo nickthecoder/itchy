@@ -32,17 +32,12 @@ public abstract class StandardScriptLanguage extends ScriptLanguage
     @Override
     protected void initialise()
     {
+        this.engine = createEngine();
+        
         Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
         bindings.put("scriptLanguage", this);
         bindings.put("scriptEngine", this.engine);
-    }
-
-    @Override
-    protected void ensureInitialised()
-        throws ScriptException
-    {
-        super.ensureInitialised();
-
+        
         File directory = this.manager.getIncludeDirectory(this);
 
         String end = "." + getExtension();
@@ -52,10 +47,17 @@ public abstract class StandardScriptLanguage extends ScriptLanguage
         Arrays.sort(scripts);
         for (File script : scripts) {
             if (script.getName().endsWith(end)) {
-                loadScript(script);
+                try {
+                    loadScript(script);
+                } catch (Exception e) {
+                    
+                }
             }
         }
+
     }
+    
+    abstract protected ScriptEngine createEngine();
 
     public boolean eventResult( Object result )
     {
@@ -94,6 +96,8 @@ public abstract class StandardScriptLanguage extends ScriptLanguage
                 return;
             }
         }
+        
+        this.lastLoadedMap.put(file, new Date().getTime());
 
         try {
             Reader reader = new InputStreamReader(new FileInputStream(file));
@@ -107,10 +111,11 @@ public abstract class StandardScriptLanguage extends ScriptLanguage
             }
         } catch (IOException e) {
             e.printStackTrace();
+            this.lastLoadedMap.remove(file);
+
             throw new ScriptException("IOException loading " + file);
         }
 
-        this.lastLoadedMap.put(file, new Date().getTime());
     }
 
 }

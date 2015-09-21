@@ -1,0 +1,27 @@
+<scene showMouse="true" role="menu.py" background="#000000ff">
+  <properties/>
+  <layer name="plain">
+    <text text="Pyrox" font="Boycott" size="222" color="#ff7e1a" xAlignment="0.5" yAlignment="0.5" x="416" y="449" direction="0.0" heading="0.0" startEvent="default" zOrder="-1">
+      <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
+        <property name="dx" value="10"/>
+        <property name="dy" value="-6"/>
+        <property name="color" value="#0098ffff"/>
+      </makeup>
+    </text>
+    <text text="Play" font="Boycott" size="150" color="#49ff46" xAlignment="0.0" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.SceneButton" x="245" y="317" direction="0.0" heading="0.0" startEvent="default" zOrder="0">
+      <property name="sceneName" value="play"/>
+      <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
+        <property name="dx" value="4"/>
+        <property name="dy" value="-4"/>
+        <property name="color" value="#d500dbff"/>
+      </makeup>
+    </text>
+    <text text="Quit" font="Boycott" size="60" color="#c72b1a" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.QuitButton" x="408" y="85" direction="0.0" heading="0.0" startEvent="default" zOrder="1">
+      <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
+        <property name="dx" value="3"/>
+        <property name="dy" value="-3"/>
+        <property name="color" value="#ffff00ff"/>
+      </makeup>
+    </text>
+  </layer>
+</scene>

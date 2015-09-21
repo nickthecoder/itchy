@@ -1,6 +1,7 @@
 import math
 
 from uk.co.nickthecoder.itchy import Itchy
+from uk.co.nickthecoder.itchy import Input
 from uk.co.nickthecoder.itchy import Role
 from uk.co.nickthecoder.itchy.util import ClassName
 from uk.co.nickthecoder.itchy.role import OnionSkin
@@ -8,7 +9,6 @@ from uk.co.nickthecoder.itchy.role import Explosion
 from uk.co.nickthecoder.itchy.extras import Timer
 from uk.co.nickthecoder.itchy.extras import Fragment
 
-from uk.co.nickthecoder.jame.event import Keys
 
 from java.util import ArrayList
 from moving import Moving
@@ -22,6 +22,14 @@ class Ship(Moving) :
         self.lifeIcon = []
 
     def onBirth(self) :
+    
+        self.inputLeft = Input.find("left")
+        self.inputRight = Input.find("right")
+        self.inputThrust = Input.find("thrust")
+        self.inputFire = Input.find("fire")
+        self.inputCheat = Input.find("cheat")
+    
+    
         OnionSkin( self.getActor() ).alpha(128).every(5).fade(3).createActor();
 
         self.rotationSpeed = self.getActor().getCostume().getProperties().rotationSpeed;
@@ -65,12 +73,13 @@ class Ship(Moving) :
 
     def tick(self) :
 
-        if Itchy.isKeyDown(Keys.LEFT) :
+        if self.inputLeft.pressed() :
             self.getActor().adjustDirection( self.rotationSpeed )
-        if Itchy.isKeyDown(Keys.RIGHT) :
+            
+        if self.inputRight.pressed() :
             self.getActor().adjustDirection( -self.rotationSpeed );
 
-        if Itchy.isKeyDown(Keys.UP) :
+        if self.inputThrust.pressed() :
             theta = self.getActor().getHeadingRadians()
             self.vx += math.cos(theta) * self.thrust
             self.vy += math.sin(theta) * self.thrust
@@ -82,7 +91,7 @@ class Ship(Moving) :
                 .randomSpread().speed(1,2,0,0).fade(3).eventName("spark") \
                 .createActor()
 
-        if Itchy.isKeyDown(Keys.SPACE) :
+        if self.inputFire.pressed() :
             if self.fireTimer.isFinished() :
                 self.fire()
                 self.fireTimer.reset()
@@ -94,7 +103,7 @@ class Ship(Moving) :
             self.explode();
 
         # For debugging.
-        if Itchy.isKeyDown(Keys.x) :
+        if self.inputCheat.pressed() :
             Itchy.getGame().getSceneDirector().addRocks(-1);
     
     def explode( self ) :

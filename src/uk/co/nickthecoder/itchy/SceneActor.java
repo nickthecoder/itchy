@@ -27,6 +27,8 @@ public abstract class SceneActor implements Cloneable
         }
     }
 
+    public String id;
+    
     public Costume costume;
 
     public int x;
@@ -67,6 +69,7 @@ public abstract class SceneActor implements Cloneable
     {
         Role actualRole = ((SceneDesignerRole) actor.getRole()).actualRole;
 
+        this.id = actualRole.getId();
         this.x = (int) actor.getX();
         this.y = (int) actor.getY();
         this.alpha = actor.getAppearance().getAlpha();
@@ -102,6 +105,7 @@ public abstract class SceneActor implements Cloneable
 
     protected void updateActor( Actor actor, Resources resources, boolean designMode )
     {
+        
         actor.setStartEvent(this.startEvent);
         actor.moveTo(this.x, this.y);
         actor.setZOrder(this.zOrder);
@@ -175,6 +179,9 @@ public abstract class SceneActor implements Cloneable
                 }
             }
         }
+        
+        actualRole.setId( this.id );
+
 
         if (!designMode) {
             if (this.activationDelay > 0) {

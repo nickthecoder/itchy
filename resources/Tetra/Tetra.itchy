@@ -23,32 +23,32 @@
   </sounds>
   <animations>
     <animation name="moveDown1">
-      <compound loops="1" sequence="false">
+      <parallel loops="1" sequence="false">
         <move ease="linear" ticks="20" dx="0.0" dy="-20.0"/>
-      </compound>
+      </parallel>
     </animation>
     <animation name="moveDown2">
-      <compound loops="1" sequence="false">
+      <parallel loops="1" sequence="false">
         <move ease="linear" ticks="30" dx="0.0" dy="-40.0"/>
-      </compound>
+      </parallel>
     </animation>
     <animation name="moveDown3">
-      <compound loops="1" sequence="false">
+      <parallel loops="1" sequence="false">
         <move ease="linear" ticks="30" dx="0.0" dy="-60.0"/>
-      </compound>
+      </parallel>
     </animation>
     <animation name="moveDown4">
-      <compound loops="1" sequence="false">
+      <parallel loops="1" sequence="false">
         <move ease="linear" ticks="40" dx="0.0" dy="-80.0"/>
-        <compound loops="1" sequence="true">
-          <turn ease="linear" ticks="5" turn="30.0"/>
-          <turn ease="linear" ticks="5" turn="-30.0"/>
-          <turn ease="linear" ticks="5" turn="30.0"/>
-          <turn ease="linear" ticks="5" turn="-30.0"/>
-          <turn ease="linear" ticks="5" turn="30.0"/>
-          <turn ease="linear" ticks="5" turn="-30.0"/>
-        </compound>
-      </compound>
+        <sequence loops="1" sequence="true">
+          <turn ease="linear" headingToo="false" ticks="5" turn="30.0"/>
+          <turn ease="linear" headingToo="false" ticks="5" turn="-30.0"/>
+          <turn ease="linear" headingToo="false" ticks="5" turn="30.0"/>
+          <turn ease="linear" headingToo="false" ticks="5" turn="-30.0"/>
+          <turn ease="linear" headingToo="false" ticks="5" turn="30.0"/>
+          <turn ease="linear" headingToo="false" ticks="5" turn="-30.0"/>
+        </sequence>
+      </parallel>
     </animation>
   </animations>
   <costumes>
@@ -94,4 +94,15 @@
     <scene name="main"/>
     <scene name="menu"/>
   </scenes>
+  <inputs>
+    <input name="about" keys="a"/>
+    <input name="debug" keys="F1"/>
+    <input name="drop" keys="DOWN,PERIOD"/>
+    <input name="editor" keys="F12"/>
+    <input name="exit" keys="ESCAPE"/>
+    <input name="left" keys="LEFT,z"/>
+    <input name="play" keys="p,RETURN,KP_ENTER"/>
+    <input name="right" keys="RIGHT,x"/>
+    <input name="rotate" keys="UP,SEMICOLON"/>
+  </inputs>
 </resources>

@@ -4,7 +4,6 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -174,7 +173,7 @@ public class Game
      */
     public Game( Resources resources )
     {
-        if ( (!(this instanceof Editor)) && (resources.game != null)) {
+        if ((!(this instanceof Editor)) && (resources.game != null)) {
             throw new RuntimeException("Attempted to create more than one game sharing a single resources file");
         }
         this.resources = resources;
@@ -220,6 +219,11 @@ public class Game
         this.allViews.add(this.glassView);
 
         this.addMouseListener(this.allViews);
+    }
+
+    public FrameRate getFrameRate()
+    {
+        return Itchy.frameRate;
     }
 
     /**
@@ -435,6 +439,23 @@ public class Game
     public Set<Role> findRoleByTag( String tag )
     {
         return this.roleTags.getTagMembers(tag);
+    }
+
+    public Role findRoleById( String id )
+    {
+        if (id == null) {
+            return null;
+        }
+
+        for (Stage stage : this.getStages()) {
+            for (Actor actor : stage.getActors()) {
+                Role role = actor.getRole();
+                if (id.equals(role.getId())) {
+                    return role;
+                }
+            }
+        }
+        return null;
     }
 
     /**
@@ -737,18 +758,6 @@ public class Game
         return this.resources.getGameInfo().title;
     }
 
-    public List<Actor> getActors()
-    {
-        return this.actors;
-    }
-
-    private List<Actor> newActors = new ArrayList<Actor>();
-
-    void add( Actor actor )
-    {
-        this.newActors.add(actor);
-    }
-
     /**
      */
     public void tick()
@@ -756,18 +765,13 @@ public class Game
         this.director.tick();
 
         this.getSceneDirector().tick();
-        for (Iterator<Actor> i = this.getActors().iterator(); i.hasNext();) {
-            Actor actor = i.next();
-            if (actor.isDead()) {
-                i.remove();
-            } else {
-                actor.tick();
-            }
+        for (Stage stage : this.getStages()) {
+            stage.tick();
         }
-        this.actors.addAll(this.newActors);
-        this.newActors.clear();
+        this.glassStage.tick();
     }
 
+    
     public SceneDirector getSceneDirector()
     {
         return this.sceneDirector;
@@ -823,12 +827,12 @@ public class Game
                 this.mouse.showRegularMousePointer(scene.showMouse);
                 this.sceneDirector = scene.createSceneDirector(this.resources);
 
-                this.sceneDirector.onActivate();
             }
 
             scene.create(this, false);
 
             if (!loadOnly) {
+                this.sceneDirector.onActivate();
                 Itchy.frameRate.reset();
             }
 
@@ -919,5 +923,65 @@ public class Game
 //    {
 //        return this.getClass().getName() + " Resources " + this.resources;
 //    }
+
+    public Iterator<Actor> getActors()
+    {
+        return new AllActorsIterator();
+    };
+    
+    class AllActorsIterator implements Iterator<Actor>
+    {
+        private Actor next;
+        
+        public Iterator<Stage> stageIterator;
+        
+        public Iterator<Actor> actorIterator;
+        
+        public AllActorsIterator()
+        {
+            stageIterator = Game.this.stages.iterator();
+            if ( stageIterator.hasNext() ) {
+                actorIterator = stageIterator.next().iterator();
+            }
+            advance();
+        }
+        
+        private void advance()
+        {
+            if (actorIterator.hasNext() ) {
+                next = actorIterator.next();
+            } else {
+                while (stageIterator.hasNext()) {
+                    actorIterator = stageIterator.next().iterator();
+                    if (actorIterator.hasNext()) {
+                        next = actorIterator.next();
+                        return;
+                    }
+                }
+            }
+            next = null;
+        }
+        
+        @Override
+        public boolean hasNext()
+        {
+            return next != null;
+        }
+
+        @Override
+        public Actor next()
+        {
+            Actor result = next;
+            advance();
+            return result;
+        }
+
+        @Override
+        public void remove()
+        {
+            actorIterator.remove();
+        }
+        
+    }
 
 }

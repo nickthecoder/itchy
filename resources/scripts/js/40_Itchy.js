@@ -79,8 +79,14 @@ RoleScript = Class({
         return this.actor.getCostume().getProperties().costumePropertiesScript;
     },
         
-    getProperties: function() { return new java.util.ArrayList(); }
+    getProperties: function() { return new java.util.ArrayList(); },
 
+    Class: {
+        create: function( name ) {
+            var role = language.createRole( name );
+            //return role.roleScript;
+        }
+    }
 });
 
 
@@ -118,6 +124,14 @@ CostumePropertiesScript = Class({
 
 });
 
+
+StageConstraint = Class({
+
+    constrainX: function( x, y ) { return x; },
+    
+    constrainY: function( x, y ) { return y; }
+
+});
 
     
 

@@ -4,10 +4,11 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.role;
 
+import uk.co.nickthecoder.itchy.AbstractTextPose;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Font;
 import uk.co.nickthecoder.itchy.Itchy;
-import uk.co.nickthecoder.itchy.Pose;
+import uk.co.nickthecoder.itchy.MultiLineTextPose;
 import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.TextPose;
 import uk.co.nickthecoder.itchy.makeup.Frame;
@@ -133,7 +134,13 @@ public class Talk extends Follower
         if (this.font == null) {
             this.font = Itchy.getResources().getDefaultFont();
         }
-        Pose pose = new TextPose(this.text, this.font, this.fontSize, this.color);
+        AbstractTextPose pose;
+        if (this.text.contains("\n")) {
+            pose = new MultiLineTextPose(this.font, this.fontSize, this.color);
+            pose.setText(this.text);
+        } else {
+            pose = new TextPose(this.text, this.font, this.fontSize, this.color);
+        }
         pose(pose);
 
         Actor result = super.createActor();

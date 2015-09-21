@@ -49,6 +49,8 @@ public final class Editor extends Game
     public CostumesEditor costumesEditor;
 
     public ScenesEditor scenesEditor;
+    
+    public InputsEditor inputsEditor;
 
     private String designSceneName = null;
 
@@ -71,6 +73,8 @@ public final class Editor extends Game
         this.animationsEditor = new AnimationsEditor(this);
         this.costumesEditor = new CostumesEditor(this);
         this.scenesEditor = new ScenesEditor(this);
+        this.inputsEditor = new InputsEditor(this);
+        
         // this.preferencesEditor = new PreferencesEditor(this);
 
         try {
@@ -149,6 +153,7 @@ public final class Editor extends Game
         notebook.addPage(new Label("Nine Patches"), this.ninePatchEditor.createPage());
         notebook.addPage(new Label("Sounds"), this.soundsEditor.createPage());
         notebook.addPage(new Label("Fonts"), this.fontsEditor.createPage());
+        notebook.addPage(new Label("Inputs"), this.inputsEditor.createPage());
         notebook.addPage(new Label("Costumes"), this.costumesEditor.createPage());
         notebook.addPage(new Label("Scenes"), this.scenesEditor.createPage());
         // notebook.addPage(new Label("Preferences"), this.preferencesEditor.createPage());

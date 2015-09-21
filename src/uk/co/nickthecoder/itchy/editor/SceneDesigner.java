@@ -27,6 +27,7 @@ import uk.co.nickthecoder.itchy.SceneActor;
 import uk.co.nickthecoder.itchy.SceneDirector;
 import uk.co.nickthecoder.itchy.SceneResource;
 import uk.co.nickthecoder.itchy.Stage;
+import uk.co.nickthecoder.itchy.StageConstraint;
 import uk.co.nickthecoder.itchy.StageView;
 import uk.co.nickthecoder.itchy.TextPose;
 import uk.co.nickthecoder.itchy.View;
@@ -151,6 +152,8 @@ public class SceneDesigner implements MouseListener, KeyListener
 
     private ClassNameBox roleClassName;
 
+    private TextBox roleId;
+
     /**
      * Has anything changed since onSave was last called?
      */
@@ -206,6 +209,8 @@ public class SceneDesigner implements MouseListener, KeyListener
         }
 
         this.overlayStage = new ZOrderStage("overlay");
+        this.editor.getStages().add(this.overlayStage);
+        
         this.overlayView = new StageView(editRect, this.overlayStage);
         this.editor.getViews().add(this.overlayView);
 
@@ -259,6 +264,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.editor.getStages().clear();
         this.overlayStage.clear();
 
+        this.editor.getStages().remove(this.overlayStage);
         this.editor.getViews().remove(this.designViews);
         this.editor.getViews().remove(this.overlayView);
         this.editor.removeMouseListener(this);
@@ -285,6 +291,8 @@ public class SceneDesigner implements MouseListener, KeyListener
         newPose.setOffsetY(margin);
 
         Actor actor = new Actor(newPose);
+        Role role = new PlainRole();
+        actor.setRole(role);
         this.overlayStage.addTop(actor);
         actor.moveTo(margin, this.sceneRect.height - margin);
 
@@ -725,6 +733,22 @@ public class SceneDesigner implements MouseListener, KeyListener
             }
         });
 
+        Role role = ((SceneDesignerRole) SceneDesigner.this.currentActor.getRole()).actualRole;
+
+        this.roleId = new TextBox(role.getId());
+
+        this.roleId.addChangeListener(new ComponentChangeListener() {
+
+            @Override
+            public void changed()
+            {
+                Role role = ((SceneDesignerRole) SceneDesigner.this.currentActor.getRole()).actualRole;
+                if (role != null) {
+                    role.setId(SceneDesigner.this.roleId.getText());
+                }
+            }
+        });
+
         createRoleProperties();
     }
 
@@ -733,12 +757,15 @@ public class SceneDesigner implements MouseListener, KeyListener
     private void createRoleProperties()
     {
         this.roleClassName.remove();
+        this.roleId.remove();
 
         Role role = ((SceneDesignerRole) this.currentActor.getRole()).actualRole;
         this.rolePropertiesForm = new SceneDesignerPropertiesForm<Role>("role", this, role, role.getProperties());
         this.rolePropertiesForm.autoUpdate = true;
         this.roleContainer.clear();
+        this.rolePropertiesForm.grid.addRow("ID", this.roleId);
         this.rolePropertiesForm.grid.addRow("Role", this.roleClassName);
+
         this.roleContainer.addChild(this.rolePropertiesForm.createForm());
     }
 
@@ -1169,7 +1196,11 @@ public class SceneDesigner implements MouseListener, KeyListener
     private void moveActor( int dx, int dy )
     {
         if (this.currentActor != null) {
-            this.currentActor.moveBy(dx, dy);
+            double x = this.currentActor.getX() + dx;
+            double y = this.currentActor.getY() + dy;
+
+            StageConstraint sc = this.currentStageView.getStage().getStageConstraint();
+            this.currentActor.moveTo(sc.constrainX(x, y), sc.constrainY(x, y));
         }
     }
 
@@ -1244,7 +1275,7 @@ public class SceneDesigner implements MouseListener, KeyListener
 
         if ((event.button == 2) || ((event.button == 1) && Itchy.isAltDown())) {
             setMode(MODE_DRAG_SCROLL);
-            beginDrag(event);
+            beginDrag(event.x, event.y);
             return true;
         }
 
@@ -1257,8 +1288,8 @@ public class SceneDesigner implements MouseListener, KeyListener
             for (HandleRole handleRole : this.handles) {
                 Actor actor = handleRole.getActor();
 
-                if (actor.hitting(event.x, event.y)) {
-                    beginDrag(event);
+                if (actor.hitting(event.x, event.y) && (actor.getAppearance().getAlpha() > 0)) {
+                    beginDrag(event.x, event.y);
                     handleRole.dragStart();
                     this.currentHandleRole = handleRole;
                     setMode(MODE_DRAG_HANDLE);
@@ -1288,7 +1319,7 @@ public class SceneDesigner implements MouseListener, KeyListener
                             } else {
                                 selectActor(actor);
                                 setMode(MODE_DRAG_ACTOR);
-                                beginDrag(event);
+                                beginDrag(event.x, event.y);
                                 return true;
                             }
                         }
@@ -1307,7 +1338,7 @@ public class SceneDesigner implements MouseListener, KeyListener
                         } else {
                             selectActor(actor);
                             setMode(MODE_DRAG_ACTOR);
-                            beginDrag(event);
+                            beginDrag(event.x, event.y);
                             return true;
                         }
                     }
@@ -1349,7 +1380,9 @@ public class SceneDesigner implements MouseListener, KeyListener
                 setDefaultProperties(role.actualRole, this.currentCostume);
             }
 
-            actor.moveTo(event.x, event.y);
+            StageConstraint sc = this.currentStageView.getStage().getStageConstraint();
+
+            actor.moveTo(sc.constrainX(event.x, event.y), sc.constrainY(event.x, event.y));
             actor.setRole(role);
             if (this.currentCostume != null) {
                 actor.setZOrder(this.currentCostume.defaultZOrder);
@@ -1365,6 +1398,9 @@ public class SceneDesigner implements MouseListener, KeyListener
             } else {
                 stage.add(actor);
             }
+
+            // TODO, When stamping an actor implements undo/red, then the StageConstraint will have to implement it too.
+            sc.added(actor);
 
             if (!Itchy.isShiftDown()) {
                 setMode(MODE_SELECT);
@@ -1406,7 +1442,13 @@ public class SceneDesigner implements MouseListener, KeyListener
         int dy = event.y - this.dragStartY;
 
         if (this.mode == MODE_STAMP_COSTUME) {
-            this.stampActor.moveTo(event.x, event.y);
+
+            StageConstraint sc = this.currentStageView.getStage().getStageConstraint();
+
+            double newX = sc.constrainX(event.x, event.y);
+            double newY = sc.constrainY(event.x, event.y);
+
+            this.stampActor.moveTo(newX, newY);
 
             return true;
 
@@ -1415,26 +1457,40 @@ public class SceneDesigner implements MouseListener, KeyListener
             return true;
 
         } else if (this.mode == MODE_DRAG_ACTOR) {
-            if ((dx != 0) || (dy != 0)) {
-                this.undoList.apply(new UndoMoveActor(this.currentActor, dx, dy));
+
+            StageConstraint sc = this.currentStageView.getStage().getStageConstraint();
+
+            double reqX = this.currentActor.getX() + dx;
+            double reqY = this.currentActor.getY() + dy;
+
+            double newX = sc.constrainX(reqX, reqY);
+            double newY = sc.constrainY(reqX, reqY);
+
+            if ((newX != this.currentActor.getX()) || (newY != this.currentActor.getY())) {
+                this.undoList.apply(
+                    new UndoMoveActor(
+                        this.currentActor,
+                        newX - this.currentActor.getX(),
+                        newY - this.currentActor.getY()
+                    ));
+                this.changed = true;
+                beginDrag((int) (event.x + newX - reqX), (int) (event.y + newY - reqY));
             }
-            this.changed = true;
-            beginDrag(event);
 
         } else if (this.mode == MODE_DRAG_HANDLE) {
             this.currentHandleRole.moveBy(dx, dy);
             this.changed = true;
-            beginDrag(event);
+            beginDrag(event.x, event.y);
 
         }
 
         return false;
     }
 
-    private void beginDrag( MouseEvent event )
+    private void beginDrag( int x, int y )
     {
-        this.dragStartX = event.x;
-        this.dragStartY = event.y;
+        this.dragStartX = x;
+        this.dragStartY = y;
     }
 
     private void setDefaultProperties( Role role, Costume costume )
@@ -1687,13 +1743,13 @@ public class SceneDesigner implements MouseListener, KeyListener
     {
         try {
 
-            //Game game = new Game(this.editor.resources);
+            // Game game = new Game(this.editor.resources);
             // Game game = this.editor.resources.game;
             Resources duplicate = this.editor.resources.copy();
             Game game = duplicate.game;
-            
-            System.out.println("SceneDesigner. Testing game : " + game );
-            //game.init();
+
+            System.out.println("SceneDesigner. Testing game : " + game);
+            // game.init();
             // game.setDirector(this.editor.resources.getGameInfo().createDirector(this.editor.resources));
             game.testScene(this.sceneResource.name);
 
@@ -1969,6 +2025,10 @@ public class SceneDesigner implements MouseListener, KeyListener
         @Override
         public void moveBy( int dx, int dy )
         {
+            if (this.target == null) {
+                return;
+            }
+
             UndoRotateActor undo = new UndoRotateActor(this.target);
             try {
                 super.moveBy(dx, dy);

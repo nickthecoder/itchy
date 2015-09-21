@@ -8,6 +8,9 @@ Play = new Class({
         this.player = null; // The sheep's role. Set from Player.js
         this.score = 0;
         
+        this.inputRestart = itchy.Input.find("restart");
+        this.inputExit = itchy.Input.find("exit");
+                
         // Each level (easy,medium,hard) has different values for each of the following.
         // Change them from the Scene Designer's "Scene" section.
         this.speed = 5; // The default initial speed. 
@@ -51,13 +54,13 @@ Play = new Class({
     onKeyDown: function(ke)
     {
         // If we are dead, then the RETURN key will start a new game (reloads the current scene)
-        if ((ke.symbol == ke.RETURN) && (!this.isPlaying())) {
+        if ((!this.isPlaying()) && this.inputRestart.matches(ke)) {
             game.startScene( game.getSceneName() );
             return true; // Return true to indicate that the key has been processed.
         }
-        
+
         // Escape key takes us back to the menu.
-        if (ke.symbol == ke.ESCAPE) {
+        if (this.inputExit.matches(ke)) {
             game.startScene("menu");
             return true; // Return true to indicate that the key has been processed.
         }

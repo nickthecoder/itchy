@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.script.Bindings;
 import javax.script.ScriptContext;
+import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
@@ -45,10 +46,9 @@ public class JavascriptLanguage extends ShimmedScriptLanguage
     }
 
     @Override
-    public void initialise()
+    public ScriptEngine createEngine()
     {
-        this.engine = new ScriptEngineManager().getEngineByName("javascript");
-        super.initialise();
+        return new ScriptEngineManager().getEngineByName("javascript");
     }
 
     @Override
@@ -71,12 +71,12 @@ public class JavascriptLanguage extends ShimmedScriptLanguage
     public void ensureGlobals()
         throws ScriptException
     {
-        ensureInitialised();
         Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
         Game game = this.manager.resources.getGame();
         bindings.put("game", game);
         bindings.put("director", game.getDirector());
         bindings.put("sceneDirector", game.getSceneDirector());
+        bindings.put("language", this);
     }
 
     @Override
@@ -303,7 +303,11 @@ public class JavascriptLanguage extends ShimmedScriptLanguage
 
     // ===== Role ======
 
-    @Override
+    public Role createRole( String name )
+    {
+        return this.createRole( new ClassName( Role.class, name + ".js") );
+    }
+
     public Role createRole( ClassName className )
     {
         ScriptedRole role = null;
@@ -709,4 +713,53 @@ public class JavascriptLanguage extends ShimmedScriptLanguage
         }
     }
 
+
+    // ===== StageConstraint ======
+    
+    @Override
+    public double constrainX( ScriptedStageConstraint stageConstraint, double x, double y )
+    {
+        try {
+            Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
+            bindings.put("ssc", stageConstraint);
+            bindings.put("x", x);
+            bindings.put("y", x);
+            return (Double) this.engine.eval("ssc.onconstrainX(x,y);");
+
+        } catch (ScriptException e) {
+            handleException("StageConstraint.constrainX", e);
+            return x;
+        } 
+    }
+
+    @Override
+    public double constrainY( ScriptedStageConstraint stageConstraint, double x, double y )
+    {
+        try {
+            Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
+            bindings.put("ssc", stageConstraint);
+            bindings.put("x", x);
+            bindings.put("y", x);
+            return (Double) this.engine.eval("ssc.onconstrainY(x,y);");
+
+        } catch (ScriptException e) {
+            handleException("StageConstraint.constrainX", e);
+            return x;
+        } 
+    }
+    
+    public void added(ScriptedStageConstraint stageConstraint, Actor actor)
+    {
+        try {
+            Bindings bindings = this.engine.getBindings(ScriptContext.ENGINE_SCOPE);
+            bindings.put("ssc", stageConstraint);
+            bindings.put("actor", actor);
+            this.engine.eval("ssc.added(actor);");
+
+        } catch (ScriptException e) {
+            handleException("StageConstraint.added", e);
+        } 
+        
+    }
 }
+

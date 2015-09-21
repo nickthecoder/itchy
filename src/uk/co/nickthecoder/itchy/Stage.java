@@ -7,6 +7,8 @@ package uk.co.nickthecoder.itchy;
 import java.util.Iterator;
 import java.util.List;
 
+import uk.co.nickthecoder.itchy.StageConstraint;
+
 /**
  * A group of Actors, which are ultimately drawn at the the same time using a View.
  */
@@ -30,6 +32,8 @@ public interface Stage
      */
     public void add( Actor actor );
 
+    public void tick();
+    
     public void changedRole( Actor actor );
 
     /**
@@ -54,4 +58,6 @@ public interface Stage
      * but some may have different role during the design compared to during actual game play.
      */
     public Stage createDesignStage();
+
+    public StageConstraint getStageConstraint();
 }

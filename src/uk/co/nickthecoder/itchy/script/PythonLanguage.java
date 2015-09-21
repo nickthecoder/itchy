@@ -10,11 +10,15 @@ import java.util.Properties;
 
 import javax.script.ScriptException;
 
+import org.python.core.PyBoolean;
+import org.python.core.PyException;
 import org.python.core.PyFloat;
 import org.python.core.PyInteger;
 import org.python.core.PyLong;
+import org.python.core.PyNone;
 import org.python.core.PyObject;
 import org.python.core.PyProxy;
+import org.python.core.PyString;
 import org.python.util.PythonInterpreter;
 
 import uk.co.nickthecoder.itchy.CostumeProperties;
@@ -59,17 +63,30 @@ public class PythonLanguage extends ScriptLanguage
         throw new ScriptException("Not Implemented");
     }
 
+    ScriptException wrapException( Exception e )
+    {
+        if (e instanceof PyException) {
+            PyException pe = (PyException) e;
+            return new WrappedScriptException( pe, pe.value.toString() );
+        }
+        
+        return new ScriptException( e );
+    }
+    
     @Override
     public void loadScript( ClassName className )
         throws ScriptException
     {
-        ensureInitialised();
         String moduleName = ScriptManager.getName(className);
         String klassName = moduleName.substring(0, 1).toUpperCase() + moduleName.substring(1);
 
-        this.interpreter.exec("from " + moduleName + " import " + klassName);
-        PyObject jythonClass = this.interpreter.get(klassName);
-        this.classes.put(className.name, jythonClass);
+        try {
+            this.interpreter.exec("from " + moduleName + " import " + klassName);
+            PyObject jythonClass = this.interpreter.get(klassName);
+            this.classes.put(className.name, jythonClass);            
+        } catch (Exception e) {
+            throw wrapException(e);
+        }
     }
 
     @Override
@@ -90,12 +107,19 @@ public class PythonLanguage extends ScriptLanguage
         try {
             this.interpreter.set("__inst", inst);
             Object result = this.interpreter.eval("__inst." + name);
+            if (result instanceof PyBoolean) {
+                return ((PyBoolean) result).getBooleanValue();
+            }
             if (result instanceof PyInteger) {
                 return ((PyInteger) result).getValue();
+            } else if (result instanceof PyString) {
+                return ((PyString) result).toString();
             } else if (result instanceof PyFloat) {
                 return ((PyFloat) result).getValue();
             } else if (result instanceof PyLong) {
                 return ((PyLong) result).getValue();
+            } else if (result instanceof PyNone) {
+                return null;
             }
             return result;
         } catch (Exception e) {
@@ -120,7 +144,6 @@ public class PythonLanguage extends ScriptLanguage
     private void ensureGlobals()
         throws ScriptException
     {
-        ensureInitialised();
         Game game = this.manager.resources.getGame();
         this.interpreter.set("game", game);
         this.interpreter.set("director", game.getDirector());

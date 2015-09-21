@@ -4,17 +4,24 @@
  ******************************************************************************/
 package uk.co.nickthecoder.drunkinvaders;
 
+import uk.co.nickthecoder.itchy.Input;
 import uk.co.nickthecoder.itchy.PlainSceneDirector;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
-import uk.co.nickthecoder.jame.event.Keys;
 
 public class About extends PlainSceneDirector
 {
+    protected Input inputExit;
+
+    @Override
+    public void onActivate()
+    {
+        inputExit = Input.find("exit");
+    }
 
     @Override
     public boolean onKeyDown( KeyboardEvent ke )
     {
-        if (ke.symbol == Keys.ESCAPE) {
+        if (this.inputExit.matches(ke)) {
             DrunkInvaders.director.startScene("menu");
             return true;
         }

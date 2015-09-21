@@ -4,7 +4,7 @@ ${NAME} = Class({
     init: function() {
         // TODO Perform SIMPLE initialisation here (don't call any methods).
         // At this stage, none of the Actors exist, and the scene's properties haven't been set.
-    	// If you want to do stuff when the scene begins use onActivate.
+        // If you want to do stuff when the scene begins use onActivate.
     },
     
     onActivate: function() {

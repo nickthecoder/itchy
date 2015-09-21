@@ -335,4 +335,18 @@
     <scene name="menu"/>
     <scene name="pause"/>
   </scenes>
+  <inputs>
+    <input name="about" keys="a"/>
+    <input name="cheat" keys="ctrl+alt+c"/>
+    <input name="debug" keys="F2"/>
+    <input name="editor" keys="F12"/>
+    <input name="exit" keys="ESCAPE"/>
+    <input name="fire" keys="RETURN,SPACE"/>
+    <input name="left" keys="LEFT,z"/>
+    <input name="pause" keys="p,PAUSE"/>
+    <input name="play" keys="p,RETURN,KP_ENTER"/>
+    <input name="right" keys="RIGHT,x"/>
+    <input name="shield" keys="LSHIFT,RSHIFT,s"/>
+    <input name="toggleInfo" keys="F1"/>
+  </inputs>
 </resources>

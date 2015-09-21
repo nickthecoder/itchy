@@ -10,6 +10,8 @@ import java.util.List;
 public abstract class AbstractStage implements Stage, Cloneable
 {
     public final String name;
+    
+    public StageConstraint stageConstraint;
 
     /**
      * Used by the editor - can actors be placed into this stage? This is handy if you have a stage for non-game objects, for example a
@@ -22,6 +24,7 @@ public abstract class AbstractStage implements Stage, Cloneable
     public AbstractStage( String name )
     {
         this.name = name;
+        this.stageConstraint = new NullStageConstraint();
     }
 
     @Override
@@ -30,6 +33,16 @@ public abstract class AbstractStage implements Stage, Cloneable
         return this.name;
     }
 
+    public StageConstraint getStageConstraint()
+    {
+        return stageConstraint;
+    }
+    
+    public void setStageConstraint( StageConstraint sc )
+    {
+        this.stageConstraint = sc;
+    }
+    
     @Override
     public boolean isLocked()
     {
