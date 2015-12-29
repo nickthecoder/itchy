@@ -62,7 +62,7 @@ public class AbstractDirector implements Director
     @Override
     public boolean onMouseUp( MouseButtonEvent event )
     {
-        return this.game.getSceneDirector().onMouseDown(event);
+        return this.game.getSceneDirector().onMouseUp(event);
     }
 
     /**

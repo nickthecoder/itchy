@@ -1,5 +1,20 @@
 
+BUGS
+====
+
+SceneButton not in the list of Roles when starting a new project.
+    
+No error message when there are no fonts, and the user tries to add text to the scene design.
+
+The control handles still exist when not visible, and throw an exception when dragged.
+
+ZOrder buttons don't work/work the wrong way round.
+
+Keyboard shortcuts not working in the scene designer.
+
+
 PyRox
+=====
 
     Create more levels
     
@@ -20,8 +35,6 @@ PyRox
 
     Remove Rox from Itchy
         Maybe create a milestone or something in git, so that I can get it back easily.    
-
-Rox Later
 
     Zoom in/out : Scale all GridRole objects. Care needed if/when creating new objects.
 
@@ -50,7 +63,7 @@ Inputs
 
 See KeyInput - there is no super modifier, therefore KeyInput should not have it either.
 
-Rebuild Jame on i686 and win32
+Rebuild Jame on i686 and win32 and linux arm?
 
 Save an animation with delay/frames = 0 fails, but the error message throws an exception!!! - possibly Label's font not set
     Catch the exception rather than let it crash the system
@@ -60,9 +73,7 @@ Save an animation with delay/frames = 0 fails, but the error message throws an e
 Why isn't "iterator" method seen on Stage class on overview class diagram?
     Actor.kill not on diagram.
 
-SceneButton not in the list of Roles when starting a new project.
-    
-No error message when there are no fonts, and the user tries to add text to the scene design.
+
 
 ---
 
@@ -154,9 +165,6 @@ Should Costumes have Makeup? If each jewel is given a Sparkle makeup, does it ma
 Costume editor to have filters on event name and resource type.
     i.e. show all Animations, or show all "death" events, or show all "death" Animations or show everything. 
     Should the filters stay as you flick from one Costume to another - Yes, probably.
-
-Send to Asul
-    package, test on windows. 
 
 EntryBox is firing change events for arrow keys.
 
