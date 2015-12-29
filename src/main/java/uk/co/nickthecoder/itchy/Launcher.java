@@ -1,7 +1,18 @@
-/*******************************************************************************
- * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
- * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
- ******************************************************************************/
+/* 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package uk.co.nickthecoder.itchy;
 
 import java.io.File;
@@ -32,7 +43,6 @@ public class Launcher extends AbstractDirector
     {
         super.onStarted();
 
-        System.out.println("Starting Launcher");
         Itchy.enableKeyboardRepeat(true);
 
         try {
@@ -42,7 +52,6 @@ public class Launcher extends AbstractDirector
             e.printStackTrace();
         }
 
-        System.out.println("Creating Laucher window");
         this.root = new RootContainer();
         this.root.addStyle("editor");
 
@@ -82,14 +91,15 @@ public class Launcher extends AbstractDirector
         this.root.addChild(notebook);
     }
 
-    private void createNotebookPage( Notebook notebook, final Page page )
+    private void createNotebookPage(Notebook notebook, final Page page)
     {
         final Container container = new Container();
         container.addChild(page.createPage());
         container.setFill(true, true);
         notebook.addPage(page.getName(), container);
         Button button = notebook.getTab(notebook.size() - 1);
-        button.addActionListener(new ActionListener() {
+        button.addActionListener(new ActionListener()
+        {
 
             @Override
             public void action()
@@ -101,7 +111,7 @@ public class Launcher extends AbstractDirector
         });
     }
 
-    public static void main( String argv[] ) throws Exception
+    public static void main(String argv[]) throws Exception
     {
         for (String arg : argv) {
             System.out.println(arg);
@@ -118,7 +128,8 @@ public class Launcher extends AbstractDirector
         File resourcesFile = new File(name);
         if (resourcesFile.exists() && (resourcesFile.isFile())) {
         } else {
-            resourcesFile = new File(Itchy.getBaseDirectory(), "resources" + File.separator + name + File.separator + name + ".itchy");
+            resourcesFile = new File(Itchy.getBaseDirectory(), "resources" + File.separator + name + File.separator
+                            + name + ".itchy");
         }
         System.out.println("Loading resources : " + resourcesFile);
         Resources resources = new Resources();
