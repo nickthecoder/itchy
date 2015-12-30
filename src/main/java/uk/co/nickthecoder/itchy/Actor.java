@@ -199,7 +199,11 @@ public class Actor implements PropertySubject<Actor>
 
     public Actor createCompanion( String name, String startEvent )
     {
-        Costume costume = Itchy.getGame().resources.getCompanionCostume(this.costume, name);
+        Costume costume;
+        costume = this.costume.getCompanion(name);
+        if ( costume == null ) {
+            costume = Itchy.getGame().resources.getCompanionCostume(this.costume, name);
+        }
         Actor actor = costume.createActor(startEvent);
         actor.moveTo(this);
         getStage().add(actor);

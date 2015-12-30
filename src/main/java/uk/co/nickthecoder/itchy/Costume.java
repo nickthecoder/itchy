@@ -45,6 +45,20 @@ public class Costume implements Cloneable
 
     private HashMap<String, List<FontResource>> fontChoices;
 
+    /**
+     * A Costume can link to other costumes by a String key. These are called "companions", because they
+     * tend to be used to create companion objects. For example, "Space Miner" (asteroids) uses this
+     * when one "rock" breaks up into smaller rocks. The smaller rocks are the companions of the larger one.
+     */
+    private HashMap<String, List<CostumeResource>> companionChoices;
+
+    /**
+     * When loading a costume, we may have circular references, which can only be resolved when all costumes
+     * have been loaded. This stores the list of names of costumes during the load phase, which are then
+     * converted into companionChoices at the end.
+     */
+    public HashMap<String, List<String>> companionStringChoices;
+
     public Costume()
     {
         this(null);
@@ -59,6 +73,8 @@ public class Costume implements Cloneable
         this.poseChoices = new HashMap<String, List<PoseResource>>();
         this.fontChoices = new HashMap<String, List<FontResource>>();
         this.animationChoices = new HashMap<String, List<AnimationResource>>();
+        this.companionChoices = new HashMap<String, List<CostumeResource>>();
+        this.companionStringChoices = new HashMap<String, List<String>>();
     }
 
     public Actor createActor( String startEvent )
@@ -130,6 +146,11 @@ public class Costume implements Cloneable
     {
         return Resources.sortNames(this.animationChoices.keySet());
     }
+    
+    public List<String> getCompanionNames()
+    {
+        return Resources.sortNames(this.companionChoices.keySet());
+    }
 
     // String
 
@@ -176,6 +197,52 @@ public class Costume implements Cloneable
     public List<String> getStringChoices( String name )
     {
         return this.stringChoices.get(name);
+    }
+
+    // Companion (Costume)
+    
+    public void addCompanion( String name, CostumeResource costumeResource )
+    {
+        List<CostumeResource> choices = this.companionChoices.get(name);
+        if (choices == null) {
+            choices = new ArrayList<CostumeResource>();
+            this.companionChoices.put(name, choices);
+        }
+        choices.add(costumeResource);        
+    }
+
+    public void removeCompanion( String name, CostumeResource costumeResource)
+    {
+        List<CostumeResource> choices = this.companionChoices.get(name);
+        assert (choices.contains(costumeResource));
+        choices.remove(costumeResource);
+    }
+    
+    public CostumeResource getCompanionResource( String name )
+    {
+        List<CostumeResource> choices = this.companionChoices.get(name);
+        if ((choices == null) || (choices.size() == 0)) {
+            if (this.extendedFrom != null) {
+                return this.extendedFrom.getCompanionResource(name);
+            }
+            return null;
+        }
+        if (choices.size() == 0) {
+            return null;
+        }
+        CostumeResource costumeResource = choices.get(random.nextInt(choices.size()));
+        return costumeResource  ;
+    }
+    
+    public Costume getCompanion( String name )
+    {
+        CostumeResource resource = getCompanionResource(name);
+        return resource == null ? null : resource.getCostume();
+    }
+    
+    public List<CostumeResource> getCompanionChoices( String name )
+    {
+        return this.companionChoices.get(name);
     }
 
     // Pose
@@ -430,7 +497,7 @@ public class Costume implements Cloneable
             return null;
         }
     }
-    
+
     public String toString()
     {
         try {

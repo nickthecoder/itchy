@@ -8,7 +8,9 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import uk.co.nickthecoder.itchy.animation.Animation;
 import uk.co.nickthecoder.itchy.animation.CompoundAnimation;
@@ -312,11 +314,43 @@ public class ResourcesReader
                 costume.addAnimation(itemName, animationResource);
             }
 
+            for (Iterator<XMLTag> j = costumeTag.getTags("companion"); j.hasNext();) {
+                XMLTag companionTag = j.next();
+
+                String itemName = companionTag.getAttribute("name");
+                String companionName = companionTag.getAttribute("companion");
+
+                List<String> companionNames = costume.companionStringChoices.get( itemName );
+                if (companionNames == null) {
+                    companionNames = new ArrayList<String>();
+                    costume.companionStringChoices.put( itemName,companionNames );
+                }
+                companionNames.add( companionName );
+                // Note, once all costumes have been loaded, costume.costumeStringChoices is
+                // used to build the actual map of CostumeResouuces.
+            }
+
             CostumeResource resource = new CostumeResource(this.resources, costumeName, costume);
             this.resources.addCostume(resource);
 
         }
 
+        for (String costumeName : resources.costumeNames()) {
+            Costume costume = resources.getCostume(costumeName);
+            for ( String key : costume.companionStringChoices.keySet()) {
+                List<String> costumeNames = costume.companionStringChoices.get( key );
+                for ( String companionName : costumeNames ) {
+                    CostumeResource costumeResource = resources.getCostumeResource( companionName );
+                    if ( costumeResource == null) {
+                        // TODO How should this be handled?
+                        System.err.println( "Companion costume not found : " + companionName );
+                    } else {
+                        costume.addCompanion(key, costumeResource);
+                    }
+                }
+            }
+        }
+        
     }
 
     private void readAnimation( XMLTag tag, Animation animation ) throws XMLException

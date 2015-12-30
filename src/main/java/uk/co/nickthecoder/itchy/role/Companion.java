@@ -128,9 +128,12 @@ public abstract class Companion<T extends Companion<T>> extends AbstractRole
      */
     public T companion( String companionType )
     {
-        Costume costume = Itchy.getGame().resources.getCompanionCostume(
-            this.source.getCostume(),
-            companionType);
+        Costume costume = this.source.getCostume().getCompanion(companionType);
+        
+        if (costume == null) {
+            // Fall back to the old-fashioned way of doing it.
+            costume = Itchy.getGame().resources.getCompanionCostume(this.source.getCostume(),companionType);
+        }
 
         if (costume == null) {
             throw new NullPointerException();

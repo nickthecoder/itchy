@@ -294,6 +294,7 @@ public class ResourcesWriter extends XMLWriter
         this.writeCostumeSounds(simpleCostume);
         this.writeCostumeFonts(simpleCostume);
         this.writeCostumeAnimations(simpleCostume);
+        this.writeCostumeCompanions(simpleCostume);
         this.writeCostumeProperties(simpleCostume);
 
         this.endTag("costume");
@@ -407,7 +408,19 @@ public class ResourcesWriter extends XMLWriter
         }
 
     }
-
+    
+    private void writeCostumeCompanions( Costume costume ) throws XMLException
+    {
+        for (String name : costume.getCompanionNames()) {
+            for (CostumeResource costumeResource : costume.getCompanionChoices(name)) {
+                this.beginTag("companion");
+                this.attribute("name", name);
+                this.attribute("companion", costumeResource.name);
+                this.endTag("companion");
+            }
+        }
+    }
+    
     private void writeScenes() throws XMLException
     {
         this.beginTag("scenes");

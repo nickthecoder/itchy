@@ -543,7 +543,10 @@ public class Resources extends Loadable
         this.costumes.put(newName, costumeResource);
     }
 
+    // TODO Deprecate Resources.getCompanionCostume - Update all games.
     /**
+     * This will be deprecated soon. Use Costume.getCopmanion instead.
+     *
      * Looks for a named string, and then uses that to search for another costume.
      * <p>
      * For example, create two ship costumes named bigShip and smallShip, and two bullets named redBullet and greenBullet. Now create a

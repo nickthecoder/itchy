@@ -300,8 +300,8 @@
     <costume name="groovy-a" defaultZOrder="0" extends="rock" role="rock.py" properties="rockProperties.py">
       <pose name="default" pose="groovy-a"/>
       <pose name="fragment" pose="spark2"/>
-      <string name="fragment-1">groovy-b1</string>
-      <string name="fragment-2">groovy-b2</string>
+      <companion name="fragment-1" companion="groovy-b1"/>
+      <companion name="fragment-2" companion="groovy-b2"/>
       <properties pieces="2" points="10" strength="0" hitsRequired="1"/>
     </costume>
     <costume name="groovy-b1" defaultZOrder="0" extends="rock" role="rock.py" properties="rockProperties.py">
@@ -318,30 +318,30 @@
       <pose name="default" pose="java-0"/>
       <pose name="fragment" pose="spark5"/>
       <pose name="fragment" pose="spark2"/>
-      <string name="fragment-1">java-1a</string>
-      <string name="fragment-2">java-1b</string>
-      <string name="fragment-3">java-1c</string>
+      <companion name="fragment-1" companion="java-1a"/>
+      <companion name="fragment-2" companion="java-1b"/>
+      <companion name="fragment-3" companion="java-1c"/>
       <properties pieces="3" points="10" strength="0" hitsRequired="1"/>
     </costume>
     <costume name="java-1a" defaultZOrder="0" extends="rock" role="rock.py" properties="rockProperties.py">
       <pose name="default" pose="java-1a"/>
       <pose name="fragment" pose="spark2"/>
-      <string name="fragment-1">java-2f</string>
-      <string name="fragment-2">java-2e</string>
+      <companion name="fragment-1" companion="java-2e"/>
+      <companion name="fragment-2" companion="java-2f"/>
       <properties pieces="2" points="10" strength="0" hitsRequired="1"/>
     </costume>
     <costume name="java-1b" defaultZOrder="0" extends="rock" role="rock.py" properties="rockProperties.py">
       <pose name="default" pose="java-1b"/>
       <pose name="fragment" pose="spark5"/>
-      <string name="fragment-1">java-2a</string>
-      <string name="fragment-2">java-2b</string>
+      <companion name="fragment-1" companion="java-2a"/>
+      <companion name="fragment-2" companion="java-2b"/>
       <properties pieces="2" points="10" strength="0" hitsRequired="1"/>
     </costume>
     <costume name="java-1c" defaultZOrder="0" extends="rock" role="rock.py" properties="rockProperties.py">
       <pose name="default" pose="java-1c"/>
       <pose name="fragment" pose="spark5"/>
-      <string name="fragment-1">java-2c</string>
-      <string name="fragment-2">java-2d</string>
+      <companion name="fragment-1" companion="java-2c"/>
+      <companion name="fragment-2" companion="java-2d"/>
       <properties pieces="2" points="10" strength="0" hitsRequired="1"/>
     </costume>
     <costume name="java-2a" defaultZOrder="0" extends="rock" role="rock.py" properties="rockProperties.py">
@@ -378,8 +378,8 @@
       <pose name="default" pose="kotlin-a"/>
       <pose name="fragment" pose="spark2"/>
       <pose name="fragment" pose="spark4"/>
-      <string name="fragment-1">kotlin-b1</string>
-      <string name="fragment-2">kotlin-b2</string>
+      <companion name="fragment-1" companion="kotlin-b1"/>
+      <companion name="fragment-2" companion="kotlin-b2"/>
       <properties pieces="2" points="10" strength="0" hitsRequired="1"/>
     </costume>
     <costume name="kotlin-b1" defaultZOrder="0" extends="rock" role="rock.py" properties="rockProperties.py">
@@ -387,15 +387,16 @@
       <pose name="fragment" pose="spark2"/>
       <pose name="fragment" pose="spark4"/>
       <pose name="fragment" pose="spark4"/>
-      <string name="fragment-1">kotlin-c1</string>
-      <string name="fragment-2">kotlin-c3</string>
+      <companion name="fragment-1" companion="kotlin-c1"/>
+      <companion name="fragment-2" companion="kotlin-c3"/>
       <properties pieces="2" points="10" strength="0" hitsRequired="1"/>
     </costume>
     <costume name="kotlin-b2" defaultZOrder="0" extends="rock" role="rock.py" properties="rockProperties.py">
       <pose name="default" pose="kotlin-b2"/>
       <pose name="fragment" pose="spark2"/>
-      <string name="fragment-1">kotlin-c2</string>
-      <string name="fragment-2">kotlin-c4</string>
+      <companion name="default" companion="kotlin-c1"/>
+      <companion name="fragment-1" companion="kotlin-c2"/>
+      <companion name="fragment-2" companion="kotlin-c4"/>
       <properties pieces="2" points="10" strength="0" hitsRequired="1"/>
     </costume>
     <costume name="kotlin-c1" defaultZOrder="0" extends="rock" role="rock.py" properties="rockProperties.py">
@@ -457,22 +458,22 @@
       <pose name="default" pose="python-a"/>
       <pose name="fragment" pose="spark2"/>
       <pose name="fragment" pose="spark3"/>
-      <string name="fragment-1">python-b1</string>
-      <string name="fragment-2">python-b2</string>
+      <companion name="fragment-1" companion="python-b1"/>
+      <companion name="fragment-2" companion="python-b2"/>
       <properties pieces="2" points="10" strength="0" hitsRequired="1"/>
     </costume>
     <costume name="python-b1" defaultZOrder="0" extends="rock" role="rock.py" properties="rockProperties.py">
       <pose name="default" pose="python-b1"/>
       <pose name="fragment" pose="spark2"/>
-      <string name="fragment-1">python-c1</string>
-      <string name="fragment-2">python-c1</string>
+      <companion name="fragment-1" companion="python-c1"/>
+      <companion name="fragment-2" companion="python-c1"/>
       <properties pieces="2" points="10" strength="0" hitsRequired="1"/>
     </costume>
     <costume name="python-b2" defaultZOrder="0" extends="rock" role="rock.py" properties="rockProperties.py">
       <pose name="default" pose="python-b2"/>
       <pose name="fragment" pose="spark3"/>
-      <string name="fragment-1">python-c2</string>
-      <string name="fragment-2">python-c2</string>
+      <companion name="fragment-1" companion="python-c2"/>
+      <companion name="fragment-2" companion="python-c2"/>
       <properties pieces="2" points="10" strength="0" hitsRequired="1"/>
     </costume>
     <costume name="python-c1" defaultZOrder="0" extends="rock" role="rock.py" properties="rockProperties.py">
@@ -488,16 +489,16 @@
     <costume name="rock1" defaultZOrder="0" extends="rock" role="rock.py" properties="rockProperties.py">
       <pose name="default" pose="rock1a"/>
       <pose name="fragment" pose="fragment1"/>
-      <string name="fragment-1">rock1b</string>
-      <string name="fragment-2">rock1b</string>
-      <string name="fragment-3">rock1b</string>
+      <companion name="fragment-1" companion="rock1b"/>
+      <companion name="fragment-2" companion="rock1b"/>
+      <companion name="fragment-3" companion="rock1b"/>
       <properties pieces="3" points="10" strength="1" hitsRequired="1"/>
     </costume>
     <costume name="rock1b" defaultZOrder="0" extends="rock" role="rock.py" properties="rockProperties.py">
       <pose name="default" pose="rock1b"/>
       <pose name="fragment" pose="fragment1"/>
-      <string name="fragment-1">rock1c</string>
-      <string name="fragment-2">rock1c</string>
+      <companion name="fragment-1" companion="rock1c"/>
+      <companion name="fragment-2" companion="rock1c"/>
       <properties pieces="2" points="20" strength="1" hitsRequired="1"/>
     </costume>
     <costume name="rock1c" defaultZOrder="0" extends="rock" role="rock.py" properties="rockProperties.py">
@@ -510,17 +511,17 @@
       <pose name="default" pose="rock2a1"/>
       <pose name="default" pose="rock2a2"/>
       <pose name="fragment" pose="fragment2"/>
-      <string name="fragment-1">rock2b</string>
-      <string name="fragment-2">rock2b</string>
-      <string name="fragment-3">rock2b</string>
+      <companion name="fragment-1" companion="rock2b"/>
+      <companion name="fragment-2" companion="rock2b"/>
+      <companion name="fragment-3" companion="rock2b"/>
       <properties pieces="3" points="100" strength="1" hitsRequired="3"/>
     </costume>
     <costume name="rock2b" defaultZOrder="0" extends="rock" role="rock.py" properties="rockProperties.py">
       <pose name="default" pose="rock2b1"/>
       <pose name="default" pose="rock2b2"/>
       <pose name="fragment" pose="fragment2"/>
-      <string name="fragment-1">rock2c</string>
-      <string name="fragment-2">rock2c</string>
+      <companion name="fragment-1" companion="rock2c"/>
+      <companion name="fragment-2" companion="rock2c"/>
       <properties pieces="2" points="200" strength="1" hitsRequired="2"/>
     </costume>
     <costume name="rock2c" defaultZOrder="0" extends="rock" role="rock.py" properties="rockProperties.py">
@@ -533,15 +534,15 @@
     <costume name="scala-a" defaultZOrder="0" extends="rock" role="rock.py" properties="rockProperties.py">
       <pose name="default" pose="scala-a"/>
       <pose name="fragment" pose="spark5"/>
-      <string name="fragment-1">scala-b</string>
-      <string name="fragment-2">scala-c</string>
+      <companion name="fragment-1" companion="scala-b"/>
+      <companion name="fragment-2" companion="scala-c"/>
       <properties pieces="2" points="10" strength="0" hitsRequired="1"/>
     </costume>
     <costume name="scala-b" defaultZOrder="0" extends="rock" role="rock.py" properties="rockProperties.py">
       <pose name="default" pose="scala-b"/>
       <pose name="fragment" pose="spark5"/>
-      <string name="fragment-1">scala-c</string>
-      <string name="fragment-2">scala-c</string>
+      <companion name="fragment-1" companion="scala-c"/>
+      <companion name="fragment-2" companion="scala-c"/>
       <properties pieces="2" points="10" strength="0" hitsRequired="1"/>
     </costume>
     <costume name="scala-c" defaultZOrder="0" extends="rock" role="rock.py" properties="rockProperties.py">
@@ -556,9 +557,6 @@
       <pose name="spark" pose="spark4"/>
       <pose name="spark" pose="spark5"/>
       <pose name="spark1" pose="spark1"/>
-      <string name="bullet">bullet1</string>
-      <string name="explosion">explosion</string>
-      <string name="warp">warp</string>
       <sound name="default" sound="mystic" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="STOP_FIRST" priority="0"/>
       <sound name="explode" sound="explode" fadeOutSeconds="3.0" fadeOnDeath="false" multipleRole="PLAY_BOTH" priority="10"/>
       <sound name="fade" sound="warp" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
@@ -566,17 +564,20 @@
       <animation name="default" animation="fadeIn"/>
       <animation name="explode" animation="shipDeath"/>
       <animation name="fade" animation="fadeOut"/>
+      <companion name="bullet" companion="bullet1"/>
+      <companion name="explosion" companion="explosion"/>
+      <companion name="warp" companion="warp"/>
       <properties rotationSpeed="5.0" thrust="0.3" firePeriod="0.2"/>
     </costume>
     <costume name="ship1" defaultZOrder="0" extends="ship" role="ship.py" properties="shipProperties.py">
       <pose name="default" pose="ship1"/>
-      <string name="life">life1</string>
+      <companion name="life" companion="life1"/>
       <properties rotationSpeed="3.0" thrust="0.3" firePeriod="0.2"/>
     </costume>
     <costume name="ship2" defaultZOrder="0" extends="ship" role="ship.py" properties="shipProperties.py">
       <pose name="default" pose="ship2"/>
-      <string name="bullet">bullet2</string>
-      <string name="life">life2</string>
+      <companion name="bullet" companion="bullet2"/>
+      <companion name="life" companion="life2"/>
       <properties rotationSpeed="2.0" thrust="0.3" firePeriod="0.3"/>
     </costume>
     <costume name="stars1" defaultZOrder="0">

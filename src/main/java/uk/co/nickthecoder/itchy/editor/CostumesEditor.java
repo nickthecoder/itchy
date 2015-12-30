@@ -341,6 +341,9 @@ public class CostumesEditor extends SubEditor<CostumeResource>
                 } else if (data instanceof PoseResource) {
                     PoseResource resource = (PoseResource) data;
                     container.addChild(new ImageComponent(resource.getThumbnail()));
+                } else if (data instanceof CostumeResource) {
+                    CostumeResource resource = (CostumeResource) data;
+                    container.addChild(new ImageComponent(resource.getThumbnail()));
                 } else if (data instanceof ManagedSound) {
                     Button button = new Button("Play");
                     button.addActionListener(new ActionListener() {
@@ -390,6 +393,18 @@ public class CostumesEditor extends SubEditor<CostumeResource>
 
         Costume costume = this.currentResource.getCostume();
 
+        for (String name : costume.getCompanionNames()) {
+            for (CostumeResource companionResource : costume.getCompanionChoices(name)) {
+
+                    SimpleTableModelRow row = new SimpleTableModelRow();
+                    row.add(name);
+                    row.add("Companion");
+                    row.add(companionResource.getName());
+                    row.add(companionResource);
+
+                    model.addRow(row);
+            }
+        }
         for (String name : costume.getPoseNames()) {
             for (PoseResource poseResource : costume.getPoseChoices(name)) {
 
@@ -465,6 +480,7 @@ public class CostumesEditor extends SubEditor<CostumeResource>
         pickList.put("Animation", AnimationResource.class);
         pickList.put("Sound", ManagedSound.class);
         pickList.put("Font", FontResource.class);
+        pickList.put("Companion", CostumeResource.class);
 
         Picker<Class<?>> picker = new Picker<Class<?>>("Which Type?", pickList) {
             @Override
@@ -484,6 +500,9 @@ public class CostumesEditor extends SubEditor<CostumeResource>
 
                 } else if (picked == FontResource.class) {
                     CostumesEditor.this.onAddFont();
+
+                } else if (picked == CostumeResource.class) {
+                    CostumesEditor.this.onAddCompanion();
                 }
 
             }
@@ -498,6 +517,22 @@ public class CostumesEditor extends SubEditor<CostumeResource>
         rebuildEventTable();
         selectEventTableRow(NEW_EVENT_NAME, newValue);
         onEditEvent();
+    }
+
+    private void onAddCompanion()
+    {
+        CostumePicker picker = new CostumePicker(this.editor.resources) {
+            @Override
+            public void pick( CostumeResource companionResource )
+            {
+                Costume costume = CostumesEditor.this.currentResource.getCostume();
+                costume.addCompanion(NEW_EVENT_NAME, companionResource);
+                CostumesEditor.this.rebuildEventTable();
+                selectEventTableRow(NEW_EVENT_NAME, companionResource);
+                onEditEvent();
+            }
+        };
+        picker.show();
     }
 
     private void onAddPose()
@@ -617,6 +652,9 @@ public class CostumesEditor extends SubEditor<CostumeResource>
             } else if (data instanceof ManagedSound) {
                 costume.removeSound(name, (ManagedSound) data);
 
+            } else if (data instanceof CostumeResource) {
+                costume.removeCompanion(name, (CostumeResource) data);
+
             } else {
                 System.err.println("Unknown data : " + data.getClass().getName());
             }
@@ -630,6 +668,8 @@ public class CostumesEditor extends SubEditor<CostumeResource>
     private TextBox txtEventString;
 
     private PosePickerButton eventPosePickerButton;
+
+    private CostumePickerButton eventCostumePickerButton;
 
     private FontPickerButton eventFontPickerButton;
 
@@ -672,6 +712,11 @@ public class CostumesEditor extends SubEditor<CostumeResource>
                 this.eventPosePickerButton = new PosePickerButton(this.getResources(),
                     (PoseResource) data);
                 grid.addRow("Pose", this.eventPosePickerButton);
+
+            } else if (data instanceof CostumeResource) {
+                this.eventCostumePickerButton = new CostumePickerButton(this.getResources(),
+                    (CostumeResource) data);
+                grid.addRow("Costume", this.eventCostumePickerButton);
 
             } else if (data instanceof FontResource) {
                 this.eventFontPickerButton = new FontPickerButton(this.getResources(),
@@ -755,6 +800,9 @@ public class CostumesEditor extends SubEditor<CostumeResource>
 
             } else if (data instanceof PoseResource) {
                 costume.addPose(name, this.eventPosePickerButton.getValue());
+
+            } else if (data instanceof CostumeResource) {
+                costume.addCompanion(name, this.eventCostumePickerButton.getValue());
 
             } else if (data instanceof FontResource) {
                 costume.addFont(name, this.eventFontPickerButton.getValue());
