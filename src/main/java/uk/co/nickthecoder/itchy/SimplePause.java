@@ -102,7 +102,7 @@ public class SimplePause implements Pause
             Scene scene = this.game.resources.getSceneResource(this.pauseSceneName).loadScene();
             scene.create(this.stage, this.game.resources, false);
         } catch (Exception e) {
-            System.out.println("Failed to load pause scene : " + this.pauseSceneName);
+            System.err.println("Failed to load pause scene : " + this.pauseSceneName);
             e.printStackTrace();
         }
 

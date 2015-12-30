@@ -187,7 +187,6 @@ public class DrunkInvaders extends AbstractDirector
     {
         this.neighbourhood.clear();
 
-        System.out.println("Transition start for " + sceneName);
         Animation transition = new CompoundAnimation(false)
             .add(SceneTransition.slideUp())
             .add(SceneTransition.fade());
@@ -227,8 +226,6 @@ public class DrunkInvaders extends AbstractDirector
 
         } else if (message == SceneTransition.COMPLETE) {
             this.transitioning = false;
-            System.out.println("Transition end");
-
         }
     }
 

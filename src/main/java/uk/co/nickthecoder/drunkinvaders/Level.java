@@ -47,7 +47,6 @@ public class Level extends PlainSceneDirector
         }
 
         if (this.aliensRemaining == 0) {
-            System.out.println("No aliens remain. Starting next level");
             this.ending = true;
             DrunkInvaders.director.nextLevel();
         }
@@ -68,7 +67,6 @@ public class Level extends PlainSceneDirector
         }
 
         if (this.inputCheat.matches(ke)) {
-            System.out.println("Cheat!");
             addAliens(-1);
         }
 

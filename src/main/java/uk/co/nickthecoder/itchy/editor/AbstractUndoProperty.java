@@ -19,7 +19,6 @@ public abstract class AbstractUndoProperty<S> implements Undo
         this.property = property;
         this.oldValue = oldValue;
         this.newValue = newValue;
-        System.out.println("UndoProperty " + property.key + " " + oldValue + "->" + newValue);
     }
 
     @Override
@@ -27,7 +26,6 @@ public abstract class AbstractUndoProperty<S> implements Undo
     {
         try {
             SceneDesignerPropertiesForm<S> form = getForm();
-            System.out.println("Undo " + form.getSubject() + " " + this.property.key + " = " + this.oldValue);
             this.property.setValueByString(form.subject, this.oldValue);
             getForm().refresh(this.property);
         } catch (Exception e) {
@@ -39,7 +37,6 @@ public abstract class AbstractUndoProperty<S> implements Undo
     public void redo()
     {
         try {
-            System.out.println("Redo " + this.property.key + " = " + this.newValue);
             SceneDesignerPropertiesForm<S> form = getForm();
             this.property.setValueByString(form.subject, this.newValue);
             form.refresh(this.property);
