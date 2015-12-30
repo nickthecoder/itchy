@@ -51,6 +51,13 @@ public class ScriptManager
         languageClassMap.put(extension, class1);
     }
 
+    public void reload()
+    {
+        for( ScriptLanguage language : languages.values()) {
+            language.reload();
+        }
+    }
+    
     public ScriptLanguage getLanguage( ClassName className )
     {
         return getLanguage(getExtension(className.name));

@@ -40,6 +40,12 @@ public class JavascriptLanguage extends ShimmedScriptLanguage
     }
 
     @Override
+    public void reload()
+    {
+        // TODO Reload ???
+    }
+    
+    @Override
     public String getExtension()
     {
         return "js";

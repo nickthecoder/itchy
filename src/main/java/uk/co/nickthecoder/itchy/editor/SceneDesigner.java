@@ -1741,6 +1741,8 @@ public class SceneDesigner implements MouseListener, KeyListener
 
     private void onTest()
     {
+        onSave();
+        
         try {
 
             // Game game = new Game(this.editor.resources);

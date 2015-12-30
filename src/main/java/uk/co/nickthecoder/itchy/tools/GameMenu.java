@@ -39,6 +39,16 @@ public class GameMenu implements Page
         return "Game Menu";
     }
 
+    private File findResourceFile( File directory )
+    {
+        for (String name: directory.list()) {
+            if (name.endsWith(".itchy")) {
+                return new File( directory, name );
+            }
+        }
+        return null;
+    }
+    
     @Override
     public Component createPage()
     {
@@ -71,14 +81,13 @@ public class GameMenu implements Page
 
         for (File dir : directory.listFiles()) {
             // Ignore Luancher's own directory.
-            System.out.println( "Scanning: " + dir.getName() );
             if (dir.getName().equals("Launcher")) {
                 continue;
             }
-            
+
             if (dir.isDirectory()) {
-                final File resourceFile = new File(dir, dir.getName() + ".itchy");
-                if (resourceFile.exists()) {
+                final File resourceFile = findResourceFile( dir );
+                if (resourceFile != null) {
 
                     Container combo = new Container();
                     combo.setType("comboBox");

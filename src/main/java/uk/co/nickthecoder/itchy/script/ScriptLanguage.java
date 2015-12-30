@@ -28,15 +28,18 @@ public abstract class ScriptLanguage
     public ScriptLanguage( ScriptManager manager )
     {
         this.manager = manager;
+        // TODO Not using this for Jython?
         this.lastLoadedMap = new HashMap<File, Long>();
         
         //TODO if this works, then I don't need ensureInitialise
         initialise();
     }
-    
+
     protected abstract void initialise();
 
     public abstract String getExtension();
+
+    public abstract void reload();
 
     protected abstract void loadScript( ClassName className )
         throws ScriptException;

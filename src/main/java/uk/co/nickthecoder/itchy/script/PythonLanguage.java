@@ -56,6 +56,14 @@ public class PythonLanguage extends ScriptLanguage
         this.interpreter = new PythonInterpreter();
     }
 
+    public void reload()
+    {
+        classes.clear();
+        interpreter.exec("import sys\nsys.modules.clear()");
+        initialise();
+    }
+    
+
     @Override
     public void loadScript( String filename )
         throws ScriptException
@@ -63,16 +71,6 @@ public class PythonLanguage extends ScriptLanguage
         throw new ScriptException("Not Implemented");
     }
 
-    ScriptException wrapException( Exception e )
-    {
-        if (e instanceof PyException) {
-            PyException pe = (PyException) e;
-            return new WrappedScriptException( pe, pe.value.toString() );
-        }
-        
-        return new ScriptException( e );
-    }
-    
     @Override
     public void loadScript( ClassName className )
         throws ScriptException
@@ -89,6 +87,16 @@ public class PythonLanguage extends ScriptLanguage
         }
     }
 
+    ScriptException wrapException( Exception e )
+    {
+        if (e instanceof PyException) {
+            PyException pe = (PyException) e;
+            return new WrappedScriptException( pe, pe.value.toString() );
+        }
+        
+        return new ScriptException( e );
+    }
+    
     @Override
     public String getExtension()
     {
