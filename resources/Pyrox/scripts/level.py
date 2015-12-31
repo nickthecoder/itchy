@@ -101,7 +101,7 @@ class Level(PlainSceneDirector) :
         maxY = -1000000
 
         i = stage.iterator()
-        if ( ! i.hasNext() ) :
+        if ( not i.hasNext() ) :
             minX = 0
             minY = 0
             maxX = 0

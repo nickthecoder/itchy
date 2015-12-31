@@ -7,7 +7,7 @@ LIB=${BASE}/build/install/itchy/lib
 popd > /dev/null
 
 NATIVE_DIR=${BASE}/build/libs/native/linux_`uname -m`
-CLASSPATH=${LIB}/itchy-0.4.jar:${LIB}/jame-1.1.jar:${LIB}/jython-standalone-2.5.2.jar
+CLASSPATH=${LIB}/itchy-0.4.jar:${LIB}/jame-1.1.jar:${LIB}/jython-standalone-2.5.2.jar:${LIB}/groovy-all-2.4.5.jar
 MAIN=uk.co.nickthecoder.itchy.Launcher
 
 #
