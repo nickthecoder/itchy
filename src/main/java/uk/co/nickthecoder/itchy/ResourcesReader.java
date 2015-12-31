@@ -212,6 +212,8 @@ public class ResourcesReader
             Costume costume = new Costume();
 
             costume.defaultZOrder = costumeTag.getOptionalIntAttribute("defaultZOrder", 0);
+            costume.showInDesigner = costumesTag.getOptionalBooleanAttribute("showInDesigner", true);
+            
             String extendsName = costumeTag.getOptionalAttribute("extends", null);
             if (extendsName != null) {
                 Costume base = this.resources.getCostume(extendsName);

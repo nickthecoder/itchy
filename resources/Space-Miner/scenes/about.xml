@@ -8,8 +8,8 @@
       <property name="sceneName" value="menu"/>
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="1"/>
-        <property name="color" value="#ffffffff"/>
         <property name="dy" value="1"/>
+        <property name="color" value="#ffffffff"/>
       </makeup>
     </text>
     <text text="Itchy Powered" font="Boycott" size="31" color="#ffffff" xAlignment="0.1" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.LinkButton" costume="link" x="29" y="38" direction="90.0" heading="0.0" startEvent="default" zOrder="4">
@@ -37,8 +37,8 @@
       <property name="url" value="http://en.wikipedia.org/wiki/Asteroid_belt#Characteristics"/>
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="1"/>
-        <property name="color" value="#8888ffff"/>
         <property name="dy" value="1"/>
+        <property name="color" value="#8888ffff"/>
       </makeup>
     </text>
     <text text="Joining the edges of a rectangle" font="Vera" size="22" color="#ffffff" xAlignment="0.0" yAlignment="0.5" costume="title" x="125" y="307" direction="0.0" heading="0.0" startEvent="slideInRight" zOrder="10" activationDelay="0.2"/>
@@ -46,8 +46,8 @@
       <property name="url" value="http://en.wikipedia.org/wiki/File:Torus_from_rectangle.gif"/>
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="1"/>
-        <property name="color" value="#8888ffff"/>
         <property name="dy" value="1"/>
+        <property name="color" value="#8888ffff"/>
       </makeup>
     </text>
     <text text="Angles of a triangle " font="Vera" size="22" color="#ffffff" xAlignment="0.0" yAlignment="0.5" costume="title" x="127" y="269" direction="0.0" heading="0.0" startEvent="slideInRight" zOrder="12" activationDelay="0.4"/>
@@ -55,8 +55,8 @@
       <property name="url" value="http://soler7.com/IFAQ/NonEuclideanGeometryNotes.html"/>
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="1"/>
-        <property name="color" value="#8888ffff"/>
         <property name="dy" value="1"/>
+        <property name="color" value="#8888ffff"/>
       </makeup>
     </text>
   </layer>

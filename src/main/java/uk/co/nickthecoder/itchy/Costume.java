@@ -33,6 +33,9 @@ public class Costume implements Cloneable
     @Property(label = "Properties")
     private ClassName propertiesClassName = new ClassName(CostumeProperties.class, CostumeProperties.class.getName());
 
+    @Property(label = "Show in Scene Designer")
+    public boolean showInDesigner = true;
+    
     private CostumeProperties properties = new CostumeProperties();
 
     private HashMap<String, List<AnimationResource>> animationChoices;

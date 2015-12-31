@@ -319,7 +319,9 @@ public class SceneDesigner implements MouseListener, KeyListener
 
         for (String name : this.editor.resources.costumeNames()) {
             CostumeResource costumeResource = this.editor.resources.getCostumeResource(name);
-            this.addCostumeButton(costumes, costumeResource);
+            if (costumeResource.getCostume().showInDesigner) {
+                this.addCostumeButton(costumes, costumeResource);
+            }
         }
         VerticalScroll costumesScroll = new VerticalScroll(costumes);
 
