@@ -19,14 +19,13 @@ class Bullet(Moving) :
     def tick(self) :
     	Moving.tick(self)
         
-        i = self.getCollisionStrategy().collisions(self.getActor(),"shootable").iterator()
-        # Shoot ONE of the rocks that the bullet is touching.
-        if i.hasNext() :
-        	role = i.next()
-        	if not role.getActor().isDying() :
-        		role.shot(self)
-        		self.getActor().kill()
-
+        for role in self.collisions("shootable") :
+            if not role.getActor().isDying() :
+                print "New way"
+                role.shot(self)
+                self.getActor().kill()
+                return
+        
     def onMessage(self, message) :
     	if message == "die" :
     		# Sent at the end of the fade out animation. Its the animation that determines the bullets max life span.
