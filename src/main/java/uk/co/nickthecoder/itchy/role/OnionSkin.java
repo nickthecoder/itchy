@@ -47,13 +47,6 @@ public class OnionSkin extends Companion
         }
     }
 
-    @Override
-    public Actor createActor()
-    {
-        Actor actor = super.createActor();
-        actor.getAppearance().setAlpha(0);
-        return actor;
-    }
 
     protected void createOnionSkin()
     {
@@ -77,6 +70,14 @@ public class OnionSkin extends Companion
         if (stage != null) {
             stage.add(actor);
         }
+    }
+
+    @Override
+    public Actor createActor()
+    {
+        Actor result = super.createActor();
+        result.getAppearance().setAlpha(0);
+        return result;
     }
 
     public class OnionSkinFade extends AbstractRole
@@ -109,5 +110,6 @@ public class OnionSkin extends Companion
             this.companion.fade = fade;
             return getThis();
         }
+
     }
 }

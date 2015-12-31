@@ -117,21 +117,6 @@ public class Explosion extends Companion
         this.lifeTicks = (int) (DEFAULT_LIFE_SECONDS * Itchy.frameRate.getFrameRate());
     }
 
-    /**
-     * Creates the explosion actor.
-     * 
-     * @return A new actor, which has an Explosion Role, has been added to the same layer as the actor in the constructor, but has not been
-     *         activated yet.
-     */
-    @Override
-    public Actor createActor()
-    {
-        Actor result = super.createActor();
-
-        result.getAppearance().setAlpha(0);
-
-        return result;
-    }
 
     /**
      * Creates the Projectile objects and then dies. Unless projectilesPerClick is called, this will only tick once, creating all of the
@@ -209,7 +194,7 @@ public class Explosion extends Companion
 
             }
 
-            Actor actor = projectile.createActor();
+            Actor actor = projectileBuilder.create().getActor();
             if (this.pose != null) {
                 actor.getAppearance().setPose(this.pose);
             }
@@ -224,6 +209,23 @@ public class Explosion extends Companion
             }
 
         }
+    }
+
+
+    /**
+     * Creates the explosion actor.
+     * 
+     * @return A new actor, which has an Explosion Role, has been added to the same layer as the actor in the constructor, but has not been
+     *         activated yet.
+     */
+    @Override
+    public Actor createActor()
+    {
+        Actor result = super.createActor();
+
+        result.getAppearance().setAlpha(0);
+
+        return result;
     }
 
     public static abstract class AbstractExplosionBuilder<C extends Explosion, B extends AbstractExplosionBuilder<C, B>> extends
@@ -625,6 +627,7 @@ public class Explosion extends Companion
             this.companion.dependent = value;
             return getThis();
         }
+        
     }
 
 }

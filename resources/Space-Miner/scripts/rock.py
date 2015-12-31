@@ -57,7 +57,7 @@ class Rock(Moving) :
             .spread( bullet.actor.getHeading() - 120, bullet.actor.getHeading() + 120 ).randomSpread() \
             .speed(5,3,0,0).fade(3).distance(40) \
             .rotate(True).pose("fragment").projectiles(8) \
-            .createActor()
+            .create()
 
         sum_dx = 0
         sum_dy = 0

@@ -143,7 +143,7 @@ class Beehive(Faller) :
             
             costume = resources.getCostume("bee")
             
-            beeActor = resources.createActor( costume, self.actor.stage )
+            beeActor = resources.create( costume, self.actor.stage ).getActor()
             beeActor.moveTo( self.actor.x + squareSize * dx, self.actor.y + squareSize * dy )
             
             bee = beeActor.role

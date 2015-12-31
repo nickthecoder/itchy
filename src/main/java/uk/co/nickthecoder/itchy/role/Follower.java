@@ -31,7 +31,7 @@ public class Follower extends Companion
         }
     }
 
-    private void follow()
+    public void follow()
     {
         getActor().moveTo(this.source);
         getActor().moveForwards(this.offsetForwards, this.offsetSidewards);
@@ -46,10 +46,10 @@ public class Follower extends Companion
     public Actor createActor()
     {
         Actor result = super.createActor();
-        follow();
-        return result;
+        this.follow();
+        return result;        	
     }
-
+    
     public static abstract class AbstractFollowerBuilder<C extends Follower, B extends AbstractFollowerBuilder<C, B>>
         extends Companion.AbstractCompanionBuilder<C, B>
     {
@@ -68,6 +68,7 @@ public class Follower extends Companion
             this.companion.stop = true;
             return getThis();
         }
+        
     }
 
 }

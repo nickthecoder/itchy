@@ -51,7 +51,7 @@ class Machine(GridRole) :
                 
                 resources = Itchy.getGame().resources
                     
-                actor = resources.createActor( self.toCostume, self.actor.stage )
+                actor = resources.create( self.toCostume, self.actor.stage ).getActor()
                 squareSize = self.square.grid.squareSize
                 actor.moveTo( self.actor.x + self.offsetX * squareSize, self.actor.y + self.offsetY * squareSize )
                 actor.role.placeOnGrid( self.square.grid )

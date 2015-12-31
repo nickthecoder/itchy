@@ -159,7 +159,7 @@ class Player(Big) :
             .vy(0.6, 1.2).vx(0.2,0.3).gravity(-0.01) \
             .fade( 2 ) \
             .projectilesPerTick(1).slow(50).forever() \
-            .createActor()
+            .create()
         
     def wake( self ) :
         self.killZs()
@@ -244,14 +244,14 @@ class Player(Big) :
             .projectiles(5) \
             .fade(0.9, 3.5).vx(3,5).vy(-0.4,0.4) \
             .pose("fragment") \
-            .createActor()
+            .create()
 
         ExplosionBuilder(self.actor) \
             .gravity(-0.1) \
             .projectiles(5) \
             .fade(0.9, 3.5).vx(-3,-5).vy(-0.4,0.4) \
             .pose("fragment") \
-            .createActor()
+            .create()
 
 
         self.killZs()

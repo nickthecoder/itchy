@@ -18,218 +18,217 @@ import uk.co.nickthecoder.itchy.makeup.ScaledBackground;
 import uk.co.nickthecoder.itchy.util.NinePatch;
 import uk.co.nickthecoder.jame.RGBA;
 
-public class Talk extends Follower
-{
-    public String text = "";
+public class Talk extends Follower {
+	public String text = "";
 
-    public String bubbleName = null;
+	public String bubbleName = null;
 
-    public TextStyle textStyle;
+	public TextStyle textStyle;
 
-    public Talk( Actor following )
-    {
-        super(following);
-        createTextStyle();
-        this.textStyle = new TextStyle();
-    }
+	public Talk(Actor following) {
+		super(following);
+		createTextStyle();
+		this.textStyle = new TextStyle();
+	}
 
-    private final void createTextStyle()
-    {
-        this.textStyle = new TextStyle(Itchy.getGame().resources.getDefaultFontResource().font, 14);
-    }
+	private final void createTextStyle() {
+		this.textStyle = new TextStyle(
+				Itchy.getGame().resources.getDefaultFontResource().font, 14);
+	}
 
-    @Override
-    public Actor createActor()
-    {
-        if (this.textStyle == null) {
-            FontResource fontResource = Itchy.getGame().resources.getDefaultFontResource();
-            this.textStyle = new TextStyle(fontResource.font, 14);
-        }
+	public static abstract class AbstractTalkBuilder<C extends Talk, B extends AbstractTalkBuilder<C, B>>
+			extends AbstractFollowerBuilder<C, B> {
+		public B text(String text) {
+			this.companion.text = text;
+			return getThis();
+		}
 
-        AbstractTextPose pose;
-        if (this.text.contains("\n")) {
-            pose = new MultiLineTextPose(this.textStyle);
-            pose.setText(this.text);
-        } else {
-            pose = new TextPose(this.text, this.textStyle);
-        }
-        this.pose = pose;
+		public B event(String eventName) {
+			TextStyle style = this.companion.costume.getTextStyle(eventName)
+					.clone();
+			if (style != null) {
+				this.companion.textStyle = style;
+			}
+			return getThis();
+		}
 
-        Actor result = super.createActor();
+		public B font(String fontName, int fontSize) {
+			this.companion.textStyle.setFont(Itchy.getGame().resources
+					.getFont(fontName));
+			this.companion.textStyle.fontSize = fontSize;
+			return getThis();
+		}
 
-        // Apply the background. Use a Frame if the bubble name is a nine patch, otherwise use a ScaledBackground.
-        NinePatch ninePatch = null;
-        if (this.bubbleName != null) {
-            ninePatch = Itchy.getGame().resources.getNinePatch(this.bubbleName);
-        }
-        if (ninePatch == null) {
-            Pose backgroundPose = Itchy.getGame().resources.getPose(this.bubbleName);
-            if (backgroundPose != null) {
-                ScaledBackground scaledBackground = new ScaledBackground(
-                    this.textStyle.marginTop, this.textStyle.marginRight,
-                    this.textStyle.marginBottom, this.textStyle.marginLeft);
-                scaledBackground.setPose(backgroundPose);
-                result.getAppearance().setMakeup(scaledBackground);
-            }
-        } else {
-            Frame frame = new Frame(
-                this.textStyle.marginTop, this.textStyle.marginRight,
-                this.textStyle.marginBottom, this.textStyle.marginLeft);
-            frame.setNinePatch(ninePatch);
-            result.getAppearance().setMakeup(frame);
-        }
+		public B textStyle(TextStyle textStyle) {
+			this.companion.textStyle = textStyle;
+			return getThis();
+		}
 
-        result.getAppearance().fixAppearance();
-        ImagePose imagePose = (ImagePose) result.getAppearance().getPose();
-        imagePose.setOffsetX((int) (imagePose.getSurface().getWidth() * this.textStyle.xAlignment));
-        imagePose.setOffsetY((int) (imagePose.getSurface().getHeight() * this.textStyle.yAlignment));
+		public B textStyle(String textStyleName) {
+			this.companion.textStyle = this.companion.source.getCostume()
+					.getTextStyle(textStyleName);
+			return getThis();
+		}
 
-        result.setZOrder(this.source.getZOrder());
+		public B style(String style) {
+			this.textStyle(style);
 
-        return result;
-    }
+			// MORE - We are using STRINGS to redirect to a Pose or a NinePatch,
+			// but what we should be doing is
+			// let the Costume have the Pose or NinePatch. But Costumes don't
+			// have NinePatch events at the moment.
+			// Also it may be confusing to have an event called "talk" with a
+			// Pose, because we want that pose to be used for
+			// the speech bubble, not to change the actor's pose! So we'd need
+			// two event names.
+			String name = this.companion.source.getCostume().getString(style);
+			if (name == null) {
+				name = style;
+			}
+			this.bubble(name);
 
-    public static abstract class AbstractTalkBuilder<C extends Talk, B extends AbstractTalkBuilder<C, B>>
-        extends AbstractFollowerBuilder<C, B>
-    {
-        public B text( String text )
-        {
-            this.companion.text = text;
-            return getThis();
-        }
+			return getThis();
+		}
 
-        public B event( String eventName )
-        {
-            TextStyle style = this.companion.costume.getTextStyle(eventName).clone();
-            if (style != null) {
-                this.companion.textStyle = style;                
-            }
-            return getThis();
-        }
+		@Override
+		public B eventName(String eventName) {
+			super.eventName(eventName);
 
-        public B font( String fontName, int fontSize )
-        {
-            this.companion.textStyle.setFont(Itchy.getGame().resources.getFont(fontName));
-            this.companion.textStyle.fontSize = fontSize;
-            return getThis();
-        }
+			String text = this.companion.source.getCostume().getString(
+					eventName);
+			if (text == null) {
+				this.companion.text = eventName;
+			} else {
+				this.companion.text = text;
+			}
 
-        public B textStyle( TextStyle textStyle )
-        {
-            this.companion.textStyle = textStyle;
-            return getThis();
-        }
+			return getThis();
+		}
 
-        public B textStyle( String textStyleName )
-        {
-            this.companion.textStyle = this.companion.source.getCostume().getTextStyle(textStyleName);
-            return getThis();
-        }
+		public B bubble(String name) {
+			this.companion.bubbleName = name;
+			return getThis();
+		}
 
-        public B style( String style )
-        {
-            this.textStyle(style);
+		public B alignment(double x, double y) {
+			this.companion.textStyle.xAlignment = x;
+			this.companion.textStyle.yAlignment = y;
+			return getThis();
+		}
 
-            // MORE - We are using STRINGS to redirect to a Pose or a NinePatch, but what we should be doing is
-            // let the Costume have the Pose or NinePatch. But Costumes don't have NinePatch events at the moment.
-            // Also it may be confusing to have an event called "talk" with a Pose, because we want that pose to be used for
-            // the speech bubble, not to change the actor's pose! So we'd need two event names.
-            String name = this.companion.source.getCostume().getString(style);
-            if (name == null) {
-                name = style;
-            }
-            this.bubble(name);
+		public B color(RGBA color) {
+			this.companion.textStyle.color = color;
+			return getThis();
+		}
 
-            return getThis();
-        }
+		/**
+		 * Sets the margins of the text within the bubble.
+		 * 
+		 * @param margin
+		 *            The margin of top,left,bottom and right.
+		 * @return this
+		 */
+		public B margin(int margin) {
+			this.companion.textStyle.marginTop = margin;
+			this.companion.textStyle.marginRight = margin;
+			this.companion.textStyle.marginBottom = margin;
+			this.companion.textStyle.marginLeft = margin;
+			return getThis();
+		}
 
-        @Override
-        public B eventName( String eventName )
-        {
-            super.eventName(eventName);
+		/**
+		 * Sets the margins of the text within the bubble.
+		 * 
+		 * @param topBottom
+		 *            The margin of top and bottom.
+		 * @return this
+		 */
+		public B margin(int topBottom, int leftRight) {
+			this.companion.textStyle.marginTop = topBottom;
+			this.companion.textStyle.marginRight = leftRight;
+			this.companion.textStyle.marginBottom = topBottom;
+			this.companion.textStyle.marginLeft = leftRight;
+			return getThis();
+		}
 
-            String text = this.companion.source.getCostume().getString(eventName);
-            if (text == null) {
-                this.companion.text = eventName;
-            } else {
-                this.companion.text = text;
-            }
+		/**
+		 * Sets the margins of the text within the bubble.
+		 * 
+		 * @return this
+		 */
+		public B margin(int top, int right, int bottom, int left) {
+			this.companion.textStyle.marginTop = top;
+			this.companion.textStyle.marginRight = right;
+			this.companion.textStyle.marginBottom = bottom;
+			this.companion.textStyle.marginLeft = left;
+			return getThis();
+		}
 
-            return getThis();
-        }
+		@Override
+		public B offset(double x, double y) {
+			super.offset(x, y);
+			return getThis();
+		}
 
-        public B bubble( String name )
-        {
-            this.companion.bubbleName = name;
-            return getThis();
-        }
+		@Override
+		public C create() {
+			if (companion.textStyle == null) {
+				FontResource fontResource = Itchy.getGame().resources
+						.getDefaultFontResource();
+				companion.textStyle = new TextStyle(fontResource.font, 14);
+			}
 
-        public B alignment( double x, double y )
-        {
-            this.companion.textStyle.xAlignment = x;
-            this.companion.textStyle.yAlignment = y;
-            return getThis();
-        }
+			AbstractTextPose pose;
+			if (companion.text.contains("\n")) {
+				pose = new MultiLineTextPose(companion.textStyle);
+				pose.setText(companion.text);
+			} else {
+				pose = new TextPose(companion.text, companion.textStyle);
+			}
+			companion.pose = pose;
 
-        public B color( RGBA color )
-        {
-            this.companion.textStyle.color = color;
-            return getThis();
-        }
+			Actor result = super.create().getActor();
 
-        /**
-         * Sets the margins of the text within the bubble.
-         * 
-         * @param margin
-         *        The margin of top,left,bottom and right.
-         * @return this
-         */
-        public B margin( int margin )
-        {
-            this.companion.textStyle.marginTop = margin;
-            this.companion.textStyle.marginRight = margin;
-            this.companion.textStyle.marginBottom = margin;
-            this.companion.textStyle.marginLeft = margin;
-            return getThis();
-        }
+			// Apply the background. Use a Frame if the bubble name is a nine
+			// patch, otherwise use a ScaledBackground.
+			NinePatch ninePatch = null;
+			if (companion.bubbleName != null) {
+				ninePatch = Itchy.getGame().resources
+						.getNinePatch(companion.bubbleName);
+			}
+			if (ninePatch == null) {
+				Pose backgroundPose = Itchy.getGame().resources
+						.getPose(companion.bubbleName);
+				if (backgroundPose != null) {
+					ScaledBackground scaledBackground = new ScaledBackground(
+							companion.textStyle.marginTop,
+							companion.textStyle.marginRight,
+							companion.textStyle.marginBottom,
+							companion.textStyle.marginLeft);
+					scaledBackground.setPose(backgroundPose);
+					result.getAppearance().setMakeup(scaledBackground);
+				}
+			} else {
+				Frame frame = new Frame(companion.textStyle.marginTop,
+						companion.textStyle.marginRight,
+						companion.textStyle.marginBottom,
+						companion.textStyle.marginLeft);
+				frame.setNinePatch(ninePatch);
+				result.getAppearance().setMakeup(frame);
+			}
 
-        /**
-         * Sets the margins of the text within the bubble.
-         * 
-         * @param topBottom
-         *        The margin of top and bottom.
-         * @return this
-         */
-        public B margin( int topBottom, int leftRight )
-        {
-            this.companion.textStyle.marginTop = topBottom;
-            this.companion.textStyle.marginRight = leftRight;
-            this.companion.textStyle.marginBottom = topBottom;
-            this.companion.textStyle.marginLeft = leftRight;
-            return getThis();
-        }
+			result.getAppearance().fixAppearance();
+			ImagePose imagePose = (ImagePose) result.getAppearance().getPose();
+			imagePose
+					.setOffsetX((int) (imagePose.getSurface().getWidth() * companion.textStyle.xAlignment));
+			imagePose
+					.setOffsetY((int) (imagePose.getSurface().getHeight() * companion.textStyle.yAlignment));
 
-        /**
-         * Sets the margins of the text within the bubble.
-         * 
-         * @return this
-         */
-        public B margin( int top, int right, int bottom, int left )
-        {
-            this.companion.textStyle.marginTop = top;
-            this.companion.textStyle.marginRight = right;
-            this.companion.textStyle.marginBottom = bottom;
-            this.companion.textStyle.marginLeft = left;
-            return getThis();
-        }
+			result.setZOrder(companion.source.getZOrder());
 
-        @Override
-        public B offset( double x, double y )
-        {
-            super.offset(x, y);
-            return getThis();
-        }
+			return companion;
+		}
 
-    }
+	}
 
 }

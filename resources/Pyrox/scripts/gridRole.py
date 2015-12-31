@@ -53,7 +53,7 @@ class GridRole(AbstractRole) :
             .text(message)
         self.adjustTalk( talk );
         
-        self.talkActor = talk.createActor()
+        self.talkActor = talk.create().getActor()
         
         self.talkActor.getStage().addTop(self.talkActor)
         self.talkActor.setCostume( self.getActor().getCostume() )
@@ -199,7 +199,7 @@ class GridRole(AbstractRole) :
             .projectiles(10) \
             .gravity(-0.2).fade(0.9, 3.5).speed(0.1, 1.5).vy(5) \
             .pose("fragment") \
-            .createActor()
+            .create()
 
         self.actor.deathEvent("explode")
 

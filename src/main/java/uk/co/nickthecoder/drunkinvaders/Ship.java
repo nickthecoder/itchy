@@ -66,7 +66,7 @@ public class Ship extends Bouncy implements Shootable
     {
         super.onBirth();
 
-        new OnionSkinBuilder(getActor()).alpha(128).createActor();
+        new OnionSkinBuilder(getActor()).alpha(128).create();
         this.mass = 100000000000.0;
 
         this.radius = Math.sqrt(
@@ -248,7 +248,7 @@ public class Ship extends Bouncy implements Shootable
         Actor yell = new TalkBuilder(getActor())
             .eventName("death").style("shout")
             .offset(0, 60).alignment(0.5, 0).direction(0)
-            .createActor();
+            .create().getActor();
         yell.setCostume(getActor().getCostume());
         yell.deathEvent("shout");
 
@@ -258,7 +258,7 @@ public class Ship extends Bouncy implements Shootable
             .fade(2)
             .spin(-0.2, 0.2)
             .eventName("fragment")
-            .createActor();
+            .create();
 
         new ExplosionBuilder(getActor())
             .projectiles(40)
@@ -266,7 +266,7 @@ public class Ship extends Bouncy implements Shootable
             .speed(1, 3, 0, 0)
             .fade(2)
             .eventName("pixel")
-            .createActor();
+            .create();
 
         deathEvent("death");
     }

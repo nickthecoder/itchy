@@ -46,7 +46,7 @@ class Grenade(Faller) :
                 .costume("explosion").eventName("default") \
                 .projectiles(10).projectilesPerTick(1) \
                 .vy(-3, 3).vx( -0.5, 0.5 ) \
-                .createActor()
+                .create()
         else :
             a = self.lookEast()
             b = self.lookWest()
@@ -54,7 +54,7 @@ class Grenade(Faller) :
                 .costume("explosion").eventName("default") \
                 .projectiles(10).projectilesPerTick(1) \
                 .vx(-3, 3).vy( -0.5, 0.5 ) \
-                .createActor()
+                .create()
 
         self.explode()
                 

@@ -60,9 +60,9 @@ public class TestProjectiles extends AbstractRole
     public void tick()
     {
         if (this.id == 0) {
-            test0().createActor();
+            test0().create();
         } else if (this.id == 1) {
-            test1().createActor();
+            test1().create();
         }
         getActor().setRole(new PlainRole());
     }

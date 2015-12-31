@@ -46,7 +46,7 @@ class Copier(GridRole) :
             else :
                 self.copying = north.actor.costume
                 self.event("scan", "copied")
-                Projectile(self).pose("light").fade(0).life(1).vx(.6).createActor()
+                ProjectileBuilder(self).pose("light").fade(0).life(1).vx(.6).create()
     
     def onMessage(self, message) :
         if message == "copied" :

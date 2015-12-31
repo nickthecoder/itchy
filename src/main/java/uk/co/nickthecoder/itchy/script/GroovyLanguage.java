@@ -27,7 +27,7 @@ public class GroovyLanguage extends ScriptLanguage
 
 	GroovyClassLoader groovyClassLoader;
 
-    private Map<String, Class<?>> classes = new HashMap<String, Class<?>>();
+    private Map<String, Class<?>> classes;
 
     public GroovyLanguage( ScriptManager manager )
     {
@@ -37,7 +37,7 @@ public class GroovyLanguage extends ScriptLanguage
     @Override
     protected void initialise()
     {
-    	this.classes.clear();
+    	this.classes = new HashMap<String, Class<?>>();
         ClassLoader parent = getClass().getClassLoader();
         this.groovyClassLoader = new GroovyClassLoader(parent);
     }

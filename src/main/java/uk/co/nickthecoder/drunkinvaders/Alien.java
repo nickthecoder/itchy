@@ -97,7 +97,7 @@ public class Alien extends Bouncy implements Shootable
             .eventName("fragment")
             .distance(10 * getActor().getAppearance().getScale())
             .scale(1)
-            .createActor();
+            .create();
 
         new ExplosionBuilder(getActor())
             .projectiles(40).projectilesPerTick(10)
@@ -107,7 +107,7 @@ public class Alien extends Bouncy implements Shootable
             .fade(3)
             .scale(1)
             .eventName("pixel")
-            .createActor();
+            .create();
 
         double scale = getActor().getAppearance().getScale();
 
@@ -127,7 +127,7 @@ public class Alien extends Bouncy implements Shootable
         Actor yell = new TalkBuilder(getActor())
             .eventName("death").style("yell")
             .offset(0, 40).direction(0)
-            .createActor();
+            .create().getActor();
         yell.setCostume(getActor().getCostume());
         yell.deathEvent("yell");
 

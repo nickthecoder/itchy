@@ -49,7 +49,7 @@ class Drop extends AbstractRole
             new ExplosionBuilder(getActor())
                 .projectiles(5).gravity(-0.2)
                 .fade(0.9, 3.5).speed(-1.5, 1.5).vy(5,8)
-                .pose('droplet').createActor();
+                .pose('droplet').create();
             
             // Blue drops make a "drop" sound, gold drops say a random phrase.
             if (Itchy.getGame().getSceneDirector().isPlaying()) {

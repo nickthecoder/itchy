@@ -29,7 +29,7 @@ class Hard(GridRole) :
                 .projectiles(1) \
                 .gravity(-0.2).fade(0.9, 3.5).speed(0.1, 1.5).vy(5) \
                 .pose("fragment") \
-                .createActor()
+                .create()
 
             self.remaining -= 1
             if self.remaining <= 0 :

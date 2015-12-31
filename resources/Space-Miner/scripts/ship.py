@@ -34,7 +34,7 @@ class Ship(Moving) :
         self.inputWeapon2 = Input.find("weapon-2")
     
         OnionSkinBuilder( self.getActor() ) \
-            .alpha(128).every(5).fade(3).createActor();
+            .alpha(128).every(5).fade(3).create();
 
         self.rotationSpeed = self.getActor().getCostume().getProperties().rotationSpeed;
         self.thrust = self.getActor().getCostume().getProperties().thrust;
@@ -51,7 +51,7 @@ class Ship(Moving) :
         ExplosionBuilder(self.getActor()) \
             .companion("warp").eventName("default").distance(30,-80).spread(0,360).spread(0,360).randomSpread(False) \
             .speed(0,0).projectiles(40) \
-            .createActor();
+            .create();
 
         print "Lives : ", Itchy.getGame().getDirector().lives
         
@@ -71,7 +71,7 @@ class Ship(Moving) :
                 .companion("warp") \
                 .spread(i*120, 360 + i*120).vx(self.vx).vy(self.vy).distance(100) \
                 .speed(-6,0).projectiles(20).projectilesPerTick(1).randomSpread(False).alpha(0).fade(-3) \
-                .createActor()
+                .create()
 
         self.getActor().deathEvent("fade")
 
@@ -94,7 +94,7 @@ class Ship(Moving) :
                 .projectiles(4).follow().projectilesPerTick(1) \
                 .spread(heading+160, heading+200).distance(40) \
                 .randomSpread().speed(1,2,0,0).fade(3).eventName("spark") \
-                .createActor()
+                .create()
 
         if self.fireTimer == None or self.fireTimer.isFinished() :
         
@@ -129,10 +129,10 @@ class Ship(Moving) :
        # Use the "fragment" and "part" poses created in onBirth to explode the ship in all directions.
        # The large "part" pieces move slowly, and the smaller "fragment" pieces move quickly.
         ExplosionBuilder(self.getActor()) \
-            .speed(0.5,0,1,0).fade(3).spin(-1,1).rotate(True).eventName("part").projectiles(4).createActor()
+            .speed(0.5,0,1,0).fade(3).spin(-1,1).rotate(True).eventName("part").projectiles(4).create()
             
         ExplosionBuilder(self.getActor()) \
-            .speed(1.5,0,4,0).fade(3).spin(-1,1).rotate(True).eventName("fragment").projectiles(20).createActor()
+            .speed(1.5,0,4,0).fade(3).spin(-1,1).rotate(True).eventName("fragment").projectiles(20).create()
         
         Itchy.getGame().getDirector().lives -= 1
 

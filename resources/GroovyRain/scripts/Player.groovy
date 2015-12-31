@@ -37,7 +37,7 @@ class Player extends AbstractRole
             if ( getCollisionStrategy().collisions(getActor(),'deadly').size() > 0 ) {
             
                 // Create a skeleton below the sheep, which will become visible when the sheep fades out.
-                new FollowerBuilder(this.actor).followRotatation().pose('bones').adjustZOrder(-1).createActor();
+                new FollowerBuilder(this.actor).followRotatation().pose('bones').adjustZOrder(-1).create();
                 
                 // Plays a sound, and starts an animation.
                 getActor().deathEvent('death');

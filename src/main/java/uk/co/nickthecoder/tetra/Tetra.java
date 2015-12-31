@@ -377,7 +377,7 @@ public class Tetra extends AbstractDirector
             .speed(2, 4)
             .fade(3)
             .pose("fragment")
-            .createActor();
+            .create();
 
         actor.kill();
     }

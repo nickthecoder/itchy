@@ -16,27 +16,11 @@ import uk.co.nickthecoder.itchy.Actor;
  * <code>
  * new ExplosionBuilder(actor)
  *     .projectiles(10).gravity(-0.2).fade(0.9, 3.5).speed(0.1, 1.5).vy(5)
- *     .pose("droplet").createActor(); 
+ *     .pose("droplet").create(); 
  * </code>
  * </pre>
  * 
- * And is the same as this long winded form :
- * 
- * <pre>
- * <code>
- * Explosion explosion = new itchy.extras.Explosion(actor);
- * explosion.projectiles = 10;
- * explosion.gravity = -0.2;
- * explosion.setFade(0.9, 3.5);
- * explosion.setSpeed(0.1, 1.5);
- * explosion.vy(5);
- * explosion.setPose("droplet");
- * explosion.createActor();
- * </code>
- * </pre>
- * 
- * Note that the createActor method returns an Actor (not the Explosion), and therefore must be last.
- * 
+ * Note: the create method returns an Explosion (not the ExplosionBuilder), and therefore must be last.
  */
 public class ExplosionBuilder extends Explosion.AbstractExplosionBuilder<Explosion, ExplosionBuilder>
 {
