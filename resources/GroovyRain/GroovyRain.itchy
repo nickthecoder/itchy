@@ -1,5 +1,5 @@
 <resources>
-  <game title="It's Gonna Rain" width="800" height="600" initialScene="menu" directorClassName="uk.co.nickthecoder.itchy.PlainDirector"/>
+  <game resizable="false" title="It's Gonna Rain" width="800" height="600" initialScene="menu" directorClassName="uk.co.nickthecoder.itchy.PlainDirector"/>
   <fonts>
     <font name="BlackCasper" filename="fonts/BlackCasper/BlackCasper.ttf"/>
     <font name="Boycott" filename="fonts/Boycott/Boycott.ttf"/>

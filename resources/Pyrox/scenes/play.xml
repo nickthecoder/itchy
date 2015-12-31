@@ -584,7 +584,7 @@
     </actor>
     <actor costume="portcullis" x="-1080" y="-300" direction="0.0" heading="0.0" startEvent="default" zOrder="10">
       <property name="text" value="Balloons(4) and Extras(3)"/>
-      <property name="requires" value="balloons4,extras3"/>
+      <property name="requires" value="balloons4"/>
     </actor>
     <actor costume="portcullis" x="240" y="720" direction="0.0" heading="0.0" startEvent="default" zOrder="10">
       <property name="text" value="Furniture"/>
