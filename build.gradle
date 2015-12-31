@@ -23,6 +23,24 @@ dependencies {
     compile 'junit:junit:4.12'
     compile 'org.python:jython-standalone:2.5.2'
     compile 'org.codehaus.groovy:groovy-all:2.4.5'
+    compile 'uk.co.nickthecoder:prioritydoc:0.1'
+}
+
+
+javadoc {
+    source = sourceSets.main.allJava
+    classpath = configurations.compile
+    
+    options.doclet = "uk.co.nickthecoder.prioritydoc.PriorityDoc"
+    options.addStringOption( "mainpackage", "uk.co.nickthecoder.itchy" )
+    options.addStringOption( "overwriteresources" )
+    options.addStringOption( "usecookies" )
+    options.addStringOption( "title", "Itchy" )
+    options.addStringOption( "link", "http://docs.oracle.com/javase/7/docs/api/")
+
+    options.docletpath = configurations.compile.files.asType(List)
+    //options.addStringOption( "diagram", "src/docs/classDiagram.xml" )
+    verbose = true
 }
 
 // A horrible chunk of code which extracts the contents of the "native" jar files
