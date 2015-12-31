@@ -116,7 +116,7 @@ class Ship(Moving) :
         # Move and wrap from one edge of the world to the opposite.
         Moving.tick(self)
         
-        if not self.getCollisionStrategy().collisions(self.getActor(),"deadly").isEmpty() :
+        if self.collided("deadly") :
             self.explode();
 
         # For debugging.

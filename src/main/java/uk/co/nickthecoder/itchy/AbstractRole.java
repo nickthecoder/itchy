@@ -94,6 +94,26 @@ public abstract class AbstractRole implements Role
         return this.collisionStrategy;
     }
 
+    /**
+     * A convenience method for getCollisionStrategy().collisions(this.getActor(), tags )
+     * @param tags
+     * @return The Roles which are colliding with this Role.
+     */
+    public Set<Role> collisions( String... tags )
+    {
+        return this.collisionStrategy.collisions(this.getActor(), tags);
+    }
+
+    /**
+     * A convenience method similar to "collisions".
+     * @param tags
+     * @return True iff this role is colliding with another Role having the given tag(s).
+     */
+    public boolean collided( String... tags )
+    {
+        return ! this.collisionStrategy.collisions(this.getActor(), tags).isEmpty();
+    }
+
     @Override
     public ClassName getClassName()
     {
