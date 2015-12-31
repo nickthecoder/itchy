@@ -4,9 +4,12 @@ from uk.co.nickthecoder.itchy import PlainSceneDirector
 from uk.co.nickthecoder.itchy.util import ClassName
 from uk.co.nickthecoder.itchy.extras import Timer
 
+from uk.co.nickthecoder.itchy.property import StringProperty
+
 from java.util import ArrayList
 
 properties = ArrayList()
+properties.add( StringProperty("nextScene").hint("The name of the next scene") );
 
 class Play(PlainSceneDirector) :
 
@@ -15,6 +18,7 @@ class Play(PlainSceneDirector) :
         self.rocks = 0 # count the rocks on the screen, when it goes down to zero, next level!
         self.endTimer = None
         self.ship = None # Set by Ship's onBirth.
+        self.nextScene = "completed"
 
     def onActivate(self) :
     
@@ -57,9 +61,8 @@ class Play(PlainSceneDirector) :
     def tick(self) :
     
         if self.endTimer and self.endTimer.isFinished() :
-            nextScene = str(1 + int(self.game.getSceneName()))
-            if self.game.hasScene( nextScene ) :
-                self.game.startScene( nextScene )
+            if self.game.hasScene( self.nextScene ) :
+                self.game.startScene( self.nextScene )
             else :
                 self.game.startScene("completed")   
     

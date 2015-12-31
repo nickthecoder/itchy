@@ -10,7 +10,6 @@ from java.util import ArrayList
 from moving import Moving
 
 properties = ArrayList()
-properties.add( DoubleProperty("impulse").hint("recoils the ship") );
 properties.add( DoubleProperty("strength") );
 
 properties.add( DoubleProperty("rotationSpeed").hint("Degrees per Tick)") );
@@ -21,7 +20,6 @@ class Rock(Moving) :
 
     def __init__(self) :
         Moving.__init__(self)
-        self.impulse = 0;
         self.strength = 1;
         self.rotationSpeed = 0
         self.hits = 0;
@@ -68,14 +66,15 @@ class Rock(Moving) :
             actor = self.getActor().createCompanion("fragment-"+`i + 1`)
             role = actor.getRole()
             
-            role.rotationSpeed = self.rotationSpeed + Util.randomBetween( -2*strength, 2*strength )
-            delta = strength * 2
+            explosiveness = bullet.getActor().getCostume().getProperties().explosiveness
+            role.rotationSpeed = self.rotationSpeed + Util.randomBetween( -explosiveness, explosiveness )
+
             if i == pieces -1 :
                 dx = -sum_dx
                 dy = -sum_dy
             else :
-                dx = Util.randomBetween( -delta, delta )
-                dy = Util.randomBetween( -delta, delta )
+                dx = Util.randomBetween( -explosiveness, explosiveness )
+                dy = Util.randomBetween( -explosiveness, explosiveness )
                 sum_dx += dx
                 sum_dy += dy
             role.vx = self.vx + dx

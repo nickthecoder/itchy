@@ -1,0 +1,37 @@
+<scene showMouse="false" role="play.py" background="#00000000">
+  <properties>
+    <property name="nextScene" value="intro-2"/>
+  </properties>
+  <layer name="main">
+    <actor costume="stars2" x="400" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="0"/>
+    <actor costume="ship1" x="387" y="303" direction="90.0" heading="90.0" startEvent="default" zOrder="10"/>
+    <actor costume="key-arrows" x="228" y="422" direction="0.0" heading="0.0" startEvent="default" zOrder="11">
+      <property name="vy" value="1.0"/>
+      <property name="vx" value="1.0"/>
+      <property name="strength" value="1.0"/>
+      <property name="rotationSpeed" value="0.01"/>
+    </actor>
+    <actor costume="keys-zx" x="635" y="170" direction="0.0" heading="0.0" startEvent="default" zOrder="12">
+      <property name="vy" value="1.0"/>
+      <property name="vx" value="-0.5"/>
+      <property name="strength" value="1.0"/>
+      <property name="rotationSpeed" value="-0.03"/>
+    </actor>
+  </layer>
+  <layer name="hud">
+    <text text="Shoot all of the floating objects to move to the next level" font="Vera" size="26" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="392" y="26" direction="0.0" heading="0.0" startEvent="default" zOrder="0">
+      <makeup classname="uk.co.nickthecoder.itchy.makeup.Textured">
+        <property name="poseName" value="texture1"/>
+        <property name="y" value="0"/>
+        <property name="x" value="0"/>
+      </makeup>
+    </text>
+    <text text="Turn your ship with the arrow keys, &quot;Up&quot; to thrust" font="Vera" size="26" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="394" y="61" direction="0.0" heading="0.0" startEvent="default" zOrder="1">
+      <makeup classname="uk.co.nickthecoder.itchy.makeup.Textured">
+        <property name="poseName" value="texture1"/>
+        <property name="y" value="0"/>
+        <property name="x" value="0"/>
+      </makeup>
+    </text>
+  </layer>
+</scene>

@@ -18,9 +18,12 @@ class Director(AbstractDirector) :
 
     def __init__(self) :
         self.score = 0
-        self.lives = 0
+        self.lives = 3
 
     def onStarted(self) :
+        self.socre = 0
+        self.lives = 3
+        
         # Don't create default stages and views, because we want to use a special WrappedStageView
         print "Creating custom stages and views"
 
@@ -48,7 +51,8 @@ class Director(AbstractDirector) :
         pass
       
     def startScene(self, sceneName) :
-
+        print "Starting scene :", sceneName
+        
         if self.getGame().pause.isPaused() :
             self.getGame().pause.unpause()
             
@@ -61,6 +65,8 @@ class Director(AbstractDirector) :
 
         if sceneName == "menu" :
             transition = SceneTransition.slideLeft()
+            self.score = 0
+            self.lives = 3
 
         return SceneTransition(transition).transition(sceneName)
     
@@ -72,11 +78,6 @@ class Director(AbstractDirector) :
         if message == "continue" :
             self.startGame(self.getGame().getSceneName())
     
-    def startGame(self, sceneName="1" ) :
-        self.score = 0
-        self.lives = 3
-        self.startScene(sceneName)
-
     def addPoints(self, points ) :
         self.score += points;
 

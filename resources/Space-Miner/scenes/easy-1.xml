@@ -1,5 +1,7 @@
 <scene showMouse="false" role="play.py" background="#00000000">
-  <properties/>
+  <properties>
+    <property name="nextScene" value="easy-2"/>
+  </properties>
   <layer name="main">
     <actor costume="stars2" x="400" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="0"/>
     <actor costume="python-a" x="603" y="440" direction="0.0" heading="0.0" startEvent="default" zOrder="0">
@@ -7,14 +9,12 @@
       <property name="vx" value="0.5"/>
       <property name="strength" value="1.0"/>
       <property name="rotationSpeed" value="0.0"/>
-      <property name="impulse" value="0.0"/>
     </actor>
     <actor costume="kotlin-a" x="165" y="404" direction="0.0" heading="0.0" startEvent="default" zOrder="0">
       <property name="vy" value="0.0"/>
       <property name="vx" value="1.0"/>
       <property name="strength" value="1.0"/>
       <property name="rotationSpeed" value="-2.0"/>
-      <property name="impulse" value="0.0"/>
     </actor>
     <actor costume="ship1" x="387" y="303" direction="90.0" heading="90.0" startEvent="default" zOrder="10"/>
   </layer>

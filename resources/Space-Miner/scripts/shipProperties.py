@@ -10,14 +10,12 @@ properties = ArrayList()
 properties = ArrayList()
 properties.add( DoubleProperty("rotationSpeed") )
 properties.add( DoubleProperty("thrust") )
-properties.add( DoubleProperty("firePeriod") )
         
 class ShipProperties(CostumeProperties) :
 
     def __init__(self) :
         self.rotationSpeed = 5
         self.thrust = 0.3
-        self.firePeriod = 0.2
         
     # Boiler plate code - no need to change this
     def getProperties(self):

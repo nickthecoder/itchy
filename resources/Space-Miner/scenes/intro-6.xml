@@ -1,0 +1,42 @@
+<scene showMouse="false" role="play.py" background="#00000000">
+  <properties>
+    <property name="nextScene" value="menu"/>
+  </properties>
+  <layer name="main">
+    <actor costume="stars2" x="400" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="0"/>
+    <actor costume="ship2" x="452" y="184" direction="90.0" heading="90.0" startEvent="default" zOrder="13"/>
+    <actor costume="scala-a" x="630" y="496" direction="0.0" heading="0.0" startEvent="default" zOrder="15">
+      <property name="vy" value="0.05"/>
+      <property name="vx" value="-2.0"/>
+      <property name="strength" value="1.0"/>
+      <property name="rotationSpeed" value="-1.5"/>
+    </actor>
+    <actor costume="java-0" x="131" y="486" direction="0.0" heading="0.0" startEvent="default" zOrder="16">
+      <property name="vy" value="0.8"/>
+      <property name="vx" value="0.3"/>
+      <property name="strength" value="1.0"/>
+      <property name="rotationSpeed" value="0.2"/>
+    </actor>
+    <actor costume="duke-0" x="126" y="183" direction="0.0" heading="0.0" startEvent="default" zOrder="17">
+      <property name="vy" value="0.8"/>
+      <property name="vx" value="0.1"/>
+      <property name="strength" value="1.0"/>
+      <property name="rotationSpeed" value="-1.0"/>
+    </actor>
+    <actor costume="python-a" x="267" y="342" direction="0.0" heading="0.0" startEvent="default" zOrder="18">
+      <property name="vy" value="0.3"/>
+      <property name="vx" value="1.0"/>
+      <property name="strength" value="1.0"/>
+      <property name="rotationSpeed" value="1.0"/>
+    </actor>
+  </layer>
+  <layer name="hud">
+    <text text="You've completed the introduction..." font="Vera" size="26" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="392" y="19" direction="0.0" heading="0.0" startEvent="default" zOrder="3">
+      <makeup classname="uk.co.nickthecoder.itchy.makeup.Textured">
+        <property name="poseName" value="texture1"/>
+        <property name="y" value="0"/>
+        <property name="x" value="0"/>
+      </makeup>
+    </text>
+  </layer>
+</scene>

@@ -20,6 +20,7 @@ class Ship(Moving) :
     def __init__(self) :
         Moving.__init__(self)
         self.lifeIcon = []
+        self.bulletName = "bullet-1"
 
     def onBirth(self) :
     
@@ -29,15 +30,15 @@ class Ship(Moving) :
         self.inputFire = Input.find("fire")
         self.inputCheat = Input.find("cheat")
     
+        self.inputWeapon1 = Input.find("weapon-1")
+        self.inputWeapon2 = Input.find("weapon-2")
     
         OnionSkin( self.getActor() ).alpha(128).every(5).fade(3).createActor();
 
         self.rotationSpeed = self.getActor().getCostume().getProperties().rotationSpeed;
         self.thrust = self.getActor().getCostume().getProperties().thrust;
-        self.firePeriod = self.getActor().getCostume().getProperties().firePeriod;
+        self.fireTimer = None
         
-        self.fireTimer = Timer.createTimerSeconds(self.firePeriod);        
-
         # Cut the ship into 3 large pieces, and call these poses "part"
         Fragment().actor(self.getActor()).pieces(3).createPoses("part");
         # Cut the ship again, this time into 10 pieces, and call these poses "fragment".
@@ -51,6 +52,8 @@ class Ship(Moving) :
             .speed(0,0).projectiles(40) \
             .createActor();
 
+        print "Lives : ", Itchy.getGame().getDirector().lives
+        
         for i in range( 0, Itchy.getGame().getDirector().lives ) :
             actor = self.getActor().createCompanion("life")
             Itchy.getGame().getDirector().hudStage.add(actor)
@@ -73,6 +76,7 @@ class Ship(Moving) :
 
     def tick(self) :
 
+            
         if self.inputLeft.pressed() :
             self.getActor().adjustDirection( self.rotationSpeed )
             
@@ -91,10 +95,23 @@ class Ship(Moving) :
                 .randomSpread().speed(1,2,0,0).fade(3).eventName("spark") \
                 .createActor()
 
-        if self.inputFire.pressed() :
-            if self.fireTimer.isFinished() :
+        if self.fireTimer == None or self.fireTimer.isFinished() :
+        
+            if self.inputFire.pressed() :
+                if self.fireTimer is None :
+                    firePeriod = self.getActor().getCostume().getCompanion(self.bulletName).getProperties().firePeriod;
+                    self.fireTimer = Timer.createTimerSeconds(firePeriod);
+
                 self.fire()
                 self.fireTimer.reset()
+
+            if self.inputWeapon1.pressed() :
+                self.bulletName = "bullet-1"
+                self.fireTimer = None
+
+            if self.inputWeapon2.pressed() :
+                self.bulletName = "bullet-2"
+                self.fireTimer = None
 
         # Move and wrap from one edge of the world to the opposite.
         Moving.tick(self)
@@ -129,7 +146,7 @@ class Ship(Moving) :
                 Itchy.getGame().loadScene("gameOver", True)
     
     def fire(self) :
-        actor = self.actor.createCompanion("bullet")
+        actor = self.actor.createCompanion(self.bulletName)
 
         actor.setDirection( self.getActor().getHeading() )
         actor.moveTo( self.getActor() )
