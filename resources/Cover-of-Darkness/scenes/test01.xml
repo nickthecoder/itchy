@@ -1,0 +1,54 @@
+<scene showMouse="false" role="play.py" background="#000000ff">
+  <properties/>
+  <layer name="middle">
+    <actor costume="wall1" x="14" y="503" direction="0.0" heading="0.0" startEvent="default" zOrder="0"/>
+    <actor costume="wall2" x="96" y="576" direction="0.0" heading="0.0" startEvent="default" zOrder="3"/>
+    <actor costume="wall1" x="170" y="502" direction="0.0" heading="0.0" startEvent="default" zOrder="4"/>
+    <actor costume="exit" x="92" y="575" direction="0.0" heading="0.0" startEvent="default" zOrder="5">
+      <property name="nextLevel" value=""/>
+    </actor>
+    <actor costume="player" x="87" y="491" direction="0.0" heading="0.0" startEvent="default" zOrder="5">
+      <property name="speed" value="1.75"/>
+    </actor>
+    <actor costume="wall2" x="243" y="428" direction="0.0" heading="0.0" startEvent="default" zOrder="6"/>
+    <actor costume="wall2" x="396" y="428" direction="0.0" heading="0.0" startEvent="default" zOrder="7"/>
+    <actor costume="money1" x="720" y="49" direction="0.0" heading="0.0" startEvent="default" zOrder="8"/>
+    <actor costume="wall2" x="397" y="361" direction="0.0" heading="0.0" startEvent="default" zOrder="9"/>
+    <actor costume="wall2" x="242" y="361" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
+    <actor costume="wall1" x="14" y="361" direction="0.0" heading="0.0" startEvent="default" zOrder="11"/>
+    <actor costume="wall1" x="14" y="205" direction="0.0" heading="0.0" startEvent="default" zOrder="12"/>
+    <actor costume="wall1" x="13" y="88" direction="0.0" heading="0.0" startEvent="default" zOrder="13"/>
+    <actor costume="wall2" x="86" y="15" direction="0.0" heading="0.0" startEvent="default" zOrder="14"/>
+    <actor costume="wall2" x="241" y="15" direction="0.0" heading="0.0" startEvent="default" zOrder="15"/>
+    <actor costume="wall2" x="396" y="15" direction="0.0" heading="0.0" startEvent="default" zOrder="16"/>
+    <actor costume="wall2" x="551" y="15" direction="0.0" heading="0.0" startEvent="default" zOrder="17"/>
+    <actor costume="wall2" x="673" y="15" direction="0.0" heading="0.0" startEvent="default" zOrder="18"/>
+    <actor costume="wall2" x="547" y="428" direction="0.0" heading="0.0" startEvent="default" zOrder="19"/>
+    <actor costume="wall1" x="752" y="89" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
+    <actor costume="wall1" x="752" y="238" direction="0.0" heading="0.0" startEvent="default" zOrder="21"/>
+    <actor costume="wall1" x="752" y="355" direction="0.0" heading="0.0" startEvent="default" zOrder="22"/>
+    <actor costume="wall2" x="672" y="428" direction="0.0" heading="0.0" startEvent="default" zOrder="23"/>
+    <actor costume="wall1" x="543" y="91" direction="0.0" heading="0.0" startEvent="default" zOrder="24"/>
+    <actor costume="wall2" x="673" y="165" direction="0.0" heading="0.0" startEvent="default" zOrder="25"/>
+    <actor costume="wall2" x="550" y="361" direction="0.0" heading="0.0" startEvent="default" zOrder="26"/>
+    <actor costume="wall1" x="170" y="169" direction="0.0" heading="0.0" startEvent="default" zOrder="27"/>
+    <actor costume="wall2" x="252" y="242" direction="0.0" heading="0.0" startEvent="default" zOrder="28"/>
+    <actor costume="wall1" x="246" y="96" direction="0.0" heading="0.0" startEvent="default" zOrder="29"/>
+    <actor costume="wall2" x="467" y="292" direction="-0.24549738641276872" heading="-0.24549738641276872" startEvent="default" zOrder="30"/>
+    <actor costume="wall1" x="543" y="217" direction="0.0" heading="0.0" startEvent="default" zOrder="31"/>
+    <actor costume="money1" x="245" y="210" direction="0.0" heading="0.0" startEvent="default" zOrder="32"/>
+    <actor costume="wall1" x="326" y="166" direction="0.0" heading="0.0" startEvent="default" zOrder="33"/>
+    <actor costume="guard1" x="630" y="51" direction="180.0" heading="180.0" startEvent="default" zOrder="36">
+      <property name="forwardSpeed" value="2.0"/>
+      <property name="routeString" value="C90 R90 100 T10 R180 100 C90 L90 L180 T10"/>
+      <property name="turnSpeed" value="2.0"/>
+    </actor>
+    <actor costume="money1" x="695" y="396" direction="0.0" heading="0.0" startEvent="default" zOrder="37"/>
+    <actor costume="money1" x="510" y="262" direction="0.0" heading="0.0" startEvent="default" zOrder="40"/>
+    <actor costume="money1" x="510" y="219" direction="0.0" heading="0.0" startEvent="default" zOrder="41"/>
+    <actor costume="money1" x="510" y="175" direction="0.0" heading="0.0" startEvent="default" zOrder="42"/>
+    <actor costume="money1" x="510" y="90" direction="0.0" heading="0.0" startEvent="default" zOrder="43"/>
+    <actor costume="money1" x="511" y="48" direction="0.0" heading="0.0" startEvent="default" zOrder="44"/>
+    <actor costume="money1" x="510" y="134" direction="0.0" heading="0.0" startEvent="default" zOrder="45"/>
+  </layer>
+</scene>

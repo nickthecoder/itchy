@@ -1,0 +1,518 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="744.09448819"
+   height="1052.3622047"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.5 r10040"
+   sodipodi:docname="darkness.svg">
+  <defs
+     id="defs4">
+    <filter
+       height="1.3"
+       width="1.3"
+       y="-0.15"
+       x="-0.15"
+       inkscape:menu-tooltip="Silk carpet texture, horizontal stripes"
+       inkscape:menu="Textures"
+       inkscape:label="Silk carpet"
+       color-interpolation-filters="sRGB"
+       id="filter3915">
+      <feTurbulence
+         type="turbulence"
+         numOctaves="2"
+         baseFrequency="0.01 0.11"
+         seed="10"
+         id="feTurbulence3917" />
+      <feColorMatrix
+         result="result5"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 1.3 0 "
+         id="feColorMatrix3919" />
+      <feComposite
+         in="SourceGraphic"
+         operator="out"
+         in2="result5"
+         id="feComposite3921" />
+      <feMorphology
+         operator="dilate"
+         radius="1.3"
+         result="result3"
+         id="feMorphology3923" />
+      <feTurbulence
+         numOctaves="3"
+         baseFrequency="0.08 0.05"
+         type="fractalNoise"
+         seed="7"
+         result="result6"
+         id="feTurbulence3925" />
+      <feGaussianBlur
+         stdDeviation="0.5"
+         result="result7"
+         id="feGaussianBlur3927" />
+      <feDisplacementMap
+         in="result3"
+         xChannelSelector="R"
+         yChannelSelector="G"
+         scale="3"
+         result="result4"
+         in2="result7"
+         id="feDisplacementMap3929" />
+      <feComposite
+         in="result4"
+         k1="1"
+         result="result2"
+         operator="arithmetic"
+         in2="result4"
+         k2="1"
+         id="feComposite3931" />
+      <feBlend
+         in2="result4"
+         mode="normal"
+         in="result2"
+         id="feBlend3933" />
+    </filter>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath3967">
+      <rect
+         style="fill:#3b2d0d;fill-opacity:1;stroke:none"
+         id="rect3969"
+         width="100.1953"
+         height="100.1953"
+         x="222.96207"
+         y="505.14172"
+         rx="0"
+         ry="0" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath3971">
+      <rect
+         style="fill:#3b2d0d;fill-opacity:1;stroke:none"
+         id="rect3973"
+         width="100.1953"
+         height="100.1953"
+         x="222.96207"
+         y="505.14172"
+         rx="0"
+         ry="0" />
+    </clipPath>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.2844259"
+     inkscape:cx="250.56424"
+     inkscape:cy="777.15084"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="true"
+     inkscape:window-width="1440"
+     inkscape:window-height="847"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     showguides="true"
+     inkscape:guide-bbox="true">
+    <inkscape:grid
+       type="xygrid"
+       id="grid2985"
+       units="mm"
+       empspacing="5"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       id="g3759"
+       inkscape:export-filename="/home/nick/itchy/resources/Darkness/images/guard1.png"
+       inkscape:export-xdpi="60"
+       inkscape:export-ydpi="60"
+       style="stroke:none"
+       transform="matrix(0,1,-1,0,801.03422,-130.74138)">
+      <path
+         transform="matrix(1,0,0,2.0009739,-80.734572,-647.41551)"
+         sodipodi:end="5.0623155"
+         sodipodi:start="4.3500007"
+         d="m 388.07562,490.61093 c 17.88971,-6.78255 37.62196,-6.90551 55.5948,-0.3464 l -27.33183,74.89294 z"
+         sodipodi:ry="79.724411"
+         sodipodi:rx="79.724411"
+         sodipodi:cy="565.15747"
+         sodipodi:cx="416.33859"
+         id="path2989"
+         style="fill:#fffab2;fill-opacity:0.30414745;stroke:none"
+         sodipodi:type="arc" />
+      <path
+         transform="translate(-1.4757215,-1.9832195)"
+         d="m 354.3307,467.71652 c 0,9.78457 -7.93196,17.71654 -17.71653,17.71654 -9.78458,0 -17.71654,-7.93197 -17.71654,-17.71654 0,-9.78457 7.93196,-17.71653 17.71654,-17.71653 9.78457,0 17.71653,7.93196 17.71653,17.71653 z"
+         sodipodi:ry="17.716536"
+         sodipodi:rx="17.716536"
+         sodipodi:cy="467.71652"
+         sodipodi:cx="336.61417"
+         id="path2987"
+         style="fill:#100460;fill-opacity:1;stroke:none;stroke-opacity:1"
+         sodipodi:type="arc" />
+    </g>
+    <path
+       sodipodi:type="arc"
+       style="fill:#9d03bd;fill-opacity:1;stroke:none"
+       id="path3782"
+       sodipodi:cx="393.9595"
+       sodipodi:cy="483.6463"
+       sodipodi:rx="31.31473"
+       sodipodi:ry="31.31473"
+       d="m 425.27423,483.6463 a 31.31473,31.31473 0 1 1 -62.62946,0 31.31473,31.31473 0 1 1 62.62946,0 z"
+       transform="matrix(0.55838107,0,0,0.55838107,207.37263,-1.1394849)"
+       inkscape:export-filename="/home/nick/itchy/resources/Darkness/images/player.png"
+       inkscape:export-xdpi="60"
+       inkscape:export-ydpi="60" />
+    <rect
+       style="fill:#950007;fill-opacity:1;stroke:none"
+       id="rect3792"
+       width="18.182745"
+       height="238.396"
+       x="53.576641"
+       y="372.47989"
+       rx="3.5432956"
+       ry="3.5432956"
+       inkscape:export-filename="/home/nick/itchy/resources/Darkness/images/wall1.png"
+       inkscape:export-xdpi="60"
+       inkscape:export-ydpi="60" />
+    <rect
+       inkscape:export-ydpi="60"
+       inkscape:export-xdpi="60"
+       inkscape:export-filename="/home/nick/itchy/resources/Darkness/images/wall2.png"
+       ry="3.5432956"
+       rx="3.5432956"
+       y="-326.24182"
+       x="623.15051"
+       height="238.396"
+       width="18.182745"
+       id="rect3794"
+       style="fill:#950007;fill-opacity:1;stroke:none"
+       transform="matrix(0,1,-1,0,0,0)" />
+    <g
+       id="g3833"
+       transform="translate(-85.065289,-90.700096)">
+      <rect
+         inkscape:export-ydpi="60"
+         inkscape:export-xdpi="60"
+         inkscape:export-filename="/home/nick/itchy/resources/Darkness/images/exit.png"
+         ry="7.8289881"
+         rx="7.8289881"
+         y="150.93629"
+         x="120.49836"
+         height="62.483311"
+         width="131.08908"
+         id="rect3818"
+         style="fill:#426f43;fill-opacity:1;stroke:#d9ffbb;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+      <text
+         sodipodi:linespacing="125%"
+         id="text3820"
+         y="195.93629"
+         x="134.78407"
+         style="font-size:40px;font-style:normal;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#fbffdb;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Bold"
+         xml:space="preserve"><tspan
+           y="195.93629"
+           x="134.78407"
+           id="tspan3822"
+           sodipodi:role="line">EXIT</tspan></text>
+    </g>
+    <path
+       inkscape:export-ydpi="80.550003"
+       inkscape:export-xdpi="80.550003"
+       inkscape:export-filename="/home/nick/itchy/resources/Darkness/icon32.png"
+       transform="matrix(0.55838107,0,0,0.55838107,-273.48936,462.7792)"
+       d="m 425.27423,483.6463 a 31.31473,31.31473 0 1 1 -62.62946,0 31.31473,31.31473 0 1 1 62.62946,0 z"
+       sodipodi:ry="31.31473"
+       sodipodi:rx="31.31473"
+       sodipodi:cy="483.6463"
+       sodipodi:cx="393.9595"
+       id="path3840"
+       style="fill:#9d03bd;fill-opacity:1;stroke:#6300c8;stroke-width:1.41732287;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       sodipodi:type="arc" />
+    <g
+       id="g3939"
+       transform="matrix(1.1484964,0,0,1.1484964,-160.83055,-202.18267)"
+       inkscape:export-filename="/home/nick/itchy/resources/Darkness/images/floor1.png"
+       inkscape:export-xdpi="60"
+       inkscape:export-ydpi="60">
+      <rect
+         style="fill:#3b2d0d;fill-opacity:1;stroke:none"
+         id="rect3937"
+         width="110.10472"
+         height="110.10472"
+         x="217.63797"
+         y="501.28806"
+         rx="0"
+         ry="0"
+         clip-path="url(#clipPath3971)"
+         transform="matrix(1.989011,0,0,1.978022,-220.51193,-494.0397)" />
+      <rect
+         ry="0"
+         rx="0"
+         y="501.28806"
+         x="217.63797"
+         height="110.10472"
+         width="110.10472"
+         id="rect3019"
+         style="fill:#3b2d0d;fill-opacity:1;stroke:none;filter:url(#filter3915)"
+         clip-path="url(#clipPath3967)" />
+      <rect
+         clip-path="url(#clipPath3967)"
+         style="fill:#3b2d0d;fill-opacity:1;stroke:none;filter:url(#filter3915)"
+         id="rect3975"
+         width="110.10472"
+         height="110.10472"
+         x="217.63797"
+         y="501.28806"
+         rx="0"
+         ry="0"
+         transform="matrix(-1,0,0,1,646.11943,0)" />
+      <rect
+         clip-path="url(#clipPath3967)"
+         style="fill:#3b2d0d;fill-opacity:1;stroke:none;filter:url(#filter3915)"
+         id="rect3977"
+         width="110.10472"
+         height="110.10472"
+         x="217.63797"
+         y="501.28806"
+         rx="0"
+         ry="0"
+         transform="matrix(1,0,0,-1,0,1210.4787)" />
+      <rect
+         transform="matrix(-1,0,0,-1,646.11943,1210.4787)"
+         ry="0"
+         rx="0"
+         y="501.28806"
+         x="217.63797"
+         height="110.10472"
+         width="110.10472"
+         id="rect3979"
+         style="fill:#3b2d0d;fill-opacity:1;stroke:none;filter:url(#filter3915)"
+         clip-path="url(#clipPath3967)" />
+    </g>
+    <text
+       sodipodi:linespacing="125%"
+       id="text3814"
+       y="322.31387"
+       x="379.5238"
+       style="font-size:40px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffc019;fill-opacity:1;stroke:#f6512f;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;font-family:Arial;-inkscape-font-specification:Arial Bold"
+       xml:space="preserve"
+       inkscape:export-filename="/home/nick/itchy/resources/Darkness/images/money1.png"
+       inkscape:export-xdpi="60"
+       inkscape:export-ydpi="60"><tspan
+         y="322.31387"
+         x="379.5238"
+         id="tspan3816"
+         sodipodi:role="line">£</tspan></text>
+    <g
+       inkscape:export-ydpi="62.195087"
+       inkscape:export-xdpi="62.195087"
+       inkscape:export-filename="/home/nick/itchy/resources/Darkness/images/wall4.png"
+       transform="matrix(0,1,-1,0,739.20999,-261.8067)"
+       id="g3009"
+       style="fill:#7765c4;fill-opacity:1">
+      <rect
+         inkscape:export-ydpi="60"
+         inkscape:export-xdpi="60"
+         inkscape:export-filename="/home/nick/itchy/resources/Darkness/images/wall1.png"
+         ry="3.5432956"
+         rx="3.5432956"
+         y="422.02701"
+         x="610.33008"
+         height="35.80328"
+         width="11.576456"
+         id="rect3011"
+         style="fill:#7765c4;fill-opacity:1;stroke:none" />
+      <rect
+         style="fill:#7765c4;fill-opacity:1;stroke:none"
+         id="rect3013"
+         width="11.576456"
+         height="35.80328"
+         x="610.33008"
+         y="482.02701"
+         rx="3.5432956"
+         ry="3.5432956"
+         inkscape:export-filename="/home/nick/itchy/resources/Darkness/images/wall1.png"
+         inkscape:export-xdpi="60"
+         inkscape:export-ydpi="60" />
+      <rect
+         inkscape:export-ydpi="60"
+         inkscape:export-xdpi="60"
+         inkscape:export-filename="/home/nick/itchy/resources/Darkness/images/wall1.png"
+         ry="3.5432956"
+         rx="3.5432956"
+         y="542.02698"
+         x="610.33008"
+         height="35.80328"
+         width="11.576456"
+         id="rect3015"
+         style="fill:#7765c4;fill-opacity:1;stroke:none" />
+      <rect
+         style="fill:#7765c4;fill-opacity:1;stroke:none"
+         id="rect3017"
+         width="11.576456"
+         height="35.80328"
+         x="610.33008"
+         y="602.02698"
+         rx="3.5432956"
+         ry="3.5432956"
+         inkscape:export-filename="/home/nick/itchy/resources/Darkness/images/wall1.png"
+         inkscape:export-xdpi="60"
+         inkscape:export-ydpi="60" />
+    </g>
+    <use
+       x="0"
+       y="0"
+       xlink:href="#g3009"
+       id="use3991"
+       transform="matrix(0,1,-1,0,708.38055,281.5601)"
+       width="744.09448"
+       height="1052.3622"
+       inkscape:export-filename="/home/nick/itchy/resources/Darkness/images/wall3.png"
+       inkscape:export-xdpi="62.195087"
+       inkscape:export-ydpi="62.195087" />
+    <rect
+       inkscape:export-ydpi="60"
+       inkscape:export-xdpi="60"
+       inkscape:export-filename="/home/nick/itchy/resources/Darkness/images/wall1s.png"
+       ry="3.5432956"
+       rx="3.5432956"
+       y="373.58093"
+       x="10.6358"
+       height="56.723209"
+       width="18.182747"
+       id="rect3021"
+       style="fill:#950007;fill-opacity:1;stroke:none" />
+    <rect
+       transform="matrix(0,1,-1,0,0,0)"
+       style="fill:#950007;fill-opacity:1;stroke:none"
+       id="rect3023"
+       width="18.182739"
+       height="58.925304"
+       x="658.38403"
+       y="-326.24182"
+       rx="1.9241091"
+       ry="3.5432956"
+       inkscape:export-filename="/home/nick/itchy/resources/Darkness/images/wall2s.png"
+       inkscape:export-xdpi="60"
+       inkscape:export-ydpi="60" />
+    <rect
+       style="fill:#7765c4;fill-opacity:1;stroke:none"
+       id="rect3035"
+       width="11.576456"
+       height="35.80328"
+       x="328.52338"
+       y="-137.18301"
+       rx="3.5432956"
+       ry="3.5432956"
+       inkscape:export-filename="/home/nick/itchy/resources/Darkness/images/wall4s.png"
+       inkscape:export-xdpi="60"
+       inkscape:export-ydpi="60"
+       transform="matrix(0,1,-1,0,0,0)" />
+    <rect
+       transform="scale(-1,1)"
+       inkscape:export-ydpi="60"
+       inkscape:export-xdpi="60"
+       inkscape:export-filename="/home/nick/itchy/resources/Darkness/images/wall3s.png"
+       ry="3.5432956"
+       rx="3.5432956"
+       y="383.57385"
+       x="-387.11884"
+       height="35.80328"
+       width="11.576456"
+       id="rect3041"
+       style="fill:#7765c4;fill-opacity:1;stroke:none" />
+    <g
+       id="g3820"
+       inkscape:export-filename="/home/nick/itchy/resources/Darkness/images/editor.png"
+       inkscape:export-xdpi="60"
+       inkscape:export-ydpi="60"
+       transform="translate(55.698143,-184.12705)">
+      <rect
+         style="fill:#42446f;fill-opacity:1;stroke:#bfbbff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+         id="rect3814"
+         width="194.93083"
+         height="62.483307"
+         x="139.18375"
+         y="244.36325"
+         rx="7.8289881"
+         ry="7.8289881"
+         inkscape:export-filename="/home/nick/itchy/resources/Darkness/images/exit.png"
+         inkscape:export-xdpi="60"
+         inkscape:export-ydpi="60" />
+      <text
+         xml:space="preserve"
+         style="font-size:40px;font-style:normal;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#fbffdb;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Bold"
+         x="153.46947"
+         y="289.36325"
+         id="text3816"
+         sodipodi:linespacing="125%"><tspan
+           sodipodi:role="line"
+           id="tspan3818"
+           x="153.46947"
+           y="289.36325">EDITOR</tspan></text>
+    </g>
+    <g
+       inkscape:export-ydpi="60"
+       inkscape:export-xdpi="60"
+       inkscape:export-filename="/home/nick/itchy/resources/Darkness/images/quit.png"
+       id="g3825"
+       transform="translate(286.0131,-184.12705)">
+      <rect
+         inkscape:export-ydpi="60"
+         inkscape:export-xdpi="60"
+         inkscape:export-filename="/home/nick/itchy/resources/Darkness/images/exit.png"
+         ry="7.8289881"
+         rx="7.8289881"
+         y="244.36325"
+         x="139.18375"
+         height="62.483307"
+         width="139.6532"
+         id="rect3827"
+         style="fill:#d80007;fill-opacity:1;stroke:#ffbcbb;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+      <text
+         sodipodi:linespacing="125%"
+         id="text3829"
+         y="289.36325"
+         x="153.46947"
+         style="font-size:40px;font-style:normal;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#fbffdb;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Bold"
+         xml:space="preserve"><tspan
+           y="289.36325"
+           x="153.46947"
+           id="tspan3831"
+           sodipodi:role="line">QUIT</tspan></text>
+    </g>
+  </g>
+</svg>
