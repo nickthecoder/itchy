@@ -37,6 +37,7 @@ public class GroovyLanguage extends ScriptLanguage
     @Override
     protected void initialise()
     {
+    	this.classes.clear();
         ClassLoader parent = getClass().getClassLoader();
         this.groovyClassLoader = new GroovyClassLoader(parent);
     }
@@ -49,7 +50,7 @@ public class GroovyLanguage extends ScriptLanguage
     @Override
     public void reload()
     {
-    	// TODO Implement reload for groovy
+    	this.initialise();
     }
     
     @Override
