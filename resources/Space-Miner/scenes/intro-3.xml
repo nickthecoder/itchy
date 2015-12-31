@@ -1,0 +1,37 @@
+<scene showMouse="false" role="play.py" background="#00000000">
+  <properties>
+    <property name="nextScene" value="intro-4"/>
+  </properties>
+  <layer name="main">
+    <actor costume="stars2" x="400" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="0"/>
+    <actor costume="ship1" x="387" y="303" direction="90.0" heading="90.0" startEvent="default" zOrder="10"/>
+    <actor costume="duke-0" x="135" y="287" direction="0.0" heading="0.0" startEvent="default" zOrder="11">
+      <property name="vy" value="1.0"/>
+      <property name="vx" value="0.2"/>
+      <property name="strength" value="1.0"/>
+      <property name="rotationSpeed" value="0.8"/>
+    </actor>
+    <actor costume="java-0" x="87" y="426" direction="0.0" heading="0.0" startEvent="default" zOrder="12">
+      <property name="vy" value="1.1"/>
+      <property name="vx" value="0.1"/>
+      <property name="strength" value="1.0"/>
+      <property name="rotationSpeed" value="0.9"/>
+    </actor>
+  </layer>
+  <layer name="hud">
+    <text text="which is written in Java." font="Vera" size="26" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="392" y="26" direction="0.0" heading="0.0" startEvent="default" zOrder="0">
+      <makeup classname="uk.co.nickthecoder.itchy.makeup.Textured">
+        <property name="poseName" value="texture1"/>
+        <property name="y" value="0"/>
+        <property name="x" value="0"/>
+      </makeup>
+    </text>
+    <text text="The trcky code is in the game engine, &quot;Itchy&quot;" font="Vera" size="26" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="387" y="59" direction="0.0" heading="0.0" startEvent="default" zOrder="1">
+      <makeup classname="uk.co.nickthecoder.itchy.makeup.Textured">
+        <property name="poseName" value="texture1"/>
+        <property name="y" value="0"/>
+        <property name="x" value="0"/>
+      </makeup>
+    </text>
+  </layer>
+</scene>

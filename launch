@@ -3,13 +3,12 @@
 # Find the base directory
 pushd `dirname $0` > /dev/null
 BASE=`pwd -P`
+LIB=${BASE}/build/install/itchy/lib
 popd > /dev/null
 
-NATIVE_DIR=${BASE}/lib/native/`uname -m`
-CLASSPATH=${BASE}/lib/itchy.jar:${BASE}/lib/jame.jar:${BASE}/lib/jython-2.5.3.jar:${BASE}/lib/groovy-all-2.3.6.jar
+NATIVE_DIR=${BASE}/build/libs/native/linux_`uname -m`
+CLASSPATH=${LIB}/itchy-0.4.jar:${LIB}/jame-1.1.jar:${LIB}/jython-standalone-2.5.2.jar
 MAIN=uk.co.nickthecoder.itchy.Launcher
-
-java -Ditchy.base="${BASE}" -Djava.library.path="${NATIVE_DIR}" -classpath "${CLASSPATH}" "${MAIN}" "$@"
 
 #
 # Register ".itchy" files, so that games can be run by double clicking their ".itchy" file.
@@ -25,3 +24,6 @@ if [[ "${BASE}/resources/Launcher/template.desktop" -nt "${BASE}/resources/Launc
     xdg-desktop-menu install --mode user "${BASE}/resources/Launcher/nickthecoder-itchy.desktop" > /dev/null 2>&1
     xdg-mime default nickthecoder.itchy.desktop application/x-itchy  > /dev/null 2>&1
 fi
+
+java -Ditchy.base="${BASE}" -Djava.library.path="${NATIVE_DIR}" -classpath "${CLASSPATH}" "${MAIN}" "$@"
+

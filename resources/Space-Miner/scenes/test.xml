@@ -1,0 +1,69 @@
+<scene showMouse="false" role="play.py" background="#00000000">
+  <properties>
+    <property name="nextScene" value="completed"/>
+  </properties>
+  <layer name="main">
+    <actor costume="stars2" x="400" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="0"/>
+    <actor costume="rock1" x="91" y="452" direction="0.0" heading="0.0" startEvent="default" zOrder="0">
+      <property name="vy" value="0.0"/>
+      <property name="vx" value="0.0"/>
+      <property name="strength" value="1.0"/>
+      <property name="rotationSpeed" value="0.0"/>
+    </actor>
+    <actor costume="python-a" x="389" y="538" direction="0.0" heading="0.0" startEvent="default" zOrder="0">
+      <property name="vy" value="0.0"/>
+      <property name="vx" value="0.0"/>
+      <property name="strength" value="1.0"/>
+      <property name="rotationSpeed" value="0.0"/>
+    </actor>
+    <actor costume="scala-a" x="264" y="537" direction="0.0" heading="0.0" startEvent="default" zOrder="0">
+      <property name="vy" value="0.0"/>
+      <property name="vx" value="0.0"/>
+      <property name="strength" value="1.0"/>
+      <property name="rotationSpeed" value="0.0"/>
+    </actor>
+    <actor costume="kotlin-a" x="541" y="524" direction="0.0" heading="0.0" startEvent="default" zOrder="0">
+      <property name="vy" value="0.0"/>
+      <property name="vx" value="0.0"/>
+      <property name="strength" value="1.0"/>
+      <property name="rotationSpeed" value="0.0"/>
+    </actor>
+    <actor costume="rock2" x="69" y="281" direction="0.0" heading="0.0" startEvent="default" zOrder="0">
+      <property name="vy" value="0.0"/>
+      <property name="vx" value="0.0"/>
+      <property name="strength" value="1.0"/>
+      <property name="rotationSpeed" value="0.0"/>
+    </actor>
+    <actor costume="groovy-a" x="77" y="152" direction="0.0" heading="0.0" startEvent="default" zOrder="0">
+      <property name="vy" value="0.0"/>
+      <property name="vx" value="0.0"/>
+      <property name="strength" value="1.0"/>
+      <property name="rotationSpeed" value="0.0"/>
+    </actor>
+    <actor costume="java-0" x="400" y="76" direction="0.0" heading="0.0" startEvent="default" zOrder="0">
+      <property name="vy" value="0.0"/>
+      <property name="vx" value="0.0"/>
+      <property name="strength" value="1.0"/>
+      <property name="rotationSpeed" value="0.0"/>
+    </actor>
+    <actor costume="duke-0" x="687" y="513" direction="0.0" heading="0.0" startEvent="default" zOrder="0">
+      <property name="vy" value="0.0"/>
+      <property name="vx" value="0.0"/>
+      <property name="strength" value="1.0"/>
+      <property name="rotationSpeed" value="0.0"/>
+    </actor>
+    <actor costume="key-arrows" x="668" y="311" direction="0.0" heading="0.0" startEvent="default" zOrder="0">
+      <property name="vy" value="0.0"/>
+      <property name="vx" value="0.0"/>
+      <property name="strength" value="1.0"/>
+      <property name="rotationSpeed" value="0.0"/>
+    </actor>
+    <actor costume="ship1" x="373" y="295" direction="-52.76516601842534" heading="-52.76516601842534" startEvent="default" zOrder="1"/>
+    <actor costume="keys-zx" x="677" y="175" direction="0.0" heading="0.0" startEvent="default" zOrder="2">
+      <property name="vy" value="0.0"/>
+      <property name="vx" value="0.0"/>
+      <property name="strength" value="1.0"/>
+      <property name="rotationSpeed" value="0.0"/>
+    </actor>
+  </layer>
+</scene>

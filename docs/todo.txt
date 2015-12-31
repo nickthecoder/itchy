@@ -2,10 +2,23 @@ Resize Editor windows
 	SceneDesigner doesn't resize correctly
 	Enter SceneDesigner then back to Editor, resize doesn't work.
 
-Bugs
+BUGS
+====
 
-	GroovyRain z-order of wally and player are wrong. 
-    ithrust 2nd level collision detection of ship fails.
+SceneButton not in the list of Roles when starting a new project.
+    
+No error message when there are no fonts, and the user tries to add text to the scene design.
+
+The control handles still exist when not visible, and throw an exception when dragged.
+
+ZOrder buttons don't work/work the wrong way round.
+
+Keyboard shortcuts not working in the scene designer.
+
+
+GroovyRain z-order of wally and player are wrong. 
+
+ithrust 2nd level collision detection of ship fails.
     
     RootContainers sometimes have a view which is bigger than the rootContainer, and rootContainer is not at 0,0 of the view.
     Editor's root container is one - and any others that use "center".
@@ -87,6 +100,53 @@ Use gradle instead of ant?
 
 Try to use eclipse as the editor for a project not hosted within the itchy project.
     Maybe move rox out of itchy.
+
+Rename warp and gate to wormHole and exit
+
+    More characters :
+        Machines - convert rocks to balloons etc
+        Local worm hole
+        Keys and whatever they unlock
+            local worm holes (padlock symbol in front of a closed gate)
+            
+        Sideways runner that can explode grenades
+        Eggs - hatches into ??? when dropped
+        More than one Player, Tab to cycle through them.
+            Weaker than the normal one - can't lift or push rocks.
+
+    Remove the old warpRoom, and the old tutorial-* and level-*
+
+    Remove Rox from Itchy
+        Maybe create a milestone or something in git, so that I can get it back easily.    
+
+    Zoom in/out : Scale all GridRole objects. Care needed if/when creating new objects.
+
+    Have a music layer, which has notes at each point. When an object moves over it, call that note's event to play the note.
+        When a player stays one square, continue to play the square's note(s)
+            The player has events, and the squares have event names. Use animations to control the sequence of notes played?
+                Use the player's animations, but animate the Note object so that it doesn't interfere with the player's normal animation.
+        Can have a high tempo piece whenever you hover on a "dangerous" or important square.
+        Different characters will play different samples (but of the same basic note).
+        The "correct" way through the puzzle should always sound harmonious
+        Have set riffs, which can be played in different keys.
+            While moving across a same-key field, it will sound like "Bah-Bah-Bah-Bah" for each square walked.
+            Then when you stand still, the riff continues "Bah-da-da-da-Bah-da-da".
+        Some square are silent.
+        The square knows the name of the note, but the level know the instrument to use. The sample to use if "$instrument-$note".
+        Some music squares can change the instrument too. From and To at choke points
+        Use the editor's strings to define the riffs??
+        Would be nice to have a visual representation of the music squares values.
+            Use Makeup to achieve this?
+            Can use colour to denote the note - hue for A-G and saturation/brightness for the octave. Background pattern for the instrument.
+        Put the music in the grid at the same time as the GridRoles.
+        Use classic songs for some obvious-ish pathways.
+
+Inputs
+    Use in iThrust
+
+See KeyInput - there is no super modifier, therefore KeyInput should not have it either.
+
+Rebuild Jame on i686 and win32 and linux arm?
 
 Save an animation with delay/frames = 0 fails, but the error message throws an exception!!! - possibly Label's font not set
     Catch the exception rather than let it crash the system

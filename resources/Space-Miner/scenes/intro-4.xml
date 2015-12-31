@@ -1,0 +1,44 @@
+<scene showMouse="false" role="play.py" background="#00000000">
+  <properties>
+    <property name="nextScene" value="intro-5"/>
+  </properties>
+  <layer name="main">
+    <actor costume="stars2" x="400" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="0"/>
+    <actor costume="duke-0" x="135" y="287" direction="0.0" heading="0.0" startEvent="default" zOrder="11">
+      <property name="vy" value="1.0"/>
+      <property name="vx" value="0.2"/>
+      <property name="strength" value="1.0"/>
+      <property name="rotationSpeed" value="0.8"/>
+    </actor>
+    <actor costume="java-0" x="87" y="426" direction="0.0" heading="0.0" startEvent="default" zOrder="12">
+      <property name="vy" value="1.1"/>
+      <property name="vx" value="0.1"/>
+      <property name="strength" value="1.0"/>
+      <property name="rotationSpeed" value="0.9"/>
+    </actor>
+    <actor costume="ship2" x="452" y="184" direction="90.0" heading="90.0" startEvent="default" zOrder="13"/>
+  </layer>
+  <layer name="hud">
+    <text text="Press &quot;2&quot; to select the rocket launcher" font="Vera" size="26" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="390" y="59" direction="0.0" heading="0.0" startEvent="default" zOrder="0">
+      <makeup classname="uk.co.nickthecoder.itchy.makeup.Textured">
+        <property name="poseName" value="texture1"/>
+        <property name="y" value="0"/>
+        <property name="x" value="0"/>
+      </makeup>
+    </text>
+    <text text="Here's a new ship, with a bigger gun." font="Vera" size="26" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="389" y="96" direction="0.0" heading="0.0" startEvent="default" zOrder="1">
+      <makeup classname="uk.co.nickthecoder.itchy.makeup.Textured">
+        <property name="poseName" value="texture1"/>
+        <property name="y" value="0"/>
+        <property name="x" value="0"/>
+      </makeup>
+    </text>
+    <text text="Press &quot;1&quot; to return to the puny rifle" font="Vera" size="26" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="392" y="20" direction="0.0" heading="0.0" startEvent="default" zOrder="3">
+      <makeup classname="uk.co.nickthecoder.itchy.makeup.Textured">
+        <property name="poseName" value="texture1"/>
+        <property name="y" value="0"/>
+        <property name="x" value="0"/>
+      </makeup>
+    </text>
+  </layer>
+</scene>
