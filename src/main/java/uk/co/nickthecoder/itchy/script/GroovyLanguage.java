@@ -47,6 +47,12 @@ public class GroovyLanguage extends ScriptLanguage
     }
     
     @Override
+    public void reload()
+    {
+    	// TODO Implement reload for groovy
+    }
+    
+    @Override
     public void loadScript( String filename )
         throws ScriptException
     {

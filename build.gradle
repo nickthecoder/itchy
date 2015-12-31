@@ -22,6 +22,7 @@ dependencies {
     //compile 'uk.co.nickthecoder:jame-native-win32:1.1'
     compile 'junit:junit:4.12'
     compile 'org.python:jython-standalone:2.5.2'
+    compile 'org.codehaus.groovy:groovy-all:2.4.5'
 }
 
 // A horrible chunk of code which extracts the contents of the "native" jar files

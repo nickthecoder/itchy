@@ -70,38 +70,6 @@ public abstract class Companion extends AbstractRole
         this.pose = this.source.getCostume().getPose(poseName);
     }
 
-
-    /**
-     * Uses a different Costume, the costume is found by looking up 'companionType' within the source actor's costume, and using the result
-     * as a costume name.
-     * <p>
-     * For example, imagine we have a costume called "bigShip". Create a string within bigShip, named "bullet" with a value "redBullet". We
-     * can now create a bullet like so : <code>new Projectile( myBigShipActor ).companionCostume("bullet").createActor().activate();</code>
-     * 
-     * @param companionType
-     *        The name of the string within the source actors costume. This is NOT the name of a costume!
-     * 
-     * @return this
-     * @throws NullPointerException
-     *         if the costume is not found.
-     */
-    public T companion( String companionType )
-    {
-        Costume costume = this.source.getCostume().getCompanion(companionType);
-        
-        if (costume == null) {
-            // Fall back to the old-fashioned way of doing it.
-            costume = Itchy.getGame().resources.getCompanionCostume(this.source.getCostume(),companionType);
-        }
-        
-        if (costume == null) {
-            throw new NullPointerException();
-        }
-
-        costume(costume);
-        return this.me;
-    }
-
     /**
      * Creates a new Actor on the same stage as the source actor.
      * 
@@ -149,6 +117,7 @@ public abstract class Companion extends AbstractRole
         {
             return this.companion;
         }
+
 
         public Role getRole()
         {
@@ -205,9 +174,12 @@ public abstract class Companion extends AbstractRole
          */
         public B companion( String companionType )
         {
-            Costume costume = Itchy.getGame().resources.getCompanionCostume(
-                this.companion.source.getCostume(),
-                companionType);
+            Costume costume = this.companion.source.getCostume().getCompanion(companionType);
+            
+            if (costume == null) {
+                // Fall back to the old-fashioned way of doing it.
+                costume = Itchy.getGame().resources.getCompanionCostume(this.companion.source.getCostume(),companionType);
+            }
 
             if (costume == null) {
                 throw new NullPointerException();
