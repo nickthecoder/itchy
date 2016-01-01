@@ -15,8 +15,11 @@ import javax.script.ScriptException;
 import uk.co.nickthecoder.itchy.CostumeProperties;
 import uk.co.nickthecoder.itchy.Director;
 import uk.co.nickthecoder.itchy.Itchy;
+import uk.co.nickthecoder.itchy.PlainDirector;
+import uk.co.nickthecoder.itchy.PlainSceneDirector;
 import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.SceneDirector;
+import uk.co.nickthecoder.itchy.role.PlainRole;
 import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.itchy.util.Util;
 
@@ -29,13 +32,8 @@ public abstract class ScriptLanguage
     public ScriptLanguage( ScriptManager manager )
     {
         this.manager = manager;
-        this.lastLoadedMap = new HashMap<ClassName, Long>();
-        
-        //TO DO if this works, then I don't need ensureInitialise
-        initialise();
+        this.lastLoadedMap = new HashMap<ClassName, Long>();        
     }
-
-    protected abstract void initialise();
 
     public abstract String getExtension();
 
@@ -85,6 +83,11 @@ public abstract class ScriptLanguage
     public abstract void loadScript( ClassName className, File file ) throws ScriptException;
     
 
+    protected ScriptException wrapException( Exception e )
+    {        
+        return new ScriptException( e );
+    }
+    
     public void handleException( Exception e )
     {
         e.printStackTrace();
@@ -155,20 +158,56 @@ public abstract class ScriptLanguage
     public abstract void setAttribute( Object inst, String name, Object value )
         throws ScriptException;
 
-    // ===== DIRECTOR =====
 
-    public abstract Director createDirector( ClassName className );
+    protected abstract Object createInstance( ClassName className ) throws Exception;
 
-    // ===== ROLE =====
+	
+    public Director createDirector( ClassName className )
+    {
+        try {
+            Director director = (Director) createInstance( className );
+            return director;
+            
+        } catch (Exception e) {
+            handleException("Creating Director", e);
+            return new PlainDirector();
+        }
+    }
 
-    public abstract Role createRole( ClassName className );
+    public Role createRole( ClassName className )
+    {
+        try {
+            Role role= (Role) createInstance( className );
+            return role;
 
-    // ===== SCENE DIRECTOR=====
+        } catch (Exception e) {
+            handleException("Creating Role", e);
+            return new PlainRole();
+        }
+    }
 
-    public abstract SceneDirector createSceneDirector( ClassName className );
+    public SceneDirector createSceneDirector( ClassName className )
+    {
+        try {
+        	SceneDirector sceneDirector = (SceneDirector) createInstance( className );
+            return sceneDirector;
 
-    // ====== COSTUME PROPERTIES =====
+        } catch (Exception e) {
+            handleException("Creating SceneDirector", e);
+            return new PlainSceneDirector();
+        }
+    }
 
-    public abstract CostumeProperties createCostumeProperties( ClassName className );
+    public CostumeProperties createCostumeProperties( ClassName className )
+    {
+        try {
+        	CostumeProperties costumeProperties = (CostumeProperties) createInstance( className );
+            return costumeProperties;
+
+        } catch (Exception e) {
+            handleException("Creating CostumeProperties", e);
+            return new CostumeProperties();
+        }
+    }
 
 }

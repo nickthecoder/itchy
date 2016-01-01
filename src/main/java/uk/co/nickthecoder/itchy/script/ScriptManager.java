@@ -138,7 +138,6 @@ public class ScriptManager
     
     public File getIncludeDirectory( ScriptLanguage language )
     {
-        // resources/scripts/${LANGUAGE-EXTENSION}/
         File directory = new File(Itchy.getResourcesDirectory(),
             "scripts" + File.separator + language.getExtension());
         

@@ -22,19 +22,11 @@ import org.python.core.PyProxy;
 import org.python.core.PyString;
 import org.python.util.PythonInterpreter;
 
-import uk.co.nickthecoder.itchy.CostumeProperties;
-import uk.co.nickthecoder.itchy.Director;
 import uk.co.nickthecoder.itchy.Game;
-import uk.co.nickthecoder.itchy.PlainDirector;
-import uk.co.nickthecoder.itchy.PlainSceneDirector;
-import uk.co.nickthecoder.itchy.Role;
-import uk.co.nickthecoder.itchy.SceneDirector;
-import uk.co.nickthecoder.itchy.role.PlainRole;
 import uk.co.nickthecoder.itchy.util.ClassName;
 
 public class PythonLanguage extends ScriptLanguage
 {
-
     PythonInterpreter interpreter;
 
     private Map<ClassName, PyObject> classes;
@@ -42,10 +34,10 @@ public class PythonLanguage extends ScriptLanguage
     public PythonLanguage( ScriptManager manager )
     {
         super(manager);
+        initialise();
     }
 
-    @Override
-    protected void initialise()
+    private final void initialise()
     {
     	this.classes = new HashMap<ClassName, PyObject>();
         Properties properties = new Properties();
@@ -58,12 +50,12 @@ public class PythonLanguage extends ScriptLanguage
         this.interpreter = new PythonInterpreter();
     }
 
-    public void unload()
+    @Override
+    public String getExtension()
     {
-    	super.unload();
-        interpreter.exec("import sys\nsys.modules.clear()");
-        initialise();
+        return "py";
     }
+
     
     @Override
     public void loadScript( ClassName className, File file )
@@ -73,32 +65,31 @@ public class PythonLanguage extends ScriptLanguage
         String klassName = name.substring(0, 1).toUpperCase() + name.substring(1);
 
         try {
-        	System.out.println( "from " + name + " import " + klassName );
             this.interpreter.exec("from " + name + " import " + klassName);
             PyObject jythonClass = this.interpreter.get(klassName);
-            System.out.println( "Loaded class " + jythonClass );
             this.classes.put(className, jythonClass);            
         } catch (Exception e) {
             throw wrapException(e);
         }
     }
 
-    ScriptException wrapException( Exception e )
+    public void unload()
+    {
+    	super.unload();
+        interpreter.exec("import sys\nsys.modules.clear()");
+        initialise();
+    }
+    
+    protected ScriptException wrapException( Exception e )
     {
         if (e instanceof PyException) {
             PyException pe = (PyException) e;
             return new WrappedScriptException( pe, pe.value.toString() );
         }
         
-        return new ScriptException( e );
+        return super.wrapException( e );
     }
     
-    @Override
-    public String getExtension()
-    {
-        return "py";
-    }
-
     @Override
     public boolean isInstance( Object inst )
     {
@@ -153,70 +144,17 @@ public class PythonLanguage extends ScriptLanguage
         this.interpreter.set("director", game.getDirector());
         this.interpreter.set("sceneDirector", game.getSceneDirector());
     }
-
-    private PyObject getClass( ClassName className )
+    
+    protected Object createInstance( ClassName className )
+    	throws Exception
     {
-        return this.classes.get(className);
+    	if (!this.classes.containsKey(className)) {
+            this.loadScript(className);    		
+    	}
+    	
+        ensureGlobals();
+
+        PyObject instance = this.classes.get(className).__call__();
+        return instance.__tojava__(className.baseClass);
     }
-
-    @Override
-    public Director createDirector( ClassName className )
-    {
-        try {
-            ensureGlobals();
-            this.loadScript(className);
-            PyObject instance = getClass(className).__call__();
-            return (Director) instance.__tojava__(Director.class);
-
-        } catch (Exception e) {
-            handleException("Creating Director", e);
-            return new PlainDirector();
-        }
-    }
-
-    @Override
-    public Role createRole( ClassName className )
-    {
-        try {
-            ensureGlobals();
-            this.loadScript(className);
-            PyObject instance = getClass(className).__call__();
-            return (Role) instance.__tojava__(Role.class);
-
-        } catch (Exception e) {
-            handleException("Creating Role", e);
-            return new PlainRole();
-        }
-    }
-
-    @Override
-    public SceneDirector createSceneDirector( ClassName className )
-    {
-        try {
-            ensureGlobals();
-            this.loadScript(className);
-            PyObject instance = getClass(className).__call__();
-            return (SceneDirector) instance.__tojava__(SceneDirector.class);
-
-        } catch (Exception e) {
-            handleException("Creating SceneDirector", e);
-            return new PlainSceneDirector();
-        }
-    }
-
-    @Override
-    public CostumeProperties createCostumeProperties( ClassName className )
-    {
-        try {
-            ensureGlobals();
-            this.loadScript(className);
-            PyObject instance = getClass(className).__call__();
-            return (CostumeProperties) instance.__tojava__(CostumeProperties.class);
-
-        } catch (Exception e) {
-            handleException("Creating CostumeProperties", e);
-            return new CostumeProperties();
-        }
-    }
-
 }

@@ -13,13 +13,6 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.script.ScriptException;
 
-import uk.co.nickthecoder.itchy.CostumeProperties;
-import uk.co.nickthecoder.itchy.Director;
-import uk.co.nickthecoder.itchy.PlainDirector;
-import uk.co.nickthecoder.itchy.PlainSceneDirector;
-import uk.co.nickthecoder.itchy.Role;
-import uk.co.nickthecoder.itchy.SceneDirector;
-import uk.co.nickthecoder.itchy.role.PlainRole;
 import uk.co.nickthecoder.itchy.util.ClassName;
 
 public class GroovyLanguage extends ScriptLanguage
@@ -32,28 +25,22 @@ public class GroovyLanguage extends ScriptLanguage
     public GroovyLanguage( ScriptManager manager )
     {
         super(manager);
+        initialise();
     }
 
-    @Override
-    protected void initialise()
+    private final void initialise()
     {
     	this.classes = new HashMap<ClassName, Class<?>>();
         ClassLoader parent = getClass().getClassLoader();
         this.groovyClassLoader = new GroovyClassLoader(parent);
     }
-    
-    ScriptException wrapException( Exception e )
-    {        
-        return new ScriptException( e );
-    }
-    
-    @Override
-    public void unload()
-    {
-    	super.unload();
-    	this.initialise();
-    }
 
+    @Override
+    public String getExtension()
+    {
+        return "groovy";
+    }
+    
     @Override
     public void loadScript( ClassName className, File file )
 		throws ScriptException
@@ -68,9 +55,10 @@ public class GroovyLanguage extends ScriptLanguage
     }
 
     @Override
-    public String getExtension()
+    public void unload()
     {
-        return "groovy";
+    	super.unload();
+    	this.initialise();
     }
 
     /**
@@ -102,69 +90,16 @@ public class GroovyLanguage extends ScriptLanguage
     	throw new ScriptException( "Groovy objects should not be treated as special; do not call setAttribute");
     }
 
-    private Class<?> getClass( ClassName className )
-    {
-        return this.classes.get(className);
-    }
-
     protected Object createInstance( ClassName className )
     	throws Exception
     {
-        this.loadScript(className);
-        Class<?> klass = getClass(className);
+    	
+        if ( ! this.classes.containsKey(className) ) {
+        	this.loadScript(className);
+        }
+        
+        Class<?> klass = this.classes.get(className);
         return klass.newInstance();
     }
     
-    @Override
-    public Director createDirector( ClassName className )
-    {
-        try {
-            Director director = (Director) createInstance( className );
-            return director;
-            
-        } catch (Exception e) {
-            handleException("Creating Director", e);
-            return new PlainDirector();
-        }
-    }
-
-    @Override
-    public Role createRole( ClassName className )
-    {
-        try {
-            Role role= (Role) createInstance( className );
-            return role;
-
-        } catch (Exception e) {
-            handleException("Creating Role", e);
-            return new PlainRole();
-        }
-    }
-
-    @Override
-    public SceneDirector createSceneDirector( ClassName className )
-    {
-        try {
-        	SceneDirector sceneDirector = (SceneDirector) createInstance( className );
-            return sceneDirector;
-
-        } catch (Exception e) {
-            handleException("Creating SceneDirector", e);
-            return new PlainSceneDirector();
-        }
-    }
-
-    @Override
-    public CostumeProperties createCostumeProperties( ClassName className )
-    {
-        try {
-        	CostumeProperties costumeProperties = (CostumeProperties) createInstance( className );
-            return costumeProperties;
-
-        } catch (Exception e) {
-            handleException("Creating CostumeProperties", e);
-            return new CostumeProperties();
-        }
-    }
-
 }
