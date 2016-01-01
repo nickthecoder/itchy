@@ -166,6 +166,11 @@ public class Game
     private boolean testing;
 
     /**
+     * Set when the game is running, both normally and when testing a scene from the scene designer.
+     */
+    protected boolean running = false;
+
+    /**
      * Defines how GUI components look, such as the images/textures used for the controls, their margins etc.
      */
     private Stylesheet stylesheet;
@@ -335,9 +340,10 @@ public class Game
         if (!StringUtils.isBlank(this.resources.getGameInfo().initialScene)) {
             startScene(this.resources.getGameInfo().initialScene);
         }
+        running = true;
         Itchy.mainLoop();
     }
-
+    
     /**
      * The same as {@link #start()}, but named scene is started instead of the default scene. This can be useful during development to jump
      * to a particular scene.
@@ -353,10 +359,15 @@ public class Game
             clear();
             startScene(sceneName);
         }
-
+        running = true;
         Itchy.mainLoop();
     }
 
+    public boolean isRunning()
+    {
+    	return this.running;
+    }
+    
     public void startEditor()
     {
         // If the editor has been started without the game being started (i.e. directly from the
@@ -886,6 +897,7 @@ public class Game
     public void end()
     {
         clear();
+        running = false;
         Itchy.endGame();
     }
 

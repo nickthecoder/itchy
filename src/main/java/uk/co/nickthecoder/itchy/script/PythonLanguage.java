@@ -4,6 +4,7 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.script;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -36,7 +37,7 @@ public class PythonLanguage extends ScriptLanguage
 
     PythonInterpreter interpreter;
 
-    private Map<String, PyObject> classes = new HashMap<String, PyObject>();
+    private Map<ClassName, PyObject> classes;
 
     public PythonLanguage( ScriptManager manager )
     {
@@ -46,6 +47,7 @@ public class PythonLanguage extends ScriptLanguage
     @Override
     protected void initialise()
     {
+    	this.classes = new HashMap<ClassName, PyObject>();
         Properties properties = new Properties();
         String path =
             this.manager.getScriptDirectory().getPath() + ":" +
@@ -56,32 +58,26 @@ public class PythonLanguage extends ScriptLanguage
         this.interpreter = new PythonInterpreter();
     }
 
-    public void reload()
+    public void unload()
     {
-        classes.clear();
+    	super.unload();
         interpreter.exec("import sys\nsys.modules.clear()");
         initialise();
     }
     
-
     @Override
-    public void loadScript( String filename )
+    public void loadScript( ClassName className, File file )
         throws ScriptException
     {
-        throw new ScriptException("Not Implemented");
-    }
-
-    @Override
-    public void loadScript( ClassName className )
-        throws ScriptException
-    {
-        String moduleName = ScriptManager.getName(className);
-        String klassName = moduleName.substring(0, 1).toUpperCase() + moduleName.substring(1);
+    	String name = ScriptManager.getName(className);
+        String klassName = name.substring(0, 1).toUpperCase() + name.substring(1);
 
         try {
-            this.interpreter.exec("from " + moduleName + " import " + klassName);
+        	System.out.println( "from " + name + " import " + klassName );
+            this.interpreter.exec("from " + name + " import " + klassName);
             PyObject jythonClass = this.interpreter.get(klassName);
-            this.classes.put(className.name, jythonClass);            
+            System.out.println( "Loaded class " + jythonClass );
+            this.classes.put(className, jythonClass);            
         } catch (Exception e) {
             throw wrapException(e);
         }
@@ -160,7 +156,7 @@ public class PythonLanguage extends ScriptLanguage
 
     private PyObject getClass( ClassName className )
     {
-        return this.classes.get(className.name);
+        return this.classes.get(className);
     }
 
     @Override
@@ -168,7 +164,7 @@ public class PythonLanguage extends ScriptLanguage
     {
         try {
             ensureGlobals();
-            this.manager.loadScript(className);
+            this.loadScript(className);
             PyObject instance = getClass(className).__call__();
             return (Director) instance.__tojava__(Director.class);
 
@@ -183,7 +179,7 @@ public class PythonLanguage extends ScriptLanguage
     {
         try {
             ensureGlobals();
-            this.manager.loadScript(className);
+            this.loadScript(className);
             PyObject instance = getClass(className).__call__();
             return (Role) instance.__tojava__(Role.class);
 
@@ -198,7 +194,7 @@ public class PythonLanguage extends ScriptLanguage
     {
         try {
             ensureGlobals();
-            this.manager.loadScript(className);
+            this.loadScript(className);
             PyObject instance = getClass(className).__call__();
             return (SceneDirector) instance.__tojava__(SceneDirector.class);
 
@@ -213,7 +209,7 @@ public class PythonLanguage extends ScriptLanguage
     {
         try {
             ensureGlobals();
-            this.manager.loadScript(className);
+            this.loadScript(className);
             PyObject instance = getClass(className).__call__();
             return (CostumeProperties) instance.__tojava__(CostumeProperties.class);
 

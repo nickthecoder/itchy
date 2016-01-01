@@ -27,7 +27,7 @@ public class GroovyLanguage extends ScriptLanguage
 
 	GroovyClassLoader groovyClassLoader;
 
-    private Map<String, Class<?>> classes;
+    private Map<ClassName, Class<?>> classes;
 
     public GroovyLanguage( ScriptManager manager )
     {
@@ -37,7 +37,7 @@ public class GroovyLanguage extends ScriptLanguage
     @Override
     protected void initialise()
     {
-    	this.classes = new HashMap<String, Class<?>>();
+    	this.classes = new HashMap<ClassName, Class<?>>();
         ClassLoader parent = getClass().getClassLoader();
         this.groovyClassLoader = new GroovyClassLoader(parent);
     }
@@ -48,26 +48,20 @@ public class GroovyLanguage extends ScriptLanguage
     }
     
     @Override
-    public void reload()
+    public void unload()
     {
+    	super.unload();
     	this.initialise();
-    }
-    
-    @Override
-    public void loadScript( String filename )
-        throws ScriptException
-    {
-        throw new ScriptException("Not Implemented");
     }
 
     @Override
-    public void loadScript( ClassName className )
-        throws ScriptException
+    public void loadScript( ClassName className, File file )
+		throws ScriptException
     {
         try {
-        	Class<?> groovyClass = groovyClassLoader.parseClass(new File(this.manager.getScriptDirectory(),className.name));
+        	Class<?> groovyClass = groovyClassLoader.parseClass(file);
         	
-            this.classes.put(className.name, groovyClass);            
+            this.classes.put(className, groovyClass);            
         } catch (Exception e) {
             throw wrapException(e);
         }
@@ -110,13 +104,13 @@ public class GroovyLanguage extends ScriptLanguage
 
     private Class<?> getClass( ClassName className )
     {
-        return this.classes.get(className.name);
+        return this.classes.get(className);
     }
 
     protected Object createInstance( ClassName className )
     	throws Exception
     {
-        this.manager.loadScript(className);
+        this.loadScript(className);
         Class<?> klass = getClass(className);
         return klass.newInstance();
     }

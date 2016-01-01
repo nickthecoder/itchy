@@ -22,6 +22,8 @@ import uk.co.nickthecoder.itchy.util.TagMembership;
 
 public abstract class AbstractRole implements Role
 {
+	// TODO Remove annotation based properties for Role (and Director,SceneDirector?)
+	// They are only useful for Java based games, and I want to discourage those!
     private final static HashMap<Class<?>, List<AbstractProperty<Role, ?>>> allProperties = new HashMap<Class<?>, List<AbstractProperty<Role, ?>>>();
 
     private CollisionStrategy collisionStrategy = BruteForceCollisionStrategy.pixelCollision;

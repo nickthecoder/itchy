@@ -152,7 +152,6 @@ public class Resources extends Loadable
         ResourcesWriter writer = new ResourcesWriter(this);
         writer.write(file.getPath());
         // TODO Is this the best place to reload the scripts? (after resources are saved).
-        Itchy.getGame().scriptManager.reload();
     }
 
     @Override

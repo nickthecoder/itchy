@@ -1,28 +1,27 @@
-Resize Editor windows
-	SceneDesigner doesn't resize correctly
-	Enter SceneDesigner then back to Editor, resize doesn't work.
 
 BUGS
 ====
 
-SceneButton not in the list of Roles when starting a new project.
-    
 No error message when there are no fonts, and the user tries to add text to the scene design.
-
-The control handles still exist when not visible, and throw an exception when dragged.
 
 ZOrder buttons don't work/work the wrong way round.
 
 Keyboard shortcuts not working in the scene designer.
-
-
-GroovyRain z-order of wally and player are wrong. 
 
 ithrust 2nd level collision detection of ship fails.
     
     RootContainers sometimes have a view which is bigger than the rootContainer, and rootContainer is not at 0,0 of the view.
     Editor's root container is one - and any others that use "center".
     	Need RootContainers to change their view's position when they change size.
+
+Save an animation with delay/frames = 0 fails, but the error message throws an exception!!! - possibly Label's font not set
+    Catch the exception rather than let it crash the system
+    Fix the exception
+
+Trouble with undo/redo of null/blank values for colorize.
+
+New Features
+============
 
 Create Node interface
 	Stage and Actor implement it
@@ -58,29 +57,18 @@ Generic Hierarchy Node/ParentNode interface. Actors and Stages will be ParentNod
 				In fact, this will force GridLayouts to use the parent container's collection of children, rather than its own. 
 
 
+Sprite Sheet Pose
+    Allow multiple poses to be loaded from one image, and define the rectangle of each sub-image.
+
+Code Tidy Up
+============
+
 Rename one of the Button classes. ButtonRole
 
 Look at groovy and python game code, and try to simplify it.
 	Auto import itchy.* - also jame.* and/or jame.event.* ?
 	Make properties easy
 	Make CostumeProperties easier - Can we replace it with a simple HashMap? CostumeProperties never have any processing in them.
-
-
-CollisionStrategy
-	Decide whether actor or role has one.
-	Don't call it directly from game code, call it via actor, or via role???
-	Have it create an iterator of possible actors rather than actors that ARE matching
-		So BruteForce will return ALL actors (excluding self)
-		Clever ones will only return those from overlapping squares.
-		Actor will then do the overlapping/colliding test.
-	Maybe also add a find nearest? Nbh will look in current square, then in surrounding squares and outwards.
-
-
-Companion hierarchy.
-    Z-Order - Is the default behaviour sensible now that Costumes have default Z-Orders?
-        If we ever select a different Costume (i.e. "companion" method) then we should use that costume's z-order if it has one.
-
-    Are the builders doing more than they should? Any processing should be done in Companion, not in the XXXBuilder
 
 Look at companion, it has font, font size and color. Why ????
     Check sub classes for get/set for font colour size etc. I think this is done now???
@@ -91,36 +79,20 @@ Talk and TalkProjectile
     Should talk use animations to fade and die or a constant, hard-wired fade?
     Do we need Talk.stop now that we have TalkProjectile? It was originally there, so that it wouldn't follow!
 
-Put builders on extras class diagram.
-
-Change all "copy" methods to clone???
-
-Use gradle instead of ant?
-    Use it in jame first???
-
-Try to use eclipse as the editor for a project not hosted within the itchy project.
-    Maybe move rox out of itchy.
-
-Rename warp and gate to wormHole and exit
-
-    More characters :
-        Machines - convert rocks to balloons etc
-        Local worm hole
-        Keys and whatever they unlock
-            local worm holes (padlock symbol in front of a closed gate)
-            
-        Sideways runner that can explode grenades
-        Eggs - hatches into ??? when dropped
-        More than one Player, Tab to cycle through them.
-            Weaker than the normal one - can't lift or push rocks.
-
-    Remove the old warpRoom, and the old tutorial-* and level-*
-
-    Remove Rox from Itchy
-        Maybe create a milestone or something in git, so that I can get it back easily.    
-
     Zoom in/out : Scale all GridRole objects. Care needed if/when creating new objects.
 
+See KeyInput - there is no super modifier, therefore KeyInput should not have it either.
+
+Should TextPose have a TextStyle, rather than individual attributes?
+
+Why have a Role interface if everything will end up using AbstractRole?
+    Why does Role have "birth" and yet everything uses onBirth() ? Ditto with other events.
+    At least make Role have the methods that people will actually use ie. onBirth rather than birth.
+    Actor could have any boilerplate code that is currently in AbstractRole.
+
+
+Rox Ideas
+=========
     Have a music layer, which has notes at each point. When an object moves over it, call that note's event to play the note.
         When a player stays one square, continue to play the square's note(s)
             The player has events, and the squares have event names. Use animations to control the sequence of notes played?
@@ -141,38 +113,9 @@ Rename warp and gate to wormHole and exit
         Put the music in the grid at the same time as the GridRoles.
         Use classic songs for some obvious-ish pathways.
 
-Inputs
-    Use in iThrust
 
-See KeyInput - there is no super modifier, therefore KeyInput should not have it either.
-
-Rebuild Jame on i686 and win32 and linux arm?
-
-Save an animation with delay/frames = 0 fails, but the error message throws an exception!!! - possibly Label's font not set
-    Catch the exception rather than let it crash the system
-    Fix the exception
-
-Should TextPose have a TextStyle, rather than individual attributes?
-
-Why have a Role interface if everything will end up using AbstractRole?
-    Why does Role have "birth" and yet everything uses onBirth() ? Ditto with other events.
-    At least make Role have the methods that people will actually use ie. onBirth rather than birth.
-    Actor could have any boilerplate code that is currently in AbstractRole.
-
-Rebuild Jame on i686, amd64, win32, arm32
-    Package jame and itchy
-
-
-Undo/Redo
-
-    Trouble with null/blank values for colorize.
-
-    Cut actor
-    Classname changes
-    Paste an Actor
-    Any other fields which don't use propertiesforms
-
-    Toolbar buttons
+Other Stuff
+===========
 
 SceneDesigner for Text
     In the toolbox, if a Costume has no "default" pose, but does have a "default" TextStyle, then it is text.
@@ -188,9 +131,6 @@ SceneDesigner for Text
     Have a "Reset to Costume Defaults", and a "Apply to Costume" buttons.
 
 
-Sprite Sheet Pose
-    Allow multiple poses to be loaded from one image, and define the rectangle of each sub-image.
-
 Group Costumes on the SceneDesigner's toolbox, so that similar costumes can be displayed as a single item.
     Clicking it reveals a popup, where the actual Costume can be selected.
     Use this for Pyrox's machines, one way streets, and maybe even the walls.
@@ -198,10 +138,6 @@ Group Costumes on the SceneDesigner's toolbox, so that similar costumes can be d
         main icon in the scene design toolbox. Similar impl as "costume base"
 
 SceneDesigner : select groups of actors, and move/delete them together.
-
-
-Unordered
-=========
 
 Dynamic class loader for game jar files, which live in resources/foo/lib/ or ./lib when outside of itchy's resources directory.
 
@@ -256,8 +192,6 @@ Joystick input devices.
 
 Optimise Explosion by using fixAppearance for projectiles which are turned, but won't rotate.
     maybe just add a fix boolean, and leave it up to the user to do it.
-
-check all code for this.[a-z 0-9]*\(, and remove the "this".
 
 Create a Compound Role, which has a ClassName array of other Roles
     It has one AbstractProperty, who's Component is a table with Add/Remove Up/Down buttons, and clicking on any row show the
@@ -334,16 +268,6 @@ A Gallery
     Import poses, costumes, fonts, animations etc from another game.
     Create a game just for this purpose.
 
-Is the special Map needed which allows scripted Costume properties to be retrieved from BeanHelper
-    Now we have ScriptedObject, isn't it better to have it done that way?
-    Would need a "set" version of the special code too.
-
-Scripted Behaviours can't detect MouseEvents.
-    The whole Layer as a MouseListener needs looking at.
-
-Text Costumes.
-    Buttons can have sounds and animations
-
 Get Thrust to run via "launch" without the resource symlinks to itchy.
     Need thrust's jar file to be in a lib directory within its resources, and for the jar to be loaded
     after java has started.
@@ -351,8 +275,6 @@ Get Thrust to run via "launch" without the resource symlinks to itchy.
 iThrust
 	Bucket to be more transparent
 	Water looks naff
-
-The stars on Drunk Invaders backgrounds should have more variation (alpha and slight colour - maybe size too).
 
 Component : Override all rules. Currently only Font can be overridden.
     Allow to be reset to default (i.e. be restyled).

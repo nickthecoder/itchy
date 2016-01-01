@@ -51,13 +51,6 @@ public class ScriptManager
         languageClassMap.put(extension, class1);
     }
 
-    public void reload()
-    {
-        for( ScriptLanguage language : languages.values()) {
-            language.reload();
-        }
-    }
-    
     public ScriptLanguage getLanguage( ClassName className )
     {
         return getLanguage(getExtension(className.name));
@@ -172,13 +165,6 @@ public class ScriptManager
         }
 
         return false;
-    }
-
-    public void loadScript( String filename )
-        throws ScriptException
-    {
-        ScriptLanguage language = getLanguage(getExtension(filename));
-        language.loadScript(filename);        
     }
     
     public void loadScript( ClassName className )

@@ -6,6 +6,7 @@ package uk.co.nickthecoder.itchy.script;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,13 +24,12 @@ public abstract class ScriptLanguage
 {
     public final ScriptManager manager;
 
-    protected HashMap<File, Long> lastLoadedMap;
+    protected HashMap<ClassName, Long> lastLoadedMap;
 
     public ScriptLanguage( ScriptManager manager )
     {
         this.manager = manager;
-        // TODO Not using this for Jython?
-        this.lastLoadedMap = new HashMap<File, Long>();
+        this.lastLoadedMap = new HashMap<ClassName, Long>();
         
         //TO DO if this works, then I don't need ensureInitialise
         initialise();
@@ -39,14 +39,51 @@ public abstract class ScriptLanguage
 
     public abstract String getExtension();
 
-    public abstract void reload();
+    /**
+     * Unloads all classes.
+     */
+    public void unload()
+    {
+    	this.lastLoadedMap.clear();
+    }
+    
+    public void loadScript( ClassName className )
+        throws ScriptException
+    {
+		File file = new File(this.manager.getScriptDirectory(), className.name);
+		
+		if ( ! file.exists() ) {
+			throw new ScriptException( "Script not found " + file );
+		}
+		
+		Long lastLoaded = lastLoadedMap.get( className );
+		
+		// Don't even TRY to reload while the game is running - bad things are bound to happen!
+		if ( ! this.manager.resources.game.isRunning() ) {
+			long lastModified = file.lastModified();
+			
+			if ( (lastLoaded != null) && ( lastModified > lastLoaded ) ) {
+				// The game isn't running, and the script has been changed, so lets unload everything
+				// so that we pick up the changes to the script.
+				unload();
+				lastLoaded = null;
+			}
+		}
+		
+		if ( lastLoaded == null ) {
+			loadScript( className, file );
+			lastLoadedMap.put( className, new Date().getTime() );
+		}
+    }
 
-    protected abstract void loadScript( ClassName className )
-        throws ScriptException;
-
-    protected abstract void loadScript( String filename )
-        throws ScriptException;
-
+    /**
+     * Load a script from the given file
+     * @param file
+     * @param name The name without the file extension. e.g. "PacMan" for groovy files, or "pacMan" for python files
+     * @throws ScriptException
+     */
+    public abstract void loadScript( ClassName className, File file ) throws ScriptException;
+    
 
     public void handleException( Exception e )
     {

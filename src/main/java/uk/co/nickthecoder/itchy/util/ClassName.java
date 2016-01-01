@@ -39,11 +39,16 @@ public class ClassName
     {
         return ScriptManager.isScript(this);
     }
-
+    
     @Override
     public String toString()
     {
         return this.baseClass + " : " + this.name;
     }
 
+    @Override
+    public int hashCode()
+    {
+    	return name.hashCode();
+    }
 }
