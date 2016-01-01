@@ -1,5 +1,9 @@
 <scene showMouse="true" role="Play.groovy" background="#00000000">
-  <properties/>
+  <properties>
+    <property name="speed" value="5"/>
+    <property name="maxSpeed" value="15"/>
+    <property name="speedUpAfter" value="10"/>
+  </properties>
   <layer name="main">
     <actor costume="background" x="0" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="1"/>
     <text text="Easy" font="Boycott" size="72" color="#401c00" xAlignment="0.5" yAlignment="0.5" x="384" y="559" direction="0.0" heading="0.0" startEvent="default" zOrder="2"/>
@@ -40,14 +44,14 @@
     <actor costume="drop1" x="231" y="1125" direction="0.0" heading="0.0" startEvent="default" zOrder="13">
       <property name="distance" value="600"/>
     </actor>
-    <actor costume="drop3" role="Drop.groovy" x="317" y="641" direction="0.0" heading="0.0" startEvent="default" zOrder="14">
+    <actor costume="drop3" x="317" y="641" direction="0.0" heading="0.0" startEvent="default" zOrder="14">
       <property name="distance" value="600"/>
     </actor>
-    <actor costume="drop3" role="Drop.groovy" x="160" y="985" direction="0.0" heading="0.0" startEvent="default" zOrder="15">
+    <actor costume="drop3" x="160" y="985" direction="0.0" heading="0.0" startEvent="default" zOrder="15">
       <property name="distance" value="600"/>
     </actor>
-    <actor costume="wally" x="-112" y="263" direction="0.0" heading="0.0" startEvent="default" zOrder="17" scale="1.2092457420924574" activationDelay="15.0"/>
     <text text="High Score" font="Boycott" size="35" color="#8f9688" xAlignment="0.5" yAlignment="0.5" x="704" y="570" direction="0.0" heading="0.0" startEvent="default" zOrder="18"/>
     <actor costume="player" x="448" y="22" direction="0.0" heading="0.0" startEvent="default" zOrder="19"/>
+    <actor costume="wally" x="-107" y="280" direction="0.0" heading="0.0" startEvent="default" zOrder="20" scale="1.2092457420924574" activationDelay="15.0"/>
   </layer>
 </scene>

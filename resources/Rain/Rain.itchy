@@ -176,10 +176,10 @@
     </animation>
   </animations>
   <costumes>
-    <costume name="background" defaultZOrder="0" order="0">
+    <costume name="background" defaultZOrder="0" order="0" showInDesigner="true">
       <pose name="default" pose="background"/>
     </costume>
-    <costume name="button" defaultZOrder="0" order="0">
+    <costume name="button" defaultZOrder="0" order="0" showInDesigner="true">
       <string name="default">Button</string>
       <sound name="hoverOver" sound="drip" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
       <font name="default" font="BlackCasper" fontSize="14" color="#ffffffff" xAlignment="0.5" yAlignment="0.5" marginTop="0" marginRight="0" marginBottom="0" marginLeft="0"/>
@@ -188,19 +188,19 @@
       <animation name="mouseDown" animation="mouseDown"/>
       <animation name="mouseUp" animation="mouseUp"/>
     </costume>
-    <costume name="drop1" defaultZOrder="0" order="0" role="Drop.groovy" properties="DropProperties.groovy">
+    <costume name="drop1" defaultZOrder="0" order="0" showInDesigner="true" role="Drop.groovy" properties="DropProperties.groovy">
       <pose name="default" pose="drop1"/>
       <pose name="droplet" pose="droplet1"/>
       <sound name="drip" sound="drip" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="PLAY_BOTH" priority="3"/>
       <properties speedFactor="1.0"/>
     </costume>
-    <costume name="drop2" defaultZOrder="0" order="0" role="Drop.groovy" properties="DropProperties.groovy">
+    <costume name="drop2" defaultZOrder="0" order="0" showInDesigner="true" role="Drop.groovy" properties="DropProperties.groovy">
       <pose name="default" pose="drop2"/>
       <pose name="default" pose="drop2b"/>
       <pose name="droplet" pose="droplet2"/>
       <properties speedFactor="0.75"/>
     </costume>
-    <costume name="drop3" defaultZOrder="0" order="0" role="Drop.groovy" properties="DropProperties.groovy">
+    <costume name="drop3" defaultZOrder="0" order="0" showInDesigner="true" role="Drop.groovy" properties="DropProperties.groovy">
       <pose name="default" pose="drop3"/>
       <pose name="droplet" pose="droplet3"/>
       <sound name="drip" sound="forFortyDays" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="PLAY_BOTH" priority="1"/>
@@ -211,20 +211,20 @@
       <sound name="drip" sound="myLordMyLord" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="PLAY_BOTH" priority="2"/>
       <properties speedFactor="1.2"/>
     </costume>
-    <costume name="player" defaultZOrder="0" order="0" role="Player.groovy">
+    <costume name="player" defaultZOrder="0" order="0" showInDesigner="true" role="Player.groovy">
       <pose name="bones" pose="sheepBones"/>
       <pose name="default" pose="sheep"/>
       <sound name="death" sound="ohLord" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="3"/>
       <sound name="highScore" sound="woo" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="2"/>
       <animation name="death" animation="death"/>
     </costume>
-    <costume name="speed" defaultZOrder="0" order="0" role="uk.co.nickthecoder.itchy.role.ProgressBar">
+    <costume name="speed" defaultZOrder="0" order="0" showInDesigner="true" role="uk.co.nickthecoder.itchy.role.ProgressBar">
       <pose name="default" pose="speed"/>
     </costume>
-    <costume name="speedV" defaultZOrder="0" order="0" role="uk.co.nickthecoder.itchy.role.ProgressBar">
+    <costume name="speedV" defaultZOrder="0" order="0" showInDesigner="true" role="uk.co.nickthecoder.itchy.role.ProgressBar">
       <pose name="default" pose="speedV"/>
     </costume>
-    <costume name="wally" defaultZOrder="0" order="0" role="Wally.groovy">
+    <costume name="wally" defaultZOrder="0" order="0" showInDesigner="true" role="Wally.groovy">
       <pose name="default" pose="wally3"/>
       <pose name="default" pose="wally4"/>
       <pose name="default" pose="wally5"/>
