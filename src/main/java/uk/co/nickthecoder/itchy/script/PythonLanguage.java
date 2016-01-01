@@ -7,19 +7,21 @@ package uk.co.nickthecoder.itchy.script;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Properties;
 
 import javax.script.ScriptException;
 
 import org.python.core.PyBoolean;
+import org.python.core.PyDictionary;
 import org.python.core.PyException;
 import org.python.core.PyFloat;
 import org.python.core.PyInteger;
+import org.python.core.PyList;
 import org.python.core.PyLong;
 import org.python.core.PyNone;
 import org.python.core.PyObject;
 import org.python.core.PyProxy;
 import org.python.core.PyString;
+import org.python.core.PySystemState;
 import org.python.util.PythonInterpreter;
 
 import uk.co.nickthecoder.itchy.util.ClassName;
@@ -39,18 +41,24 @@ public class PythonLanguage extends ScriptLanguage
     private final void initialise()
     {
     	this.classes = new HashMap<ClassName, PyObject>();
-        Properties properties = new Properties();
-        String path =
-            this.manager.getScriptDirectory().getPath() + ":" +
-                this.manager.getIncludeDirectory(this).getPath();
 
-        properties.setProperty("python.path", path);
-        PythonInterpreter.initialize(System.getProperties(), properties, new String[] {});
-        this.interpreter = new PythonInterpreter();
-        
+    	// Create a Python Interpreter with its own "path", and its own namespace
+    	// This ensures that one instance does not interfere with another, so
+    	// you can run one Game, then another without any name clashes.
+    	
+        PySystemState systemState = new PySystemState();
+        PyList pathList = new PyList();
+        pathList.add( this.manager.getScriptDirectory().getPath() );
+        pathList.add( this.manager.getIncludeDirectory(this).getPath() );
+        systemState.path = pathList;
+
+        PyDictionary namespace = new PyDictionary();
+        this.interpreter = new PythonInterpreter( namespace, systemState );
+
+    	// Set global variables
         this.interpreter.set("game", manager.resources.game);
     }
-
+    
     @Override
     public String getExtension()
     {
@@ -68,7 +76,6 @@ public class PythonLanguage extends ScriptLanguage
             this.interpreter.exec("from " + name + " import " + klassName);
             PyObject jythonClass = this.interpreter.get(klassName);
             this.classes.put(className, jythonClass);            
-            System.out.println( "Loaded jython script : " + file + " = " + jythonClass.hashCode() );
         } catch (Exception e) {
             throw wrapException(e);
         }

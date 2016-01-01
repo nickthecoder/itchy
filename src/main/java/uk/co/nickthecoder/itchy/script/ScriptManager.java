@@ -39,8 +39,6 @@ public class ScriptManager
     public ScriptManager( Resources resources )
     {
         this.resources = resources;
-
-        System.out.println( "Created a Script Manager " + this.hashCode() );
     }
 
     private static HashMap<String, ScriptLanguageFactory> getRegisteredFactories()
@@ -62,8 +60,7 @@ public class ScriptManager
     {
         ScriptLanguage result = this.languages.get(extension);
         if (result == null) {
-    		System.out.println( "Creating a ScriptLanguage for extension : " + extension );
-    		
+        	
             ScriptLanguageFactory factory = getRegisteredFactories().get(extension);
             if (factory == null) {
                 return null;
@@ -183,8 +180,6 @@ public class ScriptManager
     public Director createDirector( ClassName className )
         throws ScriptException
     {
-        System.out.println("Creating Director from SM " + this.hashCode() );
-
         ScriptLanguage language = getLanguage(getExtension(className.name));
 
         return language.createDirector(className);
