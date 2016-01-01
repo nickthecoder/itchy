@@ -5,7 +5,6 @@
 package uk.co.nickthecoder.itchy.script;
 
 import java.io.File;
-import java.lang.reflect.Constructor;
 import java.util.HashMap;
 
 import javax.script.ScriptException;
@@ -33,22 +32,25 @@ public class ScriptManager
 {
     public Resources resources;
 
-    private static HashMap<String, Class<ScriptLanguage>> languageClassMap = new HashMap<String, Class<ScriptLanguage>>();
+    private static HashMap<String, ScriptLanguageFactory> registeredFactories; 
 
     private HashMap<String, ScriptLanguage> languages = new HashMap<String, ScriptLanguage>();
 
-    @SuppressWarnings("unchecked")
     public ScriptManager( Resources resources )
     {
         this.resources = resources;
 
-        registerLanguage("py", (Class<ScriptLanguage>) (PythonLanguage.class.asSubclass(ScriptLanguage.class)));
-        registerLanguage("groovy", (Class<ScriptLanguage>) (GroovyLanguage.class.asSubclass(ScriptLanguage.class)));
+        System.out.println( "Created a Script Manager " + this.hashCode() );
     }
 
-    public static void registerLanguage( String extension, Class<ScriptLanguage> class1 )
+    private static HashMap<String, ScriptLanguageFactory> getRegisteredFactories()
     {
-        languageClassMap.put(extension, class1);
+        if (registeredFactories == null) {
+        	registeredFactories = new HashMap<String, ScriptLanguageFactory>();
+        	registeredFactories.put("py", new PythonFactory() );
+        	registeredFactories.put("groovy", new GroovyFactory() );
+        }
+        return registeredFactories;
     }
 
     public ScriptLanguage getLanguage( ClassName className )
@@ -60,19 +62,15 @@ public class ScriptManager
     {
         ScriptLanguage result = this.languages.get(extension);
         if (result == null) {
-
-            Class<ScriptLanguage> klass = languageClassMap.get(extension);
-            if (klass == null) {
+    		System.out.println( "Creating a ScriptLanguage for extension : " + extension );
+    		
+            ScriptLanguageFactory factory = getRegisteredFactories().get(extension);
+            if (factory == null) {
                 return null;
             }
 
-            try {
-                Constructor<ScriptLanguage> constructor = klass.getConstructor(ScriptManager.class);
-                result = constructor.newInstance(this);
-                this.languages.put(extension, result);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        	result = factory.create( this );
+        	this.languages.put(extension, result);
 
         }
 
@@ -116,7 +114,7 @@ public class ScriptManager
     {
         String extension = getExtension(name);
 
-        for (String registeredExtension : languageClassMap.keySet()) {
+        for (String registeredExtension : getRegisteredFactories().keySet()) {
             if (extension.equals(registeredExtension)) {
                 return isValidName(getName(name));
             }
@@ -166,6 +164,7 @@ public class ScriptManager
         return false;
     }
     
+    // TODO This is being used just once - others
     public void loadScript( ClassName className )
         throws ScriptException
     {
@@ -184,6 +183,8 @@ public class ScriptManager
     public Director createDirector( ClassName className )
         throws ScriptException
     {
+        System.out.println("Creating Director from SM " + this.hashCode() );
+
         ScriptLanguage language = getLanguage(getExtension(className.name));
 
         return language.createDirector(className);

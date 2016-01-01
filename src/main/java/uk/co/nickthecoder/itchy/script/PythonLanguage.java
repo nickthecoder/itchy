@@ -22,7 +22,6 @@ import org.python.core.PyProxy;
 import org.python.core.PyString;
 import org.python.util.PythonInterpreter;
 
-import uk.co.nickthecoder.itchy.Game;
 import uk.co.nickthecoder.itchy.util.ClassName;
 
 public class PythonLanguage extends ScriptLanguage
@@ -48,6 +47,8 @@ public class PythonLanguage extends ScriptLanguage
         properties.setProperty("python.path", path);
         PythonInterpreter.initialize(System.getProperties(), properties, new String[] {});
         this.interpreter = new PythonInterpreter();
+        
+        this.interpreter.set("game", manager.resources.game);
     }
 
     @Override
@@ -63,11 +64,11 @@ public class PythonLanguage extends ScriptLanguage
     {
     	String name = ScriptManager.getName(className);
         String klassName = name.substring(0, 1).toUpperCase() + name.substring(1);
-
         try {
             this.interpreter.exec("from " + name + " import " + klassName);
             PyObject jythonClass = this.interpreter.get(klassName);
             this.classes.put(className, jythonClass);            
+            System.out.println( "Loaded jython script : " + file + " = " + jythonClass.hashCode() );
         } catch (Exception e) {
             throw wrapException(e);
         }
@@ -135,15 +136,6 @@ public class PythonLanguage extends ScriptLanguage
             throw e;
         }
     }
-
-    private void ensureGlobals()
-        throws ScriptException
-    {
-        Game game = this.manager.resources.getGame();
-        this.interpreter.set("game", game);
-        this.interpreter.set("director", game.getDirector());
-        this.interpreter.set("sceneDirector", game.getSceneDirector());
-    }
     
     protected Object createInstance( ClassName className )
     	throws Exception
@@ -152,8 +144,6 @@ public class PythonLanguage extends ScriptLanguage
             this.loadScript(className);    		
     	}
     	
-        ensureGlobals();
-
         PyObject instance = this.classes.get(className).__call__();
         return instance.__tojava__(className.baseClass);
     }

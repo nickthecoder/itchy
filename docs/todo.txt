@@ -2,6 +2,11 @@
 BUGS
 ====
 
+Why is ScriptManager.loadScript used just once? Delete it?
+
+Run Space Miner then The Mings throws a weird exception.
+	Loading resources using the same ScriptManager? (the launcher's ?)
+
 No error message when there are no fonts, and the user tries to add text to the scene design.
 
 ZOrder buttons don't work/work the wrong way round.
