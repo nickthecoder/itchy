@@ -42,7 +42,6 @@ public class ScriptManager
     {
         this.resources = resources;
 
-        registerLanguage("js", (Class<ScriptLanguage>) (JavascriptLanguage.class.asSubclass(ScriptLanguage.class)));
         registerLanguage("py", (Class<ScriptLanguage>) (PythonLanguage.class.asSubclass(ScriptLanguage.class)));
         registerLanguage("groovy", (Class<ScriptLanguage>) (GroovyLanguage.class.asSubclass(ScriptLanguage.class)));
     }
