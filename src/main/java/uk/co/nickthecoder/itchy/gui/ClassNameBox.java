@@ -144,7 +144,7 @@ public class ClassNameBox extends PlainContainer
             } catch (ScriptException e) {
                 this.scriptManager.resources.errorLog.log(e.getMessage());
                 this.textBox.addStyle("error");
-                ScriptLanguage language = this.scriptManager.getLanguage(getClassName());
+                ScriptLanguage language = this.scriptManager.findLanguage(getClassName());
                 this.errorText.setText(language.simpleMessage(e, false));
                 this.errorText.setVisible(true);
             } catch (Exception e) {

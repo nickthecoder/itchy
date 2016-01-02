@@ -18,21 +18,21 @@ import uk.co.nickthecoder.itchy.SceneDirector;
 import uk.co.nickthecoder.itchy.util.ClassName;
 
 /**
- * Allows games to use script languages, such as javascript, for their game logic.
+ * Allows games to use script languages, such as python and groovy, for their game logic.
  * 
- * Subclasses of Role, SceneDirector, CostumeProperties and Game can all be coded in a scripting language.
+ * Subclasses of Director, SceneDirector, Role, CostumeProperties can all be coded in a scripting language.
  * 
- * All scripts are read from a "scripts" folder relative to the game's resources file. (i.e. resources/MY_GAME/scripts/). No further
- * sub-directories are supported.
+ * All scripts are read from a "scripts" folder relative to the game's resources file. (i.e. resources/MY_GAME/scripts/).
+ * Sub-directories are not supported.
  * 
- * At present, only Javascript is supported, but it should be simple to add others by subclassing ScriptLanguage and calling
- * ScriptManager.registerLanguage.
+ * At present, only python and groovy are supported, but adding others jvm based languages should be easy, and
+ * non-jvm languages, such as Javascript is possible, but will be slower and more of a kludge. 
  */
 public class ScriptManager
 {
     public Resources resources;
 
-    private static HashMap<String, ScriptLanguageFactory> registeredFactories; 
+    private static HashMap<String, ScriptLanguageFactory> registeredLanguages; 
 
     private HashMap<String, ScriptLanguage> languages = new HashMap<String, ScriptLanguage>();
 
@@ -41,27 +41,27 @@ public class ScriptManager
         this.resources = resources;
     }
 
-    private static HashMap<String, ScriptLanguageFactory> getRegisteredFactories()
+    private static HashMap<String, ScriptLanguageFactory> getRegisteredLanguages()
     {
-        if (registeredFactories == null) {
-        	registeredFactories = new HashMap<String, ScriptLanguageFactory>();
-        	registeredFactories.put("py", new PythonFactory() );
-        	registeredFactories.put("groovy", new GroovyFactory() );
+        if (registeredLanguages == null) {
+        	registeredLanguages = new HashMap<String, ScriptLanguageFactory>();
+        	registeredLanguages.put("py", new PythonFactory() );
+        	registeredLanguages.put("groovy", new GroovyFactory() );
         }
-        return registeredFactories;
+        return registeredLanguages;
     }
 
-    public ScriptLanguage getLanguage( ClassName className )
+    public ScriptLanguage findLanguage( ClassName className )
     {
-        return getLanguage(getExtension(className.name));
+        return findLanguageByExtension(getExtension(className.name));
     }
 
-    public ScriptLanguage getLanguage( String extension )
+    public ScriptLanguage findLanguageByExtension( String extension )
     {
         ScriptLanguage result = this.languages.get(extension);
         if (result == null) {
         	
-            ScriptLanguageFactory factory = getRegisteredFactories().get(extension);
+            ScriptLanguageFactory factory = getRegisteredLanguages().get(extension);
             if (factory == null) {
                 return null;
             }
@@ -82,6 +82,9 @@ public class ScriptManager
         return getName(className.name);
     }
 
+    /**
+     * Strips the file extension from the filename. (eg from Player.js to Player).
+     */
     public static String getName( String filename )
     {
         int dot = filename.lastIndexOf('.');
@@ -111,7 +114,7 @@ public class ScriptManager
     {
         String extension = getExtension(name);
 
-        for (String registeredExtension : getRegisteredFactories().keySet()) {
+        for (String registeredExtension : getRegisteredLanguages().keySet()) {
             if (extension.equals(registeredExtension)) {
                 return isValidName(getName(name));
             }
@@ -149,7 +152,7 @@ public class ScriptManager
 
     public boolean isValidScript( ClassName className )
     {
-        ScriptLanguage language = getLanguage( className );
+        ScriptLanguage language = findLanguage( className );
         if (language == null) {
             return false;
         }
@@ -161,26 +164,23 @@ public class ScriptManager
         return false;
     }
     
-    // TODO This is being used just once - others
     public void loadScript( ClassName className )
         throws ScriptException
-    {
-        String filename = className.name;
-        
-        ScriptLanguage language = getLanguage(getExtension(filename));
+    {        
+        ScriptLanguage language = findLanguage(className);
         language.loadScript(className);
     }
 
     public boolean createScript( String templateName, ClassName className )
     {
-        ScriptLanguage language = getLanguage(getExtension(className.name));
+        ScriptLanguage language = findLanguage(className);
         return language.createScript(templateName, className);
     }
 
     public Director createDirector( ClassName className )
         throws ScriptException
     {
-        ScriptLanguage language = getLanguage(getExtension(className.name));
+        ScriptLanguage language = findLanguage(className);
 
         return language.createDirector(className);
     }
@@ -188,7 +188,7 @@ public class ScriptManager
     public Role createRole( ClassName className )
         throws ScriptException
     {
-        ScriptLanguage language = getLanguage(getExtension(className.name));
+        ScriptLanguage language = findLanguage(className);
 
         return language.createRole(className);
     }
@@ -196,7 +196,7 @@ public class ScriptManager
     public SceneDirector createSceneDirector( ClassName className )
         throws ScriptException
     {
-        ScriptLanguage language = getLanguage(getExtension(className.name));
+        ScriptLanguage language = findLanguage(className);
 
         return language.createSceneDirector(className);
     }
@@ -204,7 +204,7 @@ public class ScriptManager
     public CostumeProperties createCostumeProperties( ClassName className )
         throws ScriptException
     {
-        ScriptLanguage language = getLanguage(getExtension(className.name));
+        ScriptLanguage language = findLanguage(className);
 
         return language.createCostumeProperties(className);
     }
