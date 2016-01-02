@@ -1,26 +1,16 @@
-import uk.co.nickthecoder.itchy.PlainSceneDirector
-import uk.co.nickthecoder.itchy.util.ClassName
-
-// TODO If your SceneDirector has properties, you'll need to import one or more of these...
-// import uk.co.nickthecoder.itchy.property.StringProperty
-// import uk.co.nickthecoder.itchy.property.IntegerProperty
-// import uk.co.nickthecoder.itchy.property.BooleanProperty
-// import uk.co.nickthecoder.itchy.property.DoubleProperty
-// import uk.co.nickthecoder.itchy.property.RGBAProperty
+import uk.co.nickthecoder.itchy.*
+import uk.co.nickthecoder.itchy.property.*
+import uk.co.nickthecoder.itchy.util.*
 
 public class ${Name} extends PlainSceneDirector
 {
-    protected static properties = new ArrayList()
-    /*{
-        // TODO declare properties here. Note that you should also initialise them in the constructor.
+    public static properties = new ArrayList()
+
+	static {
+		// TODO declare properties here. Note that you must also add a "def" for each one.
         // properties.add( new StringProperty( "myString" ) )
-        // properties.add( new IntegerProperty( "myInteger" ) )
-        // properties.add( new DoubleProperty( "myDouble" ) )
-        // properties.add( new BooleanProperty( "myBoolean" ) )
-        // properties.add( new RGBAProperty( "myColor" ).label( "My Colour" ) )
-        // properties.add( new RGBAProperty( "myOtherColor" ).allowNull().includeAlpha() )
-    }*/
-    
+    }
+
     // Constructor
     public ${Name}()
     {
@@ -46,7 +36,4 @@ public class ${Name} extends PlainSceneDirector
     {
         return new ClassName( CostumeProperties, "${NAME}.groovy" )
     }
-
 }
-
-

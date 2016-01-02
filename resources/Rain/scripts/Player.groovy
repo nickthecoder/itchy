@@ -54,9 +54,6 @@ class Player extends AbstractRole
     // Boiler plate code - no need to change this
     public ClassName getClassName()
     {
-        System.out.println( "Finding player's classname" );
-        return new ClassName( Role, "Player.groovy" )
+		return new ClassName( Role, "Player.groovy" )
     }
-    
 }
-

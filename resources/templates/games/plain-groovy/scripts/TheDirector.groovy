@@ -1,11 +1,10 @@
-import uk.co.nickthecoder.itchy.Director
-import uk.co.nickthecoder.itchy.AbstractDirector
-import uk.co.nickthecoder.itchy.util.ClassName
+import uk.co.nickthecoder.itchy.*
+import uk.co.nickthecoder.itchy.util.*
 
 public class TheDirector extends AbstractDirector
 {    
     // Constructor
-    public ${Name}()
+    public TheDirector()
     {
     }
         
@@ -20,6 +19,4 @@ public class TheDirector extends AbstractDirector
     {
         return new ClassName( Director, "${NAME}.groovy" )
     }
-
 }
-
