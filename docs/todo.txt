@@ -2,8 +2,6 @@
 BUGS
 ====
 
-search for "boolean key" and "boolean mouse", replace with void alternatives.
-
 No error message when there are no fonts, and the user tries to add text to the scene design.
 
 ZOrder buttons don't work/work the wrong way round.

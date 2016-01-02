@@ -5,6 +5,7 @@
 package uk.co.nickthecoder.itchy;
 
 import java.io.File;
+import java.util.Date;
 import java.util.Stack;
 
 import uk.co.nickthecoder.itchy.animation.Animations;
@@ -19,6 +20,7 @@ import uk.co.nickthecoder.jame.event.Event;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.Keys;
 import uk.co.nickthecoder.jame.event.MouseEvent;
+import uk.co.nickthecoder.jame.event.ResizeEvent;
 import uk.co.nickthecoder.jame.event.StopPropagation;
 
 /**
@@ -64,6 +66,8 @@ public class Itchy
     public static int keyboardRepeatDelay = Events.DEFAULT_REPEAT_DELAY;
 
     public static int keyboardRepeatInterval = Events.DEFAULT_REPEAT_INTERVAL;
+
+    private static long lastWindowResizeTime = 0;
 
     /**
      * The FrameRate is in charge of ensuring that the game runs at the correct speed, redrawing the screen at regular intervals
@@ -152,6 +156,7 @@ public class Itchy
     	Game game = currentGame;
     	
         setScreenMode( game.getTitle(), game.resources,  width, height, game.isResizable() );
+        lastWindowResizeTime = new Date().getTime();
     }
     
     /**
@@ -433,14 +438,27 @@ public class Itchy
     {
         return keyboardState[Keys.LMETA] || keyboardState[Keys.RMETA];
     }
-
+    
     /**
      * Processes a single event. Called from {@link #processEvents}.
      * @param event
      */
     private static void processEvent( Event event )
     {
-
+    	if (event instanceof ResizeEvent) {
+    		// Using Gnome 3.14.1, when a window border is dragged, the correct resize event is sent, but
+    		// then the window is resized, and ANOTHER resize event is fired which includes the
+    		// size of the chrome (title bar and borders). This bodge stops a runaway, where the window
+    		// is made higher and higher when dragging sideways. It does not completely fix the problem, but
+    		// makes it bearable.
+    		long diff = new Date().getTime() - lastWindowResizeTime;
+    		if ( diff < 500 ) {
+    			// Ignore the resize event which happens within 0.5 seconds of the window being resized.
+    			lastWindowResizeTime = 0;
+    			return;
+    		}
+    	}
+    	
         if (event instanceof KeyboardEvent) {
             KeyboardEvent ke = (KeyboardEvent) event;
 

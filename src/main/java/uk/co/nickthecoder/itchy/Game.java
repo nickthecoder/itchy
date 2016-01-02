@@ -552,8 +552,8 @@ public class Game
             Itchy.terminate();
 
         } else if (event instanceof ResizeEvent) {
-    		
-        	this.director.onResize( (ResizeEvent) event );
+        	ResizeEvent re = (ResizeEvent) event;
+			this.director.onResize( re );
         	
         } else if (event instanceof KeyboardEvent) {
             KeyboardEvent ke = (KeyboardEvent) event;
