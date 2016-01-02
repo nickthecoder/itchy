@@ -1,14 +1,4 @@
-from uk.co.nickthecoder.itchy import PlainSceneDirector
-from uk.co.nickthecoder.itchy.util import ClassName
-
-# TODO If your SceneDirector has properties, you'll need to import one or more of these...
-# from uk.co.nickthecoder.itchy.property import StringProperty
-# from uk.co.nickthecoder.itchy.property import IntegerProperty
-# from uk.co.nickthecoder.itchy.property import BooleanProperty
-# from uk.co.nickthecoder.itchy.property import DoubleProperty
-# from uk.co.nickthecoder.itchy.property import RGBAProperty
-
-from java.util import ArrayList
+from common import *
 
 properties = ArrayList()
 # TODO declare poroperties here. Note that you must also initialise them in __init__
@@ -23,8 +13,6 @@ class ${Name}(PlainSceneDirector) :
 
     def __init__(self) :
         # TODO Initialise your object.
-        # self.myString = "Default Value"
-        # self.myInteger = 0
         pass
     
     def tick(self) :

@@ -1,7 +1,4 @@
-from uk.co.nickthecoder.itchy import PlainSceneDirector
-from uk.co.nickthecoder.itchy.util import ClassName
-
-from java.util import ArrayList
+from common import *
 
 properties = ArrayList()
 

@@ -49,6 +49,7 @@ public class PythonLanguage extends ScriptLanguage
         PySystemState systemState = new PySystemState();
         PyList pathList = new PyList();
         pathList.add( this.manager.getScriptDirectory().getPath() );
+        System.out.println( "Adding path : " + this.manager.getIncludeDirectory(this).getPath() );
         pathList.add( this.manager.getIncludeDirectory(this).getPath() );
         systemState.path = pathList;
 
@@ -56,6 +57,7 @@ public class PythonLanguage extends ScriptLanguage
         this.interpreter = new PythonInterpreter( namespace, systemState );
 
     	// Set global variables
+        System.out.println( "Setting python game to " +  manager.resources.game );
         this.interpreter.set("game", manager.resources.game);
     }
     
@@ -73,6 +75,7 @@ public class PythonLanguage extends ScriptLanguage
     	String name = ScriptManager.getName(className);
         String klassName = name.substring(0, 1).toUpperCase() + name.substring(1);
         try {
+            this.interpreter.set("game", manager.resources.game);
             this.interpreter.exec("from " + name + " import " + klassName);
             PyObject jythonClass = this.interpreter.get(klassName);
             this.classes.put(className, jythonClass);            

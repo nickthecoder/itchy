@@ -1,15 +1,4 @@
-from uk.co.nickthecoder.itchy import Role
-from uk.co.nickthecoder.itchy import AbstractRole
-from uk.co.nickthecoder.itchy.util import ClassName
-
-# TODO If your Role uses properties, you'll need to import on or more of these...
-# from uk.co.nickthecoder.itchy.property import StringProperty
-# from uk.co.nickthecoder.itchy.property import IntegerProperty
-# from uk.co.nickthecoder.itchy.property import BooleanProperty
-# from uk.co.nickthecoder.itchy.property import DoubleProperty
-# from uk.co.nickthecoder.itchy.property import RGBAProperty
-
-from java.util import ArrayList
+from common import *
 
 properties = ArrayList()
 # TODO declare poroperties here. Note that you must also initialise them in __init__
@@ -23,9 +12,7 @@ properties = ArrayList()
 class ${Name}(AbstractRole) :
 
     def __init__(self) :
-        # TODO Initialise your object. Note you can't access self.getActor() yet. e.g. :
-        # self.myString = "Default Value"
-        # self.myInteger = 0
+        # TODO Initialise your object. Note you can't access self.getActor() yet.
         pass
         
     def onBirth(self):
