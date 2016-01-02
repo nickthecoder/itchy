@@ -2,13 +2,13 @@
   <properties/>
   <layer name="main">
     <actor costume="stars2" x="400" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="0"/>
-    <actor costume="python-a" x="695" y="186" direction="0.0" heading="0.0" startEvent="default" zOrder="62">
+    <actor costume="python-a" x="589" y="133" direction="0.0" heading="0.0" startEvent="default" zOrder="62">
       <property name="vy" value="-0.4"/>
       <property name="vx" value="0.8"/>
       <property name="strength" value="0.0"/>
       <property name="rotationSpeed" value="0.0"/>
     </actor>
-    <actor costume="duke-0" x="157" y="211" direction="0.0" heading="0.0" startEvent="default" zOrder="62">
+    <actor costume="duke-0" x="195" y="209" direction="0.0" heading="0.0" startEvent="default" zOrder="62">
       <property name="vy" value="3.0"/>
       <property name="vx" value="0.3"/>
       <property name="strength" value="1.0"/>
@@ -19,7 +19,6 @@
       <property name="vx" value="1.3"/>
       <property name="strength" value="1.0"/>
       <property name="rotationSpeed" value="-0.8"/>
-      <property name="impulse" value="0.0"/>
     </actor>
     <actor costume="python-a" x="96" y="326" direction="0.0" heading="0.0" startEvent="default" zOrder="64">
       <property name="vy" value="2.0"/>
@@ -27,22 +26,21 @@
       <property name="strength" value="1.0"/>
       <property name="rotationSpeed" value="1.0"/>
     </actor>
-    <actor costume="key-arrows" x="210" y="173" direction="0.0" heading="0.0" startEvent="default" zOrder="65">
+    <actor costume="key-arrows" x="313" y="72" direction="0.0" heading="0.0" startEvent="default" zOrder="65">
       <property name="vy" value="0.0"/>
       <property name="vx" value="0.0"/>
       <property name="strength" value="1.0"/>
       <property name="rotationSpeed" value="0.0"/>
     </actor>
-    <actor costume="keys-zx" x="574" y="166" direction="0.0" heading="0.0" startEvent="default" zOrder="66">
+    <actor costume="keys-zx" x="481" y="69" direction="0.0" heading="0.0" startEvent="default" zOrder="66">
       <property name="vy" value="0.0"/>
       <property name="vx" value="0.0"/>
       <property name="strength" value="1.0"/>
       <property name="rotationSpeed" value="0.0"/>
-      <property name="impulse" value="0.0"/>
     </actor>
   </layer>
   <layer name="hud">
-    <text text="Space Miner" font="BlackCasper" size="144" color="#d526db" xAlignment="0.5" yAlignment="0.5" costume="title" x="408" y="511" direction="0.0" heading="0.0" startEvent="slideInDown" zOrder="1" alpha="168.0" activationDelay="0.3">
+    <text text="Destroy Debris" font="BlackCasper" size="120" color="#d526db" xAlignment="0.5" yAlignment="0.5" costume="title" x="408" y="511" direction="0.0" heading="0.0" startEvent="slideInDown" zOrder="1" alpha="168.0" activationDelay="0.3">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Textured">
         <property name="pose" value="texture1"/>
         <property name="y" value="0"/>
@@ -59,39 +57,32 @@
     <text text="Quit" font="BlackCasper" size="60" color="#5a72ff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.QuitButton" costume="button" x="720" y="56" direction="0.0" heading="0.0" startEvent="fadeIn" zOrder="60" alpha="150.0" activationDelay="1.0">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="1"/>
-        <property name="color" value="#ffffffff"/>
         <property name="dy" value="2"/>
+        <property name="color" value="#ffffffff"/>
       </makeup>
     </text>
-    <text text="Editor" font="BlackCasper" size="60" color="#5a72ff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.EditorButton" costume="editor" x="103" y="60" direction="0.0" heading="0.0" startEvent="fadeIn" zOrder="60" alpha="128.0" activationDelay="1.0">
-      <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
-        <property name="dx" value="1"/>
-        <property name="color" value="#ffffffff"/>
-        <property name="dy" value="2"/>
-      </makeup>
-    </text>
-    <text text="About" font="BlackCasper" size="60" color="#5572ff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.SceneButton" costume="button" x="403" y="65" direction="0.0" heading="0.0" startEvent="fadeIn" zOrder="61" alpha="150.0" activationDelay="0.8">
+    <text text="About" font="BlackCasper" size="60" color="#5572ff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.SceneButton" costume="button" x="95" y="62" direction="0.0" heading="0.0" startEvent="fadeIn" zOrder="61" alpha="150.0" activationDelay="0.8">
       <property name="sceneName" value="about"/>
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="1"/>
-        <property name="color" value="#ffffffff"/>
         <property name="dy" value="1"/>
+        <property name="color" value="#ffffffff"/>
       </makeup>
     </text>
     <text text="Play" font="BlackCasper" size="100" color="#5572ff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.SceneButton" costume="button" x="403" y="210" direction="0.0" heading="0.0" startEvent="fadeIn" zOrder="62" alpha="150.0" activationDelay="0.8">
       <property name="sceneName" value="easy-1"/>
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="1"/>
-        <property name="color" value="#ffffffff"/>
         <property name="dy" value="1"/>
+        <property name="color" value="#ffffffff"/>
       </makeup>
     </text>
     <text text="Intro" font="BlackCasper" size="100" color="#5572ff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.SceneButton" costume="button" x="402" y="315" direction="0.0" heading="0.0" startEvent="fadeIn" zOrder="63" alpha="150.0" activationDelay="0.8">
       <property name="sceneName" value="intro-1"/>
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="1"/>
-        <property name="color" value="#ffffffff"/>
         <property name="dy" value="1"/>
+        <property name="color" value="#ffffffff"/>
       </makeup>
     </text>
   </layer>

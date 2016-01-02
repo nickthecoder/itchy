@@ -18,15 +18,15 @@
     <text text="By Nick Robinson" font="BlackCasper" size="40" color="#0044ff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.LinkButton" costume="link" x="415" y="442" direction="0.0" heading="0.0" startEvent="default" zOrder="5" alpha="128.0">
       <property name="url" value="http://nickthecoder.co.uk/"/>
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Textured">
-        <property name="poseName" value="texture1"/>
+        <property name="pose" value="texture1"/>
         <property name="y" value="0"/>
         <property name="x" value="0"/>
       </makeup>
     </text>
-    <text text="Torus World" font="BlackCasper" size="100" color="#0044ff" xAlignment="0.5" yAlignment="0.3" role="uk.co.nickthecoder.itchy.role.LinkButton" costume="link" x="425" y="539" direction="0.0" heading="0.0" startEvent="default" zOrder="6" alpha="128.0">
+    <text text="Destroy Debris" font="BlackCasper" size="100" color="#0044ff" xAlignment="0.5" yAlignment="0.3" role="uk.co.nickthecoder.itchy.role.LinkButton" costume="link" x="425" y="539" direction="0.0" heading="0.0" startEvent="default" zOrder="6" alpha="128.0">
       <property name="url" value="http://nickthecoder.co.uk/software/view/Torus%20World"/>
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Textured">
-        <property name="poseName" value="texture1"/>
+        <property name="pose" value="texture1"/>
         <property name="y" value="0"/>
         <property name="x" value="0"/>
       </makeup>

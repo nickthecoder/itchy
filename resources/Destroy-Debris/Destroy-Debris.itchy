@@ -1,5 +1,5 @@
 <resources>
-  <game resizable="false" title="Space Miner" width="800" height="600" initialScene="menu" directorClassName="director.py"/>
+  <game resizable="false" title="Destroy Debris" width="800" height="600" initialScene="menu" directorClassName="director.py"/>
   <fonts>
     <font name="BlackCasper" filename="fonts/BlackCasper/BlackCasper.ttf"/>
     <font name="Boycott" filename="fonts/Boycott/Boycott.ttf"/>
@@ -100,7 +100,7 @@
   </sounds>
   <animations>
     <animation name="bullet1">
-      <parallel finishedMessage="die" loops="1" sequence="false">
+      <parallel loops="1" sequence="false">
         <sequence loops="1" sequence="true">
           <alpha ease="linear" target="255.0" ticks="30"/>
           <alpha ease="linear" target="0.0" ticks="10"/>
@@ -720,7 +720,6 @@
     <scene name="menu"/>
     <scene name="pause"/>
     <scene name="test"/>
-    <scene name="zorder-test"/>
   </scenes>
   <inputs>
     <input name="about" keys="a"/>
