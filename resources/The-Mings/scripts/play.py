@@ -119,7 +119,6 @@ class Play(PlainSceneDirector) :
             x = event.x
             y = event.y # + 20 # Near their middles, not their feet
             ming = Actor.nearest( x, y, "ming" )
-            print "Nearest = ", ming
             if ming is not None and ming.getActor().contains( x, y ) :
             #if ming.getActor().pixelOverlap( x, y ) :
                 self.selectMing( ming )

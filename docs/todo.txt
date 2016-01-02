@@ -2,23 +2,10 @@
 BUGS
 ====
 
-No error message when there are no fonts, and the user tries to add text to the scene design.
+TextArea's background center of nine path is flat colour rather than tiled.
 
-ZOrder buttons don't work/work the wrong way round.
-
-Keyboard shortcuts not working in the scene designer.
-
-ithrust 2nd level collision detection of ship fails.
-    
-    RootContainers sometimes have a view which is bigger than the rootContainer, and rootContainer is not at 0,0 of the view.
-    Editor's root container is one - and any others that use "center".
-    	Need RootContainers to change their view's position when they change size.
-
-Save an animation with delay/frames = 0 fails, but the error message throws an exception!!! - possibly Label's font not set
-    Catch the exception rather than let it crash the system
-    Fix the exception
-
-Trouble with undo/redo of null/blank values for colorize.
+SceneDesigner doesn't use the full width when window is maximised
+SceneDesigner toolbox isn't moved when the window is maximised (floats in middle of the screen).
 
 New Features
 ============

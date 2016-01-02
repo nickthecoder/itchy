@@ -30,7 +30,7 @@ class Play(PlainSceneDirector) :
         # Escape key takes us back to the menu.
         if self.inputExit.matches(event) :
             game.startScene("menu")
-            return True # Return true to indicate that the key has been processed.
+            event.stopPropagation()
 
         if director.lives == 0 :
         
@@ -43,8 +43,6 @@ class Play(PlainSceneDirector) :
     
         if self.inputPause.matches(event) :
             game.pause.togglePause()
-        
-        return False
     
     
     def addRocks(self, diff) :

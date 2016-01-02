@@ -1,5 +1,5 @@
 <resources>
-  <game directorClassName="director.py" height="600" initialScene="menu" title="Space Miner" width="800"/>
+  <game resizable="false" title="Space Miner" width="800" height="600" initialScene="menu" directorClassName="director.py"/>
   <fonts>
     <font name="BlackCasper" filename="fonts/BlackCasper/BlackCasper.ttf"/>
     <font name="Boycott" filename="fonts/Boycott/Boycott.ttf"/>
@@ -105,7 +105,7 @@
           <alpha ease="linear" target="255.0" ticks="30"/>
           <alpha ease="linear" target="0.0" ticks="10"/>
         </sequence>
-        <forwards ease="linear" forwards="400.0" sidewards="0.0" ticks="40"/>
+        <forwards customAngle="0.0" ease="linear" forwards="400.0" sidewards="0.0" ticks="40" using="HEADING"/>
       </parallel>
     </animation>
     <animation name="buttonDown">
@@ -251,7 +251,7 @@
     </animation>
     <animation name="warp">
       <parallel loops="1" sequence="false">
-        <forwards ease="easeOutCubic" forwards="400.0" sidewards="0.0" ticks="200"/>
+        <forwards customAngle="0.0" ease="easeOutCubic" forwards="400.0" sidewards="0.0" ticks="200" using="HEADING"/>
         <head directionToo="false" ease="linear" ticks="150" turn="720.0"/>
         <sequence loops="1" sequence="true">
           <scale ease="easeIn" target="2.0" ticks="100"/>
@@ -263,45 +263,45 @@
     </animation>
   </animations>
   <costumes>
-    <costume name="bullet" defaultZOrder="0" showInDesigner="false" role="bullet.py" properties="bulletProperties.py">
+    <costume name="bullet" defaultZOrder="0" order="0" showInDesigner="true" role="bullet.py" properties="bulletProperties.py">
       <sound name="default" sound="fire" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
       <properties impulse="1.0" strength="1" firePeriod="0.2" explosiveness="1.0"/>
     </costume>
-    <costume name="bullet1" defaultZOrder="0" showInDesigner="false" extends="bullet" role="bullet.py" properties="bulletProperties.py">
+    <costume name="bullet1" defaultZOrder="0" order="0" showInDesigner="true" extends="bullet" role="bullet.py" properties="bulletProperties.py">
       <pose name="default" pose="bullet1"/>
       <animation name="default" animation="bullet1"/>
       <properties impulse="0.1" strength="1" firePeriod="0.2" explosiveness="1.0"/>
     </costume>
-    <costume name="bullet2" defaultZOrder="0" showInDesigner="false" extends="bullet" role="bullet.py" properties="bulletProperties.py">
+    <costume name="bullet2" defaultZOrder="0" order="0" showInDesigner="true" extends="bullet" role="bullet.py" properties="bulletProperties.py">
       <pose name="default" pose="bullet2"/>
       <sound name="default" sound="missile" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
       <animation name="default" animation="bullet1"/>
       <properties impulse="1.0" strength="2" firePeriod="1.0" explosiveness="2.0"/>
     </costume>
-    <costume name="title" defaultZOrder="0" showInDesigner="false">
+    <costume name="title" defaultZOrder="0" order="0" showInDesigner="true">
       <string name="default">title</string>
-      <font name="default" font="Vera"/>
+      <font name="default" font="Vera" fontSize="14" color="#ffffffff" xAlignment="0.5" yAlignment="0.5" marginTop="0" marginRight="0" marginBottom="0" marginLeft="0"/>
       <animation name="slideInDown" animation="slideInDown"/>
       <animation name="slideInLeft" animation="slideInLeft"/>
       <animation name="slideInRight" animation="slideInRight"/>
     </costume>
-    <costume name="button" defaultZOrder="0" showInDesigner="false" extends="title">
+    <costume name="button" defaultZOrder="0" order="0" showInDesigner="true" extends="title">
       <string name="default">Button</string>
       <sound name="click" sound="missile" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
       <sound name="hoverOver" sound="ding" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="PLAY_BOTH" priority="1"/>
-      <font name="default" font="Vera"/>
+      <font name="default" font="Vera" fontSize="14" color="#ffffffff" xAlignment="0.5" yAlignment="0.5" marginTop="0" marginRight="0" marginBottom="0" marginLeft="0"/>
       <animation name="fadeIn" animation="buttonFadeIn"/>
       <animation name="hoverOut" animation="buttonHoverOut"/>
       <animation name="hoverOver" animation="buttonHoverOver"/>
       <animation name="mouseDown" animation="buttonDown"/>
       <animation name="mouseUp" animation="buttonUp"/>
     </costume>
-    <costume name="rock" defaultZOrder="0" showInDesigner="false" role="rock.py">
+    <costume name="rock" defaultZOrder="0" order="0" showInDesigner="true" role="rock.py">
       <sound name="explode" sound="explode-medium" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="PLAY_BOTH" priority="1"/>
       <sound name="hit" sound="ricochet" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
       <sound name="ricochet" sound="ricochet" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="PLAY_BOTH" priority="1"/>
     </costume>
-    <costume name="duke-0" defaultZOrder="0" showInDesigner="true" extends="rock" role="rock.py" properties="rockProperties.py">
+    <costume name="duke-0" defaultZOrder="0" order="0" showInDesigner="true" extends="rock" role="rock.py" properties="rockProperties.py">
       <pose name="default" pose="duke-0"/>
       <pose name="fragment" pose="spark5"/>
       <companion name="default" companion="button"/>
@@ -310,63 +310,63 @@
       <companion name="fragment-3" companion="duke-1c"/>
       <properties pieces="3" points="10" strength="0" hitsRequired="1"/>
     </costume>
-    <costume name="duke-1a" defaultZOrder="0" showInDesigner="false" extends="rock" role="rock.py" properties="rockProperties.py">
+    <costume name="duke-1a" defaultZOrder="0" order="0" showInDesigner="true" extends="rock" role="rock.py" properties="rockProperties.py">
       <pose name="default" pose="duke-1a"/>
       <pose name="fragment" pose="spark5"/>
       <properties pieces="0" points="10" strength="0" hitsRequired="1"/>
     </costume>
-    <costume name="duke-1b" defaultZOrder="0" showInDesigner="false" extends="rock" role="rock.py" properties="rockProperties.py">
+    <costume name="duke-1b" defaultZOrder="0" order="0" showInDesigner="true" extends="rock" role="rock.py" properties="rockProperties.py">
       <pose name="default" pose="duke-1b"/>
       <pose name="fragment" pose="spark5"/>
       <companion name="fragment-1" companion="duke-2a"/>
       <companion name="fragment-2" companion="duke-2b"/>
       <properties pieces="2" points="10" strength="0" hitsRequired="1"/>
     </costume>
-    <costume name="duke-1c" defaultZOrder="0" showInDesigner="false" extends="rock" role="rock.py" properties="rockProperties.py">
+    <costume name="duke-1c" defaultZOrder="0" order="0" showInDesigner="true" extends="rock" role="rock.py" properties="rockProperties.py">
       <pose name="default" pose="duke-1c"/>
       <pose name="fragment" pose="spark5"/>
       <properties pieces="0" points="10" strength="0" hitsRequired="1"/>
     </costume>
-    <costume name="duke-2a" defaultZOrder="0" showInDesigner="false" extends="rock" role="rock.py" properties="rockProperties.py">
+    <costume name="duke-2a" defaultZOrder="0" order="0" showInDesigner="true" extends="rock" role="rock.py" properties="rockProperties.py">
       <pose name="default" pose="duke-2a"/>
       <pose name="fragment" pose="spark5"/>
       <properties pieces="0" points="10" strength="0" hitsRequired="1"/>
     </costume>
-    <costume name="duke-2b" defaultZOrder="0" showInDesigner="false" extends="rock" role="rock.py" properties="rockProperties.py">
+    <costume name="duke-2b" defaultZOrder="0" order="0" showInDesigner="true" extends="rock" role="rock.py" properties="rockProperties.py">
       <pose name="default" pose="duke-2b"/>
       <pose name="fragment" pose="spark5"/>
       <properties pieces="0" points="10" strength="0" hitsRequired="1"/>
     </costume>
-    <costume name="editor" defaultZOrder="0" showInDesigner="false" extends="button" role="uk.co.nickthecoder.itchy.role.EditorButton">
+    <costume name="editor" defaultZOrder="0" order="0" showInDesigner="true" extends="button" role="uk.co.nickthecoder.itchy.role.EditorButton">
       <string name="default">Editor</string>
-      <font name="default" font="Vera"/>
+      <font name="default" font="Vera" fontSize="14" color="#ffffffff" xAlignment="0.5" yAlignment="0.5" marginTop="0" marginRight="0" marginBottom="0" marginLeft="0"/>
     </costume>
-    <costume name="explosion" defaultZOrder="0" showInDesigner="false">
+    <costume name="explosion" defaultZOrder="0" order="0" showInDesigner="true">
       <pose name="default" pose="explosion"/>
     </costume>
-    <costume name="gameOver" defaultZOrder="0" showInDesigner="false" role="uk.co.nickthecoder.itchy.role.Tagged">
+    <costume name="gameOver" defaultZOrder="0" order="0" showInDesigner="true" role="uk.co.nickthecoder.itchy.role.Tagged">
       <string name="default">Game Over</string>
-      <font name="default" font="Vera"/>
+      <font name="default" font="Vera" fontSize="14" color="#ffffffff" xAlignment="0.5" yAlignment="0.5" marginTop="0" marginRight="0" marginBottom="0" marginLeft="0"/>
       <animation name="fadeIn" animation="gameOverReveal"/>
     </costume>
-    <costume name="groovy-a" defaultZOrder="0" showInDesigner="true" extends="rock" role="rock.py" properties="rockProperties.py">
+    <costume name="groovy-a" defaultZOrder="0" order="0" showInDesigner="true" extends="rock" role="rock.py" properties="rockProperties.py">
       <pose name="default" pose="groovy-a"/>
       <pose name="fragment" pose="spark2"/>
       <companion name="fragment-1" companion="groovy-b1"/>
       <companion name="fragment-2" companion="groovy-b2"/>
       <properties pieces="2" points="10" strength="0" hitsRequired="1"/>
     </costume>
-    <costume name="groovy-b1" defaultZOrder="0" showInDesigner="false" extends="rock" role="rock.py" properties="rockProperties.py">
+    <costume name="groovy-b1" defaultZOrder="0" order="0" showInDesigner="true" extends="rock" role="rock.py" properties="rockProperties.py">
       <pose name="default" pose="groovy-b1"/>
       <pose name="fragment" pose="spark2"/>
       <properties pieces="0" points="10" strength="0" hitsRequired="1"/>
     </costume>
-    <costume name="groovy-b2" defaultZOrder="0" showInDesigner="false" extends="rock" role="rock.py" properties="rockProperties.py">
+    <costume name="groovy-b2" defaultZOrder="0" order="0" showInDesigner="true" extends="rock" role="rock.py" properties="rockProperties.py">
       <pose name="default" pose="groovy-b2"/>
       <pose name="fragment" pose="spark2"/>
       <properties pieces="0" points="10" strength="0" hitsRequired="1"/>
     </costume>
-    <costume name="java-0" defaultZOrder="0" showInDesigner="true" extends="rock" role="rock.py" properties="rockProperties.py">
+    <costume name="java-0" defaultZOrder="0" order="0" showInDesigner="true" extends="rock" role="rock.py" properties="rockProperties.py">
       <pose name="default" pose="java-0"/>
       <pose name="fragment" pose="spark5"/>
       <pose name="fragment" pose="spark2"/>
@@ -375,58 +375,58 @@
       <companion name="fragment-3" companion="java-1c"/>
       <properties pieces="3" points="10" strength="0" hitsRequired="3"/>
     </costume>
-    <costume name="java-1a" defaultZOrder="0" showInDesigner="false" extends="rock" role="rock.py" properties="rockProperties.py">
+    <costume name="java-1a" defaultZOrder="0" order="0" showInDesigner="true" extends="rock" role="rock.py" properties="rockProperties.py">
       <pose name="default" pose="java-1a"/>
       <pose name="fragment" pose="spark2"/>
       <companion name="fragment-1" companion="java-2e"/>
       <companion name="fragment-2" companion="java-2f"/>
       <properties pieces="2" points="10" strength="0" hitsRequired="2"/>
     </costume>
-    <costume name="java-1b" defaultZOrder="0" showInDesigner="false" extends="rock" role="rock.py" properties="rockProperties.py">
+    <costume name="java-1b" defaultZOrder="0" order="0" showInDesigner="true" extends="rock" role="rock.py" properties="rockProperties.py">
       <pose name="default" pose="java-1b"/>
       <pose name="fragment" pose="spark5"/>
       <companion name="fragment-1" companion="java-2a"/>
       <companion name="fragment-2" companion="java-2b"/>
       <properties pieces="2" points="10" strength="0" hitsRequired="2"/>
     </costume>
-    <costume name="java-1c" defaultZOrder="0" showInDesigner="false" extends="rock" role="rock.py" properties="rockProperties.py">
+    <costume name="java-1c" defaultZOrder="0" order="0" showInDesigner="true" extends="rock" role="rock.py" properties="rockProperties.py">
       <pose name="default" pose="java-1c"/>
       <pose name="fragment" pose="spark5"/>
       <companion name="fragment-1" companion="java-2c"/>
       <companion name="fragment-2" companion="java-2d"/>
       <properties pieces="2" points="10" strength="0" hitsRequired="2"/>
     </costume>
-    <costume name="java-2a" defaultZOrder="0" showInDesigner="false" extends="rock" role="rock.py" properties="rockProperties.py">
+    <costume name="java-2a" defaultZOrder="0" order="0" showInDesigner="true" extends="rock" role="rock.py" properties="rockProperties.py">
       <pose name="default" pose="java-2a"/>
       <pose name="fragment" pose="spark5"/>
       <properties pieces="0" points="10" strength="0" hitsRequired="2"/>
     </costume>
-    <costume name="java-2b" defaultZOrder="0" showInDesigner="false" extends="rock" role="rock.py" properties="rockProperties.py">
+    <costume name="java-2b" defaultZOrder="0" order="0" showInDesigner="true" extends="rock" role="rock.py" properties="rockProperties.py">
       <pose name="default" pose="java-2b"/>
       <pose name="fragment" pose="spark5"/>
       <properties pieces="0" points="10" strength="0" hitsRequired="2"/>
     </costume>
-    <costume name="java-2c" defaultZOrder="0" showInDesigner="false" extends="rock" role="rock.py" properties="rockProperties.py">
+    <costume name="java-2c" defaultZOrder="0" order="0" showInDesigner="true" extends="rock" role="rock.py" properties="rockProperties.py">
       <pose name="default" pose="java-2c"/>
       <pose name="fragment" pose="spark5"/>
       <properties pieces="0" points="10" strength="0" hitsRequired="2"/>
     </costume>
-    <costume name="java-2d" defaultZOrder="0" showInDesigner="false" extends="rock" role="rock.py" properties="rockProperties.py">
+    <costume name="java-2d" defaultZOrder="0" order="0" showInDesigner="true" extends="rock" role="rock.py" properties="rockProperties.py">
       <pose name="default" pose="java-2d"/>
       <pose name="fragment" pose="spark5"/>
       <properties pieces="0" points="10" strength="0" hitsRequired="2"/>
     </costume>
-    <costume name="java-2e" defaultZOrder="0" showInDesigner="false" extends="rock" role="rock.py" properties="rockProperties.py">
+    <costume name="java-2e" defaultZOrder="0" order="0" showInDesigner="true" extends="rock" role="rock.py" properties="rockProperties.py">
       <pose name="default" pose="java-2e"/>
       <pose name="fragment" pose="spark2"/>
       <properties pieces="0" points="10" strength="0" hitsRequired="2"/>
     </costume>
-    <costume name="java-2f" defaultZOrder="0" showInDesigner="false" extends="rock" role="rock.py" properties="rockProperties.py">
+    <costume name="java-2f" defaultZOrder="0" order="0" showInDesigner="true" extends="rock" role="rock.py" properties="rockProperties.py">
       <pose name="default" pose="java-2f"/>
       <pose name="fragment" pose="spark2"/>
       <properties pieces="0" points="10" strength="0" hitsRequired="2"/>
     </costume>
-    <costume name="key-arrows" defaultZOrder="0" showInDesigner="true" extends="rock" role="rock.py" properties="rockProperties.py">
+    <costume name="key-arrows" defaultZOrder="0" order="0" showInDesigner="true" extends="rock" role="rock.py" properties="rockProperties.py">
       <pose name="default" pose="keys-arrows"/>
       <pose name="fragment" pose="spark1"/>
       <companion name="fragment-1" companion="key-up"/>
@@ -435,47 +435,47 @@
       <companion name="fragment-4" companion="key-space"/>
       <properties pieces="4" points="10" strength="0" hitsRequired="1"/>
     </costume>
-    <costume name="key-left" defaultZOrder="0" showInDesigner="false" extends="rock" role="rock.py" properties="rockProperties.py">
+    <costume name="key-left" defaultZOrder="0" order="0" showInDesigner="true" extends="rock" role="rock.py" properties="rockProperties.py">
       <pose name="default" pose="key-left"/>
       <pose name="fragment" pose="spark1"/>
       <properties pieces="0" points="10" strength="0" hitsRequired="1"/>
     </costume>
-    <costume name="key-return" defaultZOrder="0" showInDesigner="false" extends="rock" role="rock.py" properties="rockProperties.py">
+    <costume name="key-return" defaultZOrder="0" order="0" showInDesigner="true" extends="rock" role="rock.py" properties="rockProperties.py">
       <pose name="default" pose="key-return"/>
       <pose name="fragment" pose="spark5"/>
       <properties pieces="0" points="10" strength="0" hitsRequired="1"/>
     </costume>
-    <costume name="key-right" defaultZOrder="0" showInDesigner="false" extends="rock" role="rock.py" properties="rockProperties.py">
+    <costume name="key-right" defaultZOrder="0" order="0" showInDesigner="true" extends="rock" role="rock.py" properties="rockProperties.py">
       <pose name="default" pose="key-right"/>
       <pose name="fragment" pose="spark1"/>
       <properties pieces="0" points="10" strength="0" hitsRequired="1"/>
     </costume>
-    <costume name="key-semicolon" defaultZOrder="0" showInDesigner="false" extends="rock" role="rock.py" properties="rockProperties.py">
+    <costume name="key-semicolon" defaultZOrder="0" order="0" showInDesigner="true" extends="rock" role="rock.py" properties="rockProperties.py">
       <pose name="default" pose="key-semicolon"/>
       <pose name="fragment" pose="spark5"/>
       <properties pieces="0" points="10" strength="0" hitsRequired="1"/>
     </costume>
-    <costume name="key-space" defaultZOrder="0" showInDesigner="false" extends="rock" role="rock.py" properties="rockProperties.py">
+    <costume name="key-space" defaultZOrder="0" order="0" showInDesigner="true" extends="rock" role="rock.py" properties="rockProperties.py">
       <pose name="default" pose="key-space"/>
       <pose name="fragment" pose="spark1"/>
       <properties pieces="0" points="10" strength="0" hitsRequired="1"/>
     </costume>
-    <costume name="key-up" defaultZOrder="0" showInDesigner="false" extends="rock" role="rock.py" properties="rockProperties.py">
+    <costume name="key-up" defaultZOrder="0" order="0" showInDesigner="true" extends="rock" role="rock.py" properties="rockProperties.py">
       <pose name="default" pose="key-up"/>
       <pose name="fragment" pose="spark1"/>
       <properties pieces="0" points="10" strength="0" hitsRequired="1"/>
     </costume>
-    <costume name="key-x" defaultZOrder="0" showInDesigner="false" extends="rock" role="rock.py" properties="rockProperties.py">
+    <costume name="key-x" defaultZOrder="0" order="0" showInDesigner="true" extends="rock" role="rock.py" properties="rockProperties.py">
       <pose name="default" pose="key-x"/>
       <pose name="fragment" pose="spark5"/>
       <properties pieces="0" points="10" strength="0" hitsRequired="1"/>
     </costume>
-    <costume name="key-z" defaultZOrder="0" showInDesigner="false" extends="rock" role="rock.py" properties="rockProperties.py">
+    <costume name="key-z" defaultZOrder="0" order="0" showInDesigner="true" extends="rock" role="rock.py" properties="rockProperties.py">
       <pose name="default" pose="key-z"/>
       <pose name="fragment" pose="spark5"/>
       <properties pieces="0" points="10" strength="0" hitsRequired="1"/>
     </costume>
-    <costume name="keys-zx" defaultZOrder="0" showInDesigner="true" extends="rock" role="rock.py" properties="rockProperties.py">
+    <costume name="keys-zx" defaultZOrder="0" order="0" showInDesigner="true" extends="rock" role="rock.py" properties="rockProperties.py">
       <pose name="default" pose="keys-zx"/>
       <pose name="fragment" pose="spark5"/>
       <companion name="fragment-1" companion="key-x"/>
@@ -484,7 +484,7 @@
       <companion name="fragment-4" companion="key-return"/>
       <properties pieces="4" points="10" strength="0" hitsRequired="1"/>
     </costume>
-    <costume name="kotlin-a" defaultZOrder="0" showInDesigner="true" extends="rock" role="rock.py" properties="rockProperties.py">
+    <costume name="kotlin-a" defaultZOrder="0" order="0" showInDesigner="true" extends="rock" role="rock.py" properties="rockProperties.py">
       <pose name="default" pose="kotlin-a"/>
       <pose name="fragment" pose="spark2"/>
       <pose name="fragment" pose="spark4"/>
@@ -492,7 +492,7 @@
       <companion name="fragment-2" companion="kotlin-b2"/>
       <properties pieces="2" points="10" strength="0" hitsRequired="1"/>
     </costume>
-    <costume name="kotlin-b1" defaultZOrder="0" showInDesigner="false" extends="rock" role="rock.py" properties="rockProperties.py">
+    <costume name="kotlin-b1" defaultZOrder="0" order="0" showInDesigner="true" extends="rock" role="rock.py" properties="rockProperties.py">
       <pose name="default" pose="kotlin-b1"/>
       <pose name="fragment" pose="spark2"/>
       <pose name="fragment" pose="spark4"/>
@@ -501,7 +501,7 @@
       <companion name="fragment-2" companion="kotlin-c3"/>
       <properties pieces="2" points="10" strength="0" hitsRequired="1"/>
     </costume>
-    <costume name="kotlin-b2" defaultZOrder="0" showInDesigner="false" extends="rock" role="rock.py" properties="rockProperties.py">
+    <costume name="kotlin-b2" defaultZOrder="0" order="0" showInDesigner="true" extends="rock" role="rock.py" properties="rockProperties.py">
       <pose name="default" pose="kotlin-b2"/>
       <pose name="fragment" pose="spark2"/>
       <companion name="default" companion="kotlin-c1"/>
@@ -509,45 +509,45 @@
       <companion name="fragment-2" companion="kotlin-c4"/>
       <properties pieces="2" points="10" strength="0" hitsRequired="1"/>
     </costume>
-    <costume name="kotlin-c1" defaultZOrder="0" showInDesigner="false" extends="rock" role="rock.py" properties="rockProperties.py">
+    <costume name="kotlin-c1" defaultZOrder="0" order="0" showInDesigner="true" extends="rock" role="rock.py" properties="rockProperties.py">
       <pose name="default" pose="kotlin-c1"/>
       <pose name="fragment" pose="spark2"/>
       <properties pieces="0" points="10" strength="0" hitsRequired="1"/>
     </costume>
-    <costume name="kotlin-c2" defaultZOrder="0" showInDesigner="false" extends="rock" role="rock.py" properties="rockProperties.py">
+    <costume name="kotlin-c2" defaultZOrder="0" order="0" showInDesigner="true" extends="rock" role="rock.py" properties="rockProperties.py">
       <pose name="default" pose="kotlin-c2"/>
       <pose name="fragment" pose="spark2"/>
       <properties pieces="0" points="10" strength="0" hitsRequired="1"/>
     </costume>
-    <costume name="kotlin-c3" defaultZOrder="0" showInDesigner="false" extends="rock" role="rock.py" properties="rockProperties.py">
+    <costume name="kotlin-c3" defaultZOrder="0" order="0" showInDesigner="true" extends="rock" role="rock.py" properties="rockProperties.py">
       <pose name="default" pose="kotlin-c3"/>
       <pose name="fragment" pose="spark4"/>
       <properties pieces="0" points="10" strength="0" hitsRequired="1"/>
     </costume>
-    <costume name="kotlin-c4" defaultZOrder="0" showInDesigner="false" extends="rock" role="rock.py" properties="rockProperties.py">
+    <costume name="kotlin-c4" defaultZOrder="0" order="0" showInDesigner="true" extends="rock" role="rock.py" properties="rockProperties.py">
       <pose name="default" pose="kotlin-c4"/>
       <pose name="fragment" pose="spark2"/>
       <properties pieces="0" points="10" strength="0" hitsRequired="1"/>
     </costume>
-    <costume name="life" defaultZOrder="0" showInDesigner="false">
+    <costume name="life" defaultZOrder="0" order="0" showInDesigner="true">
       <animation name="appear" animation="lifeAppear"/>
       <animation name="disappear" animation="lifeDisappear"/>
     </costume>
-    <costume name="life1" defaultZOrder="0" showInDesigner="false" extends="life">
+    <costume name="life1" defaultZOrder="0" order="0" showInDesigner="true" extends="life">
       <pose name="default" pose="life1"/>
     </costume>
-    <costume name="life2" defaultZOrder="0" showInDesigner="false" extends="life">
+    <costume name="life2" defaultZOrder="0" order="0" showInDesigner="true" extends="life">
       <pose name="default" pose="life2"/>
     </costume>
-    <costume name="link" defaultZOrder="0" showInDesigner="false" extends="button" role="uk.co.nickthecoder.itchy.role.LinkButton">
+    <costume name="link" defaultZOrder="0" order="0" showInDesigner="true" extends="button" role="uk.co.nickthecoder.itchy.role.LinkButton">
       <string name="default">Link</string>
-      <font name="default" font="Vera"/>
+      <font name="default" font="Vera" fontSize="14" color="#ffffffff" xAlignment="0.5" yAlignment="0.5" marginTop="0" marginRight="0" marginBottom="0" marginLeft="0"/>
       <animation name="hoverOut" animation="linkHoverOut"/>
       <animation name="hoverOver" animation="linkHoverOver"/>
       <animation name="mouseDown" animation="linkDown"/>
       <animation name="mouseUp" animation="linkUp"/>
     </costume>
-    <costume name="mouse" defaultZOrder="0" showInDesigner="false">
+    <costume name="mouse" defaultZOrder="0" order="0" showInDesigner="true">
       <pose name="default" pose="mouse"/>
       <pose name="spark" pose="spark1"/>
       <pose name="spark" pose="spark2"/>
@@ -555,16 +555,16 @@
       <pose name="spark" pose="spark4"/>
       <pose name="spark" pose="spark5"/>
     </costume>
-    <costume name="pause" defaultZOrder="0" showInDesigner="false">
+    <costume name="pause" defaultZOrder="0" order="0" showInDesigner="true">
       <string name="default">Pause</string>
-      <font name="default" font="Vera"/>
+      <font name="default" font="Vera" fontSize="14" color="#ffffffff" xAlignment="0.5" yAlignment="0.5" marginTop="0" marginRight="0" marginBottom="0" marginLeft="0"/>
       <animation name="default" animation="pauseReveal"/>
     </costume>
-    <costume name="play" defaultZOrder="0" showInDesigner="false" extends="button" role="uk.co.nickthecoder.itchy.role.MessageButton">
+    <costume name="play" defaultZOrder="0" order="0" showInDesigner="true" extends="button" role="uk.co.nickthecoder.itchy.role.MessageButton">
       <string name="default">play</string>
-      <font name="default" font="Vera"/>
+      <font name="default" font="Vera" fontSize="14" color="#ffffffff" xAlignment="0.5" yAlignment="0.5" marginTop="0" marginRight="0" marginBottom="0" marginLeft="0"/>
     </costume>
-    <costume name="python-a" defaultZOrder="0" showInDesigner="true" extends="rock" role="rock.py" properties="rockProperties.py">
+    <costume name="python-a" defaultZOrder="0" order="0" showInDesigner="true" extends="rock" role="rock.py" properties="rockProperties.py">
       <pose name="default" pose="python-a"/>
       <pose name="fragment" pose="spark2"/>
       <pose name="fragment" pose="spark3"/>
@@ -572,31 +572,31 @@
       <companion name="fragment-2" companion="python-b2"/>
       <properties pieces="2" points="10" strength="0" hitsRequired="1"/>
     </costume>
-    <costume name="python-b1" defaultZOrder="0" showInDesigner="false" extends="rock" role="rock.py" properties="rockProperties.py">
+    <costume name="python-b1" defaultZOrder="0" order="0" showInDesigner="true" extends="rock" role="rock.py" properties="rockProperties.py">
       <pose name="default" pose="python-b1"/>
       <pose name="fragment" pose="spark2"/>
       <companion name="fragment-1" companion="python-c1"/>
       <companion name="fragment-2" companion="python-c1"/>
       <properties pieces="2" points="10" strength="0" hitsRequired="1"/>
     </costume>
-    <costume name="python-b2" defaultZOrder="0" showInDesigner="false" extends="rock" role="rock.py" properties="rockProperties.py">
+    <costume name="python-b2" defaultZOrder="0" order="0" showInDesigner="true" extends="rock" role="rock.py" properties="rockProperties.py">
       <pose name="default" pose="python-b2"/>
       <pose name="fragment" pose="spark3"/>
       <companion name="fragment-1" companion="python-c2"/>
       <companion name="fragment-2" companion="python-c2"/>
       <properties pieces="2" points="10" strength="0" hitsRequired="1"/>
     </costume>
-    <costume name="python-c1" defaultZOrder="0" showInDesigner="false" extends="rock" role="rock.py" properties="rockProperties.py">
+    <costume name="python-c1" defaultZOrder="0" order="0" showInDesigner="true" extends="rock" role="rock.py" properties="rockProperties.py">
       <pose name="default" pose="python-c1"/>
       <pose name="fragment" pose="spark2"/>
       <properties pieces="0" points="10" strength="0" hitsRequired="1"/>
     </costume>
-    <costume name="python-c2" defaultZOrder="0" showInDesigner="false" extends="rock" role="rock.py" properties="rockProperties.py">
+    <costume name="python-c2" defaultZOrder="0" order="0" showInDesigner="true" extends="rock" role="rock.py" properties="rockProperties.py">
       <pose name="default" pose="python-c2"/>
       <pose name="fragment" pose="spark3"/>
       <properties pieces="0" points="10" strength="0" hitsRequired="1"/>
     </costume>
-    <costume name="rock1" defaultZOrder="0" showInDesigner="true" extends="rock" role="rock.py" properties="rockProperties.py">
+    <costume name="rock1" defaultZOrder="0" order="0" showInDesigner="true" extends="rock" role="rock.py" properties="rockProperties.py">
       <pose name="default" pose="rock1a"/>
       <pose name="fragment" pose="fragment1"/>
       <companion name="fragment-1" companion="rock1b"/>
@@ -604,20 +604,20 @@
       <companion name="fragment-3" companion="rock1b"/>
       <properties pieces="3" points="10" strength="1" hitsRequired="1"/>
     </costume>
-    <costume name="rock1b" defaultZOrder="0" showInDesigner="false" extends="rock" role="rock.py" properties="rockProperties.py">
+    <costume name="rock1b" defaultZOrder="0" order="0" showInDesigner="true" extends="rock" role="rock.py" properties="rockProperties.py">
       <pose name="default" pose="rock1b"/>
       <pose name="fragment" pose="fragment1"/>
       <companion name="fragment-1" companion="rock1c"/>
       <companion name="fragment-2" companion="rock1c"/>
       <properties pieces="2" points="20" strength="1" hitsRequired="1"/>
     </costume>
-    <costume name="rock1c" defaultZOrder="0" showInDesigner="false" extends="rock" role="rock.py" properties="rockProperties.py">
+    <costume name="rock1c" defaultZOrder="0" order="0" showInDesigner="true" extends="rock" role="rock.py" properties="rockProperties.py">
       <pose name="default" pose="rock1c"/>
       <pose name="fragment" pose="fragment1"/>
       <sound name="explode" sound="explode-quiet" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="PLAY_BOTH" priority="1"/>
       <properties pieces="0" points="50" strength="1" hitsRequired="1"/>
     </costume>
-    <costume name="rock2" defaultZOrder="0" showInDesigner="true" extends="rock" role="rock.py" properties="rockProperties.py">
+    <costume name="rock2" defaultZOrder="0" order="0" showInDesigner="true" extends="rock" role="rock.py" properties="rockProperties.py">
       <pose name="default" pose="rock2a1"/>
       <pose name="default" pose="rock2a2"/>
       <pose name="fragment" pose="fragment2"/>
@@ -626,7 +626,7 @@
       <companion name="fragment-3" companion="rock2b"/>
       <properties pieces="3" points="100" strength="1" hitsRequired="3"/>
     </costume>
-    <costume name="rock2b" defaultZOrder="0" showInDesigner="false" extends="rock" role="rock.py" properties="rockProperties.py">
+    <costume name="rock2b" defaultZOrder="0" order="0" showInDesigner="true" extends="rock" role="rock.py" properties="rockProperties.py">
       <pose name="default" pose="rock2b1"/>
       <pose name="default" pose="rock2b2"/>
       <pose name="fragment" pose="fragment2"/>
@@ -634,33 +634,33 @@
       <companion name="fragment-2" companion="rock2c"/>
       <properties pieces="2" points="200" strength="1" hitsRequired="2"/>
     </costume>
-    <costume name="rock2c" defaultZOrder="0" showInDesigner="false" extends="rock" role="rock.py" properties="rockProperties.py">
+    <costume name="rock2c" defaultZOrder="0" order="0" showInDesigner="true" extends="rock" role="rock.py" properties="rockProperties.py">
       <pose name="default" pose="rock2c1"/>
       <pose name="default" pose="rock2c2"/>
       <pose name="fragment" pose="fragment2"/>
       <sound name="explode" sound="explode-quiet" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="PLAY_BOTH" priority="1"/>
       <properties pieces="0" points="400" strength="1" hitsRequired="2"/>
     </costume>
-    <costume name="scala-a" defaultZOrder="0" showInDesigner="true" extends="rock" role="rock.py" properties="rockProperties.py">
+    <costume name="scala-a" defaultZOrder="0" order="0" showInDesigner="true" extends="rock" role="rock.py" properties="rockProperties.py">
       <pose name="default" pose="scala-a"/>
       <pose name="fragment" pose="spark5"/>
       <companion name="fragment-1" companion="scala-b"/>
       <companion name="fragment-2" companion="scala-c"/>
       <properties pieces="2" points="100" strength="2" hitsRequired="1"/>
     </costume>
-    <costume name="scala-b" defaultZOrder="0" showInDesigner="false" extends="rock" role="rock.py" properties="rockProperties.py">
+    <costume name="scala-b" defaultZOrder="0" order="0" showInDesigner="true" extends="rock" role="rock.py" properties="rockProperties.py">
       <pose name="default" pose="scala-b"/>
       <pose name="fragment" pose="spark5"/>
       <companion name="fragment-1" companion="scala-c"/>
       <companion name="fragment-2" companion="scala-c"/>
       <properties pieces="2" points="75" strength="2" hitsRequired="1"/>
     </costume>
-    <costume name="scala-c" defaultZOrder="0" showInDesigner="false" extends="rock" role="rock.py" properties="rockProperties.py">
+    <costume name="scala-c" defaultZOrder="0" order="0" showInDesigner="true" extends="rock" role="rock.py" properties="rockProperties.py">
       <pose name="default" pose="scala-c"/>
       <pose name="fragment" pose="spark5"/>
       <properties pieces="0" points="50" strength="2" hitsRequired="1"/>
     </costume>
-    <costume name="ship" defaultZOrder="0" showInDesigner="false" role="ship.py" properties="shipProperties.py">
+    <costume name="ship" defaultZOrder="0" order="0" showInDesigner="true" role="ship.py" properties="shipProperties.py">
       <pose name="spark" pose="spark2"/>
       <pose name="spark" pose="spark3"/>
       <pose name="spark" pose="spark4"/>
@@ -680,24 +680,24 @@
       <companion name="warp" companion="warp"/>
       <properties rotationSpeed="5.0" thrust="0.3"/>
     </costume>
-    <costume name="ship1" defaultZOrder="0" showInDesigner="true" extends="ship" role="ship.py" properties="shipProperties.py">
+    <costume name="ship1" defaultZOrder="0" order="0" showInDesigner="true" extends="ship" role="ship.py" properties="shipProperties.py">
       <pose name="default" pose="ship1"/>
       <companion name="life" companion="life1"/>
       <properties rotationSpeed="3.0" thrust="0.3"/>
     </costume>
-    <costume name="ship2" defaultZOrder="0" showInDesigner="true" extends="ship" role="ship.py" properties="shipProperties.py">
+    <costume name="ship2" defaultZOrder="0" order="0" showInDesigner="true" extends="ship" role="ship.py" properties="shipProperties.py">
       <pose name="default" pose="ship2"/>
       <companion name="bullet-2" companion="bullet2"/>
       <companion name="life" companion="life2"/>
       <properties rotationSpeed="2.0" thrust="0.3"/>
     </costume>
-    <costume name="stars1" defaultZOrder="0" showInDesigner="true">
+    <costume name="stars1" defaultZOrder="0" order="0" showInDesigner="true">
       <pose name="default" pose="stars1"/>
     </costume>
-    <costume name="stars2" defaultZOrder="0" showInDesigner="true">
+    <costume name="stars2" defaultZOrder="0" order="0" showInDesigner="true">
       <pose name="default" pose="stars2"/>
     </costume>
-    <costume name="warp" defaultZOrder="0" showInDesigner="false">
+    <costume name="warp" defaultZOrder="0" order="0" showInDesigner="true">
       <pose name="default" pose="warp"/>
       <animation name="default" animation="warp"/>
     </costume>
@@ -720,6 +720,7 @@
     <scene name="menu"/>
     <scene name="pause"/>
     <scene name="test"/>
+    <scene name="zorder-test"/>
   </scenes>
   <inputs>
     <input name="about" keys="a"/>
