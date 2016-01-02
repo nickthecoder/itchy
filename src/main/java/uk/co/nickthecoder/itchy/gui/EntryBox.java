@@ -128,18 +128,18 @@ public class EntryBox<E extends EntryBox<?>> extends ClickableContainer implemen
     }
 
     @Override
-    public boolean onKeyDown( KeyboardEvent ke )
+    public void onKeyDown( KeyboardEvent ke )
     {
         if (ke.symbol == Keys.HOME) {
             this.caretIndex = 0;
             this.update();
-            return true;
+            ke.stopPropagation();
         }
 
         if (ke.symbol == Keys.END) {
             this.caretIndex = this.label.getText().length();
             this.update();
-            return true;
+            ke.stopPropagation();
         }
 
         if (ke.symbol == Keys.LEFT) {
@@ -147,7 +147,7 @@ public class EntryBox<E extends EntryBox<?>> extends ClickableContainer implemen
                 this.caretIndex--;
                 this.update();
             }
-            return true;
+            ke.stopPropagation();
         }
 
         if (ke.symbol == Keys.RIGHT) {
@@ -155,7 +155,7 @@ public class EntryBox<E extends EntryBox<?>> extends ClickableContainer implemen
                 this.caretIndex++;
                 this.update();
             }
-            return true;
+            ke.stopPropagation();
         }
 
         if (ke.symbol == Keys.BACKSPACE) {
@@ -167,7 +167,7 @@ public class EntryBox<E extends EntryBox<?>> extends ClickableContainer implemen
                 this.setEntryText(this.label.getText().substring(0, pos - 1) +
                     this.label.getText().substring(pos));
             }
-            return true;
+            ke.stopPropagation();
         }
 
         if (ke.symbol == Keys.DELETE) {
@@ -175,7 +175,7 @@ public class EntryBox<E extends EntryBox<?>> extends ClickableContainer implemen
                 this.setEntryText(this.label.getText().substring(0, this.caretIndex) +
                     this.label.getText().substring(this.caretIndex + 1));
             }
-            return true;
+            ke.stopPropagation();
         }
 
         if ((ke.symbol == Keys.v) && (Itchy.isCtrlDown())) {
@@ -191,15 +191,15 @@ public class EntryBox<E extends EntryBox<?>> extends ClickableContainer implemen
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            return true;
+            ke.stopPropagation();
         }
 
         if ((ke.c >= 32)) {
             insert( ke.c );
-            return true;
+            ke.stopPropagation();
         }
 
-        return super.onKeyDown(ke);
+        super.onKeyDown(ke);
     }
     
 
@@ -226,9 +226,8 @@ public class EntryBox<E extends EntryBox<?>> extends ClickableContainer implemen
     }
 
     @Override
-    public boolean onKeyUp( KeyboardEvent ke )
+    public void onKeyUp( KeyboardEvent ke )
     {
-        return false;
     }
 
     public void setCaretPosition( int index )

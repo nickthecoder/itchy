@@ -44,18 +44,18 @@ public class VerticalScroll extends PlainContainer implements Layout
     }
 
     @Override
-    public boolean onKeyDown( KeyboardEvent e )
+    public void onKeyDown( KeyboardEvent e )
     {
         if (e.symbol == Keys.PAGEUP) {
             this.scrollBy((int) (-this.getHeight() * 0.9));
-            return true;
+            e.stopPropagation();
         }
         if (e.symbol == Keys.PAGEDOWN) {
             this.scrollBy((int) (this.getHeight() * 0.9));
-            return true;
+            e.stopPropagation();
         }
 
-        return super.onKeyDown(e);
+        super.onKeyDown(e);
     }
 
     @Override

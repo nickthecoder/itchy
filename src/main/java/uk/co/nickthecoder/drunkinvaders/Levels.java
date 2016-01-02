@@ -22,19 +22,17 @@ public class Levels extends PlainSceneDirector
     }
 
     @Override
-    public boolean onKeyDown( KeyboardEvent ke )
+    public void onKeyDown( KeyboardEvent ke )
     {
         if (this.inputExit.matches(ke)) {
             DrunkInvaders.director.startScene("menu");
-            return true;
+            ke.stopPropagation();
         }
 
         if (this.inputPlay.matches(ke)) {
             DrunkInvaders.director.play();
-            return true;
+            ke.stopPropagation();
         }
-
-        return false;
     }
 
 }

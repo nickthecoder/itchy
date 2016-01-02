@@ -1086,11 +1086,11 @@ public class SceneDesigner implements MouseListener, KeyListener {
 	}
 
 	@Override
-	public boolean onKeyDown(KeyboardEvent event) {
+	public void onKeyDown(KeyboardEvent event) {
 
 		if (event.symbol == Keys.ESCAPE) {
 			onEscape();
-			return true;
+            event.stopPropagation();
 		}
 
 		if (Itchy.isCtrlDown()) {
@@ -1099,82 +1099,85 @@ public class SceneDesigner implements MouseListener, KeyListener {
 
 			if (event.symbol == Keys.s) {
 				onSave();
-				return true;
+	            event.stopPropagation();
+
 			} else if (event.symbol == Keys.z) {
 				if (Itchy.isShiftDown()) {
 					this.undoList.redo();
 				} else {
 					this.undoList.undo();
 				}
-				return true;
+	            event.stopPropagation();
 
 			} else if (event.symbol == Keys.y) {
 				this.undoList.redo();
-				return true;
+	            event.stopPropagation();
 
 			} else if (event.symbol == Keys.w) {
 				onDone();
-				return true;
+	            event.stopPropagation();
 
 			} else if (event.symbol == Keys.x) {
 				onCopy();
 				onActorDelete();
-				return true;
+	            event.stopPropagation();
 
 			} else if (event.symbol == Keys.c) {
 				onCopy();
-				return true;
+	            event.stopPropagation();
 
 			} else if (event.symbol == Keys.v) {
 				onPaste();
-				return true;
+	            event.stopPropagation();
+
 			} else if (event.symbol == Keys.LEFT) {
 				scrollBy(-scrollAmount, 0);
-				return true;
+	            event.stopPropagation();
 
 			} else if (event.symbol == Keys.RIGHT) {
 				scrollBy(scrollAmount, 0);
-				return true;
+	            event.stopPropagation();
 
 			} else if (event.symbol == Keys.UP) {
 				scrollBy(0, scrollAmount);
-				return true;
+	            event.stopPropagation();
 
 			} else if (event.symbol == Keys.DOWN) {
 				scrollBy(0, -scrollAmount);
-				return true;
+	            event.stopPropagation();
 
 			} else if (event.symbol == Keys.DELETE) {
 				onActorDelete();
-				return true;
+	            event.stopPropagation();
+
 			} else if ((event.symbol >= Keys.KEY_1)
 					&& (event.symbol <= Keys.KEY_7)) {
 				this.toolboxNotebook.selectPage(event.symbol - Keys.KEY_1);
-				return true;
+	            event.stopPropagation();
 
 			} else if (event.symbol == Keys.HOME) {
 				onCenter();
-				return true;
+	            event.stopPropagation();
 
 			} else if (event.symbol == Keys.PAGEUP) {
 				onActorUpStage();
-				return true;
+	            event.stopPropagation();
 
 			} else if (event.symbol == Keys.PAGEDOWN) {
 				onActorDownStage();
-				return true;
+	            event.stopPropagation();
 
 			} else if (event.symbol == Keys.o) {
 				onActorUnrotate();
-				return true;
+	            event.stopPropagation();
 
 			} else if (event.symbol == Keys.KEY_0) {
 				onActorUnscale();
-				return true;
+	            event.stopPropagation();
 
 			} else if (event.symbol == Keys.HASH) {
 				onResetZOrders();
-				return true;
+	            event.stopPropagation();
 			}
 
 		} else {
@@ -1183,60 +1186,60 @@ public class SceneDesigner implements MouseListener, KeyListener {
 
 			if (event.symbol == Keys.PAGEUP) {
 				onActorUp();
-				return true;
+	            event.stopPropagation();
 
 			} else if (event.symbol == Keys.PAGEDOWN) {
 				onActorDown();
-				return true;
+	            event.stopPropagation();
 
 			} else if (event.symbol == Keys.HOME) {
 				onActorTop();
-				return true;
+	            event.stopPropagation();
 
 			} else if (event.symbol == Keys.END) {
 				onActorBottom();
-				return true;
+	            event.stopPropagation();
 
 			} else if (event.symbol == Keys.LEFT) {
 				moveActor(-moveAmount, 0);
-				return true;
+	            event.stopPropagation();
 
 			} else if (event.symbol == Keys.RIGHT) {
 				moveActor(moveAmount, 0);
-				return true;
+	            event.stopPropagation();
 
 			} else if (event.symbol == Keys.UP) {
 				moveActor(0, moveAmount);
-				return true;
+	            event.stopPropagation();
 
 			} else if (event.symbol == Keys.DOWN) {
 				moveActor(0, -moveAmount);
-				return true;
+	            event.stopPropagation();
 
 			} else if (event.symbol == Keys.F2) {
 				onEditText();
-				return true;
+	            event.stopPropagation();
 
 			} else if (event.symbol == Keys.F8) {
 				onEditText();
-				return true;
+	            event.stopPropagation();
 
 			} else if (event.symbol == Keys.F12) {
 				onTest();
-				return true;
+	            event.stopPropagation();
 			}
 
 		}
-
-		return false;
 	}
 
-	private void onEscape() {
+	private void onEscape()
+	{
 		setMode(MODE_SELECT);
 		selectActor(null);
 	}
 
-	private void moveActor(int dx, int dy) {
+	private void moveActor(int dx, int dy)
+	{
 		if (this.currentActor != null) {
 			double x = this.currentActor.getX() + dx;
 			double y = this.currentActor.getY() + dy;
@@ -1248,8 +1251,8 @@ public class SceneDesigner implements MouseListener, KeyListener {
 	}
 
 	@Override
-	public boolean onKeyUp(KeyboardEvent event) {
-		return false;
+	public void onKeyUp(KeyboardEvent event)
+	{
 	}
 
 	@Override

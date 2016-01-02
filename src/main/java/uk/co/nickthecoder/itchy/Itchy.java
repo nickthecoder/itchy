@@ -19,6 +19,7 @@ import uk.co.nickthecoder.jame.event.Event;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.Keys;
 import uk.co.nickthecoder.jame.event.MouseEvent;
+import uk.co.nickthecoder.jame.event.StopPropagation;
 
 /**
  * The top-level manager of the game engine.
@@ -337,7 +338,11 @@ public class Itchy
             if (event == null) {
                 break;
             } else {
-                processEvent(event);
+            	try {
+            		processEvent(event);
+            	} catch (StopPropagation e) {
+            		// Do nothing
+            	}
             }
         }
         

@@ -4,7 +4,9 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
+import uk.co.nickthecoder.jame.event.QuitEvent;
+
 public interface QuitListener
 {
-    public boolean onQuit();
+    public void onQuit( QuitEvent e );
 }

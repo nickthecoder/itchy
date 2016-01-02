@@ -10,6 +10,8 @@ import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
+import uk.co.nickthecoder.jame.event.QuitEvent;
+import uk.co.nickthecoder.jame.event.ResizeEvent;
 import uk.co.nickthecoder.jame.event.WindowEvent;
 
 public class AbstractDirector implements Director
@@ -77,9 +79,9 @@ public class AbstractDirector implements Director
      * Itchy.isKeyDown( ... ). onKeyDown and onKeyUp are useful for typing, not for game play.
      */
     @Override
-    public boolean onKeyDown( KeyboardEvent event )
+    public void onKeyDown( KeyboardEvent event )
     {
-        return this.game.getSceneDirector().onKeyDown(event);
+        this.game.getSceneDirector().onKeyDown(event);
     }
 
     /**
@@ -89,9 +91,9 @@ public class AbstractDirector implements Director
      * The default role is to do nothing more than forward the event to the current scene's {@link SceneDirector}.
      */
     @Override
-    public boolean onKeyUp( KeyboardEvent ke )
+    public void onKeyUp( KeyboardEvent ke )
     {
-        return this.game.getSceneDirector().onKeyUp(ke);
+        this.game.getSceneDirector().onKeyUp(ke);
     }
 
     /**
@@ -99,10 +101,8 @@ public class AbstractDirector implements Director
      * default role is to terminate the application.
      */
     @Override
-    public boolean onQuit()
+    public void onQuit(QuitEvent e)
     {
-        Itchy.terminate();
-        return true;
     }
     
     @Override
@@ -125,10 +125,10 @@ public class AbstractDirector implements Director
     }
 
     @Override
-	public void onResize( int width, int height )
+	public void onResize( ResizeEvent event )
     {
     	try {
-    		this.game.resize( width, height );
+    		this.game.resize( event.width, event.height );
     		
     	} catch (Exception e) {
     		e.printStackTrace();

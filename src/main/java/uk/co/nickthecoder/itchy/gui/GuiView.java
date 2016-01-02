@@ -165,15 +165,14 @@ public class GuiView extends AbstractView implements View, InputListener
     }
 
     @Override
-    public boolean onKeyDown( KeyboardEvent event )
+    public void onKeyDown( KeyboardEvent event )
     {
-        return this.rootContainer.keyDown(event);
+        this.rootContainer.keyDown(event);
     }
 
     @Override
-    public boolean onKeyUp( KeyboardEvent ke )
+    public void onKeyUp( KeyboardEvent ke )
     {
-        return false;
     }
 
     @Override

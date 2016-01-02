@@ -261,7 +261,7 @@ public class Table extends PlainContainer
     }
 
     @Override
-    public boolean onKeyDown( KeyboardEvent ke )
+    public void onKeyDown( KeyboardEvent ke )
     {
         if (this.currentRow != null) {
             if (ke.symbol == Keys.UP) {
@@ -269,21 +269,21 @@ public class Table extends PlainContainer
                     this.selectRow((TableRow) this.rows.getChildren().get(
                         this.currentRow.getRowIndex() - 1));
                 }
-                return true;
+                ke.stopPropagation();
             }
             if (ke.symbol == Keys.DOWN) {
                 if (this.currentRow.getRowIndex() < this.rows.getChildren().size() - 1) {
                     this.selectRow((TableRow) this.rows.getChildren().get(
                         this.currentRow.getRowIndex() + 1));
                 }
-                return true;
+                ke.stopPropagation();
             }
             if (ke.symbol == Keys.RETURN) {
                 this.pickRow(this.currentRow);
-                return true;
+                ke.stopPropagation();
             }
         }
 
-        return super.onKeyDown(ke);
+        super.onKeyDown(ke);
     }
 }

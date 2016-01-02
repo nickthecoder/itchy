@@ -547,15 +547,13 @@ public class Game
     void processEvent( Event event )
     {
         if (event instanceof QuitEvent) {
-            if (this.director.onQuit()) {
-                return;
-            }
+            this.director.onQuit( (QuitEvent) event );
+            // Itchy won't terminate if the director calls event.stopPropagation().
             Itchy.terminate();
-            
+
         } else if (event instanceof ResizeEvent) {
-    		ResizeEvent re = (ResizeEvent) event;
     		
-        	this.director.onResize( re.width, re.height );
+        	this.director.onResize( (ResizeEvent) event );
         	
         } else if (event instanceof KeyboardEvent) {
             KeyboardEvent ke = (KeyboardEvent) event;
@@ -565,22 +563,18 @@ public class Game
                 if (this.testing) {
                     if ((ke.symbol == Keys.ESCAPE) || (ke.symbol == Keys.F12)) {
                         endTest();
-                        return;
+                        event.stopPropagation();
                     }
                 }
 
                 if (this.keyboardFocus != null) {
-                    if (this.keyboardFocus.onKeyDown(ke)) {
-                        return;
-                    }
+                    this.keyboardFocus.onKeyDown(ke);
                 }
 
                 if (this.modalListener == null) {
 
                     for (KeyListener listener : this.keyListeners) {
-                        if (listener.onKeyDown(ke)) {
-                            return;
-                        }
+                        listener.onKeyDown(ke);
                     }
 
                 } else {
@@ -593,9 +587,7 @@ public class Game
                 if (this.modalListener == null) {
 
                     for (KeyListener listener : this.keyListeners) {
-                        if (listener.onKeyUp(ke)) {
-                            return;
-                        }
+                        listener.onKeyUp(ke);
                     }
 
                 } else {

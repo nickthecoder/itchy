@@ -53,15 +53,13 @@ public class PlainSceneDirector implements SceneDirector
     }
 
     @Override
-    public boolean onKeyDown( KeyboardEvent ke )
+    public void onKeyDown( KeyboardEvent ke )
     {
-        return false;
     }
 
     @Override
-    public boolean onKeyUp( KeyboardEvent ke )
+    public void onKeyUp( KeyboardEvent ke )
     {
-        return false;
     }
 
     @Override

@@ -108,17 +108,19 @@ public class DrunkInvaders extends AbstractDirector
     }
 
     @Override
-    public boolean onKeyDown( KeyboardEvent ke )
+    public void onKeyDown( KeyboardEvent ke )
     {
         if (this.inputDebug.matches(ke)) {
             debug();
+            ke.stopPropagation();
         }
 
         if (this.inputToggleInfo.matches(ke)) {
             toggleInfo();
+            ke.stopPropagation();
         }
 
-        return super.onKeyDown(ke);
+        super.onKeyDown(ke);
     }
 
     @Override

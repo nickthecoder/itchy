@@ -213,20 +213,20 @@ public class TextArea extends ClickableContainer implements Layout, KeyListener,
     }
 
     @Override
-    public boolean onKeyDown( KeyboardEvent ke )
+    public void onKeyDown( KeyboardEvent ke )
     {
         Label label = getCurrentLabel();
 
         if (ke.symbol == Keys.HOME) {
             this.caretIndex = 0;
             this.update();
-            return true;
+            ke.stopPropagation();
         }
 
         if (ke.symbol == Keys.END) {
             this.caretIndex = label.getText().length();
             this.update();
-            return true;
+            ke.stopPropagation();
         }
 
         if (ke.symbol == Keys.LEFT) {
@@ -234,7 +234,7 @@ public class TextArea extends ClickableContainer implements Layout, KeyListener,
                 this.caretIndex--;
                 this.update();
             }
-            return true;
+            ke.stopPropagation();
         }
 
         if (ke.symbol == Keys.UP) {
@@ -242,7 +242,7 @@ public class TextArea extends ClickableContainer implements Layout, KeyListener,
                 this.currentLine--;
                 this.update();
             }
-            return true;
+            ke.stopPropagation();
         }
 
         if (ke.symbol == Keys.DOWN) {
@@ -250,7 +250,7 @@ public class TextArea extends ClickableContainer implements Layout, KeyListener,
                 this.currentLine++;
                 this.update();
             }
-            return true;
+            ke.stopPropagation();
         }
 
         if (ke.symbol == Keys.RIGHT) {
@@ -258,13 +258,13 @@ public class TextArea extends ClickableContainer implements Layout, KeyListener,
                 this.caretIndex++;
                 this.update();
             }
-            return true;
+            ke.stopPropagation();
         }
 
         if (ke.symbol == Keys.RETURN) {
             addReturn();
             this.update();
-            return true;
+            ke.stopPropagation();
         }
 
         if (ke.symbol == Keys.BACKSPACE) {
@@ -279,7 +279,7 @@ public class TextArea extends ClickableContainer implements Layout, KeyListener,
                     this.update();
                 }
             }
-            return true;
+            ke.stopPropagation();
         }
 
         if (ke.symbol == Keys.DELETE) {
@@ -293,7 +293,7 @@ public class TextArea extends ClickableContainer implements Layout, KeyListener,
                     this.update();
                 }
             }
-            return true;
+            ke.stopPropagation();
         }
 
         if ((ke.symbol == Keys.v) && (Itchy.isCtrlDown())) {
@@ -311,16 +311,16 @@ public class TextArea extends ClickableContainer implements Layout, KeyListener,
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            return true;
+            ke.stopPropagation();
         }
 
         if ((ke.c >= 32)) {
             label.setText(label.getText().substring(0, this.caretIndex) + ke.c + label.getText().substring(this.caretIndex));
             this.caretIndex++;
-            return true;
+            ke.stopPropagation();
         }
 
-        return super.onKeyDown(ke);
+        super.onKeyDown(ke);
     }
 
     private void addReturn()
@@ -356,9 +356,8 @@ public class TextArea extends ClickableContainer implements Layout, KeyListener,
     }
 
     @Override
-    public boolean onKeyUp( KeyboardEvent ke )
+    public void onKeyUp( KeyboardEvent ke )
     {
-        return false;
     }
 
     public void setCaretPosition( int index )

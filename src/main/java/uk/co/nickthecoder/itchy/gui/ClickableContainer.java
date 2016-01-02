@@ -22,13 +22,13 @@ public abstract class ClickableContainer extends PlainContainer
     }
 
     @Override
-    public boolean onKeyDown( KeyboardEvent ke )
+    public void onKeyDown( KeyboardEvent ke )
     {
         if (this.hasFocus && ((ke.symbol == Keys.SPACE) || (ke.symbol == Keys.RETURN))) {
             this.onClick(null);
-            return true;
+            ke.stopPropagation();
         }
-        return super.onKeyDown(ke);
+        super.onKeyDown(ke);
     }
 
     @Override

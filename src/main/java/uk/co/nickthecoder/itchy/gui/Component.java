@@ -45,9 +45,9 @@ public interface Component
 
     public void remove();
 
-    public boolean onKeyDown( KeyboardEvent ke );
+    public void onKeyDown( KeyboardEvent ke );
 
-    public boolean onKeyUp( KeyboardEvent ke );
+    public void onKeyUp( KeyboardEvent ke );
 
     public boolean canFocus();
 

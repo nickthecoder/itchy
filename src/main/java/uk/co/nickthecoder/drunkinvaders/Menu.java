@@ -29,16 +29,16 @@ public class Menu extends PlainSceneDirector
     }
 
     @Override
-    public boolean onKeyDown( KeyboardEvent ke )
+    public void onKeyDown( KeyboardEvent ke )
     {
         if (ke.symbol == Keys.ESCAPE) {
             DrunkInvaders.director.getGame().end();
-            return true;
+            ke.stopPropagation();
         }
 
         if ((ke.symbol == Keys.p) || (ke.symbol == Keys.RETURN)) {
             DrunkInvaders.director.startScene("levels");
-            return true;
+            ke.stopPropagation();
         }
 
         if ((ke.symbol == Keys.a) || (ke.symbol == Keys.c)) {
@@ -48,8 +48,6 @@ public class Menu extends PlainSceneDirector
         if ((ke.symbol == Keys.F12) || (ke.symbol == Keys.e)) {
             DrunkInvaders.director.getGame().startEditor();
         }
-
-        return false;
     }
 
 }

@@ -169,15 +169,13 @@ public abstract class AbstractComponent implements Focusable, Component
     }
 
     @Override
-    public boolean onKeyDown( KeyboardEvent ke )
+    public void onKeyDown( KeyboardEvent ke )
     {
-        return false;
     }
 
     @Override
-    public boolean onKeyUp( KeyboardEvent ke )
+    public void onKeyUp( KeyboardEvent ke )
     {
-        return false;
     }
 
     @Override

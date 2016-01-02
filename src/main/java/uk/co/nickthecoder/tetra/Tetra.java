@@ -214,10 +214,10 @@ public class Tetra extends AbstractDirector
     }
 
     @Override
-    public boolean onKeyDown( KeyboardEvent ke )
+    public void onKeyDown( KeyboardEvent ke )
     {
         if (ke.isReleased()) {
-            return false;
+            return;
         }
 
         if (this.inputEditor.matches(ke)) {
@@ -269,7 +269,6 @@ public class Tetra extends AbstractDirector
                 }
             }
         }
-        return false;
     }
 
     private void chooseLevel( int level )

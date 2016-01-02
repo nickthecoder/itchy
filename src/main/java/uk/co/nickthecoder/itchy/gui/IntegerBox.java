@@ -105,22 +105,22 @@ public class IntegerBox extends EntryBox<IntegerBox>
     }
 
     @Override
-    public boolean onKeyDown( KeyboardEvent ke )
+    public void onKeyDown( KeyboardEvent ke )
     {
         if (ke.symbol == Keys.UP) {
             this.adjust(1);
-            return true;
+            ke.stopPropagation();
         } else if (ke.symbol == Keys.DOWN) {
             this.adjust(-1);
-            return true;
+            ke.stopPropagation();
         } else if (ke.symbol == Keys.PAGEUP) {
             this.adjust(10);
-            return true;
+            ke.stopPropagation();
         } else if (ke.symbol == Keys.PAGEDOWN) {
             this.adjust(-10);
-            return true;
+            ke.stopPropagation();
         }
-        return super.onKeyDown(ke);
+        super.onKeyDown(ke);
     }
 
     @Override

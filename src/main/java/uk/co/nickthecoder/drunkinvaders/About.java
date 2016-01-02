@@ -19,14 +19,13 @@ public class About extends PlainSceneDirector
     }
 
     @Override
-    public boolean onKeyDown( KeyboardEvent ke )
+    public void onKeyDown( KeyboardEvent ke )
     {
         if (this.inputExit.matches(ke)) {
             DrunkInvaders.director.startScene("menu");
-            return true;
+            ke.stopPropagation();
         }
 
-        return false;
     }
 
 }

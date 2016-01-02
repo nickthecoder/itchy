@@ -53,24 +53,22 @@ public class Level extends PlainSceneDirector
     }
 
     @Override
-    public boolean onKeyDown( KeyboardEvent ke )
+    public void onKeyDown( KeyboardEvent ke )
     {
         if (this.inputExit.matches(ke)) {
             this.ending = true;
             DrunkInvaders.director.startScene("menu");
-            return true;
+            ke.stopPropagation();
         }
 
         if (this.inputPause.matches(ke)) {
             DrunkInvaders.director.getGame().pause.togglePause();
-            return true;
+            ke.stopPropagation();
         }
 
         if (this.inputCheat.matches(ke)) {
             addAliens(-1);
         }
-
-        return false;
     }
 
     @Override

@@ -6,6 +6,8 @@ package uk.co.nickthecoder.itchy;
 
 import java.util.prefs.Preferences;
 
+import uk.co.nickthecoder.jame.event.ResizeEvent;
+
 public interface Director extends InputListener, QuitListener, MessageListener, WindowListener
 {
     public void attach( Game game );
@@ -16,7 +18,7 @@ public interface Director extends InputListener, QuitListener, MessageListener, 
 
     public void onDeactivate();
 
-    public void onResize( int width, int height );
+    public void onResize( ResizeEvent e );
 
     public boolean startScene( String sceneName );
 
