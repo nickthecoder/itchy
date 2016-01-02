@@ -1,19 +1,11 @@
-import math
+from common import *
 
-from uk.co.nickthecoder.itchy import Itchy
-from uk.co.nickthecoder.itchy import Input
-from uk.co.nickthecoder.itchy import Role
-from uk.co.nickthecoder.itchy.util import ClassName
-from uk.co.nickthecoder.itchy.role import OnionSkinBuilder
-from uk.co.nickthecoder.itchy.role import ExplosionBuilder
-from uk.co.nickthecoder.itchy.extras import Timer
-from uk.co.nickthecoder.itchy.extras import Fragment
-
-
-from java.util import ArrayList
 from moving import Moving
 
 properties = ArrayList()
+
+game = Itchy.getGame()
+director = game.getDirector()
 
 class Ship(Moving) :
 
@@ -21,6 +13,7 @@ class Ship(Moving) :
         Moving.__init__(self)
         self.lifeIcon = []
         self.bulletName = "bullet-1"
+
 
     def onBirth(self) :
     
@@ -34,35 +27,34 @@ class Ship(Moving) :
         self.inputWeapon2 = Input.find("weapon-2")
     
         OnionSkinBuilder( self.getActor() ) \
-            .alpha(128).every(5).fade(3).create();
+            .alpha(128).every(5).fade(3).create()
 
-        self.rotationSpeed = self.getActor().getCostume().getProperties().rotationSpeed;
-        self.thrust = self.getActor().getCostume().getProperties().thrust;
+        self.rotationSpeed = self.getActor().getCostume().getProperties().rotationSpeed
+        self.thrust = self.getActor().getCostume().getProperties().thrust
         self.fireTimer = None
         
         # Cut the ship into 3 large pieces, and call these poses "part"
-        Fragment().actor(self.getActor()).pieces(3).createPoses("part");
+        Fragment().actor(self.getActor()).pieces(3).createPoses("part")
         # Cut the ship again, this time into 10 pieces, and call these poses "fragment".
-        Fragment().actor(self.getActor()).pieces(10).createPoses("fragment");
+        Fragment().actor(self.getActor()).pieces(10).createPoses("fragment")
         # These are use together when the ship explodes in the "die" method.
 
-        Itchy.getGame().getSceneDirector().ship = self;
+        game.getSceneDirector().ship = self
         
         ExplosionBuilder(self.getActor()) \
             .companion("warp").eventName("default").distance(30,-80).spread(0,360).spread(0,360).randomSpread(False) \
             .speed(0,0).projectiles(40) \
-            .create();
-
-        print "Lives : ", Itchy.getGame().getDirector().lives
+            .create()
         
-        for i in range( 0, Itchy.getGame().getDirector().lives ) :
+        for i in range( 0, director.lives ) :
             actor = self.getActor().createCompanion("life")
-            Itchy.getGame().getDirector().hudStage.add(actor)
+            director.hudStage.add(actor)
             actor.moveTo( 30 + i * 40 , 560 )
-            if Itchy.getGame().getSceneName() == "1" :
-                actor.event("appear");
+            if game.getSceneName() == "1" :
+                actor.event("appear")
                 
-            self.lifeIcon.append(actor);
+            self.lifeIcon.append(actor)
+
 
     def warp(self) :
     
@@ -75,14 +67,14 @@ class Ship(Moving) :
 
         self.getActor().deathEvent("fade")
 
-    def tick(self) :
 
+    def tick(self) :
             
         if self.inputLeft.pressed() :
             self.getActor().adjustDirection( self.rotationSpeed )
             
         if self.inputRight.pressed() :
-            self.getActor().adjustDirection( -self.rotationSpeed );
+            self.getActor().adjustDirection( -self.rotationSpeed )
 
         if self.inputThrust.pressed() :
             theta = self.getActor().getHeadingRadians()
@@ -100,8 +92,8 @@ class Ship(Moving) :
         
             if self.inputFire.pressed() :
                 if self.fireTimer is None :
-                    firePeriod = self.getActor().getCostume().getCompanion(self.bulletName).getProperties().firePeriod;
-                    self.fireTimer = Timer.createTimerSeconds(firePeriod);
+                    firePeriod = self.getActor().getCostume().getCompanion(self.bulletName).getProperties().firePeriod
+                    self.fireTimer = Timer.createTimerSeconds(firePeriod)
 
                 self.fire()
                 self.fireTimer.reset()
@@ -118,12 +110,13 @@ class Ship(Moving) :
         Moving.tick(self)
         
         if self.collided("deadly") :
-            self.explode();
+            self.explode()
 
         # For debugging.
         if self.inputCheat.pressed() :
-            Itchy.getGame().getSceneDirector().addRocks(-1);
-    
+            game.getSceneDirector().addRocks(-1)
+
+
     def explode( self ) :
        
        # Use the "fragment" and "part" poses created in onBirth to explode the ship in all directions.
@@ -134,19 +127,21 @@ class Ship(Moving) :
         ExplosionBuilder(self.getActor()) \
             .speed(1.5,0,4,0).fade(3).spin(-1,1).rotate(True).eventName("fragment").projectiles(20).create()
         
-        Itchy.getGame().getDirector().lives -= 1
+        director.lives -= 1
 
-        self.lifeIcon[Itchy.getGame().getDirector().lives].event("disappear")
+        self.lifeIcon[director.lives].event("disappear")
         self.actor.deathEvent("explode", "exploded")
-    
+
+
     def onMessage(self, message ) :
         if message == "exploded" :
-            if Itchy.getGame().getDirector().lives > 0 :
-                Itchy.getGame().startScene(Itchy.getGame().getSceneName())
+            if director.lives > 0 :
+                game.startScene(game.getSceneName())
             else :
-                Itchy.getGame().getDirector().showFancyMouse()
-                Itchy.getGame().loadScene("gameOver", True)
-    
+                director.showFancyMouse()
+                game.loadScene("gameOver", True)
+
+
     def fire(self) :
         actor = self.actor.createCompanion(self.bulletName)
 
@@ -154,12 +149,12 @@ class Ship(Moving) :
         actor.moveTo( self.getActor() )
         actor.moveForwards(40)
 
-        impulse = actor.getCostume().getProperties().impulse;
+        impulse = actor.getCostume().getProperties().impulse
         theta = self.getActor().getHeadingRadians()
-        self.vx -= math.cos(theta) * impulse;
-        self.vy -= math.sin(theta) * impulse;
-    
-    
+        self.vx -= math.cos(theta) * impulse
+        self.vy -= math.sin(theta) * impulse
+
+
     # Boiler plate code - no need to change this
     def getProperties(self):
         return properties

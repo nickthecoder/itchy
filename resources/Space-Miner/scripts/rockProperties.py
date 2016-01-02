@@ -1,13 +1,6 @@
-from uk.co.nickthecoder.itchy import CostumeProperties
-from uk.co.nickthecoder.itchy.util import ClassName
-
-from java.util import ArrayList
-
-from uk.co.nickthecoder.itchy.property import IntegerProperty
-from uk.co.nickthecoder.itchy.property import DoubleProperty
+from common import *
 
 properties = ArrayList()
-
 properties.add( IntegerProperty("pieces") )
 properties.add( IntegerProperty("points") )
 properties.add( IntegerProperty("strength") )
@@ -20,7 +13,8 @@ class RockProperties(CostumeProperties) :
     	self.points = 10
     	self.strength = 0
     	self.hitsRequired = 1
-        
+
+
     # Boiler plate code - no need to change this
     def getProperties(self):
         return properties

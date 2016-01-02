@@ -1,10 +1,4 @@
-from uk.co.nickthecoder.itchy import CostumeProperties
-from uk.co.nickthecoder.itchy.util import ClassName
-
-from java.util import ArrayList
-
-from uk.co.nickthecoder.itchy.property import DoubleProperty
-from uk.co.nickthecoder.itchy.property import IntegerProperty
+from common import *
 
 properties = ArrayList()
 
@@ -20,6 +14,7 @@ class BulletProperties(CostumeProperties) :
         self.strength = 1
         self.firePeriod = 0.2
         self.explosiveness = 1
+
 
     # Boiler plate code - no need to change this
     def getProperties(self):

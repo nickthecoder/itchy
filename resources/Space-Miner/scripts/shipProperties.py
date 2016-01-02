@@ -1,11 +1,4 @@
-from uk.co.nickthecoder.itchy import CostumeProperties
-from uk.co.nickthecoder.itchy.util import ClassName
-
-from java.util import ArrayList
-
-from uk.co.nickthecoder.itchy.property import DoubleProperty
-
-properties = ArrayList()
+from common import *
 
 properties = ArrayList()
 properties.add( DoubleProperty("rotationSpeed") )
