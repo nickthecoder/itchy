@@ -1,7 +1,6 @@
-import uk.co.nickthecoder.itchy.CostumeProperties
-import uk.co.nickthecoder.itchy.util.ClassName
-
-import uk.co.nickthecoder.itchy.property.DoubleProperty
+import uk.co.nickthecoder.itchy.*
+import uk.co.nickthecoder.itchy.property.*
+import uk.co.nickthecoder.itchy.util.*
 
 public class DropProperties extends CostumeProperties
 {
@@ -16,13 +15,13 @@ public class DropProperties extends CostumeProperties
     // Boiler plate code - no need to change this
     public ArrayList getProperties()
     {
-        return properties;
+        return properties
     }
     
     // Boiler plate code - no need to change this
     public ClassName getClassName()
     {
-        return ClassName( CostumeProperties, 'DropProperties.groovy' );
+        return ClassName( CostumeProperties, 'DropProperties.groovy' )
     }
 
 }

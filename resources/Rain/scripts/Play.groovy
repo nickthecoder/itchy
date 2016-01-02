@@ -1,24 +1,18 @@
-import uk.co.nickthecoder.jame.event.KeyboardEvent
-import uk.co.nickthecoder.itchy.Itchy
-import uk.co.nickthecoder.itchy.Input
-import uk.co.nickthecoder.itchy.PlainSceneDirector
-import uk.co.nickthecoder.itchy.util.ClassName
-import uk.co.nickthecoder.itchy.extras.Timer
-import uk.co.nickthecoder.itchy.property.IntegerProperty
+import uk.co.nickthecoder.jame.event.*
+import uk.co.nickthecoder.itchy.*
+import uk.co.nickthecoder.itchy.util.*
+import uk.co.nickthecoder.itchy.extras.*
+import uk.co.nickthecoder.itchy.property.*
 
 public class Play extends PlainSceneDirector
 {
     protected static properties = new ArrayList()
     
     static {
-        // Define the scene's properties. These properties can then be editted within the Scene Designer,
-        // within the "Scene" section. Each scene has its own values,
-        // i.e. scene "easy" will have a different "speed" to scene "hard".
-        properties.add( new IntegerProperty("speed") );
-        properties.add( new IntegerProperty("maxSpeed").label("Maximum Speed") );
-        properties.add( new IntegerProperty("speedUpAfter") );
+        properties.add( new IntegerProperty("speed") )
+        properties.add( new IntegerProperty("maxSpeed").label("Maximum Speed") )
+        properties.add( new IntegerProperty("speedUpAfter") )
     }
-    
     
     def speed = 5
     
@@ -44,7 +38,7 @@ public class Play extends PlainSceneDirector
         inputExit = Input.find('exit')
 
         // High scores are saved. There is a high score for each level. If there is no high score, then use 0.
-        highScore = Itchy.getGame().getPreferences().getInt( Itchy.getGame().getSceneName() + ".highScore", 0)
+        highScore = Itchy.game.preferences.getInt( Itchy.game.sceneName + ".highScore", 0 )
         
         // Create a timer, which will tell us when to increase the speed.
         speedUpTimer = Timer.createTimerSeconds( speedUpAfter )
@@ -75,17 +69,18 @@ public class Play extends PlainSceneDirector
     
     boolean onKeyDown( KeyboardEvent ke )
     {
-        
         // If we are dead, then the RETURN key will start a new game (reloads the current scene)
         if ((!isPlaying()) && inputRestart.matches(ke)) {
-            Itchy.getGame().startScene( Itchy.getGame().getSceneName() )
-            return true // Return true to indicate that the key has been processed.
+            Itchy.game.startScene( Itchy.game.sceneName )
+            return true
+            // Return true to indicate that the key has been processed.
         }
 
         // Escape key takes us back to the menu.
         if (inputExit.matches(ke)) {
-            Itchy.getGame().startScene("menu")
-            return true // Return true to indicate that the key has been processed.
+            Itchy.game.startScene("menu")
+            return true
+            // Return true to indicate that the key has been processed.
         }
         return false
     }
@@ -103,7 +98,7 @@ public class Play extends PlainSceneDirector
         // If we've beaten the high score, store in into preferences. Preferences are stored permanently,
         // so the high score will still be there when we play the game weeks or months later.
         if (score > highScore) {
-            Itchy.getGame().getPreferences().putInt( Itchy.getGame().getSceneName() + ".highScore", score )
+            Itchy.game.preferences.putInt( Itchy.game.sceneName + ".highScore", score )
         }
     }       
 
@@ -118,7 +113,5 @@ public class Play extends PlainSceneDirector
     {
         return new ClassName( CostumeProperties, "Play.groovy" )
     }
-
 }
-
 

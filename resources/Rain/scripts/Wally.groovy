@@ -1,12 +1,7 @@
-import uk.co.nickthecoder.itchy.Role
-import uk.co.nickthecoder.itchy.Actor
-import uk.co.nickthecoder.itchy.AbstractRole
-import uk.co.nickthecoder.itchy.ViewMouseListener
-import uk.co.nickthecoder.itchy.MouseListenerView
-import uk.co.nickthecoder.itchy.util.ClassName
+import uk.co.nickthecoder.itchy.*
+import uk.co.nickthecoder.itchy.util.*
 
-import uk.co.nickthecoder.jame.event.MouseButtonEvent
-import uk.co.nickthecoder.jame.event.MouseMotionEvent
+import uk.co.nickthecoder.jame.event.*
 
 class Wally extends AbstractRole implements ViewMouseListener
 {
@@ -15,8 +10,8 @@ class Wally extends AbstractRole implements ViewMouseListener
     // Poke (mouse click) the wally walking across out view, to make him/her jump.   
     public boolean onMouseDown(MouseListenerView view, MouseButtonEvent event)
     {
-        if (getActor().pixelOverlap(event.x, event.y)) {
-            getActor().event("boo", null, Actor.AnimationEvent.PARALLEL)
+        if (actor.pixelOverlap(event.x, event.y)) {
+            actor.event("boo", null, Actor.AnimationEvent.PARALLEL)
             return true
         }
         return false
@@ -48,6 +43,5 @@ class Wally extends AbstractRole implements ViewMouseListener
     {
         return new ClassName( Role, "Wally.groovy" )
     }
-    
 }
 
