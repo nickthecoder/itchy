@@ -1,0 +1,360 @@
+<resources>
+  <game resizable="false" title="The Mings" width="1000" height="800" initialScene="test" directorClassName="director.py"/>
+  <fonts>
+    <font name="Boycott" filename="fonts/Boycott/Boycott.ttf"/>
+  </fonts>
+  <ninePatches>
+    <ninePatch name="borderE" filename="images/borderE.png" top="2" right="2" bottom="2" left="2"/>
+    <ninePatch name="borderEW" filename="images/borderEW.png" top="2" right="2" bottom="2" left="2"/>
+    <ninePatch name="borderN" filename="images/borderN.png" top="2" right="2" bottom="2" left="2"/>
+    <ninePatch name="borderNE" filename="images/borderNE.png" top="2" right="2" bottom="2" left="2"/>
+    <ninePatch name="borderNEW" filename="images/borderNEW.png" top="2" right="2" bottom="2" left="2"/>
+    <ninePatch name="borderNS" filename="images/borderNS.png" top="2" right="2" bottom="2" left="2"/>
+    <ninePatch name="borderNSE" filename="images/borderNSE.png" top="2" right="2" bottom="2" left="2"/>
+    <ninePatch name="borderNSEW" filename="images/borderNSEW.png" top="2" right="2" bottom="2" left="2"/>
+    <ninePatch name="borderNSW" filename="images/borderNSW.png" top="2" right="2" bottom="2" left="2"/>
+    <ninePatch name="borderNW" filename="images/borderNW.png" top="2" right="2" bottom="2" left="2"/>
+    <ninePatch name="borderS" filename="images/borderS.png" top="2" right="2" bottom="2" left="2"/>
+    <ninePatch name="borderSE" filename="images/borderSE.png" top="2" right="2" bottom="2" left="2"/>
+    <ninePatch name="borderSEW" filename="images/borderSEW.png" top="2" right="2" bottom="2" left="2"/>
+    <ninePatch name="borderSW" filename="images/borderSW.png" top="2" right="2" bottom="2" left="2"/>
+    <ninePatch name="borderW" filename="images/borderW.png" top="2" right="2" bottom="2" left="2"/>
+    <ninePatch name="button" filename="images/button.png" top="3" right="3" bottom="3" left="3"/>
+  </ninePatches>
+  <poses>
+    <pose name="blocker0" filename="images/blocker0.png" offsetY="60"/>
+    <pose name="blocker1" filename="images/blocker1.png" offsetY="60"/>
+    <pose name="blocker10" filename="images/blocker10.png" offsetY="60"/>
+    <pose name="blocker11" filename="images/blocker11.png" offsetY="60"/>
+    <pose name="blocker12" filename="images/blocker12.png" offsetY="60"/>
+    <pose name="blocker13" filename="images/blocker13.png" offsetY="60"/>
+    <pose name="blocker14" filename="images/blocker14.png" offsetY="60"/>
+    <pose name="blocker15" filename="images/blocker15.png" offsetY="60"/>
+    <pose name="blocker2" filename="images/blocker2.png" offsetY="60"/>
+    <pose name="blocker3" filename="images/blocker3.png" offsetY="60"/>
+    <pose name="blocker4" filename="images/blocker4.png" offsetY="60"/>
+    <pose name="blocker5" filename="images/blocker5.png" offsetY="60"/>
+    <pose name="blocker6" filename="images/blocker6.png" offsetY="60"/>
+    <pose name="blocker7" filename="images/blocker7.png" offsetY="60"/>
+    <pose name="blocker8" filename="images/blocker8.png" offsetY="60"/>
+    <pose name="blocker9" filename="images/blocker9.png" offsetY="60"/>
+    <pose name="button" filename="images/button.png"/>
+    <pose name="buttonBlocker" filename="images/buttonBlocker.png"/>
+    <pose name="buttonClimber" filename="images/buttonClimber.png"/>
+    <pose name="buttonDefault" filename="images/buttonDefault.png"/>
+    <pose name="buttonSelect" filename="images/buttonSelect.png"/>
+    <pose name="buttonSelected" filename="images/buttonSelected.png"/>
+    <pose name="buttonSmasher" filename="images/buttonSmasher.png"/>
+    <pose name="climberL0" filename="images/climberL0.png" offsetX="24" offsetY="60"/>
+    <pose name="climberL1" filename="images/climberL1.png" offsetX="24" offsetY="60"/>
+    <pose name="climberL2" filename="images/climberL2.png" offsetX="24" offsetY="60"/>
+    <pose name="climberL3" filename="images/climberL3.png" offsetX="24" offsetY="60"/>
+    <pose name="climberL4" filename="images/climberL4.png" offsetX="24" offsetY="60"/>
+    <pose name="climberL5" filename="images/climberL5.png" offsetX="24" offsetY="60"/>
+    <pose name="climberL6" filename="images/climberL6.png" offsetX="24" offsetY="60"/>
+    <pose name="climberL7" filename="images/climberL7.png" offsetX="24" offsetY="60"/>
+    <pose name="climberR0" filename="images/climberR0.png" offsetX="24" offsetY="60"/>
+    <pose name="climberR1" filename="images/climberR1.png" offsetX="24" offsetY="60"/>
+    <pose name="climberR2" filename="images/climberR2.png" offsetX="24" offsetY="60"/>
+    <pose name="climberR3" filename="images/climberR3.png" offsetX="24" offsetY="60"/>
+    <pose name="climberR4" filename="images/climberR4.png" offsetX="24" offsetY="60"/>
+    <pose name="climberR5" filename="images/climberR5.png" offsetX="24" offsetY="60"/>
+    <pose name="climberR6" filename="images/climberR6.png" offsetX="24" offsetY="60"/>
+    <pose name="climberR7" filename="images/climberR7.png" offsetX="24" offsetY="60"/>
+    <pose name="entrance1" filename="images/entrance1.png" offsetY="78"/>
+    <pose name="fall" filename="images/fall.png" offsetY="0"/>
+    <pose name="fall0" filename="images/fall0.png" offsetY="60"/>
+    <pose name="fall1" filename="images/fall1.png" offsetY="60"/>
+    <pose name="fall2" filename="images/fall2.png" offsetY="60"/>
+    <pose name="fall3" filename="images/fall3.png" offsetY="60"/>
+    <pose name="grass1" filename="images/grass1.png" offsetX="2" offsetY="8"/>
+    <pose name="gui" filename="images/gui.png" offsetX="0" offsetY="100"/>
+    <pose name="highlight" filename="images/highlight.png" offsetY="95"/>
+    <pose name="paws" filename="images/paws.png"/>
+    <pose name="smashed" filename="images/smashed.png" offsetY="61"/>
+    <pose name="smasherL0" filename="images/smasherL0.png" offsetY="60"/>
+    <pose name="smasherL1" filename="images/smasherL1.png" offsetY="60"/>
+    <pose name="smasherL10" filename="images/smasherL10.png" offsetY="60"/>
+    <pose name="smasherL11" filename="images/smasherL11.png" offsetY="60"/>
+    <pose name="smasherL12" filename="images/smasherL12.png" offsetY="60"/>
+    <pose name="smasherL13" filename="images/smasherL13.png" offsetY="60"/>
+    <pose name="smasherL14" filename="images/smasherL14.png" offsetY="60"/>
+    <pose name="smasherL15" filename="images/smasherL15.png" offsetY="60"/>
+    <pose name="smasherL2" filename="images/smasherL2.png" offsetY="60"/>
+    <pose name="smasherL3" filename="images/smasherL3.png" offsetY="60"/>
+    <pose name="smasherL4" filename="images/smasherL4.png" offsetY="60"/>
+    <pose name="smasherL5" filename="images/smasherL5.png" offsetY="60"/>
+    <pose name="smasherL6" filename="images/smasherL6.png" offsetY="60"/>
+    <pose name="smasherL7" filename="images/smasherL7.png" offsetY="60"/>
+    <pose name="smasherL8" filename="images/smasherL8.png" offsetY="60"/>
+    <pose name="smasherL9" filename="images/smasherL9.png" offsetY="60"/>
+    <pose name="smasherR0" filename="images/smasherR0.png" offsetY="60"/>
+    <pose name="smasherR1" filename="images/smasherR1.png" offsetY="60"/>
+    <pose name="smasherR10" filename="images/smasherR10.png" offsetY="60"/>
+    <pose name="smasherR11" filename="images/smasherR11.png" offsetY="60"/>
+    <pose name="smasherR12" filename="images/smasherR12.png" offsetY="60"/>
+    <pose name="smasherR13" filename="images/smasherR13.png" offsetY="60"/>
+    <pose name="smasherR14" filename="images/smasherR14.png" offsetY="60"/>
+    <pose name="smasherR15" filename="images/smasherR15.png" offsetY="60"/>
+    <pose name="smasherR2" filename="images/smasherR2.png" offsetY="60"/>
+    <pose name="smasherR3" filename="images/smasherR3.png" offsetY="60"/>
+    <pose name="smasherR4" filename="images/smasherR4.png" offsetY="60"/>
+    <pose name="smasherR5" filename="images/smasherR5.png" offsetY="60"/>
+    <pose name="smasherR6" filename="images/smasherR6.png" offsetY="60"/>
+    <pose name="smasherR7" filename="images/smasherR7.png" offsetY="60"/>
+    <pose name="smasherR8" filename="images/smasherR8.png" offsetY="60"/>
+    <pose name="smasherR9" filename="images/smasherR9.png" offsetY="60"/>
+    <pose name="soil1" filename="images/soil1.png" offsetX="2" offsetY="4"/>
+    <pose name="squish0" filename="images/squish0.png" offsetY="60"/>
+    <pose name="squish1" filename="images/squish1.png" offsetY="60"/>
+    <pose name="squish10" filename="images/squish10.png" offsetY="60"/>
+    <pose name="squish11" filename="images/squish11.png" offsetY="60"/>
+    <pose name="squish12" filename="images/squish12.png" offsetY="60"/>
+    <pose name="squish13" filename="images/squish13.png" offsetY="60"/>
+    <pose name="squish14" filename="images/squish14.png" offsetY="60"/>
+    <pose name="squish15" filename="images/squish15.png" offsetY="60"/>
+    <pose name="squish2" filename="images/squish2.png" offsetY="60"/>
+    <pose name="squish3" filename="images/squish3.png" offsetY="60"/>
+    <pose name="squish4" filename="images/squish4.png" offsetY="60"/>
+    <pose name="squish5" filename="images/squish5.png" offsetY="60"/>
+    <pose name="squish6" filename="images/squish6.png" offsetY="60"/>
+    <pose name="squish7" filename="images/squish7.png" offsetY="60"/>
+    <pose name="squish8" filename="images/squish8.png" offsetY="60"/>
+    <pose name="squish9" filename="images/squish9.png" offsetY="60"/>
+    <pose name="stepUp" filename="images/climb.png" offsetY="6"/>
+    <pose name="theMings" filename="images/src/theMings.png"/>
+    <pose name="turnLeft" filename="images/reverse.png" offsetX="-12" offsetY="57"/>
+    <pose name="turnRight" filename="images/reverse.png" offsetX="13" offsetY="57"/>
+    <pose name="walkL0" filename="images/walkL0.png" offsetY="60"/>
+    <pose name="walkL1" filename="images/walkL1.png" offsetY="60"/>
+    <pose name="walkL2" filename="images/walkL2.png" offsetY="60"/>
+    <pose name="walkL3" filename="images/walkL3.png" offsetY="60"/>
+    <pose name="walkL4" filename="images/walkL4.png" offsetY="60"/>
+    <pose name="walkL5" filename="images/walkL5.png" offsetY="60"/>
+    <pose name="walkL6" filename="images/walkL6.png" offsetY="60"/>
+    <pose name="walkL7" filename="images/walkL7.png" offsetY="60"/>
+    <pose name="walkL8" filename="images/walkL8.png"/>
+    <pose name="walkL9" filename="images/walkL9.png"/>
+    <pose name="walkR0" filename="images/walkR0.png" offsetY="60"/>
+    <pose name="walkR1" filename="images/walkR1.png" offsetY="60"/>
+    <pose name="walkR2" filename="images/walkR2.png" offsetY="60"/>
+    <pose name="walkR3" filename="images/walkR3.png" offsetY="60"/>
+    <pose name="walkR4" filename="images/walkR4.png" offsetY="60"/>
+    <pose name="walkR5" filename="images/walkR5.png" offsetY="60"/>
+    <pose name="walkR6" filename="images/walkR6.png" offsetY="60"/>
+    <pose name="walkR7" filename="images/walkR7.png" offsetY="60"/>
+    <pose name="walkR8" filename="images/walkR8.png"/>
+    <pose name="walkR9" filename="images/walkR9.png"/>
+  </poses>
+  <sounds/>
+  <animations>
+    <animation name="blocker">
+      <sequence loops="0" sequence="true">
+        <frames pingPong="false">
+          <frame pose="blocker0" delay="8"/>
+          <frame pose="blocker1" delay="8"/>
+          <frame pose="blocker2" delay="8"/>
+          <frame pose="blocker3" delay="8"/>
+          <frame pose="blocker4" delay="8"/>
+          <frame pose="blocker5" delay="8"/>
+          <frame pose="blocker6" delay="8"/>
+          <frame pose="blocker7" delay="8"/>
+          <frame pose="blocker8" delay="8"/>
+          <frame pose="blocker9" delay="8"/>
+          <frame pose="blocker10" delay="8"/>
+          <frame pose="blocker11" delay="8"/>
+          <frame pose="blocker12" delay="8"/>
+          <frame pose="blocker13" delay="8"/>
+          <frame pose="blocker14" delay="8"/>
+          <frame pose="blocker15" delay="8"/>
+        </frames>
+      </sequence>
+    </animation>
+    <animation name="climberL">
+      <sequence loops="0" sequence="true">
+        <frames pingPong="false">
+          <frame pose="climberL0" delay="4"/>
+          <frame pose="climberL1" delay="4"/>
+          <frame pose="climberL2" delay="4"/>
+          <frame pose="climberL3" delay="4"/>
+          <frame pose="climberL4" delay="4"/>
+          <frame pose="climberL5" delay="4"/>
+          <frame pose="climberL6" delay="4"/>
+          <frame pose="climberL7" delay="4"/>
+        </frames>
+      </sequence>
+    </animation>
+    <animation name="climberR">
+      <sequence loops="0" sequence="true">
+        <frames pingPong="false">
+          <frame pose="climberR0" delay="4"/>
+          <frame pose="climberR1" delay="4"/>
+          <frame pose="climberR2" delay="4"/>
+          <frame pose="climberR3" delay="4"/>
+          <frame pose="climberR4" delay="4"/>
+          <frame pose="climberR5" delay="4"/>
+          <frame pose="climberR6" delay="4"/>
+          <frame pose="climberR7" delay="4"/>
+        </frames>
+      </sequence>
+    </animation>
+    <animation name="fall">
+      <sequence loops="0" sequence="true">
+        <frames pingPong="false">
+          <frame pose="fall0" delay="4"/>
+          <frame pose="fall1" delay="4"/>
+          <frame pose="fall2" delay="4"/>
+          <frame pose="fall3" delay="4"/>
+        </frames>
+      </sequence>
+    </animation>
+    <animation name="smasherL">
+      <sequence loops="0" sequence="true">
+        <frames pingPong="false">
+          <frame pose="smasherL0" delay="4"/>
+          <frame pose="smasherL1" delay="4"/>
+          <frame pose="smasherL2" delay="4"/>
+          <frame pose="smasherL3" delay="4"/>
+          <frame pose="smasherL4" delay="4"/>
+          <frame pose="smasherL5" delay="4"/>
+          <frame pose="smasherL6" delay="4"/>
+          <frame pose="smasherL7" delay="4"/>
+          <frame pose="smasherL8" delay="4"/>
+          <frame pose="smasherL9" delay="4"/>
+          <frame pose="smasherL10" delay="4"/>
+          <frame pose="smasherL11" delay="4"/>
+          <frame pose="smasherL12" delay="4"/>
+          <frame pose="smasherL13" delay="4"/>
+          <frame pose="smasherL14" delay="4"/>
+          <frame pose="smasherL15" delay="4"/>
+        </frames>
+      </sequence>
+    </animation>
+    <animation name="smasherR">
+      <sequence loops="0" sequence="true">
+        <frames pingPong="false">
+          <frame pose="smasherR0" delay="4"/>
+          <frame pose="smasherR1" delay="4"/>
+          <frame pose="smasherR2" delay="4"/>
+          <frame pose="smasherR3" delay="4"/>
+          <frame pose="smasherR4" delay="4"/>
+          <frame pose="smasherR5" delay="4"/>
+          <frame pose="smasherR6" delay="4"/>
+          <frame pose="smasherR7" delay="4"/>
+          <frame pose="smasherR8" delay="4"/>
+          <frame pose="smasherR9" delay="4"/>
+          <frame pose="smasherR10" delay="4"/>
+          <frame pose="smasherR11" delay="4"/>
+          <frame pose="smasherR12" delay="4"/>
+          <frame pose="smasherR13" delay="4"/>
+          <frame pose="smasherR14" delay="4"/>
+          <frame pose="smasherR15" delay="4"/>
+        </frames>
+      </sequence>
+    </animation>
+    <animation name="squish">
+      <sequence loops="1" sequence="true">
+        <frames pingPong="false">
+          <frame pose="squish0" delay="4"/>
+          <frame pose="squish1" delay="4"/>
+          <frame pose="squish2" delay="4"/>
+          <frame pose="squish3" delay="4"/>
+          <frame pose="squish4" delay="4"/>
+          <frame pose="squish5" delay="4"/>
+          <frame pose="squish6" delay="4"/>
+          <frame pose="squish7" delay="4"/>
+          <frame pose="squish8" delay="4"/>
+          <frame pose="squish9" delay="4"/>
+          <frame pose="squish10" delay="4"/>
+          <frame pose="squish11" delay="4"/>
+          <frame pose="squish12" delay="4"/>
+          <frame pose="squish13" delay="4"/>
+          <frame pose="squish14" delay="4"/>
+          <frame pose="squish15" delay="4"/>
+        </frames>
+      </sequence>
+    </animation>
+    <animation name="walkL">
+      <sequence loops="0" sequence="true">
+        <frames pingPong="false">
+          <frame pose="walkL0" delay="4"/>
+          <frame pose="walkL1" delay="4"/>
+          <frame pose="walkL2" delay="4"/>
+          <frame pose="walkL3" delay="4"/>
+          <frame pose="walkL4" delay="4"/>
+          <frame pose="walkL5" delay="4"/>
+          <frame pose="walkL6" delay="4"/>
+          <frame pose="walkL7" delay="4"/>
+        </frames>
+      </sequence>
+    </animation>
+    <animation name="walkR">
+      <sequence loops="0" sequence="true">
+        <frames pingPong="false">
+          <frame pose="walkR0" delay="4"/>
+          <frame pose="walkR1" delay="4"/>
+          <frame pose="walkR2" delay="4"/>
+          <frame pose="walkR3" delay="4"/>
+          <frame pose="walkR4" delay="4"/>
+          <frame pose="walkR5" delay="4"/>
+          <frame pose="walkR6" delay="4"/>
+          <frame pose="walkR7" delay="4"/>
+        </frames>
+      </sequence>
+    </animation>
+  </animations>
+  <costumes>
+    <costume name="entrance1" defaultZOrder="0" order="0" showInDesigner="true" role="entrance.py">
+      <pose name="default" pose="entrance1"/>
+    </costume>
+    <costume name="grass1" defaultZOrder="0" order="0" showInDesigner="true" role="solid.py">
+      <pose name="default" pose="grass1"/>
+    </costume>
+    <costume name="gui" defaultZOrder="0" order="0" showInDesigner="true">
+      <pose name="default" pose="gui"/>
+    </costume>
+    <costume name="jobButton" defaultZOrder="0" order="0" showInDesigner="true" role="jobButton.py">
+      <pose name="blocker" pose="buttonBlocker"/>
+      <pose name="climber" pose="buttonClimber"/>
+      <pose name="default" pose="buttonDefault"/>
+      <pose name="select" pose="buttonSelect"/>
+      <pose name="smasher" pose="buttonSmasher"/>
+    </costume>
+    <costume name="ming" defaultZOrder="0" order="0" showInDesigner="true" role="ming.py">
+      <pose name="default" pose="walkR0"/>
+      <pose name="fall" pose="fall"/>
+      <pose name="highlight" pose="highlight"/>
+      <pose name="smashed" pose="smashed"/>
+      <pose name="stepUp" pose="stepUp"/>
+      <pose name="turnLeft" pose="turnLeft"/>
+      <pose name="turnRight" pose="turnRight"/>
+      <animation name="blocker" animation="blocker"/>
+      <animation name="climberL" animation="climberL"/>
+      <animation name="climberR" animation="climberR"/>
+      <animation name="fall" animation="fall"/>
+      <animation name="smasherL" animation="smasherL"/>
+      <animation name="smasherR" animation="smasherR"/>
+      <animation name="squish" animation="squish"/>
+      <animation name="walkL" animation="walkL"/>
+      <animation name="walkR" animation="walkR"/>
+    </costume>
+    <costume name="paws" defaultZOrder="0" order="0" showInDesigner="true" role="uk.co.nickthecoder.itchy.role.MessageButton">
+      <pose name="default" pose="paws"/>
+    </costume>
+    <costume name="soil1" defaultZOrder="0" order="0" showInDesigner="true" role="solid.py">
+      <pose name="default" pose="soil1"/>
+    </costume>
+  </costumes>
+  <scenes>
+    <scene name="admin"/>
+    <scene name="gui"/>
+    <scene name="start"/>
+    <scene name="test"/>
+  </scenes>
+  <inputs>
+    <input name="scrollDown" keys="DOWN"/>
+    <input name="scrollLeft" keys="LEFT"/>
+    <input name="scrollRight" keys="RIGHT"/>
+    <input name="scrollUp" keys="UP"/>
+  </inputs>
+</resources>

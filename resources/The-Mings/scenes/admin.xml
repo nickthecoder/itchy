@@ -1,0 +1,11 @@
+<scene showMouse="true" role="admin.py" background="#000000ff">
+  <properties/>
+  <layer name="main">
+    <text text="Generate Images" font="Boycott" size="22" color="#4957f0" xAlignment="0.0" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.MessageButton" x="192" y="637" direction="0.0" heading="0.0" startEvent="default" zOrder="0">
+      <property name="message" value="generateImages"/>
+    </text>
+    <text text="Generate Buttons" font="Boycott" size="22" color="#4957f0" xAlignment="0.0" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.MessageButton" x="188" y="598" direction="0.0" heading="0.0" startEvent="default" zOrder="1">
+      <property name="message" value="generateButtons"/>
+    </text>
+  </layer>
+</scene>
