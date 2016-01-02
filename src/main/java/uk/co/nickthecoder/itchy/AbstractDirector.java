@@ -51,27 +51,27 @@ public class AbstractDirector implements Director
      * The default role is to do nothing more than forward the event to the current scene's {@link SceneDirector}.
      */
     @Override
-    public boolean onMouseDown( MouseButtonEvent event )
+    public void onMouseDown( MouseButtonEvent event )
     {
-        return this.game.getSceneDirector().onMouseDown(event);
+        this.game.getSceneDirector().onMouseDown(event);
     }
 
     /**
      * The default role is to do nothing more than forward the event to the current scene's {@link SceneDirector}.
      */
     @Override
-    public boolean onMouseUp( MouseButtonEvent event )
+    public void onMouseUp( MouseButtonEvent event )
     {
-        return this.game.getSceneDirector().onMouseUp(event);
+        this.game.getSceneDirector().onMouseUp(event);
     }
 
     /**
      * The default role is to do nothing more than forward the event to the current scene's {@link SceneDirector}.
      */
     @Override
-    public boolean onMouseMove( MouseMotionEvent event )
+    public void onMouseMove( MouseMotionEvent event )
     {
-        return this.game.getSceneDirector().onMouseMove(event);
+        this.game.getSceneDirector().onMouseMove(event);
     }
 
     /**

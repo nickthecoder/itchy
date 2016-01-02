@@ -38,20 +38,19 @@ public abstract class Button extends AbstractRole implements ViewMouseListener
     }
 
     @Override
-    public boolean onMouseDown( MouseListenerView view, MouseButtonEvent event )
+    public void onMouseDown( MouseListenerView view, MouseButtonEvent event )
     {
         if (getActor().hitting(event.x, event.y)) {
             onDown();
             this.down = true;
             this.inside = true;
             view.captureMouse(this);
-            return true;
+            event.stopPropagation();
         }
-        return false;
     }
 
     @Override
-    public boolean onMouseUp( MouseListenerView view, MouseButtonEvent event )
+    public void onMouseUp( MouseListenerView view, MouseButtonEvent event )
     {
         if (this.down) {
             view.releaseMouse(this);
@@ -63,13 +62,12 @@ public abstract class Button extends AbstractRole implements ViewMouseListener
                 onClick();
             }
             this.down = false;
-            return true;
+            event.stopPropagation();
         }
-        return false;
     }
 
     @Override
-    public boolean onMouseMove( MouseListenerView view, MouseMotionEvent event )
+    public void onMouseMove( MouseListenerView view, MouseMotionEvent event )
     {
         boolean nowInside = getActor().hitting(event.x, event.y);
 
@@ -90,10 +88,8 @@ public abstract class Button extends AbstractRole implements ViewMouseListener
                 }
             }
 
-            return true;
+            event.stopPropagation();
         }
-
-        return false;
     }
 
     /**

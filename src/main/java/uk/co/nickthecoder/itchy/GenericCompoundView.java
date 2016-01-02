@@ -88,48 +88,37 @@ public class GenericCompoundView<V extends View> extends AbstractView implements
     }
 
     @Override
-    public boolean onMouseDown( MouseButtonEvent event )
+    public void onMouseDown( MouseButtonEvent event )
     {
         for (ListIterator<V> i = this.children.listIterator(this.children.size()); i.hasPrevious();) {
             V view = i.previous();
             if (view instanceof MouseListener) {
-                if (((MouseListener) view).onMouseDown(event)) {
-                    return true;
-                }
+                ((MouseListener) view).onMouseDown(event);
             }
         }
-
-        return false;
     }
 
     @Override
-    public boolean onMouseUp( MouseButtonEvent event )
+    public void onMouseUp( MouseButtonEvent event )
     {
         for (ListIterator<V> i = this.children.listIterator(this.children.size()); i.hasPrevious();) {
 
             V view = i.previous();
             if (view instanceof MouseListener) {
-                if (((MouseListener) view).onMouseUp(event)) {
-                    return true;
-                }
+                ((MouseListener) view).onMouseUp(event);
             }
         }
-        return false;
     }
 
     @Override
-    public boolean onMouseMove( MouseMotionEvent event )
+    public void onMouseMove( MouseMotionEvent event )
     {
         for (ListIterator<V> i = this.children.listIterator(this.children.size()); i.hasPrevious();) {
             V view = i.previous();
             if (view instanceof MouseListener) {
-                if (((MouseListener) view).onMouseMove(event)) {
-                    return true;
-                }
+                ((MouseListener) view).onMouseMove(event);
             }
         }
-
-        return false;
     }
 
     @Override

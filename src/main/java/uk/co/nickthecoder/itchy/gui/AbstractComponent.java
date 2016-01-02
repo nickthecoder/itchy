@@ -595,7 +595,7 @@ public abstract class AbstractComponent implements Focusable, Component
     }
 
     @Override
-    public boolean mouseDown( MouseButtonEvent event )
+    public void mouseDown( MouseButtonEvent event )
     {
         if (this.contains2(event)) {
 
@@ -605,17 +605,16 @@ public abstract class AbstractComponent implements Focusable, Component
             event.x -= dx;
             event.y -= dy;
             try {
-                return this.onMouseDown(event);
+                this.onMouseDown(event);
             } finally {
                 event.x += dx;
                 event.y += dy;
             }
         }
-        return false;
     }
 
     @Override
-    public boolean mouseMove( MouseMotionEvent event )
+    public void mouseMove( MouseMotionEvent event )
     {
         if (this.contains2(event)) {
 
@@ -625,17 +624,16 @@ public abstract class AbstractComponent implements Focusable, Component
             event.x -= dx;
             event.y -= dy;
             try {
-                return this.onMouseMove(event);
+                this.onMouseMove(event);
             } finally {
                 event.x += dx;
                 event.y += dy;
             }
         }
-        return false;
     }
 
     @Override
-    public boolean mouseUp( MouseButtonEvent event )
+    public void mouseUp( MouseButtonEvent event )
     {
         if (this.contains2(event)) {
 
@@ -645,34 +643,27 @@ public abstract class AbstractComponent implements Focusable, Component
             event.x -= dx;
             event.y -= dy;
             try {
-                return this.onMouseUp(event);
+                this.onMouseUp(event);
             } finally {
                 event.x += dx;
                 event.y += dy;
             }
         }
-        return false;
     }
 
     @Override
-    public boolean onMouseDown( MouseButtonEvent event )
+    public void onMouseDown( MouseButtonEvent event )
     {
-        // This base class does nothing.
-        return false;
     }
 
     @Override
-    public boolean onMouseUp( MouseButtonEvent event )
+    public void onMouseUp( MouseButtonEvent event )
     {
-        // This base class does nothing.
-        return false;
     }
 
     @Override
-    public boolean onMouseMove( MouseMotionEvent event )
+    public void onMouseMove( MouseMotionEvent event )
     {
-        // This base class does nothing.
-        return false;
     }
 
     @Override

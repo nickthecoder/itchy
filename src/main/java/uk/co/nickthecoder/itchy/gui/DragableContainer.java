@@ -17,7 +17,7 @@ public abstract class DragableContainer extends ClickableContainer
     protected boolean dragging;
 
     @Override
-    public boolean onMouseDown( MouseButtonEvent event )
+    public void onMouseDown( MouseButtonEvent event )
     {
         if (event.button == 1) {
             this.dragging = this.acceptDrag(event);
@@ -26,35 +26,35 @@ public abstract class DragableContainer extends ClickableContainer
                 this.startX = event.x;
                 this.startY = event.y;
                 this.getRoot().captureMouse(this);
-                return true;
+                event.stopPropagation();
             }
         }
-        return super.onMouseDown(event);
+        super.onMouseDown(event);
 
     }
 
     @Override
-    public boolean onMouseMove( MouseMotionEvent event )
+    public void onMouseMove( MouseMotionEvent event )
     {
         if (this.dragging) {
             this.drag(event, event.x - this.startX, event.y - this.startY);
-            return true;
+            event.stopPropagation();
         } else {
-            return super.onMouseMove(event);
+            super.onMouseMove(event);
         }
     }
 
     @Override
-    public boolean onMouseUp( MouseButtonEvent event )
+    public void onMouseUp( MouseButtonEvent event )
     {
         if (this.dragging) {
             this.dragging = false;
             this.getRoot().releaseMouse(this);
             this.drag(event, event.x - this.startX, event.y - this.startY);
             this.endDrag(event, event.x - this.startX, event.y - this.startY);
-            return true;
+            event.stopPropagation();
         } else {
-            return super.onMouseUp(event);
+            super.onMouseUp(event);
         }
     }
 

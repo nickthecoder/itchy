@@ -9,11 +9,11 @@ import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 
 public interface ViewMouseListener
 {
-    public boolean onMouseDown( MouseListenerView view, MouseButtonEvent event );
+    public void onMouseDown( MouseListenerView view, MouseButtonEvent event );
 
-    public boolean onMouseUp( MouseListenerView view, MouseButtonEvent event );
+    public void onMouseUp( MouseListenerView view, MouseButtonEvent event );
 
-    public boolean onMouseMove( MouseListenerView view, MouseMotionEvent event );
+    public void onMouseMove( MouseListenerView view, MouseMotionEvent event );
 
     /**
      * We can't tell if scripted objects are mouse listeners until they have been created. All regular java classes are expected to return

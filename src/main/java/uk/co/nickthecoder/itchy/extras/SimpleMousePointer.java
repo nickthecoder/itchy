@@ -36,22 +36,19 @@ public class SimpleMousePointer implements MousePointer
     }
 
     @Override
-    public boolean onMouseDown( MouseButtonEvent event )
+    public void onMouseDown( MouseButtonEvent event )
     {
-        return false;
     }
 
     @Override
-    public boolean onMouseUp( MouseButtonEvent event )
+    public void onMouseUp( MouseButtonEvent event )
     {
-        return false;
     }
 
     @Override
-    public boolean onMouseMove( MouseMotionEvent event )
+    public void onMouseMove( MouseMotionEvent event )
     {
         this.actor.moveTo(event.x, Itchy.getGame().getHeight() - event.y);
-        return false;
     }
 
     public Role createRole()

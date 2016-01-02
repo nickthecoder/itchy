@@ -120,13 +120,13 @@ public class GuiView extends AbstractView implements View, InputListener
     }
 
     @Override
-    public boolean onMouseDown( MouseButtonEvent event )
+    public void onMouseDown( MouseButtonEvent event )
     {
         try {
             if (!adjustMouse(event)) {
-                return false;
+                return;
             }
-            return this.rootContainer.mouseDown(event);
+            this.rootContainer.mouseDown(event);
 
         } finally {
             unadjustMouse(event);
@@ -135,13 +135,13 @@ public class GuiView extends AbstractView implements View, InputListener
     }
 
     @Override
-    public boolean onMouseUp( MouseButtonEvent event )
+    public void onMouseUp( MouseButtonEvent event )
     {
         try {
             if (!adjustMouse(event)) {
-                return false;
+                return;
             }
-            return this.rootContainer.mouseUp(event);
+            this.rootContainer.mouseUp(event);
 
         } finally {
             unadjustMouse(event);
@@ -149,15 +149,15 @@ public class GuiView extends AbstractView implements View, InputListener
     }
 
     @Override
-    public boolean onMouseMove( MouseMotionEvent event )
+    public void onMouseMove( MouseMotionEvent event )
     {
         try {
             if (!adjustMouse(event)) {
                 this.endTooltipTimer();
-                return false;
+                return;
             }
             beginTooltipTimer(event);
-            return this.rootContainer.mouseMove(event);
+            this.rootContainer.mouseMove(event);
 
         } finally {
             unadjustMouse(event);

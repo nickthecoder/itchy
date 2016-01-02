@@ -494,7 +494,7 @@ public class PlainContainer extends AbstractComponent implements Container
     }
 
     @Override
-    public boolean onMouseDown( MouseButtonEvent event )
+    public void onMouseDown( MouseButtonEvent event )
     {
         ListIterator<Component> i = this.children.listIterator(this.children.size());
         while (i.hasPrevious()) {
@@ -502,17 +502,14 @@ public class PlainContainer extends AbstractComponent implements Container
 
             if (child.isVisible()) {
 
-                if (child.mouseDown(event)) {
-                    return true;
-                }
+                child.mouseDown(event);
 
             }
         }
-        return false;
     }
 
     @Override
-    public boolean onMouseUp( MouseButtonEvent event )
+    public void onMouseUp( MouseButtonEvent event )
     {
         ListIterator<Component> i = this.children.listIterator(this.children.size());
         while (i.hasPrevious()) {
@@ -520,17 +517,14 @@ public class PlainContainer extends AbstractComponent implements Container
 
             if (child.isVisible()) {
 
-                if (child.mouseUp(event)) {
-                    return true;
-                }
+                child.mouseUp(event);
 
             }
         }
-        return false;
     }
 
     @Override
-    public boolean onMouseMove( MouseMotionEvent event )
+    public void onMouseMove( MouseMotionEvent event )
     {
         ListIterator<Component> i = this.children.listIterator(this.children.size());
         while (i.hasPrevious()) {
@@ -538,13 +532,10 @@ public class PlainContainer extends AbstractComponent implements Container
 
             if (child.isVisible()) {
 
-                if (child.mouseMove(event)) {
-                    return true;
-                }
+                child.mouseMove(event);
 
             }
         }
-        return false;
     }
 
     /**

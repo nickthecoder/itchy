@@ -59,21 +59,18 @@ public class VerticalScroll extends PlainContainer implements Layout
     }
 
     @Override
-    public boolean onMouseDown( MouseButtonEvent mbe )
+    public void onMouseDown( MouseButtonEvent event )
     {
-        if (super.onMouseDown(mbe)) {
-            return true;
-        }
+        super.onMouseDown(event);
 
-        if (mbe.button == MouseButtonEvent.BUTTON_WHEELUP) {
+        if (event.button == MouseButtonEvent.BUTTON_WHEELUP) {
             this.scrollBy(-50);
-            return true;
-        } else if (mbe.button == MouseButtonEvent.BUTTON_WHEELDOWN) {
+            event.stopPropagation();
+        } else if (event.button == MouseButtonEvent.BUTTON_WHEELDOWN) {
             this.scrollBy(50);
-            return true;
+            event.stopPropagation();
         }
 
-        return false;
     }
 
     /**

@@ -610,9 +610,7 @@ public class Game
                     if (this.modalListener == null) {
 
                         for (MouseListener ml : this.mouseListeners) {
-                            if (ml.onMouseDown(mbe)) {
-                                return;
-                            }
+                            ml.onMouseDown(mbe);
                         }
                     } else {
                         this.modalListener.onMouseDown(mbe);
@@ -635,9 +633,7 @@ public class Game
                     if (this.modalListener == null) {
 
                         for (MouseListener ml : this.mouseListeners) {
-                            if (ml.onMouseUp(mbe)) {
-                                return;
-                            }
+                            ml.onMouseUp(mbe);
                         }
                     } else {
                         this.modalListener.onMouseUp(mbe);
@@ -663,9 +659,7 @@ public class Game
                 if (this.modalListener == null) {
 
                     for (MouseListener el : this.mouseListeners) {
-                        if (el.onMouseMove(mme)) {
-                            return;
-                        }
+                        el.onMouseMove(mme);
                     }
                 } else {
                     this.modalListener.onMouseMove(mme);

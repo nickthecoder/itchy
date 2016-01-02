@@ -32,11 +32,10 @@ public abstract class ClickableContainer extends PlainContainer
     }
 
     @Override
-    public boolean onMouseDown( MouseButtonEvent event )
+    public void onMouseDown( MouseButtonEvent event )
     {
-        if (super.onMouseDown(event)) {
-            return true;
-        }
+        super.onMouseDown(event);
+
         if (event.button == 1) {
             this.getRoot().captureMouse(this);
 
@@ -46,13 +45,12 @@ public abstract class ClickableContainer extends PlainContainer
             if (this.focusable) {
                 this.focus();
             }
-            return true;
+            event.stopPropagation();
         }
-        return false;
     }
 
     @Override
-    public boolean onMouseUp( MouseButtonEvent event )
+    public void onMouseUp( MouseButtonEvent event )
     {
         if (this.dragging) {
             this.dragging = false;
@@ -69,13 +67,12 @@ public abstract class ClickableContainer extends PlainContainer
                 this.clickTimeMillis = now;
             }
 
-            return true;
+            event.stopPropagation();
         }
-        return false;
     }
 
     @Override
-    public boolean onMouseMove( MouseMotionEvent event )
+    public void onMouseMove( MouseMotionEvent event )
     {
         if (this.dragging) {
 
@@ -84,9 +81,8 @@ public abstract class ClickableContainer extends PlainContainer
             } else {
                 this.removeStyle("down");
             }
-            return true;
+            event.stopPropagation();
         }
-        return false;
     }
 
     /**

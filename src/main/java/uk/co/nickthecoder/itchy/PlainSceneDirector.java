@@ -35,21 +35,18 @@ public class PlainSceneDirector implements SceneDirector
     }
 
     @Override
-    public boolean onMouseDown( MouseButtonEvent mbe )
+    public void onMouseDown( MouseButtonEvent mbe )
     {
-        return false;
     }
 
     @Override
-    public boolean onMouseUp( MouseButtonEvent mbe )
+    public void onMouseUp( MouseButtonEvent mbe )
     {
-        return false;
     }
 
     @Override
-    public boolean onMouseMove( MouseMotionEvent mme )
+    public void onMouseMove( MouseMotionEvent mme )
     {
-        return false;
     }
 
     @Override

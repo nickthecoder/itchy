@@ -67,12 +67,10 @@ public class RootContainer extends PlainContainer
     private int dragStartY;
 
     @Override
-    public boolean onMouseDown( MouseButtonEvent event )
+    public void onMouseDown( MouseButtonEvent event )
     {
         if (this.mouseOwner == null) {
-            if (super.onMouseDown(event)) {
-                return true;
-            }
+            super.onMouseDown(event);
 
             if (this.draggable && contains(event)) {
                 if ((event.button == 2) || ((event.button == 1) && Itchy.isAltDown())) {
@@ -80,7 +78,7 @@ public class RootContainer extends PlainContainer
                     this.dragging = true;
                     this.dragStartX = event.x;
                     this.dragStartY = event.y;
-                    return true;
+                    event.stopPropagation();
                 }
             }
 
@@ -94,9 +92,7 @@ public class RootContainer extends PlainContainer
                 }
                 event.x += dx;
                 event.y += dy;
-                if (this.mouseOwner.onMouseDown(event)) {
-                    return true;
-                }
+                this.mouseOwner.onMouseDown(event);
 
             } finally {
                 event.x -= dx;
@@ -104,11 +100,13 @@ public class RootContainer extends PlainContainer
             }
         }
 
-        return contains(event);
+        if (contains(event)) {
+            event.stopPropagation();
+        }
     }
 
     @Override
-    public boolean onMouseUp( MouseButtonEvent event )
+    public void onMouseUp( MouseButtonEvent event )
     {
         if (this.dragging) {
             int dx = event.x - this.dragStartX;
@@ -117,13 +115,11 @@ public class RootContainer extends PlainContainer
             this.setPosition(this.x + dx, this.y + dy, this.width, this.height);
             this.dragging = false;
             this.releaseMouse(this);
-            return true;
+            event.stopPropagation();
         }
 
         if (this.mouseOwner == null) {
-            if (super.onMouseUp(event)) {
-                return true;
-            }
+            super.onMouseUp(event);
 
         } else {
             int dx = 0;
@@ -135,9 +131,7 @@ public class RootContainer extends PlainContainer
                 }
                 event.x += dx;
                 event.y += dy;
-                if (this.mouseOwner.onMouseUp(event)) {
-                    return true;
-                }
+                this.mouseOwner.onMouseUp(event);
 
             } finally {
                 event.x -= dx;
@@ -145,11 +139,13 @@ public class RootContainer extends PlainContainer
             }
         }
 
-        return contains(event);
+        if (contains(event)) {
+            event.stopPropagation();
+        }
     }
 
     @Override
-    public boolean onMouseMove( MouseMotionEvent event )
+    public void onMouseMove( MouseMotionEvent event )
     {
         if (this.dragging) {
             int dx = event.x - this.dragStartX;
@@ -164,13 +160,11 @@ public class RootContainer extends PlainContainer
             } else {
                 this.setPosition(this.x + dx, this.y + dy, this.width, this.height);
             }
-            return true;
+            event.stopPropagation();
         }
 
         if (this.mouseOwner == null) {
-            if (super.onMouseMove(event)) {
-                return true;
-            }
+            super.onMouseMove(event);
 
         } else {
             int dx = 0;
@@ -182,9 +176,7 @@ public class RootContainer extends PlainContainer
                 }
                 event.x += dx;
                 event.y += dy;
-                if (this.mouseOwner.onMouseMove(event)) {
-                    return true;
-                }
+                this.mouseOwner.onMouseMove(event);
 
             } finally {
                 event.x -= dx;
@@ -192,14 +184,16 @@ public class RootContainer extends PlainContainer
             }
         }
 
-        return contains(event);
+        if ( contains(event) ) {
+            event.stopPropagation();
+        }
     }
 
-    public boolean keyDown( KeyboardEvent ke )
+    public void keyDown( KeyboardEvent event )
     {
-        if (ke.symbol == Keys.TAB) {
+        if (event.symbol == Keys.TAB) {
 
-            if (ke.modifier(ModifierKey.SHIFT)) {
+            if (event.modifier(ModifierKey.SHIFT)) {
 
                 if (RootContainer.focus == null) {
                     this.previousFocus(null, this);
@@ -216,10 +210,8 @@ public class RootContainer extends PlainContainer
                 }
 
             }
-            return true;
+            event.stopPropagation();
         }
-
-        return false;
     }
 
     @Override

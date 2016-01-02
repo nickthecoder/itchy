@@ -233,7 +233,7 @@ public class NinePatchEditor extends SubEditor<NinePatchResource>
         }
 
         @Override
-        public boolean onMouseDown( MouseButtonEvent mbe )
+        public void onMouseDown( MouseButtonEvent mbe )
         {
             if (mbe.button == 1) {
                 this.backgroundIndex++;
@@ -241,9 +241,9 @@ public class NinePatchEditor extends SubEditor<NinePatchResource>
                     this.backgroundIndex = 0;
                 }
                 this.invalidate();
-                return true;
+                mbe.stopPropagation();
             }
-            return super.onMouseDown(mbe);
+            super.onMouseDown(mbe);
         }
 
         private int getMargin( String name )

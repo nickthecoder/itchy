@@ -256,90 +256,78 @@ public class StageView extends AbstractScrollableView implements StageListener, 
     }
 
     @Override
-    public boolean onMouseDown( MouseButtonEvent event )
+    public void onMouseDown( MouseButtonEvent event )
     {
         if (this.roleMouseListeners == null) {
-            return false;
+            return;
         }
 
         try {
             if (!adjustMouse(event)) {
-                return false;
+                return;
             }
 
             if (this.mouseOwner == null) {
                 for (ViewMouseListener vml : this.roleMouseListeners) {
-                    if (vml.onMouseDown(StageView.this, event)) {
-                        return true;
-                    }
+                    vml.onMouseDown(StageView.this, event);
                 }
             } else {
-                return this.mouseOwner.onMouseDown(StageView.this, event);
+                this.mouseOwner.onMouseDown(StageView.this, event);
             }
 
         } finally {
             unadjustMouse(event);
         }
-
-        return false;
     }
 
     @Override
-    public boolean onMouseUp( MouseButtonEvent event )
+    public void onMouseUp( MouseButtonEvent event )
     {
         if (this.roleMouseListeners == null) {
-            return false;
+            return;
         }
 
         try {
             if (!adjustMouse(event)) {
-                return false;
+                return;
             }
 
             if (this.mouseOwner == null) {
                 for (ViewMouseListener vml : this.roleMouseListeners) {
-                    if (vml.onMouseUp(StageView.this, event)) {
-                        return true;
-                    }
+                    vml.onMouseUp(StageView.this, event);
                 }
             } else {
-                return this.mouseOwner.onMouseUp(StageView.this, event);
+                this.mouseOwner.onMouseUp(StageView.this, event);
             }
 
         } finally {
             unadjustMouse(event);
         }
-        return false;
     }
 
     @Override
-    public boolean onMouseMove( MouseMotionEvent event )
+    public void onMouseMove( MouseMotionEvent event )
     {
         if (this.roleMouseListeners == null) {
-            return false;
+            return;
         }
 
         try {
             if (!adjustMouse(event)) {
-                return false;
+                return;
             }
 
             if (this.mouseOwner == null) {
                 for (ViewMouseListener vml : this.roleMouseListeners) {
-                    if (vml.onMouseMove(StageView.this, event)) {
-                        return true;
-                    }
+                    vml.onMouseMove(StageView.this, event);
                 }
             } else {
-                return this.mouseOwner.onMouseMove(StageView.this, event);
+                this.mouseOwner.onMouseMove(StageView.this, event);
             }
 
         } finally {
             unadjustMouse(event);
         }
-
-        return false;
-
     }
 
     @Override

@@ -1256,13 +1256,13 @@ public class SceneDesigner implements MouseListener, KeyListener {
 	}
 
 	@Override
-	public boolean onMouseDown(MouseButtonEvent event) {
+	public void onMouseDown(MouseButtonEvent event) {
 		try {
 			if (!this.overlayView.adjustMouse(event)) {
-				return false;
+				return;
 			}
 			mouseDown(event);
-			return true;
+            event.stopPropagation();
 
 		} finally {
 			this.overlayView.unadjustMouse(event);
@@ -1270,13 +1270,13 @@ public class SceneDesigner implements MouseListener, KeyListener {
 	}
 
 	@Override
-	public boolean onMouseUp(MouseButtonEvent event) {
+	public void onMouseUp(MouseButtonEvent event) {
 		try {
 			if (!this.overlayView.adjustMouse(event)) {
-				return false;
+				return;
 			}
 			mouseUp(event);
-			return true;
+            event.stopPropagation();
 
 		} finally {
 			this.overlayView.unadjustMouse(event);
@@ -1284,13 +1284,13 @@ public class SceneDesigner implements MouseListener, KeyListener {
 	}
 
 	@Override
-	public boolean onMouseMove(MouseMotionEvent event) {
+	public void onMouseMove(MouseMotionEvent event) {
 		try {
 			if (!this.overlayView.adjustMouse(event)) {
-				return false;
+				return;
 			}
 			mouseMove(event);
-			return true;
+            event.stopPropagation();
 
 		} finally {
 			this.overlayView.unadjustMouse(event);
@@ -1312,17 +1312,17 @@ public class SceneDesigner implements MouseListener, KeyListener {
 		return result;
 	}
 
-	public boolean mouseDown(MouseButtonEvent event) {
+	public void mouseDown(MouseButtonEvent event) {
 		boolean isNearClick = isNearClick(event);
 
 		if ((event.button == 2) || ((event.button == 1) && Itchy.isAltDown())) {
 			setMode(MODE_DRAG_SCROLL);
 			beginDrag(event.x, event.y);
-			return true;
+            event.stopPropagation();
 		}
 
 		if (event.button != 1) {
-			return false;
+			return;
 		}
 
 		if (this.mode == MODE_SELECT) {
@@ -1337,7 +1337,7 @@ public class SceneDesigner implements MouseListener, KeyListener {
 					this.currentHandleRole = handleRole;
 					setMode(MODE_DRAG_HANDLE);
 					this.hideHighlightActor();
-					return true;
+		            event.stopPropagation();
 				}
 			}
 
@@ -1366,7 +1366,7 @@ public class SceneDesigner implements MouseListener, KeyListener {
 								selectActor(actor);
 								setMode(MODE_DRAG_ACTOR);
 								beginDrag(event.x, event.y);
-								return true;
+					            event.stopPropagation();
 							}
 						}
 					}
@@ -1386,15 +1386,14 @@ public class SceneDesigner implements MouseListener, KeyListener {
 							selectActor(actor);
 							setMode(MODE_DRAG_ACTOR);
 							beginDrag(event.x, event.y);
-							return true;
+				            event.stopPropagation();
 						}
 					}
 				}
 			}
 
 			selectActor(null);
-			return true;
-
+            event.stopPropagation();
 		}
 
 		if (this.mode == MODE_STAMP_COSTUME) {
@@ -1461,13 +1460,11 @@ public class SceneDesigner implements MouseListener, KeyListener {
 			}
 			this.changed = true;
 
-			return true;
+            event.stopPropagation();
 		}
-
-		return false;
 	}
 
-	public boolean mouseUp(MouseButtonEvent event) {
+	public void mouseUp(MouseButtonEvent event) {
 		if ((this.mode == MODE_DRAG_HANDLE) || (this.mode == MODE_DRAG_ACTOR)) {
 			updateProperties();
 		}
@@ -1482,11 +1479,9 @@ public class SceneDesigner implements MouseListener, KeyListener {
 		if ((this.mode == MODE_DRAG_SCROLL) || (this.mode == MODE_DRAG_ACTOR)) {
 			setMode(MODE_SELECT);
 		}
-
-		return false;
 	}
 
-	public boolean mouseMove(MouseMotionEvent event) {
+	public void mouseMove(MouseMotionEvent event) {
 		int dx = event.x - this.dragStartX;
 		int dy = event.y - this.dragStartY;
 
@@ -1500,11 +1495,11 @@ public class SceneDesigner implements MouseListener, KeyListener {
 
 			this.stampActor.moveTo(newX, newY);
 
-			return true;
+            event.stopPropagation();
 
 		} else if (this.mode == MODE_DRAG_SCROLL) {
 			scrollBy(-dx, -dy);
-			return true;
+            event.stopPropagation();
 
 		} else if (this.mode == MODE_DRAG_ACTOR) {
 
@@ -1533,8 +1528,6 @@ public class SceneDesigner implements MouseListener, KeyListener {
 			beginDrag(event.x, event.y);
 
 		}
-
-		return false;
 	}
 
 	private void beginDrag(int x, int y) {

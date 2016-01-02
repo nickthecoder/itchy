@@ -149,7 +149,7 @@ public interface Component
      * 
      * @return True is the mouse event has been handled, otherwise false.
      */
-    public boolean mouseDown( MouseButtonEvent event );
+    public void mouseDown( MouseButtonEvent event );
 
     /**
      * @param event
@@ -157,7 +157,7 @@ public interface Component
      * 
      * @return True is the mouse event has been handled, otherwise false.
      */
-    public boolean mouseMove( MouseMotionEvent event );
+    public void mouseMove( MouseMotionEvent event );
 
     /**
      * @param event
@@ -165,27 +165,27 @@ public interface Component
      * 
      * @return True is the mouse event has been handled, otherwise false.
      */
-    public boolean mouseUp( MouseButtonEvent event );
+    public void mouseUp( MouseButtonEvent event );
 
     /**
      * 
      * @param event
      *        The mouse event, where x and y are relative to this component.
      */
-    public boolean onMouseDown( MouseButtonEvent event );
+    public void onMouseDown( MouseButtonEvent event );
 
     /**
      * 
      * @param event
      *        The mouse event, where x and y are relative to this component.
      */
-    public boolean onMouseUp( MouseButtonEvent event );
+    public void onMouseUp( MouseButtonEvent event );
 
     /**
      * @param event
      *        The mouse event, where x and y are relative to this component.
      */
-    public boolean onMouseMove( MouseMotionEvent event );
+    public void onMouseMove( MouseMotionEvent event );
 
     /**
      * Given an event whose x,y are relative to this Component, check if the event is within this Component.

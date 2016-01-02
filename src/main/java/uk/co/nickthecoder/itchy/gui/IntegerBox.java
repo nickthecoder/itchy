@@ -124,22 +124,22 @@ public class IntegerBox extends EntryBox<IntegerBox>
     }
 
     @Override
-    public boolean onMouseDown( MouseButtonEvent mbe )
+    public void onMouseDown( MouseButtonEvent event )
     {
         if (this.hasFocus) {
-            if (mbe.button == MouseButtonEvent.BUTTON_WHEELUP) {
+            if (event.button == MouseButtonEvent.BUTTON_WHEELUP) {
                 this.adjust(Itchy.isKeyDown(Keys.LSHIFT) ||
                     Itchy.isKeyDown(Keys.RSHIFT) ? 10 : 1);
-                return true;
+                event.stopPropagation();
 
-            } else if (mbe.button == MouseButtonEvent.BUTTON_WHEELDOWN) {
+            } else if (event.button == MouseButtonEvent.BUTTON_WHEELDOWN) {
                 this.adjust(Itchy.isKeyDown(Keys.LSHIFT) ||
                     Itchy.isKeyDown(Keys.RSHIFT) ? -10 : -1);
-                return true;
+                event.stopPropagation();
             }
         }
 
-        return super.onMouseDown(mbe);
+        super.onMouseDown(event);
     }
 
 }

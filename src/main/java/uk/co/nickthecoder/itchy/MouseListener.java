@@ -9,10 +9,10 @@ import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 
 public interface MouseListener
 {
-    public boolean onMouseDown( MouseButtonEvent event );
+    public void onMouseDown( MouseButtonEvent event );
 
-    public boolean onMouseUp( MouseButtonEvent event );
+    public void onMouseUp( MouseButtonEvent event );
 
-    public boolean onMouseMove( MouseMotionEvent event );
+    public void onMouseMove( MouseMotionEvent event );
 
 }
