@@ -9,7 +9,8 @@ class ${Name} extends AbstractRole
     
 	static {
 		// TODO declare properties here. Note that you must also add a "def" for each one.
-		// properties.add( new StringProperty( "myString" ) )
+        // e.g.
+		// properties.add( new StringProperty( "myString" ).hint( "my greeen label" ) )
 	}
 
 	// Constructor
@@ -28,7 +29,7 @@ class ${Name} extends AbstractRole
     }
 
     // TODO Other methods include :
-    // onSceneCreated, onDetach, onKill, onMouseDown, onMouseUp, onMouseMove
+    // onSceneCreated, onDetach, onKill, onMouseDown, onMouseUp, onMouseMove, createCostumeProperties
 
 
     // Boiler plate code - no need to change this

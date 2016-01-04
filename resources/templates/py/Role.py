@@ -2,12 +2,8 @@ from common import *
 
 properties = ArrayList()
 # TODO declare poroperties here. Note that you must also initialise them in __init__
-# properties.add( StringProperty( "myString" ) )
-# properties.add( IntegerProperty( "myInteger" ) )
-# properties.add( DoubleProperty( "myDouble" ) )
-# properties.add( BooleanProperty( "myBoolean" ) )
-# properties.add( RGBAProperty( "myColor" ).label( "My Colour" ) )
-# properties.add( RGBAProperty( "myOtherColor" ).allowNull().includeAlpha() )
+# e.g.
+# properties.add( StringProperty( "myString" ).hint("My green label" ) )
 
 class ${Name}(AbstractRole) :
 
@@ -25,7 +21,7 @@ class ${Name}(AbstractRole) :
 
 
     # TODO Other methods include :
-    # onSceneCreated, onDetach, onKill, onMouseDown, onMouseUp, onMouseMove
+    # onSceneCreated, onDetach, onKill, onMouseDown, onMouseUp, onMouseMove, createCostumeProperties
 
     # Boiler plate code - no need to change this
     def getProperties(self):

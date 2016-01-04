@@ -1,13 +1,6 @@
 Current Tasks
 =============
 
-When Costume's Role is changed, then the CostumeEditor needs to rebuild the properties grid.
-	Also when the Role script is changed!?
-	Also just before Ok is processed.
-	
-Convert all other games to use the new system
-	Done Pyrox, Darkness, Debris
-
 Change the Role templates for python and groovy
 Remove one of Costume's duplicates : getProperties, getCostumeProperties. Maybe rename?
 
