@@ -2,6 +2,8 @@ from common import *
 
 from gridRole import GridRole
 
+game = Itchy.getGame()
+
 properties = ArrayList()
 properties.add( StringProperty( "requires" ) )
 properties.add( StringProperty( "text" ) )
@@ -19,17 +21,17 @@ class Portcullis(GridRole) :
         self.addTag("portcullis")
 
     def getReady(self, player) :
-        delay = player.getActor().distanceTo( self.getActor() ) / 200
+        delay = player.actor.distanceTo( self.actor ) / 200
         if self.isOpen() :
             self.timer = Timer.createTimerSeconds( delay )
             
     def tick(self) :
         if self.timer and self.timer.isFinished() :
             self.explode()
-            self.getActor().kill()
+            self.actor.kill()
 
     def isOpen(self):
-        node = Itchy.getGame().getPreferences().node("completed")
+        node = game.preferences.node("completed")
         for requirement in self.requires.split(",") :
         
             if not node.getBoolean( requirement.strip(), False ) :

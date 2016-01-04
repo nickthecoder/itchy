@@ -1,5 +1,7 @@
 from common import *
 
+game = Itchy.getGame()
+
 # Records the up/down/left/right keystrokes that Player objects test for.
 # Saves the results in a string, which consists of a number followed by a bitmask of the keys
 # that were pressed in the frame. left=1, up=2, down=4, right=8. These are "OR"ed together,
@@ -23,7 +25,7 @@ class MacroRecorder() :
         self.asked = False
         
     def startRecording(self) :
-        for player in Itchy.getGame().findRoleByTag("player") :
+        for player in game.findRoleByTag("player") :
             self.interceptRecord( player )
 
     def interceptRecord(self, player) :
@@ -71,7 +73,7 @@ class MacroRecorder() :
         self.asked = False
         
     def endRecording(self) :
-        for player in Itchy.getGame().findRoleByTag("player") :
+        for player in game.findRoleByTag("player") :
             self.endIntercept( player )
 
     def getRecording(self) :
@@ -102,8 +104,4 @@ class InterceptRecord() :
         else :
             self.recorder.noMatch()
         return False
-        
 
-        
-
-        

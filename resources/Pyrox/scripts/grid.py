@@ -28,8 +28,6 @@ class Grid(object) :
             for j in range(0,down) :
                 self.squares[i].append( Square( self, i, j ) )
 
-
-
     
     # Finds the square at the given grid location, or None if it is out of bounds.
     def getSquare( self, x, y ) :
@@ -37,7 +35,6 @@ class Grid(object) :
             return None
         else :
             return self.squares[x][y]
-
 
 
     # Finds the square at the given pixel coordinates, or None if it is out of bounds.
@@ -81,9 +78,8 @@ class Grid(object) :
     def toGridY( self, py ) :
         return int(math.floor( (py - self.offsetY) / self.squareSize ))
 
+
     def getEmpty(self) :
         return self.empty;
         
-
-
 

@@ -16,7 +16,7 @@ class Grenade(Faller) :
     
     def onBirth(self):
         super(Grenade,self).onBirth()
-        self.getCostumeProperties().update(self)
+        self.costumeProperties.update(self)
         
         self.addTag("hittable")
         
@@ -99,9 +99,5 @@ class GrenadeProperties(CostumeProperties) :
     # Boiler plate code - no need to change this
     def getProperties(self):
         return costumeProperties
-
-    # Boiler plate code - no need to change this
-    def getClassName(self):
-        return ClassName( CostumeProperties, self.__module__ + ".py" )
 
 

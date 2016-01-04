@@ -289,20 +289,25 @@ public class Itchy
             }
         } catch (Exception e) {
             System.err.println("Mainloop Failed");
-            e.printStackTrace();
-            if (e instanceof org.python.core.PySyntaxError) {
-                for (StackTraceElement ste : e.getStackTrace()) {
-                    if (ste.getClassName().startsWith("org.python")) {
-                        // Ignored
-                    } else {
-                        System.err.println( ste );
-                    }
-                }
-                System.err.println( "Python script exception!" );
-            }
+            handleException( e );
         }
     }
 
+    public static void handleException( Exception e )
+    {
+        e.printStackTrace();
+        if (e instanceof org.python.core.PySyntaxError) {
+            for (StackTraceElement ste : e.getStackTrace()) {
+                if (ste.getClassName().startsWith("org.python")) {
+                    // Ignored
+                } else {
+                    System.err.println( ste );
+                }
+            }
+            System.err.println( "Python script exception!" );
+        }        
+    }
+    
     public static void endGame()
     {
         currentGame.onDeactivate();
@@ -347,6 +352,8 @@ public class Itchy
             		processEvent(event);
             	} catch (StopPropagation e) {
             		// Do nothing
+            	} catch (Exception e) {
+            	    handleException(e);
             	}
             }
         }
@@ -359,8 +366,12 @@ public class Itchy
      */
     public static void tick()
     {
-        soundManager.tick();
-        currentGame.tick();
+        try {
+            soundManager.tick();
+            currentGame.tick();
+        } catch (Exception e) {
+            handleException(e);
+        }
     }
 
     public static Surface getDisplaySurface()

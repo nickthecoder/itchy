@@ -1,5 +1,7 @@
 from common import *
 
+game = Itchy.getGame()
+
 properties = ArrayList()
 properties.add( StringProperty( "text" ).multiLine() )
 properties.add( DoubleProperty( "initialDelay" ).hint("seconds") )
@@ -39,7 +41,7 @@ class Sledger(AbstractRole) :
             
     def talk(self) :
 
-        player = Itchy.getGame().sceneDirector.player
+        player = game.sceneDirector.player
 
         if player :
             text = self.choices[ self.index ]

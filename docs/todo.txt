@@ -3,6 +3,9 @@ Current Tasks
 
 Tidy up Pyrox scripts. e.g. from common
 
+gridRole.onBirth looks like rubbish. Is it called?
+gridRole.talk looks weird.
+
 BUGS
 ====
 
@@ -24,7 +27,9 @@ Sprite Sheet Pose
 Code Tidy Up
 ============
 
-Rename one of the Button classes. ButtonRole
+Is .actor.event("...") the best way. Replace with just .event("...") ???
+
+Rename one of the Button classes. GuiButton
 
 Remove one of Costume's duplicates : getProperties, getCostumeProperties. Maybe rename?
 

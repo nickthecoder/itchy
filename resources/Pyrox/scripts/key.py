@@ -5,6 +5,8 @@ from gridRole import GridRole
 properties = ArrayList()
 properties.add( StringProperty( "name" ) )
 
+game = Itchy.getGame()
+
 class Key(GridRole) :
 
     def __init__(self) :
@@ -21,7 +23,7 @@ class Key(GridRole) :
     def onHalfInvaded(self,invader) :
         if invader.hasTag("player") :
             self.deathEvent("collected")
-            for safe in Itchy.getGame().findRoleByTag("safe-" + self.name) :
+            for safe in game.findRoleByTag("safe-" + self.name) :
                 safe.unlock()
         else :
             self.explode()

@@ -7,6 +7,8 @@ from macroPlayback import MacroPlayback
 
 properties = ArrayList()
 
+game = Itchy.getGame()
+
 # Globals used to allow the user to save and restore their location. Its done using MacroRecorder
 recordedInput = ""
 replayInput = False
@@ -44,17 +46,17 @@ class Level(PlainSceneDirector) :
 
     def onActivate( self ) :
 
-        for player in Itchy.getGame().findRoleByTag("player") :
+        for player in game.findRoleByTag("player") :
             if self.player is None or player.awake :
                 self.player = player
 
         if self.player :
-            director = Itchy.getGame().director
+            director = game.director
             director.gridView.centerOn(self.player.actor)
             director.testView.centerOn(self.player.actor)
             director.plainView.centerOn(self.player.actor)
 
-        self.droppedFramesRole = Itchy.getGame().findRoleById("droppedFrames")
+        self.droppedFramesRole = game.findRoleById("droppedFrames")
 
         self.toggleInfo()
                 
@@ -62,10 +64,10 @@ class Level(PlainSceneDirector) :
         # This is used on the "play" scene, to allow the player to start near to the gate he
         # has just completed.
         # If there are more than one player, then the others will go to sleep.
-        for player in Itchy.getGame().findRoleByTag("player") :
+        for player in game.findRoleByTag("player") :
             player.getReady( player == self.player )
     
-        for portcullis in Itchy.getGame().findRoleByTag("portcullis") :
+        for portcullis in game.findRoleByTag("portcullis") :
             portcullis.getReady(self.player)
             
         self.macroRecorder = MacroRecorder()
@@ -82,10 +84,10 @@ class Level(PlainSceneDirector) :
     def onLoaded( self ) :
         
         # Load the glass stage on top of the current scene.
-        Itchy.getGame().loadScene("glass", True)
+        game.loadScene("glass", True)
         
         # Calculate the size of the grid needed to fit all of the actors
-        stage = Itchy.getGame().getDirector().gridStage
+        stage = game.director.gridStage
 
         minX = 1000000
         minY = 1000000
@@ -116,20 +118,20 @@ class Level(PlainSceneDirector) :
             if y > maxY :
                 maxY = y
 
-        squareSize = Itchy.getGame().getDirector().squareSize
+        squareSize = game.director.squareSize
         across = math.floor( (maxX - minX) / squareSize) + 1
         down = math.floor( (maxY - minY) / squareSize) + 1
         
         self.grid = Grid( squareSize, across, down, minX, minY )
-        Itchy.getGame().getDirector().gridStage.grid = self.grid
+        game.director.gridStage.grid = self.grid
         
         # Add all of the GridRoles to the grid
         i = stage.iterator()
         while (i.hasNext()) :
             actor = i.next()
-            role = actor.getRole()
+            role = actor.role
             if isinstance( role, GridRole ) :
-                if not role.getActor().isDead() :
+                if not role.actor.isDead() :
                     role.placeOnGrid( self.grid )
 
     def tick(self) :
@@ -171,7 +173,7 @@ class Level(PlainSceneDirector) :
     def wakeNextPlayer(self) :
         
         previous = None
-        for player in Itchy.getGame().findRoleByTag("player") :
+        for player in game.findRoleByTag("player") :
                 
             if player is self.player and previous is not None :
                 self.wakePlayer( previous )
@@ -204,28 +206,31 @@ class Level(PlainSceneDirector) :
     def loadGame(self) :
         global replayInput
         replayInput = True
-        Itchy.getGame().startScene(Itchy.getGame().sceneName)
+        game.startScene(game.sceneName)
         
 
     def runTests(self) :
     
         for autoPilot in Itchy.getGame().findRoleByTag("autoPilot") :
             autoPilot.run()
+            return
+            
+        game.startScene("test")
     
     def toggleInfo( self ) :
 
         self.showInfo = not self.showInfo
         alpha = 255 if self.showInfo else 0
-        
+
         if self.droppedFramesRole :
-            self.droppedFramesRole.getActor().getAppearance().setAlpha( alpha )
+            self.droppedFramesRole.actor.appearance.alpha = alpha
         
     # When the number of collectables remaining is zero, tell all gates to open.
     def collected( self, amount ) :
         self.collectablesRemaining -= amount
         if self.collectablesRemaining <= 0 :
 
-            for gate in AbstractRole.allByTag( "gate" ) :
+            for gate in game.findRoleByTag( "gate" ) :
                 gate.onMessage("open")
 
 

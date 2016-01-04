@@ -6,6 +6,8 @@ from big import Big
 properties = ArrayList()
 properties.add( BooleanProperty( "awake" ) )
 
+game = Itchy.getGame()
+
 # The main character in the game, i.e. the one that the user is in controll of.
 # There is usually just one Player in a Scene, but it is possible to have more, in which case,
 # Level controls which Player is awake, and which are sent to sleep.
@@ -45,9 +47,8 @@ class Player(Big) :
     def onBirth( self ) :
         Big.onBirth(self)
 
-        cp = self.costumeProperties
-        self.talkX = cp.talkX
-        self.talkY = cp.talkY
+        self.talkX = self.costumeProperties.talkX
+        self.talkY = self.costumeProperties.talkY
         
         self.speed = 6
         self.addTag("player")
@@ -57,7 +58,6 @@ class Player(Big) :
     def onPlacedOnGrid(self) :
         Big.onPlacedOnGrid(self)
 
-        # My costume properties should be BigProperties (or something compatable).
         self.costumeProperties.createParts( self )
         self.calculateLeadingEdges()
 
@@ -68,24 +68,25 @@ class Player(Big) :
     def getReady( self, wake ) :
     
         if wake :
-            for warp in Itchy.getGame().findRoleByTag("warp") :
-                director = Itchy.getGame().getDirector()
+            for warp in game.findRoleByTag("warp") :
+                director = game.getDirector()
                 if director.previousSceneName == warp.scene :
-                    x = warp.getActor().getX() + warp.exitX * director.squareSize
-                    y = warp.getActor().getY() + warp.exitY * director.squareSize
+                    x = warp.actor.x + warp.exitX * director.squareSize
+                    y = warp.actor.y + warp.exitY * director.squareSize
                     self.moveTo( x, y )
                     break
                     
         else :
             self.sleep()
         
-    def tick(self) :
-        pass
-
     # The player's tick is special - it is called before all other objects on the grid.
-    # This is so that it is easier to predict what will happen objects near us.
+    # This is so that it is easier to predict what will happen to objects near us.
     # For example, we don't want objects to the left to act different to those to the right
     # just because our tick happens before one and after the other.
+    def tick(self) :
+        # Do nothing - out tick code is in method playerTick. See : level.tick()
+        pass
+
     def playerTick( self ) :
 
         if self.scrollResetting :
@@ -106,7 +107,7 @@ class Player(Big) :
         if self.square is None :
             return
             
-        for evil in self.getCollisionStrategy().collisions(self.getActor(),["enemy"]) :
+        for evil in self.collisions(["enemy"]) :
             self.killMe( evil )
             return
 
@@ -118,10 +119,10 @@ class Player(Big) :
 
         Big.tick(self)
         
-        tx = self.actor.getX() + self.scrollOffsetX
-        ty = self.actor.getY() + self.scrollOffsetY
+        tx = self.actor.x + self.scrollOffsetX
+        ty = self.actor.y + self.scrollOffsetY
         
-        Itchy.getGame().getDirector().centerOn( tx, ty )
+        game.director.centerOn( tx, ty )
 
 
     def movements(self) :
@@ -218,18 +219,16 @@ class Player(Big) :
     def move( self, dx, dy, speed=None ) :
         Big.move(self,dx, dy, speed )
         if dy == 0 :
-            self.actor.event( "move-" + ("L" if dx == -1 else "R" ) )
+            self.event( "move-" + ("L" if dx == -1 else "R" ) )
         else :
-            self.actor.event( "move-" + ("U" if dy ==  1 else "D" ) )
+            self.event( "move-" + ("U" if dy ==  1 else "D" ) )
 
 
     def onHit( self, hitter, dx, dy ) :
-        print "Player onHit"
         if hitter.hasTag("deadly") :
             self.killMe( hitter )
 
     def killMe( self, other=None ) :
-        print "Player.killMe"
         ExplosionBuilder(self.actor) \
             .gravity(-0.1) \
             .projectiles(5) \
@@ -249,7 +248,7 @@ class Player(Big) :
         # TODO Use different events depending on the hitter - rocks squash, bees sting,
         # so use different animations and sound effects.
         self.removeFromGrid()
-        self.actor.deathEvent("hit")
+        self.deathEvent("hit")
 
 
     def killZs( self ) :
@@ -259,7 +258,7 @@ class Player(Big) :
             
 
     def onDeath( self ) :
-        Itchy.getGame().sceneDirector.playerDied( self )
+        game.sceneDirector.playerDied( self )
         self.killZs()
         Big.onDeath(self)
 

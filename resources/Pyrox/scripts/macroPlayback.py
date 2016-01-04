@@ -1,5 +1,7 @@
 from common import *
 
+game = Itchy.getGame()
+
 # Takes over control of all Player objects, and instead of the input coming from the keyboard,
 # it is controlled by parsing a string which holds the keys to be played back.
 #
@@ -14,7 +16,7 @@ class MacroPlayback() :
         self.advanceIndex = True
         self.counter = 0
         
-        for player in Itchy.getGame().findRoleByTag("player") :
+        for player in game.findRoleByTag("player") :
             self.interceptPlay( player )
     
     def tick(self) :
@@ -32,7 +34,7 @@ class MacroPlayback() :
 
                 if self.index >= len( self.letters ) :
 
-                    for player in Itchy.getGame().findRoleByTag("player") :
+                    for player in game.findRoleByTag("player") :
                         self.endIntercept( player )
                     self.letters = None
                     

@@ -52,7 +52,7 @@ class GridStage(ZOrderStage) :
             if role.latestTick != self.tickCount :
                 role.latestTick = self.tickCount
 
-                actor = role.getActor()
+                actor = role.actor
                 if actor :
                     if actor.isDead() :
                         self.remove(actor)

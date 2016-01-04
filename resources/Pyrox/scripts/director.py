@@ -2,6 +2,8 @@ from common import *
 
 from gridStage import GridStage
 
+game = Itchy.getGame()
+
 class Director(AbstractDirector) :
 
     def __init__(self) :
@@ -66,36 +68,36 @@ class Director(AbstractDirector) :
     
     def returnToGateRoom( self, warpRoom ) :
         
-        self.previousSceneName = Itchy.getGame().getSceneName()
-        Itchy.getGame().startScene( warpRoom )
+        self.previousSceneName = game.getSceneName()
+        game.startScene( warpRoom )
 
         
     def onKeyDown(self,kevent) :
     
         if self.inputTest.matches(kevent) :
-            Itchy.getGame().startScene( "test" )
+            game.startScene( "test" )
 
         if self.inputEditor.matches(kevent) :
             sceneName = Itchy.getGame().getSceneName()
             if sceneName == "menu" :
-                Itchy.getGame().startEditor()
+                game.startEditor()
             else :
-                Itchy.getGame().startEditor( sceneName )
+                game.startEditor( sceneName )
     
         if self.inputRestart.matches(kevent) :
             Itchy.getGame().startScene( Itchy.getGame().getSceneName() )
 
         if self.inputQuit.matches(kevent) :
-            scene = Itchy.getGame().sceneName
+            scene = game.sceneName
             if scene == "menu" :
                 Itchy.getGame().end()
             elif scene == "play" :
-                Itchy.getGame().startScene("menu")
+                game.startScene("menu")
             else :
-                Itchy.getGame().startScene( "play" )
+                game.startScene( "play" )
 
         if self.inputReset.matches(kevent) :
-            Itchy.getGame().getPreferences().removeNode()
+            game.preferences.removeNode()
         
         # Call the base class. Note that super(Director,self).onKeyDown(kevent) throws an exception :-(        
         AbstractDirector.onKeyDown(self, kevent)

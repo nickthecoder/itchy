@@ -7,6 +7,8 @@ properties.add( IntegerProperty( "copies" ) )
 properties.add( IntegerProperty( "dx" ) )
 properties.add( IntegerProperty( "dy" ) )
 
+game = Itchy.getGame()
+
 class Copier(GridRole) :
 
     def __init__(self) :
@@ -49,7 +51,7 @@ class Copier(GridRole) :
 
                 squareSize = self.square.grid.squareSize
                 self.event("copied")
-                actor = Itchy.getGame().resources.createActor( self.copying, self.actor.stage )
+                actor = game.resources.createActor( self.copying, self.actor.stage )
                 actor.moveTo( self.actor.x, self.actor.y )
                 actor.role.placeOnGrid( self.square.grid )
                 actor.role.move(self.dx, self.dy, self.speed)

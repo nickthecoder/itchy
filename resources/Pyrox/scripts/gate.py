@@ -6,6 +6,8 @@ properties = ArrayList()
 properties.add( StringProperty( "scene" ) )
 properties.add( IntegerProperty( "spare" ).label("Spare Collectables" ) )
 
+game = Itchy.getGame()
+
 class Gate(GridRole) :
 
     def __init__(self) :
@@ -23,23 +25,23 @@ class Gate(GridRole) :
         
     def onPlacedOnGrid(self) :
         super(Gate,self).onPlacedOnGrid()
-        Itchy.getGame().getSceneDirector().collected( self.spare )
+        game.sceneDirector.collected( self.spare )
 
     def onInvaded( self, invader ) :
         super(Gate,self).onInvaded(invader)
-        self.actor.deathEvent("exit")
+        self.deathEvent("exit")
         self.exiting = True
         invader.event("exit")
-        Itchy.getGame().getPreferences().node("completed").putBoolean( Itchy.getGame().getSceneName(), True )
+        game.preferences.node("completed").putBoolean( game.sceneName, True )
 
     def onDeath( self ) :
         if self.exiting :
-            Itchy.getGame().getDirector().returnToGateRoom( self.scene )
+            game.director.returnToGateRoom( self.scene )
         
 
     def onMessage( self, message ) :
         if (message == "open") :
-            self.getActor().event("open")
+            self.event("open")
             self.addTag("soft")
 
 

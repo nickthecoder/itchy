@@ -21,7 +21,8 @@ class Soft(GridRole) :
         
     def onInvaded( self, invader ) :
         pass
-        
+
+
     # Boiler plate code - no need to change this
     def getProperties(self):
         return properties

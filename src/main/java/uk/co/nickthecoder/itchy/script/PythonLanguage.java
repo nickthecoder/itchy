@@ -91,7 +91,7 @@ public class PythonLanguage extends ScriptLanguage
             PyException pe = (PyException) e;
             return new WrappedScriptException( pe, pe.value.toString() );
         }
-        
+
         return super.wrapException( e );
     }
     

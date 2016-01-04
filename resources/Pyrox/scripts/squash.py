@@ -32,7 +32,7 @@ class Squash(GridRole) :
     def onHalfInvaded(self,invader):
         if not self.permanent :
             self.removeFromGrid()
-            self.actor.event("fade")
+            self.event("fade")
     
     def shove( self, pusher, dx, dy, speed ) :
         pass

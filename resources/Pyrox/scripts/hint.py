@@ -11,10 +11,11 @@ class Hint(AbstractRole) :
         self.hint=""
 
     def tick(self) :
-        players = self.getCollisionStrategy().collisions(self.getActor(),["player"])
+        players = self.getCollisionStrategy().collisions(self.actor,["player"])
         for player in players :
             player.talk( self.hint )
-            self.getActor().deathEvent("death")
+            self.actor.deathEvent("death")
+
 
     # Boiler plate code - no need to change this
     def getProperties(self):

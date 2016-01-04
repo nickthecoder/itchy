@@ -1,5 +1,7 @@
 from common import *
 
+game = Itchy.getGame()
+
 properties = ArrayList()
 properties.add( StringProperty( "expectedClass" ) )
 
@@ -13,8 +15,8 @@ class Test(AbstractRole) :
         
     def run(self) :
     
-        grid = Itchy.getGame().sceneDirector.grid
-        square = grid.getSquareByPixel( self.actor.getX(), self.actor.getY() )
+        grid = game.sceneDirector.grid
+        square = grid.getSquareByPixel( self.actor.x, self.actor.y )
         role = grid.getGridRole(square.x,square.y)
 
         if role is None :
@@ -25,10 +27,10 @@ class Test(AbstractRole) :
     def test( self, waffle, expected, found ) :
     
         if expected == found :
-            self.actor.event("pass")
+            self.event("pass")
             return True
         else :
-            self.actor.event("fail")
+            self.event("fail")
             print waffle, ". Expected : ", expected, " found : ", found
             return False
 

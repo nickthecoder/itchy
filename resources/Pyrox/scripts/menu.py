@@ -18,13 +18,14 @@ class Menu(Level) :
             Itchy.getGame().startScene("play")
 
         super(Menu,self).onKeyDown(ke)
-    
+
+
     # Boiler plate code - no need to change this
     def getProperties(self):
         return properties
 
     # Boiler plate code - no need to change this
     def getClassName(self):
-        return ClassName( CostumeProperties, self.__module__ + ".py" )
+        return ClassName( SceneDirector, self.__module__ + ".py" )
 
 

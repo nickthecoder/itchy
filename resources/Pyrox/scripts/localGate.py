@@ -2,6 +2,8 @@ from common import *
 
 from gridRole import GridRole
 
+game = Itchy.getGame()
+
 properties = ArrayList()
 properties.add( StringProperty( "destinationId" ) )
 
@@ -30,7 +32,7 @@ class LocalGate(GridRole) :
         if self.destinationId == "" :
             return
 
-        destination = Itchy.getGame().findRoleById( self.destinationId )
+        destination = game.findRoleById( self.destinationId )
         if destination is None :
             return
             
@@ -55,7 +57,7 @@ class LocalGate(GridRole) :
             invader.event("exit")
             invader.actor.costume = costume
 
-            destination = Itchy.getGame().findRoleById( self.destinationId )
+            destination = game.findRoleById( self.destinationId )
             if destination :
                 invader.moveTo(destination.actor.x, destination.actor.y)
                 self.event("jumped") # Makes another sound effect  

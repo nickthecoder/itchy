@@ -764,7 +764,7 @@ public class Actor implements PropertySubject<Actor>
             try {
                 this.role.animateAndTick();
             } catch (Exception e) {
-                e.printStackTrace();
+                Itchy.handleException(e);
             }
         }
     }

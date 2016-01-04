@@ -46,12 +46,13 @@ class GridRole(AbstractRole) :
             .text(message)
         self.adjustTalk( talk );
         
-        self.talkActor = talk.create().getActor()
+        self.talkActor = talk.create().actor
         
         self.talkActor.getStage().addTop(self.talkActor)
-        self.talkActor.setCostume( self.getActor().getCostume() )
+        self.talkActor.setCostume( self.actor.costume )
         self.talkActor.event("talk-fade")
-               
+
+
     def adjustTalk( self, talkBuilder ) :
         pass;
 
@@ -60,7 +61,7 @@ class GridRole(AbstractRole) :
         grid = self.square.grid if self.square else None
             
         self.removeFromGrid()
-        self.getActor().moveTo(x, y)
+        self.actor.moveTo(x, y)
         if grid :
             self.placeOnGrid(grid)
 
@@ -69,13 +70,13 @@ class GridRole(AbstractRole) :
     # Uses the actors position to calculate the correct square to occupy.
     def placeOnGrid( self, grid ) :
     
-        self.square = grid.getSquareByPixel( self.getActor().getX(), self.getActor().getY() )
+        self.square = grid.getSquareByPixel( self.actor.x, self.actor.y )
         if self.square != None :
             self.square.occupant = self
             self.onPlacedOnGrid()
         else :
-            print "Failed to find square! ", self.actor.getX(), ",", self.actor.getY()
-            self.getActor().getAppearance().setAlpha( 128 )
+            print "Failed to find square! ", self.actor.x, ",", self.actor.y
+            self.actor.appearance.alpha = 128
 
     def onPlacedOnGrid( self ) :
         pass

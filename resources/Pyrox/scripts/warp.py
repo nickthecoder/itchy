@@ -2,6 +2,8 @@ from common import *
 
 from gridRole import GridRole
 
+game = Itchy.getGame()
+
 properties = ArrayList()
 properties.add( StringProperty( "scene" ) )
 properties.add( IntegerProperty( "exitX" ).label("Exit dx") )
@@ -26,18 +28,18 @@ class Warp(GridRole) :
 
         
         if self.isCompleted() :
-            self.getActor().event("completed")
+            self.event("completed")
 
         if not Itchy.getGame().resources.getSceneResource(self.scene) :
-            self.getActor().event("closed")
-            self.getActor().setRole( PlainRole() )
+            self.event("closed")
+            self.actor.role = PlainRole()
 
     def onInvaded( self, invader ) :
         super(Warp,self).onInvaded(invader)
-        Itchy.getGame().startScene( self.scene )
+        game.startScene( self.scene )
 
     def isCompleted(self):
-        return Itchy.getGame().getPreferences().node("completed").getBoolean( self.scene, False )
+        return game.preferences.node("completed").getBoolean( self.scene, False )
 
 
     # Boiler plate code - no need to change this

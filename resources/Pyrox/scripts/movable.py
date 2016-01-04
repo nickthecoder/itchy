@@ -77,8 +77,7 @@ class Movable(GridRole) :
             newSquare.entrant = None
 
         self.square = newSquare
-        
- 
+
 
     def move( self, dx, dy,speed=None) :
 

@@ -6,6 +6,8 @@ properties.add( StringProperty( "moves" ) )
 properties.add( BooleanProperty( "killOnPressed" ) )
 properties.add( BooleanProperty( "autoTest" ) )
 
+game = Itchy.getGame()
+
 # Automates the Player, so that his movements are automatically made based upon the "moves" property of this object.
 # "moves" is a string, with the letters "u","d","l","r" used for up,down,left and right.
 class AutoPilot(GridRole) :
@@ -31,10 +33,10 @@ class AutoPilot(GridRole) :
 
         # The extra collectable will be gained if no tests fail
         # This will prevent the gate opening if a test fails, and therefore remain on this level.
-        Itchy.getGame().getSceneDirector().collected(-1) 
+        game.sceneDirector.collected(-1) 
 
         self.testing = True
-        for player in Itchy.getGame().findRoleByTag("player") :
+        for player in game.findRoleByTag("player") :
             self.runPlayer( player )
 
     def runPlayer(self,player) :
@@ -44,7 +46,6 @@ class AutoPilot(GridRole) :
         self.player.inputUp = FakeInput( self, "u" )
         self.player.inputDown = FakeInput( self, "d" )
         self.player.inputRight = FakeInput( self, "r" )
-        print "Auto Pilot engaged"
                 
         self.movesIndex = 0
 
@@ -75,22 +76,21 @@ class AutoPilot(GridRole) :
                     self.player.inputRight = Input.find("right")
                     self.player.inputUp = Input.find("up")
                     self.player.inputDown = Input.find("down")
-                print "Auto Pilot disengaged"
                 self.actor.kill()
 
     def runTests(self) :
     
-        Itchy.getGame().director.testView.setVisible(True)
+        game.director.testView.setVisible(True)
         print "Running tests"
         count = 0
         fails = 0
-        for test in Itchy.getGame().findRoleByTag("test") :
+        for test in game.findRoleByTag("test") :
             count += 1
             if not test.run() :
                 fails += 1
         print "Ran", count, "tests", fails, "failures"
         if fails == 0 :
-            Itchy.getGame().getSceneDirector().collected(1)
+            game.sceneDirector.collected(1)
 
     def canShove( self, pusher, dx, dy, speed, force ) :
     

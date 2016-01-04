@@ -16,6 +16,8 @@ properties.add( IntegerProperty( "randomSeed" ) )
 # However, if it is hit or pushed, then it will fall.
 # On being detached, it will emit bees. Afterwards, it becomes collectable (soft tag).
 
+game = Itchy.getGame()
+
 class Beehive(Faller) :
 
     def __init__(self) :
@@ -34,7 +36,7 @@ class Beehive(Faller) :
 
     def onBirth(self) :
         super(Beehive,self).onBirth()
-        Itchy.getGame().getSceneDirector().collectablesRemaining += 1
+        game.sceneDirector.collectablesRemaining += 1
         self.addTag("hittable")
         self.addTag("beehive")
         
@@ -80,7 +82,7 @@ class Beehive(Faller) :
         if self.bees == 0 :
 
             if (invader.hasTag("player")) :
-                Itchy.getGame().getSceneDirector().collected(1)
+                game.sceneDirector.collected(1)
                 invader.talk( "_honey" )
                 self.removeFromGrid()
                 self.actor.deathEvent("collected")

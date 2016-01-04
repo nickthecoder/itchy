@@ -3,14 +3,15 @@ from common import *
 from gridRole import GridRole
 from roundProperties import RoundProperties
 
-
 properties = ArrayList()
+
+game = Itchy.getGame()
 
 class Collectable(GridRole) :
 
     def onBirth(self) :
         super(Collectable,self).onBirth()
-        Itchy.getGame().getSceneDirector().collectablesRemaining += 1
+        game.sceneDirector.collectablesRemaining += 1
         self.addTag("soft")
         
         if isinstance(self.costumeProperties, RoundProperties) :
@@ -21,7 +22,7 @@ class Collectable(GridRole) :
         super(Collectable,self).onHalfInvaded(invader)
 
         if (invader.hasTag("player")) :
-            Itchy.getGame().getSceneDirector().collected(1)
+            game.getSceneDirector().collected(1)
             self.actor.deathEvent("collected")
         else :
             self.explode()
