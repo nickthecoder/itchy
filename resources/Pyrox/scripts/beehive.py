@@ -44,7 +44,7 @@ class Beehive(Faller) :
         else :
             self.random = Random(self.randomSeed)
 
-        self.actor.costume.properties.update(self) # Its a roundedProperties
+        self.costumeProperties.update(self) # Its a roundedProperties
         self.rolls = self.hasTag("roundedSE")
         self.detached = not self.rolls # The round hive is not detatched, the square one is.
             

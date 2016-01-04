@@ -1,12 +1,7 @@
-from uk.co.nickthecoder.itchy import Role
-from uk.co.nickthecoder.itchy import AbstractRole
-from uk.co.nickthecoder.itchy import Actor
-from uk.co.nickthecoder.itchy.util import ClassName
+from common import *
 
 from gridRole import GridRole
 from movable import Movable
-
-from java.util import ArrayList
 
 properties = ArrayList()
 

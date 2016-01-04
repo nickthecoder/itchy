@@ -18,7 +18,7 @@ class Squash(GridRole) :
         
     def onBirth(self):
         super(Squash,self).onBirth()
-        self.actor.costume.properties.update(self)
+        self.costumeProperties.update(self)
 
 
     def onPlacedOnGrid(self) :

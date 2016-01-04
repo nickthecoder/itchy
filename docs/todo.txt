@@ -1,11 +1,8 @@
 Current Tasks
 =============
 
-Change the Role templates for python and groovy
-Remove one of Costume's duplicates : getProperties, getCostumeProperties. Maybe rename?
-
-
 Tidy up Pyrox scripts. e.g. from common
+
 BUGS
 ====
 
@@ -28,6 +25,8 @@ Code Tidy Up
 ============
 
 Rename one of the Button classes. ButtonRole
+
+Remove one of Costume's duplicates : getProperties, getCostumeProperties. Maybe rename?
 
 Look at companion, it has font, font size and color. Why ????
     Check sub classes for get/set for font colour size etc. I think this is done now???

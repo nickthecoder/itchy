@@ -1,8 +1,4 @@
-from uk.co.nickthecoder.itchy import Role
-from uk.co.nickthecoder.itchy import AbstractRole
-from uk.co.nickthecoder.itchy.util import ClassName
-
-from java.util import ArrayList
+from common import *
 
 from collectable import Collectable
 

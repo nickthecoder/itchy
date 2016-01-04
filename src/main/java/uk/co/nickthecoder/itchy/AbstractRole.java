@@ -122,6 +122,11 @@ public abstract class AbstractRole implements Role
         return new ClassName(Role.class, this.getClass().getName());
     }
 
+    public CostumeProperties getCostumeProperties()
+    {
+        return getActor().getCostume().getCostumeProperties();
+    }
+    
     @Override
     public boolean hasTag( String name )
     {

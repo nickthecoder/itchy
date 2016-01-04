@@ -16,7 +16,7 @@ class Wall(GridRole) :
     def onBirth( self ) :
         super(Wall,self).onBirth()
         
-        self.getActor().getCostume().getProperties().update(self)
+        self.getCostumeProperties().update(self)
 
 
     def createCostumeProperties(self) :

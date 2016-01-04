@@ -1,12 +1,6 @@
-from uk.co.nickthecoder.itchy import Role
-from uk.co.nickthecoder.itchy import AbstractRole
-from uk.co.nickthecoder.itchy.util import ClassName
+from common import *
 
 from square import Square
-
-import math
-
-from java.util import ArrayList
 
 class Grid(object) :
 

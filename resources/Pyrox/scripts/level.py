@@ -1,12 +1,4 @@
-from uk.co.nickthecoder.itchy import Itchy
-from uk.co.nickthecoder.itchy import PlainSceneDirector
-from uk.co.nickthecoder.itchy import AbstractRole
-from uk.co.nickthecoder.itchy import Input
-from uk.co.nickthecoder.itchy.util import ClassName
-
-import math
-
-from java.util import ArrayList
+from common import *
 
 from grid import Grid
 from gridRole import GridRole

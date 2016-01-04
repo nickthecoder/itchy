@@ -30,7 +30,7 @@ class Machine(GridRole) :
     def onSceneCreated(self):
         GridRole.onSceneCreated(self)
         self.makeAlternateOccupant()
-        self.actor.costume.properties.update(self)
+        self.costumeProperties.update(self)
         
         dummy = None
         squareSize = self.square.grid.squareSize

@@ -1,4 +1,4 @@
-from uk.co.nickthecoder.itchy import Itchy
+from common import *
 
 # Takes over control of all Player objects, and instead of the input coming from the keyboard,
 # it is controlled by parsing a string which holds the keys to be played back.

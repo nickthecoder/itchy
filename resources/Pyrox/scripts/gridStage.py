@@ -1,5 +1,4 @@
-from uk.co.nickthecoder.itchy import Itchy
-from uk.co.nickthecoder.itchy import ZOrderStage
+from common import *
 
 from square import Square
 from gridRole import GridRole

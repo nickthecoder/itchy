@@ -8,7 +8,7 @@ from uk.co.nickthecoder.itchy.util import ClassName, Util
 
 from uk.co.nickthecoder.itchy.collision import StandardNeighbourhood, NeighbourhoodCollisionStrategy, WrappedCollisionStrategy
 
-from uk.co.nickthecoder.itchy.role import Button, ProgressBar
+from uk.co.nickthecoder.itchy.role import PlainRole, Button, ProgressBar
 from uk.co.nickthecoder.itchy.role import Companion, Follower, Explosion, OnionSkin, Projectile, Talk, TalkProjectile
 from uk.co.nickthecoder.itchy.role import FollowerBuilder, ExplosionBuilder, OnionSkinBuilder, ProjectileBuilder, TalkBuilder, TalkProjectileBuilder
 
@@ -25,5 +25,6 @@ from uk.co.nickthecoder.jame import Surface, Rect, RGBA
 from uk.co.nickthecoder.jame.event import MouseButtonEvent
 
 from java.util import ArrayList
+from java.util import Random
 
 import math

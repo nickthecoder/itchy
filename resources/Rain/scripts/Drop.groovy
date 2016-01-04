@@ -29,7 +29,7 @@ class Drop extends AbstractRole
         
         // Each type of drop can got down the screen at different speed. The speedFactor is set from
         // the editor's "Costumes" page, in the "Properties" section.
-        speedFactor = actor.costume.properties.speedFactor
+        speedFactor = costumeProperties.speedFactor
         speed = Itchy.game.sceneDirector.speed * speedFactor
     }
 

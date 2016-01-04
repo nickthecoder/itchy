@@ -1,14 +1,6 @@
-from uk.co.nickthecoder.itchy import Itchy
-from uk.co.nickthecoder.itchy import Role
-from uk.co.nickthecoder.itchy import AbstractRole
-from uk.co.nickthecoder.itchy.util import ClassName
-from uk.co.nickthecoder.itchy.extras import Timer
-
-from java.util import ArrayList
+from common import *
 
 from gridRole import GridRole
-
-from uk.co.nickthecoder.itchy.property import StringProperty
 
 properties = ArrayList()
 properties.add( StringProperty( "requires" ) )

@@ -1,14 +1,4 @@
-from uk.co.nickthecoder.itchy import AbstractDirector
-from uk.co.nickthecoder.itchy.util import ClassName
-from uk.co.nickthecoder.itchy import Itchy
-from uk.co.nickthecoder.itchy import StageView
-from uk.co.nickthecoder.itchy import ZOrderStage
-from uk.co.nickthecoder.itchy import GridStageConstraint
-from uk.co.nickthecoder.itchy import Input
-
-from uk.co.nickthecoder.jame import Rect
-
-from java.util import ArrayList
+from common import *
 
 from gridStage import GridStage
 

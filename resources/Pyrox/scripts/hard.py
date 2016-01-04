@@ -1,9 +1,4 @@
-from uk.co.nickthecoder.itchy import Role
-from uk.co.nickthecoder.itchy import AbstractRole
-from uk.co.nickthecoder.itchy.util import ClassName
-from uk.co.nickthecoder.itchy.role import ExplosionBuilder
-
-from java.util import ArrayList
+from common import *
 
 from gridRole import GridRole
 

@@ -100,6 +100,11 @@ public class Costume implements Cloneable
     public CostumeProperties getProperties()
     {
         System.err.println("Called deprecated method : Costume.getCostumeProperties. Use getCostumeProperties instead.");
+        try {
+            throw new RuntimeException();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return getCostumeProperties();
     }
 

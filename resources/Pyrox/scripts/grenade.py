@@ -16,7 +16,7 @@ class Grenade(Faller) :
     
     def onBirth(self):
         super(Grenade,self).onBirth()
-        self.getActor().getCostume().getProperties().update(self)
+        self.getCostumeProperties().update(self)
         
         self.addTag("hittable")
         

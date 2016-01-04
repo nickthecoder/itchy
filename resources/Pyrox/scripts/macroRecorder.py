@@ -1,4 +1,4 @@
-from uk.co.nickthecoder.itchy import Itchy
+from common import *
 
 # Records the up/down/left/right keystrokes that Player objects test for.
 # Saves the results in a string, which consists of a number followed by a bitmask of the keys

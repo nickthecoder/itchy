@@ -1,15 +1,6 @@
-from uk.co.nickthecoder.itchy import Itchy
-from uk.co.nickthecoder.itchy import Role
-from uk.co.nickthecoder.itchy import AbstractRole
-from uk.co.nickthecoder.itchy.role import PlainRole
-from uk.co.nickthecoder.itchy.util import ClassName
-
-from java.util import ArrayList
+from common import *
 
 from gridRole import GridRole
-
-from uk.co.nickthecoder.itchy.property import StringProperty
-from uk.co.nickthecoder.itchy.property import IntegerProperty
 
 properties = ArrayList()
 properties.add( StringProperty( "scene" ) )

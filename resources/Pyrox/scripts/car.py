@@ -24,7 +24,7 @@ class Car(Faller) :
     def onBirth(self):
         super(Car,self).onBirth()
         self.rolls = False
-        self.actor.costume.properties.update(self)
+        self.costumeProperties.update(self)
 
         self.squash = "squashE" if self.direction == 1 else "squashW"
 

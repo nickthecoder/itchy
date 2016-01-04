@@ -18,7 +18,7 @@ class Plane(Movable) :
     def onBirth(self):
         super(Plane,self).onBirth()
         self.rolls = False
-        self.actor.costume.properties.update(self)
+        self.costumeProperties.update(self)
         self.squash = "squashE" if self.direction == 1 else "squashW"
         self.speed  = 10
 

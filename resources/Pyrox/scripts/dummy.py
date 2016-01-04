@@ -1,3 +1,4 @@
+from common import *
 
 from movable import Movable
 

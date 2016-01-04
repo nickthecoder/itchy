@@ -1,13 +1,4 @@
-from uk.co.nickthecoder.itchy import Itchy
-from uk.co.nickthecoder.itchy import Input
-from uk.co.nickthecoder.itchy import Role
-from uk.co.nickthecoder.itchy import Actor
-from uk.co.nickthecoder.itchy.util import ClassName
-from uk.co.nickthecoder.itchy.role import ExplosionBuilder
-
-from uk.co.nickthecoder.itchy.property import BooleanProperty
-
-from java.util import ArrayList
+from common import *
 
 from gridRole import GridRole
 from big import Big
@@ -54,7 +45,7 @@ class Player(Big) :
     def onBirth( self ) :
         Big.onBirth(self)
 
-        cp = self.actor.costume.properties
+        cp = self.costumeProperties
         self.talkX = cp.talkX
         self.talkY = cp.talkY
         
@@ -67,7 +58,7 @@ class Player(Big) :
         Big.onPlacedOnGrid(self)
 
         # My costume properties should be BigProperties (or something compatable).
-        self.actor.costume.properties.createParts( self )
+        self.costumeProperties.createParts( self )
         self.calculateLeadingEdges()
 
         self.allAddTag("hittable")

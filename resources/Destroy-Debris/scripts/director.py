@@ -49,18 +49,22 @@ class Director(AbstractDirector) :
 
         if sceneName == "menu" :
             transition = SceneTransition.slideLeft()
-            self.score = 0
-            self.lives = 3
+            self.reset();
 
         return SceneTransition(transition).transition(sceneName)
-    
 
+    def reset(self) :
+        self.score = 0
+        self.lives = 3
+    
     def onMessage(self, message) :
         if message == "start" :
-            self.startGame("1")
+            self.reset();
+            self.startScene("easy-1")
         
         if message == "continue" :
-            self.startGame(game.getSceneName())
+            self.reset();
+            self.startScene(game.getSceneName())
     
     
     def addPoints(self, points ) :

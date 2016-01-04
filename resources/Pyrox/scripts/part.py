@@ -1,3 +1,5 @@
+from common import *
+
 from movable import Movable
 
 # Used as padding when creating Big objects. The main object is in one square, which Part objects

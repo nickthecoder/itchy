@@ -1,9 +1,4 @@
-from uk.co.nickthecoder.itchy import Itchy
-from uk.co.nickthecoder.itchy import Role
-from uk.co.nickthecoder.itchy import AbstractRole
-from uk.co.nickthecoder.itchy.util import ClassName
-
-from java.util import ArrayList
+from common import *
 
 from gridRole import GridRole
 from roundProperties import RoundProperties
@@ -18,8 +13,8 @@ class Collectable(GridRole) :
         Itchy.getGame().getSceneDirector().collectablesRemaining += 1
         self.addTag("soft")
         
-        if isinstance(self.actor.costume.properties, RoundProperties) :
-            self.actor.costume.properties.update(self)
+        if isinstance(self.costumeProperties, RoundProperties) :
+            self.costumeProperties.update(self)
 
 
     def onHalfInvaded( self, invader ) :

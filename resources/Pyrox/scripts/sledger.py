@@ -1,15 +1,4 @@
-from uk.co.nickthecoder.itchy import Itchy
-from uk.co.nickthecoder.itchy import Role
-from uk.co.nickthecoder.itchy import AbstractRole
-from uk.co.nickthecoder.itchy.util import ClassName
-from uk.co.nickthecoder.itchy.extras import Timer
-
-from java.util import ArrayList
-from java.util import Random
-
-from uk.co.nickthecoder.itchy.property import StringProperty
-from uk.co.nickthecoder.itchy.property import DoubleProperty
-from uk.co.nickthecoder.itchy.property import BooleanProperty
+from common import *
 
 properties = ArrayList()
 properties.add( StringProperty( "text" ).multiLine() )

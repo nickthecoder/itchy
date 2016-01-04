@@ -1,6 +1,6 @@
-from gridRole import GridRole
+from common import *
 
-from uk.co.nickthecoder.itchy import Itchy
+from gridRole import GridRole
 
 class OutOfBounds(GridRole) :
 
