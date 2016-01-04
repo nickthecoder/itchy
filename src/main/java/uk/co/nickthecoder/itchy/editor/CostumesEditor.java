@@ -151,7 +151,7 @@ public class CostumesEditor extends SubEditor<CostumeResource>
     }
 
     @Override
-    protected void createForm()
+    protected Component createForm()
     {
         super.createForm();
 
@@ -176,16 +176,15 @@ public class CostumesEditor extends SubEditor<CostumeResource>
         };
         this.form.grid.addRow("Extends", this.buttonExtendedFrom);
 
-        Container all = new PlainContainer();
-        all.setLayout(new VerticalLayout());
+        
         this.notebook = new Notebook();
 
         PlainContainer eventsPage = new PlainContainer();
         PlainContainer propertiesPage = new PlainContainer();
+        
+        this.notebook.addPage("Details", this.form.container);
         this.notebook.addPage("Events", eventsPage);
         this.notebook.addPage("Properties", propertiesPage);
-
-        this.form.grid.addRow("", this.notebook);
 
         eventsPage.setLayout(new VerticalLayout());
         PlainContainer eventsTableSection = new PlainContainer();
@@ -246,6 +245,7 @@ public class CostumesEditor extends SubEditor<CostumeResource>
         propertiesPage.addChild(this.propertiesContainer);
         createPropertiesGrid();
 
+        return this.notebook;
     }
 
     private Costume clonedCostume;

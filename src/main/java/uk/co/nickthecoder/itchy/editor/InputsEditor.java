@@ -12,6 +12,7 @@ import uk.co.nickthecoder.itchy.InputResource;
 import uk.co.nickthecoder.itchy.KeyInput;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Button;
+import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.PlainContainer;
 import uk.co.nickthecoder.itchy.gui.GridLayout;
 import uk.co.nickthecoder.itchy.gui.Container;
@@ -74,7 +75,7 @@ public class InputsEditor extends SubEditor<InputResource>
     }
 
     @Override
-    protected void createForm()
+    protected Component createForm()
     {
         super.createForm();
 
@@ -98,6 +99,8 @@ public class InputsEditor extends SubEditor<InputResource>
         container.addChild(keysButton);
 
         grid.addRow("Keys", container);
+        
+        return this.form.container;
     }
 
     @Override

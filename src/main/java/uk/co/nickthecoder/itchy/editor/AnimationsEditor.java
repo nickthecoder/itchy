@@ -15,16 +15,17 @@ import uk.co.nickthecoder.itchy.Thumbnailed;
 import uk.co.nickthecoder.itchy.animation.Animation;
 import uk.co.nickthecoder.itchy.animation.CompoundAnimation;
 import uk.co.nickthecoder.itchy.animation.FramedAnimation;
+import uk.co.nickthecoder.itchy.gui.AbstractComponent;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Button;
-import uk.co.nickthecoder.itchy.gui.AbstractComponent;
+import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
-import uk.co.nickthecoder.itchy.gui.PlainContainer;
 import uk.co.nickthecoder.itchy.gui.Container;
 import uk.co.nickthecoder.itchy.gui.ImageComponent;
 import uk.co.nickthecoder.itchy.gui.MessageBox;
 import uk.co.nickthecoder.itchy.gui.NullComponent;
 import uk.co.nickthecoder.itchy.gui.PickerButton;
+import uk.co.nickthecoder.itchy.gui.PlainContainer;
 import uk.co.nickthecoder.itchy.gui.ReflectionTableModelRow;
 import uk.co.nickthecoder.itchy.gui.SimpleTableModel;
 import uk.co.nickthecoder.itchy.gui.SingleColumnRowComparator;
@@ -130,7 +131,7 @@ public class AnimationsEditor extends SubEditor<AnimationResource>
     }
 
     @Override
-    protected void createForm()
+    protected Component createForm()
     {
         super.createForm();
         this.currentAnimation = this.currentResource.animation.copy();
@@ -138,6 +139,8 @@ public class AnimationsEditor extends SubEditor<AnimationResource>
         this.treeContainer = new PlainContainer();
         this.createTree();
         this.form.grid.addRow(new NullComponent(), this.treeContainer);
+        
+        return this.form.container;
     }
 
     private void createTree()

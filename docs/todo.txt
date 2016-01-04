@@ -1,6 +1,7 @@
 Current Tasks
 =============
 
+CostumeEditor layout change.
 
 When Costume's Role is changed, then the CostumeEditor needs to rebuild the properties grid.
 	Also when the Role script is changed!?
@@ -85,18 +86,11 @@ Other Stuff
 SDL Drop event to add poses by dragging image files.
  
 SceneDesigner for Text
-    In the toolbox, if a Costume has no "default" pose, but does have a "default" TextStyle, then it is text.
-    Actor should only have a Constructor which takes a Costume. Make Costume mandatory.
-        We can have a helper method, which takes an arbitary pose, and creates a costume.
     Don't have a "Text" tool??
-    When loading, existing text won't have a costume, in which case, create a costume for each
-        Font (or maybe font,font-size combo).
     The thumbnail should have the font-size in the bottom right if its bigger than the thumbnail can display.
         Using an Editor's font, because we want a plain, consistant font.
-    Attributes for a single actor can be overridden, such as color, alignment.
     When saving an actor, only save the attributes which differ from the costume's style.
     Have a "Reset to Costume Defaults", and a "Apply to Costume" buttons.
-
 
 Group Costumes on the SceneDesigner's toolbox, so that similar costumes can be displayed as a single item.
     Clicking it reveals a popup, where the actual Costume can be selected.
@@ -105,14 +99,6 @@ Group Costumes on the SceneDesigner's toolbox, so that similar costumes can be d
         main icon in the scene design toolbox. Similar impl as "costume base"
 
 SceneDesigner : select groups of actors, and move/delete them together.
-
-Make Text Costumes real costumes - Don't use the "Text" tool.
-    Thumbnail to include the colour and the text "Abc".
-    Don't add a String to the costume when creating it.
-    Try to rationalise Actor's constructor - can I force it to have a Costume now?
-        Actor(Costume, String poseName = "default" ) i.e. just two constructors.
-        If a Pose is found use it, else if a Font is found use that, otherwise use a dummy 1x1 surface, and issue a warning.
-    During load - if it finds a "text", then generate a costume which is used by later "text" actors.
 
 Need to allow Makeup appear at any stage in the pipeline from the editor. e.g. a Decoration which should not be rotated with the actor.
 Or a clip done at the end.

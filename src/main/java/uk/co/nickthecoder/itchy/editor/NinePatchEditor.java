@@ -12,6 +12,7 @@ import java.util.List;
 import uk.co.nickthecoder.itchy.GraphicsContext;
 import uk.co.nickthecoder.itchy.NinePatchResource;
 import uk.co.nickthecoder.itchy.gui.AbstractComponent;
+import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.FileOpenDialog;
 import uk.co.nickthecoder.itchy.gui.ImageComponent;
@@ -95,7 +96,7 @@ public class NinePatchEditor extends SubEditor<NinePatchResource>
     }
 
     @Override
-    protected void createForm()
+    protected Component createForm()
     {
         super.createForm();
 
@@ -114,6 +115,8 @@ public class NinePatchEditor extends SubEditor<NinePatchResource>
         this.explodedImage = new ExplodedImage();
         this.explodedImage.addStyle("checkered");
         this.form.grid.addRow(new Label("Image"), this.addOptionalScrollbars(this.explodedImage, 500, 130));
+        
+        return this.form.container;
     }
 
     @Override

@@ -16,6 +16,7 @@ import uk.co.nickthecoder.itchy.PoseResource;
 import uk.co.nickthecoder.itchy.Thumbnailed;
 import uk.co.nickthecoder.itchy.gui.ClickableContainer;
 import uk.co.nickthecoder.itchy.gui.AbstractComponent;
+import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.PlainContainer;
 import uk.co.nickthecoder.itchy.gui.FileOpenDialog;
@@ -149,7 +150,7 @@ public class PosesEditor extends SubEditor<PoseResource>
     }
 
     @Override
-    protected void createForm()
+    protected Component createForm()
     {
         super.createForm();
 
@@ -185,6 +186,7 @@ public class PosesEditor extends SubEditor<PoseResource>
 
         grid.addRow("Size", new Label("" + pose.getSurface().getWidth() + "," + pose.getSurface().getHeight()));
 
+        return this.form.container;
     }
 
     @Override

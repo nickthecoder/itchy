@@ -275,8 +275,8 @@ public abstract class SubEditor<S>
         this.editWindow.clientArea.setLayout(new VerticalLayout());
 
         this.form = new PropertiesForm<S>(this.currentResource, getProperties());
-        createForm();
-        this.editWindow.clientArea.addChild(this.form.container);
+        
+        this.editWindow.clientArea.addChild(createForm());
 
         this.message = new Label("");
         this.message.addStyle("error");
@@ -293,9 +293,10 @@ public abstract class SubEditor<S>
         this.editWindow.show();
     }
 
-    protected void createForm()
+    protected Component createForm()
     {
         this.form.createForm();
+        return this.form.container;
     }
 
     protected abstract List<AbstractProperty<S, ?>> getProperties();
