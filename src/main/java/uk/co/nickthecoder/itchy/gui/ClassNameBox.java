@@ -21,10 +21,8 @@ import uk.co.nickthecoder.itchy.util.ClassName;
 
 public class ClassNameBox extends PlainContainer
 {
-
     private ScriptManager scriptManager;
 
-    // private ComboBox comboBox;
     private TextBox textBox;
 
     private Button editButton;
@@ -155,23 +153,9 @@ public class ClassNameBox extends PlainContainer
         }
     }
 
-    private boolean isValid()
+    public boolean isValid()
     {
-        if (this.value.isScript()) {
-            return this.scriptManager.isValidScript(this.value);
-        } else {
-            try {
-                Class<?> klass = Class.forName(this.value.name);
-                if (klass == null) {
-                    return false;
-                }
-                klass.asSubclass(this.baseClass);
-
-                return true;
-            } catch (Exception e) {
-                return false;
-            }
-        }
+        return this.value.isValid(this.scriptManager);
     }
 
     private void reload()

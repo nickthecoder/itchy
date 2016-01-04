@@ -1,10 +1,10 @@
 Current Tasks
 =============
 
-CostumeEditor layout change.
-
 When Costume's Role is changed, then the CostumeEditor needs to rebuild the properties grid.
 	Also when the Role script is changed!?
+	Also just before Ok is processed.
+	
 Convert all other games to use the new system
 	Done Pyrox, Darkness, Debris
 

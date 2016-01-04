@@ -32,7 +32,7 @@ public class Costume implements Cloneable
     public boolean showInDesigner = true;
 
     private CostumeProperties costumeProperties;
-    
+
     private HashMap<String, List<AnimationResource>> animationChoices;
 
     private HashMap<String, List<String>> stringChoices;
@@ -44,16 +44,19 @@ public class Costume implements Cloneable
     private HashMap<String, List<TextStyle>> textStyleChoices;
 
     /**
-     * A Costume can link to other costumes by a String key. These are called "companions", because they
-     * tend to be used to create companion objects. For example, "Space Miner" (asteroids) uses this
-     * when one "rock" breaks up into smaller rocks. The smaller rocks are the companions of the larger one.
+     * A Costume can link to other costumes by a String key. These are called
+     * "companions", because they tend to be used to create companion objects.
+     * For example, "Space Miner" (asteroids) uses this when one "rock" breaks
+     * up into smaller rocks. The smaller rocks are the companions of the larger
+     * one.
      */
     private HashMap<String, List<CostumeResource>> companionChoices;
 
     /**
-     * When loading a costume, we may have circular references, which can only be resolved when all costumes
-     * have been loaded. This stores the list of names of costumes during the load phase, which are then
-     * converted into companionChoices at the end.
+     * When loading a costume, we may have circular references, which can only
+     * be resolved when all costumes have been loaded. This stores the list of
+     * names of costumes during the load phase, which are then converted into
+     * companionChoices at the end.
      */
     public HashMap<String, List<String>> companionStringChoices;
 
@@ -62,7 +65,7 @@ public class Costume implements Cloneable
         this(null);
     }
 
-    public Costume( Costume extendsFrom )
+    public Costume(Costume extendsFrom)
     {
         this.extendedFrom = extendsFrom;
 
@@ -75,7 +78,7 @@ public class Costume implements Cloneable
         this.companionStringChoices = new HashMap<String, List<String>>();
     }
 
-    public Actor createActor( String startEvent )
+    public Actor createActor(String startEvent)
     {
         Actor actor = new Actor(this, startEvent);
         Role role;
@@ -93,32 +96,43 @@ public class Costume implements Cloneable
     }
 
     // TODO REMOVE Costume.getProperties
+    @Deprecated
     public CostumeProperties getProperties()
     {
+        System.err.println("Called deprecated method : Costume.getCostumeProperties. Use getCostumeProperties instead.");
         return getCostumeProperties();
     }
-	
+
+    private String roleClassNameForCostumeProperties;
+
     public CostumeProperties getCostumeProperties()
     {
-		if ( this.costumeProperties == null ) {
-			try {
-				Role dummyRole = AbstractRole.createRole(Itchy.getGame().resources, this.roleClassName );
-				this.costumeProperties = dummyRole.createCostumeProperties();
-			} catch (Exception e) {
-				e.printStackTrace();
-				this.costumeProperties = new CostumeProperties();
-			}
-		}
-		return this.costumeProperties;
+        // If the Role has changed since we last created the costume properties, then we can't use
+        // the old costumeProperties.
+        if ((this.roleClassNameForCostumeProperties != null)
+                        && (! this.roleClassNameForCostumeProperties.equals(this.roleClassName.name))) {
+            this.costumeProperties = null;
+        }
+
+        if (this.costumeProperties == null) {
+            try {
+                roleClassNameForCostumeProperties = this.roleClassName.name;
+                Role dummyRole = AbstractRole.createRole(Itchy.getGame().resources, this.roleClassName);
+                this.costumeProperties = dummyRole.createCostumeProperties();
+            } catch (Exception e) {
+                e.printStackTrace();
+                this.costumeProperties = new CostumeProperties();
+            }
+        }
+        return this.costumeProperties;
     }
 
-    
     public Costume getExtendedFrom()
     {
         return this.extendedFrom;
     }
 
-    public void setExtendedFrom( Costume costume )
+    public void setExtendedFrom(Costume costume)
     {
         this.extendedFrom = costume;
     }
@@ -147,7 +161,7 @@ public class Costume implements Cloneable
     {
         return Resources.sortNames(this.animationChoices.keySet());
     }
-    
+
     public List<String> getCompanionNames()
     {
         return Resources.sortNames(this.companionChoices.keySet());
@@ -155,7 +169,7 @@ public class Costume implements Cloneable
 
     // String
 
-    public void addString( String name, String value )
+    public void addString(String name, String value)
     {
         List<String> choices = this.stringChoices.get(name);
         if (choices == null) {
@@ -165,14 +179,14 @@ public class Costume implements Cloneable
         choices.add(value);
     }
 
-    public void removeString( String name, String value )
+    public void removeString(String name, String value)
     {
         List<String> choices = this.stringChoices.get(name);
         assert (choices.contains(value));
         choices.remove(value);
     }
 
-    public String getString( String name, String defaultValue )
+    public String getString(String name, String defaultValue)
     {
         String result = this.getString(name);
         if (result == null) {
@@ -182,7 +196,7 @@ public class Costume implements Cloneable
         return result;
     }
 
-    public String getString( String name )
+    public String getString(String name)
     {
         List<String> strings = this.stringChoices.get(name);
         if ((strings == null) || (strings.size() == 0)) {
@@ -195,31 +209,31 @@ public class Costume implements Cloneable
         return string;
     }
 
-    public List<String> getStringChoices( String name )
+    public List<String> getStringChoices(String name)
     {
         return this.stringChoices.get(name);
     }
 
     // Companion (Costume)
-    
-    public void addCompanion( String name, CostumeResource costumeResource )
+
+    public void addCompanion(String name, CostumeResource costumeResource)
     {
         List<CostumeResource> choices = this.companionChoices.get(name);
         if (choices == null) {
             choices = new ArrayList<CostumeResource>();
             this.companionChoices.put(name, choices);
         }
-        choices.add(costumeResource);        
+        choices.add(costumeResource);
     }
 
-    public void removeCompanion( String name, CostumeResource costumeResource)
+    public void removeCompanion(String name, CostumeResource costumeResource)
     {
         List<CostumeResource> choices = this.companionChoices.get(name);
         assert (choices.contains(costumeResource));
         choices.remove(costumeResource);
     }
-    
-    public CostumeResource getCompanionResource( String name )
+
+    public CostumeResource getCompanionResource(String name)
     {
         List<CostumeResource> choices = this.companionChoices.get(name);
         if ((choices == null) || (choices.size() == 0)) {
@@ -232,23 +246,23 @@ public class Costume implements Cloneable
             return null;
         }
         CostumeResource costumeResource = choices.get(random.nextInt(choices.size()));
-        return costumeResource  ;
+        return costumeResource;
     }
-    
-    public Costume getCompanion( String name )
+
+    public Costume getCompanion(String name)
     {
         CostumeResource resource = getCompanionResource(name);
         return resource == null ? null : resource.getCostume();
     }
-    
-    public List<CostumeResource> getCompanionChoices( String name )
+
+    public List<CostumeResource> getCompanionChoices(String name)
     {
         return this.companionChoices.get(name);
     }
 
     // Pose
 
-    public void addPose( String name, PoseResource poseResource )
+    public void addPose(String name, PoseResource poseResource)
     {
         List<PoseResource> choices = this.poseChoices.get(name);
         if (choices == null) {
@@ -258,14 +272,14 @@ public class Costume implements Cloneable
         choices.add(poseResource);
     }
 
-    public void removePose( String name, PoseResource resource )
+    public void removePose(String name, PoseResource resource)
     {
         List<PoseResource> choices = this.poseChoices.get(name);
         assert (choices.contains(resource));
         choices.remove(resource);
     }
 
-    public PoseResource getPoseResource( String name )
+    public PoseResource getPoseResource(String name)
     {
         List<PoseResource> choices = this.poseChoices.get(name);
         if ((choices == null) || (choices.size() == 0)) {
@@ -281,19 +295,19 @@ public class Costume implements Cloneable
         return poseResource;
     }
 
-    public Pose getPose( String name )
+    public Pose getPose(String name)
     {
         PoseResource resource = this.getPoseResource(name);
         return resource == null ? null : resource.pose;
     }
 
-    public List<PoseResource> getPoseChoices( String name )
+    public List<PoseResource> getPoseChoices(String name)
     {
         return this.poseChoices.get(name);
     }
 
     // Sound
-    public void addSound( String name, ManagedSound managedSound )
+    public void addSound(String name, ManagedSound managedSound)
     {
         List<ManagedSound> choices = this.soundChoices.get(name);
         if (choices == null) {
@@ -304,21 +318,21 @@ public class Costume implements Cloneable
 
     }
 
-    public ManagedSound addSound( String name, SoundResource soundResource )
+    public ManagedSound addSound(String name, SoundResource soundResource)
     {
         ManagedSound managedSound = new ManagedSound(soundResource);
         this.addSound(name, managedSound);
         return managedSound;
     }
 
-    public void removeSound( String name, ManagedSound value )
+    public void removeSound(String name, ManagedSound value)
     {
         List<ManagedSound> choices = this.soundChoices.get(name);
         assert (choices.contains(value));
         choices.remove(value);
     }
 
-    public SoundResource getSoundResource( String name )
+    public SoundResource getSoundResource(String name)
     {
         ManagedSound cs = getCostumeSound(name);
         if (cs == null) {
@@ -328,7 +342,7 @@ public class Costume implements Cloneable
         }
     }
 
-    public ManagedSound getCostumeSound( String name )
+    public ManagedSound getCostumeSound(String name)
     {
         List<ManagedSound> choices = this.soundChoices.get(name);
         if ((choices == null) || (choices.size() == 0)) {
@@ -341,20 +355,20 @@ public class Costume implements Cloneable
         return costumeSound;
     }
 
-    public Sound getSound( String name )
+    public Sound getSound(String name)
     {
         SoundResource resource = this.getSoundResource(name);
         return resource == null ? null : resource.getSound();
     }
 
-    public List<ManagedSound> getSoundChoices( String name )
+    public List<ManagedSound> getSoundChoices(String name)
     {
         return this.soundChoices.get(name);
     }
 
     // TextStyle
 
-    public void addTextStyle( String name, TextStyle textStyle )
+    public void addTextStyle(String name, TextStyle textStyle)
     {
         List<TextStyle> choices = this.textStyleChoices.get(name);
         if (choices == null) {
@@ -364,14 +378,14 @@ public class Costume implements Cloneable
         choices.add(textStyle);
     }
 
-    public void removeTextStyle( String name, TextStyle value )
+    public void removeTextStyle(String name, TextStyle value)
     {
         List<TextStyle> choices = this.textStyleChoices.get(name);
         assert (choices.contains(value));
         choices.remove(value);
     }
 
-    public TextStyle getTextStyle( String name )
+    public TextStyle getTextStyle(String name)
     {
         List<TextStyle> choices = this.textStyleChoices.get(name);
         if ((choices == null) || (choices.size() == 0)) {
@@ -385,21 +399,19 @@ public class Costume implements Cloneable
     }
 
     /*
-    public Font getFont( String name )
-    {
-        FontResource resource = this.getFontResource(name);
-        return resource == null ? null : resource.font;
-    }
-    */
-    
-    public List<TextStyle> getTextStyleChoices( String name )
+     * public Font getFont( String name ) { FontResource resource =
+     * this.getFontResource(name); return resource == null ? null :
+     * resource.font; }
+     */
+
+    public List<TextStyle> getTextStyleChoices(String name)
     {
         return this.textStyleChoices.get(name);
     }
 
     // Animation
 
-    public void addAnimation( String name, AnimationResource animationResource )
+    public void addAnimation(String name, AnimationResource animationResource)
     {
         List<AnimationResource> choices = this.animationChoices.get(name);
         if (choices == null) {
@@ -409,14 +421,14 @@ public class Costume implements Cloneable
         choices.add(animationResource);
     }
 
-    public void removeAnimation( String name, AnimationResource value )
+    public void removeAnimation(String name, AnimationResource value)
     {
         List<AnimationResource> choices = this.animationChoices.get(name);
         assert (choices.contains(value));
         choices.remove(value);
     }
 
-    public AnimationResource getAnimationResource( String name )
+    public AnimationResource getAnimationResource(String name)
     {
         List<AnimationResource> choices = this.animationChoices.get(name);
         if ((choices == null) || (choices.size() == 0)) {
@@ -425,23 +437,22 @@ public class Costume implements Cloneable
             }
             return null;
         }
-        AnimationResource animationResource = choices
-            .get(random.nextInt(choices.size()));
+        AnimationResource animationResource = choices.get(random.nextInt(choices.size()));
         return animationResource;
     }
 
-    public Animation getAnimation( String name )
+    public Animation getAnimation(String name)
     {
         AnimationResource resource = this.getAnimationResource(name);
         return resource == null ? null : resource.animation;
     }
 
-    public List<AnimationResource> getAnimationChoices( String name )
+    public List<AnimationResource> getAnimationChoices(String name)
     {
         return this.animationChoices.get(name);
     }
 
-    public Costume copy( Resources resource )
+    public Costume copy(Resources resource)
     {
         try {
             Costume result = (Costume) super.clone();

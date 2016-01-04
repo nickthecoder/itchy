@@ -40,6 +40,25 @@ public class ClassName
         return ScriptManager.isScript(this);
     }
     
+    public boolean isValid( ScriptManager scriptManager )
+    {
+        if (this.isScript()) {
+            return scriptManager.isValidScript(this);
+        } else {
+            try {
+                Class<?> klass = Class.forName(this.name);
+                if (klass == null) {
+                    return false;
+                }
+                klass.asSubclass(this.baseClass);
+
+                return true;
+            } catch (Exception e) {
+                return false;
+            }
+        }
+    }
+    
     @Override
     public String toString()
     {
