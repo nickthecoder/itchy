@@ -600,15 +600,14 @@ public class Resources extends Loadable
         if (pose == null) {
 
             String text = resource.getCostume().getString("default");
-            if (text != null) {
-                TextStyle textStyle = resource.getCostume().getTextStyle("default");
-                if (textStyle == null) {
-                    textStyle = new TextStyle(this.getDefaultFontResource().font, 12);
-                }
-                return this.getThumbnail(textStyle, text);
+            if (text == null) {
+            	text = resource.name;
             }
-
-            return null;
+            TextStyle textStyle = resource.getCostume().getTextStyle("default");
+            if (textStyle == null) {
+            	return null;
+            }
+            return this.getThumbnail(textStyle, text);
         }
         return this.getThumbnail(pose);
     }

@@ -923,7 +923,6 @@ public class CostumesEditor extends SubEditor<CostumeResource>
     @Override
     protected void onAdd()
     {
-        System.out.println("Is CostumeEditor.onAdd this still used?"); // TO DO
         PoseOrFontPicker picker = new PoseOrFontPicker(this.editor.resources) {
             @Override
             public void pick( PoseResource poseResource )
@@ -934,7 +933,7 @@ public class CostumesEditor extends SubEditor<CostumeResource>
             @Override
             public void pick( FontResource fontResource )
             {
-                // CostumesEditor.this.add(fontResource);
+                CostumesEditor.this.add(fontResource);
             }
         };
         picker.show();
@@ -948,6 +947,15 @@ public class CostumesEditor extends SubEditor<CostumeResource>
         this.edit(new CostumeResource(this.editor.resources, poseResource.getName(), costume), true);
     }
 
+    private void add( FontResource fontResource )
+    {
+        Costume costume = new Costume();
+        TextStyle textStyle = new TextStyle(fontResource.font, 14); 
+        costume.addTextStyle("default", textStyle);
+
+        this.edit(new CostumeResource(this.editor.resources, fontResource.getName(), costume), true);
+    }
+    
     @Override
     protected List<AbstractProperty<CostumeResource, ?>> getProperties()
     {

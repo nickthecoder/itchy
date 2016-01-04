@@ -106,8 +106,6 @@ Group Costumes on the SceneDesigner's toolbox, so that similar costumes can be d
 
 SceneDesigner : select groups of actors, and move/delete them together.
 
-Dynamic class loader for game jar files, which live in resources/foo/lib/ or ./lib when outside of itchy's resources directory.
-
 Make Text Costumes real costumes - Don't use the "Text" tool.
     Thumbnail to include the colour and the text "Abc".
     Don't add a String to the costume when creating it.
