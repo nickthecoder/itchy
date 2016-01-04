@@ -2,8 +2,6 @@ from common import *
 
 from highlight import Highlight
 
-print "Loading play.py"
-
 properties = ArrayList()
 properties.add( IntegerProperty( "limitsLeft" ) )
 properties.add( IntegerProperty( "limitsRight" ) )
@@ -108,7 +106,6 @@ class Play(PlainSceneDirector) :
         if ming is None :
             self.highlight = None
         else :
-            print "Highlighting a ming", ming.getActor(), ming.getActor().getStage()
             self.highlight = Highlight( ming.getActor() )
             self.highlight.createActor().event( "highlight" )
 

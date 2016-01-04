@@ -1,13 +1,16 @@
-from uk.co.nickthecoder.itchy import Role
-from uk.co.nickthecoder.itchy import AbstractRole
-from uk.co.nickthecoder.itchy.util import ClassName
-
-from java.util import ArrayList
+from common import *
 
 from faller import Faller
 from movable import Movable
+import roundProperties
+from roundProperties import RoundProperties
 
 properties = ArrayList()
+
+costumeProperties = ArrayList()
+costumeProperties.addAll( roundProperties.costumeProperties )
+costumeProperties.add( BooleanProperty( "headingLeft" ) )
+
 
 class Car(Faller) :
 
@@ -68,6 +71,10 @@ class Car(Faller) :
                 forward.onHit( self, dx, dy )
 
    
+    def createCostumeProperties(self) :
+        return CarProperties()
+
+   
     # Boiler plate code - no need to change this
     def getProperties(self):
         return properties
@@ -75,5 +82,23 @@ class Car(Faller) :
     # Boiler plate code - no need to change this
     def getClassName(self):
         return ClassName( Role, self.__module__ + ".py" )
+
+
+class CarProperties(RoundProperties) :
+
+    def __init__(self) :
+        super(CarProperties,self).__init__()
+        self.headingLeft = True
+
+
+    def update(self, role) :
+        super(CarProperties,self).update(role)
+        
+        role.direction = -1 if self.headingLeft else 1
+
+
+    # Boiler plate code - no need to change this
+    def getProperties(self):
+        return costumeProperties
 
 

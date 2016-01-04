@@ -67,22 +67,19 @@ public class Play extends PlainSceneDirector
         }
     }
     
-    boolean onKeyDown( KeyboardEvent ke )
+    void onKeyDown( KeyboardEvent ke )
     {
         // If we are dead, then the RETURN key will start a new game (reloads the current scene)
         if ((!isPlaying()) && inputRestart.matches(ke)) {
             Itchy.game.startScene( Itchy.game.sceneName )
-            return true
-            // Return true to indicate that the key has been processed.
+            ke.stopPropagation()
         }
 
         // Escape key takes us back to the menu.
         if (inputExit.matches(ke)) {
             Itchy.game.startScene("menu")
-            return true
-            // Return true to indicate that the key has been processed.
+            ke.stopPropagation()
         }
-        return false
     }
 
     def isPlaying()

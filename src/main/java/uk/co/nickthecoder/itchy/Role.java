@@ -166,4 +166,7 @@ public interface Role extends MessageListener, Cloneable, PropertySubject<Role> 
 	 */
 	@Override
 	public List<AbstractProperty<Role, ?>> getProperties();
+	
+	public CostumeProperties createCostumeProperties();
+
 }

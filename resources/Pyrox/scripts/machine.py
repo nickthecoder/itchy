@@ -1,11 +1,14 @@
-from uk.co.nickthecoder.itchy import Itchy
-from uk.co.nickthecoder.itchy import Role
-from uk.co.nickthecoder.itchy import AbstractRole
-from uk.co.nickthecoder.itchy.util import ClassName
-
-from java.util import ArrayList
+from common import *
 
 properties = ArrayList()
+
+costumeProperties = ArrayList()
+costumeProperties.add( StringProperty( "fromCostume" ) )
+costumeProperties.add( StringProperty( "toCostume" ) )
+costumeProperties.add( StringProperty( "enters" ) )
+costumeProperties.add( StringProperty( "exits" ) )
+costumeProperties.add( IntegerProperty( "offsetX" ) )
+costumeProperties.add( IntegerProperty( "offsetY" ) )
 
 from gridRole import GridRole
 from dummy import Dummy
@@ -51,7 +54,7 @@ class Machine(GridRole) :
                 
                 resources = Itchy.getGame().resources
                     
-                actor = resources.create( self.toCostume, self.actor.stage ).getActor()
+                actor = resources.createActor( self.toCostume, self.actor.stage )
                 squareSize = self.square.grid.squareSize
                 actor.moveTo( self.actor.x + self.offsetX * squareSize, self.actor.y + self.offsetY * squareSize )
                 actor.role.placeOnGrid( self.square.grid )
@@ -90,6 +93,10 @@ class Machine(GridRole) :
             self.pulled = False
         
 
+    def createCostumeProperties(self) :
+        return MachineProperties()
+
+
     # Boiler plate code - no need to change this
     def getProperties(self):
         return properties
@@ -98,5 +105,63 @@ class Machine(GridRole) :
     def getClassName(self):
         return ClassName( Role, self.__module__ + ".py" )
 
+
+
+class MachineProperties(CostumeProperties) :
+
+    def __init__(self) :
+        self.fromCostume = "carR"
+        self.toCostume = "carL"
+        self.enters = "E"
+        self.exits = "W"
+        self.offsetX = 0;
+        self.offsetY = 0;
+
+    def update( self, role ) :
+    
+        resources = Itchy.getGame().resources
+
+        role.fromCostume = resources.getCostume(self.fromCostume)
+        role.toCostume = resources.getCostume(self.toCostume)
+
+        role.offsetX = self.offsetX
+        role.offsetY = self.offsetY
+        
+        if self.enters == "E" :
+            role.fromDX = 1
+            role.fromDY = 0
+            
+        if self.enters == "W" :
+            role.fromDX = -1
+            role.fromDY = 0
+            
+        if self.enters == "N" :
+            role.fromDX = 0
+            role.fromDY = 1
+            
+        if self.enters == "S" :
+            role.fromDX = 0
+            role.fromDY = -1
+    
+    
+        if self.exits == "E" :
+            role.toDX = 1
+            role.toDY = 0
+            
+        if self.exits == "W" :
+            role.toDX = -1
+            role.toDY = 0
+            
+        if self.exits == "N" :
+            role.toDX = 0
+            role.toDY = 1
+            
+        if self.exits == "S" :
+            role.toDX = 0
+            role.toDY = -1
+            
+    # Boiler plate code - no need to change this
+    def getProperties(self):
+        return costumeProperties
 
 

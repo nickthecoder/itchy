@@ -462,28 +462,28 @@
     </animation>
   </animations>
   <costumes>
-    <costume name="arrow" defaultZOrder="50" order="90">
+    <costume name="arrow" defaultZOrder="50" order="90" showInDesigner="true">
       <pose name="default" pose="arrow"/>
     </costume>
-    <costume name="arrow2" defaultZOrder="50" order="90">
+    <costume name="arrow2" defaultZOrder="50" order="90" showInDesigner="true">
       <pose name="default" pose="arrow2"/>
     </costume>
-    <costume name="arrowCurved" defaultZOrder="50" order="90">
+    <costume name="arrowCurved" defaultZOrder="50" order="90" showInDesigner="true">
       <pose name="default" pose="arrowCurved"/>
     </costume>
-    <costume name="arrowCurved2" defaultZOrder="50" order="90">
+    <costume name="arrowCurved2" defaultZOrder="50" order="90" showInDesigner="true">
       <pose name="default" pose="arrowCurved2"/>
     </costume>
-    <costume name="arrowKeys" defaultZOrder="50" order="90">
+    <costume name="arrowKeys" defaultZOrder="50" order="90" showInDesigner="true">
       <pose name="default" pose="arrowKeys"/>
     </costume>
-    <costume name="autoPilot" defaultZOrder="10" order="40" role="autoPilot.py">
+    <costume name="autoPilot" defaultZOrder="10" order="40" showInDesigner="true" role="autoPilot.py">
       <pose name="default" pose="autoPilot"/>
     </costume>
-    <costume name="balloon" defaultZOrder="20" order="10" role="balloon.py">
+    <costume name="balloon" defaultZOrder="20" order="10" showInDesigner="true" role="balloon.py">
       <pose name="default" pose="balloon"/>
     </costume>
-    <costume name="player-base" defaultZOrder="100" order="99" role="player.py" properties="bigProperties.py">
+    <costume name="player-base" defaultZOrder="100" order="99" showInDesigner="true" role="player.py">
       <pose name="z" pose="z1"/>
       <pose name="z" pose="z2"/>
       <pose name="z" pose="z4"/>
@@ -504,11 +504,11 @@ before we can harvest the honey.</string>
       <animation name="wake" animation="player-wake"/>
       <properties width="1" height="1" talkX="70" talkY="10"/>
     </costume>
-    <costume name="beanPole" defaultZOrder="100" order="12" extends="player-base" role="player.py" properties="bigProperties.py">
+    <costume name="beanPole" defaultZOrder="100" order="12" showInDesigner="true" extends="player-base" role="player.py">
       <pose name="default" pose="beanPole"/>
       <properties width="1" height="2" talkX="70" talkY="60"/>
     </costume>
-    <costume name="bee" defaultZOrder="80" order="90" role="bee.py">
+    <costume name="bee" defaultZOrder="80" order="90" showInDesigner="true" role="bee.py">
       <pose name="default" pose="bee-W1"/>
       <pose name="face-E" pose="bee-E1"/>
       <pose name="face-W" pose="bee-W1"/>
@@ -519,41 +519,41 @@ before we can harvest the honey.</string>
       <animation name="escapeW" animation="bee-escapeW"/>
       <animation name="pollinate" animation="bee-pollinate"/>
     </costume>
-    <costume name="beehive2" defaultZOrder="30" order="40" role="beehive.py" properties="roundProperties.py">
+    <costume name="beehive2" defaultZOrder="30" order="40" showInDesigner="true" role="beehive.py">
       <pose name="default" pose="beehive2"/>
       <properties roundedNE="true" roundedSE="false" roundedSW="false" roundedNW="true"/>
     </costume>
-    <costume name="roll" defaultZOrder="0" order="90">
+    <costume name="roll" defaultZOrder="0" order="90" showInDesigner="true">
       <animation name="rollAnticlockwise" animation="rollAnticlockwise"/>
       <animation name="rollClockwise" animation="rollClockwise"/>
     </costume>
-    <costume name="behive" defaultZOrder="30" order="40" extends="roll" role="beehive.py" properties="roundProperties.py">
+    <costume name="behive" defaultZOrder="30" order="40" showInDesigner="true" extends="roll" role="beehive.py">
       <pose name="default" pose="beehive"/>
       <animation name="collected" animation="collectable-collected"/>
       <properties roundedNE="true" roundedSE="true" roundedSW="true" roundedNW="true"/>
     </costume>
-    <costume name="carL" defaultZOrder="20" order="20" role="car.py" properties="carProperties.py">
+    <costume name="carL" defaultZOrder="20" order="20" showInDesigner="true" role="car.py">
       <pose name="default" pose="car-L"/>
       <properties roundedNE="false" roundedSE="false" roundedSW="false" roundedNW="false" headingLeft="true"/>
     </costume>
-    <costume name="carR" defaultZOrder="20" order="20" role="car.py" properties="carProperties.py">
+    <costume name="carR" defaultZOrder="20" order="20" showInDesigner="true" role="car.py">
       <pose name="default" pose="car-R"/>
       <properties roundedNE="false" roundedSE="false" roundedSW="false" roundedNW="false" headingLeft="false"/>
     </costume>
-    <costume name="chair" defaultZOrder="20" order="30" role="chair.py">
+    <costume name="chair" defaultZOrder="20" order="30" showInDesigner="true" role="chair.py">
       <pose name="default" pose="chair"/>
     </costume>
-    <costume name="coin" defaultZOrder="60" order="10" role="collectable.py" properties="roundProperties.py">
+    <costume name="coin" defaultZOrder="60" order="10" showInDesigner="true" role="collectable.py">
       <pose name="default" pose="coin"/>
       <animation name="collected" animation="collectable-collected"/>
       <properties roundedNE="true" roundedSE="true" roundedSW="true" roundedNW="true"/>
     </costume>
-    <costume name="concrete" defaultZOrder="5" order="30" role="wall.py" properties="wallProperties.py">
+    <costume name="concrete" defaultZOrder="5" order="30" showInDesigner="true" role="wall.py">
       <pose name="default" pose="concrete-1"/>
       <pose name="default" pose="concrete-2"/>
       <properties roundedNE="false" roundedSE="false" roundedSW="false" roundedNW="false" canExplode="false"/>
     </costume>
-    <costume name="copier" defaultZOrder="90" order="40" role="copier.py">
+    <costume name="copier" defaultZOrder="90" order="40" showInDesigner="true" role="copier.py">
       <pose name="default" pose="copier"/>
       <pose name="light" pose="copierLight"/>
       <string name="empty">The paper tray is empty</string>
@@ -567,147 +567,147 @@ before we can harvest the honey.</string>
       <animation name="scan" animation="copier-scan"/>
       <animation name="talk-fade" animation="copier-talk-fade"/>
     </costume>
-    <costume name="explosion" defaultZOrder="60" order="100">
+    <costume name="explosion" defaultZOrder="60" order="100" showInDesigner="true">
       <pose name="default" pose="explosion-01"/>
       <animation name="default" animation="explosion"/>
     </costume>
-    <costume name="gate" defaultZOrder="40" order="20" role="gate.py">
+    <costume name="gate" defaultZOrder="40" order="20" showInDesigner="true" role="gate.py">
       <pose name="default" pose="gateClosed"/>
       <animation name="exit" animation="gate-exit"/>
       <animation name="open" animation="gate-open"/>
     </costume>
-    <costume name="giant" defaultZOrder="100" order="12" extends="player-base" role="player.py" properties="bigProperties.py">
+    <costume name="giant" defaultZOrder="100" order="12" showInDesigner="true" extends="player-base" role="player.py">
       <pose name="default" pose="giant"/>
       <properties width="2" height="2" talkX="120" talkY="60"/>
     </costume>
-    <costume name="grenade" defaultZOrder="20" order="20" extends="roll" role="grenade.py" properties="grenadeProperties.py">
+    <costume name="grenade" defaultZOrder="20" order="20" showInDesigner="true" extends="roll" role="grenade.py">
       <pose name="default" pose="grenade"/>
       <properties fallen="false"/>
     </costume>
-    <costume name="grenade2" defaultZOrder="20" order="20" extends="roll" role="grenade.py" properties="grenadeProperties.py">
+    <costume name="grenade2" defaultZOrder="20" order="20" showInDesigner="true" extends="roll" role="grenade.py">
       <pose name="default" pose="grenade2"/>
       <properties fallen="true"/>
     </costume>
-    <costume name="hint" defaultZOrder="10" order="30" role="hint.py">
+    <costume name="hint" defaultZOrder="10" order="30" showInDesigner="true" role="hint.py">
       <pose name="default" pose="hint"/>
       <animation name="death" animation="hint-death"/>
     </costume>
-    <costume name="key" defaultZOrder="30" order="30" role="key.py">
+    <costume name="key" defaultZOrder="30" order="30" showInDesigner="true" role="key.py">
       <pose name="default" pose="key"/>
       <animation name="collected" animation="collectable-collected"/>
     </costume>
-    <costume name="keyEscape" defaultZOrder="50" order="90">
+    <costume name="keyEscape" defaultZOrder="50" order="90" showInDesigner="true">
       <pose name="default" pose="keyEscape"/>
     </costume>
-    <costume name="keyF5" defaultZOrder="50" order="90">
+    <costume name="keyF5" defaultZOrder="50" order="90" showInDesigner="true">
       <pose name="default" pose="keyF5"/>
     </costume>
-    <costume name="localGate" defaultZOrder="5" order="20" role="localGate.py">
+    <costume name="localGate" defaultZOrder="5" order="20" showInDesigner="true" role="localGate.py">
       <pose name="default" pose="gateLocal"/>
       <animation name="enter" animation="localGate-enter"/>
       <animation name="exit" animation="localGate-exit"/>
     </costume>
-    <costume name="machineEN" defaultZOrder="90" order="45" role="machine.py" properties="machineProperties.py">
+    <costume name="machineEN" defaultZOrder="90" order="45" showInDesigner="true" role="machine.py">
       <pose name="default" pose="machine-EN"/>
       <properties fromCostume="carR" toCostume="balloon" enters="E" exits="N" offsetX="0" offsetY="0"/>
     </costume>
-    <costume name="machineEN2" defaultZOrder="90" order="47" role="machine.py" properties="machineProperties.py">
+    <costume name="machineEN2" defaultZOrder="90" order="47" showInDesigner="true" role="machine.py">
       <pose name="default" pose="machine-EN2"/>
       <properties fromCostume="planeR" toCostume="balloon" enters="E" exits="N" offsetX="-1" offsetY="0"/>
     </costume>
-    <costume name="machineES" defaultZOrder="90" order="44" role="machine.py" properties="machineProperties.py">
+    <costume name="machineES" defaultZOrder="90" order="44" showInDesigner="true" role="machine.py">
       <pose name="default" pose="machine-ES"/>
       <properties fromCostume="carR" toCostume="rock" enters="E" exits="S" offsetX="0" offsetY="0"/>
     </costume>
-    <costume name="machineES2" defaultZOrder="90" order="46" role="machine.py" properties="machineProperties.py">
+    <costume name="machineES2" defaultZOrder="90" order="46" showInDesigner="true" role="machine.py">
       <pose name="default" pose="machine-ES2"/>
       <properties fromCostume="planeR" toCostume="rock" enters="E" exits="S" offsetX="-1" offsetY="0"/>
     </costume>
-    <costume name="machineEW" defaultZOrder="90" order="41" role="machine.py" properties="machineProperties.py">
+    <costume name="machineEW" defaultZOrder="90" order="41" showInDesigner="true" role="machine.py">
       <pose name="default" pose="machine-EW"/>
       <properties fromCostume="carR" toCostume="carL" enters="E" exits="W" offsetX="0" offsetY="0"/>
     </costume>
-    <costume name="machineEW2" defaultZOrder="90" order="48" role="machine.py" properties="machineProperties.py">
+    <costume name="machineEW2" defaultZOrder="90" order="48" showInDesigner="true" role="machine.py">
       <pose name="default" pose="machine-EW2"/>
       <properties fromCostume="planeR" toCostume="planeL" enters="E" exits="W" offsetX="-1" offsetY="0"/>
     </costume>
-    <costume name="machineNE" defaultZOrder="90" order="44" role="machine.py" properties="machineProperties.py">
+    <costume name="machineNE" defaultZOrder="90" order="44" showInDesigner="true" role="machine.py">
       <pose name="default" pose="machine-NE"/>
       <properties fromCostume="balloon" toCostume="carR" enters="N" exits="E" offsetX="0" offsetY="0"/>
     </costume>
-    <costume name="machineNE2" defaultZOrder="90" order="46" role="machine.py" properties="machineProperties.py">
+    <costume name="machineNE2" defaultZOrder="90" order="46" showInDesigner="true" role="machine.py">
       <pose name="default" pose="machine-NE2"/>
       <properties fromCostume="balloon" toCostume="planeR" enters="N" exits="E" offsetX="0" offsetY="0"/>
     </costume>
-    <costume name="machineNS" defaultZOrder="90" order="42" role="machine.py" properties="machineProperties.py">
+    <costume name="machineNS" defaultZOrder="90" order="42" showInDesigner="true" role="machine.py">
       <pose name="default" pose="machine-NS"/>
       <properties fromCostume="balloon" toCostume="rock" enters="N" exits="S" offsetX="0" offsetY="0"/>
     </costume>
-    <costume name="machineNW" defaultZOrder="90" order="45" role="machine.py" properties="machineProperties.py">
+    <costume name="machineNW" defaultZOrder="90" order="45" showInDesigner="true" role="machine.py">
       <pose name="default" pose="machine-NW"/>
       <properties fromCostume="balloon" toCostume="carL" enters="N" exits="W" offsetX="0" offsetY="0"/>
     </costume>
-    <costume name="machineNW2" defaultZOrder="90" order="47" role="machine.py" properties="machineProperties.py">
+    <costume name="machineNW2" defaultZOrder="90" order="47" showInDesigner="true" role="machine.py">
       <pose name="default" pose="machine-NW2"/>
       <properties fromCostume="balloon" toCostume="planeL" enters="N" exits="W" offsetX="0" offsetY="0"/>
     </costume>
-    <costume name="machineSE" defaultZOrder="90" order="45" role="machine.py" properties="machineProperties.py">
+    <costume name="machineSE" defaultZOrder="90" order="45" showInDesigner="true" role="machine.py">
       <pose name="default" pose="machine-SE"/>
       <properties fromCostume="rock" toCostume="carR" enters="S" exits="E" offsetX="0" offsetY="0"/>
     </costume>
-    <costume name="machineSE2" defaultZOrder="90" order="47" role="machine.py" properties="machineProperties.py">
+    <costume name="machineSE2" defaultZOrder="90" order="47" showInDesigner="true" role="machine.py">
       <pose name="default" pose="machine-SE2"/>
       <properties fromCostume="rock" toCostume="planeR" enters="S" exits="E" offsetX="0" offsetY="0"/>
     </costume>
-    <costume name="machineSN" defaultZOrder="90" order="42" role="machine.py" properties="machineProperties.py">
+    <costume name="machineSN" defaultZOrder="90" order="42" showInDesigner="true" role="machine.py">
       <pose name="default" pose="machine-SN"/>
       <properties fromCostume="rock" toCostume="balloon" enters="S" exits="N" offsetX="0" offsetY="0"/>
     </costume>
-    <costume name="machineSW" defaultZOrder="90" order="44" role="machine.py" properties="machineProperties.py">
+    <costume name="machineSW" defaultZOrder="90" order="44" showInDesigner="true" role="machine.py">
       <pose name="default" pose="machine-SW"/>
       <properties fromCostume="rock" toCostume="carL" enters="S" exits="W" offsetX="0" offsetY="0"/>
     </costume>
-    <costume name="machineSW2" defaultZOrder="90" order="46" role="machine.py" properties="machineProperties.py">
+    <costume name="machineSW2" defaultZOrder="90" order="46" showInDesigner="true" role="machine.py">
       <pose name="default" pose="machine-SW2"/>
       <properties fromCostume="rock" toCostume="planeL" enters="S" exits="W" offsetX="0" offsetY="0"/>
     </costume>
-    <costume name="machineWE" defaultZOrder="90" order="41" role="machine.py" properties="machineProperties.py">
+    <costume name="machineWE" defaultZOrder="90" order="41" showInDesigner="true" role="machine.py">
       <pose name="default" pose="machine-WE"/>
       <properties fromCostume="carL" toCostume="carR" enters="W" exits="E" offsetX="0" offsetY="0"/>
     </costume>
-    <costume name="machineWE2" defaultZOrder="90" order="48" role="machine.py" properties="machineProperties.py">
+    <costume name="machineWE2" defaultZOrder="90" order="48" showInDesigner="true" role="machine.py">
       <pose name="default" pose="machine-WE2"/>
       <properties fromCostume="planeL" toCostume="planeR" enters="W" exits="E" offsetX="1" offsetY="0"/>
     </costume>
-    <costume name="machineWN" defaultZOrder="90" order="44" role="machine.py" properties="machineProperties.py">
+    <costume name="machineWN" defaultZOrder="90" order="44" showInDesigner="true" role="machine.py">
       <pose name="default" pose="machine-WN"/>
       <properties fromCostume="carL" toCostume="balloon" enters="W" exits="N" offsetX="0" offsetY="0"/>
     </costume>
-    <costume name="machineWN2" defaultZOrder="90" order="46" role="machine.py" properties="machineProperties.py">
+    <costume name="machineWN2" defaultZOrder="90" order="46" showInDesigner="true" role="machine.py">
       <pose name="default" pose="machine-WN2"/>
       <properties fromCostume="planeL" toCostume="balloon" enters="W" exits="N" offsetX="1" offsetY="0"/>
     </costume>
-    <costume name="machineWS" defaultZOrder="90" order="45" role="machine.py" properties="machineProperties.py">
+    <costume name="machineWS" defaultZOrder="90" order="45" showInDesigner="true" role="machine.py">
       <pose name="default" pose="machine-WS"/>
       <properties fromCostume="carL" toCostume="rock" enters="W" exits="S" offsetX="0" offsetY="0"/>
     </costume>
-    <costume name="machineWS2" defaultZOrder="90" order="47" role="machine.py" properties="machineProperties.py">
+    <costume name="machineWS2" defaultZOrder="90" order="47" showInDesigner="true" role="machine.py">
       <pose name="default" pose="machine-WS2"/>
       <properties fromCostume="planeL" toCostume="rock" enters="W" exits="S" offsetX="1" offsetY="0"/>
     </costume>
-    <costume name="plainPlayer" defaultZOrder="100" order="1" role="player.py" properties="bigProperties.py">
+    <costume name="plainPlayer" defaultZOrder="100" order="1" showInDesigner="true" role="player.py">
       <pose name="default" pose="robot-N2"/>
       <properties width="1" height="1" talkX="70" talkY="10"/>
     </costume>
-    <costume name="planeL" defaultZOrder="30" order="10" role="plane.py" properties="planeProperties.py">
+    <costume name="planeL" defaultZOrder="30" order="10" showInDesigner="true" role="plane.py">
       <pose name="default" pose="plane-W"/>
       <properties headingLeft="true"/>
     </costume>
-    <costume name="planeR" defaultZOrder="30" order="10" role="plane.py" properties="planeProperties.py">
+    <costume name="planeR" defaultZOrder="30" order="10" showInDesigner="true" role="plane.py">
       <pose name="default" pose="plane-E"/>
       <properties headingLeft="false"/>
     </costume>
-    <costume name="player" defaultZOrder="100" order="11" extends="player-base" role="player.py" properties="bigProperties.py">
+    <costume name="player" defaultZOrder="100" order="11" showInDesigner="true" extends="player-base" role="player.py">
       <pose name="default" pose="robot-E1"/>
       <animation name="move-D" animation="robot-D"/>
       <animation name="move-L" animation="robot-L"/>
@@ -715,124 +715,126 @@ before we can harvest the honey.</string>
       <animation name="move-U" animation="robot-U"/>
       <properties width="1" height="1" talkX="70" talkY="10"/>
     </costume>
-    <costume name="portcullis" defaultZOrder="10" order="30" role="portcullis.py">
+    <costume name="portcullis" defaultZOrder="10" order="30" showInDesigner="true" role="portcullis.py">
       <pose name="close" pose="wall"/>
       <pose name="default" pose="portcullis"/>
       <string name="requires">You need to complete these levels :</string>
     </costume>
-    <costume name="pumpkin" defaultZOrder="30" order="30" role="pumpkin.py">
+    <costume name="pumpkin" defaultZOrder="30" order="30" showInDesigner="true" role="pumpkin.py">
       <pose name="default" pose="pumpkin-1"/>
       <animation name="pollinate" animation="pumpkin-pollinate"/>
+      <properties roundedNE="false" roundedSE="false" roundedSW="false" roundedNW="false"/>
     </costume>
-    <costume name="rock" defaultZOrder="20" order="10" role="rock.py">
+    <costume name="rock" defaultZOrder="20" order="10" showInDesigner="true" role="rock.py">
       <pose name="default" pose="rock"/>
     </costume>
-    <costume name="safe" defaultZOrder="30" order="30" role="safe.py">
+    <costume name="safe" defaultZOrder="30" order="30" showInDesigner="true" role="safe.py">
       <pose name="default" pose="safe"/>
       <animation name="collected" animation="collectable-collected"/>
       <animation name="open" animation="safe-open"/>
+      <properties roundedNE="false" roundedSE="false" roundedSW="false" roundedNW="false"/>
     </costume>
-    <costume name="scroll" defaultZOrder="50" order="90">
+    <costume name="scroll" defaultZOrder="50" order="90" showInDesigner="true">
       <pose name="default" pose="scroll"/>
     </costume>
-    <costume name="sledge" defaultZOrder="90" order="40" role="sledger.py">
+    <costume name="sledge" defaultZOrder="90" order="40" showInDesigner="true" role="sledger.py">
       <pose name="default" pose="sledge"/>
     </costume>
-    <costume name="soil" defaultZOrder="10" order="10" role="soft.py">
+    <costume name="soil" defaultZOrder="10" order="10" showInDesigner="true" role="soft.py">
       <pose name="default" pose="soil"/>
     </costume>
-    <costume name="soil2" defaultZOrder="10" order="10" role="hard.py">
+    <costume name="soil2" defaultZOrder="10" order="10" showInDesigner="true" role="hard.py">
       <pose name="default" pose="soil2"/>
       <animation name="dig" animation="soil2-dig"/>
     </costume>
-    <costume name="squashE" defaultZOrder="10" order="30" role="squash.py" properties="squashProperties.py">
+    <costume name="squashE" defaultZOrder="10" order="30" showInDesigner="true" role="squash.py">
       <pose name="default" pose="squash-E"/>
       <animation name="fade" animation="squash-fade"/>
       <properties roundedNE="false" roundedSE="false" roundedSW="false" roundedNW="false" squashN="false" squashE="true" squashS="false" squashW="false" permanent="false"/>
     </costume>
-    <costume name="squashEP" defaultZOrder="10" order="40" role="squash.py" properties="squashProperties.py">
+    <costume name="squashEP" defaultZOrder="10" order="40" showInDesigner="true" role="squash.py">
       <pose name="default" pose="squash-EP"/>
       <properties roundedNE="true" roundedSE="true" roundedSW="true" roundedNW="true" squashN="false" squashE="true" squashS="false" squashW="false" permanent="true"/>
     </costume>
-    <costume name="squashEW" defaultZOrder="10" order="30" extends="squashE" role="squash.py" properties="squashProperties.py">
+    <costume name="squashEW" defaultZOrder="10" order="30" showInDesigner="true" extends="squashE" role="squash.py">
       <pose name="default" pose="squash-EW"/>
       <properties roundedNE="false" roundedSE="false" roundedSW="false" roundedNW="false" squashN="false" squashE="true" squashS="false" squashW="true" permanent="false"/>
     </costume>
-    <costume name="squashEWP" defaultZOrder="10" order="40" role="squash.py" properties="squashProperties.py">
+    <costume name="squashEWP" defaultZOrder="10" order="40" showInDesigner="true" role="squash.py">
       <pose name="default" pose="squash-EWP"/>
       <properties roundedNE="true" roundedSE="true" roundedSW="true" roundedNW="true" squashN="false" squashE="true" squashS="false" squashW="true" permanent="true"/>
     </costume>
-    <costume name="squashN" defaultZOrder="10" order="30" extends="squashE" role="squash.py" properties="squashProperties.py">
+    <costume name="squashN" defaultZOrder="10" order="30" showInDesigner="true" extends="squashE" role="squash.py">
       <pose name="default" pose="squash-N"/>
       <properties roundedNE="false" roundedSE="false" roundedSW="false" roundedNW="false" squashN="true" squashE="false" squashS="false" squashW="false" permanent="false"/>
     </costume>
-    <costume name="squashNP" defaultZOrder="10" order="40" role="squash.py" properties="squashProperties.py">
+    <costume name="squashNP" defaultZOrder="10" order="40" showInDesigner="true" role="squash.py">
       <pose name="default" pose="squash-NP"/>
       <properties roundedNE="true" roundedSE="true" roundedSW="true" roundedNW="true" squashN="true" squashE="false" squashS="false" squashW="false" permanent="true"/>
     </costume>
-    <costume name="squashNS" defaultZOrder="10" order="30" extends="squashE" role="squash.py" properties="squashProperties.py">
+    <costume name="squashNS" defaultZOrder="10" order="30" showInDesigner="true" extends="squashE" role="squash.py">
       <pose name="default" pose="squash-NS"/>
       <properties roundedNE="false" roundedSE="false" roundedSW="false" roundedNW="false" squashN="true" squashE="false" squashS="true" squashW="false" permanent="false"/>
     </costume>
-    <costume name="squashNSP" defaultZOrder="10" order="40" role="squash.py" properties="squashProperties.py">
+    <costume name="squashNSP" defaultZOrder="10" order="40" showInDesigner="true" role="squash.py">
       <pose name="default" pose="squash-NSP"/>
       <properties roundedNE="true" roundedSE="true" roundedSW="true" roundedNW="true" squashN="true" squashE="false" squashS="true" squashW="false" permanent="true"/>
     </costume>
-    <costume name="squashS" defaultZOrder="10" order="30" extends="squashE" role="squash.py" properties="squashProperties.py">
+    <costume name="squashS" defaultZOrder="10" order="30" showInDesigner="true" extends="squashE" role="squash.py">
       <pose name="default" pose="squash-S"/>
       <properties roundedNE="false" roundedSE="false" roundedSW="false" roundedNW="false" squashN="false" squashE="false" squashS="true" squashW="false" permanent="false"/>
     </costume>
-    <costume name="squashSP" defaultZOrder="10" order="40" role="squash.py" properties="squashProperties.py">
+    <costume name="squashSP" defaultZOrder="10" order="40" showInDesigner="true" role="squash.py">
       <pose name="default" pose="squash-SP"/>
       <properties roundedNE="true" roundedSE="true" roundedSW="true" roundedNW="true" squashN="false" squashE="false" squashS="true" squashW="false" permanent="true"/>
     </costume>
-    <costume name="squashW" defaultZOrder="10" order="30" extends="squashE" role="squash.py" properties="squashProperties.py">
+    <costume name="squashW" defaultZOrder="10" order="30" showInDesigner="true" extends="squashE" role="squash.py">
       <pose name="default" pose="squash-W"/>
       <properties roundedNE="false" roundedSE="false" roundedSW="false" roundedNW="false" squashN="false" squashE="false" squashS="false" squashW="true" permanent="false"/>
     </costume>
-    <costume name="squashWP" defaultZOrder="10" order="40" role="squash.py" properties="squashProperties.py">
+    <costume name="squashWP" defaultZOrder="10" order="40" showInDesigner="true" role="squash.py">
       <pose name="default" pose="squash-WP"/>
       <properties roundedNE="true" roundedSE="true" roundedSW="true" roundedNW="true" squashN="false" squashE="false" squashS="false" squashW="true" permanent="true"/>
     </costume>
-    <costume name="stamp" defaultZOrder="60" order="10" role="collectable.py" properties="roundProperties.py">
+    <costume name="stamp" defaultZOrder="60" order="10" showInDesigner="true" role="collectable.py">
       <pose name="default" pose="stamp"/>
       <animation name="collected" animation="collectable-collected"/>
       <properties roundedNE="false" roundedSE="false" roundedSW="false" roundedNW="false"/>
     </costume>
-    <costume name="table" defaultZOrder="10" order="20" role="table.py">
+    <costume name="table" defaultZOrder="10" order="20" showInDesigner="true" role="table.py">
       <pose name="default" pose="table"/>
     </costume>
-    <costume name="test" defaultZOrder="50" order="90" role="test.py">
+    <costume name="test" defaultZOrder="50" order="90" showInDesigner="true" role="test.py">
       <pose name="default" pose="test"/>
       <pose name="fail" pose="testN"/>
       <pose name="pass" pose="textY"/>
     </costume>
-    <costume name="wall" defaultZOrder="5" order="10" role="wall.py" properties="wallProperties.py">
+    <costume name="wall" defaultZOrder="5" order="10" showInDesigner="true" role="wall.py">
       <pose name="default" pose="wall"/>
       <properties roundedNE="false" roundedSE="false" roundedSW="false" roundedNW="false" canExplode="true"/>
     </costume>
-    <costume name="wallNE" defaultZOrder="5" order="10" role="wall.py" properties="wallProperties.py">
+    <costume name="wallNE" defaultZOrder="5" order="10" showInDesigner="true" role="wall.py">
       <pose name="default" pose="wall-NE"/>
       <properties roundedNE="true" roundedSE="false" roundedSW="false" roundedNW="false" canExplode="true"/>
     </costume>
-    <costume name="wallNW" defaultZOrder="5" order="10" role="wall.py" properties="wallProperties.py">
+    <costume name="wallNW" defaultZOrder="5" order="10" showInDesigner="true" role="wall.py">
       <pose name="default" pose="wall-NW"/>
       <properties roundedNE="false" roundedSE="false" roundedSW="false" roundedNW="true" canExplode="true"/>
     </costume>
-    <costume name="wallSE" defaultZOrder="5" order="10" role="wall.py" properties="wallProperties.py">
+    <costume name="wallSE" defaultZOrder="5" order="10" showInDesigner="true" role="wall.py">
       <pose name="default" pose="wall-SE"/>
       <properties roundedNE="false" roundedSE="true" roundedSW="false" roundedNW="false" canExplode="true"/>
     </costume>
-    <costume name="wallSW" defaultZOrder="5" order="10" role="wall.py" properties="wallProperties.py">
+    <costume name="wallSW" defaultZOrder="5" order="10" showInDesigner="true" role="wall.py">
       <pose name="default" pose="wall-SW"/>
       <properties roundedNE="false" roundedSE="false" roundedSW="true" roundedNW="false" canExplode="true"/>
     </costume>
-    <costume name="warp" defaultZOrder="40" order="20" role="warp.py">
+    <costume name="warp" defaultZOrder="40" order="20" showInDesigner="true" role="warp.py">
       <pose name="closed" pose="gateClosed"/>
       <pose name="completed" pose="gateOpen"/>
       <pose name="default" pose="gatePending"/>
     </costume>
-    <costume name="wideLoad" defaultZOrder="100" order="12" extends="player-base" role="player.py" properties="bigProperties.py">
+    <costume name="wideLoad" defaultZOrder="100" order="12" showInDesigner="true" extends="player-base" role="player.py">
       <pose name="default" pose="wideLoad"/>
       <properties width="2" height="1" talkX="120" talkY="10"/>
     </costume>

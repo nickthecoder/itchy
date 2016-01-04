@@ -32,6 +32,10 @@ class Collectable(GridRole) :
             self.explode()
 
 
+    def createCostumeProperties(self) :
+        return RoundProperties()
+
+
     # Boiler plate code - no need to change this
     def getProperties(self):
         return properties

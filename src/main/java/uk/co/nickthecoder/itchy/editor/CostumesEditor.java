@@ -21,22 +21,21 @@ import uk.co.nickthecoder.itchy.Scene;
 import uk.co.nickthecoder.itchy.SceneResource;
 import uk.co.nickthecoder.itchy.SoundResource;
 import uk.co.nickthecoder.itchy.TextStyle;
+import uk.co.nickthecoder.itchy.gui.AbstractComponent;
 import uk.co.nickthecoder.itchy.gui.AbstractTableListener;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Button;
 import uk.co.nickthecoder.itchy.gui.ClassNameBox;
-import uk.co.nickthecoder.itchy.gui.AbstractComponent;
-import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
-import uk.co.nickthecoder.itchy.gui.PlainContainer;
-import uk.co.nickthecoder.itchy.gui.GridLayout;
 import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.Container;
+import uk.co.nickthecoder.itchy.gui.GridLayout;
 import uk.co.nickthecoder.itchy.gui.ImageComponent;
 import uk.co.nickthecoder.itchy.gui.Label;
 import uk.co.nickthecoder.itchy.gui.MessageBox;
 import uk.co.nickthecoder.itchy.gui.Notebook;
 import uk.co.nickthecoder.itchy.gui.Picker;
 import uk.co.nickthecoder.itchy.gui.PickerButton;
+import uk.co.nickthecoder.itchy.gui.PlainContainer;
 import uk.co.nickthecoder.itchy.gui.ReflectionTableModelRow;
 import uk.co.nickthecoder.itchy.gui.SimpleTableModel;
 import uk.co.nickthecoder.itchy.gui.SimpleTableModelRow;
@@ -52,7 +51,6 @@ import uk.co.nickthecoder.itchy.gui.VerticalLayout;
 import uk.co.nickthecoder.itchy.gui.Window;
 import uk.co.nickthecoder.itchy.gui.WrappedRowComparator;
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
-import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.itchy.util.StringList;
 import uk.co.nickthecoder.jame.Surface;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
@@ -64,8 +62,6 @@ public class CostumesEditor extends SubEditor<CostumeResource>
     private static final String NEW_EVENT_NAME = "default";
 
     private Notebook notebook;
-
-    private ClassNameBox propertiesClassName;
 
     private Table eventsTable;
 
@@ -246,35 +242,6 @@ public class CostumesEditor extends SubEditor<CostumeResource>
 
         propertiesPage.setLayout(new VerticalLayout());
 
-        this.propertiesClassName = new ClassNameBox(this.editor.getScriptManager(), costume.getPropertiesClassName(),
-            CostumeProperties.class);
-
-        this.propertiesClassName.addChangeListener(new ComponentChangeListener() {
-
-            @Override
-            public void changed()
-            {
-                ClassName className = CostumesEditor.this.propertiesClassName.getClassName();
-
-                // if (className.equals(costume.getPropertiesClassName())) {
-                // CostumesEditor.this.propertiesClassName.removeStyle("error");
-                // } else {
-                // Assume error...
-                CostumesEditor.this.propertiesClassName.addStyle("error");
-
-                if (CostumesEditor.this.editor.resources.checkClassName(className)) {
-
-                    costume.setPropertiesClassName(CostumesEditor.this.editor.getScriptManager(), className);
-
-                    createPropertiesGrid();
-                    CostumesEditor.this.propertiesClassName.removeStyle("error");
-                }
-                // }
-            }
-
-        });
-
-        propertiesPage.addChild(this.propertiesClassName);
         this.propertiesContainer = new PlainContainer();
         propertiesPage.addChild(this.propertiesContainer);
         createPropertiesGrid();
@@ -320,20 +287,18 @@ public class CostumesEditor extends SubEditor<CostumeResource>
 
     private void createPropertiesGrid()
     {
-        CostumeProperties properties = this.currentResource.getCostume().getProperties();
-
-        if (!this.currentResource.getCostume().getPropertiesClassName().name.equals(this.propertiesClassName.getClassName().name)) {
-
-            properties = CostumeProperties.createProperties(this.editor.getScriptManager(), this.propertiesClassName.getClassName());
-        }
+    	CostumeProperties cp = this.currentResource.getCostume().getCostumeProperties();
+        List<AbstractProperty<CostumeProperties,?>> properties = cp.getProperties();
+        
+        System.out.println( "Creating Properties grid. " + properties.size() );
 
         GridLayout grid = new GridLayout(this.propertiesContainer, 2);
         this.propertiesContainer.setLayout(grid);
 
-        for (AbstractProperty<CostumeProperties, ?> property : properties.getProperties()) {
+        for (AbstractProperty<CostumeProperties, ?> property : properties) {
 
             try {
-                Component component = property.createComponent(properties, true);
+                Component component = property.createComponent(cp, true);
                 grid.addRow(property.label, component);
 
             } catch (Exception e) {
@@ -887,11 +852,6 @@ public class CostumesEditor extends SubEditor<CostumeResource>
             throw new MessageException("Not a valid role class name");
         }
 
-        if (!this.editor.resources.checkClassName(this.propertiesClassName.getClassName())) {
-
-            throw new MessageException("Not a valid class name");
-        }
-
         Costume oldBase = this.currentResource.getCostume().getExtendedFrom();
         if (this.labelExtendedFrom.getText().equals("None")) {
             this.currentResource.getCostume().setExtendedFrom(null);
@@ -909,12 +869,6 @@ public class CostumesEditor extends SubEditor<CostumeResource>
                     throw new MessageException("Bad Extends - forms a loop.");
                 }
             }
-        }
-
-        if (this.editor.resources.checkClassName(this.propertiesClassName.getClassName())) {
-
-        } else {
-            throw new MessageException("Invalid properties class name");
         }
 
         super.update();

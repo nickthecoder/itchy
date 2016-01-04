@@ -98,7 +98,7 @@ class Director(AbstractDirector) :
         if self.inputQuit.matches(kevent) :
             scene = Itchy.getGame().sceneName
             if scene == "menu" :
-                Itchy.terminate()
+                Itchy.getGame().end()
             elif scene == "play" :
                 Itchy.getGame().startScene("menu")
             else :

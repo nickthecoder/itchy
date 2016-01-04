@@ -1,14 +1,13 @@
-from uk.co.nickthecoder.itchy import Role
-from uk.co.nickthecoder.itchy import AbstractRole
-from uk.co.nickthecoder.itchy.util import ClassName
-
-from java.util import ArrayList
+from common import *
 
 from movable import Movable
 from dummy import Dummy
 
 properties = ArrayList()
 
+costumeProperties = ArrayList()
+costumeProperties.add( BooleanProperty( "headingLeft" ) )
+        
 class Plane(Movable) :
 
     def __init__(self) :
@@ -102,6 +101,10 @@ class Plane(Movable) :
             self.dummy.move(dx, dy, speed)
         
 
+    def createCostumeProperties(self) :
+        return PlaneProperties()
+
+
     # Boiler plate code - no need to change this
     def getProperties(self):
         return properties
@@ -110,4 +113,16 @@ class Plane(Movable) :
     def getClassName(self):
         return ClassName( Role, self.__module__ + ".py" )
 
+
+class PlaneProperties(CostumeProperties) :
+
+    def __init__(self) :
+        self.headingLeft = True
+
+    def update( self, role ) :
+        role.direction = -1 if self.headingLeft else 1
+
+    # Boiler plate code - no need to change this
+    def getProperties(self):
+        return costumeProperties
 

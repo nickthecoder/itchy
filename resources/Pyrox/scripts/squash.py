@@ -1,12 +1,18 @@
-from uk.co.nickthecoder.itchy import Role
-from uk.co.nickthecoder.itchy import AbstractRole
-from uk.co.nickthecoder.itchy.util import ClassName
-
-from java.util import ArrayList
+from common import *
 
 from gridRole import GridRole
+from roundProperties import RoundProperties
+import roundProperties
 
 properties = ArrayList()
+
+costumeProperties = ArrayList()
+costumeProperties.addAll( roundProperties.costumeProperties )
+costumeProperties.add( BooleanProperty( "squashN" ) )
+costumeProperties.add( BooleanProperty( "squashE" ) )
+costumeProperties.add( BooleanProperty( "squashS" ) )
+costumeProperties.add( BooleanProperty( "squashW" ) )
+costumeProperties.add( BooleanProperty( "permanent" ) )
 
 class Squash(GridRole) :
         
@@ -31,6 +37,10 @@ class Squash(GridRole) :
     def shove( self, pusher, dx, dy, speed ) :
         pass
         
+    def createCostumeProperties(self) :
+        return SquashProperties()
+
+
     # Boiler plate code - no need to change this
     def getProperties(self):
         return properties
@@ -38,5 +48,29 @@ class Squash(GridRole) :
     # Boiler plate code - no need to change this
     def getClassName(self):
         return ClassName( Role, self.__module__ + ".py" )
+
+
+class SquashProperties(RoundProperties) :
+
+    def __init__(self) :
+        super(SquashProperties,self).__init__()
+        self.squashN = False
+        self.squashE = False
+        self.squashS = False
+        self.squashW = False
+        self.permanent = False
+        
+    def update( self, role ) :
+        super(SquashProperties,self).update(role)
+        
+        role.tag( "squashN", self.squashN )
+        role.tag( "squashE", self.squashE )
+        role.tag( "squashS", self.squashS )
+        role.tag( "squashW", self.squashW )
+        role.permanent = self.permanent
+    
+    # Boiler plate code - no need to change this
+    def getProperties(self):
+        return costumeProperties
 
 

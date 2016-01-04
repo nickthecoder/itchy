@@ -1,17 +1,8 @@
-from uk.co.nickthecoder.itchy import Itchy
-from uk.co.nickthecoder.itchy import Role
-from uk.co.nickthecoder.itchy import AbstractRole
-from uk.co.nickthecoder.itchy.util import ClassName
-from uk.co.nickthecoder.itchy.extras import Timer
-
-from uk.co.nickthecoder.itchy.property import IntegerProperty
-from uk.co.nickthecoder.itchy.property import DoubleProperty
-from uk.co.nickthecoder.itchy.property import ChoiceProperty
-
-from java.util import ArrayList
+from common import *
 from java.util import Random
 
 from faller import Faller
+from roundProperties import RoundProperties
 
 properties = ArrayList()
 properties.add( IntegerProperty( "bees" ) )
@@ -107,8 +98,8 @@ class Beehive(Faller) :
 
         if self.emitTimer :
             if self.emitTimer.isFinished() :
-                if ! not self.isMoving() :
-                
+                if not self.isMoving() :
+
                     if self.emitBee() :
                         self.bees -= 1
                         if self.bees > 0 :
@@ -143,7 +134,7 @@ class Beehive(Faller) :
             
             costume = resources.getCostume("bee")
             
-            beeActor = resources.create( costume, self.actor.stage ).getActor()
+            beeActor = resources.createActor( costume, self.actor.stage )
             beeActor.moveTo( self.actor.x + squareSize * dx, self.actor.y + squareSize * dy )
             
             bee = beeActor.role
@@ -174,6 +165,11 @@ class Beehive(Faller) :
             self.addTag("soft")
 
         return True
+
+
+    def createCostumeProperties(self) :
+        return RoundProperties()
+
 
     # Boiler plate code - no need to change this
     def getProperties(self):

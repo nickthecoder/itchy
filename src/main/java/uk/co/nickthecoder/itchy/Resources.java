@@ -479,7 +479,6 @@ public class Resources extends Loadable
     {
         this.costumes.put(resource.name, resource);
         this.registry.add(resource.getCostume().roleClassName);
-        this.registry.add(resource.getCostume().getPropertiesClassName());
     }
 
     public void removeCostume( String name )

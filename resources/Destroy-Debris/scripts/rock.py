@@ -8,8 +8,14 @@ properties.add( DoubleProperty("rotationSpeed").hint("Degrees per Tick)") )
 properties.add( DoubleProperty("vx").label("X Velocity") )
 properties.add( DoubleProperty("vy").label("Y Velocity") )
 
+
+costumeProperties = ArrayList()
+costumeProperties.add( IntegerProperty("pieces") )
+costumeProperties.add( IntegerProperty("points") )
+costumeProperties.add( IntegerProperty("strength") )
+costumeProperties.add( IntegerProperty("hitsRequired") )
+ 
 game = Itchy.getGame()
-director = game.getDirector()
 
 class Rock(Moving) :
 
@@ -37,20 +43,20 @@ class Rock(Moving) :
     
     def shot(self, bullet) :
     	# Small bullets have NO effect on strong rocks.
-    	strength = bullet.getActor().getCostume().getProperties().strength
-    	
-    	if (strength < self.getActor().getCostume().getProperties().strength) :
+    	strength = bullet.getActor().getCostume().getCostumeProperties().strength
+
+    	if strength < self.getActor().getCostume().getCostumeProperties().strength :
     		self.getActor().event("ricochet")
     		return
     	
     	self.hits += strength
     	# Have we hit the rock enough times?
-    	if self.hits < self.getActor().getCostume().getProperties().hitsRequired :
+    	if self.hits < self.getActor().getCostume().getCostumeProperties().hitsRequired :
     		self.getActor().event("hit")
     		return
     	
 		self.getActor().event("explode")
-    	director.addPoints(self.getActor().getCostume().getProperties().points)
+    	game.getDirector().addPoints(self.getActor().getCostume().getCostumeProperties().points)
     	
         ExplosionBuilder(self.getActor()) \
             .spread( bullet.getActor().getHeading() - 120, bullet.getActor().getHeading() + 120 ).randomSpread() \
@@ -60,12 +66,12 @@ class Rock(Moving) :
 
         sum_dx = 0
         sum_dy = 0
-        pieces = self.getActor().getCostume().getProperties().pieces
+        pieces = self.getActor().getCostume().getCostumeProperties().pieces
         for i in range( 0, pieces ) :
             actor = self.getActor().createCompanion("fragment-"+`i + 1`)
             role = actor.getRole()
             
-            explosiveness = bullet.getActor().getCostume().getProperties().explosiveness
+            explosiveness = bullet.getActor().getCostume().getCostumeProperties().explosiveness
             role.rotationSpeed = self.rotationSpeed + Util.randomBetween( -explosiveness, explosiveness )
 
             if i == pieces -1 :
@@ -86,6 +92,10 @@ class Rock(Moving) :
         self.removeTag("shootable")
     
     
+    def createCostumeProperties( self ) :
+        return RockProperties()
+
+
     # Boiler plate code - no need to change this
     def getProperties(self):
         return properties
@@ -94,4 +104,16 @@ class Rock(Moving) :
     def getClassName(self):
         return ClassName( Role, self.__module__ + ".py" )
 
+
+class RockProperties(CostumeProperties) :
+
+    def __init__(self) :
+        self.pieces = 0
+        self.points = 1    
+        self.strength = 1    
+        self.hitsRequired = 1    
+    
+    # Boiler plate code - no need to change this
+    def getProperties(self):
+        return costumeProperties
 

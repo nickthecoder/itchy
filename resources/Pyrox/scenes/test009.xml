@@ -136,8 +136,8 @@
     <actor costume="wall" x="-60" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
     <actor costume="wall" x="0" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
     <actor costume="autoPilot" x="540" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="10">
-      <property name="moves" value="lll rrrrrr lll u lllluuu lr uuu lr uuuu- lllldduu llldduu----------------ll"/>
-      <property name="autoTest" value="false"/>
+      <property name="moves" value="lll rrrrrr lll u lllluuu lr uuu lr uuuu- lllldduu lll-------------------dduull"/>
+      <property name="autoTest" value="true"/>
       <property name="killOnPressed" value="true"/>
     </actor>
     <actor costume="squashWP" x="480" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>

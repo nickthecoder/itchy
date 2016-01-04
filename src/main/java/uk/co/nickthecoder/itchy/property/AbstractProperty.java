@@ -58,7 +58,7 @@ public abstract class AbstractProperty<S, T> implements Comparable<AbstractPrope
     }
 
     /**
-     * Uses reflection to looks through all of the fields and methods for "Property" annotions, and and for each one it finds, it creates
+     * Uses reflection to looks through all of the fields and methods for "Property" annotations, and and for each one it finds, it creates
      * the appropriate AbstractProperty and adds it to the collection.
      * 
      * @param klass

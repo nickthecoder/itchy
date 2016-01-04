@@ -3,9 +3,12 @@ from common import *
 from moving import Moving
 
 properties = ArrayList()
-
+            
+costumeProperties = ArrayList()
+costumeProperties.add( DoubleProperty("rotationSpeed") )
+costumeProperties.add( DoubleProperty("thrust") )
+  
 game = Itchy.getGame()
-director = game.getDirector()
 
 class Ship(Moving) :
 
@@ -29,8 +32,8 @@ class Ship(Moving) :
         OnionSkinBuilder( self.getActor() ) \
             .alpha(128).every(5).fade(3).create()
 
-        self.rotationSpeed = self.getActor().getCostume().getProperties().rotationSpeed
-        self.thrust = self.getActor().getCostume().getProperties().thrust
+        self.rotationSpeed = self.getActor().getCostume().getCostumeProperties().rotationSpeed
+        self.thrust = self.getActor().getCostume().getCostumeProperties().thrust
         self.fireTimer = None
         
         # Cut the ship into 3 large pieces, and call these poses "part"
@@ -46,9 +49,9 @@ class Ship(Moving) :
             .speed(0,0).projectiles(40) \
             .create()
         
-        for i in range( 0, director.lives ) :
+        for i in range( 0, game.getDirector().lives ) :
             actor = self.getActor().createCompanion("life")
-            director.hudStage.add(actor)
+            game.getDirector().hudStage.add(actor)
             actor.moveTo( 30 + i * 40 , 560 )
             if game.getSceneName() == "1" :
                 actor.event("appear")
@@ -92,7 +95,7 @@ class Ship(Moving) :
         
             if self.inputFire.pressed() :
                 if self.fireTimer is None :
-                    firePeriod = self.getActor().getCostume().getCompanion(self.bulletName).getProperties().firePeriod
+                    firePeriod = self.getActor().getCostume().getCompanion(self.bulletName).getCostumeProperties().firePeriod
                     self.fireTimer = Timer.createTimerSeconds(firePeriod)
 
                 self.fire()
@@ -127,18 +130,18 @@ class Ship(Moving) :
         ExplosionBuilder(self.getActor()) \
             .speed(1.5,0,4,0).fade(3).spin(-1,1).rotate(True).eventName("fragment").projectiles(20).create()
         
-        director.lives -= 1
+        game.getDirector().lives -= 1
 
-        self.lifeIcon[director.lives].event("disappear")
+        self.lifeIcon[game.getDirector().lives].event("disappear")
         self.actor.deathEvent("explode", "exploded")
 
 
     def onMessage(self, message ) :
         if message == "exploded" :
-            if director.lives > 0 :
+            if game.getDirector().lives > 0 :
                 game.startScene(game.getSceneName())
             else :
-                director.showFancyMouse()
+                game.getDirector().showFancyMouse()
                 game.loadScene("gameOver", True)
 
 
@@ -149,11 +152,13 @@ class Ship(Moving) :
         actor.moveTo( self.getActor() )
         actor.moveForwards(40)
 
-        impulse = actor.getCostume().getProperties().impulse
+        impulse = actor.getCostume().getCostumeProperties().impulse
         theta = self.getActor().getHeadingRadians()
         self.vx -= math.cos(theta) * impulse
         self.vy -= math.sin(theta) * impulse
 
+    def createCostumeProperties( self ) :
+        return ShipProperties()
 
     # Boiler plate code - no need to change this
     def getProperties(self):
@@ -162,4 +167,15 @@ class Ship(Moving) :
     # Boiler plate code - no need to change this
     def getClassName(self):
         return ClassName( Role, self.__module__ + ".py" )
+
+
+class ShipProperties(CostumeProperties) :
+
+    def __init__(self) :
+        self.rotationSpeed = 2
+        self.thrust = 1    
+    
+    # Boiler plate code - no need to change this
+    def getProperties(self):
+        return costumeProperties
 

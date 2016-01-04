@@ -9,7 +9,6 @@ import java.util.HashMap;
 
 import javax.script.ScriptException;
 
-import uk.co.nickthecoder.itchy.CostumeProperties;
 import uk.co.nickthecoder.itchy.Director;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Resources;
@@ -199,14 +198,6 @@ public class ScriptManager
         ScriptLanguage language = findLanguage(className);
 
         return language.createSceneDirector(className);
-    }
-
-    public CostumeProperties createCostumeProperties( ClassName className )
-        throws ScriptException
-    {
-        ScriptLanguage language = findLanguage(className);
-
-        return language.createCostumeProperties(className);
     }
 
     public Object getAttribute( Object inst, String name ) throws ScriptException

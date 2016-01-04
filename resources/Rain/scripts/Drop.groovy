@@ -3,6 +3,8 @@ import uk.co.nickthecoder.itchy.property.*
 import uk.co.nickthecoder.itchy.role.*
 import uk.co.nickthecoder.itchy.util.*
 
+import DropProperties;
+
 class Drop extends AbstractRole
 {
     public static properties = new ArrayList()
@@ -56,13 +58,17 @@ class Drop extends AbstractRole
         }
     }
 
+    public CostumeProperties createCostumeProperties()
+    {
+        return new DropProperties()
+    }
 
     // Boiler plate code - no need to change this
     public ArrayList getProperties()
     {
         return properties
     }
-    
+
     // Boiler plate code - no need to change this
     public ClassName getClassName()
     {

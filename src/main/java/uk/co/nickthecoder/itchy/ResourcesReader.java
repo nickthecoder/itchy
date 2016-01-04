@@ -19,7 +19,6 @@ import uk.co.nickthecoder.itchy.animation.FramedAnimation;
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
 import uk.co.nickthecoder.itchy.property.PropertySubject;
 import uk.co.nickthecoder.itchy.role.PlainRole;
-import uk.co.nickthecoder.itchy.script.ScriptManager;
 import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.itchy.util.NinePatch;
 import uk.co.nickthecoder.itchy.util.XMLException;
@@ -31,7 +30,6 @@ public class ResourcesReader
 {
     private final Resources resources;
 
-    private final ScriptManager scriptManager;
     /**
      * true if the resources being read are included from another file.
      */
@@ -40,7 +38,6 @@ public class ResourcesReader
     public ResourcesReader( Resources resources )
     {
         this.resources = resources;
-        this.scriptManager = resources.scriptManager;
     }
 
     public void load( String filename ) throws Exception
@@ -234,20 +231,10 @@ public class ResourcesReader
                 throw new XMLException("Expected a subclass of Role : " + costume.roleClassName);
             }
 
-            String propertiesName = costumeTag.getOptionalAttribute("properties", CostumeProperties.class.getName());
-            ClassName propertiesClassName = new ClassName(CostumeProperties.class, propertiesName);
-
-            if (this.resources.checkClassName(propertiesClassName)) {
-                costume.setPropertiesClassName(this.scriptManager, propertiesClassName);
-
-            } else {
-                throw new XMLException("Expected a name of a Properties class : " + propertiesClassName);
-            }
-
             for (Iterator<XMLTag> j = costumeTag.getTags("properties"); j.hasNext();) {
                 XMLTag propertiesTag = j.next();
 
-                readProperties(propertiesTag, costume.getProperties());
+                readProperties(propertiesTag, costume.getCostumeProperties());
             }
 
             for (Iterator<XMLTag> j = costumeTag.getTags("pose"); j.hasNext();) {
@@ -412,8 +399,14 @@ public class ResourcesReader
         }
         return animation;
     }
-
+    
     private <S extends PropertySubject<S>> void readProperties( XMLTag tag, S subject )
+        throws XMLException
+    {
+    	readProperties( tag, subject, subject.getProperties() );
+    }
+    
+	private <S extends PropertySubject<S>> void readProperties( XMLTag tag, S subject, List<AbstractProperty<S, ?>> properties )
         throws XMLException
     {
 

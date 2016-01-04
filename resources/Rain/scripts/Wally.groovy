@@ -8,23 +8,20 @@ class Wally extends AbstractRole implements ViewMouseListener
     public static properties = new ArrayList()
     
     // Poke (mouse click) the wally walking across out view, to make him/her jump.   
-    public boolean onMouseDown(MouseListenerView view, MouseButtonEvent event)
+    public void onMouseDown(MouseListenerView view, MouseButtonEvent event)
     {
         if (actor.pixelOverlap(event.x, event.y)) {
             actor.event("boo", null, Actor.AnimationEvent.PARALLEL)
-            return true
+            event.stopPropagation()
         }
-        return false
     }
 
-    public boolean onMouseUp(MouseListenerView view, MouseButtonEvent event)
+    public void onMouseUp(MouseListenerView view, MouseButtonEvent event)
     {
-        return false
     }
 
-    public boolean onMouseMove(MouseListenerView view, MouseMotionEvent event)
+    public void onMouseMove(MouseListenerView view, MouseMotionEvent event)
     {
-        return false
     }
   
     public boolean isMouseListener()

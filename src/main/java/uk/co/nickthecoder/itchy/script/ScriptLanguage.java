@@ -12,7 +12,6 @@ import java.util.Map;
 
 import javax.script.ScriptException;
 
-import uk.co.nickthecoder.itchy.CostumeProperties;
 import uk.co.nickthecoder.itchy.Director;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.PlainDirector;
@@ -195,18 +194,6 @@ public abstract class ScriptLanguage
         } catch (Exception e) {
             handleException("Creating SceneDirector", e);
             return new PlainSceneDirector();
-        }
-    }
-
-    public CostumeProperties createCostumeProperties( ClassName className )
-    {
-        try {
-        	CostumeProperties costumeProperties = (CostumeProperties) createInstance( className );
-            return costumeProperties;
-
-        } catch (Exception e) {
-            handleException("Creating CostumeProperties", e);
-            return new CostumeProperties();
         }
     }
 

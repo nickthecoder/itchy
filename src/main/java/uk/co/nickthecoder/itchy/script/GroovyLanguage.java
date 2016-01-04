@@ -11,6 +11,7 @@ import groovy.lang.GroovyClassLoader;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
+
 import javax.script.ScriptException;
 
 import uk.co.nickthecoder.itchy.util.ClassName;
@@ -31,8 +32,11 @@ public class GroovyLanguage extends ScriptLanguage
     private final void initialise()
     {
     	this.classes = new HashMap<ClassName, Class<?>>();
-        ClassLoader parent = getClass().getClassLoader();
+        
+        ClassLoader parent = getClass().getClassLoader();        
         this.groovyClassLoader = new GroovyClassLoader(parent);
+        this.groovyClassLoader.addClasspath( this.manager.getScriptDirectory().getPath() );
+        this.groovyClassLoader.addClasspath( this.manager.getIncludeDirectory(this).getPath() );
     }
 
     @Override

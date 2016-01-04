@@ -291,10 +291,6 @@ public class ResourcesWriter extends XMLWriter
             this.attribute("role", simpleCostume.roleClassName.name);
         }
 
-        if (CostumeProperties.class != simpleCostume.getProperties().getClass()) {
-            this.attribute("properties", simpleCostume.getPropertiesClassName().name);
-        }
-
         this.writeCostumePoses(simpleCostume);
         this.writeCostumeStrings(simpleCostume);
         this.writeCostumeSounds(simpleCostume);
@@ -308,19 +304,14 @@ public class ResourcesWriter extends XMLWriter
         this.writtenCostumeName.add(name);
     }
 
-    @SuppressWarnings({ "unchecked", "rawtypes" })
     private void writeCostumeProperties( Costume costume ) throws XMLException
     {
-        Object properties = costume.getProperties();
-
-        if (properties.getClass() == CostumeProperties.class) {
-            return;
-        }
-
-        this.beginTag("properties");
-        writeProperties((PropertySubject) properties);
-        this.endTag("properties");
-
+    	CostumeProperties cp = costume.getCostumeProperties();
+    	if ( cp.getProperties().size() > 0 ) {
+	        this.beginTag("properties");
+	        writeProperties(cp);
+	        this.endTag("properties");
+    	}
     }
 
     private void writeCostumePoses( Costume costume ) throws XMLException

@@ -1,18 +1,10 @@
-from uk.co.nickthecoder.itchy import CostumeProperties
-from uk.co.nickthecoder.itchy.util import ClassName
-from uk.co.nickthecoder.itchy.property import StringProperty
-from uk.co.nickthecoder.itchy.property import BooleanProperty
-from uk.co.nickthecoder.itchy.property import IntegerProperty
+from common import *
 
-from gridRole import GridRole
-
-from java.util import ArrayList
-
-properties = ArrayList()
-properties.add( BooleanProperty( "roundedNE" ).label( "Rounded NE" ) )
-properties.add( BooleanProperty( "roundedSE" ).label( "Rounded SE" ) )
-properties.add( BooleanProperty( "roundedSW" ).label( "Rounded SW" ) )
-properties.add( BooleanProperty( "roundedNW" ).label( "Rounded NW" ) )
+costumeProperties = ArrayList()
+costumeProperties.add( BooleanProperty( "roundedNE" ).label( "Rounded NE" ) )
+costumeProperties.add( BooleanProperty( "roundedSE" ).label( "Rounded SE" ) )
+costumeProperties.add( BooleanProperty( "roundedSW" ).label( "Rounded SW" ) )
+costumeProperties.add( BooleanProperty( "roundedNW" ).label( "Rounded NW" ) )
 
 class RoundProperties(CostumeProperties) :
 
@@ -33,10 +25,6 @@ class RoundProperties(CostumeProperties) :
 
     # Boiler plate code - no need to change this
     def getProperties(self):
-        return properties
-
-    # Boiler plate code - no need to change this
-    def getClassName(self):
-        return ClassName( CostumeProperties, self.__module__ + ".py" )
+        return costumeProperties
 
 

@@ -69,6 +69,7 @@
       <property name="randomSeed" value="0"/>
       <property name="beeDirection" value="North"/>
       <property name="bees" value="3"/>
+      <property name="requiredPollen" value="0"/>
       <property name="beeLogic" value="Anticlockwise"/>
       <property name="spawnPeriod" value="1.0"/>
     </actor>
@@ -76,6 +77,7 @@
       <property name="randomSeed" value="0"/>
       <property name="beeDirection" value="South"/>
       <property name="bees" value="1"/>
+      <property name="requiredPollen" value="0"/>
       <property name="beeLogic" value="Clockwise"/>
       <property name="spawnPeriod" value="1.0"/>
     </actor>
@@ -120,6 +122,7 @@
       <property name="scene" value="test006"/>
     </actor>
     <actor costume="gate" x="660" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="40">
+      <property name="spare" value="0"/>
       <property name="scene" value="menu"/>
     </actor>
     <actor costume="bee" x="-240" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="80" colorize="#0000ffff">

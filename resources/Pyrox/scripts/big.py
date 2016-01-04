@@ -1,7 +1,13 @@
-from uk.co.nickthecoder.itchy import Itchy
+from common import *
 
 from movable import Movable
 from part import Part
+
+costumeProperties = ArrayList()
+costumeProperties.add( IntegerProperty( "width" ) )
+costumeProperties.add( IntegerProperty( "height" ) )
+costumeProperties.add( IntegerProperty( "talkX" ) )
+costumeProperties.add( IntegerProperty( "talkY" ) )
 
 # A Movable GridRole, which takes up more than one Square. This object is the main occupant of one square,
 # and there are companion "Part" roles, which occupy the other squares. When looking outwards, many
@@ -165,4 +171,26 @@ class Big(Movable) :
         for part in self.parts :
             part.explode()
         self.explode()
+
+    def createCostumeProperties(self) :
+        return BigProperties()
+
+class BigProperties(CostumeProperties) :
+
+    def __init__(self) :
+        self.width = 1
+        self.height = 1
+        self.talkX = 70
+        self.talkY = 10
+
+    def createParts(self, big) :
+        for x in range(0,self.width) :
+            for y in range(0,self.height) :
+                if x != 0 or y != 0 :
+                    big.createPart(x, y)
+
+    # Boiler plate code - no need to change this
+    def getProperties(self):
+        return costumeProperties
+
 

@@ -10,9 +10,7 @@ class Director(AbstractDirector) :
 
 
     def onStarted(self) :
-        self.socre = 0
-        self.lives = 3
-        
+       
         # Don't create default stages and views, because we want to use a special WrappedStageView
         print "Creating custom stages and views"
 
@@ -94,6 +92,5 @@ class Director(AbstractDirector) :
 
     # Boiler plate code - no need to change this
     def getClassName(self):
-        return ClassName( CostumeProperties, self.__module__ + ".py" )
+        return ClassName( Director, self.__module__ + ".py" )
 
- 

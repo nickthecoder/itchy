@@ -1,5 +1,7 @@
 from common import *
 
+from uk.co.nickthecoder.itchy import Pose, ImagePose
+
 properties = ArrayList()
 
 class Ming(AbstractRole) :

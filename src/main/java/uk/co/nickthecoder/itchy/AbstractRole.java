@@ -209,6 +209,12 @@ public abstract class AbstractRole implements Role
         return result;
     }
 
+    @Override
+    public CostumeProperties createCostumeProperties()
+    {
+    	return new CostumeProperties();
+    }
+    
     /**
      * For Itchy Gurus Only.
      * 

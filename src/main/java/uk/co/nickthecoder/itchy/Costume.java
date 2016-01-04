@@ -11,10 +11,8 @@ import java.util.Random;
 import java.util.Set;
 
 import uk.co.nickthecoder.itchy.animation.Animation;
-import uk.co.nickthecoder.itchy.property.AbstractProperty;
 import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.role.PlainRole;
-import uk.co.nickthecoder.itchy.script.ScriptManager;
 import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.jame.Sound;
 
@@ -30,14 +28,11 @@ public class Costume implements Cloneable
     @Property(label = "Default Z Order")
     public int defaultZOrder;
 
-    @Property(label = "Properties")
-    private ClassName propertiesClassName = new ClassName(CostumeProperties.class, CostumeProperties.class.getName());
-
     @Property(label = "Show in Scene Designer")
     public boolean showInDesigner = true;
-    
-    private CostumeProperties properties = new CostumeProperties();
 
+    private CostumeProperties costumeProperties;
+    
     private HashMap<String, List<AnimationResource>> animationChoices;
 
     private HashMap<String, List<String>> stringChoices;
@@ -97,24 +92,27 @@ public class Costume implements Cloneable
         return actor;
     }
 
-    public ClassName getPropertiesClassName()
-    {
-        return this.propertiesClassName;
-    }
-
-    public void setPropertiesClassName( ScriptManager scriptManager, ClassName value )
-    {
-        if (!value.equals(this.propertiesClassName)) {
-            this.properties = CostumeProperties.createProperties(scriptManager, value);
-            this.propertiesClassName = value;
-        }
-    }
-
+    // TODO REMOVE Costume.getProperties
     public CostumeProperties getProperties()
     {
-        return this.properties;
+        return getCostumeProperties();
+    }
+	
+    public CostumeProperties getCostumeProperties()
+    {
+		if ( this.costumeProperties == null ) {
+			try {
+				Role dummyRole = AbstractRole.createRole(Itchy.getGame().resources, this.roleClassName );
+				this.costumeProperties = dummyRole.createCostumeProperties();
+			} catch (Exception e) {
+				e.printStackTrace();
+				this.costumeProperties = new CostumeProperties();
+			}
+		}
+		return this.costumeProperties;
     }
 
+    
     public Costume getExtendedFrom()
     {
         return this.extendedFrom;
@@ -450,16 +448,7 @@ public class Costume implements Cloneable
 
             result.roleClassName = new ClassName(this.roleClassName.baseClass, this.roleClassName.name);
 
-            // Need to reset the name before setting it to ensure a NEW property is created.
-            result.setPropertiesClassName(resource.scriptManager,
-                new ClassName(this.propertiesClassName.baseClass, CostumeProperties.class.getName()));
-            result.setPropertiesClassName(resource.scriptManager,
-                new ClassName(this.propertiesClassName.baseClass, this.propertiesClassName.name));
-
-            for (AbstractProperty<CostumeProperties, ?> property : this.getProperties().getProperties()) {
-                Object value = property.getValue(this.properties);
-                property.setValue(result.properties, value);
-            }
+            // result.costumeProperties = this.costumeProperties.copy();
 
             result.animationChoices = new HashMap<String, List<AnimationResource>>();
             for (String eventName : this.animationChoices.keySet()) {

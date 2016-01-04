@@ -1,14 +1,12 @@
-from uk.co.nickthecoder.itchy import Role
-from uk.co.nickthecoder.itchy import AbstractRole
-from uk.co.nickthecoder.itchy.util import ClassName
-from uk.co.nickthecoder.itchy.role import ExplosionBuilder
-
-from java.util import ArrayList
+from common import *
 
 import gridRole
 from faller import Faller
 
 properties = ArrayList()
+
+costumeProperties = ArrayList()
+costumeProperties.add( BooleanProperty( "fallen" ).label( "Fallen" ) )
 
 class Grenade(Faller) :
 
@@ -76,7 +74,11 @@ class Grenade(Faller) :
         if message == "turned" :
             self.fallen = not self.fallen
 
-            
+
+    def createCostumeProperties(self) :
+        return GrenadeProperties()
+
+
     # Boiler plate code - no need to change this
     def getProperties(self):
         return properties
@@ -84,5 +86,22 @@ class Grenade(Faller) :
     # Boiler plate code - no need to change this
     def getClassName(self):
         return ClassName( Role, self.__module__ + ".py" )
+
+
+class GrenadeProperties(CostumeProperties) :
+
+    def __init__(self) :
+        self.fallen = False
+
+    def update(self, role) :       
+        role.fallen = self.fallen
+
+    # Boiler plate code - no need to change this
+    def getProperties(self):
+        return costumeProperties
+
+    # Boiler plate code - no need to change this
+    def getClassName(self):
+        return ClassName( CostumeProperties, self.__module__ + ".py" )
 
 

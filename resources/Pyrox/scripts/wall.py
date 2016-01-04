@@ -1,12 +1,15 @@
-from uk.co.nickthecoder.itchy import Role
-from uk.co.nickthecoder.itchy import AbstractRole
-from uk.co.nickthecoder.itchy.util import ClassName
+from common import *
 
 from gridRole import GridRole
-
-from java.util import ArrayList
+import roundProperties
+from roundProperties import RoundProperties
 
 properties = ArrayList()
+
+costumeProperties = ArrayList()
+costumeProperties.addAll( roundProperties.costumeProperties )
+costumeProperties.add( BooleanProperty( "canExplode" ).label( "Can Explode" ) )
+
 
 class Wall(GridRole) :
 
@@ -14,6 +17,10 @@ class Wall(GridRole) :
         super(Wall,self).onBirth()
         
         self.getActor().getCostume().getProperties().update(self)
+
+
+    def createCostumeProperties(self) :
+        return WallProperties()
 
 
     # Boiler plate code - no need to change this
@@ -24,4 +31,20 @@ class Wall(GridRole) :
     def getClassName(self):
         return ClassName( Role, self.__module__ + ".py" )
 
+
+class WallProperties(RoundProperties) :
+
+    def __init__(self) :
+        super(WallProperties,self).__init__()
+        self.canExplode = True
+
+    def update(self, role) :
+        super(WallProperties,self).update(role)
+        
+        role.tag( "explodable", self.canExplode )
+
+
+    # Boiler plate code - no need to change this
+    def getProperties(self):
+        return costumeProperties
 

@@ -21,14 +21,14 @@
   <layer name="hud">
     <text text="Scala is tough, you can't shoot them with the puny gun." font="Vera" size="26" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="390" y="59" direction="0.0" heading="0.0" startEvent="default" zOrder="0">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Textured">
-        <property name="poseName" value="texture1"/>
+        <property name="pose" value="texture1"/>
         <property name="y" value="0"/>
         <property name="x" value="0"/>
       </makeup>
     </text>
     <text text="Press &quot;2&quot; to switch to the rocket launcher." font="Vera" size="26" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="392" y="20" direction="0.0" heading="0.0" startEvent="default" zOrder="3">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Textured">
-        <property name="poseName" value="texture1"/>
+        <property name="pose" value="texture1"/>
         <property name="y" value="0"/>
         <property name="x" value="0"/>
       </makeup>

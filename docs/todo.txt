@@ -1,6 +1,21 @@
+Current Tasks
+=============
 
+
+When Costume's Role is changed, then the CostumeEditor needs to rebuild the properties grid.
+	Also when the Role script is changed!?
+Convert all other games to use the new system
+	Done Pyrox, Darkness, Debris
+
+Change the Role templates for python and groovy
+Remove one of Costume's duplicates : getProperties, getCostumeProperties. Maybe rename?
+
+
+Tidy up Pyrox scripts. e.g. from common
 BUGS
 ====
+
+Debris - Bullets (#2) stay alive, even when invisible, and kill rocks that pass over them.
 
 TextArea's background center of nine path is flat colour rather than tiled.
 
@@ -10,39 +25,7 @@ SceneDesigner toolbox isn't moved when the window is maximised (floats in middle
 New Features
 ============
 
-Create Node interface
-	Stage and Actor implement it
-	Create RootNode too, which only allows Stages as children.
-	Create Tree Component and use it to show the Node hierarchy.
-
-Generic Hierarchy Node/ParentNode interface. Actors and Stages will be ParentNodes
-	This allows for composite objects.
-	For example the drunk invaders speech bubbles are children of the main actor
-	How should transformations of the parent affect the children?
-		Does a rotation rotate the speech bubble around the center of the alien, and should the bubble also rotate?
-	The child actor has a PositionRelationship
-		The default is class "Glued", which follows the rotations, translations and scales
-		Or could be Follow, which ignores scales and rotations
-	This will make Follower redundant. Good!
-	Will we need more animation types, to move relative to the parent.
-		MoveForwards :
-			forwards (pixels)
-			sideways (pixels)
-			using "direction", "heading", "fromParent", "custom angle" (enum)
-			custom angle (degrees)
-				Maybe "custom angle" is added to direction/heading/fromParent for maximum flexibility
-			When "fromParent", should the angle be calculated once per frame, or only at the start of the animation?
-				Each frame - making it consistent with direction/heading, which may be updated each frame.
-
-	While I'm at it, why can't GUI components use the same hierarchy.
-		This will allow a GUI to be built using the editor!		
-		GUIVIew will be just another ParentNode	
-		Grids won't work well, because the children are added via the LayoutManager, not the Container.
-			Will just have to add extra glue
-			Will also need extra NullComponents added manually when there are empty gaps in the grid.
-			More glue needed to allow for components to be moved around.
-				In fact, this will force GridLayouts to use the parent container's collection of children, rather than its own. 
-
+Design Stages/Views graphically - Aim for no code in Director.
 
 Sprite Sheet Pose
     Allow multiple poses to be loaded from one image, and define the rectangle of each sub-image.
@@ -51,11 +34,6 @@ Code Tidy Up
 ============
 
 Rename one of the Button classes. ButtonRole
-
-Look at groovy and python game code, and try to simplify it.
-	Auto import itchy.* - also jame.* and/or jame.event.* ?
-	Make properties easy
-	Make CostumeProperties easier - Can we replace it with a simple HashMap? CostumeProperties never have any processing in them.
 
 Look at companion, it has font, font size and color. Why ????
     Check sub classes for get/set for font colour size etc. I think this is done now???
@@ -104,6 +82,8 @@ Rox Ideas
 Other Stuff
 ===========
 
+SDL Drop event to add poses by dragging image files.
+ 
 SceneDesigner for Text
     In the toolbox, if a Costume has no "default" pose, but does have a "default" TextStyle, then it is text.
     Actor should only have a Constructor which takes a Costume. Make Costume mandatory.
@@ -151,6 +131,7 @@ Should Costumes have Makeup? If each jewel is given a Sparkle makeup, does it ma
     No. A diamond costume would specify a standard makeup, which can be overridden if needed.
     Have a reset button to revert to the costume's makeup, or default makeup if it has none.
     Costumes' makeup just like animations - based on events, and can have multiple options picked a random.
+	One Makeup shared by many costumes, so it has its own tab, just like animation. 
 
 Costume editor to have filters on event name and resource type.
     i.e. show all Animations, or show all "death" events, or show all "death" Animations or show everything.
@@ -163,10 +144,6 @@ Glitter Makeup - sprinkle poses randomly. use getpixel.
 Decoration - Adds a Pose to a given place relative to the actor's x,y.
 Underscore - used for text poses to place a line under the text. Use "_" to create the line,  or Surface.fill.
     Use it on link text when compound makeup is available.
-
-Companion string names wont be renamed when a costume is renamed.
-    Create a first class citizen "CompanionCostume"
-    Get rid of old string based code.
 
 Later
 =====
