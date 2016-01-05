@@ -880,6 +880,7 @@ before we can harvest the honey.</string>
     <scene name="rocks8"/>
     <scene name="test"/>
     <scene name="test-template"/>
+    <scene name="test001"/>
     <scene name="test002"/>
     <scene name="test003"/>
     <scene name="test004"/>

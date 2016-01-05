@@ -14,8 +14,7 @@ class Collectable(GridRole) :
         game.sceneDirector.collectablesRemaining += 1
         self.addTag("soft")
         
-        if isinstance(self.costumeProperties, RoundProperties) :
-            self.costumeProperties.update(self)
+        self.costumeProperties.update(self)
 
 
     def onHalfInvaded( self, invader ) :
