@@ -9,7 +9,7 @@ import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.IntegerBox;
 import uk.co.nickthecoder.itchy.util.BeanHelper;
 
-public class IntegerProperty<S> extends AbstractProperty<S, Integer>
+public class IntegerProperty<S> extends Property<S, Integer>
 {
     public IntegerProperty( String key)
     {

@@ -7,7 +7,7 @@ package uk.co.nickthecoder.itchy;
 import java.util.LinkedList;
 import java.util.List;
 
-import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.BooleanProperty;
 import uk.co.nickthecoder.itchy.property.ClassNameProperty;
 import uk.co.nickthecoder.itchy.property.IntegerProperty;
@@ -17,7 +17,7 @@ import uk.co.nickthecoder.itchy.util.ClassName;
 
 public class GameInfo implements PropertySubject<GameInfo>
 {
-    protected static List<AbstractProperty<GameInfo, ?>> properties = new LinkedList<AbstractProperty<GameInfo, ?>>();
+    protected static List<Property<GameInfo, ?>> properties = new LinkedList<Property<GameInfo, ?>>();
     
     static {
         properties.add( new StringProperty<GameInfo>( "title" ));
@@ -55,7 +55,7 @@ public class GameInfo implements PropertySubject<GameInfo>
     }
 
     @Override
-    public List<AbstractProperty<GameInfo, ?>> getProperties()
+    public List<Property<GameInfo, ?>> getProperties()
     {
         return properties;
     }

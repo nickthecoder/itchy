@@ -11,7 +11,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.makeup.Makeup;
-import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.role.PlainRole;
 import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.itchy.util.XMLException;
@@ -76,14 +76,14 @@ public class SceneReader
     private void readProperties( XMLTag propertiesTag )
         throws Exception
     {
-        List<AbstractProperty<SceneDirector, ?>> properties = this.scene.sceneDirector.getProperties();
+        List<Property<SceneDirector, ?>> properties = this.scene.sceneDirector.getProperties();
 
         for (Iterator<XMLTag> i = propertiesTag.getTags("property"); i.hasNext();) {
             XMLTag propertyTag = i.next();
             String name = propertyTag.getAttribute("name");
             String value = propertyTag.getAttribute("value");
 
-            AbstractProperty<SceneDirector, ?> property = findProperty(properties, name);
+            Property<SceneDirector, ?> property = findProperty(properties, name);
             if (property == null) {
                 throw new Exception("Didn't find SceneDirector property : " + name);
             }
@@ -92,9 +92,9 @@ public class SceneReader
 
     }
 
-    private AbstractProperty<SceneDirector, ?> findProperty( List<AbstractProperty<SceneDirector, ?>> properties, String name )
+    private Property<SceneDirector, ?> findProperty( List<Property<SceneDirector, ?>> properties, String name )
     {
-        for (AbstractProperty<SceneDirector, ?> property : properties) {
+        for (Property<SceneDirector, ?> property : properties) {
             if (property.key.equals(name)) {
                 return property;
             }

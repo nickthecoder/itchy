@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
-import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.itchy.util.StringUtils;
 import uk.co.nickthecoder.jame.RGBA;
@@ -142,7 +142,7 @@ public class Scene
         }
         // Copy the sceneDirector properties
         if (this.sceneDirector != null) {
-            for (AbstractProperty<SceneDirector, ?> property : result.getProperties()) {
+            for (Property<SceneDirector, ?> property : result.getProperties()) {
                 property.setValue(result, property.getValue(this.sceneDirector));
             }
         }

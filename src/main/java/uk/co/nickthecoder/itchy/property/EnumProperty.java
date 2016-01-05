@@ -8,7 +8,7 @@ import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.EnumPickerButton;
 import uk.co.nickthecoder.itchy.gui.Component;
 
-public class EnumProperty<S, E extends Enum<?>> extends AbstractProperty<S, E>
+public class EnumProperty<S, E extends Enum<?>> extends Property<S, E>
 {
     private Class<E> klass;
 

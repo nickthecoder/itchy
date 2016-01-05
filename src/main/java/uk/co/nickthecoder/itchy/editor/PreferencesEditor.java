@@ -11,7 +11,7 @@ import uk.co.nickthecoder.itchy.gui.GridLayout;
 import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.Container;
 import uk.co.nickthecoder.itchy.gui.VerticalLayout;
-import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 
 public class PreferencesEditor
 {
@@ -34,7 +34,7 @@ public class PreferencesEditor
 
         EditorPreferences editorPreferences = this.editor.preferences;
 
-        for (AbstractProperty<EditorPreferences, ?> property : editorPreferences.getProperties()) {
+        for (Property<EditorPreferences, ?> property : editorPreferences.getProperties()) {
             try {
                 Component component = property.createComponent(editorPreferences, true);
                 grid.addRow(property.label, component);

@@ -9,13 +9,13 @@ import java.util.List;
 
 import uk.co.nickthecoder.itchy.OffsetSurface;
 import uk.co.nickthecoder.itchy.SimpleOffsetSurface;
-import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.DoubleProperty;
 import uk.co.nickthecoder.jame.Surface;
 
 public class Scale implements Makeup
 {
-    protected static final List<AbstractProperty<Makeup, ?>> properties = new ArrayList<AbstractProperty<Makeup, ?>>();
+    protected static final List<Property<Makeup, ?>> properties = new ArrayList<Property<Makeup, ?>>();
 
     static {
         properties.add(new DoubleProperty<Makeup>("scaleX"));
@@ -65,7 +65,7 @@ public class Scale implements Makeup
     }
 
     @Override
-    public List<AbstractProperty<Makeup, ?>> getProperties()
+    public List<Property<Makeup, ?>> getProperties()
     {
         return properties;
     }

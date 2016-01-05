@@ -24,7 +24,7 @@ import uk.co.nickthecoder.itchy.gui.TableModel;
 import uk.co.nickthecoder.itchy.gui.TableModelColumn;
 import uk.co.nickthecoder.itchy.gui.TableModelRow;
 import uk.co.nickthecoder.itchy.gui.TextBox;
-import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 
 public class InputsEditor extends SubEditor<InputResource>
 {
@@ -140,7 +140,7 @@ public class InputsEditor extends SubEditor<InputResource>
     }
 
     @Override
-    protected List<AbstractProperty<InputResource, ?>> getProperties()
+    protected List<Property<InputResource, ?>> getProperties()
     {
         return this.currentResource.getProperties();
     }

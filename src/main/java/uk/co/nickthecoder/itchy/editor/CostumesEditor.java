@@ -51,7 +51,7 @@ import uk.co.nickthecoder.itchy.gui.TextBox;
 import uk.co.nickthecoder.itchy.gui.VerticalLayout;
 import uk.co.nickthecoder.itchy.gui.Window;
 import uk.co.nickthecoder.itchy.gui.WrappedRowComparator;
-import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.util.StringList;
 import uk.co.nickthecoder.jame.Surface;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
@@ -311,13 +311,13 @@ public class CostumesEditor extends SubEditor<CostumeResource>
     private void createPropertiesGrid()
     {
         CostumeProperties cp = this.currentResource.getCostume().getCostumeProperties();
-        List<AbstractProperty<CostumeProperties, ?>> properties = cp.getProperties();
+        List<Property<CostumeProperties, ?>> properties = cp.getProperties();
 
         GridLayout grid = new GridLayout(this.propertiesContainer, 2);
         this.propertiesContainer.clear();
         this.propertiesContainer.setLayout(grid);
         
-        for (AbstractProperty<CostumeProperties, ?> property : properties) {
+        for (Property<CostumeProperties, ?> property : properties) {
 
             try {
                 Component component = property.createComponent(cp, true);
@@ -743,7 +743,7 @@ public class CostumesEditor extends SubEditor<CostumeResource>
                 this.eventFontPickerButton = new FontPickerButton(this.getResources(), fr);
                 grid.addRow("Font", this.eventFontPickerButton);
 
-                for (AbstractProperty<TextStyle, ?> property : this.eventTextStyle.getProperties()) {
+                for (Property<TextStyle, ?> property : this.eventTextStyle.getProperties()) {
                     try {
                         Component component = property.createComponent(this.eventTextStyle, true);
                         grid.addRow(property.label, component);
@@ -764,7 +764,7 @@ public class CostumesEditor extends SubEditor<CostumeResource>
                                 this.eventManagedSound.soundResource, createSoundsHashMap());
                 grid.addRow("Sound", this.eventSoundPickerButton);
 
-                for (AbstractProperty<ManagedSound, ?> property : this.eventManagedSound.getProperties()) {
+                for (Property<ManagedSound, ?> property : this.eventManagedSound.getProperties()) {
                     try {
                         Component component = property.createComponent(this.eventManagedSound, true);
                         grid.addRow(property.label, component);
@@ -989,7 +989,7 @@ public class CostumesEditor extends SubEditor<CostumeResource>
     }
 
     @Override
-    protected List<AbstractProperty<CostumeResource, ?>> getProperties()
+    protected List<Property<CostumeResource, ?>> getProperties()
     {
         return this.currentResource.getProperties();
     }

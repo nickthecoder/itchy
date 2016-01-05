@@ -10,7 +10,7 @@ import java.util.Map;
 
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.Component;
-import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.util.StringUtils;
 
 public class SceneDesignerPropertiesForm<S> extends PropertiesForm<S>
@@ -21,7 +21,7 @@ public class SceneDesignerPropertiesForm<S> extends PropertiesForm<S>
 
     private SceneDesigner sceneDesigner;
 
-    public SceneDesignerPropertiesForm( String name, SceneDesigner sd, S subject, List<AbstractProperty<S, ?>> properties )
+    public SceneDesignerPropertiesForm( String name, SceneDesigner sd, S subject, List<Property<S, ?>> properties )
     {
         super(subject, properties);
         this.name = name;
@@ -40,7 +40,7 @@ public class SceneDesignerPropertiesForm<S> extends PropertiesForm<S>
     }
 
     @Override
-    protected Component createComponent( final AbstractProperty<S, ?> property )
+    protected Component createComponent( final Property<S, ?> property )
     {
         Component result = super.createComponent(property);
         try {
@@ -77,7 +77,7 @@ public class SceneDesignerPropertiesForm<S> extends PropertiesForm<S>
         return result;
     }
 
-    protected void refresh( AbstractProperty<S, ?> property )
+    protected void refresh( Property<S, ?> property )
     {
         try {
             Component component = getComponent(property.key);

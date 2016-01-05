@@ -4,7 +4,7 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.editor;
 
-import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 
 public class UndoProperty<S> extends AbstractUndoProperty<S>
 {
@@ -12,7 +12,7 @@ public class UndoProperty<S> extends AbstractUndoProperty<S>
 
     protected SceneDesigner sceneDesigner;
 
-    public UndoProperty( SceneDesigner sd, String formName, AbstractProperty<S, ?> property, String oldValue, String newValue )
+    public UndoProperty( SceneDesigner sd, String formName, Property<S, ?> property, String oldValue, String newValue )
     {
         super(property, oldValue, newValue);
         this.formName = formName;

@@ -7,7 +7,7 @@ package uk.co.nickthecoder.itchy;
 import java.util.ArrayList;
 import java.util.List;
 
-import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.PropertySubject;
 
 public class CostumeProperties implements PropertySubject<CostumeProperties>, Cloneable
@@ -16,11 +16,11 @@ public class CostumeProperties implements PropertySubject<CostumeProperties>, Cl
 	{
 	}
 	
-	private final static List<AbstractProperty<CostumeProperties, ?>> EMPTY_PROPERTIES =
-			new ArrayList<AbstractProperty<CostumeProperties, ?>>();
+	private final static List<Property<CostumeProperties, ?>> EMPTY_PROPERTIES =
+			new ArrayList<Property<CostumeProperties, ?>>();
 	
 	@Override
-    public List<AbstractProperty<CostumeProperties, ?>> getProperties()
+    public List<Property<CostumeProperties, ?>> getProperties()
     {
 		return  EMPTY_PROPERTIES;
     }

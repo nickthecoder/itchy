@@ -11,7 +11,7 @@ import uk.co.nickthecoder.itchy.animation.LinearEase;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.Component;
 
-public class EaseProperty<S> extends AbstractProperty<S, Ease>
+public class EaseProperty<S> extends Property<S, Ease>
 {
     public EaseProperty( String key)
     {

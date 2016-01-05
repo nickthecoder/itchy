@@ -12,7 +12,7 @@ import uk.co.nickthecoder.itchy.animation.Animation;
 import uk.co.nickthecoder.itchy.animation.CompoundAnimation;
 import uk.co.nickthecoder.itchy.animation.Frame;
 import uk.co.nickthecoder.itchy.animation.FramedAnimation;
-import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.PropertySubject;
 import uk.co.nickthecoder.itchy.role.PlainRole;
 import uk.co.nickthecoder.itchy.util.NinePatch;
@@ -181,7 +181,7 @@ public class ResourcesWriter extends XMLWriter
     private <S extends PropertySubject<S>> void writeProperties( S subject )
         throws XMLException
     {
-        for (AbstractProperty<S, ?> property : subject.getProperties()) {
+        for (Property<S, ?> property : subject.getProperties()) {
 
             try {
                 String value = property.getStringValue(subject);

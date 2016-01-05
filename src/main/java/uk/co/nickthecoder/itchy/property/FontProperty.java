@@ -12,7 +12,7 @@ import uk.co.nickthecoder.itchy.editor.FontPickerButton;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.Component;
 
-public class FontProperty<S> extends AbstractProperty<S, Font>
+public class FontProperty<S> extends Property<S, Font>
 {
     public FontProperty( String key )
     {

@@ -9,7 +9,7 @@ import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.RGBABox;
 import uk.co.nickthecoder.jame.RGBA;
 
-public class RGBAProperty<S> extends AbstractProperty<S, RGBA>
+public class RGBAProperty<S> extends Property<S, RGBA>
 {
     private boolean allowNull;
 

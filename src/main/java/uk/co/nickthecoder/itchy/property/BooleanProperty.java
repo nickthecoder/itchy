@@ -8,7 +8,7 @@ import uk.co.nickthecoder.itchy.gui.CheckBox;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.Component;
 
-public class BooleanProperty<S> extends AbstractProperty<S, Boolean>
+public class BooleanProperty<S> extends Property<S, Boolean>
 {
     /*
     public BooleanProperty( String label, String access, String key )

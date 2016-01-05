@@ -14,7 +14,7 @@ import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.Container;
 import uk.co.nickthecoder.itchy.gui.VerticalLayout;
 import uk.co.nickthecoder.itchy.gui.Window;
-import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 
 public class AnimationEditor extends Window
 {
@@ -68,7 +68,7 @@ public class AnimationEditor extends Window
 
     public void createForm( GridLayout gridLayout )
     {
-        for (AbstractProperty<Animation, ?> property : this.animation.getProperties()) {
+        for (Property<Animation, ?> property : this.animation.getProperties()) {
             try {
                 Component component = property.createComponent(this.animation, true);
                 gridLayout.addRow(property.label, component);

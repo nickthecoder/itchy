@@ -9,7 +9,7 @@ import java.util.Set;
 
 import uk.co.nickthecoder.itchy.collision.BruteForceCollisionStrategy;
 import uk.co.nickthecoder.itchy.collision.CollisionStrategy;
-import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.PropertySubject;
 import uk.co.nickthecoder.itchy.util.ClassName;
 
@@ -164,7 +164,7 @@ public interface Role extends MessageListener, Cloneable, PropertySubject<Role> 
 	 * getProperties.
 	 */
 	@Override
-	public List<AbstractProperty<Role, ?>> getProperties();
+	public List<Property<Role, ?>> getProperties();
 	
 	public CostumeProperties createCostumeProperties();
 

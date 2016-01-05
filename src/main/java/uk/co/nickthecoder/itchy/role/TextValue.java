@@ -13,7 +13,7 @@ import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.TextPose;
 import uk.co.nickthecoder.itchy.extras.Timer;
-import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.BooleanProperty;
 import uk.co.nickthecoder.itchy.property.DoubleProperty;
 import uk.co.nickthecoder.itchy.property.StringProperty;
@@ -26,7 +26,7 @@ import uk.co.nickthecoder.itchy.util.BeanHelper;
  */
 public class TextValue extends AbstractRole
 {
-    protected static final List<AbstractProperty<Role, ?>> properties = new ArrayList<AbstractProperty<Role, ?>>();
+    protected static final List<Property<Role, ?>> properties = new ArrayList<Property<Role, ?>>();
 
     static {
         properties.add(new StringProperty<Role>("access"));
@@ -83,7 +83,7 @@ public class TextValue extends AbstractRole
     private Timer timer;
 
     @Override
-    public List<AbstractProperty<Role, ?>> getProperties()
+    public List<Property<Role, ?>> getProperties()
     {
         return properties;
     }

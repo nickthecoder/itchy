@@ -12,7 +12,7 @@ import java.util.prefs.NodeChangeListener;
 import java.util.prefs.PreferenceChangeListener;
 import java.util.prefs.Preferences;
 
-import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 
 /**
  * Works in the same way as {@link java.util.prefs.Preferences}, but there is no need to {@link #flush()} as this is done for every write.
@@ -275,9 +275,9 @@ public class AutoFlushPreferences extends Preferences
         }
     }
 
-    public <S> void load( S subject, List<AbstractProperty<S, ?>> properties )
+    public <S> void load( S subject, List<Property<S, ?>> properties )
     {
-        for (AbstractProperty<S, ?> property : properties) {
+        for (Property<S, ?> property : properties) {
             try {
                 String value = this.get(property.key, null);
                 if (value != null) {
@@ -289,9 +289,9 @@ public class AutoFlushPreferences extends Preferences
         }
     }
 
-    public <S> void save( S subject, List<AbstractProperty<S, ?>> properties )
+    public <S> void save( S subject, List<Property<S, ?>> properties )
     {
-        for (AbstractProperty<S, ?> property : properties) {
+        for (Property<S, ?> property : properties) {
             try {
                 String value = property.getStringValue(subject);
                 this.put(property.key, value);

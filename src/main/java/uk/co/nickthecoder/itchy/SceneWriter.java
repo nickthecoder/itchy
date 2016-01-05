@@ -4,7 +4,7 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
-import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.role.PlainRole;
 import uk.co.nickthecoder.itchy.util.XMLException;
 import uk.co.nickthecoder.itchy.util.XMLWriter;
@@ -69,7 +69,7 @@ public class SceneWriter extends XMLWriter
     {
 
         this.beginTag("properties");
-        for (AbstractProperty<SceneDirector, ?> property : this.scene.sceneDirector.getProperties()) {
+        for (Property<SceneDirector, ?> property : this.scene.sceneDirector.getProperties()) {
             try {
                 this.beginTag("property");
                 this.attribute("name", property.key);

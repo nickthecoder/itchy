@@ -9,7 +9,7 @@ import java.util.List;
 
 import uk.co.nickthecoder.itchy.animation.Animation;
 import uk.co.nickthecoder.itchy.animation.CompoundAnimation;
-import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.DoubleProperty;
 import uk.co.nickthecoder.itchy.property.IntegerProperty;
 import uk.co.nickthecoder.itchy.property.PropertySubject;
@@ -21,7 +21,7 @@ import uk.co.nickthecoder.jame.Surface;
 
 public class Actor implements PropertySubject<Actor>
 {
-    protected static final List<AbstractProperty<Actor, ?>> properties = new ArrayList<AbstractProperty<Actor, ?>>();
+    protected static final List<Property<Actor, ?>> properties = new ArrayList<Property<Actor, ?>>();
 
     static {
         properties.add(new StringProperty<Actor>("startEvent"));
@@ -792,7 +792,7 @@ public class Actor implements PropertySubject<Actor>
     }
 
     @Override
-    public List<AbstractProperty<Actor, ?>> getProperties()
+    public List<Property<Actor, ?>> getProperties()
     {
         return properties;
     }

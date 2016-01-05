@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.Role;
-import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.StringProperty;
 
 /**
@@ -19,7 +19,7 @@ import uk.co.nickthecoder.itchy.property.StringProperty;
  */
 public class LinkButton extends Button
 {
-    protected static final List<AbstractProperty<Role, ?>> properties = new ArrayList<AbstractProperty<Role, ?>>();
+    protected static final List<Property<Role, ?>> properties = new ArrayList<Property<Role, ?>>();
 
     static {
         properties.add(new StringProperty<Role>("url"));
@@ -31,7 +31,7 @@ public class LinkButton extends Button
     public String url = "";
 
     @Override
-    public List<AbstractProperty<Role, ?>> getProperties()
+    public List<Property<Role, ?>> getProperties()
     {
         return properties;
     }

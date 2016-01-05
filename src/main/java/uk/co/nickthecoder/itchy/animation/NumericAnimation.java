@@ -9,13 +9,13 @@ import java.util.List;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Itchy;
-import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.EaseProperty;
 import uk.co.nickthecoder.itchy.property.IntegerProperty;
 
 public abstract class NumericAnimation extends AbstractAnimation
 {
-    protected static final List<AbstractProperty<Animation, ?>> properties = new ArrayList<AbstractProperty<Animation, ?>>();
+    protected static final List<Property<Animation, ?>> properties = new ArrayList<Property<Animation, ?>>();
 
     static {
         properties.add( new IntegerProperty<Animation>( "ticks" ) );

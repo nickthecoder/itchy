@@ -12,7 +12,7 @@ import uk.co.nickthecoder.itchy.editor.PosePickerButton;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.Component;
 
-public class PoseProperty<S> extends AbstractProperty<S, Pose>
+public class PoseProperty<S> extends Property<S, Pose>
 {
     public PoseProperty( String key )
     {

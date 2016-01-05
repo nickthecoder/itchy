@@ -8,14 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.Actor;
-import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.BooleanProperty;
 import uk.co.nickthecoder.itchy.property.DoubleProperty;
 
 public class TurnAnimation extends NumericAnimation
 {
 
-    protected static final List<AbstractProperty<Animation, ?>> properties = new ArrayList<AbstractProperty<Animation, ?>>();
+    protected static final List<Property<Animation, ?>> properties = new ArrayList<Property<Animation, ?>>();
 
     static {
         properties.add( new DoubleProperty<Animation>( "turn" ) );
@@ -42,7 +42,7 @@ public class TurnAnimation extends NumericAnimation
     }
 
     @Override
-    public List<AbstractProperty<Animation, ?>> getProperties()
+    public List<Property<Animation, ?>> getProperties()
     {
         return properties;
     }

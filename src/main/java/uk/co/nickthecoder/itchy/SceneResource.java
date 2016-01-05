@@ -8,7 +8,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.BooleanProperty;
 import uk.co.nickthecoder.itchy.property.ClassNameProperty;
 import uk.co.nickthecoder.itchy.property.PropertySubject;
@@ -17,7 +17,7 @@ import uk.co.nickthecoder.itchy.property.StringProperty;
 
 public class SceneResource extends Loadable implements PropertySubject<SceneResource>
 {
-    protected static final List<AbstractProperty<SceneResource, ?>> properties = new ArrayList<AbstractProperty<SceneResource, ?>>();
+    protected static final List<Property<SceneResource, ?>> properties = new ArrayList<Property<SceneResource, ?>>();
 
     static {
         properties.add(new StringProperty<SceneResource>("name"));
@@ -48,7 +48,7 @@ public class SceneResource extends Loadable implements PropertySubject<SceneReso
     }
 
     @Override
-    public List<AbstractProperty<SceneResource, ?>> getProperties()
+    public List<Property<SceneResource, ?>> getProperties()
     {
         return properties;
     }

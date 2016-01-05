@@ -23,7 +23,7 @@ import uk.co.nickthecoder.itchy.gui.TableRow;
 import uk.co.nickthecoder.itchy.gui.VerticalLayout;
 import uk.co.nickthecoder.itchy.gui.VerticalScroll;
 import uk.co.nickthecoder.itchy.gui.Window;
-import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 
 /**
  * Creates a framework for most of the Notebook pages within the Editor. Each SubEditor has a table listing a set of resources (e.g.
@@ -299,7 +299,7 @@ public abstract class SubEditor<S>
         return this.form.container;
     }
 
-    protected abstract List<AbstractProperty<S, ?>> getProperties();
+    protected abstract List<Property<S, ?>> getProperties();
 
     protected void update() throws MessageException
     {

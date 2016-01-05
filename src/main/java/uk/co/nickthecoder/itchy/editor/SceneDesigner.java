@@ -64,7 +64,7 @@ import uk.co.nickthecoder.itchy.gui.ToggleButton;
 import uk.co.nickthecoder.itchy.gui.VerticalLayout;
 import uk.co.nickthecoder.itchy.gui.VerticalScroll;
 import uk.co.nickthecoder.itchy.makeup.Makeup;
-import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.role.Follower;
 import uk.co.nickthecoder.itchy.role.PlainRole;
 import uk.co.nickthecoder.itchy.util.ClassName;
@@ -1536,7 +1536,7 @@ public class SceneDesigner implements MouseListener, KeyListener {
 	}
 
 	private void setDefaultProperties(Role role, Costume costume) {
-		for (AbstractProperty<Role, ?> property : role.getProperties()) {
+		for (Property<Role, ?> property : role.getProperties()) {
 			try {
 				String stringValue = costume.getString(property.access);
 				if (stringValue != null) {

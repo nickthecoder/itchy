@@ -10,7 +10,7 @@ import uk.co.nickthecoder.itchy.gui.TextArea;
 import uk.co.nickthecoder.itchy.gui.TextBox;
 import uk.co.nickthecoder.itchy.gui.TextWidget;
 
-public class StringProperty<S> extends AbstractProperty<S, String>
+public class StringProperty<S> extends Property<S, String>
 {
     private boolean multiLine = false;
     

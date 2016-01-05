@@ -8,7 +8,7 @@ import java.util.Collections;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.OffsetSurface;
-import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 
 public class ForwardingMakeup implements Makeup
 {
@@ -48,7 +48,7 @@ public class ForwardingMakeup implements Makeup
     }
 
     @Override
-    public List<AbstractProperty<Makeup, ?>> getProperties()
+    public List<Property<Makeup, ?>> getProperties()
     {
         return Collections.emptyList();
     }

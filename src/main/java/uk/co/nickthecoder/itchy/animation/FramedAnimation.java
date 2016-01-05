@@ -9,12 +9,12 @@ import java.util.Collections;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.Actor;
-import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.BooleanProperty;
 
 public class FramedAnimation extends AbstractAnimation
 {
-    protected static final List<AbstractProperty<Animation, ?>> properties = new ArrayList<AbstractProperty<Animation, ?>>();
+    protected static final List<Property<Animation, ?>> properties = new ArrayList<Property<Animation, ?>>();
 
     static {
         properties.add( new BooleanProperty<Animation>( "pingPong" ) );
@@ -34,7 +34,7 @@ public class FramedAnimation extends AbstractAnimation
     protected int direction = 1;
 
     @Override
-    public List<AbstractProperty<Animation, ?>> getProperties()
+    public List<Property<Animation, ?>> getProperties()
     {
         return properties;
     }

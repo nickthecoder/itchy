@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.BooleanProperty;
 import uk.co.nickthecoder.itchy.property.ClassNameProperty;
 import uk.co.nickthecoder.itchy.property.IntegerProperty;
@@ -17,7 +17,7 @@ import uk.co.nickthecoder.jame.Surface;
 
 public class CostumeResource extends NamedResource implements PropertySubject<CostumeResource>
 {
-    protected static final List<AbstractProperty<CostumeResource, ?>> properties = new ArrayList<AbstractProperty<CostumeResource, ?>>();
+    protected static final List<Property<CostumeResource, ?>> properties = new ArrayList<Property<CostumeResource, ?>>();
 
     static {
         properties.add( new ClassNameProperty<CostumeResource>( Role.class, "costume.roleClassName" ) );
@@ -51,7 +51,7 @@ public class CostumeResource extends NamedResource implements PropertySubject<Co
     }
 
     @Override
-    public List<AbstractProperty<CostumeResource, ?>> getProperties()
+    public List<Property<CostumeResource, ?>> getProperties()
     {
         return properties;
     }

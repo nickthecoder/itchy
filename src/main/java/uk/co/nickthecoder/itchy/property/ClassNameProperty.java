@@ -11,7 +11,7 @@ import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.script.ScriptManager;
 import uk.co.nickthecoder.itchy.util.ClassName;
 
-public class ClassNameProperty<S> extends AbstractProperty<S, ClassName>
+public class ClassNameProperty<S> extends Property<S, ClassName>
 {
     /**
      * The required type for the property, either Role, SceneDirector, CostumeProperty or Game.

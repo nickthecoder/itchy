@@ -10,13 +10,13 @@ package uk.co.nickthecoder.itchy;
 import java.util.ArrayList;
 import java.util.List;
 
-import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.PropertySubject;
 import uk.co.nickthecoder.itchy.property.StringProperty;
 
 public class InputResource extends NamedResource implements PropertySubject<InputResource>
 {
-    protected static final List<AbstractProperty<InputResource, ?>> properties = new ArrayList<AbstractProperty<InputResource,?>>();
+    protected static final List<Property<InputResource, ?>> properties = new ArrayList<Property<InputResource,?>>();
 
     static {
         properties.add(new StringProperty<InputResource>("name"));
@@ -31,7 +31,7 @@ public class InputResource extends NamedResource implements PropertySubject<Inpu
     }
 
     @Override
-    public List<AbstractProperty<InputResource, ?>> getProperties()
+    public List<Property<InputResource, ?>> getProperties()
     {
         return properties;
     }

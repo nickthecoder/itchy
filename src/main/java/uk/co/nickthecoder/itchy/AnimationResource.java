@@ -8,13 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.animation.Animation;
-import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.PropertySubject;
 import uk.co.nickthecoder.itchy.property.StringProperty;
 
 public class AnimationResource extends NamedResource implements PropertySubject<AnimationResource>
 {
-    protected static final List<AbstractProperty<AnimationResource, ?>> properties = new ArrayList<AbstractProperty<AnimationResource, ?>>();
+    protected static final List<Property<AnimationResource, ?>> properties = new ArrayList<Property<AnimationResource, ?>>();
 
     static {
         properties.add(new StringProperty<AnimationResource>("name"));
@@ -29,7 +29,7 @@ public class AnimationResource extends NamedResource implements PropertySubject<
     }
 
     @Override
-    public List<AbstractProperty<AnimationResource, ?>> getProperties()
+    public List<Property<AnimationResource, ?>> getProperties()
     {
         return properties;
     }

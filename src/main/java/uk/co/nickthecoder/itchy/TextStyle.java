@@ -7,7 +7,7 @@ package uk.co.nickthecoder.itchy;
 import java.util.ArrayList;
 import java.util.List;
 
-import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.DoubleProperty;
 import uk.co.nickthecoder.itchy.property.IntegerProperty;
 import uk.co.nickthecoder.itchy.property.PropertySubject;
@@ -16,7 +16,7 @@ import uk.co.nickthecoder.jame.RGBA;
 
 public class TextStyle implements PropertySubject<TextStyle>, Cloneable
 {
-    protected static final List<AbstractProperty<TextStyle, ?>> properties = new ArrayList<AbstractProperty<TextStyle, ?>>();
+    protected static final List<Property<TextStyle, ?>> properties = new ArrayList<Property<TextStyle, ?>>();
 
     static {
         properties.add(new IntegerProperty<TextStyle>("fontSize"));
@@ -60,7 +60,7 @@ public class TextStyle implements PropertySubject<TextStyle>, Cloneable
     }
 
     @Override
-    public List<AbstractProperty<TextStyle, ?>> getProperties()
+    public List<Property<TextStyle, ?>> getProperties()
     {
         return properties;
     }

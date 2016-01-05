@@ -26,7 +26,7 @@ import uk.co.nickthecoder.itchy.gui.TableModel;
 import uk.co.nickthecoder.itchy.gui.TableModelColumn;
 import uk.co.nickthecoder.itchy.gui.TableModelRow;
 import uk.co.nickthecoder.itchy.gui.TextBox;
-import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.util.NinePatch;
 import uk.co.nickthecoder.itchy.util.Util;
 import uk.co.nickthecoder.jame.JameException;
@@ -324,7 +324,7 @@ public class NinePatchEditor extends SubEditor<NinePatchResource>
     }
 
     @Override
-    protected List<AbstractProperty<NinePatchResource, ?>> getProperties()
+    protected List<Property<NinePatchResource, ?>> getProperties()
     {
         return this.currentResource.getProperties();
     }

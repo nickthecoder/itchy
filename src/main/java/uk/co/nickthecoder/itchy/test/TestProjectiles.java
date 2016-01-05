@@ -9,7 +9,7 @@ import java.util.List;
 
 import uk.co.nickthecoder.itchy.AbstractRole;
 import uk.co.nickthecoder.itchy.Role;
-import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.DoubleProperty;
 import uk.co.nickthecoder.itchy.property.IntegerProperty;
 import uk.co.nickthecoder.itchy.role.PlainRole;
@@ -17,7 +17,7 @@ import uk.co.nickthecoder.itchy.role.ProjectileBuilder;
 
 public class TestProjectiles extends AbstractRole
 {
-    protected static final List<AbstractProperty<Role, ?>> properties = new ArrayList<AbstractProperty<Role, ?>>();
+    protected static final List<Property<Role, ?>> properties = new ArrayList<Property<Role, ?>>();
 
     static {
         properties.add(new IntegerProperty<Role>("id"));
@@ -68,7 +68,7 @@ public class TestProjectiles extends AbstractRole
     public double alpha = 255;
 
     @Override
-    public List<AbstractProperty<Role, ?>> getProperties()
+    public List<Property<Role, ?>> getProperties()
     {
         return properties;
     }

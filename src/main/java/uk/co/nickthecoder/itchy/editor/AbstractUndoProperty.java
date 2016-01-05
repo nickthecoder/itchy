@@ -4,17 +4,17 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.editor;
 
-import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 
 public abstract class AbstractUndoProperty<S> implements Undo
 {
-    protected AbstractProperty<S, ?> property;
+    protected Property<S, ?> property;
 
     protected String oldValue;
 
     protected String newValue;
 
-    public AbstractUndoProperty( AbstractProperty<S, ?> property, String oldValue, String newValue )
+    public AbstractUndoProperty( Property<S, ?> property, String oldValue, String newValue )
     {
         this.property = property;
         this.oldValue = oldValue;

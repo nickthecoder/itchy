@@ -21,7 +21,7 @@ import uk.co.nickthecoder.itchy.gui.TableModel;
 import uk.co.nickthecoder.itchy.gui.TableModelColumn;
 import uk.co.nickthecoder.itchy.gui.TableModelRow;
 import uk.co.nickthecoder.itchy.gui.TextBox;
-import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.util.ClassName;
 
 public class ScenesEditor extends SubEditor<SceneResource>
@@ -181,7 +181,7 @@ public class ScenesEditor extends SubEditor<SceneResource>
     }
 
     @Override
-    protected List<AbstractProperty<SceneResource, ?>> getProperties()
+    protected List<Property<SceneResource, ?>> getProperties()
     {
         return this.currentResource.getProperties();
     }

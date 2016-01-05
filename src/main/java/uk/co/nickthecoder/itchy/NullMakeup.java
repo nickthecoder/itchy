@@ -9,13 +9,13 @@ import java.util.List;
 
 import uk.co.nickthecoder.itchy.makeup.Makeup;
 import uk.co.nickthecoder.itchy.makeup.TransformationData;
-import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 
 public class NullMakeup implements Makeup
 {
 
     @Override
-    public List<AbstractProperty<Makeup, ?>> getProperties()
+    public List<Property<Makeup, ?>> getProperties()
     {
         return Collections.emptyList();
     }

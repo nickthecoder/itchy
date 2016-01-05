@@ -10,7 +10,7 @@ import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.PickerButton;
 
-public class ChoiceProperty<S, T> extends AbstractProperty<S, T>
+public class ChoiceProperty<S, T> extends Property<S, T>
 {
     private HashMap<String, T> map;
 

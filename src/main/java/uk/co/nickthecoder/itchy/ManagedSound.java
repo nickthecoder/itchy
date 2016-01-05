@@ -7,7 +7,7 @@ package uk.co.nickthecoder.itchy;
 import java.util.ArrayList;
 import java.util.List;
 
-import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.BooleanProperty;
 import uk.co.nickthecoder.itchy.property.DoubleProperty;
 import uk.co.nickthecoder.itchy.property.EnumProperty;
@@ -16,7 +16,7 @@ import uk.co.nickthecoder.itchy.property.PropertySubject;
 
 public class ManagedSound implements PropertySubject<ManagedSound>
 {
-    protected static final List<AbstractProperty<ManagedSound, ?>> properties = new ArrayList<AbstractProperty<ManagedSound, ?>>();
+    protected static final List<Property<ManagedSound, ?>> properties = new ArrayList<Property<ManagedSound, ?>>();
 
     static {
         properties.add(new IntegerProperty<ManagedSound>("priority"));
@@ -63,7 +63,7 @@ public class ManagedSound implements PropertySubject<ManagedSound>
     }
 
     @Override
-    public List<AbstractProperty<ManagedSound, ?>> getProperties()
+    public List<Property<ManagedSound, ?>> getProperties()
     {
         return properties;
     }

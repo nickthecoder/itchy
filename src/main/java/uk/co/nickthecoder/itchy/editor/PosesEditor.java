@@ -37,7 +37,7 @@ import uk.co.nickthecoder.itchy.gui.TableModelRow;
 import uk.co.nickthecoder.itchy.gui.TextBox;
 import uk.co.nickthecoder.itchy.gui.ThumbnailedPickerButton;
 import uk.co.nickthecoder.itchy.gui.VerticalScroll;
-import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.util.StringList;
 import uk.co.nickthecoder.itchy.util.Util;
 import uk.co.nickthecoder.jame.JameException;
@@ -295,7 +295,7 @@ public class PosesEditor extends SubEditor<PoseResource>
     }
 
     @Override
-    protected List<AbstractProperty<PoseResource, ?>> getProperties()
+    protected List<Property<PoseResource, ?>> getProperties()
     {
         return this.currentResource.getProperties();
     }

@@ -14,14 +14,14 @@ import uk.co.nickthecoder.itchy.Actor.AnimationEvent;
 import uk.co.nickthecoder.itchy.animation.Animation;
 import uk.co.nickthecoder.itchy.collision.BruteForceCollisionStrategy;
 import uk.co.nickthecoder.itchy.collision.CollisionStrategy;
-import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.itchy.util.Tag;
 import uk.co.nickthecoder.itchy.util.TagMembership;
 
 public abstract class AbstractRole implements Role
 {
-    protected static final List<AbstractProperty<Role, ?>> properties = new ArrayList<AbstractProperty<Role, ?>>();
+    protected static final List<Property<Role, ?>> properties = new ArrayList<Property<Role, ?>>();
 
     private CollisionStrategy collisionStrategy = BruteForceCollisionStrategy.pixelCollision;
 
@@ -69,7 +69,7 @@ public abstract class AbstractRole implements Role
     }
 
     @Override
-    public List<AbstractProperty<Role, ?>> getProperties()
+    public List<Property<Role, ?>> getProperties()
     {
         return properties;
     }

@@ -8,14 +8,14 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.FileProperty;
 import uk.co.nickthecoder.itchy.property.PropertySubject;
 import uk.co.nickthecoder.itchy.property.StringProperty;
 
 public class FontResource extends NamedResource implements PropertySubject<FontResource>
 {
-    protected static final List<AbstractProperty<FontResource, ?>> properties = new ArrayList<AbstractProperty<FontResource, ?>>();
+    protected static final List<Property<FontResource, ?>> properties = new ArrayList<Property<FontResource, ?>>();
 
     static {
         properties.add( new StringProperty<FontResource>( "name" ) );
@@ -34,7 +34,7 @@ public class FontResource extends NamedResource implements PropertySubject<FontR
     }
 
     @Override
-    public List<AbstractProperty<FontResource, ?>> getProperties()
+    public List<Property<FontResource, ?>> getProperties()
     {
         return properties;
     }

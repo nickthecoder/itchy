@@ -14,7 +14,7 @@ import uk.co.nickthecoder.itchy.gui.GridLayout;
 import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.Container;
 import uk.co.nickthecoder.itchy.gui.Label;
-import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.util.StringUtils;
 
 /**
@@ -32,9 +32,9 @@ public class PropertiesForm<S>
 
     private Map<String, Component> componentMap;
 
-    List<AbstractProperty<S, ?>> properties;
+    List<Property<S, ?>> properties;
 
-    public PropertiesForm( S subject, List<AbstractProperty<S, ?>> properties )
+    public PropertiesForm( S subject, List<Property<S, ?>> properties )
     {
         this.subject = subject;
         this.properties = properties;
@@ -50,7 +50,7 @@ public class PropertiesForm<S>
     {
         this.componentMap = new HashMap<String, Component>();
 
-        for (AbstractProperty<S, ?> property : this.properties) {
+        for (Property<S, ?> property : this.properties) {
             Component component = createComponent(property);
             this.componentMap.put(property.key, component);
             this.grid.addRow(property.label, hint(component, property.hint));
@@ -59,7 +59,7 @@ public class PropertiesForm<S>
         return this.container;
     }
 
-    protected Component createComponent( AbstractProperty<S, ?> property )
+    protected Component createComponent( Property<S, ?> property )
     {
         return property.createComponent(this.subject, this.autoUpdate);
     }
@@ -101,7 +101,7 @@ public class PropertiesForm<S>
      */
     public String getErrorMessage()
     {
-        for (AbstractProperty<S, ?> property : this.properties) {
+        for (Property<S, ?> property : this.properties) {
             Component component = this.componentMap.get(property.key);
             String errorMessage = property.getErrorText(component);
             if (errorMessage != null) {
@@ -125,7 +125,7 @@ public class PropertiesForm<S>
             return;
         }
 
-        for (AbstractProperty<S, ?> property : this.properties) {
+        for (Property<S, ?> property : this.properties) {
             Component component = this.componentMap.get(property.key);
             try {
                 property.update(this.subject, component);
@@ -139,7 +139,7 @@ public class PropertiesForm<S>
      * Returns the GUI component used to enter the property value.
      * 
      * @param propertyKey
-     *        The key for the property. See {@link AbstractProperty#key}.
+     *        The key for the property. See {@link Property#key}.
      * @return The component.
      */
     public Component getComponent( String propertyKey )
@@ -150,7 +150,7 @@ public class PropertiesForm<S>
     public void addComponentChangeListener( String propertyKey, ComponentChangeListener listener )
     {
         Component component = this.componentMap.get(propertyKey);
-        for (AbstractProperty<S, ?> property : this.properties) {
+        for (Property<S, ?> property : this.properties) {
             if (property.key.equals(propertyKey)) {
                 property.addChangeListener(component, listener);
                 return;

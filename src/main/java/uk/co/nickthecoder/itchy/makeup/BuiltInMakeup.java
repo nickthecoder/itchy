@@ -8,7 +8,7 @@ import java.util.Collections;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.Appearance;
-import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 
 /**
  * Used internally by Appearance, has no properties, and always returns the same change id.
@@ -25,7 +25,7 @@ public abstract class BuiltInMakeup implements Makeup
     }
 
     @Override
-    public List<AbstractProperty<Makeup, ?>> getProperties()
+    public List<Property<Makeup, ?>> getProperties()
     {
         return Collections.emptyList();
     }

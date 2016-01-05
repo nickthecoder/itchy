@@ -9,7 +9,7 @@ import java.util.List;
 
 import uk.co.nickthecoder.itchy.collision.BruteForceCollisionStrategy;
 import uk.co.nickthecoder.itchy.collision.CollisionStrategy;
-import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
@@ -20,7 +20,7 @@ import uk.co.nickthecoder.jame.event.MouseMotionEvent;
  */
 public class PlainSceneDirector implements SceneDirector
 {
-    protected static final List<AbstractProperty<SceneDirector, ?>> properties = new ArrayList<AbstractProperty<SceneDirector, ?>>();
+    protected static final List<Property<SceneDirector, ?>> properties = new ArrayList<Property<SceneDirector, ?>>();
 
     @Override
     public void onLoaded()
@@ -79,7 +79,7 @@ public class PlainSceneDirector implements SceneDirector
     }
 
     @Override
-    public List<AbstractProperty<SceneDirector, ?>> getProperties()
+    public List<Property<SceneDirector, ?>> getProperties()
     {
         return properties;
     }

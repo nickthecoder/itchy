@@ -9,13 +9,13 @@ import java.util.List;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.TextPose;
-import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.RGBAProperty;
 import uk.co.nickthecoder.jame.RGBA;
 
 public class ColorAnimation extends NumericAnimation
 {
-    protected static final List<AbstractProperty<Animation, ?>> properties = new ArrayList<AbstractProperty<Animation, ?>>();
+    protected static final List<Property<Animation, ?>> properties = new ArrayList<Property<Animation, ?>>();
 
     static {
         properties.add( new RGBAProperty<Animation>( "targetColor" ) );
@@ -38,7 +38,7 @@ public class ColorAnimation extends NumericAnimation
     }
 
     @Override
-    public List<AbstractProperty<Animation, ?>> getProperties()
+    public List<Property<Animation, ?>> getProperties()
     {
         return properties;
     }

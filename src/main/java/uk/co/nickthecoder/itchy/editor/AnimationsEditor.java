@@ -37,7 +37,7 @@ import uk.co.nickthecoder.itchy.gui.TextBox;
 import uk.co.nickthecoder.itchy.gui.ThumbnailedPickerButton;
 import uk.co.nickthecoder.itchy.gui.VerticalLayout;
 import uk.co.nickthecoder.itchy.gui.VerticalScroll;
-import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.util.StringList;
 import uk.co.nickthecoder.jame.Surface;
 
@@ -346,7 +346,7 @@ public class AnimationsEditor extends SubEditor<AnimationResource>
     }
 
     @Override
-    protected List<AbstractProperty<AnimationResource, ?>> getProperties()
+    protected List<Property<AnimationResource, ?>> getProperties()
     {
         return this.currentResource.getProperties();
     }

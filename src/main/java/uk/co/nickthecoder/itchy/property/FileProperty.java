@@ -12,7 +12,7 @@ import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.TextBox;
 
-public class FileProperty<S> extends AbstractProperty<S, File>
+public class FileProperty<S> extends Property<S, File>
 {
     public FileProperty( String key )
     {

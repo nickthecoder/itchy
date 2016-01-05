@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface PropertySubject<S extends PropertySubject<S>>
 {
-    public List<AbstractProperty<S, ?>> getProperties();
+    public List<Property<S, ?>> getProperties();
 }

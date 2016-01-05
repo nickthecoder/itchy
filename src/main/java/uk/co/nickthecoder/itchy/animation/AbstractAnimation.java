@@ -9,13 +9,13 @@ import java.util.List;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.MessageListener;
-import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.StringProperty;
 import uk.co.nickthecoder.itchy.util.StringUtils;
 
 public abstract class AbstractAnimation implements Animation, Cloneable
 {
-    protected static final List<AbstractProperty<Animation, ?>> properties = new ArrayList<AbstractProperty<Animation, ?>>();
+    protected static final List<Property<Animation, ?>> properties = new ArrayList<Property<Animation, ?>>();
     
     static {
         properties.add( new StringProperty<Animation>( "finishedMessage" ));
@@ -28,7 +28,7 @@ public abstract class AbstractAnimation implements Animation, Cloneable
     private String finishedMessage = null;
 
     @Override
-    public List<AbstractProperty<Animation, ?>> getProperties()
+    public List<Property<Animation, ?>> getProperties()
     {
         return properties;
     }

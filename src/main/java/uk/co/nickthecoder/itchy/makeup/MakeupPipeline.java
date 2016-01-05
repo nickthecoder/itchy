@@ -9,7 +9,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.OffsetSurface;
-import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 
 public class MakeupPipeline implements Makeup
 {
@@ -18,7 +18,7 @@ public class MakeupPipeline implements Makeup
     private int changeId = 0;
 
     @Override
-    public List<AbstractProperty<Makeup, ?>> getProperties()
+    public List<Property<Makeup, ?>> getProperties()
     {
         return Collections.emptyList();
     }

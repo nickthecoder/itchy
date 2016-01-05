@@ -7,13 +7,13 @@ package uk.co.nickthecoder.itchy.editor;
 import java.util.ArrayList;
 import java.util.List;
 
-import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.PropertySubject;
 import uk.co.nickthecoder.itchy.property.StringProperty;
 
 public class EditorPreferences implements PropertySubject<EditorPreferences>
 {
-    protected static final List<AbstractProperty<EditorPreferences, ?>> properties = new ArrayList<AbstractProperty<EditorPreferences, ?>>();
+    protected static final List<Property<EditorPreferences, ?>> properties = new ArrayList<Property<EditorPreferences, ?>>();
 
     static {
         properties.add(new StringProperty<EditorPreferences>("textEditor"));
@@ -34,7 +34,7 @@ public class EditorPreferences implements PropertySubject<EditorPreferences>
     }
 
     @Override
-    public List<AbstractProperty<EditorPreferences, ?>> getProperties()
+    public List<Property<EditorPreferences, ?>> getProperties()
     {
         return properties;
     }

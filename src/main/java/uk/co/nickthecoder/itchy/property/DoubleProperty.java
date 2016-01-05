@@ -9,7 +9,7 @@ import uk.co.nickthecoder.itchy.gui.DoubleBox;
 import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.util.BeanHelper;
 
-public class DoubleProperty<S> extends AbstractProperty<S, Double>
+public class DoubleProperty<S> extends Property<S, Double>
 {
     public DoubleProperty( String key )
     {

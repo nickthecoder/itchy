@@ -5,13 +5,13 @@
 package uk.co.nickthecoder.itchy.editor;
 
 import uk.co.nickthecoder.itchy.Actor;
-import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 
 public class UndoActorProperty<S> extends UndoProperty<S>
 {
     protected Actor actor;
 
-    public UndoActorProperty( SceneDesigner sd, String formName, Actor actor, AbstractProperty<S, ?> property,
+    public UndoActorProperty( SceneDesigner sd, String formName, Actor actor, Property<S, ?> property,
         String oldValue, String newValue )
     {
         super(sd, formName, property, oldValue, newValue);

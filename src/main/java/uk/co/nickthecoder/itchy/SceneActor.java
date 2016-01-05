@@ -9,7 +9,7 @@ import java.util.Map;
 
 import uk.co.nickthecoder.itchy.editor.SceneDesignerRole;
 import uk.co.nickthecoder.itchy.makeup.Makeup;
-import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.role.PlainRole;
 import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.itchy.util.StringUtils;
@@ -84,7 +84,7 @@ public abstract class SceneActor implements Cloneable
         this.activationDelay = actor.getActivationDelay();
         this.startEvent = actor.getStartEvent();
 
-        for (AbstractProperty<Role, ?> property : actualRole.getProperties()) {
+        for (Property<Role, ?> property : actualRole.getProperties()) {
             try {
                 String value = property.getStringValue(actualRole);
                 this.customPropertyStrings.put(property.key, value);
@@ -94,7 +94,7 @@ public abstract class SceneActor implements Cloneable
         }
         
         Makeup makeup = actor.getAppearance().getMakeup();
-        for (AbstractProperty<Makeup, ?> property : makeup.getProperties()) {
+        for (Property<Makeup, ?> property : makeup.getProperties()) {
             try {
                 String value = property.getStringValue(makeup);
                 this.makeupPropertyStrings.put(property.key, value);
@@ -157,7 +157,7 @@ public abstract class SceneActor implements Cloneable
             }
         }
 
-        for (AbstractProperty<Role, ?> property : actualRole.getProperties()) {
+        for (Property<Role, ?> property : actualRole.getProperties()) {
             String value = this.customPropertyStrings.get(property.key);
             if ( value == null ) {
                 for (String alias : property.aliases) {
@@ -178,7 +178,7 @@ public abstract class SceneActor implements Cloneable
 
         Makeup makeup = actor.getAppearance().getMakeup();
 
-        for (AbstractProperty<Makeup, ?> property : makeup.getProperties()) {
+        for (Property<Makeup, ?> property : makeup.getProperties()) {
             String value = this.makeupPropertyStrings.get(property.key);
             if ( value == null ) {
                 for (String alias : property.aliases) {

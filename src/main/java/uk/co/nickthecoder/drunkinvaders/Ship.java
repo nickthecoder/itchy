@@ -11,7 +11,7 @@ import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Input;
 import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.extras.Fragment;
-import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.DoubleProperty;
 import uk.co.nickthecoder.itchy.role.ExplosionBuilder;
 import uk.co.nickthecoder.itchy.role.OnionSkinBuilder;
@@ -22,7 +22,7 @@ import uk.co.nickthecoder.itchy.util.Tag;
 public class Ship extends Bouncy implements Shootable
 {
 
-    protected static final List<AbstractProperty<Role, ?>> properties = new ArrayList<AbstractProperty<Role, ?>>();
+    protected static final List<Property<Role, ?>> properties = new ArrayList<Property<Role, ?>>();
 
     static {
         properties.add(new DoubleProperty<Role>("ox").label("Planet's Center X"));
@@ -72,7 +72,7 @@ public class Ship extends Bouncy implements Shootable
     protected Input inputFire;
 
     @Override
-    public List<AbstractProperty<Role, ?>> getProperties()
+    public List<Property<Role, ?>> getProperties()
     {
         return properties;
     }

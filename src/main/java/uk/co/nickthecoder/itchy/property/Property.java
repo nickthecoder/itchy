@@ -27,7 +27,7 @@ import uk.co.nickthecoder.itchy.util.StringUtils;
  * @param <T>
  *        The type of the property, such as String, Integer, Double etc.
  */
-public abstract class AbstractProperty<S, T>
+public abstract class Property<S, T>
 {
 
     /**
@@ -89,7 +89,7 @@ public abstract class AbstractProperty<S, T>
         return access;
     }
 
-    public AbstractProperty( String access )
+    public Property( String access )
     {
         this.access = access;
         this.key = keyFromAccess(access);
@@ -228,7 +228,7 @@ public abstract class AbstractProperty<S, T>
      * @param label
      * @return this
      */
-    public AbstractProperty<S, T> label( String label )
+    public Property<S, T> label( String label )
     {
         this.label = label;
         return this;
@@ -240,7 +240,7 @@ public abstract class AbstractProperty<S, T>
      * @param access
      * @return this
      */
-    public AbstractProperty<S, T> access( String access )
+    public Property<S, T> access( String access )
     {
         this.access = access;
         return this;
@@ -252,13 +252,13 @@ public abstract class AbstractProperty<S, T>
      * @param access
      * @return this
      */
-    public AbstractProperty<S, T> hint( String access )
+    public Property<S, T> hint( String access )
     {
         this.hint = access;
         return this;
     }
 
-    public AbstractProperty<S, T> aliases( String... aliases )
+    public Property<S, T> aliases( String... aliases )
     {
         addAliases(aliases);
         return this;

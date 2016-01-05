@@ -16,7 +16,7 @@ import uk.co.nickthecoder.itchy.makeup.ForwardingMakeup;
 import uk.co.nickthecoder.itchy.makeup.Makeup;
 import uk.co.nickthecoder.itchy.makeup.MakeupPipeline;
 import uk.co.nickthecoder.itchy.makeup.TransformationData;
-import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.DoubleProperty;
 import uk.co.nickthecoder.itchy.property.FontProperty;
 import uk.co.nickthecoder.itchy.property.PropertySubject;
@@ -29,9 +29,9 @@ import uk.co.nickthecoder.jame.Surface;
 
 public final class Appearance implements OffsetSurface, PropertySubject<Appearance>
 {
-    protected static final List<AbstractProperty<Appearance, ?>> properties = new ArrayList<AbstractProperty<Appearance, ?>>();
-    protected static final List<AbstractProperty<Appearance, ?>> textProperties = new ArrayList<AbstractProperty<Appearance, ?>>();
-    protected static final List<AbstractProperty<Appearance, ?>> imageProperties = new ArrayList<AbstractProperty<Appearance, ?>>();
+    protected static final List<Property<Appearance, ?>> properties = new ArrayList<Property<Appearance, ?>>();
+    protected static final List<Property<Appearance, ?>> textProperties = new ArrayList<Property<Appearance, ?>>();
+    protected static final List<Property<Appearance, ?>> imageProperties = new ArrayList<Property<Appearance, ?>>();
 
     static {
         properties.add(new DoubleProperty<Appearance>("scale"));
@@ -156,7 +156,7 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
 
 
     @Override
-    public List<AbstractProperty<Appearance, ?>> getProperties()
+    public List<Property<Appearance, ?>> getProperties()
     {
         if (this.pose instanceof TextPose ) {
             return textProperties;

@@ -8,7 +8,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.FileProperty;
 import uk.co.nickthecoder.itchy.property.PropertySubject;
 import uk.co.nickthecoder.itchy.property.StringProperty;
@@ -17,7 +17,7 @@ import uk.co.nickthecoder.jame.Sound;
 
 public class SoundResource extends NamedResource implements PropertySubject<SoundResource>
 {
-    protected static final List<AbstractProperty<SoundResource, ?>> properties = new ArrayList<AbstractProperty<SoundResource, ?>>();
+    protected static final List<Property<SoundResource, ?>> properties = new ArrayList<Property<SoundResource, ?>>();
 
     static {
         properties.add( new StringProperty<SoundResource>( "name" ));
@@ -36,7 +36,7 @@ public class SoundResource extends NamedResource implements PropertySubject<Soun
     }
 
     @Override
-    public List<AbstractProperty<SoundResource, ?>> getProperties()
+    public List<Property<SoundResource, ?>> getProperties()
     {
         return properties;
     }

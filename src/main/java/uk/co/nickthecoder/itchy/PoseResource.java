@@ -8,7 +8,7 @@ import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
 
-import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.BooleanProperty;
 import uk.co.nickthecoder.itchy.property.DoubleProperty;
 import uk.co.nickthecoder.itchy.property.FileProperty;
@@ -19,7 +19,7 @@ import uk.co.nickthecoder.jame.Surface;
 
 public class PoseResource extends NamedResource implements Thumbnailed, PropertySubject<PoseResource>
 {
-    protected static List<AbstractProperty<PoseResource, ?>> properties = new LinkedList<AbstractProperty<PoseResource, ?>>();
+    protected static List<Property<PoseResource, ?>> properties = new LinkedList<Property<PoseResource, ?>>();
 
     static {
         properties.add( new StringProperty<PoseResource>( "name" ));
@@ -56,7 +56,7 @@ public class PoseResource extends NamedResource implements Thumbnailed, Property
     }
 
     @Override
-    public List<AbstractProperty<PoseResource, ?>> getProperties()
+    public List<Property<PoseResource, ?>> getProperties()
     {
         return properties;
     }

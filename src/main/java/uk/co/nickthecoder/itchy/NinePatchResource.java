@@ -8,7 +8,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.EnumProperty;
 import uk.co.nickthecoder.itchy.property.FileProperty;
 import uk.co.nickthecoder.itchy.property.IntegerProperty;
@@ -22,7 +22,7 @@ import uk.co.nickthecoder.jame.Surface;
 
 public class NinePatchResource extends NamedResource implements PropertySubject<NinePatchResource>
 {
-    protected static final List<AbstractProperty<NinePatchResource, ?>> properties = new ArrayList<AbstractProperty<NinePatchResource, ?>>();
+    protected static final List<Property<NinePatchResource, ?>> properties = new ArrayList<Property<NinePatchResource, ?>>();
     
     static {
         properties.add( new StringProperty<NinePatchResource>( "name" ));
@@ -52,7 +52,7 @@ public class NinePatchResource extends NamedResource implements PropertySubject<
     }
 
     @Override
-    public List<AbstractProperty<NinePatchResource, ?>> getProperties()
+    public List<Property<NinePatchResource, ?>> getProperties()
     {
         return properties;
     }

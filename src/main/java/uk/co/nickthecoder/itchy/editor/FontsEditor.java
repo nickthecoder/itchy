@@ -25,7 +25,7 @@ import uk.co.nickthecoder.itchy.gui.TableModel;
 import uk.co.nickthecoder.itchy.gui.TableModelColumn;
 import uk.co.nickthecoder.itchy.gui.TableModelRow;
 import uk.co.nickthecoder.itchy.gui.TextBox;
-import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.util.StringList;
 import uk.co.nickthecoder.itchy.util.Util;
 
@@ -219,7 +219,7 @@ public class FontsEditor extends SubEditor<FontResource>
 
 
     @Override
-    protected List<AbstractProperty<FontResource, ?>> getProperties()
+    protected List<Property<FontResource, ?>> getProperties()
     {
         return this.currentResource.getProperties();
     }

@@ -16,7 +16,7 @@ import uk.co.nickthecoder.itchy.animation.Animation;
 import uk.co.nickthecoder.itchy.animation.CompoundAnimation;
 import uk.co.nickthecoder.itchy.animation.Frame;
 import uk.co.nickthecoder.itchy.animation.FramedAnimation;
-import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.PropertySubject;
 import uk.co.nickthecoder.itchy.role.PlainRole;
 import uk.co.nickthecoder.itchy.util.ClassName;
@@ -406,11 +406,11 @@ public class ResourcesReader
     	readProperties( tag, subject, subject.getProperties() );
     }
     
-	private <S extends PropertySubject<S>> void readProperties( XMLTag tag, S subject, List<AbstractProperty<S, ?>> properties )
+	private <S extends PropertySubject<S>> void readProperties( XMLTag tag, S subject, List<Property<S, ?>> properties )
         throws XMLException
     {
 
-        for (AbstractProperty<S, ?> property : subject.getProperties()) {
+        for (Property<S, ?> property : subject.getProperties()) {
             String value = tag.getOptionalAttribute(property.key, null);
             if (value == null) {
                 for (String alias : property.aliases) {

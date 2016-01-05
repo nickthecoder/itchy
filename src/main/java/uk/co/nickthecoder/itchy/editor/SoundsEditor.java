@@ -32,7 +32,7 @@ import uk.co.nickthecoder.itchy.gui.TableModelColumn;
 import uk.co.nickthecoder.itchy.gui.TableModelRow;
 import uk.co.nickthecoder.itchy.gui.TextBox;
 import uk.co.nickthecoder.itchy.gui.ThumbnailedPickerButton;
-import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.util.StringList;
 import uk.co.nickthecoder.itchy.util.Util;
 import uk.co.nickthecoder.jame.JameException;
@@ -248,7 +248,7 @@ public class SoundsEditor extends SubEditor<SoundResource>
     }
 
     @Override
-    protected List<AbstractProperty<SoundResource, ?>> getProperties()
+    protected List<Property<SoundResource, ?>> getProperties()
     {
         return this.currentResource.getProperties();
     }
