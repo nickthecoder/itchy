@@ -10,7 +10,7 @@ import java.util.Map;
 
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 
-public class PickerButton<T> extends Button
+public class PickerButton<T> extends GuiButton
 {
     protected final Map<String, T> map;
 

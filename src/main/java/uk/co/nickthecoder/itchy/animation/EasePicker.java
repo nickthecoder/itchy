@@ -10,7 +10,7 @@ import java.util.Map;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
-import uk.co.nickthecoder.itchy.gui.Button;
+import uk.co.nickthecoder.itchy.gui.GuiButton;
 import uk.co.nickthecoder.itchy.gui.AbstractComponent;
 import uk.co.nickthecoder.itchy.gui.PlainContainer;
 import uk.co.nickthecoder.itchy.gui.GridLayout;
@@ -49,7 +49,7 @@ public abstract class EasePicker extends Window
         buttons.setLayout(new HorizontalLayout());
         buttons.setXAlignment(0.5f);
 
-        Button cancel = new Button("Cancel");
+        GuiButton cancel = new GuiButton("Cancel");
         cancel.addActionListener(new ActionListener() {
 
             @Override
@@ -94,7 +94,7 @@ public abstract class EasePicker extends Window
 
     private AbstractComponent createButton( final String name, final Ease ease )
     {
-        Button button = new Button();
+        GuiButton button = new GuiButton();
         button.setLayout(new VerticalLayout());
         button.setXAlignment(0.5f);
 

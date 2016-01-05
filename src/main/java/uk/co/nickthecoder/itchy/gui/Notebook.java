@@ -58,7 +58,7 @@ public class Notebook extends PlainContainer
         return this.pages.getChildren().size();
     }
 
-    public Button getTab( int pageIndex )
+    public GuiButton getTab( int pageIndex )
     {
         return (Tab) this.tabs.getChildren().get(pageIndex);
     }
@@ -118,7 +118,7 @@ public class Notebook extends PlainContainer
         }
     }
 
-    public class Tab extends Button
+    public class Tab extends GuiButton
     {
         private final Component page;
 

@@ -1,18 +1,12 @@
 Current Tasks
 =============
 
-Get rid of the Property annotation?
-	Save resources, and git diff them to make sure nothing significant has changed.
-	Rename AbstractProperty to Property
-
 
 gridRole.onBirth looks like rubbish. Is it called?
 gridRole.talk looks weird.
 
 BUGS
 ====
-
-Pyrox. Rock not rolling off of Coin. Add test before fixing.
 
 Debris - Bullets (#2) stay alive, even when invisible, and kill rocks that pass over them.
 
@@ -23,8 +17,6 @@ SceneDesigner toolbox isn't moved when the window is maximised (floats in middle
 
 New Features
 ============
-
-NumberValue to expose the format as a property.
 
 Design Stages/Views graphically - Aim for no code in Director.
 

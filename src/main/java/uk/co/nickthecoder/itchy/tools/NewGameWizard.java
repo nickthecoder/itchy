@@ -11,7 +11,7 @@ import uk.co.nickthecoder.itchy.Game;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
-import uk.co.nickthecoder.itchy.gui.Button;
+import uk.co.nickthecoder.itchy.gui.GuiButton;
 import uk.co.nickthecoder.itchy.gui.PlainContainer;
 import uk.co.nickthecoder.itchy.gui.GridLayout;
 import uk.co.nickthecoder.itchy.gui.Component;
@@ -84,7 +84,7 @@ public class NewGameWizard implements Page
         result.addChild(buttonBar);
         buttonBar.addStyle("buttonBar");
 
-        Button create = new Button("Create");
+        GuiButton create = new GuiButton("Create");
         buttonBar.addChild(create);
 
         create.addActionListener(new ActionListener() {
@@ -97,7 +97,7 @@ public class NewGameWizard implements Page
 
         });
 
-        Button test = new Button("Test");
+        GuiButton test = new GuiButton("Test");
         buttonBar.addChild(test);
 
         test.addActionListener(new ActionListener() {
@@ -110,7 +110,7 @@ public class NewGameWizard implements Page
 
         });
 
-        Button editor = new Button("Editor");
+        GuiButton editor = new GuiButton("Editor");
         buttonBar.addChild(editor);
 
         editor.addActionListener(new ActionListener() {

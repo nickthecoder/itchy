@@ -8,7 +8,7 @@ import uk.co.nickthecoder.itchy.ImagePose;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.animation.Animation;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
-import uk.co.nickthecoder.itchy.gui.Button;
+import uk.co.nickthecoder.itchy.gui.GuiButton;
 import uk.co.nickthecoder.itchy.gui.AbstractComponent;
 import uk.co.nickthecoder.itchy.gui.PlainContainer;
 import uk.co.nickthecoder.itchy.gui.GridLayout;
@@ -58,7 +58,7 @@ public abstract class AnimationTypePicker extends Window
         ImagePose icon = Editor.instance.getStylesheet().resources.getPose("animation-" + animation.getTagName());
         ImageComponent img = new ImageComponent((icon == null) ? null : icon.getSurface());
         center.addChild(img);
-        Button button = new Button(center);
+        GuiButton button = new GuiButton(center);
         container.addChild(button);
 
         container.addChild(new Label(animation.getName()));

@@ -24,7 +24,7 @@ import uk.co.nickthecoder.itchy.TextStyle;
 import uk.co.nickthecoder.itchy.gui.AbstractComponent;
 import uk.co.nickthecoder.itchy.gui.AbstractTableListener;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
-import uk.co.nickthecoder.itchy.gui.Button;
+import uk.co.nickthecoder.itchy.gui.GuiButton;
 import uk.co.nickthecoder.itchy.gui.ClassNameBox;
 import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
@@ -72,7 +72,7 @@ public class CostumesEditor extends SubEditor<CostumeResource>
 
     private Label labelExtendedFrom;
 
-    private Button buttonExtendedFrom;
+    private GuiButton buttonExtendedFrom;
 
     public CostumesEditor(Editor editor)
     {
@@ -176,7 +176,7 @@ public class CostumesEditor extends SubEditor<CostumeResource>
         this.labelExtendedFrom = new Label(base == null ? "None" : this.editor.resources.getCostumeResource(base)
                         .getName());
 
-        this.buttonExtendedFrom = new Button(this.labelExtendedFrom)
+        this.buttonExtendedFrom = new GuiButton(this.labelExtendedFrom)
         {
             @Override
             public void onClick(MouseButtonEvent e)
@@ -228,7 +228,7 @@ public class CostumesEditor extends SubEditor<CostumeResource>
 
         eventsTableSection.addChild(eventsTableButtons);
 
-        Button edit = new Button("Edit");
+        GuiButton edit = new GuiButton("Edit");
         edit.addActionListener(new ActionListener()
         {
             @Override
@@ -239,7 +239,7 @@ public class CostumesEditor extends SubEditor<CostumeResource>
         });
         eventsTableButtons.addChild(edit);
 
-        Button add = new Button("Add");
+        GuiButton add = new GuiButton("Add");
         add.addActionListener(new ActionListener()
         {
             @Override
@@ -250,7 +250,7 @@ public class CostumesEditor extends SubEditor<CostumeResource>
         });
         eventsTableButtons.addChild(add);
 
-        Button remove = new Button("Remove");
+        GuiButton remove = new GuiButton("Remove");
         remove.addActionListener(new ActionListener()
         {
             @Override
@@ -357,7 +357,7 @@ public class CostumesEditor extends SubEditor<CostumeResource>
                     CostumeResource resource = (CostumeResource) data;
                     container.addChild(new ImageComponent(resource.getThumbnail()));
                 } else if (data instanceof ManagedSound) {
-                    Button button = new Button("Play");
+                    GuiButton button = new GuiButton("Play");
                     button.addActionListener(new ActionListener()
                     {
                         @Override
@@ -780,7 +780,7 @@ public class CostumesEditor extends SubEditor<CostumeResource>
             buttons.addStyle("buttonBar");
             buttons.setXAlignment(0.5f);
 
-            Button ok = new Button(new Label("Ok"));
+            GuiButton ok = new GuiButton(new Label("Ok"));
             ok.addActionListener(new ActionListener()
             {
                 @Override
@@ -790,7 +790,7 @@ public class CostumesEditor extends SubEditor<CostumeResource>
                     window.hide();
                 }
             });
-            Button cancel = new Button(new Label("Cancel"));
+            GuiButton cancel = new GuiButton(new Label("Cancel"));
             cancel.addActionListener(new ActionListener()
             {
                 @Override

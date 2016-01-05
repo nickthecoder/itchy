@@ -6,7 +6,7 @@ package uk.co.nickthecoder.itchy.editor;
 
 import uk.co.nickthecoder.itchy.animation.Animation;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
-import uk.co.nickthecoder.itchy.gui.Button;
+import uk.co.nickthecoder.itchy.gui.GuiButton;
 import uk.co.nickthecoder.itchy.gui.AbstractComponent;
 import uk.co.nickthecoder.itchy.gui.PlainContainer;
 import uk.co.nickthecoder.itchy.gui.GridLayout;
@@ -55,7 +55,7 @@ public class AnimationEditor extends Window
 
     public void createButtons( Container buttonBar )
     {
-        Button ok = new Button("Done");
+        GuiButton ok = new GuiButton("Done");
         ok.addActionListener(new ActionListener() {
             @Override
             public void action()

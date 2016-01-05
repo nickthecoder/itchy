@@ -9,7 +9,7 @@ import java.util.List;
 
 import uk.co.nickthecoder.itchy.SceneResource;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
-import uk.co.nickthecoder.itchy.gui.Button;
+import uk.co.nickthecoder.itchy.gui.GuiButton;
 import uk.co.nickthecoder.itchy.gui.ClassNameBox;
 import uk.co.nickthecoder.itchy.gui.Container;
 import uk.co.nickthecoder.itchy.gui.Label;
@@ -63,7 +63,7 @@ public class ScenesEditor extends SubEditor<SceneResource>
     @Override
     protected void addListButtons( Container buttons )
     {
-        Button duplicate = new Button(new Label("Duplicate"));
+        GuiButton duplicate = new GuiButton(new Label("Duplicate"));
         duplicate.addActionListener(new ActionListener() {
             @Override
             public void action()

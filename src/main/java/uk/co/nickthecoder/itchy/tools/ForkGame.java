@@ -11,7 +11,7 @@ import java.util.HashMap;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
-import uk.co.nickthecoder.itchy.gui.Button;
+import uk.co.nickthecoder.itchy.gui.GuiButton;
 import uk.co.nickthecoder.itchy.gui.PlainContainer;
 import uk.co.nickthecoder.itchy.gui.GridLayout;
 import uk.co.nickthecoder.itchy.gui.Component;
@@ -63,7 +63,7 @@ public class ForkGame implements Page
         result.addChild(buttonBar);
         buttonBar.addStyle("buttonBar");
 
-        Button copy = new Button("Copy");
+        GuiButton copy = new GuiButton("Copy");
         buttonBar.addChild(copy);
 
         copy.addActionListener(new ActionListener() {

@@ -7,7 +7,7 @@ package uk.co.nickthecoder.itchy.editor;
 import uk.co.nickthecoder.itchy.CostumeResource;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
-import uk.co.nickthecoder.itchy.gui.Button;
+import uk.co.nickthecoder.itchy.gui.GuiButton;
 import uk.co.nickthecoder.itchy.gui.AbstractComponent;
 import uk.co.nickthecoder.itchy.gui.PlainContainer;
 import uk.co.nickthecoder.itchy.gui.GridLayout;
@@ -69,13 +69,13 @@ public abstract class CostumePicker extends Window
         container.setLayout(new VerticalLayout());
         container.setXAlignment(0.5f);
 
-        Button button;
+        GuiButton button;
         Surface surface = costumeResource == null ? null : costumeResource.getThumbnail();
         if (surface == null) {
-            button = new Button(costumeResource == null ? this.nullText : costumeResource.getName());
+            button = new GuiButton(costumeResource == null ? this.nullText : costumeResource.getName());
         } else {
             ImageComponent img = new ImageComponent(surface);
-            button = new Button(img);
+            button = new GuiButton(img);
         }
 
         button.addActionListener(new ActionListener() {

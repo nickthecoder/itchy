@@ -17,7 +17,7 @@ import uk.co.nickthecoder.itchy.animation.CompoundAnimation;
 import uk.co.nickthecoder.itchy.animation.FramedAnimation;
 import uk.co.nickthecoder.itchy.gui.AbstractComponent;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
-import uk.co.nickthecoder.itchy.gui.Button;
+import uk.co.nickthecoder.itchy.gui.GuiButton;
 import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.Container;
@@ -187,12 +187,12 @@ public class AnimationsEditor extends SubEditor<AnimationResource>
         PlainContainer line = new PlainContainer();
         line.setFill(true, false);
 
-        Button name = new Button(animation.getName());
+        GuiButton name = new GuiButton(animation.getName());
         name.setExpansion(1);
         line.addChild(name);
 
         if ((parent != null) && (parent.children.get(0) != animation)) {
-            Button up = new Button(new ImageComponent(this.editor.getStylesheet().resources.getPose("icon_up")
+            GuiButton up = new GuiButton(new ImageComponent(this.editor.getStylesheet().resources.getPose("icon_up")
                             .getSurface()));
             up.addStyle("compact");
             up.addActionListener(new ActionListener()
@@ -208,7 +208,7 @@ public class AnimationsEditor extends SubEditor<AnimationResource>
         }
 
         if (parent != null) {
-            Button delete = new Button(new ImageComponent(this.editor.getStylesheet().resources.getPose("icon_delete")
+            GuiButton delete = new GuiButton(new ImageComponent(this.editor.getStylesheet().resources.getPose("icon_delete")
                             .getSurface()));
 
             delete.addStyle("compact");
@@ -252,7 +252,7 @@ public class AnimationsEditor extends SubEditor<AnimationResource>
                 indent.addChild(this.createAnimationTree(child, ca));
             }
 
-            Button add = new Button("Add");
+            GuiButton add = new GuiButton("Add");
             add.addActionListener(new ActionListener()
             {
                 @Override

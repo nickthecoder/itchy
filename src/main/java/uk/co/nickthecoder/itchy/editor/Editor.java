@@ -10,7 +10,7 @@ import uk.co.nickthecoder.itchy.Game;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.PlainDirector;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
-import uk.co.nickthecoder.itchy.gui.Button;
+import uk.co.nickthecoder.itchy.gui.GuiButton;
 import uk.co.nickthecoder.itchy.gui.PlainContainer;
 import uk.co.nickthecoder.itchy.gui.Label;
 import uk.co.nickthecoder.itchy.gui.MessageBox;
@@ -170,7 +170,7 @@ public final class Editor extends Game
         buttons.addStyle("buttonBar");
         buttons.setXAlignment(1);
 
-        Button quit = new Button(new Label("Quit"));
+        GuiButton quit = new GuiButton(new Label("Quit"));
         quit.addActionListener(new ActionListener() {
             @Override
             public void action()
@@ -181,7 +181,7 @@ public final class Editor extends Game
         });
         buttons.addChild(quit);
 
-        Button save = new Button(new Label("Save"));
+        GuiButton save = new GuiButton(new Label("Save"));
         buttons.addChild(save);
         save.addActionListener(new ActionListener() {
             @Override

@@ -6,7 +6,7 @@ package uk.co.nickthecoder.itchy.editor;
 
 import uk.co.nickthecoder.itchy.KeyInput;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
-import uk.co.nickthecoder.itchy.gui.Button;
+import uk.co.nickthecoder.itchy.gui.GuiButton;
 import uk.co.nickthecoder.itchy.gui.ButtonGroup;
 import uk.co.nickthecoder.itchy.gui.CheckBox;
 import uk.co.nickthecoder.itchy.gui.AbstractComponent;
@@ -35,7 +35,7 @@ public abstract class KeyInputPicker extends Window
         this.clientArea.setFill(true, false);
 
 
-        Button ok = new Button("Ok");
+        GuiButton ok = new GuiButton("Ok");
         ok.addActionListener(new ActionListener() {
 
             @Override
@@ -58,7 +58,7 @@ public abstract class KeyInputPicker extends Window
         });
         buttons.addChild(ok);
         
-        Button cancel = new Button("Cancel");
+        GuiButton cancel = new GuiButton("Cancel");
         cancel.addActionListener(new ActionListener() {
 
             @Override

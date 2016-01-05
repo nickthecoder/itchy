@@ -7,7 +7,7 @@ package uk.co.nickthecoder.itchy.editor;
 import uk.co.nickthecoder.itchy.PoseResource;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
-import uk.co.nickthecoder.itchy.gui.Button;
+import uk.co.nickthecoder.itchy.gui.GuiButton;
 import uk.co.nickthecoder.itchy.gui.AbstractComponent;
 import uk.co.nickthecoder.itchy.gui.PlainContainer;
 import uk.co.nickthecoder.itchy.gui.GridLayout;
@@ -53,7 +53,7 @@ public abstract class PosePicker extends Window
         buttons.setLayout(new HorizontalLayout());
         buttons.setXAlignment(0.5f);
 
-        Button cancel = new Button("Cancel");
+        GuiButton cancel = new GuiButton("Cancel");
         cancel.addActionListener(new ActionListener() {
 
             @Override
@@ -106,7 +106,7 @@ public abstract class PosePicker extends Window
         container.setXAlignment(0.5f);
 
         ImageComponent img = new ImageComponent(poseResource.getThumbnail());
-        Button button = new Button(img);
+        GuiButton button = new GuiButton(img);
         button.addActionListener(new ActionListener() {
             @Override
             public void action()

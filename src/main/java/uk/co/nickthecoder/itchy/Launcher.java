@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.gui.ActionListener;
-import uk.co.nickthecoder.itchy.gui.Button;
+import uk.co.nickthecoder.itchy.gui.GuiButton;
 import uk.co.nickthecoder.itchy.gui.PlainContainer;
 import uk.co.nickthecoder.itchy.gui.Notebook;
 import uk.co.nickthecoder.itchy.gui.RootContainer;
@@ -96,7 +96,7 @@ public class Launcher extends AbstractDirector
         container.addChild(page.createPage());
         container.setFill(true, true);
         notebook.addPage(page.getName(), container);
-        Button button = notebook.getTab(notebook.size() - 1);
+        GuiButton button = notebook.getTab(notebook.size() - 1);
         button.addActionListener(new ActionListener()
         {
 

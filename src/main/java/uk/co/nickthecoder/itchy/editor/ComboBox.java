@@ -8,7 +8,7 @@ import java.util.Collection;
 import java.util.HashMap;
 
 import uk.co.nickthecoder.itchy.gui.ActionListener;
-import uk.co.nickthecoder.itchy.gui.Button;
+import uk.co.nickthecoder.itchy.gui.GuiButton;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.PlainContainer;
 import uk.co.nickthecoder.itchy.gui.Picker;
@@ -18,7 +18,7 @@ public class ComboBox extends PlainContainer
 {
     private TextBox name;
 
-    private Button button;
+    private GuiButton button;
 
     public String pickTitle = "Pick";
 
@@ -35,7 +35,7 @@ public class ComboBox extends PlainContainer
         for (String value : values) {
             this.map.put(value, value);
         }
-        this.button = new Button("...");
+        this.button = new GuiButton("...");
         this.button.addActionListener(new ActionListener() {
 
             @Override

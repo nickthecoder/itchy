@@ -8,7 +8,7 @@ import uk.co.nickthecoder.itchy.FontResource;
 import uk.co.nickthecoder.itchy.PoseResource;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
-import uk.co.nickthecoder.itchy.gui.Button;
+import uk.co.nickthecoder.itchy.gui.GuiButton;
 import uk.co.nickthecoder.itchy.gui.AbstractComponent;
 import uk.co.nickthecoder.itchy.gui.PlainContainer;
 import uk.co.nickthecoder.itchy.gui.GridLayout;
@@ -68,7 +68,7 @@ public abstract class PoseOrFontPicker extends PosePicker
         container.setXAlignment(0.5f);
 
         Label example = createExample(fontResource);
-        Button button = new Button(example);
+        GuiButton button = new GuiButton(example);
         button.addActionListener(new ActionListener() {
             @Override
             public void action()

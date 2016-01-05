@@ -8,7 +8,7 @@ import java.io.File;
 
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
-import uk.co.nickthecoder.itchy.gui.Button;
+import uk.co.nickthecoder.itchy.gui.GuiButton;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.PlainContainer;
 import uk.co.nickthecoder.itchy.gui.FileOpenDialog;
@@ -57,7 +57,7 @@ public class FilenameComponent extends PlainContainer
         });
         this.addChild(this.textBox);
 
-        Button pick = new Button("...");
+        GuiButton pick = new GuiButton("...");
         pick.addActionListener(new ActionListener() {
             @Override
             public void action()
@@ -67,7 +67,7 @@ public class FilenameComponent extends PlainContainer
         });
         this.addChild(pick);
 
-        Button rename = new Button("Rename");
+        GuiButton rename = new GuiButton("Rename");
         rename.addActionListener(new ActionListener() {
             @Override
             public void action()

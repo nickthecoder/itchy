@@ -9,7 +9,7 @@ import java.util.List;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.gui.AbstractTableListener;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
-import uk.co.nickthecoder.itchy.gui.Button;
+import uk.co.nickthecoder.itchy.gui.GuiButton;
 import uk.co.nickthecoder.itchy.gui.AbstractComponent;
 import uk.co.nickthecoder.itchy.gui.PlainContainer;
 import uk.co.nickthecoder.itchy.gui.FileOpenDialog;
@@ -148,7 +148,7 @@ public abstract class SubEditor<S>
      */
     protected void addListButtons( Container buttonBar )
     {
-        Button edit = new Button(new Label("Edit"));
+        GuiButton edit = new GuiButton(new Label("Edit"));
         edit.addActionListener(new ActionListener() {
             @Override
             public void action()
@@ -158,7 +158,7 @@ public abstract class SubEditor<S>
         });
         buttonBar.addChild(edit);
 
-        Button add = new Button(new Label("Add"));
+        GuiButton add = new GuiButton(new Label("Add"));
         add.addActionListener(new ActionListener() {
             @Override
             public void action()
@@ -168,7 +168,7 @@ public abstract class SubEditor<S>
         });
         buttonBar.addChild(add);
 
-        Button remove = new Button(new Label("Remove"));
+        GuiButton remove = new GuiButton(new Label("Remove"));
         remove.addActionListener(new ActionListener() {
             @Override
             public void action()
@@ -189,7 +189,7 @@ public abstract class SubEditor<S>
     protected void addDetailButtons( Container buttonBar )
     {
 
-        Button ok = new Button(new Label("Ok"));
+        GuiButton ok = new GuiButton(new Label("Ok"));
         ok.addActionListener(new ActionListener() {
             @Override
             public void action()
@@ -199,7 +199,7 @@ public abstract class SubEditor<S>
         });
         buttonBar.addChild(ok);
 
-        Button cancel = new Button(new Label("Cancel"));
+        GuiButton cancel = new GuiButton(new Label("Cancel"));
         cancel.addActionListener(new ActionListener() {
             @Override
             public void action()

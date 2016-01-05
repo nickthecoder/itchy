@@ -17,7 +17,7 @@ public class MessageDialog extends Window
         buttons.addStyle("buttonBar");
         this.clientArea.addChild(buttons);
 
-        Button ok = new Button("Ok");
+        GuiButton ok = new GuiButton("Ok");
         ok.addActionListener(new ActionListener() {
             @Override
             public void action()

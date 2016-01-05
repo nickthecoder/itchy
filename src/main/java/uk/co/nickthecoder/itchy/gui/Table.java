@@ -80,7 +80,7 @@ public class Table extends PlainContainer
         Comparator<TableModelRow> comparator = column.rowComparator;
 
         if (comparator != null) {
-            Button buttonHeading = new Button(column.getTitle());
+            GuiButton buttonHeading = new GuiButton(column.getTitle());
             buttonHeading.setXAlignment(0);
             buttonHeading.addActionListener(new ActionListener() {
                 @Override

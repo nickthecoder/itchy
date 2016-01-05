@@ -15,7 +15,7 @@ import uk.co.nickthecoder.itchy.ManagedSound;
 import uk.co.nickthecoder.itchy.SoundResource;
 import uk.co.nickthecoder.itchy.Thumbnailed;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
-import uk.co.nickthecoder.itchy.gui.Button;
+import uk.co.nickthecoder.itchy.gui.GuiButton;
 import uk.co.nickthecoder.itchy.gui.AbstractComponent;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.PlainContainer;
@@ -100,7 +100,7 @@ public class SoundsEditor extends SubEditor<SoundResource>
             {
                 PlainContainer container = new PlainContainer();
 
-                Button button = new Button("Play");
+                GuiButton button = new GuiButton("Play");
                 button.addActionListener(new ActionListener() {
                     @Override
                     public void action()

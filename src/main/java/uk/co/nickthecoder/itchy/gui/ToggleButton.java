@@ -6,7 +6,7 @@ package uk.co.nickthecoder.itchy.gui;
 
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 
-public class ToggleButton extends Button
+public class ToggleButton extends GuiButton
 {
     protected boolean down;
 

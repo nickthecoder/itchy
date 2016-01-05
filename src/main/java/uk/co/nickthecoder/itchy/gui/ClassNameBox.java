@@ -25,9 +25,9 @@ public class ClassNameBox extends PlainContainer
 
     private TextBox textBox;
 
-    private Button editButton;
+    private GuiButton editButton;
 
-    private Button reloadButton;
+    private GuiButton reloadButton;
 
     private Label editButtonLabel;
 
@@ -56,14 +56,14 @@ public class ClassNameBox extends PlainContainer
         this.textBox = new TextBox(className.name);
         main.addChild(this.textBox);
 
-        Button pick = new Button("...");
+        GuiButton pick = new GuiButton("...");
         main.addChild(pick);
 
         this.editButtonLabel = new Label("Edit");
-        this.editButton = new Button(this.editButtonLabel);
+        this.editButton = new GuiButton(this.editButtonLabel);
         main.addChild(this.editButton);
 
-        this.reloadButton = new Button("Reload");
+        this.reloadButton = new GuiButton("Reload");
         main.addChild(this.reloadButton);
 
         this.errorText = new Label("");
