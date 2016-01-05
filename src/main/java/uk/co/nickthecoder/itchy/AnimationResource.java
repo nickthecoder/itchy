@@ -4,22 +4,34 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.animation.Animation;
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.PropertySubject;
+import uk.co.nickthecoder.itchy.property.StringProperty;
 
-public class AnimationResource extends NamedResource
+public class AnimationResource extends NamedResource implements PropertySubject<AnimationResource>
 {
+    protected static final List<AbstractProperty<AnimationResource, ?>> properties = new ArrayList<AbstractProperty<AnimationResource, ?>>();
 
-    public static List<AbstractProperty<AnimationResource, ?>> properties = AbstractProperty.findAnnotations(AnimationResource.class);
+    static {
+        properties.add(new StringProperty<AnimationResource>("name"));
+    }
 
     public Animation animation;
 
-    public AnimationResource( Resources resources, String name, Animation animation )
+    public AnimationResource(Resources resources, String name, Animation animation)
     {
         super(resources, name);
         this.animation = animation;
+    }
+
+    @Override
+    public List<AbstractProperty<AnimationResource, ?>> getProperties()
+    {
+        return properties;
     }
 
 }

@@ -4,7 +4,6 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
-import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.util.Named;
 
 public class NamedResource implements Named
@@ -45,7 +44,6 @@ public class NamedResource implements Named
     }
 
     @Override
-    @Property(label = "Name", sortOrder = -10)
     public String getName()
     {
         return this.name;

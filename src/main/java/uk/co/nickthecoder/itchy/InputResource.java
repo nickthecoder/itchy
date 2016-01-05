@@ -7,14 +7,20 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
-import uk.co.nickthecoder.itchy.property.Property;
+import uk.co.nickthecoder.itchy.property.PropertySubject;
+import uk.co.nickthecoder.itchy.property.StringProperty;
 
-public class InputResource extends NamedResource
+public class InputResource extends NamedResource implements PropertySubject<InputResource>
 {
-    public static List<AbstractProperty<InputResource, ?>> properties = AbstractProperty.findAnnotations(InputResource.class);
+    protected static final List<AbstractProperty<InputResource, ?>> properties = new ArrayList<AbstractProperty<InputResource,?>>();
+
+    static {
+        properties.add(new StringProperty<InputResource>("name"));
+    }
 
     private Input input;
 
@@ -24,7 +30,12 @@ public class InputResource extends NamedResource
         this.input = input;
     }
 
-    @Property(label = "Input", recurse = true)
+    @Override
+    public List<AbstractProperty<InputResource, ?>> getProperties()
+    {
+        return properties;
+    }
+    
     public Input getInput()
     {
         return this.input;

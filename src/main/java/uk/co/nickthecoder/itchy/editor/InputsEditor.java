@@ -142,7 +142,7 @@ public class InputsEditor extends SubEditor<InputResource>
     @Override
     protected List<AbstractProperty<InputResource, ?>> getProperties()
     {
-        return InputResource.properties;
+        return this.currentResource.getProperties();
     }
 
     protected void onAddKey()

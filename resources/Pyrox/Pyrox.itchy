@@ -1,5 +1,5 @@
 <resources>
-  <game resizable="false" title="Rox" width="800" height="600" initialScene="menu" directorClassName="director.py" authors="Nick Robinson. nickthecoder@gmail.com&#xA;"/>
+  <game title="Rox" width="800" height="600" resizable="false" initialScene="menu" directorClassName="director.py" authors="Nick Robinson. nickthecoder@gmail.com&#xA;"/>
   <fonts>
     <font name="Boycott" filename="fonts/Boycott/Boycott.ttf"/>
     <font name="Comic" filename="fonts/bubblegum-sans/BubblegumSans-Regular.otf"/>
@@ -137,99 +137,99 @@
   <sounds/>
   <animations>
     <animation name="bee-enterHive">
-      <sequence finishedMessage="enteredHive" loops="1" sequence="true">
-        <scale ease="easeInOut" target="0.5" ticks="45"/>
+      <sequence sequence="true" loops="1" finishedMessage="enteredHive">
+        <scale target="0.5" ticks="45" ease="easeInOut"/>
       </sequence>
     </animation>
     <animation name="bee-escapeE">
-      <sequence finishedMessage="unpause" loops="1" sequence="true">
-        <parallel loops="1" sequence="false">
-          <move ease="linear" ticks="1" dx="-60.0" dy="0.0"/>
-          <alpha ease="linear" target="128.0" ticks="1"/>
-          <scale ease="linear" target="0.1" ticks="1"/>
+      <sequence sequence="true" loops="1" finishedMessage="unpause">
+        <parallel sequence="false" loops="1">
+          <move dx="-60.0" dy="0.0" ticks="1" ease="linear"/>
+          <alpha target="128.0" ticks="1" ease="linear"/>
+          <scale target="0.1" ticks="1" ease="linear"/>
           <frames pingPong="false">
             <frame pose="bee-E1" delay="1"/>
           </frames>
         </parallel>
-        <parallel loops="1" sequence="false">
-          <alpha ease="easeInOut" target="255.0" ticks="15"/>
-          <scale ease="linear" target="1.0" ticks="30"/>
-          <move ease="easeInOut" ticks="30" dx="60.0" dy="0.0"/>
+        <parallel sequence="false" loops="1">
+          <alpha target="255.0" ticks="15" ease="easeInOut"/>
+          <scale target="1.0" ticks="30" ease="linear"/>
+          <move dx="60.0" dy="0.0" ticks="30" ease="easeInOut"/>
         </parallel>
       </sequence>
     </animation>
     <animation name="bee-escapeN">
-      <sequence finishedMessage="unpause" loops="1" sequence="true">
-        <parallel loops="1" sequence="false">
-          <move ease="linear" ticks="1" dx="0.0" dy="-60.0"/>
-          <alpha ease="linear" target="128.0" ticks="1"/>
-          <scale ease="linear" target="0.1" ticks="1"/>
+      <sequence sequence="true" loops="1" finishedMessage="unpause">
+        <parallel sequence="false" loops="1">
+          <move dx="0.0" dy="-60.0" ticks="1" ease="linear"/>
+          <alpha target="128.0" ticks="1" ease="linear"/>
+          <scale target="0.1" ticks="1" ease="linear"/>
           <frames pingPong="false">
             <frame pose="bee-E1" delay="1"/>
           </frames>
         </parallel>
-        <parallel loops="1" sequence="false">
-          <alpha ease="easeInOut" target="255.0" ticks="15"/>
-          <scale ease="linear" target="1.0" ticks="30"/>
-          <move ease="easeInOut" ticks="30" dx="0.0" dy="60.0"/>
+        <parallel sequence="false" loops="1">
+          <alpha target="255.0" ticks="15" ease="easeInOut"/>
+          <scale target="1.0" ticks="30" ease="linear"/>
+          <move dx="0.0" dy="60.0" ticks="30" ease="easeInOut"/>
         </parallel>
       </sequence>
     </animation>
     <animation name="bee-escapeS">
-      <sequence finishedMessage="go" loops="1" sequence="true">
-        <parallel loops="1" sequence="false">
-          <move ease="linear" ticks="1" dx="0.0" dy="60.0"/>
-          <alpha ease="linear" target="128.0" ticks="1"/>
-          <scale ease="linear" target="0.1" ticks="1"/>
+      <sequence sequence="true" loops="1" finishedMessage="go">
+        <parallel sequence="false" loops="1">
+          <move dx="0.0" dy="60.0" ticks="1" ease="linear"/>
+          <alpha target="128.0" ticks="1" ease="linear"/>
+          <scale target="0.1" ticks="1" ease="linear"/>
           <frames pingPong="false">
             <frame pose="bee-E1" delay="1"/>
           </frames>
         </parallel>
-        <parallel loops="1" sequence="false">
-          <alpha ease="easeInOut" target="255.0" ticks="15"/>
-          <scale ease="linear" target="1.0" ticks="30"/>
-          <move ease="easeInOut" ticks="30" dx="0.0" dy="-60.0"/>
+        <parallel sequence="false" loops="1">
+          <alpha target="255.0" ticks="15" ease="easeInOut"/>
+          <scale target="1.0" ticks="30" ease="linear"/>
+          <move dx="0.0" dy="-60.0" ticks="30" ease="easeInOut"/>
         </parallel>
       </sequence>
     </animation>
     <animation name="bee-escapeW">
-      <sequence finishedMessage="unpause" loops="1" sequence="true">
-        <parallel loops="1" sequence="false">
-          <scale ease="linear" target="0.1" ticks="1"/>
-          <alpha ease="linear" target="128.0" ticks="1"/>
-          <move ease="linear" ticks="1" dx="60.0" dy="0.0"/>
+      <sequence sequence="true" loops="1" finishedMessage="unpause">
+        <parallel sequence="false" loops="1">
+          <scale target="0.1" ticks="1" ease="linear"/>
+          <alpha target="128.0" ticks="1" ease="linear"/>
+          <move dx="60.0" dy="0.0" ticks="1" ease="linear"/>
           <frames pingPong="false">
             <frame pose="bee-W1" delay="1"/>
           </frames>
         </parallel>
-        <parallel loops="1" sequence="false">
-          <scale ease="easeInOut" target="1.0" ticks="30"/>
-          <alpha ease="easeInOut" target="255.0" ticks="15"/>
-          <move ease="easeInOut" ticks="30" dx="-60.0" dy="0.0"/>
+        <parallel sequence="false" loops="1">
+          <scale target="1.0" ticks="30" ease="easeInOut"/>
+          <alpha target="255.0" ticks="15" ease="easeInOut"/>
+          <move dx="-60.0" dy="0.0" ticks="30" ease="easeInOut"/>
         </parallel>
       </sequence>
     </animation>
     <animation name="bee-pollinate">
-      <sequence finishedMessage="unpause" loops="1" sequence="true">
-        <parallel loops="1" sequence="false">
-          <scale ease="easeInOut" target="0.5" ticks="60"/>
+      <sequence sequence="true" loops="1" finishedMessage="unpause">
+        <parallel sequence="false" loops="1">
+          <scale target="0.5" ticks="60" ease="easeInOut"/>
         </parallel>
         <delay ticks="30"/>
-        <parallel loops="1" sequence="false">
-          <scale ease="linear" target="1.0" ticks="15"/>
+        <parallel sequence="false" loops="1">
+          <scale target="1.0" ticks="15" ease="linear"/>
         </parallel>
       </sequence>
     </animation>
     <animation name="collectable-collected">
-      <parallel loops="1" sequence="false">
-        <alpha ease="easeIn" target="0.0" ticks="80"/>
-        <scale ease="easeInCubic" target="5.0" ticks="70"/>
-        <move ease="linear" ticks="70" dx="200.0" dy="0.0"/>
-        <move ease="easeOutQuad" ticks="70" dx="0.0" dy="200.0"/>
+      <parallel sequence="false" loops="1">
+        <alpha target="0.0" ticks="80" ease="easeIn"/>
+        <scale target="5.0" ticks="70" ease="easeInCubic"/>
+        <move dx="200.0" dy="0.0" ticks="70" ease="linear"/>
+        <move dx="0.0" dy="200.0" ticks="70" ease="easeOutQuad"/>
       </parallel>
     </animation>
     <animation name="copier-scan">
-      <sequence finishedMessage="copied" loops="1" sequence="true">
+      <sequence sequence="true" loops="1" finishedMessage="copied">
         <frames pingPong="false">
           <frame pose="copierScanning" delay="60"/>
           <frame pose="copier" delay="1"/>
@@ -237,25 +237,25 @@
       </sequence>
     </animation>
     <animation name="copier-talk-fade">
-      <sequence loops="1" sequence="true">
-        <parallel loops="1" sequence="false">
-          <move ease="linear" ticks="1" dx="10.0" dy="10.0"/>
-          <scale ease="linear" target="0.02" ticks="1"/>
+      <sequence sequence="true" loops="1">
+        <parallel sequence="false" loops="1">
+          <move dx="10.0" dy="10.0" ticks="1" ease="linear"/>
+          <scale target="0.02" ticks="1" ease="linear"/>
         </parallel>
-        <parallel loops="1" sequence="false">
-          <scale ease="easeInOut" target="1.0" ticks="30"/>
-          <move ease="easeInBack" ticks="30" dx="0.0" dy="-90.0"/>
+        <parallel sequence="false" loops="1">
+          <scale target="1.0" ticks="30" ease="easeInOut"/>
+          <move dx="0.0" dy="-90.0" ticks="30" ease="easeInBack"/>
         </parallel>
         <delay ticks="60"/>
-        <parallel loops="1" sequence="false">
-          <alpha ease="easeInOut" target="0.0" ticks="30"/>
-          <scale ease="easeInOut" target="0.02" ticks="15"/>
-          <move ease="easeOutBack" ticks="30" dx="0.0" dy="90.0"/>
+        <parallel sequence="false" loops="1">
+          <alpha target="0.0" ticks="30" ease="easeInOut"/>
+          <scale target="0.02" ticks="15" ease="easeInOut"/>
+          <move dx="0.0" dy="90.0" ticks="30" ease="easeOutBack"/>
         </parallel>
       </sequence>
     </animation>
     <animation name="explosion">
-      <sequence loops="1" sequence="true">
+      <sequence sequence="true" loops="1">
         <frames pingPong="false">
           <frame pose="explosion-01" delay="5"/>
           <frame pose="explosion-02" delay="5"/>
@@ -265,72 +265,72 @@
           <frame pose="explosion-06" delay="5"/>
           <frame pose="explosion-07" delay="1"/>
         </frames>
-        <sequence loops="1" sequence="true">
-          <alpha ease="linear" target="0.0" ticks="3"/>
+        <sequence sequence="true" loops="1">
+          <alpha target="0.0" ticks="3" ease="linear"/>
         </sequence>
       </sequence>
     </animation>
     <animation name="gate-exit">
-      <sequence loops="1" sequence="true">
+      <sequence sequence="true" loops="1">
         <frames pingPong="false">
           <frame pose="gateOpen" delay="1"/>
         </frames>
-        <scale ease="easeInOut" target="3.0" ticks="30"/>
-        <scale ease="easeInOut" target="1.0" ticks="30"/>
+        <scale target="3.0" ticks="30" ease="easeInOut"/>
+        <scale target="1.0" ticks="30" ease="easeInOut"/>
       </sequence>
     </animation>
     <animation name="gate-open">
-      <sequence loops="1" sequence="true">
+      <sequence sequence="true" loops="1">
         <frames pingPong="false">
           <frame pose="gatePending" delay="1"/>
         </frames>
-        <scale ease="easeInOut" target="3.0" ticks="10"/>
-        <scale ease="easeInOut" target="1.0" ticks="30"/>
+        <scale target="3.0" ticks="10" ease="easeInOut"/>
+        <scale target="1.0" ticks="30" ease="easeInOut"/>
       </sequence>
     </animation>
     <animation name="hint-death">
-      <sequence loops="1" sequence="true">
-        <alpha ease="linear" target="0.0" ticks="30"/>
+      <sequence sequence="true" loops="1">
+        <alpha target="0.0" ticks="30" ease="linear"/>
       </sequence>
     </animation>
     <animation name="localGate-enter">
-      <parallel loops="1" sequence="false">
-        <alpha ease="easeIn" target="0.0" ticks="50"/>
-        <scale ease="easeIn" target="0.3" ticks="50"/>
+      <parallel sequence="false" loops="1">
+        <alpha target="0.0" ticks="50" ease="easeIn"/>
+        <scale target="0.3" ticks="50" ease="easeIn"/>
       </parallel>
     </animation>
     <animation name="localGate-exit">
-      <parallel loops="1" sequence="false">
-        <alpha ease="easeInOut" target="255.0" ticks="10"/>
-        <scale ease="easeInOut" target="1.0" ticks="10"/>
+      <parallel sequence="false" loops="1">
+        <alpha target="255.0" ticks="10" ease="easeInOut"/>
+        <scale target="1.0" ticks="10" ease="easeInOut"/>
       </parallel>
     </animation>
     <animation name="none">
-      <sequence loops="1" sequence="true"/>
+      <sequence sequence="true" loops="1"/>
     </animation>
     <animation name="player-exit">
-      <parallel loops="1" sequence="false">
-        <alpha ease="easeIn" target="0.0" ticks="60"/>
-        <scale ease="easeIn" target="3.0" ticks="60"/>
+      <parallel sequence="false" loops="1">
+        <alpha target="0.0" ticks="60" ease="easeIn"/>
+        <scale target="3.0" ticks="60" ease="easeIn"/>
       </parallel>
     </animation>
     <animation name="player-hit">
-      <sequence loops="1" sequence="true">
-        <parallel loops="1" sequence="false">
-          <move ease="easeIn" ticks="100" dx="0.0" dy="200.0"/>
-          <alpha ease="default" target="128.0" ticks="40"/>
-          <scale ease="easeOut" target="0.75" ticks="100"/>
-          <sequence loops="1" sequence="true">
-            <move ease="easeOut" ticks="10" dx="-30.0" dy="0.0"/>
-            <move ease="easeIn" ticks="10" dx="30.0" dy="0.0"/>
-            <move ease="easeOut" ticks="10" dx="20.0" dy="0.0"/>
-            <move ease="easeIn" ticks="10" dx="-20.0" dy="0.0"/>
-            <move ease="easeOut" ticks="10" dx="-10.0" dy="0.0"/>
-            <move ease="easeIn" ticks="10" dx="10.0" dy="0.0"/>
-            <move ease="easeOut" ticks="10" dx="5.0" dy="0.0"/>
-            <move ease="easeIn" ticks="10" dx="-5.0" dy="0.0"/>
+      <sequence sequence="true" loops="1">
+        <parallel sequence="false" loops="1">
+          <move dx="0.0" dy="200.0" ticks="100" ease="easeIn"/>
+          <alpha target="128.0" ticks="40" ease="default"/>
+          <scale target="0.75" ticks="100" ease="easeOut"/>
+          <sequence sequence="true" loops="1">
+            <move dx="-30.0" dy="0.0" ticks="10" ease="easeOut"/>
+            <move dx="30.0" dy="0.0" ticks="10" ease="easeIn"/>
+            <move dx="20.0" dy="0.0" ticks="10" ease="easeOut"/>
+            <move dx="-20.0" dy="0.0" ticks="10" ease="easeIn"/>
+            <move dx="-10.0" dy="0.0" ticks="10" ease="easeOut"/>
+            <move dx="10.0" dy="0.0" ticks="10" ease="easeIn"/>
+            <move dx="5.0" dy="0.0" ticks="10" ease="easeOut"/>
+            <move dx="-5.0" dy="0.0" ticks="10" ease="easeIn"/>
           </sequence>
-          <sequence loops="7" sequence="true">
+          <sequence sequence="true" loops="7">
             <frames pingPong="false">
               <frame pose="robot-E3" delay="4"/>
               <frame pose="robot-W3" delay="4"/>
@@ -338,10 +338,10 @@
             </frames>
           </sequence>
         </parallel>
-        <parallel loops="1" sequence="false">
-          <scale ease="easeOutBack" target="3.0" ticks="100"/>
-          <alpha ease="easeOut" target="0.0" ticks="100"/>
-          <sequence loops="10" sequence="true">
+        <parallel sequence="false" loops="1">
+          <scale target="3.0" ticks="100" ease="easeOutBack"/>
+          <alpha target="0.0" ticks="100" ease="easeOut"/>
+          <sequence sequence="true" loops="10">
             <frames pingPong="false">
               <frame pose="robot-E2" delay="6"/>
               <frame pose="robot-W2" delay="6"/>
@@ -352,22 +352,22 @@
       </sequence>
     </animation>
     <animation name="player-sleep">
-      <parallel loops="1" sequence="false">
-        <alpha ease="easeInOut" target="200.0" ticks="120"/>
-        <color ease="easeInOut" targetColor="#4c5252b5" ticks="120"/>
+      <parallel sequence="false" loops="1">
+        <alpha target="200.0" ticks="120" ease="easeInOut"/>
+        <color targetColor="#4c5252b5" ticks="120" ease="easeInOut"/>
       </parallel>
     </animation>
     <animation name="player-wake">
-      <parallel loops="1" sequence="false">
-        <alpha ease="easeInOut" target="255.0" ticks="120"/>
-        <sequence loops="1" sequence="true">
-          <color ease="easeInOut" targetColor="#ffffff80" ticks="10"/>
-          <color ease="easeOut" targetColor="#7b786f00" ticks="110"/>
+      <parallel sequence="false" loops="1">
+        <alpha target="255.0" ticks="120" ease="easeInOut"/>
+        <sequence sequence="true" loops="1">
+          <color targetColor="#ffffff80" ticks="10" ease="easeInOut"/>
+          <color targetColor="#7b786f00" ticks="110" ease="easeOut"/>
         </sequence>
       </parallel>
     </animation>
     <animation name="pumpkin-pollinate">
-      <sequence finishedMessage="pollinated" loops="1" sequence="true">
+      <sequence sequence="true" loops="1" finishedMessage="pollinated">
         <delay ticks="120"/>
         <frames pingPong="false">
           <frame pose="pumpkin-1" delay="30"/>
@@ -381,7 +381,7 @@
       </sequence>
     </animation>
     <animation name="robot-D">
-      <sequence loops="1" sequence="true">
+      <sequence sequence="true" loops="1">
         <frames pingPong="false">
           <frame pose="robot-S1" delay="3"/>
           <frame pose="robot-S2" delay="3"/>
@@ -391,7 +391,7 @@
       </sequence>
     </animation>
     <animation name="robot-L">
-      <sequence loops="1" sequence="true">
+      <sequence sequence="true" loops="1">
         <frames pingPong="false">
           <frame pose="robot-W1" delay="3"/>
           <frame pose="robot-W2" delay="3"/>
@@ -401,7 +401,7 @@
       </sequence>
     </animation>
     <animation name="robot-R">
-      <sequence loops="1" sequence="true">
+      <sequence sequence="true" loops="1">
         <frames pingPong="false">
           <frame pose="robot-E1" delay="3"/>
           <frame pose="robot-E2" delay="3"/>
@@ -411,7 +411,7 @@
       </sequence>
     </animation>
     <animation name="robot-U">
-      <sequence loops="1" sequence="true">
+      <sequence sequence="true" loops="1">
         <frames pingPong="false">
           <frame pose="robot-N1" delay="2"/>
           <frame pose="robot-N2" delay="2"/>
@@ -423,41 +423,41 @@
       </sequence>
     </animation>
     <animation name="rollAnticlockwise">
-      <sequence finishedMessage="turned" loops="1" sequence="true">
-        <turn ease="linear" headingToo="false" ticks="10" turn="90.0"/>
+      <sequence sequence="true" loops="1" finishedMessage="turned">
+        <turn turn="90.0" headingToo="false" ticks="10" ease="linear"/>
       </sequence>
     </animation>
     <animation name="rollClockwise">
-      <sequence finishedMessage="turned" loops="1" sequence="true">
-        <turn ease="linear" headingToo="false" ticks="10" turn="-90.0"/>
+      <sequence sequence="true" loops="1" finishedMessage="turned">
+        <turn turn="-90.0" headingToo="false" ticks="10" ease="linear"/>
       </sequence>
     </animation>
     <animation name="safe-open">
-      <sequence finishedMessage="open" loops="1" sequence="true">
-        <move ease="easeInOut" ticks="5" dx="7.0" dy="0.0"/>
-        <move ease="easeInOut" ticks="4" dx="-14.0" dy="0.0"/>
-        <move ease="easeInOut" ticks="5" dx="7.0" dy="0.0"/>
+      <sequence sequence="true" loops="1" finishedMessage="open">
+        <move dx="7.0" dy="0.0" ticks="5" ease="easeInOut"/>
+        <move dx="-14.0" dy="0.0" ticks="4" ease="easeInOut"/>
+        <move dx="7.0" dy="0.0" ticks="5" ease="easeInOut"/>
         <frames pingPong="false">
           <frame pose="safeOpen" delay="1"/>
         </frames>
       </sequence>
     </animation>
     <animation name="soil2-dig">
-      <sequence loops="1" sequence="true">
-        <alpha ease="easeInOut" target="128.0" ticks="30"/>
+      <sequence sequence="true" loops="1">
+        <alpha target="128.0" ticks="30" ease="easeInOut"/>
       </sequence>
     </animation>
     <animation name="squash-fade">
-      <parallel loops="1" sequence="false">
-        <alpha ease="easeInOut" target="0.0" ticks="100"/>
-        <scale ease="easeInOut" target="0.3" ticks="100"/>
+      <parallel sequence="false" loops="1">
+        <alpha target="0.0" ticks="100" ease="easeInOut"/>
+        <scale target="0.3" ticks="100" ease="easeInOut"/>
       </parallel>
     </animation>
     <animation name="talk-fade">
-      <sequence loops="1" sequence="true">
-        <alpha ease="linear" target="200.0" ticks="1"/>
-        <forwards customAngle="0.0" ease="linear" forwards="0.0" sidewards="0.0" ticks="200" using="HEADING"/>
-        <alpha ease="default" target="0.0" ticks="60"/>
+      <sequence sequence="true" loops="1">
+        <alpha target="200.0" ticks="1" ease="linear"/>
+        <forwards forwards="0.0" sidewards="0.0" using="HEADING" customAngle="0.0" ticks="200" ease="linear"/>
+        <alpha target="0.0" ticks="60" ease="default"/>
       </sequence>
     </animation>
   </animations>

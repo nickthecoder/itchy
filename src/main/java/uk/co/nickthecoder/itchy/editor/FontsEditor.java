@@ -221,7 +221,7 @@ public class FontsEditor extends SubEditor<FontResource>
     @Override
     protected List<AbstractProperty<FontResource, ?>> getProperties()
     {
-        return FontResource.properties;
+        return this.currentResource.getProperties();
     }
 
 }

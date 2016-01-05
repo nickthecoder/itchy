@@ -4,21 +4,25 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.animation;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
-import uk.co.nickthecoder.itchy.property.Property;
+import uk.co.nickthecoder.itchy.property.DoubleProperty;
 
 public class AlphaAnimation extends NumericAnimation
 {
-    private static final List<AbstractProperty<Animation, ?>> properties =
-        AbstractProperty.<Animation> findAnnotations(AlphaAnimation.class);
+    protected static final List<AbstractProperty<Animation, ?>> properties = new ArrayList<AbstractProperty<Animation, ?>>();
+
+    static {
+        properties.add( new DoubleProperty<Animation>( "target" ) );
+        properties.addAll( NumericAnimation.properties );
+    }
 
     /**
      * The final delta value
      */
-    @Property(label = "Target")
     public double target;
 
     private double initialValue;

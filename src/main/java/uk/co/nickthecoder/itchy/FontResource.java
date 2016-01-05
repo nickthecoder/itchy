@@ -5,15 +5,23 @@
 package uk.co.nickthecoder.itchy;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
-import uk.co.nickthecoder.itchy.property.Property;
+import uk.co.nickthecoder.itchy.property.FileProperty;
+import uk.co.nickthecoder.itchy.property.PropertySubject;
+import uk.co.nickthecoder.itchy.property.StringProperty;
 
-public class FontResource extends NamedResource
+public class FontResource extends NamedResource implements PropertySubject<FontResource>
 {
-    public static List<AbstractProperty<FontResource, ?>> properties = AbstractProperty.findAnnotations(FontResource.class);
+    protected static final List<AbstractProperty<FontResource, ?>> properties = new ArrayList<AbstractProperty<FontResource, ?>>();
 
+    static {
+        properties.add( new StringProperty<FontResource>( "name" ) );
+        properties.add( new FileProperty<FontResource>( "file" ).aliases( "filename" ) );
+    }
+    
     private File file;
 
     public Font font;
@@ -25,6 +33,12 @@ public class FontResource extends NamedResource
         this.font = new Font(this.resources.resolveFilename(filename));
     }
 
+    @Override
+    public List<AbstractProperty<FontResource, ?>> getProperties()
+    {
+        return properties;
+    }
+    
     public void setFilename( String filename )
     {
         this.setFile(new File(filename));
@@ -35,7 +49,6 @@ public class FontResource extends NamedResource
         return this.file.getPath();
     }
 
-    @Property(label = "Filename", aliases = "filename")
     public File getFile()
     {
         return this.file;

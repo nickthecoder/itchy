@@ -4,7 +4,6 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
-import uk.co.nickthecoder.itchy.property.Property;
 
 /**
  * A Pose is a single image used by an Actor's Appearance. A Pose consists of a single Surface, which holds the image, as well as an offset
@@ -12,8 +11,7 @@ import uk.co.nickthecoder.itchy.property.Property;
  * x-offsetX, y-offsetY ) Also, if the Actor can be rotated, then the offset will be the point around which the Actor will rotate.
  */
 public interface Pose extends OffsetSurface
-{
-
+{    
     /**
      * The direction that the Pose is facing. The default is 0 degrees (facing right). This is useful if you have images which don't face
      * right. For example, a human's bullet in Space Invaders points upwards, and it would be counter intuative to draw it pointing right,
@@ -21,7 +19,6 @@ public interface Pose extends OffsetSurface
      * 
      * @return The direction that the image is pointing in degrees. 0 degrees is to the right, 90 degrees is straight up.
      */
-    @Property(label = "Direction")
     public double getDirection();
 
     /**
@@ -32,11 +29,9 @@ public interface Pose extends OffsetSurface
     public int getChangeId();
 
     @Override
-    @Property(label = "Offset X")
     public int getOffsetX();
 
     @Override
-    @Property(label = "Offset Y")
     public int getOffsetY();
 
     public void attach( Appearance appearance );

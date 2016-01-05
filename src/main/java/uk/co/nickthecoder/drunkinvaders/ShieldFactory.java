@@ -4,22 +4,38 @@
  ******************************************************************************/
 package uk.co.nickthecoder.drunkinvaders;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import uk.co.nickthecoder.itchy.AbstractRole;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Pose;
-import uk.co.nickthecoder.itchy.property.Property;
+import uk.co.nickthecoder.itchy.Role;
+import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.IntegerProperty;
 
 public class ShieldFactory extends AbstractRole
 {
-    @Property(label = "Width")
+    protected static final List<AbstractProperty<Role, ?>> properties = new ArrayList<AbstractProperty<Role, ?>>();
+
+    static {
+        properties.add(new IntegerProperty<Role>("width"));
+        properties.add(new IntegerProperty<Role>("height"));
+        properties.add(new IntegerProperty<Role>("spacing"));
+    }
+
     public int width = 6;
 
-    @Property(label = "Height")
     public int height = 4;
 
-    @Property(label = "Spacing")
     public double spacing = 10;
 
+    @Override
+    public List<AbstractProperty<Role, ?>> getProperties()
+    {
+        return properties;
+    }
+    
     @Override
     public void tick()
     {

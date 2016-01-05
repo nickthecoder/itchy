@@ -4,27 +4,15 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.property;
 
-import java.io.File;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import uk.co.nickthecoder.itchy.Font;
-import uk.co.nickthecoder.itchy.Pose;
-import uk.co.nickthecoder.itchy.animation.Ease;
-import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.Component;
+import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.util.BeanHelper;
-import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.itchy.util.StringUtils;
-import uk.co.nickthecoder.jame.RGBA;
 
 /**
  * Holds meta data about a property, which makes dealing with properties much simpler, as much of the work can be automated, rather than
@@ -39,182 +27,8 @@ import uk.co.nickthecoder.jame.RGBA;
  * @param <T>
  *        The type of the property, such as String, Integer, Double etc.
  */
-public abstract class AbstractProperty<S, T> implements Comparable<AbstractProperty<S, ?>>
+public abstract class AbstractProperty<S, T>
 {
-    /**
-     * Uses reflection to looks through all of the fields and methods for "Property" annotations, and and for each one it finds, it creates
-     * the appropriate AbstractProperty and adds it to the collection.
-     * 
-     * @param klass
-     *        The class who to scan for Property annotations return A list of newly created AbstractProperty instances.
-     */
-    public static <SS> List<AbstractProperty<SS, ?>> findAnnotations( Class<? extends SS> klass )
-    {
-        List<AbstractProperty<SS, ?>> result = new ArrayList<AbstractProperty<SS, ?>>();
-        addProperties(klass, result);
-
-        Collections.sort(result);
-        return result;
-    }
-
-    /**
-     * Uses reflection to looks through all of the fields and methods for "Property" annotations, and and for each one it finds, it creates
-     * the appropriate AbstractProperty and adds it to the collection.
-     * 
-     * @param klass
-     *        The class who to scan for Property annotations
-     * @param collection
-     *        Where to add the newly created AbstractProperty instances. This is usually an empty list.
-     */
-    public static <SS> void addProperties( Class<? extends SS> klass, Collection<AbstractProperty<SS, ?>> collection )
-    {
-        addProperties(klass, "", collection);
-    }
-
-    private static <SS> void addProperties( Class<?> klass, String prefix, Collection<AbstractProperty<SS, ?>> collection )
-    {
-        addMethodProperties(klass, prefix, collection);
-
-        for (Field field : klass.getFields()) {
-            Property annotation = field.getAnnotation(Property.class);
-
-            if (annotation != null) {
-                addProperty(field.getType(), annotation, field.getName(), prefix, collection);
-            }
-        }
-
-    }
-
-    private static <SS> void addMethodProperties( Class<?> klass, String prefix, Collection<AbstractProperty<SS, ?>> collection )
-    {
-        if (klass.getSuperclass() != null) {
-            addMethodProperties(klass.getSuperclass(), prefix, collection);
-        }
-
-        for (Class<?> klass2 : klass.getInterfaces()) {
-            addMethodProperties(klass2, prefix, collection);
-        }
-
-        for (Method method : klass.getDeclaredMethods()) {
-            Property annotation = method.getAnnotation(Property.class);
-
-            if (annotation != null) {
-
-                if (method.getName().startsWith("get")) {
-
-                    String name = method.getName();
-                    name = name.substring(3, 4).toLowerCase() + name.substring(4);
-
-                    addProperty(method.getReturnType(), annotation, name, prefix, collection);
-
-                } else {
-                    System.err.println("Unexpected Property on method : " +
-                        method.getDeclaringClass() + "." + method.getName());
-                }
-            }
-        }
-
-    }
-
-    private static <SS> AbstractProperty<SS, ?> createProperty(
-        Class<?> klass, String access, String key, Property annotation )
-    {
-        AbstractProperty<SS, ?> result = null;
-
-        if (klass == ClassName.class) {
-            try {
-                result = new ClassNameProperty<SS>(annotation.baseClass(), key);
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else {
-            result = createProperty(klass, key);
-        }
-
-        if (result != null) {
-            result.access = access;
-            result.label = annotation.label();
-            result.hint = annotation.hint();
-            result.sortOrder = annotation.sortOrder();
-            result.addAliases(annotation.aliases());
-        }
-
-        if (result instanceof StringProperty) {
-            StringProperty<?> property = (StringProperty<?>) result;
-            property.multiLine(annotation.multiLine());
-        }
-        if (result instanceof RGBAProperty) {
-            RGBAProperty<?> property = (RGBAProperty<?>) result;
-            property.allowNull(annotation.allowNull());
-            property.includeAlpha(annotation.alpha());
-        }
-
-        return result;
-    }
-
-    private static <SS> void addProperty( Class<?> klass, Property annotation, String name, String prefix,
-        Collection<AbstractProperty<SS, ?>> collection )
-    {
-        if (annotation.recurse()) {
-
-            addProperties(klass, prefix + name + ".", collection);
-
-        } else {
-            AbstractProperty<SS, ?> property = createProperty(klass, prefix + name, name, annotation);
-
-            if (property != null) {
-                property.sortOrder = annotation.sortOrder();
-            }
-            if (annotation.aliases().length > 0) {
-                property.addAliases(annotation.aliases());
-            }
-            collection.add(property);
-        }
-
-    }
-
-    private static <SS> AbstractProperty<SS, ?> createProperty( Class<?> klass, String key )
-    {
-        if (klass == int.class || klass == Integer.class) {
-            return new IntegerProperty<SS>(key);
-        }
-        if (klass == double.class || klass == Double.class) {
-            return new DoubleProperty<SS>(key);
-        }
-        if (klass == boolean.class || klass == Boolean.class) {
-            return new BooleanProperty<SS>(key);
-        }
-        if (klass == String.class) {
-            return new StringProperty<SS>(key);
-        }
-        if (klass == File.class) {
-            return new FileProperty<SS>(key);
-        }
-        if (klass == RGBA.class) {
-            return new RGBAProperty<SS>(key);
-        }
-        if (klass == Font.class) {
-            return new FontProperty<SS>(key);
-        }
-        if (klass == Ease.class) {
-            return new EaseProperty<SS>(key);
-        }
-        if (klass == Pose.class) {
-            return new PoseProperty<SS>(key);
-        }
-        if (Enum.class.isAssignableFrom(klass)) {
-
-            @SuppressWarnings("unchecked")
-            AbstractProperty<SS, Enum<?>> result = new EnumProperty<SS, Enum<?>>(key, (Class<Enum<?>>) klass);
-            return result;
-        }
-
-        System.err.println("Unexpected property : " + klass.getName() + "#" + key);
-        return null;
-    }
-
-    public int sortOrder = 0;
 
     /**
      * The human readable label shown in the GUI
@@ -265,14 +79,21 @@ public abstract class AbstractProperty<S, T> implements Comparable<AbstractPrope
         Pattern pattern = Pattern.compile("([A-Z])");
         Matcher matcher = pattern.matcher(key);
         return matcher.replaceAll(" $1").trim();
-        // return key.replaceAll("[A-Z]", " \\1").trim();
     }
 
-    public AbstractProperty( String key )
+    private static String keyFromAccess( String access )
     {
-        this.label = labelFromKey(key);
-        this.key = key;
-        this.access = key;
+        if (access.indexOf('.') >= 0) {
+            return access.substring(access.lastIndexOf('.')+1);
+        }
+        return access;
+    }
+
+    public AbstractProperty( String access )
+    {
+        this.access = access;
+        this.key = keyFromAccess(access);
+        this.label = labelFromKey(this.key);
         this.aliases = new HashSet<String>();
     }
 
@@ -401,17 +222,6 @@ public abstract class AbstractProperty<S, T> implements Comparable<AbstractPrope
         }
     }
 
-    @Override
-    public int compareTo( AbstractProperty<S, ?> other )
-    {
-        if ( other == null) {
-            return -1;
-        }
-        
-        int diff = this.sortOrder - other.sortOrder;
-        return diff == 0 ? this.label.compareTo(other.label) : diff;
-    }
-
     /**
      * A Fluent setter for the label
      * 
@@ -448,4 +258,9 @@ public abstract class AbstractProperty<S, T> implements Comparable<AbstractPrope
         return this;
     }
 
+    public AbstractProperty<S, T> aliases( String... aliases )
+    {
+        addAliases(aliases);
+        return this;
+    }
 }

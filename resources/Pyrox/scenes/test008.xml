@@ -99,6 +99,7 @@
     <actor costume="planeL" x="-360" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="30"/>
     <actor costume="planeR" x="-420" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="30"/>
     <actor costume="gate" x="-600" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="40">
+      <property name="spare" value="0"/>
       <property name="scene" value="test009"/>
     </actor>
     <actor costume="machineEW" x="180" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>

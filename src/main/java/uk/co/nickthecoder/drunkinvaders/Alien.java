@@ -4,12 +4,17 @@
  ******************************************************************************/
 package uk.co.nickthecoder.drunkinvaders;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.animation.Eases;
 import uk.co.nickthecoder.itchy.animation.ScaleAnimation;
 import uk.co.nickthecoder.itchy.extras.Fragment;
-import uk.co.nickthecoder.itchy.property.Property;
+import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.DoubleProperty;
+import uk.co.nickthecoder.itchy.property.IntegerProperty;
 import uk.co.nickthecoder.itchy.role.ExplosionBuilder;
 import uk.co.nickthecoder.itchy.role.TalkBuilder;
 import uk.co.nickthecoder.itchy.util.Tag;
@@ -18,16 +23,28 @@ import uk.co.nickthecoder.itchy.util.Util;
 @Tag(names = { "deadly", "shootable" })
 public class Alien extends Bouncy implements Shootable
 {
+    protected static final List<AbstractProperty<Role, ?>> properties = new ArrayList<AbstractProperty<Role, ?>>();
+
+    static {
+        properties.add(new DoubleProperty<Role>("fireOnceEvery").hint("seconds"));
+        properties.add(new IntegerProperty<Role>("shotsRequired"));
+    }
+    
     public static final String[] SHOOTABLE_LIST = new String[] { "shootable" };
 
-    @Property(label = "Fire Every (s)")
     public double fireOnceEvery = 1.0; // Average duration between bombs in seconds
 
-    @Property(label = "Shots Required")
     public int shotsRequired = 1;
 
     public boolean tock = true;
 
+
+    @Override
+    public List<AbstractProperty<Role, ?>> getProperties()
+    {
+        return properties;
+    }
+    
     @Override
     public void onBirth()
     {

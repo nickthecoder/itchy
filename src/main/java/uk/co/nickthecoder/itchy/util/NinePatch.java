@@ -4,7 +4,6 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.util;
 
-import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.jame.RGBA;
 import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.Surface;
@@ -27,28 +26,22 @@ public class NinePatch extends ImageRenderable
         empty, tile, fill
     };
 
-    @Property(label = "Margin Top")
     public int marginTop;
 
-    @Property(label = "Margin Right")
     public int marginRight;
 
-    @Property(label = "Margin Bottom")
     public int marginBottom;
 
-    @Property(label = "Margin Left")
     public int marginLeft;
 
     /**
      * How should the middle of the destination image be drawn?
      */
-    @Property(label = "Middle Treatment")
     public Middle middle;
 
     /**
      * If {@link #middle} is <code>Middle.fill</code>, then this is the colour used to draw the middle.
      */
-    @Property(label = "Background Colour")
     protected RGBA backgroundColor;
 
     /**

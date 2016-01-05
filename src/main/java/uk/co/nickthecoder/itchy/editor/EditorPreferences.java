@@ -4,24 +4,38 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.editor;
 
-import uk.co.nickthecoder.itchy.property.AbstractProperty;
-import uk.co.nickthecoder.itchy.property.Property;
+import java.util.ArrayList;
+import java.util.List;
 
-public class EditorPreferences
+import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.PropertySubject;
+import uk.co.nickthecoder.itchy.property.StringProperty;
+
+public class EditorPreferences implements PropertySubject<EditorPreferences>
 {
-    @Property(label = "Text Editor")
+    protected static final List<AbstractProperty<EditorPreferences, ?>> properties = new ArrayList<AbstractProperty<EditorPreferences, ?>>();
+
+    static {
+        properties.add(new StringProperty<EditorPreferences>("textEditor"));
+    }
+    
     public String textEditor;
 
     public EditorPreferences()
     {
         Editor.instance.getPreferences().node("editorPreferences")
-            .load(this, AbstractProperty.findAnnotations(this.getClass()));
+            .load(this, this.getProperties());
     }
 
     public void save()
     {
         Editor.instance.getPreferences().node("editorPreferences")
-            .save(this, AbstractProperty.findAnnotations(this.getClass()));
+            .save(this, this.getProperties());
     }
 
+    @Override
+    public List<AbstractProperty<EditorPreferences, ?>> getProperties()
+    {
+        return properties;
+    }
 }

@@ -4,13 +4,15 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.makeup;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.OffsetSurface;
 import uk.co.nickthecoder.itchy.Pose;
 import uk.co.nickthecoder.itchy.SimpleOffsetSurface;
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
-import uk.co.nickthecoder.itchy.property.Property;
+import uk.co.nickthecoder.itchy.property.IntegerProperty;
+import uk.co.nickthecoder.itchy.property.PoseProperty;
 import uk.co.nickthecoder.jame.Surface;
 import uk.co.nickthecoder.jame.Surface.BlendMode;
 
@@ -22,8 +24,13 @@ import uk.co.nickthecoder.jame.Surface.BlendMode;
  */
 public class Textured implements Makeup
 {
-    private static final List<AbstractProperty<Makeup, ?>> properties =
-        AbstractProperty.<Makeup> findAnnotations(Textured.class);
+    protected static final List<AbstractProperty<Makeup, ?>> properties = new ArrayList<AbstractProperty<Makeup, ?>>();
+
+    static {
+        properties.add(new PoseProperty<Makeup>("pose").aliases("poseName"));
+        properties.add(new IntegerProperty<Makeup>("x"));
+        properties.add(new IntegerProperty<Makeup>("y"));
+    }
 
     private int x;
 
@@ -33,7 +40,6 @@ public class Textured implements Makeup
 
     private int seq = 0;
 
-    @Property(label = "X")
     public int getX()
     {
         return this.x;
@@ -45,7 +51,6 @@ public class Textured implements Makeup
         this.x = x;
     }
 
-    @Property(label = "Y")
     public int getY()
     {
         return this.y;
@@ -57,7 +62,6 @@ public class Textured implements Makeup
         this.y = y;
     }
 
-    @Property(label = "Pose", aliases={"poseName"})
     public Pose getPose()
     {
         return this.pose;

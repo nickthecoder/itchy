@@ -71,6 +71,7 @@
     <actor costume="rock" x="-360" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
     <actor costume="rock" x="-420" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
     <actor costume="gate" x="-60" y="780" direction="0.0" heading="0.0" startEvent="default" zOrder="40">
+      <property name="spare" value="0"/>
       <property name="scene" value="test008"/>
     </actor>
     <actor costume="planeL" x="540" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="59"/>

@@ -10,19 +10,23 @@ import java.util.List;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.MessageListener;
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
-import uk.co.nickthecoder.itchy.property.Property;
+import uk.co.nickthecoder.itchy.property.BooleanProperty;
+import uk.co.nickthecoder.itchy.property.IntegerProperty;
 
 public class CompoundAnimation extends AbstractAnimation
 {
-    private static final List<AbstractProperty<Animation, ?>> properties =
-        AbstractProperty.<Animation> findAnnotations(CompoundAnimation.class);
+    protected static final List<AbstractProperty<Animation, ?>> properties = new ArrayList<AbstractProperty<Animation, ?>>();
 
+    static {
+        properties.add( new BooleanProperty<Animation>( "sequence" ) );
+        properties.add( new IntegerProperty<Animation>( "loops" ) );
+        properties.addAll( AbstractAnimation.properties );
+    }
+    
     public List<Animation> children = new ArrayList<Animation>();
 
-    @Property(label = "Sequence?")
     public boolean sequence;
 
-    @Property(label = "Loops")
     public int loops;
 
     private SequenceOrParallel sop;

@@ -4,34 +4,43 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
-import uk.co.nickthecoder.itchy.property.Property;
+import uk.co.nickthecoder.itchy.property.BooleanProperty;
+import uk.co.nickthecoder.itchy.property.ClassNameProperty;
+import uk.co.nickthecoder.itchy.property.IntegerProperty;
 import uk.co.nickthecoder.itchy.property.PropertySubject;
+import uk.co.nickthecoder.itchy.property.StringProperty;
 import uk.co.nickthecoder.itchy.util.ClassName;
 
 public class GameInfo implements PropertySubject<GameInfo>
 {
-    @Property(label = "Title", sortOrder=10)
+    protected static List<AbstractProperty<GameInfo, ?>> properties = new LinkedList<AbstractProperty<GameInfo, ?>>();
+    
+    static {
+        properties.add( new StringProperty<GameInfo>( "title" ));
+        properties.add( new IntegerProperty<GameInfo>( "width" ));
+        properties.add( new IntegerProperty<GameInfo>( "height" ));
+        properties.add( new BooleanProperty<GameInfo>( "resizable" ));
+        properties.add( new StringProperty<GameInfo>( "initialScene" ));
+        properties.add( new ClassNameProperty<GameInfo>( Director.class, "directorClassName" ).aliases( "className" ));
+        properties.add( new StringProperty<GameInfo>( "authors" ).multiLine());        
+    }
+    
     public String title;
 
-    @Property(label = "Width", sortOrder=20)
     public int width;
 
-    @Property(label = "Height", sortOrder=21)
     public int height;
 
-    @Property(label = "Initial Scene", sortOrder=30)
     public String initialScene;
 
-    @Property(label = "Class Name", baseClass = Director.class, aliases = { "className" }, sortOrder=40)
     public ClassName directorClassName;
 
-    @Property(label = "Author(s)", multiLine=true, sortOrder=90)
     public String authors;
     
-    @Property(label = "Resizable")
     public boolean resizable;
     
     public GameInfo()
@@ -48,7 +57,7 @@ public class GameInfo implements PropertySubject<GameInfo>
     @Override
     public List<AbstractProperty<GameInfo, ?>> getProperties()
     {
-        return AbstractProperty.findAnnotations(this.getClass());
+        return properties;
     }
 
     public Director createDirector( Resources resources )

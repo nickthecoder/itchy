@@ -4,28 +4,46 @@
  ******************************************************************************/
 package uk.co.nickthecoder.drunkinvaders;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import uk.co.nickthecoder.itchy.Font;
+import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.TextPose;
-import uk.co.nickthecoder.itchy.property.Property;
+import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.FontProperty;
+import uk.co.nickthecoder.itchy.property.IntegerProperty;
+import uk.co.nickthecoder.itchy.property.RGBAProperty;
 import uk.co.nickthecoder.itchy.role.Button;
 import uk.co.nickthecoder.jame.RGBA;
 
 public class PickLevel extends Button
 {
-    @Property(label = "Level Number")
+    protected static final List<AbstractProperty<Role, ?>> properties = new ArrayList<AbstractProperty<Role, ?>>();
+
+    static {
+        properties.add(new IntegerProperty<Role>("levelNumber"));
+        properties.add(new FontProperty<Role>("font"));
+        properties.add(new IntegerProperty<Role>("fontSize"));
+        properties.add(new RGBAProperty<Role>("fontColor"));
+        properties.add(new RGBAProperty<Role>("shadowColor"));
+    }
+
     public int levelNumber;
 
-    @Property(label = "Font")
     public Font font;
 
-    @Property(label = "Font Size")
     public int fontSize = 22;
 
-    @Property(label = "Colour")
     public RGBA fontColor = new RGBA(255, 255, 255);
 
-    @Property(label = "Shadow Colour")
     public RGBA shadowColor = new RGBA(0, 0, 0);
+
+    @Override
+    public List<AbstractProperty<Role, ?>> getProperties()
+    {
+        return properties;
+    }
 
     @Override
     public void onAttach()
@@ -35,8 +53,8 @@ public class PickLevel extends Button
         }
 
         if (this.font != null) {
-            TextPose shadowPose = new TextPose(String.valueOf(this.levelNumber), this.font,
-                this.fontSize, this.shadowColor);
+            TextPose shadowPose = new TextPose(String.valueOf(this.levelNumber), this.font, this.fontSize,
+                            this.shadowColor);
 
             TextPose textPose = new TextPose(String.valueOf(this.levelNumber), this.font, this.fontSize, this.fontColor);
             getActor().getAppearance().superimpose(shadowPose, 2, 2);

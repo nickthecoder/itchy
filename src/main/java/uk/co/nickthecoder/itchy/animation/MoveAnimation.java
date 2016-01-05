@@ -4,27 +4,31 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.animation;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
-import uk.co.nickthecoder.itchy.property.Property;
+import uk.co.nickthecoder.itchy.property.DoubleProperty;
 
 public class MoveAnimation extends NumericAnimation
 {
-    private static final List<AbstractProperty<Animation, ?>> properties =
-        AbstractProperty.<Animation> findAnnotations(MoveAnimation.class);
+    protected static final List<AbstractProperty<Animation, ?>> properties = new ArrayList<AbstractProperty<Animation, ?>>();
+
+    static {
+        properties.add( new DoubleProperty<Animation>( "dx" ).label( "X Distance") );
+        properties.add( new DoubleProperty<Animation>( "dy" ).label( "Y Distance") );
+        properties.addAll( NumericAnimation.properties );
+    }
 
     /**
      * The total X distance to move
      */
-    @Property(label = "X Distance")
     public double dx;
 
     /**
      * The total Y distance to move.
      */
-    @Property(label = "Y Distance")
     public double dy;
 
     public MoveAnimation()

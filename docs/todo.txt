@@ -1,7 +1,10 @@
 Current Tasks
 =============
 
-Tooltips for Costumes' names in scene editor.
+Get rid of the Property annotation?
+	Save resources, and git diff them to make sure nothing significant has changed.
+	Rename AbstractProperty to Property
+
 
 gridRole.onBirth looks like rubbish. Is it called?
 gridRole.talk looks weird.
@@ -21,6 +24,8 @@ SceneDesigner toolbox isn't moved when the window is maximised (floats in middle
 New Features
 ============
 
+NumberValue to expose the format as a property.
+
 Design Stages/Views graphically - Aim for no code in Director.
 
 Sprite Sheet Pose
@@ -29,7 +34,6 @@ Sprite Sheet Pose
 Code Tidy Up
 ============
 
-Is .actor.event("...") the best way. Replace with just .event("...") ???
 
 Rename one of the Button classes. GuiButton
 

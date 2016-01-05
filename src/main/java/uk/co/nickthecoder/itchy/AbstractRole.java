@@ -5,7 +5,6 @@
 package uk.co.nickthecoder.itchy;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
@@ -22,20 +21,18 @@ import uk.co.nickthecoder.itchy.util.TagMembership;
 
 public abstract class AbstractRole implements Role
 {
-	// TODO Remove annotation based properties for Role (and Director,SceneDirector?)
-	// They are only useful for Java based games, and I want to discourage those!
-    private final static HashMap<Class<?>, List<AbstractProperty<Role, ?>>> allProperties = new HashMap<Class<?>, List<AbstractProperty<Role, ?>>>();
+    protected static final List<AbstractProperty<Role, ?>> properties = new ArrayList<AbstractProperty<Role, ?>>();
 
     private CollisionStrategy collisionStrategy = BruteForceCollisionStrategy.pixelCollision;
 
     private String id;
 
-    public static Set<Role> allByTag( String tag )
+    public static Set<Role> allByTag(String tag)
     {
         return Itchy.getGame().findRoleByTag(tag);
     }
 
-    public static boolean isValidClassName( Resources resources, ClassName className )
+    public static boolean isValidClassName(Resources resources, ClassName className)
     {
         if (resources.isValidScript(className)) {
             return true;
@@ -51,9 +48,8 @@ public abstract class AbstractRole implements Role
         return true;
     }
 
-    public static Role createRole( Resources resources, ClassName className )
-        throws InstantiationException, IllegalAccessException, ScriptException,
-        ClassNotFoundException
+    public static Role createRole(Resources resources, ClassName className) throws InstantiationException,
+                    IllegalAccessException, ScriptException, ClassNotFoundException
     {
         if (resources.isValidScript(className)) {
             return resources.getGame().getScriptManager().createRole(className);
@@ -73,13 +69,19 @@ public abstract class AbstractRole implements Role
     }
 
     @Override
+    public List<AbstractProperty<Role, ?>> getProperties()
+    {
+        return properties;
+    }
+
+    @Override
     public String getId()
     {
         return this.id;
     }
 
     @Override
-    public void setId( String id )
+    public void setId(String id)
     {
         if (id != null) {
             id = id.trim();
@@ -98,22 +100,24 @@ public abstract class AbstractRole implements Role
 
     /**
      * A convenience method for getCollisionStrategy().collisions(this.getActor(), tags )
+     * 
      * @param tags
      * @return The Roles which are colliding with this Role.
      */
-    public Set<Role> collisions( String... tags )
+    public Set<Role> collisions(String... tags)
     {
         return this.collisionStrategy.collisions(this.getActor(), tags);
     }
 
     /**
      * A convenience method similar to "collisions".
+     * 
      * @param tags
      * @return True iff this role is colliding with another Role having the given tag(s).
      */
-    public boolean collided( String... tags )
+    public boolean collided(String... tags)
     {
-        return ! this.collisionStrategy.collisions(this.getActor(), tags).isEmpty();
+        return !this.collisionStrategy.collisions(this.getActor(), tags).isEmpty();
     }
 
     @Override
@@ -126,25 +130,25 @@ public abstract class AbstractRole implements Role
     {
         return getActor().getCostume().getCostumeProperties();
     }
-    
+
     @Override
-    public boolean hasTag( String name )
+    public boolean hasTag(String name)
     {
         return this.tagMembership.hasTag(name);
     }
 
     @Override
-    public void addTag( String tag )
+    public void addTag(String tag)
     {
         this.tagMembership.add(tag);
     }
 
-    public void removeTag( String tag )
+    public void removeTag(String tag)
     {
         this.tagMembership.remove(tag);
     }
 
-    public void tag( String name, boolean value )
+    public void tag(String name, boolean value)
     {
         if (value) {
             this.addTag(name);
@@ -176,7 +180,7 @@ public abstract class AbstractRole implements Role
     {
         // Do nothing
     }
-    
+
     public void onDeath()
     {
         // Do nothing
@@ -188,7 +192,7 @@ public abstract class AbstractRole implements Role
         this.collisionStrategy = Itchy.getGame().getSceneDirector().getCollisionStrategy(this.getActor());
         onBirth();
     }
-    
+
     public void sceneCreated()
     {
         this.onSceneCreated();
@@ -203,48 +207,13 @@ public abstract class AbstractRole implements Role
     }
 
     @Override
-    public List<AbstractProperty<Role, ?>> getProperties()
-    {
-        List<AbstractProperty<Role, ?>> result = allProperties.get(this.getClass());
-        if (result == null) {
-            result = new ArrayList<AbstractProperty<Role, ?>>();
-            allProperties.put(this.getClass(), result);
-            this.addProperties();
-        }
-        return result;
-    }
-
-    @Override
     public CostumeProperties createCostumeProperties()
     {
-    	return new CostumeProperties();
-    }
-    
-    /**
-     * For Itchy Gurus Only.
-     * 
-     * Allows a role to manually add a property, which will appear in the GUI scene editor. Most role's won't need this, instead they will
-     * use a '@Property(label="Whatever")' annotation above the field.
-     * 
-     * Must only be called from within addProperties to ensure that the property won't be added twice.
-     */
-    protected void addProperty( AbstractProperty<Role, ?> property )
-    {
-        allProperties.get(this.getClass()).add(property);
-    }
-
-    /**
-     * For Itchy Gurus Only.
-     * 
-     * Override this method, and then call addProperty for each property you wish to add.
-     */
-    protected void addProperties()
-    {
-        AbstractProperty.addProperties(this.getClass(), allProperties.get(this.getClass()));
+        return new CostumeProperties();
     }
 
     @Override
-    public void attached( Actor actor )
+    public void attached(Actor actor)
     {
         assert ((getActor() == null) || (getActor() == actor));
         this.actor = actor;
@@ -271,43 +240,43 @@ public abstract class AbstractRole implements Role
         return this.actor;
     }
 
-    public void play( String soundName )
+    public void play(String soundName)
     {
         getActor().play(soundName);
     }
 
-    public void event( String eventName, String message, AnimationEvent ae )
+    public void event(String eventName, String message, AnimationEvent ae)
     {
         getActor().event(eventName, message, ae);
     }
 
-    public void event( String eventName, String message )
+    public void event(String eventName, String message)
     {
-        getActor().event(eventName, message );
+        getActor().event(eventName, message);
     }
 
-    public void event( String poseName )
+    public void event(String poseName)
     {
         getActor().event(poseName);
     }
 
-    public void endEvent( String poseName )
+    public void endEvent(String poseName)
     {
         getActor().endEvent(poseName);
     }
 
-    public void deathEvent( String poseName )
+    public void deathEvent(String poseName)
     {
         getActor().deathEvent(poseName);
     }
 
     /**
-     * Called when the Role is first attached to its actor. For most roles, this will be when the actor is first created. You may override
-     * this method to do one-time initialisation. Use this instead of a Constructor, because the role will not be fully formed in the
-     * constructor - it won't be attached to its Actor yet.
+     * Called when the Role is first attached to its actor. For most roles, this will be when the actor is first
+     * created. You may override this method to do one-time initialisation. Use this instead of a Constructor, because
+     * the role will not be fully formed in the constructor - it won't be attached to its Actor yet.
      * 
-     * Consider using onActivated for game logic, and in particular, never use sleep or delay from within onAttach - weird things will
-     * happen!
+     * Consider using onActivated for game logic, and in particular, never use sleep or delay from within onAttach -
+     * weird things will happen!
      */
     public void onAttach()
     {
@@ -318,17 +287,17 @@ public abstract class AbstractRole implements Role
     }
 
     @Override
-    public void onMessage( String message )
+    public void onMessage(String message)
     {
         // do nothing
     }
 
     /**
-     * Called by Actor.tick, once every frame, for every actor in the game. If the actor has an animation, it plays the next frame. Then
-     * calls this.tick which is where the real work is one.
+     * Called by Actor.tick, once every frame, for every actor in the game. If the actor has an animation, it plays the
+     * next frame. Then calls this.tick which is where the real work is one.
      * <p>
-     * This method was created so that Pause could make actors animation stop, as well as the role's tick methods not firing. This is done
-     * by creating a PauseRole, which does nothing in tickHandler.
+     * This method was created so that Pause could make actors animation stop, as well as the role's tick methods not
+     * firing. This is done by creating a PauseRole, which does nothing in tickHandler.
      */
     @Override
     public void animateAndTick()

@@ -4,17 +4,33 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.role;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import uk.co.nickthecoder.itchy.Itchy;
-import uk.co.nickthecoder.itchy.property.Property;
+import uk.co.nickthecoder.itchy.Role;
+import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.StringProperty;
 
 /**
- * When clicked, this button will start a given scene. The scene is given by the sceneName property, which can be editted within the Scene
- * Designer.
+ * When clicked, this button will start a given scene. The scene is given by the sceneName property, which can be
+ * edited within the Scene Designer.
  */
 public class SceneButton extends Button
 {
-    @Property(label = "Scene Name")
+    protected static final List<AbstractProperty<Role, ?>> properties = new ArrayList<AbstractProperty<Role, ?>>();
+
+    static {
+        properties.add(new StringProperty<Role>("sceneName"));
+    }
+
     public String sceneName;
+
+    @Override
+    public List<AbstractProperty<Role, ?>> getProperties()
+    {
+        return properties;
+    }
 
     @Override
     protected void onClick()

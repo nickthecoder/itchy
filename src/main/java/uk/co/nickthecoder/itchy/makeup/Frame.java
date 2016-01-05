@@ -4,6 +4,7 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.makeup;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.Itchy;
@@ -11,13 +12,21 @@ import uk.co.nickthecoder.itchy.OffsetSurface;
 import uk.co.nickthecoder.itchy.Renderable;
 import uk.co.nickthecoder.itchy.SimpleOffsetSurface;
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
-import uk.co.nickthecoder.itchy.property.Property;
+import uk.co.nickthecoder.itchy.property.IntegerProperty;
+import uk.co.nickthecoder.itchy.property.StringProperty;
 import uk.co.nickthecoder.jame.Surface;
 
 public class Frame implements Makeup
 {
-    private static final List<AbstractProperty<Makeup, ?>> properties =
-        AbstractProperty.<Makeup> findAnnotations(Frame.class);
+    protected static final List<AbstractProperty<Makeup, ?>> properties = new ArrayList<AbstractProperty<Makeup, ?>>();
+
+    static {
+        properties.add(new StringProperty<Makeup>("ninePatchName"));
+        properties.add(new IntegerProperty<Makeup>("borderTop"));
+        properties.add(new IntegerProperty<Makeup>("borderRight"));
+        properties.add(new IntegerProperty<Makeup>("borderBottom"));
+        properties.add(new IntegerProperty<Makeup>("borderLeft"));
+    }
 
     private int borderTop;
 
@@ -57,7 +66,6 @@ public class Frame implements Makeup
         return this.seq;
     }
 
-    @Property(label = "Frame Top")
     public int getBorderTop()
     {
         return this.borderTop;
@@ -69,7 +77,6 @@ public class Frame implements Makeup
         this.borderTop = borderTop;
     }
 
-    @Property(label = "Frame Right")
     public int getBorderRight()
     {
         return this.borderRight;
@@ -81,7 +88,6 @@ public class Frame implements Makeup
         this.borderRight = borderRight;
     }
 
-    @Property(label = "Frame Bottom")
     public int getBorderBottom()
     {
         return this.borderBottom;
@@ -93,7 +99,6 @@ public class Frame implements Makeup
         this.borderBottom = borderBottom;
     }
 
-    @Property(label = "Frame Left")
     public int getBorderLeft()
     {
         return this.borderLeft;
@@ -105,7 +110,6 @@ public class Frame implements Makeup
         this.borderLeft = borderLeft;
     }
 
-    @Property(label = "Nine Patch Name")
     public String getNinePatchName()
     {
         return this.ninePatchName;

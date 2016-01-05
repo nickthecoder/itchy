@@ -4,21 +4,28 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.animation;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
-import uk.co.nickthecoder.itchy.property.Property;
+import uk.co.nickthecoder.itchy.property.DoubleProperty;
+import uk.co.nickthecoder.itchy.property.EnumProperty;
 
 public class ForwardsAnimation extends NumericAnimation
 {
-    private static final List<AbstractProperty<Animation, ?>> properties =
-        AbstractProperty.<Animation> findAnnotations(ForwardsAnimation.class);
+    protected static final List<AbstractProperty<Animation, ?>> properties = new ArrayList<AbstractProperty<Animation, ?>>();
 
-    @Property(label = "Forwards")
+    static {
+        properties.add( new DoubleProperty<Animation>( "forwards" ) );
+        properties.add( new DoubleProperty<Animation>( "sidewards" ).aliases( "sideways") );
+        properties.add( new EnumProperty<Animation,Using>( "using", Using.class ) );
+        properties.add( new DoubleProperty<Animation>( "customAngle" ).hint( "degrees" ) );
+        properties.addAll( NumericAnimation.properties );
+    }
+    
     public double forwards;
 
-    @Property(label = "Sidewards", aliases = { "sideways" })
     public double sidewards;
 
     public static enum Using
@@ -28,10 +35,8 @@ public class ForwardsAnimation extends NumericAnimation
     	CUSTOM_ANGLE
     }
     
-    @Property(label = "Using")
     public Using using = Using.HEADING;
     
-    @Property(label = "Custom Angle", hint="degrees")
     public double customAngle = 0;
     
     public ForwardsAnimation()

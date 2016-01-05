@@ -5,22 +5,39 @@
 package uk.co.nickthecoder.itchy;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
-import uk.co.nickthecoder.itchy.property.Property;
+import uk.co.nickthecoder.itchy.property.EnumProperty;
+import uk.co.nickthecoder.itchy.property.FileProperty;
+import uk.co.nickthecoder.itchy.property.IntegerProperty;
+import uk.co.nickthecoder.itchy.property.PropertySubject;
+import uk.co.nickthecoder.itchy.property.RGBAProperty;
+import uk.co.nickthecoder.itchy.property.StringProperty;
 import uk.co.nickthecoder.itchy.util.NinePatch;
+import uk.co.nickthecoder.itchy.util.NinePatch.Middle;
 import uk.co.nickthecoder.jame.JameException;
 import uk.co.nickthecoder.jame.Surface;
 
-public class NinePatchResource extends NamedResource
+public class NinePatchResource extends NamedResource implements PropertySubject<NinePatchResource>
 {
-    public static List<AbstractProperty<NinePatchResource, ?>> properties = AbstractProperty.findAnnotations(NinePatchResource.class);
-
+    protected static final List<AbstractProperty<NinePatchResource, ?>> properties = new ArrayList<AbstractProperty<NinePatchResource, ?>>();
+    
+    static {
+        properties.add( new StringProperty<NinePatchResource>( "name" ));
+        properties.add( new FileProperty<NinePatchResource>( "file" ).aliases( "filename" ) );
+        properties.add( new IntegerProperty<NinePatchResource>( "ninePatch.marginTop" ));
+        properties.add( new IntegerProperty<NinePatchResource>( "ninePatch.marginRight" ));
+        properties.add( new IntegerProperty<NinePatchResource>( "ninePatch.marginBottom" ));
+        properties.add( new IntegerProperty<NinePatchResource>( "ninePatch.marginLeft" ));
+        properties.add( new EnumProperty<NinePatchResource, Middle>( "ninePatch.middle", Middle.class ));
+        properties.add( new RGBAProperty<NinePatchResource>( "ninePatch.backgroundColor" ));
+    }
+    
     public static final int THUMBNAIL_WIDTH = 100;
     public static final int THUMBNAIL_HEIGHT = 60;
 
-    @Property(label = "Nine Patch", recurse = true)
     public NinePatch ninePatch;
 
     private File file;
@@ -34,6 +51,12 @@ public class NinePatchResource extends NamedResource
         this.ninePatch = ninePatch;
     }
 
+    @Override
+    public List<AbstractProperty<NinePatchResource, ?>> getProperties()
+    {
+        return properties;
+    }
+    
     public void setFilename( String filename ) throws JameException
     {
         setFile(new File(filename));
@@ -44,7 +67,6 @@ public class NinePatchResource extends NamedResource
         return this.file.getPath();
     }
 
-    @Property(label = "Filename", aliases = "filename")
     public File getFile()
     {
         return this.file;

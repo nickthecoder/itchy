@@ -4,6 +4,7 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.collision.BruteForceCollisionStrategy;
@@ -14,11 +15,13 @@ import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 
 /**
- * Does nothing, but it is handy to use as a subclass, rather than creating your own empty methods for those methods that you don't care
- * about.
+ * Does nothing, but it is handy to use as a subclass, rather than creating your own empty methods for those methods
+ * that you don't care about.
  */
 public class PlainSceneDirector implements SceneDirector
 {
+    protected static final List<AbstractProperty<SceneDirector, ?>> properties = new ArrayList<AbstractProperty<SceneDirector, ?>>();
+
     @Override
     public void onLoaded()
     {
@@ -35,32 +38,32 @@ public class PlainSceneDirector implements SceneDirector
     }
 
     @Override
-    public void onMouseDown( MouseButtonEvent mbe )
+    public void onMouseDown(MouseButtonEvent mbe)
     {
     }
 
     @Override
-    public void onMouseUp( MouseButtonEvent mbe )
+    public void onMouseUp(MouseButtonEvent mbe)
     {
     }
 
     @Override
-    public void onMouseMove( MouseMotionEvent mme )
+    public void onMouseMove(MouseMotionEvent mme)
     {
     }
 
     @Override
-    public void onKeyDown( KeyboardEvent ke )
+    public void onKeyDown(KeyboardEvent ke)
     {
     }
 
     @Override
-    public void onKeyUp( KeyboardEvent ke )
+    public void onKeyUp(KeyboardEvent ke)
     {
     }
 
     @Override
-    public void onMessage( String message )
+    public void onMessage(String message)
     {
     }
 
@@ -70,17 +73,14 @@ public class PlainSceneDirector implements SceneDirector
     }
 
     @Override
-    public List<AbstractProperty<SceneDirector, ?>> getProperties()
-    {
-        Class<? extends SceneDirector> klass = this.getClass().asSubclass(SceneDirector.class);
-
-        return AbstractProperty.findAnnotations(klass);
-    }
-
-    @Override
-    public CollisionStrategy getCollisionStrategy( Actor actor )
+    public CollisionStrategy getCollisionStrategy(Actor actor)
     {
         return BruteForceCollisionStrategy.pixelCollision;
     }
 
+    @Override
+    public List<AbstractProperty<SceneDirector, ?>> getProperties()
+    {
+        return properties;
+    }
 }

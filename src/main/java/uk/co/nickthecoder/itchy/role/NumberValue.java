@@ -5,12 +5,22 @@
 package uk.co.nickthecoder.itchy.role;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 
-import uk.co.nickthecoder.itchy.property.Property;
+import uk.co.nickthecoder.itchy.Role;
+import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.StringProperty;
 
 public class NumberValue extends TextValue
 {
-    @Property(label = "Format")
+    protected static final List<AbstractProperty<Role, ?>> properties = new ArrayList<AbstractProperty<Role, ?>>();
+
+    static {
+        properties.addAll( TextValue.properties );
+        properties.add(new StringProperty<Role>("formatPattern"));
+    }
+    
     public String formatPattern = "0";
 
     private DecimalFormat format = new DecimalFormat("0");

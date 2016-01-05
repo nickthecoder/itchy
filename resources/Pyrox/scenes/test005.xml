@@ -126,6 +126,7 @@
     <actor costume="balloon" x="360" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
     <actor costume="balloon" x="480" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
     <actor costume="gate" x="600" y="660" direction="0.0" heading="0.0" startEvent="default" zOrder="40">
+      <property name="spare" value="0"/>
       <property name="scene" value="test006"/>
     </actor>
     <actor costume="player" x="420" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="100">

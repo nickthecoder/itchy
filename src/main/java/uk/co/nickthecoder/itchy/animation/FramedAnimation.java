@@ -10,14 +10,17 @@ import java.util.List;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
-import uk.co.nickthecoder.itchy.property.Property;
+import uk.co.nickthecoder.itchy.property.BooleanProperty;
 
 public class FramedAnimation extends AbstractAnimation
 {
-    private static final List<AbstractProperty<Animation, ?>> properties =
-        AbstractProperty.<Animation> findAnnotations(FramedAnimation.class);
+    protected static final List<AbstractProperty<Animation, ?>> properties = new ArrayList<AbstractProperty<Animation, ?>>();
 
-    @Property(label = "Ping Pong")
+    static {
+        properties.add( new BooleanProperty<Animation>( "pingPong" ) );
+        properties.addAll( AbstractAnimation.properties );
+    }
+
     public boolean pingPong;
 
     List<Frame> frames;

@@ -10,20 +10,16 @@ import java.util.HashMap;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
-import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.itchy.util.StringUtils;
 import uk.co.nickthecoder.jame.RGBA;
 
 public class Scene
 {
-    @Property(label = "Show Mouse")
     public boolean showMouse = true;
 
-    @Property(label = "Scene Director", baseClass = SceneDirector.class, sortOrder = 90)
     public ClassName sceneDirectorClassName;
 
-    @Property(label = "Background Colour")
     public RGBA backgroundColor = RGBA.BLACK;
 
     private List<SceneLayer> sceneLayers;

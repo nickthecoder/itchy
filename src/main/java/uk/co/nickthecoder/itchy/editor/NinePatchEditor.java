@@ -326,7 +326,7 @@ public class NinePatchEditor extends SubEditor<NinePatchResource>
     @Override
     protected List<AbstractProperty<NinePatchResource, ?>> getProperties()
     {
-        return NinePatchResource.properties;
+        return this.currentResource.getProperties();
     }
 
 }

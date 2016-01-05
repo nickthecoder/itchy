@@ -4,19 +4,22 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.animation;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
-import uk.co.nickthecoder.itchy.property.Property;
+import uk.co.nickthecoder.itchy.property.IntegerProperty;
 
 public class DelayAnimation extends AbstractAnimation
 {
+    protected static final List<AbstractProperty<Animation, ?>> properties = new ArrayList<AbstractProperty<Animation, ?>>();
 
-    private static final List<AbstractProperty<Animation, ?>> properties =
-        AbstractProperty.<Animation> findAnnotations(DelayAnimation.class);
+    static {
+        properties.add( new IntegerProperty<Animation>( "ticks" ) );
+        properties.addAll( AbstractAnimation.properties );
+    }
 
-    @Property(label = "ticks")
     public int ticks;
 
     protected int currentFrame;

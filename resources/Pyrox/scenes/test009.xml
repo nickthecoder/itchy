@@ -1,4 +1,4 @@
-<scene showMouse="false" role="level.py" background="#0b0000ff">
+<scene showMouse="false" role="level.py" background="#2b0000ff">
   <properties/>
   <layer name="grid">
     <actor costume="wall" x="420" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>

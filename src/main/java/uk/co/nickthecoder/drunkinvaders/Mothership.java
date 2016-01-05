@@ -4,48 +4,66 @@
  ******************************************************************************/
 package uk.co.nickthecoder.drunkinvaders;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Costume;
+import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.extras.Timer;
-import uk.co.nickthecoder.itchy.property.Property;
+import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.DoubleProperty;
+import uk.co.nickthecoder.itchy.property.IntegerProperty;
+import uk.co.nickthecoder.itchy.property.StringProperty;
 import uk.co.nickthecoder.itchy.util.Tag;
 import uk.co.nickthecoder.itchy.util.Util;
 
 @Tag(names = { "deadly", "shootable" })
 public class Mothership extends Alien
 {
+    protected static final List<AbstractProperty<Role, ?>> properties = new ArrayList<AbstractProperty<Role, ?>>();
+
+    static {
+        properties.add(new IntegerProperty<Role>("childrenCount"));
+        properties.add(new StringProperty<Role>("costumeName").label("Childrens' Costume"));
+        properties.add(new DoubleProperty<Role>("birthInterval").hint("seconds"));
+        properties.add(new DoubleProperty<Role>("childFireOnceEvery"));
+        properties.add(new DoubleProperty<Role>("firstBornDelay").hint("seconds"));
+    }
+
     public static final String[] SHOOTABLE_LIST = new String[] { "shootable" };
 
     /**
      * The number of aliens to create
      */
-    @Property(label = "Children")
     public int childrenCount;
 
-    @Property(label = "Children's Costume")
     public String costumeName;
 
     /**
      * The time in seconds between children being born.
      */
-    @Property(label = "Birth Interval (s)")
     public double birthInterval = 1.0;
 
     /**
      * The children's average duration is seconds between bombs
      */
-    @Property(label = "Child Fire Once Every (s)")
     public double childFireOnceEvery = 1;
 
     /**
      * How long in seconds for the first child to be born after the mothership is activated.
      */
-    @Property(label = "First Born Delay (s)")
     public double firstBornDelay = 0;
 
     private Timer firstBornTimer;
 
     private Timer birthTimer;
+
+    @Override
+    public List<AbstractProperty<Role, ?>> getProperties()
+    {
+        return properties;
+    }
 
     @Override
     public void onBirth()

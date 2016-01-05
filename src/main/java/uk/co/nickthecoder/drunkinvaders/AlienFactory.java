@@ -11,31 +11,48 @@ import uk.co.nickthecoder.itchy.AbstractRole;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Appearance;
 import uk.co.nickthecoder.itchy.Costume;
+import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.extras.Timer;
-import uk.co.nickthecoder.itchy.property.Property;
+import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.BooleanProperty;
+import uk.co.nickthecoder.itchy.property.DoubleProperty;
+import uk.co.nickthecoder.itchy.property.IntegerProperty;
+import uk.co.nickthecoder.itchy.property.StringProperty;
 import uk.co.nickthecoder.itchy.util.Util;
 
 public class AlienFactory extends AbstractRole
 {
+    protected static final List<AbstractProperty<Role, ?>> properties = new ArrayList<AbstractProperty<Role, ?>>();
 
-    @Property(label = "Costume")
+    static {
+        properties.add(new StringProperty<Role>("costumeName"));
+        properties.add(new DoubleProperty<Role>("delayPerAlien"));
+        properties.add(new IntegerProperty<Role>("alienCount"));
+        properties.add(new DoubleProperty<Role>("spacing"));
+        properties.add(new DoubleProperty<Role>("fireOnceEvery").hint("seconds"));
+
+        properties.add(new BooleanProperty<Role>("horizontal"));
+    }
+
     public String costumeName;
 
-    @Property(label = "Delay per Alien")
     public double delayPerAlien = 0.500;
 
-    @Property(label = "Aliens")
     public int alienCount = 6;
 
-    @Property(label = "Spacing")
     public double spacing = 80;
 
-    @Property(label = "Fire Once Every (s)")
     public double fireOnceEvery = 1; // The aliens' average number of seconds between bombs
 
     private List<Alien> aliens;
 
     private Timer timer;
+
+    @Override
+    public List<AbstractProperty<Role, ?>> getProperties()
+    {
+        return properties;
+    }
 
     @Override
     public void onBirth()

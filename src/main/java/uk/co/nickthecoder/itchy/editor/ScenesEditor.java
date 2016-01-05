@@ -183,6 +183,6 @@ public class ScenesEditor extends SubEditor<SceneResource>
     @Override
     protected List<AbstractProperty<SceneResource, ?>> getProperties()
     {
-        return SceneResource.properties;
+        return this.currentResource.getProperties();
     }
 }

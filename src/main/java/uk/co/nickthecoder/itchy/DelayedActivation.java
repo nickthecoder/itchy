@@ -14,7 +14,7 @@ public class DelayedActivation extends AbstractRole
 
     private double alpha;
 
-    public DelayedActivation( double seconds, Role role )
+    public DelayedActivation(double seconds, Role role)
     {
         this.delay = Timer.createTimerSeconds(seconds);
         this.role = role;
@@ -35,7 +35,7 @@ public class DelayedActivation extends AbstractRole
             // The normal way that role.birth is called happened to this DelayedActivation,
             // but we want it to be called for the actual role as well...
             this.role.born();
-            
+
             getActor().getAppearance().setAlpha(this.alpha);
             getActor().event(getActor().getStartEvent());
         }

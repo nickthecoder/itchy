@@ -5,16 +5,24 @@
 package uk.co.nickthecoder.itchy;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
-import uk.co.nickthecoder.itchy.property.Property;
+import uk.co.nickthecoder.itchy.property.FileProperty;
+import uk.co.nickthecoder.itchy.property.PropertySubject;
+import uk.co.nickthecoder.itchy.property.StringProperty;
 import uk.co.nickthecoder.jame.JameException;
 import uk.co.nickthecoder.jame.Sound;
 
-public class SoundResource extends NamedResource
+public class SoundResource extends NamedResource implements PropertySubject<SoundResource>
 {
-    public static List<AbstractProperty<SoundResource, ?>> properties = AbstractProperty.findAnnotations(SoundResource.class);
+    protected static final List<AbstractProperty<SoundResource, ?>> properties = new ArrayList<AbstractProperty<SoundResource, ?>>();
+
+    static {
+        properties.add( new StringProperty<SoundResource>( "name" ));
+        properties.add( new FileProperty<SoundResource>( "file" ).aliases( "filename" ) );
+    }
 
     public File file;
 
@@ -27,7 +35,12 @@ public class SoundResource extends NamedResource
         this.file = new File(filename);
     }
 
-    @Property(label = "filename", aliases = "filename")
+    @Override
+    public List<AbstractProperty<SoundResource, ?>> getProperties()
+    {
+        return properties;
+    }
+    
     public File getFile()
     {
         return this.file;

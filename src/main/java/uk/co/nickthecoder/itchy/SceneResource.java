@@ -5,29 +5,40 @@
 package uk.co.nickthecoder.itchy;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
-import uk.co.nickthecoder.itchy.property.Property;
+import uk.co.nickthecoder.itchy.property.BooleanProperty;
+import uk.co.nickthecoder.itchy.property.ClassNameProperty;
+import uk.co.nickthecoder.itchy.property.PropertySubject;
+import uk.co.nickthecoder.itchy.property.RGBAProperty;
+import uk.co.nickthecoder.itchy.property.StringProperty;
 
-public class SceneResource extends Loadable
+public class SceneResource extends Loadable implements PropertySubject<SceneResource>
 {
-    public static List<AbstractProperty<SceneResource, ?>> properties = AbstractProperty.findAnnotations(SceneResource.class);
+    protected static final List<AbstractProperty<SceneResource, ?>> properties = new ArrayList<AbstractProperty<SceneResource, ?>>();
+
+    static {
+        properties.add(new StringProperty<SceneResource>("name"));
+        properties.add(new BooleanProperty<SceneResource>("scene.showMouse"));
+        properties.add(new ClassNameProperty<SceneResource>(SceneDirector.class, "scene.sceneDirectorClassName"));
+        properties.add(new RGBAProperty<SceneResource>("scene.backgroundColor"));
+    }
 
     private Scene scene;
 
-    @Property(label = "Name", sortOrder = -1)
     public String name;
 
     public Resources resources;
 
-    private static File makeFile( String name )
+    private static File makeFile(String name)
     {
         File file = new File("scenes");
         return new File(file, name + ".xml");
     }
 
-    public SceneResource( Resources resources, String name )
+    public SceneResource(Resources resources, String name)
     {
         super(resources.getDirectory(), makeFile(name));
 
@@ -36,12 +47,18 @@ public class SceneResource extends Loadable
         this.name = name;
     }
 
+    @Override
+    public List<AbstractProperty<SceneResource, ?>> getProperties()
+    {
+        return properties;
+    }
+
     public String getName()
     {
         return this.name;
     }
 
-    public boolean canRenameTo( String newName )
+    public boolean canRenameTo(String newName)
     {
         File file = makeFile(newName);
         File resolvedFile = this.resources.resolveFile(file);
@@ -54,7 +71,7 @@ public class SceneResource extends Loadable
         return true;
     }
 
-    public void rename( String newName ) throws Exception
+    public void rename(String newName) throws Exception
     {
         File file = makeFile(newName);
         File resolvedFile = this.resources.resolveFile(file);
@@ -68,7 +85,6 @@ public class SceneResource extends Loadable
         this.name = newName;
     }
 
-    @Property(label = "Scene", recurse = true)
     public Scene getScene() throws Exception
     {
         if (this.scene == null) {
@@ -99,13 +115,13 @@ public class SceneResource extends Loadable
         }
     }
 
-    public void setScene( Scene scene )
+    public void setScene(Scene scene)
     {
         this.scene = scene;
     }
 
     @Override
-    protected void actualSave( File file ) throws Exception
+    protected void actualSave(File file) throws Exception
     {
         if (this.scene == null) {
             this.load();
@@ -120,7 +136,7 @@ public class SceneResource extends Loadable
     }
 
     @Override
-    protected void checkSave( File file ) throws Exception
+    protected void checkSave(File file) throws Exception
     {
         SceneReader sceneReader = new SceneReader(this.resources);
         Scene newScene = sceneReader.load(file.getPath());
@@ -145,8 +161,7 @@ public class SceneResource extends Loadable
             ensure(oldSceneLayer.name, newSceneLayer.name, "Different stage name");
 
             List<SceneActor> newSceneActors = newSceneLayer.getSceneActors();
-            ensure(newSceneActors.size() == oldSceneLayer.getSceneActors().size(),
-                "Different number of actors");
+            ensure(newSceneActors.size() == oldSceneLayer.getSceneActors().size(), "Different number of actors");
 
             int j = 0;
             for (SceneActor oldSceneActor : oldSceneLayer.getSceneActors()) {

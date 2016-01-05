@@ -34,7 +34,7 @@ public class PreferencesEditor
 
         EditorPreferences editorPreferences = this.editor.preferences;
 
-        for (AbstractProperty<EditorPreferences, ?> property : AbstractProperty.findAnnotations(EditorPreferences.class)) {
+        for (AbstractProperty<EditorPreferences, ?> property : editorPreferences.getProperties()) {
             try {
                 Component component = property.createComponent(editorPreferences, true);
                 grid.addRow(property.label, component);

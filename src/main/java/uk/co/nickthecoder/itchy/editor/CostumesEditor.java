@@ -991,6 +991,6 @@ public class CostumesEditor extends SubEditor<CostumeResource>
     @Override
     protected List<AbstractProperty<CostumeResource, ?>> getProperties()
     {
-        return CostumeResource.properties;
+        return this.currentResource.getProperties();
     }
 }

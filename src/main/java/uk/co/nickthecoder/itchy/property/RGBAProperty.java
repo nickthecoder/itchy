@@ -19,7 +19,7 @@ public class RGBAProperty<S> extends AbstractProperty<S, RGBA>
     {
         super(key);
         this.allowNull = false;
-        this.includeAlpha = false;
+        this.includeAlpha = true;
     }
 
     @Override

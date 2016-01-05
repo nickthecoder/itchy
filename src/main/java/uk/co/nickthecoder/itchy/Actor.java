@@ -4,13 +4,16 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.animation.Animation;
 import uk.co.nickthecoder.itchy.animation.CompoundAnimation;
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
-import uk.co.nickthecoder.itchy.property.Property;
+import uk.co.nickthecoder.itchy.property.DoubleProperty;
+import uk.co.nickthecoder.itchy.property.IntegerProperty;
 import uk.co.nickthecoder.itchy.property.PropertySubject;
+import uk.co.nickthecoder.itchy.property.StringProperty;
 import uk.co.nickthecoder.itchy.role.PlainRole;
 import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.jame.RGBA;
@@ -18,6 +21,18 @@ import uk.co.nickthecoder.jame.Surface;
 
 public class Actor implements PropertySubject<Actor>
 {
+    protected static final List<AbstractProperty<Actor, ?>> properties = new ArrayList<AbstractProperty<Actor, ?>>();
+
+    static {
+        properties.add(new StringProperty<Actor>("startEvent"));
+        properties.add(new DoubleProperty<Actor>("heading"));
+        properties.add(new DoubleProperty<Actor>("x"));
+        properties.add(new DoubleProperty<Actor>("y"));
+        properties.add(new DoubleProperty<Actor>("activationDelay"));
+        properties.add(new IntegerProperty<Actor>("zOrder"));
+        
+    }
+    
     private static Pose startPose( Costume costume, String name )
     {
         Pose pose = costume.getPose(name);
@@ -44,8 +59,6 @@ public class Actor implements PropertySubject<Actor>
     private static int nextId = 1;
 
     public final int id;
-
-    private static List<AbstractProperty<Actor, ?>> properties = AbstractProperty.findAnnotations(Actor.class);
 
     Role role;
 
@@ -101,7 +114,6 @@ public class Actor implements PropertySubject<Actor>
         this.setDirection(pose.getDirection());
     }
 
-    @Property(label = "Start Event")
     public String getStartEvent()
     {
         return this.startEvent;
@@ -127,7 +139,6 @@ public class Actor implements PropertySubject<Actor>
         this.setHeading(radians * 180 / Math.PI);
     }
 
-    @Property(label = "Heading")
     public double getHeading()
     {
         return this.heading;
@@ -405,13 +416,11 @@ public class Actor implements PropertySubject<Actor>
         return !(this.dying || this.dead);
     }
 
-    @Property(label = "X")
     public double getX()
     {
         return this.x;
     }
 
-    @Property(label = "Y")
     public double getY()
     {
         return this.y;
@@ -474,7 +483,6 @@ public class Actor implements PropertySubject<Actor>
         this.activationDelay = value;
     }
 
-    @Property(label = "Activation Delay")
     public double getActivationDelay()
     {
         return this.activationDelay;
@@ -728,7 +736,6 @@ public class Actor implements PropertySubject<Actor>
 
     }
 
-    @Property(label = "Z Order")
     public int getZOrder()
     {
         return this.zOrder;

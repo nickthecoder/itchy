@@ -4,20 +4,24 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.animation;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.TextPose;
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
-import uk.co.nickthecoder.itchy.property.Property;
+import uk.co.nickthecoder.itchy.property.RGBAProperty;
 import uk.co.nickthecoder.jame.RGBA;
 
 public class ColorAnimation extends NumericAnimation
 {
-    private static final List<AbstractProperty<Animation, ?>> properties =
-        AbstractProperty.<Animation> findAnnotations(ColorAnimation.class);
+    protected static final List<AbstractProperty<Animation, ?>> properties = new ArrayList<AbstractProperty<Animation, ?>>();
 
-    @Property(label = "Target Color")
+    static {
+        properties.add( new RGBAProperty<Animation>( "targetColor" ) );
+        properties.addAll( NumericAnimation.properties );
+    }
+
     public RGBA targetColor;
 
     private RGBA startColor;

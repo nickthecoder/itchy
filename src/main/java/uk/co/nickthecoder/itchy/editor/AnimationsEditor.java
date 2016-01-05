@@ -49,18 +49,19 @@ public class AnimationsEditor extends SubEditor<AnimationResource>
 
     private PickerButton<Filter> filterPickerButton;
 
-    public AnimationsEditor( Editor editor )
+    public AnimationsEditor(Editor editor)
     {
         super(editor);
     }
 
     @Override
-    public void addHeader( Container page )
+    public void addHeader(Container page)
     {
         HashMap<String, Filter> filterMap = new HashMap<String, Filter>();
-        Filter all = new Filter() {
+        Filter all = new Filter()
+        {
             @Override
-            public boolean accept( AnimationResource ar )
+            public boolean accept(AnimationResource ar)
             {
                 return true;
             }
@@ -72,14 +73,14 @@ public class AnimationsEditor extends SubEditor<AnimationResource>
             }
         };
         filterMap.put(" * All * ", all);
-//        Filter shared = new Filter() {
-//            @Override
-//            public boolean accept( AnimationResource ar )
-//            {
-//                return ar.shared;
-//            }
-//        };
-//        filterMap.put(" * Shared * ", shared);
+        // Filter shared = new Filter() {
+        // @Override
+        // public boolean accept( AnimationResource ar )
+        // {
+        // return ar.shared;
+        // }
+        // };
+        // filterMap.put(" * Shared * ", shared);
         for (String name : this.editor.resources.costumeNames()) {
             CostumeResource cr = this.editor.resources.getCostumeResource(name);
             Filter filter = new CostumeFilter(cr);
@@ -87,7 +88,8 @@ public class AnimationsEditor extends SubEditor<AnimationResource>
         }
 
         this.filterPickerButton = new ThumbnailedPickerButton<Filter>("Filter", all, filterMap);
-        this.filterPickerButton.addChangeListener(new ComponentChangeListener() {
+        this.filterPickerButton.addChangeListener(new ComponentChangeListener()
+        {
             @Override
             public void changed()
             {
@@ -139,7 +141,7 @@ public class AnimationsEditor extends SubEditor<AnimationResource>
         this.treeContainer = new PlainContainer();
         this.createTree();
         this.form.grid.addRow(new NullComponent(), this.treeContainer);
-        
+
         return this.form.container;
     }
 
@@ -149,7 +151,7 @@ public class AnimationsEditor extends SubEditor<AnimationResource>
         this.treeContainer.addChild(this.createAnimationTree(this.currentAnimation, null));
     }
 
-    private AnimationEditor createAnimationEditor( Animation animation )
+    private AnimationEditor createAnimationEditor(Animation animation)
     {
         AnimationEditor result;
 
@@ -159,7 +161,8 @@ public class AnimationsEditor extends SubEditor<AnimationResource>
 
         }
         if (animation instanceof CompoundAnimation) {
-            result = new AnimationEditor(this.editor, animation) {
+            result = new AnimationEditor(this.editor, animation)
+            {
                 @Override
                 public void onOk()
                 {
@@ -169,8 +172,8 @@ public class AnimationsEditor extends SubEditor<AnimationResource>
             };
 
         } else if (animation instanceof FramedAnimation) {
-            result = new FramedAnimationEditor(this.editor,this.getResources(),(FramedAnimation) animation);
-            
+            result = new FramedAnimationEditor(this.editor, this.getResources(), (FramedAnimation) animation);
+
         } else {
             result = new AnimationEditor(this.editor, animation);
         }
@@ -178,7 +181,7 @@ public class AnimationsEditor extends SubEditor<AnimationResource>
         return result;
     }
 
-    private AbstractComponent createAnimationTree( final Animation animation, final CompoundAnimation parent )
+    private AbstractComponent createAnimationTree(final Animation animation, final CompoundAnimation parent)
     {
 
         PlainContainer line = new PlainContainer();
@@ -189,9 +192,11 @@ public class AnimationsEditor extends SubEditor<AnimationResource>
         line.addChild(name);
 
         if ((parent != null) && (parent.children.get(0) != animation)) {
-            Button up = new Button(new ImageComponent(this.editor.getStylesheet().resources.getPose("icon_up").getSurface()));
+            Button up = new Button(new ImageComponent(this.editor.getStylesheet().resources.getPose("icon_up")
+                            .getSurface()));
             up.addStyle("compact");
-            up.addActionListener(new ActionListener() {
+            up.addActionListener(new ActionListener()
+            {
                 @Override
                 public void action()
                 {
@@ -203,10 +208,12 @@ public class AnimationsEditor extends SubEditor<AnimationResource>
         }
 
         if (parent != null) {
-            Button delete = new Button(new ImageComponent(this.editor.getStylesheet().resources.getPose("icon_delete").getSurface()));
+            Button delete = new Button(new ImageComponent(this.editor.getStylesheet().resources.getPose("icon_delete")
+                            .getSurface()));
 
             delete.addStyle("compact");
-            delete.addActionListener(new ActionListener() {
+            delete.addActionListener(new ActionListener()
+            {
                 @Override
                 public void action()
                 {
@@ -217,7 +224,8 @@ public class AnimationsEditor extends SubEditor<AnimationResource>
             line.addChild(delete);
         }
 
-        name.addActionListener(new ActionListener() {
+        name.addActionListener(new ActionListener()
+        {
             @Override
             public void action()
             {
@@ -245,7 +253,8 @@ public class AnimationsEditor extends SubEditor<AnimationResource>
             }
 
             Button add = new Button("Add");
-            add.addActionListener(new ActionListener() {
+            add.addActionListener(new ActionListener()
+            {
                 @Override
                 public void action()
                 {
@@ -270,11 +279,12 @@ public class AnimationsEditor extends SubEditor<AnimationResource>
 
     }
 
-    private void addAnimation( final CompoundAnimation ca )
+    private void addAnimation(final CompoundAnimation ca)
     {
-        AnimationTypePicker picker = new AnimationTypePicker() {
+        AnimationTypePicker picker = new AnimationTypePicker()
+        {
             @Override
-            public void pick( Animation animation )
+            public void pick(Animation animation)
             {
                 Animation child = animation.copy();
                 ca.addAnimation(child);
@@ -286,7 +296,7 @@ public class AnimationsEditor extends SubEditor<AnimationResource>
     }
 
     @Override
-    protected void remove( AnimationResource ar )
+    protected void remove(AnimationResource ar)
     {
         StringList usedBy = new StringList();
 
@@ -338,25 +348,25 @@ public class AnimationsEditor extends SubEditor<AnimationResource>
     @Override
     protected List<AbstractProperty<AnimationResource, ?>> getProperties()
     {
-        return AnimationResource.properties;
+        return this.currentResource.getProperties();
     }
 
     interface Filter extends Thumbnailed
     {
-        boolean accept( AnimationResource pr );
+        boolean accept(AnimationResource pr);
     }
 
     class CostumeFilter implements Filter
     {
         CostumeResource costumeResource;
 
-        CostumeFilter( CostumeResource costumeResource )
+        CostumeFilter(CostumeResource costumeResource)
         {
             this.costumeResource = costumeResource;
         }
 
         @Override
-        public boolean accept( AnimationResource animationResource )
+        public boolean accept(AnimationResource animationResource)
         {
             Costume costume = this.costumeResource.getCostume();
             while (costume != null) {

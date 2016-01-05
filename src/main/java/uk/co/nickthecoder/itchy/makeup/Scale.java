@@ -4,26 +4,30 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.makeup;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.OffsetSurface;
 import uk.co.nickthecoder.itchy.SimpleOffsetSurface;
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
-import uk.co.nickthecoder.itchy.property.Property;
+import uk.co.nickthecoder.itchy.property.DoubleProperty;
 import uk.co.nickthecoder.jame.Surface;
 
 public class Scale implements Makeup
 {
-    private static final List<AbstractProperty<Makeup, ?>> properties =
-        AbstractProperty.<Makeup> findAnnotations(Scale.class);
+    protected static final List<AbstractProperty<Makeup, ?>> properties = new ArrayList<AbstractProperty<Makeup, ?>>();
 
+    static {
+        properties.add(new DoubleProperty<Makeup>("scaleX"));
+        properties.add(new DoubleProperty<Makeup>("scaleY"));
+    }
+    
     private double scaleX = 1;
 
     private double scaleY = 1;
 
     private int seq = 0;
 
-    @Property(label = "Scale X")
     public double getScaleX()
     {
         return this.scaleX;
@@ -35,7 +39,6 @@ public class Scale implements Makeup
         this.scaleX = scaleX;
     }
 
-    @Property(label = "Scale Y")
     public double getScaleY()
     {
         return this.scaleY;

@@ -4,17 +4,27 @@
  ******************************************************************************/
 package uk.co.nickthecoder.drunkinvaders;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import uk.co.nickthecoder.itchy.AbstractRole;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Role;
-import uk.co.nickthecoder.itchy.property.Property;
+import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.DoubleProperty;
+import uk.co.nickthecoder.itchy.property.StringProperty;
 
 public class Bullet extends AbstractRole implements Shootable
 {
-    @Property(label = "Speed")
+    protected static final List<AbstractProperty<Role, ?>> properties = new ArrayList<AbstractProperty<Role, ?>>();
+
+    static {
+        properties.add(new DoubleProperty<Role>("speed"));
+        properties.add(new StringProperty<Role>("targetTagName"));
+    }
+
     public double speed = 5.0;
 
-    @Property(label = "Target Tag")
     public String targetTagName;
 
     public Bullet()
@@ -26,6 +36,12 @@ public class Bullet extends AbstractRole implements Shootable
     {
         super();
         this.targetTagName = tagName;
+    }
+
+    @Override
+    public List<AbstractProperty<Role, ?>> getProperties()
+    {
+        return properties;
     }
 
     @Override

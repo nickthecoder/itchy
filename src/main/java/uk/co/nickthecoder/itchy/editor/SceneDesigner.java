@@ -631,7 +631,7 @@ public class SceneDesigner implements MouseListener, KeyListener {
 
 	private void createScenePage() {
 		this.sceneForm = new SceneDesignerPropertiesForm<SceneResource>(
-				"scene", this, this.sceneResource, SceneResource.properties);
+				"scene", this, this.sceneResource, this.sceneResource.getProperties());
 		this.sceneForm.autoUpdate = true;
 		this.sceneDetailsContainer.clear();
 		this.sceneDetailsContainer.addChild(this.sceneForm.createForm());

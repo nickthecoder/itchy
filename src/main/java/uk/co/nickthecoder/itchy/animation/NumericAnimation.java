@@ -4,16 +4,27 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.animation;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Itchy;
-import uk.co.nickthecoder.itchy.property.Property;
+import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.EaseProperty;
+import uk.co.nickthecoder.itchy.property.IntegerProperty;
 
 public abstract class NumericAnimation extends AbstractAnimation
 {
-    @Property(label = "Ticks")
+    protected static final List<AbstractProperty<Animation, ?>> properties = new ArrayList<AbstractProperty<Animation, ?>>();
+
+    static {
+        properties.add( new IntegerProperty<Animation>( "ticks" ) );
+        properties.add( new EaseProperty<Animation>( "ease" ).aliases("profile") );
+        properties.addAll( AbstractAnimation.properties );
+    }
+
     public int ticks;
 
-    @Property(label = "Ease", aliases = { "profile" })
     public Ease ease;
 
     private double previous;

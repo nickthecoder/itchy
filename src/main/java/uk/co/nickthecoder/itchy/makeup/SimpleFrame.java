@@ -4,20 +4,31 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.makeup;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.OffsetSurface;
 import uk.co.nickthecoder.itchy.SimpleOffsetSurface;
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
-import uk.co.nickthecoder.itchy.property.Property;
+import uk.co.nickthecoder.itchy.property.IntegerProperty;
+import uk.co.nickthecoder.itchy.property.RGBAProperty;
 import uk.co.nickthecoder.jame.RGBA;
 import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.Surface;
 
 public class SimpleFrame implements Makeup
 {
-    private static final List<AbstractProperty<Makeup, ?>> properties =
-        AbstractProperty.<Makeup> findAnnotations(SimpleFrame.class);
+    protected static final List<AbstractProperty<Makeup, ?>> properties = new ArrayList<AbstractProperty<Makeup, ?>>();
+
+    static {
+        properties.add(new RGBAProperty<Makeup>("backgroundColor"));
+        properties.add(new RGBAProperty<Makeup>("borderColor"));
+        properties.add(new IntegerProperty<Makeup>("borderWidth"));
+        properties.add(new IntegerProperty<Makeup>("paddingTop"));
+        properties.add(new IntegerProperty<Makeup>("paddingRight"));
+        properties.add(new IntegerProperty<Makeup>("paddingBottom"));
+        properties.add(new IntegerProperty<Makeup>("paddingLeft"));
+    }
 
     private int paddingTop;
 
@@ -79,7 +90,6 @@ public class SimpleFrame implements Makeup
         return this.seq;
     }
 
-    @Property(label = "Background Colour")
     public RGBA getBackgroundColor()
     {
         return this.backgroundColor;
@@ -91,7 +101,6 @@ public class SimpleFrame implements Makeup
         this.backgroundColor = backgroundColor;
     }
 
-    @Property(label = "Border Colour")
     public RGBA getBorderColor()
     {
         return this.borderColor;
@@ -103,7 +112,6 @@ public class SimpleFrame implements Makeup
         this.borderColor = borderColor;
     }
 
-    @Property(label = "Border Width")
     public int getBorderWidth()
     {
         return this.borderWidth;
@@ -115,7 +123,6 @@ public class SimpleFrame implements Makeup
         this.borderWidth = width;
     }
 
-    @Property(label = "Top Padding")
     public int getBorderTop()
     {
         return this.paddingTop;
@@ -127,7 +134,6 @@ public class SimpleFrame implements Makeup
         this.paddingTop = paddingTop;
     }
 
-    @Property(label = "Right Padding")
     public int getPaddingRight()
     {
         return this.paddingRight;
@@ -139,7 +145,6 @@ public class SimpleFrame implements Makeup
         this.paddingRight = paddingRight;
     }
 
-    @Property(label = "Bottom Padding")
     public int getPaddingBottom()
     {
         return this.paddingBottom;
@@ -151,7 +156,6 @@ public class SimpleFrame implements Makeup
         this.paddingBottom = borderBottom;
     }
 
-    @Property(label = "Left Padding")
     public int getPaddingLeft()
     {
         return this.paddingLeft;

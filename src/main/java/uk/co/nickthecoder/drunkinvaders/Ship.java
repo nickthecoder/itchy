@@ -4,11 +4,15 @@
  ******************************************************************************/
 package uk.co.nickthecoder.drunkinvaders;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Input;
 import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.extras.Fragment;
-import uk.co.nickthecoder.itchy.property.Property;
+import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.DoubleProperty;
 import uk.co.nickthecoder.itchy.role.ExplosionBuilder;
 import uk.co.nickthecoder.itchy.role.OnionSkinBuilder;
 import uk.co.nickthecoder.itchy.role.TalkBuilder;
@@ -17,25 +21,31 @@ import uk.co.nickthecoder.itchy.util.Tag;
 @Tag(names = { "killable" })
 public class Ship extends Bouncy implements Shootable
 {
+
+    protected static final List<AbstractProperty<Role, ?>> properties = new ArrayList<AbstractProperty<Role, ?>>();
+
+    static {
+        properties.add(new DoubleProperty<Role>("ox").label("Planet's Center X"));
+        properties.add(new DoubleProperty<Role>("ox").label("Planet's Center Y"));
+        properties.add(new DoubleProperty<Role>("rotationSpeed"));
+        properties.add(new DoubleProperty<Role>("shieldRechargeRate"));
+        properties.add(new DoubleProperty<Role>("shieldDischargeRate"));
+    }
+
     private static final int TIMER_DURATION = 40;
 
     private static final int SHIELD_POSE_COUNT = 7;
 
     public static final String[] DEADLY_LIST = new String[] { "deadly" };
 
-    @Property(label = "Planet Center X")
     public double ox = 320;
 
-    @Property(label = "Planet Center Y")
     public double oy = -1300;
 
-    @Property(label = "Speed")
     public double rotationSpeed = 0.003;
 
-    @Property(label = "Shield's Recharge Rate")
     public double shieldRechargeRate = 0.001;
 
-    @Property(label = "Shield's Discharge Rate")
     public double shieldDischargeRate = 0.01;
 
     public double radius;
@@ -62,6 +72,12 @@ public class Ship extends Bouncy implements Shootable
     protected Input inputFire;
 
     @Override
+    public List<AbstractProperty<Role, ?>> getProperties()
+    {
+        return properties;
+    }
+
+    @Override
     public void onBirth()
     {
         super.onBirth();
@@ -69,8 +85,8 @@ public class Ship extends Bouncy implements Shootable
         new OnionSkinBuilder(getActor()).alpha(128).create();
         this.mass = 100000000000.0;
 
-        this.radius = Math.sqrt(
-            (getActor().getX() - this.ox) * (getActor().getX() - this.ox) + (getActor().getY() - this.oy) * (getActor().getY() - this.oy));
+        this.radius = Math.sqrt((getActor().getX() - this.ox) * (getActor().getX() - this.ox)
+                        + (getActor().getY() - this.oy) * (getActor().getY() - this.oy));
 
         this.angle = Math.atan2(getActor().getY() - this.oy, getActor().getX() - this.ox);
         getActor().getAppearance().setDirectionRadians(this.angle);
@@ -128,8 +144,7 @@ public class Ship extends Bouncy implements Shootable
 
             if (this.recharge > 0) {
                 this.recharge--;
-                if ((this.recharge == 0) ||
-                    ((this.latestBullet != null) && this.latestBullet.isDead())) {
+                if ((this.recharge == 0) || ((this.latestBullet != null) && this.latestBullet.isDead())) {
                     this.event("charged");
                     this.recharge = 0;
                 }
@@ -155,7 +170,7 @@ public class Ship extends Bouncy implements Shootable
 
     }
 
-    private void turn( double speed )
+    private void turn(double speed)
     {
         double oldX = getActor().getX();
         double oldY = getActor().getY();
@@ -238,35 +253,23 @@ public class Ship extends Bouncy implements Shootable
     }
 
     @Override
-    public void shot( Actor other )
+    public void shot(Actor other)
     {
         if (this.shielded) {
             this.event("deflect");
             return;
         }
 
-        Actor yell = new TalkBuilder(getActor())
-            .eventName("death").style("shout")
-            .offset(0, 60).alignment(0.5, 0).direction(0)
-            .create().getActor();
+        Actor yell = new TalkBuilder(getActor()).eventName("death").style("shout").offset(0, 60).alignment(0.5, 0)
+                        .direction(0).create().getActor();
         yell.setCostume(getActor().getCostume());
         yell.deathEvent("shout");
 
-        new ExplosionBuilder(getActor())
-            .projectiles(20)
-            .speed(0.3, 0.9, 0, 0)
-            .fade(2)
-            .spin(-0.2, 0.2)
-            .eventName("fragment")
-            .create();
+        new ExplosionBuilder(getActor()).projectiles(20).speed(0.3, 0.9, 0, 0).fade(2).spin(-0.2, 0.2)
+                        .eventName("fragment").create();
 
-        new ExplosionBuilder(getActor())
-            .projectiles(40)
-            .offsetForwards(-10, 10).offsetSidewards(-10, 10)
-            .speed(1, 3, 0, 0)
-            .fade(2)
-            .eventName("pixel")
-            .create();
+        new ExplosionBuilder(getActor()).projectiles(40).offsetForwards(-10, 10).offsetSidewards(-10, 10)
+                        .speed(1, 3, 0, 0).fade(2).eventName("pixel").create();
 
         deathEvent("death");
     }

@@ -4,81 +4,98 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import uk.co.nickthecoder.itchy.AbstractRole;
-import uk.co.nickthecoder.itchy.property.Property;
+import uk.co.nickthecoder.itchy.Role;
+import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.DoubleProperty;
+import uk.co.nickthecoder.itchy.property.IntegerProperty;
 import uk.co.nickthecoder.itchy.role.ExplosionBuilder;
 import uk.co.nickthecoder.itchy.role.PlainRole;
 
 public class TestExplosion extends AbstractRole
 {
-    @Property(label = "Test ID")
+    protected static final List<AbstractProperty<Role, ?>> properties = new ArrayList<AbstractProperty<Role, ?>>();
+
+    static {
+        properties.add(new IntegerProperty<Role>("id"));
+        properties.add(new DoubleProperty<Role>("offsetForwards"));
+        properties.add(new DoubleProperty<Role>("offsetSidewards"));
+        properties.add(new DoubleProperty<Role>("offsetX"));
+        properties.add(new DoubleProperty<Role>("offsetY"));
+        properties.add(new DoubleProperty<Role>("distance"));
+        properties.add(new DoubleProperty<Role>("life"));
+        properties.add(new DoubleProperty<Role>("vx"));
+        properties.add(new DoubleProperty<Role>("vy"));
+        properties.add(new DoubleProperty<Role>("speedForwards"));
+        properties.add(new DoubleProperty<Role>("speedSidewards"));
+        properties.add(new DoubleProperty<Role>("gravity"));
+        properties.add(new DoubleProperty<Role>("spinFrom"));
+        properties.add(new DoubleProperty<Role>("spinTo"));
+        properties.add(new DoubleProperty<Role>("fade"));
+        properties.add(new DoubleProperty<Role>("growFactor"));
+        properties.add(new DoubleProperty<Role>("alpha"));
+        properties.add(new IntegerProperty<Role>("projectiles"));
+        properties.add(new DoubleProperty<Role>("projectilesPerTick"));
+        properties.add(new DoubleProperty<Role>("spreadFrom"));
+        properties.add(new DoubleProperty<Role>("spreadTo"));
+        properties.add(new DoubleProperty<Role>("randomSpread"));
+        properties.add(new IntegerProperty<Role>("deltaZ"));
+    }
+
     public int id;
 
-    @Property(label = "Offset Forwards")
     public double offsetForwards;
 
-    @Property(label = "Offset Sidewards")
     public double offsetSidewards;
 
-    @Property(label = "Offset X")
     public double offsetX;
 
-    @Property(label = "Offset Y")
     public double offsetY;
 
-    @Property(label = "distance")
     public double distance;
 
-    @Property(label = "Life")
     public double life;
 
-    @Property(label = "X Velocity")
     public double vx;
 
-    @Property(label = "Y Velocity")
     public double vy;
 
-    @Property(label = "Speed Forwards")
     public double speedForwards;
 
-    @Property(label = "Speed Sideways")
     public double speedSidewards;
 
-    @Property(label = "Gravity")
     public double gravity;
 
-    @Property(label = "Spin From")
     public double spinFrom;
 
-    @Property(label = "Spin To")
     public double spinTo;
 
-    @Property(label = "Fade")
     public double fade;
 
-    @Property(label = "growFactor")
     public double growFactor = 1;
 
-    @Property(label = "alpha")
     public double alpha = 255;
 
-    @Property(label = "projectiles")
     public int projectiles = 10;
 
-    @Property(label = "projectilesPerTick")
     public int projectilesPerTick = -1;
 
-    @Property(label = "Heading From")
     public double spreadFrom = 0;
 
-    @Property(label = "Heading To")
     public double spreadTo = 360;
 
-    @Property(label = "Random Spread")
     public boolean randomSpread = false;
 
-    @Property(label = "Delta Z Order")
     public int deltaZ = 0;
+
+    @Override
+    public List<AbstractProperty<Role, ?>> getProperties()
+    {
+        return properties;
+    }
 
     @Override
     public void tick()
@@ -89,15 +106,13 @@ public class TestExplosion extends AbstractRole
 
     private ExplosionBuilder test0()
     {
-        ExplosionBuilder result = new ExplosionBuilder(getActor())
-            .distance(this.distance).offset(this.offsetX, this.offsetY)
-            .offsetForwards(this.offsetForwards).offsetSidewards(this.offsetSidewards)
-            .speed(this.speedForwards, this.speedSidewards).vx(this.vx).vy(this.vy).gravity(this.gravity)
-            .alpha(this.alpha).life(this.life).fade(this.fade).spin(this.spinFrom, this.spinTo).rotate()
-            .adjustZOrder(this.deltaZ)
-            .pose("bomb")
-            .projectiles(this.projectiles)
-            .spread(this.spreadFrom, this.spreadTo).randomSpread(this.randomSpread);
+        ExplosionBuilder result = new ExplosionBuilder(getActor()).distance(this.distance)
+                        .offset(this.offsetX, this.offsetY).offsetForwards(this.offsetForwards)
+                        .offsetSidewards(this.offsetSidewards).speed(this.speedForwards, this.speedSidewards)
+                        .vx(this.vx).vy(this.vy).gravity(this.gravity).alpha(this.alpha).life(this.life)
+                        .fade(this.fade).spin(this.spinFrom, this.spinTo).rotate().adjustZOrder(this.deltaZ)
+                        .pose("bomb").projectiles(this.projectiles).spread(this.spreadFrom, this.spreadTo)
+                        .randomSpread(this.randomSpread);
 
         if (this.projectilesPerTick != -1) {
             result.projectilesPerTick(this.projectilesPerTick);

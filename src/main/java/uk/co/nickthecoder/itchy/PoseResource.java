@@ -5,26 +5,38 @@
 package uk.co.nickthecoder.itchy;
 
 import java.io.File;
+import java.util.LinkedList;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
-import uk.co.nickthecoder.itchy.property.Property;
+import uk.co.nickthecoder.itchy.property.BooleanProperty;
+import uk.co.nickthecoder.itchy.property.DoubleProperty;
+import uk.co.nickthecoder.itchy.property.FileProperty;
+import uk.co.nickthecoder.itchy.property.PropertySubject;
+import uk.co.nickthecoder.itchy.property.StringProperty;
 import uk.co.nickthecoder.jame.JameException;
 import uk.co.nickthecoder.jame.Surface;
 
-public class PoseResource extends NamedResource implements Thumbnailed
+public class PoseResource extends NamedResource implements Thumbnailed, PropertySubject<PoseResource>
 {
-    public static List<AbstractProperty<PoseResource, ?>> properties = AbstractProperty.findAnnotations(PoseResource.class);
+    protected static List<AbstractProperty<PoseResource, ?>> properties = new LinkedList<AbstractProperty<PoseResource, ?>>();
 
+    static {
+        properties.add( new StringProperty<PoseResource>( "name" ));
+        properties.add( new FileProperty<PoseResource>( "file" ).aliases( "filename" ));
+        properties.add( new BooleanProperty<PoseResource>( "shared" ));
+        properties.add( new DoubleProperty<PoseResource>( "pose.direction" ) );
+        properties.add( new DoubleProperty<PoseResource>( "pose.offsetX" ) );
+        properties.add( new DoubleProperty<PoseResource>( "pose.offsetY" ) );
+    }
+    
     public static final int THUMBNAIL_WIDTH = 50;
     public static final int THUMBNAIL_HEIGHT = 50;
 
     private File file;
 
-    @Property(label = "Pose", recurse = true)
     public ImagePose pose;
 
-    @Property(label = "Shared")
     public boolean shared;
 
     private Surface thumbnail;
@@ -43,7 +55,12 @@ public class PoseResource extends NamedResource implements Thumbnailed
         this.file = null;
     }
 
-    @Property(label = "Filename", sortOrder = -1, aliases = "filename")
+    @Override
+    public List<AbstractProperty<PoseResource, ?>> getProperties()
+    {
+        return properties;
+    }
+    
     public File getFile()
     {
         return this.file;

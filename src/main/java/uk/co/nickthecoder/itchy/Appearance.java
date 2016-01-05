@@ -19,7 +19,6 @@ import uk.co.nickthecoder.itchy.makeup.TransformationData;
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
 import uk.co.nickthecoder.itchy.property.DoubleProperty;
 import uk.co.nickthecoder.itchy.property.FontProperty;
-import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.PropertySubject;
 import uk.co.nickthecoder.itchy.property.RGBAProperty;
 import uk.co.nickthecoder.itchy.property.StringProperty;
@@ -30,23 +29,25 @@ import uk.co.nickthecoder.jame.Surface;
 
 public final class Appearance implements OffsetSurface, PropertySubject<Appearance>
 {
-    private static List<AbstractProperty<Appearance, ?>> normalProperties =
-        AbstractProperty.findAnnotations(Appearance.class);
+    protected static final List<AbstractProperty<Appearance, ?>> properties = new ArrayList<AbstractProperty<Appearance, ?>>();
+    protected static final List<AbstractProperty<Appearance, ?>> textProperties = new ArrayList<AbstractProperty<Appearance, ?>>();
+    protected static final List<AbstractProperty<Appearance, ?>> imageProperties = new ArrayList<AbstractProperty<Appearance, ?>>();
 
-    private static List<AbstractProperty<Appearance, ?>> textProperties = createTextProperties();
+    static {
+        properties.add(new DoubleProperty<Appearance>("scale"));
+        properties.add(new DoubleProperty<Appearance>("direction"));
+        properties.add(new DoubleProperty<Appearance>("alpha"));
+        properties.add(new RGBAProperty<Appearance>("colorize").allowNull(true));
 
-    private static List<AbstractProperty<Appearance, ?>> createTextProperties()
-    {
-        List<AbstractProperty<Appearance, ?>> result = new ArrayList<AbstractProperty<Appearance, ?>>(normalProperties);
-
-        result.add(new FontProperty<Appearance>("pose.font").label("Font"));
-        result.add(new DoubleProperty<Appearance>("pose.fontSize").label("Font Size"));
-        result.add(new StringProperty<Appearance>("pose.text").label("Text"));
-        result.add(new RGBAProperty<Appearance>("pose.color").label("Text Color"));
-        result.add(new DoubleProperty<Appearance>("pose.xAlignment").label("X Alignment"));
-        result.add(new DoubleProperty<Appearance>("pose.yAlignment").label("Y Alignment"));
-
-        return result;
+        textProperties.add(new FontProperty<Appearance>("pose.font"));
+        textProperties.add(new DoubleProperty<Appearance>("pose.fontSize"));
+        textProperties.add(new StringProperty<Appearance>("pose.text"));
+        textProperties.add(new RGBAProperty<Appearance>("pose.color"));
+        textProperties.add(new DoubleProperty<Appearance>("pose.xAlignment"));
+        textProperties.add(new DoubleProperty<Appearance>("pose.yAlignment"));
+        textProperties.addAll( properties );
+        
+        imageProperties.addAll( properties );
     }
 
     private Actor actor;
@@ -58,25 +59,21 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
     /**
      * A scale factor. A value of 1 leaves the appearance unchanged, less than 1 shrinks, greater than 1 scales.
      */
-    @Property(label = "Scale")
     private double scale;
 
     /**
      * The direction the image is pointing towards in degrees.
      */
-    @Property(label = "Direction")
     private double direction;
 
     /**
      * How transparent the image is from 0 (fully transparent) to 255 (fully opaque).
      */
-    @Property(label = "Alpha (0..255)")
     private double alpha;
 
     /**
      * If set, then the image tends to this color (uses the alpha value).
      */
-    @Property(label = "Colourise")
     private RGBA colorize;
 
     /**
@@ -157,6 +154,17 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
         pose.attach(this);
     }
 
+
+    @Override
+    public List<AbstractProperty<Appearance, ?>> getProperties()
+    {
+        if (this.pose instanceof TextPose ) {
+            return textProperties;
+        } else {
+            return imageProperties;
+        }
+    }
+
     void setActor( Actor actor )
     {
         assert this.actor == null : "An Appearance cannot be shared by more than one Actor";
@@ -221,7 +229,6 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
         return this.processedSurface.getOffsetY();
     }
 
-    @Property(label = "Alpha")
     public double getAlpha()
     {
         return this.alpha;
@@ -239,7 +246,6 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
         this.setAlpha(this.alpha + amount);
     }
 
-    @Property(label = "Colourise", allowNull = true)
     public RGBA getColorize()
     {
         return this.colorize;
@@ -252,7 +258,6 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
         invalidateShape();
     }
 
-    @Property(label = "Direction")
     public double getDirection()
     {
         return this.direction;
@@ -287,7 +292,6 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
         this.setDirection((radians * 180 / Math.PI));
     }
 
-    @Property(label = "Scale")
     public double getScale()
     {
         return this.scale;
@@ -428,16 +432,6 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
     public void superimpose( OffsetSurface other, int dx, int dy )
     {
         this.setPose(ImagePose.superimpose(this, other, dx, dy));
-    }
-
-    @Override
-    public List<AbstractProperty<Appearance, ?>> getProperties()
-    {
-        if (this.pose instanceof TextPose) {
-            return textProperties;
-        } else {
-            return normalProperties;
-        }
     }
 
     /**

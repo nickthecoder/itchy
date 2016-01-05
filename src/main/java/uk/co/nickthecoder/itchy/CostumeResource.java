@@ -4,16 +4,27 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
-import uk.co.nickthecoder.itchy.property.Property;
+import uk.co.nickthecoder.itchy.property.BooleanProperty;
+import uk.co.nickthecoder.itchy.property.ClassNameProperty;
+import uk.co.nickthecoder.itchy.property.IntegerProperty;
+import uk.co.nickthecoder.itchy.property.PropertySubject;
 import uk.co.nickthecoder.jame.Surface;
 
-public class CostumeResource extends NamedResource
+public class CostumeResource extends NamedResource implements PropertySubject<CostumeResource>
 {
-    public static List<AbstractProperty<CostumeResource, ?>> properties = AbstractProperty.findAnnotations(CostumeResource.class);
+    protected static final List<AbstractProperty<CostumeResource, ?>> properties = new ArrayList<AbstractProperty<CostumeResource, ?>>();
+
+    static {
+        properties.add( new ClassNameProperty<CostumeResource>( Role.class, "costume.roleClassName" ) );
+        properties.add( new IntegerProperty<CostumeResource>( "costume.defaultZOrder" ) );
+        properties.add( new BooleanProperty<CostumeResource>( "costume.showInDesigner" ) );
+        properties.add( new IntegerProperty<CostumeResource>( "order" ).hint("(within scene designer's toolbox)") );
+    }
 
     private Costume costume;
 
@@ -39,7 +50,12 @@ public class CostumeResource extends NamedResource
         this.order = 10;
     }
 
-    @Property(label = "Costume", recurse = true)
+    @Override
+    public List<AbstractProperty<CostumeResource, ?>> getProperties()
+    {
+        return properties;
+    }
+    
     public Costume getCostume()
     {
         return this.costume;
@@ -50,7 +66,6 @@ public class CostumeResource extends NamedResource
         this.costume = costume;
     }
 
-    @Property(label = "Order" )
     public int getOrder()
     {
         return this.order;

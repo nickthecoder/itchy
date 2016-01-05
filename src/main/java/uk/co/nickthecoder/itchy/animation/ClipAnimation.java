@@ -4,29 +4,33 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.animation;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
-import uk.co.nickthecoder.itchy.property.Property;
+import uk.co.nickthecoder.itchy.property.DoubleProperty;
 import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.Surface;
 
 public class ClipAnimation extends NumericAnimation
 {
-    private static final List<AbstractProperty<Animation, ?>> properties =
-        AbstractProperty.<Animation> findAnnotations(ClipAnimation.class);
+    protected static final List<AbstractProperty<Animation, ?>> properties = new ArrayList<AbstractProperty<Animation, ?>>();
 
-    @Property(label = "Top")
+    static {
+        properties.add( new DoubleProperty<Animation>( "top" ) );
+        properties.add( new DoubleProperty<Animation>( "right" ) );
+        properties.add( new DoubleProperty<Animation>( "bottom" ) );
+        properties.add( new DoubleProperty<Animation>( "left" ) );
+        properties.addAll( NumericAnimation.properties );
+    }
+
     public double top;
 
-    @Property(label = "Right")
     public double right;
 
-    @Property(label = "Bottom")
     public double bottom;
 
-    @Property(label = "Left")
     public double left;
 
     private int startTop;

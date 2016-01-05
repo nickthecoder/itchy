@@ -297,7 +297,7 @@ public class PosesEditor extends SubEditor<PoseResource>
     @Override
     protected List<AbstractProperty<PoseResource, ?>> getProperties()
     {
-        return PoseResource.properties;
+        return this.currentResource.getProperties();
     }
 
     interface Filter extends Thumbnailed

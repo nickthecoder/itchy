@@ -4,20 +4,27 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.makeup;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.OffsetSurface;
 import uk.co.nickthecoder.itchy.SimpleOffsetSurface;
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
-import uk.co.nickthecoder.itchy.property.Property;
+import uk.co.nickthecoder.itchy.property.IntegerProperty;
+import uk.co.nickthecoder.itchy.property.RGBAProperty;
 import uk.co.nickthecoder.jame.RGBA;
 import uk.co.nickthecoder.jame.Surface;
 import uk.co.nickthecoder.jame.Surface.BlendMode;
 
 public class Shadow implements Makeup
 {
-    private static final List<AbstractProperty<Makeup, ?>> properties =
-        AbstractProperty.<Makeup> findAnnotations(Shadow.class);
+    protected static final List<AbstractProperty<Makeup, ?>> properties = new ArrayList<AbstractProperty<Makeup, ?>>();
+
+    static {
+        properties.add(new IntegerProperty<Makeup>("dx"));
+        properties.add(new IntegerProperty<Makeup>("dy"));
+        properties.add(new RGBAProperty<Makeup>("color"));
+    }
 
     private int dx;
 
@@ -27,7 +34,6 @@ public class Shadow implements Makeup
 
     private int seq = 0;
 
-    @Property(label = "X Offset")
     public int getDx()
     {
         return this.dx;
@@ -39,7 +45,6 @@ public class Shadow implements Makeup
         this.dx = dx;
     }
 
-    @Property(label = "Y Offset")
     public int getDy()
     {
         return this.dy;
@@ -51,7 +56,6 @@ public class Shadow implements Makeup
         this.dy = dy;
     }
 
-    @Property(label = "Colour")
     public RGBA getColor()
     {
         return this.color;

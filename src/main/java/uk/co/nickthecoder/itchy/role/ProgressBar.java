@@ -4,34 +4,52 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.role;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import uk.co.nickthecoder.itchy.AbstractRole;
 import uk.co.nickthecoder.itchy.Itchy;
+import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.extras.Timer;
-import uk.co.nickthecoder.itchy.property.Property;
+import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.BooleanProperty;
+import uk.co.nickthecoder.itchy.property.DoubleProperty;
+import uk.co.nickthecoder.itchy.property.StringProperty;
 import uk.co.nickthecoder.itchy.util.BeanHelper;
 import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.Surface;
 
 public class ProgressBar extends AbstractRole
 {
-    @Property(label = "From")
+    protected static final List<AbstractProperty<Role, ?>> properties = new ArrayList<AbstractProperty<Role, ?>>();
+
+    static {
+        properties.add(new DoubleProperty<Role>("from"));
+        properties.add(new DoubleProperty<Role>("to"));
+        properties.add(new StringProperty<Role>("access").hint("from Game object"));
+        properties.add(new DoubleProperty<Role>("updatePeriod"));
+        properties.add(new BooleanProperty<Role>("horizontal"));
+    }
+
     public double from = 0;
 
-    @Property(label = "To")
     public double to = 1;
 
-    @Property(label = "Access", hint = "from Game Bean")
     public String access;
 
-    @Property(label = "Update Period")
     public double updatePeriod = 0.0;
 
-    @Property(label = "Horizontal")
     public boolean horizontal = true;
 
     private Timer timer;
 
     private BeanHelper beanHelper;
+
+    @Override
+    public List<AbstractProperty<Role, ?>> getProperties()
+    {
+        return properties;
+    }
 
     @Override
     public void onBirth()
@@ -64,7 +82,7 @@ public class ProgressBar extends AbstractRole
         }
     }
 
-    public void setValue( double value )
+    public void setValue(double value)
     {
         Surface surface = getActor().getAppearance().getPose().getSurface();
 

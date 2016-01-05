@@ -13,13 +13,16 @@
       <property name="killOnPressed" value="true"/>
     </actor>
     <actor costume="hint" x="420" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="10">
-      <property name="hint" value="Push a rock when it's nearly finished moving, and it looks from its OLD square, not its nearly new square."/>
+      <property name="hint" value="Push a rock when it's nearly finished moving,&#xA;and it looks from its OLD square,&#xA;not its nearly new square."/>
     </actor>
     <actor costume="rock" x="360" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
     <actor costume="gate" x="480" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="40">
-      <property name="scene" value="bug-00002"/>
+      <property name="spare" value="0"/>
+      <property name="scene" value="test"/>
     </actor>
-    <actor costume="player" x="420" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="100"/>
+    <actor costume="player" x="420" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="100">
+      <property name="awake" value="true"/>
+    </actor>
   </layer>
   <layer name="test">
     <actor costume="test" x="360" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="50">

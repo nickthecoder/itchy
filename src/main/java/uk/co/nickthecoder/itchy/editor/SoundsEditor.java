@@ -250,7 +250,7 @@ public class SoundsEditor extends SubEditor<SoundResource>
     @Override
     protected List<AbstractProperty<SoundResource, ?>> getProperties()
     {
-        return SoundResource.properties;
+        return this.currentResource.getProperties();
     }
 
     interface Filter extends Thumbnailed

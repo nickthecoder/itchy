@@ -4,24 +4,30 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.animation;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
-import uk.co.nickthecoder.itchy.property.Property;
+import uk.co.nickthecoder.itchy.property.BooleanProperty;
+import uk.co.nickthecoder.itchy.property.DoubleProperty;
 
 public class TurnAnimation extends NumericAnimation
 {
-    private static final List<AbstractProperty<Animation, ?>> properties =
-        AbstractProperty.<Animation> findAnnotations(TurnAnimation.class);
 
+    protected static final List<AbstractProperty<Animation, ?>> properties = new ArrayList<AbstractProperty<Animation, ?>>();
+
+    static {
+        properties.add( new DoubleProperty<Animation>( "turn" ) );
+        properties.add( new BooleanProperty<Animation>( "headingToo" ) );
+        properties.addAll( NumericAnimation.properties );
+    }
+    
     /**
      * The total turn in degrees
      */
-    @Property(label = "Turn")
     public double turn;
 
-    @Property(label = "Heading Too")
     public boolean headingToo;
 
     public TurnAnimation()

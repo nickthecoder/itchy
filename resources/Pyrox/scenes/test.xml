@@ -156,8 +156,8 @@
     <text text="Bugs" font="Vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="420" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="250">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="1"/>
-        <property name="dy" value="1"/>
         <property name="color" value="#000000ff"/>
+        <property name="dy" value="1"/>
       </makeup>
     </text>
     <actor costume="bee" x="-180" y="720" direction="0.0" heading="0.0" startEvent="default" zOrder="251" alpha="200.0" colorize="#08ff00ff">
@@ -176,6 +176,12 @@
       <property name="scene" value="test010"/>
     </actor>
     <text text="10 Blank" font="Vera" size="22" color="#ffffff" xAlignment="0.0" yAlignment="0.5" x="900" y="480" direction="90.0" heading="0.0" startEvent="default" zOrder="254"/>
+    <actor costume="warp" x="360" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="255">
+      <property name="exitX" value="0"/>
+      <property name="exitY" value="-1"/>
+      <property name="scene" value="test001"/>
+    </actor>
+    <text text="1 Roundedness" font="Vera" size="22" color="#ffffff" xAlignment="0.0" yAlignment="0.5" x="360" y="480" direction="90.0" heading="0.0" startEvent="default" zOrder="256"/>
   </layer>
   <layer name="glass">
     <actor costume="sledge" x="48" y="767" direction="0.0" heading="0.0" startEvent="default" zOrder="90">

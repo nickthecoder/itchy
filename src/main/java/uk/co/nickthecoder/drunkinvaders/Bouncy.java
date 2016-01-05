@@ -4,25 +4,41 @@
  ******************************************************************************/
 package uk.co.nickthecoder.drunkinvaders;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import uk.co.nickthecoder.itchy.AbstractRole;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Role;
-import uk.co.nickthecoder.itchy.property.Property;
+import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.DoubleProperty;
 
 public class Bouncy extends AbstractRole
 {
+    protected static final List<AbstractProperty<Role, ?>> properties = new ArrayList<AbstractProperty<Role, ?>>();
+
+    static {
+        properties.add(new DoubleProperty<Role>("vx"));
+        properties.add(new DoubleProperty<Role>("vy"));
+        properties.add(new DoubleProperty<Role>("mass"));
+    }
+        
     public static final String[] BOUNCY_LIST = new String[] { "bouncy" };
 
-    @Property(label = "Speed X")
     public double vx = 0;
 
-    @Property(label = "Speed Y")
     public double vy = 0;
 
-    @Property(label = "Mass")
     public double mass = 1;
 
     public double radius = 20;
+
+
+    @Override
+    public List<AbstractProperty<Role, ?>> getProperties()
+    {
+        return properties;
+    }
 
     @Override
     public void onAttach()

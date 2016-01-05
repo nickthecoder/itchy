@@ -4,44 +4,47 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.property.AbstractProperty;
-import uk.co.nickthecoder.itchy.property.Property;
+import uk.co.nickthecoder.itchy.property.DoubleProperty;
+import uk.co.nickthecoder.itchy.property.IntegerProperty;
 import uk.co.nickthecoder.itchy.property.PropertySubject;
+import uk.co.nickthecoder.itchy.property.RGBAProperty;
 import uk.co.nickthecoder.jame.RGBA;
 
 public class TextStyle implements PropertySubject<TextStyle>, Cloneable
 {
+    protected static final List<AbstractProperty<TextStyle, ?>> properties = new ArrayList<AbstractProperty<TextStyle, ?>>();
 
-    private static final List<AbstractProperty<TextStyle, ?>> properties =
-        AbstractProperty.<TextStyle> findAnnotations(TextStyle.class);
+    static {
+        properties.add(new IntegerProperty<TextStyle>("fontSize"));
+        properties.add(new RGBAProperty<TextStyle>("color"));
+        properties.add(new DoubleProperty<TextStyle>("xAlignment").hint("0..1"));
+        properties.add(new DoubleProperty<TextStyle>("yAlignment").hint("0..1"));
+        properties.add(new IntegerProperty<TextStyle>("marginTop"));
+        properties.add(new IntegerProperty<TextStyle>("marginRight"));
+        properties.add(new IntegerProperty<TextStyle>("marginBottom"));
+        properties.add(new IntegerProperty<TextStyle>("marginLeft"));
+    }
 
     protected Font font;
 
-    @Property(label = "Font Size", sortOrder=1)
     public int fontSize;
 
-    @Property(label = "Colour", sortOrder=20)
     public RGBA color = RGBA.WHITE;
 
-
-    @Property(label= "Align X", hint="0..1", sortOrder=25)
     public double xAlignment = 0.5;
     
-    @Property(label= "Align Y", hint="0..1", sortOrder=25)
     public double yAlignment = 0.5;
     
-    @Property(label = "Top Margin", sortOrder=30)
     public int marginTop = 0;
 
-    @Property(label = "Right Margin", sortOrder=31)
     public int marginRight = 0;
 
-    @Property(label = "Bottom Margin", sortOrder=32)
     public int marginBottom = 0;
 
-    @Property(label = "Left Margin", sortOrder=33)
     public int marginLeft = 0;
 
     
@@ -56,6 +59,12 @@ public class TextStyle implements PropertySubject<TextStyle>, Cloneable
         this.fontSize = fontSize;
     }
 
+    @Override
+    public List<AbstractProperty<TextStyle, ?>> getProperties()
+    {
+        return properties;
+    }
+    
     public void setFont( Font font )
     {
         this.font = font;
@@ -91,12 +100,6 @@ public class TextStyle implements PropertySubject<TextStyle>, Cloneable
         }
 
         return "TextStyle : " + this.font.getFilename() + "(" + this.fontSize + ")" + this.color.toString();
-    }
-
-    @Override
-    public List<AbstractProperty<TextStyle, ?>> getProperties()
-    {
-        return properties;
     }
 
     @Override

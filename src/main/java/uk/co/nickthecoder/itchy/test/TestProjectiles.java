@@ -4,57 +4,74 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import uk.co.nickthecoder.itchy.AbstractRole;
-import uk.co.nickthecoder.itchy.property.Property;
+import uk.co.nickthecoder.itchy.Role;
+import uk.co.nickthecoder.itchy.property.AbstractProperty;
+import uk.co.nickthecoder.itchy.property.DoubleProperty;
+import uk.co.nickthecoder.itchy.property.IntegerProperty;
 import uk.co.nickthecoder.itchy.role.PlainRole;
 import uk.co.nickthecoder.itchy.role.ProjectileBuilder;
 
 public class TestProjectiles extends AbstractRole
 {
-    @Property(label = "Test ID")
+    protected static final List<AbstractProperty<Role, ?>> properties = new ArrayList<AbstractProperty<Role, ?>>();
+
+    static {
+        properties.add(new IntegerProperty<Role>("id"));
+        properties.add(new DoubleProperty<Role>("offsetForwards"));
+        properties.add(new DoubleProperty<Role>("offsetSidewards"));
+        properties.add(new DoubleProperty<Role>("offsetX"));
+        properties.add(new DoubleProperty<Role>("offsetY"));
+        properties.add(new DoubleProperty<Role>("life"));
+        properties.add(new DoubleProperty<Role>("vx"));
+        properties.add(new DoubleProperty<Role>("vy"));
+        properties.add(new DoubleProperty<Role>("speedForwards"));
+        properties.add(new DoubleProperty<Role>("speedSidewards"));
+        properties.add(new DoubleProperty<Role>("gravity"));
+        properties.add(new DoubleProperty<Role>("spin"));
+        properties.add(new DoubleProperty<Role>("fade"));
+        properties.add(new DoubleProperty<Role>("growFactor"));
+        properties.add(new DoubleProperty<Role>("alpha"));
+    }
+
     public int id;
 
-    @Property(label = "Offset Forwards")
     public double offsetForwards;
 
-    @Property(label = "Offset Sidewards")
     public double offsetSidewards;
 
-    @Property(label = "Offset X")
     public double offsetX;
 
-    @Property(label = "Offset Y")
     public double offsetY;
 
-    @Property(label = "Life")
     public double life;
 
-    @Property(label = "X Velocity")
     public double vx;
 
-    @Property(label = "Y Velocity")
     public double vy;
 
-    @Property(label = "Speed Forwards")
     public double speedForwards;
 
-    @Property(label = "Speed Sideways")
     public double speedSidewards;
 
-    @Property(label = "Gravity")
     public double gravity;
 
-    @Property(label = "Spin")
     public double spin;
 
-    @Property(label = "Fade")
     public double fade;
 
-    @Property(label = "growFactor")
     public double growFactor = 1;
 
-    @Property(label = "alpha")
     public double alpha = 255;
+
+    @Override
+    public List<AbstractProperty<Role, ?>> getProperties()
+    {
+        return properties;
+    }
 
     @Override
     public void tick()
@@ -69,13 +86,10 @@ public class TestProjectiles extends AbstractRole
 
     private ProjectileBuilder test0()
     {
-        return new ProjectileBuilder(getActor())
-            .offset(this.offsetX, this.offsetY)
-            .offsetForwards(this.offsetForwards).offsetSidewards(this.offsetSidewards)
-            .alpha(this.alpha)
-            .life(this.life).vx(this.vx).vy(this.vy)
-            .speed(this.speedForwards, this.speedSidewards).gravity(this.gravity).spin(this.spin)
-            .fade(this.fade).growFactor(this.growFactor).eventName("bomb");
+        return new ProjectileBuilder(getActor()).offset(this.offsetX, this.offsetY).offsetForwards(this.offsetForwards)
+                        .offsetSidewards(this.offsetSidewards).alpha(this.alpha).life(this.life).vx(this.vx)
+                        .vy(this.vy).speed(this.speedForwards, this.speedSidewards).gravity(this.gravity)
+                        .spin(this.spin).fade(this.fade).growFactor(this.growFactor).eventName("bomb");
     }
 
     private ProjectileBuilder test1()
