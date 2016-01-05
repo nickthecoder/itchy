@@ -2,9 +2,6 @@ Current Tasks
 =============
 
 
-gridRole.onBirth looks like rubbish. Is it called?
-gridRole.talk looks weird.
-
 BUGS
 ====
 
@@ -14,6 +11,7 @@ TextArea's background center of nine path is flat colour rather than tiled.
 
 SceneDesigner doesn't use the full width when window is maximised
 SceneDesigner toolbox isn't moved when the window is maximised (floats in middle of the screen).
+
 
 New Features
 ============
@@ -26,8 +24,8 @@ Sprite Sheet Pose
 Code Tidy Up
 ============
 
-
-Rename one of the Button classes. GuiButton
+Pyrox : gridRole.onBirth looks like rubbish. Is it called?
+Pyrox : gridRole.talk looks weird.
 
 Remove one of Costume's duplicates : getProperties, getCostumeProperties.
 
@@ -41,8 +39,6 @@ Talk and TalkProjectile
     Do we need Talk.stop now that we have TalkProjectile? It was originally there, so that it wouldn't follow!
 
     Zoom in/out : Scale all GridRole objects. Care needed if/when creating new objects.
-
-See KeyInput - there is no super modifier, therefore KeyInput should not have it either.
 
 Should TextPose have a TextStyle, rather than individual attributes?
 
@@ -82,7 +78,7 @@ SDL Drop event to add poses by dragging image files.
 SceneDesigner for Text
     Don't have a "Text" tool??
     The thumbnail should have the font-size in the bottom right if its bigger than the thumbnail can display.
-        Using an Editor's font, because we want a plain, consistant font.
+        Using an Editor's font, because we want a plain, consistent font.
     When saving an actor, only save the attributes which differ from the costume's style.
     Have a "Reset to Costume Defaults", and a "Apply to Costume" buttons.
 
@@ -93,10 +89,6 @@ Group Costumes on the SceneDesigner's toolbox, so that similar costumes can be d
         main icon in the scene design toolbox. Similar impl as "costume base"
 
 SceneDesigner : select groups of actors, and move/delete them together.
-
-Need to allow Makeup appear at any stage in the pipeline from the editor. e.g. a Decoration which should not be rotated with the actor.
-Or a clip done at the end.
-    A tick box "Advanced" will reveal a Compound Makeup as a table, with the standard items as well as the current Makeup if its not Null.
 
 Tiled background - instead of a RGBA, specify a Pose, and tile it in a Grid.
     More generic - Create a Background interface, and let it have Properties
@@ -112,24 +104,12 @@ Should Costumes have Makeup? If each jewel is given a Sparkle makeup, does it ma
     Costumes' makeup just like animations - based on events, and can have multiple options picked a random.
 	One Makeup shared by many costumes, so it has its own tab, just like animation. 
 
-Costume editor to have filters on event name and resource type.
-    i.e. show all Animations, or show all "death" events, or show all "death" Animations or show everything.
-    Should the filters stay as you flick from one Costume to another - Yes, probably.
-
-EntryBox is firing change events for arrow keys.
-
-Allow Compound makeups
-Glitter Makeup - sprinkle poses randomly. use getpixel.
-Decoration - Adds a Pose to a given place relative to the actor's x,y.
-Underscore - used for text poses to place a line under the text. Use "_" to create the line,  or Surface.fill.
-    Use it on link text when compound makeup is available.
+GUIView.keyUp does nothing - is this ok?
 
 Later
 =====
 
 Use JBox2D : http://www.jbox2d.org/
-
-GUIView.keyUp does nothing - is this ok?
 
 Joystick input devices.
 

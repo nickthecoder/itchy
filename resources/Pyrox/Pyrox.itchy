@@ -1,5 +1,5 @@
 <resources>
-  <game title="Rox" width="800" height="600" resizable="false" initialScene="menu" directorClassName="director.py" authors="Nick Robinson. nickthecoder@gmail.com&#xA;"/>
+  <game title="Pyrox" width="800" height="600" resizable="false" initialScene="menu" directorClassName="director.py" authors="Nick Robinson. nickthecoder@gmail.com&#xA;"/>
   <fonts>
     <font name="Boycott" filename="fonts/Boycott/Boycott.ttf"/>
     <font name="Comic" filename="fonts/bubblegum-sans/BubblegumSans-Regular.otf"/>
@@ -862,6 +862,7 @@ before we can harvest the honey.</string>
     <scene name="grenades2"/>
     <scene name="grenades3"/>
     <scene name="grenades4"/>
+    <scene name="grenades5"/>
     <scene name="intro"/>
     <scene name="level-template"/>
     <scene name="menu"/>
