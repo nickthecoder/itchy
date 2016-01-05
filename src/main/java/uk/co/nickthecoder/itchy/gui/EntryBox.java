@@ -52,7 +52,7 @@ public class EntryBox<E extends EntryBox<?>> extends ClickableContainer implemen
         this.setType("textBox");
         this.label = new Label(str);
         this.addChild(this.label);
-        this.label.setExpansion(1.0);
+        //this.label.setExpansion(1.0);
 
         this.caret = new PlainContainer();
         this.caret.setType("caret");

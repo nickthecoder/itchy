@@ -488,8 +488,11 @@ public class TextArea extends ClickableContainer implements Layout, KeyListener,
 
         this.caret.setPosition(caretTotalX, caretY, caretWidth, caretHeight);
 
-        this.labelsContainer.setPosition(this.scrollX + this.getPaddingLeft() + this.labelsContainer.getMarginLeft(),
-            this.scrollY + this.getPaddingTop() + this.labelsContainer.getMarginTop(), width, this.labelsContainer.getNaturalHeight());
+        this.labelsContainer.setPosition(
+            this.scrollX + this.getPaddingLeft() + this.labelsContainer.getMarginLeft(),
+            this.scrollY + this.getPaddingTop() + this.labelsContainer.getMarginTop(),
+            width + (this.scrollX < 0 ? this.getPaddingLeft() : 0),
+            this.labelsContainer.getNaturalHeight());
 
     }
 
