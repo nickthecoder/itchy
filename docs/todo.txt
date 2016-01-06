@@ -1,6 +1,19 @@
 Current Tasks
 =============
 
+Game.startEditor is buggy. It calls Director.onStart, but Itchy.getGame() is NOT correct.
+	Need to start the game PROPERLY, without running a scene.
+	Remove Game.startEditor(sceneName), or fix it too.
+		Don't want to edit a scene from within a game, but do want to from a command line.
+
+Complete Sprite sheet stuff
+	On The right : a Notebook with "Preview", and "Position". Both are images in a scrollbox
+	Check cancel works.
+	Click preview to select the offset (just like regular poses)
+
+	Check name isn't duplicated
+	Add the sprites to the resources.
+	Implement remove
 
 BUGS
 ====
@@ -12,10 +25,6 @@ TextArea's background center of nine path is flat colour rather than tiled.
 SceneDesigner doesn't use the full width when window is maximised
 SceneDesigner toolbox isn't moved when the window is maximised (floats in middle of the screen).
 
-Game.startEditor is buggy. It calls Director.onStart, but Itchy.getGame() is NOT correct.
-	Need to start the game PROPERLY, without running a scene.
-	Remove Game.startEditor(sceneName), or fix it too.
-		Don't want to edit a scene from within a game, but do want to from a command line.
 
 New Features
 ============

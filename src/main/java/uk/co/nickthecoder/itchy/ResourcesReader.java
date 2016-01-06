@@ -35,15 +35,14 @@ public class ResourcesReader
      */
     public boolean included;
 
-    public ResourcesReader( Resources resources )
+    public ResourcesReader(Resources resources)
     {
         this.resources = resources;
     }
 
-    public void load( String filename ) throws Exception
+    public void load(String filename) throws Exception
     {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(
-            filename)));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(filename)));
         try {
             XMLTag document = XMLTag.openDocument(reader);
             this.resources.setFile(new File(filename));
@@ -53,8 +52,8 @@ public class ResourcesReader
             reader.close();
         }
     }
-    
-    private void readResources( XMLTag resourcesTag ) throws Exception
+
+    private void readResources(XMLTag resourcesTag) throws Exception
     {
 
         for (Iterator<XMLTag> i = resourcesTag.getTags("game"); i.hasNext();) {
@@ -66,60 +65,66 @@ public class ResourcesReader
             director = new NullDirector();
         }
 
-        director.onMessage( Director.GAME_INFO_LOADED );
-        
+        director.onMessage(Director.GAME_INFO_LOADED);
+
         for (Iterator<XMLTag> i = resourcesTag.getTags("inputs"); i.hasNext();) {
             XMLTag inputsTag = i.next();
             this.readInputs(inputsTag);
         }
-        director.onMessage( Director.INPUTS_LOADED );
+        director.onMessage(Director.INPUTS_LOADED);
 
         for (Iterator<XMLTag> i = resourcesTag.getTags("fonts"); i.hasNext();) {
             XMLTag fontsTag = i.next();
             this.readFonts(fontsTag);
         }
-        director.onMessage( Director.FONTS_LOADED );
+        director.onMessage(Director.FONTS_LOADED);
 
         for (Iterator<XMLTag> i = resourcesTag.getTags("sounds"); i.hasNext();) {
             XMLTag soundsTag = i.next();
             this.readSounds(soundsTag);
         }
-        director.onMessage( Director.SOUNDS_LOADED );
+        director.onMessage(Director.SOUNDS_LOADED);
 
         for (Iterator<XMLTag> i = resourcesTag.getTags("ninePatches"); i.hasNext();) {
             XMLTag eightPatchesTag = i.next();
             this.readNinePatches(eightPatchesTag);
         }
-        director.onMessage( Director.NINE_PATCHES_LOADED );
+        director.onMessage(Director.NINE_PATCHES_LOADED);
+
+        for (Iterator<XMLTag> i = resourcesTag.getTags("spriteSheets"); i.hasNext();) {
+            XMLTag spriteSheetsTag = i.next();
+            this.readSpriteSheets(spriteSheetsTag);
+        }
+        director.onMessage(Director.SPRITE_SHEETS_LOADED);
 
         for (Iterator<XMLTag> i = resourcesTag.getTags("poses"); i.hasNext();) {
             XMLTag posesTag = i.next();
             this.readPoses(posesTag);
         }
-        director.onMessage( Director.POSES_LOADED );
+        director.onMessage(Director.POSES_LOADED);
 
         for (Iterator<XMLTag> i = resourcesTag.getTags("animations"); i.hasNext();) {
             XMLTag animationsTag = i.next();
             this.readAnimations(animationsTag);
         }
-        director.onMessage( Director.ANIMIATIONS_LOADED );
+        director.onMessage(Director.ANIMIATIONS_LOADED);
 
         for (Iterator<XMLTag> i = resourcesTag.getTags("costumes"); i.hasNext();) {
             XMLTag costumesTag = i.next();
             this.readCostumes(costumesTag);
         }
-        director.onMessage( Director.COSTUMES_LOADED );
+        director.onMessage(Director.COSTUMES_LOADED);
 
         for (Iterator<XMLTag> i = resourcesTag.getTags("scenes"); i.hasNext();) {
             XMLTag scenesTag = i.next();
             this.readScenes(scenesTag);
         }
-        director.onMessage( Director.SCENES_LOADED );
+        director.onMessage(Director.SCENES_LOADED);
 
-        director.onMessage( Director.LOADED );
+        director.onMessage(Director.LOADED);
     }
 
-    private void readGame( XMLTag gameTag ) throws Exception
+    private void readGame(XMLTag gameTag) throws Exception
     {
         GameInfo gameInfo = new GameInfo();
         this.readProperties(gameTag, gameInfo);
@@ -127,11 +132,11 @@ public class ResourcesReader
         this.resources.registry.add(gameInfo.directorClassName);
 
         this.resources.game.setDirector(gameInfo.createDirector(this.resources));
-        
+
         Itchy.init(this.resources);
     }
 
-    private void readNinePatches( XMLTag eightPatchesTag ) throws Exception
+    private void readNinePatches(XMLTag eightPatchesTag) throws Exception
     {
         for (Iterator<XMLTag> i = eightPatchesTag.getTags("ninePatch"); i.hasNext();) {
             XMLTag eightPatchTag = i.next();
@@ -150,10 +155,8 @@ public class ResourcesReader
             try {
                 NinePatch.Middle middle = NinePatch.Middle.valueOf(middleStr);
 
-                NinePatch ninePatch = new NinePatch(surface, marginTop, marginRight, marginBottom,
-                    marginLeft, middle);
-                NinePatchResource resource = new NinePatchResource(this.resources, name, filename,
-                    ninePatch);
+                NinePatch ninePatch = new NinePatch(surface, marginTop, marginRight, marginBottom, marginLeft, middle);
+                NinePatchResource resource = new NinePatchResource(this.resources, name, filename, ninePatch);
                 this.resources.addNinePatch(resource);
 
             } catch (IllegalArgumentException e) {
@@ -164,7 +167,29 @@ public class ResourcesReader
 
     }
 
-    private void readPoses( XMLTag posesTag ) throws Exception
+    private void readSpriteSheets(XMLTag spriteSheetsTag) throws Exception
+    {
+        for (Iterator<XMLTag> i = spriteSheetsTag.getTags("spriteSheet"); i.hasNext();) {
+            XMLTag spriteSheetTag = i.next();
+
+            String name = spriteSheetTag.getAttribute("name");
+            SpriteSheet spriteSheet = new SpriteSheet(this.resources, name);
+
+            this.readProperties(spriteSheetTag, spriteSheet);
+            
+            for (Iterator<XMLTag> j = spriteSheetTag.getTags("sprite"); j.hasNext();) {
+                XMLTag spriteTag = j.next();
+                String spriteName = spriteTag.getAttribute("name");
+                Sprite sprite = new Sprite(spriteSheet, spriteName);
+                this.readProperties(spriteTag, sprite);
+                spriteSheet.addSprite(sprite);
+            }
+            this.resources.addSpriteSheet(spriteSheet);
+        }
+
+    }
+
+    private void readPoses(XMLTag posesTag) throws Exception
     {
         for (Iterator<XMLTag> i = posesTag.getTags("pose"); i.hasNext();) {
             XMLTag poseTag = i.next();
@@ -172,7 +197,7 @@ public class ResourcesReader
             String name = poseTag.getAttribute("name");
             String filename = poseTag.getAttribute("filename");
 
-            PoseResource resource = new PoseResource(this.resources, name, filename);
+            PoseResource resource = new FilePoseResource(this.resources, name, filename);
             ImagePose pose = resource.pose;
             this.resources.addPose(resource);
             pose.setDirection(poseTag.getOptionalDoubleAttribute("direction", 0));
@@ -187,7 +212,7 @@ public class ResourcesReader
 
     }
 
-    private void readSounds( XMLTag soundsTag ) throws Exception
+    private void readSounds(XMLTag soundsTag) throws Exception
     {
         for (Iterator<XMLTag> i = soundsTag.getTags("sound"); i.hasNext();) {
             XMLTag soundTag = i.next();
@@ -205,7 +230,7 @@ public class ResourcesReader
 
     }
 
-    private void readAnimations( XMLTag animationsTag ) throws XMLException
+    private void readAnimations(XMLTag animationsTag) throws XMLException
     {
         for (Iterator<XMLTag> j = animationsTag.getTags("animation"); j.hasNext();) {
             XMLTag animationTag = j.next();
@@ -217,8 +242,7 @@ public class ResourcesReader
 
             // But only one animation can be named
             if (dummyAnimation.children.size() != 1) {
-                throw new XMLException(
-                    "animation tag requires exactly one child");
+                throw new XMLException("animation tag requires exactly one child");
             }
 
             AnimationResource ar = new AnimationResource(this.resources, itemName, dummyAnimation.children.get(0));
@@ -226,7 +250,7 @@ public class ResourcesReader
         }
     }
 
-    private void readCostumes( XMLTag costumesTag ) throws Exception
+    private void readCostumes(XMLTag costumesTag) throws Exception
     {
         for (Iterator<XMLTag> i = costumesTag.getTags("costume"); i.hasNext();) {
             XMLTag costumeTag = i.next();
@@ -238,12 +262,13 @@ public class ResourcesReader
             int order = costumeTag.getOptionalIntAttribute("order", 0);
             costume.defaultZOrder = costumeTag.getOptionalIntAttribute("defaultZOrder", 0);
             costume.showInDesigner = costumesTag.getOptionalBooleanAttribute("showInDesigner", true);
-            
+
             String extendsName = costumeTag.getOptionalAttribute("extends", null);
             if (extendsName != null) {
                 Costume base = this.resources.getCostume(extendsName);
                 if (base == null) {
-                    throw new XMLException("Failed to find base costume : " + extendsName + " for costume : " + costumeName);
+                    throw new XMLException("Failed to find base costume : " + extendsName + " for costume : "
+                                    + costumeName);
                 }
                 costume.setExtendedFrom(base);
 
@@ -314,18 +339,13 @@ public class ResourcesReader
                 TextStyle textStyle = new TextStyle(fontResource.font, 14);
                 this.readProperties(fontTag, textStyle);
                 /*
-                int fontSize = stringTag.getOptionalIntAttribute("fontSize", 14);
-                TextStyle textStyle = new TextStyle( fontResource, fontSize );
-                
-                RGBA color = RGBA.WHITE;
-                String colorText = stringTag.getOptionalAttribute("color", "#ffffffff");
-                try {
-                    color = RGBA.parse( colorText );
-                } catch (Exception e) {
-                    System.err.println( "Ignored badly formed color : " + colorText );
-                }
-                textStyle.color = color;
-                */
+                 * int fontSize = stringTag.getOptionalIntAttribute("fontSize", 14); TextStyle textStyle = new
+                 * TextStyle( fontResource, fontSize );
+                 * 
+                 * RGBA color = RGBA.WHITE; String colorText = stringTag.getOptionalAttribute("color", "#ffffffff"); try
+                 * { color = RGBA.parse( colorText ); } catch (Exception e) { System.err.println(
+                 * "Ignored badly formed color : " + colorText ); } textStyle.color = color;
+                 */
                 costume.addTextStyle(itemName, textStyle);
             }
 
@@ -335,11 +355,9 @@ public class ResourcesReader
                 String itemName = animationTag.getAttribute("name");
                 String animationName = animationTag.getAttribute("animation");
 
-                AnimationResource animationResource = this.resources
-                    .getAnimationResource(animationName);
+                AnimationResource animationResource = this.resources.getAnimationResource(animationName);
                 if (animationResource == null) {
-                    throw new XMLException("Animation : " + animationName +
-                        " not found for costume : " + costumeName);
+                    throw new XMLException("Animation : " + animationName + " not found for costume : " + costumeName);
                 }
 
                 costume.addAnimation(itemName, animationResource);
@@ -351,12 +369,12 @@ public class ResourcesReader
                 String itemName = companionTag.getAttribute("name");
                 String companionName = companionTag.getAttribute("companion");
 
-                List<String> companionNames = costume.companionStringChoices.get( itemName );
+                List<String> companionNames = costume.companionStringChoices.get(itemName);
                 if (companionNames == null) {
                     companionNames = new ArrayList<String>();
-                    costume.companionStringChoices.put( itemName,companionNames );
+                    costume.companionStringChoices.put(itemName, companionNames);
                 }
-                companionNames.add( companionName );
+                companionNames.add(companionName);
                 // Note, once all costumes have been loaded, costume.costumeStringChoices is
                 // used to build the actual map of CostumeResouuces.
             }
@@ -369,29 +387,28 @@ public class ResourcesReader
 
         for (String costumeName : resources.costumeNames()) {
             Costume costume = resources.getCostume(costumeName);
-            for ( String key : costume.companionStringChoices.keySet()) {
-                List<String> costumeNames = costume.companionStringChoices.get( key );
-                for ( String companionName : costumeNames ) {
-                    CostumeResource costumeResource = resources.getCostumeResource( companionName );
-                    if ( costumeResource == null) {
+            for (String key : costume.companionStringChoices.keySet()) {
+                List<String> costumeNames = costume.companionStringChoices.get(key);
+                for (String companionName : costumeNames) {
+                    CostumeResource costumeResource = resources.getCostumeResource(companionName);
+                    if (costumeResource == null) {
                         // TODO How should this be handled?
-                        System.err.println( "Companion costume not found : " + companionName );
+                        System.err.println("Companion costume not found : " + companionName);
                     } else {
                         costume.addCompanion(key, costumeResource);
                     }
                 }
             }
         }
-        
+
     }
 
-    private void readAnimation( XMLTag tag, Animation animation ) throws XMLException
+    private void readAnimation(XMLTag tag, Animation animation) throws XMLException
     {
         animation.setFinishedMessage(tag.getOptionalAttribute("finishedMessage", null));
     }
 
-    private void readCompoundAnimation( XMLTag parentTag, CompoundAnimation animation )
-        throws XMLException
+    private void readCompoundAnimation(XMLTag parentTag, CompoundAnimation animation) throws XMLException
     {
         readAnimation(parentTag, animation);
 
@@ -414,8 +431,7 @@ public class ResourcesReader
         }
     }
 
-    public Animation createAnimation( String tagName )
-        throws XMLException
+    public Animation createAnimation(String tagName) throws XMLException
     {
         if (tagName == "compound") {
             return new CompoundAnimation(true);
@@ -426,15 +442,14 @@ public class ResourcesReader
         }
         return animation;
     }
-    
-    private <S extends PropertySubject<S>> void readProperties( XMLTag tag, S subject )
-        throws XMLException
+
+    private <S extends PropertySubject<S>> void readProperties(XMLTag tag, S subject) throws XMLException
     {
-    	readProperties( tag, subject, subject.getProperties() );
+        readProperties(tag, subject, subject.getProperties());
     }
-    
-	private <S extends PropertySubject<S>> void readProperties( XMLTag tag, S subject, List<Property<S, ?>> properties )
-        throws XMLException
+
+    private <S extends PropertySubject<S>> void readProperties(XMLTag tag, S subject, List<Property<S, ?>> properties)
+                    throws XMLException
     {
 
         for (Property<S, ?> property : subject.getProperties()) {
@@ -452,16 +467,14 @@ public class ResourcesReader
                     property.setValueByString(subject, value);
                 } catch (Exception e) {
                     e.printStackTrace();
-                    throw new XMLException("Failed to parse property : '" + property.key +
-                        "'. value : '" + value + "'");
+                    throw new XMLException("Failed to parse property : '" + property.key + "'. value : '" + value + "'");
                 }
             }
         }
 
     }
 
-    private void readFramedAnimation( XMLTag parentTag, FramedAnimation animation )
-        throws XMLException
+    private void readFramedAnimation(XMLTag parentTag, FramedAnimation animation) throws XMLException
     {
         readAnimation(parentTag, animation);
 
@@ -484,7 +497,7 @@ public class ResourcesReader
 
     }
 
-    private void readFonts( XMLTag fontsTag ) throws Exception
+    private void readFonts(XMLTag fontsTag) throws Exception
     {
         for (Iterator<XMLTag> i = fontsTag.getTags("font"); i.hasNext();) {
             XMLTag fontTag = i.next();
@@ -498,7 +511,7 @@ public class ResourcesReader
 
     }
 
-    private void readScenes( XMLTag scenesTag ) throws Exception
+    private void readScenes(XMLTag scenesTag) throws Exception
     {
         for (Iterator<XMLTag> i = scenesTag.getTags("scene"); i.hasNext();) {
             XMLTag sceneTag = i.next();
@@ -510,7 +523,7 @@ public class ResourcesReader
         }
     }
 
-    private void readInputs( XMLTag inputsTag ) throws Exception
+    private void readInputs(XMLTag inputsTag) throws Exception
     {
         for (Iterator<XMLTag> i = inputsTag.getTags("input"); i.hasNext();) {
             XMLTag inputTag = i.next();

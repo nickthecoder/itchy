@@ -10,7 +10,9 @@ import java.util.Random;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Costume;
+import uk.co.nickthecoder.itchy.DynamicPoseResource;
 import uk.co.nickthecoder.itchy.ImagePose;
+import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Pose;
 import uk.co.nickthecoder.itchy.PoseResource;
 import uk.co.nickthecoder.jame.Surface;
@@ -89,8 +91,8 @@ public class Fragment
         if (costume.getPose(destPose) != null) {
             return;
         }
-
-        Pose pose = costume.getPose(srcPose);
+        PoseResource poseResource = costume.getPoseResource(srcPose);
+        Pose pose = poseResource.pose;
         this.source = pose.getSurface();
 
         this.pieces = new Piece[this.pieceCount];
@@ -122,7 +124,8 @@ public class Fragment
                 pose.getOffsetY());
 
             newPose.setDirection(pose.getDirection());
-            costume.addPose(destPose, new PoseResource(newPose));
+            String name = poseResource.getName() + "-fragment-" + i;
+            costume.addPose(destPose, new DynamicPoseResource(Itchy.getGame().resources, name, newPose));
         }
     }
 

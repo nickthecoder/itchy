@@ -51,9 +51,10 @@ public class ResourcesWriter extends XMLWriter
         this.beginTag("resources");
 
         this.writeGame();
-        this.writeFonts();
-        this.writeNinePatches();
+        this.writeSpriteSheets();
         this.writePoses();
+        this.writeNinePatches();
+        this.writeFonts();
         this.writeSounds();
         this.writeAnimations();
         this.writeCostumes();
@@ -113,26 +114,48 @@ public class ResourcesWriter extends XMLWriter
         this.endTag("ninePatches");
     }
 
+    private void writeSpriteSheets() throws XMLException
+    {
+        this.beginTag("spriteSheets");
+
+        for (String name : this.resources.spriteSheetNames()) {
+            SpriteSheet spriteSheet = this.resources.getSpriteSheet(name);
+            this.beginTag("spriteSheet");
+            this.writeProperties(spriteSheet);
+
+            for ( Sprite sprite: spriteSheet.getSprites() ) {
+                this.beginTag( "sprite" );
+                this.writeProperties(sprite);
+                this.endTag( "sprite" );
+            }
+            
+            this.endTag("spriteSheet");
+        }
+
+        this.endTag("spriteSheets");
+    }
     private void writePoses() throws XMLException
     {
         this.beginTag("poses");
 
         for (String name : this.resources.poseNames()) {
             PoseResource poseResource = this.resources.getPoseResource(name);
-
-            this.beginTag("pose");
-            this.attribute("name", name);
-            this.attribute("filename", poseResource.getFilename());
-            if (poseResource.pose.getDirection() != 0) {
-                this.attribute("direction", poseResource.pose.getDirection());
+            if (poseResource instanceof FilePoseResource) {
+                FilePoseResource filePoseResource = (FilePoseResource) poseResource;
+                this.beginTag("pose");
+                this.attribute("name", name);
+                this.attribute("filename", filePoseResource.getFilename());
+                if (filePoseResource.pose.getDirection() != 0) {
+                    this.attribute("direction", filePoseResource.pose.getDirection());
+                }
+                if (filePoseResource.pose.getOffsetX() != filePoseResource.pose.getSurface().getWidth() / 2) {
+                    this.attribute("offsetX", filePoseResource.pose.getOffsetX());
+                }
+                if (filePoseResource.pose.getOffsetY() != filePoseResource.pose.getSurface().getHeight() / 2) {
+                    this.attribute("offsetY", filePoseResource.pose.getOffsetY());
+                }
+                this.endTag("pose");
             }
-            if (poseResource.pose.getOffsetX() != poseResource.pose.getSurface().getWidth() / 2) {
-                this.attribute("offsetX", poseResource.pose.getOffsetX());
-            }
-            if (poseResource.pose.getOffsetY() != poseResource.pose.getSurface().getHeight() / 2) {
-                this.attribute("offsetY", poseResource.pose.getOffsetY());
-            }
-            this.endTag("pose");
         }
 
         this.endTag("poses");

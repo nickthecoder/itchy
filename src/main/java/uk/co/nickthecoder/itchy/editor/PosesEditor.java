@@ -11,6 +11,7 @@ import java.util.List;
 
 import uk.co.nickthecoder.itchy.Costume;
 import uk.co.nickthecoder.itchy.CostumeResource;
+import uk.co.nickthecoder.itchy.FilePoseResource;
 import uk.co.nickthecoder.itchy.ImagePose;
 import uk.co.nickthecoder.itchy.PoseResource;
 import uk.co.nickthecoder.itchy.Thumbnailed;
@@ -44,7 +45,7 @@ import uk.co.nickthecoder.jame.JameException;
 import uk.co.nickthecoder.jame.Surface;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 
-public class PosesEditor extends SubEditor<PoseResource>
+public class PosesEditor extends SubEditor<FilePoseResource>
 {
     private PickerButton<Filter> filterPickerButton;
 
@@ -228,7 +229,7 @@ public class PosesEditor extends SubEditor<PoseResource>
     }
 
     @Override
-    protected void remove( PoseResource poseResource )
+    protected void remove( FilePoseResource poseResource )
     {
         StringList usedBy = new StringList();
 
@@ -285,7 +286,7 @@ public class PosesEditor extends SubEditor<PoseResource>
             String name = Util.nameFromFilename(filename);
             try {
                 this.openDialog.hide();
-                this.edit(new PoseResource(this.editor.resources, name, filename), true);
+                this.edit(new FilePoseResource(this.editor.resources, name, filename), true);
 
             } catch (JameException e) {
                 this.openDialog.setMessage(e.getMessage());
@@ -295,7 +296,7 @@ public class PosesEditor extends SubEditor<PoseResource>
     }
 
     @Override
-    protected List<Property<PoseResource, ?>> getProperties()
+    protected List<Property<FilePoseResource, ?>> getProperties()
     {
         return this.currentResource.getProperties();
     }

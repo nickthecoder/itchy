@@ -1,9 +1,14 @@
 <resources>
-  <game directorClassName="director.py" height="600" initialScene="start" title="Cover of Darkness" width="800"/>
-  <fonts>
-    <font name="Vera" filename="fonts/Vera/Vera.ttf"/>
-  </fonts>
-  <ninePatches/>
+  <game title="Cover of Darkness" width="800" height="600" resizable="false" initialScene="start" directorClassName="director.py"/>
+  <spriteSheets>
+    <spriteSheet name="black" file="images/black.png">
+      <sprite name="blackie" x="0" y="0" width="30" height="30" direction="0.0" offsetX="0" offsetY="0"/>
+    </spriteSheet>
+    <spriteSheet name="floor1" file="images/floor1.png">
+      <sprite name="bar" x="10" y="10" width="5" height="5" direction="0.0" offsetX="0" offsetY="0"/>
+      <sprite name="foo" x="1" y="2" width="10" height="10" direction="0.0" offsetX="0" offsetY="0"/>
+    </spriteSheet>
+  </spriteSheets>
   <poses>
     <pose name="black" filename="images/black.png"/>
     <pose name="editor" filename="images/editor.png"/>
@@ -22,66 +27,70 @@
     <pose name="wall4" filename="images/wall4.png"/>
     <pose name="wall4s" filename="images/wall4s.png"/>
   </poses>
+  <ninePatches/>
+  <fonts>
+    <font name="Vera" filename="fonts/Vera/Vera.ttf"/>
+  </fonts>
   <sounds/>
   <animations>
     <animation name="collected">
-      <sequence loops="1" sequence="true">
-        <parallel loops="1" sequence="false">
-          <alpha ease="easeInOutCirc" target="0.0" ticks="60"/>
-          <move ease="easeOutBack" ticks="60" dx="0.0" dy="100.0"/>
-          <scale ease="easeOutBack" target="3.0" ticks="60"/>
+      <sequence sequence="true" loops="1">
+        <parallel sequence="false" loops="1">
+          <alpha target="0.0" ticks="60" ease="easeInOutCirc"/>
+          <move dx="0.0" dy="100.0" ticks="60" ease="easeOutBack"/>
+          <scale target="3.0" ticks="60" ease="easeOutBack"/>
         </parallel>
       </sequence>
     </animation>
   </animations>
   <costumes>
-    <costume name="black" defaultZOrder="0">
+    <costume name="black" defaultZOrder="0" order="0" showInDesigner="true">
       <pose name="default" pose="black"/>
     </costume>
-    <costume name="editor" defaultZOrder="0" role="uk.co.nickthecoder.itchy.role.EditorButton">
+    <costume name="editor" defaultZOrder="0" order="0" showInDesigner="true" role="uk.co.nickthecoder.itchy.role.EditorButton">
       <pose name="default" pose="editor"/>
     </costume>
-    <costume name="exit" defaultZOrder="0" role="exit.py">
+    <costume name="exit" defaultZOrder="0" order="0" showInDesigner="true" role="exit.py">
       <pose name="default" pose="exit"/>
     </costume>
-    <costume name="floor1" defaultZOrder="0">
+    <costume name="floor1" defaultZOrder="0" order="0" showInDesigner="true">
       <pose name="default" pose="floor1"/>
     </costume>
-    <costume name="guard1" defaultZOrder="0" role="guard.py">
+    <costume name="guard1" defaultZOrder="0" order="0" showInDesigner="true" role="guard.py">
       <pose name="default" pose="guard1"/>
     </costume>
-    <costume name="money1" defaultZOrder="0" role="collectable.py">
+    <costume name="money1" defaultZOrder="0" order="0" showInDesigner="true" role="collectable.py">
       <pose name="default" pose="money1"/>
       <animation name="collected" animation="collected"/>
     </costume>
-    <costume name="player" defaultZOrder="0" role="player.py">
+    <costume name="player" defaultZOrder="0" order="0" showInDesigner="true" role="player.py">
       <pose name="default" pose="player"/>
     </costume>
-    <costume name="quit" defaultZOrder="0" role="uk.co.nickthecoder.itchy.role.QuitButton">
+    <costume name="quit" defaultZOrder="0" order="0" showInDesigner="true" role="uk.co.nickthecoder.itchy.role.QuitButton">
       <pose name="default" pose="quit"/>
     </costume>
-    <costume name="wall1" defaultZOrder="0" role="solid.py">
+    <costume name="wall1" defaultZOrder="0" order="0" showInDesigner="true" role="solid.py">
       <pose name="default" pose="wall1"/>
     </costume>
-    <costume name="wall1s" defaultZOrder="0" role="solid.py">
+    <costume name="wall1s" defaultZOrder="0" order="0" showInDesigner="true" role="solid.py">
       <pose name="default" pose="wall1s"/>
     </costume>
-    <costume name="wall2" defaultZOrder="0" role="solid.py">
+    <costume name="wall2" defaultZOrder="0" order="0" showInDesigner="true" role="solid.py">
       <pose name="default" pose="wall2"/>
     </costume>
-    <costume name="wall2s" defaultZOrder="0" role="solid.py">
+    <costume name="wall2s" defaultZOrder="0" order="0" showInDesigner="true" role="solid.py">
       <pose name="default" pose="wall2s"/>
     </costume>
-    <costume name="wall3" defaultZOrder="0" role="solid.py">
+    <costume name="wall3" defaultZOrder="0" order="0" showInDesigner="true" role="solid.py">
       <pose name="default" pose="wall3"/>
     </costume>
-    <costume name="wall3s" defaultZOrder="0" role="solid.py">
+    <costume name="wall3s" defaultZOrder="0" order="0" showInDesigner="true" role="solid.py">
       <pose name="default" pose="wall3s"/>
     </costume>
-    <costume name="wall4" defaultZOrder="0" role="solid.py">
+    <costume name="wall4" defaultZOrder="0" order="0" showInDesigner="true" role="solid.py">
       <pose name="default" pose="wall4"/>
     </costume>
-    <costume name="wall4s" defaultZOrder="0" role="solid.py">
+    <costume name="wall4s" defaultZOrder="0" order="0" showInDesigner="true" role="solid.py">
       <pose name="default" pose="wall4s"/>
     </costume>
   </costumes>

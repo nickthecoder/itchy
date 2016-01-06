@@ -4,36 +4,13 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
-import java.io.File;
-import java.util.LinkedList;
-import java.util.List;
-
-import uk.co.nickthecoder.itchy.property.Property;
-import uk.co.nickthecoder.itchy.property.BooleanProperty;
-import uk.co.nickthecoder.itchy.property.DoubleProperty;
-import uk.co.nickthecoder.itchy.property.FileProperty;
-import uk.co.nickthecoder.itchy.property.PropertySubject;
-import uk.co.nickthecoder.itchy.property.StringProperty;
-import uk.co.nickthecoder.jame.JameException;
 import uk.co.nickthecoder.jame.Surface;
 
-public class PoseResource extends NamedResource implements Thumbnailed, PropertySubject<PoseResource>
+public abstract class PoseResource extends NamedResource implements Thumbnailed
 {
-    protected static List<Property<PoseResource, ?>> properties = new LinkedList<Property<PoseResource, ?>>();
 
-    static {
-        properties.add( new StringProperty<PoseResource>( "name" ));
-        properties.add( new FileProperty<PoseResource>( "file" ).aliases( "filename" ));
-        properties.add( new BooleanProperty<PoseResource>( "shared" ));
-        properties.add( new DoubleProperty<PoseResource>( "pose.direction" ) );
-        properties.add( new DoubleProperty<PoseResource>( "pose.offsetX" ) );
-        properties.add( new DoubleProperty<PoseResource>( "pose.offsetY" ) );
-    }
-    
     public static final int THUMBNAIL_WIDTH = 50;
     public static final int THUMBNAIL_HEIGHT = 50;
-
-    private File file;
 
     public ImagePose pose;
 
@@ -41,56 +18,11 @@ public class PoseResource extends NamedResource implements Thumbnailed, Property
 
     private Surface thumbnail;
 
-    public PoseResource( Resources resources, String name, String filename ) throws JameException
+    PoseResource( Resources resources, String name )
     {
-        super(resources, name);
-        this.file = new File(filename);
-        this.pose = new ImagePose(this.resources.resolveFilename(filename));
-    }
-
-    public PoseResource( ImagePose pose )
-    {
-        super();
-        this.pose = pose;
-        this.file = null;
-    }
-
-    @Override
-    public List<Property<PoseResource, ?>> getProperties()
-    {
-        return properties;
+        super( resources, name );
     }
     
-    public File getFile()
-    {
-        return this.file;
-    }
-
-    public void setFile( File file ) throws JameException
-    {
-        if (file.isAbsolute()) {
-            // Lets try to make file relative to the resources directory.
-            file = new File( this.resources.makeRelativeFilename(file) );
-        }
-        
-        if (! file.equals(this.file)) { 
-            this.pose.load( this.resources.resolveFilename(file.getPath()) );
-            this.thumbnail = null;
-            // this.pose = new ImagePose(this.resources.resolveFilename(file.getPath()));
-            this.file = file;
-        }
-    }
-
-    public String getFilename()
-    {
-        return this.file.getPath();
-    }
-
-    public void setFilename( String filename ) throws JameException
-    {
-        setFile(new File(filename));
-    }
-
     @Override
     public Surface getThumbnail()
     {
@@ -107,5 +39,10 @@ public class PoseResource extends NamedResource implements Thumbnailed, Property
 
         }
         return this.thumbnail;
+    }
+    
+    protected void resetThumbnail()
+    {
+        this.thumbnail = null;
     }
 }

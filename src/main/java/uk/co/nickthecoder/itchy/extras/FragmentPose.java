@@ -4,6 +4,7 @@ import java.awt.Point;
 import java.util.LinkedList;
 import java.util.Random;
 
+import uk.co.nickthecoder.itchy.DynamicPoseResource;
 import uk.co.nickthecoder.itchy.ImagePose;
 import uk.co.nickthecoder.itchy.Pose;
 import uk.co.nickthecoder.itchy.PoseResource;
@@ -64,7 +65,7 @@ public class FragmentPose
 
     private Random random;
     
-    public void filter(Resources resource, PoseResource poseResource)
+    public void filter(Resources resources, PoseResource poseResource)
     {
         Pose pose = poseResource.pose;
         source = pose.getSurface();
@@ -103,8 +104,9 @@ public class FragmentPose
             newPose.setOffsetX(newPose.getSurface().getWidth() / 2);
             newPose.setOffsetY(newPose.getSurface().getHeight() / 2);
 
-            PoseResource newPoseResource = new PoseResource(newPose);
-            newPoseResource.setName(poseResource.getName() + this.suffix + i + 1);
+            String name = poseResource.getName() + this.suffix + i + 1;
+            PoseResource newPoseResource = new DynamicPoseResource(resources, name, newPose);
+            resources.addPose(newPoseResource);
         }
 
         // Allow the garbage collector to free resources now that we are finished.
