@@ -80,6 +80,10 @@
     <rule criteria="scrollbar.v" padding="4" marginTop="4" marginBottom="4" marginRight="-6"/>
     <rule criteria="scroller.v" background="scrollerV" width="14" />
 
+    <rule criteria="hScroll" paddingRight="20"/>
+    <rule criteria="scrollbar.h" padding="4" marginLeft="4" marginRight="4" marginBottom="-6"/>
+    <rule criteria="scroller.h" background="scrollerH" height="14" />
+
     <rule criteria="checkbox" background="checkbox" width="25" height="25"/>
     <rule criteria="checkbox image" image="checked" marginLeft="4" marginTop="6"/>
     

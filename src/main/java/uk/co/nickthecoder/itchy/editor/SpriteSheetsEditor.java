@@ -30,6 +30,7 @@ import uk.co.nickthecoder.itchy.gui.MessageBox;
 import uk.co.nickthecoder.itchy.gui.Notebook;
 import uk.co.nickthecoder.itchy.gui.PlainContainer;
 import uk.co.nickthecoder.itchy.gui.ReflectionTableModelRow;
+import uk.co.nickthecoder.itchy.gui.Scroll;
 import uk.co.nickthecoder.itchy.gui.SimpleTableModel;
 import uk.co.nickthecoder.itchy.gui.SimpleTableModelRow;
 import uk.co.nickthecoder.itchy.gui.SingleColumnRowComparator;
@@ -40,7 +41,6 @@ import uk.co.nickthecoder.itchy.gui.TableModelRow;
 import uk.co.nickthecoder.itchy.gui.TableRow;
 import uk.co.nickthecoder.itchy.gui.TextBox;
 import uk.co.nickthecoder.itchy.gui.VerticalLayout;
-import uk.co.nickthecoder.itchy.gui.VerticalScroll;
 import uk.co.nickthecoder.itchy.gui.Window;
 import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.util.StringList;
@@ -89,13 +89,11 @@ public class SpriteSheetsEditor extends SubEditor<SpriteSheet>
     protected SimpleTableModel createTableModel()
     {
         SimpleTableModel model = new SimpleTableModel();
-        System.out.println("Creating table");
         for (String spriteSheetName : this.editor.resources.spriteSheetNames()) {
             SpriteSheet spriteSheet = this.editor.resources.getSpriteSheet(spriteSheetName);
             String[] attributeNames = { "name", "filename", "thumbnail" };
             TableModelRow row = new ReflectionTableModelRow<SpriteSheet>(spriteSheet, attributeNames);
             model.addRow(row);
-            System.out.println("Added row");
         }
         return model;
     }
@@ -256,7 +254,6 @@ public class SpriteSheetsEditor extends SubEditor<SpriteSheet>
 
     private void onAddSprite()
     {
-        System.out.println("Add Sprite");
         Sprite sprite = new Sprite(this.currentResource, "new");
 
         editSprite(sprite);
@@ -264,6 +261,7 @@ public class SpriteSheetsEditor extends SubEditor<SpriteSheet>
 
     private void onRemoveSprite()
     {
+        // TODO onRemoveSprite
         System.out.println("Remove Sprite");
     }
 
@@ -288,17 +286,15 @@ public class SpriteSheetsEditor extends SubEditor<SpriteSheet>
     {
         imageContainer.setMinimumWidth(300);
         imageContainer.setMinimumHeight(300);
-        imageContainer.setMaximumWidth(300);
-        imageContainer.setMinimumHeight(300);
         
-        VerticalScroll scroll = new VerticalScroll(imageContainer);
-        scroll.setNaturalHeight(300);
+        Scroll scroll = new Scroll(imageContainer);
+        scroll.setNaturalHeight(301);
+        scroll.setNaturalWidth(301);
         return scroll;
     }
 
     private void editSprite(final Sprite sprite)
     {
-        System.out.println("Edit Sprite");
         this.edittingSprite = sprite;
 
         final Window window = new Window("Edit Event");
@@ -321,7 +317,6 @@ public class SpriteSheetsEditor extends SubEditor<SpriteSheet>
             @Override
             public void onClick(MouseButtonEvent e)
             {
-                System.out.println("Clicked preview " + e.x + "," + e.y);
                 ((IntegerBox) spriteForm.getComponent("offsetX")).setValue(e.x);
                 ((IntegerBox) spriteForm.getComponent("offsetY")).setValue(e.y);
             }
@@ -339,7 +334,6 @@ public class SpriteSheetsEditor extends SubEditor<SpriteSheet>
             @Override
             public void onClick(MouseButtonEvent e)
             {
-                System.out.println("Clicked sprite sheet " + e.x + "," + e.y);
                 ((IntegerBox) spriteForm.getComponent("x")).setValue(e.x);
                 ((IntegerBox) spriteForm.getComponent("y")).setValue(e.y);
             }
@@ -359,6 +353,8 @@ public class SpriteSheetsEditor extends SubEditor<SpriteSheet>
                 public void changed()
                 {
                     previewImg.setImage(sprite.pose.getSurface());
+                    previewClick.getParent().getParent().invalidate();
+                    previewClick.getParent().getParent().forceLayout();
                 }
             });
         }
@@ -396,14 +392,10 @@ public class SpriteSheetsEditor extends SubEditor<SpriteSheet>
 
     private void onEditSpritesOk()
     {
-        System.out.println("onEditSpritesOK");
-
         this.spriteForm.update();
 
         if (this.currentResource.getSprites().contains(this.edittingSprite)) {
-            System.out.println("Already in the collection of sprites");
         } else {
-            System.out.println("Adding a new sprite");
             this.currentResource.addSprite(this.edittingSprite);
         }
         this.rebuildSpritesTable();
@@ -445,7 +437,6 @@ public class SpriteSheetsEditor extends SubEditor<SpriteSheet>
         super.update();
 
         if (this.adding) {
-            System.out.println("Added sprite sheet");
             this.editor.resources.addSpriteSheet(this.currentResource);
         }
 

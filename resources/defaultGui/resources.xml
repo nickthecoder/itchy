@@ -54,7 +54,8 @@
         <ninePatch name="text-naked-focus" filename="images/text-naked-focus.png" top="18" right="18" bottom="18" left="18"  middle="fill" />
         <ninePatch name="text-naked-error" filename="images/text-naked-error.png" top="18" right="18" bottom="18" left="18"  middle="fill" />
 
-        <ninePatch name="scrollerV" filename="images/scrollerV.png" top="14" right="5" bottom="14" left="5"  middle="fill" />                
+        <ninePatch name="scrollerV" filename="images/scrollerV.png" top="14" right="5" bottom="14" left="5"  middle="fill" />
+        <ninePatch name="scrollerH" filename="images/scrollerH.png" top="5" right="14" bottom="5" left="14"  middle="fill" />
 
         <ninePatch name="tooltip" filename="images/tooltip.png" top="5" right="5" bottom="5" left="5"  middle="fill" />                
 

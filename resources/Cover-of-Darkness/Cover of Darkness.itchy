@@ -6,7 +6,7 @@
     </spriteSheet>
     <spriteSheet name="floor1" file="images/floor1.png">
       <sprite name="bar" x="10" y="10" width="5" height="5" direction="0.0" offsetX="0" offsetY="0"/>
-      <sprite name="foo" x="1" y="2" width="10" height="10" direction="0.0" offsetX="0" offsetY="0"/>
+      <sprite name="foo" x="1" y="2" width="500" height="500" direction="0.0" offsetX="122" offsetY="103"/>
     </spriteSheet>
   </spriteSheets>
   <poses>

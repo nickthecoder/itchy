@@ -18,6 +18,8 @@ Complete Sprite sheet stuff
 BUGS
 ====
 
+Scrollbars lengths are not updated, when the child changes size.
+
 Debris - Bullets (#2) stay alive, even when invisible, and kill rocks that pass over them.
 
 TextArea's background center of nine path is flat colour rather than tiled.
@@ -77,6 +79,8 @@ Load TheMings images directly from the sprite sheet.
 
 Code Tidy Up
 ============
+
+Move GraphicsContext to the gui package? Is it used elsewhere (for stages?)
 
 Pyrox : gridRole.onBirth looks like rubbish. Is it called?
 Pyrox : gridRole.talk looks weird.

@@ -49,16 +49,16 @@ public class GraphicsContext
 
         Rect srcRect = new Rect(origSrcRect);
 
+        int clipRight = (x + srcRect.width) - (this.clip.x + this.clip.width);
+        if (clipRight > 0) {
+            srcRect.width -= clipRight;
+        }
+
         int clipLeft = this.clip.x - x;
         if (clipLeft > 0) {
             x += clipLeft;
             srcRect.x += clipLeft;
             srcRect.width -= clipLeft;
-        }
-
-        int clipRight = (x - clipLeft + srcRect.width) - (this.clip.x + this.clip.width);
-        if (clipRight > 0) {
-            srcRect.width -= clipRight;
         }
 
         if (srcRect.width < 0) {
