@@ -1,5 +1,5 @@
 <resources>
-  <game resizable="false" title="The Mings" width="1000" height="800" initialScene="test" directorClassName="director.py"/>
+  <game title="The Mings" width="1000" height="800" resizable="false" initialScene="menu" directorClassName="director.py"/>
   <fonts>
     <font name="Boycott" filename="fonts/Boycott/Boycott.ttf"/>
   </fonts>
@@ -149,7 +149,7 @@
   <sounds/>
   <animations>
     <animation name="blocker">
-      <sequence loops="0" sequence="true">
+      <sequence sequence="true" loops="0">
         <frames pingPong="false">
           <frame pose="blocker0" delay="8"/>
           <frame pose="blocker1" delay="8"/>
@@ -171,7 +171,7 @@
       </sequence>
     </animation>
     <animation name="climberL">
-      <sequence loops="0" sequence="true">
+      <sequence sequence="true" loops="0">
         <frames pingPong="false">
           <frame pose="climberL0" delay="4"/>
           <frame pose="climberL1" delay="4"/>
@@ -185,7 +185,7 @@
       </sequence>
     </animation>
     <animation name="climberR">
-      <sequence loops="0" sequence="true">
+      <sequence sequence="true" loops="0">
         <frames pingPong="false">
           <frame pose="climberR0" delay="4"/>
           <frame pose="climberR1" delay="4"/>
@@ -199,7 +199,7 @@
       </sequence>
     </animation>
     <animation name="fall">
-      <sequence loops="0" sequence="true">
+      <sequence sequence="true" loops="0">
         <frames pingPong="false">
           <frame pose="fall0" delay="4"/>
           <frame pose="fall1" delay="4"/>
@@ -209,7 +209,7 @@
       </sequence>
     </animation>
     <animation name="smasherL">
-      <sequence loops="0" sequence="true">
+      <sequence sequence="true" loops="0">
         <frames pingPong="false">
           <frame pose="smasherL0" delay="4"/>
           <frame pose="smasherL1" delay="4"/>
@@ -231,7 +231,7 @@
       </sequence>
     </animation>
     <animation name="smasherR">
-      <sequence loops="0" sequence="true">
+      <sequence sequence="true" loops="0">
         <frames pingPong="false">
           <frame pose="smasherR0" delay="4"/>
           <frame pose="smasherR1" delay="4"/>
@@ -253,7 +253,7 @@
       </sequence>
     </animation>
     <animation name="squish">
-      <sequence loops="1" sequence="true">
+      <sequence sequence="true" loops="1">
         <frames pingPong="false">
           <frame pose="squish0" delay="4"/>
           <frame pose="squish1" delay="4"/>
@@ -275,7 +275,7 @@
       </sequence>
     </animation>
     <animation name="walkL">
-      <sequence loops="0" sequence="true">
+      <sequence sequence="true" loops="0">
         <frames pingPong="false">
           <frame pose="walkL0" delay="4"/>
           <frame pose="walkL1" delay="4"/>
@@ -289,7 +289,7 @@
       </sequence>
     </animation>
     <animation name="walkR">
-      <sequence loops="0" sequence="true">
+      <sequence sequence="true" loops="0">
         <frames pingPong="false">
           <frame pose="walkR0" delay="4"/>
           <frame pose="walkR1" delay="4"/>
@@ -348,10 +348,12 @@
   <scenes>
     <scene name="admin"/>
     <scene name="gui"/>
+    <scene name="menu"/>
     <scene name="start"/>
     <scene name="test"/>
   </scenes>
   <inputs>
+    <input name="quit" keys="ESCAPE"/>
     <input name="scrollDown" keys="DOWN"/>
     <input name="scrollLeft" keys="LEFT"/>
     <input name="scrollRight" keys="RIGHT"/>

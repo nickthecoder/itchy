@@ -9,16 +9,16 @@ class Director(AbstractDirector) :
     def __init__(self) :
         
         self.squareSize = 60
-        
+                
+        self.previousSceneName = ""
+    
+    def onStarted( self ) :
+
         self.inputEditor = Input.find( "editor" )
         self.inputTest = Input.find( "test" )
         self.inputRestart = Input.find("restart")
         self.inputQuit = Input.find("quit")
         self.inputReset = Input.find("reset")
-        
-        self.previousSceneName = ""
-    
-    def onStarted( self ) :
     
         screenRect = Rect(0, 0, self.game.getWidth(), self.game.getHeight())
 

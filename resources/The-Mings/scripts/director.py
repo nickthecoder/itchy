@@ -5,6 +5,9 @@ game = Itchy.getGame()
 class Director(AbstractDirector) :
 
     def onStarted( self ) :
+    
+        self.inputQuit = Input.find("quit")
+            
         guiHeight = 100
         playRect = Rect(0, 0, game.getWidth(), game.getHeight() - guiHeight)
         guiRect = Rect(0, game.getHeight() - guiHeight, game.getWidth(), guiHeight )        
@@ -28,6 +31,16 @@ class Director(AbstractDirector) :
         game.getGameViews().add(self.guiView)
         self.guiView.enableMouseListener(game)
 
+
+        
+    def onKeyDown(self,kevent) :
+
+        if self.inputQuit.matches(kevent) :
+            scene = game.sceneName
+            if scene == "menu" :
+                Itchy.getGame().end()
+            else :
+                game.startScene( "menu" )
 
     def scrollTo( self, x, y ) :
         self.mainView.centerOn( x,y )

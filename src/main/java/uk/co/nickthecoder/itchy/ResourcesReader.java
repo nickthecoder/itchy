@@ -53,46 +53,66 @@ public class ResourcesReader
             reader.close();
         }
     }
-
+    
     private void readResources( XMLTag resourcesTag ) throws Exception
     {
 
-        for (Iterator<XMLTag> i = resourcesTag.getTags("inputs"); i.hasNext();) {
-            XMLTag inputsTag = i.next();
-            this.readInputs(inputsTag);
-        }
         for (Iterator<XMLTag> i = resourcesTag.getTags("game"); i.hasNext();) {
             XMLTag gameTag = i.next();
             this.readGame(gameTag);
         }
+        Director director = this.resources.game.getDirector();
+        director.onMessage( Director.GAME_INFO_LOADED );
+        
+        for (Iterator<XMLTag> i = resourcesTag.getTags("inputs"); i.hasNext();) {
+            XMLTag inputsTag = i.next();
+            this.readInputs(inputsTag);
+        }
+        director.onMessage( Director.INPUTS_LOADED );
+
         for (Iterator<XMLTag> i = resourcesTag.getTags("fonts"); i.hasNext();) {
             XMLTag fontsTag = i.next();
             this.readFonts(fontsTag);
         }
+        director.onMessage( Director.FONTS_LOADED );
+
         for (Iterator<XMLTag> i = resourcesTag.getTags("sounds"); i.hasNext();) {
             XMLTag soundsTag = i.next();
             this.readSounds(soundsTag);
         }
+        director.onMessage( Director.SOUNDS_LOADED );
+
         for (Iterator<XMLTag> i = resourcesTag.getTags("ninePatches"); i.hasNext();) {
             XMLTag eightPatchesTag = i.next();
             this.readNinePatches(eightPatchesTag);
         }
+        director.onMessage( Director.NINE_PATCHES_LOADED );
+
         for (Iterator<XMLTag> i = resourcesTag.getTags("poses"); i.hasNext();) {
             XMLTag posesTag = i.next();
             this.readPoses(posesTag);
         }
+        director.onMessage( Director.POSES_LOADED );
+
         for (Iterator<XMLTag> i = resourcesTag.getTags("animations"); i.hasNext();) {
             XMLTag animationsTag = i.next();
             this.readAnimations(animationsTag);
         }
+        director.onMessage( Director.ANIMIATIONS_LOADED );
+
         for (Iterator<XMLTag> i = resourcesTag.getTags("costumes"); i.hasNext();) {
             XMLTag costumesTag = i.next();
             this.readCostumes(costumesTag);
         }
+        director.onMessage( Director.COSTUMES_LOADED );
+
         for (Iterator<XMLTag> i = resourcesTag.getTags("scenes"); i.hasNext();) {
             XMLTag scenesTag = i.next();
             this.readScenes(scenesTag);
         }
+        director.onMessage( Director.SCENES_LOADED );
+
+        director.onMessage( Director.LOADED );
     }
 
     private void readGame( XMLTag gameTag ) throws Exception
@@ -101,6 +121,9 @@ public class ResourcesReader
         this.readProperties(gameTag, gameInfo);
         this.resources.setGameInfo(gameInfo);
         this.resources.registry.add(gameInfo.directorClassName);
+
+        this.resources.game.setDirector(gameInfo.createDirector(this.resources));
+
         Itchy.init(this.resources);
     }
 

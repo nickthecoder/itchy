@@ -142,7 +142,6 @@ public class Resources extends Loadable
         ResourcesReader loader = new ResourcesReader(this);
         loader.load(getFilename());
 
-        this.game.setDirector(this.gameInfo.createDirector(this));
         Itchy.loadingGame(null);
     }
 
