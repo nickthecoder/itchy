@@ -16,10 +16,48 @@ SceneDesigner toolbox isn't moved when the window is maximised (floats in middle
 New Features
 ============
 
+TheMings
+	Menu
+	An actual real game level.
+
 Design Stages/Views graphically - Aim for no code in Director.
 
 Sprite Sheet Pose
     Allow multiple poses to be loaded from one image, and define the rectangle of each sub-image.
+	Load the sprite sheet as a regular Pose/PoseResource.
+		Have a "SpriteSheet" button, which goes to the SpriteSheet Editor
+		Draw rectangles around each individual pose.
+			This data is stored in the PoseResource object, and creates additional PoseResource objects
+				which are added to the Resources object.
+			ResourcesWriter will use the lack of Filename to skip them.
+
+Create a Pixelator, for Pyrox, which pixelates the images as they are loaded.
+	Similar to Fragment class - in fact, convert Fragment to BE an ImageFilter.
+	Hmmm, If we create copies of the poses, then the FrameAnimations can't see the Pixelated poses.
+	If we replace the original mini-version, then this isn't very generic. 
+	Create a NEW scriptable class called "PoseFilter". Every pose can have one, and it is called
+	when the pose is loaded.
+		Ahhh! This will have properties!!! Pose will need a Notebook with "Details" and "Filter" pages.
+		For TheMings, I'll subclass Pixelator, and hard-code the values in a script.
+	When will these be run?
+		They may depend on other Poses and/or NinePatches.
+		Animations may depend on them.
+		Therefore run after nine-patches and poses are loaded, but before the animations.
+
+Hmmm, SpriteSheets and ImageFilter don't work well together...
+	Unless an ImageFilter is also added to each sprite within the sheet
+		and/or to all the sprites in the sheet.
+	Nice!
+	
+Well, rather than manually setting an ImageFilter for every Pose, why not have ONE ImageFilter,
+which is scripted, and is run for ALL PoseResources added to the resources.
+In which case, could just have it as a method on Director ;-)
+
+Why have something specific to PoseResources? Just make Director a listener for each stage of resource loading.
+It needs to do stuff after all Poses/Nine Patches have loaded and before Animations.
+  
+
+Load TheMings images directly from the sprite sheet.
 
 Code Tidy Up
 ============

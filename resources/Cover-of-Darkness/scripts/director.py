@@ -13,9 +13,11 @@ from java.util import Date
 class Director(AbstractDirector) :
 
     def __init__(self) :
-        self.inputExit = Input.find("exit")
+        pass
 
     def onStarted( self ) :
+
+        self.inputExit = Input.find("exit")
 
         self.startTime = Date().time
         self.time = 0
