@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.Actor;
+import uk.co.nickthecoder.itchy.property.BooleanProperty;
 import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.DoubleProperty;
 
@@ -17,7 +18,7 @@ public class HeadAnimation extends NumericAnimation
 
     static {
         properties.add( new DoubleProperty<Animation>( "turn" ).hint( "degrees") );
-        properties.add( new DoubleProperty<Animation>( "directionToo" ) );
+        properties.add( new BooleanProperty<Animation>( "directionToo" ) );
         properties.addAll( NumericAnimation.properties );
     }
 
