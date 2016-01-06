@@ -74,8 +74,9 @@ public class StyleSheetReader
             reader.included = this.included;
             reader.load(resolvedFilename);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new XMLException("Failed to read resource file : " + resolvedFilename + "(" +
-                e.getMessage() + ")");
+                e + ")");
         }
     }
 

@@ -74,9 +74,10 @@ public class GameInfo implements PropertySubject<GameInfo>
             }
         } catch (Exception e) {
             System.err.println("Failed to create director, using a PlainDirector instead");
-            director = new PlainDirector();
+            director = new NullDirector();
             e.printStackTrace();
         }
+        
         return director;
     }
 }

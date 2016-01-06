@@ -8,13 +8,13 @@ import java.io.File;
 
 import uk.co.nickthecoder.itchy.Game;
 import uk.co.nickthecoder.itchy.Itchy;
-import uk.co.nickthecoder.itchy.PlainDirector;
+import uk.co.nickthecoder.itchy.NullDirector;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.GuiButton;
-import uk.co.nickthecoder.itchy.gui.PlainContainer;
 import uk.co.nickthecoder.itchy.gui.Label;
 import uk.co.nickthecoder.itchy.gui.MessageBox;
 import uk.co.nickthecoder.itchy.gui.Notebook;
+import uk.co.nickthecoder.itchy.gui.PlainContainer;
 import uk.co.nickthecoder.itchy.gui.RootContainer;
 import uk.co.nickthecoder.itchy.gui.Stylesheet;
 import uk.co.nickthecoder.itchy.gui.VerticalLayout;
@@ -23,8 +23,7 @@ public final class Editor extends Game
 {
     public static Editor instance;
 
-    private static final File RULES =
-        new File(new File(Itchy.getResourcesDirectory(), "editor"), "style.xml");
+    private static final File RULES = new File(new File(Itchy.getResourcesDirectory(), "editor"), "style.xml");
 
     public EditorPreferences preferences;
 
@@ -36,38 +35,42 @@ public final class Editor extends Game
 
     public GameInfoEditor gameInfoEditor;
 
-    public SoundsEditor soundsEditor;
+    public SpriteSheetsEditor spriteSheetsEditor;
 
     public PosesEditor posesEditor;
 
-    public FontsEditor fontsEditor;
+    public AnimationsEditor animationsEditor;
 
     public NinePatchEditor ninePatchEditor;
 
-    public AnimationsEditor animationsEditor;
+    public SoundsEditor soundsEditor;
+
+    public FontsEditor fontsEditor;
+
+    public InputsEditor inputsEditor;
 
     public CostumesEditor costumesEditor;
 
     public ScenesEditor scenesEditor;
-    
-    public SceneDesigner sceneDesigner;
-    
-    public InputsEditor inputsEditor;
 
+    public SceneDesigner sceneDesigner;
+
+    
     private String designSceneName = null;
 
-    public Editor( Game game ) throws Exception
+    public Editor(Game game) throws Exception
     {
         super(game.resources);
         this.game = game;
         instance = this;
-        setDirector(new PlainDirector());
+        setDirector(new NullDirector());
 
         this.init();
 
         this.preferences = new EditorPreferences();
 
         this.gameInfoEditor = new GameInfoEditor(this);
+        this.spriteSheetsEditor = new SpriteSheetsEditor(this);
         this.soundsEditor = new SoundsEditor(this);
         this.posesEditor = new PosesEditor(this);
         this.fontsEditor = new FontsEditor(this);
@@ -76,7 +79,7 @@ public final class Editor extends Game
         this.costumesEditor = new CostumesEditor(this);
         this.scenesEditor = new ScenesEditor(this);
         this.inputsEditor = new InputsEditor(this);
-        
+
         // this.preferencesEditor = new PreferencesEditor(this);
 
         try {
@@ -104,11 +107,11 @@ public final class Editor extends Game
     {
         return "Itchy Editor : " + this.game.getTitle();
     }
-    
+
     @Override
-	public boolean isResizable()
+    public boolean isResizable()
     {
-    	return true;
+        return true;
     }
 
     @Override
@@ -124,7 +127,7 @@ public final class Editor extends Game
     }
 
     @Override
-    public void start( String sceneName )
+    public void start(String sceneName)
     {
         this.designSceneName = sceneName;
         this.start();
@@ -156,6 +159,7 @@ public final class Editor extends Game
         notebook.setExpansion(1);
 
         notebook.addPage(new Label("Info"), this.gameInfoEditor.createPage());
+        notebook.addPage(new Label("Sprite Sheets"), this.spriteSheetsEditor.createPage());
         notebook.addPage(new Label("Poses"), this.posesEditor.createPage());
         notebook.addPage(new Label("Animations"), this.animationsEditor.createPage());
         notebook.addPage(new Label("Nine Patches"), this.ninePatchEditor.createPage());
@@ -171,7 +175,8 @@ public final class Editor extends Game
         buttons.setXAlignment(1);
 
         GuiButton quit = new GuiButton(new Label("Quit"));
-        quit.addActionListener(new ActionListener() {
+        quit.addActionListener(new ActionListener()
+        {
             @Override
             public void action()
             {
@@ -183,7 +188,8 @@ public final class Editor extends Game
 
         GuiButton save = new GuiButton(new Label("Save"));
         buttons.addChild(save);
-        save.addActionListener(new ActionListener() {
+        save.addActionListener(new ActionListener()
+        {
             @Override
             public void action()
             {
@@ -198,7 +204,7 @@ public final class Editor extends Game
         if (this.designSceneName != null) {
             this.scenesEditor.design(this.designSceneName);
         }
- 
+
         Itchy.mainLoop();
     }
 
@@ -226,14 +232,14 @@ public final class Editor extends Game
         }
     }
 
-    public void resize( int width, int height )
+    public void resize(int width, int height)
     {
-    	super.resize( width, height );
+        super.resize(width, height);
         root.setPosition(0, 0, width, height);
 
         root.resizeView();
-        if ( sceneDesigner != null) {
-        	sceneDesigner.resize( width,  height );
+        if (sceneDesigner != null) {
+            sceneDesigner.resize(width, height);
         }
     }
 

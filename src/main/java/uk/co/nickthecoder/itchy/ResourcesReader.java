@@ -62,6 +62,10 @@ public class ResourcesReader
             this.readGame(gameTag);
         }
         Director director = this.resources.game.getDirector();
+        if (director == null) {
+            director = new NullDirector();
+        }
+
         director.onMessage( Director.GAME_INFO_LOADED );
         
         for (Iterator<XMLTag> i = resourcesTag.getTags("inputs"); i.hasNext();) {
@@ -123,7 +127,7 @@ public class ResourcesReader
         this.resources.registry.add(gameInfo.directorClassName);
 
         this.resources.game.setDirector(gameInfo.createDirector(this.resources));
-
+        
         Itchy.init(this.resources);
     }
 
