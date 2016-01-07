@@ -33,6 +33,8 @@ public class PropertiesForm<S>
     private Map<String, Component> componentMap;
 
     List<Property<S, ?>> properties;
+    
+    private Map<String,Object> revertValues;
 
     public PropertiesForm( S subject, List<Property<S, ?>> properties )
     {
@@ -44,21 +46,38 @@ public class PropertiesForm<S>
         this.container.setYAlignment(0.5);
         this.grid = new GridLayout(this.container, 2);
         this.container.setLayout(this.grid);
+        this.revertValues = new HashMap<String,Object>();
     }
 
     public Container createForm()
     {
-        this.componentMap = new HashMap<String, Component>();
-
-        for (Property<S, ?> property : this.properties) {
-            Component component = createComponent(property);
-            this.componentMap.put(property.key, component);
-            this.grid.addRow(property.label, hint(component, property.hint));
+        try {
+            this.componentMap = new HashMap<String, Component>();
+    
+            for (Property<S, ?> property : this.properties) {
+                Component component = createComponent(property);
+                this.componentMap.put(property.key, component);
+                this.grid.addRow(property.label, hint(component, property.hint));
+                this.revertValues.put(property.key, property.getValue(subject));
+            }
+        } catch (Exception e) {
+            throw new RuntimeException( e );
         }
 
         return this.container;
     }
 
+    public void revert()
+    {
+        try {
+            for(Property<S, ?> property : this.properties) {
+                property.setValue(subject, this.revertValues.get(property.key) );
+            }
+        } catch (Exception e) {
+            throw new RuntimeException( e );
+        }
+    }
+    
     protected Component createComponent( Property<S, ?> property )
     {
         return property.createComponent(this.subject, this.autoUpdate);

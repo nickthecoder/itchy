@@ -379,6 +379,7 @@ public class SpriteSheetsEditor extends SubEditor<SpriteSheet>
             @Override
             public void action()
             {
+                spriteForm.revert();
                 window.hide();
             }
         });

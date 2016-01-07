@@ -1,12 +1,8 @@
 <resources>
-  <game title="Cover of Darkness" width="800" height="600" resizable="false" initialScene="start" directorClassName="director.py"/>
+  <game title="Cover of Darkness" width="800" height="600" resizable="false" initialScene="start" directorClassName="director.py" authors="Nick Robinson&#xA;Matthew Robinson"/>
   <spriteSheets>
-    <spriteSheet name="black" file="images/black.png">
-      <sprite name="blackie" x="0" y="0" width="30" height="30" direction="0.0" offsetX="0" offsetY="0"/>
-    </spriteSheet>
     <spriteSheet name="floor1" file="images/floor1.png">
-      <sprite name="bar" x="10" y="10" width="5" height="5" direction="0.0" offsetX="0" offsetY="0"/>
-      <sprite name="foo" x="1" y="2" width="500" height="500" direction="0.0" offsetX="122" offsetY="103"/>
+      <sprite name="new" x="0" y="0" width="1" height="1" direction="0.0" offsetX="0" offsetY="0"/>
     </spriteSheet>
   </spriteSheets>
   <poses>
