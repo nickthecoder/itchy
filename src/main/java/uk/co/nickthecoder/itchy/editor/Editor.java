@@ -160,7 +160,7 @@ public final class Editor extends Game
 
         notebook.addPage(new Label("Info"), this.gameInfoEditor.createPage());
         notebook.addPage(new Label("Sprite Sheets"), this.spriteSheetsEditor.createPage());
-        notebook.addPage(new Label("Poses"), this.posesEditor.createPage());
+        notebook.addPage(new Label("Sprites"), this.posesEditor.createPage());
         notebook.addPage(new Label("Animations"), this.animationsEditor.createPage());
         notebook.addPage(new Label("Nine Patches"), this.ninePatchEditor.createPage());
         notebook.addPage(new Label("Sounds"), this.soundsEditor.createPage());
