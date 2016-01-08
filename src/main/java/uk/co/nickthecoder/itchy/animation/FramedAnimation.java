@@ -76,6 +76,8 @@ public class FramedAnimation extends AbstractAnimation
     @Override
     public void start( Actor actor )
     {
+        super.start(actor);
+
         this.frameIndex = 0;
         this.direction = 1;
         useFrame(actor);

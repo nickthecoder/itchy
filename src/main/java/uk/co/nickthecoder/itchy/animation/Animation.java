@@ -40,4 +40,7 @@ public interface Animation extends Cloneable, PropertySubject<Animation>, Named
 
     public void setFinishedMessage( String message );
 
+    public String getStartMessage();
+    
+    public void setStartMessage( String message );
 }

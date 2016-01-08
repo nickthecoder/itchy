@@ -2,21 +2,21 @@
   <game title="The Mings" width="1000" height="800" resizable="false" initialScene="menu" directorClassName="director.py"/>
   <spriteSheets>
     <spriteSheet name="spriteSheet" file="images/spriteSheet.png">
-      <sprite name="tiny-build-11" x="204" y="103" width="10" height="10" direction="0.0" offsetX="5" offsetY="9"/>
-      <sprite name="tiny-build-12" x="224" y="103" width="10" height="10" direction="0.0" offsetX="5" offsetY="9"/>
-      <sprite name="tiny-build-05" x="83" y="104" width="8" height="10" direction="0.0" offsetX="4" offsetY="9"/>
-      <sprite name="tiny-build-14" x="264" y="103" width="10" height="10" direction="0.0" offsetX="5" offsetY="9"/>
-      <sprite name="tiny-build-04" x="63" y="103" width="8" height="10" direction="0.0" offsetX="4" offsetY="9"/>
-      <sprite name="tiny-build-01" x="4" y="103" width="8" height="10" direction="0.0" offsetX="4" offsetY="9"/>
+      <sprite name="tiny-build-06" x="103" y="104" width="8" height="10" direction="0.0" offsetX="4" offsetY="9"/>
       <sprite name="tiny-build-15" x="285" y="103" width="9" height="10" direction="0.0" offsetX="5" offsetY="9"/>
+      <sprite name="tiny-build-10" x="184" y="104" width="10" height="10" direction="0.0" offsetX="5" offsetY="9"/>
       <sprite name="tiny-build-07" x="123" y="102" width="8" height="11" direction="0.0" offsetX="4" offsetY="10"/>
+      <sprite name="tiny-build-08" x="143" y="102" width="9" height="11" direction="0.0" offsetX="4" offsetY="10"/>
+      <sprite name="tiny-build-14" x="264" y="103" width="10" height="10" direction="0.0" offsetX="5" offsetY="9"/>
+      <sprite name="tiny-build-13" x="244" y="103" width="10" height="10" direction="0.0" offsetX="5" offsetY="9"/>
+      <sprite name="tiny-build-12" x="224" y="103" width="10" height="10" direction="0.0" offsetX="5" offsetY="9"/>
+      <sprite name="tiny-build-01" x="4" y="103" width="8" height="10" direction="0.0" offsetX="4" offsetY="9"/>
+      <sprite name="tiny-build-11" x="204" y="103" width="10" height="10" direction="0.0" offsetX="5" offsetY="9"/>
+      <sprite name="tiny-build-09" x="163" y="102" width="10" height="11" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-build-04" x="63" y="103" width="8" height="10" direction="0.0" offsetX="4" offsetY="9"/>
       <sprite name="tiny-build-03" x="43" y="103" width="8" height="10" direction="0.0" offsetX="4" offsetY="9"/>
       <sprite name="tiny-build-02" x="24" y="103" width="8" height="10" direction="0.0" offsetX="4" offsetY="9"/>
-      <sprite name="tiny-build-09" x="163" y="102" width="10" height="11" direction="0.0" offsetX="5" offsetY="10"/>
-      <sprite name="tiny-build-06" x="103" y="104" width="8" height="10" direction="0.0" offsetX="4" offsetY="9"/>
-      <sprite name="tiny-build-08" x="143" y="102" width="9" height="11" direction="0.0" offsetX="4" offsetY="10"/>
-      <sprite name="tiny-build-10" x="184" y="104" width="10" height="10" direction="0.0" offsetX="5" offsetY="9"/>
-      <sprite name="tiny-build-13" x="244" y="103" width="10" height="10" direction="0.0" offsetX="5" offsetY="9"/>
+      <sprite name="tiny-build-05" x="83" y="104" width="8" height="10" direction="0.0" offsetX="4" offsetY="9"/>
       <sprite name="tiny-brick-01" x="230" y="112" width="4" height="1" direction="0.0" offsetX="-1" offsetY="0"/>
     </spriteSheet>
   </spriteSheets>
@@ -192,7 +192,7 @@
     </animation>
     <animation name="builderR">
       <sequence sequence="true" loops="10" finishedMessage="jobComplete">
-        <frames pingPong="false" finishedMessage="layedBrick">
+        <frames pingPong="false">
           <frame pose="builderR-01" delay="4"/>
           <frame pose="builderR-02" delay="4"/>
           <frame pose="builderR-03" delay="4"/>
@@ -204,7 +204,7 @@
           <frame pose="builderR-09" delay="4"/>
           <frame pose="builderR-10" delay="4"/>
         </frames>
-        <frames pingPong="false" finishedMessage="steppedUp">
+        <frames pingPong="false" startMessage="laidBrick" finishedMessage="steppedUp">
           <frame pose="builderR-11" delay="1"/>
           <frame pose="builderR-12" delay="1"/>
           <frame pose="builderR-13" delay="1"/>

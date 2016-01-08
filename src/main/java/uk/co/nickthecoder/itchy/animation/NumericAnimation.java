@@ -46,6 +46,8 @@ public abstract class NumericAnimation extends AbstractAnimation
     @Override
     public void start( Actor actor )
     {
+        super.start(actor);
+
         this.previous = 0;
         this.currentFrame = 0;
         if (this.ticks == 0) {

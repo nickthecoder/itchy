@@ -17,11 +17,14 @@ public abstract class AbstractAnimation implements Animation, Cloneable
     protected static final List<Property<Animation, ?>> properties = new ArrayList<Property<Animation, ?>>();
     
     static {
+        properties.add( new StringProperty<Animation>( "startMessage" ));
         properties.add( new StringProperty<Animation>( "finishedMessage" ));
     }
     
+    private String startMessage = null;
+
     private String finishedMessage = null;
-    
+
     @Override
     public List<Property<Animation, ?>> getProperties()
     {
@@ -39,7 +42,10 @@ public abstract class AbstractAnimation implements Animation, Cloneable
     }
 
     @Override
-    public abstract void start( Actor actor );
+    public void start( Actor actor )
+    {
+        fireStart( actor );
+    }
 
     @Override
     public abstract boolean isFinished();
@@ -52,12 +58,32 @@ public abstract class AbstractAnimation implements Animation, Cloneable
         }
     }
 
+    protected void fireStart( Actor actor )
+    {
+        if (!StringUtils.isBlank(this.startMessage)) {
+            actor.getRole().onMessage(this.startMessage);
+        }        
+    }
+
     protected void fireFinished( Actor actor )
     {
         if (!StringUtils.isBlank(this.finishedMessage)) {
-            actor.getRole().onMessage(getFinishedMessage());
+            actor.getRole().onMessage(this.finishedMessage);
         }        
     }
+
+    @Override
+    public String getStartMessage()
+    {
+        return this.startMessage;
+    }
+
+    @Override
+    public void setStartMessage( String message )
+    {
+        this.startMessage = message;
+    }
+
 
     @Override
     public String getFinishedMessage()
@@ -70,7 +96,7 @@ public abstract class AbstractAnimation implements Animation, Cloneable
     {
         this.finishedMessage = message;
     }
-
+    
     @Override
     public Animation clone() throws CloneNotSupportedException
     {

@@ -235,7 +235,7 @@ class Builder(Job) :
         ming.event( "builder" + ming.directionLetter() )
     
     def onMessage( self, ming, message ) :
-        if message == "layedBrick" :
+        if message == "laidBrick" :
             brick = ming.actor.createCompanion( "brick" )
         if message == "steppedUp" :
             ming.actor.x += 2 * PIXELATION_SIZE * ming.direction

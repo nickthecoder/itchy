@@ -39,6 +39,8 @@ public class DelayAnimation extends AbstractAnimation
     @Override
     public void start( Actor actor )
     {
+        super.start(actor);
+        
         this.currentFrame = 0;
     }
 

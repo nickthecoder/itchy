@@ -21,16 +21,8 @@ SceneDesigner toolbox isn't moved when the window is maximised (floats in middle
 New Features
 ============
 
-Animations. Don't have message listeners at all levels, just have a Parent, and bubble up the hierarchy
-		Note - CompoundAnimation's clone needs to set the parent of the clone.
-	Do I need the other type of listeners? Legacy? Can't use them in regular script games.
-		Only used by SceneTransition, and this could be recoded as a Role, and use a deathEvent,
-		or a finishedMessage to end the transition.
-
 	Maybe add a start message too.
 	
-	Have null list of listeners until one is added.
-
 Ensure Scrollbars of Scroll do not obscure the contents.
 
 Use Scroll for TextArea, instead of its buggy, self implemented, non-clipping scroller.
