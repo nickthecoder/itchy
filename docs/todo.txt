@@ -7,9 +7,6 @@ Game.startEditor is buggy. It calls Director.onStart, but Itchy.getGame() is NOT
 		Don't want to edit a scene from within a game, but do want to from a command line.
 
 Complete Sprite sheet stuff
-	Check cancel works.
-		It won't, as I've turned on auto-update, without cloning.
-		Maybe implement "revert" in PropertyForm.
 	Check sprites name isn't duplicated in resources.
 	Add the sprites to the resources as well as the sprite sheet.
 	Implement remove (removing them from resources too).

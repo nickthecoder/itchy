@@ -11,6 +11,7 @@ import java.util.List;
 import uk.co.nickthecoder.itchy.Costume;
 import uk.co.nickthecoder.itchy.CostumeResource;
 import uk.co.nickthecoder.itchy.PoseResource;
+import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.Sprite;
 import uk.co.nickthecoder.itchy.SpriteSheet;
 import uk.co.nickthecoder.itchy.gui.AbstractComponent;
@@ -261,8 +262,16 @@ public class SpriteSheetsEditor extends SubEditor<SpriteSheet>
 
     private void onRemoveSprite()
     {
-        // TODO onRemoveSprite
-        System.out.println("Remove Sprite");
+
+        TableModelRow row = this.spritesTable.getCurrentTableModelRow();
+        if (row == null) {
+            return;
+        }
+
+        Sprite sprite = (Sprite) row.getData(3);
+        currentResource.resources.removePose(sprite.getName());
+        currentResource.removeSprite( sprite );
+        rebuildSpritesTable();
     }
 
     private void onEditSprite()
@@ -358,7 +367,17 @@ public class SpriteSheetsEditor extends SubEditor<SpriteSheet>
                 }
             });
         }
-
+        
+        final TextBox txtName = ((TextBox) this.spriteForm.getComponent("name")); 
+        txtName.addChangeListener( new ComponentChangeListener() {
+            @Override
+            public void changed()
+            {
+                txtName.addStyle("error",  !checkSpriteNameDuplicates() );
+                
+            }
+        });
+        
         PlainContainer buttons = new PlainContainer();
         buttons.addStyle("buttonBar");
         buttons.setXAlignment(0.5f);
@@ -369,6 +388,12 @@ public class SpriteSheetsEditor extends SubEditor<SpriteSheet>
             @Override
             public void action()
             {
+                try {
+                    updateSprite();
+                } catch (MessageException e) {
+                    // TODO Show the message.
+                    return;
+                }
                 SpriteSheetsEditor.this.onEditSpritesOk();
                 window.hide();
             }
@@ -391,13 +416,47 @@ public class SpriteSheetsEditor extends SubEditor<SpriteSheet>
         window.show();
     }
 
+    private boolean checkSpriteNameDuplicates()
+    {
+        TextBox txtName = ((TextBox) this.spriteForm.getComponent("name")); 
+        String newName = txtName.getText();
+        // Look for a pose (using the text box's text). If the resource is found, then
+        // it is only and acceptable name if the found resource is the same one as we are
+        // editing.
+        PoseResource existing = currentResource.resources.getPoseResource(newName);
+        if ((existing != null) && (existing != edittingSprite)) {
+            return false;
+        }
+        return true;
+    }
+    
+    private void updateSprite() throws MessageException
+    {
+        if (!checkSpriteNameDuplicates() ) {
+            throw new MessageException( "Sprite name already used by another Sprite" );
+        }
+    }
+    
     private void onEditSpritesOk()
     {
-        this.spriteForm.update();
+        Resources resources = this.currentResource.resources;
+        
+        // No need to update, we are using auto-update.
+        // this.spriteForm.update();
 
         if (this.currentResource.getSprites().contains(this.edittingSprite)) {
+            // Update - check for rename
+            String oldName = (String) this.spriteForm.getRevertValue( "name" );
+            if (edittingSprite.getName().equals( oldName )) {
+                // Do nothing
+            } else {
+                resources.removePose(oldName);
+                resources.addPose(edittingSprite);
+            }
         } else {
+            // New
             this.currentResource.addSprite(this.edittingSprite);
+            resources.addPose( this.edittingSprite );
         }
         this.rebuildSpritesTable();
         this.selectSpritesTableRow(this.edittingSprite);

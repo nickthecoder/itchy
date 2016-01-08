@@ -78,6 +78,11 @@ public class PropertiesForm<S>
         }
     }
     
+    public Object getRevertValue( String key )
+    {
+        return revertValues.get(key);
+    }
+    
     protected Component createComponent( Property<S, ?> property )
     {
         return property.createComponent(this.subject, this.autoUpdate);

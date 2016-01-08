@@ -183,6 +183,7 @@ public class ResourcesReader
                 Sprite sprite = new Sprite(spriteSheet, spriteName);
                 this.readProperties(spriteTag, sprite);
                 spriteSheet.addSprite(sprite);
+                this.resources.addPose(sprite);
             }
             this.resources.addSpriteSheet(spriteSheet);
         }

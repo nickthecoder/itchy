@@ -15,19 +15,19 @@ import uk.co.nickthecoder.itchy.FilePoseResource;
 import uk.co.nickthecoder.itchy.ImagePose;
 import uk.co.nickthecoder.itchy.PoseResource;
 import uk.co.nickthecoder.itchy.Thumbnailed;
-import uk.co.nickthecoder.itchy.gui.ClickableContainer;
 import uk.co.nickthecoder.itchy.gui.AbstractComponent;
+import uk.co.nickthecoder.itchy.gui.ClickableContainer;
 import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
-import uk.co.nickthecoder.itchy.gui.PlainContainer;
+import uk.co.nickthecoder.itchy.gui.Container;
 import uk.co.nickthecoder.itchy.gui.FileOpenDialog;
 import uk.co.nickthecoder.itchy.gui.GridLayout;
-import uk.co.nickthecoder.itchy.gui.Container;
 import uk.co.nickthecoder.itchy.gui.ImageComponent;
 import uk.co.nickthecoder.itchy.gui.IntegerBox;
 import uk.co.nickthecoder.itchy.gui.Label;
 import uk.co.nickthecoder.itchy.gui.MessageBox;
 import uk.co.nickthecoder.itchy.gui.PickerButton;
+import uk.co.nickthecoder.itchy.gui.PlainContainer;
 import uk.co.nickthecoder.itchy.gui.ReflectionTableModelRow;
 import uk.co.nickthecoder.itchy.gui.SimpleTableModel;
 import uk.co.nickthecoder.itchy.gui.SingleColumnRowComparator;
@@ -141,10 +141,12 @@ public class PosesEditor extends SubEditor<FilePoseResource>
 
         for (String poseName : this.editor.resources.poseNames()) {
             PoseResource poseResource = this.editor.resources.getPoseResource(poseName);
-            if (this.filterPickerButton.getValue().accept(poseResource)) {
-                String[] attributeNames = { "name", "filename", "thumbnail" };
-                TableModelRow row = new ReflectionTableModelRow<PoseResource>(poseResource, attributeNames);
-                model.addRow(row);
+            if (poseResource instanceof FilePoseResource) {
+                if (this.filterPickerButton.getValue().accept(poseResource)) {
+                    String[] attributeNames = { "name", "filename", "thumbnail" };
+                    TableModelRow row = new ReflectionTableModelRow<PoseResource>(poseResource, attributeNames);
+                    model.addRow(row);
+                }
             }
         }
         return model;

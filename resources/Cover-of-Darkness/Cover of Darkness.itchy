@@ -3,6 +3,7 @@
   <spriteSheets>
     <spriteSheet name="floor1" file="images/floor1.png">
       <sprite name="new" x="0" y="0" width="1" height="1" direction="0.0" offsetX="0" offsetY="0"/>
+      <sprite name="foo" x="10" y="10" width="50" height="50" direction="0.0" offsetX="0" offsetY="0"/>
     </spriteSheet>
   </spriteSheets>
   <poses>
@@ -36,6 +37,14 @@
           <move dx="0.0" dy="100.0" ticks="60" ease="easeOutBack"/>
           <scale target="3.0" ticks="60" ease="easeOutBack"/>
         </parallel>
+      </sequence>
+    </animation>
+    <animation name="testSprites">
+      <sequence sequence="true" loops="1">
+        <frames pingPong="false">
+          <frame pose="foo" delay="1"/>
+          <frame pose="new" delay="1"/>
+        </frames>
       </sequence>
     </animation>
   </animations>

@@ -164,11 +164,12 @@ public class Resources extends Loadable
         Resources resources = new Resources();
         resources.load(file);
 
-        // MORE. Should check that each resource is identical to the other one.
-
         for (String name : this.poseNames()) {
-            if (resources.getPose(name) == null) {
-                throw new Exception("Pose " + name + " wasn't saved");
+            // We only care about PoseResources that were loaded.
+            if (! (this.getPoseResource(name) instanceof DynamicPoseResource) ) {
+                if (resources.getPose(name) == null) {
+                    throw new Exception("Pose " + name + " wasn't saved");
+                }
             }
         }
         for (String name : this.animationNames()) {

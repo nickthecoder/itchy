@@ -1,10 +1,10 @@
 package uk.co.nickthecoder.itchy;
 
 import java.io.File;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
-import java.util.TreeSet;
 
 import uk.co.nickthecoder.itchy.property.FileProperty;
 import uk.co.nickthecoder.itchy.property.Property;
@@ -26,6 +26,8 @@ public class SpriteSheet extends NamedResource implements PropertySubject<Sprite
     
     private Surface thumbnail;
     
+    public Resources resources;
+    
     static {
         properties.add( new StringProperty<SpriteSheet>( "name" ));
         properties.add( new FileProperty<SpriteSheet>( "file" ).aliases( "filename" ));
@@ -36,7 +38,8 @@ public class SpriteSheet extends NamedResource implements PropertySubject<Sprite
     public SpriteSheet(Resources resources, String name)
     {
         super(resources, name);
-        this.sprites = new TreeSet<Sprite>();
+        this.resources = resources;
+        this.sprites = new HashSet<Sprite>();
     }
     
     public Surface getSurface()
@@ -52,6 +55,11 @@ public class SpriteSheet extends NamedResource implements PropertySubject<Sprite
     public void addSprite( Sprite sprite )
     {
         this.sprites.add( sprite );
+    }
+    
+    public void removeSprite( Sprite sprite )
+    {
+        this.sprites.remove( sprite );
     }
     
     public void setFilename( String filename ) throws JameException
