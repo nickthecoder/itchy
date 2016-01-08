@@ -97,7 +97,6 @@ public class Itchy
         registry.add(new ClassName(SceneDirector.class, PlainSceneDirector.class.getName()));
 
         registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.role.PlainRole.class.getName()));
-        registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.role.EditorButton.class.getName()));
         registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.role.LinkButton.class.getName()));
         registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.role.MessageButton.class.getName()));
         registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.role.NumberValue.class.getName()));

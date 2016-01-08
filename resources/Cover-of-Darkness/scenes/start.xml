@@ -57,7 +57,6 @@
     <actor costume="exit" x="422" y="125" direction="0.0" heading="0.0" startEvent="default" zOrder="31">
       <property name="nextLevel" value="level01"/>
     </actor>
-    <actor costume="editor" x="84" y="39" direction="0.0" heading="0.0" startEvent="default" zOrder="33"/>
     <actor costume="quit" x="741" y="34" direction="0.0" heading="0.0" startEvent="default" zOrder="34"/>
   </layer>
 </scene>
