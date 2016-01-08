@@ -13,6 +13,7 @@ import uk.co.nickthecoder.itchy.property.BooleanProperty;
 import uk.co.nickthecoder.itchy.property.ClassNameProperty;
 import uk.co.nickthecoder.itchy.property.IntegerProperty;
 import uk.co.nickthecoder.itchy.property.PropertySubject;
+import uk.co.nickthecoder.itchy.property.StringProperty;
 import uk.co.nickthecoder.jame.Surface;
 
 public class CostumeResource extends NamedResource implements PropertySubject<CostumeResource>
@@ -20,6 +21,7 @@ public class CostumeResource extends NamedResource implements PropertySubject<Co
     protected static final List<Property<CostumeResource, ?>> properties = new ArrayList<Property<CostumeResource, ?>>();
 
     static {
+        properties.add( new StringProperty<CostumeResource>( "name" ) );
         properties.add( new ClassNameProperty<CostumeResource>( Role.class, "costume.roleClassName" ) );
         properties.add( new IntegerProperty<CostumeResource>( "costume.defaultZOrder" ) );
         properties.add( new BooleanProperty<CostumeResource>( "costume.showInDesigner" ) );
