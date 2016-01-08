@@ -4,15 +4,14 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.extras;
 
+import uk.co.nickthecoder.itchy.AbstractRole;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.ImagePose;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.animation.AlphaAnimation;
 import uk.co.nickthecoder.itchy.animation.Animation;
-import uk.co.nickthecoder.itchy.animation.AnimationListener;
 import uk.co.nickthecoder.itchy.animation.Eases;
 import uk.co.nickthecoder.itchy.animation.MoveAnimation;
-import uk.co.nickthecoder.itchy.role.PlainRole;
 import uk.co.nickthecoder.jame.Surface;
 
 /**
@@ -43,7 +42,7 @@ import uk.co.nickthecoder.jame.Surface;
  * The {@link uk.co.nickthecoder.itchy.Game} object will receive a message : <code>SceneTransition.COMPLETE</code> when the transition has
  * finished.
  */
-public class SceneTransition
+public class SceneTransition extends AbstractRole
 {
     public static final String COMPLETE = "SceneTransition.COMPLETE";
 
@@ -120,7 +119,6 @@ public class SceneTransition
     public SceneTransition( Animation animation )
     {
         this.animation = animation.copy();
-
     }
 
     /**
@@ -145,7 +143,7 @@ public class SceneTransition
         ImagePose pose = new ImagePose(oldImage, 0, oldImage.getHeight());
 
         this.actor = new Actor(pose);
-        this.actor.setRole(new PlainRole());
+        this.actor.setRole(this);
     }
 
     /**
@@ -165,16 +163,19 @@ public class SceneTransition
     {
         this.actor.moveTo(0, 0);
         Itchy.getGame().getGlassStage().addTop(this.actor);
-        this.animation.addAnimationListener(new AnimationListener() {
-            @Override
-            public void finished()
-            {
-                onAnimationComplete();
-            }
-        });
         this.actor.setAnimation(this.animation);
     }
 
+    /**
+     * Sent message SceneTransition.COMPLETE, at which point we should kill the actor,
+     * and send the message on to the Game's Director.
+     */
+    public void onMessage( String message )
+    {
+        if (message.equals(COMPLETE)) {
+            onAnimationComplete();
+        }
+    }
     /**
      * Performs the transition to the named scene.
      * 
