@@ -32,13 +32,9 @@ public interface Animation extends Cloneable, PropertySubject<Animation>, Named
     
     public boolean isFinished();
 
-    public Object clone() throws CloneNotSupportedException;
+    public Animation clone() throws CloneNotSupportedException;
 
     public Animation copy();
-
-    public void addAnimationListener( AnimationListener listener );
-
-    public void removeAnimationListener( AnimationListener listener );
 
     public String getFinishedMessage();
 
