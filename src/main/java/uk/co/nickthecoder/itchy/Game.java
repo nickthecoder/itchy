@@ -370,13 +370,6 @@ public class Game
     
     public void startEditor()
     {
-        // If the editor has been started without the game being started (i.e. directly from the
-        // launcher) then we need to start the game, so that it creates its layers and views.
-        // For the scene designer to copy.
-        if ((this.stages == null) || (this.stages.size() == 0)) {
-            this.director.onStarted();
-        }
-
         try {
             Editor editor = new Editor(this);
             editor.start();

@@ -58,11 +58,10 @@
       <property name="nextLevel" value="level02"/>
     </actor>
     <text text="0" font="Vera" size="40" color="#ffffff" xAlignment="1.0" yAlignment="0.0" role="uk.co.nickthecoder.itchy.role.NumberValue" x="787" y="589" direction="0.0" heading="0.0" startEvent="default" zOrder="27" colorize="#ff75e4ff">
-      <property name="formatPattern" value="0"/>
       <property name="nullValue" value=""/>
       <property name="errorValue" value=""/>
-      <property name="updateInterval" value="0.0"/>
       <property name="quiet" value="false"/>
+      <property name="updateInterval" value="0.0"/>
       <property name="access" value="director.time"/>
     </text>
   </layer>

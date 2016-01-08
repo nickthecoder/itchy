@@ -138,6 +138,13 @@ public final class Editor extends Game
     {
         Itchy.startGame(this);
 
+        // If the editor has been started without the game being started (i.e. directly from the
+        // launcher) then we need to start the game, so that it creates its layers and views.
+        // For the scene designer to copy.
+        if ((this.game.getStages() == null) || (this.game.getStages().size() == 0)) {
+            this.game.getDirector().onStarted();
+        }
+
         Itchy.enableKeyboardRepeat(true);
 
         this.root = new RootContainer();

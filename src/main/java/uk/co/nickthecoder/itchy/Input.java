@@ -35,11 +35,6 @@ public class Input
         Input result = Itchy.getGame().resources.getInput(name);
         if (result == null) {
             System.err.println( "Didn't find Input : " + name + " in " + Itchy.getGame().resources.getFilename() );
-            try {
-                throw new Exception( "Foo" );
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
             return new Input();
         }
         return result;
