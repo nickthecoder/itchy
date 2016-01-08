@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.Actor;
-import uk.co.nickthecoder.itchy.MessageListener;
 import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.StringProperty;
 import uk.co.nickthecoder.itchy.util.StringUtils;
@@ -22,8 +21,6 @@ public abstract class AbstractAnimation implements Animation, Cloneable
     }
     
     private List<AnimationListener> listeners = new ArrayList<AnimationListener>();
-
-    private List<MessageListener> messageListeners = new ArrayList<MessageListener>();
 
     private String finishedMessage = null;
     
@@ -65,9 +62,6 @@ public abstract class AbstractAnimation implements Animation, Cloneable
         }
         if (!StringUtils.isBlank(this.finishedMessage)) {
             actor.getRole().onMessage(getFinishedMessage());
-            for (MessageListener listener : this.messageListeners) {
-                listener.onMessage(this.finishedMessage);
-            }
         }        
     }
 
@@ -96,18 +90,6 @@ public abstract class AbstractAnimation implements Animation, Cloneable
     }
 
     @Override
-    public void addMessageListener( MessageListener listener )
-    {
-        this.messageListeners.add(listener);
-    }
-
-    @Override
-    public void removeMessageListener( MessageListener listener )
-    {
-        this.messageListeners.remove(listener);
-    }
-
-    @Override
     public Object clone() throws CloneNotSupportedException
     {
         AbstractAnimation result = (AbstractAnimation) super.clone();
@@ -115,11 +97,6 @@ public abstract class AbstractAnimation implements Animation, Cloneable
         result.listeners = new ArrayList<AnimationListener>();
         for (AnimationListener listener : this.listeners) {
             result.listeners.add(listener);
-        }
-
-        result.messageListeners = new ArrayList<MessageListener>();
-        for (MessageListener listener : this.messageListeners) {
-            result.messageListeners.add(listener);
         }
 
         return result;

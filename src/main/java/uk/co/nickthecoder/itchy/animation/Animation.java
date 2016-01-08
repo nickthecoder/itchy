@@ -7,7 +7,6 @@ package uk.co.nickthecoder.itchy.animation;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.Actor;
-import uk.co.nickthecoder.itchy.MessageListener;
 import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.PropertySubject;
 import uk.co.nickthecoder.itchy.util.Named;
@@ -40,10 +39,6 @@ public interface Animation extends Cloneable, PropertySubject<Animation>, Named
     public void addAnimationListener( AnimationListener listener );
 
     public void removeAnimationListener( AnimationListener listener );
-
-    public void addMessageListener( MessageListener listener );
-
-    public void removeMessageListener( MessageListener listener );
 
     public String getFinishedMessage();
 

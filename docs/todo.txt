@@ -1,11 +1,8 @@
 Current Tasks
 =============
 
-Split builder's animation into pieces
-Send a message when brick is laid, and when step up is finished.
-	dx,dy = 0 most of the time. Set when brick is laid till step up is finished.
-
-Do similar trick for basher? Or just clever use of the offsetX ?
+Improve basher's animation (similar to builders)?
+	Clever use of the offsetX ?, or step on a given message?
 	Bash big lumps at a time
 
 To aid testing, allow mings to be added with any job.
@@ -27,6 +24,9 @@ New Features
 Animations. Don't have message listeners at all levels, just have a Parent, and bubble up the hierarchy
 		Note - CompoundAnimation's clone needs to set the parent of the clone.
 	Do I need the other type of listeners? Legacy? Can't use them in regular script games.
+		Only used by SceneTransition, and this could be recoded as a Role, and use a deathEvent,
+		or a finishedMessage to end the transition.
+
 	Maybe add a start message too.
 	
 	Have null list of listeners until one is added.

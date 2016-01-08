@@ -8,10 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.Actor;
-import uk.co.nickthecoder.itchy.MessageListener;
-import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.BooleanProperty;
 import uk.co.nickthecoder.itchy.property.IntegerProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 
 public class CompoundAnimation extends AbstractAnimation
 {
@@ -74,24 +73,6 @@ public class CompoundAnimation extends AbstractAnimation
         Animation other = this.children.get(index - 1);
         this.children.set(index, other);
         this.children.set(index - 1, child);
-    }
-
-    @Override
-    public void addMessageListener( MessageListener listener )
-    {
-        super.addMessageListener(listener);
-        for (Animation child : this.children) {
-            child.addMessageListener(listener);
-        }
-    }
-
-    @Override
-    public void removeMessageListener( MessageListener listener )
-    {
-        super.removeMessageListener(listener);
-        for (Animation child : this.children) {
-            child.removeMessageListener(listener);
-        }
     }
 
     @Override
