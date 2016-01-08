@@ -8,18 +8,18 @@
         <property name="ninePatchName" value="button"/>
         <property name="borderTop" value="4"/>
         <property name="borderBottom" value="4"/>
-        <property name="borderRight" value="4"/>
         <property name="borderLeft" value="4"/>
+        <property name="borderRight" value="4"/>
       </makeup>
     </actor>
     <actor costume="jobButton" x="294" y="57" direction="0.0" heading="0.0" startEvent="default" zOrder="5" colorize="#8f98ca00">
-      <property name="job" value="climber"/>
+      <property name="job" value="builder"/>
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Frame">
         <property name="ninePatchName" value="button"/>
         <property name="borderTop" value="4"/>
         <property name="borderBottom" value="4"/>
-        <property name="borderRight" value="4"/>
         <property name="borderLeft" value="4"/>
+        <property name="borderRight" value="4"/>
       </makeup>
     </actor>
     <actor costume="jobButton" x="347" y="57" direction="0.0" heading="0.0" startEvent="default" zOrder="6" colorize="#8f98ca00">
@@ -28,8 +28,8 @@
         <property name="ninePatchName" value="button"/>
         <property name="borderTop" value="4"/>
         <property name="borderBottom" value="4"/>
-        <property name="borderRight" value="4"/>
         <property name="borderLeft" value="4"/>
+        <property name="borderRight" value="4"/>
       </makeup>
     </actor>
     <actor costume="paws" x="47" y="53" direction="0.0" heading="0.0" startEvent="default" zOrder="7">
@@ -38,8 +38,8 @@
         <property name="ninePatchName" value="button"/>
         <property name="borderTop" value="4"/>
         <property name="borderBottom" value="4"/>
-        <property name="borderRight" value="4"/>
         <property name="borderLeft" value="4"/>
+        <property name="borderRight" value="4"/>
       </makeup>
     </actor>
     <actor costume="jobButton" id="selectButton" x="188" y="56" direction="0.0" heading="0.0" startEvent="default" zOrder="8" colorize="#8f98ca00">
@@ -48,8 +48,8 @@
         <property name="ninePatchName" value="button"/>
         <property name="borderTop" value="4"/>
         <property name="borderBottom" value="4"/>
-        <property name="borderRight" value="4"/>
         <property name="borderLeft" value="4"/>
+        <property name="borderRight" value="4"/>
       </makeup>
     </actor>
   </layer>

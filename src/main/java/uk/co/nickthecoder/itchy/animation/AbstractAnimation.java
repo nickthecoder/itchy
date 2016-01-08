@@ -26,15 +26,16 @@ public abstract class AbstractAnimation implements Animation, Cloneable
     private List<MessageListener> messageListeners = new ArrayList<MessageListener>();
 
     private String finishedMessage = null;
-
+    
     @Override
     public List<Property<Animation, ?>> getProperties()
     {
         return properties;
     }
-    
+
     @Override
     public abstract String getName();
+
 
     @Override
     public String getTagName()
@@ -58,11 +59,12 @@ public abstract class AbstractAnimation implements Animation, Cloneable
 
     protected void fireFinished( Actor actor )
     {
-        
+
         for (AnimationListener listener : this.listeners) {
             listener.finished();
         }
         if (!StringUtils.isBlank(this.finishedMessage)) {
+            actor.getRole().onMessage(getFinishedMessage());
             for (MessageListener listener : this.messageListeners) {
                 listener.onMessage(this.finishedMessage);
             }

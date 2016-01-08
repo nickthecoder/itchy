@@ -655,17 +655,17 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.8"
-     inkscape:cx="392.65327"
-     inkscape:cy="639.47588"
+     inkscape:zoom="1.979899"
+     inkscape:cx="330.07479"
+     inkscape:cy="619.26997"
      inkscape:document-units="px"
-     inkscape:current-layer="layer2"
+     inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="502"
-     inkscape:window-height="480"
-     inkscape:window-x="1811"
-     inkscape:window-y="175"
-     inkscape:window-maximized="0">
+     inkscape:window-width="1440"
+     inkscape:window-height="847"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1">
     <inkscape:grid
        type="xygrid"
        id="grid3013" />
@@ -691,8 +691,8 @@
        id="rect3784"
        width="313.92856"
        height="258.92856"
-       x="449.01672"
-       y="289.39429" />
+       x="446.49133"
+       y="409.09735" />
     <g
        transform="matrix(-0.92307694,0,0,-1,696.50198,845.30862)"
        inkscape:export-ydpi="92.571426"
@@ -776,7 +776,7 @@
        height="60"
        width="36" />
     <rect
-       style="fill:#ff0000;fill-opacity:1;stroke:none"
+       style="fill:#ff0000;fill-opacity:0.66359448;stroke:none"
        id="rect2996"
        width="30.000008"
        height="1.9999981"
@@ -784,27 +784,27 @@
        y="382.36218"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90"
-       inkscape:export-filename="/home/nick/projects/itchy/resources/TheMings/images/fall.png" />
+       inkscape:export-filename="/home/nick/server/projects/itchy/resources/The-Mings/images/fall.png" />
     <rect
        y="374.36218"
        x="475"
        height="6.9999919"
        width="30.000015"
        id="rect3009"
-       style="fill:#aa0000;fill-opacity:1;stroke:none"
-       inkscape:export-filename="/home/nick/projects/itchy/resources/TheMings/images/climb.png"
+       style="fill:#000faa;fill-opacity:0.58525348;stroke:none"
+       inkscape:export-filename="/home/nick/server/projects/itchy/resources/The-Mings/images/climb.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
     <rect
        inkscape:export-ydpi="92.571426"
        inkscape:export-xdpi="92.571426"
-       inkscape:export-filename="/home/nick/projects/itchy/resources/TheMings/images/reverse.png"
-       style="fill:#ff0000;fill-opacity:1;stroke:none"
+       inkscape:export-filename="/home/nick/server/projects/itchy/resources/The-Mings/images/reverse.png"
+       style="fill:#00ff11;fill-opacity:0.65898617;stroke:none"
        id="rect3011"
        width="2"
-       height="55"
+       height="48.43401"
        x="473"
-       y="317.36218" />
+       y="323.92816" />
     <g
        id="g3785"
        transform="translate(-114,-36)"

@@ -52,6 +52,8 @@ import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 
 public class SpriteSheetsEditor extends SubEditor<SpriteSheet>
 {
+    private static final int DATA_COLUMN = 5;
+
     public SpriteSheetsEditor(Editor editor)
     {
         super(editor);
@@ -179,16 +181,22 @@ public class SpriteSheetsEditor extends SubEditor<SpriteSheet>
         nameColumn.rowComparator = new SingleColumnRowComparator<String>(0);
 
         TableModelColumn xColumn = new TableModelColumn("X", 1, 50);
-        xColumn.rowComparator = new SingleColumnRowComparator<Integer>(0);
+        xColumn.rowComparator = new SingleColumnRowComparator<Integer>(1);
 
-        TableModelColumn yColumn = new TableModelColumn("Y", 2, 50);
-        yColumn.rowComparator = new SingleColumnRowComparator<Integer>(0);
+        TableModelColumn yColumn = new TableModelColumn("Y", 2, 70);
+        yColumn.rowComparator = new SingleColumnRowComparator<Integer>(2);
 
-        TableModelColumn previewColumn = new TableModelColumn("Sprite", 3, 140)
+        TableModelColumn widthColumn = new TableModelColumn("Width", 3, 70);
+        widthColumn.rowComparator = new SingleColumnRowComparator<Integer>(3);
+
+        TableModelColumn heightColumn = new TableModelColumn("Height", 4, 70);
+        heightColumn.rowComparator = new SingleColumnRowComparator<Integer>(4);
+
+        TableModelColumn previewColumn = new TableModelColumn("Sprite", DATA_COLUMN, 140)
         {
             public void addPlainCell(Container container, final TableModelRow row)
             {
-                final Sprite sprite = (Sprite) row.getData(3);
+                final Sprite sprite = (Sprite) row.getData(DATA_COLUMN);
                 container.addChild(new ImageComponent(sprite.getThumbnail()));
             }
 
@@ -208,11 +216,13 @@ public class SpriteSheetsEditor extends SubEditor<SpriteSheet>
                 this.addPlainCell(container, row);
             };
         };
-
+        
         List<TableModelColumn> columns = new ArrayList<TableModelColumn>();
         columns.add(nameColumn);
         columns.add(xColumn);
         columns.add(yColumn);
+        columns.add(widthColumn);
+        columns.add(heightColumn);
         columns.add(previewColumn);
 
         this.spritesTableModel = this.createSpritesTableModel();
@@ -228,6 +238,8 @@ public class SpriteSheetsEditor extends SubEditor<SpriteSheet>
             row.add(sprite.getName());
             row.add(sprite.getX());
             row.add(sprite.getY());
+            row.add(sprite.getWidth());
+            row.add(sprite.getHeight());
             row.add(sprite);
 
             model.addRow(row);
@@ -241,12 +253,13 @@ public class SpriteSheetsEditor extends SubEditor<SpriteSheet>
         this.spritesTableModel = this.createSpritesTableModel();
         this.spritesTable.setTableModel(this.spritesTableModel);
     }
+    
 
     private void selectSpritesTableRow(Sprite sprite)
     {
         for (int i = 0; i < this.spritesTableModel.getRowCount(); i++) {
             TableModelRow row = this.spritesTableModel.getRow(i);
-            if (row.getData(3) == sprite) {
+            if (row.getData(DATA_COLUMN) == sprite) {
                 this.spritesTable.selectRow(row);
                 return;
             }
@@ -268,7 +281,7 @@ public class SpriteSheetsEditor extends SubEditor<SpriteSheet>
             return;
         }
 
-        Sprite sprite = (Sprite) row.getData(3);
+        Sprite sprite = (Sprite) row.getData(DATA_COLUMN);
         currentResource.resources.removePose(sprite.getName());
         currentResource.removeSprite( sprite );
         rebuildSpritesTable();
@@ -281,7 +294,7 @@ public class SpriteSheetsEditor extends SubEditor<SpriteSheet>
             return;
         }
 
-        Sprite sprite = (Sprite) row.getData(3);
+        Sprite sprite = (Sprite) row.getData(DATA_COLUMN);
 
         if (row != null) {
             editSprite(sprite);

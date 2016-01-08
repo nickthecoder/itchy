@@ -284,7 +284,7 @@ public class Actor implements PropertySubject<Actor>
 
     public void setAnimation( Animation animation, AnimationEvent ae )
     {
-        
+
         if (animation == null) {
             if (ae == AnimationEvent.REPLACE) {
                 // If we are trying to REPLACE the old animation with null, then stop the old animation if there is one.
@@ -324,7 +324,6 @@ public class Actor implements PropertySubject<Actor>
             newAnimation = ca;
         }
 
-        newAnimation.addMessageListener(getRole());
         this.animation = newAnimation;
         this.animation.tick(this);
     }
@@ -363,16 +362,17 @@ public class Actor implements PropertySubject<Actor>
         }
 
         Animation animation = this.costume.getAnimation(eventName);
-        if (animation == null) {
-            // If there is no animation, but a completion message is specified, then send the message straight away.
-            if (message != null) {
+        if ( message != null ) {
+            if (animation == null) {
+                // If there is no animation, but a completion message is specified, then send the message straight away.
                 this.getRole().onMessage(message);
+            } else {
+                animation = animation.copy();
+                animation.setFinishedMessage(message);
             }
-        } else {
-            animation.setFinishedMessage(message);
         }
         this.setAnimation(animation, ae);
-
+        
         ManagedSound cs = this.costume.getCostumeSound(eventName);
         if (cs != null) {
             Itchy.soundManager.play(this, eventName, cs);
