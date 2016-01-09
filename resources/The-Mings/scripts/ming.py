@@ -29,7 +29,7 @@ class Ming(AbstractRole) :
         actor = FollowerBuilder( self.actor ).pose( name ).create().actor
         actor.setZOrder( 100 )
         # Make it invisible, comment out this line while debugging motions.
-        #actor.getAppearance().setAlpha( 0 )
+        actor.getAppearance().setAlpha( 0 )
         return actor.role
 
 
@@ -237,6 +237,7 @@ class Builder(Job) :
     def onMessage( self, ming, message ) :
         if message == "laidBrick" :
             brick = ming.actor.createCompanion( "brick" )
+            brick.moveBy( ming.direction * 3 * PIXELATION_SIZE, 0 )
         if message == "steppedUp" :
             ming.actor.x += 2 * PIXELATION_SIZE * ming.direction
             ming.actor.y += PIXELATION_SIZE

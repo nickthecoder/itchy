@@ -2,22 +2,22 @@
   <game title="The Mings" width="1000" height="800" resizable="false" initialScene="menu" directorClassName="director.py"/>
   <spriteSheets>
     <spriteSheet name="spriteSheet" file="images/spriteSheet.png">
-      <sprite name="tiny-build-06" x="103" y="104" width="8" height="10" direction="0.0" offsetX="4" offsetY="9"/>
-      <sprite name="tiny-build-15" x="285" y="103" width="9" height="10" direction="0.0" offsetX="5" offsetY="9"/>
-      <sprite name="tiny-build-10" x="184" y="104" width="10" height="10" direction="0.0" offsetX="5" offsetY="9"/>
-      <sprite name="tiny-build-07" x="123" y="102" width="8" height="11" direction="0.0" offsetX="4" offsetY="10"/>
+      <sprite name="tiny-build-11" x="204" y="103" width="10" height="10" direction="0.0" offsetX="5" offsetY="9"/>
+      <sprite name="tiny-build-01" x="4" y="103" width="8" height="10" direction="0.0" offsetX="4" offsetY="9"/>
+      <sprite name="tiny-build-02" x="24" y="103" width="8" height="10" direction="0.0" offsetX="4" offsetY="9"/>
       <sprite name="tiny-build-08" x="143" y="102" width="9" height="11" direction="0.0" offsetX="4" offsetY="10"/>
       <sprite name="tiny-build-14" x="264" y="103" width="10" height="10" direction="0.0" offsetX="5" offsetY="9"/>
+      <sprite name="tiny-brick-01" x="230" y="112" width="4" height="1" direction="0.0" offsetX="2" offsetY="0"/>
       <sprite name="tiny-build-13" x="244" y="103" width="10" height="10" direction="0.0" offsetX="5" offsetY="9"/>
-      <sprite name="tiny-build-12" x="224" y="103" width="10" height="10" direction="0.0" offsetX="5" offsetY="9"/>
-      <sprite name="tiny-build-01" x="4" y="103" width="8" height="10" direction="0.0" offsetX="4" offsetY="9"/>
-      <sprite name="tiny-build-11" x="204" y="103" width="10" height="10" direction="0.0" offsetX="5" offsetY="9"/>
-      <sprite name="tiny-build-09" x="163" y="102" width="10" height="11" direction="0.0" offsetX="5" offsetY="10"/>
-      <sprite name="tiny-build-04" x="63" y="103" width="8" height="10" direction="0.0" offsetX="4" offsetY="9"/>
-      <sprite name="tiny-build-03" x="43" y="103" width="8" height="10" direction="0.0" offsetX="4" offsetY="9"/>
-      <sprite name="tiny-build-02" x="24" y="103" width="8" height="10" direction="0.0" offsetX="4" offsetY="9"/>
       <sprite name="tiny-build-05" x="83" y="104" width="8" height="10" direction="0.0" offsetX="4" offsetY="9"/>
-      <sprite name="tiny-brick-01" x="230" y="112" width="4" height="1" direction="0.0" offsetX="-1" offsetY="0"/>
+      <sprite name="tiny-build-15" x="285" y="103" width="9" height="10" direction="0.0" offsetX="5" offsetY="9"/>
+      <sprite name="tiny-build-03" x="43" y="103" width="8" height="10" direction="0.0" offsetX="4" offsetY="9"/>
+      <sprite name="tiny-build-04" x="63" y="103" width="8" height="10" direction="0.0" offsetX="4" offsetY="9"/>
+      <sprite name="tiny-build-09" x="163" y="102" width="10" height="11" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-build-12" x="224" y="103" width="10" height="10" direction="0.0" offsetX="5" offsetY="9"/>
+      <sprite name="tiny-build-07" x="123" y="102" width="8" height="11" direction="0.0" offsetX="4" offsetY="10"/>
+      <sprite name="tiny-build-10" x="184" y="104" width="10" height="10" direction="0.0" offsetX="5" offsetY="9"/>
+      <sprite name="tiny-build-06" x="103" y="104" width="8" height="10" direction="0.0" offsetX="4" offsetY="9"/>
     </spriteSheet>
   </spriteSheets>
   <poses>
@@ -187,6 +187,29 @@
           <frame pose="blocker13" delay="8"/>
           <frame pose="blocker14" delay="8"/>
           <frame pose="blocker15" delay="8"/>
+        </frames>
+      </sequence>
+    </animation>
+    <animation name="builderL">
+      <sequence sequence="true" loops="10" finishedMessage="jobComplete">
+        <frames pingPong="false">
+          <frame pose="builderL-01" delay="4"/>
+          <frame pose="builderL-02" delay="4"/>
+          <frame pose="builderL-03" delay="4"/>
+          <frame pose="builderL-04" delay="4"/>
+          <frame pose="builderL-05" delay="4"/>
+          <frame pose="builderL-06" delay="4"/>
+          <frame pose="builderL-07" delay="4"/>
+          <frame pose="builderL-08" delay="4"/>
+          <frame pose="builderL-09" delay="4"/>
+          <frame pose="builderL-10" delay="4"/>
+        </frames>
+        <frames pingPong="false" startMessage="laidBrick" finishedMessage="steppedUp">
+          <frame pose="builderL-11" delay="4"/>
+          <frame pose="builderL-12" delay="4"/>
+          <frame pose="builderL-13" delay="4"/>
+          <frame pose="builderL-14" delay="4"/>
+          <frame pose="builderL-15" delay="4"/>
         </frames>
       </sequence>
     </animation>
@@ -376,6 +399,7 @@
       <pose name="turnLeft" pose="turnLeft"/>
       <pose name="turnRight" pose="turnRight"/>
       <animation name="blocker" animation="blocker"/>
+      <animation name="builderL" animation="builderL"/>
       <animation name="builderR" animation="builderR"/>
       <animation name="climberL" animation="climberL"/>
       <animation name="climberR" animation="climberR"/>

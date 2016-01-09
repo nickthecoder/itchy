@@ -60,7 +60,8 @@ class Director(AbstractDirector) :
         
         self.pixelateSprites( "tiny-brick-", "brick-", 1 )
         self.pixelateSprites( "tiny-build-", "builderR-", 15 )
-
+        self.pixelateSprites( "tiny-build-", "builderL-", 15, True )
+        
         self.createButton( "tiny-build-09", "buttonBuilder" )
         
         print "Processed images in", time.time() - start_time, "seconds"
@@ -79,7 +80,7 @@ class Director(AbstractDirector) :
             
             game.resources.addPose( poseResource )
     
-    def pixelateSprites( self, sourcePrefix, destinationPrefix, amount ) :
+    def pixelateSprites( self, sourcePrefix, destinationPrefix, amount, flip = False ) :
     
         for i in range(0,amount) :
             sourceName = sourcePrefix + str(i+1).zfill(2)
@@ -88,12 +89,9 @@ class Director(AbstractDirector) :
             if pose is None :
                 print "Pose", sourceName, "not found"
             else :
-                self.pixelateSprite( self.pixelator, pose, destinationName )
-                
-    def pixelateSprite( self, pixelator, pose, newName ) :
-        newPose = pixelator.pixelate( pose )
-        newPoseResource = DynamicPoseResource( game.resources, newName, newPose )
-        game.resources.addPose( newPoseResource )
+                newPose = self.pixelator.pixelate( pose, flip )
+                newPoseResource = DynamicPoseResource( game.resources, destinationName, newPose )
+                game.resources.addPose( newPoseResource )
     
 
     # Boiler plate code - no need to change this

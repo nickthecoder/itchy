@@ -95,9 +95,10 @@ class Play(PlainSceneDirector) :
 
         self.jobButton = jobButton
         # MORE Highlight the button
+        
         if self.highlight is not None :
             self.highlight.parent.getRole().setJob( jobButton.job )
-
+            self.selectMing(None)
 
 
     def selectMing( self, ming ) :

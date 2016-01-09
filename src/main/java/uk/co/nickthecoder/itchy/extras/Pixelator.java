@@ -24,17 +24,34 @@ public class Pixelator
         this.lowlight = lowlight;
     }
 
+
     public ImagePose pixelate(Pose pose)
     {
-        ImagePose result = new ImagePose(pixelate(pose.getSurface()));
+        return pixelate(pose, false);
+    }
+    
+    public ImagePose pixelate(Pose pose, boolean flip)
+    {
+        ImagePose result = new ImagePose(pixelate(pose.getSurface(), flip));
         result.setOffsetX(pose.getOffsetX() * scale);
+        if (flip) {
+            result.setOffsetX(result.getSurface().getWidth() - result.getOffsetX());
+        }
         result.setOffsetY(pose.getOffsetY() * scale);
         return result;
     }
 
     public Surface pixelate(Surface source )
     {
+        return pixelate(source, false);
+    }
+    
+    public Surface pixelate(Surface source, boolean flip )
+    {
         // Make a scaled copy
+        if (flip) {
+            source = source.zoom(-1, 1, false );
+        }
         Surface result = source.rotoZoom(0, scale, false);
 
         // Apply highlights and lowlights on top of the scaled image

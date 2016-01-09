@@ -19,7 +19,7 @@ class JobButton(Button) :
 
     def onClick(self) :
         print "Job : ", self.job
-        Itchy.getGame().getSceneDirector().pickJob( self )
+        Itchy.getGame().sceneDirector.pickJob( self )
 
     # TODO Other methods include :
     # onDetach, onKill, onMouseDown, onMouseUp, onMouseMove

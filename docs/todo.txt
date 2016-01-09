@@ -1,8 +1,13 @@
 Current Tasks
 =============
 
+The-Mings delete existing Ming poses, and use the sprite sheet instead.
+
+Create a TestMing role, a property to set the animation and dx, dy.
+	Create a test scene, showing all possible animations.
+	 
 Improve basher's animation (similar to builders)?
-	Clever use of the offsetX ?, or step on a given message?
+	Clever use of the offsetX ?, or step, on a given message?
 	Bash big lumps at a time
 
 To aid testing, allow mings to be added with any job.
@@ -20,8 +25,6 @@ SceneDesigner toolbox isn't moved when the window is maximised (floats in middle
 
 New Features
 ============
-
-	Maybe add a start message too.
 	
 Ensure Scrollbars of Scroll do not obscure the contents.
 
@@ -35,9 +38,6 @@ TheMings
 	An actual real game level.
 
 Design Stages/Views graphically - Aim for no code in Director.
-
-Create a Pixelator, for TheMings, which pixelates the images as they are loaded.  
-Load TheMings images directly from the sprite sheet.
 
 Code Tidy Up
 ============
