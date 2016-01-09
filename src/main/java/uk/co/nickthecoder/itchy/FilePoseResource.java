@@ -7,6 +7,7 @@ import java.util.List;
 import uk.co.nickthecoder.itchy.property.BooleanProperty;
 import uk.co.nickthecoder.itchy.property.DoubleProperty;
 import uk.co.nickthecoder.itchy.property.FileProperty;
+import uk.co.nickthecoder.itchy.property.IntegerProperty;
 import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.PropertySubject;
 import uk.co.nickthecoder.itchy.property.StringProperty;
@@ -21,8 +22,8 @@ public class FilePoseResource extends PoseResource implements PropertySubject<Fi
         properties.add( new FileProperty<FilePoseResource>( "file" ).aliases( "filename" ));
         properties.add( new BooleanProperty<FilePoseResource>( "shared" ));
         properties.add( new DoubleProperty<FilePoseResource>( "pose.direction" ) );
-        properties.add( new DoubleProperty<FilePoseResource>( "pose.offsetX" ) );
-        properties.add( new DoubleProperty<FilePoseResource>( "pose.offsetY" ) );
+        properties.add( new IntegerProperty<FilePoseResource>( "pose.offsetX" ) );
+        properties.add( new IntegerProperty<FilePoseResource>( "pose.offsetY" ) );
     }
     
     private File file;
