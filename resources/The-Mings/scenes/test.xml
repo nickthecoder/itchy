@@ -75,7 +75,7 @@
     <actor costume="soil1" x="30" y="510" direction="0.0" heading="0.0" startEvent="default" zOrder="112"/>
   </layer>
   <layer name="main">
-    <actor costume="ming" x="359" y="453" direction="0.0" heading="0.0" startEvent="default" zOrder="37"/>
+    <actor costume="ming" x="653" y="418" direction="0.0" heading="0.0" startEvent="default" zOrder="37"/>
     <actor costume="entrance1" x="363" y="611" direction="0.0" heading="0.0" startEvent="default" zOrder="90">
       <property name="offsetY" value="-300"/>
       <property name="offsetX" value="300"/>

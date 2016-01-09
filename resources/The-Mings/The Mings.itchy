@@ -92,7 +92,7 @@
     <pose name="grass1" filename="images/grass1.png" offsetX="2" offsetY="8"/>
     <pose name="gui" filename="images/gui.png" offsetX="0" offsetY="100"/>
     <pose name="highlight" filename="images/highlight.png" offsetY="95"/>
-    <pose name="lookDown" filename="images/lookDown.png" offsetY="0"/>
+    <pose name="lookDown" filename="images/lookDown.png" offsetY="5"/>
     <pose name="lookLeft" filename="images/lookLeftRight.png" offsetX="13" offsetY="57"/>
     <pose name="lookRight" filename="images/lookLeftRight.png" offsetX="-12" offsetY="57"/>
     <pose name="lookStepUpLeft" filename="images/lookStepUp.png" offsetX="18" offsetY="3"/>
@@ -375,7 +375,7 @@
           <move dx="-6.0" dy="0.0" ticks="1" ease="linear"/>
         </sequence>
         <sequence sequence="true" loops="1">
-          <frames pingPong="false" finishedMessage="step4">
+          <frames pingPong="false">
             <frame pose="walkerL-01" delay="4"/>
             <frame pose="walkerL-02" delay="4"/>
             <frame pose="walkerL-03" delay="4"/>
