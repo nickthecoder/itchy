@@ -4,6 +4,8 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -122,8 +124,12 @@ public class ResourcesWriter extends XMLWriter
             SpriteSheet spriteSheet = this.resources.getSpriteSheet(name);
             this.beginTag("spriteSheet");
             this.writeProperties(spriteSheet);
-
-            for ( Sprite sprite: spriteSheet.getSprites() ) {
+            
+            List<Sprite> sprites = new ArrayList<Sprite>();
+            sprites.addAll(spriteSheet.getSprites());
+            Collections.sort(sprites);
+            
+            for ( Sprite sprite: sprites ) {
                 this.beginTag( "sprite" );
                 this.writeProperties(sprite);
                 this.endTag( "sprite" );

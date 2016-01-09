@@ -455,9 +455,14 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
     public void fixAppearance()
     {
         ImagePose pose = new ImagePose(getSurface().copy(), getOffsetX(), getOffsetY());
+        
         pose.setDirection(getDirection());
+
         setPose(pose);
         setMakeup(new NullMakeup());
+        this.scale = 1;
+
+        System.out.println("Fixed appearance direction diff : " + (this.getDirection() - this.getPose().getDirection()) );
     }
 
     @Override

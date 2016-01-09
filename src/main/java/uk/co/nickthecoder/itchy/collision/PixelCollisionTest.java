@@ -11,16 +11,26 @@ import uk.co.nickthecoder.itchy.Actor;
 
 public class PixelCollisionTest implements CollisionTest
 {
+    public static final int DEFAULT_THRESHOLD = 1;
+    
     public static final PixelCollisionTest instance = new PixelCollisionTest();
-    
-    private PixelCollisionTest()
+
+    public int threshold;
+
+    public PixelCollisionTest()
     {
+        this(DEFAULT_THRESHOLD);
     }
-    
+
+    public PixelCollisionTest( int threshold)
+    {
+        this.threshold = threshold;
+    }
+
     @Override
     public boolean collided( Actor a, Actor b )
     {
-        return a.pixelOverlap(b);
+        return a.pixelOverlap(b, threshold);
     }
 
 }

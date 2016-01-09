@@ -11,6 +11,7 @@ import java.util.Set;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.WorldRectangle;
+import uk.co.nickthecoder.itchy.collision.PixelCollisionTest;
 
 /**
  * Uses a Neighbourhood to optimise Actor's overlapping and pixelOverlap methods. This strategy uses a grid based neighbourhood. It is
@@ -51,7 +52,7 @@ public class NeighbourhoodCollisionStrategy extends ActorCollisionStrategy
 
     public NeighbourhoodCollisionStrategy( Actor actor, Neighbourhood neighbourhood )
     {
-        this(PixelCollisionTest.instance, actor, neighbourhood);
+        this( PixelCollisionTest.instance, actor, neighbourhood);
     }
 
     public NeighbourhoodCollisionStrategy( CollisionTest collisionTest, Actor actor, Neighbourhood neighbourhood )
@@ -61,7 +62,7 @@ public class NeighbourhoodCollisionStrategy extends ActorCollisionStrategy
         this.neighbourhood = neighbourhood;
         this.update();
     }
-
+    
     @Override
     public void update()
     {
