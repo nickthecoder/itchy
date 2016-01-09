@@ -7,53 +7,37 @@ properties = ArrayList()
 class Ming(AbstractRole) :
 
     def __init__(self) :
-        # TODO Initialise your object. Note you can't access self.getActor() yet. e.g. :
-        self.dx = 2
+        self.dx = 0
         self.dy = 0
         self.direction = 1 # Either 1 or -1. Remembered even when falling/digging etc.
         self.job = None
         
     def onBirth(self):
 
-        self.fallTest = self.createCollisionTest( "fall" )
-        self.turnRightTest = self.createCollisionTest( "turnRight" )
-        self.turnLeftTest = self.createCollisionTest( "turnLeft" )
-        self.stepUpTest = self.createCollisionTest( "stepUp" )
         self.addTag( "ming" )
 
-        self.direction = 1 # Either 1 or -1. Remembered even when falling/digging etc.
+        self.lookLeftRight = self.createLooker( "lookLeftRight" )
+        self.lookDown = self.createLooker( "lookDown" )
+        self.lookStepUp = self.createLooker( "lookStepUp" )
+
         self.changeJob( Walker() )
         
-
-    def createCollisionTest( self, name ) :
-        actor = FollowerBuilder( self.actor ).pose( name ).create().actor
-        actor.setZOrder( 100 )
-        # Make it invisible, comment out this line while debugging motions.
-        actor.getAppearance().setAlpha( 0 )
-        return actor.role
-
-
-    def checkCollision( self, role, checkForBlockers=False ) :
-        role.getCollisionStrategy().update()
-        if not role.getCollisionStrategy().collisions( role.getActor(), "solid" ).isEmpty() :
-            return False
-
-        if checkForBlockers :
-            if not role.getCollisionStrategy().collisions( role.getActor(), "blocker" ).isEmpty() :
-                return False
-
-        return True
-
+        
+    def createLooker(self, name) :
+        result = FollowerBuilder( self.actor ).companion( name ).create()
+        result.event( "look" + self.directionLetter() )
+        #result.actor.appearance.alpha = 100
+        return result
+        
 
     def tick(self):
 
-        self.getActor().moveBy( self.dx, self.dy )
+        self.actor.moveBy( self.dx, self.dy )
         self.job.work( self )
-        self.getCollisionStrategy().update()
+        self.collisionStrategy.update()
 
 
     def onMessage( self, message ) :
-        print "Ming message", message
         self.job.onMessage( self, message )
 
 
@@ -73,11 +57,15 @@ class Ming(AbstractRole) :
         elif jobName == "builder" :
             newJob = Builder()
 
+        elif jobName == "digger" :
+            newJob = Digger()
+
         if newJob is not None :
             self.changeJob( newJob )
 
 
     def changeJob( self, job ) :
+        self.actor.setAnimation( None, Actor.AnimationEvent.REPLACE )
         if self.job is not None :
             self.job.quit( self )
         self.job = job
@@ -89,26 +77,26 @@ class Ming(AbstractRole) :
             return "L"
         else :
             return "R"
+            
 
+    def reverse( self ) :
+        print "Reverse!"
+        self.direction = - self.direction
+        self.lookLeftRight.event( "look" + self.directionLetter() )
+        self.lookStepUp.event( "look" + self.directionLetter() )
+        self.dx = - self.dx
 
-    def checkForFalling( self ) :
+    def look( self, looker, tags = ["solid"] ) :
+        looker.tick()
+        looker.collisionStrategy.update()
+        return looker.collided( tags )
+        
+        
+    def checkForReversing( self ) :
 
-        # Is there anything under my feet?
-        if self.checkCollision( self.fallTest ) :
-
-            # If it is a small step down, don't fall, just change Y
-            self.getActor().moveBy(0,-8)
-            self.fallTest.tick()
-            if not self.checkCollision( self.fallTest ) :
-                #print "Small step down"
-                self.findLevel()
-                return False
-            self.getActor().moveBy(0,8)
-            self.fallTest.tick()
-
-            # Nothing under us. Fall!
-            #print "Fall"
-            self.changeJob( Faller() )
+        if self.look( self.lookLeftRight, ["solid", "blocker"] ) :
+            self.reverse()
+            self.changeJob( Walker() )
             return True
 
         return False
@@ -116,39 +104,67 @@ class Ming(AbstractRole) :
 
     def checkForStepUp( self ) :
 
-        if not self.checkCollision( self.stepUpTest ) :
+        if self.look( self.lookStepUp ) :
             self.findLevel()
             return True
         return False
 
 
-    def checkForReversing( self ) :
+    def checkForFalling( self ) :
 
-        if self.direction > 0 :
-            # Is there something solid to my right?
-            if not self.checkCollision( self.turnLeftTest, True ) :
-                self.direction = -1
-                self.changeJob( Walker() )
-                return True
+        # Is there anything under my feet?
+        if not self.look( self.lookDown ) :
 
-        else :
-            # Is there something solid to my left?
-            if not self.checkCollision( self.turnRightTest, True ) :
-                self.direction = 1
-                self.changeJob( Walker() )
-                return True
+            # If it is a small step down, don't fall, just change Y
+            self.actor.moveBy(0,-8)
+            if self.look( self.lookDown ) :
+                print "Small step down"                    
+                self.findLevel()
+                return False
+                
+            self.actor.moveBy(0,8)
+
+            # Nothing under us. Fall!
+            print "Fall"
+            self.changeJob( Faller() )
+            return True
 
         return False
 
 
+
     def findLevel( self ) :
         # Move up till we aren't on solid ground
-        while not self.checkCollision( self.fallTest ) :
-            self.getActor().moveBy(0,1)
-            self.fallTest.tick() # Allow the follow to follow me upwards
-            self.fallTest.getCollisionStrategy().update()
+        while self.look( self.lookDown ) :
+            self.actor.moveBy(0,1)
         # Move down 1 pixel, and we are now perfectly level with the ground.
-        self.getActor().moveBy(0,-1)
+        self.actor.moveBy(0,-1)
+
+
+
+    def removeSolids( self, follower ) :
+        follower.getCollisionStrategy().update()
+        for solid in follower.collisions( "solid" ) :
+            self.removeSolid( follower, solid )
+
+    def removeSolid( self, follower, solid ) :
+
+        followerPose = follower.actor.appearance.pose
+        solid.actor.appearance.fixAppearance()
+        solidPose = solid.actor.appearance.pose
+
+        tx = follower.actor.x - solid.actor.x
+        tx += solidPose.offsetX - followerPose.offsetX
+
+        ty = solid.actor.y - follower.actor.y
+        ty -= followerPose.offsetY - solidPose.offsetY
+
+        surface = solidPose.surface.copy()
+
+        rect = Rect( 0,0, followerPose.surface.width, followerPose.surface.height )
+        followerPose.surface.blit( rect, surface, int(tx), int(ty), Surface.BlendMode.RGBA_SUB )
+        newPose = ImagePose( surface, solidPose.offsetX, solidPose.offsetY )
+        solid.actor.appearance.pose = newPose
 
 
     # Boiler plate code - no need to change this
@@ -165,7 +181,8 @@ class Job() :
         pass
         
     def work( self, ming ) :
-        pass
+        if ming.checkForFalling() :
+            return
         
     def quit( self, ming ) :
         pass    
@@ -174,14 +191,30 @@ class Job() :
         pass    
 
 
+class Stop(Job) :
+
+    def start(self, ming) :
+        ming.dx = 0
+        ming.dy = 0
+        
+    def work(self, ming) :
+        pass
+
 class Walker(Job) :
 
     def start(self, ming) :
-    
+        print "Walker", ming.directionLetter()
         ming.dy = 0
-        ming.dx = ming.direction * 2
+        ming.dx = 0
         ming.event( "walk" + ming.directionLetter() )
+        print ming.actor.animation
     
+    def onMessage(self, ming, message) :
+        if message == "step5" :
+            ming.actor.moveBy( ming.direction * 5 * PIXELATION_SIZE, 0 )
+        if message == "step4" :
+            ming.actor.moveBy( ming.direction * 4 * PIXELATION_SIZE, 0 )
+
     def work( self, ming ) :
         if ming.checkForFalling() :
             return
@@ -192,7 +225,7 @@ class Walker(Job) :
 class Faller(Job) :
     
     def start( self, ming ) :
-    
+
         ming.dx = 0
         ming.dy = -1
         self.fallCount = 0
@@ -206,7 +239,8 @@ class Faller(Job) :
             ming.dy = -8 # Reached terminal velocity, don't get too fast.
 
         # Have I hit bottom?
-        if not ming.checkCollision( ming.fallTest ) :
+        if ming.look( ming.lookDown ) :
+            print "Stopped falling"
 
             # Have I fallen too far to land safely?
             if self.fallCount > 250 :
@@ -239,6 +273,7 @@ class Builder(Job) :
             brick = ming.actor.createCompanion( "brick" )
             brick.moveBy( ming.direction * 4 * PIXELATION_SIZE, 0 )
         if message == "steppedUp" :
+            print "Step up"
             ming.actor.x += 2 * PIXELATION_SIZE * ming.direction
             ming.actor.y += PIXELATION_SIZE
             if ming.checkForReversing() :
@@ -269,14 +304,15 @@ class Smasher(Job) :
         self.smashFollower = Follower( ming )
         self.smashFollower.createActor()
         self.smashFollower.event( "smashed" )
-        self.smashFollower.getActor().getAppearance().setAlpha( 0 )
+        # Comment out this line (or change the value) to help debugging.
+        self.smashFollower.actor.appearance.alpha = 0
 
         ming.event( "smasher" + ming.directionLetter() )
     
     def work( self, ming ) :
         if self.smashTimer.isFinished() :
 
-            self.smashFollower.getActor().kill()
+            self.smashFollower.actor.kill()
             self.smashFollower = None
             ming.changeJob( Walker() )
 
@@ -285,12 +321,11 @@ class Smasher(Job) :
             if self.smashed :
                 if not ming.checkCollision( tester ) :
 
-                    self.smashFollower.getCollisionStrategy().update()
-                    for solid in self.smashFollower.getCollisionStrategy().collisions( self.smashFollower.getActor(), "solid" ) :
-                        self.smashSolid( solid )
+                    ming.removeSolids( self.smashFollower )
+
                 else :
 
-                    self.smashFollower.getActor().kill()
+                    self.smashFollower.actor.kill()
                     self.smashFollower = None
                     ming.changeJob( Walker() )
             else :
@@ -299,21 +334,32 @@ class Smasher(Job) :
                     self.smashed = True
 
 
-    def smashSolid( self, solid ) :
+class Digger(Job) :
 
-        smashedPose = self.smashFollower.getActor().getAppearance().getPose()
-        solidPose = solid.getActor().getAppearance().getPose()
+    def start( self, ming ) :
+        ming.dy = 0
+        ming.dx = 0
+        self.removed = False # Set to true when first piece of solid is removed
 
-        tx = self.smashFollower.getActor().getX() - solid.getActor().getX()
-        tx += solidPose.getOffsetX() - smashedPose.getOffsetX()
+        self.digFollower = FollowerBuilder( ming.actor ).companion( "dug" ).create()
+        # Comment out this line (or change the value) to help debugging.
+        self.digFollower.actor.appearance.alpha = 128
 
-        ty = solid.getActor().getY() - self.smashFollower.getActor().getY()
-        ty -= smashedPose.getOffsetY() - solidPose.getOffsetY()
+        ming.event( "digger" )
 
-        surface = solidPose.getSurface().copy()
+    def quit( self, ming ) :
+        self.digFollower.actor.kill()
+        
+    def onMessage( self, ming, message ) :
+        print "Digger message", message
+        
+        if message == "jobComplete" :
+            print "Complete"
+            ming.changeJob( Walker() )
+            
+        if message == "dugDown" :
+            print "Dug Down"
+            ming.actor.moveBy( 0, -PIXELATION_SIZE )
+            ming.removeSolids( self.digFollower )
 
-        rect = Rect( 0,0, smashedPose.getSurface().getWidth(), smashedPose.getSurface().getHeight() )
-        smashedPose.getSurface().blit( rect, surface, int(tx), int(ty), Surface.BlendMode.RGBA_SUB )
-        newPose = ImagePose( surface, solidPose.getOffsetX(), solidPose.getOffsetY() )
-        solid.getActor().getAppearance().setPose( newPose )
 

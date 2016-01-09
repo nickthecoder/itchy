@@ -2,22 +2,45 @@
   <game title="The Mings" width="1000" height="800" resizable="false" initialScene="menu" directorClassName="director.py"/>
   <spriteSheets>
     <spriteSheet name="spriteSheet" file="images/spriteSheet.png">
-      <sprite name="tiny-build-08" x="144" y="102" width="9" height="11" direction="0.0" offsetX="4" offsetY="10"/>
-      <sprite name="tiny-build-04" x="64" y="103" width="8" height="10" direction="0.0" offsetX="4" offsetY="9"/>
-      <sprite name="tiny-build-11" x="204" y="103" width="10" height="10" direction="0.0" offsetX="4" offsetY="9"/>
-      <sprite name="tiny-build-14" x="264" y="103" width="10" height="10" direction="0.0" offsetX="4" offsetY="9"/>
-      <sprite name="tiny-build-05" x="84" y="103" width="8" height="10" direction="0.0" offsetX="4" offsetY="9"/>
-      <sprite name="tiny-brick-01" x="230" y="112" width="4" height="1" direction="0.0" offsetX="2" offsetY="0"/>
-      <sprite name="tiny-build-10" x="184" y="103" width="10" height="10" direction="0.0" offsetX="4" offsetY="9"/>
-      <sprite name="tiny-build-13" x="244" y="103" width="10" height="10" direction="0.0" offsetX="4" offsetY="9"/>
-      <sprite name="tiny-build-03" x="44" y="103" width="8" height="10" direction="0.0" offsetX="4" offsetY="9"/>
-      <sprite name="tiny-build-07" x="124" y="102" width="8" height="11" direction="0.0" offsetX="4" offsetY="10"/>
-      <sprite name="tiny-build-01" x="4" y="103" width="8" height="10" direction="0.0" offsetX="4" offsetY="9"/>
-      <sprite name="tiny-build-15" x="285" y="103" width="9" height="10" direction="0.0" offsetX="3" offsetY="9"/>
-      <sprite name="tiny-build-12" x="224" y="103" width="10" height="10" direction="0.0" offsetX="4" offsetY="9"/>
-      <sprite name="tiny-build-06" x="104" y="103" width="8" height="10" direction="0.0" offsetX="4" offsetY="9"/>
-      <sprite name="tiny-build-02" x="24" y="103" width="8" height="10" direction="0.0" offsetX="4" offsetY="9"/>
-      <sprite name="tiny-build-09" x="163" y="102" width="10" height="11" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-brick-01" x="230" y="112" width="4" height="1" direction="0.0" offsetX="2" offsetY="1"/>
+      <sprite name="tiny-build-01" x="4" y="103" width="8" height="10" direction="0.0" offsetX="4" offsetY="10"/>
+      <sprite name="tiny-build-02" x="24" y="103" width="8" height="10" direction="0.0" offsetX="4" offsetY="10"/>
+      <sprite name="tiny-build-03" x="44" y="103" width="8" height="10" direction="0.0" offsetX="4" offsetY="10"/>
+      <sprite name="tiny-build-04" x="64" y="103" width="8" height="10" direction="0.0" offsetX="4" offsetY="10"/>
+      <sprite name="tiny-build-05" x="84" y="103" width="8" height="10" direction="0.0" offsetX="4" offsetY="10"/>
+      <sprite name="tiny-build-06" x="104" y="103" width="8" height="10" direction="0.0" offsetX="4" offsetY="10"/>
+      <sprite name="tiny-build-07" x="124" y="102" width="8" height="11" direction="0.0" offsetX="4" offsetY="11"/>
+      <sprite name="tiny-build-08" x="144" y="102" width="9" height="11" direction="0.0" offsetX="4" offsetY="11"/>
+      <sprite name="tiny-build-09" x="163" y="102" width="10" height="11" direction="0.0" offsetX="5" offsetY="11"/>
+      <sprite name="tiny-build-10" x="184" y="103" width="10" height="10" direction="0.0" offsetX="4" offsetY="10"/>
+      <sprite name="tiny-build-11" x="204" y="103" width="10" height="10" direction="0.0" offsetX="4" offsetY="10"/>
+      <sprite name="tiny-build-12" x="224" y="103" width="10" height="10" direction="0.0" offsetX="4" offsetY="10"/>
+      <sprite name="tiny-build-13" x="244" y="103" width="10" height="10" direction="0.0" offsetX="4" offsetY="10"/>
+      <sprite name="tiny-build-14" x="264" y="103" width="10" height="10" direction="0.0" offsetX="4" offsetY="10"/>
+      <sprite name="tiny-build-15" x="285" y="103" width="9" height="10" direction="0.0" offsetX="3" offsetY="10"/>
+      <sprite name="tiny-digger-01" x="2" y="159" width="14" height="14" direction="0.0" offsetX="7" offsetY="14"/>
+      <sprite name="tiny-digger-02" x="22" y="159" width="14" height="14" direction="0.0" offsetX="7" offsetY="15"/>
+      <sprite name="tiny-digger-03" x="42" y="159" width="14" height="14" direction="0.0" offsetX="7" offsetY="14"/>
+      <sprite name="tiny-digger-04" x="62" y="159" width="14" height="14" direction="0.0" offsetX="7" offsetY="14"/>
+      <sprite name="tiny-digger-05" x="82" y="159" width="14" height="14" direction="0.0" offsetX="7" offsetY="14"/>
+      <sprite name="tiny-digger-06" x="102" y="159" width="14" height="14" direction="0.0" offsetX="7" offsetY="14"/>
+      <sprite name="tiny-digger-07" x="122" y="159" width="14" height="14" direction="0.0" offsetX="7" offsetY="14"/>
+      <sprite name="tiny-digger-08" x="142" y="159" width="14" height="14" direction="0.0" offsetX="7" offsetY="14"/>
+      <sprite name="tiny-shrug-01" x="204" y="0" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-shrug-02" x="224" y="0" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-shrug-03" x="244" y="0" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-shrug-04" x="284" y="0" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-shrug-05" x="304" y="0" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-walker-01" x="4" y="0" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-walker-02" x="24" y="0" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-walker-03" x="44" y="0" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-walker-04" x="64" y="0" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-walker-05" x="84" y="0" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-walker-06" x="104" y="0" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-walker-07" x="124" y="0" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-walker-08" x="144" y="0" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-walker-09" x="164" y="0" width="10" height="10" direction="0.0" offsetX="3" offsetY="10"/>
+      <sprite name="tiny-walker-10" x="184" y="0" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
     </spriteSheet>
   </spriteSheets>
   <poses>
@@ -60,8 +83,8 @@
     <pose name="climberR5" filename="images/climberR5.png" offsetX="24" offsetY="60"/>
     <pose name="climberR6" filename="images/climberR6.png" offsetX="24" offsetY="60"/>
     <pose name="climberR7" filename="images/climberR7.png" offsetX="24" offsetY="60"/>
+    <pose name="dug" filename="images/dug.png" offsetY="34"/>
     <pose name="entrance1" filename="images/entrance1.png" offsetY="78"/>
-    <pose name="fall" filename="images/fall.png" offsetY="0"/>
     <pose name="fall0" filename="images/fall0.png" offsetY="60"/>
     <pose name="fall1" filename="images/fall1.png" offsetY="60"/>
     <pose name="fall2" filename="images/fall2.png" offsetY="60"/>
@@ -69,6 +92,11 @@
     <pose name="grass1" filename="images/grass1.png" offsetX="2" offsetY="8"/>
     <pose name="gui" filename="images/gui.png" offsetX="0" offsetY="100"/>
     <pose name="highlight" filename="images/highlight.png" offsetY="95"/>
+    <pose name="lookDown" filename="images/lookDown.png" offsetY="0"/>
+    <pose name="lookLeft" filename="images/lookLeftRight.png" offsetX="13" offsetY="57"/>
+    <pose name="lookRight" filename="images/lookLeftRight.png" offsetX="-12" offsetY="57"/>
+    <pose name="lookStepUpLeft" filename="images/lookStepUp.png" offsetX="18" offsetY="3"/>
+    <pose name="lookStepUpRight" filename="images/lookStepUp.png" offsetX="0" offsetY="3"/>
     <pose name="paws" filename="images/paws.png"/>
     <pose name="smashed" filename="images/smashed.png" offsetY="61"/>
     <pose name="smasherL0" filename="images/smasherL0.png" offsetY="60"/>
@@ -120,30 +148,6 @@
     <pose name="squish7" filename="images/squish7.png" offsetY="60"/>
     <pose name="squish8" filename="images/squish8.png" offsetY="60"/>
     <pose name="squish9" filename="images/squish9.png" offsetY="60"/>
-    <pose name="stepUp" filename="images/climb.png" offsetY="6"/>
-    <pose name="theMings" filename="images/src/theMings.png"/>
-    <pose name="turnLeft" filename="images/reverse.png" offsetX="-12" offsetY="57"/>
-    <pose name="turnRight" filename="images/reverse.png" offsetX="13" offsetY="57"/>
-    <pose name="walkL0" filename="images/walkL0.png" offsetY="60"/>
-    <pose name="walkL1" filename="images/walkL1.png" offsetY="60"/>
-    <pose name="walkL2" filename="images/walkL2.png" offsetY="60"/>
-    <pose name="walkL3" filename="images/walkL3.png" offsetY="60"/>
-    <pose name="walkL4" filename="images/walkL4.png" offsetY="60"/>
-    <pose name="walkL5" filename="images/walkL5.png" offsetY="60"/>
-    <pose name="walkL6" filename="images/walkL6.png" offsetY="60"/>
-    <pose name="walkL7" filename="images/walkL7.png" offsetY="60"/>
-    <pose name="walkL8" filename="images/walkL8.png"/>
-    <pose name="walkL9" filename="images/walkL9.png"/>
-    <pose name="walkR0" filename="images/walkR0.png" offsetY="60"/>
-    <pose name="walkR1" filename="images/walkR1.png" offsetY="60"/>
-    <pose name="walkR2" filename="images/walkR2.png" offsetY="60"/>
-    <pose name="walkR3" filename="images/walkR3.png" offsetY="60"/>
-    <pose name="walkR4" filename="images/walkR4.png" offsetY="60"/>
-    <pose name="walkR5" filename="images/walkR5.png" offsetY="60"/>
-    <pose name="walkR6" filename="images/walkR6.png" offsetY="60"/>
-    <pose name="walkR7" filename="images/walkR7.png" offsetY="60"/>
-    <pose name="walkR8" filename="images/walkR8.png"/>
-    <pose name="walkR9" filename="images/walkR9.png"/>
   </poses>
   <ninePatches>
     <ninePatch name="borderE" filename="images/borderE.png" top="2" right="2" bottom="2" left="2"/>
@@ -264,6 +268,30 @@
         </frames>
       </sequence>
     </animation>
+    <animation name="digger">
+      <sequence sequence="true" loops="10" finishedMessage="jobComplete">
+        <frames pingPong="false" finishedMessage="dugDown">
+          <frame pose="diggerA-01" delay="4"/>
+          <frame pose="diggerA-02" delay="4"/>
+          <frame pose="diggerA-03" delay="4"/>
+          <frame pose="diggerA-04" delay="4"/>
+          <frame pose="diggerA-05" delay="4"/>
+          <frame pose="diggerA-06" delay="4"/>
+          <frame pose="diggerA-07" delay="4"/>
+          <frame pose="diggerA-08" delay="4"/>
+        </frames>
+        <frames pingPong="false" finishedMessage="dugDown">
+          <frame pose="diggerB-01" delay="4"/>
+          <frame pose="diggerB-02" delay="4"/>
+          <frame pose="diggerB-03" delay="4"/>
+          <frame pose="diggerB-04" delay="4"/>
+          <frame pose="diggerB-05" delay="4"/>
+          <frame pose="diggerB-06" delay="4"/>
+          <frame pose="diggerB-07" delay="4"/>
+          <frame pose="diggerB-08" delay="4"/>
+        </frames>
+      </sequence>
+    </animation>
     <animation name="fall">
       <sequence sequence="true" loops="0">
         <frames pingPong="false">
@@ -341,48 +369,61 @@
       </sequence>
     </animation>
     <animation name="walkL">
-      <sequence sequence="true" loops="0">
-        <frames pingPong="false">
-          <frame pose="walkL0" delay="4"/>
-          <frame pose="walkL1" delay="4"/>
-          <frame pose="walkL2" delay="4"/>
-          <frame pose="walkL3" delay="4"/>
-          <frame pose="walkL4" delay="4"/>
-          <frame pose="walkL5" delay="4"/>
-          <frame pose="walkL6" delay="4"/>
-          <frame pose="walkL7" delay="4"/>
-        </frames>
-      </sequence>
+      <parallel sequence="false" loops="0">
+        <sequence sequence="true" loops="9">
+          <delay ticks="3"/>
+          <move dx="-6.0" dy="0.0" ticks="1" ease="linear"/>
+        </sequence>
+        <sequence sequence="true" loops="1">
+          <frames pingPong="false" finishedMessage="step4">
+            <frame pose="walkerL-01" delay="4"/>
+            <frame pose="walkerL-02" delay="4"/>
+            <frame pose="walkerL-03" delay="4"/>
+            <frame pose="walkerL-04" delay="4"/>
+            <frame pose="walkerL-05" delay="4"/>
+            <frame pose="walkerL-06" delay="4"/>
+            <frame pose="walkerL-07" delay="4"/>
+            <frame pose="walkerL-08" delay="4"/>
+            <frame pose="walkerL-09" delay="3"/>
+          </frames>
+          <move dx="-6.0" dy="0.0" ticks="1" ease="linear"/>
+        </sequence>
+      </parallel>
     </animation>
     <animation name="walkR">
-      <sequence sequence="true" loops="0">
-        <frames pingPong="false">
-          <frame pose="walkR0" delay="4"/>
-          <frame pose="walkR1" delay="4"/>
-          <frame pose="walkR2" delay="4"/>
-          <frame pose="walkR3" delay="4"/>
-          <frame pose="walkR4" delay="4"/>
-          <frame pose="walkR5" delay="4"/>
-          <frame pose="walkR6" delay="4"/>
-          <frame pose="walkR7" delay="4"/>
-        </frames>
-      </sequence>
+      <parallel sequence="false" loops="0">
+        <sequence sequence="true" loops="9">
+          <delay ticks="3"/>
+          <move dx="6.0" dy="0.0" ticks="1" ease="linear"/>
+        </sequence>
+        <sequence sequence="true" loops="1">
+          <frames pingPong="false">
+            <frame pose="walkerR-01" delay="4"/>
+            <frame pose="walkerR-02" delay="4"/>
+            <frame pose="walkerR-03" delay="4"/>
+            <frame pose="walkerR-04" delay="4"/>
+            <frame pose="walkerR-05" delay="4"/>
+            <frame pose="walkerR-06" delay="4"/>
+            <frame pose="walkerR-07" delay="4"/>
+            <frame pose="walkerR-08" delay="4"/>
+            <frame pose="walkerR-09" delay="3"/>
+          </frames>
+          <move dx="6.0" dy="0.0" ticks="1" ease="linear"/>
+        </sequence>
+      </parallel>
     </animation>
   </animations>
   <costumes>
     <costume name="ming" defaultZOrder="0" order="0" showInDesigner="true" role="ming.py">
-      <pose name="default" pose="walkR0"/>
-      <pose name="fall" pose="fall"/>
+      <pose name="default" pose="walkerR-02"/>
       <pose name="highlight" pose="highlight"/>
       <pose name="smashed" pose="smashed"/>
-      <pose name="stepUp" pose="stepUp"/>
-      <pose name="turnLeft" pose="turnLeft"/>
-      <pose name="turnRight" pose="turnRight"/>
       <animation name="blocker" animation="blocker"/>
       <animation name="builderL" animation="builderL"/>
       <animation name="builderR" animation="builderR"/>
       <animation name="climberL" animation="climberL"/>
       <animation name="climberR" animation="climberR"/>
+      <animation name="digger" animation="digger"/>
       <animation name="fall" animation="fall"/>
       <animation name="smasherL" animation="smasherL"/>
       <animation name="smasherR" animation="smasherR"/>
@@ -391,12 +432,19 @@
       <animation name="walkR" animation="walkR"/>
       <companion name="brick" companion="brick"/>
       <companion name="default" companion="entrance1"/>
+      <companion name="dug" companion="dug"/>
+      <companion name="lookDown" companion="lookDown"/>
+      <companion name="lookLeftRight" companion="lookLeftRight"/>
+      <companion name="lookStepUp" companion="lookStepUp"/>
     </costume>
     <costume name="animationTest" defaultZOrder="0" order="10" showInDesigner="true" extends="ming" role="animationTest.py">
       <pose name="default" pose="buttonSelected"/>
     </costume>
     <costume name="brick" defaultZOrder="0" order="10" showInDesigner="true" role="solid.py">
       <pose name="default" pose="brick-01"/>
+    </costume>
+    <costume name="dug" defaultZOrder="0" order="10" showInDesigner="true">
+      <pose name="default" pose="dug"/>
     </costume>
     <costume name="entrance1" defaultZOrder="0" order="0" showInDesigner="true" role="entrance.py">
       <pose name="default" pose="entrance1"/>
@@ -412,8 +460,22 @@
       <pose name="builder" pose="buttonBuilder"/>
       <pose name="climber" pose="buttonClimber"/>
       <pose name="default" pose="buttonDefault"/>
+      <pose name="digger" pose="buttonDigger"/>
       <pose name="select" pose="buttonSelect"/>
       <pose name="smasher" pose="buttonSmasher"/>
+    </costume>
+    <costume name="lookDown" defaultZOrder="0" order="10" showInDesigner="true">
+      <pose name="default" pose="lookDown"/>
+    </costume>
+    <costume name="lookLeftRight" defaultZOrder="0" order="10" showInDesigner="true">
+      <pose name="default" pose="lookLeft"/>
+      <pose name="lookL" pose="lookLeft"/>
+      <pose name="lookR" pose="lookRight"/>
+    </costume>
+    <costume name="lookStepUp" defaultZOrder="0" order="10" showInDesigner="true">
+      <pose name="default" pose="lookStepUpRight"/>
+      <pose name="lookL" pose="lookStepUpLeft"/>
+      <pose name="lookR" pose="lookStepUpRight"/>
     </costume>
     <costume name="paws" defaultZOrder="0" order="0" showInDesigner="true" role="uk.co.nickthecoder.itchy.role.MessageButton">
       <pose name="default" pose="paws"/>

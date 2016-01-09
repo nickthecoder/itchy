@@ -655,9 +655,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.979899"
-     inkscape:cx="330.07479"
-     inkscape:cy="619.26997"
+     inkscape:zoom="3.959798"
+     inkscape:cx="430.8375"
+     inkscape:cy="676.84867"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -763,6 +763,19 @@
        inkscape:export-filename="/home/nick/projects/itchy/resources/TheMings/images/smashed.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/nick/server/projects/itchy/resources/The-Mings/images/dug.png"
+       inkscape:label="#rect3143"
+       rx="8.2624083"
+       ry="9.6428528"
+       y="361.16782"
+       x="175.27898"
+       height="34.7188"
+       width="61.833874"
+       id="rect3142"
+       style="fill:#000000;fill-opacity:1;stroke:none" />
   </g>
   <g
      inkscape:label="Layer 1"
@@ -776,23 +789,23 @@
        height="60"
        width="36" />
     <rect
-       style="fill:#ff0000;fill-opacity:0.66359448;stroke:none"
+       style="fill:#ff0000;fill-opacity:0.6635945;stroke:none"
        id="rect2996"
-       width="30.000008"
-       height="1.9999981"
-       x="475"
-       y="382.36218"
+       width="17.625637"
+       height="5.2829938"
+       x="489.64719"
+       y="373.52335"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90"
-       inkscape:export-filename="/home/nick/server/projects/itchy/resources/The-Mings/images/fall.png" />
+       inkscape:export-filename="/home/nick/server/projects/itchy/resources/The-Mings/images/lookDown.png" />
     <rect
-       y="374.36218"
-       x="475"
-       height="6.9999919"
-       width="30.000015"
+       y="365.03857"
+       x="509.09265"
+       height="5.4847631"
+       width="17.878185"
        id="rect3009"
-       style="fill:#000faa;fill-opacity:0.58525348;stroke:none"
-       inkscape:export-filename="/home/nick/server/projects/itchy/resources/The-Mings/images/climb.png"
+       style="fill:#000faa;fill-opacity:0.58525349;stroke:none"
+       inkscape:export-filename="/home/nick/server/projects/itchy/resources/The-Mings/images/lookStepUp.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
     <rect

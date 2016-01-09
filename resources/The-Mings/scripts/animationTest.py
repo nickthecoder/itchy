@@ -2,8 +2,8 @@ from common import *
 
 properties = ArrayList()
 properties.add( IntegerProperty( "direction" ) )
-properties.add( IntegerProperty( "dx" ) )
-properties.add( IntegerProperty( "dy" ) )
+properties.add( DoubleProperty( "dx" ) )
+properties.add( DoubleProperty( "dy" ) )
 
 class AnimationTest(AbstractRole) :
 
@@ -19,6 +19,14 @@ class AnimationTest(AbstractRole) :
     def onMessage(self, message) :
         if message == "steppedUp" :
             self.actor.moveBy( self.direction * 12, 6 )
+        if message == "dugDown" :
+            self.actor.moveBy( 0, -6 )
+        if message == "step5" :
+            self.actor.moveBy( self.direction * 6 * 5, 0 )
+        if message == "step4" :
+            self.actor.moveBy( self.direction * 6 * 4, 0 )
+        if message == "step3" :
+            self.actor.moveBy( self.direction * 6 * 3, 0 )
         
     # Boiler plate code - no need to change this
     def getProperties(self):

@@ -1,19 +1,33 @@
 Current Tasks
 =============
 
-The-Mings delete existing Ming poses, and use the sprite sheet instead.
+Diggers etc need to look for solid objects separately from blockers.
 
-Create a TestMing role, a property to set the animation and dx, dy.
-	Create a test scene, showing all possible animations.
+All mings need to look down, including diggers.
+
+The-Mings delete existing Ming poses, and use the sprite sheet instead.
 	 
 Improve basher's animation (similar to builders)?
-	Clever use of the offsetX ?, or step, on a given message?
+	Clever use of the offsetX ?
+	or step, on a given message?
+	or move by jumps every n frames
+	or define the jumps in the editor using a parallel.
+	
 	Bash big lumps at a time
 
 To aid testing, allow mings to be added with any job.
 
+Use a sensible default for pixcel detection threshold in actor and pixeldetection classes.
+	Change lookers to fully opaque.
+
 BUGS
 ====
+
+WTF is Animation.startExceptFirst ? Parallel certainly doesn't do aything sensible!
+
+Appearance.fixPose doesn't do the right thing with direction.
+	Setting dir to 0 works, but ideally both appearance and the new pose should have the old appearance's direction,
+	and yet the pose won't need rotating.
 
 Debris - Bullets (#2) stay alive, even when invisible, and kill rocks that pass over them.
 

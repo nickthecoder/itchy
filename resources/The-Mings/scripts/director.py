@@ -59,10 +59,18 @@ class Director(AbstractDirector) :
         self.buttonPixelator = Pixelator( 4, RGBA(255,255,255,128), RGBA(0,0,0,128) )
         
         self.pixelateSprites( "tiny-brick-", "brick-", 1 )
+
         self.pixelateSprites( "tiny-build-", "builderR-", 15 )
         self.pixelateSprites( "tiny-build-", "builderL-", 15, True )
+
+        self.pixelateSprites( "tiny-walker-", "walkerR-", 10 )
+        self.pixelateSprites( "tiny-walker-", "walkerL-", 10, True )
+
+        self.pixelateSprites( "tiny-digger-", "diggerA-", 8, False, -PIXELATION_SIZE/2, 0 )
+        self.pixelateSprites( "tiny-digger-", "diggerB-", 8, True , PIXELATION_SIZE/2, 0 )
         
         self.createButton( "tiny-build-09", "buttonBuilder" )
+        self.createButton( "tiny-digger-03", "buttonDigger" )
         
         print "Processed images in", time.time() - start_time, "seconds"
 
@@ -80,7 +88,7 @@ class Director(AbstractDirector) :
             
             game.resources.addPose( poseResource )
     
-    def pixelateSprites( self, sourcePrefix, destinationPrefix, amount, flip = False ) :
+    def pixelateSprites( self, sourcePrefix, destinationPrefix, amount, flip = False, dx = 0, dy = 0 ) :
     
         for i in range(0,amount) :
             sourceName = sourcePrefix + str(i+1).zfill(2)
@@ -89,7 +97,7 @@ class Director(AbstractDirector) :
             if pose is None :
                 print "Pose", sourceName, "not found"
             else :
-                newPose = self.pixelator.pixelate( pose, flip )
+                newPose = self.pixelator.pixelate( pose, flip, dx, dy )
                 newPoseResource = DynamicPoseResource( game.resources, destinationName, newPose )
                 game.resources.addPose( newPoseResource )
     
