@@ -1,0 +1,15 @@
+<scene showMouse="true" role="uk.co.nickthecoder.itchy.PlainSceneDirector" background="#000000ff">
+  <properties/>
+  <layer name="main">
+    <actor costume="animationTest" x="143" y="578" direction="0.0" heading="0.0" startEvent="builderL" zOrder="0">
+      <property name="dx" value="0"/>
+      <property name="dy" value="0"/>
+      <property name="direction" value="-1"/>
+    </actor>
+    <actor costume="animationTest" x="193" y="578" direction="0.0" heading="0.0" startEvent="builderR" zOrder="1">
+      <property name="dx" value="0"/>
+      <property name="dy" value="0"/>
+      <property name="direction" value="1"/>
+    </actor>
+  </layer>
+</scene>

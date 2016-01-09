@@ -2,22 +2,22 @@
   <game title="The Mings" width="1000" height="800" resizable="false" initialScene="menu" directorClassName="director.py"/>
   <spriteSheets>
     <spriteSheet name="spriteSheet" file="images/spriteSheet.png">
-      <sprite name="tiny-build-11" x="204" y="103" width="10" height="10" direction="0.0" offsetX="5" offsetY="9"/>
-      <sprite name="tiny-build-01" x="4" y="103" width="8" height="10" direction="0.0" offsetX="4" offsetY="9"/>
-      <sprite name="tiny-build-02" x="24" y="103" width="8" height="10" direction="0.0" offsetX="4" offsetY="9"/>
-      <sprite name="tiny-build-08" x="143" y="102" width="9" height="11" direction="0.0" offsetX="4" offsetY="10"/>
-      <sprite name="tiny-build-14" x="264" y="103" width="10" height="10" direction="0.0" offsetX="5" offsetY="9"/>
+      <sprite name="tiny-build-08" x="144" y="102" width="9" height="11" direction="0.0" offsetX="4" offsetY="10"/>
+      <sprite name="tiny-build-04" x="64" y="103" width="8" height="10" direction="0.0" offsetX="4" offsetY="9"/>
+      <sprite name="tiny-build-11" x="204" y="103" width="10" height="10" direction="0.0" offsetX="4" offsetY="9"/>
+      <sprite name="tiny-build-14" x="264" y="103" width="10" height="10" direction="0.0" offsetX="4" offsetY="9"/>
+      <sprite name="tiny-build-05" x="84" y="103" width="8" height="10" direction="0.0" offsetX="4" offsetY="9"/>
       <sprite name="tiny-brick-01" x="230" y="112" width="4" height="1" direction="0.0" offsetX="2" offsetY="0"/>
-      <sprite name="tiny-build-13" x="244" y="103" width="10" height="10" direction="0.0" offsetX="5" offsetY="9"/>
-      <sprite name="tiny-build-05" x="83" y="104" width="8" height="10" direction="0.0" offsetX="4" offsetY="9"/>
-      <sprite name="tiny-build-15" x="285" y="103" width="9" height="10" direction="0.0" offsetX="5" offsetY="9"/>
-      <sprite name="tiny-build-03" x="43" y="103" width="8" height="10" direction="0.0" offsetX="4" offsetY="9"/>
-      <sprite name="tiny-build-04" x="63" y="103" width="8" height="10" direction="0.0" offsetX="4" offsetY="9"/>
+      <sprite name="tiny-build-10" x="184" y="103" width="10" height="10" direction="0.0" offsetX="4" offsetY="9"/>
+      <sprite name="tiny-build-13" x="244" y="103" width="10" height="10" direction="0.0" offsetX="4" offsetY="9"/>
+      <sprite name="tiny-build-03" x="44" y="103" width="8" height="10" direction="0.0" offsetX="4" offsetY="9"/>
+      <sprite name="tiny-build-07" x="124" y="102" width="8" height="11" direction="0.0" offsetX="4" offsetY="10"/>
+      <sprite name="tiny-build-01" x="4" y="103" width="8" height="10" direction="0.0" offsetX="4" offsetY="9"/>
+      <sprite name="tiny-build-15" x="285" y="103" width="9" height="10" direction="0.0" offsetX="3" offsetY="9"/>
+      <sprite name="tiny-build-12" x="224" y="103" width="10" height="10" direction="0.0" offsetX="4" offsetY="9"/>
+      <sprite name="tiny-build-06" x="104" y="103" width="8" height="10" direction="0.0" offsetX="4" offsetY="9"/>
+      <sprite name="tiny-build-02" x="24" y="103" width="8" height="10" direction="0.0" offsetX="4" offsetY="9"/>
       <sprite name="tiny-build-09" x="163" y="102" width="10" height="11" direction="0.0" offsetX="5" offsetY="10"/>
-      <sprite name="tiny-build-12" x="224" y="103" width="10" height="10" direction="0.0" offsetX="5" offsetY="9"/>
-      <sprite name="tiny-build-07" x="123" y="102" width="8" height="11" direction="0.0" offsetX="4" offsetY="10"/>
-      <sprite name="tiny-build-10" x="184" y="104" width="10" height="10" direction="0.0" offsetX="5" offsetY="9"/>
-      <sprite name="tiny-build-06" x="103" y="104" width="8" height="10" direction="0.0" offsetX="4" offsetY="9"/>
     </spriteSheet>
   </spriteSheets>
   <poses>
@@ -228,11 +228,11 @@
           <frame pose="builderR-10" delay="4"/>
         </frames>
         <frames pingPong="false" startMessage="laidBrick" finishedMessage="steppedUp">
-          <frame pose="builderR-11" delay="1"/>
-          <frame pose="builderR-12" delay="1"/>
-          <frame pose="builderR-13" delay="1"/>
-          <frame pose="builderR-14" delay="1"/>
-          <frame pose="builderR-15" delay="1"/>
+          <frame pose="builderR-11" delay="4"/>
+          <frame pose="builderR-12" delay="4"/>
+          <frame pose="builderR-13" delay="4"/>
+          <frame pose="builderR-14" delay="4"/>
+          <frame pose="builderR-15" delay="4"/>
         </frames>
       </sequence>
     </animation>
@@ -370,26 +370,6 @@
     </animation>
   </animations>
   <costumes>
-    <costume name="brick" defaultZOrder="0" order="10" showInDesigner="true" role="solid.py">
-      <pose name="default" pose="brick-01"/>
-    </costume>
-    <costume name="entrance1" defaultZOrder="0" order="0" showInDesigner="true" role="entrance.py">
-      <pose name="default" pose="entrance1"/>
-    </costume>
-    <costume name="grass1" defaultZOrder="0" order="0" showInDesigner="true" role="solid.py">
-      <pose name="default" pose="grass1"/>
-    </costume>
-    <costume name="gui" defaultZOrder="0" order="0" showInDesigner="true">
-      <pose name="default" pose="gui"/>
-    </costume>
-    <costume name="jobButton" defaultZOrder="0" order="0" showInDesigner="true" role="jobButton.py">
-      <pose name="blocker" pose="buttonBlocker"/>
-      <pose name="builder" pose="buttonBuilder"/>
-      <pose name="climber" pose="buttonClimber"/>
-      <pose name="default" pose="buttonDefault"/>
-      <pose name="select" pose="buttonSelect"/>
-      <pose name="smasher" pose="buttonSmasher"/>
-    </costume>
     <costume name="ming" defaultZOrder="0" order="0" showInDesigner="true" role="ming.py">
       <pose name="default" pose="walkR0"/>
       <pose name="fall" pose="fall"/>
@@ -412,6 +392,29 @@
       <companion name="brick" companion="brick"/>
       <companion name="default" companion="entrance1"/>
     </costume>
+    <costume name="animationTest" defaultZOrder="0" order="10" showInDesigner="true" extends="ming" role="animationTest.py">
+      <pose name="default" pose="buttonSelected"/>
+    </costume>
+    <costume name="brick" defaultZOrder="0" order="10" showInDesigner="true" role="solid.py">
+      <pose name="default" pose="brick-01"/>
+    </costume>
+    <costume name="entrance1" defaultZOrder="0" order="0" showInDesigner="true" role="entrance.py">
+      <pose name="default" pose="entrance1"/>
+    </costume>
+    <costume name="grass1" defaultZOrder="0" order="0" showInDesigner="true" role="solid.py">
+      <pose name="default" pose="grass1"/>
+    </costume>
+    <costume name="gui" defaultZOrder="0" order="0" showInDesigner="true">
+      <pose name="default" pose="gui"/>
+    </costume>
+    <costume name="jobButton" defaultZOrder="0" order="0" showInDesigner="true" role="jobButton.py">
+      <pose name="blocker" pose="buttonBlocker"/>
+      <pose name="builder" pose="buttonBuilder"/>
+      <pose name="climber" pose="buttonClimber"/>
+      <pose name="default" pose="buttonDefault"/>
+      <pose name="select" pose="buttonSelect"/>
+      <pose name="smasher" pose="buttonSmasher"/>
+    </costume>
     <costume name="paws" defaultZOrder="0" order="0" showInDesigner="true" role="uk.co.nickthecoder.itchy.role.MessageButton">
       <pose name="default" pose="paws"/>
     </costume>
@@ -425,6 +428,7 @@
     <scene name="menu"/>
     <scene name="start"/>
     <scene name="test"/>
+    <scene name="testAnimations"/>
   </scenes>
   <inputs>
     <input name="quit" keys="ESCAPE"/>

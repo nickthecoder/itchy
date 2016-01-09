@@ -7,14 +7,17 @@ package uk.co.nickthecoder.itchy.editor;
 import java.util.ArrayList;
 import java.util.List;
 
+import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.PoseResource;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.animation.Frame;
 import uk.co.nickthecoder.itchy.animation.FramedAnimation;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
+import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.GuiButton;
 import uk.co.nickthecoder.itchy.gui.AbstractComponent;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
+import uk.co.nickthecoder.itchy.gui.NullComponent;
 import uk.co.nickthecoder.itchy.gui.PlainContainer;
 import uk.co.nickthecoder.itchy.gui.GridLayout;
 import uk.co.nickthecoder.itchy.gui.Container;
@@ -56,7 +59,6 @@ public class FramedAnimationEditor extends AnimationEditor
                         FramedAnimationEditor.this.rebuildFrames();
                     }
                 };
-
                 posePicker.show();
             }
         });
@@ -72,7 +74,7 @@ public class FramedAnimationEditor extends AnimationEditor
 
         this.framesContainer = new PlainContainer();
         this.framesContainer.addStyle("form");
-        this.framesGrid = new GridLayout(this.framesContainer, 4);
+        this.framesGrid = new GridLayout(this.framesContainer, 5);
 
         this.framesGrid.addRow("Pose", new Label("Frames"), null, null);
 
@@ -100,10 +102,14 @@ public class FramedAnimationEditor extends AnimationEditor
 
     private void rebuildFrame( final int i, final Frame frame )
     {
-        AbstractComponent image;
+        String name = Itchy.getGame().resources.getPoseName(frame.getPose());
+        if (name == null) {
+            name = "?";
+        }
+        
         ImageComponent img = new ImageComponent(frame.getPose().getSurface());
-        image = img;
-        final IntegerBox delay = new IntegerBox(frame.getDelay());
+        img.setTooltip("Pose " + name);
+        final IntegerBox delay = new IntegerBox(frame.getDelay());        
         delay.minimumValue = 1;
 
         delay.addChangeListener(new ComponentChangeListener() {
@@ -130,6 +136,7 @@ public class FramedAnimationEditor extends AnimationEditor
                 }
             });
             up.addStyle("compact");
+            up.setTooltip("Move Up");
         }
 
         GuiButton delete = new GuiButton(new ImageComponent(this.editor.getStylesheet().resources.getPose(
@@ -143,8 +150,11 @@ public class FramedAnimationEditor extends AnimationEditor
             }
         });
         delete.addStyle("compact");
+        delete.setTooltip("Remove " + name);
 
-        this.framesGrid.addRow(image, delay, up, delete);
+        Label label = new Label( name );
+        
+        this.framesGrid.addRow( new Component[] {img, delay, up == null ? new NullComponent() : up, delete, label} );
     }
 
     @Override
