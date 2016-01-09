@@ -279,20 +279,25 @@ public class Actor implements PropertySubject<Actor>
 
     public void setAnimation( Animation animation )
     {
-        setAnimation(animation, AnimationEvent.REPLACE);
+        setAnimation(animation, AnimationEvent.FAST_FORWARD);
     }
 
     public void setAnimation( Animation animation, AnimationEvent ae )
     {
 
         if (animation == null) {
-            if (ae == AnimationEvent.REPLACE) {
-                // If we are trying to REPLACE the old animation with null, then stop the old animation if there is one.
+            if (ae == AnimationEvent.FAST_FORWARD) {
+                // If we are trying to FAST_FORWARD the old animation with null, then stop the old animation if there is one.
                 if ( (this.animation != null) && ( ! this.animation.isFinished()) ) {
                     this.animation.fastForward(this);
                 }
                 this.animation = null;
                 return;
+                
+            } else if (ae == AnimationEvent.REPLACE) {
+                this.animation = null;
+                return;
+                
             } else {
                 // If we are trying to merge the old animation with null, then just let the old animation continue.
                 // We also do nothing when ae==IGNORE
@@ -336,6 +341,7 @@ public class Actor implements PropertySubject<Actor>
     public enum AnimationEvent
     {
         REPLACE,
+        FAST_FORWARD,
         SEQUENCE,
         PARALLEL,
         IGNORE
@@ -726,14 +732,19 @@ public class Actor implements PropertySubject<Actor>
         return false;
     }
 
+
     public boolean pixelOverlap( Actor other )
+    {
+        return pixelOverlap( other, 1 );
+    }
+    
+    public boolean pixelOverlap( Actor other, int threshold )
     {
         int dx = ((int) this.getX() - this.appearance.getOffsetX()) - ((int) (other.getX()) - other.appearance.getOffsetX());
         int dy = ((int) -this.getY() - this.appearance.getOffsetY()) - ((int) (-other.getY()) - other.appearance.getOffsetY());
 
         return this.getAppearance().getSurface()
-            .pixelOverlap(other.getAppearance().getSurface(), dx, dy, 64);
-
+            .pixelOverlap(other.getAppearance().getSurface(), dx, dy, threshold);
     }
 
     public int getZOrder()

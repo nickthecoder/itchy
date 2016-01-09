@@ -44,9 +44,8 @@ public class Parallel implements SequenceOrParallel
     {
         for (Iterator<Animation> i = this.compoundAnimation.children.iterator(); i.hasNext();) {
             Animation child = i.next();
-            child.tick(actor);
-            if (child.isFinished()) {
-                i.remove();
+            if (!child.isFinished()) {
+                child.tick(actor);
             }
         }
     }
@@ -54,7 +53,13 @@ public class Parallel implements SequenceOrParallel
     @Override
     public boolean isFinished()
     {
-        return this.compoundAnimation.children.size() == 0;
+        for (Iterator<Animation> i = this.compoundAnimation.children.iterator(); i.hasNext();) {
+            Animation child = i.next();
+            if (!child.isFinished()) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override

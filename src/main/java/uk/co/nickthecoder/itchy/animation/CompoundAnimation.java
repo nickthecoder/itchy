@@ -113,7 +113,7 @@ public class CompoundAnimation extends AbstractAnimation
             if (this.loops > 0) {
                 this.loopsRemaining--;
             }
-            if (this.loopsRemaining > 0) {
+            if ((this.loopsRemaining > 0) || (this.loops == 0)) {
                 this.sop.start(actor);
             }
         }
