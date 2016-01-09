@@ -27,17 +27,20 @@ public class Pixelator
 
     public ImagePose pixelate(Pose pose)
     {
-        return pixelate(pose, false);
+        return pixelate(pose, false, 0 ,0);
     }
     
-    public ImagePose pixelate(Pose pose, boolean flip)
+    public ImagePose pixelate(Pose pose, boolean flip, int dx, int dy )
     {
         ImagePose result = new ImagePose(pixelate(pose.getSurface(), flip));
+        
         result.setOffsetX(pose.getOffsetX() * scale);
         if (flip) {
             result.setOffsetX(result.getSurface().getWidth() - result.getOffsetX());
         }
-        result.setOffsetY(pose.getOffsetY() * scale);
+        result.setOffsetX(result.getOffsetX() + dx);
+        
+        result.setOffsetY(pose.getOffsetY() * scale + dy);
         return result;
     }
 
