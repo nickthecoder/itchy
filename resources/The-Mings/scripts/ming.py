@@ -194,6 +194,7 @@ class Job() :
 class Stop(Job) :
 
     def start(self, ming) :
+        print "Stop"
         ming.dx = 0
         ming.dy = 0
         
@@ -225,7 +226,7 @@ class Walker(Job) :
 class Faller(Job) :
     
     def start( self, ming ) :
-
+        print "Faller"
         ming.dx = 0
         ming.dy = -1
         self.fallCount = 0
@@ -264,9 +265,13 @@ class Faller(Job) :
 class Builder(Job) :
 
     def start( self, ming ) :
+        print "Builder"
         ming.dy = 0
         ming.dx = 0
         ming.event( "builder" + ming.directionLetter() )
+    
+    def work(self,ming) :
+        pass
     
     def onMessage( self, ming, message ) :
         if message == "laidBrick" :
@@ -284,6 +289,7 @@ class Builder(Job) :
 class Blocker(Job) :
     
     def start( self, ming ) :
+        print "Blocker"
         ming.dx = 0
         ming.dy = 0
         ming.addTag( "blocker" )
@@ -296,6 +302,7 @@ class Blocker(Job) :
 class Smasher(Job) :
 
     def start( self, ming ) :
+        print "Smasher"
         ming.dy = 0
         ming.dx = ming.direction # Slower than walking
         self.smashed = False # Set to true when first piece of solid is removed
@@ -337,6 +344,7 @@ class Smasher(Job) :
 class Digger(Job) :
 
     def start( self, ming ) :
+        print "Digger"
         ming.dy = 0
         ming.dx = 0
         self.removed = False # Set to true when first piece of solid is removed

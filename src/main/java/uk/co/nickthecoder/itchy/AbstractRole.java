@@ -308,7 +308,10 @@ public abstract class AbstractRole implements Role
         if (animation != null) {
             animation.tick(getActor());
             if (animation.isFinished()) {
-                actor.setAnimation(null);
+                // The animation could have been changed by the animation finish event. In which case leave the new one.
+                if ( actor.getAnimation() == animation ) {
+                    actor.setAnimation(null);
+                }
                 if (actor.isDying()) {
                     actor.kill();
                     return;
