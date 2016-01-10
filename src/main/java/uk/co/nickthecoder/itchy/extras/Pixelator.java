@@ -55,7 +55,7 @@ public class Pixelator
         if (flip) {
             source = source.zoom(-1, 1, false );
         }
-        Surface result = source.rotoZoom(0, scale, false);
+        Surface result = source.zoom(scale, scale, false);
 
         // Apply highlights and lowlights on top of the scaled image
         // wherever the colour changes.
@@ -81,7 +81,7 @@ public class Pixelator
                     boolean bottom = changedColor(source, x, y + 1, color);
                     boolean right = changedColor(source, x + 1, y, color);
     
-                    int bodge = 1; // Why do I need to add 1 to all x,y values ?
+                    int bodge = scale > 5 ? 1 : 0; // Why do I need to add 1 to all x,y values ?
                     if (top) {
                         high.blit(hRect, result, bodge + x * scale, 1 + y * scale);
                     }

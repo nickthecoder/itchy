@@ -58,20 +58,34 @@ class Director(AbstractDirector) :
         self.pixelator = Pixelator( PIXELATION_SIZE, RGBA(255,255,255,128), RGBA(0,0,0,128) )
         self.buttonPixelator = Pixelator( 4, RGBA(255,255,255,128), RGBA(0,0,0,128) )
         
-        self.pixelateSprites( "tiny-brick-", "brick-", 1 )
+        self.pixelateSprites( "tiny-blocker-", "blocker-", 16 )
 
-        self.pixelateSprites( "tiny-build-", "builderR-", 15 )
-        self.pixelateSprites( "tiny-build-", "builderL-", 15, True )
+        self.pixelateSprites( "tiny-builder-", "builderR-", 16 )
+        self.pixelateSprites( "tiny-builder-", "builderL-", 16, True )
+
+        self.pixelateSprites( "tiny-digger-", "diggerA-", 8, False, -PIXELATION_SIZE/2, 0 )
+        self.pixelateSprites( "tiny-digger-", "diggerB-", 8, True , PIXELATION_SIZE/2, 0 )
+
+        self.pixelateSprites( "tiny-faller-", "fallerA-", 4, False  )
+        self.pixelateSprites( "tiny-faller-", "fallerB-", 4, True )
+
+        self.pixelateSprites( "tiny-splat-", "splat-", 16, True )
+        
+        self.pixelateSprites( "tiny-smasher-", "smasherR-", 16 )
+        self.pixelateSprites( "tiny-smasher-", "smasherL-", 16, True )
 
         self.pixelateSprites( "tiny-walker-", "walkerR-", 10 )
         self.pixelateSprites( "tiny-walker-", "walkerL-", 10, True )
 
-        self.pixelateSprites( "tiny-digger-", "diggerA-", 8, False, -PIXELATION_SIZE/2, 0 )
-        self.pixelateSprites( "tiny-digger-", "diggerB-", 8, True , PIXELATION_SIZE/2, 0 )
+
+        self.createButton( "tiny-buttonBlocker", "buttonBlocker" )
+        self.createButton( "tiny-buttonBuilder", "buttonBuilder" )
+        self.createButton( "tiny-buttonClimber", "buttonClimber" )
+        self.createButton( "tiny-buttonDigger", "buttonDigger" )
+        self.createButton( "tiny-buttonSmasher", "buttonSmasher" )
         
-        self.createButton( "tiny-build-09", "buttonBuilder" )
-        self.createButton( "tiny-digger-03", "buttonDigger" )
-        
+        self.pixelateSprites( "tiny-brick-", "brick-", 1 )
+
         print "Processed images in", time.time() - start_time, "seconds"
 
     def createButton( self, sourceName, destinationName ) :

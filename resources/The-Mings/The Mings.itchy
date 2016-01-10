@@ -2,22 +2,44 @@
   <game title="The Mings" width="1000" height="800" resizable="false" initialScene="menu" directorClassName="director.py"/>
   <spriteSheets>
     <spriteSheet name="spriteSheet" file="images/spriteSheet.png">
+      <sprite name="tiny-blocker-01" x="3" y="60" width="12" height="10" direction="0.0" offsetX="6" offsetY="10"/>
+      <sprite name="tiny-blocker-02" x="23" y="60" width="12" height="10" direction="0.0" offsetX="6" offsetY="10"/>
+      <sprite name="tiny-blocker-03" x="43" y="60" width="12" height="10" direction="0.0" offsetX="6" offsetY="10"/>
+      <sprite name="tiny-blocker-04" x="63" y="60" width="12" height="10" direction="0.0" offsetX="6" offsetY="10"/>
+      <sprite name="tiny-blocker-05" x="83" y="60" width="12" height="10" direction="0.0" offsetX="6" offsetY="10"/>
+      <sprite name="tiny-blocker-06" x="103" y="60" width="12" height="10" direction="0.0" offsetX="6" offsetY="10"/>
+      <sprite name="tiny-blocker-07" x="123" y="60" width="12" height="10" direction="0.0" offsetX="6" offsetY="10"/>
+      <sprite name="tiny-blocker-08" x="143" y="60" width="12" height="10" direction="0.0" offsetX="6" offsetY="10"/>
+      <sprite name="tiny-blocker-09" x="163" y="60" width="12" height="10" direction="0.0" offsetX="6" offsetY="10"/>
+      <sprite name="tiny-blocker-10" x="183" y="60" width="12" height="10" direction="0.0" offsetX="6" offsetY="10"/>
+      <sprite name="tiny-blocker-11" x="203" y="60" width="12" height="10" direction="0.0" offsetX="6" offsetY="10"/>
+      <sprite name="tiny-blocker-12" x="223" y="60" width="12" height="10" direction="0.0" offsetX="6" offsetY="10"/>
+      <sprite name="tiny-blocker-13" x="243" y="60" width="12" height="10" direction="0.0" offsetX="6" offsetY="10"/>
+      <sprite name="tiny-blocker-14" x="263" y="60" width="12" height="10" direction="0.0" offsetX="6" offsetY="10"/>
+      <sprite name="tiny-blocker-15" x="283" y="60" width="12" height="10" direction="0.0" offsetX="6" offsetY="10"/>
+      <sprite name="tiny-blocker-16" x="303" y="60" width="12" height="10" direction="0.0" offsetX="6" offsetY="10"/>
       <sprite name="tiny-brick-01" x="230" y="112" width="4" height="1" direction="0.0" offsetX="2" offsetY="1"/>
-      <sprite name="tiny-build-01" x="4" y="103" width="8" height="10" direction="0.0" offsetX="4" offsetY="10"/>
-      <sprite name="tiny-build-02" x="24" y="103" width="8" height="10" direction="0.0" offsetX="4" offsetY="10"/>
-      <sprite name="tiny-build-03" x="44" y="103" width="8" height="10" direction="0.0" offsetX="4" offsetY="10"/>
-      <sprite name="tiny-build-04" x="64" y="103" width="8" height="10" direction="0.0" offsetX="4" offsetY="10"/>
-      <sprite name="tiny-build-05" x="84" y="103" width="8" height="10" direction="0.0" offsetX="4" offsetY="10"/>
-      <sprite name="tiny-build-06" x="104" y="103" width="8" height="10" direction="0.0" offsetX="4" offsetY="10"/>
-      <sprite name="tiny-build-07" x="124" y="102" width="8" height="11" direction="0.0" offsetX="4" offsetY="11"/>
-      <sprite name="tiny-build-08" x="144" y="102" width="9" height="11" direction="0.0" offsetX="4" offsetY="11"/>
-      <sprite name="tiny-build-09" x="163" y="102" width="10" height="11" direction="0.0" offsetX="5" offsetY="11"/>
-      <sprite name="tiny-build-10" x="184" y="103" width="10" height="10" direction="0.0" offsetX="4" offsetY="10"/>
-      <sprite name="tiny-build-11" x="204" y="103" width="10" height="10" direction="0.0" offsetX="4" offsetY="10"/>
-      <sprite name="tiny-build-12" x="224" y="103" width="10" height="10" direction="0.0" offsetX="4" offsetY="10"/>
-      <sprite name="tiny-build-13" x="244" y="103" width="10" height="10" direction="0.0" offsetX="4" offsetY="10"/>
-      <sprite name="tiny-build-14" x="264" y="103" width="10" height="10" direction="0.0" offsetX="4" offsetY="10"/>
-      <sprite name="tiny-build-15" x="285" y="103" width="9" height="10" direction="0.0" offsetX="3" offsetY="10"/>
+      <sprite name="tiny-builder-01" x="4" y="103" width="8" height="10" direction="0.0" offsetX="4" offsetY="10"/>
+      <sprite name="tiny-builder-02" x="24" y="103" width="8" height="10" direction="0.0" offsetX="4" offsetY="10"/>
+      <sprite name="tiny-builder-03" x="44" y="103" width="8" height="10" direction="0.0" offsetX="4" offsetY="10"/>
+      <sprite name="tiny-builder-04" x="64" y="103" width="8" height="10" direction="0.0" offsetX="4" offsetY="10"/>
+      <sprite name="tiny-builder-05" x="84" y="103" width="8" height="10" direction="0.0" offsetX="4" offsetY="10"/>
+      <sprite name="tiny-builder-06" x="104" y="103" width="8" height="10" direction="0.0" offsetX="4" offsetY="10"/>
+      <sprite name="tiny-builder-07" x="124" y="102" width="8" height="11" direction="0.0" offsetX="4" offsetY="11"/>
+      <sprite name="tiny-builder-08" x="144" y="102" width="9" height="11" direction="0.0" offsetX="4" offsetY="11"/>
+      <sprite name="tiny-builder-09" x="163" y="102" width="10" height="11" direction="0.0" offsetX="5" offsetY="11"/>
+      <sprite name="tiny-builder-10" x="184" y="103" width="10" height="10" direction="0.0" offsetX="4" offsetY="10"/>
+      <sprite name="tiny-builder-11" x="204" y="103" width="10" height="10" direction="0.0" offsetX="4" offsetY="10"/>
+      <sprite name="tiny-builder-12" x="224" y="103" width="10" height="10" direction="0.0" offsetX="4" offsetY="10"/>
+      <sprite name="tiny-builder-13" x="244" y="103" width="10" height="10" direction="0.0" offsetX="4" offsetY="10"/>
+      <sprite name="tiny-builder-14" x="264" y="103" width="10" height="10" direction="0.0" offsetX="4" offsetY="10"/>
+      <sprite name="tiny-builder-15" x="285" y="103" width="9" height="10" direction="0.0" offsetX="3" offsetY="10"/>
+      <sprite name="tiny-builder-16" x="305" y="103" width="9" height="10" direction="0.0" offsetX="3" offsetY="10"/>
+      <sprite name="tiny-buttonBlocker" x="123" y="59" width="12" height="12" direction="0.0" offsetX="0" offsetY="0"/>
+      <sprite name="tiny-buttonBuilder" x="163" y="101" width="12" height="12" direction="0.0" offsetX="0" offsetY="0"/>
+      <sprite name="tiny-buttonClimber" x="60" y="80" width="12" height="12" direction="0.0" offsetX="0" offsetY="0"/>
+      <sprite name="tiny-buttonDigger" x="206" y="118" width="12" height="12" direction="0.0" offsetX="0" offsetY="0"/>
+      <sprite name="tiny-buttonSmasher" x="225" y="119" width="12" height="12" direction="0.0" offsetX="0" offsetY="0"/>
       <sprite name="tiny-digger-01" x="2" y="159" width="14" height="14" direction="0.0" offsetX="7" offsetY="14"/>
       <sprite name="tiny-digger-02" x="22" y="159" width="14" height="14" direction="0.0" offsetX="7" offsetY="15"/>
       <sprite name="tiny-digger-03" x="42" y="159" width="14" height="14" direction="0.0" offsetX="7" offsetY="14"/>
@@ -26,11 +48,47 @@
       <sprite name="tiny-digger-06" x="102" y="159" width="14" height="14" direction="0.0" offsetX="7" offsetY="14"/>
       <sprite name="tiny-digger-07" x="122" y="159" width="14" height="14" direction="0.0" offsetX="7" offsetY="14"/>
       <sprite name="tiny-digger-08" x="142" y="159" width="14" height="14" direction="0.0" offsetX="7" offsetY="14"/>
+      <sprite name="tiny-faller-01" x="4" y="40" width="8" height="10" direction="0.0" offsetX="4" offsetY="10"/>
+      <sprite name="tiny-faller-02" x="24" y="40" width="8" height="10" direction="0.0" offsetX="4" offsetY="10"/>
+      <sprite name="tiny-faller-03" x="44" y="40" width="8" height="10" direction="0.0" offsetX="4" offsetY="10"/>
+      <sprite name="tiny-faller-04" x="64" y="40" width="8" height="10" direction="0.0" offsetX="4" offsetY="10"/>
       <sprite name="tiny-shrug-01" x="204" y="0" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
       <sprite name="tiny-shrug-02" x="224" y="0" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
       <sprite name="tiny-shrug-03" x="244" y="0" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
       <sprite name="tiny-shrug-04" x="284" y="0" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
       <sprite name="tiny-shrug-05" x="304" y="0" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-smasher-01" x="3" y="120" width="12" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-smasher-02" x="23" y="120" width="12" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-smasher-03" x="43" y="120" width="12" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-smasher-04" x="63" y="120" width="12" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-smasher-05" x="83" y="120" width="12" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-smasher-06" x="103" y="120" width="12" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-smasher-07" x="124" y="120" width="12" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-smasher-08" x="143" y="120" width="12" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-smasher-09" x="163" y="120" width="12" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-smasher-10" x="184" y="120" width="12" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-smasher-11" x="205" y="120" width="12" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-smasher-12" x="224" y="120" width="12" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-smasher-13" x="243" y="120" width="12" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-smasher-14" x="262" y="120" width="12" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-smasher-15" x="281" y="120" width="12" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-smasher-16" x="300" y="120" width="12" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-splat-01" x="3" y="220" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-splat-02" x="23" y="220" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-splat-03" x="43" y="220" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-splat-04" x="63" y="220" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-splat-05" x="83" y="220" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-splat-06" x="103" y="220" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-splat-07" x="123" y="220" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-splat-08" x="143" y="220" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-splat-09" x="163" y="220" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-splat-10" x="183" y="220" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-splat-11" x="203" y="220" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-splat-12" x="223" y="220" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-splat-13" x="243" y="220" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-splat-14" x="263" y="220" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-splat-15" x="283" y="220" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-splat-16" x="303" y="220" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
       <sprite name="tiny-walker-01" x="4" y="0" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
       <sprite name="tiny-walker-02" x="24" y="0" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
       <sprite name="tiny-walker-03" x="44" y="0" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
@@ -44,35 +102,11 @@
     </spriteSheet>
   </spriteSheets>
   <poses>
-    <pose name="blocker0" filename="images/blocker0.png" offsetY="60"/>
-    <pose name="blocker1" filename="images/blocker1.png" offsetY="60"/>
-    <pose name="blocker10" filename="images/blocker10.png" offsetY="60"/>
-    <pose name="blocker11" filename="images/blocker11.png" offsetY="60"/>
-    <pose name="blocker12" filename="images/blocker12.png" offsetY="60"/>
-    <pose name="blocker13" filename="images/blocker13.png" offsetY="60"/>
-    <pose name="blocker14" filename="images/blocker14.png" offsetY="60"/>
-    <pose name="blocker15" filename="images/blocker15.png" offsetY="60"/>
-    <pose name="blocker2" filename="images/blocker2.png" offsetY="60"/>
-    <pose name="blocker3" filename="images/blocker3.png" offsetY="60"/>
-    <pose name="blocker4" filename="images/blocker4.png" offsetY="60"/>
-    <pose name="blocker5" filename="images/blocker5.png" offsetY="60"/>
-    <pose name="blocker6" filename="images/blocker6.png" offsetY="60"/>
-    <pose name="blocker7" filename="images/blocker7.png" offsetY="60"/>
-    <pose name="blocker8" filename="images/blocker8.png" offsetY="60"/>
-    <pose name="blocker9" filename="images/blocker9.png" offsetY="60"/>
     <pose name="button" filename="images/button.png"/>
-    <pose name="buttonBlocker" filename="images/buttonBlocker.png"/>
-    <pose name="buttonClimber" filename="images/buttonClimber.png"/>
     <pose name="buttonDefault" filename="images/buttonDefault.png"/>
-    <pose name="buttonSelect" filename="images/buttonSelect.png"/>
     <pose name="buttonSelected" filename="images/buttonSelected.png"/>
-    <pose name="buttonSmasher" filename="images/buttonSmasher.png"/>
     <pose name="dig" filename="images/dig.png" offsetY="21"/>
     <pose name="entrance1" filename="images/entrance1.png" offsetY="78"/>
-    <pose name="fall0" filename="images/fall0.png" offsetY="60"/>
-    <pose name="fall1" filename="images/fall1.png" offsetY="60"/>
-    <pose name="fall2" filename="images/fall2.png" offsetY="60"/>
-    <pose name="fall3" filename="images/fall3.png" offsetY="60"/>
     <pose name="grass1" filename="images/grass1.png" offsetX="2" offsetY="8"/>
     <pose name="gui" filename="images/gui.png" offsetX="0" offsetY="100"/>
     <pose name="highlight" filename="images/highlight.png" offsetY="95"/>
@@ -83,55 +117,7 @@
     <pose name="lookStepUpRight" filename="images/lookStepUp.png" offsetX="0" offsetY="3"/>
     <pose name="paws" filename="images/paws.png"/>
     <pose name="smashed" filename="images/smashed.png" offsetY="61"/>
-    <pose name="smasherL0" filename="images/smasherL0.png" offsetY="60"/>
-    <pose name="smasherL1" filename="images/smasherL1.png" offsetY="60"/>
-    <pose name="smasherL10" filename="images/smasherL10.png" offsetY="60"/>
-    <pose name="smasherL11" filename="images/smasherL11.png" offsetY="60"/>
-    <pose name="smasherL12" filename="images/smasherL12.png" offsetY="60"/>
-    <pose name="smasherL13" filename="images/smasherL13.png" offsetY="60"/>
-    <pose name="smasherL14" filename="images/smasherL14.png" offsetY="60"/>
-    <pose name="smasherL15" filename="images/smasherL15.png" offsetY="60"/>
-    <pose name="smasherL2" filename="images/smasherL2.png" offsetY="60"/>
-    <pose name="smasherL3" filename="images/smasherL3.png" offsetY="60"/>
-    <pose name="smasherL4" filename="images/smasherL4.png" offsetY="60"/>
-    <pose name="smasherL5" filename="images/smasherL5.png" offsetY="60"/>
-    <pose name="smasherL6" filename="images/smasherL6.png" offsetY="60"/>
-    <pose name="smasherL7" filename="images/smasherL7.png" offsetY="60"/>
-    <pose name="smasherL8" filename="images/smasherL8.png" offsetY="60"/>
-    <pose name="smasherL9" filename="images/smasherL9.png" offsetY="60"/>
-    <pose name="smasherR0" filename="images/smasherR0.png" offsetY="60"/>
-    <pose name="smasherR1" filename="images/smasherR1.png" offsetY="60"/>
-    <pose name="smasherR10" filename="images/smasherR10.png" offsetY="60"/>
-    <pose name="smasherR11" filename="images/smasherR11.png" offsetY="60"/>
-    <pose name="smasherR12" filename="images/smasherR12.png" offsetY="60"/>
-    <pose name="smasherR13" filename="images/smasherR13.png" offsetY="60"/>
-    <pose name="smasherR14" filename="images/smasherR14.png" offsetY="60"/>
-    <pose name="smasherR15" filename="images/smasherR15.png" offsetY="60"/>
-    <pose name="smasherR2" filename="images/smasherR2.png" offsetY="60"/>
-    <pose name="smasherR3" filename="images/smasherR3.png" offsetY="60"/>
-    <pose name="smasherR4" filename="images/smasherR4.png" offsetY="60"/>
-    <pose name="smasherR5" filename="images/smasherR5.png" offsetY="60"/>
-    <pose name="smasherR6" filename="images/smasherR6.png" offsetY="60"/>
-    <pose name="smasherR7" filename="images/smasherR7.png" offsetY="60"/>
-    <pose name="smasherR8" filename="images/smasherR8.png" offsetY="60"/>
-    <pose name="smasherR9" filename="images/smasherR9.png" offsetY="60"/>
     <pose name="soil1" filename="images/soil1.png" offsetX="2" offsetY="4"/>
-    <pose name="squish0" filename="images/squish0.png" offsetY="60"/>
-    <pose name="squish1" filename="images/squish1.png" offsetY="60"/>
-    <pose name="squish10" filename="images/squish10.png" offsetY="60"/>
-    <pose name="squish11" filename="images/squish11.png" offsetY="60"/>
-    <pose name="squish12" filename="images/squish12.png" offsetY="60"/>
-    <pose name="squish13" filename="images/squish13.png" offsetY="60"/>
-    <pose name="squish14" filename="images/squish14.png" offsetY="60"/>
-    <pose name="squish15" filename="images/squish15.png" offsetY="60"/>
-    <pose name="squish2" filename="images/squish2.png" offsetY="60"/>
-    <pose name="squish3" filename="images/squish3.png" offsetY="60"/>
-    <pose name="squish4" filename="images/squish4.png" offsetY="60"/>
-    <pose name="squish5" filename="images/squish5.png" offsetY="60"/>
-    <pose name="squish6" filename="images/squish6.png" offsetY="60"/>
-    <pose name="squish7" filename="images/squish7.png" offsetY="60"/>
-    <pose name="squish8" filename="images/squish8.png" offsetY="60"/>
-    <pose name="squish9" filename="images/squish9.png" offsetY="60"/>
   </poses>
   <ninePatches>
     <ninePatch name="borderE" filename="images/borderE.png" top="2" right="2" bottom="2" left="2"/>
@@ -159,22 +145,22 @@
     <animation name="blocker">
       <sequence sequence="true" loops="0">
         <frames pingPong="false">
-          <frame pose="blocker0" delay="8"/>
-          <frame pose="blocker1" delay="8"/>
-          <frame pose="blocker2" delay="8"/>
-          <frame pose="blocker3" delay="8"/>
-          <frame pose="blocker4" delay="8"/>
-          <frame pose="blocker5" delay="8"/>
-          <frame pose="blocker6" delay="8"/>
-          <frame pose="blocker7" delay="8"/>
-          <frame pose="blocker8" delay="8"/>
-          <frame pose="blocker9" delay="8"/>
-          <frame pose="blocker10" delay="8"/>
-          <frame pose="blocker11" delay="8"/>
-          <frame pose="blocker12" delay="8"/>
-          <frame pose="blocker13" delay="8"/>
-          <frame pose="blocker14" delay="8"/>
-          <frame pose="blocker15" delay="8"/>
+          <frame pose="blocker-01" delay="4"/>
+          <frame pose="blocker-02" delay="4"/>
+          <frame pose="blocker-03" delay="4"/>
+          <frame pose="blocker-04" delay="4"/>
+          <frame pose="blocker-05" delay="4"/>
+          <frame pose="blocker-06" delay="4"/>
+          <frame pose="blocker-07" delay="4"/>
+          <frame pose="blocker-08" delay="4"/>
+          <frame pose="blocker-09" delay="4"/>
+          <frame pose="blocker-10" delay="4"/>
+          <frame pose="blocker-11" delay="4"/>
+          <frame pose="blocker-12" delay="4"/>
+          <frame pose="blocker-13" delay="4"/>
+          <frame pose="blocker-14" delay="4"/>
+          <frame pose="blocker-15" delay="4"/>
+          <frame pose="blocker-16" delay="4"/>
         </frames>
       </sequence>
     </animation>
@@ -198,6 +184,7 @@
           <frame pose="builderL-13" delay="4"/>
           <frame pose="builderL-14" delay="4"/>
           <frame pose="builderL-15" delay="4"/>
+          <frame pose="builderL-16" delay="4"/>
         </frames>
       </sequence>
     </animation>
@@ -221,6 +208,7 @@
           <frame pose="builderR-13" delay="4"/>
           <frame pose="builderR-14" delay="4"/>
           <frame pose="builderR-15" delay="4"/>
+          <frame pose="builderR-16" delay="4"/>
         </frames>
       </sequence>
     </animation>
@@ -251,76 +239,88 @@
     <animation name="fall">
       <sequence sequence="true" loops="0">
         <frames pingPong="false">
-          <frame pose="fall0" delay="4"/>
-          <frame pose="fall1" delay="4"/>
-          <frame pose="fall2" delay="4"/>
-          <frame pose="fall3" delay="4"/>
+          <frame pose="fallerA-01" delay="4"/>
+          <frame pose="fallerA-02" delay="4"/>
+          <frame pose="fallerA-03" delay="4"/>
+          <frame pose="fallerA-04" delay="4"/>
+          <frame pose="fallerB-01" delay="4"/>
+          <frame pose="fallerB-02" delay="4"/>
+          <frame pose="fallerB-03" delay="4"/>
+          <frame pose="fallerB-04" delay="4"/>
         </frames>
       </sequence>
     </animation>
     <animation name="smasherL">
-      <sequence sequence="true" loops="0">
+      <sequence sequence="true" loops="10">
         <frames pingPong="false">
-          <frame pose="smasherL0" delay="4"/>
-          <frame pose="smasherL1" delay="4"/>
-          <frame pose="smasherL2" delay="4"/>
-          <frame pose="smasherL3" delay="4"/>
-          <frame pose="smasherL4" delay="4"/>
-          <frame pose="smasherL5" delay="4"/>
-          <frame pose="smasherL6" delay="4"/>
-          <frame pose="smasherL7" delay="4"/>
-          <frame pose="smasherL8" delay="4"/>
-          <frame pose="smasherL9" delay="4"/>
-          <frame pose="smasherL10" delay="4"/>
-          <frame pose="smasherL11" delay="4"/>
-          <frame pose="smasherL12" delay="4"/>
-          <frame pose="smasherL13" delay="4"/>
-          <frame pose="smasherL14" delay="4"/>
-          <frame pose="smasherL15" delay="4"/>
+          <frame pose="smasherL-01" delay="4"/>
+          <frame pose="smasherL-02" delay="4"/>
+          <frame pose="smasherL-03" delay="4"/>
+          <frame pose="smasherL-04" delay="4"/>
+          <frame pose="smasherL-05" delay="4"/>
+          <frame pose="smasherL-06" delay="4"/>
+          <frame pose="smasherL-07" delay="3"/>
         </frames>
+        <move dx="-18.0" dy="0.0" ticks="1" ease="linear"/>
+        <frames pingPong="false">
+          <frame pose="smasherL-08" delay="4"/>
+          <frame pose="smasherL-09" delay="4"/>
+          <frame pose="smasherL-10" delay="4"/>
+          <frame pose="smasherL-11" delay="4"/>
+          <frame pose="smasherL-12" delay="4"/>
+          <frame pose="smasherL-13" delay="4"/>
+          <frame pose="smasherL-14" delay="4"/>
+          <frame pose="smasherL-15" delay="4"/>
+          <frame pose="smasherL-16" delay="3"/>
+        </frames>
+        <move dx="-12.0" dy="0.0" ticks="1" ease="linear"/>
       </sequence>
     </animation>
     <animation name="smasherR">
-      <sequence sequence="true" loops="0">
+      <sequence sequence="true" loops="10">
         <frames pingPong="false">
-          <frame pose="smasherR0" delay="4"/>
-          <frame pose="smasherR1" delay="4"/>
-          <frame pose="smasherR2" delay="4"/>
-          <frame pose="smasherR3" delay="4"/>
-          <frame pose="smasherR4" delay="4"/>
-          <frame pose="smasherR5" delay="4"/>
-          <frame pose="smasherR6" delay="4"/>
-          <frame pose="smasherR7" delay="4"/>
-          <frame pose="smasherR8" delay="4"/>
-          <frame pose="smasherR9" delay="4"/>
-          <frame pose="smasherR10" delay="4"/>
-          <frame pose="smasherR11" delay="4"/>
-          <frame pose="smasherR12" delay="4"/>
-          <frame pose="smasherR13" delay="4"/>
-          <frame pose="smasherR14" delay="4"/>
-          <frame pose="smasherR15" delay="4"/>
+          <frame pose="smasherR-01" delay="4"/>
+          <frame pose="smasherR-02" delay="4"/>
+          <frame pose="smasherR-03" delay="4"/>
+          <frame pose="smasherR-04" delay="4"/>
+          <frame pose="smasherR-05" delay="4"/>
+          <frame pose="smasherR-06" delay="4"/>
+          <frame pose="smasherR-07" delay="3"/>
         </frames>
+        <move dx="18.0" dy="0.0" ticks="1" ease="linear"/>
+        <frames pingPong="false">
+          <frame pose="smasherR-08" delay="4"/>
+          <frame pose="smasherR-09" delay="4"/>
+          <frame pose="smasherR-10" delay="4"/>
+          <frame pose="smasherR-11" delay="4"/>
+          <frame pose="smasherR-12" delay="4"/>
+          <frame pose="smasherR-13" delay="4"/>
+          <frame pose="smasherR-14" delay="4"/>
+          <frame pose="smasherR-15" delay="4"/>
+          <frame pose="smasherR-16" delay="3"/>
+        </frames>
+        <move dx="12.0" dy="0.0" ticks="1" ease="linear"/>
       </sequence>
     </animation>
-    <animation name="squish">
+    <animation name="splat">
       <sequence sequence="true" loops="1">
         <frames pingPong="false">
-          <frame pose="squish0" delay="4"/>
-          <frame pose="squish1" delay="4"/>
-          <frame pose="squish2" delay="4"/>
-          <frame pose="squish3" delay="4"/>
-          <frame pose="squish4" delay="4"/>
-          <frame pose="squish5" delay="4"/>
-          <frame pose="squish6" delay="4"/>
-          <frame pose="squish7" delay="4"/>
-          <frame pose="squish8" delay="4"/>
-          <frame pose="squish9" delay="4"/>
-          <frame pose="squish10" delay="4"/>
-          <frame pose="squish11" delay="4"/>
-          <frame pose="squish12" delay="4"/>
-          <frame pose="squish13" delay="4"/>
-          <frame pose="squish14" delay="4"/>
-          <frame pose="squish15" delay="4"/>
+          <frame pose="splat-01" delay="4"/>
+          <frame pose="splat-02" delay="4"/>
+          <frame pose="splat-03" delay="4"/>
+          <frame pose="splat-04" delay="4"/>
+          <frame pose="splat-05" delay="4"/>
+          <frame pose="splat-06" delay="4"/>
+          <frame pose="splat-07" delay="4"/>
+          <frame pose="splat-08" delay="4"/>
+          <frame pose="splat-09" delay="4"/>
+          <frame pose="splat-10" delay="4"/>
+          <frame pose="splat-11" delay="4"/>
+          <frame pose="splat-12" delay="4"/>
+          <frame pose="splat-13" delay="4"/>
+          <frame pose="splat-14" delay="4"/>
+          <frame pose="splat-15" delay="4"/>
+          <frame pose="splat-16" delay="1"/>
         </frames>
       </sequence>
     </animation>
@@ -379,9 +379,9 @@
       <animation name="builderR" animation="builderR"/>
       <animation name="digger" animation="digger"/>
       <animation name="fall" animation="fall"/>
-      <animation name="smasherL" animation="smasherL"/>
-      <animation name="smasherR" animation="smasherR"/>
-      <animation name="squish" animation="squish"/>
+      <animation name="smashL" animation="smasherL"/>
+      <animation name="smashR" animation="smasherR"/>
+      <animation name="splat" animation="splat"/>
       <animation name="walkL" animation="walkL"/>
       <animation name="walkR" animation="walkR"/>
       <companion name="brick" companion="brick"/>
@@ -415,7 +415,6 @@
       <pose name="climber" pose="buttonClimber"/>
       <pose name="default" pose="buttonDefault"/>
       <pose name="digger" pose="buttonDigger"/>
-      <pose name="select" pose="buttonSelect"/>
       <pose name="smasher" pose="buttonSmasher"/>
     </costume>
     <costume name="lookDown" defaultZOrder="0" order="10" showInDesigner="true">
@@ -439,7 +438,6 @@
     </costume>
   </costumes>
   <scenes>
-    <scene name="admin"/>
     <scene name="gui"/>
     <scene name="menu"/>
     <scene name="start"/>

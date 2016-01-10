@@ -16,7 +16,7 @@
       <property name="dy" value="0.0"/>
       <property name="direction" value="1"/>
     </actor>
-    <actor costume="animationTest" x="375" y="414" direction="0.0" heading="0.0" startEvent="walkL" zOrder="3">
+    <actor costume="animationTest" x="432" y="463" direction="0.0" heading="0.0" startEvent="smashR" zOrder="3">
       <property name="dx" value="0.0"/>
       <property name="dy" value="0.0"/>
       <property name="direction" value="-1"/>
@@ -25,6 +25,16 @@
       <property name="dx" value="0.0"/>
       <property name="dy" value="0.0"/>
       <property name="direction" value="1"/>
+    </actor>
+    <actor costume="animationTest" x="371" y="410" direction="0.0" heading="0.0" startEvent="walkL" zOrder="5">
+      <property name="dx" value="0.0"/>
+      <property name="dy" value="0.0"/>
+      <property name="direction" value="-1"/>
+    </actor>
+    <actor costume="animationTest" x="372" y="463" direction="0.0" heading="0.0" startEvent="smashL" zOrder="6">
+      <property name="dx" value="0.0"/>
+      <property name="dy" value="0.0"/>
+      <property name="direction" value="-1"/>
     </actor>
   </layer>
 </scene>

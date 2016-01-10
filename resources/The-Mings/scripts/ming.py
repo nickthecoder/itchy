@@ -88,7 +88,6 @@ class Ming(AbstractRole) :
 
 
     def look( self, looker, tags = ["solid"] ) :
-        print "WR ", looker.actor.appearance.worldRectangle
         looker.tick()
         looker.collisionStrategy.update()
         result = looker.collided( tags )
@@ -123,7 +122,6 @@ class Ming(AbstractRole) :
             for i in range(0,8) :
                 self.actor.moveBy(0,-1)
                 if self.look( self.lookDown ) :
-                    print "Small step down"  
                     return False
             
             # Nothing under us. Fall!
@@ -252,12 +250,12 @@ class Faller(Job) :
         # Have I hit bottom?
         if ming.look( ming.lookDown ) :
             print "Stopped falling"
-
+            
             # Have I fallen too far to land safely?
-            if self.fallCount > 250 :
+            if self.fallCount > 150 :
 
                 ming.findLevel()
-                ming.deathEvent( "squish" )
+                ming.deathEvent( "splat" )
                 ming.dy = 0
                 ming.dx = 0
 
@@ -307,7 +305,7 @@ class Smasher(Job) :
     def start( self, ming ) :
         print "Smasher"
         ming.dy = 0
-        ming.dx = ming.direction # Slower than walking
+        ming.dx = 0 # Animation does the movement
         self.smashed = False # Set to true when first piece of solid is removed
         self.smashTimer = Timer.createTimerSeconds( 3 )
 
@@ -317,7 +315,7 @@ class Smasher(Job) :
         # Comment out this line (or change the value) to help debugging.
         self.smashFollower.actor.appearance.alpha = 0
 
-        ming.event( "smasher" + ming.directionLetter() )
+        ming.event( "smash" + ming.directionLetter() )
     
     def work( self, ming ) :
         if self.smashTimer.isFinished() :
@@ -327,20 +325,15 @@ class Smasher(Job) :
             ming.changeJob( Walker() )
 
         else :
-            tester = ming.turnLeftTest if ming.direction > 0 else ming.turnRightTest
             if self.smashed :
-                if not ming.checkCollision( tester ) :
-
+                if ming.look( self.smashFollower ) :
                     ming.removeSolids( self.smashFollower )
 
                 else :
-
                     self.smashFollower.actor.kill()
-                    self.smashFollower = None
                     ming.changeJob( Walker() )
             else :
-                if not ming.checkCollision( tester ) :
-
+                if ming.look( ming.lookLeftRight ) :
                     self.smashed = True
 
 

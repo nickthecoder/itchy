@@ -7,10 +7,13 @@ Mings collisions need to take into account that the ANIMATION move the ming.
 	
 Diggers etc need to look for solid objects separately from blockers.
 
+When testing blockers, use the direction of travel.
+	i.e. don't turn left if the blocker is already to the left of me.
+
 All mings need to look down, including diggers.
 
 The-Mings delete existing Ming poses, and use the sprite sheet instead.
-	 
+
 Improve basher's animation (similar to builders)?
 	Clever use of the offsetX ?
 	or step, on a given message?
@@ -27,8 +30,6 @@ Use a sensible default for pixcel detection threshold in actor and pixeldetectio
 BUGS
 ====
 
-WTF is Animation.startExceptFirst ? Parallel certainly doesn't do aything sensible!
-
 Appearance.fixPose doesn't do the right thing with direction.
 	Setting dir to 0 works, but ideally both appearance and the new pose should have the old appearance's direction,
 	and yet the pose won't need rotating.
@@ -39,7 +40,6 @@ TextArea's background center of nine patch is flat colour rather than tiled.
 
 SceneDesigner doesn't use the full width when window is maximised
 SceneDesigner toolbox isn't moved when the window is maximised (floats in middle of the screen).
-
 
 New Features
 ============
@@ -61,6 +61,14 @@ Design Stages/Views graphically - Aim for no code in Director.
 
 Code Tidy Up
 ============
+
+Pixelator has a bodge in it. Sometime it needs to add one to all the pixels.
+	Do a test, and see if the top row of pixels are blank for large scales, and if so,
+		then move blit to another surface before embossing the edges.
+	Rename it EmbossEdgesPixelator? Create EmbossPixelator, which embosses every pixel.
+
+WTF is Animation.startExceptFirst ? Parallel certainly doesn't do aything sensible!
+	Used when merging two animations. Do it better!!!
 
 Role.animateAndTick
 	Replace with separate animate and tick methods.

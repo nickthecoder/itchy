@@ -71,17 +71,18 @@
     <actor costume="soil1" x="1370" y="510" direction="0.0" heading="0.0" startEvent="default" zOrder="108"/>
     <actor costume="grass1" x="980" y="430" direction="0.0" heading="0.0" startEvent="default" zOrder="109"/>
     <actor costume="soil1" x="980" y="410" direction="0.0" heading="0.0" startEvent="default" zOrder="110"/>
-    <actor costume="soil1" x="500" y="500" direction="0.0" heading="0.0" startEvent="default" zOrder="111"/>
-    <actor costume="soil1" x="30" y="510" direction="0.0" heading="0.0" startEvent="default" zOrder="112"/>
+    <actor costume="soil1" x="250" y="570" direction="0.0" heading="0.0" startEvent="default" zOrder="111"/>
+    <actor costume="soil1" x="60" y="660" direction="0.0" heading="0.0" startEvent="default" zOrder="112"/>
     <actor costume="grass1" x="730" y="250" direction="0.0" heading="0.0" startEvent="default" zOrder="113"/>
   </layer>
   <layer name="main">
-    <actor costume="ming" x="751" y="260" direction="0.0" heading="0.0" startEvent="default" zOrder="37"/>
-    <actor costume="entrance1" x="363" y="611" direction="0.0" heading="0.0" startEvent="default" zOrder="90">
+    <actor costume="ming" x="90" y="666" direction="0.0" heading="0.0" startEvent="default" zOrder="37"/>
+    <actor costume="entrance1" x="545" y="634" direction="0.0" heading="0.0" startEvent="default" zOrder="90">
       <property name="offsetY" value="-300"/>
-      <property name="offsetX" value="300"/>
-      <property name="mings" value="0"/>
+      <property name="offsetX" value="0"/>
       <property name="period" value="2.0"/>
+      <property name="mings" value="0"/>
     </actor>
+    <actor costume="ming" x="154" y="447" direction="0.0" heading="0.0" startEvent="default" zOrder="91"/>
   </layer>
 </scene>
