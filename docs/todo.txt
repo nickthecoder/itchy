@@ -1,6 +1,10 @@
 Current Tasks
 =============
 
+Mings collisions need to take into account that the ANIMATION move the ming.
+	e.g. A ming can be moved up, embedding his head in soil, when building
+	So need to keep track of last safe position and revert if colliding.
+	
 Diggers etc need to look for solid objects separately from blockers.
 
 All mings need to look down, including diggers.
@@ -39,7 +43,9 @@ SceneDesigner toolbox isn't moved when the window is maximised (floats in middle
 
 New Features
 ============
-	
+
+FramedAnimation to have a dx and dy (or forwards sideways???)
+
 Ensure Scrollbars of Scroll do not obscure the contents.
 
 Use Scroll for TextArea, instead of its buggy, self implemented, non-clipping scroller.
@@ -55,6 +61,10 @@ Design Stages/Views graphically - Aim for no code in Director.
 
 Code Tidy Up
 ============
+
+Role.animateAndTick
+	Replace with separate animate and tick methods.
+	Pause can then override both with empty values.
 
 Move GraphicsContext to the gui package? Is it used elsewhere (for stages?)
 

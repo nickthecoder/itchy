@@ -67,23 +67,7 @@
     <pose name="buttonSelect" filename="images/buttonSelect.png"/>
     <pose name="buttonSelected" filename="images/buttonSelected.png"/>
     <pose name="buttonSmasher" filename="images/buttonSmasher.png"/>
-    <pose name="climberL0" filename="images/climberL0.png" offsetX="24" offsetY="60"/>
-    <pose name="climberL1" filename="images/climberL1.png" offsetX="24" offsetY="60"/>
-    <pose name="climberL2" filename="images/climberL2.png" offsetX="24" offsetY="60"/>
-    <pose name="climberL3" filename="images/climberL3.png" offsetX="24" offsetY="60"/>
-    <pose name="climberL4" filename="images/climberL4.png" offsetX="24" offsetY="60"/>
-    <pose name="climberL5" filename="images/climberL5.png" offsetX="24" offsetY="60"/>
-    <pose name="climberL6" filename="images/climberL6.png" offsetX="24" offsetY="60"/>
-    <pose name="climberL7" filename="images/climberL7.png" offsetX="24" offsetY="60"/>
-    <pose name="climberR0" filename="images/climberR0.png" offsetX="24" offsetY="60"/>
-    <pose name="climberR1" filename="images/climberR1.png" offsetX="24" offsetY="60"/>
-    <pose name="climberR2" filename="images/climberR2.png" offsetX="24" offsetY="60"/>
-    <pose name="climberR3" filename="images/climberR3.png" offsetX="24" offsetY="60"/>
-    <pose name="climberR4" filename="images/climberR4.png" offsetX="24" offsetY="60"/>
-    <pose name="climberR5" filename="images/climberR5.png" offsetX="24" offsetY="60"/>
-    <pose name="climberR6" filename="images/climberR6.png" offsetX="24" offsetY="60"/>
-    <pose name="climberR7" filename="images/climberR7.png" offsetX="24" offsetY="60"/>
-    <pose name="dug" filename="images/dug.png" offsetY="34"/>
+    <pose name="dig" filename="images/dig.png" offsetY="21"/>
     <pose name="entrance1" filename="images/entrance1.png" offsetY="78"/>
     <pose name="fall0" filename="images/fall0.png" offsetY="60"/>
     <pose name="fall1" filename="images/fall1.png" offsetY="60"/>
@@ -240,37 +224,9 @@
         </frames>
       </sequence>
     </animation>
-    <animation name="climberL">
-      <sequence sequence="true" loops="0">
-        <frames pingPong="false">
-          <frame pose="climberL0" delay="4"/>
-          <frame pose="climberL1" delay="4"/>
-          <frame pose="climberL2" delay="4"/>
-          <frame pose="climberL3" delay="4"/>
-          <frame pose="climberL4" delay="4"/>
-          <frame pose="climberL5" delay="4"/>
-          <frame pose="climberL6" delay="4"/>
-          <frame pose="climberL7" delay="4"/>
-        </frames>
-      </sequence>
-    </animation>
-    <animation name="climberR">
-      <sequence sequence="true" loops="0">
-        <frames pingPong="false">
-          <frame pose="climberR0" delay="4"/>
-          <frame pose="climberR1" delay="4"/>
-          <frame pose="climberR2" delay="4"/>
-          <frame pose="climberR3" delay="4"/>
-          <frame pose="climberR4" delay="4"/>
-          <frame pose="climberR5" delay="4"/>
-          <frame pose="climberR6" delay="4"/>
-          <frame pose="climberR7" delay="4"/>
-        </frames>
-      </sequence>
-    </animation>
     <animation name="digger">
       <sequence sequence="true" loops="10" finishedMessage="jobComplete">
-        <frames pingPong="false" finishedMessage="dugDown">
+        <frames pingPong="false" finishedMessage="dig">
           <frame pose="diggerA-01" delay="4"/>
           <frame pose="diggerA-02" delay="4"/>
           <frame pose="diggerA-03" delay="4"/>
@@ -280,7 +236,7 @@
           <frame pose="diggerA-07" delay="4"/>
           <frame pose="diggerA-08" delay="4"/>
         </frames>
-        <frames pingPong="false" finishedMessage="dugDown">
+        <frames pingPong="false" finishedMessage="dig">
           <frame pose="diggerB-01" delay="4"/>
           <frame pose="diggerB-02" delay="4"/>
           <frame pose="diggerB-03" delay="4"/>
@@ -421,8 +377,6 @@
       <animation name="blocker" animation="blocker"/>
       <animation name="builderL" animation="builderL"/>
       <animation name="builderR" animation="builderR"/>
-      <animation name="climberL" animation="climberL"/>
-      <animation name="climberR" animation="climberR"/>
       <animation name="digger" animation="digger"/>
       <animation name="fall" animation="fall"/>
       <animation name="smasherL" animation="smasherL"/>
@@ -432,7 +386,7 @@
       <animation name="walkR" animation="walkR"/>
       <companion name="brick" companion="brick"/>
       <companion name="default" companion="entrance1"/>
-      <companion name="dug" companion="dug"/>
+      <companion name="dig" companion="dig"/>
       <companion name="lookDown" companion="lookDown"/>
       <companion name="lookLeftRight" companion="lookLeftRight"/>
       <companion name="lookStepUp" companion="lookStepUp"/>
@@ -443,8 +397,8 @@
     <costume name="brick" defaultZOrder="0" order="10" showInDesigner="true" role="solid.py">
       <pose name="default" pose="brick-01"/>
     </costume>
-    <costume name="dug" defaultZOrder="0" order="10" showInDesigner="true">
-      <pose name="default" pose="dug"/>
+    <costume name="dig" defaultZOrder="0" order="10" showInDesigner="true">
+      <pose name="default" pose="dig"/>
     </costume>
     <costume name="entrance1" defaultZOrder="0" order="0" showInDesigner="true" role="entrance.py">
       <pose name="default" pose="entrance1"/>

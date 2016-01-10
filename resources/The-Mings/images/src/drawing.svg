@@ -655,11 +655,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="3.959798"
-     inkscape:cx="430.8375"
-     inkscape:cy="676.84867"
+     inkscape:zoom="1.979899"
+     inkscape:cx="273.75878"
+     inkscape:cy="661.19131"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="layer2"
      showgrid="false"
      inkscape:window-width="1440"
      inkscape:window-height="847"
@@ -769,11 +769,11 @@
        inkscape:export-filename="/home/nick/server/projects/itchy/resources/The-Mings/images/dug.png"
        inkscape:label="#rect3143"
        rx="8.2624083"
-       ry="9.6428528"
-       y="361.16782"
+       ry="0"
+       y="375.30997"
        x="175.27898"
-       height="34.7188"
-       width="61.833874"
+       height="20.576668"
+       width="61.833878"
        id="rect3142"
        style="fill:#000000;fill-opacity:1;stroke:none" />
   </g>
@@ -811,13 +811,13 @@
     <rect
        inkscape:export-ydpi="92.571426"
        inkscape:export-xdpi="92.571426"
-       inkscape:export-filename="/home/nick/server/projects/itchy/resources/The-Mings/images/reverse.png"
+       inkscape:export-filename="/home/nick/server/projects/itchy/resources/The-Mings/images/lookLeftRight.png"
        style="fill:#00ff11;fill-opacity:0.65898617;stroke:none"
        id="rect3011"
        width="2"
-       height="48.43401"
+       height="43.888325"
        x="473"
-       y="323.92816" />
+       y="326.20102" />
     <g
        id="g3785"
        transform="translate(-114,-36)"

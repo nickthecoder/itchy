@@ -26,7 +26,7 @@ class Ming(AbstractRole) :
     def createLooker(self, name) :
         result = FollowerBuilder( self.actor ).companion( name ).create()
         result.event( "look" + self.directionLetter() )
-        #result.actor.appearance.alpha = 100
+        result.actor.appearance.alpha = 0
         return result
         
 
@@ -86,15 +86,21 @@ class Ming(AbstractRole) :
         self.lookStepUp.event( "look" + self.directionLetter() )
         self.dx = - self.dx
 
+
     def look( self, looker, tags = ["solid"] ) :
+        print "WR ", looker.actor.appearance.worldRectangle
         looker.tick()
         looker.collisionStrategy.update()
-        return looker.collided( tags )
+        result = looker.collided( tags )
+        return result
         
         
     def checkForReversing( self ) :
 
-        if self.look( self.lookLeftRight, ["solid", "blocker"] ) :
+        self.lookLeftRight.tick()
+        self.lookLeftRight.collisionStrategy.update()
+        for role in self.lookLeftRight.collisions( ["solid", "blocker"] ) :
+        
             self.reverse()
             self.changeJob( Walker() )
             return True
@@ -114,16 +120,12 @@ class Ming(AbstractRole) :
 
         # Is there anything under my feet?
         if not self.look( self.lookDown ) :
-
-            # If it is a small step down, don't fall, just change Y
-            self.actor.moveBy(0,-8)
-            if self.look( self.lookDown ) :
-                print "Small step down"                    
-                self.findLevel()
-                return False
-                
-            self.actor.moveBy(0,8)
-
+            for i in range(0,8) :
+                self.actor.moveBy(0,-1)
+                if self.look( self.lookDown ) :
+                    print "Small step down"  
+                    return False
+            
             # Nothing under us. Fall!
             print "Fall"
             self.changeJob( Faller() )
@@ -135,10 +137,17 @@ class Ming(AbstractRole) :
 
     def findLevel( self ) :
         # Move up till we aren't on solid ground
-        while self.look( self.lookDown ) :
+        for i in range(0,8) :
             self.actor.moveBy(0,1)
-        # Move down 1 pixel, and we are now perfectly level with the ground.
-        self.actor.moveBy(0,-1)
+
+            if self.look( self.lookLeftRight ) :
+                self.actor.moveBy(0,-1)
+                print "Hitting LR"
+                return
+
+            if not self.look( self.lookDown ) :
+                self.actor.moveBy(0,-1)
+                return
 
 
 
@@ -208,7 +217,6 @@ class Walker(Job) :
         ming.dy = 0
         ming.dx = 0
         ming.event( "walk" + ming.directionLetter() )
-        print ming.actor.animation
     
     def onMessage(self, ming, message) :
         if message == "step5" :
@@ -219,9 +227,11 @@ class Walker(Job) :
     def work( self, ming ) :
         if ming.checkForFalling() :
             return
+
+        ming.checkForStepUp()
+
         if ming.checkForReversing() :
             return
-        ming.checkForStepUp()
         
 class Faller(Job) :
     
@@ -253,13 +263,6 @@ class Faller(Job) :
 
             else :
                 ming.findLevel()
-
-                if ming.direction > 0 :
-                    ming.event( "walkR" )
-                else :
-                    ming.event( "walkL" )
-                ming.dy = 0
-                ming.dx = ming.direction * 2
                 ming.changeJob( Walker() )
 
 class Builder(Job) :
@@ -349,15 +352,12 @@ class Digger(Job) :
         ming.dx = 0
         self.removed = False # Set to true when first piece of solid is removed
 
-        self.digFollower = FollowerBuilder( ming.actor ).companion( "dug" ).create()
-        # Comment out this line (or change the value) to help debugging.
-        self.digFollower.actor.appearance.alpha = 128
-
+        self.digFollower = ming.createLooker( "dig" )
         ming.event( "digger" )
 
-    def quit( self, ming ) :
-        self.digFollower.actor.kill()
-        
+    def work( self, ming ) :
+        pass
+
     def onMessage( self, ming, message ) :
         print "Digger message", message
         
@@ -365,9 +365,15 @@ class Digger(Job) :
             print "Complete"
             ming.changeJob( Walker() )
             
-        if message == "dugDown" :
-            print "Dug Down"
+        if message == "dig" :
+            print "Dig"
             ming.actor.moveBy( 0, -PIXELATION_SIZE )
-            ming.removeSolids( self.digFollower )
+            if not ming.look( self.digFollower ) :
+                ming.changeJob( Walker() )
+            else :
+                ming.removeSolids( self.digFollower )
 
+    def quit( self, ming ) :
+        self.digFollower.actor.kill()
+        
 
