@@ -70,7 +70,7 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
      * How transparent the image is from 0 (fully transparent) to 255 (fully opaque).
      */
     private double alpha;
-
+    
     /**
      * If set, then the image tends to this color (uses the alpha value).
      */
@@ -400,10 +400,10 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
                 data.set(this.pose.getSurface().getWidth(), this.pose.getSurface().getHeight(),
                     this.pose.getOffsetX(), this.pose.getOffsetY());
                 this.pipeline.applyGeometry(data);
-                
+
                 this.worldRectangle = new WorldRectangle(
                     this.actor.getX() - data.offsetX,
-                    this.actor.getY() - data.offsetY,
+                    this.actor.getY() + data.offsetY - data.height, 
                     data.width,
                     data.height
                     );
@@ -455,14 +455,14 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
     public void fixAppearance()
     {
         ImagePose pose = new ImagePose(getSurface().copy(), getOffsetX(), getOffsetY());
-        
-        pose.setDirection(getDirection());
+
+        // Doesn't work. Bodge it bt setting direction to 0 for now.
+        // pose.setDirection(getDirection());
+        this.direction = 0;
 
         setPose(pose);
         setMakeup(new NullMakeup());
         this.scale = 1;
-
-        System.out.println("Fixed appearance direction diff : " + (this.getDirection() - this.getPose().getDirection()) );
     }
 
     @Override

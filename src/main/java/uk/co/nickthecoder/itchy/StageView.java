@@ -64,20 +64,13 @@ public class StageView extends AbstractScrollableView implements StageListener, 
                 }
 
                 // Don't render actors that are invisible (or very nearly invisible)
-                if ((actor.getAppearance().getAlpha() < 2) && (this.minimumAlpha < 2)) {
-                    continue;
+                if ((actor.getAppearance().getAlpha() > 1) || (this.minimumAlpha > 1)) {
+                    render( destSurface, clip, tx, ty, actor );
                 }
-
-                render( destSurface, clip, tx, ty, actor );
                 
             } catch (Exception e) {
                 e.printStackTrace();
-                try {
-                    // actor.kill();
-                    System.err.println("Failed to render " + actor);
-                } catch (Exception e2) {
-                    // Do nothing
-                }
+                System.err.println("Failed to render " + actor);
             }
         }
     }
