@@ -168,7 +168,7 @@ public class SimplePause implements Pause
         }
 
         @Override
-        public void animateAndTick()
+        public void animate()
         {
             // Do nothing
         }

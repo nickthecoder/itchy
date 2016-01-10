@@ -300,7 +300,7 @@ public abstract class AbstractRole implements Role
      * firing. This is done by creating a PauseRole, which does nothing in tickHandler.
      */
     @Override
-    public void animateAndTick()
+    public void animate()
     {
         Actor actor = getActor();
 
@@ -318,11 +318,9 @@ public abstract class AbstractRole implements Role
                 }
             }
         }
-        if ((!actor.isDead()) && (!actor.isDying())) {
-            tick();
-        }
     }
 
+    @Override
     public void tick()
     {
     }

@@ -130,9 +130,16 @@ public interface Role extends MessageListener, Cloneable, PropertySubject<Role> 
 	 * <p>
 	 * Should only be called internally by Itchy.
 	 */
-	void animateAndTick();
+	void animate();
 
-	/**
+    /**
+     * Called once per frame for all active actors' roles.
+     * <p>
+     * Should only be called internally by Itchy.
+     */
+    void tick();
+
+    /**
 	 * Called when a message is sent to this Role. Messages are a simple way to
 	 * communicate with a Role, but it is often better to create a specific
 	 * method, rather than passing strings to onMessage.

@@ -1,6 +1,8 @@
 Current Tasks
 =============
 
+AnimationTests : allow single step animation.
+
 Mings collisions need to take into account that the ANIMATION move the ming.
 	e.g. A ming can be moved up, embedding his head in soil, when building
 	So need to keep track of last safe position and revert if colliding.
@@ -12,19 +14,7 @@ When testing blockers, use the direction of travel.
 
 All mings need to look down, including diggers.
 
-The-Mings delete existing Ming poses, and use the sprite sheet instead.
-
-Improve basher's animation (similar to builders)?
-	Clever use of the offsetX ?
-	or step, on a given message?
-	or move by jumps every n frames
-	or define the jumps in the editor using a parallel.
-	
-	Bash big lumps at a time
-
-To aid testing, allow mings to be added with any job.
-
-Use a sensible default for pixcel detection threshold in actor and pixeldetection classes.
+Use a sensible default for pixel detection threshold in actor and pixeldetection classes.
 	Change lookers to fully opaque.
 
 BUGS

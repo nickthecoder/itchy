@@ -780,7 +780,12 @@ public class Actor implements PropertySubject<Actor>
     {
         if (this.role != null) {
             try {
-                this.role.animateAndTick();
+                this.role.animate();
+
+                if ((!this.isDead()) && (!this.isDying())) {
+                    this.role.tick();
+                }
+
             } catch (Exception e) {
                 Itchy.handleException(e);
             }
