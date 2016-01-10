@@ -37,4 +37,7 @@
       <property name="direction" value="-1"/>
     </actor>
   </layer>
+  <layer name="gui">
+    <text text="Press Space to step through the animations" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="429" y="34" direction="0.0" heading="0.0" startEvent="default" zOrder="0"/>
+  </layer>
 </scene>
