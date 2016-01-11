@@ -61,8 +61,8 @@ public class BuiltInRotoZoom extends BuiltInMakeup
         double ody = mathOffsetY - os.height / 2.0;
 
         double dirRadians = dirDiff / 180.0 * Math.PI;
-        double cosa = Math.cos(-dirRadians);
-        double sina = Math.sin(-dirRadians);
+        double cosa = Math.cos(dirRadians);
+        double sina = Math.sin(dirRadians);
 
         // Calculate were (odx,ody) is using the new coordinate system.
         double ndy = odx * sina + ody * cosa;
