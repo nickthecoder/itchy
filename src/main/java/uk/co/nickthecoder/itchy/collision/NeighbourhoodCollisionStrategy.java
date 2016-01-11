@@ -22,7 +22,7 @@ import uk.co.nickthecoder.itchy.collision.PixelCollisionTest;
  * 
  * Adds the actor to all of the neighbourhood squares within its bounding rectangle. To test for collisions, iterate through all of these
  * squares, comparing with each of the the squares occupants. Note that if another actor shares two or more squares, then the collision test
- * will be made two or more times. This is an acceptable overhread, only because this strategy is expected to be used rarely for moving
+ * will be made two or more times. This is an acceptable overhead, only because this strategy is expected to be used rarely for moving
  * objects. If this assumption isn't true, then its worth creating a new strategy which keeps track of which actors have already been tested
  * to prevent duplicate collision tests.
  * 
