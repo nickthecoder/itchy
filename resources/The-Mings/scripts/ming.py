@@ -2,6 +2,8 @@ from common import *
 
 from director import PIXELATION_SIZE
 
+MAX_SAFE_HEIGHT = 200
+
 properties = ArrayList()
 
 properties.add( StringProperty( "initialJob" ) )
@@ -29,12 +31,22 @@ class Ming(AbstractRole) :
         
         self.job.assignJob( self, self.initialJob )
         
+        self.prevX = self.actor.x
+        self.prevY = self.actor.y
         
+    def onDeath(self) :
+        self.job.quit(self)
+        self.lookLeftRight.actor.kill()
+        self.lookDown.actor.kill()
+        self.lookStepUp.actor.kill()
+    
     def tick(self):
 
-        self.job.work( self )
-        self.collisionStrategy.update()
+        self.job.tick( self )
+        self.collisionStrategy.update() # TODO Only need this for Blockers?
 
+        self.prevX = self.actor.x
+        self.prevY = self.actor.y
 
     def onMessage( self, message ) :
         self.job.onMessage( self, message )
@@ -43,7 +55,7 @@ class Ming(AbstractRole) :
     def createLooker(self, name) :
         result = FollowerBuilder( self.actor ).companion( name ).create()
         result.event( "look" + self.directionLetter() )
-        result.actor.appearance.alpha = 0
+        result.actor.appearance.alpha = 200
         return result
 
 
@@ -52,7 +64,7 @@ class Ming(AbstractRole) :
         result.event( "mask" )
         result.event( "mask" + self.directionLetter() )
         
-        result.actor.appearance.alpha = 100
+        result.actor.appearance.alpha = 0
         return result
 
 
@@ -73,13 +85,6 @@ class Ming(AbstractRole) :
             return "L"
         else :
             return "R"
-            
-
-    def reverse( self ) :
-        print "Reverse!"
-        self.direction = - self.direction
-        self.lookLeftRight.event( "look" + self.directionLetter() )
-        self.lookStepUp.event( "look" + self.directionLetter() )
 
 
     def look( self, looker, tags = ["solid"] ) :
@@ -88,19 +93,31 @@ class Ming(AbstractRole) :
         result = looker.collided( tags )
         return result
         
-        
+
     def checkForReversing( self ) :
 
         self.lookLeftRight.tick()
         self.lookLeftRight.collisionStrategy.update()
-        for role in self.lookLeftRight.collisions( ["solid", "blocker"] ) :
-        
+        if self.lookLeftRight.collided("solid") :
             self.reverse()
-            self.changeJob( Walker() )
             return True
+
+        for blocker in self.lookLeftRight.collisions("blocker") :
+            # Am I heading towards the blocker?
+            if (self.direction > 0) != (blocker.actor.x < self.actor.x) :
+                self.reverse()
+                return True
 
         return False
 
+    def reverse(self) :
+        self.actor.x = self.prevX
+        self.actor.y = self.prevY
+        self.direction = - self.direction
+        self.lookLeftRight.event( "look" + self.directionLetter() )
+        self.lookStepUp.event( "look" + self.directionLetter() )
+
+        self.changeJob( Walker() )
 
     def checkForStepUp( self ) :
 
@@ -148,7 +165,7 @@ class Ming(AbstractRole) :
 
     def removeSolids( self, follower ) :
         follower.getCollisionStrategy().update()
-        for solid in follower.collisions( "solid" ) :
+        for solid in follower.collisions( "breakable" ) :
             self.removeSolid( follower, solid )
 
     def removeSolid( self, follower, solid ) :
@@ -183,10 +200,15 @@ class Job() :
 
     def start(self, ming) :
         pass
-        
-    def work( self, ming ) :
+
+    def tick( self, ming ) :
+    
         if ming.checkForFalling() :
             return
+
+        if ming.actor.x != ming.prevX or ming.actor.y != ming.prevY:
+            if ming.checkForReversing() :
+                return
 
     def assignJob( self, ming, jobName ) :
 
@@ -227,48 +249,32 @@ class Job() :
         pass    
 
 
-class Stop(Job) :
-
-    def start(self, ming) :
-        print "Stop"
-        
-    def work(self, ming) :
-        pass
-
 class Walker(Job) :
 
     def start(self, ming) :
         print "Walker", ming.directionLetter()
         ming.event( "walk" + ming.directionLetter() )
     
-    def onMessage(self, ming, message) :
-        if message == "step5" :
-            ming.actor.moveBy( ming.direction * 5 * PIXELATION_SIZE, 0 )
-        if message == "step4" :
-            ming.actor.moveBy( ming.direction * 4 * PIXELATION_SIZE, 0 )
-
-    def work( self, ming ) :
-        if ming.checkForFalling() :
-            return
+    def tick( self, ming ) :
 
         ming.checkForStepUp()
-
-        if ming.checkForReversing() :
-            return
+        Job.tick( self, ming )
+        
         
 class Faller(Job) :
     
     def start( self, ming ) :
         print "Faller"
-        self.fallStart = ming.actor.y
+        self.fallStart = ming.actor.y # Used to calculate the height of the drop.
         ming.event( "fall" )
 
     def assignJob( self, ming, jobName ) :
+        # We can only give umbrellas to a faller. No other jobs assignments are allowed.
         if jobName != "floater" :
             return False;
         return Job.assignJob( ming, jobName )
 
-    def work( self, ming ) :
+    def tick( self, ming ) :
 
         # Have I hit bottom?
         if ming.look( ming.lookDown ) :
@@ -276,11 +282,12 @@ class Faller(Job) :
             
             ming.findLevel()
             # Have I fallen too far to land safely?
-            if self.fallStart - ming.actor.y > 150 :
+            if self.fallStart - ming.actor.y > MAX_SAFE_HEIGHT :
                 ming.deathEvent( "splat" )
 
             else :
                 ming.changeJob( Walker() )
+
 
 class Floater(Job) :
 
@@ -289,12 +296,13 @@ class Floater(Job) :
         ming.event( "float" )
 
     def assignJob( self, ming, jobName ) :
-        return False;
-                    
-    def canChange( self ) :
-        return False
+        # Do the same logic as for Faller.
+        # Can we waste an umbrella is handled in just one place ( Job.assignJob )
+        if jobName != "floater" :
+            return False;
+        return Job.assignJob( ming, jobName )
 
-    def work(self, ming) :
+    def tick(self, ming) :
         
         # Have I hit bottom?
         if ming.look( ming.lookDown ) :
@@ -302,27 +310,20 @@ class Floater(Job) :
             ming.findLevel()
             ming.changeJob( Walker() )
 
+
 class Builder(Job) :
 
     def start( self, ming ) :
         print "Builder"
         ming.event( "builder" + ming.directionLetter() )
     
-    def work(self,ming) :
-        pass
-    
     def onMessage( self, ming, message ) :
         if message == "laidBrick" :
             brick = ming.actor.createCompanion( "brick" )
             brick.moveBy( ming.direction * 4 * PIXELATION_SIZE, 0 )
-        if message == "steppedUp" :
-            print "Step up"
-            ming.actor.x += 2 * PIXELATION_SIZE * ming.direction
-            ming.actor.y += PIXELATION_SIZE
-            if ming.checkForReversing() :
-                ming.changeJob( Walker() )
         if message == "jobComplete" :
             ming.changeJob( Walker() )
+
 
 class Blocker(Job) :
     
@@ -364,6 +365,7 @@ class Smasher(Job) :
     def quit( self, ming ) :
         self.remover.actor.kill()
 
+
 class Digger(Job) :
 
     def start( self, ming ) :
@@ -373,9 +375,6 @@ class Digger(Job) :
         self.remover = ming.createRemover( "dig" )
         ming.event( "digger" )
 
-    def work( self, ming ) :
-        pass
-
     def onMessage( self, ming, message ) :
         print "Digger message", message
         
@@ -383,19 +382,15 @@ class Digger(Job) :
             ming.changeJob( Walker() )
         if message == "dig" :
             ming.removeSolids( self.remover )
-            if not ming.look( ming.lookDown ) :
-                ming.changeJob( Walker() )
 
     def quit( self, ming ) :
         self.remover.actor.kill()
+
         
 class Bomber(Job) :
 
     def start( self, ming ) :
         ming.deathEvent( "bomb" )
-        
-    def work( self, ming ) :
-        pass
 
     def onMessage( self, ming, message ) :
         if message == "bang" :
@@ -403,4 +398,3 @@ class Bomber(Job) :
             ming.removeSolids( remover )
             remover.actor.kill()
 
-            

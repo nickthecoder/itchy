@@ -78,7 +78,7 @@
     <actor costume="soil1" x="150" y="790" direction="0.0" heading="0.0" startEvent="default" zOrder="115"/>
     <actor costume="soil1" x="180" y="660" direction="0.0" heading="0.0" startEvent="default" zOrder="116"/>
     <actor costume="soil1" x="-70" y="550" direction="0.0" heading="0.0" startEvent="default" zOrder="117"/>
-    <actor costume="soil1" x="780" y="470" direction="0.0" heading="0.0" startEvent="default" zOrder="118"/>
+    <actor costume="soil1" x="120" y="540" direction="-58.392497753751094" heading="-58.392497753751094" startEvent="default" zOrder="118"/>
   </layer>
   <layer name="main">
     <actor costume="ming" x="90" y="668" direction="0.0" heading="0.0" startEvent="default" zOrder="37">
