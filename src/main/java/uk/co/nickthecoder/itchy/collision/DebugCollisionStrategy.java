@@ -6,7 +6,6 @@ package uk.co.nickthecoder.itchy.collision;
 
 import java.util.Set;
 
-import uk.co.nickthecoder.drunkinvaders.DrunkInvaders;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Role;
 
@@ -43,7 +42,6 @@ public class DebugCollisionStrategy extends ActorCollisionStrategy
             System.err.println("Pixel Collision failed for " + getActor());
             System.err.println("Results1 : " + results1);
             System.err.println("Results2 : " + results2);
-            DrunkInvaders.director.debug();
 
             System.err.println("Source actor's square : " + this.strategy1.getSquare());
             this.strategy1.getSquare().debug();
