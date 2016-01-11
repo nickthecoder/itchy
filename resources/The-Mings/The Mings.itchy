@@ -162,8 +162,8 @@
     <pose name="lookDown" filename="images/lookDown.png" offsetY="5"/>
     <pose name="lookLeft" filename="images/lookLeftRight.png" offsetX="13" offsetY="57"/>
     <pose name="lookRight" filename="images/lookLeftRight.png" offsetX="-12" offsetY="57"/>
-    <pose name="lookStepUpLeft" filename="images/lookStepUp.png" offsetX="18" offsetY="3"/>
-    <pose name="lookStepUpRight" filename="images/lookStepUp.png" offsetX="0" offsetY="3"/>
+    <pose name="lookStepUpLeft" filename="images/lookStepUp.png" offsetX="18" offsetY="7"/>
+    <pose name="lookStepUpRight" filename="images/lookStepUp.png" offsetX="0" offsetY="7"/>
     <pose name="paws" filename="images/paws.png"/>
     <pose name="smashL" filename="images/smash.png" offsetX="38" offsetY="58"/>
     <pose name="smashR" filename="images/smash.png" offsetX="0" offsetY="58"/>
@@ -581,6 +581,7 @@
   <scenes>
     <scene name="gui"/>
     <scene name="menu"/>
+    <scene name="singleTest"/>
     <scene name="start"/>
     <scene name="test"/>
     <scene name="testAnimations"/>

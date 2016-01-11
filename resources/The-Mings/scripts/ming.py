@@ -3,6 +3,7 @@ from common import *
 from director import PIXELATION_SIZE
 
 MAX_SAFE_HEIGHT = 200
+STEP_UP_DOWN = 6
 
 properties = ArrayList()
 
@@ -120,18 +121,40 @@ class Ming(AbstractRole) :
         self.changeJob( Walker() )
 
     def checkForStepUp( self ) :
+        self.findLevel()
+        
+        #stepSize = 4
+        #self.actor.moveBy(0,stepSize)
+        #if self.look( self.lookDown ) :
+        #    print "Stepping up"
+        #    for i in range(0,stepSize) :
+        #        self.actor.moveBy(0,-1)
+        #        if self.look( self.lookDown ) :
+        #            break
+        #    return True
+        #    
+        #self.actor.moveBy(0,-stepSize)
+        #return False   
 
-        if self.look( self.lookStepUp ) :
-            self.findLevel()
-            return True
-        return False
+
+        #if self.look( self.lookStepUp ) :
+        #    print "Stepping up", self.actor.y
+        #    self.findLevel()
+        #    print "to", self.actor.y
+        #    return True
+        #return False
 
 
     def checkForFalling( self ) :
 
         # Is there anything under my feet?
         if not self.look( self.lookDown ) :
-            for i in range(0,8) :
+            print "Falling (maybe a little)"
+
+            # Try moving down a little bit
+            for i in range(0,STEP_UP_DOWN) :
+                if i != 0 :
+                    print "d"
                 self.actor.moveBy(0,-1)
                 if self.look( self.lookDown ) :
                     return False
@@ -149,18 +172,14 @@ class Ming(AbstractRole) :
 
     def findLevel( self ) :
         # Move up till we aren't on solid ground
-        for i in range(0,8) :
+        for i in range(0,STEP_UP_DOWN) :
             self.actor.moveBy(0,1)
-
-            if self.look( self.lookLeftRight ) :
-                self.actor.moveBy(0,-1)
-                print "Hitting LR"
-                return
-
             if not self.look( self.lookDown ) :
                 self.actor.moveBy(0,-1)
                 return
-
+        
+        # Too far up, go back to where we were.
+        self.actor.moveBy(0,-STEP_UP_DOWN)
 
 
     def removeSolids( self, follower ) :

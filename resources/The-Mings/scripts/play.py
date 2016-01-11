@@ -1,5 +1,7 @@
 from common import *
 
+from uk.co.nickthecoder.itchy.collision import SinglePointCollisionStrategy
+
 from highlight import Highlight
 
 properties = ArrayList()
@@ -19,7 +21,7 @@ class Play(PlainSceneDirector) :
         self.limitsBottom = 0
         self.limitsTop = 800
 
-        self.neighbourhood = StandardNeighbourhood( 80 )
+        self.neighbourhood = StandardNeighbourhood( 180 )
 
         self.scrollSpeed = 4
         self.scrollX = 0
@@ -125,8 +127,8 @@ class Play(PlainSceneDirector) :
 
         director.mainView.unadjustMouse( event )
 
-
     def getCollisionStrategy( self, actor ) :
+        #return SinglePointCollisionStrategy( actor, self.neighbourhood )
         return NeighbourhoodCollisionStrategy( actor, self.neighbourhood )
 
 
