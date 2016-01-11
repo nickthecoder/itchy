@@ -22,23 +22,15 @@ class AnimationTest(AbstractRole) :
         else :
             if self.wasDown :
                 AbstractRole.animate(self)
+                AbstractRole.animate(self)
+                AbstractRole.animate(self)
+                AbstractRole.animate(self)
+                AbstractRole.animate(self)
                 self.actor.moveBy( self.dx, self.dy )
                 self.wasDown = False
 
     def tick(self):
         self.actor.moveBy( self.dx, self.dy )
-
-    def onMessage(self, message) :
-        if message == "steppedUp" :
-            self.actor.moveBy( self.direction * 12, 6 )
-        if message == "dugDown" :
-            self.actor.moveBy( 0, -6 )
-        if message == "step5" :
-            self.actor.moveBy( self.direction * 6 * 5, 0 )
-        if message == "step4" :
-            self.actor.moveBy( self.direction * 6 * 4, 0 )
-        if message == "step3" :
-            self.actor.moveBy( self.direction * 6 * 3, 0 )
         
     # Boiler plate code - no need to change this
     def getProperties(self):

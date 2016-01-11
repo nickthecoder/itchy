@@ -4,9 +4,15 @@ from director import PIXELATION_SIZE
 
 properties = ArrayList()
 
+properties.add( StringProperty( "initialJob" ) )
+properties.add( BooleanProperty( "umbrella" ) )
+
 class Ming(AbstractRole) :
 
     def __init__(self) :
+        self.initialJob = ""        
+        self.umbrella = False
+
         self.dx = 0
         self.dy = 0
         self.direction = 1 # Either 1 or -1. Remembered even when falling/digging etc.
@@ -20,16 +26,12 @@ class Ming(AbstractRole) :
         self.lookDown = self.createLooker( "lookDown" )
         self.lookStepUp = self.createLooker( "lookStepUp" )
 
-        self.changeJob( Walker() )
+        self.job = Walker()
+        self.job.start(self)
+        
+        self.job.assignJob( self, self.initialJob )
         
         
-    def createLooker(self, name) :
-        result = FollowerBuilder( self.actor ).companion( name ).create()
-        result.event( "look" + self.directionLetter() )
-        result.actor.appearance.alpha = 0
-        return result
-        
-
     def tick(self):
 
         self.actor.moveBy( self.dx, self.dy )
@@ -41,29 +43,26 @@ class Ming(AbstractRole) :
         self.job.onMessage( self, message )
 
 
-    def setJob( self, jobName ) :
-
-        # Can't change a job while falling
-        if isinstance( self.job, Faller ) :
-            return
-
-        newJob = None
-        if jobName == "blocker" :
-            newJob = Blocker()
-            
-        elif jobName == "smasher" :
-            newJob = Smasher()
-
-        elif jobName == "builder" :
-            newJob = Builder()
-
-        elif jobName == "digger" :
-            newJob = Digger()
-
-        if newJob is not None :
-            self.changeJob( newJob )
+    def createLooker(self, name) :
+        result = FollowerBuilder( self.actor ).companion( name ).create()
+        result.event( "look" + self.directionLetter() )
+        result.actor.appearance.alpha = 0
+        return result
 
 
+    def createRemover(self, name) :
+        result = FollowerBuilder( self.actor ).companion( name ).create()
+        result.event( "mask" )
+        result.event( "mask" + self.directionLetter() )
+        
+        result.actor.appearance.alpha = 100
+        return result
+
+
+    def assignJob( self, jobName ) :
+        return self.job.assignJob( self, jobName )
+
+        
     def changeJob( self, job ) :
         self.actor.setAnimation( None, Actor.AnimationEvent.REPLACE )
         if self.job is not None :
@@ -125,8 +124,10 @@ class Ming(AbstractRole) :
                     return False
             
             # Nothing under us. Fall!
-            print "Fall"
-            self.changeJob( Faller() )
+            if self.umbrella :
+                self.changeJob( Floater() )
+            else :
+                self.changeJob( Faller() )
             return True
 
         return False
@@ -169,7 +170,7 @@ class Ming(AbstractRole) :
         surface = solidPose.surface.copy()
 
         rect = Rect( 0,0, followerPose.surface.width, followerPose.surface.height )
-        followerPose.surface.blit( rect, surface, int(tx), int(ty), Surface.BlendMode.RGBA_SUB )
+        followerPose.surface.blit( rect, surface, int(tx), int(ty), Surface.BlendMode.RGBA_MULT )
         newPose = ImagePose( surface, solidPose.offsetX, solidPose.offsetY )
         solid.actor.appearance.pose = newPose
 
@@ -190,7 +191,39 @@ class Job() :
     def work( self, ming ) :
         if ming.checkForFalling() :
             return
-        
+
+    def assignJob( self, ming, jobName ) :
+
+        newJob = None
+        if jobName == "blocker" :
+            newJob = Blocker()
+            
+        elif jobName == "smasher" :
+            newJob = Smasher()
+
+        elif jobName == "builder" :
+            newJob = Builder()
+
+        elif jobName == "digger" :
+            newJob = Digger()
+
+        elif jobName == "bomber" :
+            newJob = Bomber()
+
+        elif jobName == "floater" :
+            # What should happen if we give two umbrellas? Silently accept or return False?
+            # Already has an umbrella?
+            #if ming.umbrella :
+            #    return False
+            ming.umbrella = True
+            return True
+
+        if newJob is not None :
+            ming.changeJob( newJob )
+            return True
+            
+        return False
+
     def quit( self, ming ) :
         pass    
         
@@ -236,32 +269,50 @@ class Faller(Job) :
     def start( self, ming ) :
         print "Faller"
         ming.dx = 0
-        ming.dy = -1
-        self.fallCount = 0
+        ming.dy = 0
+        self.fallStart = ming.actor.y
         ming.event( "fall" )
 
-    def work( self, ming ) :
+    def assignJob( self, ming, jobName ) :
+        if jobName != "floater" :
+            return False;
+        return Job.assignJob( ming, jobName )
 
-        self.fallCount -= ming.dy
-        ming.dy -= 0.2 # Accelerate a little
-        if ming.dy < -8 :
-            ming.dy = -8 # Reached terminal velocity, don't get too fast.
+    def work( self, ming ) :
 
         # Have I hit bottom?
         if ming.look( ming.lookDown ) :
             print "Stopped falling"
             
+            ming.findLevel()
             # Have I fallen too far to land safely?
-            if self.fallCount > 150 :
-
-                ming.findLevel()
+            if self.fallStart - ming.actor.y > 150 :
                 ming.deathEvent( "splat" )
-                ming.dy = 0
-                ming.dx = 0
 
             else :
-                ming.findLevel()
                 ming.changeJob( Walker() )
+
+class Floater(Job) :
+
+    def start( self, ming ) :
+        print "Floater"
+        ming.dx = 0
+        ming.dy = 0
+        ming.event( "float" )
+
+    def assignJob( self, ming, jobName ) :
+        return False;
+                    
+    def canChange( self ) :
+        return False
+
+    def work(self, ming) :
+        
+        # Have I hit bottom?
+        if ming.look( ming.lookDown ) :
+            print "Stopped floating"
+            ming.findLevel()
+            ming.changeJob( Walker() )
 
 class Builder(Job) :
 
@@ -305,37 +356,31 @@ class Smasher(Job) :
     def start( self, ming ) :
         print "Smasher"
         ming.dy = 0
-        ming.dx = 0 # Animation does the movement
-        self.smashed = False # Set to true when first piece of solid is removed
-        self.smashTimer = Timer.createTimerSeconds( 3 )
+        ming.dx = 0
+        self.freeSmashes = 2 # Can smash in thin air twice, before giving up
 
-        self.smashFollower = Follower( ming )
-        self.smashFollower.createActor()
-        self.smashFollower.event( "smashed" )
-        # Comment out this line (or change the value) to help debugging.
-        self.smashFollower.actor.appearance.alpha = 0
-
+        self.remover = ming.createRemover("smash")
         ming.event( "smash" + ming.directionLetter() )
-    
-    def work( self, ming ) :
-        if self.smashTimer.isFinished() :
 
-            self.smashFollower.actor.kill()
-            self.smashFollower = None
+    def onMessage( self, ming, message ) :
+        print "Smasher message", message
+
+        if message == "jobComplete" :
             ming.changeJob( Walker() )
-
-        else :
-            if self.smashed :
-                if ming.look( self.smashFollower ) :
-                    ming.removeSolids( self.smashFollower )
-
-                else :
-                    self.smashFollower.actor.kill()
-                    ming.changeJob( Walker() )
+        
+        if message == "smash" :
+            if ming.look( ming.lookLeftRight ) :
+                self.freeSmashes = 0
+                ming.removeSolids( self.remover )
             else :
-                if ming.look( ming.lookLeftRight ) :
-                    self.smashed = True
+                if self.freeSmashes > 0 :
+                    self.freeSmashes -= 1
+                else :
+                    # We've shashed thin air, let's not be a smasher any more.
+                    ming.changeJob( Walker() )
 
+    def quit( self, ming ) :
+        self.remover.actor.kill()
 
 class Digger(Job) :
 
@@ -345,7 +390,7 @@ class Digger(Job) :
         ming.dx = 0
         self.removed = False # Set to true when first piece of solid is removed
 
-        self.digFollower = ming.createLooker( "dig" )
+        self.remover = ming.createRemover( "dig" )
         ming.event( "digger" )
 
     def work( self, ming ) :
@@ -355,18 +400,27 @@ class Digger(Job) :
         print "Digger message", message
         
         if message == "jobComplete" :
-            print "Complete"
             ming.changeJob( Walker() )
-            
         if message == "dig" :
-            print "Dig"
-            ming.actor.moveBy( 0, -PIXELATION_SIZE )
-            if not ming.look( self.digFollower ) :
+            ming.removeSolids( self.remover )
+            if not ming.look( ming.lookDown ) :
                 ming.changeJob( Walker() )
-            else :
-                ming.removeSolids( self.digFollower )
 
     def quit( self, ming ) :
-        self.digFollower.actor.kill()
+        self.remover.actor.kill()
         
+class Bomber(Job) :
 
+    def start( self, ming ) :
+        ming.deathEvent( "bomb" )
+        
+    def work( self, ming ) :
+        pass
+
+    def onMessage( self, ming, message ) :
+        if message == "bang" :
+            remover = ming.createRemover( "crater" )
+            ming.removeSolids( remover )
+            remover.actor.kill()
+
+            

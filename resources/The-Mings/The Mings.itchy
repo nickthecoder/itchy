@@ -1,5 +1,5 @@
 <resources>
-  <game title="The Mings" width="1000" height="800" resizable="false" initialScene="menu" directorClassName="director.py"/>
+  <game title="The Mings" width="1000" height="800" resizable="false" initialScene="test" directorClassName="director.py"/>
   <spriteSheets>
     <spriteSheet name="spriteSheet" file="images/spriteSheet.png">
       <sprite name="tiny-blocker-01" x="3" y="60" width="12" height="10" direction="0.0" offsetX="6" offsetY="10"/>
@@ -18,6 +18,15 @@
       <sprite name="tiny-blocker-14" x="263" y="60" width="12" height="10" direction="0.0" offsetX="6" offsetY="10"/>
       <sprite name="tiny-blocker-15" x="283" y="60" width="12" height="10" direction="0.0" offsetX="6" offsetY="10"/>
       <sprite name="tiny-blocker-16" x="303" y="60" width="12" height="10" direction="0.0" offsetX="6" offsetY="10"/>
+      <sprite name="tiny-bomber-01" x="3" y="200" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-bomber-02" x="43" y="200" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-bomber-03" x="63" y="200" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-bomber-04" x="83" y="200" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-bomber-05" x="103" y="200" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-bomber-06" x="123" y="200" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-bomber-07" x="143" y="200" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-bomber-08" x="163" y="200" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-bomber-09" x="203" y="200" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
       <sprite name="tiny-brick-01" x="230" y="112" width="4" height="1" direction="0.0" offsetX="2" offsetY="1"/>
       <sprite name="tiny-builder-01" x="4" y="103" width="8" height="10" direction="0.0" offsetX="4" offsetY="10"/>
       <sprite name="tiny-builder-02" x="24" y="103" width="8" height="10" direction="0.0" offsetX="4" offsetY="10"/>
@@ -26,32 +35,55 @@
       <sprite name="tiny-builder-05" x="84" y="103" width="8" height="10" direction="0.0" offsetX="4" offsetY="10"/>
       <sprite name="tiny-builder-06" x="104" y="103" width="8" height="10" direction="0.0" offsetX="4" offsetY="10"/>
       <sprite name="tiny-builder-07" x="124" y="102" width="8" height="11" direction="0.0" offsetX="4" offsetY="11"/>
-      <sprite name="tiny-builder-08" x="144" y="102" width="9" height="11" direction="0.0" offsetX="4" offsetY="11"/>
-      <sprite name="tiny-builder-09" x="163" y="102" width="10" height="11" direction="0.0" offsetX="5" offsetY="11"/>
-      <sprite name="tiny-builder-10" x="184" y="103" width="10" height="10" direction="0.0" offsetX="4" offsetY="10"/>
-      <sprite name="tiny-builder-11" x="204" y="103" width="10" height="10" direction="0.0" offsetX="4" offsetY="10"/>
-      <sprite name="tiny-builder-12" x="224" y="103" width="10" height="10" direction="0.0" offsetX="4" offsetY="10"/>
-      <sprite name="tiny-builder-13" x="244" y="103" width="10" height="10" direction="0.0" offsetX="4" offsetY="10"/>
-      <sprite name="tiny-builder-14" x="264" y="103" width="10" height="10" direction="0.0" offsetX="4" offsetY="10"/>
-      <sprite name="tiny-builder-15" x="285" y="103" width="9" height="10" direction="0.0" offsetX="3" offsetY="10"/>
-      <sprite name="tiny-builder-16" x="305" y="103" width="9" height="10" direction="0.0" offsetX="3" offsetY="10"/>
+      <sprite name="tiny-builder-08" x="145" y="102" width="9" height="11" direction="0.0" offsetX="4" offsetY="11"/>
+      <sprite name="tiny-builder-09" x="164" y="102" width="10" height="11" direction="0.0" offsetX="5" offsetY="11"/>
+      <sprite name="tiny-builder-10" x="185" y="103" width="10" height="10" direction="0.0" offsetX="4" offsetY="10"/>
+      <sprite name="tiny-builder-11" x="205" y="103" width="10" height="10" direction="0.0" offsetX="4" offsetY="10"/>
+      <sprite name="tiny-builder-12" x="225" y="103" width="10" height="10" direction="0.0" offsetX="4" offsetY="10"/>
+      <sprite name="tiny-builder-13" x="245" y="103" width="10" height="10" direction="0.0" offsetX="4" offsetY="10"/>
+      <sprite name="tiny-builder-14" x="265" y="103" width="10" height="10" direction="0.0" offsetX="4" offsetY="10"/>
+      <sprite name="tiny-builder-15" x="286" y="103" width="9" height="10" direction="0.0" offsetX="3" offsetY="10"/>
+      <sprite name="tiny-builder-16" x="306" y="103" width="9" height="10" direction="0.0" offsetX="3" offsetY="10"/>
       <sprite name="tiny-buttonBlocker" x="123" y="59" width="12" height="12" direction="0.0" offsetX="0" offsetY="0"/>
       <sprite name="tiny-buttonBuilder" x="163" y="101" width="12" height="12" direction="0.0" offsetX="0" offsetY="0"/>
       <sprite name="tiny-buttonClimber" x="60" y="80" width="12" height="12" direction="0.0" offsetX="0" offsetY="0"/>
-      <sprite name="tiny-buttonDigger" x="206" y="118" width="12" height="12" direction="0.0" offsetX="0" offsetY="0"/>
+      <sprite name="tiny-buttonDigger" x="122" y="160" width="12" height="12" direction="0.0" offsetX="0" offsetY="0"/>
+      <sprite name="tiny-buttonFloater" x="161" y="39" width="12" height="12" direction="0.0" offsetX="0" offsetY="0"/>
       <sprite name="tiny-buttonSmasher" x="225" y="119" width="12" height="12" direction="0.0" offsetX="0" offsetY="0"/>
-      <sprite name="tiny-digger-01" x="2" y="159" width="14" height="14" direction="0.0" offsetX="7" offsetY="14"/>
-      <sprite name="tiny-digger-02" x="22" y="159" width="14" height="14" direction="0.0" offsetX="7" offsetY="15"/>
-      <sprite name="tiny-digger-03" x="42" y="159" width="14" height="14" direction="0.0" offsetX="7" offsetY="14"/>
-      <sprite name="tiny-digger-04" x="62" y="159" width="14" height="14" direction="0.0" offsetX="7" offsetY="14"/>
-      <sprite name="tiny-digger-05" x="82" y="159" width="14" height="14" direction="0.0" offsetX="7" offsetY="14"/>
-      <sprite name="tiny-digger-06" x="102" y="159" width="14" height="14" direction="0.0" offsetX="7" offsetY="14"/>
-      <sprite name="tiny-digger-07" x="122" y="159" width="14" height="14" direction="0.0" offsetX="7" offsetY="14"/>
-      <sprite name="tiny-digger-08" x="142" y="159" width="14" height="14" direction="0.0" offsetX="7" offsetY="14"/>
+      <sprite name="tiny-digger-01" x="2" y="159" width="14" height="13" direction="0.0" offsetX="7" offsetY="13"/>
+      <sprite name="tiny-digger-02" x="22" y="159" width="14" height="14" direction="0.0" offsetX="7" offsetY="13"/>
+      <sprite name="tiny-digger-03" x="42" y="159" width="14" height="14" direction="0.0" offsetX="7" offsetY="13"/>
+      <sprite name="tiny-digger-04" x="62" y="159" width="14" height="14" direction="0.0" offsetX="7" offsetY="13"/>
+      <sprite name="tiny-digger-05" x="82" y="159" width="14" height="14" direction="0.0" offsetX="7" offsetY="13"/>
+      <sprite name="tiny-digger-06" x="102" y="159" width="14" height="14" direction="0.0" offsetX="7" offsetY="13"/>
+      <sprite name="tiny-digger-07" x="122" y="159" width="14" height="14" direction="0.0" offsetX="7" offsetY="13"/>
+      <sprite name="tiny-digger-08" x="142" y="159" width="14" height="14" direction="0.0" offsetX="7" offsetY="13"/>
+      <sprite name="tiny-explode-01" x="3" y="263" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-explode-02" x="23" y="263" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-explode-03" x="43" y="263" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-explode-04" x="63" y="263" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-explode-05" x="83" y="263" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-explode-06" x="103" y="263" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-explode-07" x="123" y="263" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-explode-08" x="143" y="263" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-explode-09" x="163" y="263" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-explode-10" x="183" y="263" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-explode-11" x="203" y="263" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-explode-12" x="223" y="263" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-explode-13" x="243" y="263" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-explode-14" x="261" y="260" width="16" height="17" direction="0.0" offsetX="8" offsetY="13"/>
       <sprite name="tiny-faller-01" x="4" y="40" width="8" height="10" direction="0.0" offsetX="4" offsetY="10"/>
       <sprite name="tiny-faller-02" x="24" y="40" width="8" height="10" direction="0.0" offsetX="4" offsetY="10"/>
       <sprite name="tiny-faller-03" x="44" y="40" width="8" height="10" direction="0.0" offsetX="4" offsetY="10"/>
       <sprite name="tiny-faller-04" x="64" y="40" width="8" height="10" direction="0.0" offsetX="4" offsetY="10"/>
+      <sprite name="tiny-floaterA-01" x="83" y="45" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-floaterA-02" x="103" y="45" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-floaterA-03" x="123" y="45" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-floaterA-04" x="143" y="40" width="10" height="15" direction="0.0" offsetX="5" offsetY="15"/>
+      <sprite name="tiny-floaterB-01" x="183" y="40" width="10" height="15" direction="0.0" offsetX="5" offsetY="15"/>
+      <sprite name="tiny-floaterB-02" x="163" y="40" width="10" height="15" direction="0.0" offsetX="5" offsetY="15"/>
+      <sprite name="tiny-floaterB-03" x="203" y="40" width="10" height="15" direction="0.0" offsetX="5" offsetY="15"/>
+      <sprite name="tiny-floaterB-04" x="223" y="40" width="10" height="15" direction="0.0" offsetX="5" offsetY="15"/>
       <sprite name="tiny-shrug-01" x="204" y="0" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
       <sprite name="tiny-shrug-02" x="224" y="0" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
       <sprite name="tiny-shrug-03" x="244" y="0" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
@@ -64,15 +96,31 @@
       <sprite name="tiny-smasher-05" x="83" y="120" width="12" height="10" direction="0.0" offsetX="5" offsetY="10"/>
       <sprite name="tiny-smasher-06" x="103" y="120" width="12" height="10" direction="0.0" offsetX="5" offsetY="10"/>
       <sprite name="tiny-smasher-07" x="124" y="120" width="12" height="10" direction="0.0" offsetX="5" offsetY="10"/>
-      <sprite name="tiny-smasher-08" x="143" y="120" width="12" height="10" direction="0.0" offsetX="5" offsetY="10"/>
-      <sprite name="tiny-smasher-09" x="163" y="120" width="12" height="10" direction="0.0" offsetX="5" offsetY="10"/>
-      <sprite name="tiny-smasher-10" x="184" y="120" width="12" height="10" direction="0.0" offsetX="5" offsetY="10"/>
-      <sprite name="tiny-smasher-11" x="205" y="120" width="12" height="10" direction="0.0" offsetX="5" offsetY="10"/>
-      <sprite name="tiny-smasher-12" x="224" y="120" width="12" height="10" direction="0.0" offsetX="5" offsetY="10"/>
-      <sprite name="tiny-smasher-13" x="243" y="120" width="12" height="10" direction="0.0" offsetX="5" offsetY="10"/>
-      <sprite name="tiny-smasher-14" x="262" y="120" width="12" height="10" direction="0.0" offsetX="5" offsetY="10"/>
-      <sprite name="tiny-smasher-15" x="281" y="120" width="12" height="10" direction="0.0" offsetX="5" offsetY="10"/>
-      <sprite name="tiny-smasher-16" x="300" y="120" width="12" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-smasher-08" x="143" y="120" width="12" height="10" direction="0.0" offsetX="6" offsetY="10"/>
+      <sprite name="tiny-smasher-09" x="163" y="120" width="12" height="10" direction="0.0" offsetX="8" offsetY="10"/>
+      <sprite name="tiny-smasher-10" x="184" y="120" width="12" height="10" direction="0.0" offsetX="8" offsetY="10"/>
+      <sprite name="tiny-smasher-11" x="205" y="120" width="12" height="10" direction="0.0" offsetX="8" offsetY="10"/>
+      <sprite name="tiny-smasher-12" x="224" y="120" width="12" height="10" direction="0.0" offsetX="8" offsetY="10"/>
+      <sprite name="tiny-smasher-13" x="243" y="120" width="12" height="10" direction="0.0" offsetX="8" offsetY="10"/>
+      <sprite name="tiny-smasher-14" x="262" y="120" width="12" height="10" direction="0.0" offsetX="8" offsetY="10"/>
+      <sprite name="tiny-smasher-15" x="281" y="120" width="12" height="10" direction="0.0" offsetX="8" offsetY="10"/>
+      <sprite name="tiny-smasher-16" x="300" y="120" width="12" height="10" direction="0.0" offsetX="8" offsetY="10"/>
+      <sprite name="tiny-smasher-17" x="3" y="140" width="12" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-smasher-18" x="23" y="140" width="12" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-smasher-19" x="43" y="140" width="12" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-smasher-20" x="63" y="140" width="12" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-smasher-21" x="83" y="140" width="12" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-smasher-22" x="103" y="140" width="12" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-smasher-23" x="124" y="140" width="12" height="10" direction="0.0" offsetX="5" offsetY="10"/>
+      <sprite name="tiny-smasher-24" x="143" y="140" width="12" height="10" direction="0.0" offsetX="6" offsetY="10"/>
+      <sprite name="tiny-smasher-25" x="163" y="140" width="12" height="10" direction="0.0" offsetX="8" offsetY="10"/>
+      <sprite name="tiny-smasher-26" x="184" y="140" width="12" height="10" direction="0.0" offsetX="8" offsetY="10"/>
+      <sprite name="tiny-smasher-27" x="205" y="140" width="12" height="10" direction="0.0" offsetX="8" offsetY="10"/>
+      <sprite name="tiny-smasher-28" x="224" y="140" width="12" height="10" direction="0.0" offsetX="8" offsetY="10"/>
+      <sprite name="tiny-smasher-29" x="243" y="140" width="12" height="10" direction="0.0" offsetX="8" offsetY="10"/>
+      <sprite name="tiny-smasher-30" x="262" y="140" width="12" height="10" direction="0.0" offsetX="8" offsetY="10"/>
+      <sprite name="tiny-smasher-31" x="281" y="140" width="12" height="10" direction="0.0" offsetX="8" offsetY="10"/>
+      <sprite name="tiny-smasher-32" x="300" y="140" width="12" height="10" direction="0.0" offsetX="8" offsetY="10"/>
       <sprite name="tiny-splat-01" x="3" y="220" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
       <sprite name="tiny-splat-02" x="23" y="220" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
       <sprite name="tiny-splat-03" x="43" y="220" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
@@ -105,6 +153,7 @@
     <pose name="button" filename="images/button.png"/>
     <pose name="buttonDefault" filename="images/buttonDefault.png"/>
     <pose name="buttonSelected" filename="images/buttonSelected.png"/>
+    <pose name="crater" filename="images/crater.png" offsetX="44" offsetY="67"/>
     <pose name="dig" filename="images/dig.png" offsetY="21"/>
     <pose name="entrance1" filename="images/entrance1.png" offsetY="78"/>
     <pose name="grass1" filename="images/grass1.png" offsetX="2" offsetY="8"/>
@@ -116,25 +165,11 @@
     <pose name="lookStepUpLeft" filename="images/lookStepUp.png" offsetX="18" offsetY="3"/>
     <pose name="lookStepUpRight" filename="images/lookStepUp.png" offsetX="0" offsetY="3"/>
     <pose name="paws" filename="images/paws.png"/>
-    <pose name="smashed" filename="images/smashed.png" offsetY="61"/>
+    <pose name="smashL" filename="images/smash.png" offsetX="38" offsetY="58"/>
+    <pose name="smashR" filename="images/smash.png" offsetX="0" offsetY="58"/>
     <pose name="soil1" filename="images/soil1.png" offsetX="2" offsetY="4"/>
   </poses>
   <ninePatches>
-    <ninePatch name="borderE" filename="images/borderE.png" top="2" right="2" bottom="2" left="2"/>
-    <ninePatch name="borderEW" filename="images/borderEW.png" top="2" right="2" bottom="2" left="2"/>
-    <ninePatch name="borderN" filename="images/borderN.png" top="2" right="2" bottom="2" left="2"/>
-    <ninePatch name="borderNE" filename="images/borderNE.png" top="2" right="2" bottom="2" left="2"/>
-    <ninePatch name="borderNEW" filename="images/borderNEW.png" top="2" right="2" bottom="2" left="2"/>
-    <ninePatch name="borderNS" filename="images/borderNS.png" top="2" right="2" bottom="2" left="2"/>
-    <ninePatch name="borderNSE" filename="images/borderNSE.png" top="2" right="2" bottom="2" left="2"/>
-    <ninePatch name="borderNSEW" filename="images/borderNSEW.png" top="2" right="2" bottom="2" left="2"/>
-    <ninePatch name="borderNSW" filename="images/borderNSW.png" top="2" right="2" bottom="2" left="2"/>
-    <ninePatch name="borderNW" filename="images/borderNW.png" top="2" right="2" bottom="2" left="2"/>
-    <ninePatch name="borderS" filename="images/borderS.png" top="2" right="2" bottom="2" left="2"/>
-    <ninePatch name="borderSE" filename="images/borderSE.png" top="2" right="2" bottom="2" left="2"/>
-    <ninePatch name="borderSEW" filename="images/borderSEW.png" top="2" right="2" bottom="2" left="2"/>
-    <ninePatch name="borderSW" filename="images/borderSW.png" top="2" right="2" bottom="2" left="2"/>
-    <ninePatch name="borderW" filename="images/borderW.png" top="2" right="2" bottom="2" left="2"/>
     <ninePatch name="button" filename="images/button.png" top="3" right="3" bottom="3" left="3"/>
   </ninePatches>
   <fonts>
@@ -145,251 +180,346 @@
     <animation name="blocker">
       <sequence sequence="true" loops="0">
         <frames pingPong="false">
-          <frame pose="blocker-01" delay="4"/>
-          <frame pose="blocker-02" delay="4"/>
-          <frame pose="blocker-03" delay="4"/>
-          <frame pose="blocker-04" delay="4"/>
-          <frame pose="blocker-05" delay="4"/>
-          <frame pose="blocker-06" delay="4"/>
-          <frame pose="blocker-07" delay="4"/>
-          <frame pose="blocker-08" delay="4"/>
-          <frame pose="blocker-09" delay="4"/>
-          <frame pose="blocker-10" delay="4"/>
-          <frame pose="blocker-11" delay="4"/>
-          <frame pose="blocker-12" delay="4"/>
-          <frame pose="blocker-13" delay="4"/>
-          <frame pose="blocker-14" delay="4"/>
-          <frame pose="blocker-15" delay="4"/>
-          <frame pose="blocker-16" delay="4"/>
+          <frame pose="blocker-01" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="blocker-02" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="blocker-03" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="blocker-04" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="blocker-05" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="blocker-06" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="blocker-07" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="blocker-08" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="blocker-09" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="blocker-10" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="blocker-11" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="blocker-12" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="blocker-13" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="blocker-14" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="blocker-15" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="blocker-16" delay="4" dx="0.0" dy="0.0"/>
+        </frames>
+      </sequence>
+    </animation>
+    <animation name="bomb">
+      <sequence sequence="true" loops="1" finishedMessage="bang">
+        <frames pingPong="false">
+          <frame pose="bomber-01" delay="8" dx="0.0" dy="0.0"/>
+          <frame pose="bomber-02" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="bomber-03" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="bomber-04" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="bomber-05" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="bomber-06" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="bomber-07" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="bomber-08" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="bomber-07" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="bomber-09" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="bomber-07" delay="2" dx="0.0" dy="0.0"/>
+          <frame pose="bomber-08" delay="2" dx="0.0" dy="0.0"/>
+          <frame pose="bomber-07" delay="2" dx="0.0" dy="0.0"/>
+          <frame pose="bomber-09" delay="2" dx="0.0" dy="0.0"/>
+          <frame pose="bomber-07" delay="2" dx="0.0" dy="0.0"/>
+          <frame pose="explode-01" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="explode-02" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="explode-03" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="explode-04" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="explode-05" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="explode-06" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="explode-07" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="explode-08" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="explode-09" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="explode-10" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="explode-11" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="explode-12" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="explode-13" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="explode-14" delay="1" dx="0.0" dy="0.0"/>
         </frames>
       </sequence>
     </animation>
     <animation name="builderL">
       <sequence sequence="true" loops="10" finishedMessage="jobComplete">
         <frames pingPong="false">
-          <frame pose="builderL-01" delay="4"/>
-          <frame pose="builderL-02" delay="4"/>
-          <frame pose="builderL-03" delay="4"/>
-          <frame pose="builderL-04" delay="4"/>
-          <frame pose="builderL-05" delay="4"/>
-          <frame pose="builderL-06" delay="4"/>
-          <frame pose="builderL-07" delay="4"/>
-          <frame pose="builderL-08" delay="4"/>
-          <frame pose="builderL-09" delay="4"/>
-          <frame pose="builderL-10" delay="4"/>
+          <frame pose="builderL-01" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="builderL-02" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="builderL-03" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="builderL-04" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="builderL-05" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="builderL-06" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="builderL-07" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="builderL-08" delay="4" dx="-6.0" dy="0.0"/>
+          <frame pose="builderL-09" delay="4" dx="0.0" dy="0.0"/>
         </frames>
-        <frames pingPong="false" startMessage="laidBrick" finishedMessage="steppedUp">
-          <frame pose="builderL-11" delay="4"/>
-          <frame pose="builderL-12" delay="4"/>
-          <frame pose="builderL-13" delay="4"/>
-          <frame pose="builderL-14" delay="4"/>
-          <frame pose="builderL-15" delay="4"/>
-          <frame pose="builderL-16" delay="4"/>
+        <frames pingPong="false" startMessage="laidBrick">
+          <frame pose="builderL-10" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="builderL-11" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="builderL-12" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="builderL-13" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="builderL-14" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="builderL-15" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="builderL-16" delay="4" dx="0.0" dy="0.0"/>
         </frames>
+        <move dx="-12.0" dy="6.0" ticks="0" ease="linear"/>
       </sequence>
     </animation>
     <animation name="builderR">
       <sequence sequence="true" loops="10" finishedMessage="jobComplete">
         <frames pingPong="false">
-          <frame pose="builderR-01" delay="4"/>
-          <frame pose="builderR-02" delay="4"/>
-          <frame pose="builderR-03" delay="4"/>
-          <frame pose="builderR-04" delay="4"/>
-          <frame pose="builderR-05" delay="4"/>
-          <frame pose="builderR-06" delay="4"/>
-          <frame pose="builderR-07" delay="4"/>
-          <frame pose="builderR-08" delay="4"/>
-          <frame pose="builderR-09" delay="4"/>
-          <frame pose="builderR-10" delay="4"/>
+          <frame pose="builderR-01" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="builderR-02" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="builderR-03" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="builderR-04" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="builderR-05" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="builderR-06" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="builderR-07" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="builderR-08" delay="4" dx="6.0" dy="0.0"/>
+          <frame pose="builderR-09" delay="4" dx="0.0" dy="0.0"/>
         </frames>
-        <frames pingPong="false" startMessage="laidBrick" finishedMessage="steppedUp">
-          <frame pose="builderR-11" delay="4"/>
-          <frame pose="builderR-12" delay="4"/>
-          <frame pose="builderR-13" delay="4"/>
-          <frame pose="builderR-14" delay="4"/>
-          <frame pose="builderR-15" delay="4"/>
-          <frame pose="builderR-16" delay="4"/>
+        <frames pingPong="false" startMessage="laidBrick">
+          <frame pose="builderR-10" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="builderR-11" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="builderR-12" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="builderR-13" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="builderR-14" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="builderR-15" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="builderR-16" delay="4" dx="0.0" dy="0.0"/>
         </frames>
+        <move dx="12.0" dy="6.0" ticks="0" ease="linear"/>
       </sequence>
     </animation>
-    <animation name="digger">
+    <animation name="dig">
       <sequence sequence="true" loops="10" finishedMessage="jobComplete">
-        <frames pingPong="false" finishedMessage="dig">
-          <frame pose="diggerA-01" delay="4"/>
-          <frame pose="diggerA-02" delay="4"/>
-          <frame pose="diggerA-03" delay="4"/>
-          <frame pose="diggerA-04" delay="4"/>
-          <frame pose="diggerA-05" delay="4"/>
-          <frame pose="diggerA-06" delay="4"/>
-          <frame pose="diggerA-07" delay="4"/>
-          <frame pose="diggerA-08" delay="4"/>
+        <frames pingPong="false">
+          <frame pose="diggerA-01" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="diggerA-02" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="diggerA-03" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="diggerA-04" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="diggerA-05" delay="4" dx="0.0" dy="0.0"/>
         </frames>
-        <frames pingPong="false" finishedMessage="dig">
-          <frame pose="diggerB-01" delay="4"/>
-          <frame pose="diggerB-02" delay="4"/>
-          <frame pose="diggerB-03" delay="4"/>
-          <frame pose="diggerB-04" delay="4"/>
-          <frame pose="diggerB-05" delay="4"/>
-          <frame pose="diggerB-06" delay="4"/>
-          <frame pose="diggerB-07" delay="4"/>
-          <frame pose="diggerB-08" delay="4"/>
+        <move dx="0.0" dy="-6.0" ticks="0" ease="linear" finishedMessage="dig"/>
+        <frames pingPong="false">
+          <frame pose="diggerA-06" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="diggerA-07" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="diggerA-08" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="diggerB-01" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="diggerB-02" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="diggerB-03" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="diggerB-04" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="diggerB-05" delay="4" dx="0.0" dy="0.0"/>
+        </frames>
+        <move dx="0.0" dy="-6.0" ticks="0" ease="linear" finishedMessage="dig"/>
+        <frames pingPong="false">
+          <frame pose="diggerB-06" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="diggerB-07" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="diggerB-08" delay="4" dx="0.0" dy="0.0"/>
         </frames>
       </sequence>
     </animation>
     <animation name="fall">
       <sequence sequence="true" loops="0">
         <frames pingPong="false">
-          <frame pose="fallerA-01" delay="4"/>
-          <frame pose="fallerA-02" delay="4"/>
-          <frame pose="fallerA-03" delay="4"/>
-          <frame pose="fallerA-04" delay="4"/>
-          <frame pose="fallerB-01" delay="4"/>
-          <frame pose="fallerB-02" delay="4"/>
-          <frame pose="fallerB-03" delay="4"/>
-          <frame pose="fallerB-04" delay="4"/>
+          <frame pose="fallerA-01" delay="4" dx="0.0" dy="-6.0"/>
+          <frame pose="fallerA-02" delay="4" dx="0.0" dy="-6.0"/>
+          <frame pose="fallerA-03" delay="4" dx="0.0" dy="-6.0"/>
+          <frame pose="fallerA-04" delay="4" dx="0.0" dy="-6.0"/>
+          <frame pose="fallerB-01" delay="4" dx="0.0" dy="-6.0"/>
+          <frame pose="fallerB-02" delay="4" dx="0.0" dy="-6.0"/>
+          <frame pose="fallerB-03" delay="4" dx="0.0" dy="-6.0"/>
+          <frame pose="fallerB-04" delay="4" dx="0.0" dy="-6.0"/>
         </frames>
+      </sequence>
+    </animation>
+    <animation name="float">
+      <sequence sequence="true" loops="1">
+        <frames pingPong="false">
+          <frame pose="fallerA-01" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="fallerA-02" delay="4" dx="0.0" dy="-6.0"/>
+          <frame pose="fallerA-03" delay="4" dx="0.0" dy="-6.0"/>
+          <frame pose="fallerA-04" delay="4" dx="0.0" dy="-6.0"/>
+          <frame pose="floaterA-01" delay="4" dx="0.0" dy="-6.0"/>
+          <frame pose="floaterA-02" delay="4" dx="0.0" dy="-6.0"/>
+          <frame pose="floaterA-03" delay="4" dx="0.0" dy="-6.0"/>
+          <frame pose="floaterA-04" delay="4" dx="0.0" dy="-6.0"/>
+        </frames>
+        <sequence sequence="true" loops="0">
+          <frames pingPong="false">
+            <frame pose="floaterB-01" delay="4" dx="0.0" dy="-3.0"/>
+            <frame pose="floaterB-02" delay="4" dx="0.0" dy="-3.0"/>
+            <frame pose="floaterB-03" delay="4" dx="0.0" dy="-3.0"/>
+            <frame pose="floaterB-04" delay="4" dx="0.0" dy="-3.0"/>
+            <frame pose="floaterC-01" delay="4" dx="0.0" dy="-3.0"/>
+            <frame pose="floaterC-02" delay="4" dx="0.0" dy="-3.0"/>
+            <frame pose="floaterC-03" delay="4" dx="0.0" dy="-3.0"/>
+            <frame pose="floaterC-04" delay="4" dx="0.0" dy="-3.0"/>
+          </frames>
+        </sequence>
       </sequence>
     </animation>
     <animation name="smasherL">
-      <sequence sequence="true" loops="10">
+      <sequence sequence="true" loops="5" finishedMessage="jobComplete">
         <frames pingPong="false">
-          <frame pose="smasherL-01" delay="4"/>
-          <frame pose="smasherL-02" delay="4"/>
-          <frame pose="smasherL-03" delay="4"/>
-          <frame pose="smasherL-04" delay="4"/>
-          <frame pose="smasherL-05" delay="4"/>
-          <frame pose="smasherL-06" delay="4"/>
-          <frame pose="smasherL-07" delay="3"/>
+          <frame pose="smasherL-01" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="smasherL-02" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="smasherL-03" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="smasherL-04" delay="4" dx="0.0" dy="0.0"/>
         </frames>
-        <move dx="-18.0" dy="0.0" ticks="1" ease="linear"/>
+        <move dx="-12.0" dy="0.0" ticks="0" ease="linear" finishedMessage="smash"/>
         <frames pingPong="false">
-          <frame pose="smasherL-08" delay="4"/>
-          <frame pose="smasherL-09" delay="4"/>
-          <frame pose="smasherL-10" delay="4"/>
-          <frame pose="smasherL-11" delay="4"/>
-          <frame pose="smasherL-12" delay="4"/>
-          <frame pose="smasherL-13" delay="4"/>
-          <frame pose="smasherL-14" delay="4"/>
-          <frame pose="smasherL-15" delay="4"/>
-          <frame pose="smasherL-16" delay="3"/>
+          <frame pose="smasherL-05" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="smasherL-06" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="smasherL-07" delay="3" dx="0.0" dy="0.0"/>
+          <frame pose="smasherL-08" delay="4" dx="6.0" dy="0.0"/>
+          <frame pose="smasherL-09" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="smasherL-10" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="smasherL-11" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="smasherL-12" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="smasherL-13" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="smasherL-14" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="smasherL-15" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="smasherL-16" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="smasherL-17" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="smasherL-18" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="smasherL-19" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="smasherL-20" delay="4" dx="0.0" dy="0.0"/>
         </frames>
-        <move dx="-12.0" dy="0.0" ticks="1" ease="linear"/>
+        <move dx="-12.0" dy="0.0" ticks="0" ease="linear" finishedMessage="smash"/>
+        <frames pingPong="false">
+          <frame pose="smasherL-21" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="smasherL-22" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="smasherL-23" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="smasherL-24" delay="4" dx="6.0" dy="0.0"/>
+          <frame pose="smasherL-25" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="smasherL-26" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="smasherL-27" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="smasherL-28" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="smasherL-29" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="smasherL-30" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="smasherL-31" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="smasherL-32" delay="4" dx="0.0" dy="0.0"/>
+        </frames>
+        <move dx="-18.0" dy="0.0" ticks="0" ease="linear" finishedMessage="smash"/>
       </sequence>
     </animation>
     <animation name="smasherR">
-      <sequence sequence="true" loops="10">
+      <sequence sequence="true" loops="5" finishedMessage="jobComplete">
         <frames pingPong="false">
-          <frame pose="smasherR-01" delay="4"/>
-          <frame pose="smasherR-02" delay="4"/>
-          <frame pose="smasherR-03" delay="4"/>
-          <frame pose="smasherR-04" delay="4"/>
-          <frame pose="smasherR-05" delay="4"/>
-          <frame pose="smasherR-06" delay="4"/>
-          <frame pose="smasherR-07" delay="3"/>
+          <frame pose="smasherR-01" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="smasherR-02" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="smasherR-03" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="smasherR-04" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="smasherR-05" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="smasherR-06" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="smasherR-07" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="smasherR-08" delay="4" dx="0.0" dy="0.0"/>
         </frames>
-        <move dx="18.0" dy="0.0" ticks="1" ease="linear"/>
+        <move dx="12.0" dy="0.0" ticks="0" ease="linear" finishedMessage="smash"/>
         <frames pingPong="false">
-          <frame pose="smasherR-08" delay="4"/>
-          <frame pose="smasherR-09" delay="4"/>
-          <frame pose="smasherR-10" delay="4"/>
-          <frame pose="smasherR-11" delay="4"/>
-          <frame pose="smasherR-12" delay="4"/>
-          <frame pose="smasherR-13" delay="4"/>
-          <frame pose="smasherR-14" delay="4"/>
-          <frame pose="smasherR-15" delay="4"/>
-          <frame pose="smasherR-16" delay="3"/>
+          <frame pose="smasherR-09" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="smasherR-10" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="smasherR-11" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="smasherR-12" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="smasherR-13" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="smasherR-14" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="smasherR-15" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="smasherR-16" delay="4" dx="0.0" dy="0.0"/>
         </frames>
-        <move dx="12.0" dy="0.0" ticks="1" ease="linear"/>
+        <frames pingPong="false">
+          <frame pose="smasherR-17" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="smasherR-18" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="smasherR-19" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="smasherR-20" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="smasherR-21" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="smasherR-22" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="smasherR-23" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="smasherR-24" delay="4" dx="0.0" dy="0.0"/>
+        </frames>
+        <move dx="12.0" dy="0.0" ticks="0" ease="linear" finishedMessage="smash"/>
+        <frames pingPong="false">
+          <frame pose="smasherR-25" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="smasherR-26" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="smasherR-27" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="smasherR-28" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="smasherR-29" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="smasherR-30" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="smasherR-31" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="smasherR-32" delay="4" dx="0.0" dy="0.0"/>
+        </frames>
       </sequence>
     </animation>
     <animation name="splat">
       <sequence sequence="true" loops="1">
         <frames pingPong="false">
-          <frame pose="splat-01" delay="4"/>
-          <frame pose="splat-02" delay="4"/>
-          <frame pose="splat-03" delay="4"/>
-          <frame pose="splat-04" delay="4"/>
-          <frame pose="splat-05" delay="4"/>
-          <frame pose="splat-06" delay="4"/>
-          <frame pose="splat-07" delay="4"/>
-          <frame pose="splat-08" delay="4"/>
-          <frame pose="splat-09" delay="4"/>
-          <frame pose="splat-10" delay="4"/>
-          <frame pose="splat-11" delay="4"/>
-          <frame pose="splat-12" delay="4"/>
-          <frame pose="splat-13" delay="4"/>
-          <frame pose="splat-14" delay="4"/>
-          <frame pose="splat-15" delay="4"/>
-          <frame pose="splat-16" delay="1"/>
+          <frame pose="splat-01" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="splat-02" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="splat-03" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="splat-04" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="splat-05" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="splat-06" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="splat-07" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="splat-08" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="splat-09" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="splat-10" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="splat-11" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="splat-12" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="splat-13" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="splat-14" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="splat-15" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="splat-16" delay="1" dx="0.0" dy="0.0"/>
         </frames>
       </sequence>
     </animation>
     <animation name="walkL">
-      <parallel sequence="false" loops="0">
-        <sequence sequence="true" loops="9">
-          <delay ticks="3"/>
-          <move dx="-6.0" dy="0.0" ticks="1" ease="linear"/>
-        </sequence>
-        <sequence sequence="true" loops="1">
-          <frames pingPong="false">
-            <frame pose="walkerL-01" delay="4"/>
-            <frame pose="walkerL-02" delay="4"/>
-            <frame pose="walkerL-03" delay="4"/>
-            <frame pose="walkerL-04" delay="4"/>
-            <frame pose="walkerL-05" delay="4"/>
-            <frame pose="walkerL-06" delay="4"/>
-            <frame pose="walkerL-07" delay="4"/>
-            <frame pose="walkerL-08" delay="4"/>
-            <frame pose="walkerL-09" delay="3"/>
-          </frames>
-          <move dx="-6.0" dy="0.0" ticks="1" ease="linear"/>
-        </sequence>
-      </parallel>
+      <sequence sequence="true" loops="0">
+        <frames pingPong="false">
+          <frame pose="walkerL-01" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="walkerL-02" delay="4" dx="-6.0" dy="0.0"/>
+          <frame pose="walkerL-03" delay="4" dx="-6.0" dy="0.0"/>
+          <frame pose="walkerL-04" delay="4" dx="-6.0" dy="0.0"/>
+          <frame pose="walkerL-05" delay="4" dx="-6.0" dy="0.0"/>
+          <frame pose="walkerL-06" delay="4" dx="-6.0" dy="0.0"/>
+          <frame pose="walkerL-07" delay="4" dx="-6.0" dy="0.0"/>
+          <frame pose="walkerL-08" delay="4" dx="-6.0" dy="0.0"/>
+        </frames>
+        <move dx="-12.0" dy="0.0" ticks="0" ease="linear"/>
+      </sequence>
     </animation>
     <animation name="walkR">
-      <parallel sequence="false" loops="0">
-        <sequence sequence="true" loops="9">
-          <move dx="6.0" dy="0.0" ticks="1" ease="linear"/>
-          <delay ticks="3"/>
-        </sequence>
-        <sequence sequence="true" loops="1">
-          <frames pingPong="false">
-            <frame pose="walkerR-01" delay="4"/>
-            <frame pose="walkerR-02" delay="4"/>
-            <frame pose="walkerR-03" delay="4"/>
-            <frame pose="walkerR-04" delay="4"/>
-            <frame pose="walkerR-05" delay="4"/>
-            <frame pose="walkerR-06" delay="4"/>
-            <frame pose="walkerR-07" delay="4"/>
-            <frame pose="walkerR-08" delay="4"/>
-            <frame pose="walkerR-09" delay="3"/>
-          </frames>
-          <move dx="6.0" dy="0.0" ticks="1" ease="linear"/>
-        </sequence>
-      </parallel>
+      <sequence sequence="true" loops="0">
+        <frames pingPong="false">
+          <frame pose="walkerR-01" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="walkerR-02" delay="4" dx="6.0" dy="0.0"/>
+          <frame pose="walkerR-03" delay="4" dx="6.0" dy="0.0"/>
+          <frame pose="walkerR-04" delay="4" dx="6.0" dy="0.0"/>
+          <frame pose="walkerR-05" delay="4" dx="6.0" dy="0.0"/>
+          <frame pose="walkerR-06" delay="4" dx="6.0" dy="0.0"/>
+          <frame pose="walkerR-07" delay="4" dx="6.0" dy="0.0"/>
+          <frame pose="walkerR-08" delay="4" dx="6.0" dy="0.0"/>
+        </frames>
+        <move dx="12.0" dy="0.0" ticks="0" ease="linear"/>
+      </sequence>
     </animation>
   </animations>
   <costumes>
     <costume name="ming" defaultZOrder="0" order="0" showInDesigner="true" role="ming.py">
       <pose name="default" pose="walkerR-02"/>
       <pose name="highlight" pose="highlight"/>
-      <pose name="smashed" pose="smashed"/>
       <animation name="blocker" animation="blocker"/>
+      <animation name="bomb" animation="bomb"/>
       <animation name="builderL" animation="builderL"/>
       <animation name="builderR" animation="builderR"/>
-      <animation name="digger" animation="digger"/>
+      <animation name="digger" animation="dig"/>
       <animation name="fall" animation="fall"/>
+      <animation name="float" animation="float"/>
       <animation name="smashL" animation="smasherL"/>
       <animation name="smashR" animation="smasherR"/>
       <animation name="splat" animation="splat"/>
       <animation name="walkL" animation="walkL"/>
       <animation name="walkR" animation="walkR"/>
       <companion name="brick" companion="brick"/>
+      <companion name="crater" companion="crater"/>
       <companion name="default" companion="entrance1"/>
       <companion name="dig" companion="dig"/>
       <companion name="lookDown" companion="lookDown"/>
       <companion name="lookLeftRight" companion="lookLeftRight"/>
       <companion name="lookStepUp" companion="lookStepUp"/>
+      <companion name="smash" companion="smash"/>
     </costume>
     <costume name="animationTest" defaultZOrder="0" order="10" showInDesigner="true" extends="ming" role="animationTest.py">
       <pose name="default" pose="buttonSelected"/>
@@ -397,8 +527,13 @@
     <costume name="brick" defaultZOrder="0" order="10" showInDesigner="true" role="solid.py">
       <pose name="default" pose="brick-01"/>
     </costume>
+    <costume name="crater" defaultZOrder="0" order="10" showInDesigner="true">
+      <pose name="default" pose="crater"/>
+      <pose name="mask" pose="craterMask"/>
+    </costume>
     <costume name="dig" defaultZOrder="0" order="10" showInDesigner="true">
       <pose name="default" pose="dig"/>
+      <pose name="mask" pose="digMask"/>
     </costume>
     <costume name="entrance1" defaultZOrder="0" order="0" showInDesigner="true" role="entrance.py">
       <pose name="default" pose="entrance1"/>
@@ -415,6 +550,7 @@
       <pose name="climber" pose="buttonClimber"/>
       <pose name="default" pose="buttonDefault"/>
       <pose name="digger" pose="buttonDigger"/>
+      <pose name="floater" pose="buttonFloater"/>
       <pose name="smasher" pose="buttonSmasher"/>
     </costume>
     <costume name="lookDown" defaultZOrder="0" order="10" showInDesigner="true">
@@ -432,6 +568,11 @@
     </costume>
     <costume name="paws" defaultZOrder="0" order="0" showInDesigner="true" role="uk.co.nickthecoder.itchy.role.MessageButton">
       <pose name="default" pose="paws"/>
+    </costume>
+    <costume name="smash" defaultZOrder="0" order="10" showInDesigner="true">
+      <pose name="default" pose="smashR"/>
+      <pose name="maskL" pose="smashLMask"/>
+      <pose name="maskR" pose="smashRMask"/>
     </costume>
     <costume name="soil1" defaultZOrder="0" order="0" showInDesigner="true" role="solid.py">
       <pose name="default" pose="soil1"/>

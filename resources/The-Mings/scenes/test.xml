@@ -2,7 +2,7 @@
   <properties>
     <property name="limitsLeft" value="0"/>
     <property name="limitsRight" value="2000"/>
-    <property name="limitsTop" value="800"/>
+    <property name="limitsTop" value="1800"/>
     <property name="limitsBottom" value="-800"/>
   </properties>
   <layer name="grid">
@@ -71,18 +71,53 @@
     <actor costume="soil1" x="1370" y="510" direction="0.0" heading="0.0" startEvent="default" zOrder="108"/>
     <actor costume="grass1" x="980" y="430" direction="0.0" heading="0.0" startEvent="default" zOrder="109"/>
     <actor costume="soil1" x="980" y="410" direction="0.0" heading="0.0" startEvent="default" zOrder="110"/>
-    <actor costume="soil1" x="250" y="570" direction="0.0" heading="0.0" startEvent="default" zOrder="111"/>
+    <actor costume="soil1" x="50" y="550" direction="0.0" heading="0.0" startEvent="default" zOrder="111"/>
     <actor costume="soil1" x="60" y="660" direction="0.0" heading="0.0" startEvent="default" zOrder="112"/>
     <actor costume="grass1" x="730" y="250" direction="0.0" heading="0.0" startEvent="default" zOrder="113"/>
+    <actor costume="soil1" x="270" y="790" direction="0.0" heading="0.0" startEvent="default" zOrder="114"/>
+    <actor costume="soil1" x="150" y="790" direction="0.0" heading="0.0" startEvent="default" zOrder="115"/>
+    <actor costume="soil1" x="180" y="660" direction="0.0" heading="0.0" startEvent="default" zOrder="116"/>
+    <actor costume="soil1" x="-70" y="550" direction="0.0" heading="0.0" startEvent="default" zOrder="117"/>
+    <actor costume="soil1" x="780" y="470" direction="0.0" heading="0.0" startEvent="default" zOrder="118"/>
   </layer>
   <layer name="main">
-    <actor costume="ming" x="90" y="666" direction="0.0" heading="0.0" startEvent="default" zOrder="37"/>
+    <actor costume="ming" x="90" y="668" direction="0.0" heading="0.0" startEvent="default" zOrder="37">
+      <property name="umbrella" value="true"/>
+      <property name="initialJob" value=""/>
+    </actor>
     <actor costume="entrance1" x="545" y="634" direction="0.0" heading="0.0" startEvent="default" zOrder="90">
       <property name="offsetY" value="-300"/>
       <property name="offsetX" value="0"/>
       <property name="period" value="2.0"/>
-      <property name="mings" value="0"/>
+      <property name="mings" value="2"/>
     </actor>
-    <actor costume="ming" x="154" y="447" direction="0.0" heading="0.0" startEvent="default" zOrder="91"/>
+    <actor costume="ming" x="512" y="423" direction="0.0" heading="0.0" startEvent="default" zOrder="91">
+      <property name="umbrella" value="false"/>
+      <property name="initialJob" value=""/>
+    </actor>
+    <actor costume="ming" x="164" y="795" direction="0.0" heading="0.0" startEvent="default" zOrder="92">
+      <property name="umbrella" value="true"/>
+      <property name="initialJob" value=""/>
+    </actor>
+    <actor costume="ming" x="234" y="795" direction="0.0" heading="0.0" startEvent="default" zOrder="93">
+      <property name="umbrella" value="false"/>
+      <property name="initialJob" value=""/>
+    </actor>
+    <actor costume="ming" x="170" y="663" direction="0.0" heading="0.0" startEvent="default" zOrder="94">
+      <property name="umbrella" value="false"/>
+      <property name="initialJob" value=""/>
+    </actor>
+    <actor costume="ming" x="51" y="558" direction="0.0" heading="0.0" startEvent="default" zOrder="95">
+      <property name="umbrella" value="false"/>
+      <property name="initialJob" value=""/>
+    </actor>
+    <actor costume="ming" x="-44" y="555" direction="0.0" heading="0.0" startEvent="default" zOrder="96">
+      <property name="umbrella" value="true"/>
+      <property name="initialJob" value=""/>
+    </actor>
+    <actor costume="ming" x="348" y="446" direction="0.0" heading="0.0" startEvent="default" zOrder="97">
+      <property name="umbrella" value="false"/>
+      <property name="initialJob" value="bomber"/>
+    </actor>
   </layer>
 </scene>

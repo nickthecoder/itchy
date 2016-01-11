@@ -11,7 +11,7 @@
       <property name="dy" value="0.0"/>
       <property name="direction" value="1"/>
     </actor>
-    <actor costume="animationTest" x="627" y="549" direction="0.0" heading="0.0" startEvent="digger" zOrder="2">
+    <actor costume="animationTest" x="700" y="514" direction="0.0" heading="0.0" startEvent="float" zOrder="2">
       <property name="dx" value="0.0"/>
       <property name="dy" value="0.0"/>
       <property name="direction" value="1"/>
@@ -21,12 +21,12 @@
       <property name="dy" value="0.0"/>
       <property name="direction" value="-1"/>
     </actor>
-    <actor costume="animationTest" x="432" y="411" direction="0.0" heading="0.0" startEvent="walkR" zOrder="4">
+    <actor costume="animationTest" x="430" y="375" direction="0.0" heading="0.0" startEvent="walkR" zOrder="4">
       <property name="dx" value="0.0"/>
       <property name="dy" value="0.0"/>
       <property name="direction" value="1"/>
     </actor>
-    <actor costume="animationTest" x="371" y="410" direction="0.0" heading="0.0" startEvent="walkL" zOrder="5">
+    <actor costume="animationTest" x="371" y="374" direction="0.0" heading="0.0" startEvent="walkL" zOrder="5">
       <property name="dx" value="0.0"/>
       <property name="dy" value="0.0"/>
       <property name="direction" value="-1"/>
@@ -35,6 +35,16 @@
       <property name="dx" value="0.0"/>
       <property name="dy" value="0.0"/>
       <property name="direction" value="-1"/>
+    </actor>
+    <actor costume="animationTest" x="637" y="559" direction="0.0" heading="0.0" startEvent="digger" zOrder="7">
+      <property name="dx" value="0.0"/>
+      <property name="dy" value="0.0"/>
+      <property name="direction" value="1"/>
+    </actor>
+    <actor costume="animationTest" x="402" y="299" direction="0.0" heading="0.0" startEvent="bomb" zOrder="8">
+      <property name="dx" value="0.0"/>
+      <property name="dy" value="0.0"/>
+      <property name="direction" value="1"/>
     </actor>
   </layer>
   <layer name="gui">

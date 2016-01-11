@@ -1,21 +1,18 @@
 Current Tasks
 =============
 
-AnimationTests : allow single step animation.
-
-Mings collisions need to take into account that the ANIMATION move the ming.
+Mings collisions need to take into account that the ANIMATIONS move the ming.
 	e.g. A ming can be moved up, embedding his head in soil, when building
-	So need to keep track of last safe position and revert if colliding.
-	
+	So need to keep track of last safe position and revert + reverse if colliding
+
 Diggers etc need to look for solid objects separately from blockers.
-
-When testing blockers, use the direction of travel.
-	i.e. don't turn left if the blocker is already to the left of me.
-
-All mings need to look down, including diggers.
+	When testing blockers, use the direction of travel.
+		i.e. don't turn left if the blocker is already to the left of me.
 
 Use a sensible default for pixel detection threshold in actor and pixeldetection classes.
 	Change lookers to fully opaque.
+
+Remaining Ming Jobs: Climbers, Miners, Leavers, Drowners, 
 
 BUGS
 ====
@@ -24,7 +21,8 @@ Appearance.fixPose doesn't do the right thing with direction.
 	Setting dir to 0 works, but ideally both appearance and the new pose should have the old appearance's direction,
 	and yet the pose won't need rotating.
 
-Debris - Bullets (#2) stay alive, even when invisible, and kill rocks that pass over them.
+Destroy-Debris: Bullets (#2) stay alive, even when invisible, and kill rocks that pass over them.
+	Shouldn't "Projectile" class do this automatically? Maybe the threshold is too low?
 
 TextArea's background center of nine patch is flat colour rather than tiled.
 
@@ -34,7 +32,9 @@ SceneDesigner toolbox isn't moved when the window is maximised (floats in middle
 New Features
 ============
 
-FramedAnimation to have a dx and dy (or forwards sideways???)
+Animations to apply start/end events, so that sounds can be played.
+	Can also be used to asign a new Pose during a non-framed based animation.
+	
 
 Ensure Scrollbars of Scroll do not obscure the contents.
 
@@ -43,11 +43,24 @@ Use Scroll for TextArea, instead of its buggy, self implemented, non-clipping sc
 PoseFilter : Scan Costumes' animations for FramedAnimations
 	Without this the "Ming" filter only show one Ming.
 
-TheMings
-	Menu
-	An actual real game level.
+Finish The-Mings
 
 Design Stages/Views graphically - Aim for no code in Director.
+
+Spritesheet : Crop. Remove all transparent edges, updating the x,y offsets appropriately.
+	Use this on the mings spritesheet.
+
+Have a preview image of the animation in FramedAnimationEditor.
+	Single step back/forward or continuous.
+	In fact, don't have the list or poses, just show one frame's details, and scroll back/forward to edit others.
+
+Game to have a "test" scene.
+	Anywhere in the editor, press F?? and it runs the test scene.
+		From the scene designer, use the current scene?
+			Maybe not, because it can help test partial scenes, such as the "gui" scene in The-Mings.
+
+On Info tab in the editor, have a "Open Folder" button, which opens the game's folder in nautilus/file explorer
+
 
 Code Tidy Up
 ============

@@ -97,7 +97,7 @@ class Play(PlainSceneDirector) :
         # MORE Highlight the button
         
         if self.highlight is not None :
-            self.highlight.parent.getRole().setJob( jobButton.job )
+            self.highlight.parent.role.assignJob( jobButton.job )
             self.selectMing(None)
 
 

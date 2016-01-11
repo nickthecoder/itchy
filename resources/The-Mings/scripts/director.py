@@ -38,6 +38,8 @@ class Director(AbstractDirector) :
     def onMessage(self,message) :
         if message == Director.SPRITE_SHEETS_LOADED :
             self.processSpriteSheet()
+        if message == Director.POSES_LOADED :
+            self.processPoses()
             
     def onKeyDown(self,kevent) :
 
@@ -60,34 +62,66 @@ class Director(AbstractDirector) :
         
         self.pixelateSprites( "tiny-blocker-", "blocker-", 16 )
 
+        self.pixelateSprites( "tiny-bomber-", "bomber-", 9 )
+
         self.pixelateSprites( "tiny-builder-", "builderR-", 16 )
         self.pixelateSprites( "tiny-builder-", "builderL-", 16, True )
 
         self.pixelateSprites( "tiny-digger-", "diggerA-", 8, False, -PIXELATION_SIZE/2, 0 )
         self.pixelateSprites( "tiny-digger-", "diggerB-", 8, True , PIXELATION_SIZE/2, 0 )
 
-        self.pixelateSprites( "tiny-faller-", "fallerA-", 4, False  )
+        self.pixelateSprites( "tiny-explode-", "explode-", 14 )
+        
+        self.pixelateSprites( "tiny-faller-", "fallerA-", 4 )
         self.pixelateSprites( "tiny-faller-", "fallerB-", 4, True )
 
-        self.pixelateSprites( "tiny-splat-", "splat-", 16, True )
+        self.pixelateSprites( "tiny-floaterA-", "floaterA-", 4 )
+        self.pixelateSprites( "tiny-floaterB-", "floaterB-", 4 )
+        self.pixelateSprites( "tiny-floaterB-", "floaterC-", 4, True )
         
-        self.pixelateSprites( "tiny-smasher-", "smasherR-", 16 )
-        self.pixelateSprites( "tiny-smasher-", "smasherL-", 16, True )
+        self.pixelateSprites( "tiny-splat-", "splat-", 16 )
+        
+        self.pixelateSprites( "tiny-smasher-", "smasherR-", 32 )
+        self.pixelateSprites( "tiny-smasher-", "smasherL-", 32, True )
 
-        self.pixelateSprites( "tiny-walker-", "walkerR-", 10 )
-        self.pixelateSprites( "tiny-walker-", "walkerL-", 10, True )
+        self.pixelateSprites( "tiny-walker-", "walkerR-", 8 )
+        self.pixelateSprites( "tiny-walker-", "walkerL-", 8, True )
 
 
         self.createButton( "tiny-buttonBlocker", "buttonBlocker" )
         self.createButton( "tiny-buttonBuilder", "buttonBuilder" )
         self.createButton( "tiny-buttonClimber", "buttonClimber" )
-        self.createButton( "tiny-buttonDigger", "buttonDigger" )
+        self.createButton( "tiny-buttonDigger" , "buttonDigger"  )
         self.createButton( "tiny-buttonSmasher", "buttonSmasher" )
+        self.createButton( "tiny-buttonFloater", "buttonFloater" )
         
         self.pixelateSprites( "tiny-brick-", "brick-", 1 )
 
         print "Processed images in", time.time() - start_time, "seconds"
 
+
+    def processPoses(self) :
+        self.convertToMask( "crater", "craterMask" )
+        self.convertToMask( "smashL", "smashLMask" )
+        self.convertToMask( "smashR", "smashRMask" )
+        self.convertToMask( "dig", "digMask" )
+
+
+    def convertToMask( self, poseName, newName ) :
+        # Convert the image, so that it is suitable as a mask.
+        srcPose = game.resources.getPose( poseName )
+        if srcPose is None :
+            print "Pose", poseName, "not found."
+            return
+
+        srcSurface = srcPose.surface
+        newSurface = Surface( srcSurface.width, srcSurface.height, True )
+        newSurface.fill( RGBA( 255,255,255,255 ) )
+        srcSurface.blit( newSurface, Surface.BlendMode.RGBA_SUB )
+        newPose = ImagePose( newSurface, srcPose.offsetX, srcPose.offsetY )
+
+        game.resources.addPose( DynamicPoseResource( game.resources, newName, newPose) )
+        
     def createButton( self, sourceName, destinationName ) :
     
         source = game.resources.getPose( sourceName )

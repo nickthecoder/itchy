@@ -655,9 +655,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.979899"
-     inkscape:cx="273.75878"
-     inkscape:cy="661.19131"
+     inkscape:zoom="0.9899495"
+     inkscape:cx="308.35651"
+     inkscape:cy="767.25733"
      inkscape:document-units="px"
      inkscape:current-layer="layer2"
      showgrid="false"
@@ -751,31 +751,56 @@
          style="fill:url(#radialGradient4047);fill-opacity:1;stroke:#4f220f;stroke-width:0.5;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
     </g>
     <rect
+       style="opacity:0.01000001;fill:#000000;fill-opacity:0.00392157;stroke:#000000;stroke-width:1.72856009;stroke-opacity:1"
+       id="rect3912"
+       width="560.26093"
+       height="217.61032"
+       x="67.718994"
+       y="33.15704"
+       rx="0"
+       ry="0"
+       inkscape:export-filename="/home/nick/server/projects/itchy/resources/The-Mings/images/rect3912.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
        style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.08190839;stroke-miterlimit:4;stroke-opacity:0.03398061;stroke-dasharray:none"
        id="smashed"
-       width="26.448536"
+       width="38.065285"
        height="57.952301"
-       x="238.91859"
-       y="318.74142"
+       x="250.53534"
+       y="60.142376"
        ry="9.6428528"
        rx="10.188559"
        inkscape:label="#rect3143"
-       inkscape:export-filename="/home/nick/projects/itchy/resources/TheMings/images/smashed.png"
+       inkscape:export-filename="/home/nick/server/projects/itchy/resources/The-Mings/images/smash.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
     <rect
        inkscape:export-ydpi="90"
        inkscape:export-xdpi="90"
-       inkscape:export-filename="/home/nick/server/projects/itchy/resources/The-Mings/images/dug.png"
+       inkscape:export-filename="/home/nick/server/projects/itchy/resources/The-Mings/images/dig.png"
        inkscape:label="#rect3143"
        rx="8.2624083"
-       ry="0"
-       y="375.30997"
-       x="175.27898"
+       ry="8.0812206"
+       y="57.111919"
+       x="310.6394"
        height="20.576668"
        width="61.833878"
        id="rect3142"
        style="fill:#000000;fill-opacity:1;stroke:none" />
+    <rect
+       style="fill:#000000;fill-opacity:1;stroke:none"
+       id="smashed-8"
+       width="86.552643"
+       height="84.721352"
+       x="132.7428"
+       y="57.680168"
+       ry="41.855598"
+       rx="40.24585"
+       inkscape:label="#rect3143"
+       inkscape:export-filename="/home/nick/server/projects/itchy/resources/The-Mings/images/crater.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
   </g>
   <g
      inkscape:label="Layer 1"
@@ -1137,7 +1162,7 @@
          y="505.41464">?</tspan></text>
     <path
        style="fill:#000080;fill-opacity:1;stroke:none"
-       d="m 47.857143,254.50504 122.142857,0 0,79.28571 -29.10714,-30.71429 -30.53572,0 -30.535711,0 -31.964286,30.71429 z"
+       d="m 55.938363,274.70809 122.142857,0 0,79.28571 -29.10714,-30.71429 -30.53572,0 -30.535711,0 -31.964286,30.71429 z"
        id="entrance1"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cccccccc"
@@ -1150,7 +1175,8 @@
        inkscape:label="#g3972"
        inkscape:export-filename="/home/nick/projects/itchy/resources/TheMings/images/highlight.png"
        inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90">
+       inkscape:export-ydpi="90"
+       transform="translate(211.12188,81.822356)">
       <path
          sodipodi:nodetypes="ccccccc"
          inkscape:connector-curvature="0"
@@ -1211,5 +1237,42 @@
          d="m 285.58035,494.86218 25,5 -5.89286,6.96429 8.30357,11.875 -4.01785,3.66071 -11.07143,-9.28571 -7.32143,6.78571 z"
          style="fill:#000080;fill-opacity:1;stroke:#ffffff;stroke-width:1.89999998000000003;stroke-miterlimit:4;stroke-opacity:1" />
     </g>
+    <text
+       xml:space="preserve"
+       style="font-size:20px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="75.475761"
+       y="167.74866"
+       id="text3918-4"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="75.475761"
+         y="167.74866"
+         style="font-size:12px"
+         id="tspan3947">These are used to remove pixels. The background must be BLACK but TRANSPARENT!</tspan><tspan
+         sodipodi:role="line"
+         x="75.475761"
+         y="182.74866"
+         style="font-size:12px"
+         id="tspan3959">i.e. RGBA of 0,0,0,0</tspan><tspan
+         sodipodi:role="line"
+         x="75.475761"
+         y="197.74866"
+         style="font-size:12px"
+         id="tspan3954" /><tspan
+         sodipodi:role="line"
+         x="75.475761"
+         y="212.74866"
+         style="font-size:12px"
+         id="tspan3957">Alas, if we set the alpha to zero, Inkscape ignores it, and the background ends up</tspan><tspan
+         sodipodi:role="line"
+         x="75.475761"
+         y="227.74866"
+         style="font-size:12px"
+         id="tspan3961">being transparent WHITE. Therefore, I use an alpha of 1 and an opacity of 1%, the result</tspan><tspan
+         sodipodi:role="line"
+         x="75.475761"
+         y="242.74866"
+         style="font-size:12px"
+         id="tspan3965">rounds down to 0 :-)</tspan></text>
   </g>
 </svg>
