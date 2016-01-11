@@ -13,8 +13,6 @@ class Ming(AbstractRole) :
         self.initialJob = ""        
         self.umbrella = False
 
-        self.dx = 0
-        self.dy = 0
         self.direction = 1 # Either 1 or -1. Remembered even when falling/digging etc.
         self.job = None
         
@@ -34,7 +32,6 @@ class Ming(AbstractRole) :
         
     def tick(self):
 
-        self.actor.moveBy( self.dx, self.dy )
         self.job.work( self )
         self.collisionStrategy.update()
 
@@ -83,7 +80,6 @@ class Ming(AbstractRole) :
         self.direction = - self.direction
         self.lookLeftRight.event( "look" + self.directionLetter() )
         self.lookStepUp.event( "look" + self.directionLetter() )
-        self.dx = - self.dx
 
 
     def look( self, looker, tags = ["solid"] ) :
@@ -235,8 +231,6 @@ class Stop(Job) :
 
     def start(self, ming) :
         print "Stop"
-        ming.dx = 0
-        ming.dy = 0
         
     def work(self, ming) :
         pass
@@ -245,8 +239,6 @@ class Walker(Job) :
 
     def start(self, ming) :
         print "Walker", ming.directionLetter()
-        ming.dy = 0
-        ming.dx = 0
         ming.event( "walk" + ming.directionLetter() )
     
     def onMessage(self, ming, message) :
@@ -268,8 +260,6 @@ class Faller(Job) :
     
     def start( self, ming ) :
         print "Faller"
-        ming.dx = 0
-        ming.dy = 0
         self.fallStart = ming.actor.y
         ming.event( "fall" )
 
@@ -296,8 +286,6 @@ class Floater(Job) :
 
     def start( self, ming ) :
         print "Floater"
-        ming.dx = 0
-        ming.dy = 0
         ming.event( "float" )
 
     def assignJob( self, ming, jobName ) :
@@ -318,8 +306,6 @@ class Builder(Job) :
 
     def start( self, ming ) :
         print "Builder"
-        ming.dy = 0
-        ming.dx = 0
         ming.event( "builder" + ming.directionLetter() )
     
     def work(self,ming) :
@@ -342,8 +328,6 @@ class Blocker(Job) :
     
     def start( self, ming ) :
         print "Blocker"
-        ming.dx = 0
-        ming.dy = 0
         ming.addTag( "blocker" )
         ming.event( "blocker" )
 
@@ -355,8 +339,6 @@ class Smasher(Job) :
 
     def start( self, ming ) :
         print "Smasher"
-        ming.dy = 0
-        ming.dx = 0
         self.freeSmashes = 2 # Can smash in thin air twice, before giving up
 
         self.remover = ming.createRemover("smash")
@@ -386,8 +368,6 @@ class Digger(Job) :
 
     def start( self, ming ) :
         print "Digger"
-        ming.dy = 0
-        ming.dx = 0
         self.removed = False # Set to true when first piece of solid is removed
 
         self.remover = ming.createRemover( "dig" )
