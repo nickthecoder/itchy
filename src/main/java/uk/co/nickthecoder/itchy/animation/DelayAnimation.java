@@ -45,9 +45,11 @@ public class DelayAnimation extends AbstractAnimation
     }
 
     @Override
-    public void tick( Actor actor )
+    public boolean tick( Actor actor )
     {
         this.currentFrame++;
+
+        return this.ticks == 0;
     }
 
     public void fastForward(Actor actor)
@@ -61,4 +63,5 @@ public class DelayAnimation extends AbstractAnimation
     {
         return this.currentFrame >= this.ticks;
     }
+
 }

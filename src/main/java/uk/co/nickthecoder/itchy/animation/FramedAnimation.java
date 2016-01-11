@@ -29,6 +29,10 @@ public class FramedAnimation extends AbstractAnimation
 
     protected int frameIndex;
 
+    /**
+     * The number of frames to delay, the Pose will be on show for delay+1 ticks.
+     * i.e. a delay of zero, will show the frame for one tick.
+     */
     protected int delay;
 
     protected int direction = 1;
@@ -87,15 +91,20 @@ public class FramedAnimation extends AbstractAnimation
     {
         Frame frame = this.frames.get(this.frameIndex);
         actor.getAppearance().setPose(frame.getPose());
+        actor.moveBy( frame.dx, frame.dy );
         this.delay = frame.getDelay();
     }
 
     @Override
-    public void tick( Actor actor )
+    public boolean tick( Actor actor )
     {
+        if (this.frames.size() == 0) {
+            return true;
+        }
+        
         if (this.delay > 0) {
             this.delay--;
-            return;
+            return false;
         }
 
         // Move onto the next frame.
@@ -110,6 +119,8 @@ public class FramedAnimation extends AbstractAnimation
         } else {
             useFrame(actor);
         }
+        
+        return false;
     }
 
     public void fastForward( Actor actor ) 

@@ -7,6 +7,7 @@ package uk.co.nickthecoder.itchy;
 import java.util.ArrayList;
 import java.util.List;
 
+import uk.co.nickthecoder.itchy.animation.AbstractAnimation;
 import uk.co.nickthecoder.itchy.animation.Animation;
 import uk.co.nickthecoder.itchy.animation.CompoundAnimation;
 import uk.co.nickthecoder.itchy.property.Property;
@@ -330,7 +331,7 @@ public class Actor implements PropertySubject<Actor>
         }
 
         this.animation = newAnimation;
-        this.animation.tick(this);
+        AbstractAnimation.tick(this.animation,this);
     }
 
     public Animation getAnimation()

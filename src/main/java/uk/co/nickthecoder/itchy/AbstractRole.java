@@ -11,6 +11,7 @@ import java.util.Set;
 import javax.script.ScriptException;
 
 import uk.co.nickthecoder.itchy.Actor.AnimationEvent;
+import uk.co.nickthecoder.itchy.animation.AbstractAnimation;
 import uk.co.nickthecoder.itchy.animation.Animation;
 import uk.co.nickthecoder.itchy.collision.BruteForceCollisionStrategy;
 import uk.co.nickthecoder.itchy.collision.CollisionStrategy;
@@ -306,7 +307,7 @@ public abstract class AbstractRole implements Role
 
         Animation animation = actor.getAnimation();
         if (animation != null) {
-            animation.tick(getActor());
+            AbstractAnimation.tick(animation,getActor());
             if (animation.isFinished()) {
                 // The animation could have been changed by the animation finish event. In which case leave the new one.
                 if ( actor.getAnimation() == animation ) {

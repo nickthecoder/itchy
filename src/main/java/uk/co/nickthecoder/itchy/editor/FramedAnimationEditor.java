@@ -14,6 +14,7 @@ import uk.co.nickthecoder.itchy.animation.Frame;
 import uk.co.nickthecoder.itchy.animation.FramedAnimation;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Component;
+import uk.co.nickthecoder.itchy.gui.DoubleBox;
 import uk.co.nickthecoder.itchy.gui.GuiButton;
 import uk.co.nickthecoder.itchy.gui.AbstractComponent;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
@@ -74,7 +75,7 @@ public class FramedAnimationEditor extends AnimationEditor
 
         this.framesContainer = new PlainContainer();
         this.framesContainer.addStyle("form");
-        this.framesGrid = new GridLayout(this.framesContainer, 5);
+        this.framesGrid = new GridLayout(this.framesContainer, 7);
 
         this.framesGrid.addRow("Pose", new Label("Frames"), null, null);
 
@@ -152,9 +153,28 @@ public class FramedAnimationEditor extends AnimationEditor
         delete.addStyle("compact");
         delete.setTooltip("Remove " + name);
 
+        final DoubleBox dxBox = new DoubleBox(frame.dx);
+        dxBox.addChangeListener(new ComponentChangeListener()
+        {
+            @Override
+            public void changed()
+            {
+                frame.dx = dxBox.getValue();
+            }
+        });
+        final DoubleBox dyBox = new DoubleBox(frame.dy);
+        dyBox.addChangeListener(new ComponentChangeListener()
+        {
+            @Override
+            public void changed()
+            {
+                frame.dy = dyBox.getValue();
+            }
+        });
+        
         Label label = new Label( name );
         
-        this.framesGrid.addRow( new Component[] {img, delay, up == null ? new NullComponent() : up, delete, label} );
+        this.framesGrid.addRow( new Component[] {img, delay, up == null ? new NullComponent() : up, delete, dxBox, dyBox, label} );
     }
 
     @Override

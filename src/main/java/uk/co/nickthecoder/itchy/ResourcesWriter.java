@@ -249,6 +249,8 @@ public class ResourcesWriter extends XMLWriter
             this.beginTag("frame");
             this.attribute("pose", this.resources.getPoseName(frame.getPose()));
             this.attribute("delay", frame.getDelay());
+            this.attribute("dx", frame.dx);
+            this.attribute("dy", frame.dy);
             this.endTag("frame");
         }
     }

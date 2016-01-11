@@ -483,16 +483,21 @@ public class ResourcesReader
             XMLTag frameTag = k.next();
 
             int delay = frameTag.getOptionalIntAttribute("delay", 1);
-            if (delay < 1) {
-                throw new XMLException("Delay must be greater than 0");
+            if (delay < 0) {
+                throw new XMLException("Delay cannot  be negative");
             }
+            double dx = frameTag.getOptionalDoubleAttribute("dx", 0);
+            double dy = frameTag.getOptionalDoubleAttribute("dy", 0);
+
             String poseName = frameTag.getAttribute("pose");
             Pose pose = this.resources.getPose(poseName);
             if (pose == null) {
                 throw new XMLException("Pose : " + poseName + " not found");
             }
             Frame frame = new Frame(poseName, pose);
-            frame.setDelay(delay);
+            frame.delay = delay;
+            frame.dx = dx;
+            frame.dy = dy;
             animation.addFrame(frame);
         }
 

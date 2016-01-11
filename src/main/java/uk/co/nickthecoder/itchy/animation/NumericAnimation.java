@@ -50,24 +50,29 @@ public abstract class NumericAnimation extends AbstractAnimation
 
         this.previous = 0;
         this.currentFrame = 0;
-        if (this.ticks == 0) {
-            this.tick(actor, 1, 1);
-        }
     }
 
     @Override
-    public void tick( Actor actor )
+    public boolean tick( Actor actor )
     {
-        this.currentFrame++;
-
-        double amount = this.currentFrame / (double) this.ticks;
-        double eased = this.ease.amount(amount);
-        double delta = eased - this.previous;
-
-        this.tick(actor, eased, delta);
-        this.previous = eased;
+        if ( this.ticks > 0 ) {
+        
+            this.currentFrame++;
+    
+            double amount = this.currentFrame / (double) this.ticks;
+            double eased = this.ease.amount(amount);
+            double delta = eased - this.previous;
+    
+            this.tick(actor, eased, delta);
+            this.previous = eased;
+    
+        } else {
+            this.tick(actor, 1, 1);
+        }
 
         super.tick(actor);
+
+        return this.ticks <= 0;
     }
 
     public void fastForward( Actor actor )
@@ -75,7 +80,7 @@ public abstract class NumericAnimation extends AbstractAnimation
         this.currentFrame = this.ticks -1;
         this.tick(actor);
     }
-    
+
     @Override
     public boolean isFinished()
     {

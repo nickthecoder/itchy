@@ -43,9 +43,10 @@ public class Sequence implements SequenceOrParallel
     }
 
     @Override
-    public void tick( Actor actor )
-    {
-        this.currentAnimation.tick(actor);
+    public boolean tick( Actor actor )
+    {   
+        boolean result = this.currentAnimation.tick(actor);
+        
         if (this.currentAnimation.isFinished()) {
             this.index++;
             if (this.index < this.compoundAnimation.children.size()) {
@@ -55,6 +56,8 @@ public class Sequence implements SequenceOrParallel
                 this.currentAnimation = null;
             }
         }
+        
+        return result;
     }
 
     @Override
@@ -62,6 +65,7 @@ public class Sequence implements SequenceOrParallel
     {
         return this.currentAnimation == null;
     }
+
 
     @Override
     public SequenceOrParallel copy()

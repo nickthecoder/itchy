@@ -13,7 +13,12 @@ public class Frame implements Cloneable
 {
     private final Pose pose;
 
-    private int delay;
+    public int delay;
+    
+    public double dx;
+    
+    public double dy;
+
 
     public Frame( String poseName, Pose pose )
     {

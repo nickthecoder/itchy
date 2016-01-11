@@ -20,6 +20,19 @@ public abstract class AbstractAnimation implements Animation, Cloneable
         properties.add( new StringProperty<Animation>( "startMessage" ));
         properties.add( new StringProperty<Animation>( "finishedMessage" ));
     }
+
+    public static void tick( Animation animation, Actor actor )
+    {
+        for ( int i = 0; i < 100; i ++ ) {
+            if (!animation.tick(actor)) {
+                return;
+            }
+            if (animation.isFinished()) {
+                return;
+            }
+        }
+        System.err.println( "Too many instananeous animations. Probably an infinite loop. Aborting.");
+    }
     
     private String startMessage = null;
 
@@ -51,11 +64,12 @@ public abstract class AbstractAnimation implements Animation, Cloneable
     public abstract boolean isFinished();
 
     @Override
-    public void tick( Actor actor )
+    public boolean tick( Actor actor )
     {
         if (this.isFinished()) {
             fireFinished(actor);
         }
+        return false;
     }
 
     protected void fireStart( Actor actor )

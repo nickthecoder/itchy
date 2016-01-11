@@ -12,7 +12,7 @@ public interface SequenceOrParallel extends Cloneable
 
     public void startExceptFirst( Actor actor );
 
-    public void tick( Actor actor );
+    public boolean tick( Actor actor );
 
     public boolean isFinished();
 

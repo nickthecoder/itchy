@@ -23,7 +23,10 @@ public interface Animation extends Cloneable, PropertySubject<Animation>, Named
 
     public void start( Actor actor );
 
-    public void tick( Actor actor );
+    /**
+     * @return True iff the animation was instantaneous, and another tick should follow.
+     */
+    public boolean tick( Actor actor );
 
     /**
      * Perform the last part of the animation. If it is a compound, then fast forward each part.
@@ -31,7 +34,7 @@ public interface Animation extends Cloneable, PropertySubject<Animation>, Named
     public void fastForward( Actor actor );
     
     public boolean isFinished();
-
+    
     public Animation clone() throws CloneNotSupportedException;
 
     public Animation copy();

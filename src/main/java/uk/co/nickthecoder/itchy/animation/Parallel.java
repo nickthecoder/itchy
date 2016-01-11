@@ -40,14 +40,19 @@ public class Parallel implements SequenceOrParallel
     }
 
     @Override
-    public void tick( Actor actor )
+    public boolean tick( Actor actor )
     {
+        boolean result = true;
+        
         for (Iterator<Animation> i = this.compoundAnimation.children.iterator(); i.hasNext();) {
             Animation child = i.next();
             if (!child.isFinished()) {
-                child.tick(actor);
+                if (child.tick(actor)) {
+                    result = false;
+                }
             }
         }
+        return result;
     }
 
     @Override

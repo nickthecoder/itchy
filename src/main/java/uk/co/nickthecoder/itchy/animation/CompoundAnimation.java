@@ -105,9 +105,9 @@ public class CompoundAnimation extends AbstractAnimation
     }
 
     @Override
-    public void tick( Actor actor )
+    public boolean tick( Actor actor )
     {
-        this.sop.tick(actor);
+        boolean result = this.sop.tick(actor);
 
         if (this.sop.isFinished()) {
             if (this.loops > 0) {
@@ -118,6 +118,8 @@ public class CompoundAnimation extends AbstractAnimation
             }
         }
         super.tick(actor);
+        
+        return result;
     }
 
     public void fastForward( Actor actor )
