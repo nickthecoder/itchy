@@ -47,7 +47,7 @@ public class Parallel implements SequenceOrParallel
         for (Iterator<Animation> i = this.compoundAnimation.children.iterator(); i.hasNext();) {
             Animation child = i.next();
             if (!child.isFinished()) {
-                if (child.tick(actor)) {
+                if (!child.tick(actor)) {
                     result = false;
                 }
             }

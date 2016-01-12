@@ -31,7 +31,7 @@ public abstract class AbstractAnimation implements Animation, Cloneable
                 return;
             }
         }
-        System.err.println( "Too many instananeous animations. Probably an infinite loop. Aborting.");
+        System.err.println( "Too many instananeous animations. Probably an infinite loop. Aborting. Actor : " + actor);
     }
     
     private String startMessage = null;
