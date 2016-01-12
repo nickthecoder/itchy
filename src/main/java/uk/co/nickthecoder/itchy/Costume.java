@@ -124,6 +124,7 @@ public class Costume implements Cloneable
                 e.printStackTrace();
                 this.costumeProperties = new CostumeProperties();
             }
+            this.costumeProperties.setCostume( this );
         }
         return this.costumeProperties;
     }

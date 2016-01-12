@@ -368,8 +368,7 @@ public class Tetra extends AbstractDirector
     {
         new Fragment()
             .pieces(5)
-            .actor(actor)
-            .createPoses("fragment");
+            .createPoses(actor);
 
         new ExplosionBuilder(actor)
             .projectiles(5)

@@ -18,51 +18,42 @@ import uk.co.nickthecoder.itchy.PoseResource;
 import uk.co.nickthecoder.jame.Surface;
 
 /**
- * Fragments an actor's pose in lots of random shaped pieces. The pieces are added to the actor's costume with the given pose name. The
- * recommended name to use is "fragment", but you can choose any name you like.
+ * Fragments a pose in lots of random shaped pieces.
+ * The pieces can be added to a costume using a single event name.
+ * The recommended name is "fragment", but you can choose any name you like.
  * 
- * The fragments are only created once, so if you call fragment twice, with the same pose name, then you will still only have the fragments
- * from the first call.
+ * The fragments are only created once, so if you call fragment twice, with the same pose name,
+ * then you will still only have the fragments from the first call.
  * 
- * This algorithm is inefficient (in memory, and speed), so ideally don't use it while the game is playing. Instead, call it during a Role's
- * init method.
+ * This algorithm is inefficient (in memory, and speed), so ideally don't use it while the game is playing.
  * 
- * This class is often used in conjunction with ExplosionRole, to produce an explosion with the pieces of the actor flying apart in
- * different directions.
+ * This class is often used in conjunction with Explosion, to produce an explosion with the pieces of
+ * the actor flying apart in different directions.
+ * 
+ * Uses a "Fluent" interface, so many methods return "this".
  */
 public class Fragment
 {
-    private Actor actor;
-
-    private String poseName = "default";
-
-    private int[][] owner;
-
-    private Surface source;
-
     private int pieceCount = 10;
 
     private Random random;
+
+    private ImagePose[] results;
+    
+    // The following attributes are used during the fragmentation process only.
+    
+    private int[][] owner;
+
+    private Surface source;
 
     private Piece[] pieces;
 
     private int toGo;
 
+    
     public Fragment()
     {
         this.random = new Random();
-    }
-
-    public Fragment actor( Actor actor )
-    {
-        this.actor = actor;
-        return this;
-    }
-
-    public Fragment pose( String poseName )
-    {
-        this.poseName = poseName;
-        return this;
     }
 
     public Fragment pieces( int value )
@@ -71,28 +62,14 @@ public class Fragment
         return this;
     }
 
-    public void createPoses( String destPose )
+    public Fragment randomSeed( int seed )
     {
-        fragment(this.actor.getCostume(), this.poseName, destPose);
+        this.random.setSeed(seed);
+        return this;
     }
 
-    /**
-     * This is the work horse.
-     * 
-     * @param costume
-     *        The costume used as the source of the pose, and the destination of the fragments
-     * @param srcPose
-     *        The name of the pose to use as the source
-     * @param destPose
-     *        The name of the poses which are created.
-     */
-    private void fragment( Costume costume, String srcPose, String destPose )
+    public Fragment fragment( Pose pose )
     {
-        if (costume.getPose(destPose) != null) {
-            return;
-        }
-        PoseResource poseResource = costume.getPoseResource(srcPose);
-        Pose pose = poseResource.pose;
         this.source = pose.getSurface();
 
         this.pieces = new Piece[this.pieceCount];
@@ -117,6 +94,8 @@ public class Fragment
             this.pieces[i].grow();
         }
 
+        this.results = new ImagePose[this.pieceCount];
+        
         for (int i = 0; i < this.pieceCount; i++) {
             ImagePose newPose = new ImagePose(
                 this.pieces[i].surface,
@@ -124,9 +103,39 @@ public class Fragment
                 pose.getOffsetY());
 
             newPose.setDirection(pose.getDirection());
-            String name = poseResource.getName() + "-fragment-" + i;
-            costume.addPose(destPose, new DynamicPoseResource(Itchy.getGame().resources, name, newPose));
+            
+            this.results[i] = newPose;
         }
+        
+        return this;
+    }
+
+    /**
+     * A convenience method, uses the actor's current pose, and adds the fragments to the actor's costume
+     * with an event name of "fragment".
+     */
+    public Fragment createPoses( Actor actor )
+    {
+        return createPoses( actor, "fragment" );
+    }
+    
+    public Fragment createPoses( Actor actor, String eventName )
+    {
+        return fragment( actor.getAppearance().getPose()).addToCostume(actor.getCostume(), eventName );
+    }
+    
+    public Fragment addToCostume( Costume costume )
+    {
+        return addToCostume( costume, "fragment" );
+    }
+    
+    public Fragment addToCostume( Costume costume, String eventName )
+    {
+        for ( int i = 0; i < this.pieceCount; i ++ ) {
+            PoseResource pr = new DynamicPoseResource(Itchy.getGame().resources, eventName, results[i]);
+            costume.addPose( eventName, pr );
+        }
+        return this;
     }
 
     private void setOwner( int x, int y, int owner )

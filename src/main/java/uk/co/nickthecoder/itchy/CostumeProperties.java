@@ -12,8 +12,25 @@ import uk.co.nickthecoder.itchy.property.PropertySubject;
 
 public class CostumeProperties implements PropertySubject<CostumeProperties>, Cloneable
 {
+    private Costume costume;
+    
 	public CostumeProperties( )
 	{
+	}
+	
+	/**
+	 * This should only be set by Itchy, not by any game code.
+	 * It is set immediately after the constructor is called. Its done like this to make the constructor
+	 * easy for game programers. i.e. There is no need for boiler plate code to call super.
+	 */
+	void setCostume( Costume costume )
+	{
+	    this.costume = costume;
+	}
+	
+	public Costume getCostume()
+	{
+	    return this.costume;
 	}
 	
 	private final static List<Property<CostumeProperties, ?>> EMPTY_PROPERTIES =

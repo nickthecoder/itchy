@@ -37,9 +37,9 @@ class Ship(Moving) :
         self.fireTimer = None
         
         # Cut the ship into 3 large pieces, and call these poses "part"
-        Fragment().actor(self.getActor()).pieces(3).createPoses("part")
+        Fragment().pieces(3).createPoses(self.getActor(), "part")
         # Cut the ship again, this time into 10 pieces, and call these poses "fragment".
-        Fragment().actor(self.getActor()).pieces(10).createPoses("fragment")
+        Fragment().pieces(10).createPoses(self.getActor())
         # These are use together when the ship explodes in the "die" method.
 
         game.getSceneDirector().ship = self

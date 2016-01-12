@@ -1,6 +1,9 @@
 Current Tasks
 =============
 
+Pyrox animations are borked.
+Drunk Invaders complains about too many instanaeious animations.
+
 Use a sensible default for pixel detection threshold in actor and pixeldetection classes.
 
 Remaining Ming Jobs: Climbers, Miners, Leavers, Drowners, 
