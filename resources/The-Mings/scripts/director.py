@@ -79,6 +79,9 @@ class Director(AbstractDirector) :
         self.pixelateSprites( "tiny-floaterB-", "floaterB-", 4 )
         self.pixelateSprites( "tiny-floaterB-", "floaterC-", 4, True )
         
+        self.pixelateSprites( "tiny-miner-", "minerR-", 24 )
+        self.pixelateSprites( "tiny-miner-", "minerL-", 24, True )
+
         self.pixelateSprites( "tiny-splat-", "splat-", 16 )
         
         self.pixelateSprites( "tiny-smasher-", "smasherR-", 32 )
@@ -95,7 +98,11 @@ class Director(AbstractDirector) :
         self.createButton( "tiny-buttonSmasher", "buttonSmasher" )
         self.createButton( "tiny-buttonFloater", "buttonFloater" )
         
-        self.pixelateSprites( "tiny-brick-", "brick-", 1 )
+        self.pixelateSprite( "tiny-brick", "brick" )
+        self.pixelateSprite( "tiny-highlight", "highlight" )
+        self.pixelateSprite( "tiny-lookDown", "lookDown" )
+        self.pixelateSprite( "tiny-lookLeft", "lookLeft" )
+        self.pixelateSprite( "tiny-lookRight", "lookRight" )
 
         print "Processed images in", time.time() - start_time, "seconds"
 
@@ -141,14 +148,18 @@ class Director(AbstractDirector) :
         for i in range(0,amount) :
             sourceName = sourcePrefix + str(i+1).zfill(2)
             destinationName = destinationPrefix + str(i+1).zfill(2)
-            pose = game.resources.getPose( sourceName )
-            if pose is None :
-                print "Pose", sourceName, "not found"
-            else :
-                newPose = self.pixelator.pixelate( pose, flip, dx, dy )
-                newPoseResource = DynamicPoseResource( game.resources, destinationName, newPose )
-                game.resources.addPose( newPoseResource )
-    
+            self.pixelateSprite( sourceName, destinationName, flip, dx, dy )
+            
+    def pixelateSprite( self, sourceName, destinationName, flip = False, dx = 0, dy = 0 ) :
+
+        pose = game.resources.getPose( sourceName )
+        if pose is None :
+            print "Pose", sourceName, "not found"
+        else :
+            newPose = self.pixelator.pixelate( pose, flip, dx, dy )
+            newPoseResource = DynamicPoseResource( game.resources, destinationName, newPose )
+            game.resources.addPose( newPoseResource )
+
 
     # Boiler plate code - no need to change this
     def getClassName(self):

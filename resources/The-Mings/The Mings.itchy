@@ -2,7 +2,7 @@
   <game title="The Mings" width="1000" height="800" resizable="false" initialScene="test" directorClassName="director.py"/>
   <spriteSheets>
     <spriteSheet name="spriteSheet" file="images/spriteSheet.png">
-      <sprite name="tiny-blocker-01" x="3" y="60" width="12" height="10" direction="0.0" offsetX="6" offsetY="10"/>
+      <sprite name="tiny-blocker-01" x="3" y="60" width="10" height="10" direction="0.0" offsetX="6" offsetY="10"/>
       <sprite name="tiny-blocker-02" x="23" y="60" width="12" height="10" direction="0.0" offsetX="6" offsetY="10"/>
       <sprite name="tiny-blocker-03" x="43" y="60" width="12" height="10" direction="0.0" offsetX="6" offsetY="10"/>
       <sprite name="tiny-blocker-04" x="63" y="60" width="12" height="10" direction="0.0" offsetX="6" offsetY="10"/>
@@ -27,7 +27,7 @@
       <sprite name="tiny-bomber-07" x="143" y="200" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
       <sprite name="tiny-bomber-08" x="163" y="200" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
       <sprite name="tiny-bomber-09" x="203" y="200" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
-      <sprite name="tiny-brick-01" x="230" y="112" width="4" height="1" direction="0.0" offsetX="2" offsetY="1"/>
+      <sprite name="tiny-brick" x="230" y="112" width="4" height="1" direction="0.0" offsetX="2" offsetY="1"/>
       <sprite name="tiny-builder-01" x="4" y="103" width="8" height="10" direction="0.0" offsetX="4" offsetY="10"/>
       <sprite name="tiny-builder-02" x="24" y="103" width="8" height="10" direction="0.0" offsetX="4" offsetY="10"/>
       <sprite name="tiny-builder-03" x="44" y="103" width="8" height="10" direction="0.0" offsetX="4" offsetY="10"/>
@@ -84,6 +84,34 @@
       <sprite name="tiny-floaterB-02" x="163" y="40" width="10" height="15" direction="0.0" offsetX="5" offsetY="15"/>
       <sprite name="tiny-floaterB-03" x="203" y="40" width="10" height="15" direction="0.0" offsetX="5" offsetY="15"/>
       <sprite name="tiny-floaterB-04" x="223" y="40" width="10" height="15" direction="0.0" offsetX="5" offsetY="15"/>
+      <sprite name="tiny-highlight" x="243" y="18" width="12" height="14" direction="0.0" offsetX="6" offsetY="12"/>
+      <sprite name="tiny-lookDown" x="230" y="112" width="2" height="1" direction="0.0" offsetX="1" offsetY="1"/>
+      <sprite name="tiny-lookLeft" x="26" y="24" width="1" height="7" direction="0.0" offsetX="2" offsetY="9"/>
+      <sprite name="tiny-lookRight" x="26" y="24" width="1" height="7" direction="0.0" offsetX="-1" offsetY="9"/>
+      <sprite name="tiny-miner-01" x="160" y="159" width="10" height="13" direction="0.0" offsetX="9" offsetY="13"/>
+      <sprite name="tiny-miner-02" x="185" y="159" width="10" height="13" direction="0.0" offsetX="4" offsetY="13"/>
+      <sprite name="tiny-miner-03" x="205" y="160" width="11" height="13" direction="0.0" offsetX="3" offsetY="13"/>
+      <sprite name="tiny-miner-04" x="225" y="160" width="11" height="13" direction="0.0" offsetX="3" offsetY="13"/>
+      <sprite name="tiny-miner-05" x="245" y="160" width="10" height="13" direction="0.0" offsetX="2" offsetY="13"/>
+      <sprite name="tiny-miner-06" x="265" y="160" width="10" height="13" direction="0.0" offsetX="2" offsetY="13"/>
+      <sprite name="tiny-miner-07" x="284" y="160" width="11" height="13" direction="0.0" offsetX="3" offsetY="13"/>
+      <sprite name="tiny-miner-08" x="303" y="160" width="12" height="14" direction="0.0" offsetX="4" offsetY="13"/>
+      <sprite name="tiny-miner-09" x="2" y="180" width="14" height="14" direction="0.0" offsetX="5" offsetY="13"/>
+      <sprite name="tiny-miner-10" x="21" y="180" width="14" height="14" direction="0.0" offsetX="6" offsetY="13"/>
+      <sprite name="tiny-miner-11" x="40" y="180" width="16" height="14" direction="0.0" offsetX="7" offsetY="13"/>
+      <sprite name="tiny-miner-12" x="61" y="180" width="14" height="14" direction="0.0" offsetX="6" offsetY="13"/>
+      <sprite name="tiny-miner-13" x="86" y="180" width="10" height="14" direction="0.0" offsetX="1" offsetY="13"/>
+      <sprite name="tiny-miner-14" x="106" y="180" width="10" height="14" direction="0.0" offsetX="1" offsetY="13"/>
+      <sprite name="tiny-miner-15" x="126" y="180" width="12" height="13" direction="0.0" offsetX="1" offsetY="13"/>
+      <sprite name="tiny-miner-16" x="145" y="180" width="12" height="13" direction="0.0" offsetX="0" offsetY="13"/>
+      <sprite name="tiny-miner-17" x="164" y="180" width="12" height="13" direction="0.0" offsetX="1" offsetY="13"/>
+      <sprite name="tiny-miner-18" x="184" y="180" width="12" height="13" direction="0.0" offsetX="2" offsetY="13"/>
+      <sprite name="tiny-miner-19" x="204" y="180" width="12" height="13" direction="0.0" offsetX="2" offsetY="13"/>
+      <sprite name="tiny-miner-20" x="224" y="180" width="12" height="13" direction="0.0" offsetX="1" offsetY="13"/>
+      <sprite name="tiny-miner-21" x="244" y="180" width="12" height="13" direction="0.0" offsetX="1" offsetY="13"/>
+      <sprite name="tiny-miner-22" x="264" y="180" width="12" height="13" direction="0.0" offsetX="1" offsetY="13"/>
+      <sprite name="tiny-miner-23" x="279" y="180" width="12" height="13" direction="0.0" offsetX="6" offsetY="13"/>
+      <sprite name="tiny-miner-24" x="300" y="180" width="12" height="13" direction="0.0" offsetX="5" offsetY="13"/>
       <sprite name="tiny-shrug-01" x="204" y="0" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
       <sprite name="tiny-shrug-02" x="224" y="0" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
       <sprite name="tiny-shrug-03" x="244" y="0" width="10" height="10" direction="0.0" offsetX="5" offsetY="10"/>
@@ -158,12 +186,6 @@
     <pose name="entrance1" filename="images/entrance1.png" offsetY="78"/>
     <pose name="grass1" filename="images/grass1.png" offsetX="2" offsetY="8"/>
     <pose name="gui" filename="images/gui.png" offsetX="0" offsetY="100"/>
-    <pose name="highlight" filename="images/highlight.png" offsetY="95"/>
-    <pose name="lookDown" filename="images/lookDown.png" offsetY="5"/>
-    <pose name="lookLeft" filename="images/lookLeftRight.png" offsetX="13" offsetY="57"/>
-    <pose name="lookRight" filename="images/lookLeftRight.png" offsetX="-12" offsetY="57"/>
-    <pose name="lookStepUpLeft" filename="images/lookStepUp.png" offsetX="18" offsetY="7"/>
-    <pose name="lookStepUpRight" filename="images/lookStepUp.png" offsetX="0" offsetY="7"/>
     <pose name="paws" filename="images/paws.png"/>
     <pose name="smashL" filename="images/smash.png" offsetX="38" offsetY="58"/>
     <pose name="smashR" filename="images/smash.png" offsetX="0" offsetY="58"/>
@@ -256,7 +278,7 @@
           <frame pose="builderL-15" delay="4" dx="0.0" dy="0.0"/>
           <frame pose="builderL-16" delay="4" dx="0.0" dy="0.0"/>
         </frames>
-        <move dx="-12.0" dy="6.0" ticks="0" ease="linear"/>
+        <move dx="-6.0" dy="6.0" ticks="0" ease="linear"/>
       </sequence>
     </animation>
     <animation name="builderR">
@@ -281,7 +303,7 @@
           <frame pose="builderR-15" delay="4" dx="0.0" dy="0.0"/>
           <frame pose="builderR-16" delay="4" dx="0.0" dy="0.0"/>
         </frames>
-        <move dx="12.0" dy="6.0" ticks="0" ease="linear"/>
+        <move dx="6.0" dy="6.0" ticks="0" ease="linear"/>
       </sequence>
     </animation>
     <animation name="dig">
@@ -350,6 +372,39 @@
             <frame pose="floaterC-04" delay="4" dx="0.0" dy="-3.0"/>
           </frames>
         </sequence>
+      </sequence>
+    </animation>
+    <animation name="mineR">
+      <sequence sequence="true" loops="10" finishedMessage="jobComplete">
+        <frames pingPong="false">
+          <frame pose="minerR-01" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="minerR-02" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="minerR-03" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="minerR-04" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="minerR-05" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="minerR-06" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="minerR-07" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="minerR-08" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="minerR-09" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="minerR-10" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="minerR-11" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="minerR-12" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="minerR-13" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="minerR-14" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="minerR-15" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="minerR-16" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="minerR-17" delay="4" dx="0.0" dy="0.0"/>
+        </frames>
+        <move dx="6.0" dy="-6.0" ticks="0" ease="linear" finishedMessage="mine"/>
+        <frames pingPong="false">
+          <frame pose="minerR-18" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="minerR-19" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="minerR-20" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="minerR-21" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="minerR-22" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="minerR-23" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="minerR-24" delay="4" dx="0.0" dy="0.0"/>
+        </frames>
       </sequence>
     </animation>
     <animation name="smasherL">
@@ -507,6 +562,7 @@
       <animation name="digger" animation="dig"/>
       <animation name="fall" animation="fall"/>
       <animation name="float" animation="float"/>
+      <animation name="mineR" animation="mineR"/>
       <animation name="smashL" animation="smasherL"/>
       <animation name="smashR" animation="smasherR"/>
       <animation name="splat" animation="splat"/>
@@ -518,14 +574,13 @@
       <companion name="dig" companion="dig"/>
       <companion name="lookDown" companion="lookDown"/>
       <companion name="lookLeftRight" companion="lookLeftRight"/>
-      <companion name="lookStepUp" companion="lookStepUp"/>
       <companion name="smash" companion="smash"/>
     </costume>
     <costume name="animationTest" defaultZOrder="0" order="10" showInDesigner="true" extends="ming" role="animationTest.py">
       <pose name="default" pose="buttonSelected"/>
     </costume>
-    <costume name="brick" defaultZOrder="0" order="10" showInDesigner="true" role="solid.py">
-      <pose name="default" pose="brick-01"/>
+    <costume name="brick" defaultZOrder="0" order="10" showInDesigner="true" role="brick.py">
+      <pose name="default" pose="brick"/>
     </costume>
     <costume name="crater" defaultZOrder="0" order="10" showInDesigner="true">
       <pose name="default" pose="crater"/>
@@ -560,11 +615,6 @@
       <pose name="default" pose="lookLeft"/>
       <pose name="lookL" pose="lookLeft"/>
       <pose name="lookR" pose="lookRight"/>
-    </costume>
-    <costume name="lookStepUp" defaultZOrder="0" order="10" showInDesigner="true">
-      <pose name="default" pose="lookStepUpRight"/>
-      <pose name="lookL" pose="lookStepUpLeft"/>
-      <pose name="lookR" pose="lookStepUpRight"/>
     </costume>
     <costume name="paws" defaultZOrder="0" order="0" showInDesigner="true" role="uk.co.nickthecoder.itchy.role.MessageButton">
       <pose name="default" pose="paws"/>

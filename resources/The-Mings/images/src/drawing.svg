@@ -656,10 +656,10 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.9899495"
-     inkscape:cx="308.35651"
-     inkscape:cy="767.25733"
+     inkscape:cx="330.57987"
+     inkscape:cy="683.41467"
      inkscape:document-units="px"
-     inkscape:current-layer="layer2"
+     inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="1440"
      inkscape:window-height="847"
@@ -678,7 +678,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -813,36 +813,6 @@
        xlink:href="file:///home/nick/projects/itchy/resources/TheMings/images/walkL1.png"
        height="60"
        width="36" />
-    <rect
-       style="fill:#ff0000;fill-opacity:0.6635945;stroke:none"
-       id="rect2996"
-       width="17.625637"
-       height="5.2829938"
-       x="489.64719"
-       y="373.52335"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90"
-       inkscape:export-filename="/home/nick/server/projects/itchy/resources/The-Mings/images/lookDown.png" />
-    <rect
-       y="365.03857"
-       x="509.09265"
-       height="5.4847631"
-       width="17.878185"
-       id="rect3009"
-       style="fill:#000faa;fill-opacity:0.58525349;stroke:none"
-       inkscape:export-filename="/home/nick/server/projects/itchy/resources/The-Mings/images/lookStepUp.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90" />
-    <rect
-       inkscape:export-ydpi="92.571426"
-       inkscape:export-xdpi="92.571426"
-       inkscape:export-filename="/home/nick/server/projects/itchy/resources/The-Mings/images/lookLeftRight.png"
-       style="fill:#00ff11;fill-opacity:0.65898617;stroke:none"
-       id="rect3011"
-       width="2"
-       height="43.888325"
-       x="473"
-       y="326.20102" />
     <g
        id="g3785"
        transform="translate(-114,-36)"
@@ -1207,35 +1177,6 @@
          xlink:href="#rect3961"
          y="0"
          x="0" />
-    </g>
-    <g
-       id="buttonSelect"
-       inkscape:label="#g4018"
-       inkscape:export-filename="/home/nick/projects/itchy/resources/TheMings/images/buttonSelect.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90">
-      <rect
-         inkscape:transform-center-y="-2.8571429"
-         inkscape:transform-center-x="5.1785714"
-         inkscape:export-ydpi="90"
-         inkscape:export-xdpi="90"
-         inkscape:export-filename="/home/nick/projects/itchy/resources/TheMings/images/buttonDefault.png"
-         y="488.61218"
-         x="279.28571"
-         height="40"
-         width="40"
-         id="rect3952-5"
-         style="fill:none;fill-opacity:1;stroke:#000000;stroke-opacity:0.03398058;stroke-width:0.10000000000000001;stroke-miterlimit:4;stroke-dasharray:none" />
-      <path
-         inkscape:export-ydpi="90"
-         inkscape:export-xdpi="90"
-         inkscape:export-filename="/home/nick/projects/itchy/resources/TheMings/images/buttonSelect.png"
-         inkscape:label="#rect3978"
-         sodipodi:nodetypes="cccccccc"
-         inkscape:connector-curvature="0"
-         id="select"
-         d="m 285.58035,494.86218 25,5 -5.89286,6.96429 8.30357,11.875 -4.01785,3.66071 -11.07143,-9.28571 -7.32143,6.78571 z"
-         style="fill:#000080;fill-opacity:1;stroke:#ffffff;stroke-width:1.89999998000000003;stroke-miterlimit:4;stroke-opacity:1" />
     </g>
     <text
        xml:space="preserve"

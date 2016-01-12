@@ -1,18 +1,13 @@
 Current Tasks
 =============
 
-Mings collisions need to take into account that the ANIMATIONS move the ming.
-	e.g. A ming can be moved up, embedding his head in soil, when building
-	So need to keep track of last safe position and revert + reverse if colliding
-
-Diggers etc need to look for solid objects separately from blockers.
-	When testing blockers, use the direction of travel.
-		i.e. don't turn left if the blocker is already to the left of me.
-
 Use a sensible default for pixel detection threshold in actor and pixeldetection classes.
-	Change lookers to fully opaque.
 
 Remaining Ming Jobs: Climbers, Miners, Leavers, Drowners, 
+
+Shrink the lookDown image - the original appears to be just one pixel.
+Projectiles when a ming explodes
+
 
 BUGS
 ====
@@ -32,8 +27,19 @@ SceneDesigner toolbox isn't moved when the window is maximised (floats in middle
 New Features
 ============
 
+Macro record/playback, useful for testing, and creating demos, and cheat modes.
+    Record all input events for each tick
+    Playback : Ignore real input events (except a special STOP input), and simulate the events instead.
+    Load/Save a macro.
+
+Fragment to keep the information about each fragments offset relative to the parent, so that an explosion can be
+created correctly, and yet have each fragment's offsets at its center.
+
+ColoredFragment. Use another pose, to decide which pixels belong to each fragment.
+    If the poses aren't the same size, then scale non blended.
+
 Animations to apply start/end events, so that sounds can be played.
-	Can also be used to asign a new Pose during a non-framed based animation.
+	Can also be used to assign a new Pose during a non-framed based animation.
 	
 
 Ensure Scrollbars of Scroll do not obscure the contents.
@@ -70,7 +76,7 @@ Pixelator has a bodge in it. Sometime it needs to add one to all the pixels.
 		then move blit to another surface before embossing the edges.
 	Rename it EmbossEdgesPixelator? Create EmbossPixelator, which embosses every pixel.
 
-WTF is Animation.startExceptFirst ? Parallel certainly doesn't do aything sensible!
+WTF is Animation.startExceptFirst ? Parallel certainly doesn't do anything sensible!
 	Used when merging two animations. Do it better!!!
 
 Role.animateAndTick
@@ -101,6 +107,12 @@ Why have a Role interface if everything will end up using AbstractRole?
     Why does Role have "birth" and yet everything uses onBirth() ? Ditto with other events.
     At least make Role have the methods that people will actually use ie. onBirth rather than birth.
 
+Disallow roles being removed and added to an actor. An actor has a role for life.
+    If you need to change behaviour, do it like the Mings do it, and have a separate class hierarchy. 
+    Hmm, Pause does exactly that!
+        Probably a bad design, as the user's roles may do some of their own stuff in onActive, and
+        not expect it to be called when unpaused.
+    Delayed Activation also works like this!
 
 Rox Ideas
 =========

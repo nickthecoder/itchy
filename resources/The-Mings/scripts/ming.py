@@ -3,7 +3,7 @@ from common import *
 from director import PIXELATION_SIZE
 
 MAX_SAFE_HEIGHT = 200
-STEP_UP_DOWN = 6
+STEP_UP_DOWN = 12
 
 properties = ArrayList()
 
@@ -25,7 +25,6 @@ class Ming(AbstractRole) :
 
         self.lookLeftRight = self.createLooker( "lookLeftRight" )
         self.lookDown = self.createLooker( "lookDown" )
-        self.lookStepUp = self.createLooker( "lookStepUp" )
 
         self.job = Walker()
         self.job.start(self)
@@ -39,12 +38,10 @@ class Ming(AbstractRole) :
         self.job.quit(self)
         self.lookLeftRight.actor.kill()
         self.lookDown.actor.kill()
-        self.lookStepUp.actor.kill()
     
     def tick(self):
 
         self.job.tick( self )
-        self.collisionStrategy.update() # TODO Only need this for Blockers?
 
         self.prevX = self.actor.x
         self.prevY = self.actor.y
@@ -56,7 +53,7 @@ class Ming(AbstractRole) :
     def createLooker(self, name) :
         result = FollowerBuilder( self.actor ).companion( name ).create()
         result.event( "look" + self.directionLetter() )
-        result.actor.appearance.alpha = 200
+        result.actor.appearance.alpha = 0
         return result
 
 
@@ -88,18 +85,24 @@ class Ming(AbstractRole) :
             return "R"
 
 
-    def look( self, looker, tags = ["solid"] ) :
+    def look( self, looker, tags ) :
         looker.tick()
         looker.collisionStrategy.update()
         result = looker.collided( tags )
         return result
         
 
+    def somethingBelow( self ) :
+        return self.look( self.lookDown, "ground" );
+
+
+    def somethingInfront( self ) :
+        return self.look( self.lookLeftRight, "solid" );
+
+
     def checkForReversing( self ) :
 
-        self.lookLeftRight.tick()
-        self.lookLeftRight.collisionStrategy.update()
-        if self.lookLeftRight.collided("solid") :
+        if self.somethingInfront() :
             self.reverse()
             return True
 
@@ -116,47 +119,17 @@ class Ming(AbstractRole) :
         self.actor.y = self.prevY
         self.direction = - self.direction
         self.lookLeftRight.event( "look" + self.directionLetter() )
-        self.lookStepUp.event( "look" + self.directionLetter() )
 
         self.changeJob( Walker() )
 
-    def checkForStepUp( self ) :
-        self.findLevel()
-        
-        #stepSize = 4
-        #self.actor.moveBy(0,stepSize)
-        #if self.look( self.lookDown ) :
-        #    print "Stepping up"
-        #    for i in range(0,stepSize) :
-        #        self.actor.moveBy(0,-1)
-        #        if self.look( self.lookDown ) :
-        #            break
-        #    return True
-        #    
-        #self.actor.moveBy(0,-stepSize)
-        #return False   
-
-
-        #if self.look( self.lookStepUp ) :
-        #    print "Stepping up", self.actor.y
-        #    self.findLevel()
-        #    print "to", self.actor.y
-        #    return True
-        #return False
-
-
     def checkForFalling( self ) :
 
-        # Is there anything under my feet?
-        if not self.look( self.lookDown ) :
-            print "Falling (maybe a little)"
+        if not self.somethingBelow() :
 
             # Try moving down a little bit
             for i in range(0,STEP_UP_DOWN) :
-                if i != 0 :
-                    print "d"
                 self.actor.moveBy(0,-1)
-                if self.look( self.lookDown ) :
+                if self.somethingBelow() :
                     return False
             
             # Nothing under us. Fall!
@@ -169,12 +142,11 @@ class Ming(AbstractRole) :
         return False
 
 
-
     def findLevel( self ) :
         # Move up till we aren't on solid ground
         for i in range(0,STEP_UP_DOWN) :
             self.actor.moveBy(0,1)
-            if not self.look( self.lookDown ) :
+            if not self.somethingBelow() :
                 self.actor.moveBy(0,-1)
                 return
         
@@ -276,7 +248,7 @@ class Walker(Job) :
     
     def tick( self, ming ) :
 
-        ming.checkForStepUp()
+        ming.findLevel()
         Job.tick( self, ming )
         
         
@@ -296,7 +268,7 @@ class Faller(Job) :
     def tick( self, ming ) :
 
         # Have I hit bottom?
-        if ming.look( ming.lookDown ) :
+        if ming.somethingBelow() :
             print "Stopped falling"
             
             ming.findLevel()
@@ -324,7 +296,7 @@ class Floater(Job) :
     def tick(self, ming) :
         
         # Have I hit bottom?
-        if ming.look( ming.lookDown ) :
+        if ming.somethingBelow() :
             print "Stopped floating"
             ming.findLevel()
             ming.changeJob( Walker() )
@@ -339,7 +311,7 @@ class Builder(Job) :
     def onMessage( self, ming, message ) :
         if message == "laidBrick" :
             brick = ming.actor.createCompanion( "brick" )
-            brick.moveBy( ming.direction * 4 * PIXELATION_SIZE, 0 )
+            brick.moveBy( ming.direction * 3 * PIXELATION_SIZE, 0 )
         if message == "jobComplete" :
             ming.changeJob( Walker() )
 
@@ -348,6 +320,7 @@ class Blocker(Job) :
     
     def start( self, ming ) :
         print "Blocker"
+        ming.collisionStrategy.update()
         ming.addTag( "blocker" )
         ming.event( "blocker" )
 
@@ -371,7 +344,7 @@ class Smasher(Job) :
             ming.changeJob( Walker() )
         
         if message == "smash" :
-            if ming.look( ming.lookLeftRight ) :
+            if ming.somethingInfront() :
                 self.freeSmashes = 0
                 ming.removeSolids( self.remover )
             else :

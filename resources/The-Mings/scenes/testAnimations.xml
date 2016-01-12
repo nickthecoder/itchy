@@ -46,6 +46,11 @@
       <property name="dy" value="0.0"/>
       <property name="direction" value="1"/>
     </actor>
+    <actor costume="animationTest" x="616" y="382" direction="0.0" heading="0.0" startEvent="mineR" zOrder="9">
+      <property name="dx" value="0.0"/>
+      <property name="dy" value="0.0"/>
+      <property name="direction" value="1"/>
+    </actor>
   </layer>
   <layer name="gui">
     <text text="Press Space to step through the animations" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="429" y="34" direction="0.0" heading="0.0" startEvent="default" zOrder="0"/>

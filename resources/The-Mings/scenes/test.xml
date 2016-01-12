@@ -91,7 +91,7 @@
       <property name="period" value="2.0"/>
       <property name="mings" value="2"/>
     </actor>
-    <actor costume="ming" x="512" y="423" direction="0.0" heading="0.0" startEvent="default" zOrder="91">
+    <actor costume="ming" x="1002" y="439" direction="0.0" heading="0.0" startEvent="default" zOrder="91">
       <property name="umbrella" value="false"/>
       <property name="initialJob" value=""/>
     </actor>

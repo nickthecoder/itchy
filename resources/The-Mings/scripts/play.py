@@ -21,7 +21,7 @@ class Play(PlainSceneDirector) :
         self.limitsBottom = 0
         self.limitsTop = 800
 
-        self.neighbourhood = StandardNeighbourhood( 180 )
+        self.neighbourhood = StandardNeighbourhood( 80 )
 
         self.scrollSpeed = 4
         self.scrollX = 0

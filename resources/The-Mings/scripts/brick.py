@@ -2,12 +2,10 @@ from common import *
 
 properties = ArrayList()
 
-class Solid(AbstractRole) :
+class Brick(AbstractRole) :
         
     def onBirth(self):
-        self.addTag( "solid" ) # Mings cannot get past me.
         self.addTag( "ground" ) # Mings can walk on me.
-        self.addTag( "breakable" ) # Explosions, diggers and bashers can cut into me.
 
     # Boiler plate code - no need to change this
     def getProperties(self):
@@ -16,5 +14,6 @@ class Solid(AbstractRole) :
     # Boiler plate code - no need to change this
     def getClassName(self):
         return ClassName( Role, self.__module__ + ".py" )
+
 
 
