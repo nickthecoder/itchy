@@ -127,9 +127,9 @@ public abstract class AbstractRole implements Role
         return new ClassName(Role.class, this.getClass().getName());
     }
 
-    public CostumeProperties getCostumeProperties()
+    public CostumeFeatures getCostumeFeatures()
     {
-        return getActor().getCostume().getCostumeProperties();
+        return getActor().getCostume().getCostumeFeatures();
     }
 
     @Override
@@ -208,9 +208,9 @@ public abstract class AbstractRole implements Role
     }
 
     @Override
-    public CostumeProperties createCostumeProperties(Costume costume)
+    public CostumeFeatures createCostumeFeatures(Costume costume)
     {
-        return new CostumeProperties(costume);
+        return new CostumeFeatures(costume);
     }
 
     @Override

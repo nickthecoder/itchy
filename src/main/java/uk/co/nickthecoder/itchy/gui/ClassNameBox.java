@@ -10,7 +10,7 @@ import java.util.Set;
 
 import javax.script.ScriptException;
 
-import uk.co.nickthecoder.itchy.CostumeProperties;
+import uk.co.nickthecoder.itchy.CostumeFeatures;
 import uk.co.nickthecoder.itchy.Director;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.Role;
@@ -176,7 +176,7 @@ public class ClassNameBox extends PlainContainer
             return "SceneDirector";
         } else if (this.baseClass == Director.class) {
             return "Director";
-        } else if (this.baseClass == CostumeProperties.class) {
+        } else if (this.baseClass == CostumeFeatures.class) {
             return "CostumeProperties";
         } else {
             return null;

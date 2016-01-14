@@ -32,8 +32,8 @@ class Ship(Moving) :
         OnionSkinBuilder( self.getActor() ) \
             .alpha(128).every(5).fade(3).create()
 
-        self.rotationSpeed = self.getActor().getCostume().getCostumeProperties().rotationSpeed
-        self.thrust = self.getActor().getCostume().getCostumeProperties().thrust
+        self.rotationSpeed = self.costumeFeatures.rotationSpeed
+        self.thrust = self.costumeFeatures.thrust
         self.fireTimer = None
         
         # Cut the ship into 3 large pieces, and call these poses "part"
@@ -95,7 +95,7 @@ class Ship(Moving) :
         
             if self.inputFire.pressed() :
                 if self.fireTimer is None :
-                    firePeriod = self.getActor().getCostume().getCompanion(self.bulletName).getCostumeProperties().firePeriod
+                    firePeriod = self.actor.costume.getCompanion(self.bulletName).costumeFeatures.firePeriod
                     self.fireTimer = Timer.createTimerSeconds(firePeriod)
 
                 self.fire()
@@ -121,12 +121,9 @@ class Ship(Moving) :
 
 
     def explode( self ) :
-       
-        # Use the "fragment" and "part" poses created in onBirth to explode the ship in all directions.
-        #ExplosionBuilder(self.getActor()).speed(1.5, 1.6, 0, 0).fade(2).spin(-0.4, 0.4).fragments(self.actor.costume.costumeProperties.fragments).create();
-
+    
         ExplosionBuilder(self.actor) \
-            .fragments( self.actor.costume.costumeProperties.fragments ) \
+            .fragments( self.costumeFeatures.fragments ) \
             .speed(1.0,0,1.5,0).fade(3).spin(-1,1).vx(self.vx/2).vy(self.vy/2) \
             .create()
         
@@ -152,13 +149,13 @@ class Ship(Moving) :
         actor.moveTo( self.getActor() )
         actor.moveForwards(40)
 
-        impulse = actor.getCostume().getCostumeProperties().impulse
+        impulse = actor.costume.costumeFeatures.impulse
         theta = self.getActor().getHeadingRadians()
         self.vx -= math.cos(theta) * impulse
         self.vy -= math.sin(theta) * impulse
 
-    def createCostumeProperties( self, costume ) :
-        return ShipProperties(costume)
+    def createCostumeFeatures( self, costume ) :
+        return ShipFeatures(costume)
 
     # Boiler plate code - no need to change this
     def getProperties(self):
@@ -169,10 +166,10 @@ class Ship(Moving) :
         return ClassName( Role, self.__module__ + ".py" )
 
 
-class ShipProperties(CostumeProperties) :
+class ShipFeatures(CostumeFeatures) :
 
     def __init__(self,costume) :
-        CostumeProperties.__init__(self,costume)
+        super(ShipFeatures,self).__init__(costume)
         self.rotationSpeed = 2
         self.thrust = 1   
         pose = costume.getPose("default")

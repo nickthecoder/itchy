@@ -377,7 +377,7 @@ public class ResourcesReader
             for (Iterator<XMLTag> j = costumeTag.getTags("properties"); j.hasNext();) {
                 XMLTag propertiesTag = j.next();
 
-                readProperties(propertiesTag, costume.getCostumeProperties());
+                readProperties(propertiesTag, costume.getCostumeFeatures());
             }
 
             CostumeResource resource = new CostumeResource(this.resources, costumeName, costume);

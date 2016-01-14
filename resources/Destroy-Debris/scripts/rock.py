@@ -43,20 +43,20 @@ class Rock(Moving) :
     
     def shot(self, bullet) :
     	# Small bullets have NO effect on strong rocks.
-    	strength = bullet.getActor().getCostume().getCostumeProperties().strength
+    	strength = bullet.actor.costume.costumeFeatures.strength
 
-    	if strength < self.getActor().getCostume().getCostumeProperties().strength :
+    	if strength < self.actor.costume.costumeFeatures.strength :
     		self.getActor().event("ricochet")
     		return
     	
     	self.hits += strength
     	# Have we hit the rock enough times?
-    	if self.hits < self.getActor().getCostume().getCostumeProperties().hitsRequired :
+    	if self.hits < self.actor.costume.costumeFeatures.hitsRequired :
     		self.getActor().event("hit")
     		return
     	
 		self.getActor().event("explode")
-    	game.getDirector().addPoints(self.getActor().getCostume().getCostumeProperties().points)
+    	game.getDirector().addPoints(self.actor.costume.costumeFeatures.points)
     	
         ExplosionBuilder(self.getActor()) \
             .spread( bullet.getActor().getHeading() - 120, bullet.getActor().getHeading() + 120 ).randomSpread() \
@@ -66,12 +66,12 @@ class Rock(Moving) :
 
         sum_dx = 0
         sum_dy = 0
-        pieces = self.getActor().getCostume().getCostumeProperties().pieces
+        pieces = self.actor.costume.costumeFeatures.pieces
         for i in range( 0, pieces ) :
             actor = self.getActor().createCompanion("fragment-"+`i + 1`)
             role = actor.getRole()
             
-            explosiveness = bullet.getActor().getCostume().getCostumeProperties().explosiveness
+            explosiveness = bullet.actor.costume.costumeFeatures.explosiveness
             role.rotationSpeed = self.rotationSpeed + Util.randomBetween( -explosiveness, explosiveness )
 
             if i == pieces -1 :
@@ -92,8 +92,8 @@ class Rock(Moving) :
         self.removeTag("shootable")
     
     
-    def createCostumeProperties( self, costume ) :
-        return RockProperties(costume)
+    def createCostumeFeatures( self, costume ) :
+        return RockFeatures(costume)
 
 
     # Boiler plate code - no need to change this
@@ -105,15 +105,15 @@ class Rock(Moving) :
         return ClassName( Role, self.__module__ + ".py" )
 
 
-class RockProperties(CostumeProperties) :
+class RockFeatures(CostumeFeatures) :
 
     def __init__(self, costume) :
-        CostumeProperties.__init__(self,costume)
+        super(RockFeatures,self).__init__(costume)
         self.pieces = 0
         self.points = 1    
         self.strength = 1    
         self.hitsRequired = 1    
-    
+
     # Boiler plate code - no need to change this
     def getProperties(self):
         return costumeProperties

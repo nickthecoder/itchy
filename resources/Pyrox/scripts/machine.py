@@ -1,5 +1,7 @@
 from common import *
-from gridRole import GridRoleCostumeProperties
+
+from gridRole import GridRole, GridRoleFeatures
+from dummy import Dummy
 
 properties = ArrayList()
 
@@ -10,10 +12,6 @@ costumeProperties.add( StringProperty( "enters" ) )
 costumeProperties.add( StringProperty( "exits" ) )
 costumeProperties.add( IntegerProperty( "offsetX" ) )
 costumeProperties.add( IntegerProperty( "offsetY" ) )
-
-from gridRole import GridRole
-from dummy import Dummy
-from gridRole import GridRoleCostumeProperties
 
 class Machine(GridRole) :
 
@@ -32,7 +30,7 @@ class Machine(GridRole) :
     def onSceneCreated(self):
         GridRole.onSceneCreated(self)
         self.makeAlternateOccupant()
-        self.costumeProperties.update(self)
+        self.costumeFeatures.update(self)
         
         dummy = None
         squareSize = self.square.grid.squareSize
@@ -95,8 +93,8 @@ class Machine(GridRole) :
             self.pulled = False
         
 
-    def createCostumeProperties(self,costume) :
-        return MachineProperties(costume)
+    def createCostumeFeatures(self,costume) :
+        return MachineFeatures(costume)
 
 
     # Boiler plate code - no need to change this
@@ -109,10 +107,10 @@ class Machine(GridRole) :
 
 
 
-class MachineProperties(GridRoleCostumeProperties) :
+class MachineFeatures(GridRoleFeatures) :
 
     def __init__(self,costume) :
-        super(MachineProperties,self).__init__(costume)
+        super(MachineFeatures,self).__init__(costume)
         self.fromCostume = "carR"
         self.toCostume = "carL"
         self.enters = "E"

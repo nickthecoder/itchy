@@ -99,7 +99,7 @@ public class Registry
 
     public Set<String> getCostumePropertiesClassNames()
     {
-        return getClassNames(CostumeProperties.class);
+        return getClassNames(CostumeFeatures.class);
     }
 
     public Set<String> getSceneDirectorClassNames()

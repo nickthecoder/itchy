@@ -1,13 +1,13 @@
 from common import *
 
 from gridRole import GridRole
-from roundProperties import RoundProperties
-import roundProperties
+from roundFeatures import RoundFeatures
+import roundFeatures
 
 properties = ArrayList()
 
 costumeProperties = ArrayList()
-costumeProperties.addAll( roundProperties.costumeProperties )
+costumeProperties.addAll( roundFeatures.costumeProperties )
 costumeProperties.add( BooleanProperty( "squashN" ) )
 costumeProperties.add( BooleanProperty( "squashE" ) )
 costumeProperties.add( BooleanProperty( "squashS" ) )
@@ -18,7 +18,7 @@ class Squash(GridRole) :
         
     def onBirth(self):
         super(Squash,self).onBirth()
-        self.costumeProperties.update(self)
+        self.costumeFeatures.update(self)
 
 
     def onPlacedOnGrid(self) :
@@ -37,8 +37,8 @@ class Squash(GridRole) :
     def shove( self, pusher, dx, dy, speed ) :
         pass
         
-    def createCostumeProperties(self,costume) :
-        return SquashProperties(costume)
+    def createCostumeFeatures(self,costume) :
+        return SquashFeatures(costume)
 
 
     # Boiler plate code - no need to change this
@@ -50,10 +50,10 @@ class Squash(GridRole) :
         return ClassName( Role, self.__module__ + ".py" )
 
 
-class SquashProperties(RoundProperties) :
+class SquashFeatures(RoundFeatures) :
 
     def __init__(self,costume) :
-        super(SquashProperties,self).__init__(costume)
+        super(SquashFeatures,self).__init__(costume)
         self.squashN = False
         self.squashE = False
         self.squashS = False
@@ -61,7 +61,7 @@ class SquashProperties(RoundProperties) :
         self.permanent = False
         
     def update( self, role ) :
-        super(SquashProperties,self).update(role)
+        super(SquashFeatures,self).update(role)
         
         role.tag( "squashN", self.squashN )
         role.tag( "squashE", self.squashE )

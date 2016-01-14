@@ -190,7 +190,7 @@ class GridRole(AbstractRole) :
     def explode( self ) :        
         # TODO Explode using new fragments
         ExplosionBuilder(self.actor) \
-            .fragments(self.actor.costume.costumeProperties.fragments) \
+            .fragments(self.costumeFeatures.fragments) \
             .speed(2.0,0,3.5,0).fade(3).spin(-0.5,0.5) \
             .create()
         
@@ -277,8 +277,8 @@ class GridRole(AbstractRole) :
         return [0,1,0,-1][direction]
 
 
-    def createCostumeProperties( self, costume ) :
-        return GridRoleCostumeProperties(costume)
+    def createCostumeFeatures( self, costume ) :
+        return GridRoleFeatures(costume)
 
     # Boiler plate code - no need to change this
     def getProperties(self):
@@ -296,10 +296,10 @@ class GridRole(AbstractRole) :
         return self.__class__.__name__ + " @ " + str(self.square.x) + "," + str(self.square.y)
 
     
-class GridRoleCostumeProperties(CostumeProperties) :
+class GridRoleFeatures(CostumeFeatures) :
 
     def __init__(self,costume) :
-        CostumeProperties.__init__(self,costume)
+        super(GridRoleFeatures,self).__init__(costume)
 
         pose = costume.getPose("default")
         if pose is not None :

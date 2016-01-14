@@ -22,6 +22,6 @@ class Play(PlainSceneDirector) :
 
     # Boiler plate code - no need to change this
     def getClassName(self):
-        return ClassName( CostumeProperties, self.__module__ + ".py" )
+        return ClassName( SceneDirector, self.__module__ + ".py" )
 
 

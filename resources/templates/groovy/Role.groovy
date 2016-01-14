@@ -28,10 +28,6 @@ class ${Name} extends AbstractRole
         // TODO Called 60 times a second, and is where all the good stuff belongs!
     }
 
-    // TODO Other methods include :
-    // onSceneCreated, onDetach, onKill, onMouseDown, onMouseUp, onMouseMove, createCostumeProperties
-
-
     // Boiler plate code - no need to change this
     public ArrayList getProperties()
     {

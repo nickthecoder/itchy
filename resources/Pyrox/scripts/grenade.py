@@ -1,7 +1,7 @@
 from common import *
 
 import gridRole
-from gridRole import GridRoleCostumeProperties
+from gridRole import GridRoleFeatures
 
 from faller import Faller
 
@@ -18,7 +18,7 @@ class Grenade(Faller) :
     
     def onBirth(self):
         super(Grenade,self).onBirth()
-        self.costumeProperties.update(self)
+        self.costumeFeatures.update(self)
         
         self.addTag("hittable")
         
@@ -77,8 +77,8 @@ class Grenade(Faller) :
             self.fallen = not self.fallen
 
 
-    def createCostumeProperties(self,costume) :
-        return GrenadeProperties(costume)
+    def createCostumeFeatures(self,costume) :
+        return GrenadeFeatures(costume)
 
 
     # Boiler plate code - no need to change this
@@ -90,10 +90,10 @@ class Grenade(Faller) :
         return ClassName( Role, self.__module__ + ".py" )
 
 
-class GrenadeProperties(GridRoleCostumeProperties) :
+class GrenadeFeatures(GridRoleFeatures) :
 
     def __init__(self,costume) :
-        super(GrenadeProperties,self).__init__(costume)
+        super(GrenadeFeatures,self).__init__(costume)
         self.fallen = False
 
     def update(self, role) :       

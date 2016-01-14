@@ -1,4 +1,4 @@
-from uk.co.nickthecoder.itchy import Itchy, Actor, Role, AbstractRole, CostumeProperties
+from uk.co.nickthecoder.itchy import Itchy, Actor, Role, AbstractRole, CostumeFeatures
 from uk.co.nickthecoder.itchy import Director, AbstractDirector 
 from uk.co.nickthecoder.itchy import SceneDirector, PlainSceneDirector
 from uk.co.nickthecoder.itchy import Input

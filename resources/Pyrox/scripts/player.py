@@ -47,8 +47,8 @@ class Player(Big) :
     def onBirth( self ) :
         Big.onBirth(self)
 
-        self.talkX = self.costumeProperties.talkX
-        self.talkY = self.costumeProperties.talkY
+        self.talkX = self.costumeFeatures.talkX
+        self.talkY = self.costumeFeatures.talkY
         
         self.speed = 6
         self.addTag("player")
@@ -58,7 +58,7 @@ class Player(Big) :
     def onPlacedOnGrid(self) :
         Big.onPlacedOnGrid(self)
 
-        self.costumeProperties.createParts( self )
+        self.costumeFeatures.createParts( self )
         self.calculateLeadingEdges()
 
         self.allAddTag("hittable")

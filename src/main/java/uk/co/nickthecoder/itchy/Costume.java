@@ -27,7 +27,7 @@ public class Costume implements Cloneable
 
     public boolean showInDesigner = true;
 
-    private CostumeProperties costumeProperties;
+    private CostumeFeatures costumeFeatures;
 
     private HashMap<String, List<AnimationResource>> animationChoices;
 
@@ -40,18 +40,15 @@ public class Costume implements Cloneable
     private HashMap<String, List<TextStyle>> textStyleChoices;
 
     /**
-     * A Costume can link to other costumes by a String key. These are called
-     * "companions", because they tend to be used to create companion objects.
-     * For example, "Space Miner" (asteroids) uses this when one "rock" breaks
-     * up into smaller rocks. The smaller rocks are the companions of the larger
-     * one.
+     * A Costume can link to other costumes by a String key. These are called "companions", because they tend to be used
+     * to create companion objects. For example, "Space Miner" (asteroids) uses this when one "rock" breaks up into
+     * smaller rocks. The smaller rocks are the companions of the larger one.
      */
     private HashMap<String, List<CostumeResource>> companionChoices;
 
     /**
-     * When loading a costume, we may have circular references, which can only
-     * be resolved when all costumes have been loaded. This stores the list of
-     * names of costumes during the load phase, which are then converted into
+     * When loading a costume, we may have circular references, which can only be resolved when all costumes have been
+     * loaded. This stores the list of names of costumes during the load phase, which are then converted into
      * companionChoices at the end.
      */
     public HashMap<String, List<String>> companionStringChoices;
@@ -91,41 +88,29 @@ public class Costume implements Cloneable
         return actor;
     }
 
-    // TODO REMOVE Costume.getProperties
-    @Deprecated
-    public CostumeProperties getProperties()
-    {
-        System.err.println("Called deprecated method : Costume.getCostumeProperties. Use getCostumeProperties instead.");
-        try {
-            throw new RuntimeException();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return getCostumeProperties();
-    }
+    private String roleClassNameForCostumeFeatures;
 
-    private String roleClassNameForCostumeProperties;
-
-    public CostumeProperties getCostumeProperties()
+    public CostumeFeatures getCostumeFeatures()
     {
         // If the Role has changed since we last created the costume properties, then we can't use
         // the old costumeProperties.
-        if ((this.roleClassNameForCostumeProperties != null)
-                        && (! this.roleClassNameForCostumeProperties.equals(this.roleClassName.name))) {
-            this.costumeProperties = null;
+        if ((this.roleClassNameForCostumeFeatures != null)
+            && (!this.roleClassNameForCostumeFeatures.equals(this.roleClassName.name))) {
+            
+            this.costumeFeatures = null;
         }
 
-        if (this.costumeProperties == null) {
+        if (this.costumeFeatures == null) {
             try {
-                roleClassNameForCostumeProperties = this.roleClassName.name;
+                roleClassNameForCostumeFeatures = this.roleClassName.name;
                 Role dummyRole = AbstractRole.createRole(Itchy.getGame().resources, this.roleClassName);
-                this.costumeProperties = dummyRole.createCostumeProperties(this);
+                this.costumeFeatures = dummyRole.createCostumeFeatures(this);
             } catch (Exception e) {
                 e.printStackTrace();
-                this.costumeProperties = new CostumeProperties( this );
+                this.costumeFeatures = new CostumeFeatures(this);
             }
         }
-        return this.costumeProperties;
+        return this.costumeFeatures;
     }
 
     public Costume getExtendedFrom()
@@ -400,9 +385,8 @@ public class Costume implements Cloneable
     }
 
     /*
-     * public Font getFont( String name ) { FontResource resource =
-     * this.getFontResource(name); return resource == null ? null :
-     * resource.font; }
+     * public Font getFont( String name ) { FontResource resource = this.getFontResource(name); return resource == null
+     * ? null : resource.font; }
      */
 
     public List<TextStyle> getTextStyleChoices(String name)

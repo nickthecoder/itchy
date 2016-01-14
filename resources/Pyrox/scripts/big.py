@@ -2,7 +2,7 @@ from common import *
 
 from movable import Movable
 from part import Part
-from gridRole import GridRoleCostumeProperties
+from gridRole import GridRoleFeatures
 
 costumeProperties = ArrayList()
 costumeProperties.add( IntegerProperty( "width" ) )
@@ -173,10 +173,10 @@ class Big(Movable) :
             part.explode()
         self.explode()
 
-    def createCostumeProperties(self,costume) :
+    def createCostumeFeatures(self,costume) :
         return BigProperties(costume)
 
-class BigProperties(GridRoleCostumeProperties) :
+class BigProperties(GridRoleFeatures) :
 
     def __init__(self,costume) :
         super(BigProperties,self).__init__(costume)

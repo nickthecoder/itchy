@@ -2,7 +2,7 @@ from common import *
 from java.util import Random
 
 from faller import Faller
-from roundProperties import RoundProperties
+from roundFeatures import RoundFeatures
 
 properties = ArrayList()
 properties.add( IntegerProperty( "bees" ) )
@@ -46,7 +46,7 @@ class Beehive(Faller) :
         else :
             self.random = Random(self.randomSeed)
 
-        self.costumeProperties.update(self) # Its a roundedProperties
+        self.costumeFeatures.update(self) # Its a roundedProperties
         self.rolls = self.hasTag("roundedSE")
         self.detached = not self.rolls # The round hive is not detatched, the square one is.
             
@@ -169,8 +169,8 @@ class Beehive(Faller) :
         return True
 
 
-    def createCostumeProperties(self,costume) :
-        return RoundProperties(costume)
+    def createCostumeFeatures(self,costume) :
+        return RoundFeatures(costume)
 
 
     # Boiler plate code - no need to change this

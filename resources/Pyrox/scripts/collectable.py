@@ -1,7 +1,7 @@
 from common import *
 
 from gridRole import GridRole
-from roundProperties import RoundProperties
+from roundFeatures import RoundFeatures
 
 properties = ArrayList()
 
@@ -14,7 +14,7 @@ class Collectable(GridRole) :
         game.sceneDirector.collectablesRemaining += 1
         self.addTag("soft")
         
-        self.costumeProperties.update(self)
+        self.costumeFeatures.update(self)
 
 
     def onHalfInvaded( self, invader ) :
@@ -27,8 +27,8 @@ class Collectable(GridRole) :
             self.explode()
 
 
-    def createCostumeProperties(self,costume) :
-        return RoundProperties(costume)
+    def createCostumeFeatures(self,costume) :
+        return RoundFeatures(costume)
 
 
     # Boiler plate code - no need to change this

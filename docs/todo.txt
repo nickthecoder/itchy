@@ -1,8 +1,10 @@
 Current Tasks
 =============
 
-Fragment to keep the information about each fragments offset relative to the parent, so that an explosion can be
-created correctly, and yet have each fragment's offsets at its center.
+Remove one of Costume's duplicates : getProperties, getCostumeProperties.
+    CostumeProperties now has two meanings. Very bad!
+    Rename CostumeProperties to CostumeMetaData ? CostumeCustomisation ? CostumeFeatures ;-)
+
 
 Projectiles when a ming explodes
 
@@ -85,16 +87,10 @@ Pixelator has a bodge in it. Sometime it needs to add one to all the pixels.
 WTF is Animation.startExceptFirst ? Parallel certainly doesn't do anything sensible!
 	Used when merging two animations. Do it better!!!
 
-Role.animateAndTick
-	Replace with separate animate and tick methods.
-	Pause can then override both with empty values.
-
 Move GraphicsContext to the gui package? Is it used elsewhere (for stages?)
 
 Pyrox : gridRole.onBirth looks like rubbish. Is it called?
 Pyrox : gridRole.talk looks weird.
-
-Remove one of Costume's duplicates : getProperties, getCostumeProperties.
 
 Look at companion, it has font, font size and color. Why ????
     Check sub classes for get/set for font colour size etc. I think this is done now???

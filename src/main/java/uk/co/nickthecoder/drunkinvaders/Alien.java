@@ -9,7 +9,7 @@ import java.util.List;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Costume;
-import uk.co.nickthecoder.itchy.CostumeProperties;
+import uk.co.nickthecoder.itchy.CostumeFeatures;
 import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.animation.Eases;
 import uk.co.nickthecoder.itchy.animation.ScaleAnimation;
@@ -152,17 +152,17 @@ public class Alien extends Bouncy implements Shootable
     }
 
     @Override
-    public AlienCostumeProperties createCostumeProperties(Costume costume)
+    public AlienCostumeProperties createCostumeFeatures(Costume costume)
     {
         return new AlienCostumeProperties(costume);
     }
 
     AlienCostumeProperties getAlienCostumeProperties()
     {
-        return (AlienCostumeProperties) this.getActor().getCostume().getCostumeProperties();
+        return (AlienCostumeProperties) this.getActor().getCostume().getCostumeFeatures();
     }
 
-    public static class AlienCostumeProperties extends CostumeProperties
+    public static class AlienCostumeProperties extends CostumeFeatures
     {
         public Fragments fragments;
 

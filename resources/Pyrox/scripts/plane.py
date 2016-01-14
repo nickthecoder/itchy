@@ -2,7 +2,7 @@ from common import *
 
 from movable import Movable
 from dummy import Dummy
-from gridRole import GridRoleCostumeProperties
+from gridRole import GridRoleFeatures
 
 properties = ArrayList()
 
@@ -19,7 +19,7 @@ class Plane(Movable) :
     def onBirth(self):
         super(Plane,self).onBirth()
         self.rolls = False
-        self.costumeProperties.update(self)
+        self.costumeFeatures.update(self)
         self.squash = "squashE" if self.direction == 1 else "squashW"
         self.speed  = 10
 
@@ -102,8 +102,8 @@ class Plane(Movable) :
             self.dummy.move(dx, dy, speed)
         
 
-    def createCostumeProperties(self,costume) :
-        return PlaneProperties(costume)
+    def createCostumeFeatures(self,costume) :
+        return PlaneFeatures(costume)
 
 
     # Boiler plate code - no need to change this
@@ -115,10 +115,10 @@ class Plane(Movable) :
         return ClassName( Role, self.__module__ + ".py" )
 
 
-class PlaneProperties(GridRoleCostumeProperties) :
+class PlaneFeatures(GridRoleFeatures) :
 
     def __init__(self,costume) :
-        super(PlaneProperties,self).__init__(costume)
+        super(PlaneFeatures,self).__init__(costume)
         self.headingLeft = True
 
     def update( self, role ) :

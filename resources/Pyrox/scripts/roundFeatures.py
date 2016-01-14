@@ -1,6 +1,6 @@
 from common import *
 
-from gridRole import GridRoleCostumeProperties
+from gridRole import GridRoleFeatures
 
 costumeProperties = ArrayList()
 costumeProperties.add( BooleanProperty( "roundedNE" ).label( "Rounded NE" ) )
@@ -8,10 +8,10 @@ costumeProperties.add( BooleanProperty( "roundedSE" ).label( "Rounded SE" ) )
 costumeProperties.add( BooleanProperty( "roundedSW" ).label( "Rounded SW" ) )
 costumeProperties.add( BooleanProperty( "roundedNW" ).label( "Rounded NW" ) )
 
-class RoundProperties(GridRoleCostumeProperties) :
+class RoundFeatures(GridRoleFeatures) :
 
     def __init__(self,costume) :
-        super(RoundProperties,self).__init__(costume)
+        super(RoundFeatures,self).__init__(costume)
 
         self.roundedNE = False
         self.roundedSE = False

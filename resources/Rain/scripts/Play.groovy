@@ -108,7 +108,7 @@ public class Play extends PlainSceneDirector
     // Boiler plate code - no need to change this
     public ClassName getClassName()
     {
-        return new ClassName( CostumeProperties, "Play.groovy" )
+        return new ClassName( SceneDirector, "Play.groovy" )
     }
 }
 

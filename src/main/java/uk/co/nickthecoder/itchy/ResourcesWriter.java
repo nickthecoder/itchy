@@ -337,7 +337,7 @@ public class ResourcesWriter extends XMLWriter
 
     private void writeCostumeProperties( Costume costume ) throws XMLException
     {
-    	CostumeProperties cp = costume.getCostumeProperties();
+    	CostumeFeatures cp = costume.getCostumeFeatures();
     	if ( cp.getProperties().size() > 0 ) {
 	        this.beginTag("properties");
 	        writeProperties(cp);

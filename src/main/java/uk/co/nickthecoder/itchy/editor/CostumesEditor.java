@@ -11,7 +11,7 @@ import java.util.List;
 
 import uk.co.nickthecoder.itchy.AnimationResource;
 import uk.co.nickthecoder.itchy.Costume;
-import uk.co.nickthecoder.itchy.CostumeProperties;
+import uk.co.nickthecoder.itchy.CostumeFeatures;
 import uk.co.nickthecoder.itchy.CostumeResource;
 import uk.co.nickthecoder.itchy.FontResource;
 import uk.co.nickthecoder.itchy.ManagedSound;
@@ -310,14 +310,14 @@ public class CostumesEditor extends SubEditor<CostumeResource>
 
     private void createPropertiesGrid()
     {
-        CostumeProperties cp = this.currentResource.getCostume().getCostumeProperties();
-        List<Property<CostumeProperties, ?>> properties = cp.getProperties();
+        CostumeFeatures cp = this.currentResource.getCostume().getCostumeFeatures();
+        List<Property<CostumeFeatures, ?>> properties = cp.getProperties();
 
         GridLayout grid = new GridLayout(this.propertiesContainer, 2);
         this.propertiesContainer.clear();
         this.propertiesContainer.setLayout(grid);
         
-        for (Property<CostumeProperties, ?> property : properties) {
+        for (Property<CostumeFeatures, ?> property : properties) {
 
             try {
                 Component component = property.createComponent(cp, true);

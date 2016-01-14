@@ -2,13 +2,13 @@ from common import *
 
 from faller import Faller
 from movable import Movable
-import roundProperties
-from roundProperties import RoundProperties
+import roundFeatures
+from roundFeatures import RoundFeatures
 
 properties = ArrayList()
 
 costumeProperties = ArrayList()
-costumeProperties.addAll( roundProperties.costumeProperties )
+costumeProperties.addAll( roundFeatures.costumeProperties )
 costumeProperties.add( BooleanProperty( "headingLeft" ) )
 
 
@@ -24,7 +24,7 @@ class Car(Faller) :
     def onBirth(self):
         super(Car,self).onBirth()
         self.rolls = False
-        self.costumeProperties.update(self)
+        self.costumeFeatures.update(self)
 
         self.squash = "squashE" if self.direction == 1 else "squashW"
 
@@ -71,8 +71,8 @@ class Car(Faller) :
                 forward.onHit( self, dx, dy )
 
    
-    def createCostumeProperties(self,costume) :
-        return CarProperties(costume)
+    def createCostumeFeatures(self,costume) :
+        return CarFeatures(costume)
 
    
     # Boiler plate code - no need to change this
@@ -84,15 +84,15 @@ class Car(Faller) :
         return ClassName( Role, self.__module__ + ".py" )
 
 
-class CarProperties(RoundProperties) :
+class CarFeatures(RoundFeatures) :
 
     def __init__(self,costume) :
-        super(CarProperties,self).__init__(costume)
+        super(CarFeatures,self).__init__(costume)
         self.headingLeft = True
 
 
     def update(self, role) :
-        super(CarProperties,self).update(role)
+        super(CarFeatures,self).update(role)
         
         role.direction = -1 if self.headingLeft else 1
 

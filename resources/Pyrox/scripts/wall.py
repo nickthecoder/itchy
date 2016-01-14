@@ -1,13 +1,13 @@
 from common import *
 
 from gridRole import GridRole
-import roundProperties
-from roundProperties import RoundProperties
+import roundFeatures
+from roundFeatures import RoundFeatures
 
 properties = ArrayList()
 
 costumeProperties = ArrayList()
-costumeProperties.addAll( roundProperties.costumeProperties )
+costumeProperties.addAll( roundFeatures.costumeProperties )
 costumeProperties.add( BooleanProperty( "canExplode" ).label( "Can Explode" ) )
 
 
@@ -16,11 +16,11 @@ class Wall(GridRole) :
     def onBirth( self ) :
         super(Wall,self).onBirth()
         
-        self.costumeProperties.update(self)
+        self.costumeFeatures.update(self)
 
 
-    def createCostumeProperties(self,costume) :
-        return WallProperties(costume)
+    def createCostumeFeatures(self,costume) :
+        return WallFeatures(costume)
 
 
     # Boiler plate code - no need to change this
@@ -32,14 +32,14 @@ class Wall(GridRole) :
         return ClassName( Role, self.__module__ + ".py" )
 
 
-class WallProperties(RoundProperties) :
+class WallFeatures(RoundFeatures) :
 
     def __init__(self,costume) :
-        super(WallProperties,self).__init__(costume)
+        super(WallFeatures,self).__init__(costume)
         self.canExplode = True
 
     def update(self, role) :
-        super(WallProperties,self).update(role)
+        super(WallFeatures,self).update(role)
         
         role.tag( "explodable", self.canExplode )
 

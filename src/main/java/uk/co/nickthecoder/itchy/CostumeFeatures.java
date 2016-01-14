@@ -10,20 +10,20 @@ import java.util.List;
 import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.PropertySubject;
 
-public class CostumeProperties implements PropertySubject<CostumeProperties>, Cloneable
+public class CostumeFeatures implements PropertySubject<CostumeFeatures>, Cloneable
 {
     public Costume costume;
     
-	public CostumeProperties( Costume costume )
+	public CostumeFeatures( Costume costume )
 	{
 	    this.costume = costume;
 	}
 	
-	private final static List<Property<CostumeProperties, ?>> EMPTY_PROPERTIES =
-			new ArrayList<Property<CostumeProperties, ?>>();
+	private final static List<Property<CostumeFeatures, ?>> EMPTY_PROPERTIES =
+			new ArrayList<Property<CostumeFeatures, ?>>();
 	
 	@Override
-    public List<Property<CostumeProperties, ?>> getProperties()
+    public List<Property<CostumeFeatures, ?>> getProperties()
     {
 		return  EMPTY_PROPERTIES;
     }

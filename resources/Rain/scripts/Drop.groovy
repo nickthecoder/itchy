@@ -3,8 +3,6 @@ import uk.co.nickthecoder.itchy.property.*
 import uk.co.nickthecoder.itchy.role.*
 import uk.co.nickthecoder.itchy.util.*
 
-import DropProperties;
-
 class Drop extends AbstractRole
 {
     public static properties = new ArrayList()
@@ -29,7 +27,7 @@ class Drop extends AbstractRole
         
         // Each type of drop can got down the screen at different speed. The speedFactor is set from
         // the editor's "Costumes" page, in the "Properties" section.
-        speedFactor = costumeProperties.speedFactor
+        speedFactor = costumeFeatures.speedFactor
         speed = Itchy.game.sceneDirector.speed * speedFactor
     }
 
@@ -58,10 +56,10 @@ class Drop extends AbstractRole
         }
     }
 
-    public CostumeProperties createCostumeProperties(Costume costume)
+    public CostumeFeatures createCostumeFeatures(Costume costume)
     {
         print "Creating drop properties"
-        return new DropProperties(costume)
+        return new DropFeatures(costume)
     }
 
     // Boiler plate code - no need to change this
@@ -75,5 +73,29 @@ class Drop extends AbstractRole
     {
         return new ClassName( Role, "Drop.groovy" )
     }
+}
+
+public class DropFeatures extends CostumeFeatures
+{
+    protected static properties = new ArrayList()
+    
+    static {
+        properties.add( new DoubleProperty( 'speedFactor' ) )
+    }
+    
+    def speedFactor = 1
+
+
+    DropFeatures( costume )
+    {
+        super(costume)
+    }
+
+    // Boiler plate code - no need to change this
+    public ArrayList getProperties()
+    {
+        return properties
+    }
+
 }
 
