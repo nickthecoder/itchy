@@ -58,9 +58,10 @@ class Drop extends AbstractRole
         }
     }
 
-    public CostumeProperties createCostumeProperties()
+    public CostumeProperties createCostumeProperties(Costume costume)
     {
-        return new DropProperties()
+        print "Creating drop properties"
+        return new DropProperties(costume)
     }
 
     // Boiler plate code - no need to change this

@@ -283,13 +283,7 @@ public class ResourcesReader
             } else {
                 throw new XMLException("Expected a subclass of Role : " + costume.roleClassName);
             }
-
-            for (Iterator<XMLTag> j = costumeTag.getTags("properties"); j.hasNext();) {
-                XMLTag propertiesTag = j.next();
-
-                readProperties(propertiesTag, costume.getCostumeProperties());
-            }
-
+            
             for (Iterator<XMLTag> j = costumeTag.getTags("pose"); j.hasNext();) {
                 XMLTag poseTag = j.next();
 
@@ -378,6 +372,12 @@ public class ResourcesReader
                 companionNames.add(companionName);
                 // Note, once all costumes have been loaded, costume.costumeStringChoices is
                 // used to build the actual map of CostumeResouuces.
+            }
+
+            for (Iterator<XMLTag> j = costumeTag.getTags("properties"); j.hasNext();) {
+                XMLTag propertiesTag = j.next();
+
+                readProperties(propertiesTag, costume.getCostumeProperties());
             }
 
             CostumeResource resource = new CostumeResource(this.resources, costumeName, costume);

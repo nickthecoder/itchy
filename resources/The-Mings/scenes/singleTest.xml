@@ -1,0 +1,113 @@
+<scene showMouse="true" role="play.py" background="#000055ff">
+  <properties>
+    <property name="limitsLeft" value="0"/>
+    <property name="limitsRight" value="2000"/>
+    <property name="limitsTop" value="1800"/>
+    <property name="limitsBottom" value="-800"/>
+  </properties>
+  <layer name="grid">
+    <actor costume="grass1" x="40" y="440" direction="0.0" heading="0.0" startEvent="default" zOrder="-1"/>
+    <actor costume="grass1" x="160" y="440" direction="0.0" heading="0.0" startEvent="default" zOrder="48"/>
+    <actor costume="grass1" x="280" y="440" direction="0.0" heading="0.0" startEvent="default" zOrder="48"/>
+    <actor costume="grass1" x="10" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="49"/>
+    <actor costume="grass1" x="130" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="50"/>
+    <actor costume="grass1" x="250" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="51"/>
+    <actor costume="grass1" x="370" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="52"/>
+    <actor costume="grass1" x="480" y="140" direction="0.0" heading="0.0" startEvent="default" zOrder="53"/>
+    <actor costume="grass1" x="600" y="140" direction="0.0" heading="0.0" startEvent="default" zOrder="54"/>
+    <actor costume="grass1" x="720" y="140" direction="0.0" heading="0.0" startEvent="default" zOrder="55"/>
+    <actor costume="grass1" x="510" y="410" direction="0.0" heading="0.0" startEvent="default" zOrder="56"/>
+    <actor costume="grass1" x="630" y="410" direction="0.0" heading="0.0" startEvent="default" zOrder="57"/>
+    <actor costume="grass1" x="400" y="440" direction="-15.439243328008896" heading="-15.439243328008896" startEvent="default" zOrder="58"/>
+    <actor costume="soil1" x="40" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="59"/>
+    <actor costume="soil1" x="40" y="400" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
+    <actor costume="soil1" x="160" y="400" direction="0.0" heading="0.0" startEvent="default" zOrder="61"/>
+    <actor costume="soil1" x="160" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="62"/>
+    <actor costume="soil1" x="280" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="63"/>
+    <actor costume="soil1" x="280" y="400" direction="0.0" heading="0.0" startEvent="default" zOrder="64"/>
+    <actor costume="soil1" x="40" y="380" direction="0.0" heading="0.0" startEvent="default" zOrder="65"/>
+    <actor costume="soil1" x="160" y="380" direction="0.0" heading="0.0" startEvent="default" zOrder="66"/>
+    <actor costume="soil1" x="280" y="380" direction="0.0" heading="0.0" startEvent="default" zOrder="67"/>
+    <actor costume="soil1" x="500" y="400" direction="0.0" heading="0.0" startEvent="default" zOrder="68"/>
+    <actor costume="soil1" x="340" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="69"/>
+    <actor costume="soil1" x="500" y="380" direction="0.0" heading="0.0" startEvent="default" zOrder="70"/>
+    <actor costume="soil1" x="620" y="380" direction="0.0" heading="0.0" startEvent="default" zOrder="71"/>
+    <actor costume="soil1" x="620" y="400" direction="0.0" heading="0.0" startEvent="default" zOrder="72"/>
+    <actor costume="soil1" x="860" y="390" direction="0.0" heading="0.0" startEvent="default" zOrder="73"/>
+    <actor costume="soil1" x="740" y="390" direction="0.0" heading="0.0" startEvent="default" zOrder="75"/>
+    <actor costume="soil1" x="740" y="370" direction="0.0" heading="0.0" startEvent="default" zOrder="76"/>
+    <actor costume="soil1" x="10" y="220" direction="0.0" heading="0.0" startEvent="default" zOrder="77"/>
+    <actor costume="soil1" x="10" y="200" direction="0.0" heading="0.0" startEvent="default" zOrder="78"/>
+    <actor costume="soil1" x="130" y="220" direction="0.0" heading="0.0" startEvent="default" zOrder="79"/>
+    <actor costume="soil1" x="130" y="200" direction="0.0" heading="0.0" startEvent="default" zOrder="80"/>
+    <actor costume="soil1" x="250" y="220" direction="0.0" heading="0.0" startEvent="default" zOrder="81"/>
+    <actor costume="soil1" x="250" y="200" direction="0.0" heading="0.0" startEvent="default" zOrder="82"/>
+    <actor costume="soil1" x="370" y="220" direction="0.0" heading="0.0" startEvent="default" zOrder="83"/>
+    <actor costume="soil1" x="370" y="200" direction="0.0" heading="0.0" startEvent="default" zOrder="84"/>
+    <actor costume="soil1" x="10" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="85"/>
+    <actor costume="soil1" x="10" y="140" direction="0.0" heading="0.0" startEvent="default" zOrder="86"/>
+    <actor costume="soil1" x="130" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="87"/>
+    <actor costume="soil1" x="10" y="160" direction="0.0" heading="0.0" startEvent="default" zOrder="88"/>
+    <actor costume="soil1" x="10" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="89"/>
+    <actor costume="grass1" x="860" y="410" direction="9.450985780898353" heading="9.450985780898353" startEvent="default" zOrder="90"/>
+    <actor costume="grass1" x="844" y="140" direction="0.0" heading="0.0" startEvent="default" zOrder="91"/>
+    <actor costume="soil1" x="860" y="370" direction="0.0" heading="0.0" startEvent="default" zOrder="92"/>
+    <actor costume="grass1" x="967" y="140" direction="0.0" heading="0.0" startEvent="default" zOrder="92"/>
+    <actor costume="grass1" x="750" y="410" direction="0.0" heading="0.0" startEvent="default" zOrder="93"/>
+    <actor costume="soil1" x="400" y="400" direction="0.0" heading="0.0" startEvent="default" zOrder="96"/>
+    <actor costume="soil1" x="400" y="380" direction="0.0" heading="0.0" startEvent="default" zOrder="97"/>
+    <actor costume="grass1" x="960" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="99"/>
+    <actor costume="grass1" x="850" y="250" direction="25.016893478100023" heading="25.016893478100023" startEvent="default" zOrder="100"/>
+    <actor costume="grass1" x="1080" y="300" direction="14.979302174484777" heading="14.979302174484777" startEvent="default" zOrder="101"/>
+    <actor costume="grass1" x="1420" y="580" direction="0.0" heading="0.0" startEvent="default" zOrder="102" scale="2.7840000000000003"/>
+    <actor costume="soil1" x="1370" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="103"/>
+    <actor costume="soil1" x="1370" y="390" direction="0.0" heading="0.0" startEvent="default" zOrder="104"/>
+    <actor costume="soil1" x="1370" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="105"/>
+    <actor costume="soil1" x="1370" y="450" direction="0.0" heading="0.0" startEvent="default" zOrder="106"/>
+    <actor costume="soil1" x="1370" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="107"/>
+    <actor costume="soil1" x="1370" y="510" direction="0.0" heading="0.0" startEvent="default" zOrder="108"/>
+    <actor costume="grass1" x="980" y="580" direction="0.0" heading="0.0" startEvent="default" zOrder="109"/>
+    <actor costume="soil1" x="50" y="550" direction="0.0" heading="0.0" startEvent="default" zOrder="111"/>
+    <actor costume="soil1" x="60" y="660" direction="0.0" heading="0.0" startEvent="default" zOrder="112"/>
+    <actor costume="grass1" x="730" y="250" direction="0.0" heading="0.0" startEvent="default" zOrder="113"/>
+    <actor costume="soil1" x="270" y="790" direction="0.0" heading="0.0" startEvent="default" zOrder="114"/>
+    <actor costume="soil1" x="150" y="790" direction="0.0" heading="0.0" startEvent="default" zOrder="115"/>
+    <actor costume="soil1" x="180" y="660" direction="0.0" heading="0.0" startEvent="default" zOrder="116"/>
+    <actor costume="soil1" x="-70" y="550" direction="0.0" heading="0.0" startEvent="default" zOrder="117"/>
+    <actor costume="soil1" x="120" y="540" direction="-58.392497753751094" heading="-58.392497753751094" startEvent="default" zOrder="118"/>
+    <actor costume="grass1" x="620" y="410" direction="14.979302174484777" heading="14.979302174484777" startEvent="default" zOrder="119"/>
+    <actor costume="grass1" x="1200" y="330" direction="0.0" heading="0.0" startEvent="default" zOrder="120"/>
+    <actor costume="grass1" x="830" y="480" direction="14.979302174484777" heading="14.979302174484777" startEvent="default" zOrder="121"/>
+    <actor costume="grass1" x="710" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="122"/>
+    <actor costume="grass1" x="1170" y="470" direction="14.979302174484777" heading="14.979302174484777" startEvent="default" zOrder="123"/>
+    <actor costume="grass1" x="1290" y="500" direction="0.0" heading="0.0" startEvent="default" zOrder="124"/>
+    <actor costume="grass1" x="1050" y="470" direction="0.0" heading="0.0" startEvent="default" zOrder="125"/>
+    <actor costume="grass1" x="930" y="470" direction="0.0" heading="0.0" startEvent="default" zOrder="126"/>
+    <actor costume="grass1" x="710" y="590" direction="0.0" heading="0.0" startEvent="default" zOrder="127"/>
+    <actor costume="grass1" x="830" y="590" direction="26.11182742159632" heading="26.11182742159632" startEvent="default" zOrder="128"/>
+    <actor costume="grass1" x="710" y="730" direction="0.0" heading="0.0" startEvent="default" zOrder="129"/>
+    <actor costume="grass1" x="830" y="730" direction="41.373396173752624" heading="41.373396173752624" startEvent="default" zOrder="130"/>
+    <actor costume="grass1" x="620" y="810" direction="-42.88464260054319" heading="-42.88464260054319" startEvent="default" zOrder="131"/>
+    <actor costume="grass1" x="1180" y="470" direction="0.0" heading="0.0" startEvent="default" zOrder="132"/>
+  </layer>
+  <layer name="main">
+    <actor costume="entrance1" x="545" y="634" direction="0.0" heading="0.0" startEvent="default" zOrder="90">
+      <property name="offsetY" value="-300"/>
+      <property name="offsetX" value="0"/>
+      <property name="period" value="2.0"/>
+      <property name="mings" value="0"/>
+    </actor>
+    <actor costume="ming" x="767" y="489" direction="0.0" heading="0.0" startEvent="default" zOrder="91">
+      <property name="umbrella" value="false"/>
+      <property name="initialJob" value=""/>
+    </actor>
+    <actor costume="ming" x="752" y="601" direction="0.0" heading="0.0" startEvent="default" zOrder="92">
+      <property name="umbrella" value="false"/>
+      <property name="initialJob" value=""/>
+    </actor>
+    <actor costume="ming" x="747" y="740" direction="0.0" heading="0.0" startEvent="default" zOrder="93">
+      <property name="umbrella" value="false"/>
+      <property name="initialJob" value=""/>
+    </actor>
+  </layer>
+</scene>

@@ -19,8 +19,8 @@ class Wall(GridRole) :
         self.costumeProperties.update(self)
 
 
-    def createCostumeProperties(self) :
-        return WallProperties()
+    def createCostumeProperties(self,costume) :
+        return WallProperties(costume)
 
 
     # Boiler plate code - no need to change this
@@ -34,8 +34,8 @@ class Wall(GridRole) :
 
 class WallProperties(RoundProperties) :
 
-    def __init__(self) :
-        super(WallProperties,self).__init__()
+    def __init__(self,costume) :
+        super(WallProperties,self).__init__(costume)
         self.canExplode = True
 
     def update(self, role) :

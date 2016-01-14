@@ -12,6 +12,7 @@ import java.util.Random;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Role;
+import uk.co.nickthecoder.itchy.extras.Fragments;
 
 /**
  * Creates many particles from a central point, spreading outwards. This is typically used when an actor is destroyed.
@@ -93,6 +94,8 @@ public class Explosion extends Companion
 
     public boolean dependent = false;
 
+    public Fragments fragments;
+    
     private int toSkip = 0;
 
     /**
@@ -168,16 +171,34 @@ public class Explosion extends Companion
             projectile.fade = this.fade + random.nextDouble() * this.randomFade;
 
             double actualHeading = this.spreadFrom;
-            if (this.randomSpread) {
-                actualHeading += +random.nextDouble() * (this.spreadTo - this.spreadFrom);
-            } else {
-                actualHeading += (this.spreadTo - this.spreadFrom) / this.totalProjectiles * this.projectileCounter;
-            }
-            if (this.rotate) {
-                projectileBuilder.direction(this.direction + random.nextDouble() * this.randomDirection);
+            if ( fragments == null) {
+                if (this.randomSpread) {
+                    actualHeading += +random.nextDouble() * (this.spreadTo - this.spreadFrom);
+                } else {
+                    actualHeading += (this.spreadTo - this.spreadFrom) / this.totalProjectiles * this.projectileCounter;
+                }
+                if (this.rotate) {
+                    projectileBuilder.direction(this.direction + random.nextDouble() * this.randomDirection);
+                }
             }
             projectileBuilder.offsetForwards(random.nextDouble() * this.randomOffsetForwards);
             projectileBuilder.offsetSidewards(random.nextDouble() * this.randomOffsetSidewards);
+
+            Actor actor = projectileBuilder.create().getActor();
+            if (this.pose != null) {
+                actor.getAppearance().setPose(this.pose);
+            }
+
+            if (this.fragments != null) {
+                // For useFragment to work, we must be heading in the direction of the source actor's
+                // direction.
+                // double tmpHeading = actor.getHeading();
+                actor.setDirection(this.source.getDirection());
+                this.fragments.useFragment(actor);
+                actualHeading = 180 + actor.directionOf(this.source);
+            }
+
+            actor.setHeading(actualHeading);
 
             // Do speed and randomSpeed
             if ((this.speedForwards != 0) || (this.speedSidewards != 0) || (this.randomSpeedForwards != 0) ||
@@ -194,12 +215,6 @@ public class Explosion extends Companion
 
             }
 
-            Actor actor = projectileBuilder.create().getActor();
-            if (this.pose != null) {
-                actor.getAppearance().setPose(this.pose);
-            }
-
-            actor.setHeading(actualHeading);
             actor.moveForwards(this.distance + random.nextDouble() * this.randomDistance);
 
             this.projectileCounter++;
@@ -340,7 +355,7 @@ public class Explosion extends Companion
 
         /**
          * Randomly spin the projectiles. Note that the spin is calculated once for each projectile. It is typical to use
-         * <code>spin( -N, N )</code> so that the projectiles, where N defines the maximum speed of rotation.
+         * <code>spin( -N, N )</code>, where N defines the maximum speed of rotation.
          * 
          * @param from
          *        The lowest number of degrees to turn the projectiles each frame.
@@ -625,6 +640,15 @@ public class Explosion extends Companion
         public B dependent( boolean value )
         {
             this.companion.dependent = value;
+            return getThis();
+        }
+        
+        public B fragments( Fragments fragments )
+        {
+            this.companion.fragments = fragments;
+            this.projectiles( fragments.getPieceCount() );
+            this.companion.spreadFrom = 0; 
+            this.companion.spreadTo = 0; // We'll use the fragments offsets to work out the heading. 
             return getThis();
         }
         

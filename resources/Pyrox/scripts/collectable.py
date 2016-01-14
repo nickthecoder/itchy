@@ -27,8 +27,8 @@ class Collectable(GridRole) :
             self.explode()
 
 
-    def createCostumeProperties(self) :
-        return RoundProperties()
+    def createCostumeProperties(self,costume) :
+        return RoundProperties(costume)
 
 
     # Boiler plate code - no need to change this

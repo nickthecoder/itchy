@@ -8,10 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.Actor;
+import uk.co.nickthecoder.itchy.Costume;
+import uk.co.nickthecoder.itchy.CostumeProperties;
 import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.animation.Eases;
 import uk.co.nickthecoder.itchy.animation.ScaleAnimation;
-import uk.co.nickthecoder.itchy.extras.Fragment;
+import uk.co.nickthecoder.itchy.extras.Fragments;
 import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.DoubleProperty;
 import uk.co.nickthecoder.itchy.property.IntegerProperty;
@@ -26,10 +28,11 @@ public class Alien extends Bouncy implements Shootable
     protected static final List<Property<Role, ?>> properties = new ArrayList<Property<Role, ?>>();
 
     static {
+        properties.addAll(Bouncy.properties);
         properties.add(new DoubleProperty<Role>("fireOnceEvery").hint("seconds"));
         properties.add(new IntegerProperty<Role>("shotsRequired"));
     }
-    
+
     public static final String[] SHOOTABLE_LIST = new String[] { "shootable" };
 
     public double fireOnceEvery = 1.0; // Average duration between bombs in seconds
@@ -38,19 +41,18 @@ public class Alien extends Bouncy implements Shootable
 
     public boolean tock = true;
 
-
     @Override
     public List<Property<Role, ?>> getProperties()
     {
         return properties;
     }
-    
+
     @Override
     public void onBirth()
     {
         super.onBirth();
         DrunkInvaders.director.addAliens(1);
-        new Fragment().createPoses(getActor());
+        new Fragments().createPoses(getActor());
     }
 
     @Override
@@ -104,26 +106,19 @@ public class Alien extends Bouncy implements Shootable
     }
 
     @Override
-    public void shot( Actor bullet )
+    public void shot(Actor bullet)
     {
+        // Explode pieces outwards
+        new ExplosionBuilder(getActor()).fragments(getAlienCostumeProperties().fragments)
+            .fade(3).speed(1, 3, 0, 0)
+            .spin(-1, 1).create();
 
-        new ExplosionBuilder(getActor())
-            .projectiles(20)
-            .fade(3)
-            .speed(1, 3, 0, 0)
-            .eventName("fragment")
-            .distance(10 * getActor().getAppearance().getScale())
-            .scale(1)
-            .create();
-
+        // Particles exploding outwards
         new ExplosionBuilder(getActor())
             .projectiles(40).projectilesPerTick(10)
             .offsetForwards(-10, 10).offsetSidewards(-10, 10)
             .distance(10 * getActor().getAppearance().getScale())
-            .speed(5, 9, 0, 0)
-            .fade(3)
-            .scale(1)
-            .eventName("pixel")
+            .speed(5, 9, 0, 0).fade(3).scale(1).eventName("pixel")
             .create();
 
         double scale = getActor().getAppearance().getScale();
@@ -141,16 +136,40 @@ public class Alien extends Bouncy implements Shootable
             return;
         }
 
+
         Actor yell = new TalkBuilder(getActor())
             .eventName("death").style("yell")
             .offset(0, 40).direction(0)
             .create().getActor();
+        
         yell.setCostume(getActor().getCostume());
-        yell.deathEvent("yell");
+        // TODO Do we want a deathEvent, or just and event?
+        //yell.deathEvent("yell");
 
-        removeAllTags();
         this.deathEvent("death");
+        removeAllTags();
 
     }
 
+    @Override
+    public AlienCostumeProperties createCostumeProperties(Costume costume)
+    {
+        return new AlienCostumeProperties(costume);
+    }
+
+    AlienCostumeProperties getAlienCostumeProperties()
+    {
+        return (AlienCostumeProperties) this.getActor().getCostume().getCostumeProperties();
+    }
+
+    public static class AlienCostumeProperties extends CostumeProperties
+    {
+        public Fragments fragments;
+
+        public AlienCostumeProperties(Costume costume)
+        {
+            super(costume);
+            this.fragments = new Fragments().create(costume.getPose("default"));
+        }
+    }
 }

@@ -9,8 +9,14 @@ public class DropProperties extends CostumeProperties
     static {
         properties.add( new DoubleProperty( 'speedFactor' ) )
     }
-
+    
     def speedFactor = 1
+
+
+    DropProperties( costume )
+    {
+        super(costume)
+    }
 
     // Boiler plate code - no need to change this
     public ArrayList getProperties()

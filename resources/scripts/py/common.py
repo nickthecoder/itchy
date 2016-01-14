@@ -14,7 +14,7 @@ from uk.co.nickthecoder.itchy.role import PlainRole, Button, ProgressBar
 from uk.co.nickthecoder.itchy.role import Companion, Follower, Explosion, OnionSkin, Projectile, Talk, TalkProjectile
 from uk.co.nickthecoder.itchy.role import FollowerBuilder, ExplosionBuilder, OnionSkinBuilder, ProjectileBuilder, TalkBuilder, TalkProjectileBuilder
 
-from uk.co.nickthecoder.itchy.extras import Timer, SceneTransition, SimpleMousePointer, Fragment, Pixelator
+from uk.co.nickthecoder.itchy.extras import Timer, SceneTransition, SimpleMousePointer, Fragments, Pixelator
 
 from uk.co.nickthecoder.itchy.property import BooleanProperty
 from uk.co.nickthecoder.itchy.property import ChoiceProperty

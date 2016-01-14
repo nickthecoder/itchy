@@ -30,7 +30,7 @@ public class Follower extends Companion
             follow();
         }
     }
-
+    
     public void follow()
     {
         getActor().moveTo(this.source);

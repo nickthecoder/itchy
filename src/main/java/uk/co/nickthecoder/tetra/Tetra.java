@@ -16,7 +16,7 @@ import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Actor.AnimationEvent;
 import uk.co.nickthecoder.itchy.Input;
 import uk.co.nickthecoder.itchy.Launcher;
-import uk.co.nickthecoder.itchy.extras.Fragment;
+import uk.co.nickthecoder.itchy.extras.Fragments;
 import uk.co.nickthecoder.itchy.extras.Timer;
 import uk.co.nickthecoder.itchy.role.ExplosionBuilder;
 import uk.co.nickthecoder.itchy.role.PlainRole;
@@ -366,7 +366,7 @@ public class Tetra extends AbstractDirector
 
     private void kill( Actor actor )
     {
-        new Fragment()
+        new Fragments()
             .pieces(5)
             .createPoses(actor);
 

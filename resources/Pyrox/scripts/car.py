@@ -71,8 +71,8 @@ class Car(Faller) :
                 forward.onHit( self, dx, dy )
 
    
-    def createCostumeProperties(self) :
-        return CarProperties()
+    def createCostumeProperties(self,costume) :
+        return CarProperties(costume)
 
    
     # Boiler plate code - no need to change this
@@ -86,8 +86,8 @@ class Car(Faller) :
 
 class CarProperties(RoundProperties) :
 
-    def __init__(self) :
-        super(CarProperties,self).__init__()
+    def __init__(self,costume) :
+        super(CarProperties,self).__init__(costume)
         self.headingLeft = True
 
 

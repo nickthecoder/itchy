@@ -24,6 +24,8 @@ public class Mothership extends Alien
     protected static final List<Property<Role, ?>> properties = new ArrayList<Property<Role, ?>>();
 
     static {
+        properties.addAll( Alien.properties );
+        
         properties.add(new IntegerProperty<Role>("childrenCount"));
         properties.add(new StringProperty<Role>("costumeName").label("Childrens' Costume"));
         properties.add(new DoubleProperty<Role>("birthInterval").hint("seconds"));

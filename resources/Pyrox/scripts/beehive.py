@@ -169,8 +169,8 @@ class Beehive(Faller) :
         return True
 
 
-    def createCostumeProperties(self) :
-        return RoundProperties()
+    def createCostumeProperties(self,costume) :
+        return RoundProperties(costume)
 
 
     # Boiler plate code - no need to change this

@@ -10,7 +10,7 @@ import java.util.List;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Input;
 import uk.co.nickthecoder.itchy.Role;
-import uk.co.nickthecoder.itchy.extras.Fragment;
+import uk.co.nickthecoder.itchy.extras.Fragments;
 import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.DoubleProperty;
 import uk.co.nickthecoder.itchy.role.ExplosionBuilder;
@@ -26,7 +26,7 @@ public class Ship extends Bouncy implements Shootable
 
     static {
         properties.add(new DoubleProperty<Role>("ox").label("Planet's Center X"));
-        properties.add(new DoubleProperty<Role>("ox").label("Planet's Center Y"));
+        properties.add(new DoubleProperty<Role>("oy").label("Planet's Center Y"));
         properties.add(new DoubleProperty<Role>("rotationSpeed"));
         properties.add(new DoubleProperty<Role>("shieldRechargeRate"));
         properties.add(new DoubleProperty<Role>("shieldDischargeRate"));
@@ -37,6 +37,8 @@ public class Ship extends Bouncy implements Shootable
     private static final int SHIELD_POSE_COUNT = 7;
 
     public static final String[] DEADLY_LIST = new String[] { "deadly" };
+
+    private Fragments fragments;
 
     public double ox = 320;
 
@@ -71,6 +73,8 @@ public class Ship extends Bouncy implements Shootable
 
     protected Input inputFire;
 
+    protected Input inputDie;
+
     @Override
     public List<Property<Role, ?>> getProperties()
     {
@@ -93,12 +97,13 @@ public class Ship extends Bouncy implements Shootable
         turn(0); // calculates the direction
 
         // Create the fragments for the explosions when I get shot.
-        new Fragment().createPoses(getActor());
+        fragments = new Fragments().create( getActor().getCostume() );
 
         this.inputLeft = Input.find("left");
         this.inputRight = Input.find("right");
         this.inputShield = Input.find("shield");
         this.inputFire = Input.find("fire");
+        this.inputDie = Input.find("die");
     }
 
     @Override
@@ -116,6 +121,10 @@ public class Ship extends Bouncy implements Shootable
     @Override
     public void tick()
     {
+        if (this.inputDie.pressed()) {
+            this.shot(this.getActor());
+            return;
+        }
 
         if (this.inputShield.pressed()) {
             if (!this.shielded) {
@@ -177,11 +186,9 @@ public class Ship extends Bouncy implements Shootable
         double oldDirection = getActor().getHeading();
 
         this.angle += speed;
-
         getActor().setDirectionRadians(this.angle);
         getActor().setX(this.radius * Math.cos(this.angle) + this.ox);
         getActor().setY(this.radius * Math.sin(this.angle) + this.oy);
-
         if (!getActor().getAppearance().getWorldRectangle().within(DrunkInvaders.director.worldBounds)) {
             this.angle -= speed;
             getActor().moveTo(oldX, oldY);
@@ -265,8 +272,7 @@ public class Ship extends Bouncy implements Shootable
         yell.setCostume(getActor().getCostume());
         yell.deathEvent("shout");
 
-        new ExplosionBuilder(getActor()).projectiles(20).speed(0.3, 0.9, 0, 0).fade(2).spin(-0.2, 0.2)
-                        .eventName("fragment").create();
+        new ExplosionBuilder(getActor()).speed(1.5, 1.6, 0, 0).fade(2).spin(-0.4, 0.4).fragments(fragments).create();
 
         new ExplosionBuilder(getActor()).projectiles(40).offsetForwards(-10, 10).offsetSidewards(-10, 10)
                         .speed(1, 3, 0, 0).fade(2).eventName("pixel").create();

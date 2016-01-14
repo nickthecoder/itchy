@@ -92,8 +92,8 @@ class Rock(Moving) :
         self.removeTag("shootable")
     
     
-    def createCostumeProperties( self ) :
-        return RockProperties()
+    def createCostumeProperties( self, costume ) :
+        return RockProperties(costume)
 
 
     # Boiler plate code - no need to change this
@@ -107,7 +107,8 @@ class Rock(Moving) :
 
 class RockProperties(CostumeProperties) :
 
-    def __init__(self) :
+    def __init__(self, costume) :
+        CostumeProperties.__init__(self,costume)
         self.pieces = 0
         self.points = 1    
         self.strength = 1    

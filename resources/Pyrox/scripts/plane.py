@@ -2,6 +2,7 @@ from common import *
 
 from movable import Movable
 from dummy import Dummy
+from gridRole import GridRoleCostumeProperties
 
 properties = ArrayList()
 
@@ -101,8 +102,8 @@ class Plane(Movable) :
             self.dummy.move(dx, dy, speed)
         
 
-    def createCostumeProperties(self) :
-        return PlaneProperties()
+    def createCostumeProperties(self,costume) :
+        return PlaneProperties(costume)
 
 
     # Boiler plate code - no need to change this
@@ -114,9 +115,10 @@ class Plane(Movable) :
         return ClassName( Role, self.__module__ + ".py" )
 
 
-class PlaneProperties(CostumeProperties) :
+class PlaneProperties(GridRoleCostumeProperties) :
 
-    def __init__(self) :
+    def __init__(self,costume) :
+        super(PlaneProperties,self).__init__(costume)
         self.headingLeft = True
 
     def update( self, role ) :

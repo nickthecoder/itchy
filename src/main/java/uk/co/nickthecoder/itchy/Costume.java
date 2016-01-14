@@ -119,12 +119,11 @@ public class Costume implements Cloneable
             try {
                 roleClassNameForCostumeProperties = this.roleClassName.name;
                 Role dummyRole = AbstractRole.createRole(Itchy.getGame().resources, this.roleClassName);
-                this.costumeProperties = dummyRole.createCostumeProperties();
+                this.costumeProperties = dummyRole.createCostumeProperties(this);
             } catch (Exception e) {
                 e.printStackTrace();
-                this.costumeProperties = new CostumeProperties();
+                this.costumeProperties = new CostumeProperties( this );
             }
-            this.costumeProperties.setCostume( this );
         }
         return this.costumeProperties;
     }

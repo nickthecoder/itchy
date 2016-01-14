@@ -37,8 +37,8 @@ class Squash(GridRole) :
     def shove( self, pusher, dx, dy, speed ) :
         pass
         
-    def createCostumeProperties(self) :
-        return SquashProperties()
+    def createCostumeProperties(self,costume) :
+        return SquashProperties(costume)
 
 
     # Boiler plate code - no need to change this
@@ -52,8 +52,8 @@ class Squash(GridRole) :
 
 class SquashProperties(RoundProperties) :
 
-    def __init__(self) :
-        super(SquashProperties,self).__init__()
+    def __init__(self,costume) :
+        super(SquashProperties,self).__init__(costume)
         self.squashN = False
         self.squashE = False
         self.squashS = False

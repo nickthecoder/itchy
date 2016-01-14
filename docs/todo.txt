@@ -1,15 +1,18 @@
 Current Tasks
 =============
 
-Pyrox animations are borked.
-Drunk Invaders complains about too many instanaeious animations.
+Fragment to keep the information about each fragments offset relative to the parent, so that an explosion can be
+created correctly, and yet have each fragment's offsets at its center.
+
+Projectiles when a ming explodes
+
+Ming bacshers only bash twice?
 
 Use a sensible default for pixel detection threshold in actor and pixeldetection classes.
 
 Remaining Ming Jobs: Climbers, Miners, Leavers, Drowners, 
 
 Shrink the lookDown image - the original appears to be just one pixel.
-Projectiles when a ming explodes
 
 
 BUGS
@@ -34,9 +37,6 @@ Macro record/playback, useful for testing, and creating demos, and cheat modes.
     Record all input events for each tick
     Playback : Ignore real input events (except a special STOP input), and simulate the events instead.
     Load/Save a macro.
-
-Fragment to keep the information about each fragments offset relative to the parent, so that an explosion can be
-created correctly, and yet have each fragment's offsets at its center.
 
 ColoredFragment. Use another pose, to decide which pixels belong to each fragment.
     If the poses aren't the same size, then scale non blended.
@@ -73,6 +73,9 @@ On Info tab in the editor, have a "Open Folder" button, which opens the game's f
 
 Code Tidy Up
 ============
+
+Drunk invaders - every instance of Alien creates a Fragments.
+    Also, Alien doesn't use the new Fragments code, because it is needed one per Costume, and this is tricky within java.
 
 Pixelator has a bodge in it. Sometime it needs to add one to all the pixels.
 	Do a test, and see if the top row of pixels are blank for large scales, and if so,

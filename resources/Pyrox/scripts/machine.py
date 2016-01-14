@@ -1,4 +1,5 @@
 from common import *
+from gridRole import GridRoleCostumeProperties
 
 properties = ArrayList()
 
@@ -12,6 +13,7 @@ costumeProperties.add( IntegerProperty( "offsetY" ) )
 
 from gridRole import GridRole
 from dummy import Dummy
+from gridRole import GridRoleCostumeProperties
 
 class Machine(GridRole) :
 
@@ -93,8 +95,8 @@ class Machine(GridRole) :
             self.pulled = False
         
 
-    def createCostumeProperties(self) :
-        return MachineProperties()
+    def createCostumeProperties(self,costume) :
+        return MachineProperties(costume)
 
 
     # Boiler plate code - no need to change this
@@ -107,9 +109,10 @@ class Machine(GridRole) :
 
 
 
-class MachineProperties(CostumeProperties) :
+class MachineProperties(GridRoleCostumeProperties) :
 
-    def __init__(self) :
+    def __init__(self,costume) :
+        super(MachineProperties,self).__init__(costume)
         self.fromCostume = "carR"
         self.toCostume = "carL"
         self.enters = "E"

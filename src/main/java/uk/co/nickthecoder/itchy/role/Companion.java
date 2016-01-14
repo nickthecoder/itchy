@@ -71,8 +71,6 @@ public abstract class Companion extends AbstractRole {
 
 	/**
 	 * Creates a new Actor on the same stage as the source actor.
-	 * 
-	 * @return The Role for the newly created Actor.
 	 */
 	public Actor createActor() {
 		Actor actor = new Actor(this.costume);

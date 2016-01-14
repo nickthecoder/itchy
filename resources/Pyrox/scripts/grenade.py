@@ -1,6 +1,8 @@
 from common import *
 
 import gridRole
+from gridRole import GridRoleCostumeProperties
+
 from faller import Faller
 
 properties = ArrayList()
@@ -75,8 +77,8 @@ class Grenade(Faller) :
             self.fallen = not self.fallen
 
 
-    def createCostumeProperties(self) :
-        return GrenadeProperties()
+    def createCostumeProperties(self,costume) :
+        return GrenadeProperties(costume)
 
 
     # Boiler plate code - no need to change this
@@ -88,9 +90,10 @@ class Grenade(Faller) :
         return ClassName( Role, self.__module__ + ".py" )
 
 
-class GrenadeProperties(CostumeProperties) :
+class GrenadeProperties(GridRoleCostumeProperties) :
 
-    def __init__(self) :
+    def __init__(self,costume) :
+        super(GrenadeProperties,self).__init__(costume)
         self.fallen = False
 
     def update(self, role) :       

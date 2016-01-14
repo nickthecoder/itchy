@@ -25,7 +25,7 @@ class GridRole(AbstractRole) :
 
 
     def onBirth( self ) :
-        Fragment().pieces( 10 ).createPoses( self.actor )
+        Fragments().pieces( 10 ).createPoses( self.actor )
         self.addTag( "explodable" )
     
     def onAttach( self ) :
@@ -188,12 +188,17 @@ class GridRole(AbstractRole) :
         self.explode()
 
     def explode( self ) :        
-    
+        # TODO Explode using new fragments
         ExplosionBuilder(self.actor) \
-            .projectiles(10) \
-            .gravity(-0.2).fade(0.9, 3.5).speed(0.1, 1.5).vy(5) \
-            .pose("fragment") \
+            .fragments(self.actor.costume.costumeProperties.fragments) \
+            .speed(2.0,0,3.5,0).fade(3).spin(-0.5,0.5) \
             .create()
+        
+        #ExplosionBuilder(self.actor) \
+        #    .projectiles(10) \
+        #    .gravity(-0.2).fade(0.9, 3.5).speed(0.1, 1.5).vy(5) \
+        #    .pose("fragment") \
+        #    .create()
 
         self.actor.deathEvent("explode")
 
@@ -272,6 +277,9 @@ class GridRole(AbstractRole) :
         return [0,1,0,-1][direction]
 
 
+    def createCostumeProperties( self, costume ) :
+        return GridRoleCostumeProperties(costume)
+
     # Boiler plate code - no need to change this
     def getProperties(self):
         return properties
@@ -288,4 +296,12 @@ class GridRole(AbstractRole) :
         return self.__class__.__name__ + " @ " + str(self.square.x) + "," + str(self.square.y)
 
     
+class GridRoleCostumeProperties(CostumeProperties) :
+
+    def __init__(self,costume) :
+        CostumeProperties.__init__(self,costume)
+
+        pose = costume.getPose("default")
+        if pose is not None :
+            self.fragments = Fragments().pieces(20).create(pose)
 

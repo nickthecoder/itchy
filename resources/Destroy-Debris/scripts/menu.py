@@ -21,7 +21,7 @@ class Menu(PlainSceneDirector) :
     def onKeyDown(self,event) :
     
         if self.inputStart.matches(event) :
-            director.startGame()
+            game.startScene("easy-1")
             
         elif self.inputMenu.matches(event) :
             game.startScene("menu")

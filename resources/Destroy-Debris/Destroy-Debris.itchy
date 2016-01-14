@@ -1,12 +1,6 @@
 <resources>
-  <game resizable="false" title="Destroy Debris" width="800" height="600" initialScene="menu" directorClassName="director.py"/>
-  <fonts>
-    <font name="BlackCasper" filename="fonts/BlackCasper/BlackCasper.ttf"/>
-    <font name="Boycott" filename="fonts/Boycott/Boycott.ttf"/>
-    <font name="Vera" filename="fonts/Vera/Vera.ttf"/>
-    <font name="VeraBold" filename="fonts/Vera/VeraBd.ttf"/>
-  </fonts>
-  <ninePatches/>
+  <game title="Destroy Debris" width="800" height="600" resizable="false" initialScene="menu" directorClassName="director.py"/>
+  <spriteSheets/>
   <poses>
     <pose name="bullet1" filename="images/bullet1.png"/>
     <pose name="bullet2" filename="images/bullet2.png"/>
@@ -85,6 +79,13 @@
     <pose name="texture2" filename="images/texture2.jpg"/>
     <pose name="warp" filename="images/warp.png"/>
   </poses>
+  <ninePatches/>
+  <fonts>
+    <font name="BlackCasper" filename="fonts/BlackCasper/BlackCasper.ttf"/>
+    <font name="Boycott" filename="fonts/Boycott/Boycott.ttf"/>
+    <font name="Vera" filename="fonts/Vera/Vera.ttf"/>
+    <font name="VeraBold" filename="fonts/Vera/VeraBd.ttf"/>
+  </fonts>
   <sounds>
     <sound name="ding" filename="sounds/ding.ogg"/>
     <sound name="explode" filename="sounds/explode.ogg"/>
@@ -100,171 +101,171 @@
   </sounds>
   <animations>
     <animation name="bullet1">
-      <parallel loops="1" sequence="false">
-        <sequence loops="1" sequence="true">
-          <alpha ease="linear" target="255.0" ticks="30"/>
-          <alpha ease="linear" target="0.0" ticks="10"/>
+      <parallel sequence="false" loops="1">
+        <sequence sequence="true" loops="1">
+          <alpha target="255.0" ticks="30" ease="linear"/>
+          <alpha target="0.0" ticks="10" ease="linear"/>
         </sequence>
-        <forwards customAngle="0.0" ease="linear" forwards="400.0" sidewards="0.0" ticks="40" using="HEADING"/>
+        <forwards forwards="400.0" sidewards="0.0" using="HEADING" customAngle="0.0" ticks="40" ease="linear"/>
       </parallel>
     </animation>
     <animation name="buttonDown">
-      <sequence loops="1" sequence="true">
-        <scale ease="easeOutBack" target="2.0" ticks="20"/>
+      <sequence sequence="true" loops="1">
+        <scale target="2.0" ticks="20" ease="easeOutBack"/>
       </sequence>
     </animation>
     <animation name="buttonFadeIn">
-      <sequence loops="1" sequence="true">
-        <scale ease="linear" target="0.1" ticks="0"/>
-        <parallel loops="1" sequence="false">
-          <scale ease="easeOutBack" target="1.0" ticks="60"/>
+      <sequence sequence="true" loops="1">
+        <scale target="0.1" ticks="0" ease="linear"/>
+        <parallel sequence="false" loops="1">
+          <scale target="1.0" ticks="60" ease="easeOutBack"/>
         </parallel>
       </sequence>
     </animation>
     <animation name="buttonHoverOut">
-      <parallel loops="1" sequence="false">
-        <turnto direction="0.0" ease="linear" longWay="false" ticks="10"/>
-        <scale ease="linear" target="1.0" ticks="10"/>
+      <parallel sequence="false" loops="1">
+        <turnto direction="0.0" longWay="false" ticks="10" ease="linear"/>
+        <scale target="1.0" ticks="10" ease="linear"/>
       </parallel>
     </animation>
     <animation name="buttonHoverOver">
-      <parallel loops="1" sequence="false">
-        <turnto direction="0.0" ease="easeInOutCirc" longWay="true" ticks="30"/>
-        <scale ease="easeOutBack" target="1.5" ticks="30"/>
+      <parallel sequence="false" loops="1">
+        <turnto direction="0.0" longWay="true" ticks="30" ease="easeInOutCirc"/>
+        <scale target="1.5" ticks="30" ease="easeOutBack"/>
       </parallel>
     </animation>
     <animation name="buttonUp">
-      <sequence loops="1" sequence="true">
-        <scale ease="linear" target="1.0" ticks="10"/>
+      <sequence sequence="true" loops="1">
+        <scale target="1.0" ticks="10" ease="linear"/>
       </sequence>
     </animation>
     <animation name="fadeIn">
-      <sequence loops="1" sequence="true">
-        <parallel loops="1" sequence="false">
-          <scale ease="linear" target="0.1" ticks="1"/>
-          <alpha ease="linear" target="1.0" ticks="1"/>
+      <sequence sequence="true" loops="1">
+        <parallel sequence="false" loops="1">
+          <scale target="0.1" ticks="1" ease="linear"/>
+          <alpha target="1.0" ticks="1" ease="linear"/>
         </parallel>
-        <parallel loops="1" sequence="false">
-          <alpha ease="linear" target="255.0" ticks="120"/>
-          <scale ease="linear" target="1.0" ticks="60"/>
+        <parallel sequence="false" loops="1">
+          <alpha target="255.0" ticks="120" ease="linear"/>
+          <scale target="1.0" ticks="60" ease="linear"/>
         </parallel>
       </sequence>
     </animation>
     <animation name="fadeOut">
-      <sequence loops="1" sequence="true">
-        <alpha ease="linear" target="0.0" ticks="20"/>
+      <sequence sequence="true" loops="1">
+        <alpha target="0.0" ticks="20" ease="linear"/>
       </sequence>
     </animation>
     <animation name="gameOverReveal">
-      <sequence loops="1" sequence="true">
-        <alpha ease="linear" target="0.0" ticks="0"/>
-        <alpha ease="easeInOut" target="148.0" ticks="30"/>
+      <sequence sequence="true" loops="1">
+        <alpha target="0.0" ticks="0" ease="linear"/>
+        <alpha target="148.0" ticks="30" ease="easeInOut"/>
       </sequence>
     </animation>
     <animation name="hoverOut">
-      <parallel loops="1" sequence="false">
-        <scale ease="linear" target="1.0" ticks="10"/>
-        <color ease="linear" targetColor="#231a9eff" ticks="10"/>
+      <parallel sequence="false" loops="1">
+        <scale target="1.0" ticks="10" ease="linear"/>
+        <color targetColor="#231a9eff" ticks="10" ease="linear"/>
       </parallel>
     </animation>
     <animation name="hoverOver">
-      <parallel loops="1" sequence="false">
-        <color ease="easeOutCubic" targetColor="#8300dbff" ticks="30"/>
-        <scale ease="linear" target="1.0" ticks="10"/>
+      <parallel sequence="false" loops="1">
+        <color targetColor="#8300dbff" ticks="30" ease="easeOutCubic"/>
+        <scale target="1.0" ticks="10" ease="linear"/>
       </parallel>
     </animation>
     <animation name="lifeAppear">
-      <sequence loops="1" sequence="true">
-        <move ease="linear" ticks="0" dx="0.0" dy="120.0"/>
-        <move ease="linear" ticks="30" dx="0.0" dy="-60.0"/>
-        <move ease="bounce2" ticks="30" dx="0.0" dy="-60.0"/>
+      <sequence sequence="true" loops="1">
+        <move dx="0.0" dy="120.0" ticks="0" ease="linear"/>
+        <move dx="0.0" dy="-60.0" ticks="30" ease="linear"/>
+        <move dx="0.0" dy="-60.0" ticks="30" ease="bounce2"/>
       </sequence>
     </animation>
     <animation name="lifeDisappear">
-      <sequence loops="1" sequence="true">
-        <move ease="easeIn" ticks="60" dx="0.0" dy="120.0"/>
+      <sequence sequence="true" loops="1">
+        <move dx="0.0" dy="120.0" ticks="60" ease="easeIn"/>
       </sequence>
     </animation>
     <animation name="linkDown">
-      <sequence loops="1" sequence="true">
-        <scale ease="easeOutBack" target="1.2" ticks="20"/>
+      <sequence sequence="true" loops="1">
+        <scale target="1.2" ticks="20" ease="easeOutBack"/>
       </sequence>
     </animation>
     <animation name="linkHoverOut">
-      <parallel loops="1" sequence="false">
-        <scale ease="linear" target="1.0" ticks="10"/>
+      <parallel sequence="false" loops="1">
+        <scale target="1.0" ticks="10" ease="linear"/>
       </parallel>
     </animation>
     <animation name="linkHoverOver">
-      <parallel loops="1" sequence="false">
-        <scale ease="linear" target="1.1" ticks="20"/>
+      <parallel sequence="false" loops="1">
+        <scale target="1.1" ticks="20" ease="linear"/>
       </parallel>
     </animation>
     <animation name="linkUp">
-      <sequence loops="1" sequence="true">
-        <scale ease="linear" target="1.0" ticks="10"/>
+      <sequence sequence="true" loops="1">
+        <scale target="1.0" ticks="10" ease="linear"/>
       </sequence>
     </animation>
     <animation name="mouseDown">
-      <sequence loops="1" sequence="true">
-        <scale ease="easeOut" target="1.5" ticks="5"/>
+      <sequence sequence="true" loops="1">
+        <scale target="1.5" ticks="5" ease="easeOut"/>
       </sequence>
     </animation>
     <animation name="mouseUp">
-      <sequence loops="1" sequence="true">
-        <scale ease="linear" target="1.0" ticks="20"/>
+      <sequence sequence="true" loops="1">
+        <scale target="1.0" ticks="20" ease="linear"/>
       </sequence>
     </animation>
     <animation name="pauseReveal">
-      <sequence loops="1" sequence="true">
-        <alpha ease="linear" target="0.0" ticks="0"/>
-        <scale ease="linear" target="0.1" ticks="0"/>
-        <parallel loops="1" sequence="false">
-          <alpha ease="easeOutBack" target="128.0" ticks="30"/>
-          <scale ease="easeOutBack" target="1.0" ticks="30"/>
+      <sequence sequence="true" loops="1">
+        <alpha target="0.0" ticks="0" ease="linear"/>
+        <scale target="0.1" ticks="0" ease="linear"/>
+        <parallel sequence="false" loops="1">
+          <alpha target="128.0" ticks="30" ease="easeOutBack"/>
+          <scale target="1.0" ticks="30" ease="easeOutBack"/>
         </parallel>
       </sequence>
     </animation>
     <animation name="shipDeath">
-      <parallel finishedMessage="exploded" loops="1" sequence="false">
-        <alpha ease="easeOut" target="0.0" ticks="70"/>
-        <color ease="linear" targetColor="#a50300ff" ticks="100"/>
+      <parallel sequence="false" loops="1" finishedMessage="exploded">
+        <alpha target="0.0" ticks="1" ease="easeOut"/>
+        <delay ticks="120"/>
       </parallel>
     </animation>
     <animation name="slideInDown">
-      <sequence loops="1" sequence="true">
-        <move ease="linear" ticks="0" dx="0.0" dy="300.0"/>
-        <move ease="easeOutBack" ticks="50" dx="0.0" dy="-300.0"/>
+      <sequence sequence="true" loops="1">
+        <move dx="0.0" dy="300.0" ticks="0" ease="linear"/>
+        <move dx="0.0" dy="-300.0" ticks="50" ease="easeOutBack"/>
       </sequence>
     </animation>
     <animation name="slideInLeft">
-      <sequence loops="1" sequence="true">
-        <move ease="linear" ticks="0" dx="800.0" dy="0.0"/>
-        <move ease="easeOut" ticks="90" dx="-800.0" dy="0.0"/>
+      <sequence sequence="true" loops="1">
+        <move dx="800.0" dy="0.0" ticks="0" ease="linear"/>
+        <move dx="-800.0" dy="0.0" ticks="90" ease="easeOut"/>
       </sequence>
     </animation>
     <animation name="slideInRight">
-      <sequence loops="1" sequence="true">
-        <move ease="linear" ticks="0" dx="-800.0" dy="0.0"/>
-        <move ease="easeOut" ticks="90" dx="800.0" dy="0.0"/>
+      <sequence sequence="true" loops="1">
+        <move dx="-800.0" dy="0.0" ticks="0" ease="linear"/>
+        <move dx="800.0" dy="0.0" ticks="90" ease="easeOut"/>
       </sequence>
     </animation>
     <animation name="warp">
-      <parallel loops="1" sequence="false">
-        <forwards customAngle="0.0" ease="easeOutCubic" forwards="400.0" sidewards="0.0" ticks="200" using="HEADING"/>
-        <head directionToo="false" ease="linear" ticks="150" turn="720.0"/>
-        <sequence loops="1" sequence="true">
-          <scale ease="easeIn" target="2.0" ticks="100"/>
-          <scale ease="easeOut" target="0.5" ticks="100"/>
+      <parallel sequence="false" loops="1">
+        <forwards forwards="400.0" sidewards="0.0" using="HEADING" customAngle="0.0" ticks="200" ease="easeOutCubic"/>
+        <head turn="720.0" directionToo="false" ticks="150" ease="linear"/>
+        <sequence sequence="true" loops="1">
+          <scale target="2.0" ticks="100" ease="easeIn"/>
+          <scale target="0.5" ticks="100" ease="easeOut"/>
         </sequence>
-        <turn ease="easeIn" headingToo="false" ticks="200" turn="1800.0"/>
-        <alpha ease="easeIn" target="0.0" ticks="100"/>
+        <turn turn="1800.0" headingToo="false" ticks="200" ease="easeIn"/>
+        <alpha target="0.0" ticks="100" ease="easeIn"/>
       </parallel>
     </animation>
   </animations>
   <costumes>
     <costume name="bullet" defaultZOrder="0" order="0" showInDesigner="true" role="bullet.py">
-      <sound name="default" sound="fire" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
+      <sound name="default" sound="fire" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND"/>
       <properties impulse="1.0" strength="1" firePeriod="0.2" explosiveness="1.0"/>
     </costume>
     <costume name="bullet1" defaultZOrder="0" order="0" showInDesigner="true" extends="bullet" role="bullet.py">
@@ -274,7 +275,7 @@
     </costume>
     <costume name="bullet2" defaultZOrder="0" order="0" showInDesigner="true" extends="bullet" role="bullet.py">
       <pose name="default" pose="bullet2"/>
-      <sound name="default" sound="missile" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
+      <sound name="default" sound="missile" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND"/>
       <animation name="default" animation="bullet1"/>
       <properties impulse="1.0" strength="2" firePeriod="1.0" explosiveness="2.0"/>
     </costume>
@@ -287,8 +288,8 @@
     </costume>
     <costume name="button" defaultZOrder="0" order="0" showInDesigner="true" extends="title">
       <string name="default">Button</string>
-      <sound name="click" sound="missile" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
-      <sound name="hoverOver" sound="ding" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="PLAY_BOTH" priority="1"/>
+      <sound name="click" sound="missile" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND"/>
+      <sound name="hoverOver" sound="ding" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="PLAY_BOTH"/>
       <font name="default" font="Vera" fontSize="14" color="#ffffffff" xAlignment="0.5" yAlignment="0.5" marginTop="0" marginRight="0" marginBottom="0" marginLeft="0"/>
       <animation name="fadeIn" animation="buttonFadeIn"/>
       <animation name="hoverOut" animation="buttonHoverOut"/>
@@ -297,9 +298,9 @@
       <animation name="mouseUp" animation="buttonUp"/>
     </costume>
     <costume name="rock" defaultZOrder="0" order="0" showInDesigner="true" role="rock.py">
-      <sound name="explode" sound="explode-medium" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="PLAY_BOTH" priority="1"/>
-      <sound name="hit" sound="ricochet" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
-      <sound name="ricochet" sound="ricochet" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="PLAY_BOTH" priority="1"/>
+      <sound name="explode" sound="explode-medium" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="PLAY_BOTH"/>
+      <sound name="hit" sound="ricochet" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND"/>
+      <sound name="ricochet" sound="ricochet" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="PLAY_BOTH"/>
       <properties pieces="0" points="1" strength="1" hitsRequired="1"/>
     </costume>
     <costume name="duke-0" defaultZOrder="0" order="0" showInDesigner="true" extends="rock" role="rock.py">
@@ -615,7 +616,7 @@
     <costume name="rock1c" defaultZOrder="0" order="0" showInDesigner="true" extends="rock" role="rock.py">
       <pose name="default" pose="rock1c"/>
       <pose name="fragment" pose="fragment1"/>
-      <sound name="explode" sound="explode-quiet" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="PLAY_BOTH" priority="1"/>
+      <sound name="explode" sound="explode-quiet" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="PLAY_BOTH"/>
       <properties pieces="0" points="50" strength="1" hitsRequired="1"/>
     </costume>
     <costume name="rock2" defaultZOrder="0" order="0" showInDesigner="true" extends="rock" role="rock.py">
@@ -639,7 +640,7 @@
       <pose name="default" pose="rock2c1"/>
       <pose name="default" pose="rock2c2"/>
       <pose name="fragment" pose="fragment2"/>
-      <sound name="explode" sound="explode-quiet" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="PLAY_BOTH" priority="1"/>
+      <sound name="explode" sound="explode-quiet" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="PLAY_BOTH"/>
       <properties pieces="0" points="400" strength="1" hitsRequired="2"/>
     </costume>
     <costume name="scala-a" defaultZOrder="0" order="0" showInDesigner="true" extends="rock" role="rock.py">
@@ -668,10 +669,10 @@
       <pose name="spark" pose="spark4"/>
       <pose name="spark" pose="spark5"/>
       <pose name="spark1" pose="spark1"/>
-      <sound name="default" sound="mystic" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="STOP_FIRST" priority="0"/>
-      <sound name="explode" sound="explode" fadeOutSeconds="3.0" fadeOnDeath="false" multipleRole="PLAY_BOTH" priority="10"/>
-      <sound name="fade" sound="warp" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
-      <sound name="warp" sound="warp" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
+      <sound name="default" sound="mystic" priority="0" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="STOP_FIRST"/>
+      <sound name="explode" sound="explode" priority="10" fadeOutSeconds="3.0" fadeOnDeath="false" multipleRole="PLAY_BOTH"/>
+      <sound name="fade" sound="warp" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND"/>
+      <sound name="warp" sound="warp" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND"/>
       <animation name="default" animation="fadeIn"/>
       <animation name="explode" animation="shipDeath"/>
       <animation name="fade" animation="fadeOut"/>
@@ -679,18 +680,18 @@
       <companion name="bullet-2" companion="bullet1"/>
       <companion name="explosion" companion="explosion"/>
       <companion name="warp" companion="warp"/>
-      <properties rotationSpeed="5.0" thrust="0.3"/>
+      <properties rotationSpeed="2.0" thrust="1.0"/>
     </costume>
     <costume name="ship1" defaultZOrder="0" order="0" showInDesigner="true" extends="ship" role="ship.py">
       <pose name="default" pose="ship1"/>
       <companion name="life" companion="life1"/>
-      <properties rotationSpeed="3.0" thrust="0.3"/>
+      <properties rotationSpeed="2.0" thrust="1.0"/>
     </costume>
     <costume name="ship2" defaultZOrder="0" order="0" showInDesigner="true" extends="ship" role="ship.py">
       <pose name="default" pose="ship2"/>
       <companion name="bullet-2" companion="bullet2"/>
       <companion name="life" companion="life2"/>
-      <properties rotationSpeed="2.0" thrust="0.3"/>
+      <properties rotationSpeed="2.0" thrust="1.0"/>
     </costume>
     <costume name="stars1" defaultZOrder="0" order="0" showInDesigner="true">
       <pose name="default" pose="stars1"/>

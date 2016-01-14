@@ -34,8 +34,8 @@ class Bullet(Moving) :
     		self.getActor().kill()
 
 
-    def createCostumeProperties( self ) :
-        return BulletProperties()
+    def createCostumeProperties( self, costume ) :
+        return BulletProperties(costume)
 
 
     # Boiler plate code - no need to change this
@@ -49,7 +49,8 @@ class Bullet(Moving) :
 
 class BulletProperties(CostumeProperties) :
 
-    def __init__(self) :
+    def __init__(self,costume) :
+        CostumeProperties.__init__(self,costume)
         self.impulse = 1
         self.strength = 1
         self.firePeriod = 1

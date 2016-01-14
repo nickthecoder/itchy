@@ -208,9 +208,9 @@ public abstract class AbstractRole implements Role
     }
 
     @Override
-    public CostumeProperties createCostumeProperties()
+    public CostumeProperties createCostumeProperties(Costume costume)
     {
-        return new CostumeProperties();
+        return new CostumeProperties(costume);
     }
 
     @Override

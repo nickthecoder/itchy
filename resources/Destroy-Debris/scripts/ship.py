@@ -37,9 +37,9 @@ class Ship(Moving) :
         self.fireTimer = None
         
         # Cut the ship into 3 large pieces, and call these poses "part"
-        Fragment().pieces(3).createPoses(self.getActor(), "part")
+        Fragments().pieces(3).createPoses(self.getActor(), "part")
         # Cut the ship again, this time into 10 pieces, and call these poses "fragment".
-        Fragment().pieces(10).createPoses(self.getActor())
+        Fragments().pieces(10).createPoses(self.getActor())
         # These are use together when the ship explodes in the "die" method.
 
         game.getSceneDirector().ship = self
@@ -122,17 +122,17 @@ class Ship(Moving) :
 
     def explode( self ) :
        
-       # Use the "fragment" and "part" poses created in onBirth to explode the ship in all directions.
-       # The large "part" pieces move slowly, and the smaller "fragment" pieces move quickly.
-        ExplosionBuilder(self.getActor()) \
-            .speed(0.5,0,1,0).fade(3).spin(-1,1).rotate(True).eventName("part").projectiles(4).create()
-            
-        ExplosionBuilder(self.getActor()) \
-            .speed(1.5,0,4,0).fade(3).spin(-1,1).rotate(True).eventName("fragment").projectiles(20).create()
-        
-        game.getDirector().lives -= 1
+        # Use the "fragment" and "part" poses created in onBirth to explode the ship in all directions.
+        #ExplosionBuilder(self.getActor()).speed(1.5, 1.6, 0, 0).fade(2).spin(-0.4, 0.4).fragments(self.actor.costume.costumeProperties.fragments).create();
 
-        self.lifeIcon[game.getDirector().lives].event("disappear")
+        ExplosionBuilder(self.actor) \
+            .fragments( self.actor.costume.costumeProperties.fragments ) \
+            .speed(1.0,0,1.5,0).fade(3).spin(-1,1).vx(self.vx/2).vy(self.vy/2) \
+            .create()
+        
+        game.director.lives -= 1
+
+        self.lifeIcon[game.director.lives].event("disappear")
         self.actor.deathEvent("explode", "exploded")
 
 
@@ -157,8 +157,8 @@ class Ship(Moving) :
         self.vx -= math.cos(theta) * impulse
         self.vy -= math.sin(theta) * impulse
 
-    def createCostumeProperties( self ) :
-        return ShipProperties()
+    def createCostumeProperties( self, costume ) :
+        return ShipProperties(costume)
 
     # Boiler plate code - no need to change this
     def getProperties(self):
@@ -171,9 +171,13 @@ class Ship(Moving) :
 
 class ShipProperties(CostumeProperties) :
 
-    def __init__(self) :
+    def __init__(self,costume) :
+        CostumeProperties.__init__(self,costume)
         self.rotationSpeed = 2
-        self.thrust = 1    
+        self.thrust = 1   
+        pose = costume.getPose("default")
+        if pose is not None :
+            self.fragments = Fragments().create(pose)
     
     # Boiler plate code - no need to change this
     def getProperties(self):
