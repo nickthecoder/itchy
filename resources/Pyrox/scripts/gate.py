@@ -12,7 +12,7 @@ class Gate(GridRole) :
 
     def __init__(self) :
         super(Gate,self).__init__()
-        self.scene = "menu"
+        self.scene = "play"
         self.exiting = False # Set in onInvaded, then used in onDeath to start the new scene
         self.spare = 0
 

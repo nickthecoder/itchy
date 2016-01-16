@@ -25,7 +25,6 @@ class GridRole(AbstractRole) :
 
 
     def onBirth( self ) :
-        Fragments().pieces( 10 ).createPoses( self.actor )
         self.addTag( "explodable" )
     
     def onAttach( self ) :

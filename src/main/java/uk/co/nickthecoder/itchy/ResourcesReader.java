@@ -291,7 +291,7 @@ public class ResourcesReader
                 String poseName = poseTag.getAttribute("pose");
                 PoseResource poseResource = this.resources.getPoseResource(poseName);
                 if (poseResource == null) {
-                    throw new XMLException("Pose : " + poseName + " not found for costume : " + costumeName);
+                    throw new XMLException("Pose : '" + poseName + "' not found for costume : " + costumeName);
                 }
                 costume.addPose(itemName, poseResource);
 
@@ -492,7 +492,7 @@ public class ResourcesReader
             String poseName = frameTag.getAttribute("pose");
             Pose pose = this.resources.getPose(poseName);
             if (pose == null) {
-                throw new XMLException("Pose : " + poseName + " not found");
+                throw new XMLException("Pose : '" + poseName + "' not found");
             }
             Frame frame = new Frame(poseName, pose);
             frame.delay = delay;

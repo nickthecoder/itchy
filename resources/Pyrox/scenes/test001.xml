@@ -140,33 +140,33 @@
     <actor costume="rock" x="780" y="-300" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
     <actor costume="rock" x="-60" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
     <actor costume="beehive2" x="420" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="30">
-      <property name="randomSeed" value="0"/>
-      <property name="beeDirection" value="East"/>
       <property name="bees" value="0"/>
+      <property name="beeDirection" value="East"/>
+      <property name="randomSeed" value="0"/>
       <property name="requiredPollen" value="0"/>
       <property name="beeLogic" value="Random"/>
       <property name="spawnPeriod" value="1.0"/>
     </actor>
     <actor costume="beehive2" x="600" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="30">
-      <property name="randomSeed" value="0"/>
-      <property name="beeDirection" value="East"/>
       <property name="bees" value="0"/>
+      <property name="beeDirection" value="East"/>
+      <property name="randomSeed" value="0"/>
       <property name="requiredPollen" value="0"/>
       <property name="beeLogic" value="Random"/>
       <property name="spawnPeriod" value="1.0"/>
     </actor>
     <actor costume="behive" x="420" y="-120" direction="0.0" heading="0.0" startEvent="default" zOrder="30">
-      <property name="randomSeed" value="0"/>
-      <property name="beeDirection" value="East"/>
       <property name="bees" value="0"/>
+      <property name="beeDirection" value="East"/>
+      <property name="randomSeed" value="0"/>
       <property name="requiredPollen" value="0"/>
       <property name="beeLogic" value="Random"/>
       <property name="spawnPeriod" value="1.0"/>
     </actor>
     <actor costume="behive" x="600" y="-120" direction="0.0" heading="0.0" startEvent="default" zOrder="30">
-      <property name="randomSeed" value="0"/>
-      <property name="beeDirection" value="East"/>
       <property name="bees" value="0"/>
+      <property name="beeDirection" value="East"/>
+      <property name="randomSeed" value="0"/>
       <property name="requiredPollen" value="0"/>
       <property name="beeLogic" value="Random"/>
       <property name="spawnPeriod" value="1.0"/>

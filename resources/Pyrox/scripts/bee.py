@@ -4,7 +4,7 @@ from java.util import Random
 from movable import Movable
 
 properties = ArrayList()
-properties.add( ChoiceProperty( "logic" ).add("Random", 0).add("Clockwise", 1).add("Anticlockwise", 2) )
+properties.add( ChoiceProperty( "logic" ).add("Random", 0).add("AntiClockwise", 1).add("Clockwise", 2) )
 properties.add( ChoiceProperty( "direction" ).add("North", 1).add("East", 0).add("South", 3).add("West",2) )
 properties.add( IntegerProperty( "randomSeed" ) )
 
@@ -13,7 +13,7 @@ class Bee(Movable) :
     def __init__(self) :
         super(Bee,self).__init__()
         self.randomSeed = 0
-        self.logic = 0
+        self.logic = 1
         self.direction = 1
         self.random = None
         self.jammedCount = 0 # How many clicks I've been stuck because of another bee getting in the way.
@@ -66,6 +66,7 @@ class Bee(Movable) :
                     self.logic = 3 - self.logic # Reverse direction Clockwise <-> Anticlockwise
                     self.changeDirection( -delta )
             else :
+                print "Changing direction"
                 self.changeDirection( delta )
            
     

@@ -19,8 +19,7 @@ class Collectable(GridRole) :
 
     def onHalfInvaded( self, invader ) :
         super(Collectable,self).onHalfInvaded(invader)
-
-        if (invader.hasTag("player")) :
+        if (invader.hasTag("collector")) :
             game.getSceneDirector().collected(1)
             self.actor.deathEvent("collected")
         else :

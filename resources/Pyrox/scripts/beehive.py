@@ -6,8 +6,9 @@ from roundFeatures import RoundFeatures
 
 properties = ArrayList()
 properties.add( IntegerProperty( "bees" ) )
+properties.add( BooleanProperty( "needsProdding" ) )
 properties.add( IntegerProperty( "requiredPollen" ) )
-properties.add( ChoiceProperty( "beeLogic" ).add("Random", 0).add("Clockwise", 1).add("Anticlockwise", 2) )
+properties.add( ChoiceProperty( "beeLogic" ).add("Random", 0).add("AntiClockwise", 1).add("Clockwise", 2) )
 properties.add( ChoiceProperty( "beeDirection" ).add("Random", -1).add("North", 1).add("East", 0).add("South", 3).add("West",2) )
 properties.add( DoubleProperty( "spawnPeriod" ).hint("seconds") )
 properties.add( IntegerProperty( "randomSeed" ) )
@@ -25,17 +26,18 @@ class Beehive(Faller) :
 
         self.bees = 3
         self.requiredPollen = 0
-        self.beeLogic = 0
+        self.beeLogic = 1
         self.beeDirection = 0
         self.randomSeed = 0
         self.spawnPeriod = 1
-
-        self.detached = False
+        self.needsProdding = False # When True, doesn't emit bees till shoved, or hit.
+        
+        self.attached = False # When True, the hive doesn't move, otherwise it falls.
         self.emitTimer = None
         self.pollen = 0 # Bees will add pollen if they visit a flower (Pumpkin) and then return here.
 
     def onBirth(self) :
-        super(Beehive,self).onBirth()
+            
         game.sceneDirector.collectablesRemaining += 1
         self.addTag("hittable")
         self.addTag("beehive")
@@ -48,25 +50,31 @@ class Beehive(Faller) :
 
         self.costumeFeatures.update(self) # Its a roundedProperties
         self.rolls = self.hasTag("roundedSE")
-        self.detached = not self.rolls # The round hive is not detatched, the square one is.
+
+        if not self.needsProdding :
+            self.prodded()
             
+        super(Beehive,self).onBirth()            
+        self.attached = self.rolls # The round beehive is attached (won't wall until prodded).
 
     def makeAMove(self) :
-        if self.detached :
+        if not self.attached :
             super(Beehive,self).makeAMove()
             
             
     def shove( self, pusher, dx, dy, speed ) :
-        self.detach()
+        self.prodded()
         super(Beehive,self).shove(pusher, dx, dy, speed )
 
 
     def onHit( self, hitter, dx, dy ) :
-        self.detach()
+        self.prodded()
 
 
-    def detach(self) :
-        self.detached = True
+    def prodded(self) :
+        print "Prodded"
+        self.needsProdding = False
+        self.attached = False
         if self.bees == 0 :
             if self.requiredPollen <= self.pollen :
                 self.addTag("soft")
@@ -74,14 +82,13 @@ class Beehive(Faller) :
             self.emitTimer = Timer.createTimerSeconds(self.spawnPeriod)
         
 
-
     def onHalfInvaded( self, invader ) :
         if self.isMoving() :
             return
             
         if self.bees == 0 :
 
-            if (invader.hasTag("player")) :
+            if (invader.hasTag("collector")) :
                 game.sceneDirector.collected(1)
                 invader.talk( "_honey" )
                 self.removeFromGrid()
@@ -90,10 +97,11 @@ class Beehive(Faller) :
 
     def canShove( self, pusher, dx, dy, speed, force) :
     
-        if self.requiredPollen > self.pollen and pusher.hasTag("player" ) :
+        if self.requiredPollen > self.pollen and pusher.hasTag("collector" ) :
             pusher.talk( "_collectPollen" )
             
         return Faller.canShove( self, pusher, dx, dy, speed, force )
+
 
     def tick(self) :
         super(Beehive,self).tick()
@@ -122,7 +130,8 @@ class Beehive(Faller) :
             return True
             
         return False
-            
+
+
     def emitBeeDirection(self, direction) :
 
         dx = self.getDeltaX( direction )

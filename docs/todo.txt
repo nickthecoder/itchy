@@ -1,20 +1,9 @@
 Current Tasks
 =============
 
-Remove one of Costume's duplicates : getProperties, getCostumeProperties.
-    CostumeProperties now has two meanings. Very bad!
-    Rename CostumeProperties to CostumeMetaData ? CostumeCustomisation ? CostumeFeatures ;-)
-
-
-Projectiles when a ming explodes
-
-Ming bacshers only bash twice?
-
-Use a sensible default for pixel detection threshold in actor and pixeldetection classes.
+Ming bashers only bash twice?
 
 Remaining Ming Jobs: Climbers, Miners, Leavers, Drowners, 
-
-Shrink the lookDown image - the original appears to be just one pixel.
 
 
 BUGS
@@ -34,6 +23,10 @@ SceneDesigner toolbox isn't moved when the window is maximised (floats in middle
 
 New Features
 ============
+
+Friends pages in Pyrox - Giant, Bean pole and Wide Load. Each with their own scenes
+    Then a scene with a twin (two players that are both active at the same time!)
+    Then tag teams - one player switches to another. Like XOR game - finally ;-)
 
 Macro record/playback, useful for testing, and creating demos, and cheat modes.
     Record all input events for each tick

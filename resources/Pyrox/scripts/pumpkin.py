@@ -8,7 +8,7 @@ class Pumpkin(Collectable) :
 
     def onBirth(self) :
         super(Pumpkin,self).onBirth()
-        self.removeTag("soft")
+        self.removeTag("soft") # Can't be collected till pollinated.
         self.addTag("flower")
         self.pollinated = False
         self.fixed = False
@@ -27,15 +27,19 @@ class Pumpkin(Collectable) :
         pass
         
     def pollinate(self) :
+        print "Polinating pumpkin"
         self.event("pollinate", "pollinated")
-        self.removeTag("enemySoft")
+        self.removeTag("flower")
         
     def onMessage(self, message) :
         if message == "pollinated" :
+            print "Pollinated"
             self.pollinated = True
 
     def tick(self) :
         
+        # When we have been pollinated, convert to a regular collectable as soon as the
+        # bee has moved out of the way.
         if self.pollinated and not self.fixed :
             if self.look(0,0).role is self :
                 self.unmakeAlternateOccupant()

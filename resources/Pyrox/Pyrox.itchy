@@ -1,15 +1,20 @@
 <resources>
   <game title="Pyrox" width="800" height="600" resizable="false" initialScene="menu" directorClassName="director.py" authors="Nick Robinson. nickthecoder@gmail.com&#xA;"/>
-  <fonts>
-    <font name="Boycott" filename="fonts/Boycott/Boycott.ttf"/>
-    <font name="Comic" filename="fonts/bubblegum-sans/BubblegumSans-Regular.otf"/>
-    <font name="Computer" filename="fonts/dot_matrix/DOTMATRI.TTF"/>
-    <font name="Vera" filename="fonts/Vera/Vera.ttf"/>
-  </fonts>
-  <ninePatches>
-    <ninePatch name="bubble" filename="images/bubble.png" top="20" right="60" bottom="78" left="20"/>
-    <ninePatch name="bubble2" filename="images/bubble2.png" top="5" right="5" bottom="5" left="5"/>
-  </ninePatches>
+  <spriteSheets>
+    <spriteSheet name="robotSheet" file="images/robotSheet.png">
+      <sprite name="robot-D0" x="66" y="148" width="60" height="60" direction="0.0" offsetX="30" offsetY="30"/>
+      <sprite name="robot-D1" x="131" y="144" width="60" height="61" direction="0.0" offsetX="30" offsetY="30"/>
+      <sprite name="robot-D3" x="194" y="144" width="60" height="61" direction="0.0" offsetX="30" offsetY="30"/>
+      <sprite name="robot-R0" x="0" y="3" width="60" height="60" direction="0.0" offsetX="30" offsetY="30"/>
+      <sprite name="robot-R1" x="64" y="3" width="60" height="60" direction="0.0" offsetX="30" offsetY="30"/>
+      <sprite name="robot-R2" x="128" y="3" width="60" height="60" direction="0.0" offsetX="30" offsetY="30"/>
+      <sprite name="robot-R3" x="192" y="3" width="60" height="60" direction="0.0" offsetX="30" offsetY="30"/>
+      <sprite name="robot-U0" x="3" y="209" width="60" height="63" direction="0.0" offsetX="30" offsetY="30"/>
+      <sprite name="robot-U1" x="66" y="209" width="60" height="60" direction="0.0" offsetX="30" offsetY="30"/>
+      <sprite name="robot-U2" x="131" y="209" width="60" height="60" direction="0.0" offsetX="30" offsetY="30"/>
+      <sprite name="robot-U3" x="196" y="209" width="60" height="63" direction="0.0" offsetX="30" offsetY="31"/>
+    </spriteSheet>
+  </spriteSheets>
   <poses>
     <pose name="arrow" filename="images/arrow.png" offsetX="7"/>
     <pose name="arrow2" filename="images/arrow2.png" offsetX="0" offsetY="29"/>
@@ -19,8 +24,8 @@
     <pose name="autoPilot" filename="images/autoPilot.png"/>
     <pose name="balloon" filename="images/balloon.png"/>
     <pose name="beanPole" filename="images/beanPole.png" offsetY="90"/>
-    <pose name="bee-E1" filename="images/bee-E1.png"/>
-    <pose name="bee-W1" filename="images/bee-W1.png"/>
+    <pose name="bee-E1" filename="images/bee-E1.png" offsetY="31"/>
+    <pose name="bee-W1" filename="images/bee-W1.png" offsetY="31"/>
     <pose name="beehive" filename="images/beehive.png"/>
     <pose name="beehive2" filename="images/beehive2.png"/>
     <pose name="car-L" filename="images/car-L.png"/>
@@ -82,21 +87,6 @@
     <pose name="pumpkin-5" filename="images/pumpkin-5.png"/>
     <pose name="pumpkin-6" filename="images/pumpkin-6.png"/>
     <pose name="pumpkin-7" filename="images/pumpkin-7.png"/>
-    <pose name="robot-E1" filename="images/robot-E1.png"/>
-    <pose name="robot-E2" filename="images/robot-E2.png"/>
-    <pose name="robot-E3" filename="images/robot-E3.png"/>
-    <pose name="robot-E4" filename="images/robot-E4.png"/>
-    <pose name="robot-N1" filename="images/robot-N1.png"/>
-    <pose name="robot-N2" filename="images/robot-N2.png"/>
-    <pose name="robot-N3" filename="images/robot-N3.png"/>
-    <pose name="robot-S1" filename="images/robot-S1.png"/>
-    <pose name="robot-S2" filename="images/robot-S2.png"/>
-    <pose name="robot-S3" filename="images/robot-S3.png"/>
-    <pose name="robot-S4" filename="images/robot-S4.png"/>
-    <pose name="robot-W1" filename="images/robot-W1.png"/>
-    <pose name="robot-W2" filename="images/robot-W2.png"/>
-    <pose name="robot-W3" filename="images/robot-W3.png"/>
-    <pose name="robot-W4" filename="images/robot-W4.png"/>
     <pose name="rock" filename="images/rock.png"/>
     <pose name="safe" filename="images/safe.png"/>
     <pose name="safeOpen" filename="images/safeOpen.png"/>
@@ -134,6 +124,16 @@
     <pose name="z5" filename="images/z5.png"/>
     <pose name="z6" filename="images/z6.png"/>
   </poses>
+  <ninePatches>
+    <ninePatch name="bubble" filename="images/bubble.png" top="20" right="60" bottom="78" left="20"/>
+    <ninePatch name="bubble2" filename="images/bubble2.png" top="5" right="5" bottom="5" left="5"/>
+  </ninePatches>
+  <fonts>
+    <font name="Boycott" filename="fonts/Boycott/Boycott.ttf"/>
+    <font name="Comic" filename="fonts/bubblegum-sans/BubblegumSans-Regular.otf"/>
+    <font name="Computer" filename="fonts/dot_matrix/DOTMATRI.TTF"/>
+    <font name="Vera" filename="fonts/Vera/Vera.ttf"/>
+  </fonts>
   <sounds/>
   <animations>
     <animation name="bee-enterHive">
@@ -148,7 +148,7 @@
           <alpha target="128.0" ticks="1" ease="linear"/>
           <scale target="0.1" ticks="1" ease="linear"/>
           <frames pingPong="false">
-            <frame pose="bee-E1" delay="1"/>
+            <frame pose="bee-E1" delay="1" dx="0.0" dy="0.0"/>
           </frames>
         </parallel>
         <parallel sequence="false" loops="1">
@@ -165,7 +165,7 @@
           <alpha target="128.0" ticks="1" ease="linear"/>
           <scale target="0.1" ticks="1" ease="linear"/>
           <frames pingPong="false">
-            <frame pose="bee-E1" delay="1"/>
+            <frame pose="bee-E1" delay="1" dx="0.0" dy="0.0"/>
           </frames>
         </parallel>
         <parallel sequence="false" loops="1">
@@ -182,7 +182,7 @@
           <alpha target="128.0" ticks="1" ease="linear"/>
           <scale target="0.1" ticks="1" ease="linear"/>
           <frames pingPong="false">
-            <frame pose="bee-E1" delay="1"/>
+            <frame pose="bee-E1" delay="1" dx="0.0" dy="0.0"/>
           </frames>
         </parallel>
         <parallel sequence="false" loops="1">
@@ -199,7 +199,7 @@
           <alpha target="128.0" ticks="1" ease="linear"/>
           <move dx="60.0" dy="0.0" ticks="1" ease="linear"/>
           <frames pingPong="false">
-            <frame pose="bee-W1" delay="1"/>
+            <frame pose="bee-W1" delay="1" dx="0.0" dy="0.0"/>
           </frames>
         </parallel>
         <parallel sequence="false" loops="1">
@@ -231,8 +231,8 @@
     <animation name="copier-scan">
       <sequence sequence="true" loops="1" finishedMessage="copied">
         <frames pingPong="false">
-          <frame pose="copierScanning" delay="60"/>
-          <frame pose="copier" delay="1"/>
+          <frame pose="copierScanning" delay="60" dx="0.0" dy="0.0"/>
+          <frame pose="copier" delay="1" dx="0.0" dy="0.0"/>
         </frames>
       </sequence>
     </animation>
@@ -257,13 +257,13 @@
     <animation name="explosion">
       <sequence sequence="true" loops="1">
         <frames pingPong="false">
-          <frame pose="explosion-01" delay="5"/>
-          <frame pose="explosion-02" delay="5"/>
-          <frame pose="explosion-03" delay="5"/>
-          <frame pose="explosion-04" delay="5"/>
-          <frame pose="explosion-05" delay="5"/>
-          <frame pose="explosion-06" delay="5"/>
-          <frame pose="explosion-07" delay="1"/>
+          <frame pose="explosion-01" delay="5" dx="0.0" dy="0.0"/>
+          <frame pose="explosion-02" delay="5" dx="0.0" dy="0.0"/>
+          <frame pose="explosion-03" delay="5" dx="0.0" dy="0.0"/>
+          <frame pose="explosion-04" delay="5" dx="0.0" dy="0.0"/>
+          <frame pose="explosion-05" delay="5" dx="0.0" dy="0.0"/>
+          <frame pose="explosion-06" delay="5" dx="0.0" dy="0.0"/>
+          <frame pose="explosion-07" delay="1" dx="0.0" dy="0.0"/>
         </frames>
         <sequence sequence="true" loops="1">
           <alpha target="0.0" ticks="3" ease="linear"/>
@@ -273,7 +273,7 @@
     <animation name="gate-exit">
       <sequence sequence="true" loops="1">
         <frames pingPong="false">
-          <frame pose="gateOpen" delay="1"/>
+          <frame pose="gateOpen" delay="1" dx="0.0" dy="0.0"/>
         </frames>
         <scale target="3.0" ticks="30" ease="easeInOut"/>
         <scale target="1.0" ticks="30" ease="easeInOut"/>
@@ -282,7 +282,7 @@
     <animation name="gate-open">
       <sequence sequence="true" loops="1">
         <frames pingPong="false">
-          <frame pose="gatePending" delay="1"/>
+          <frame pose="gatePending" delay="1" dx="0.0" dy="0.0"/>
         </frames>
         <scale target="3.0" ticks="10" ease="easeInOut"/>
         <scale target="1.0" ticks="30" ease="easeInOut"/>
@@ -332,9 +332,9 @@
           </sequence>
           <sequence sequence="true" loops="7">
             <frames pingPong="false">
-              <frame pose="robot-E3" delay="4"/>
-              <frame pose="robot-W3" delay="4"/>
-              <frame pose="robot-S2" delay="4"/>
+              <frame pose="robot-R3" delay="4" dx="0.0" dy="0.0"/>
+              <frame pose="robot-L3" delay="4" dx="0.0" dy="0.0"/>
+              <frame pose="robot-D1" delay="4" dx="0.0" dy="0.0"/>
             </frames>
           </sequence>
         </parallel>
@@ -343,9 +343,9 @@
           <alpha target="0.0" ticks="100" ease="easeOut"/>
           <sequence sequence="true" loops="10">
             <frames pingPong="false">
-              <frame pose="robot-E2" delay="6"/>
-              <frame pose="robot-W2" delay="6"/>
-              <frame pose="robot-S2" delay="6"/>
+              <frame pose="robot-R2" delay="6" dx="0.0" dy="0.0"/>
+              <frame pose="robot-L2" delay="6" dx="0.0" dy="0.0"/>
+              <frame pose="robot-D1" delay="6" dx="0.0" dy="0.0"/>
             </frames>
           </sequence>
         </parallel>
@@ -370,55 +370,55 @@
       <sequence sequence="true" loops="1" finishedMessage="pollinated">
         <delay ticks="120"/>
         <frames pingPong="false">
-          <frame pose="pumpkin-1" delay="30"/>
-          <frame pose="pumpkin-2" delay="10"/>
-          <frame pose="pumpkin-3" delay="10"/>
-          <frame pose="pumpkin-4" delay="10"/>
-          <frame pose="pumpkin-5" delay="10"/>
-          <frame pose="pumpkin-6" delay="10"/>
-          <frame pose="pumpkin-7" delay="1"/>
+          <frame pose="pumpkin-1" delay="30" dx="0.0" dy="0.0"/>
+          <frame pose="pumpkin-2" delay="10" dx="0.0" dy="0.0"/>
+          <frame pose="pumpkin-3" delay="10" dx="0.0" dy="0.0"/>
+          <frame pose="pumpkin-4" delay="10" dx="0.0" dy="0.0"/>
+          <frame pose="pumpkin-5" delay="10" dx="0.0" dy="0.0"/>
+          <frame pose="pumpkin-6" delay="10" dx="0.0" dy="0.0"/>
+          <frame pose="pumpkin-7" delay="1" dx="0.0" dy="0.0"/>
         </frames>
       </sequence>
     </animation>
     <animation name="robot-D">
       <sequence sequence="true" loops="1">
         <frames pingPong="false">
-          <frame pose="robot-S1" delay="3"/>
-          <frame pose="robot-S2" delay="3"/>
-          <frame pose="robot-S3" delay="3"/>
-          <frame pose="robot-S4" delay="3"/>
+          <frame pose="robot-U0" delay="3" dx="0.0" dy="0.0"/>
+          <frame pose="robot-U1" delay="3" dx="0.0" dy="0.0"/>
+          <frame pose="robot-U2" delay="3" dx="0.0" dy="0.0"/>
+          <frame pose="robot-U3" delay="3" dx="0.0" dy="0.0"/>
+          <frame pose="robot-L1" delay="1" dx="0.0" dy="0.0"/>
         </frames>
       </sequence>
     </animation>
     <animation name="robot-L">
       <sequence sequence="true" loops="1">
         <frames pingPong="false">
-          <frame pose="robot-W1" delay="3"/>
-          <frame pose="robot-W2" delay="3"/>
-          <frame pose="robot-W3" delay="3"/>
-          <frame pose="robot-W4" delay="3"/>
+          <frame pose="robot-L0" delay="3" dx="0.0" dy="0.0"/>
+          <frame pose="robot-L1" delay="3" dx="0.0" dy="0.0"/>
+          <frame pose="robot-L2" delay="3" dx="0.0" dy="0.0"/>
+          <frame pose="robot-L3" delay="3" dx="0.0" dy="0.0"/>
         </frames>
       </sequence>
     </animation>
     <animation name="robot-R">
       <sequence sequence="true" loops="1">
         <frames pingPong="false">
-          <frame pose="robot-E1" delay="3"/>
-          <frame pose="robot-E2" delay="3"/>
-          <frame pose="robot-E3" delay="3"/>
-          <frame pose="robot-E4" delay="3"/>
+          <frame pose="robot-R0" delay="3" dx="0.0" dy="0.0"/>
+          <frame pose="robot-R1" delay="3" dx="0.0" dy="0.0"/>
+          <frame pose="robot-R2" delay="3" dx="0.0" dy="0.0"/>
+          <frame pose="robot-R3" delay="3" dx="0.0" dy="0.0"/>
         </frames>
       </sequence>
     </animation>
     <animation name="robot-U">
       <sequence sequence="true" loops="1">
         <frames pingPong="false">
-          <frame pose="robot-N1" delay="2"/>
-          <frame pose="robot-N2" delay="2"/>
-          <frame pose="robot-N3" delay="2"/>
-          <frame pose="robot-N2" delay="2"/>
-          <frame pose="robot-N1" delay="2"/>
-          <frame pose="robot-E1" delay="1"/>
+          <frame pose="robot-U0" delay="2" dx="0.0" dy="0.0"/>
+          <frame pose="robot-U1" delay="2" dx="0.0" dy="0.0"/>
+          <frame pose="robot-U2" delay="2" dx="0.0" dy="0.0"/>
+          <frame pose="robot-U3" delay="2" dx="0.0" dy="0.0"/>
+          <frame pose="robot-L1" delay="1" dx="0.0" dy="0.0"/>
         </frames>
       </sequence>
     </animation>
@@ -438,7 +438,7 @@
         <move dx="-14.0" dy="0.0" ticks="4" ease="easeInOut"/>
         <move dx="7.0" dy="0.0" ticks="5" ease="easeInOut"/>
         <frames pingPong="false">
-          <frame pose="safeOpen" delay="1"/>
+          <frame pose="safeOpen" delay="1" dx="0.0" dy="0.0"/>
         </frames>
       </sequence>
     </animation>
@@ -482,31 +482,6 @@
     </costume>
     <costume name="balloon" defaultZOrder="20" order="10" showInDesigner="true" role="balloon.py">
       <pose name="default" pose="balloon"/>
-    </costume>
-    <costume name="player-base" defaultZOrder="100" order="99" showInDesigner="true" role="player.py">
-      <pose name="z" pose="z1"/>
-      <pose name="z" pose="z2"/>
-      <pose name="z" pose="z4"/>
-      <pose name="z" pose="z3"/>
-      <pose name="z" pose="z5"/>
-      <pose name="z" pose="z6"/>
-      <string name="collectPollen">The bees must collect pollen and nectar
-before we can harvest the honey.</string>
-      <string name="honey">Yummy, Honey</string>
-      <string name="honey">Ooo, sweet sticky goodness</string>
-      <string name="honey">Honey's nice, but I prefer jam</string>
-      <string name="talk-style">bubble</string>
-      <font name="talk-style" font="Comic" fontSize="24" color="#000000ff" xAlignment="1.0" yAlignment="1.0" marginTop="15" marginRight="10" marginBottom="65" marginLeft="10"/>
-      <animation name="exit" animation="player-exit"/>
-      <animation name="hit" animation="player-hit"/>
-      <animation name="sleep" animation="player-sleep"/>
-      <animation name="talk-fade" animation="talk-fade"/>
-      <animation name="wake" animation="player-wake"/>
-      <properties width="1" height="1" talkX="70" talkY="10"/>
-    </costume>
-    <costume name="beanPole" defaultZOrder="100" order="12" showInDesigner="true" extends="player-base" role="player.py">
-      <pose name="default" pose="beanPole"/>
-      <properties width="1" height="2" talkX="70" talkY="60"/>
     </costume>
     <costume name="bee" defaultZOrder="80" order="90" showInDesigner="true" role="bee.py">
       <pose name="default" pose="bee-W1"/>
@@ -575,10 +550,6 @@ before we can harvest the honey.</string>
       <pose name="default" pose="gateClosed"/>
       <animation name="exit" animation="gate-exit"/>
       <animation name="open" animation="gate-open"/>
-    </costume>
-    <costume name="giant" defaultZOrder="100" order="12" showInDesigner="true" extends="player-base" role="player.py">
-      <pose name="default" pose="giant"/>
-      <properties width="2" height="2" talkX="120" talkY="60"/>
     </costume>
     <costume name="grenade" defaultZOrder="20" order="20" showInDesigner="true" extends="roll" role="grenade.py">
       <pose name="default" pose="grenade"/>
@@ -695,10 +666,6 @@ before we can harvest the honey.</string>
       <pose name="default" pose="machine-WS2"/>
       <properties fromCostume="planeL" toCostume="rock" enters="W" exits="S" offsetX="1" offsetY="0"/>
     </costume>
-    <costume name="plainPlayer" defaultZOrder="100" order="1" showInDesigner="true" role="player.py">
-      <pose name="default" pose="robot-N2"/>
-      <properties width="1" height="1" talkX="70" talkY="10"/>
-    </costume>
     <costume name="planeL" defaultZOrder="30" order="10" showInDesigner="true" role="plane.py">
       <pose name="default" pose="plane-W"/>
       <properties headingLeft="true"/>
@@ -707,13 +674,46 @@ before we can harvest the honey.</string>
       <pose name="default" pose="plane-E"/>
       <properties headingLeft="false"/>
     </costume>
-    <costume name="player" defaultZOrder="100" order="11" showInDesigner="true" extends="player-base" role="player.py">
-      <pose name="default" pose="robot-E1"/>
+    <costume name="player-base" defaultZOrder="100" order="99" showInDesigner="true" role="player.py">
+      <pose name="z" pose="z1"/>
+      <pose name="z" pose="z2"/>
+      <pose name="z" pose="z4"/>
+      <pose name="z" pose="z3"/>
+      <pose name="z" pose="z5"/>
+      <pose name="z" pose="z6"/>
+      <string name="collectPollen">The bees must collect pollen and nectar
+before we can harvest the honey.</string>
+      <string name="honey">Yummy, Honey</string>
+      <string name="honey">Ooo, sweet sticky goodness</string>
+      <string name="honey">Honey's nice, but I prefer jam</string>
+      <string name="talk-style">bubble</string>
+      <font name="talk-style" font="Comic" fontSize="24" color="#000000ff" xAlignment="1.0" yAlignment="1.0" marginTop="15" marginRight="10" marginBottom="65" marginLeft="10"/>
+      <animation name="exit" animation="player-exit"/>
+      <animation name="hit" animation="player-hit"/>
+      <animation name="sleep" animation="player-sleep"/>
+      <animation name="talk-fade" animation="talk-fade"/>
+      <animation name="wake" animation="player-wake"/>
+      <properties width="1" height="1" talkX="70" talkY="10"/>
+    </costume>
+    <costume name="player" defaultZOrder="1000" order="11" showInDesigner="true" extends="player-base" role="player.py">
+      <pose name="default" pose="robot-R0"/>
       <animation name="move-D" animation="robot-D"/>
       <animation name="move-L" animation="robot-L"/>
       <animation name="move-R" animation="robot-R"/>
       <animation name="move-U" animation="robot-U"/>
       <properties width="1" height="1" talkX="70" talkY="10"/>
+    </costume>
+    <costume name="player-beanPole" defaultZOrder="1000" order="12" showInDesigner="true" extends="player-base" role="player.py">
+      <pose name="default" pose="beanPole"/>
+      <properties width="1" height="2" talkX="70" talkY="60"/>
+    </costume>
+    <costume name="player-giant" defaultZOrder="1000" order="12" showInDesigner="true" extends="player-base" role="player.py">
+      <pose name="default" pose="giant"/>
+      <properties width="2" height="2" talkX="120" talkY="60"/>
+    </costume>
+    <costume name="player-wideLoad" defaultZOrder="1000" order="12" showInDesigner="true" extends="player-base" role="player.py">
+      <pose name="default" pose="wideLoad"/>
+      <properties width="2" height="1" talkX="120" talkY="10"/>
     </costume>
     <costume name="portcullis" defaultZOrder="10" order="30" showInDesigner="true" role="portcullis.py">
       <pose name="close" pose="wall"/>
@@ -834,10 +834,6 @@ before we can harvest the honey.</string>
       <pose name="completed" pose="gateOpen"/>
       <pose name="default" pose="gatePending"/>
     </costume>
-    <costume name="wideLoad" defaultZOrder="100" order="12" showInDesigner="true" extends="player-base" role="player.py">
-      <pose name="default" pose="wideLoad"/>
-      <properties width="2" height="1" talkX="120" talkY="10"/>
-    </costume>
   </costumes>
   <scenes>
     <scene name="balloons"/>
@@ -848,12 +844,19 @@ before we can harvest the honey.</string>
     <scene name="balloons2a"/>
     <scene name="balloons3"/>
     <scene name="balloons3a"/>
+    <scene name="balloons3b"/>
     <scene name="balloons4"/>
     <scene name="balloons5"/>
+    <scene name="bees"/>
+    <scene name="bees2"/>
+    <scene name="bees3"/>
+    <scene name="bees4"/>
     <scene name="bug-00001"/>
     <scene name="credits"/>
     <scene name="extras"/>
     <scene name="extras2"/>
+    <scene name="friends"/>
+    <scene name="friends1a"/>
     <scene name="furniture"/>
     <scene name="furniture2"/>
     <scene name="glass"/>

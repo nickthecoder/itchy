@@ -52,8 +52,6 @@ class Player(Big) :
         
         self.speed = 6
         self.addTag("player")
-        self.addTag("enemySoft")
-        self.addTag("digger") # Allows me to dig hard soil. See class Hard
 
     def onPlacedOnGrid(self) :
         Big.onPlacedOnGrid(self)
@@ -61,8 +59,10 @@ class Player(Big) :
         self.costumeFeatures.createParts( self )
         self.calculateLeadingEdges()
 
-        self.allAddTag("hittable")
-        
+        self.allAddTag("collector")        
+        self.allAddTag("hittable")        
+        self.allAddTag("enemySoft")
+        self.allAddTag("digger") # Allows me to dig hard soil. See class Hard
             
     # Called by Level to let me find the "warp" of the scene that's just been completed.
     def getReady( self, wake ) :
@@ -146,7 +146,7 @@ class Player(Big) :
         self.awake = False
         x = self.talkX - 40
         y = self.talkY + 20
-        self.sleepyZ = ExplosionBuilder(self).pose("z") \
+        self.sleepyZ = ExplosionBuilder(self.actor).pose("z") \
             .offsetForwards( x,x ).offsetSidewards( y,y ) \
             .vy(0.6, 1.2).vx(0.2,0.3).gravity(-0.01) \
             .fade( 2 ) \
@@ -253,7 +253,7 @@ class Player(Big) :
 
     def killZs( self ) :
         if self.sleepyZ :
-            self.sleepyZ.kill()
+            self.sleepyZ.actor.kill()
             self.sleepyZ = None
             
 

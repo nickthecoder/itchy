@@ -222,8 +222,8 @@
       </sequence>
     </animation>
     <animation name="bomb">
-      <sequence sequence="true" loops="1" finishedMessage="bang">
-        <frames pingPong="false">
+      <sequence sequence="true" loops="1">
+        <frames pingPong="false" finishedMessage="bang">
           <frame pose="bomber-01" delay="8" dx="0.0" dy="0.0"/>
           <frame pose="bomber-02" delay="4" dx="0.0" dy="0.0"/>
           <frame pose="bomber-03" delay="4" dx="0.0" dy="0.0"/>
@@ -239,19 +239,21 @@
           <frame pose="bomber-07" delay="2" dx="0.0" dy="0.0"/>
           <frame pose="bomber-09" delay="2" dx="0.0" dy="0.0"/>
           <frame pose="bomber-07" delay="2" dx="0.0" dy="0.0"/>
-          <frame pose="explode-01" delay="4" dx="0.0" dy="0.0"/>
-          <frame pose="explode-02" delay="4" dx="0.0" dy="0.0"/>
-          <frame pose="explode-03" delay="4" dx="0.0" dy="0.0"/>
-          <frame pose="explode-04" delay="4" dx="0.0" dy="0.0"/>
-          <frame pose="explode-05" delay="4" dx="0.0" dy="0.0"/>
-          <frame pose="explode-06" delay="4" dx="0.0" dy="0.0"/>
-          <frame pose="explode-07" delay="4" dx="0.0" dy="0.0"/>
-          <frame pose="explode-08" delay="4" dx="0.0" dy="0.0"/>
-          <frame pose="explode-09" delay="4" dx="0.0" dy="0.0"/>
-          <frame pose="explode-10" delay="4" dx="0.0" dy="0.0"/>
-          <frame pose="explode-11" delay="4" dx="0.0" dy="0.0"/>
-          <frame pose="explode-12" delay="4" dx="0.0" dy="0.0"/>
-          <frame pose="explode-13" delay="4" dx="0.0" dy="0.0"/>
+          <frame pose="explode-01" delay="1" dx="0.0" dy="0.0"/>
+          <frame pose="explode-02" delay="1" dx="0.0" dy="0.0"/>
+          <frame pose="explode-03" delay="1" dx="0.0" dy="0.0"/>
+          <frame pose="explode-04" delay="1" dx="0.0" dy="0.0"/>
+          <frame pose="explode-05" delay="1" dx="0.0" dy="0.0"/>
+          <frame pose="explode-06" delay="1" dx="0.0" dy="0.0"/>
+          <frame pose="explode-07" delay="1" dx="0.0" dy="0.0"/>
+          <frame pose="explode-08" delay="1" dx="0.0" dy="0.0"/>
+          <frame pose="explode-09" delay="1" dx="0.0" dy="0.0"/>
+        </frames>
+        <frames pingPong="false">
+          <frame pose="explode-10" delay="1" dx="0.0" dy="0.0"/>
+          <frame pose="explode-11" delay="1" dx="0.0" dy="0.0"/>
+          <frame pose="explode-12" delay="1" dx="0.0" dy="0.0"/>
+          <frame pose="explode-13" delay="1" dx="0.0" dy="0.0"/>
           <frame pose="explode-14" delay="1" dx="0.0" dy="0.0"/>
         </frames>
       </sequence>
@@ -553,7 +555,7 @@
   </animations>
   <costumes>
     <costume name="ming" defaultZOrder="0" order="0" showInDesigner="true" role="ming.py">
-      <pose name="default" pose="walkerR-02"/>
+      <pose name="default" pose="bomber-01"/>
       <pose name="highlight" pose="highlight"/>
       <animation name="blocker" animation="blocker"/>
       <animation name="bomb" animation="bomb"/>

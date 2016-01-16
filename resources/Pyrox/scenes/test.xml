@@ -71,6 +71,7 @@
       <property name="bees" value="3"/>
       <property name="requiredPollen" value="0"/>
       <property name="beeLogic" value="Anticlockwise"/>
+      <property name="detached" value="true"/>
       <property name="spawnPeriod" value="1.0"/>
     </actor>
     <actor costume="behive" x="300" y="900" direction="0.0" heading="0.0" startEvent="default" zOrder="30">
@@ -79,6 +80,7 @@
       <property name="bees" value="1"/>
       <property name="requiredPollen" value="0"/>
       <property name="beeLogic" value="Clockwise"/>
+      <property name="detached" value="true"/>
       <property name="spawnPeriod" value="1.0"/>
     </actor>
     <actor costume="warp" x="420" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="40">
@@ -135,9 +137,6 @@
       <property name="direction" value="West"/>
       <property name="logic" value="Anticlockwise"/>
     </actor>
-    <actor costume="plainPlayer" x="-60" y="780" direction="0.0" heading="0.0" startEvent="default" zOrder="100">
-      <property name="awake" value="true"/>
-    </actor>
     <text text="2 Rocks and Balloons" font="Vera" size="22" color="#ffffff" xAlignment="0.0" yAlignment="0.5" x="420" y="480" direction="90.0" heading="0.0" startEvent="default" zOrder="213"/>
     <text text="Enter a test level." font="Vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="540" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="226"/>
     <text text="It will continue to the end, or until a test fails." font="Vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="540" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="229"/>
@@ -182,6 +181,9 @@
       <property name="scene" value="test001"/>
     </actor>
     <text text="1 Roundedness" font="Vera" size="22" color="#ffffff" xAlignment="0.0" yAlignment="0.5" x="360" y="480" direction="90.0" heading="0.0" startEvent="default" zOrder="256"/>
+    <actor costume="player" x="300" y="540" direction="0.0" heading="0.0" startEvent="default" zOrder="1000">
+      <property name="awake" value="true"/>
+    </actor>
   </layer>
   <layer name="glass">
     <actor costume="sledge" x="48" y="767" direction="0.0" heading="0.0" startEvent="default" zOrder="90">

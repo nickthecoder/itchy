@@ -107,7 +107,7 @@
       <property name="hint" value="You can use just one table\nto transport a grenade"/>
     </actor>
     <actor costume="autoPilot" x="960" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="10">
-      <property name="moves" value="lll-u-rll-"/>
+      <property name="moves" value="-lll-u-rl-"/>
       <property name="autoTest" value="false"/>
       <property name="killOnPressed" value="true"/>
     </actor>
@@ -119,6 +119,7 @@
     <actor costume="grenade" x="120" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
     <actor costume="rock" x="120" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
     <actor costume="gate" x="840" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="40">
+      <property name="spare" value="0"/>
       <property name="scene" value="play"/>
     </actor>
     <actor costume="arrowCurved" x="780" y="240" direction="-90.0" heading="0.0" startEvent="default" zOrder="50"/>
@@ -135,7 +136,9 @@
     <actor costume="coin" x="480" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
     <actor costume="stamp" x="120" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
     <actor costume="stamp" x="120" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
-    <actor costume="player" x="60" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="100"/>
+    <actor costume="player" x="60" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="100">
+      <property name="awake" value="true"/>
+    </actor>
     <text text="Lift the grenade up" font="Boycott" size="22" color="#66b549" xAlignment="0.5" yAlignment="0.5" x="720" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="126">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
         <property name="dx" value="1"/>
@@ -150,5 +153,8 @@
         <property name="color" value="#204311ff"/>
       </makeup>
     </text>
+    <actor costume="player" x="900" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="129">
+      <property name="awake" value="true"/>
+    </actor>
   </layer>
 </scene>

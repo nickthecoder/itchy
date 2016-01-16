@@ -47,11 +47,34 @@ class Director(AbstractDirector) :
         self.gridStage.setStageConstraint( GridStageConstraint( self.squareSize, self.squareSize ) )      
         self.testStage.setStageConstraint( GridStageConstraint( self.squareSize, self.squareSize ) )      
 
+    def onMessage(self, message) :
+        print "Message", message
+        if message == Director.SPRITE_SHEETS_LOADED :
+            self.processSprites()
 
     def centerOn( self, x, y ) :
         self.centerViewOn( self.plainView, x, y )
         self.centerViewOn( self.gridView, x, y )
         self.centerViewOn( self.testView, x, y )
+
+    def processSprites( self ) :
+        print "Processing Sprites"
+        self.flipSprites( "robot-R", "robot-L", 4 )
+        
+    def flipSprites( self, prefix, newPrefix, n ) :
+        resources = game.resources
+        
+        for i in range( 0, n ) :
+            name = prefix + `i`
+            pose = resources.getPose( name )
+            if pose is None :
+                print "Pose", name, "not found"
+            else :
+                newName = newPrefix + `i`
+                newPose = ImagePose( pose.surface.zoom( -1,1, False ), pose.offsetX, pose.offsetY )
+                newPR = DynamicPoseResource( resources, newName, newPose )
+                resources.addPose( newPR )
+                print "Created pose", newName
 
     # Centers the view on the given coordinate, not straight away, but if called every frame, then
     # it will slowly home in on the required position.
