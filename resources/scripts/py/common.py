@@ -3,6 +3,7 @@ from uk.co.nickthecoder.itchy import Director, AbstractDirector
 from uk.co.nickthecoder.itchy import SceneDirector, PlainSceneDirector
 from uk.co.nickthecoder.itchy import Input
 from uk.co.nickthecoder.itchy import Pose, ImagePose, PoseResource, DynamicPoseResource
+from uk.co.nickthecoder.itchy import MacroRecord, MacroPlayback
 
 from uk.co.nickthecoder.itchy import ZOrderStage, StageView, GridStageConstraint, WrappedStageView
 
@@ -28,6 +29,8 @@ from uk.co.nickthecoder.jame.event import MouseButtonEvent
 
 from java.util import ArrayList
 from java.util import Random
+
+from java.io import File
 
 import math
 import time

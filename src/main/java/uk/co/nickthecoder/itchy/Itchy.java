@@ -21,7 +21,6 @@ import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.Keys;
 import uk.co.nickthecoder.jame.event.MouseEvent;
 import uk.co.nickthecoder.jame.event.ResizeEvent;
-import uk.co.nickthecoder.jame.event.StopPropagation;
 
 /**
  * The top-level manager of the game engine.
@@ -90,6 +89,8 @@ public class Itchy
      * A registry of known classes/scripts (Roles, SceneDirectors, Directors) as well as Animations, Makeup and Eases.
      */
     public static final Registry registry = new Registry();
+
+    public static EventProcessor eventProcessor = new NormalEventProcessor();
 
     static {
         registry.add(new ClassName(Director.class, PlainDirector.class.getName()));
@@ -336,27 +337,13 @@ public class Itchy
         frameRate.end();
         running = false;
     }
-
+    
     /**
      * Processes events (such as key strokes and mouse), called once per frame from {@link FrameRate}'s loop.
      */
     public static void processEvents()
     {
-        while (true) {
-            Event event = Events.poll();
-            if (event == null) {
-                break;
-            } else {
-            	try {
-            		processEvent(event);
-            	} catch (StopPropagation e) {
-            		// Do nothing
-            	} catch (Exception e) {
-            	    handleException(e);
-            	}
-            }
-        }
-        
+        eventProcessor.run();
     }
     
     /**
@@ -453,7 +440,7 @@ public class Itchy
      * Processes a single event. Called from {@link #processEvents}.
      * @param event
      */
-    private static void processEvent( Event event )
+    static void processEvent( Event event )
     {
     	if (event instanceof ResizeEvent) {
     		// Using Gnome 3.14.1, when a window border is dragged, the correct resize event is sent, but

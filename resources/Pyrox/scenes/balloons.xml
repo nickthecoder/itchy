@@ -121,7 +121,6 @@
     <actor costume="balloon" x="360" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
     <actor costume="balloon" x="420" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
     <actor costume="balloon" x="480" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
-    <actor costume="balloon" x="360" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
     <actor costume="balloon" x="420" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
     <actor costume="balloon" x="480" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
     <actor costume="balloon" x="900" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
@@ -195,6 +194,7 @@
     <actor costume="player" x="60" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="100">
       <property name="awake" value="true"/>
     </actor>
+    <actor costume="stamp" x="360" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="101"/>
   </layer>
   <layer name="glass">
     <actor costume="sledge" x="-75" y="656" direction="0.0" heading="0.0" startEvent="default" zOrder="90">

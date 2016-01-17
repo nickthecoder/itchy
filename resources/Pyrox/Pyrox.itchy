@@ -902,6 +902,8 @@ before we can harvest the honey.</string>
     <input name="editor" keys="ctrl+F12"/>
     <input name="left" keys="LEFT,z"/>
     <input name="load" keys="ctrl+l"/>
+    <input name="macroPlayback" keys="ctrl+F8"/>
+    <input name="macroRecord" keys="ctrl+F7"/>
     <input name="nextPlayer" keys="TAB"/>
     <input name="play" keys="RETURN,KP_ENTER,p"/>
     <input name="quit" keys="ESCAPE"/>

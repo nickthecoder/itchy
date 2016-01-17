@@ -19,6 +19,11 @@ class Director(AbstractDirector) :
         self.inputRestart = Input.find("restart")
         self.inputQuit = Input.find("quit")
         self.inputReset = Input.find("reset")
+        self.inputRecord = Input.find("macroRecord")
+        self.inputPlayback = Input.find("macroPlayback")
+
+        self.macroRecord = False
+        self.macroPlayback = False
     
         screenRect = Rect(0, 0, self.game.getWidth(), self.game.getHeight())
 
@@ -89,6 +94,24 @@ class Director(AbstractDirector) :
         
         view.scrollTo( newX, newY );
     
+    def startScene( self, sceneName ) :
+        # If we were playing a macro, or recording a macro, then stop.
+        Itchy.eventProcessor.end()
+
+        if self.macroRecord :
+            MacroRecord( self.macroFile(sceneName) ).begin()
+            self.macroRecord = False
+
+        if self.macroPlayback :
+            macro = self.macroFile(sceneName)
+            if macro.exists() :
+                MacroPlayback( macro ).begin()
+
+        return AbstractDirector.startScene( self, sceneName )
+
+    def macroFile( self, sceneName ) :
+        return game.resources.resolveFile( File( File("macros"), sceneName + ".macro" ) )
+            
     def returnToGateRoom( self, warpRoom ) :
         
         self.previousSceneName = game.getSceneName()
@@ -97,6 +120,14 @@ class Director(AbstractDirector) :
         
     def onKeyDown(self,kevent) :
     
+        if self.inputRecord.matches(kevent) :
+            self.macroRecord = True
+            self.macroPlayback = False
+
+        if self.inputPlayback.matches(kevent) :
+            self.macroRecord = False
+            self.macroPlayback = True
+
         if self.inputTest.matches(kevent) :
             game.startScene( "test" )
 
