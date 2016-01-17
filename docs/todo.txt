@@ -1,6 +1,9 @@
 Current Tasks
 =============
 
+Game to have a "test" scene.
+    Anywhere in the editor, press F?? and it runs the test scene.
+
 Ming bashers only bash twice?
 
 Remaining Ming Jobs: Climbers, Miners, Leavers, Drowners, 
@@ -13,27 +16,21 @@ Appearance.fixPose doesn't do the right thing with direction.
 	Setting dir to 0 works, but ideally both appearance and the new pose should have the old appearance's direction,
 	and yet the pose won't need rotating.
 
-Destroy-Debris: Bullets (#2) stay alive, even when invisible, and kill rocks that pass over them.
-	Shouldn't "Projectile" class do this automatically? Maybe the threshold is too low?
 
 TextArea's background center of nine patch is flat colour rather than tiled.
 
 SceneDesigner doesn't use the full width when window is maximised
 SceneDesigner toolbox isn't moved when the window is maximised (floats in middle of the screen).
 
+Can delete Poses which are used in a Framed animation
+    Ditto for a Sprite.
+
+Name not saved when editing an Input.
+
 New Features
 ============
 
-Friends pages in Pyrox - Giant, Bean pole and Wide Load. Each with their own scenes
-    Then a scene with a twin (two players that are both active at the same time!)
-    Then tag teams - one player switches to another. Like XOR game - finally ;-)
-
-Macro record/playback, useful for testing, and creating demos, and cheat modes.
-    Record all input events for each tick
-    Playback : Ignore real input events (except a special STOP input), and simulate the events instead.
-    Load/Save a macro.
-
-ColoredFragment. Use another pose, to decide which pixels belong to each fragment.
+ColorKeyFragment. Use another pose, to decide which pixels belong to each fragment.
     If the poses aren't the same size, then scale non blended.
 
 Animations to apply start/end events, so that sounds can be played.
@@ -43,9 +40,7 @@ Animations to apply start/end events, so that sounds can be played.
 Ensure Scrollbars of Scroll do not obscure the contents.
 
 Use Scroll for TextArea, instead of its buggy, self implemented, non-clipping scroller.
-
-PoseFilter : Scan Costumes' animations for FramedAnimations
-	Without this the "Ming" filter only show one Ming.
+    Clip the TextBox input too.
 
 Finish The-Mings
 
@@ -58,10 +53,6 @@ Have a preview image of the animation in FramedAnimationEditor.
 	Single step back/forward or continuous.
 	In fact, don't have the list or poses, just show one frame's details, and scroll back/forward to edit others.
 
-Game to have a "test" scene.
-	Anywhere in the editor, press F?? and it runs the test scene.
-		From the scene designer, use the current scene?
-			Maybe not, because it can help test partial scenes, such as the "gui" scene in The-Mings.
 
 On Info tab in the editor, have a "Open Folder" button, which opens the game's folder in nautilus/file explorer
 

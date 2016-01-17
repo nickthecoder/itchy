@@ -25,6 +25,7 @@ public class GameInfo implements PropertySubject<GameInfo>
         properties.add( new IntegerProperty<GameInfo>( "height" ));
         properties.add( new BooleanProperty<GameInfo>( "resizable" ));
         properties.add( new StringProperty<GameInfo>( "initialScene" ));
+        properties.add( new StringProperty<GameInfo>( "testScene" ));
         properties.add( new ClassNameProperty<GameInfo>( Director.class, "directorClassName" ).aliases( "className" ));
         properties.add( new StringProperty<GameInfo>( "authors" ).multiLine());        
     }
@@ -36,6 +37,8 @@ public class GameInfo implements PropertySubject<GameInfo>
     public int height;
 
     public String initialScene;
+
+    public String testScene;
 
     public ClassName directorClassName;
 
@@ -51,6 +54,7 @@ public class GameInfo implements PropertySubject<GameInfo>
         this.resizable = false;
         this.directorClassName = new ClassName(Director.class, PlainDirector.class.getName());
         this.initialScene = "";
+        this.testScene = "test";
         this.authors = "";
     }
 

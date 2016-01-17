@@ -10,6 +10,7 @@ import java.util.List;
 import uk.co.nickthecoder.itchy.animation.AbstractAnimation;
 import uk.co.nickthecoder.itchy.animation.Animation;
 import uk.co.nickthecoder.itchy.animation.CompoundAnimation;
+import uk.co.nickthecoder.itchy.collision.PixelCollisionTest;
 import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.DoubleProperty;
 import uk.co.nickthecoder.itchy.property.IntegerProperty;
@@ -710,7 +711,7 @@ public class Actor implements PropertySubject<Actor>
 
     public boolean pixelOverlap( int x, int y )
     {
-        return this.pixelOverlap(x, y, 0);
+        return this.pixelOverlap(x, y, PixelCollisionTest.DEFAULT_THRESHOLD);
     }
 
     public boolean pixelOverlap( int x, int y, int alphaThreashold )

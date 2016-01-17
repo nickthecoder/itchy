@@ -11,7 +11,7 @@ costumeProperties.add( DoubleProperty("impulse").hint("recoils the ship") )
 costumeProperties.add( IntegerProperty("strength") )
 costumeProperties.add( DoubleProperty("firePeriod") )
 costumeProperties.add( DoubleProperty("explosiveness").hint("The momentum added to the fragments") )
- 
+
 class Bullet(Moving) :
 
     def __init__(self) :
@@ -20,6 +20,9 @@ class Bullet(Moving) :
 
     def tick(self) :
     	Moving.tick(self)
+    	if self.actor.appearance.alpha < 20 :
+    	    self.actor.kill()
+    	    return
         
         for role in self.collisions("shootable") :
             if not role.getActor().isDying() :

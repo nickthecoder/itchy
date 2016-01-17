@@ -29,6 +29,8 @@ public class Projectile extends Companion
     public double growFactor = 1;
 
     public int lifeTicks;
+    
+    public int alphaLimit = 10;
 
     public Projectile( Role source )
     {
@@ -67,7 +69,7 @@ public class Projectile extends Companion
             getActor().getAppearance().setScale(getActor().getAppearance().getScale() * this.growFactor);
         }
 
-        if ((this.lifeTicks-- < 0) || (getActor().getAppearance().getAlpha() <= 0)) {
+        if ((this.lifeTicks-- < 0) || (getActor().getAppearance().getAlpha() <= this.alphaLimit)) {
             getActor().kill();
         }
     }
@@ -139,6 +141,12 @@ public class Projectile extends Companion
         public B life( double seconds )
         {
             this.companion.lifeTicks = (int) (Itchy.frameRate.getFrameRate() * seconds);
+            return getThis();
+        }
+        
+        public B alphaLimit( int limit )
+        {
+            this.companion.alphaLimit = limit;
             return getThis();
         }
 

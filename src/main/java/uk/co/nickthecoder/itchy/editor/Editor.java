@@ -9,6 +9,7 @@ import java.io.File;
 import uk.co.nickthecoder.itchy.Game;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.NullDirector;
+import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.GuiButton;
 import uk.co.nickthecoder.itchy.gui.Label;
@@ -181,6 +182,17 @@ public final class Editor extends Game
         buttons.addStyle("buttonBar");
         buttons.setXAlignment(1);
 
+        GuiButton test = new GuiButton(new Label("Test"));
+        test.addActionListener(new ActionListener()
+        {
+            @Override
+            public void action()
+            {
+                Editor.this.test();
+            }
+        });
+        buttons.addChild(test);
+
         GuiButton quit = new GuiButton(new Label("Quit"));
         quit.addActionListener(new ActionListener()
         {
@@ -213,6 +225,21 @@ public final class Editor extends Game
         }
 
         Itchy.mainLoop();
+    }
+    
+    public void test()
+    {
+        onSave();
+        
+        try {
+
+            Resources duplicate = this.resources.copy();
+            Game game = duplicate.game;
+            game.testScene(game.resources.getGameInfo().testScene);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }       
     }
 
     private void onSave()

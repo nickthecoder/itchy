@@ -11,7 +11,7 @@ import uk.co.nickthecoder.itchy.Actor;
 
 public class PixelCollisionTest implements CollisionTest
 {
-    public static final int DEFAULT_THRESHOLD = 1;
+    public static final int DEFAULT_THRESHOLD = 50;
     
     public static final PixelCollisionTest instance = new PixelCollisionTest();
 

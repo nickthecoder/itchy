@@ -879,7 +879,7 @@ public class Game
         running = false;
         Itchy.endGame();
     }
-
+    
     public void setStylesheet( Stylesheet rules )
     {
         this.stylesheet = rules;

@@ -146,7 +146,7 @@ public class AbstractDirector implements Director
     }
 
     /**
-     * Gets the root node for this game. The default implementation uses the path based on the Directors class name, and the game's ID.
+     * Gets the root node for this game. The default implementation uses the path based on Itchy's class name, and the game's ID.
      * Note, unlike {@link Game#getPreferences()}, the returned Preferences are not AutoFlushPreferences, you will need to call 'flush' to
      * commit each of the changes.
      * 
