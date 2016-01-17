@@ -155,7 +155,7 @@ public class AbstractDirector implements Director
     @Override
     public Preferences getPreferenceNode()
     {
-        return Preferences.userNodeForPackage(this.getClass()).node(this.game.resources.getId());
+        return Preferences.userNodeForPackage(Itchy.class).node(this.game.resources.getId());
     }
 
     /**
