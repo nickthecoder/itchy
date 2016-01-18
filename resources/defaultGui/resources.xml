@@ -45,14 +45,14 @@
         <ninePatch name="row-focus" filename="images/row-focus.png" top="3" right="3" left="3" bottom="3" middle="fill" />
         <ninePatch name="row-selected" filename="images/row-selected.png" top="3" right="3" left="3" bottom="3" middle="fill" />
         
-        <ninePatch name="text" filename="images/text.png" top="18" right="18" bottom="18" left="18"  middle="fill" />
-        <ninePatch name="text-focus" filename="images/text-focus.png" top="18" right="18" bottom="18" left="18"  middle="fill" />
-        <ninePatch name="text-error" filename="images/text-error.png" top="18" right="18" bottom="18" left="18"  middle="fill" />
+        <ninePatch name="text" filename="images/text.png" top="10" right="10" bottom="10" left="10"  middle="tile" />
+        <ninePatch name="text-focus" filename="images/text-focus.png" top="10" right="10" bottom="10" left="10"  middle="tile" />
+        <ninePatch name="text-error" filename="images/text-error.png" top="10" right="10" bottom="10" left="10"  middle="tile" />
         <ninePatch name="caret" filename="images/caret.png" top="8" right="0" bottom="8" left="12"  middle="fill" />                
 
-        <ninePatch name="text-naked" filename="images/text-naked.png" top="18" right="18" bottom="18" left="18"  middle="fill" />
-        <ninePatch name="text-naked-focus" filename="images/text-naked-focus.png" top="18" right="18" bottom="18" left="18"  middle="fill" />
-        <ninePatch name="text-naked-error" filename="images/text-naked-error.png" top="18" right="18" bottom="18" left="18"  middle="fill" />
+        <ninePatch name="text-naked" filename="images/text-naked.png" top="10" right="10" bottom="10" left="10"  middle="tile" />
+        <ninePatch name="text-naked-focus" filename="images/text-naked-focus.png" top="10" right="10" bottom="10" left="10"  middle="tile" />
+        <ninePatch name="text-naked-error" filename="images/text-naked-error.png" top="10" right="10" bottom="10" left="10"  middle="tile" />
 
         <ninePatch name="scrollerV" filename="images/scrollerV.png" top="14" right="5" bottom="14" left="5"  middle="fill" />
         <ninePatch name="scrollerH" filename="images/scrollerH.png" top="5" right="14" bottom="5" left="14"  middle="fill" />
