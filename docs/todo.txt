@@ -57,9 +57,6 @@ On Info tab in the editor, have a "Open Folder" button, which opens the game's f
 Code Tidy Up
 ============
 
-Drunk invaders - every instance of Alien creates a Fragments.
-    Also, Alien doesn't use the new Fragments code, because it is needed one per Costume, and this is tricky within java.
-
 Pixelator has a bodge in it. Sometime it needs to add one to all the pixels.
 	Do a test, and see if the top row of pixels are blank for large scales, and if so,
 		then move blit to another surface before embossing the edges.

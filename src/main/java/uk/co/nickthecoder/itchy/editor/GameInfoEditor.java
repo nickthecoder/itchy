@@ -6,6 +6,7 @@ package uk.co.nickthecoder.itchy.editor;
 
 import uk.co.nickthecoder.itchy.GameInfo;
 import uk.co.nickthecoder.itchy.gui.Container;
+import uk.co.nickthecoder.itchy.gui.FolderComponent;
 
 public class GameInfoEditor
 {
@@ -20,7 +21,13 @@ public class GameInfoEditor
     {
         GameInfo gameInfo = this.editor.resources.getGameInfo();
 
-        PropertiesForm<GameInfo> form = new PropertiesForm<GameInfo>(gameInfo, gameInfo.getProperties());
+
+        PropertiesForm<GameInfo> form = new PropertiesForm<GameInfo>(gameInfo, gameInfo.getProperties());        
+
+        FolderComponent folderComponent = new FolderComponent(this.editor.resources,this.editor.resources.getDirectory());
+        folderComponent.setReadOnly(true);
+        form.grid.addRow("Folder", folderComponent );
+
         form.autoUpdate = true;
         return form.createForm();
     }
