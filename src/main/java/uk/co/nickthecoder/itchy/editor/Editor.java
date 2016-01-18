@@ -68,6 +68,11 @@ public final class Editor extends Game implements KeyListener
 
     private KeyInput inputTest = KeyInput.parseKeyInput("ctrl+t");
     
+    private KeyInput inputRun = KeyInput.parseKeyInput("ctrl+r");
+    
+    private KeyInput inputQuit = KeyInput.parseKeyInput("ctrl+q");
+    
+    private KeyInput inputSave = KeyInput.parseKeyInput("ctrl+s");
     
     public Editor(Game game) throws Exception
     {
@@ -193,6 +198,7 @@ public final class Editor extends Game implements KeyListener
         buttons.setXAlignment(1);
 
         GuiButton test = new GuiButton(new Label("Test"));
+        test.setTooltip("ctrl+T");
         test.addActionListener(new ActionListener()
         {
             @Override
@@ -202,8 +208,21 @@ public final class Editor extends Game implements KeyListener
             }
         });
         buttons.addChild(test);
+        
+        GuiButton run = new GuiButton(new Label("Run"));
+        run.setTooltip("ctrl+R");
+        run.addActionListener(new ActionListener()
+        {
+            @Override
+            public void action()
+            {
+                Editor.this.run();
+            }
+        });
+        buttons.addChild(run);
 
         GuiButton quit = new GuiButton(new Label("Quit"));
+        quit.setTooltip("ctrl+Q");
         quit.addActionListener(new ActionListener()
         {
             @Override
@@ -216,6 +235,7 @@ public final class Editor extends Game implements KeyListener
         buttons.addChild(quit);
 
         GuiButton save = new GuiButton(new Label("Save"));
+        save.setTooltip("ctrl+S");
         buttons.addChild(save);
         save.addActionListener(new ActionListener()
         {
@@ -235,6 +255,22 @@ public final class Editor extends Game implements KeyListener
         }
         addKeyListener(this);
         Itchy.mainLoop();
+    }
+    
+    
+    public void run()
+    {
+        onSave();
+        
+        try {
+
+            Resources duplicate = this.resources.copy();
+            Game game = duplicate.game;
+            game.testScene(game.resources.getGameInfo().initialScene);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }       
     }
     
     public void test()
@@ -302,6 +338,16 @@ public final class Editor extends Game implements KeyListener
     {
         if (inputTest.matches(ke)) {
             test();
+        }
+        if (inputRun.matches(ke)) {
+            run();
+        }
+        if (inputQuit.matches(ke)) {
+            Editor.instance = null;
+            Editor.this.end();
+        }
+        if (inputSave.matches(ke)) {
+            onSave();
         }
     }
 
