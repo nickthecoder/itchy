@@ -1,9 +1,9 @@
 <resources>
-  <game title="Cover of Darkness" width="800" height="600" resizable="false" initialScene="start" directorClassName="director.py" authors="Nick Robinson&#xA;Matthew Robinson"/>
+  <game title="Cover of Darkness" width="800" height="600" resizable="false" initialScene="start" testScene="start" directorClassName="director.py" authors="Nick Robinson&#xA;Matthew Robinson"/>
   <spriteSheets>
     <spriteSheet name="floor1" file="images/floor1.png">
-      <sprite name="new" x="0" y="0" width="1" height="1" direction="0.0" offsetX="0" offsetY="0"/>
       <sprite name="foo" x="10" y="10" width="50" height="50" direction="0.0" offsetX="0" offsetY="0"/>
+      <sprite name="new" x="0" y="0" width="1" height="1" direction="0.0" offsetX="0" offsetY="0"/>
     </spriteSheet>
   </spriteSheets>
   <poses>
@@ -42,8 +42,8 @@
     <animation name="testSprites">
       <sequence sequence="true" loops="1">
         <frames pingPong="false">
-          <frame pose="foo" delay="1"/>
-          <frame pose="new" delay="1"/>
+          <frame pose="foo" delay="1" dx="0.0" dy="0.0"/>
+          <frame pose="new" delay="1" dx="0.0" dy="0.0"/>
         </frames>
       </sequence>
     </animation>

@@ -1,7 +1,7 @@
 Current Tasks
 =============
 
-
+Editor revert back to wrong size after test is finished.
 
 
 BUGS
@@ -11,11 +11,7 @@ Appearance.fixPose doesn't do the right thing with direction.
 	Setting dir to 0 works, but ideally both appearance and the new pose should have the old appearance's direction,
 	and yet the pose won't need rotating.
 
-
 TextArea's background center of nine patch is flat colour rather than tiled.
-
-SceneDesigner doesn't use the full width when window is maximised
-SceneDesigner toolbox isn't moved when the window is maximised (floats in middle of the screen).
 
 Can delete Poses which are used in a Framed animation
     Ditto for a Sprite.
@@ -49,9 +45,6 @@ Spritesheet : Crop. Remove all transparent edges, updating the x,y offsets appro
 Have a preview image of the animation in FramedAnimationEditor.
 	Single step back/forward or continuous.
 	In fact, don't have the list or poses, just show one frame's details, and scroll back/forward to edit others.
-
-
-On Info tab in the editor, have a "Open Folder" button, which opens the game's folder in nautilus/file explorer
 
 
 Code Tidy Up

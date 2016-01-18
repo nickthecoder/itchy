@@ -162,11 +162,10 @@
     <actor costume="wall3" x="543" y="102" direction="0.0" heading="0.0" startEvent="default" zOrder="55"/>
     <actor costume="wall4" x="472" y="294" direction="0.0" heading="0.0" startEvent="default" zOrder="56"/>
     <text text="0" font="Vera" size="40" color="#ffffff" xAlignment="1.0" yAlignment="0.0" role="uk.co.nickthecoder.itchy.role.NumberValue" x="787" y="589" direction="0.0" heading="0.0" startEvent="default" zOrder="57" colorize="#ff75e4ff">
-      <property name="formatPattern" value="0"/>
       <property name="nullValue" value=""/>
       <property name="errorValue" value=""/>
-      <property name="updateInterval" value="0.0"/>
       <property name="quiet" value="false"/>
+      <property name="updateInterval" value="0.0"/>
       <property name="access" value="director.time"/>
     </text>
   </layer>

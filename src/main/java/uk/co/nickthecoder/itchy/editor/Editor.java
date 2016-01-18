@@ -33,6 +33,10 @@ public final class Editor extends Game implements KeyListener
 
     private Game game;
 
+    private int width = 1000;
+    
+    private int height = 720;
+    
     public RootContainer root;
 
     // public PreferencesEditor preferencesEditor;
@@ -124,13 +128,13 @@ public final class Editor extends Game implements KeyListener
     @Override
     public int getWidth()
     {
-        return 1000;
+        return width;
     }
 
     @Override
     public int getHeight()
     {
-        return 720;
+        return height;
     }
 
     @Override
@@ -276,12 +280,21 @@ public final class Editor extends Game implements KeyListener
     public void resize(int width, int height)
     {
         super.resize(width, height);
+        this.width = width;
+        this.height = height;
         root.setPosition(0, 0, width, height);
 
         root.resizeView();
         if (sceneDesigner != null) {
             sceneDesigner.resize(width, height);
         }
+        
+        this.root.setMinimumWidth(width);
+        this.root.setMinimumHeight(height);
+
+        this.root.setMaximumWidth(width);
+        this.root.setMaximumHeight(height);
+
     }
 
     @Override
