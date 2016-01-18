@@ -23,23 +23,22 @@ import uk.co.nickthecoder.jame.event.MouseEvent;
 import uk.co.nickthecoder.jame.event.ResizeEvent;
 
 /**
- * The top-level manager of the game engine.
- * It only has static methods.
- * Manages the game loop, including the redrawing of the screen, and dispatching events.
+ * The top-level manager of the game engine. It only has static methods. Manages the game loop, including the redrawing
+ * of the screen, and dispatching events.
  * 
  */
 public class Itchy
 {
 
     /**
-     * This is the highest SDL key sym which can be checked using isKeyDown(). The highest key sym is currently 321, and I'm using 400,
-     * which leaves plenty of room for additional keys to be added in the future.
+     * This is the highest SDL key sym which can be checked using isKeyDown(). The highest key sym is currently 321, and
+     * I'm using 400, which leaves plenty of room for additional keys to be added in the future.
      */
     private static int KEYBOARD_STATE_SIZE = 400;
 
     /**
-     * Holds a boolean for each key. On key pressed events sets the appropriate boolean, and key released events reset the boolean. Uses the
-     * Keys values to index the array.
+     * Holds a boolean for each key. On key pressed events sets the appropriate boolean, and key released events reset
+     * the boolean. Uses the Keys values to index the array.
      */
     private static boolean[] keyboardState;
 
@@ -61,7 +60,6 @@ public class Itchy
 
     private static File baseDirectory;
 
-    
     public static int keyboardRepeatDelay = Events.DEFAULT_REPEAT_DELAY;
 
     public static int keyboardRepeatInterval = Events.DEFAULT_REPEAT_INTERVAL;
@@ -69,18 +67,19 @@ public class Itchy
     private static long lastWindowResizeTime = 0;
 
     /**
-     * The FrameRate is in charge of ensuring that the game runs at the correct speed, redrawing the screen at regular intervals
-     * and decides what to do when the required frame rate cannot be maintained.
+     * The FrameRate is in charge of ensuring that the game runs at the correct speed, redrawing the screen at regular
+     * intervals and decides what to do when the required frame rate cannot be maintained.
      * 
      * Most games can leave this alone, but advanced programmers may want to create a new implementation of FrameRate,
-     * and therefore having more control over the frame rate. 
+     * and therefore having more control over the frame rate.
      */
     public static FrameRate frameRate = new SimpleFrameRate();
 
     /**
-     * SoundManager is a thin layer over Jame's sound system adding some extra features; the option to end sounds when its Actor is killed,
-     * as well as choosing what to do when a single sound is asked to play more than once simultaneously.
-     *  
+     * SoundManager is a thin layer over Jame's sound system adding some extra features; the option to end sounds when
+     * its Actor is killed, as well as choosing what to do when a single sound is asked to play more than once
+     * simultaneously.
+     * 
      * Most games can leave this alone.
      */
     public static SoundManager soundManager;
@@ -122,14 +121,14 @@ public class Itchy
     }
 
     /**
-     * This is called automatically when the game's ".itchy" file is being loaded (because it gets the game's width and height from
-     * this file).
-     * As this is called automatically, you don't need to worry about it.
+     * This is called automatically when the game's ".itchy" file is being loaded (because it gets the game's width and
+     * height from this file). As this is called automatically, you don't need to worry about it.
      * 
-     * @param resources Uses the resource's GameInfo to set the screen size.
+     * @param resources
+     *            Uses the resource's GameInfo to set the screen size.
      * @throws Exception
      */
-    public static void init( Resources resources ) throws Exception
+    public static void init(Resources resources) throws Exception
     {
         if (initialised) {
             return;
@@ -146,23 +145,27 @@ public class Itchy
     }
 
     /**
-     * Most games don't have resizable windows, so this method isn't used much.
-     * Note, this only changes the size of the screen, it does not change the sizes of the {@link View}s.
-     * @param width The new width of the screen in pixels.
-     * @param height The new height of the screen in pixels.
+     * Most games don't have resizable windows, so this method isn't used much. Note, this only changes the size of the
+     * screen, it does not change the sizes of the {@link View}s.
+     * 
+     * @param width
+     *            The new width of the screen in pixels.
+     * @param height
+     *            The new height of the screen in pixels.
      */
-    public static void resizeScreen( int width, int height )
+    public static void resizeScreen(int width, int height)
     {
-    	Game game = currentGame;
-    	
-        setScreenMode( game.getTitle(), game.resources,  width, height, game.isResizable() );
+        Game game = currentGame;
+
+        setScreenMode(game.getTitle(), game.resources, width, height, game.isResizable());
         lastWindowResizeTime = new Date().getTime();
     }
-    
+
     /**
-     * Gets Itchy's base directory - it is the directory which has the "resources" sub-directory, and its used to find all of the games'
-     * resources.
-     * Most of the time this will be the current directory, but if you set the system property "itchy.base", then it will use that instead. 
+     * Gets Itchy's base directory - it is the directory which has the "resources" sub-directory, and its used to find
+     * all of the games' resources. Most of the time this will be the current directory, but if you set the system
+     * property "itchy.base", then it will use that instead.
+     * 
      * @return The system property "itchy.base" if it is set, otherwise the current directory (".").
      */
     public static File getBaseDirectory()
@@ -191,27 +194,25 @@ public class Itchy
      */
     public static Game getGame()
     {
-        if ( loadingGame != null ) {
+        if (loadingGame != null) {
             return loadingGame;
         } else {
             return currentGame;
         }
     }
 
-
-    private static void setScreenMode( Resources resources )
+    private static void setScreenMode(Resources resources)
     {
-    	GameInfo gameInfo = resources.getGameInfo();
-        setScreenMode(gameInfo.title, resources, gameInfo.width, gameInfo.height, gameInfo.resizable );
+        GameInfo gameInfo = resources.getGameInfo();
+        setScreenMode(gameInfo.title, resources, gameInfo.width, gameInfo.height, gameInfo.resizable);
     }
-    
-    private static void setScreenMode( Game game )
-    {
-        setScreenMode(game.getTitle(), game.resources, game.getWidth(), game.getHeight(), game.isResizable() );
-    }
-    
 
-    private static void setScreenMode( String title, Resources resources, int width, int height, boolean resizable )
+    private static void setScreenMode(Game game)
+    {
+        setScreenMode(game.getTitle(), game.resources, game.getWidth(), game.getHeight(), game.isResizable());
+    }
+
+    private static void setScreenMode(String title, Resources resources, int width, int height, boolean resizable)
     {
         Video.setWindowTitle(title);
 
@@ -236,28 +237,28 @@ public class Itchy
         }
 
         try {
-        	int flags = Video.SWSURFACE | Video.DOUBLEBUF;
-        	if ( resizable ) {
-        		flags = flags | Video.RESIZABLE;
-        	}
+            int flags = Video.SWSURFACE | Video.DOUBLEBUF;
+            if (resizable) {
+                flags = flags | Video.RESIZABLE;
+            }
             Video.setMode(width, height, 32, flags);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    
-    public void setFrameRate( FrameRate newFrameRate )
+
+    public void setFrameRate(FrameRate newFrameRate)
     {
-    	if ( running ) {
-    		frameRate.end();
-    	}
-		frameRate = newFrameRate;
-    	if ( running ) {
-    		frameRate.loop();
-    	}
+        if (running) {
+            frameRate.end();
+        }
+        frameRate = newFrameRate;
+        if (running) {
+            frameRate.loop();
+        }
     }
-    
-    public static void startGame( Game game )
+
+    public static void startGame(Game game)
     {
         loadingGame = null;
         if (currentGame != null) {
@@ -269,14 +270,14 @@ public class Itchy
         setScreenMode(currentGame);
     }
 
-    public static void loadingGame( Game game )
+    public static void loadingGame(Game game)
     {
         loadingGame = game;
     }
-    
+
     /**
-     * Should be called once from the program's entry point (static void main method; usually from {@link Launcher}).
-     * To exit from the mainLoop, call {@link #terminate()}.
+     * Should be called once from the program's entry point (static void main method; usually from {@link Launcher}). To
+     * exit from the mainLoop, call {@link #terminate()}.
      */
     public static void mainLoop()
     {
@@ -284,16 +285,16 @@ public class Itchy
             if (!running) {
                 running = true;
                 while (running) {
-                	frameRate.loop();
+                    frameRate.loop();
                 }
             }
         } catch (Exception e) {
             System.err.println("Mainloop Failed");
-            handleException( e );
+            handleException(e);
         }
     }
 
-    public static void handleException( Exception e )
+    public static void handleException(Exception e)
     {
         e.printStackTrace();
         if (e instanceof org.python.core.PySyntaxError) {
@@ -301,13 +302,13 @@ public class Itchy
                 if (ste.getClassName().startsWith("org.python")) {
                     // Ignored
                 } else {
-                    System.err.println( ste );
+                    System.err.println(ste);
                 }
             }
-            System.err.println( "Python script exception!" );
-        }        
+            System.err.println("Python script exception!");
+        }
     }
-    
+
     public static void endGame()
     {
         currentGame.onDeactivate();
@@ -328,8 +329,8 @@ public class Itchy
     }
 
     /**
-     * Indicates that the main loop should end. Note the game does not end immediately, it only sets a flag, which will cause the main loop
-     * to end after the current frame has been processed.
+     * Indicates that the main loop should end. Note the game does not end immediately, it only sets a flag, which will
+     * cause the main loop to end after the current frame has been processed.
      */
     public static void terminate()
     {
@@ -337,7 +338,7 @@ public class Itchy
         frameRate.end();
         running = false;
     }
-    
+
     /**
      * Processes events (such as key strokes and mouse), called once per frame from {@link FrameRate}'s loop.
      */
@@ -345,10 +346,10 @@ public class Itchy
     {
         eventProcessor.run();
     }
-    
+
     /**
-     * Called once per frame from {@link FrameRate}'s loop. Calls tick on the soundManager, and the current game.
-     * (This will in turn call the tick of the Director, the SceneDirector and all Actor's roles.
+     * Called once per frame from {@link FrameRate}'s loop. Calls tick on the soundManager, and the current game. (This
+     * will in turn call the tick of the Director, the SceneDirector and all Actor's roles.
      */
     public static void tick()
     {
@@ -374,7 +375,8 @@ public class Itchy
         Video.flip();
     }
 
-    /** Is itchy still running?
+    /**
+     * Is itchy still running?
      * 
      * @return False if Itchy should exit at the end of the current frame. True otherwise.
      */
@@ -386,7 +388,7 @@ public class Itchy
     /**
      * Should holding down a key cause repeated events, or just a single one?
      */
-    public static void enableKeyboardRepeat( boolean value )
+    public static void enableKeyboardRepeat(boolean value)
     {
         if (value) {
             Events.keyboardRepeat(keyboardRepeatDelay, keyboardRepeatInterval);
@@ -395,14 +397,14 @@ public class Itchy
         }
     }
 
-    public static boolean isKeyDown( int keySym )
+    public static boolean isKeyDown(int keySym)
     {
         return keyboardState[keySym];
     }
 
     /**
-     * Tests state of either shift keys.
-     * A convenience method, the same as <code>isKeyDown( Keys.LSHIFT ) || isKeyDown( Keys.RSHIFT )</code>
+     * Tests state of either shift keys. A convenience method, the same as
+     * <code>isKeyDown( Keys.LSHIFT ) || isKeyDown( Keys.RSHIFT )</code>
      */
     public static boolean isShiftDown()
     {
@@ -410,8 +412,8 @@ public class Itchy
     }
 
     /**
-     * Tests state of either control keys.
-     * A convenience method, the same as <code>isKeyDown( Keys.LCTRL ) || isKeyDown( Keys.RCTRL )</code>
+     * Tests state of either control keys. A convenience method, the same as
+     * <code>isKeyDown( Keys.LCTRL ) || isKeyDown( Keys.RCTRL )</code>
      */
     public static boolean isCtrlDown()
     {
@@ -419,8 +421,8 @@ public class Itchy
     }
 
     /**
-     * Tests state of either control keys.
-     * A convenience method, the same as <code>isKeyDown( Keys.LALT ) || isKeyDown( Keys.RALT )</code>
+     * Tests state of either control keys. A convenience method, the same as
+     * <code>isKeyDown( Keys.LALT ) || isKeyDown( Keys.RALT )</code>
      */
     public static boolean isAltDown()
     {
@@ -428,34 +430,36 @@ public class Itchy
     }
 
     /**
-     * Tests state of either meta keys.
-     * A convenience method, the same as <code>isKeyDown( Keys.LMETA ) || isKeyDown( Keys.RMETA )</code>
+     * Tests state of either meta keys. A convenience method, the same as
+     * <code>isKeyDown( Keys.LMETA ) || isKeyDown( Keys.RMETA )</code>
      */
     public static boolean isMetaDown()
     {
         return keyboardState[Keys.LMETA] || keyboardState[Keys.RMETA];
     }
-    
+
     /**
      * Processes a single event. Called from {@link #processEvents}.
+     * 
      * @param event
      */
-    static void processEvent( Event event )
+    static void processEvent(Event event)
     {
-    	if (event instanceof ResizeEvent) {
-    		// Using Gnome 3.14.1, when a window border is dragged, the correct resize event is sent, but
-    		// then the window is resized, and ANOTHER resize event is fired which includes the
-    		// size of the chrome (title bar and borders). This bodge stops a runaway, where the window
-    		// is made higher and higher when dragging sideways. It does not completely fix the problem, but
-    		// makes it bearable.
-    		long diff = new Date().getTime() - lastWindowResizeTime;
-    		if ( diff < 500 ) {
-    			// Ignore the resize event which happens within 0.5 seconds of the window being resized.
-    			lastWindowResizeTime = 0;
-    			return;
-    		}
-    	}
-    	
+        if (event instanceof ResizeEvent) {
+
+            // Using Gnome 3.14.1, when a window border is dragged, the correct resize event is sent, but
+            // then the window is resized, and ANOTHER resize event is fired which includes the
+            // size of the chrome (title bar and borders). This bodge stops a runaway, where the window
+            // is made higher and higher when dragging sideways. It does not completely fix the problem, but
+            // makes it bearable.
+            long diff = new Date().getTime() - lastWindowResizeTime;
+            if (diff < 500) {
+                // Ignore the resize event which happens within 0.5 seconds of the window being resized.
+                lastWindowResizeTime = 0;
+                return;
+            }
+        }
+
         if (event instanceof KeyboardEvent) {
             KeyboardEvent ke = (KeyboardEvent) event;
 
@@ -485,8 +489,8 @@ public class Itchy
     }
 
     /**
-     * Taken from the last MouseEvent
-     * 0 is the left edge of the screen.
+     * Taken from the last MouseEvent 0 is the left edge of the screen.
+     * 
      * @return The x position of the mouse in pixels.
      */
     public static int getMouseX()
@@ -495,8 +499,8 @@ public class Itchy
     }
 
     /**
-     * Taken from the last MouseEvent
-     * 0 is the top edge of the screen.
+     * Taken from the last MouseEvent 0 is the top edge of the screen.
+     * 
      * @return The y position of the mouse in pixels.
      */
     public static int getMouseY()
@@ -510,5 +514,5 @@ public class Itchy
     private Itchy()
     {
     }
-    
+
 }

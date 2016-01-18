@@ -13,7 +13,7 @@ public abstract class AbstractScrollableView extends AbstractView implements Scr
      */
     protected final WorldRectangle worldRect;
 
-    public AbstractScrollableView( Rect position )
+    public AbstractScrollableView(Rect position)
     {
         super(position);
         this.worldRect = new WorldRectangle(0, 0, position.width, position.height);
@@ -26,34 +26,42 @@ public abstract class AbstractScrollableView extends AbstractView implements Scr
     }
 
     @Override
-    public void centerOn( Actor actor )
+    public void setPosition(Rect rect)
+    {
+        super.setPosition(rect);
+        this.worldRect.width = rect.width;
+        this.worldRect.height = rect.height;
+    }
+
+    @Override
+    public void centerOn(Actor actor)
     {
         this.centerOn(actor.getX(), actor.getY());
     }
 
     @Override
-    public void centerOn( double x, double y )
+    public void centerOn(double x, double y)
     {
         this.worldRect.x = x - this.worldRect.width / 2;
         this.worldRect.y = y - this.worldRect.height / 2;
     }
 
     @Override
-    public void scrollTo( double x, double y )
+    public void scrollTo(double x, double y)
     {
         this.worldRect.x = x;
         this.worldRect.y = y;
     }
 
     @Override
-    public void scrollBy( double dx, double dy )
+    public void scrollBy(double dx, double dy)
     {
         this.worldRect.x += dx;
         this.worldRect.y += dy;
     }
 
     @Override
-    public boolean contains( int x, int y )
+    public boolean contains(int x, int y)
     {
         Rect position = this.getAbsolutePosition();
         if ((x < position.x) || (y < position.y) || (x > position.x + position.width) ||

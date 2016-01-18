@@ -10,7 +10,7 @@ import uk.co.nickthecoder.itchy.Game;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.KeyInput;
 import uk.co.nickthecoder.itchy.KeyListener;
-import uk.co.nickthecoder.itchy.NullDirector;
+import uk.co.nickthecoder.itchy.PlainDirector;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.GuiButton;
@@ -70,7 +70,7 @@ public final class Editor extends Game implements KeyListener
         super(game.resources);
         this.game = game;
         instance = this;
-        setDirector(new NullDirector());
+        setDirector(new PlainDirector());
 
         this.init();
 
@@ -272,6 +272,7 @@ public final class Editor extends Game implements KeyListener
         }
     }
 
+    @Override
     public void resize(int width, int height)
     {
         super.resize(width, height);

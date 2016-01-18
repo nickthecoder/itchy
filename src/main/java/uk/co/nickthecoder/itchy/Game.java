@@ -513,7 +513,7 @@ public class Game
      */
     public void render( Surface display )
     {
-        Rect screenRect = new Rect(0, 0, getWidth(), getHeight());
+        Rect screenRect = new Rect(0, 0, display.getWidth(), display.getHeight());
         this.allViews.render(display, screenRect, 0, 0);
     }
 
