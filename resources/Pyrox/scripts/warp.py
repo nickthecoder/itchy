@@ -13,7 +13,7 @@ class Warp(GridRole) :
 
     def __init__(self) :
         super(Warp,self).__init__()
-        self.scene = "menu"
+        self.scene = "play"
         self.exitX = 0
         self.exitY = -1
         

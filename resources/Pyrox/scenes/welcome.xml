@@ -3,7 +3,7 @@
   <layer name="plain">
     <text text="PyroX" font="Boycott" size="222" color="#ff7e1a" xAlignment="0.5" yAlignment="0.5" x="371" y="272" direction="0.0" heading="0.0" startEvent="default" zOrder="-1">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Textured">
-        <property name="poseName" value="wall"/>
+        <property name="pose" value="wall"/>
         <property name="y" value="0"/>
         <property name="x" value="1"/>
       </makeup>
@@ -132,6 +132,7 @@
     <actor costume="rock" x="-300" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
     <actor costume="balloon" x="360" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
     <actor costume="gate" x="360" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="40">
+      <property name="spare" value="0"/>
       <property name="scene" value="play"/>
     </actor>
     <actor costume="coin" x="-540" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
@@ -154,9 +155,9 @@
   <layer name="glass">
     <actor costume="sledge" x="211" y="412" direction="0.0" heading="0.0" startEvent="default" zOrder="90">
       <property name="text" value="Welcome to Pyrox&#xA;Let's go.&#xA;"/>
-      <property name="initialDelay" value="1"/>
+      <property name="initialDelay" value="1.0"/>
       <property name="loop" value="true"/>
-      <property name="period" value="9"/>
+      <property name="period" value="9.0"/>
     </actor>
   </layer>
 </scene>
