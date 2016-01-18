@@ -4,15 +4,15 @@
  ******************************************************************************/
 package uk.co.nickthecoder.drunkinvaders;
 
-import uk.co.nickthecoder.itchy.AbstractRole;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.util.Tag;
 
 @Tag(names = { "killable", "shootable" })
-public class Shield extends AbstractRole implements Shootable
+public class Shield extends Bouncy implements Shootable
 {
     public Shield()
     {
+        this.mass = 10000;
     }
 
     @Override
@@ -24,5 +24,9 @@ public class Shield extends AbstractRole implements Shootable
     @Override
     public void tick()
     {
+        // If we have bounced, then kill ourselves.
+        if ((this.vx != 0) || (this.vy!=0)) {
+            this.getActor().kill();
+        }
     }
 }
