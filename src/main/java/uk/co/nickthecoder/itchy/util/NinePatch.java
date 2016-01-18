@@ -42,7 +42,7 @@ public class NinePatch extends ImageRenderable
     /**
      * If {@link #middle} is <code>Middle.fill</code>, then this is the colour used to draw the middle.
      */
-    protected RGBA backgroundColor;
+    public RGBA backgroundColor;
 
     /**
      * Creates a nine patch with the desired margins, with the default middle of <code>Middle.file</code>.
