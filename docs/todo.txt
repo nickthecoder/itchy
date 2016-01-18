@@ -1,12 +1,7 @@
 Current Tasks
 =============
 
-Game to have a "test" scene.
-    Anywhere in the editor, press F?? and it runs the test scene.
 
-Ming bashers only bash twice?
-
-Remaining Ming Jobs: Climbers, Miners, Leavers, Drowners, 
 
 
 BUGS
@@ -43,6 +38,8 @@ Use Scroll for TextArea, instead of its buggy, self implemented, non-clipping sc
     Clip the TextBox input too.
 
 Finish The-Mings
+    Remaining Ming Jobs: Climbers, Miners, Leavers, Drowners, 
+    Ming bashers only bash twice?
 
 Design Stages/Views graphically - Aim for no code in Director.
 

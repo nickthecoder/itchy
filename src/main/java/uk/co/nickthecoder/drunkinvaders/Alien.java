@@ -52,7 +52,6 @@ public class Alien extends Bouncy implements Shootable
     {
         super.onBirth();
         DrunkInvaders.director.addAliens(1);
-        new Fragments().createPoses(getActor());
     }
 
     @Override
