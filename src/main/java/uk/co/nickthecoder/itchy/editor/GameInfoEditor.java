@@ -7,6 +7,7 @@ package uk.co.nickthecoder.itchy.editor;
 import uk.co.nickthecoder.itchy.GameInfo;
 import uk.co.nickthecoder.itchy.gui.Container;
 import uk.co.nickthecoder.itchy.gui.FolderComponent;
+import uk.co.nickthecoder.itchy.gui.PropertiesForm;
 
 public class GameInfoEditor
 {

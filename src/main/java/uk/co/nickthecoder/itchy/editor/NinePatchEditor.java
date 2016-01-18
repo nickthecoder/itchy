@@ -15,6 +15,7 @@ import uk.co.nickthecoder.itchy.gui.AbstractComponent;
 import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.FileOpenDialog;
+import uk.co.nickthecoder.itchy.gui.FilenameComponent;
 import uk.co.nickthecoder.itchy.gui.ImageComponent;
 import uk.co.nickthecoder.itchy.gui.IntegerBox;
 import uk.co.nickthecoder.itchy.gui.Label;

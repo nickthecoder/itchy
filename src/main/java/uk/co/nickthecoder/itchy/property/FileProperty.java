@@ -7,9 +7,9 @@ package uk.co.nickthecoder.itchy.property;
 import java.io.File;
 
 import uk.co.nickthecoder.itchy.Itchy;
-import uk.co.nickthecoder.itchy.editor.FilenameComponent;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.Component;
+import uk.co.nickthecoder.itchy.gui.FilenameComponent;
 import uk.co.nickthecoder.itchy.gui.TextBox;
 
 public class FileProperty<S> extends Property<S, File>

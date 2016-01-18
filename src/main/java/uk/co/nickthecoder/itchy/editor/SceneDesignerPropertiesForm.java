@@ -10,6 +10,7 @@ import java.util.Map;
 
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.Component;
+import uk.co.nickthecoder.itchy.gui.PropertiesForm;
 import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.util.StringUtils;
 

@@ -15,6 +15,7 @@ import uk.co.nickthecoder.itchy.ManagedSound;
 import uk.co.nickthecoder.itchy.SoundResource;
 import uk.co.nickthecoder.itchy.Thumbnailed;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
+import uk.co.nickthecoder.itchy.gui.FilenameComponent;
 import uk.co.nickthecoder.itchy.gui.GuiButton;
 import uk.co.nickthecoder.itchy.gui.AbstractComponent;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;

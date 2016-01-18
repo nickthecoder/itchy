@@ -41,6 +41,7 @@ import uk.co.nickthecoder.itchy.gui.ClassNameBox;
 import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.Container;
+import uk.co.nickthecoder.itchy.gui.CostumePicker;
 import uk.co.nickthecoder.itchy.gui.FlowLayout;
 import uk.co.nickthecoder.itchy.gui.GridLayout;
 import uk.co.nickthecoder.itchy.gui.GuiButton;

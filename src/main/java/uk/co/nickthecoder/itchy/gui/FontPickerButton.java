@@ -2,59 +2,58 @@
  * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
  * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
-package uk.co.nickthecoder.itchy.editor;
+package uk.co.nickthecoder.itchy.gui;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import uk.co.nickthecoder.itchy.CostumeResource;
+import uk.co.nickthecoder.itchy.FontResource;
 import uk.co.nickthecoder.itchy.Resources;
-import uk.co.nickthecoder.itchy.gui.ActionListener;
-import uk.co.nickthecoder.itchy.gui.GuiButton;
-import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
-import uk.co.nickthecoder.itchy.gui.ImageComponent;
-import uk.co.nickthecoder.itchy.gui.Label;
-import uk.co.nickthecoder.itchy.gui.VerticalLayout;
 
-public class CostumePickerButton extends GuiButton implements ActionListener
+public class FontPickerButton extends GuiButton implements ActionListener
 {
     private Resources resources;
 
-    private CostumeResource costumeResource;
+    private FontResource fontResource;
 
     private List<ComponentChangeListener> changeListeners = new ArrayList<ComponentChangeListener>();
 
-    private ImageComponent img;
+    private Label example;
 
     private Label label;
 
-    public CostumePickerButton( Resources resources, CostumeResource costumeResource )
+    public FontPickerButton( Resources resources, FontResource fontResource )
     {
         super();
         this.layout = new VerticalLayout();
         this.setXAlignment(0.5f);
 
-        this.img = new ImageComponent(costumeResource.getThumbnail());
-        this.label = new Label(costumeResource.getName());
-        this.addChild(this.img);
+        this.example = FontPicker.createExample(fontResource);
+        this.label = new Label(fontResource.getName());
+        this.addChild(this.example);
         this.addChild(this.label);
 
         this.resources = resources;
-        this.costumeResource = costumeResource;
+        this.fontResource = fontResource;
         this.addActionListener(this);
     }
 
-    public CostumeResource getValue()
+    public FontResource getValue()
     {
-        return this.costumeResource;
+        return this.fontResource;
     }
 
-    public void setValue( CostumeResource costumeResource )
+    public void setCompact( boolean value )
     {
-        this.costumeResource = costumeResource;
+        this.example.setVisible(!value);
+    }
 
-        this.img.setImage(costumeResource.getThumbnail());
-        this.label.setText(costumeResource.getName());
+    public void setValue( FontResource fontResource )
+    {
+        this.fontResource = fontResource;
+
+        this.example.setFont(fontResource.font);
+        this.label.setText(fontResource.getName());
 
         for (ComponentChangeListener listener : this.changeListeners) {
             listener.changed();
@@ -64,12 +63,12 @@ public class CostumePickerButton extends GuiButton implements ActionListener
     @Override
     public void action()
     {
-        CostumePicker picker = new CostumePicker(this.resources)
+        FontPicker picker = new FontPicker(this.resources, this.getValue())
         {
             @Override
-            public void pick( CostumeResource costumeResource )
+            public void pick( FontResource fontResource )
             {
-                setValue(costumeResource);
+                setValue(fontResource);
             }
         };
         picker.show();

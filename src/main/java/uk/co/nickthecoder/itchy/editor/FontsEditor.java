@@ -16,6 +16,7 @@ import uk.co.nickthecoder.itchy.Scene;
 import uk.co.nickthecoder.itchy.SceneResource;
 import uk.co.nickthecoder.itchy.TextStyle;
 import uk.co.nickthecoder.itchy.gui.FileOpenDialog;
+import uk.co.nickthecoder.itchy.gui.FilenameComponent;
 import uk.co.nickthecoder.itchy.gui.MessageBox;
 import uk.co.nickthecoder.itchy.gui.ReflectionTableModelRow;
 import uk.co.nickthecoder.itchy.gui.SimpleTableModel;

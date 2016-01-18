@@ -25,6 +25,7 @@ import uk.co.nickthecoder.itchy.gui.Container;
 import uk.co.nickthecoder.itchy.gui.ImageComponent;
 import uk.co.nickthecoder.itchy.gui.IntegerBox;
 import uk.co.nickthecoder.itchy.gui.Label;
+import uk.co.nickthecoder.itchy.gui.PosePicker;
 import uk.co.nickthecoder.itchy.gui.VerticalScroll;
 
 public class FramedAnimationEditor extends AnimationEditor
