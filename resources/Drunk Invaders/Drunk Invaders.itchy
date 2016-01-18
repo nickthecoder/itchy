@@ -1,5 +1,5 @@
 <resources>
-  <game title="Drunk Invaders" width="640" height="480" resizable="false" initialScene="menu" directorClassName="uk.co.nickthecoder.drunkinvaders.DrunkInvaders" authors="Nick TheCoder"/>
+  <game title="Drunk Invaders" width="640" height="480" resizable="false" initialScene="menu" testScene="test" directorClassName="uk.co.nickthecoder.drunkinvaders.DrunkInvaders" authors="Nick TheCoder"/>
   <spriteSheets/>
   <poses>
     <pose name="alien1a" filename="images/alien1a.png" direction="-90.0"/>
