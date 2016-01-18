@@ -8,6 +8,8 @@ import java.io.File;
 
 import uk.co.nickthecoder.itchy.Game;
 import uk.co.nickthecoder.itchy.Itchy;
+import uk.co.nickthecoder.itchy.KeyInput;
+import uk.co.nickthecoder.itchy.KeyListener;
 import uk.co.nickthecoder.itchy.NullDirector;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
@@ -19,8 +21,9 @@ import uk.co.nickthecoder.itchy.gui.PlainContainer;
 import uk.co.nickthecoder.itchy.gui.RootContainer;
 import uk.co.nickthecoder.itchy.gui.Stylesheet;
 import uk.co.nickthecoder.itchy.gui.VerticalLayout;
+import uk.co.nickthecoder.jame.event.KeyboardEvent;
 
-public final class Editor extends Game
+public final class Editor extends Game implements KeyListener
 {
     public static Editor instance;
 
@@ -59,6 +62,9 @@ public final class Editor extends Game
     
     private String designSceneName = null;
 
+    private KeyInput inputTest = KeyInput.parseKeyInput("ctrl+t");
+    
+    
     public Editor(Game game) throws Exception
     {
         super(game.resources);
@@ -223,7 +229,7 @@ public final class Editor extends Game
         if (this.designSceneName != null) {
             this.scenesEditor.design(this.designSceneName);
         }
-
+        addKeyListener(this);
         Itchy.mainLoop();
     }
     
@@ -275,6 +281,20 @@ public final class Editor extends Game
         if (sceneDesigner != null) {
             sceneDesigner.resize(width, height);
         }
+    }
+
+    @Override
+    public void onKeyDown(KeyboardEvent ke)
+    {
+        if (inputTest.matches(ke)) {
+            test();
+        }
+    }
+
+    @Override
+    public void onKeyUp(KeyboardEvent ke)
+    {
+        
     }
 
 }
