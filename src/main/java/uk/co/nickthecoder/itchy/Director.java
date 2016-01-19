@@ -20,6 +20,7 @@ public interface Director extends InputListener, QuitListener, MessageListener, 
     public static final String POSES_LOADED = "PosesLoaded";
     public static final String ANIMIATIONS_LOADED = "AnimationsLoaded";
     public static final String COSTUMES_LOADED = "CostumesLoaded";
+    public static final String LAYOUTS_LOADED = "LayoutsLoaded";
     public static final String SCENES_LOADED = "ScenesLoaded";
     public static final String LOADED = "Loaded";
 

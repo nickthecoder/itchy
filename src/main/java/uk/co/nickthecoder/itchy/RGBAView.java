@@ -15,6 +15,12 @@ public class RGBAView extends AbstractView
 {
     public RGBA color;
 
+    public RGBAView()
+    {
+        super();
+        this.color = new RGBA(0,0,0);
+    }
+
     public RGBAView( Rect position, RGBA color )
     {
         super(position);

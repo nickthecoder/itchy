@@ -4,16 +4,27 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.Surface;
 
 public abstract class AbstractView implements View
 {
+    protected static final List<Property<View,?>> properties = new ArrayList<Property<View,?>>();
+    
     private ParentView<?> parent;
 
     protected Rect position;
 
     public boolean visible = true;
+
+    public AbstractView()
+    {
+        this(new Rect(0,0,100,100));
+    }
 
     public AbstractView( Rect position )
     {
@@ -113,5 +124,11 @@ public abstract class AbstractView implements View
     public void setVisible( boolean value )
     {
         this.visible = value;
+    }
+    
+    @Override
+    public List<Property<View,?>> getProperties()
+    {
+        return properties;
     }
 }

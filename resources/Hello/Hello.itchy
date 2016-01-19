@@ -1,14 +1,21 @@
 <resources>
-  <game directorClassName="uk.co.nickthecoder.itchy.PlainDirector" height="600" initialScene="start" title="Hello World" width="800"/>
+  <game title="Hello World" width="800" height="600" resizable="false" initialScene="start" testScene="test" directorClassName="uk.co.nickthecoder.itchy.PlainDirector"/>
+  <spriteSheets/>
+  <poses/>
+  <ninePatches/>
   <fonts>
     <font name="Boycott" filename="fonts/Boycott.ttf"/>
   </fonts>
-  <ninePatches/>
-  <poses/>
   <sounds/>
   <animations/>
   <costumes/>
   <scenes>
     <scene name="start"/>
   </scenes>
+  <inputs/>
+  <layouts>
+    <layout name="default">
+      <layer name="main" zOrder="10" x="0" y="0" width="800" height="600" viewClassName="uk.co.nickthecoder.itchy.StageView" stageClassName="uk.co.nickthecoder.itchy.ZOrderStage"/>
+    </layout>
+  </layouts>
 </resources>

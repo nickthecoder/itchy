@@ -4,10 +4,11 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
+import uk.co.nickthecoder.itchy.property.PropertySubject;
 import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.Surface;
 
-public interface View
+public interface View extends PropertySubject<View>
 {
     /**
      * Layers can be stacked in a hierarchical manner.

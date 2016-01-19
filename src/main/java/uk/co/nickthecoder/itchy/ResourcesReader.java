@@ -46,7 +46,7 @@ public class ResourcesReader
         try {
             XMLTag document = XMLTag.openDocument(reader);
             this.resources.setFile(new File(filename));
-            this.readResources(document.getTag("resources"));
+            this.readResources(document.getTag("resources", true));
 
         } finally {
             reader.close();
@@ -115,11 +115,18 @@ public class ResourcesReader
         }
         director.onMessage(Director.COSTUMES_LOADED);
 
+        for (Iterator<XMLTag> i = resourcesTag.getTags("layouts"); i.hasNext();) {
+            XMLTag layoutsTag = i.next();
+            this.readLayouts(layoutsTag);
+        }
+        director.onMessage(Director.LAYOUTS_LOADED);
+
         for (Iterator<XMLTag> i = resourcesTag.getTags("scenes"); i.hasNext();) {
             XMLTag scenesTag = i.next();
             this.readScenes(scenesTag);
         }
         director.onMessage(Director.SCENES_LOADED);
+
 
         director.onMessage(Director.LOADED);
     }
@@ -515,6 +522,35 @@ public class ResourcesReader
             this.resources.addFont(fontResource);
         }
 
+    }
+
+    private void readLayouts(XMLTag layoutsTag) throws Exception
+    {
+        for (Iterator<XMLTag> i = layoutsTag.getTags("layout"); i.hasNext();) {
+            XMLTag layoutTag = i.next();
+
+            Layout layout = new Layout();
+            this.readProperties(layoutTag,  layout);
+
+            for (Iterator<XMLTag> j = layoutTag.getTags("layer"); j.hasNext();) {
+                XMLTag layerTag = j.next();
+                Layer layer = new Layer();
+                this.readProperties(layerTag,  layer);
+                layout.layers.add( layer );
+                
+                XMLTag viewTag = layerTag.getTag("view", false);
+                if (viewTag != null) {
+                    this.readProperties(viewTag, layer.getView());
+                }
+
+                XMLTag stageTag = layerTag.getTag("stage", false);
+                if (stageTag != null) {
+                    this.readProperties(stageTag, ((StageView) layer.getView()).getStage());
+                }
+            }
+            
+            this.resources.addLayout(layout);
+        }
     }
 
     private void readScenes(XMLTag scenesTag) throws Exception

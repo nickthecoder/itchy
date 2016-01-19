@@ -96,24 +96,30 @@ public class Itchy
 
         registry.add(new ClassName(SceneDirector.class, PlainSceneDirector.class.getName()));
 
-        registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.role.PlainRole.class.getName()));
-        registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.role.LinkButton.class.getName()));
-        registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.role.MessageButton.class.getName()));
-        registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.role.NumberValue.class.getName()));
-        registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.role.TextValue.class.getName()));
-        registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.role.QuitButton.class.getName()));
-        registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.role.ProgressBar.class.getName()));
-        registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.role.SceneButton.class.getName()));
+        registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.role.PlainRole.class));
+        registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.role.LinkButton.class));
+        registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.role.MessageButton.class));
+        registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.role.NumberValue.class));
+        registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.role.TextValue.class));
+        registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.role.QuitButton.class));
+        registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.role.ProgressBar.class));
+        registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.role.SceneButton.class));
 
-        registry.add(new ClassName(CostumeFeatures.class, CostumeFeatures.class.getName()));
+        registry.add(new ClassName(CostumeFeatures.class, CostumeFeatures.class));
 
-        registry.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.NullMakeup.class.getName()));
-        registry.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.makeup.Shadow.class.getName()));
-        registry.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.makeup.Scale.class.getName()));
-        registry.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.makeup.Textured.class.getName()));
-        registry.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.makeup.Frame.class.getName()));
-        registry.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.makeup.SimpleFrame.class.getName()));
-        registry.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.makeup.ScaledBackground.class.getName()));
+        registry.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.NullMakeup.class));
+        registry.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.makeup.Shadow.class));
+        registry.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.makeup.Scale.class));
+        registry.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.makeup.Textured.class));
+        registry.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.makeup.Frame.class));
+        registry.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.makeup.SimpleFrame.class));
+        registry.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.makeup.ScaledBackground.class));
+
+        registry.add(new ClassName(View.class, uk.co.nickthecoder.itchy.RGBAView.class));
+        registry.add(new ClassName(View.class, uk.co.nickthecoder.itchy.StageView.class));
+        registry.add(new ClassName(View.class, uk.co.nickthecoder.itchy.WrappedStageView.class));
+
+        registry.add(new ClassName(Stage.class, uk.co.nickthecoder.itchy.ZOrderStage.class));
 
         Eases.registerEases();
 

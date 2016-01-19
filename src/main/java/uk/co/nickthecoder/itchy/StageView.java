@@ -33,6 +33,12 @@ public class StageView extends AbstractScrollableView implements StageListener, 
      */
     private ViewMouseListener mouseOwner;
 
+    
+    public StageView()
+    {
+        super();
+    }
+    
     public StageView( Rect position, Stage stage )
     {
         super(position);
@@ -40,6 +46,12 @@ public class StageView extends AbstractScrollableView implements StageListener, 
         this.stage.addStageListener(this);
     }
 
+    public void setStage( Stage stage )
+    {
+        this.stage = stage;
+        this.stage.addStageListener(this);
+    }
+    
     public Stage getStage()
     {
         return this.stage;

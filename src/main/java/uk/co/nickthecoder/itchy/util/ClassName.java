@@ -4,13 +4,15 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.util;
 
+import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.script.ScriptManager;
 
 /**
- * Holds the name of a class, which the user can set within the editor, used for Role, CostumeProperties, SceneDirector and Director.
+ * Holds the name of a class, which the user can set within the editor, used for Role, CostumeProperties, SceneDirector
+ * and Director.
  * 
- * The class name can either be a regular Java class (in which case the name will be a fully qualified java class name), or a scripted class
- * (in which case the name will be the filename of the script such as "Ship.js").
+ * The class name can either be a regular Java class (in which case the name will be a fully qualified java class name),
+ * or a scripted class (in which case the name will be the filename of the script such as "Ship.js").
  * 
  */
 public class ClassName
@@ -19,14 +21,19 @@ public class ClassName
 
     public final Class<?> baseClass;
 
-    public ClassName( Class<?> baseClass, String name )
+    public ClassName(Class<?> baseClass, Class<?> implementation)
+    {
+        this(baseClass, implementation.getName());
+    }
+
+    public ClassName(Class<?> baseClass, String name)
     {
         this.baseClass = baseClass;
         this.name = name;
     }
 
     @Override
-    public boolean equals( Object other )
+    public boolean equals(Object other)
     {
         if (other instanceof ClassName) {
             return ((ClassName) other).name.equals(this.name);
@@ -39,8 +46,8 @@ public class ClassName
     {
         return ScriptManager.isScript(this);
     }
-    
-    public boolean isValid( ScriptManager scriptManager )
+
+    public boolean isValid(ScriptManager scriptManager)
     {
         if (this.isScript()) {
             return scriptManager.isValidScript(this);
@@ -58,7 +65,17 @@ public class ClassName
             }
         }
     }
-    
+
+    public Object createInstance(Resources resources) throws Exception
+    {
+        if (resources.isValidScript(this)) {
+            return resources.getGame().getScriptManager().createInstance(this);
+        } else {
+            Class<?> klass = Class.forName(this.name);
+            return klass.newInstance();
+        }
+    }
+
     @Override
     public String toString()
     {
@@ -68,6 +85,6 @@ public class ClassName
     @Override
     public int hashCode()
     {
-    	return name.hashCode();
+        return name.hashCode();
     }
 }

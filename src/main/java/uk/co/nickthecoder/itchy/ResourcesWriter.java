@@ -62,6 +62,7 @@ public class ResourcesWriter extends XMLWriter
         this.writeCostumes();
         this.writeScenes();
         this.writeInputs();
+        this.writeLayouts();
 
         this.endTag("resources");
     }
@@ -486,6 +487,45 @@ public class ResourcesWriter extends XMLWriter
         }
 
         this.endTag("inputs");
+    }
+
+    private void writeLayouts() throws XMLException
+    {
+        this.beginTag("layouts");
+
+        for (String name : this.resources.layoutNames()) {
+            Layout layout = this.resources.getLayout(name);
+            
+            this.beginTag("layout");
+            this.writeProperties(layout);
+
+            for (Layer layer: layout.layers) {
+                this.beginTag("layer");
+                
+                this.writeProperties(layer);
+                
+                View view = layer.getView();
+                if ((view != null) && (view.getProperties().size() > 0)) {
+                    this.beginTag( "view" );
+                    this.writeProperties(view);
+                    this.endTag("view");
+                }
+                if (view instanceof StageView) {
+                    StageView stageView = (StageView) view;
+                    Stage stage = stageView.getStage();
+                    if ((stage != null) && (stage.getProperties().size() > 0)) {
+                        this.beginTag( "stage" );
+                        this.writeProperties(stage);
+                        this.endTag("stage");
+                    }
+                }
+                
+                this.endTag("layer");
+            }
+            this.endTag("layout");
+        }
+
+        this.endTag("layouts");
     }
 
 }

@@ -4,6 +4,11 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import uk.co.nickthecoder.itchy.property.IntegerProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.Surface;
 
@@ -12,11 +17,27 @@ import uk.co.nickthecoder.jame.Surface;
  */
 public class WrappedStageView extends StageView implements Wrapped
 {
+    private static final List<Property<View,?>> properties = new ArrayList<Property<View,?>>();
+
+    static {
+        properties.addAll(StageView.properties);
+        properties.add(new IntegerProperty<View>("top"));
+        properties.add(new IntegerProperty<View>("right"));
+        properties.add(new IntegerProperty<View>("bottom"));
+        properties.add(new IntegerProperty<View>("left"));
+    }
+    
+    
     private int leftEdge = Integer.MIN_VALUE;
     private int rightEdge = Integer.MAX_VALUE;
 
     private int topEdge = Integer.MAX_VALUE;
     private int bottomEdge = Integer.MIN_VALUE;
+
+    public WrappedStageView()
+    {
+        super();
+    }
 
     public WrappedStageView( Rect position, Stage stage )
     {
@@ -48,25 +69,45 @@ public class WrappedStageView extends StageView implements Wrapped
     {
         return this.topEdge;
     }
-
+    
+    public void setTop( int value )
+    {
+        this.topEdge = value;
+    }
+    
     @Override
     public int getRight()
     {
         return this.rightEdge;
     }
 
+    public void setRight( int value )
+    {
+        this.rightEdge = value;
+    }
+    
     @Override
     public int getBottom()
     {
         return this.bottomEdge;
     }
 
+    public void setBottom( int value )
+    {
+        this.bottomEdge = value;
+    }
+    
     @Override
     public int getLeft()
     {
         return this.leftEdge;
     }
 
+    public void setLeft( int value )
+    {
+        this.leftEdge = value;
+    }
+    
     @Override
     public int getWidth()
     {
@@ -149,4 +190,9 @@ public class WrappedStageView extends StageView implements Wrapped
 
     }
 
+    @Override
+    public List<Property<View,?>> getProperties()
+    {
+        return properties;
+    }
 }

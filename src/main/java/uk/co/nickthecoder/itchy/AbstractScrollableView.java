@@ -13,6 +13,11 @@ public abstract class AbstractScrollableView extends AbstractView implements Scr
      */
     protected final WorldRectangle worldRect;
 
+    public AbstractScrollableView()
+    {
+        this( new Rect( 0,0,10,10) );
+    }
+    
     public AbstractScrollableView(Rect position)
     {
         super(position);

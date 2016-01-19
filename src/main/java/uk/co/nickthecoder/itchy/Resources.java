@@ -60,6 +60,8 @@ public class Resources extends Loadable
 
     private final HashMap<String, SceneResource> scenes;
 
+    private final HashMap<String, Layout> layouts;
+
     private HashMap<String, String> renamedCostumes;
 
     public ErrorLog errorLog;
@@ -84,6 +86,8 @@ public class Resources extends Loadable
         this.costumes = new HashMap<String, CostumeResource>();
         this.scenes = new HashMap<String, SceneResource>();
 
+        this.layouts = new HashMap<String,Layout>();
+        
         this.renamedCostumes = new HashMap<String, String>();
 
         this.game = new Game(this);
@@ -105,8 +109,9 @@ public class Resources extends Loadable
         result.costumes.putAll(this.costumes);
         result.animations.putAll(this.animations);
         result.inputs.putAll(this.inputs);
+        result.layouts.putAll(this.layouts);
         result.renamedCostumes.putAll(this.renamedCostumes);
-
+        
         result.setFile(this.getFile());
 
         Itchy.loadingGame(result.game);
@@ -202,6 +207,11 @@ public class Resources extends Loadable
                 throw new Exception("Costume " + name + " wasn't saved");
             }
         }
+        for (String name : this.layoutNames()) {
+            if (resources.getLayout(name) == null) {
+                throw new Exception("Layout " + name + " wasn't saved");
+            }
+        }
 
     }
 
@@ -227,8 +237,8 @@ public class Resources extends Loadable
 
         } else if (object instanceof CostumeResource) {
             return this.getCostumeResource(object.name) == object;
-
         }
+        
         return false;
     }
 
@@ -258,6 +268,9 @@ public class Resources extends Loadable
 
         } else if (object instanceof CostumeResource) {
             this.rename2((CostumeResource) object, name);
+
+        } else if (object instanceof Layout) {
+            this.rename2((Layout) object, name);
 
         } else {
             throw new RuntimeException("Unknown resource type : " + object.getClass().getName());
@@ -435,6 +448,34 @@ public class Resources extends Loadable
         this.ninePatches.put(name, ninePatchResource);
     }
 
+
+    // Layouts
+    public void addLayout(Layout layout)
+    {
+        this.layouts.put(layout.getName(), layout);
+    }
+
+    public void removeLayout(String name)
+    {
+        this.layouts.remove(name);
+    }
+
+    public Layout getLayout(String name)
+    {
+        return this.layouts.get(name);
+    }
+
+    public List<String> layoutNames()
+    {
+        return sortNames(this.layouts.keySet());
+    }
+
+    void rename2(Layout layout, String name)
+    {
+        this.layouts.remove(layout.getName());
+        this.layouts.put(name, layout);
+    }
+    
     // Sounds
 
     public void addSound(SoundResource soundResource)

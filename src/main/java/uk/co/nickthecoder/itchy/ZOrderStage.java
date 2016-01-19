@@ -22,6 +22,11 @@ public class ZOrderStage extends AbstractStage implements ZOrderStageInterface
      */
     protected TreeSet<Actor> actors = new TreeSet<Actor>(new ZOrderComparactor());
     
+    public ZOrderStage()
+    {
+        this( "unnamed" );
+    }
+    
     public ZOrderStage( String name )
     {
         super(name);

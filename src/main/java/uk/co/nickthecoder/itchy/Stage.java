@@ -8,11 +8,12 @@ import java.util.Iterator;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.StageConstraint;
+import uk.co.nickthecoder.itchy.property.PropertySubject;
 
 /**
  * A group of Actors, which are ultimately drawn at the the same time using a View.
  */
-public interface Stage
+public interface Stage extends PropertySubject<Stage>
 {
     public String getName();
 

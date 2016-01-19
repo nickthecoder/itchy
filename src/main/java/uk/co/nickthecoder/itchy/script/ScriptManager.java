@@ -176,6 +176,14 @@ public class ScriptManager
         return language.createScript(templateName, className);
     }
 
+    public Object createInstance( ClassName className )
+        throws Exception
+    {
+        ScriptLanguage language = findLanguage(className);
+
+        return language.createInstance(className);        
+    }
+    
     public Director createDirector( ClassName className )
         throws ScriptException
     {

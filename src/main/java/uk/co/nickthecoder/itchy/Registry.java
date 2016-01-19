@@ -19,6 +19,10 @@ public class Registry
 {
     private Registry parent;
 
+    /**
+     * The key is the base class, such as Role, or Director.
+     * The values are the known implementations, such as "alien.py" or "uk.co.nickthecoder.itchy.PlainDirector"
+     */
     private Map<Class<?>, Set<String>> classNames;
 
     private Map<String, Ease> eases;

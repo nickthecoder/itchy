@@ -7,11 +7,16 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import uk.co.nickthecoder.itchy.property.Property;
+
 public abstract class AbstractStage implements Stage, Cloneable
 {
+    private static final List<Property<Stage,?>> properties = new ArrayList<Property<Stage,?>>();
+
     public final String name;
 
     public StageConstraint stageConstraint;
@@ -118,5 +123,11 @@ public abstract class AbstractStage implements Stage, Cloneable
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+    
+    @Override
+    public List<Property<Stage,?>> getProperties()
+    {
+        return properties;
     }
 }

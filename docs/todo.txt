@@ -1,8 +1,45 @@
 Current Tasks
 =============
 
-Editor revert back to wrong size after test is finished.
+Create Layout tab in editor
+    View an Stage properties in a Notebook. (Details is first page).
+    Load/Save the view and stage's properties
 
+When merging layouts, need to clone the layers, including the view, stage and the view's and stage's properties.
+
+Scene has a Layout property.
+Therefore Need a LayoutPicker and a LayoutProperty.
+
+SceneEditor to use the Layout to generate the design layers.
+    Saves in the usual way.
+
+Loading a scene
+    Creates a new layout
+        
+    Merge the named layout with it.
+
+    Instantiate the views
+    
+    Place actors onto the stages.
+    
+    Optional: SceneDirector loads additional scenes, merging the layers using the same two steps above.
+    
+    Clear the existing game's stages, and then remove all stages/views.
+    Add all stages/views from the layout to the main view tree.
+
+SceneDirector has a Layout, which can be used to find stages. Don't use Itchy's view tree.
+
+Remove names from existing Stage/View classes.
+
+Should Layout be a NamedResource?
+    If not, why are the other resources?
+
+Renaming a Layer/Layout will need to alter all scenes???
+    Or SceneDesigner can handle missing Layout/Layers, and still muddle through.
+
+
+Look at ScriptManager's createXXX methods, and see where they are called from.
+    Consider removing createXXX methods, and doing it via ClassName.createInstance instead.
 
 BUGS
 ====
@@ -11,44 +48,104 @@ Appearance.fixPose doesn't do the right thing with direction.
 	Setting dir to 0 works, but ideally both appearance and the new pose should have the old appearance's direction,
 	and yet the pose won't need rotating.
 
-TextArea's background center of nine patch is flat colour rather than tiled.
-
 Can delete Poses which are used in a Framed animation
     Ditto for a Sprite.
 
 Name not saved when editing an Input.
 
-New Features
+
+Trivial Bugs
 ============
-
-ColorKeyFragment. Use another pose, to decide which pixels belong to each fragment.
-    If the poses aren't the same size, then scale non blended.
-
-Animations to apply start/end events, so that sounds can be played.
-	Can also be used to assign a new Pose during a non-framed based animation.
-	
 
 Ensure Scrollbars of Scroll do not obscure the contents.
 
-Use Scroll for TextArea, instead of its buggy, self implemented, non-clipping scroller.
-    Clip the TextBox input too.
+New Features
+============
 
-Finish The-Mings
-    Remaining Ming Jobs: Climbers, Miners, Leavers, Drowners, 
-    Ming bashers only bash twice?
+Reset Z-order of all actors based on their costume's z-order.
 
 Design Stages/Views graphically - Aim for no code in Director.
+Better editing for views which are not the whole screen.
+    The-Mings has a GUI at the bottom, and a scrollable area above.
+        The editor should reflect this.
+    Create a "Layout" tab, where the layouts are edited.
+        The GUI scene uses a short, non-scrolling Stage/View Layout. Called "GUI"
+        The playing scenes use the layout with scrolling view(s). Called "Arena"
+    The "Play" SceneDirector loads the scene as normal, and ALSO loads the GUI scene.
+        This will create both sets of Stages/Views.
 
-Spritesheet : Crop. Remove all transparent edges, updating the x,y offsets appropriately.
-	Use this on the mings spritesheet.
+    The GUI and .itchy file format could only allow a LIST of view/stages, not a TREE.
+    Also, make the relationship 1:1 between Stage and View to keep it simple.
+
+    How can views be customised on a per scene basis?
+        E.g. A layout has a RGBBackground or a TiledBackground. How is the colour / tile info picked?
+
+    Is a layout made up of Stages or of Views?
+        RGBBackground is a View, not a stage
+        But most of the time we care about the type of stage. e.g. ZORderStage, TorusZOrderStage...
+        Layout made from Layer, which has...
+            Name
+            ClassName of Stage, which can be null and ClassName of a View, which cannot be null.
+            Save properties of both - the view has top,left, width, height properties
+            BackgroundViews will have additional properties
+            If the View has a "stage" property, then Stage cannot be null.
+
+    SceneDesigner shows dotted blue outline for the currently selected layer's position.
+    and dotted red outline for the size of the screen.
+
+    When composing a scene from multiple Layouts, then how is the Z-order of the layers specified?
+    Either the layers have a Z-order themselves, or the sceneDirector uses : loadScence(string name,boolean above)
+
+Animations to apply start/end events, so that sounds can be played.
+	Can also be used to assign a new Pose during a non-framed based animation.
+
 
 Have a preview image of the animation in FramedAnimationEditor.
 	Single step back/forward or continuous.
 	In fact, don't have the list or poses, just show one frame's details, and scroll back/forward to edit others.
 
+Redesign editor based on a traditional IDE style layout.
+    Left panel contains tree structure of all objects (Poses/Animations/Inputs/Costumes/Scenes etc)
+        Can subset the list for a single type (e.g. just Poses)
+        Hide those views if there are no children
+    Central "Edit" panel will display the currently selected object (pose/animation etc).
+    Can be editing multiple items simultaneously, each with its own tab.
+        This will have impact on renamed poses etc. Maybe very tricky!
+        Maybe abandon Ok/Cancel, and always auto-update.
+        Notepad will need "<" and ">" navigation items, when tabs cannot all fit.
+    Left panel can also have a "favourites" view and a "Recent" view.
+    Toolbar items for Add Pose/Sprite Sheet/Animation/Sound/Input etc.
+    SceneDesigner to co-exist, just like any SubEditor.
+        The actors in a scene are also listed in the main tree view.
+            Shortcut for toolbox pages automatically shows the toolbox.
+        Toolbox not free floating
+            Either hidden (when not in scene designer), or taking up full width at bottom of screen.
+    Toolbox and Side Panel can be hidden/shown via a toggle button in the toolbar (and shortcut).
+        Toolbar is always visible
+        Toolbar changes depending on what is being edited.
+    Still have the Tables (when a category is selected)?
+
+
+Nice-to-have Features
+=====================
+
+Use Scroll for TextArea, instead of its buggy, self implemented, non-clipping scroller.
+    Clip the TextBox input too.
+
+Be able to select text in EntryBoxes, and copy/cut/delete the selected text.
+    Double click to select a word.
+
+Spritesheet : Crop. Remove all transparent edges, updating the x,y offsets appropriately.
+    Use this on the mings spritesheet.
+
+ColorKeyFragment. Use another pose, to decide which pixels belong to each fragment.
+    If the poses aren't the same size, then scale non blended.
+
 
 Code Tidy Up
 ============
+
+Consider merging Pose & PoseResource. Ditto for other resources.
 
 Pixelator has a bodge in it. Sometime it needs to add one to all the pixels.
 	Do a test, and see if the top row of pixels are blank for large scales, and if so,
@@ -130,11 +227,11 @@ Group Costumes on the SceneDesigner's toolbox, so that similar costumes can be d
 
 SceneDesigner : select groups of actors, and move/delete them together.
 
-Tiled background - instead of a RGBA, specify a Pose, and tile it in a Grid.
-    More generic - Create a Background interface, and let it have Properties
+Create a Background interface :
     NoBackground, RGBABackground
     Tile, BrickH, BrickV, TileH, TileV (spacing can be different to the image size)
-    But Tiled Backgrounds only make sense if associated with a StageView, not one for the whole screen.
+    We already have Renderable, which can do nine-patches and flat colour.
+    Should the background be scrollable?
 
 Explosion and Projectile don't work very well with text - See Gate.collected.
 
@@ -153,14 +250,6 @@ Use JBox2D : http://www.jbox2d.org/
 
 Joystick input devices.
 
-Optimise Explosion by using fixAppearance for projectiles which are turned, but won't rotate.
-    maybe just add a fix boolean, and leave it up to the user to do it.
-
-Create a Compound Role, which has a ClassName array of other Roles
-    It has one AbstractProperty, who's Component is a table with Add/Remove Up/Down buttons, and clicking on any row show the
-    properties for that row.
-        Get this working for Role, and maybe it could be made generic for Makeup too.
-
 BlitModes on Pose, so a "spotlight" can ADD
 
 "Duplicate" button in Animation editor - maybe on Costume too.
@@ -174,13 +263,6 @@ Drag and drop to move and reorder animation in the editor.
     Click at a point in the time-line to show that frame.
     Save the pose and start x,y, direction, heading with each animation ("test" tag)
 
-Explanatory games
-    e.g. Showing the different between heading and direction.
-
-Catch all ScriptExceptions
-    Report them to ScriptErrorLog, which will also write to stderr (not as a stack trace)
-    An icon on the popup Layer shows when a new error has occurred. Click to open the log viewer.
-        "Clear" button will remove the icon from the popup layer.
 
 Much Later
 ==========
@@ -206,30 +288,12 @@ Look at rotozoom, and try to implement a generic affine transformation matrix???
             Where the rect is large, average multiple pixels
             Where the rect is small (less than 2x2 pixels), average parts of each pixel.
 
-Should poses and animations be owned by Resources, or by Costume? Some are used by only one, and therefore is annoying to be in a
-big horrible unorganised list.
-    When editing a pose it has a "shared" tick box, which just toggles.
-        Defaults to true when adding a pose via PosesEditor
-        Defaults to false when adding via the CostumesEditor (if that gets written).
-        When a pose is used by a second costume, it is also changed to true (must be done post-save).
-    When listing Poses shows : all, shared or a single costume's. (via a picker button). Defaults to shared.
-    Animation names are still unique, but default to costumename.x when added via costumeseditor.
-    If an unshared pose is removed from its costume, then it is deleted - only acceptable if shared is hidden from the user.
-    CostumesEditor needs Add -> Pose, New Pose, Animation, New Animation etc.
-
-    The "shared" tick box currently is useless, so either use it, or remove it.
-    Add an "unused" filter, which lists poses not used by a Costume, and let them be deleted manually.
-
 Same pattern for sounds and animations, not for font or nine patches.
 
 
 How about a Scripts tab
     List all scripts double click to edit.
     Show errors / Clear errors
-
-A Gallery
-    Import poses, costumes, fonts, animations etc from another game.
-    Create a game just for this purpose.
 
 Get Thrust to run via "launch" without the resource symlinks to itchy.
     Need thrust's jar file to be in a lib directory within its resources, and for the jar to be loaded
@@ -244,17 +308,9 @@ Component : Override all rules. Currently only Font can be overridden.
 
 Create a game which uses the GUI
 
-Container.render should get the NinePatches to render directly onto the gc, not via a temp surface.
-RenderableInterface is rubbish. NinePatches should be told where and how large to draw themselves
-   (assuming that they can render onto a existing surface rather than needing a new surface).
-
 Replace crufty render and render2 methods with the concept of a Graphics Context.
 To scroll, a sub-layer, push the context, alter its mapping, call the childrens render,
 then pop the context.
-
-Appearance optimised so that it doesn't need to re-render the appearance to get the worldRectangle
-    Maybe calculate the maximum rectangle for the Pose for any rotation
-    When asked for its worldRect, if cached, returned that, other wise if direction == 0, return pose.rectangle * scale, otherwise return maximum rect * scale
 
 
 

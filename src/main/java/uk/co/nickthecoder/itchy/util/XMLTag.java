@@ -63,7 +63,7 @@ public class XMLTag
 
     public String getContent( String tagName ) throws XMLException
     {
-        XMLTag childTag = this.getSingleSubTag(tagName);
+        XMLTag childTag = this.getTag(tagName);
 
         return childTag.getBody();
     }
@@ -87,10 +87,32 @@ public class XMLTag
 
         return child.getNodeValue();
     }
+    
 
     public XMLTag getTag( String tagName ) throws XMLException
     {
-        return this.getSingleSubTag(tagName);
+        return getTag( tagName, true );
+    }
+
+    public XMLTag getTag( String tagName, boolean mustExist ) throws XMLException
+    {
+        List<XMLTag> tagList = this.getChildrenByTagName(tagName);
+
+        if (tagList.size() > 1) {
+            throw new XMLException("Expected only one '" + tagName + "' tags, but found " +
+                tagList.size());
+
+        } else if (tagList.size() < 1) {
+            if (mustExist) {
+                throw new XMLException("Expected a '" + tagName + "' tag.");
+            } else {
+                return null;
+            }
+
+        } else {
+            return tagList.get(0);
+        }
+
     }
 
     public Iterator<XMLTag> getTags()
@@ -310,21 +332,5 @@ public class XMLTag
     {
     }
 
-    private XMLTag getSingleSubTag( String tagName ) throws XMLException
-    {
-        List<XMLTag> tagList = this.getChildrenByTagName(tagName);
-
-        if (tagList.size() > 1) {
-            throw new XMLException("Expected only one '" + tagName + "' tags, but found " +
-                tagList.size());
-
-        } else if (tagList.size() < 1) {
-            throw new XMLException("Expected a '" + tagName + "' tag.");
-
-        } else {
-            return tagList.get(0);
-        }
-
-    }
 
 }
