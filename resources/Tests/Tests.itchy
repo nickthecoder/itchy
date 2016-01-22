@@ -1,9 +1,6 @@
 <resources>
-  <game title="Tests" width="800" height="600" initialScene="menu" directorClassName="uk.co.nickthecoder.itchy.PlainDirector"/>
-  <fonts>
-    <font name="vera" filename="fonts/Vera/Vera.ttf"/>
-  </fonts>
-  <ninePatches/>
+  <game title="Tests" width="800" height="600" resizable="false" initialScene="menu" testScene="test" directorClassName="uk.co.nickthecoder.itchy.PlainDirector"/>
+  <spriteSheets/>
   <poses>
     <pose name="alien1a" filename="images/alien1a.png" direction="-90.0"/>
     <pose name="alien1b" filename="images/alien1b.png" direction="-90.0"/>
@@ -15,277 +12,281 @@
     <pose name="bomb2" filename="images/bomb2.png" direction="-90.0"/>
     <pose name="line" filename="images/line.png"/>
   </poses>
+  <ninePatches/>
+  <fonts>
+    <font name="vera" filename="fonts/Vera/Vera.ttf"/>
+  </fonts>
   <sounds/>
   <animations>
     <animation name="bomb">
-      <sequence loops="0" sequence="true">
+      <sequence sequence="true" loops="0">
         <frames pingPong="false">
-          <frame pose="bomb1" delay="1"/>
-          <frame pose="bomb2" delay="1"/>
+          <frame pose="bomb1" delay="1" dx="0.0" dy="0.0"/>
+          <frame pose="bomb2" delay="1" dx="0.0" dy="0.0"/>
         </frames>
       </sequence>
     </animation>
     <animation name="bounce">
-      <sequence loops="1" sequence="true">
-        <move ease="bounce" ticks="200" dx="0.0" dy="200.0"/>
-        <move ease="bounce" ticks="200" dx="0.0" dy="-200.0"/>
-        <turn ease="bounce" headingToo="false" ticks="100" turn="360.0"/>
-        <scale ease="bounce" target="2.0" ticks="200"/>
-        <scale ease="bounce" target="1.0" ticks="200"/>
-        <alpha ease="bounce" target="20.0" ticks="200"/>
-        <alpha ease="bounce" target="235.0" ticks="200"/>
+      <sequence sequence="true" loops="1">
+        <move dx="0.0" dy="200.0" ticks="200" ease="bounce"/>
+        <move dx="0.0" dy="-200.0" ticks="200" ease="bounce"/>
+        <turn turn="360.0" headingToo="false" ticks="100" ease="bounce"/>
+        <scale target="2.0" ticks="200" ease="bounce"/>
+        <scale target="1.0" ticks="200" ease="bounce"/>
+        <alpha target="20.0" ticks="200" ease="bounce"/>
+        <alpha target="235.0" ticks="200" ease="bounce"/>
       </sequence>
     </animation>
     <animation name="bounce2">
-      <sequence loops="1" sequence="true">
-        <move ease="bounce2" ticks="200" dx="0.0" dy="200.0"/>
-        <move ease="bounce2" ticks="200" dx="0.0" dy="-200.0"/>
-        <turn ease="bounce2" headingToo="false" ticks="100" turn="360.0"/>
-        <scale ease="bounce2" target="2.0" ticks="200"/>
-        <scale ease="bounce2" target="1.0" ticks="200"/>
-        <alpha ease="bounce2" target="20.0" ticks="200"/>
-        <alpha ease="bounce2" target="235.0" ticks="200"/>
+      <sequence sequence="true" loops="1">
+        <move dx="0.0" dy="200.0" ticks="200" ease="bounce2"/>
+        <move dx="0.0" dy="-200.0" ticks="200" ease="bounce2"/>
+        <turn turn="360.0" headingToo="false" ticks="100" ease="bounce2"/>
+        <scale target="2.0" ticks="200" ease="bounce2"/>
+        <scale target="1.0" ticks="200" ease="bounce2"/>
+        <alpha target="20.0" ticks="200" ease="bounce2"/>
+        <alpha target="235.0" ticks="200" ease="bounce2"/>
       </sequence>
     </animation>
     <animation name="bounce3">
-      <sequence loops="1" sequence="true">
-        <move ease="bounce3" ticks="200" dx="0.0" dy="200.0"/>
-        <move ease="bounce3" ticks="200" dx="0.0" dy="-200.0"/>
-        <turn ease="bounce3" headingToo="false" ticks="100" turn="360.0"/>
-        <scale ease="bounce3" target="2.0" ticks="200"/>
-        <scale ease="bounce3" target="1.0" ticks="200"/>
-        <alpha ease="bounce3" target="20.0" ticks="200"/>
-        <alpha ease="bounce3" target="235.0" ticks="200"/>
+      <sequence sequence="true" loops="1">
+        <move dx="0.0" dy="200.0" ticks="200" ease="bounce3"/>
+        <move dx="0.0" dy="-200.0" ticks="200" ease="bounce3"/>
+        <turn turn="360.0" headingToo="false" ticks="100" ease="bounce3"/>
+        <scale target="2.0" ticks="200" ease="bounce3"/>
+        <scale target="1.0" ticks="200" ease="bounce3"/>
+        <alpha target="20.0" ticks="200" ease="bounce3"/>
+        <alpha target="235.0" ticks="200" ease="bounce3"/>
       </sequence>
     </animation>
     <animation name="ease">
-      <sequence loops="1" sequence="true">
-        <move ease="default" ticks="200" dx="0.0" dy="200.0"/>
-        <move ease="default" ticks="200" dx="0.0" dy="-200.0"/>
-        <turn ease="default" headingToo="false" ticks="100" turn="360.0"/>
-        <scale ease="default" target="2.0" ticks="200"/>
-        <scale ease="default" target="1.0" ticks="200"/>
-        <alpha ease="default" target="20.0" ticks="200"/>
-        <alpha ease="default" target="235.0" ticks="200"/>
+      <sequence sequence="true" loops="1">
+        <move dx="0.0" dy="200.0" ticks="200" ease="default"/>
+        <move dx="0.0" dy="-200.0" ticks="200" ease="default"/>
+        <turn turn="360.0" headingToo="false" ticks="100" ease="default"/>
+        <scale target="2.0" ticks="200" ease="default"/>
+        <scale target="1.0" ticks="200" ease="default"/>
+        <alpha target="20.0" ticks="200" ease="default"/>
+        <alpha target="235.0" ticks="200" ease="default"/>
       </sequence>
     </animation>
     <animation name="easeIn">
-      <sequence loops="1" sequence="true">
-        <move ease="easeIn" ticks="200" dx="0.0" dy="200.0"/>
-        <move ease="easeIn" ticks="200" dx="0.0" dy="-200.0"/>
-        <turn ease="easeIn" headingToo="false" ticks="100" turn="360.0"/>
-        <scale ease="easeIn" target="2.0" ticks="200"/>
-        <scale ease="easeIn" target="1.0" ticks="200"/>
-        <alpha ease="easeIn" target="20.0" ticks="200"/>
-        <alpha ease="easeIn" target="235.0" ticks="200"/>
+      <sequence sequence="true" loops="1">
+        <move dx="0.0" dy="200.0" ticks="200" ease="easeIn"/>
+        <move dx="0.0" dy="-200.0" ticks="200" ease="easeIn"/>
+        <turn turn="360.0" headingToo="false" ticks="100" ease="easeIn"/>
+        <scale target="2.0" ticks="200" ease="easeIn"/>
+        <scale target="1.0" ticks="200" ease="easeIn"/>
+        <alpha target="20.0" ticks="200" ease="easeIn"/>
+        <alpha target="235.0" ticks="200" ease="easeIn"/>
       </sequence>
     </animation>
     <animation name="easeInBack">
-      <sequence loops="1" sequence="true">
-        <move ease="easeInBack" ticks="200" dx="0.0" dy="200.0"/>
-        <move ease="easeInBack" ticks="200" dx="0.0" dy="-200.0"/>
-        <turn ease="easeInBack" headingToo="false" ticks="100" turn="360.0"/>
-        <scale ease="easeInBack" target="2.0" ticks="200"/>
-        <scale ease="easeInBack" target="1.0" ticks="200"/>
-        <alpha ease="easeInBack" target="20.0" ticks="200"/>
-        <alpha ease="easeInBack" target="235.0" ticks="200"/>
+      <sequence sequence="true" loops="1">
+        <move dx="0.0" dy="200.0" ticks="200" ease="easeInBack"/>
+        <move dx="0.0" dy="-200.0" ticks="200" ease="easeInBack"/>
+        <turn turn="360.0" headingToo="false" ticks="100" ease="easeInBack"/>
+        <scale target="2.0" ticks="200" ease="easeInBack"/>
+        <scale target="1.0" ticks="200" ease="easeInBack"/>
+        <alpha target="20.0" ticks="200" ease="easeInBack"/>
+        <alpha target="235.0" ticks="200" ease="easeInBack"/>
       </sequence>
     </animation>
     <animation name="easeInCirc">
-      <sequence loops="1" sequence="true">
-        <move ease="easeInCirc" ticks="200" dx="0.0" dy="200.0"/>
-        <move ease="easeInCirc" ticks="200" dx="0.0" dy="-200.0"/>
-        <turn ease="easeInCirc" headingToo="false" ticks="100" turn="360.0"/>
-        <scale ease="easeInCirc" target="2.0" ticks="200"/>
-        <scale ease="easeInCirc" target="1.0" ticks="200"/>
-        <alpha ease="easeInCirc" target="20.0" ticks="200"/>
-        <alpha ease="easeInCirc" target="235.0" ticks="200"/>
+      <sequence sequence="true" loops="1">
+        <move dx="0.0" dy="200.0" ticks="200" ease="easeInCirc"/>
+        <move dx="0.0" dy="-200.0" ticks="200" ease="easeInCirc"/>
+        <turn turn="360.0" headingToo="false" ticks="100" ease="easeInCirc"/>
+        <scale target="2.0" ticks="200" ease="easeInCirc"/>
+        <scale target="1.0" ticks="200" ease="easeInCirc"/>
+        <alpha target="20.0" ticks="200" ease="easeInCirc"/>
+        <alpha target="235.0" ticks="200" ease="easeInCirc"/>
       </sequence>
     </animation>
     <animation name="easeInCubic">
-      <sequence loops="1" sequence="true">
-        <move ease="easeInCubic" ticks="200" dx="0.0" dy="200.0"/>
-        <move ease="easeInCubic" ticks="200" dx="0.0" dy="-200.0"/>
-        <turn ease="easeInCubic" headingToo="false" ticks="100" turn="360.0"/>
-        <scale ease="easeInCubic" target="2.0" ticks="200"/>
-        <scale ease="easeInCubic" target="1.0" ticks="200"/>
-        <alpha ease="easeInCubic" target="20.0" ticks="200"/>
-        <alpha ease="easeInCubic" target="235.0" ticks="200"/>
+      <sequence sequence="true" loops="1">
+        <move dx="0.0" dy="200.0" ticks="200" ease="easeInCubic"/>
+        <move dx="0.0" dy="-200.0" ticks="200" ease="easeInCubic"/>
+        <turn turn="360.0" headingToo="false" ticks="100" ease="easeInCubic"/>
+        <scale target="2.0" ticks="200" ease="easeInCubic"/>
+        <scale target="1.0" ticks="200" ease="easeInCubic"/>
+        <alpha target="20.0" ticks="200" ease="easeInCubic"/>
+        <alpha target="235.0" ticks="200" ease="easeInCubic"/>
       </sequence>
     </animation>
     <animation name="easeInExpo">
-      <sequence loops="1" sequence="true">
-        <move ease="easeInExpo" ticks="200" dx="0.0" dy="200.0"/>
-        <move ease="easeInExpo" ticks="200" dx="0.0" dy="-200.0"/>
-        <turn ease="easeInExpo" headingToo="false" ticks="100" turn="360.0"/>
-        <scale ease="easeInExpo" target="2.0" ticks="200"/>
-        <scale ease="easeInExpo" target="1.0" ticks="200"/>
-        <alpha ease="easeInExpo" target="20.0" ticks="200"/>
-        <alpha ease="easeInExpo" target="235.0" ticks="200"/>
+      <sequence sequence="true" loops="1">
+        <move dx="0.0" dy="200.0" ticks="200" ease="easeInExpo"/>
+        <move dx="0.0" dy="-200.0" ticks="200" ease="easeInExpo"/>
+        <turn turn="360.0" headingToo="false" ticks="100" ease="easeInExpo"/>
+        <scale target="2.0" ticks="200" ease="easeInExpo"/>
+        <scale target="1.0" ticks="200" ease="easeInExpo"/>
+        <alpha target="20.0" ticks="200" ease="easeInExpo"/>
+        <alpha target="235.0" ticks="200" ease="easeInExpo"/>
       </sequence>
     </animation>
     <animation name="easeInOut">
-      <sequence loops="1" sequence="true">
-        <move ease="easeOut" ticks="200" dx="0.0" dy="200.0"/>
-        <move ease="easeOut" ticks="200" dx="0.0" dy="-200.0"/>
-        <turn ease="easeOut" headingToo="false" ticks="100" turn="360.0"/>
-        <scale ease="easeOut" target="2.0" ticks="200"/>
-        <scale ease="easeOut" target="1.0" ticks="200"/>
-        <alpha ease="easeOut" target="20.0" ticks="200"/>
-        <alpha ease="easeOut" target="235.0" ticks="200"/>
+      <sequence sequence="true" loops="1">
+        <move dx="0.0" dy="200.0" ticks="200" ease="easeOut"/>
+        <move dx="0.0" dy="-200.0" ticks="200" ease="easeOut"/>
+        <turn turn="360.0" headingToo="false" ticks="100" ease="easeOut"/>
+        <scale target="2.0" ticks="200" ease="easeOut"/>
+        <scale target="1.0" ticks="200" ease="easeOut"/>
+        <alpha target="20.0" ticks="200" ease="easeOut"/>
+        <alpha target="235.0" ticks="200" ease="easeOut"/>
       </sequence>
     </animation>
     <animation name="easeInOutBack">
-      <sequence loops="1" sequence="true">
-        <move ease="easeInOutBack" ticks="200" dx="0.0" dy="200.0"/>
-        <move ease="easeInOutBack" ticks="200" dx="0.0" dy="-200.0"/>
-        <turn ease="easeInOutBack" headingToo="false" ticks="100" turn="360.0"/>
-        <scale ease="easeInOutBack" target="2.0" ticks="200"/>
-        <scale ease="easeInOutBack" target="1.0" ticks="200"/>
-        <alpha ease="easeInOutBack" target="20.0" ticks="200"/>
-        <alpha ease="easeInOutBack" target="235.0" ticks="200"/>
+      <sequence sequence="true" loops="1">
+        <move dx="0.0" dy="200.0" ticks="200" ease="easeInOutBack"/>
+        <move dx="0.0" dy="-200.0" ticks="200" ease="easeInOutBack"/>
+        <turn turn="360.0" headingToo="false" ticks="100" ease="easeInOutBack"/>
+        <scale target="2.0" ticks="200" ease="easeInOutBack"/>
+        <scale target="1.0" ticks="200" ease="easeInOutBack"/>
+        <alpha target="20.0" ticks="200" ease="easeInOutBack"/>
+        <alpha target="235.0" ticks="200" ease="easeInOutBack"/>
       </sequence>
     </animation>
     <animation name="easeInOutCirc">
-      <sequence loops="1" sequence="true">
-        <move ease="easeInOutCirc" ticks="200" dx="0.0" dy="200.0"/>
-        <move ease="easeInOutCirc" ticks="200" dx="0.0" dy="-200.0"/>
-        <turn ease="easeInOutCirc" headingToo="false" ticks="100" turn="360.0"/>
-        <scale ease="easeInOutCirc" target="2.0" ticks="200"/>
-        <scale ease="easeInOutCirc" target="1.0" ticks="200"/>
-        <alpha ease="easeInOutCirc" target="20.0" ticks="200"/>
-        <alpha ease="easeInOutCirc" target="235.0" ticks="200"/>
+      <sequence sequence="true" loops="1">
+        <move dx="0.0" dy="200.0" ticks="200" ease="easeInOutCirc"/>
+        <move dx="0.0" dy="-200.0" ticks="200" ease="easeInOutCirc"/>
+        <turn turn="360.0" headingToo="false" ticks="100" ease="easeInOutCirc"/>
+        <scale target="2.0" ticks="200" ease="easeInOutCirc"/>
+        <scale target="1.0" ticks="200" ease="easeInOutCirc"/>
+        <alpha target="20.0" ticks="200" ease="easeInOutCirc"/>
+        <alpha target="235.0" ticks="200" ease="easeInOutCirc"/>
       </sequence>
     </animation>
     <animation name="easeInOutCubic">
-      <sequence loops="1" sequence="true">
-        <move ease="easeInOutCubic" ticks="200" dx="0.0" dy="200.0"/>
-        <move ease="easeInOutCubic" ticks="200" dx="0.0" dy="-200.0"/>
-        <turn ease="easeInOutCubic" headingToo="false" ticks="100" turn="360.0"/>
-        <scale ease="easeInOutCubic" target="2.0" ticks="200"/>
-        <scale ease="easeInOutCubic" target="1.0" ticks="200"/>
-        <alpha ease="easeInOutCubic" target="20.0" ticks="200"/>
-        <alpha ease="easeInOutCubic" target="235.0" ticks="200"/>
+      <sequence sequence="true" loops="1">
+        <move dx="0.0" dy="200.0" ticks="200" ease="easeInOutCubic"/>
+        <move dx="0.0" dy="-200.0" ticks="200" ease="easeInOutCubic"/>
+        <turn turn="360.0" headingToo="false" ticks="100" ease="easeInOutCubic"/>
+        <scale target="2.0" ticks="200" ease="easeInOutCubic"/>
+        <scale target="1.0" ticks="200" ease="easeInOutCubic"/>
+        <alpha target="20.0" ticks="200" ease="easeInOutCubic"/>
+        <alpha target="235.0" ticks="200" ease="easeInOutCubic"/>
       </sequence>
     </animation>
     <animation name="easeInOutExpo">
-      <sequence loops="1" sequence="true">
-        <move ease="easeInOutExpo" ticks="200" dx="0.0" dy="200.0"/>
-        <move ease="easeInOutExpo" ticks="200" dx="0.0" dy="-200.0"/>
-        <turn ease="easeInOutExpo" headingToo="false" ticks="100" turn="360.0"/>
-        <scale ease="easeInOutExpo" target="2.0" ticks="200"/>
-        <scale ease="easeInOutExpo" target="1.0" ticks="200"/>
-        <alpha ease="easeInOutExpo" target="20.0" ticks="200"/>
-        <alpha ease="easeInOutExpo" target="235.0" ticks="200"/>
+      <sequence sequence="true" loops="1">
+        <move dx="0.0" dy="200.0" ticks="200" ease="easeInOutExpo"/>
+        <move dx="0.0" dy="-200.0" ticks="200" ease="easeInOutExpo"/>
+        <turn turn="360.0" headingToo="false" ticks="100" ease="easeInOutExpo"/>
+        <scale target="2.0" ticks="200" ease="easeInOutExpo"/>
+        <scale target="1.0" ticks="200" ease="easeInOutExpo"/>
+        <alpha target="20.0" ticks="200" ease="easeInOutExpo"/>
+        <alpha target="235.0" ticks="200" ease="easeInOutExpo"/>
       </sequence>
     </animation>
     <animation name="easeInOutQuad">
-      <sequence loops="1" sequence="true">
-        <move ease="easeInOutQuad" ticks="200" dx="0.0" dy="200.0"/>
-        <move ease="easeInOutQuad" ticks="200" dx="0.0" dy="-200.0"/>
-        <turn ease="easeInOutQuad" headingToo="false" ticks="100" turn="360.0"/>
-        <scale ease="easeInOutQuad" target="2.0" ticks="200"/>
-        <scale ease="easeInOutQuad" target="1.0" ticks="200"/>
-        <alpha ease="easeInOutQuad" target="20.0" ticks="200"/>
-        <alpha ease="easeInOutQuad" target="235.0" ticks="200"/>
+      <sequence sequence="true" loops="1">
+        <move dx="0.0" dy="200.0" ticks="200" ease="easeInOutQuad"/>
+        <move dx="0.0" dy="-200.0" ticks="200" ease="easeInOutQuad"/>
+        <turn turn="360.0" headingToo="false" ticks="100" ease="easeInOutQuad"/>
+        <scale target="2.0" ticks="200" ease="easeInOutQuad"/>
+        <scale target="1.0" ticks="200" ease="easeInOutQuad"/>
+        <alpha target="20.0" ticks="200" ease="easeInOutQuad"/>
+        <alpha target="235.0" ticks="200" ease="easeInOutQuad"/>
       </sequence>
     </animation>
     <animation name="easeInQuad">
-      <sequence loops="1" sequence="true">
-        <move ease="easeInQuad" ticks="200" dx="0.0" dy="200.0"/>
-        <move ease="easeInQuad" ticks="200" dx="0.0" dy="-200.0"/>
-        <turn ease="easeInQuad" headingToo="false" ticks="100" turn="360.0"/>
-        <scale ease="easeInQuad" target="2.0" ticks="200"/>
-        <scale ease="easeInQuad" target="1.0" ticks="200"/>
-        <alpha ease="easeInQuad" target="20.0" ticks="200"/>
-        <alpha ease="easeInQuad" target="235.0" ticks="200"/>
+      <sequence sequence="true" loops="1">
+        <move dx="0.0" dy="200.0" ticks="200" ease="easeInQuad"/>
+        <move dx="0.0" dy="-200.0" ticks="200" ease="easeInQuad"/>
+        <turn turn="360.0" headingToo="false" ticks="100" ease="easeInQuad"/>
+        <scale target="2.0" ticks="200" ease="easeInQuad"/>
+        <scale target="1.0" ticks="200" ease="easeInQuad"/>
+        <alpha target="20.0" ticks="200" ease="easeInQuad"/>
+        <alpha target="235.0" ticks="200" ease="easeInQuad"/>
       </sequence>
     </animation>
     <animation name="easeOut">
-      <sequence loops="1" sequence="true">
-        <move ease="easeOut" ticks="200" dx="0.0" dy="200.0"/>
-        <move ease="easeOut" ticks="200" dx="0.0" dy="-200.0"/>
-        <turn ease="easeOut" headingToo="false" ticks="100" turn="360.0"/>
-        <scale ease="easeOut" target="2.0" ticks="200"/>
-        <scale ease="easeOut" target="1.0" ticks="200"/>
-        <alpha ease="easeOut" target="20.0" ticks="200"/>
-        <alpha ease="easeOut" target="235.0" ticks="200"/>
+      <sequence sequence="true" loops="1">
+        <move dx="0.0" dy="200.0" ticks="200" ease="easeOut"/>
+        <move dx="0.0" dy="-200.0" ticks="200" ease="easeOut"/>
+        <turn turn="360.0" headingToo="false" ticks="100" ease="easeOut"/>
+        <scale target="2.0" ticks="200" ease="easeOut"/>
+        <scale target="1.0" ticks="200" ease="easeOut"/>
+        <alpha target="20.0" ticks="200" ease="easeOut"/>
+        <alpha target="235.0" ticks="200" ease="easeOut"/>
       </sequence>
     </animation>
     <animation name="easeOutBack">
-      <sequence loops="1" sequence="true">
-        <move ease="easeOutBack" ticks="200" dx="0.0" dy="200.0"/>
-        <move ease="easeOutBack" ticks="200" dx="0.0" dy="-200.0"/>
-        <turn ease="easeOutBack" headingToo="false" ticks="100" turn="360.0"/>
-        <scale ease="easeOutBack" target="2.0" ticks="200"/>
-        <scale ease="easeOutBack" target="1.0" ticks="200"/>
-        <alpha ease="easeOutBack" target="20.0" ticks="200"/>
-        <alpha ease="easeOutBack" target="235.0" ticks="200"/>
+      <sequence sequence="true" loops="1">
+        <move dx="0.0" dy="200.0" ticks="200" ease="easeOutBack"/>
+        <move dx="0.0" dy="-200.0" ticks="200" ease="easeOutBack"/>
+        <turn turn="360.0" headingToo="false" ticks="100" ease="easeOutBack"/>
+        <scale target="2.0" ticks="200" ease="easeOutBack"/>
+        <scale target="1.0" ticks="200" ease="easeOutBack"/>
+        <alpha target="20.0" ticks="200" ease="easeOutBack"/>
+        <alpha target="235.0" ticks="200" ease="easeOutBack"/>
       </sequence>
     </animation>
     <animation name="easeOutCirc">
-      <sequence loops="1" sequence="true">
-        <move ease="easeOutCirc" ticks="200" dx="0.0" dy="200.0"/>
-        <move ease="easeOutCirc" ticks="200" dx="0.0" dy="-200.0"/>
-        <turn ease="easeOutCirc" headingToo="false" ticks="100" turn="360.0"/>
-        <scale ease="easeOutCirc" target="2.0" ticks="200"/>
-        <scale ease="easeOutCirc" target="1.0" ticks="200"/>
-        <alpha ease="easeOutCirc" target="20.0" ticks="200"/>
-        <alpha ease="easeOutCirc" target="235.0" ticks="200"/>
+      <sequence sequence="true" loops="1">
+        <move dx="0.0" dy="200.0" ticks="200" ease="easeOutCirc"/>
+        <move dx="0.0" dy="-200.0" ticks="200" ease="easeOutCirc"/>
+        <turn turn="360.0" headingToo="false" ticks="100" ease="easeOutCirc"/>
+        <scale target="2.0" ticks="200" ease="easeOutCirc"/>
+        <scale target="1.0" ticks="200" ease="easeOutCirc"/>
+        <alpha target="20.0" ticks="200" ease="easeOutCirc"/>
+        <alpha target="235.0" ticks="200" ease="easeOutCirc"/>
       </sequence>
     </animation>
     <animation name="easeOutCubic">
-      <sequence loops="1" sequence="true">
-        <move ease="easeOutCubic" ticks="200" dx="0.0" dy="200.0"/>
-        <move ease="easeOutCubic" ticks="200" dx="0.0" dy="-200.0"/>
-        <turn ease="easeOutCubic" headingToo="false" ticks="100" turn="360.0"/>
-        <scale ease="easeOutCubic" target="2.0" ticks="200"/>
-        <scale ease="easeOutCubic" target="1.0" ticks="200"/>
-        <alpha ease="easeOutCubic" target="20.0" ticks="200"/>
-        <alpha ease="easeOutCubic" target="235.0" ticks="200"/>
+      <sequence sequence="true" loops="1">
+        <move dx="0.0" dy="200.0" ticks="200" ease="easeOutCubic"/>
+        <move dx="0.0" dy="-200.0" ticks="200" ease="easeOutCubic"/>
+        <turn turn="360.0" headingToo="false" ticks="100" ease="easeOutCubic"/>
+        <scale target="2.0" ticks="200" ease="easeOutCubic"/>
+        <scale target="1.0" ticks="200" ease="easeOutCubic"/>
+        <alpha target="20.0" ticks="200" ease="easeOutCubic"/>
+        <alpha target="235.0" ticks="200" ease="easeOutCubic"/>
       </sequence>
     </animation>
     <animation name="easeOutExpo">
-      <sequence loops="1" sequence="true">
-        <move ease="easeOutExpo" ticks="200" dx="0.0" dy="200.0"/>
-        <move ease="easeOutExpo" ticks="200" dx="0.0" dy="-200.0"/>
-        <turn ease="easeOutExpo" headingToo="false" ticks="100" turn="360.0"/>
-        <scale ease="easeOutExpo" target="2.0" ticks="200"/>
-        <scale ease="easeOutExpo" target="1.0" ticks="200"/>
-        <alpha ease="easeOutExpo" target="20.0" ticks="200"/>
-        <alpha ease="easeOutExpo" target="235.0" ticks="200"/>
+      <sequence sequence="true" loops="1">
+        <move dx="0.0" dy="200.0" ticks="200" ease="easeOutExpo"/>
+        <move dx="0.0" dy="-200.0" ticks="200" ease="easeOutExpo"/>
+        <turn turn="360.0" headingToo="false" ticks="100" ease="easeOutExpo"/>
+        <scale target="2.0" ticks="200" ease="easeOutExpo"/>
+        <scale target="1.0" ticks="200" ease="easeOutExpo"/>
+        <alpha target="20.0" ticks="200" ease="easeOutExpo"/>
+        <alpha target="235.0" ticks="200" ease="easeOutExpo"/>
       </sequence>
     </animation>
     <animation name="easeOutQuad">
-      <sequence loops="1" sequence="true">
-        <move ease="easeOutQuad" ticks="200" dx="0.0" dy="200.0"/>
-        <move ease="easeOutQuad" ticks="200" dx="0.0" dy="-200.0"/>
-        <turn ease="easeOutQuad" headingToo="false" ticks="100" turn="360.0"/>
-        <scale ease="easeOutQuad" target="2.0" ticks="200"/>
-        <scale ease="easeOutQuad" target="1.0" ticks="200"/>
-        <alpha ease="easeOutQuad" target="20.0" ticks="200"/>
-        <alpha ease="easeOutQuad" target="235.0" ticks="200"/>
+      <sequence sequence="true" loops="1">
+        <move dx="0.0" dy="200.0" ticks="200" ease="easeOutQuad"/>
+        <move dx="0.0" dy="-200.0" ticks="200" ease="easeOutQuad"/>
+        <turn turn="360.0" headingToo="false" ticks="100" ease="easeOutQuad"/>
+        <scale target="2.0" ticks="200" ease="easeOutQuad"/>
+        <scale target="1.0" ticks="200" ease="easeOutQuad"/>
+        <alpha target="20.0" ticks="200" ease="easeOutQuad"/>
+        <alpha target="235.0" ticks="200" ease="easeOutQuad"/>
       </sequence>
     </animation>
     <animation name="fade">
-      <sequence loops="1" sequence="true">
-        <alpha ease="easeIn" target="0.0" ticks="200"/>
+      <sequence sequence="true" loops="1">
+        <alpha target="0.0" ticks="200" ease="easeIn"/>
       </sequence>
     </animation>
     <animation name="linear">
-      <sequence loops="1" sequence="true">
-        <move ease="linear" ticks="200" dx="0.0" dy="200.0"/>
-        <move ease="linear" ticks="200" dx="0.0" dy="-200.0"/>
-        <turn ease="linear" headingToo="false" ticks="100" turn="360.0"/>
-        <scale ease="linear" target="2.0" ticks="200"/>
-        <scale ease="linear" target="1.0" ticks="200"/>
-        <alpha ease="linear" target="20.0" ticks="200"/>
-        <alpha ease="linear" target="235.0" ticks="200"/>
+      <sequence sequence="true" loops="1">
+        <move dx="0.0" dy="200.0" ticks="200" ease="linear"/>
+        <move dx="0.0" dy="-200.0" ticks="200" ease="linear"/>
+        <turn turn="360.0" headingToo="false" ticks="100" ease="linear"/>
+        <scale target="2.0" ticks="200" ease="linear"/>
+        <scale target="1.0" ticks="200" ease="linear"/>
+        <alpha target="20.0" ticks="200" ease="linear"/>
+        <alpha target="235.0" ticks="200" ease="linear"/>
       </sequence>
     </animation>
   </animations>
   <costumes>
-    <costume name="alien" defaultZOrder="0" order="0">
+    <costume name="alien" defaultZOrder="0" order="0" showInDesigner="true">
       <pose name="bomb" pose="bomb1"/>
       <pose name="default" pose="alien1a"/>
       <animation name="bomb" animation="bomb"/>
@@ -313,29 +314,29 @@
       <animation name="easeOutQuad" animation="easeOutQuad"/>
       <animation name="linear" animation="linear"/>
     </costume>
-    <costume name="alien1a" defaultZOrder="0" order="0" extends="alien">
+    <costume name="alien1a" defaultZOrder="0" order="0" showInDesigner="true" extends="alien">
       <pose name="default" pose="alien1a"/>
     </costume>
-    <costume name="alien1b" defaultZOrder="0" order="0" extends="alien">
+    <costume name="alien1b" defaultZOrder="0" order="0" showInDesigner="true" extends="alien">
       <pose name="default" pose="alien1b"/>
     </costume>
-    <costume name="alien2a" defaultZOrder="0" order="0" extends="alien">
+    <costume name="alien2a" defaultZOrder="0" order="0" showInDesigner="true" extends="alien">
       <pose name="default" pose="alien2a"/>
     </costume>
-    <costume name="alien2b" defaultZOrder="0" order="0" extends="alien">
+    <costume name="alien2b" defaultZOrder="0" order="0" showInDesigner="true" extends="alien">
       <pose name="default" pose="alien2b"/>
     </costume>
-    <costume name="alien3a" defaultZOrder="0" order="0" extends="alien">
+    <costume name="alien3a" defaultZOrder="0" order="0" showInDesigner="true" extends="alien">
       <pose name="default" pose="alien3a"/>
     </costume>
-    <costume name="alien3b" defaultZOrder="0" order="0" extends="alien">
+    <costume name="alien3b" defaultZOrder="0" order="0" showInDesigner="true" extends="alien">
       <pose name="default" pose="alien3b"/>
     </costume>
-    <costume name="bomb" defaultZOrder="0" order="0">
+    <costume name="bomb" defaultZOrder="0" order="0" showInDesigner="true">
       <pose name="default" pose="bomb1"/>
       <animation name="default" animation="bomb"/>
     </costume>
-    <costume name="line" defaultZOrder="0" order="0">
+    <costume name="line" defaultZOrder="0" order="0" showInDesigner="true">
       <pose name="default" pose="line"/>
     </costume>
   </costumes>
@@ -347,4 +348,11 @@
     <scene name="projectiles"/>
   </scenes>
   <inputs/>
+  <layouts>
+    <layout name="default">
+      <layer name="main" zOrder="0" x="0" y="0" width="800" height="600" viewClassName="uk.co.nickthecoder.itchy.StageView" stageClassName="uk.co.nickthecoder.itchy.ZOrderStage" stageConstraintClassName="uk.co.nickthecoder.itchy.NullStageConstraint">
+        <view enableMouse="true"/>
+      </layer>
+    </layout>
+  </layouts>
 </resources>

@@ -8,6 +8,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import uk.co.nickthecoder.itchy.property.LayoutProperty;
 import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.BooleanProperty;
 import uk.co.nickthecoder.itchy.property.ClassNameProperty;
@@ -21,6 +22,7 @@ public class SceneResource extends Loadable implements PropertySubject<SceneReso
 
     static {
         properties.add(new StringProperty<SceneResource>("name"));
+        properties.add(new LayoutProperty<SceneResource>("scene.layout"));
         properties.add(new BooleanProperty<SceneResource>("scene.showMouse"));
         properties.add(new ClassNameProperty<SceneResource>(SceneDirector.class, "scene.sceneDirectorClassName"));
         properties.add(new RGBAProperty<SceneResource>("scene.backgroundColor"));

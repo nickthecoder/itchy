@@ -15,24 +15,8 @@ class Director(AbstractDirector) :
         print "Creating custom stages and views"
 
         screenRect = Rect(0, 0, game.getWidth(), game.getHeight())
-
-        self.mainStage = ZOrderStage("main")
-        game.getStages().add(self.mainStage)
-
-        # We need a separate view for the "lives" in the top left, because we don't want those to
-        # wrap round to the bottom of the screen.
-        self.hudStage = ZOrderStage("hud")
-        game.getStages().add(self.hudStage)
-
-        self.mainView = WrappedStageView(screenRect, self.mainStage)
-        self.mainView.wrap( game.getHeight(), game.getWidth(), 0, 0 )
-        game.getGameViews().add(self.mainView)
-
-        self.hudView = StageView(screenRect, self.hudStage)
-        game.getGameViews().add(self.hudView)
-
-        self.hudView.enableMouseListener(game)
-        self.collisionStrategy = WrappedCollisionStrategy( self.mainView )
+        wrapped = WrappedStageView( screenRect, None )
+        self.collisionStrategy = WrappedCollisionStrategy( wrapped )
 
       
     def startScene(self, sceneName) :
@@ -51,7 +35,15 @@ class Director(AbstractDirector) :
             transition = SceneTransition.slideLeft()
             self.reset();
 
-        return SceneTransition(transition).transition(sceneName)
+        st = SceneTransition(transition)
+        st.prepare()
+        
+        result = AbstractDirector.startScene( self, sceneName )
+        if result:
+            st.begin()
+
+        return result
+
 
     def reset(self) :
         self.score = 0

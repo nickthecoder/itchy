@@ -3,7 +3,7 @@
   <layer name="main">
     <actor costume="stars1" x="400" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="0" alpha="128.0"/>
   </layer>
-  <layer name="hud">
+  <layer name="foreground">
     <text text="Back" font="BlackCasper" size="77" color="#5263ff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.SceneButton" costume="button" x="411" y="75" direction="0.0" heading="0.0" startEvent="fadeIn" zOrder="3" alpha="198.0" activationDelay="0.3">
       <property name="sceneName" value="menu"/>
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">

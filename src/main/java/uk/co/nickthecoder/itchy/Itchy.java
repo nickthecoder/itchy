@@ -121,6 +121,9 @@ public class Itchy
 
         registry.add(new ClassName(Stage.class, uk.co.nickthecoder.itchy.ZOrderStage.class));
 
+        registry.add(new ClassName(StageConstraint.class, uk.co.nickthecoder.itchy.NullStageConstraint.class));
+        registry.add(new ClassName(StageConstraint.class, uk.co.nickthecoder.itchy.GridStageConstraint.class));
+
         Eases.registerEases();
 
         Animations.registerAnimations();

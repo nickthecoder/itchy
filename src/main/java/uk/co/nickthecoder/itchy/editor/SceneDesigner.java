@@ -18,6 +18,7 @@ import uk.co.nickthecoder.itchy.GenericCompoundView;
 import uk.co.nickthecoder.itchy.ImagePose;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.KeyListener;
+import uk.co.nickthecoder.itchy.Layer;
 import uk.co.nickthecoder.itchy.MouseListener;
 import uk.co.nickthecoder.itchy.Pose;
 import uk.co.nickthecoder.itchy.Resources;
@@ -26,6 +27,7 @@ import uk.co.nickthecoder.itchy.Scene;
 import uk.co.nickthecoder.itchy.SceneActor;
 import uk.co.nickthecoder.itchy.SceneDirector;
 import uk.co.nickthecoder.itchy.SceneResource;
+import uk.co.nickthecoder.itchy.ScrollableView;
 import uk.co.nickthecoder.itchy.Stage;
 import uk.co.nickthecoder.itchy.StageConstraint;
 import uk.co.nickthecoder.itchy.StageView;
@@ -98,7 +100,9 @@ public class SceneDesigner implements MouseListener, KeyListener
 
     private Scene scene;
 
-    private GenericCompoundView<StageView> designViews;
+    private GenericCompoundView<View> designViews;
+
+    private Layer currentLayer;
 
     private StageView currentStageView;
 
@@ -189,6 +193,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.costumeButtonGroup = new ButtonGroup();
     }
 
+    
     public void go()
     {
         this.editor.root.hide();
@@ -196,25 +201,29 @@ public class SceneDesigner implements MouseListener, KeyListener
         createToolbar();
 
         Rect wholeRect = new Rect(0, 0, this.editor.getWidth(), this.editor.getHeight());
-        this.designViews = new GenericCompoundView<StageView>("designViews", wholeRect);
+        this.designViews = new GenericCompoundView<View>("designViews", wholeRect);
 
         Rect editRect = new Rect(0, this.toolbar.getHeight(),
             this.editor.getWidth(), this.editor.getHeight() - this.toolbar.getHeight());
 
         this.editor.getViews().add(this.designViews);
 
-        for (Stage stage : this.editor.getGame().getStages()) {
-            if (!stage.isLocked()) {
-                Stage designStage = stage.createDesignStage();
+        createToolbox();
 
-                this.editor.getStages().add(designStage);
-                StageView view = new StageView(editRect, designStage);
-                this.designViews.add(view);
-                this.currentStageView = view;
+        for (Layer layer : this.scene.layout.layers) {
+            // TODO Create a DESIGN view, covering whole screen, offset the correct amount.
+            View view = layer.getView();
+            StageView stageView = layer.getStageView();
+            if (stageView != null) {
+                Stage stage = stageView.getStage();
+                this.editor.getStages().add(stage);
+                this.currentLayer = layer;
+                this.currentStageView = stageView;
             }
+            this.designViews.add(view);
         }
 
-        this.overlayStage = new ZOrderStage("overlay");
+        this.overlayStage = new ZOrderStage();
         this.editor.getStages().add(this.overlayStage);
 
         this.overlayView = new StageView(editRect, this.overlayStage);
@@ -228,7 +237,6 @@ public class SceneDesigner implements MouseListener, KeyListener
         createPageBorder();
         createHandles();
 
-        createToolbox();
 
         setMode(MODE_SELECT);
 
@@ -297,7 +305,8 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.editor.getViews().setPosition(viewsRect);
         this.overlayView.setPosition(editRect);
         this.designViews.setPosition(new Rect(0, 0, width, height));
-        for (StageView view : this.designViews.getChildren()) {
+
+        for (View view : this.designViews.getChildren()) {
             view.setPosition(editRect);
         }
 
@@ -310,28 +319,16 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.toolbar.setPosition(0, 0, width, this.toolbar.getHeight());
         this.toolbox.setPosition(0, 0, width, this.toolbox.getHeight());
 
-        //debugViews(this.editor.getGlassView().getParent(), "");
+        // debugViews(this.editor.getGlassView().getParent(), "");
     }
 
     /*
-    private void debugViews(View view, String prefix)
-    {
-        System.out.print(prefix);
-        if (view instanceof GenericCompoundView) {
-            GenericCompoundView<?> gcv = (GenericCompoundView<?>) view;
-            System.out.print(gcv.name + " : ");
-        } else {
-            System.out.print(view.getClass().getName() + " : ");
-        }
-        System.out.println(view.getPosition());
-        if (view instanceof GenericCompoundView) {
-            GenericCompoundView<?> parent = (GenericCompoundView<?>) view;
-            for (View child : parent.getChildren()) {
-                debugViews(child, prefix + "    ");
-            }
-        }
-    }
-    */
+     * private void debugViews(View view, String prefix) { System.out.print(prefix); if (view instanceof
+     * GenericCompoundView) { GenericCompoundView<?> gcv = (GenericCompoundView<?>) view; System.out.print(gcv.name +
+     * " : "); } else { System.out.print(view.getClass().getName() + " : "); } System.out.println(view.getPosition());
+     * if (view instanceof GenericCompoundView) { GenericCompoundView<?> parent = (GenericCompoundView<?>) view; for
+     * (View child : parent.getChildren()) { debugViews(child, prefix + "    "); } } }
+     */
 
     private void createPageBorder()
     {
@@ -381,12 +378,10 @@ public class SceneDesigner implements MouseListener, KeyListener
         VerticalScroll costumesScroll = new VerticalScroll(costumes);
 
         this.propertiesContainer = new PlainContainer();
-        VerticalScroll propertiesScroll = new VerticalScroll(
-            this.propertiesContainer);
+        VerticalScroll propertiesScroll = new VerticalScroll(this.propertiesContainer);
 
         this.appearanceContainer = new PlainContainer();
-        VerticalScroll appearanceScroll = new VerticalScroll(
-            this.appearanceContainer);
+        VerticalScroll appearanceScroll = new VerticalScroll(this.appearanceContainer);
 
         this.roleContainer = new PlainContainer();
         VerticalScroll roleScroll = new VerticalScroll(this.roleContainer);
@@ -962,13 +957,18 @@ public class SceneDesigner implements MouseListener, KeyListener
     private void createLayersTable()
     {
         this.layersTableModel = new SimpleTableModel();
-        for (StageView stageView : this.designViews.getChildren()) {
-            Stage stage = stageView.getStage();
+        for (Layer layer : this.scene.layout.layers) {
+            StageView stageView = layer.getStageView();
+
+            int minimumAlpha = 0;
+            if (stageView != null) {
+                minimumAlpha = stageView.minimumAlpha;
+            }
 
             SimpleTableModelRow row = new SimpleTableModelRow();
-            row.add(stageView);
-            row.add(stage.getName());
-            row.add(stageView.minimumAlpha);
+            row.add(layer);
+            row.add(layer.name);
+            row.add(minimumAlpha);
             this.layersTableModel.addRow(row);
         }
 
@@ -976,17 +976,19 @@ public class SceneDesigner implements MouseListener, KeyListener
 
         TableModelColumn showHideColumn = new TableModelColumn("Dim", 0, 70)
         {
-            public void addPlainCell(Container container,
-                final TableModelRow row)
+            public void addPlainCell(Container container, final TableModelRow row)
             {
-                final StageView stageView = (StageView) row.getData(0);
+                final Layer layer = (Layer) row.getData(0);
                 final CheckBox dim = new CheckBox(false);
                 dim.addChangeListener(new ComponentChangeListener()
                 {
                     @Override
                     public void changed()
                     {
-                        stageView.maximumAlpha = dim.getValue() ? 80 : 255;
+                        StageView view = layer.getStageView();
+                        if (view !=null) {
+                            view.maximumAlpha = dim.getValue() ? 80 : 255;   
+                        }
                     }
                 });
                 container.addChild(dim);
@@ -1018,20 +1020,25 @@ public class SceneDesigner implements MouseListener, KeyListener
             public void addPlainCell(Container container,
                 final TableModelRow row)
             {
-                final StageView stageView = (StageView) row.getData(0);
-                final CheckBox check = new CheckBox(stageView.minimumAlpha > 0);
-                check.addChangeListener(new ComponentChangeListener()
-                {
-                    @Override
-                    public void changed()
+                final Layer layer = (Layer) row.getData(0);
+                final StageView stageView = layer.getStageView();
+                if (stageView == null ) {
+                    // Do nothing - add no components.
+                } else {
+                    final CheckBox check = new CheckBox(stageView.minimumAlpha > 0);
+                    check.addChangeListener(new ComponentChangeListener()
                     {
-                        try {
-                            stageView.minimumAlpha = (check.getValue() ? 200 : 0);
-                        } catch (Exception e) {
+                        @Override
+                        public void changed()
+                        {
+                            try {
+                                stageView.minimumAlpha = (check.getValue() ? 200 : 0);
+                            } catch (Exception e) {
+                            }
                         }
+                    });
+                    container.addChild(check);
                     }
-                });
-                container.addChild(check);
             }
 
             @Override
@@ -1067,7 +1074,8 @@ public class SceneDesigner implements MouseListener, KeyListener
             @Override
             public void onRowSelected(TableRow tableRow)
             {
-                SceneDesigner.this.currentStageView = (StageView) tableRow.getTableModelRow().getData(0);
+                currentLayer = (Layer) tableRow.getTableModelRow().getData(0);
+                currentStageView = currentLayer.getStageView(); 
             }
 
             @Override
@@ -1079,13 +1087,12 @@ public class SceneDesigner implements MouseListener, KeyListener
 
     private void updateLayersTable()
     {
-        String stageName = this.currentActor == null ? "" : this.currentActor
-            .getStage().getName();
+        Stage stage = this.currentActor.getStage();
 
         for (int i = 0; i < this.layersTableModel.getRowCount(); i++) {
             SimpleTableModelRow row = (SimpleTableModelRow) this.layersTableModel.getRow(i);
-            String name = (String) (row.getData(1));
-            if (stageName.equals(name)) {
+            Layer layer = (Layer) (row.getData(0));
+            if (stage == layer.getStage()) {
                 this.layersTable.selectRow(row);
                 break;
             }
@@ -1433,22 +1440,24 @@ public class SceneDesigner implements MouseListener, KeyListener
             if (Itchy.isCtrlDown()) {
                 // Look at ALL stages, not only the current one.
 
-                for (StageView child : Reversed.list(this.designViews
-                    .getChildren())) {
-                    Stage stage = child.getStage();
+                for (View child : Reversed.list(this.designViews.getChildren())) {
+                    if (child instanceof StageView) {
+                        StageView stageView = (StageView) child;
+                        Stage stage = stageView.getStage();
 
-                    for (Actor actor : Reversed.list(stage.getActors())) {
+                        for (Actor actor : Reversed.list(stage.getActors())) {
 
-                        if (actor.hitting(event.x, event.y)) {
-                            if (searching) {
-                                if (actor == this.currentActor) {
-                                    searching = false;
+                            if (actor.hitting(event.x, event.y)) {
+                                if (searching) {
+                                    if (actor == this.currentActor) {
+                                        searching = false;
+                                    }
+                                } else {
+                                    selectActor(actor);
+                                    setMode(MODE_DRAG_ACTOR);
+                                    beginDrag(event.x, event.y);
+                                    event.stopPropagation();
                                 }
-                            } else {
-                                selectActor(actor);
-                                setMode(MODE_DRAG_ACTOR);
-                                beginDrag(event.x, event.y);
-                                event.stopPropagation();
                             }
                         }
                     }
@@ -1456,8 +1465,7 @@ public class SceneDesigner implements MouseListener, KeyListener
 
             } else {
 
-                for (Actor actor : Reversed.list(this.currentStageView
-                    .getStage().getActors())) {
+                for (Actor actor : Reversed.list(this.currentStageView.getStage().getActors())) {
 
                     if (actor.hitting(event.x, event.y)) {
                         if (searching) {
@@ -1509,8 +1517,7 @@ public class SceneDesigner implements MouseListener, KeyListener
                 setDefaultProperties(role.actualRole, this.currentCostume);
             }
 
-            StageConstraint sc = this.currentStageView.getStage()
-                .getStageConstraint();
+            StageConstraint sc = this.currentStageView.getStage().getStageConstraint();
 
             actor.moveTo(sc.constrainX(event.x, event.y),
                 sc.constrainY(event.x, event.y));
@@ -1571,8 +1578,7 @@ public class SceneDesigner implements MouseListener, KeyListener
 
         if (this.mode == MODE_STAMP_COSTUME) {
 
-            StageConstraint sc = this.currentStageView.getStage()
-                .getStageConstraint();
+            StageConstraint sc = this.currentStageView.getStage().getStageConstraint();
 
             double newX = sc.constrainX(event.x, event.y);
             double newY = sc.constrainY(event.x, event.y);
@@ -1587,8 +1593,7 @@ public class SceneDesigner implements MouseListener, KeyListener
 
         } else if (this.mode == MODE_DRAG_ACTOR) {
 
-            StageConstraint sc = this.currentStageView.getStage()
-                .getStageConstraint();
+            StageConstraint sc = this.currentStageView.getStage().getStageConstraint();
 
             double reqX = this.currentActor.getX() + dx;
             double reqY = this.currentActor.getY() + dy;
@@ -1670,8 +1675,10 @@ public class SceneDesigner implements MouseListener, KeyListener
 
     private void scrollBy(int dx, int dy)
     {
-        for (StageView view : this.designViews.getChildren()) {
-            view.scrollBy(dx, dy);
+        for (View view : this.designViews.getChildren()) {
+            if (view instanceof ScrollableView) {
+                ((ScrollableView) view).scrollBy(dx, dy);
+            }
         }
         this.overlayView.scrollBy(dx, dy);
     }
@@ -1679,10 +1686,11 @@ public class SceneDesigner implements MouseListener, KeyListener
     private void onCenter()
     {
         int x = 0;
-        int y = this.sceneRect.height
-            - (int) this.overlayView.getVisibleRectangle().height;
-        for (StageView stageView : this.designViews.getChildren()) {
-            stageView.scrollTo(x, y);
+        int y = this.sceneRect.height - (int) this.overlayView.getVisibleRectangle().height;
+        for (View view : this.designViews.getChildren()) {
+            if (view instanceof ScrollableView) {
+                ((ScrollableView) view).scrollTo(x, y);
+            }
         }
         this.overlayView.scrollTo(x, y);
     }
@@ -1831,14 +1839,17 @@ public class SceneDesigner implements MouseListener, KeyListener
 
     private void onResetZOrders()
     {
-        for (StageView child : this.designViews.getChildren()) {
-            Stage stage = child.getStage();
+        for (View view : this.designViews.getChildren()) {
+            if (view instanceof StageView) {
+                StageView stageView = (StageView) view;
+                Stage stage = stageView.getStage();
 
-            for (Actor actor : stage.getActors()) {
-                if ((actor.getCostume() != null)
-                    && (actor.getCostume().defaultZOrder != 0)) {
-                    if (actor.getZOrder() != actor.getCostume().defaultZOrder) {
-                        actor.setZOrder(actor.getCostume().defaultZOrder);
+                for (Actor actor : stage.getActors()) {
+                    if ((actor.getCostume() != null)
+                        && (actor.getCostume().defaultZOrder != 0)) {
+                        if (actor.getZOrder() != actor.getCostume().defaultZOrder) {
+                            actor.setZOrder(actor.getCostume().defaultZOrder);
+                        }
                     }
                 }
             }
@@ -1865,14 +1876,16 @@ public class SceneDesigner implements MouseListener, KeyListener
     private void onSave()
     {
         this.scene.clear();
-        for (StageView stageView : this.designViews.getChildren()) {
+        for (Layer layer : this.scene.layout.layers) {
+            StageView stageView = layer.getStageView();
+            if (stageView != null) {
+                
+                Scene.SceneLayer sceneLayer = this.scene.createSceneLayer(layer.name);
 
-            Scene.SceneLayer sceneLayer = this.scene.createSceneLayer(stageView
-                .getStage().getName());
-
-            for (Actor actor : stageView.getStage().getActors()) {
-                SceneActor sceneActor = SceneActor.createSceneActor(actor);
-                sceneLayer.add(sceneActor);
+                for (Actor actor : stageView.getStage().getActors()) {
+                    SceneActor sceneActor = SceneActor.createSceneActor(actor);
+                    sceneLayer.add(sceneActor);
+                }
             }
         }
 

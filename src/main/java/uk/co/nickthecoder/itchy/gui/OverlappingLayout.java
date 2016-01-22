@@ -6,7 +6,7 @@ package uk.co.nickthecoder.itchy.gui;
 
 import java.util.List;
 
-public class OverlappingLayout implements Layout
+public class OverlappingLayout implements ContainerLayout
 {
     @Override
     public void calculateRequirements( PlainContainer container )

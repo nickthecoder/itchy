@@ -11,6 +11,7 @@ import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Costume;
 import uk.co.nickthecoder.itchy.CostumeFeatures;
 import uk.co.nickthecoder.itchy.Role;
+import uk.co.nickthecoder.itchy.ZOrderStage;
 import uk.co.nickthecoder.itchy.animation.Eases;
 import uk.co.nickthecoder.itchy.animation.ScaleAnimation;
 import uk.co.nickthecoder.itchy.extras.Fragments;
@@ -97,7 +98,7 @@ public class Alien extends Bouncy implements Shootable
         bullet.event("default");
         bullet.moveTo(getActor());
         bullet.setDirection(getActor().getAppearance().getDirection());
-        DrunkInvaders.director.mainStage.addTop(bullet);
+        ((ZOrderStage) DrunkInvaders.director.getLayout().findStage("main")).addTop(bullet);
         // Scaled up aliens have scaled up bullets
         bullet.moveForwards(15 * getActor().getAppearance().getScale());
         bullet.getAppearance().setScale(getActor().getAppearance().getScale());

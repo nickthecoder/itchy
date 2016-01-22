@@ -60,8 +60,6 @@ public class NeighbourhoodTest
     @Before
     public void setUp() throws Exception
     {
-        System.out.println("Loading resources");
-
         resources = new Resources();
         resources.load(new File(Itchy.getResourcesDirectory(),
             "tests" + File.separator + "neighbourhood.xml"));

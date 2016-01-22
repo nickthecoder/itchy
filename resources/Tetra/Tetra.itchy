@@ -1,9 +1,6 @@
 <resources>
-  <game directorClassName="uk.co.nickthecoder.tetra.Tetra" height="480" initialScene="menu" title="Tetra" width="640"/>
-  <fonts>
-    <font name="Boycott" filename="fonts/Boycott.ttf"/>
-  </fonts>
-  <ninePatches/>
+  <game title="Tetra" width="640" height="480" resizable="false" initialScene="menu" testScene="test" directorClassName="uk.co.nickthecoder.tetra.Tetra"/>
+  <spriteSheets/>
   <poses>
     <pose name="background" filename="images/background.png"/>
     <pose name="blue" filename="images/blue.png"/>
@@ -16,6 +13,10 @@
     <pose name="red" filename="images/red.png"/>
     <pose name="yellow" filename="images/yellow.png"/>
   </poses>
+  <ninePatches/>
+  <fonts>
+    <font name="Boycott" filename="fonts/Boycott.ttf"/>
+  </fonts>
   <sounds>
     <sound name="explode" filename="sounds/explode.ogg"/>
     <sound name="pop" filename="sounds/pop.ogg"/>
@@ -23,70 +24,70 @@
   </sounds>
   <animations>
     <animation name="moveDown1">
-      <parallel loops="1" sequence="false">
-        <move ease="linear" ticks="20" dx="0.0" dy="-20.0"/>
+      <parallel sequence="false" loops="1">
+        <move dx="0.0" dy="-20.0" ticks="20" ease="linear"/>
       </parallel>
     </animation>
     <animation name="moveDown2">
-      <parallel loops="1" sequence="false">
-        <move ease="linear" ticks="30" dx="0.0" dy="-40.0"/>
+      <parallel sequence="false" loops="1">
+        <move dx="0.0" dy="-40.0" ticks="30" ease="linear"/>
       </parallel>
     </animation>
     <animation name="moveDown3">
-      <parallel loops="1" sequence="false">
-        <move ease="linear" ticks="30" dx="0.0" dy="-60.0"/>
+      <parallel sequence="false" loops="1">
+        <move dx="0.0" dy="-60.0" ticks="30" ease="linear"/>
       </parallel>
     </animation>
     <animation name="moveDown4">
-      <parallel loops="1" sequence="false">
-        <move ease="linear" ticks="40" dx="0.0" dy="-80.0"/>
-        <sequence loops="1" sequence="true">
-          <turn ease="linear" headingToo="false" ticks="5" turn="30.0"/>
-          <turn ease="linear" headingToo="false" ticks="5" turn="-30.0"/>
-          <turn ease="linear" headingToo="false" ticks="5" turn="30.0"/>
-          <turn ease="linear" headingToo="false" ticks="5" turn="-30.0"/>
-          <turn ease="linear" headingToo="false" ticks="5" turn="30.0"/>
-          <turn ease="linear" headingToo="false" ticks="5" turn="-30.0"/>
+      <parallel sequence="false" loops="1">
+        <move dx="0.0" dy="-80.0" ticks="40" ease="linear"/>
+        <sequence sequence="true" loops="1">
+          <turn turn="30.0" headingToo="false" ticks="5" ease="linear"/>
+          <turn turn="-30.0" headingToo="false" ticks="5" ease="linear"/>
+          <turn turn="30.0" headingToo="false" ticks="5" ease="linear"/>
+          <turn turn="-30.0" headingToo="false" ticks="5" ease="linear"/>
+          <turn turn="30.0" headingToo="false" ticks="5" ease="linear"/>
+          <turn turn="-30.0" headingToo="false" ticks="5" ease="linear"/>
         </sequence>
       </parallel>
     </animation>
   </animations>
   <costumes>
-    <costume name="background" defaultZOrder="0">
+    <costume name="background" defaultZOrder="0" order="0" showInDesigner="true">
       <pose name="default" pose="background"/>
     </costume>
-    <costume name="square" defaultZOrder="0">
+    <costume name="square" defaultZOrder="0" order="0" showInDesigner="true">
       <pose name="default" pose="blue"/>
       <animation name="moveDown1" animation="moveDown1"/>
       <animation name="moveDown2" animation="moveDown2"/>
       <animation name="moveDown3" animation="moveDown3"/>
       <animation name="moveDown4" animation="moveDown4"/>
     </costume>
-    <costume name="blue" defaultZOrder="0" extends="square">
+    <costume name="blue" defaultZOrder="0" order="0" showInDesigner="true" extends="square">
       <pose name="default" pose="blue"/>
     </costume>
-    <costume name="board" defaultZOrder="0">
+    <costume name="board" defaultZOrder="0" order="0" showInDesigner="true">
       <pose name="default" pose="board"/>
     </costume>
-    <costume name="button" defaultZOrder="0" role="uk.co.nickthecoder.itchy.role.MessageButton">
+    <costume name="button" defaultZOrder="0" order="0" showInDesigner="true" role="uk.co.nickthecoder.itchy.role.MessageButton">
       <pose name="default" pose="button"/>
     </costume>
-    <costume name="cyan" defaultZOrder="0" extends="square">
+    <costume name="cyan" defaultZOrder="0" order="0" showInDesigner="true" extends="square">
       <pose name="default" pose="cyan"/>
     </costume>
-    <costume name="green" defaultZOrder="0" extends="square">
+    <costume name="green" defaultZOrder="0" order="0" showInDesigner="true" extends="square">
       <pose name="default" pose="green"/>
     </costume>
-    <costume name="orange" defaultZOrder="0" extends="square">
+    <costume name="orange" defaultZOrder="0" order="0" showInDesigner="true" extends="square">
       <pose name="default" pose="orange"/>
     </costume>
-    <costume name="purple" defaultZOrder="0" extends="square">
+    <costume name="purple" defaultZOrder="0" order="0" showInDesigner="true" extends="square">
       <pose name="default" pose="purple"/>
     </costume>
-    <costume name="red" defaultZOrder="0" extends="square">
+    <costume name="red" defaultZOrder="0" order="0" showInDesigner="true" extends="square">
       <pose name="default" pose="red"/>
     </costume>
-    <costume name="yellow" defaultZOrder="0" extends="square">
+    <costume name="yellow" defaultZOrder="0" order="0" showInDesigner="true" extends="square">
       <pose name="default" pose="yellow"/>
     </costume>
   </costumes>
@@ -105,4 +106,11 @@
     <input name="right" keys="RIGHT,x"/>
     <input name="rotate" keys="UP,SEMICOLON"/>
   </inputs>
+  <layouts>
+    <layout name="default">
+      <layer name="main" zOrder="0" x="0" y="0" width="640" height="480" viewClassName="uk.co.nickthecoder.itchy.StageView" stageClassName="uk.co.nickthecoder.itchy.ZOrderStage" stageConstraintClassName="uk.co.nickthecoder.itchy.NullStageConstraint">
+        <view enableMouse="true"/>
+      </layer>
+    </layout>
+  </layouts>
 </resources>

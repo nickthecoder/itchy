@@ -28,6 +28,8 @@ public class Scene
 
     public SceneDirector sceneDirector;
 
+    public Layout layout;
+    
     public Scene()
     {
         this.sceneLayers = new ArrayList<SceneLayer>();
@@ -77,21 +79,27 @@ public class Scene
     {
         for (SceneLayer sceneLayer : this.sceneLayers) {
             String name = sceneLayer.name;
-
-            sceneLayer.create(findStage(game, name), game.resources, designMode);
+            
+            sceneLayer.create(findStage(name), game.resources, designMode);
         }
     }
 
-    private Stage findStage( Game game, String name )
+    /**
+     * Look for a layer with a given name, and return its stage.
+     * If non are found, then return a ANY stage, as a fallback.
+     */
+    private Stage findStage(String name )
     {
-        Stage best = game.getStages().get(0);
+        Stage best = null;
 
-        for (Stage stage : game.getStages()) {
-            if (!stage.isLocked()) {
-
-                if (name.equals(stage.getName())) {
+        for (Layer layer: layout.layers) {
+            Stage stage= layer.getStage();
+            if (layer.name.equals(name)) {
+                if (stage != null) {
                     return stage;
                 }
+            }
+            if ( stage != null) {
                 best = stage;
             }
         }
@@ -116,6 +124,7 @@ public class Scene
         result.backgroundColor = this.backgroundColor;
         result.sceneDirectorClassName = this.sceneDirectorClassName;
         result.sceneDirector = this.sceneDirector;
+        result.layout = this.layout;
 
         for (SceneLayer sceneLayer : this.sceneLayers) {
             SceneLayer newSceneLayer = sceneLayer.copy();

@@ -4,8 +4,21 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import uk.co.nickthecoder.itchy.property.Property;
+
 public class NullStageConstraint implements StageConstraint
 {
+    private static final List<Property<StageConstraint,?>> properties = new ArrayList<Property<StageConstraint,?>>();
+
+    @Override
+    public List<Property<StageConstraint,?>> getProperties()
+    {
+        return properties;
+    }
+    
     @Override
     public double constrainX( double requestedX, double requestedY )
     {

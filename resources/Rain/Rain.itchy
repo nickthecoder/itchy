@@ -1,5 +1,5 @@
 <resources>
-  <game title="It's Gonna Rain" width="800" height="600" resizable="false" initialScene="menu" directorClassName="uk.co.nickthecoder.itchy.PlainDirector"/>
+  <game title="It's Gonna Rain" width="800" height="600" resizable="false" initialScene="menu" testScene="test" directorClassName="uk.co.nickthecoder.itchy.PlainDirector"/>
   <spriteSheets/>
   <poses>
     <pose name="background" filename="images/background.png" offsetX="0" offsetY="0"/>
@@ -253,4 +253,11 @@
     <input name="exit" keys="ESCAPE"/>
     <input name="restart" keys="RETURN,KP_ENTER"/>
   </inputs>
+  <layouts>
+    <layout name="default">
+      <layer name="main" zOrder="0" x="0" y="0" width="800" height="600" viewClassName="uk.co.nickthecoder.itchy.StageView" stageClassName="uk.co.nickthecoder.itchy.ZOrderStage" stageConstraintClassName="uk.co.nickthecoder.itchy.NullStageConstraint">
+        <view enableMouse="true"/>
+      </layer>
+    </layout>
+  </layouts>
 </resources>

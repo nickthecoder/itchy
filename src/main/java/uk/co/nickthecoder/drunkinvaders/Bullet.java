@@ -10,8 +10,9 @@ import java.util.List;
 import uk.co.nickthecoder.itchy.AbstractRole;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Role;
-import uk.co.nickthecoder.itchy.property.Property;
+import uk.co.nickthecoder.itchy.StageView;
 import uk.co.nickthecoder.itchy.property.DoubleProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.StringProperty;
 
 public class Bullet extends AbstractRole implements Shootable
@@ -55,7 +56,8 @@ public class Bullet extends AbstractRole implements Shootable
     {
         getActor().moveForwards(this.speed);
 
-        if (!DrunkInvaders.director.mainView.getVisibleRectangle().overlaps(getActor().getAppearance().getWorldRectangle())) {
+        StageView mainView = DrunkInvaders.director.getLayout().findStageView("main");
+        if (!mainView.getVisibleRectangle().overlaps(getActor().getAppearance().getWorldRectangle())) {
             getActor().kill();
         }
 

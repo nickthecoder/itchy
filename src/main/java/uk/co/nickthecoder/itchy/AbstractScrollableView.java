@@ -15,7 +15,7 @@ public abstract class AbstractScrollableView extends AbstractView implements Scr
 
     public AbstractScrollableView()
     {
-        this( new Rect( 0,0,10,10) );
+        this( new Rect( 0,0,640,480) );
     }
     
     public AbstractScrollableView(Rect position)

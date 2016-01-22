@@ -4,7 +4,7 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.gui;
 
-public class NullLayout implements Layout
+public class NullLayout implements ContainerLayout
 {
 
     @Override

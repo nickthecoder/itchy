@@ -6,7 +6,7 @@ package uk.co.nickthecoder.itchy.gui;
 
 import java.util.List;
 
-public class RowLayout implements Layout
+public class RowLayout implements ContainerLayout
 {
 
     private List<TableModelColumn> columns;

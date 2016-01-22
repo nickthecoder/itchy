@@ -24,12 +24,7 @@ public class ZOrderStage extends AbstractStage implements ZOrderStageInterface
     
     public ZOrderStage()
     {
-        this( "unnamed" );
-    }
-    
-    public ZOrderStage( String name )
-    {
-        super(name);
+        super();
     }
 
     @Override
@@ -142,15 +137,6 @@ public class ZOrderStage extends AbstractStage implements ZOrderStageInterface
                 return a.getZOrder() - b.getZOrder();
             }
         }
-    }
-
-    @Override
-    public Stage createDesignStage()
-    {
-        ZOrderStage result = (ZOrderStage) super.createDesignStage();
-        result.actors = new TreeSet<Actor>(new ZOrderComparactor());
-
-        return result;
     }
 
     private List<Actor> tempList = new ArrayList<Actor>();

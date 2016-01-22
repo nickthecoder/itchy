@@ -15,13 +15,6 @@ import uk.co.nickthecoder.itchy.property.PropertySubject;
  */
 public interface Stage extends PropertySubject<Stage>
 {
-    public String getName();
-
-    /**
-     * @return True if this layer shouldn't be edited within the SceneDesigner.
-     */
-    public boolean isLocked();
-
     public Iterator<Actor> iterator();
 
     public List<Actor> getActors();
@@ -54,11 +47,7 @@ public interface Stage extends PropertySubject<Stage>
 
     public void removeStageListener( StageListener listener );
 
-    /**
-     * Used by the SceneDesigner to create the stages where Actors are edited. Most stages will just create another instance of themselves,
-     * but some may have different role during the design compared to during actual game play.
-     */
-    public Stage createDesignStage();
-
     public StageConstraint getStageConstraint();
+
+    public void setStageConstraint(StageConstraint stageConstraint);
 }

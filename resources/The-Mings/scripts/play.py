@@ -37,12 +37,12 @@ class Play(PlainSceneDirector) :
 
 
     def onActivate(self) :
-        game.loadScene("gui", True)
+        game.director.mergeScene("gui")
         width = game.getWidth()
         height = game.getHeight()
 
         # Adjust the limits, so that they reference the CENTER of the screen
-        # MORE Change to the VISIBLE area i.e. the size of the mainView.
+        # MORE Change to the VISIBLE area i.e. the size of the main view.
         self.limitsLeft += width/2
         self.limitsRight -= width/2
         self.limitsTop -= height/2
@@ -114,7 +114,8 @@ class Play(PlainSceneDirector) :
 
 
     def onMouseDown( self, event ) :
-        director.mainView.adjustMouse( event )
+        mainView = director.layout.findView("main")
+        mainView.adjustMouse( event )
         if event.button == MouseButtonEvent.BUTTON_LEFT :
             x = event.x
             y = event.y # + 20 # Near their middles, not their feet
@@ -125,7 +126,7 @@ class Play(PlainSceneDirector) :
             else :
                 self.selectMing( None )
 
-        director.mainView.unadjustMouse( event )
+        mainView.unadjustMouse( event )
 
     def getCollisionStrategy( self, actor ) :
         #return SinglePointCollisionStrategy( actor, self.neighbourhood )

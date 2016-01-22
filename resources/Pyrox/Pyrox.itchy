@@ -922,4 +922,24 @@ before we can harvest the honey.</string>
     <input name="toggleInfo" keys="F1"/>
     <input name="up" keys="UP,SEMICOLON"/>
   </inputs>
+  <layouts>
+    <layout name="default">
+      <layer name="test" zOrder="0" x="0" y="0" width="800" height="600" viewClassName="uk.co.nickthecoder.itchy.StageView" stageClassName="uk.co.nickthecoder.itchy.ZOrderStage" stageConstraintClassName="uk.co.nickthecoder.itchy.GridStageConstraint">
+        <view enableMouse="false"/>
+        <stageConstraint boxWidth="60" boxHeight="60"/>
+      </layer>
+      <layer name="grid" zOrder="50" x="0" y="0" width="800" height="600" viewClassName="uk.co.nickthecoder.itchy.StageView" stageClassName="gridStage.py" stageConstraintClassName="uk.co.nickthecoder.itchy.GridStageConstraint">
+        <view enableMouse="false"/>
+        <stageConstraint boxWidth="100" boxHeight="100"/>
+      </layer>
+      <layer name="plain" zOrder="30" x="0" y="0" width="800" height="600" viewClassName="uk.co.nickthecoder.itchy.StageView" stageClassName="uk.co.nickthecoder.itchy.ZOrderStage" stageConstraintClassName="uk.co.nickthecoder.itchy.NullStageConstraint">
+        <view enableMouse="true"/>
+      </layer>
+    </layout>
+    <layout name="glass">
+      <layer name="glass" zOrder="100" x="0" y="0" width="800" height="600" viewClassName="uk.co.nickthecoder.itchy.StageView" stageClassName="uk.co.nickthecoder.itchy.ZOrderStage" stageConstraintClassName="uk.co.nickthecoder.itchy.NullStageConstraint">
+        <view enableMouse="false"/>
+      </layer>
+    </layout>
+  </layouts>
 </resources>

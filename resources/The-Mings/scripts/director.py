@@ -10,29 +10,10 @@ class Director(AbstractDirector) :
     def onStarted( self ) :
     
         self.inputQuit = Input.find("quit")
-            
+
         guiHeight = 100
         playRect = Rect(0, 0, game.getWidth(), game.getHeight() - guiHeight)
         guiRect = Rect(0, game.getHeight() - guiHeight, game.getWidth(), guiHeight )        
-
-        self.gridStage = ZOrderStage("grid")
-        game.getStages().add(self.gridStage)
-        self.gridView = StageView( playRect, self.gridStage )
-        game.getGameViews().add(self.gridView)
-        self.gridStage.setStageConstraint( GridStageConstraint( 10,10 ) )
-        self.gridView.enableMouseListener(game)
-
-        self.mainStage = ZOrderStage("main")
-        game.getStages().add(self.mainStage)
-        self.mainView = StageView(playRect, self.mainStage)
-        game.getGameViews().add(self.mainView)
-        self.mainView.enableMouseListener(game)
-
-        self.guiStage = ZOrderStage("gui")
-        game.getStages().add(self.guiStage)
-        self.guiView = StageView(guiRect, self.guiStage)
-        game.getGameViews().add(self.guiView)
-        self.guiView.enableMouseListener(game)
 
 
     def onMessage(self,message) :
@@ -51,8 +32,8 @@ class Director(AbstractDirector) :
                 game.startScene( "menu" )
 
     def scrollTo( self, x, y ) :
-        self.mainView.centerOn( x,y )
-        self.gridView.centerOn( x,y )
+        self.layout.findView("main").centerOn( x,y )
+        self.layout.findView("grid").centerOn( x,y )
 
     def processSpriteSheet(self) :
         start_time = time.time()

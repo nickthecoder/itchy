@@ -6,7 +6,6 @@ package uk.co.nickthecoder.itchy;
 
 import java.util.prefs.Preferences;
 
-import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
@@ -17,10 +16,8 @@ import uk.co.nickthecoder.jame.event.WindowEvent;
 public class AbstractDirector implements Director
 {
     protected Game game;
-
-    public ZOrderStage mainStage;
-
-    public StageView mainView;
+    
+    private Layout layout;
 
     public Game getGame()
     {
@@ -36,15 +33,6 @@ public class AbstractDirector implements Director
     @Override
     public void onStarted()
     {
-        Rect screenRect = new Rect(0, 0, this.game.getWidth(), this.game.getHeight());
-
-        this.mainStage = new ZOrderStage("main");
-        this.game.getStages().add(this.mainStage);
-
-        this.mainView = new StageView(screenRect, this.mainStage);
-        this.game.getGameViews().add(this.mainView);
-
-        this.mainView.enableMouseListener(this.game);
     }
 
     /**
@@ -142,9 +130,44 @@ public class AbstractDirector implements Director
             this.game.pause.unpause();
         }
         this.game.clear();
-        return this.game.loadScene(sceneName);
+        Layout layout = this.game.loadScene(sceneName);
+        if ( layout == null) {
+            return false;
+        }
+
+        this.layout = layout;
+
+        // fire events
+        this.game.getSceneDirector().onLoaded();
+        for (Stage stage : this.game.getStages()) {
+            for (Actor actor : stage.getActors()) {
+                actor.getRole().sceneCreated();
+            }
+        }
+        this.game.getSceneDirector().onActivate();
+        Itchy.frameRate.reset();
+        
+        return true;
     }
 
+    @Override
+    public boolean mergeScene( String sceneName )
+    {
+        Layout layout = this.game.loadScene(sceneName, true);
+        if ( layout == null) {
+            return false;
+        }
+        
+        this.layout.merge(layout);
+        return true;
+    }
+    
+    @Override
+    public Layout getLayout()
+    {
+        return this.layout;
+    }
+    
     /**
      * Gets the root node for this game. The default implementation uses the path based on Itchy's class name, and the game's ID.
      * Note, unlike {@link Game#getPreferences()}, the returned Preferences are not AutoFlushPreferences, you will need to call 'flush' to
@@ -164,7 +187,9 @@ public class AbstractDirector implements Director
     @Override
     public void onMessage( String message )
     {
-        this.game.getSceneDirector().onMessage(message);
+        if ((this.game != null) && (this.game.getSceneDirector() != null)) {
+            this.game.getSceneDirector().onMessage(message);
+        }
     }
 
     @Override

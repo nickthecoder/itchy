@@ -159,7 +159,7 @@ public class SceneTransition extends AbstractRole
      * Begins the transition by creating an Actor with the snapshot of the old scene, and then setting its animation to that used in the
      * SceneTransition constructor. {@link #onAnimationComplete} will be called when the animation finishes.
      */
-    protected void begin()
+    public void begin()
     {
         this.actor.moveTo(0, 0);
         Itchy.getGame().getGlassStage().addTop(this.actor);
@@ -176,18 +176,9 @@ public class SceneTransition extends AbstractRole
             onAnimationComplete();
         }
     }
-    /**
-     * Performs the transition to the named scene.
-     * 
-     * @param sceneName
-     *        The name of the scene to transition to.
-     */
-    public boolean transition( String sceneName )
+    
+    public void prepare()
     {
-        if (!Itchy.getGame().hasScene(sceneName)) {
-            return false;
-        }
-
         if (currentSceneTransition != null) {
             // We are already in the middle of a different transition. Lets kill that one,
             // and redraw the screen before taking the snapshot.
@@ -197,15 +188,8 @@ public class SceneTransition extends AbstractRole
 
         currentSceneTransition = this;
         takeSnapshot();
-        clear();
-
-        Itchy.getGame().loadScene(sceneName);
-
-        begin();
-
-        return true;
     }
-
+    
     /**
      * Kills the snapshot actor and sends the message <code>FilmTransition.COMPLETE</code> to the Game.
      */

@@ -4,10 +4,14 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
+import uk.co.nickthecoder.itchy.property.BooleanProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.Surface;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
@@ -16,6 +20,19 @@ import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 
 public class StageView extends AbstractScrollableView implements StageListener, MouseListener, MouseListenerView
 {
+    protected static final List<Property<View,?>> properties = new ArrayList<Property<View,?>>();
+
+    static {
+        properties.addAll( AbstractScrollableView.properties );
+        properties.add(new BooleanProperty<View>("enableMouse"));
+    }
+    
+    @Override
+    public List<Property<View,?>> getProperties()
+    {
+        return properties;
+    }
+    
     private Stage stage;
 
     public int minimumAlpha = 0;
@@ -43,13 +60,17 @@ public class StageView extends AbstractScrollableView implements StageListener, 
     {
         super(position);
         this.stage = stage;
-        this.stage.addStageListener(this);
+        if (stage != null) {
+            this.stage.addStageListener(this);
+        }
     }
 
     public void setStage( Stage stage )
     {
         this.stage = stage;
-        this.stage.addStageListener(this);
+        if (stage != null) {
+            this.stage.addStageListener(this);
+        }
     }
     
     public Stage getStage()
@@ -57,6 +78,20 @@ public class StageView extends AbstractScrollableView implements StageListener, 
         return this.stage;
     }
 
+    public boolean getEnableMouse()
+    {
+        return this.roleMouseListeners != null;
+    }
+    
+    public void setEnableMouse( boolean value )
+    {
+        if (value) {
+            enableMouseListener(Itchy.getGame());
+        } else {
+            disableMouseListener(Itchy.getGame());
+        }
+    }
+    
     @Override
     public void render2( Surface destSurface, Rect clip, final int offsetX, final int offsetY )
     {
@@ -209,12 +244,20 @@ public class StageView extends AbstractScrollableView implements StageListener, 
     public void enableMouseListener( Game game )
     {
         this.roleMouseListeners = new HashSet<ViewMouseListener>();
+        for ( Actor actor : this.stage.getActors() ) {
+            Role role = actor.getRole();
+            if (role instanceof ViewMouseListener) {
+                this.roleMouseListeners.add( (ViewMouseListener) role );
+            }
+        }
     }
 
     @Override
     public void disableMouseListener( Game game )
     {
-        this.roleMouseListeners.clear();
+        if (this.roleMouseListeners != null) {
+            this.roleMouseListeners.clear();
+        }
         this.roleMouseListeners = null;
     }
 
@@ -333,12 +376,6 @@ public class StageView extends AbstractScrollableView implements StageListener, 
         } finally {
             unadjustMouse(event);
         }
-    }
-
-    @Override
-    public String toString()
-    {
-        return "StageView " + this.stage.getName();
     }
 
 }

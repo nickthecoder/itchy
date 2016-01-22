@@ -67,7 +67,6 @@ public abstract class AbstractView implements View
         for (ParentView<?> parent = this.getParent(); parent != null; parent = parent.getParent()) {
             parent.adjustChildRect(rect);
         }
-        // System.out.println( "Adjusted " + this.position + " to " + rect );
         return rect;
     }
 

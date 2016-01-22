@@ -6,7 +6,7 @@ package uk.co.nickthecoder.itchy.gui;
 
 import java.util.List;
 
-public class FlowLayout implements Layout
+public class FlowLayout implements ContainerLayout
 {
     @Override
     public void calculateRequirements( PlainContainer container )

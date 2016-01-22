@@ -7,13 +7,15 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
+import uk.co.nickthecoder.itchy.property.PropertySubject;
+
 /**
  * When designing a scene, sometimes it is important to contrain where an actor can be positioned.
  * For example, in a grid based game, the actors can only be placed within one square of the grid,
  * and not half way between two.
  */
 
-public interface StageConstraint
+public interface StageConstraint extends PropertySubject<StageConstraint>
 {
     public double constrainX( double requestedX, double requestedY );
     public double constrainY( double requestedX, double requestedY );

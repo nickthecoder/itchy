@@ -10,6 +10,7 @@ import java.util.List;
 import uk.co.nickthecoder.itchy.Layer;
 import uk.co.nickthecoder.itchy.Layout;
 import uk.co.nickthecoder.itchy.Stage;
+import uk.co.nickthecoder.itchy.StageConstraint;
 import uk.co.nickthecoder.itchy.StageView;
 import uk.co.nickthecoder.itchy.View;
 import uk.co.nickthecoder.itchy.gui.AbstractTableListener;
@@ -190,30 +191,38 @@ public class LayoutsEditor extends SubEditor<Layout>
         TableModelColumn nameColumn = new TableModelColumn("Layer Name", 0, 200);
         nameColumn.rowComparator = new SingleColumnRowComparator<String>(0);
 
-        TableModelColumn xColumn = new TableModelColumn("X", 1, 50);
-        xColumn.rowComparator = new SingleColumnRowComparator<Integer>(1);
+        TableModelColumn zOrderColumn = new TableModelColumn("Z Order", 1, 100);
+        zOrderColumn.rowComparator = new SingleColumnRowComparator<Integer>(1);
 
-        TableModelColumn yColumn = new TableModelColumn("Y", 2, 70);
-        yColumn.rowComparator = new SingleColumnRowComparator<Integer>(2);
+        TableModelColumn xColumn = new TableModelColumn("X", 2, 50);
+        xColumn.rowComparator = new SingleColumnRowComparator<Integer>(2);
 
-        TableModelColumn widthColumn = new TableModelColumn("Width", 3, 70);
-        widthColumn.rowComparator = new SingleColumnRowComparator<Integer>(3);
+        TableModelColumn yColumn = new TableModelColumn("Y", 3, 70);
+        yColumn.rowComparator = new SingleColumnRowComparator<Integer>(3);
 
-        TableModelColumn heightColumn = new TableModelColumn("Height", 4, 70);
-        heightColumn.rowComparator = new SingleColumnRowComparator<Integer>(4);
+        TableModelColumn widthColumn = new TableModelColumn("Width", 4, 70);
+        widthColumn.rowComparator = new SingleColumnRowComparator<Integer>(4);
+
+        TableModelColumn heightColumn = new TableModelColumn("Height", 5, 70);
+        heightColumn.rowComparator = new SingleColumnRowComparator<Integer>(5);
 
         List<TableModelColumn> columns = new ArrayList<TableModelColumn>();
         columns.add(nameColumn);
+        columns.add(zOrderColumn);
         columns.add(xColumn);
         columns.add(yColumn);
         columns.add(widthColumn);
         columns.add(heightColumn);
 
         this.layersTableModel = this.createLayersTableModel();
-        return new Table(this.layersTableModel, columns);
+        Table table = new Table(this.layersTableModel, columns);
+        table.sort(2);
+        
+        return table;
+
     }
 
-    private static final int DATA_COLUMN = 5;
+    private static final int DATA_COLUMN = 6;
 
     private SimpleTableModel createLayersTableModel()
     {
@@ -222,6 +231,7 @@ public class LayoutsEditor extends SubEditor<Layout>
         for (Layer layer : this.currentResource.layers) {
             SimpleTableModelRow row = new SimpleTableModelRow();
             row.add(layer.name);
+            row.add(layer.zOrder);
             row.add(layer.position.x);
             row.add(layer.position.y);
             row.add(layer.position.width);
@@ -308,13 +318,16 @@ public class LayoutsEditor extends SubEditor<Layout>
 
         stagePropertiesContainer = new PlainContainer();
         viewPropertiesContainer = new PlainContainer();
-
+        stageConstraintPropertiesContainer = new PlainContainer();
+        
         editNotebook.addPage("Details", this.layerForm.createForm());
         editNotebook.addPage("View Properties", viewPropertiesContainer);
         editNotebook.addPage("Stage Properties", stagePropertiesContainer);
+        editNotebook.addPage("Stage Constraint", stageConstraintPropertiesContainer);
 
         createViewProperties();
         createStageProperties();
+        createStageConstraintProperties();
 
         final ClassNameBox viewClassNameBox = (ClassNameBox) this.layerForm.getComponent("viewClassName");
         viewClassNameBox.addChangeListener(new ComponentChangeListener()
@@ -325,6 +338,7 @@ public class LayoutsEditor extends SubEditor<Layout>
                 if (viewClassNameBox.isValid()) {
                     createViewProperties();
                     createStageProperties();
+                    createStageConstraintProperties();
                 }
             }
         });
@@ -337,6 +351,19 @@ public class LayoutsEditor extends SubEditor<Layout>
             {
                 if (stageClassNameBox.isValid()) {
                     createStageProperties();
+                    createStageConstraintProperties();
+                }
+            }
+        });
+        
+        final ClassNameBox stageConstraintClassNameBox = (ClassNameBox) this.layerForm.getComponent("stageConstraintClassName");
+        stageConstraintClassNameBox.addChangeListener(new ComponentChangeListener()
+        {
+            @Override
+            public void changed()
+            {
+                if (stageConstraintClassNameBox.isValid()) {
+                    createStageConstraintProperties();
                 }
             }
         });
@@ -403,11 +430,10 @@ public class LayoutsEditor extends SubEditor<Layout>
         
         stagePropertiesContainer.clear();
 
-        View view = this.editingLayer.getView();
-        boolean hasStage = view instanceof StageView;
+        StageView stageView = this.editingLayer.getStageView();
+        boolean hasStage = stageView != null;
 
         if (hasStage) {
-            StageView stageView = (StageView) view;
 
             Stage stage = stageView.getStage();
             if (stage != null) {
@@ -419,7 +445,36 @@ public class LayoutsEditor extends SubEditor<Layout>
         }
 
         this.layerForm.getComponent("stageClassName").setVisible(hasStage);
+        this.layerForm.getComponent("stageConstraintClassName").setVisible(hasStage);
         this.editNotebook.getTab(2).setVisible(hasStage);
+        this.editNotebook.getTab(3).setVisible(hasStage);
+
+    }
+
+
+    private PropertiesForm<StageConstraint> stageConstraintPropertiesForm;
+
+    private Container stageConstraintPropertiesContainer;
+
+    private void createStageConstraintProperties()
+    {
+        stageConstraintPropertiesForm = null;
+        
+        stageConstraintPropertiesContainer.clear();
+
+        StageView stageView = this.editingLayer.getStageView();
+
+        if (stageView != null) {
+
+            Stage stage = stageView.getStage();
+            if (stage != null) {
+                StageConstraint stageConstraint = stage.getStageConstraint();
+                
+                stageConstraintPropertiesForm = new PropertiesForm<StageConstraint>(stageConstraint, stageConstraint.getProperties());
+                stageConstraintPropertiesContainer.addChild(stageConstraintPropertiesForm.createForm());
+
+            }
+        }
 
     }
 
@@ -434,6 +489,9 @@ public class LayoutsEditor extends SubEditor<Layout>
         viewPropertiesForm.update();
         if (stagePropertiesForm != null) {
             stagePropertiesForm.update();
+        }
+        if (stageConstraintPropertiesForm != null) {
+            stageConstraintPropertiesForm.update();
         }
         
         if (this.currentResource.layers.contains(this.editingLayer)) {

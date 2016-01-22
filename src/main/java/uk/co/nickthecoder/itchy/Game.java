@@ -237,7 +237,7 @@ public class Game
         this.allViews.add(this.windows);
 
         // Covered by the glass view
-        this.glassStage = new ZOrderStage("glass");
+        this.glassStage = new ZOrderStage();
         this.glassView = new StageView(displayRect, this.glassStage);
         this.glassView.enableMouseListener(this);
         this.allViews.add(this.glassView);
@@ -327,6 +327,9 @@ public class Game
         for (Stage stage : this.stages) {
             stage.clear();
         }
+        this.gameViews.clear();
+        this.stages.clear();
+        
         this.glassStage.clear();
     }
 
@@ -768,15 +771,23 @@ public class Game
     	return this.resources.getGameInfo().resizable;
     }
 
-    /**
-     */
+    private boolean abortTicks;
+    
     public void tick()
     {
+        this.abortTicks = false;
         this.director.tick();
 
+        if (this.abortTicks ) {
+            return;
+        }
+        
         this.getSceneDirector().tick();
         for (Stage stage : this.getStages()) {
             stage.tick();
+            if (this.abortTicks ) {
+                return;
+            }
         }
         this.glassStage.tick();
     }
@@ -807,26 +818,32 @@ public class Game
         }
     }
 
-    public boolean loadScene( String sceneName )
+    public Layout loadScene( String sceneName )
     {
         return loadScene(sceneName, false);
     }
 
-    public boolean loadScene( String sceneName, boolean loadOnly )
+    public Layout loadScene( String sceneName, boolean loadOnly )
     {
+        this.abortTicks = true;
+        
         SceneResource sceneResource = this.resources.getSceneResource(sceneName);
+        if (sceneResource == null) {
+            System.err.println("Scene not found : " + sceneName);
+            return null;
+        }
         try {
             Scene scene = sceneResource.loadScene();
             if (scene == null) {
-                System.err.println("Scene not found : " + sceneName);
+                System.err.println("Error loading scene : " + sceneName);
                 try {
                     throw new Exception();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                return false;
+                return null;
             }
-
+            
             if (!loadOnly) {
 
                 this.sceneDirector.onDeactivate();
@@ -840,25 +857,24 @@ public class Game
 
             scene.create(this, false);
 
-            if (!loadOnly) {
-                this.sceneDirector.onLoaded();
-                for (Stage stage : this.stages ) {
-                    for (Actor actor : stage.getActors()) {
-                        actor.getRole().sceneCreated();
-                    }
+            for (Layer layer: scene.layout.layers) {
+                this.gameViews.add( layer.getView() );
+
+                Stage stage = layer.getStage();
+                if (stage != null) {
+                    this.stages.add(stage);
                 }
-                this.sceneDirector.onActivate();
-                Itchy.frameRate.reset();
             }
+            
+            return scene.layout;
 
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
+            return null;
         } finally {
             sceneResource.unloadScene();
         }
 
-        return true;
     }
 
     public String getSceneName()

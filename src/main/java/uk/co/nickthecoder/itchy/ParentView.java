@@ -17,6 +17,8 @@ public interface ParentView<V extends View> extends View
 
     public void add( int index, V view );
 
+    public void clear();
+    
     public void remove( V view );
 
     public List<V> getChildren();

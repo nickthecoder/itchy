@@ -1,17 +1,26 @@
 Current Tasks
 =============
 
-Create Layout tab in editor
-    View an Stage properties in a Notebook. (Details is first page).
-    Load/Save the view and stage's properties
+Remove scene.backgroundColor
 
-When merging layouts, need to clone the layers, including the view, stage and the view's and stage's properties.
+Get each game working without coded stages/views.
 
-Scene has a Layout property.
-Therefore Need a LayoutPicker and a LayoutProperty.
+Debris : Life icons don't appear
+    Can't access the "hud" layer from ship's onBirth
 
-SceneEditor to use the Layout to generate the design layers.
-    Saves in the usual way.
+SceneDesigner
+    Views should NOT be the one from Layout, but a scrollable one, which covers the whole screen.
+        Bounds are the whole screen, and offsets are based on the layer's position (and any scroll amount by the editor).
+
+    Layer to have a getDesignView method.
+
+SceneDesigner: one dotted box for the screen's  bounds, and another for the current view's if they are different.
+
+SceneDesigner
+    When scrolling, then StageViews should be scrolled, but non-stage view should just be moved
+        e.g. a RGBAView should only cover the inside of the dotted rectangle.
+    Therefore editor needs to add another black RGBAView behind all the others.
+
 
 Loading a scene
     Creates a new layout
@@ -25,21 +34,41 @@ Loading a scene
     Optional: SceneDirector loads additional scenes, merging the layers using the same two steps above.
     
     Clear the existing game's stages, and then remove all stages/views.
-    Add all stages/views from the layout to the main view tree.
+    Add all stages/views from the layout to the game.
+        Maybe Game should have a Layout, instead of a list of stages?
+        Maybe Layout should implement View, and be a node within the game's/itchy's tree of views.
+            No - because then adding a new programatically wouldn't work.
 
 SceneDirector has a Layout, which can be used to find stages. Don't use Itchy's view tree.
 
-Remove names from existing Stage/View classes.
+SceneDesigner's Layers tab: Add a "..." button if the layer or the stage have properties.
 
-Should Layout be a NamedResource?
-    If not, why are the other resources?
+Remove background colour from SceneResource - Implement this as a layer.
+
+When loading/merging layouts, need to clone the layers, including the view, stage and the view's and stage's properties.
+
+How should StageConstraint be handled?
+    AbastractStage has stageConstaint as a property, but I can't save arbitrary classes (yet?).
+    Also, I can't set the attributes of the stage complaint, nor choose the StageContraint implementation from the GUI.
+    
+    Could subclass ZOrderStage (or whatever), and "hard code" the stage constraint there.
+        Nasty
+        
+    Give Layer a stageConstraint ClassName, and add this to the Layout GUI and save/load. 
+        Better. Do this!
+    
+
+SceneDesigner onPaste, and maybe other places uses addTop, but now that costumes have default ZOrders, it makes more sensse
+    to use add, and let them have the same ZOrder.
+
 
 Renaming a Layer/Layout will need to alter all scenes???
     Or SceneDesigner can handle missing Layout/Layers, and still muddle through.
 
+Game.loadScene, calls Role.sceneCreated only for the "main" load, not for additional scenes, such as
+    glass view for highscores, lives etc.
 
-Look at ScriptManager's createXXX methods, and see where they are called from.
-    Consider removing createXXX methods, and doing it via ClassName.createInstance instead.
+SceneDesigner : Show the current layer in the toolbar as a button. Click to switch.
 
 BUGS
 ====
@@ -145,8 +174,16 @@ ColorKeyFragment. Use another pose, to decide which pixels belong to each fragme
 Code Tidy Up
 ============
 
+MouseListenerView - Why is Game passed to its methods?
+
+Look at ScriptManager's createXXX methods, and see where they are called from.
+    Consider removing createXXX methods, and doing it via ClassName.createInstance instead.
+
 Consider merging Pose & PoseResource. Ditto for other resources.
 
+Should Layout be a NamedResource?
+    If not, why are the other resources?
+    
 Pixelator has a bodge in it. Sometime it needs to add one to all the pixels.
 	Do a test, and see if the top row of pixels are blank for large scales, and if so,
 		then move blit to another surface before embossing the edges.

@@ -5,8 +5,8 @@ from gridRole import GridRole
 
 class GridStage(ZOrderStage) :
 
-    def __init__(self, name) :
-        ZOrderStage.__init__(self, name)
+    def __init__(self) :
+        ZOrderStage.__init__(self)
         self.grid = None
         # Used to ensure that each GridRole is never ticked twice in one frame.
         # Each GridRole has a "lastTicked", and if this is == this.tickCount, then don't tick.

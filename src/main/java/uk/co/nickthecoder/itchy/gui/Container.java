@@ -48,7 +48,7 @@ public interface Container extends Component
 
     public void setYSpacing( int value );
 
-    public void setLayout( Layout layout );
+    public void setLayout( ContainerLayout layout );
 
     public void setXAlignment( double value );
 

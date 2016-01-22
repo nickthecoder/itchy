@@ -16,6 +16,7 @@ import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Actor.AnimationEvent;
 import uk.co.nickthecoder.itchy.Input;
 import uk.co.nickthecoder.itchy.Launcher;
+import uk.co.nickthecoder.itchy.ZOrderStage;
 import uk.co.nickthecoder.itchy.extras.Fragments;
 import uk.co.nickthecoder.itchy.extras.Timer;
 import uk.co.nickthecoder.itchy.role.ExplosionBuilder;
@@ -481,7 +482,7 @@ public class Tetra extends AbstractDirector
             for (int i = 0; i < PIECES; i++) {
                 this.actors[i] = new Actor(Tetra.this.game.resources.getCostume(names[n]));
                 this.actors[i].setRole(new PlainRole());
-                Tetra.this.mainStage.addTop(this.actors[i]);
+                ((ZOrderStage) Tetra.this.getLayout().findStage("main")).addTop(this.actors[i]);
             }
             update();
 

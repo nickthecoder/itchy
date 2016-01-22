@@ -11,7 +11,7 @@ import uk.co.nickthecoder.jame.event.Keys;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseEvent;
 
-public class Scroll extends PlainContainer implements Layout
+public class Scroll extends PlainContainer implements ContainerLayout
 {
     protected AbstractComponent child;
 
@@ -253,7 +253,7 @@ public class Scroll extends PlainContainer implements Layout
         }
     }
 
-    public class VerticalScrollbar extends DragableContainer implements Layout
+    public class VerticalScrollbar extends DragableContainer implements ContainerLayout
     {
         PlainContainer scroller;
 
@@ -384,7 +384,7 @@ public class Scroll extends PlainContainer implements Layout
     }
 
 
-    public class HorizontalScrollbar extends DragableContainer implements Layout
+    public class HorizontalScrollbar extends DragableContainer implements ContainerLayout
     {
         PlainContainer scroller;
 

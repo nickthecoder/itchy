@@ -1,4 +1,4 @@
-<scene showMouse="false" role="uk.co.nickthecoder.itchy.PlainSceneDirector" background="#000000ff">
+<scene layout="glass" showMouse="false" role="uk.co.nickthecoder.itchy.PlainSceneDirector" background="#000000ff">
   <properties/>
   <layer name="glass">
     <text text="0" font="Boycott" size="42" color="#464cff" xAlignment="1.0" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.NumberValue" x="786" y="566" direction="0.0" heading="0.0" startEvent="default" zOrder="0">

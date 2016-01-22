@@ -95,7 +95,7 @@ public class SimplePause implements Pause
         }
 
         Rect rect = new Rect(0, 0, this.game.getWidth(), this.game.getHeight());
-        this.stage = new ZOrderStage("pause");
+        this.stage = new ZOrderStage();
 
         try {
             // Note, that the pause scene is not unloaded.

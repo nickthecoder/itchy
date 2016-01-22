@@ -21,7 +21,7 @@ import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.Keys;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 
-public class EntryBox<E extends EntryBox<?>> extends ClickableContainer implements Layout, KeyListener
+public class EntryBox<E extends EntryBox<?>> extends ClickableContainer implements ContainerLayout, KeyListener
 {
     private static final RGBA ANY_COLOR = new RGBA(0, 0, 0);
 

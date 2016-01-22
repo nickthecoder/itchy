@@ -4,7 +4,7 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.gui;
 
-public interface Layout
+public interface ContainerLayout
 {
 
     /**

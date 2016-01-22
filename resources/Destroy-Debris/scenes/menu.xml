@@ -39,7 +39,7 @@
       <property name="rotationSpeed" value="0.0"/>
     </actor>
   </layer>
-  <layer name="hud">
+  <layer name="foreground">
     <text text="Destroy Debris" font="BlackCasper" size="120" color="#d526db" xAlignment="0.5" yAlignment="0.5" costume="title" x="408" y="511" direction="0.0" heading="0.0" startEvent="slideInDown" zOrder="1" alpha="168.0" activationDelay="0.3">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Textured">
         <property name="pose" value="texture1"/>

@@ -22,7 +22,7 @@ import uk.co.nickthecoder.jame.event.Keys;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseEvent;
 
-public class TextArea extends ClickableContainer implements Layout, KeyListener, TextWidget
+public class TextArea extends ClickableContainer implements ContainerLayout, KeyListener, TextWidget
 {
     private static final RGBA ANY_COLOR = new RGBA(0, 0, 0);
 

@@ -1,5 +1,5 @@
 <resources>
-  <game title="Destroy Debris" width="800" height="600" resizable="false" initialScene="menu" directorClassName="director.py"/>
+  <game title="Destroy Debris" width="800" height="600" resizable="false" initialScene="menu" testScene="test" directorClassName="director.py"/>
   <spriteSheets/>
   <poses>
     <pose name="bullet1" filename="images/bullet1.png"/>
@@ -740,4 +740,19 @@
     <input name="weapon-1" keys="KEY_1"/>
     <input name="weapon-2" keys="KEY_2"/>
   </inputs>
+  <layouts>
+    <layout name="default">
+      <layer name="main" zOrder="50" x="0" y="0" width="800" height="600" viewClassName="uk.co.nickthecoder.itchy.WrappedStageView" stageClassName="uk.co.nickthecoder.itchy.ZOrderStage" stageConstraintClassName="uk.co.nickthecoder.itchy.NullStageConstraint">
+        <view enableMouse="false" top="600" right="800" bottom="0" left="0"/>
+      </layer>
+      <layer name="foreground" zOrder="60" x="0" y="0" width="800" height="600" viewClassName="uk.co.nickthecoder.itchy.StageView" stageClassName="uk.co.nickthecoder.itchy.ZOrderStage" stageConstraintClassName="uk.co.nickthecoder.itchy.NullStageConstraint">
+        <view enableMouse="true"/>
+      </layer>
+    </layout>
+    <layout name="hud">
+      <layer name="hud" zOrder="100" x="0" y="0" width="800" height="600" viewClassName="uk.co.nickthecoder.itchy.StageView" stageClassName="uk.co.nickthecoder.itchy.ZOrderStage" stageConstraintClassName="uk.co.nickthecoder.itchy.NullStageConstraint">
+        <view enableMouse="true"/>
+      </layer>
+    </layout>
+  </layouts>
 </resources>

@@ -1,5 +1,5 @@
 <resources>
-  <game title="The Mings" width="1000" height="800" resizable="false" initialScene="test" directorClassName="director.py"/>
+  <game title="The Mings" width="1000" height="800" resizable="false" initialScene="test" testScene="test" directorClassName="director.py"/>
   <spriteSheets>
     <spriteSheet name="spriteSheet" file="images/spriteSheet.png">
       <sprite name="tiny-blocker-01" x="3" y="60" width="10" height="10" direction="0.0" offsetX="6" offsetY="10"/>
@@ -646,4 +646,20 @@
     <input name="scrollUp" keys="UP"/>
     <input name="step" keys="SPACE"/>
   </inputs>
+  <layouts>
+    <layout name="default">
+      <layer name="grid" zOrder="40" x="0" y="0" width="1000" height="700" viewClassName="uk.co.nickthecoder.itchy.StageView" stageClassName="uk.co.nickthecoder.itchy.ZOrderStage" stageConstraintClassName="uk.co.nickthecoder.itchy.GridStageConstraint">
+        <view enableMouse="true"/>
+        <stageConstraint boxWidth="10" boxHeight="10"/>
+      </layer>
+      <layer name="main" zOrder="50" x="0" y="0" width="1000" height="700" viewClassName="uk.co.nickthecoder.itchy.StageView" stageClassName="uk.co.nickthecoder.itchy.ZOrderStage" stageConstraintClassName="uk.co.nickthecoder.itchy.NullStageConstraint">
+        <view enableMouse="true"/>
+      </layer>
+    </layout>
+    <layout name="gui">
+      <layer name="gui" zOrder="100" x="0" y="700" width="1000" height="100" viewClassName="uk.co.nickthecoder.itchy.StageView" stageClassName="uk.co.nickthecoder.itchy.ZOrderStage" stageConstraintClassName="uk.co.nickthecoder.itchy.NullStageConstraint">
+        <view enableMouse="true"/>
+      </layer>
+    </layout>
+  </layouts>
 </resources>

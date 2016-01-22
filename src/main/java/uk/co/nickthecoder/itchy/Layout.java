@@ -10,7 +10,7 @@ import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.PropertySubject;
 import uk.co.nickthecoder.itchy.property.StringProperty;
 
-public class Layout implements PropertySubject<Layout>
+public class Layout implements PropertySubject<Layout>, Cloneable
 {
     protected static final List<Property<Layout, ?>> properties = new ArrayList<Property<Layout,?>>();
 
@@ -66,19 +66,26 @@ public class Layout implements PropertySubject<Layout>
         }
         return layer.getView();
     }
+    
+    public StageView findStageView(String name)
+    {
+        View view = findView(name);
+        if (view instanceof StageView) {
+            return (StageView) view;
+        }
+        return null;
+    }
 
     public Stage findStage(String name)
-    {
-        if (stageMap.containsKey(name)) {
-            return stageMap.get(name);
+    {        
+        Stage result = stageMap.get(name);
+        if (result != null) {
+            return result;
         }
 
-        View view = findView(name);
-        if (view == null) {
-            return null;
-        }
-        if (view instanceof StageView) {
-            Stage result = ((StageView) view).getStage();
+        StageView stageView = findStageView(name);
+        if (stageView != null) {
+            result = stageView.getStage();
             stageMap.put(name, result);
             return result;
         }
@@ -97,6 +104,10 @@ public class Layout implements PropertySubject<Layout>
      */
     public void merge(Layout other)
     {
+        if (other== null) {
+            return;
+        }
+        
         for (Layer layer : other.layers) {
             this.layers.add(layer);
         }
@@ -106,6 +117,28 @@ public class Layout implements PropertySubject<Layout>
     public List<Property<Layout, ?>> getProperties()
     {
         return properties;
+    }
+
+    @Override
+    public Layout clone()
+    {
+        Layout result;
+        try {
+            result = (Layout) super.clone();
+        } catch (CloneNotSupportedException e) {
+            // Should never happen, so this is just to stop the compiler whining.
+            throw new RuntimeException(e);
+        }
+        
+
+        result.stageMap = new HashMap<String, Stage>();
+        result.layers = new TreeSet<Layer>();
+        
+        for (Layer layer : this.layers) {
+            result.addLayer( layer.clone() );
+        }
+        
+        return result;
     }
 
 }

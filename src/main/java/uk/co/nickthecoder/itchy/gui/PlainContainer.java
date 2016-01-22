@@ -20,7 +20,7 @@ public class PlainContainer extends AbstractComponent implements Container
 {
     public static final int NOT_SET = -1;
 
-    protected Layout layout;
+    protected ContainerLayout layout;
 
     private boolean layedOut;
 
@@ -215,7 +215,7 @@ public class PlainContainer extends AbstractComponent implements Container
     }
 
     @Override
-    public void setLayout( Layout layout )
+    public void setLayout( ContainerLayout layout )
     {
         this.layout = layout;
         this.forceLayout();

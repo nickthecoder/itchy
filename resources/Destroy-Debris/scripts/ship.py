@@ -49,12 +49,13 @@ class Ship(Moving) :
             .speed(0,0).projectiles(40) \
             .create()
         
-        for i in range( 0, game.getDirector().lives ) :
-            actor = self.getActor().createCompanion("life")
-            game.getDirector().hudStage.add(actor)
+        for i in range( 0, game.director.lives ) :
+            print "Adding life icon ", i
+            actor = self.actor.createCompanion("life")
+            game.director.layout.findStage("foreground").add(actor)
             actor.moveTo( 30 + i * 40 , 560 )
-            if game.getSceneName() == "1" :
-                actor.event("appear")
+            #if game.getSceneName() == "1" :
+            actor.event("appear")
                 
             self.lifeIcon.append(actor)
 

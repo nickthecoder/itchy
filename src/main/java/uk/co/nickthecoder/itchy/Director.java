@@ -36,7 +36,11 @@ public interface Director extends InputListener, QuitListener, MessageListener, 
 
     public boolean startScene( String sceneName );
 
+    public boolean mergeScene( String sceneName );
+
     public void tick();
+    
+    public Layout getLayout();
 
     /**
      * Gets the root node for this game.

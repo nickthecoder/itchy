@@ -42,6 +42,7 @@ public class SceneWriter extends XMLWriter
         }
         this.beginTag("scene");
         this.attribute("showMouse", this.scene.showMouse);
+        this.attribute("layout",  this.scene.layout.name);
         if (!PlainSceneDirector.class.getName().equals(this.scene.sceneDirectorClassName)) {
             this.attribute("role", this.scene.sceneDirectorClassName.name);
         }

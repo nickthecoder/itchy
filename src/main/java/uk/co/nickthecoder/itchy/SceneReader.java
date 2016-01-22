@@ -53,7 +53,10 @@ public class SceneReader
         } catch (Exception e) {
             throw new XMLException("Illegal colour : " + background);
         }
-
+        String layoutName = sceneTag.getOptionalAttribute("layout", "default" );
+        Layout layout = resources.getLayout(layoutName);
+        this.scene.layout = layout.clone();
+        
         String sceneDirectorName = sceneTag.getOptionalAttribute("role", PlainSceneDirector.class.getName());
         this.scene.sceneDirectorClassName = new ClassName(SceneDirector.class, sceneDirectorName);
 

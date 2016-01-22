@@ -109,7 +109,6 @@ public class GuiView extends AbstractView implements View, InputListener
         Rect rect = getAbsolutePosition();
         event.x -= rect.x;
         event.y -= rect.y;
-        // System.out.println( "adjust for " + rect + " was " + this.oldX + "," + this.oldY + " Now  "+ event.x + "," + event.y );
         return ((event.x >= 0) && (event.x < rect.width) && (event.y >= 0) && (event.y < rect.height));
     }
 
@@ -192,7 +191,6 @@ public class GuiView extends AbstractView implements View, InputListener
 
     private void beginTooltipTimer( MouseEvent event )
     {
-        // System.out.println( "beginTooltipTimer for " + this + " @ " + event.x + "," + event.y );
         if (!this.isVisible()) {
             return;
         }

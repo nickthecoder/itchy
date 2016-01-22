@@ -5,20 +5,16 @@
 package uk.co.nickthecoder.drunkinvaders;
 
 import java.text.DecimalFormat;
-import java.util.List;
 
 import uk.co.nickthecoder.itchy.AbstractDirector;
 import uk.co.nickthecoder.itchy.AbstractRole;
 import uk.co.nickthecoder.itchy.Actor;
-import uk.co.nickthecoder.itchy.GenericCompoundView;
 import uk.co.nickthecoder.itchy.Input;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Launcher;
 import uk.co.nickthecoder.itchy.MultiLineTextPose;
 import uk.co.nickthecoder.itchy.Role;
-import uk.co.nickthecoder.itchy.Stage;
 import uk.co.nickthecoder.itchy.StageView;
-import uk.co.nickthecoder.itchy.View;
 import uk.co.nickthecoder.itchy.WorldRectangle;
 import uk.co.nickthecoder.itchy.ZOrderStage;
 import uk.co.nickthecoder.itchy.animation.Animation;
@@ -28,7 +24,6 @@ import uk.co.nickthecoder.itchy.collision.Neighbourhood;
 import uk.co.nickthecoder.itchy.collision.NeighbourhoodCollisionStrategy;
 import uk.co.nickthecoder.itchy.collision.StandardNeighbourhood;
 import uk.co.nickthecoder.itchy.extras.SceneTransition;
-import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.Surface;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 
@@ -68,30 +63,6 @@ public class DrunkInvaders extends AbstractDirector
         this.neighbourhood = new StandardNeighbourhood(NEIGHBOURHOOD_SQUARE_SIZE);
 
         this.worldBounds = new WorldRectangle(0, 0, this.game.getWidth(), this.game.getHeight());
-
-        Rect screenRect = new Rect(0, 0, this.game.getWidth(), this.game.getHeight());
-
-        this.mainStage = new ZOrderStage("main");
-        this.backgroundStage = new ZOrderStage("background");
-
-        this.mainView = new StageView(screenRect, this.mainStage);
-        this.mainView.centerOn(320, 240);
-        this.mainView.enableMouseListener(this.game);
-
-        this.backgroundView = new StageView(screenRect, this.backgroundStage);
-        this.backgroundView.centerOn(320, 240);
-
-        GenericCompoundView<View> views = this.game.getGameViews();
-        views.add(this.backgroundView);
-        views.add(this.mainView);
-
-        List<Stage> stages = this.game.getStages();
-        stages.add(this.backgroundStage);
-        stages.add(this.mainStage);
-
-        // this.glassStage.locked = true;
-        // this.fadeStage.locked = true;
-
     }
 
     @Override
@@ -209,8 +180,16 @@ public class DrunkInvaders extends AbstractDirector
                 .add(SceneTransition.fade());
         }
         this.transitioning = true;
-        boolean result = new SceneTransition(transition).transition(sceneName);
-        this.transitioning = true;
+        SceneTransition st = new SceneTransition(transition);
+        st.prepare();
+        
+        boolean result = super.startScene( sceneName );
+        
+        if (result) {
+            st.begin();
+            this.transitioning = true;
+        }
+        
         return result;
     }
 

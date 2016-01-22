@@ -5,6 +5,7 @@
 package uk.co.nickthecoder.itchy.property;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -73,6 +74,23 @@ public abstract class Property<S, T>
      */
     public Set<String> aliases;
 
+    /**
+     * Make a shallow copy of the property values.
+     * @param from The object who's properties are to be copied
+     * @param to The object who is to have its properties set.
+     * @throws Exception
+     */
+    public static <X extends PropertySubject<X>> void copyProperties( X from, X to )
+        throws Exception
+    {        
+        List<Property<X,?>> properties = from.getProperties();
+        for ( Property<X,?> property : properties) {
+            Object value = property.getValue(from);
+            property.setValue(to, value);
+            
+        }
+    }
+    
     private static String labelFromKey( String key )
     {
         key = key.substring(0, 1).toUpperCase() + key.substring(1);

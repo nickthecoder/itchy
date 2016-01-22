@@ -6,7 +6,7 @@ package uk.co.nickthecoder.itchy.gui;
 
 import java.util.List;
 
-public class VerticalLayout implements Layout
+public class VerticalLayout implements ContainerLayout
 {
     private double sumExpansion;
 

@@ -1,4 +1,4 @@
-<scene showMouse="true" role="play.py" background="#000055ff">
+<scene showMouse="true" layout="default" role="play.py" background="#000055ff">
   <properties>
     <property name="limitsLeft" value="0"/>
     <property name="limitsRight" value="2000"/>

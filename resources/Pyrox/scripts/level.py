@@ -52,9 +52,9 @@ class Level(PlainSceneDirector) :
 
         if self.player :
             director = game.director
-            director.gridView.centerOn(self.player.actor)
-            director.testView.centerOn(self.player.actor)
-            director.plainView.centerOn(self.player.actor)
+            director.layout.findView("grid").centerOn(self.player.actor)
+            director.layout.findView("test").centerOn(self.player.actor)
+            director.layout.findView("plain").centerOn(self.player.actor)
 
         self.droppedFramesRole = game.findRoleById("droppedFrames")
 
@@ -84,10 +84,10 @@ class Level(PlainSceneDirector) :
     def onLoaded( self ) :
         
         # Load the glass stage on top of the current scene.
-        game.loadScene("glass", True)
+        game.director.mergeScene("glass")
         
         # Calculate the size of the grid needed to fit all of the actors
-        stage = game.director.gridStage
+        stage = game.director.layout.findStage("grid")
 
         minX = 1000000
         minY = 1000000
@@ -123,7 +123,7 @@ class Level(PlainSceneDirector) :
         down = math.floor( (maxY - minY) / squareSize) + 1
         
         self.grid = Grid( squareSize, across, down, minX, minY )
-        game.director.gridStage.grid = self.grid
+        game.director.layout.findStage("grid").grid = self.grid
         
         # Add all of the GridRoles to the grid
         i = stage.iterator()

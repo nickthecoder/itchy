@@ -24,6 +24,7 @@ import uk.co.nickthecoder.itchy.util.NinePatch;
 import uk.co.nickthecoder.itchy.util.XMLException;
 import uk.co.nickthecoder.itchy.util.XMLTag;
 import uk.co.nickthecoder.jame.JameException;
+import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.Surface;
 
 public class ResourcesReader
@@ -60,9 +61,14 @@ public class ResourcesReader
             XMLTag gameTag = i.next();
             this.readGame(gameTag);
         }
+        GameInfo gameInfo = this.resources.getGameInfo();
+        if (gameInfo == null) {
+            gameInfo = new GameInfo();
+            resources.setGameInfo( gameInfo );;
+        }
         Director director = this.resources.game.getDirector();
         if (director == null) {
-            director = new NullDirector();
+            director = new PlainDirector();
         }
 
         director.onMessage(Director.GAME_INFO_LOADED);
@@ -119,6 +125,18 @@ public class ResourcesReader
             XMLTag layoutsTag = i.next();
             this.readLayouts(layoutsTag);
         }
+        /*
+         * For backwards compatibility (when layouts didn't exist), create a default layout, with a single layer.
+         */
+        if (this.resources.layoutNames().size() == 0) {
+            Layout layout = new Layout();
+            layout.name = "default";
+            Layer layer = new Layer();
+            layer.name = "main";
+            layer.position = new Rect(0, 0, gameInfo.width, gameInfo.height);
+            layout.addLayer(layer);
+            resources.addLayout(layout);
+        }
         director.onMessage(Director.LAYOUTS_LOADED);
 
         for (Iterator<XMLTag> i = resourcesTag.getTags("scenes"); i.hasNext();) {
@@ -126,7 +144,6 @@ public class ResourcesReader
             this.readScenes(scenesTag);
         }
         director.onMessage(Director.SCENES_LOADED);
-
 
         director.onMessage(Director.LOADED);
     }
@@ -183,7 +200,7 @@ public class ResourcesReader
             SpriteSheet spriteSheet = new SpriteSheet(this.resources, name);
 
             this.readProperties(spriteSheetTag, spriteSheet);
-            
+
             for (Iterator<XMLTag> j = spriteSheetTag.getTags("sprite"); j.hasNext();) {
                 XMLTag spriteTag = j.next();
                 String spriteName = spriteTag.getAttribute("name");
@@ -276,7 +293,7 @@ public class ResourcesReader
                 Costume base = this.resources.getCostume(extendsName);
                 if (base == null) {
                     throw new XMLException("Failed to find base costume : " + extendsName + " for costume : "
-                                    + costumeName);
+                        + costumeName);
                 }
                 costume.setExtendedFrom(base);
 
@@ -290,7 +307,7 @@ public class ResourcesReader
             } else {
                 throw new XMLException("Expected a subclass of Role : " + costume.roleClassName);
             }
-            
+
             for (Iterator<XMLTag> j = costumeTag.getTags("pose"); j.hasNext();) {
                 XMLTag poseTag = j.next();
 
@@ -457,7 +474,7 @@ public class ResourcesReader
     }
 
     private <S extends PropertySubject<S>> void readProperties(XMLTag tag, S subject, List<Property<S, ?>> properties)
-                    throws XMLException
+        throws XMLException
     {
 
         for (Property<S, ?> property : subject.getProperties()) {
@@ -530,27 +547,36 @@ public class ResourcesReader
             XMLTag layoutTag = i.next();
 
             Layout layout = new Layout();
-            this.readProperties(layoutTag,  layout);
+            this.readProperties(layoutTag, layout);
 
             for (Iterator<XMLTag> j = layoutTag.getTags("layer"); j.hasNext();) {
                 XMLTag layerTag = j.next();
                 Layer layer = new Layer();
-                this.readProperties(layerTag,  layer);
-                layout.layers.add( layer );
-                
+                this.readProperties(layerTag, layer);
+                layout.layers.add(layer);
+
                 XMLTag viewTag = layerTag.getTag("view", false);
                 if (viewTag != null) {
                     this.readProperties(viewTag, layer.getView());
                 }
 
-                XMLTag stageTag = layerTag.getTag("stage", false);
-                if (stageTag != null) {
-                    this.readProperties(stageTag, ((StageView) layer.getView()).getStage());
+                Stage stage = layer.getStage();
+                if ( stage != null) {
+                    XMLTag stageTag = layerTag.getTag("stage", false);
+                    if (stageTag != null) {
+                        this.readProperties(stageTag, stage);
+                    }
+    
+                    XMLTag stageConstraintTag = layerTag.getTag("stageConstraint", false);
+                    if (stageConstraintTag != null) {
+                        this.readProperties(stageConstraintTag, stage.getStageConstraint());
+                    }
                 }
             }
-            
+
             this.resources.addLayout(layout);
         }
+
     }
 
     private void readScenes(XMLTag scenesTag) throws Exception

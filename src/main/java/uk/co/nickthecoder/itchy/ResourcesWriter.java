@@ -518,6 +518,11 @@ public class ResourcesWriter extends XMLWriter
                         this.writeProperties(stage);
                         this.endTag("stage");
                     }
+                    if ((stage != null) && (stage.getStageConstraint().getProperties().size() > 0)) {
+                        this.beginTag( "stageConstraint" );
+                        this.writeProperties(stage.getStageConstraint());
+                        this.endTag( "stageConstraint" );
+                    }
                 }
                 
                 this.endTag("layer");

@@ -4,12 +4,35 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
+
+import uk.co.nickthecoder.itchy.property.IntegerProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 
 public class GridStageConstraint implements StageConstraint
 {
-    private int boxWidth;
-    private int boxHeight;
+    private static final List<Property<StageConstraint,?>> properties = new ArrayList<Property<StageConstraint,?>>();
+
+    static {
+        properties.add(new IntegerProperty<StageConstraint>("boxWidth"));
+        properties.add(new IntegerProperty<StageConstraint>("boxHeight"));
+    }
+
+    @Override
+    public List<Property<StageConstraint,?>> getProperties()
+    {
+        return properties;
+    }
+    
+    public int boxWidth;
+    public int boxHeight;
+
+    public GridStageConstraint()
+    {
+        this(100,100);
+    }
 
     public GridStageConstraint( int boxWidth, int boxHeight )
     {

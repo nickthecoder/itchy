@@ -25,42 +25,16 @@ class Director(AbstractDirector) :
         self.macroRecord = False
         self.macroPlayback = False
     
-        screenRect = Rect(0, 0, self.game.getWidth(), self.game.getHeight())
-
-        self.plainStage = ZOrderStage("plain")
-        self.game.getStages().add(self.plainStage)
-        self.plainView = StageView(screenRect, self.plainStage)
-        self.game.getGameViews().add(self.plainView)
-        self.plainView.enableMouseListener(self.game)
-
-        self.gridStage = GridStage( "grid" )
-        self.game.getStages().add(self.gridStage)
-        self.gridView = StageView(screenRect, self.gridStage)
-        self.game.getGameViews().add(self.gridView)
-
-        self.testStage = ZOrderStage( "test" )
-        self.game.getStages().add(self.testStage)
-        self.testView = StageView(screenRect, self.testStage)
-        self.game.getGameViews().add(self.testView)
-        self.testView.setVisible( False )
-
-        self.glassStage = ZOrderStage("glass")
-        self.game.getStages().add(self.glassStage)
-        self.glassView = StageView(screenRect, self.glassStage)
-        self.game.getGameViews().add(self.glassView)
-
-        self.gridStage.setStageConstraint( GridStageConstraint( self.squareSize, self.squareSize ) )      
-        self.testStage.setStageConstraint( GridStageConstraint( self.squareSize, self.squareSize ) )      
-
+            
     def onMessage(self, message) :
         print "Message", message
         if message == Director.SPRITE_SHEETS_LOADED :
             self.processSprites()
 
     def centerOn( self, x, y ) :
-        self.centerViewOn( self.plainView, x, y )
-        self.centerViewOn( self.gridView, x, y )
-        self.centerViewOn( self.testView, x, y )
+        self.centerViewOn( self.layout.findView("plain"), x, y )
+        self.centerViewOn( self.layout.findView("grid"), x, y )
+        self.centerViewOn( self.layout.findView("test"), x, y )
 
     def processSprites( self ) :
         print "Processing Sprites"
@@ -133,20 +107,17 @@ class Director(AbstractDirector) :
 
         if self.inputEditor.matches(kevent) :
             sceneName = Itchy.getGame().getSceneName()
-            if sceneName == "menu" :
-                game.startEditor()
-            else :
-                game.startEditor( sceneName )
+            game.startEditor( sceneName )
     
         if self.inputRestart.matches(kevent) :
             Itchy.getGame().startScene( Itchy.getGame().getSceneName() )
 
         if self.inputQuit.matches(kevent) :
             scene = game.sceneName
-            if scene == "menu" :
+            if scene == "welcome" :
                 Itchy.getGame().end()
             elif scene == "play" :
-                game.startScene("menu")
+                game.startScene("welcome")
             else :
                 game.startScene( "play" )
 

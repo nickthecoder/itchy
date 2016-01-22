@@ -124,7 +124,6 @@ public class ClassDiagram
         for (String line : lines) {
             line = line.trim();
 
-            // System.out.println("> " + line);
             String param = "";
             if (line.indexOf(' ') > 0) {
                 param = line.substring(line.indexOf(' ')).trim();
@@ -209,7 +208,6 @@ public class ClassDiagram
 
     private void generate( ClassRequirements classRequirements )
     {
-        // System.out.println("Generating : " + classRequirements.klass.getName());
         String name = classRequirements.klass.getSimpleName();
         String slashName = getSlashName(classRequirements.klass);
 

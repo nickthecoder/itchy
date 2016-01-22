@@ -6,7 +6,7 @@ package uk.co.nickthecoder.itchy.gui;
 
 import java.util.List;
 
-public class CenterLayout implements Layout
+public class CenterLayout implements ContainerLayout
 {
 
     @Override

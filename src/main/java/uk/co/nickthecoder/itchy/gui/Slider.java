@@ -10,7 +10,7 @@ import java.util.List;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseEvent;
 
-public class Slider extends DragableContainer implements Layout
+public class Slider extends DragableContainer implements ContainerLayout
 {
     public double from;
 

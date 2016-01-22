@@ -67,6 +67,14 @@ public class GenericCompoundView<V extends View> extends AbstractView implements
     }
 
     @Override
+    public void clear()
+    {
+        while (this.children.size() > 0) {
+            this.remove(this.children.get(0));
+        }
+    }
+
+    @Override
     public void remove( V view )
     {
         this.children.remove(view);

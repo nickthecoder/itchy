@@ -13,32 +13,17 @@ import java.util.List;
 
 import uk.co.nickthecoder.itchy.property.Property;
 
-public abstract class AbstractStage implements Stage, Cloneable
+public abstract class AbstractStage implements Stage
 {
     private static final List<Property<Stage,?>> properties = new ArrayList<Property<Stage,?>>();
 
-    public final String name;
-
     public StageConstraint stageConstraint;
-
-    /**
-     * Used by the editor - can actors be placed into this stage? This is handy if you have a stage for non-game objects, for example a
-     * stage for a mini-map, control panel, dash boards etc.
-     */
-    public boolean locked = false;
 
     private List<StageListener> stageListeners = new LinkedList<StageListener>();
 
-    public AbstractStage( String name )
+    public AbstractStage()
     {
-        this.name = name;
         this.stageConstraint = new NullStageConstraint();
-    }
-
-    @Override
-    public String getName()
-    {
-        return this.name;
     }
 
     @Override
@@ -50,12 +35,6 @@ public abstract class AbstractStage implements Stage, Cloneable
     public void setStageConstraint( StageConstraint sc )
     {
         this.stageConstraint = sc;
-    }
-
-    @Override
-    public boolean isLocked()
-    {
-        return this.locked;
     }
 
     @Override
@@ -97,34 +76,6 @@ public abstract class AbstractStage implements Stage, Cloneable
         this.stageListeners.add(listener);
     }
 
-    /**
-     * Uses the clone method, to create an identical stage, but without any actors.
-     */
-    @Override
-    public Stage createDesignStage()
-    {
-        if (this.locked) {
-            return null;
-        } else {
-            return this.clone();
-        }
-    }
-
-    /**
-     * Used by {@link #createDesignStage()}.
-     */
-    @Override
-    public AbstractStage clone()
-    {
-        try {
-            AbstractStage result = (AbstractStage) super.clone();
-            result.stageListeners = new LinkedList<StageListener>();
-            return result;
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-    
     @Override
     public List<Property<Stage,?>> getProperties()
     {
