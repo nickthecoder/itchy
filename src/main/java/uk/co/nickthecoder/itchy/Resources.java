@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import uk.co.nickthecoder.itchy.animation.Animation;
@@ -54,7 +55,7 @@ public class Resources extends Loadable
 
     private final HashMap<String, FontResource> fonts;
 
-    private final HashMap<String, InputResource> inputs;
+    private final HashMap<String, Input> inputs;
 
     private final HashMap<String, CostumeResource> costumes;
 
@@ -68,6 +69,11 @@ public class Resources extends Loadable
 
     public final Registry registry = new Registry(Itchy.registry);
 
+    /**
+     * True iff any of the resources have been changed since it was loaded, or last saved.
+     */
+    private boolean dirty;
+        
     public Resources()
     {
         super();
@@ -82,14 +88,15 @@ public class Resources extends Loadable
         this.sounds = new HashMap<String, SoundResource>();
         this.fonts = new HashMap<String, FontResource>();
 
-        this.inputs = new HashMap<String, InputResource>();
+        this.inputs = new HashMap<String, Input>();
         this.costumes = new HashMap<String, CostumeResource>();
         this.scenes = new HashMap<String, SceneResource>();
 
         this.layouts = new HashMap<String,Layout>();
         
         this.renamedCostumes = new HashMap<String, String>();
-
+        this.dirty = false;
+        
         this.game = new Game(this);
     }
 
@@ -133,6 +140,16 @@ public class Resources extends Loadable
         }
     }
 
+    public boolean isDirty() 
+    {
+        return this.dirty;
+    }
+    
+    public void dirty()
+    {
+        this.dirty = true;
+    }
+    
     public GameInfo getGameInfo()
     {
         return this.gameInfo;
@@ -148,6 +165,7 @@ public class Resources extends Loadable
     @Override
     public void load() throws Exception
     {
+        this.dirty = false;
         Itchy.loadingGame(this.game);
 
         ResourcesReader loader = new ResourcesReader(this);
@@ -602,9 +620,9 @@ public class Resources extends Loadable
 
     // Inputs
 
-    public void addInput(InputResource ir)
+    public void addInput(Input input)
     {
-        this.inputs.put(ir.getName(), ir);
+        this.inputs.put(input.getName(), input);
     }
 
     public void removeInput(String name)
@@ -613,12 +631,6 @@ public class Resources extends Loadable
     }
 
     public Input getInput(String name)
-    {
-        InputResource resource = this.inputs.get(name);
-        return resource == null ? null : resource.getInput();
-    }
-
-    public InputResource getInputResource(String name)
     {
         return this.inputs.get(name);
     }
@@ -638,10 +650,15 @@ public class Resources extends Loadable
         return null;
     }
 
-    void rename2(InputResource inputResource, String name)
+    void rename(Input input)
     {
-        this.inputs.remove(inputResource.getName());
-        this.inputs.put(name, inputResource);
+        for (Entry<String, Input> entry : this.inputs.entrySet() ) {
+            if (entry.getValue() == input) {
+                this.inputs.remove(entry.getKey());
+                break;
+            }
+        }
+        this.inputs.put(input.getName(), input);
     }
 
     // Costumes

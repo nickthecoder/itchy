@@ -69,25 +69,25 @@ public abstract class AbstractComponent implements Focusable, Component
 
     public AbstractComponent()
     {
-        this.x = 0;
-        this.y = 0;
-        this.width = 0;
-        this.height = 0;
-        this.expansion = 0;
-        this.parent = null;
-        this.visible = true;
-        this.styles = new HashSet<String>();
-        this.type = "component";
+        x = 0;
+        y = 0;
+        width = 0;
+        height = 0;
+        expansion = 0;
+        parent = null;
+        visible = true;
+        styles = new HashSet<String>();
+        type = "component";
     }
 
     @Override
     public String getType()
     {
-        return this.type;
+        return type;
     }
 
     @Override
-    public void setType( String type )
+    public void setType(String type)
     {
         this.type = type;
         this.reStyle();
@@ -96,20 +96,20 @@ public abstract class AbstractComponent implements Focusable, Component
     @Override
     public RootContainer getRoot()
     {
-        if (this.parent == null) {
+        if (parent == null) {
             return null;
         }
-        return this.parent.getRoot();
+        return parent.getRoot();
     }
 
     @Override
     public Set<String> getStyles()
     {
-        return this.styles;
+        return styles;
     }
 
     @Override
-    public void addStyle( String style, boolean test )
+    public void addStyle(String style, boolean test)
     {
         if (test) {
             this.addStyle(style);
@@ -119,19 +119,25 @@ public abstract class AbstractComponent implements Focusable, Component
     }
 
     @Override
-    public void addStyle( String style )
+    public void addStyle(String style)
     {
-        if (!this.styles.contains(style)) {
-            this.styles.add(style);
+        if (!styles.contains(style)) {
+            styles.add(style);
             this.reStyle();
         }
     }
 
     @Override
-    public void removeStyle( String style )
+    public boolean hasStyle(String style)
     {
-        if (this.styles.contains(style)) {
-            this.styles.remove(style);
+        return styles.contains(style);
+    }
+
+    @Override
+    public void removeStyle(String style)
+    {
+        if (styles.contains(style)) {
+            styles.remove(style);
             this.reStyle();
         }
     }
@@ -152,36 +158,37 @@ public abstract class AbstractComponent implements Focusable, Component
     @Override
     public Container getParent()
     {
-        return this.parent;
+        return parent;
     }
 
-    public void setParent( Container container )
+    @Override
+    public void setParent(Container container)
     {
-        this.parent = container;
+        parent = container;
     }
 
     @Override
     public void remove()
     {
-        if (this.parent != null) {
+        if (parent != null) {
             this.getParent().removeChild(this);
         }
     }
 
     @Override
-    public void onKeyDown( KeyboardEvent ke )
+    public void onKeyDown(KeyboardEvent ke)
     {
     }
 
     @Override
-    public void onKeyUp( KeyboardEvent ke )
+    public void onKeyUp(KeyboardEvent ke)
     {
     }
 
     @Override
     public boolean canFocus()
     {
-        return this.focusable;
+        return focusable;
     }
 
     @Override
@@ -203,25 +210,25 @@ public abstract class AbstractComponent implements Focusable, Component
     }
 
     @Override
-    public void onFocus( boolean focus )
+    public void onFocus(boolean focus)
     {
     }
 
     @Override
     public double getExpansion()
     {
-        return this.expansion;
+        return expansion;
     }
 
     @Override
-    public void setExpansion( double value )
+    public void setExpansion(double value)
     {
-        if (value != this.expansion) {
-            this.expansion = value;
+        if (value != expansion) {
+            expansion = value;
 
             this.invalidate();
-            if (this.parent != null) {
-                this.parent.forceLayout();
+            if (parent != null) {
+                parent.forceLayout();
             }
         }
     }
@@ -229,126 +236,126 @@ public abstract class AbstractComponent implements Focusable, Component
     @Override
     public boolean isVisible()
     {
-        return this.visible;
+        return visible;
     }
 
     @Override
-    public void setVisible( boolean value )
+    public void setVisible(boolean value)
     {
-        this.visible = value;
-        if (this.parent != null) {
-            this.parent.forceLayout();
+        visible = value;
+        if (parent != null) {
+            parent.forceLayout();
         }
     }
 
     @Override
     public int getMarginTop()
     {
-        return this.marginTop;
+        return marginTop;
     }
 
     @Override
     public int getMarginLeft()
     {
-        return this.marginLeft;
+        return marginLeft;
     }
 
     @Override
     public int getMarginBottom()
     {
-        return this.marginBottom;
+        return marginBottom;
     }
 
     @Override
     public int getMarginRight()
     {
-        return this.marginRight;
+        return marginRight;
     }
 
     @Override
-    public void setMarginTop( int value )
+    public void setMarginTop(int value)
     {
-        if (this.marginTop != value) {
-            this.marginTop = value;
-            if (this.parent != null) {
-                this.parent.forceLayout();
+        if (marginTop != value) {
+            marginTop = value;
+            if (parent != null) {
+                parent.forceLayout();
             }
         }
     }
 
     @Override
-    public void setMarginRight( int value )
+    public void setMarginRight(int value)
     {
-        if (this.marginRight != value) {
-            this.marginRight = value;
-            if (this.parent != null) {
-                this.parent.forceLayout();
+        if (marginRight != value) {
+            marginRight = value;
+            if (parent != null) {
+                parent.forceLayout();
             }
         }
     }
 
     @Override
-    public void setMarginBottom( int value )
+    public void setMarginBottom(int value)
     {
-        if (this.marginBottom != value) {
-            this.marginBottom = value;
-            if (this.parent != null) {
-                this.parent.forceLayout();
+        if (marginBottom != value) {
+            marginBottom = value;
+            if (parent != null) {
+                parent.forceLayout();
             }
         }
     }
 
     @Override
-    public void setMarginLeft( int value )
+    public void setMarginLeft(int value)
     {
-        if (this.marginLeft != value) {
-            this.marginLeft = value;
-            if (this.parent != null) {
-                this.parent.forceLayout();
+        if (marginLeft != value) {
+            marginLeft = value;
+            if (parent != null) {
+                parent.forceLayout();
             }
         }
     }
 
     @Override
-    public void setMinimumWidth( int value )
+    public void setMinimumWidth(int value)
     {
-        if (this.minimumWidth != value) {
-            this.minimumWidth = value;
-            if (this.parent != null) {
-                this.parent.forceLayout();
+        if (minimumWidth != value) {
+            minimumWidth = value;
+            if (parent != null) {
+                parent.forceLayout();
             }
         }
     }
 
     @Override
-    public void setMinimumHeight( int value )
+    public void setMinimumHeight(int value)
     {
-        if (this.minimumHeight != value) {
-            this.minimumHeight = value;
-            if (this.parent != null) {
-                this.parent.forceLayout();
+        if (minimumHeight != value) {
+            minimumHeight = value;
+            if (parent != null) {
+                parent.forceLayout();
             }
         }
     }
 
     @Override
-    public void setMaximumWidth( int value )
+    public void setMaximumWidth(int value)
     {
-        if (this.maximumWidth != value) {
-            this.maximumWidth = value;
-            if (this.parent != null) {
-                this.parent.forceLayout();
+        if (maximumWidth != value) {
+            maximumWidth = value;
+            if (parent != null) {
+                parent.forceLayout();
             }
         }
     }
 
     @Override
-    public void setMaximumHeight( int value )
+    public void setMaximumHeight(int value)
     {
-        if (this.maximumHeight != value) {
-            this.maximumHeight = value;
-            if (this.parent != null) {
-                this.parent.forceLayout();
+        if (maximumHeight != value) {
+            maximumHeight = value;
+            if (parent != null) {
+                parent.forceLayout();
             }
         }
     }
@@ -362,56 +369,56 @@ public abstract class AbstractComponent implements Focusable, Component
     @Override
     public int getRequiredWidth()
     {
-        return Math.min(this.maximumWidth, Math.max(this.minimumWidth, this.getNaturalWidth()));
+        return Math.min(maximumWidth, Math.max(minimumWidth, this.getNaturalWidth()));
     }
 
     @Override
     public int getRequiredHeight()
     {
-        return Math.min(this.maximumHeight, Math.max(this.minimumHeight, this.getNaturalHeight()));
+        return Math.min(maximumHeight, Math.max(minimumHeight, this.getNaturalHeight()));
     }
 
     @Override
     public Font getFont()
     {
-        return this.font;
+        return font;
     }
 
     private boolean overrideFontRule;
 
-    void setFontFromRule( Font font )
+    void setFontFromRule(Font font)
     {
-        if (!this.overrideFontRule) {
+        if (!overrideFontRule) {
             setFont(font);
-            this.overrideFontRule = false;
+            overrideFontRule = false;
         }
     }
 
     @Override
-    public void setFont( Font font )
+    public void setFont(Font font)
     {
         if (this.font != font) {
             this.font = font;
-            if (this.parent != null) {
-                this.parent.forceLayout();
+            if (parent != null) {
+                parent.forceLayout();
             }
         }
-        this.overrideFontRule = true;
+        overrideFontRule = true;
     }
 
     @Override
     public int getFontSize()
     {
-        return this.fontSize;
+        return fontSize;
     }
 
     @Override
-    public void setFontSize( int fontSize )
+    public void setFontSize(int fontSize)
     {
         if (this.fontSize != fontSize) {
             this.fontSize = fontSize;
-            if (this.parent != null) {
-                this.parent.forceLayout();
+            if (parent != null) {
+                parent.forceLayout();
             }
         }
     }
@@ -419,41 +426,41 @@ public abstract class AbstractComponent implements Focusable, Component
     @Override
     public int getX()
     {
-        if (this.parent != null) {
-            this.parent.ensureLayedOut();
+        if (parent != null) {
+            parent.ensureLayedOut();
         }
-        return this.x;
+        return x;
     }
 
     @Override
     public int getY()
     {
-        if (this.parent != null) {
-            this.parent.ensureLayedOut();
+        if (parent != null) {
+            parent.ensureLayedOut();
         }
-        return this.y;
+        return y;
     }
 
     @Override
     public int getWidth()
     {
-        if (this.parent != null) {
-            this.parent.ensureLayedOut();
+        if (parent != null) {
+            parent.ensureLayedOut();
         }
-        return this.width;
+        return width;
     }
 
     @Override
     public int getHeight()
     {
-        if (this.parent != null) {
-            this.parent.ensureLayedOut();
+        if (parent != null) {
+            parent.ensureLayedOut();
         }
-        return this.height;
+        return height;
     }
 
     @Override
-    public void setPosition( int x, int y, int width, int height )
+    public void setPosition(int x, int y, int width, int height)
     {
         if ((this.x != x) || (this.y != y) || (this.width != width) || (this.height != height)) {
             this.x = x;
@@ -465,7 +472,7 @@ public abstract class AbstractComponent implements Focusable, Component
     }
 
     @Override
-    public void moveTo( int x, int y )
+    public void moveTo(int x, int y)
     {
         if ((this.x != x) || (this.y != y)) {
             this.x = x;
@@ -483,23 +490,24 @@ public abstract class AbstractComponent implements Focusable, Component
         }
     }
 
-    public void render( GraphicsContext gc )
+    @Override
+    public void render(GraphicsContext gc)
     {
         this.renderBackground(gc);
     }
 
-    protected void renderBackground( GraphicsContext gc )
+    protected void renderBackground(GraphicsContext gc)
     {
-        if (this.background != null) {
+        if (background != null) {
             Surface surface = new Surface(this.getWidth(), this.getHeight(), true);
-            this.background.render(surface);
+            background.render(surface);
             gc.blit(surface, 0, 0, Surface.BlendMode.COMPOSITE);
             surface.free();
         }
     }
 
     @Override
-    public void setBackground( Renderable background )
+    public void setBackground(Renderable background)
     {
         if (this.background != background) {
             this.background = background;
@@ -508,7 +516,7 @@ public abstract class AbstractComponent implements Focusable, Component
     }
 
     @Override
-    public void setColor( RGBA color )
+    public void setColor(RGBA color)
     {
         this.color = color;
         this.invalidate();
@@ -517,11 +525,11 @@ public abstract class AbstractComponent implements Focusable, Component
     @Override
     public RGBA getColor()
     {
-        return this.color;
+        return color;
     }
 
     @Override
-    public boolean hasAncestor( String type )
+    public boolean hasAncestor(String type)
     {
         for (Iterator<Container> i = this.getAncestors(); i.hasNext();) {
             Component ancestor = i.next();
@@ -535,7 +543,7 @@ public abstract class AbstractComponent implements Focusable, Component
     }
 
     @Override
-    public boolean hasAncestorStyle( String style )
+    public boolean hasAncestorStyle(String style)
     {
         for (Iterator<Container> i = this.getAncestors(); i.hasNext();) {
             Component ancestor = i.next();
@@ -551,7 +559,7 @@ public abstract class AbstractComponent implements Focusable, Component
     @Override
     public Rect getAbsolutePosition()
     {
-        Rect rect = new Rect(this.x, this.y, this.getWidth(), this.getHeight());
+        Rect rect = new Rect(x, y, this.getWidth(), this.getHeight());
 
         Container parent = this.parent;
         while (parent != null) {
@@ -572,12 +580,12 @@ public abstract class AbstractComponent implements Focusable, Component
 
     public class AncestorIterator implements Iterator<Container>
     {
-        private Container nextAncestor = AbstractComponent.this.parent;
+        private Container nextAncestor = parent;
 
         @Override
         public boolean hasNext()
         {
-            return (this.nextAncestor != null) && (this.nextAncestor.getParent() != null);
+            return (nextAncestor != null) && (nextAncestor.getParent() != null);
         }
 
         @Override
@@ -588,19 +596,19 @@ public abstract class AbstractComponent implements Focusable, Component
         @Override
         public Container next()
         {
-            Container result = this.nextAncestor;
-            this.nextAncestor = this.nextAncestor.getParent();
+            Container result = nextAncestor;
+            nextAncestor = nextAncestor.getParent();
             return result;
         }
     }
 
     @Override
-    public void mouseDown( MouseButtonEvent event )
+    public void mouseDown(MouseButtonEvent event)
     {
         if (this.contains2(event)) {
 
-            int dx = this.x;
-            int dy = this.y;
+            int dx = x;
+            int dy = y;
 
             event.x -= dx;
             event.y -= dy;
@@ -614,12 +622,12 @@ public abstract class AbstractComponent implements Focusable, Component
     }
 
     @Override
-    public void mouseMove( MouseMotionEvent event )
+    public void mouseMove(MouseMotionEvent event)
     {
         if (this.contains2(event)) {
 
-            int dx = this.x;
-            int dy = this.y;
+            int dx = x;
+            int dy = y;
 
             event.x -= dx;
             event.y -= dy;
@@ -633,12 +641,12 @@ public abstract class AbstractComponent implements Focusable, Component
     }
 
     @Override
-    public void mouseUp( MouseButtonEvent event )
+    public void mouseUp(MouseButtonEvent event)
     {
         if (this.contains2(event)) {
 
-            int dx = this.x;
-            int dy = this.y;
+            int dx = x;
+            int dy = y;
 
             event.x -= dx;
             event.y -= dy;
@@ -652,35 +660,35 @@ public abstract class AbstractComponent implements Focusable, Component
     }
 
     @Override
-    public void onMouseDown( MouseButtonEvent event )
+    public void onMouseDown(MouseButtonEvent event)
     {
     }
 
     @Override
-    public void onMouseUp( MouseButtonEvent event )
+    public void onMouseUp(MouseButtonEvent event)
     {
     }
 
     @Override
-    public void onMouseMove( MouseMotionEvent event )
+    public void onMouseMove(MouseMotionEvent event)
     {
     }
 
     @Override
-    public boolean contains( MouseEvent event )
+    public boolean contains(MouseEvent event)
     {
         return (event.x) >= 0 && (event.y >= 0) && (event.x < this.getWidth()) && (event.y < this.getHeight());
     }
 
     @Override
-    public boolean contains2( MouseEvent event )
+    public boolean contains2(MouseEvent event)
     {
         return (event.x) >= this.getX() && (event.y >= this.getY()) && (event.x < this.getX() + this.getWidth()) &&
             (event.y < this.getY() + this.getHeight());
     }
 
     @Override
-    public Component getComponent( MouseEvent me )
+    public Component getComponent(MouseEvent me)
     {
         if (this.contains(me)) {
             return this;
@@ -692,11 +700,11 @@ public abstract class AbstractComponent implements Focusable, Component
     @Override
     public String getTooltip()
     {
-        return this.tooltip;
+        return tooltip;
     }
 
     @Override
-    public void setTooltip( String tooltip )
+    public void setTooltip(String tooltip)
     {
         this.tooltip = tooltip;
     }
@@ -704,8 +712,8 @@ public abstract class AbstractComponent implements Focusable, Component
     @Override
     public String toString()
     {
-        return this.getClass().getName() + " Type: " + this.type + " Styles: " + this.styles + " (" + this.x + "," + this.y + ") - (" +
-            this.width + "," + this.height + ")";
+        return this.getClass().getName() + " Type: " + type + " Styles: " + styles + " (" + x + "," + y + ") - (" +
+            width + "," + height + ")";
     }
 
 }

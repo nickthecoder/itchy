@@ -477,12 +477,10 @@ public class ResourcesWriter extends XMLWriter
         this.beginTag("inputs");
 
         for (String name : this.resources.inputNames()) {
-            InputResource inputResource = this.resources.getInputResource(name);
-            Input input = inputResource.getInput();
+            Input input = this.resources.getInput(name);
             
             this.beginTag("input");
-            this.attribute("name", name);
-            this.attribute("keys", input.getKeys());
+            this.writeProperties(input);
             this.endTag("input");
         }
 

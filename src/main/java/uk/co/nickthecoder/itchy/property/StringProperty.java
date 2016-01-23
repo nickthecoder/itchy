@@ -62,7 +62,7 @@ public class StringProperty<S> extends Property<S, String>
         }
     }
 
-    private void addChangeListener( final TextWidget widget, final S subject, boolean autoUpdate )
+    protected void addChangeListener( final TextWidget widget, final S subject, boolean autoUpdate )
     {
         if (autoUpdate) {
             widget.addChangeListener(new ComponentChangeListener() {

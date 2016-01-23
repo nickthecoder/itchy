@@ -596,14 +596,10 @@ public class ResourcesReader
         for (Iterator<XMLTag> i = inputsTag.getTags("input"); i.hasNext();) {
             XMLTag inputTag = i.next();
 
-            String name = inputTag.getAttribute("name");
-            String keys = inputTag.getOptionalAttribute("keys", "");
-
             Input input = new Input();
-            input.parseKeys(keys);
-
-            InputResource inputResource = new InputResource(this.resources, name, input);
-            this.resources.addInput(inputResource);
+            this.readProperties(inputTag, input);
+            
+            this.resources.addInput(input);
         }
     }
 

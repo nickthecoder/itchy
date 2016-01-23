@@ -7,6 +7,9 @@ package uk.co.nickthecoder.itchy;
 import java.util.ArrayList;
 import java.util.List;
 
+import uk.co.nickthecoder.itchy.property.InputKeysProperty;
+import uk.co.nickthecoder.itchy.property.Property;
+import uk.co.nickthecoder.itchy.property.StringProperty;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 
 /**
@@ -19,8 +22,23 @@ import uk.co.nickthecoder.jame.event.KeyboardEvent;
  * 
  * Note, only keyboard input is implemented at present, but other input devices such as mouse and joystick will be added later.
  */
-public class Input
+public class Input implements NamedSubject<Input>
 {
+    protected static final List<Property<Input, ?>> properties = new ArrayList<Property<Input,?>>();
+
+    static {
+        properties.add(new StringProperty<Input>("name"));
+        properties.add(new InputKeysProperty<Input>("keys").access("keysString"));
+    }
+
+    @Override
+    public List<Property<Input, ?>> getProperties()
+    {
+        return properties;
+    }
+    
+    private String name;
+    
     private List<KeyInput> keys;
 
     private String asString = null;
@@ -42,16 +60,28 @@ public class Input
 
     public Input()
     {
+        this.asString = "";
+        this.name = "";
         this.keys = new ArrayList<KeyInput>();
     }
 
+    public String getName()
+    {
+        return this.name;
+    }
+    
+    public void setName( String name )
+    {
+        this.name = name;
+    }
+    
     /**
      * Builds a string representation of the set of keys for this input.
      * The format is comma separated list of : [ctrl+][shift+][meta+][alt+]KEY_NAME.
      * Used when saving the resources file.
      * @return The string representation of the set of keys for this input.
      */
-    public String getKeys()
+    public String getKeysString()
     {
         if (this.asString == null) {
             StringBuffer buffer = new StringBuffer();
@@ -71,7 +101,7 @@ public class Input
      * @param keys
      * @throws Exception
      */
-    public void parseKeys( String keys )
+    public void setKeysString( String keys )
         throws Exception
     {
 
@@ -116,7 +146,7 @@ public class Input
     @Override
     public String toString()
     {
-        return "Keys : " + this.getKeys();
+        return "Keys : " + this.getKeysString();
     }
 
 }

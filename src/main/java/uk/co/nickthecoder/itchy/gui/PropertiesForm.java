@@ -61,6 +61,33 @@ public class PropertiesForm<S>
         return this.container;
     }
 
+    /**
+     * When using autoUpdate, check if any of the fields have been altered.
+     * @return True iff any of the fields have been changed.
+     */
+    public boolean hasChanged()
+    {
+        try {
+            for(Property<S, ?> property : this.properties) {
+                Object newValue = property.getValue(subject);
+                Object oldValue = this.revertValues.get(property.key);
+                if ( newValue == oldValue ) continue;
+                
+                if ( newValue == null ) {
+                    return true;
+                }
+                
+                if ( ! newValue.equals(oldValue) ) {
+                    return true;
+                }
+                
+            }
+            return false;
+        } catch (Exception e) {
+            return true;
+        }        
+    }
+    
     public void revert()
     {
         try {
@@ -111,11 +138,17 @@ public class PropertiesForm<S>
      */
     public boolean isOk()
     {
+        for (Property<S, ?> property : this.properties) {
+            Component component = this.componentMap.get(property.key);
+            if (component.hasStyle("error")) {
+                return false;
+            }
+        }
         return this.getErrorMessage() == null;
     }
 
     /**
-     * @return An error message is one or more properties have been entered incorrectly. Null if all properties are ok.
+     * @return An error message if one or more properties have been entered incorrectly. Null if all properties are ok.
      */
     public String getErrorMessage()
     {

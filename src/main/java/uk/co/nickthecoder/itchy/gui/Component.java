@@ -39,6 +39,8 @@ public interface Component
 
     public void addStyle( String style );
 
+    public boolean hasStyle( String style );
+    
     public void removeStyle( String style );
 
     public void reStyle();

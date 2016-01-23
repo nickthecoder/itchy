@@ -1,6 +1,28 @@
 Current Tasks
 =============
 
+Remove OldInputsEditor
+
+Check name isn't clashing.
+Get ListInputs working
+Get EditInput working
+Load/Save input using properties.
+
+
+For each of these : GameInfo, SpriteSheet, Sprites (Poses), Animations, NinePatches, Sounds, Fonts, Costumes, Layouts, Scenes
+    Refactor all other resources to use the new ListXXX and EditXXX classes
+    Merge XXXResource with XXX
+    Load/Save using properties
+    
+Editor to test if resources have changed and prompt for confirm before exiting.
+
+
+
+
+
+
+
+
 Remove scene.backgroundColor
 
 Debris : Life icons don't appear

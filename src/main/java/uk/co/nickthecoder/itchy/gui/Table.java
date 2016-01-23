@@ -102,6 +102,11 @@ public class Table extends PlainContainer
         return heading;
     }
 
+    public TableModel getTableModel()
+    {
+        return this.model;
+    }
+    
     public void setTableModel( TableModel model )
     {
         this.model = model;

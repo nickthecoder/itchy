@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.Input;
-import uk.co.nickthecoder.itchy.InputResource;
 import uk.co.nickthecoder.itchy.KeyInput;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.GuiButton;
@@ -27,9 +26,9 @@ import uk.co.nickthecoder.itchy.gui.TableModelRow;
 import uk.co.nickthecoder.itchy.gui.TextBox;
 import uk.co.nickthecoder.itchy.property.Property;
 
-public class InputsEditor extends SubEditor<InputResource>
+public class OldInputsEditor extends SubEditor<Input>
 {
-    public InputsEditor( Editor editor )
+    public OldInputsEditor( Editor editor )
     {
         super(editor);
     }
@@ -67,9 +66,9 @@ public class InputsEditor extends SubEditor<InputResource>
         SimpleTableModel model = new SimpleTableModel();
 
         for (String inputName : this.editor.resources.inputNames()) {
-            InputResource inputResource = this.editor.resources.getInputResource(inputName);
+            Input input = this.editor.resources.getInput(inputName);
             String[] attributeNames = { "name", "input.keys" };
-            TableModelRow row = new ReflectionTableModelRow<InputResource>(inputResource, attributeNames);
+            TableModelRow row = new ReflectionTableModelRow<Input>(input, attributeNames);
             model.addRow(row);
         }
         return model;
@@ -84,7 +83,7 @@ public class InputsEditor extends SubEditor<InputResource>
 
         PlainContainer container = new PlainContainer();
         container.addStyle("combo");
-        this.keysText = new TextBox( this.currentResource.getInput().getKeys() );
+        this.keysText = new TextBox( this.currentResource.getKeysString() );
         GuiButton keysButton = new GuiButton("+");
         keysButton.addActionListener(new ActionListener() {
 
@@ -110,13 +109,13 @@ public class InputsEditor extends SubEditor<InputResource>
         TextBox name = (TextBox) this.form.getComponent("name");
 
         if (this.adding || (!name.getText().equals(this.currentResource.getName()))) {
-            if (this.editor.resources.getInputResource(name.getText()) != null) {
+            if (this.editor.resources.getInput(name.getText()) != null) {
                 throw new MessageException("That name is already being used.");
             }
         }
 
         try {
-            this.currentResource.getInput().parseKeys(this.keysText.getText());
+            this.currentResource.setKeysString(this.keysText.getText());
         } catch (Exception e) {
             throw new MessageException(e.getMessage());
         }
@@ -129,19 +128,19 @@ public class InputsEditor extends SubEditor<InputResource>
     }
 
     @Override
-    protected void remove( InputResource inputResource )
+    protected void remove( Input input )
     {
-        this.editor.resources.removeInput(inputResource.getName());
+        this.editor.resources.removeInput(input.getName());
     }
 
     @Override
     protected void onAdd()
     {
-        this.edit(new InputResource(this.editor.resources, "new", new Input()), true);
+        this.edit(new Input(), true);
     }
 
     @Override
-    protected List<Property<InputResource, ?>> getProperties()
+    protected List<Property<Input, ?>> getProperties()
     {
         return this.currentResource.getProperties();
     }
@@ -152,11 +151,11 @@ public class InputsEditor extends SubEditor<InputResource>
             @Override
             public void pick(KeyInput keyInput)
             {
-                String old = InputsEditor.this.keysText.getText().trim();
+                String old = OldInputsEditor.this.keysText.getText().trim();
                 if (old.length() > 0) {
                     old = old + ",";
                 }
-                InputsEditor.this.keysText.setText(old + keyInput.toString());
+                OldInputsEditor.this.keysText.setText(old + keyInput.toString());
             }
         };
         keyPicker.show();
