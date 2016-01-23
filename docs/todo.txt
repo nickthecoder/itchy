@@ -3,10 +3,10 @@ Current Tasks
 
 Remove scene.backgroundColor
 
-Get each game working without coded stages/views.
-
 Debris : Life icons don't appear
-    Can't access the "hud" layer from ship's onBirth
+
+Can't access the "hud" layer from ship's onBirth
+    Because the hud is loaded in the sceneDirectors onActivate, and onBirth is called before that.
 
 SceneDesigner
     Views should NOT be the one from Layout, but a scrollable one, which covers the whole screen.
@@ -21,23 +21,6 @@ SceneDesigner
         e.g. a RGBAView should only cover the inside of the dotted rectangle.
     Therefore editor needs to add another black RGBAView behind all the others.
 
-
-Loading a scene
-    Creates a new layout
-        
-    Merge the named layout with it.
-
-    Instantiate the views
-    
-    Place actors onto the stages.
-    
-    Optional: SceneDirector loads additional scenes, merging the layers using the same two steps above.
-    
-    Clear the existing game's stages, and then remove all stages/views.
-    Add all stages/views from the layout to the game.
-        Maybe Game should have a Layout, instead of a list of stages?
-        Maybe Layout should implement View, and be a node within the game's/itchy's tree of views.
-            No - because then adding a new programatically wouldn't work.
 
 SceneDirector has a Layout, which can be used to find stages. Don't use Itchy's view tree.
 

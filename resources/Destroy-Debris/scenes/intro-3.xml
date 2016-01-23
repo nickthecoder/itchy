@@ -1,4 +1,4 @@
-<scene showMouse="false" role="play.py" background="#00000000">
+<scene showMouse="false" layout="default" role="play.py" background="#00000000">
   <properties>
     <property name="nextScene" value="intro-4"/>
   </properties>
@@ -18,17 +18,17 @@
       <property name="rotationSpeed" value="0.9"/>
     </actor>
   </layer>
-  <layer name="hud">
+  <layer name="foreground">
     <text text="which is written in Java." font="Vera" size="26" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="392" y="26" direction="0.0" heading="0.0" startEvent="default" zOrder="0">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Textured">
-        <property name="poseName" value="texture1"/>
+        <property name="pose" value="texture1"/>
         <property name="y" value="0"/>
         <property name="x" value="0"/>
       </makeup>
     </text>
-    <text text="The trcky code is in the game engine, &quot;Itchy&quot;" font="Vera" size="26" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="387" y="59" direction="0.0" heading="0.0" startEvent="default" zOrder="1">
+    <text text="The tricky code is in the game engine, &quot;Itchy&quot;" font="Vera" size="26" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="387" y="59" direction="0.0" heading="0.0" startEvent="default" zOrder="1">
       <makeup classname="uk.co.nickthecoder.itchy.makeup.Textured">
-        <property name="poseName" value="texture1"/>
+        <property name="pose" value="texture1"/>
         <property name="y" value="0"/>
         <property name="x" value="0"/>
       </makeup>

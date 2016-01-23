@@ -14,15 +14,15 @@ class Play(PlainSceneDirector) :
         self.ship = None # Set by Ship's onBirth.
         self.nextScene = "completed"
 
-
-    def onActivate(self) :
-    
         self.inputExit = Input.find("exit")
         self.inputPause = Input.find("pause")
         self.inputRestart = Input.find("restart")
         self.inputContinue = Input.find("continue")
 
-        game.loadScene("foreground", True)
+
+    def onLoaded(self) :
+        print "Loading glass"
+        game.loadScene("glass", True)
 
 
     def onKeyDown(self, event) :

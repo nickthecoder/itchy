@@ -20,6 +20,7 @@ class Ship(Moving) :
 
     def onBirth(self) :
     
+        print "Ship.onBirth"
         self.inputLeft = Input.find("left")
         self.inputRight = Input.find("right")
         self.inputThrust = Input.find("thrust")
@@ -48,29 +49,18 @@ class Ship(Moving) :
             .companion("warp").eventName("default").distance(30,-80).spread(0,360).spread(0,360).randomSpread(False) \
             .speed(0,0).projectiles(40) \
             .create()
-        
+
+
+    def onSceneCreated( self ) :
+        print "Ship.onSceneCreated"
         for i in range( 0, game.director.lives ) :
             print "Adding life icon ", i
             actor = self.actor.createCompanion("life")
-            game.director.layout.findStage("foreground").add(actor)
+            game.director.layout.findStage("foreground").add( actor )
             actor.moveTo( 30 + i * 40 , 560 )
-            #if game.getSceneName() == "1" :
-            actor.event("appear")
-                
+            actor.event("appear")                
             self.lifeIcon.append(actor)
-
-
-    def warp(self) :
     
-        for i in range( 0, 3 ) :
-            ExplosionBuilder(self.getActor()) \
-                .companion("warp") \
-                .spread(i*120, 360 + i*120).vx(self.vx).vy(self.vy).distance(100) \
-                .speed(-6,0).projectiles(20).projectilesPerTick(1).randomSpread(False).alpha(0).fade(-3) \
-                .create()
-
-        self.getActor().deathEvent("fade")
-
 
     def tick(self) :
             
@@ -119,6 +109,18 @@ class Ship(Moving) :
         # For debugging.
         if self.inputCheat.pressed() :
             game.getSceneDirector().addRocks(-1)
+
+
+    def warp(self) :
+
+        for i in range( 0, 3 ) :
+            ExplosionBuilder(self.actor) \
+                .companion("warp").eventName("default") \
+                .spread(i*120, 360 + i*120).vx(self.vx).vy(self.vy).distance(100) \
+                .speed(-6,0).projectiles(20).projectilesPerTick(1).randomSpread(False).alpha(0).fade(-3) \
+                .create()
+
+        self.getActor().deathEvent("fade")
 
 
     def explode( self ) :

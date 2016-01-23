@@ -711,8 +711,8 @@
     <scene name="easy-2"/>
     <scene name="easy-3"/>
     <scene name="easy-4"/>
-    <scene name="foreground"/>
     <scene name="gameOver"/>
+    <scene name="glass"/>
     <scene name="intro-1"/>
     <scene name="intro-2"/>
     <scene name="intro-3"/>
@@ -749,8 +749,8 @@
         <view enableMouse="true"/>
       </layer>
     </layout>
-    <layout name="hud">
-      <layer name="hud" zOrder="100" x="0" y="0" width="800" height="600" viewClassName="uk.co.nickthecoder.itchy.StageView" stageClassName="uk.co.nickthecoder.itchy.ZOrderStage" stageConstraintClassName="uk.co.nickthecoder.itchy.NullStageConstraint">
+    <layout name="glass">
+      <layer name="glass" zOrder="100" x="0" y="0" width="800" height="600" viewClassName="uk.co.nickthecoder.itchy.StageView" stageClassName="uk.co.nickthecoder.itchy.ZOrderStage" stageConstraintClassName="uk.co.nickthecoder.itchy.NullStageConstraint">
         <view enableMouse="true"/>
       </layer>
     </layout>
