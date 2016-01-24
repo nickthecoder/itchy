@@ -6,6 +6,7 @@ package uk.co.nickthecoder.itchy.property;
 
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.Component;
+import uk.co.nickthecoder.itchy.gui.ComponentValidator;
 import uk.co.nickthecoder.itchy.gui.TextArea;
 import uk.co.nickthecoder.itchy.gui.TextBox;
 import uk.co.nickthecoder.itchy.gui.TextWidget;
@@ -70,13 +71,22 @@ public class StringProperty<S> extends Property<S, String>
                 public void changed()
                 {
                     try {
-                        StringProperty.this.update(subject, (Component) widget);
+                        if (! widget.hasStyle("error")) {
+                            StringProperty.this.update(subject, (Component) widget);
+                        }
                     } catch (Exception e) {
                         // Do nothing
                     }
                 }
             });
         }
+    }
+
+    @Override
+    public void addValidator( Component component, ComponentValidator validator)
+    {
+        TextWidget textWidget = (TextWidget) component;
+        textWidget.addValidator(validator);
     }
 
     @Override

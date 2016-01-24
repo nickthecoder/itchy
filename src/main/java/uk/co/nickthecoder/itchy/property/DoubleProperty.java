@@ -5,6 +5,7 @@
 package uk.co.nickthecoder.itchy.property;
 
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
+import uk.co.nickthecoder.itchy.gui.ComponentValidator;
 import uk.co.nickthecoder.itchy.gui.DoubleBox;
 import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.util.BeanHelper;
@@ -43,6 +44,13 @@ public class DoubleProperty<S> extends Property<S, Double>
     {
         DoubleBox doubleBox = (DoubleBox) component;
         doubleBox.addChangeListener(listener);
+    }
+    
+    @Override
+    public void addValidator( Component component, ComponentValidator validator)
+    {
+        DoubleBox doubleBox = (DoubleBox) component;
+        doubleBox.addValidator(validator);
     }
 
     /**

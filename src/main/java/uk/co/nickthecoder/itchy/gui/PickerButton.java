@@ -22,6 +22,8 @@ public class PickerButton<T> extends GuiButton
 
     protected final List<ComponentChangeListener> changeListeners;
 
+    protected final List<ComponentValidator> validators;
+
     public PickerButton( String title, T current, Map<String, T> map )
     {
         super();
@@ -42,6 +44,8 @@ public class PickerButton<T> extends GuiButton
         this.addChild(this.label);
 
         this.changeListeners = new ArrayList<ComponentChangeListener>();
+        
+        this.validators = new ArrayList<ComponentValidator>();
     }
 
     private String getLabelString( T value )
@@ -64,6 +68,17 @@ public class PickerButton<T> extends GuiButton
         this.changeListeners.remove(listener);
     }
 
+
+    public void addValidator( ComponentValidator validator )
+    {
+        this.validators.add(validator);
+    }
+
+    public void removeValidator( ComponentValidator validator )
+    {
+        this.validators.remove(validator);
+    }
+    
     @Override
     public void onClick( final MouseButtonEvent e )
     {
@@ -81,6 +96,12 @@ public class PickerButton<T> extends GuiButton
 
     public void fireChangeEvent()
     {
+        this.removeStyle("error");
+        for (ComponentValidator validator : this.validators) {
+            if ( ! validator.isValid() ) {
+                this.addStyle("error");
+            }
+        }
         for (ComponentChangeListener listener : this.changeListeners) {
             listener.changed();
         }

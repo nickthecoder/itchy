@@ -7,17 +7,16 @@ import java.util.Map;
 import java.util.TreeSet;
 
 import uk.co.nickthecoder.itchy.property.Property;
-import uk.co.nickthecoder.itchy.property.PropertySubject;
 import uk.co.nickthecoder.itchy.property.StringProperty;
 
-public class Layout implements PropertySubject<Layout>, Cloneable
+public class Layout implements NamedSubject<Layout>, Cloneable
 {
-    protected static final List<Property<Layout, ?>> properties = new ArrayList<Property<Layout,?>>();
+    protected static final List<Property<Layout, ?>> properties = new ArrayList<Property<Layout, ?>>();
 
     static {
         properties.add(new StringProperty<Layout>("name"));
     }
-    
+
     public String name = "";
 
     public TreeSet<Layer> layers;
@@ -29,25 +28,32 @@ public class Layout implements PropertySubject<Layout>, Cloneable
 
     public Layout()
     {
-        this.layers = new TreeSet<Layer>();
-        this.stageMap = new HashMap<String, Stage>();
+        layers = new TreeSet<Layer>();
+        stageMap = new HashMap<String, Stage>();
     }
 
+    @Override
     public String getName()
     {
-        return this.name;
+        return name;
     }
-    
-    public void addLayer( Layer layer )
+
+    @Override
+    public void setName(String name)
     {
-        this.layers.add( layer );
+        this.name = name;
     }
-    
-    public void removeLayer( Layer layer )
+
+    public void addLayer(Layer layer)
     {
-        this.layers.remove(layer);
+        layers.add(layer);
     }
-    
+
+    public void removeLayer(Layer layer)
+    {
+        layers.remove(layer);
+    }
+
     public Layer findLayer(String name)
     {
         for (Layer layer : layers) {
@@ -66,7 +72,7 @@ public class Layout implements PropertySubject<Layout>, Cloneable
         }
         return layer.getView();
     }
-    
+
     public StageView findStageView(String name)
     {
         View view = findView(name);
@@ -77,7 +83,7 @@ public class Layout implements PropertySubject<Layout>, Cloneable
     }
 
     public Stage findStage(String name)
-    {        
+    {
         Stage result = stageMap.get(name);
         if (result != null) {
             return result;
@@ -94,22 +100,22 @@ public class Layout implements PropertySubject<Layout>, Cloneable
 
     /**
      * Adds all of the other layout's layers to this layout.
-     * 
+     *
      * Note, if two layers share the same name, then both layers will exist in the merged layout, as independent layers,
      * and findLayer will only return one of them (which one is not guaranteed). Therefore, it is highly recommended to
      * avoid name clashes.
-     * 
+     *
      * @param other
      *            Not altered in any way
      */
     public void merge(Layout other)
     {
-        if (other== null) {
+        if (other == null) {
             return;
         }
-        
+
         for (Layer layer : other.layers) {
-            this.layers.add(layer);
+            layers.add(layer);
         }
     }
 
@@ -129,15 +135,14 @@ public class Layout implements PropertySubject<Layout>, Cloneable
             // Should never happen, so this is just to stop the compiler whining.
             throw new RuntimeException(e);
         }
-        
 
         result.stageMap = new HashMap<String, Stage>();
         result.layers = new TreeSet<Layer>();
-        
-        for (Layer layer : this.layers) {
-            result.addLayer( layer.clone() );
+
+        for (Layer layer : layers) {
+            result.addLayer(layer.clone());
         }
-        
+
         return result;
     }
 

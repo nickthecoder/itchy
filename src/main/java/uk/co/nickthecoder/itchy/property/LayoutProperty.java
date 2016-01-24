@@ -9,6 +9,7 @@ import uk.co.nickthecoder.itchy.Layout;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.Component;
+import uk.co.nickthecoder.itchy.gui.ComponentValidator;
 import uk.co.nickthecoder.itchy.gui.LayoutPickerButton;
 
 public class LayoutProperty<S> extends Property<S, Layout>
@@ -57,6 +58,13 @@ public class LayoutProperty<S> extends Property<S, Layout>
     {
         LayoutPickerButton button = (LayoutPickerButton) component;
         button.addChangeListener(listener);
+    }
+
+    @Override
+    public void addValidator( Component component, ComponentValidator validator)
+    {
+        LayoutPickerButton button = (LayoutPickerButton) component;
+        button.addValidator(validator);
     }
 
     @Override

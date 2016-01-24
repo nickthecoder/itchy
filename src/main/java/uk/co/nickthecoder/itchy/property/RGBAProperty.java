@@ -4,8 +4,9 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.property;
 
-import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.Component;
+import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
+import uk.co.nickthecoder.itchy.gui.ComponentValidator;
 import uk.co.nickthecoder.itchy.gui.RGBABox;
 import uk.co.nickthecoder.jame.RGBA;
 
@@ -58,6 +59,13 @@ public class RGBAProperty<S> extends Property<S, RGBA>
         rgbaBox.addChangeListener(listener);
     }
 
+    @Override
+    public void addValidator( Component component, ComponentValidator validator)
+    {
+        RGBABox rgbaBox = (RGBABox) component;
+        rgbaBox.addValidator(validator);
+    }
+    
     @Override
     public void update( S subject, Component component )
     {

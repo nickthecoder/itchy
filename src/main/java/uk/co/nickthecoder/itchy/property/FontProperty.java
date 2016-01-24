@@ -9,6 +9,7 @@ import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
+import uk.co.nickthecoder.itchy.gui.ComponentValidator;
 import uk.co.nickthecoder.itchy.gui.FontPickerButton;
 
 public class FontProperty<S> extends Property<S, Font>
@@ -58,6 +59,13 @@ public class FontProperty<S> extends Property<S, Font>
     {
         FontPickerButton button = (FontPickerButton) component;
         button.addChangeListener(listener);
+    }
+    
+    @Override
+    public void addValidator( Component component, ComponentValidator validator )
+    {
+        FontPickerButton button = (FontPickerButton) component;
+        button.addValidator(validator);
     }
 
     @Override

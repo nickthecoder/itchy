@@ -40,7 +40,7 @@ import uk.co.nickthecoder.itchy.property.Property;
 
 public class LayoutsEditor extends SubEditor<Layout>
 {
-    public LayoutsEditor(Editor editor)
+    private LayoutsEditor(Editor editor)
     {
         super(editor);
     }

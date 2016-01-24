@@ -26,6 +26,8 @@ public class Slider extends DragableContainer implements ContainerLayout
 
     private final List<ComponentChangeListener> changeListeners;
 
+    private final List<ComponentValidator> validators;
+
     public Slider( double value )
     {
         setLayout(this);
@@ -36,6 +38,7 @@ public class Slider extends DragableContainer implements ContainerLayout
         this.addChild(this.knob);
 
         this.changeListeners = new ArrayList<ComponentChangeListener>();
+        this.validators = new ArrayList<ComponentValidator>();
 
     }
 
@@ -55,6 +58,16 @@ public class Slider extends DragableContainer implements ContainerLayout
     public void removeChangeListener( ComponentChangeListener listener )
     {
         this.changeListeners.remove(listener);
+    }
+
+    public void addValidator( ComponentValidator validator )
+    {
+        this.validators.add(validator);
+    }
+
+    public void removeChangeListener( ComponentValidator validator )
+    {
+        this.validators.remove(validator);
     }
 
     public Slider link( final IntegerBox link )
@@ -101,6 +114,12 @@ public class Slider extends DragableContainer implements ContainerLayout
 
             forceLayout();
 
+            this.removeStyle("error");
+            for (ComponentValidator validator : this.validators) {
+                if ( ! validator.isValid() ) {
+                    this.addStyle("error");
+                }
+            }
             for (ComponentChangeListener listener : this.changeListeners) {
                 listener.changed();
             }

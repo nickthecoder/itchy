@@ -1,6 +1,13 @@
 Current Tasks
 =============
 
+StringProperty checks for "error" style before autoUpdating. Other Properties do  not yet.
+This stops working as soon as there is more than one validation; as in the case of ClassNameProperty.
+    Need a new set of "listeners": addValidator,
+        boolean isValue(Component)
+    Whenever a change is made, call all validators, and set the "error" status apropriately
+    Then call all of the changeListeners, which can look at the error status.
+
 Layouts
     Merge resources
     Load/Save using properties

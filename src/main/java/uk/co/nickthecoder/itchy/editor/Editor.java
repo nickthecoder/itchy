@@ -61,7 +61,7 @@ public final class Editor extends Game implements KeyListener
 
     public ScenesEditor scenesEditor;
 
-    public LayoutsEditor layoutsEditor;
+    public ListLayouts listLayouts;
 
     public SceneDesigner sceneDesigner;
 
@@ -97,7 +97,7 @@ public final class Editor extends Game implements KeyListener
         this.costumesEditor = new CostumesEditor(this);
         this.scenesEditor = new ScenesEditor(this);
         this.listInputs = new ListInputs(this.resources);
-        this.layoutsEditor = new LayoutsEditor(this);
+        this.listLayouts = new ListLayouts(this.resources);
 
         // this.preferencesEditor = new PreferencesEditor(this);
 
@@ -193,7 +193,7 @@ public final class Editor extends Game implements KeyListener
         notebook.addPage(new Label("Fonts"), this.listFonts.createPage());
         notebook.addPage(new Label("Inputs"), this.listInputs.createPage());
         notebook.addPage(new Label("Costumes"), this.costumesEditor.createPage());
-        notebook.addPage(new Label("Layouts"), this.layoutsEditor.createPage());
+        notebook.addPage(new Label("Layouts"), this.listLayouts.createPage());
         notebook.addPage(new Label("Scenes"), this.scenesEditor.createPage());
         // notebook.addPage(new Label("Preferences"), this.preferencesEditor.createPage());
 

@@ -8,6 +8,7 @@ import uk.co.nickthecoder.itchy.gui.AbstractTableListener;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Container;
 import uk.co.nickthecoder.itchy.gui.GuiButton;
+import uk.co.nickthecoder.itchy.gui.HorizontalLayout;
 import uk.co.nickthecoder.itchy.gui.Label;
 import uk.co.nickthecoder.itchy.gui.PlainContainer;
 import uk.co.nickthecoder.itchy.gui.ReflectionTableModelRow;
@@ -45,6 +46,8 @@ public abstract class ListSubjects<S extends NamedSubject<S>>
      * True iff the currently edited resource isn't in the resources yet, ie we are adding a new record.
      */
     protected boolean adding;
+    
+    public boolean buttonsBelow = true;
 
     public ListSubjects(Resources resources)
     {
@@ -54,7 +57,12 @@ public abstract class ListSubjects<S extends NamedSubject<S>>
     public Container createPage()
     {
         Container page = new PlainContainer();
-        page.setLayout(new VerticalLayout());
+        if ( buttonsBelow ) {
+            page.setLayout(new VerticalLayout());
+        } else {
+            page.setXSpacing(20);
+            page.setLayout(new HorizontalLayout());
+        }
         page.setFill(true, true);
 
         addHeader(page);
@@ -155,7 +163,14 @@ public abstract class ListSubjects<S extends NamedSubject<S>>
     {
         PlainContainer buttonBar = new PlainContainer();
         buttonBar.addStyle("buttonBar");
-        buttonBar.setXAlignment(0.5f);
+        
+        if ( buttonsBelow) {
+            buttonBar.setXAlignment(0.5f);
+        } else {
+            buttonBar.setXAlignment(0.5f);
+            buttonBar.setYAlignment(0.5f);
+            buttonBar.setLayout(new VerticalLayout());
+        }
 
         this.addListButtons(buttonBar);
 

@@ -18,6 +18,8 @@ public class FontPickerButton extends GuiButton implements ActionListener
 
     private List<ComponentChangeListener> changeListeners = new ArrayList<ComponentChangeListener>();
 
+    private List<ComponentValidator> validators = new ArrayList<ComponentValidator>();
+
     private Label example;
 
     private Label label;
@@ -55,6 +57,13 @@ public class FontPickerButton extends GuiButton implements ActionListener
         this.example.setFont(font);
         this.label.setText(font.getName());
 
+
+        this.removeStyle("error");
+        for (ComponentValidator validator : this.validators) {
+            if ( ! validator.isValid() ) {
+                this.addStyle("error");
+            }
+        }
         for (ComponentChangeListener listener : this.changeListeners) {
             listener.changed();
         }
@@ -82,6 +91,16 @@ public class FontPickerButton extends GuiButton implements ActionListener
     public void removeChangeListener( ComponentChangeListener ccl )
     {
         this.changeListeners.remove(ccl);
+    }
+    
+    public void addValidator( ComponentValidator validator)
+    {
+        this.validators.add(validator);
+    }
+
+    public void removeValidator( ComponentValidator validator )
+    {
+        this.validators.remove(validator);
     }
 
 }

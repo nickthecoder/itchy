@@ -14,7 +14,7 @@ public class RGBABox extends PlainContainer
 
     private boolean allowNull;
 
-    public RGBABox( RGBA color, boolean allowNull, boolean includeAlpha )
+    public RGBABox(RGBA color, boolean allowNull, boolean includeAlpha)
     {
         addStyle("combo");
         this.includeAlpha = includeAlpha;
@@ -27,7 +27,8 @@ public class RGBABox extends PlainContainer
         this.textBox.setBoxWidth(8);
 
         GuiButton button = new GuiButton("...");
-        button.addActionListener(new ActionListener() {
+        button.addActionListener(new ActionListener()
+        {
             @Override
             public void action()
             {
@@ -39,7 +40,8 @@ public class RGBABox extends PlainContainer
         addChild(this.textBox);
         addChild(button);
 
-        this.textBox.addChangeListener(new ComponentChangeListener() {
+        this.textBox.addChangeListener(new ComponentChangeListener()
+        {
             @Override
             public void changed()
             {
@@ -58,18 +60,28 @@ public class RGBABox extends PlainContainer
         return RGBA.parse(this.textBox.getText(), this.allowNull, this.includeAlpha);
     }
 
-    public void setValue( RGBA value )
+    public void setValue(RGBA value)
     {
         this.textBox.setText(this.includeAlpha ? value.getRGBACode() : value.getRGBCode());
     }
 
-    public void addChangeListener( ComponentChangeListener ccl )
+    public void addChangeListener(ComponentChangeListener ccl)
     {
         this.textBox.addChangeListener(ccl);
     }
 
-    public void removeChangeListener( ComponentChangeListener ccl )
+    public void removeChangeListener(ComponentChangeListener ccl)
     {
         this.textBox.removeChangeListener(ccl);
+    }
+
+    public void addValidator(ComponentValidator validator)
+    {
+        this.textBox.addValidator(validator);
+    }
+
+    public void removeValidator(ComponentValidator validator)
+    {
+        this.textBox.removeValidator(validator);
     }
 }

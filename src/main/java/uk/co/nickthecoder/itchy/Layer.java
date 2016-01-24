@@ -6,12 +6,11 @@ import java.util.List;
 import uk.co.nickthecoder.itchy.property.ClassNameProperty;
 import uk.co.nickthecoder.itchy.property.IntegerProperty;
 import uk.co.nickthecoder.itchy.property.Property;
-import uk.co.nickthecoder.itchy.property.PropertySubject;
 import uk.co.nickthecoder.itchy.property.StringProperty;
 import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.jame.Rect;
 
-public class Layer implements Comparable<Layer>, PropertySubject<Layer>, Cloneable
+public class Layer implements Comparable<Layer>, NamedSubject<Layer>, Cloneable
 {
     protected static final List<Property<Layer, ?>> properties = new ArrayList<Property<Layer, ?>>();
 
@@ -57,6 +56,18 @@ public class Layer implements Comparable<Layer>, PropertySubject<Layer>, Cloneab
         updateStageConstraint();
     }
 
+    @Override
+    public String getName()
+    {
+        return name;
+    }
+
+    @Override
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+    
     public ClassName getViewClassName()
     {
         return this.viewClassName;
@@ -191,4 +202,5 @@ public class Layer implements Comparable<Layer>, PropertySubject<Layer>, Cloneab
         
         return result;
     }
+
 }

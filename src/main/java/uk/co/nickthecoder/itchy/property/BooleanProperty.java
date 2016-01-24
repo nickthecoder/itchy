@@ -7,6 +7,7 @@ package uk.co.nickthecoder.itchy.property;
 import uk.co.nickthecoder.itchy.gui.CheckBox;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.Component;
+import uk.co.nickthecoder.itchy.gui.ComponentValidator;
 
 public class BooleanProperty<S> extends Property<S, Boolean>
 {
@@ -60,6 +61,13 @@ public class BooleanProperty<S> extends Property<S, Boolean>
     {
         CheckBox checkBox = (CheckBox) component;
         checkBox.addChangeListener(listener);
+    }
+    
+    @Override
+    public void addValidator( Component component, ComponentValidator validator )
+    {
+        CheckBox checkBox = (CheckBox) component;
+        checkBox.addValidator(validator);
     }
 
     @Override

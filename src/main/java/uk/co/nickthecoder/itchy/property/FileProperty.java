@@ -7,8 +7,9 @@ package uk.co.nickthecoder.itchy.property;
 import java.io.File;
 
 import uk.co.nickthecoder.itchy.Itchy;
-import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.Component;
+import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
+import uk.co.nickthecoder.itchy.gui.ComponentValidator;
 import uk.co.nickthecoder.itchy.gui.FilenameComponent;
 import uk.co.nickthecoder.itchy.gui.TextBox;
 
@@ -52,6 +53,13 @@ public class FileProperty<S> extends Property<S, File>
         textBox.addChangeListener(listener);
     }
 
+    @Override
+    public void addValidator( Component component, ComponentValidator validator)
+    {
+        TextBox textBox = (TextBox) component;
+        textBox.addValidator(validator);
+    }
+    
     @Override
     public void update( S subject, Component component ) throws Exception
     {

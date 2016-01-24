@@ -32,6 +32,6 @@ public class EditInput extends EditSubject<Input>
     @Override
     protected void rename()
     {
-        resources.rename(subject);
+        resources.renameInput(subject);
     }
 }

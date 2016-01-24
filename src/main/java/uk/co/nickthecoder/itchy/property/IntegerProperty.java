@@ -4,8 +4,9 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.property;
 
-import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.Component;
+import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
+import uk.co.nickthecoder.itchy.gui.ComponentValidator;
 import uk.co.nickthecoder.itchy.gui.IntegerBox;
 import uk.co.nickthecoder.itchy.util.BeanHelper;
 
@@ -43,6 +44,14 @@ public class IntegerProperty<S> extends Property<S, Integer>
         IntegerBox integerBox = (IntegerBox) component;
         integerBox.addChangeListener(listener);
     }
+
+    @Override
+    public void addValidator( Component component, ComponentValidator validator)
+    {
+        IntegerBox integerBox = (IntegerBox) component;
+        integerBox.addValidator(validator);
+    }
+    
 
     /**
      * Do don't use the super class, just in case the type of the property value isn't an Integer (which would cause a cast exception). This

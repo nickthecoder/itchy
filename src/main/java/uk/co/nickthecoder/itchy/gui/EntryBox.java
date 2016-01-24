@@ -34,8 +34,9 @@ public class EntryBox<E extends EntryBox<?>> extends ClickableContainer implemen
     protected int boxWidth;
 
     private int caretIndex;
-    
+
     private boolean readOnly = false;
+
 
     /**
      * The amount the text is scrolled left/right to ensure that the caret is visible.
@@ -43,6 +44,8 @@ public class EntryBox<E extends EntryBox<?>> extends ClickableContainer implemen
     private int scroll = 0;
 
     private final List<ComponentChangeListener> changeListeners;
+
+    private final List<ComponentValidator> validators;
 
     public EntryBox(String str)
     {
@@ -67,9 +70,10 @@ public class EntryBox<E extends EntryBox<?>> extends ClickableContainer implemen
         this.boxWidth = 30;
 
         this.caret.setVisible(false);
-        this.focusable = true;
+        focusable = true;
 
         this.changeListeners = new ArrayList<ComponentChangeListener>();
+        this.validators = new ArrayList<ComponentValidator>();
     }
 
     public void addChangeListener(ComponentChangeListener listener)
@@ -82,6 +86,16 @@ public class EntryBox<E extends EntryBox<?>> extends ClickableContainer implemen
         this.changeListeners.remove(listener);
     }
 
+    public void addValidator( ComponentValidator validator )
+    {
+        this.validators.add(validator);
+    }
+
+    public void removeValidator( ComponentValidator validator )
+    {
+        this.validators.remove(validator);
+    }
+
     public int getBoxWidth()
     {
         return this.boxWidth;
@@ -92,18 +106,18 @@ public class EntryBox<E extends EntryBox<?>> extends ClickableContainer implemen
         this.boxWidth = value;
     }
 
-    public void setReadOnly( boolean value )
+    public void setReadOnly(boolean value)
     {
         this.readOnly = value;
         this.addStyle("readOnly", this.readOnly);
         this.reStyle();
     }
-    
+
     public boolean getReadOnly()
     {
         return this.readOnly;
     }
-    
+
     @Override
     public void onClick(MouseButtonEvent ke)
     {
@@ -183,7 +197,7 @@ public class EntryBox<E extends EntryBox<?>> extends ClickableContainer implemen
                 }
                 ke.stopPropagation();
             }
-    
+
             if (ke.symbol == Keys.DELETE) {
                 if (this.caretIndex < this.label.getText().length()) {
                     this.setEntryText(this.label.getText().substring(0, this.caretIndex) +
@@ -191,15 +205,15 @@ public class EntryBox<E extends EntryBox<?>> extends ClickableContainer implemen
                 }
                 ke.stopPropagation();
             }
-    
+
             if ((ke.symbol == Keys.v) && (Itchy.isCtrlDown())) {
-    
+
                 try {
                     Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
                     String str = (String) clipboard.getData(DataFlavor.stringFlavor);
-    
+
                     insert(str);
-    
+
                 } catch (UnsupportedFlavorException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
@@ -207,14 +221,14 @@ public class EntryBox<E extends EntryBox<?>> extends ClickableContainer implemen
                 }
                 ke.stopPropagation();
             }
-    
+
             if ((ke.c >= 32)) {
                 insert(ke.c);
                 ke.stopPropagation();
             }
-        
+
         }
-        
+
         super.onKeyDown(ke);
     }
 
@@ -253,7 +267,7 @@ public class EntryBox<E extends EntryBox<?>> extends ClickableContainer implemen
     }
 
     /**
-     * 
+     *
      * @param text
      * @return true if the change was allowed (sub classes of TextBox, such as IntegerBox may prevent arbitrary text)
      */
@@ -277,6 +291,12 @@ public class EntryBox<E extends EntryBox<?>> extends ClickableContainer implemen
 
     public void fireChangeEvent()
     {
+        this.removeStyle("error");
+        for (ComponentValidator validator : this.validators) {
+            if ( ! validator.isValid() ) {
+                this.addStyle("error");
+            }
+        }
         for (ComponentChangeListener listener : this.changeListeners) {
             listener.changed();
         }
@@ -305,7 +325,7 @@ public class EntryBox<E extends EntryBox<?>> extends ClickableContainer implemen
 
         this.setNaturalHeight(
             this.label.getRequiredHeight() + this.label.getMarginTop() +
-                this.label.getMarginBottom() + this.getPaddingTop() + this.getPaddingBottom());
+            this.label.getMarginBottom() + this.getPaddingTop() + this.getPaddingBottom());
     }
 
     @Override

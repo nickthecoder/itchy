@@ -5,6 +5,7 @@
 package uk.co.nickthecoder.itchy.property;
 
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
+import uk.co.nickthecoder.itchy.gui.ComponentValidator;
 import uk.co.nickthecoder.itchy.gui.EnumPickerButton;
 import uk.co.nickthecoder.itchy.gui.Component;
 
@@ -52,6 +53,14 @@ public class EnumProperty<S, E extends Enum<?>> extends Property<S, E>
         @SuppressWarnings("unchecked")
         EnumPickerButton<E> button = (EnumPickerButton<E>) component;
         button.addChangeListener(listener);
+    }
+    
+    @Override
+    public void addValidator( Component component, ComponentValidator validator )
+    {
+        @SuppressWarnings("unchecked")
+        EnumPickerButton<E> button = (EnumPickerButton<E>) component;
+        button.addValidator(validator);
     }
 
     @Override

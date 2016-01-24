@@ -12,6 +12,7 @@ import java.util.regex.Pattern;
 
 import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
+import uk.co.nickthecoder.itchy.gui.ComponentValidator;
 import uk.co.nickthecoder.itchy.util.BeanHelper;
 import uk.co.nickthecoder.itchy.util.StringUtils;
 
@@ -187,6 +188,8 @@ public abstract class Property<S, T>
     public abstract Component createComponent( final S subject, boolean autoUpdate );
 
     public abstract void addChangeListener( Component component, ComponentChangeListener listener );
+
+    public abstract void addValidator( Component component, ComponentValidator validator );
 
     /**
      * Updates the subject based on the state of the Component. This is used when the Components are created with an autoUpdate of false, in

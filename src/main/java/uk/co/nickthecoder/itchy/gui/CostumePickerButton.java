@@ -18,6 +18,8 @@ public class CostumePickerButton extends GuiButton implements ActionListener
 
     private List<ComponentChangeListener> changeListeners = new ArrayList<ComponentChangeListener>();
 
+    private List<ComponentValidator> validators = new ArrayList<ComponentValidator>();
+
     private ImageComponent img;
 
     private Label label;
@@ -50,6 +52,12 @@ public class CostumePickerButton extends GuiButton implements ActionListener
         this.img.setImage(costumeResource.getThumbnail());
         this.label.setText(costumeResource.getName());
 
+        this.removeStyle("error");
+        for (ComponentValidator validator : this.validators) {
+            if ( ! validator.isValid() ) {
+                this.addStyle("error");
+            }
+        }
         for (ComponentChangeListener listener : this.changeListeners) {
             listener.changed();
         }
@@ -77,6 +85,16 @@ public class CostumePickerButton extends GuiButton implements ActionListener
     public void removeChangeListener( ComponentChangeListener ccl )
     {
         this.changeListeners.remove(ccl);
+    }
+    
+    public void addValidator( ComponentValidator validator )
+    {
+        this.validators.add(validator);
+    }
+
+    public void removeChangeListener( ComponentValidator validator )
+    {
+        this.validators.remove(validator);
     }
 
 }

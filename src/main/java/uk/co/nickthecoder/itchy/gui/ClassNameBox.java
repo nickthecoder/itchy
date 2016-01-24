@@ -11,6 +11,7 @@ import java.util.Set;
 import javax.script.ScriptException;
 
 import uk.co.nickthecoder.itchy.Director;
+import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.SceneDirector;
@@ -36,7 +37,7 @@ public class ClassNameBox extends PlainContainer
 
     private Class<?> baseClass;
 
-    public ClassNameBox( final ScriptManager scriptManager, ClassName className, final Class<?> baseClass )
+    public ClassNameBox( final ScriptManager scriptManager, final ClassName className, final Class<?> baseClass )
     {
         super();
 
@@ -118,15 +119,29 @@ public class ClassNameBox extends PlainContainer
             }
         });
 
+        this.addValidator(new ComponentValidator() {
+
+            @Override
+            public boolean isValid()
+            {
+                ClassName temp = new ClassName(className.baseClass, textBox.getText());
+                return temp.isValid(Itchy.getGame().scriptManager);
+            }
+            
+        });
         update();
     }
 
+    public boolean isValid()
+    {
+        return !this.textBox.hasStyle("error");
+    }
+    
     private void update()
     {
         this.errorText.setVisible(false);
-
+        this.addStyle("error", this.textBox.hasStyle("error"));
         this.value.name = this.textBox.getText();
-        this.textBox.addStyle("error", !isValid());
 
         boolean isValidScript = this.scriptManager.isValidScript(this.value);
         this.editButtonLabel.setText(isValidScript ? "Edit" : "Create");
@@ -150,11 +165,6 @@ public class ClassNameBox extends PlainContainer
             }
 
         }
-    }
-
-    public boolean isValid()
-    {
-        return this.value.isValid(this.scriptManager);
     }
 
     private void reload()
@@ -219,6 +229,16 @@ public class ClassNameBox extends PlainContainer
     public void removeChangeListener( ComponentChangeListener ccl )
     {
         this.textBox.removeChangeListener(ccl);
+    }
+    
+    public void addValidator( ComponentValidator validator )
+    {
+        this.textBox.addValidator(validator);
+    }
+
+    public void removeValidator( ComponentValidator validator )
+    {
+        this.textBox.removeValidator(validator);
     }
 
     public void fireChangeEvent()

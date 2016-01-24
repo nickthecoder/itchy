@@ -482,8 +482,9 @@ public class Resources extends Loadable
         return sortNames(this.layouts.keySet());
     }
 
-    void rename(Layout layout)
+    public void renameLayout(Layout layout)
     {
+        System.out.println("Renaming layout " + layout.name );
         for (Entry<String, Layout> entry : this.layouts.entrySet() ) {
             if (entry.getValue() == layout) {
                 this.layouts.remove(entry.getKey());
@@ -562,7 +563,7 @@ public class Resources extends Loadable
     }
 
 
-    public void rename(Font font)
+    public void renameFont(Font font)
     {
         for (Entry<String, Font> entry : this.fonts.entrySet() ) {
             if (entry.getValue() == font) {
@@ -619,7 +620,7 @@ public class Resources extends Loadable
         return null;
     }
 
-    public void rename(Input input)
+    public void renameInput(Input input)
     {
         for (Entry<String, Input> entry : this.inputs.entrySet() ) {
             if (entry.getValue() == input) {

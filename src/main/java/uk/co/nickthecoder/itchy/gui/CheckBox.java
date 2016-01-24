@@ -17,10 +17,13 @@ public class CheckBox extends ClickableContainer
 
     private final List<ComponentChangeListener> changeListeners;
 
+    private final List<ComponentValidator> validators;
+
     public CheckBox( boolean value )
     {
         super();
         this.changeListeners = new ArrayList<ComponentChangeListener>();
+        this.validators = new ArrayList<ComponentValidator>();
 
         this.image = new ImageComponent();
         this.addChild(this.image);
@@ -45,6 +48,16 @@ public class CheckBox extends ClickableContainer
         this.changeListeners.remove(listener);
     }
 
+    public void addValidator( ComponentValidator validator )
+    {
+        this.validators.add(validator);
+    }
+
+    public void removeValidator( ComponentValidator validator )
+    {
+        this.validators.remove(validator);
+    }
+    
     public boolean getValue()
     {
         return this.value;
@@ -61,6 +74,12 @@ public class CheckBox extends ClickableContainer
             }
             this.invalidate();
 
+            this.removeStyle("error");
+            for (ComponentValidator validator : this.validators) {
+                if ( ! validator.isValid() ) {
+                    this.addStyle("error");
+                }
+            }
             for (ComponentChangeListener listener : this.changeListeners) {
                 listener.changed();
             }

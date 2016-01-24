@@ -10,6 +10,7 @@ import uk.co.nickthecoder.itchy.animation.EasePickerButton;
 import uk.co.nickthecoder.itchy.animation.LinearEase;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.Component;
+import uk.co.nickthecoder.itchy.gui.ComponentValidator;
 
 public class EaseProperty<S> extends Property<S, Ease>
 {
@@ -50,6 +51,13 @@ public class EaseProperty<S> extends Property<S, Ease>
     {
         EasePickerButton button = (EasePickerButton) component;
         button.addChangeListener(listener);
+    }
+    
+    @Override
+    public void addValidator( Component component, ComponentValidator validator )
+    {
+        EasePickerButton button = (EasePickerButton) component;
+        button.addValidator(validator);
     }
 
     @Override

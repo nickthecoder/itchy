@@ -27,4 +27,8 @@ public interface TextWidget extends Component
 
     public void removeChangeListener( ComponentChangeListener listener );
 
+    public void addValidator( ComponentValidator validator );
+
+    public void removeValidator( ComponentValidator validator );
+
 }

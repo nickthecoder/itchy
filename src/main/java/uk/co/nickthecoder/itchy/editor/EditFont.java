@@ -33,7 +33,7 @@ public class EditFont extends EditSubject<Font>
     @Override
     protected void rename()
     {
-        resources.rename(subject);
+        resources.renameFont(subject);
     }
 
 }

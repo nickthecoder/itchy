@@ -5,6 +5,7 @@ import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
+import uk.co.nickthecoder.itchy.gui.ComponentValidator;
 import uk.co.nickthecoder.itchy.gui.Container;
 import uk.co.nickthecoder.itchy.gui.GuiButton;
 import uk.co.nickthecoder.itchy.gui.Label;
@@ -123,21 +124,27 @@ public abstract class EditSubject<S extends NamedSubject<S>>
     protected Component createForm()
     {
         this.form.createForm();
-        
         final TextBox nameBox = (TextBox) this.form.getComponent("name");
+
+        nameBox.addValidator(new ComponentValidator()
+        {
+            @Override
+            public boolean isValid()
+            {
+                return isValidName( nameBox.getText() );
+            }
+        });
+
         nameBox.addChangeListener(new ComponentChangeListener()
         {
             @Override
             public void changed()
             {
-                boolean isValid = isValidName( nameBox.getText() );
-                nameBox.addStyle("error", ! isValid );
-                if (isValid) {
+                if ( !nameBox.hasStyle("error") ) {
                     rename();
                 }
             }
         });
-        
         return this.form.container;
     }
 
