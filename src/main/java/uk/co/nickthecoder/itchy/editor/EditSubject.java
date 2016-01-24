@@ -130,7 +130,11 @@ public abstract class EditSubject<S extends NamedSubject<S>>
             @Override
             public void changed()
             {
-                nameBox.addStyle("error", ! isValidName( nameBox.getText() ) );
+                boolean isValid = isValidName( nameBox.getText() );
+                nameBox.addStyle("error", ! isValid );
+                if (isValid) {
+                    rename();
+                }
             }
         });
         
@@ -156,6 +160,8 @@ public abstract class EditSubject<S extends NamedSubject<S>>
             if (isNew) {
                 add();
             }
+            
+            
             if (this.listSubjects != null) {
                 this.listSubjects.update(this.subject, isNew);
             }
@@ -174,4 +180,6 @@ public abstract class EditSubject<S extends NamedSubject<S>>
     }
 
     protected abstract void add();
+
+    protected abstract void rename();
 }

@@ -1,13 +1,13 @@
 Current Tasks
 =============
 
-Fonts
+Layouts
     Merge resources
     Load/Save using properties
     List page
     Edit page
 
-For each of these : GameInfo, SpriteSheet, Sprites (Poses), Animations, Sounds, Fonts, Costumes, Layouts, Scenes
+For each of these : GameInfo, SpriteSheet, Sprites (Poses), Animations, Sounds, Costumes, Layouts, Scenes
     Refactor all other resources to use the new ListXXX and EditXXX classes
     Merge XXXResource with XXX
     Load/Save using properties

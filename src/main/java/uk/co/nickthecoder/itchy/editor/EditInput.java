@@ -29,4 +29,9 @@ public class EditInput extends EditSubject<Input>
         resources.addInput(subject);
     }
 
+    @Override
+    protected void rename()
+    {
+        resources.rename(subject);
+    }
 }

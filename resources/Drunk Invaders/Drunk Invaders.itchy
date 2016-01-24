@@ -1,5 +1,5 @@
 <resources>
-  <game title="Drunk Invaders" width="640" height="480" resizable="false" initialScene="menu" testScene="test" directorClassName="uk.co.nickthecoder.drunkinvaders.DrunkInvaders" authors="Nick TheCoder"/>
+  <game title="Drunk Invaders" width="640" height="480" resizable="false" initialScene="menu" testScene="level01" directorClassName="uk.co.nickthecoder.drunkinvaders.DrunkInvaders" authors="Nick TheCoder"/>
   <spriteSheets/>
   <poses>
     <pose name="alien1a" filename="images/alien1a.png" direction="-90.0"/>
@@ -45,14 +45,14 @@
     <pose name="white" filename="images/white.png" offsetX="0" offsetY="480"/>
   </poses>
   <ninePatches>
-    <ninePatch name="speechBubble" filename="images/speech.png" top="10" right="31" bottom="23" left="10"/>
-    <ninePatch name="speechBubble2" filename="images/speech2.png" top="10" right="31" bottom="23" left="10"/>
+    <ninePatch name="speechBubble" file="images/speech.png" top="10" right="31" bottom="23" left="10" middle="tile"/>
+    <ninePatch name="speechBubble2" file="images/speech2.png" top="10" right="31" bottom="23" left="10" middle="tile"/>
   </ninePatches>
   <fonts>
-    <font name="blackCasper" filename="fonts/BlackCasper/BlackCasper.ttf"/>
-    <font name="boycott" filename="fonts/Boycott/Boycott.ttf"/>
-    <font name="vera" filename="fonts/Vera/Vera.ttf"/>
-    <font name="veraBold" filename="fonts/Vera/VeraBd.ttf"/>
+    <font name="blackCasper" file="fonts/BlackCasper/BlackCasper.ttf"/>
+    <font name="boycott" file="fonts/Boycott/Boycott.ttf"/>
+    <font name="vera" file="fonts/Vera/Vera.ttf"/>
+    <font name="veraBold" file="fonts/Vera/VeraBd.ttf"/>
   </fonts>
   <sounds>
     <sound name="ahh1" filename="sounds/ahh1.ogg"/>

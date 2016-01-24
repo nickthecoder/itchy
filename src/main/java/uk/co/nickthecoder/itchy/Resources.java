@@ -450,6 +450,17 @@ public class Resources extends Loadable
         return sortNames(this.ninePatches.keySet());
     }
 
+    public void rename(NinePatch ninePatch)
+    {
+        for (Entry<String, NinePatch> entry : this.ninePatches.entrySet() ) {
+            if (entry.getValue() == ninePatch) {
+                this.ninePatches.remove(entry.getKey());
+                break;
+            }
+        }
+        this.ninePatches.put(ninePatch.getName(), ninePatch);
+    }
+
     // Layouts
     public void addLayout(Layout layout)
     {
@@ -471,15 +482,15 @@ public class Resources extends Loadable
         return sortNames(this.layouts.keySet());
     }
 
-    void rename(NinePatch ninePatch)
+    void rename(Layout layout)
     {
-        for (Entry<String, NinePatch> entry : this.ninePatches.entrySet() ) {
-            if (entry.getValue() == ninePatch) {
-                this.ninePatches.remove(entry.getKey());
+        for (Entry<String, Layout> entry : this.layouts.entrySet() ) {
+            if (entry.getValue() == layout) {
+                this.layouts.remove(entry.getKey());
                 break;
             }
         }
-        this.ninePatches.put(ninePatch.getName(), ninePatch);
+        this.layouts.put(layout.getName(), layout);
     }
 
     
@@ -551,7 +562,7 @@ public class Resources extends Loadable
     }
 
 
-    void rename(Font font)
+    public void rename(Font font)
     {
         for (Entry<String, Font> entry : this.fonts.entrySet() ) {
             if (entry.getValue() == font) {
@@ -608,7 +619,7 @@ public class Resources extends Loadable
         return null;
     }
 
-    void rename(Input input)
+    public void rename(Input input)
     {
         for (Entry<String, Input> entry : this.inputs.entrySet() ) {
             if (entry.getValue() == input) {

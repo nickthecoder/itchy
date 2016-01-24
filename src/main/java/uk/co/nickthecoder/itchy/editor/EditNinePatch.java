@@ -37,6 +37,12 @@ public class EditNinePatch extends EditSubject<NinePatch>
     }
 
     @Override
+    protected void rename()
+    {
+        resources.rename(subject);
+    }
+    
+    @Override
     protected Component createForm()
     {
         super.createForm();
