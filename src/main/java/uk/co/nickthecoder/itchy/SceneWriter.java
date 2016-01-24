@@ -108,7 +108,7 @@ public class SceneWriter extends XMLWriter
                 TextSceneActor tsa = (TextSceneActor) sceneActor;
                 this.beginTag("text");
                 this.attribute("text", tsa.text);
-                this.attribute("font", this.sceneResource.resources.getFontName(tsa.font));
+                this.attribute("font", tsa.font.getName());
                 this.attribute("size", tsa.fontSize);
                 this.attribute("color", tsa.color.getRGBCode());
                 this.attribute("xAlignment", tsa.xAlignment);

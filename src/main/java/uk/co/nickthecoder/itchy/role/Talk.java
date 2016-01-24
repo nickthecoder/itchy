@@ -6,7 +6,7 @@ package uk.co.nickthecoder.itchy.role;
 
 import uk.co.nickthecoder.itchy.AbstractTextPose;
 import uk.co.nickthecoder.itchy.Actor;
-import uk.co.nickthecoder.itchy.FontResource;
+import uk.co.nickthecoder.itchy.Font;
 import uk.co.nickthecoder.itchy.ImagePose;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.MultiLineTextPose;
@@ -35,7 +35,7 @@ public class Talk extends Follower
 
     private final void createTextStyle()
     {
-        this.textStyle = new TextStyle(Itchy.getGame().resources.getDefaultFontResource().font, 14);
+        this.textStyle = new TextStyle(Itchy.getGame().resources.getDefaultFont(), 14);
     }
 
     public static abstract class AbstractTalkBuilder<C extends Talk, B extends AbstractTalkBuilder<C, B>> extends
@@ -187,8 +187,8 @@ public class Talk extends Follower
         public C create()
         {
             if (companion.textStyle == null) {
-                FontResource fontResource = Itchy.getGame().resources.getDefaultFontResource();
-                companion.textStyle = new TextStyle(fontResource.font, 14);
+                Font font = Itchy.getGame().resources.getDefaultFont();
+                companion.textStyle = new TextStyle(font, 14);
             }
 
             AbstractTextPose pose;

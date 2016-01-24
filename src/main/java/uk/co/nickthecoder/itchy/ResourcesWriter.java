@@ -28,12 +28,12 @@ public class ResourcesWriter extends XMLWriter
 
     private Set<String> writtenCostumeName;
 
-    public ResourcesWriter( Resources resources )
+    public ResourcesWriter(Resources resources)
     {
         this.resources = resources;
     }
 
-    public void write( String filename ) throws Exception
+    public void write(String filename) throws Exception
     {
         this.writtenCostumeName = new HashSet<String>();
 
@@ -79,11 +79,10 @@ public class ResourcesWriter extends XMLWriter
         this.beginTag("fonts");
 
         for (String name : this.resources.fontNames()) {
-            FontResource fontResource = this.resources.getFontResource(name);
+            Font font = this.resources.getFont(name);
 
             this.beginTag("font");
-            this.attribute("name", name);
-            this.attribute("filename", fontResource.getFilename());
+            this.writeProperties(font);
             this.endTag("font");
         }
 
@@ -100,7 +99,7 @@ public class ResourcesWriter extends XMLWriter
             this.beginTag("ninePatch");
 
             this.writeProperties(ninePatch);
-            
+
             this.endTag("ninePatch");
         }
 
@@ -115,22 +114,23 @@ public class ResourcesWriter extends XMLWriter
             SpriteSheet spriteSheet = this.resources.getSpriteSheet(name);
             this.beginTag("spriteSheet");
             this.writeProperties(spriteSheet);
-            
+
             List<Sprite> sprites = new ArrayList<Sprite>();
             sprites.addAll(spriteSheet.getSprites());
             Collections.sort(sprites);
-            
-            for ( Sprite sprite: sprites ) {
-                this.beginTag( "sprite" );
+
+            for (Sprite sprite : sprites) {
+                this.beginTag("sprite");
                 this.writeProperties(sprite);
-                this.endTag( "sprite" );
+                this.endTag("sprite");
             }
-            
+
             this.endTag("spriteSheet");
         }
 
         this.endTag("spriteSheets");
     }
+
     private void writePoses() throws XMLException
     {
         this.beginTag("poses");
@@ -192,13 +192,13 @@ public class ResourcesWriter extends XMLWriter
         this.endTag("animations");
     }
 
-    private String getAnimationTagName( Animation animation )
+    private String getAnimationTagName(Animation animation)
         throws XMLException
     {
         return animation.getTagName();
     }
 
-    private <S extends PropertySubject<S>> void writeProperties( S subject )
+    private <S extends PropertySubject<S>> void writeProperties(S subject)
         throws XMLException
     {
         for (Property<S, ?> property : subject.getProperties()) {
@@ -210,14 +210,14 @@ public class ResourcesWriter extends XMLWriter
                 }
 
             } catch (Exception e) {
-            	e.printStackTrace();
+                e.printStackTrace();
                 throw new XMLException("Failed to write property : " + property.key);
             }
 
         }
     }
 
-    private void writeAnimation( Animation animation ) throws XMLException
+    private void writeAnimation(Animation animation) throws XMLException
     {
         String tagName = getAnimationTagName(animation);
         this.beginTag(tagName);
@@ -234,7 +234,7 @@ public class ResourcesWriter extends XMLWriter
 
     }
 
-    private void writeFrames( List<Frame> frames ) throws XMLException
+    private void writeFrames(List<Frame> frames) throws XMLException
     {
         for (Frame frame : frames) {
             this.beginTag("frame");
@@ -246,7 +246,7 @@ public class ResourcesWriter extends XMLWriter
         }
     }
 
-    private void writeAnimations( CompoundAnimation parent ) throws XMLException
+    private void writeAnimations(CompoundAnimation parent) throws XMLException
     {
         for (Animation child : parent.children) {
             this.writeAnimation(child);
@@ -266,7 +266,7 @@ public class ResourcesWriter extends XMLWriter
 
     }
 
-    private void writeCostume( String name ) throws XMLException
+    private void writeCostume(String name) throws XMLException
     {
         CostumeResource cr = this.resources.getCostumeResource(name);
         Costume costume = cr.getCostume();
@@ -291,11 +291,11 @@ public class ResourcesWriter extends XMLWriter
         }
     }
 
-    private void writeCostume( CostumeResource cr, String name, String baseName )
+    private void writeCostume(CostumeResource cr, String name, String baseName)
         throws XMLException
     {
         Costume simpleCostume = cr.getCostume();
-        
+
         if (this.writtenCostumeName.contains(name)) {
             return;
         }
@@ -326,17 +326,17 @@ public class ResourcesWriter extends XMLWriter
         this.writtenCostumeName.add(name);
     }
 
-    private void writeCostumeProperties( Costume costume ) throws XMLException
+    private void writeCostumeProperties(Costume costume) throws XMLException
     {
-    	CostumeFeatures cp = costume.getCostumeFeatures();
-    	if ( cp.getProperties().size() > 0 ) {
-	        this.beginTag("properties");
-	        writeProperties(cp);
-	        this.endTag("properties");
-    	}
+        CostumeFeatures cp = costume.getCostumeFeatures();
+        if (cp.getProperties().size() > 0) {
+            this.beginTag("properties");
+            writeProperties(cp);
+            this.endTag("properties");
+        }
     }
 
-    private void writeCostumePoses( Costume costume ) throws XMLException
+    private void writeCostumePoses(Costume costume) throws XMLException
     {
 
         for (String name : costume.getPoseNames()) {
@@ -360,7 +360,7 @@ public class ResourcesWriter extends XMLWriter
         }
     }
 
-    private void writeCostumeStrings( Costume costume ) throws XMLException
+    private void writeCostumeStrings(Costume costume) throws XMLException
     {
 
         for (String name : costume.getStringNames()) {
@@ -376,7 +376,7 @@ public class ResourcesWriter extends XMLWriter
         }
     }
 
-    private void writeCostumeSounds( Costume costume ) throws XMLException
+    private void writeCostumeSounds(Costume costume) throws XMLException
     {
 
         for (String name : costume.getSoundNames()) {
@@ -394,7 +394,7 @@ public class ResourcesWriter extends XMLWriter
         }
     }
 
-    private void writeCostumeFonts( Costume costume ) throws XMLException
+    private void writeCostumeFonts(Costume costume) throws XMLException
     {
 
         for (String name : costume.getTextStyleNames()) {
@@ -403,22 +403,17 @@ public class ResourcesWriter extends XMLWriter
                 this.beginTag("font");
                 this.attribute("name", name);
 
-                FontResource fr = this.resources.getFontResource(textStyle.font);
-                this.attribute("font", fr.name);
-                /*
-                this.attribute("fontSize", textStyle.fontSize);
-
-                this.attribute("color", textStyle.color.getRGBACode());
-                 */
+                Font font = textStyle.font;
+                this.attribute("font", font.getName());
                 this.writeProperties(textStyle);
-                
+
                 this.endTag("font");
             }
         }
 
     }
 
-    private void writeCostumeAnimations( Costume costume ) throws XMLException
+    private void writeCostumeAnimations(Costume costume) throws XMLException
     {
 
         for (String name : costume.getAnimationNames()) {
@@ -434,8 +429,8 @@ public class ResourcesWriter extends XMLWriter
         }
 
     }
-    
-    private void writeCostumeCompanions( Costume costume ) throws XMLException
+
+    private void writeCostumeCompanions(Costume costume) throws XMLException
     {
         for (String name : costume.getCompanionNames()) {
             for (CostumeResource costumeResource : costume.getCompanionChoices(name)) {
@@ -446,7 +441,7 @@ public class ResourcesWriter extends XMLWriter
             }
         }
     }
-    
+
     private void writeScenes() throws XMLException
     {
         this.beginTag("scenes");
@@ -468,7 +463,7 @@ public class ResourcesWriter extends XMLWriter
 
         for (String name : this.resources.inputNames()) {
             Input input = this.resources.getInput(name);
-            
+
             this.beginTag("input");
             this.writeProperties(input);
             this.endTag("input");
@@ -483,18 +478,18 @@ public class ResourcesWriter extends XMLWriter
 
         for (String name : this.resources.layoutNames()) {
             Layout layout = this.resources.getLayout(name);
-            
+
             this.beginTag("layout");
             this.writeProperties(layout);
 
-            for (Layer layer: layout.layers) {
+            for (Layer layer : layout.layers) {
                 this.beginTag("layer");
-                
+
                 this.writeProperties(layer);
-                
+
                 View view = layer.getView();
                 if ((view != null) && (view.getProperties().size() > 0)) {
-                    this.beginTag( "view" );
+                    this.beginTag("view");
                     this.writeProperties(view);
                     this.endTag("view");
                 }
@@ -502,17 +497,17 @@ public class ResourcesWriter extends XMLWriter
                     StageView stageView = (StageView) view;
                     Stage stage = stageView.getStage();
                     if ((stage != null) && (stage.getProperties().size() > 0)) {
-                        this.beginTag( "stage" );
+                        this.beginTag("stage");
                         this.writeProperties(stage);
                         this.endTag("stage");
                     }
                     if ((stage != null) && (stage.getStageConstraint().getProperties().size() > 0)) {
-                        this.beginTag( "stageConstraint" );
+                        this.beginTag("stageConstraint");
                         this.writeProperties(stage.getStageConstraint());
-                        this.endTag( "stageConstraint" );
+                        this.endTag("stageConstraint");
                     }
                 }
-                
+
                 this.endTag("layer");
             }
             this.endTag("layout");

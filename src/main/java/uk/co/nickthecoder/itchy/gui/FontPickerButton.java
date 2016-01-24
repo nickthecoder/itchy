@@ -7,14 +7,14 @@ package uk.co.nickthecoder.itchy.gui;
 import java.util.ArrayList;
 import java.util.List;
 
-import uk.co.nickthecoder.itchy.FontResource;
+import uk.co.nickthecoder.itchy.Font;
 import uk.co.nickthecoder.itchy.Resources;
 
 public class FontPickerButton extends GuiButton implements ActionListener
 {
     private Resources resources;
 
-    private FontResource fontResource;
+    private Font font;
 
     private List<ComponentChangeListener> changeListeners = new ArrayList<ComponentChangeListener>();
 
@@ -22,25 +22,25 @@ public class FontPickerButton extends GuiButton implements ActionListener
 
     private Label label;
 
-    public FontPickerButton( Resources resources, FontResource fontResource )
+    public FontPickerButton( Resources resources, Font font)
     {
         super();
         this.layout = new VerticalLayout();
         this.setXAlignment(0.5f);
 
-        this.example = FontPicker.createExample(fontResource);
-        this.label = new Label(fontResource.getName());
+        this.example = FontPicker.createExample(font);
+        this.label = new Label(font.getName());
         this.addChild(this.example);
         this.addChild(this.label);
 
         this.resources = resources;
-        this.fontResource = fontResource;
+        this.font = font;
         this.addActionListener(this);
     }
 
-    public FontResource getValue()
+    public Font getValue()
     {
-        return this.fontResource;
+        return this.font;
     }
 
     public void setCompact( boolean value )
@@ -48,12 +48,12 @@ public class FontPickerButton extends GuiButton implements ActionListener
         this.example.setVisible(!value);
     }
 
-    public void setValue( FontResource fontResource )
+    public void setValue( Font font)
     {
-        this.fontResource = fontResource;
+        this.font = font;
 
-        this.example.setFont(fontResource.font);
-        this.label.setText(fontResource.getName());
+        this.example.setFont(font);
+        this.label.setText(font.getName());
 
         for (ComponentChangeListener listener : this.changeListeners) {
             listener.changed();
@@ -66,9 +66,9 @@ public class FontPickerButton extends GuiButton implements ActionListener
         FontPicker picker = new FontPicker(this.resources, this.getValue())
         {
             @Override
-            public void pick( FontResource fontResource )
+            public void pick( Font font)
             {
-                setValue(fontResource);
+                setValue(font);
             }
         };
         picker.show();

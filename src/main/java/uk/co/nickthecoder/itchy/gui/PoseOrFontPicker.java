@@ -4,17 +4,17 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.gui;
 
-import uk.co.nickthecoder.itchy.FontResource;
+import uk.co.nickthecoder.itchy.Font;
 import uk.co.nickthecoder.itchy.PoseResource;
 import uk.co.nickthecoder.itchy.Resources;
 
 public abstract class PoseOrFontPicker extends PosePicker
 {
-    public static Label createExample( FontResource fontResource )
+    public static Label createExample( Font font)
     {
         Label example = new Label("Abc");
         example.addStyle("exampleFont");
-        example.setFont(fontResource.font);
+        example.setFont(font);
 
         return example;
     }
@@ -39,9 +39,9 @@ public abstract class PoseOrFontPicker extends PosePicker
         container.addStyle("pickGrid");
 
         for (String name : this.resources.fontNames()) {
-            FontResource fontResource = this.resources.getFontResource(name);
+            Font font = this.resources.getFont(name);
 
-            AbstractComponent component = this.createFontButton(fontResource);
+            AbstractComponent component = this.createFontButton(font);
 
             gridLayout.addChild(component);
         }
@@ -50,7 +50,7 @@ public abstract class PoseOrFontPicker extends PosePicker
         return focus;
     }
 
-    private AbstractComponent createFontButton( final FontResource fontResource )
+    private AbstractComponent createFontButton( final Font font)
     {
         // final Pose pose = poseResource.pose;
         PlainContainer container = new PlainContainer();
@@ -58,18 +58,18 @@ public abstract class PoseOrFontPicker extends PosePicker
         container.setLayout(new VerticalLayout());
         container.setXAlignment(0.5f);
 
-        Label example = createExample(fontResource);
+        Label example = createExample(font);
         GuiButton button = new GuiButton(example);
         button.addActionListener(new ActionListener() {
             @Override
             public void action()
             {
                 PoseOrFontPicker.this.hide();
-                PoseOrFontPicker.this.pick(fontResource);
+                PoseOrFontPicker.this.pick(font);
             }
         });
 
-        Label label = new Label(fontResource.getName());
+        Label label = new Label(font.getName());
 
         container.addChild(button);
         container.addChild(label);
@@ -80,6 +80,6 @@ public abstract class PoseOrFontPicker extends PosePicker
     @Override
     public abstract void pick( PoseResource poseResource );
 
-    public abstract void pick( FontResource fontResource );
+    public abstract void pick( Font fontResource );
 
 }

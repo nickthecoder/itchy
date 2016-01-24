@@ -1,13 +1,13 @@
 Current Tasks
 =============
 
-NinePatch
+Fonts
     Merge resources
     Load/Save using properties
     List page
     Edit page
 
-For each of these : GameInfo, SpriteSheet, Sprites (Poses), Animations, NinePatches, Sounds, Fonts, Costumes, Layouts, Scenes
+For each of these : GameInfo, SpriteSheet, Sprites (Poses), Animations, Sounds, Fonts, Costumes, Layouts, Scenes
     Refactor all other resources to use the new ListXXX and EditXXX classes
     Merge XXXResource with XXX
     Load/Save using properties
@@ -22,11 +22,6 @@ Editor to test if resources have changed and prompt for confirm before exiting.
 
 
 Remove scene.backgroundColor
-
-Debris : Life icons don't appear
-
-Can't access the "hud" layer from ship's onBirth
-    Because the hud is loaded in the sceneDirectors onActivate, and onBirth is called before that.
 
 SceneDesigner
     Views should NOT be the one from Layout, but a scrollable one, which covers the whole screen.

@@ -4,7 +4,7 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.gui;
 
-import uk.co.nickthecoder.itchy.FontResource;
+import uk.co.nickthecoder.itchy.Font;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.jame.JameException;
 
@@ -12,26 +12,26 @@ public abstract class FontPicker extends Window
 {
     private final Resources resources;
 
-    public static Label createExample( FontResource fontResource )
+    public static Label createExample(Font font)
     {
         Label example = new Label("AaBbCcDdEeFfGg");
         example.addStyle("exampleFont");
-        example.setFont(fontResource.font);
+        example.setFont(font);
 
         return example;
     }
 
-    public FontPicker( Resources resources )
+    public FontPicker(Resources resources)
     {
         this(resources, null);
     }
 
-    public FontPicker( Resources resources, FontResource initialValue )
+    public FontPicker(Resources resources, Font initialValue)
     {
         super("Pick a Font");
         this.resources = resources;
-        this.clientArea.setLayout(new VerticalLayout());
-        this.clientArea.setXAlignment(0.5f);
+        clientArea.setLayout(new VerticalLayout());
+        clientArea.setXAlignment(0.5f);
 
         PlainContainer container = new PlainContainer();
         container.setFill(true, false);
@@ -39,8 +39,8 @@ public abstract class FontPicker extends Window
         vs.setNaturalHeight(400);
 
         Component focus = this.createFonts(container, initialValue);
-        this.clientArea.addChild(vs);
-        this.clientArea.addStyle("vScrolled");
+        clientArea.addChild(vs);
+        clientArea.addStyle("vScrolled");
 
         PlainContainer buttons = new PlainContainer();
         buttons.addStyle("buttonBar");
@@ -48,7 +48,8 @@ public abstract class FontPicker extends Window
         buttons.setXAlignment(0.5f);
 
         GuiButton cancel = new GuiButton("Cancel");
-        cancel.addActionListener(new ActionListener() {
+        cancel.addActionListener(new ActionListener()
+        {
 
             @Override
             public void action()
@@ -58,26 +59,26 @@ public abstract class FontPicker extends Window
 
         });
         buttons.addChild(cancel);
-        this.clientArea.addChild(buttons);
+        clientArea.addChild(buttons);
 
         if (focus != null) {
             focus.focus();
         }
     }
 
-    private Component createFonts( Container container, FontResource initialValue )
+    private Component createFonts(Container container, Font initialValue)
     {
         container.setLayout(new VerticalLayout());
         Component focus = null;
 
-        for (String name : this.resources.fontNames()) {
-            FontResource fontResource = this.resources.getFontResource(name);
+        for (String name : resources.fontNames()) {
+            Font font = resources.getFont(name);
 
             try {
-                AbstractComponent component = this.createButton(fontResource);
+                AbstractComponent component = this.createButton(font);
 
                 container.addChild(component);
-                if (fontResource == initialValue) {
+                if (font == initialValue) {
                     focus = component;
                 }
             } catch (JameException e) {
@@ -87,28 +88,29 @@ public abstract class FontPicker extends Window
         return focus;
     }
 
-    private AbstractComponent createButton( final FontResource fontResource )
+    private AbstractComponent createButton(final Font font)
         throws JameException
     {
         GuiButton button = new GuiButton();
         button.setLayout(new VerticalLayout());
         button.setXAlignment(0.5f);
 
-        button.addChild(createExample(fontResource));
-        button.addChild(new Label(fontResource.getName()));
+        button.addChild(createExample(font));
+        button.addChild(new Label(font.getName()));
 
-        button.addActionListener(new ActionListener() {
+        button.addActionListener(new ActionListener()
+        {
             @Override
             public void action()
             {
                 FontPicker.this.hide();
-                FontPicker.this.pick(fontResource);
+                FontPicker.this.pick(font);
             }
         });
 
         return button;
     }
 
-    public abstract void pick( FontResource fontResource );
+    public abstract void pick(Font font);
 
 }

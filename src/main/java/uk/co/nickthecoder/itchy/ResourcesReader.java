@@ -334,11 +334,11 @@ public class ResourcesReader
                 String itemName = fontTag.getAttribute("name");
                 String fontName = fontTag.getAttribute("font");
 
-                FontResource fontResource = this.resources.getFontResource(fontName);
-                if (fontResource == null) {
+                Font font = this.resources.getFont(fontName);
+                if (font== null) {
                     throw new XMLException("Font : " + fontName + " not found for costume : " + costumeName);
                 }
-                TextStyle textStyle = new TextStyle(fontResource.font, 14);
+                TextStyle textStyle = new TextStyle(font, 14);
                 this.readProperties(fontTag, textStyle);
                 /*
                  * int fontSize = stringTag.getOptionalIntAttribute("fontSize", 14); TextStyle textStyle = new
@@ -508,11 +508,9 @@ public class ResourcesReader
         for (Iterator<XMLTag> i = fontsTag.getTags("font"); i.hasNext();) {
             XMLTag fontTag = i.next();
 
-            String name = fontTag.getAttribute("name");
-            String filename = fontTag.getAttribute("filename");
-
-            FontResource fontResource = new FontResource(this.resources, name, filename);
-            this.resources.addFont(fontResource);
+            Font font = new Font();
+            this.readProperties(fontTag, font);
+            this.resources.addFont(font);
         }
 
     }

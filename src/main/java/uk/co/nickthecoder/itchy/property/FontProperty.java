@@ -5,11 +5,10 @@
 package uk.co.nickthecoder.itchy.property;
 
 import uk.co.nickthecoder.itchy.Font;
-import uk.co.nickthecoder.itchy.FontResource;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Resources;
-import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.Component;
+import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.FontPickerButton;
 
 public class FontProperty<S> extends Property<S, Font>
@@ -30,9 +29,9 @@ public class FontProperty<S> extends Property<S, Font>
     {
         Resources resources = Itchy.getGame().resources;
 
-        FontResource fontResource = resources.getFontResource(this.getSafeValue(subject));
+        Font font = this.getSafeValue(subject);
 
-        final FontPickerButton pickerButton = new FontPickerButton(resources, fontResource);
+        final FontPickerButton pickerButton = new FontPickerButton(resources, font);
         pickerButton.setCompact(true);
 
         if (autoUpdate) {
@@ -66,7 +65,7 @@ public class FontProperty<S> extends Property<S, Font>
     {
         FontPickerButton pickerButton = (FontPickerButton) component;
         try {
-            this.setValue(subject, pickerButton.getValue().font);
+            this.setValue(subject, pickerButton.getValue());
             pickerButton.removeStyle("error");
         } catch (Exception e) {
             pickerButton.addStyle("error");
@@ -77,10 +76,8 @@ public class FontProperty<S> extends Property<S, Font>
     public void refresh( S subject, Component component ) throws Exception
     {
         FontPickerButton pickerButton = (FontPickerButton) component;
-        Resources resources = Itchy.getGame().resources;
         Font font = this.getValue(subject);
-        FontResource fontResource = resources.getFontResource(font);
-        pickerButton.setValue(fontResource);
+        pickerButton.setValue(font);
     }
 
     @Override
@@ -99,14 +96,9 @@ public class FontProperty<S> extends Property<S, Font>
     @Override
     public String getStringValue( S subject ) throws Exception
     {
-        Font value = this.getValue(subject);
+        Font font = this.getValue(subject);
 
-        FontResource fr = Itchy.getGame().resources.getFontResource(value);
-        if (fr == null) {
-            System.err.println("FontProperty not found.");
-            return "";
-        }
-        return fr.getName();
+        return font.getName();
     }
 
     @Override

@@ -158,10 +158,10 @@ public class Scene
         return result;
     }
 
-    public boolean uses( FontResource fontResource )
+    public boolean uses( Font font )
     {
         for (SceneLayer layer : this.sceneLayers) {
-            if (layer.uses(fontResource)) {
+            if (layer.uses(font)) {
                 return true;
             }
         }
@@ -240,11 +240,11 @@ public class Scene
             }
         }
 
-        public boolean uses( FontResource fontResource )
+        public boolean uses( Font font )
         {
             for (SceneActor sceneActor : this.sceneActors) {
                 if (sceneActor instanceof TextSceneActor) {
-                    if (((TextSceneActor) sceneActor).font == fontResource.font) {
+                    if (((TextSceneActor) sceneActor).font == font) {
                         return true;
                     }
                 }

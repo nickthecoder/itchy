@@ -99,7 +99,7 @@ public class TextStyle implements PropertySubject<TextStyle>, Cloneable
             return "TextStyle : null";
         }
 
-        return "TextStyle : " + this.font.getFilename() + "(" + this.fontSize + ")" + this.color.toString();
+        return "TextStyle : " + this.font.getFile() + "(" + this.fontSize + ")" + this.color.toString();
     }
 
     @Override

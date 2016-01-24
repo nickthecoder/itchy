@@ -64,7 +64,7 @@ public class Resources extends Loadable
 
     private final HashMap<String, SoundResource> sounds;
 
-    private final HashMap<String, FontResource> fonts;
+    private final HashMap<String, Font> fonts;
 
     private final HashMap<String, Input> inputs;
 
@@ -97,7 +97,7 @@ public class Resources extends Loadable
         this.ninePatches = new HashMap<String, NinePatch>();
 
         this.sounds = new HashMap<String, SoundResource>();
-        this.fonts = new HashMap<String, FontResource>();
+        this.fonts = new HashMap<String, Font>();
 
         this.inputs = new HashMap<String, Input>();
         this.costumes = new HashMap<String, CostumeResource>();
@@ -258,9 +258,6 @@ public class Resources extends Loadable
         } else if (object instanceof SoundResource) {
             return this.getSoundResource(object.name) == object;
 
-        } else if (object instanceof FontResource) {
-            return this.getFontResource(object.name) == object;
-
         } else if (object instanceof CostumeResource) {
             return this.getCostumeResource(object.name) == object;
         }
@@ -279,9 +276,6 @@ public class Resources extends Loadable
 
         } else if (object instanceof SoundResource) {
             this.rename2((SoundResource) object, name);
-
-        } else if (object instanceof FontResource) {
-            this.rename2((FontResource) object, name);
 
         } else if (object instanceof AnimationResource) {
             this.rename2((AnimationResource) object, name);
@@ -535,9 +529,9 @@ public class Resources extends Loadable
 
     // Fonts
 
-    public void addFont(FontResource fontResource)
+    public void addFont(Font font)
     {
-        this.fonts.put(fontResource.getName(), fontResource);
+        this.fonts.put(font.getName(), font);
     }
 
     public void removeFont(String name)
@@ -545,60 +539,29 @@ public class Resources extends Loadable
         this.fonts.remove(name);
     }
 
-    public FontResource getFontResource(String name)
+    public Font getFont(String name)
     {
         return this.fonts.get(name);
     }
 
-    public FontResource getFontResource(Font font)
-    {
-        for (FontResource fontResource : this.fonts.values()) {
-            if (fontResource.font == font) {
-                return fontResource;
-            }
-        }
-        return null;
-    }
-
-    public Font getFont(String name)
-    {
-        FontResource resource = this.fonts.get(name);
-        return resource == null ? null : resource.font;
-    }
 
     public List<String> fontNames()
     {
         return sortNames(this.fonts.keySet());
     }
 
-    void rename2(FontResource fontResource, String name)
-    {
-        this.fonts.remove(fontResource.getName());
-        this.fonts.put(name, fontResource);
-    }
 
-    public String getFontName(Font font)
+    void rename(Font font)
     {
-        for (String name : this.fontNames()) {
-            if (this.getFont(name) == font) {
-                return name;
+        for (Entry<String, Font> entry : this.fonts.entrySet() ) {
+            if (entry.getValue() == font) {
+                this.fonts.remove(entry.getKey());
+                break;
             }
         }
-        return null;
+        this.fonts.put(font.getName(), font);
     }
 
-    /**
-     * @return The default font. At the moment this is a randomly picked font! Null if there are no fonts.
-     */
-    public FontResource getDefaultFontResource()
-    {
-        try {
-            FontResource fr = this.fonts.values().iterator().next();
-            return fr;
-        } catch (Exception e) {
-            return null;
-        }
-    }
 
     /**
      * @return The default font. At the moment this is a randomly picked font! Null if there are no fonts.
@@ -606,8 +569,8 @@ public class Resources extends Loadable
     public Font getDefaultFont()
     {
         try {
-            FontResource fr = this.fonts.values().iterator().next();
-            return fr.font;
+            Font font = this.fonts.values().iterator().next();
+            return font;
         } catch (Exception e) {
             return null;
         }
