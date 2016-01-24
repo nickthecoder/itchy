@@ -22,6 +22,17 @@ import uk.co.nickthecoder.jame.Surface;
 
 public class Resources extends Loadable
 {
+    public static Resources currentlyLoading = null;
+    
+    public static Resources getCurrentResources()
+    {
+        if (currentlyLoading == null) {
+            return Itchy.getGame().resources;
+        } else {
+            return currentlyLoading;
+        }
+    }
+
     public static List<String> sortNames(Set<String> set)
     {
         if (set == null) {
@@ -49,7 +60,7 @@ public class Resources extends Loadable
 
     private final HashMap<String, AnimationResource> animations;
 
-    private final HashMap<String, NinePatchResource> ninePatches;
+    private final HashMap<String, NinePatch> ninePatches;
 
     private final HashMap<String, SoundResource> sounds;
 
@@ -83,7 +94,7 @@ public class Resources extends Loadable
         this.spriteSheets = new HashMap<String, SpriteSheet>();
         this.poses = new HashMap<String, PoseResource>();
         this.animations = new HashMap<String, AnimationResource>();
-        this.ninePatches = new HashMap<String, NinePatchResource>();
+        this.ninePatches = new HashMap<String, NinePatch>();
 
         this.sounds = new HashMap<String, SoundResource>();
         this.fonts = new HashMap<String, FontResource>();
@@ -244,9 +255,6 @@ public class Resources extends Loadable
         } else if (object instanceof AnimationResource) {
             return this.getAnimationResource(object.name) == object;
 
-        } else if (object instanceof NinePatchResource) {
-            return this.getNinePatchResource(object.name) == object;
-
         } else if (object instanceof SoundResource) {
             return this.getSoundResource(object.name) == object;
 
@@ -275,9 +283,6 @@ public class Resources extends Loadable
         } else if (object instanceof FontResource) {
             this.rename2((FontResource) object, name);
 
-        } else if (object instanceof NinePatchResource) {
-            this.rename2((NinePatchResource) object, name);
-
         } else if (object instanceof AnimationResource) {
             this.rename2((AnimationResource) object, name);
 
@@ -286,9 +291,6 @@ public class Resources extends Loadable
 
         } else if (object instanceof CostumeResource) {
             this.rename2((CostumeResource) object, name);
-
-        } else if (object instanceof Layout) {
-            this.rename2((Layout) object, name);
 
         } else {
             throw new RuntimeException("Unknown resource type : " + object.getClass().getName());
@@ -434,9 +436,9 @@ public class Resources extends Loadable
 
     // NinePatches
 
-    public void addNinePatch(NinePatchResource ninePatchResource)
+    public void addNinePatch(NinePatch ninePatch)
     {
-        this.ninePatches.put(ninePatchResource.getName(), ninePatchResource);
+        this.ninePatches.put(ninePatch.getName(), ninePatch);
     }
 
     public void removeNinePatch(String name)
@@ -444,28 +446,15 @@ public class Resources extends Loadable
         this.ninePatches.remove(name);
     }
 
-    public NinePatchResource getNinePatchResource(String name)
-    {
-        return this.ninePatches.get(name);
-    }
-
     public NinePatch getNinePatch(String name)
     {
-        NinePatchResource resource = this.ninePatches.get(name);
-        return resource == null ? null : resource.ninePatch;
+        return this.ninePatches.get(name);
     }
 
     public List<String> ninePatchNames()
     {
         return sortNames(this.ninePatches.keySet());
     }
-
-    void rename2(NinePatchResource ninePatchResource, String name)
-    {
-        this.ninePatches.remove(ninePatchResource.getName());
-        this.ninePatches.put(name, ninePatchResource);
-    }
-
 
     // Layouts
     public void addLayout(Layout layout)
@@ -488,11 +477,17 @@ public class Resources extends Loadable
         return sortNames(this.layouts.keySet());
     }
 
-    void rename2(Layout layout, String name)
+    void rename(NinePatch ninePatch)
     {
-        this.layouts.remove(layout.getName());
-        this.layouts.put(name, layout);
+        for (Entry<String, NinePatch> entry : this.ninePatches.entrySet() ) {
+            if (entry.getValue() == ninePatch) {
+                this.ninePatches.remove(entry.getKey());
+                break;
+            }
+        }
+        this.ninePatches.put(ninePatch.getName(), ninePatch);
     }
+
     
     // Sounds
 

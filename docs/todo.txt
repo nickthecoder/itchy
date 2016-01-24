@@ -1,13 +1,11 @@
 Current Tasks
 =============
 
-Remove OldInputsEditor
-
-Check name isn't clashing.
-Get ListInputs working
-Get EditInput working
-Load/Save input using properties.
-
+NinePatch
+    Merge resources
+    Load/Save using properties
+    List page
+    Edit page
 
 For each of these : GameInfo, SpriteSheet, Sprites (Poses), Animations, NinePatches, Sounds, Fonts, Costumes, Layouts, Scenes
     Refactor all other resources to use the new ListXXX and EditXXX classes

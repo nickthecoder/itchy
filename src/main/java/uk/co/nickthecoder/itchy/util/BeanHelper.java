@@ -117,7 +117,6 @@ public class BeanHelper
                             return;
                         } catch (IllegalAccessException e1) {
                         } catch (IllegalArgumentException e2) {
-                        } catch (InvocationTargetException e3) {
                         }
                     }
                 }

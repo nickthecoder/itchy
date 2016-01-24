@@ -4,20 +4,60 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.util;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+import uk.co.nickthecoder.itchy.NamedSubject;
+import uk.co.nickthecoder.itchy.Resources;
+import uk.co.nickthecoder.itchy.property.EnumProperty;
+import uk.co.nickthecoder.itchy.property.FileProperty;
+import uk.co.nickthecoder.itchy.property.IntegerProperty;
+import uk.co.nickthecoder.itchy.property.Property;
+import uk.co.nickthecoder.itchy.property.RGBAProperty;
+import uk.co.nickthecoder.itchy.property.StringProperty;
+import uk.co.nickthecoder.jame.JameException;
 import uk.co.nickthecoder.jame.RGBA;
 import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.Surface;
 
 /**
- * Divide an image into a 3x3 grid, and you have nine patches, which can be used to draw a larger image. Imagine we have an image of a plain
+ * Divide an image into a 3x3 grid, and you have nine patches, which can be used to draw a larger image. Imagine we have
+ * an image of a plain
  * button background, and we want to draw a much larger button.
  * 
- * Take the corners, and copy them into the corners of the destination image. Now take each side, and copy it multiple times so that it
- * reaches from one corner to the other. We are just left with the centre to complete the final image. We could tile the source's centre
+ * Take the corners, and copy them into the corners of the destination image. Now take each side, and copy it multiple
+ * times so that it
+ * reaches from one corner to the other. We are just left with the centre to complete the final image. We could tile the
+ * source's centre
  * into the destination centre, but for some images, a flat fill is all that's needed.
  */
-public class NinePatch extends ImageRenderable
+public class NinePatch extends ImageRenderable implements NamedSubject<NinePatch>
 {
+
+    public static final int THUMBNAIL_WIDTH = 100;
+
+    public static final int THUMBNAIL_HEIGHT = 60;
+
+    protected static final List<Property<NinePatch, ?>> properties = new ArrayList<Property<NinePatch, ?>>();
+
+    static {
+        properties.add(new StringProperty<NinePatch>("name"));
+        properties.add(new FileProperty<NinePatch>("file").aliases("filename"));
+        properties.add(new IntegerProperty<NinePatch>("top").access("marginTop"));
+        properties.add(new IntegerProperty<NinePatch>("right").access("marginRight"));
+        properties.add(new IntegerProperty<NinePatch>("bottom").access("marginBottom"));
+        properties.add(new IntegerProperty<NinePatch>("left").access("marginLeft"));
+        properties.add(new EnumProperty<NinePatch, Middle>("middle", Middle.class));
+        properties.add(new RGBAProperty<NinePatch>("backgroundColor").allowNull(true));
+    }
+
+    @Override
+    public List<Property<NinePatch, ?>> getProperties()
+    {
+        return properties;
+    }
+
     /**
      * All of the ways that the center can be rendered.
      */
@@ -25,6 +65,13 @@ public class NinePatch extends ImageRenderable
     {
         empty, tile, fill
     };
+    
+    
+    private String name;
+
+    private File file;
+
+    private Surface thumbnail;
 
     public int marginTop;
 
@@ -45,56 +92,25 @@ public class NinePatch extends ImageRenderable
     public RGBA backgroundColor;
 
     /**
-     * Creates a nine patch with the desired margins, with the default middle of <code>Middle.file</code>.
-     * 
-     * @param surface
-     *        The source image for the NinePatch. The fill colour is taken from centre pixel of the source surfaces middle patch.
-     * @param marginTop
-     * @param marginRight
-     * @param marginBottom
-     * @param marginLeft
+     * If a background color isn't specified, then use the middle pixel of the nine patch as the background color.
      */
-    public NinePatch( Surface surface, int marginTop, int marginRight, int marginBottom, int marginLeft )
+    private RGBA midColor;
+    
+    public NinePatch()
     {
-        this(surface, marginTop, marginRight, marginBottom, marginLeft, Middle.tile);
-    }
-
-    /**
-     * @param surface
-     * @param marginTop
-     * @param marginRight
-     * @param marginBottom
-     * @param marginLeft
-     * @param middle
-     *        If using <code>Middle.fill</code>, then the fill colour is taken from the centre of the source image's middle patch.
-     */
-    public NinePatch( Surface surface, int marginTop, int marginRight, int marginBottom,
-        int marginLeft, Middle middle )
-    {
-        super(surface);
-
-        this.middle = middle;
-
-        this.marginTop = marginTop;
-        this.marginRight = marginRight;
-        this.marginBottom = marginBottom;
-        this.marginLeft = marginLeft;
-
-        int midY = (this.marginTop + surface.getHeight() - this.marginBottom) / 2;
-        int midX = (this.marginLeft + surface.getWidth() - this.marginRight) / 2;
-        this.backgroundColor = surface.getPixelRGBA(midX, midY);
+        middle = Middle.tile;
     }
 
     public int getMinimumWidth()
     {
         return this.marginLeft + this.marginRight;
     }
-    
+
     public int getMinimumHeight()
     {
         return this.marginTop + this.marginBottom;
     }
-    
+
     public int getMarginTop()
     {
         return this.marginTop;
@@ -115,16 +131,45 @@ public class NinePatch extends ImageRenderable
         return this.marginLeft;
     }
 
+    public void setFile(File file) throws JameException
+    {
+        this.loadImage(Resources.getCurrentResources().resolveFilename(file.getPath()));
+        this.file = file;
+        this.midColor = null;
+    }
+
+    public File getFile()
+    {
+        return this.file;
+    }
+
+    public Surface getThumbnail()
+    {
+        if (this.thumbnail == null) {
+
+            Surface full = this.getSurface();
+            if ((full.getWidth() > THUMBNAIL_WIDTH) || (full.getHeight() > THUMBNAIL_HEIGHT)) {
+                double scale = Math.min(THUMBNAIL_WIDTH / (double) full.getWidth(),
+                    THUMBNAIL_HEIGHT / (double) full.getHeight());
+                this.thumbnail = full.zoom(scale, scale, true);
+            } else {
+                this.thumbnail = full;
+            }
+
+        }
+        return this.thumbnail;
+    }
+
     /**
      * Creates a new Surface of the given size and renders this NinePatch onto it.
      * 
      * @param width
-     *        The width of the new Surface.
+     *            The width of the new Surface.
      * @param height
-     *        The height of the new Surface
+     *            The height of the new Surface
      * @return A new Surface, of the given size, with an alpha channel.
      */
-    public Surface createSurface( int width, int height )
+    public Surface createSurface(int width, int height)
     {
         Surface surface = new Surface(width, height, true);
         this.render(surface);
@@ -135,10 +180,10 @@ public class NinePatch extends ImageRenderable
      * Draws the nine patch onto <code>result</code>.
      * 
      * @param result
-     *        The destination surface. It is assumed to be a blank image.
+     *            The destination surface. It is assumed to be a blank image.
      */
     @Override
-    public void render( Surface result )
+    public void render(Surface result)
     {
         Rect srcRect;
         Rect destRect;
@@ -153,11 +198,21 @@ public class NinePatch extends ImageRenderable
         if (this.middle == Middle.fill) {
             // flat fill the middle
 
+            RGBA bg = this.backgroundColor;
+            if (bg == null) {
+                if (this.midColor == null) {
+                    int x = (this.surface.getWidth() - marginLeft - marginRight) / 2 + marginLeft;
+                    int y = (this.surface.getHeight() - marginTop - marginBottom) / 2 + marginTop;
+                    this.midColor = surface.getPixelRGBA(x, y);                
+                }
+                bg = this.midColor;
+            }
             Rect rect = new Rect(this.marginLeft, this.marginTop, result.getWidth() -
                 this.marginLeft - this.marginRight, result.getHeight() - this.marginTop -
                 this.marginBottom);
-            result.fill(rect, this.backgroundColor);
-
+            result.fill(rect, bg);
+        
+            
         } else if (this.middle == Middle.tile) {
             // tile the middle
 
@@ -251,6 +306,18 @@ public class NinePatch extends ImageRenderable
 
         this.surface.setAlphaEnabled(true);
 
+    }
+
+    @Override
+    public String getName()
+    {
+        return this.name;
+    }
+
+    @Override
+    public void setName(String name)
+    {
+        this.name = name;
     }
 
 }

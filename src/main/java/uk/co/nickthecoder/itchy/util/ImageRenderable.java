@@ -12,6 +12,11 @@ public abstract class ImageRenderable implements Renderable
 {
     protected Surface surface;
 
+
+    public ImageRenderable( )
+    {
+    }
+    
     public ImageRenderable( Surface surface )
     {
         this.surface = surface;

@@ -25,7 +25,6 @@ import uk.co.nickthecoder.itchy.util.XMLException;
 import uk.co.nickthecoder.itchy.util.XMLTag;
 import uk.co.nickthecoder.jame.JameException;
 import uk.co.nickthecoder.jame.Rect;
-import uk.co.nickthecoder.jame.Surface;
 
 public class ResourcesReader
 {
@@ -43,6 +42,7 @@ public class ResourcesReader
 
     public void load(String filename) throws Exception
     {
+        Resources.currentlyLoading = this.resources;
         BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(filename)));
         try {
             XMLTag document = XMLTag.openDocument(reader);
@@ -50,6 +50,7 @@ public class ResourcesReader
             this.readResources(document.getTag("resources", true));
 
         } finally {
+            Resources.currentlyLoading = null;
             reader.close();
         }
     }
@@ -165,27 +166,9 @@ public class ResourcesReader
         for (Iterator<XMLTag> i = eightPatchesTag.getTags("ninePatch"); i.hasNext();) {
             XMLTag eightPatchTag = i.next();
 
-            String name = eightPatchTag.getAttribute("name");
-            String filename = eightPatchTag.getAttribute("filename");
-
-            int marginTop = eightPatchTag.getIntAttribute("top");
-            int marginRight = eightPatchTag.getIntAttribute("right");
-            int marginBottom = eightPatchTag.getIntAttribute("bottom");
-            int marginLeft = eightPatchTag.getIntAttribute("left");
-
-            Surface surface = new Surface(this.resources.resolveFilename(filename));
-
-            String middleStr = eightPatchTag.getOptionalAttribute("middle", "tile");
-            try {
-                NinePatch.Middle middle = NinePatch.Middle.valueOf(middleStr);
-
-                NinePatch ninePatch = new NinePatch(surface, marginTop, marginRight, marginBottom, marginLeft, middle);
-                NinePatchResource resource = new NinePatchResource(this.resources, name, filename, ninePatch);
-                this.resources.addNinePatch(resource);
-
-            } catch (IllegalArgumentException e) {
-                throw new XMLException("Invalid ninePatch middle " + middleStr);
-            }
+            NinePatch ninePatch = new NinePatch();
+            this.readProperties(eightPatchTag, ninePatch);
+            this.resources.addNinePatch(ninePatch);
 
         }
 
@@ -470,13 +453,6 @@ public class ResourcesReader
 
     private <S extends PropertySubject<S>> void readProperties(XMLTag tag, S subject) throws XMLException
     {
-        readProperties(tag, subject, subject.getProperties());
-    }
-
-    private <S extends PropertySubject<S>> void readProperties(XMLTag tag, S subject, List<Property<S, ?>> properties)
-        throws XMLException
-    {
-
         for (Property<S, ?> property : subject.getProperties()) {
             String value = tag.getOptionalAttribute(property.key, null);
             if (value == null) {

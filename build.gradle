@@ -46,9 +46,9 @@ javadoc {
 // A horrible chunk of code which extracts the contents of the "native" jar files
 // which are listed as project dependencies.
 task extractNatives() {
-    project.configurations.compile.each { file -> 
-        if ( file.name.startsWith( 'jame-natives-' ) ) {
-            def arch = file.name.substring(13).split('-')[0]
+    project.configurations.compile.each { file ->
+        if ( file.name.startsWith( 'jame-native-' ) ) {
+            def arch = file.name.substring(12).split('-')[0]
             project.file( "${project.buildDir}/natives/${arch}" ).mkdirs()
             
             def jar = new java.util.jar.JarFile( file )

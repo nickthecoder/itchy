@@ -95,22 +95,12 @@ public class ResourcesWriter extends XMLWriter
         this.beginTag("ninePatches");
 
         for (String name : this.resources.ninePatchNames()) {
-            NinePatchResource ninePatchResource = this.resources.getNinePatchResource(name);
+            NinePatch ninePatch = this.resources.getNinePatch(name);
 
             this.beginTag("ninePatch");
 
-            this.attribute("name", name);
-            this.attribute("filename", ninePatchResource.getFilename());
-
-            if (ninePatchResource.ninePatch instanceof NinePatch) {
-                NinePatch patch = (ninePatchResource.ninePatch);
-
-                this.attribute("top", patch.getMarginTop());
-                this.attribute("right", patch.getMarginRight());
-                this.attribute("bottom", patch.getMarginBottom());
-                this.attribute("left", patch.getMarginLeft());
-            }
-
+            this.writeProperties(ninePatch);
+            
             this.endTag("ninePatch");
         }
 
