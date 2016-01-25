@@ -6,7 +6,6 @@ import java.util.List;
 import uk.co.nickthecoder.itchy.property.IntegerProperty;
 import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.PropertySubject;
-import uk.co.nickthecoder.itchy.property.StringProperty;
 import uk.co.nickthecoder.jame.Surface;
 
 public class Sprite extends PoseResource implements Comparable<Sprite>, PropertySubject<Sprite> 
@@ -16,7 +15,6 @@ public class Sprite extends PoseResource implements Comparable<Sprite>, Property
     
     static {
         Property.addAll( PoseResource.properties, properties );
-        properties.add( new StringProperty<Sprite>( "name" ));
         properties.add( new IntegerProperty<Sprite>( "x" ) );
         properties.add( new IntegerProperty<Sprite>( "y" ) );
         properties.add( new IntegerProperty<Sprite>( "width" ) );

@@ -24,21 +24,21 @@
   </poses>
   <ninePatches/>
   <fonts>
-    <font name="BlackCasper" filename="fonts/BlackCasper/BlackCasper.ttf"/>
-    <font name="Boycott" filename="fonts/Boycott/Boycott.ttf"/>
+    <font name="BlackCasper" file="fonts/BlackCasper/BlackCasper.ttf"/>
+    <font name="Boycott" file="fonts/Boycott/Boycott.ttf"/>
   </fonts>
   <sounds>
-    <sound name="ItAintGunnaRain" filename="sounds/ItAintGunnaRain.ogg"/>
-    <sound name="drip" filename="sounds/drip.ogg"/>
-    <sound name="forFortyDays" filename="sounds/forFortyDays.ogg"/>
-    <sound name="hallelujah" filename="sounds/hallelujah.ogg"/>
-    <sound name="hallelujah2" filename="sounds/hallelujah2.ogg"/>
-    <sound name="itBeganToRain" filename="sounds/itBeganToRain.ogg"/>
-    <sound name="myLordMyLord" filename="sounds/myLordMyLord.ogg"/>
-    <sound name="ohLord" filename="sounds/ohLord.ogg"/>
-    <sound name="rain" filename="sounds/rain.ogg"/>
-    <sound name="theyDidntBelieveThatItWasGunnaRain" filename="sounds/theyDidntBelieveThatItWasGunnaRain.ogg"/>
-    <sound name="woo" filename="sounds/woo.ogg"/>
+    <sound name="ItAintGunnaRain" file="sounds/ItAintGunnaRain.ogg"/>
+    <sound name="drip" file="sounds/drip.ogg"/>
+    <sound name="forFortyDays" file="sounds/forFortyDays.ogg"/>
+    <sound name="hallelujah" file="sounds/hallelujah.ogg"/>
+    <sound name="hallelujah2" file="sounds/hallelujah2.ogg"/>
+    <sound name="itBeganToRain" file="sounds/itBeganToRain.ogg"/>
+    <sound name="myLordMyLord" file="sounds/myLordMyLord.ogg"/>
+    <sound name="ohLord" file="sounds/ohLord.ogg"/>
+    <sound name="rain" file="sounds/rain.ogg"/>
+    <sound name="theyDidntBelieveThatItWasGunnaRain" file="sounds/theyDidntBelieveThatItWasGunnaRain.ogg"/>
+    <sound name="woo" file="sounds/woo.ogg"/>
   </sounds>
   <animations>
     <animation name="aTest">

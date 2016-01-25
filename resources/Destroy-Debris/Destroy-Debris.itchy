@@ -81,23 +81,23 @@
   </poses>
   <ninePatches/>
   <fonts>
-    <font name="BlackCasper" filename="fonts/BlackCasper/BlackCasper.ttf"/>
-    <font name="Boycott" filename="fonts/Boycott/Boycott.ttf"/>
-    <font name="Vera" filename="fonts/Vera/Vera.ttf"/>
-    <font name="VeraBold" filename="fonts/Vera/VeraBd.ttf"/>
+    <font name="BlackCasper" file="fonts/BlackCasper/BlackCasper.ttf"/>
+    <font name="Boycott" file="fonts/Boycott/Boycott.ttf"/>
+    <font name="Vera" file="fonts/Vera/Vera.ttf"/>
+    <font name="VeraBold" file="fonts/Vera/VeraBd.ttf"/>
   </fonts>
   <sounds>
-    <sound name="ding" filename="sounds/ding.ogg"/>
-    <sound name="explode" filename="sounds/explode.ogg"/>
-    <sound name="explode-medium" filename="sounds/explode-medium.ogg"/>
-    <sound name="explode-quiet" filename="sounds/explode-quiet.ogg"/>
-    <sound name="fire" filename="sounds/fire.ogg"/>
-    <sound name="missile" filename="sounds/missile.ogg"/>
-    <sound name="mystic" filename="sounds/mystic.ogg"/>
-    <sound name="ricochet" filename="sounds/ricochet.ogg"/>
-    <sound name="thrust2" filename="sounds/thrust2.ogg"/>
-    <sound name="warp" filename="sounds/warp.ogg"/>
-    <sound name="woo" filename="sounds/woo.ogg"/>
+    <sound name="ding" file="sounds/ding.ogg"/>
+    <sound name="explode" file="sounds/explode.ogg"/>
+    <sound name="explode-medium" file="sounds/explode-medium.ogg"/>
+    <sound name="explode-quiet" file="sounds/explode-quiet.ogg"/>
+    <sound name="fire" file="sounds/fire.ogg"/>
+    <sound name="missile" file="sounds/missile.ogg"/>
+    <sound name="mystic" file="sounds/mystic.ogg"/>
+    <sound name="ricochet" file="sounds/ricochet.ogg"/>
+    <sound name="thrust2" file="sounds/thrust2.ogg"/>
+    <sound name="warp" file="sounds/warp.ogg"/>
+    <sound name="woo" file="sounds/woo.ogg"/>
   </sounds>
   <animations>
     <animation name="bullet1">
@@ -346,7 +346,7 @@
     <costume name="explosion" defaultZOrder="0" order="0" showInDesigner="true">
       <pose name="default" pose="explosion"/>
     </costume>
-    <costume name="gameOver" defaultZOrder="0" order="0" showInDesigner="true" role="uk.co.nickthecoder.itchy.role.PlainRole">
+    <costume name="gameOver" defaultZOrder="0" order="0" showInDesigner="true">
       <string name="default">Game Over</string>
       <font name="default" font="Vera" fontSize="14" color="#ffffffff" xAlignment="0.5" yAlignment="0.5" marginTop="0" marginRight="0" marginBottom="0" marginLeft="0"/>
       <animation name="fadeIn" animation="gameOverReveal"/>

@@ -2,17 +2,17 @@
   <game title="Pyrox" width="800" height="600" resizable="false" initialScene="welcome" testScene="test" directorClassName="director.py" authors="Nick Robinson. nickthecoder@gmail.com&#xA;"/>
   <spriteSheets>
     <spriteSheet name="robotSheet" file="images/robotSheet.png">
-      <sprite name="robot-D0" x="66" y="148" width="60" height="60" direction="0.0" offsetX="30" offsetY="30"/>
-      <sprite name="robot-D1" x="131" y="144" width="60" height="61" direction="0.0" offsetX="30" offsetY="30"/>
-      <sprite name="robot-D3" x="194" y="144" width="60" height="61" direction="0.0" offsetX="30" offsetY="30"/>
-      <sprite name="robot-R0" x="0" y="3" width="60" height="60" direction="0.0" offsetX="30" offsetY="30"/>
-      <sprite name="robot-R1" x="64" y="3" width="60" height="60" direction="0.0" offsetX="30" offsetY="30"/>
-      <sprite name="robot-R2" x="128" y="3" width="60" height="60" direction="0.0" offsetX="30" offsetY="30"/>
-      <sprite name="robot-R3" x="192" y="3" width="60" height="60" direction="0.0" offsetX="30" offsetY="30"/>
-      <sprite name="robot-U0" x="3" y="209" width="60" height="63" direction="0.0" offsetX="30" offsetY="30"/>
-      <sprite name="robot-U1" x="66" y="209" width="60" height="60" direction="0.0" offsetX="30" offsetY="30"/>
-      <sprite name="robot-U2" x="131" y="209" width="60" height="60" direction="0.0" offsetX="30" offsetY="30"/>
-      <sprite name="robot-U3" x="196" y="209" width="60" height="63" direction="0.0" offsetX="30" offsetY="31"/>
+      <sprite name="robot-D0" direction="0.0" offsetX="30" offsetY="30" x="66" y="148" width="60" height="60"/>
+      <sprite name="robot-D1" direction="0.0" offsetX="30" offsetY="30" x="131" y="144" width="60" height="61"/>
+      <sprite name="robot-D3" direction="0.0" offsetX="30" offsetY="30" x="194" y="144" width="60" height="61"/>
+      <sprite name="robot-R0" direction="0.0" offsetX="30" offsetY="30" x="0" y="3" width="60" height="60"/>
+      <sprite name="robot-R1" direction="0.0" offsetX="30" offsetY="30" x="64" y="3" width="60" height="60"/>
+      <sprite name="robot-R2" direction="0.0" offsetX="30" offsetY="30" x="128" y="3" width="60" height="60"/>
+      <sprite name="robot-R3" direction="0.0" offsetX="30" offsetY="30" x="192" y="3" width="60" height="60"/>
+      <sprite name="robot-U0" direction="0.0" offsetX="30" offsetY="30" x="3" y="209" width="60" height="63"/>
+      <sprite name="robot-U1" direction="0.0" offsetX="30" offsetY="30" x="66" y="209" width="60" height="60"/>
+      <sprite name="robot-U2" direction="0.0" offsetX="30" offsetY="30" x="131" y="209" width="60" height="60"/>
+      <sprite name="robot-U3" direction="0.0" offsetX="30" offsetY="31" x="196" y="209" width="60" height="63"/>
     </spriteSheet>
   </spriteSheets>
   <poses>
@@ -125,14 +125,14 @@
     <pose name="z6" filename="images/z6.png"/>
   </poses>
   <ninePatches>
-    <ninePatch name="bubble" filename="images/bubble.png" top="20" right="60" bottom="78" left="20"/>
-    <ninePatch name="bubble2" filename="images/bubble2.png" top="5" right="5" bottom="5" left="5"/>
+    <ninePatch name="bubble" file="images/bubble.png" top="20" right="60" bottom="78" left="20" middle="tile"/>
+    <ninePatch name="bubble2" file="images/bubble2.png" top="5" right="5" bottom="5" left="5" middle="tile"/>
   </ninePatches>
   <fonts>
-    <font name="Boycott" filename="fonts/Boycott/Boycott.ttf"/>
-    <font name="Comic" filename="fonts/bubblegum-sans/BubblegumSans-Regular.otf"/>
-    <font name="Computer" filename="fonts/dot_matrix/DOTMATRI.TTF"/>
-    <font name="Vera" filename="fonts/Vera/Vera.ttf"/>
+    <font name="Boycott" file="fonts/Boycott/Boycott.ttf"/>
+    <font name="Comic" file="fonts/bubblegum-sans/BubblegumSans-Regular.otf"/>
+    <font name="Computer" file="fonts/dot_matrix/DOTMATRI.TTF"/>
+    <font name="Vera" file="fonts/Vera/Vera.ttf"/>
   </fonts>
   <sounds/>
   <animations>
@@ -928,12 +928,12 @@ before we can harvest the honey.</string>
         <view enableMouse="false"/>
         <stageConstraint boxWidth="60" boxHeight="60"/>
       </layer>
+      <layer name="plain" zOrder="30" x="0" y="0" width="800" height="600" viewClassName="uk.co.nickthecoder.itchy.StageView" stageClassName="uk.co.nickthecoder.itchy.ZOrderStage" stageConstraintClassName="uk.co.nickthecoder.itchy.NullStageConstraint">
+        <view enableMouse="true"/>
+      </layer>
       <layer name="grid" zOrder="50" x="0" y="0" width="800" height="600" viewClassName="uk.co.nickthecoder.itchy.StageView" stageClassName="gridStage.py" stageConstraintClassName="uk.co.nickthecoder.itchy.GridStageConstraint">
         <view enableMouse="false"/>
         <stageConstraint boxWidth="100" boxHeight="100"/>
-      </layer>
-      <layer name="plain" zOrder="30" x="0" y="0" width="800" height="600" viewClassName="uk.co.nickthecoder.itchy.StageView" stageClassName="uk.co.nickthecoder.itchy.ZOrderStage" stageConstraintClassName="uk.co.nickthecoder.itchy.NullStageConstraint">
-        <view enableMouse="true"/>
       </layer>
     </layout>
     <layout name="glass">

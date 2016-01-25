@@ -55,15 +55,15 @@
     <font name="veraBold" file="fonts/Vera/VeraBd.ttf"/>
   </fonts>
   <sounds>
-    <sound name="ahh1" filename="sounds/ahh1.ogg"/>
-    <sound name="ahh2" filename="sounds/ahh2.ogg"/>
-    <sound name="ahh3" filename="sounds/ahh3.ogg"/>
-    <sound name="ahh4" filename="sounds/ahh4.ogg"/>
-    <sound name="explode" filename="sounds/explode.ogg"/>
-    <sound name="fire" filename="sounds/fire.ogg"/>
-    <sound name="pop" filename="sounds/pop.ogg"/>
-    <sound name="ricochet" filename="sounds/ricochet.ogg"/>
-    <sound name="shatter" filename="sounds/shatter.ogg"/>
+    <sound name="ahh1" file="sounds/ahh1.ogg"/>
+    <sound name="ahh2" file="sounds/ahh2.ogg"/>
+    <sound name="ahh3" file="sounds/ahh3.ogg"/>
+    <sound name="ahh4" file="sounds/ahh4.ogg"/>
+    <sound name="explode" file="sounds/explode.ogg"/>
+    <sound name="fire" file="sounds/fire.ogg"/>
+    <sound name="pop" file="sounds/pop.ogg"/>
+    <sound name="ricochet" file="sounds/ricochet.ogg"/>
+    <sound name="shatter" file="sounds/shatter.ogg"/>
   </sounds>
   <animations>
     <animation name="alien1">
