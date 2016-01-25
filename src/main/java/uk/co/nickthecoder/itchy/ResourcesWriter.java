@@ -342,9 +342,9 @@ public class ResourcesWriter extends XMLWriter
 
                 // Ignore poses which were GENERATED rather than loaded.
                 // For example Fragment, generates poses, which are added to a costume, but should
-                // be
-                // ignore when saving the resources.
-                if (!poseResource.isAnonymous()) {
+                // be ignore when saving the resources.
+                // Also ignore Sprites from a SpriteSheet, which are saved elsewhere.
+                if (poseResource instanceof FilePoseResource) {
 
                     this.beginTag("pose");
                     this.attribute("name", name);

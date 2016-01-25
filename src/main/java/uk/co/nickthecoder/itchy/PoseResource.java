@@ -6,21 +6,33 @@ package uk.co.nickthecoder.itchy;
 
 import uk.co.nickthecoder.jame.Surface;
 
-public abstract class PoseResource extends NamedResource implements Thumbnailed
+public abstract class PoseResource implements Thumbnailed, Named 
 {
 
     public static final int THUMBNAIL_WIDTH = 50;
     public static final int THUMBNAIL_HEIGHT = 50;
 
+    public String name;
+    
     public ImagePose pose;
 
     public boolean shared;
 
     private Surface thumbnail;
 
-    PoseResource( Resources resources, String name )
+    PoseResource( String name )
     {
-        super( resources, name );
+        this.name = name;
+    }
+    
+    public String getName()
+    {
+        return this.name;
+    }
+    
+    public void setName( String name )
+    {
+        this.name = name;
     }
     
     @Override

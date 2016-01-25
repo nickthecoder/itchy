@@ -21,9 +21,11 @@ import uk.co.nickthecoder.itchy.property.DoubleProperty;
 import uk.co.nickthecoder.itchy.property.EnumProperty;
 import uk.co.nickthecoder.itchy.property.FontProperty;
 import uk.co.nickthecoder.itchy.property.IntegerProperty;
+import uk.co.nickthecoder.itchy.property.PoseResourceProperty;
 import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.PropertySubject;
 import uk.co.nickthecoder.itchy.property.RGBAProperty;
+import uk.co.nickthecoder.itchy.property.SoundProperty;
 import uk.co.nickthecoder.itchy.property.StringProperty;
 import uk.co.nickthecoder.itchy.role.PlainRole;
 import uk.co.nickthecoder.itchy.util.ClassName;
@@ -594,25 +596,24 @@ public class Costume implements NamedSubject<Costume>, Cloneable
             event_properties.add(new StringProperty<Event>("eventName"));
 
             pose_properties.addAll(event_properties);
-            // TODO Add this back when I've refactored Pose/PoseResource.
-            // pose_properties.add( new PoseProperty<Event>("data").label("Pose"));
+            pose_properties.add(new PoseResourceProperty<Event>("data").label("Pose"));
 
             animation_properties.addAll(event_properties);
-            animation_properties.add( new AnimationProperty<Event>("data").label( "Animation" ));
+            animation_properties.add(new AnimationProperty<Event>("data").label("Animation"));
 
             string_properties.addAll(event_properties);
             string_properties.add(new StringProperty<Event>("data").label("String"));
 
             companion_properties.addAll(event_properties);
-            companion_properties.add( new CostumeProperty<Event>("data").label( "Companion" ));
+            companion_properties.add(new CostumeProperty<Event>("data").label("Companion"));
 
             sound_properties.addAll(event_properties);
+            sound_properties.add(new SoundProperty<Event>("data.soundResource"));
             sound_properties.add(new IntegerProperty<Event>("data.priority"));
             sound_properties.add(new DoubleProperty<Event>("data.fadeOutSeconds"));
             sound_properties.add(new BooleanProperty<Event>("data.fadeOnDeath"));
-            sound_properties.add(new EnumProperty<Event,MultipleRole>("data.multipleRole", MultipleRole.class));
-     
-            
+            sound_properties.add(new EnumProperty<Event, MultipleRole>("data.multipleRole", MultipleRole.class));
+
             text_style_properties.addAll(event_properties);
             text_style_properties.add(new FontProperty<Event>("data.font"));
             text_style_properties.add(new IntegerProperty<Event>("data.fontSize"));
@@ -638,22 +639,31 @@ public class Costume implements NamedSubject<Costume>, Cloneable
                 return companion_properties;
             } else if (data instanceof TextStyle) {
                 return text_style_properties;
-            } else if (data instanceof AnimationResource ) {
+            } else if (data instanceof AnimationResource) {
                 return animation_properties;
             }
             return event_properties;
         }
 
+        public Costume costume;
+
+        public String initialEventName;
+        
         public String eventName;
+
+        public Object initialData;
 
         public Object data;
 
         public String type;
 
-        public Event(String eventName, Object object, String type)
+        public Event(Costume costume, String eventName, Object object, String type)
         {
+            this.costume = costume;
+            this.initialEventName = eventName;
             this.eventName = eventName;
-            data = object;
+            this.initialData = object;
+            this.data = object;
             this.type = type;
         }
 
@@ -661,8 +671,41 @@ public class Costume implements NamedSubject<Costume>, Cloneable
         {
             if (data instanceof Named) {
                 return ((Named) data).getName();
+            } else if (data instanceof TextStyle) {
+                return ((TextStyle)data).font.getName();
+            } else if (data instanceof ManagedSound) {
+                return ((ManagedSound)data).soundResource.getName();
             } else {
+                System.out.println( "Unknown type : " + data.getClass().getName() );
                 return "";
+            }
+        }
+
+        public void update()
+        {
+            if (data instanceof PoseResource) {
+                costume.removePose(initialEventName,  (PoseResource) initialData); 
+                costume.addPose(eventName,  (PoseResource) data); 
+                
+            } else if (data instanceof String) {
+                costume.removeString(initialEventName,  (String) initialData); 
+                costume.addString(eventName,  (String) data); 
+                
+            } else if (data instanceof ManagedSound) {
+                costume.removeSound(initialEventName,  (ManagedSound) initialData); 
+                costume.addSound(eventName,  (ManagedSound) data); 
+                
+            } else if (data instanceof Costume) {
+                costume.removeCompanion(initialEventName,  (Costume) initialData); 
+                costume.addCompanion(eventName,  (Costume) data); 
+                
+            } else if (data instanceof TextStyle) {
+                costume.removeTextStyle(initialEventName,  (TextStyle) initialData); 
+                costume.addTextStyle(eventName,  (TextStyle) data); 
+                
+            } else if (data instanceof AnimationResource) {
+                costume.removeAnimation(initialEventName,  (AnimationResource) initialData); 
+                costume.addAnimation(eventName,  (AnimationResource) data); 
             }
         }
 

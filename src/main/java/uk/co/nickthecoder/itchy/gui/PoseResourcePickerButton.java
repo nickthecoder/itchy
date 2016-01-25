@@ -11,7 +11,7 @@ import uk.co.nickthecoder.itchy.PoseResource;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.jame.Surface;
 
-public class PosePickerButton extends GuiButton implements ActionListener
+public class PoseResourcePickerButton extends GuiButton implements ActionListener
 {
     private Resources resources;
 
@@ -25,7 +25,7 @@ public class PosePickerButton extends GuiButton implements ActionListener
 
     private Label label;
 
-    public PosePickerButton( Resources resources, PoseResource poseResource )
+    public PoseResourcePickerButton( Resources resources, PoseResource poseResource )
     {
         super();
         this.layout = new VerticalLayout();
@@ -73,7 +73,7 @@ public class PosePickerButton extends GuiButton implements ActionListener
     @Override
     public void action()
     {
-        PosePicker picker = new PosePicker(this.resources)
+        PoseResourcePicker picker = new PoseResourcePicker(this.resources)
         {
             @Override
             public void pick( PoseResource poseResource )

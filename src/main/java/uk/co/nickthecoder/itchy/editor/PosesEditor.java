@@ -287,7 +287,7 @@ public class PosesEditor extends SubEditor<FilePoseResource>
             String name = Util.nameFromFilename(filename);
             try {
                 this.openDialog.hide();
-                this.edit(new FilePoseResource(this.editor.resources, name, filename), true);
+                this.edit(new FilePoseResource(name, filename), true);
 
             } catch (JameException e) {
                 this.openDialog.setMessage(e.getMessage());

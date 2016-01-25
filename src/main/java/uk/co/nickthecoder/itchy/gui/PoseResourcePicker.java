@@ -7,18 +7,18 @@ package uk.co.nickthecoder.itchy.gui;
 import uk.co.nickthecoder.itchy.PoseResource;
 import uk.co.nickthecoder.itchy.Resources;
 
-public abstract class PosePicker extends Window
+public abstract class PoseResourcePicker extends Window
 {
     protected final Resources resources;
 
     private PoseResource defaultPoseResource;
 
-    public PosePicker( Resources resources )
+    public PoseResourcePicker( Resources resources )
     {
         this(resources, null);
     }
 
-    public PosePicker( Resources resources, PoseResource defaultPoseResource )
+    public PoseResourcePicker( Resources resources, PoseResource defaultPoseResource )
     {
         super("Pick a Pose");
         this.resources = resources;
@@ -46,7 +46,7 @@ public abstract class PosePicker extends Window
             @Override
             public void action()
             {
-                PosePicker.this.hide();
+                PoseResourcePicker.this.hide();
             }
 
         });
@@ -98,8 +98,8 @@ public abstract class PosePicker extends Window
             @Override
             public void action()
             {
-                PosePicker.this.hide();
-                PosePicker.this.pick(poseResource);
+                PoseResourcePicker.this.hide();
+                PoseResourcePicker.this.pick(poseResource);
             }
         });
 

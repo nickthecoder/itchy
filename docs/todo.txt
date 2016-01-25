@@ -3,16 +3,9 @@ Current Tasks
 
 Drebis: doesn't load.
 
-Sounds
-    Merge resources
-    Load/Save using properties
-    List page
-    Edit page
+Poses to use new editor format.
 
-For each of these : Poses, Costumes
-    Refactor all other resources to use the new ListXXX and EditXXX classes
-    Merge XXXResource with XXX
-    Load/Save using properties
+Load/Save using properties wherever possible.
     
 Editor to test if resources have changed and prompt for confirm before exiting.
 

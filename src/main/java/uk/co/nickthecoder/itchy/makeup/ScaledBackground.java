@@ -9,10 +9,11 @@ import java.util.List;
 
 import uk.co.nickthecoder.itchy.OffsetSurface;
 import uk.co.nickthecoder.itchy.Pose;
+import uk.co.nickthecoder.itchy.PoseResource;
 import uk.co.nickthecoder.itchy.SimpleOffsetSurface;
-import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.IntegerProperty;
-import uk.co.nickthecoder.itchy.property.PoseProperty;
+import uk.co.nickthecoder.itchy.property.PoseResourceProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.jame.Surface;
 
 public class ScaledBackground implements Makeup
@@ -20,7 +21,7 @@ public class ScaledBackground implements Makeup
     protected static final List<Property<Makeup, ?>> properties = new ArrayList<Property<Makeup, ?>>();
 
     static {
-        properties.add(new PoseProperty<Makeup>("pose").aliases("poseName"));
+        properties.add(new PoseResourceProperty<Makeup>("pose").aliases("poseName"));
         properties.add(new IntegerProperty<Makeup>("borderTop"));
         properties.add(new IntegerProperty<Makeup>("borderRight"));
         properties.add(new IntegerProperty<Makeup>("borderBottom"));
@@ -35,7 +36,7 @@ public class ScaledBackground implements Makeup
 
     private int borderLeft;
 
-    private Pose pose;
+    private PoseResource poseResource;
 
     private int seq = 0;
 
@@ -109,25 +110,28 @@ public class ScaledBackground implements Makeup
 
     public Pose getPose()
     {
-        return this.pose;
+        return this.poseResource.pose;
     }
 
-    public void setPose( Pose pose )
+    public PoseResource getPoseResource()
     {
-        this.seq++;
-        this.pose = pose;
+        return this.poseResource;
     }
 
+    public void setPoseResource(PoseResource poseResource)
+    {
+        this.poseResource = poseResource;
+    }
 
     @Override
     public OffsetSurface apply( OffsetSurface src )
     {
-        if (this.pose == null) {
+        if (this.poseResource == null) {
             return src;
         }
 
         Surface srcSurface = src.getSurface();
-        Surface background = this.pose.getSurface();
+        Surface background = this.poseResource.pose.getSurface();
 
         // Find the amount of space in the background image once we have removed the borders
         int remainingWidth = background.getWidth() - this.borderLeft - this.borderRight;
@@ -151,7 +155,7 @@ public class ScaledBackground implements Makeup
     @Override
     public void applyGeometry( TransformationData src )
     {
-        if (this.pose == null) {
+        if (this.poseResource == null) {
             return;
         }
 

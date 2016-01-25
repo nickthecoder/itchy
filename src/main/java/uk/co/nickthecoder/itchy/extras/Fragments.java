@@ -12,7 +12,6 @@ import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Costume;
 import uk.co.nickthecoder.itchy.DynamicPoseResource;
 import uk.co.nickthecoder.itchy.ImagePose;
-import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Pose;
 import uk.co.nickthecoder.itchy.PoseResource;
 import uk.co.nickthecoder.jame.Surface;
@@ -192,7 +191,7 @@ public class Fragments
     public Fragments addToCostume(Costume costume, String eventName)
     {
         for (int i = 0; i < this.pieceCount; i++) {
-            PoseResource pr = new DynamicPoseResource(Itchy.getGame().resources, eventName, fragments[i].pose);
+            PoseResource pr = new DynamicPoseResource(eventName, fragments[i].pose);
             costume.addPose(eventName, pr);
         }
         return this;

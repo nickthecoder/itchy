@@ -6,7 +6,7 @@ import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.ComponentValidator;
 import uk.co.nickthecoder.itchy.gui.CostumePickerButton;
-import uk.co.nickthecoder.itchy.gui.PosePickerButton;
+import uk.co.nickthecoder.itchy.gui.PoseResourcePickerButton;
 
 public class CostumeProperty<S> extends Property<S, Costume>
 {
@@ -50,14 +50,14 @@ public class CostumeProperty<S> extends Property<S, Costume>
     @Override
     public void addChangeListener( Component component, ComponentChangeListener listener )
     {
-        PosePickerButton button = (PosePickerButton) component;
+        PoseResourcePickerButton button = (PoseResourcePickerButton) component;
         button.addChangeListener(listener);
     }
     
     @Override
     public void addValidator( Component component, ComponentValidator validator )
     {
-        PosePickerButton button = (PosePickerButton) component;
+        PoseResourcePickerButton button = (PoseResourcePickerButton) component;
         button.addValidator(validator);
     }
 

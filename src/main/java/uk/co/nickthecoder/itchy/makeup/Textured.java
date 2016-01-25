@@ -12,7 +12,7 @@ import uk.co.nickthecoder.itchy.Pose;
 import uk.co.nickthecoder.itchy.SimpleOffsetSurface;
 import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.IntegerProperty;
-import uk.co.nickthecoder.itchy.property.PoseProperty;
+import uk.co.nickthecoder.itchy.property.PoseResourceProperty;
 import uk.co.nickthecoder.jame.Surface;
 import uk.co.nickthecoder.jame.Surface.BlendMode;
 
@@ -27,7 +27,7 @@ public class Textured implements Makeup
     protected static final List<Property<Makeup, ?>> properties = new ArrayList<Property<Makeup, ?>>();
 
     static {
-        properties.add(new PoseProperty<Makeup>("pose").aliases("poseName"));
+        properties.add(new PoseResourceProperty<Makeup>("pose").aliases("poseName"));
         properties.add(new IntegerProperty<Makeup>("x"));
         properties.add(new IntegerProperty<Makeup>("y"));
     }

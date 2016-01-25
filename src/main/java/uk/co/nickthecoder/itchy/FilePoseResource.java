@@ -28,11 +28,11 @@ public class FilePoseResource extends PoseResource implements PropertySubject<Fi
     
     private File file;
 
-    public FilePoseResource( Resources resources, String name, String filename ) throws JameException
+    public FilePoseResource( String name, String filename ) throws JameException
     {
-        super(resources, name);
+        super(name);
         this.file = new File(filename);
-        this.pose = new ImagePose(this.resources.resolveFilename(filename));
+        this.pose = new ImagePose(Resources.getCurrentResources().resolveFilename(filename));
     }
 
     @Override
@@ -50,11 +50,11 @@ public class FilePoseResource extends PoseResource implements PropertySubject<Fi
     {
         if (file.isAbsolute()) {
             // Lets try to make file relative to the resources directory.
-            file = new File( this.resources.makeRelativeFilename(file) );
+            file = new File( Resources.getCurrentResources().makeRelativeFilename(file) );
         }
         
         if (! file.equals(this.file)) { 
-            this.pose.load( this.resources.resolveFilename(file.getPath()) );
+            this.pose.load( Resources.getCurrentResources().resolveFilename(file.getPath()) );
             this.resetThumbnail();
             this.file = file;
         }

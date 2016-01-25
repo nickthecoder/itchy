@@ -6,9 +6,9 @@ package uk.co.nickthecoder.itchy;
  */
 public class DynamicPoseResource extends PoseResource
 {
-    public DynamicPoseResource(Resources resources, String name, ImagePose pose)
+    public DynamicPoseResource(String name, ImagePose pose)
     {
-        super(resources, name);
+        super( name);
         this.pose = pose;
     }
 

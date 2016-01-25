@@ -10,7 +10,7 @@ import uk.co.nickthecoder.itchy.Font;
 import uk.co.nickthecoder.itchy.ImagePose;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.MultiLineTextPose;
-import uk.co.nickthecoder.itchy.Pose;
+import uk.co.nickthecoder.itchy.PoseResource;
 import uk.co.nickthecoder.itchy.TextPose;
 import uk.co.nickthecoder.itchy.TextStyle;
 import uk.co.nickthecoder.itchy.makeup.Frame;
@@ -209,12 +209,12 @@ public class Talk extends Follower
                 ninePatch = Itchy.getGame().resources.getNinePatch(companion.bubbleName);
             }
             if (ninePatch == null) {
-                Pose backgroundPose = Itchy.getGame().resources.getPose(companion.bubbleName);
-                if (backgroundPose != null) {
+                PoseResource backgroundPR = Itchy.getGame().resources.getPoseResource(companion.bubbleName);
+                if (backgroundPR != null) {
                     ScaledBackground scaledBackground = new ScaledBackground(companion.textStyle.marginTop,
                         companion.textStyle.marginRight, companion.textStyle.marginBottom,
                         companion.textStyle.marginLeft);
-                    scaledBackground.setPose(backgroundPose);
+                    scaledBackground.setPoseResource(backgroundPR);
                     result.getAppearance().setMakeup(scaledBackground);
                 }
             } else {

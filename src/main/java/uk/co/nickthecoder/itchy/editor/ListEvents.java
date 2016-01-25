@@ -25,10 +25,11 @@ import uk.co.nickthecoder.itchy.gui.ImageComponent;
 import uk.co.nickthecoder.itchy.gui.Label;
 import uk.co.nickthecoder.itchy.gui.Picker;
 import uk.co.nickthecoder.itchy.gui.PlainContainer;
-import uk.co.nickthecoder.itchy.gui.PosePicker;
+import uk.co.nickthecoder.itchy.gui.PoseResourcePicker;
 import uk.co.nickthecoder.itchy.gui.ReflectionTableModelRow;
 import uk.co.nickthecoder.itchy.gui.SimpleTableModel;
 import uk.co.nickthecoder.itchy.gui.SingleColumnRowComparator;
+import uk.co.nickthecoder.itchy.gui.SoundPicker;
 import uk.co.nickthecoder.itchy.gui.TableModel;
 import uk.co.nickthecoder.itchy.gui.TableModelColumn;
 import uk.co.nickthecoder.itchy.gui.TableModelRow;
@@ -125,7 +126,7 @@ public class ListEvents extends ListSubjects<Costume.Event>
         for (String eventName : costume.getCompanionNames()) {
             for (Costume companion : costume.getCompanionChoices(eventName)) {
 
-                Costume.Event event = new Costume.Event(eventName, companion, "Companion");
+                Costume.Event event = new Costume.Event(costume, eventName, companion, "Companion");
                 TableModelRow row = new ReflectionTableModelRow<Event>(event, attributeNames);
                 model.addRow(row);
             }
@@ -133,7 +134,7 @@ public class ListEvents extends ListSubjects<Costume.Event>
         for (String eventName : costume.getPoseNames()) {
             for (PoseResource poseResource : costume.getPoseChoices(eventName)) {
 
-                Costume.Event event = new Costume.Event(eventName, poseResource, "Pose");
+                Costume.Event event = new Costume.Event(costume, eventName, poseResource, "Pose");
                 TableModelRow row = new ReflectionTableModelRow<Event>(event, attributeNames);
                 model.addRow(row);
 
@@ -142,7 +143,7 @@ public class ListEvents extends ListSubjects<Costume.Event>
         for (String eventName : costume.getAnimationNames()) {
             for (AnimationResource animationResource : costume.getAnimationChoices(eventName)) {
 
-                Costume.Event event = new Costume.Event(eventName, animationResource, "Animation");
+                Costume.Event event = new Costume.Event(costume, eventName, animationResource, "Animation");
                 TableModelRow row = new ReflectionTableModelRow<Event>(event, attributeNames);
                 model.addRow(row);
 
@@ -151,7 +152,7 @@ public class ListEvents extends ListSubjects<Costume.Event>
         for (String eventName : costume.getSoundNames()) {
             for (ManagedSound costumeSound : costume.getSoundChoices(eventName)) {
 
-                Costume.Event event = new Costume.Event(eventName, costumeSound, "Sound");
+                Costume.Event event = new Costume.Event(costume, eventName, costumeSound, "Sound");
                 TableModelRow row = new ReflectionTableModelRow<Event>(event, attributeNames);
                 model.addRow(row);
             }
@@ -159,7 +160,7 @@ public class ListEvents extends ListSubjects<Costume.Event>
         for (String eventName : costume.getTextStyleNames()) {
             for (TextStyle textStyle : costume.getTextStyleChoices(eventName)) {
 
-                Costume.Event event = new Costume.Event(eventName, textStyle, "Text Style");
+                Costume.Event event = new Costume.Event(costume, eventName, textStyle, "Text Style");
                 TableModelRow row = new ReflectionTableModelRow<Event>(event, attributeNames);
                 model.addRow(row);
 
@@ -168,7 +169,7 @@ public class ListEvents extends ListSubjects<Costume.Event>
         for (String eventName : costume.getStringNames()) {
             for (String string : costume.getStringChoices(eventName)) {
 
-                Costume.Event event = new Costume.Event(eventName, string, "String");
+                Costume.Event event = new Costume.Event(costume, eventName, string, "String");
                 TableModelRow row = new ReflectionTableModelRow<Event>(event, attributeNames);
                 model.addRow(row);
             }
@@ -219,7 +220,7 @@ public class ListEvents extends ListSubjects<Costume.Event>
         pickList.put("Companion", Costume.class);
 
         Picker<Class<?>> picker = new Picker<Class<?>>("Which Type?", pickList)
-            {
+        {
             @Override
             public void pick(String string, Class<?> picked)
             {
@@ -242,8 +243,8 @@ public class ListEvents extends ListSubjects<Costume.Event>
                     addCompanion();
                 }
             }
-            };
-            picker.show();
+        };
+        picker.show();
     }
 
     private static final String NEW_EVENT_NAME = "x";
@@ -293,7 +294,7 @@ public class ListEvents extends ListSubjects<Costume.Event>
 
     private void addPose()
     {
-        PosePicker picker = new PosePicker(resources)
+        PoseResourcePicker picker = new PoseResourcePicker(resources)
         {
             @Override
             public void pick(PoseResource poseResource)
@@ -308,21 +309,21 @@ public class ListEvents extends ListSubjects<Costume.Event>
     private void addAnimation()
     {
         AnimationPicker picker = new AnimationPicker()
-            {
+        {
             @Override
             public void pick(String label, AnimationResource animationResource)
             {
                 costume.addAnimation(NEW_EVENT_NAME, animationResource);
                 added(animationResource);
             }
-            };
-            picker.show();
+        };
+        picker.show();
     }
 
     private void addSound()
     {
-        Picker<SoundResource> picker = new Picker<SoundResource>("Pick a Sound", createSoundsHashMap())
-            {
+        SoundPicker picker = new SoundPicker()
+        {
             @Override
             public void pick(String label, SoundResource soundResource)
             {
@@ -330,8 +331,8 @@ public class ListEvents extends ListSubjects<Costume.Event>
                 costume.addSound(NEW_EVENT_NAME, ms);
                 added(ms);
             }
-            };
-            picker.show();
+        };
+        picker.show();
     }
 
     private void addTextStyle()
@@ -349,13 +350,4 @@ public class ListEvents extends ListSubjects<Costume.Event>
         picker.show();
     }
 
-    private HashMap<String, SoundResource> createSoundsHashMap()
-    {
-        HashMap<String, SoundResource> sounds = new HashMap<String, SoundResource>();
-        for (String name : resources.soundNames()) {
-            SoundResource soundResource = resources.getSound(name);
-            sounds.put(name, soundResource);
-        }
-        return sounds;
-    }
 }

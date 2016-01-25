@@ -8,7 +8,7 @@ import uk.co.nickthecoder.itchy.Font;
 import uk.co.nickthecoder.itchy.PoseResource;
 import uk.co.nickthecoder.itchy.Resources;
 
-public abstract class PoseOrFontPicker extends PosePicker
+public abstract class PoseOrFontPicker extends PoseResourcePicker
 {
     public static Label createExample( Font font)
     {

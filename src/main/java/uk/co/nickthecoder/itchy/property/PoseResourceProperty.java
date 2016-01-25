@@ -5,23 +5,22 @@
 package uk.co.nickthecoder.itchy.property;
 
 import uk.co.nickthecoder.itchy.Itchy;
-import uk.co.nickthecoder.itchy.Pose;
 import uk.co.nickthecoder.itchy.PoseResource;
 import uk.co.nickthecoder.itchy.Resources;
-import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.Component;
+import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.ComponentValidator;
-import uk.co.nickthecoder.itchy.gui.PosePickerButton;
+import uk.co.nickthecoder.itchy.gui.PoseResourcePickerButton;
 
-public class PoseProperty<S> extends Property<S, Pose>
+public class PoseResourceProperty<S> extends Property<S, PoseResource>
 {
-    public PoseProperty( String key )
+    public PoseResourceProperty( String key )
     {
         super(key);
     }
 
     @Override
-    public Pose getDefaultValue()
+    public PoseResource getDefaultValue()
     {
         return null;
     }
@@ -31,10 +30,9 @@ public class PoseProperty<S> extends Property<S, Pose>
     {
         Resources resources = Itchy.getGame().resources;
 
-        PoseResource poseResource = resources.getPoseResource(this.getSafeValue(subject));
+        PoseResource poseResource = this.getSafeValue(subject);
 
-        final PosePickerButton pickerButton = new PosePickerButton(resources, poseResource);
-        // pickerButton.setCompact(true);
+        final PoseResourcePickerButton pickerButton = new PoseResourcePickerButton(resources, poseResource);
 
         if (autoUpdate) {
 
@@ -44,7 +42,7 @@ public class PoseProperty<S> extends Property<S, Pose>
                 public void changed()
                 {
                     try {
-                        PoseProperty.this.update(subject, pickerButton);
+                        PoseResourceProperty.this.update(subject, pickerButton);
                     } catch (Exception e) {
                         // Do nothing
                     }
@@ -58,23 +56,23 @@ public class PoseProperty<S> extends Property<S, Pose>
     @Override
     public void addChangeListener( Component component, ComponentChangeListener listener )
     {
-        PosePickerButton button = (PosePickerButton) component;
+        PoseResourcePickerButton button = (PoseResourcePickerButton) component;
         button.addChangeListener(listener);
     }
     
     @Override
     public void addValidator( Component component, ComponentValidator validator )
     {
-        PosePickerButton button = (PosePickerButton) component;
+        PoseResourcePickerButton button = (PoseResourcePickerButton) component;
         button.addValidator(validator);
     }
 
     @Override
     public void update( S subject, Component component ) throws Exception
     {
-        PosePickerButton pickerButton = (PosePickerButton) component;
+        PoseResourcePickerButton pickerButton = (PoseResourcePickerButton) component;
         try {
-            this.setValue(subject, pickerButton.getValue().pose);
+            this.setValue(subject, pickerButton.getValue());
             pickerButton.removeStyle("error");
         } catch (Exception e) {
             pickerButton.addStyle("error");
@@ -84,20 +82,18 @@ public class PoseProperty<S> extends Property<S, Pose>
     @Override
     public void refresh( S subject, Component component ) throws Exception
     {
-        PosePickerButton pickerButton = (PosePickerButton) component;
-        Resources resources = Itchy.getGame().resources;
-        Pose pose = this.getValue(subject);
-        PoseResource fontResource = resources.getPoseResource(pose);
-        pickerButton.setValue(fontResource);
+        PoseResourcePickerButton pickerButton = (PoseResourcePickerButton) component;
+        PoseResource poseResource = this.getValue(subject);
+        pickerButton.setValue(poseResource);
     }
 
     @Override
-    public Pose parse( String value )
+    public PoseResource parse( String value )
     {
         if ("".equals(value) || (value == null)) {
             return null;
         }
-        Pose result = Itchy.getGame().resources.getPose(value);
+        PoseResource result = Itchy.getGame().resources.getPoseResource(value);
         if (result == null) {
             throw new NullPointerException();
         }
@@ -107,14 +103,13 @@ public class PoseProperty<S> extends Property<S, Pose>
     @Override
     public String getStringValue( S subject ) throws Exception
     {
-        Pose value = this.getValue(subject);
+        PoseResource value = this.getValue(subject);
 
-        PoseResource pr = Itchy.getGame().resources.getPoseResource(value);
-        if (pr == null) {
+        if (value == null) {
             System.err.println("PoseProperty not found.");
             return "";
         }
-        return pr.getName();
+        return value.getName();
     }
 
     @Override

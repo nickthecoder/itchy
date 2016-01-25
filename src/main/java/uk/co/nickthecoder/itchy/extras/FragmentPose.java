@@ -105,7 +105,7 @@ public class FragmentPose
             newPose.setOffsetY(newPose.getSurface().getHeight() / 2);
 
             String name = poseResource.getName() + this.suffix + i + 1;
-            PoseResource newPoseResource = new DynamicPoseResource(resources, name, newPose);
+            PoseResource newPoseResource = new DynamicPoseResource(name, newPose);
             resources.addPose(newPoseResource);
         }
 

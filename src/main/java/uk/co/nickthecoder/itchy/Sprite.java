@@ -36,8 +36,7 @@ public class Sprite extends PoseResource implements NamedSubject<Sprite>, Compar
     
     public Sprite(SpriteSheet spriteSheet, String name)
     {
-        // TODO Remove resources when PoseResource is refactored.
-        super(Itchy.getGame().resources, name);
+        super(name);
         this.spriteSheet = spriteSheet;
         this.pose = new ImagePose(createSurface());
     }

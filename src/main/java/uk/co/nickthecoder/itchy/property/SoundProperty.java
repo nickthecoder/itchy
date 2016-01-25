@@ -1,21 +1,21 @@
 package uk.co.nickthecoder.itchy.property;
 
-import uk.co.nickthecoder.itchy.AnimationResource;
 import uk.co.nickthecoder.itchy.Itchy;
-import uk.co.nickthecoder.itchy.gui.AnimationPickerButton;
+import uk.co.nickthecoder.itchy.SoundResource;
 import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.ComponentValidator;
+import uk.co.nickthecoder.itchy.gui.SoundPickerButton;
 
-public class AnimationProperty<S> extends Property<S, AnimationResource>
+public class SoundProperty<S> extends Property<S, SoundResource>
 {
-    public AnimationProperty( String key )
+    public SoundProperty( String key )
     {
         super(key);
     }
 
     @Override
-    public AnimationResource getDefaultValue()
+    public SoundResource getDefaultValue()
     {
         return null;
     }
@@ -23,9 +23,9 @@ public class AnimationProperty<S> extends Property<S, AnimationResource>
     @Override
     public Component createComponent( final S subject, final boolean autoUpdate )
     {
-        AnimationResource animationResource = this.getSafeValue(subject);
+        SoundResource soundResource = this.getSafeValue(subject);
 
-        final AnimationPickerButton pickerButton = new AnimationPickerButton( animationResource);
+        final SoundPickerButton pickerButton = new SoundPickerButton( soundResource);
 
         if (autoUpdate) {
 
@@ -35,7 +35,7 @@ public class AnimationProperty<S> extends Property<S, AnimationResource>
                 public void changed()
                 {
                     try {
-                        AnimationProperty.this.update(subject, pickerButton);
+                        SoundProperty.this.update(subject, pickerButton);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -49,25 +49,26 @@ public class AnimationProperty<S> extends Property<S, AnimationResource>
     @Override
     public void addChangeListener( Component component, ComponentChangeListener listener )
     {
-        AnimationPickerButton button = (AnimationPickerButton) component;
+        SoundPickerButton button = (SoundPickerButton) component;
         button.addChangeListener(listener);
     }
     
     @Override
     public void addValidator( Component component, ComponentValidator validator )
     {
-        AnimationPickerButton button = (AnimationPickerButton) component;
+        SoundPickerButton button = (SoundPickerButton) component;
         button.addValidator(validator);
     }
 
     @Override
     public void update( S subject, Component component ) throws Exception
     {
-        AnimationPickerButton pickerButton = (AnimationPickerButton) component;
+        SoundPickerButton pickerButton = (SoundPickerButton) component;
         try {
             this.setValue(subject, pickerButton.getValue());
             pickerButton.removeStyle("error");
         } catch (Exception e) {
+            e.printStackTrace();
             pickerButton.addStyle("error");
         }
     }
@@ -75,17 +76,17 @@ public class AnimationProperty<S> extends Property<S, AnimationResource>
     @Override
     public void refresh( S subject, Component component ) throws Exception
     {
-        AnimationPickerButton pickerButton = (AnimationPickerButton) component;
+        SoundPickerButton pickerButton = (SoundPickerButton) component;
         pickerButton.setValue(this.getValue(subject));
     }
 
     @Override
-    public AnimationResource parse( String value )
+    public SoundResource parse( String value )
     {
         if ("".equals(value) || (value == null)) {
             return null;
         }
-        AnimationResource result = Itchy.getGame().resources.getAnimationResource(value);
+        SoundResource result = Itchy.getGame().resources.getSound(value);
         if (result == null) {
             throw new NullPointerException();
         }
@@ -95,7 +96,7 @@ public class AnimationProperty<S> extends Property<S, AnimationResource>
     @Override
     public String getStringValue( S subject ) throws Exception
     {
-        AnimationResource value = this.getValue(subject);
+        SoundResource value = this.getValue(subject);
 
         return value.getName();
     }
@@ -105,5 +106,6 @@ public class AnimationProperty<S> extends Property<S, AnimationResource>
     {
         return null;
     }
+
 
 }

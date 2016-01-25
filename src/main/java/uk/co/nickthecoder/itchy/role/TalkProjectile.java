@@ -10,7 +10,7 @@ import uk.co.nickthecoder.itchy.Font;
 import uk.co.nickthecoder.itchy.ImagePose;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.MultiLineTextPose;
-import uk.co.nickthecoder.itchy.Pose;
+import uk.co.nickthecoder.itchy.PoseResource;
 import uk.co.nickthecoder.itchy.TextPose;
 import uk.co.nickthecoder.itchy.TextStyle;
 import uk.co.nickthecoder.itchy.makeup.Frame;
@@ -30,12 +30,12 @@ public class TalkProjectile extends Projectile
     {
         super(following);
         createTextStyle();
-        this.textStyle = new TextStyle();
+        textStyle = new TextStyle();
     }
 
     private final void createTextStyle()
     {
-        this.textStyle = new TextStyle(Itchy.getGame().resources.getDefaultFont(), 14);
+        textStyle = new TextStyle(Itchy.getGame().resources.getDefaultFont(), 14);
     }
 
     public static abstract class AbstractTalkProjectileBuilder<C extends TalkProjectile, B extends AbstractTalkProjectileBuilder<C, B>>
@@ -43,37 +43,37 @@ public class TalkProjectile extends Projectile
     {
         public B text(String text)
         {
-            this.companion.text = text;
+            companion.text = text;
             return getThis();
         }
 
         public B event(String eventName)
         {
-            TextStyle style = this.companion.costume.getTextStyle(eventName)
+            TextStyle style = companion.costume.getTextStyle(eventName)
                 .clone();
             if (style != null) {
-                this.companion.textStyle = style;
+                companion.textStyle = style;
             }
             return getThis();
         }
 
         public B font(String fontName, int fontSize)
         {
-            this.companion.textStyle.setFont(Itchy.getGame().resources
+            companion.textStyle.setFont(Itchy.getGame().resources
                 .getFont(fontName));
-            this.companion.textStyle.fontSize = fontSize;
+            companion.textStyle.fontSize = fontSize;
             return getThis();
         }
 
         public B textStyle(TextStyle textStyle)
         {
-            this.companion.textStyle = textStyle;
+            companion.textStyle = textStyle;
             return getThis();
         }
 
         public B textStyle(String textStyleName)
         {
-            this.companion.textStyle = this.companion.source.getCostume()
+            companion.textStyle = companion.source.getCostume()
                 .getTextStyle(textStyleName);
             return getThis();
         }
@@ -90,7 +90,7 @@ public class TalkProjectile extends Projectile
             // Pose, because we want that pose to be used for
             // the speech bubble, not to change the actor's pose! So we'd need
             // two event names.
-            String name = this.companion.source.getCostume().getString(style);
+            String name = companion.source.getCostume().getString(style);
             if (name == null) {
                 name = style;
             }
@@ -104,12 +104,12 @@ public class TalkProjectile extends Projectile
         {
             super.eventName(eventName);
 
-            String text = this.companion.source.getCostume().getString(
+            String text = companion.source.getCostume().getString(
                 eventName);
             if (text == null) {
-                this.companion.text = eventName;
+                companion.text = eventName;
             } else {
-                this.companion.text = text;
+                companion.text = text;
             }
 
             return getThis();
@@ -117,20 +117,20 @@ public class TalkProjectile extends Projectile
 
         public B bubble(String name)
         {
-            this.companion.bubbleName = name;
+            companion.bubbleName = name;
             return getThis();
         }
 
         public B alignment(double x, double y)
         {
-            this.companion.textStyle.xAlignment = x;
-            this.companion.textStyle.yAlignment = y;
+            companion.textStyle.xAlignment = x;
+            companion.textStyle.yAlignment = y;
             return getThis();
         }
 
         public B color(RGBA color)
         {
-            this.companion.textStyle.color = color;
+            companion.textStyle.color = color;
             return getThis();
         }
 
@@ -143,10 +143,10 @@ public class TalkProjectile extends Projectile
          */
         public B margin(int margin)
         {
-            this.companion.textStyle.marginTop = margin;
-            this.companion.textStyle.marginRight = margin;
-            this.companion.textStyle.marginBottom = margin;
-            this.companion.textStyle.marginLeft = margin;
+            companion.textStyle.marginTop = margin;
+            companion.textStyle.marginRight = margin;
+            companion.textStyle.marginBottom = margin;
+            companion.textStyle.marginLeft = margin;
             return getThis();
         }
 
@@ -159,10 +159,10 @@ public class TalkProjectile extends Projectile
          */
         public B margin(int topBottom, int leftRight)
         {
-            this.companion.textStyle.marginTop = topBottom;
-            this.companion.textStyle.marginRight = leftRight;
-            this.companion.textStyle.marginBottom = topBottom;
-            this.companion.textStyle.marginLeft = leftRight;
+            companion.textStyle.marginTop = topBottom;
+            companion.textStyle.marginRight = leftRight;
+            companion.textStyle.marginBottom = topBottom;
+            companion.textStyle.marginLeft = leftRight;
             return getThis();
         }
 
@@ -173,10 +173,10 @@ public class TalkProjectile extends Projectile
          */
         public B margin(int top, int right, int bottom, int left)
         {
-            this.companion.textStyle.marginTop = top;
-            this.companion.textStyle.marginRight = right;
-            this.companion.textStyle.marginBottom = bottom;
-            this.companion.textStyle.marginLeft = left;
+            companion.textStyle.marginTop = top;
+            companion.textStyle.marginRight = right;
+            companion.textStyle.marginBottom = bottom;
+            companion.textStyle.marginLeft = left;
             return getThis();
         }
 
@@ -214,15 +214,14 @@ public class TalkProjectile extends Projectile
                     .getNinePatch(companion.bubbleName);
             }
             if (ninePatch == null) {
-                Pose backgroundPose = Itchy.getGame().resources
-                    .getPose(companion.bubbleName);
-                if (backgroundPose != null) {
+                PoseResource backgroundPR = Itchy.getGame().resources.getPoseResource(companion.bubbleName);
+                if (backgroundPR!= null) {
                     ScaledBackground scaledBackground = new ScaledBackground(
                         companion.textStyle.marginTop,
                         companion.textStyle.marginRight,
                         companion.textStyle.marginBottom,
                         companion.textStyle.marginLeft);
-                    scaledBackground.setPose(backgroundPose);
+                    scaledBackground.setPoseResource(backgroundPR);
                     result.getAppearance().setMakeup(scaledBackground);
                 }
             } else {

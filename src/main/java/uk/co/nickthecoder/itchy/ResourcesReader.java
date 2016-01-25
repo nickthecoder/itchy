@@ -202,7 +202,7 @@ public class ResourcesReader
             String name = poseTag.getAttribute("name");
             String filename = poseTag.getAttribute("filename");
 
-            PoseResource resource = new FilePoseResource(this.resources, name, filename);
+            PoseResource resource = new FilePoseResource(name, filename);
             ImagePose pose = resource.pose;
             this.resources.addPose(resource);
             pose.setDirection(poseTag.getOptionalDoubleAttribute("direction", 0));

@@ -19,6 +19,13 @@ public class EditEvent extends EditSubject<Costume.Event>
     }
 
     @Override
+    protected void onOk()
+    {
+        super.onOk();
+        subject.update();
+    }
+    
+    @Override
     protected void add()
     {
         // Do nothing

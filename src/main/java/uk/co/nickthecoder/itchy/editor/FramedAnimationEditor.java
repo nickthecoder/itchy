@@ -25,7 +25,7 @@ import uk.co.nickthecoder.itchy.gui.IntegerBox;
 import uk.co.nickthecoder.itchy.gui.Label;
 import uk.co.nickthecoder.itchy.gui.NullComponent;
 import uk.co.nickthecoder.itchy.gui.PlainContainer;
-import uk.co.nickthecoder.itchy.gui.PosePicker;
+import uk.co.nickthecoder.itchy.gui.PoseResourcePicker;
 import uk.co.nickthecoder.itchy.gui.VerticalScroll;
 
 public class FramedAnimationEditor extends AnimationEditor
@@ -52,7 +52,7 @@ public class FramedAnimationEditor extends AnimationEditor
             @Override
             public void action()
             {
-                PosePicker posePicker = new PosePicker(FramedAnimationEditor.this.resources) {
+                PoseResourcePicker posePicker = new PoseResourcePicker(FramedAnimationEditor.this.resources) {
                     @Override
                     public void pick( PoseResource poseResource )
                     {
