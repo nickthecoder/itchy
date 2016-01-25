@@ -243,44 +243,6 @@ public class Resources extends Loadable
 
     }
 
-    public boolean has(NamedResource object)
-    {
-        if (object instanceof SpriteSheet) {
-            return this.getSpriteSheet(object.name) == object;
-
-        } else if (object instanceof PoseResource) {
-            return this.getPoseResource(object.name) == object;
-
-        } else if (object instanceof AnimationResource) {
-            return this.getAnimationResource(object.name) == object;
-
-        } else if (object instanceof CostumeResource) {
-            return this.getCostumeResource(object.name) == object;
-        }
-
-        return false;
-    }
-
-    public void renameResource(Object object, String name)
-    {
-
-        if (object instanceof SpriteSheet) {
-            this.rename2((SpriteSheet) object, name);
-
-        } else if (object instanceof PoseResource) {
-            this.rename2((PoseResource) object, name);
-
-        } else if (object instanceof AnimationResource) {
-            this.rename2((AnimationResource) object, name);
-
-        } else if (object instanceof CostumeResource) {
-            this.rename2((CostumeResource) object, name);
-
-        } else {
-            throw new RuntimeException("Unknown resource type : " + object.getClass().getName());
-        }
-    }
-
     // SpriteSheets
 
     public void addSpriteSheet(SpriteSheet resource)
@@ -410,12 +372,17 @@ public class Resources extends Loadable
         return null;
     }
 
-    void rename2(AnimationResource animationResource, String name)
+    public void renameAnimation(AnimationResource ar)
     {
-        this.animations.remove(animationResource.getName());
-        this.animations.put(name, animationResource);
+        for (Entry<String, AnimationResource> entry : this.animations.entrySet()) {
+            if (entry.getValue() == ar) {
+                this.animations.remove(entry.getKey());
+                break;
+            }
+        }
+        this.animations.put(ar.getName(), ar);
     }
-
+    
     // NinePatches
 
     public void addNinePatch(NinePatch ninePatch)

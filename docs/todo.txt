@@ -7,7 +7,7 @@ Sounds
     List page
     Edit page
 
-For each of these : GameInfo, SpriteSheet, Sprites (Poses), Animations, Sounds, Costumes
+For each of these : GameInfo, SpriteSheet, Sprites (Poses), Animations, Costumes
     Refactor all other resources to use the new ListXXX and EditXXX classes
     Merge XXXResource with XXX
     Load/Save using properties
@@ -19,6 +19,7 @@ Editor to test if resources have changed and prompt for confirm before exiting.
 All resources.renameXXX needs to update the renamed collection, so that renameSubjectsInScenes will work. 
     And do the same with other resources. Layouts, Fonts, ... ?
 
+Delete NamedResource
 
 
 

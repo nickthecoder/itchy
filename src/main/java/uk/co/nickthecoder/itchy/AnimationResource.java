@@ -8,11 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.animation.Animation;
+import uk.co.nickthecoder.itchy.animation.CompoundAnimation;
 import uk.co.nickthecoder.itchy.property.Property;
-import uk.co.nickthecoder.itchy.property.PropertySubject;
 import uk.co.nickthecoder.itchy.property.StringProperty;
 
-public class AnimationResource extends NamedResource implements PropertySubject<AnimationResource>
+public class AnimationResource implements NamedSubject<AnimationResource>
 {
     protected static final List<Property<AnimationResource, ?>> properties = new ArrayList<Property<AnimationResource, ?>>();
 
@@ -20,18 +20,32 @@ public class AnimationResource extends NamedResource implements PropertySubject<
         properties.add(new StringProperty<AnimationResource>("name"));
     }
 
-    public Animation animation;
-
-    public AnimationResource(Resources resources, String name, Animation animation)
-    {
-        super(resources, name);
-        this.animation = animation;
-    }
-
     @Override
     public List<Property<AnimationResource, ?>> getProperties()
     {
         return properties;
+    }
+    
+    public Animation animation;
+
+    private String name;
+    
+    public AnimationResource()
+    {
+        animation = new CompoundAnimation(true);
+    }
+
+
+    @Override
+    public String getName()
+    {
+        return name;
+    }
+
+    @Override
+    public void setName(String name)
+    {
+        this.name = name;
     }
 
 }

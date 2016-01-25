@@ -20,13 +20,10 @@ public class AnimationEditor extends Window
 {
     public Animation animation;
 
-    protected Editor editor;
-
-    public AnimationEditor( Editor editor, Animation animation )
+    public AnimationEditor( Animation animation )
     {
         super(animation.getName());
         assert (animation != null);
-        this.editor = editor;
         this.animation = animation;
         this.clientArea.setLayout(new VerticalLayout());
         this.clientArea.setFill(true, false);

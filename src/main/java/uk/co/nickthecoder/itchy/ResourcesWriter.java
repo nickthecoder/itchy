@@ -420,9 +420,7 @@ public class ResourcesWriter extends XMLWriter
             for (AnimationResource animationResource : costume.getAnimationChoices(name)) {
                 this.beginTag("animation");
                 this.attribute("name", name);
-
-                this.attribute("animation", animationResource.name);
-
+                this.attribute("animation", animationResource.getName());
                 this.endTag("animation");
             }
         }

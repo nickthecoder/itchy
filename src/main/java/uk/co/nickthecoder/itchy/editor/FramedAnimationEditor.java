@@ -12,19 +12,19 @@ import uk.co.nickthecoder.itchy.PoseResource;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.animation.Frame;
 import uk.co.nickthecoder.itchy.animation.FramedAnimation;
+import uk.co.nickthecoder.itchy.gui.AbstractComponent;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Component;
-import uk.co.nickthecoder.itchy.gui.DoubleBox;
-import uk.co.nickthecoder.itchy.gui.GuiButton;
-import uk.co.nickthecoder.itchy.gui.AbstractComponent;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
-import uk.co.nickthecoder.itchy.gui.NullComponent;
-import uk.co.nickthecoder.itchy.gui.PlainContainer;
-import uk.co.nickthecoder.itchy.gui.GridLayout;
 import uk.co.nickthecoder.itchy.gui.Container;
+import uk.co.nickthecoder.itchy.gui.DoubleBox;
+import uk.co.nickthecoder.itchy.gui.GridLayout;
+import uk.co.nickthecoder.itchy.gui.GuiButton;
 import uk.co.nickthecoder.itchy.gui.ImageComponent;
 import uk.co.nickthecoder.itchy.gui.IntegerBox;
 import uk.co.nickthecoder.itchy.gui.Label;
+import uk.co.nickthecoder.itchy.gui.NullComponent;
+import uk.co.nickthecoder.itchy.gui.PlainContainer;
 import uk.co.nickthecoder.itchy.gui.PosePicker;
 import uk.co.nickthecoder.itchy.gui.VerticalScroll;
 
@@ -38,9 +38,9 @@ public class FramedAnimationEditor extends AnimationEditor
 
     private GridLayout framesGrid;
 
-    public FramedAnimationEditor( Editor editor, Resources resources, FramedAnimation animation )
+    public FramedAnimationEditor( Resources resources, FramedAnimation animation )
     {
-        super(editor, animation);
+        super( animation);
         this.resources = resources;
     }
 
@@ -125,8 +125,7 @@ public class FramedAnimationEditor extends AnimationEditor
 
         GuiButton up = null;
         if (i > 0) {
-            up = new GuiButton(new ImageComponent(this.editor.getStylesheet().resources.getPose(
-                "icon_up").getSurface()));
+            up = new GuiButton(new ImageComponent(getStylesheet().resources.getPose("icon_up").getSurface()));
             up.addActionListener(new ActionListener() {
                 @Override
                 public void action()
@@ -141,7 +140,7 @@ public class FramedAnimationEditor extends AnimationEditor
             up.setTooltip("Move Up");
         }
 
-        GuiButton delete = new GuiButton(new ImageComponent(this.editor.getStylesheet().resources.getPose(
+        GuiButton delete = new GuiButton(new ImageComponent(getStylesheet().resources.getPose(
             "icon_delete").getSurface()));
         delete.addActionListener(new ActionListener() {
             @Override

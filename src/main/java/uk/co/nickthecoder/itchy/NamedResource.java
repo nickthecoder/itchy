@@ -37,9 +37,9 @@ public class NamedResource implements Named
 
     public void setName( String newName )
     {
-        if (this.resources.has(this)) {
-            this.resources.renameResource(this, newName);
-        }
+        //if (this.resources.has(this)) {
+        //    this.resources.renameResource(this, newName);
+       // }
         this.name = newName;
     }
 

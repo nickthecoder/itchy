@@ -237,8 +237,6 @@ public class ResourcesReader
         for (Iterator<XMLTag> j = animationsTag.getTags("animation"); j.hasNext();) {
             XMLTag animationTag = j.next();
 
-            String itemName = animationTag.getAttribute("name");
-
             CompoundAnimation dummyAnimation = new CompoundAnimation(true);
             this.readCompoundAnimation(animationTag, dummyAnimation);
 
@@ -247,7 +245,9 @@ public class ResourcesReader
                 throw new XMLException("animation tag requires exactly one child");
             }
 
-            AnimationResource ar = new AnimationResource(this.resources, itemName, dummyAnimation.children.get(0));
+            AnimationResource ar = new AnimationResource();
+            this.readProperties(animationTag, ar);
+            ar.animation = dummyAnimation.children.get(0);
             this.resources.addAnimation(ar);
         }
     }
