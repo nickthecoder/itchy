@@ -51,7 +51,7 @@ class Director(AbstractDirector) :
             else :
                 newName = newPrefix + `i`
                 newPose = ImagePose( pose.surface.zoom( -1,1, False ), pose.offsetX, pose.offsetY )
-                newPR = DynamicPoseResource( resources, newName, newPose )
+                newPR = DynamicPoseResource( newName, newPose )
                 resources.addPose( newPR )
                 print "Created pose", newName
 

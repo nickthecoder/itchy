@@ -280,7 +280,7 @@ public class ResourcesReader
             if (roleClassName.isValid(resources.scriptManager)) {
                 costume.roleClassName = roleClassName;
             } else {
-                throw new XMLException("Expected a subclass of Role : " + costume.roleClassName);
+                throw new XMLException("Costume " + costumeName + ". Expected a subclass of Role : '" + roleClassName + "'");
             }
 
             for (Iterator<XMLTag> j = costumeTag.getTags("pose"); j.hasNext();) {

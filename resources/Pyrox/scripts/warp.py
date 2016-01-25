@@ -30,7 +30,7 @@ class Warp(GridRole) :
         if self.isCompleted() :
             self.event("completed")
 
-        if not Itchy.getGame().resources.getSceneResource(self.scene) :
+        if not Itchy.getGame().resources.getScene(self.scene) :
             self.event("closed")
             self.actor.role = PlainRole()
 

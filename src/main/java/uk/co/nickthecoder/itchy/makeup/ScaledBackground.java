@@ -21,7 +21,7 @@ public class ScaledBackground implements Makeup
     protected static final List<Property<Makeup, ?>> properties = new ArrayList<Property<Makeup, ?>>();
 
     static {
-        properties.add(new PoseResourceProperty<Makeup>("pose").aliases("poseName"));
+        properties.add(new PoseResourceProperty<Makeup>("pose").access("poseResource").aliases("poseName"));
         properties.add(new IntegerProperty<Makeup>("borderTop"));
         properties.add(new IntegerProperty<Makeup>("borderRight"));
         properties.add(new IntegerProperty<Makeup>("borderBottom"));

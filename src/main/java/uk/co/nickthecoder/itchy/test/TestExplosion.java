@@ -9,6 +9,7 @@ import java.util.List;
 
 import uk.co.nickthecoder.itchy.AbstractRole;
 import uk.co.nickthecoder.itchy.Role;
+import uk.co.nickthecoder.itchy.property.BooleanProperty;
 import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.DoubleProperty;
 import uk.co.nickthecoder.itchy.property.IntegerProperty;
@@ -38,10 +39,10 @@ public class TestExplosion extends AbstractRole
         properties.add(new DoubleProperty<Role>("growFactor"));
         properties.add(new DoubleProperty<Role>("alpha"));
         properties.add(new IntegerProperty<Role>("projectiles"));
-        properties.add(new DoubleProperty<Role>("projectilesPerTick"));
+        properties.add(new IntegerProperty<Role>("projectilesPerTick"));
         properties.add(new DoubleProperty<Role>("spreadFrom"));
         properties.add(new DoubleProperty<Role>("spreadTo"));
-        properties.add(new DoubleProperty<Role>("randomSpread"));
+        properties.add(new BooleanProperty<Role>("randomSpread"));
         properties.add(new IntegerProperty<Role>("deltaZ"));
     }
 

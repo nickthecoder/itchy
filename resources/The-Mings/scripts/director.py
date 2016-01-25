@@ -108,7 +108,7 @@ class Director(AbstractDirector) :
         srcSurface.blit( newSurface, Surface.BlendMode.RGBA_SUB )
         newPose = ImagePose( newSurface, srcPose.offsetX, srcPose.offsetY )
 
-        game.resources.addPose( DynamicPoseResource( game.resources, newName, newPose) )
+        game.resources.addPose( DynamicPoseResource( newName, newPose) )
         
     def createButton( self, sourceName, destinationName ) :
     
@@ -120,7 +120,7 @@ class Director(AbstractDirector) :
             pose = ImagePose( surface )
             pose.offsetX = surface.width/2
             pose.offsetY = surface.height/2
-            poseResource = DynamicPoseResource( game.resources, destinationName, pose )
+            poseResource = DynamicPoseResource( destinationName, pose )
             
             game.resources.addPose( poseResource )
     
@@ -138,7 +138,7 @@ class Director(AbstractDirector) :
             print "Pose", sourceName, "not found"
         else :
             newPose = self.pixelator.pixelate( pose, flip, dx, dy )
-            newPoseResource = DynamicPoseResource( game.resources, destinationName, newPose )
+            newPoseResource = DynamicPoseResource( destinationName, newPose )
             game.resources.addPose( newPoseResource )
 
 

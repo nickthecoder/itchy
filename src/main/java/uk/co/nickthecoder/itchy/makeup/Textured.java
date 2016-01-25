@@ -9,6 +9,7 @@ import java.util.List;
 
 import uk.co.nickthecoder.itchy.OffsetSurface;
 import uk.co.nickthecoder.itchy.Pose;
+import uk.co.nickthecoder.itchy.PoseResource;
 import uk.co.nickthecoder.itchy.SimpleOffsetSurface;
 import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.IntegerProperty;
@@ -27,7 +28,7 @@ public class Textured implements Makeup
     protected static final List<Property<Makeup, ?>> properties = new ArrayList<Property<Makeup, ?>>();
 
     static {
-        properties.add(new PoseResourceProperty<Makeup>("pose").aliases("poseName"));
+        properties.add(new PoseResourceProperty<Makeup>("pose").access("poseResource").aliases("poseName"));
         properties.add(new IntegerProperty<Makeup>("x"));
         properties.add(new IntegerProperty<Makeup>("y"));
     }
@@ -36,7 +37,7 @@ public class Textured implements Makeup
 
     private int y;
 
-    private Pose pose;
+    private PoseResource poseResource;
 
     private int seq = 0;
 
@@ -64,12 +65,12 @@ public class Textured implements Makeup
 
     public Pose getPose()
     {
-        return this.pose;
+        return this.poseResource.pose;
     }
 
-    public void setPose( Pose pose )
+    public void setPoseResource( PoseResource poseResource )
     {
-        this.pose = pose;
+        this.poseResource = poseResource;
         this.seq ++;
     }
 
@@ -82,12 +83,12 @@ public class Textured implements Makeup
     @Override
     public OffsetSurface apply( OffsetSurface src )
     {
-        if (this.pose == null) {
+        if (this.poseResource == null) {
             return src;
         }
 
         boolean rebuiltTexture = false;
-        Surface texture = this.pose.getSurface();
+        Surface texture = this.poseResource.pose.getSurface();
 
         int textureWidth = texture.getWidth();
         int textureHeight = texture.getHeight();
