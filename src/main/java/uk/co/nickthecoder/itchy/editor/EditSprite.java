@@ -15,7 +15,7 @@ import uk.co.nickthecoder.itchy.gui.PlainContainer;
 import uk.co.nickthecoder.itchy.gui.Scroll;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 
-public class EditSprite extends EditSubject<Sprite>
+public class EditSprite extends EditNamedSubject<Sprite>
 {
     private SpriteSheet spriteSheet;
 

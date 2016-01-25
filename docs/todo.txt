@@ -1,13 +1,15 @@
 Current Tasks
 =============
 
+Drebis: doesn't load.
+
 Sounds
     Merge resources
     Load/Save using properties
     List page
     Edit page
 
-For each of these : GameInfo, SpriteSheet, Sprites (Poses), Animations, Costumes
+For each of these : Poses, Costumes
     Refactor all other resources to use the new ListXXX and EditXXX classes
     Merge XXXResource with XXX
     Load/Save using properties

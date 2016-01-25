@@ -4,67 +4,58 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.editor;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
 
-import uk.co.nickthecoder.itchy.AnimationResource;
 import uk.co.nickthecoder.itchy.Costume;
-import uk.co.nickthecoder.itchy.CostumeFeatures;
-import uk.co.nickthecoder.itchy.CostumeResource;
-import uk.co.nickthecoder.itchy.Font;
-import uk.co.nickthecoder.itchy.ManagedSound;
-import uk.co.nickthecoder.itchy.PoseResource;
-import uk.co.nickthecoder.itchy.Resources;
-import uk.co.nickthecoder.itchy.Scene;
-import uk.co.nickthecoder.itchy.SceneStub;
-import uk.co.nickthecoder.itchy.SoundResource;
-import uk.co.nickthecoder.itchy.TextStyle;
-import uk.co.nickthecoder.itchy.gui.AbstractComponent;
-import uk.co.nickthecoder.itchy.gui.AbstractTableListener;
-import uk.co.nickthecoder.itchy.gui.ActionListener;
-import uk.co.nickthecoder.itchy.gui.ClassNameBox;
-import uk.co.nickthecoder.itchy.gui.Component;
-import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
-import uk.co.nickthecoder.itchy.gui.Container;
-import uk.co.nickthecoder.itchy.gui.CostumePicker;
-import uk.co.nickthecoder.itchy.gui.CostumePickerButton;
-import uk.co.nickthecoder.itchy.gui.FontPicker;
-import uk.co.nickthecoder.itchy.gui.FontPickerButton;
-import uk.co.nickthecoder.itchy.gui.GridLayout;
-import uk.co.nickthecoder.itchy.gui.GuiButton;
-import uk.co.nickthecoder.itchy.gui.ImageComponent;
-import uk.co.nickthecoder.itchy.gui.Label;
-import uk.co.nickthecoder.itchy.gui.MessageBox;
-import uk.co.nickthecoder.itchy.gui.Notebook;
-import uk.co.nickthecoder.itchy.gui.Picker;
-import uk.co.nickthecoder.itchy.gui.PickerButton;
-import uk.co.nickthecoder.itchy.gui.PlainContainer;
-import uk.co.nickthecoder.itchy.gui.PoseOrFontPicker;
-import uk.co.nickthecoder.itchy.gui.PosePicker;
-import uk.co.nickthecoder.itchy.gui.PosePickerButton;
-import uk.co.nickthecoder.itchy.gui.ReflectionTableModelRow;
-import uk.co.nickthecoder.itchy.gui.SimpleTableModel;
-import uk.co.nickthecoder.itchy.gui.SimpleTableModelRow;
-import uk.co.nickthecoder.itchy.gui.SingleColumnRowComparator;
 import uk.co.nickthecoder.itchy.gui.Table;
 import uk.co.nickthecoder.itchy.gui.TableModel;
-import uk.co.nickthecoder.itchy.gui.TableModelColumn;
-import uk.co.nickthecoder.itchy.gui.TableModelRow;
-import uk.co.nickthecoder.itchy.gui.TableRow;
-import uk.co.nickthecoder.itchy.gui.TextArea;
-import uk.co.nickthecoder.itchy.gui.TextBox;
-import uk.co.nickthecoder.itchy.gui.VerticalLayout;
-import uk.co.nickthecoder.itchy.gui.Window;
-import uk.co.nickthecoder.itchy.gui.WrappedRowComparator;
 import uk.co.nickthecoder.itchy.property.Property;
-import uk.co.nickthecoder.itchy.util.StringList;
-import uk.co.nickthecoder.jame.Surface;
-import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 
-public class CostumesEditor extends SubEditor<CostumeResource>
+
+public class CostumesEditor extends SubEditor<Costume>
 {
+
+    private CostumesEditor(Editor editor)
+    {
+        super(editor);
+        // TODO Auto-generated constructor stub
+    }
+
+    @Override
+    protected Table createTable()
+    {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    protected TableModel createTableModel()
+    {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    protected List<Property<Costume, ?>> getProperties()
+    {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    protected void remove(Costume resource)
+    {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    protected void onAdd()
+    {
+        // TODO Auto-generated method stub
+        
+    }
+    /*
     private static final int EVENT_RESOURCE_COLUMN = 3;
 
     private static final String NEW_EVENT_NAME = "default";
@@ -152,8 +143,8 @@ public class CostumesEditor extends SubEditor<CostumeResource>
 
         String[] attributeNames = { "name", "costume", "extendedFromName", "order", null };
         for (String costumeName : this.editor.resources.costumeNames()) {
-            CostumeResource costumeResource = this.editor.resources.getCostumeResource(costumeName);
-            TableModelRow row = new ReflectionTableModelRow<CostumeResource>(costumeResource, attributeNames);
+            Costume costume = this.editor.resources.getCostume(costumeName);
+            TableModelRow row = new ReflectionTableModelRow<Costume>(costume, attributeNames);
             model.addRow(row);
         }
         return model;
@@ -164,7 +155,7 @@ public class CostumesEditor extends SubEditor<CostumeResource>
     {
         super.createForm();
 
-        final Costume costume = this.currentResource.getCostume();
+        final Costume costume = this.currentResource;
 
         final ClassNameBox cnb = (ClassNameBox) this.form.getComponent("roleClassName");
         cnb.addChangeListener( new ComponentChangeListener()
@@ -289,12 +280,12 @@ public class CostumesEditor extends SubEditor<CostumeResource>
         }
     }
 
-    /**
+    **
      * When we cancel an edit, the changes are discarded by replacing the
      * costume with a clone made before the changes were made. However, if there
      * are other costumes which extend from the edited costume, then their link
      * to the correct costume will be broken. This method fixes that.
-     */
+     *
     private void swapExtendedFrom(Costume oldCostume, Costume newCostume)
     {
         Resources resources = this.editor.resources;
@@ -999,4 +990,5 @@ public class CostumesEditor extends SubEditor<CostumeResource>
     {
         return this.currentResource.getProperties();
     }
+    */
 }

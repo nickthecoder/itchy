@@ -2,7 +2,6 @@ package uk.co.nickthecoder.itchy.editor;
 
 import java.util.List;
 
-import uk.co.nickthecoder.itchy.NamedSubject;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.gui.AbstractTableListener;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
@@ -36,7 +35,7 @@ import uk.co.nickthecoder.itchy.gui.VerticalLayout;
  * @param <S>
  *            The type of resource (e.g. PoseResource).
  */
-public abstract class ListSubjects<S extends NamedSubject<S>>
+public abstract class ListSubjects<S>
 {
     protected Resources resources;
 

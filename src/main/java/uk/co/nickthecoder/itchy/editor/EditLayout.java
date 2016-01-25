@@ -4,7 +4,7 @@ import uk.co.nickthecoder.itchy.Layout;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.gui.Component;
 
-public class EditLayout extends EditSubject<Layout>
+public class EditLayout extends EditNamedSubject<Layout>
 {
 
     public EditLayout(Resources resources, ListSubjects<Layout> listSubjects, Layout subject, boolean isNew)

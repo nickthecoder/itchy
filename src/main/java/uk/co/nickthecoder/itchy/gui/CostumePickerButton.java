@@ -7,14 +7,14 @@ package uk.co.nickthecoder.itchy.gui;
 import java.util.ArrayList;
 import java.util.List;
 
-import uk.co.nickthecoder.itchy.CostumeResource;
+import uk.co.nickthecoder.itchy.Costume;
 import uk.co.nickthecoder.itchy.Resources;
 
 public class CostumePickerButton extends GuiButton implements ActionListener
 {
     private Resources resources;
 
-    private CostumeResource costumeResource;
+    private Costume costume;
 
     private List<ComponentChangeListener> changeListeners = new ArrayList<ComponentChangeListener>();
 
@@ -24,41 +24,41 @@ public class CostumePickerButton extends GuiButton implements ActionListener
 
     private Label label;
 
-    public CostumePickerButton( Resources resources, CostumeResource costumeResource )
+    public CostumePickerButton(Resources resources, Costume costume)
     {
         super();
-        this.layout = new VerticalLayout();
+        layout = new VerticalLayout();
         this.setXAlignment(0.5f);
 
-        this.img = new ImageComponent(costumeResource.getThumbnail());
-        this.label = new Label(costumeResource.getName());
-        this.addChild(this.img);
-        this.addChild(this.label);
+        img = new ImageComponent(costume.getThumbnail());
+        label = new Label(costume.getName());
+        this.addChild(img);
+        this.addChild(label);
 
         this.resources = resources;
-        this.costumeResource = costumeResource;
+        this.costume = costume;
         this.addActionListener(this);
     }
 
-    public CostumeResource getValue()
+    public Costume getValue()
     {
-        return this.costumeResource;
+        return costume;
     }
 
-    public void setValue( CostumeResource costumeResource )
+    public void setValue(Costume costume)
     {
-        this.costumeResource = costumeResource;
+        this.costume = costume;
 
-        this.img.setImage(costumeResource.getThumbnail());
-        this.label.setText(costumeResource.getName());
+        img.setImage(costume.getThumbnail());
+        label.setText(costume.getName());
 
         this.removeStyle("error");
-        for (ComponentValidator validator : this.validators) {
-            if ( ! validator.isValid() ) {
+        for (ComponentValidator validator : validators) {
+            if (!validator.isValid()) {
                 this.addStyle("error");
             }
         }
-        for (ComponentChangeListener listener : this.changeListeners) {
+        for (ComponentChangeListener listener : changeListeners) {
             listener.changed();
         }
     }
@@ -66,35 +66,35 @@ public class CostumePickerButton extends GuiButton implements ActionListener
     @Override
     public void action()
     {
-        CostumePicker picker = new CostumePicker(this.resources)
+        CostumePicker picker = new CostumePicker(resources)
         {
             @Override
-            public void pick( CostumeResource costumeResource )
+            public void pick(Costume costume)
             {
-                setValue(costumeResource);
+                setValue(costume);
             }
         };
         picker.show();
     }
 
-    public void addChangeListener( ComponentChangeListener ccl )
+    public void addChangeListener(ComponentChangeListener ccl)
     {
-        this.changeListeners.add(ccl);
+        changeListeners.add(ccl);
     }
 
-    public void removeChangeListener( ComponentChangeListener ccl )
+    public void removeChangeListener(ComponentChangeListener ccl)
     {
-        this.changeListeners.remove(ccl);
-    }
-    
-    public void addValidator( ComponentValidator validator )
-    {
-        this.validators.add(validator);
+        changeListeners.remove(ccl);
     }
 
-    public void removeChangeListener( ComponentValidator validator )
+    public void addValidator(ComponentValidator validator)
     {
-        this.validators.remove(validator);
+        validators.add(validator);
+    }
+
+    public void removeChangeListener(ComponentValidator validator)
+    {
+        validators.remove(validator);
     }
 
 }

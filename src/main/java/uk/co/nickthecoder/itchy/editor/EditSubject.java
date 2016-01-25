@@ -1,21 +1,18 @@
 package uk.co.nickthecoder.itchy.editor;
 
-import uk.co.nickthecoder.itchy.NamedSubject;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Component;
-import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
-import uk.co.nickthecoder.itchy.gui.ComponentValidator;
 import uk.co.nickthecoder.itchy.gui.Container;
 import uk.co.nickthecoder.itchy.gui.GuiButton;
 import uk.co.nickthecoder.itchy.gui.Label;
 import uk.co.nickthecoder.itchy.gui.PlainContainer;
 import uk.co.nickthecoder.itchy.gui.PropertiesForm;
-import uk.co.nickthecoder.itchy.gui.TextBox;
 import uk.co.nickthecoder.itchy.gui.VerticalLayout;
 import uk.co.nickthecoder.itchy.gui.Window;
+import uk.co.nickthecoder.itchy.property.PropertySubject;
 
-public abstract class EditSubject<S extends NamedSubject<S>>
+public abstract class EditSubject<S extends PropertySubject<S>>
 {
     protected Resources resources;
 
@@ -124,45 +121,7 @@ public abstract class EditSubject<S extends NamedSubject<S>>
     protected Component createForm()
     {
         this.form.createForm();
-        final TextBox nameBox = (TextBox) this.form.getComponent("name");
-
-        nameBox.addValidator(new ComponentValidator()
-        {
-            @Override
-            public boolean isValid()
-            {
-                return isValidName( nameBox.getText() );
-            }
-        });
-
-        nameBox.addChangeListener(new ComponentChangeListener()
-        {
-            @Override
-            public void changed()
-            {
-                if ( !nameBox.hasStyle("error") ) {
-                    rename();
-                }
-            }
-        });
         return this.form.container;
-    }
-
-    protected abstract S getSubjectByName( String name );
-    
-    protected boolean isValidName(String name)
-    {
-        try {
-            S found = getSubjectByName(name);
-            if (found == null) {
-                // No resource with that name
-                return true;
-            }
-            // Valid, if the resource is the one that is found, otherwise the name is already in use.
-            return found == subject;
-        } catch (Exception e) {
-            return false;
-        }
     }
     
     protected void onOk()
@@ -171,8 +130,7 @@ public abstract class EditSubject<S extends NamedSubject<S>>
             if (isNew) {
                 add();
             }
-            
-            
+
             if (this.listSubjects != null) {
                 this.listSubjects.update(this.subject, isNew);
             }
@@ -191,6 +149,4 @@ public abstract class EditSubject<S extends NamedSubject<S>>
     }
 
     protected abstract void add();
-
-    protected abstract void rename();
 }

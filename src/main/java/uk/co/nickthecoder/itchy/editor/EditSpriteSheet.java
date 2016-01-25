@@ -4,7 +4,7 @@ import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.SpriteSheet;
 import uk.co.nickthecoder.itchy.gui.Component;
 
-public class EditSpriteSheet extends EditSubject<SpriteSheet>
+public class EditSpriteSheet extends EditNamedSubject<SpriteSheet>
 {
 
     public EditSpriteSheet(Resources resources, ListSubjects<SpriteSheet> listSubjects, SpriteSheet subject,

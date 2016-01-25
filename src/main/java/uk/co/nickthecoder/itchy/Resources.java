@@ -67,7 +67,7 @@ public class Resources extends Loadable
 
     private final HashMap<String, Input> inputs;
 
-    private final HashMap<String, CostumeResource> costumes;
+    private final HashMap<String, Costume> costumes;
 
     private final HashMap<String, SceneStub> scenes;
 
@@ -87,27 +87,27 @@ public class Resources extends Loadable
     public Resources()
     {
         super();
-        this.scriptManager = new ScriptManager(this);
-        this.errorLog = new ErrorLog();
+        scriptManager = new ScriptManager(this);
+        errorLog = new ErrorLog();
 
-        this.spriteSheets = new HashMap<String, SpriteSheet>();
-        this.poses = new HashMap<String, PoseResource>();
-        this.animations = new HashMap<String, AnimationResource>();
-        this.ninePatches = new HashMap<String, NinePatch>();
+        spriteSheets = new HashMap<String, SpriteSheet>();
+        poses = new HashMap<String, PoseResource>();
+        animations = new HashMap<String, AnimationResource>();
+        ninePatches = new HashMap<String, NinePatch>();
 
-        this.sounds = new HashMap<String, SoundResource>();
-        this.fonts = new HashMap<String, Font>();
+        sounds = new HashMap<String, SoundResource>();
+        fonts = new HashMap<String, Font>();
 
-        this.inputs = new HashMap<String, Input>();
-        this.costumes = new HashMap<String, CostumeResource>();
-        this.scenes = new HashMap<String, SceneStub>();
+        inputs = new HashMap<String, Input>();
+        costumes = new HashMap<String, Costume>();
+        scenes = new HashMap<String, SceneStub>();
 
-        this.layouts = new HashMap<String, Layout>();
+        layouts = new HashMap<String, Layout>();
 
-        this.renamedCostumes = new HashMap<String, String>();
-        this.dirty = false;
+        renamedCostumes = new HashMap<String, String>();
+        dirty = false;
 
-        this.game = new Game(this);
+        game = new Game(this);
     }
 
     /**
@@ -118,21 +118,21 @@ public class Resources extends Loadable
     public Resources copy()
     {
         Resources result = new Resources();
-        result.sounds.putAll(this.sounds);
-        result.fonts.putAll(this.fonts);
-        result.ninePatches.putAll(this.ninePatches);
-        result.scenes.putAll(this.scenes);
-        result.poses.putAll(this.poses);
-        result.costumes.putAll(this.costumes);
-        result.animations.putAll(this.animations);
-        result.inputs.putAll(this.inputs);
-        result.layouts.putAll(this.layouts);
-        result.renamedCostumes.putAll(this.renamedCostumes);
+        result.sounds.putAll(sounds);
+        result.fonts.putAll(fonts);
+        result.ninePatches.putAll(ninePatches);
+        result.scenes.putAll(scenes);
+        result.poses.putAll(poses);
+        result.costumes.putAll(costumes);
+        result.animations.putAll(animations);
+        result.inputs.putAll(inputs);
+        result.layouts.putAll(layouts);
+        result.renamedCostumes.putAll(renamedCostumes);
 
         result.setFile(this.getFile());
 
         Itchy.loadingGame(result.game);
-        result.setGameInfo(this.gameInfo);
+        result.setGameInfo(gameInfo);
         result.game.setDirector(result.getGameInfo().createDirector(result));
         Itchy.loadingGame(null);
 
@@ -152,31 +152,31 @@ public class Resources extends Loadable
 
     public boolean isDirty()
     {
-        return this.dirty;
+        return dirty;
     }
 
     public void dirty()
     {
-        this.dirty = true;
+        dirty = true;
     }
 
     public GameInfo getGameInfo()
     {
-        return this.gameInfo;
+        return gameInfo;
     }
 
     public void setGameInfo(GameInfo gameInfo)
     {
         assert (this.gameInfo == null);
         this.gameInfo = gameInfo;
-        this.game.init();
+        game.init();
     }
 
     @Override
     public void load() throws Exception
     {
-        this.dirty = false;
-        Itchy.loadingGame(this.game);
+        dirty = false;
+        Itchy.loadingGame(game);
 
         ResourcesReader loader = new ResourcesReader(this);
         loader.load(getFilename());
@@ -247,67 +247,67 @@ public class Resources extends Loadable
 
     public void addSpriteSheet(SpriteSheet resource)
     {
-        this.spriteSheets.put(resource.getName(), resource);
+        spriteSheets.put(resource.getName(), resource);
     }
 
     public void removeSpriteSheet(String name)
     {
-        this.spriteSheets.remove(name);
+        spriteSheets.remove(name);
     }
 
     public SpriteSheet getSpriteSheet(String name)
     {
-        return this.spriteSheets.get(name);
+        return spriteSheets.get(name);
     }
 
     public List<String> spriteSheetNames()
     {
-        return sortNames(this.spriteSheets.keySet());
+        return sortNames(spriteSheets.keySet());
     }
 
     public void renameSpriteSheet(SpriteSheet spriteSheet)
     {
-        for (Entry<String, SpriteSheet> entry : this.spriteSheets.entrySet()) {
+        for (Entry<String, SpriteSheet> entry : spriteSheets.entrySet()) {
             if (entry.getValue() == spriteSheet) {
-                this.spriteSheets.remove(entry.getKey());
+                spriteSheets.remove(entry.getKey());
                 break;
             }
         }
-        this.spriteSheets.put(spriteSheet.getName(), spriteSheet);
+        spriteSheets.put(spriteSheet.getName(), spriteSheet);
     }
 
     // Poses
 
     public void addPose(PoseResource resource)
     {
-        this.poses.put(resource.getName(), resource);
+        poses.put(resource.getName(), resource);
     }
 
     public void removePose(String name)
     {
-        this.poses.remove(name);
+        poses.remove(name);
     }
 
     public PoseResource getPoseResource(String name)
     {
-        return this.poses.get(name);
+        return poses.get(name);
     }
 
     public ImagePose getPose(String name)
     {
-        PoseResource resource = this.poses.get(name);
+        PoseResource resource = poses.get(name);
         return resource == null ? null : resource.pose;
     }
 
     public List<String> poseNames()
     {
-        return sortNames(this.poses.keySet());
+        return sortNames(poses.keySet());
     }
 
     void rename2(PoseResource poseResource, String name)
     {
-        this.poses.remove(poseResource.getName());
-        this.poses.put(name, poseResource);
+        poses.remove(poseResource.getName());
+        poses.put(name, poseResource);
     }
 
     public String getPoseName(Pose pose)
@@ -342,41 +342,41 @@ public class Resources extends Loadable
     public void renamePose(PoseResource pr)
     {
         // TODO Implement when Pose/PoseResource is refactored.
-//    for (Entry<String, PoseResource> entry : this.poses.entrySet()) {
-//        if (entry.getValue() == spriteSheet) {
-//            this.spriteSheets.remove(entry.getKey());
-//            break;
-//        }
-//    }
-//    this.spriteSheets.put(spriteSheet.getName(), spriteSheet);
+        // for (Entry<String, PoseResource> entry : this.poses.entrySet()) {
+        // if (entry.getValue() == spriteSheet) {
+        // this.spriteSheets.remove(entry.getKey());
+        // break;
+        // }
+        // }
+        // this.spriteSheets.put(spriteSheet.getName(), spriteSheet);
     }
-    
+
     // Animations
 
     public void addAnimation(AnimationResource ar)
     {
-        this.animations.put(ar.getName(), ar);
+        animations.put(ar.getName(), ar);
     }
 
     public void removeAnimation(String name)
     {
-        this.animations.remove(name);
+        animations.remove(name);
     }
 
     public Animation getAnimation(String name)
     {
-        AnimationResource resource = this.animations.get(name);
+        AnimationResource resource = animations.get(name);
         return resource == null ? null : resource.animation;
     }
 
     public AnimationResource getAnimationResource(String name)
     {
-        return this.animations.get(name);
+        return animations.get(name);
     }
 
     public List<String> animationNames()
     {
-        return sortNames(this.animations.keySet());
+        return sortNames(animations.keySet());
     }
 
     public String getAnimationName(Animation animation)
@@ -391,145 +391,145 @@ public class Resources extends Loadable
 
     public void renameAnimation(AnimationResource ar)
     {
-        for (Entry<String, AnimationResource> entry : this.animations.entrySet()) {
+        for (Entry<String, AnimationResource> entry : animations.entrySet()) {
             if (entry.getValue() == ar) {
-                this.animations.remove(entry.getKey());
+                animations.remove(entry.getKey());
                 break;
             }
         }
-        this.animations.put(ar.getName(), ar);
+        animations.put(ar.getName(), ar);
     }
-    
+
     // NinePatches
 
     public void addNinePatch(NinePatch ninePatch)
     {
-        this.ninePatches.put(ninePatch.getName(), ninePatch);
+        ninePatches.put(ninePatch.getName(), ninePatch);
     }
 
     public void removeNinePatch(String name)
     {
-        this.ninePatches.remove(name);
+        ninePatches.remove(name);
     }
 
     public NinePatch getNinePatch(String name)
     {
-        return this.ninePatches.get(name);
+        return ninePatches.get(name);
     }
 
     public List<String> ninePatchNames()
     {
-        return sortNames(this.ninePatches.keySet());
+        return sortNames(ninePatches.keySet());
     }
 
     public void rename(NinePatch ninePatch)
     {
-        for (Entry<String, NinePatch> entry : this.ninePatches.entrySet()) {
+        for (Entry<String, NinePatch> entry : ninePatches.entrySet()) {
             if (entry.getValue() == ninePatch) {
-                this.ninePatches.remove(entry.getKey());
+                ninePatches.remove(entry.getKey());
                 break;
             }
         }
-        this.ninePatches.put(ninePatch.getName(), ninePatch);
+        ninePatches.put(ninePatch.getName(), ninePatch);
     }
 
     // Layouts
     public void addLayout(Layout layout)
     {
-        this.layouts.put(layout.getName(), layout);
+        layouts.put(layout.getName(), layout);
     }
 
     public void removeLayout(String name)
     {
-        this.layouts.remove(name);
+        layouts.remove(name);
     }
 
     public Layout getLayout(String name)
     {
-        return this.layouts.get(name);
+        return layouts.get(name);
     }
 
     public List<String> layoutNames()
     {
-        return sortNames(this.layouts.keySet());
+        return sortNames(layouts.keySet());
     }
 
     public void renameLayout(Layout layout)
     {
         System.out.println("Renaming layout " + layout.name);
-        for (Entry<String, Layout> entry : this.layouts.entrySet()) {
+        for (Entry<String, Layout> entry : layouts.entrySet()) {
             if (entry.getValue() == layout) {
-                this.layouts.remove(entry.getKey());
+                layouts.remove(entry.getKey());
                 break;
             }
         }
-        this.layouts.put(layout.getName(), layout);
+        layouts.put(layout.getName(), layout);
     }
 
     // Sounds
 
     public void addSound(SoundResource soundResource)
     {
-        this.sounds.put(soundResource.getName(), soundResource);
+        sounds.put(soundResource.getName(), soundResource);
     }
 
     public void removeSound(String name)
     {
-        this.sounds.remove(name);
+        sounds.remove(name);
     }
 
     public SoundResource getSound(String name)
     {
-        return this.sounds.get(name);
+        return sounds.get(name);
     }
 
     public List<String> soundNames()
     {
-        return sortNames(this.sounds.keySet());
+        return sortNames(sounds.keySet());
     }
 
     public void renameSound(SoundResource soundResource)
     {
-        for (Entry<String, SoundResource> entry : this.sounds.entrySet()) {
+        for (Entry<String, SoundResource> entry : sounds.entrySet()) {
             if (entry.getValue() == soundResource) {
-                this.sounds.remove(entry.getKey());
+                sounds.remove(entry.getKey());
                 break;
             }
         }
-        this.sounds.put(soundResource.getName(), soundResource);
+        sounds.put(soundResource.getName(), soundResource);
     }
-            
+
     // Fonts
 
     public void addFont(Font font)
     {
-        this.fonts.put(font.getName(), font);
+        fonts.put(font.getName(), font);
     }
 
     public void removeFont(String name)
     {
-        this.fonts.remove(name);
+        fonts.remove(name);
     }
 
     public Font getFont(String name)
     {
-        return this.fonts.get(name);
+        return fonts.get(name);
     }
 
     public List<String> fontNames()
     {
-        return sortNames(this.fonts.keySet());
+        return sortNames(fonts.keySet());
     }
 
     public void renameFont(Font font)
     {
-        for (Entry<String, Font> entry : this.fonts.entrySet()) {
+        for (Entry<String, Font> entry : fonts.entrySet()) {
             if (entry.getValue() == font) {
-                this.fonts.remove(entry.getKey());
+                fonts.remove(entry.getKey());
                 break;
             }
         }
-        this.fonts.put(font.getName(), font);
+        fonts.put(font.getName(), font);
     }
 
     /**
@@ -538,7 +538,7 @@ public class Resources extends Loadable
     public Font getDefaultFont()
     {
         try {
-            Font font = this.fonts.values().iterator().next();
+            Font font = fonts.values().iterator().next();
             return font;
         } catch (Exception e) {
             return null;
@@ -549,22 +549,22 @@ public class Resources extends Loadable
 
     public void addInput(Input input)
     {
-        this.inputs.put(input.getName(), input);
+        inputs.put(input.getName(), input);
     }
 
     public void removeInput(String name)
     {
-        this.inputs.remove(name);
+        inputs.remove(name);
     }
 
     public Input getInput(String name)
     {
-        return this.inputs.get(name);
+        return inputs.get(name);
     }
 
     public List<String> inputNames()
     {
-        return sortNames(this.inputs.keySet());
+        return sortNames(inputs.keySet());
     }
 
     public String getInputName(Input input)
@@ -579,26 +579,26 @@ public class Resources extends Loadable
 
     public void renameInput(Input input)
     {
-        for (Entry<String, Input> entry : this.inputs.entrySet()) {
+        for (Entry<String, Input> entry : inputs.entrySet()) {
             if (entry.getValue() == input) {
-                this.inputs.remove(entry.getKey());
+                inputs.remove(entry.getKey());
                 break;
             }
         }
-        this.inputs.put(input.getName(), input);
+        inputs.put(input.getName(), input);
     }
 
     // Costumes
 
-    public void addCostume(CostumeResource resource)
+    public void addCostume(Costume costume)
     {
-        this.costumes.put(resource.name, resource);
-        this.registry.add(resource.getCostume().roleClassName);
+        costumes.put(costume.getName(), costume);
+        registry.add(costume.roleClassName);
     }
 
     public void removeCostume(String name)
     {
-        this.costumes.remove(name);
+        costumes.remove(name);
     }
 
     /**
@@ -607,24 +607,18 @@ public class Resources extends Loadable
      */
     public String getNewCostumeName(String name)
     {
-        String origName = this.renamedCostumes.get(name);
+        String origName = renamedCostumes.get(name);
         return origName == null ? name : origName;
     }
 
     public Costume getCostume(String name)
     {
-        CostumeResource resource = this.costumes.get(name);
-        return resource == null ? null : resource.getCostume();
-    }
-
-    public CostumeResource getCostumeResource(String name)
-    {
-        return this.costumes.get(name);
+        return costumes.get(name);
     }
 
     public List<String> costumeNames()
     {
-        return sortNames(this.costumes.keySet());
+        return sortNames(costumes.keySet());
     }
 
     public String getCostumeName(Costume costume)
@@ -637,38 +631,40 @@ public class Resources extends Loadable
         return null;
     }
 
-    public CostumeResource getCostumeResource(Costume costume)
+    public void renameCostume(Costume costume)
     {
-        for (String name : this.costumeNames()) {
-            if (this.getCostume(name) == costume) {
-                return this.costumes.get(name);
+        String newName = costume.getName();
+        String oldName = null;
+        for (Entry<String, Costume> entry : costumes.entrySet()) {
+            if (entry.getValue() == costume) {
+                oldName = entry.getKey();
+                break;
             }
         }
-        return null;
-    }
 
-    void rename2(CostumeResource costumeResource, String newName)
-    {
-        if (costumeResource.getName().equals(newName)) {
+        if (oldName == null) {
             return;
         }
 
-        String oldName = costumeResource.getName();
+        if (oldName.equals(newName)) {
+            return;
+        }
+
         String origName = oldName;
 
         // If the costume has been renamed already, we want to map from the ORIGINAL name, not the intermediate name
         // (oldName).
-        for (String name : this.renamedCostumes.keySet()) {
-            if (this.renamedCostumes.get(name).equals(oldName)) {
+        for (String name : renamedCostumes.keySet()) {
+            if (renamedCostumes.get(name).equals(oldName)) {
                 origName = name;
                 break;
             }
         }
 
-        this.renamedCostumes.put(origName, newName);
+        renamedCostumes.put(origName, newName);
 
-        this.costumes.remove(oldName);
-        this.costumes.put(newName, costumeResource);
+        costumes.remove(oldName);
+        costumes.put(newName, costume);
     }
 
     // TODO Deprecate Resources.getCompanionCostume - Update all games.
@@ -684,7 +680,7 @@ public class Resources extends Loadable
      * <p>
      * By creating multiple strings all named "bullet" within a ship's costume, the code above will randomly pick from
      * the named costumes.
-     * 
+     *
      * @param sourceCostume
      *            The costume who's strings are search to find the name of another costume.
      * @param name
@@ -705,23 +701,11 @@ public class Resources extends Loadable
 
     public Surface getThumbnail(Costume costume)
     {
-        CostumeResource resource = this.getCostumeResource(costume);
-        if (resource == null) {
-            return null;
-        }
-        return this.getThumbnail(resource);
-    }
-
-    public Surface getThumbnail(CostumeResource resource)
-    {
-        Pose pose = resource.getCostume().getPose("default");
+        Pose pose = costume.getPose("default");
         if (pose == null) {
 
-            String text = resource.getCostume().getString("default");
-            if (text == null) {
-                text = resource.name;
-            }
-            TextStyle textStyle = resource.getCostume().getTextStyle("default");
+            String text = costume.getName();
+            TextStyle textStyle = costume.getTextStyle("default");
             if (textStyle == null) {
                 return null;
             }
@@ -774,33 +758,33 @@ public class Resources extends Loadable
 
     public void addScene(SceneStub sceneStub)
     {
-        this.scenes.put(sceneStub.getName(), sceneStub);
+        scenes.put(sceneStub.getName(), sceneStub);
     }
 
     public void removeScene(String name)
     {
-        this.scenes.remove(name);
+        scenes.remove(name);
     }
 
     public SceneStub getScene(String name)
     {
-        return this.scenes.get(name);
+        return scenes.get(name);
     }
 
     public List<String> sceneNames()
     {
-        return sortNames(this.scenes.keySet());
+        return sortNames(scenes.keySet());
     }
 
     public void renameScene(SceneStub sceneStub)
     {
-        for (Entry<String, SceneStub> entry : this.scenes.entrySet()) {
+        for (Entry<String, SceneStub> entry : scenes.entrySet()) {
             if (entry.getValue() == sceneStub) {
-                this.scenes.remove(entry.getKey());
+                scenes.remove(entry.getKey());
                 break;
             }
         }
-        this.scenes.put(sceneStub.getName(), sceneStub);
+        scenes.put(sceneStub.getName(), sceneStub);
     }
 
     public boolean isValidScript(String name)
@@ -834,18 +818,18 @@ public class Resources extends Loadable
             return false;
         }
 
-        this.registry.add(className);
+        registry.add(className);
         return true;
     }
 
     public Game getGame()
     {
-        return this.game;
+        return game;
     }
 
     public boolean renamesPending()
     {
-        return !this.renamedCostumes.isEmpty();
+        return !renamedCostumes.isEmpty();
     }
 
     public void renameSubjectsInScenes() throws Exception
@@ -855,7 +839,7 @@ public class Resources extends Loadable
             Scene scene = sceneStub.load();
             sceneStub.save(scene);
         }
-        this.renamedCostumes.clear();
+        renamedCostumes.clear();
     }
 
 }

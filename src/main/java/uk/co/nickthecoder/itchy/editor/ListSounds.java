@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.Costume;
-import uk.co.nickthecoder.itchy.CostumeResource;
 import uk.co.nickthecoder.itchy.ManagedSound;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.SoundResource;
@@ -62,9 +61,9 @@ public class ListSounds extends ListSubjects<SoundResource>
         filterMap.put(" * All * ", all);
 
         for (String name : this.resources.costumeNames()) {
-            CostumeResource cr = this.resources.getCostumeResource(name);
-            Filter filter = new CostumeFilter(cr);
-            filterMap.put(cr.getName(), filter);
+            Costume costume = this.resources.getCostume(name);
+            Filter filter = new CostumeFilter(costume);
+            filterMap.put(costume.getName(), filter);
         }
 
         this.filterPickerButton = new ThumbnailedPickerButton<Filter>("Filter", all, filterMap);
@@ -191,8 +190,7 @@ public class ListSounds extends ListSubjects<SoundResource>
         StringList usedBy = new StringList();
 
         for (String costumeName : this.resources.costumeNames()) {
-            CostumeResource cr = this.resources.getCostumeResource(costumeName);
-            Costume costume = cr.getCostume();
+            Costume costume = this.resources.getCostume(costumeName);
             for (String resourceName : costume.getSoundNames()) {
                 for (ManagedSound managedSound : costume.getSoundChoices(resourceName)) {
                     if (managedSound.soundResource == soundResource) {
@@ -217,17 +215,16 @@ public class ListSounds extends ListSubjects<SoundResource>
     
     class CostumeFilter implements Filter
     {
-        CostumeResource costumeResource;
+        Costume costume;
 
-        CostumeFilter( CostumeResource costumeResource )
+        CostumeFilter( Costume costume)
         {
-            this.costumeResource = costumeResource;
+            this.costume = costume;
         }
 
         @Override
         public boolean accept( SoundResource soundResource )
         {
-            Costume costume = this.costumeResource.getCostume();
             while (costume != null) {
                 for (String eventName : costume.getSoundNames()) {
                     for (ManagedSound ms : costume.getSoundChoices(eventName)) {
@@ -245,7 +242,7 @@ public class ListSounds extends ListSubjects<SoundResource>
         @Override
         public Surface getThumbnail()
         {
-            return this.costumeResource.getThumbnail();
+            return this.costume.getThumbnail();
         }
     }
 }

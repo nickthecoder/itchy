@@ -10,7 +10,7 @@ import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.Surface;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 
-public class EditNinePatch extends EditSubject<NinePatch>
+public class EditNinePatch extends EditNamedSubject<NinePatch>
 {
 
     public EditNinePatch(Resources resources, ListNinePatches list, NinePatch subject, boolean adding)

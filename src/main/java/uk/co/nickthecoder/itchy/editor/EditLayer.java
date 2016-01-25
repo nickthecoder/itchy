@@ -15,7 +15,7 @@ import uk.co.nickthecoder.itchy.gui.Notebook;
 import uk.co.nickthecoder.itchy.gui.PlainContainer;
 import uk.co.nickthecoder.itchy.gui.PropertiesForm;
 
-public class EditLayer extends EditSubject<Layer>
+public class EditLayer extends EditNamedSubject<Layer>
 {
 
     private Layout layout;

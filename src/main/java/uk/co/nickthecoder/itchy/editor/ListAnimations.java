@@ -6,7 +6,6 @@ import java.util.List;
 
 import uk.co.nickthecoder.itchy.AnimationResource;
 import uk.co.nickthecoder.itchy.Costume;
-import uk.co.nickthecoder.itchy.CostumeResource;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.Thumbnailed;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
@@ -53,9 +52,9 @@ public class ListAnimations extends ListSubjects<AnimationResource>
         filterMap.put(" * All * ", all);
         
         for (String name : this.resources.costumeNames()) {
-            CostumeResource cr = this.resources.getCostumeResource(name);
-            Filter filter = new CostumeFilter(cr);
-            filterMap.put(cr.getName(), filter);
+            Costume costume = this.resources.getCostume(name);
+            Filter filter = new CostumeFilter(costume);
+            filterMap.put(costume.getName(), filter);
         }
 
         this.filterPickerButton = new ThumbnailedPickerButton<Filter>("Filter", all, filterMap);
@@ -127,17 +126,16 @@ public class ListAnimations extends ListSubjects<AnimationResource>
 
     class CostumeFilter implements Filter
     {
-        CostumeResource costumeResource;
+        Costume costume;
 
-        CostumeFilter(CostumeResource costumeResource)
+        CostumeFilter(Costume costume)
         {
-            this.costumeResource = costumeResource;
+            this.costume = costume;
         }
 
         @Override
         public boolean accept(AnimationResource animationResource)
         {
-            Costume costume = this.costumeResource.getCostume();
             while (costume != null) {
                 for (String eventName : costume.getAnimationNames()) {
                     for (AnimationResource other : costume.getAnimationChoices(eventName)) {
@@ -154,7 +152,7 @@ public class ListAnimations extends ListSubjects<AnimationResource>
         @Override
         public Surface getThumbnail()
         {
-            return this.costumeResource.getThumbnail();
+            return this.costume.getThumbnail();
         }
     }
 

@@ -277,7 +277,7 @@ public class ResourcesReader
             String roleName = costumeTag.getOptionalAttribute("role", PlainRole.class.getName());
             ClassName roleClassName = new ClassName(Role.class, roleName);
 
-            if (this.resources.checkClassName(roleClassName)) {
+            if (roleClassName.isValid(resources.scriptManager)) {
                 costume.roleClassName = roleClassName;
             } else {
                 throw new XMLException("Expected a subclass of Role : " + costume.roleClassName);
@@ -379,9 +379,9 @@ public class ResourcesReader
                 readProperties(propertiesTag, costume.getCostumeFeatures());
             }
 
-            CostumeResource resource = new CostumeResource(this.resources, costumeName, costume);
-            resource.setOrder(order);
-            this.resources.addCostume(resource);
+            costume.setOrder(order);
+            costume.setName(costumeName);
+            this.resources.addCostume(costume);
 
         }
 
@@ -390,12 +390,12 @@ public class ResourcesReader
             for (String key : costume.companionStringChoices.keySet()) {
                 List<String> costumeNames = costume.companionStringChoices.get(key);
                 for (String companionName : costumeNames) {
-                    CostumeResource costumeResource = resources.getCostumeResource(companionName);
-                    if (costumeResource == null) {
+                    Costume companion = resources.getCostume(companionName);
+                    if (companion == null) {
                         // TODO How should this be handled?
                         System.err.println("Companion costume not found : " + companionName);
                     } else {
-                        costume.addCompanion(key, costumeResource);
+                        costume.addCompanion(key, companion);
                     }
                 }
             }

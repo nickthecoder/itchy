@@ -4,7 +4,7 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.gui;
 
-import uk.co.nickthecoder.itchy.CostumeResource;
+import uk.co.nickthecoder.itchy.Costume;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.jame.Surface;
 
@@ -43,16 +43,16 @@ public abstract class CostumePicker extends Window
         }
 
         for (String name : this.resources.costumeNames()) {
-            CostumeResource costumeResource = this.resources.getCostumeResource(name);
+            Costume costume = this.resources.getCostume(name);
 
-            AbstractComponent component = this.createButton(costumeResource);
+            AbstractComponent component = this.createButton(costume);
 
             gridLayout.addChild(component);
         }
         gridLayout.endRow();
     }
 
-    private AbstractComponent createButton( final CostumeResource costumeResource )
+    private AbstractComponent createButton( final Costume costume)
     {
         // final Pose pose = poseResource.pose;
         PlainContainer container = new PlainContainer();
@@ -60,9 +60,9 @@ public abstract class CostumePicker extends Window
         container.setXAlignment(0.5f);
 
         GuiButton button;
-        Surface surface = costumeResource == null ? null : costumeResource.getThumbnail();
+        Surface surface = costume == null ? null : costume.getThumbnail();
         if (surface == null) {
-            button = new GuiButton(costumeResource == null ? this.nullText : costumeResource.getName());
+            button = new GuiButton(costume == null ? this.nullText : costume.getName());
         } else {
             ImageComponent img = new ImageComponent(surface);
             button = new GuiButton(img);
@@ -73,11 +73,11 @@ public abstract class CostumePicker extends Window
             public void action()
             {
                 CostumePicker.this.hide();
-                CostumePicker.this.pick(costumeResource);
+                CostumePicker.this.pick(costume);
             }
         });
 
-        Label label = new Label(costumeResource == null ? this.nullText : costumeResource.getName());
+        Label label = new Label(costume == null ? this.nullText : costume.getName());
 
         container.addChild(button);
         container.addChild(label);
@@ -85,6 +85,6 @@ public abstract class CostumePicker extends Window
         return container;
     }
 
-    public abstract void pick( CostumeResource costumeResource );
+    public abstract void pick( Costume costume );
 
 }

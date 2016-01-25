@@ -267,8 +267,7 @@ public class ResourcesWriter extends XMLWriter
 
     private void writeCostume(String name) throws XMLException
     {
-        CostumeResource cr = this.resources.getCostumeResource(name);
-        Costume costume = cr.getCostume();
+        Costume costume = this.resources.getCostume(name);
         String baseName = null;
 
         Costume extendedCostume = costume.getExtendedFrom();
@@ -283,17 +282,16 @@ public class ResourcesWriter extends XMLWriter
                 this.writeCostume(baseName);
             }
 
-            this.writeCostume(cr, name, baseName);
+            this.writeCostume(costume, name, baseName);
 
         } else {
-            this.writeCostume(cr, name, null);
+            this.writeCostume(costume, name, null);
         }
     }
 
-    private void writeCostume(CostumeResource cr, String name, String baseName)
+    private void writeCostume(Costume costume, String name, String baseName)
         throws XMLException
     {
-        Costume simpleCostume = cr.getCostume();
 
         if (this.writtenCostumeName.contains(name)) {
             return;
@@ -301,24 +299,24 @@ public class ResourcesWriter extends XMLWriter
 
         this.beginTag("costume");
         this.attribute("name", name);
-        this.attribute("defaultZOrder", simpleCostume.defaultZOrder);
-        this.attribute("order", cr.getOrder());
-        this.attribute("showInDesigner", simpleCostume.showInDesigner);
+        this.attribute("defaultZOrder", costume.defaultZOrder);
+        this.attribute("order", costume.getOrder());
+        this.attribute("showInDesigner", costume.showInDesigner);
 
         if (baseName != null) {
             this.attribute("extends", baseName);
         }
-        if (!PlainRole.class.getName().equals(simpleCostume.roleClassName.name)) {
-            this.attribute("role", simpleCostume.roleClassName.name);
+        if (!PlainRole.class.getName().equals(costume.roleClassName.name)) {
+            this.attribute("role", costume.roleClassName.name);
         }
 
-        this.writeCostumePoses(simpleCostume);
-        this.writeCostumeStrings(simpleCostume);
-        this.writeCostumeSounds(simpleCostume);
-        this.writeCostumeFonts(simpleCostume);
-        this.writeCostumeAnimations(simpleCostume);
-        this.writeCostumeCompanions(simpleCostume);
-        this.writeCostumeProperties(simpleCostume);
+        this.writeCostumePoses(costume);
+        this.writeCostumeStrings(costume);
+        this.writeCostumeSounds(costume);
+        this.writeCostumeFonts(costume);
+        this.writeCostumeAnimations(costume);
+        this.writeCostumeCompanions(costume);
+        this.writeCostumeProperties(costume);
 
         this.endTag("costume");
 
@@ -430,10 +428,10 @@ public class ResourcesWriter extends XMLWriter
     private void writeCostumeCompanions(Costume costume) throws XMLException
     {
         for (String name : costume.getCompanionNames()) {
-            for (CostumeResource costumeResource : costume.getCompanionChoices(name)) {
+            for (Costume companion : costume.getCompanionChoices(name)) {
                 this.beginTag("companion");
                 this.attribute("name", name);
-                this.attribute("companion", costumeResource.name);
+                this.attribute("companion", companion.getName());
                 this.endTag("companion");
             }
         }

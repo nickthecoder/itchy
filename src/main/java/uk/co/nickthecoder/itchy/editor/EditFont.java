@@ -3,7 +3,7 @@ package uk.co.nickthecoder.itchy.editor;
 import uk.co.nickthecoder.itchy.Font;
 import uk.co.nickthecoder.itchy.Resources;
 
-public class EditFont extends EditSubject<Font>
+public class EditFont extends EditNamedSubject<Font>
 {
 
     public EditFont(Resources resources, ListSubjects<Font> listSubjects, Font subject, boolean isNew)

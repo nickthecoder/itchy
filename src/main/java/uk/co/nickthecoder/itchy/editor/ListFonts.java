@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.Costume;
-import uk.co.nickthecoder.itchy.CostumeResource;
 import uk.co.nickthecoder.itchy.Font;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.Scene;
@@ -77,8 +76,7 @@ public class ListFonts extends ListSubjects<Font>
         StringList usedBy = new StringList();
 
         for (String costumeName : this.resources.costumeNames()) {
-            CostumeResource cr = this.resources.getCostumeResource(costumeName);
-            Costume costume = cr.getCostume();
+            Costume costume = this.resources.getCostume(costumeName);
             for (String resourceName : costume.getTextStyleNames()) {
                 for (TextStyle ts : costume.getTextStyleChoices(resourceName)) {
                     if (ts.getFont() == font) {

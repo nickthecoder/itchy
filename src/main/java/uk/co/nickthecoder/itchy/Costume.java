@@ -5,19 +5,51 @@
 package uk.co.nickthecoder.itchy;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
+import uk.co.nickthecoder.itchy.ManagedSound.MultipleRole;
 import uk.co.nickthecoder.itchy.animation.Animation;
+import uk.co.nickthecoder.itchy.property.AnimationProperty;
+import uk.co.nickthecoder.itchy.property.BooleanProperty;
+import uk.co.nickthecoder.itchy.property.ClassNameProperty;
+import uk.co.nickthecoder.itchy.property.CostumeProperty;
+import uk.co.nickthecoder.itchy.property.DoubleProperty;
+import uk.co.nickthecoder.itchy.property.EnumProperty;
+import uk.co.nickthecoder.itchy.property.FontProperty;
+import uk.co.nickthecoder.itchy.property.IntegerProperty;
+import uk.co.nickthecoder.itchy.property.Property;
+import uk.co.nickthecoder.itchy.property.PropertySubject;
+import uk.co.nickthecoder.itchy.property.RGBAProperty;
+import uk.co.nickthecoder.itchy.property.StringProperty;
 import uk.co.nickthecoder.itchy.role.PlainRole;
 import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.jame.Sound;
+import uk.co.nickthecoder.jame.Surface;
 
-public class Costume implements Cloneable
+public class Costume implements NamedSubject<Costume>, Cloneable
 {
-    private static final Random random = new Random();
+
+    protected static final List<Property<Costume, ?>> properties = new ArrayList<Property<Costume, ?>>();
+
+    static {
+        properties.add(new StringProperty<Costume>("name"));
+        properties.add(new ClassNameProperty<Costume>(Role.class, "roleClassName"));
+        properties.add(new IntegerProperty<Costume>("defaultZOrder"));
+        properties.add(new BooleanProperty<Costume>("showInDesigner"));
+        properties.add(new IntegerProperty<Costume>("order").hint("(within scene designer's toolbox)"));
+    }
+
+    @Override
+    public List<Property<Costume, ?>> getProperties()
+    {
+        return properties;
+    }
+
+    private String name;
 
     private Costume extendedFrom;
 
@@ -26,6 +58,8 @@ public class Costume implements Cloneable
     public int defaultZOrder;
 
     public boolean showInDesigner = true;
+
+    private int order;
 
     private CostumeFeatures costumeFeatures;
 
@@ -44,7 +78,7 @@ public class Costume implements Cloneable
      * to create companion objects. For example, "Space Miner" (asteroids) uses this when one "rock" breaks up into
      * smaller rocks. The smaller rocks are the companions of the larger one.
      */
-    private HashMap<String, List<CostumeResource>> companionChoices;
+    private HashMap<String, List<Costume>> companionChoices;
 
     /**
      * When loading a costume, we may have circular references, which can only be resolved when all costumes have been
@@ -53,6 +87,8 @@ public class Costume implements Cloneable
      */
     public HashMap<String, List<String>> companionStringChoices;
 
+    private static final Random random = new Random();
+
     public Costume()
     {
         this(null);
@@ -60,15 +96,52 @@ public class Costume implements Cloneable
 
     public Costume(Costume extendsFrom)
     {
-        this.extendedFrom = extendsFrom;
+        extendedFrom = extendsFrom;
 
-        this.stringChoices = new HashMap<String, List<String>>();
-        this.soundChoices = new HashMap<String, List<ManagedSound>>();
-        this.poseChoices = new HashMap<String, List<PoseResource>>();
-        this.textStyleChoices = new HashMap<String, List<TextStyle>>();
-        this.animationChoices = new HashMap<String, List<AnimationResource>>();
-        this.companionChoices = new HashMap<String, List<CostumeResource>>();
-        this.companionStringChoices = new HashMap<String, List<String>>();
+        stringChoices = new HashMap<String, List<String>>();
+        soundChoices = new HashMap<String, List<ManagedSound>>();
+        poseChoices = new HashMap<String, List<PoseResource>>();
+        textStyleChoices = new HashMap<String, List<TextStyle>>();
+        animationChoices = new HashMap<String, List<AnimationResource>>();
+        companionChoices = new HashMap<String, List<Costume>>();
+        companionStringChoices = new HashMap<String, List<String>>();
+    }
+
+    @Override
+    public String getName()
+    {
+        return name;
+    }
+
+    @Override
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    public int getOrder()
+    {
+        return order;
+    }
+
+    public void setOrder(int order)
+    {
+        this.order = order;
+    }
+
+    public String getExtendedFromName()
+    {
+        Costume base = this.getExtendedFrom();
+        if (base == null) {
+            return null;
+        } else {
+            return Itchy.getGame().resources.getCostumeName(base);
+        }
+    }
+
+    public Surface getThumbnail()
+    {
+        return Itchy.getGame().resources.getThumbnail(this);
     }
 
     public Actor createActor(String startEvent)
@@ -76,7 +149,7 @@ public class Costume implements Cloneable
         Actor actor = new Actor(this, startEvent);
         Role role;
         try {
-            role = AbstractRole.createRole(Itchy.getGame().resources, this.roleClassName);
+            role = AbstractRole.createRole(Itchy.getGame().resources, roleClassName);
 
         } catch (Exception e) {
             role = new PlainRole();
@@ -94,80 +167,80 @@ public class Costume implements Cloneable
     {
         // If the Role has changed since we last created the costume properties, then we can't use
         // the old costumeProperties.
-        if ((this.roleClassNameForCostumeFeatures != null)
-            && (!this.roleClassNameForCostumeFeatures.equals(this.roleClassName.name))) {
-            
-            this.costumeFeatures = null;
+        if ((roleClassNameForCostumeFeatures != null)
+            && (!roleClassNameForCostumeFeatures.equals(roleClassName.name))) {
+
+            costumeFeatures = null;
         }
 
-        if (this.costumeFeatures == null) {
+        if (costumeFeatures == null) {
             try {
-                roleClassNameForCostumeFeatures = this.roleClassName.name;
-                Role dummyRole = AbstractRole.createRole(Itchy.getGame().resources, this.roleClassName);
-                this.costumeFeatures = dummyRole.createCostumeFeatures(this);
+                roleClassNameForCostumeFeatures = roleClassName.name;
+                Role dummyRole = AbstractRole.createRole(Itchy.getGame().resources, roleClassName);
+                costumeFeatures = dummyRole.createCostumeFeatures(this);
             } catch (Exception e) {
                 e.printStackTrace();
-                this.costumeFeatures = new CostumeFeatures(this);
+                costumeFeatures = new CostumeFeatures(this);
             }
         }
-        return this.costumeFeatures;
+        return costumeFeatures;
     }
 
     public Costume getExtendedFrom()
     {
-        return this.extendedFrom;
+        return extendedFrom;
     }
 
     public void setExtendedFrom(Costume costume)
     {
-        this.extendedFrom = costume;
+        extendedFrom = costume;
     }
 
     public Set<String> getTextStyleNames()
     {
-        return this.textStyleChoices.keySet();
+        return textStyleChoices.keySet();
     }
 
     public List<String> getStringNames()
     {
-        return Resources.sortNames(this.stringChoices.keySet());
+        return Resources.sortNames(stringChoices.keySet());
     }
 
     public List<String> getPoseNames()
     {
-        return Resources.sortNames(this.poseChoices.keySet());
+        return Resources.sortNames(poseChoices.keySet());
     }
 
     public List<String> getSoundNames()
     {
-        return Resources.sortNames(this.soundChoices.keySet());
+        return Resources.sortNames(soundChoices.keySet());
     }
 
     public List<String> getAnimationNames()
     {
-        return Resources.sortNames(this.animationChoices.keySet());
+        return Resources.sortNames(animationChoices.keySet());
     }
 
     public List<String> getCompanionNames()
     {
-        return Resources.sortNames(this.companionChoices.keySet());
+        return Resources.sortNames(companionChoices.keySet());
     }
 
     // String
 
     public void addString(String name, String value)
     {
-        List<String> choices = this.stringChoices.get(name);
+        List<String> choices = stringChoices.get(name);
         if (choices == null) {
             choices = new ArrayList<String>();
-            this.stringChoices.put(name, choices);
+            stringChoices.put(name, choices);
         }
         choices.add(value);
     }
 
     public void removeString(String name, String value)
     {
-        List<String> choices = this.stringChoices.get(name);
+        List<String> choices = stringChoices.get(name);
         assert (choices.contains(value));
         choices.remove(value);
     }
@@ -184,10 +257,10 @@ public class Costume implements Cloneable
 
     public String getString(String name)
     {
-        List<String> strings = this.stringChoices.get(name);
+        List<String> strings = stringChoices.get(name);
         if ((strings == null) || (strings.size() == 0)) {
-            if (this.extendedFrom != null) {
-                return this.extendedFrom.getString(name);
+            if (extendedFrom != null) {
+                return extendedFrom.getString(name);
             }
             return null;
         }
@@ -197,80 +270,74 @@ public class Costume implements Cloneable
 
     public List<String> getStringChoices(String name)
     {
-        return this.stringChoices.get(name);
+        return stringChoices.get(name);
     }
 
     // Companion (Costume)
 
-    public void addCompanion(String name, CostumeResource costumeResource)
+    public void addCompanion(String name, Costume costume)
     {
-        List<CostumeResource> choices = this.companionChoices.get(name);
+        List<Costume> choices = companionChoices.get(name);
         if (choices == null) {
-            choices = new ArrayList<CostumeResource>();
-            this.companionChoices.put(name, choices);
+            choices = new ArrayList<Costume>();
+            companionChoices.put(name, choices);
         }
-        choices.add(costumeResource);
+        choices.add(costume);
     }
 
-    public void removeCompanion(String name, CostumeResource costumeResource)
+    public void removeCompanion(String name, Costume costume)
     {
-        List<CostumeResource> choices = this.companionChoices.get(name);
-        assert (choices.contains(costumeResource));
-        choices.remove(costumeResource);
+        List<Costume> choices = companionChoices.get(name);
+        assert (choices.contains(costume));
+        choices.remove(costume);
     }
 
-    public CostumeResource getCompanionResource(String name)
+    public Costume getCompanion(String name)
     {
-        List<CostumeResource> choices = this.companionChoices.get(name);
+        List<Costume> choices = companionChoices.get(name);
         if ((choices == null) || (choices.size() == 0)) {
-            if (this.extendedFrom != null) {
-                return this.extendedFrom.getCompanionResource(name);
+            if (extendedFrom != null) {
+                return extendedFrom.getCompanion(name);
             }
             return null;
         }
         if (choices.size() == 0) {
             return null;
         }
-        CostumeResource costumeResource = choices.get(random.nextInt(choices.size()));
-        return costumeResource;
+        Costume costume = choices.get(random.nextInt(choices.size()));
+        return costume;
     }
 
-    public Costume getCompanion(String name)
+    public List<Costume> getCompanionChoices(String name)
     {
-        CostumeResource resource = getCompanionResource(name);
-        return resource == null ? null : resource.getCostume();
-    }
-
-    public List<CostumeResource> getCompanionChoices(String name)
-    {
-        return this.companionChoices.get(name);
+        return companionChoices.get(name);
     }
 
     // Pose
 
     public void addPose(String name, PoseResource poseResource)
     {
-        List<PoseResource> choices = this.poseChoices.get(name);
+        List<PoseResource> choices = poseChoices.get(name);
         if (choices == null) {
             choices = new ArrayList<PoseResource>();
-            this.poseChoices.put(name, choices);
+            poseChoices.put(name, choices);
         }
         choices.add(poseResource);
     }
 
     public void removePose(String name, PoseResource resource)
     {
-        List<PoseResource> choices = this.poseChoices.get(name);
+        List<PoseResource> choices = poseChoices.get(name);
         assert (choices.contains(resource));
         choices.remove(resource);
     }
 
     public PoseResource getPoseResource(String name)
     {
-        List<PoseResource> choices = this.poseChoices.get(name);
+        List<PoseResource> choices = poseChoices.get(name);
         if ((choices == null) || (choices.size() == 0)) {
-            if (this.extendedFrom != null) {
-                return this.extendedFrom.getPoseResource(name);
+            if (extendedFrom != null) {
+                return extendedFrom.getPoseResource(name);
             }
             return null;
         }
@@ -289,16 +356,16 @@ public class Costume implements Cloneable
 
     public List<PoseResource> getPoseChoices(String name)
     {
-        return this.poseChoices.get(name);
+        return poseChoices.get(name);
     }
 
     // Sound
     public void addSound(String name, ManagedSound managedSound)
     {
-        List<ManagedSound> choices = this.soundChoices.get(name);
+        List<ManagedSound> choices = soundChoices.get(name);
         if (choices == null) {
             choices = new ArrayList<ManagedSound>();
-            this.soundChoices.put(name, choices);
+            soundChoices.put(name, choices);
         }
         choices.add(managedSound);
 
@@ -313,7 +380,7 @@ public class Costume implements Cloneable
 
     public void removeSound(String name, ManagedSound value)
     {
-        List<ManagedSound> choices = this.soundChoices.get(name);
+        List<ManagedSound> choices = soundChoices.get(name);
         assert (choices.contains(value));
         choices.remove(value);
     }
@@ -330,10 +397,10 @@ public class Costume implements Cloneable
 
     public ManagedSound getCostumeSound(String name)
     {
-        List<ManagedSound> choices = this.soundChoices.get(name);
+        List<ManagedSound> choices = soundChoices.get(name);
         if ((choices == null) || (choices.size() == 0)) {
-            if (this.extendedFrom != null) {
-                return this.extendedFrom.getCostumeSound(name);
+            if (extendedFrom != null) {
+                return extendedFrom.getCostumeSound(name);
             }
             return null;
         }
@@ -349,34 +416,34 @@ public class Costume implements Cloneable
 
     public List<ManagedSound> getSoundChoices(String name)
     {
-        return this.soundChoices.get(name);
+        return soundChoices.get(name);
     }
 
     // TextStyle
 
     public void addTextStyle(String name, TextStyle textStyle)
     {
-        List<TextStyle> choices = this.textStyleChoices.get(name);
+        List<TextStyle> choices = textStyleChoices.get(name);
         if (choices == null) {
             choices = new ArrayList<TextStyle>();
-            this.textStyleChoices.put(name, choices);
+            textStyleChoices.put(name, choices);
         }
         choices.add(textStyle);
     }
 
     public void removeTextStyle(String name, TextStyle value)
     {
-        List<TextStyle> choices = this.textStyleChoices.get(name);
+        List<TextStyle> choices = textStyleChoices.get(name);
         assert (choices.contains(value));
         choices.remove(value);
     }
 
     public TextStyle getTextStyle(String name)
     {
-        List<TextStyle> choices = this.textStyleChoices.get(name);
+        List<TextStyle> choices = textStyleChoices.get(name);
         if ((choices == null) || (choices.size() == 0)) {
-            if (this.extendedFrom != null) {
-                return this.extendedFrom.getTextStyle(name);
+            if (extendedFrom != null) {
+                return extendedFrom.getTextStyle(name);
             }
             return null;
         }
@@ -391,34 +458,34 @@ public class Costume implements Cloneable
 
     public List<TextStyle> getTextStyleChoices(String name)
     {
-        return this.textStyleChoices.get(name);
+        return textStyleChoices.get(name);
     }
 
     // Animation
 
     public void addAnimation(String name, AnimationResource animationResource)
     {
-        List<AnimationResource> choices = this.animationChoices.get(name);
+        List<AnimationResource> choices = animationChoices.get(name);
         if (choices == null) {
             choices = new ArrayList<AnimationResource>();
-            this.animationChoices.put(name, choices);
+            animationChoices.put(name, choices);
         }
         choices.add(animationResource);
     }
 
     public void removeAnimation(String name, AnimationResource value)
     {
-        List<AnimationResource> choices = this.animationChoices.get(name);
+        List<AnimationResource> choices = animationChoices.get(name);
         assert (choices.contains(value));
         choices.remove(value);
     }
 
     public AnimationResource getAnimationResource(String name)
     {
-        List<AnimationResource> choices = this.animationChoices.get(name);
+        List<AnimationResource> choices = animationChoices.get(name);
         if ((choices == null) || (choices.size() == 0)) {
-            if (this.extendedFrom != null) {
-                return this.extendedFrom.getAnimationResource(name);
+            if (extendedFrom != null) {
+                return extendedFrom.getAnimationResource(name);
             }
             return null;
         }
@@ -434,7 +501,7 @@ public class Costume implements Cloneable
 
     public List<AnimationResource> getAnimationChoices(String name)
     {
-        return this.animationChoices.get(name);
+        return animationChoices.get(name);
     }
 
     public Costume copy(Resources resource)
@@ -442,42 +509,42 @@ public class Costume implements Cloneable
         try {
             Costume result = (Costume) super.clone();
 
-            result.roleClassName = new ClassName(this.roleClassName.baseClass, this.roleClassName.name);
+            result.roleClassName = new ClassName(roleClassName.baseClass, roleClassName.name);
 
             // result.costumeProperties = this.costumeProperties.copy();
 
             result.animationChoices = new HashMap<String, List<AnimationResource>>();
-            for (String eventName : this.animationChoices.keySet()) {
+            for (String eventName : animationChoices.keySet()) {
                 List<AnimationResource> list = new ArrayList<AnimationResource>();
-                list.addAll(this.animationChoices.get(eventName));
+                list.addAll(animationChoices.get(eventName));
                 result.animationChoices.put(eventName, list);
             }
 
             result.stringChoices = new HashMap<String, List<String>>();
-            for (String eventName : this.stringChoices.keySet()) {
+            for (String eventName : stringChoices.keySet()) {
                 List<String> list = new ArrayList<String>();
-                list.addAll(this.stringChoices.get(eventName));
+                list.addAll(stringChoices.get(eventName));
                 result.stringChoices.put(eventName, list);
             }
 
             result.soundChoices = new HashMap<String, List<ManagedSound>>();
-            for (String eventName : this.soundChoices.keySet()) {
+            for (String eventName : soundChoices.keySet()) {
                 List<ManagedSound> list = new ArrayList<ManagedSound>();
-                list.addAll(this.soundChoices.get(eventName));
+                list.addAll(soundChoices.get(eventName));
                 result.soundChoices.put(eventName, list);
             }
 
             result.poseChoices = new HashMap<String, List<PoseResource>>();
-            for (String eventName : this.poseChoices.keySet()) {
+            for (String eventName : poseChoices.keySet()) {
                 List<PoseResource> list = new ArrayList<PoseResource>();
-                list.addAll(this.poseChoices.get(eventName));
+                list.addAll(poseChoices.get(eventName));
                 result.poseChoices.put(eventName, list);
             }
 
             result.textStyleChoices = new HashMap<String, List<TextStyle>>();
-            for (String eventName : this.textStyleChoices.keySet()) {
+            for (String eventName : textStyleChoices.keySet()) {
                 List<TextStyle> list = new ArrayList<TextStyle>();
-                list.addAll(this.textStyleChoices.get(eventName));
+                list.addAll(textStyleChoices.get(eventName));
                 result.textStyleChoices.put(eventName, list);
             }
 
@@ -488,13 +555,116 @@ public class Costume implements Cloneable
         }
     }
 
+    @Override
     public String toString()
     {
-        try {
-            CostumeResource cr = Itchy.getGame().resources.getCostumeResource(this);
-            return "Costume " + cr.getName();
-        } catch (Exception e) {
-            return "Costume (not named in resources)";
+        return "Costume " + getName();
+    }
+
+    public static final Comparator<Costume> orderComparator = new Comparator<Costume>()
+    {
+        @Override
+        public int compare(Costume a, Costume b)
+        {
+            if (a.getOrder() != b.getOrder()) {
+                return a.getOrder() - b.getOrder();
+            } else {
+                return a.getName().compareTo(b.getName());
+            }
         }
+    };
+
+    public static class Event implements PropertySubject<Event>
+    {
+        protected static final List<Property<Event, ?>> event_properties = new ArrayList<Property<Event, ?>>();
+
+        protected static final List<Property<Event, ?>> pose_properties = new ArrayList<Property<Event, ?>>();
+
+        protected static final List<Property<Event, ?>> animation_properties = new ArrayList<Property<Event, ?>>();
+
+        protected static final List<Property<Event, ?>> string_properties = new ArrayList<Property<Event, ?>>();
+
+        protected static final List<Property<Event, ?>> companion_properties = new ArrayList<Property<Event, ?>>();
+
+        protected static final List<Property<Event, ?>> sound_properties = new ArrayList<Property<Event, ?>>();
+
+        protected static final List<Property<Event, ?>> text_style_properties = new ArrayList<Property<Event, ?>>();
+
+        static {
+            event_properties.add(new StringProperty<Event>("eventName"));
+
+            pose_properties.addAll(event_properties);
+            // TODO Add this back when I've refactored Pose/PoseResource.
+            // pose_properties.add( new PoseProperty<Event>("data").label("Pose"));
+
+            animation_properties.addAll(event_properties);
+            animation_properties.add( new AnimationProperty<Event>("data").label( "Animation" ));
+
+            string_properties.addAll(event_properties);
+            string_properties.add(new StringProperty<Event>("data").label("String"));
+
+            companion_properties.addAll(event_properties);
+            companion_properties.add( new CostumeProperty<Event>("data").label( "Companion" ));
+
+            sound_properties.addAll(event_properties);
+            sound_properties.add(new IntegerProperty<Event>("data.priority"));
+            sound_properties.add(new DoubleProperty<Event>("data.fadeOutSeconds"));
+            sound_properties.add(new BooleanProperty<Event>("data.fadeOnDeath"));
+            sound_properties.add(new EnumProperty<Event,MultipleRole>("data.multipleRole", MultipleRole.class));
+     
+            
+            text_style_properties.addAll(event_properties);
+            text_style_properties.add(new FontProperty<Event>("data.font"));
+            text_style_properties.add(new IntegerProperty<Event>("data.fontSize"));
+            text_style_properties.add(new RGBAProperty<Event>("data.color"));
+            text_style_properties.add(new DoubleProperty<Event>("data.xAlignment").hint("0..1"));
+            text_style_properties.add(new DoubleProperty<Event>("data.yAlignment").hint("0..1"));
+            text_style_properties.add(new IntegerProperty<Event>("data.marginTop"));
+            text_style_properties.add(new IntegerProperty<Event>("data.marginRight"));
+            text_style_properties.add(new IntegerProperty<Event>("data.marginBottom"));
+
+        }
+
+        @Override
+        public List<Property<Event, ?>> getProperties()
+        {
+            if (data instanceof PoseResource) {
+                return pose_properties;
+            } else if (data instanceof String) {
+                return string_properties;
+            } else if (data instanceof ManagedSound) {
+                return sound_properties;
+            } else if (data instanceof Costume) {
+                return companion_properties;
+            } else if (data instanceof TextStyle) {
+                return text_style_properties;
+            } else if (data instanceof AnimationResource ) {
+                return animation_properties;
+            }
+            return event_properties;
+        }
+
+        public String eventName;
+
+        public Object data;
+
+        public String type;
+
+        public Event(String eventName, Object object, String type)
+        {
+            this.eventName = eventName;
+            data = object;
+            this.type = type;
+        }
+
+        public String getResourceName()
+        {
+            if (data instanceof Named) {
+                return ((Named) data).getName();
+            } else {
+                return "";
+            }
+        }
+
     }
 }

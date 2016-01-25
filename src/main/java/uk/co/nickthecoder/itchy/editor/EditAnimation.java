@@ -18,7 +18,7 @@ import uk.co.nickthecoder.itchy.gui.Stylesheet;
 import uk.co.nickthecoder.itchy.gui.VerticalLayout;
 import uk.co.nickthecoder.itchy.gui.VerticalScroll;
 
-public class EditAnimation extends EditSubject<AnimationResource>
+public class EditAnimation extends EditNamedSubject<AnimationResource>
 {
 
     private PlainContainer treeContainer;

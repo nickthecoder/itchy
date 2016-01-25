@@ -211,10 +211,10 @@ public class Scene implements NamedSubject<Scene>
         return false;
     }
 
-    public boolean uses(CostumeResource costumeResource)
+    public boolean uses(Costume costume)
     {
         for (SceneLayer layer : this.sceneLayers) {
-            if (layer.uses(costumeResource)) {
+            if (layer.uses(costume)) {
                 return true;
             }
         }
@@ -295,10 +295,10 @@ public class Scene implements NamedSubject<Scene>
             return false;
         }
 
-        public boolean uses(CostumeResource costumeResource)
+        public boolean uses(Costume costume)
         {
             for (SceneActor sceneActor : this.sceneActors) {
-                if (sceneActor.costume == costumeResource.getCostume()) {
+                if (sceneActor.costume == costume) {
                     return true;
                 }
             }

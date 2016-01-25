@@ -3,7 +3,7 @@ package uk.co.nickthecoder.itchy.editor;
 import uk.co.nickthecoder.itchy.Input;
 import uk.co.nickthecoder.itchy.Resources;
 
-public class EditInput extends EditSubject<Input>
+public class EditInput extends EditNamedSubject<Input>
 {
 
     public EditInput(Resources resources, ListInputs listInputs, Input subject, boolean adding)

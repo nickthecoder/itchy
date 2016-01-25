@@ -10,7 +10,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.Costume;
-import uk.co.nickthecoder.itchy.CostumeResource;
 import uk.co.nickthecoder.itchy.FilePoseResource;
 import uk.co.nickthecoder.itchy.ImagePose;
 import uk.co.nickthecoder.itchy.PoseResource;
@@ -88,9 +87,9 @@ public class PosesEditor extends SubEditor<FilePoseResource>
         filterMap.put(" * All * ", all);
         filterMap.put(" * Shared * ", shared);
         for (String name : this.editor.resources.costumeNames()) {
-            CostumeResource cr = this.editor.resources.getCostumeResource(name);
-            Filter filter = new CostumeFilter(cr);
-            filterMap.put(cr.getName(), filter);
+            Costume costume = this.editor.resources.getCostume(name);
+            Filter filter = new CostumeFilter(costume);
+            filterMap.put(costume.getName(), filter);
         }
 
         this.filterPickerButton = new ThumbnailedPickerButton<Filter>("Filter", all, filterMap);
@@ -237,8 +236,7 @@ public class PosesEditor extends SubEditor<FilePoseResource>
         StringList usedBy = new StringList();
 
         for (String costumeName : this.editor.resources.costumeNames()) {
-            CostumeResource cr = this.editor.resources.getCostumeResource(costumeName);
-            Costume costume = cr.getCostume();
+            Costume costume = this.editor.resources.getCostume(costumeName);
             for (String resourceName : costume.getPoseNames()) {
                 for (PoseResource resource : costume.getPoseChoices(resourceName)) {
                     if (resource == poseResource) {
@@ -312,17 +310,16 @@ public class PosesEditor extends SubEditor<FilePoseResource>
 
     class CostumeFilter implements Filter
     {
-        CostumeResource costumeResource;
+        Costume costume;
 
-        CostumeFilter( CostumeResource costumeResource )
+        CostumeFilter( Costume costume)
         {
-            this.costumeResource = costumeResource;
+            this.costume = costume;
         }
 
         @Override
         public boolean accept( PoseResource poseResource )
         {
-            Costume costume = this.costumeResource.getCostume();
             while (costume != null) {
                 for (String eventName : costume.getPoseNames()) {
                     for (PoseResource other : costume.getPoseChoices(eventName)) {
@@ -339,7 +336,7 @@ public class PosesEditor extends SubEditor<FilePoseResource>
         @Override
         public Surface getThumbnail()
         {
-            return this.costumeResource.getThumbnail();
+            return this.costume.getThumbnail();
         }
     }
 

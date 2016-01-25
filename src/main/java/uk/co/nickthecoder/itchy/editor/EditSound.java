@@ -3,7 +3,7 @@ package uk.co.nickthecoder.itchy.editor;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.SoundResource;
 
-public class EditSound extends EditSubject<SoundResource>
+public class EditSound extends EditNamedSubject<SoundResource>
 {
 
     public EditSound(Resources resources, ListSubjects<SoundResource> listSubjects, SoundResource subject, boolean isNew)
