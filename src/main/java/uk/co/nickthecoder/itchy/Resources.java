@@ -23,7 +23,7 @@ import uk.co.nickthecoder.jame.Surface;
 public class Resources extends Loadable
 {
     public static Resources currentlyLoading = null;
-    
+
     public static Resources getCurrentResources()
     {
         if (currentlyLoading == null) {
@@ -70,7 +70,7 @@ public class Resources extends Loadable
 
     private final HashMap<String, CostumeResource> costumes;
 
-    private final HashMap<String, SceneResource> scenes;
+    private final HashMap<String, SceneStub> scenes;
 
     private final HashMap<String, Layout> layouts;
 
@@ -84,7 +84,7 @@ public class Resources extends Loadable
      * True iff any of the resources have been changed since it was loaded, or last saved.
      */
     private boolean dirty;
-        
+
     public Resources()
     {
         super();
@@ -101,13 +101,13 @@ public class Resources extends Loadable
 
         this.inputs = new HashMap<String, Input>();
         this.costumes = new HashMap<String, CostumeResource>();
-        this.scenes = new HashMap<String, SceneResource>();
+        this.scenes = new HashMap<String, SceneStub>();
 
-        this.layouts = new HashMap<String,Layout>();
-        
+        this.layouts = new HashMap<String, Layout>();
+
         this.renamedCostumes = new HashMap<String, String>();
         this.dirty = false;
-        
+
         this.game = new Game(this);
     }
 
@@ -129,7 +129,7 @@ public class Resources extends Loadable
         result.inputs.putAll(this.inputs);
         result.layouts.putAll(this.layouts);
         result.renamedCostumes.putAll(this.renamedCostumes);
-        
+
         result.setFile(this.getFile());
 
         Itchy.loadingGame(result.game);
@@ -151,16 +151,16 @@ public class Resources extends Loadable
         }
     }
 
-    public boolean isDirty() 
+    public boolean isDirty()
     {
         return this.dirty;
     }
-    
+
     public void dirty()
     {
         this.dirty = true;
     }
-    
+
     public GameInfo getGameInfo()
     {
         return this.gameInfo;
@@ -200,7 +200,7 @@ public class Resources extends Loadable
 
         for (String name : this.poseNames()) {
             // We only care about PoseResources that were loaded.
-            if (! (this.getPoseResource(name) instanceof DynamicPoseResource) ) {
+            if (!(this.getPoseResource(name) instanceof DynamicPoseResource)) {
                 if (resources.getPose(name) == null) {
                     throw new Exception("Pose " + name + " wasn't saved");
                 }
@@ -261,7 +261,7 @@ public class Resources extends Loadable
         } else if (object instanceof CostumeResource) {
             return this.getCostumeResource(object.name) == object;
         }
-        
+
         return false;
     }
 
@@ -280,9 +280,6 @@ public class Resources extends Loadable
         } else if (object instanceof AnimationResource) {
             this.rename2((AnimationResource) object, name);
 
-        } else if (object instanceof SceneResource) {
-            this.rename2((SceneResource) object, name);
-
         } else if (object instanceof CostumeResource) {
             this.rename2((CostumeResource) object, name);
 
@@ -292,7 +289,6 @@ public class Resources extends Loadable
     }
 
     // SpriteSheets
-   
 
     public void addSpriteSheet(SpriteSheet resource)
     {
@@ -303,7 +299,6 @@ public class Resources extends Loadable
     {
         this.spriteSheets.remove(name);
     }
-
 
     public SpriteSheet getSpriteSheet(String name)
     {
@@ -320,7 +315,7 @@ public class Resources extends Loadable
         this.spriteSheets.remove(spriteSheet.getName());
         this.spriteSheets.put(name, spriteSheet);
     }
-    
+
     // Poses
 
     public void addPose(PoseResource resource)
@@ -452,7 +447,7 @@ public class Resources extends Loadable
 
     public void rename(NinePatch ninePatch)
     {
-        for (Entry<String, NinePatch> entry : this.ninePatches.entrySet() ) {
+        for (Entry<String, NinePatch> entry : this.ninePatches.entrySet()) {
             if (entry.getValue() == ninePatch) {
                 this.ninePatches.remove(entry.getKey());
                 break;
@@ -484,8 +479,8 @@ public class Resources extends Loadable
 
     public void renameLayout(Layout layout)
     {
-        System.out.println("Renaming layout " + layout.name );
-        for (Entry<String, Layout> entry : this.layouts.entrySet() ) {
+        System.out.println("Renaming layout " + layout.name);
+        for (Entry<String, Layout> entry : this.layouts.entrySet()) {
             if (entry.getValue() == layout) {
                 this.layouts.remove(entry.getKey());
                 break;
@@ -494,7 +489,6 @@ public class Resources extends Loadable
         this.layouts.put(layout.getName(), layout);
     }
 
-    
     // Sounds
 
     public void addSound(SoundResource soundResource)
@@ -556,16 +550,14 @@ public class Resources extends Loadable
         return this.fonts.get(name);
     }
 
-
     public List<String> fontNames()
     {
         return sortNames(this.fonts.keySet());
     }
 
-
     public void renameFont(Font font)
     {
-        for (Entry<String, Font> entry : this.fonts.entrySet() ) {
+        for (Entry<String, Font> entry : this.fonts.entrySet()) {
             if (entry.getValue() == font) {
                 this.fonts.remove(entry.getKey());
                 break;
@@ -573,7 +565,6 @@ public class Resources extends Loadable
         }
         this.fonts.put(font.getName(), font);
     }
-
 
     /**
      * @return The default font. At the moment this is a randomly picked font! Null if there are no fonts.
@@ -622,7 +613,7 @@ public class Resources extends Loadable
 
     public void renameInput(Input input)
     {
-        for (Entry<String, Input> entry : this.inputs.entrySet() ) {
+        for (Entry<String, Input> entry : this.inputs.entrySet()) {
             if (entry.getValue() == input) {
                 this.inputs.remove(entry.getKey());
                 break;
@@ -815,9 +806,9 @@ public class Resources extends Loadable
 
     // Scenes
 
-    public void addScene(SceneResource sceneResource)
+    public void addScene(SceneStub sceneStub)
     {
-        this.scenes.put(sceneResource.name, sceneResource);
+        this.scenes.put(sceneStub.getName(), sceneStub);
     }
 
     public void removeScene(String name)
@@ -825,7 +816,7 @@ public class Resources extends Loadable
         this.scenes.remove(name);
     }
 
-    public SceneResource getSceneResource(String name)
+    public SceneStub getScene(String name)
     {
         return this.scenes.get(name);
     }
@@ -835,10 +826,15 @@ public class Resources extends Loadable
         return sortNames(this.scenes.keySet());
     }
 
-    void rename2(SceneResource sceneResource, String name)
+    public void renameScene(SceneStub sceneStub)
     {
-        this.scenes.remove(sceneResource.getName());
-        this.scenes.put(name, sceneResource);
+        for (Entry<String, SceneStub> entry : this.scenes.entrySet()) {
+            if (entry.getValue() == sceneStub) {
+                this.scenes.remove(entry.getKey());
+                break;
+            }
+        }
+        this.scenes.put(sceneStub.getName(), sceneStub);
     }
 
     public boolean isValidScript(String name)
@@ -886,13 +882,12 @@ public class Resources extends Loadable
         return !this.renamedCostumes.isEmpty();
     }
 
-    public void loadSaveAllScenes() throws Exception
+    public void renameSubjectsInScenes() throws Exception
     {
         for (String sceneName : this.sceneNames()) {
-            SceneResource sceneResource = this.getSceneResource(sceneName);
-            sceneResource.load();
-            sceneResource.save();
-            sceneResource.unloadScene();
+            SceneStub sceneStub = this.getScene(sceneName);
+            Scene scene = sceneStub.load();
+            sceneStub.save(scene);
         }
         this.renamedCostumes.clear();
     }

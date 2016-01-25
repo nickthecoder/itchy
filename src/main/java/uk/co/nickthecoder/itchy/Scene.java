@@ -9,16 +9,40 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
+import uk.co.nickthecoder.itchy.property.BooleanProperty;
+import uk.co.nickthecoder.itchy.property.ClassNameProperty;
+import uk.co.nickthecoder.itchy.property.LayoutProperty;
 import uk.co.nickthecoder.itchy.property.Property;
+import uk.co.nickthecoder.itchy.property.RGBAProperty;
+import uk.co.nickthecoder.itchy.property.StringProperty;
 import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.itchy.util.StringUtils;
 import uk.co.nickthecoder.jame.RGBA;
 
-public class Scene
+public class Scene implements NamedSubject<Scene>
 {
+    protected static final List<Property<Scene, ?>> properties = new ArrayList<Property<Scene, ?>>();
+
+    static {
+        properties.add(new StringProperty<Scene>("name"));
+        properties.add(new LayoutProperty<Scene>("layout"));
+        properties.add(new ClassNameProperty<Scene>(SceneDirector.class, "sceneDirector").access("sceneDirectorClassName"));
+        properties.add(new BooleanProperty<Scene>("showMouse"));
+        properties.add(new RGBAProperty<Scene>("backgroundColor"));
+
+    }
+
+    @Override
+    public List<Property<Scene, ?>> getProperties()
+    {
+        return properties;
+    }
+
+    public String name = "";
+    
     public boolean showMouse = true;
 
-    public ClassName sceneDirectorClassName;
+    private ClassName sceneDirectorClassName;
 
     public RGBA backgroundColor = RGBA.BLACK;
 
@@ -26,10 +50,10 @@ public class Scene
 
     private HashMap<String, SceneLayer> layersMap;
 
-    public SceneDirector sceneDirector;
+    private SceneDirector sceneDirector;
 
     public Layout layout;
-    
+
     public Scene()
     {
         this.sceneLayers = new ArrayList<SceneLayer>();
@@ -37,12 +61,25 @@ public class Scene
         this.sceneDirectorClassName = new ClassName(SceneDirector.class, PlainSceneDirector.class.getName());
     }
 
+
+    @Override
+    public String getName()
+    {
+        return this.name;
+    }
+
+    @Override
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
     public List<SceneLayer> getSceneLayers()
     {
         return this.sceneLayers;
     }
 
-    public SceneLayer createSceneLayer( String name )
+    public SceneLayer createSceneLayer(String name)
     {
         SceneLayer layer = new SceneLayer(name);
         addSceneLayer(layer);
@@ -54,7 +91,7 @@ public class Scene
         return this.sceneLayers.get(0);
     }
 
-    private void addSceneLayer( SceneLayer sceneLayer )
+    private void addSceneLayer(SceneLayer sceneLayer)
     {
         this.sceneLayers.add(sceneLayer);
         this.layersMap.put(sceneLayer.getName(), sceneLayer);
@@ -68,18 +105,18 @@ public class Scene
         this.sceneLayers.clear();
     }
 
-    public void create( Stage layer, Resources resources, boolean designMode )
+    public void create(Stage layer, Resources resources, boolean designMode)
     {
         for (SceneLayer sceneLayer : this.sceneLayers) {
             sceneLayer.create(layer, resources, designMode);
         }
     }
 
-    public void create( Game game, boolean designMode )
+    public void create(Game game, boolean designMode)
     {
         for (SceneLayer sceneLayer : this.sceneLayers) {
             String name = sceneLayer.name;
-            
+
             sceneLayer.create(findStage(name), game.resources, designMode);
         }
     }
@@ -88,18 +125,18 @@ public class Scene
      * Look for a layer with a given name, and return its stage.
      * If non are found, then return a ANY stage, as a fallback.
      */
-    private Stage findStage(String name )
+    private Stage findStage(String name)
     {
         Stage best = null;
 
-        for (Layer layer: layout.layers) {
-            Stage stage= layer.getStage();
+        for (Layer layer : layout.layers) {
+            Stage stage = layer.getStage();
             if (layer.name.equals(name)) {
                 if (stage != null) {
                     return stage;
                 }
             }
-            if ( stage != null) {
+            if (stage != null) {
                 best = stage;
             }
         }
@@ -107,7 +144,7 @@ public class Scene
         return best;
     }
 
-    public void add( SceneActor sceneActor )
+    public void add(SceneActor sceneActor)
     {
         this.sceneLayers.get(0).add(sceneActor);
     }
@@ -134,31 +171,37 @@ public class Scene
         return result;
     }
 
-    public SceneDirector createSceneDirector( Resources resources )
-        throws Exception
+    public ClassName getSceneDirectorClassName()
     {
-        SceneDirector result;
-
-        if (StringUtils.isBlank(this.sceneDirectorClassName.name)) {
-            result = new PlainSceneDirector();
-        } else {
-            if (resources.isValidScript(this.sceneDirectorClassName)) {
-                result = Itchy.getGame().getScriptManager().createSceneDirector(this.sceneDirectorClassName);
-            } else {
-                Class<?> klass = Class.forName(this.sceneDirectorClassName.name);
-                result = (SceneDirector) klass.newInstance();
-            }
-        }
-        // Copy the sceneDirector properties
+        return this.sceneDirectorClassName;
+    }
+    
+    public void setSceneDirectorClassName( ClassName className )
+    {
+        this.sceneDirectorClassName = className;
+        this.sceneDirector = null;
+    }
+    
+    public SceneDirector getSceneDirector()
+    {
         if (this.sceneDirector != null) {
-            for (Property<SceneDirector, ?> property : result.getProperties()) {
-                property.setValue(result, property.getValue(this.sceneDirector));
+            return this.sceneDirector;
+        }
+        
+        if (StringUtils.isBlank(this.sceneDirectorClassName.name)) {
+            this.sceneDirector = new PlainSceneDirector();
+        } else {
+            try {
+                this.sceneDirector = (SceneDirector) this.sceneDirectorClassName.createInstance(Itchy.getGame().resources);
+            } catch (Exception e) {
+                Itchy.handleException(e);
+                this.sceneDirector = new PlainSceneDirector();
             }
         }
-        return result;
+        return this.sceneDirector;
     }
 
-    public boolean uses( Font font )
+    public boolean uses(Font font)
     {
         for (SceneLayer layer : this.sceneLayers) {
             if (layer.uses(font)) {
@@ -168,7 +211,7 @@ public class Scene
         return false;
     }
 
-    public boolean uses( CostumeResource costumeResource )
+    public boolean uses(CostumeResource costumeResource)
     {
         for (SceneLayer layer : this.sceneLayers) {
             if (layer.uses(costumeResource)) {
@@ -192,7 +235,7 @@ public class Scene
 
         private List<SceneActor> sceneActors;
 
-        public SceneLayer( String name )
+        public SceneLayer(String name)
         {
             this.name = name;
             this.sceneActors = new ArrayList<SceneActor>();
@@ -203,7 +246,7 @@ public class Scene
             return this.name;
         }
 
-        public void add( SceneActor sceneActor )
+        public void add(SceneActor sceneActor)
         {
             this.sceneActors.add(sceneActor);
         }
@@ -232,7 +275,7 @@ public class Scene
             return this.sceneActors.size() == 0;
         }
 
-        public void create( Stage stage, Resources resources, boolean designMode )
+        public void create(Stage stage, Resources resources, boolean designMode)
         {
             for (SceneActor sceneActor : this.sceneActors) {
                 Actor actor = sceneActor.createActor(resources, designMode);
@@ -240,7 +283,7 @@ public class Scene
             }
         }
 
-        public boolean uses( Font font )
+        public boolean uses(Font font)
         {
             for (SceneActor sceneActor : this.sceneActors) {
                 if (sceneActor instanceof TextSceneActor) {
@@ -252,7 +295,7 @@ public class Scene
             return false;
         }
 
-        public boolean uses( CostumeResource costumeResource )
+        public boolean uses(CostumeResource costumeResource)
         {
             for (SceneActor sceneActor : this.sceneActors) {
                 if (sceneActor.costume == costumeResource.getCostume()) {
@@ -262,5 +305,5 @@ public class Scene
             return false;
         }
     }
-
+   
 }

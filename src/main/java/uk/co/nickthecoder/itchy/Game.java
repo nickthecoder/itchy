@@ -812,7 +812,7 @@ public class Game
     public boolean hasScene( String sceneName )
     {
         try {
-            return this.resources.getSceneResource(sceneName) != null;
+            return this.resources.getScene(sceneName) != null;
         } catch (Exception e) {
             return false;
         }
@@ -827,13 +827,13 @@ public class Game
     {
         this.abortTicks = true;
         
-        SceneResource sceneResource = this.resources.getSceneResource(sceneName);
-        if (sceneResource == null) {
+        SceneStub sceneStub = this.resources.getScene(sceneName);
+        if (sceneStub == null) {
             System.err.println("Scene not found : " + sceneName);
             return null;
         }
         try {
-            Scene scene = sceneResource.loadScene();
+            Scene scene = sceneStub.load();
             if (scene == null) {
                 System.err.println("Error loading scene : " + sceneName);
                 try {
@@ -851,7 +851,7 @@ public class Game
                 this.sceneName = sceneName;
                 this.background.color = scene.backgroundColor;
                 this.mouse.showRegularMousePointer(scene.showMouse);
-                this.sceneDirector = scene.createSceneDirector(this.resources);
+                this.sceneDirector = scene.getSceneDirector();
 
             }
 
@@ -871,10 +871,7 @@ public class Game
         } catch (Exception e) {
             e.printStackTrace();
             return null;
-        } finally {
-            sceneResource.unloadScene();
         }
-
     }
 
     public String getSceneName()

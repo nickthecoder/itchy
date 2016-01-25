@@ -51,13 +51,18 @@ public class PickerButton<T> extends GuiButton
     private String getLabelString( T value )
     {
         for (String key : this.map.keySet()) {
-            if (value.equals(this.map.get(key))) {
+            if (matches(value,this.map.get(key))) {
                 return key;
             }
         }
         return "<select>";
     }
 
+    public boolean matches( T value, T other )
+    {
+        return value.equals(other);
+    }
+    
     public void addChangeListener( ComponentChangeListener listener )
     {
         this.changeListeners.add(listener);

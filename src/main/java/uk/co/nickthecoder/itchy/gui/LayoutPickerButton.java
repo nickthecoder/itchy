@@ -12,20 +12,33 @@ import uk.co.nickthecoder.itchy.Resources;
 
 public class LayoutPickerButton extends PickerButton<Layout>
 {
-    
+
     private static Map<String, Layout> createPickMap(Resources resources)
     {
-        HashMap<String,Layout> result = new HashMap<String,Layout>();
-        
-        for (String name : resources.layoutNames() ) {
+        HashMap<String, Layout> result = new HashMap<String, Layout>();
+
+        for (String name : resources.layoutNames()) {
             result.put(name, resources.getLayout(name));
         }
         return result;
     }
-    
-    public LayoutPickerButton( Resources resources, Layout layout )
+
+    public LayoutPickerButton(Resources resources, Layout layout)
     {
         super("Layout", layout, createPickMap(resources));
     }
 
+    @Override
+    public Layout getValue()
+    {
+        // We need to clone, because layouts are changed when they are used, and the layouts returned from
+        // resources must remain pristine.
+        return value.clone();
+    }
+
+    @Override
+    public boolean matches(Layout a, Layout b)
+    {
+        return a.getName().equals(b.getName());
+    }
 }

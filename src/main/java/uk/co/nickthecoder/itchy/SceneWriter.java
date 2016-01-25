@@ -4,6 +4,8 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
+import java.io.File;
+
 import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.role.PlainRole;
 import uk.co.nickthecoder.itchy.util.XMLException;
@@ -11,18 +13,20 @@ import uk.co.nickthecoder.itchy.util.XMLWriter;
 
 public class SceneWriter extends XMLWriter
 {
-    private final SceneResource sceneResource;
+    private Resources resources;
+    
     private Scene scene;
 
-    public SceneWriter( SceneResource sceneResource )
+    public SceneWriter( Resources resources, Scene scene )
     {
-        this.sceneResource = sceneResource;
+        this.resources = resources;
+        this.scene = scene;
     }
 
-    public void write( String filename ) throws Exception
+    public void write( File file) throws Exception
     {
 
-        this.begin(filename);
+        this.begin(file);
 
         try {
 
@@ -35,16 +39,11 @@ public class SceneWriter extends XMLWriter
 
     private void writeScene() throws XMLException
     {
-        try {
-            this.scene = this.sceneResource.getScene();
-        } catch (Exception e) {
-            throw new XMLException("Failed to get the scene");
-        }
         this.beginTag("scene");
         this.attribute("showMouse", this.scene.showMouse);
         this.attribute("layout",  this.scene.layout.name);
-        if (!PlainSceneDirector.class.getName().equals(this.scene.sceneDirectorClassName)) {
-            this.attribute("role", this.scene.sceneDirectorClassName.name);
+        if (!PlainSceneDirector.class.getName().equals(this.scene.getSceneDirectorClassName())) {
+            this.attribute("role", this.scene.getSceneDirectorClassName().name);
         }
         this.attribute("background", this.scene.backgroundColor.toString());
 
@@ -68,13 +67,12 @@ public class SceneWriter extends XMLWriter
     private void writeSceneDirectorProperties()
         throws XMLException
     {
-
         this.beginTag("properties");
-        for (Property<SceneDirector, ?> property : this.scene.sceneDirector.getProperties()) {
+        for (Property<SceneDirector, ?> property : this.scene.getSceneDirector().getProperties()) {
             try {
                 this.beginTag("property");
                 this.attribute("name", property.key);
-                this.attribute("value", property.getStringValue(this.scene.sceneDirector));
+                this.attribute("value", property.getStringValue(this.scene.getSceneDirector()));
                 this.endTag("property");
             } catch (Exception e) {
                 throw new XMLException("Failed to write sceneDirector property : " + property.key);
@@ -92,7 +90,7 @@ public class SceneWriter extends XMLWriter
 
                 CostumeSceneActor csa = (CostumeSceneActor) sceneActor;
                 this.beginTag("actor");
-                this.attribute("costume", this.sceneResource.resources.getCostumeName(csa.costume));
+                this.attribute("costume", this.resources.getCostumeName(csa.costume));
 
                 if ((csa.costume.roleClassName == null) ||
                     (!csa.costume.roleClassName.name.equals(csa.roleClassName.name))) {
@@ -117,7 +115,7 @@ public class SceneWriter extends XMLWriter
                     this.attribute("role", sceneActor.roleClassName.name);
                 }
                 if (tsa.costume != null) {
-                    this.attribute("costume", this.sceneResource.resources.getCostumeName(tsa.costume));
+                    this.attribute("costume", this.resources.getCostumeName(tsa.costume));
                 }
 
                 this.writeSceneActorAttributes(sceneActor);

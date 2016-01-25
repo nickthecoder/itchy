@@ -1,20 +1,13 @@
 Current Tasks
 =============
 
-StringProperty checks for "error" style before autoUpdating. Other Properties do  not yet.
-This stops working as soon as there is more than one validation; as in the case of ClassNameProperty.
-    Need a new set of "listeners": addValidator,
-        boolean isValue(Component)
-    Whenever a change is made, call all validators, and set the "error" status apropriately
-    Then call all of the changeListeners, which can look at the error status.
-
 Layouts
     Merge resources
     Load/Save using properties
     List page
     Edit page
 
-For each of these : GameInfo, SpriteSheet, Sprites (Poses), Animations, Sounds, Costumes, Layouts, Scenes
+For each of these : GameInfo, SpriteSheet, Sprites (Poses), Animations, Sounds, Costumes, Scenes
     Refactor all other resources to use the new ListXXX and EditXXX classes
     Merge XXXResource with XXX
     Load/Save using properties
@@ -23,7 +16,8 @@ Editor to test if resources have changed and prompt for confirm before exiting.
 
 
 
-
+All resources.renameXXX needs to update the renamed collection, so that renameSubjectsInScenes will work. 
+    And do the same with other resources. Layouts, Fonts, ... ?
 
 
 

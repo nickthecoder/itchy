@@ -558,10 +558,9 @@ public class ResourcesReader
         for (Iterator<XMLTag> i = scenesTag.getTags("scene"); i.hasNext();) {
             XMLTag sceneTag = i.next();
 
-            String name = sceneTag.getAttribute("name");
-
-            SceneResource sceneResource = new SceneResource(this.resources, name);
-            this.resources.addScene(sceneResource);
+            SceneStub sceneStub = new SceneStub();
+            this.readProperties(sceneTag, sceneStub);
+            this.resources.addScene(sceneStub);
         }
     }
 

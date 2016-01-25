@@ -4,6 +4,7 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.util;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -37,7 +38,12 @@ public class XMLWriter
 
     public void begin( String filename ) throws XMLException, IOException
     {
-        this.begin(new PrintWriter(new FileOutputStream(filename)));
+        begin( new File(filename));
+    }
+    
+    public void begin( File file ) throws XMLException, IOException
+    {
+        this.begin(new PrintWriter(new FileOutputStream(file)));
     }
 
     public void begin( PrintWriter writer )

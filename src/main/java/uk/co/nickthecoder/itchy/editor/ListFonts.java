@@ -8,7 +8,7 @@ import uk.co.nickthecoder.itchy.CostumeResource;
 import uk.co.nickthecoder.itchy.Font;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.Scene;
-import uk.co.nickthecoder.itchy.SceneResource;
+import uk.co.nickthecoder.itchy.SceneStub;
 import uk.co.nickthecoder.itchy.TextStyle;
 import uk.co.nickthecoder.itchy.gui.MessageBox;
 import uk.co.nickthecoder.itchy.gui.ReflectionTableModelRow;
@@ -107,12 +107,11 @@ public class ListFonts extends ListSubjects<Font>
             Resources resources = this.resources;
             for (String sceneName : resources.sceneNames()) {
                 try {
-                    SceneResource sr = resources.getSceneResource(sceneName);
-                    Scene scene = sr.loadScene();
+                    SceneStub stub = resources.getScene(sceneName);
+                    Scene scene = stub.load();
                     if (scene.uses(font)) {
                         list.add(sceneName);
                     }
-                    sr.unloadScene();
                 } catch (Exception e) {
                     list.add(sceneName + " (failed to load)");
                 }

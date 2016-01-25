@@ -208,4 +208,15 @@ public class PropertiesForm<S>
             }
         }
     }
+    
+    public void addValidator( String propertyKey, ComponentValidator validator )
+    {
+        Component component = this.componentMap.get(propertyKey);
+        for (Property<S, ?> property : this.properties) {
+            if (property.key.equals(propertyKey)) {
+                property.addValidator(component, validator);
+                return;
+            }
+        }
+    }
 }

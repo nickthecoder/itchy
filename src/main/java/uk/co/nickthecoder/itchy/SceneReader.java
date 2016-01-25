@@ -5,6 +5,7 @@
 package uk.co.nickthecoder.itchy;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.util.Iterator;
@@ -24,15 +25,19 @@ public class SceneReader
 
     private Scene scene;
 
-    public SceneReader( Resources resources )
+    public SceneReader(Resources resources)
     {
         this.resources = resources;
     }
 
-    public Scene load( String filename ) throws Exception
+    public Scene load(String filename) throws Exception
     {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(
-            filename)));
+        return this.load(new File(filename));
+    }
+
+    public Scene load(File file) throws Exception
+    {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
         this.scene = new Scene();
         try {
             XMLTag document = XMLTag.openDocument(reader);
@@ -44,7 +49,7 @@ public class SceneReader
         return this.scene;
     }
 
-    private void readScene( XMLTag sceneTag ) throws Exception
+    private void readScene(XMLTag sceneTag) throws Exception
     {
         this.scene.showMouse = sceneTag.getOptionalBooleanAttribute("showMouse", true);
         String background = sceneTag.getOptionalAttribute("background", "#000");
@@ -53,14 +58,13 @@ public class SceneReader
         } catch (Exception e) {
             throw new XMLException("Illegal colour : " + background);
         }
-        String layoutName = sceneTag.getOptionalAttribute("layout", "default" );
+        String layoutName = sceneTag.getOptionalAttribute("layout", "default");
         Layout layout = resources.getLayout(layoutName);
         this.scene.layout = layout.clone();
-        
-        String sceneDirectorName = sceneTag.getOptionalAttribute("role", PlainSceneDirector.class.getName());
-        this.scene.sceneDirectorClassName = new ClassName(SceneDirector.class, sceneDirectorName);
 
-        this.scene.sceneDirector = this.scene.createSceneDirector(this.resources);
+        String sceneDirectorName = sceneTag.getOptionalAttribute("role", PlainSceneDirector.class.getName());
+        this.scene.setSceneDirectorClassName( new ClassName(SceneDirector.class, sceneDirectorName) );
+
 
         for (Iterator<XMLTag> i = sceneTag.getTags("properties"); i.hasNext();) {
             XMLTag propertiesTag = i.next();
@@ -76,10 +80,10 @@ public class SceneReader
 
     }
 
-    private void readProperties( XMLTag propertiesTag )
+    private void readProperties(XMLTag propertiesTag)
         throws Exception
     {
-        List<Property<SceneDirector, ?>> properties = this.scene.sceneDirector.getProperties();
+        List<Property<SceneDirector, ?>> properties = this.scene.getSceneDirector().getProperties();
 
         for (Iterator<XMLTag> i = propertiesTag.getTags("property"); i.hasNext();) {
             XMLTag propertyTag = i.next();
@@ -90,12 +94,12 @@ public class SceneReader
             if (property == null) {
                 throw new Exception("Didn't find SceneDirector property : " + name);
             }
-            property.setValueByString(this.scene.sceneDirector, value);
+            property.setValueByString(this.scene.getSceneDirector(), value);
         }
 
     }
 
-    private Property<SceneDirector, ?> findProperty( List<Property<SceneDirector, ?>> properties, String name )
+    private Property<SceneDirector, ?> findProperty(List<Property<SceneDirector, ?>> properties, String name)
     {
         for (Property<SceneDirector, ?> property : properties) {
             if (property.key.equals(name)) {
@@ -105,7 +109,7 @@ public class SceneReader
         return null;
     }
 
-    private void readLayer( XMLTag parentTag, Scene.SceneLayer sceneLayer ) throws Exception
+    private void readLayer(XMLTag parentTag, Scene.SceneLayer sceneLayer) throws Exception
     {
         for (Iterator<XMLTag> i = parentTag.getTags(); i.hasNext();) {
             XMLTag tag = i.next();
@@ -117,7 +121,7 @@ public class SceneReader
         }
     }
 
-    private void readActor( XMLTag actorTag, Scene.SceneLayer sceneLayer ) throws Exception
+    private void readActor(XMLTag actorTag, Scene.SceneLayer sceneLayer) throws Exception
     {
         String costumeName = actorTag.getAttribute("costume");
         costumeName = this.resources.getNewCostumeName(costumeName);
@@ -140,7 +144,7 @@ public class SceneReader
         sceneLayer.add(sceneActor);
     }
 
-    private void readMakeup( XMLTag makeupTag, SceneActor sceneActor )
+    private void readMakeup(XMLTag makeupTag, SceneActor sceneActor)
         throws Exception
     {
         ClassName className = new ClassName(Makeup.class, makeupTag.getAttribute("classname"));
@@ -156,14 +160,13 @@ public class SceneReader
         }
     }
 
-    private void setMakeupProperty( SceneActor sceneActor, Makeup makeup, String name, String value )
+    private void setMakeupProperty(SceneActor sceneActor, Makeup makeup, String name, String value)
         throws Exception
     {
         sceneActor.makeupPropertyStrings.put(name, value);
     }
 
-    
-    private void readText( XMLTag textTag, Scene.SceneLayer sceneLayer ) throws Exception
+    private void readText(XMLTag textTag, Scene.SceneLayer sceneLayer) throws Exception
     {
         String fontName = textTag.getAttribute("font");
         int fontSize = textTag.getIntAttribute("size");
@@ -211,12 +214,13 @@ public class SceneReader
     }
 
     /**
-     * For backwards compatibility, if the zOrder isn't specified, then the default zOrder increases by 1 for each actor read. Therefore,
+     * For backwards compatibility, if the zOrder isn't specified, then the default zOrder increases by 1 for each actor
+     * read. Therefore,
      * the actors will have increasing zOrders.
      */
     private int defaultZOrder = 0;
 
-    private void readSceneActorAttributes( XMLTag actorTag, SceneActor sceneActor )
+    private void readSceneActorAttributes(XMLTag actorTag, SceneActor sceneActor)
         throws Exception
     {
         this.defaultZOrder += 1;
@@ -259,7 +263,7 @@ public class SceneReader
         }
     }
 
-    private void setProperty( SceneActor sceneActor, Actor actor, String name, String value )
+    private void setProperty(SceneActor sceneActor, Actor actor, String name, String value)
         throws Exception
     {
         sceneActor.customPropertyStrings.put(name, value);

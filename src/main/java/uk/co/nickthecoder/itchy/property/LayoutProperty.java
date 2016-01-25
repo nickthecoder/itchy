@@ -31,7 +31,6 @@ public class LayoutProperty<S> extends Property<S, Layout>
         Resources resources = Itchy.getGame().resources;
 
         Layout layout = this.getSafeValue(subject);
-
         final LayoutPickerButton pickerButton = new LayoutPickerButton(resources, layout);
 
         if (autoUpdate) {

@@ -59,7 +59,7 @@ public final class Editor extends Game implements KeyListener
 
     public CostumesEditor costumesEditor;
 
-    public ScenesEditor scenesEditor;
+    public ListScenes listScenes;
 
     public ListLayouts listLayouts;
 
@@ -95,7 +95,7 @@ public final class Editor extends Game implements KeyListener
         this.listNinePatches = new ListNinePatches(this.resources);
         this.animationsEditor = new AnimationsEditor(this);
         this.costumesEditor = new CostumesEditor(this);
-        this.scenesEditor = new ScenesEditor(this);
+        this.listScenes = new ListScenes(this);
         this.listInputs = new ListInputs(this.resources);
         this.listLayouts = new ListLayouts(this.resources);
 
@@ -194,7 +194,7 @@ public final class Editor extends Game implements KeyListener
         notebook.addPage(new Label("Inputs"), this.listInputs.createPage());
         notebook.addPage(new Label("Costumes"), this.costumesEditor.createPage());
         notebook.addPage(new Label("Layouts"), this.listLayouts.createPage());
-        notebook.addPage(new Label("Scenes"), this.scenesEditor.createPage());
+        notebook.addPage(new Label("Scenes"), this.listScenes.createPage());
         // notebook.addPage(new Label("Preferences"), this.preferencesEditor.createPage());
 
         PlainContainer buttons = new PlainContainer();
@@ -252,10 +252,10 @@ public final class Editor extends Game implements KeyListener
         this.root.addChild(buttons);
 
         this.root.setPosition(0, 0, this.getWidth(), this.getHeight());
-        this.root.reStyle(); // MORE needed ?
+        this.root.reStyle();
 
         if (this.designSceneName != null) {
-            this.scenesEditor.design(this.designSceneName);
+            this.listScenes.edit(this.resources.getScene(this.designSceneName));
         }
         addKeyListener(this);
         Itchy.mainLoop();
@@ -302,7 +302,7 @@ public final class Editor extends Game implements KeyListener
                 messageBox.showNow();
             }
             if (this.resources.renamesPending()) {
-                this.resources.loadSaveAllScenes();
+                this.resources.renameSubjectsInScenes();
             }
 
         } catch (Exception e) {
