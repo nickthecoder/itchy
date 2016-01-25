@@ -45,6 +45,13 @@ public class SpriteSheet implements NamedSubject<SpriteSheet>
         sprites = new HashSet<Sprite>();
     }
 
+    public SpriteSheet( String name, File file ) throws JameException
+    {
+        this();
+        this.name = name;
+        this.setFile( file );
+    }
+
     @Override
     public String getName()
     {
@@ -77,7 +84,7 @@ public class SpriteSheet implements NamedSubject<SpriteSheet>
         sprites.remove(sprite);
     }
 
-    public void setFile(File file) throws JameException
+    public final void setFile(File file) throws JameException
     {
         this.file = file;
         surface = new Surface(Itchy.getGame().resources.resolveFile(file));

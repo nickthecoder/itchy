@@ -1,38 +1,24 @@
 package uk.co.nickthecoder.itchy;
 
 import java.io.File;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.property.BooleanProperty;
-import uk.co.nickthecoder.itchy.property.DoubleProperty;
 import uk.co.nickthecoder.itchy.property.FileProperty;
-import uk.co.nickthecoder.itchy.property.IntegerProperty;
 import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.PropertySubject;
-import uk.co.nickthecoder.itchy.property.StringProperty;
 import uk.co.nickthecoder.jame.JameException;
 
 public class FilePoseResource extends PoseResource implements PropertySubject<FilePoseResource>
 {
-    protected static List<Property<FilePoseResource, ?>> properties = new LinkedList<Property<FilePoseResource, ?>>();
+    protected static List<Property<FilePoseResource, ?>> properties = new ArrayList<Property<FilePoseResource, ?>>();
 
     static {
-        properties.add( new StringProperty<FilePoseResource>( "name" ));
-        properties.add( new FileProperty<FilePoseResource>( "file" ).aliases( "filename" ));
+        Property.addAll( PoseResource.properties, properties );
+        properties.add( 1, new FileProperty<FilePoseResource>( "file" ).aliases( "filename" ));
         properties.add( new BooleanProperty<FilePoseResource>( "shared" ));
-        properties.add( new DoubleProperty<FilePoseResource>( "pose.direction" ) );
-        properties.add( new IntegerProperty<FilePoseResource>( "pose.offsetX" ) );
-        properties.add( new IntegerProperty<FilePoseResource>( "pose.offsetY" ) );
-    }
-    
-    private File file;
 
-    public FilePoseResource( String name, String filename ) throws JameException
-    {
-        super(name);
-        this.file = new File(filename);
-        this.pose = new ImagePose(Resources.getCurrentResources().resolveFilename(filename));
     }
 
     @Override
@@ -40,6 +26,18 @@ public class FilePoseResource extends PoseResource implements PropertySubject<Fi
     {
         return properties;
     }
+    
+    private File file;
+
+    public boolean shared;
+
+    public FilePoseResource( String name, File file ) throws JameException
+    {
+        super(name);
+        this.file = file;
+        this.pose = new ImagePose(Resources.getCurrentResources().resolveFile(file).getPath());
+    }
+
 
     public File getFile()
     {

@@ -191,6 +191,18 @@ public class Resources extends Loadable
         writer.write(file.getPath());
     }
 
+
+    public File getImageDirectory()
+    {
+        File dir = getDirectory();
+        File imageDir = new File(dir, "images");
+        if (imageDir.exists()) {
+            return imageDir;
+        } else {
+            return dir;
+        }
+    }
+
     @Override
     protected void checkSave(File file) throws Exception
     {

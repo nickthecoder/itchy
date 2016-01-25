@@ -112,8 +112,8 @@ public class ListSprites extends ListSubjects<Sprite>
     @Override
     protected void remove(Sprite subject)
     {
-        // TODO Auto-generated method stub
-        
+        this.resources.removePose(subject.name);
+        this.spriteSheet.removeSprite(subject);
     }
 
 }

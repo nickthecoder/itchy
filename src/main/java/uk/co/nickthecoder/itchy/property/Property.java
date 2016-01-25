@@ -32,6 +32,14 @@ import uk.co.nickthecoder.itchy.util.StringUtils;
 public abstract class Property<S, T>
 {
 
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+    public static void addAll( List from, List to )
+    {
+        for (Object property : from ) {
+            to.add( property );
+        }
+    }
+    
     /**
      * The human readable label shown in the GUI
      */

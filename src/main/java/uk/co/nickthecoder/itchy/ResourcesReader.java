@@ -200,9 +200,9 @@ public class ResourcesReader
             XMLTag poseTag = i.next();
 
             String name = poseTag.getAttribute("name");
-            String filename = poseTag.getAttribute("filename");
+            File file = new File( poseTag.getAttribute("filename") );
 
-            PoseResource resource = new FilePoseResource(name, filename);
+            PoseResource resource = new FilePoseResource(name, file);
             ImagePose pose = resource.pose;
             this.resources.addPose(resource);
             pose.setDirection(poseTag.getOptionalDoubleAttribute("direction", 0));

@@ -1,11 +1,13 @@
 package uk.co.nickthecoder.itchy.editor;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.SpriteSheet;
 import uk.co.nickthecoder.itchy.gui.AbstractComponent;
+import uk.co.nickthecoder.itchy.gui.FileOpenDialog;
 import uk.co.nickthecoder.itchy.gui.ImageComponent;
 import uk.co.nickthecoder.itchy.gui.ReflectionTableModelRow;
 import uk.co.nickthecoder.itchy.gui.SimpleTableModel;
@@ -13,6 +15,8 @@ import uk.co.nickthecoder.itchy.gui.SingleColumnRowComparator;
 import uk.co.nickthecoder.itchy.gui.TableModel;
 import uk.co.nickthecoder.itchy.gui.TableModelColumn;
 import uk.co.nickthecoder.itchy.gui.TableModelRow;
+import uk.co.nickthecoder.itchy.util.Util;
+import uk.co.nickthecoder.jame.JameException;
 import uk.co.nickthecoder.jame.Surface;
 
 public class ListSpriteSheets extends ListSubjects<SpriteSheet>
@@ -61,17 +65,41 @@ public class ListSpriteSheets extends ListSubjects<SpriteSheet>
         }
         return model;
     }
+    
+    protected FileOpenDialog openDialog;
 
     @Override
     protected void edit(SpriteSheet subject)
     {
-        boolean isNew = false;
         if (subject == null) {
-            subject = new SpriteSheet();
-            isNew = true;
+            this.openDialog = new FileOpenDialog()
+            {
+                @Override
+                public void onChosen(File file)
+                {
+                    File relative = resources.makeRelativeFile(file);
+                    String name = Util.nameFromFile(file);
+                    try {
+                        SpriteSheet spriteSheet = new SpriteSheet(name, relative);
+                        EditSpriteSheet edit = new EditSpriteSheet(resources, ListSpriteSheets.this, spriteSheet, true);
+                        edit.show();
+
+                        openDialog.hide();
+
+                    } catch (JameException e) {
+                        openDialog.setMessage(e.getMessage());
+                        return;
+                    }
+
+                }
+            };
+            this.openDialog.setDirectory(resources.getImageDirectory());
+            this.openDialog.show();
+
+            return;
         }
         
-        EditSpriteSheet edit = new EditSpriteSheet( this.resources, this, subject, isNew );
+        EditSpriteSheet edit = new EditSpriteSheet( this.resources, this, subject, false );
         edit.show();          
     }
 

@@ -3,27 +3,32 @@ package uk.co.nickthecoder.itchy;
 import java.util.LinkedList;
 import java.util.List;
 
-import uk.co.nickthecoder.itchy.property.DoubleProperty;
 import uk.co.nickthecoder.itchy.property.IntegerProperty;
 import uk.co.nickthecoder.itchy.property.Property;
+import uk.co.nickthecoder.itchy.property.PropertySubject;
 import uk.co.nickthecoder.itchy.property.StringProperty;
 import uk.co.nickthecoder.jame.Surface;
 
-public class Sprite extends PoseResource implements NamedSubject<Sprite>, Comparable<Sprite>
+public class Sprite extends PoseResource implements Comparable<Sprite>, PropertySubject<Sprite> 
 {
     protected static List<Property<Sprite, ?>> properties = new LinkedList<Property<Sprite, ?>>();
 
+    
     static {
+        Property.addAll( PoseResource.properties, properties );
         properties.add( new StringProperty<Sprite>( "name" ));
         properties.add( new IntegerProperty<Sprite>( "x" ) );
         properties.add( new IntegerProperty<Sprite>( "y" ) );
         properties.add( new IntegerProperty<Sprite>( "width" ) );
         properties.add( new IntegerProperty<Sprite>( "height" ) );
-        properties.add( new DoubleProperty<Sprite>( "pose.direction" ) );
-        properties.add( new IntegerProperty<Sprite>( "pose.offsetX" ) );
-        properties.add( new IntegerProperty<Sprite>( "pose.offsetY" ) );
     }
-    
+
+    @Override
+    public List<Property<Sprite, ?>> getProperties()
+    {
+        return properties;
+    }
+
     private SpriteSheet spriteSheet;
     
     private int x;
@@ -49,12 +54,6 @@ public class Sprite extends PoseResource implements NamedSubject<Sprite>, Compar
         return result;
     }
     
-    @Override
-    public List<Property<Sprite, ?>> getProperties()
-    {
-        return properties;
-    }
-
     public int getX()
     {
         return this.x;

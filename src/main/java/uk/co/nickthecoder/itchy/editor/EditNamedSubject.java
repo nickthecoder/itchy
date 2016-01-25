@@ -1,13 +1,13 @@
 package uk.co.nickthecoder.itchy.editor;
 
-import uk.co.nickthecoder.itchy.NamedSubject;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.ComponentValidator;
 import uk.co.nickthecoder.itchy.gui.TextBox;
+import uk.co.nickthecoder.itchy.property.PropertySubject;
 
-public abstract class EditNamedSubject<S extends NamedSubject<S>> extends EditSubject<S>
+public abstract class EditNamedSubject<S extends PropertySubject<S>> extends EditSubject<S>
 {
 
     public EditNamedSubject(Resources resources, ListSubjects<S> listSubjects, S subject, boolean isNew)

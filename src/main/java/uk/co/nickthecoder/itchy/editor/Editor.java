@@ -45,7 +45,7 @@ public final class Editor extends Game implements KeyListener
 
     public ListSpriteSheets listSpriteSheets;
 
-    public PosesEditor posesEditor;
+    public ListPoses listPoses;
 
     public ListAnimations listAnimations;
 
@@ -90,7 +90,7 @@ public final class Editor extends Game implements KeyListener
         this.gameInfoEditor = new GameInfoEditor(this);
         this.listSpriteSheets = new ListSpriteSheets(this.resources);
         this.listSounds = new ListSounds(this.resources);
-        this.posesEditor = new PosesEditor(this);
+        this.listPoses = new ListPoses(this.resources);
         this.listFonts = new ListFonts(this.resources);
         this.listNinePatches = new ListNinePatches(this.resources);
         this.listAnimations = new ListAnimations(this.resources);
@@ -186,7 +186,7 @@ public final class Editor extends Game implements KeyListener
 
         notebook.addPage(new Label("Info"), this.gameInfoEditor.createPage());
         notebook.addPage(new Label("Sprite Sheets"), this.listSpriteSheets.createPage());
-        notebook.addPage(new Label("Sprites"), this.posesEditor.createPage());
+        notebook.addPage(new Label("Sprites"), this.listPoses.createPage());
         notebook.addPage(new Label("Animations"), this.listAnimations.createPage());
         notebook.addPage(new Label("Nine Patches"), this.listNinePatches.createPage());
         notebook.addPage(new Label("Sounds"), this.listSounds.createPage());

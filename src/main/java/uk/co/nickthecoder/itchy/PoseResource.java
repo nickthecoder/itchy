@@ -4,10 +4,25 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
+import java.util.LinkedList;
+import java.util.List;
+
+import uk.co.nickthecoder.itchy.property.DoubleProperty;
+import uk.co.nickthecoder.itchy.property.IntegerProperty;
+import uk.co.nickthecoder.itchy.property.Property;
+import uk.co.nickthecoder.itchy.property.StringProperty;
 import uk.co.nickthecoder.jame.Surface;
 
-public abstract class PoseResource implements Thumbnailed, Named 
+public abstract class PoseResource implements Thumbnailed, Named
 {
+    protected static List<Property<PoseResource, ?>> properties = new LinkedList<Property<PoseResource, ?>>();
+
+    static {
+        properties.add( new StringProperty<PoseResource>( "name" ));
+        properties.add( new DoubleProperty<PoseResource>( "pose.direction" ) );
+        properties.add( new IntegerProperty<PoseResource>( "pose.offsetX" ) );
+        properties.add( new IntegerProperty<PoseResource>( "pose.offsetY" ) );
+    }
 
     public static final int THUMBNAIL_WIDTH = 50;
     public static final int THUMBNAIL_HEIGHT = 50;
@@ -15,8 +30,6 @@ public abstract class PoseResource implements Thumbnailed, Named
     public String name;
     
     public ImagePose pose;
-
-    public boolean shared;
 
     private Surface thumbnail;
 
@@ -57,4 +70,5 @@ public abstract class PoseResource implements Thumbnailed, Named
     {
         this.thumbnail = null;
     }
+
 }
