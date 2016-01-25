@@ -23,7 +23,6 @@ import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.itchy.util.NinePatch;
 import uk.co.nickthecoder.itchy.util.XMLException;
 import uk.co.nickthecoder.itchy.util.XMLTag;
-import uk.co.nickthecoder.jame.JameException;
 import uk.co.nickthecoder.jame.Rect;
 
 public class ResourcesReader
@@ -225,15 +224,10 @@ public class ResourcesReader
         for (Iterator<XMLTag> i = soundsTag.getTags("sound"); i.hasNext();) {
             XMLTag soundTag = i.next();
 
-            String name = soundTag.getAttribute("name");
-            String filename = soundTag.getAttribute("filename");
+            SoundResource soundResource = new SoundResource();
+            this.readProperties(soundTag,  soundResource);
+            this.resources.addSound(soundResource);
 
-            try {
-                SoundResource soundResource = new SoundResource(this.resources, name, filename);
-                this.resources.addSound(soundResource);
-            } catch (JameException e) {
-                throw new XMLException("Failed to load sound file : " + filename);
-            }
         }
 
     }
@@ -310,7 +304,7 @@ public class ResourcesReader
                 String itemName = soundTag.getAttribute("name");
                 String soundName = soundTag.getAttribute("sound");
 
-                SoundResource soundResource = this.resources.getSoundResource(soundName);
+                SoundResource soundResource = this.resources.getSound(soundName);
                 if (soundResource == null) {
                     throw new XMLException("Sound : " + soundName + " not found for costume : " + costumeName);
                 }

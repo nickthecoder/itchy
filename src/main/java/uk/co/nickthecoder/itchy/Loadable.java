@@ -170,6 +170,11 @@ public abstract class Loadable
 
     }
 
+    public File makeRelativeFile( File file )
+    {
+        return new File( makeRelativeFilename(file));
+    }
+
     public boolean fileExists( String filename )
     {
         File file = new File(this.resolveFilename(filename));

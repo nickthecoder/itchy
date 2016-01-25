@@ -15,7 +15,7 @@ import uk.co.nickthecoder.itchy.property.StringProperty;
 import uk.co.nickthecoder.jame.JameException;
 import uk.co.nickthecoder.jame.Sound;
 
-public class SoundResource extends NamedResource implements PropertySubject<SoundResource>
+public class SoundResource implements NamedSubject<SoundResource>, PropertySubject<SoundResource>
 {
     protected static final List<Property<SoundResource, ?>> properties = new ArrayList<Property<SoundResource, ?>>();
 
@@ -24,15 +24,14 @@ public class SoundResource extends NamedResource implements PropertySubject<Soun
         properties.add( new FileProperty<SoundResource>( "file" ).aliases( "filename" ) );
     }
 
-    public File file;
+    private String name;
+    
+    private File file;
 
     private Sound sound;
 
-    public SoundResource( Resources resources, String name, String filename ) throws JameException
+    public SoundResource()
     {
-        super(resources, name);
-        this.sound = new Sound(this.resources.resolveFilename(filename));
-        this.file = new File(filename);
     }
 
     @Override
@@ -48,24 +47,28 @@ public class SoundResource extends NamedResource implements PropertySubject<Soun
 
     public void setFile( File file ) throws JameException
     {
-        this.sound.free();
-        this.sound = new Sound(this.resources.resolveFilename(file.getPath()));
+        if (this.sound != null) {
+            this.sound.free();
+        }
+        this.sound = new Sound(Itchy.getGame().resources.resolveFilename(file.getPath()));
         this.file = file;
-    }
-
-    public String getFilename()
-    {
-        return this.file.getPath();
-    }
-
-    public void setFilename( String filename ) throws JameException
-    {
-        setFile(new File(filename));
     }
 
     public Sound getSound()
     {
         return this.sound;
+    }
+
+    @Override
+    public String getName()
+    {
+        return name;
+    }
+
+    @Override
+    public void setName(String name)
+    {
+        this.name = name;
     }
 
 }

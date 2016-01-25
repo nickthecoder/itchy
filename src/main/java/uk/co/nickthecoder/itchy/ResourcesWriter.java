@@ -163,11 +163,10 @@ public class ResourcesWriter extends XMLWriter
         this.beginTag("sounds");
 
         for (String name : this.resources.soundNames()) {
-            SoundResource soundResource = this.resources.getSoundResource(name);
+            SoundResource soundResource = this.resources.getSound(name);
 
             this.beginTag("sound");
-            this.attribute("name", name);
-            this.attribute("filename", soundResource.getFilename());
+            this.writeProperties(soundResource);
             this.endTag("sound");
         }
 
@@ -385,7 +384,7 @@ public class ResourcesWriter extends XMLWriter
                 this.beginTag("sound");
                 this.attribute("name", name);
 
-                this.attribute("sound", cs.soundResource.name);
+                this.attribute("sound", cs.soundResource.getName());
                 writeProperties(cs);
 
                 this.endTag("sound");

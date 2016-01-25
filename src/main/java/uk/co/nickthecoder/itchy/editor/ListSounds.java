@@ -1,7 +1,3 @@
-/*******************************************************************************
- * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
- * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
- ******************************************************************************/
 package uk.co.nickthecoder.itchy.editor;
 
 import java.io.File;
@@ -12,40 +8,38 @@ import java.util.List;
 import uk.co.nickthecoder.itchy.Costume;
 import uk.co.nickthecoder.itchy.CostumeResource;
 import uk.co.nickthecoder.itchy.ManagedSound;
+import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.SoundResource;
 import uk.co.nickthecoder.itchy.Thumbnailed;
-import uk.co.nickthecoder.itchy.gui.ActionListener;
-import uk.co.nickthecoder.itchy.gui.FilenameComponent;
-import uk.co.nickthecoder.itchy.gui.GuiButton;
 import uk.co.nickthecoder.itchy.gui.AbstractComponent;
+import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
-import uk.co.nickthecoder.itchy.gui.PlainContainer;
-import uk.co.nickthecoder.itchy.gui.FileOpenDialog;
 import uk.co.nickthecoder.itchy.gui.Container;
+import uk.co.nickthecoder.itchy.gui.FileOpenDialog;
+import uk.co.nickthecoder.itchy.gui.GuiButton;
 import uk.co.nickthecoder.itchy.gui.MessageBox;
 import uk.co.nickthecoder.itchy.gui.PickerButton;
+import uk.co.nickthecoder.itchy.gui.PlainContainer;
 import uk.co.nickthecoder.itchy.gui.ReflectionTableModelRow;
 import uk.co.nickthecoder.itchy.gui.SimpleTableModel;
 import uk.co.nickthecoder.itchy.gui.SingleColumnRowComparator;
-import uk.co.nickthecoder.itchy.gui.Table;
 import uk.co.nickthecoder.itchy.gui.TableModel;
 import uk.co.nickthecoder.itchy.gui.TableModelColumn;
 import uk.co.nickthecoder.itchy.gui.TableModelRow;
-import uk.co.nickthecoder.itchy.gui.TextBox;
 import uk.co.nickthecoder.itchy.gui.ThumbnailedPickerButton;
-import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.util.StringList;
 import uk.co.nickthecoder.itchy.util.Util;
 import uk.co.nickthecoder.jame.JameException;
 import uk.co.nickthecoder.jame.Surface;
 
-public class SoundsEditor extends SubEditor<SoundResource>
+public class ListSounds extends ListSubjects<SoundResource>
 {
+
     private PickerButton<Filter> filterPickerButton;
 
-    public SoundsEditor( Editor editor )
+    public ListSounds(Resources resources)
     {
-        super(editor);
+        super(resources);
     }
 
     @Override
@@ -67,8 +61,8 @@ public class SoundsEditor extends SubEditor<SoundResource>
         };
         filterMap.put(" * All * ", all);
 
-        for (String name : this.editor.resources.costumeNames()) {
-            CostumeResource cr = this.editor.resources.getCostumeResource(name);
+        for (String name : this.resources.costumeNames()) {
+            CostumeResource cr = this.resources.getCostumeResource(name);
             Filter filter = new CostumeFilter(cr);
             filterMap.put(cr.getName(), filter);
         }
@@ -85,9 +79,9 @@ public class SoundsEditor extends SubEditor<SoundResource>
         page.addChild(this.filterPickerButton);
 
     }
-
+    
     @Override
-    public Table createTable()
+    protected List<TableModelColumn> createTableColumns()
     {
         TableModelColumn name = new TableModelColumn("Name", 0, 200);
         name.rowComparator = new SingleColumnRowComparator<String>(0);
@@ -120,11 +114,8 @@ public class SoundsEditor extends SubEditor<SoundResource>
         columns.add(name);
         columns.add(filename);
         columns.add(play);
-
-        TableModel tableModel = this.createTableModel();
-        Table table = new Table(tableModel, columns);
-
-        return table;
+        
+        return columns;
     }
 
     @Override
@@ -132,62 +123,75 @@ public class SoundsEditor extends SubEditor<SoundResource>
     {
         SimpleTableModel model = new SimpleTableModel();
 
-        for (String soundName : this.editor.resources.soundNames()) {
-            SoundResource soundResource = this.editor.resources.getSoundResource(soundName);
+        for (String soundName : this.resources.soundNames()) {
+            SoundResource soundResource = this.resources.getSound(soundName);
             if (this.filterPickerButton.getValue().accept(soundResource)) {
-                String[] attributeNames = { "name", "filename" };
+                String[] attributeNames = { "name", "file" };
                 TableModelRow row = new ReflectionTableModelRow<SoundResource>(soundResource, attributeNames);
                 model.addRow(row);
             }
         }
         return model;
     }
+    
 
-    @Override
-    protected void update() throws MessageException
+    public File getSoundsDirectory()
     {
-        FilenameComponent filenameComponent = (FilenameComponent) this.form.getComponent("file");
-        File file = filenameComponent.getValue();
-        TextBox name = (TextBox) this.form.getComponent("name");
-
-        boolean exists = this.editor.resources.fileExists(file.getPath());
-        if (!exists) {
-            throw new MessageException("Filename not found");
-        }
-        
-
-        if (!this.editor.resources.fileIsWithin(file)) {
-            File newFile = new File(getSoundsDirectory(), file.getName());
-            if (newFile.exists()) {
-                throw new MessageException("File is outside of this game's resource directory.");
-            }
-            try {
-                Util.copyFile(this.editor.resources.resolveFile(file), newFile);
-                filenameComponent.setText(this.editor.resources.makeRelativeFilename(newFile));
-            } catch (Exception e) {
-                throw new MessageException("Failed to copy image into the resources directory");
-            }
-        }
-        if (this.adding || (!name.getText().equals(this.currentResource.getName()))) {
-            if (this.editor.resources.getSoundResource(name.getText()) != null) {
-                throw new MessageException("That name is already being used.");
-            }
-        }
-
-        super.update();
-
-        if (this.adding) {
-            this.editor.resources.addSound(this.currentResource);
+        File dir = this.resources.getDirectory();
+        File soundsDir = new File(dir, "sounds");
+        if (soundsDir.exists()) {
+            return soundsDir;
+        } else {
+            return dir;
         }
     }
+    
+    private FileOpenDialog openDialog; 
+    
+    @Override
+    protected void edit(SoundResource subject)
+    {
+        if (subject == null) {
 
+            openDialog = new FileOpenDialog() {
+                @Override
+                public void onChosen( File file )
+                {
+                    try {
+                        File relativeFile = resources.makeRelativeFile(file);
+                        String name = Util.nameFromFile(relativeFile);
+
+                        openDialog.hide();
+
+                        SoundResource newSubject = new SoundResource();
+                        newSubject.setName(name);;
+                        newSubject.setFile(relativeFile);
+                        EditSound edit = new EditSound( resources, ListSounds.this, newSubject, false );
+                        edit.show();         
+
+                    } catch (JameException e) {
+                        openDialog.setMessage(e.getMessage());
+                        return;
+                    }
+                }
+            };
+            openDialog.setDirectory(getSoundsDirectory());
+            openDialog.show();
+            return;
+        }
+        
+        EditSound edit = new EditSound( this.resources, this, subject, false );
+        edit.show();         
+    }
+
+    
     @Override
     protected void remove( SoundResource soundResource )
     {
         StringList usedBy = new StringList();
 
-        for (String costumeName : this.editor.resources.costumeNames()) {
-            CostumeResource cr = this.editor.resources.getCostumeResource(costumeName);
+        for (String costumeName : this.resources.costumeNames()) {
+            CostumeResource cr = this.resources.getCostumeResource(costumeName);
             Costume costume = cr.getCostume();
             for (String resourceName : costume.getSoundNames()) {
                 for (ManagedSound managedSound : costume.getSoundChoices(resourceName)) {
@@ -198,67 +202,19 @@ public class SoundsEditor extends SubEditor<SoundResource>
             }
         }
         if (usedBy.isEmpty()) {
-            this.editor.resources.removeSound(soundResource.getName());
+            this.resources.removeSound(soundResource.getName());
         } else {
             new MessageBox("Cannot Delete. Used by Costumes...", usedBy.toString()).show();
         }
 
     }
-
-    @Override
-    protected void onAdd()
-    {
-        this.openDialog = new FileOpenDialog() {
-            @Override
-            public void onChosen( File file )
-            {
-                SoundsEditor.this.onAdd(file);
-            }
-        };
-        this.openDialog.setDirectory(getSoundsDirectory());
-        this.openDialog.show();
-    }
-
-    public void onAdd( File file )
-    {
-        if (file == null) {
-            this.openDialog.hide();
-        } else {
-            String filename = this.editor.resources.makeRelativeFilename(file);
-            String name = Util.nameFromFilename(filename);
-            try {
-                this.openDialog.hide();
-                this.edit(new SoundResource(this.editor.resources, name, filename), true);
-
-            } catch (JameException e) {
-                this.openDialog.setMessage(e.getMessage());
-                return;
-            }
-        }
-    }
-
-    public File getSoundsDirectory()
-    {
-        File dir = this.editor.resources.getDirectory();
-        File soundsDir = new File(dir, "sounds");
-        if (soundsDir.exists()) {
-            return soundsDir;
-        } else {
-            return dir;
-        }
-    }
-
-    @Override
-    protected List<Property<SoundResource, ?>> getProperties()
-    {
-        return this.currentResource.getProperties();
-    }
+    
 
     interface Filter extends Thumbnailed
     {
         boolean accept( SoundResource pr );
     }
-
+    
     class CostumeFilter implements Filter
     {
         CostumeResource costumeResource;
@@ -292,5 +248,4 @@ public class SoundsEditor extends SubEditor<SoundResource>
             return this.costumeResource.getThumbnail();
         }
     }
-
 }

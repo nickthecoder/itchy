@@ -235,7 +235,7 @@ public class Tetra extends AbstractDirector
 
         if ((this.inputExit.matches(ke)) && (this.game.getSceneName().equals("main"))) {
             gameOver();
-            this.game.resources.getSound("shatter").play();
+            this.game.resources.getSound("shatter").getSound().play();
             for (int x = 1; x <= WIDTH; x++) {
                 for (int y = 1; y <= HEIGHT; y++) {
                     Actor actor = this.grid[x][y];
@@ -319,11 +319,11 @@ public class Tetra extends AbstractDirector
 
         Sound sound = null;
         if (destroyed == 4) {
-            sound = this.game.resources.getSound("explode");
+            sound = this.game.resources.getSound("explode").getSound();
         } else if (destroyed == 0) {
-            sound = this.game.resources.getSound("pop");
+            sound = this.game.resources.getSound("pop").getSound();
         } else {
-            sound = this.game.resources.getSound("shatter");
+            sound = this.game.resources.getSound("shatter").getSound();
         }
         if (sound != null) {
             sound.play();
@@ -393,7 +393,7 @@ public class Tetra extends AbstractDirector
                 kill(actor);
             }
 
-            this.game.resources.getSound("shatter").play();
+            this.game.resources.getSound("shatter").getSound().play();
         }
         this.playing = false;
         this.piece = null;

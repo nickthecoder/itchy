@@ -589,7 +589,7 @@ public class CostumesEditor extends SubEditor<CostumeResource>
     {
         HashMap<String, SoundResource> sounds = new HashMap<String, SoundResource>();
         for (String name : this.editor.resources.soundNames()) {
-            SoundResource soundResource = this.editor.resources.getSoundResource(name);
+            SoundResource soundResource = this.editor.resources.getSound(name);
             sounds.put(name, soundResource);
         }
         return sounds;

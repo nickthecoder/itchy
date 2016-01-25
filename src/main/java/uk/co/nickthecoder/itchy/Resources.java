@@ -17,7 +17,6 @@ import uk.co.nickthecoder.itchy.script.ScriptManager;
 import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.itchy.util.NinePatch;
 import uk.co.nickthecoder.jame.JameException;
-import uk.co.nickthecoder.jame.Sound;
 import uk.co.nickthecoder.jame.Surface;
 
 public class Resources extends Loadable
@@ -255,9 +254,6 @@ public class Resources extends Loadable
         } else if (object instanceof AnimationResource) {
             return this.getAnimationResource(object.name) == object;
 
-        } else if (object instanceof SoundResource) {
-            return this.getSoundResource(object.name) == object;
-
         } else if (object instanceof CostumeResource) {
             return this.getCostumeResource(object.name) == object;
         }
@@ -273,9 +269,6 @@ public class Resources extends Loadable
 
         } else if (object instanceof PoseResource) {
             this.rename2((PoseResource) object, name);
-
-        } else if (object instanceof SoundResource) {
-            this.rename2((SoundResource) object, name);
 
         } else if (object instanceof AnimationResource) {
             this.rename2((AnimationResource) object, name);
@@ -493,7 +486,7 @@ public class Resources extends Loadable
 
     public void addSound(SoundResource soundResource)
     {
-        this.sounds.put(soundResource.name, soundResource);
+        this.sounds.put(soundResource.getName(), soundResource);
     }
 
     public void removeSound(String name)
@@ -501,15 +494,9 @@ public class Resources extends Loadable
         this.sounds.remove(name);
     }
 
-    public SoundResource getSoundResource(String name)
+    public SoundResource getSound(String name)
     {
         return this.sounds.get(name);
-    }
-
-    public Sound getSound(String name)
-    {
-        SoundResource resource = this.sounds.get(name);
-        return resource == null ? null : resource.getSound();
     }
 
     public List<String> soundNames()
@@ -517,22 +504,17 @@ public class Resources extends Loadable
         return sortNames(this.sounds.keySet());
     }
 
-    void rename2(SoundResource soundResource, String name)
+    public void renameSound(SoundResource soundResource)
     {
-        this.sounds.remove(soundResource.getName());
-        this.sounds.put(name, soundResource);
-    }
-
-    public String getSoundName(Sound sound)
-    {
-        for (String name : this.soundNames()) {
-            if (this.getSound(name) == sound) {
-                return name;
+        for (Entry<String, SoundResource> entry : this.sounds.entrySet()) {
+            if (entry.getValue() == soundResource) {
+                this.sounds.remove(entry.getKey());
+                break;
             }
         }
-        return null;
+        this.sounds.put(soundResource.getName(), soundResource);
     }
-
+            
     // Fonts
 
     public void addFont(Font font)

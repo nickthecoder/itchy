@@ -51,7 +51,7 @@ public final class Editor extends Game implements KeyListener
 
     public ListNinePatches listNinePatches;
 
-    public SoundsEditor soundsEditor;
+    public ListSounds listSounds;
 
     public ListFonts listFonts;
 
@@ -89,7 +89,7 @@ public final class Editor extends Game implements KeyListener
 
         this.gameInfoEditor = new GameInfoEditor(this);
         this.spriteSheetsEditor = new SpriteSheetsEditor(this);
-        this.soundsEditor = new SoundsEditor(this);
+        this.listSounds = new ListSounds(this.resources);
         this.posesEditor = new PosesEditor(this);
         this.listFonts = new ListFonts(this.resources);
         this.listNinePatches = new ListNinePatches(this.resources);
@@ -189,7 +189,7 @@ public final class Editor extends Game implements KeyListener
         notebook.addPage(new Label("Sprites"), this.posesEditor.createPage());
         notebook.addPage(new Label("Animations"), this.animationsEditor.createPage());
         notebook.addPage(new Label("Nine Patches"), this.listNinePatches.createPage());
-        notebook.addPage(new Label("Sounds"), this.soundsEditor.createPage());
+        notebook.addPage(new Label("Sounds"), this.listSounds.createPage());
         notebook.addPage(new Label("Fonts"), this.listFonts.createPage());
         notebook.addPage(new Label("Inputs"), this.listInputs.createPage());
         notebook.addPage(new Label("Costumes"), this.costumesEditor.createPage());
