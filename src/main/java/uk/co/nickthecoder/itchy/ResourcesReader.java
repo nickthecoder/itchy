@@ -178,9 +178,7 @@ public class ResourcesReader
         for (Iterator<XMLTag> i = spriteSheetsTag.getTags("spriteSheet"); i.hasNext();) {
             XMLTag spriteSheetTag = i.next();
 
-            String name = spriteSheetTag.getAttribute("name");
-            SpriteSheet spriteSheet = new SpriteSheet(this.resources, name);
-
+            SpriteSheet spriteSheet = new SpriteSheet();
             this.readProperties(spriteSheetTag, spriteSheet);
 
             for (Iterator<XMLTag> j = spriteSheetTag.getTags("sprite"); j.hasNext();) {

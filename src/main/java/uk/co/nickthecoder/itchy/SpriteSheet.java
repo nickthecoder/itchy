@@ -8,76 +8,81 @@ import java.util.Set;
 
 import uk.co.nickthecoder.itchy.property.FileProperty;
 import uk.co.nickthecoder.itchy.property.Property;
-import uk.co.nickthecoder.itchy.property.PropertySubject;
 import uk.co.nickthecoder.itchy.property.StringProperty;
 import uk.co.nickthecoder.jame.JameException;
 import uk.co.nickthecoder.jame.Surface;
 
-public class SpriteSheet extends NamedResource implements PropertySubject<SpriteSheet>
+public class SpriteSheet implements NamedSubject<SpriteSheet>
 {
     protected static List<Property<SpriteSheet, ?>> properties = new LinkedList<Property<SpriteSheet, ?>>();
-        
+
+    static {
+        properties.add(new StringProperty<SpriteSheet>("name"));
+        properties.add(new FileProperty<SpriteSheet>("file").aliases("filename"));
+    }
+
+    @Override
+    public List<Property<SpriteSheet, ?>> getProperties()
+    {
+        return properties;
+    }
+
     private static final int THUMBNAIL_WIDTH = 80;
     private static final int THUMBNAIL_HEIGHT = 80;
 
+    private String name;
+
     private File file;
-    
+
     private Surface surface;
-    
+
     private Surface thumbnail;
-    
-    public Resources resources;
-    
-    static {
-        properties.add( new StringProperty<SpriteSheet>( "name" ));
-        properties.add( new FileProperty<SpriteSheet>( "file" ).aliases( "filename" ));
-    }
-    
+
     private Set<Sprite> sprites;
 
-    public SpriteSheet(Resources resources, String name)
+    public SpriteSheet()
     {
-        super(resources, name);
-        this.resources = resources;
-        this.sprites = new HashSet<Sprite>();
+        sprites = new HashSet<Sprite>();
     }
-    
+
+    @Override
+    public String getName()
+    {
+        return name;
+    }
+
+    @Override
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
     public Surface getSurface()
     {
-        return this.surface;
+        return surface;
     }
-    
+
     public Set<Sprite> getSprites()
     {
-        return this.sprites;
+        return sprites;
     }
-    
-    public void addSprite( Sprite sprite )
+
+    public void addSprite(Sprite sprite)
     {
-        this.sprites.add( sprite );
+        sprites.add(sprite);
     }
-    
-    public void removeSprite( Sprite sprite )
+
+    public void removeSprite(Sprite sprite)
     {
-        this.sprites.remove( sprite );
+        sprites.remove(sprite);
     }
-    
-    public void setFilename( String filename ) throws JameException
-    {
-        setFile( new File(filename) );
-    }
-    
-    public String getFilename()
-    {
-        return this.file.getPath();
-    }
-    
-    public void setFile( File file ) throws JameException
+
+    public void setFile(File file) throws JameException
     {
         this.file = file;
-        this.surface = new Surface(this.resources.resolveFile(file));
+        surface = new Surface(Itchy.getGame().resources.resolveFile(file));
     }
-    
+
     public File getFile()
     {
         return file;
@@ -85,23 +90,18 @@ public class SpriteSheet extends NamedResource implements PropertySubject<Sprite
 
     public Surface getThumbnail()
     {
-        if (this.thumbnail == null) {
+        if (thumbnail == null) {
 
             if ((surface.getWidth() > THUMBNAIL_WIDTH) || (surface.getHeight() > THUMBNAIL_HEIGHT)) {
                 double scale = Math.min(THUMBNAIL_WIDTH / (double) surface.getWidth(),
                     THUMBNAIL_HEIGHT / (double) surface.getHeight());
-                this.thumbnail = surface.zoom(scale, scale, true);
+                thumbnail = surface.zoom(scale, scale, true);
             } else {
-                this.thumbnail = surface;
+                thumbnail = surface;
             }
 
         }
-        return this.thumbnail;
+        return thumbnail;
     }
-    
-    @Override
-    public List<Property<SpriteSheet, ?>> getProperties()
-    {
-        return properties;
-    }
+
 }

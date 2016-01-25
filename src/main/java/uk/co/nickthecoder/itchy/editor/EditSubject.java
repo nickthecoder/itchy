@@ -152,13 +152,17 @@ public abstract class EditSubject<S extends NamedSubject<S>>
     
     protected boolean isValidName(String name)
     {
-        S found = getSubjectByName(name);
-        if (found == null) {
-            // No resource with that name
-            return true;
+        try {
+            S found = getSubjectByName(name);
+            if (found == null) {
+                // No resource with that name
+                return true;
+            }
+            // Valid, if the resource is the one that is found, otherwise the name is already in use.
+            return found == subject;
+        } catch (Exception e) {
+            return false;
         }
-        // Valid, if the resource is the one that is found, otherwise the name is already in use.
-        return found == subject;
     }
     
     protected void onOk()

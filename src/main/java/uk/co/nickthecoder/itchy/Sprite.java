@@ -6,11 +6,10 @@ import java.util.List;
 import uk.co.nickthecoder.itchy.property.DoubleProperty;
 import uk.co.nickthecoder.itchy.property.IntegerProperty;
 import uk.co.nickthecoder.itchy.property.Property;
-import uk.co.nickthecoder.itchy.property.PropertySubject;
 import uk.co.nickthecoder.itchy.property.StringProperty;
 import uk.co.nickthecoder.jame.Surface;
 
-public class Sprite extends PoseResource implements PropertySubject<Sprite>, Comparable<Sprite>
+public class Sprite extends PoseResource implements NamedSubject<Sprite>, Comparable<Sprite>
 {
     protected static List<Property<Sprite, ?>> properties = new LinkedList<Property<Sprite, ?>>();
 
@@ -37,7 +36,8 @@ public class Sprite extends PoseResource implements PropertySubject<Sprite>, Com
     
     public Sprite(SpriteSheet spriteSheet, String name)
     {
-        super(spriteSheet.resources, name);
+        // TODO Remove resources when PoseResource is refactored.
+        super(Itchy.getGame().resources, name);
         this.spriteSheet = spriteSheet;
         this.pose = new ImagePose(createSurface());
     }

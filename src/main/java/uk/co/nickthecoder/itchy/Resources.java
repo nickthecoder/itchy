@@ -265,10 +265,15 @@ public class Resources extends Loadable
         return sortNames(this.spriteSheets.keySet());
     }
 
-    void rename2(SpriteSheet spriteSheet, String name)
+    public void renameSpriteSheet(SpriteSheet spriteSheet)
     {
-        this.spriteSheets.remove(spriteSheet.getName());
-        this.spriteSheets.put(name, spriteSheet);
+        for (Entry<String, SpriteSheet> entry : this.spriteSheets.entrySet()) {
+            if (entry.getValue() == spriteSheet) {
+                this.spriteSheets.remove(entry.getKey());
+                break;
+            }
+        }
+        this.spriteSheets.put(spriteSheet.getName(), spriteSheet);
     }
 
     // Poses
@@ -334,6 +339,18 @@ public class Resources extends Loadable
         return resource.getThumbnail();
     }
 
+    public void renamePose(PoseResource pr)
+    {
+        // TODO Implement when Pose/PoseResource is refactored.
+//    for (Entry<String, PoseResource> entry : this.poses.entrySet()) {
+//        if (entry.getValue() == spriteSheet) {
+//            this.spriteSheets.remove(entry.getKey());
+//            break;
+//        }
+//    }
+//    this.spriteSheets.put(spriteSheet.getName(), spriteSheet);
+    }
+    
     // Animations
 
     public void addAnimation(AnimationResource ar)
