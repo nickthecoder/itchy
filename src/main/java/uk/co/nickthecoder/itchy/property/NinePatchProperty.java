@@ -1,26 +1,22 @@
-/*******************************************************************************
- * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
- * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
- ******************************************************************************/
 package uk.co.nickthecoder.itchy.property;
 
 import uk.co.nickthecoder.itchy.Itchy;
-import uk.co.nickthecoder.itchy.PoseResource;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.ComponentValidator;
-import uk.co.nickthecoder.itchy.gui.PoseResourcePickerButton;
+import uk.co.nickthecoder.itchy.gui.NinePatchPickerButton;
+import uk.co.nickthecoder.itchy.util.NinePatch;
 
-public class PoseResourceProperty<S> extends Property<S, PoseResource>
+public class NinePatchProperty<S> extends Property<S, NinePatch>
 {
-    public PoseResourceProperty( String key )
+    public NinePatchProperty( String key )
     {
         super(key);
     }
 
     @Override
-    public PoseResource getDefaultValue()
+    public NinePatch getDefaultValue()
     {
         return null;
     }
@@ -30,9 +26,10 @@ public class PoseResourceProperty<S> extends Property<S, PoseResource>
     {
         Resources resources = Itchy.getGame().resources;
 
-        PoseResource poseResource = this.getSafeValue(subject);
+        NinePatch ninePatch = this.getSafeValue(subject);
 
-        final PoseResourcePickerButton pickerButton = new PoseResourcePickerButton(resources, poseResource);
+        final NinePatchPickerButton pickerButton = new NinePatchPickerButton(resources, ninePatch);
+        pickerButton.setCompact(true);
 
         if (autoUpdate) {
 
@@ -42,7 +39,7 @@ public class PoseResourceProperty<S> extends Property<S, PoseResource>
                 public void changed()
                 {
                     try {
-                        PoseResourceProperty.this.update(subject, pickerButton);
+                        NinePatchProperty.this.update(subject, pickerButton);
                     } catch (Exception e) {
                         // Do nothing
                     }
@@ -56,21 +53,21 @@ public class PoseResourceProperty<S> extends Property<S, PoseResource>
     @Override
     public void addChangeListener( Component component, ComponentChangeListener listener )
     {
-        PoseResourcePickerButton button = (PoseResourcePickerButton) component;
+        NinePatchPickerButton button = (NinePatchPickerButton) component;
         button.addChangeListener(listener);
     }
     
     @Override
     public void addValidator( Component component, ComponentValidator validator )
     {
-        PoseResourcePickerButton button = (PoseResourcePickerButton) component;
+        NinePatchPickerButton button = (NinePatchPickerButton) component;
         button.addValidator(validator);
     }
 
     @Override
     public void update( S subject, Component component ) throws Exception
     {
-        PoseResourcePickerButton pickerButton = (PoseResourcePickerButton) component;
+        NinePatchPickerButton pickerButton = (NinePatchPickerButton) component;
         try {
             this.setValue(subject, pickerButton.getValue());
             pickerButton.removeStyle("error");
@@ -82,18 +79,18 @@ public class PoseResourceProperty<S> extends Property<S, PoseResource>
     @Override
     public void refresh( S subject, Component component ) throws Exception
     {
-        PoseResourcePickerButton pickerButton = (PoseResourcePickerButton) component;
-        PoseResource poseResource = this.getValue(subject);
-        pickerButton.setValue(poseResource);
+        NinePatchPickerButton pickerButton = (NinePatchPickerButton) component;
+        NinePatch ninePatch = this.getValue(subject);
+        pickerButton.setValue(ninePatch);
     }
 
     @Override
-    public PoseResource parse( String value )
+    public NinePatch parse( String value )
     {
         if ("".equals(value) || (value == null)) {
             return null;
         }
-        PoseResource result = Itchy.getGame().resources.getPoseResource(value);
+        NinePatch result = Itchy.getGame().resources.getNinePatch(value);
         if (result == null) {
             throw new NullPointerException();
         }
@@ -103,12 +100,9 @@ public class PoseResourceProperty<S> extends Property<S, PoseResource>
     @Override
     public String getStringValue( S subject ) throws Exception
     {
-        PoseResource value = this.getValue(subject);
-
-        if (value == null) {
-            return "";
-        }
-        return value.getName();
+        NinePatch ninePatch = this.getValue(subject);
+        
+        return ninePatch == null ? "" : ninePatch.getName();
     }
 
     @Override

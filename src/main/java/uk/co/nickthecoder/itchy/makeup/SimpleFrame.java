@@ -24,6 +24,7 @@ public class SimpleFrame implements Makeup
         properties.add(new RGBAProperty<Makeup>("backgroundColor"));
         properties.add(new RGBAProperty<Makeup>("borderColor"));
         properties.add(new IntegerProperty<Makeup>("borderWidth"));
+        
         properties.add(new IntegerProperty<Makeup>("paddingTop"));
         properties.add(new IntegerProperty<Makeup>("paddingRight"));
         properties.add(new IntegerProperty<Makeup>("paddingBottom"));
@@ -123,7 +124,7 @@ public class SimpleFrame implements Makeup
         this.borderWidth = width;
     }
 
-    public int getBorderTop()
+    public int getPaddingTop()
     {
         return this.paddingTop;
     }

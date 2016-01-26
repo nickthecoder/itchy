@@ -238,7 +238,7 @@ public class GuiView extends AbstractView implements View, InputListener
 
             if (dummy.background != null) {
                 Frame frame = new Frame(dummy.getMarginTop(), dummy.getMarginRight(), dummy.getMarginBottom(), dummy.getMarginLeft());
-                frame.setNinePatch(dummy.background);
+                frame.setBackground(dummy.background);
                 this.tooltipMakeup = frame;
             } else {
                 this.tooltipMakeup = new SimpleFrame(new RGBA(128, 128, 128, 200), new RGBA(160, 160, 160, 200), 2, dummy.getMarginTop(),

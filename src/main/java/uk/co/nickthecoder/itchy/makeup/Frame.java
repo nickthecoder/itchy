@@ -7,13 +7,13 @@ package uk.co.nickthecoder.itchy.makeup;
 import java.util.ArrayList;
 import java.util.List;
 
-import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.OffsetSurface;
 import uk.co.nickthecoder.itchy.Renderable;
 import uk.co.nickthecoder.itchy.SimpleOffsetSurface;
-import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.IntegerProperty;
-import uk.co.nickthecoder.itchy.property.StringProperty;
+import uk.co.nickthecoder.itchy.property.NinePatchProperty;
+import uk.co.nickthecoder.itchy.property.Property;
+import uk.co.nickthecoder.itchy.util.NinePatch;
 import uk.co.nickthecoder.jame.Surface;
 
 public class Frame implements Makeup
@@ -21,7 +21,7 @@ public class Frame implements Makeup
     protected static final List<Property<Makeup, ?>> properties = new ArrayList<Property<Makeup, ?>>();
 
     static {
-        properties.add(new StringProperty<Makeup>("ninePatchName"));
+        properties.add(new NinePatchProperty<Makeup>("ninePatch").aliases("ninePathcName"));
         properties.add(new IntegerProperty<Makeup>("borderTop"));
         properties.add(new IntegerProperty<Makeup>("borderRight"));
         properties.add(new IntegerProperty<Makeup>("borderBottom"));
@@ -36,9 +36,12 @@ public class Frame implements Makeup
 
     private int borderLeft;
 
-    private String ninePatchName;
-
-    private Renderable ninePatch;
+    private NinePatch ninePatch;
+    
+    /**
+     * If a nine patch is not specified, then any Renderable can also be used.
+     */
+    private Renderable background;
 
     private int seq = 0;
 
@@ -110,27 +113,33 @@ public class Frame implements Makeup
         this.borderLeft = borderLeft;
     }
 
-    public String getNinePatchName()
+    public NinePatch getNinePatch()
     {
-        return this.ninePatchName;
+        return ninePatch;
     }
-
-    public void setNinePatchName( String ninePatchName )
-    {
-        this.seq++;
-        this.ninePatchName = ninePatchName;
-        this.ninePatch = Itchy.getGame().resources.getNinePatch(ninePatchName);
-    }
-
-    public void setNinePatch( Renderable ninePatch )
+    
+    public void setNinePatch( NinePatch ninePatch )
     {
         this.ninePatch = ninePatch;
+        this.seq++;
     }
-
+    
+    public void setBackground( Renderable background )
+    {
+        this.background = background;
+    }
+    
+    public Renderable getBackground()
+    {
+        return this.ninePatch == null ? this.background : this.ninePatch;
+    }
+    
     @Override
     public OffsetSurface apply( OffsetSurface src )
     {
-        if (this.ninePatch == null) {
+        Renderable renderable = getBackground();
+        
+        if (renderable == null) {
             return src;
         }
 
@@ -143,8 +152,8 @@ public class Frame implements Makeup
         // If so, we render the whole frame, and place the contents in the middle
         int offsetX = 0;
         int offsetY = 0;
-        int minFrameWidth = this.ninePatch.getMinimumWidth();
-        int minFrameHeight = this.ninePatch.getMinimumHeight();
+        int minFrameWidth = renderable.getMinimumWidth();
+        int minFrameHeight = renderable.getMinimumHeight();
 
         if (width < minFrameWidth) {
             offsetX = (minFrameWidth - width) / 2;
@@ -157,7 +166,7 @@ public class Frame implements Makeup
 
         Surface surface = new Surface(width, height, true);
 
-        this.ninePatch.render(surface);
+        renderable.render(surface);
         srcSurface.blit(surface, this.borderLeft + offsetX, this.borderTop + offsetY);
 
         return new SimpleOffsetSurface(surface, src.getOffsetX() + this.borderLeft, src.getOffsetY() + this.borderTop);
@@ -166,7 +175,7 @@ public class Frame implements Makeup
     @Override
     public void applyGeometry( TransformationData src )
     {
-        if (this.ninePatch == null) {
+        if (getBackground() == null) {
             return;
         }
 

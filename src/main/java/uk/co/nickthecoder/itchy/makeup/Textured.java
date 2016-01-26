@@ -68,6 +68,11 @@ public class Textured implements Makeup
         return this.poseResource.pose;
     }
 
+    public PoseResource getPoseResource()
+    {
+        return this.poseResource;
+    }
+    
     public void setPoseResource( PoseResource poseResource )
     {
         this.poseResource = poseResource;
