@@ -35,7 +35,7 @@ public class SoundProperty<S> extends Property<S, SoundResource>
                 public void changed()
                 {
                     try {
-                        SoundProperty.this.update(subject, pickerButton);
+                        SoundProperty.this.updateSubject(subject, pickerButton);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -61,7 +61,7 @@ public class SoundProperty<S> extends Property<S, SoundResource>
     }
 
     @Override
-    public void update( S subject, Component component ) throws Exception
+    public void updateSubject( S subject, Component component ) throws Exception
     {
         SoundPickerButton pickerButton = (SoundPickerButton) component;
         try {
@@ -74,7 +74,7 @@ public class SoundProperty<S> extends Property<S, SoundResource>
     }
 
     @Override
-    public void refresh( S subject, Component component ) throws Exception
+    public void updateComponent( S subject, Component component ) throws Exception
     {
         SoundPickerButton pickerButton = (SoundPickerButton) component;
         pickerButton.setValue(this.getValue(subject));

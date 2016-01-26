@@ -36,7 +36,7 @@ public class FileProperty<S> extends Property<S, File>
                 public void changed()
                 {
                     try {
-                        FileProperty.this.update(subject, box);
+                        FileProperty.this.updateSubject(subject, box);
                     } catch (Exception e) {
                         // Do nothing
                     }
@@ -61,7 +61,7 @@ public class FileProperty<S> extends Property<S, File>
     }
     
     @Override
-    public void update( S subject, Component component ) throws Exception
+    public void updateSubject( S subject, Component component ) throws Exception
     {
         FilenameComponent filenameComponent = (FilenameComponent) component;
         try {
@@ -74,7 +74,7 @@ public class FileProperty<S> extends Property<S, File>
     }
 
     @Override
-    public void refresh( S subject, Component component ) throws Exception
+    public void updateComponent( S subject, Component component ) throws Exception
     {
         FilenameComponent filenameComponent = (FilenameComponent) component;
         filenameComponent.setText(getValue(subject).getPath());

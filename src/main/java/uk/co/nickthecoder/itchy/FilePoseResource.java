@@ -68,4 +68,8 @@ public class FilePoseResource extends PoseResource implements PropertySubject<Fi
         setFile(new File(filename));
     }
 
+    public String toString()
+    {
+        return "FilePoseResource name:'" + name + "' file:'" + file + "' " + pose.toString();
+    }
 }

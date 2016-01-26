@@ -46,7 +46,7 @@ public class ClassNameProperty<S> extends Property<S, ClassName>
                 public void changed()
                 {
                     try {
-                        ClassNameProperty.this.update(subject, classNameBox);
+                        ClassNameProperty.this.updateSubject(subject, classNameBox);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -72,7 +72,7 @@ public class ClassNameProperty<S> extends Property<S, ClassName>
     }
 
     @Override
-    public void update( S subject, Component component ) throws Exception
+    public void updateSubject( S subject, Component component ) throws Exception
     {
         ClassNameBox classNameBox = (ClassNameBox) component;
 
@@ -85,7 +85,7 @@ public class ClassNameProperty<S> extends Property<S, ClassName>
     }
 
     @Override
-    public void refresh( S subject, Component component ) throws Exception
+    public void updateComponent( S subject, Component component ) throws Exception
     {
         ClassNameBox classNameBox = (ClassNameBox) component;
 

@@ -353,14 +353,13 @@ public class Resources extends Loadable
 
     public void renamePose(PoseResource pr)
     {
-        // TODO Implement when Pose/PoseResource is refactored.
-        // for (Entry<String, PoseResource> entry : this.poses.entrySet()) {
-        // if (entry.getValue() == spriteSheet) {
-        // this.spriteSheets.remove(entry.getKey());
-        // break;
-        // }
-        // }
-        // this.spriteSheets.put(spriteSheet.getName(), spriteSheet);
+        for (Entry<String, PoseResource> entry : this.poses.entrySet()) {
+            if (entry.getValue() == pr) {
+                this.poses.remove(entry.getKey());
+                break;
+            }
+        }
+        this.poses.put(pr.getName(), pr);
     }
 
     // Animations
@@ -854,4 +853,35 @@ public class Resources extends Loadable
         renamedCostumes.clear();
     }
 
+    public void dump( String label, Object... data)
+    {
+        System.out.print( label );
+        for ( Object d : data ) {
+            System.out.print( " " );
+            System.out.print(d);
+        }
+        System.out.println();
+    }
+
+    public void dump()
+    {
+        dump("Poses");
+        for ( String name : this.poseNames() ) {
+            dump( "   ", "[", name, "]", this.poses.get(name));
+        }
+        dump("");
+        
+        dump("SpriteSheets");
+        for ( String name : this.spriteSheetNames() ) {
+            SpriteSheet spriteSheet = this.spriteSheets.get(name);
+            dump( "   ", "[", name, "]", spriteSheet);
+            for (Sprite sprite:spriteSheet.getSprites()) {
+                dump( "       ", sprite);
+            }
+        }
+        dump("");
+        
+        
+    }
+    
 }

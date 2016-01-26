@@ -83,7 +83,7 @@ public class SceneDesignerPropertiesForm<S> extends PropertiesForm<S>
         try {
             Component component = getComponent(property.key);
             component.focus();
-            property.refresh(this.subject, component);
+            property.updateComponent(this.subject, component);
         } catch (Exception e) {
             e.printStackTrace();
         }

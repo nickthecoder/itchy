@@ -71,4 +71,9 @@ public abstract class PoseResource implements Thumbnailed, Named
         this.thumbnail = null;
     }
 
+    public String toString()
+    {
+        return "PoseResource name:'" + name + "' " + pose.toString();
+    }
+    
 }

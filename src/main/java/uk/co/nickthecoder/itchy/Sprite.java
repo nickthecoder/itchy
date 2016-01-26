@@ -111,4 +111,10 @@ public class Sprite extends PoseResource implements Comparable<Sprite>, Property
         return this.name.compareTo( o.name );
     }
     
+    public String toString()
+    {
+        return "Sprite name:'" + name +
+            "' (" + x + "," + y + "-" + width + ","+height+
+            ") -> " + pose.toString();
+    }
 }

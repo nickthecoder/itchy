@@ -72,7 +72,7 @@ public class StringProperty<S> extends Property<S, String>
                 {
                     try {
                         if (! widget.hasStyle("error")) {
-                            StringProperty.this.update(subject, (Component) widget);
+                            StringProperty.this.updateSubject(subject, (Component) widget);
                         }
                     } catch (Exception e) {
                         // Do nothing
@@ -97,7 +97,7 @@ public class StringProperty<S> extends Property<S, String>
     }
 
     @Override
-    public void update( S subject, Component component ) throws Exception
+    public void updateSubject( S subject, Component component ) throws Exception
     {
         TextWidget textWidget = (TextWidget) component;
         try {
@@ -110,7 +110,7 @@ public class StringProperty<S> extends Property<S, String>
     }
 
     @Override
-    public void refresh( S subject, Component component ) throws Exception
+    public void updateComponent( S subject, Component component ) throws Exception
     {
         TextBox textBox = (TextBox) component;
         textBox.setText(this.getValue(subject));

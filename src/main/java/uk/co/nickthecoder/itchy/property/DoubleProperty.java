@@ -29,7 +29,7 @@ public class DoubleProperty<S> extends Property<S, Double>
                 public void changed()
                 {
                     try {
-                        DoubleProperty.this.update(subject, box);
+                        DoubleProperty.this.updateSubject(subject, box);
                     } catch (Exception e) {
                         // Do nothing
                     }
@@ -73,7 +73,7 @@ public class DoubleProperty<S> extends Property<S, Double>
     }
 
     @Override
-    public void update( S subject, Component component ) throws Exception
+    public void updateSubject( S subject, Component component ) throws Exception
     {
         DoubleBox doubleBox = (DoubleBox) component;
         try {
@@ -85,7 +85,7 @@ public class DoubleProperty<S> extends Property<S, Double>
     }
 
     @Override
-    public void refresh( S subject, Component component ) throws Exception
+    public void updateComponent( S subject, Component component ) throws Exception
     {
         DoubleBox doubleBox = (DoubleBox) component;
         doubleBox.setValue(this.getValue(subject));

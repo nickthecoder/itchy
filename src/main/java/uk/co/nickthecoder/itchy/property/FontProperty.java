@@ -43,7 +43,7 @@ public class FontProperty<S> extends Property<S, Font>
                 public void changed()
                 {
                     try {
-                        FontProperty.this.update(subject, pickerButton);
+                        FontProperty.this.updateSubject(subject, pickerButton);
                     } catch (Exception e) {
                         // Do nothing
                     }
@@ -69,7 +69,7 @@ public class FontProperty<S> extends Property<S, Font>
     }
 
     @Override
-    public void update( S subject, Component component ) throws Exception
+    public void updateSubject( S subject, Component component ) throws Exception
     {
         FontPickerButton pickerButton = (FontPickerButton) component;
         try {
@@ -81,7 +81,7 @@ public class FontProperty<S> extends Property<S, Font>
     }
 
     @Override
-    public void refresh( S subject, Component component ) throws Exception
+    public void updateComponent( S subject, Component component ) throws Exception
     {
         FontPickerButton pickerButton = (FontPickerButton) component;
         Font font = this.getValue(subject);

@@ -37,9 +37,9 @@ public class EditLayer extends EditNamedSubject<Layer>
     {
         for (Layer layer : layout.layers) {
             // As this is used to test for duplicate names, don't return this layer.
-            //if (layer == subject) {
-            //    continue;
-            //}
+            // if (layer == subject) {
+            // continue;
+            // }
             if (layer.name.equals(name)) {
                 return layer;
             }
@@ -58,6 +58,10 @@ public class EditLayer extends EditNamedSubject<Layer>
     private Container stageConstraintPropertiesContainer;
     private Notebook notebook;
 
+    private PropertiesForm<View> initialViewPropertiesForm = null;
+    private PropertiesForm<Stage> initialStagePropertiesForm = null;
+    private PropertiesForm<StageConstraint> initialStageConstraintPropertiesForm = null;
+
     @Override
     protected Component createForm()
     {
@@ -74,9 +78,9 @@ public class EditLayer extends EditNamedSubject<Layer>
         notebook.addPage("Stage Properties", stagePropertiesContainer);
         notebook.addPage("Stage Constraint", stageConstraintPropertiesContainer);
 
-        createViewProperties();
-        createStageProperties();
-        createStageConstraintProperties();
+        initialViewPropertiesForm = createViewProperties();
+        initialStagePropertiesForm = createStageProperties();
+        initialStageConstraintPropertiesForm = createStageConstraintProperties();
 
         final ClassNameBox viewClassNameBox = (ClassNameBox) form.getComponent("viewClassName");
         viewClassNameBox.addChangeListener(new ComponentChangeListener()
@@ -120,24 +124,23 @@ public class EditLayer extends EditNamedSubject<Layer>
         return notebook;
     }
 
-    private PropertiesForm<View> viewPropertiesForm;
-
-    private void createViewProperties()
+    private PropertiesForm<View> createViewProperties()
     {
         viewPropertiesContainer.clear();
 
         View view = subject.getView();
-        viewPropertiesForm = new PropertiesForm<View>(view, view.getProperties());
+        PropertiesForm<View> viewForm = new PropertiesForm<View>(view, view.getProperties());
+        viewForm.autoUpdate = true;
 
-        viewPropertiesContainer.addChild(viewPropertiesForm.createForm());
+        viewPropertiesContainer.addChild(viewForm.createForm());
+        
+        return viewForm;
     }
 
-    private PropertiesForm<Stage> stagePropertiesForm;
-
-    private void createStageProperties()
+    private PropertiesForm<Stage> createStageProperties()
     {
-        stagePropertiesForm = null;
-
+        PropertiesForm<Stage> stageForm = null;
+        
         stagePropertiesContainer.clear();
 
         StageView stageView = subject.getStageView();
@@ -148,8 +151,9 @@ public class EditLayer extends EditNamedSubject<Layer>
             Stage stage = stageView.getStage();
             if (stage != null) {
 
-                stagePropertiesForm = new PropertiesForm<Stage>(stage, stage.getProperties());
-                stagePropertiesContainer.addChild(stagePropertiesForm.createForm());
+                stageForm = new PropertiesForm<Stage>(stage, stage.getProperties());
+                stageForm.autoUpdate = true;
+                stagePropertiesContainer.addChild(stageForm.createForm());
 
             }
         }
@@ -159,14 +163,12 @@ public class EditLayer extends EditNamedSubject<Layer>
         notebook.getTab(2).setVisible(hasStage);
         notebook.getTab(3).setVisible(hasStage);
 
+        return stageForm;
     }
 
-    private PropertiesForm<StageConstraint> stageConstraintPropertiesForm;
 
-    private void createStageConstraintProperties()
+    private PropertiesForm<StageConstraint> createStageConstraintProperties()
     {
-        stageConstraintPropertiesForm = null;
-
         stageConstraintPropertiesContainer.clear();
 
         StageView stageView = subject.getStageView();
@@ -177,13 +179,17 @@ public class EditLayer extends EditNamedSubject<Layer>
             if (stage != null) {
                 StageConstraint stageConstraint = stage.getStageConstraint();
 
-                stageConstraintPropertiesForm = new PropertiesForm<StageConstraint>(stageConstraint,
-                    stageConstraint.getProperties());
-                stageConstraintPropertiesContainer.addChild(stageConstraintPropertiesForm.createForm());
+                PropertiesForm<StageConstraint> stageConstraintForm =
+                    new PropertiesForm<StageConstraint>(stageConstraint, stageConstraint.getProperties());
+                
+                stageConstraintForm.autoUpdate = true;
+                stageConstraintPropertiesContainer.addChild(stageConstraintForm.createForm());
 
+                return stageConstraintForm;
             }
         }
 
+        return null;
     }
 
     @Override
@@ -195,9 +201,18 @@ public class EditLayer extends EditNamedSubject<Layer>
     @Override
     protected void onCancel()
     {
-        stageConstraintPropertiesForm.revert();
-        stagePropertiesForm.revert();
-        viewPropertiesForm.revert();
         super.onCancel();
+
+        // Revert the other forms to the values they had when they were FIRST created.
+        initialViewPropertiesForm.revert(subject.getView());
+
+        if (initialStageConstraintPropertiesForm != null) {
+            initialStageConstraintPropertiesForm.revert( subject.getStage().getStageConstraint());
+        }
+        
+        if ( initialStagePropertiesForm != null) {
+            initialStagePropertiesForm.revert(subject.getStage());
+        }
+        
     }
 }

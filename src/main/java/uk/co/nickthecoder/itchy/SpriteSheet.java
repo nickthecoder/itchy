@@ -111,4 +111,8 @@ public class SpriteSheet implements NamedSubject<SpriteSheet>
         return thumbnail;
     }
 
+    public String toString()
+    {
+        return "SpriteSheet name:'" + name + "' file:'" + file + "' size:" + sprites.size();
+    }
 }

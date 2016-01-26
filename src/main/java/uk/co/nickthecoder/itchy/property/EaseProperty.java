@@ -36,7 +36,7 @@ public class EaseProperty<S> extends Property<S, Ease>
                 public void changed()
                 {
                     try {
-                        EaseProperty.this.update(subject, button);
+                        EaseProperty.this.updateSubject(subject, button);
                     } catch (Exception e) {
                     }
                 }
@@ -61,14 +61,14 @@ public class EaseProperty<S> extends Property<S, Ease>
     }
 
     @Override
-    public void update( S subject, Component component ) throws Exception
+    public void updateSubject( S subject, Component component ) throws Exception
     {
         EasePickerButton button = (EasePickerButton) component;
         setValue(subject, button.getValue());
     }
 
     @Override
-    public void refresh( S subject, Component component ) throws Exception
+    public void updateComponent( S subject, Component component ) throws Exception
     {
         EasePickerButton button = (EasePickerButton) component;
         button.setValue(getValue(subject));

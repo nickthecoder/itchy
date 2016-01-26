@@ -6,6 +6,7 @@ package uk.co.nickthecoder.itchy.extras;
 
 import java.awt.Point;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Random;
 
 import uk.co.nickthecoder.itchy.Actor;
@@ -14,6 +15,7 @@ import uk.co.nickthecoder.itchy.DynamicPoseResource;
 import uk.co.nickthecoder.itchy.ImagePose;
 import uk.co.nickthecoder.itchy.Pose;
 import uk.co.nickthecoder.itchy.PoseResource;
+import uk.co.nickthecoder.jame.RGBA;
 import uk.co.nickthecoder.jame.Surface;
 
 /**
@@ -32,39 +34,31 @@ import uk.co.nickthecoder.jame.Surface;
  */
 public class Fragments
 {
-    private int pieceCount = 10;
+    protected int pieceCount = 10;
 
-    private Random random;
+    protected Random random;
 
-    public Fragment[] fragments;
+    protected Fragment[] fragments;
 
-    public double direction;
+    protected double direction;
+
+    protected FragmentMethod fragmentMethod = new RandomFragments();
     
-    /*
-    public int minDx = Integer.MAX_VALUE;
-
-    public int maxDx = Integer.MIN_VALUE;
-
-    public int minDy = Integer.MAX_VALUE;
-
-    public int maxDy = Integer.MIN_VALUE;
-    */
-
-    
-    private int index;
+    protected int index;
 
     // The following attributes are used during the fragmentation process only.
 
-    private int[][] owner;
+    protected int[][] owner;
 
-    private Pose sourcePose;
+    protected Pose sourcePose;
 
-    private Surface source;
+    protected Surface source;
 
-    private PieceInProgress[] piecesInProgress;
+    protected PieceInProgress[] piecesInProgress;
 
-    private int toGo;
+    protected int toGo;
 
+    
     public Fragments()
     {
         this.random = new Random();
@@ -87,6 +81,12 @@ public class Fragments
         return this;
     }
 
+    public Fragments method( FragmentMethod fragmentMethod )
+    {
+        this.fragmentMethod = fragmentMethod;
+        return this;
+    }
+    
     public Fragments create(Costume costume)
     {
         return create( costume.getPose( "default" ) );
@@ -108,55 +108,8 @@ public class Fragments
             }
         }
 
-        for (int i = 0; i < this.pieceCount; i++) {
-
-            // We may pick a pixel that is already owned, if so, lets try 10 times, and then give up.
-            for (int loop = 0; loop < 10; loop++) {
-                int x = this.random.nextInt(this.source.getWidth());
-                int y = this.random.nextInt(this.source.getHeight());
-                if (this.owner[x][y] == -1) {
-                    this.piecesInProgress[i] = new PieceInProgress(i);
-                    setOwner(x, y, i);
-                    break;
-                }
-                // Failed to find a good starting spot, give up and use one that's already owned.
-                this.piecesInProgress[i] = new PieceInProgress(i);
-                this.piecesInProgress[i].setOwner(x, y);
-            }
-        }
-
-        while (this.toGo > 0) {
-            int i = this.random.nextInt(this.pieceCount);
-            this.piecesInProgress[i].grow();
-        }
-
-        this.fragments = new Fragment[this.pieceCount];
-
-        for (int i = 0; i < this.pieceCount; i++) {
-            ImagePose newPose = new ImagePose(this.piecesInProgress[i].surface, pose.getOffsetX(), pose.getOffsetY());
-
-            newPose.setDirection(pose.getDirection());
-
-            this.fragments[i] = piecesInProgress[i].createPiece();
-
-            /*
-            if (fragments[i].dx < minDx)
-                minDx = fragments[i].dx;
-            if (fragments[i].dy > maxDx)
-                minDx = fragments[i].dx;
-            if (fragments[i].dx < minDy)
-                minDy = fragments[i].dy;
-            if (fragments[i].dy > maxDy)
-                minDy = fragments[i].dy;
-            */  
-        }
-
-        // Allow objects to be freed, as they are no longer needed.
-        this.piecesInProgress = null;
-        this.owner = null;
-        this.sourcePose = null;
-        this.source = null;
-
+        this.fragmentMethod.create(this);
+        
         return this;
     }
 
@@ -173,7 +126,7 @@ public class Fragments
      * Fragments the actor's current pose, and adds the result to the actors costume. If the costume already had one or
      * more poses with that name, then nothing is done.
      * 
-     * @return this )(Fluent API)
+     * @return this (Fluent API)
      */
     public Fragments createPoses(Actor actor, String eventName)
     {
@@ -181,6 +134,16 @@ public class Fragments
             create(actor.getAppearance().getPose()).addToCostume(actor.getCostume(), eventName);
         }
         return this;
+    }
+    
+    public RGBA getRGBA( int x, int y )
+    {
+        return this.source.getPixelRGBA(x,  y);
+    }
+    
+    public RGBA getRGBA( Point point )
+    {
+        return this.source.getPixelRGBA(point.x,  point.y);
     }
 
     public Fragments addToCostume(Costume costume)
@@ -197,15 +160,77 @@ public class Fragments
         return this;
     }
 
-    private void setOwner(int x, int y, int owner)
+    protected boolean setOwner(int x, int y, int owner)
     {
         if (this.owner[x][y] != -1) {
-            return;
+            return false;
         }
         this.owner[x][y] = owner;
         this.toGo--;
-        this.piecesInProgress[owner].setOwner(x, y);
+        return true;
     }
+
+    protected int findPointType = 0;
+    protected List<Point> unownedPoints;
+    
+    protected Point findUnownedPoint()
+    {
+        if ( this.findPointType == 0 ) {
+            // We may pick a pixel that is already owned, if so, lets try 10 times, and then give up.
+            for (int loop = 0; loop < 10; loop++) {
+                int x = this.random.nextInt(this.source.getWidth());
+                int y = this.random.nextInt(this.source.getHeight());
+    
+                if (this.owner[x][y] == -1) {
+                    return new Point(x, y );
+                }
+            }
+            // There's probably few places let, so lets put all unowned points in a list, and pick one at random.
+            this.findPointType ++;
+            unownedPoints = new LinkedList<Point>();
+            for ( int x = 0; x < this.source.getWidth(); x ++ ) {
+                for ( int y = 0; y < this.source.getHeight(); y ++ ) {
+                    if (this.owner[x][y] == -1) {
+                        unownedPoints.add(new Point(x, y));
+                    }
+                }
+            }
+        }
+        
+        if (this.unownedPoints.size() == 0) {
+            throw new RuntimeException( "All points have been used" );
+        }
+        
+        int index = this.random.nextInt(this.unownedPoints.size());
+        Point point = this.unownedPoints.get(index);
+        this.unownedPoints.remove(index);
+        
+        return point;
+    }
+    
+    protected void createFragments( int count )
+    {
+        
+        this.fragments = new Fragment[count];
+    
+        for (int i = 0; i < count; i++) {
+            ImagePose newPose = new ImagePose(this.piecesInProgress[i].surface, sourcePose.getOffsetX(), sourcePose.getOffsetY());
+    
+            newPose.setDirection(sourcePose.getDirection());
+    
+            this.fragments[i] = this.piecesInProgress[i].createPiece();
+    
+        }
+    
+        // Allow objects to be freed, as they are no longer needed.
+        this.findPointType = 0;
+        this.unownedPoints = null;
+        this.piecesInProgress = null;
+        this.owner = null;
+        this.sourcePose = null;
+        this.source = null;
+    }
+
 
     public void useFragment(Actor actor)
     {
@@ -226,7 +251,7 @@ public class Fragments
     /**
      * One piece after fragmentation.
      */
-    class Fragment
+    static class Fragment
     {
         public ImagePose pose;
         /**
@@ -244,12 +269,17 @@ public class Fragments
             this.dy = dy;
         }
     }
-
+    public PieceInProgress createPieceInProgress( int index )
+    {
+        this.piecesInProgress[index] = new PieceInProgress( index );
+        return this.piecesInProgress[index];
+    }
+    
     /**
      * Inner class PieceInProgress, is one fragment of the larger image. Each piece has its own surface which is the
      * same size as the original image. This surface starts off completely transparent, and then one pixel is chosen as
      * the seed point for this fragment. The seed pixel is set to the same as the original image. As the piece grows,
-     * more pixels are set until every pixel on the origianal image has been copied to one of the pieces.
+     * more pixels are set until every pixel on the original image has been copied to one of the pieces.
      */
     class PieceInProgress
     {
@@ -263,7 +293,7 @@ public class Fragments
         int maxY = 0;
         int minY = Fragments.this.source.getHeight();
 
-        PieceInProgress(int index)
+        public PieceInProgress(int index)
         {
             this.edges = new LinkedList<Point>();
             this.owner = index;
@@ -292,19 +322,28 @@ public class Fragments
         {
             if ((x >= 0) && (x < Fragments.this.source.getWidth()) && (y >= 0)
                             && (y < Fragments.this.source.getHeight())) {
-                this.edges.add(new Point(x, y));
+                if (Fragments.this.owner[x][y] == -1) {
+                    this.edges.add(new Point(x, y));
+                }
             }
         }
-
-        private void grow()
+        
+        protected void ignoreEdge( int i )
         {
-            if (this.edges.size() > 0) {
-                int i = Fragments.this.random.nextInt(this.edges.size());
-                Point point = this.edges.get(i);
-                this.edges.remove(i);
-                Fragments.this.setOwner(point.x, point.y, this.owner);
+            Point point = this.edges.get(i);
+            this.edges.remove(i);
+            Fragments.this.setOwner(point.x,  point.y,  pieceCount);
+        }
+        
+        protected void useEdge( int i )
+        {
+            Point point = this.edges.get(i);
+            this.edges.remove(i);
+            if (Fragments.this.setOwner(point.x,  point.y,  this.owner)) {
+                this.setOwner(point.x, point.y);
             }
         }
+            
 
         public Fragment createPiece()
         {

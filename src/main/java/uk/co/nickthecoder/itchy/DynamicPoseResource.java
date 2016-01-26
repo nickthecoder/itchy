@@ -12,4 +12,8 @@ public class DynamicPoseResource extends PoseResource
         this.pose = pose;
     }
 
+    public String toString()
+    {
+        return "Dynamic" + super.toString();
+    }
 }

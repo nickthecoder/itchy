@@ -37,7 +37,7 @@ public class EnumProperty<S, E extends Enum<?>> extends Property<S, E>
                 public void changed()
                 {
                     try {
-                        EnumProperty.this.update(subject, button);
+                        EnumProperty.this.updateSubject(subject, button);
                     } catch (Exception e) {
                     }
                 }
@@ -64,7 +64,7 @@ public class EnumProperty<S, E extends Enum<?>> extends Property<S, E>
     }
 
     @Override
-    public void update( S subject, Component component ) throws Exception
+    public void updateSubject( S subject, Component component ) throws Exception
     {
         @SuppressWarnings("unchecked")
         EnumPickerButton<E> button = (EnumPickerButton<E>) component;
@@ -73,7 +73,7 @@ public class EnumProperty<S, E extends Enum<?>> extends Property<S, E>
     }
 
     @Override
-    public void refresh( S subject, Component component ) throws Exception
+    public void updateComponent( S subject, Component component ) throws Exception
     {
         @SuppressWarnings("unchecked")
         EnumPickerButton<E> button = (EnumPickerButton<E>) component;

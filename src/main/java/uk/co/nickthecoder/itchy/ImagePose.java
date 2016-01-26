@@ -143,4 +143,10 @@ public class ImagePose implements Pose
     {
     }
 
+    public String toString()
+    {
+        return "ImagePose: (" + surface.getWidth() + "x" + surface.getHeight() + ")"
+            + " offset(" + getOffsetX() + "," + getOffsetY() +")"
+            + " direction: " + direction;
+    }
 }

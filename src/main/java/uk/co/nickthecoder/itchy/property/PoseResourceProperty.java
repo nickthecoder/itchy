@@ -42,7 +42,7 @@ public class PoseResourceProperty<S> extends Property<S, PoseResource>
                 public void changed()
                 {
                     try {
-                        PoseResourceProperty.this.update(subject, pickerButton);
+                        PoseResourceProperty.this.updateSubject(subject, pickerButton);
                     } catch (Exception e) {
                         // Do nothing
                     }
@@ -68,7 +68,7 @@ public class PoseResourceProperty<S> extends Property<S, PoseResource>
     }
 
     @Override
-    public void update( S subject, Component component ) throws Exception
+    public void updateSubject( S subject, Component component ) throws Exception
     {
         PoseResourcePickerButton pickerButton = (PoseResourcePickerButton) component;
         try {
@@ -80,7 +80,7 @@ public class PoseResourceProperty<S> extends Property<S, PoseResource>
     }
 
     @Override
-    public void refresh( S subject, Component component ) throws Exception
+    public void updateComponent( S subject, Component component ) throws Exception
     {
         PoseResourcePickerButton pickerButton = (PoseResourcePickerButton) component;
         PoseResource poseResource = this.getValue(subject);

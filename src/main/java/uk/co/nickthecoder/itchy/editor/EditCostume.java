@@ -115,6 +115,8 @@ public class EditCostume extends EditNamedSubject<Costume>
         return notebook;
     }
 
+    private PropertiesForm<CostumeFeatures> initialCostumeFeaturesForm;
+    
     private void createPropertiesGrid()
     {
         this.propertiesContainer.clear();
@@ -126,5 +128,17 @@ public class EditCostume extends EditNamedSubject<Costume>
         form.autoUpdate = true;
 
         this.propertiesContainer.addChild( form.createForm() );
+        
+        // Remember the FIRST form that was created, as this will have the values needed to revert
+        // the costume features back to their original values. See onCancel.
+        if ( initialCostumeFeaturesForm == null ) {
+            initialCostumeFeaturesForm = form;
+        }
+    }
+
+    protected void onCancel()
+    {
+        super.onCancel();
+        this.initialCostumeFeaturesForm.revert(subject.getCostumeFeatures());
     }
 }

@@ -46,7 +46,7 @@ public class BooleanProperty<S> extends Property<S, Boolean>
                 public void changed()
                 {
                     try {
-                        BooleanProperty.this.update(subject, checkBox);
+                        BooleanProperty.this.updateSubject(subject, checkBox);
                     } catch (Exception e) {
                         // Do nothing
                     }
@@ -71,7 +71,7 @@ public class BooleanProperty<S> extends Property<S, Boolean>
     }
 
     @Override
-    public void update( S subject, Component component ) throws Exception
+    public void updateSubject( S subject, Component component ) throws Exception
     {
         CheckBox checkBox = (CheckBox) component;
         try {
@@ -83,7 +83,7 @@ public class BooleanProperty<S> extends Property<S, Boolean>
     }
 
     @Override
-    public void refresh( S subject, Component component ) throws Exception
+    public void updateComponent( S subject, Component component ) throws Exception
     {
         CheckBox checkBox = (CheckBox) component;
         checkBox.setValue(this.getValue(subject));

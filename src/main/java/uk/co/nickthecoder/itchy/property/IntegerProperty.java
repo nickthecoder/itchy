@@ -28,7 +28,7 @@ public class IntegerProperty<S> extends Property<S, Integer>
                 public void changed()
                 {
                     try {
-                        IntegerProperty.this.update(subject, box);
+                        IntegerProperty.this.updateSubject(subject, box);
                     } catch (Exception e) {
                         // Do nothing
                     }
@@ -83,7 +83,7 @@ public class IntegerProperty<S> extends Property<S, Integer>
     }
 
     @Override
-    public void update( S subject, Component component ) throws Exception
+    public void updateSubject( S subject, Component component ) throws Exception
     {
         IntegerBox integerBox = (IntegerBox) component;
         try {
@@ -95,7 +95,7 @@ public class IntegerProperty<S> extends Property<S, Integer>
     }
 
     @Override
-    public void refresh( S subject, Component component ) throws Exception
+    public void updateComponent( S subject, Component component ) throws Exception
     {
         IntegerBox integerBox = (IntegerBox) component;
         integerBox.setValue(this.getValue(subject));

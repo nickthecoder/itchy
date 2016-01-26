@@ -48,7 +48,7 @@ public class ChoiceProperty<S, T> extends Property<S, T>
                 public void changed()
                 {
                     try {
-                        ChoiceProperty.this.update(subject, button);
+                        ChoiceProperty.this.updateSubject(subject, button);
                     } catch (Exception e) {
                         // Do nothing
                     }
@@ -84,7 +84,7 @@ public class ChoiceProperty<S, T> extends Property<S, T>
     }
 
     @Override
-    public void update( S subject, Component component ) throws Exception
+    public void updateSubject( S subject, Component component ) throws Exception
     {
         @SuppressWarnings("unchecked")
         PickerButton<T> button = (PickerButton<T>) component;
@@ -92,7 +92,7 @@ public class ChoiceProperty<S, T> extends Property<S, T>
     }
 
     @Override
-    public void refresh( S subject, Component component ) throws Exception
+    public void updateComponent( S subject, Component component ) throws Exception
     {
         @SuppressWarnings("unchecked")
         PickerButton<T> button = (PickerButton<T>) component;

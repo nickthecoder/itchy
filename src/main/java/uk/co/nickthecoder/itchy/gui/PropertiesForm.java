@@ -27,10 +27,10 @@ public class PropertiesForm<S>
     private Map<String, Component> componentMap;
 
     List<Property<S, ?>> properties;
-    
-    private Map<String,Object> revertValues;
 
-    public PropertiesForm( S subject, List<Property<S, ?>> properties )
+    private Map<String, Object> revertValues;
+
+    public PropertiesForm(S subject, List<Property<S, ?>> properties)
     {
         this.subject = subject;
         this.properties = properties;
@@ -40,14 +40,14 @@ public class PropertiesForm<S>
         this.container.setYAlignment(0.5);
         this.grid = new GridLayout(this.container, 2);
         this.container.setLayout(this.grid);
-        this.revertValues = new HashMap<String,Object>();
+        this.revertValues = new HashMap<String, Object>();
     }
 
     public Container createForm()
     {
         try {
             this.componentMap = new HashMap<String, Component>();
-    
+
             for (Property<S, ?> property : this.properties) {
                 Component component = createComponent(property);
                 this.componentMap.put(property.key, component);
@@ -55,7 +55,7 @@ public class PropertiesForm<S>
                 this.revertValues.put(property.key, property.getValue(subject));
             }
         } catch (Exception e) {
-            throw new RuntimeException( e );
+            throw new RuntimeException(e);
         }
 
         return this.container;
@@ -63,48 +63,66 @@ public class PropertiesForm<S>
 
     /**
      * When using autoUpdate, check if any of the fields have been altered.
+     * 
      * @return True iff any of the fields have been changed.
      */
     public boolean hasChanged()
     {
         try {
-            for(Property<S, ?> property : this.properties) {
+            for (Property<S, ?> property : this.properties) {
                 Object newValue = property.getValue(subject);
                 Object oldValue = this.revertValues.get(property.key);
-                if ( newValue == oldValue ) continue;
-                
-                if ( newValue == null ) {
+                if (newValue == oldValue)
+                    continue;
+
+                if (newValue == null) {
                     return true;
                 }
-                
-                if ( ! newValue.equals(oldValue) ) {
+
+                if (!newValue.equals(oldValue)) {
                     return true;
                 }
-                
+
             }
             return false;
         } catch (Exception e) {
             return true;
-        }        
-    }
-    
-    public void revert()
-    {
-        try {
-            for(Property<S, ?> property : this.properties) {
-                property.setValue(subject, this.revertValues.get(property.key) );
-            }
-        } catch (Exception e) {
-            throw new RuntimeException( e );
         }
     }
-    
-    public Object getRevertValue( String key )
+
+    /**
+     * Sets the subject's values back to the values they had when the form was first created.
+     */
+    public void revert()
+    {
+        revert(this.subject);
+    }
+
+    /**
+     * Sets the subject's values back to the values they had when the form was first created.
+     * 
+     * @param subject
+     *            The subject who's values are reverted.
+     */
+    public void revert(S subject)
+    {
+        try {
+            for (Property<S, ?> property : this.properties) {
+                property.setValue(subject, this.revertValues.get(property.key));
+                // Update the component, so that ComponentChangeListeners can detect the changed value.
+                property.updateComponent(subject, getComponent(property.key));
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public Object getRevertValue(String key)
     {
         return revertValues.get(key);
     }
-    
-    protected Component createComponent( Property<S, ?> property )
+
+    protected Component createComponent(Property<S, ?> property)
     {
         return property.createComponent(this.subject, this.autoUpdate);
     }
@@ -113,12 +131,13 @@ public class PropertiesForm<S>
      * Takes an input component, and adds a optional hint text to its right.
      * 
      * @param input
-     *        The input component
+     *            The input component
      * @param hint
-     *        The optional hint (may be null or blank).
-     * @return If the hint is blank, then 'input' is returned, otherwise a Container containing 'input' and the hint as a Label.
+     *            The optional hint (may be null or blank).
+     * @return If the hint is blank, then 'input' is returned, otherwise a Container containing 'input' and the hint as
+     *         a Label.
      */
-    private static Component hint( Component input, String hint )
+    private static Component hint(Component input, String hint)
     {
         if (StringUtils.isBlank(hint)) {
             return input;
@@ -166,7 +185,7 @@ public class PropertiesForm<S>
      * Updates the subject with the values entered by the user. No need to call this when using autoUpdate=true.
      * 
      * @throws Exception
-     *         If one of the properties couldn't be updated.
+     *             If one of the properties couldn't be updated.
      */
     public void update()
     {
@@ -179,7 +198,7 @@ public class PropertiesForm<S>
         for (Property<S, ?> property : this.properties) {
             Component component = this.componentMap.get(property.key);
             try {
-                property.update(this.subject, component);
+                property.updateSubject(this.subject, component);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -190,15 +209,15 @@ public class PropertiesForm<S>
      * Returns the GUI component used to enter the property value.
      * 
      * @param propertyKey
-     *        The key for the property. See {@link Property#key}.
+     *            The key for the property. See {@link Property#key}.
      * @return The component.
      */
-    public Component getComponent( String propertyKey )
+    public Component getComponent(String propertyKey)
     {
         return this.componentMap.get(propertyKey);
     }
 
-    public void addComponentChangeListener( String propertyKey, ComponentChangeListener listener )
+    public void addComponentChangeListener(String propertyKey, ComponentChangeListener listener)
     {
         Component component = this.componentMap.get(propertyKey);
         for (Property<S, ?> property : this.properties) {
@@ -208,8 +227,8 @@ public class PropertiesForm<S>
             }
         }
     }
-    
-    public void addValidator( String propertyKey, ComponentValidator validator )
+
+    public void addValidator(String propertyKey, ComponentValidator validator)
     {
         Component component = this.componentMap.get(propertyKey);
         for (Property<S, ?> property : this.properties) {

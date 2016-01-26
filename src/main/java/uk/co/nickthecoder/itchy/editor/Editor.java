@@ -76,6 +76,14 @@ public final class Editor extends Game implements KeyListener
     
     private KeyInput inputSave = KeyInput.parseKeyInput("ctrl+s");
     
+    
+    private KeyInput inputDebug1 = KeyInput.parseKeyInput("ctrl+F1"); 
+
+    private KeyInput inputDebug2 = KeyInput.parseKeyInput("ctrl+F2"); 
+
+    private KeyInput inputDebug3 = KeyInput.parseKeyInput("ctrl+F3"); 
+
+    
     public Editor(Game game) throws Exception
     {
         super(game.resources);
@@ -353,8 +361,34 @@ public final class Editor extends Game implements KeyListener
         if (inputSave.matches(ke)) {
             onSave();
         }
+        
+        if (inputDebug1.matches(ke)) {
+            debug1();
+        }
+        
+        if (inputDebug2.matches(ke)) {
+            debug2();
+        }
+        
+        if (inputDebug3.matches(ke)) {
+            debug3();
+        }
     }
 
+    public void debug1()
+    {
+        this.resources.dump();
+    }
+    
+    public void debug2()
+    {
+        
+    }
+    
+    public void debug3()
+    {
+    }
+    
     @Override
     public void onKeyUp(KeyboardEvent ke)
     {

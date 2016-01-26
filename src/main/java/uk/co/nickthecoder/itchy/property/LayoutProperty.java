@@ -41,7 +41,7 @@ public class LayoutProperty<S> extends Property<S, Layout>
                 public void changed()
                 {
                     try {
-                        LayoutProperty.this.update(subject, pickerButton);
+                        LayoutProperty.this.updateSubject(subject, pickerButton);
                     } catch (Exception e) {
                         // Do nothing
                     }
@@ -67,7 +67,7 @@ public class LayoutProperty<S> extends Property<S, Layout>
     }
 
     @Override
-    public void update( S subject, Component component ) throws Exception
+    public void updateSubject( S subject, Component component ) throws Exception
     {
         LayoutPickerButton pickerButton = (LayoutPickerButton) component;
         try {
@@ -79,7 +79,7 @@ public class LayoutProperty<S> extends Property<S, Layout>
     }
 
     @Override
-    public void refresh( S subject, Component component ) throws Exception
+    public void updateComponent( S subject, Component component ) throws Exception
     {
         LayoutPickerButton pickerButton = (LayoutPickerButton) component;
         Layout layout = this.getValue(subject);

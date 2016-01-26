@@ -1,8 +1,20 @@
 Current Tasks
 =============
 
-Remove a Sprite, save doesn't work (check fails, but is fine).
+Add debug Inputs for Editor:
+    List Poses, SpritesSheets&Sprites, etc.
+    
 
+Remove a Sprite, save doesn't work (check fails, but is fine).
+    maybe renaming!
+Rename then delete a pose doesn't work.
+
+Debris-rocks - pieces have offsets, so they explode naturally.
+    Can I use Fragments class as this already does what I want?
+    Make Fragments an abstract base class, then implement :
+        RandomFragments - (What Fragments currently does)
+        FloodFillFragments - Flood fill based on transparency for the keyboard and "K"
+        ColorKeyFragments - for the others Pyrox rocks, or maybe Random with a fixed key (to ensure pieces are not too small).
 
 All resources.renameXXX needs to update the renamed collection, so that renameSubjectsInScenes will work. 
     And do the same with other resources. Layouts, Fonts, ... ?

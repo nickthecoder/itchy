@@ -36,7 +36,7 @@ public class CostumeProperty<S> extends Property<S, Costume>
                 public void changed()
                 {
                     try {
-                        CostumeProperty.this.update(subject, pickerButton);
+                        CostumeProperty.this.updateSubject(subject, pickerButton);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -62,7 +62,7 @@ public class CostumeProperty<S> extends Property<S, Costume>
     }
 
     @Override
-    public void update( S subject, Component component ) throws Exception
+    public void updateSubject( S subject, Component component ) throws Exception
     {
         CostumePickerButton pickerButton = (CostumePickerButton) component;
         try {
@@ -74,7 +74,7 @@ public class CostumeProperty<S> extends Property<S, Costume>
     }
 
     @Override
-    public void refresh( S subject, Component component ) throws Exception
+    public void updateComponent( S subject, Component component ) throws Exception
     {
         CostumePickerButton pickerButton = (CostumePickerButton) component;
         pickerButton.setValue(this.getValue(subject));

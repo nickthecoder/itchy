@@ -39,7 +39,7 @@ public class NinePatchProperty<S> extends Property<S, NinePatch>
                 public void changed()
                 {
                     try {
-                        NinePatchProperty.this.update(subject, pickerButton);
+                        NinePatchProperty.this.updateSubject(subject, pickerButton);
                     } catch (Exception e) {
                         // Do nothing
                     }
@@ -65,7 +65,7 @@ public class NinePatchProperty<S> extends Property<S, NinePatch>
     }
 
     @Override
-    public void update( S subject, Component component ) throws Exception
+    public void updateSubject( S subject, Component component ) throws Exception
     {
         NinePatchPickerButton pickerButton = (NinePatchPickerButton) component;
         try {
@@ -77,7 +77,7 @@ public class NinePatchProperty<S> extends Property<S, NinePatch>
     }
 
     @Override
-    public void refresh( S subject, Component component ) throws Exception
+    public void updateComponent( S subject, Component component ) throws Exception
     {
         NinePatchPickerButton pickerButton = (NinePatchPickerButton) component;
         NinePatch ninePatch = this.getValue(subject);

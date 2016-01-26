@@ -35,7 +35,7 @@ public class AnimationProperty<S> extends Property<S, AnimationResource>
                 public void changed()
                 {
                     try {
-                        AnimationProperty.this.update(subject, pickerButton);
+                        AnimationProperty.this.updateSubject(subject, pickerButton);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -61,7 +61,7 @@ public class AnimationProperty<S> extends Property<S, AnimationResource>
     }
 
     @Override
-    public void update( S subject, Component component ) throws Exception
+    public void updateSubject( S subject, Component component ) throws Exception
     {
         AnimationPickerButton pickerButton = (AnimationPickerButton) component;
         try {
@@ -73,7 +73,7 @@ public class AnimationProperty<S> extends Property<S, AnimationResource>
     }
 
     @Override
-    public void refresh( S subject, Component component ) throws Exception
+    public void updateComponent( S subject, Component component ) throws Exception
     {
         AnimationPickerButton pickerButton = (AnimationPickerButton) component;
         pickerButton.setValue(this.getValue(subject));

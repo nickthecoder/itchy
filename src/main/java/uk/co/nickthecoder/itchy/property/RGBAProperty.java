@@ -42,7 +42,7 @@ public class RGBAProperty<S> extends Property<S, RGBA>
                 public void changed()
                 {
                     try {
-                        RGBAProperty.this.update(subject, result);
+                        RGBAProperty.this.updateSubject(subject, result);
                     } catch (Exception e) {
                     }
                 }
@@ -67,7 +67,7 @@ public class RGBAProperty<S> extends Property<S, RGBA>
     }
     
     @Override
-    public void update( S subject, Component component )
+    public void updateSubject( S subject, Component component )
     {
         RGBABox rgbaBox = (RGBABox) component;
         try {
@@ -77,7 +77,7 @@ public class RGBAProperty<S> extends Property<S, RGBA>
     }
 
     @Override
-    public void refresh( S subject, Component component ) throws Exception
+    public void updateComponent( S subject, Component component ) throws Exception
     {
         RGBABox rgbaBox = (RGBABox) component;
         rgbaBox.setValue(this.getValue(subject));
