@@ -1,10 +1,6 @@
 Current Tasks
 =============
 
-Drebis: doesn't load.
-
-Frame Makeup uses a String for a NinePatch. Create a property, picker, etc.
-
 Load/Save using properties wherever possible.
     
 Editor to test if resources have changed and prompt for confirm before exiting.
