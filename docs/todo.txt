@@ -1,18 +1,11 @@
 Current Tasks
 =============
 
-Load/Save using properties wherever possible.
-    
-Editor to test if resources have changed and prompt for confirm before exiting.
-
+Remove a Sprite, save doesn't work (check fails, but is fine).
 
 
 All resources.renameXXX needs to update the renamed collection, so that renameSubjectsInScenes will work. 
     And do the same with other resources. Layouts, Fonts, ... ?
-
-Delete NamedResource
-
-
 
 Remove scene.backgroundColor
 
@@ -71,8 +64,6 @@ Appearance.fixPose doesn't do the right thing with direction.
 Can delete Poses which are used in a Framed animation
     Ditto for a Sprite.
 
-Name not saved when editing an Input.
-
 
 Trivial Bugs
 ============
@@ -81,6 +72,8 @@ Ensure Scrollbars of Scroll do not obscure the contents.
 
 New Features
 ============
+
+Editor to test if resources have changed and prompt for confirm before exiting.
 
 Reset Z-order of all actors based on their costume's z-order.
 
@@ -164,6 +157,10 @@ ColorKeyFragment. Use another pose, to decide which pixels belong to each fragme
 
 Code Tidy Up
 ============
+
+
+Load/Save using properties wherever possible.
+   
 
 MouseListenerView - Why is Game passed to its methods?
 

@@ -41,6 +41,7 @@ class Rock(Moving) :
         self.getActor().getAppearance().adjustDirection(self.rotationSpeed)
 
     
+    
     def shot(self, bullet) :
     	# Small bullets have NO effect on strong rocks.
     	strength = bullet.actor.costume.costumeFeatures.strength
@@ -87,9 +88,11 @@ class Rock(Moving) :
             
             actor.setDirection( self.getActor().getAppearance().getDirection() )
 
+
+
         game.getSceneDirector().addRocks(-1)
-        self.getActor().deathEvent("explode")
         self.removeTag("shootable")
+        self.getActor().deathEvent("explode")
     
     
     def createCostumeFeatures( self, costume ) :

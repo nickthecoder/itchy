@@ -1,6 +1,21 @@
 <resources>
   <game title="Destroy Debris" width="800" height="600" resizable="false" initialScene="menu" testScene="test" directorClassName="director.py"/>
-  <spriteSheets/>
+  <spriteSheets>
+    <spriteSheet name="keys-arrows" file="images/keys-arrows.png">
+      <sprite name="key-left2" direction="0.0" offsetX="16" offsetY="14" x="0" y="9" width="35" height="36"/>
+      <sprite name="key-right2" direction="0.0" offsetX="17" offsetY="15" x="80" y="9" width="35" height="36"/>
+      <sprite name="key-space" direction="0.0" offsetX="56" offsetY="16" x="0" y="47" width="115" height="36"/>
+      <sprite name="key-up2" direction="0.0" offsetX="17" offsetY="15" x="40" y="0" width="35" height="36"/>
+      <sprite name="keys-arrows2" direction="0.0" offsetX="57" offsetY="36" x="0" y="0" width="115" height="83"/>
+    </spriteSheet>
+    <spriteSheet name="keys-zx" file="images/keys-zx.png">
+      <sprite name="key-return2" direction="0.0" offsetX="57" offsetY="18" x="0" y="45" width="115" height="36"/>
+      <sprite name="key-semi2" direction="0.0" offsetX="17" offsetY="15" x="40" y="0" width="35" height="36"/>
+      <sprite name="key-x2" direction="0.0" offsetX="17" offsetY="16" x="80" y="7" width="35" height="36"/>
+      <sprite name="key-z2" direction="0.0" offsetX="17" offsetY="17" x="0" y="7" width="35" height="36"/>
+      <sprite name="keys-zx2" direction="0.0" offsetX="57" offsetY="36" x="0" y="0" width="115" height="81"/>
+    </spriteSheet>
+  </spriteSheets>
   <poses>
     <pose name="bullet1" filename="images/bullet1.png"/>
     <pose name="bullet2" filename="images/bullet2.png"/>
@@ -29,16 +44,6 @@
     <pose name="java-2d" filename="images/java-2d.png"/>
     <pose name="java-2e" filename="images/java-2e.png"/>
     <pose name="java-2f" filename="images/java-2f.png"/>
-    <pose name="key-left" filename="images/key-left.png"/>
-    <pose name="key-return" filename="images/key-return.png"/>
-    <pose name="key-right" filename="images/key-right.png"/>
-    <pose name="key-semicolon" filename="images/key-semicolon.png"/>
-    <pose name="key-space" filename="images/key-space.png"/>
-    <pose name="key-up" filename="images/key-up.png"/>
-    <pose name="key-x" filename="images/key-x.png"/>
-    <pose name="key-z" filename="images/key-z.png"/>
-    <pose name="keys-arrows" filename="images/keys-arrows.png" offsetX="52" offsetY="35"/>
-    <pose name="keys-zx" filename="images/keys-zx.png"/>
     <pose name="kotlin-a" filename="images/kotlin-a.png"/>
     <pose name="kotlin-b1" filename="images/kotlin-b1.png" offsetX="25" offsetY="24"/>
     <pose name="kotlin-b2" filename="images/kotlin-b2.png" offsetX="43" offsetY="24"/>
@@ -429,7 +434,7 @@
       <properties pieces="0" points="10" strength="0" hitsRequired="2"/>
     </costume>
     <costume name="key-arrows" defaultZOrder="0" order="0" showInDesigner="true" extends="rock" role="rock.py">
-      <pose name="default" pose="keys-arrows"/>
+      <pose name="default" pose="keys-arrows2"/>
       <pose name="fragment" pose="spark1"/>
       <companion name="fragment-1" companion="key-up"/>
       <companion name="fragment-2" companion="key-left"/>
@@ -438,47 +443,47 @@
       <properties pieces="4" points="10" strength="0" hitsRequired="1"/>
     </costume>
     <costume name="key-left" defaultZOrder="0" order="0" showInDesigner="true" extends="rock" role="rock.py">
-      <pose name="default" pose="key-left"/>
+      <pose name="default" pose="key-left2"/>
       <pose name="fragment" pose="spark1"/>
       <properties pieces="0" points="10" strength="0" hitsRequired="1"/>
     </costume>
     <costume name="key-return" defaultZOrder="0" order="0" showInDesigner="true" extends="rock" role="rock.py">
-      <pose name="default" pose="key-return"/>
+      <pose name="default" pose="key-return2"/>
       <pose name="fragment" pose="spark5"/>
       <properties pieces="0" points="10" strength="0" hitsRequired="1"/>
     </costume>
     <costume name="key-right" defaultZOrder="0" order="0" showInDesigner="true" extends="rock" role="rock.py">
-      <pose name="default" pose="key-right"/>
+      <pose name="default" pose="key-right2"/>
       <pose name="fragment" pose="spark1"/>
       <properties pieces="0" points="10" strength="0" hitsRequired="1"/>
     </costume>
     <costume name="key-semicolon" defaultZOrder="0" order="0" showInDesigner="true" extends="rock" role="rock.py">
-      <pose name="default" pose="key-semicolon"/>
+      <pose name="default" pose="key-semi2"/>
       <pose name="fragment" pose="spark5"/>
       <properties pieces="0" points="10" strength="0" hitsRequired="1"/>
     </costume>
-    <costume name="key-space" defaultZOrder="0" order="0" showInDesigner="true" extends="rock" role="rock.py">
+    <costume name="key-space" defaultZOrder="0" order="0" showInDesigner="true" role="rock.py">
       <pose name="default" pose="key-space"/>
       <pose name="fragment" pose="spark1"/>
       <properties pieces="0" points="10" strength="0" hitsRequired="1"/>
     </costume>
     <costume name="key-up" defaultZOrder="0" order="0" showInDesigner="true" extends="rock" role="rock.py">
-      <pose name="default" pose="key-up"/>
+      <pose name="default" pose="key-up2"/>
       <pose name="fragment" pose="spark1"/>
       <properties pieces="0" points="10" strength="0" hitsRequired="1"/>
     </costume>
     <costume name="key-x" defaultZOrder="0" order="0" showInDesigner="true" extends="rock" role="rock.py">
-      <pose name="default" pose="key-x"/>
+      <pose name="default" pose="key-x2"/>
       <pose name="fragment" pose="spark5"/>
       <properties pieces="0" points="10" strength="0" hitsRequired="1"/>
     </costume>
     <costume name="key-z" defaultZOrder="0" order="0" showInDesigner="true" extends="rock" role="rock.py">
-      <pose name="default" pose="key-z"/>
+      <pose name="default" pose="key-z2"/>
       <pose name="fragment" pose="spark5"/>
       <properties pieces="0" points="10" strength="0" hitsRequired="1"/>
     </costume>
     <costume name="keys-zx" defaultZOrder="0" order="0" showInDesigner="true" extends="rock" role="rock.py">
-      <pose name="default" pose="keys-zx"/>
+      <pose name="default" pose="keys-zx2"/>
       <pose name="fragment" pose="spark5"/>
       <companion name="fragment-1" companion="key-x"/>
       <companion name="fragment-2" companion="key-z"/>
