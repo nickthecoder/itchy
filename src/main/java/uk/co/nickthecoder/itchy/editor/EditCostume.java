@@ -123,6 +123,7 @@ public class EditCostume extends EditNamedSubject<Costume>
 
         PropertiesForm<CostumeFeatures> form = new PropertiesForm<CostumeFeatures>(
             costumeFeatures, costumeFeatures.getProperties());
+        form.autoUpdate = true;
 
         this.propertiesContainer.addChild( form.createForm() );
     }
