@@ -16,7 +16,7 @@ import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.util.NinePatch;
 import uk.co.nickthecoder.jame.Surface;
 
-public class Frame implements Makeup
+public class PictureFrame implements Makeup
 {
     protected static final List<Property<Makeup, ?>> properties = new ArrayList<Property<Makeup, ?>>();
 
@@ -51,11 +51,11 @@ public class Frame implements Makeup
         return properties;
     }
 
-    public Frame()
+    public PictureFrame()
     {
     }
 
-    public Frame( int top, int right, int bottom, int left )
+    public PictureFrame( int top, int right, int bottom, int left )
     {
         this.borderTop = top;
         this.borderBottom = bottom;

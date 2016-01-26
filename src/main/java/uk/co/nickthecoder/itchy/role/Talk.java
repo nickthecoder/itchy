@@ -13,7 +13,7 @@ import uk.co.nickthecoder.itchy.MultiLineTextPose;
 import uk.co.nickthecoder.itchy.PoseResource;
 import uk.co.nickthecoder.itchy.TextPose;
 import uk.co.nickthecoder.itchy.TextStyle;
-import uk.co.nickthecoder.itchy.makeup.Frame;
+import uk.co.nickthecoder.itchy.makeup.PictureFrame;
 import uk.co.nickthecoder.itchy.makeup.ScaledBackground;
 import uk.co.nickthecoder.itchy.util.NinePatch;
 import uk.co.nickthecoder.jame.RGBA;
@@ -218,7 +218,7 @@ public class Talk extends Follower
                     result.getAppearance().setMakeup(scaledBackground);
                 }
             } else {
-                Frame frame = new Frame(companion.textStyle.marginTop, companion.textStyle.marginRight,
+                PictureFrame frame = new PictureFrame(companion.textStyle.marginTop, companion.textStyle.marginRight,
                     companion.textStyle.marginBottom, companion.textStyle.marginLeft);
                 frame.setNinePatch(ninePatch);
                 result.getAppearance().setMakeup(frame);

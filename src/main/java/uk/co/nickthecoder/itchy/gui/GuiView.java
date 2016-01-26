@@ -13,7 +13,7 @@ import uk.co.nickthecoder.itchy.MultiLineTextPose;
 import uk.co.nickthecoder.itchy.TextStyle;
 import uk.co.nickthecoder.itchy.View;
 import uk.co.nickthecoder.itchy.extras.Timer;
-import uk.co.nickthecoder.itchy.makeup.Frame;
+import uk.co.nickthecoder.itchy.makeup.PictureFrame;
 import uk.co.nickthecoder.itchy.makeup.Makeup;
 import uk.co.nickthecoder.itchy.makeup.SimpleFrame;
 import uk.co.nickthecoder.jame.RGBA;
@@ -237,7 +237,7 @@ public class GuiView extends AbstractView implements View, InputListener
             this.tooltipStyle.setMargins(4);
 
             if (dummy.background != null) {
-                Frame frame = new Frame(dummy.getMarginTop(), dummy.getMarginRight(), dummy.getMarginBottom(), dummy.getMarginLeft());
+                PictureFrame frame = new PictureFrame(dummy.getMarginTop(), dummy.getMarginRight(), dummy.getMarginBottom(), dummy.getMarginLeft());
                 frame.setBackground(dummy.background);
                 this.tooltipMakeup = frame;
             } else {
