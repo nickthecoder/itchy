@@ -7,6 +7,7 @@ package uk.co.nickthecoder.itchy;
 import java.io.File;
 
 import uk.co.nickthecoder.itchy.property.Property;
+import uk.co.nickthecoder.itchy.property.PropertySubject;
 import uk.co.nickthecoder.itchy.role.PlainRole;
 import uk.co.nickthecoder.itchy.util.XMLException;
 import uk.co.nickthecoder.itchy.util.XMLWriter;
@@ -14,16 +15,16 @@ import uk.co.nickthecoder.itchy.util.XMLWriter;
 public class SceneWriter extends XMLWriter
 {
     private Resources resources;
-    
+
     private Scene scene;
 
-    public SceneWriter( Resources resources, Scene scene )
+    public SceneWriter(Resources resources, Scene scene)
     {
         this.resources = resources;
         this.scene = scene;
     }
 
-    public void write( File file) throws Exception
+    public void write(File file) throws Exception
     {
 
         this.begin(file);
@@ -41,26 +42,93 @@ public class SceneWriter extends XMLWriter
     {
         this.beginTag("scene");
         this.attribute("showMouse", this.scene.showMouse);
-        this.attribute("layout",  this.scene.layout.name);
+        this.attribute("layout", this.scene.layout.name);
         if (!PlainSceneDirector.class.getName().equals(this.scene.getSceneDirectorClassName())) {
             this.attribute("role", this.scene.getSceneDirectorClassName().name);
         }
 
         writeSceneDirectorProperties();
 
-        for (Scene.SceneLayer sceneLayer : this.scene.getSceneLayers()) {
+        //for (Scene.SceneLayer sceneLayer : this.scene.getSceneLayers()) {
 
-            if (!sceneLayer.isEmpty()) {
-                this.beginTag("layer");
-                this.attribute("name", sceneLayer.name);
+        for (Layer layer : scene.layout.getLayersByZOrder()) {
+            Scene.SceneLayer sceneLayer = scene.findSceneLayer(layer.name);
+            
+            this.beginTag("layer");
+            this.attribute("name", layer.name);
 
+            this.writeLayerProperties(layer);
+
+            if (sceneLayer != null ) {
                 this.writeActors(sceneLayer);
-
-                this.endTag("layer");
             }
+
+            this.endTag("layer");
         }
 
         this.endTag("scene");
+    }
+
+    private void writeLayerProperties(Layer actualLayer)
+        throws XMLException
+    {
+        Layout templateLayout = this.resources.getLayout(this.scene.layout.name);
+        if (templateLayout == null) {
+            return;
+        }
+        Layer templateLayer = templateLayout.findLayer(actualLayer.name);
+
+        if ((actualLayer == null) || (templateLayer == null)) {
+            return;
+        }
+
+        View view = actualLayer.getView();
+        View templateView = templateLayer.getView();
+        if ((view != null) && (view.getProperties().size() > 0)) {
+            this.beginTag("view");
+            this.writeChangedProperties(view, templateView);
+            this.endTag("view");
+        }
+        
+        if (view instanceof StageView) {
+            
+            StageView stageView = (StageView) view;
+            StageView templateStageView = (StageView) templateView;
+            
+            Stage stage = stageView.getStage();
+            Stage templateStage = templateStageView.getStage();
+            
+            if ((stage != null) && (stage.getProperties().size() > 0)) {
+                this.beginTag("stage");
+                this.writeChangedProperties(stage, templateStage);
+                this.endTag("stage");
+            }
+            if ((stage != null) && (stage.getStageConstraint().getProperties().size() > 0)) {
+                this.beginTag("stageConstraint");
+                this.writeChangedProperties(stage.getStageConstraint(), templateStage.getStageConstraint());
+                this.endTag("stageConstraint");
+            }
+        }
+    }
+
+    private <S extends PropertySubject<S>> void writeChangedProperties(S subject, S template)
+        throws XMLException
+    {
+        for (Property<S, ?> property : subject.getProperties()) {
+
+            try {
+                String value = property.getStringValue(subject);
+                String value2 = property.getStringValue(template);
+                if (!value.equals(value2)) {
+                    this.attribute(property.key, value);
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                throw new XMLException("Failed to write property : " + property.key);
+            }
+
+        }
     }
 
     private void writeSceneDirectorProperties()
@@ -81,7 +149,7 @@ public class SceneWriter extends XMLWriter
         this.endTag("properties");
     }
 
-    private void writeActors( Scene.SceneLayer sceneLayer ) throws XMLException
+    private void writeActors(Scene.SceneLayer sceneLayer) throws XMLException
     {
         for (SceneActor sceneActor : sceneLayer.getSceneActors()) {
 
@@ -129,7 +197,7 @@ public class SceneWriter extends XMLWriter
         // this.endTag( "actors" );
     }
 
-    private void writeSceneActorAttributes( SceneActor sceneActor ) throws XMLException
+    private void writeSceneActorAttributes(SceneActor sceneActor) throws XMLException
     {
         if (sceneActor.id != null) {
             this.attribute("id", sceneActor.id);
@@ -170,7 +238,7 @@ public class SceneWriter extends XMLWriter
 
     }
 
-    private void writeMakeupAttributes( SceneActor sceneActor ) throws XMLException
+    private void writeMakeupAttributes(SceneActor sceneActor) throws XMLException
     {
         if (sceneActor.makeupClassName.name.equals(NullMakeup.class.getName())) {
             return;

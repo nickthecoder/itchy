@@ -1,6 +1,13 @@
 Current Tasks
 =============
 
+Allow Layers' properties to be overridden per scene.
+    Only save the changed properties.
+
+Pyrox is annoying because the "test" layer is edited by default, but "grid" is almost always what I want to edit.
+    Create a "defaultLayer" attribute on Layer?
+    If implemented as LayerProperty, then I can reuse the LayerPickerButton and LayerPicker for SceneDesigners title bar.
+
 SceneDesigner: one dotted box for the screen's  bounds, and another for the current view's if they are different.
 
 SceneDesigner

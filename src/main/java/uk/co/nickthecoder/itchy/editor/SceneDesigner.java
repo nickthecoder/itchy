@@ -1045,6 +1045,30 @@ public class SceneDesigner implements MouseListener, KeyListener
         };
         columns.add(minAlphaColumn);
 
+        TableModelColumn editLayerColumn = new TableModelColumn("Edit", 0, 70)
+        {
+
+            @Override
+            public AbstractComponent createCell(TableModelRow row)
+            {
+                final Layer layer = (Layer) row.getData(0);
+                GuiButton button = new GuiButton( "..." );
+                button.addActionListener(new ActionListener()
+                {
+                    @Override
+                    public void action()
+                    {
+                        EditLayer editLayer = new EditLayer(editor.resources,null,scene.layout, layer, false);
+                        editLayer.show();
+                        editLayer.hideDetails();
+                    }
+                });
+                
+                return button;
+            };     
+        };
+        columns.add(editLayerColumn);
+        
         layersTable = new Table(layersTableModel, columns);
         layersTable.setFill(true, true);
         layersTable.setExpansion(1.0);

@@ -165,7 +165,7 @@ public class EditLayer extends EditNamedSubject<Layer>
         form.getComponent("stageConstraintClassName").setVisible(hasStage);
         notebook.getTab(2).setVisible(hasStage);
         notebook.getTab(3).setVisible(hasStage);
-
+        
         return stageForm;
     }
 
@@ -217,5 +217,17 @@ public class EditLayer extends EditNamedSubject<Layer>
             initialStagePropertiesForm.revert(subject.getStage());
         }
         
+    }
+    
+    public void hideDetails()
+    {
+        notebook.getTab(0).setVisible(false);
+        notebook.getPage(0).setVisible(false);
+        notebook.selectPage(1);
+        
+        // If there is only one tab visible (the View tab), then hide it.
+        if (!notebook.getTab(2).isVisible()) {
+            notebook.getTab(1).setVisible(false );
+        }
     }
 }

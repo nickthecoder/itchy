@@ -1,6 +1,10 @@
-<scene showMouse="true" role="play.py" background="#000000ff">
+<scene showMouse="true" layout="default" role="play.py">
   <properties/>
+  <layer name="background">
+    <view color="#212326ff"/>
+  </layer>
   <layer name="bottom">
+    <view/>
     <actor costume="floor1" x="125" y="93" direction="0.0" heading="0.0" startEvent="default" zOrder="0"/>
     <actor costume="floor1" x="126" y="217" direction="0.0" heading="0.0" startEvent="default" zOrder="1"/>
     <actor costume="floor1" x="276" y="119" direction="0.0" heading="0.0" startEvent="default" zOrder="2"/>
@@ -14,6 +18,7 @@
     <actor costume="floor1" x="567" y="367" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
   </layer>
   <layer name="middle">
+    <view/>
     <actor costume="money1" x="273" y="124" direction="0.0" heading="0.0" startEvent="default" zOrder="13"/>
     <actor costume="money1" x="423" y="107" direction="0.0" heading="0.0" startEvent="default" zOrder="14"/>
     <actor costume="player" x="101" y="71" direction="0.0" heading="0.0" startEvent="default" zOrder="15">
@@ -34,6 +39,7 @@
     <actor costume="money1" x="259" y="374" direction="0.0" heading="0.0" startEvent="default" zOrder="32"/>
   </layer>
   <layer name="top">
+    <view/>
     <actor costume="wall1" x="51" y="91" direction="0.0" heading="0.0" startEvent="default" zOrder="0"/>
     <actor costume="wall2" x="126" y="15" direction="0.0" heading="0.0" startEvent="default" zOrder="1"/>
     <actor costume="wall1" x="51" y="220" direction="0.0" heading="0.0" startEvent="default" zOrder="4"/>
@@ -75,11 +81,10 @@
     <actor costume="wall4s" x="303" y="200" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
     <actor costume="wall4" x="176" y="199" direction="0.0" heading="0.0" startEvent="default" zOrder="61"/>
     <text text="0" font="Vera" size="40" color="#ffffff" xAlignment="1.0" yAlignment="0.0" role="uk.co.nickthecoder.itchy.role.NumberValue" x="788" y="590" direction="0.0" heading="0.0" startEvent="default" zOrder="62" colorize="#ff75e4ff">
-      <property name="formatPattern" value="0"/>
       <property name="nullValue" value=""/>
       <property name="errorValue" value=""/>
-      <property name="updateInterval" value="0.0"/>
       <property name="quiet" value="false"/>
+      <property name="updateInterval" value="0.0"/>
       <property name="access" value="director.time"/>
     </text>
   </layer>

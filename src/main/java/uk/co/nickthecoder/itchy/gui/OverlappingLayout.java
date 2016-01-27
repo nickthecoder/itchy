@@ -17,11 +17,13 @@ public class OverlappingLayout implements ContainerLayout
         List<Component> children = container.getChildren();
 
         for (Component child : children) {
-            if (width < child.getRequiredWidth()) {
-                width = child.getRequiredWidth();
-            }
-            if (height < child.getRequiredHeight()) {
-                height = child.getRequiredHeight();
+            if (child.isVisible()) {
+                if (width < child.getRequiredWidth()) {
+                    width = child.getRequiredWidth();
+                }
+                if (height < child.getRequiredHeight()) {
+                    height = child.getRequiredHeight();
+                }
             }
         }
 

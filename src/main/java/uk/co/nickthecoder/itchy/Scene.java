@@ -69,6 +69,16 @@ public class Scene implements NamedSubject<Scene>
         this.name = name;
     }
 
+    public SceneLayer findSceneLayer( String name )
+    {
+        for (SceneLayer sceneLayer : this.sceneLayers) {
+            if (sceneLayer.name.equals(name)) {
+                return sceneLayer;
+            }
+        }
+        return null;
+    }
+    
     public List<SceneLayer> getSceneLayers()
     {
         return this.sceneLayers;

@@ -13,6 +13,7 @@ import java.util.List;
 
 import uk.co.nickthecoder.itchy.makeup.Makeup;
 import uk.co.nickthecoder.itchy.property.Property;
+import uk.co.nickthecoder.itchy.property.PropertySubject;
 import uk.co.nickthecoder.itchy.role.PlainRole;
 import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.itchy.util.XMLException;
@@ -69,12 +70,39 @@ public class SceneReader
         for (Iterator<XMLTag> i = sceneTag.getTags("layer"); i.hasNext();) {
             XMLTag layerTag = i.next();
             String name = layerTag.getAttribute("name");
-            Scene.SceneLayer sceneLayer = this.scene.createSceneLayer(name);
-            this.readLayer(layerTag, sceneLayer);
+            this.readLayerProperties(layerTag, name);
+
+            if (layerTag.hasTag("actor")) {
+                Scene.SceneLayer sceneLayer = this.scene.createSceneLayer(name);
+                this.readLayer(layerTag, sceneLayer);
+            }
         }
 
     }
-
+    
+    private void readLayerProperties(XMLTag layerTag, String name)
+        throws XMLException
+    {
+        Layout layout = this.scene.layout;
+        Layer layer = layout.findLayer( name );
+        if (layer == null) {
+            return;
+        }
+        
+        XMLTag viewTag = layerTag.getTag("view",false);
+        if (viewTag != null) {            
+            readProperties( viewTag, layer.getView());
+        }
+        XMLTag stageTag = layerTag.getTag("stage",false);
+        if (stageTag != null) {            
+            readProperties( stageTag, layer.getStage());
+        }
+        XMLTag stageConstraintTag = layerTag.getTag("stageConstraint",false);
+        if (stageConstraintTag != null) {            
+            readProperties( stageConstraintTag, layer.getStage().getStageConstraint());
+        }
+    }
+    
     private void readProperties(XMLTag propertiesTag)
         throws Exception
     {
@@ -262,6 +290,31 @@ public class SceneReader
         throws Exception
     {
         sceneActor.customPropertyStrings.put(name, value);
+    }
+
+
+    private <S extends PropertySubject<S>> void readProperties(XMLTag tag, S subject) throws XMLException
+    {
+        for (Property<S, ?> property : subject.getProperties()) {
+            String value = tag.getOptionalAttribute(property.key, null);
+            if (value == null) {
+                for (String alias : property.aliases) {
+                    value = tag.getOptionalAttribute(alias, null);
+                    if (value != null) {
+                        break;
+                    }
+                }
+            }
+            if (value != null) {
+                try {
+                    property.setValueByString(subject, value);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    throw new XMLException("Failed to parse property : '" + property.key + "'. value : '" + value + "'");
+                }
+            }
+        }
+
     }
 
 }

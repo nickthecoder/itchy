@@ -1,6 +1,16 @@
-<scene showMouse="false" layout="default" role="play.py" background="#000000ff">
+<scene showMouse="false" layout="default" role="play.py">
   <properties/>
-  <layer name="main">
+  <layer name="background">
+    <view color="#382326ff"/>
+  </layer>
+  <layer name="bottom">
+    <view/>
+  </layer>
+  <layer name="middle">
+    <view/>
+  </layer>
+  <layer name="top">
+    <view/>
     <actor costume="floor1" x="164" y="130" direction="0.0" heading="0.0" startEvent="default" zOrder="0"/>
     <actor costume="wall2s" x="519" y="364" direction="0.0" heading="0.0" startEvent="default" zOrder="0"/>
     <actor costume="floor1" x="164" y="283" direction="0.0" heading="0.0" startEvent="default" zOrder="1"/>
