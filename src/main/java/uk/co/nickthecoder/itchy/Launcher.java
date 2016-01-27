@@ -161,6 +161,7 @@ public class Launcher extends AbstractDirector
         Game game = resources.getGame();
 
         if (editor) {
+            Itchy.startGame(game);
             if (sceneName == null) {
                 game.startEditor();
             } else {

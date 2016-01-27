@@ -240,8 +240,7 @@ public final class Editor extends Game implements KeyListener
             @Override
             public void action()
             {
-                Editor.instance = null;
-                Editor.this.end();
+                Editor.this.onQuit();
             }
         });
         buttons.addChild(quit);
@@ -300,6 +299,18 @@ public final class Editor extends Game implements KeyListener
         }       
     }
 
+    private void onQuit()
+    {
+        Editor.instance = null;
+        Editor.this.end();
+        // If the editor was started directly from the command line, then end the non-running game,
+        // so that Itchy will terminate in the normal way.
+        // Launcher has the corresponding Itchy.startGame(game).
+        if (!Itchy.getGame().isRunning()) {
+            Itchy.getGame().end();
+        }
+    }
+    
     private void onSave()
     {
         MessageBox messageBox = null;
@@ -355,8 +366,7 @@ public final class Editor extends Game implements KeyListener
             run();
         }
         if (inputQuit.matches(ke)) {
-            Editor.instance = null;
-            Editor.this.end();
+            this.onQuit();
         }
         if (inputSave.matches(ke)) {
             onSave();

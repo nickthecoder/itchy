@@ -1,13 +1,7 @@
 Current Tasks
 =============
 
-Add debug Inputs for Editor:
-    List Poses, SpritesSheets&Sprites, etc.
-    
-
-Remove a Sprite, save doesn't work (check fails, but is fine).
-    maybe renaming!
-Rename then delete a pose doesn't work.
+Bug: Cannot start editor from the command line.
 
 Debris-rocks - pieces have offsets, so they explode naturally.
     Can I use Fragments class as this already does what I want?
