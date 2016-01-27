@@ -519,7 +519,7 @@ public class ResourcesReader
                 XMLTag layerTag = j.next();
                 Layer layer = new Layer();
                 this.readProperties(layerTag, layer);
-                layout.layers.add(layer);
+                layout.addLayer(layer);
 
                 XMLTag viewTag = layerTag.getTag("view", false);
                 if (viewTag != null) {

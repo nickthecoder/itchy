@@ -14,7 +14,7 @@
   </poses>
   <ninePatches/>
   <fonts>
-    <font name="vera" filename="fonts/Vera/Vera.ttf"/>
+    <font name="vera" file="fonts/Vera/Vera.ttf"/>
   </fonts>
   <sounds/>
   <animations>
@@ -350,7 +350,10 @@
   <inputs/>
   <layouts>
     <layout name="default">
-      <layer name="main" zOrder="0" x="0" y="0" width="800" height="600" viewClassName="uk.co.nickthecoder.itchy.StageView" stageClassName="uk.co.nickthecoder.itchy.ZOrderStage" stageConstraintClassName="uk.co.nickthecoder.itchy.NullStageConstraint">
+      <layer name="background" zOrder="0" x="0" y="0" width="800" height="600" viewClassName="uk.co.nickthecoder.itchy.RGBAView" stageClassName="uk.co.nickthecoder.itchy.ZOrderStage" stageConstraintClassName="uk.co.nickthecoder.itchy.NullStageConstraint">
+        <view color="#000000ff"/>
+      </layer>
+      <layer name="main" zOrder="50" x="0" y="0" width="800" height="600" viewClassName="uk.co.nickthecoder.itchy.StageView" stageClassName="uk.co.nickthecoder.itchy.ZOrderStage" stageConstraintClassName="uk.co.nickthecoder.itchy.NullStageConstraint">
         <view enableMouse="true"/>
       </layer>
     </layout>

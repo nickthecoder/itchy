@@ -203,7 +203,7 @@ public class SceneDesigner implements MouseListener, KeyListener
 
         createToolbox();
 
-        for (Layer layer : scene.layout.layers) {
+        for (Layer layer : scene.layout.getLayersByZOrder()) {
             // TODO Create a DESIGN view, covering whole screen, offset the correct amount.
             View view = layer.getView();
             StageView stageView = layer.getStageView();
@@ -313,19 +313,28 @@ public class SceneDesigner implements MouseListener, KeyListener
         // debugViews(this.editor.getGlassView().getParent(), "");
     }
 
-    /*
-     * private void debugViews(View view, String prefix) { System.out.print(prefix); if (view instanceof
-     * GenericCompoundView) { GenericCompoundView<?> gcv = (GenericCompoundView<?>) view; System.out.print(gcv.name +
-     * " : "); } else { System.out.print(view.getClass().getName() + " : "); } System.out.println(view.getPosition());
-     * if (view instanceof GenericCompoundView) { GenericCompoundView<?> parent = (GenericCompoundView<?>) view; for
-     * (View child : parent.getChildren()) { debugViews(child, prefix + "    "); } } }
-     */
+    protected void debugViews(View view, String prefix)
+    {
+        System.out.print(prefix);
+        if (view instanceof GenericCompoundView) {
+            GenericCompoundView<?> gcv = (GenericCompoundView<?>) view;
+            System.out.print(gcv.name + " : ");
+        } else {
+            System.out.print(view.getClass().getName() + " : ");
+        }
+        System.out.println(view.getPosition());
+        if (view instanceof GenericCompoundView) {
+            GenericCompoundView<?> parent = (GenericCompoundView<?>) view;
+            for (View child : parent.getChildren()) {
+                debugViews(child, prefix + "    ");
+            }
+        }
+    }
 
     private void createPageBorder()
     {
         int margin = 0;
-        NinePatch ninePatch = editor.getStylesheet().resources
-            .getNinePatch("pageBorder");
+        NinePatch ninePatch = editor.getStylesheet().resources.getNinePatch("pageBorder");
         Surface newSurface = ninePatch.createSurface(
             sceneRect.width + margin * 2,
             sceneRect.height + margin * 2);
@@ -679,7 +688,7 @@ public class SceneDesigner implements MouseListener, KeyListener
                 public boolean isValid()
                 {
                     return sceneStub.isValidName(sceneNameBox.getText());
-            }
+                }
             });
 
         sceneDirectorName = (ClassNameBox) sceneForm.getComponent("sceneDirectorClassName");
@@ -933,7 +942,7 @@ public class SceneDesigner implements MouseListener, KeyListener
     private void createLayersTable()
     {
         layersTableModel = new SimpleTableModel();
-        for (Layer layer : scene.layout.layers) {
+        for (Layer layer : scene.layout.getLayersByZOrder()) {
             StageView stageView = layer.getStageView();
 
             int minimumAlpha = 0;
@@ -1851,7 +1860,7 @@ public class SceneDesigner implements MouseListener, KeyListener
     private void onSave()
     {
         scene.clear();
-        for (Layer layer : scene.layout.layers) {
+        for (Layer layer : scene.layout.getLayersByZOrder()) {
             StageView stageView = layer.getStageView();
             if (stageView != null) {
 

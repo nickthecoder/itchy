@@ -20,6 +20,17 @@ public class EditLayer extends EditNamedSubject<Layer>
 
     private Layout layout;
 
+
+    private Container stagePropertiesContainer;
+    private Container viewPropertiesContainer;
+    private Container stageConstraintPropertiesContainer;
+    private Notebook notebook;
+
+    private PropertiesForm<View> initialViewPropertiesForm = null;
+    private PropertiesForm<Stage> initialStagePropertiesForm = null;
+    private PropertiesForm<StageConstraint> initialStageConstraintPropertiesForm = null;
+
+    
     public EditLayer(Resources resources, ListSubjects<Layer> listSubjects, Layout layout, Layer subject, boolean isNew)
     {
         super(resources, listSubjects, subject, isNew);
@@ -35,7 +46,7 @@ public class EditLayer extends EditNamedSubject<Layer>
     @Override
     protected Layer getSubjectByName(String name)
     {
-        for (Layer layer : layout.layers) {
+        for (Layer layer : layout.getLayers()) {
             // As this is used to test for duplicate names, don't return this layer.
             // if (layer == subject) {
             // continue;
@@ -50,17 +61,9 @@ public class EditLayer extends EditNamedSubject<Layer>
     @Override
     protected void add()
     {
+        System.out.println( "Adding layer " + subject + " to " + subject );
         layout.addLayer(subject);
     }
-
-    private Container stagePropertiesContainer;
-    private Container viewPropertiesContainer;
-    private Container stageConstraintPropertiesContainer;
-    private Notebook notebook;
-
-    private PropertiesForm<View> initialViewPropertiesForm = null;
-    private PropertiesForm<Stage> initialStagePropertiesForm = null;
-    private PropertiesForm<StageConstraint> initialStageConstraintPropertiesForm = null;
 
     @Override
     protected Component createForm()

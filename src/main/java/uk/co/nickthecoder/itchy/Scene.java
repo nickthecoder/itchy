@@ -13,11 +13,9 @@ import uk.co.nickthecoder.itchy.property.BooleanProperty;
 import uk.co.nickthecoder.itchy.property.ClassNameProperty;
 import uk.co.nickthecoder.itchy.property.LayoutProperty;
 import uk.co.nickthecoder.itchy.property.Property;
-import uk.co.nickthecoder.itchy.property.RGBAProperty;
 import uk.co.nickthecoder.itchy.property.StringProperty;
 import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.itchy.util.StringUtils;
-import uk.co.nickthecoder.jame.RGBA;
 
 public class Scene implements NamedSubject<Scene>
 {
@@ -28,7 +26,6 @@ public class Scene implements NamedSubject<Scene>
         properties.add(new LayoutProperty<Scene>("layout"));
         properties.add(new ClassNameProperty<Scene>(SceneDirector.class, "sceneDirector").access("sceneDirectorClassName"));
         properties.add(new BooleanProperty<Scene>("showMouse"));
-        properties.add(new RGBAProperty<Scene>("backgroundColor"));
 
     }
 
@@ -43,8 +40,6 @@ public class Scene implements NamedSubject<Scene>
     public boolean showMouse = true;
 
     private ClassName sceneDirectorClassName;
-
-    public RGBA backgroundColor = RGBA.BLACK;
 
     private List<SceneLayer> sceneLayers;
 
@@ -129,7 +124,7 @@ public class Scene implements NamedSubject<Scene>
     {
         Stage best = null;
 
-        for (Layer layer : layout.layers) {
+        for (Layer layer : layout.getLayers()) {
             Stage stage = layer.getStage();
             if (layer.name.equals(name)) {
                 if (stage != null) {
@@ -158,7 +153,6 @@ public class Scene implements NamedSubject<Scene>
     {
         Scene result = new Scene();
         result.showMouse = this.showMouse;
-        result.backgroundColor = this.backgroundColor;
         result.sceneDirectorClassName = this.sceneDirectorClassName;
         result.sceneDirector = this.sceneDirector;
         result.layout = this.layout;

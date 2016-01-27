@@ -145,10 +145,12 @@ public abstract class ListSubjects<S>
     
     protected void update(S subject, boolean isNew)
     {
-
+        System.out.println( "List Subjects update" );
         if (isNew) {
+            System.out.println( "List Subjects rebuild" );
             this.rebuildTable();
         } else {
+            System.out.println( "List Subjects update row" );
             TableModelRow row = this.findRow(subject);
             if ( row == null ) {
                 this.rebuildTable();

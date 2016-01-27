@@ -648,6 +648,9 @@
   </inputs>
   <layouts>
     <layout name="default">
+      <layer name="background" zOrder="0" x="0" y="0" width="1000" height="800" viewClassName="uk.co.nickthecoder.itchy.RGBAView" stageClassName="uk.co.nickthecoder.itchy.ZOrderStage" stageConstraintClassName="uk.co.nickthecoder.itchy.NullStageConstraint">
+        <view color="#000000ff"/>
+      </layer>
       <layer name="grid" zOrder="40" x="0" y="0" width="1000" height="700" viewClassName="uk.co.nickthecoder.itchy.StageView" stageClassName="uk.co.nickthecoder.itchy.ZOrderStage" stageConstraintClassName="uk.co.nickthecoder.itchy.GridStageConstraint">
         <view enableMouse="true"/>
         <stageConstraint boxWidth="10" boxHeight="10"/>

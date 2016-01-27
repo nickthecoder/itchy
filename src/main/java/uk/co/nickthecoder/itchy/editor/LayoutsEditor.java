@@ -228,7 +228,7 @@ public class LayoutsEditor extends SubEditor<Layout>
     {
         SimpleTableModel model = new SimpleTableModel();
 
-        for (Layer layer : this.currentResource.layers) {
+        for (Layer layer : this.currentResource.getLayersByZOrder()) {
             SimpleTableModelRow row = new SimpleTableModelRow();
             row.add(layer.name);
             row.add(layer.zOrder);
@@ -494,7 +494,7 @@ public class LayoutsEditor extends SubEditor<Layout>
             stageConstraintPropertiesForm.update();
         }
         
-        if (this.currentResource.layers.contains(this.editingLayer)) {
+        if (this.currentResource.getLayers().contains(this.editingLayer)) {
         } else {
             // New
             this.currentResource.addLayer(this.editingLayer);

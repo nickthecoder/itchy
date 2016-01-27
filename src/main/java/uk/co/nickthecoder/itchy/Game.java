@@ -20,7 +20,6 @@ import uk.co.nickthecoder.itchy.script.ScriptManager;
 import uk.co.nickthecoder.itchy.util.AutoFlushPreferences;
 import uk.co.nickthecoder.itchy.util.StringUtils;
 import uk.co.nickthecoder.itchy.util.TagCollection;
-import uk.co.nickthecoder.jame.RGBA;
 import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.Surface;
 import uk.co.nickthecoder.jame.event.Event;
@@ -100,12 +99,6 @@ public class Game
      * A list of all the stages used by this game.
      */
     private List<Stage> stages;
-
-    /**
-     * The whole screen is filled with a solid colour when being redrawn.
-     * The colour is taken from the "Scene" tab of the {@link SceneEditor}
-     */
-    private RGBAView background;
 
     /**
      * A special stage which is at the front of the z-order (i.e. always visible).
@@ -224,10 +217,6 @@ public class Game
         this.allViews = new CompoundView("allViews", displayRect);
         this.stages = new LinkedList<Stage>();
 
-        // Background view
-        this.background = new RGBAView(displayRect, new RGBA(0, 0, 0));
-        this.allViews.add(this.background);
-
         // Covered by game views
         this.gameViews = new CompoundView("gameViews", displayRect);
         this.allViews.add(this.gameViews);
@@ -270,11 +259,6 @@ public class Game
         return this.director;
     }
 
-    public RGBAView getBackground()
-    {
-        return this.background;
-    }
-
     public CompoundView getGameViews()
     {
         return this.gameViews;
@@ -312,7 +296,6 @@ public class Game
 		Itchy.resizeScreen( width, height );
 		Rect rect = new Rect( 0,0, width, height ); 
 		this.allViews.setPosition( rect );
-		this.background.setPosition( rect );
     	this.gameViews.setPosition( rect );
 		this.windows.setPosition( rect );
     }
@@ -856,7 +839,6 @@ public class Game
                 this.sceneDirector.onDeactivate();
 
                 this.sceneName = sceneName;
-                this.background.color = scene.backgroundColor;
                 this.mouse.showRegularMousePointer(scene.showMouse);
                 this.sceneDirector = scene.getSceneDirector();
 
@@ -864,7 +846,7 @@ public class Game
 
             scene.create(this, false);
 
-            for (Layer layer: scene.layout.layers) {
+            for (Layer layer: scene.layout.getLayersByZOrder()) {
                 this.gameViews.add( layer.getView() );
 
                 Stage stage = layer.getStage();

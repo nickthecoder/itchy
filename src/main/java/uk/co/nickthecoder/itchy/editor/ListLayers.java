@@ -60,7 +60,7 @@ public class ListLayers extends ListSubjects<Layer>
     {
         SimpleTableModel model = new SimpleTableModel();
 
-        for (Layer layer : this.layout.layers) {
+        for (Layer layer : this.layout.getLayers()) {
             String[] attributeNames = { "name", "zOrder", "position.x", "position.y", "position.width",
                 "position.height" };
             TableModelRow row = new ReflectionTableModelRow<Layer>(layer, attributeNames);

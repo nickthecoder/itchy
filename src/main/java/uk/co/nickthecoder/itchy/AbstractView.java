@@ -14,6 +14,12 @@ import uk.co.nickthecoder.jame.Surface;
 public abstract class AbstractView implements View
 {
     protected static final List<Property<View,?>> properties = new ArrayList<Property<View,?>>();
+
+    @Override
+    public List<Property<View,?>> getProperties()
+    {
+        return properties;
+    }
     
     private ParentView<?> parent;
 
@@ -125,9 +131,4 @@ public abstract class AbstractView implements View
         this.visible = value;
     }
     
-    @Override
-    public List<Property<View,?>> getProperties()
-    {
-        return properties;
-    }
 }

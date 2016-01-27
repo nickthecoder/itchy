@@ -476,7 +476,7 @@ public class ResourcesWriter extends XMLWriter
             this.beginTag("layout");
             this.writeProperties(layout);
 
-            for (Layer layer : layout.layers) {
+            for (Layer layer : layout.getLayersByZOrder()) {
                 this.beginTag("layer");
 
                 this.writeProperties(layer);

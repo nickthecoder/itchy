@@ -4,6 +4,11 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import uk.co.nickthecoder.itchy.property.Property;
+import uk.co.nickthecoder.itchy.property.RGBAProperty;
 import uk.co.nickthecoder.jame.RGBA;
 import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.Surface;
@@ -13,6 +18,18 @@ import uk.co.nickthecoder.jame.Surface;
  */
 public class RGBAView extends AbstractView
 {
+    protected static final List<Property<View,?>> properties = new ArrayList<Property<View,?>>();
+
+    static {
+        properties.add(new RGBAProperty<View>("color"));
+    }
+    
+    @Override
+    public List<Property<View,?>> getProperties()
+    {
+        return properties;
+    }
+    
     public RGBA color;
 
     public RGBAView()

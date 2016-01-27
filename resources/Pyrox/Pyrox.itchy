@@ -924,16 +924,19 @@ before we can harvest the honey.</string>
   </inputs>
   <layouts>
     <layout name="default">
-      <layer name="test" zOrder="0" x="0" y="0" width="800" height="600" viewClassName="uk.co.nickthecoder.itchy.StageView" stageClassName="uk.co.nickthecoder.itchy.ZOrderStage" stageConstraintClassName="uk.co.nickthecoder.itchy.GridStageConstraint">
-        <view enableMouse="false"/>
-        <stageConstraint boxWidth="60" boxHeight="60"/>
+      <layer name="background" zOrder="0" x="0" y="0" width="800" height="600" viewClassName="uk.co.nickthecoder.itchy.RGBAView" stageClassName="uk.co.nickthecoder.itchy.ZOrderStage" stageConstraintClassName="uk.co.nickthecoder.itchy.NullStageConstraint">
+        <view color="#0b1100ff"/>
       </layer>
       <layer name="plain" zOrder="30" x="0" y="0" width="800" height="600" viewClassName="uk.co.nickthecoder.itchy.StageView" stageClassName="uk.co.nickthecoder.itchy.ZOrderStage" stageConstraintClassName="uk.co.nickthecoder.itchy.NullStageConstraint">
         <view enableMouse="true"/>
       </layer>
       <layer name="grid" zOrder="50" x="0" y="0" width="800" height="600" viewClassName="uk.co.nickthecoder.itchy.StageView" stageClassName="gridStage.py" stageConstraintClassName="uk.co.nickthecoder.itchy.GridStageConstraint">
         <view enableMouse="false"/>
-        <stageConstraint boxWidth="100" boxHeight="100"/>
+        <stageConstraint boxWidth="60" boxHeight="60"/>
+      </layer>
+      <layer name="test" zOrder="80" x="0" y="0" width="800" height="600" viewClassName="uk.co.nickthecoder.itchy.StageView" stageClassName="uk.co.nickthecoder.itchy.ZOrderStage" stageConstraintClassName="uk.co.nickthecoder.itchy.GridStageConstraint">
+        <view enableMouse="false"/>
+        <stageConstraint boxWidth="60" boxHeight="60"/>
       </layer>
     </layout>
     <layout name="glass">

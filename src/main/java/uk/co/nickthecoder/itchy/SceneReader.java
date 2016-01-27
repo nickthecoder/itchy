@@ -52,12 +52,7 @@ public class SceneReader
     private void readScene(XMLTag sceneTag) throws Exception
     {
         this.scene.showMouse = sceneTag.getOptionalBooleanAttribute("showMouse", true);
-        String background = sceneTag.getOptionalAttribute("background", "#000");
-        try {
-            this.scene.backgroundColor = RGBA.parse(background);
-        } catch (Exception e) {
-            throw new XMLException("Illegal colour : " + background);
-        }
+
         String layoutName = sceneTag.getOptionalAttribute("layout", "default");
         Layout layout = resources.getLayout(layoutName);
         this.scene.layout = layout.clone();

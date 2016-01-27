@@ -1,19 +1,7 @@
 Current Tasks
 =============
 
-Bug: Cannot start editor from the command line.
-
-Debris-rocks - pieces have offsets, so they explode naturally.
-    Can I use Fragments class as this already does what I want?
-    Make Fragments an abstract base class, then implement :
-        RandomFragments - (What Fragments currently does)
-        FloodFillFragments - Flood fill based on transparency for the keyboard and "K"
-        ColorKeyFragments - for the others Pyrox rocks, or maybe Random with a fixed key (to ensure pieces are not too small).
-
-All resources.renameXXX needs to update the renamed collection, so that renameSubjectsInScenes will work. 
-    And do the same with other resources. Layouts, Fonts, ... ?
-
-Remove scene.backgroundColor
+SceneDesigner: one dotted box for the screen's  bounds, and another for the current view's if they are different.
 
 SceneDesigner
     Views should NOT be the one from Layout, but a scrollable one, which covers the whole screen.
@@ -21,7 +9,8 @@ SceneDesigner
 
     Layer to have a getDesignView method.
 
-SceneDesigner: one dotted box for the screen's  bounds, and another for the current view's if they are different.
+Remove scene.backgroundColor
+
 
 SceneDesigner
     When scrolling, then StageViews should be scrolled, but non-stage view should just be moved
@@ -63,6 +52,9 @@ SceneDesigner : Show the current layer in the toolbar as a button. Click to swit
 BUGS
 ====
 
+
+All resources.renameXXX needs to update the renamed collection, so that renameSubjectsInScenes will work. 
+    And do the same with other resources. Layouts, Fonts, ... ?
 Appearance.fixPose doesn't do the right thing with direction.
 	Setting dir to 0 works, but ideally both appearance and the new pose should have the old appearance's direction,
 	and yet the pose won't need rotating.
@@ -78,6 +70,14 @@ Ensure Scrollbars of Scroll do not obscure the contents.
 
 New Features
 ============
+
+
+Debris-rocks - pieces have offsets, so they explode naturally.
+    Can I use Fragments class as this already does what I want?
+    Make Fragments an abstract base class, then implement :
+        RandomFragments - (What Fragments currently does)
+        FloodFillFragments - Flood fill based on transparency for the keyboard and "K"
+        ColorKeyFragments - for the others Pyrox rocks, or maybe Random with a fixed key (to ensure pieces are not too small).
 
 Editor to test if resources have changed and prompt for confirm before exiting.
 

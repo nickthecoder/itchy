@@ -1,10 +1,10 @@
 package uk.co.nickthecoder.itchy;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeSet;
 
 import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.StringProperty;
@@ -19,7 +19,7 @@ public class Layout implements NamedSubject<Layout>, Cloneable
 
     public String name = "";
 
-    public TreeSet<Layer> layers;
+    private List<Layer> layers;
 
     /**
      * Speeds up findStage.
@@ -28,7 +28,7 @@ public class Layout implements NamedSubject<Layout>, Cloneable
 
     public Layout()
     {
-        layers = new TreeSet<Layer>();
+        layers = new ArrayList<Layer>();
         stageMap = new HashMap<String, Stage>();
     }
 
@@ -42,6 +42,17 @@ public class Layout implements NamedSubject<Layout>, Cloneable
     public void setName(String name)
     {
         this.name = name;
+    }
+
+    public List<Layer> getLayers()
+    {
+        return layers;
+    }
+
+    public List<Layer> getLayersByZOrder()
+    {
+        Collections.sort(layers);
+        return layers;
     }
 
     public void addLayer(Layer layer)
@@ -137,7 +148,7 @@ public class Layout implements NamedSubject<Layout>, Cloneable
         }
 
         result.stageMap = new HashMap<String, Stage>();
-        result.layers = new TreeSet<Layer>();
+        result.layers = new ArrayList<Layer>();
 
         for (Layer layer : layers) {
             result.addLayer(layer.clone());
