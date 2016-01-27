@@ -36,7 +36,8 @@ class Guard(AbstractRole) :
         self.forwardAmount = 0
         
     def onBirth(self) :
-        self.addTag( "guard" )
+        self.torch = self.actor.createCompanion("torch").role
+        self.torch.owner = self
 
     def tick(self) :
     

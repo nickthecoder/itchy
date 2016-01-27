@@ -11,11 +11,11 @@
     <actor costume="floor1" x="424" y="95" direction="0.0" heading="0.0" startEvent="default" zOrder="3"/>
     <actor costume="floor1" x="572" y="130" direction="0.0" heading="0.0" startEvent="default" zOrder="4"/>
     <actor costume="floor1" x="261" y="369" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="floor1" x="269" y="226" direction="0.0" heading="0.0" startEvent="default" zOrder="6"/>
     <actor costume="floor1" x="420" y="247" direction="0.0" heading="0.0" startEvent="default" zOrder="7"/>
     <actor costume="floor1" x="414" y="327" direction="0.0" heading="0.0" startEvent="default" zOrder="8"/>
     <actor costume="floor1" x="570" y="283" direction="0.0" heading="0.0" startEvent="default" zOrder="9"/>
     <actor costume="floor1" x="567" y="367" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
+    <actor costume="floor1" x="269" y="239" direction="0.0" heading="0.0" startEvent="default" zOrder="11"/>
   </layer>
   <layer name="middle">
     <view/>
@@ -62,7 +62,7 @@
     <actor costume="wall3" x="199" y="124" direction="0.0" heading="0.0" startEvent="default" zOrder="39"/>
     <actor costume="wall3" x="349" y="124" direction="0.0" heading="0.0" startEvent="default" zOrder="40"/>
     <actor costume="wall3" x="495" y="130" direction="0.0" heading="0.0" startEvent="default" zOrder="41"/>
-    <actor costume="wall4" x="515" y="201" direction="0.0" heading="0.0" startEvent="default" zOrder="42"/>
+    <actor costume="wall4" x="529" y="200" direction="0.0" heading="0.0" startEvent="default" zOrder="42"/>
     <actor costume="wall4" x="323" y="294" direction="0.0" heading="0.0" startEvent="default" zOrder="43"/>
     <actor costume="wall4" x="515" y="291" direction="0.0" heading="0.0" startEvent="default" zOrder="44"/>
     <actor costume="wall3" x="494" y="366" direction="0.0" heading="0.0" startEvent="default" zOrder="45"/>
@@ -76,10 +76,7 @@
     <actor costume="wall2s" x="94" y="293" direction="0.0" heading="0.0" startEvent="default" zOrder="53"/>
     <actor costume="wall2s" x="130" y="293" direction="0.0" heading="0.0" startEvent="default" zOrder="54"/>
     <actor costume="wall2s" x="165" y="293" direction="0.0" heading="0.0" startEvent="default" zOrder="55"/>
-    <actor costume="wall4s" x="347" y="200" direction="0.0" heading="0.0" startEvent="default" zOrder="58"/>
-    <actor costume="wall4s" x="389" y="200" direction="0.0" heading="0.0" startEvent="default" zOrder="59"/>
-    <actor costume="wall4s" x="303" y="200" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
-    <actor costume="wall4" x="176" y="199" direction="0.0" heading="0.0" startEvent="default" zOrder="61"/>
+    <actor costume="wall4" x="172" y="199" direction="0.0" heading="0.0" startEvent="default" zOrder="61"/>
     <text text="0" font="Vera" size="40" color="#ffffff" xAlignment="1.0" yAlignment="0.0" role="uk.co.nickthecoder.itchy.role.NumberValue" x="788" y="590" direction="0.0" heading="0.0" startEvent="default" zOrder="62" colorize="#ff75e4ff">
       <property name="nullValue" value=""/>
       <property name="errorValue" value=""/>
@@ -87,5 +84,6 @@
       <property name="updateInterval" value="0.0"/>
       <property name="access" value="director.time"/>
     </text>
+    <actor costume="wall4" x="350" y="199" direction="0.0" heading="0.0" startEvent="default" zOrder="63"/>
   </layer>
 </scene>

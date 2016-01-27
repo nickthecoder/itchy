@@ -3,6 +3,12 @@ package uk.co.nickthecoder.itchy.editor;
 import uk.co.nickthecoder.itchy.FilePoseResource;
 import uk.co.nickthecoder.itchy.PoseResource;
 import uk.co.nickthecoder.itchy.Resources;
+import uk.co.nickthecoder.itchy.gui.ClickableContainer;
+import uk.co.nickthecoder.itchy.gui.Component;
+import uk.co.nickthecoder.itchy.gui.ImageComponent;
+import uk.co.nickthecoder.itchy.gui.IntegerBox;
+import uk.co.nickthecoder.itchy.gui.Label;
+import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 
 public class EditPose extends EditNamedSubject<FilePoseResource>
 {
@@ -45,4 +51,31 @@ public class EditPose extends EditNamedSubject<FilePoseResource>
         this.resources.addPose(subject);
     }
 
+    @Override
+    protected Component createForm()
+    {
+        super.createForm();
+        
+        final ClickableContainer previewClick = new ClickableContainer()
+        {
+            @Override
+            public void onClick(MouseButtonEvent e)
+            {
+                ((IntegerBox) form.getComponent("offsetX")).setValue(e.x);
+                ((IntegerBox) form.getComponent("offsetY")).setValue(e.y);
+            }
+        };
+        final ImageComponent previewImg = new ImageComponent(subject.pose.getSurface());
+        previewImg.addStyle("checkered");
+        previewClick.addChild(previewImg);
+
+        String size = "(" +
+            subject.pose.getSurface().getWidth() + "," +
+            subject.pose.getSurface().getHeight() + ")";
+        
+        form.grid.addRow("Size", new Label( size ) );
+        form.grid.addRow("Preview",  previewClick );
+        
+        return form.container;
+    }
 }

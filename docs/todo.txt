@@ -1,28 +1,28 @@
 Current Tasks
 =============
 
-Allow Layers' properties to be overridden per scene.
-    Only save the changed properties.
-
-Pyrox is annoying because the "test" layer is edited by default, but "grid" is almost always what I want to edit.
-    Create a "defaultLayer" attribute on Layer?
-    If implemented as LayerProperty, then I can reuse the LayerPickerButton and LayerPicker for SceneDesigners title bar.
-
-SceneDesigner: one dotted box for the screen's  bounds, and another for the current view's if they are different.
-
 SceneDesigner
     Views should NOT be the one from Layout, but a scrollable one, which covers the whole screen.
         Bounds are the whole screen, and offsets are based on the layer's position (and any scroll amount by the editor).
 
     Layer to have a getDesignView method.
 
-Remove scene.backgroundColor
-
 
 SceneDesigner
     When scrolling, then StageViews should be scrolled, but non-stage view should just be moved
         e.g. a RGBAView should only cover the inside of the dotted rectangle.
     Therefore editor needs to add another black RGBAView behind all the others.
+
+
+
+
+Pyrox is annoying because the "test" layer is edited by default, but "grid" is almost always what I want to edit.
+    Create a "defaultLayer" attribute on Layer?
+    If implemented as LayerProperty, then I can reuse the LayerPickerButton and LayerPicker for SceneDesigners title bar.
+
+Add a LayerPickerButton to the SceneDesigner's toolbar.
+
+SceneDesigner: one dotted box for the screen's  bounds, and another for the current view's if they are different.
 
 
 SceneDirector has a Layout, which can be used to find stages. Don't use Itchy's view tree.
@@ -77,7 +77,6 @@ Ensure Scrollbars of Scroll do not obscure the contents.
 
 New Features
 ============
-
 
 Debris-rocks - pieces have offsets, so they explode naturally.
     Can I use Fragments class as this already does what I want?

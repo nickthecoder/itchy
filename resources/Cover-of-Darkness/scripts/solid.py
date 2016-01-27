@@ -13,6 +13,7 @@ class Solid(AbstractRole) :
         
     def onBirth(self):
         self.addTag("solid")
+        self.addTag("opaque")
 
     # Boiler plate code - no need to change this
     def getProperties(self):

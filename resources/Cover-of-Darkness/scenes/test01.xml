@@ -1,6 +1,13 @@
-<scene showMouse="false" role="play.py" background="#000000ff">
+<scene showMouse="false" layout="default" role="play.py">
   <properties/>
+  <layer name="background">
+    <view/>
+  </layer>
+  <layer name="bottom">
+    <view/>
+  </layer>
   <layer name="middle">
+    <view/>
     <actor costume="wall1" x="14" y="503" direction="0.0" heading="0.0" startEvent="default" zOrder="0"/>
     <actor costume="wall2" x="96" y="576" direction="0.0" heading="0.0" startEvent="default" zOrder="3"/>
     <actor costume="wall1" x="170" y="502" direction="0.0" heading="0.0" startEvent="default" zOrder="4"/>
@@ -50,5 +57,8 @@
     <actor costume="money1" x="510" y="90" direction="0.0" heading="0.0" startEvent="default" zOrder="43"/>
     <actor costume="money1" x="511" y="48" direction="0.0" heading="0.0" startEvent="default" zOrder="44"/>
     <actor costume="money1" x="510" y="134" direction="0.0" heading="0.0" startEvent="default" zOrder="45"/>
+  </layer>
+  <layer name="top">
+    <view/>
   </layer>
 </scene>

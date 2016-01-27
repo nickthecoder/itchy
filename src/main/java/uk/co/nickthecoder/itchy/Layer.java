@@ -185,7 +185,8 @@ public class Layer implements Comparable<Layer>, NamedSubject<Layer>, Cloneable
         } catch (CloneNotSupportedException e) {
             throw new RuntimeException(e);
         }
-        
+        result.position = new Rect(this.position);
+
         result.setViewClassName(new ClassName( View.class, this.viewClassName.name));
         result.setStageClassName(new ClassName( Stage.class, this.stageClassName.name));
         result.setStageConstraintClassName(new ClassName( StageConstraint.class, this.stageConstraintClassName.name));

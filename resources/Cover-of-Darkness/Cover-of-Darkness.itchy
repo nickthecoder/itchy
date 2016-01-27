@@ -15,6 +15,7 @@
     <pose name="money1" filename="images/money1.png"/>
     <pose name="player" filename="images/player.png"/>
     <pose name="quit" filename="images/quit.png"/>
+    <pose name="torch1" filename="images/torch1.png" offsetX="0" offsetY="19"/>
     <pose name="wall1" filename="images/wall1.png"/>
     <pose name="wall1s" filename="images/wall1s.png"/>
     <pose name="wall2" filename="images/wall2.png"/>
@@ -63,6 +64,7 @@
     </costume>
     <costume name="guard1" defaultZOrder="0" order="0" showInDesigner="true" role="guard.py">
       <pose name="default" pose="guard1"/>
+      <companion name="torch" companion="torch1"/>
     </costume>
     <costume name="money1" defaultZOrder="0" order="0" showInDesigner="true" role="collectable.py">
       <pose name="default" pose="money1"/>
@@ -73,6 +75,9 @@
     </costume>
     <costume name="quit" defaultZOrder="0" order="0" showInDesigner="true" role="uk.co.nickthecoder.itchy.role.QuitButton">
       <pose name="default" pose="quit"/>
+    </costume>
+    <costume name="torch1" defaultZOrder="50" order="0" showInDesigner="true" role="torch.py">
+      <pose name="default" pose="torch1"/>
     </costume>
     <costume name="wall1" defaultZOrder="0" order="0" showInDesigner="true" role="solid.py">
       <pose name="default" pose="wall1"/>

@@ -1,6 +1,10 @@
-<scene showMouse="false" role="play.py" background="#000000ff">
+<scene showMouse="false" layout="default" role="play.py">
   <properties/>
+  <layer name="background">
+    <view color="#000029ff"/>
+  </layer>
   <layer name="bottom">
+    <view/>
     <actor costume="floor1" x="92" y="88" direction="0.0" heading="0.0" startEvent="default" zOrder="-7"/>
     <actor costume="floor1" x="92" y="355" direction="0.0" heading="0.0" startEvent="default" zOrder="-6"/>
     <actor costume="floor1" x="88" y="500" direction="0.0" heading="0.0" startEvent="default" zOrder="-5"/>
@@ -69,6 +73,7 @@
     <actor costume="floor1" x="672" y="96" direction="0.0" heading="0.0" startEvent="default" zOrder="65"/>
   </layer>
   <layer name="middle">
+    <view/>
     <actor costume="guard1" x="135" y="399" direction="0.0" heading="0.0" startEvent="default" zOrder="11">
       <property name="forwardSpeed" value="2.5"/>
       <property name="routeString" value="500 C114 R180"/>
@@ -114,12 +119,7 @@
     </actor>
   </layer>
   <layer name="top">
-    <actor costume="black" x="816" y="369" direction="0.0" heading="0.0" startEvent="default" zOrder="-10"/>
-    <actor costume="black" x="608" y="498" direction="0.0" heading="0.0" startEvent="default" zOrder="-9"/>
-    <actor costume="black" x="733" y="495" direction="0.0" heading="0.0" startEvent="default" zOrder="-8"/>
-    <actor costume="black" x="355" y="498" direction="0.0" heading="0.0" startEvent="default" zOrder="-7"/>
-    <actor costume="black" x="482" y="497" direction="0.0" heading="0.0" startEvent="default" zOrder="-6"/>
-    <actor costume="black" x="231" y="495" direction="0.0" heading="0.0" startEvent="default" zOrder="-5"/>
+    <view/>
     <actor costume="wall2" x="243" y="432" direction="0.0" heading="0.0" startEvent="default" zOrder="14"/>
     <actor costume="wall1" x="167" y="507" direction="0.0" heading="0.0" startEvent="default" zOrder="16"/>
     <actor costume="wall2" x="87" y="15" direction="0.0" heading="0.0" startEvent="default" zOrder="16"/>

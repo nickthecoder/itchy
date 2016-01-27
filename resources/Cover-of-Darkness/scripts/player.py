@@ -50,7 +50,7 @@ class Player(AbstractRole) :
             self.actor.moveTo( oldX, oldY )
             
 
-        if not self.getCollisionStrategy().collisions(self.getActor(),"guard").isEmpty() :
+        if not self.getCollisionStrategy().collisions(self.getActor(),"light").isEmpty() :
             Itchy.getGame().getDirector().restartScene()
             return
             

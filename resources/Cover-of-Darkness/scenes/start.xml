@@ -1,6 +1,10 @@
-<scene showMouse="true" role="play.py" background="#000000ff">
+<scene showMouse="true" layout="default" role="play.py">
   <properties/>
+  <layer name="background">
+    <view/>
+  </layer>
   <layer name="bottom">
+    <view/>
     <actor costume="floor1" x="204" y="199" direction="0.0" heading="0.0" startEvent="default" zOrder="0"/>
     <actor costume="floor1" x="353" y="199" direction="0.0" heading="0.0" startEvent="default" zOrder="1"/>
     <actor costume="floor1" x="503" y="202" direction="0.0" heading="0.0" startEvent="default" zOrder="2"/>
@@ -15,6 +19,7 @@
     <actor costume="floor1" x="631" y="472" direction="0.0" heading="0.0" startEvent="default" zOrder="11"/>
   </layer>
   <layer name="middle">
+    <view/>
     <text text="Use the arrow keys to move." font="Vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="418" y="510" direction="0.0" heading="0.0" startEvent="default" zOrder="0"/>
     <actor costume="wall2" x="349" y="547" direction="0.0" heading="0.0" startEvent="default" zOrder="3"/>
     <actor costume="wall2" x="201" y="547" direction="0.0" heading="0.0" startEvent="default" zOrder="4"/>
@@ -24,14 +29,14 @@
     <actor costume="wall1" x="710" y="465" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
     <actor costume="wall1" x="126" y="473" direction="0.0" heading="0.0" startEvent="default" zOrder="11"/>
     <actor costume="wall1" x="126" y="356" direction="0.0" heading="0.0" startEvent="default" zOrder="12"/>
-    <actor costume="guard1" x="248" y="314" direction="0.0" heading="0.0" startEvent="default" zOrder="14">
+    <actor costume="guard1" x="181" y="313" direction="0.0" heading="0.0" startEvent="default" zOrder="14">
       <property name="forwardSpeed" value="4.0"/>
-      <property name="routeString" value="350 L180 350 R180"/>
+      <property name="routeString" value="450 R180 450 L180"/>
       <property name="turnSpeed" value="4.0"/>
     </actor>
-    <actor costume="guard1" x="580" y="170" direction="-179.10226823279518" heading="-179.56488014573995" startEvent="default" zOrder="18">
+    <actor costume="guard1" x="646" y="209" direction="-179.10226823279518" heading="-179.56488014573995" startEvent="default" zOrder="18">
       <property name="forwardSpeed" value="3.0"/>
-      <property name="routeString" value="350 R180 350 L180"/>
+      <property name="routeString" value="450 R180 450 L180"/>
       <property name="turnSpeed" value="5.0"/>
     </actor>
     <actor costume="wall1" x="126" y="202" direction="0.0" heading="0.0" startEvent="default" zOrder="19"/>
@@ -48,6 +53,7 @@
     <actor costume="wall4" x="624" y="274" direction="0.0" heading="0.0" startEvent="default" zOrder="34"/>
   </layer>
   <layer name="top">
+    <view/>
     <actor costume="player" x="424" y="476" direction="0.0" heading="0.0" startEvent="default" zOrder="1">
       <property name="speed" value="3.0"/>
     </actor>

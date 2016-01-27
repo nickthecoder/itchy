@@ -59,6 +59,7 @@ public class EditSprite extends EditNamedSubject<Sprite>
     }
 
 
+    @Override
     protected Component createForm()
     {
         super.createForm();

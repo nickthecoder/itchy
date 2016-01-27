@@ -20,6 +20,7 @@ import uk.co.nickthecoder.itchy.KeyListener;
 import uk.co.nickthecoder.itchy.Layer;
 import uk.co.nickthecoder.itchy.MouseListener;
 import uk.co.nickthecoder.itchy.Pose;
+import uk.co.nickthecoder.itchy.RGBAView;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.Scene;
@@ -110,6 +111,8 @@ public class SceneDesigner implements MouseListener, KeyListener
 
     private StageView overlayView;
 
+    private RGBAView background;
+
     private final Rect sceneRect;
 
     private RootContainer toolbox;
@@ -191,6 +194,9 @@ public class SceneDesigner implements MouseListener, KeyListener
     {
         editor.root.hide();
 
+        background = new RGBAView();
+        editor.getViews().add(background);
+
         createToolbar();
 
         Rect wholeRect = new Rect(0, 0, editor.getWidth(), editor.getHeight());
@@ -222,6 +228,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         overlayView = new StageView(editRect, overlayStage);
         editor.getViews().add(overlayView);
 
+        
         editor.addMouseListener(this);
         editor.addKeyListener(this);
 
@@ -276,6 +283,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         editor.getStages().remove(overlayStage);
         editor.getViews().remove(designViews);
         editor.getViews().remove(overlayView);
+        editor.getViews().remove(background);
         editor.removeMouseListener(this);
         editor.removeKeyListener(this);
 
@@ -295,10 +303,13 @@ public class SceneDesigner implements MouseListener, KeyListener
 
         editor.getViews().setPosition(viewsRect);
         overlayView.setPosition(editRect);
+        background.setPosition(editRect);
         designViews.setPosition(new Rect(0, 0, width, height));
 
         for (View view : designViews.getChildren()) {
-            view.setPosition(editRect);
+            if ((view instanceof ScrollableView) && (view instanceof StageView)) {
+                view.setPosition(editRect);
+            }
         }
 
         Rect old = toolbox.getView().getPosition();
@@ -310,7 +321,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         toolbar.setPosition(0, 0, width, toolbar.getHeight());
         toolbox.setPosition(0, 0, width, toolbox.getHeight());
 
-        // debugViews(this.editor.getGlassView().getParent(), "");
+        debugViews(this.editor.getGlassView().getParent(), "");
     }
 
     protected void debugViews(View view, String prefix)
@@ -1686,6 +1697,11 @@ public class SceneDesigner implements MouseListener, KeyListener
         for (View view : designViews.getChildren()) {
             if (view instanceof ScrollableView) {
                 ((ScrollableView) view).scrollBy(dx, dy);
+            } else {
+                Rect rect = view.getPosition();
+                rect.x -= dx;
+                rect.y += dy;
+                view.setPosition(rect);
             }
         }
         overlayView.scrollBy(dx, dy);
