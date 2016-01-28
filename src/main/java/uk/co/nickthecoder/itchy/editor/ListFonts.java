@@ -1,5 +1,6 @@
 package uk.co.nickthecoder.itchy.editor;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +19,7 @@ import uk.co.nickthecoder.itchy.gui.TableModelColumn;
 import uk.co.nickthecoder.itchy.gui.TableModelRow;
 import uk.co.nickthecoder.itchy.util.StringList;
 
-public class ListFonts extends ListSubjects<Font>
+public class ListFonts extends ListFileSubjects<Font>
 {
 
     public ListFonts(Resources resources)
@@ -57,15 +58,24 @@ public class ListFonts extends ListSubjects<Font>
     }
 
     @Override
+    protected void add(String name, File relativeFile)
+    {
+        Font font = new Font();
+        font.setName( name );
+        font.setFile(relativeFile);
+        EditFont edit = new EditFont( this.resources, this, font, false );
+        edit.show();        
+    }
+
+    protected File getDirectory()
+    {
+        return resources.getFontsDirectory();
+    }
+    
+    @Override
     protected void edit(Font subject)
     {
-        boolean isNew = false;
-        if (subject == null) {
-            subject = new Font();
-            isNew = true;
-        }
-        
-        EditFont edit = new EditFont( this.resources, this, subject, isNew );
+        EditFont edit = new EditFont( this.resources, this, subject, false );
         edit.show();        
     }
 

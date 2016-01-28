@@ -221,13 +221,18 @@ public class EditLayer extends EditNamedSubject<Layer>
     
     public void hideDetails()
     {
+        // Completely hide the details page and tab. Clear contents so it doesn't take up space.
         notebook.getTab(0).setVisible(false);
         notebook.getPage(0).setVisible(false);
+        ((Container) notebook.getPage(0)).clear();
+        notebook.forceLayout();
+        notebook.invalidate();
+
         notebook.selectPage(1);
         
-        // If there is only one tab visible (the View tab), then hide it.
+        // If there is only one tab visible (the View tab), then hide the tab.
         if (!notebook.getTab(2).isVisible()) {
-            notebook.getTab(1).setVisible(false );
+            notebook.getTab(1).setVisible(false);
         }
     }
 }

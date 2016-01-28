@@ -62,6 +62,10 @@ public class RGBABox extends PlainContainer
 
     public void setValue(RGBA value)
     {
+        if (value == null) {
+            this.textBox.setText("");
+            return;
+        }
         this.textBox.setText(this.includeAlpha ? value.getRGBACode() : value.getRGBCode());
     }
 

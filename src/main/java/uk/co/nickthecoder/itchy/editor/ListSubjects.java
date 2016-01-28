@@ -223,7 +223,7 @@ public abstract class ListSubjects<S>
 
     public void onAdd()
     {
-        this.edit(null);
+        this.addOrEdit(null);
     }
 
     public void onEdit()
@@ -235,7 +235,7 @@ public abstract class ListSubjects<S>
         @SuppressWarnings("unchecked")
         ReflectionTableModelRow<S> row = (ReflectionTableModelRow<S>) this.table.getCurrentTableModelRow();
 
-        this.edit((S) row.getData());
+        this.addOrEdit((S) row.getData());
     }
 
     public void onRemove()
@@ -256,7 +256,7 @@ public abstract class ListSubjects<S>
      * @param subject
      *            The subject to be edited, or null to add a new subject.
      */
-    protected abstract void edit(S subject);
+    protected abstract void addOrEdit(S subject);
 
     protected abstract void remove(S subject);
 

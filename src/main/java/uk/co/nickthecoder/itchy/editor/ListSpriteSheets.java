@@ -7,7 +7,6 @@ import java.util.List;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.SpriteSheet;
 import uk.co.nickthecoder.itchy.gui.AbstractComponent;
-import uk.co.nickthecoder.itchy.gui.FileOpenDialog;
 import uk.co.nickthecoder.itchy.gui.ImageComponent;
 import uk.co.nickthecoder.itchy.gui.ReflectionTableModelRow;
 import uk.co.nickthecoder.itchy.gui.SimpleTableModel;
@@ -15,11 +14,10 @@ import uk.co.nickthecoder.itchy.gui.SingleColumnRowComparator;
 import uk.co.nickthecoder.itchy.gui.TableModel;
 import uk.co.nickthecoder.itchy.gui.TableModelColumn;
 import uk.co.nickthecoder.itchy.gui.TableModelRow;
-import uk.co.nickthecoder.itchy.util.Util;
 import uk.co.nickthecoder.jame.JameException;
 import uk.co.nickthecoder.jame.Surface;
 
-public class ListSpriteSheets extends ListSubjects<SpriteSheet>
+public class ListSpriteSheets extends ListFileSubjects<SpriteSheet>
 {
 
     public ListSpriteSheets(Resources resources)
@@ -49,7 +47,7 @@ public class ListSpriteSheets extends ListSubjects<SpriteSheet>
         columns.add(name);
         columns.add(filename);
         columns.add(image);
-        
+
         return columns;
     }
 
@@ -65,48 +63,33 @@ public class ListSpriteSheets extends ListSubjects<SpriteSheet>
         }
         return model;
     }
+
+
+    protected File getDirectory()
+    {
+        return resources.getImagesDirectory();
+    }
     
-    protected FileOpenDialog openDialog;
+    @Override
+    protected void add(String name, File relativeFile)
+        throws JameException
+    {
+        SpriteSheet spriteSheet = new SpriteSheet(name, relativeFile);
+        EditSpriteSheet edit = new EditSpriteSheet(resources, ListSpriteSheets.this, spriteSheet, true);
+        edit.show();
+    }
 
     @Override
     protected void edit(SpriteSheet subject)
     {
-        if (subject == null) {
-            this.openDialog = new FileOpenDialog()
-            {
-                @Override
-                public void onChosen(File file)
-                {
-                    File relative = resources.makeRelativeFile(file);
-                    String name = Util.nameFromFile(file);
-                    try {
-                        SpriteSheet spriteSheet = new SpriteSheet(name, relative);
-                        EditSpriteSheet edit = new EditSpriteSheet(resources, ListSpriteSheets.this, spriteSheet, true);
-                        edit.show();
-
-                        openDialog.hide();
-
-                    } catch (JameException e) {
-                        openDialog.setMessage(e.getMessage());
-                        return;
-                    }
-
-                }
-            };
-            this.openDialog.setDirectory(resources.getImageDirectory());
-            this.openDialog.show();
-
-            return;
-        }
-        
-        EditSpriteSheet edit = new EditSpriteSheet( this.resources, this, subject, false );
-        edit.show();          
+        EditSpriteSheet edit = new EditSpriteSheet(this.resources, this, subject, false);
+        edit.show();
     }
 
     @Override
     protected void remove(SpriteSheet subject)
     {
-        this.resources.removeSpriteSheet(subject.getName());        
+        this.resources.removeSpriteSheet(subject.getName());
     }
 
 }

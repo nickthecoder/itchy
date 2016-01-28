@@ -13,7 +13,6 @@ import uk.co.nickthecoder.itchy.Thumbnailed;
 import uk.co.nickthecoder.itchy.gui.AbstractComponent;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.Container;
-import uk.co.nickthecoder.itchy.gui.FileOpenDialog;
 import uk.co.nickthecoder.itchy.gui.ImageComponent;
 import uk.co.nickthecoder.itchy.gui.PickerButton;
 import uk.co.nickthecoder.itchy.gui.ReflectionTableModelRow;
@@ -23,11 +22,10 @@ import uk.co.nickthecoder.itchy.gui.TableModel;
 import uk.co.nickthecoder.itchy.gui.TableModelColumn;
 import uk.co.nickthecoder.itchy.gui.TableModelRow;
 import uk.co.nickthecoder.itchy.gui.ThumbnailedPickerButton;
-import uk.co.nickthecoder.itchy.util.Util;
 import uk.co.nickthecoder.jame.JameException;
 import uk.co.nickthecoder.jame.Surface;
 
-public class ListPoses extends ListSubjects<FilePoseResource>
+public class ListPoses extends ListFileSubjects<FilePoseResource>
 {
     private PickerButton<Filter> filterPickerButton;
 
@@ -137,39 +135,23 @@ public class ListPoses extends ListSubjects<FilePoseResource>
         return model;
     }
 
-    protected FileOpenDialog openDialog;
 
+    protected File getDirectory()
+    {
+        return resources.getImagesDirectory();
+    }
+    
     @Override
+    protected void add(String name, File relativeFile)
+        throws JameException
+    {
+        FilePoseResource fpr = new FilePoseResource(name, relativeFile);
+        EditPose edit = new EditPose(resources, ListPoses.this, fpr, true);
+        edit.show();
+    }
+    
     protected void edit(FilePoseResource subject)
     {
-        if (subject == null) {
-            this.openDialog = new FileOpenDialog()
-            {
-                @Override
-                public void onChosen(File file)
-                {
-                    File relative = resources.makeRelativeFile(file);
-                    String name = Util.nameFromFile(file);
-                    try {
-                        FilePoseResource fpr = new FilePoseResource(name, relative);
-                        EditPose edit = new EditPose(resources, ListPoses.this, fpr, true);
-                        edit.show();
-
-                        openDialog.hide();
-
-                    } catch (JameException e) {
-                        openDialog.setMessage(e.getMessage());
-                        return;
-                    }
-
-                }
-            };
-            this.openDialog.setDirectory(resources.getImageDirectory());
-            this.openDialog.show();
-
-            return;
-        }
-
         EditPose edit = new EditPose(this.resources, this, subject, false);
         edit.show();
     }

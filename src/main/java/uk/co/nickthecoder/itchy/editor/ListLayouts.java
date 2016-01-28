@@ -48,7 +48,7 @@ public class ListLayouts extends ListSubjects<Layout>
     }
 
     @Override
-    protected void edit(Layout subject)
+    protected void addOrEdit(Layout subject)
     {
         boolean isNew = false;
         if (subject == null) {

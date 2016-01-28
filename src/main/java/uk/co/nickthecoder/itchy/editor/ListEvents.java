@@ -197,7 +197,7 @@ public class ListEvents extends ListSubjects<Costume.Event>
     }
 
     @Override
-    protected void edit(Event subject)
+    protected void addOrEdit(Event subject)
     {
         if (subject == null) {
             add();
@@ -267,7 +267,7 @@ public class ListEvents extends ListSubjects<Costume.Event>
         rebuildTable();
         Event event = selectRow(NEW_EVENT_NAME, data);
         if (event != null) {
-            edit(event);
+            addOrEdit(event);
         }
     }
 

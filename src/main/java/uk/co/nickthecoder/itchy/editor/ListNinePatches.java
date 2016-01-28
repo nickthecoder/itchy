@@ -14,9 +14,10 @@ import uk.co.nickthecoder.itchy.gui.TableModel;
 import uk.co.nickthecoder.itchy.gui.TableModelColumn;
 import uk.co.nickthecoder.itchy.gui.TableModelRow;
 import uk.co.nickthecoder.itchy.util.NinePatch;
+import uk.co.nickthecoder.jame.JameException;
 import uk.co.nickthecoder.jame.Surface;
 
-public class ListNinePatches extends ListSubjects<NinePatch>
+public class ListNinePatches extends ListFileSubjects<NinePatch>
 {
 
     public ListNinePatches(Resources resources)
@@ -64,16 +65,26 @@ public class ListNinePatches extends ListSubjects<NinePatch>
         return model;
     }
 
+    
+    protected File getDirectory()
+    {
+        return resources.getImagesDirectory();
+    }
+    
     @Override
+    protected void add(String name, File relativeFile)
+        throws JameException
+    {
+        NinePatch ninePatch = new NinePatch();
+        ninePatch.setName(name);
+        ninePatch.setFile(relativeFile);
+        EditNinePatch edit = new EditNinePatch(resources, ListNinePatches.this, ninePatch, true);
+        edit.show();
+    }
+    
     protected void edit(NinePatch subject)
     {
-        boolean isNew = false;
-        if (subject == null) {
-            subject = new NinePatch();
-            isNew = true;
-        }
-        
-        EditNinePatch edit = new EditNinePatch( this.resources, this, subject, isNew );
+        EditNinePatch edit = new EditNinePatch( this.resources, this, subject, false );
         edit.show();
     }
 

@@ -189,7 +189,7 @@ public class FileOpenDialog extends Window
      * Called when the user has finished with the dialog, either by Ok or Cancel.
      * 
      * @param file
-     *        The file that was chosen or null if no file were chosen.
+     *            The file that was chosen or null if no file were chosen.
      */
     protected void onChosen( File file )
     {

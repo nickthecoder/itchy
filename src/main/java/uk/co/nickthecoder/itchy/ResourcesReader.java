@@ -513,7 +513,6 @@ public class ResourcesReader
             XMLTag layoutTag = i.next();
 
             Layout layout = new Layout();
-            this.readProperties(layoutTag, layout);
 
             for (Iterator<XMLTag> j = layoutTag.getTags("layer"); j.hasNext();) {
                 XMLTag layerTag = j.next();
@@ -539,6 +538,7 @@ public class ResourcesReader
                     }
                 }
             }
+            this.readProperties(layoutTag, layout);
 
             this.resources.addLayout(layout);
         }

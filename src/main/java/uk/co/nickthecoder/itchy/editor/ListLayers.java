@@ -70,7 +70,7 @@ public class ListLayers extends ListSubjects<Layer>
     }
 
     @Override
-    protected void edit(Layer subject)
+    protected void addOrEdit(Layer subject)
     {
         boolean isNew = false;
         if (subject == null) {

@@ -14,7 +14,6 @@ import uk.co.nickthecoder.itchy.gui.AbstractComponent;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.Container;
-import uk.co.nickthecoder.itchy.gui.FileOpenDialog;
 import uk.co.nickthecoder.itchy.gui.GuiButton;
 import uk.co.nickthecoder.itchy.gui.MessageBox;
 import uk.co.nickthecoder.itchy.gui.PickerButton;
@@ -27,11 +26,10 @@ import uk.co.nickthecoder.itchy.gui.TableModelColumn;
 import uk.co.nickthecoder.itchy.gui.TableModelRow;
 import uk.co.nickthecoder.itchy.gui.ThumbnailedPickerButton;
 import uk.co.nickthecoder.itchy.util.StringList;
-import uk.co.nickthecoder.itchy.util.Util;
 import uk.co.nickthecoder.jame.JameException;
 import uk.co.nickthecoder.jame.Surface;
 
-public class ListSounds extends ListSubjects<SoundResource>
+public class ListSounds extends ListFileSubjects<SoundResource>
 {
 
     private PickerButton<Filter> filterPickerButton;
@@ -133,52 +131,28 @@ public class ListSounds extends ListSubjects<SoundResource>
         return model;
     }
     
-
-    public File getSoundsDirectory()
+    
+    protected File getDirectory()
     {
-        File dir = this.resources.getDirectory();
-        File soundsDir = new File(dir, "sounds");
-        if (soundsDir.exists()) {
-            return soundsDir;
-        } else {
-            return dir;
-        }
+        return resources.getSoundsDirectory();
     }
     
-    private FileOpenDialog openDialog; 
-    
     @Override
-    protected void edit(SoundResource subject)
+    protected void add(String name, File relativeFile)
+        throws JameException
     {
-        if (subject == null) {
-
-            openDialog = new FileOpenDialog() {
-                @Override
-                public void onChosen( File file )
-                {
-                    try {
-                        File relativeFile = resources.makeRelativeFile(file);
-                        String name = Util.nameFromFile(relativeFile);
-
-                        openDialog.hide();
-
-                        SoundResource newSubject = new SoundResource();
-                        newSubject.setName(name);;
-                        newSubject.setFile(relativeFile);
-                        EditSound edit = new EditSound( resources, ListSounds.this, newSubject, false );
-                        edit.show();         
-
-                    } catch (JameException e) {
-                        openDialog.setMessage(e.getMessage());
-                        return;
-                    }
-                }
-            };
-            openDialog.setDirectory(getSoundsDirectory());
-            openDialog.show();
-            return;
-        }
         
+        SoundResource newSubject = new SoundResource();
+        newSubject.setName(name);;
+        newSubject.setFile(relativeFile);
+        EditSound edit = new EditSound( resources, ListSounds.this, newSubject, false );
+        edit.show();         
+    }
+
+
+    @Override
+    protected void edit(SoundResource subject )
+    {
         EditSound edit = new EditSound( this.resources, this, subject, false );
         edit.show();         
     }

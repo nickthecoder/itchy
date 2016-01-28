@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import uk.co.nickthecoder.itchy.property.LayerProperty;
 import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.StringProperty;
 
@@ -17,10 +18,35 @@ public class Layout implements NamedSubject<Layout>, Cloneable
         properties.add(new StringProperty<Layout>("name"));
     }
 
+    private List<Property<Layout, ?>> customProperties;
+
+    @Override
+    public List<Property<Layout, ?>> getProperties()
+    {
+        if (customProperties == null) {
+            customProperties = new ArrayList<Property<Layout, ?>>();
+            customProperties.addAll(properties);
+            customProperties.add(new LayerProperty<Layout>("defaultLayer")
+            {
+                @Override
+                public Layout getLayout()
+                {
+                    return Layout.this;
+                }
+            });
+        }
+        return customProperties;
+    }
+
     public String name = "";
 
     private List<Layer> layers;
 
+    /**
+     * The active layer when starting the SceneDesigner
+     */
+    public Layer defaultLayer;
+    
     /**
      * Speeds up findStage.
      */
@@ -131,12 +157,6 @@ public class Layout implements NamedSubject<Layout>, Cloneable
     }
 
     @Override
-    public List<Property<Layout, ?>> getProperties()
-    {
-        return properties;
-    }
-
-    @Override
     public Layout clone()
     {
         Layout result;
@@ -154,6 +174,9 @@ public class Layout implements NamedSubject<Layout>, Cloneable
             result.addLayer(layer.clone());
         }
 
+        if (result.defaultLayer != null) {
+            result.defaultLayer = result.findLayer(result.defaultLayer.name);
+        }
         return result;
     }
 

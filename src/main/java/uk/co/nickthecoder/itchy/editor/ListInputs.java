@@ -52,7 +52,7 @@ public class ListInputs extends ListSubjects<Input>
     }
 
     @Override
-    protected void edit(Input subject)
+    protected void addOrEdit(Input subject)
     {
         boolean isNew = false;
         if (subject == null) {

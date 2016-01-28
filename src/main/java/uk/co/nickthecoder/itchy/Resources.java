@@ -192,17 +192,34 @@ public class Resources extends Loadable
     }
 
 
-    public File getImageDirectory()
+    public File getImagesDirectory()
+    {
+        return getDirectory( "images" );
+    }
+    
+    public File getSoundsDirectory()
+    {
+        return getDirectory( "sounds" );
+    }
+    
+    public File getFontsDirectory()
+    {
+        return getDirectory( "fonts" );
+    }
+    
+    
+    private File getDirectory( String name )
     {
         File dir = getDirectory();
-        File imageDir = new File(dir, "images");
-        if (imageDir.exists()) {
-            return imageDir;
+        File subDir = new File(dir, name);
+        if (subDir.exists()) {
+            return subDir;
         } else {
             return dir;
         }
     }
-
+    
+    
     @Override
     protected void checkSave(File file) throws Exception
     {

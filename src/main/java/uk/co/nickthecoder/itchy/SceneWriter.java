@@ -109,6 +109,7 @@ public class SceneWriter extends XMLWriter
                 this.endTag("stageConstraint");
             }
         }
+        
     }
 
     private <S extends PropertySubject<S>> void writeChangedProperties(S subject, S template)

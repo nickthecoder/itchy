@@ -97,7 +97,7 @@ public class ListSprites extends ListSubjects<Sprite>
     }
 
     @Override
-    protected void edit(Sprite subject)
+    protected void addOrEdit(Sprite subject)
     {
         boolean isNew = false;
         if (subject == null) {

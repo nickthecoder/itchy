@@ -102,7 +102,7 @@ public class ListCostumes extends ListSubjects<Costume>
     }
     
     @Override
-    protected void edit(Costume subject)
+    protected void addOrEdit(Costume subject)
     {
         boolean isNew = false;
         if (subject == null) {

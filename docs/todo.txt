@@ -1,55 +1,13 @@
 Current Tasks
 =============
 
-SceneDesigner
-    Views should NOT be the one from Layout, but a scrollable one, which covers the whole screen.
-        Bounds are the whole screen, and offsets are based on the layer's position (and any scroll amount by the editor).
-
-    Layer to have a getDesignView method.
-
-
-SceneDesigner
-    When scrolling, then StageViews should be scrolled, but non-stage view should just be moved
-        e.g. a RGBAView should only cover the inside of the dotted rectangle.
-    Therefore editor needs to add another black RGBAView behind all the others.
-
-
-
-
-Pyrox is annoying because the "test" layer is edited by default, but "grid" is almost always what I want to edit.
-    Create a "defaultLayer" attribute on Layer?
-    If implemented as LayerProperty, then I can reuse the LayerPickerButton and LayerPicker for SceneDesigners title bar.
-
-Add a LayerPickerButton to the SceneDesigner's toolbar.
-
 SceneDesigner: one dotted box for the screen's  bounds, and another for the current view's if they are different.
-
-
-SceneDirector has a Layout, which can be used to find stages. Don't use Itchy's view tree.
-
-SceneDesigner's Layers tab: Add a "..." button if the layer or the stage have properties.
-
-Remove background colour from SceneResource - Implement this as a layer.
-
-When loading/merging layouts, need to clone the layers, including the view, stage and the view's and stage's properties.
-
-How should StageConstraint be handled?
-    AbastractStage has stageConstaint as a property, but I can't save arbitrary classes (yet?).
-    Also, I can't set the attributes of the stage complaint, nor choose the StageContraint implementation from the GUI.
-    
-    Could subclass ZOrderStage (or whatever), and "hard code" the stage constraint there.
-        Nasty
-        
-    Give Layer a stageConstraint ClassName, and add this to the Layout GUI and save/load. 
-        Better. Do this!
-    
 
 SceneDesigner onPaste, and maybe other places uses addTop, but now that costumes have default ZOrders, it makes more sensse
     to use add, and let them have the same ZOrder.
 
 
 Renaming a Layer/Layout will need to alter all scenes???
-    Or SceneDesigner can handle missing Layout/Layers, and still muddle through.
 
 Game.loadScene, calls Role.sceneCreated only for the "main" load, not for additional scenes, such as
     glass view for highscores, lives etc.

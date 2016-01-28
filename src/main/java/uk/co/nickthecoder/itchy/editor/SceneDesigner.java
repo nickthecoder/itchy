@@ -51,6 +51,7 @@ import uk.co.nickthecoder.itchy.gui.GuiButton;
 import uk.co.nickthecoder.itchy.gui.GuiView;
 import uk.co.nickthecoder.itchy.gui.ImageComponent;
 import uk.co.nickthecoder.itchy.gui.Label;
+import uk.co.nickthecoder.itchy.gui.LayerPickerButton;
 import uk.co.nickthecoder.itchy.gui.MessageBox;
 import uk.co.nickthecoder.itchy.gui.Notebook;
 import uk.co.nickthecoder.itchy.gui.PlainContainer;
@@ -210,7 +211,6 @@ public class SceneDesigner implements MouseListener, KeyListener
         createToolbox();
 
         for (Layer layer : scene.layout.getLayersByZOrder()) {
-            // TODO Create a DESIGN view, covering whole screen, offset the correct amount.
             View view = layer.getView();
             StageView stageView = layer.getStageView();
             if (stageView != null) {
@@ -242,6 +242,10 @@ public class SceneDesigner implements MouseListener, KeyListener
         Surface screen = Itchy.getDisplaySurface();
         resize(screen.getWidth(), screen.getHeight());
         onCenter();
+        
+        if (scene.layout.defaultLayer != null) {
+            selectLayer( scene.layout.defaultLayer);
+        }
     }
 
     private void onDone()
@@ -669,8 +673,21 @@ public class SceneDesigner implements MouseListener, KeyListener
         textButton.setTooltip("Add Text");
         toolbar.addChild(textButton);
 
+        layerPickerButton = new LayerPickerButton( this.scene.layout, this.currentLayer );
+        layerPickerButton.addChangeListener(new ComponentChangeListener()
+        {            
+            @Override
+            public void changed()
+            {
+                SceneDesigner.this.selectLayer(layerPickerButton.getValue());
+            }
+        });
+        layerPickerButton.setTooltip("Pick a Layer");
+        toolbar.addChild(layerPickerButton);
     }
 
+    private LayerPickerButton layerPickerButton;
+    
     private SceneDesignerPropertiesForm<Scene> sceneForm;
 
     private ClassNameBox sceneDirectorName;
@@ -1094,8 +1111,7 @@ public class SceneDesigner implements MouseListener, KeyListener
             @Override
             public void onRowSelected(TableRow tableRow)
             {
-                currentLayer = (Layer) tableRow.getTableModelRow().getData(0);
-                currentStageView = currentLayer.getStageView();
+                selectLayer((Layer) tableRow.getTableModelRow().getData(0));
             }
 
             @Override
@@ -1104,15 +1120,21 @@ public class SceneDesigner implements MouseListener, KeyListener
             }
         });
     }
+    
+    private void selectLayer( Layer layer )
+    {
+        currentLayer = layer;
+        currentStageView = currentLayer.getStageView(); 
+        layerPickerButton.setValue(layer);
+        updateLayersTable();
+    }
 
     private void updateLayersTable()
     {
-        Stage stage = currentActor.getStage();
-
         for (int i = 0; i < layersTableModel.getRowCount(); i++) {
             SimpleTableModelRow row = (SimpleTableModelRow) layersTableModel.getRow(i);
             Layer layer = (Layer) (row.getData(0));
-            if (stage == layer.getStage()) {
+            if (layer == currentLayer) {
                 layersTable.selectRow(row);
                 break;
             }
@@ -1459,9 +1481,10 @@ public class SceneDesigner implements MouseListener, KeyListener
             if (Itchy.isCtrlDown()) {
                 // Look at ALL stages, not only the current one.
 
-                for (View child : Reversed.list(designViews.getChildren())) {
-                    if (child instanceof StageView) {
-                        StageView stageView = (StageView) child;
+                //for (View child : Reversed.list(designViews.getChildren())) {
+                for ( Layer layer : Reversed.list(scene.layout.getLayersByZOrder())) {
+                    StageView stageView = layer.getStageView();
+                    if (stageView != null) {
                         Stage stage = stageView.getStage();
 
                         for (Actor actor : Reversed.list(stage.getActors())) {
@@ -1472,6 +1495,7 @@ public class SceneDesigner implements MouseListener, KeyListener
                                         searching = false;
                                     }
                                 } else {
+                                    selectLayer( layer );
                                     selectActor(actor);
                                     setMode(MODE_DRAG_ACTOR);
                                     beginDrag(event.x, event.y);

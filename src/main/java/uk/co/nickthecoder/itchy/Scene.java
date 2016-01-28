@@ -24,10 +24,11 @@ public class Scene implements NamedSubject<Scene>
     static {
         properties.add(new StringProperty<Scene>("name"));
         properties.add(new LayoutProperty<Scene>("layout"));
-        properties.add(new ClassNameProperty<Scene>(SceneDirector.class, "sceneDirector").access("sceneDirectorClassName"));
+        properties.add(new ClassNameProperty<Scene>(SceneDirector.class, "sceneDirector")
+            .access("sceneDirectorClassName"));
         properties.add(new BooleanProperty<Scene>("showMouse"));
-
     }
+
 
     @Override
     public List<Property<Scene, ?>> getProperties()
@@ -36,7 +37,7 @@ public class Scene implements NamedSubject<Scene>
     }
 
     public String name = "";
-    
+
     public boolean showMouse = true;
 
     private ClassName sceneDirectorClassName;
@@ -49,13 +50,13 @@ public class Scene implements NamedSubject<Scene>
 
     public Layout layout;
 
+
     public Scene()
     {
         this.sceneLayers = new ArrayList<SceneLayer>();
         this.layersMap = new HashMap<String, SceneLayer>();
         this.sceneDirectorClassName = new ClassName(SceneDirector.class, PlainSceneDirector.class.getName());
     }
-
 
     @Override
     public String getName()
@@ -69,7 +70,7 @@ public class Scene implements NamedSubject<Scene>
         this.name = name;
     }
 
-    public SceneLayer findSceneLayer( String name )
+    public SceneLayer findSceneLayer(String name)
     {
         for (SceneLayer sceneLayer : this.sceneLayers) {
             if (sceneLayer.name.equals(name)) {
@@ -78,7 +79,7 @@ public class Scene implements NamedSubject<Scene>
         }
         return null;
     }
-    
+
     public List<SceneLayer> getSceneLayers()
     {
         return this.sceneLayers;
@@ -179,24 +180,25 @@ public class Scene implements NamedSubject<Scene>
     {
         return this.sceneDirectorClassName;
     }
-    
-    public void setSceneDirectorClassName( ClassName className )
+
+    public void setSceneDirectorClassName(ClassName className)
     {
         this.sceneDirectorClassName = className;
         this.sceneDirector = null;
     }
-    
+
     public SceneDirector getSceneDirector()
     {
         if (this.sceneDirector != null) {
             return this.sceneDirector;
         }
-        
+
         if (StringUtils.isBlank(this.sceneDirectorClassName.name)) {
             this.sceneDirector = new PlainSceneDirector();
         } else {
             try {
-                this.sceneDirector = (SceneDirector) this.sceneDirectorClassName.createInstance(Itchy.getGame().resources);
+                this.sceneDirector = (SceneDirector) this.sceneDirectorClassName
+                    .createInstance(Itchy.getGame().resources);
             } catch (Exception e) {
                 Itchy.handleException(e);
                 this.sceneDirector = new PlainSceneDirector();
@@ -309,5 +311,5 @@ public class Scene implements NamedSubject<Scene>
             return false;
         }
     }
-   
+
 }

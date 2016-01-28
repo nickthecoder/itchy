@@ -52,7 +52,7 @@ public class ListScenes extends ListSubjects<SceneStub>
     }
 
     @Override
-    protected void edit(SceneStub subject)
+    protected void addOrEdit(SceneStub subject)
     {
         Scene scene;
         

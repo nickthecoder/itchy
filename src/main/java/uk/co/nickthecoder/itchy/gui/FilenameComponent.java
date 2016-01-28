@@ -28,7 +28,7 @@ public class FilenameComponent extends PlainContainer
 
     public FilenameComponent( Resources resources, File file )
     {
-        this(resources, file.getPath());
+        this(resources, file == null ? "" : file.getPath());
     }
 
     public FilenameComponent( Resources resources, String filename )

@@ -100,7 +100,7 @@ public class ListAnimations extends ListSubjects<AnimationResource>
     }
 
     @Override
-    protected void edit(AnimationResource subject)
+    protected void addOrEdit(AnimationResource subject)
     {
         boolean isNew = false;
         if (subject == null) {

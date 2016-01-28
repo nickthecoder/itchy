@@ -262,7 +262,7 @@ public final class Editor extends Game implements KeyListener
         this.root.reStyle();
 
         if (this.designSceneName != null) {
-            this.listScenes.edit(this.resources.getScene(this.designSceneName));
+            this.listScenes.addOrEdit(this.resources.getScene(this.designSceneName));
         }
         addKeyListener(this);
         Itchy.mainLoop();
