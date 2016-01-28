@@ -1,10 +1,16 @@
 Current Tasks
 =============
 
-SceneDesigner: one dotted box for the screen's  bounds, and another for the current view's if they are different.
 
-SceneDesigner onPaste, and maybe other places uses addTop, but now that costumes have default ZOrders, it makes more sensse
+A button/shortcut to reset all actors to their default Z-Orders.
+    Don't forget about Undo/Redo!
+SceneDesigner onPaste, and maybe other places uses addTop, but now that costumes have default ZOrders, it makes more sense
     to use add, and let them have the same ZOrder.
+
+
+
+SceneDesigner: one dotted box for the screen's  bounds, and another for the current view's if they are different.
+    Make both semi-transparent?
 
 
 Renaming a Layer/Layout will need to alter all scenes???
@@ -12,11 +18,9 @@ Renaming a Layer/Layout will need to alter all scenes???
 Game.loadScene, calls Role.sceneCreated only for the "main" load, not for additional scenes, such as
     glass view for highscores, lives etc.
 
-SceneDesigner : Show the current layer in the toolbar as a button. Click to switch.
 
 BUGS
 ====
-
 
 All resources.renameXXX needs to update the renamed collection, so that renameSubjectsInScenes will work. 
     And do the same with other resources. Layouts, Fonts, ... ?
@@ -43,41 +47,9 @@ Debris-rocks - pieces have offsets, so they explode naturally.
         FloodFillFragments - Flood fill based on transparency for the keyboard and "K"
         ColorKeyFragments - for the others Pyrox rocks, or maybe Random with a fixed key (to ensure pieces are not too small).
 
+
 Editor to test if resources have changed and prompt for confirm before exiting.
 
-Reset Z-order of all actors based on their costume's z-order.
-
-Design Stages/Views graphically - Aim for no code in Director.
-Better editing for views which are not the whole screen.
-    The-Mings has a GUI at the bottom, and a scrollable area above.
-        The editor should reflect this.
-    Create a "Layout" tab, where the layouts are edited.
-        The GUI scene uses a short, non-scrolling Stage/View Layout. Called "GUI"
-        The playing scenes use the layout with scrolling view(s). Called "Arena"
-    The "Play" SceneDirector loads the scene as normal, and ALSO loads the GUI scene.
-        This will create both sets of Stages/Views.
-
-    The GUI and .itchy file format could only allow a LIST of view/stages, not a TREE.
-    Also, make the relationship 1:1 between Stage and View to keep it simple.
-
-    How can views be customised on a per scene basis?
-        E.g. A layout has a RGBBackground or a TiledBackground. How is the colour / tile info picked?
-
-    Is a layout made up of Stages or of Views?
-        RGBBackground is a View, not a stage
-        But most of the time we care about the type of stage. e.g. ZORderStage, TorusZOrderStage...
-        Layout made from Layer, which has...
-            Name
-            ClassName of Stage, which can be null and ClassName of a View, which cannot be null.
-            Save properties of both - the view has top,left, width, height properties
-            BackgroundViews will have additional properties
-            If the View has a "stage" property, then Stage cannot be null.
-
-    SceneDesigner shows dotted blue outline for the currently selected layer's position.
-    and dotted red outline for the size of the screen.
-
-    When composing a scene from multiple Layouts, then how is the Z-order of the layers specified?
-    Either the layers have a Z-order themselves, or the sceneDirector uses : loadScence(string name,boolean above)
 
 Animations to apply start/end events, so that sounds can be played.
 	Can also be used to assign a new Pose during a non-framed based animation.
@@ -137,11 +109,6 @@ MouseListenerView - Why is Game passed to its methods?
 Look at ScriptManager's createXXX methods, and see where they are called from.
     Consider removing createXXX methods, and doing it via ClassName.createInstance instead.
 
-Consider merging Pose & PoseResource. Ditto for other resources.
-
-Should Layout be a NamedResource?
-    If not, why are the other resources?
-    
 Pixelator has a bodge in it. Sometime it needs to add one to all the pixels.
 	Do a test, and see if the top row of pixels are blank for large scales, and if so,
 		then move blit to another surface before embossing the edges.
@@ -216,9 +183,11 @@ SceneDesigner for Text
 
 Group Costumes on the SceneDesigner's toolbox, so that similar costumes can be displayed as a single item.
     Clicking it reveals a popup, where the actual Costume can be selected.
-    Use this for Pyrox's machines, one way streets, and maybe even the walls.
+    Use this for Pyrox's machines, one way streets.
         A costume can have a "Group Leader" field, which is the name of the Costume that is displayed as the
         main icon in the scene design toolbox. Similar impl as "costume base"
+    Instead of a Popup, when the group leader is clicked, reveal the "children". Click to hide them. Leader will be there twice???
+        If costume has a "leader" pose, then use that instead of default.
 
 SceneDesigner : select groups of actors, and move/delete them together.
 
@@ -303,26 +272,8 @@ Component : Override all rules. Currently only Font can be overridden.
 
 Create a game which uses the GUI
 
-Replace crufty render and render2 methods with the concept of a Graphics Context.
-To scroll, a sub-layer, push the context, alter its mapping, call the childrens render,
-then pop the context.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Create a game using an isometric view, where Z-Order is governed by actor's Y value.
+    
 
 
 

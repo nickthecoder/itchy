@@ -353,7 +353,11 @@ public class Itchy
      */
     public static void processEvents()
     {
-        eventProcessor.run();
+        try {
+            eventProcessor.run();
+        } catch (Exception e) {
+            handleException(e);
+        }
     }
 
     /**
@@ -380,7 +384,11 @@ public class Itchy
      */
     public static void render()
     {
-        currentGame.render(Video.getDisplaySurface());
+        try {
+            currentGame.render(Video.getDisplaySurface());
+        } catch (Exception e) {
+            handleException(e);
+        }
         Video.flip();
     }
 

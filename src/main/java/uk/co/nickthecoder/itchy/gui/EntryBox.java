@@ -273,6 +273,9 @@ public class EntryBox<E extends EntryBox<?>> extends ClickableContainer implemen
      */
     protected boolean setEntryText(String text)
     {
+        if (text == null) {
+            text = "";
+        }
         this.label.setText(text);
         if (this.caretIndex > text.length()) {
             this.caretIndex = text.length();

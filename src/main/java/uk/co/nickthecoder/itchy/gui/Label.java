@@ -15,7 +15,7 @@ public class Label extends SurfaceComponent
 
     public Label( String text )
     {
-        this.text = text;
+        this.text = text == null ? "" : text;
         this.type = "label";
     }
 
@@ -28,7 +28,7 @@ public class Label extends SurfaceComponent
     {
         if (this.text.equals(text)) {
         } else {
-            this.text = text;
+            this.text = text == null ? "" : text;
             this.clearPlainSurface();
             this.invalidate();
             if (this.parent != null) {
@@ -63,7 +63,9 @@ public class Label extends SurfaceComponent
     {
         try {
             TrueTypeFont ttf = this.getFont().getSize(this.getFontSize());
-            this.plainSurface = ttf.renderBlended(this.text, this.getColor());
+            if ((ttf != null) && (this.getColor() != null) && (this.text != null)) {
+                this.plainSurface = ttf.renderBlended(this.text, this.getColor());
+            }
         } catch (JameException e) {
             e.printStackTrace();
         }

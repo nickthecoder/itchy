@@ -27,6 +27,10 @@ public abstract class SurfaceComponent extends AbstractComponent
     {
         if (this.plainSurface == null) {
             this.createPlainSurface();
+            // Oh dear, lets use a dummy surface.
+            if (this.plainSurface == null) {
+                this.plainSurface = new Surface(1,1,true);
+            }
         }
 
         return this.plainSurface;

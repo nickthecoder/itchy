@@ -5,13 +5,17 @@ import java.util.Comparator;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.Costume;
+import uk.co.nickthecoder.itchy.Font;
+import uk.co.nickthecoder.itchy.PoseResource;
 import uk.co.nickthecoder.itchy.Resources;
+import uk.co.nickthecoder.itchy.TextStyle;
 import uk.co.nickthecoder.itchy.gui.AbstractComponent;
 import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.Container;
 import uk.co.nickthecoder.itchy.gui.ImageComponent;
 import uk.co.nickthecoder.itchy.gui.Label;
 import uk.co.nickthecoder.itchy.gui.PlainContainer;
+import uk.co.nickthecoder.itchy.gui.PoseOrFontPicker;
 import uk.co.nickthecoder.itchy.gui.ReflectionTableModelRow;
 import uk.co.nickthecoder.itchy.gui.SimpleTableModel;
 import uk.co.nickthecoder.itchy.gui.SingleColumnRowComparator;
@@ -83,7 +87,7 @@ public class ListCostumes extends ListSubjects<Costume>
         columns.add(order);
         columns.add(extendedFrom);
         columns.add(image);
-        
+
         return columns;
     }
 
@@ -100,24 +104,54 @@ public class ListCostumes extends ListSubjects<Costume>
         }
         return model;
     }
-    
+
+    private PoseOrFontPicker poseOrFontPicker;
+
     @Override
     protected void addOrEdit(Costume subject)
     {
-        boolean isNew = false;
         if (subject == null) {
-            subject = new Costume();
-            isNew = true;
+            final Costume newCostume = new Costume();
+
+            poseOrFontPicker = new PoseOrFontPicker(resources)
+            {
+                @Override
+                public void pick(PoseResource poseResource)
+                {
+                    newCostume.addPose("default", poseResource);
+                    newCostume.setName(poseResource.getName());
+                    add(newCostume);
+                }
+
+                @Override
+                public void pick(Font fontResource)
+                {
+                    TextStyle textStyle = new TextStyle(fontResource, 14);
+                    newCostume.addTextStyle("default", textStyle);
+                    newCostume.setName(textStyle.getFont().getName());
+                    add(newCostume);
+                }
+
+            };
+            poseOrFontPicker.show();
+
+        } else {
+
+            EditCostume edit = new EditCostume(this.resources, this, subject, false);
+            edit.show();
         }
-        
-        EditCostume edit = new EditCostume( this.resources, this, subject, isNew );
-        edit.show();        
+    }
+
+    protected void add(Costume subject)
+    {
+        EditCostume edit = new EditCostume(this.resources, this, subject, true);
+        edit.show();
     }
 
     @Override
     protected void remove(Costume subject)
     {
-        this.resources.removeCostume(subject.getName());                
+        this.resources.removeCostume(subject.getName());
     }
 
 }
