@@ -205,8 +205,8 @@
     <scene name="test01"/>
   </scenes>
   <inputs>
-    <input name="click" keys="SPACE,M_LEFT"/>
-    <input name="exit" keys="ESCAPE,ctrl+q"/>
+    <input name="click" keys="click+SPACE,click+M_LEFT"/>
+    <input name="exit" keys="click+ESCAPE,click+ctrl+q"/>
     <input name="scrollDown" keys="DOWN"/>
     <input name="scrollLeft" keys="LEFT"/>
     <input name="scrollRight" keys="RIGHT"/>

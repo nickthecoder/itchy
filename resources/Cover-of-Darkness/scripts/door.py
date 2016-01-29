@@ -40,6 +40,8 @@ class Door(AbstractRole) :
             return
         
         if self.rotate != 0 :
+            self.rotate = 96-self.rotate
+            self.open = not self.open
             return
             
         self.addTag("clickable")

@@ -17,8 +17,13 @@ class Play(PlainSceneDirector) :
 
     def tick(self) :
         if self.inputScrollLeft.pressed() :
-            print "Scroll Left"
             game.sceneDirector.scrollBy(-2,0)
+        if self.inputScrollRight.pressed() :
+            game.sceneDirector.scrollBy(2,0)
+        if self.inputScrollUp.pressed() :
+            game.sceneDirector.scrollBy(0,2)
+        if self.inputScrollDown.pressed() :
+            game.sceneDirector.scrollBy(0,-2)
             
     def scrollBy(self, x, y) :
         game.layout.findView("top").scrollBy( x, y )
