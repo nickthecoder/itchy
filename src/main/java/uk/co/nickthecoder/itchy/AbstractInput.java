@@ -24,7 +24,9 @@ public class AbstractInput implements InputInterface
     public String toString()
     {
         StringBuffer buffer = new StringBuffer();
-
+        if (this.click) {
+            buffer.append("click+");
+        }
         if (this.shiftModifier) {
             buffer.append("shift+");
         }

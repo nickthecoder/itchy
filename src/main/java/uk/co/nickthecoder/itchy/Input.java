@@ -97,7 +97,6 @@ public class Input implements NamedSubject<Input>, InputInterface
                 mdi.button = mouseButton;
                 result = mdi;
             } else {
-
                 throw new Exception("Expected a key or mouse button name, but found : " + keyStr);
             }
             
@@ -210,9 +209,10 @@ public class Input implements NamedSubject<Input>, InputInterface
         String[] parts = keys.split(",");
         this.keys.clear();
         for (String part : parts) {
-            System.out.println("Input parsing key " + part );
-            this.keys.add(Input.parse(part));
-            System.out.println("Ok" );
+            part = part.trim();
+            if (! part.equals("")) {
+                this.keys.add(Input.parse(part));
+            }
         }
 
         this.asString = keys;

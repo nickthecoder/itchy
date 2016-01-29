@@ -4,56 +4,70 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.gui;
 
+import uk.co.nickthecoder.itchy.AbstractInput;
+import uk.co.nickthecoder.itchy.InputInterface;
 import uk.co.nickthecoder.itchy.KeyInput;
+import uk.co.nickthecoder.itchy.MouseInput;
 import uk.co.nickthecoder.jame.event.KeysEnum;
 
-public abstract class KeyInputPicker extends Window
+public abstract class InputPicker extends Window
 {
     public KeysEnum key;
+    
+    public int mouseButton = -1;
 
-    public KeyInputPicker()
+    public InputPicker()
     {
         super("Pick a Key");
-        
+
         this.clientArea.setLayout(new VerticalLayout());
-        
+
         PlainContainer buttons = new PlainContainer();
         buttons.addStyle("buttonBar");
         buttons.setLayout(new HorizontalLayout());
         buttons.setXAlignment(0.5f);
         this.clientArea.setFill(true, false);
 
-
         GuiButton ok = new GuiButton("Ok");
-        ok.addActionListener(new ActionListener() {
+        ok.addActionListener(new ActionListener()
+        {
 
             @Override
             public void action()
             {
-                if (KeyInputPicker.this.key == null) {
+                AbstractInput input = null;
+                
+                if (InputPicker.this.key != null) {
+                    input = new KeyInput(InputPicker.this.key);
+                } else if (InputPicker.this.mouseButton >= 0) {
+                    input = new MouseInput( InputPicker.this.mouseButton );
+                }
+                if ( input == null) {
                     return;
                 }
-                KeyInputPicker.this.hide();
                 
-                KeyInput keyInput = new KeyInput( KeyInputPicker.this.key );
-                keyInput.ctrlModifier = KeyInputPicker.this.ctrl.getValue();
-                keyInput.shiftModifier = KeyInputPicker.this.shift.getValue();
-                keyInput.altModifier = KeyInputPicker.this.alt.getValue();
-                keyInput.metaModifier = KeyInputPicker.this.meta.getValue();
-                
-                KeyInputPicker.this.pick(keyInput);
+                InputPicker.this.hide();
+
+                input.click = InputPicker.this.click.getValue();
+                input.ctrlModifier = InputPicker.this.ctrl.getValue();
+                input.shiftModifier = InputPicker.this.shift.getValue();
+                input.altModifier = InputPicker.this.alt.getValue();
+                input.metaModifier = InputPicker.this.meta.getValue();
+
+                InputPicker.this.pick(input);
             }
 
         });
         buttons.addChild(ok);
-        
+
         GuiButton cancel = new GuiButton("Cancel");
-        cancel.addActionListener(new ActionListener() {
+        cancel.addActionListener(new ActionListener()
+        {
 
             @Override
             public void action()
             {
-                KeyInputPicker.this.hide();
+                InputPicker.this.hide();
             }
 
         });
@@ -80,7 +94,7 @@ public abstract class KeyInputPicker extends Window
             KeysEnum.F10,
             KeysEnum.F11,
             KeysEnum.F12,
-        },
+    },
         {
             KeysEnum.BACKQUOTE,
             KeysEnum.KEY_1,
@@ -96,7 +110,7 @@ public abstract class KeyInputPicker extends Window
             KeysEnum.MINUS,
             KeysEnum.EQUALS,
             KeysEnum.BACKSPACE
-        },
+    },
         {
             KeysEnum.TAB,
             KeysEnum.q,
@@ -112,7 +126,7 @@ public abstract class KeyInputPicker extends Window
             KeysEnum.LEFTBRACKET,
             KeysEnum.RIGHTBRACKET,
             KeysEnum.RETURN
-        },
+    },
         {
             KeysEnum.CAPSLOCK,
             KeysEnum.a,
@@ -127,7 +141,7 @@ public abstract class KeyInputPicker extends Window
             KeysEnum.SEMICOLON,
             KeysEnum.QUOTE,
             KeysEnum.HASH
-        },
+    },
         {
             KeysEnum.LSHIFT,
             KeysEnum.BACKSLASH,
@@ -142,7 +156,7 @@ public abstract class KeyInputPicker extends Window
             KeysEnum.PERIOD,
             KeysEnum.SLASH,
             KeysEnum.RSHIFT
-        },
+    },
         {
             KeysEnum.LCTRL,
             KeysEnum.LSUPER,
@@ -151,7 +165,7 @@ public abstract class KeyInputPicker extends Window
             KeysEnum.RALT,
             KeysEnum.RSUPER,
             KeysEnum.RCTRL,
-        }
+    }
     };
 
     KeysEnum[][] middle = new KeysEnum[][]
@@ -160,7 +174,7 @@ public abstract class KeyInputPicker extends Window
             KeysEnum.PRINT,
             KeysEnum.SCROLLOCK,
             KeysEnum.PAUSE
-        },
+    },
         {
         },
         {
@@ -222,16 +236,16 @@ public abstract class KeyInputPicker extends Window
     };
 
     protected PlainContainer createForm()
-    {        
+    {
         PlainContainer result = new PlainContainer();
-        result.setLayout( new VerticalLayout() );
+        result.setLayout(new VerticalLayout());
         result.setYSpacing(20);
-        
+
         PlainContainer keyboardContainer = new PlainContainer();
         result.addChild(keyboardContainer);
         keyboardContainer.setLayout(new HorizontalLayout());
         keyboardContainer.setXSpacing(20);
-        
+
         ButtonGroup buttonGroup = new ButtonGroup();
 
         for (KeysEnum[][] s : this.keyboard) {
@@ -246,7 +260,7 @@ public abstract class KeyInputPicker extends Window
                 } else {
                     row.addStyle("combo");
                     row.setLayout(new HorizontalLayout());
-    
+
                     for (KeysEnum key : r) {
                         AbstractComponent button = createKeyButton(buttonGroup, key);
                         row.addChild(button);
@@ -255,14 +269,25 @@ public abstract class KeyInputPicker extends Window
                 section.addChild(row);
             }
         }
+
+        PlainContainer mouseButtons = new PlainContainer();
+        mouseButtons.setXSpacing(4);
+        mouseButtons.setYAlignment(0.5);
+        mouseButtons.addChild(new Label("Moues Buttons : " ));
+        for ( int i = 0; i < MouseInput.buttonLabels.length; i ++ ) {
+            Component button = createMouseButton( buttonGroup, i);
+            mouseButtons.addChild(button);
+        }        
+        result.addChild(mouseButtons);
+
         
         PlainContainer modifiers = new PlainContainer();
-        modifiers.setXSpacing( 40 );
+        modifiers.setXSpacing(40);
         result.addChild(modifiers);
         modifiers.setYAlignment(0.5);
 
         modifiers.addChild(new Label("Modifiers : "));
-        
+
         this.ctrl = new CheckBox();
         modifiers.addChild(makeModifier(this.ctrl, "ctrl"));
 
@@ -275,42 +300,62 @@ public abstract class KeyInputPicker extends Window
         this.meta = new CheckBox();
         modifiers.addChild(makeModifier(this.meta, "meta"));
 
+        modifiers.addChild( new Label( "" ) );
+        this.click = new CheckBox();
+        modifiers.addChild(makeModifier(this.click, "Click ?"));
+        
         return result;
     }
 
-    protected AbstractComponent makeModifier( AbstractComponent component, String label )
+    protected AbstractComponent makeModifier(AbstractComponent component, String label)
     {
         PlainContainer container = new PlainContainer();
         container.setLayout(new HorizontalLayout());
         container.setXSpacing(10);
         container.setYAlignment(0.5);
-        container.addChild( component );
-        container.addChild( new Label(label) );
+        container.addChild(component);
+        container.addChild(new Label(label));
         return container;
     }
-    
+
+    public CheckBox click;
     public CheckBox ctrl;
     public CheckBox shift;
     public CheckBox alt;
     public CheckBox meta;
-    
-    protected AbstractComponent createKeyButton( ButtonGroup buttonGroup, final KeysEnum key )
+
+    protected AbstractComponent createKeyButton(ButtonGroup buttonGroup, final KeysEnum key)
     {
         ToggleButton button = new ToggleButton(key.label);
         buttonGroup.add(button);
-        button.addActionListener(new ActionListener() {
-
+        button.addActionListener(new ActionListener()
+        {
             @Override
             public void action()
             {
-                KeyInputPicker.this.key = key;
+                InputPicker.this.key = key;
+                InputPicker.this.mouseButton = -1;
             }
-
         });
-
+        return button;
+    }
+    
+    protected AbstractComponent createMouseButton(ButtonGroup buttonGroup, final int buttonNumber)
+    {
+        ToggleButton button = new ToggleButton(MouseInput.buttonLabels[buttonNumber]);
+        buttonGroup.add(button);
+        button.addActionListener(new ActionListener()
+        {
+            @Override
+            public void action()
+            {
+                InputPicker.this.key = null;
+                InputPicker.this.mouseButton = buttonNumber;
+            }
+        });
         return button;
     }
 
-    public abstract void pick( KeyInput keyInput );
+    public abstract void pick(InputInterface input);
 
 }

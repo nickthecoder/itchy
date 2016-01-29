@@ -85,7 +85,7 @@ public class StringProperty<S> extends Property<S, String>
     @Override
     public void addValidator( Component component, ComponentValidator validator)
     {
-        TextWidget textWidget = (TextWidget) component;
+        TextWidget textWidget = getTextWidgetFromComponent(component);
         textWidget.addValidator(validator);
     }
 
@@ -99,7 +99,7 @@ public class StringProperty<S> extends Property<S, String>
     @Override
     public void updateSubject( S subject, Component component ) throws Exception
     {
-        TextWidget textWidget = (TextWidget) component;
+        TextWidget textWidget = getTextWidgetFromComponent(component);
         try {
             this.setValue(subject, textWidget.getText());
             textWidget.removeStyle("error");
@@ -112,8 +112,8 @@ public class StringProperty<S> extends Property<S, String>
     @Override
     public void updateComponent( S subject, Component component ) throws Exception
     {
-        TextBox textBox = (TextBox) component;
-        textBox.setText(this.getValue(subject));
+        TextWidget textWidget = getTextWidgetFromComponent(component);
+        textWidget.setText(this.getValue(subject));
     }
 
     @Override
@@ -122,6 +122,17 @@ public class StringProperty<S> extends Property<S, String>
         return value;
     }
 
+    /**
+     * Returns the TextWidget that was created by createComponent.
+     * Subclasses will have different implementations.
+     * @param comonent
+     * @return
+     */
+    protected TextWidget getTextWidgetFromComponent( Component component )
+    {   
+        return (TextBox) component;
+    }
+    
     @Override
     public String getErrorText( Component component )
     {

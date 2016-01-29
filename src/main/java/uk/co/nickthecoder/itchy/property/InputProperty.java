@@ -1,12 +1,15 @@
 package uk.co.nickthecoder.itchy.property;
 
-import uk.co.nickthecoder.itchy.KeyInput;
+import uk.co.nickthecoder.itchy.Input;
+import uk.co.nickthecoder.itchy.InputInterface;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Component;
+import uk.co.nickthecoder.itchy.gui.ComponentValidator;
+import uk.co.nickthecoder.itchy.gui.Container;
 import uk.co.nickthecoder.itchy.gui.GuiButton;
-import uk.co.nickthecoder.itchy.gui.KeyInputPicker;
+import uk.co.nickthecoder.itchy.gui.InputPicker;
 import uk.co.nickthecoder.itchy.gui.PlainContainer;
-import uk.co.nickthecoder.itchy.gui.TextBox;
+import uk.co.nickthecoder.itchy.gui.TextWidget;
 
 public class InputProperty<S> extends StringProperty<S>
 {
@@ -16,15 +19,32 @@ public class InputProperty<S> extends StringProperty<S>
     }
 
     @Override
+    public String getDefaultValue()
+    {
+        return "";
+    }
+    
+    @Override
     public Component createComponent(final S subject, boolean autoUpdate)
     {
-
+        final TextWidget textWidget = (TextWidget) super.createComponent(subject,  autoUpdate);
+        textWidget.addValidator(new ComponentValidator()
+        {
+            @Override
+            public boolean isValid()
+            {
+                try {
+                    new Input().setKeysString(textWidget.getText());
+                    return true;
+                } catch (Exception e) {
+                    return false;
+                }
+            }
+        });
+        
         PlainContainer container = new PlainContainer();
         container.addStyle("combo");
         
-        final TextBox box = new TextBox(this.getSafeValue(subject));
-        this.addChangeListener(box, subject, autoUpdate);
-
         GuiButton keysButton = new GuiButton("+");
         keysButton.addActionListener(new ActionListener()
         {
@@ -32,16 +52,16 @@ public class InputProperty<S> extends StringProperty<S>
             @Override
             public void action()
             {
-                KeyInputPicker keyPicker = new KeyInputPicker()
+                InputPicker keyPicker = new InputPicker()
                 {
                     @Override
-                    public void pick(KeyInput keyInput)
+                    public void pick(InputInterface input)
                     {
-                        String old = box.getText().trim();
+                        String old = textWidget.getText().trim();
                         if (old.length() > 0) {
                             old = old + ",";
                         }
-                        box.setText(old + keyInput.toString());
+                        textWidget.setText(old + input.toString());
                     }
                 };
                 keyPicker.show();
@@ -49,9 +69,16 @@ public class InputProperty<S> extends StringProperty<S>
 
         });
 
-        container.addChild(box);
+        container.addChild(textWidget);
         container.addChild(keysButton);
 
         return container;
     }
+
+    @Override
+    protected TextWidget getTextWidgetFromComponent( Component component )
+    {
+        return (TextWidget) ((Container) component).getChildren().get(0);
+    }
+
 }
