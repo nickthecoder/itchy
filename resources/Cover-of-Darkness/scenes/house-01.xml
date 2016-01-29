@@ -1,0 +1,67 @@
+<scene showMouse="true" layout="default" role="play.py">
+  <properties/>
+  <layer name="background">
+    <view color="#001700ff"/>
+  </layer>
+  <layer name="bottom">
+    <view/>
+  </layer>
+  <layer name="middle">
+    <view/>
+    <stageConstraint/>
+    <actor costume="window-ah2" x="336" y="552" direction="0.0" heading="0.0" startEvent="default" zOrder="30"/>
+    <actor costume="window-ah1" x="552" y="48" direction="0.0" heading="0.0" startEvent="default" zOrder="30"/>
+    <actor costume="window-av2" x="768" y="336" direction="0.0" heading="0.0" startEvent="default" zOrder="30"/>
+    <actor costume="doorFrame-1" x="120" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="30">
+      <property name="open" value="false"/>
+      <property name="pickPush" value="false"/>
+      <property name="pickPull" value="true"/>
+      <property name="locked" value="true"/>
+    </actor>
+    <actor costume="doorFrame-1" x="336" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="30">
+      <property name="open" value="false"/>
+      <property name="pickPush" value="true"/>
+      <property name="pickPull" value="false"/>
+      <property name="locked" value="true"/>
+    </actor>
+    <actor costume="doorFrame-1" x="192" y="480" direction="-90.0" heading="-90.0" startEvent="default" zOrder="30">
+      <property name="open" value="false"/>
+      <property name="pickPush" value="true"/>
+      <property name="pickPull" value="true"/>
+      <property name="locked" value="false"/>
+    </actor>
+    <actor costume="guard1" x="216" y="408" direction="0.0" heading="0.0" startEvent="default" zOrder="50" scale="0.75">
+      <property name="debug" value="false"/>
+      <property name="forwardSpeed" value="4.0"/>
+      <property name="routeString" value="450 C80 R90 160 C100 R90 80 C20 L90 T30 R180 223.5 C100 L90 281 L180"/>
+      <property name="turnSpeed" value="6.0"/>
+    </actor>
+    <actor costume="player" x="240" y="192" direction="0.0" heading="0.0" startEvent="default" zOrder="70" scale="0.75">
+      <property name="speed" value="4.0"/>
+    </actor>
+    <actor costume="corner-a1" x="120" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="corner-a2" x="480" y="552" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="wall-ah2" x="192" y="264" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="corner-a2" x="336" y="264" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="corner-a3" x="264" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="corner-a2" x="768" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="corner-a4" x="480" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="corner-a1" x="264" y="552" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="wall-ah3" x="624" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="wall-av2" x="120" y="408" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="corner-a3" x="768" y="48" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="wall-ah2" x="624" y="48" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="wall-ah2" x="408" y="48" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="wall-av2" x="768" y="192" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="wall-av1" x="768" y="408" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="wall-av1" x="120" y="192" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="corner-a4" x="120" y="48" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="wall-ah2" x="192" y="48" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="wall-av1" x="336" y="192" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="junction-a4" x="120" y="264" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="junction-a3" x="336" y="48" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+  </layer>
+  <layer name="top">
+    <view/>
+  </layer>
+</scene>

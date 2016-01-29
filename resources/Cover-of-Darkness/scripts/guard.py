@@ -1,16 +1,10 @@
-from uk.co.nickthecoder.itchy import Role
-from uk.co.nickthecoder.itchy import AbstractRole
-from uk.co.nickthecoder.itchy.util import ClassName
-
-from java.util import ArrayList
-
-from uk.co.nickthecoder.itchy.property import StringProperty
-from uk.co.nickthecoder.itchy.property import DoubleProperty
+from common import *
 
 properties = ArrayList()
 properties.add( DoubleProperty( "forwardSpeed" ) )
 properties.add( DoubleProperty( "turnSpeed" ) )
 properties.add( StringProperty( "routeString"  ) )
+properties.add( BooleanProperty( "debug"  ) )
 
 # routeString is a set of parts separated by spaces.
 # A part is either a number, or a command letter followed by a number.
@@ -34,10 +28,19 @@ class Guard(AbstractRole) :
         
         self.turnAmount = 1
         self.forwardAmount = 0
+        self.debug = False
+        
         
     def onBirth(self) :
         self.torch = self.actor.createCompanion("torch").role
         self.torch.owner = self
+        if self.debug :
+            print "Starting at :", self.actor.x, self.actor.y, "heading", self.actor.heading
+        self.startX = self.actor.x
+        self.startY = self.actor.y
+        self.startHeading = self.actor.heading
+        self.addTag("guard")
+
 
     def tick(self) :
     
@@ -66,8 +69,11 @@ class Guard(AbstractRole) :
 
         # Turn
         if self.turnAmount != 0 :
-            self.actor.setDirection( self.actor.getDirection() + self.turnAmount )            
+            self.actor.direction += self.turnAmount
+            self.torch.actor.direction += self.turnAmount
 
+        if self.collided( "door" ) :
+            game.director.restartScene()
 
     def nextPart(self) :
         self.stepsTaken = 0
@@ -75,6 +81,12 @@ class Guard(AbstractRole) :
 
         if self.routeIndex >= len( parts ) :
             self.routeIndex = 0
+            if self.debug :
+                print "Ending at :", self.actor.x, self.actor.y, "heading", self.actor.heading
+            self.actor.x = self.startX
+            self.actor.y = self.startY
+            self.actor.heading = self.startHeading
+
         
         part = parts[ self.routeIndex ]
         self.routeIndex += 1

@@ -19,6 +19,7 @@ import uk.co.nickthecoder.jame.Video;
 import uk.co.nickthecoder.jame.event.Event;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.Keys;
+import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseEvent;
 import uk.co.nickthecoder.jame.event.ResizeEvent;
 
@@ -36,11 +37,15 @@ public class Itchy
      */
     private static int KEYBOARD_STATE_SIZE = 400;
 
+    private static int MOUSE_STATE_SIZE = 6;
+
     /**
      * Holds a boolean for each key. On key pressed events sets the appropriate boolean, and key released events reset
      * the boolean. Uses the Keys values to index the array.
      */
     private static boolean[] keyboardState;
+
+    private static boolean[] mouseState;
 
     private static int mouseX;
 
@@ -148,6 +153,7 @@ public class Itchy
         Events.enableKeyTranslation(true);
 
         keyboardState = new boolean[KEYBOARD_STATE_SIZE];
+        mouseState = new boolean[ MOUSE_STATE_SIZE ];
         soundManager = new SoundManager();
         setScreenMode(resources);
         initialised = true;
@@ -455,6 +461,7 @@ public class Itchy
         return keyboardState[Keys.LMETA] || keyboardState[Keys.RMETA];
     }
 
+    
     /**
      * Processes a single event. Called from {@link #processEvents}.
      * 
@@ -500,6 +507,12 @@ public class Itchy
 
             mouseX = me.x;
             mouseY = me.y;
+
+            if (event instanceof MouseButtonEvent) {
+                MouseButtonEvent mbe = (MouseButtonEvent) event;
+                mouseState[mbe.button] = mbe.state == MouseButtonEvent.STATE_PRESSED;
+            }
+
         }
 
         currentGame.processEvent(event);
@@ -525,6 +538,16 @@ public class Itchy
         return mouseY;
     }
 
+    /**
+     * Tests if the one of the mouse buttons is currently held down.
+     * @param mouseButton The number of the mouse button. See MouseButtonEvent for button numbers.
+     * @return true iff the button is down.
+     */
+    public static boolean isMouseButtonDown( int mouseButton )
+    {
+        return mouseState[mouseButton];
+    }
+    
     /**
      * Prevent people creating instances of Itchy - it only has static methods.
      */

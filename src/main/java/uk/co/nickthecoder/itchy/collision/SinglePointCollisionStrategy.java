@@ -4,8 +4,8 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.collision;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Role;
@@ -72,15 +72,15 @@ public class SinglePointCollisionStrategy extends ActorCollisionStrategy
     private static final String[] EMPTY = {};
     
     @Override
-    public Set<Role> collisions( Actor actor, String... includeTags )
+    public List<Role> collisions( Actor actor, String... includeTags )
     {
         return collisions(actor, includeTags, EMPTY );
     }
     
     @Override
-    public Set<Role> collisions( Actor source, String[] includeTags, String[] excludeTags )
+    public List<Role> collisions( Actor source, String[] includeTags, String[] excludeTags )
     {
-        Set<Role> results = new HashSet<Role>();
+        List<Role> results = new ArrayList<Role>();
 
         for (Square square : this.neighbourhoodSquare.getNeighbouringSquares()) {
 

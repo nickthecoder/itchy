@@ -4,7 +4,7 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.collision;
 
-import java.util.Set;
+import java.util.List;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Role;
@@ -27,16 +27,16 @@ public class DebugCollisionStrategy extends ActorCollisionStrategy
     private static final String[] EMPTY = {};
     
     @Override
-    public Set<Role> collisions( Actor actor, String... includeTags )
+    public List<Role> collisions( Actor actor, String... includeTags )
     {
         return collisions(actor, includeTags, EMPTY );
     }
     
     @Override
-    public Set<Role> collisions( Actor actor, String[] includeTags, String[] excludeTags )
+    public List<Role> collisions( Actor actor, String[] includeTags, String[] excludeTags )
     {
-        Set<Role> results1 = this.strategy1.collisions(includeTags, excludeTags);
-        Set<Role> results2 = this.strategy2.collisions(includeTags, excludeTags);
+        List<Role> results1 = this.strategy1.collisions(includeTags, excludeTags);
+        List<Role> results2 = this.strategy2.collisions(includeTags, excludeTags);
 
         if (!results1.equals(results2)) {
             System.err.println("Pixel Collision failed for " + getActor());

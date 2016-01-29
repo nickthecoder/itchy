@@ -149,6 +149,7 @@ public class Costume implements NamedSubject<Costume>, Cloneable
     public Actor createActor(String startEvent)
     {
         Actor actor = new Actor(this, startEvent);
+        actor.setZOrder(this.defaultZOrder);
         Role role;
         try {
             role = AbstractRole.createRole(Itchy.getGame().resources, roleClassName);

@@ -21,26 +21,28 @@ public interface View extends PropertySubject<View>
      * Called by ParentLayer's when added or removed from a layer.
      * 
      * @param parent
-     *        The new parent, or null if this layer is being removed from a ParentLayer.
+     *            The new parent, or null if this layer is being removed from a ParentLayer.
      */
-    public void setParent( ParentView<?> parent );
+    public void setParent(ParentView<?> parent);
 
     /**
-     * Draws this layer to the given Surface. This is how layers are drawn to the display, but can also be used to draw to non-display
-     * surfaces. For example, if you want to take a snapshot of the game, you could render to a surface which you created, and then save
+     * Draws this layer to the given Surface. This is how layers are drawn to the display, but can also be used to draw
+     * to non-display
+     * surfaces. For example, if you want to take a snapshot of the game, you could render to a surface which you
+     * created, and then save
      * that surface to disk.
      * 
      * @param clip
-     *        The clip rectangle of the surface on which to draw. For the top-level
+     *            The clip rectangle of the surface on which to draw. For the top-level
      * @param destSurface
-     *        The surface to draw on
+     *            The surface to draw on
      * 
      * @param offsetX
-     *        How much to add to X.
+     *            How much to add to X.
      * @param offsetY
-     *        How much to add to Y.
+     *            How much to add to Y.
      */
-    public void render( Surface destSurface, Rect clip, int offsetX, int offsetY );
+    public void render(Surface destSurface, Rect clip, int offsetX, int offsetY);
 
     /**
      * @return The position of the view relative to the parent view
@@ -48,7 +50,7 @@ public interface View extends PropertySubject<View>
     public Rect getPosition();
 
     public void setPosition(Rect rect);
-    
+
     /**
      * @return The position of this View in display device coordinates, i.e. relative to the top left of the display.
      */
@@ -57,18 +59,23 @@ public interface View extends PropertySubject<View>
     public Rect getRelativeRect();
 
     /**
-     * Does this layer contain the point (which is in device coordinates). This is useful to determine if a mouse click if within a given
-     * layer.
+     * Does this layer contain the point (which is in device coordinates). This is useful to determine if a mouse click
+     * is within a given view.
      * 
      * @param x
-     *        The x coordinate from the left of the display.
+     *            The x coordinate from the left of the display.
      * @param y
-     *        The y coordinate fomr the top of the display.
+     *            The y coordinate from the top of the display.
      */
-    public boolean contains( int x, int y );
+    public boolean contains(int x, int y);
 
+    public double getWorldX( int screenX );
+
+    public double getWorldY( int screenY );
+    
     /**
-     * Resets this layer, and all children layers if it has them. For ScrollableViews, this means scrolling them back to (0,0).
+     * Resets this view, and all children view if it has them. For ScrollableViews, this means scrolling them back to
+     * (0,0).
      */
     public void reset();
 

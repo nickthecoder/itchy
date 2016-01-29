@@ -40,8 +40,18 @@ public class ListCostumes extends ListSubjects<Costume>
         TableModelColumn name = new TableModelColumn("Name", 0, 200);
         name.rowComparator = new SingleColumnRowComparator<String>(0);
 
-        TableModelColumn extendedFrom = new TableModelColumn("Extends", 1, 200);
-        extendedFrom.rowComparator = new SingleColumnRowComparator<String>(2);
+        TableModelColumn order = new TableModelColumn("Order", 1, 80);
+        // Allow sorting by the costume resources's order, and then its name.
+        @SuppressWarnings("rawtypes")
+        Comparator comparator = (Costume.orderComparator);
+        order.rowComparator = new WrappedRowComparator(4, (Comparator<Object>) comparator);
+
+        TableModelColumn zOrder = new TableModelColumn("Z Order", 2, 90);
+        zOrder.rowComparator = new SingleColumnRowComparator<String>(2);
+
+        TableModelColumn extendedFrom = new TableModelColumn("Extends", 3, 200);
+        extendedFrom.rowComparator = new SingleColumnRowComparator<String>(3);
+
 
         TableModelColumn image = new TableModelColumn("\"default\" Pose", 0, 150)
         {
@@ -76,17 +86,12 @@ public class ListCostumes extends ListSubjects<Costume>
             }
         };
 
-        TableModelColumn order = new TableModelColumn("Order", 3, 80);
-        // Allow sorting by the costume resources's order, and then its name.
-        @SuppressWarnings("rawtypes")
-        Comparator comparator = (Costume.orderComparator);
-        order.rowComparator = new WrappedRowComparator(4, (Comparator<Object>) comparator);
-
         List<TableModelColumn> columns = new ArrayList<TableModelColumn>();
         columns.add(name);
         columns.add(order);
-        columns.add(extendedFrom);
         columns.add(image);
+        columns.add(zOrder);
+        columns.add(extendedFrom);
 
         return columns;
     }
@@ -96,7 +101,7 @@ public class ListCostumes extends ListSubjects<Costume>
     {
         SimpleTableModel model = new SimpleTableModel();
 
-        String[] attributeNames = { "name", "extendedFromName", "order", null };
+        String[] attributeNames = { "name", "order", "defaultZOrder", "extendedFromName", null };
         for (String costumeName : this.resources.costumeNames()) {
             Costume costume = this.resources.getCostume(costumeName);
             TableModelRow row = new ReflectionTableModelRow<Costume>(costume, attributeNames);

@@ -4,7 +4,7 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.collision;
 
-import java.util.Set;
+import java.util.List;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Role;
@@ -28,12 +28,12 @@ public abstract class ActorCollisionStrategy implements CollisionStrategy
         return this.actor;
     }
 
-    public Set<Role> collisions( String... tags )
+    public List<Role> collisions( String... tags )
     {
         return this.collisions(this.actor, tags, null);
     }
 
-    public Set<Role> collisions( String[] includeTags, String[] excludeTags )
+    public List<Role> collisions( String[] includeTags, String[] excludeTags )
     {
         return this.collisions(this.actor, includeTags, excludeTags);
     }

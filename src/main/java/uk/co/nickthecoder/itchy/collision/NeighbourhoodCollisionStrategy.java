@@ -4,14 +4,13 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.collision;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Set;
+import java.util.List;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.WorldRectangle;
-import uk.co.nickthecoder.itchy.collision.PixelCollisionTest;
 
 /**
  * Uses a Neighbourhood to optimise Actor's overlapping and pixelOverlap methods. This strategy uses a grid based neighbourhood. It is
@@ -110,15 +109,15 @@ public class NeighbourhoodCollisionStrategy extends ActorCollisionStrategy
     private static final String[] EMPTY = {};
     
     @Override
-    public Set<Role> collisions( Actor actor, String... includeTags )
+    public List<Role> collisions( Actor actor, String... includeTags )
     {
         return collisions(actor, includeTags, EMPTY );
     }
     
     @Override
-    public Set<Role> collisions( Actor source, String[] includeTags, String[] excludeTags )
+    public List<Role> collisions( Actor source, String[] includeTags, String[] excludeTags )
     {
-        Set<Role> results = new HashSet<Role>();
+        List<Role> results = new ArrayList<Role>();
 
         for (Iterator<Square> i = this.neighbourhood.squareIterator(this.topLeft, this.bottomRight); i
             .hasNext();) {

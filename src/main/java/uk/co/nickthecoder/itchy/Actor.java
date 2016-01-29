@@ -676,6 +676,11 @@ public class Actor implements PropertySubject<Actor>
             (this.y - other.y));
     }
 
+    public double directionOf( double x, double y )
+    {
+        return Math.atan2(y - this.y, x - this.x) * 180.0 / Math.PI;
+    }
+
     public double directionOf( Actor other )
     {
         return Math.atan2(other.y - this.y, other.x - this.x) * 180.0 / Math.PI;
@@ -789,7 +794,9 @@ public class Actor implements PropertySubject<Actor>
                 }
 
             } catch (Exception e) {
-                Itchy.handleException(e);
+                System.err.println( "Ooops" );
+                e.printStackTrace();
+                // Itchy.handleException(e);
             }
         }
     }

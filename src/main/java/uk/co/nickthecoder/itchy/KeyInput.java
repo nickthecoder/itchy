@@ -6,123 +6,47 @@ package uk.co.nickthecoder.itchy;
 
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.KeysEnum;
-import uk.co.nickthecoder.jame.event.ModifierKey;
 
-public class KeyInput
+public class KeyInput extends AbstractInput
 {
 
     public KeysEnum key;
-
-    public boolean ctrlModifier;
-    public boolean shiftModifier;
-    public boolean metaModifier;
-    public boolean altModifier;
-
-    public static KeyInput parseKeyInput( String str )
-        throws Exception
-    {
-        KeyInput result = new KeyInput();
-
-        String[] parts = str.split("\\+");
-        for (int i = 0; i < parts.length - 1; i++) {
-            String part = parts[i];
-            if (part.equals("ctrl")) {
-                result.ctrlModifier = true;
-            } else if (part.equals("shift")) {
-                result.shiftModifier = true;
-
-            } else if (part.equals("meta")) {
-                result.metaModifier = true;
-
-            } else if (part.equals("alt")) {
-                result.altModifier = true;
-
-            } else {
-                throw new Exception("Expected shift,meta, or alt, but found : " + part);
-            }
-
-        }
-        String keyStr = parts[parts.length - 1];
-        KeysEnum key = KeysEnum.valueOf(keyStr);
-        if (key == null) {
-            throw new Exception("Expected a key name, but found : " + keyStr);
-        }
-        result.key = key;
-
-        return result;
-    }
 
     public KeyInput()
     {
     }
 
-    public KeyInput( KeysEnum key )
+    public KeyInput(KeysEnum key)
     {
         this.key = key;
-    }
-
-    @Override
-    public String toString()
-    {
-        StringBuffer buffer = new StringBuffer();
-
-        if (this.shiftModifier) {
-            buffer.append("shift+");
-        }
-        if (this.ctrlModifier) {
-            buffer.append("ctrl+");
-        }
-        if (this.metaModifier) {
-            buffer.append("meta+");
-        }
-        if (this.altModifier) {
-            buffer.append("alt+");
-        }
-
-        buffer.append(this.key.name());
-
-        return buffer.toString();
     }
 
     public boolean matches(KeyboardEvent ke)
     {
         if (ke.isPressed() && (ke.symbol == this.key.value)) {
-            if (this.ctrlModifier != (ke.modifier(ModifierKey.LCTRL) || ke.modifier(ModifierKey.RCTRL))) {
-                return false;
-            }
-            if (this.shiftModifier != (ke.modifier(ModifierKey.LSHIFT) || ke.modifier(ModifierKey.RSHIFT))) {
-                return false;
-            }
-            if (this.metaModifier != (ke.modifier(ModifierKey.LMETA) || ke.modifier(ModifierKey.RMETA))) {
-                return false;
-            }
-            if (this.altModifier != (ke.modifier(ModifierKey.LALT) || ke.modifier(ModifierKey.RALT))) {
-                return false;
-            }
-            return true;
+            return super.matches(ke);
         }
         return false;
     }
 
     public boolean pressed()
     {
-        if ( ! Itchy.isKeyDown(this.key.value) ) {
-            return false;
-        }
-        
-        if (this.ctrlModifier && ! Itchy.isCtrlDown()) {
-            return false;
-        }
-        if (this.shiftModifier && ! Itchy.isShiftDown()) {
-            return false;
-        }
-        if (this.altModifier && ! Itchy.isAltDown()) {
-            return false;
-        }
-        if (this.metaModifier && ! Itchy.isMetaDown()) {
-            return false;
-        }
 
-        return true;
+        if (Itchy.isKeyDown(this.key.value)) {
+            if ( (click && previouslyUp) || (!click) ) {
+                previouslyUp = false;
+                return super.pressed();
+            }
+        } else {
+            previouslyUp = true;
+        }
+        return false;
+    }
+    
+
+    @Override
+    public String toString()
+    {
+        return super.toString() + this.key.name();
     }
 }

@@ -81,6 +81,18 @@ public abstract class AbstractView implements View
     {
         return getAbsolutePosition().contains(x, y);
     }
+    
+    public double getWorldX( int screenX )
+    {
+        Rect position = this.getAbsolutePosition();
+        return screenX - position.x;
+    }
+    
+    public double getWorldY( int screenY )
+    {
+        Rect position = this.getAbsolutePosition();
+        return position.y - screenY + position.height;
+    }
 
     @Override
     public void render( Surface destSurface, Rect parentClip, int offsetX, int offsetY )

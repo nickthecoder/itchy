@@ -7,8 +7,9 @@ package uk.co.nickthecoder.itchy.editor;
 import java.io.File;
 
 import uk.co.nickthecoder.itchy.Game;
+import uk.co.nickthecoder.itchy.InputInterface;
+import uk.co.nickthecoder.itchy.Input;
 import uk.co.nickthecoder.itchy.Itchy;
-import uk.co.nickthecoder.itchy.KeyInput;
 import uk.co.nickthecoder.itchy.KeyListener;
 import uk.co.nickthecoder.itchy.PlainDirector;
 import uk.co.nickthecoder.itchy.Resources;
@@ -68,20 +69,20 @@ public final class Editor extends Game implements KeyListener
     
     private String designSceneName = null;
 
-    private KeyInput inputTest = KeyInput.parseKeyInput("ctrl+t");
+    private InputInterface inputTest = Input.parse("ctrl+t");
     
-    private KeyInput inputRun = KeyInput.parseKeyInput("ctrl+r");
+    private InputInterface inputRun = Input.parse("ctrl+r");
     
-    private KeyInput inputQuit = KeyInput.parseKeyInput("ctrl+q");
+    private InputInterface inputQuit = Input.parse("ctrl+q");
     
-    private KeyInput inputSave = KeyInput.parseKeyInput("ctrl+s");
+    private InputInterface inputSave = Input.parse("ctrl+s");
     
     
-    private KeyInput inputDebug1 = KeyInput.parseKeyInput("ctrl+F1"); 
+    private InputInterface inputDebug1 = Input.parse("ctrl+F1"); 
 
-    private KeyInput inputDebug2 = KeyInput.parseKeyInput("ctrl+F2"); 
+    private InputInterface inputDebug2 = Input.parse("ctrl+F2"); 
 
-    private KeyInput inputDebug3 = KeyInput.parseKeyInput("ctrl+F3"); 
+    private InputInterface inputDebug3 = Input.parse("ctrl+F3"); 
 
     
     public Editor(Game game) throws Exception

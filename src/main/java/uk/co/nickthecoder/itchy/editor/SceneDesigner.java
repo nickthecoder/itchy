@@ -673,6 +673,18 @@ public class SceneDesigner implements MouseListener, KeyListener
         textButton.setTooltip("Add Text");
         toolbar.addChild(textButton);
 
+        GuiButton resetZButton = createButton("resetZ", "Z");
+        resetZButton.addActionListener(new ActionListener()
+        {
+            @Override
+            public void action()
+            {
+                onResetZOrders();
+            }
+        });
+        resetZButton.setTooltip("Reset Z Orders (#)");
+        toolbar.addChild(resetZButton);
+
         layerPickerButton = new LayerPickerButton( this.scene.layout, this.currentLayer );
         layerPickerButton.addChangeListener(new ComponentChangeListener()
         {            

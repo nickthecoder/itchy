@@ -7,7 +7,7 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.collision;
 
-import java.util.Set;
+import java.util.List;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Role;
@@ -42,17 +42,17 @@ public class WrappedCollisionStrategy implements CollisionStrategy
     private static final String[] EMPTY = {};
     
     @Override
-    public Set<Role> collisions( Actor actor, String... includeTags )
+    public List<Role> collisions( Actor actor, String... includeTags )
     {
         return collisions(actor, includeTags, EMPTY );
     }
     
     @Override
-    public Set<Role> collisions( Actor actor, String[] includeTags, String[] excludeTags )
+    public List<Role> collisions( Actor actor, String[] includeTags, String[] excludeTags )
     {
         wrapped.normalise(actor);
 
-        Set<Role> result = collisions2( actor, includeTags, excludeTags );
+        List<Role> result = collisions2( actor, includeTags, excludeTags );
         
         if (wrapped.overlappingLeft(actor)) {
             actor.setX( actor.getX() + wrapped.getWidth() );
@@ -69,9 +69,9 @@ public class WrappedCollisionStrategy implements CollisionStrategy
         return result;
     }
     
-    public Set<Role> collisions2( Actor actor, String[] includeTags, String[] excludeTags )
+    public List<Role> collisions2( Actor actor, String[] includeTags, String[] excludeTags )
     {
-        Set<Role> result = wrappedCollisionStrategy.collisions( actor, includeTags, excludeTags );
+        List<Role> result = wrappedCollisionStrategy.collisions( actor, includeTags, excludeTags );
         
         if (wrapped.overlappingBottom(actor)) {
             actor.setY( actor.getY() + wrapped.getHeight() );

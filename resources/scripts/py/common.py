@@ -11,7 +11,7 @@ from uk.co.nickthecoder.itchy.util import ClassName, Util
 
 from uk.co.nickthecoder.itchy.collision import StandardNeighbourhood, NeighbourhoodCollisionStrategy, WrappedCollisionStrategy
 
-from uk.co.nickthecoder.itchy.role import PlainRole, Button, ProgressBar
+from uk.co.nickthecoder.itchy.role import PlainRole, Button, ProgressBar, MouseRole
 from uk.co.nickthecoder.itchy.role import Companion, Follower, Explosion, OnionSkin, Projectile, Talk, TalkProjectile
 from uk.co.nickthecoder.itchy.role import FollowerBuilder, ExplosionBuilder, OnionSkinBuilder, ProjectileBuilder, TalkBuilder, TalkProjectileBuilder
 
@@ -34,4 +34,6 @@ from java.io import File
 
 import math
 import time
+
+game = Itchy.getGame()
 

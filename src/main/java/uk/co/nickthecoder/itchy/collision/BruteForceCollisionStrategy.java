@@ -8,8 +8,8 @@ package uk.co.nickthecoder.itchy.collision;
  * The default strategy for Actor's overlapping and pixelOverlap methods. It is Order n squared, and therefore slow for large values of n.
  */
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import uk.co.nickthecoder.itchy.AbstractRole;
 import uk.co.nickthecoder.itchy.Actor;
@@ -71,18 +71,21 @@ public class BruteForceCollisionStrategy implements CollisionStrategy
     private static final String[] EMPTY = {};
     
     @Override
-    public Set<Role> collisions( Actor actor, String... includeTags )
+    public List<Role> collisions( Actor actor, String... includeTags )
     {
         return collisions(actor, includeTags, EMPTY );
     }
     
     @Override
-    public Set<Role> collisions( Actor source, String[] includeTags, String[] excludeTags )
+    public List<Role> collisions( Actor source, String[] includeTags, String[] excludeTags )
     {
-        Set<Role> results = new HashSet<Role>();
+        List<Role> results = new ArrayList<Role>();
         for (String tag : includeTags) {
             for (Role otherRole : AbstractRole.allByTag(tag)) {
                 Actor other = otherRole.getActor();
+                if (other == null) {
+                    continue;
+                }
 
                 if ((other != source) && (!exclude(otherRole, excludeTags))) {
                     if (!results.contains(other)) {

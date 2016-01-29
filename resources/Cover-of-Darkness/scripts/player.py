@@ -1,12 +1,4 @@
-from uk.co.nickthecoder.itchy import Itchy
-from uk.co.nickthecoder.itchy import Role
-from uk.co.nickthecoder.itchy import AbstractRole
-from uk.co.nickthecoder.itchy import Input
-from uk.co.nickthecoder.itchy.util import ClassName
-
-from java.util import ArrayList
-
-from uk.co.nickthecoder.itchy.property import DoubleProperty
+from common import *
 
 properties = ArrayList()
 properties.add( DoubleProperty( "speed" ) )
@@ -16,54 +8,77 @@ class Player(AbstractRole) :
     def __init__(self) :
         self.speed = 1
         self.collected = 0
-                
-    def onBirth(self):
 
-        self.inputLeft = Input.find("left")
-        self.inputRight = Input.find("right")
-        self.inputUp = Input.find("up")
-        self.inputDown = Input.find("down")
+    def onBirth(self) :
+        self.addTag("player")
+        self.inputClick = Input.find("click")
 
-    def tick(self):
-        oldX = self.actor.x
-        oldY = self.actor.y
+    def onSceneCreated(self) :
+
+        self.view = game.layout.findView("middle")
         
-        if self.inputLeft.pressed() :
-            self.actor.moveBy( -self.speed, 0 )
+    def tick(self):
 
-        if self.inputRight.pressed() :
-            self.actor.moveBy( self.speed, 0 )
-
-        if not self.getCollisionStrategy().collisions(self.getActor(),"solid").isEmpty() :
-            self.actor.moveTo( oldX, oldY )
-            
         oldX = self.actor.x
         oldY = self.actor.y
+        oldDirection = self.actor.direction
 
-        if self.inputUp.pressed() :
-            self.actor.moveBy( 0, self.speed )
+        mouseX = self.view.getWorldX( Itchy.getMouseX() )
+        mouseY = self.view.getWorldY( Itchy.getMouseY() )
 
-        if self.inputDown.pressed() :
-            self.actor.moveBy( 0, -self.speed )
+        distance = self.actor.distanceTo( mouseX, mouseY )
+        if distance > 10 :
+            self.actor.direction = self.actor.directionOf( mouseX, mouseY )
+            self.actor.moveForwards( self.speed if distance > 100 else self.speed * distance / 100 )
 
-        if not self.getCollisionStrategy().collisions(self.getActor(),"solid").isEmpty() :
-            self.actor.moveTo( oldX, oldY )
+            if self.inputClick.pressed() :
+                if self.collided( "clickable" ) :
+                    self.collisions( "clickable" ).get(0).click()
+
+            if self.collided("solid") :
+                self.actor.direction = oldDirection
+                # Hit a wall, so let's try moving x and y independantly
+                tx = self.actor.x
+                self.actor.moveTo( oldX, self.actor.y )
+                if self.collided("solid") :
+                    self.actor.moveTo( tx, oldY )
+                    if self.collided("solid") :
+                        # Give up, move back.
+                        self.actor.moveTo(oldX, oldY)
+
+
+        screenX = self.actor.x - self.view.visibleRectangle.x
+        screenY = self.actor.y - self.view.visibleRectangle.y
+
+        if screenX < 200 :
+            game.sceneDirector.scrollBy( -1 + self.actor.x - oldX, 0 )
+        if screenX > 600 :
+            game.sceneDirector.scrollBy( 1 + self.actor.x -oldX, 0 )
             
+        if screenY < 150 :
+            game.sceneDirector.scrollBy( 0, -4 )
+        if screenY > 450 :
+            game.sceneDirector.scrollBy( 0, 4 )
+            
+        if self.inputClick.pressed() :
+            if self.collided( "clickable" ) :
+                self.collisions( "clickable" ).get(0).click()  
 
-        if not self.getCollisionStrategy().collisions(self.getActor(),"light").isEmpty() :
-            Itchy.getGame().getDirector().restartScene()
+        if self.collided("light") :
+            game.director.restartScene()
             return
             
-        i = self.getCollisionStrategy().collisions(self.getActor(),"exit").iterator()
-        if i.hasNext() :
-            exit = i.next()
-            if self.collected >= Itchy.getGame().sceneDirector.collectables :
-                Itchy.getGame().director.startScene( exit.nextLevel )
+        if self.collided("exit") :
+
+            exit = self.collisions("exit").get(0)
+            if self.collected >= game.sceneDirector.collectables :
+                game.director.startScene( exit.nextLevel )
 
         i = self.getCollisionStrategy().collisions(self.getActor(),"collectable").iterator()
         while i.hasNext() :
             collectable = i.next()
             self.collected += collectable.collect()
+
 
     # Boiler plate code - no need to change this
     def getProperties(self):

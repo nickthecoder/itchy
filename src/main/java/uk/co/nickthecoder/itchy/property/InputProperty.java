@@ -8,9 +8,9 @@ import uk.co.nickthecoder.itchy.gui.KeyInputPicker;
 import uk.co.nickthecoder.itchy.gui.PlainContainer;
 import uk.co.nickthecoder.itchy.gui.TextBox;
 
-public class InputKeysProperty<S> extends StringProperty<S>
+public class InputProperty<S> extends StringProperty<S>
 {
-    public InputKeysProperty(String key)
+    public InputProperty(String key)
     {
         super(key);
     }

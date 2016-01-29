@@ -1,9 +1,12 @@
 Current Tasks
 =============
 
+Undo/Redo for Z Order Reset
+    Create a "Group" undo/redo, and add each zorder change to that group.
+    Undo/redo the group as one.
 
-A button/shortcut to reset all actors to their default Z-Orders.
-    Don't forget about Undo/Redo!
+Undo/Redo for destructive edits, such as changing class names (e.g. Makeup)
+
 SceneDesigner onPaste, and maybe other places uses addTop, but now that costumes have default ZOrders, it makes more sense
     to use add, and let them have the same ZOrder.
 
@@ -32,13 +35,13 @@ Can delete Poses which are used in a Framed animation
     Ditto for a Sprite.
 
 
-Trivial Bugs
-============
-
-Ensure Scrollbars of Scroll do not obscure the contents.
+Ensure Scrollbars of Scroll do not obscure the contents?
 
 New Features
 ============
+
+Bean Animation. Change the value of a Role's property.
+    Use it to change the size of a torch's light, or its direction.
 
 Debris-rocks - pieces have offsets, so they explode naturally.
     Can I use Fragments class as this already does what I want?
@@ -100,6 +103,11 @@ ColorKeyFragment. Use another pose, to decide which pixels belong to each fragme
 Code Tidy Up
 ============
 
+Scrap the concept of views within views?
+    Just have lists of views, all are relative to the screen. Makes it MUCH simpler!
+    Need to look at Window/RootContainer first.
+    Also need to consider ZOrder of views.
+        Perhaps keep the hierarchy of views for the z-order, but make each view relative to the screen, not the parent view.
 
 Load/Save using properties wherever possible.
    

@@ -13,8 +13,8 @@ class Torch(AbstractRole) :
     def tick(self):
         # Follow the guard
         self.actor.moveTo( self.owner.actor )
-        self.actor.direction = self.owner.actor.direction
-        self.actor.moveForwards( 4 )
+        # self.actor.direction = self.owner.actor.direction + 5
+        self.actor.moveForwards( -1, -20 )
 
         # Check if the torch is overlapping a wall
         scale = 1.0

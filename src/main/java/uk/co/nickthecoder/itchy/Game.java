@@ -808,9 +808,12 @@ public class Game
         }
     }
 
+    public Layout layout;
+    
     public Layout loadScene( String sceneName )
     {
-        return loadScene(sceneName, false);
+        this.layout = loadScene(sceneName, false);
+        return this.layout;
     }
 
     public Layout loadScene( String sceneName, boolean loadOnly )

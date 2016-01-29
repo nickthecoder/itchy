@@ -105,7 +105,7 @@ public abstract class AbstractRole implements Role
      * @param tags
      * @return The Roles which are colliding with this Role.
      */
-    public Set<Role> collisions(String... tags)
+    public List<Role> collisions(String... tags)
     {
         return this.collisionStrategy.collisions(this.getActor(), tags);
     }

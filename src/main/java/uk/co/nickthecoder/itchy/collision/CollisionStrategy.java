@@ -4,7 +4,7 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.collision;
 
-import java.util.Set;
+import java.util.List;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Role;
@@ -31,8 +31,8 @@ public interface CollisionStrategy
 
     public void remove();
 
-    public Set<Role> collisions( Actor actor, String... includeTags );
+    public List<Role> collisions( Actor actor, String... includeTags );
     
-    public Set<Role> collisions( Actor actor, String[] includeTags, String[] excludeTags );
+    public List<Role> collisions( Actor actor, String[] includeTags, String[] excludeTags );
 
 }

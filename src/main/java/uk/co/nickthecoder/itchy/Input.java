@@ -7,28 +7,30 @@ package uk.co.nickthecoder.itchy;
 import java.util.ArrayList;
 import java.util.List;
 
-import uk.co.nickthecoder.itchy.property.InputKeysProperty;
+import uk.co.nickthecoder.itchy.property.InputProperty;
 import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.StringProperty;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
+import uk.co.nickthecoder.jame.event.KeysEnum;
+import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 
 /**
- * The set of keys and joystick events which can be used as input for a particular task. For example, to fire a weapon, you could define
- * multiple keys, and multiple joystick buttons, all of which will cause the weapon to fire. Each player can then choose which they find
- * most comfortable.
+ * The set of keys and joystick events which can be used as input for a particular task. For example, to fire a weapon,
+ * you could define multiple keys, and multiple joystick buttons, all of which will cause the weapon to fire. Each
+ * player can then choose which they find most comfortable.
  * 
- * You typically use the Editor, to define each of the Inputs, and then you game code just needs to find it, using {@#find(String)}
- * and then check the {@#pressed} (typically in a tick method).
+ * You typically use the Editor, to define each of the Inputs, and then your game code just needs to find it, using
+ * {@#find(String)} and then check {@#pressed} (typically in a tick method).
  * 
- * Note, only keyboard input is implemented at present, but other input devices such as mouse and joystick will be added later.
+ * Note, only keyboard and mouse input is implemented at present, but joystick will be added later.
  */
-public class Input implements NamedSubject<Input>
+public class Input implements NamedSubject<Input>, InputInterface
 {
-    protected static final List<Property<Input, ?>> properties = new ArrayList<Property<Input,?>>();
+    protected static final List<Property<Input, ?>> properties = new ArrayList<Property<Input, ?>>();
 
     static {
         properties.add(new StringProperty<Input>("name"));
-        properties.add(new InputKeysProperty<Input>("keys").access("keysString"));
+        properties.add(new InputProperty<Input>("keys").access("keysString"));
     }
 
     @Override
@@ -36,23 +38,119 @@ public class Input implements NamedSubject<Input>
     {
         return properties;
     }
-    
+
+    private static int parseMouseButton(String str)
+    {
+        if (str.startsWith("M_")) {
+            String rest = str.substring(2);
+
+            if (rest.equals("LEFT")) {
+                return MouseButtonEvent.BUTTON_LEFT;
+            }
+            if (rest.equals("RIGHT")) {
+                return MouseButtonEvent.BUTTON_RIGHT;
+            }
+            if (rest.equals("MIDDLE")) {
+                return MouseButtonEvent.BUTTON_MIDDLE;
+            }
+            if (rest.equals("WHEELUP")) {
+                return MouseButtonEvent.BUTTON_WHEELUP;
+            }
+            if (rest.equals("WHEELDOWN")) {
+                return MouseButtonEvent.BUTTON_WHEELDOWN;
+            }
+        }
+
+        return -1;
+    }
+
+    /**
+     * Parses a String with the following format :
+     * [click+][ctrl+][shift+][meta+][alt+]KEY_NAME
+     *
+     * Where KEY_NAME is in KeysEnum, or M_LEFT, M_RIGHT, M_MIDDLE, M_WHEELUP, M_WHEELDOWN (for mouse buttons).
+     * If "click" is specified, then the input trigers when the key/mouse is pressed, not continuously while the
+     * key/button is held down.
+     * 
+     * @param str
+     * @return
+     * @throws Exception
+     */
+    public static InputInterface parse(String str)
+        throws Exception
+    {
+        AbstractInput result;
+
+        String[] parts = str.split("\\+");
+
+        String keyStr = parts[parts.length - 1];
+        
+        KeysEnum key = null;
+        try {
+            key = KeysEnum.valueOf(keyStr);
+        } catch (Exception e) {
+        }
+        if (key == null) {
+            int mouseButton = parseMouseButton(keyStr);
+            if (mouseButton >= 0) {
+                MouseInput mdi = new MouseInput();
+                mdi.button = mouseButton;
+                result = mdi;
+            } else {
+
+                throw new Exception("Expected a key or mouse button name, but found : " + keyStr);
+            }
+            
+        } else {
+            KeyInput keyInput = new KeyInput();
+            keyInput.key = key;
+            result = keyInput;
+        }
+
+        for (int i = 0; i < parts.length - 1; i++) {
+
+            String part = parts[i];
+
+            if (part.equals("click")) {
+                result.click = true;
+            } else if (part.equals("ctrl")) {
+                result.ctrlModifier = true;
+            } else if (part.equals("shift")) {
+                result.shiftModifier = true;
+
+            } else if (part.equals("meta")) {
+                result.metaModifier = true;
+
+            } else if (part.equals("alt")) {
+                result.altModifier = true;
+
+            } else {
+                throw new Exception("Expected shift,meta, or alt, but found : " + part);
+            }
+
+        }
+
+        return result;
+    }
+
     private String name;
-    
-    private List<KeyInput> keys;
+
+    private List<InputInterface> keys;
 
     private String asString = null;
 
     /**
      * Finds the Input from the current game's resources
-     * @param name The name of the Input to search for.
+     * 
+     * @param name
+     *            The name of the Input to search for.
      * @return The named input, or a dummy input if the named one was not found.
      */
-    public static Input find( String name )
+    public static Input find(String name)
     {
         Input result = Itchy.getGame().resources.getInput(name);
         if (result == null) {
-            System.err.println( "Didn't find Input : " + name + " in " + Itchy.getGame().resources.getFilename() );
+            System.err.println("Didn't find Input : " + name + " in " + Itchy.getGame().resources.getFilename());
             return new Input();
         }
         return result;
@@ -62,34 +160,37 @@ public class Input implements NamedSubject<Input>
     {
         this.asString = "";
         this.name = "";
-        this.keys = new ArrayList<KeyInput>();
+        this.keys = new ArrayList<InputInterface>();
     }
 
+    @Override
     public String getName()
     {
         return this.name;
     }
-    
-    public void setName( String name )
+
+    @Override
+    public void setName(String name)
     {
         this.name = name;
     }
-    
+
     /**
      * Builds a string representation of the set of keys for this input.
      * The format is comma separated list of : [ctrl+][shift+][meta+][alt+]KEY_NAME.
      * Used when saving the resources file.
+     * 
      * @return The string representation of the set of keys for this input.
      */
     public String getKeysString()
     {
         if (this.asString == null) {
             StringBuffer buffer = new StringBuffer();
-            for (KeyInput ki : this.keys) {
+            for (InputInterface input : this.keys) {
                 if (buffer.length() > 0) {
                     buffer.append(",");
                 }
-                buffer.append(ki.toString());
+                buffer.append(input.toString());
             }
         }
         return this.asString;
@@ -97,18 +198,21 @@ public class Input implements NamedSubject<Input>
 
     /**
      * Parses a String representation of the input keys, replacing any existing input keys.
-     * This is used when loading a resources file. 
+     * This is used when loading a resources file.
+     * 
      * @param keys
      * @throws Exception
      */
-    public void setKeysString( String keys )
+    public void setKeysString(String keys)
         throws Exception
     {
 
         String[] parts = keys.split(",");
         this.keys.clear();
         for (String part : parts) {
-            this.keys.add(KeyInput.parseKeyInput(part));
+            System.out.println("Input parsing key " + part );
+            this.keys.add(Input.parse(part));
+            System.out.println("Ok" );
         }
 
         this.asString = keys;
@@ -116,27 +220,45 @@ public class Input implements NamedSubject<Input>
 
     /**
      * @param ke
-     * @return true iff the keyboard event matches one of this Input's key combinations.
-     * Use this from your game code's onKeyDown method.
+     * @return true iff the keyboard event matches one of this Input's key/mouse combinations.
+     *         Use this from your game code's onKeyDown method.
      */
-    public boolean matches( KeyboardEvent ke )
+    @Override
+    public boolean matches(KeyboardEvent ke)
     {
-        for (KeyInput keyInput : this.keys) {
-            if (keyInput.matches(ke)) {
+        for (InputInterface input : this.keys) {
+            if (input.matches(ke)) {
                 return true;
             }
         }
-        return false;        
+        return false;
     }
-    
+
+    /**
+     * @param mbe
+     * @return true iff the keyboard event matches one of this Input's key/mouse combinations.
+     */
+    @Override
+    public boolean matches(MouseButtonEvent mbe)
+    {
+        for (InputInterface input : this.keys) {
+            if (input.matches(mbe)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     /**
      * Tests each of this Input's possible triggers, and returns true if any of then are currently pressed.
+     * 
      * @return true iff any of this Input's triggers are pressed.
      */
+    @Override
     public boolean pressed()
     {
-        for (KeyInput keyInput : this.keys) {
-            if (keyInput.pressed()) {
+        for (InputInterface input : this.keys) {
+            if (input.pressed()) {
                 return true;
             }
         }

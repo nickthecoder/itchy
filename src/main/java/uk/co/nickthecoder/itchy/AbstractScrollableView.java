@@ -65,6 +65,7 @@ public abstract class AbstractScrollableView extends AbstractView implements Scr
         this.worldRect.y += dy;
     }
 
+    // TODO Is this different from the parent implementation?
     @Override
     public boolean contains(int x, int y)
     {
@@ -74,6 +75,19 @@ public abstract class AbstractScrollableView extends AbstractView implements Scr
             return false;
         }
         return true;
+    }
+
+    @Override
+    public double getWorldX(int screenX)
+    {
+        return this.worldRect.x + super.getWorldX(screenX);
+    }
+
+    @Override
+    public double getWorldY(int screenY)
+    {
+        return this.worldRect.y + super.getWorldY(screenY);
+
     }
 
     @Override

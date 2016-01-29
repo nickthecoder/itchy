@@ -1,14 +1,37 @@
 <resources>
-  <game title="Cover of Darkness" width="800" height="600" resizable="false" initialScene="start" testScene="start" directorClassName="director.py" authors="Nick Robinson&#xA;Matthew Robinson"/>
+  <game title="Cover of Darkness" width="800" height="600" resizable="false" initialScene="start" testScene="house-01" directorClassName="director.py" authors="Nick Robinson&#xA;Matthew Robinson"/>
   <spriteSheets>
-    <spriteSheet name="floor1" file="images/floor1.png">
-      <sprite name="foo" direction="0.0" offsetX="0" offsetY="0" x="10" y="10" width="50" height="50"/>
-      <sprite name="new" direction="0.0" offsetX="0" offsetY="0" x="0" y="0" width="1" height="1"/>
+    <spriteSheet name="darkness" file="images/darkness.png">
+      <sprite name="corner-a1" direction="0.0" offsetX="12" offsetY="12" x="488" y="700" width="48" height="48"/>
+      <sprite name="corner-a2" direction="0.0" offsetX="36" offsetY="12" x="544" y="700" width="48" height="48"/>
+      <sprite name="corner-a3" direction="0.0" offsetX="36" offsetY="36" x="544" y="756" width="48" height="48"/>
+      <sprite name="corner-a4" direction="0.0" offsetX="12" offsetY="36" x="488" y="756" width="48" height="48"/>
+      <sprite name="door-1" direction="0.0" offsetX="10" offsetY="0" x="330" y="592" width="12" height="64"/>
+      <sprite name="doorFrame-1" direction="0.0" offsetX="8" offsetY="36" x="346" y="588" width="81" height="72"/>
+      <sprite name="doorMat-1" direction="0.0" offsetX="-12" offsetY="29" x="431" y="588" width="58" height="64"/>
+      <sprite name="guard-1a" direction="0.0" offsetX="24" offsetY="25" x="670" y="893" width="36" height="51"/>
+      <sprite name="junction-a1" direction="0.0" offsetX="36" offsetY="12" x="504" y="852" width="72" height="48"/>
+      <sprite name="junction-a2" direction="0.0" offsetX="36" offsetY="36" x="560" y="892" width="48" height="72"/>
+      <sprite name="junction-a3" direction="0.0" offsetX="36" offsetY="36" x="504" y="956" width="72" height="48"/>
+      <sprite name="junction-a4" direction="0.0" offsetX="12" offsetY="36" x="472" y="892" width="48" height="72"/>
+      <sprite name="light-1" direction="0.0" offsetX="0" offsetY="24" x="607" y="813" width="132" height="48"/>
+      <sprite name="light-2" direction="0.0" offsetX="0" offsetY="31" x="576" y="978" width="167" height="62"/>
+      <sprite name="player-1a" direction="0.0" offsetX="5" offsetY="25" x="623" y="894" width="34" height="52"/>
+      <sprite name="wall-ah1" direction="0.0" offsetX="36" offsetY="12" x="72" y="612" width="72" height="24"/>
+      <sprite name="wall-ah2" direction="0.0" offsetX="36" offsetY="12" x="152" y="612" width="144" height="24"/>
+      <sprite name="wall-ah3" direction="0.0" offsetX="108" offsetY="12" x="72" y="652" width="216" height="24"/>
+      <sprite name="wall-av1" direction="0.0" offsetX="12" offsetY="36" x="224" y="940" width="24" height="72"/>
+      <sprite name="wall-av2" direction="0.0" offsetX="12" offsetY="36" x="224" y="788" width="24" height="144"/>
+      <sprite name="wall-av3" direction="0.0" offsetX="12" offsetY="108" x="264" y="796" width="24" height="216"/>
+      <sprite name="window-ah1" direction="0.0" offsetX="36" offsetY="12" x="72" y="500" width="72" height="24"/>
+      <sprite name="window-ah2" direction="0.0" offsetX="36" offsetY="12" x="152" y="500" width="144" height="24"/>
+      <sprite name="window-ah3" direction="0.0" offsetX="108" offsetY="12" x="72" y="460" width="216" height="24"/>
+      <sprite name="window-av1" direction="0.0" offsetX="12" offsetY="36" x="112" y="940" width="24" height="72"/>
+      <sprite name="window-av2" direction="0.0" offsetX="12" offsetY="36" x="112" y="789" width="24" height="143"/>
+      <sprite name="window-av3" direction="0.0" offsetX="12" offsetY="108" x="72" y="796" width="24" height="216"/>
     </spriteSheet>
   </spriteSheets>
   <poses>
-    <pose name="black" filename="images/black.png"/>
-    <pose name="editor" filename="images/editor.png"/>
     <pose name="exit" filename="images/exit.png"/>
     <pose name="floor1" filename="images/floor1.png"/>
     <pose name="guard1" filename="images/guard1.png" offsetX="11"/>
@@ -40,71 +63,141 @@
         </parallel>
       </sequence>
     </animation>
-    <animation name="testSprites">
-      <sequence sequence="true" loops="1">
-        <frames pingPong="false">
-          <frame pose="foo" delay="1" dx="0.0" dy="0.0"/>
-          <frame pose="new" delay="1" dx="0.0" dy="0.0"/>
-        </frames>
+    <animation name="sweep">
+      <sequence sequence="true" loops="0">
+        <turn turn="20.0" headingToo="false" ticks="20" ease="easeIn"/>
+        <delay ticks="20"/>
+        <turn turn="-20.0" headingToo="false" ticks="20" ease="easeIn"/>
+        <delay ticks="20"/>
       </sequence>
     </animation>
   </animations>
   <costumes>
-    <costume name="black" defaultZOrder="0" order="0" showInDesigner="true">
-      <pose name="default" pose="black"/>
+    <costume name="corner-a1" defaultZOrder="90" order="10" showInDesigner="true" role="solid.py">
+      <pose name="default" pose="corner-a1"/>
     </costume>
-    <costume name="editor" defaultZOrder="0" order="0" showInDesigner="true" role="uk.co.nickthecoder.itchy.role.EditorButton">
-      <pose name="default" pose="editor"/>
+    <costume name="corner-a2" defaultZOrder="90" order="10" showInDesigner="true" role="solid.py">
+      <pose name="default" pose="corner-a2"/>
     </costume>
-    <costume name="exit" defaultZOrder="0" order="0" showInDesigner="true" role="exit.py">
+    <costume name="corner-a3" defaultZOrder="90" order="10" showInDesigner="true" role="solid.py">
+      <pose name="default" pose="corner-a3"/>
+    </costume>
+    <costume name="corner-a4" defaultZOrder="90" order="10" showInDesigner="true" role="solid.py">
+      <pose name="default" pose="corner-a4"/>
+    </costume>
+    <costume name="door-1" defaultZOrder="40" order="0" showInDesigner="true" role="door.py">
+      <pose name="default" pose="door-1"/>
+    </costume>
+    <costume name="doorFrame-1" defaultZOrder="30" order="60" showInDesigner="true" role="doorFrame.py">
+      <pose name="default" pose="doorFrame-1"/>
+      <companion name="door" companion="door-1"/>
+      <companion name="mat" companion="doorMat-1"/>
+    </costume>
+    <costume name="doorMat-1" defaultZOrder="30" order="0" showInDesigner="true" role="doorMat.py">
+      <pose name="default" pose="doorMat-1"/>
+    </costume>
+    <costume name="exit" defaultZOrder="100" order="90" showInDesigner="true" role="exit.py">
       <pose name="default" pose="exit"/>
     </costume>
-    <costume name="floor1" defaultZOrder="0" order="0" showInDesigner="true">
+    <costume name="floor1" defaultZOrder="0" order="30" showInDesigner="true">
       <pose name="default" pose="floor1"/>
     </costume>
-    <costume name="guard1" defaultZOrder="0" order="0" showInDesigner="true" role="guard.py">
-      <pose name="default" pose="guard1"/>
-      <companion name="torch" companion="torch1"/>
+    <costume name="guard1" defaultZOrder="50" order="5" showInDesigner="true" role="guard.py">
+      <pose name="default" pose="guard-1a"/>
+      <companion name="torch" companion="light-2"/>
     </costume>
-    <costume name="money1" defaultZOrder="0" order="0" showInDesigner="true" role="collectable.py">
+    <costume name="junction-a1" defaultZOrder="90" order="12" showInDesigner="true" role="solid.py">
+      <pose name="default" pose="junction-a1"/>
+    </costume>
+    <costume name="junction-a2" defaultZOrder="90" order="12" showInDesigner="true" role="solid.py">
+      <pose name="default" pose="junction-a2"/>
+    </costume>
+    <costume name="junction-a3" defaultZOrder="90" order="12" showInDesigner="true" role="solid.py">
+      <pose name="default" pose="junction-a3"/>
+    </costume>
+    <costume name="junction-a4" defaultZOrder="90" order="12" showInDesigner="true" role="solid.py">
+      <pose name="default" pose="junction-a4"/>
+    </costume>
+    <costume name="light-1" defaultZOrder="70" order="0" showInDesigner="true" role="torch.py">
+      <pose name="default" pose="light-1"/>
+    </costume>
+    <costume name="light-2" defaultZOrder="70" order="0" showInDesigner="true" role="torch.py">
+      <pose name="default" pose="light-2"/>
+      <animation name="default" animation="sweep"/>
+    </costume>
+    <costume name="money1" defaultZOrder="40" order="20" showInDesigner="true" role="collectable.py">
       <pose name="default" pose="money1"/>
       <animation name="collected" animation="collected"/>
     </costume>
-    <costume name="player" defaultZOrder="0" order="0" showInDesigner="true" role="player.py">
-      <pose name="default" pose="player"/>
+    <costume name="player" defaultZOrder="70" order="1" showInDesigner="true" role="player.py">
+      <pose name="default" pose="player-1a"/>
     </costume>
-    <costume name="quit" defaultZOrder="0" order="0" showInDesigner="true" role="uk.co.nickthecoder.itchy.role.QuitButton">
+    <costume name="quit" defaultZOrder="100" order="90" showInDesigner="true" role="uk.co.nickthecoder.itchy.role.QuitButton">
       <pose name="default" pose="quit"/>
     </costume>
-    <costume name="torch1" defaultZOrder="50" order="0" showInDesigner="true" role="torch.py">
-      <pose name="default" pose="torch1"/>
+    <costume name="wall-ah1" defaultZOrder="90" order="10" showInDesigner="true" role="solid.py">
+      <pose name="default" pose="wall-ah1"/>
     </costume>
-    <costume name="wall1" defaultZOrder="0" order="0" showInDesigner="true" role="solid.py">
+    <costume name="wall-ah2" defaultZOrder="90" order="10" showInDesigner="true" role="solid.py">
+      <pose name="default" pose="wall-ah2"/>
+    </costume>
+    <costume name="wall-ah3" defaultZOrder="90" order="10" showInDesigner="true" role="solid.py">
+      <pose name="default" pose="wall-ah3"/>
+    </costume>
+    <costume name="wall-av1" defaultZOrder="90" order="10" showInDesigner="true" role="solid.py">
+      <pose name="default" pose="wall-av1"/>
+    </costume>
+    <costume name="wall-av2" defaultZOrder="90" order="10" showInDesigner="true" role="solid.py">
+      <pose name="default" pose="wall-av2"/>
+    </costume>
+    <costume name="wall-av3" defaultZOrder="90" order="10" showInDesigner="true" role="solid.py">
+      <pose name="default" pose="wall-av3"/>
+    </costume>
+    <costume name="wall1" defaultZOrder="90" order="10" showInDesigner="true" role="solid.py">
       <pose name="default" pose="wall1"/>
     </costume>
-    <costume name="wall1s" defaultZOrder="0" order="0" showInDesigner="true" role="solid.py">
+    <costume name="wall1s" defaultZOrder="90" order="10" showInDesigner="true" role="solid.py">
       <pose name="default" pose="wall1s"/>
     </costume>
-    <costume name="wall2" defaultZOrder="0" order="0" showInDesigner="true" role="solid.py">
+    <costume name="wall2" defaultZOrder="90" order="10" showInDesigner="true" role="solid.py">
       <pose name="default" pose="wall2"/>
     </costume>
-    <costume name="wall2s" defaultZOrder="0" order="0" showInDesigner="true" role="solid.py">
+    <costume name="wall2s" defaultZOrder="90" order="10" showInDesigner="true" role="solid.py">
       <pose name="default" pose="wall2s"/>
     </costume>
-    <costume name="wall3" defaultZOrder="0" order="0" showInDesigner="true" role="solid.py">
+    <costume name="wall3" defaultZOrder="80" order="11" showInDesigner="true" role="solid.py">
       <pose name="default" pose="wall3"/>
     </costume>
-    <costume name="wall3s" defaultZOrder="0" order="0" showInDesigner="true" role="solid.py">
+    <costume name="wall3s" defaultZOrder="80" order="11" showInDesigner="true" role="solid.py">
       <pose name="default" pose="wall3s"/>
     </costume>
-    <costume name="wall4" defaultZOrder="0" order="0" showInDesigner="true" role="solid.py">
+    <costume name="wall4" defaultZOrder="80" order="11" showInDesigner="true" role="solid.py">
       <pose name="default" pose="wall4"/>
     </costume>
-    <costume name="wall4s" defaultZOrder="0" order="0" showInDesigner="true" role="solid.py">
+    <costume name="wall4s" defaultZOrder="80" order="11" showInDesigner="true" role="solid.py">
       <pose name="default" pose="wall4s"/>
+    </costume>
+    <costume name="window-ah1" defaultZOrder="30" order="20" showInDesigner="true" role="furniture.py">
+      <pose name="default" pose="window-ah1"/>
+    </costume>
+    <costume name="window-ah2" defaultZOrder="30" order="20" showInDesigner="true" role="furniture.py">
+      <pose name="default" pose="window-ah2"/>
+    </costume>
+    <costume name="window-ah3" defaultZOrder="30" order="20" showInDesigner="true" role="furniture.py">
+      <pose name="default" pose="window-ah3"/>
+    </costume>
+    <costume name="window-av1" defaultZOrder="30" order="20" showInDesigner="true" role="furniture.py">
+      <pose name="default" pose="window-av1"/>
+    </costume>
+    <costume name="window-av2" defaultZOrder="30" order="20" showInDesigner="true" role="furniture.py">
+      <pose name="default" pose="window-av2"/>
+    </costume>
+    <costume name="window-av3" defaultZOrder="30" order="20" showInDesigner="true" role="furniture.py">
+      <pose name="default" pose="window-av3"/>
     </costume>
   </costumes>
   <scenes>
+    <scene name="house-01"/>
     <scene name="level01"/>
     <scene name="level02"/>
     <scene name="level0Matt"/>
@@ -112,11 +205,12 @@
     <scene name="test01"/>
   </scenes>
   <inputs>
-    <input name="down" keys="DOWN,SLASH,s"/>
+    <input name="click" keys="SPACE,M_LEFT"/>
     <input name="exit" keys="ESCAPE,ctrl+q"/>
-    <input name="left" keys="LEFT,z,a"/>
-    <input name="right" keys="RIGHT,x,d"/>
-    <input name="up" keys="UP,QUOTE,w"/>
+    <input name="scrollDown" keys="DOWN"/>
+    <input name="scrollLeft" keys="LEFT"/>
+    <input name="scrollRight" keys="RIGHT"/>
+    <input name="scrollUp" keys="UP"/>
   </inputs>
   <layouts>
     <layout name="default" defaultLayer="middle">
@@ -126,8 +220,9 @@
       <layer name="bottom" zOrder="10" x="0" y="0" width="800" height="600" viewClassName="uk.co.nickthecoder.itchy.StageView" stageClassName="uk.co.nickthecoder.itchy.ZOrderStage" stageConstraintClassName="uk.co.nickthecoder.itchy.NullStageConstraint">
         <view enableMouse="false"/>
       </layer>
-      <layer name="middle" zOrder="50" x="0" y="0" width="800" height="600" viewClassName="uk.co.nickthecoder.itchy.StageView" stageClassName="uk.co.nickthecoder.itchy.ZOrderStage" stageConstraintClassName="uk.co.nickthecoder.itchy.NullStageConstraint">
-        <view enableMouse="false"/>
+      <layer name="middle" zOrder="50" x="0" y="0" width="800" height="600" viewClassName="uk.co.nickthecoder.itchy.StageView" stageClassName="uk.co.nickthecoder.itchy.ZOrderStage" stageConstraintClassName="uk.co.nickthecoder.itchy.GridStageConstraint">
+        <view enableMouse="true"/>
+        <stageConstraint boxWidth="24" boxHeight="24"/>
       </layer>
       <layer name="top" zOrder="100" x="0" y="0" width="800" height="600" viewClassName="uk.co.nickthecoder.itchy.StageView" stageClassName="uk.co.nickthecoder.itchy.ZOrderStage" stageConstraintClassName="uk.co.nickthecoder.itchy.NullStageConstraint">
         <view enableMouse="true"/>
