@@ -36,6 +36,8 @@ class Light(AbstractRole) :
             # Grow a little, so that the end is tucked under the opaque object,
             self.actor.appearance.scale( 1.1 )
 
+        if self.collided("giveaway") :
+            game.sceneDirector.caught()
 
     # Boiler plate code - no need to change this
     def getProperties(self):

@@ -65,7 +65,7 @@ class Player(AbstractRole) :
                 self.collisions( "clickable" ).get(0).click()  
 
         if self.collided("light") :
-            game.director.restartScene()
+            game.sceneDirector.caught()
             return
             
         if self.collided("exit") :

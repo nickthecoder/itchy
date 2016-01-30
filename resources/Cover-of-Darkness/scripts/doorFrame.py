@@ -26,6 +26,7 @@ class DoorFrame(AbstractRole) :
         if self.open :
             self.door.actor.direction += self.door.angle;
             self.door.open = True
+            self.door.wasOpen = True
             self.door.addTag("clickable")
 
         self.pushMat = self.actor.createCompanion("mat").role

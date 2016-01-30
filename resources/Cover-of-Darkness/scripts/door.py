@@ -11,6 +11,7 @@ class Door(AbstractRole) :
         self.open = False
         self.locked = False
         self.angle = 96
+        self.wasOpen = False
         
     def onBirth(self):
         self.addTag("solid")
@@ -21,7 +22,7 @@ class Door(AbstractRole) :
         oldDirection = self.actor.heading
         if self.rotate != 0 :
 
-            self.actor.direction += self.rotateSpeed if self.open > 0 else -self.rotateSpeed
+            self.actor.direction += self.rotateSpeed if self.open else -self.rotateSpeed
 
             if self.collided( "guard" ) :
                 game.director.restartScene()
@@ -30,6 +31,10 @@ class Door(AbstractRole) :
                 self.actor.direction = oldDirection
             else :
                 self.rotate -= self.rotateSpeed                            
+                if self.rotate <= 0 :
+                    self.actor.direction += self.rotate if self.open else -self.rotate
+                    self.rotate = 0
+                    self.tag( "giveaway", self.open != self.wasOpen )
 
     def unlock( self ) :
         self.locked = False
@@ -38,6 +43,9 @@ class Door(AbstractRole) :
     def click( self ) :
         if self.locked :
             return
+        
+        # When the door has been opened, light falling on it is a giveaway that someone is in the house.
+        self.addTag("giveaway")
         
         if self.rotate != 0 :
             self.rotate = 96-self.rotate

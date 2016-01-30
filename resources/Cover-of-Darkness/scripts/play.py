@@ -30,6 +30,9 @@ class Play(PlainSceneDirector) :
         game.layout.findView("middle").scrollBy( x, y )
         game.layout.findView("bottom").scrollBy( x, y )
 
+    def caught(self) :
+        game.director.restartScene()
+            
     # Boiler plate code - no need to change this
     def getProperties(self):
         return properties
