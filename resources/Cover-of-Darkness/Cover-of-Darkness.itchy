@@ -6,6 +6,10 @@
       <sprite name="corner-a2" direction="0.0" offsetX="36" offsetY="12" x="544" y="700" width="48" height="48"/>
       <sprite name="corner-a3" direction="0.0" offsetX="36" offsetY="36" x="544" y="756" width="48" height="48"/>
       <sprite name="corner-a4" direction="0.0" offsetX="12" offsetY="36" x="488" y="756" width="48" height="48"/>
+      <sprite name="corner-b1" direction="0.0" offsetX="12" offsetY="12" x="328" y="700" width="48" height="48"/>
+      <sprite name="corner-b2" direction="0.0" offsetX="36" offsetY="12" x="384" y="700" width="48" height="48"/>
+      <sprite name="corner-b3" direction="0.0" offsetX="36" offsetY="36" x="384" y="756" width="48" height="48"/>
+      <sprite name="corner-b4" direction="0.0" offsetX="12" offsetY="36" x="328" y="756" width="48" height="48"/>
       <sprite name="door-1" direction="0.0" offsetX="10" offsetY="0" x="330" y="592" width="12" height="64"/>
       <sprite name="doorFrame-1" direction="0.0" offsetX="8" offsetY="36" x="346" y="588" width="81" height="72"/>
       <sprite name="doorMat-1" direction="0.0" offsetX="-12" offsetY="29" x="431" y="588" width="58" height="64"/>
@@ -14,15 +18,26 @@
       <sprite name="junction-a2" direction="0.0" offsetX="36" offsetY="36" x="560" y="892" width="48" height="72"/>
       <sprite name="junction-a3" direction="0.0" offsetX="36" offsetY="36" x="504" y="956" width="72" height="48"/>
       <sprite name="junction-a4" direction="0.0" offsetX="12" offsetY="36" x="472" y="892" width="48" height="72"/>
-      <sprite name="light-1" direction="0.0" offsetX="0" offsetY="24" x="607" y="813" width="132" height="48"/>
-      <sprite name="light-2" direction="0.0" offsetX="0" offsetY="31" x="576" y="978" width="167" height="62"/>
+      <sprite name="junction-b1" direction="0.0" offsetX="36" offsetY="12" x="344" y="852" width="72" height="48"/>
+      <sprite name="junction-b2" direction="0.0" offsetX="36" offsetY="36" x="400" y="892" width="48" height="72"/>
+      <sprite name="junction-b3" direction="0.0" offsetX="36" offsetY="24" x="344" y="956" width="72" height="48"/>
+      <sprite name="junction-b4" direction="0.0" offsetX="12" offsetY="36" x="312" y="892" width="48" height="72"/>
+      <sprite name="light-1" direction="0.0" offsetX="0" offsetY="24" x="612" y="813" width="127" height="48"/>
+      <sprite name="light-2" direction="0.0" offsetX="0" offsetY="31" x="579" y="978" width="163" height="62"/>
       <sprite name="player-1a" direction="0.0" offsetX="5" offsetY="25" x="623" y="894" width="34" height="52"/>
+      <sprite name="torch-1" direction="0.0" offsetX="13" offsetY="5" x="686" y="948" width="20" height="10"/>
       <sprite name="wall-ah1" direction="0.0" offsetX="36" offsetY="12" x="72" y="612" width="72" height="24"/>
       <sprite name="wall-ah2" direction="0.0" offsetX="36" offsetY="12" x="152" y="612" width="144" height="24"/>
       <sprite name="wall-ah3" direction="0.0" offsetX="108" offsetY="12" x="72" y="652" width="216" height="24"/>
       <sprite name="wall-av1" direction="0.0" offsetX="12" offsetY="36" x="224" y="940" width="24" height="72"/>
       <sprite name="wall-av2" direction="0.0" offsetX="12" offsetY="36" x="224" y="788" width="24" height="144"/>
       <sprite name="wall-av3" direction="0.0" offsetX="12" offsetY="108" x="264" y="796" width="24" height="216"/>
+      <sprite name="wall-bh1" direction="0.0" offsetX="36" offsetY="12" x="72" y="532" width="72" height="24"/>
+      <sprite name="wall-bh2" direction="0.0" offsetX="36" offsetY="12" x="152" y="532" width="144" height="24"/>
+      <sprite name="wall-bh3" direction="0.0" offsetX="108" offsetY="12" x="72" y="572" width="216" height="24"/>
+      <sprite name="wall-bv1" direction="0.0" offsetX="12" offsetY="36" x="144" y="940" width="24" height="72"/>
+      <sprite name="wall-bv2" direction="0.0" offsetX="12" offsetY="36" x="144" y="788" width="24" height="144"/>
+      <sprite name="wall-bv3" direction="0.0" offsetX="12" offsetY="108" x="184" y="796" width="24" height="216"/>
       <sprite name="window-ah1" direction="0.0" offsetX="36" offsetY="12" x="72" y="500" width="72" height="24"/>
       <sprite name="window-ah2" direction="0.0" offsetX="36" offsetY="12" x="152" y="500" width="144" height="24"/>
       <sprite name="window-ah3" direction="0.0" offsetX="108" offsetY="12" x="72" y="460" width="216" height="24"/>
@@ -64,11 +79,15 @@
       </sequence>
     </animation>
     <animation name="sweep">
-      <sequence sequence="true" loops="0">
-        <turn turn="20.0" headingToo="false" ticks="20" ease="easeIn"/>
+      <sequence sequence="true" loops="1">
+        <turn turn="10.0" headingToo="false" ticks="10" ease="easeIn"/>
         <delay ticks="20"/>
-        <turn turn="-20.0" headingToo="false" ticks="20" ease="easeIn"/>
-        <delay ticks="20"/>
+        <sequence sequence="true" loops="0">
+          <turn turn="-20.0" headingToo="false" ticks="20" ease="easeIn"/>
+          <delay ticks="20"/>
+          <turn turn="20.0" headingToo="false" ticks="20" ease="easeIn"/>
+          <delay ticks="20"/>
+        </sequence>
       </sequence>
     </animation>
   </animations>
@@ -84,6 +103,18 @@
     </costume>
     <costume name="corner-a4" defaultZOrder="90" order="10" showInDesigner="true" role="solid.py">
       <pose name="default" pose="corner-a4"/>
+    </costume>
+    <costume name="corner-b1" defaultZOrder="90" order="11" showInDesigner="true" role="solid.py">
+      <pose name="default" pose="corner-b1"/>
+    </costume>
+    <costume name="corner-b2" defaultZOrder="90" order="11" showInDesigner="true" role="solid.py">
+      <pose name="default" pose="corner-b2"/>
+    </costume>
+    <costume name="corner-b3" defaultZOrder="90" order="11" showInDesigner="true" role="solid.py">
+      <pose name="default" pose="corner-b3"/>
+    </costume>
+    <costume name="corner-b4" defaultZOrder="90" order="11" showInDesigner="true" role="solid.py">
+      <pose name="default" pose="corner-b4"/>
     </costume>
     <costume name="door-1" defaultZOrder="40" order="0" showInDesigner="true" role="door.py">
       <pose name="default" pose="door-1"/>
@@ -102,9 +133,9 @@
     <costume name="floor1" defaultZOrder="0" order="30" showInDesigner="true">
       <pose name="default" pose="floor1"/>
     </costume>
-    <costume name="guard1" defaultZOrder="50" order="5" showInDesigner="true" role="guard.py">
+    <costume name="guard1" defaultZOrder="80" order="5" showInDesigner="true" role="guard.py">
       <pose name="default" pose="guard-1a"/>
-      <companion name="torch" companion="light-2"/>
+      <companion name="torch" companion="torch-1"/>
     </costume>
     <costume name="junction-a1" defaultZOrder="90" order="12" showInDesigner="true" role="solid.py">
       <pose name="default" pose="junction-a1"/>
@@ -118,12 +149,23 @@
     <costume name="junction-a4" defaultZOrder="90" order="12" showInDesigner="true" role="solid.py">
       <pose name="default" pose="junction-a4"/>
     </costume>
-    <costume name="light-1" defaultZOrder="70" order="0" showInDesigner="true" role="torch.py">
+    <costume name="junction-b1" defaultZOrder="90" order="11" showInDesigner="true" role="solid.py">
+      <pose name="default" pose="junction-b1"/>
+    </costume>
+    <costume name="junction-b2" defaultZOrder="90" order="11" showInDesigner="true" role="solid.py">
+      <pose name="default" pose="junction-b2"/>
+    </costume>
+    <costume name="junction-b3" defaultZOrder="90" order="11" showInDesigner="true" role="solid.py">
+      <pose name="default" pose="junction-b3"/>
+    </costume>
+    <costume name="junction-b4" defaultZOrder="90" order="11" showInDesigner="true" role="solid.py">
+      <pose name="default" pose="junction-b4"/>
+    </costume>
+    <costume name="light-1" defaultZOrder="70" order="0" showInDesigner="true" role="light.py">
       <pose name="default" pose="light-1"/>
     </costume>
-    <costume name="light-2" defaultZOrder="70" order="0" showInDesigner="true" role="torch.py">
+    <costume name="light-2" defaultZOrder="70" order="0" showInDesigner="true" role="light.py">
       <pose name="default" pose="light-2"/>
-      <animation name="default" animation="sweep"/>
     </costume>
     <costume name="money1" defaultZOrder="40" order="20" showInDesigner="true" role="collectable.py">
       <pose name="default" pose="money1"/>
@@ -134,6 +176,11 @@
     </costume>
     <costume name="quit" defaultZOrder="100" order="90" showInDesigner="true" role="uk.co.nickthecoder.itchy.role.QuitButton">
       <pose name="default" pose="quit"/>
+    </costume>
+    <costume name="torch-1" defaultZOrder="75" order="0" showInDesigner="true" role="torch.py">
+      <pose name="default" pose="torch-1"/>
+      <animation name="default" animation="sweep"/>
+      <companion name="light" companion="light-1"/>
     </costume>
     <costume name="wall-ah1" defaultZOrder="90" order="10" showInDesigner="true" role="solid.py">
       <pose name="default" pose="wall-ah1"/>
@@ -152,6 +199,24 @@
     </costume>
     <costume name="wall-av3" defaultZOrder="90" order="10" showInDesigner="true" role="solid.py">
       <pose name="default" pose="wall-av3"/>
+    </costume>
+    <costume name="wall-bh1" defaultZOrder="90" order="11" showInDesigner="true" role="solid.py">
+      <pose name="default" pose="wall-bh1"/>
+    </costume>
+    <costume name="wall-bh2" defaultZOrder="90" order="11" showInDesigner="true" role="solid.py">
+      <pose name="default" pose="wall-bh2"/>
+    </costume>
+    <costume name="wall-bh3" defaultZOrder="90" order="11" showInDesigner="true" role="solid.py">
+      <pose name="default" pose="wall-bh3"/>
+    </costume>
+    <costume name="wall-bv1" defaultZOrder="90" order="11" showInDesigner="true" role="solid.py">
+      <pose name="default" pose="wall-bv1"/>
+    </costume>
+    <costume name="wall-bv2" defaultZOrder="90" order="11" showInDesigner="true" role="solid.py">
+      <pose name="default" pose="wall-bv2"/>
+    </costume>
+    <costume name="wall-bv3" defaultZOrder="90" order="11" showInDesigner="true" role="solid.py">
+      <pose name="default" pose="wall-bv3"/>
     </costume>
     <costume name="wall1" defaultZOrder="90" order="10" showInDesigner="true" role="solid.py">
       <pose name="default" pose="wall1"/>

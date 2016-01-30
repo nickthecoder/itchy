@@ -33,7 +33,9 @@ class Guard(AbstractRole) :
         
     def onBirth(self) :
         self.torch = self.actor.createCompanion("torch").role
+        self.torch.actor.direction = self.actor.direction
         self.torch.owner = self
+        
         if self.debug :
             print "Starting at :", self.actor.x, self.actor.y, "heading", self.actor.heading
         self.startX = self.actor.x

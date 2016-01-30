@@ -1,29 +1,17 @@
 Current Tasks
 =============
 
-Undo/Redo for Z Order Reset
-    Create a "Group" undo/redo, and add each zorder change to that group.
-    Undo/redo the group as one.
-
-Undo/Redo for destructive edits, such as changing class names (e.g. Makeup)
-
-
-
-SceneDesigner: one dotted box for the screen's  bounds, and another for the current view's if they are different.
-    Make both semi-transparent?
-
-
 Renaming a Layer/Layout will need to alter all scenes???
 
-Game.loadScene, calls Role.sceneCreated only for the "main" load, not for additional scenes, such as
-    glass view for highscores, lives etc.
+All resources.renameXXX needs to update the renamed collection, so that renameSubjectsInScenes will work. 
+    And do the same with other resources. Layouts, Fonts, ... ?
 
 
 BUGS
 ====
 
-All resources.renameXXX needs to update the renamed collection, so that renameSubjectsInScenes will work. 
-    And do the same with other resources. Layouts, Fonts, ... ?
+Mouse WheelLeft/WheelRight events.
+
 Appearance.fixPose doesn't do the right thing with direction.
 	Setting dir to 0 works, but ideally both appearance and the new pose should have the old appearance's direction,
 	and yet the pose won't need rotating.
@@ -32,10 +20,25 @@ Can delete Poses which are used in a Framed animation
     Ditto for a Sprite.
 
 
-Ensure Scrollbars of Scroll do not obscure the contents?
-
 New Features
 ============
+
+
+Undo/Redo for Z Order Reset
+    Create a "Group" undo/redo, and add each zorder change to that group.
+    Undo/redo the group as one.
+
+Undo/Redo for destructive edits, such as changing class names (e.g. Makeup)
+
+SceneDesigner: one dotted box for the screen's  bounds, and another for the current view's if they are different.
+    Make both semi-transparent?
+
+
+Game.loadScene, calls Role.sceneCreated only for the "main" load, not for additional scenes, such as
+    glass view for highscores, lives etc.
+
+
+Ensure Scrollbars of Scroll do not obscure the contents?
 
 Cover-of-Darkness Menu : A street - you are driving the van. Park outside a house to start the level.
     Streets with lights on are "locked"
@@ -67,6 +70,8 @@ Redesign editor based on a traditional IDE style layout.
         Can subset the list for a single type (e.g. just Poses)
         Hide those views if there are no children
     Central "Edit" panel will display the currently selected object (pose/animation etc).
+    "Pin" any view to add it as a tab, otherwise it vanishes when another view is selected.
+        Save "pinned" views as Preferences, so they are visible after restarting the editor.
     Can be editing multiple items simultaneously, each with its own tab.
         This will have impact on renamed poses etc. Maybe very tricky!
         Maybe abandon Ok/Cancel, and always auto-update.

@@ -30,14 +30,14 @@
       <property name="pickPull" value="true"/>
       <property name="locked" value="false"/>
     </actor>
-    <actor costume="guard1" x="216" y="408" direction="0.0" heading="0.0" startEvent="default" zOrder="50" scale="0.75">
+    <actor costume="player" x="240" y="192" direction="0.0" heading="0.0" startEvent="default" zOrder="70" scale="0.75">
+      <property name="speed" value="4.0"/>
+    </actor>
+    <actor costume="guard1" x="216" y="408" direction="0.0" heading="0.0" startEvent="default" zOrder="80" scale="0.75">
       <property name="debug" value="false"/>
       <property name="forwardSpeed" value="4.0"/>
       <property name="routeString" value="450 C80 R90 160 C100 R90 80 C20 L90 T30 R180 223.5 C100 L90 281 L180"/>
       <property name="turnSpeed" value="6.0"/>
-    </actor>
-    <actor costume="player" x="240" y="192" direction="0.0" heading="0.0" startEvent="default" zOrder="70" scale="0.75">
-      <property name="speed" value="4.0"/>
     </actor>
     <actor costume="corner-a1" x="120" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
     <actor costume="corner-a2" x="480" y="552" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
