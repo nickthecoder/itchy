@@ -127,12 +127,12 @@ public class IntegerBox extends EntryBox<IntegerBox>
     public void onMouseDown( MouseButtonEvent event )
     {
         if (this.hasFocus) {
-            if (event.button == MouseButtonEvent.BUTTON_WHEELUP) {
+            if (event.button == MouseButtonEvent.BUTTON_WHEEL_UP) {
                 this.adjust(Itchy.isKeyDown(Keys.LSHIFT) ||
                     Itchy.isKeyDown(Keys.RSHIFT) ? 10 : 1);
                 event.stopPropagation();
 
-            } else if (event.button == MouseButtonEvent.BUTTON_WHEELDOWN) {
+            } else if (event.button == MouseButtonEvent.BUTTON_WHEEL_DOWN) {
                 this.adjust(Itchy.isKeyDown(Keys.LSHIFT) ||
                     Itchy.isKeyDown(Keys.RSHIFT) ? -10 : -1);
                 event.stopPropagation();

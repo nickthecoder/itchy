@@ -89,11 +89,11 @@ public class DoubleBox extends EntryBox<DoubleBox>
                 amount = 0.1;
             }
 
-            if (mbe.button == MouseButtonEvent.BUTTON_WHEELUP) {
+            if (mbe.button == MouseButtonEvent.BUTTON_WHEEL_UP) {
                 this.adjust(amount);
                 mbe.stopPropagation();
 
-            } else if (mbe.button == MouseButtonEvent.BUTTON_WHEELDOWN) {
+            } else if (mbe.button == MouseButtonEvent.BUTTON_WHEEL_DOWN) {
                 this.adjust(-amount);
                 mbe.stopPropagation();
             }

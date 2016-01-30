@@ -63,10 +63,10 @@ public class VerticalScroll extends PlainContainer implements ContainerLayout
     {
         super.onMouseDown(event);
 
-        if (event.button == MouseButtonEvent.BUTTON_WHEELUP) {
+        if (event.button == MouseButtonEvent.BUTTON_WHEEL_UP) {
             this.scrollBy(-50);
             event.stopPropagation();
-        } else if (event.button == MouseButtonEvent.BUTTON_WHEELDOWN) {
+        } else if (event.button == MouseButtonEvent.BUTTON_WHEEL_DOWN) {
             this.scrollBy(50);
             event.stopPropagation();
         }

@@ -1,32 +1,27 @@
 package uk.co.nickthecoder.itchy;
 
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
+import uk.co.nickthecoder.jame.event.MouseButton;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 
 public class MouseInput extends AbstractInput
 {
-    public static final String[] buttonCodes = new String[]
-    { "NONE", "M_LEFT", "M_MIDDLE", "M_RIGHT", "M_WHEELUP", "M_WHEELDOWN" };
-
-    public static final String[] buttonLabels = new String[]
-    { "NONE", "Left", "Middle", "Right", "Wheel Up", "Wheel Down" };
-
-    public int button;
+    public MouseButton mouseButton;
 
     public MouseInput()
     {
         
     }
     
-    public MouseInput( int buttonNumber )
+    public MouseInput( MouseButton mouseButton )
     {
-        button = buttonNumber;
+        this.mouseButton = mouseButton;
     }
     
     @Override
     public boolean pressed()
     {
-        if (Itchy.isMouseButtonDown(this.button)) {
+        if (Itchy.isMouseButtonDown(this.mouseButton.value)) {
             if ((click && previouslyUp) || (!click)) {
                 previouslyUp = false;
                 return super.pressed();
@@ -46,7 +41,7 @@ public class MouseInput extends AbstractInput
     @Override
     public boolean matches(MouseButtonEvent mbe)
     {
-        if ((mbe.button == this.button) && (mbe.state == MouseButtonEvent.STATE_PRESSED)) {
+        if ((mbe.button == this.mouseButton.value) && (mbe.state == MouseButtonEvent.STATE_PRESSED)) {
             return super.matches(mbe);
         }
         return false;
@@ -55,6 +50,6 @@ public class MouseInput extends AbstractInput
     @Override
     public String toString()
     {
-        return super.toString() + buttonCodes[button];
+        return super.toString() + "M_" + mouseButton.name();
     }
 }

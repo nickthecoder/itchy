@@ -21,7 +21,7 @@ public class Scroll extends PlainContainer implements ContainerLayout
     private int scrollY = 0;
     private int scrollX = 0;
 
-    public Scroll( AbstractComponent child )
+    public Scroll(AbstractComponent child)
     {
         this.setType("scroll");
 
@@ -44,19 +44,19 @@ public class Scroll extends PlainContainer implements ContainerLayout
     }
 
     @Override
-    public void setNaturalWidth( int width )
+    public void setNaturalWidth(int width)
     {
         super.setNaturalWidth(width);
     }
 
     @Override
-    public void setNaturalHeight( int height )
+    public void setNaturalHeight(int height)
     {
         super.setNaturalHeight(height);
     }
 
     @Override
-    public void onKeyDown( KeyboardEvent e )
+    public void onKeyDown(KeyboardEvent e)
     {
         if (e.symbol == Keys.PAGEUP) {
             this.scrollYBy((int) (-this.getHeight() * 0.9));
@@ -71,15 +71,21 @@ public class Scroll extends PlainContainer implements ContainerLayout
     }
 
     @Override
-    public void onMouseDown( MouseButtonEvent event )
+    public void onMouseDown(MouseButtonEvent event)
     {
         super.onMouseDown(event);
 
-        if (event.button == MouseButtonEvent.BUTTON_WHEELUP) {
+        if (event.button == MouseButtonEvent.BUTTON_WHEEL_UP) {
             this.scrollYBy(-50);
             event.stopPropagation();
-        } else if (event.button == MouseButtonEvent.BUTTON_WHEELDOWN) {
+        } else if (event.button == MouseButtonEvent.BUTTON_WHEEL_DOWN) {
             this.scrollYBy(50);
+            event.stopPropagation();
+        } else if (event.button == MouseButtonEvent.BUTTON_WHEEL_LEFT) {
+            this.scrollXBy(-50);
+            event.stopPropagation();
+        } else if (event.button == MouseButtonEvent.BUTTON_WHEEL_RIGHT) {
+            this.scrollXBy(50);
             event.stopPropagation();
         }
 
@@ -89,10 +95,10 @@ public class Scroll extends PlainContainer implements ContainerLayout
      * Scrolls the viewport if needed to ensure that the component is visible
      * 
      * @param component
-     *        A descendant of this Scroll
+     *            A descendant of this Scroll
      */
     @Override
-    public void ensureVisible( Component component )
+    public void ensureVisible(Component component)
     {
         int dy = this.scrollY;
         int dx = this.scrollX;
@@ -124,7 +130,7 @@ public class Scroll extends PlainContainer implements ContainerLayout
         }
     }
 
-    public void scrollYTo( int value )
+    public void scrollYTo(int value)
     {
         this.scrollY = value;
 
@@ -143,7 +149,7 @@ public class Scroll extends PlainContainer implements ContainerLayout
         this.vScrollbar.forceLayout();
     }
 
-    public void scrollXTo( int value )
+    public void scrollXTo(int value)
     {
         this.scrollX = value;
 
@@ -162,23 +168,23 @@ public class Scroll extends PlainContainer implements ContainerLayout
         this.hScrollbar.forceLayout();
     }
 
-    public void scrollYBy( int delta )
+    public void scrollYBy(int delta)
     {
         this.scrollYTo(this.scrollY + delta);
     }
 
-    public void scrollXBy( int delta )
+    public void scrollXBy(int delta)
     {
         this.scrollXTo(this.scrollX + delta);
     }
 
     @Override
-    public void calculateRequirements( PlainContainer me )
+    public void calculateRequirements(PlainContainer me)
     {
     }
 
     @Override
-    public void layout( PlainContainer me )
+    public void layout(PlainContainer me)
     {
         this.child.setPosition(
             this.getPaddingLeft() + this.child.getMarginLeft() - this.scrollX,
@@ -190,7 +196,7 @@ public class Scroll extends PlainContainer implements ContainerLayout
             this.getWidth() - this.vScrollbar.getRequiredWidth() -
                 this.vScrollbar.getMarginLeft() - this.vScrollbar.getMarginRight(),
             this.getPaddingTop() + this.vScrollbar.getMarginTop(),
-            
+
             this.vScrollbar.getRequiredWidth(),
             this.getHeight() - this.getPaddingTop() - this.getPaddingBottom() -
                 this.vScrollbar.getMarginTop() - this.vScrollbar.getMarginBottom());
@@ -199,14 +205,14 @@ public class Scroll extends PlainContainer implements ContainerLayout
             this.getPaddingLeft() + this.hScrollbar.getMarginLeft(),
             this.getHeight() - this.hScrollbar.getRequiredHeight() -
                 this.hScrollbar.getMarginTop() - this.hScrollbar.getMarginBottom(),
-                    
+
             this.getWidth() - this.getPaddingLeft() - this.getPaddingRight() -
                 this.hScrollbar.getMarginLeft() - this.hScrollbar.getMarginRight(),
-            this.hScrollbar.getRequiredHeight() );
-        
+            this.hScrollbar.getRequiredHeight());
+
         this.vScrollbar.setVisible(this.getHeight() < this.child.getRequiredHeight());
         this.hScrollbar.setVisible(this.getWidth() < this.child.getRequiredWidth());
-        
+
         if (this.vScrollbar.isVisible()) {
             this.vScrollbar.forceLayout();
         }
@@ -216,7 +222,7 @@ public class Scroll extends PlainContainer implements ContainerLayout
     }
 
     @Override
-    public void render( GraphicsContext gc )
+    public void render(GraphicsContext gc)
     {
         this.ensureLayedOut();
         this.renderBackground(gc);
@@ -226,8 +232,8 @@ public class Scroll extends PlainContainer implements ContainerLayout
             this.child.getY() + this.scrollY,
             this.getWidth() - this.getPaddingLeft() - this.getPaddingRight(),
             this.getHeight() - this.getPaddingBottom() - this.getPaddingTop()
-        );
-        
+            );
+
         GraphicsContext childGc = gc.window(rect);
         childGc.scroll(this.scrollX, this.scrollY);
         if (!childGc.empty()) {
@@ -274,7 +280,7 @@ public class Scroll extends PlainContainer implements ContainerLayout
         }
 
         @Override
-        public void calculateRequirements( PlainContainer me )
+        public void calculateRequirements(PlainContainer me)
         {
             int height = Scroll.this.getHeight() - this.getMarginTop() -
                 this.getMarginBottom();
@@ -296,7 +302,7 @@ public class Scroll extends PlainContainer implements ContainerLayout
             return barExtent * Scroll.this.scrollY / (actual - visible);
         }
 
-        public int positionToScroll( int position )
+        public int positionToScroll(int position)
         {
             int visible = Scroll.this.getHeight() - Scroll.this.getPaddingBottom() -
                 Scroll.this.getPaddingTop();
@@ -307,7 +313,7 @@ public class Scroll extends PlainContainer implements ContainerLayout
         }
 
         @Override
-        public void layout( PlainContainer me )
+        public void layout(PlainContainer me)
         {
             int scrollBarHeight = VerticalScrollbar.this.getHeight();
             int clientHeight = Scroll.this.getHeight(); // Scroll.this.clientHeight;
@@ -343,7 +349,7 @@ public class Scroll extends PlainContainer implements ContainerLayout
         }
 
         @Override
-        public void onClick( MouseButtonEvent mbe )
+        public void onClick(MouseButtonEvent mbe)
         {
             if (mbe == null) {
                 return;
@@ -356,7 +362,7 @@ public class Scroll extends PlainContainer implements ContainerLayout
         }
 
         @Override
-        public boolean acceptDrag( MouseButtonEvent e )
+        public boolean acceptDrag(MouseButtonEvent e)
         {
             if (this.scroller.contains2(e)) {
                 this.dragY = this.scroller.getY();
@@ -366,7 +372,7 @@ public class Scroll extends PlainContainer implements ContainerLayout
         }
 
         @Override
-        public void drag( MouseEvent mme, int dx, int dy )
+        public void drag(MouseEvent mme, int dx, int dy)
         {
             // If the GUI is too slow to scroll in real time, then just comment
             // out these two lines
@@ -375,14 +381,13 @@ public class Scroll extends PlainContainer implements ContainerLayout
         }
 
         @Override
-        public void endDrag( MouseButtonEvent e, int dx, int dy )
+        public void endDrag(MouseButtonEvent e, int dx, int dy)
         {
             int y = this.dragY + dy;
             Scroll.this.scrollYTo(this.positionToScroll(y));
         }
 
     }
-
 
     public class HorizontalScrollbar extends DragableContainer implements ContainerLayout
     {
@@ -405,7 +410,7 @@ public class Scroll extends PlainContainer implements ContainerLayout
         }
 
         @Override
-        public void calculateRequirements( PlainContainer me )
+        public void calculateRequirements(PlainContainer me)
         {
             int width = Scroll.this.getWidth() - this.getMarginLeft() -
                 this.getMarginRight();
@@ -426,9 +431,8 @@ public class Scroll extends PlainContainer implements ContainerLayout
 
             return barExtent * Scroll.this.scrollX / (actual - visible);
         }
-        
 
-        public int positionToScroll( int position )
+        public int positionToScroll(int position)
         {
             int visible = Scroll.this.getWidth() - Scroll.this.getPaddingRight() -
                 Scroll.this.getPaddingLeft();
@@ -439,11 +443,11 @@ public class Scroll extends PlainContainer implements ContainerLayout
         }
 
         @Override
-        public void layout( PlainContainer me )
+        public void layout(PlainContainer me)
         {
             int scrollBarWidth = HorizontalScrollbar.this.getWidth();
             int clientWidth = Scroll.this.getWidth(); // Scroll.this.clientHeight;
-            int contentWidth= Scroll.this.child.getWidth();
+            int contentWidth = Scroll.this.child.getWidth();
 
             if (contentWidth <= 0) {
                 setVisible(false);
@@ -475,7 +479,7 @@ public class Scroll extends PlainContainer implements ContainerLayout
         }
 
         @Override
-        public void onClick( MouseButtonEvent mbe )
+        public void onClick(MouseButtonEvent mbe)
         {
             if (mbe == null) {
                 return;
@@ -488,7 +492,7 @@ public class Scroll extends PlainContainer implements ContainerLayout
         }
 
         @Override
-        public boolean acceptDrag( MouseButtonEvent e )
+        public boolean acceptDrag(MouseButtonEvent e)
         {
             if (this.scroller.contains2(e)) {
                 this.dragX = this.scroller.getX();
@@ -498,7 +502,7 @@ public class Scroll extends PlainContainer implements ContainerLayout
         }
 
         @Override
-        public void drag( MouseEvent mme, int dx, int dy )
+        public void drag(MouseEvent mme, int dx, int dy)
         {
             // If the GUI is too slow to scroll in real time, then just comment
             // out these two lines
@@ -507,7 +511,7 @@ public class Scroll extends PlainContainer implements ContainerLayout
         }
 
         @Override
-        public void endDrag( MouseButtonEvent e, int dx, int dy )
+        public void endDrag(MouseButtonEvent e, int dx, int dy)
         {
             int x = this.dragX + dx;
             Scroll.this.scrollXTo(this.positionToScroll(x));

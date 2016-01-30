@@ -5,18 +5,18 @@
 package uk.co.nickthecoder.itchy;
 
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
-import uk.co.nickthecoder.jame.event.KeysEnum;
+import uk.co.nickthecoder.jame.event.Key;
 
 public class KeyInput extends AbstractInput
 {
 
-    public KeysEnum key;
+    public Key key;
 
     public KeyInput()
     {
     }
 
-    public KeyInput(KeysEnum key)
+    public KeyInput(Key key)
     {
         this.key = key;
     }

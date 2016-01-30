@@ -11,7 +11,8 @@ import uk.co.nickthecoder.itchy.property.InputProperty;
 import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.StringProperty;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
-import uk.co.nickthecoder.jame.event.KeysEnum;
+import uk.co.nickthecoder.jame.event.Key;
+import uk.co.nickthecoder.jame.event.MouseButton;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 
 /**
@@ -39,36 +40,23 @@ public class Input implements NamedSubject<Input>, InputInterface
         return properties;
     }
 
-    private static int parseMouseButton(String str)
+    private static MouseButton parseMouseButton(String str)
     {
         if (str.startsWith("M_")) {
             String rest = str.substring(2);
-
-            if (rest.equals("LEFT")) {
-                return MouseButtonEvent.BUTTON_LEFT;
-            }
-            if (rest.equals("RIGHT")) {
-                return MouseButtonEvent.BUTTON_RIGHT;
-            }
-            if (rest.equals("MIDDLE")) {
-                return MouseButtonEvent.BUTTON_MIDDLE;
-            }
-            if (rest.equals("WHEELUP")) {
-                return MouseButtonEvent.BUTTON_WHEELUP;
-            }
-            if (rest.equals("WHEELDOWN")) {
-                return MouseButtonEvent.BUTTON_WHEELDOWN;
+            try {
+                return MouseButton.valueOf(rest);
+            } catch (Exception e) {
             }
         }
-
-        return -1;
+        return null;
     }
 
     /**
      * Parses a String with the following format :
      * [click+][ctrl+][shift+][meta+][alt+]KEY_NAME
      *
-     * Where KEY_NAME is in KeysEnum, or M_LEFT, M_RIGHT, M_MIDDLE, M_WHEELUP, M_WHEELDOWN (for mouse buttons).
+     * Where KEY_NAME is in Key, or M_LEFT, M_RIGHT, M_MIDDLE, M_WHEELUP, M_WHEELDOWN (for mouse buttons).
      * If "click" is specified, then the input trigers when the key/mouse is pressed, not continuously while the
      * key/button is held down.
      * 
@@ -85,16 +73,16 @@ public class Input implements NamedSubject<Input>, InputInterface
 
         String keyStr = parts[parts.length - 1];
         
-        KeysEnum key = null;
+        Key key = null;
         try {
-            key = KeysEnum.valueOf(keyStr);
+            key = Key.valueOf(keyStr);
         } catch (Exception e) {
         }
         if (key == null) {
-            int mouseButton = parseMouseButton(keyStr);
-            if (mouseButton >= 0) {
+            MouseButton mouseButton = parseMouseButton(keyStr);
+            if (mouseButton != null) {
                 MouseInput mdi = new MouseInput();
-                mdi.button = mouseButton;
+                mdi.mouseButton = mouseButton;
                 result = mdi;
             } else {
                 throw new Exception("Expected a key or mouse button name, but found : " + keyStr);

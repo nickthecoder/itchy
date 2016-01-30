@@ -20,6 +20,7 @@ import uk.co.nickthecoder.jame.event.Event;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.Keys;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
+import uk.co.nickthecoder.jame.event.MouseButton;
 import uk.co.nickthecoder.jame.event.MouseEvent;
 import uk.co.nickthecoder.jame.event.ResizeEvent;
 
@@ -37,7 +38,7 @@ public class Itchy
      */
     private static int KEYBOARD_STATE_SIZE = 400;
 
-    private static int MOUSE_STATE_SIZE = 6;
+    private static int MOUSE_STATE_SIZE = MouseButton.values().length + 1;
 
     /**
      * Holds a boolean for each key. On key pressed events sets the appropriate boolean, and key released events reset
@@ -510,7 +511,9 @@ public class Itchy
 
             if (event instanceof MouseButtonEvent) {
                 MouseButtonEvent mbe = (MouseButtonEvent) event;
-                mouseState[mbe.button] = mbe.state == MouseButtonEvent.STATE_PRESSED;
+                if ( mbe.button < mouseState.length ) {
+                    mouseState[mbe.button] = mbe.state == MouseButtonEvent.STATE_PRESSED;
+                }
             }
 
         }
@@ -545,7 +548,11 @@ public class Itchy
      */
     public static boolean isMouseButtonDown( int mouseButton )
     {
-        return mouseState[mouseButton];
+        if ( mouseButton < mouseState.length ) {
+            return false;
+        } else {
+            return mouseState[mouseButton];
+        }
     }
     
     /**

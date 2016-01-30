@@ -8,13 +8,14 @@ import uk.co.nickthecoder.itchy.AbstractInput;
 import uk.co.nickthecoder.itchy.InputInterface;
 import uk.co.nickthecoder.itchy.KeyInput;
 import uk.co.nickthecoder.itchy.MouseInput;
-import uk.co.nickthecoder.jame.event.KeysEnum;
+import uk.co.nickthecoder.jame.event.Key;
+import uk.co.nickthecoder.jame.event.MouseButton;
 
 public abstract class InputPicker extends Window
 {
-    public KeysEnum key;
-    
-    public int mouseButton = -1;
+    public Key key;
+
+    public MouseButton mouseButton;
 
     public InputPicker()
     {
@@ -36,16 +37,16 @@ public abstract class InputPicker extends Window
             public void action()
             {
                 AbstractInput input = null;
-                
+
                 if (InputPicker.this.key != null) {
                     input = new KeyInput(InputPicker.this.key);
-                } else if (InputPicker.this.mouseButton >= 0) {
-                    input = new MouseInput( InputPicker.this.mouseButton );
+                } else if (InputPicker.this.mouseButton != null) {
+                    input = new MouseInput(InputPicker.this.mouseButton);
                 }
-                if ( input == null) {
+                if (input == null) {
                     return;
                 }
-                
+
                 InputPicker.this.hide();
 
                 input.click = InputPicker.this.click.getValue();
@@ -78,160 +79,160 @@ public abstract class InputPicker extends Window
 
     }
 
-    KeysEnum[][] main = new KeysEnum[][]
+    Key[][] main = new Key[][]
     {
         {
-            KeysEnum.ESCAPE,
-            KeysEnum.F1,
-            KeysEnum.F2,
-            KeysEnum.F3,
-            KeysEnum.F4,
-            KeysEnum.F5,
-            KeysEnum.F6,
-            KeysEnum.F7,
-            KeysEnum.F8,
-            KeysEnum.F9,
-            KeysEnum.F10,
-            KeysEnum.F11,
-            KeysEnum.F12,
+            Key.ESCAPE,
+            Key.F1,
+            Key.F2,
+            Key.F3,
+            Key.F4,
+            Key.F5,
+            Key.F6,
+            Key.F7,
+            Key.F8,
+            Key.F9,
+            Key.F10,
+            Key.F11,
+            Key.F12,
     },
         {
-            KeysEnum.BACKQUOTE,
-            KeysEnum.KEY_1,
-            KeysEnum.KEY_2,
-            KeysEnum.KEY_3,
-            KeysEnum.KEY_4,
-            KeysEnum.KEY_5,
-            KeysEnum.KEY_6,
-            KeysEnum.KEY_7,
-            KeysEnum.KEY_8,
-            KeysEnum.KEY_9,
-            KeysEnum.KEY_0,
-            KeysEnum.MINUS,
-            KeysEnum.EQUALS,
-            KeysEnum.BACKSPACE
+            Key.BACKQUOTE,
+            Key.KEY_1,
+            Key.KEY_2,
+            Key.KEY_3,
+            Key.KEY_4,
+            Key.KEY_5,
+            Key.KEY_6,
+            Key.KEY_7,
+            Key.KEY_8,
+            Key.KEY_9,
+            Key.KEY_0,
+            Key.MINUS,
+            Key.EQUALS,
+            Key.BACKSPACE
     },
         {
-            KeysEnum.TAB,
-            KeysEnum.q,
-            KeysEnum.w,
-            KeysEnum.e,
-            KeysEnum.r,
-            KeysEnum.t,
-            KeysEnum.y,
-            KeysEnum.u,
-            KeysEnum.i,
-            KeysEnum.o,
-            KeysEnum.p,
-            KeysEnum.LEFTBRACKET,
-            KeysEnum.RIGHTBRACKET,
-            KeysEnum.RETURN
+            Key.TAB,
+            Key.q,
+            Key.w,
+            Key.e,
+            Key.r,
+            Key.t,
+            Key.y,
+            Key.u,
+            Key.i,
+            Key.o,
+            Key.p,
+            Key.LEFTBRACKET,
+            Key.RIGHTBRACKET,
+            Key.RETURN
     },
         {
-            KeysEnum.CAPSLOCK,
-            KeysEnum.a,
-            KeysEnum.s,
-            KeysEnum.d,
-            KeysEnum.f,
-            KeysEnum.g,
-            KeysEnum.h,
-            KeysEnum.j,
-            KeysEnum.k,
-            KeysEnum.l,
-            KeysEnum.SEMICOLON,
-            KeysEnum.QUOTE,
-            KeysEnum.HASH
+            Key.CAPSLOCK,
+            Key.a,
+            Key.s,
+            Key.d,
+            Key.f,
+            Key.g,
+            Key.h,
+            Key.j,
+            Key.k,
+            Key.l,
+            Key.SEMICOLON,
+            Key.QUOTE,
+            Key.HASH
     },
         {
-            KeysEnum.LSHIFT,
-            KeysEnum.BACKSLASH,
-            KeysEnum.z,
-            KeysEnum.x,
-            KeysEnum.c,
-            KeysEnum.v,
-            KeysEnum.b,
-            KeysEnum.n,
-            KeysEnum.m,
-            KeysEnum.COMMA,
-            KeysEnum.PERIOD,
-            KeysEnum.SLASH,
-            KeysEnum.RSHIFT
+            Key.LSHIFT,
+            Key.BACKSLASH,
+            Key.z,
+            Key.x,
+            Key.c,
+            Key.v,
+            Key.b,
+            Key.n,
+            Key.m,
+            Key.COMMA,
+            Key.PERIOD,
+            Key.SLASH,
+            Key.RSHIFT
     },
         {
-            KeysEnum.LCTRL,
-            KeysEnum.LSUPER,
-            KeysEnum.LALT,
-            KeysEnum.SPACE,
-            KeysEnum.RALT,
-            KeysEnum.RSUPER,
-            KeysEnum.RCTRL,
+            Key.LCTRL,
+            Key.LSUPER,
+            Key.LALT,
+            Key.SPACE,
+            Key.RALT,
+            Key.RSUPER,
+            Key.RCTRL,
     }
     };
 
-    KeysEnum[][] middle = new KeysEnum[][]
+    Key[][] middle = new Key[][]
     {
         {
-            KeysEnum.PRINT,
-            KeysEnum.SCROLLOCK,
-            KeysEnum.PAUSE
+            Key.PRINT,
+            Key.SCROLLOCK,
+            Key.PAUSE
     },
         {
         },
         {
-            KeysEnum.INSERT,
-            KeysEnum.HOME,
-            KeysEnum.PAGEUP,
+            Key.INSERT,
+            Key.HOME,
+            Key.PAGEUP,
         },
         {
-            KeysEnum.DELETE,
-            KeysEnum.END,
-            KeysEnum.PAGEDOWN
+            Key.DELETE,
+            Key.END,
+            Key.PAGEDOWN
         },
         {
         },
         {
-            KeysEnum.UP,
+            Key.UP,
         },
         {
-            KeysEnum.LEFT,
-            KeysEnum.DOWN,
-            KeysEnum.RIGHT
+            Key.LEFT,
+            Key.DOWN,
+            Key.RIGHT
         }
     };
 
-    KeysEnum[][] keypad = new KeysEnum[][] {
+    Key[][] keypad = new Key[][] {
         {
         },
         {
-            KeysEnum.NUMLOCK,
-            KeysEnum.KP_DIVIDE,
-            KeysEnum.KP_MULTIPLY,
+            Key.NUMLOCK,
+            Key.KP_DIVIDE,
+            Key.KP_MULTIPLY,
         },
         {
-            KeysEnum.KP7,
-            KeysEnum.KP8,
-            KeysEnum.KP9,
-            KeysEnum.KP_MINUS
+            Key.KP7,
+            Key.KP8,
+            Key.KP9,
+            Key.KP_MINUS
         },
         {
-            KeysEnum.KP4,
-            KeysEnum.KP5,
-            KeysEnum.KP6,
-            KeysEnum.KP_PLUS
+            Key.KP4,
+            Key.KP5,
+            Key.KP6,
+            Key.KP_PLUS
         },
         {
-            KeysEnum.KP3,
-            KeysEnum.KP2,
-            KeysEnum.KP1
+            Key.KP3,
+            Key.KP2,
+            Key.KP1
         },
         {
-            KeysEnum.KP0,
-            KeysEnum.KP_PERIOD,
-            KeysEnum.KP_ENTER
+            Key.KP0,
+            Key.KP_PERIOD,
+            Key.KP_ENTER
         }
     };
 
-    KeysEnum[][][] keyboard = new KeysEnum[][][] {
+    Key[][][] keyboard = new Key[][][] {
         this.main, this.middle, this.keypad
     };
 
@@ -248,12 +249,12 @@ public abstract class InputPicker extends Window
 
         ButtonGroup buttonGroup = new ButtonGroup();
 
-        for (KeysEnum[][] s : this.keyboard) {
+        for (Key[][] s : this.keyboard) {
             PlainContainer section = new PlainContainer();
             section.setLayout(new VerticalLayout());
             keyboardContainer.addChild(section);
 
-            for (KeysEnum[] r : s) {
+            for (Key[] r : s) {
                 PlainContainer row = new PlainContainer();
                 if (r.length == 0) {
                     row.setMinimumHeight(20); // Arbitrary spacing
@@ -261,7 +262,7 @@ public abstract class InputPicker extends Window
                     row.addStyle("combo");
                     row.setLayout(new HorizontalLayout());
 
-                    for (KeysEnum key : r) {
+                    for (Key key : r) {
                         AbstractComponent button = createKeyButton(buttonGroup, key);
                         row.addChild(button);
                     }
@@ -273,14 +274,13 @@ public abstract class InputPicker extends Window
         PlainContainer mouseButtons = new PlainContainer();
         mouseButtons.setXSpacing(4);
         mouseButtons.setYAlignment(0.5);
-        mouseButtons.addChild(new Label("Moues Buttons : " ));
-        for ( int i = 0; i < MouseInput.buttonLabels.length; i ++ ) {
-            Component button = createMouseButton( buttonGroup, i);
+        mouseButtons.addChild(new Label("Moues Buttons : "));
+        for (MouseButton mouseButton : MouseButton.values()) {
+            Component button = createMouseButton(buttonGroup, mouseButton);
             mouseButtons.addChild(button);
-        }        
+        }
         result.addChild(mouseButtons);
 
-        
         PlainContainer modifiers = new PlainContainer();
         modifiers.setXSpacing(40);
         result.addChild(modifiers);
@@ -300,10 +300,10 @@ public abstract class InputPicker extends Window
         this.meta = new CheckBox();
         modifiers.addChild(makeModifier(this.meta, "meta"));
 
-        modifiers.addChild( new Label( "" ) );
+        modifiers.addChild(new Label(""));
         this.click = new CheckBox();
         modifiers.addChild(makeModifier(this.click, "Click ?"));
-        
+
         return result;
     }
 
@@ -324,7 +324,7 @@ public abstract class InputPicker extends Window
     public CheckBox alt;
     public CheckBox meta;
 
-    protected AbstractComponent createKeyButton(ButtonGroup buttonGroup, final KeysEnum key)
+    protected AbstractComponent createKeyButton(ButtonGroup buttonGroup, final Key key)
     {
         ToggleButton button = new ToggleButton(key.label);
         buttonGroup.add(button);
@@ -334,15 +334,15 @@ public abstract class InputPicker extends Window
             public void action()
             {
                 InputPicker.this.key = key;
-                InputPicker.this.mouseButton = -1;
+                InputPicker.this.mouseButton = null;
             }
         });
         return button;
     }
-    
-    protected AbstractComponent createMouseButton(ButtonGroup buttonGroup, final int buttonNumber)
+
+    protected AbstractComponent createMouseButton(ButtonGroup buttonGroup, final MouseButton mouseButton)
     {
-        ToggleButton button = new ToggleButton(MouseInput.buttonLabels[buttonNumber]);
+        ToggleButton button = new ToggleButton(mouseButton.label);
         buttonGroup.add(button);
         button.addActionListener(new ActionListener()
         {
@@ -350,7 +350,7 @@ public abstract class InputPicker extends Window
             public void action()
             {
                 InputPicker.this.key = null;
-                InputPicker.this.mouseButton = buttonNumber;
+                InputPicker.this.mouseButton = mouseButton;
             }
         });
         return button;
