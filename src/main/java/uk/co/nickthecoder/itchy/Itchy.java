@@ -548,7 +548,7 @@ public class Itchy
      */
     public static boolean isMouseButtonDown( int mouseButton )
     {
-        if ( mouseButton < mouseState.length ) {
+        if ( mouseButton >= mouseState.length ) {
             return false;
         } else {
             return mouseState[mouseButton];
