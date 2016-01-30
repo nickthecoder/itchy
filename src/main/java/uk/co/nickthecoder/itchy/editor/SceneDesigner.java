@@ -1580,17 +1580,8 @@ public class SceneDesigner implements MouseListener, KeyListener
             if (currentCostume != null) {
                 actor.setZOrder(currentCostume.defaultZOrder);
             }
-            // Place on top if no default zOrder defined for the costume.
             Stage stage = currentStageView.getStage();
-            if (actor.getZOrder() == 0) {
-                if (stage instanceof ZOrderStageInterface) {
-                    ((ZOrderStageInterface) stage).addTop(actor);
-                } else {
-                    stage.add(actor);
-                }
-            } else {
-                stage.add(actor);
-            }
+            stage.add(actor);
 
             // TO DO, When stamping an actor implements undo/red, then the
             // StageConstraint will have to implement it too.
@@ -1844,7 +1835,7 @@ public class SceneDesigner implements MouseListener, KeyListener
             Actor actor = SceneDesigner.copiedActor.createActor(
                 editor.resources, true);
             actor.moveBy(10, 10);
-            addTop(currentStageView.getStage(), actor);
+            currentStageView.getStage().add(actor);
             selectActor(actor);
         }
     }
@@ -2009,14 +2000,6 @@ public class SceneDesigner implements MouseListener, KeyListener
 
     }
 
-    private void addTop(Stage stage, Actor actor)
-    {
-        if (stage instanceof ZOrderStageInterface) {
-            ((ZOrderStageInterface) stage).addTop(actor);
-        } else {
-            stage.add(actor);
-        }
-    }
 
     private void createHightlightActor()
     {

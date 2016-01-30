@@ -7,9 +7,6 @@ Undo/Redo for Z Order Reset
 
 Undo/Redo for destructive edits, such as changing class names (e.g. Makeup)
 
-SceneDesigner onPaste, and maybe other places uses addTop, but now that costumes have default ZOrders, it makes more sense
-    to use add, and let them have the same ZOrder.
-
 
 
 SceneDesigner: one dotted box for the screen's  bounds, and another for the current view's if they are different.
@@ -39,6 +36,9 @@ Ensure Scrollbars of Scroll do not obscure the contents?
 
 New Features
 ============
+
+Cover-of-Darkness Menu : A street - you are driving the van. Park outside a house to start the level.
+    Streets with lights on are "locked"
 
 Bean Animation. Change the value of a Role's property.
     Use it to change the size of a torch's light, or its direction.
