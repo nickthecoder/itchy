@@ -15,6 +15,12 @@ class Play(PlainSceneDirector) :
         self.inputScrollUp = Input.find("scrollUp")
         self.inputScrollDown = Input.find("scrollDown")
 
+
+    def onLoaded(self) :
+        print "Loading glass"
+        game.loadScene("glass", True)
+
+
     def tick(self) :
         if self.inputScrollLeft.pressed() :
             game.sceneDirector.scrollBy(-2,0)

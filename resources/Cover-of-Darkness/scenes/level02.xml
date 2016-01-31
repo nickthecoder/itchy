@@ -22,10 +22,10 @@
     </actor>
     <actor costume="money1" x="672" y="192" direction="0.0" heading="0.0" startEvent="default" zOrder="27"/>
     <actor costume="money1" x="720" y="312" direction="0.0" heading="0.0" startEvent="default" zOrder="28"/>
-    <actor costume="guard1" x="672" y="168" direction="91.43209618416466" heading="91.43209618416466" startEvent="default" zOrder="29">
+    <actor costume="guard1" x="696" y="144" direction="91.43209618416466" heading="91.43209618416466" startEvent="default" zOrder="29">
       <property name="debug" value="false"/>
       <property name="forwardSpeed" value="2.0"/>
-      <property name="routeString" value="200 L180 200 R180"/>
+      <property name="routeString" value="170 R180 170 R180"/>
       <property name="turnSpeed" value="4.0"/>
     </actor>
     <actor costume="doorFrame-1" x="120" y="384" direction="90.0" heading="90.0" startEvent="default" zOrder="30">
@@ -47,6 +47,9 @@
     <actor costume="window-ah1" x="624" y="384" direction="0.0" heading="0.0" startEvent="default" zOrder="30"/>
     <actor costume="money1" x="264" y="456" direction="0.0" heading="0.0" startEvent="default" zOrder="32"/>
     <actor costume="money1" x="408" y="456" direction="0.0" heading="0.0" startEvent="default" zOrder="32"/>
+    <actor costume="getaway-1" id="level03" x="72" y="528" direction="0.0" heading="0.0" startEvent="default" zOrder="60">
+      <property name="nextLevel" value=""/>
+    </actor>
     <actor costume="corner-a4" x="48" y="24" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
     <actor costume="wall-av2" x="48" y="168" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
     <actor costume="junction-b1" x="192" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
@@ -83,15 +86,5 @@
   </layer>
   <layer name="top">
     <view/>
-    <actor costume="exit" x="83" y="537" direction="0.0" heading="0.0" startEvent="default" zOrder="33">
-      <property name="nextLevel" value="start"/>
-    </actor>
-    <text text="0" font="Vera" size="40" color="#ffffff" xAlignment="1.0" yAlignment="0.0" role="uk.co.nickthecoder.itchy.role.NumberValue" x="788" y="590" direction="0.0" heading="0.0" startEvent="default" zOrder="62" colorize="#ff75e4ff">
-      <property name="nullValue" value=""/>
-      <property name="errorValue" value=""/>
-      <property name="quiet" value="false"/>
-      <property name="updateInterval" value="0.0"/>
-      <property name="access" value="director.time"/>
-    </text>
   </layer>
 </scene>

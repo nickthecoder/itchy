@@ -5,64 +5,69 @@
   </layer>
   <layer name="bottom">
     <view/>
-    <actor costume="floor1" x="204" y="199" direction="0.0" heading="0.0" startEvent="default" zOrder="0"/>
-    <actor costume="floor1" x="353" y="199" direction="0.0" heading="0.0" startEvent="default" zOrder="1"/>
-    <actor costume="floor1" x="503" y="202" direction="0.0" heading="0.0" startEvent="default" zOrder="2"/>
-    <actor costume="floor1" x="632" y="201" direction="0.0" heading="0.0" startEvent="default" zOrder="3"/>
-    <actor costume="floor1" x="207" y="349" direction="0.0" heading="0.0" startEvent="default" zOrder="4"/>
-    <actor costume="floor1" x="358" y="349" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="floor1" x="508" y="351" direction="0.0" heading="0.0" startEvent="default" zOrder="6"/>
-    <actor costume="floor1" x="632" y="353" direction="0.0" heading="0.0" startEvent="default" zOrder="7"/>
-    <actor costume="floor1" x="204" y="470" direction="0.0" heading="0.0" startEvent="default" zOrder="8"/>
-    <actor costume="floor1" x="351" y="469" direction="0.0" heading="0.0" startEvent="default" zOrder="9"/>
-    <actor costume="floor1" x="497" y="471" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
-    <actor costume="floor1" x="631" y="472" direction="0.0" heading="0.0" startEvent="default" zOrder="11"/>
   </layer>
   <layer name="middle">
     <view/>
-    <text text="Use the arrow keys to move." font="Vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="418" y="510" direction="0.0" heading="0.0" startEvent="default" zOrder="0"/>
-    <actor costume="wall2" x="349" y="547" direction="0.0" heading="0.0" startEvent="default" zOrder="3"/>
-    <actor costume="wall2" x="201" y="547" direction="0.0" heading="0.0" startEvent="default" zOrder="4"/>
-    <actor costume="wall2" x="496" y="547" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall2" x="340" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="7"/>
-    <actor costume="wall1" x="710" y="350" direction="0.0" heading="0.0" startEvent="default" zOrder="9"/>
-    <actor costume="wall1" x="710" y="465" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
-    <actor costume="wall1" x="126" y="473" direction="0.0" heading="0.0" startEvent="default" zOrder="11"/>
-    <actor costume="wall1" x="126" y="356" direction="0.0" heading="0.0" startEvent="default" zOrder="12"/>
-    <actor costume="guard1" x="181" y="313" direction="0.0" heading="0.0" startEvent="default" zOrder="14">
+    <stageConstraint/>
+    <text text="Use the mouse to move about" font="Vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="456" y="720" direction="0.0" heading="0.0" startEvent="default" zOrder="0"/>
+    <text text="Click the left button (or Space) to open doors" font="Vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="432" y="624" direction="0.0" heading="0.0" startEvent="default" zOrder="0"/>
+    <actor costume="player" x="548" y="719" direction="0.0" heading="0.0" startEvent="default" zOrder="1">
+      <property name="speed" value="3.0"/>
+    </actor>
+    <actor costume="guard1" x="192" y="216" direction="0.0" heading="0.0" startEvent="default" zOrder="14">
+      <property name="debug" value="false"/>
       <property name="forwardSpeed" value="4.0"/>
       <property name="routeString" value="450 R180 450 L180"/>
       <property name="turnSpeed" value="4.0"/>
     </actor>
-    <actor costume="guard1" x="646" y="209" direction="-179.10226823279518" heading="-179.56488014573995" startEvent="default" zOrder="18">
+    <actor costume="guard1" x="648" y="408" direction="-179.10226823279518" heading="-179.56488014573995" startEvent="default" zOrder="18">
+      <property name="debug" value="false"/>
       <property name="forwardSpeed" value="3.0"/>
       <property name="routeString" value="450 R180 450 L180"/>
       <property name="turnSpeed" value="5.0"/>
     </actor>
-    <actor costume="wall1" x="126" y="202" direction="0.0" heading="0.0" startEvent="default" zOrder="19"/>
-    <actor costume="wall2" x="199" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="21"/>
     <text text="Collect all of the money" font="Vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="421" y="441" direction="0.0" heading="0.0" startEvent="default" zOrder="23"/>
-    <text text="Then head for the exit." font="Vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="420" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="24"/>
+    <text text="Then head for the getaway car." font="Vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="432" y="216" direction="0.0" heading="0.0" startEvent="default" zOrder="24"/>
     <text text="Keep to the shadows; avoid the guards' lights" font="Vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="418" y="362" direction="0.0" heading="0.0" startEvent="default" zOrder="25"/>
-    <actor costume="wall2" x="484" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="27"/>
-    <actor costume="wall2" x="636" y="547" direction="0.0" heading="0.0" startEvent="default" zOrder="28"/>
-    <actor costume="wall1" x="710" y="199" direction="0.0" heading="0.0" startEvent="default" zOrder="29"/>
-    <actor costume="wall2" x="636" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="30"/>
-    <actor costume="wall4" x="215" y="276" direction="0.0" heading="0.0" startEvent="default" zOrder="32"/>
-    <actor costume="wall4" x="420" y="275" direction="0.0" heading="0.0" startEvent="default" zOrder="33"/>
-    <actor costume="wall4" x="624" y="274" direction="0.0" heading="0.0" startEvent="default" zOrder="34"/>
+    <actor costume="doorFrame-1" x="408" y="576" direction="-90.0" heading="-90.0" startEvent="default" zOrder="30">
+      <property name="open" value="false"/>
+      <property name="pickPush" value="true"/>
+      <property name="pickPull" value="true"/>
+      <property name="locked" value="false"/>
+    </actor>
+    <actor costume="doorFrame-1" x="480" y="144" direction="-90.0" heading="-90.0" startEvent="default" zOrder="30">
+      <property name="open" value="false"/>
+      <property name="pickPush" value="true"/>
+      <property name="pickPull" value="true"/>
+      <property name="locked" value="false"/>
+    </actor>
+    <actor costume="getaway-1" x="672" y="72" direction="0.0" heading="0.0" startEvent="default" zOrder="60">
+      <property name="nextLevel" value="level01"/>
+    </actor>
+    <actor costume="wall-bh2" x="408" y="288" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="junction-a4" x="120" y="288" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="wall-bh2" x="192" y="288" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="wall-bh2" x="624" y="288" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="junction-a2" x="768" y="288" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="wall-av3" x="120" y="432" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="wall-av3" x="768" y="432" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="corner-a1" x="120" y="576" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="wall-ah3" x="264" y="576" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="wall-ah3" x="624" y="576" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="corner-a2" x="768" y="576" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="wall-ah1" x="480" y="576" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="wall-av1" x="120" y="216" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="wall-av1" x="768" y="216" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="corner-a3" x="768" y="144" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="corner-a4" x="120" y="144" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="wall-ah3" x="264" y="144" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="wall-ah3" x="624" y="144" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="wall-ah1" x="408" y="144" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
   </layer>
   <layer name="top">
     <view/>
-    <actor costume="player" x="424" y="476" direction="0.0" heading="0.0" startEvent="default" zOrder="1">
-      <property name="speed" value="3.0"/>
-    </actor>
     <actor costume="money1" x="337" y="401" direction="0.0" heading="0.0" startEvent="default" zOrder="15"/>
     <actor costume="money1" x="518" y="402" direction="0.0" heading="0.0" startEvent="default" zOrder="16"/>
     <actor costume="money1" x="429" y="402" direction="0.0" heading="0.0" startEvent="default" zOrder="17"/>
-    <actor costume="exit" x="422" y="125" direction="0.0" heading="0.0" startEvent="default" zOrder="31">
-      <property name="nextLevel" value="level01"/>
-    </actor>
-    <actor costume="quit" x="741" y="34" direction="0.0" heading="0.0" startEvent="default" zOrder="34"/>
   </layer>
 </scene>

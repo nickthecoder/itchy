@@ -13,7 +13,7 @@
       <sprite name="door-1" direction="0.0" offsetX="10" offsetY="0" x="330" y="592" width="12" height="64"/>
       <sprite name="doorFrame-1" direction="0.0" offsetX="8" offsetY="36" x="346" y="588" width="81" height="72"/>
       <sprite name="doorMat-1" direction="0.0" offsetX="-12" offsetY="29" x="431" y="588" width="58" height="64"/>
-      <sprite name="guard-1a" direction="0.0" offsetX="24" offsetY="25" x="670" y="893" width="36" height="51"/>
+      <sprite name="guard-1a" direction="0.0" offsetX="14" offsetY="21" x="674" y="898" width="25" height="40"/>
       <sprite name="junction-a1" direction="0.0" offsetX="36" offsetY="12" x="504" y="852" width="72" height="48"/>
       <sprite name="junction-a2" direction="0.0" offsetX="36" offsetY="36" x="560" y="892" width="48" height="72"/>
       <sprite name="junction-a3" direction="0.0" offsetX="36" offsetY="36" x="504" y="956" width="72" height="48"/>
@@ -24,7 +24,7 @@
       <sprite name="junction-b4" direction="0.0" offsetX="12" offsetY="36" x="312" y="892" width="48" height="72"/>
       <sprite name="light-1" direction="0.0" offsetX="0" offsetY="24" x="612" y="813" width="127" height="48"/>
       <sprite name="light-2" direction="0.0" offsetX="0" offsetY="31" x="579" y="978" width="163" height="62"/>
-      <sprite name="player-1a" direction="0.0" offsetX="5" offsetY="25" x="623" y="894" width="34" height="52"/>
+      <sprite name="player-1a" direction="0.0" offsetX="5" offsetY="20" x="627" y="900" width="26" height="40"/>
       <sprite name="torch-1" direction="0.0" offsetX="13" offsetY="5" x="686" y="948" width="20" height="10"/>
       <sprite name="wall-ah1" direction="0.0" offsetX="36" offsetY="12" x="72" y="612" width="72" height="24"/>
       <sprite name="wall-ah2" direction="0.0" offsetX="36" offsetY="12" x="152" y="612" width="144" height="24"/>
@@ -47,21 +47,9 @@
     </spriteSheet>
   </spriteSheets>
   <poses>
-    <pose name="exit" filename="images/exit.png"/>
-    <pose name="floor1" filename="images/floor1.png"/>
-    <pose name="guard1" filename="images/guard1.png" offsetX="11"/>
+    <pose name="getaway-1" filename="images/getaway-1.png" offsetY="32"/>
     <pose name="money1" filename="images/money1.png"/>
-    <pose name="player" filename="images/player.png"/>
     <pose name="quit" filename="images/quit.png"/>
-    <pose name="torch1" filename="images/torch1.png" offsetX="0" offsetY="19"/>
-    <pose name="wall1" filename="images/wall1.png"/>
-    <pose name="wall1s" filename="images/wall1s.png"/>
-    <pose name="wall2" filename="images/wall2.png"/>
-    <pose name="wall2s" filename="images/wall2s.png"/>
-    <pose name="wall3" filename="images/wall3.png"/>
-    <pose name="wall3s" filename="images/wall3s.png"/>
-    <pose name="wall4" filename="images/wall4.png"/>
-    <pose name="wall4s" filename="images/wall4s.png"/>
   </poses>
   <ninePatches/>
   <fonts>
@@ -127,11 +115,8 @@
     <costume name="doorMat-1" defaultZOrder="30" order="0" showInDesigner="true" role="doorMat.py">
       <pose name="default" pose="doorMat-1"/>
     </costume>
-    <costume name="exit" defaultZOrder="100" order="90" showInDesigner="true" role="exit.py">
-      <pose name="default" pose="exit"/>
-    </costume>
-    <costume name="floor1" defaultZOrder="0" order="30" showInDesigner="true">
-      <pose name="default" pose="floor1"/>
+    <costume name="getaway-1" defaultZOrder="60" order="90" showInDesigner="true" role="exit.py">
+      <pose name="default" pose="getaway-1"/>
     </costume>
     <costume name="guard1" defaultZOrder="80" order="5" showInDesigner="true" role="guard.py">
       <pose name="default" pose="guard-1a"/>
@@ -218,30 +203,6 @@
     <costume name="wall-bv3" defaultZOrder="90" order="11" showInDesigner="true" role="solid.py">
       <pose name="default" pose="wall-bv3"/>
     </costume>
-    <costume name="wall1" defaultZOrder="90" order="10" showInDesigner="true" role="solid.py">
-      <pose name="default" pose="wall1"/>
-    </costume>
-    <costume name="wall1s" defaultZOrder="90" order="10" showInDesigner="true" role="solid.py">
-      <pose name="default" pose="wall1s"/>
-    </costume>
-    <costume name="wall2" defaultZOrder="90" order="10" showInDesigner="true" role="solid.py">
-      <pose name="default" pose="wall2"/>
-    </costume>
-    <costume name="wall2s" defaultZOrder="90" order="10" showInDesigner="true" role="solid.py">
-      <pose name="default" pose="wall2s"/>
-    </costume>
-    <costume name="wall3" defaultZOrder="80" order="11" showInDesigner="true" role="solid.py">
-      <pose name="default" pose="wall3"/>
-    </costume>
-    <costume name="wall3s" defaultZOrder="80" order="11" showInDesigner="true" role="solid.py">
-      <pose name="default" pose="wall3s"/>
-    </costume>
-    <costume name="wall4" defaultZOrder="80" order="11" showInDesigner="true" role="solid.py">
-      <pose name="default" pose="wall4"/>
-    </costume>
-    <costume name="wall4s" defaultZOrder="80" order="11" showInDesigner="true" role="solid.py">
-      <pose name="default" pose="wall4s"/>
-    </costume>
     <costume name="window-ah1" defaultZOrder="30" order="20" showInDesigner="true" role="furniture.py">
       <pose name="default" pose="window-ah1"/>
     </costume>
@@ -262,6 +223,7 @@
     </costume>
   </costumes>
   <scenes>
+    <scene name="glass"/>
     <scene name="house-01"/>
     <scene name="level01"/>
     <scene name="level02"/>
@@ -290,6 +252,11 @@
         <stageConstraint boxWidth="24" boxHeight="24"/>
       </layer>
       <layer name="top" zOrder="100" x="0" y="0" width="800" height="600" viewClassName="uk.co.nickthecoder.itchy.StageView" stageClassName="uk.co.nickthecoder.itchy.ZOrderStage" stageConstraintClassName="uk.co.nickthecoder.itchy.NullStageConstraint">
+        <view enableMouse="true"/>
+      </layer>
+    </layout>
+    <layout name="glass" defaultLayer="glass">
+      <layer name="glass" zOrder="100" x="0" y="0" width="800" height="600" viewClassName="uk.co.nickthecoder.itchy.StageView" stageClassName="uk.co.nickthecoder.itchy.ZOrderStage" stageConstraintClassName="uk.co.nickthecoder.itchy.NullStageConstraint">
         <view enableMouse="true"/>
       </layer>
     </layout>

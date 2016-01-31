@@ -1,6 +1,10 @@
 Current Tasks
 =============
 
+Get rid of SceneActor.
+
+Implement change Layout in scene designer.
+
 Renaming a Layer/Layout will need to alter all scenes???
 
 All resources.renameXXX needs to update the renamed collection, so that renameSubjectsInScenes will work. 
@@ -10,7 +14,7 @@ All resources.renameXXX needs to update the renamed collection, so that renameSu
 BUGS
 ====
 
-Mouse WheelLeft/WheelRight events.
+Reload resources - not quite working (only the thumbnails of the list screens?)
 
 Appearance.fixPose doesn't do the right thing with direction.
 	Setting dir to 0 works, but ideally both appearance and the new pose should have the old appearance's direction,
@@ -23,6 +27,8 @@ Can delete Poses which are used in a Framed animation
 New Features
 ============
 
+Stickflick?
+    
 
 Undo/Redo for Z Order Reset
     Create a "Group" undo/redo, and add each zorder change to that group.
@@ -44,7 +50,6 @@ Cover-of-Darkness Menu : A street - you are driving the van. Park outside a hous
     Streets with lights on are "locked"
 
 Bean Animation. Change the value of a Role's property.
-    Use it to change the size of a torch's light, or its direction.
 
 Debris-rocks - pieces have offsets, so they explode naturally.
     Can I use Fragments class as this already does what I want?

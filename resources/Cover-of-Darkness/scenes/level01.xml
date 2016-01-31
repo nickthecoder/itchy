@@ -15,11 +15,8 @@
       <property name="routeString" value="100 R180 100 R180"/>
       <property name="turnSpeed" value="3.0"/>
     </actor>
-    <actor costume="player" x="689" y="175" direction="0.0" heading="0.0" startEvent="default" zOrder="19">
+    <actor costume="player" x="672" y="384" direction="0.0" heading="0.0" startEvent="default" zOrder="19">
       <property name="speed" value="4.0"/>
-    </actor>
-    <actor costume="exit" x="720" y="456" direction="90.0" heading="90.0" startEvent="default" zOrder="26">
-      <property name="nextLevel" value="level02"/>
     </actor>
     <actor costume="window-ah2" x="312" y="48" direction="0.0" heading="0.0" startEvent="default" zOrder="30"/>
     <actor costume="doorFrame-1" x="600" y="192" direction="0.0" heading="0.0" startEvent="default" zOrder="30">
@@ -29,6 +26,9 @@
       <property name="locked" value="false"/>
     </actor>
     <actor costume="window-ah1" x="312" y="552" direction="0.0" heading="0.0" startEvent="default" zOrder="30"/>
+    <actor costume="getaway-1" id="level02" x="696" y="456" direction="0.0" heading="0.0" startEvent="default" zOrder="60">
+      <property name="nextLevel" value=""/>
+    </actor>
     <actor costume="corner-a1" x="24" y="552" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
     <actor costume="corner-a2" x="528" y="552" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
     <actor costume="wall-ah3" x="168" y="552" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>

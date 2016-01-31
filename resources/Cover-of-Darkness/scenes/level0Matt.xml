@@ -5,162 +5,112 @@
   </layer>
   <layer name="bottom">
     <view/>
-    <actor costume="floor1" x="92" y="88" direction="0.0" heading="0.0" startEvent="default" zOrder="-7"/>
-    <actor costume="floor1" x="92" y="355" direction="0.0" heading="0.0" startEvent="default" zOrder="-6"/>
-    <actor costume="floor1" x="88" y="500" direction="0.0" heading="0.0" startEvent="default" zOrder="-5"/>
-    <actor costume="wall1" x="542" y="216" direction="0.0" heading="0.0" startEvent="default" zOrder="-3"/>
-    <actor costume="wall1" x="542" y="216" direction="0.0" heading="0.0" startEvent="default" zOrder="-3"/>
-    <actor costume="wall1" x="543" y="92" direction="0.0" heading="0.0" startEvent="default" zOrder="-2"/>
-    <actor costume="wall1" x="543" y="92" direction="0.0" heading="0.0" startEvent="default" zOrder="-2"/>
-    <actor costume="wall2" x="247" y="432" direction="0.0" heading="0.0" startEvent="default" zOrder="14"/>
-    <actor costume="wall2" x="247" y="432" direction="0.0" heading="0.0" startEvent="default" zOrder="14"/>
-    <actor costume="wall1" x="167" y="507" direction="0.0" heading="0.0" startEvent="default" zOrder="16"/>
-    <actor costume="wall2" x="87" y="15" direction="0.0" heading="0.0" startEvent="default" zOrder="16"/>
-    <actor costume="wall2" x="671" y="432" direction="0.0" heading="0.0" startEvent="default" zOrder="17"/>
-    <actor costume="wall2" x="671" y="432" direction="0.0" heading="0.0" startEvent="default" zOrder="17"/>
-    <actor costume="wall1" x="752" y="229" direction="0.0" heading="0.0" startEvent="default" zOrder="23"/>
-    <actor costume="wall1" x="752" y="229" direction="0.0" heading="0.0" startEvent="default" zOrder="23"/>
-    <actor costume="wall1" x="752" y="89" direction="0.0" heading="0.0" startEvent="default" zOrder="24"/>
-    <actor costume="wall1" x="752" y="89" direction="0.0" heading="0.0" startEvent="default" zOrder="24"/>
-    <actor costume="wall1" x="14" y="506" direction="0.0" heading="0.0" startEvent="default" zOrder="25"/>
-    <actor costume="wall1" x="14" y="506" direction="0.0" heading="0.0" startEvent="default" zOrder="25"/>
-    <actor costume="wall2" x="676" y="15" direction="0.0" heading="0.0" startEvent="default" zOrder="26"/>
-    <actor costume="wall2" x="676" y="15" direction="0.0" heading="0.0" startEvent="default" zOrder="26"/>
-    <actor costume="wall2" x="89" y="579" direction="0.0" heading="0.0" startEvent="default" zOrder="27"/>
-    <actor costume="wall2" x="89" y="579" direction="0.0" heading="0.0" startEvent="default" zOrder="27"/>
-    <actor costume="wall2" x="538" y="15" direction="0.0" heading="0.0" startEvent="default" zOrder="27"/>
-    <actor costume="wall2" x="538" y="15" direction="0.0" heading="0.0" startEvent="default" zOrder="27"/>
-    <actor costume="wall2" x="538" y="15" direction="0.0" heading="0.0" startEvent="default" zOrder="27"/>
-    <actor costume="wall2" x="387" y="432" direction="0.0" heading="0.0" startEvent="default" zOrder="28"/>
-    <actor costume="wall2" x="387" y="432" direction="0.0" heading="0.0" startEvent="default" zOrder="28"/>
-    <actor costume="wall1" x="752" y="359" direction="0.0" heading="0.0" startEvent="default" zOrder="29"/>
-    <actor costume="wall1" x="752" y="359" direction="0.0" heading="0.0" startEvent="default" zOrder="29"/>
-    <actor costume="wall1" x="752" y="359" direction="0.0" heading="0.0" startEvent="default" zOrder="29"/>
-    <actor costume="wall2" x="522" y="432" direction="0.0" heading="0.0" startEvent="default" zOrder="30"/>
-    <actor costume="wall2" x="522" y="432" direction="0.0" heading="0.0" startEvent="default" zOrder="30"/>
-    <actor costume="wall2" x="522" y="432" direction="0.0" heading="0.0" startEvent="default" zOrder="30"/>
-    <actor costume="wall1" x="14" y="216" direction="0.0" heading="0.0" startEvent="default" zOrder="44"/>
-    <actor costume="wall1" x="14" y="216" direction="0.0" heading="0.0" startEvent="default" zOrder="44"/>
-    <actor costume="wall1" x="14" y="216" direction="0.0" heading="0.0" startEvent="default" zOrder="44"/>
-    <actor costume="wall1" x="14" y="216" direction="0.0" heading="0.0" startEvent="default" zOrder="44"/>
-    <actor costume="wall1" x="14" y="216" direction="0.0" heading="0.0" startEvent="default" zOrder="44"/>
-    <actor costume="wall1" x="14" y="216" direction="0.0" heading="0.0" startEvent="default" zOrder="44"/>
-    <actor costume="wall1" x="14" y="216" direction="0.0" heading="0.0" startEvent="default" zOrder="44"/>
-    <actor costume="wall1" x="14" y="216" direction="0.0" heading="0.0" startEvent="default" zOrder="44"/>
-    <actor costume="wall1" x="14" y="216" direction="0.0" heading="0.0" startEvent="default" zOrder="44"/>
-    <actor costume="exit" x="88" y="577" direction="0.0" heading="0.0" startEvent="default" zOrder="47">
-      <property name="nextLevel" value=""/>
-    </actor>
-    <actor costume="exit" x="88" y="577" direction="0.0" heading="0.0" startEvent="default" zOrder="47">
-      <property name="nextLevel" value=""/>
-    </actor>
-    <actor costume="floor1" x="93" y="204" direction="0.0" heading="0.0" startEvent="default" zOrder="48"/>
-    <actor costume="wall1" x="14" y="351" direction="0.0" heading="0.0" startEvent="default" zOrder="49"/>
-    <actor costume="wall1" x="14" y="351" direction="0.0" heading="0.0" startEvent="default" zOrder="49"/>
-    <actor costume="wall1" x="14" y="351" direction="0.0" heading="0.0" startEvent="default" zOrder="49"/>
-    <actor costume="wall1" x="14" y="351" direction="0.0" heading="0.0" startEvent="default" zOrder="49"/>
-    <actor costume="floor1" x="243" y="94" direction="0.0" heading="0.0" startEvent="default" zOrder="54"/>
-    <actor costume="floor1" x="245" y="244" direction="0.0" heading="0.0" startEvent="default" zOrder="55"/>
-    <actor costume="floor1" x="239" y="356" direction="0.0" heading="0.0" startEvent="default" zOrder="56"/>
-    <actor costume="floor1" x="390" y="356" direction="0.0" heading="0.0" startEvent="default" zOrder="57"/>
-    <actor costume="floor1" x="541" y="356" direction="0.0" heading="0.0" startEvent="default" zOrder="58"/>
-    <actor costume="floor1" x="674" y="355" direction="0.0" heading="0.0" startEvent="default" zOrder="59"/>
-    <actor costume="floor1" x="394" y="206" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
-    <actor costume="floor1" x="393" y="95" direction="0.0" heading="0.0" startEvent="default" zOrder="61"/>
-    <actor costume="floor1" x="543" y="97" direction="0.0" heading="0.0" startEvent="default" zOrder="62"/>
-    <actor costume="floor1" x="539" y="218" direction="0.0" heading="0.0" startEvent="default" zOrder="63"/>
-    <actor costume="floor1" x="674" y="211" direction="0.0" heading="0.0" startEvent="default" zOrder="64"/>
-    <actor costume="floor1" x="672" y="96" direction="0.0" heading="0.0" startEvent="default" zOrder="65"/>
   </layer>
   <layer name="middle">
     <view/>
+    <stageConstraint/>
     <actor costume="guard1" x="135" y="399" direction="0.0" heading="0.0" startEvent="default" zOrder="11">
+      <property name="debug" value="false"/>
       <property name="forwardSpeed" value="2.5"/>
-      <property name="routeString" value="500 C114 R180"/>
+      <property name="routeString" value="500 C114 R180 500 C114 R180"/>
       <property name="turnSpeed" value="2.0"/>
     </actor>
-    <actor costume="guard1" x="426" y="257" direction="0.0" heading="0.0" startEvent="default" zOrder="13">
+    <actor costume="guard1" x="432" y="288" direction="0.0" heading="0.0" startEvent="default" zOrder="13">
+      <property name="debug" value="false"/>
       <property name="forwardSpeed" value="1.0"/>
       <property name="routeString" value="R90 50 L180 50 R90"/>
       <property name="turnSpeed" value="1.0"/>
     </actor>
     <actor costume="guard1" x="426" y="49" direction="0.0" heading="0.0" startEvent="default" zOrder="14">
+      <property name="debug" value="false"/>
       <property name="forwardSpeed" value="1.0"/>
       <property name="routeString" value="L90 50 R180 50 L90"/>
       <property name="turnSpeed" value="1.0"/>
     </actor>
     <actor costume="guard1" x="280" y="211" direction="-90.0" heading="-90.0" startEvent="default" zOrder="15">
+      <property name="debug" value="false"/>
       <property name="forwardSpeed" value="1.5"/>
       <property name="routeString" value="100 C100 L180 40 R180 40 C100 R180 100 R180"/>
       <property name="turnSpeed" value="4.0"/>
     </actor>
-    <actor costume="guard1" x="135" y="227" direction="-90.0" heading="-88.53119928561418" startEvent="default" zOrder="16">
+    <actor costume="guard1" x="96" y="216" direction="-90.0" heading="-88.53119928561418" startEvent="default" zOrder="16">
+      <property name="debug" value="false"/>
       <property name="forwardSpeed" value="2.0"/>
       <property name="routeString" value="R90 L90"/>
       <property name="turnSpeed" value="2.0"/>
     </actor>
     <actor costume="guard1" x="628" y="60" direction="180.0" heading="178.53119928561418" startEvent="default" zOrder="18">
+      <property name="debug" value="false"/>
       <property name="forwardSpeed" value="1.0"/>
       <property name="routeString" value="C80 R90 80 R180 80 C80 L90 L180"/>
       <property name="turnSpeed" value="4.0"/>
     </actor>
-    <actor costume="player" x="88" y="528" direction="0.0" heading="0.0" startEvent="default" zOrder="48">
+    <actor costume="doorFrame-1" x="168" y="504" direction="180.0" heading="180.0" startEvent="default" zOrder="30">
+      <property name="open" value="false"/>
+      <property name="pickPush" value="true"/>
+      <property name="pickPull" value="true"/>
+      <property name="locked" value="false"/>
+    </actor>
+    <actor costume="player" x="240" y="528" direction="0.0" heading="0.0" startEvent="default" zOrder="48">
       <property name="speed" value="1.5"/>
     </actor>
-    <actor costume="guard1" x="671" y="330" direction="-180.0" heading="-180.0" startEvent="default" zOrder="49">
+    <actor costume="guard1" x="696" y="288" direction="-180.0" heading="-180.0" startEvent="default" zOrder="49">
+      <property name="debug" value="false"/>
       <property name="forwardSpeed" value="2.5"/>
-      <property name="routeString" value="500 C114 R180"/>
+      <property name="routeString" value="500 C114 R180 500 C114 R180"/>
       <property name="turnSpeed" value="2.0"/>
     </actor>
-    <actor costume="guard1" x="44" y="49" direction="90.0" heading="90.12091343418723" startEvent="default" zOrder="50">
+    <actor costume="guard1" x="72" y="48" direction="90.0" heading="90.12091343418723" startEvent="default" zOrder="50">
+      <property name="debug" value="false"/>
       <property name="forwardSpeed" value="2.0"/>
       <property name="routeString" value="R90 L90"/>
       <property name="turnSpeed" value="2.0"/>
     </actor>
+    <actor costume="getaway-1" x="360" y="528" direction="0.0" heading="0.0" startEvent="default" zOrder="60">
+      <property name="nextLevel" value=""/>
+    </actor>
+    <actor costume="corner-a2" x="168" y="576" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="wall-ah1" x="96" y="576" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="corner-a1" x="24" y="576" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="corner-a4" x="168" y="432" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="wall-ah3" x="312" y="432" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="wall-ah3" x="600" y="432" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="wall-ah1" x="456" y="432" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="corner-a2" x="744" y="432" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="wall-bh3" x="264" y="336" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="wall-bh3" x="552" y="336" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="wall-bh1" x="408" y="336" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="corner-b2" x="528" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="wall-bh1" x="456" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="wall-bv2" x="528" y="168" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="junction-a3" x="528" y="24" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="wall-ah2" x="600" y="24" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="corner-a3" x="744" y="24" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="wall-av3" x="744" y="168" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="wall-av2" x="744" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="wall-ah3" x="384" y="24" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="junction-a3" x="240" y="24" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="wall-bv1" x="240" y="96" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="wall-bv1" x="336" y="168" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="corner-b2" x="336" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="corner-b1" x="144" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="wall-bh2" x="216" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="wall-bv1" x="144" y="168" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="corner-a4" x="24" y="24" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="wall-ah2" x="96" y="24" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="wall-av3" x="24" y="168" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="wall-av3" x="24" y="432" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="wall-av1" x="24" y="288" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
   </layer>
   <layer name="top">
     <view/>
-    <actor costume="wall2" x="243" y="432" direction="0.0" heading="0.0" startEvent="default" zOrder="14"/>
-    <actor costume="wall1" x="167" y="507" direction="0.0" heading="0.0" startEvent="default" zOrder="16"/>
-    <actor costume="wall2" x="87" y="15" direction="0.0" heading="0.0" startEvent="default" zOrder="16"/>
-    <actor costume="wall2" x="671" y="432" direction="0.0" heading="0.0" startEvent="default" zOrder="17"/>
-    <actor costume="wall1" x="752" y="229" direction="0.0" heading="0.0" startEvent="default" zOrder="23"/>
-    <actor costume="wall1" x="752" y="89" direction="0.0" heading="0.0" startEvent="default" zOrder="24"/>
-    <actor costume="wall1" x="14" y="506" direction="0.0" heading="0.0" startEvent="default" zOrder="25"/>
-    <actor costume="wall2" x="388" y="15" direction="0.0" heading="0.0" startEvent="default" zOrder="25"/>
-    <actor costume="wall2" x="241" y="15" direction="0.0" heading="0.0" startEvent="default" zOrder="26"/>
-    <actor costume="wall2" x="676" y="15" direction="0.0" heading="0.0" startEvent="default" zOrder="26"/>
-    <actor costume="wall2" x="87" y="580" direction="0.0" heading="0.0" startEvent="default" zOrder="27"/>
-    <actor costume="wall2" x="538" y="15" direction="0.0" heading="0.0" startEvent="default" zOrder="27"/>
-    <actor costume="wall2" x="387" y="432" direction="0.0" heading="0.0" startEvent="default" zOrder="28"/>
-    <actor costume="wall1" x="752" y="359" direction="0.0" heading="0.0" startEvent="default" zOrder="29"/>
-    <actor costume="wall2" x="522" y="432" direction="0.0" heading="0.0" startEvent="default" zOrder="30"/>
-    <actor costume="wall1" x="14" y="92" direction="0.0" heading="0.0" startEvent="default" zOrder="32"/>
-    <actor costume="money1" x="510" y="261" direction="0.0" heading="0.0" startEvent="default" zOrder="39"/>
-    <actor costume="money1" x="510" y="218" direction="0.0" heading="0.0" startEvent="default" zOrder="40"/>
-    <actor costume="money1" x="510" y="175" direction="0.0" heading="0.0" startEvent="default" zOrder="41"/>
-    <actor costume="money1" x="511" y="133" direction="0.0" heading="0.0" startEvent="default" zOrder="42"/>
-    <actor costume="money1" x="511" y="88" direction="0.0" heading="0.0" startEvent="default" zOrder="43"/>
-    <actor costume="wall1" x="14" y="216" direction="0.0" heading="0.0" startEvent="default" zOrder="44"/>
-    <actor costume="money1" x="511" y="47" direction="0.0" heading="0.0" startEvent="default" zOrder="44"/>
+    <actor costume="money1" x="524" y="287" direction="0.0" heading="0.0" startEvent="default" zOrder="39"/>
+    <actor costume="money1" x="486" y="196" direction="0.0" heading="0.0" startEvent="default" zOrder="40"/>
+    <actor costume="money1" x="484" y="129" direction="0.0" heading="0.0" startEvent="default" zOrder="42"/>
+    <actor costume="money1" x="486" y="72" direction="0.0" heading="0.0" startEvent="default" zOrder="43"/>
     <actor costume="money1" x="720" y="48" direction="0.0" heading="0.0" startEvent="default" zOrder="45"/>
-    <actor costume="money1" x="243" y="210" direction="0.0" heading="0.0" startEvent="default" zOrder="46"/>
-    <actor costume="exit" x="88" y="577" direction="0.0" heading="0.0" startEvent="default" zOrder="47">
-      <property name="nextLevel" value=""/>
-    </actor>
+    <actor costume="money1" x="239" y="182" direction="0.0" heading="0.0" startEvent="default" zOrder="46"/>
     <actor costume="money1" x="717" y="397" direction="0.0" heading="0.0" startEvent="default" zOrder="47"/>
-    <actor costume="wall1" x="14" y="351" direction="0.0" heading="0.0" startEvent="default" zOrder="49"/>
-    <actor costume="wall4" x="244" y="246" direction="0.0" heading="0.0" startEvent="default" zOrder="50"/>
-    <actor costume="wall4" x="242" y="362" direction="0.0" heading="0.0" startEvent="default" zOrder="50"/>
-    <actor costume="wall3" x="317" y="176" direction="0.0" heading="0.0" startEvent="default" zOrder="51"/>
-    <actor costume="wall4" x="411" y="363" direction="0.0" heading="0.0" startEvent="default" zOrder="51"/>
-    <actor costume="wall3" x="173" y="176" direction="0.0" heading="0.0" startEvent="default" zOrder="52"/>
-    <actor costume="wall4" x="574" y="364" direction="0.0" heading="0.0" startEvent="default" zOrder="52"/>
-    <actor costume="wall4" x="672" y="173" direction="0.0" heading="0.0" startEvent="default" zOrder="53"/>
-    <actor costume="wall3" x="242" y="106" direction="0.0" heading="0.0" startEvent="default" zOrder="53"/>
-    <actor costume="wall3" x="544" y="224" direction="0.0" heading="0.0" startEvent="default" zOrder="54"/>
-    <actor costume="wall3" x="543" y="102" direction="0.0" heading="0.0" startEvent="default" zOrder="55"/>
-    <actor costume="wall4" x="472" y="294" direction="0.0" heading="0.0" startEvent="default" zOrder="56"/>
     <text text="0" font="Vera" size="40" color="#ffffff" xAlignment="1.0" yAlignment="0.0" role="uk.co.nickthecoder.itchy.role.NumberValue" x="787" y="589" direction="0.0" heading="0.0" startEvent="default" zOrder="57" colorize="#ff75e4ff">
       <property name="nullValue" value=""/>
       <property name="errorValue" value=""/>

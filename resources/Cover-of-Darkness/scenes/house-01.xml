@@ -15,29 +15,41 @@
     <actor costume="doorFrame-1" x="120" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="30">
       <property name="open" value="false"/>
       <property name="pickPush" value="false"/>
-      <property name="pickPull" value="true"/>
-      <property name="locked" value="true"/>
+      <property name="pickPull" value="false"/>
+      <property name="locked" value="false"/>
     </actor>
     <actor costume="doorFrame-1" x="336" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="30">
       <property name="open" value="false"/>
-      <property name="pickPush" value="true"/>
+      <property name="pickPush" value="false"/>
       <property name="pickPull" value="false"/>
-      <property name="locked" value="true"/>
+      <property name="locked" value="false"/>
     </actor>
     <actor costume="doorFrame-1" x="192" y="480" direction="-90.0" heading="-90.0" startEvent="default" zOrder="30">
       <property name="open" value="false"/>
-      <property name="pickPush" value="true"/>
+      <property name="pickPush" value="false"/>
       <property name="pickPull" value="true"/>
-      <property name="locked" value="false"/>
+      <property name="locked" value="true"/>
     </actor>
-    <actor costume="player" x="240" y="192" direction="0.0" heading="0.0" startEvent="default" zOrder="70" scale="0.75">
+    <actor costume="money1" x="240" y="168" direction="0.0" heading="0.0" startEvent="default" zOrder="40"/>
+    <actor costume="money1" x="648" y="168" direction="0.0" heading="0.0" startEvent="default" zOrder="40"/>
+    <actor costume="money1" x="240" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="40"/>
+    <actor costume="getaway-1" x="72" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="60">
+      <property name="nextLevel" value="house-02"/>
+    </actor>
+    <actor costume="player" x="48" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="70">
       <property name="speed" value="4.0"/>
     </actor>
-    <actor costume="guard1" x="216" y="408" direction="0.0" heading="0.0" startEvent="default" zOrder="80" scale="0.75">
+    <actor costume="guard1" x="216" y="408" direction="0.0" heading="0.0" startEvent="default" zOrder="80">
       <property name="debug" value="false"/>
       <property name="forwardSpeed" value="4.0"/>
       <property name="routeString" value="450 C80 R90 160 C100 R90 80 C20 L90 T30 R180 223.5 C100 L90 281 L180"/>
       <property name="turnSpeed" value="6.0"/>
+    </actor>
+    <actor costume="guard1" x="576" y="120" direction="143.35435083537968" heading="143.35435083537968" startEvent="default" zOrder="80">
+      <property name="debug" value="true"/>
+      <property name="forwardSpeed" value="2.0"/>
+      <property name="routeString" value="200 C50 R90 30 C50 R90 200 C50 R90 30 C50 R90"/>
+      <property name="turnSpeed" value="3.0"/>
     </actor>
     <actor costume="corner-a1" x="120" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
     <actor costume="corner-a2" x="480" y="552" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>

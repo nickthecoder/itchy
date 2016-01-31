@@ -37,10 +37,10 @@ class Guard(AbstractRole) :
         self.torch.owner = self
         
         if self.debug :
-            print "Starting at :", self.actor.x, self.actor.y, "heading", self.actor.heading
+            print "Starting at :", self.actor.x, self.actor.y, "direction", self.actor.direction
         self.startX = self.actor.x
         self.startY = self.actor.y
-        self.startHeading = self.actor.heading
+        self.startDirection = self.actor.direction
         self.addTag("guard")
 
 
@@ -84,10 +84,11 @@ class Guard(AbstractRole) :
         if self.routeIndex >= len( parts ) :
             self.routeIndex = 0
             if self.debug :
-                print "Ending at :", self.actor.x, self.actor.y, "heading", self.actor.heading
+                print "Ending at :", self.actor.x, self.actor.y, "direction", self.actor.direction
             self.actor.x = self.startX
             self.actor.y = self.startY
-            self.actor.heading = self.startHeading
+            self.actor.direction = self.startDirection
+            self.torch.actor.direction = self.startDirection
 
         
         part = parts[ self.routeIndex ]

@@ -15,7 +15,6 @@ class Torch(AbstractRole) :
         # Follow the guard
         self.actor.moveTo( self.owner.actor )
         self.actor.moveForwards( 9, -16 )
-
             
     # Boiler plate code - no need to change this
     def getProperties(self):
