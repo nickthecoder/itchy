@@ -44,11 +44,16 @@ public class Sprite extends PoseResource implements Comparable<Sprite>, Property
         this.pose = new ImagePose(createSurface());
     }
 
+    public void reload()
+    {
+        createSurface();
+        resetThumbnail();
+    }
+    
     private final Surface createSurface()
     {
         Surface result = new Surface( width, height, true );
         spriteSheet.getSurface().blit(result, -x, -y, Surface.BlendMode.COMPOSITE);
-        
         return result;
     }
     

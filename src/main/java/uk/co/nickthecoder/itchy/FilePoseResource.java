@@ -43,6 +43,12 @@ public class FilePoseResource extends PoseResource implements PropertySubject<Fi
     {
         return this.file;
     }
+    
+    public void reload() throws JameException
+    {
+        setFile( this.file );
+        this.resetThumbnail();
+    }
 
     public void setFile( File file ) throws JameException
     {

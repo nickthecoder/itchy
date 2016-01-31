@@ -109,6 +109,23 @@ public class Resources extends Loadable
 
         game = new Game(this);
     }
+    
+    /**
+     * Reloads all of the Poses/SpriteSheets etc
+     * @throws JameException 
+     */
+    public void reload() throws JameException
+    {
+        for (PoseResource poseResource : this.poses.values() ) {
+            if (poseResource instanceof FilePoseResource) {
+                ((FilePoseResource) poseResource).reload();
+            }
+        }
+        
+        for (SpriteSheet spriteSheet : this.spriteSheets.values() ) {
+            spriteSheet.reload();
+        }
+    }
 
     /**
      * Used by the SceneDesigner when testing a scene. It creates a duplicate set of resources, so that a new Game can

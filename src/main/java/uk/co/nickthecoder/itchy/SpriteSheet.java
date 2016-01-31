@@ -84,6 +84,16 @@ public class SpriteSheet implements NamedSubject<SpriteSheet>
         sprites.remove(sprite);
     }
 
+    public void reload() throws JameException
+    {
+        this.setFile( this.file );
+        this.resetThumbnail();
+
+        for (Sprite sprite : this.sprites) {
+            sprite.reload();
+        }
+    }
+    
     public final void setFile(File file) throws JameException
     {
         this.file = file;
@@ -111,6 +121,11 @@ public class SpriteSheet implements NamedSubject<SpriteSheet>
         return thumbnail;
     }
 
+    public void resetThumbnail()
+    {
+        this.thumbnail = null;
+    }
+    
     public String toString()
     {
         return "SpriteSheet name:'" + name + "' file:'" + file + "' size:" + sprites.size();
