@@ -1,0 +1,14 @@
+<scene showMouse="true" layout="glass" role="play.py">
+  <properties/>
+  <layer name="glass">
+    <view/>
+    <actor costume="quit" x="737" y="41" direction="0.0" heading="0.0" startEvent="default" zOrder="100"/>
+    <text text="time" font="Vera" size="22" color="#ffffff" xAlignment="1.0" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.NumberValue" x="778" y="558" direction="0.0" heading="0.0" startEvent="default" zOrder="100">
+      <property name="nullValue" value=""/>
+      <property name="errorValue" value=""/>
+      <property name="quiet" value="false"/>
+      <property name="updateInterval" value="1.0"/>
+      <property name="access" value="director.time"/>
+    </text>
+  </layer>
+</scene>
