@@ -23,12 +23,7 @@ public class ClassNameProperty<S> extends Property<S, ClassName>
     {
         super(key);
         this.baseClass = klass;
-    }
-    
-    @Override
-    public ClassName getDefaultValue()
-    {
-        return new ClassName(this.baseClass, "");
+        this.defaultValue = new ClassName(this.baseClass, "");
     }
 
     @Override

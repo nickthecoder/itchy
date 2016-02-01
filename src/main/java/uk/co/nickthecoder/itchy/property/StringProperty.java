@@ -18,12 +18,7 @@ public class StringProperty<S> extends Property<S, String>
     public StringProperty( String key )
     {
         super(key);
-    }
-
-    @Override
-    public String getDefaultValue()
-    {
-        return "";
+        this.defaultValue = "";
     }
 
     /**

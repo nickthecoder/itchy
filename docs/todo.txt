@@ -1,7 +1,22 @@
 Current Tasks
 =============
 
-Get rid of SceneActor.
+Look over all TODOs
+
+Load/Save all scenes in all games to convert them to the new format.
+
+
+
+
+
+
+
+
+Remove Actor.getActivationDelay, and put it in SceneDesignRole (which is then loaded directly into DelayedActivation) ?
+
+Escape does "cancel" on all "Edit" forms, and "close" on Lists.
+
+SubjectProperty should include the method getClassName() ?
 
 Implement change Layout in scene designer.
 
@@ -10,9 +25,15 @@ Renaming a Layer/Layout will need to alter all scenes???
 All resources.renameXXX needs to update the renamed collection, so that renameSubjectsInScenes will work. 
     And do the same with other resources. Layouts, Fonts, ... ?
 
+Why does AbstractDirector have a layout?
+    Either Game or SceneDirector.
 
 BUGS
 ====
+
+Destroy-Debris completed scene doesn't work.
+
+If no layout specified, and there is no "default" layout, then nothing works.
 
 Reload resources - not quite working (only the thumbnails of the list screens?)
 

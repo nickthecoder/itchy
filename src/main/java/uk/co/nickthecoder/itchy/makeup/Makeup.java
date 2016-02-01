@@ -6,6 +6,7 @@ package uk.co.nickthecoder.itchy.makeup;
 
 import uk.co.nickthecoder.itchy.OffsetSurface;
 import uk.co.nickthecoder.itchy.property.PropertySubject;
+import uk.co.nickthecoder.itchy.util.ClassName;
 
 public interface Makeup extends PropertySubject<Makeup>
 {
@@ -23,4 +24,7 @@ public interface Makeup extends PropertySubject<Makeup>
     public void applyGeometry( TransformationData src );
 
     public int getChangeId();
+    
+    public ClassName getClassName();
+    
 }

@@ -16,12 +16,6 @@ public class NinePatchProperty<S> extends Property<S, NinePatch>
     }
 
     @Override
-    public NinePatch getDefaultValue()
-    {
-        return null;
-    }
-
-    @Override
     public Component createComponent( final S subject, final boolean autoUpdate )
     {
         Resources resources = Itchy.getGame().resources;

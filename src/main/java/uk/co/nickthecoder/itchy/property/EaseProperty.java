@@ -17,12 +17,8 @@ public class EaseProperty<S> extends Property<S, Ease>
     public EaseProperty( String key)
     {
         super(key);
-    }
+        this.defaultValue = new LinearEase();
 
-    @Override
-    public Ease getDefaultValue()
-    {
-        return new LinearEase();
     }
 
     @Override

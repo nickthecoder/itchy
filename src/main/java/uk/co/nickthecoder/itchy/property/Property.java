@@ -86,6 +86,8 @@ public abstract class Property<S, T>
      */
     public Set<String> aliases;
 
+    public T defaultValue;
+    
     /**
      * Make a shallow copy of the property values.
      * 
@@ -153,7 +155,28 @@ public abstract class Property<S, T>
         }
     }
 
-    public abstract T getDefaultValue();
+    public T getDefaultValue()
+    {
+        return defaultValue;
+    }
+
+    public boolean isDefaultValue( S subject )
+    {
+        try {
+            
+            Object value = this.getValue( subject );
+            Object defaultValue = this.getDefaultValue();
+            
+            if (value == null) {
+                return defaultValue == null;
+            }
+            
+            return value.equals( defaultValue );
+            
+        } catch (Exception e) {
+            return false;
+        }
+    }
 
     public String getStringValue(S subject) throws Exception
     {
@@ -302,4 +325,12 @@ public abstract class Property<S, T>
         addAliases(aliases);
         return this;
     }
+    
+    public Property<S,T> defaultValue( T value )
+    {
+        this.defaultValue = value;
+        return this;
+    }
+    
+
 }

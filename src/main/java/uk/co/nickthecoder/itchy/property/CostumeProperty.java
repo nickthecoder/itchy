@@ -16,12 +16,6 @@ public class CostumeProperty<S> extends Property<S, Costume>
     }
 
     @Override
-    public Costume getDefaultValue()
-    {
-        return null;
-    }
-
-    @Override
     public Component createComponent( final S subject, final boolean autoUpdate )
     {
         Costume costume = this.getSafeValue(subject);

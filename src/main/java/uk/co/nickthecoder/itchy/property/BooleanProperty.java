@@ -11,26 +11,11 @@ import uk.co.nickthecoder.itchy.gui.ComponentValidator;
 
 public class BooleanProperty<S> extends Property<S, Boolean>
 {
-    /*
-    public BooleanProperty( String label, String access, String key )
-    {
-        super(label, access, key);
-    }
 
-    public BooleanProperty( String label, String access )
-    {
-        super(label, access);
-    }
-    */
     public BooleanProperty( String key )
     {
         super(key);
-    }
-
-    @Override
-    public Boolean getDefaultValue()
-    {
-        return false;
+        this.defaultValue = false;
     }
 
     @Override

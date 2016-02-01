@@ -923,7 +923,7 @@ before we can harvest the honey.</string>
     <input name="up" keys="UP,SEMICOLON"/>
   </inputs>
   <layouts>
-    <layout name="default">
+    <layout name="default" defaultLayer="grid">
       <layer name="background" zOrder="0" x="0" y="0" width="800" height="600" viewClassName="uk.co.nickthecoder.itchy.RGBAView" stageClassName="uk.co.nickthecoder.itchy.ZOrderStage" stageConstraintClassName="uk.co.nickthecoder.itchy.NullStageConstraint">
         <view color="#0b1100ff"/>
       </layer>

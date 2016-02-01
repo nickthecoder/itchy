@@ -116,7 +116,7 @@ public class ListFonts extends ListFileSubjects<Font>
             for (String sceneName : resources.sceneNames()) {
                 try {
                     SceneStub stub = resources.getScene(sceneName);
-                    Scene scene = stub.load();
+                    Scene scene = stub.load( false );
                     if (scene.uses(font)) {
                         list.add(sceneName);
                     }

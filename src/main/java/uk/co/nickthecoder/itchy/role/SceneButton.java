@@ -36,7 +36,7 @@ public class SceneButton extends Button
     protected void onClick()
     {
         super.onClick();
-        Itchy.getGame().startScene(this.sceneName);
+        Itchy.getGame().getDirector().startScene(this.sceneName);
     }
 
 }

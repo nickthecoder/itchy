@@ -20,12 +20,6 @@ public class LayoutProperty<S> extends Property<S, Layout>
     }
 
     @Override
-    public Layout getDefaultValue()
-    {
-        return null;
-    }
-
-    @Override
     public Component createComponent( final S subject, final boolean autoUpdate )
     {
         Resources resources = Itchy.getGame().resources;

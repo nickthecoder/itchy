@@ -56,7 +56,7 @@ class Ship(Moving) :
         for i in range( 0, game.director.lives ) :
             print "Adding life icon ", i
             actor = self.actor.createCompanion("life")
-            game.director.layout.findStage("foreground").add( actor )
+            game.layout.findStage("foreground").add( actor )
             actor.moveTo( 30 + i * 40 , 560 )
             actor.event("appear")                
             self.lifeIcon.append(actor)

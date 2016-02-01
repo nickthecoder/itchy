@@ -20,12 +20,6 @@ public class PoseResourceProperty<S> extends Property<S, PoseResource>
     }
 
     @Override
-    public PoseResource getDefaultValue()
-    {
-        return null;
-    }
-
-    @Override
     public Component createComponent( final S subject, final boolean autoUpdate )
     {
         Resources resources = Itchy.getGame().resources;

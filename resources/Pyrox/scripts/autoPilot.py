@@ -80,7 +80,7 @@ class AutoPilot(GridRole) :
 
     def runTests(self) :
     
-        game.director.layout.findView("test").setVisible(True)
+        game.layout.findView("test").setVisible(True)
         print "Running tests"
         count = 0
         fails = 0

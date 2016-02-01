@@ -4,10 +4,10 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
-import uk.co.nickthecoder.jame.RGBA;
 
 public class TextSceneActor extends SceneActor
 {
+    /*
     public Font font;
 
     public int fontSize;
@@ -59,5 +59,5 @@ public class TextSceneActor extends SceneActor
 
         return actor;
     }
-
+*/
 }

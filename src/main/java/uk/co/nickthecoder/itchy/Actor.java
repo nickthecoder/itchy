@@ -26,15 +26,15 @@ public class Actor implements PropertySubject<Actor>
     protected static final List<Property<Actor, ?>> properties = new ArrayList<Property<Actor, ?>>();
 
     static {
-        properties.add(new StringProperty<Actor>("startEvent"));
-        properties.add(new DoubleProperty<Actor>("heading"));
         properties.add(new DoubleProperty<Actor>("x"));
         properties.add(new DoubleProperty<Actor>("y"));
+        properties.add(new DoubleProperty<Actor>("heading"));
+        properties.add(new StringProperty<Actor>("startEvent").defaultValue("default"));
         properties.add(new DoubleProperty<Actor>("activationDelay"));
-        properties.add(new IntegerProperty<Actor>("zOrder"));
-        
+        properties.add(new IntegerProperty<Actor>("zOrder"));        
+        properties.add(new StringProperty<Actor>("role.id"));
     }
-    
+
     private static Pose startPose( Costume costume, String name )
     {
         Pose pose = costume.getPose(name);
@@ -115,7 +115,7 @@ public class Actor implements PropertySubject<Actor>
         this.y = 0;
         this.setDirection(pose.getDirection());
     }
-
+    
     public String getStartEvent()
     {
         return this.startEvent;
@@ -787,16 +787,19 @@ public class Actor implements PropertySubject<Actor>
     {
         if (this.role != null) {
             try {
+
                 this.role.animate();
 
                 if ((!this.isDead()) && (!this.isDying())) {
+                    if (this.role.getActor() == null) {
+                        // The role may have changed due to an animation's finishedMessage.
+                        return;
+                    }
                     this.role.tick();
                 }
 
             } catch (Exception e) {
-                System.err.println( "Ooops" );
-                e.printStackTrace();
-                // Itchy.handleException(e);
+                Itchy.handleException(e);
             }
         }
     }

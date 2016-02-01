@@ -23,6 +23,11 @@ public class PlainSceneDirector implements SceneDirector
     protected static final List<Property<SceneDirector, ?>> properties = new ArrayList<Property<SceneDirector, ?>>();
 
     @Override
+    public void loading(Scene scene)
+    {
+    }
+
+    @Override
     public void onLoaded()
     {
     }
@@ -83,4 +88,5 @@ public class PlainSceneDirector implements SceneDirector
     {
         return properties;
     }
+
 }

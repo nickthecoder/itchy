@@ -746,7 +746,7 @@
     <input name="weapon-2" keys="KEY_2"/>
   </inputs>
   <layouts>
-    <layout name="default">
+    <layout name="default" defaultLayer="main">
       <layer name="main" zOrder="50" x="0" y="0" width="800" height="600" viewClassName="uk.co.nickthecoder.itchy.WrappedStageView" stageClassName="uk.co.nickthecoder.itchy.ZOrderStage" stageConstraintClassName="uk.co.nickthecoder.itchy.NullStageConstraint">
         <view enableMouse="false" top="600" right="800" bottom="0" left="0"/>
       </layer>

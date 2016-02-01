@@ -11,7 +11,7 @@ import java.util.List;
 import uk.co.nickthecoder.itchy.OffsetSurface;
 import uk.co.nickthecoder.itchy.property.Property;
 
-public class MakeupPipeline implements Makeup
+public class MakeupPipeline extends AbstractMakeup
 {
     public List<Makeup> pipeline = new LinkedList<Makeup>();
 

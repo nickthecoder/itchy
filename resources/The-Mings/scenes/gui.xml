@@ -4,7 +4,7 @@
     <actor costume="gui" x="0" y="0" direction="0.0" heading="0.0" startEvent="default" zOrder="-1"/>
     <actor costume="jobButton" x="239" y="57" direction="0.0" heading="0.0" startEvent="default" zOrder="4" colorize="#8f98ca00">
       <property name="job" value="blocker"/>
-      <makeup classname="uk.co.nickthecoder.itchy.makeup.Frame">
+      <makeup classname="uk.co.nickthecoder.itchy.makeup.PictureFrame">
         <property name="ninePatchName" value="button"/>
         <property name="borderTop" value="4"/>
         <property name="borderBottom" value="4"/>
@@ -14,7 +14,7 @@
     </actor>
     <actor costume="jobButton" x="298" y="57" direction="0.0" heading="0.0" startEvent="default" zOrder="5" colorize="#8f98ca00">
       <property name="job" value="builder"/>
-      <makeup classname="uk.co.nickthecoder.itchy.makeup.Frame">
+      <makeup classname="uk.co.nickthecoder.itchy.makeup.PictureFrame">
         <property name="ninePatchName" value="button"/>
         <property name="borderTop" value="4"/>
         <property name="borderBottom" value="4"/>
@@ -24,7 +24,7 @@
     </actor>
     <actor costume="jobButton" x="356" y="57" direction="0.0" heading="0.0" startEvent="default" zOrder="6" colorize="#8f98ca00">
       <property name="job" value="smasher"/>
-      <makeup classname="uk.co.nickthecoder.itchy.makeup.Frame">
+      <makeup classname="uk.co.nickthecoder.itchy.makeup.PictureFrame">
         <property name="ninePatchName" value="button"/>
         <property name="borderTop" value="4"/>
         <property name="borderBottom" value="4"/>
@@ -34,7 +34,7 @@
     </actor>
     <actor costume="paws" x="47" y="53" direction="0.0" heading="0.0" startEvent="default" zOrder="7">
       <property name="message" value="pause"/>
-      <makeup classname="uk.co.nickthecoder.itchy.makeup.Frame">
+      <makeup classname="uk.co.nickthecoder.itchy.makeup.PictureFrame">
         <property name="ninePatchName" value="button"/>
         <property name="borderTop" value="4"/>
         <property name="borderBottom" value="4"/>
@@ -44,7 +44,7 @@
     </actor>
     <actor costume="jobButton" x="414" y="57" direction="0.0" heading="0.0" startEvent="default" zOrder="9" colorize="#8f98ca00">
       <property name="job" value="digger"/>
-      <makeup classname="uk.co.nickthecoder.itchy.makeup.Frame">
+      <makeup classname="uk.co.nickthecoder.itchy.makeup.PictureFrame">
         <property name="ninePatchName" value="button"/>
         <property name="borderTop" value="4"/>
         <property name="borderBottom" value="4"/>
@@ -54,7 +54,7 @@
     </actor>
     <actor costume="jobButton" x="474" y="57" direction="0.0" heading="0.0" startEvent="default" zOrder="10" colorize="#8f98ca00">
       <property name="job" value="floater"/>
-      <makeup classname="uk.co.nickthecoder.itchy.makeup.Frame">
+      <makeup classname="uk.co.nickthecoder.itchy.makeup.PictureFrame">
         <property name="ninePatchName" value="button"/>
         <property name="borderTop" value="4"/>
         <property name="borderBottom" value="4"/>

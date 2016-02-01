@@ -11,6 +11,7 @@ import java.io.InputStreamReader;
 import java.util.Iterator;
 import java.util.List;
 
+import uk.co.nickthecoder.itchy.editor.SceneDesignerRole;
 import uk.co.nickthecoder.itchy.makeup.Makeup;
 import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.PropertySubject;
@@ -18,7 +19,6 @@ import uk.co.nickthecoder.itchy.role.PlainRole;
 import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.itchy.util.XMLException;
 import uk.co.nickthecoder.itchy.util.XMLTag;
-import uk.co.nickthecoder.jame.RGBA;
 
 public class SceneReader
 {
@@ -26,14 +26,12 @@ public class SceneReader
 
     private Scene scene;
 
-    public SceneReader(Resources resources)
-    {
-        this.resources = resources;
-    }
+    private boolean design = false;
 
-    public Scene load(String filename) throws Exception
+    public SceneReader(Resources resources, boolean design)
     {
-        return this.load(new File(filename));
+        this.design = design;
+        this.resources = resources;
     }
 
     public Scene load(File file) throws Exception
@@ -52,99 +50,84 @@ public class SceneReader
 
     private void readScene(XMLTag sceneTag) throws Exception
     {
-        this.scene.showMouse = sceneTag.getOptionalBooleanAttribute("showMouse", true);
+        readProperties(sceneTag, this.scene);
+        if (this.scene.layout == null) {
+            this.scene.layout = resources.getLayout("default");
+        }
+        if (this.scene.layout == null) {
+            System.out.println ("Creating a blank layout, as one was not found");
+            this.scene.layout = new Layout();
+            Layer layer = new Layer();
+            layer.setName("default");
+            layer.setViewClassName(new ClassName(View.class, StageView.class.getName()));
+            this.scene.layout.addLayer(new Layer());
+        } else {
+            this.scene.layout = this.scene.layout.clone();
+        }
 
-        String layoutName = sceneTag.getOptionalAttribute("layout", "default");
-        Layout layout = resources.getLayout(layoutName);
-        this.scene.layout = layout.clone();
-
-        String sceneDirectorName = sceneTag.getOptionalAttribute("role", PlainSceneDirector.class.getName());
-        this.scene.setSceneDirectorClassName( new ClassName(SceneDirector.class, sceneDirectorName) );
-
-
-        for (Iterator<XMLTag> i = sceneTag.getTags("properties"); i.hasNext();) {
-            XMLTag propertiesTag = i.next();
-            this.readProperties(propertiesTag);
+        if (sceneTag.hasTag("properties")) {
+            // The old way
+            this.oldReadSceneDirectorProperties(sceneTag.getTag("properties"));
+        } else {
+            // The good way
+            readProperties(sceneTag, "sceneDirector", scene.getSceneDirector());
         }
 
         for (Iterator<XMLTag> i = sceneTag.getTags("layer"); i.hasNext();) {
             XMLTag layerTag = i.next();
             String name = layerTag.getAttribute("name");
+
             this.readLayerProperties(layerTag, name);
 
-            if (layerTag.hasTag("actor")) {
-                Scene.SceneLayer sceneLayer = this.scene.createSceneLayer(name);
-                this.readLayer(layerTag, sceneLayer);
+            Layer layer = this.scene.layout.findLayer(name);
+            if (layer == null) {
+                layer = this.scene.layout.defaultLayer;
             }
+            if (layer == null) {
+                layer = this.scene.layout.getLayers().get(0);
+            }
+            this.readLayer(layerTag, layer);
         }
 
     }
-    
+
     private void readLayerProperties(XMLTag layerTag, String name)
         throws XMLException
     {
         Layout layout = this.scene.layout;
-        Layer layer = layout.findLayer( name );
+        Layer layer = layout.findLayer(name);
         if (layer == null) {
             return;
         }
-        
-        XMLTag viewTag = layerTag.getTag("view",false);
-        if (viewTag != null) {            
-            readProperties( viewTag, layer.getView());
+
+        XMLTag viewTag = layerTag.getTag("view", false);
+        if (viewTag != null) {
+            readProperties(viewTag, layer.getView());
         }
-        XMLTag stageTag = layerTag.getTag("stage",false);
-        if (stageTag != null) {            
-            readProperties( stageTag, layer.getStage());
+        XMLTag stageTag = layerTag.getTag("stage", false);
+        if (stageTag != null) {
+            readProperties(stageTag, layer.getStage());
         }
-        XMLTag stageConstraintTag = layerTag.getTag("stageConstraint",false);
-        if (stageConstraintTag != null) {            
-            readProperties( stageConstraintTag, layer.getStage().getStageConstraint());
+        XMLTag stageConstraintTag = layerTag.getTag("stageConstraint", false);
+        if (stageConstraintTag != null) {
+            readProperties(stageConstraintTag, layer.getStage().getStageConstraint());
         }
     }
-    
-    private void readProperties(XMLTag propertiesTag)
-        throws Exception
+
+    private void readLayer(XMLTag parentTag, Layer layer) throws Exception
     {
-        List<Property<SceneDirector, ?>> properties = this.scene.getSceneDirector().getProperties();
-
-        for (Iterator<XMLTag> i = propertiesTag.getTags("property"); i.hasNext();) {
-            XMLTag propertyTag = i.next();
-            String name = propertyTag.getAttribute("name");
-            String value = propertyTag.getAttribute("value");
-
-            Property<SceneDirector, ?> property = findProperty(properties, name);
-            if (property == null) {
-                throw new Exception("Didn't find SceneDirector property : " + name);
-            }
-            property.setValueByString(this.scene.getSceneDirector(), value);
-        }
-
-    }
-
-    private Property<SceneDirector, ?> findProperty(List<Property<SceneDirector, ?>> properties, String name)
-    {
-        for (Property<SceneDirector, ?> property : properties) {
-            if (property.key.equals(name)) {
-                return property;
-            }
-        }
-        return null;
-    }
-
-    private void readLayer(XMLTag parentTag, Scene.SceneLayer sceneLayer) throws Exception
-    {
+        Stage stage = layer.getStage();
         for (Iterator<XMLTag> i = parentTag.getTags(); i.hasNext();) {
             XMLTag tag = i.next();
             if (tag.getName() == "actor") {
-                this.readActor(tag, sceneLayer);
+                this.readActor(tag, stage);
             } else if (tag.getName() == "text") {
-                this.readText(tag, sceneLayer);
+                this.readText(tag, stage);
             }
         }
     }
 
-    private void readActor(XMLTag actorTag, Scene.SceneLayer sceneLayer) throws Exception
+    private void readActor(XMLTag actorTag, Stage stage) throws Exception
     {
         String costumeName = actorTag.getAttribute("costume");
         costumeName = this.resources.getNewCostumeName(costumeName);
@@ -153,55 +136,25 @@ public class SceneReader
             throw new XMLException("Costume not found : " + costumeName);
         }
 
-        CostumeSceneActor sceneActor = new CostumeSceneActor(costume);
-        sceneActor.roleClassName = costume.roleClassName;
+        Actor sceneActor = new Actor(costume);
         this.readSceneActorAttributes(actorTag, sceneActor);
 
-        try {
-            XMLTag makeupTag = actorTag.getTag("makeup");
-            this.readMakeup(makeupTag, sceneActor);
-        } catch (Exception e) {
-            // Do nothing
-        }
-
-        sceneLayer.add(sceneActor);
+        stage.add(sceneActor);
     }
 
-    private void readMakeup(XMLTag makeupTag, SceneActor sceneActor)
-        throws Exception
-    {
-        ClassName className = new ClassName(Makeup.class, makeupTag.getAttribute("classname"));
-        sceneActor.makeupClassName = className;
-        Makeup makeup = Appearance.createMakeup(className);
-
-        for (Iterator<XMLTag> i = makeupTag.getTags("property"); i.hasNext();) {
-            XMLTag tag = i.next();
-
-            String name = tag.getAttribute("name");
-            String value = tag.getAttribute("value");
-            setMakeupProperty(sceneActor, makeup, name, value);
-        }
-    }
-
-    private void setMakeupProperty(SceneActor sceneActor, Makeup makeup, String name, String value)
-        throws Exception
-    {
-        sceneActor.makeupPropertyStrings.put(name, value);
-    }
-
-    private void readText(XMLTag textTag, Scene.SceneLayer sceneLayer) throws Exception
+    private void readText(XMLTag textTag, Stage stage) throws Exception
     {
         String fontName = textTag.getAttribute("font");
-        int fontSize = textTag.getIntAttribute("size");
-        String text = textTag.getAttribute("text");
         Font font = this.resources.getFont(fontName);
 
         if (font == null) {
             throw new XMLException("Font not found : " + fontName);
         }
 
-        TextSceneActor sceneActor = new TextSceneActor(font, fontSize, text);
-        sceneActor.roleClassName = new ClassName(Role.class, PlainRole.class.getName());
+        // Use default text, and font size for now. They will be read later.
+        TextPose textPose = new TextPose("", font, 14);
+
+        Actor sceneActor = new Actor(textPose);
 
         String costumeName = textTag.getOptionalAttribute("costume", null);
         costumeName = this.resources.getNewCostumeName(costumeName);
@@ -210,88 +163,116 @@ public class SceneReader
             if (costume == null) {
                 throw new XMLException("Costume not found : " + costumeName);
             }
-            sceneActor.costume = costume;
+            sceneActor.setCostume(costume);
         }
-
-        String colorString = textTag.getOptionalAttribute("color", "#ffffff");
-        try {
-            sceneActor.color = RGBA.parse(colorString);
-        } catch (Exception e) {
-            throw new XMLException("Illegal color : " + colorString);
-        }
-        double xAlignment = textTag.getOptionalDoubleAttribute("xAlignment", 0.5);
-        double yAlignment = textTag.getOptionalDoubleAttribute("yAlignment", 0.5);
-        sceneActor.xAlignment = xAlignment;
-        sceneActor.yAlignment = yAlignment;
 
         this.readSceneActorAttributes(textTag, sceneActor);
 
-        try {
-            XMLTag makeupTag = textTag.getTag("makeup");
-            this.readMakeup(makeupTag, sceneActor);
-        } catch (Exception e) {
-            // Do nothing
-        }
-
-        sceneLayer.add(sceneActor);
+        stage.add(sceneActor);
     }
 
-    /**
-     * For backwards compatibility, if the zOrder isn't specified, then the default zOrder increases by 1 for each actor
-     * read. Therefore,
-     * the actors will have increasing zOrders.
-     */
-    private int defaultZOrder = 0;
-
-    private void readSceneActorAttributes(XMLTag actorTag, SceneActor sceneActor)
+    private void readSceneActorAttributes(XMLTag actorTag, Actor sceneActor)
         throws Exception
     {
-        this.defaultZOrder += 1;
+        String roleClassNameString = actorTag.getOptionalAttribute("role", null);
+        if (roleClassNameString == null) {
+            if (sceneActor.getCostume() != null) {
+                roleClassNameString = sceneActor.getCostume().roleClassName.name;
+            } else {
+                roleClassNameString = PlainRole.class.getName();
+            }
+        }
+        ClassName roleClassName = new ClassName(Role.class, roleClassNameString);
+        Role role = (Role) roleClassName.createInstance(resources);
+        if (design) {
+            sceneActor.setRole(new SceneDesignerRole(role));
+        } else {
+            sceneActor.setRole(new DelayedActivation(sceneActor.getActivationDelay(), role));
+        }
 
-        sceneActor.id = actorTag.getOptionalAttribute("id", null);
-        sceneActor.x = actorTag.getIntAttribute("x");
-        sceneActor.y = actorTag.getIntAttribute("y");
-        sceneActor.zOrder = actorTag.getOptionalIntAttribute("zOrder", this.defaultZOrder);
-        sceneActor.alpha = actorTag.getOptionalDoubleAttribute("alpha", 255);
-        sceneActor.direction = actorTag.getOptionalDoubleAttribute("direction", 0);
-        sceneActor.heading = actorTag.getOptionalDoubleAttribute("heading", sceneActor.direction);
-        sceneActor.scale = actorTag.getOptionalDoubleAttribute("scale", 1);
-        sceneActor.activationDelay = actorTag.getOptionalDoubleAttribute("activationDelay", 0);
-        sceneActor.startEvent = actorTag.getOptionalAttribute("startEvent", "default");
+        this.readProperties(actorTag, sceneActor);
+        this.readProperties(actorTag, sceneActor.getAppearance());
 
-        if (actorTag.hasAttribute("colorize")) {
-            try {
-                sceneActor.colorize = RGBA.parse(actorTag.getAttribute("colorize"));
-            } catch (Exception e) {
-                throw new XMLException("Illegal color : " + actorTag.getAttribute("colorize"));
+        readRole(actorTag, role);
+        readMakeup(actorTag, sceneActor);
+
+    }
+
+    private void readRole(XMLTag actorTag, Role role) throws Exception
+    {
+        if (actorTag.hasTag("role")) {
+            this.readProperties(actorTag.getTag("role"), role);
+        } else {
+            // Do it the old way...
+
+            List<Property<Role, ?>> properties = role.getProperties();
+
+            for (Iterator<XMLTag> i = actorTag.getTags("property"); i.hasNext();) {
+                XMLTag propertyTag = i.next();
+                String name = propertyTag.getAttribute("name");
+                String value = propertyTag.getAttribute("value");
+
+                Property<Role, ?> property = findProperty(properties, name);
+                if (property == null) {
+                    System.err.println( "Didn't find Role property : " + name + " for " + role);
+                    //throw new Exception("Didn't find Role property : " + name + " for " + role);
+                } else {
+                    property.setValueByString(role, value);
+                }
+            }
+
+        }
+    }
+
+    private void readMakeup(XMLTag actorTag, Actor sceneActor)
+        throws Exception
+    {
+        // The new way is for the makeup class name to be on the "actor" tag.
+        if (actorTag.hasAttribute("makeup")) {
+            ClassName className = new ClassName(Makeup.class, actorTag.getAttribute("makeup"));
+            Makeup makeup = (Makeup) className.createInstance(resources);
+            sceneActor.getAppearance().setMakeup(makeup);
+        }
+
+        if (actorTag.hasTag("makeup")) {
+            XMLTag makeupTag = actorTag.getTag("makeup");
+
+            if (makeupTag.hasAttribute("classname")) {
+                // Makeup class name used to be on the makeup tag. This is the old way.
+                ClassName className = new ClassName(Makeup.class, makeupTag.getAttribute("classname"));
+                Makeup makeup = (Makeup) className.createInstance(resources);
+                sceneActor.getAppearance().setMakeup(makeup);
+            }
+
+            Makeup makeup = sceneActor.getAppearance().getMakeup();
+
+            // New way to read the makeup properties.
+            this.readProperties(makeupTag, sceneActor.getAppearance().getMakeup());
+
+            // Old way to read the makeup properties.
+            for (Iterator<XMLTag> i = makeupTag.getTags("property"); i.hasNext();) {
+                XMLTag tag = i.next();
+
+                String name = tag.getAttribute("name");
+                String value = tag.getAttribute("value");
+
+                for (Property<Makeup, ?> property : makeup.getProperties()) {
+                    if (property.key.equals(name)) {
+                        property.setValueByString(makeup, value);
+                    }
+                }
             }
         }
 
-        if (actorTag.hasAttribute("role")) {
-            ClassName className = new ClassName(Role.class, actorTag.getAttribute("role"));
-
-            if (this.resources.checkClassName(className)) {
-                sceneActor.roleClassName = className;
-            }
-        }
-
-        Actor actor = sceneActor.createActor(this.resources, true);
-
-        for (Iterator<XMLTag> i = actorTag.getTags("property"); i.hasNext();) {
-            XMLTag tag = i.next();
-
-            String name = tag.getAttribute("name");
-            String value = tag.getAttribute("value");
-            setProperty(sceneActor, actor, name, value);
-        }
     }
 
-    private void setProperty(SceneActor sceneActor, Actor actor, String name, String value)
-        throws Exception
+    private <S extends PropertySubject<S>> void readProperties(XMLTag tag, String tagName, S subject)
+        throws XMLException
     {
-        sceneActor.customPropertyStrings.put(name, value);
+        if (tag.hasTag(tagName)) {
+            readProperties(tag.getTag(tagName), subject);
+        }
     }
-
 
     private <S extends PropertySubject<S>> void readProperties(XMLTag tag, S subject) throws XMLException
     {
@@ -315,6 +296,38 @@ public class SceneReader
             }
         }
 
+    }
+
+    /**
+     * For backwards compatibility only.
+     */
+    private void oldReadSceneDirectorProperties(XMLTag propertiesTag)
+        throws Exception
+    {
+        List<Property<SceneDirector, ?>> properties = this.scene.getSceneDirector().getProperties();
+
+        for (Iterator<XMLTag> i = propertiesTag.getTags("property"); i.hasNext();) {
+            XMLTag propertyTag = i.next();
+            String name = propertyTag.getAttribute("name");
+            String value = propertyTag.getAttribute("value");
+
+            Property<SceneDirector, ?> property = findProperty(properties, name);
+            if (property == null) {
+                throw new Exception("Didn't find sceneDirector property : " + name);
+            }
+            property.setValueByString(this.scene.getSceneDirector(), value);
+        }
+
+    }
+
+    private <S> Property<S, ?> findProperty(List<Property<S, ?>> properties, String name)
+    {
+        for (Property<S, ?> property : properties) {
+            if (property.key.equals(name)) {
+                return property;
+            }
+        }
+        return null;
     }
 
 }

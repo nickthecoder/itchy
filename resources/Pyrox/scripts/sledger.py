@@ -31,7 +31,7 @@ class Sledger(AbstractRole) :
         else :
             self.choices = self.text.split("\n");
             self.timer = Timer.createTimerSeconds( self.initialDelay )
-            self.actor.appearance.alpha = 0
+        self.actor.appearance.alpha = 0
     
     def tick(self) :
 

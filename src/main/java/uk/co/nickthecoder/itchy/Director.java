@@ -35,12 +35,10 @@ public interface Director extends InputListener, QuitListener, MessageListener, 
     public void onResize( ResizeEvent e );
 
     public boolean startScene( String sceneName );
-
-    public boolean mergeScene( String sceneName );
+    
+    public Scene loadScene( String sceneName );
 
     public void tick();
-    
-    public Layout getLayout();
 
     /**
      * Gets the root node for this game.

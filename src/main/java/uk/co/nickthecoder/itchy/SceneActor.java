@@ -4,19 +4,10 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import uk.co.nickthecoder.itchy.editor.SceneDesignerRole;
-import uk.co.nickthecoder.itchy.makeup.Makeup;
-import uk.co.nickthecoder.itchy.property.Property;
-import uk.co.nickthecoder.itchy.role.PlainRole;
-import uk.co.nickthecoder.itchy.util.ClassName;
-import uk.co.nickthecoder.itchy.util.StringUtils;
-import uk.co.nickthecoder.jame.RGBA;
 
 public abstract class SceneActor implements Cloneable
 {
+    /*
     public static SceneActor createSceneActor( Actor actor )
     {
         if (actor.getAppearance().getPose() instanceof TextPose) {
@@ -272,5 +263,5 @@ public abstract class SceneActor implements Cloneable
 
         return this.customPropertyStrings.equals(other.customPropertyStrings);
     }
-
+*/
 }

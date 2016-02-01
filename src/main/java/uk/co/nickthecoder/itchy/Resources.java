@@ -881,13 +881,13 @@ public class Resources extends Loadable
     {
         for (String sceneName : this.sceneNames()) {
             SceneStub sceneStub = this.getScene(sceneName);
-            Scene scene = sceneStub.load();
+            Scene scene = sceneStub.load( false );
             sceneStub.save(scene);
         }
         renamedCostumes.clear();
     }
 
-    public void dump( String label, Object... data)
+    public static void dump( String label, Object... data)
     {
         System.out.print( label );
         for ( Object d : data ) {

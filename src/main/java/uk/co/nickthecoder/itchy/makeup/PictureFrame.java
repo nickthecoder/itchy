@@ -16,7 +16,7 @@ import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.util.NinePatch;
 import uk.co.nickthecoder.jame.Surface;
 
-public class PictureFrame implements Makeup
+public class PictureFrame extends AbstractMakeup
 {
     protected static final List<Property<Makeup, ?>> properties = new ArrayList<Property<Makeup, ?>>();
 

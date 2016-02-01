@@ -15,6 +15,7 @@ public class IntegerProperty<S> extends Property<S, Integer>
     public IntegerProperty( String key)
     {
         super(key);
+        this.defaultValue = 0;
     }
 
     @Override
@@ -75,13 +76,7 @@ public class IntegerProperty<S> extends Property<S, Integer>
         }
 
     }
-
-    @Override
-    public Integer getDefaultValue()
-    {
-        return 0;
-    }
-
+    
     @Override
     public void updateSubject( S subject, Component component ) throws Exception
     {

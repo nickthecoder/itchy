@@ -10,34 +10,48 @@ public class DelayedActivation extends AbstractRole
 {
     private Timer delay;
 
-    private Role role;
+    public Role actualRole;
 
     private double alpha;
 
     public DelayedActivation(double seconds, Role role)
     {
         this.delay = Timer.createTimerSeconds(seconds);
-        this.role = role;
+        this.actualRole = role;
     }
 
     @Override
     public void onBirth()
     {
         this.alpha = getActor().getAppearance().getAlpha();
-        getActor().getAppearance().setAlpha(0);
+        if (this.delay.period != 0) {
+            getActor().getAppearance().setAlpha(0);
+        }
+    }
+
+    public String getId()
+    {
+        return this.actualRole.getId();
+    }
+    
+    public void setId( String id )
+    {
+        this.actualRole.setId(id);
     }
 
     @Override
     public void tick()
     {
         if (this.delay.isFinished()) {
-            getActor().setRole(this.role);
+            getActor().getAppearance().setAlpha(this.alpha);
+
+            getActor().event(getActor().getStartEvent());
+            getActor().setRole(this.actualRole);
+
             // The normal way that role.birth is called happened to this DelayedActivation,
             // but we want it to be called for the actual role as well...
-            this.role.born();
+            this.actualRole.born();
 
-            getActor().getAppearance().setAlpha(this.alpha);
-            getActor().event(getActor().getStartEvent());
         }
     }
 }

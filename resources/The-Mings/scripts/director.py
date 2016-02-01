@@ -32,8 +32,8 @@ class Director(AbstractDirector) :
                 game.startScene( "menu" )
 
     def scrollTo( self, x, y ) :
-        self.layout.findView("main").centerOn( x,y )
-        self.layout.findView("grid").centerOn( x,y )
+        game.layout.findView("main").centerOn( x,y )
+        game.layout.findView("grid").centerOn( x,y )
 
     def processSpriteSheet(self) :
         start_time = time.time()

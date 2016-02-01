@@ -24,7 +24,6 @@ import uk.co.nickthecoder.itchy.RGBAView;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.Scene;
-import uk.co.nickthecoder.itchy.SceneActor;
 import uk.co.nickthecoder.itchy.SceneDirector;
 import uk.co.nickthecoder.itchy.SceneStub;
 import uk.co.nickthecoder.itchy.ScrollableView;
@@ -94,7 +93,7 @@ public class SceneDesigner implements MouseListener, KeyListener
     /**
      * Used when copying and pasting
      */
-    private static SceneActor copiedActor;
+    private static Actor copiedActor;
 
     private final Editor editor;
 
@@ -182,13 +181,17 @@ public class SceneDesigner implements MouseListener, KeyListener
 
     public SceneDesigner(Editor editor, SceneStub sceneStub, Scene scene)
     {
-        undoList = new UndoList();
         this.editor = editor;
-        sceneRect = new Rect(0, 0, editor.getGame().getWidth(), editor.getGame().getHeight());
+        undoList = new UndoList();
+        this.sceneRect = new Rect(0, 0, editor.getGame().getWidth(), editor.getGame().getHeight());
         this.sceneStub = sceneStub;
         this.scene = scene;
 
         costumeButtonGroup = new ButtonGroup();
+        
+        System.out.println( "Editing scene  "+ this.scene );
+        System.out.println( "Editing Layout "+ this.scene.layout );
+        this.scene.layout.dump();
     }
 
     public void go()
@@ -215,6 +218,7 @@ public class SceneDesigner implements MouseListener, KeyListener
             StageView stageView = layer.getStageView();
             if (stageView != null) {
                 Stage stage = stageView.getStage();
+                System.out.println( "Editor adding stage/view " + stage + "/" + stageView );
                 editor.getStages().add(stage);
                 currentLayer = layer;
                 currentStageView = stageView;
@@ -231,8 +235,6 @@ public class SceneDesigner implements MouseListener, KeyListener
         
         editor.addMouseListener(this);
         editor.addKeyListener(this);
-
-        scene.create(editor, true);
 
         createPageBorder();
         createHandles();
@@ -337,7 +339,12 @@ public class SceneDesigner implements MouseListener, KeyListener
         } else {
             System.out.print(view.getClass().getName() + " : ");
         }
-        System.out.println(view.getPosition());
+        System.out.print(view.getPosition());
+        if ( view instanceof StageView ) {
+            Stage stage = ((StageView) view).getStage();
+            System.out.print( " Stage " + stage + " " + stage.getActors().size() + " actors." );
+        }
+        System.out.println();
         if (view instanceof GenericCompoundView) {
             GenericCompoundView<?> parent = (GenericCompoundView<?>) view;
             for (View child : parent.getChildren()) {
@@ -852,11 +859,11 @@ public class SceneDesigner implements MouseListener, KeyListener
             @Override
             public void changed()
             {
-                ClassName className = roleClassName
-                    .getClassName();
+                ClassName className = roleClassName.getClassName();
                 SceneDesignerRole sdb = (SceneDesignerRole) currentActor.getRole();
                 try {
-                    sdb.setRoleClassName(editor.resources, className);
+                    Role actualRole = (Role) className.createInstance(editor.resources);
+                    sdb.actualRole = actualRole;
                     SceneDesigner.this.createRoleProperties();
                     editor.resources.checkClassName(className);
                     roleClassName.removeStyle("error");
@@ -1136,8 +1143,10 @@ public class SceneDesigner implements MouseListener, KeyListener
     private void selectLayer( Layer layer )
     {
         currentLayer = layer;
-        currentStageView = currentLayer.getStageView(); 
-        layerPickerButton.setValue(layer);
+        if (currentLayer.getStageView() != null) {
+            currentStageView = currentLayer.getStageView(); 
+            layerPickerButton.setValue(layer);
+        }
         updateLayersTable();
     }
 
@@ -1544,32 +1553,36 @@ public class SceneDesigner implements MouseListener, KeyListener
         if (mode == MODE_STAMP_COSTUME) {
             Actor actor;
 
-            SceneDesignerRole role = new SceneDesignerRole();
-            ClassName roleClassName;
+            Role role;
 
             if (stampActor.getAppearance().getPose() instanceof TextPose) {
                 actor = new Actor(stampActor.getAppearance().getPose());
-                if (stampActor.getCostume() != null) {
-                    actor.setCostume(stampActor.getCostume());
-                    roleClassName = stampActor.getCostume().roleClassName;
+                if (stampActor.getCostume() == null) {
+                    role = new PlainRole();
                 } else {
-                    roleClassName = new ClassName(Role.class,
-                        PlainRole.class.getName());
+                    try {
+                        role = (Role) stampActor.getCostume().roleClassName.createInstance(this.editor.resources);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        return;
+                    }
                 }
 
             } else {
                 actor = new Actor(currentCostume);
-                roleClassName = stampActor.getCostume().roleClassName;
+                try {
+                    role = (Role) stampActor.getCostume().roleClassName.createInstance(this.editor.resources);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return;
+                }
             }
 
-            try {
-                role.setRoleClassName(editor.resources, roleClassName);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
+            SceneDesignerRole sdRole = new SceneDesignerRole( role );
+            actor.setRole(sdRole);
+            
             if (!stampActor.isText()) {
-                setDefaultProperties(role.actualRole, currentCostume);
+                setDefaultProperties(role, currentCostume);
             }
 
             StageConstraint sc = currentStageView.getStage().getStageConstraint();
@@ -1825,21 +1838,26 @@ public class SceneDesigner implements MouseListener, KeyListener
     private void onCopy()
     {
         if ((mode == MODE_SELECT) && (currentActor != null)) {
-            copiedActor = SceneActor.createSceneActor(currentActor);
+            copiedActor = copyActor(currentActor);
         }
     }
 
     private void onPaste()
     {
         if (SceneDesigner.copiedActor != null) {
-            Actor actor = SceneDesigner.copiedActor.createActor(
-                editor.resources, true);
+            Actor actor = copyActor( copiedActor );
             actor.moveBy(10, 10);
             currentStageView.getStage().add(actor);
             selectActor(actor);
         }
     }
 
+    public Actor copyActor( Actor actor )
+    {
+        // TODO Implement copyActor
+        return actor;
+    }
+    
     private void onActorDelete()
     {
         if ((mode == MODE_SELECT) && (currentActor != null)) {
@@ -1926,20 +1944,6 @@ public class SceneDesigner implements MouseListener, KeyListener
 
     private void onSave()
     {
-        scene.clear();
-        for (Layer layer : scene.layout.getLayersByZOrder()) {
-            StageView stageView = layer.getStageView();
-            if (stageView != null) {
-
-                Scene.SceneLayer sceneLayer = scene.createSceneLayer(layer.name);
-
-                for (Actor actor : stageView.getStage().getActors()) {
-                    SceneActor sceneActor = SceneActor.createSceneActor(actor);
-                    sceneLayer.add(sceneActor);
-                }
-            }
-        }
-
         try {
             // Rename the scene first if needed.
             if (!scene.name.equals(oldSceneName)) {

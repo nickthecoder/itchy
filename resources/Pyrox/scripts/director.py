@@ -32,9 +32,9 @@ class Director(AbstractDirector) :
             self.processSprites()
 
     def centerOn( self, x, y ) :
-        self.centerViewOn( self.layout.findView("plain"), x, y )
-        self.centerViewOn( self.layout.findView("grid"), x, y )
-        self.centerViewOn( self.layout.findView("test"), x, y )
+        self.centerViewOn( game.layout.findView("plain"), x, y )
+        self.centerViewOn( game.layout.findView("grid"), x, y )
+        self.centerViewOn( game.layout.findView("test"), x, y )
 
     def processSprites( self ) :
         print "Processing Sprites"

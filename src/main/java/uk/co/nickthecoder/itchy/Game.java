@@ -324,7 +324,7 @@ public class Game
         Itchy.startGame(this);
         this.director.onStarted();
         if (!StringUtils.isBlank(this.resources.getGameInfo().initialScene)) {
-            startScene(this.resources.getGameInfo().initialScene);
+            director.startScene(this.resources.getGameInfo().initialScene);
         }
         running = true;
         Itchy.mainLoop();
@@ -343,7 +343,7 @@ public class Game
 
         if (!StringUtils.isBlank(sceneName)) {
             clear();
-            startScene(sceneName);
+            this.director.startScene(sceneName);
         }
         running = true;
         Itchy.mainLoop();
@@ -787,18 +787,6 @@ public class Game
         return this.sceneDirector;
     }
 
-    /**
-     * Asks the Director to start the scene. The director will (probably) un-pause the game, clear the game of all Actors, and then load the
-     * scene.
-     * 
-     * @param sceneName
-     *        The name of the scene to start.
-     */
-    public boolean startScene( String sceneName )
-    {
-        return this.director.startScene(sceneName);
-    }
-
     public boolean hasScene( String sceneName )
     {
         try {
@@ -810,23 +798,80 @@ public class Game
 
     public Layout layout;
     
-    public Layout loadScene( String sceneName )
+    public boolean mergeScene( Scene original, String additionalSceneName )
     {
-        this.layout = loadScene(sceneName, false);
+        Scene scene = this.loadScene(additionalSceneName);
+        if (scene == null) {
+            return false;
+        }
+        
+        original.layout.merge(scene.layout);
+        return true;
+    }
+    
+    public Layout getLayout()
+    {
         return this.layout;
     }
-
-    public Layout loadScene( String sceneName, boolean loadOnly )
+    
+    public boolean startScene( String sceneName )
     {
         this.abortTicks = true;
+
+        if (this.pause.isPaused()) {
+            this.pause.unpause();
+        }
+        this.clear();
+        Scene scene = this.director.loadScene(sceneName);
+        if ( scene== null) {
+            return false;
+        }
+
+        // fire loading
+        scene.getSceneDirector().loading(scene);
+
+        this.sceneDirector.onDeactivate();
+
+        this.sceneName = sceneName;
+        this.mouse.showRegularMousePointer(scene.showMouse);
+        this.sceneDirector = scene.getSceneDirector();
+        this.layout = scene.layout;
+
+        // Convert all of the DelayedActivation roles into the actual roles.
+        // This will fire each role's onBirth and onAttach
+        for (Stage stage : this.getStages()) {
+            for (Actor actor : stage.getActors()) {
+                actor.getRole().tick();
+            }
+        }
+
+        // fire events
+        this.getSceneDirector().onLoaded();
+
+        // Fire each role's "onSceneCreated"
+        for (Stage stage : this.getStages()) {
+            for (Actor actor : stage.getActors()) {
+                actor.getRole().sceneCreated();
+            }
+        }
+
+        // Fire sceneDirector's onActivate
+        this.getSceneDirector().onActivate();
+
+        Itchy.frameRate.reset();
         
+        return true;
+    }
+
+    public Scene loadScene( String sceneName )
+    {
         SceneStub sceneStub = this.resources.getScene(sceneName);
         if (sceneStub == null) {
             System.err.println("Scene not found : " + sceneName);
             return null;
         }
         try {
-            Scene scene = sceneStub.load();
+            Scene scene = sceneStub.load( false );
             if (scene == null) {
                 System.err.println("Error loading scene : " + sceneName);
                 try {
@@ -836,18 +881,6 @@ public class Game
                 }
                 return null;
             }
-            
-            if (!loadOnly) {
-
-                this.sceneDirector.onDeactivate();
-
-                this.sceneName = sceneName;
-                this.mouse.showRegularMousePointer(scene.showMouse);
-                this.sceneDirector = scene.getSceneDirector();
-
-            }
-
-            scene.create(this, false);
 
             for (Layer layer: scene.layout.getLayersByZOrder()) {
                 this.gameViews.add( layer.getView() );
@@ -858,7 +891,7 @@ public class Game
                 }
             }
             
-            return scene.layout;
+            return scene;
 
         } catch (Exception e) {
             e.printStackTrace();

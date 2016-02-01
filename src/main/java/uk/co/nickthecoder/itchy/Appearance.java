@@ -34,17 +34,17 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
     protected static final List<Property<Appearance, ?>> imageProperties = new ArrayList<Property<Appearance, ?>>();
 
     static {
-        properties.add(new DoubleProperty<Appearance>("scale"));
+        properties.add(new DoubleProperty<Appearance>("scale").defaultValue(1.0));
         properties.add(new DoubleProperty<Appearance>("direction"));
-        properties.add(new DoubleProperty<Appearance>("alpha"));
+        properties.add(new DoubleProperty<Appearance>("alpha").defaultValue(255.0));
         properties.add(new RGBAProperty<Appearance>("colorize").allowNull(true));
 
         textProperties.add(new FontProperty<Appearance>("pose.font"));
-        textProperties.add(new DoubleProperty<Appearance>("pose.fontSize"));
+        textProperties.add(new DoubleProperty<Appearance>("pose.fontSize").aliases("size"));
         textProperties.add(new StringProperty<Appearance>("pose.text"));
         textProperties.add(new RGBAProperty<Appearance>("pose.color"));
-        textProperties.add(new DoubleProperty<Appearance>("pose.xAlignment"));
-        textProperties.add(new DoubleProperty<Appearance>("pose.yAlignment"));
+        textProperties.add(new DoubleProperty<Appearance>("pose.xAlignment").defaultValue(0.5));
+        textProperties.add(new DoubleProperty<Appearance>("pose.yAlignment").defaultValue(0.5));
         textProperties.addAll( properties );
         
         imageProperties.addAll( properties );

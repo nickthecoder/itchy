@@ -16,9 +16,9 @@ class Play(PlainSceneDirector) :
         self.inputScrollDown = Input.find("scrollDown")
 
 
-    def onLoaded(self) :
+    def loading(self, scene) :
         print "Loading glass"
-        game.loadScene("glass", True)
+        game.mergeScene( scene, "glass")
 
 
     def tick(self) :

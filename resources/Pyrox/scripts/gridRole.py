@@ -288,7 +288,7 @@ class GridRole(AbstractRole) :
         return ClassName( Role, self.__module__ + ".py" )
 
 
-    def toString(self) :
+    def toStringXXX(self) :
         return self.__str__()
         
     def __str__(self) :

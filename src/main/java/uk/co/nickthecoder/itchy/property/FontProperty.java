@@ -20,12 +20,6 @@ public class FontProperty<S> extends Property<S, Font>
     }
 
     @Override
-    public Font getDefaultValue()
-    {
-        return null;
-    }
-
-    @Override
     public Component createComponent( final S subject, final boolean autoUpdate )
     {
         Resources resources = Itchy.getGame().resources;

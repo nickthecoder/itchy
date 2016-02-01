@@ -44,19 +44,26 @@ class Level(PlainSceneDirector) :
         self.macroRecorder = None
         self.macroPlayback = None
 
+
+    def loading( self, scene ) :
+        # Load the glass stage on top of the current scene.
+        game.mergeScene( scene, "glass")
+
+
     def onActivate( self ) :
 
+        print "onActivate"
         for player in game.findRoleByTag("player") :
             if self.player is None or player.awake :
                 self.player = player
 
         if self.player :
-            director = game.director
-            director.layout.findView("grid").centerOn(self.player.actor)
-            director.layout.findView("test").centerOn(self.player.actor)
-            director.layout.findView("plain").centerOn(self.player.actor)
+            game.layout.findView("grid").centerOn(self.player.actor)
+            game.layout.findView("test").centerOn(self.player.actor)
+            game.layout.findView("plain").centerOn(self.player.actor)
 
         self.droppedFramesRole = game.findRoleById("droppedFrames")
+        print "droppedFramesRole ", self.droppedFramesRole
 
         self.toggleInfo()
                 
@@ -83,11 +90,10 @@ class Level(PlainSceneDirector) :
         
     def onLoaded( self ) :
         
-        # Load the glass stage on top of the current scene.
-        game.director.mergeScene("glass")
+        print "onLoaded"
         
         # Calculate the size of the grid needed to fit all of the actors
-        stage = game.director.layout.findStage("grid")
+        stage = game.layout.findStage("grid")
 
         minX = 1000000
         minY = 1000000
@@ -123,7 +129,7 @@ class Level(PlainSceneDirector) :
         down = math.floor( (maxY - minY) / squareSize) + 1
         
         self.grid = Grid( squareSize, across, down, minX, minY )
-        game.director.layout.findStage("grid").grid = self.grid
+        game.layout.findStage("grid").grid = self.grid
         
         # Add all of the GridRoles to the grid
         i = stage.iterator()

@@ -98,9 +98,10 @@ public class SimplePause implements Pause
         this.stage = new ZOrderStage();
 
         try {
+            //TODO Reimplement SimplePause
             // Note, that the pause scene is not unloaded.
-            Scene scene = this.game.resources.getScene(this.pauseSceneName).load();
-            scene.create(this.stage, this.game.resources, false);
+            //Scene scene = this.game.resources.getScene(this.pauseSceneName).load();
+            // scene.create(this.stage, this.game.resources, false);
         } catch (Exception e) {
             System.err.println("Failed to load pause scene : " + this.pauseSceneName);
             e.printStackTrace();

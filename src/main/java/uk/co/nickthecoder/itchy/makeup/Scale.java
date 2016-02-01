@@ -13,7 +13,7 @@ import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.DoubleProperty;
 import uk.co.nickthecoder.jame.Surface;
 
-public class Scale implements Makeup
+public class Scale extends AbstractMakeup
 {
     protected static final List<Property<Makeup, ?>> properties = new ArrayList<Property<Makeup, ?>>();
 

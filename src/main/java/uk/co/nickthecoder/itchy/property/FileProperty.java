@@ -15,23 +15,19 @@ import uk.co.nickthecoder.itchy.gui.TextBox;
 
 public class FileProperty<S> extends Property<S, File>
 {
-    public FileProperty( String key )
+    public FileProperty(String key)
     {
         super(key);
+        this.defaultValue = new File("");
     }
 
     @Override
-    public File getDefaultValue()
-    {
-        return new File("");
-    }
-
-    @Override
-    public Component createComponent( final S subject, boolean autoUpdate )
+    public Component createComponent(final S subject, boolean autoUpdate)
     {
         final FilenameComponent box = new FilenameComponent(Itchy.getGame().resources, this.getSafeValue(subject));
         if (autoUpdate) {
-            box.addChangeListener(new ComponentChangeListener() {
+            box.addChangeListener(new ComponentChangeListener()
+            {
                 @Override
                 public void changed()
                 {
@@ -47,21 +43,21 @@ public class FileProperty<S> extends Property<S, File>
     }
 
     @Override
-    public void addChangeListener( Component component, ComponentChangeListener listener )
+    public void addChangeListener(Component component, ComponentChangeListener listener)
     {
         TextBox textBox = (TextBox) component;
         textBox.addChangeListener(listener);
     }
 
     @Override
-    public void addValidator( Component component, ComponentValidator validator)
+    public void addValidator(Component component, ComponentValidator validator)
     {
         TextBox textBox = (TextBox) component;
         textBox.addValidator(validator);
     }
-    
+
     @Override
-    public void updateSubject( S subject, Component component ) throws Exception
+    public void updateSubject(S subject, Component component) throws Exception
     {
         FilenameComponent filenameComponent = (FilenameComponent) component;
         try {
@@ -74,20 +70,20 @@ public class FileProperty<S> extends Property<S, File>
     }
 
     @Override
-    public void updateComponent( S subject, Component component ) throws Exception
+    public void updateComponent(S subject, Component component) throws Exception
     {
         FilenameComponent filenameComponent = (FilenameComponent) component;
         filenameComponent.setText(getValue(subject).getPath());
     }
 
     @Override
-    public File parse( String value )
+    public File parse(String value)
     {
         return new File(value);
     }
 
     @Override
-    public String getErrorText( Component component )
+    public String getErrorText(Component component)
     {
         return null;
     }

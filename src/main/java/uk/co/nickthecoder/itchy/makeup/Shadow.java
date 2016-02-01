@@ -16,7 +16,7 @@ import uk.co.nickthecoder.jame.RGBA;
 import uk.co.nickthecoder.jame.Surface;
 import uk.co.nickthecoder.jame.Surface.BlendMode;
 
-public class Shadow implements Makeup
+public class Shadow extends AbstractMakeup
 {
     protected static final List<Property<Makeup, ?>> properties = new ArrayList<Property<Makeup, ?>>();
 

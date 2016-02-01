@@ -23,7 +23,7 @@ import uk.co.nickthecoder.jame.Surface.BlendMode;
  * 
  * Note, if the pose texture has an alpha channel, then the source image's RGB will show through wherever the texture is transparent.
  */
-public class Textured implements Makeup
+public class Textured extends AbstractMakeup
 {
     protected static final List<Property<Makeup, ?>> properties = new ArrayList<Property<Makeup, ?>>();
 

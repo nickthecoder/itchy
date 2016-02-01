@@ -20,9 +20,9 @@ class Play(PlainSceneDirector) :
         self.inputContinue = Input.find("continue")
 
 
-    def onLoaded(self) :
+    def onLoading(self, scene) :
         print "Loading glass"
-        game.loadScene("glass", True)
+        game.mergeScene(scene, "glass")
 
 
     def onKeyDown(self, event) :

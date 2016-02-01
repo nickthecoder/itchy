@@ -18,12 +18,6 @@ public abstract class LayerProperty<S> extends Property<S, Layer>
     {
         super(key);
     }
-
-    @Override
-    public Layer getDefaultValue()
-    {
-        return null;
-    }
     
     public abstract Layout getLayout();
 

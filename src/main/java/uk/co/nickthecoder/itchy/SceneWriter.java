@@ -6,6 +6,8 @@ package uk.co.nickthecoder.itchy;
 
 import java.io.File;
 
+import uk.co.nickthecoder.itchy.editor.SceneDesignerRole;
+import uk.co.nickthecoder.itchy.makeup.Makeup;
 import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.PropertySubject;
 import uk.co.nickthecoder.itchy.role.PlainRole;
@@ -41,26 +43,20 @@ public class SceneWriter extends XMLWriter
     private void writeScene() throws XMLException
     {
         this.beginTag("scene");
-        this.attribute("showMouse", this.scene.showMouse);
-        this.attribute("layout", this.scene.layout.name);
-        if (!PlainSceneDirector.class.getName().equals(this.scene.getSceneDirectorClassName())) {
-            this.attribute("role", this.scene.getSceneDirectorClassName().name);
-        }
+        this.writeProperties(this.scene);
 
-        writeSceneDirectorProperties();
-
-        //for (Scene.SceneLayer sceneLayer : this.scene.getSceneLayers()) {
+        this.writeProperties("sceneDirector", this.scene.getSceneDirector());
 
         for (Layer layer : scene.layout.getLayersByZOrder()) {
-            Scene.SceneLayer sceneLayer = scene.findSceneLayer(layer.name);
             
             this.beginTag("layer");
             this.attribute("name", layer.name);
 
             this.writeLayerProperties(layer);
 
-            if (sceneLayer != null ) {
-                this.writeActors(sceneLayer);
+            Stage stage = layer.getStage();
+            if (stage != null) {
+                this.writeActors(stage);
             }
 
             this.endTag("layer");
@@ -85,9 +81,7 @@ public class SceneWriter extends XMLWriter
         View view = actualLayer.getView();
         View templateView = templateLayer.getView();
         if ((view != null) && (view.getProperties().size() > 0)) {
-            this.beginTag("view");
-            this.writeChangedProperties(view, templateView);
-            this.endTag("view");
+            this.writeChangedProperties("view", view, templateView);
         }
         
         if (view instanceof StageView) {
@@ -99,28 +93,87 @@ public class SceneWriter extends XMLWriter
             Stage templateStage = templateStageView.getStage();
             
             if ((stage != null) && (stage.getProperties().size() > 0)) {
-                this.beginTag("stage");
-                this.writeChangedProperties(stage, templateStage);
-                this.endTag("stage");
+                this.writeChangedProperties("stage", stage, templateStage);
             }
             if ((stage != null) && (stage.getStageConstraint().getProperties().size() > 0)) {
-                this.beginTag("stageConstraint");
-                this.writeChangedProperties(stage.getStageConstraint(), templateStage.getStageConstraint());
-                this.endTag("stageConstraint");
+                this.writeChangedProperties("stageConstraint", stage.getStageConstraint(), templateStage.getStageConstraint());
             }
         }
         
     }
 
-    private <S extends PropertySubject<S>> void writeChangedProperties(S subject, S template)
+    private void writeActors(Stage stage) throws XMLException
+    {
+        for (Actor sceneActor : stage.getActors()) {
+
+            Role role = sceneActor.getRole();
+            if (role instanceof SceneDesignerRole) {
+                role = ((SceneDesignerRole)role).actualRole;
+            }
+            
+            if (sceneActor.getAppearance().getPose() instanceof TextPose) {
+                this.beginTag("text");
+
+                if (sceneActor.getCostume() != null) {
+                    this.attribute("costume", sceneActor.getCostume().getName());
+                }
+
+                this.writeSceneActorAttributes(sceneActor, role);
+                this.endTag("text");
+            
+            } else {
+                
+                this.beginTag("actor");
+                this.attribute("costume", sceneActor.getCostume().getName());
+                
+                this.writeSceneActorAttributes(sceneActor, role);
+                
+                this.endTag("actor");
+
+            }
+
+        }
+
+    }
+
+    private void writeSceneActorAttributes(Actor sceneActor, Role role) throws XMLException
+    {
+        writeProperties( sceneActor );
+        writeProperties( sceneActor.getAppearance() );
+        
+        if (PlainRole.class != role.getClass()) {
+            this.attribute("role", role.getClassName().name);
+        }
+        
+        Makeup makeup = sceneActor.getAppearance().getMakeup();
+        if (NullMakeup.class != makeup.getClass()) {
+            this.attribute("makeup", makeup.getClassName().name);
+        }
+        
+        this.writeProperties("role", role);
+        this.writeProperties("makeup", sceneActor.getAppearance().getMakeup());
+
+    }
+
+
+    private <S extends PropertySubject<S>> void writeProperties(String tagName, S subject)
+        throws XMLException
+    {
+        if ( subject.getProperties().size() > 0 ) {
+            this.beginTag(tagName);
+            this.writeProperties(subject);
+            this.endTag(tagName);
+        }
+    }
+    
+    private <S extends PropertySubject<S>> void writeProperties(S subject)
         throws XMLException
     {
         for (Property<S, ?> property : subject.getProperties()) {
 
             try {
                 String value = property.getStringValue(subject);
-                String value2 = property.getStringValue(template);
-                if (!value.equals(value2)) {
+                if (! property.isDefaultValue( subject )) {
                     this.attribute(property.key, value);
                 }
 
@@ -131,133 +184,36 @@ public class SceneWriter extends XMLWriter
 
         }
     }
+    
 
-    private void writeSceneDirectorProperties()
+    private <S extends PropertySubject<S>> void writeChangedProperties(String tagName, S subject, S template)
         throws XMLException
     {
-        this.beginTag("properties");
-        for (Property<SceneDirector, ?> property : this.scene.getSceneDirector().getProperties()) {
+        boolean startedTag = false;
+        
+        for (Property<S, ?> property : subject.getProperties()) {
+
             try {
-                this.beginTag("property");
-                this.attribute("name", property.key);
-                this.attribute("value", property.getStringValue(this.scene.getSceneDirector()));
-                this.endTag("property");
+                String value = property.getStringValue(subject);
+                String value2 = property.getStringValue(template);
+                if (!value.equals(value2)) {
+                    if (!startedTag) {
+                        this.beginTag(tagName);
+                        startedTag = true;
+                    }
+                    this.attribute(property.key, value);
+                }
+
             } catch (Exception e) {
-                throw new XMLException("Failed to write sceneDirector property : " + property.key);
-            }
-        }
-
-        this.endTag("properties");
-    }
-
-    private void writeActors(Scene.SceneLayer sceneLayer) throws XMLException
-    {
-        for (SceneActor sceneActor : sceneLayer.getSceneActors()) {
-
-            if (sceneActor instanceof CostumeSceneActor) {
-
-                CostumeSceneActor csa = (CostumeSceneActor) sceneActor;
-                this.beginTag("actor");
-                this.attribute("costume", this.resources.getCostumeName(csa.costume));
-
-                if ((csa.costume.roleClassName == null) ||
-                    (!csa.costume.roleClassName.name.equals(csa.roleClassName.name))) {
-                    this.attribute("role", sceneActor.roleClassName.name);
-                }
-                this.writeSceneActorAttributes(sceneActor);
-
-                this.writeMakeupAttributes(sceneActor);
-
-                this.endTag("actor");
-
-            } else if (sceneActor instanceof TextSceneActor) {
-                TextSceneActor tsa = (TextSceneActor) sceneActor;
-                this.beginTag("text");
-                this.attribute("text", tsa.text);
-                this.attribute("font", tsa.font.getName());
-                this.attribute("size", tsa.fontSize);
-                this.attribute("color", tsa.color.getRGBCode());
-                this.attribute("xAlignment", tsa.xAlignment);
-                this.attribute("yAlignment", tsa.yAlignment);
-                if (!PlainRole.class.getName().equals(sceneActor.roleClassName.name)) {
-                    this.attribute("role", sceneActor.roleClassName.name);
-                }
-                if (tsa.costume != null) {
-                    this.attribute("costume", this.resources.getCostumeName(tsa.costume));
-                }
-
-                this.writeSceneActorAttributes(sceneActor);
-
-                this.writeMakeupAttributes(sceneActor);
-
-                this.endTag("text");
+                e.printStackTrace();
+                throw new XMLException("Failed to write property : " + property.key);
             }
 
         }
-
-        // this.endTag( "actors" );
-    }
-
-    private void writeSceneActorAttributes(SceneActor sceneActor) throws XMLException
-    {
-        if (sceneActor.id != null) {
-            this.attribute("id", sceneActor.id);
+        if ( startedTag ) {
+            this.endTag( tagName );
         }
-        this.attribute("x", sceneActor.x);
-        this.attribute("y", sceneActor.y);
-        this.attribute("direction", sceneActor.direction);
-        this.attribute("heading", sceneActor.heading);
-        this.attribute("startEvent", sceneActor.startEvent);
-        this.attribute("zOrder", sceneActor.zOrder);
-
-        if (sceneActor.alpha != 255) {
-            this.attribute("alpha", sceneActor.alpha);
-        }
-
-        if (sceneActor.colorize != null) {
-            this.attribute("colorize", sceneActor.colorize.getRGBACode());
-        }
-
-        if (sceneActor.scale != 1) {
-            this.attribute("scale", sceneActor.scale);
-        }
-
-        if (sceneActor.activationDelay != 0) {
-            this.attribute("activationDelay", sceneActor.activationDelay);
-        }
-
-        for (String key : sceneActor.customPropertyStrings.keySet()) {
-            String value = sceneActor.customPropertyStrings.get(key);
-
-            if (value != null) {
-                this.beginTag("property");
-                this.attribute("name", key);
-                this.attribute("value", value);
-                this.endTag("property");
-            }
-        }
-
-    }
-
-    private void writeMakeupAttributes(SceneActor sceneActor) throws XMLException
-    {
-        if (sceneActor.makeupClassName.name.equals(NullMakeup.class.getName())) {
-            return;
-        }
-        this.beginTag("makeup");
-        this.attribute("classname", sceneActor.makeupClassName.name);
-
-        for (String key : sceneActor.makeupPropertyStrings.keySet()) {
-            String value = sceneActor.makeupPropertyStrings.get(key);
-
-            if (value != null) {
-                this.beginTag("property");
-                this.attribute("name", key);
-                this.attribute("value", value);
-                this.endTag("property");
-            }
-        }
-        this.endTag("makeup");
+        
     }
 
 }

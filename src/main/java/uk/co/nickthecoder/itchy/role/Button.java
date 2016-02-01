@@ -15,13 +15,14 @@ import uk.co.nickthecoder.jame.event.MouseMotionEvent;
  * <p>
  * The abstract onClick method is called after the mouseUp event.
  * <p>
- * The button will fire three events, "mouseDown", "mouseUp" and "click". "mouseDown" is fired when the mouse is pressed within the actor.
- * The "mouseUp" is fired when the mouse moves outside of the actor while the button is still down. "mouseUp" and "click" are fired when the
- * mouse button is released within the button. In addition, events "hoverOver" and "hoverOut" are also fired when the mouse moves over the
- * button without being clicked.
+ * The button will fire three events, "mouseDown", "mouseUp" and "click". "mouseDown" is fired when the mouse is pressed
+ * within the actor. The "mouseUp" is fired when the mouse moves outside of the actor while the button is still down.
+ * "mouseUp" and "click" are fired when the mouse button is released within the button. In addition, events "hoverOver"
+ * and "hoverOut" are also fired when the mouse moves over the button without being clicked.
  * <p>
  * For the button to work, the layer that the actor is drawn on must have had its mouse listener enabled. i.e. call
- * {@link uk.co.nickthecoder.itchy.StageView#enableMouseListener(uk.co.nickthecoder.itchy.Game)} when initialising your Game object.
+ * {@link uk.co.nickthecoder.itchy.StageView#enableMouseListener(uk.co.nickthecoder.itchy.Game)} when initialising your
+ * Game object.
  */
 public abstract class Button extends AbstractRole implements ViewMouseListener
 {
@@ -38,7 +39,19 @@ public abstract class Button extends AbstractRole implements ViewMouseListener
     }
 
     @Override
-    public void onMouseDown( MouseListenerView view, MouseButtonEvent event )
+    public void onAttach()
+    {
+        super.onAttach();
+    }
+
+    @Override
+    public void onBirth()
+    {
+        super.onBirth();
+    }
+
+    @Override
+    public void onMouseDown(MouseListenerView view, MouseButtonEvent event)
     {
         if (getActor().hitting(event.x, event.y)) {
             onDown();
@@ -50,7 +63,7 @@ public abstract class Button extends AbstractRole implements ViewMouseListener
     }
 
     @Override
-    public void onMouseUp( MouseListenerView view, MouseButtonEvent event )
+    public void onMouseUp(MouseListenerView view, MouseButtonEvent event)
     {
         if (this.down) {
             view.releaseMouse(this);
@@ -67,7 +80,7 @@ public abstract class Button extends AbstractRole implements ViewMouseListener
     }
 
     @Override
-    public void onMouseMove( MouseListenerView view, MouseMotionEvent event )
+    public void onMouseMove(MouseListenerView view, MouseMotionEvent event)
     {
         boolean nowInside = getActor().hitting(event.x, event.y);
 

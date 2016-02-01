@@ -17,8 +17,6 @@ public class AbstractDirector implements Director
 {
     protected Game game;
     
-    private Layout layout;
-
     public Game getGame()
     {
         return this.game;
@@ -126,46 +124,9 @@ public class AbstractDirector implements Director
     @Override
     public boolean startScene( String sceneName )
     {
-        if (this.game.pause.isPaused()) {
-            this.game.pause.unpause();
-        }
-        this.game.clear();
-        Layout layout = this.game.loadScene(sceneName);
-        if ( layout == null) {
-            return false;
-        }
-
-        this.layout = layout;
-
-        // fire events
-        this.game.getSceneDirector().onLoaded();
-        for (Stage stage : this.game.getStages()) {
-            for (Actor actor : stage.getActors()) {
-                actor.getRole().sceneCreated();
-            }
-        }
-        this.game.getSceneDirector().onActivate();
-        Itchy.frameRate.reset();
+        this.game.startScene( sceneName );
         
         return true;
-    }
-
-    @Override
-    public boolean mergeScene( String sceneName )
-    {
-        Layout layout = this.game.loadScene(sceneName, true);
-        if ( layout == null) {
-            return false;
-        }
-        
-        this.layout.merge(layout);
-        return true;
-    }
-    
-    @Override
-    public Layout getLayout()
-    {
-        return this.layout;
     }
     
     /**
@@ -196,5 +157,11 @@ public class AbstractDirector implements Director
     public void tick()
     {
         // Do nothing.
+    }
+
+    @Override
+    public Scene loadScene(String sceneName)
+    {
+        return this.game.loadScene(sceneName);
     }
 }

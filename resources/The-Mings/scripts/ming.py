@@ -20,7 +20,7 @@ class Ming(AbstractRole) :
         self.job = None
         
     def onBirth(self):
-
+        print "ming.onBirth"
         self.addTag( "ming" )
 
         self.lookLeftRight = self.createLooker( "lookLeftRight" )

@@ -5,8 +5,6 @@
 package uk.co.nickthecoder.itchy;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.property.BooleanProperty;
@@ -25,7 +23,7 @@ public class Scene implements NamedSubject<Scene>
         properties.add(new StringProperty<Scene>("name"));
         properties.add(new LayoutProperty<Scene>("layout"));
         properties.add(new ClassNameProperty<Scene>(SceneDirector.class, "sceneDirector")
-            .access("sceneDirectorClassName"));
+            .access("sceneDirectorClassName").aliases("role"));
         properties.add(new BooleanProperty<Scene>("showMouse"));
     }
 
@@ -42,10 +40,6 @@ public class Scene implements NamedSubject<Scene>
 
     private ClassName sceneDirectorClassName;
 
-    private List<SceneLayer> sceneLayers;
-
-    private HashMap<String, SceneLayer> layersMap;
-
     private SceneDirector sceneDirector;
 
     public Layout layout;
@@ -53,8 +47,6 @@ public class Scene implements NamedSubject<Scene>
 
     public Scene()
     {
-        this.sceneLayers = new ArrayList<SceneLayer>();
-        this.layersMap = new HashMap<String, SceneLayer>();
         this.sceneDirectorClassName = new ClassName(SceneDirector.class, PlainSceneDirector.class.getName());
     }
 
@@ -70,94 +62,14 @@ public class Scene implements NamedSubject<Scene>
         this.name = name;
     }
 
-    public SceneLayer findSceneLayer(String name)
-    {
-        for (SceneLayer sceneLayer : this.sceneLayers) {
-            if (sceneLayer.name.equals(name)) {
-                return sceneLayer;
-            }
-        }
-        return null;
-    }
-
-    public List<SceneLayer> getSceneLayers()
-    {
-        return this.sceneLayers;
-    }
-
-    public SceneLayer createSceneLayer(String name)
-    {
-        SceneLayer layer = new SceneLayer(name);
-        addSceneLayer(layer);
-        return layer;
-    }
-
-    public SceneLayer getDefaultSceneLayer()
-    {
-        return this.sceneLayers.get(0);
-    }
-
-    private void addSceneLayer(SceneLayer sceneLayer)
-    {
-        this.sceneLayers.add(sceneLayer);
-        this.layersMap.put(sceneLayer.getName(), sceneLayer);
-    }
-
     public void clear()
     {
-        for (SceneLayer sceneLayer : this.sceneLayers) {
-            sceneLayer.clear();
-        }
-        this.sceneLayers.clear();
-    }
-
-    public void create(Stage layer, Resources resources, boolean designMode)
-    {
-        for (SceneLayer sceneLayer : this.sceneLayers) {
-            sceneLayer.create(layer, resources, designMode);
-        }
-    }
-
-    public void create(Game game, boolean designMode)
-    {
-        for (SceneLayer sceneLayer : this.sceneLayers) {
-            String name = sceneLayer.name;
-
-            sceneLayer.create(findStage(name), game.resources, designMode);
-        }
-    }
-
-    /**
-     * Look for a layer with a given name, and return its stage.
-     * If non are found, then return a ANY stage, as a fallback.
-     */
-    private Stage findStage(String name)
-    {
-        Stage best = null;
-
-        for (Layer layer : layout.getLayers()) {
+        for (Layer layer : this.layout.getLayers()) {
             Stage stage = layer.getStage();
-            if (layer.name.equals(name)) {
-                if (stage != null) {
-                    return stage;
-                }
-            }
             if (stage != null) {
-                best = stage;
+                stage.clear();
             }
         }
-
-        return best;
-    }
-
-    public void add(SceneActor sceneActor)
-    {
-        this.sceneLayers.get(0).add(sceneActor);
-    }
-
-    public List<SceneActor> getSceneActors()
-    {
-        return this.sceneLayers.get(0).getSceneActors();
     }
 
     public Scene copy()
@@ -166,12 +78,7 @@ public class Scene implements NamedSubject<Scene>
         result.showMouse = this.showMouse;
         result.sceneDirectorClassName = this.sceneDirectorClassName;
         result.sceneDirector = this.sceneDirector;
-        result.layout = this.layout;
-
-        for (SceneLayer sceneLayer : this.sceneLayers) {
-            SceneLayer newSceneLayer = sceneLayer.copy();
-            result.addSceneLayer(newSceneLayer);
-        }
+        result.layout = this.layout.clone();
 
         return result;
     }
@@ -209,107 +116,41 @@ public class Scene implements NamedSubject<Scene>
 
     public boolean uses(Font font)
     {
-        for (SceneLayer layer : this.sceneLayers) {
-            if (layer.uses(font)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean uses(Costume costume)
-    {
-        for (SceneLayer layer : this.sceneLayers) {
-            if (layer.uses(costume)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public void debug()
-    {
-        System.err.println("Scene");
-        for (SceneLayer layer : this.sceneLayers) {
-            System.err.println("Layer : " + layer.name + " Actors " + layer.sceneActors.size());
-        }
-    }
-
-    public class SceneLayer
-    {
-        String name;
-
-        private List<SceneActor> sceneActors;
-
-        public SceneLayer(String name)
-        {
-            this.name = name;
-            this.sceneActors = new ArrayList<SceneActor>();
-        }
-
-        public String getName()
-        {
-            return this.name;
-        }
-
-        public void add(SceneActor sceneActor)
-        {
-            this.sceneActors.add(sceneActor);
-        }
-
-        public List<SceneActor> getSceneActors()
-        {
-            return Collections.unmodifiableList(this.sceneActors);
-        }
-
-        public void clear()
-        {
-            this.sceneActors.clear();
-        }
-
-        public SceneLayer copy()
-        {
-            SceneLayer result = new SceneLayer(this.name);
-            for (SceneActor sceneActor : this.sceneActors) {
-                result.sceneActors.add(sceneActor.copy());
-            }
-            return result;
-        }
-
-        public boolean isEmpty()
-        {
-            return this.sceneActors.size() == 0;
-        }
-
-        public void create(Stage stage, Resources resources, boolean designMode)
-        {
-            for (SceneActor sceneActor : this.sceneActors) {
-                Actor actor = sceneActor.createActor(resources, designMode);
-                stage.add(actor);
-            }
-        }
-
-        public boolean uses(Font font)
-        {
-            for (SceneActor sceneActor : this.sceneActors) {
-                if (sceneActor instanceof TextSceneActor) {
-                    if (((TextSceneActor) sceneActor).font == font) {
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
-
-        public boolean uses(Costume costume)
-        {
-            for (SceneActor sceneActor : this.sceneActors) {
-                if (sceneActor.costume == costume) {
+        for (Layer layer : this.layout.getLayers()) {
+            Stage stage = layer.getStage();
+            if (stage!= null) {
+                if (stageUses(stage, font)) {
                     return true;
                 }
             }
-            return false;
         }
+        return false;
+    }
+    
+    public boolean uses(Costume costume)
+    {
+        for (Layer layer : this.layout.getLayers()) {
+            Stage stage = layer.getStage();
+            if (stage!= null) {
+                if (stageUses(stage, costume)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
+
+    public boolean stageUses(Stage stage, Font font)
+    {
+        // TODO implement stageUses(Font)
+        return false;
+    }
+    
+    public boolean stageUses(Stage stage, Costume costume)
+    {
+        // TODO implement stageUses(Costume)
+        return false;
+    }
+   
 }

@@ -20,12 +20,6 @@ public class EnumProperty<S, E extends Enum<?>> extends Property<S, E>
     }
 
     @Override
-    public E getDefaultValue()
-    {
-        return null;
-    }
-
-    @Override
     public Component createComponent( final S subject, boolean autoUpdate )
     {
         final EnumPickerButton<E> button = new EnumPickerButton<E>("Picker", this.getSafeValue(subject));

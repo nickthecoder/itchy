@@ -15,6 +15,7 @@ public class DoubleProperty<S> extends Property<S, Double>
     public DoubleProperty( String key )
     {
         super(key);
+        this.defaultValue = 0.0;
     }
 
     @Override
@@ -64,12 +65,6 @@ public class DoubleProperty<S> extends Property<S, Double>
     {
         Number result = (Number) BeanHelper.getProperty(subject, this.access);
         return result.doubleValue();
-    }
-
-    @Override
-    public Double getDefaultValue()
-    {
-        return 0.0;
     }
 
     @Override

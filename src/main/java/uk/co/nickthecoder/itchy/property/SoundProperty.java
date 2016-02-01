@@ -15,12 +15,6 @@ public class SoundProperty<S> extends Property<S, SoundResource>
     }
 
     @Override
-    public SoundResource getDefaultValue()
-    {
-        return null;
-    }
-
-    @Override
     public Component createComponent( final S subject, final boolean autoUpdate )
     {
         SoundResource soundResource = this.getSafeValue(subject);

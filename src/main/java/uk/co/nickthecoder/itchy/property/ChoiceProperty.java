@@ -77,10 +77,14 @@ public class ChoiceProperty<S, T> extends Property<S, T>
     @Override
     public T getDefaultValue()
     {
-        for (T value : this.map.values()) {
-            return value;
+        // TODO Add "allowNull" 
+        if (this.defaultValue == null)  {
+            for (T value : this.map.values()) {
+                return value;
+            }
         }
-        return null;
+        
+        return this.defaultValue;
     }
 
     @Override

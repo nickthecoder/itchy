@@ -15,12 +15,6 @@ public class AnimationProperty<S> extends Property<S, AnimationResource>
     }
 
     @Override
-    public AnimationResource getDefaultValue()
-    {
-        return null;
-    }
-
-    @Override
     public Component createComponent( final S subject, final boolean autoUpdate )
     {
         AnimationResource animationResource = this.getSafeValue(subject);

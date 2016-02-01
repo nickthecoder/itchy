@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.Itchy;
-import uk.co.nickthecoder.itchy.Layout;
 import uk.co.nickthecoder.itchy.Scene;
 import uk.co.nickthecoder.itchy.SceneStub;
 import uk.co.nickthecoder.itchy.gui.ReflectionTableModelRow;
@@ -58,14 +57,20 @@ public class ListScenes extends ListSubjects<SceneStub>
         
         if (subject == null) {
             subject = new SceneStub();
+            subject.setName( "new" );
             scene = new Scene();
             scene.layout = resources.getLayout("default");
             if (scene.layout == null) {
-                scene.layout = new Layout();
+                try {
+                    scene.layout = resources.getLayout( resources.layoutNames().get(0) );
+                } catch (Exception e) {
+                    // TODO Show message "You need to create a default Layout".
+                    e.printStackTrace();
+                }
             }
         } else {
             try {
-                scene = subject.load();
+                scene = subject.load( true );
             } catch (Exception e) {
                 Itchy.handleException(e);
                 return;

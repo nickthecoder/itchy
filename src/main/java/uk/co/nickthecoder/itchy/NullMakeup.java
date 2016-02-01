@@ -7,11 +7,14 @@ package uk.co.nickthecoder.itchy;
 import java.util.Collections;
 import java.util.List;
 
+import uk.co.nickthecoder.itchy.makeup.AbstractMakeup;
 import uk.co.nickthecoder.itchy.makeup.Makeup;
 import uk.co.nickthecoder.itchy.makeup.TransformationData;
 import uk.co.nickthecoder.itchy.property.Property;
 
-public class NullMakeup implements Makeup
+//TODO Move to Makup package?
+
+public class NullMakeup extends AbstractMakeup
 {
 
     @Override

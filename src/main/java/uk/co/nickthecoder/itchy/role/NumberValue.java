@@ -17,10 +17,16 @@ public class NumberValue extends TextValue
     protected static final List<Property<Role, ?>> properties = new ArrayList<Property<Role, ?>>();
 
     static {
-        properties.addAll( TextValue.properties );
+        properties.addAll(TextValue.properties);
         properties.add(new StringProperty<Role>("formatPattern"));
     }
-    
+
+    @Override
+    public List<Property<Role, ?>> getProperties()
+    {
+        return properties;
+    }
+
     public String formatPattern = "0";
 
     private DecimalFormat format = new DecimalFormat("0");
@@ -33,7 +39,7 @@ public class NumberValue extends TextValue
     }
 
     @Override
-    protected String formatValue( Object value )
+    protected String formatValue(Object value)
     {
         return this.format.format(value);
     }

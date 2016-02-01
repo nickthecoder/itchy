@@ -13,7 +13,7 @@ import uk.co.nickthecoder.itchy.property.Property;
 /**
  * Used internally by Appearance, has no properties, and always returns the same change id.
  */
-public abstract class BuiltInMakeup implements Makeup
+public abstract class BuiltInMakeup extends AbstractMakeup
 {
     protected int changeId = 1;
 

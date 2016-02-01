@@ -21,12 +21,7 @@ public class RGBAProperty<S> extends Property<S, RGBA>
         super(key);
         this.allowNull = false;
         this.includeAlpha = true;
-    }
-
-    @Override
-    public RGBA getDefaultValue()
-    {
-        return RGBA.BLACK;
+        this.defaultValue = RGBA.BLACK;
     }
 
     @Override
@@ -129,6 +124,7 @@ public class RGBAProperty<S> extends Property<S, RGBA>
     public RGBAProperty<S> allowNull( boolean value )
     {
         this.allowNull = value;
+        this.defaultValue = this.allowNull ? null : RGBA.BLACK;
         return this;
     }
     

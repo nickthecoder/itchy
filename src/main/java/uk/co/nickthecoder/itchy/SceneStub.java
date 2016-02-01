@@ -91,17 +91,17 @@ public class SceneStub implements NamedSubject<SceneStub>
         return true;
     }
 
-    public Scene load() throws Exception
+    public Scene load( boolean design ) throws Exception
     {
-        Scene scene = this.load(Itchy.getGame().resources.resolveFile(getFile()));
+        Scene scene = this.load(Itchy.getGame().resources.resolveFile(getFile()), design);
         scene.name = this.name;
         System.out.println(scene.layout);
         return scene;
     }
 
-    private Scene load(File file) throws Exception
+    private Scene load(File file, boolean design) throws Exception
     {
-        SceneReader reader = new SceneReader(Itchy.getGame().resources);
+        SceneReader reader = new SceneReader(Itchy.getGame().resources, design);
         return reader.load(file);
 
     }
@@ -123,41 +123,8 @@ public class SceneStub implements NamedSubject<SceneStub>
         saveBackup.renameToBackup();
     }
 
-    // TODO This needs looking at - more things to check.
+    // TODO Implement SceneStub checkSave
     private void checkSave(Scene scene, File file) throws Exception
     {
-        Scene newScene = this.load(file);
-
-        List<Scene.SceneLayer> newSceneLayers = newScene.getSceneLayers();
-
-        int i = 0;
-        for (Scene.SceneLayer oldSceneLayer : scene.getSceneLayers()) {
-            if (i >= newSceneLayers.size()) {
-                if (oldSceneLayer.getSceneActors().size() != 0) {
-                    throw new Exception("Layers differ");
-                }
-                continue;
-            }
-            Scene.SceneLayer newSceneLayer = newSceneLayers.get(i);
-            if (!oldSceneLayer.getName().equals(newSceneLayer.getName())) {
-                if (oldSceneLayer.getSceneActors().size() == 0) {
-                    continue;
-                }
-            }
-            i++;
-            SaveBackup.ensure(oldSceneLayer.name, newSceneLayer.name, "Different stage name");
-
-            List<SceneActor> newSceneActors = newSceneLayer.getSceneActors();
-            SaveBackup.ensure(newSceneActors.size(), oldSceneLayer.getSceneActors().size(),
-                "Different number of actors");
-
-            int j = 0;
-            for (SceneActor oldSceneActor : oldSceneLayer.getSceneActors()) {
-                SceneActor newSceneActor = newSceneActors.get(j);
-                j++;
-                SaveBackup.ensure(oldSceneActor, newSceneActor, "Different actor #" + j);
-            }
-
-        }
     }
 }

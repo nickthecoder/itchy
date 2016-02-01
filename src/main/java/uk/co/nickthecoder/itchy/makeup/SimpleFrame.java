@@ -16,7 +16,7 @@ import uk.co.nickthecoder.jame.RGBA;
 import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.Surface;
 
-public class SimpleFrame implements Makeup
+public class SimpleFrame extends AbstractMakeup
 {
     protected static final List<Property<Makeup, ?>> properties = new ArrayList<Property<Makeup, ?>>();
 

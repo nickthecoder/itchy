@@ -10,7 +10,7 @@ import java.util.List;
 import uk.co.nickthecoder.itchy.OffsetSurface;
 import uk.co.nickthecoder.itchy.property.Property;
 
-public class ForwardingMakeup implements Makeup
+public class ForwardingMakeup extends AbstractMakeup
 {
     private int changeId = 0;
 

@@ -48,11 +48,14 @@ public class PickLevel extends Button
     @Override
     public void onAttach()
     {
+        System.out.println( "PickLevel onAttach" );
         if (DrunkInvaders.director.completedLevel(this.levelNumber)) {
             getActor().event("completed");
         }
 
-        if (this.font != null) {
+        if (this.font == null) {
+            System.err.println( "Couldn't find PickLevel's font" );
+        } else {
             TextPose shadowPose = new TextPose(String.valueOf(this.levelNumber), this.font, this.fontSize,
                             this.shadowColor);
 

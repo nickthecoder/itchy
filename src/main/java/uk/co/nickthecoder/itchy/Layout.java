@@ -180,4 +180,12 @@ public class Layout implements NamedSubject<Layout>, Cloneable
         return result;
     }
 
+    public void dump()
+    {
+        Resources.dump("Layout");
+        for ( Layer layer : this.layers ) {
+            Resources.dump( "   ", layer.name, layer.getView(), layer.getStage(), layer.getStage() == null ? "" : (layer.getStage().getActors().size() + " actors") );
+        }
+        Resources.dump("");
+    }
 }

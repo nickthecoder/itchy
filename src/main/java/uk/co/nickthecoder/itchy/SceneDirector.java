@@ -10,6 +10,12 @@ import uk.co.nickthecoder.itchy.property.PropertySubject;
 public interface SceneDirector extends MouseListener, KeyListener, MessageListener, PropertySubject<SceneDirector>
 {
     /**
+     * Called early during the load process, before the actors have been fully  initialised.
+     * This is primarily here, so that a SceneDirector can choose to merge additional scenes. 
+     */
+    public void loading( Scene scene );
+
+    /**
      * Called after the scene has been loaded, and all of the actor's have been added to the stages.
      * At this stage, none of the actor's have had their onSceneCreated called.
      */

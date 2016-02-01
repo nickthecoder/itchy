@@ -36,8 +36,11 @@ class Play(PlainSceneDirector) :
         self.highlight = None # a Highlight object or None if no Ming is highlighted
 
 
+    def loading( self, scene ) :
+        print "Loading gui scene"
+        game.mergeScene(scene, "gui")
+
     def onActivate(self) :
-        game.director.mergeScene("gui")
         width = game.getWidth()
         height = game.getHeight()
 
@@ -114,7 +117,7 @@ class Play(PlainSceneDirector) :
 
 
     def onMouseDown( self, event ) :
-        mainView = director.layout.findView("main")
+        mainView = game.layout.findView("main")
         mainView.adjustMouse( event )
         if event.button == MouseButtonEvent.BUTTON_LEFT :
             x = event.x
