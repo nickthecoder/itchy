@@ -188,9 +188,9 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.scene = scene;
 
         costumeButtonGroup = new ButtonGroup();
-        
-        System.out.println( "Editing scene  "+ this.scene );
-        System.out.println( "Editing Layout "+ this.scene.layout );
+
+        System.out.println("Editing scene  " + this.scene);
+        System.out.println("Editing Layout " + this.scene.layout);
         this.scene.layout.dump();
     }
 
@@ -218,7 +218,7 @@ public class SceneDesigner implements MouseListener, KeyListener
             StageView stageView = layer.getStageView();
             if (stageView != null) {
                 Stage stage = stageView.getStage();
-                System.out.println( "Editor adding stage/view " + stage + "/" + stageView );
+                System.out.println("Editor adding stage/view " + stage + "/" + stageView);
                 editor.getStages().add(stage);
                 currentLayer = layer;
                 currentStageView = stageView;
@@ -232,7 +232,6 @@ public class SceneDesigner implements MouseListener, KeyListener
         overlayView = new StageView(editRect, overlayStage);
         editor.getViews().add(overlayView);
 
-        
         editor.addMouseListener(this);
         editor.addKeyListener(this);
 
@@ -244,9 +243,9 @@ public class SceneDesigner implements MouseListener, KeyListener
         Surface screen = Itchy.getDisplaySurface();
         resize(screen.getWidth(), screen.getHeight());
         onCenter();
-        
+
         if (scene.layout.defaultLayer != null) {
-            selectLayer( scene.layout.defaultLayer);
+            selectLayer(scene.layout.defaultLayer);
         }
     }
 
@@ -340,9 +339,9 @@ public class SceneDesigner implements MouseListener, KeyListener
             System.out.print(view.getClass().getName() + " : ");
         }
         System.out.print(view.getPosition());
-        if ( view instanceof StageView ) {
+        if (view instanceof StageView) {
             Stage stage = ((StageView) view).getStage();
-            System.out.print( " Stage " + stage + " " + stage.getActors().size() + " actors." );
+            System.out.print(" Stage " + stage + " " + stage.getActors().size() + " actors.");
         }
         System.out.println();
         if (view instanceof GenericCompoundView) {
@@ -692,9 +691,9 @@ public class SceneDesigner implements MouseListener, KeyListener
         resetZButton.setTooltip("Reset Z Orders (#)");
         toolbar.addChild(resetZButton);
 
-        layerPickerButton = new LayerPickerButton( this.scene.layout, this.currentLayer );
+        layerPickerButton = new LayerPickerButton(this.scene.layout, this.currentLayer);
         layerPickerButton.addChangeListener(new ComponentChangeListener()
-        {            
+        {
             @Override
             public void changed()
             {
@@ -706,7 +705,7 @@ public class SceneDesigner implements MouseListener, KeyListener
     }
 
     private LayerPickerButton layerPickerButton;
-    
+
     private SceneDesignerPropertiesForm<Scene> sceneForm;
 
     private ClassNameBox sceneDirectorName;
@@ -1099,23 +1098,23 @@ public class SceneDesigner implements MouseListener, KeyListener
             public AbstractComponent createCell(TableModelRow row)
             {
                 final Layer layer = (Layer) row.getData(0);
-                GuiButton button = new GuiButton( "..." );
+                GuiButton button = new GuiButton("...");
                 button.addActionListener(new ActionListener()
                 {
                     @Override
                     public void action()
                     {
-                        EditLayer editLayer = new EditLayer(editor.resources,null,scene.layout, layer, false);
+                        EditLayer editLayer = new EditLayer(editor.resources, null, scene.layout, layer, false);
                         editLayer.show();
                         editLayer.hideDetails();
                     }
                 });
-                
+
                 return button;
-            };     
+            };
         };
         columns.add(editLayerColumn);
-        
+
         layersTable = new Table(layersTableModel, columns);
         layersTable.setFill(true, true);
         layersTable.setExpansion(1.0);
@@ -1139,12 +1138,12 @@ public class SceneDesigner implements MouseListener, KeyListener
             }
         });
     }
-    
-    private void selectLayer( Layer layer )
+
+    private void selectLayer(Layer layer)
     {
         currentLayer = layer;
         if (currentLayer.getStageView() != null) {
-            currentStageView = currentLayer.getStageView(); 
+            currentStageView = currentLayer.getStageView();
             layerPickerButton.setValue(layer);
         }
         updateLayersTable();
@@ -1502,8 +1501,8 @@ public class SceneDesigner implements MouseListener, KeyListener
             if (Itchy.isCtrlDown()) {
                 // Look at ALL stages, not only the current one.
 
-                //for (View child : Reversed.list(designViews.getChildren())) {
-                for ( Layer layer : Reversed.list(scene.layout.getLayersByZOrder())) {
+                // for (View child : Reversed.list(designViews.getChildren())) {
+                for (Layer layer : Reversed.list(scene.layout.getLayersByZOrder())) {
                     StageView stageView = layer.getStageView();
                     if (stageView != null) {
                         Stage stage = stageView.getStage();
@@ -1516,7 +1515,7 @@ public class SceneDesigner implements MouseListener, KeyListener
                                         searching = false;
                                     }
                                 } else {
-                                    selectLayer( layer );
+                                    selectLayer(layer);
                                     selectActor(actor);
                                     setMode(MODE_DRAG_ACTOR);
                                     beginDrag(event.x, event.y);
@@ -1578,18 +1577,16 @@ public class SceneDesigner implements MouseListener, KeyListener
                 }
             }
 
-            SceneDesignerRole sdRole = new SceneDesignerRole( role );
+            SceneDesignerRole sdRole = new SceneDesignerRole(role);
             actor.setRole(sdRole);
-            
+
             if (!stampActor.isText()) {
                 setDefaultProperties(role, currentCostume);
             }
 
             StageConstraint sc = currentStageView.getStage().getStageConstraint();
 
-            actor.moveTo(sc.constrainX(event.x, event.y),
-                sc.constrainY(event.x, event.y));
-            actor.setRole(role);
+            actor.moveTo(sc.constrainX(event.x, event.y), sc.constrainY(event.x, event.y));
             if (currentCostume != null) {
                 actor.setZOrder(currentCostume.defaultZOrder);
             }
@@ -1845,19 +1842,59 @@ public class SceneDesigner implements MouseListener, KeyListener
     private void onPaste()
     {
         if (SceneDesigner.copiedActor != null) {
-            Actor actor = copyActor( copiedActor );
+            Actor actor = copyActor(copiedActor);
             actor.moveBy(10, 10);
             currentStageView.getStage().add(actor);
             selectActor(actor);
         }
     }
 
-    public Actor copyActor( Actor actor )
+    public Actor copyActor(Actor fromActor)
     {
-        // TODO Implement copyActor
-        return actor;
+        Actor toActor;
+        if (fromActor.getCostume() == null) {
+            toActor = new Actor(fromActor.getAppearance().getPose());
+        } else {
+            toActor = new Actor(fromActor.getCostume());
+        }
+
+        try {
+            Role fromRole = ((SceneDesignerRole) fromActor.getRole()).actualRole;
+            Role toRole = (Role) fromRole.getClassName().createInstance(this.editor.resources);
+            
+            Makeup fromMakeup = fromActor.getAppearance().getMakeup();
+            Makeup toMakeup = (Makeup) fromMakeup.getClassName().createInstance(this.editor.resources);
+            
+            toActor.setRole(new SceneDesignerRole( toRole ) ); 
+            toActor.getAppearance().setMakeup( toMakeup );
+
+            for (Property<Actor, ?> property : fromActor.getProperties()) {
+                Object value = property.getValue(fromActor);
+                property.setValue(toActor, value);
+            }
+            
+            for (Property<Appearance, ?> property : fromActor.getAppearance().getProperties()) {
+                Object value = property.getValue(fromActor.getAppearance());
+                property.setValue(toActor.getAppearance(), value);
+            }
+            
+            for (Property<Role, ?> property : fromRole.getProperties()) {
+                Object value = property.getValue(fromRole);
+                property.setValue(toRole, value);
+            }
+            
+            for (Property<Makeup, ?> property : fromActor.getAppearance().getMakeup().getProperties()) {
+                Object value = property.getValue(fromActor.getAppearance().getMakeup());
+                property.setValue(toActor.getAppearance().getMakeup(), value);
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return toActor;
     }
-    
+
     private void onActorDelete()
     {
         if ((mode == MODE_SELECT) && (currentActor != null)) {
@@ -2003,7 +2040,6 @@ public class SceneDesigner implements MouseListener, KeyListener
         overlayStage.addTop(stampActor);
 
     }
-
 
     private void createHightlightActor()
     {
