@@ -8,7 +8,7 @@ properties = ArrayList()
 properties.add( IntegerProperty( "bees" ) )
 properties.add( BooleanProperty( "needsProdding" ) )
 properties.add( IntegerProperty( "requiredPollen" ) )
-properties.add( ChoiceProperty( "beeLogic" ).add("Random", 0).add("AntiClockwise", 1).add("Clockwise", 2) )
+properties.add( ChoiceProperty( "beeLogic" ).add("Random", 0).add("Right Edge", 1).add("Left Edge", 2) )
 properties.add( ChoiceProperty( "beeDirection" ).add("Random", -1).add("North", 1).add("East", 0).add("South", 3).add("West",2) )
 properties.add( DoubleProperty( "spawnPeriod" ).hint("seconds") )
 properties.add( IntegerProperty( "randomSeed" ) )
@@ -24,7 +24,7 @@ class Beehive(Faller) :
     def __init__(self) :
         super(Beehive,self).__init__()
 
-        self.bees = 3
+        self.bees = 0
         self.requiredPollen = 0
         self.beeLogic = 1
         self.beeDirection = 0
@@ -49,12 +49,12 @@ class Beehive(Faller) :
             self.random = Random(self.randomSeed)
 
         self.costumeFeatures.update(self) # Its a roundedProperties
-        self.rolls = self.hasTag("roundedSE")
-
         if not self.needsProdding :
             self.prodded()
             
         super(Beehive,self).onBirth()            
+
+        self.rolls = self.hasTag("roundedSE")
         self.attached = self.rolls # The round beehive is attached (won't wall until prodded).
 
     def makeAMove(self) :
@@ -72,7 +72,6 @@ class Beehive(Faller) :
 
 
     def prodded(self) :
-        print "Prodded"
         self.needsProdding = False
         self.attached = False
         if self.bees == 0 :

@@ -49,7 +49,7 @@ public class SceneWriter extends XMLWriter
         this.writeProperties("sceneDirector", this.scene.getSceneDirector());
 
         for (Layer layer : scene.layout.getLayersByZOrder()) {
-            
+
             this.beginTag("layer");
             this.attribute("name", layer.name);
 
@@ -84,23 +84,24 @@ public class SceneWriter extends XMLWriter
         if ((view != null) && (view.getProperties().size() > 0)) {
             this.writeChangedProperties("view", view, templateView);
         }
-        
+
         if (view instanceof StageView) {
-            
+
             StageView stageView = (StageView) view;
             StageView templateStageView = (StageView) templateView;
-            
+
             Stage stage = stageView.getStage();
             Stage templateStage = templateStageView.getStage();
-            
+
             if ((stage != null) && (stage.getProperties().size() > 0)) {
                 this.writeChangedProperties("stage", stage, templateStage);
             }
             if ((stage != null) && (stage.getStageConstraint().getProperties().size() > 0)) {
-                this.writeChangedProperties("stageConstraint", stage.getStageConstraint(), templateStage.getStageConstraint());
+                this.writeChangedProperties("stageConstraint", stage.getStageConstraint(),
+                    templateStage.getStageConstraint());
             }
         }
-        
+
     }
 
     private void writeActors(Stage stage) throws XMLException
@@ -109,9 +110,9 @@ public class SceneWriter extends XMLWriter
 
             Role role = sceneActor.getRole();
             if (role instanceof SceneDesignerRole) {
-                role = ((SceneDesignerRole)role).actualRole;
+                role = ((SceneDesignerRole) role).actualRole;
             }
-            
+
             if (sceneActor.getAppearance().getPose() instanceof TextPose) {
                 this.beginTag("text");
 
@@ -121,14 +122,14 @@ public class SceneWriter extends XMLWriter
 
                 this.writeSceneActorAttributes(sceneActor, role);
                 this.endTag("text");
-            
+
             } else {
-                
+
                 this.beginTag("actor");
                 this.attribute("costume", sceneActor.getCostume().getName());
-                
+
                 this.writeSceneActorAttributes(sceneActor, role);
-                
+
                 this.endTag("actor");
 
             }
@@ -139,42 +140,59 @@ public class SceneWriter extends XMLWriter
 
     private void writeSceneActorAttributes(Actor sceneActor, Role role) throws XMLException
     {
-        writeProperties( sceneActor );
-        writeProperties( sceneActor.getAppearance() );
-        
+        writeProperties(sceneActor);
+        writeProperties(sceneActor.getAppearance());
+
         if (PlainRole.class != role.getClass()) {
             this.attribute("role", role.getClassName().name);
         }
-        
+
         Makeup makeup = sceneActor.getAppearance().getMakeup();
         if (NullMakeup.class != makeup.getClass()) {
             this.attribute("makeup", makeup.getClassName().name);
         }
-        
-        this.writeProperties("role", role);
+
+        this.writeAllProperties("role", role);
         this.writeProperties("makeup", sceneActor.getAppearance().getMakeup());
 
     }
 
+    private <S extends PropertySubject<S>> void writeAllProperties(String tagName, S subject)
+        throws XMLException
+    {
+        writeProperties(tagName, subject, true);        
+    }
 
     private <S extends PropertySubject<S>> void writeProperties(String tagName, S subject)
         throws XMLException
     {
-        if ( subject.getProperties().size() > 0 ) {
+        writeProperties(tagName, subject, false);
+    }
+    
+    private <S extends PropertySubject<S>> void writeProperties(String tagName, S subject, boolean allValues)
+        throws XMLException
+    {
+        if (subject.getProperties().size() > 0) {
             this.beginTag(tagName);
             this.writeProperties(subject);
             this.endTag(tagName);
         }
     }
-    
+
     private <S extends PropertySubject<S>> void writeProperties(S subject)
+        throws XMLException
+    {
+        writeProperties(subject, false);
+    }
+
+    private <S extends PropertySubject<S>> void writeProperties(S subject, boolean allValues)
         throws XMLException
     {
         for (Property<S, ?> property : subject.getProperties()) {
 
             try {
                 String value = property.getStringValue(subject);
-                if (! property.isDefaultValue( subject )) {
+                if (allValues || !property.isDefaultValue(subject)) {
                     this.attribute(property.key, value);
                 }
 
@@ -185,13 +203,12 @@ public class SceneWriter extends XMLWriter
 
         }
     }
-    
 
     private <S extends PropertySubject<S>> void writeChangedProperties(String tagName, S subject, S template)
         throws XMLException
     {
         boolean startedTag = false;
-        
+
         for (Property<S, ?> property : subject.getProperties()) {
 
             try {
@@ -211,10 +228,10 @@ public class SceneWriter extends XMLWriter
             }
 
         }
-        if ( startedTag ) {
-            this.endTag( tagName );
+        if (startedTag) {
+            this.endTag(tagName);
         }
-        
+
     }
 
 }
