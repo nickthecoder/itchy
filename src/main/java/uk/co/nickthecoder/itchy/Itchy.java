@@ -113,7 +113,7 @@ public class Itchy
 
         registry.add(new ClassName(CostumeFeatures.class, CostumeFeatures.class));
 
-        registry.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.NullMakeup.class));
+        registry.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.makeup.NullMakeup.class));
         registry.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.makeup.Shadow.class));
         registry.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.makeup.Scale.class));
         registry.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.makeup.Textured.class));

@@ -15,6 +15,7 @@ import uk.co.nickthecoder.itchy.makeup.BuiltInScale;
 import uk.co.nickthecoder.itchy.makeup.ForwardingMakeup;
 import uk.co.nickthecoder.itchy.makeup.Makeup;
 import uk.co.nickthecoder.itchy.makeup.MakeupPipeline;
+import uk.co.nickthecoder.itchy.makeup.NullMakeup;
 import uk.co.nickthecoder.itchy.makeup.TransformationData;
 import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.DoubleProperty;

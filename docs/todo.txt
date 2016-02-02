@@ -5,14 +5,15 @@ Look over all TODOs
 
 Load/Save all scenes in all games to convert them to the new format.
 
+Check order of Role onAttach and onBirth, I think it should be reversed.
+    Remove the special "onBirth" in DelayedActivation, and put a special instanceof DelayedActivation when attach is called. 
+
+Get Pause working - which games use it ?
 
 
 
 
-
-
-
-Remove Actor.getActivationDelay, and put it in SceneDesignRole (which is then loaded directly into DelayedActivation) ?
+Remove Actor.getActivationDelay, and put it in SceneDesignerRole (which is then loaded directly into DelayedActivation) ?
 
 Escape does "cancel" on all "Edit" forms, and "close" on Lists.
 
@@ -25,8 +26,6 @@ Renaming a Layer/Layout will need to alter all scenes???
 All resources.renameXXX needs to update the renamed collection, so that renameSubjectsInScenes will work. 
     And do the same with other resources. Layouts, Fonts, ... ?
 
-Why does AbstractDirector have a layout?
-    Either Game or SceneDirector.
 
 BUGS
 ====
