@@ -15,7 +15,7 @@ public class AnimationProperty<S> extends Property<S, AnimationResource>
     }
 
     @Override
-    public Component createComponent( final S subject, final boolean autoUpdate )
+    public Component createUnvalidatedComponent( final S subject, final boolean autoUpdate )
     {
         AnimationResource animationResource = this.getSafeValue(subject);
 
@@ -55,22 +55,17 @@ public class AnimationProperty<S> extends Property<S, AnimationResource>
     }
 
     @Override
-    public void updateSubject( S subject, Component component ) throws Exception
+    public AnimationResource getValueFromComponent( Component component )
     {
         AnimationPickerButton pickerButton = (AnimationPickerButton) component;
-        try {
-            this.setValue(subject, pickerButton.getValue());
-            pickerButton.removeStyle("error");
-        } catch (Exception e) {
-            pickerButton.addStyle("error");
-        }
+        return pickerButton.getValue();
     }
 
     @Override
-    public void updateComponent( S subject, Component component ) throws Exception
+    public void updateComponentValue( AnimationResource value, Component component )
     {
         AnimationPickerButton pickerButton = (AnimationPickerButton) component;
-        pickerButton.setValue(this.getValue(subject));
+        pickerButton.setValue(value);
     }
 
     @Override
@@ -92,12 +87,6 @@ public class AnimationProperty<S> extends Property<S, AnimationResource>
         AnimationResource value = this.getValue(subject);
 
         return value.getName();
-    }
-
-    @Override
-    public String getErrorText( Component component )
-    {
-        return null;
     }
 
 }

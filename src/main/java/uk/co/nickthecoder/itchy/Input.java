@@ -30,7 +30,7 @@ public class Input implements NamedSubject<Input>, InputInterface
     protected static final List<Property<Input, ?>> properties = new ArrayList<Property<Input, ?>>();
 
     static {
-        properties.add(new StringProperty<Input>("name"));
+        properties.add(new StringProperty<Input>("name").allowBlank(false));
         properties.add(new InputProperty<Input>("keys").access("keysString"));
     }
 

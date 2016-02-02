@@ -42,7 +42,7 @@ public class NinePatch extends ImageRenderable implements NamedSubject<NinePatch
     protected static final List<Property<NinePatch, ?>> properties = new ArrayList<Property<NinePatch, ?>>();
 
     static {
-        properties.add(new StringProperty<NinePatch>("name"));
+        properties.add(new StringProperty<NinePatch>("name").allowBlank(false));
         properties.add(new FileProperty<NinePatch>("file").aliases("filename"));
         properties.add(new IntegerProperty<NinePatch>("top").access("marginTop"));
         properties.add(new IntegerProperty<NinePatch>("right").access("marginRight"));

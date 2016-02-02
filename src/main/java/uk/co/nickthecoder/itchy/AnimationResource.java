@@ -17,7 +17,7 @@ public class AnimationResource implements NamedSubject<AnimationResource>
     protected static final List<Property<AnimationResource, ?>> properties = new ArrayList<Property<AnimationResource, ?>>();
 
     static {
-        properties.add(new StringProperty<AnimationResource>("name"));
+        properties.add(new StringProperty<AnimationResource>("name").allowBlank(false));
     }
 
     @Override

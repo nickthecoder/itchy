@@ -16,7 +16,7 @@ public class NinePatchProperty<S> extends Property<S, NinePatch>
     }
 
     @Override
-    public Component createComponent( final S subject, final boolean autoUpdate )
+    public Component createUnvalidatedComponent( final S subject, final boolean autoUpdate )
     {
         Resources resources = Itchy.getGame().resources;
 
@@ -59,23 +59,17 @@ public class NinePatchProperty<S> extends Property<S, NinePatch>
     }
 
     @Override
-    public void updateSubject( S subject, Component component ) throws Exception
+    public NinePatch getValueFromComponent( Component component )
     {
         NinePatchPickerButton pickerButton = (NinePatchPickerButton) component;
-        try {
-            this.setValue(subject, pickerButton.getValue());
-            pickerButton.removeStyle("error");
-        } catch (Exception e) {
-            pickerButton.addStyle("error");
-        }
+        return pickerButton.getValue();
     }
 
     @Override
-    public void updateComponent( S subject, Component component ) throws Exception
+    public void updateComponentValue( NinePatch value, Component component )
     {
         NinePatchPickerButton pickerButton = (NinePatchPickerButton) component;
-        NinePatch ninePatch = this.getValue(subject);
-        pickerButton.setValue(ninePatch);
+        pickerButton.setValue(value);
     }
 
     @Override
@@ -98,11 +92,4 @@ public class NinePatchProperty<S> extends Property<S, NinePatch>
         
         return ninePatch == null ? "" : ninePatch.getName();
     }
-
-    @Override
-    public String getErrorText( Component component )
-    {
-        return null;
-    }
-
 }

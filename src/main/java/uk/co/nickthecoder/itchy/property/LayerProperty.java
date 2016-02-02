@@ -22,7 +22,7 @@ public abstract class LayerProperty<S> extends Property<S, Layer>
     public abstract Layout getLayout();
 
     @Override
-    public Component createComponent( final S subject, final boolean autoUpdate )
+    public Component createUnvalidatedComponent( final S subject, final boolean autoUpdate )
     {
         Layer layer = this.getSafeValue(subject);
         final LayerPickerButton pickerButton = new LayerPickerButton(getLayout(), layer);
@@ -61,23 +61,17 @@ public abstract class LayerProperty<S> extends Property<S, Layer>
     }
 
     @Override
-    public void updateSubject( S subject, Component component ) throws Exception
+    public Layer getValueFromComponent( Component component )
     {
         LayerPickerButton pickerButton = (LayerPickerButton) component;
-        try {
-            this.setValue(subject, pickerButton.getValue());
-            pickerButton.removeStyle("error");
-        } catch (Exception e) {
-            pickerButton.addStyle("error");
-        }
+        return pickerButton.getValue();
     }
 
     @Override
-    public void updateComponent( S subject, Component component ) throws Exception
+    public void updateComponentValue( Layer value, Component component )
     {
         LayerPickerButton pickerButton = (LayerPickerButton) component;
-        Layer layer = this.getValue(subject);
-        pickerButton.setValue(layer);
+        pickerButton.setValue(value);
     }
 
     @Override
@@ -102,12 +96,6 @@ public abstract class LayerProperty<S> extends Property<S, Layer>
             return "";
         }
         return layer.getName();
-    }
-
-    @Override
-    public String getErrorText( Component component )
-    {
-        return null;
     }
 
 }

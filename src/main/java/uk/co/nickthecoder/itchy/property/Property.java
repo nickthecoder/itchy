@@ -88,6 +88,8 @@ public abstract class Property<S, T>
 
     public T defaultValue;
     
+    public boolean allowNull = false;
+
     /**
      * Make a shallow copy of the property values.
      * 
@@ -222,8 +224,37 @@ public abstract class Property<S, T>
      * 
      * @throws Exception
      */
-    public abstract Component createComponent(final S subject, boolean autoUpdate);
+    public abstract Component createUnvalidatedComponent( S subject, boolean autoUpdate);
 
+    public Component createComponent( S subject, boolean autoUpdate )
+    {
+        Component result = createUnvalidatedComponent(subject, autoUpdate);
+        addValidator(result);
+        
+        return result;
+    }
+    
+    public void addValidator(final Component component)
+    {
+        ComponentValidator validator = new ComponentValidator()
+        {
+            @Override
+            public boolean isValid()
+            {
+                return Property.this.isValid(component);
+            }
+        };
+        this.addValidator(component, validator);
+        
+        // Set the value, to the EXISTING value, just so that the new validator is fired.
+        // So, required fields will be red when their initial value is blank.
+        try {
+            this.updateComponentValue( this.getValueFromComponent(component), component);
+        } catch (Exception e) {
+            // Ignore
+        }
+    }
+    
     public abstract void addChangeListener(Component component, ComponentChangeListener listener);
 
     public abstract void addValidator(Component component, ComponentValidator validator);
@@ -239,8 +270,14 @@ public abstract class Property<S, T>
      *            The GUI Component, that was created by the createComponent method.
      * @throws Exception
      */
-    public abstract void updateSubject(S subject, Component component) throws Exception;
+    public void updateSubject(S subject, Component component) throws Exception
+    {
+        T value = getValueFromComponent(component);
+        this.setValue(subject, value);
+    }
 
+    public abstract T getValueFromComponent( Component component ) throws Exception;
+    
     /**
      * Refreshes the component based on the state of the subject.
      * 
@@ -250,18 +287,25 @@ public abstract class Property<S, T>
      * 
      * @throws Exception
      */
-    public abstract void updateComponent(S subject, Component component) throws Exception;
+    public void updateComponent(S subject, Component component) throws Exception
+    {
+        this.updateComponentValue( this.getValue(subject), component);
+    }
 
-    /**
-     * Checks if the entered value is valid, and if so, returns null, otherwise it returns the error message explaining
-     * what if wrong with the entered value.
-     * 
-     * @param component
-     *            The component created via {@link #createComponent(Object, boolean)}
-     * @return
-     *         Null if there is no error, otherwise a descriptive error message.
-     */
-    public abstract String getErrorText(Component component);
+    public abstract void updateComponentValue(T value, Component component);
+
+    public boolean isValid(Component component)
+    {
+        try {
+            T value = getValueFromComponent(component);
+            if ((value == null) && !allowNull) {
+                return false;
+            }
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 
     /**
      * Converts a String representation of the properties value into the appropriate. For example, an IntegerProperty
@@ -332,5 +376,10 @@ public abstract class Property<S, T>
         return this;
     }
     
-
+    public Property<S,T> allowNull( boolean value )
+    {
+        this.allowNull = value;
+        return this;
+    }
+    
 }

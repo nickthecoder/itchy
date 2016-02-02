@@ -10,8 +10,6 @@ import java.util.List;
 import uk.co.nickthecoder.itchy.OffsetSurface;
 import uk.co.nickthecoder.itchy.property.Property;
 
-//TODO Move to Makup package?
-
 public class NullMakeup extends AbstractMakeup
 {
 

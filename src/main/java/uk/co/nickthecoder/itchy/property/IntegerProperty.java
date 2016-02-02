@@ -19,7 +19,7 @@ public class IntegerProperty<S> extends Property<S, Integer>
     }
 
     @Override
-    public Component createComponent( final S subject, boolean autoUpdate )
+    public Component createUnvalidatedComponent( final S subject, boolean autoUpdate )
     {
         final IntegerBox box = new IntegerBox(this.getSafeValue(subject));
         if (autoUpdate) {
@@ -78,22 +78,17 @@ public class IntegerProperty<S> extends Property<S, Integer>
     }
     
     @Override
-    public void updateSubject( S subject, Component component ) throws Exception
+    public Integer getValueFromComponent( Component component ) throws Exception
     {
         IntegerBox integerBox = (IntegerBox) component;
-        try {
-            this.setValue(subject, integerBox.getValue());
-            integerBox.removeStyle("error");
-        } catch (Exception e) {
-            integerBox.addStyle("error");
-        }
+         return integerBox.getValue();
     }
 
     @Override
-    public void updateComponent( S subject, Component component ) throws Exception
+    public void updateComponentValue( Integer value, Component component )
     {
         IntegerBox integerBox = (IntegerBox) component;
-        integerBox.setValue(this.getValue(subject));
+        integerBox.setValue(value);
     }
 
     @Override
@@ -104,17 +99,6 @@ public class IntegerProperty<S> extends Property<S, Integer>
         } catch (NumberFormatException e) {
             return (int) Float.parseFloat(value);
         }
-    }
-
-    @Override
-    public String getErrorText( Component component )
-    {
-        try {
-            ((IntegerBox) component).getValue();
-        } catch (Exception e) {
-            return "Not a valid whole number";
-        }
-        return null;
     }
 
 }

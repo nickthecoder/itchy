@@ -14,7 +14,7 @@ import uk.co.nickthecoder.itchy.gui.PickerButton;
 public class ChoiceProperty<S, T> extends Property<S, T>
 {
     private HashMap<String, T> map;
-
+    
     public ChoiceProperty( String key )
     {
         super(key);
@@ -22,7 +22,7 @@ public class ChoiceProperty<S, T> extends Property<S, T>
     }
 
     /**
-     * A Fluent version of "put"
+     * A Fluent API for adding a value to the map of allowed value/label pairs.
      * 
      * @return this
      */
@@ -38,7 +38,7 @@ public class ChoiceProperty<S, T> extends Property<S, T>
     }
 
     @Override
-    public Component createComponent( final S subject, boolean autoUpdate )
+    public Component createUnvalidatedComponent( final S subject, boolean autoUpdate )
     {
         final PickerButton<T> button = new PickerButton<T>("Choice", this.getSafeValue(subject), this.map);
         if (autoUpdate) {
@@ -88,19 +88,19 @@ public class ChoiceProperty<S, T> extends Property<S, T>
     }
 
     @Override
-    public void updateSubject( S subject, Component component ) throws Exception
+    public T getValueFromComponent( Component component )
     {
         @SuppressWarnings("unchecked")
         PickerButton<T> button = (PickerButton<T>) component;
-        this.setValue(subject, button.getValue());
+        return button.getValue();
     }
 
     @Override
-    public void updateComponent( S subject, Component component ) throws Exception
+    public void updateComponentValue( T value, Component component )
     {
         @SuppressWarnings("unchecked")
         PickerButton<T> button = (PickerButton<T>) component;
-        button.setValue(this.getValue(subject));
+        button.setValue(value);
     }
 
     @Override
@@ -121,11 +121,5 @@ public class ChoiceProperty<S, T> extends Property<S, T>
     public T parse( String key )
     {
         return this.map.get(key);
-    }
-
-    @Override
-    public String getErrorText( Component component )
-    {
-        return null;
     }
 }

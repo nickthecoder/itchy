@@ -20,7 +20,7 @@ public class FontProperty<S> extends Property<S, Font>
     }
 
     @Override
-    public Component createComponent( final S subject, final boolean autoUpdate )
+    public Component createUnvalidatedComponent( final S subject, final boolean autoUpdate )
     {
         Resources resources = Itchy.getGame().resources;
 
@@ -63,23 +63,17 @@ public class FontProperty<S> extends Property<S, Font>
     }
 
     @Override
-    public void updateSubject( S subject, Component component ) throws Exception
+    public Font getValueFromComponent( Component component )
     {
         FontPickerButton pickerButton = (FontPickerButton) component;
-        try {
-            this.setValue(subject, pickerButton.getValue());
-            pickerButton.removeStyle("error");
-        } catch (Exception e) {
-            pickerButton.addStyle("error");
-        }
+        return pickerButton.getValue();
     }
 
     @Override
-    public void updateComponent( S subject, Component component ) throws Exception
+    public void updateComponentValue( Font value, Component component )
     {
         FontPickerButton pickerButton = (FontPickerButton) component;
-        Font font = this.getValue(subject);
-        pickerButton.setValue(font);
+        pickerButton.setValue(value);
     }
 
     @Override
@@ -101,12 +95,6 @@ public class FontProperty<S> extends Property<S, Font>
         Font font = this.getValue(subject);
 
         return font.getName();
-    }
-
-    @Override
-    public String getErrorText( Component component )
-    {
-        return null;
     }
 
 }

@@ -18,7 +18,7 @@ public abstract class PoseResource implements Thumbnailed, Named
     protected static List<Property<PoseResource, ?>> properties = new LinkedList<Property<PoseResource, ?>>();
 
     static {
-        properties.add( new StringProperty<PoseResource>( "name" ));
+        properties.add( new StringProperty<PoseResource>( "name" ).allowBlank(false));
         properties.add( new DoubleProperty<PoseResource>( "pose.direction" ) );
         properties.add( new IntegerProperty<PoseResource>( "pose.offsetX" ) );
         properties.add( new IntegerProperty<PoseResource>( "pose.offsetY" ) );

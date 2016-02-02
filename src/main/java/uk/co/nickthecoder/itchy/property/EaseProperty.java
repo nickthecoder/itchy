@@ -22,7 +22,7 @@ public class EaseProperty<S> extends Property<S, Ease>
     }
 
     @Override
-    public Component createComponent( final S subject, boolean autoUpdate )
+    public Component createUnvalidatedComponent( final S subject, boolean autoUpdate )
     {
         final EasePickerButton button = new EasePickerButton(getSafeValue(subject));
 
@@ -57,17 +57,17 @@ public class EaseProperty<S> extends Property<S, Ease>
     }
 
     @Override
-    public void updateSubject( S subject, Component component ) throws Exception
+    public Ease getValueFromComponent( Component component )
     {
         EasePickerButton button = (EasePickerButton) component;
-        setValue(subject, button.getValue());
+        return button.getValue();
     }
 
     @Override
-    public void updateComponent( S subject, Component component ) throws Exception
+    public void updateComponentValue( Ease value, Component component )
     {
         EasePickerButton button = (EasePickerButton) component;
-        button.setValue(getValue(subject));
+        button.setValue(value);
     }
 
     @Override
@@ -91,9 +91,4 @@ public class EaseProperty<S> extends Property<S, Ease>
         }
     }
 
-    @Override
-    public String getErrorText( Component component )
-    {
-        return null;
-    }
 }

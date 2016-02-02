@@ -20,7 +20,7 @@ public class EnumProperty<S, E extends Enum<?>> extends Property<S, E>
     }
 
     @Override
-    public Component createComponent( final S subject, boolean autoUpdate )
+    public Component createUnvalidatedComponent( final S subject, boolean autoUpdate )
     {
         final EnumPickerButton<E> button = new EnumPickerButton<E>("Picker", this.getSafeValue(subject));
 
@@ -58,21 +58,21 @@ public class EnumProperty<S, E extends Enum<?>> extends Property<S, E>
     }
 
     @Override
-    public void updateSubject( S subject, Component component ) throws Exception
+    public E getValueFromComponent( Component component )
     {
         @SuppressWarnings("unchecked")
         EnumPickerButton<E> button = (EnumPickerButton<E>) component;
 
-        setValue(subject, button.getValue());
+        return button.getValue();
     }
 
     @Override
-    public void updateComponent( S subject, Component component ) throws Exception
+    public void updateComponentValue( E value, Component component )
     {
         @SuppressWarnings("unchecked")
         EnumPickerButton<E> button = (EnumPickerButton<E>) component;
 
-        button.setValue(getValue(subject));
+        button.setValue(value);
     }
 
     @Override
@@ -92,12 +92,6 @@ public class EnumProperty<S, E extends Enum<?>> extends Property<S, E>
     {
         E value = getValue(subject);
         return value.name();
-    }
-
-    @Override
-    public String getErrorText( Component component )
-    {
-        return null;
     }
 
 }

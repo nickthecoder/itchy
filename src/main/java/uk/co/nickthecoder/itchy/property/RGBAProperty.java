@@ -12,27 +12,25 @@ import uk.co.nickthecoder.jame.RGBA;
 
 public class RGBAProperty<S> extends Property<S, RGBA>
 {
-    private boolean allowNull;
-
     private boolean includeAlpha;
-    
-    public RGBAProperty( String key )
+
+    public RGBAProperty(String key)
     {
         super(key);
-        this.allowNull = false;
         this.includeAlpha = true;
         this.defaultValue = RGBA.BLACK;
     }
 
     @Override
-    public Component createComponent( final S subject, final boolean autoUpdate )
+    public Component createUnvalidatedComponent(final S subject, final boolean autoUpdate)
     {
         RGBA color = this.getSafeValue(subject);
         final RGBABox result = new RGBABox(color, this.allowNull, this.includeAlpha);
 
         if (autoUpdate) {
 
-            result.addChangeListener(new ComponentChangeListener() {
+            result.addChangeListener(new ComponentChangeListener()
+            {
                 @Override
                 public void changed()
                 {
@@ -48,38 +46,36 @@ public class RGBAProperty<S> extends Property<S, RGBA>
     }
 
     @Override
-    public void addChangeListener( Component component, ComponentChangeListener listener )
+    public void addChangeListener(Component component, ComponentChangeListener listener)
     {
         RGBABox rgbaBox = (RGBABox) component;
         rgbaBox.addChangeListener(listener);
     }
 
     @Override
-    public void addValidator( Component component, ComponentValidator validator)
+    public void addValidator(Component component, ComponentValidator validator)
     {
         RGBABox rgbaBox = (RGBABox) component;
         rgbaBox.addValidator(validator);
     }
+
+    @Override
+    public void updateComponentValue(RGBA value, Component component)
+    {
+        RGBABox rgbaBox = (RGBABox) component;
+        rgbaBox.setValue(value);
+    }
+
+
+    @Override
+    public RGBA getValueFromComponent(Component component) throws Exception
+    {
+        RGBABox rgbaBox = (RGBABox) component;
+        return rgbaBox.getValue();
+    }
     
     @Override
-    public void updateSubject( S subject, Component component )
-    {
-        RGBABox rgbaBox = (RGBABox) component;
-        try {
-            this.setValue(subject, rgbaBox.getValue());
-        } catch (Exception e) {
-        }
-    }
-
-    @Override
-    public void updateComponent( S subject, Component component ) throws Exception
-    {
-        RGBABox rgbaBox = (RGBABox) component;
-        rgbaBox.setValue(this.getValue(subject));
-    }
-
-    @Override
-    public RGBA parse( String value )
+    public RGBA parse(String value)
     {
         try {
             return RGBA.parse(value, this.allowNull, this.includeAlpha);
@@ -88,50 +84,42 @@ public class RGBAProperty<S> extends Property<S, RGBA>
         }
     }
 
-    @Override
-    public String getErrorText( Component component )
-    {
-        try {
-            ((RGBABox) component).getValue();
-        } catch (Exception e) {
-            return "Not a valid colour";
-        }
-        return null;
-    }
-
     // Fluent API boilerplate
     @Override
-    public RGBAProperty<S> label( String label )
+    public RGBAProperty<S> label(String label)
     {
         super.label(label);
         return this;
     }
 
     @Override
-    public RGBAProperty<S> access( String access )
+    public RGBAProperty<S> access(String access)
     {
         super.access(access);
         return this;
     }
 
     @Override
-    public RGBAProperty<S> hint( String hint )
+    public RGBAProperty<S> hint(String hint)
     {
         super.hint(hint);
         return this;
     }
 
-    public RGBAProperty<S> allowNull( boolean value )
+    public RGBAProperty<S> allowNull(boolean value)
     {
-        this.allowNull = value;
-        this.defaultValue = this.allowNull ? null : RGBA.BLACK;
+        super.allowNull(value);
+        if ((this.defaultValue == null) && (!this.allowNull)) {
+            this.defaultValue = RGBA.BLACK;
+        }
         return this;
     }
-    
-    public RGBAProperty<S> includeAlpha( boolean value )
+
+    public RGBAProperty<S> includeAlpha(boolean value)
     {
         this.includeAlpha = value;
         return this;
     }
+
 
 }

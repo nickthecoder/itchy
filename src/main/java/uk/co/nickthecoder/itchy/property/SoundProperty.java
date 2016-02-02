@@ -15,7 +15,7 @@ public class SoundProperty<S> extends Property<S, SoundResource>
     }
 
     @Override
-    public Component createComponent( final S subject, final boolean autoUpdate )
+    public Component createUnvalidatedComponent( final S subject, final boolean autoUpdate )
     {
         SoundResource soundResource = this.getSafeValue(subject);
 
@@ -55,23 +55,17 @@ public class SoundProperty<S> extends Property<S, SoundResource>
     }
 
     @Override
-    public void updateSubject( S subject, Component component ) throws Exception
+    public SoundResource getValueFromComponent( Component component )
     {
         SoundPickerButton pickerButton = (SoundPickerButton) component;
-        try {
-            this.setValue(subject, pickerButton.getValue());
-            pickerButton.removeStyle("error");
-        } catch (Exception e) {
-            e.printStackTrace();
-            pickerButton.addStyle("error");
-        }
+        return pickerButton.getValue();
     }
 
     @Override
-    public void updateComponent( S subject, Component component ) throws Exception
+    public void updateComponentValue( SoundResource value, Component component )
     {
         SoundPickerButton pickerButton = (SoundPickerButton) component;
-        pickerButton.setValue(this.getValue(subject));
+        pickerButton.setValue(value);
     }
 
     @Override
@@ -94,12 +88,5 @@ public class SoundProperty<S> extends Property<S, SoundResource>
 
         return value.getName();
     }
-
-    @Override
-    public String getErrorText( Component component )
-    {
-        return null;
-    }
-
 
 }

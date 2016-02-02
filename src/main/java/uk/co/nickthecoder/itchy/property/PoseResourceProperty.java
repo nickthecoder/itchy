@@ -20,7 +20,7 @@ public class PoseResourceProperty<S> extends Property<S, PoseResource>
     }
 
     @Override
-    public Component createComponent( final S subject, final boolean autoUpdate )
+    public Component createUnvalidatedComponent( final S subject, final boolean autoUpdate )
     {
         Resources resources = Itchy.getGame().resources;
 
@@ -62,23 +62,17 @@ public class PoseResourceProperty<S> extends Property<S, PoseResource>
     }
 
     @Override
-    public void updateSubject( S subject, Component component ) throws Exception
+    public PoseResource getValueFromComponent( Component component )
     {
         PoseResourcePickerButton pickerButton = (PoseResourcePickerButton) component;
-        try {
-            this.setValue(subject, pickerButton.getValue());
-            pickerButton.removeStyle("error");
-        } catch (Exception e) {
-            pickerButton.addStyle("error");
-        }
+        return pickerButton.getValue();
     }
 
     @Override
-    public void updateComponent( S subject, Component component ) throws Exception
+    public void updateComponentValue( PoseResource value, Component component )
     {
         PoseResourcePickerButton pickerButton = (PoseResourcePickerButton) component;
-        PoseResource poseResource = this.getValue(subject);
-        pickerButton.setValue(poseResource);
+        pickerButton.setValue(value);
     }
 
     @Override
@@ -103,12 +97,6 @@ public class PoseResourceProperty<S> extends Property<S, PoseResource>
             return "";
         }
         return value.getName();
-    }
-
-    @Override
-    public String getErrorText( Component component )
-    {
-        return null;
     }
 
 }

@@ -16,7 +16,7 @@ public class CostumeProperty<S> extends Property<S, Costume>
     }
 
     @Override
-    public Component createComponent( final S subject, final boolean autoUpdate )
+    public Component createUnvalidatedComponent( final S subject, final boolean autoUpdate )
     {
         Costume costume = this.getSafeValue(subject);
 
@@ -56,22 +56,17 @@ public class CostumeProperty<S> extends Property<S, Costume>
     }
 
     @Override
-    public void updateSubject( S subject, Component component ) throws Exception
+    public Costume getValueFromComponent( Component component )
     {
         CostumePickerButton pickerButton = (CostumePickerButton) component;
-        try {
-            this.setValue(subject, pickerButton.getValue());
-            pickerButton.removeStyle("error");
-        } catch (Exception e) {
-            pickerButton.addStyle("error");
-        }
+        return pickerButton.getValue();
     }
 
     @Override
-    public void updateComponent( S subject, Component component ) throws Exception
+    public void updateComponentValue( Costume value, Component component )
     {
         CostumePickerButton pickerButton = (CostumePickerButton) component;
-        pickerButton.setValue(this.getValue(subject));
+        pickerButton.setValue(value);
     }
 
     @Override
@@ -93,12 +88,6 @@ public class CostumeProperty<S> extends Property<S, Costume>
         Costume value = this.getValue(subject);
 
         return value.getName();
-    }
-
-    @Override
-    public String getErrorText( Component component )
-    {
-        return null;
     }
 
 }

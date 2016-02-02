@@ -38,7 +38,7 @@ public class Costume implements NamedSubject<Costume>, Cloneable
     protected static final List<Property<Costume, ?>> properties = new ArrayList<Property<Costume, ?>>();
 
     static {
-        properties.add(new StringProperty<Costume>("name"));
+        properties.add(new StringProperty<Costume>("name").allowBlank(false));
         properties.add(new ClassNameProperty<Costume>(Role.class, "roleClassName"));
         properties.add(new IntegerProperty<Costume>("defaultZOrder"));
         properties.add(new BooleanProperty<Costume>("showInDesigner"));
@@ -594,7 +594,7 @@ public class Costume implements NamedSubject<Costume>, Cloneable
         protected static final List<Property<Event, ?>> text_style_properties = new ArrayList<Property<Event, ?>>();
 
         static {
-            event_properties.add(new StringProperty<Event>("eventName"));
+            event_properties.add(new StringProperty<Event>("eventName").allowBlank(false));
 
             pose_properties.addAll(event_properties);
             pose_properties.add(new PoseResourceProperty<Event>("data").label("Pose"));

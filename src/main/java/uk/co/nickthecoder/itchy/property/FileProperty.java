@@ -11,10 +11,15 @@ import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.ComponentValidator;
 import uk.co.nickthecoder.itchy.gui.FilenameComponent;
-import uk.co.nickthecoder.itchy.gui.TextBox;
 
 public class FileProperty<S> extends Property<S, File>
 {
+    /**
+     * True if the file must exist.
+     */
+    public boolean mustExist = true;
+
+    
     public FileProperty(String key)
     {
         super(key);
@@ -22,7 +27,7 @@ public class FileProperty<S> extends Property<S, File>
     }
 
     @Override
-    public Component createComponent(final S subject, boolean autoUpdate)
+    public Component createUnvalidatedComponent(final S subject, boolean autoUpdate)
     {
         final FilenameComponent box = new FilenameComponent(Itchy.getGame().resources, this.getSafeValue(subject));
         if (autoUpdate) {
@@ -45,35 +50,29 @@ public class FileProperty<S> extends Property<S, File>
     @Override
     public void addChangeListener(Component component, ComponentChangeListener listener)
     {
-        TextBox textBox = (TextBox) component;
-        textBox.addChangeListener(listener);
+        FilenameComponent filenameComponent = (FilenameComponent) component;
+        filenameComponent.addChangeListener(listener);
     }
 
     @Override
     public void addValidator(Component component, ComponentValidator validator)
     {
-        TextBox textBox = (TextBox) component;
-        textBox.addValidator(validator);
+        FilenameComponent filenameComponent = (FilenameComponent) component;
+        filenameComponent.addValidator(validator);
     }
 
     @Override
-    public void updateSubject(S subject, Component component) throws Exception
+    public File getValueFromComponent(Component component)
     {
         FilenameComponent filenameComponent = (FilenameComponent) component;
-        try {
-            this.setValue(subject, new File(filenameComponent.getText()));
-            filenameComponent.removeStyle("error");
-        } catch (Exception e) {
-            filenameComponent.addStyle("error");
-            throw e;
-        }
+        return new File(filenameComponent.getText());
     }
 
     @Override
-    public void updateComponent(S subject, Component component) throws Exception
+    public void updateComponentValue(File value, Component component)
     {
         FilenameComponent filenameComponent = (FilenameComponent) component;
-        filenameComponent.setText(getValue(subject).getPath());
+        filenameComponent.setText(value.getPath());
     }
 
     @Override
@@ -82,10 +81,31 @@ public class FileProperty<S> extends Property<S, File>
         return new File(value);
     }
 
-    @Override
-    public String getErrorText(Component component)
+    public FileProperty<S> mustExist( boolean value )
     {
-        return null;
+        this.mustExist = value;
+        return this;
     }
 
+    /**
+     * When validating if the file is valid, this resolves relative Files into absolute files.
+     * This implementation uses Resources.resolveFile, so relative paths are resolved relative to the
+     * current game's resources folder.
+     */
+    protected File resolveFile( File file )
+    {
+        return Itchy.getGame().resources.resolveFile(file);
+    }
+    
+    @Override
+    public boolean isValid( Component component )
+    {
+        if ( this.mustExist ) {
+            File file = resolveFile(this.getValueFromComponent(component));
+            if (!file.exists() ) {
+                return false;
+            }
+        }
+        return super.isValid(component);
+    }
 }

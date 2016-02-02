@@ -20,7 +20,7 @@ public class SoundResource implements NamedSubject<SoundResource>, PropertySubje
     protected static final List<Property<SoundResource, ?>> properties = new ArrayList<Property<SoundResource, ?>>();
 
     static {
-        properties.add( new StringProperty<SoundResource>( "name" ));
+        properties.add( new StringProperty<SoundResource>( "name" ).allowBlank(false));
         properties.add( new FileProperty<SoundResource>( "file" ).aliases( "filename" ) );
     }
 

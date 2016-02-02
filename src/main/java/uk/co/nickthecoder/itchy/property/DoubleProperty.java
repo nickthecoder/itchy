@@ -19,7 +19,7 @@ public class DoubleProperty<S> extends Property<S, Double>
     }
 
     @Override
-    public Component createComponent( final S subject, boolean autoUpdate )
+    public Component createUnvalidatedComponent( final S subject, boolean autoUpdate )
     {
         final DoubleBox box = new DoubleBox(this.getSafeValue(subject));
 
@@ -68,22 +68,17 @@ public class DoubleProperty<S> extends Property<S, Double>
     }
 
     @Override
-    public void updateSubject( S subject, Component component ) throws Exception
+    public Double getValueFromComponent(Component component )
     {
         DoubleBox doubleBox = (DoubleBox) component;
-        try {
-            this.setValue(subject, doubleBox.getValue());
-            doubleBox.removeStyle("error");
-        } catch (Exception e) {
-            doubleBox.addStyle("error");
-        }
+        return doubleBox.getValue();
     }
 
     @Override
-    public void updateComponent( S subject, Component component ) throws Exception
+    public void updateComponentValue( Double value, Component component )
     {
         DoubleBox doubleBox = (DoubleBox) component;
-        doubleBox.setValue(this.getValue(subject));
+        doubleBox.setValue(value);
     }
 
     @Override
@@ -91,16 +86,4 @@ public class DoubleProperty<S> extends Property<S, Double>
     {
         return Double.parseDouble(value);
     }
-
-    @Override
-    public String getErrorText( Component component )
-    {
-        try {
-            ((DoubleBox) component).getValue();
-        } catch (Exception e) {
-            return "Not a valid decimal number";
-        }
-        return null;
-    }
-
 }

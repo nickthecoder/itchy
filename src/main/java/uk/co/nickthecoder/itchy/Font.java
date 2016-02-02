@@ -27,7 +27,7 @@ public class Font implements NamedSubject<Font>
     protected static final List<Property<Font, ?>> properties = new ArrayList<Property<Font, ?>>();
 
     static {
-        properties.add(new StringProperty<Font>("name"));
+        properties.add(new StringProperty<Font>("name").allowBlank(false));
         properties.add(new FileProperty<Font>("file").aliases("filename"));
     }
 

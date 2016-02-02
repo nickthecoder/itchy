@@ -20,11 +20,11 @@ public class GameInfo implements PropertySubject<GameInfo>
     protected static List<Property<GameInfo, ?>> properties = new LinkedList<Property<GameInfo, ?>>();
     
     static {
-        properties.add( new StringProperty<GameInfo>( "title" ));
+        properties.add( new StringProperty<GameInfo>( "title" ).allowBlank(false));
         properties.add( new IntegerProperty<GameInfo>( "width" ));
         properties.add( new IntegerProperty<GameInfo>( "height" ));
         properties.add( new BooleanProperty<GameInfo>( "resizable" ));
-        properties.add( new StringProperty<GameInfo>( "initialScene" ));
+        properties.add( new StringProperty<GameInfo>( "initialScene" ).allowBlank(false));
         properties.add( new StringProperty<GameInfo>( "testScene" ));
         properties.add( new ClassNameProperty<GameInfo>( Director.class, "directorClassName" ).aliases( "className" ));
         properties.add( new StringProperty<GameInfo>( "authors" ).multiLine());        

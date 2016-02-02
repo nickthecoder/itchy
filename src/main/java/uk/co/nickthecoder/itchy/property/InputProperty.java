@@ -25,9 +25,9 @@ public class InputProperty<S> extends StringProperty<S>
     }
     
     @Override
-    public Component createComponent(final S subject, boolean autoUpdate)
+    public Component createUnvalidatedComponent(final S subject, boolean autoUpdate)
     {
-        final TextWidget textWidget = (TextWidget) super.createComponent(subject,  autoUpdate);
+        final TextWidget textWidget = (TextWidget) super.createUnvalidatedComponent(subject,  autoUpdate);
         textWidget.addValidator(new ComponentValidator()
         {
             @Override

@@ -19,7 +19,7 @@ public class BooleanProperty<S> extends Property<S, Boolean>
     }
 
     @Override
-    public Component createComponent( final S subject, boolean autoUpdate )
+    public Component createUnvalidatedComponent( final S subject, boolean autoUpdate )
     {
         boolean value = (this.getSafeValue(subject) == true);
         final CheckBox checkBox = new CheckBox(value);
@@ -56,34 +56,23 @@ public class BooleanProperty<S> extends Property<S, Boolean>
     }
 
     @Override
-    public void updateSubject( S subject, Component component ) throws Exception
+    public Boolean getValueFromComponent( Component component )
     {
         CheckBox checkBox = (CheckBox) component;
-        try {
-            this.setValue(subject, checkBox.getValue());
-            checkBox.removeStyle("error");
-        } catch (Exception e) {
-            checkBox.addStyle("error");
-        }
+        return checkBox.getValue();
     }
 
     @Override
-    public void updateComponent( S subject, Component component ) throws Exception
+    public void updateComponentValue( Boolean value, Component component )
     {
         CheckBox checkBox = (CheckBox) component;
-        checkBox.setValue(this.getValue(subject));
+        checkBox.setValue(value);
     }
 
     @Override
     public Boolean parse( String value )
     {
         return Boolean.parseBoolean(value);
-    }
-
-    @Override
-    public String getErrorText( Component component )
-    {
-        return null;
     }
 
 }

@@ -129,7 +129,6 @@ public class Notebook extends PlainContainer
         Tab( Component label, Component page, int pageNumber )
         {
             this.addChild(label);
-            // this.tooltip = "Page " + pageNumber; // TODO REMOVE
             this.page = page;
             this.type = "tab";
             this.focusable = true;

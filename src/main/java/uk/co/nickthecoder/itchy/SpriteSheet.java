@@ -17,7 +17,7 @@ public class SpriteSheet implements NamedSubject<SpriteSheet>
     protected static List<Property<SpriteSheet, ?>> properties = new LinkedList<Property<SpriteSheet, ?>>();
 
     static {
-        properties.add(new StringProperty<SpriteSheet>("name"));
+        properties.add(new StringProperty<SpriteSheet>("name").allowBlank(false));
         properties.add(new FileProperty<SpriteSheet>("file").aliases("filename"));
     }
 

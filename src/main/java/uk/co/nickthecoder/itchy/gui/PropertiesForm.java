@@ -159,26 +159,11 @@ public class PropertiesForm<S>
     {
         for (Property<S, ?> property : this.properties) {
             Component component = this.componentMap.get(property.key);
-            if (component.hasStyle("error")) {
+            if (!property.isValid(component)) {
                 return false;
             }
         }
-        return this.getErrorMessage() == null;
-    }
-
-    /**
-     * @return An error message if one or more properties have been entered incorrectly. Null if all properties are ok.
-     */
-    public String getErrorMessage()
-    {
-        for (Property<S, ?> property : this.properties) {
-            Component component = this.componentMap.get(property.key);
-            String errorMessage = property.getErrorText(component);
-            if (errorMessage != null) {
-                return errorMessage;
-            }
-        }
-        return null;
+        return true;
     }
 
     /**

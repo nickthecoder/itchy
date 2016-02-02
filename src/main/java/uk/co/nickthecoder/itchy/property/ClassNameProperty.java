@@ -19,7 +19,7 @@ public class ClassNameProperty<S> extends Property<S, ClassName>
      */
     private Class<?> baseClass;
 
-    public ClassNameProperty( Class<?>klass, String key )
+    public ClassNameProperty(Class<?> klass, String key)
     {
         super(key);
         this.baseClass = klass;
@@ -27,7 +27,7 @@ public class ClassNameProperty<S> extends Property<S, ClassName>
     }
 
     @Override
-    public Component createComponent( final S subject, boolean autoUpdate )
+    public Component createUnvalidatedComponent(final S subject, boolean autoUpdate)
     {
         ClassName className = this.getSafeValue(subject);
         ScriptManager scriptManager = Itchy.getGame().getScriptManager();
@@ -36,7 +36,8 @@ public class ClassNameProperty<S> extends Property<S, ClassName>
 
         if (autoUpdate) {
 
-            classNameBox.addChangeListener(new ComponentChangeListener() {
+            classNameBox.addChangeListener(new ComponentChangeListener()
+            {
                 @Override
                 public void changed()
                 {
@@ -53,56 +54,44 @@ public class ClassNameProperty<S> extends Property<S, ClassName>
     }
 
     @Override
-    public void addChangeListener( Component component, ComponentChangeListener listener )
+    public void addChangeListener(Component component, ComponentChangeListener listener)
     {
         ClassNameBox classNameBox = (ClassNameBox) component;
         classNameBox.addChangeListener(listener);
     }
 
     @Override
-    public void addValidator( Component component, ComponentValidator validator )
+    public void addValidator(Component component, ComponentValidator validator)
     {
         ClassNameBox classNameBox = (ClassNameBox) component;
         classNameBox.addValidator(validator);
     }
 
     @Override
-    public void updateSubject( S subject, Component component ) throws Exception
+    public ClassName getValueFromComponent(Component component)
     {
         ClassNameBox classNameBox = (ClassNameBox) component;
-
-        if (!classNameBox.hasStyle("error")) {
-            try {
-                this.setValue(subject, classNameBox.getClassName());
-            } catch (Exception e) {
-            }
-        }
+        return classNameBox.getClassName();
     }
 
     @Override
-    public void updateComponent( S subject, Component component ) throws Exception
+    public void updateComponentValue(ClassName value, Component component)
     {
         ClassNameBox classNameBox = (ClassNameBox) component;
 
-        classNameBox.setClassName(this.getValue(subject));
+        classNameBox.setClassName(value);
     }
 
     @Override
-    public ClassName parse( String value )
+    public ClassName parse(String value)
     {
         return new ClassName(this.baseClass, value);
     }
 
     @Override
-    public String getStringValue( S subject ) throws Exception
+    public String getStringValue(S subject) throws Exception
     {
         return getValue(subject).name;
-    }
-
-    @Override
-    public String getErrorText( Component component )
-    {
-        return null;
     }
 
 }
