@@ -13,10 +13,9 @@ import uk.co.nickthecoder.itchy.Appearance;
 import uk.co.nickthecoder.itchy.Costume;
 import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.extras.Timer;
-import uk.co.nickthecoder.itchy.property.Property;
-import uk.co.nickthecoder.itchy.property.BooleanProperty;
 import uk.co.nickthecoder.itchy.property.DoubleProperty;
 import uk.co.nickthecoder.itchy.property.IntegerProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.StringProperty;
 import uk.co.nickthecoder.itchy.util.Util;
 
@@ -30,8 +29,6 @@ public class AlienFactory extends AbstractRole
         properties.add(new IntegerProperty<Role>("alienCount"));
         properties.add(new DoubleProperty<Role>("spacing"));
         properties.add(new DoubleProperty<Role>("fireOnceEvery").hint("seconds"));
-
-        properties.add(new BooleanProperty<Role>("horizontal"));
     }
 
     public String costumeName;

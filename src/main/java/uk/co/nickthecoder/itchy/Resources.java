@@ -109,20 +109,21 @@ public class Resources extends Loadable
 
         game = new Game(this);
     }
-    
+
     /**
      * Reloads all of the Poses/SpriteSheets etc
-     * @throws JameException 
+     * 
+     * @throws JameException
      */
     public void reload() throws JameException
     {
-        for (PoseResource poseResource : this.poses.values() ) {
+        for (PoseResource poseResource : this.poses.values()) {
             if (poseResource instanceof FilePoseResource) {
                 ((FilePoseResource) poseResource).reload();
             }
         }
-        
-        for (SpriteSheet spriteSheet : this.spriteSheets.values() ) {
+
+        for (SpriteSheet spriteSheet : this.spriteSheets.values()) {
             spriteSheet.reload();
         }
     }
@@ -208,24 +209,22 @@ public class Resources extends Loadable
         writer.write(file.getPath());
     }
 
-
     public File getImagesDirectory()
     {
-        return getDirectory( "images" );
+        return getDirectory("images");
     }
-    
+
     public File getSoundsDirectory()
     {
-        return getDirectory( "sounds" );
+        return getDirectory("sounds");
     }
-    
+
     public File getFontsDirectory()
     {
-        return getDirectory( "fonts" );
+        return getDirectory("fonts");
     }
-    
-    
-    private File getDirectory( String name )
+
+    private File getDirectory(String name)
     {
         File dir = getDirectory();
         File subDir = new File(dir, name);
@@ -235,8 +234,7 @@ public class Resources extends Loadable
             return dir;
         }
     }
-    
-    
+
     @Override
     protected void checkSave(File file) throws Exception
     {
@@ -712,7 +710,6 @@ public class Resources extends Loadable
         costumes.put(newName, costume);
     }
 
-    // TODO Deprecate Resources.getCompanionCostume - Update all games.
     /**
      * This will be deprecated soon. Use Costume.getCopmanion instead.
      *
@@ -732,9 +729,13 @@ public class Resources extends Loadable
      *            The name of the String to look up, which is then used as a costume name. Note, this is NOT a costume
      *            name, it is the name of a String.
      * @return The costume that you were searching for, or null if none was found.
+     * @deprecated
      */
+    @Deprecated
     public Costume getCompanionCostume(Costume sourceCostume, String name)
     {
+        System.err.println("Looking in " + sourceCostume.getName() + " for  " + name);
+        System.err.println("Using depricate method Resources.getCompanionCostume. Use Costume.getCompanion instead.");
         String costumeName = sourceCostume.getString(name);
         if (costumeName == null) {
             return null;
@@ -881,17 +882,17 @@ public class Resources extends Loadable
     {
         for (String sceneName : this.sceneNames()) {
             SceneStub sceneStub = this.getScene(sceneName);
-            Scene scene = sceneStub.load( false );
+            Scene scene = sceneStub.load(false);
             sceneStub.save(scene);
         }
         renamedCostumes.clear();
     }
 
-    public static void dump( String label, Object... data)
+    public static void dump(String label, Object... data)
     {
-        System.out.print( label );
-        for ( Object d : data ) {
-            System.out.print( " " );
+        System.out.print(label);
+        for (Object d : data) {
+            System.out.print(" ");
             System.out.print(d);
         }
         System.out.println();
@@ -900,22 +901,21 @@ public class Resources extends Loadable
     public void dump()
     {
         dump("Poses");
-        for ( String name : this.poseNames() ) {
-            dump( "   ", "[", name, "]", this.poses.get(name));
+        for (String name : this.poseNames()) {
+            dump("   ", "[", name, "]", this.poses.get(name));
         }
         dump("");
-        
+
         dump("SpriteSheets");
-        for ( String name : this.spriteSheetNames() ) {
+        for (String name : this.spriteSheetNames()) {
             SpriteSheet spriteSheet = this.spriteSheets.get(name);
-            dump( "   ", "[", name, "]", spriteSheet);
-            for (Sprite sprite:spriteSheet.getSprites()) {
-                dump( "       ", sprite);
+            dump("   ", "[", name, "]", spriteSheet);
+            for (Sprite sprite : spriteSheet.getSprites()) {
+                dump("       ", sprite);
             }
         }
         dump("");
-        
-        
+
     }
-    
+
 }

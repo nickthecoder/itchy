@@ -1,81 +1,73 @@
-<scene showMouse="true" role="level.py" background="#000000ff">
-  <properties/>
+<scene name="bees" layout="default" sceneDirector="level.py" showMouse="true">
+  <layer name="background"/>
+  <layer name="plain"/>
   <layer name="grid">
-    <actor costume="wall" x="360" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="300" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="240" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="480" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="420" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="660" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="720" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="720" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="720" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="720" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="720" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="180" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="120" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="120" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="120" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="120" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="120" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="180" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="240" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="420" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="300" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="480" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="600" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wallSW" x="120" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wallNE" x="720" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wallSE" x="720" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wallNW" x="120" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="540" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="600" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="360" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="660" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="120" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="120" y="540" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="720" y="540" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="720" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="soil" x="360" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
-    <actor costume="soil" x="420" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
-    <actor costume="soil" x="480" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
-    <actor costume="rock" x="360" y="540" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
-    <actor costume="rock" x="480" y="540" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
-    <actor costume="beehive2" x="240" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="30">
-      <property name="bees" value="3"/>
-      <property name="beeDirection" value="East"/>
-      <property name="randomSeed" value="0"/>
-      <property name="requiredPollen" value="3"/>
-      <property name="detached" value="true"/>
-      <property name="beeLogic" value="Anticlockwise"/>
-      <property name="spawnPeriod" value="3.0"/>
+    <actor costume="wall" x="360.0" y="600.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="300.0" y="600.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="240.0" y="600.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="480.0" y="600.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="420.0" y="600.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="660.0" y="600.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="720.0" y="420.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="720.0" y="240.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="720.0" y="360.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="720.0" y="300.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="720.0" y="180.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="180.0" y="600.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="120.0" y="180.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="120.0" y="240.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="120.0" y="420.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="120.0" y="360.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="120.0" y="300.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="180.0" y="120.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="240.0" y="120.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="420.0" y="120.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="300.0" y="120.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="480.0" y="120.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="600.0" y="120.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wallSW" x="120.0" y="120.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wallNE" x="720.0" y="600.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wallSE" x="720.0" y="120.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wallNW" x="120.0" y="600.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="540.0" y="600.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="600.0" y="600.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="360.0" y="120.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="660.0" y="120.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="120.0" y="480.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="120.0" y="540.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="720.0" y="540.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="720.0" y="480.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="soil" x="360.0" y="480.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="soil" x="420.0" y="480.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="soil" x="480.0" y="480.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="rock" x="360.0" y="540.0" zOrder="20" id="" colorize="" role="rock.py"/>
+    <actor costume="rock" x="480.0" y="540.0" zOrder="20" id="" colorize="" role="rock.py"/>
+    <actor costume="beehive2" x="240.0" y="180.0" zOrder="30" id="" colorize="" role="beehive.py">
+      <role bees="3" requiredPollen="3" beeDirection="East" spawnPeriod="3.0"/>
     </actor>
-    <actor costume="gate" x="420" y="540" direction="0.0" heading="0.0" startEvent="default" zOrder="40">
-      <property name="spare" value="0"/>
-      <property name="scene" value="menu"/>
+    <actor costume="gate" x="420.0" y="540.0" zOrder="40" id="" colorize="" role="gate.py">
+      <role scene="menu"/>
     </actor>
-    <actor costume="sledge" x="60" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="90">
-      <property name="text" value="Ooh, look a beehive.&#xA;"/>
-      <property name="initialDelay" value="0.0"/>
-      <property name="loop" value="false"/>
-      <property name="period" value="15.0"/>
+    <actor costume="sledge" x="60.0" y="420.0" zOrder="90" id="" colorize="" role="sledger.py">
+      <role text="Ooh, look a beehive.&#xA;" period="15.0"/>
     </actor>
-    <actor costume="player" x="420" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="1000">
-      <property name="awake" value="true"/>
+    <actor costume="player" x="420.0" y="360.0" zOrder="1000" id="" colorize="" role="player.py">
+      <role awake="true"/>
     </actor>
-    <actor costume="wall" x="540" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="1002"/>
-    <actor costume="pumpkin" x="600" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="1005"/>
-    <actor costume="pumpkin" x="360" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="1006"/>
-    <actor costume="pumpkin" x="540" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="1007"/>
-    <actor costume="hint" x="540" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="1008">
-      <property name="hint" value="Collect the pumpkins when they are ripe."/>
+    <actor costume="wall" x="540.0" y="120.0" zOrder="1002" id="" colorize="" role="wall.py"/>
+    <actor costume="pumpkin" x="600.0" y="180.0" zOrder="1005" id="" colorize="" role="pumpkin.py"/>
+    <actor costume="pumpkin" x="360.0" y="240.0" zOrder="1006" id="" colorize="" role="pumpkin.py"/>
+    <actor costume="pumpkin" x="540.0" y="180.0" zOrder="1007" id="" colorize="" role="pumpkin.py"/>
+    <actor costume="hint" x="540.0" y="360.0" zOrder="1008" id="" colorize="" role="hint.py">
+      <role hint="Collect the pumpkins when they are ripe."/>
     </actor>
-    <actor costume="hint" x="240" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="1009">
-      <property name="hint" value="Collect the honey from the hive when &#xA;thebees get back to the hive."/>
+    <actor costume="hint" x="240.0" y="360.0" zOrder="1009" id="" colorize="" role="hint.py">
+      <role hint="Collect the honey from the hive when &#xA;thebees get back to the hive."/>
     </actor>
-    <actor costume="hint" x="480" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="1010">
-      <property name="hint" value="Don't let the bees sting you!&#xA;"/>
+    <actor costume="hint" x="480.0" y="360.0" zOrder="1010" id="" colorize="" role="hint.py">
+      <role hint="Don't let the bees sting you!&#xA;"/>
     </actor>
-    <actor costume="rock" x="540" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="1011"/>
+    <actor costume="rock" x="540.0" y="240.0" zOrder="1011" id="" colorize="" role="rock.py"/>
   </layer>
+  <layer name="test"/>
 </scene>

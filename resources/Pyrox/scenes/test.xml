@@ -71,7 +71,6 @@
       <property name="bees" value="3"/>
       <property name="requiredPollen" value="0"/>
       <property name="beeLogic" value="Anticlockwise"/>
-      <property name="detached" value="true"/>
       <property name="spawnPeriod" value="1.0"/>
     </actor>
     <actor costume="behive" x="300" y="900" direction="0.0" heading="0.0" startEvent="default" zOrder="30">
@@ -80,7 +79,6 @@
       <property name="bees" value="1"/>
       <property name="requiredPollen" value="0"/>
       <property name="beeLogic" value="Clockwise"/>
-      <property name="detached" value="true"/>
       <property name="spawnPeriod" value="1.0"/>
     </actor>
     <actor costume="warp" x="420" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="40">

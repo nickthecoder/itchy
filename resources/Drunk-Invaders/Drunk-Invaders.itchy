@@ -305,8 +305,9 @@
       <sound name="death" sound="explode" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND"/>
       <sound name="deflect" sound="ricochet" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND"/>
       <sound name="fire" sound="fire" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND"/>
-      <font name="shout" font="vera" fontSize="18" color="#003700ff" xAlignment="0.5" yAlignment="0.5" marginTop="12" marginRight="14" marginBottom="26" marginLeft="14"/>
+      <font name="shout" font="vera" fontSize="18" color="#003700ff" xAlignment="0.5" yAlignment="0.0" marginTop="12" marginRight="14" marginBottom="26" marginLeft="14"/>
       <animation name="shout" animation="toHeaven"/>
+      <companion name="bullet" companion="bullet"/>
     </costume>
     <costume name="ship-won" defaultZOrder="0" order="0" showInDesigner="true" extends="ship" role="uk.co.nickthecoder.drunkinvaders.Ship">
       <pose name="default" pose="ship2"/>

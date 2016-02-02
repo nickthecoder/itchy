@@ -332,14 +332,6 @@ public class ResourcesReader
                 }
                 TextStyle textStyle = new TextStyle(font, 14);
                 this.readProperties(fontTag, textStyle);
-                /*
-                 * int fontSize = stringTag.getOptionalIntAttribute("fontSize", 14); TextStyle textStyle = new
-                 * TextStyle( fontResource, fontSize );
-                 * 
-                 * RGBA color = RGBA.WHITE; String colorText = stringTag.getOptionalAttribute("color", "#ffffffff"); try
-                 * { color = RGBA.parse( colorText ); } catch (Exception e) { System.err.println(
-                 * "Ignored badly formed color : " + colorText ); } textStyle.color = color;
-                 */
                 costume.addTextStyle(itemName, textStyle);
             }
 
@@ -392,8 +384,7 @@ public class ResourcesReader
                 for (String companionName : costumeNames) {
                     Costume companion = resources.getCostume(companionName);
                     if (companion == null) {
-                        // TODO How should this be handled?
-                        System.err.println("Companion costume not found : " + companionName);
+                        throw new XMLException("Companion costume not found : " + companionName);
                     } else {
                         costume.addCompanion(key, companion);
                     }

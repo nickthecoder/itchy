@@ -133,6 +133,8 @@ ColorKeyFragment. Use another pose, to decide which pixels belong to each fragme
 Code Tidy Up
 ============
 
+Remove deprecate Resources.getCompanionCostume.
+
 Scrap the concept of views within views?
     Just have lists of views, all are relative to the screen. Makes it MUCH simpler!
     Need to look at Window/RootContainer first.

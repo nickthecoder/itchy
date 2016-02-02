@@ -25,6 +25,7 @@ public class Ship extends Bouncy implements Shootable
     protected static final List<Property<Role, ?>> properties = new ArrayList<Property<Role, ?>>();
 
     static {
+        properties.addAll( Bouncy.properties );
         properties.add(new DoubleProperty<Role>("ox").label("Planet's Center X"));
         properties.add(new DoubleProperty<Role>("oy").label("Planet's Center Y"));
         properties.add(new DoubleProperty<Role>("rotationSpeed"));

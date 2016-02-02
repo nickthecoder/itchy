@@ -85,7 +85,6 @@ public abstract class AbstractRole implements Role
     public void setId(String id)
     {
         if (id != null) {
-            System.out.println( "Setting non-null id to " + id );
             id = id.trim();
             if ("".equals(id)) {
                 id = null;

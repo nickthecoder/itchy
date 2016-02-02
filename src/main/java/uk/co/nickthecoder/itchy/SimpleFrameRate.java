@@ -14,7 +14,6 @@ package uk.co.nickthecoder.itchy;
  * </code>
  * </pre>
  */
-//TODO make this an interface
 public class SimpleFrameRate implements FrameRate
 {
     private static final int NANOS_TO_MILLIS = 1000000;

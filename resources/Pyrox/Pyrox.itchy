@@ -1,5 +1,5 @@
 <resources>
-  <game title="Pyrox" width="800" height="600" resizable="false" initialScene="welcome" testScene="test" directorClassName="director.py" authors="Nick Robinson. nickthecoder@gmail.com&#xA;"/>
+  <game title="Pyrox" width="800" height="600" resizable="false" initialScene="welcome" testScene="test" directorClassName="director.py" authors="Nick Robinson. nickthecoder@gmail.com"/>
   <spriteSheets>
     <spriteSheet name="robotSheet" file="images/robotSheet.png">
       <sprite name="robot-D0" direction="0.0" offsetX="30" offsetY="30" x="66" y="148" width="60" height="60"/>

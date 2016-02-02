@@ -77,8 +77,9 @@ public class ChoiceProperty<S, T> extends Property<S, T>
     @Override
     public T getDefaultValue()
     {
-        // TODO Add "allowNull" 
-        if (this.defaultValue == null)  {
+        // If a default value hasn't been specified, but we don't allow nulls, 
+        // then return an arbitrary item from the list (the first).
+        if ((this.defaultValue == null) && (!allowNull))  {
             for (T value : this.map.values()) {
                 return value;
             }

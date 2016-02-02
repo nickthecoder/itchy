@@ -214,8 +214,7 @@ public class SceneReader
 
                 Property<Role, ?> property = findProperty(properties, name);
                 if (property == null) {
-                    System.err.println( "Didn't find Role property : " + name + " for " + role);
-                    //throw new Exception("Didn't find Role property : " + name + " for " + role);
+                    throw new Exception("Didn't find Role property : " + name + " for " + role);
                 } else {
                     property.setValueByString(role, value);
                 }

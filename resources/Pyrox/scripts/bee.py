@@ -66,7 +66,6 @@ class Bee(Movable) :
                     self.logic = 3 - self.logic # Reverse direction Clockwise <-> Anticlockwise
                     self.changeDirection( -delta )
             else :
-                print "Changing direction"
                 self.changeDirection( delta )
            
     

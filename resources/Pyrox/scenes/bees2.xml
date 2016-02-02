@@ -59,7 +59,6 @@
       <property name="bees" value="2"/>
       <property name="requiredPollen" value="2"/>
       <property name="beeLogic" value="Anticlockwise"/>
-      <property name="detached" value="true"/>
       <property name="spawnPeriod" value="1.0"/>
     </actor>
     <actor costume="pumpkin" x="420" y="660" direction="0.0" heading="0.0" startEvent="default" zOrder="30"/>

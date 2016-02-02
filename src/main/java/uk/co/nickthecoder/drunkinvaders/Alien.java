@@ -144,8 +144,6 @@ public class Alien extends Bouncy implements Shootable
             .create().getActor();
         
         yell.setCostume(getActor().getCostume());
-        // TODO Do we want a deathEvent, or just and event?
-        //yell.deathEvent("yell");
 
         this.deathEvent("death");
         removeAllTags();
