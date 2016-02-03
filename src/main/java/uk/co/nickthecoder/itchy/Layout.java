@@ -100,6 +100,25 @@ public class Layout implements NamedSubject<Layout>, Cloneable
         }
         return null;
     }
+    
+    public Layer findSafeLayer( String name )
+    {
+        Layer layer = findLayer(name);
+        if (layer != null) {
+            return layer;
+        }
+        
+        if (this.defaultLayer != null) {
+            return this.defaultLayer;
+        }
+        
+        for (Layer layer2 : this.layers) {
+            if (layer2.getStage() != null) {
+                return layer2;
+            }
+        }
+        return null;
+    }
 
     public View findView(String name)
     {

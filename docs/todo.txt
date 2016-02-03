@@ -50,6 +50,7 @@ New Features
 Client/Server views.
     A server runs the game, calling the director,scenedirector,roles ticks etc.
     The server sends each client a list of views containing a list of "appearances" (the data, not the images)
+    Client renders these view using the local images
     Clients sends a list of events (keyboard, mouse)
 
     Dynamics poses are an issue. Solutions:

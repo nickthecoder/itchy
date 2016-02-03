@@ -174,7 +174,7 @@ public class SceneWriter extends XMLWriter
     {
         if (subject.getProperties().size() > 0) {
             this.beginTag(tagName);
-            this.writeProperties(subject);
+            this.writeProperties(subject, allValues);
             this.endTag(tagName);
         }
     }

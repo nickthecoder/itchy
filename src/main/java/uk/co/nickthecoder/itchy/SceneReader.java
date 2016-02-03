@@ -79,12 +79,9 @@ public class SceneReader
 
             this.readLayerProperties(layerTag, name);
 
-            Layer layer = this.scene.layout.findLayer(name);
+            Layer layer = this.scene.layout.findSafeLayer(name);
             if (layer == null) {
-                layer = this.scene.layout.defaultLayer;
-            }
-            if (layer == null) {
-                layer = this.scene.layout.getLayers().get(0);
+                throw new XMLException( "Cannot find layer " + name );
             }
             this.readLayer(layerTag, layer);
         }
@@ -184,10 +181,13 @@ public class SceneReader
         }
         ClassName roleClassName = new ClassName(Role.class, roleClassNameString);
         Role role = (Role) roleClassName.createInstance(resources);
+        
+        
         if (design) {
             sceneActor.setRole(new SceneDesignerRole(role));
         } else {
-            sceneActor.setRole(new DelayedActivation(sceneActor.getActivationDelay(), role));
+            double delay = actorTag.getOptionalDoubleAttribute("activationDelay", 0);
+            sceneActor.setRole(new DelayedActivation(delay, role));
         }
 
         this.readProperties(actorTag, sceneActor);

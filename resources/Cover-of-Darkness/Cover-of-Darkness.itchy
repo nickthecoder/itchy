@@ -229,7 +229,6 @@
     <scene name="level02"/>
     <scene name="level0Matt"/>
     <scene name="start"/>
-    <scene name="test01"/>
   </scenes>
   <inputs>
     <input name="click" keys="click+SPACE,click+M_LEFT"/>

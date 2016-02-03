@@ -32,9 +32,10 @@ public interface Director extends InputListener, QuitListener, MessageListener, 
 
     public void onDeactivate();
 
+    public boolean startScene( String sceneName );
+
     public void onResize( ResizeEvent e );
 
-    public boolean startScene( String sceneName );
     
     public Scene loadScene( String sceneName );
 

@@ -324,7 +324,7 @@ public class Game
         Itchy.startGame(this);
         this.director.onStarted();
         if (!StringUtils.isBlank(this.resources.getGameInfo().initialScene)) {
-            director.startScene(this.resources.getGameInfo().initialScene);
+            this.director.startScene(this.resources.getGameInfo().initialScene);
         }
         running = true;
         Itchy.mainLoop();

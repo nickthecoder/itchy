@@ -11,6 +11,8 @@ class Director(AbstractDirector) :
         self.squareSize = 60
                 
         self.previousSceneName = ""
+        self.macroRecord = False
+        self.macroPlayback = False
     
     def onStarted( self ) :
 
@@ -22,8 +24,6 @@ class Director(AbstractDirector) :
         self.inputRecord = Input.find("macroRecord")
         self.inputPlayback = Input.find("macroPlayback")
 
-        self.macroRecord = False
-        self.macroPlayback = False
     
             
     def onMessage(self, message) :
@@ -69,6 +69,9 @@ class Director(AbstractDirector) :
         view.scrollTo( newX, newY );
     
     def startScene( self, sceneName ) :
+        AbstractDirector.startScene(self,sceneName)
+        print "starting scene", sceneName
+    
         # If we were playing a macro, or recording a macro, then stop.
         Itchy.eventProcessor.end()
 
@@ -79,9 +82,11 @@ class Director(AbstractDirector) :
         if self.macroPlayback :
             macro = self.macroFile(sceneName)
             if macro.exists() :
+                print "Playing back macro"
                 MacroPlayback( macro ).begin()
+            else :
+                print "Macro not found"
 
-        return AbstractDirector.startScene( self, sceneName )
 
     def macroFile( self, sceneName ) :
         return game.resources.resolveFile( File( File("macros"), sceneName + ".macro" ) )
@@ -93,14 +98,17 @@ class Director(AbstractDirector) :
 
         
     def onKeyDown(self,kevent) :
-    
+            
         if self.inputRecord.matches(kevent) :
             self.macroRecord = True
             self.macroPlayback = False
+            print "Will start recording macro as soon as you start a new scene"
+
 
         if self.inputPlayback.matches(kevent) :
             self.macroRecord = False
             self.macroPlayback = True
+            print "Will start playing back the macro as soon as you start a new scene"
 
         if self.inputTest.matches(kevent) :
             game.startScene( "test" )
