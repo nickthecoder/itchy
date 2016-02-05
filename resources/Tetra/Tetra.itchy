@@ -15,12 +15,12 @@
   </poses>
   <ninePatches/>
   <fonts>
-    <font name="Boycott" filename="fonts/Boycott.ttf"/>
+    <font name="Boycott" file="fonts/Boycott.ttf"/>
   </fonts>
   <sounds>
-    <sound name="explode" filename="sounds/explode.ogg"/>
-    <sound name="pop" filename="sounds/pop.ogg"/>
-    <sound name="shatter" filename="sounds/shatter.ogg"/>
+    <sound name="explode" file="sounds/explode.ogg"/>
+    <sound name="pop" file="sounds/pop.ogg"/>
+    <sound name="shatter" file="sounds/shatter.ogg"/>
   </sounds>
   <animations>
     <animation name="moveDown1">
@@ -107,7 +107,7 @@
     <input name="rotate" keys="UP,SEMICOLON"/>
   </inputs>
   <layouts>
-    <layout name="default">
+    <layout name="default" defaultLayer="main">
       <layer name="main" zOrder="0" x="0" y="0" width="640" height="480" viewClassName="uk.co.nickthecoder.itchy.StageView" stageClassName="uk.co.nickthecoder.itchy.ZOrderStage" stageConstraintClassName="uk.co.nickthecoder.itchy.NullStageConstraint">
         <view enableMouse="true"/>
       </layer>

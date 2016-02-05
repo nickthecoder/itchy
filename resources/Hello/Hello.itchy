@@ -4,7 +4,7 @@
   <poses/>
   <ninePatches/>
   <fonts>
-    <font name="Boycott" filename="fonts/Boycott.ttf"/>
+    <font name="Boycott" file="fonts/Boycott.ttf"/>
   </fonts>
   <sounds/>
   <animations/>
@@ -14,7 +14,7 @@
   </scenes>
   <inputs/>
   <layouts>
-    <layout name="default">
+    <layout name="default" defaultLayer="main">
       <layer name="main" zOrder="10" x="0" y="0" width="800" height="600" viewClassName="uk.co.nickthecoder.itchy.StageView" stageClassName="uk.co.nickthecoder.itchy.ZOrderStage" stageConstraintClassName="uk.co.nickthecoder.itchy.NullStageConstraint">
         <view enableMouse="false"/>
       </layer>

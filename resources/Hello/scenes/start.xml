@@ -1,6 +1,5 @@
-<scene showMouse="true" layout="default" role="uk.co.nickthecoder.itchy.PlainSceneDirector" background="#000000ff">
-  <properties/>
+<scene name="start" layout="default" sceneDirector="uk.co.nickthecoder.itchy.PlainSceneDirector" showMouse="true">
   <layer name="main">
-    <text text="Hello World" font="Boycott" size="71" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="402" y="295" direction="0.0" heading="0.0" startEvent="default" zOrder="0"/>
+    <text x="402.0" y="295.0" id="" font="Boycott" fontSize="71.0" text="Hello World" color="#ffffffff" colorize=""/>
   </layer>
 </scene>

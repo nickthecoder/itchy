@@ -353,7 +353,7 @@
     <input name="toggleInfo" keys="F1"/>
   </inputs>
   <layouts>
-    <layout name="default">
+    <layout name="default" defaultLayer="main">
       <layer name="background" zOrder="0" x="0" y="0" width="640" height="480" viewClassName="uk.co.nickthecoder.itchy.StageView" stageClassName="uk.co.nickthecoder.itchy.ZOrderStage" stageConstraintClassName="uk.co.nickthecoder.itchy.NullStageConstraint">
         <view enableMouse="false"/>
       </layer>

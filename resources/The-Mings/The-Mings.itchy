@@ -647,7 +647,7 @@
     <input name="step" keys="SPACE"/>
   </inputs>
   <layouts>
-    <layout name="default">
+    <layout name="default" defaultLayer="main">
       <layer name="background" zOrder="0" x="0" y="0" width="1000" height="800" viewClassName="uk.co.nickthecoder.itchy.RGBAView" stageClassName="uk.co.nickthecoder.itchy.ZOrderStage" stageConstraintClassName="uk.co.nickthecoder.itchy.NullStageConstraint">
         <view color="#000000ff"/>
       </layer>
@@ -659,7 +659,7 @@
         <view enableMouse="true"/>
       </layer>
     </layout>
-    <layout name="gui">
+    <layout name="gui" defaultLayer="gui">
       <layer name="gui" zOrder="100" x="0" y="700" width="1000" height="100" viewClassName="uk.co.nickthecoder.itchy.StageView" stageClassName="uk.co.nickthecoder.itchy.ZOrderStage" stageConstraintClassName="uk.co.nickthecoder.itchy.NullStageConstraint">
         <view enableMouse="true"/>
       </layer>

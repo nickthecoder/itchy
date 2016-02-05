@@ -1,83 +1,80 @@
-<scene showMouse="true">
+<scene name="menu" layout="default" sceneDirector="uk.co.nickthecoder.itchy.PlainSceneDirector" showMouse="true">
   <layer name="main">
-    <actor costume="background" x="320" y="240" direction="0.0" startEvent="default"/>
-    <actor costume="button" x="443" y="169" direction="0.0" startEvent="default">
-      <property name="message" value="levelDown"/>
+    <actor costume="background" x="320.0" y="240.0" id="" colorize=""/>
+    <actor costume="button" x="443.0" y="169.0" id="" colorize="" role="uk.co.nickthecoder.itchy.role.MessageButton">
+      <role message="levelDown"/>
     </actor>
-    <actor costume="button" x="443" y="218" direction="0.0" startEvent="default">
-      <property name="message" value="levelUp"/>
+    <actor costume="button" x="443.0" y="218.0" id="" colorize="" role="uk.co.nickthecoder.itchy.role.MessageButton">
+      <role message="levelUp"/>
     </actor>
-    <text text="Play" font="Boycott" size="40" color="#ffffff" role="uk.co.nickthecoder.itchy.role.MessageButton" x="311" y="260" direction="0.0" startEvent="default">
-      <property name="message" value="play"/>
+    <text x="311.0" y="260.0" id="" font="Boycott" fontSize="40.0" text="Play" color="#ffffffff" colorize="" role="uk.co.nickthecoder.itchy.role.MessageButton">
+      <role message="play"/>
     </text>
-    <text text="quit" font="Boycott" size="40" color="#ffffff" role="uk.co.nickthecoder.itchy.role.MessageButton" x="311" y="65" direction="0.0" startEvent="default">
-      <property name="message" value="quit"/>
+    <text x="311.0" y="65.0" id="" font="Boycott" fontSize="40.0" text="quit" color="#ffffffff" colorize="" role="uk.co.nickthecoder.itchy.role.MessageButton">
+      <role message="quit"/>
     </text>
-    <text text="Level" font="Boycott" size="40" color="#ffffff" x="312" y="194" direction="0.0" startEvent="default"/>
-    <text text="1" font="Boycott" size="40" color="#ffffff" role="uk.co.nickthecoder.itchy.role.TextValue" x="404" y="195" direction="0.0" startEvent="default">
-      <property name="nullValue" value=""/>
-      <property name="errorValue" value=""/>
-      <property name="updateInterval" value="0"/>
-      <property name="access" value="director.level"/>
+    <text x="312.0" y="194.0" id="" font="Boycott" fontSize="40.0" text="Level" color="#ffffffff" colorize=""/>
+    <text x="404.0" y="195.0" id="" font="Boycott" fontSize="40.0" text="1" color="#ffffffff" colorize="" role="uk.co.nickthecoder.itchy.role.TextValue">
+      <role access="director.level" errorValue="" nullValue="" updateInterval="0.0" quiet="false"/>
     </text>
-    <text text=">" font="Boycott" size="40" color="#ffffff" role="uk.co.nickthecoder.itchy.role.MessageButton" x="442" y="218" direction="90.0" startEvent="default">
-      <property name="message" value="levelUp"/>
+    <text x="442.0" y="218.0" id="" font="Boycott" fontSize="40.0" text=">" color="#ffffffff" direction="90.0" colorize="" role="uk.co.nickthecoder.itchy.role.MessageButton">
+      <role message="levelUp"/>
     </text>
-    <text text=">" font="Boycott" size="40" color="#ffffff" role="uk.co.nickthecoder.itchy.role.MessageButton" x="442" y="173" direction="-90.0" startEvent="default">
-      <property name="message" value="levelDown"/>
+    <text x="442.0" y="173.0" id="" font="Boycott" fontSize="40.0" text=">" color="#ffffffff" direction="-90.0" colorize="" role="uk.co.nickthecoder.itchy.role.MessageButton">
+      <role message="levelDown"/>
     </text>
-    <actor costume="blue" x="88" y="439" direction="0.0" startEvent="default"/>
-    <actor costume="blue" x="112" y="439" direction="0.0" startEvent="default"/>
-    <actor costume="blue" x="136" y="438" direction="0.0" startEvent="default"/>
-    <actor costume="blue" x="159" y="437" direction="0.0" startEvent="default"/>
-    <actor costume="blue" x="64" y="437" direction="0.0" startEvent="default"/>
-    <actor costume="blue" x="114" y="412" direction="0.0" startEvent="default"/>
-    <actor costume="blue" x="115" y="388" direction="0.0" startEvent="default"/>
-    <actor costume="blue" x="114" y="364" direction="0.0" startEvent="default"/>
-    <actor costume="blue" x="112" y="341" direction="0.0" startEvent="default"/>
-    <actor costume="orange" x="215" y="436" direction="0.0" startEvent="default"/>
-    <actor costume="orange" x="190" y="436" direction="0.0" startEvent="default"/>
-    <actor costume="orange" x="214" y="391" direction="0.0" startEvent="default"/>
-    <actor costume="orange" x="192" y="365" direction="0.0" startEvent="default"/>
-    <actor costume="orange" x="215" y="340" direction="0.0" startEvent="default"/>
-    <actor costume="orange" x="240" y="341" direction="0.0" startEvent="default"/>
-    <actor costume="orange" x="191" y="340" direction="0.0" startEvent="default"/>
-    <actor costume="orange" x="191" y="391" direction="0.0" startEvent="default"/>
-    <actor costume="orange" x="240" y="436" direction="0.0" startEvent="default"/>
-    <actor costume="orange" x="190" y="414" direction="0.0" startEvent="default"/>
-    <actor costume="cyan" x="296" y="440" direction="0.0" startEvent="default"/>
-    <actor costume="cyan" x="318" y="440" direction="0.0" startEvent="default"/>
-    <actor costume="cyan" x="341" y="439" direction="0.0" startEvent="default"/>
-    <actor costume="cyan" x="364" y="440" direction="0.0" startEvent="default"/>
-    <actor costume="cyan" x="273" y="439" direction="0.0" startEvent="default"/>
-    <actor costume="cyan" x="318" y="417" direction="0.0" startEvent="default"/>
-    <actor costume="cyan" x="316" y="395" direction="0.0" startEvent="default"/>
-    <actor costume="cyan" x="318" y="373" direction="0.0" startEvent="default"/>
-    <actor costume="cyan" x="318" y="349" direction="0.0" startEvent="default"/>
-    <actor costume="red" x="392" y="441" direction="0.0" startEvent="default"/>
-    <actor costume="red" x="393" y="418" direction="0.0" startEvent="default"/>
-    <actor costume="red" x="394" y="393" direction="0.0" startEvent="default"/>
-    <actor costume="red" x="395" y="369" direction="0.0" startEvent="default"/>
-    <actor costume="red" x="395" y="345" direction="0.0" startEvent="default"/>
-    <actor costume="red" x="415" y="441" direction="0.0" startEvent="default"/>
-    <actor costume="red" x="437" y="441" direction="0.0" startEvent="default"/>
-    <actor costume="red" x="462" y="421" direction="0.0" startEvent="default"/>
-    <actor costume="red" x="463" y="396" direction="0.0" startEvent="default"/>
-    <actor costume="red" x="417" y="393" direction="0.0" startEvent="default"/>
-    <actor costume="red" x="440" y="393" direction="0.0" startEvent="default"/>
-    <actor costume="red" x="441" y="370" direction="0.0" startEvent="default"/>
-    <actor costume="red" x="461" y="345" direction="0.0" startEvent="default"/>
-    <actor costume="yellow" x="504" y="347" direction="0.0" startEvent="default"/>
-    <actor costume="yellow" x="503" y="371" direction="0.0" startEvent="default"/>
-    <actor costume="yellow" x="504" y="395" direction="0.0" startEvent="default"/>
-    <actor costume="yellow" x="526" y="392" direction="0.0" startEvent="default"/>
-    <actor costume="yellow" x="549" y="394" direction="0.0" startEvent="default"/>
-    <actor costume="yellow" x="571" y="391" direction="0.0" startEvent="default"/>
-    <actor costume="yellow" x="571" y="370" direction="0.0" startEvent="default"/>
-    <actor costume="yellow" x="571" y="347" direction="0.0" startEvent="default"/>
-    <actor costume="yellow" x="504" y="420" direction="0.0" startEvent="default"/>
-    <actor costume="yellow" x="528" y="441" direction="0.0" startEvent="default"/>
-    <actor costume="yellow" x="552" y="441" direction="0.0" startEvent="default"/>
-    <actor costume="yellow" x="572" y="416" direction="0.0" startEvent="default"/>
+    <actor costume="blue" x="88.0" y="439.0" id="" colorize=""/>
+    <actor costume="blue" x="112.0" y="439.0" id="" colorize=""/>
+    <actor costume="blue" x="136.0" y="438.0" id="" colorize=""/>
+    <actor costume="blue" x="159.0" y="437.0" id="" colorize=""/>
+    <actor costume="blue" x="64.0" y="437.0" id="" colorize=""/>
+    <actor costume="blue" x="114.0" y="412.0" id="" colorize=""/>
+    <actor costume="blue" x="115.0" y="388.0" id="" colorize=""/>
+    <actor costume="blue" x="114.0" y="364.0" id="" colorize=""/>
+    <actor costume="blue" x="112.0" y="341.0" id="" colorize=""/>
+    <actor costume="orange" x="215.0" y="436.0" id="" colorize=""/>
+    <actor costume="orange" x="190.0" y="436.0" id="" colorize=""/>
+    <actor costume="orange" x="214.0" y="391.0" id="" colorize=""/>
+    <actor costume="orange" x="192.0" y="365.0" id="" colorize=""/>
+    <actor costume="orange" x="215.0" y="340.0" id="" colorize=""/>
+    <actor costume="orange" x="240.0" y="341.0" id="" colorize=""/>
+    <actor costume="orange" x="191.0" y="340.0" id="" colorize=""/>
+    <actor costume="orange" x="191.0" y="391.0" id="" colorize=""/>
+    <actor costume="orange" x="240.0" y="436.0" id="" colorize=""/>
+    <actor costume="orange" x="190.0" y="414.0" id="" colorize=""/>
+    <actor costume="cyan" x="296.0" y="440.0" id="" colorize=""/>
+    <actor costume="cyan" x="318.0" y="440.0" id="" colorize=""/>
+    <actor costume="cyan" x="341.0" y="439.0" id="" colorize=""/>
+    <actor costume="cyan" x="364.0" y="440.0" id="" colorize=""/>
+    <actor costume="cyan" x="273.0" y="439.0" id="" colorize=""/>
+    <actor costume="cyan" x="318.0" y="417.0" id="" colorize=""/>
+    <actor costume="cyan" x="316.0" y="395.0" id="" colorize=""/>
+    <actor costume="cyan" x="318.0" y="373.0" id="" colorize=""/>
+    <actor costume="cyan" x="318.0" y="349.0" id="" colorize=""/>
+    <actor costume="red" x="392.0" y="441.0" id="" colorize=""/>
+    <actor costume="red" x="393.0" y="418.0" id="" colorize=""/>
+    <actor costume="red" x="394.0" y="393.0" id="" colorize=""/>
+    <actor costume="red" x="395.0" y="369.0" id="" colorize=""/>
+    <actor costume="red" x="395.0" y="345.0" id="" colorize=""/>
+    <actor costume="red" x="415.0" y="441.0" id="" colorize=""/>
+    <actor costume="red" x="437.0" y="441.0" id="" colorize=""/>
+    <actor costume="red" x="462.0" y="421.0" id="" colorize=""/>
+    <actor costume="red" x="463.0" y="396.0" id="" colorize=""/>
+    <actor costume="red" x="417.0" y="393.0" id="" colorize=""/>
+    <actor costume="red" x="440.0" y="393.0" id="" colorize=""/>
+    <actor costume="red" x="441.0" y="370.0" id="" colorize=""/>
+    <actor costume="red" x="461.0" y="345.0" id="" colorize=""/>
+    <actor costume="yellow" x="504.0" y="347.0" id="" colorize=""/>
+    <actor costume="yellow" x="503.0" y="371.0" id="" colorize=""/>
+    <actor costume="yellow" x="504.0" y="395.0" id="" colorize=""/>
+    <actor costume="yellow" x="526.0" y="392.0" id="" colorize=""/>
+    <actor costume="yellow" x="549.0" y="394.0" id="" colorize=""/>
+    <actor costume="yellow" x="571.0" y="391.0" id="" colorize=""/>
+    <actor costume="yellow" x="571.0" y="370.0" id="" colorize=""/>
+    <actor costume="yellow" x="571.0" y="347.0" id="" colorize=""/>
+    <actor costume="yellow" x="504.0" y="420.0" id="" colorize=""/>
+    <actor costume="yellow" x="528.0" y="441.0" id="" colorize=""/>
+    <actor costume="yellow" x="552.0" y="441.0" id="" colorize=""/>
+    <actor costume="yellow" x="572.0" y="416.0" id="" colorize=""/>
   </layer>
 </scene>

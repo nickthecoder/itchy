@@ -939,7 +939,7 @@ before we can harvest the honey.</string>
         <stageConstraint boxWidth="60" boxHeight="60"/>
       </layer>
     </layout>
-    <layout name="glass">
+    <layout name="glass" defaultLayer="glass">
       <layer name="glass" zOrder="100" x="0" y="0" width="800" height="600" viewClassName="uk.co.nickthecoder.itchy.StageView" stageClassName="uk.co.nickthecoder.itchy.ZOrderStage" stageConstraintClassName="uk.co.nickthecoder.itchy.NullStageConstraint">
         <view enableMouse="false"/>
       </layer>
