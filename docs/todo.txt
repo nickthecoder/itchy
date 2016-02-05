@@ -1,9 +1,15 @@
 Current Tasks
 =============
 
+Load/Save all scenes in all games to convert them to the new format.
+
+Custom level for Rain
+    Slider for number of Rain Droplets, Fast Droplets, Frog,
+    Slider for start speed, end speed, ...
+    Generate a "key" from the figures for the preferences node of the high score.
+
 Look over all TODOs
 
-Load/Save all scenes in all games to convert them to the new format.
 
 Check order of Role onAttach and onBirth, I think it should be reversed.
     Remove the special "onBirth" in DelayedActivation, and put a special instanceof DelayedActivation when attach is called. 

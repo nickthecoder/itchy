@@ -1,19 +1,19 @@
-<scene showMouse="true" role="Menu.groovy" background="#000000ff">
-  <properties/>
+<scene name="about" layout="default" sceneDirector="Menu.groovy" showMouse="true">
+  <layer name="background"/>
   <layer name="main">
-    <actor costume="background" x="0" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="1" alpha="90.0"/>
-    <text text="It's Gonna Rain" font="BlackCasper" size="102" color="#3981af" xAlignment="0.5" yAlignment="0.5" x="388" y="518" direction="0.0" heading="0.0" startEvent="default" zOrder="3"/>
-    <text text="Reset Highscores" font="Boycott" size="34" color="#ffffff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.MessageButton" costume="button" x="173" y="46" direction="0.0" heading="0.0" startEvent="default" zOrder="5">
-      <property name="message" value="resetHighScores"/>
+    <actor costume="background" y="600.0" zOrder="1" id="" alpha="90.0" colorize=""/>
+    <text x="388.0" y="518.0" zOrder="3" id="" font="BlackCasper" fontSize="102.0" text="It's Gonna Rain" color="#3981afff" colorize=""/>
+    <text costume="button" x="173.0" y="46.0" zOrder="5" id="" font="Boycott" fontSize="34.0" text="Reset Highscores" color="#ffffffff" colorize="" role="uk.co.nickthecoder.itchy.role.MessageButton">
+      <role message="resetHighScores"/>
     </text>
-    <text text="By Nick Robinson" font="Boycott" size="26" color="#ffffff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.LinkButton" costume="button" x="404" y="408" direction="0.0" heading="0.0" startEvent="default" zOrder="6">
-      <property name="url" value="http://nickthecoder.co.uk/"/>
+    <text costume="button" x="404.0" y="408.0" zOrder="6" id="" font="Boycott" fontSize="26.0" text="By Nick Robinson" color="#ffffffff" colorize="" role="uk.co.nickthecoder.itchy.role.LinkButton">
+      <role url="http://nickthecoder.co.uk/"/>
     </text>
-    <text text="Itchy Powered" font="Boycott" size="29" color="#ffffff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.LinkButton" costume="button" x="399" y="454" direction="0.0" heading="0.0" startEvent="default" zOrder="7">
-      <property name="url" value="http://nickthecoder.co.uk/software/view/Itchy"/>
+    <text costume="button" x="399.0" y="454.0" zOrder="7" id="" font="Boycott" fontSize="29.0" text="Itchy Powered" color="#ffffffff" colorize="" role="uk.co.nickthecoder.itchy.role.LinkButton">
+      <role url="http://nickthecoder.co.uk/software/view/Itchy"/>
     </text>
-    <text text="Back" font="BlackCasper" size="80" color="#ffffff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.SceneButton" costume="button" x="389" y="188" direction="0.0" heading="0.0" startEvent="default" zOrder="8">
-      <property name="sceneName" value="menu"/>
+    <text costume="button" x="389.0" y="188.0" zOrder="8" id="" font="BlackCasper" fontSize="80.0" text="Back" color="#ffffffff" colorize="" role="uk.co.nickthecoder.itchy.role.SceneButton">
+      <role sceneName="menu"/>
     </text>
   </layer>
 </scene>
