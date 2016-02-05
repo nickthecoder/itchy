@@ -7,7 +7,7 @@ package uk.co.nickthecoder.itchy;
 import java.util.ArrayList;
 import java.util.List;
 
-import uk.co.nickthecoder.itchy.property.InputProperty;
+import uk.co.nickthecoder.itchy.property.InputStringProperty;
 import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.StringProperty;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
@@ -31,7 +31,7 @@ public class Input implements NamedSubject<Input>, InputInterface
 
     static {
         properties.add(new StringProperty<Input>("name").allowBlank(false));
-        properties.add(new InputProperty<Input>("keys").access("keysString"));
+        properties.add(new InputStringProperty<Input>("keys").access("keysString"));
     }
 
     @Override
