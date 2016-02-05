@@ -1,4 +1,5 @@
 from common import *
+from java.util import Date
 
 properties = ArrayList()
 
@@ -10,18 +11,26 @@ class Play(PlainSceneDirector) :
         self.collectables = 0
         
     def onActivate(self) :
+        self.inputExit = Input.find("exit")
+            
         self.inputScrollLeft = Input.find("scrollLeft")
         self.inputScrollRight = Input.find("scrollRight")
         self.inputScrollUp = Input.find("scrollUp")
         self.inputScrollDown = Input.find("scrollDown")
 
-
+        self.startTime = Date().time
+        self.time = 0
+        
     def loading(self, scene) :
         print "Loading glass"
         game.mergeScene( scene, "glass")
 
 
     def tick(self) :
+        if self.inputExit.pressed() :
+            self.startScene( "start" )
+        self.time = (Date().time - self.startTime) / 1000
+
         if self.inputScrollLeft.pressed() :
             game.sceneDirector.scrollBy(-2,0)
         if self.inputScrollRight.pressed() :

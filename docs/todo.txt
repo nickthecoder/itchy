@@ -1,8 +1,6 @@
 Current Tasks
 =============
 
-Fix EditInput
-
 Look over all TODOs
 
 Load/Save all scenes in all games to convert them to the new format.

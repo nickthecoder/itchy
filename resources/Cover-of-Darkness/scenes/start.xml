@@ -1,73 +1,53 @@
-<scene showMouse="true" layout="default" role="play.py">
-  <properties/>
-  <layer name="background">
-    <view/>
-  </layer>
-  <layer name="bottom">
-    <view/>
-  </layer>
+<scene name="start" layout="default" sceneDirector="play.py" showMouse="true">
+  <layer name="background"/>
+  <layer name="bottom"/>
   <layer name="middle">
-    <view/>
-    <stageConstraint/>
-    <text text="Use the mouse to move about" font="Vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="456" y="720" direction="0.0" heading="0.0" startEvent="default" zOrder="0"/>
-    <text text="Click the left button (or Space) to open doors" font="Vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="432" y="624" direction="0.0" heading="0.0" startEvent="default" zOrder="0"/>
-    <actor costume="player" x="548" y="719" direction="0.0" heading="0.0" startEvent="default" zOrder="1">
-      <property name="speed" value="3.0"/>
+    <text x="456.0" y="720.0" id="" font="Vera" fontSize="22.0" text="Use the mouse to move about" color="#ffffffff" colorize=""/>
+    <text x="432.0" y="624.0" id="" font="Vera" fontSize="22.0" text="Click the left button (or Space) to open doors" color="#ffffffff" colorize=""/>
+    <actor costume="player" x="548.0" y="719.0" zOrder="1" id="" colorize="" role="player.py">
+      <role speed="3.0"/>
     </actor>
-    <actor costume="guard1" x="192" y="216" direction="0.0" heading="0.0" startEvent="default" zOrder="14">
-      <property name="debug" value="false"/>
-      <property name="forwardSpeed" value="4.0"/>
-      <property name="routeString" value="450 R180 450 L180"/>
-      <property name="turnSpeed" value="4.0"/>
+    <actor costume="guard1" x="192.0" y="216.0" zOrder="14" id="" colorize="" role="guard.py">
+      <role forwardSpeed="4.0" turnSpeed="4.0" routeString="450 R180 450 L180" debug="false"/>
     </actor>
-    <actor costume="guard1" x="648" y="408" direction="-179.10226823279518" heading="-179.56488014573995" startEvent="default" zOrder="18">
-      <property name="debug" value="false"/>
-      <property name="forwardSpeed" value="3.0"/>
-      <property name="routeString" value="450 R180 450 L180"/>
-      <property name="turnSpeed" value="5.0"/>
+    <actor costume="guard1" x="648.0" y="408.0" heading="-179.56488014573995" zOrder="18" id="" direction="-179.10226823279518" colorize="" role="guard.py">
+      <role forwardSpeed="3.0" turnSpeed="5.0" routeString="450 R180 450 L180" debug="false"/>
     </actor>
-    <text text="Collect all of the money" font="Vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="421" y="441" direction="0.0" heading="0.0" startEvent="default" zOrder="23"/>
-    <text text="Then head for the getaway car." font="Vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="432" y="216" direction="0.0" heading="0.0" startEvent="default" zOrder="24"/>
-    <text text="Keep to the shadows; avoid the guards' lights" font="Vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="418" y="362" direction="0.0" heading="0.0" startEvent="default" zOrder="25"/>
-    <actor costume="doorFrame-1" x="408" y="576" direction="-90.0" heading="-90.0" startEvent="default" zOrder="30">
-      <property name="open" value="false"/>
-      <property name="pickPush" value="true"/>
-      <property name="pickPull" value="true"/>
-      <property name="locked" value="false"/>
+    <text x="421.0" y="441.0" zOrder="23" id="" font="Vera" fontSize="22.0" text="Collect all of the money" color="#ffffffff" colorize=""/>
+    <text x="432.0" y="216.0" zOrder="24" id="" font="Vera" fontSize="22.0" text="Then head for the getaway car." color="#ffffffff" colorize=""/>
+    <text x="418.0" y="362.0" zOrder="25" id="" font="Vera" fontSize="22.0" text="Keep to the shadows; avoid the guards' lights" color="#ffffffff" colorize=""/>
+    <actor costume="doorFrame-1" x="408.0" y="576.0" heading="-90.0" zOrder="30" id="" direction="-90.0" colorize="" role="doorFrame.py">
+      <role open="false" locked="false" pickPull="true" pickPush="true"/>
     </actor>
-    <actor costume="doorFrame-1" x="480" y="144" direction="-90.0" heading="-90.0" startEvent="default" zOrder="30">
-      <property name="open" value="false"/>
-      <property name="pickPush" value="true"/>
-      <property name="pickPull" value="true"/>
-      <property name="locked" value="false"/>
+    <actor costume="doorFrame-1" x="480.0" y="144.0" heading="-90.0" zOrder="30" id="" direction="-90.0" colorize="" role="doorFrame.py">
+      <role open="false" locked="false" pickPull="true" pickPush="true"/>
     </actor>
-    <actor costume="getaway-1" x="672" y="72" direction="0.0" heading="0.0" startEvent="default" zOrder="60">
-      <property name="nextLevel" value="level01"/>
+    <actor costume="getaway-1" x="672.0" y="72.0" zOrder="60" id="" colorize="" role="exit.py">
+      <role nextLevel="level01"/>
     </actor>
-    <actor costume="wall-bh2" x="408" y="288" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
-    <actor costume="junction-a4" x="120" y="288" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
-    <actor costume="wall-bh2" x="192" y="288" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
-    <actor costume="wall-bh2" x="624" y="288" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
-    <actor costume="junction-a2" x="768" y="288" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
-    <actor costume="wall-av3" x="120" y="432" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
-    <actor costume="wall-av3" x="768" y="432" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
-    <actor costume="corner-a1" x="120" y="576" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
-    <actor costume="wall-ah3" x="264" y="576" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
-    <actor costume="wall-ah3" x="624" y="576" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
-    <actor costume="corner-a2" x="768" y="576" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
-    <actor costume="wall-ah1" x="480" y="576" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
-    <actor costume="wall-av1" x="120" y="216" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
-    <actor costume="wall-av1" x="768" y="216" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
-    <actor costume="corner-a3" x="768" y="144" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
-    <actor costume="corner-a4" x="120" y="144" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
-    <actor costume="wall-ah3" x="264" y="144" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
-    <actor costume="wall-ah3" x="624" y="144" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
-    <actor costume="wall-ah1" x="408" y="144" direction="0.0" heading="0.0" startEvent="default" zOrder="90"/>
+    <actor costume="wall-bh2" x="408.0" y="288.0" zOrder="90" id="" colorize="" role="solid.py"/>
+    <actor costume="junction-a4" x="120.0" y="288.0" zOrder="90" id="" colorize="" role="solid.py"/>
+    <actor costume="wall-bh2" x="192.0" y="288.0" zOrder="90" id="" colorize="" role="solid.py"/>
+    <actor costume="wall-bh2" x="624.0" y="288.0" zOrder="90" id="" colorize="" role="solid.py"/>
+    <actor costume="junction-a2" x="768.0" y="288.0" zOrder="90" id="" colorize="" role="solid.py"/>
+    <actor costume="wall-av3" x="120.0" y="432.0" zOrder="90" id="" colorize="" role="solid.py"/>
+    <actor costume="wall-av3" x="768.0" y="432.0" zOrder="90" id="" colorize="" role="solid.py"/>
+    <actor costume="corner-a1" x="120.0" y="576.0" zOrder="90" id="" colorize="" role="solid.py"/>
+    <actor costume="wall-ah3" x="264.0" y="576.0" zOrder="90" id="" colorize="" role="solid.py"/>
+    <actor costume="wall-ah3" x="624.0" y="576.0" zOrder="90" id="" colorize="" role="solid.py"/>
+    <actor costume="corner-a2" x="768.0" y="576.0" zOrder="90" id="" colorize="" role="solid.py"/>
+    <actor costume="wall-ah1" x="480.0" y="576.0" zOrder="90" id="" colorize="" role="solid.py"/>
+    <actor costume="wall-av1" x="120.0" y="216.0" zOrder="90" id="" colorize="" role="solid.py"/>
+    <actor costume="wall-av1" x="768.0" y="216.0" zOrder="90" id="" colorize="" role="solid.py"/>
+    <actor costume="corner-a3" x="768.0" y="144.0" zOrder="90" id="" colorize="" role="solid.py"/>
+    <actor costume="corner-a4" x="120.0" y="144.0" zOrder="90" id="" colorize="" role="solid.py"/>
+    <actor costume="wall-ah3" x="264.0" y="144.0" zOrder="90" id="" colorize="" role="solid.py"/>
+    <actor costume="wall-ah3" x="624.0" y="144.0" zOrder="90" id="" colorize="" role="solid.py"/>
+    <actor costume="wall-ah1" x="408.0" y="144.0" zOrder="90" id="" colorize="" role="solid.py"/>
   </layer>
   <layer name="top">
-    <view/>
-    <actor costume="money1" x="337" y="401" direction="0.0" heading="0.0" startEvent="default" zOrder="15"/>
-    <actor costume="money1" x="518" y="402" direction="0.0" heading="0.0" startEvent="default" zOrder="16"/>
-    <actor costume="money1" x="429" y="402" direction="0.0" heading="0.0" startEvent="default" zOrder="17"/>
+    <actor costume="money1" x="337.0" y="401.0" zOrder="15" id="" colorize="" role="collectable.py"/>
+    <actor costume="money1" x="518.0" y="402.0" zOrder="16" id="" colorize="" role="collectable.py"/>
+    <actor costume="money1" x="429.0" y="402.0" zOrder="17" id="" colorize="" role="collectable.py"/>
   </layer>
 </scene>
