@@ -1,4 +1,4 @@
-from common import *
+from common import * #@UnusedWildImport
 
 game = Itchy.getGame()
 
@@ -20,7 +20,7 @@ class Director(AbstractDirector) :
 
       
     def startScene(self, sceneName) :
-        
+
         if game.pause.isPaused() :
             game.pause.unpause()
             

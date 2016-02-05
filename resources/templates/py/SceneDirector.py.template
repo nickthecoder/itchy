@@ -1,13 +1,8 @@
-from common import *
+from common import * #@UnusedWildImport
 
 properties = ArrayList()
-# TODO declare poroperties here. Note that you must also initialise them in __init__
+# TODO declare properties here. Note that you must also initialise them in __init__
 # properties.add( StringProperty( "myString" ) )
-# properties.add( IntegerProperty( "myInteger" ) )
-# properties.add( DoubleProperty( "myDouble" ) )
-# properties.add( BooleanProperty( "myBoolean" ) )
-# properties.add( RGBAProperty( "myColor" ).label( "My Colour" ) )
-# properties.add( RGBAProperty( "myOtherColor" ).allowNull().includeAlpha() )
 
 class ${Name}(PlainSceneDirector) :
 

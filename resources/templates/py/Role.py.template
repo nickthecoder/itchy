@@ -1,7 +1,7 @@
-from common import *
+from common import * #@UnusedWildImport
 
 properties = ArrayList()
-# TODO declare poroperties here. Note that you must also initialise them in __init__
+# TODO declare properties here. Note that you must also initialise them in __init__
 # e.g.
 # properties.add( StringProperty( "myString" ).hint("My green label" ) )
 

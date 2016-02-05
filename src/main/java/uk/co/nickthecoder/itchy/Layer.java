@@ -15,7 +15,7 @@ public class Layer implements Comparable<Layer>, NamedSubject<Layer>, Cloneable
     protected static final List<Property<Layer, ?>> properties = new ArrayList<Property<Layer, ?>>();
 
     static {
-        properties.add(new StringProperty<Layer>("name"));
+        properties.add(new StringProperty<Layer>("name").allowBlank(false));
         properties.add(new IntegerProperty<Layer>("zOrder"));
         properties.add(new IntegerProperty<Layer>("position.x"));
         properties.add(new IntegerProperty<Layer>("position.y").hint("0 is the top of the screen"));

@@ -1,4 +1,4 @@
-from common import *
+from common import * #@UnusedWildImport
 
 from moving import Moving
 

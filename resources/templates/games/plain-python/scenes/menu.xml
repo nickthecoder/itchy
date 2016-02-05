@@ -2,12 +2,8 @@
   <properties/>
   <layer name="main">
     <text text="Play" font="veraBold" size="43" color="#ffffff" xAlignment="0.0" yAlignment="0.0" role="uk.co.nickthecoder.itchy.role.SceneButton" x="100" y="500" direction="0.0" startEvent="default">
-      <property name="sceneName" value="play"/>
+      <role sceneName="play"/>
     </text>
-    <text text="About" font="veraBold" size="43" color="#ffffff" xAlignment="0.0" yAlignment="0.0" role="uk.co.nickthecoder.itchy.role.SceneButton" x="100" y="400" direction="0.0" startEvent="default">
-      <property name="sceneName" value="about"/>
-    </text>
-    <text text="Editor" font="veraBold" size="43" color="#ffffff" xAlignment="0.0" yAlignment="0.0" role="uk.co.nickthecoder.itchy.role.EditorButton" x="100" y="300" direction="0.0" startEvent="default"/>
     <text text="Quit" font="veraBold" size="43" color="#ffffff" xAlignment="0.0" yAlignment="0.0" role="uk.co.nickthecoder.itchy.role.QuitButton" x="100" y="200" direction="0.0" startEvent="default"/>
   </layer>
 </scene>

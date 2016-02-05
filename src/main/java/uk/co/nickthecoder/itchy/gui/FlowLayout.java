@@ -11,23 +11,22 @@ public class FlowLayout implements ContainerLayout
     @Override
     public void calculateRequirements( PlainContainer container )
     {
+        int accumulatedWidth = container.getPaddingLeft() + container.getPaddingRight();
         int maxHeight = 0;
 
         List<Component> children = container.getChildren();
 
         for (Component child : children) {
             if (child.isVisible()) {
-
+                accumulatedWidth += child.getRequiredWidth() + container.getXSpacing();
                 int tempHeight = child.getRequiredHeight() + child.getMarginTop() + child.getMarginBottom();
                 if (tempHeight > maxHeight) {
                     maxHeight = tempHeight;
                 }
             }
         }
-
-        container.setNaturalWidth(100); // requiredSum + container.getPaddingLeft() +
-                                        // container.getPaddingRight() );
-        container.setNaturalHeight(maxHeight + container.getPaddingTop() + container.getPaddingBottom());
+        container.setNaturalWidth(accumulatedWidth);
+        container.setNaturalHeight(maxHeight + container.getPaddingTop() + container.getPaddingBottom());        
     }
 
     @Override
@@ -62,7 +61,6 @@ public class FlowLayout implements ContainerLayout
         }
 
         container.setNaturalHeight(y + maxHeight + container.getPaddingBottom());
-
     }
 
 }

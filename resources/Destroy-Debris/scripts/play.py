@@ -1,4 +1,4 @@
-from common import *
+from common import * #@UnusedWildImport
 
 properties = ArrayList()
 properties.add( StringProperty("nextScene").hint("The name of the next scene") )

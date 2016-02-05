@@ -1,6 +1,7 @@
 *~
 *.class
 /.project
+/.pydevproject
 /.classpath
 /.settings
 /.gradle
@@ -27,5 +28,5 @@
 /docs/diagrams/overview-thumbnail.png
 /docs/diagrams/overview.png
 /resources/Launcher/nickthecoder-itchy.desktop
-
+/resources/FontPreview
 

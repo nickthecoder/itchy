@@ -132,7 +132,7 @@ public abstract class ScriptLanguage
         // template file : resources/templates/EXTENSION/TEMPLATE.EXTENSION
         File templateFile = new File(Itchy.getResourcesDirectory(),
             "templates" + File.separator + getExtension() + File.separator + templateName + "." +
-                this.getExtension());
+                this.getExtension() + ".template");
 
         File destFile = this.manager.getScript(className.name);
 

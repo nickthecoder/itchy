@@ -1,6 +1,8 @@
 Current Tasks
 =============
 
+Fix EditInput
+
 Look over all TODOs
 
 Load/Save all scenes in all games to convert them to the new format.
@@ -46,6 +48,7 @@ Can delete Poses which are used in a Framed animation
 
 New Features
 ============
+
 
 Client/Server views.
     A server runs the game, calling the director,scenedirector,roles ticks etc.

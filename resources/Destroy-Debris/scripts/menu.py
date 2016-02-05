@@ -1,4 +1,4 @@
-from common import *
+from common import *  #@UnusedWildImport
 
 properties = ArrayList()
 
@@ -27,10 +27,10 @@ class Menu(PlainSceneDirector) :
             game.startScene("menu")
             
         elif self.inputAbout.matches(event) :
-        	game.startScene("about")
+            game.startScene("about")
     
         elif self.inputEditor.matches(event) :
-        	game.startEditor()
+            game.startEditor()
     
     
     # The menu has flying rocks, but we don't care about them, so do nothing.

@@ -1,4 +1,4 @@
-from common import *
+from common import * #@UnusedWildImport
 
 from moving import Moving
 
@@ -7,10 +7,10 @@ properties = ArrayList()
 
 costumeProperties = ArrayList()
 
-costumeProperties.add( DoubleProperty("impulse").hint("recoils the ship") )
-costumeProperties.add( IntegerProperty("strength") )
-costumeProperties.add( DoubleProperty("firePeriod") )
-costumeProperties.add( DoubleProperty("explosiveness").hint("The momentum added to the fragments") )
+costumeProperties.add(DoubleProperty("impulse").hint("recoils the ship"))
+costumeProperties.add(IntegerProperty("strength"))
+costumeProperties.add(DoubleProperty("firePeriod"))
+costumeProperties.add(DoubleProperty("explosiveness").hint("The momentum added to the fragments"))
 
 class Bullet(Moving) :
 
@@ -19,10 +19,10 @@ class Bullet(Moving) :
         self.speed = 1
 
     def tick(self) :
-    	Moving.tick(self)
-    	if self.actor.appearance.alpha < 20 :
-    	    self.actor.kill()
-    	    return
+        Moving.tick(self)
+        if self.actor.appearance.alpha < 20 :
+            self.actor.kill()
+            return
         
         for role in self.collisions("shootable") :
             if not role.getActor().isDying() :
@@ -32,12 +32,12 @@ class Bullet(Moving) :
 
         
     def onMessage(self, message) :
-    	if message == "die" :
-    		# Sent at the end of the fade out animation. Its the animation that determines the bullets max life span.
-    		self.getActor().kill()
+        if message == "die" :
+            # Sent at the end of the fade out animation. Its the animation that determines the bullets max life span.
+            self.getActor().kill()
 
 
-    def createCostumeFeatures( self, costume ) :
+    def createCostumeFeatures(self, costume) :
         return BulletFeatures(costume)
 
 
@@ -47,13 +47,13 @@ class Bullet(Moving) :
 
     # Boiler plate code - no need to change this
     def getClassName(self):
-        return ClassName( Role, self.__module__ + ".py" )
+        return ClassName(Role, self.__module__ + ".py")
 
 
 class BulletFeatures(CostumeFeatures) :
 
-    def __init__(self,costume) :
-        super(BulletFeatures,self).__init__(costume)
+    def __init__(self, costume) :
+        super(BulletFeatures, self).__init__(costume)
         self.impulse = 1
         self.strength = 1
         self.firePeriod = 1

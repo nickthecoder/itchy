@@ -9,9 +9,21 @@
   <sounds/>
   <animations/>
   <costumes/>
+  <inputs>
+    <input name="exit" keys="click+ESCAPE"/>
+  </inputs>
+  <layouts>
+    <layout name="default">
+      <layer name="background" zOrder="0" x="0" y="0" width="${WIDTH}" height="${HEIGHT}" viewClassName="uk.co.nickthecoder.itchy.RGBAView" stageClassName="uk.co.nickthecoder.itchy.ZOrderStage" stageConstraintClassName="uk.co.nickthecoder.itchy.NullStageConstraint">
+        <view color="#000000ff"/>
+      </layer>
+      <layer name="main" zOrder="50" x="0" y="0" width="${WIDTH}" height="${HEIGHT}" viewClassName="uk.co.nickthecoder.itchy.StageView" stageClassName="uk.co.nickthecoder.itchy.ZOrderStage" stageConstraintClassName="uk.co.nickthecoder.itchy.NullStageConstraint">
+        <view enableMouse="true"/>
+      </layer>
+    </layout>
+  </layouts>
   <scenes>
-    <scene name="about"/>
-    <scene name="menu"/>
     <scene name="play"/>
+    <scene name="menu"/>
   </scenes>
 </resources>

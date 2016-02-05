@@ -3,6 +3,7 @@ package uk.co.nickthecoder.itchy.editor;
 import java.util.ArrayList;
 import java.util.List;
 
+import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Layer;
 import uk.co.nickthecoder.itchy.Layout;
 import uk.co.nickthecoder.itchy.Resources;
@@ -12,6 +13,7 @@ import uk.co.nickthecoder.itchy.gui.SingleColumnRowComparator;
 import uk.co.nickthecoder.itchy.gui.TableModel;
 import uk.co.nickthecoder.itchy.gui.TableModelColumn;
 import uk.co.nickthecoder.itchy.gui.TableModelRow;
+import uk.co.nickthecoder.jame.Rect;
 
 public class ListLayers extends ListSubjects<Layer>
 {
@@ -75,6 +77,7 @@ public class ListLayers extends ListSubjects<Layer>
         boolean isNew = false;
         if (subject == null) {
             subject = new Layer();
+            subject.position = new Rect( 0,0, Itchy.getGame().getWidth(), Itchy.getGame().getHeight());
             isNew = true;
         }
         

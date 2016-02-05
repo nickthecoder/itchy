@@ -1,6 +1,7 @@
 <scene showMouse="true" role="play.py">
   <properties/>
   <layer name="main">
-    <text text="play area!" font="vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="331" y="346" direction="0.0" startEvent="default"/>
+    <text text="Hello World" font="veraBold" size="43" color="#ffffff" xAlignment="0.0" yAlignment="0.0" x="100" y="500" direction="0.0" startEvent="default">
+    </text>
   </layer>
 </scene>

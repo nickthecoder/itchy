@@ -263,4 +263,13 @@ public class Util
 
         return C;
     }
+    
+    public static void printStackTrace()
+    {
+        try {
+            throw new Exception("printStackTrace");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

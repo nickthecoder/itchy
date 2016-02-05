@@ -1,4 +1,4 @@
-from common import *
+from common import * #@UnusedWildImport
 
 from moving import Moving
 
@@ -43,22 +43,22 @@ class Rock(Moving) :
     
     
     def shot(self, bullet) :
-    	# Small bullets have NO effect on strong rocks.
-    	strength = bullet.actor.costume.costumeFeatures.strength
+        # Small bullets have NO effect on strong rocks.
+        strength = bullet.actor.costume.costumeFeatures.strength
 
-    	if strength < self.actor.costume.costumeFeatures.strength :
-    		self.getActor().event("ricochet")
-    		return
-    	
-    	self.hits += strength
-    	# Have we hit the rock enough times?
-    	if self.hits < self.actor.costume.costumeFeatures.hitsRequired :
-    		self.getActor().event("hit")
-    		return
-    	
-		self.getActor().event("explode")
-    	game.getDirector().addPoints(self.actor.costume.costumeFeatures.points)
-    	
+        if strength < self.actor.costume.costumeFeatures.strength :
+            self.getActor().event("ricochet")
+            return
+    
+        self.hits += strength
+        # Have we hit the rock enough times?
+        if self.hits < self.actor.costume.costumeFeatures.hitsRequired :
+            self.getActor().event("hit")
+            return
+    
+        self.getActor().event("explode")
+        game.getDirector().addPoints(self.actor.costume.costumeFeatures.points)
+        
         ExplosionBuilder(self.getActor()) \
             .spread( bullet.getActor().getHeading() - 120, bullet.getActor().getHeading() + 120 ).randomSpread() \
             .speed(5,3,0,0).fade(3).distance(40) \
