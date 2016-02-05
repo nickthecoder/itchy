@@ -1,146 +1,146 @@
 <scene name="welcome" layout="default" sceneDirector="menu.py" showMouse="true">
   <layer name="background"/>
   <layer name="plain">
-    <text x="371.0" y="272.0" zOrder="-1" id="" font="Boycott" fontSize="222.0" text="PyroX" color="#ff7e1aff" makeup="uk.co.nickthecoder.itchy.makeup.Textured">
+    <text x="371.0" y="272.0" zOrder="-1" id="" font="Boycott" fontSize="222.0" text="PyroX" color="#ff7e1aff" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Textured">
       <makeup pose="wall" x="1"/>
     </text>
-    <actor costume="sledge" x="211.0" y="412.0" zOrder="90" id="" role="sledger.py">
+    <actor costume="sledge" x="211.0" y="412.0" zOrder="90" id="" colorize="" role="sledger.py">
       <role text="Welcome to Pyrox&#xA;Let's go.&#xA;" initialDelay="1.0" period="9.0" loop="true"/>
     </actor>
   </layer>
   <layer name="grid">
-    <actor costume="wall" x="120.0" y="480.0" zOrder="5" id="" role="wall.py"/>
-    <actor costume="wall" x="60.0" y="480.0" zOrder="5" id="" role="wall.py"/>
-    <actor costume="wall" y="420.0" zOrder="5" id="" role="wall.py"/>
-    <actor costume="wall" x="180.0" y="480.0" zOrder="5" id="" role="wall.py"/>
-    <actor costume="wall" x="240.0" y="480.0" zOrder="5" id="" role="wall.py"/>
-    <actor costume="wall" x="300.0" y="480.0" zOrder="5" id="" role="wall.py"/>
-    <actor costume="wall" x="360.0" y="480.0" zOrder="5" id="" role="wall.py"/>
-    <actor costume="wall" x="420.0" y="480.0" zOrder="5" id="" role="wall.py"/>
-    <actor costume="wall" x="540.0" y="480.0" zOrder="5" id="" role="wall.py"/>
-    <actor costume="wall" x="600.0" y="480.0" zOrder="5" id="" role="wall.py"/>
-    <actor costume="wall" x="660.0" y="480.0" zOrder="5" id="" role="wall.py"/>
-    <actor costume="wall" y="360.0" zOrder="5" id="" role="wall.py"/>
-    <actor costume="wall" y="300.0" zOrder="5" id="" role="wall.py"/>
-    <actor costume="wallNW" y="480.0" zOrder="5" id="" role="wall.py"/>
-    <actor costume="wall" y="240.0" zOrder="5" id="" role="wall.py"/>
-    <actor costume="wallSW" zOrder="5" id="" role="wall.py"/>
-    <actor costume="wall" x="60.0" zOrder="5" id="" role="wall.py"/>
-    <actor costume="wall" x="120.0" zOrder="5" id="" role="wall.py"/>
-    <actor costume="wall" x="180.0" zOrder="5" id="" role="wall.py"/>
-    <actor costume="wall" x="240.0" zOrder="5" id="" role="wall.py"/>
-    <actor costume="wall" x="300.0" zOrder="5" id="" role="wall.py"/>
-    <actor costume="wall" x="360.0" zOrder="5" id="" role="wall.py"/>
-    <actor costume="wall" x="420.0" zOrder="5" id="" role="wall.py"/>
-    <actor costume="wall" x="480.0" zOrder="5" id="" role="wall.py"/>
-    <actor costume="wall" x="540.0" zOrder="5" id="" role="wall.py"/>
-    <actor costume="wall" x="600.0" zOrder="5" id="" role="wall.py"/>
-    <actor costume="wall" x="660.0" zOrder="5" id="" role="wall.py"/>
-    <actor costume="wallSE" x="720.0" zOrder="5" id="" role="wall.py"/>
-    <actor costume="wall" x="720.0" y="240.0" zOrder="5" id="" role="wall.py"/>
-    <actor costume="wall" x="720.0" y="300.0" zOrder="5" id="" role="wall.py"/>
-    <actor costume="wall" x="720.0" y="360.0" zOrder="5" id="" role="wall.py"/>
-    <actor costume="wall" x="480.0" y="480.0" zOrder="5" id="" role="wall.py"/>
-    <actor costume="wall" x="720.0" y="420.0" zOrder="5" id="" role="wall.py"/>
-    <actor costume="wallNE" x="720.0" y="480.0" zOrder="5" id="" role="wall.py"/>
-    <actor costume="wallSW" y="180.0" zOrder="5" id="" role="wall.py"/>
-    <actor costume="wallNW" y="60.0" zOrder="5" id="" role="wall.py"/>
-    <actor costume="wallSE" x="720.0" y="180.0" zOrder="5" id="" role="wall.py"/>
-    <actor costume="wallNE" x="720.0" y="60.0" zOrder="5" id="" role="wall.py"/>
-    <actor costume="autoPilot" x="-1020.0" y="120.0" zOrder="10" id="" alpha="10.0" role="autoPilot.py">
+    <actor costume="wall" x="120.0" y="480.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="60.0" y="480.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" y="420.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="180.0" y="480.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="240.0" y="480.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="300.0" y="480.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="360.0" y="480.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="420.0" y="480.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="540.0" y="480.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="600.0" y="480.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="660.0" y="480.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" y="360.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" y="300.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wallNW" y="480.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" y="240.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wallSW" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="60.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="120.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="180.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="240.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="300.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="360.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="420.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="480.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="540.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="600.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="660.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wallSE" x="720.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="720.0" y="240.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="720.0" y="300.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="720.0" y="360.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="480.0" y="480.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="720.0" y="420.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wallNE" x="720.0" y="480.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wallSW" y="180.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wallNW" y="60.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wallSE" x="720.0" y="180.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wallNE" x="720.0" y="60.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="autoPilot" x="-1020.0" y="120.0" zOrder="10" id="" alpha="10.0" colorize="" role="autoPilot.py">
       <role moves="--rrrrrrrrrrrrrrrrrrrrrrrrr.dllululul---rddlluur----lddrruul------rruullll--udrru---l" killOnPressed="true" autoTest="true"/>
     </actor>
-    <actor costume="soil" x="-360.0" y="120.0" zOrder="10" id="" role="soft.py"/>
-    <actor costume="soil" x="-240.0" y="120.0" zOrder="10" id="" role="soft.py"/>
-    <actor costume="soil" x="-240.0" y="60.0" zOrder="10" id="" role="soft.py"/>
-    <actor costume="soil" x="-420.0" y="60.0" zOrder="10" id="" role="soft.py"/>
-    <actor costume="soil" x="-480.0" zOrder="10" id="" role="soft.py"/>
-    <actor costume="soil" x="-420.0" zOrder="10" id="" role="soft.py"/>
-    <actor costume="soil" x="-540.0" zOrder="10" id="" role="soft.py"/>
-    <actor costume="soil" x="-600.0" zOrder="10" id="" role="soft.py"/>
-    <actor costume="soil" x="-720.0" zOrder="10" id="" role="soft.py"/>
-    <actor costume="soil" x="-660.0" zOrder="10" id="" role="soft.py"/>
-    <actor costume="soil" x="-780.0" zOrder="10" id="" role="soft.py"/>
-    <actor costume="soil" x="-960.0" y="60.0" zOrder="10" id="" role="soft.py"/>
-    <actor costume="soil" x="-960.0" y="120.0" zOrder="10" id="" role="soft.py"/>
-    <actor costume="soil" x="-780.0" y="180.0" zOrder="10" id="" role="soft.py"/>
-    <actor costume="soil" x="-720.0" y="180.0" zOrder="10" id="" role="soft.py"/>
-    <actor costume="soil" x="-600.0" y="180.0" zOrder="10" id="" role="soft.py"/>
-    <actor costume="soil" x="-480.0" y="180.0" zOrder="10" id="" role="soft.py"/>
-    <actor costume="soil" x="-360.0" y="180.0" zOrder="10" id="" role="soft.py"/>
-    <actor costume="soil" x="-240.0" y="180.0" zOrder="10" id="" role="soft.py"/>
-    <actor costume="soil" x="-480.0" y="60.0" zOrder="10" id="" role="soft.py"/>
-    <actor costume="soil" x="-480.0" y="120.0" zOrder="10" id="" role="soft.py"/>
-    <actor costume="soil" x="-900.0" y="180.0" zOrder="10" id="" role="soft.py"/>
-    <actor costume="soil" x="-840.0" y="180.0" zOrder="10" id="" role="soft.py"/>
-    <actor costume="soil" x="-960.0" y="180.0" zOrder="10" id="" role="soft.py"/>
-    <actor costume="soil" x="-960.0" zOrder="10" id="" role="soft.py"/>
-    <actor costume="soil" x="-900.0" zOrder="10" id="" role="soft.py"/>
-    <actor costume="soil" x="-840.0" zOrder="10" id="" role="soft.py"/>
-    <actor costume="soil" x="-720.0" y="120.0" zOrder="10" id="" role="soft.py"/>
-    <actor costume="soil" x="-600.0" y="120.0" zOrder="10" id="" role="soft.py"/>
-    <actor costume="soil" x="-660.0" y="60.0" zOrder="10" id="" role="soft.py"/>
-    <actor costume="soil" x="-600.0" y="60.0" zOrder="10" id="" role="soft.py"/>
-    <actor costume="soil" x="-540.0" y="60.0" zOrder="10" id="" role="soft.py"/>
-    <actor costume="soil" x="-900.0" y="60.0" zOrder="10" id="" role="soft.py"/>
-    <actor costume="soil" x="-840.0" y="60.0" zOrder="10" id="" role="soft.py"/>
-    <actor costume="soil" x="-780.0" y="60.0" zOrder="10" id="" role="soft.py"/>
-    <actor costume="soil" x="-720.0" y="60.0" zOrder="10" id="" role="soft.py"/>
-    <actor costume="soil" x="-360.0" zOrder="10" id="" role="soft.py"/>
-    <actor costume="soil" x="-360.0" y="60.0" zOrder="10" id="" role="soft.py"/>
-    <actor costume="soil" x="-300.0" y="60.0" zOrder="10" id="" role="soft.py"/>
-    <actor costume="soil" x="-300.0" zOrder="10" id="" role="soft.py"/>
-    <actor costume="soil" x="-240.0" zOrder="10" id="" role="soft.py"/>
-    <actor costume="soil" x="-240.0" y="240.0" zOrder="10" id="" role="soft.py"/>
-    <actor costume="soil" x="-300.0" y="240.0" zOrder="10" id="" role="soft.py"/>
-    <actor costume="soil" x="-360.0" y="240.0" zOrder="10" id="" role="soft.py"/>
-    <actor costume="soil" x="-420.0" y="240.0" zOrder="10" id="" role="soft.py"/>
-    <actor costume="soil" x="-480.0" y="240.0" zOrder="10" id="" role="soft.py"/>
-    <actor costume="soil" x="-540.0" y="240.0" zOrder="10" id="" role="soft.py"/>
-    <actor costume="soil" x="-600.0" y="240.0" zOrder="10" id="" role="soft.py"/>
-    <actor costume="soil" x="-660.0" y="240.0" zOrder="10" id="" role="soft.py"/>
-    <actor costume="soil" x="-720.0" y="240.0" zOrder="10" id="" role="soft.py"/>
-    <actor costume="soil" x="-780.0" y="240.0" zOrder="10" id="" role="soft.py"/>
-    <actor costume="soil" x="-840.0" y="240.0" zOrder="10" id="" role="soft.py"/>
-    <actor costume="soil" x="-900.0" y="240.0" zOrder="10" id="" role="soft.py"/>
-    <actor costume="soil" x="-960.0" y="240.0" zOrder="10" id="" role="soft.py"/>
-    <actor costume="squashE" x="60.0" y="120.0" zOrder="10" id="" role="squash.py"/>
-    <actor costume="squashE" x="120.0" y="120.0" zOrder="10" id="" role="squash.py"/>
-    <actor costume="squashE" x="180.0" y="120.0" zOrder="10" id="" role="squash.py"/>
-    <actor costume="squashE" x="240.0" y="120.0" zOrder="10" id="" role="squash.py"/>
-    <actor costume="squashE" x="360.0" y="120.0" zOrder="10" id="" role="squash.py"/>
-    <actor costume="squashE" x="420.0" y="120.0" zOrder="10" id="" role="squash.py"/>
-    <actor costume="squashE" x="480.0" y="120.0" zOrder="10" id="" role="squash.py"/>
-    <actor costume="squashE" x="540.0" y="120.0" zOrder="10" id="" role="squash.py"/>
-    <actor costume="squashE" x="600.0" y="120.0" zOrder="10" id="" role="squash.py"/>
-    <actor costume="squashE" x="660.0" y="120.0" zOrder="10" id="" role="squash.py"/>
-    <actor costume="squashE" x="300.0" y="120.0" zOrder="10" id="" role="squash.py"/>
-    <actor costume="balloon" x="180.0" y="60.0" zOrder="20" id="" role="balloon.py"/>
-    <actor costume="balloon" x="120.0" y="60.0" zOrder="20" id="" role="balloon.py"/>
-    <actor costume="balloon" x="240.0" y="60.0" zOrder="20" id="" role="balloon.py"/>
-    <actor costume="balloon" x="300.0" y="60.0" zOrder="20" id="" role="balloon.py"/>
-    <actor costume="balloon" x="420.0" y="60.0" zOrder="20" id="" role="balloon.py"/>
-    <actor costume="balloon" x="480.0" y="60.0" zOrder="20" id="" role="balloon.py"/>
-    <actor costume="balloon" x="540.0" y="60.0" zOrder="20" id="" role="balloon.py"/>
-    <actor costume="balloon" x="600.0" y="60.0" zOrder="20" id="" role="balloon.py"/>
-    <actor costume="rock" x="-660.0" y="180.0" zOrder="20" id="" role="rock.py"/>
-    <actor costume="rock" x="-540.0" y="180.0" zOrder="20" id="" role="rock.py"/>
-    <actor costume="rock" x="-420.0" y="180.0" zOrder="20" id="" role="rock.py"/>
-    <actor costume="rock" x="-300.0" y="180.0" zOrder="20" id="" role="rock.py"/>
-    <actor costume="balloon" x="360.0" y="60.0" zOrder="20" id="" role="balloon.py"/>
-    <actor costume="gate" x="360.0" y="420.0" zOrder="40" id="" role="gate.py">
-      <role scene="play"/>
+    <actor costume="soil" x="-360.0" y="120.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="soil" x="-240.0" y="120.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="soil" x="-240.0" y="60.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="soil" x="-420.0" y="60.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="soil" x="-480.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="soil" x="-420.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="soil" x="-540.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="soil" x="-600.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="soil" x="-720.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="soil" x="-660.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="soil" x="-780.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="soil" x="-960.0" y="60.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="soil" x="-960.0" y="120.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="soil" x="-780.0" y="180.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="soil" x="-720.0" y="180.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="soil" x="-600.0" y="180.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="soil" x="-480.0" y="180.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="soil" x="-360.0" y="180.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="soil" x="-240.0" y="180.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="soil" x="-480.0" y="60.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="soil" x="-480.0" y="120.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="soil" x="-900.0" y="180.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="soil" x="-840.0" y="180.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="soil" x="-960.0" y="180.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="soil" x="-960.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="soil" x="-900.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="soil" x="-840.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="soil" x="-720.0" y="120.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="soil" x="-600.0" y="120.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="soil" x="-660.0" y="60.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="soil" x="-600.0" y="60.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="soil" x="-540.0" y="60.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="soil" x="-900.0" y="60.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="soil" x="-840.0" y="60.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="soil" x="-780.0" y="60.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="soil" x="-720.0" y="60.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="soil" x="-360.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="soil" x="-360.0" y="60.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="soil" x="-300.0" y="60.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="soil" x="-300.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="soil" x="-240.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="soil" x="-240.0" y="240.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="soil" x="-300.0" y="240.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="soil" x="-360.0" y="240.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="soil" x="-420.0" y="240.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="soil" x="-480.0" y="240.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="soil" x="-540.0" y="240.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="soil" x="-600.0" y="240.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="soil" x="-660.0" y="240.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="soil" x="-720.0" y="240.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="soil" x="-780.0" y="240.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="soil" x="-840.0" y="240.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="soil" x="-900.0" y="240.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="soil" x="-960.0" y="240.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="squashE" x="60.0" y="120.0" zOrder="10" id="" colorize="" role="squash.py"/>
+    <actor costume="squashE" x="120.0" y="120.0" zOrder="10" id="" colorize="" role="squash.py"/>
+    <actor costume="squashE" x="180.0" y="120.0" zOrder="10" id="" colorize="" role="squash.py"/>
+    <actor costume="squashE" x="240.0" y="120.0" zOrder="10" id="" colorize="" role="squash.py"/>
+    <actor costume="squashE" x="360.0" y="120.0" zOrder="10" id="" colorize="" role="squash.py"/>
+    <actor costume="squashE" x="420.0" y="120.0" zOrder="10" id="" colorize="" role="squash.py"/>
+    <actor costume="squashE" x="480.0" y="120.0" zOrder="10" id="" colorize="" role="squash.py"/>
+    <actor costume="squashE" x="540.0" y="120.0" zOrder="10" id="" colorize="" role="squash.py"/>
+    <actor costume="squashE" x="600.0" y="120.0" zOrder="10" id="" colorize="" role="squash.py"/>
+    <actor costume="squashE" x="660.0" y="120.0" zOrder="10" id="" colorize="" role="squash.py"/>
+    <actor costume="squashE" x="300.0" y="120.0" zOrder="10" id="" colorize="" role="squash.py"/>
+    <actor costume="balloon" x="180.0" y="60.0" zOrder="20" id="" colorize="" role="balloon.py"/>
+    <actor costume="balloon" x="120.0" y="60.0" zOrder="20" id="" colorize="" role="balloon.py"/>
+    <actor costume="balloon" x="240.0" y="60.0" zOrder="20" id="" colorize="" role="balloon.py"/>
+    <actor costume="balloon" x="300.0" y="60.0" zOrder="20" id="" colorize="" role="balloon.py"/>
+    <actor costume="balloon" x="420.0" y="60.0" zOrder="20" id="" colorize="" role="balloon.py"/>
+    <actor costume="balloon" x="480.0" y="60.0" zOrder="20" id="" colorize="" role="balloon.py"/>
+    <actor costume="balloon" x="540.0" y="60.0" zOrder="20" id="" colorize="" role="balloon.py"/>
+    <actor costume="balloon" x="600.0" y="60.0" zOrder="20" id="" colorize="" role="balloon.py"/>
+    <actor costume="rock" x="-660.0" y="180.0" zOrder="20" id="" colorize="" role="rock.py"/>
+    <actor costume="rock" x="-540.0" y="180.0" zOrder="20" id="" colorize="" role="rock.py"/>
+    <actor costume="rock" x="-420.0" y="180.0" zOrder="20" id="" colorize="" role="rock.py"/>
+    <actor costume="rock" x="-300.0" y="180.0" zOrder="20" id="" colorize="" role="rock.py"/>
+    <actor costume="balloon" x="360.0" y="60.0" zOrder="20" id="" colorize="" role="balloon.py"/>
+    <actor costume="gate" x="360.0" y="420.0" zOrder="40" id="" colorize="" role="gate.py">
+      <role scene="play" spare="0"/>
     </actor>
-    <actor costume="coin" x="-540.0" y="120.0" zOrder="60" id="" role="collectable.py"/>
-    <actor costume="coin" x="-420.0" y="120.0" zOrder="60" id="" role="collectable.py"/>
-    <actor costume="coin" x="-300.0" y="120.0" zOrder="60" id="" role="collectable.py"/>
-    <actor costume="coin" x="-660.0" y="120.0" zOrder="60" id="" role="collectable.py"/>
-    <actor costume="coin" x="300.0" y="420.0" zOrder="60" id="" role="collectable.py"/>
-    <actor costume="coin" x="420.0" y="420.0" zOrder="60" id="" role="collectable.py"/>
-    <text x="360.0" y="420.0" zOrder="60" id="" font="Boycott" fontSize="22.0" text="Start" color="#ffffffff" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+    <actor costume="coin" x="-540.0" y="120.0" zOrder="60" id="" colorize="" role="collectable.py"/>
+    <actor costume="coin" x="-420.0" y="120.0" zOrder="60" id="" colorize="" role="collectable.py"/>
+    <actor costume="coin" x="-300.0" y="120.0" zOrder="60" id="" colorize="" role="collectable.py"/>
+    <actor costume="coin" x="-660.0" y="120.0" zOrder="60" id="" colorize="" role="collectable.py"/>
+    <actor costume="coin" x="300.0" y="420.0" zOrder="60" id="" colorize="" role="collectable.py"/>
+    <actor costume="coin" x="420.0" y="420.0" zOrder="60" id="" colorize="" role="collectable.py"/>
+    <text x="360.0" y="420.0" zOrder="60" id="" font="Boycott" fontSize="22.0" text="Start" color="#ffffffff" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <makeup dx="2" dy="2"/>
     </text>
-    <actor costume="player" x="-840.0" y="120.0" zOrder="100" id="" role="player.py">
+    <actor costume="player" x="-840.0" y="120.0" zOrder="100" id="" colorize="" role="player.py">
       <role awake="true"/>
     </actor>
   </layer>

@@ -1,32 +1,30 @@
-<scene showMouse="false" role="level.py" background="#0b0000ff">
-  <properties/>
+<scene name="bug-00001" layout="default" sceneDirector="level.py">
+  <layer name="background"/>
+  <layer name="plain"/>
   <layer name="grid">
-    <actor costume="wall" x="420" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="480" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="540" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="300" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="360" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="300" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="autoPilot" x="540" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="10">
-      <property name="moves" value="......lu-r"/>
-      <property name="autoTest" value="true"/>
-      <property name="killOnPressed" value="true"/>
+    <actor costume="wall" x="420.0" y="180.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="480.0" y="180.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="540.0" y="180.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="300.0" y="180.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="360.0" y="180.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="300.0" y="360.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="autoPilot" x="540.0" y="300.0" zOrder="10" id="" colorize="" role="autoPilot.py">
+      <role moves="......lu-r" killOnPressed="true" autoTest="true"/>
     </actor>
-    <actor costume="hint" x="420" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="10">
-      <property name="hint" value="Push a rock when it's nearly finished moving,&#xA;and it looks from its OLD square,&#xA;not its nearly new square."/>
+    <actor costume="hint" x="420.0" y="480.0" zOrder="10" id="" colorize="" role="hint.py">
+      <role hint="Push a rock when it's nearly finished moving,&#xA;and it looks from its OLD square,&#xA;not its nearly new square."/>
     </actor>
-    <actor costume="rock" x="360" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
-    <actor costume="gate" x="480" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="40">
-      <property name="spare" value="0"/>
-      <property name="scene" value="test"/>
+    <actor costume="rock" x="360.0" y="420.0" zOrder="20" id="" colorize="" role="rock.py"/>
+    <actor costume="gate" x="480.0" y="420.0" zOrder="40" id="" colorize="" role="gate.py">
+      <role scene="test" spare="0"/>
     </actor>
-    <actor costume="player" x="420" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="100">
-      <property name="awake" value="true"/>
+    <actor costume="player" x="420.0" y="360.0" zOrder="100" id="" colorize="" role="player.py">
+      <role awake="true"/>
     </actor>
   </layer>
   <layer name="test">
-    <actor costume="test" x="360" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="50">
-      <property name="expectedClass" value="Rock"/>
+    <actor costume="test" x="360.0" y="240.0" zOrder="50" id="" colorize="" role="test.py">
+      <role expectedClass="Rock"/>
     </actor>
   </layer>
 </scene>

@@ -1,12 +1,12 @@
-<scene name="play" layout="default" sceneDirector="level.py">
+<scene name="play" layout="default" sceneDirector="level.py" showMouse="true">
   <layer name="background"/>
   <layer name="plain"/>
   <layer name="grid">
     <actor costume="warp" x="-300.0" y="840.0" zOrder="3" id="" colorize="" role="warp.py">
-      <role scene="bees2" exitY="1"/>
+      <role scene="bees2" exitX="0" exitY="1"/>
     </actor>
     <actor costume="warp" x="-240.0" y="600.0" zOrder="4" id="" colorize="" role="warp.py">
-      <role scene="bees" exitY="1"/>
+      <role scene="bees" exitX="0" exitY="1"/>
     </actor>
     <actor costume="wall" x="1500.0" zOrder="5" id="" colorize="" role="wall.py"/>
     <actor costume="wall" x="-120.0" y="180.0" zOrder="5" id="" colorize="" role="wall.py"/>
@@ -526,10 +526,10 @@
     <actor costume="wallNE" x="120.0" y="1440.0" zOrder="5" id="" colorize="" role="wall.py"/>
     <actor costume="wallSE" x="-120.0" y="1380.0" zOrder="5" id="" colorize="" role="wall.py"/>
     <actor costume="portcullis" x="-120.0" y="-60.0" zOrder="10" id="" colorize="" role="portcullis.py">
-      <role requires="intro"/>
+      <role requires="intro" text=""/>
     </actor>
     <actor costume="portcullis" x="120.0" y="-60.0" zOrder="10" id="" colorize="" role="portcullis.py">
-      <role requires="intro"/>
+      <role requires="intro" text=""/>
     </actor>
     <actor costume="portcullis" y="-180.0" zOrder="10" id="" colorize="" role="portcullis.py">
       <role requires="rocks3,balloons3" text="Rocks(3) and Balloons(3)"/>
@@ -625,100 +625,100 @@
       <role requires="bees" text="Bees"/>
     </actor>
     <actor costume="warp" x="-1200.0" y="-360.0" zOrder="40" id="" colorize="" role="warp.py">
-      <role scene="balloons5" exitX="-1"/>
+      <role scene="balloons5" exitX="-1" exitY="-1"/>
     </actor>
     <actor costume="warp" y="60.0" zOrder="40" id="" colorize="" role="warp.py">
-      <role scene="intro" exitY="-1"/>
+      <role scene="intro" exitX="0" exitY="-1"/>
     </actor>
     <actor costume="warp" x="240.0" y="-600.0" zOrder="40" id="" colorize="" role="warp.py">
-      <role scene="extras" exitY="-1"/>
+      <role scene="extras" exitX="0" exitY="-1"/>
     </actor>
     <actor costume="warp" x="-240.0" y="-120.0" zOrder="40" id="" colorize="" role="warp.py">
-      <role scene="balloons" exitX="-1"/>
+      <role scene="balloons" exitX="-1" exitY="-1"/>
     </actor>
     <actor costume="warp" x="240.0" y="120.0" zOrder="40" id="" colorize="" role="warp.py">
-      <role scene="grenades" exitX="1"/>
+      <role scene="grenades" exitX="1" exitY="-1"/>
     </actor>
     <actor costume="warp" x="240.0" y="-120.0" zOrder="40" id="" colorize="" role="warp.py">
-      <role scene="rocks" exitX="1"/>
+      <role scene="rocks" exitX="1" exitY="-1"/>
     </actor>
     <actor costume="warp" x="-240.0" y="120.0" zOrder="40" id="" colorize="" role="warp.py">
-      <role scene="vehicles" exitX="-1"/>
+      <role scene="vehicles" exitX="-1" exitY="-1"/>
     </actor>
     <actor costume="warp" x="240.0" y="600.0" zOrder="40" id="" colorize="" role="warp.py">
-      <role scene="furniture" exitY="1"/>
+      <role scene="furniture" exitX="0" exitY="1"/>
     </actor>
     <actor costume="warp" x="480.0" y="-180.0" zOrder="40" id="" colorize="" role="warp.py">
-      <role scene="rocks2" exitX="1"/>
+      <role scene="rocks2" exitX="1" exitY="-1"/>
     </actor>
     <actor costume="warp" x="720.0" y="-240.0" zOrder="40" id="" colorize="" role="warp.py">
-      <role scene="rocks3" exitX="1"/>
+      <role scene="rocks3" exitX="1" exitY="-1"/>
     </actor>
     <actor costume="warp" x="480.0" y="180.0" zOrder="40" id="" colorize="" role="warp.py">
-      <role scene="grenades2" exitX="1"/>
+      <role scene="grenades2" exitX="1" exitY="-1"/>
     </actor>
     <actor costume="warp" x="720.0" y="240.0" zOrder="40" id="" colorize="" role="warp.py">
-      <role scene="grenades3" exitX="1"/>
+      <role scene="grenades3" exitX="1" exitY="-1"/>
     </actor>
     <actor costume="warp" x="960.0" y="-300.0" zOrder="40" id="" colorize="" role="warp.py">
-      <role scene="rocks4" exitX="1"/>
+      <role scene="rocks4" exitX="1" exitY="-1"/>
     </actor>
     <actor costume="warp" x="1200.0" y="-360.0" zOrder="40" id="" colorize="" role="warp.py">
-      <role scene="rocks5" exitX="1"/>
+      <role scene="rocks5" exitX="1" exitY="-1"/>
     </actor>
     <actor costume="warp" x="1440.0" y="-420.0" zOrder="40" id="" colorize="" role="warp.py">
-      <role scene="rocks6" exitY="1"/>
+      <role scene="rocks6" exitX="0" exitY="1"/>
     </actor>
     <actor costume="warp" x="960.0" y="300.0" zOrder="40" id="" colorize="" role="warp.py">
-      <role scene="grenades4" exitX="1"/>
+      <role scene="grenades4" exitX="1" exitY="-1"/>
     </actor>
     <actor costume="warp" x="1200.0" y="360.0" zOrder="40" id="" colorize="" role="warp.py">
-      <role scene="grenades5" exitX="1"/>
+      <role scene="grenades5" exitX="1" exitY="-1"/>
     </actor>
     <actor costume="warp" x="1440.0" y="420.0" zOrder="40" id="" colorize="" role="warp.py">
-      <role scene="grenades6" exitY="-1"/>
+      <role scene="grenades6" exitX="0" exitY="-1"/>
     </actor>
     <actor costume="warp" x="1560.0" y="-180.0" zOrder="40" id="" colorize="" role="warp.py">
-      <role scene="rocks7" exitY="1"/>
+      <role scene="rocks7" exitX="0" exitY="1"/>
     </actor>
     <actor costume="warp" x="-480.0" y="-180.0" zOrder="40" id="" colorize="" role="warp.py">
-      <role scene="balloons2" exitX="-1"/>
+      <role scene="balloons2" exitX="-1" exitY="-1"/>
     </actor>
     <actor costume="warp" x="-720.0" y="-240.0" zOrder="40" id="" colorize="" role="warp.py">
-      <role scene="balloons3" exitX="-1"/>
+      <role scene="balloons3" exitX="-1" exitY="-1"/>
     </actor>
     <actor costume="warp" x="-960.0" y="-300.0" zOrder="40" id="" colorize="" role="warp.py">
-      <role scene="balloons4" exitX="-1"/>
+      <role scene="balloons4" exitX="-1" exitY="-1"/>
     </actor>
     <actor costume="warp" x="300.0" y="840.0" zOrder="40" id="" colorize="" role="warp.py">
-      <role scene="furniture2" exitY="1"/>
+      <role scene="furniture2" exitX="0" exitY="1"/>
     </actor>
     <actor costume="warp" x="360.0" y="1080.0" zOrder="40" id="" colorize="" role="warp.py">
-      <role scene="furniture3" exitX="1"/>
+      <role scene="furniture3" exitX="1" exitY="-1"/>
     </actor>
     <actor costume="warp" x="420.0" y="1320.0" zOrder="40" id="" colorize="" role="warp.py">
-      <role scene="furniture4" exitX="-1"/>
+      <role scene="furniture4" exitX="-1" exitY="-1"/>
     </actor>
     <actor costume="warp" x="480.0" y="1560.0" zOrder="40" id="" colorize="" role="warp.py">
-      <role scene="furniture5" exitY="-1"/>
+      <role scene="furniture5" exitX="0" exitY="-1"/>
     </actor>
     <actor costume="warp" x="-480.0" y="180.0" zOrder="40" id="" colorize="" role="warp.py">
-      <role scene="vehicles2" exitX="-1"/>
+      <role scene="vehicles2" exitX="-1" exitY="-1"/>
     </actor>
     <actor costume="warp" x="-720.0" y="240.0" zOrder="40" id="" colorize="" role="warp.py">
-      <role scene="vehicles3" exitX="-1"/>
+      <role scene="vehicles3" exitX="-1" exitY="-1"/>
     </actor>
     <actor costume="warp" x="-960.0" y="300.0" zOrder="40" id="" colorize="" role="warp.py">
-      <role scene="vehicles4" exitX="-1"/>
+      <role scene="vehicles4" exitX="-1" exitY="-1"/>
     </actor>
     <actor costume="warp" x="1620.0" y="60.0" zOrder="40" id="" colorize="" role="warp.py">
-      <role scene="rocks8" exitY="1"/>
+      <role scene="rocks8" exitX="0" exitY="1"/>
     </actor>
     <actor costume="warp" x="-1200.0" y="360.0" zOrder="40" id="" colorize="" role="warp.py">
-      <role scene="vehicles5" exitX="-1"/>
+      <role scene="vehicles5" exitX="-1" exitY="-1"/>
     </actor>
     <actor costume="warp" x="-1440.0" y="420.0" zOrder="40" id="" colorize="" role="warp.py">
-      <role scene="vehicles6" exitX="-1"/>
+      <role scene="vehicles6" exitX="-1" exitY="-1"/>
     </actor>
     <text y="60.0" zOrder="192" id="" font="Boycott" fontSize="22.0" text="Intro" color="#ffffffff" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <makeup dx="2" dy="-1"/>
@@ -817,16 +817,16 @@
       <makeup dx="2" dy="-1"/>
     </text>
     <actor costume="warp" x="480.0" y="-1560.0" zOrder="727" id="" colorize="" role="warp.py">
-      <role scene="extras5" exitY="-1"/>
+      <role scene="extras5" exitX="0" exitY="-1"/>
     </actor>
     <actor costume="warp" x="420.0" y="-1320.0" zOrder="728" id="" colorize="" role="warp.py">
-      <role scene="extras4" exitY="-1"/>
+      <role scene="extras4" exitX="0" exitY="-1"/>
     </actor>
     <actor costume="warp" x="300.0" y="-840.0" zOrder="729" id="" colorize="" role="warp.py">
-      <role scene="extras2" exitY="-1"/>
+      <role scene="extras2" exitX="0" exitY="-1"/>
     </actor>
     <actor costume="warp" x="360.0" y="-1080.0" zOrder="730" id="" colorize="" role="warp.py">
-      <role scene="extras3" exitY="-1"/>
+      <role scene="extras3" exitX="0" exitY="-1"/>
     </actor>
     <text x="300.0" y="-840.0" zOrder="731" id="" font="Boycott" fontSize="22.0" text="2" color="#ffffffff" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <makeup dx="2" dy="-1"/>
@@ -841,7 +841,7 @@
       <makeup dx="2" dy="-1"/>
     </text>
     <actor costume="warp" y="180.0" zOrder="736" id="" colorize="" role="warp.py">
-      <role scene="credits" exitX="1"/>
+      <role scene="credits" exitX="1" exitY="-1"/>
     </actor>
     <text y="180.0" zOrder="737" id="" font="Boycott" fontSize="22.0" text="Credits" color="#ffffffff" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <makeup dx="2" dy="-1"/>
@@ -871,19 +871,19 @@
       <role requires="bees3" text="Bees(3)"/>
     </actor>
     <actor costume="warp" x="-720.0" y="-300.0" zOrder="746" id="" colorize="" role="warp.py">
-      <role scene="balloons3a" exitX="-1"/>
+      <role scene="balloons3a" exitX="-1" exitY="-1"/>
     </actor>
     <actor costume="warp" x="-240.0" y="-180.0" zOrder="747" id="" colorize="" role="warp.py">
-      <role scene="balloons1a" exitX="-1"/>
+      <role scene="balloons1a" exitX="-1" exitY="-1"/>
     </actor>
     <actor costume="warp" x="-240.0" y="-240.0" zOrder="748" id="" colorize="" role="warp.py">
-      <role scene="balloons1c" exitX="-1"/>
+      <role scene="balloons1c" exitX="-1" exitY="-1"/>
     </actor>
     <actor costume="warp" x="-480.0" y="-240.0" zOrder="749" id="" colorize="" role="warp.py">
-      <role scene="balloons2a" exitX="-1"/>
+      <role scene="balloons2a" exitX="-1" exitY="-1"/>
     </actor>
     <actor costume="warp" x="-480.0" y="-300.0" zOrder="750" id="" colorize="" role="warp.py">
-      <role scene="balloons2b" exitX="-1"/>
+      <role scene="balloons2b" exitX="-1" exitY="-1"/>
     </actor>
     <actor costume="portcullis" x="360.0" y="-1200.0" zOrder="751" id="" colorize="" role="portcullis.py">
       <role requires="extras3" text="Extras(3)"/>
@@ -895,25 +895,25 @@
       <role requires="rocks3,balloons3" text="Rocks(3) and Balloons(3)"/>
     </actor>
     <actor costume="warp" x="240.0" y="-180.0" zOrder="754" id="" colorize="" role="warp.py">
-      <role scene="rocks1a" exitX="1"/>
+      <role scene="rocks1a" exitX="1" exitY="-1"/>
     </actor>
     <actor costume="warp" x="240.0" y="-240.0" zOrder="755" id="" colorize="" role="warp.py">
-      <role scene="rocks1b" exitX="1"/>
+      <role scene="rocks1b" exitX="1" exitY="-1"/>
     </actor>
     <actor costume="warp" x="240.0" y="-300.0" zOrder="756" id="" colorize="" role="warp.py">
-      <role scene="rocks1c" exitX="1"/>
+      <role scene="rocks1c" exitX="1" exitY="-1"/>
     </actor>
     <actor costume="warp" x="240.0" y="-360.0" zOrder="757" id="" colorize="" role="warp.py">
-      <role scene="rocks1d" exitX="1"/>
+      <role scene="rocks1d" exitX="1" exitY="-1"/>
     </actor>
     <actor costume="warp" x="-720.0" y="-360.0" zOrder="758" id="" colorize="" role="warp.py">
-      <role scene="balloons3b" exitX="-1"/>
+      <role scene="balloons3b" exitX="-1" exitY="-1"/>
     </actor>
     <actor costume="player" y="-60.0" zOrder="1000" id="player" colorize="" role="player.py">
       <role awake="true"/>
     </actor>
     <actor costume="warp" x="-720.0" y="-420.0" zOrder="1001" id="" colorize="" role="warp.py">
-      <role scene="balloons3c" exitX="-1"/>
+      <role scene="balloons3c" exitX="-1" exitY="-1"/>
     </actor>
     <text x="-300.0" y="840.0" zOrder="1002" id="" font="Boycott" fontSize="22.0" text="2" color="#ffffffff" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <makeup dx="2" dy="-1"/>
@@ -922,54 +922,54 @@
       <role requires="bees4" text="Bees(3)"/>
     </actor>
     <actor costume="warp" x="-360.0" y="1080.0" zOrder="1004" id="" colorize="" role="warp.py">
-      <role scene="bees3" exitY="1"/>
+      <role scene="bees3" exitX="0" exitY="1"/>
     </actor>
     <text x="-360.0" y="1080.0" zOrder="1005" id="" font="Boycott" fontSize="22.0" text="3" color="#ffffffff" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <makeup dx="2" dy="-1"/>
     </text>
     <actor costume="warp" x="-420.0" y="1320.0" zOrder="1006" id="" colorize="" role="warp.py">
-      <role scene="bees4" exitY="1"/>
+      <role scene="bees4" exitX="0" exitY="1"/>
     </actor>
     <text x="-420.0" y="1320.0" zOrder="1007" id="" font="Boycott" fontSize="22.0" text="4" color="#ffffffff" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <makeup dx="2" dy="-1"/>
     </text>
     <actor costume="warp" x="-480.0" y="1560.0" zOrder="1008" id="" colorize="" role="warp.py">
-      <role scene="bees5" exitY="1"/>
+      <role scene="bees5" exitX="0" exitY="1"/>
     </actor>
     <text x="-480.0" y="1560.0" zOrder="1009" id="" font="Boycott" fontSize="22.0" text="5" color="#ffffffff" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <makeup dx="2" dy="-1"/>
     </text>
     <actor costume="warp" y="960.0" zOrder="1010" id="" colorize="" role="warp.py">
-      <role scene="friends" exitX="1"/>
+      <role scene="friends" exitX="1" exitY="-1"/>
     </actor>
     <text y="960.0" zOrder="1011" id="" font="Boycott" fontSize="22.0" text="Friends" color="#ffffffff" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <makeup dx="2" dy="-1"/>
     </text>
     <actor costume="warp" y="1020.0" zOrder="1012" id="" colorize="" role="warp.py">
-      <role scene="friends1a" exitX="1"/>
+      <role scene="friends1a" exitX="1" exitY="-1"/>
     </actor>
     <actor costume="warp" y="1080.0" zOrder="1013" id="" colorize="" role="warp.py">
-      <role scene="friends1b" exitX="1"/>
+      <role scene="friends1b" exitX="1" exitY="-1"/>
     </actor>
     <actor costume="wall" x="60.0" y="840.0" zOrder="1014" id="" colorize="" role="wall.py"/>
     <actor costume="wall" x="120.0" y="840.0" zOrder="1015" id="" colorize="" role="wall.py"/>
     <actor costume="warp" y="1320.0" zOrder="1017" id="" colorize="" role="warp.py">
-      <role scene="friends2" exitY="1"/>
+      <role scene="friends2" exitX="0" exitY="1"/>
     </actor>
     <text y="1320.0" zOrder="1018" id="" font="Boycott" fontSize="22.0" text="2" color="#ffffffff" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <makeup dx="2" dy="-1"/>
     </text>
     <actor costume="warp" x="-960.0" y="-360.0" zOrder="1019" id="" colorize="" role="warp.py">
-      <role scene="balloons4a" exitX="-1"/>
+      <role scene="balloons4a" exitX="-1" exitY="-1"/>
     </actor>
     <actor costume="warp" x="-960.0" y="-420.0" zOrder="1020" id="" colorize="" role="warp.py">
-      <role scene="balloons4b" exitX="-1"/>
+      <role scene="balloons4b" exitX="-1" exitY="-1"/>
     </actor>
     <actor costume="warp" x="-960.0" y="-480.0" zOrder="1021" id="" colorize="" role="warp.py">
-      <role scene="balloons4c" exitX="-1"/>
+      <role scene="balloons4c" exitX="-1" exitY="-1"/>
     </actor>
     <actor costume="warp" x="-480.0" y="-360.0" zOrder="1022" id="" colorize="" role="warp.py">
-      <role scene="balloons2c" exitX="-1"/>
+      <role scene="balloons2c" exitX="-1" exitY="-1"/>
     </actor>
     <actor costume="portcullis" y="1200.0" zOrder="1023" id="" colorize="" role="portcullis.py">
       <role requires="friends" text="Friends"/>

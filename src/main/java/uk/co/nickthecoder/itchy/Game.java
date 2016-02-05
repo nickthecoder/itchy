@@ -830,15 +830,14 @@ public class Game
             return false;
         }
 
-        // fire loading
-        scene.getSceneDirector().loading(scene);
-
         this.sceneDirector.onDeactivate();
 
         this.sceneName = sceneName;
-        this.mouse.showRegularMousePointer(scene.showMouse);
         this.sceneDirector = scene.getSceneDirector();
         this.layout = scene.layout;
+
+        // fire loading
+        scene.getSceneDirector().loading(scene);
 
         // Convert all of the DelayedActivation roles into the actual roles.
         // This will fire each role's onBirth and onAttach
@@ -847,6 +846,8 @@ public class Game
                 actor.getRole().tick();
             }
         }
+
+        this.mouse.showRegularMousePointer(scene.showMouse);
 
         // fire events
         this.getSceneDirector().onLoaded();

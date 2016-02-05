@@ -59,10 +59,10 @@
       <role hint="Looks like we will have to&#xA;disturb that beehive.&#xA;"/>
     </actor>
     <actor costume="behive" x="600.0" y="540.0" zOrder="30" id="" colorize="" role="beehive.py">
-      <role bees="10" needsProdding="true" beeLogic="Random" spawnPeriod="0.1" randomSeed="1"/>
+      <role bees="10" needsProdding="true" requiredPollen="0" beeLogic="Random" beeDirection="East" spawnPeriod="0.1" randomSeed="1"/>
     </actor>
     <actor costume="gate" x="720.0" y="60.0" zOrder="40" id="" colorize="" role="gate.py">
-      <role scene="play"/>
+      <role scene="play" spare="0"/>
     </actor>
     <actor costume="coin" x="180.0" y="360.0" zOrder="60" id="" colorize="" role="collectable.py"/>
     <actor costume="coin" x="360.0" y="300.0" zOrder="60" id="" colorize="" role="collectable.py"/>

@@ -1,75 +1,79 @@
-<scene showMouse="false" role="level.py" background="#000000ff">
-  <properties/>
+<scene name="intro" layout="default" sceneDirector="level.py">
+  <layer name="background"/>
+  <layer name="plain"/>
   <layer name="grid">
-    <actor costume="wall" x="180" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="180" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="180" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="180" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="180" y="540" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="180" y="660" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="240" y="720" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="300" y="720" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="360" y="720" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="420" y="720" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="480" y="720" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="540" y="720" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="660" y="660" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="660" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="660" y="0" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="660" y="-60" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="660" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="180" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="180" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="180" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="180" y="60" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="180" y="0" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="180" y="-60" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="180" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="180" y="-120" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="360" y="-180" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="420" y="-180" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="540" y="-180" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="660" y="-120" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wallSE" x="660" y="-180" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wallSW" x="180" y="-180" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wallNW" x="180" y="720" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="660" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="600" y="720" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="660" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="660" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="660" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="660" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="660" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="660" y="540" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wallNE" x="660" y="720" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="240" y="-180" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="660" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="480" y="-180" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="300" y="-180" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="600" y="-180" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="gate" x="420" y="-60" direction="0.0" heading="0.0" startEvent="default" zOrder="40">
-      <property name="scene" value="play"/>
+    <actor costume="wall" x="180.0" y="360.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="180.0" y="600.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="180.0" y="480.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="180.0" y="420.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="180.0" y="540.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="180.0" y="660.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="240.0" y="720.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="300.0" y="720.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="360.0" y="720.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="420.0" y="720.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="480.0" y="720.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="540.0" y="720.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="660.0" y="660.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="660.0" y="60.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="660.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="660.0" y="-60.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="660.0" y="120.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="180.0" y="300.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="180.0" y="240.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="180.0" y="180.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="180.0" y="60.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="180.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="180.0" y="-60.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="180.0" y="120.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="180.0" y="-120.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="360.0" y="-180.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="420.0" y="-180.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="540.0" y="-180.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="660.0" y="-120.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wallSE" x="660.0" y="-180.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wallSW" x="180.0" y="-180.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wallNW" x="180.0" y="720.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="660.0" y="600.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="600.0" y="720.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="660.0" y="480.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="660.0" y="420.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="660.0" y="360.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="660.0" y="300.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="660.0" y="240.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="660.0" y="540.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wallNE" x="660.0" y="720.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="240.0" y="-180.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="660.0" y="180.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="480.0" y="-180.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="300.0" y="-180.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="600.0" y="-180.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="gate" x="420.0" y="-60.0" zOrder="40" id="" colorize="" role="gate.py">
+      <role scene="play" spare="0"/>
     </actor>
-    <actor costume="arrowKeys" x="360" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="50"/>
-    <actor costume="keyEscape" x="360" y="540" direction="0.0" heading="0.0" startEvent="default" zOrder="50"/>
-    <actor costume="keyF5" x="360" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="50"/>
-    <actor costume="scroll" x="360" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="50"/>
-    <actor costume="coin" x="300" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
-    <actor costume="coin" x="360" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
-    <actor costume="coin" x="420" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
-    <actor costume="coin" x="480" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
-    <actor costume="coin" x="540" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
-    <actor costume="stamp" x="300" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
-    <actor costume="stamp" x="360" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
-    <actor costume="stamp" x="480" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
-    <actor costume="stamp" x="540" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
-    <actor costume="stamp" x="420" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
-    <text text="quit" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="480" y="540" direction="0.0" heading="0.0" startEvent="default" zOrder="76"/>
-    <text text="try again" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="480" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="78"/>
-    <text text="Collect all of the Coins and Stamps" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="420" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="79"/>
-    <text text="Then enter the gate to finish" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="420" y="0" direction="0.0" heading="0.0" startEvent="default" zOrder="89"/>
-    <text text="move" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="480" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="93"/>
-    <text text="Scroll" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="480" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="95"/>
-    <actor costume="player" x="540" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="100"/>
+    <actor costume="arrowKeys" x="360.0" y="600.0" zOrder="50" id="" colorize=""/>
+    <actor costume="keyEscape" x="360.0" y="540.0" zOrder="50" id="" colorize=""/>
+    <actor costume="keyF5" x="360.0" y="480.0" zOrder="50" id="" colorize=""/>
+    <actor costume="scroll" x="360.0" y="360.0" zOrder="50" id="" colorize=""/>
+    <actor costume="coin" x="300.0" y="180.0" zOrder="60" id="" colorize="" role="collectable.py"/>
+    <actor costume="coin" x="360.0" y="180.0" zOrder="60" id="" colorize="" role="collectable.py"/>
+    <actor costume="coin" x="420.0" y="180.0" zOrder="60" id="" colorize="" role="collectable.py"/>
+    <actor costume="coin" x="480.0" y="180.0" zOrder="60" id="" colorize="" role="collectable.py"/>
+    <actor costume="coin" x="540.0" y="180.0" zOrder="60" id="" colorize="" role="collectable.py"/>
+    <actor costume="stamp" x="300.0" y="120.0" zOrder="60" id="" colorize="" role="collectable.py"/>
+    <actor costume="stamp" x="360.0" y="120.0" zOrder="60" id="" colorize="" role="collectable.py"/>
+    <actor costume="stamp" x="480.0" y="120.0" zOrder="60" id="" colorize="" role="collectable.py"/>
+    <actor costume="stamp" x="540.0" y="120.0" zOrder="60" id="" colorize="" role="collectable.py"/>
+    <actor costume="stamp" x="420.0" y="120.0" zOrder="60" id="" colorize="" role="collectable.py"/>
+    <text x="480.0" y="540.0" zOrder="76" id="" font="Boycott" fontSize="22.0" text="quit" color="#ffffffff" colorize=""/>
+    <text x="480.0" y="480.0" zOrder="78" id="" font="Boycott" fontSize="22.0" text="try again" color="#ffffffff" colorize=""/>
+    <text x="420.0" y="240.0" zOrder="79" id="" font="Boycott" fontSize="22.0" text="Collect all of the Coins and Stamps" color="#ffffffff" colorize=""/>
+    <text x="420.0" zOrder="89" id="" font="Boycott" fontSize="22.0" text="Then enter the gate to finish" color="#ffffffff" colorize=""/>
+    <text x="480.0" y="600.0" zOrder="93" id="" font="Boycott" fontSize="22.0" text="move" color="#ffffffff" colorize=""/>
+    <text x="480.0" y="360.0" zOrder="95" id="" font="Boycott" fontSize="22.0" text="Scroll" color="#ffffffff" colorize=""/>
+    <actor costume="player" x="540.0" y="600.0" zOrder="100" id="" colorize="" role="player.py">
+      <role awake="true"/>
+    </actor>
   </layer>
+  <layer name="test"/>
 </scene>

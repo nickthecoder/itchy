@@ -1,3 +1,3 @@
-<scene layout="glass" showMouse="false" role="uk.co.nickthecoder.itchy.PlainSceneDirector" background="#000000ff">
-  <properties/>
+<scene name="glass-empty" layout="glass" sceneDirector="uk.co.nickthecoder.itchy.PlainSceneDirector">
+  <layer name="glass"/>
 </scene>

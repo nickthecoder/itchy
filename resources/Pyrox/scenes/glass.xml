@@ -1,31 +1,12 @@
-<scene layout="glass" showMouse="false" role="uk.co.nickthecoder.itchy.PlainSceneDirector" background="#000000ff">
-  <properties/>
+<scene name="glass" layout="glass" sceneDirector="uk.co.nickthecoder.itchy.PlainSceneDirector">
   <layer name="glass">
-    <text text="0" font="Boycott" size="42" color="#464cff" xAlignment="1.0" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.NumberValue" x="786" y="566" direction="0.0" heading="0.0" startEvent="default" zOrder="0">
-      <property name="formatPattern" value="0"/>
-      <property name="nullValue" value=""/>
-      <property name="errorValue" value=""/>
-      <property name="updateInterval" value="0.0"/>
-      <property name="quiet" value="false"/>
-      <property name="access" value="sceneDirector.collectablesRemaining"/>
-      <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
-        <property name="dx" value="4"/>
-        <property name="color" value="#000049ff"/>
-        <property name="dy" value="-2"/>
-      </makeup>
+    <text x="786.0" y="566.0" id="" font="Boycott" fontSize="42.0" text="0" color="#464cffff" xAlignment="1.0" colorize="" role="uk.co.nickthecoder.itchy.role.NumberValue" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+      <role access="sceneDirector.collectablesRemaining" errorValue="" nullValue="" updateInterval="0.0" quiet="false" formatPattern="0"/>
+      <makeup dx="4" dy="-2" color="#000049ff"/>
     </text>
-    <text text="0" font="Boycott" size="42" color="#464cff" xAlignment="0.0" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.NumberValue" id="droppedFrames" x="6" y="571" direction="0.0" heading="0.0" startEvent="default" zOrder="1">
-      <property name="formatPattern" value="0"/>
-      <property name="nullValue" value=""/>
-      <property name="errorValue" value=""/>
-      <property name="updateInterval" value="0.0"/>
-      <property name="quiet" value="false"/>
-      <property name="access" value="frameRate.droppedFrames"/>
-      <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
-        <property name="dx" value="4"/>
-        <property name="color" value="#000049ff"/>
-        <property name="dy" value="-2"/>
-      </makeup>
+    <text x="6.0" y="571.0" zOrder="1" id="droppedFrames" font="Boycott" fontSize="42.0" text="0" color="#464cffff" xAlignment="0.0" colorize="" role="uk.co.nickthecoder.itchy.role.NumberValue" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+      <role access="frameRate.droppedFrames" errorValue="" nullValue="" updateInterval="0.0" quiet="false" formatPattern="0"/>
+      <makeup dx="4" dy="-2" color="#000049ff"/>
     </text>
   </layer>
 </scene>

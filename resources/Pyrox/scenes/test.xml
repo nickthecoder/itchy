@@ -1,194 +1,146 @@
-<scene showMouse="false" role="level.py" background="#2e0000ff">
-  <properties/>
+<scene name="test" layout="default" sceneDirector="level.py">
+  <layer name="background"/>
+  <layer name="plain"/>
   <layer name="grid">
-    <actor costume="wall" x="720" y="780" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="660" y="780" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="600" y="780" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="600" y="840" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="120" y="900" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="180" y="900" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="180" y="960" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="-420" y="900" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="780" y="780" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="420" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="480" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="600" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="660" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="720" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="780" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="540" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="-240" y="540" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="180" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="240" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="-240" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="120" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="-180" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="-60" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="-120" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="-180" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="-240" y="720" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="-240" y="660" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="-300" y="720" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="-240" y="960" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="-240" y="1020" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="-120" y="1080" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="-240" y="1080" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="-60" y="1080" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="360" y="720" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="300" y="720" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="240" y="720" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="180" y="720" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="180" y="780" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="420" y="720" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="540" y="720" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="540" y="840" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="480" y="840" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="420" y="840" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="300" y="840" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="240" y="840" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="180" y="840" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="540" y="660" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="540" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="480" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="420" y="660" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="420" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="-240" y="780" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="-360" y="720" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="soil" x="660" y="720" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
-    <actor costume="soil" x="300" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
-    <actor costume="soil" x="-180" y="960" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
-    <actor costume="soil" x="-120" y="960" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
-    <actor costume="soil" x="-180" y="1080" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
-    <actor costume="soil" x="-180" y="1140" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
-    <actor costume="soil" x="360" y="780" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
-    <actor costume="squashEW" x="360" y="900" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
-    <actor costume="soil" x="300" y="960" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
-    <actor costume="soil" x="420" y="960" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
-    <actor costume="rock" x="360" y="960" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
-    <actor costume="behive" x="-120" y="1020" direction="0.0" heading="0.0" startEvent="default" zOrder="30">
-      <property name="randomSeed" value="0"/>
-      <property name="beeDirection" value="North"/>
-      <property name="bees" value="3"/>
-      <property name="requiredPollen" value="0"/>
-      <property name="beeLogic" value="Anticlockwise"/>
-      <property name="spawnPeriod" value="1.0"/>
+    <actor costume="wall" x="720.0" y="780.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="660.0" y="780.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="600.0" y="780.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="600.0" y="840.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="120.0" y="900.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="180.0" y="900.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="180.0" y="960.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="-420.0" y="900.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="780.0" y="780.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="420.0" y="180.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="480.0" y="180.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="600.0" y="180.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="660.0" y="180.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="720.0" y="180.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="780.0" y="180.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="540.0" y="180.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="-240.0" y="540.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="180.0" y="180.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="240.0" y="600.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="-240.0" y="480.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="120.0" y="180.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="-180.0" y="480.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="-60.0" y="180.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="-120.0" y="180.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="-180.0" y="180.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="-240.0" y="720.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="-240.0" y="660.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="-300.0" y="720.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="-240.0" y="960.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="-240.0" y="1020.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="-120.0" y="1080.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="-240.0" y="1080.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="-60.0" y="1080.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="360.0" y="720.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="300.0" y="720.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="240.0" y="720.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="180.0" y="720.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="180.0" y="780.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="420.0" y="720.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="540.0" y="720.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="540.0" y="840.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="480.0" y="840.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="420.0" y="840.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="300.0" y="840.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="240.0" y="840.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="180.0" y="840.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="540.0" y="660.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="540.0" y="600.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="480.0" y="600.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="420.0" y="660.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="420.0" y="600.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="-240.0" y="780.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="-360.0" y="720.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="soil" x="660.0" y="720.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="soil" x="300.0" y="600.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="soil" x="-180.0" y="960.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="soil" x="-120.0" y="960.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="soil" x="-180.0" y="1080.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="soil" x="-180.0" y="1140.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="soil" x="360.0" y="780.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="squashEW" x="360.0" y="900.0" zOrder="10" id="" colorize="" role="squash.py"/>
+    <actor costume="soil" x="300.0" y="960.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="soil" x="420.0" y="960.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="rock" x="360.0" y="960.0" zOrder="20" id="" colorize="" role="rock.py"/>
+    <actor costume="behive" x="-120.0" y="1020.0" zOrder="30" id="" colorize="" role="beehive.py">
+      <role bees="3" needsProdding="false" requiredPollen="0" beeLogic="" beeDirection="North" spawnPeriod="1.0" randomSeed="0"/>
     </actor>
-    <actor costume="behive" x="300" y="900" direction="0.0" heading="0.0" startEvent="default" zOrder="30">
-      <property name="randomSeed" value="0"/>
-      <property name="beeDirection" value="South"/>
-      <property name="bees" value="1"/>
-      <property name="requiredPollen" value="0"/>
-      <property name="beeLogic" value="Clockwise"/>
-      <property name="spawnPeriod" value="1.0"/>
+    <actor costume="behive" x="300.0" y="900.0" zOrder="30" id="" colorize="" role="beehive.py">
+      <role bees="1" needsProdding="false" requiredPollen="0" beeLogic="" beeDirection="South" spawnPeriod="1.0" randomSeed="0"/>
     </actor>
-    <actor costume="warp" x="420" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="40">
-      <property name="exitX" value="0"/>
-      <property name="exitY" value="-1"/>
-      <property name="scene" value="test002"/>
+    <actor costume="warp" x="420.0" y="420.0" zOrder="40" id="" colorize="" role="warp.py">
+      <role scene="test002" exitX="0" exitY="-1"/>
     </actor>
-    <actor costume="warp" x="480" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="40">
-      <property name="exitX" value="0"/>
-      <property name="exitY" value="-1"/>
-      <property name="scene" value="test003"/>
+    <actor costume="warp" x="480.0" y="420.0" zOrder="40" id="" colorize="" role="warp.py">
+      <role scene="test003" exitX="0" exitY="-1"/>
     </actor>
-    <actor costume="warp" x="540" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="40">
-      <property name="exitX" value="0"/>
-      <property name="exitY" value="-1"/>
-      <property name="scene" value="test004"/>
+    <actor costume="warp" x="540.0" y="420.0" zOrder="40" id="" colorize="" role="warp.py">
+      <role scene="test004" exitX="0" exitY="-1"/>
     </actor>
-    <actor costume="warp" x="600" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="40">
-      <property name="exitX" value="0"/>
-      <property name="exitY" value="-1"/>
-      <property name="scene" value="test005"/>
+    <actor costume="warp" x="600.0" y="420.0" zOrder="40" id="" colorize="" role="warp.py">
+      <role scene="test005" exitX="0" exitY="-1"/>
     </actor>
-    <actor costume="warp" x="840" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="40">
-      <property name="exitX" value="0"/>
-      <property name="exitY" value="-1"/>
-      <property name="scene" value="test009"/>
+    <actor costume="warp" x="840.0" y="420.0" zOrder="40" id="" colorize="" role="warp.py">
+      <role scene="test009" exitX="0" exitY="-1"/>
     </actor>
-    <actor costume="warp" x="780" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="40">
-      <property name="exitX" value="0"/>
-      <property name="exitY" value="-1"/>
-      <property name="scene" value="test008"/>
+    <actor costume="warp" x="780.0" y="420.0" zOrder="40" id="" colorize="" role="warp.py">
+      <role scene="test008" exitX="0" exitY="-1"/>
     </actor>
-    <actor costume="warp" x="720" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="40">
-      <property name="exitX" value="0"/>
-      <property name="exitY" value="-1"/>
-      <property name="scene" value="test007"/>
+    <actor costume="warp" x="720.0" y="420.0" zOrder="40" id="" colorize="" role="warp.py">
+      <role scene="test007" exitX="0" exitY="-1"/>
     </actor>
-    <actor costume="warp" x="660" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="40">
-      <property name="exitX" value="0"/>
-      <property name="exitY" value="-1"/>
-      <property name="scene" value="test006"/>
+    <actor costume="warp" x="660.0" y="420.0" zOrder="40" id="" colorize="" role="warp.py">
+      <role scene="test006" exitX="0" exitY="-1"/>
     </actor>
-    <actor costume="gate" x="660" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="40">
-      <property name="spare" value="0"/>
-      <property name="scene" value="menu"/>
+    <actor costume="gate" x="660.0" y="300.0" zOrder="40" id="" colorize="" role="gate.py">
+      <role scene="menu" spare="0"/>
     </actor>
-    <actor costume="bee" x="-240" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="80" colorize="#0000ffff">
-      <property name="randomSeed" value="0"/>
-      <property name="direction" value="East"/>
-      <property name="logic" value="Anticlockwise"/>
+    <actor costume="bee" x="-240.0" y="420.0" zOrder="80" id="" colorize="#0000ffff" role="bee.py">
+      <role logic="" direction="East" randomSeed="0"/>
     </actor>
-    <actor costume="bee" x="-180" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="80" colorize="#ffffffff">
-      <property name="randomSeed" value="0"/>
-      <property name="direction" value="West"/>
-      <property name="logic" value="Anticlockwise"/>
+    <actor costume="bee" x="-180.0" y="600.0" zOrder="80" id="" colorize="#ffffffff" role="bee.py">
+      <role logic="" direction="West" randomSeed="0"/>
     </actor>
-    <text text="2 Rocks and Balloons" font="Vera" size="22" color="#ffffff" xAlignment="0.0" yAlignment="0.5" x="420" y="480" direction="90.0" heading="0.0" startEvent="default" zOrder="213"/>
-    <text text="Enter a test level." font="Vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="540" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="226"/>
-    <text text="It will continue to the end, or until a test fails." font="Vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="540" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="229"/>
-    <text text="3 Cars" font="Vera" size="22" color="#ffffff" xAlignment="0.0" yAlignment="0.5" x="480" y="480" direction="90.0" heading="0.0" startEvent="default" zOrder="235"/>
-    <text text="4 Grenades" font="Vera" size="22" color="#ffffff" xAlignment="0.0" yAlignment="0.5" x="540" y="480" direction="90.0" heading="0.0" startEvent="default" zOrder="236"/>
-    <text text="5 One Way" font="Vera" size="22" color="#ffffff" xAlignment="0.0" yAlignment="0.5" x="600" y="480" direction="90.0" heading="0.0" startEvent="default" zOrder="240"/>
-    <text text="9 Bees" font="Vera" size="22" color="#ffffff" xAlignment="0.0" yAlignment="0.5" x="840" y="480" direction="90.0" heading="0.0" startEvent="default" zOrder="245"/>
-    <text text="8 Machines" font="Vera" size="22" color="#ffffff" xAlignment="0.0" yAlignment="0.5" x="780" y="480" direction="90.0" heading="0.0" startEvent="default" zOrder="246"/>
-    <text text="7 Planes" font="Vera" size="22" color="#ffffff" xAlignment="0.0" yAlignment="0.5" x="720" y="480" direction="90.0" heading="0.0" startEvent="default" zOrder="247"/>
-    <text text="6 One Way (Perm)" font="Vera" size="22" color="#ffffff" xAlignment="0.0" yAlignment="0.5" x="660" y="480" direction="90.0" heading="0.0" startEvent="default" zOrder="248"/>
-    <actor costume="warp" x="420" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="249">
-      <property name="exitX" value="0"/>
-      <property name="exitY" value="-1"/>
-      <property name="scene" value="bug-00001"/>
+    <actor costume="sledge" x="48.0" y="767.0" zOrder="90" id="" colorize="" role="sledger.py">
+      <role text="Hi&#xA;A\nB\nC\nD\nE&#xA;Is it working\n yet?&#xA;Are you sure you\n can code in Python?&#xA;I don't think\n it's working.&#xA;Are you really\n a programmer?&#xA;It's broken again,\nor it soon will be!" initialDelay="100.5" period="105.0" loop="false"/>
     </actor>
-    <text text="Bugs" font="Vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="420" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="250">
-      <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
-        <property name="dx" value="1"/>
-        <property name="color" value="#000000ff"/>
-        <property name="dy" value="1"/>
-      </makeup>
+    <text x="420.0" y="480.0" zOrder="213" id="" font="Vera" fontSize="22.0" text="2 Rocks and Balloons" color="#ffffffff" xAlignment="0.0" direction="90.0" colorize=""/>
+    <text x="540.0" y="240.0" zOrder="226" id="" font="Vera" fontSize="22.0" text="Enter a test level." color="#ffffffff" colorize=""/>
+    <text x="540.0" y="120.0" zOrder="229" id="" font="Vera" fontSize="22.0" text="It will continue to the end, or until a test fails." color="#ffffffff" colorize=""/>
+    <text x="480.0" y="480.0" zOrder="235" id="" font="Vera" fontSize="22.0" text="3 Cars" color="#ffffffff" xAlignment="0.0" direction="90.0" colorize=""/>
+    <text x="540.0" y="480.0" zOrder="236" id="" font="Vera" fontSize="22.0" text="4 Grenades" color="#ffffffff" xAlignment="0.0" direction="90.0" colorize=""/>
+    <text x="600.0" y="480.0" zOrder="240" id="" font="Vera" fontSize="22.0" text="5 One Way" color="#ffffffff" xAlignment="0.0" direction="90.0" colorize=""/>
+    <text x="840.0" y="480.0" zOrder="245" id="" font="Vera" fontSize="22.0" text="9 Bees" color="#ffffffff" xAlignment="0.0" direction="90.0" colorize=""/>
+    <text x="780.0" y="480.0" zOrder="246" id="" font="Vera" fontSize="22.0" text="8 Machines" color="#ffffffff" xAlignment="0.0" direction="90.0" colorize=""/>
+    <text x="720.0" y="480.0" zOrder="247" id="" font="Vera" fontSize="22.0" text="7 Planes" color="#ffffffff" xAlignment="0.0" direction="90.0" colorize=""/>
+    <text x="660.0" y="480.0" zOrder="248" id="" font="Vera" fontSize="22.0" text="6 One Way (Perm)" color="#ffffffff" xAlignment="0.0" direction="90.0" colorize=""/>
+    <actor costume="warp" x="420.0" y="300.0" zOrder="249" id="" colorize="" role="warp.py">
+      <role scene="bug-00001" exitX="0" exitY="-1"/>
+    </actor>
+    <text x="420.0" y="300.0" zOrder="250" id="" font="Vera" fontSize="22.0" text="Bugs" color="#ffffffff" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+      <makeup dx="1" dy="1"/>
     </text>
-    <actor costume="bee" x="-180" y="720" direction="0.0" heading="0.0" startEvent="default" zOrder="251" alpha="200.0" colorize="#08ff00ff">
-      <property name="randomSeed" value="0"/>
-      <property name="direction" value="South"/>
-      <property name="logic" value="Clockwise"/>
+    <actor costume="bee" x="-180.0" y="720.0" zOrder="251" id="" alpha="200.0" colorize="#08ff00ff" role="bee.py">
+      <role logic="Clockwise" direction="South" randomSeed="0"/>
     </actor>
-    <actor costume="bee" x="-240" y="840" direction="0.0" heading="0.0" startEvent="default" zOrder="252" colorize="#7b0000ff">
-      <property name="randomSeed" value="0"/>
-      <property name="direction" value="East"/>
-      <property name="logic" value="Clockwise"/>
+    <actor costume="bee" x="-240.0" y="840.0" zOrder="252" id="" colorize="#7b0000ff" role="bee.py">
+      <role logic="Clockwise" direction="East" randomSeed="0"/>
     </actor>
-    <actor costume="warp" x="900" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="253">
-      <property name="exitX" value="0"/>
-      <property name="exitY" value="-1"/>
-      <property name="scene" value="test010"/>
+    <actor costume="warp" x="900.0" y="420.0" zOrder="253" id="" colorize="" role="warp.py">
+      <role scene="test010" exitX="0" exitY="-1"/>
     </actor>
-    <text text="10 Blank" font="Vera" size="22" color="#ffffff" xAlignment="0.0" yAlignment="0.5" x="900" y="480" direction="90.0" heading="0.0" startEvent="default" zOrder="254"/>
-    <actor costume="warp" x="360" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="255">
-      <property name="exitX" value="0"/>
-      <property name="exitY" value="-1"/>
-      <property name="scene" value="test001"/>
+    <text x="900.0" y="480.0" zOrder="254" id="" font="Vera" fontSize="22.0" text="10 Blank" color="#ffffffff" xAlignment="0.0" direction="90.0" colorize=""/>
+    <actor costume="warp" x="360.0" y="420.0" zOrder="255" id="" colorize="" role="warp.py">
+      <role scene="test001" exitX="0" exitY="-1"/>
     </actor>
-    <text text="1 Roundedness" font="Vera" size="22" color="#ffffff" xAlignment="0.0" yAlignment="0.5" x="360" y="480" direction="90.0" heading="0.0" startEvent="default" zOrder="256"/>
-    <actor costume="player" x="300" y="540" direction="0.0" heading="0.0" startEvent="default" zOrder="1000">
-      <property name="awake" value="true"/>
+    <text x="360.0" y="480.0" zOrder="256" id="" font="Vera" fontSize="22.0" text="1 Roundedness" color="#ffffffff" xAlignment="0.0" direction="90.0" colorize=""/>
+    <actor costume="player" x="300.0" y="540.0" zOrder="1000" id="" colorize="" role="player.py">
+      <role awake="true"/>
     </actor>
   </layer>
-  <layer name="glass">
-    <actor costume="sledge" x="48" y="767" direction="0.0" heading="0.0" startEvent="default" zOrder="90">
-      <property name="text" value="Hi&#xA;A\nB\nC\nD\nE&#xA;Is it working\n yet?&#xA;Are you sure you\n can code in Python?&#xA;I don't think\n it's working.&#xA;Are you really\n a programmer?&#xA;It's broken again,\nor it soon will be!"/>
-      <property name="initialDelay" value="100.5"/>
-      <property name="loop" value="false"/>
-      <property name="period" value="105.0"/>
-    </actor>
-  </layer>
+  <layer name="test"/>
 </scene>

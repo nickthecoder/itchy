@@ -1,181 +1,179 @@
-<scene showMouse="false" role="level.py" background="#0b0000ff">
-  <properties/>
+<scene name="test007" layout="default" sceneDirector="level.py">
+  <layer name="background"/>
+  <layer name="plain"/>
   <layer name="grid">
-    <actor costume="wall" x="480" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="480" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="480" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="-60" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="-60" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="-60" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="0" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="420" y="120" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="-60" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="480" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="660" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="-240" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="600" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="540" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="660" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="720" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="780" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="840" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="840" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="-120" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="-180" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="-240" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="-300" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="-360" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="-420" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="-420" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="420" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="300" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="360" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="420" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="240" y="660" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="0" y="540" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="-240" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="-240" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="60" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="300" y="720" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="240" y="720" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="300" y="780" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="360" y="780" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="180" y="720" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="180" y="780" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="wall" x="120" y="780" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <actor costume="autoPilot" x="180" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="10">
-      <property name="moves" value="uuuuuuuuuuuuuuuuuuuuuuuuuulllddddddddddddddddddddddddddddd-uuuurrrru-rduuuuuuuu-dlllu-lduuuuuuuu-llluuu"/>
-      <property name="autoTest" value="true"/>
-      <property name="killOnPressed" value="true"/>
+    <actor costume="wall" x="480.0" y="240.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="480.0" y="180.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="480.0" y="120.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="-60.0" y="240.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="-60.0" y="180.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="-60.0" y="120.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" y="120.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="420.0" y="120.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="-60.0" y="300.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="480.0" y="300.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="660.0" y="300.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="-240.0" y="300.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="600.0" y="240.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="540.0" y="240.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="660.0" y="240.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="720.0" y="240.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="780.0" y="240.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="840.0" y="240.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="840.0" y="300.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="-120.0" y="240.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="-180.0" y="240.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="-240.0" y="240.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="-300.0" y="240.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="-360.0" y="240.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="-420.0" y="240.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="-420.0" y="300.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="420.0" y="480.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="300.0" y="420.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="360.0" y="420.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="420.0" y="420.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="240.0" y="660.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" y="540.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="-240.0" y="480.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="-240.0" y="360.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="60.0" y="300.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="300.0" y="720.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="240.0" y="720.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="300.0" y="780.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="360.0" y="780.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="180.0" y="720.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="180.0" y="780.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="wall" x="120.0" y="780.0" zOrder="5" id="" colorize="" role="wall.py"/>
+    <actor costume="autoPilot" x="180.0" y="360.0" zOrder="10" id="" colorize="" role="autoPilot.py">
+      <role moves="uuuuuuuuuuuuuuuuuuuuuuuuuulllddddddddddddddddddddddddddddd-uuuurrrru-rduuuuuuuu-dlllu-lduuuuuuuu-llluuu" killOnPressed="true" autoTest="true"/>
     </actor>
-    <actor costume="soil" x="300" y="660" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
-    <actor costume="soil" x="180" y="660" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
-    <actor costume="squashE" x="420" y="540" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
-    <actor costume="squashN" x="-240" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
-    <actor costume="squashW" x="-180" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
-    <actor costume="squashN" x="480" y="540" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
-    <actor costume="soil" x="-180" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
-    <actor costume="soil" x="-480" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
-    <actor costume="grenade" x="420" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
-    <actor costume="grenade" x="0" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
-    <actor costume="rock" x="540" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
-    <actor costume="rock" x="-120" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
-    <actor costume="rock" x="780" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
-    <actor costume="grenade2" x="540" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
-    <actor costume="grenade2" x="780" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
-    <actor costume="grenade2" x="-120" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
-    <actor costume="rock" x="-360" y="480" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
-    <actor costume="grenade2" x="-360" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
-    <actor costume="rock" x="-300" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
-    <actor costume="rock" x="-240" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
-    <actor costume="rock" x="-360" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
-    <actor costume="rock" x="-420" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
-    <actor costume="gate" x="-60" y="780" direction="0.0" heading="0.0" startEvent="default" zOrder="40">
-      <property name="spare" value="0"/>
-      <property name="scene" value="test008"/>
+    <actor costume="soil" x="300.0" y="660.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="soil" x="180.0" y="660.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="squashE" x="420.0" y="540.0" zOrder="10" id="" colorize="" role="squash.py"/>
+    <actor costume="squashN" x="-240.0" y="420.0" zOrder="10" id="" colorize="" role="squash.py"/>
+    <actor costume="squashW" x="-180.0" y="420.0" zOrder="10" id="" colorize="" role="squash.py"/>
+    <actor costume="squashN" x="480.0" y="540.0" zOrder="10" id="" colorize="" role="squash.py"/>
+    <actor costume="soil" x="-180.0" y="480.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="soil" x="-480.0" y="480.0" zOrder="10" id="" colorize="" role="soft.py"/>
+    <actor costume="grenade" x="420.0" y="180.0" zOrder="20" id="" colorize="" role="grenade.py"/>
+    <actor costume="grenade" y="180.0" zOrder="20" id="" colorize="" role="grenade.py"/>
+    <actor costume="rock" x="540.0" y="480.0" zOrder="20" id="" colorize="" role="rock.py"/>
+    <actor costume="rock" x="-120.0" y="480.0" zOrder="20" id="" colorize="" role="rock.py"/>
+    <actor costume="rock" x="780.0" y="480.0" zOrder="20" id="" colorize="" role="rock.py"/>
+    <actor costume="grenade2" x="540.0" y="360.0" zOrder="20" id="" colorize="" role="grenade.py"/>
+    <actor costume="grenade2" x="780.0" y="360.0" zOrder="20" id="" colorize="" role="grenade.py"/>
+    <actor costume="grenade2" x="-120.0" y="360.0" zOrder="20" id="" colorize="" role="grenade.py"/>
+    <actor costume="rock" x="-360.0" y="480.0" zOrder="20" id="" colorize="" role="rock.py"/>
+    <actor costume="grenade2" x="-360.0" y="360.0" zOrder="20" id="" colorize="" role="grenade.py"/>
+    <actor costume="rock" x="-300.0" y="600.0" zOrder="20" id="" colorize="" role="rock.py"/>
+    <actor costume="rock" x="-240.0" y="600.0" zOrder="20" id="" colorize="" role="rock.py"/>
+    <actor costume="rock" x="-360.0" y="600.0" zOrder="20" id="" colorize="" role="rock.py"/>
+    <actor costume="rock" x="-420.0" y="600.0" zOrder="20" id="" colorize="" role="rock.py"/>
+    <actor costume="gate" x="-60.0" y="780.0" zOrder="40" id="" colorize="" role="gate.py">
+      <role scene="test008" spare="0"/>
     </actor>
-    <actor costume="planeL" x="540" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="59"/>
-    <actor costume="planeL" x="720" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
-    <actor costume="planeR" x="-300" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="61"/>
-    <actor costume="player" x="240" y="360" direction="0.0" heading="0.0" startEvent="default" zOrder="100">
-      <property name="awake" value="true"/>
+    <actor costume="planeL" x="540.0" y="300.0" zOrder="59" id="" colorize="" role="plane.py"/>
+    <actor costume="planeL" x="720.0" y="300.0" zOrder="60" id="" colorize="" role="plane.py"/>
+    <actor costume="planeR" x="-300.0" y="300.0" zOrder="61" id="" colorize="" role="plane.py"/>
+    <actor costume="player" x="240.0" y="360.0" zOrder="100" id="" colorize="" role="player.py">
+      <role awake="true"/>
     </actor>
-    <actor costume="planeR" x="-120" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="106"/>
-    <actor costume="planeR" x="300" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="107"/>
-    <actor costume="planeR" x="300" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="108"/>
-    <actor costume="planeL" x="120" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="109"/>
-    <actor costume="planeL" x="120" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="110"/>
-    <actor costume="planeR" x="240" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="111"/>
-    <actor costume="planeL" x="60" y="540" direction="0.0" heading="0.0" startEvent="default" zOrder="112"/>
-    <actor costume="planeL" x="360" y="660" direction="0.0" heading="0.0" startEvent="default" zOrder="113"/>
-    <actor costume="planeR" x="120" y="660" direction="0.0" heading="0.0" startEvent="default" zOrder="114"/>
-    <actor costume="planeL" x="-300" y="540" direction="0.0" heading="0.0" startEvent="default" zOrder="115"/>
-    <actor costume="planeR" x="-360" y="540" direction="0.0" heading="0.0" startEvent="default" zOrder="116"/>
+    <actor costume="planeR" x="-120.0" y="300.0" zOrder="106" id="" colorize="" role="plane.py"/>
+    <actor costume="planeR" x="300.0" y="240.0" zOrder="107" id="" colorize="" role="plane.py"/>
+    <actor costume="planeR" x="300.0" y="180.0" zOrder="108" id="" colorize="" role="plane.py"/>
+    <actor costume="planeL" x="120.0" y="240.0" zOrder="109" id="" colorize="" role="plane.py"/>
+    <actor costume="planeL" x="120.0" y="180.0" zOrder="110" id="" colorize="" role="plane.py"/>
+    <actor costume="planeR" x="240.0" y="420.0" zOrder="111" id="" colorize="" role="plane.py"/>
+    <actor costume="planeL" x="60.0" y="540.0" zOrder="112" id="" colorize="" role="plane.py"/>
+    <actor costume="planeL" x="360.0" y="660.0" zOrder="113" id="" colorize="" role="plane.py"/>
+    <actor costume="planeR" x="120.0" y="660.0" zOrder="114" id="" colorize="" role="plane.py"/>
+    <actor costume="planeL" x="-300.0" y="540.0" zOrder="115" id="" colorize="" role="plane.py"/>
+    <actor costume="planeR" x="-360.0" y="540.0" zOrder="116" id="" colorize="" role="plane.py"/>
   </layer>
   <layer name="test">
-    <actor costume="test" x="0" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="50">
-      <property name="expectedClass" value="Plane"/>
+    <actor costume="test" y="240.0" zOrder="50" id="" colorize="" role="test.py">
+      <role expectedClass="Plane"/>
     </actor>
-    <actor costume="test" x="420" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="51">
-      <property name="expectedClass" value="Plane"/>
+    <actor costume="test" x="420.0" y="240.0" zOrder="51" id="" colorize="" role="test.py">
+      <role expectedClass="Plane"/>
     </actor>
-    <actor costume="test" x="60" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="52">
-      <property name="expectedClass" value="Empty"/>
+    <actor costume="test" x="60.0" y="180.0" zOrder="52" id="" colorize="" role="test.py">
+      <role expectedClass="Empty"/>
     </actor>
-    <actor costume="test" x="360" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="53">
-      <property name="expectedClass" value="Empty"/>
+    <actor costume="test" x="360.0" y="180.0" zOrder="53" id="" colorize="" role="test.py">
+      <role expectedClass="Empty"/>
     </actor>
-    <actor costume="test" x="0" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="54">
-      <property name="expectedClass" value="Empty"/>
+    <actor costume="test" y="180.0" zOrder="54" id="" colorize="" role="test.py">
+      <role expectedClass="Empty"/>
     </actor>
-    <actor costume="test" x="420" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="55">
-      <property name="expectedClass" value="Empty"/>
+    <actor costume="test" x="420.0" y="180.0" zOrder="55" id="" colorize="" role="test.py">
+      <role expectedClass="Empty"/>
     </actor>
-    <actor costume="test" x="60" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="56">
-      <property name="expectedClass" value="Dummy"/>
+    <actor costume="test" x="60.0" y="240.0" zOrder="56" id="" colorize="" role="test.py">
+      <role expectedClass="Dummy"/>
     </actor>
-    <actor costume="test" x="360" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="57">
-      <property name="expectedClass" value="Dummy"/>
+    <actor costume="test" x="360.0" y="240.0" zOrder="57" id="" colorize="" role="test.py">
+      <role expectedClass="Dummy"/>
     </actor>
-    <actor costume="test" x="600" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="58">
-      <property name="expectedClass" value="Empty"/>
+    <actor costume="test" x="600.0" y="300.0" zOrder="58" id="" colorize="" role="test.py">
+      <role expectedClass="Empty"/>
     </actor>
-    <actor costume="test" x="540" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="59">
-      <property name="expectedClass" value="Empty"/>
+    <actor costume="test" x="540.0" y="300.0" zOrder="59" id="" colorize="" role="test.py">
+      <role expectedClass="Empty"/>
     </actor>
-    <actor costume="test" x="720" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="60">
-      <property name="expectedClass" value="Empty"/>
+    <actor costume="test" x="720.0" y="300.0" zOrder="60" id="" colorize="" role="test.py">
+      <role expectedClass="Empty"/>
     </actor>
-    <actor costume="test" x="780" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="61">
-      <property name="expectedClass" value="Empty"/>
+    <actor costume="test" x="780.0" y="300.0" zOrder="61" id="" colorize="" role="test.py">
+      <role expectedClass="Empty"/>
     </actor>
-    <actor costume="test" x="-120" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="62">
-      <property name="expectedClass" value="Empty"/>
+    <actor costume="test" x="-120.0" y="300.0" zOrder="62" id="" colorize="" role="test.py">
+      <role expectedClass="Empty"/>
     </actor>
-    <actor costume="test" x="-360" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="63">
-      <property name="expectedClass" value="Empty"/>
+    <actor costume="test" x="-360.0" y="300.0" zOrder="63" id="" colorize="" role="test.py">
+      <role expectedClass="Empty"/>
     </actor>
-    <actor costume="test" x="-300" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="64">
-      <property name="expectedClass" value="Empty"/>
+    <actor costume="test" x="-300.0" y="300.0" zOrder="64" id="" colorize="" role="test.py">
+      <role expectedClass="Empty"/>
     </actor>
-    <actor costume="test" x="-180" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="65">
-      <property name="expectedClass" value="Empty"/>
+    <actor costume="test" x="-180.0" y="300.0" zOrder="65" id="" colorize="" role="test.py">
+      <role expectedClass="Empty"/>
     </actor>
-    <actor costume="test" x="360" y="540" direction="0.0" heading="0.0" startEvent="default" zOrder="66">
-      <property name="expectedClass" value="Dummy"/>
+    <actor costume="test" x="360.0" y="540.0" zOrder="66" id="" colorize="" role="test.py">
+      <role expectedClass="Dummy"/>
     </actor>
-    <actor costume="test" x="-120" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="68">
-      <property name="expectedClass" value="Dummy"/>
+    <actor costume="test" x="-120.0" y="420.0" zOrder="68" id="" colorize="" role="test.py">
+      <role expectedClass="Dummy"/>
     </actor>
-    <actor costume="test" x="-180" y="420" direction="0.0" heading="0.0" startEvent="default" zOrder="69">
-      <property name="expectedClass" value="Plane"/>
+    <actor costume="test" x="-180.0" y="420.0" zOrder="69" id="" colorize="" role="test.py">
+      <role expectedClass="Plane"/>
     </actor>
-    <actor costume="test" x="360" y="720" direction="0.0" heading="0.0" startEvent="default" zOrder="70">
-      <property name="expectedClass" value="Plane"/>
+    <actor costume="test" x="360.0" y="720.0" zOrder="70" id="" colorize="" role="test.py">
+      <role expectedClass="Plane"/>
     </actor>
-    <actor costume="test" x="420" y="720" direction="0.0" heading="0.0" startEvent="default" zOrder="71">
-      <property name="expectedClass" value="Dummy"/>
+    <actor costume="test" x="420.0" y="720.0" zOrder="71" id="" colorize="" role="test.py">
+      <role expectedClass="Dummy"/>
     </actor>
-    <actor costume="test" x="120" y="720" direction="0.0" heading="0.0" startEvent="default" zOrder="72">
-      <property name="expectedClass" value="Plane"/>
+    <actor costume="test" x="120.0" y="720.0" zOrder="72" id="" colorize="" role="test.py">
+      <role expectedClass="Plane"/>
     </actor>
-    <actor costume="test" x="60" y="720" direction="0.0" heading="0.0" startEvent="default" zOrder="73">
-      <property name="expectedClass" value="Dummy"/>
+    <actor costume="test" x="60.0" y="720.0" zOrder="73" id="" colorize="" role="test.py">
+      <role expectedClass="Dummy"/>
     </actor>
-    <actor costume="test" x="420" y="540" direction="0.0" heading="0.0" startEvent="default" zOrder="74">
-      <property name="expectedClass" value="Plane"/>
+    <actor costume="test" x="420.0" y="540.0" zOrder="74" id="" colorize="" role="test.py">
+      <role expectedClass="Plane"/>
     </actor>
-    <actor costume="test" x="-480" y="540" direction="0.0" heading="0.0" startEvent="default" zOrder="75">
-      <property name="expectedClass" value="Rock"/>
+    <actor costume="test" x="-480.0" y="540.0" zOrder="75" id="" colorize="" role="test.py">
+      <role expectedClass="Rock"/>
     </actor>
-    <actor costume="test" x="-360" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="76">
-      <property name="expectedClass" value="Rock"/>
+    <actor costume="test" x="-360.0" y="600.0" zOrder="76" id="" colorize="" role="test.py">
+      <role expectedClass="Rock"/>
     </actor>
-    <actor costume="test" x="-180" y="540" direction="0.0" heading="0.0" startEvent="default" zOrder="77">
-      <property name="expectedClass" value="Rock"/>
+    <actor costume="test" x="-180.0" y="540.0" zOrder="77" id="" colorize="" role="test.py">
+      <role expectedClass="Rock"/>
     </actor>
-    <actor costume="test" x="-300" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="78">
-      <property name="expectedClass" value="Rock"/>
+    <actor costume="test" x="-300.0" y="600.0" zOrder="78" id="" colorize="" role="test.py">
+      <role expectedClass="Rock"/>
     </actor>
   </layer>
 </scene>

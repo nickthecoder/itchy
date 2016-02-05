@@ -43,13 +43,13 @@
     <actor costume="rock" x="360.0" y="540.0" zOrder="20" id="" colorize="" role="rock.py"/>
     <actor costume="rock" x="480.0" y="540.0" zOrder="20" id="" colorize="" role="rock.py"/>
     <actor costume="beehive2" x="240.0" y="180.0" zOrder="30" id="" colorize="" role="beehive.py">
-      <role bees="3" requiredPollen="3" beeLogic="Left Edge" beeDirection="East" spawnPeriod="3.0"/>
+      <role bees="3" needsProdding="false" requiredPollen="3" beeLogic="Left Edge" beeDirection="East" spawnPeriod="3.0" randomSeed="0"/>
     </actor>
     <actor costume="gate" x="420.0" y="540.0" zOrder="40" id="" colorize="" role="gate.py">
-      <role scene="menu"/>
+      <role scene="menu" spare="0"/>
     </actor>
     <actor costume="sledge" x="60.0" y="420.0" zOrder="90" id="" colorize="" role="sledger.py">
-      <role text="Ooh, look a beehive.&#xA;" initialDelay="0.5" period="15.0"/>
+      <role text="Ooh, look a beehive.&#xA;" initialDelay="0.5" period="15.0" loop="false"/>
     </actor>
     <actor costume="player" x="420.0" y="360.0" zOrder="1000" id="" colorize="" role="player.py">
       <role awake="true"/>

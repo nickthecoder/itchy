@@ -27,16 +27,7 @@ replayInput = False
 class Level(PlainSceneDirector) :
 
     def __init__(self) :
-    
-        self.inputToggleInfo = Input.find("toggleInfo")
-        self.inputTest = Input.find("runTests")
-
-        # Record and playback the player's moves using the MacroRecorder and MacroPlayback
-        self.inputSave = Input.find("save")
-        self.inputLoad = Input.find("load")
-                
-        self.inputNextPlayer = Input.find("nextPlayer")
-                
+                    
         self.collectablesRemaining = 0
         self.showInfo = True
         self.player = None
@@ -47,12 +38,24 @@ class Level(PlainSceneDirector) :
 
     def loading( self, scene ) :
         # Load the glass stage on top of the current scene.
+        print "Loading the glass"
         game.mergeScene("glass")
 
 
     def onActivate( self ) :
 
-        print "onActivate"
+        print "onActivate level"
+
+        self.inputToggleInfo = Input.find("toggleInfo")
+        self.inputTest = Input.find("runTests")
+
+        # Record and playback the player's moves using the MacroRecorder and MacroPlayback
+        self.inputSave = Input.find("save")
+        self.inputLoad = Input.find("load")
+                
+        self.inputNextPlayer = Input.find("nextPlayer")
+        print "Found all inputs"
+
         for player in game.findRoleByTag("player") :
             if self.player is None or player.awake :
                 self.player = player
