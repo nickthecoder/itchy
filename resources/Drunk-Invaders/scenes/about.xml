@@ -1,19 +1,18 @@
-<scene showMouse="true" role="uk.co.nickthecoder.drunkinvaders.About" background="#000000ff">
-  <properties/>
+<scene name="about" layout="default" sceneDirector="uk.co.nickthecoder.drunkinvaders.About" showMouse="true">
   <layer name="background">
-    <actor costume="earth" x="0" y="0" direction="0.0" heading="0.0" startEvent="default" zOrder="1"/>
+    <actor costume="earth" zOrder="1" id="" colorize=""/>
   </layer>
   <layer name="main">
-    <text text="Drunk Invaders" font="vera" size="38" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="326" y="436" direction="0.0" heading="0.0" startEvent="default" zOrder="2"/>
-    <text text="Written by Nick Robinson" font="vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="323" y="332" direction="0.0" heading="0.0" startEvent="default" zOrder="3"/>
-    <text text="Version 0.1" font="vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="323" y="402" direction="0.0" heading="0.0" startEvent="default" zOrder="4"/>
-    <text text="Inspired and helped by Simon Lucas" font="vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="324" y="296" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
-    <text text="©2012" font="vera" size="14" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="500" y="445" direction="0.0" heading="0.0" startEvent="default" zOrder="6"/>
-    <text text="BACK" font="blackCasper" size="60" color="#000000" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.SceneButton" costume="button" x="326" y="41" direction="0.0" heading="0.0" startEvent="default" zOrder="7">
-      <property name="sceneName" value="menu"/>
+    <text x="326.0" y="436.0" zOrder="2" id="" font="vera" fontSize="38.0" text="Drunk Invaders" color="#ffffffff" colorize=""/>
+    <text x="323.0" y="332.0" zOrder="3" id="" font="vera" fontSize="22.0" text="Written by Nick Robinson" color="#ffffffff" colorize=""/>
+    <text x="323.0" y="402.0" zOrder="4" id="" font="vera" fontSize="22.0" text="Version 0.1" color="#ffffffff" colorize=""/>
+    <text x="324.0" y="296.0" zOrder="5" id="" font="vera" fontSize="22.0" text="Inspired and helped by Simon Lucas" color="#ffffffff" colorize=""/>
+    <text x="500.0" y="445.0" zOrder="6" id="" font="vera" fontSize="14.0" text="©2012" color="#ffffffff" colorize=""/>
+    <text costume="button" x="326.0" y="41.0" zOrder="7" id="" font="blackCasper" fontSize="60.0" text="BACK" colorize="" role="uk.co.nickthecoder.itchy.role.SceneButton">
+      <role sceneName="menu"/>
     </text>
-    <text text="Reset" font="veraBold" size="20" color="#ffffff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.MessageButton" costume="button" x="68" y="24" direction="0.0" heading="0.0" startEvent="default" zOrder="8" colorize="#000000ff">
-      <property name="message" value="reset"/>
+    <text costume="button" x="68.0" y="24.0" zOrder="8" id="" font="veraBold" fontSize="20.0" text="Reset" color="#ffffffff" colorize="" role="uk.co.nickthecoder.itchy.role.MessageButton">
+      <role message="reset"/>
     </text>
   </layer>
 </scene>

@@ -1,45 +1,29 @@
-<scene showMouse="true" role="uk.co.nickthecoder.drunkinvaders.Level" background="#000000ff">
-  <properties/>
+<scene name="completed" layout="default" sceneDirector="uk.co.nickthecoder.drunkinvaders.Level" showMouse="true">
   <layer name="background">
-    <actor costume="earth3" x="321" y="240" direction="0.0" heading="0.0" startEvent="default" zOrder="1"/>
+    <actor costume="earth3" x="321.0" y="240.0" zOrder="1" id="" colorize=""/>
   </layer>
   <layer name="main">
-    <text text="Well Done" font="boycott" size="111" color="#22bb22" xAlignment="0.5" yAlignment="0.5" x="322" y="404" direction="0.0" heading="0.0" startEvent="default" zOrder="2"/>
-    <text text="The world is safe" font="vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="319" y="108" direction="0.0" heading="0.0" startEvent="default" zOrder="3"/>
-    <text text="The aliens are dead" font="vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="320" y="80" direction="0.0" heading="0.0" startEvent="default" zOrder="4"/>
-    <text text="MENU" font="blackCasper" size="53" color="#000000" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.SceneButton" x="320" y="24" direction="0.0" heading="0.0" startEvent="default" zOrder="5">
-      <property name="sceneName" value="menu"/>
+    <text x="322.0" y="404.0" zOrder="2" id="" font="boycott" fontSize="111.0" text="Well Done" color="#22bb22ff" colorize=""/>
+    <text x="319.0" y="108.0" zOrder="3" id="" font="vera" fontSize="22.0" text="The world is safe" color="#ffffffff" colorize=""/>
+    <text x="320.0" y="80.0" zOrder="4" id="" font="vera" fontSize="22.0" text="The aliens are dead" color="#ffffffff" colorize=""/>
+    <text x="320.0" y="24.0" zOrder="5" id="" font="blackCasper" fontSize="53.0" text="MENU" colorize="" role="uk.co.nickthecoder.itchy.role.SceneButton">
+      <role sceneName="menu"/>
     </text>
-    <actor costume="shieldFactory" x="183" y="202" direction="89.29168795888526" heading="89.29168795888526" startEvent="default" zOrder="6">
-      <property name="height" value="4"/>
-      <property name="width" value="6"/>
-      <property name="spacing" value="10.0"/>
+    <actor costume="shieldFactory" x="183.0" y="202.0" heading="89.29168795888526" zOrder="6" id="" direction="89.29168795888526" colorize="" role="uk.co.nickthecoder.drunkinvaders.ShieldFactory">
+      <role width="6" height="4" spacing="10"/>
     </actor>
-    <actor costume="shieldFactory" x="456" y="239" direction="-90.14886469626032" heading="-90.14886469626032" startEvent="default" zOrder="7">
-      <property name="height" value="4"/>
-      <property name="width" value="6"/>
-      <property name="spacing" value="10.0"/>
+    <actor costume="shieldFactory" x="456.0" y="239.0" heading="-90.14886469626032" zOrder="7" id="" direction="-90.14886469626032" colorize="" role="uk.co.nickthecoder.drunkinvaders.ShieldFactory">
+      <role width="6" height="4" spacing="10"/>
     </actor>
-    <actor costume="shieldFactory" x="402" y="316" direction="-46.87531224688961" heading="-46.87531224688961" startEvent="default" zOrder="8">
-      <property name="height" value="4"/>
-      <property name="width" value="6"/>
-      <property name="spacing" value="10.0"/>
+    <actor costume="shieldFactory" x="402.0" y="316.0" heading="-46.87531224688961" zOrder="8" id="" direction="-46.87531224688961" colorize="" role="uk.co.nickthecoder.drunkinvaders.ShieldFactory">
+      <role width="6" height="4" spacing="10"/>
     </actor>
-    <actor costume="shieldFactory" x="214" y="286" direction="46.2188752351313" heading="46.2188752351313" startEvent="default" zOrder="9">
-      <property name="height" value="4"/>
-      <property name="width" value="6"/>
-      <property name="spacing" value="10.0"/>
+    <actor costume="shieldFactory" x="214.0" y="286.0" heading="46.2188752351313" zOrder="9" id="" direction="46.2188752351313" colorize="" role="uk.co.nickthecoder.drunkinvaders.ShieldFactory">
+      <role width="6" height="4" spacing="10"/>
     </actor>
-    <actor costume="pacman1" x="716" y="65" direction="180.0" heading="180.0" startEvent="default" zOrder="10"/>
-    <actor costume="ship-won" x="320" y="302" direction="90.0" heading="90.0" startEvent="default" zOrder="11">
-      <property name="mass" value="1.0"/>
-      <property name="vy" value="0.0"/>
-      <property name="vx" value="0.0"/>
-      <property name="shieldRechargeRate" value="0.001"/>
-      <property name="rotationSpeed" value="0.012"/>
-      <property name="ox" value="320.0"/>
-      <property name="shieldDischargeRate" value="0.01"/>
-      <property name="oy" value="207.0"/>
+    <actor costume="pacman1" x="716.0" y="65.0" heading="180.0" zOrder="10" id="" direction="180.0" colorize="" role="uk.co.nickthecoder.drunkinvaders.Pacman"/>
+    <actor costume="ship-won" x="320.0" y="302.0" heading="90.0" zOrder="11" id="" direction="90.0" colorize="" role="uk.co.nickthecoder.drunkinvaders.Ship">
+      <role vx="0.0" vy="0.0" mass="1.0" ox="320.0" oy="207.0" rotationSpeed="0.012" shieldRechargeRate="0.001" shieldDischargeRate="0.01"/>
     </actor>
   </layer>
 </scene>

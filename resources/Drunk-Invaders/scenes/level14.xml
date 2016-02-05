@@ -1,5 +1,5 @@
-<scene showMouse="false" role="uk.co.nickthecoder.itchy.extras.RedirectSceneDirector" background="#000000ff">
-  <properties>
-    <property name="redirectSceneName" value="completed"/>
-  </properties>
+<scene name="level14" layout="default" sceneDirector="uk.co.nickthecoder.itchy.RedirectSceneDirector">
+  <sceneDirector sceneName="completed"/>
+  <layer name="background"/>
+  <layer name="main"/>
 </scene>

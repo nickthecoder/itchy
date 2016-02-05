@@ -1,6 +1,6 @@
-<scene showMouse="true" role="uk.co.nickthecoder.itchy.PlainSceneDirector" background="#00000000">
-  <properties/>
+<scene name="pause" layout="default" sceneDirector="uk.co.nickthecoder.itchy.PlainSceneDirector" showMouse="true">
+  <layer name="background"/>
   <layer name="main">
-    <actor costume="paused" x="318" y="308" direction="0.0" heading="0.0" startEvent="default" zOrder="0"/>
+    <actor costume="paused" x="318.0" y="308.0" id="" colorize=""/>
   </layer>
 </scene>

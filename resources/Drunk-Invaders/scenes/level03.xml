@@ -1,54 +1,28 @@
-<scene showMouse="false" role="uk.co.nickthecoder.drunkinvaders.Level" background="#000000ff">
-  <properties/>
+<scene name="level03" layout="default" sceneDirector="uk.co.nickthecoder.drunkinvaders.Level">
   <layer name="background">
-    <actor costume="earth" x="0" y="0" direction="0.0" heading="0.0" startEvent="default" zOrder="1"/>
+    <actor costume="earth" zOrder="1" id="" colorize=""/>
   </layer>
   <layer name="main">
-    <actor costume="ship" x="314" y="89" direction="90.0" heading="90.0" startEvent="default" zOrder="2">
-      <property name="mass" value="1.0"/>
-      <property name="vy" value="0.0"/>
-      <property name="vx" value="0.0"/>
-      <property name="shieldRechargeRate" value="0.001"/>
-      <property name="rotationSpeed" value="0.003"/>
-      <property name="ox" value="320.0"/>
-      <property name="shieldDischargeRate" value="0.01"/>
-      <property name="oy" value="-1300.0"/>
+    <actor costume="ship" x="314.0" y="89.0" heading="90.0" zOrder="2" id="" direction="90.0" colorize="" role="uk.co.nickthecoder.drunkinvaders.Ship">
+      <role vx="0.0" vy="0.0" mass="1.0" ox="320.0" oy="-1300.0" rotationSpeed="0.003" shieldRechargeRate="0.001" shieldDischargeRate="0.01"/>
     </actor>
-    <actor costume="factory" x="51" y="430" direction="7.305083790089056" heading="7.305083790089056" startEvent="default" zOrder="3">
-      <property name="fireOnceEvery" value="6.0"/>
-      <property name="costumeName" value="alien1"/>
-      <property name="delayPerAlien" value="0.5"/>
-      <property name="spacing" value="80.0"/>
-      <property name="alienCount" value="6"/>
+    <actor costume="factory" x="51.0" y="430.0" heading="7.305083790089056" zOrder="3" id="" direction="7.305083790089056" colorize="" role="uk.co.nickthecoder.drunkinvaders.AlienFactory">
+      <role costumeName="alien1" delayPerAlien="0.5" alienCount="6" spacing="80.0" fireOnceEvery="6.0"/>
     </actor>
-    <actor costume="factory" x="60" y="380" direction="-8.984901063197293" heading="-8.984901063197293" startEvent="default" zOrder="4">
-      <property name="fireOnceEvery" value="8.0"/>
-      <property name="costumeName" value="alien2"/>
-      <property name="delayPerAlien" value="0.5"/>
-      <property name="spacing" value="80.0"/>
-      <property name="alienCount" value="6"/>
+    <actor costume="factory" x="60.0" y="380.0" heading="-8.984901063197293" zOrder="4" id="" direction="-8.984901063197293" colorize="" role="uk.co.nickthecoder.drunkinvaders.AlienFactory">
+      <role costumeName="alien2" delayPerAlien="0.5" alienCount="6" spacing="80.0" fireOnceEvery="8.0"/>
     </actor>
-    <actor costume="factory" x="60" y="320" direction="5.254185128977311" heading="5.254185128977311" startEvent="default" zOrder="5">
-      <property name="fireOnceEvery" value="10.0"/>
-      <property name="costumeName" value="alien3"/>
-      <property name="delayPerAlien" value="0.5"/>
-      <property name="spacing" value="80.0"/>
-      <property name="alienCount" value="6"/>
+    <actor costume="factory" x="60.0" y="320.0" heading="5.254185128977311" zOrder="5" id="" direction="5.254185128977311" colorize="" role="uk.co.nickthecoder.drunkinvaders.AlienFactory">
+      <role costumeName="alien3" delayPerAlien="0.5" alienCount="6" spacing="80.0" fireOnceEvery="10.0"/>
     </actor>
-    <actor costume="shieldFactory" x="292" y="125" direction="0.0" heading="0.0" startEvent="default" zOrder="6">
-      <property name="height" value="5"/>
-      <property name="width" value="8"/>
-      <property name="spacing" value="10.0"/>
+    <actor costume="shieldFactory" x="292.0" y="125.0" zOrder="6" id="" colorize="" role="uk.co.nickthecoder.drunkinvaders.ShieldFactory">
+      <role width="8" height="5" spacing="10"/>
     </actor>
-    <actor costume="shieldFactory" x="83" y="100" direction="10.954062643398334" heading="10.954062643398334" startEvent="default" zOrder="7">
-      <property name="height" value="5"/>
-      <property name="width" value="8"/>
-      <property name="spacing" value="10.0"/>
+    <actor costume="shieldFactory" x="83.0" y="100.0" heading="10.954062643398334" zOrder="7" id="" direction="10.954062643398334" colorize="" role="uk.co.nickthecoder.drunkinvaders.ShieldFactory">
+      <role width="8" height="5" spacing="10"/>
     </actor>
-    <actor costume="shieldFactory" x="503" y="105" direction="-13.628168075833855" heading="-13.628168075833855" startEvent="default" zOrder="8">
-      <property name="height" value="5"/>
-      <property name="width" value="8"/>
-      <property name="spacing" value="10.0"/>
+    <actor costume="shieldFactory" x="503.0" y="105.0" heading="-13.628168075833855" zOrder="8" id="" direction="-13.628168075833855" colorize="" role="uk.co.nickthecoder.drunkinvaders.ShieldFactory">
+      <role width="8" height="5" spacing="10"/>
     </actor>
   </layer>
 </scene>

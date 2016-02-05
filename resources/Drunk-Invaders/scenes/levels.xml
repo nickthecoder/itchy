@@ -1,104 +1,48 @@
-<scene showMouse="true" role="uk.co.nickthecoder.drunkinvaders.Levels" background="#000000ff">
-  <properties/>
+<scene name="levels" layout="default" sceneDirector="uk.co.nickthecoder.drunkinvaders.Levels" showMouse="true">
+  <layer name="background"/>
   <layer name="main">
-    <actor costume="earth" x="0" y="0" direction="0.0" heading="0.0" startEvent="default" zOrder="1"/>
-    <actor costume="level" x="55" y="373" direction="0.0" heading="0.0" startEvent="default" zOrder="2">
-      <property name="fontColor" value="#ea8138ff"/>
-      <property name="levelNumber" value="1"/>
-      <property name="font" value="blackCasper"/>
-      <property name="fontSize" value="32"/>
-      <property name="shadowColor" value="#000000ff"/>
+    <actor costume="earth" zOrder="1" id="" colorize=""/>
+    <actor costume="level" x="55.0" y="373.0" zOrder="2" id="" colorize="" role="uk.co.nickthecoder.drunkinvaders.PickLevel">
+      <role levelNumber="1" font="blackCasper" fontSize="32" fontColor="#ea8138ff" shadowColor="#000000ff"/>
     </actor>
-    <actor costume="level" x="132" y="421" direction="0.0" heading="0.0" startEvent="default" zOrder="3">
-      <property name="fontColor" value="#ea8138ff"/>
-      <property name="levelNumber" value="2"/>
-      <property name="font" value="blackCasper"/>
-      <property name="fontSize" value="32"/>
-      <property name="shadowColor" value="#000000ff"/>
+    <actor costume="level" x="132.0" y="421.0" zOrder="3" id="" colorize="" role="uk.co.nickthecoder.drunkinvaders.PickLevel">
+      <role levelNumber="2" font="blackCasper" fontSize="32" fontColor="#ea8138ff" shadowColor="#000000ff"/>
     </actor>
-    <actor costume="level" x="215" y="437" direction="0.0" heading="0.0" startEvent="default" zOrder="4">
-      <property name="fontColor" value="#ea8138ff"/>
-      <property name="levelNumber" value="3"/>
-      <property name="font" value="blackCasper"/>
-      <property name="fontSize" value="32"/>
-      <property name="shadowColor" value="#000000ff"/>
+    <actor costume="level" x="215.0" y="437.0" zOrder="4" id="" colorize="" role="uk.co.nickthecoder.drunkinvaders.PickLevel">
+      <role levelNumber="3" font="blackCasper" fontSize="32" fontColor="#ea8138ff" shadowColor="#000000ff"/>
     </actor>
-    <actor costume="level" x="305" y="440" direction="0.0" heading="0.0" startEvent="default" zOrder="5">
-      <property name="fontColor" value="#ea8138ff"/>
-      <property name="levelNumber" value="4"/>
-      <property name="font" value="blackCasper"/>
-      <property name="fontSize" value="32"/>
-      <property name="shadowColor" value="#000000ff"/>
+    <actor costume="level" x="305.0" y="440.0" zOrder="5" id="" colorize="" role="uk.co.nickthecoder.drunkinvaders.PickLevel">
+      <role levelNumber="4" font="blackCasper" fontSize="32" fontColor="#ea8138ff" shadowColor="#000000ff"/>
     </actor>
-    <actor costume="level" x="395" y="433" direction="0.0" heading="0.0" startEvent="default" zOrder="6">
-      <property name="fontColor" value="#ea8138ff"/>
-      <property name="levelNumber" value="5"/>
-      <property name="font" value="blackCasper"/>
-      <property name="fontSize" value="32"/>
-      <property name="shadowColor" value="#000000ff"/>
+    <actor costume="level" x="395.0" y="433.0" zOrder="6" id="" colorize="" role="uk.co.nickthecoder.drunkinvaders.PickLevel">
+      <role levelNumber="5" font="blackCasper" fontSize="32" fontColor="#ea8138ff" shadowColor="#000000ff"/>
     </actor>
-    <actor costume="level" x="481" y="405" direction="0.0" heading="0.0" startEvent="default" zOrder="7">
-      <property name="fontColor" value="#ea8138ff"/>
-      <property name="levelNumber" value="6"/>
-      <property name="font" value="blackCasper"/>
-      <property name="fontSize" value="32"/>
-      <property name="shadowColor" value="#000000ff"/>
+    <actor costume="level" x="481.0" y="405.0" zOrder="7" id="" colorize="" role="uk.co.nickthecoder.drunkinvaders.PickLevel">
+      <role levelNumber="6" font="blackCasper" fontSize="32" fontColor="#ea8138ff" shadowColor="#000000ff"/>
     </actor>
-    <actor costume="level" x="539" y="344" direction="0.0" heading="0.0" startEvent="default" zOrder="8">
-      <property name="fontColor" value="#ea8138ff"/>
-      <property name="levelNumber" value="7"/>
-      <property name="font" value="blackCasper"/>
-      <property name="fontSize" value="32"/>
-      <property name="shadowColor" value="#000000ff"/>
+    <actor costume="level" x="539.0" y="344.0" zOrder="8" id="" colorize="" role="uk.co.nickthecoder.drunkinvaders.PickLevel">
+      <role levelNumber="7" font="blackCasper" fontSize="32" fontColor="#ea8138ff" shadowColor="#000000ff"/>
     </actor>
-    <actor costume="level" x="578" y="263" direction="0.0" heading="0.0" startEvent="default" zOrder="9">
-      <property name="fontColor" value="#ea8138ff"/>
-      <property name="levelNumber" value="8"/>
-      <property name="font" value="blackCasper"/>
-      <property name="fontSize" value="32"/>
-      <property name="shadowColor" value="#000000ff"/>
+    <actor costume="level" x="578.0" y="263.0" zOrder="9" id="" colorize="" role="uk.co.nickthecoder.drunkinvaders.PickLevel">
+      <role levelNumber="8" font="blackCasper" fontSize="32" fontColor="#ea8138ff" shadowColor="#000000ff"/>
     </actor>
-    <actor costume="level" x="563" y="179" direction="0.0" heading="0.0" startEvent="default" zOrder="10">
-      <property name="fontColor" value="#ea8138ff"/>
-      <property name="levelNumber" value="9"/>
-      <property name="font" value="blackCasper"/>
-      <property name="fontSize" value="32"/>
-      <property name="shadowColor" value="#000000ff"/>
+    <actor costume="level" x="563.0" y="179.0" zOrder="10" id="" colorize="" role="uk.co.nickthecoder.drunkinvaders.PickLevel">
+      <role levelNumber="9" font="blackCasper" fontSize="32" fontColor="#ea8138ff" shadowColor="#000000ff"/>
     </actor>
-    <actor costume="level" x="594" y="48" direction="0.0" heading="0.0" startEvent="default" zOrder="11">
-      <property name="fontColor" value="#ea8138ff"/>
-      <property name="levelNumber" value="99"/>
-      <property name="font" value="blackCasper"/>
-      <property name="fontSize" value="22"/>
-      <property name="shadowColor" value="#000000ff"/>
+    <actor costume="level" x="594.0" y="48.0" zOrder="11" id="" colorize="" role="uk.co.nickthecoder.drunkinvaders.PickLevel">
+      <role levelNumber="99" font="blackCasper" fontSize="22" fontColor="#ea8138ff" shadowColor="#000000ff"/>
     </actor>
-    <actor costume="level" x="499" y="101" direction="0.0" heading="0.0" startEvent="default" zOrder="12">
-      <property name="fontColor" value="#ea8138ff"/>
-      <property name="levelNumber" value="10"/>
-      <property name="font" value="blackCasper"/>
-      <property name="fontSize" value="22"/>
-      <property name="shadowColor" value="#000000ff"/>
+    <actor costume="level" x="499.0" y="101.0" zOrder="12" id="" colorize="" role="uk.co.nickthecoder.drunkinvaders.PickLevel">
+      <role levelNumber="10" font="blackCasper" fontSize="22" fontColor="#ea8138ff" shadowColor="#000000ff"/>
     </actor>
-    <actor costume="level" x="410" y="68" direction="0.0" heading="0.0" startEvent="default" zOrder="13">
-      <property name="fontColor" value="#ea8138ff"/>
-      <property name="levelNumber" value="11"/>
-      <property name="font" value="blackCasper"/>
-      <property name="fontSize" value="22"/>
-      <property name="shadowColor" value="#000000ff"/>
+    <actor costume="level" x="410.0" y="68.0" zOrder="13" id="" colorize="" role="uk.co.nickthecoder.drunkinvaders.PickLevel">
+      <role levelNumber="11" font="blackCasper" fontSize="22" fontColor="#ea8138ff" shadowColor="#000000ff"/>
     </actor>
-    <actor costume="level" x="312" y="67" direction="0.0" heading="0.0" startEvent="default" zOrder="14">
-      <property name="fontColor" value="#ea8138ff"/>
-      <property name="levelNumber" value="12"/>
-      <property name="font" value="blackCasper"/>
-      <property name="fontSize" value="32"/>
-      <property name="shadowColor" value="#000000ff"/>
+    <actor costume="level" x="312.0" y="67.0" zOrder="14" id="" colorize="" role="uk.co.nickthecoder.drunkinvaders.PickLevel">
+      <role levelNumber="12" font="blackCasper" fontSize="32" fontColor="#ea8138ff" shadowColor="#000000ff"/>
     </actor>
-    <actor costume="level" x="233" y="97" direction="0.0" heading="0.0" startEvent="default" zOrder="15">
-      <property name="fontColor" value="#ea8138ff"/>
-      <property name="levelNumber" value="13"/>
-      <property name="font" value="blackCasper"/>
-      <property name="fontSize" value="22"/>
-      <property name="shadowColor" value="#000000ff"/>
+    <actor costume="level" x="233.0" y="97.0" zOrder="15" id="" colorize="" role="uk.co.nickthecoder.drunkinvaders.PickLevel">
+      <role levelNumber="13" font="blackCasper" fontSize="22" fontColor="#ea8138ff" shadowColor="#000000ff"/>
     </actor>
   </layer>
 </scene>

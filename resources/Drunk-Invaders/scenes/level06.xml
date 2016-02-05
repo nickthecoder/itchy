@@ -1,10 +1,10 @@
-<scene name="level06" layout="default" sceneDirector="uk.co.nickthecoder.drunkinvaders.Level">
+<scene name="level06" layout="default" sceneDirector="uk.co.nickthecoder.drunkinvaders.Level" showMouse="true">
   <layer name="background">
     <actor costume="earth" zOrder="1" id="" colorize=""/>
   </layer>
   <layer name="main">
     <actor costume="ship" x="321.0" y="61.0" heading="90.0" zOrder="2" id="" direction="90.0" colorize="" role="uk.co.nickthecoder.drunkinvaders.Ship">
-      <role mass="1.0" ox="320.0" oy="-1300.0" rotationSpeed="0.003" shieldRechargeRate="0.001" shieldDischargeRate="0.01"/>
+      <role vx="0.0" vy="0.0" mass="1.0" ox="320.0" oy="-1300.0" rotationSpeed="0.003" shieldRechargeRate="0.001" shieldDischargeRate="0.01"/>
     </actor>
     <actor costume="shieldFactory" x="113.0" y="78.0" heading="7.594643368591445" zOrder="3" id="" direction="7.594643368591445" colorize="" role="uk.co.nickthecoder.drunkinvaders.ShieldFactory">
       <role width="6" height="4" spacing="10"/>
@@ -13,7 +13,7 @@
       <role width="6" height="4" spacing="10"/>
     </actor>
     <actor costume="saucer" x="688.0" y="451.0" heading="-90.0" zOrder="5" id="" direction="-90.0" colorize="" role="uk.co.nickthecoder.drunkinvaders.Mothership">
-      <role vx="-3.0" mass="1.0" fireOnceEvery="1.0" shotsRequired="1" childrenCount="15" costumeName="alien1" birthInterval="1.0" childFireOnceEvery="5.0" firstBornDelay="0.2"/>
+      <role vx="-3.0" vy="0.0" mass="1.0" fireOnceEvery="1.0" shotsRequired="1" childrenCount="15" costumeName="alien1" birthInterval="1.0" childFireOnceEvery="5.0" firstBornDelay="0.2"/>
     </actor>
   </layer>
 </scene>
