@@ -1,440 +1,66 @@
-<scene showMouse="true" role="uk.co.nickthecoder.itchy.PlainSceneDirector">
-  <properties/>
+<scene name="explosions" layout="default" sceneDirector="uk.co.nickthecoder.itchy.PlainSceneDirector" showMouse="true">
+  <layer name="background"/>
   <layer name="main">
-    <actor costume="alien" role="uk.co.nickthecoder.itchy.test.TestExplosion" x="74" y="510" direction="-90.0" heading="-90.0" startEvent="default" zOrder="0">
-      <property name="fade" value="0.7"/>
-      <property name="spinFrom" value="0.0"/>
-      <property name="projectiles" value="10"/>
-      <property name="offsetY" value="0.0"/>
-      <property name="speedForwards" value="0.2"/>
-      <property name="offsetX" value="0.0"/>
-      <property name="deltaZ" value="0"/>
-      <property name="growFactor" value="1.0"/>
-      <property name="speedSidewards" value="0.0"/>
-      <property name="randomSpread" value="true"/>
-      <property name="id" value="0"/>
-      <property name="projectilesPerTick" value="10"/>
-      <property name="spinTo" value="0.0"/>
-      <property name="distance" value="0.0"/>
-      <property name="vy" value="0.0"/>
-      <property name="offsetSidewards" value="0.0"/>
-      <property name="life" value="6.0"/>
-      <property name="vx" value="0.0"/>
-      <property name="offsetForwards" value="0.0"/>
-      <property name="spreadFrom" value="0.0"/>
-      <property name="alpha" value="255.0"/>
-      <property name="spreadTo" value="360.0"/>
-      <property name="gravity" value="0.0"/>
+    <actor costume="alien" x="74.0" y="510.0" heading="-90.0" id="" direction="-90.0" colorize="" role="uk.co.nickthecoder.itchy.test.TestExplosion">
+      <role id="0" offsetForwards="0.0" offsetSidewards="0.0" offsetX="0.0" offsetY="0.0" distance="0.0" life="6.0" vx="0.0" vy="0.0" speedForwards="0.2" speedSidewards="0.0" gravity="0.0" spinFrom="0.0" spinTo="0.0" fade="0.7" growFactor="1.0" alpha="255.0" projectiles="10" projectilesPerTick="10" spreadFrom="0.0" spreadTo="360.0" randomSpread="true" deltaZ="0"/>
     </actor>
-    <actor costume="alien" role="uk.co.nickthecoder.itchy.test.TestExplosion" x="173" y="511" direction="-90.0" heading="-90.0" startEvent="default" zOrder="1">
-      <property name="fade" value="0.7"/>
-      <property name="spinFrom" value="0.0"/>
-      <property name="projectiles" value="10"/>
-      <property name="offsetY" value="0.0"/>
-      <property name="speedForwards" value="0.2"/>
-      <property name="offsetX" value="0.0"/>
-      <property name="deltaZ" value="0"/>
-      <property name="growFactor" value="1.0"/>
-      <property name="speedSidewards" value="0.0"/>
-      <property name="randomSpread" value="false"/>
-      <property name="id" value="0"/>
-      <property name="projectilesPerTick" value="10"/>
-      <property name="spinTo" value="0.0"/>
-      <property name="distance" value="0.0"/>
-      <property name="vy" value="0.0"/>
-      <property name="offsetSidewards" value="0.0"/>
-      <property name="life" value="6.0"/>
-      <property name="vx" value="0.0"/>
-      <property name="offsetForwards" value="0.0"/>
-      <property name="spreadFrom" value="0.0"/>
-      <property name="alpha" value="255.0"/>
-      <property name="spreadTo" value="360.0"/>
-      <property name="gravity" value="0.0"/>
+    <actor costume="alien" x="173.0" y="511.0" heading="-90.0" zOrder="1" id="" direction="-90.0" colorize="" role="uk.co.nickthecoder.itchy.test.TestExplosion">
+      <role id="0" offsetForwards="0.0" offsetSidewards="0.0" offsetX="0.0" offsetY="0.0" distance="0.0" life="6.0" vx="0.0" vy="0.0" speedForwards="0.2" speedSidewards="0.0" gravity="0.0" spinFrom="0.0" spinTo="0.0" fade="0.7" growFactor="1.0" alpha="255.0" projectiles="10" projectilesPerTick="10" spreadFrom="0.0" spreadTo="360.0" randomSpread="false" deltaZ="0"/>
     </actor>
-    <text text="Go!" font="vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.SceneButton" x="107" y="587" direction="0.0" heading="0.0" startEvent="default" zOrder="2">
-      <property name="sceneName" value="explosions"/>
+    <text x="107.0" y="587.0" zOrder="2" id="" font="vera" fontSize="22.0" text="Go!" color="#ffffffff" colorize="" role="uk.co.nickthecoder.itchy.role.SceneButton">
+      <role sceneName="explosions"/>
     </text>
-    <text text="Menu" font="vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.SceneButton" x="35" y="585" direction="0.0" heading="0.0" startEvent="default" zOrder="3">
-      <property name="sceneName" value="menu"/>
+    <text x="35.0" y="585.0" zOrder="3" id="" font="vera" fontSize="22.0" text="Menu" color="#ffffffff" colorize="" role="uk.co.nickthecoder.itchy.role.SceneButton">
+      <role sceneName="menu"/>
     </text>
-    <actor costume="alien" role="uk.co.nickthecoder.itchy.test.TestExplosion" x="584" y="520" direction="-90.0" heading="-90.0" startEvent="default" zOrder="4">
-      <property name="fade" value="0.7"/>
-      <property name="spinFrom" value="0.0"/>
-      <property name="projectiles" value="10"/>
-      <property name="offsetY" value="0.0"/>
-      <property name="speedForwards" value="0.2"/>
-      <property name="offsetX" value="0.0"/>
-      <property name="deltaZ" value="0"/>
-      <property name="growFactor" value="1.0"/>
-      <property name="speedSidewards" value="0.0"/>
-      <property name="randomSpread" value="false"/>
-      <property name="id" value="0"/>
-      <property name="projectilesPerTick" value="10"/>
-      <property name="spinTo" value="0.0"/>
-      <property name="distance" value="0.0"/>
-      <property name="vy" value="0.0"/>
-      <property name="offsetSidewards" value="20.0"/>
-      <property name="life" value="6.0"/>
-      <property name="vx" value="0.0"/>
-      <property name="offsetForwards" value="0.0"/>
-      <property name="spreadFrom" value="0.0"/>
-      <property name="alpha" value="255.0"/>
-      <property name="spreadTo" value="360.0"/>
-      <property name="gravity" value="0.0"/>
+    <actor costume="alien" x="584.0" y="520.0" heading="-90.0" zOrder="4" id="" direction="-90.0" colorize="" role="uk.co.nickthecoder.itchy.test.TestExplosion">
+      <role id="0" offsetForwards="0.0" offsetSidewards="20.0" offsetX="0.0" offsetY="0.0" distance="0.0" life="6.0" vx="0.0" vy="0.0" speedForwards="0.2" speedSidewards="0.0" gravity="0.0" spinFrom="0.0" spinTo="0.0" fade="0.7" growFactor="1.0" alpha="255.0" projectiles="10" projectilesPerTick="10" spreadFrom="0.0" spreadTo="360.0" randomSpread="false" deltaZ="0"/>
     </actor>
-    <actor costume="alien" role="uk.co.nickthecoder.itchy.test.TestExplosion" x="593" y="450" direction="-90.0" heading="-90.0" startEvent="default" zOrder="5">
-      <property name="fade" value="0.7"/>
-      <property name="spinFrom" value="0.0"/>
-      <property name="projectiles" value="10"/>
-      <property name="offsetY" value="0.0"/>
-      <property name="speedForwards" value="0.2"/>
-      <property name="offsetX" value="0.0"/>
-      <property name="deltaZ" value="0"/>
-      <property name="growFactor" value="1.0"/>
-      <property name="speedSidewards" value="0.0"/>
-      <property name="randomSpread" value="false"/>
-      <property name="id" value="0"/>
-      <property name="projectilesPerTick" value="10"/>
-      <property name="spinTo" value="0.0"/>
-      <property name="distance" value="0.0"/>
-      <property name="vy" value="0.0"/>
-      <property name="offsetSidewards" value="0.0"/>
-      <property name="life" value="6.0"/>
-      <property name="vx" value="0.0"/>
-      <property name="offsetForwards" value="20.0"/>
-      <property name="spreadFrom" value="0.0"/>
-      <property name="alpha" value="255.0"/>
-      <property name="spreadTo" value="360.0"/>
-      <property name="gravity" value="0.0"/>
+    <actor costume="alien" x="593.0" y="450.0" heading="-90.0" zOrder="5" id="" direction="-90.0" colorize="" role="uk.co.nickthecoder.itchy.test.TestExplosion">
+      <role id="0" offsetForwards="20.0" offsetSidewards="0.0" offsetX="0.0" offsetY="0.0" distance="0.0" life="6.0" vx="0.0" vy="0.0" speedForwards="0.2" speedSidewards="0.0" gravity="0.0" spinFrom="0.0" spinTo="0.0" fade="0.7" growFactor="1.0" alpha="255.0" projectiles="10" projectilesPerTick="10" spreadFrom="0.0" spreadTo="360.0" randomSpread="false" deltaZ="0"/>
     </actor>
-    <actor costume="alien" role="uk.co.nickthecoder.itchy.test.TestExplosion" x="488" y="450" direction="-115.84724539498697" heading="-115.84724539498697" startEvent="default" zOrder="6">
-      <property name="fade" value="0.7"/>
-      <property name="spinFrom" value="0.0"/>
-      <property name="projectiles" value="10"/>
-      <property name="offsetY" value="0.0"/>
-      <property name="speedForwards" value="0.2"/>
-      <property name="offsetX" value="0.0"/>
-      <property name="deltaZ" value="0"/>
-      <property name="growFactor" value="1.0"/>
-      <property name="speedSidewards" value="0.0"/>
-      <property name="randomSpread" value="false"/>
-      <property name="id" value="0"/>
-      <property name="projectilesPerTick" value="10"/>
-      <property name="spinTo" value="0.0"/>
-      <property name="distance" value="0.0"/>
-      <property name="vy" value="0.0"/>
-      <property name="offsetSidewards" value="0.0"/>
-      <property name="life" value="6.0"/>
-      <property name="vx" value="0.0"/>
-      <property name="offsetForwards" value="20.0"/>
-      <property name="spreadFrom" value="0.0"/>
-      <property name="alpha" value="255.0"/>
-      <property name="spreadTo" value="360.0"/>
-      <property name="gravity" value="0.0"/>
+    <actor costume="alien" x="488.0" y="450.0" heading="-115.84724539498697" zOrder="6" id="" direction="-115.84724539498697" colorize="" role="uk.co.nickthecoder.itchy.test.TestExplosion">
+      <role id="0" offsetForwards="20.0" offsetSidewards="0.0" offsetX="0.0" offsetY="0.0" distance="0.0" life="6.0" vx="0.0" vy="0.0" speedForwards="0.2" speedSidewards="0.0" gravity="0.0" spinFrom="0.0" spinTo="0.0" fade="0.7" growFactor="1.0" alpha="255.0" projectiles="10" projectilesPerTick="10" spreadFrom="0.0" spreadTo="360.0" randomSpread="false" deltaZ="0"/>
     </actor>
-    <actor costume="alien" role="uk.co.nickthecoder.itchy.test.TestExplosion" x="674" y="520" direction="-31.924639012371056" heading="-31.924639012371056" startEvent="default" zOrder="7">
-      <property name="fade" value="0.7"/>
-      <property name="spinFrom" value="0.0"/>
-      <property name="projectiles" value="10"/>
-      <property name="offsetY" value="0.0"/>
-      <property name="speedForwards" value="0.2"/>
-      <property name="offsetX" value="0.0"/>
-      <property name="deltaZ" value="0"/>
-      <property name="growFactor" value="1.0"/>
-      <property name="speedSidewards" value="0.0"/>
-      <property name="randomSpread" value="false"/>
-      <property name="id" value="0"/>
-      <property name="projectilesPerTick" value="10"/>
-      <property name="spinTo" value="0.0"/>
-      <property name="distance" value="0.0"/>
-      <property name="vy" value="0.0"/>
-      <property name="offsetSidewards" value="20.0"/>
-      <property name="life" value="6.0"/>
-      <property name="vx" value="0.0"/>
-      <property name="offsetForwards" value="0.0"/>
-      <property name="spreadFrom" value="0.0"/>
-      <property name="alpha" value="255.0"/>
-      <property name="spreadTo" value="360.0"/>
-      <property name="gravity" value="0.0"/>
+    <actor costume="alien" x="674.0" y="520.0" heading="-31.924639012371056" zOrder="7" id="" direction="-31.924639012371056" colorize="" role="uk.co.nickthecoder.itchy.test.TestExplosion">
+      <role id="0" offsetForwards="0.0" offsetSidewards="20.0" offsetX="0.0" offsetY="0.0" distance="0.0" life="6.0" vx="0.0" vy="0.0" speedForwards="0.2" speedSidewards="0.0" gravity="0.0" spinFrom="0.0" spinTo="0.0" fade="0.7" growFactor="1.0" alpha="255.0" projectiles="10" projectilesPerTick="10" spreadFrom="0.0" spreadTo="360.0" randomSpread="false" deltaZ="0"/>
     </actor>
-    <actor costume="alien" role="uk.co.nickthecoder.itchy.test.TestExplosion" x="681" y="450" direction="-59.88358179758398" heading="-59.88358179758398" startEvent="default" zOrder="8">
-      <property name="fade" value="0.7"/>
-      <property name="spinFrom" value="0.0"/>
-      <property name="projectiles" value="10"/>
-      <property name="offsetY" value="0.0"/>
-      <property name="speedForwards" value="0.2"/>
-      <property name="offsetX" value="0.0"/>
-      <property name="deltaZ" value="0"/>
-      <property name="growFactor" value="1.0"/>
-      <property name="speedSidewards" value="0.0"/>
-      <property name="randomSpread" value="false"/>
-      <property name="id" value="0"/>
-      <property name="projectilesPerTick" value="10"/>
-      <property name="spinTo" value="0.0"/>
-      <property name="distance" value="0.0"/>
-      <property name="vy" value="0.0"/>
-      <property name="offsetSidewards" value="0.0"/>
-      <property name="life" value="6.0"/>
-      <property name="vx" value="0.0"/>
-      <property name="offsetForwards" value="20.0"/>
-      <property name="spreadFrom" value="0.0"/>
-      <property name="alpha" value="255.0"/>
-      <property name="spreadTo" value="360.0"/>
-      <property name="gravity" value="0.0"/>
+    <actor costume="alien" x="681.0" y="450.0" heading="-59.88358179758398" zOrder="8" id="" direction="-59.88358179758398" colorize="" role="uk.co.nickthecoder.itchy.test.TestExplosion">
+      <role id="0" offsetForwards="20.0" offsetSidewards="0.0" offsetX="0.0" offsetY="0.0" distance="0.0" life="6.0" vx="0.0" vy="0.0" speedForwards="0.2" speedSidewards="0.0" gravity="0.0" spinFrom="0.0" spinTo="0.0" fade="0.7" growFactor="1.0" alpha="255.0" projectiles="10" projectilesPerTick="10" spreadFrom="0.0" spreadTo="360.0" randomSpread="false" deltaZ="0"/>
     </actor>
-    <actor costume="alien" role="uk.co.nickthecoder.itchy.test.TestExplosion" x="486" y="520" direction="-140.0705601860458" heading="-140.0705601860458" startEvent="default" zOrder="9">
-      <property name="fade" value="0.7"/>
-      <property name="spinFrom" value="0.0"/>
-      <property name="projectiles" value="10"/>
-      <property name="offsetY" value="0.0"/>
-      <property name="speedForwards" value="0.2"/>
-      <property name="offsetX" value="0.0"/>
-      <property name="deltaZ" value="0"/>
-      <property name="growFactor" value="1.0"/>
-      <property name="speedSidewards" value="0.0"/>
-      <property name="randomSpread" value="false"/>
-      <property name="id" value="0"/>
-      <property name="projectilesPerTick" value="10"/>
-      <property name="spinTo" value="0.0"/>
-      <property name="distance" value="0.0"/>
-      <property name="vy" value="0.0"/>
-      <property name="offsetSidewards" value="20.0"/>
-      <property name="life" value="6.0"/>
-      <property name="vx" value="0.0"/>
-      <property name="offsetForwards" value="0.0"/>
-      <property name="spreadFrom" value="0.0"/>
-      <property name="alpha" value="255.0"/>
-      <property name="spreadTo" value="360.0"/>
-      <property name="gravity" value="0.0"/>
+    <actor costume="alien" x="486.0" y="520.0" heading="-140.0705601860458" zOrder="9" id="" direction="-140.0705601860458" colorize="" role="uk.co.nickthecoder.itchy.test.TestExplosion">
+      <role id="0" offsetForwards="0.0" offsetSidewards="20.0" offsetX="0.0" offsetY="0.0" distance="0.0" life="6.0" vx="0.0" vy="0.0" speedForwards="0.2" speedSidewards="0.0" gravity="0.0" spinFrom="0.0" spinTo="0.0" fade="0.7" growFactor="1.0" alpha="255.0" projectiles="10" projectilesPerTick="10" spreadFrom="0.0" spreadTo="360.0" randomSpread="false" deltaZ="0"/>
     </actor>
-    <text text="sidewards" font="vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="383" y="530" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
-    <text text="forwards" font="vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="375" y="450" direction="0.0" heading="0.0" startEvent="default" zOrder="11"/>
-    <text text="random" font="vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="80" y="551" direction="0.0" heading="0.0" startEvent="default" zOrder="12"/>
-    <text text="even" font="vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="176" y="552" direction="0.0" heading="0.0" startEvent="default" zOrder="13"/>
-    <actor costume="alien" role="uk.co.nickthecoder.itchy.test.TestExplosion" x="46" y="316" direction="0.0" heading="0.0" startEvent="default" zOrder="14">
-      <property name="fade" value="0.7"/>
-      <property name="spinFrom" value="0.0"/>
-      <property name="projectiles" value="10"/>
-      <property name="offsetY" value="0.0"/>
-      <property name="speedForwards" value="1.0"/>
-      <property name="offsetX" value="0.0"/>
-      <property name="deltaZ" value="0"/>
-      <property name="growFactor" value="1.0"/>
-      <property name="speedSidewards" value="0.0"/>
-      <property name="randomSpread" value="false"/>
-      <property name="id" value="0"/>
-      <property name="projectilesPerTick" value="-1"/>
-      <property name="spinTo" value="0.0"/>
-      <property name="distance" value="0.0"/>
-      <property name="vy" value="0.0"/>
-      <property name="offsetSidewards" value="0.0"/>
-      <property name="life" value="6.0"/>
-      <property name="vx" value="0.0"/>
-      <property name="offsetForwards" value="20.0"/>
-      <property name="spreadFrom" value="-30.0"/>
-      <property name="alpha" value="255.0"/>
-      <property name="spreadTo" value="30.0"/>
-      <property name="gravity" value="0.0"/>
+    <text x="383.0" y="530.0" zOrder="10" id="" font="vera" fontSize="22.0" text="sidewards" color="#ffffffff" colorize=""/>
+    <text x="375.0" y="450.0" zOrder="11" id="" font="vera" fontSize="22.0" text="forwards" color="#ffffffff" colorize=""/>
+    <text x="80.0" y="551.0" zOrder="12" id="" font="vera" fontSize="22.0" text="random" color="#ffffffff" colorize=""/>
+    <text x="176.0" y="552.0" zOrder="13" id="" font="vera" fontSize="22.0" text="even" color="#ffffffff" colorize=""/>
+    <actor costume="alien" x="46.0" y="316.0" zOrder="14" id="" colorize="" role="uk.co.nickthecoder.itchy.test.TestExplosion">
+      <role id="0" offsetForwards="20.0" offsetSidewards="0.0" offsetX="0.0" offsetY="0.0" distance="0.0" life="6.0" vx="0.0" vy="0.0" speedForwards="1.0" speedSidewards="0.0" gravity="0.0" spinFrom="0.0" spinTo="0.0" fade="0.7" growFactor="1.0" alpha="255.0" projectiles="10" projectilesPerTick="-1" spreadFrom="-30.0" spreadTo="30.0" randomSpread="false" deltaZ="0"/>
     </actor>
-    <actor costume="alien" role="uk.co.nickthecoder.itchy.test.TestExplosion" x="42" y="199" direction="28.072486935852954" heading="28.072486935852954" startEvent="default" zOrder="15">
-      <property name="fade" value="0.7"/>
-      <property name="spinFrom" value="0.0"/>
-      <property name="projectiles" value="10"/>
-      <property name="offsetY" value="0.0"/>
-      <property name="speedForwards" value="2.0"/>
-      <property name="offsetX" value="0.0"/>
-      <property name="deltaZ" value="0"/>
-      <property name="growFactor" value="1.0"/>
-      <property name="speedSidewards" value="0.0"/>
-      <property name="randomSpread" value="false"/>
-      <property name="id" value="0"/>
-      <property name="projectilesPerTick" value="-1"/>
-      <property name="spinTo" value="0.0"/>
-      <property name="distance" value="0.0"/>
-      <property name="vy" value="0.0"/>
-      <property name="offsetSidewards" value="0.0"/>
-      <property name="life" value="6.0"/>
-      <property name="vx" value="0.0"/>
-      <property name="offsetForwards" value="20.0"/>
-      <property name="spreadFrom" value="0.0"/>
-      <property name="alpha" value="255.0"/>
-      <property name="spreadTo" value="60.0"/>
-      <property name="gravity" value="-0.02"/>
+    <actor costume="alien" x="42.0" y="199.0" heading="28.072486935852954" zOrder="15" id="" direction="28.072486935852954" colorize="" role="uk.co.nickthecoder.itchy.test.TestExplosion">
+      <role id="0" offsetForwards="20.0" offsetSidewards="0.0" offsetX="0.0" offsetY="0.0" distance="0.0" life="6.0" vx="0.0" vy="0.0" speedForwards="2.0" speedSidewards="0.0" gravity="-0.02" spinFrom="0.0" spinTo="0.0" fade="0.7" growFactor="1.0" alpha="255.0" projectiles="10" projectilesPerTick="-1" spreadFrom="0.0" spreadTo="60.0" randomSpread="false" deltaZ="0"/>
     </actor>
-    <actor costume="alien" role="uk.co.nickthecoder.itchy.test.TestExplosion" x="54" y="262" direction="0.0" heading="0.0" startEvent="default" zOrder="16">
-      <property name="fade" value="0.7"/>
-      <property name="spinFrom" value="0.0"/>
-      <property name="projectiles" value="10"/>
-      <property name="offsetY" value="0.0"/>
-      <property name="speedForwards" value="1.0"/>
-      <property name="offsetX" value="0.0"/>
-      <property name="deltaZ" value="0"/>
-      <property name="growFactor" value="1.0"/>
-      <property name="speedSidewards" value="0.0"/>
-      <property name="randomSpread" value="false"/>
-      <property name="id" value="0"/>
-      <property name="projectilesPerTick" value="-1"/>
-      <property name="spinTo" value="0.0"/>
-      <property name="distance" value="0.0"/>
-      <property name="vy" value="0.0"/>
-      <property name="offsetSidewards" value="0.0"/>
-      <property name="life" value="6.0"/>
-      <property name="vx" value="0.0"/>
-      <property name="offsetForwards" value="20.0"/>
-      <property name="spreadFrom" value="-30.0"/>
-      <property name="alpha" value="255.0"/>
-      <property name="spreadTo" value="30.0"/>
-      <property name="gravity" value="0.0"/>
+    <actor costume="alien" x="54.0" y="262.0" zOrder="16" id="" colorize="" role="uk.co.nickthecoder.itchy.test.TestExplosion">
+      <role id="0" offsetForwards="20.0" offsetSidewards="0.0" offsetX="0.0" offsetY="0.0" distance="0.0" life="6.0" vx="0.0" vy="0.0" speedForwards="1.0" speedSidewards="0.0" gravity="0.0" spinFrom="0.0" spinTo="0.0" fade="0.7" growFactor="1.0" alpha="255.0" projectiles="10" projectilesPerTick="-1" spreadFrom="-30.0" spreadTo="30.0" randomSpread="false" deltaZ="0"/>
     </actor>
-    <actor costume="alien" role="uk.co.nickthecoder.itchy.test.TestExplosion" x="386" y="354" direction="-87.39743779750019" heading="-87.39743779750019" startEvent="default" zOrder="17">
-      <property name="fade" value="2.0"/>
-      <property name="spinFrom" value="0.0"/>
-      <property name="projectiles" value="990"/>
-      <property name="offsetY" value="-4.0"/>
-      <property name="speedForwards" value="1.0"/>
-      <property name="offsetX" value="0.0"/>
-      <property name="deltaZ" value="0"/>
-      <property name="growFactor" value="1.0"/>
-      <property name="speedSidewards" value="0.0"/>
-      <property name="randomSpread" value="false"/>
-      <property name="id" value="0"/>
-      <property name="projectilesPerTick" value="3"/>
-      <property name="spinTo" value="0.0"/>
-      <property name="distance" value="16.0"/>
-      <property name="vy" value="2.0"/>
-      <property name="offsetSidewards" value="0.0"/>
-      <property name="life" value="6.0"/>
-      <property name="vx" value="0.0"/>
-      <property name="offsetForwards" value="0.0"/>
-      <property name="spreadFrom" value="0.0"/>
-      <property name="alpha" value="255.0"/>
-      <property name="spreadTo" value="30000.0"/>
-      <property name="gravity" value="-0.02"/>
+    <actor costume="alien" x="386.0" y="354.0" heading="-87.39743779750019" zOrder="17" id="" direction="-87.39743779750019" colorize="" role="uk.co.nickthecoder.itchy.test.TestExplosion">
+      <role id="0" offsetForwards="0.0" offsetSidewards="0.0" offsetX="0.0" offsetY="-4.0" distance="16.0" life="6.0" vx="0.0" vy="2.0" speedForwards="1.0" speedSidewards="0.0" gravity="-0.02" spinFrom="0.0" spinTo="0.0" fade="2.0" growFactor="1.0" alpha="255.0" projectiles="990" projectilesPerTick="3" spreadFrom="0.0" spreadTo="30000.0" randomSpread="false" deltaZ="0"/>
     </actor>
-    <actor costume="alien" role="uk.co.nickthecoder.itchy.test.TestExplosion" x="564" y="353" direction="-87.39743779750019" heading="-87.39743779750019" startEvent="default" zOrder="18">
-      <property name="fade" value="2.0"/>
-      <property name="spinFrom" value="0.0"/>
-      <property name="projectiles" value="600"/>
-      <property name="offsetY" value="0.0"/>
-      <property name="speedForwards" value="1.0"/>
-      <property name="offsetX" value="10.0"/>
-      <property name="deltaZ" value="-1"/>
-      <property name="growFactor" value="1.0"/>
-      <property name="speedSidewards" value="0.0"/>
-      <property name="randomSpread" value="true"/>
-      <property name="id" value="0"/>
-      <property name="projectilesPerTick" value="2"/>
-      <property name="spinTo" value="0.0"/>
-      <property name="distance" value="0.0"/>
-      <property name="vy" value="1.0"/>
-      <property name="offsetSidewards" value="0.0"/>
-      <property name="life" value="6.0"/>
-      <property name="vx" value="3.0"/>
-      <property name="offsetForwards" value="0.0"/>
-      <property name="spreadFrom" value="0.0"/>
-      <property name="alpha" value="255.0"/>
-      <property name="spreadTo" value="30000.0"/>
-      <property name="gravity" value="-0.02"/>
+    <actor costume="alien" x="564.0" y="353.0" heading="-87.39743779750019" zOrder="18" id="" direction="-87.39743779750019" colorize="" role="uk.co.nickthecoder.itchy.test.TestExplosion">
+      <role id="0" offsetForwards="0.0" offsetSidewards="0.0" offsetX="10.0" offsetY="0.0" distance="0.0" life="6.0" vx="3.0" vy="1.0" speedForwards="1.0" speedSidewards="0.0" gravity="-0.02" spinFrom="0.0" spinTo="0.0" fade="2.0" growFactor="1.0" alpha="255.0" projectiles="600" projectilesPerTick="2" spreadFrom="0.0" spreadTo="30000.0" randomSpread="true" deltaZ="-1"/>
     </actor>
-    <actor costume="alien" role="uk.co.nickthecoder.itchy.test.TestExplosion" x="308" y="354" direction="-90.0" heading="-90.0" startEvent="default" zOrder="19">
-      <property name="fade" value="1.0"/>
-      <property name="spinFrom" value="0.0"/>
-      <property name="projectiles" value="10"/>
-      <property name="offsetY" value="0.0"/>
-      <property name="speedForwards" value="1.0"/>
-      <property name="offsetX" value="0.0"/>
-      <property name="deltaZ" value="0"/>
-      <property name="growFactor" value="1.0"/>
-      <property name="speedSidewards" value="0.0"/>
-      <property name="randomSpread" value="false"/>
-      <property name="id" value="0"/>
-      <property name="projectilesPerTick" value="-1"/>
-      <property name="spinTo" value="0.0"/>
-      <property name="distance" value="0.0"/>
-      <property name="vy" value="1.0"/>
-      <property name="offsetSidewards" value="0.0"/>
-      <property name="life" value="6.0"/>
-      <property name="vx" value="-3.0"/>
-      <property name="offsetForwards" value="0.0"/>
-      <property name="spreadFrom" value="0.0"/>
-      <property name="alpha" value="255.0"/>
-      <property name="spreadTo" value="360.0"/>
-      <property name="gravity" value="0.0"/>
+    <actor costume="alien" x="308.0" y="354.0" heading="-90.0" zOrder="19" id="" direction="-90.0" colorize="" role="uk.co.nickthecoder.itchy.test.TestExplosion">
+      <role id="0" offsetForwards="0.0" offsetSidewards="0.0" offsetX="0.0" offsetY="0.0" distance="0.0" life="6.0" vx="-3.0" vy="1.0" speedForwards="1.0" speedSidewards="0.0" gravity="0.0" spinFrom="0.0" spinTo="0.0" fade="1.0" growFactor="1.0" alpha="255.0" projectiles="10" projectilesPerTick="-1" spreadFrom="0.0" spreadTo="360.0" randomSpread="false" deltaZ="0"/>
     </actor>
-    <actor costume="alien" role="uk.co.nickthecoder.itchy.test.TestExplosion" x="76" y="428" direction="-90.0" heading="-90.0" startEvent="default" zOrder="20">
-      <property name="fade" value="0.7"/>
-      <property name="spinFrom" value="-3.0"/>
-      <property name="projectiles" value="10"/>
-      <property name="offsetY" value="0.0"/>
-      <property name="speedForwards" value="0.2"/>
-      <property name="offsetX" value="0.0"/>
-      <property name="deltaZ" value="0"/>
-      <property name="growFactor" value="1.0"/>
-      <property name="speedSidewards" value="0.0"/>
-      <property name="randomSpread" value="false"/>
-      <property name="id" value="0"/>
-      <property name="projectilesPerTick" value="10"/>
-      <property name="spinTo" value="3.0"/>
-      <property name="distance" value="0.0"/>
-      <property name="vy" value="0.0"/>
-      <property name="offsetSidewards" value="0.0"/>
-      <property name="life" value="6.0"/>
-      <property name="vx" value="0.0"/>
-      <property name="offsetForwards" value="0.0"/>
-      <property name="spreadFrom" value="0.0"/>
-      <property name="alpha" value="255.0"/>
-      <property name="spreadTo" value="360.0"/>
-      <property name="gravity" value="0.0"/>
+    <actor costume="alien" x="76.0" y="428.0" heading="-90.0" zOrder="20" id="" direction="-90.0" colorize="" role="uk.co.nickthecoder.itchy.test.TestExplosion">
+      <role id="0" offsetForwards="0.0" offsetSidewards="0.0" offsetX="0.0" offsetY="0.0" distance="0.0" life="6.0" vx="0.0" vy="0.0" speedForwards="0.2" speedSidewards="0.0" gravity="0.0" spinFrom="-3.0" spinTo="3.0" fade="0.7" growFactor="1.0" alpha="255.0" projectiles="10" projectilesPerTick="10" spreadFrom="0.0" spreadTo="360.0" randomSpread="false" deltaZ="0"/>
     </actor>
-    <actor costume="alien" role="uk.co.nickthecoder.itchy.test.TestExplosion" x="174" y="427" direction="-90.0" heading="-90.0" startEvent="default" zOrder="21">
-      <property name="fade" value="0.7"/>
-      <property name="spinFrom" value="3.0"/>
-      <property name="projectiles" value="10"/>
-      <property name="offsetY" value="0.0"/>
-      <property name="speedForwards" value="0.2"/>
-      <property name="offsetX" value="0.0"/>
-      <property name="deltaZ" value="0"/>
-      <property name="growFactor" value="1.0"/>
-      <property name="speedSidewards" value="0.0"/>
-      <property name="randomSpread" value="false"/>
-      <property name="id" value="0"/>
-      <property name="projectilesPerTick" value="10"/>
-      <property name="spinTo" value="3.0"/>
-      <property name="distance" value="0.0"/>
-      <property name="vy" value="0.0"/>
-      <property name="offsetSidewards" value="0.0"/>
-      <property name="life" value="6.0"/>
-      <property name="vx" value="0.0"/>
-      <property name="offsetForwards" value="0.0"/>
-      <property name="spreadFrom" value="0.0"/>
-      <property name="alpha" value="255.0"/>
-      <property name="spreadTo" value="360.0"/>
-      <property name="gravity" value="0.0"/>
+    <actor costume="alien" x="174.0" y="427.0" heading="-90.0" zOrder="21" id="" direction="-90.0" colorize="" role="uk.co.nickthecoder.itchy.test.TestExplosion">
+      <role id="0" offsetForwards="0.0" offsetSidewards="0.0" offsetX="0.0" offsetY="0.0" distance="0.0" life="6.0" vx="0.0" vy="0.0" speedForwards="0.2" speedSidewards="0.0" gravity="0.0" spinFrom="3.0" spinTo="3.0" fade="0.7" growFactor="1.0" alpha="255.0" projectiles="10" projectilesPerTick="10" spreadFrom="0.0" spreadTo="360.0" randomSpread="false" deltaZ="0"/>
     </actor>
-    <actor costume="alien" role="uk.co.nickthecoder.itchy.test.TestExplosion" x="669" y="266" direction="-90.0" heading="-90.0" startEvent="default" zOrder="22">
-      <property name="fade" value="0.7"/>
-      <property name="spinFrom" value="0.0"/>
-      <property name="projectiles" value="10"/>
-      <property name="offsetY" value="0.0"/>
-      <property name="speedForwards" value="0.2"/>
-      <property name="offsetX" value="0.0"/>
-      <property name="deltaZ" value="0"/>
-      <property name="growFactor" value="1.0"/>
-      <property name="speedSidewards" value="0.0"/>
-      <property name="randomSpread" value="false"/>
-      <property name="id" value="0"/>
-      <property name="projectilesPerTick" value="10"/>
-      <property name="spinTo" value="0.0"/>
-      <property name="distance" value="20.0"/>
-      <property name="vy" value="0.0"/>
-      <property name="offsetSidewards" value="0.0"/>
-      <property name="life" value="6.0"/>
-      <property name="vx" value="0.0"/>
-      <property name="offsetForwards" value="0.0"/>
-      <property name="spreadFrom" value="0.0"/>
-      <property name="alpha" value="255.0"/>
-      <property name="spreadTo" value="360.0"/>
-      <property name="gravity" value="0.0"/>
+    <actor costume="alien" x="669.0" y="266.0" heading="-90.0" zOrder="22" id="" direction="-90.0" colorize="" role="uk.co.nickthecoder.itchy.test.TestExplosion">
+      <role id="0" offsetForwards="0.0" offsetSidewards="0.0" offsetX="0.0" offsetY="0.0" distance="20.0" life="6.0" vx="0.0" vy="0.0" speedForwards="0.2" speedSidewards="0.0" gravity="0.0" spinFrom="0.0" spinTo="0.0" fade="0.7" growFactor="1.0" alpha="255.0" projectiles="10" projectilesPerTick="10" spreadFrom="0.0" spreadTo="360.0" randomSpread="false" deltaZ="0"/>
     </actor>
   </layer>
 </scene>

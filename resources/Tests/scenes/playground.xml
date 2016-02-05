@@ -1,15 +1,15 @@
-<scene showMouse="true" role="uk.co.nickthecoder.itchy.PlainSceneDirector" background="#000000ff">
-  <properties/>
+<scene name="playground" layout="default" sceneDirector="uk.co.nickthecoder.itchy.PlainSceneDirector" showMouse="true">
+  <layer name="background"/>
   <layer name="main">
-    <text text="Menu" font="vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.SceneButton" x="44" y="582" direction="0.0" heading="0.0" startEvent="default" zOrder="3">
-      <property name="sceneName" value="menu"/>
+    <text x="44.0" y="582.0" zOrder="3" id="" font="vera" fontSize="22.0" text="Menu" color="#ffffffff" colorize="" role="uk.co.nickthecoder.itchy.role.SceneButton">
+      <role sceneName="menu"/>
     </text>
-    <text text="Go!" font="vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.SceneButton" x="114" y="581" direction="0.0" heading="0.0" startEvent="default" zOrder="4">
-      <property name="sceneName" value="playground"/>
+    <text x="114.0" y="581.0" zOrder="4" id="" font="vera" fontSize="22.0" text="Go!" color="#ffffffff" colorize="" role="uk.co.nickthecoder.itchy.role.SceneButton">
+      <role sceneName="playground"/>
     </text>
-    <text text="plain" font="vera" size="49" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="201" y="491" direction="0.20536033749487598" heading="0.20536033749487598" startEvent="default" zOrder="5"/>
-    <text text="rotated" font="vera" size="49" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="367" y="494" direction="-20.586431538692526" heading="-20.586431538692526" startEvent="default" zOrder="6"/>
-    <actor costume="alien1a" x="552" y="484" direction="-90.0" heading="-90.0" startEvent="default" zOrder="7" scale="2.6315789473684212"/>
-    <actor costume="alien3b" x="182" y="372" direction="-119.47588900324575" heading="-119.47588900324575" startEvent="default" zOrder="8" scale="2.5714285714285716"/>
+    <text x="201.0" y="491.0" heading="0.20536033749487598" zOrder="5" id="" font="vera" fontSize="49.0" text="plain" color="#ffffffff" direction="0.20536033749487598" colorize=""/>
+    <text x="367.0" y="494.0" heading="-20.586431538692526" zOrder="6" id="" font="vera" fontSize="49.0" text="rotated" color="#ffffffff" direction="-20.586431538692526" colorize=""/>
+    <actor costume="alien1a" x="552.0" y="484.0" heading="-90.0" zOrder="7" id="" scale="2.6315789473684212" direction="-90.0" colorize=""/>
+    <actor costume="alien3b" x="182.0" y="372.0" heading="-119.47588900324575" zOrder="8" id="" scale="2.5714285714285716" direction="-119.47588900324575" colorize=""/>
   </layer>
 </scene>
