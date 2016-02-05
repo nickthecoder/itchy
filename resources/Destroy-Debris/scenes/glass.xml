@@ -1,17 +1,8 @@
-<scene showMouse="false" layout="glass" role="uk.co.nickthecoder.itchy.PlainSceneDirector" background="#00000000">
-  <properties/>
+<scene name="glass" layout="glass" sceneDirector="uk.co.nickthecoder.itchy.PlainSceneDirector">
   <layer name="glass">
-    <text text="000000" font="BlackCasper" size="49" color="#7e83ff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.NumberValue" x="722" y="551" direction="0.0" heading="0.0" startEvent="default" zOrder="100" alpha="133.0">
-      <property name="nullValue" value="??"/>
-      <property name="errorValue" value="?"/>
-      <property name="quiet" value="false"/>
-      <property name="updateInterval" value="0.0"/>
-      <property name="access" value="director.score"/>
-      <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
-        <property name="dx" value="1"/>
-        <property name="color" value="#ffffffff"/>
-        <property name="dy" value="2"/>
-      </makeup>
+    <text x="722.0" y="551.0" zOrder="100" id="" font="BlackCasper" fontSize="49.0" text="000000" color="#7e83ffff" alpha="133.0" colorize="" role="uk.co.nickthecoder.itchy.role.NumberValue" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+      <role access="director.score" errorValue="?" nullValue="??" updateInterval="0.0" quiet="false" formatPattern="0"/>
+      <makeup dx="1" dy="2" color="#ffffffff"/>
     </text>
   </layer>
 </scene>

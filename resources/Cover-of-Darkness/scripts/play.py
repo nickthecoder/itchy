@@ -23,7 +23,7 @@ class Play(PlainSceneDirector) :
         
     def loading(self, scene) :
         print "Loading glass"
-        game.mergeScene( scene, "glass")
+        game.mergeScene( "glass")
 
 
     def tick(self) :

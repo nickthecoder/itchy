@@ -38,7 +38,7 @@ class Play(PlainSceneDirector) :
 
     def loading( self, scene ) :
         print "Loading gui scene"
-        game.mergeScene(scene, "gui")
+        game.mergeScene("gui")
 
     def onActivate(self) :
         width = game.getWidth()

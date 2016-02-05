@@ -1,30 +1,17 @@
-<scene showMouse="false" role="play.py" background="#00000000">
-  <properties>
-    <property name="nextScene" value="intro-3"/>
-  </properties>
+<scene name="intro-2" layout="default" sceneDirector="play.py">
+  <sceneDirector nextScene="intro-3"/>
   <layer name="main">
-    <actor costume="stars2" x="400" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="0"/>
-    <actor costume="ship1" x="387" y="303" direction="90.0" heading="90.0" startEvent="default" zOrder="10"/>
-    <actor costume="python-a" x="154" y="454" direction="0.0" heading="0.0" startEvent="default" zOrder="11">
-      <property name="vy" value="0.3"/>
-      <property name="vx" value="1.0"/>
-      <property name="strength" value="1.0"/>
-      <property name="rotationSpeed" value="-0.5"/>
-    </actor>
-    <actor costume="python-a" x="490" y="180" direction="0.0" heading="0.0" startEvent="default" zOrder="12">
-      <property name="vy" value="-0.3"/>
-      <property name="vx" value="-0.8"/>
-      <property name="strength" value="1.0"/>
-      <property name="rotationSpeed" value="0.5"/>
-    </actor>
-  </layer>
-  <layer name="hud">
-    <text text="This game is written in Python - shoot the logos!" font="Vera" size="26" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="392" y="26" direction="0.0" heading="0.0" startEvent="default" zOrder="0">
-      <makeup classname="uk.co.nickthecoder.itchy.makeup.Textured">
-        <property name="poseName" value="texture1"/>
-        <property name="y" value="0"/>
-        <property name="x" value="0"/>
-      </makeup>
+    <actor costume="stars2" x="400.0" y="300.0" id="" colorize=""/>
+    <text x="392.0" y="26.0" id="" font="Vera" fontSize="26.0" text="This game is written in Python - shoot the logos!" color="#ffffffff" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Textured">
+      <makeup/>
     </text>
+    <actor costume="ship1" x="387.0" y="303.0" heading="90.0" zOrder="10" id="" direction="90.0" colorize="" role="ship.py"/>
+    <actor costume="python-a" x="154.0" y="454.0" zOrder="11" id="" colorize="" role="rock.py">
+      <role strength="1.0" rotationSpeed="-0.5" vx="1.0" vy="0.3"/>
+    </actor>
+    <actor costume="python-a" x="490.0" y="180.0" zOrder="12" id="" colorize="" role="rock.py">
+      <role strength="1.0" rotationSpeed="0.5" vx="-0.8" vy="-0.3"/>
+    </actor>
   </layer>
+  <layer name="foreground"/>
 </scene>

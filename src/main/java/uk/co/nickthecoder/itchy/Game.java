@@ -779,6 +779,7 @@ public class Game
                 return;
             }
         }
+        
         this.glassStage.tick();
     }
 
@@ -798,14 +799,16 @@ public class Game
 
     public Layout layout;
     
-    public boolean mergeScene( Scene original, String additionalSceneName )
+    public boolean mergeScene( String additionalSceneName )
     {
         Scene scene = this.loadScene(additionalSceneName);
         if (scene == null) {
             return false;
         }
+        // Prevent a concurrent modification exception by aborting the ticks after the current stage as ticked.
+        this.abortTicks = true;
         
-        original.layout.merge(scene.layout);
+        this.layout.merge(scene.layout);
         return true;
     }
     

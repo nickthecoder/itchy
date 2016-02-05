@@ -142,8 +142,7 @@ class Ship(Moving) :
                 game.startScene(game.getSceneName())
             else :
                 game.getDirector().showFancyMouse()
-                game.loadScene("gameOver", True)
-
+                game.mergeScene("gameOver")
 
     def fire(self) :
         actor = self.actor.createCompanion(self.bulletName)

@@ -1,42 +1,23 @@
-<scene showMouse="false" role="play.py" background="#00000000">
-  <properties>
-    <property name="nextScene" value="menu"/>
-  </properties>
+<scene name="intro-6" layout="default" sceneDirector="play.py">
+  <sceneDirector nextScene="menu"/>
   <layer name="main">
-    <actor costume="stars2" x="400" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="0"/>
-    <actor costume="ship2" x="452" y="184" direction="90.0" heading="90.0" startEvent="default" zOrder="13"/>
-    <actor costume="scala-a" x="630" y="496" direction="0.0" heading="0.0" startEvent="default" zOrder="15">
-      <property name="vy" value="0.05"/>
-      <property name="vx" value="-2.0"/>
-      <property name="strength" value="1.0"/>
-      <property name="rotationSpeed" value="-1.5"/>
-    </actor>
-    <actor costume="java-0" x="131" y="486" direction="0.0" heading="0.0" startEvent="default" zOrder="16">
-      <property name="vy" value="0.8"/>
-      <property name="vx" value="0.3"/>
-      <property name="strength" value="1.0"/>
-      <property name="rotationSpeed" value="0.2"/>
-    </actor>
-    <actor costume="duke-0" x="126" y="183" direction="0.0" heading="0.0" startEvent="default" zOrder="17">
-      <property name="vy" value="0.8"/>
-      <property name="vx" value="0.1"/>
-      <property name="strength" value="1.0"/>
-      <property name="rotationSpeed" value="-1.0"/>
-    </actor>
-    <actor costume="python-a" x="267" y="342" direction="0.0" heading="0.0" startEvent="default" zOrder="18">
-      <property name="vy" value="0.3"/>
-      <property name="vx" value="1.0"/>
-      <property name="strength" value="1.0"/>
-      <property name="rotationSpeed" value="1.0"/>
-    </actor>
-  </layer>
-  <layer name="hud">
-    <text text="You've completed the introduction..." font="Vera" size="26" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="392" y="19" direction="0.0" heading="0.0" startEvent="default" zOrder="3">
-      <makeup classname="uk.co.nickthecoder.itchy.makeup.Textured">
-        <property name="poseName" value="texture1"/>
-        <property name="y" value="0"/>
-        <property name="x" value="0"/>
-      </makeup>
+    <actor costume="stars2" x="400.0" y="300.0" id="" colorize=""/>
+    <text x="392.0" y="19.0" zOrder="3" id="" font="Vera" fontSize="26.0" text="You've completed the introduction..." color="#ffffffff" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Textured">
+      <makeup/>
     </text>
+    <actor costume="ship2" x="452.0" y="184.0" heading="90.0" zOrder="13" id="" direction="90.0" colorize="" role="ship.py"/>
+    <actor costume="scala-a" x="630.0" y="496.0" zOrder="15" id="" colorize="" role="rock.py">
+      <role strength="1.0" rotationSpeed="-1.5" vx="-2.0" vy="0.05"/>
+    </actor>
+    <actor costume="java-0" x="131.0" y="486.0" zOrder="16" id="" colorize="" role="rock.py">
+      <role strength="1.0" rotationSpeed="0.2" vx="0.3" vy="0.8"/>
+    </actor>
+    <actor costume="duke-0" x="126.0" y="183.0" zOrder="17" id="" colorize="" role="rock.py">
+      <role strength="1.0" rotationSpeed="-1.0" vx="0.1" vy="0.8"/>
+    </actor>
+    <actor costume="python-a" x="267.0" y="342.0" zOrder="18" id="" colorize="" role="rock.py">
+      <role strength="1.0" rotationSpeed="1.0" vx="1.0" vy="0.3"/>
+    </actor>
   </layer>
+  <layer name="foreground"/>
 </scene>

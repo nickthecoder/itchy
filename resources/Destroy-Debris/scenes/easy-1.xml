@@ -1,21 +1,14 @@
-<scene showMouse="false" role="play.py" background="#00000000">
-  <properties>
-    <property name="nextScene" value="easy-2"/>
-  </properties>
+<scene name="easy-1" layout="default" sceneDirector="play.py">
+  <sceneDirector nextScene="easy-2"/>
   <layer name="main">
-    <actor costume="stars2" x="400" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="0"/>
-    <actor costume="python-a" x="603" y="440" direction="0.0" heading="0.0" startEvent="default" zOrder="0">
-      <property name="vy" value="0.8"/>
-      <property name="vx" value="0.5"/>
-      <property name="strength" value="1.0"/>
-      <property name="rotationSpeed" value="0.0"/>
+    <actor costume="stars2" x="400.0" y="300.0" id="" colorize=""/>
+    <actor costume="python-a" x="603.0" y="440.0" id="" colorize="" role="rock.py">
+      <role strength="1.0" rotationSpeed="0.0" vx="0.5" vy="0.8"/>
     </actor>
-    <actor costume="kotlin-a" x="165" y="404" direction="0.0" heading="0.0" startEvent="default" zOrder="0">
-      <property name="vy" value="0.0"/>
-      <property name="vx" value="1.0"/>
-      <property name="strength" value="1.0"/>
-      <property name="rotationSpeed" value="-2.0"/>
+    <actor costume="kotlin-a" x="165.0" y="404.0" id="" colorize="" role="rock.py">
+      <role strength="1.0" rotationSpeed="-2.0" vx="1.0" vy="0.0"/>
     </actor>
-    <actor costume="ship1" x="387" y="303" direction="90.0" heading="90.0" startEvent="default" zOrder="10"/>
+    <actor costume="ship1" x="387.0" y="303.0" heading="90.0" zOrder="10" id="" direction="90.0" colorize="" role="ship.py"/>
   </layer>
+  <layer name="foreground"/>
 </scene>

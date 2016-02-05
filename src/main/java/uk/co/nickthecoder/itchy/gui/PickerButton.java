@@ -12,7 +12,7 @@ import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 
 public class PickerButton<T> extends GuiButton
 {
-    protected final Map<String, T> map;
+    protected Map<String, T> map;
 
     protected final Label label;
 

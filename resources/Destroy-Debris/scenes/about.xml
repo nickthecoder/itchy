@@ -1,63 +1,38 @@
-<scene showMouse="false" role="menu.py" background="#000000ff">
-  <properties/>
+<scene name="about" layout="default" sceneDirector="menu.py">
   <layer name="main">
-    <actor costume="stars1" x="400" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="0" alpha="128.0"/>
+    <actor costume="stars1" x="400.0" y="300.0" id="" alpha="128.0" colorize=""/>
   </layer>
   <layer name="foreground">
-    <text text="Back" font="BlackCasper" size="77" color="#5263ff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.SceneButton" costume="button" x="411" y="75" direction="0.0" heading="0.0" startEvent="fadeIn" zOrder="3" alpha="198.0" activationDelay="0.3">
-      <property name="sceneName" value="menu"/>
-      <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
-        <property name="dx" value="1"/>
-        <property name="dy" value="1"/>
-        <property name="color" value="#ffffffff"/>
-      </makeup>
+    <text costume="button" x="411.0" y="75.0" startEvent="fadeIn" activationDelay="0.3" zOrder="3" id="" font="BlackCasper" fontSize="77.0" text="Back" color="#5263ffff" alpha="198.0" colorize="" role="uk.co.nickthecoder.itchy.role.SceneButton" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+      <role sceneName="menu"/>
+      <makeup dx="1" dy="1" color="#ffffffff"/>
     </text>
-    <text text="Itchy Powered" font="Boycott" size="31" color="#ffffff" xAlignment="0.1" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.LinkButton" costume="link" x="29" y="38" direction="90.0" heading="0.0" startEvent="default" zOrder="4">
-      <property name="url" value="http://nickthecoder.co.uk/software/view/Itchy"/>
+    <text costume="link" x="29.0" y="38.0" zOrder="4" id="" font="Boycott" fontSize="31.0" text="Itchy Powered" color="#ffffffff" xAlignment="0.1" direction="90.0" colorize="" role="uk.co.nickthecoder.itchy.role.LinkButton">
+      <role url="http://nickthecoder.co.uk/software/view/Itchy"/>
     </text>
-    <text text="By Nick Robinson" font="BlackCasper" size="40" color="#0044ff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.LinkButton" costume="link" x="415" y="442" direction="0.0" heading="0.0" startEvent="default" zOrder="5" alpha="128.0">
-      <property name="url" value="http://nickthecoder.co.uk/"/>
-      <makeup classname="uk.co.nickthecoder.itchy.makeup.Textured">
-        <property name="pose" value="texture1"/>
-        <property name="y" value="0"/>
-        <property name="x" value="0"/>
-      </makeup>
+    <text costume="link" x="415.0" y="442.0" zOrder="5" id="" font="BlackCasper" fontSize="40.0" text="By Nick Robinson" color="#0044ffff" alpha="128.0" colorize="" role="uk.co.nickthecoder.itchy.role.LinkButton" makeup="uk.co.nickthecoder.itchy.makeup.Textured">
+      <role url="http://nickthecoder.co.uk/"/>
+      <makeup pose="texture1"/>
     </text>
-    <text text="Destroy Debris" font="BlackCasper" size="100" color="#0044ff" xAlignment="0.5" yAlignment="0.3" role="uk.co.nickthecoder.itchy.role.LinkButton" costume="link" x="425" y="539" direction="0.0" heading="0.0" startEvent="default" zOrder="6" alpha="128.0">
-      <property name="url" value="http://nickthecoder.co.uk/software/view/Torus%20World"/>
-      <makeup classname="uk.co.nickthecoder.itchy.makeup.Textured">
-        <property name="pose" value="texture1"/>
-        <property name="y" value="0"/>
-        <property name="x" value="0"/>
-      </makeup>
+    <text costume="link" x="425.0" y="539.0" zOrder="6" id="" font="BlackCasper" fontSize="100.0" text="Destroy Debris" color="#0044ffff" yAlignment="0.3" alpha="128.0" colorize="" role="uk.co.nickthecoder.itchy.role.LinkButton" makeup="uk.co.nickthecoder.itchy.makeup.Textured">
+      <role url="http://nickthecoder.co.uk/software/view/Torus%20World"/>
+      <makeup pose="texture1"/>
     </text>
-    <text text="Did you know..." font="VeraBold" size="22" color="#ffffff" xAlignment="0.0" yAlignment="0.5" x="76" y="390" direction="0.0" heading="0.0" startEvent="default" zOrder="7"/>
-    <text text="The asteroid belt is" font="Vera" size="22" color="#ffffff" xAlignment="0.0" yAlignment="0.5" costume="title" x="126" y="342" direction="0.0" heading="0.0" startEvent="slideInRight" zOrder="8"/>
-    <text text="Mostly Empty" font="VeraBold" size="22" color="#3344cc" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.LinkButton" costume="link" x="424" y="342" direction="0.0" heading="0.0" startEvent="slideInLeft" zOrder="9">
-      <property name="url" value="http://en.wikipedia.org/wiki/Asteroid_belt#Characteristics"/>
-      <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
-        <property name="dx" value="1"/>
-        <property name="dy" value="1"/>
-        <property name="color" value="#8888ffff"/>
-      </makeup>
+    <text x="76.0" y="390.0" zOrder="7" id="" font="VeraBold" fontSize="22.0" text="Did you know..." color="#ffffffff" xAlignment="0.0" colorize=""/>
+    <text costume="title" x="126.0" y="342.0" startEvent="slideInRight" zOrder="8" id="" font="Vera" fontSize="22.0" text="The asteroid belt is" color="#ffffffff" xAlignment="0.0" colorize=""/>
+    <text costume="link" x="424.0" y="342.0" startEvent="slideInLeft" zOrder="9" id="" font="VeraBold" fontSize="22.0" text="Mostly Empty" color="#3344ccff" colorize="" role="uk.co.nickthecoder.itchy.role.LinkButton" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+      <role url="http://en.wikipedia.org/wiki/Asteroid_belt#Characteristics"/>
+      <makeup dx="1" dy="1" color="#8888ffff"/>
     </text>
-    <text text="Joining the edges of a rectangle" font="Vera" size="22" color="#ffffff" xAlignment="0.0" yAlignment="0.5" costume="title" x="125" y="307" direction="0.0" heading="0.0" startEvent="slideInRight" zOrder="10" activationDelay="0.2"/>
-    <text text="Makes a Torus" font="VeraBold" size="22" color="#3344cc" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.LinkButton" costume="link" x="571" y="308" direction="0.0" heading="0.0" startEvent="slideInLeft" zOrder="11" activationDelay="0.2">
-      <property name="url" value="http://en.wikipedia.org/wiki/File:Torus_from_rectangle.gif"/>
-      <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
-        <property name="dx" value="1"/>
-        <property name="dy" value="1"/>
-        <property name="color" value="#8888ffff"/>
-      </makeup>
+    <text costume="title" x="125.0" y="307.0" startEvent="slideInRight" activationDelay="0.2" zOrder="10" id="" font="Vera" fontSize="22.0" text="Joining the edges of a rectangle" color="#ffffffff" xAlignment="0.0" colorize=""/>
+    <text costume="link" x="571.0" y="308.0" startEvent="slideInLeft" activationDelay="0.2" zOrder="11" id="" font="VeraBold" fontSize="22.0" text="Makes a Torus" color="#3344ccff" colorize="" role="uk.co.nickthecoder.itchy.role.LinkButton" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+      <role url="http://en.wikipedia.org/wiki/File:Torus_from_rectangle.gif"/>
+      <makeup dx="1" dy="1" color="#8888ffff"/>
     </text>
-    <text text="Angles of a triangle " font="Vera" size="22" color="#ffffff" xAlignment="0.0" yAlignment="0.5" costume="title" x="127" y="269" direction="0.0" heading="0.0" startEvent="slideInRight" zOrder="12" activationDelay="0.4"/>
-    <text text="Don't add up to 180 degrees" font="VeraBold" size="22" color="#3344cc" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.LinkButton" costume="link" x="525" y="270" direction="0.0" heading="0.0" startEvent="slideInLeft" zOrder="13" activationDelay="0.4">
-      <property name="url" value="http://soler7.com/IFAQ/NonEuclideanGeometryNotes.html"/>
-      <makeup classname="uk.co.nickthecoder.itchy.makeup.Shadow">
-        <property name="dx" value="1"/>
-        <property name="dy" value="1"/>
-        <property name="color" value="#8888ffff"/>
-      </makeup>
+    <text costume="title" x="127.0" y="269.0" startEvent="slideInRight" activationDelay="0.4" zOrder="12" id="" font="Vera" fontSize="22.0" text="Angles of a triangle " color="#ffffffff" xAlignment="0.0" colorize=""/>
+    <text costume="link" x="525.0" y="270.0" startEvent="slideInLeft" activationDelay="0.4" zOrder="13" id="" font="VeraBold" fontSize="22.0" text="Don't add up to 180 degrees" color="#3344ccff" colorize="" role="uk.co.nickthecoder.itchy.role.LinkButton" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+      <role url="http://soler7.com/IFAQ/NonEuclideanGeometryNotes.html"/>
+      <makeup dx="1" dy="1" color="#8888ffff"/>
     </text>
   </layer>
 </scene>

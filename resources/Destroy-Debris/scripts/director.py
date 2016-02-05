@@ -7,17 +7,6 @@ class Director(AbstractDirector) :
     def __init__(self) :
         self.score = 0
         self.lives = 3
-
-
-    def onStarted(self) :
-       
-        # Don't create default stages and views, because we want to use a special WrappedStageView
-        print "Creating custom stages and views"
-
-        screenRect = Rect(0, 0, game.getWidth(), game.getHeight())
-        wrapped = WrappedStageView( screenRect, None )
-        self.collisionStrategy = WrappedCollisionStrategy( wrapped )
-
       
     def startScene(self, sceneName) :
 

@@ -1,37 +1,21 @@
-<scene showMouse="false" layout="default" role="play.py" background="#00000000">
-  <properties>
-    <property name="nextScene" value="intro-4"/>
-  </properties>
+<scene name="intro-3" layout="default" sceneDirector="play.py">
+  <sceneDirector nextScene="intro-4"/>
   <layer name="main">
-    <actor costume="stars2" x="400" y="300" direction="0.0" heading="0.0" startEvent="default" zOrder="0"/>
-    <actor costume="ship1" x="387" y="303" direction="90.0" heading="90.0" startEvent="default" zOrder="10"/>
-    <actor costume="duke-0" x="135" y="287" direction="0.0" heading="0.0" startEvent="default" zOrder="11">
-      <property name="vy" value="1.0"/>
-      <property name="vx" value="0.2"/>
-      <property name="strength" value="1.0"/>
-      <property name="rotationSpeed" value="0.8"/>
+    <actor costume="stars2" x="400.0" y="300.0" id="" colorize=""/>
+    <actor costume="ship1" x="387.0" y="303.0" heading="90.0" zOrder="10" id="" direction="90.0" colorize="" role="ship.py"/>
+    <actor costume="duke-0" x="135.0" y="287.0" zOrder="11" id="" colorize="" role="rock.py">
+      <role strength="1.0" rotationSpeed="0.8" vx="0.2" vy="1.0"/>
     </actor>
-    <actor costume="java-0" x="87" y="426" direction="0.0" heading="0.0" startEvent="default" zOrder="12">
-      <property name="vy" value="1.1"/>
-      <property name="vx" value="0.1"/>
-      <property name="strength" value="1.0"/>
-      <property name="rotationSpeed" value="0.9"/>
+    <actor costume="java-0" x="87.0" y="426.0" zOrder="12" id="" colorize="" role="rock.py">
+      <role strength="1.0" rotationSpeed="0.9" vx="0.1" vy="1.1"/>
     </actor>
   </layer>
   <layer name="foreground">
-    <text text="which is written in Java." font="Vera" size="26" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="392" y="26" direction="0.0" heading="0.0" startEvent="default" zOrder="0">
-      <makeup classname="uk.co.nickthecoder.itchy.makeup.Textured">
-        <property name="pose" value="texture1"/>
-        <property name="y" value="0"/>
-        <property name="x" value="0"/>
-      </makeup>
+    <text x="392.0" y="26.0" id="" font="Vera" fontSize="26.0" text="which is written in Java." color="#ffffffff" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Textured">
+      <makeup pose="texture1"/>
     </text>
-    <text text="The tricky code is in the game engine, &quot;Itchy&quot;" font="Vera" size="26" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="387" y="59" direction="0.0" heading="0.0" startEvent="default" zOrder="1">
-      <makeup classname="uk.co.nickthecoder.itchy.makeup.Textured">
-        <property name="pose" value="texture1"/>
-        <property name="y" value="0"/>
-        <property name="x" value="0"/>
-      </makeup>
+    <text x="387.0" y="59.0" zOrder="1" id="" font="Vera" fontSize="26.0" text="The tricky code is in the game engine, &quot;Itchy&quot;" color="#ffffffff" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Textured">
+      <makeup pose="texture1"/>
     </text>
   </layer>
 </scene>

@@ -16,13 +16,10 @@ import uk.co.nickthecoder.itchy.Wrapped;
 /**
  * Checks for collisions within a world where the left edge is joined to the right,
  * and/or the top edge is joined to the bottom.
- * <p>
- * As well as wrapping the stage, this is also "wrapped" in the sense that it wraps another
- * collision strategy which actual performs the collision tests.
  */
 public class WrappedCollisionStrategy implements CollisionStrategy
 {
-    public CollisionStrategy wrappedCollisionStrategy;
+    public CollisionStrategy innerCollisionStrategy;
     
     public Wrapped wrapped;
     
@@ -35,7 +32,7 @@ public class WrappedCollisionStrategy implements CollisionStrategy
     {
         super();
         this.wrapped = wrapped;
-        this.wrappedCollisionStrategy = cs;
+        this.innerCollisionStrategy = cs;
     }
 
 
@@ -71,17 +68,17 @@ public class WrappedCollisionStrategy implements CollisionStrategy
     
     public List<Role> collisions2( Actor actor, String[] includeTags, String[] excludeTags )
     {
-        List<Role> result = wrappedCollisionStrategy.collisions( actor, includeTags, excludeTags );
+        List<Role> result = innerCollisionStrategy.collisions( actor, includeTags, excludeTags );
         
         if (wrapped.overlappingBottom(actor)) {
             actor.setY( actor.getY() + wrapped.getHeight() );
-            result.addAll( wrappedCollisionStrategy.collisions(actor, includeTags, excludeTags) );            
+            result.addAll( innerCollisionStrategy.collisions(actor, includeTags, excludeTags) );            
             actor.setY( actor.getY() - wrapped.getHeight() );
         }
 
         if (wrapped.overlappingTop(actor)) {
             actor.setY( actor.getY() - wrapped.getHeight() );
-            result.addAll( wrappedCollisionStrategy.collisions(actor, includeTags, excludeTags) );            
+            result.addAll( innerCollisionStrategy.collisions(actor, includeTags, excludeTags) );            
             actor.setY( actor.getY() + wrapped.getHeight() );
         }
         
@@ -91,13 +88,13 @@ public class WrappedCollisionStrategy implements CollisionStrategy
     @Override
     public void update()
     {
-        this.wrappedCollisionStrategy.update();
+        this.innerCollisionStrategy.update();
     }
 
     @Override
     public void remove()
     {
-        this.wrappedCollisionStrategy.remove();
+        this.innerCollisionStrategy.remove();
     }
 
 }

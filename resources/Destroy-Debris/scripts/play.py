@@ -20,11 +20,19 @@ class Play(PlainSceneDirector) :
         self.inputContinue = Input.find("continue")
 
 
-    def onLoading(self, scene) :
+    def loading(self, scene) :
+        print "Loading a scene"
+        
+        screenRect = Rect(0, 0, game.getWidth(), game.getHeight())
+        mainView = game.layout.findView( "main" )
+        self.collisionStrategy = WrappedCollisionStrategy( mainView )
+
         print "Loading glass"
-        game.mergeScene(scene, "glass")
+        game.mergeScene("glass")
 
-
+    def onLoaded(self) :
+        print "Loaded the scene"
+        
     def onKeyDown(self, event) :
     
         # Escape key takes us back to the menu.
@@ -64,7 +72,7 @@ class Play(PlainSceneDirector) :
     
     
     def getCollisionStrategy(self,actor) :
-        return director.collisionStrategy
+        return self.collisionStrategy
     
     
     # Boiler plate code - no need to change this

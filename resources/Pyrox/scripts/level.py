@@ -47,7 +47,7 @@ class Level(PlainSceneDirector) :
 
     def loading( self, scene ) :
         # Load the glass stage on top of the current scene.
-        game.mergeScene( scene, "glass")
+        game.mergeScene("glass")
 
 
     def onActivate( self ) :

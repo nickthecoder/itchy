@@ -9,11 +9,14 @@ import java.util.Map;
 
 import uk.co.nickthecoder.itchy.Layer;
 import uk.co.nickthecoder.itchy.Layout;
+import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 
 public class LayerPickerButton extends PickerButton<Layer>
 {
+    private Layout layout;
+    
     private static Map<String, Layer> createPickMap(Layout layout)
-    {
+    {       
         HashMap<String, Layer> result = new HashMap<String, Layer>();
 
         for (Layer layer : layout.getLayersByZOrder()) {
@@ -25,6 +28,7 @@ public class LayerPickerButton extends PickerButton<Layer>
     public LayerPickerButton(Layout layout, Layer layer)
     {
         super("Layer", layer, createPickMap(layout));
+        this.layout = layout;
     }
 
     @Override
@@ -32,4 +36,11 @@ public class LayerPickerButton extends PickerButton<Layer>
     {
         return a.getName().equals(b.getName());
     }
+    
+    public void onClick( final MouseButtonEvent e )
+    {
+        this.map = createPickMap(this.layout);
+        super.onClick(e);
+    }
+
 }
