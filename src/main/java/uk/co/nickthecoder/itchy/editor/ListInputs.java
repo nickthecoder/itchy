@@ -59,7 +59,6 @@ public class ListInputs extends ListSubjects<Input>
             subject = new Input();
             isNew = true;
         }
-        
         EditInput editInput = new EditInput( this.resources, this, subject, isNew );
         editInput.show();
     }

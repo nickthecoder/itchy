@@ -20,7 +20,7 @@ public class FontProperty<S> extends Property<S, Font>
     }
 
     @Override
-    public Component createUnvalidatedComponent( final S subject, final boolean autoUpdate )
+    public Component createUnvalidatedComponent( final S subject)
     {
         Resources resources = Itchy.getGame().resources;
 
@@ -28,22 +28,6 @@ public class FontProperty<S> extends Property<S, Font>
 
         final FontPickerButton pickerButton = new FontPickerButton(resources, font);
         pickerButton.setCompact(true);
-
-        if (autoUpdate) {
-
-            pickerButton.addChangeListener(new ComponentChangeListener() {
-
-                @Override
-                public void changed()
-                {
-                    try {
-                        FontProperty.this.updateSubject(subject, pickerButton);
-                    } catch (Exception e) {
-                        // Do nothing
-                    }
-                }
-            });
-        }
 
         return pickerButton;
     }

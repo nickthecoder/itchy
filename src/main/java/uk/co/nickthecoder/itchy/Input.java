@@ -124,7 +124,7 @@ public class Input implements NamedSubject<Input>, InputInterface
 
     private List<InputInterface> keys;
 
-    private String asString = null;
+    private String asString;
 
     /**
      * Finds the Input from the current game's resources
@@ -179,6 +179,7 @@ public class Input implements NamedSubject<Input>, InputInterface
                 }
                 buffer.append(input.toString());
             }
+            this.asString = buffer.toString();
         }
         return this.asString;
     }
@@ -193,7 +194,6 @@ public class Input implements NamedSubject<Input>, InputInterface
     public void setKeysString(String keys)
         throws Exception
     {
-
         String[] parts = keys.split(",");
         this.keys.clear();
         for (String part : parts) {
@@ -204,6 +204,18 @@ public class Input implements NamedSubject<Input>, InputInterface
         }
 
         this.asString = keys;
+    }
+
+    public void add( InputInterface input )
+    {
+        this.keys.add(input);
+        this.asString = null;
+    }
+
+    public void remove( InputInterface input )
+    {
+        this.keys.remove(input);
+        this.asString = null;
     }
 
     /**
@@ -256,7 +268,7 @@ public class Input implements NamedSubject<Input>, InputInterface
     @Override
     public String toString()
     {
-        return "Keys : " + this.getKeysString();
+        return super.toString() + " Keys : " + this.getKeysString();
     }
 
 }

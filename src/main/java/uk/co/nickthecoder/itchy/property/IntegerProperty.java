@@ -19,23 +19,10 @@ public class IntegerProperty<S> extends Property<S, Integer>
     }
 
     @Override
-    public Component createUnvalidatedComponent( final S subject, boolean autoUpdate )
+    public Component createUnvalidatedComponent( final S subject )
     {
         final IntegerBox box = new IntegerBox(this.getSafeValue(subject));
-        if (autoUpdate) {
-
-            box.addChangeListener(new ComponentChangeListener() {
-                @Override
-                public void changed()
-                {
-                    try {
-                        IntegerProperty.this.updateSubject(subject, box);
-                    } catch (Exception e) {
-                        // Do nothing
-                    }
-                }
-            });
-        }
+        
         return box;
     }
 

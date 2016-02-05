@@ -19,25 +19,11 @@ public class BooleanProperty<S> extends Property<S, Boolean>
     }
 
     @Override
-    public Component createUnvalidatedComponent( final S subject, boolean autoUpdate )
+    public Component createUnvalidatedComponent( final S subject)
     {
         boolean value = (this.getSafeValue(subject) == true);
         final CheckBox checkBox = new CheckBox(value);
 
-        if (autoUpdate) {
-
-            checkBox.addChangeListener(new ComponentChangeListener() {
-                @Override
-                public void changed()
-                {
-                    try {
-                        BooleanProperty.this.updateSubject(subject, checkBox);
-                    } catch (Exception e) {
-                        // Do nothing
-                    }
-                }
-            });
-        }
         return checkBox;
     }
 

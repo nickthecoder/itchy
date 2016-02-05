@@ -15,28 +15,11 @@ public class CostumeProperty<S> extends Property<S, Costume>
     }
 
     @Override
-    public Component createUnvalidatedComponent( final S subject, final boolean autoUpdate )
+    public Component createUnvalidatedComponent( final S subject)
     {
         Costume costume = this.getSafeValue(subject);
 
         final CostumePickerButton pickerButton = new CostumePickerButton(Itchy.getGame().resources, costume);
-
-        if (autoUpdate) {
-
-            pickerButton.addChangeListener(new ComponentChangeListener() {
-
-                @Override
-                public void changed()
-                {
-                    try {
-                        CostumeProperty.this.updateSubject(subject, pickerButton);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-        }
-
         return pickerButton;
     }
 

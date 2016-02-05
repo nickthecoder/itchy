@@ -27,28 +27,12 @@ public class ClassNameProperty<S> extends Property<S, ClassName>
     }
 
     @Override
-    public Component createUnvalidatedComponent(final S subject, boolean autoUpdate)
+    public Component createUnvalidatedComponent(final S subject)
     {
         ClassName className = this.getSafeValue(subject);
         ScriptManager scriptManager = Itchy.getGame().getScriptManager();
 
         final ClassNameBox classNameBox = new ClassNameBox(scriptManager, className, this.baseClass);
-
-        if (autoUpdate) {
-
-            classNameBox.addChangeListener(new ComponentChangeListener()
-            {
-                @Override
-                public void changed()
-                {
-                    try {
-                        ClassNameProperty.this.updateSubject(subject, classNameBox);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-        }
 
         return classNameBox;
     }

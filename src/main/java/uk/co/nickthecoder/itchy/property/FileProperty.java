@@ -27,23 +27,10 @@ public class FileProperty<S> extends Property<S, File>
     }
 
     @Override
-    public Component createUnvalidatedComponent(final S subject, boolean autoUpdate)
+    public Component createUnvalidatedComponent(final S subject)
     {
         final FilenameComponent box = new FilenameComponent(Itchy.getGame().resources, this.getSafeValue(subject));
-        if (autoUpdate) {
-            box.addChangeListener(new ComponentChangeListener()
-            {
-                @Override
-                public void changed()
-                {
-                    try {
-                        FileProperty.this.updateSubject(subject, box);
-                    } catch (Exception e) {
-                        // Do nothing
-                    }
-                }
-            });
-        }
+        
         return box;
     }
 

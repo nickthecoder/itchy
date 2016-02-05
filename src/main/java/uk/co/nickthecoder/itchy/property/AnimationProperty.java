@@ -15,28 +15,11 @@ public class AnimationProperty<S> extends Property<S, AnimationResource>
     }
 
     @Override
-    public Component createUnvalidatedComponent( final S subject, final boolean autoUpdate )
+    public Component createUnvalidatedComponent( final S subject )
     {
         AnimationResource animationResource = this.getSafeValue(subject);
 
         final AnimationPickerButton pickerButton = new AnimationPickerButton( animationResource);
-
-        if (autoUpdate) {
-
-            pickerButton.addChangeListener(new ComponentChangeListener() {
-
-                @Override
-                public void changed()
-                {
-                    try {
-                        AnimationProperty.this.updateSubject(subject, pickerButton);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-        }
-
         return pickerButton;
     }
 

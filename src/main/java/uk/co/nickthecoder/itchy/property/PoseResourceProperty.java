@@ -20,29 +20,13 @@ public class PoseResourceProperty<S> extends Property<S, PoseResource>
     }
 
     @Override
-    public Component createUnvalidatedComponent( final S subject, final boolean autoUpdate )
+    public Component createUnvalidatedComponent( final S subject )
     {
         Resources resources = Itchy.getGame().resources;
 
         PoseResource poseResource = this.getSafeValue(subject);
 
         final PoseResourcePickerButton pickerButton = new PoseResourcePickerButton(resources, poseResource);
-
-        if (autoUpdate) {
-
-            pickerButton.addChangeListener(new ComponentChangeListener() {
-
-                @Override
-                public void changed()
-                {
-                    try {
-                        PoseResourceProperty.this.updateSubject(subject, pickerButton);
-                    } catch (Exception e) {
-                        // Do nothing
-                    }
-                }
-            });
-        }
 
         return pickerButton;
     }

@@ -20,23 +20,9 @@ public class EnumProperty<S, E extends Enum<?>> extends Property<S, E>
     }
 
     @Override
-    public Component createUnvalidatedComponent( final S subject, boolean autoUpdate )
+    public Component createUnvalidatedComponent( final S subject)
     {
         final EnumPickerButton<E> button = new EnumPickerButton<E>("Picker", this.getSafeValue(subject));
-
-        if (autoUpdate) {
-            button.addChangeListener(new ComponentChangeListener() {
-
-                @Override
-                public void changed()
-                {
-                    try {
-                        EnumProperty.this.updateSubject(subject, button);
-                    } catch (Exception e) {
-                    }
-                }
-            });
-        }
 
         return button;
     }

@@ -122,9 +122,11 @@ public class PropertiesForm<S>
         return revertValues.get(key);
     }
 
-    protected Component createComponent(Property<S, ?> property)
+    protected Component createComponent(final Property<S, ?> property)
     {
-        return property.createComponent(this.subject, this.autoUpdate);
+        final Component component = property.createComponent(this.subject, this.autoUpdate);
+        
+        return component;
     }
 
     /**

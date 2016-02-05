@@ -22,23 +22,9 @@ public class EaseProperty<S> extends Property<S, Ease>
     }
 
     @Override
-    public Component createUnvalidatedComponent( final S subject, boolean autoUpdate )
+    public Component createUnvalidatedComponent( final S subject)
     {
         final EasePickerButton button = new EasePickerButton(getSafeValue(subject));
-
-        if (autoUpdate) {
-            button.addChangeListener(new ComponentChangeListener() {
-                @Override
-                public void changed()
-                {
-                    try {
-                        EaseProperty.this.updateSubject(subject, button);
-                    } catch (Exception e) {
-                    }
-                }
-            });
-        }
-
         return button;
     }
 

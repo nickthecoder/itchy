@@ -19,24 +19,10 @@ public class DoubleProperty<S> extends Property<S, Double>
     }
 
     @Override
-    public Component createUnvalidatedComponent( final S subject, boolean autoUpdate )
+    public Component createUnvalidatedComponent( final S subject)
     {
         final DoubleBox box = new DoubleBox(this.getSafeValue(subject));
 
-        if (autoUpdate) {
-
-            box.addChangeListener(new ComponentChangeListener() {
-                @Override
-                public void changed()
-                {
-                    try {
-                        DoubleProperty.this.updateSubject(subject, box);
-                    } catch (Exception e) {
-                        // Do nothing
-                    }
-                }
-            });
-        }
         return box;
     }
 

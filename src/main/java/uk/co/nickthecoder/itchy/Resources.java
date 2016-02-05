@@ -610,16 +610,6 @@ public class Resources extends Loadable
         return sortNames(inputs.keySet());
     }
 
-    public String getInputName(Input input)
-    {
-        for (String name : this.inputNames()) {
-            if (this.getInput(name) == input) {
-                return name;
-            }
-        }
-        return null;
-    }
-
     public void renameInput(Input input)
     {
         for (Entry<String, Input> entry : inputs.entrySet()) {

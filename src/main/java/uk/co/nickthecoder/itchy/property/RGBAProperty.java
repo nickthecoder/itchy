@@ -22,25 +22,10 @@ public class RGBAProperty<S> extends Property<S, RGBA>
     }
 
     @Override
-    public Component createUnvalidatedComponent(final S subject, final boolean autoUpdate)
+    public Component createUnvalidatedComponent(final S subject )
     {
         RGBA color = this.getSafeValue(subject);
         final RGBABox result = new RGBABox(color, this.allowNull, this.includeAlpha);
-
-        if (autoUpdate) {
-
-            result.addChangeListener(new ComponentChangeListener()
-            {
-                @Override
-                public void changed()
-                {
-                    try {
-                        RGBAProperty.this.updateSubject(subject, result);
-                    } catch (Exception e) {
-                    }
-                }
-            });
-        }
 
         return result;
     }

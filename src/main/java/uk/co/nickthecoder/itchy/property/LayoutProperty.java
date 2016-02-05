@@ -20,28 +20,12 @@ public class LayoutProperty<S> extends Property<S, Layout>
     }
 
     @Override
-    public Component createUnvalidatedComponent( final S subject, final boolean autoUpdate )
+    public Component createUnvalidatedComponent( final S subject )
     {
         Resources resources = Itchy.getGame().resources;
 
         Layout layout = this.getSafeValue(subject);
         final LayoutPickerButton pickerButton = new LayoutPickerButton(resources, layout);
-
-        if (autoUpdate) {
-
-            pickerButton.addChangeListener(new ComponentChangeListener() {
-
-                @Override
-                public void changed()
-                {
-                    try {
-                        LayoutProperty.this.updateSubject(subject, pickerButton);
-                    } catch (Exception e) {
-                        // Do nothing
-                    }
-                }
-            });
-        }
 
         return pickerButton;
     }

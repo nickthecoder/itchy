@@ -4,7 +4,6 @@ import uk.co.nickthecoder.itchy.Input;
 import uk.co.nickthecoder.itchy.InputInterface;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Component;
-import uk.co.nickthecoder.itchy.gui.ComponentValidator;
 import uk.co.nickthecoder.itchy.gui.Container;
 import uk.co.nickthecoder.itchy.gui.GuiButton;
 import uk.co.nickthecoder.itchy.gui.InputPicker;
@@ -25,22 +24,9 @@ public class InputProperty<S> extends StringProperty<S>
     }
     
     @Override
-    public Component createUnvalidatedComponent(final S subject, boolean autoUpdate)
+    public Component createUnvalidatedComponent(final S subject)
     {
-        final TextWidget textWidget = (TextWidget) super.createUnvalidatedComponent(subject,  autoUpdate);
-        textWidget.addValidator(new ComponentValidator()
-        {
-            @Override
-            public boolean isValid()
-            {
-                try {
-                    new Input().setKeysString(textWidget.getText());
-                    return true;
-                } catch (Exception e) {
-                    return false;
-                }
-            }
-        });
+        final TextWidget textWidget = (TextWidget) super.createUnvalidatedComponent(subject);
         
         PlainContainer container = new PlainContainer();
         container.addStyle("combo");
@@ -74,9 +60,21 @@ public class InputProperty<S> extends StringProperty<S>
 
         return container;
     }
+    
+    @Override
+    public boolean isValid( Component component )
+    {
+        TextWidget textWidget = getTextWidgetFromComponent(component);
+        try {
+            new Input().setKeysString(textWidget.getText());
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 
     @Override
-    protected TextWidget getTextWidgetFromComponent( Component component )
+    protected TextWidget getTextWidgetFromComponent(Component component)
     {
         return (TextWidget) ((Container) component).getChildren().get(0);
     }

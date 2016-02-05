@@ -15,27 +15,11 @@ public class SoundProperty<S> extends Property<S, SoundResource>
     }
 
     @Override
-    public Component createUnvalidatedComponent( final S subject, final boolean autoUpdate )
+    public Component createUnvalidatedComponent( final S subject )
     {
         SoundResource soundResource = this.getSafeValue(subject);
 
         final SoundPickerButton pickerButton = new SoundPickerButton( soundResource);
-
-        if (autoUpdate) {
-
-            pickerButton.addChangeListener(new ComponentChangeListener() {
-
-                @Override
-                public void changed()
-                {
-                    try {
-                        SoundProperty.this.updateSubject(subject, pickerButton);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-        }
 
         return pickerButton;
     }

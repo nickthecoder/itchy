@@ -4,8 +4,8 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.property;
 
-import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.Component;
+import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.ComponentValidator;
 import uk.co.nickthecoder.itchy.gui.TextArea;
 import uk.co.nickthecoder.itchy.gui.TextBox;
@@ -57,39 +57,17 @@ public class StringProperty<S> extends Property<S, String>
     }
 
     @Override
-    public Component createUnvalidatedComponent(final S subject, boolean autoUpdate)
+    public Component createUnvalidatedComponent(final S subject)
     {
         if (this.multiLine) {
 
             TextArea textArea = new TextArea(this.getSafeValue(subject));
-            this.addChangeListener(textArea, subject, autoUpdate);
             return textArea;
 
         } else {
 
             TextBox box = new TextBox(this.getSafeValue(subject));
-            this.addChangeListener(box, subject, autoUpdate);
             return box;
-        }
-    }
-
-    protected void addChangeListener(final TextWidget widget, final S subject, boolean autoUpdate)
-    {
-        if (autoUpdate) {
-            widget.addChangeListener(new ComponentChangeListener()
-            {
-                @Override
-                public void changed()
-                {
-                    try {
-                        if (!widget.hasStyle("error")) {
-                            StringProperty.this.updateSubject(subject, (Component) widget);
-                        }
-                    } catch (Exception e) {
-                        // Do nothing
-                    }
-                }
-            });
         }
     }
 
@@ -103,7 +81,7 @@ public class StringProperty<S> extends Property<S, String>
     @Override
     public void addChangeListener(Component component, ComponentChangeListener listener)
     {
-        TextWidget textWidget = (TextWidget) component;
+        TextWidget textWidget = getTextWidgetFromComponent(component);
         textWidget.addChangeListener(listener);
     }
 
@@ -139,6 +117,7 @@ public class StringProperty<S> extends Property<S, String>
         return (TextWidget) component;
     }
 
+    @Override
     public boolean isValid( Component component )
     {
         if (!allowBlank) {

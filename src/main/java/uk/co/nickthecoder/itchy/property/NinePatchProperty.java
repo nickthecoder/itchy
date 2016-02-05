@@ -16,7 +16,7 @@ public class NinePatchProperty<S> extends Property<S, NinePatch>
     }
 
     @Override
-    public Component createUnvalidatedComponent( final S subject, final boolean autoUpdate )
+    public Component createUnvalidatedComponent( final S subject )
     {
         Resources resources = Itchy.getGame().resources;
 
@@ -24,22 +24,6 @@ public class NinePatchProperty<S> extends Property<S, NinePatch>
 
         final NinePatchPickerButton pickerButton = new NinePatchPickerButton(resources, ninePatch);
         pickerButton.setCompact(true);
-
-        if (autoUpdate) {
-
-            pickerButton.addChangeListener(new ComponentChangeListener() {
-
-                @Override
-                public void changed()
-                {
-                    try {
-                        NinePatchProperty.this.updateSubject(subject, pickerButton);
-                    } catch (Exception e) {
-                        // Do nothing
-                    }
-                }
-            });
-        }
 
         return pickerButton;
     }

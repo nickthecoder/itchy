@@ -38,23 +38,9 @@ public class ChoiceProperty<S, T> extends Property<S, T>
     }
 
     @Override
-    public Component createUnvalidatedComponent( final S subject, boolean autoUpdate )
+    public Component createUnvalidatedComponent( final S subject)
     {
         final PickerButton<T> button = new PickerButton<T>("Choice", this.getSafeValue(subject), this.map);
-        if (autoUpdate) {
-
-            button.addChangeListener(new ComponentChangeListener() {
-                @Override
-                public void changed()
-                {
-                    try {
-                        ChoiceProperty.this.updateSubject(subject, button);
-                    } catch (Exception e) {
-                        // Do nothing
-                    }
-                }
-            });
-        }
         return button;
     }
 

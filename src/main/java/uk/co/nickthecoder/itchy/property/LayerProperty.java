@@ -22,26 +22,10 @@ public abstract class LayerProperty<S> extends Property<S, Layer>
     public abstract Layout getLayout();
 
     @Override
-    public Component createUnvalidatedComponent( final S subject, final boolean autoUpdate )
+    public Component createUnvalidatedComponent( final S subject )
     {
         Layer layer = this.getSafeValue(subject);
         final LayerPickerButton pickerButton = new LayerPickerButton(getLayout(), layer);
-
-        if (autoUpdate) {
-
-            pickerButton.addChangeListener(new ComponentChangeListener() {
-
-                @Override
-                public void changed()
-                {
-                    try {
-                        LayerProperty.this.updateSubject(subject, pickerButton);
-                    } catch (Exception e) {
-                        // Do nothing
-                    }
-                }
-            });
-        }
 
         return pickerButton;
     }

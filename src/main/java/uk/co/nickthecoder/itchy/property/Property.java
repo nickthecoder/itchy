@@ -224,16 +224,35 @@ public abstract class Property<S, T>
      * 
      * @throws Exception
      */
-    public abstract Component createUnvalidatedComponent( S subject, boolean autoUpdate);
+    public abstract Component createUnvalidatedComponent( S subject);
 
-    public Component createComponent( S subject, boolean autoUpdate )
+    public Component createComponent( final S subject, boolean autoUpdate )
     {
-        Component result = createUnvalidatedComponent(subject, autoUpdate);
-        addValidator(result);
+        final Component component = createUnvalidatedComponent(subject);
+        addValidator(component);
         
-        return result;
+        if (autoUpdate) {
+
+            this.addChangeListener(component, new ComponentChangeListener()
+            {
+                @Override
+                public void changed()
+                {
+                    try {
+                        if (isValid(component)) {
+                            updateSubject(subject, component);
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        }
+
+        
+        return component;
     }
-    
+
     public void addValidator(final Component component)
     {
         ComponentValidator validator = new ComponentValidator()
