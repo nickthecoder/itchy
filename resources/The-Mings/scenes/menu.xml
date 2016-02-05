@@ -1,10 +1,11 @@
-<scene showMouse="true" role="uk.co.nickthecoder.itchy.PlainSceneDirector" background="#000000ff">
-  <properties/>
+<scene name="menu" layout="default" sceneDirector="uk.co.nickthecoder.itchy.PlainSceneDirector" showMouse="true">
+  <layer name="background"/>
+  <layer name="grid"/>
   <layer name="main">
-    <text text="The Mings" font="Boycott" size="60" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="497" y="580" direction="0.0" heading="0.0" startEvent="default" zOrder="0"/>
-    <text text="Play" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.SceneButton" x="490" y="437" direction="0.0" heading="0.0" startEvent="default" zOrder="1">
-      <property name="sceneName" value="test"/>
+    <text x="497.0" y="580.0" id="" font="Boycott" fontSize="60.0" text="The Mings" color="#ffffffff" colorize=""/>
+    <text x="490.0" y="437.0" zOrder="1" id="" font="Boycott" fontSize="22.0" text="Play" color="#ffffffff" colorize="" role="uk.co.nickthecoder.itchy.role.SceneButton">
+      <role sceneName="test"/>
     </text>
-    <text text="Quit" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.QuitButton" x="494" y="157" direction="0.0" heading="0.0" startEvent="default" zOrder="2"/>
+    <text x="494.0" y="157.0" zOrder="2" id="" font="Boycott" fontSize="22.0" text="Quit" color="#ffffffff" colorize="" role="uk.co.nickthecoder.itchy.role.QuitButton"/>
   </layer>
 </scene>

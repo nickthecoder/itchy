@@ -1,58 +1,38 @@
-<scene showMouse="true" role="uk.co.nickthecoder.itchy.PlainSceneDirector" background="#000000ff">
-  <properties/>
-  <layer name="main">
-    <actor costume="animationTest" x="143" y="578" direction="0.0" heading="0.0" startEvent="builderL" zOrder="0">
-      <property name="dx" value="0.0"/>
-      <property name="dy" value="0.0"/>
-      <property name="direction" value="1"/>
-    </actor>
-    <actor costume="animationTest" x="193" y="578" direction="0.0" heading="0.0" startEvent="builderR" zOrder="1">
-      <property name="dx" value="0.0"/>
-      <property name="dy" value="0.0"/>
-      <property name="direction" value="1"/>
-    </actor>
-    <actor costume="animationTest" x="700" y="514" direction="0.0" heading="0.0" startEvent="float" zOrder="2">
-      <property name="dx" value="0.0"/>
-      <property name="dy" value="0.0"/>
-      <property name="direction" value="1"/>
-    </actor>
-    <actor costume="animationTest" x="432" y="463" direction="0.0" heading="0.0" startEvent="smashR" zOrder="3">
-      <property name="dx" value="0.0"/>
-      <property name="dy" value="0.0"/>
-      <property name="direction" value="-1"/>
-    </actor>
-    <actor costume="animationTest" x="430" y="375" direction="0.0" heading="0.0" startEvent="walkR" zOrder="4">
-      <property name="dx" value="0.0"/>
-      <property name="dy" value="0.0"/>
-      <property name="direction" value="1"/>
-    </actor>
-    <actor costume="animationTest" x="371" y="374" direction="0.0" heading="0.0" startEvent="walkL" zOrder="5">
-      <property name="dx" value="0.0"/>
-      <property name="dy" value="0.0"/>
-      <property name="direction" value="-1"/>
-    </actor>
-    <actor costume="animationTest" x="372" y="463" direction="0.0" heading="0.0" startEvent="smashL" zOrder="6">
-      <property name="dx" value="0.0"/>
-      <property name="dy" value="0.0"/>
-      <property name="direction" value="-1"/>
-    </actor>
-    <actor costume="animationTest" x="637" y="559" direction="0.0" heading="0.0" startEvent="digger" zOrder="7">
-      <property name="dx" value="0.0"/>
-      <property name="dy" value="0.0"/>
-      <property name="direction" value="1"/>
-    </actor>
-    <actor costume="animationTest" x="402" y="299" direction="0.0" heading="0.0" startEvent="bomb" zOrder="8">
-      <property name="dx" value="0.0"/>
-      <property name="dy" value="0.0"/>
-      <property name="direction" value="1"/>
-    </actor>
-    <actor costume="animationTest" x="616" y="382" direction="0.0" heading="0.0" startEvent="mineR" zOrder="9">
-      <property name="dx" value="0.0"/>
-      <property name="dy" value="0.0"/>
-      <property name="direction" value="1"/>
-    </actor>
+<scene name="testAnimations" layout="default" sceneDirector="uk.co.nickthecoder.itchy.PlainSceneDirector" showMouse="true">
+  <layer name="background"/>
+  <layer name="grid">
+    <text x="429.0" y="34.0" id="" font="Boycott" fontSize="22.0" text="Press Space to step through the animations" color="#ffffffff" colorize=""/>
   </layer>
-  <layer name="gui">
-    <text text="Press Space to step through the animations" font="Boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="429" y="34" direction="0.0" heading="0.0" startEvent="default" zOrder="0"/>
+  <layer name="main">
+    <actor costume="animationTest" x="143.0" y="578.0" startEvent="builderL" id="" colorize="" role="animationTest.py">
+      <role direction="1" dx="0.0" dy="0.0"/>
+    </actor>
+    <actor costume="animationTest" x="193.0" y="578.0" startEvent="builderR" zOrder="1" id="" colorize="" role="animationTest.py">
+      <role direction="1" dx="0.0" dy="0.0"/>
+    </actor>
+    <actor costume="animationTest" x="700.0" y="514.0" startEvent="float" zOrder="2" id="" colorize="" role="animationTest.py">
+      <role direction="1" dx="0.0" dy="0.0"/>
+    </actor>
+    <actor costume="animationTest" x="432.0" y="463.0" startEvent="smashR" zOrder="3" id="" colorize="" role="animationTest.py">
+      <role direction="-1" dx="0.0" dy="0.0"/>
+    </actor>
+    <actor costume="animationTest" x="430.0" y="375.0" startEvent="walkR" zOrder="4" id="" colorize="" role="animationTest.py">
+      <role direction="1" dx="0.0" dy="0.0"/>
+    </actor>
+    <actor costume="animationTest" x="371.0" y="374.0" startEvent="walkL" zOrder="5" id="" colorize="" role="animationTest.py">
+      <role direction="-1" dx="0.0" dy="0.0"/>
+    </actor>
+    <actor costume="animationTest" x="372.0" y="463.0" startEvent="smashL" zOrder="6" id="" colorize="" role="animationTest.py">
+      <role direction="-1" dx="0.0" dy="0.0"/>
+    </actor>
+    <actor costume="animationTest" x="637.0" y="559.0" startEvent="digger" zOrder="7" id="" colorize="" role="animationTest.py">
+      <role direction="1" dx="0.0" dy="0.0"/>
+    </actor>
+    <actor costume="animationTest" x="402.0" y="299.0" startEvent="bomb" zOrder="8" id="" colorize="" role="animationTest.py">
+      <role direction="1" dx="0.0" dy="0.0"/>
+    </actor>
+    <actor costume="animationTest" x="616.0" y="382.0" startEvent="mineR" zOrder="9" id="" colorize="" role="animationTest.py">
+      <role direction="1" dx="0.0" dy="0.0"/>
+    </actor>
   </layer>
 </scene>

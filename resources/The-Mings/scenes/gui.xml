@@ -1,66 +1,29 @@
-<scene layout="gui" showMouse="true" role="uk.co.nickthecoder.itchy.PlainSceneDirector" background="#000055ff">
-  <properties/>
+<scene name="gui" layout="gui" sceneDirector="uk.co.nickthecoder.itchy.PlainSceneDirector" showMouse="true">
   <layer name="gui">
-    <actor costume="gui" x="0" y="0" direction="0.0" heading="0.0" startEvent="default" zOrder="-1"/>
-    <actor costume="jobButton" x="239" y="57" direction="0.0" heading="0.0" startEvent="default" zOrder="4" colorize="#8f98ca00">
-      <property name="job" value="blocker"/>
-      <makeup classname="uk.co.nickthecoder.itchy.makeup.PictureFrame">
-        <property name="ninePatchName" value="button"/>
-        <property name="borderTop" value="4"/>
-        <property name="borderBottom" value="4"/>
-        <property name="borderLeft" value="4"/>
-        <property name="borderRight" value="4"/>
-      </makeup>
+    <actor costume="gui" zOrder="-1" id="" colorize=""/>
+    <actor costume="jobButton" x="239.0" y="57.0" zOrder="4" id="" colorize="#8f98ca00" role="jobButton.py" makeup="uk.co.nickthecoder.itchy.makeup.PictureFrame">
+      <role job="blocker"/>
+      <makeup ninePatch="button" borderTop="4" borderRight="4" borderBottom="4" borderLeft="4"/>
     </actor>
-    <actor costume="jobButton" x="298" y="57" direction="0.0" heading="0.0" startEvent="default" zOrder="5" colorize="#8f98ca00">
-      <property name="job" value="builder"/>
-      <makeup classname="uk.co.nickthecoder.itchy.makeup.PictureFrame">
-        <property name="ninePatchName" value="button"/>
-        <property name="borderTop" value="4"/>
-        <property name="borderBottom" value="4"/>
-        <property name="borderLeft" value="4"/>
-        <property name="borderRight" value="4"/>
-      </makeup>
+    <actor costume="jobButton" x="298.0" y="57.0" zOrder="5" id="" colorize="#8f98ca00" role="jobButton.py" makeup="uk.co.nickthecoder.itchy.makeup.PictureFrame">
+      <role job="builder"/>
+      <makeup ninePatch="button" borderTop="4" borderRight="4" borderBottom="4" borderLeft="4"/>
     </actor>
-    <actor costume="jobButton" x="356" y="57" direction="0.0" heading="0.0" startEvent="default" zOrder="6" colorize="#8f98ca00">
-      <property name="job" value="smasher"/>
-      <makeup classname="uk.co.nickthecoder.itchy.makeup.PictureFrame">
-        <property name="ninePatchName" value="button"/>
-        <property name="borderTop" value="4"/>
-        <property name="borderBottom" value="4"/>
-        <property name="borderLeft" value="4"/>
-        <property name="borderRight" value="4"/>
-      </makeup>
+    <actor costume="jobButton" x="356.0" y="57.0" zOrder="6" id="" colorize="#8f98ca00" role="jobButton.py" makeup="uk.co.nickthecoder.itchy.makeup.PictureFrame">
+      <role job="smasher"/>
+      <makeup ninePatch="button" borderTop="4" borderRight="4" borderBottom="4" borderLeft="4"/>
     </actor>
-    <actor costume="paws" x="47" y="53" direction="0.0" heading="0.0" startEvent="default" zOrder="7">
-      <property name="message" value="pause"/>
-      <makeup classname="uk.co.nickthecoder.itchy.makeup.PictureFrame">
-        <property name="ninePatchName" value="button"/>
-        <property name="borderTop" value="4"/>
-        <property name="borderBottom" value="4"/>
-        <property name="borderLeft" value="4"/>
-        <property name="borderRight" value="4"/>
-      </makeup>
+    <actor costume="paws" x="47.0" y="53.0" zOrder="7" id="" colorize="" role="uk.co.nickthecoder.itchy.role.MessageButton" makeup="uk.co.nickthecoder.itchy.makeup.PictureFrame">
+      <role message="pause"/>
+      <makeup ninePatch="button" borderTop="4" borderRight="4" borderBottom="4" borderLeft="4"/>
     </actor>
-    <actor costume="jobButton" x="414" y="57" direction="0.0" heading="0.0" startEvent="default" zOrder="9" colorize="#8f98ca00">
-      <property name="job" value="digger"/>
-      <makeup classname="uk.co.nickthecoder.itchy.makeup.PictureFrame">
-        <property name="ninePatchName" value="button"/>
-        <property name="borderTop" value="4"/>
-        <property name="borderBottom" value="4"/>
-        <property name="borderLeft" value="4"/>
-        <property name="borderRight" value="4"/>
-      </makeup>
+    <actor costume="jobButton" x="414.0" y="57.0" zOrder="9" id="" colorize="#8f98ca00" role="jobButton.py" makeup="uk.co.nickthecoder.itchy.makeup.PictureFrame">
+      <role job="digger"/>
+      <makeup ninePatch="button" borderTop="4" borderRight="4" borderBottom="4" borderLeft="4"/>
     </actor>
-    <actor costume="jobButton" x="474" y="57" direction="0.0" heading="0.0" startEvent="default" zOrder="10" colorize="#8f98ca00">
-      <property name="job" value="floater"/>
-      <makeup classname="uk.co.nickthecoder.itchy.makeup.PictureFrame">
-        <property name="ninePatchName" value="button"/>
-        <property name="borderTop" value="4"/>
-        <property name="borderBottom" value="4"/>
-        <property name="borderLeft" value="4"/>
-        <property name="borderRight" value="4"/>
-      </makeup>
+    <actor costume="jobButton" x="474.0" y="57.0" zOrder="10" id="" colorize="#8f98ca00" role="jobButton.py" makeup="uk.co.nickthecoder.itchy.makeup.PictureFrame">
+      <role job="floater"/>
+      <makeup ninePatch="button" borderTop="4" borderRight="4" borderBottom="4" borderLeft="4"/>
     </actor>
   </layer>
 </scene>
