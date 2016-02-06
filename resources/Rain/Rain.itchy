@@ -1,5 +1,5 @@
 <resources>
-  <game title="It's Gonna Rain" width="800" height="600" resizable="false" initialScene="menu" testScene="easy" directorClassName="uk.co.nickthecoder.itchy.PlainDirector"/>
+  <game title="It's Gonna Rain" width="800" height="600" resizable="false" initialScene="menu" testScene="customize" directorClassName="Rain.groovy"/>
   <spriteSheets/>
   <poses>
     <pose name="background" filename="images/background.png" offsetX="0" offsetY="0"/>
@@ -12,6 +12,8 @@
     <pose name="droplet3" filename="images/droplet3.png"/>
     <pose name="sheep" filename="images/sheep.png" offsetX="25" offsetY="84"/>
     <pose name="sheepBones" filename="images/sheepBones.png" offsetX="25" offsetY="84"/>
+    <pose name="slider" filename="images/slider.png" offsetX="30"/>
+    <pose name="sliderButton" filename="images/sliderButton.png"/>
     <pose name="speed" filename="images/speedH.png"/>
     <pose name="speedV" filename="images/speedV.png"/>
     <pose name="wally1" filename="images/wally1.png" offsetX="88" offsetY="3"/>
@@ -180,7 +182,7 @@
     <costume name="background" defaultZOrder="0" order="0" showInDesigner="true">
       <pose name="default" pose="background"/>
     </costume>
-    <costume name="button" defaultZOrder="0" order="0" showInDesigner="true">
+    <costume name="button" defaultZOrder="80" order="0" showInDesigner="true">
       <string name="default">Button</string>
       <sound name="hoverOver" sound="drip" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND"/>
       <font name="default" font="BlackCasper" fontSize="14" color="#ffffffff" xAlignment="0.5" yAlignment="0.5" marginTop="0" marginRight="0" marginBottom="0" marginLeft="0"/>
@@ -189,43 +191,51 @@
       <animation name="mouseDown" animation="mouseDown"/>
       <animation name="mouseUp" animation="mouseUp"/>
     </costume>
-    <costume name="drop1" defaultZOrder="0" order="0" showInDesigner="true" role="Drop.groovy">
+    <costume name="drop1" defaultZOrder="65" order="0" showInDesigner="true" role="Drop.groovy">
       <pose name="default" pose="drop1"/>
       <pose name="droplet" pose="droplet1"/>
-      <sound name="drip" sound="drip" priority="3" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="PLAY_BOTH"/>
+      <sound name="drip" sound="drip" priority="2" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="PLAY_BOTH"/>
       <properties speedFactor="1.0"/>
     </costume>
-    <costume name="drop2" defaultZOrder="0" order="0" showInDesigner="true" role="Drop.groovy">
+    <costume name="drop2" defaultZOrder="60" order="0" showInDesigner="true" role="Drop.groovy">
       <pose name="default" pose="drop2"/>
       <pose name="default" pose="drop2b"/>
       <pose name="droplet" pose="droplet2"/>
       <properties speedFactor="0.75"/>
     </costume>
-    <costume name="drop3" defaultZOrder="0" order="0" showInDesigner="true" role="Drop.groovy">
+    <costume name="drop3" defaultZOrder="70" order="0" showInDesigner="true" role="Drop.groovy">
       <pose name="default" pose="drop3"/>
       <pose name="droplet" pose="droplet3"/>
-      <sound name="drip" sound="forFortyDays" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="PLAY_BOTH"/>
       <sound name="drip" sound="hallelujah" priority="2" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="PLAY_BOTH"/>
+      <sound name="drip" sound="forFortyDays" priority="2" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="PLAY_BOTH"/>
       <sound name="drip" sound="hallelujah2" priority="2" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="PLAY_BOTH"/>
       <sound name="drip" sound="rain" priority="2" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="PLAY_BOTH"/>
       <sound name="drip" sound="theyDidntBelieveThatItWasGunnaRain" priority="2" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="PLAY_BOTH"/>
       <sound name="drip" sound="myLordMyLord" priority="2" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="PLAY_BOTH"/>
       <properties speedFactor="1.2"/>
     </costume>
-    <costume name="player" defaultZOrder="0" order="0" showInDesigner="true" role="Player.groovy">
+    <costume name="player" defaultZOrder="50" order="0" showInDesigner="true" role="Player.groovy">
       <pose name="bones" pose="sheepBones"/>
       <pose name="default" pose="sheep"/>
-      <sound name="death" sound="ohLord" priority="3" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND"/>
-      <sound name="highScore" sound="woo" priority="2" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND"/>
+      <sound name="death" sound="ohLord" priority="6" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND"/>
+      <sound name="highScore" sound="woo" priority="4" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND"/>
       <animation name="death" animation="death"/>
     </costume>
-    <costume name="speed" defaultZOrder="0" order="0" showInDesigner="true" role="uk.co.nickthecoder.itchy.role.ProgressBar">
+    <costume name="slider" defaultZOrder="80" order="0" showInDesigner="true" role="uk.co.nickthecoder.itchy.role.SliderRole">
+      <pose name="default" pose="slider"/>
+      <companion name="button" companion="sliderButton"/>
+      <properties extent="190"/>
+    </costume>
+    <costume name="sliderButton" defaultZOrder="85" order="0" showInDesigner="true">
+      <pose name="default" pose="sliderButton"/>
+    </costume>
+    <costume name="speed" defaultZOrder="80" order="0" showInDesigner="true" role="uk.co.nickthecoder.itchy.role.ProgressBar">
       <pose name="default" pose="speed"/>
     </costume>
-    <costume name="speedV" defaultZOrder="0" order="0" showInDesigner="true" role="uk.co.nickthecoder.itchy.role.ProgressBar">
+    <costume name="speedV" defaultZOrder="80" order="0" showInDesigner="true" role="uk.co.nickthecoder.itchy.role.ProgressBar">
       <pose name="default" pose="speedV"/>
     </costume>
-    <costume name="wally" defaultZOrder="0" order="0" showInDesigner="true" role="Wally.groovy">
+    <costume name="wally" defaultZOrder="100" order="0" showInDesigner="true" role="Wally.groovy">
       <pose name="default" pose="wally3"/>
       <pose name="default" pose="wally4"/>
       <pose name="default" pose="wally5"/>
@@ -243,6 +253,8 @@
   </costumes>
   <scenes>
     <scene name="about"/>
+    <scene name="custom"/>
+    <scene name="customise"/>
     <scene name="easy"/>
     <scene name="hard"/>
     <scene name="medium"/>

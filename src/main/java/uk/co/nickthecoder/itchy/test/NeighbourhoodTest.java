@@ -43,7 +43,6 @@ public class NeighbourhoodTest
     @BeforeClass
     public static void setup()
     {
-        System.out.println("Init Jame video");
         try {
             Video.init();
             Video.setMode(640, 480);

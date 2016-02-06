@@ -55,7 +55,7 @@ public class SceneReader
             this.scene.layout = resources.getLayout("default");
         }
         if (this.scene.layout == null) {
-            System.out.println ("Creating a blank layout, as one was not found");
+            System.err.println ("Creating a blank layout, as one was not found");
             this.scene.layout = new Layout();
             Layer layer = new Layer();
             layer.setName("default");

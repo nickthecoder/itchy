@@ -61,7 +61,6 @@ public class EditLayer extends EditNamedSubject<Layer>
     @Override
     protected void add()
     {
-        System.out.println( "Adding layer " + subject + " to " + subject );
         layout.addLayer(subject);
     }
 

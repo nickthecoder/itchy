@@ -110,6 +110,7 @@ public class Itchy
         registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.role.QuitButton.class));
         registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.role.ProgressBar.class));
         registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.role.SceneButton.class));
+        registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.role.SliderRole.class));
 
         registry.add(new ClassName(CostumeFeatures.class, CostumeFeatures.class));
 

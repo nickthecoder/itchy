@@ -6,22 +6,26 @@
     <text x="167.0" y="553.0" zOrder="3" id="" font="Boycott" fontSize="54.0" text="It's Gonna" color="#6b6f2eff" colorize=""/>
     <text x="172.0" y="445.0" zOrder="4" id="" font="Boycott" fontSize="140.0" text="Rain" color="#3d2b0aff" alpha="160.0" colorize=""/>
     <text x="167.0" y="449.0" zOrder="5" id="" font="Boycott" fontSize="128.0" text="Rain" color="#cc9656ff" alpha="121.0" colorize=""/>
-    <text costume="button" x="705.0" y="51.0" zOrder="6" id="" font="BlackCasper" fontSize="80.0" text="Quit" color="#694cffff" colorize="" role="uk.co.nickthecoder.itchy.role.QuitButton" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+    <text costume="button" x="705.0" y="51.0" zOrder="80" id="" font="BlackCasper" fontSize="80.0" text="Quit" color="#694cffff" colorize="" role="uk.co.nickthecoder.itchy.role.QuitButton" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <makeup dx="7" dy="5" color="#262063ff"/>
     </text>
-    <text costume="button" x="109.0" y="47.0" zOrder="8" id="" font="BlackCasper" fontSize="80.0" text="About" color="#694cffff" colorize="" role="uk.co.nickthecoder.itchy.role.SceneButton" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+    <text costume="button" x="109.0" y="47.0" zOrder="80" id="" font="BlackCasper" fontSize="80.0" text="About" color="#694cffff" colorize="" role="uk.co.nickthecoder.itchy.role.SceneButton" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <role sceneName="about"/>
       <makeup dx="7" dy="5" color="#262063ff"/>
     </text>
-    <text costume="button" x="550.0" y="199.0" zOrder="9" id="" font="BlackCasper" fontSize="80.0" text="Hard" color="#694cffff" colorize="" role="uk.co.nickthecoder.itchy.role.SceneButton" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+    <text costume="button" x="548.0" y="255.0" zOrder="80" id="" font="BlackCasper" fontSize="80.0" text="Hard" color="#694cffff" colorize="" role="uk.co.nickthecoder.itchy.role.SceneButton" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <role sceneName="hard"/>
       <makeup dx="7" dy="5" color="#262063ff"/>
     </text>
-    <text costume="button" x="538.0" y="407.0" zOrder="10" id="" font="BlackCasper" fontSize="80.0" text="Easy" color="#694cffff" colorize="" role="uk.co.nickthecoder.itchy.role.SceneButton" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+    <text costume="button" x="545.0" y="169.0" zOrder="80" id="" font="BlackCasper" fontSize="80.0" text="Custom" color="#694cffff" colorize="" role="uk.co.nickthecoder.itchy.role.SceneButton" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+      <role sceneName="customise"/>
+      <makeup dx="7" dy="5" color="#262063ff"/>
+    </text>
+    <text costume="button" x="538.0" y="439.0" zOrder="80" id="" font="BlackCasper" fontSize="80.0" text="Easy" color="#694cffff" colorize="" role="uk.co.nickthecoder.itchy.role.SceneButton" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <role sceneName="easy"/>
       <makeup dx="7" dy="5" color="#262063ff"/>
     </text>
-    <text costume="button" x="540.0" y="307.0" zOrder="11" id="" font="BlackCasper" fontSize="80.0" text="Medium" color="#694cffff" colorize="" role="uk.co.nickthecoder.itchy.role.SceneButton" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+    <text costume="button" x="539.0" y="356.0" zOrder="80" id="" font="BlackCasper" fontSize="80.0" text="Medium" color="#694cffff" colorize="" role="uk.co.nickthecoder.itchy.role.SceneButton" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <role sceneName="medium"/>
       <makeup dx="7" dy="5" color="#262063ff"/>
     </text>

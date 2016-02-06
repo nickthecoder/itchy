@@ -34,9 +34,7 @@ public class EditPose extends EditNamedSubject<FilePoseResource>
     @Override
     protected void rename()
     {
-        System.out.println( "Renaming pose : " + subject );
         this.resources.renamePose(subject);
-        System.out.println( "Renamed pose : " + resources.getPose(subject.getName() ));
     }
 
     @Override

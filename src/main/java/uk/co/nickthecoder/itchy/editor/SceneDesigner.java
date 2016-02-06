@@ -189,8 +189,6 @@ public class SceneDesigner implements MouseListener, KeyListener
 
         costumeButtonGroup = new ButtonGroup();
 
-        System.out.println("Editing scene  " + this.scene);
-        System.out.println("Editing Layout " + this.scene.layout);
         this.scene.layout.dump();
     }
 
@@ -218,7 +216,6 @@ public class SceneDesigner implements MouseListener, KeyListener
             StageView stageView = layer.getStageView();
             if (stageView != null) {
                 Stage stage = stageView.getStage();
-                System.out.println("Editor adding stage/view " + stage + "/" + stageView);
                 editor.getStages().add(stage);
                 currentLayer = layer;
                 currentStageView = stageView;
@@ -1945,11 +1942,9 @@ public class SceneDesigner implements MouseListener, KeyListener
 
     private void onResetZOrders()
     {
-        for (View view : designViews.getChildren()) {
-            if (view instanceof StageView) {
-                StageView stageView = (StageView) view;
-                Stage stage = stageView.getStage();
-
+        for (Layer layer : this.scene.layout.getLayers()) {
+            Stage stage = layer.getStage();
+            if (stage != null) {
                 for (Actor actor : stage.getActors()) {
                     if ((actor.getCostume() != null)
                         && (actor.getCostume().defaultZOrder != 0)) {

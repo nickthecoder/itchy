@@ -499,7 +499,6 @@ public class Resources extends Loadable
 
     public void renameLayout(Layout layout)
     {
-        System.out.println("Renaming layout " + layout.name);
         for (Entry<String, Layout> entry : layouts.entrySet()) {
             if (entry.getValue() == layout) {
                 layouts.remove(entry.getKey());

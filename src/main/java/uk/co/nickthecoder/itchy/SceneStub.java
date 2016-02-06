@@ -95,7 +95,6 @@ public class SceneStub implements NamedSubject<SceneStub>
     {
         Scene scene = this.load(Itchy.getGame().resources.resolveFile(getFile()), design);
         scene.name = this.name;
-        System.out.println(scene.layout);
         return scene;
     }
 

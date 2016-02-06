@@ -38,12 +38,17 @@ public class Play extends PlainSceneDirector
         inputExit = Input.find('exit')
 
         // High scores are saved. There is a high score for each level. If there is no high score, then use 0.
-        highScore = Itchy.game.preferences.getInt( Itchy.game.sceneName + ".highScore", 0 )
+        highScore = Itchy.game.preferences.getInt( getHighScoreKey(), 0 )
         
         // Create a timer, which will tell us when to increase the speed.
         speedUpTimer = Timer.createTimerSeconds( speedUpAfter )
     }
     
+    String getHighScoreKey()
+    {
+        return Itchy.game.sceneName + ".highScore"
+    }
+
     void tick()
     {
         if (isPlaying()) {
@@ -95,7 +100,7 @@ public class Play extends PlainSceneDirector
         // If we've beaten the high score, store in into preferences. Preferences are stored permanently,
         // so the high score will still be there when we play the game weeks or months later.
         if (score > highScore) {
-            Itchy.game.preferences.putInt( Itchy.game.sceneName + ".highScore", score )
+            Itchy.game.preferences.putInt( getHighScoreKey(), score )
         }
     }       
 

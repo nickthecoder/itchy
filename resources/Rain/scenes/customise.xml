@@ -1,0 +1,73 @@
+<scene name="customise" layout="default" sceneDirector="uk.co.nickthecoder.itchy.PlainSceneDirector" showMouse="true">
+  <layer name="background"/>
+  <layer name="main">
+    <actor costume="background" y="601.0" id="" colorize=""/>
+    <actor costume="slider" x="110.0" y="450.0" id="" colorize="" role="uk.co.nickthecoder.itchy.role.SliderRole">
+      <role minimum="0.0" maximum="20.0" value="0.0" access="director.customRainDrops"/>
+    </actor>
+    <text x="400.0" y="450.0" id="" font="Boycott" fontSize="40.0" text="0" color="#ffffffff" xAlignment="1.0" colorize="" role="uk.co.nickthecoder.itchy.role.NumberValue">
+      <role access="director.customRainDrops" errorValue="" nullValue="" updateInterval="0.0" quiet="false" formatPattern="0"/>
+    </text>
+    <actor costume="slider" x="111.0" y="400.0" id="" colorize="" role="uk.co.nickthecoder.itchy.role.SliderRole">
+      <role minimum="0.0" maximum="20.0" value="0.0" access="director.customFastDrops"/>
+    </actor>
+    <text x="400.0" y="400.0" id="" font="Boycott" fontSize="40.0" text="0" color="#ffffffff" xAlignment="1.0" colorize="" role="uk.co.nickthecoder.itchy.role.NumberValue">
+      <role access="director.customFastDrops" errorValue="" nullValue="" updateInterval="0.0" quiet="false" formatPattern="0"/>
+    </text>
+    <actor costume="slider" x="110.0" y="350.0" id="" colorize="" role="uk.co.nickthecoder.itchy.role.SliderRole">
+      <role minimum="0.0" maximum="20.0" value="0.0" access="director.customFrogs"/>
+    </actor>
+    <text x="400.0" y="350.0" id="" font="Boycott" fontSize="40.0" text="0" color="#ffffffff" xAlignment="1.0" colorize="" role="uk.co.nickthecoder.itchy.role.NumberValue">
+      <role access="director.customFrogs" errorValue="" nullValue="" updateInterval="0.0" quiet="false" formatPattern="0"/>
+    </text>
+    <text x="414.0" y="540.0" id="" font="BlackCasper" fontSize="80.0" text="Custom Level" colorize=""/>
+    <text x="408.0" y="544.0" id="" font="BlackCasper" fontSize="80.0" text="Custom Level" color="#6c724fff" colorize=""/>
+    <text x="425.0" y="400.0" id="" font="Boycott" fontSize="40.0" text="Fast Drops" color="#aaccffff" xAlignment="0.0" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+      <makeup dx="2" dy="-2"/>
+    </text>
+    <text x="425.0" y="450.0" id="" font="Boycott" fontSize="40.0" text="Rain Drops" color="#aaccffff" xAlignment="0.0" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+      <makeup dx="2" dy="-2"/>
+    </text>
+    <text x="425.0" y="350.0" id="" font="Boycott" fontSize="40.0" text="Frogs" color="#aaccffff" xAlignment="0.0" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+      <makeup dx="2" dy="-2"/>
+    </text>
+    <actor costume="slider" x="397.0" y="267.0" id="" colorize="" role="uk.co.nickthecoder.itchy.role.SliderRole">
+      <role minimum="1.0" maximum="30.0" value="1.0" access="director.customSpeed"/>
+    </actor>
+    <text x="688.0" y="266.0" id="" font="Boycott" fontSize="40.0" text="0" color="#ffffffff" xAlignment="1.0" colorize="" role="uk.co.nickthecoder.itchy.role.NumberValue">
+      <role access="director.customSpeed" errorValue="" nullValue="" updateInterval="0.0" quiet="false" formatPattern="0"/>
+    </text>
+    <text x="340.0" y="268.0" id="" font="Boycott" fontSize="40.0" text="Initial Speed" color="#aaccffff" xAlignment="1.0" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+      <makeup dx="2" dy="-2"/>
+    </text>
+    <actor costume="slider" x="397.0" y="217.0" id="" colorize="" role="uk.co.nickthecoder.itchy.role.SliderRole">
+      <role minimum="1.0" maximum="30.0" value="1.0" access="director.customMaxSpeed"/>
+    </actor>
+    <text x="338.0" y="218.0" id="" font="Boycott" fontSize="40.0" text="Maximum Speed" color="#aaccffff" xAlignment="1.0" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+      <makeup dx="2" dy="-2"/>
+    </text>
+    <text x="340.0" y="167.0" id="" font="Boycott" fontSize="40.0" text="Speed Up Every" color="#aaccffff" xAlignment="1.0" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+      <makeup dx="2" dy="-2"/>
+    </text>
+    <actor costume="slider" x="397.0" y="167.0" id="" colorize="" role="uk.co.nickthecoder.itchy.role.SliderRole">
+      <role minimum="0.0" maximum="50.0" value="0.0" access="director.customSpeedUpAfter"/>
+    </actor>
+    <text x="697.0" y="165.0" id="" font="Boycott" fontSize="20.0" text="seconds" color="#aaccffff" xAlignment="0.0" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+      <makeup dx="2" dy="-2"/>
+    </text>
+    <text x="688.0" y="216.0" id="" font="Boycott" fontSize="40.0" text="0" color="#ffffffff" xAlignment="1.0" colorize="" role="uk.co.nickthecoder.itchy.role.NumberValue">
+      <role access="director.customMaxSpeed" errorValue="" nullValue="" updateInterval="0.0" quiet="false" formatPattern="0"/>
+    </text>
+    <text x="688.0" y="166.0" id="" font="Boycott" fontSize="40.0" text="0" color="#ffffffff" xAlignment="1.0" colorize="" role="uk.co.nickthecoder.itchy.role.NumberValue">
+      <role access="director.customSpeedUpAfter" errorValue="" nullValue="" updateInterval="0.0" quiet="false" formatPattern="0"/>
+    </text>
+    <text costume="button" x="119.0" y="57.0" zOrder="8" id="" font="BlackCasper" fontSize="80.0" text="Back" color="#694cffff" colorize="" role="uk.co.nickthecoder.itchy.role.SceneButton" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+      <role sceneName="menu"/>
+      <makeup dx="7" dy="5" color="#262063ff"/>
+    </text>
+    <text costume="button" x="690.0" y="58.0" zOrder="8" id="" font="BlackCasper" fontSize="80.0" text="Go" color="#694cffff" colorize="" role="uk.co.nickthecoder.itchy.role.SceneButton" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+      <role sceneName="custom"/>
+      <makeup dx="7" dy="5" color="#262063ff"/>
+    </text>
+  </layer>
+</scene>

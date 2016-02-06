@@ -48,7 +48,6 @@ public class PickLevel extends Button
     @Override
     public void onAttach()
     {
-        System.out.println( "PickLevel onAttach" );
         if (DrunkInvaders.director.completedLevel(this.levelNumber)) {
             getActor().event("completed");
         }

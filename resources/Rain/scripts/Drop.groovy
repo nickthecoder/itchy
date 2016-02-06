@@ -58,7 +58,6 @@ class Drop extends AbstractRole
 
     public CostumeFeatures createCostumeFeatures(Costume costume)
     {
-        print "Creating drop properties"
         return new DropFeatures(costume)
     }
 

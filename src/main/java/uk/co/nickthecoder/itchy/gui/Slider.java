@@ -28,7 +28,7 @@ public class Slider extends DragableContainer implements ContainerLayout
 
     private final List<ComponentValidator> validators;
 
-    public Slider( double value )
+    public Slider(double value)
     {
         setLayout(this);
         this.value = value;
@@ -42,7 +42,7 @@ public class Slider extends DragableContainer implements ContainerLayout
 
     }
 
-    public Slider range( double from, double to )
+    public Slider range(double from, double to)
     {
         this.type = "slider";
         this.from = from;
@@ -50,29 +50,30 @@ public class Slider extends DragableContainer implements ContainerLayout
         return this;
     }
 
-    public void addChangeListener( ComponentChangeListener listener )
+    public void addChangeListener(ComponentChangeListener listener)
     {
         this.changeListeners.add(listener);
     }
 
-    public void removeChangeListener( ComponentChangeListener listener )
+    public void removeChangeListener(ComponentChangeListener listener)
     {
         this.changeListeners.remove(listener);
     }
 
-    public void addValidator( ComponentValidator validator )
+    public void addValidator(ComponentValidator validator)
     {
         this.validators.add(validator);
     }
 
-    public void removeChangeListener( ComponentValidator validator )
+    public void removeChangeListener(ComponentValidator validator)
     {
         this.validators.remove(validator);
     }
 
-    public Slider link( final IntegerBox link )
+    public Slider link(final IntegerBox link)
     {
-        link.addChangeListener(new ComponentChangeListener() {
+        link.addChangeListener(new ComponentChangeListener()
+        {
             @Override
             public void changed()
             {
@@ -84,7 +85,8 @@ public class Slider extends DragableContainer implements ContainerLayout
             }
         });
 
-        this.addChangeListener(new ComponentChangeListener() {
+        this.addChangeListener(new ComponentChangeListener()
+        {
             @Override
             public void changed()
             {
@@ -100,7 +102,7 @@ public class Slider extends DragableContainer implements ContainerLayout
         return this.value;
     }
 
-    public void setValue( double value )
+    public void setValue(double value)
     {
         if (value != this.value) {
             this.value = value;
@@ -116,7 +118,7 @@ public class Slider extends DragableContainer implements ContainerLayout
 
             this.removeStyle("error");
             for (ComponentValidator validator : this.validators) {
-                if ( ! validator.isValid() ) {
+                if (!validator.isValid()) {
                     this.addStyle("error");
                 }
             }
@@ -126,13 +128,13 @@ public class Slider extends DragableContainer implements ContainerLayout
         }
     }
 
-    public void adjust( double delta )
+    public void adjust(double delta)
     {
         this.setValue(this.value + delta);
     }
 
     @Override
-    public void calculateRequirements( PlainContainer container )
+    public void calculateRequirements(PlainContainer container)
     {
     }
 
@@ -143,7 +145,7 @@ public class Slider extends DragableContainer implements ContainerLayout
     }
 
     @Override
-    public void layout( PlainContainer container )
+    public void layout(PlainContainer container)
     {
         int x = (int) ((this.value - this.from) / (this.to - this.from) * getKnobRange());
 
@@ -155,7 +157,7 @@ public class Slider extends DragableContainer implements ContainerLayout
     }
 
     @Override
-    public void onClick( MouseButtonEvent mbe )
+    public void onClick(MouseButtonEvent mbe)
     {
         if (mbe == null) {
             return;
@@ -168,7 +170,7 @@ public class Slider extends DragableContainer implements ContainerLayout
     }
 
     @Override
-    public boolean acceptDrag( MouseButtonEvent e )
+    public boolean acceptDrag(MouseButtonEvent e)
     {
 
         if (this.knob.contains2(e)) {
@@ -179,18 +181,18 @@ public class Slider extends DragableContainer implements ContainerLayout
     }
 
     @Override
-    public void drag( MouseEvent mme, int dx, int dy )
+    public void drag(MouseEvent mme, int dx, int dy)
     {
         moveTo(this.dragX + dx);
     }
 
     @Override
-    public void endDrag( MouseButtonEvent e, int dx, int dy )
+    public void endDrag(MouseButtonEvent e, int dx, int dy)
     {
         moveTo(this.dragX + dx);
     }
 
-    private void moveTo( int x )
+    private void moveTo(int x)
     {
         double range = this.to - this.from;
 
