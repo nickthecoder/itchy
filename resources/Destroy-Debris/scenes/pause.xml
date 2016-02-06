@@ -1,3 +1,7 @@
 <scene name="pause" layout="popup" sceneDirector="uk.co.nickthecoder.itchy.PlainSceneDirector" showMouse="true">
-  <layer name="popup"/>
+  <layer name="popup">
+    <text x="396.0" y="333.0" id="" font="BlackCasper" fontSize="144.0" text="Pause" color="#c752d0ff" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Textured">
+      <makeup pose="texture1"/>
+    </text>
+  </layer>
 </scene>

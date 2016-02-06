@@ -11,7 +11,7 @@ from uk.co.nickthecoder.itchy.util import ClassName, Util #@UnusedImport
 
 from uk.co.nickthecoder.itchy.collision import StandardNeighbourhood, NeighbourhoodCollisionStrategy, WrappedCollisionStrategy #@UnusedImport
 
-from uk.co.nickthecoder.itchy.role import PlainRole, Button, ProgressBar, MouseRole #@UnusedImport
+from uk.co.nickthecoder.itchy.role import PlainRole, ButtonRole, ProgressBar, MouseRole #@UnusedImport
 from uk.co.nickthecoder.itchy.role import Companion, Follower, Explosion, OnionSkin, Projectile, Talk, TalkProjectile #@UnusedImport
 from uk.co.nickthecoder.itchy.role import FollowerBuilder, ExplosionBuilder, OnionSkinBuilder, ProjectileBuilder, TalkBuilder, TalkProjectileBuilder #@UnusedImport
 

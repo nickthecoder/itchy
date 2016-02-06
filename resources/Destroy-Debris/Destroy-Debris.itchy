@@ -1,5 +1,5 @@
 <resources>
-  <game title="Destroy Debris" width="800" height="600" resizable="false" initialScene="menu" testScene="test" directorClassName="director.py"/>
+  <game title="Destroy Debris" width="800" height="600" resizable="false" initialScene="menu" testScene="intro-1" directorClassName="director.py"/>
   <spriteSheets>
     <spriteSheet name="keys-arrows" file="images/keys-arrows.png">
       <sprite name="key-left2" direction="0.0" offsetX="16" offsetY="14" x="0" y="9" width="35" height="36"/>
