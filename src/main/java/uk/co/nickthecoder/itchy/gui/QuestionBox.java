@@ -26,7 +26,7 @@ public class QuestionBox extends Window
         this.okLabel = new Label("Ok");
         this.cancelLabel = new Label("Cancel");
 
-        GuiButton ok = new GuiButton(this.okLabel);
+        Button ok = new Button(this.okLabel);
         ok.addActionListener(new ActionListener() {
             @Override
             public void action()
@@ -39,7 +39,7 @@ public class QuestionBox extends Window
         });
         buttons.addChild(ok);
 
-        GuiButton cancel = new GuiButton(this.cancelLabel);
+        Button cancel = new Button(this.cancelLabel);
         cancel.addActionListener(new ActionListener() {
             @Override
             public void action()

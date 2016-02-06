@@ -14,7 +14,7 @@ import uk.co.nickthecoder.itchy.KeyListener;
 import uk.co.nickthecoder.itchy.PlainDirector;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
-import uk.co.nickthecoder.itchy.gui.GuiButton;
+import uk.co.nickthecoder.itchy.gui.Button;
 import uk.co.nickthecoder.itchy.gui.Label;
 import uk.co.nickthecoder.itchy.gui.MessageBox;
 import uk.co.nickthecoder.itchy.gui.Notebook;
@@ -210,7 +210,7 @@ public final class Editor extends Game implements KeyListener
         buttons.addStyle("buttonBar");
         buttons.setXAlignment(1);
 
-        GuiButton test = new GuiButton(new Label("Test"));
+        Button test = new Button(new Label("Test"));
         test.setTooltip("ctrl+T");
         test.addActionListener(new ActionListener()
         {
@@ -222,7 +222,7 @@ public final class Editor extends Game implements KeyListener
         });
         buttons.addChild(test);
         
-        GuiButton run = new GuiButton(new Label("Run"));
+        Button run = new Button(new Label("Run"));
         run.setTooltip("ctrl+R");
         run.addActionListener(new ActionListener()
         {
@@ -234,7 +234,7 @@ public final class Editor extends Game implements KeyListener
         });
         buttons.addChild(run);
 
-        GuiButton quit = new GuiButton(new Label("Quit"));
+        Button quit = new Button(new Label("Quit"));
         quit.setTooltip("ctrl+Q");
         quit.addActionListener(new ActionListener()
         {
@@ -246,7 +246,7 @@ public final class Editor extends Game implements KeyListener
         });
         buttons.addChild(quit);
 
-        GuiButton save = new GuiButton(new Label("Save"));
+        Button save = new Button(new Label("Save"));
         save.setTooltip("ctrl+S");
         buttons.addChild(save);
         save.addActionListener(new ActionListener()

@@ -22,7 +22,7 @@ public class FolderComponent extends PlainContainer
 
     private final TextBox textBox;
 
-    private final GuiButton openButton;
+    private final Button openButton;
     
     /**
      * True if the folder must exist - the textbox will have the "error" style if this is set, and the file does not
@@ -55,7 +55,7 @@ public class FolderComponent extends PlainContainer
         });
         this.addChild(this.textBox);
 
-        this.openButton = new GuiButton( "Open" );
+        this.openButton = new Button( "Open" );
         this.openButton.addActionListener(new ActionListener()
         {
             @Override

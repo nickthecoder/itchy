@@ -9,23 +9,23 @@ import java.util.List;
 
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 
-public class GuiButton extends ClickableContainer
+public class Button extends ClickableContainer
 {
     private final List<ActionListener> actionListeners = new ArrayList<ActionListener>();
 
-    public GuiButton()
+    public Button()
     {
         super();
         this.type = "button";
         this.focusable = true;
     }
 
-    public GuiButton( String text )
+    public Button( String text )
     {
         this(new Label(text));
     }
 
-    public GuiButton( AbstractComponent child )
+    public Button( AbstractComponent child )
     {
         this();
 

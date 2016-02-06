@@ -19,7 +19,7 @@ import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.Container;
 import uk.co.nickthecoder.itchy.gui.DoubleBox;
 import uk.co.nickthecoder.itchy.gui.GridLayout;
-import uk.co.nickthecoder.itchy.gui.GuiButton;
+import uk.co.nickthecoder.itchy.gui.Button;
 import uk.co.nickthecoder.itchy.gui.ImageComponent;
 import uk.co.nickthecoder.itchy.gui.IntegerBox;
 import uk.co.nickthecoder.itchy.gui.Label;
@@ -47,7 +47,7 @@ public class FramedAnimationEditor extends AnimationEditor
     @Override
     public void createButtons( Container buttonBar )
     {
-        GuiButton add = new GuiButton("Add");
+        Button add = new Button("Add");
         add.addActionListener(new ActionListener() {
             @Override
             public void action()
@@ -123,9 +123,9 @@ public class FramedAnimationEditor extends AnimationEditor
 
         });
 
-        GuiButton up = null;
+        Button up = null;
         if (i > 0) {
-            up = new GuiButton(new ImageComponent(getStylesheet().resources.getPose("icon_up").getSurface()));
+            up = new Button(new ImageComponent(getStylesheet().resources.getPose("icon_up").getSurface()));
             up.addActionListener(new ActionListener() {
                 @Override
                 public void action()
@@ -140,7 +140,7 @@ public class FramedAnimationEditor extends AnimationEditor
             up.setTooltip("Move Up");
         }
 
-        GuiButton delete = new GuiButton(new ImageComponent(getStylesheet().resources.getPose(
+        Button delete = new Button(new ImageComponent(getStylesheet().resources.getPose(
             "icon_delete").getSurface()));
         delete.addActionListener(new ActionListener() {
             @Override

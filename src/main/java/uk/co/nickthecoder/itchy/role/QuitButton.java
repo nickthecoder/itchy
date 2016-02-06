@@ -9,7 +9,7 @@ import uk.co.nickthecoder.itchy.Itchy;
 /**
  * When clicked, the game will end.
  */
-public class QuitButton extends Button
+public class QuitButton extends ButtonRole
 {
     @Override
     protected void onClick()

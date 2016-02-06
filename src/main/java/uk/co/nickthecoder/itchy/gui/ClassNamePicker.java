@@ -47,7 +47,7 @@ public abstract class ClassNamePicker extends Window
         buttons.setLayout(new HorizontalLayout());
         buttons.setXAlignment(0.5f);
 
-        GuiButton cancelButton = new GuiButton("Cancel");
+        Button cancelButton = new Button("Cancel");
         cancelButton.addActionListener(new ActionListener() {
             @Override
             public void action()
@@ -108,7 +108,7 @@ public abstract class ClassNamePicker extends Window
             this.previousGrid = grid;
         }
 
-        final GuiButton button = new GuiButton(new Label(labelText));
+        final Button button = new Button(new Label(labelText));
 
         button.addActionListener(new ActionListener() {
             @Override

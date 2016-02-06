@@ -40,7 +40,7 @@ public abstract class PoseResourcePicker extends Window
         buttons.setLayout(new HorizontalLayout());
         buttons.setXAlignment(0.5f);
 
-        GuiButton cancel = new GuiButton("Cancel");
+        Button cancel = new Button("Cancel");
         cancel.addActionListener(new ActionListener() {
 
             @Override
@@ -93,7 +93,7 @@ public abstract class PoseResourcePicker extends Window
         container.setXAlignment(0.5f);
 
         ImageComponent img = new ImageComponent(poseResource.getThumbnail());
-        GuiButton button = new GuiButton(img);
+        Button button = new Button(img);
         button.addActionListener(new ActionListener() {
             @Override
             public void action()

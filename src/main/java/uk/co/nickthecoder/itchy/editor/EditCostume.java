@@ -7,7 +7,7 @@ import uk.co.nickthecoder.itchy.gui.ClassNameBox;
 import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.CostumePicker;
-import uk.co.nickthecoder.itchy.gui.GuiButton;
+import uk.co.nickthecoder.itchy.gui.Button;
 import uk.co.nickthecoder.itchy.gui.Label;
 import uk.co.nickthecoder.itchy.gui.Notebook;
 import uk.co.nickthecoder.itchy.gui.PlainContainer;
@@ -23,7 +23,7 @@ public class EditCostume extends EditNamedSubject<Costume>
 
     private Label labelExtendedFrom;
 
-    private GuiButton buttonExtendedFrom;
+    private Button buttonExtendedFrom;
 
     public EditCostume(Resources resources, ListSubjects<Costume> listSubjects, Costume subject, boolean isNew)
     {
@@ -75,7 +75,7 @@ public class EditCostume extends EditNamedSubject<Costume>
         Costume base = subject.getExtendedFrom();
         labelExtendedFrom = new Label(base == null ? "None" : base.getName());
 
-        buttonExtendedFrom = new GuiButton(labelExtendedFrom)
+        buttonExtendedFrom = new Button(labelExtendedFrom)
         {
             @Override
             public void onClick(MouseButtonEvent e)

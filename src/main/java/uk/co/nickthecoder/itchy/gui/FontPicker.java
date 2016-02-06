@@ -47,7 +47,7 @@ public abstract class FontPicker extends Window
         buttons.setLayout(new HorizontalLayout());
         buttons.setXAlignment(0.5f);
 
-        GuiButton cancel = new GuiButton("Cancel");
+        Button cancel = new Button("Cancel");
         cancel.addActionListener(new ActionListener()
         {
 
@@ -91,7 +91,7 @@ public abstract class FontPicker extends Window
     private AbstractComponent createButton(final Font font)
         throws JameException
     {
-        GuiButton button = new GuiButton();
+        Button button = new Button();
         button.setLayout(new VerticalLayout());
         button.setXAlignment(0.5f);
 

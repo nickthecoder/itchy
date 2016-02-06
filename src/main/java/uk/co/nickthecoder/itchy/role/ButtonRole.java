@@ -23,8 +23,10 @@ import uk.co.nickthecoder.jame.event.MouseMotionEvent;
  * For the button to work, the layer that the actor is drawn on must have had its mouse listener enabled. i.e. call
  * {@link uk.co.nickthecoder.itchy.StageView#enableMouseListener(uk.co.nickthecoder.itchy.Game)} when initialising your
  * Game object.
+ * 
+ * This is called ButtonRole, rather than just Button to avoid confusion with the Button class in the gui package.
  */
-public abstract class Button extends AbstractRole implements ViewMouseListener
+public abstract class ButtonRole extends AbstractRole implements ViewMouseListener
 {
 
     private boolean down = false;

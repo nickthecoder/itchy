@@ -52,7 +52,7 @@ public abstract class Picker<T> extends Window
         buttons.setLayout(new HorizontalLayout());
         buttons.setXAlignment(0.5f);
 
-        GuiButton cancelButton = new GuiButton("Cancel");
+        Button cancelButton = new Button("Cancel");
         cancelButton.addActionListener(new ActionListener() {
             @Override
             public void action()
@@ -69,7 +69,7 @@ public abstract class Picker<T> extends Window
     private Component createButton( final String label, final T object )
     {
 
-        GuiButton button = new GuiButton(label);
+        Button button = new Button(label);
         button.addActionListener(new ActionListener() {
             @Override
             public void action()

@@ -11,7 +11,7 @@ import uk.co.nickthecoder.itchy.PoseResource;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.jame.Surface;
 
-public class PoseResourcePickerButton extends GuiButton implements ActionListener
+public class PoseResourcePickerButton extends Button implements ActionListener
 {
     private Resources resources;
 

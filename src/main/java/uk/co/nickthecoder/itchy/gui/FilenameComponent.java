@@ -36,7 +36,7 @@ public class FilenameComponent extends PlainContainer
         this.textBox = new TextBox(filename);
         this.addChild(this.textBox);
 
-        GuiButton pick = new GuiButton("...");
+        Button pick = new Button("...");
         pick.addActionListener(new ActionListener() {
             @Override
             public void action()
@@ -46,7 +46,7 @@ public class FilenameComponent extends PlainContainer
         });
         this.addChild(pick);
 
-        GuiButton rename = new GuiButton("Rename");
+        Button rename = new Button("Rename");
         rename.addActionListener(new ActionListener() {
             @Override
             public void action()

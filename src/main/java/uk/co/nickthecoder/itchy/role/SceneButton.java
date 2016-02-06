@@ -16,7 +16,7 @@ import uk.co.nickthecoder.itchy.property.StringProperty;
  * When clicked, this button will start a given scene. The scene is given by the sceneName property, which can be
  * edited within the Scene Designer.
  */
-public class SceneButton extends Button
+public class SceneButton extends ButtonRole
 {
     protected static final List<Property<Role, ?>> properties = new ArrayList<Property<Role, ?>>();
 

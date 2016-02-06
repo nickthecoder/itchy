@@ -7,7 +7,7 @@ import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.util.NinePatch;
 import uk.co.nickthecoder.jame.Surface;
 
-public class NinePatchPickerButton extends GuiButton implements ActionListener
+public class NinePatchPickerButton extends Button implements ActionListener
 {
     private Resources resources;
 

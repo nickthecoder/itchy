@@ -3,8 +3,6 @@ Current Tasks
 
 Look over all TODOs
 
-Rename Button and GuiButton
-
 Check order of Role onAttach and onBirth, I think it should be reversed.
     Remove the special "onBirth" in DelayedActivation, and put a special instanceof DelayedActivation when attach is called. 
 

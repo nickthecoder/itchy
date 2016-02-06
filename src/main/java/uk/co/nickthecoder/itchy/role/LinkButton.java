@@ -17,7 +17,7 @@ import uk.co.nickthecoder.itchy.property.StringProperty;
  * When clicked, this button will use the default web browser to display a web page. The URL (web address) can be edited
  * within the SceneDesigner.
  */
-public class LinkButton extends Button
+public class LinkButton extends ButtonRole
 {
     protected static final List<Property<Role, ?>> properties = new ArrayList<Property<Role, ?>>();
 

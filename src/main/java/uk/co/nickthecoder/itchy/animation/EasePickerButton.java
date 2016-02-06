@@ -9,13 +9,13 @@ import java.util.List;
 
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.ComponentValidator;
-import uk.co.nickthecoder.itchy.gui.GuiButton;
+import uk.co.nickthecoder.itchy.gui.Button;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.ImageComponent;
 import uk.co.nickthecoder.itchy.gui.Label;
 import uk.co.nickthecoder.itchy.gui.VerticalLayout;
 
-public class EasePickerButton extends GuiButton implements ActionListener
+public class EasePickerButton extends Button implements ActionListener
 {
     private Ease ease;
 

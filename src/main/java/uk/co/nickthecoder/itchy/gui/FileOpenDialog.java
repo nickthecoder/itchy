@@ -61,7 +61,7 @@ public class FileOpenDialog extends Window
         buttonBar.setXAlignment(0.5f);
         this.clientArea.addChild(buttonBar);
 
-        GuiButton ok = new GuiButton("Ok");
+        Button ok = new Button("Ok");
         ok.addActionListener(new ActionListener() {
             @Override
             public void action()
@@ -71,7 +71,7 @@ public class FileOpenDialog extends Window
         });
         buttonBar.addChild(ok);
 
-        GuiButton cancel = new GuiButton("Cancel");
+        Button cancel = new Button("Cancel");
         cancel.addActionListener(new ActionListener() {
             @Override
             public void action()
@@ -124,7 +124,7 @@ public class FileOpenDialog extends Window
         if (directory.getParentFile() != null) {
             this.addAncestor(directory.getParentFile(), false);
         }
-        final GuiButton button = new GuiButton(directory.getName());
+        final Button button = new Button(directory.getName());
         button.addActionListener(new ActionListener() {
             @Override
             public void action()

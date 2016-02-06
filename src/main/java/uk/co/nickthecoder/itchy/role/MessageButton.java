@@ -15,7 +15,7 @@ import uk.co.nickthecoder.itchy.property.StringProperty;
 /**
  * Sends a message to the Game when the button is clicked.
  */
-public class MessageButton extends Button
+public class MessageButton extends ButtonRole
 {
     protected static final List<Property<Role, ?>> properties = new ArrayList<Property<Role, ?>>();
 

@@ -14,10 +14,10 @@ import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.FontProperty;
 import uk.co.nickthecoder.itchy.property.IntegerProperty;
 import uk.co.nickthecoder.itchy.property.RGBAProperty;
-import uk.co.nickthecoder.itchy.role.Button;
+import uk.co.nickthecoder.itchy.role.ButtonRole;
 import uk.co.nickthecoder.jame.RGBA;
 
-public class PickLevel extends Button
+public class PickLevel extends ButtonRole
 {
     protected static final List<Property<Role, ?>> properties = new ArrayList<Property<Role, ?>>();
 

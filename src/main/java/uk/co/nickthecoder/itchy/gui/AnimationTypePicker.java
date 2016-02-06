@@ -49,7 +49,7 @@ public abstract class AnimationTypePicker extends Window
         ImagePose icon = Editor.instance.getStylesheet().resources.getPose("animation-" + animation.getTagName());
         ImageComponent img = new ImageComponent((icon == null) ? null : icon.getSurface());
         center.addChild(img);
-        GuiButton button = new GuiButton(center);
+        Button button = new Button(center);
         container.addChild(button);
 
         container.addChild(new Label(animation.getName()));

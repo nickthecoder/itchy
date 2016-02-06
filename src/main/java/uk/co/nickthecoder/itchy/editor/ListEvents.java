@@ -20,7 +20,7 @@ import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.Container;
 import uk.co.nickthecoder.itchy.gui.CostumePicker;
 import uk.co.nickthecoder.itchy.gui.FontPicker;
-import uk.co.nickthecoder.itchy.gui.GuiButton;
+import uk.co.nickthecoder.itchy.gui.Button;
 import uk.co.nickthecoder.itchy.gui.ImageComponent;
 import uk.co.nickthecoder.itchy.gui.Label;
 import uk.co.nickthecoder.itchy.gui.Picker;
@@ -76,7 +76,7 @@ public class ListEvents extends ListSubjects<Costume.Event>
                     Costume companion = (Costume) data;
                     container.addChild(new ImageComponent(companion.getThumbnail()));
                 } else if (data instanceof ManagedSound) {
-                    GuiButton button = new GuiButton("Play");
+                    Button button = new Button("Play");
                     button.addActionListener(new ActionListener()
                     {
                         @Override

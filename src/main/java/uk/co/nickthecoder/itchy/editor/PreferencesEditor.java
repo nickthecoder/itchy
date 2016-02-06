@@ -5,7 +5,7 @@
 package uk.co.nickthecoder.itchy.editor;
 
 import uk.co.nickthecoder.itchy.gui.ActionListener;
-import uk.co.nickthecoder.itchy.gui.GuiButton;
+import uk.co.nickthecoder.itchy.gui.Button;
 import uk.co.nickthecoder.itchy.gui.PlainContainer;
 import uk.co.nickthecoder.itchy.gui.GridLayout;
 import uk.co.nickthecoder.itchy.gui.Component;
@@ -43,7 +43,7 @@ public class PreferencesEditor
         }
 
         PlainContainer buttonBar = new PlainContainer();
-        GuiButton save = new GuiButton("Save");
+        Button save = new Button("Save");
         save.addActionListener(new ActionListener() {
 
             @Override

@@ -160,7 +160,7 @@ public class RGBAPicker extends Window
         buttonBar.addStyle("buttonBar");
         buttonBar.setXAlignment(0.5f);
 
-        GuiButton ok = new GuiButton("Ok");
+        Button ok = new Button("Ok");
         ok.addActionListener(new ActionListener() {
             @Override
             public void action()
@@ -170,7 +170,7 @@ public class RGBAPicker extends Window
         });
         buttonBar.addChild(ok);
 
-        GuiButton cancel = new GuiButton("Cancel");
+        Button cancel = new Button("Cancel");
         cancel.addActionListener(new ActionListener() {
             @Override
             public void action()

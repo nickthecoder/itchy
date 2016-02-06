@@ -59,7 +59,7 @@ public abstract class ThumbnailedPicker<T extends Thumbnailed> extends Window
         buttons.setLayout(new HorizontalLayout());
         buttons.setXAlignment(0.5f);
 
-        GuiButton cancelButton = new GuiButton("Cancel");
+        Button cancelButton = new Button("Cancel");
         cancelButton.addActionListener(new ActionListener() {
             @Override
             public void action()
@@ -81,12 +81,12 @@ public abstract class ThumbnailedPicker<T extends Thumbnailed> extends Window
         container.setYAlignment(1);
         container.setFill(false, true);
 
-        GuiButton button;
+        Button button;
         Surface surface = object.getThumbnail();
         if (surface == null) {
-            button = new GuiButton("");
+            button = new Button("");
         } else {
-            button = new GuiButton(new ImageComponent(surface));
+            button = new Button(new ImageComponent(surface));
         }
         button.setExpansion(1.0);
 

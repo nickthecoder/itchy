@@ -11,14 +11,14 @@ public class Custom extends Play
         super.onLoaded()
         def director = Itchy.game.director
 
-        createRain( (int) director.customRainDrops, "drop1" )
-        createRain( (int) director.customFrogs, "drop2" )
-        createRain( (int) director.customFastDrops, "drop3" )
-
         this.speed = director.customSpeed
         this.maxSpeed = director.customMaxSpeed
         this.speedUpAfter = director.customSpeedUpAfter
         
+        createRain( (int) director.customRainDrops, "drop1" )
+        createRain( (int) director.customFrogs, "drop2" )
+        createRain( (int) director.customFastDrops, "drop3" )
+
         director.putCustomValues()
     }
 

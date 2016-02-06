@@ -5,7 +5,7 @@ import uk.co.nickthecoder.itchy.InputInterface;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.Container;
-import uk.co.nickthecoder.itchy.gui.GuiButton;
+import uk.co.nickthecoder.itchy.gui.Button;
 import uk.co.nickthecoder.itchy.gui.InputPicker;
 import uk.co.nickthecoder.itchy.gui.PlainContainer;
 import uk.co.nickthecoder.itchy.gui.TextWidget;
@@ -31,7 +31,7 @@ public class InputStringProperty<S> extends StringProperty<S>
         PlainContainer container = new PlainContainer();
         container.addStyle("combo");
         
-        GuiButton keysButton = new GuiButton("+");
+        Button keysButton = new Button("+");
         keysButton.addActionListener(new ActionListener()
         {
 

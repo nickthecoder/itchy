@@ -5,7 +5,7 @@ import java.util.List;
 
 import uk.co.nickthecoder.itchy.SoundResource;
 
-public class SoundPickerButton extends GuiButton implements ActionListener
+public class SoundPickerButton extends Button implements ActionListener
 {
 
     private SoundResource soundResource;

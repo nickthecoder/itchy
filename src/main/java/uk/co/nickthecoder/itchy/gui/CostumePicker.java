@@ -59,13 +59,13 @@ public abstract class CostumePicker extends Window
         container.setLayout(new VerticalLayout());
         container.setXAlignment(0.5f);
 
-        GuiButton button;
+        Button button;
         Surface surface = costume == null ? null : costume.getThumbnail();
         if (surface == null) {
-            button = new GuiButton(costume == null ? this.nullText : costume.getName());
+            button = new Button(costume == null ? this.nullText : costume.getName());
         } else {
             ImageComponent img = new ImageComponent(surface);
-            button = new GuiButton(img);
+            button = new Button(img);
         }
 
         button.addActionListener(new ActionListener() {

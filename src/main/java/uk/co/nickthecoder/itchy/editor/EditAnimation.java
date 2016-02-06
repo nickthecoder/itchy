@@ -10,7 +10,7 @@ import uk.co.nickthecoder.itchy.gui.AbstractComponent;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.AnimationTypePicker;
 import uk.co.nickthecoder.itchy.gui.Component;
-import uk.co.nickthecoder.itchy.gui.GuiButton;
+import uk.co.nickthecoder.itchy.gui.Button;
 import uk.co.nickthecoder.itchy.gui.ImageComponent;
 import uk.co.nickthecoder.itchy.gui.NullComponent;
 import uk.co.nickthecoder.itchy.gui.PlainContainer;
@@ -112,12 +112,12 @@ public class EditAnimation extends EditNamedSubject<AnimationResource>
         PlainContainer line = new PlainContainer();
         line.setFill(true, false);
 
-        GuiButton name = new GuiButton(animation.getName());
+        Button name = new Button(animation.getName());
         name.setExpansion(1);
         line.addChild(name);
 
         if ((parent != null) && (parent.children.get(0) != animation)) {
-            GuiButton up = new GuiButton(new ImageComponent(getStylesheet().resources.getPose("icon_up")
+            Button up = new Button(new ImageComponent(getStylesheet().resources.getPose("icon_up")
                 .getSurface()));
             up.addStyle("compact");
             up.addActionListener(new ActionListener()
@@ -133,7 +133,7 @@ public class EditAnimation extends EditNamedSubject<AnimationResource>
         }
 
         if (parent != null) {
-            GuiButton delete = new GuiButton(new ImageComponent(getStylesheet().resources.getPose(
+            Button delete = new Button(new ImageComponent(getStylesheet().resources.getPose(
                 "icon_delete")
                 .getSurface()));
 
@@ -178,7 +178,7 @@ public class EditAnimation extends EditNamedSubject<AnimationResource>
                 indent.addChild(this.createAnimationTree(child, ca));
             }
 
-            GuiButton add = new GuiButton("Add");
+            Button add = new Button("Add");
             add.addActionListener(new ActionListener()
             {
                 @Override

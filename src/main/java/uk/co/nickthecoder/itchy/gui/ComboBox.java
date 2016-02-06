@@ -11,7 +11,7 @@ public class ComboBox extends PlainContainer
 {
     private TextBox name;
 
-    private GuiButton button;
+    private Button button;
 
     public String pickTitle = "Pick";
 
@@ -28,7 +28,7 @@ public class ComboBox extends PlainContainer
         for (String value : values) {
             this.map.put(value, value);
         }
-        this.button = new GuiButton("...");
+        this.button = new Button("...");
         this.button.addActionListener(new ActionListener() {
 
             @Override

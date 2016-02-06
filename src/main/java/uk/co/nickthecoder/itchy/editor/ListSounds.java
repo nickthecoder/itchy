@@ -14,7 +14,7 @@ import uk.co.nickthecoder.itchy.gui.AbstractComponent;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.Container;
-import uk.co.nickthecoder.itchy.gui.GuiButton;
+import uk.co.nickthecoder.itchy.gui.Button;
 import uk.co.nickthecoder.itchy.gui.MessageBox;
 import uk.co.nickthecoder.itchy.gui.PickerButton;
 import uk.co.nickthecoder.itchy.gui.PlainContainer;
@@ -92,7 +92,7 @@ public class ListSounds extends ListFileSubjects<SoundResource>
             {
                 PlainContainer container = new PlainContainer();
 
-                GuiButton button = new GuiButton("Play");
+                Button button = new Button("Play");
                 button.addActionListener(new ActionListener() {
                     @Override
                     public void action()

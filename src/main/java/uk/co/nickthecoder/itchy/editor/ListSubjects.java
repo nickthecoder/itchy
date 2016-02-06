@@ -6,7 +6,7 @@ import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.gui.AbstractTableListener;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Container;
-import uk.co.nickthecoder.itchy.gui.GuiButton;
+import uk.co.nickthecoder.itchy.gui.Button;
 import uk.co.nickthecoder.itchy.gui.HorizontalLayout;
 import uk.co.nickthecoder.itchy.gui.Label;
 import uk.co.nickthecoder.itchy.gui.PlainContainer;
@@ -183,7 +183,7 @@ public abstract class ListSubjects<S>
      */
     protected void addListButtons(Container buttonBar)
     {
-        GuiButton edit = new GuiButton(new Label("Edit"));
+        Button edit = new Button(new Label("Edit"));
         edit.addActionListener(new ActionListener()
         {
             @Override
@@ -194,7 +194,7 @@ public abstract class ListSubjects<S>
         });
         buttonBar.addChild(edit);
 
-        GuiButton add = new GuiButton(new Label("Add"));
+        Button add = new Button(new Label("Add"));
         add.addActionListener(new ActionListener()
         {
             @Override
@@ -205,7 +205,7 @@ public abstract class ListSubjects<S>
         });
         buttonBar.addChild(add);
 
-        GuiButton remove = new GuiButton(new Label("Remove"));
+        Button remove = new Button(new Label("Remove"));
         remove.addActionListener(new ActionListener()
         {
             @Override

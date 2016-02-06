@@ -59,7 +59,7 @@ public abstract class PoseOrFontPicker extends PoseResourcePicker
         container.setXAlignment(0.5f);
 
         Label example = createExample(font);
-        GuiButton button = new GuiButton(example);
+        Button button = new Button(example);
         button.addActionListener(new ActionListener() {
             @Override
             public void action()

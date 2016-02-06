@@ -10,7 +10,7 @@ import java.util.List;
 import uk.co.nickthecoder.itchy.Font;
 import uk.co.nickthecoder.itchy.Resources;
 
-public class FontPickerButton extends GuiButton implements ActionListener
+public class FontPickerButton extends Button implements ActionListener
 {
     private Resources resources;
 

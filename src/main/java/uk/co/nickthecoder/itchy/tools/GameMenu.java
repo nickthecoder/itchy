@@ -20,7 +20,7 @@ import uk.co.nickthecoder.itchy.Game;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
-import uk.co.nickthecoder.itchy.gui.GuiButton;
+import uk.co.nickthecoder.itchy.gui.Button;
 import uk.co.nickthecoder.itchy.gui.PlainContainer;
 import uk.co.nickthecoder.itchy.gui.GridLayout;
 import uk.co.nickthecoder.itchy.gui.Component;
@@ -99,7 +99,7 @@ public class GameMenu implements Page
                     combo.addStyle("combo");
                     combo.setFill(true, true);
 
-                    GuiButton playButton = new GuiButton();
+                    Button playButton = new Button();
 
                     File imageFile = new File(dir, "icon32.png");
                     try {
@@ -125,7 +125,7 @@ public class GameMenu implements Page
                         }
                     });
 
-                    GuiButton editButton = new GuiButton("Edit");
+                    Button editButton = new Button("Edit");
                     editButton.addActionListener(new ActionListener()
                     {
                         @Override

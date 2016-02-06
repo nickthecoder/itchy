@@ -19,7 +19,7 @@ import uk.co.nickthecoder.itchy.gui.ClassNameBox;
 import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.Container;
-import uk.co.nickthecoder.itchy.gui.GuiButton;
+import uk.co.nickthecoder.itchy.gui.Button;
 import uk.co.nickthecoder.itchy.gui.Label;
 import uk.co.nickthecoder.itchy.gui.Notebook;
 import uk.co.nickthecoder.itchy.gui.PlainContainer;
@@ -112,7 +112,7 @@ public class LayoutsEditor extends SubEditor<Layout>
 
         layersTableSection.addChild(tableButtons);
 
-        GuiButton edit = new GuiButton("Edit");
+        Button edit = new Button("Edit");
         edit.addActionListener(new ActionListener()
         {
             @Override
@@ -123,7 +123,7 @@ public class LayoutsEditor extends SubEditor<Layout>
         });
         tableButtons.addChild(edit);
 
-        GuiButton add = new GuiButton("Add");
+        Button add = new Button("Add");
         add.addActionListener(new ActionListener()
         {
             @Override
@@ -134,7 +134,7 @@ public class LayoutsEditor extends SubEditor<Layout>
         });
         tableButtons.addChild(add);
 
-        GuiButton remove = new GuiButton("Remove");
+        Button remove = new Button("Remove");
         remove.addActionListener(new ActionListener()
         {
             @Override
@@ -372,7 +372,7 @@ public class LayoutsEditor extends SubEditor<Layout>
         buttons.addStyle("buttonBar");
         buttons.setXAlignment(0.5f);
 
-        GuiButton ok = new GuiButton(new Label("Ok"));
+        Button ok = new Button(new Label("Ok"));
         ok.addActionListener(new ActionListener()
         {
             @Override
@@ -388,7 +388,7 @@ public class LayoutsEditor extends SubEditor<Layout>
                 window.hide();
             }
         });
-        GuiButton cancel = new GuiButton(new Label("Cancel"));
+        Button cancel = new Button(new Label("Cancel"));
         cancel.addActionListener(new ActionListener()
         {
             @Override

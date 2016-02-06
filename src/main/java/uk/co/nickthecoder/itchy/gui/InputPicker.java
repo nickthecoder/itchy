@@ -29,7 +29,7 @@ public abstract class InputPicker extends Window
         buttons.setXAlignment(0.5f);
         this.clientArea.setFill(true, false);
 
-        GuiButton ok = new GuiButton("Ok");
+        Button ok = new Button("Ok");
         ok.addActionListener(new ActionListener()
         {
 
@@ -61,7 +61,7 @@ public abstract class InputPicker extends Window
         });
         buttons.addChild(ok);
 
-        GuiButton cancel = new GuiButton("Cancel");
+        Button cancel = new Button("Cancel");
         cancel.addActionListener(new ActionListener()
         {
 

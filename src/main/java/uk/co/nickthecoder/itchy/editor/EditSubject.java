@@ -4,7 +4,7 @@ import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.Container;
-import uk.co.nickthecoder.itchy.gui.GuiButton;
+import uk.co.nickthecoder.itchy.gui.Button;
 import uk.co.nickthecoder.itchy.gui.Label;
 import uk.co.nickthecoder.itchy.gui.PlainContainer;
 import uk.co.nickthecoder.itchy.gui.PropertiesForm;
@@ -78,7 +78,7 @@ public abstract class EditSubject<S extends PropertySubject<S>>
     protected void addButtons(Container buttonBar)
     {
 
-        GuiButton ok = new GuiButton(new Label("Ok"));
+        Button ok = new Button(new Label("Ok"));
         ok.addActionListener(new ActionListener()
         {
             @Override
@@ -89,7 +89,7 @@ public abstract class EditSubject<S extends PropertySubject<S>>
         });
         buttonBar.addChild(ok);
 
-        GuiButton cancel = new GuiButton(new Label("Cancel"));
+        Button cancel = new Button(new Label("Cancel"));
         cancel.addActionListener(new ActionListener()
         {
             @Override

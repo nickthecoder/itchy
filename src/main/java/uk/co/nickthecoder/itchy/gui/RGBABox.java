@@ -26,7 +26,7 @@ public class RGBABox extends PlainContainer
 
         this.textBox.setBoxWidth(8);
 
-        GuiButton button = new GuiButton("...");
+        Button button = new Button("...");
         button.addActionListener(new ActionListener()
         {
             @Override

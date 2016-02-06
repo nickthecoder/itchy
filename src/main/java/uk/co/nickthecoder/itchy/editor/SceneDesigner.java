@@ -46,7 +46,7 @@ import uk.co.nickthecoder.itchy.gui.Container;
 import uk.co.nickthecoder.itchy.gui.CostumePicker;
 import uk.co.nickthecoder.itchy.gui.FlowLayout;
 import uk.co.nickthecoder.itchy.gui.GridLayout;
-import uk.co.nickthecoder.itchy.gui.GuiButton;
+import uk.co.nickthecoder.itchy.gui.Button;
 import uk.co.nickthecoder.itchy.gui.GuiView;
 import uk.co.nickthecoder.itchy.gui.ImageComponent;
 import uk.co.nickthecoder.itchy.gui.Label;
@@ -469,21 +469,21 @@ public class SceneDesigner implements MouseListener, KeyListener
             toolbar.getRequiredHeight());
     }
 
-    public GuiButton createButton(String name, String text)
+    public Button createButton(String name, String text)
     {
         Pose pose = editor.getStylesheet().resources.getPose("icon_" + name);
         if (pose == null) {
-            return new GuiButton(text);
+            return new Button(text);
         } else {
             ImageComponent image = new ImageComponent(pose.getSurface());
-            return new GuiButton(image);
+            return new Button(image);
         }
     }
 
     private void addToolbarButtons(Container toolbar)
     {
 
-        GuiButton exit = createButton("exit", "Exit");
+        Button exit = createButton("exit", "Exit");
         exit.addActionListener(new ActionListener()
         {
             @Override
@@ -495,7 +495,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         exit.setTooltip("Exit (ctrl+W)");
         toolbar.addChild(exit);
 
-        GuiButton save = createButton("save", "Save");
+        Button save = createButton("save", "Save");
         save.addActionListener(new ActionListener()
         {
             @Override
@@ -507,7 +507,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         save.setTooltip("Save (ctrl+S)");
         toolbar.addChild(save);
 
-        GuiButton test = createButton("test", "Test");
+        Button test = createButton("test", "Test");
         test.addActionListener(new ActionListener()
         {
             @Override
@@ -519,7 +519,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         test.setTooltip("Test (F12)");
         toolbar.addChild(test);
 
-        GuiButton home = createButton("center", "Center");
+        Button home = createButton("center", "Center");
         home.addActionListener(new ActionListener()
         {
             @Override
@@ -531,7 +531,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         home.setTooltip("Center View (ctrl+Home)");
         toolbar.addChild(home);
 
-        GuiButton cut = createButton("cut", "Cut");
+        Button cut = createButton("cut", "Cut");
         cut.addActionListener(new ActionListener()
         {
             @Override
@@ -544,7 +544,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         cut.setTooltip("Cut (ctrl+X)");
         toolbar.addChild(cut);
 
-        GuiButton copy = createButton("copy", "Copy");
+        Button copy = createButton("copy", "Copy");
         copy.addActionListener(new ActionListener()
         {
             @Override
@@ -556,7 +556,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         copy.setTooltip("Copy (ctrl+C)");
         toolbar.addChild(copy);
 
-        GuiButton paste = createButton("paste", "Paste");
+        Button paste = createButton("paste", "Paste");
         paste.addActionListener(new ActionListener()
         {
             @Override
@@ -568,7 +568,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         paste.setTooltip("Paste (ctrl+V)");
         toolbar.addChild(paste);
 
-        GuiButton actorUp = createButton("up", "Up");
+        Button actorUp = createButton("up", "Up");
         actorUp.addActionListener(new ActionListener()
         {
             @Override
@@ -580,7 +580,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         actorUp.setTooltip("Up the Z-Order (PageUp)");
         toolbar.addChild(actorUp);
 
-        GuiButton actorDown = createButton("down", "Down");
+        Button actorDown = createButton("down", "Down");
         actorDown.addActionListener(new ActionListener()
         {
             @Override
@@ -592,7 +592,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         actorDown.setTooltip("Down the Z-Order (PageDown)");
         toolbar.addChild(actorDown);
 
-        GuiButton actorTop = createButton("top", "Top");
+        Button actorTop = createButton("top", "Top");
         actorTop.addActionListener(new ActionListener()
         {
             @Override
@@ -604,7 +604,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         actorTop.setTooltip("Top of the Z-Order (Home)");
         toolbar.addChild(actorTop);
 
-        GuiButton actorBottom = createButton("bottom", "Bottom");
+        Button actorBottom = createButton("bottom", "Bottom");
         actorBottom.addActionListener(new ActionListener()
         {
             @Override
@@ -616,7 +616,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         actorBottom.setTooltip("Bottom of the Z-Order (End)");
         toolbar.addChild(actorBottom);
 
-        GuiButton actorUpLayer = createButton("moveUpLayer", "Up a Layer");
+        Button actorUpLayer = createButton("moveUpLayer", "Up a Layer");
         actorUpLayer.addActionListener(new ActionListener()
         {
             @Override
@@ -628,7 +628,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         actorUpLayer.setTooltip("Move actor up a layer (ctrl+PageUp)");
         toolbar.addChild(actorUpLayer);
 
-        GuiButton actorDownLayer = createButton("moveDownLayer", "Down a Layer");
+        Button actorDownLayer = createButton("moveDownLayer", "Down a Layer");
         actorDownLayer.addActionListener(new ActionListener()
         {
             @Override
@@ -640,7 +640,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         actorDownLayer.setTooltip("Move actor down a layer (ctrl+PageDown)");
         toolbar.addChild(actorDownLayer);
 
-        GuiButton actorUnrotate = createButton("unrotate", "Unrotate");
+        Button actorUnrotate = createButton("unrotate", "Unrotate");
         actorUnrotate.addActionListener(new ActionListener()
         {
             @Override
@@ -652,7 +652,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         actorUnrotate.setTooltip("Reset rotation (ctrl+o)");
         toolbar.addChild(actorUnrotate);
 
-        GuiButton actorUnscale = createButton("unscale", "Scale = 1");
+        Button actorUnscale = createButton("unscale", "Scale = 1");
         actorUnscale.addActionListener(new ActionListener()
         {
             @Override
@@ -664,7 +664,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         actorUnscale.setTooltip("Reset scale (ctrl+0)");
         toolbar.addChild(actorUnscale);
 
-        GuiButton textButton = createButton("text", "Text");
+        Button textButton = createButton("text", "Text");
         textButton.addActionListener(new ActionListener()
         {
             @Override
@@ -676,7 +676,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         textButton.setTooltip("Add Text");
         toolbar.addChild(textButton);
 
-        GuiButton resetZButton = createButton("resetZ", "Z");
+        Button resetZButton = createButton("resetZ", "Z");
         resetZButton.addActionListener(new ActionListener()
         {
             @Override
@@ -798,7 +798,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         GridLayout grid = new GridLayout(container, 2);
         grid.groupWith(appearancePropertiesForm.grid);
         final Label label = new Label((costume == null) ? "None" : editor.resources.getCostumeName(costume));
-        final GuiButton button = new GuiButton(label);
+        final Button button = new Button(label);
         grid.addRow("Costume", button);
         button.addActionListener(new ActionListener()
         {
@@ -1095,7 +1095,7 @@ public class SceneDesigner implements MouseListener, KeyListener
             public AbstractComponent createCell(TableModelRow row)
             {
                 final Layer layer = (Layer) row.getData(0);
-                GuiButton button = new GuiButton("...");
+                Button button = new Button("...");
                 button.addActionListener(new ActionListener()
                 {
                     @Override

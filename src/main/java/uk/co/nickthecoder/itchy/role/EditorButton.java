@@ -10,7 +10,7 @@ import uk.co.nickthecoder.itchy.Itchy;
  * When clicked, this button launches the Editor for the current game. This is useful for adding to your game's title page if you want
  * people to edit scenes.
  */
-public class EditorButton extends Button
+public class EditorButton extends ButtonRole
 {
     @Override
     protected void onClick()

@@ -5,7 +5,7 @@ import java.util.List;
 
 import uk.co.nickthecoder.itchy.AnimationResource;
 
-public class AnimationPickerButton extends GuiButton implements ActionListener
+public class AnimationPickerButton extends Button implements ActionListener
 {
     private AnimationResource animationResource;
 

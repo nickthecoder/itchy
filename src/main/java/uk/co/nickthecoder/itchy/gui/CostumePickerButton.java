@@ -10,7 +10,7 @@ import java.util.List;
 import uk.co.nickthecoder.itchy.Costume;
 import uk.co.nickthecoder.itchy.Resources;
 
-public class CostumePickerButton extends GuiButton implements ActionListener
+public class CostumePickerButton extends Button implements ActionListener
 {
     private Resources resources;
 

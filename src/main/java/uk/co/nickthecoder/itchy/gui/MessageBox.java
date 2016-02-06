@@ -23,7 +23,7 @@ public class MessageBox extends Window
 
         this.clientArea.addChild(buttons);
 
-        GuiButton ok = new GuiButton("Ok");
+        Button ok = new Button("Ok");
         ok.addActionListener(new ActionListener() {
             @Override
             public void action()
