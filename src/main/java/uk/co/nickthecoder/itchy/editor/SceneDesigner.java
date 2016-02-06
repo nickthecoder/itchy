@@ -74,6 +74,7 @@ import uk.co.nickthecoder.itchy.role.PlainRole;
 import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.itchy.util.NinePatch;
 import uk.co.nickthecoder.itchy.util.Reversed;
+import uk.co.nickthecoder.jame.RGBA;
 import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.Surface;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
@@ -1848,14 +1849,23 @@ public class SceneDesigner implements MouseListener, KeyListener
 
     public Actor copyActor(Actor fromActor)
     {
-        Actor toActor;
-        if (fromActor.getCostume() == null) {
-            toActor = new Actor(fromActor.getAppearance().getPose());
-        } else {
-            toActor = new Actor(fromActor.getCostume());
-        }
-
+        Actor toActor = null;
+        
         try {
+            Pose pose = fromActor.getAppearance().getPose();
+            if (pose instanceof TextPose) {
+                TextPose textPose = (TextPose) pose;
+                TextPose newTextPose = new TextPose(
+                    textPose.getText(),
+                    textPose.getFont(),
+                    textPose.getFontSize());
+                newTextPose.setAlignment(textPose.getXAlignment(), textPose.getYAlignment());
+                newTextPose.setColor( new RGBA(textPose.getColor()));
+                toActor = new Actor( newTextPose );
+            } else {
+                toActor = new Actor(fromActor.getCostume());
+            }
+
             Role fromRole = ((SceneDesignerRole) fromActor.getRole()).actualRole;
             Role toRole = (Role) fromRole.getClassName().createInstance(this.editor.resources);
             

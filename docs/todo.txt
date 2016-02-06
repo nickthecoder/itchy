@@ -13,9 +13,9 @@ Get Pause working - which games use it ?
 
 Remove Actor.getActivationDelay, and put it in SceneDesignerRole (which is then loaded directly into DelayedActivation) ?
 
-Escape does "cancel" on all "Edit" forms, and "close" on Lists.
-
 SubjectProperty should include the method getClassName() ?
+
+Check copy/paste of text in scene designer
 
 Implement change Layout in scene designer.
 
