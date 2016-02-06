@@ -22,7 +22,7 @@ import uk.co.nickthecoder.jame.event.Keys;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseEvent;
 
-public class TextArea extends ClickableContainer implements ContainerLayout, KeyListener, TextWidget
+public class TextArea extends PlainContainer implements ContainerLayout, KeyListener, TextWidget
 {
     private static final RGBA ANY_COLOR = new RGBA(0, 0, 0);
 
@@ -189,12 +189,20 @@ public class TextArea extends ClickableContainer implements ContainerLayout, Key
     }
 
     @Override
-    public void onClick(MouseButtonEvent ke)
+    public void onMouseDown( MouseButtonEvent event )
+    {
+        super.onMouseDown(event);
+
+        if (event.button == 1) {
+
+            clicked( event );
+            event.stopPropagation();
+        }
+    }
+    
+    public void clicked(MouseButtonEvent ke)
     {
         this.focus();
-        if (ke == null) {
-            return;
-        }
 
         Label label = getLabel(ke);
 

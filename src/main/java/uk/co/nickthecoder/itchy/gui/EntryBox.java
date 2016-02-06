@@ -21,7 +21,7 @@ import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.Keys;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 
-public class EntryBox<E extends EntryBox<?>> extends ClickableContainer implements ContainerLayout, KeyListener
+public class EntryBox<E extends EntryBox<?>> extends PlainContainer implements ContainerLayout, KeyListener
 {
     private static final RGBA ANY_COLOR = new RGBA(0, 0, 0);
 
@@ -117,14 +117,24 @@ public class EntryBox<E extends EntryBox<?>> extends ClickableContainer implemen
     {
         return this.readOnly;
     }
-
+    
     @Override
-    public void onClick(MouseButtonEvent ke)
+    public void onMouseDown( MouseButtonEvent event )
+    {
+        super.onMouseDown(event);
+
+        if (event.button == 1) {
+
+            clicked( event );
+            event.stopPropagation();
+        }
+    }
+
+
+    public void clicked(MouseButtonEvent ke)
     {
         this.focus();
-        if (ke == null) {
-            return;
-        }
+
         try {
             TrueTypeFont ttf = this.label.getFont().getSize(this.label.getFontSize());
 

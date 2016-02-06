@@ -1,5 +1,7 @@
 package uk.co.nickthecoder.itchy.editor;
 
+import uk.co.nickthecoder.itchy.Input;
+import uk.co.nickthecoder.itchy.InputInterface;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Component;
@@ -11,6 +13,7 @@ import uk.co.nickthecoder.itchy.gui.PropertiesForm;
 import uk.co.nickthecoder.itchy.gui.VerticalLayout;
 import uk.co.nickthecoder.itchy.gui.Window;
 import uk.co.nickthecoder.itchy.property.PropertySubject;
+import uk.co.nickthecoder.jame.event.KeyboardEvent;
 
 public abstract class EditSubject<S extends PropertySubject<S>>
 {
@@ -26,6 +29,10 @@ public abstract class EditSubject<S extends PropertySubject<S>>
 
     protected S subject;
 
+    protected InputInterface inputCancel;
+    
+    protected InputInterface inputOk;
+
     /**
      * True iff the currently edited resource isn't in the resources yet, ie we are adding a new record.
      */
@@ -37,6 +44,12 @@ public abstract class EditSubject<S extends PropertySubject<S>>
         this.listSubjects = listSubjects;
         this.subject = subject;
         this.isNew = isNew;
+        
+        try {
+            inputCancel = Input.parse("ESCAPE");
+            inputOk = Input.parse("RETURN");
+        } catch (Exception e) {
+        }
     }
 
     protected abstract String getSubjectName();
@@ -45,7 +58,14 @@ public abstract class EditSubject<S extends PropertySubject<S>>
     {
         String title = (isNew ? "New " : "Edit ") + getSubjectName();
 
-        this.editWindow = new Window(title);
+        this.editWindow = new Window(title) {
+            public void keyDown( KeyboardEvent ke )
+            {
+                super.keyDown(ke);
+                EditSubject.this.onKeyDown(ke);
+            }
+        };
+        
         this.editWindow.clientArea.setFill(true, true);
         this.editWindow.clientArea.setLayout(new VerticalLayout());
 
@@ -67,6 +87,18 @@ public abstract class EditSubject<S extends PropertySubject<S>>
 
         this.editWindow.clientArea.addChild(buttons);
         this.editWindow.show();
+    }
+
+    protected void onKeyDown( KeyboardEvent ke )
+    {        
+        if (inputCancel.matches(ke)) {
+            onCancel();
+            ke.stopPropagation();
+        }
+        if (inputOk.matches(ke)) {
+            onOk();
+            ke.stopPropagation();
+        }
     }
 
     /**
