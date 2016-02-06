@@ -1,5 +1,5 @@
 <resources>
-  <game title="It's Gonna Rain" width="800" height="600" resizable="false" initialScene="menu" testScene="customize" directorClassName="Rain.groovy"/>
+  <game title="It's Gonna Rain" width="800" height="600" resizable="false" initialScene="menu" testScene="easy" directorClassName="Rain.groovy"/>
   <spriteSheets/>
   <poses>
     <pose name="background" filename="images/background.png" offsetX="0" offsetY="0"/>
@@ -259,9 +259,11 @@
     <scene name="hard"/>
     <scene name="medium"/>
     <scene name="menu"/>
+    <scene name="pause"/>
   </scenes>
   <inputs>
     <input name="exit" keys="ESCAPE"/>
+    <input name="pause" keys="click+PAUSE,click+p"/>
     <input name="restart" keys="RETURN,KP_ENTER"/>
   </inputs>
   <layouts>
@@ -271,6 +273,11 @@
       </layer>
       <layer name="main" zOrder="50" x="0" y="0" width="800" height="600" viewClassName="uk.co.nickthecoder.itchy.StageView" stageClassName="uk.co.nickthecoder.itchy.ZOrderStage" stageConstraintClassName="uk.co.nickthecoder.itchy.NullStageConstraint">
         <view enableMouse="true"/>
+      </layer>
+    </layout>
+    <layout name="pause" defaultLayer="pause">
+      <layer name="pause" zOrder="100" x="0" y="0" width="800" height="600" viewClassName="uk.co.nickthecoder.itchy.StageView" stageClassName="uk.co.nickthecoder.itchy.ZOrderStage" stageConstraintClassName="uk.co.nickthecoder.itchy.NullStageConstraint">
+        <view enableMouse="false"/>
       </layer>
     </layout>
   </layouts>

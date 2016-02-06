@@ -202,7 +202,7 @@ public class Game
 
         // Sensible defaults, which can be replaced in the init() method.
         this.sceneDirector = new PlainSceneDirector();
-        this.pause = new SimplePause(this);
+        this.pause = new SimplePause();
     }
 
     /**
@@ -798,18 +798,35 @@ public class Game
     }
 
     public Layout layout;
-    
-    public boolean mergeScene( String additionalSceneName )
+
+    public Scene mergeScene( String additionalSceneName )
     {
         Scene scene = this.loadScene(additionalSceneName);
         if (scene == null) {
-            return false;
+            return null;
         }
         // Prevent a concurrent modification exception by aborting the ticks after the current stage as ticked.
         this.abortTicks = true;
         
         this.layout.merge(scene.layout);
-        return true;
+        return scene;
+    }
+
+    public void unmergeScene( Scene scene )
+    {
+        // Prevent a concurrent modification exception by aborting the ticks after the current stage as ticked.
+        this.abortTicks = true;
+
+        for (Layer layer : scene.layout.getLayers()) {
+            View view = layer.getView();
+            this.gameViews.remove(view);
+            
+            Stage stage = layer.getStage();
+            if ( stage != null ) {
+                stage.clear();
+                this.stages.remove(stage);
+            }
+        }
     }
     
     public Layout getLayout()
@@ -1010,7 +1027,8 @@ public class Game
         {
             this.stageIterator = Game.this.stages.iterator();
             if (this.stageIterator.hasNext()) {
-                this.actorIterator = this.stageIterator.next().iterator();
+                Stage stage = this.stageIterator.next();
+                this.actorIterator = stage.iterator();
             }
             advance();
         }
@@ -1027,8 +1045,8 @@ public class Game
                         return;
                     }
                 }
+                this.next = null;
             }
-            this.next = null;
         }
 
         @Override

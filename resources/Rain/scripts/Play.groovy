@@ -31,11 +31,14 @@ public class Play extends PlainSceneDirector
     def inputRestart
     
     def inputExit
+    
+    def inputPause
 
     void onActivate()
     {
         inputRestart = Input.find('restart')
         inputExit = Input.find('exit')
+        inputPause = Input.find('pause')
 
         // High scores are saved. There is a high score for each level. If there is no high score, then use 0.
         highScore = Itchy.game.preferences.getInt( getHighScoreKey(), 0 )
@@ -74,6 +77,10 @@ public class Play extends PlainSceneDirector
     
     void onKeyDown( KeyboardEvent ke )
     {
+        if (inputPause.matches( ke )) {
+            Itchy.game.pause.togglePause()
+        }
+        
         // If we are dead, then the RETURN key will start a new game (reloads the current scene)
         if ((!isPlaying()) && inputRestart.matches(ke)) {
             Itchy.game.startScene( Itchy.game.sceneName )

@@ -1,6 +1,8 @@
 Current Tasks
 =============
 
+Collisions to use an ActorFilter, instead of the "except tags" parameter.
+
 Look over all TODOs
 
 Check order of Role onAttach and onBirth, I think it should be reversed.
@@ -14,8 +16,6 @@ Get Pause working - which games use it ?
 Remove Actor.getActivationDelay, and put it in SceneDesignerRole (which is then loaded directly into DelayedActivation) ?
 
 SubjectProperty should include the method getClassName() ?
-
-Check copy/paste of text in scene designer
 
 Implement change Layout in scene designer.
 

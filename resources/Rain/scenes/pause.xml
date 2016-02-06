@@ -1,0 +1,7 @@
+<scene name="pause" layout="pause" sceneDirector="uk.co.nickthecoder.itchy.PlainSceneDirector" showMouse="true">
+  <layer name="pause">
+    <text x="406.0" y="324.0" id="" font="BlackCasper" fontSize="144.0" text="Pause" color="#d81700ff" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+      <makeup dx="4" dy="-4"/>
+    </text>
+  </layer>
+</scene>
