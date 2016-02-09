@@ -11,6 +11,10 @@ import uk.co.nickthecoder.itchy.util.Util;
  * Keeps track of the last time something was used, and how long it takes before it can be used again.
  * 
  * Useful for bullets, which have a maximum period between shots.
+ * 
+ * Note, this class automatically takes into account when the game is paused. e.g. if a timer is set for 1 minute, and
+ * the game is paused for 2 minutes part way through, then the timer will finish after 3 minutes.
+ * To disable this behaviour, use setPauseAware(false).
  */
 public class Timer
 {
@@ -28,7 +32,8 @@ public class Timer
      */
     private long startTime;
 
-    private boolean ignorePauses = false;
+    private boolean pauseAware = true;
+    
 
     public static Timer createTimerSeconds( double seconds )
     {
@@ -56,22 +61,23 @@ public class Timer
         this.reset();
     }
 
-    public void setIgnorePauses( boolean value )
+    public void setPauseAware( boolean value )
     {
-        this.ignorePauses = value;
+        this.pauseAware = value;
+        this.reset();
     }
 
-    public boolean getIgnorePauses()
+    public boolean getPauseAware()
     {
-        return this.ignorePauses;
+        return this.pauseAware;
     }
 
     private long currentTimeMillis()
     {
-        if (this.ignorePauses) {
-            return System.currentTimeMillis();
-        } else {
+        if (this.pauseAware) {
             return Itchy.getGame().gameTimeMillis();
+        } else {
+            return System.currentTimeMillis();
         }
     }
 
