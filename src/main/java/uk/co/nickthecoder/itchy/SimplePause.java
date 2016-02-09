@@ -8,6 +8,16 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+import uk.co.nickthecoder.itchy.util.AcceptFilter;
+import uk.co.nickthecoder.itchy.util.Filter;
+
+/**
+ * Pauses a game. Actors are paused by changing their role, and therefore the original roles' tick methods won't be
+ * called.
+ * 
+ * A pause message appears on the screen by merging a scene. So create a scene (called "pause"),
+ * with the word "Pause" in the middle.
+ */
 public class SimplePause implements Pause
 {
     protected String pauseSceneName;
@@ -17,7 +27,12 @@ public class SimplePause implements Pause
     private long totalTimePausedMillis;
 
     private Scene scene;
-
+    
+    /**
+     * Which actors should be paused? The default is for all actors to be paused.
+     */
+    public Filter<Actor> actorFilter;
+    
     /**
      * Remembers the time that the game was last paused, so that timers which don't count down during pauses can use
      * this time when the game is paused.
@@ -32,6 +47,7 @@ public class SimplePause implements Pause
     public SimplePause(String sceneName)
     {
         this.pauseSceneName = sceneName;
+        this.actorFilter = new AcceptFilter<Actor>();
     }
 
     @Override
@@ -85,24 +101,13 @@ public class SimplePause implements Pause
         for (Iterator<Actor> i = game.getActors(); i.hasNext();) {
             Actor actor = i.next();
 
-            if (pauseActor(actor)) {
+            if (actorFilter.accept(actor)) {
                 actor.setRole(new PausedRole(actor.getRole()));
             }
         }
 
         this.scene = game.mergeScene(this.pauseSceneName);
-    }
 
-    /**
-     * Subclasses may choose not to pause some actors, so example, special effects may be allowed to continue ticking
-     * during a pause.
-     * 
-     * @param actor
-     * @return The default implementation always returns true.
-     */
-    protected boolean pauseActor(Actor actor)
-    {
-        return true;
     }
 
     @Override
@@ -126,7 +131,9 @@ public class SimplePause implements Pause
         }
 
         this.totalTimePausedMillis += game.gameTimeMillis() - this.pauseTimeMillis;
+
     }
+    
 
     private class PausedRole extends AbstractRole
     {
@@ -160,4 +167,5 @@ public class SimplePause implements Pause
             // Do Nothing
         }
     }
+
 }
