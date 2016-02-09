@@ -8,6 +8,7 @@ import java.util.List;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Role;
+import uk.co.nickthecoder.itchy.util.Filter;
 
 /**
  * A collision strategy which is owned by a single Actor. i.e. the is a 1:1 relationship. Use as a base class for any strategy which need to
@@ -28,14 +29,19 @@ public abstract class ActorCollisionStrategy implements CollisionStrategy
         return this.actor;
     }
 
-    public List<Role> collisions( String... tags )
+    public List<Role> collisions( String[] tags )
     {
-        return this.collisions(this.actor, tags, null);
+        return this.collisions(this.actor, tags);
     }
 
-    public List<Role> collisions( String[] includeTags, String[] excludeTags )
+    public List<Role> collisions( String[] tags, int maxResults)
     {
-        return this.collisions(this.actor, includeTags, excludeTags);
+        return this.collisions(this.actor, tags, maxResults);
+    }
+    
+    public List<Role> collisions( String[] tags, int maxResults, Filter<Actor> filter)
+    {
+        return this.collisions(this.actor, tags, maxResults, filter);
     }
 
     public void update()

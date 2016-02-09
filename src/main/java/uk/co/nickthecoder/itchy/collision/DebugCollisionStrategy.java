@@ -8,6 +8,7 @@ import java.util.List;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Role;
+import uk.co.nickthecoder.itchy.util.Filter;
 
 public class DebugCollisionStrategy extends ActorCollisionStrategy
 {
@@ -23,20 +24,23 @@ public class DebugCollisionStrategy extends ActorCollisionStrategy
         this.strategy2 = b;
     }
 
-
-    private static final String[] EMPTY = {};
     
     @Override
-    public List<Role> collisions( Actor actor, String... includeTags )
+    public List<Role> collisions( Actor actor, String[] includeTags )
     {
-        return collisions(actor, includeTags, EMPTY );
+        return collisions(actor, includeTags, MAX_RESULTS, acceptFilter );
+    }
+    @Override
+    public List<Role> collisions( Actor actor, String[] includeTags, int maxResults )
+    {
+        return collisions(actor, includeTags, maxResults, acceptFilter );
     }
     
     @Override
-    public List<Role> collisions( Actor actor, String[] includeTags, String[] excludeTags )
+    public List<Role> collisions( Actor actor, String[] includeTags, int maxResults, Filter<Actor>filter )
     {
-        List<Role> results1 = this.strategy1.collisions(includeTags, excludeTags);
-        List<Role> results2 = this.strategy2.collisions(includeTags, excludeTags);
+        List<Role> results1 = this.strategy1.collisions(includeTags, maxResults, filter);
+        List<Role> results2 = this.strategy2.collisions(includeTags, maxResults, filter);
 
         if (!results1.equals(results2)) {
             System.err.println("Pixel Collision failed for " + getActor());

@@ -14,6 +14,7 @@ import java.util.List;
 import uk.co.nickthecoder.itchy.AbstractRole;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Role;
+import uk.co.nickthecoder.itchy.util.Filter;
 
 public class BruteForceCollisionStrategy implements CollisionStrategy
 {
@@ -67,17 +68,21 @@ public class BruteForceCollisionStrategy implements CollisionStrategy
         }
         return false;
     }
-
-    private static final String[] EMPTY = {};
     
     @Override
-    public List<Role> collisions( Actor actor, String... includeTags )
+    public List<Role> collisions( Actor actor, String[] tags )
     {
-        return collisions(actor, includeTags, EMPTY );
+        return collisions(actor, tags, MAX_RESULTS, acceptFilter );
     }
     
     @Override
-    public List<Role> collisions( Actor source, String[] includeTags, String[] excludeTags )
+    public List<Role> collisions( Actor actor, String[] tags, int maxResults )
+    {
+        return collisions(actor, tags, maxResults, acceptFilter );
+    }
+    
+    @Override
+    public List<Role> collisions( Actor source, String[] includeTags, int maxResults, Filter<Actor> filter )
     {
         List<Role> results = new ArrayList<Role>();
         for (String tag : includeTags) {
@@ -87,10 +92,13 @@ public class BruteForceCollisionStrategy implements CollisionStrategy
                     continue;
                 }
 
-                if ((other != source) && (!exclude(otherRole, excludeTags))) {
+                if ((other != source) && (filter.accept( other ))) {
                     if (!results.contains(other)) {
                         if (this.collisionTest.collided(source,other)) {
                             results.add(otherRole);
+                            if (results.size() >= maxResults) {
+                                return results;
+                            }
                         }
                     }
                 }

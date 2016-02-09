@@ -9,6 +9,7 @@ import java.util.List;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Role;
+import uk.co.nickthecoder.itchy.util.Filter;
 
 /**
  * Uses a Neighbourhood to optimise Actor's overlapping and pixelOcerlap methods. This strategy uses a grid based neighbourhood, when the
@@ -69,16 +70,20 @@ public class SinglePointCollisionStrategy extends ActorCollisionStrategy
         }
     }
 
-    private static final String[] EMPTY = {};
-    
     @Override
-    public List<Role> collisions( Actor actor, String... includeTags )
+    public List<Role> collisions( Actor actor, String[] tags )
     {
-        return collisions(actor, includeTags, EMPTY );
+        return collisions(actor, tags, MAX_RESULTS, acceptFilter );
     }
     
     @Override
-    public List<Role> collisions( Actor source, String[] includeTags, String[] excludeTags )
+    public List<Role> collisions( Actor actor, String[] tags, int maxResults )
+    {
+        return collisions(actor, tags, maxResults, acceptFilter );
+    }
+    
+    @Override
+    public List<Role> collisions( Actor source, String[] tags, int maxResults, Filter<Actor> filter )
     {
         List<Role> results = new ArrayList<Role>();
 
@@ -88,12 +93,15 @@ public class SinglePointCollisionStrategy extends ActorCollisionStrategy
                 Role role = actor.getRole();
 
                 if ((actor != source) && (!results.contains(actor))) {
-                    if (!BruteForceCollisionStrategy.exclude(role, excludeTags)) {
-                        for (String includeTag : includeTags) {
-                            if (role.hasTag(includeTag)) {
+                    if (filter.accept(actor)) {
+                        for (String tag : tags) {
+                            if (role.hasTag(tag)) {
 
                                 if (this.collisionTest.collided(source, actor)) {
                                     results.add(role);
+                                    if (results.size() >= maxResults) {
+                                        return results;
+                                    }
                                     break;
                                 }
                             }

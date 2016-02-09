@@ -17,6 +17,7 @@ import uk.co.nickthecoder.itchy.collision.BruteForceCollisionStrategy;
 import uk.co.nickthecoder.itchy.collision.CollisionStrategy;
 import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.util.ClassName;
+import uk.co.nickthecoder.itchy.util.Filter;
 import uk.co.nickthecoder.itchy.util.Tag;
 import uk.co.nickthecoder.itchy.util.TagMembership;
 
@@ -99,28 +100,27 @@ public abstract class AbstractRole implements Role
         return this.collisionStrategy;
     }
 
-    /**
-     * A convenience method for getCollisionStrategy().collisions(this.getActor(), tags )
-     * 
-     * @param tags
-     * @return The Roles which are colliding with this Role.
-     */
     public List<Role> collisions(String... tags)
     {
         return this.collisionStrategy.collisions(this.getActor(), tags);
     }
 
-    /**
-     * A convenience method similar to "collisions".
-     * 
-     * @param tags
-     * @return True iff this role is colliding with another Role having the given tag(s).
-     */
-    public boolean collided(String... tags)
+    public List<Role> collisions(int maxResults, String... tags)
     {
-        return !this.collisionStrategy.collisions(this.getActor(), tags).isEmpty();
+        return this.collisionStrategy.collisions(this.getActor(), tags, maxResults);
     }
 
+    public List<Role> collisions(int maxResults, Filter<Actor> filter, String... tags)
+    {
+        return this.collisionStrategy.collisions(this.getActor(), tags, maxResults, filter);
+    }
+
+    public boolean collided(String... tags)
+    {
+        return !this.collisionStrategy.collisions(this.getActor(), tags, 1).isEmpty();
+    }
+
+    
     @Override
     public ClassName getClassName()
     {

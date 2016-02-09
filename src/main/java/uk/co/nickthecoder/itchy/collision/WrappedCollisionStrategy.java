@@ -12,6 +12,7 @@ import java.util.List;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.Wrapped;
+import uk.co.nickthecoder.itchy.util.Filter;
 
 /**
  * Checks for collisions within a world where the left edge is joined to the right,
@@ -34,51 +35,62 @@ public class WrappedCollisionStrategy implements CollisionStrategy
         this.wrapped = wrapped;
         this.innerCollisionStrategy = cs;
     }
-
-
-    private static final String[] EMPTY = {};
     
     @Override
-    public List<Role> collisions( Actor actor, String... includeTags )
+    public List<Role> collisions( Actor actor, String[] tags )
     {
-        return collisions(actor, includeTags, EMPTY );
+        return collisions(actor, tags, MAX_RESULTS, acceptFilter );
+    }
+
+    @Override
+    public List<Role> collisions(Actor actor, String[] tags, int maxResults)
+    {
+        return collisions(actor, tags, maxResults, acceptFilter );
     }
     
     @Override
-    public List<Role> collisions( Actor actor, String[] includeTags, String[] excludeTags )
+    public List<Role> collisions( Actor actor, String[] includeTags, int maxResults, Filter<Actor> filter )
     {
         wrapped.normalise(actor);
 
-        List<Role> result = collisions2( actor, includeTags, excludeTags );
+        List<Role> result = collisions2( actor, includeTags, maxResults, filter );
+        
+        if (result.size() >= maxResults ) {
+            return result;
+        }
         
         if (wrapped.overlappingLeft(actor)) {
             actor.setX( actor.getX() + wrapped.getWidth() );
-            result.addAll( collisions2(actor, includeTags, excludeTags) );
+            result.addAll( collisions2(actor, includeTags, maxResults - result.size(), filter) );
             actor.setX( actor.getX() - wrapped.getWidth() );
+        }
+        
+        if (result.size() >= maxResults ) {
+            return result;
         }
         
         if (wrapped.overlappingRight(actor)) {
             actor.setX( actor.getX() - wrapped.getWidth() );
-            result.addAll( collisions2(actor, includeTags, excludeTags) );   
+            result.addAll( collisions2(actor, includeTags, maxResults - result.size(), filter) );   
             actor.setX( actor.getX() + wrapped.getWidth() );
         }
         
         return result;
     }
     
-    public List<Role> collisions2( Actor actor, String[] includeTags, String[] excludeTags )
+    public List<Role> collisions2( Actor actor, String[] tags, int maxResults, Filter<Actor> filter )
     {
-        List<Role> result = innerCollisionStrategy.collisions( actor, includeTags, excludeTags );
+        List<Role> result = innerCollisionStrategy.collisions( actor, tags, maxResults, filter );
         
         if (wrapped.overlappingBottom(actor)) {
             actor.setY( actor.getY() + wrapped.getHeight() );
-            result.addAll( innerCollisionStrategy.collisions(actor, includeTags, excludeTags) );            
+            result.addAll( innerCollisionStrategy.collisions(actor, tags, maxResults, filter) );            
             actor.setY( actor.getY() - wrapped.getHeight() );
         }
 
         if (wrapped.overlappingTop(actor)) {
             actor.setY( actor.getY() - wrapped.getHeight() );
-            result.addAll( innerCollisionStrategy.collisions(actor, includeTags, excludeTags) );            
+            result.addAll( innerCollisionStrategy.collisions(actor, tags, maxResults, filter) );            
             actor.setY( actor.getY() + wrapped.getHeight() );
         }
         
@@ -96,5 +108,6 @@ public class WrappedCollisionStrategy implements CollisionStrategy
     {
         this.innerCollisionStrategy.remove();
     }
+
 
 }

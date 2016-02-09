@@ -1,15 +1,27 @@
 Current Tasks
 =============
 
+
+
+Need:
+    ARole.collided( "tag", "tag2", ... )
+    ARoele.collisions( "tag", "tag2", ... )
+
+    Implement by :
+        CS.collided( String[] tags )
+        CS.collided( String[] tags, int maxResults ) and
+        CS.collided( String[] tags, int maxResults, Filter<Actor> )
+    
+
+
+Remove Named
+
 Collisions to use an ActorFilter, instead of the "except tags" parameter.
 
 Look over all TODOs
 
 Check order of Role onAttach and onBirth, I think it should be reversed.
     Remove the special "onBirth" in DelayedActivation, and put a special instanceof DelayedActivation when attach is called. 
-
-Get Pause working - which games use it ?
-
 
 
 
@@ -28,9 +40,9 @@ All resources.renameXXX needs to update the renamed collection, so that renameSu
 BUGS
 ====
 
-Destroy-Debris completed scene doesn't work.
-
-If no layout specified, and there is no "default" layout, then nothing works.
+Role tagMembership is broken.
+    Uses onDetatch to remove all tags which isn't obvious. PauseRole has a workaround, but others may overlook this.
+    Not actually a bug, but a bad smell.
 
 Reload resources - not quite working (only the thumbnails of the list screens?)
 

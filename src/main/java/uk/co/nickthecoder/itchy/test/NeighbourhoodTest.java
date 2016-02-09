@@ -175,8 +175,8 @@ public class NeighbourhoodTest
         assertTrue(b.getActor().pixelOverlap(a.getActor()));
         assertFalse(a.getActor().pixelOverlap(c.getActor()));
 
-        assertTrue(a.collisions("all").contains(b.getActor()));
-        assertFalse(a.collisions("all").contains(c.getActor()));
+        assertTrue(a.collisions( new String[] {"all"} ).contains(b.getActor()));
+        assertFalse(a.collisions( new String[] {"all"} ).contains(c.getActor()));
 
     }
 

@@ -8,6 +8,8 @@ import java.util.List;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Role;
+import uk.co.nickthecoder.itchy.util.AcceptFilter;
+import uk.co.nickthecoder.itchy.util.Filter;
 
 /**
  * A CollisionStrategy holds defines the algorithm which determines if one actor is touching or overlapping another actor. "touching" is
@@ -27,12 +29,20 @@ import uk.co.nickthecoder.itchy.Role;
  */
 public interface CollisionStrategy
 {
+    public static final int MAX_RESULTS = 100;
+
+    public static final AcceptFilter<Actor> acceptFilter = new AcceptFilter<Actor>();
+
+    
+    
     public void update();
 
     public void remove();
 
-    public List<Role> collisions( Actor actor, String... includeTags );
+    public List<Role> collisions( Actor actor, String[] tags );
     
-    public List<Role> collisions( Actor actor, String[] includeTags, String[] excludeTags );
+    public List<Role> collisions( Actor actor, String[] tags, int maxResults );
+
+    public List<Role> collisions( Actor actor, String[] tags, int maxResults, Filter<Actor> filter );
 
 }
