@@ -6,6 +6,8 @@ package uk.co.nickthecoder.itchy;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.WeakHashMap;
 
 import uk.co.nickthecoder.itchy.animation.AbstractAnimation;
 import uk.co.nickthecoder.itchy.animation.Animation;
@@ -32,7 +34,7 @@ public class Actor implements PropertySubject<Actor>
         properties.add(new StringProperty<Actor>("startEvent").defaultValue("default"));
         properties.add(new DoubleProperty<Actor>("activationDelay"));
         properties.add(new IntegerProperty<Actor>("zOrder"));        
-        properties.add(new StringProperty<Actor>("role.id"));
+        properties.add(new StringProperty<Actor>("id"));
     }
 
     private static Pose startPose( Costume costume, String name )
@@ -58,12 +60,16 @@ public class Actor implements PropertySubject<Actor>
         return new TextPose(text, textStyle);
     }
 
-    private static int nextId = 1;
+    private static Map<String,Actor> actorsById = new WeakHashMap<String,Actor>();
 
-    public final int id;
+    private static int nextSequenceNumber = 1;
 
+    private final int sequenceNumber;
+
+    private String id;
+    
     Role role;
-
+    
     private Animation animation;
 
     private final Appearance appearance;
@@ -103,8 +109,10 @@ public class Actor implements PropertySubject<Actor>
 
     public Actor( Pose pose )
     {
-        this.id = nextId;
-        nextId++;
+        this.sequenceNumber = nextSequenceNumber;
+        nextSequenceNumber++;
+        
+        this.id = null;
         this.costume = null;
         this.appearance = new Appearance(pose);
         this.appearance.setActor(this);
@@ -114,6 +122,48 @@ public class Actor implements PropertySubject<Actor>
         this.x = 0;
         this.y = 0;
         this.setDirection(pose.getDirection());
+    }
+    
+    /**
+     * @return A unique ID of this actor. This is useful when debugging a game, its a quick and simple way to
+     * keep track of a single actor.
+     */
+    public int getSequenceNumber()
+    {
+        return this.sequenceNumber;
+    }
+
+
+    public String getId()
+    {
+        return this.id;
+    }
+    
+    public void setId(String id)
+    {
+        if (this.id != null) {
+            // If there is another actor with this id, don't remove it.
+            if (actorsById.get(this.id) == this) {
+                actorsById.remove(this.id);
+            }
+        }
+        
+        if (id != null) {
+            id = id.trim();
+            if ("".equals(id)) {
+                id = null;
+            }
+        }
+        this.id = id;
+        
+        if (this.id != null) {
+            actorsById.put(this.id,  this);
+        }
+    }
+
+    public static Actor findActorById( String id )
+    {
+        return actorsById.get(id);
     }
     
     public String getStartEvent()
@@ -214,9 +264,6 @@ public class Actor implements PropertySubject<Actor>
     {
         Costume costume;
         costume = this.costume.getCompanion(name);
-        if ( costume == null ) {
-            costume = Itchy.getGame().resources.getCompanionCostume(this.costume, name);
-        }
         Actor actor = costume.createActor(startEvent);
         actor.moveTo(this);
         getStage().add(actor);
@@ -536,6 +583,7 @@ public class Actor implements PropertySubject<Actor>
             if (this.stage != null) {
                 this.stage.remove(this);
             }
+            this.setId(null);
         }
     }
 
@@ -822,13 +870,13 @@ public class Actor implements PropertySubject<Actor>
     @Override
     public String toString()
     {
-        return "Actor #" + this.id + " @ " + getX() + "," + getY() + " " +
+        return "Actor #" + this.sequenceNumber + " @ " + getX() + "," + getY() + " " +
             (getRole() == null ? "" : "(" + getRole().getClass().getName() + ")");
     }
 
     public String info()
     {
-        return "Actor #" + this.id + " @ " + getX() + "," + getY() +
+        return "Actor #" + this.sequenceNumber + " @ " + getX() + "," + getY() +
             " size(" + this.getAppearance().getWidth() + "," + this.getAppearance().getHeight() +
             ") " +
             (getRole() == null ? "" : "(" + getRole().getClass().getName() + ")");

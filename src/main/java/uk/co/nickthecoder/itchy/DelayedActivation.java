@@ -34,25 +34,12 @@ public class DelayedActivation extends AbstractRole
     }
 
     @Override
-    public String getId()
-    {
-        return this.actualRole.getId();
-    }
-
-    @Override
-    public void setId(String id)
-    {
-        this.actualRole.setId(id);
-    }
-
-    @Override
     public void tick()
     {
         if (this.delay.isFinished()) {
             getActor().getAppearance().setAlpha(this.alpha);
 
             getActor().activate( this.actualRole );
-
         }
     }
 }

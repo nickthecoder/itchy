@@ -1,14 +1,12 @@
 Current Tasks
 =============
 
+Drag and Drop in animation editor
+
 Look over all TODOs
 
 Check order of Role onAttach and onBirth, I think it should be reversed.
     Remove the special "onBirth" in DelayedActivation, and put a special instanceof DelayedActivation when attach is called. 
-
-
-
-Remove Actor.getActivationDelay, and put it in SceneDesignerRole (which is then loaded directly into DelayedActivation) ?
 
 SubjectProperty should include the method getClassName() ?
 
@@ -24,6 +22,10 @@ Replace AnimationEditor by new style? Used by FramedAnimationEditor. ???
 
 BUGS
 ====
+
+Pyrox GameOver flicks on then off, because its animation is done after it has been added to the stage,
+and is properly activated.
+
 
 Appearance.fixPose doesn't do the right thing with direction.
 	Setting dir to 0 works, but ideally both appearance and the new pose should have the old appearance's direction,

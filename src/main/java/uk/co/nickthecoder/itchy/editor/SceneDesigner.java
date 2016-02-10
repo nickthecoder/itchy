@@ -36,6 +36,7 @@ import uk.co.nickthecoder.itchy.ZOrderStage;
 import uk.co.nickthecoder.itchy.ZOrderStageInterface;
 import uk.co.nickthecoder.itchy.gui.AbstractComponent;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
+import uk.co.nickthecoder.itchy.gui.Button;
 import uk.co.nickthecoder.itchy.gui.ButtonGroup;
 import uk.co.nickthecoder.itchy.gui.CheckBox;
 import uk.co.nickthecoder.itchy.gui.ClassNameBox;
@@ -46,7 +47,6 @@ import uk.co.nickthecoder.itchy.gui.Container;
 import uk.co.nickthecoder.itchy.gui.CostumePicker;
 import uk.co.nickthecoder.itchy.gui.FlowLayout;
 import uk.co.nickthecoder.itchy.gui.GridLayout;
-import uk.co.nickthecoder.itchy.gui.Button;
 import uk.co.nickthecoder.itchy.gui.GuiView;
 import uk.co.nickthecoder.itchy.gui.ImageComponent;
 import uk.co.nickthecoder.itchy.gui.Label;
@@ -164,8 +164,6 @@ public class SceneDesigner implements MouseListener, KeyListener
     private SimpleTableModel layersTableModel;
 
     private ClassNameBox roleClassName;
-
-    private TextBox roleId;
 
     /**
      * Has anything changed since onSave was last called?
@@ -871,23 +869,6 @@ public class SceneDesigner implements MouseListener, KeyListener
             }
         });
 
-        Role role = ((SceneDesignerRole) SceneDesigner.this.currentActor.getRole()).actualRole;
-
-        roleId = new TextBox(role.getId());
-
-        roleId.addChangeListener(new ComponentChangeListener()
-        {
-
-            @Override
-            public void changed()
-            {
-                Role role = ((SceneDesignerRole) currentActor.getRole()).actualRole;
-                if (role != null) {
-                    role.setId(roleId.getText());
-                }
-            }
-        });
-
         createRoleProperties();
     }
 
@@ -896,13 +877,11 @@ public class SceneDesigner implements MouseListener, KeyListener
     private void createRoleProperties()
     {
         roleClassName.remove();
-        roleId.remove();
 
         Role role = ((SceneDesignerRole) currentActor.getRole()).actualRole;
         rolePropertiesForm = new SceneDesignerPropertiesForm<Role>("role", this, role, role.getProperties());
         rolePropertiesForm.autoUpdate = true;
         roleContainer.clear();
-        rolePropertiesForm.grid.addRow("ID", roleId);
         rolePropertiesForm.grid.addRow("Role", roleClassName);
 
         roleContainer.addChild(rolePropertiesForm.createForm());

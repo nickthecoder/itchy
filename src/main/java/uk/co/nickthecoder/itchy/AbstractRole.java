@@ -27,8 +27,6 @@ public abstract class AbstractRole implements Role
 
     private CollisionStrategy collisionStrategy = BruteForceCollisionStrategy.pixelCollision;
 
-    private String id;
-
     public static Set<Role> allByTag(String tag)
     {
         return Itchy.getGame().findRoleByTag(tag);
@@ -74,24 +72,6 @@ public abstract class AbstractRole implements Role
     public List<Property<Role, ?>> getProperties()
     {
         return properties;
-    }
-
-    @Override
-    public String getId()
-    {
-        return this.id;
-    }
-
-    @Override
-    public void setId(String id)
-    {
-        if (id != null) {
-            id = id.trim();
-            if ("".equals(id)) {
-                id = null;
-            }
-        }
-        this.id = id;
     }
 
     @Override

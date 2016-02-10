@@ -1,7 +1,7 @@
 <scene name="playground" layout="default" sceneDirector="uk.co.nickthecoder.itchy.PlainSceneDirector" showMouse="true">
   <layer name="background"/>
   <layer name="main">
-    <actor costume="alien" x="359.0" y="328.0" heading="-90.0" startEvent="testBean" id="" direction="-90.0" colorize="" role="alien.py"/>
+    <actor costume="alien" x="359.0" y="328.0" heading="-90.0" startEvent="testBean" id="foo" direction="-90.0" colorize="" role="alien.py"/>
     <text x="44.0" y="582.0" zOrder="3" id="" font="vera" fontSize="22.0" text="Menu" color="#ffffffff" colorize="" role="uk.co.nickthecoder.itchy.role.SceneButton">
       <role sceneName="menu"/>
     </text>

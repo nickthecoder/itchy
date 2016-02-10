@@ -21,16 +21,6 @@ public class SceneDesignerRole extends AbstractRole
     {
         return this.actualRole.getClassName();
     }
-
-    public String getId()
-    {
-        return this.actualRole.getId();
-    }
-    
-    public void setId( String id )
-    {
-        this.actualRole.setId(id);
-    }
     
     @Override
     public void tick()

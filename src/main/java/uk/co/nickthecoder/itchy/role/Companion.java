@@ -187,12 +187,6 @@ public abstract class Companion extends AbstractRole
             Costume costume = this.companion.source.getCostume().getCompanion(companionType);
 
             if (costume == null) {
-                // Fall back to the old-fashioned way of doing it.
-                costume = Itchy.getGame().resources.getCompanionCostume(this.companion.source.getCostume(),
-                    companionType);
-            }
-
-            if (costume == null) {
                 throw new NullPointerException();
             }
 

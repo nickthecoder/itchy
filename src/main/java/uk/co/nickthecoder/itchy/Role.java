@@ -56,16 +56,6 @@ public interface Role extends MessageListener, Cloneable, PropertySubject<Role> 
 	public Set<String> getTags();
 
 	/**
-	 * Each role can optionally have an ID which is set in the scene designer.
-	 * Game code can then search for a particular role using Game.findRoleById.
-	 * 
-	 * @return The id for this role, or null if it has no id.
-	 */
-	public String getId();
-
-	public void setId(String id);
-
-	/**
 	 * The collision strategy is usually determined by
 	 * {@link SceneDirector#getCollisionStrategy(Actor)}, when the Role is
 	 * {@link #born}, but individual roles are free to ignore this, and choose

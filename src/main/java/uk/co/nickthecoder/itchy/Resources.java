@@ -699,41 +699,6 @@ public class Resources extends Loadable
         costumes.put(newName, costume);
     }
 
-    /**
-     * This will be deprecated soon. Use Costume.getCopmanion instead.
-     *
-     * Looks for a named string, and then uses that to search for another costume.
-     * <p>
-     * For example, create two ship costumes named bigShip and smallShip, and two bullets named redBullet and
-     * greenBullet. Now create a string within the bigShip : "bullet" -> "redBullet", and another within the small ship
-     * : "bullet" -> "greenBullet". Now we can get a get the appropriate bullet costume for a ship :
-     * <code>resources.getCompananionCostume( myShipActor.getCostume(), "bullet" )</code>
-     * <p>
-     * By creating multiple strings all named "bullet" within a ship's costume, the code above will randomly pick from
-     * the named costumes.
-     *
-     * @param sourceCostume
-     *            The costume who's strings are search to find the name of another costume.
-     * @param name
-     *            The name of the String to look up, which is then used as a costume name. Note, this is NOT a costume
-     *            name, it is the name of a String.
-     * @return The costume that you were searching for, or null if none was found.
-     * @deprecated
-     */
-    @Deprecated
-    public Costume getCompanionCostume(Costume sourceCostume, String name)
-    {
-        System.err.println("Looking in " + sourceCostume.getName() + " for  " + name);
-        System.err.println("Using depricate method Resources.getCompanionCostume. Use Costume.getCompanion instead.");
-        String costumeName = sourceCostume.getString(name);
-        if (costumeName == null) {
-            return null;
-        }
-
-        Costume result = this.getCostume(costumeName);
-        return result;
-    }
-
     public Surface getThumbnail(Costume costume)
     {
         Pose pose = costume.getPose("default");

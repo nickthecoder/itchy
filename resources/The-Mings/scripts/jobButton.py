@@ -3,7 +3,7 @@ from common import *
 properties = ArrayList()
 properties.add( StringProperty( "job" ) )
 
-class JobButton(Button) :
+class JobButton(ButtonRole) :
 
     def __init__(self) :
         self.job = "blocker"

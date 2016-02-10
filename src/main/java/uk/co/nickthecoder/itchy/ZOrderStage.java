@@ -132,7 +132,7 @@ public class ZOrderStage extends AbstractStage implements ZOrderStageInterface
         public int compare( Actor a, Actor b )
         {
             if (a.getZOrder() == b.getZOrder()) {
-                return a.id - b.id;
+                return a.getSequenceNumber() - b.getSequenceNumber();
             } else {
                 return a.getZOrder() - b.getZOrder();
             }
