@@ -1,5 +1,5 @@
 <resources>
-  <game title="Tests" width="800" height="600" resizable="false" initialScene="menu" testScene="test" directorClassName="uk.co.nickthecoder.itchy.PlainDirector"/>
+  <game title="Tests" width="800" height="600" resizable="false" initialScene="menu" testScene="playground" directorClassName="uk.co.nickthecoder.itchy.PlainDirector"/>
   <spriteSheets/>
   <poses>
     <pose name="alien1a" filename="images/alien1a.png" direction="-90.0"/>
@@ -284,9 +284,15 @@
         <alpha target="235.0" ticks="200" ease="linear"/>
       </sequence>
     </animation>
+    <animation name="testBean">
+      <sequence sequence="true" loops="100">
+        <bean access="testValue" target="300.0" ticks="100" ease="easeInOut"/>
+        <bean access="testValue" target="0.0" ticks="200" ease="easeInOut"/>
+      </sequence>
+    </animation>
   </animations>
   <costumes>
-    <costume name="alien" defaultZOrder="0" order="0" showInDesigner="true">
+    <costume name="alien" defaultZOrder="0" order="0" showInDesigner="true" role="alien.py">
       <pose name="bomb" pose="bomb1"/>
       <pose name="default" pose="alien1a"/>
       <animation name="bomb" animation="bomb"/>
@@ -313,6 +319,7 @@
       <animation name="easeOutExpo" animation="easeOutExpo"/>
       <animation name="easeOutQuad" animation="easeOutQuad"/>
       <animation name="linear" animation="linear"/>
+      <animation name="testBean" animation="testBean"/>
     </costume>
     <costume name="alien1a" defaultZOrder="0" order="0" showInDesigner="true" extends="alien">
       <pose name="default" pose="alien1a"/>

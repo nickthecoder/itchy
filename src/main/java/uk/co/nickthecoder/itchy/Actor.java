@@ -446,6 +446,21 @@ public class Actor implements PropertySubject<Actor>
         }
     }
 
+    /**
+     * Called by Delayed activation, when the actor is to be activated.
+     */
+    void activate( Role role )
+    {
+        this.role = role;
+        this.event(getStartEvent());
+        this.role = null;
+        this.setRole(role);
+
+        // The normal way that role.birth is called happened to this DelayedActivation,
+        // but we want it to be called for the actual role as well...
+        role.born();
+    }
+
     public final void setRole( Role role )
     {
         if (role == this.role) {

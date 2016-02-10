@@ -15,7 +15,7 @@
    height="1052.3622047"
    id="svg5315"
    version="1.1"
-   inkscape:version="0.48.3.1 r9886"
+   inkscape:version="0.48.5 r10040"
    sodipodi:docname="graphics.svg"
    inkscape:export-filename="/media/home/nick/projects/itchy/resources/editor/moveDownLayer.png"
    inkscape:export-xdpi="63.529999"
@@ -1248,14 +1248,14 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="3.959798"
-     inkscape:cx="380.17864"
-     inkscape:cy="141.96261"
+     inkscape:zoom="5.6"
+     inkscape:cx="431.80562"
+     inkscape:cy="124.64118"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1280"
-     inkscape:window-height="747"
+     inkscape:window-width="1440"
+     inkscape:window-height="847"
      inkscape:window-x="0"
      inkscape:window-y="27"
      inkscape:window-maximized="1">
@@ -3180,6 +3180,28 @@
          id="path5100"
          d="m 395.57434,920.25936 -51.21195,0"
          style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    </g>
+    <g
+       id="g4252"
+       inkscape:export-filename="/media/home/nick/projects/itchy/resources/editor/images/animation-bean.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       style="fill:#ffffff;fill-opacity:1">
+      <path
+         d="m 505.58136,947.8114 a 11.869292,17.67767 0 1 1 -23.73859,0 11.869292,17.67767 0 1 1 23.73859,0 z"
+         sodipodi:ry="17.67767"
+         sodipodi:rx="11.869292"
+         sodipodi:cy="947.8114"
+         sodipodi:cx="493.71207"
+         id="path3454"
+         style="fill:#ffffff;stroke:#ffaf00;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;fill-opacity:1"
+         sodipodi:type="arc" />
+      <path
+         sodipodi:nodetypes="csc"
+         inkscape:connector-curvature="0"
+         id="path4250"
+         d="m 490.93413,930.6388 c 7.3363,13.34119 1.26025,11.70023 1.01016,22.72843 -0.18384,8.10661 4.87745,11.56074 4.87745,11.56074"
+         style="fill:#ffffff;stroke:#ffaf00;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;fill-opacity:1" />
     </g>
   </g>
 </svg>

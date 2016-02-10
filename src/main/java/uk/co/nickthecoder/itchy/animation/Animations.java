@@ -23,6 +23,7 @@ public class Animations
         Itchy.registry.add(new TurnAnimation());
         Itchy.registry.add(new TurnToAnimation());
         Itchy.registry.add(new ScaleAnimation());
+        Itchy.registry.add(new BeanAnimation());
     };
 
 }

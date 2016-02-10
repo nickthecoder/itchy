@@ -135,7 +135,8 @@ public abstract class ScriptLanguage
                 this.getExtension() + ".template");
 
         File destFile = this.manager.getScript(className.name);
-
+        destFile.getParentFile().mkdirs();
+        
         Util.template(templateFile, destFile, substitutions);
     }
 

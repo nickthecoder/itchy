@@ -1,23 +1,6 @@
 Current Tasks
 =============
 
-
-
-Need:
-    ARole.collided( "tag", "tag2", ... )
-    ARoele.collisions( "tag", "tag2", ... )
-
-    Implement by :
-        CS.collided( String[] tags )
-        CS.collided( String[] tags, int maxResults ) and
-        CS.collided( String[] tags, int maxResults, Filter<Actor> )
-    
-
-
-Remove Named
-
-Collisions to use an ActorFilter, instead of the "except tags" parameter.
-
 Look over all TODOs
 
 Check order of Role onAttach and onBirth, I think it should be reversed.
@@ -36,15 +19,11 @@ Renaming a Layer/Layout will need to alter all scenes???
 All resources.renameXXX needs to update the renamed collection, so that renameSubjectsInScenes will work. 
     And do the same with other resources. Layouts, Fonts, ... ?
 
+Replace AnimationEditor by new style? Used by FramedAnimationEditor. ???
+    If not, use PropertiesForm with autoupdate.
 
 BUGS
 ====
-
-Role tagMembership is broken.
-    Uses onDetatch to remove all tags which isn't obvious. PauseRole has a workaround, but others may overlook this.
-    Not actually a bug, but a bad smell.
-
-Reload resources - not quite working (only the thumbnails of the list screens?)
 
 Appearance.fixPose doesn't do the right thing with direction.
 	Setting dir to 0 works, but ideally both appearance and the new pose should have the old appearance's direction,
@@ -87,11 +66,6 @@ Undo/Redo for destructive edits, such as changing class names (e.g. Makeup)
 
 SceneDesigner: one dotted box for the screen's  bounds, and another for the current view's if they are different.
     Make both semi-transparent?
-
-
-Game.loadScene, calls Role.sceneCreated only for the "main" load, not for additional scenes, such as
-    glass view for highscores, lives etc.
-
 
 Ensure Scrollbars of Scroll do not obscure the contents?
 
