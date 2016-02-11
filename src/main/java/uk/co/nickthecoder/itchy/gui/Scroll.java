@@ -362,7 +362,7 @@ public class Scroll extends PlainContainer implements ContainerLayout
         }
 
         @Override
-        public boolean acceptDrag(MouseButtonEvent e)
+        public boolean beginDrag(MouseButtonEvent e)
         {
             if (this.scroller.contains2(e)) {
                 this.dragY = this.scroller.getY();
@@ -492,7 +492,7 @@ public class Scroll extends PlainContainer implements ContainerLayout
         }
 
         @Override
-        public boolean acceptDrag(MouseButtonEvent e)
+        public boolean beginDrag(MouseButtonEvent e)
         {
             if (this.scroller.contains2(e)) {
                 this.dragX = this.scroller.getX();

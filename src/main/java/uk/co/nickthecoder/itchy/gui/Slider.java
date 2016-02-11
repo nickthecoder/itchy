@@ -170,7 +170,7 @@ public class Slider extends DragableContainer implements ContainerLayout
     }
 
     @Override
-    public boolean acceptDrag(MouseButtonEvent e)
+    public boolean beginDrag(MouseButtonEvent e)
     {
 
         if (this.knob.contains2(e)) {

@@ -34,7 +34,7 @@ public class Window extends RootContainer
         this.titleBar = new DragableContainer() {
 
             @Override
-            public boolean acceptDrag( MouseButtonEvent e )
+            public boolean beginDrag( MouseButtonEvent e )
             {
                 return true;
             }

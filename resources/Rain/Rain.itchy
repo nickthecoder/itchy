@@ -46,6 +46,12 @@
     <animation name="aTest">
       <sequence sequence="true" loops="1">
         <forwards forwards="0.0" sidewards="0.0" using="HEADING" customAngle="0.0" ticks="200" ease="linear"/>
+        <clip top="0.0" right="0.0" bottom="0.0" left="0.0" ticks="200" ease="linear"/>
+        <sequence sequence="true" loops="1">
+          <color targetColor="#ffffffff" ticks="200" ease="linear"/>
+          <delay ticks="0"/>
+          <forwards forwards="0.0" sidewards="0.0" using="HEADING" customAngle="0.0" ticks="200" ease="linear"/>
+        </sequence>
       </sequence>
     </animation>
     <animation name="death">

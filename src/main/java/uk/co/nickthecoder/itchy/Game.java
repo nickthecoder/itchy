@@ -239,6 +239,11 @@ public class Game
         return Itchy.frameRate;
     }
 
+    public List<GuiView> getGUIViews()
+    {
+        return this.windows.getChildren();
+    }
+    
     /**
      * Called only once, after the resources have been loaded. Do not change directors during the game. Instead, if you want different
      * behaviour for different parts of the game, then use different SceneDirectors to code each part of the game.
@@ -586,7 +591,7 @@ public class Game
                         return;
                     }
                 } else {
-                    this.mouseOwner.onMouseUp(mbe);
+                    this.mouseOwner.onMouseDown(mbe);
                     return;
                 }
             }

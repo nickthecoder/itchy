@@ -114,4 +114,14 @@
     <rule criteria=".picker button" background="row" paddingTop="4" paddingRight="10" paddingBottom="4" paddingLeft="4"/>
     <rule criteria=".picker button.focus" background="row-focus" color="#211b12"/>
     <rule criteria=".picker button.focus label" color="#211b12"/>
+    
+    <rule criteria=".dragging * vDragTarget" paddingLeft="8"/>
+    <rule criteria="vDragTarget" background="row"/>
+    <rule criteria="vDragTarget.hover" background="row-focus"/>
+    <rule criteria=".dragging * hDragTarget" paddingTop="8"/>
+    <rule criteria="hDragTarget" background="row"/>
+    <rule criteria="hDragTarget.hover" background="row-focus" />
+    <rule criteria="hDrag" background="dragH" margin="4" paddingTop="20" paddingLeft="20"/>
+    <rule criteria="vDrag" background="dragV" margin="4" paddingTop="20" paddingLeft="20"/>
+    
 </rules>

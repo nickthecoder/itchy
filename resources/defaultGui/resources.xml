@@ -58,7 +58,9 @@
         <ninePatch name="scrollerH" filename="images/scrollerH.png" top="5" right="14" bottom="5" left="14"  middle="fill" />
 
         <ninePatch name="tooltip" filename="images/tooltip.png" top="5" right="5" bottom="5" left="5"  middle="fill" />                
-
+        
+        <ninePatch name="dragH" filename="images/dragH.png" top="20" right="8" bottom="0" left="8"  middle="none" />
+        <ninePatch name="dragV" filename="images/dragV.png" top="8" right="0" bottom="8" left="20"  middle="none" />
     </ninePatches>
 
 </resources>

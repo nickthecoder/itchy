@@ -140,6 +140,12 @@ ColorKeyFragment. Use another pose, to decide which pixels belong to each fragme
 Code Tidy Up
 ============
 
+Never adjust the mouse event.x,y. Instead, pass a Point (or x,y), which is relative to the object in question.
+    Make the API clear, and there's no confusion about what the event's x,y values mean (they are always absolute screen).
+    Add the additional parameters to the relevant methods
+    Rename the methods onMouseXXXRelative
+    There should not be mouseMove methods, only onMouseMove and onMouseMoveRelative
+
 Remove deprecate Resources.getCompanionCostume.
 
 Scrap the concept of views within views?

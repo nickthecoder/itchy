@@ -13,13 +13,13 @@ import uk.co.nickthecoder.jame.event.MouseEvent;
 
 public class VerticalScroll extends PlainContainer implements ContainerLayout
 {
-    protected AbstractComponent child;
+    protected Component child;
 
     private final Scrollbar scrollbar;
 
     private int scroll = 0;
 
-    public VerticalScroll( AbstractComponent child )
+    public VerticalScroll( Component child )
     {
         this.setType("vScroll");
 
@@ -288,7 +288,7 @@ public class VerticalScroll extends PlainContainer implements ContainerLayout
         }
 
         @Override
-        public boolean acceptDrag( MouseButtonEvent e )
+        public boolean beginDrag( MouseButtonEvent e )
         {
             if (this.scroller.contains2(e)) {
                 this.dragY = this.scroller.getY();

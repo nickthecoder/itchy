@@ -16,6 +16,10 @@ import uk.co.nickthecoder.itchy.gui.VerticalLayout;
 import uk.co.nickthecoder.itchy.gui.Window;
 import uk.co.nickthecoder.itchy.property.Property;
 
+/**
+ * Edits the details of a single animation.
+ * See EditAnimation editing the tree structure of a compound animation.
+ */
 public class AnimationEditor extends Window
 {
     public Animation animation;

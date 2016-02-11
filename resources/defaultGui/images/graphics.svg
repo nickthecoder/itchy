@@ -15,7 +15,7 @@
    height="1052.3622047"
    id="svg4302"
    version="1.1"
-   inkscape:version="0.48.3.1 r9886"
+   inkscape:version="0.48.5 r10040"
    sodipodi:docname="graphics.svg">
   <defs
      id="defs4304">
@@ -1940,14 +1940,14 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.8"
-     inkscape:cx="195.20806"
-     inkscape:cy="646.97059"
+     inkscape:zoom="11.2"
+     inkscape:cx="317.52115"
+     inkscape:cy="680.55638"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1280"
-     inkscape:window-height="747"
+     inkscape:window-width="1440"
+     inkscape:window-height="847"
      inkscape:window-x="0"
      inkscape:window-y="27"
      inkscape:window-maximized="1"
@@ -3417,6 +3417,94 @@
          rx="5"
          inkscape:export-xdpi="63.529999"
          inkscape:export-ydpi="63.529999" />
+    </g>
+    <g
+       transform="matrix(-2.7033328,0,0,-2.7033328,499.80276,2990.7226)"
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/media/home/nick/projects/itchy/resources/defaultGui/images/dragV.png"
+       id="g3580">
+      <g
+         id="g3569">
+        <path
+           style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1"
+           d="m 70.714285,963.43361 0,10"
+           id="path3498"
+           inkscape:connector-curvature="0" />
+        <path
+           style="fill:none;stroke:#fffafa;stroke-width:1px;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1"
+           d="m 70.982143,963.70146 0,10"
+           id="path3506"
+           inkscape:connector-curvature="0" />
+        <path
+           inkscape:connector-curvature="0"
+           id="path3514"
+           d="m 70.803571,963.61218 0,10"
+           style="fill:none;stroke:#646464;stroke-width:1px;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1" />
+      </g>
+      <use
+         x="0"
+         y="0"
+         xlink:href="#g3569"
+         id="use3574"
+         width="744.09448"
+         height="1052.3622"
+         transform="translate(2,0)" />
+      <use
+         transform="translate(3.9999998,0)"
+         height="1052.3622"
+         width="744.09448"
+         id="use3576"
+         xlink:href="#g3569"
+         y="0"
+         x="0" />
+      <use
+         x="0"
+         y="0"
+         xlink:href="#g3569"
+         id="use3578"
+         width="744.09448"
+         height="1052.3622"
+         transform="translate(5.9999998,0)" />
+    </g>
+    <g
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/media/home/nick/projects/itchy/resources/defaultGui/images/dragH.png"
+       transform="matrix(0,-2.7033328,-2.7033328,0,2953.856,571.65694)"
+       id="g3589">
+      <use
+         transform="translate(2,0)"
+         height="1052.3622"
+         width="744.09448"
+         id="use3599"
+         xlink:href="#g3569"
+         y="0"
+         x="0" />
+      <use
+         x="0"
+         y="0"
+         xlink:href="#g3569"
+         id="use3601"
+         width="744.09448"
+         height="1052.3622"
+         transform="translate(3.9999998,0)" />
+      <use
+         transform="translate(5.9999998,0)"
+         height="1052.3622"
+         width="744.09448"
+         id="use3603"
+         xlink:href="#g3569"
+         y="0"
+         x="0" />
+      <use
+         x="0"
+         y="0"
+         xlink:href="#g3569"
+         id="use4389"
+         width="744.09448"
+         height="1052.3622"
+         transform="translate(-0.21948254,0)" />
     </g>
   </g>
   <g
