@@ -894,7 +894,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         Makeup makeup = currentActor.getAppearance().getMakeup();
 
         makeupClassName = new ClassNameBox(
-            editor.getScriptManager(), Appearance.getMakeupClassName(makeup), Makeup.class);
+            editor.getScriptManager(), makeup.getClassName(), Makeup.class);
 
         makeupClassName.addChangeListener(new ComponentChangeListener()
         {
@@ -905,11 +905,11 @@ public class SceneDesigner implements MouseListener, KeyListener
                 ClassName className = makeupClassName
                     .getClassName();
 
-                boolean ok = editor.resources
-                    .checkClassName(className);
+                boolean ok = editor.resources.checkClassName(className);
                 if (ok) {
                     try {
-                        currentActor.getAppearance().setMakeup(className);
+                        Makeup makeup = (Makeup) className.createInstance(editor.resources);
+                        currentActor.getAppearance().setMakeup(makeup);
 
                         SceneDesigner.this.createMakeupProperties();
                         makeupClassName.removeStyle("error");
@@ -1829,7 +1829,7 @@ public class SceneDesigner implements MouseListener, KeyListener
     public Actor copyActor(Actor fromActor)
     {
         Actor toActor = null;
-        
+
         try {
             Pose pose = fromActor.getAppearance().getPose();
             if (pose instanceof TextPose) {
@@ -1839,41 +1839,41 @@ public class SceneDesigner implements MouseListener, KeyListener
                     textPose.getFont(),
                     textPose.getFontSize());
                 newTextPose.setAlignment(textPose.getXAlignment(), textPose.getYAlignment());
-                newTextPose.setColor( new RGBA(textPose.getColor()));
-                toActor = new Actor( newTextPose );
+                newTextPose.setColor(new RGBA(textPose.getColor()));
+                toActor = new Actor(newTextPose);
             } else {
                 toActor = new Actor(fromActor.getCostume());
             }
 
             Role fromRole = ((SceneDesignerRole) fromActor.getRole()).actualRole;
             Role toRole = (Role) fromRole.getClassName().createInstance(this.editor.resources);
-            
+
             Makeup fromMakeup = fromActor.getAppearance().getMakeup();
             Makeup toMakeup = (Makeup) fromMakeup.getClassName().createInstance(this.editor.resources);
-            
-            toActor.setRole(new SceneDesignerRole( toRole ) ); 
-            toActor.getAppearance().setMakeup( toMakeup );
+
+            toActor.setRole(new SceneDesignerRole(toRole));
+            toActor.getAppearance().setMakeup(toMakeup);
 
             for (Property<Actor, ?> property : fromActor.getProperties()) {
                 Object value = property.getValue(fromActor);
                 property.setValue(toActor, value);
             }
-            
+
             for (Property<Appearance, ?> property : fromActor.getAppearance().getProperties()) {
                 Object value = property.getValue(fromActor.getAppearance());
                 property.setValue(toActor.getAppearance(), value);
             }
-            
+
             for (Property<Role, ?> property : fromRole.getProperties()) {
                 Object value = property.getValue(fromRole);
                 property.setValue(toRole, value);
             }
-            
+
             for (Property<Makeup, ?> property : fromActor.getAppearance().getMakeup().getProperties()) {
                 Object value = property.getValue(fromActor.getAppearance().getMakeup());
                 property.setValue(toActor.getAppearance().getMakeup(), value);
             }
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         }

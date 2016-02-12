@@ -17,13 +17,12 @@ import uk.co.nickthecoder.itchy.makeup.Makeup;
 import uk.co.nickthecoder.itchy.makeup.MakeupPipeline;
 import uk.co.nickthecoder.itchy.makeup.NullMakeup;
 import uk.co.nickthecoder.itchy.makeup.TransformationData;
-import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.DoubleProperty;
 import uk.co.nickthecoder.itchy.property.FontProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.PropertySubject;
 import uk.co.nickthecoder.itchy.property.RGBAProperty;
 import uk.co.nickthecoder.itchy.property.StringProperty;
-import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.jame.RGBA;
 import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.Surface;
@@ -189,22 +188,6 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
         this.pose = pose;
     }
 
-    public static Makeup createMakeup( ClassName className )
-    {
-        try {
-            return (Makeup) Class.forName(className.name).newInstance();
-        } catch (Exception e) {
-            System.err.println("Failed to create Makeup : " + className.name);
-            e.printStackTrace();
-            return new NullMakeup();
-        }
-    }
-
-    public void setMakeup( ClassName className )
-    {
-        this.setMakeup(createMakeup(className));
-    }
-
     public void setMakeup( Makeup makeup )
     {
         this.normalMakeup.setMakeup(makeup);
@@ -361,21 +344,7 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
             this.processSurface();
         }
     }
-
-    public ClassName getMakeupClassName()
-    {
-        return getMakeupClassName(this.normalMakeup.getMakeup());
-    }
-
-    public static ClassName getMakeupClassName( Makeup makeup )
-    {
-        // if (role instanceof ScriptedMakup) {
-        // return ((ScriptedMakeup) makeup).getClassName();
-        // } else {
-        return new ClassName(Makeup.class, makeup.getClass().getName());
-        // }
-    }
-
+    
     private void processSurface()
     {
         this.previousPoseChangeId = this.pose.getChangeId();
