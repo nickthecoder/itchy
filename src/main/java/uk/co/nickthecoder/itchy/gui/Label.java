@@ -70,6 +70,20 @@ public class Label extends SurfaceComponent
             e.printStackTrace();
         }
     }
+    
+    public static Component createMultiline( String message )
+    {
+        Container container = new PlainContainer();
+        container.setLayout( new VerticalLayout() );
+        String[] lines = message.split("\\n");
+        for ( String line : lines ) {
+            Label label = new Label( line );
+            container.addChild( label );
+        }
+        
+        return container;
+    }
+
 
     @Override
     public String toString()

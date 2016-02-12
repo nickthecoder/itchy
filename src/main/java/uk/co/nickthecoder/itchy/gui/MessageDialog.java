@@ -5,13 +5,21 @@
 package uk.co.nickthecoder.itchy.gui;
 
 public class MessageDialog extends Window
-{
+{        
     public MessageDialog( String title, String message )
     {
-        super(title);
+        super( title );
+        
         this.clientArea.setLayout(new VerticalLayout());
 
-        this.clientArea.addChild(new Label(message));
+        Component messageComponent;
+        if ( message.contains("\n")) {
+            messageComponent = Label.createMultiline( message );
+        } else {
+            messageComponent = new Label(message);
+        }
+        this.clientArea.addChild( Scroll.ifNeeded(messageComponent, 400, 300) );
+        //this.clientArea.addChild( messageComponent );
 
         PlainContainer buttons = new PlainContainer();
         buttons.addStyle("buttonBar");
@@ -26,7 +34,6 @@ public class MessageDialog extends Window
             }
         });
         buttons.addChild(ok);
-
+        
     }
-
 }

@@ -1,18 +1,19 @@
 Current Tasks
 =============
 
-Drag and Drop in animation editor
+Check before deleting stuff.
+    Can delete costumes (the rest is fine!)
+
+Renaming a Layer/Layout will need to alter all scenes???
 
 Look over all TODOs
 
-Check order of Role onAttach and onBirth, I think it should be reversed.
-    Remove the special "onBirth" in DelayedActivation, and put a special instanceof DelayedActivation when attach is called. 
+Check order of Role onAttach and onBirth. delayed activation doesn't need either.
 
 SubjectProperty should include the method getClassName() ?
 
 Implement change Layout in scene designer.
 
-Renaming a Layer/Layout will need to alter all scenes???
 
 All resources.renameXXX needs to update the renamed collection, so that renameSubjectsInScenes will work. 
     And do the same with other resources. Layouts, Fonts, ... ?
@@ -30,9 +31,6 @@ and is properly activated.
 Appearance.fixPose doesn't do the right thing with direction.
 	Setting dir to 0 works, but ideally both appearance and the new pose should have the old appearance's direction,
 	and yet the pose won't need rotating.
-
-Can delete Poses which are used in a Framed animation
-    Ditto for a Sprite.
 
 
 New Features

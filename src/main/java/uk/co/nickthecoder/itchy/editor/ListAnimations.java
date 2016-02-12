@@ -10,6 +10,7 @@ import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.Thumbnailed;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.Container;
+import uk.co.nickthecoder.itchy.gui.MessageDialog;
 import uk.co.nickthecoder.itchy.gui.PickerButton;
 import uk.co.nickthecoder.itchy.gui.ReflectionTableModelRow;
 import uk.co.nickthecoder.itchy.gui.SimpleTableModel;
@@ -115,7 +116,13 @@ public class ListAnimations extends ListSubjects<AnimationResource>
     @Override
     protected void remove(AnimationResource subject)
     {
-        this.resources.removeAnimation(subject.getName());
+        String usedBy = this.resources.used( subject );
+        if (usedBy != null) {
+            MessageDialog message = new MessageDialog("Cannot Remove", "This sprite is being used by : \n\n" + usedBy );
+            message.show();
+        } else {
+            this.resources.removeAnimation(subject.getName());
+        }
     }
 
 

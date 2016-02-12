@@ -14,6 +14,7 @@ import uk.co.nickthecoder.itchy.gui.AbstractComponent;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.Container;
 import uk.co.nickthecoder.itchy.gui.ImageComponent;
+import uk.co.nickthecoder.itchy.gui.MessageDialog;
 import uk.co.nickthecoder.itchy.gui.PickerButton;
 import uk.co.nickthecoder.itchy.gui.ReflectionTableModelRow;
 import uk.co.nickthecoder.itchy.gui.SimpleTableModel;
@@ -159,7 +160,13 @@ public class ListPoses extends ListFileSubjects<FilePoseResource>
     @Override
     protected void remove(FilePoseResource subject)
     {
-        this.resources.removePose(subject.name);
+        String usedBy = this.resources.used( subject );
+        if (usedBy != null) {
+            MessageDialog message = new MessageDialog("Cannot Remove", "This pose is being used by : \n\n" + usedBy );
+            message.show();
+        } else {
+            this.resources.removePose(subject.name);
+        }
     }
 
     interface Filter extends Thumbnailed

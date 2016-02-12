@@ -14,6 +14,8 @@ import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.Container;
 import uk.co.nickthecoder.itchy.gui.ImageComponent;
 import uk.co.nickthecoder.itchy.gui.Label;
+import uk.co.nickthecoder.itchy.gui.MessageBox;
+import uk.co.nickthecoder.itchy.gui.MessageDialog;
 import uk.co.nickthecoder.itchy.gui.PlainContainer;
 import uk.co.nickthecoder.itchy.gui.PoseOrFontPicker;
 import uk.co.nickthecoder.itchy.gui.ReflectionTableModelRow;
@@ -156,7 +158,19 @@ public class ListCostumes extends ListSubjects<Costume>
     @Override
     protected void remove(Costume subject)
     {
-        this.resources.removeCostume(subject.getName());
+        MessageBox messageBox = new MessageBox("Checking All Scenes", "This may take a while");
+        messageBox.showNow();
+
+        String usedBy = this.resources.used( subject );
+        
+        messageBox.hide();
+        
+        if (usedBy != null) {
+            MessageDialog message = new MessageDialog("Cannot Remove", "This pose is being used by : \n\n" + usedBy );
+            message.show();
+        } else {
+            this.resources.removeCostume(subject.getName());
+        }
     }
 
 }

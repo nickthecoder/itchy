@@ -7,7 +7,9 @@ package uk.co.nickthecoder.itchy;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.WeakHashMap;
 
 import uk.co.nickthecoder.itchy.editor.Editor;
 import uk.co.nickthecoder.itchy.editor.SceneDesigner;
@@ -451,6 +453,13 @@ public class Game
     public Set<Role> findRoleByTag( String tag )
     {
         return this.roleTags.getTagMembers(tag);
+    }
+
+    Map<String,Actor> actorsById = new WeakHashMap<String,Actor>();
+
+    public Actor findActorById( String id )
+    {
+        return actorsById.get(id);
     }
     
     /**

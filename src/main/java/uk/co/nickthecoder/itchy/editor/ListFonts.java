@@ -4,20 +4,16 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import uk.co.nickthecoder.itchy.Costume;
 import uk.co.nickthecoder.itchy.Font;
 import uk.co.nickthecoder.itchy.Resources;
-import uk.co.nickthecoder.itchy.Scene;
-import uk.co.nickthecoder.itchy.SceneStub;
-import uk.co.nickthecoder.itchy.TextStyle;
 import uk.co.nickthecoder.itchy.gui.MessageBox;
+import uk.co.nickthecoder.itchy.gui.MessageDialog;
 import uk.co.nickthecoder.itchy.gui.ReflectionTableModelRow;
 import uk.co.nickthecoder.itchy.gui.SimpleTableModel;
 import uk.co.nickthecoder.itchy.gui.SingleColumnRowComparator;
 import uk.co.nickthecoder.itchy.gui.TableModel;
 import uk.co.nickthecoder.itchy.gui.TableModelColumn;
 import uk.co.nickthecoder.itchy.gui.TableModelRow;
-import uk.co.nickthecoder.itchy.util.StringList;
 
 public class ListFonts extends ListFileSubjects<Font>
 {
@@ -83,57 +79,19 @@ public class ListFonts extends ListFileSubjects<Font>
     @Override
     protected void remove( Font font)
     {
-        StringList usedBy = new StringList();
-
-        for (String costumeName : this.resources.costumeNames()) {
-            Costume costume = this.resources.getCostume(costumeName);
-            for (String resourceName : costume.getTextStyleNames()) {
-                for (TextStyle ts : costume.getTextStyleChoices(resourceName)) {
-                    if (ts.getFont() == font) {
-                        usedBy.add(costumeName);
-                    }
-                }
-            }
-        }
-        if (usedBy.isEmpty()) {
-            if (!usedInScenes(font)) {
-                this.resources.removeFont(font.getName());        
-            }
-        } else {
-            new MessageBox("Cannot Delete. Used by Costumes...", usedBy.toString()).show();
-        }
-    }
-
-    private boolean usedInScenes( Font font)
-    {
-        StringList list = new StringList();
-
         MessageBox messageBox = new MessageBox("Checking All Scenes", "This may take a while");
         messageBox.showNow();
 
-        try {
-            Resources resources = this.resources;
-            for (String sceneName : resources.sceneNames()) {
-                try {
-                    SceneStub stub = resources.getScene(sceneName);
-                    Scene scene = stub.load( false );
-                    if (scene.uses(font)) {
-                        list.add(sceneName);
-                    }
-                } catch (Exception e) {
-                    list.add(sceneName + " (failed to load)");
-                }
-            }
-
-        } finally {
-            messageBox.hide();
+        String usedBy = this.resources.used( font );
+        
+        messageBox.hide();
+        
+        if (usedBy != null) {
+            MessageDialog message = new MessageDialog("Cannot Remove", "This pose is being used by : \n\n" + usedBy );
+            message.show();
+        } else {
+            this.resources.removeFont(font.getName());
         }
-
-        if (!list.isEmpty()) {
-            new MessageBox("Cannot Delete. Used in scenes...", list.toString()).show();
-        }
-
-        return !list.isEmpty();
     }
 
 }

@@ -12,10 +12,10 @@ import uk.co.nickthecoder.itchy.SoundResource;
 import uk.co.nickthecoder.itchy.Thumbnailed;
 import uk.co.nickthecoder.itchy.gui.AbstractComponent;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
+import uk.co.nickthecoder.itchy.gui.Button;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.Container;
-import uk.co.nickthecoder.itchy.gui.Button;
-import uk.co.nickthecoder.itchy.gui.MessageBox;
+import uk.co.nickthecoder.itchy.gui.MessageDialog;
 import uk.co.nickthecoder.itchy.gui.PickerButton;
 import uk.co.nickthecoder.itchy.gui.PlainContainer;
 import uk.co.nickthecoder.itchy.gui.ReflectionTableModelRow;
@@ -25,7 +25,6 @@ import uk.co.nickthecoder.itchy.gui.TableModel;
 import uk.co.nickthecoder.itchy.gui.TableModelColumn;
 import uk.co.nickthecoder.itchy.gui.TableModelRow;
 import uk.co.nickthecoder.itchy.gui.ThumbnailedPickerButton;
-import uk.co.nickthecoder.itchy.util.StringList;
 import uk.co.nickthecoder.jame.JameException;
 import uk.co.nickthecoder.jame.Surface;
 
@@ -161,24 +160,14 @@ public class ListSounds extends ListFileSubjects<SoundResource>
     @Override
     protected void remove( SoundResource soundResource )
     {
-        StringList usedBy = new StringList();
-
-        for (String costumeName : this.resources.costumeNames()) {
-            Costume costume = this.resources.getCostume(costumeName);
-            for (String resourceName : costume.getSoundNames()) {
-                for (ManagedSound managedSound : costume.getSoundChoices(resourceName)) {
-                    if (managedSound.soundResource == soundResource) {
-                        usedBy.add(costumeName);
-                    }
-                }
-            }
-        }
-        if (usedBy.isEmpty()) {
-            this.resources.removeSound(soundResource.getName());
+        String usedBy = this.resources.used( soundResource );
+        
+        if (usedBy != null) {
+            MessageDialog message = new MessageDialog("Cannot Remove", "This sprite is being used by : \n\n" + usedBy );
+            message.show();
         } else {
-            new MessageBox("Cannot Delete. Used by Costumes...", usedBy.toString()).show();
+            this.resources.removeSound(soundResource.getName());
         }
-
     }
     
 

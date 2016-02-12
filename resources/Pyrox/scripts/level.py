@@ -65,8 +65,7 @@ class Level(PlainSceneDirector) :
             game.layout.findView("test").centerOn(self.player.actor)
             game.layout.findView("plain").centerOn(self.player.actor)
 
-        self.droppedFramesRole = game.findRoleById("droppedFrames")
-        print "droppedFramesRole ", self.droppedFramesRole
+        self.droppedFramesRole = game.findActorById("droppedFrames").role
 
         self.toggleInfo()
                 

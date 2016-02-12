@@ -11,6 +11,7 @@ import java.util.Set;
 import uk.co.nickthecoder.itchy.Focusable;
 import uk.co.nickthecoder.itchy.Font;
 import uk.co.nickthecoder.itchy.GraphicsContext;
+import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Renderable;
 import uk.co.nickthecoder.jame.RGBA;
 import uk.co.nickthecoder.jame.Rect;
@@ -381,6 +382,9 @@ public abstract class AbstractComponent implements Focusable, Component
     @Override
     public Font getFont()
     {
+        if ( font == null ) {
+            Itchy.getGame().getStylesheet().style(this);
+        }
         return font;
     }
 

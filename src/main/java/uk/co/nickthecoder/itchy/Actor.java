@@ -6,8 +6,6 @@ package uk.co.nickthecoder.itchy;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.WeakHashMap;
 
 import uk.co.nickthecoder.itchy.animation.AbstractAnimation;
 import uk.co.nickthecoder.itchy.animation.Animation;
@@ -59,8 +57,6 @@ public class Actor implements PropertySubject<Actor>
         }
         return new TextPose(text, textStyle);
     }
-
-    private static Map<String,Actor> actorsById = new WeakHashMap<String,Actor>();
 
     private static int nextSequenceNumber = 1;
 
@@ -143,8 +139,8 @@ public class Actor implements PropertySubject<Actor>
     {
         if (this.id != null) {
             // If there is another actor with this id, don't remove it.
-            if (actorsById.get(this.id) == this) {
-                actorsById.remove(this.id);
+            if (Itchy.getGame().actorsById.get(this.id) == this) {
+                Itchy.getGame().actorsById.remove(this.id);
             }
         }
         
@@ -157,13 +153,8 @@ public class Actor implements PropertySubject<Actor>
         this.id = id;
         
         if (this.id != null) {
-            actorsById.put(this.id,  this);
+            Itchy.getGame().actorsById.put(this.id,  this);
         }
-    }
-
-    public static Actor findActorById( String id )
-    {
-        return actorsById.get(id);
     }
     
     public String getStartEvent()

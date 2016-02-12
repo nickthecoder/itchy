@@ -13,6 +13,9 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import uk.co.nickthecoder.itchy.animation.Animation;
+import uk.co.nickthecoder.itchy.animation.CompoundAnimation;
+import uk.co.nickthecoder.itchy.animation.Frame;
+import uk.co.nickthecoder.itchy.animation.FramedAnimation;
 import uk.co.nickthecoder.itchy.script.ScriptManager;
 import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.itchy.util.NinePatch;
@@ -785,6 +788,219 @@ public class Resources extends Loadable
             }
         }
         scenes.put(sceneStub.getName(), sceneStub);
+    }
+
+    /**
+     * Checks if the poseResource is used by another resource, and therefore cannot be deleted.
+     * 
+     * @return Descriptions of how it is being used, or null if it is not being used.
+     */
+    public String used(PoseResource poseResource)
+    {
+        StringBuffer result = new StringBuffer();
+
+        for (Costume costume : this.costumes.values()) {
+            for (String eventName : costume.getPoseNames()) {
+                for (PoseResource other : costume.getPoseChoices(eventName)) {
+                    if (other == poseResource) {
+                        result.append("Costume : " + costume.getName() + " (event : " + eventName + ")\n");
+                    }
+                }
+            }
+        }
+
+        for (AnimationResource ar : this.animations.values()) {
+            if (usedByAnimation(ar.animation, poseResource)) {
+                result.append("Aniumation : " + ar.getName() + "\n");
+            }
+        }
+
+        if (result.length() == 0) {
+            return null;
+        } else {
+            return result.toString();
+        }
+    }
+
+    /**
+     * Checks if the sprite sheet is used by another resource, and therefore cannot be deleted.
+     * 
+     * @return Descriptions of how it is being used, or null if it is not being used.
+     */
+    public String used(SpriteSheet spriteSheet)
+    {
+        StringBuffer result = new StringBuffer();
+
+        for (Sprite sprite : spriteSheet.getSprites()) {
+            String used = used(sprite);
+            if (used != null) {
+                result.append(used);
+            }
+        }
+
+        if (result.length() == 0) {
+            return null;
+        } else {
+            return result.toString();
+        }
+    }
+
+    /**
+     * Checks if the animation is used by another resource, and therefore cannot be deleted.
+     * 
+     * @return Descriptions of how it is being used, or null if it is not being used.
+     */
+    public String used(AnimationResource animationResource)
+    {
+        StringBuffer result = new StringBuffer();
+
+        for (Costume costume : this.costumes.values()) {
+            for (String eventName : costume.getAnimationNames()) {
+                for (AnimationResource other : costume.getAnimationChoices(eventName)) {
+                    if (other == animationResource) {
+                        result.append("Costume : " + costume.getName() + " (event : " + eventName + ")\n");
+                    }
+                }
+            }
+        }
+
+        if (result.length() == 0) {
+            return null;
+        } else {
+            return result.toString();
+        }
+    }
+
+    /**
+     * Checks if the sound is used by another resource, and therefore cannot be deleted.
+     * 
+     * @return Descriptions of how it is being used, or null if it is not being used.
+     */
+    public String used(SoundResource soundResource)
+    {
+        StringBuffer result = new StringBuffer();
+
+        for (Costume costume : this.costumes.values()) {
+            for (String eventName : costume.getSoundNames()) {
+                for (ManagedSound other : costume.getSoundChoices(eventName)) {
+                    if (other.soundResource == soundResource) {
+                        result.append("Costume : " + costume.getName() + " (event : " + eventName + ")\n");
+                    }
+                }
+            }
+        }
+
+        if (result.length() == 0) {
+            return null;
+        } else {
+            return result.toString();
+        }
+    }
+    
+    /**
+     * Checks if the sound is used by another resource, and therefore cannot be deleted.
+     * 
+     * @return Descriptions of how it is being used, or null if it is not being used.
+     */
+    public String used(Font font)
+    {
+        StringBuffer result = new StringBuffer();
+
+        for (Costume costume : this.costumes.values()) {
+            for (String eventName : costume.getTextStyleNames()) {
+                for (TextStyle other : costume.getTextStyleChoices(eventName)) {
+                    if (other.font == font) {
+                        result.append("Costume : " + costume.getName() + " (event : " + eventName + ")\n");
+                    }
+                }
+            }
+        }
+        
+        for ( SceneStub sceneStub : this.scenes.values() ) {
+            try {
+                Scene scene = sceneStub.load(true);
+                if (scene.uses(font)) {
+                    result.append( "Scene " + sceneStub.getName() + "\n" );
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        if (result.length() == 0) {
+            return null;
+        } else {
+            return result.toString();
+        }
+    }
+
+    /**
+     * Checks if the animation is used by another resource, and therefore cannot be deleted.
+     * 
+     * @return Descriptions of how it is being used, or null if it is not being used.
+     */
+    private boolean usedByAnimation(Animation animation, PoseResource poseResource)
+    {
+        if (animation instanceof FramedAnimation) {
+            FramedAnimation fa = (FramedAnimation) animation;
+            for (Frame frame : fa.getFrames()) {
+                if (frame.getPose() == poseResource.pose) {
+                    return true;
+                }
+            }
+        } else if (animation instanceof CompoundAnimation) {
+            for (Animation child : ((CompoundAnimation) animation).children) {
+                if (usedByAnimation(child, poseResource)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Checks if the costume is used by another resource, and therefore cannot be deleted.
+     * 
+     * @return Descriptions of how it is being used, or null if it is not being used.
+     */
+    public String used(Costume costume)
+    {
+        StringBuffer result = new StringBuffer();
+
+        for (Costume other : costumes.values()) {
+            if (costume != other) {
+                if (other.getExtendedFrom() == costume) {
+                    result.append("Costume : " + other.getName() + " (extends)");
+                }
+                for (String eventName : costume.getCompanionNames()) {
+                    for (Costume companion : other.getCompanionChoices(eventName)) {
+                        if (companion == costume) {
+                            result.append("Costume : " + companion.getName() + " (event : " + eventName + ")\n");
+                        }
+                    }
+
+                }
+            }
+        }
+        
+        for ( SceneStub sceneStub : this.scenes.values() ) {
+            try {
+                Scene scene = sceneStub.load(true);
+                if (scene.uses(costume)) {
+                    result.append( "Scene " + sceneStub.getName() + "\n" );
+                }
+                scene.clear();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        if (result.length() == 0) {
+            return null;
+        } else {
+            return result.toString();
+        }
     }
 
     public boolean isValidScript(String name)

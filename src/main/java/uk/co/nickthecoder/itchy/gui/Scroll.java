@@ -13,7 +13,7 @@ import uk.co.nickthecoder.jame.event.MouseEvent;
 
 public class Scroll extends PlainContainer implements ContainerLayout
 {
-    protected AbstractComponent child;
+    protected Component child;
 
     private final VerticalScrollbar vScrollbar;
     private final HorizontalScrollbar hScrollbar;
@@ -21,7 +21,20 @@ public class Scroll extends PlainContainer implements ContainerLayout
     private int scrollY = 0;
     private int scrollX = 0;
 
-    public Scroll(AbstractComponent child)
+    public static Component ifNeeded( Component component, int maxWidth, int maxHeight )
+    {
+        if ( (component.getNaturalWidth() > maxWidth ) || ( component.getNaturalHeight() > maxHeight)) {
+            Scroll scroll = new Scroll( component );
+            scroll.setNaturalWidth(maxWidth);
+            scroll.setNaturalHeight(maxHeight);
+            
+            return scroll;
+        } else {
+            return component;
+        }
+    }
+    
+    public Scroll(Component child)
     {
         this.setType("scroll");
 

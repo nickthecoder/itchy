@@ -8,6 +8,7 @@ import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.SpriteSheet;
 import uk.co.nickthecoder.itchy.gui.AbstractComponent;
 import uk.co.nickthecoder.itchy.gui.ImageComponent;
+import uk.co.nickthecoder.itchy.gui.MessageDialog;
 import uk.co.nickthecoder.itchy.gui.ReflectionTableModelRow;
 import uk.co.nickthecoder.itchy.gui.SimpleTableModel;
 import uk.co.nickthecoder.itchy.gui.SingleColumnRowComparator;
@@ -89,7 +90,13 @@ public class ListSpriteSheets extends ListFileSubjects<SpriteSheet>
     @Override
     protected void remove(SpriteSheet subject)
     {
-        this.resources.removeSpriteSheet(subject.getName());
+        String usedBy = this.resources.used( subject );
+        if (usedBy != null) {
+            MessageDialog message = new MessageDialog("Cannot Remove", "This sprite sheet is being used by : \n\n" + usedBy );
+            message.show();
+        } else {
+            this.resources.removeSpriteSheet(subject.getName());
+        }
     }
 
 }
