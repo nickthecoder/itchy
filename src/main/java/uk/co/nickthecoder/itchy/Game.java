@@ -806,6 +806,19 @@ public class Game
         this.abortTicks = true;
         
         this.layout.merge(scene.layout);
+        
+
+        // Convert all of the DelayedActivation roles into the actual roles.
+        // This will fire each role's onBirth and onAttach
+        for (Stage stage : this.getStages()) {
+            for (Actor actor : stage.getActors()) {
+                Role role = actor.getRole();
+                if (role.getClass() == DelayedActivation.class) {
+                    role.tick();
+                }
+            }
+        }
+
         return scene;
     }
 
@@ -857,7 +870,10 @@ public class Game
         // This will fire each role's onBirth and onAttach
         for (Stage stage : this.getStages()) {
             for (Actor actor : stage.getActors()) {
-                actor.getRole().tick();
+                Role role = actor.getRole();
+                if (role.getClass() == DelayedActivation.class) {
+                    role.tick();
+                }
             }
         }
 

@@ -25,9 +25,9 @@ public class DelayedActivation extends AbstractRole
     @Override
     public void onAttach()
     {
-        this.delay = Timer.createTimerSeconds(this.seconds);
         this.alpha = getActor().getAppearance().getAlpha();
-        if (this.delay.period != 0) {
+        if (this.seconds > 0) {
+            this.delay = Timer.createTimerSeconds(this.seconds);
             getActor().getAppearance().setAlpha(0);
         }
     }
@@ -35,7 +35,7 @@ public class DelayedActivation extends AbstractRole
     @Override
     public void tick()
     {
-        if (this.delay.isFinished()) {
+        if ((this.delay == null) || (this.delay.isFinished())) {
             getActor().getAppearance().setAlpha(this.alpha);
 
             getActor().setRole( this.actualRole );
