@@ -1,9 +1,6 @@
 Current Tasks
 =============
 
-Check before deleting stuff.
-    Can delete costumes (the rest is fine!)
-
 Renaming a Layer/Layout will need to alter all scenes???
 
 Look over all TODOs
@@ -36,6 +33,9 @@ Appearance.fixPose doesn't do the right thing with direction.
 New Features
 ============
 
+NinePatches in SpriteSheet
+    Use it on the defaultGUI resources.
+    Implement by allowing a Pose or a Filename for a NinePatch 
 
 Client/Server views.
     A server runs the game, calling the director,scenedirector,roles ticks etc.

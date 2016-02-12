@@ -182,6 +182,8 @@ public class SceneReader
         ClassName roleClassName = new ClassName(Role.class, roleClassNameString);
         Role role = (Role) roleClassName.createInstance(resources);
         
+        this.readProperties(actorTag, sceneActor);
+        this.readProperties(actorTag, sceneActor.getAppearance());
         
         if (design) {
             sceneActor.setRole(new SceneDesignerRole(role));
@@ -189,9 +191,6 @@ public class SceneReader
             double delay = actorTag.getOptionalDoubleAttribute("activationDelay", 0);
             sceneActor.setRole(new DelayedActivation(delay, role));
         }
-
-        this.readProperties(actorTag, sceneActor);
-        this.readProperties(actorTag, sceneActor.getAppearance());
 
         readRole(actorTag, role);
         readMakeup(actorTag, sceneActor);

@@ -23,9 +23,8 @@ public class DelayedActivation extends AbstractRole
     }
 
     @Override
-    public void born()
+    public void onAttach()
     {
-        // Do not call super, because we aren't really being born, and don't want to be given a collision strategy
         this.delay = Timer.createTimerSeconds(this.seconds);
         this.alpha = getActor().getAppearance().getAlpha();
         if (this.delay.period != 0) {
@@ -39,7 +38,7 @@ public class DelayedActivation extends AbstractRole
         if (this.delay.isFinished()) {
             getActor().getAppearance().setAlpha(this.alpha);
 
-            getActor().activate( this.actualRole );
+            getActor().setRole( this.actualRole );
         }
     }
 }
