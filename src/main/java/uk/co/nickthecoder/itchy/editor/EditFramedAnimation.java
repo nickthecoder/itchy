@@ -12,53 +12,53 @@ import uk.co.nickthecoder.itchy.PoseResource;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.animation.Frame;
 import uk.co.nickthecoder.itchy.animation.FramedAnimation;
-import uk.co.nickthecoder.itchy.gui.AbstractComponent;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
+import uk.co.nickthecoder.itchy.gui.Button;
 import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
 import uk.co.nickthecoder.itchy.gui.Container;
 import uk.co.nickthecoder.itchy.gui.DoubleBox;
 import uk.co.nickthecoder.itchy.gui.GridLayout;
-import uk.co.nickthecoder.itchy.gui.Button;
 import uk.co.nickthecoder.itchy.gui.ImageComponent;
 import uk.co.nickthecoder.itchy.gui.IntegerBox;
 import uk.co.nickthecoder.itchy.gui.Label;
 import uk.co.nickthecoder.itchy.gui.NullComponent;
 import uk.co.nickthecoder.itchy.gui.PlainContainer;
 import uk.co.nickthecoder.itchy.gui.PoseResourcePicker;
+import uk.co.nickthecoder.itchy.gui.Stylesheet;
+import uk.co.nickthecoder.itchy.gui.VerticalLayout;
 import uk.co.nickthecoder.itchy.gui.VerticalScroll;
 
-public class FramedAnimationEditor extends AnimationEditor
+public class EditFramedAnimation extends EditSingleAnimation
 {
-    private final Resources resources;
-
     private List<Frame> frames;
 
     private PlainContainer framesContainer;
 
     private GridLayout framesGrid;
 
-    public FramedAnimationEditor( Resources resources, FramedAnimation animation )
+    public EditFramedAnimation(Resources resources, FramedAnimation animation)
     {
-        super( animation);
-        this.resources = resources;
+        super(resources, animation);
     }
 
     @Override
-    public void createButtons( Container buttonBar )
+    public void addButtons(Container buttonBar)
     {
         Button add = new Button("Add");
-        add.addActionListener(new ActionListener() {
+        add.addActionListener(new ActionListener()
+        {
             @Override
             public void action()
             {
-                PoseResourcePicker posePicker = new PoseResourcePicker(FramedAnimationEditor.this.resources) {
+                PoseResourcePicker posePicker = new PoseResourcePicker(EditFramedAnimation.this.resources)
+                {
                     @Override
-                    public void pick( PoseResource poseResource )
+                    public void pick(PoseResource poseResource)
                     {
-                        FramedAnimationEditor.this.frames.add(new Frame(poseResource.getName(),
+                        EditFramedAnimation.this.frames.add(new Frame(poseResource.getName(),
                             poseResource.pose));
-                        FramedAnimationEditor.this.rebuildFrames();
+                        EditFramedAnimation.this.rebuildFrames();
                     }
                 };
                 posePicker.show();
@@ -66,13 +66,15 @@ public class FramedAnimationEditor extends AnimationEditor
         });
         buttonBar.addChild(add);
 
-        super.createButtons(buttonBar);
+        super.addButtons(buttonBar);
     }
 
     @Override
-    public AbstractComponent createExtra()
+    public Component createForm()
     {
-        this.frames = new ArrayList<Frame>(((FramedAnimation) this.animation).getFrames());
+        super.createForm();
+
+        this.frames = new ArrayList<Frame>(((FramedAnimation) this.subject).getFrames());
 
         this.framesContainer = new PlainContainer();
         this.framesContainer.addStyle("form");
@@ -87,7 +89,12 @@ public class FramedAnimationEditor extends AnimationEditor
         VerticalScroll vs = new VerticalScroll(this.framesContainer);
         vs.addStyle("panel");
 
-        return vs;
+        PlainContainer both = new PlainContainer();
+        both.setLayout(new VerticalLayout());
+        both.addChild( this.form.container);
+        both.addChild( vs );
+        
+        return both;
     }
 
     private void rebuildFrames()
@@ -102,19 +109,20 @@ public class FramedAnimationEditor extends AnimationEditor
         this.framesContainer.invalidate();
     }
 
-    private void rebuildFrame( final int i, final Frame frame )
+    private void rebuildFrame(final int i, final Frame frame)
     {
         String name = Itchy.getGame().resources.getPoseName(frame.getPose());
         if (name == null) {
             name = "?";
         }
-        
+
         ImageComponent img = new ImageComponent(frame.getPose().getSurface());
         img.setTooltip("Pose " + name);
-        final IntegerBox delay = new IntegerBox(frame.getDelay());        
+        final IntegerBox delay = new IntegerBox(frame.getDelay());
         delay.minimumValue = 1;
 
-        delay.addChangeListener(new ComponentChangeListener() {
+        delay.addChangeListener(new ComponentChangeListener()
+        {
             @Override
             public void changed()
             {
@@ -123,31 +131,34 @@ public class FramedAnimationEditor extends AnimationEditor
 
         });
 
+        Stylesheet stylesheet = this.editWindow.getStylesheet();
         Button up = null;
         if (i > 0) {
-            up = new Button(new ImageComponent(getStylesheet().resources.getPose("icon_up").getSurface()));
-            up.addActionListener(new ActionListener() {
+            up = new Button(new ImageComponent(stylesheet.resources.getPose("icon_up").getSurface()));
+
+            up.addActionListener(new ActionListener()
+            {
                 @Override
                 public void action()
                 {
-                    Frame other = FramedAnimationEditor.this.frames.get(i - 1);
-                    FramedAnimationEditor.this.frames.set(i, other);
-                    FramedAnimationEditor.this.frames.set(i - 1, frame);
-                    FramedAnimationEditor.this.rebuildFrames();
+                    Frame other = EditFramedAnimation.this.frames.get(i - 1);
+                    EditFramedAnimation.this.frames.set(i, other);
+                    EditFramedAnimation.this.frames.set(i - 1, frame);
+                    EditFramedAnimation.this.rebuildFrames();
                 }
             });
             up.addStyle("compact");
             up.setTooltip("Move Up");
         }
 
-        Button delete = new Button(new ImageComponent(getStylesheet().resources.getPose(
-            "icon_delete").getSurface()));
-        delete.addActionListener(new ActionListener() {
+        Button delete = new Button(new ImageComponent(stylesheet.resources.getPose("icon_delete").getSurface()));
+        delete.addActionListener(new ActionListener()
+        {
             @Override
             public void action()
             {
-                FramedAnimationEditor.this.frames.remove(i);
-                FramedAnimationEditor.this.rebuildFrames();
+                EditFramedAnimation.this.frames.remove(i);
+                EditFramedAnimation.this.rebuildFrames();
             }
         });
         delete.addStyle("compact");
@@ -171,21 +182,11 @@ public class FramedAnimationEditor extends AnimationEditor
                 frame.dy = dyBox.getValue();
             }
         });
-        
-        Label label = new Label( name );
-        
-        this.framesGrid.addRow( new Component[] {img, delay, up == null ? new NullComponent() : up, delete, dxBox, dyBox, label} );
-    }
 
-    @Override
-    public boolean save()
-    {
-        super.save();
+        Label label = new Label(name);
 
-        FramedAnimation framedAnimation = (FramedAnimation) this.animation;
-        framedAnimation.replaceFrames(this.frames);
-
-        return true;
+        this.framesGrid.addRow(new Component[] { img, delay, up == null ? new NullComponent() : up, delete, dxBox,
+            dyBox, label });
     }
 
 }

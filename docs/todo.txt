@@ -1,10 +1,6 @@
 Current Tasks
 =============
 
-SubjectProperty should include the method getClassName() ?
-    Appearance.getMakeupClass name doesn't work, because it cannot find a scripts classname.
-
-
 Renaming a Layer/Layout will need to alter all scenes???
 
 Look over all TODOs

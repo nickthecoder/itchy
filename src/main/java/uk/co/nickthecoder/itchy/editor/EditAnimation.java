@@ -68,8 +68,6 @@ public class EditAnimation extends EditNamedSubject<AnimationResource>
         this.createTree();
         this.form.grid.addRow(new NullComponent(), this.treeContainer);
 
-        System.out.println( "Created form" );
-
         return this.form.container;
     }
 
@@ -79,17 +77,17 @@ public class EditAnimation extends EditNamedSubject<AnimationResource>
         this.treeContainer.addChild(this.createAnimationTree(null, this.subject.animation ));
     }
 
-    private AnimationEditor createAnimationEditor(Animation animation)
+    private EditSingleAnimation createAnimationEditor(Animation animation)
     {
-        AnimationEditor result;
+        EditSingleAnimation result;
 
         if (animation instanceof FramedAnimation) {
             FramedAnimation framedAnimation = (FramedAnimation) animation;
-            result = new FramedAnimationEditor(this.resources, framedAnimation);
+            result = new EditFramedAnimation(this.resources, framedAnimation);
 
         }
         if (animation instanceof CompoundAnimation) {
-            result = new AnimationEditor(animation)
+            result = new EditSingleAnimation(this.resources,animation)
             {
                 @Override
                 public void onOk()
@@ -100,10 +98,10 @@ public class EditAnimation extends EditNamedSubject<AnimationResource>
             };
 
         } else if (animation instanceof FramedAnimation) {
-            result = new FramedAnimationEditor(this.resources, (FramedAnimation) animation);
+            result = new EditFramedAnimation(this.resources, (FramedAnimation) animation);
 
         } else {
-            result = new AnimationEditor(animation);
+            result = new EditSingleAnimation(this.resources,animation);
         }
 
         return result;
@@ -115,9 +113,7 @@ public class EditAnimation extends EditNamedSubject<AnimationResource>
     }
 
     private Component createAnimationTree(final CompoundAnimation parent, final Animation animation )
-    {
-        System.out.println( "Creating animation tree " + parent  + " child " + animation );
-        
+    {        
         PlainContainer line = new PlainContainer();
         line.setFill(true, false);
         line.addStyle("combo");
@@ -209,7 +205,6 @@ public class EditAnimation extends EditNamedSubject<AnimationResource>
 
         }
 
-        System.out.println( "Created tree" );
         return result;
     }
 
