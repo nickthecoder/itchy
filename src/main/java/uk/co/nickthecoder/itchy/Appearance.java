@@ -457,13 +457,13 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
     {
         ImagePose pose = new ImagePose(getSurface().copy(), getOffsetX(), getOffsetY());
 
-        // Doesn't work. Bodge it bt setting direction to 0 for now.
-        // pose.setDirection(getDirection());
-        this.direction = 0;
-
-        setPose(pose);
+        pose.setDirection(this.direction);
+        this.pose = pose;
+        this.invalidateShape();
         setMakeup(new NullMakeup());
         this.scale = 1;
+        
+        this.getSurface();
     }
 
     @Override

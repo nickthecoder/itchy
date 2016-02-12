@@ -91,6 +91,12 @@ public class ImagePose implements Pose
     }
 
     @Override
+    public double getDirection()
+    {
+        return this.direction;
+    }
+    
+    @Override
     public int getOffsetX()
     {
         return this.offsetX;
@@ -110,12 +116,6 @@ public class ImagePose implements Pose
     public void setOffsetY( int value )
     {
         this.offsetY = value;
-    }
-
-    @Override
-    public double getDirection()
-    {
-        return this.direction;
     }
 
     @Override

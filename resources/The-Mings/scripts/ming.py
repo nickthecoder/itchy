@@ -176,6 +176,7 @@ class Ming(AbstractRole) :
         rect = Rect( 0,0, followerPose.surface.width, followerPose.surface.height )
         followerPose.surface.blit( rect, surface, int(tx), int(ty), Surface.BlendMode.RGBA_MULT )
         newPose = ImagePose( surface, solidPose.offsetX, solidPose.offsetY )
+        newPose.direction = solidPose.direction
         solid.actor.appearance.pose = newPose
 
 
