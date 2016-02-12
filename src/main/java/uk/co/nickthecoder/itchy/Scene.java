@@ -143,13 +143,24 @@ public class Scene implements NamedSubject<Scene>
 
     public boolean stageUses(Stage stage, Font font)
     {
-        // TODO implement stageUses(Font)
+        for ( Actor actor : stage.getActors() ) {
+            Pose pose = actor.getAppearance().getPose();
+            if ( pose instanceof TextPose ) {
+                if (((TextPose) pose).getFont() == font) {
+                    return true;
+                }
+            }
+        }
         return false;
     }
     
     public boolean stageUses(Stage stage, Costume costume)
     {
-        // TODO implement stageUses(Costume)
+        for ( Actor actor : stage.getActors() ) {
+            if (actor.getCostume() == costume ) {
+                return true;
+            }
+        }
         return false;
     }
    

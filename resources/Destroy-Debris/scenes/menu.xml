@@ -1,4 +1,4 @@
-<scene name="menu" layout="default" sceneDirector="menu.py">
+<scene name="menu" layout="default" sceneDirector="menu.py" showMouse="true">
   <layer name="main">
     <actor costume="stars2" x="400.0" y="300.0" id="" colorize=""/>
     <actor costume="python-a" x="589.0" y="133.0" zOrder="62" id="" colorize="" role="rock.py">

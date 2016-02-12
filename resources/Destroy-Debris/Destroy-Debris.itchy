@@ -562,15 +562,6 @@
       <pose name="spark" pose="spark4"/>
       <pose name="spark" pose="spark5"/>
     </costume>
-    <costume name="pause" defaultZOrder="0" order="0" showInDesigner="true">
-      <string name="default">Pause</string>
-      <font name="default" font="Vera" fontSize="14" color="#ffffffff" xAlignment="0.5" yAlignment="0.5" marginTop="0" marginRight="0" marginBottom="0" marginLeft="0"/>
-      <animation name="default" animation="pauseReveal"/>
-    </costume>
-    <costume name="play" defaultZOrder="0" order="0" showInDesigner="true" extends="button" role="uk.co.nickthecoder.itchy.role.MessageButton">
-      <string name="default">play</string>
-      <font name="default" font="Vera" fontSize="14" color="#ffffffff" xAlignment="0.5" yAlignment="0.5" marginTop="0" marginRight="0" marginBottom="0" marginLeft="0"/>
-    </costume>
     <costume name="python-a" defaultZOrder="0" order="0" showInDesigner="true" extends="rock" role="rock.py">
       <pose name="default" pose="python-a"/>
       <pose name="fragment" pose="spark2"/>

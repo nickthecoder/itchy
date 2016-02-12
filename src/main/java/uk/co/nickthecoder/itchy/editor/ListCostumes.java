@@ -166,7 +166,7 @@ public class ListCostumes extends ListSubjects<Costume>
         messageBox.hide();
         
         if (usedBy != null) {
-            MessageDialog message = new MessageDialog("Cannot Remove", "This pose is being used by : \n\n" + usedBy );
+            MessageDialog message = new MessageDialog("Cannot Remove", "This costume is being used by : \n\n" + usedBy );
             message.show();
         } else {
             this.resources.removeCostume(subject.getName());

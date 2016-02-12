@@ -971,12 +971,12 @@ public class Resources extends Loadable
         for (Costume other : costumes.values()) {
             if (costume != other) {
                 if (other.getExtendedFrom() == costume) {
-                    result.append("Costume : " + other.getName() + " (extends)");
+                    result.append("Costume : " + other.getName() + " (extends)\n");
                 }
-                for (String eventName : costume.getCompanionNames()) {
+                for (String eventName : other.getCompanionNames()) {
                     for (Costume companion : other.getCompanionChoices(eventName)) {
                         if (companion == costume) {
-                            result.append("Costume : " + companion.getName() + " (event : " + eventName + ")\n");
+                            result.append("Costume : " + other.getName() + " (event : " + eventName + ")\n");
                         }
                     }
 

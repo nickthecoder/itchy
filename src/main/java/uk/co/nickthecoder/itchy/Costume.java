@@ -676,6 +676,8 @@ public class Costume implements NamedSubject<Costume>, Cloneable
                 return ((TextStyle)data).font.getName();
             } else if (data instanceof ManagedSound) {
                 return ((ManagedSound)data).soundResource.getName();
+            } else if (data instanceof String) {
+                return (String)data;
             } else {
                 System.out.println( "Unknown type : " + data.getClass().getName() );
                 return "";
