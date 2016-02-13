@@ -5,15 +5,10 @@ Renaming a Layer/Layout will need to alter all scenes???
 
 Look over all TODOs
 
-
 Implement change Layout in scene designer.
-
 
 All resources.renameXXX needs to update the renamed collection, so that renameSubjectsInScenes will work. 
     And do the same with other resources. Layouts, Fonts, ... ?
-
-Replace AnimationEditor by new style? Used by FramedAnimationEditor. ???
-    If not, use PropertiesForm with autoupdate.
 
 BUGS
 ====

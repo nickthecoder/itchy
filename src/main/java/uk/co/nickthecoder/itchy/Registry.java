@@ -5,6 +5,7 @@
 package uk.co.nickthecoder.itchy;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -13,7 +14,6 @@ import java.util.TreeSet;
 import uk.co.nickthecoder.itchy.animation.Animation;
 import uk.co.nickthecoder.itchy.animation.Ease;
 import uk.co.nickthecoder.itchy.util.ClassName;
-import uk.co.nickthecoder.itchy.util.NamedComparator;
 
 public class Registry
 {
@@ -152,7 +152,14 @@ public class Registry
 
     public Set<Animation> getAnimations()
     {
-        TreeSet<Animation> result = new TreeSet<Animation>(new NamedComparator());
+        TreeSet<Animation> result = new TreeSet<Animation>( new Comparator<Animation>()
+        {
+            @Override
+            public int compare(Animation o1, Animation o2)
+            {
+                return o1.getName().compareTo( o2.getName() );
+            }
+        });
         result.addAll(this.animationsByName.values());
         return result;
     }

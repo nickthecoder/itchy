@@ -9,16 +9,17 @@ import java.util.List;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.PropertySubject;
-import uk.co.nickthecoder.itchy.util.Named;
 
-public interface Animation extends Cloneable, PropertySubject<Animation>, Named
+public interface Animation extends Cloneable, PropertySubject<Animation>
 {
     @Override
     public List<Property<Animation, ?>> getProperties();
 
-    @Override
     public String getName();
 
+    /**
+     * The string used when saving the animation.
+     */
     public String getTagName();
 
     public void start( Actor actor );
