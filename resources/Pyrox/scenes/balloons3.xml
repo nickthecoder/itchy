@@ -150,8 +150,8 @@
     <actor costume="balloon" x="840.0" y="420.0" zOrder="20" id="" colorize="" role="balloon.py"/>
     <actor costume="balloon" x="1080.0" y="240.0" zOrder="20" id="" colorize="" role="balloon.py"/>
     <actor costume="balloon" x="1020.0" y="420.0" zOrder="20" id="" colorize="" role="balloon.py"/>
-    <actor costume="warp" x="360.0" y="60.0" zOrder="40" id="" colorize="" role="warp.py">
-      <role scene="play" exitX="0" exitY="-1"/>
+    <actor costume="gate" x="360.0" y="60.0" zOrder="40" id="" colorize="" role="gate.py">
+      <role scene="play" spare="0"/>
     </actor>
     <actor costume="coin" x="60.0" y="480.0" zOrder="60" id="" colorize="" role="collectable.py"/>
     <actor costume="coin" x="180.0" y="420.0" zOrder="60" id="" colorize="" role="collectable.py"/>
