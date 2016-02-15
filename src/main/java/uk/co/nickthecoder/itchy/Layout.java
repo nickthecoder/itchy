@@ -84,6 +84,9 @@ public class Layout implements NamedSubject<Layout>, Cloneable
     public void addLayer(Layer layer)
     {
         layers.add(layer);
+        if (this.defaultLayer == null) {
+            this.defaultLayer = layer;
+        }
     }
 
     public void removeLayer(Layer layer)

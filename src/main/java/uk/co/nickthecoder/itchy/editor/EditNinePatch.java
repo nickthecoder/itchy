@@ -39,7 +39,7 @@ public class EditNinePatch extends EditNamedSubject<NinePatch>
     @Override
     protected void rename()
     {
-        resources.rename(subject);
+        resources.renameNinePatch(subject);
     }
     
     @Override

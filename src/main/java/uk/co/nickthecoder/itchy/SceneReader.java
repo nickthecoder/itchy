@@ -51,6 +51,11 @@ public class SceneReader
     private void readScene(XMLTag sceneTag) throws Exception
     {
         readProperties(sceneTag, this.scene);
+        
+        String layoutName = sceneTag.getOptionalAttribute("layout", "default");
+        layoutName = this.resources.getNewLayoutName(layoutName);
+        this.scene.layout = this.resources.getLayout( layoutName );
+        
         if (this.scene.layout == null) {
             this.scene.layout = resources.getLayout("default");
         }
@@ -142,6 +147,7 @@ public class SceneReader
     private void readText(XMLTag textTag, Stage stage) throws Exception
     {
         String fontName = textTag.getAttribute("font");
+        fontName = this.resources.getNewFontName(fontName);
         Font font = this.resources.getFont(fontName);
 
         if (font == null) {

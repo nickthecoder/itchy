@@ -56,6 +56,7 @@ public class Resources extends Loadable
 
     private GameInfo gameInfo;
 
+    
     private final HashMap<String, SpriteSheet> spriteSheets;
 
     private final HashMap<String, PoseResource> poses;
@@ -76,8 +77,11 @@ public class Resources extends Loadable
 
     private final HashMap<String, Layout> layouts;
 
-    private HashMap<String, String> renamedCostumes;
-
+    private static final Class<?>[] RENAME_CLASSES = { Costume.class, Font.class, Layout.class };
+    
+    private HashMap<Class<?>,HashMap<String, String>> renamedMaps;
+    
+    
     public ErrorLog errorLog;
 
     public final Registry registry = new Registry(Itchy.registry);
@@ -107,7 +111,8 @@ public class Resources extends Loadable
 
         layouts = new HashMap<String, Layout>();
 
-        renamedCostumes = new HashMap<String, String>();
+        renamedMaps = new HashMap<Class<?>,HashMap<String,String>>();
+                
         dirty = false;
 
         game = new Game(this);
@@ -148,7 +153,7 @@ public class Resources extends Loadable
         result.animations.putAll(animations);
         result.inputs.putAll(inputs);
         result.layouts.putAll(layouts);
-        result.renamedCostumes.putAll(renamedCostumes);
+        result.renamedMaps.putAll(renamedMaps);
 
         result.setFile(this.getFile());
 
@@ -312,19 +317,8 @@ public class Resources extends Loadable
         return sortNames(spriteSheets.keySet());
     }
 
-    public void renameSpriteSheet(SpriteSheet spriteSheet)
-    {
-        for (Entry<String, SpriteSheet> entry : spriteSheets.entrySet()) {
-            if (entry.getValue() == spriteSheet) {
-                spriteSheets.remove(entry.getKey());
-                break;
-            }
-        }
-        spriteSheets.put(spriteSheet.getName(), spriteSheet);
-    }
-
+    
     // Poses
-
     public void addPose(PoseResource resource)
     {
         poses.put(resource.getName(), resource);
@@ -349,12 +343,6 @@ public class Resources extends Loadable
     public List<String> poseNames()
     {
         return sortNames(poses.keySet());
-    }
-
-    void rename2(PoseResource poseResource, String name)
-    {
-        poses.remove(poseResource.getName());
-        poses.put(name, poseResource);
     }
 
     public String getPoseName(Pose pose)
@@ -385,17 +373,7 @@ public class Resources extends Loadable
         }
         return resource.getThumbnail();
     }
-
-    public void renamePose(PoseResource pr)
-    {
-        for (Entry<String, PoseResource> entry : this.poses.entrySet()) {
-            if (entry.getValue() == pr) {
-                this.poses.remove(entry.getKey());
-                break;
-            }
-        }
-        this.poses.put(pr.getName(), pr);
-    }
+    
 
     // Animations
 
@@ -435,16 +413,6 @@ public class Resources extends Loadable
         return null;
     }
 
-    public void renameAnimation(AnimationResource ar)
-    {
-        for (Entry<String, AnimationResource> entry : animations.entrySet()) {
-            if (entry.getValue() == ar) {
-                animations.remove(entry.getKey());
-                break;
-            }
-        }
-        animations.put(ar.getName(), ar);
-    }
 
     // NinePatches
 
@@ -468,16 +436,6 @@ public class Resources extends Loadable
         return sortNames(ninePatches.keySet());
     }
 
-    public void rename(NinePatch ninePatch)
-    {
-        for (Entry<String, NinePatch> entry : ninePatches.entrySet()) {
-            if (entry.getValue() == ninePatch) {
-                ninePatches.remove(entry.getKey());
-                break;
-            }
-        }
-        ninePatches.put(ninePatch.getName(), ninePatch);
-    }
 
     // Layouts
     public void addLayout(Layout layout)
@@ -500,17 +458,8 @@ public class Resources extends Loadable
         return sortNames(layouts.keySet());
     }
 
-    public void renameLayout(Layout layout)
-    {
-        for (Entry<String, Layout> entry : layouts.entrySet()) {
-            if (entry.getValue() == layout) {
-                layouts.remove(entry.getKey());
-                break;
-            }
-        }
-        layouts.put(layout.getName(), layout);
-    }
-
+    
+    
     // Sounds
 
     public void addSound(SoundResource soundResource)
@@ -566,17 +515,7 @@ public class Resources extends Loadable
         return sortNames(fonts.keySet());
     }
 
-    public void renameFont(Font font)
-    {
-        for (Entry<String, Font> entry : fonts.entrySet()) {
-            if (entry.getValue() == font) {
-                fonts.remove(entry.getKey());
-                break;
-            }
-        }
-        fonts.put(font.getName(), font);
-    }
-
+    
     /**
      * @return The default font. At the moment this is a randomly picked font! Null if there are no fonts.
      */
@@ -636,16 +575,6 @@ public class Resources extends Loadable
         costumes.remove(name);
     }
 
-    /**
-     * Used while loading a resource - if a costume has been renamed since the scene was last saved, then we need to
-     * translate from the old name to the new name before getting the costume.
-     */
-    public String getNewCostumeName(String name)
-    {
-        String origName = renamedCostumes.get(name);
-        return origName == null ? name : origName;
-    }
-
     public Costume getCostume(String name)
     {
         return costumes.get(name);
@@ -666,41 +595,6 @@ public class Resources extends Loadable
         return null;
     }
 
-    public void renameCostume(Costume costume)
-    {
-        String newName = costume.getName();
-        String oldName = null;
-        for (Entry<String, Costume> entry : costumes.entrySet()) {
-            if (entry.getValue() == costume) {
-                oldName = entry.getKey();
-                break;
-            }
-        }
-
-        if (oldName == null) {
-            return;
-        }
-
-        if (oldName.equals(newName)) {
-            return;
-        }
-
-        String origName = oldName;
-
-        // If the costume has been renamed already, we want to map from the ORIGINAL name, not the intermediate name
-        // (oldName).
-        for (String name : renamedCostumes.keySet()) {
-            if (renamedCostumes.get(name).equals(oldName)) {
-                origName = name;
-                break;
-            }
-        }
-
-        renamedCostumes.put(origName, newName);
-
-        costumes.remove(oldName);
-        costumes.put(newName, costume);
-    }
 
     public Surface getThumbnail(Costume costume)
     {
@@ -1043,21 +937,155 @@ public class Resources extends Loadable
         return game;
     }
 
-    public boolean renamesPending()
+
+    /**
+     * Used while loading a resource - if a costume has been renamed since the scene was last saved, then we need to
+     * translate from the old name to the new name.
+     */
+    public String getNewCostumeName(String name)
     {
-        return !renamedCostumes.isEmpty();
+        return getNewName( Costume.class, name );
+    }
+    /**
+     * Used while loading a resource - if a font has been renamed since the scene was last saved, then we need to
+     * translate from the old name to the new name.
+     */
+    public String getNewFontName(String name)
+    {
+        return getNewName( Font.class, name );
     }
 
-    public void renameSubjectsInScenes() throws Exception
+    /**
+     * Used while loading a resource - if a layout has been renamed since the scene was last saved, then we need to
+     * translate from the old name to the new name.
+     */
+    public String getNewLayoutName(String name)
+    {
+        return getNewName( Layout.class, name );
+    }
+    
+    private String getNewName( Class<?> klass, String name )
+    {
+        HashMap<String,String> map = this.renamedMaps.get(klass);
+        if ( map == null ) {
+            return name;
+        }
+        
+        String origName = map.get(name);
+        return origName == null ? name : origName;
+    }
+    
+    public void renameSpriteSheet(SpriteSheet spriteSheet)
+    {
+        rename( SpriteSheet.class, spriteSheet, spriteSheets);
+    }
+
+    public void renamePose(PoseResource poseResource)
+    {
+        rename( PoseResource.class, poseResource, poses );
+    }
+    
+    public void renameAnimation(AnimationResource animationResource)
+    {
+        rename( AnimationResource.class, animationResource, animations );
+    }
+
+    public void renameNinePatch(NinePatch ninePatch)
+    {
+        rename( NinePatch.class, ninePatch, ninePatches);
+    }
+    public void renameLayout(Layout layout)
+    {
+        rename( Layout.class, layout, layouts);
+    }
+
+    public void renameFont(Font font)
+    {
+        rename( Font.class, font, fonts);
+    }
+    public void renameCostume(Costume costume)
+    {
+        rename( Costume.class, costume, costumes);
+    }
+    
+
+    
+    private void rename( Class<?> klass, String oldName, String newName )
+    {
+        HashMap<String,String> map = this.renamedMaps.get(klass);
+        if (map == null) {
+            map = new HashMap<String,String>();
+            this.renamedMaps.put( klass, map );
+        }
+        rename( map, oldName, newName );
+    }
+    
+    static void rename( HashMap<String,String> map, String oldName, String newName )
+    {
+        if (oldName == null) {
+            return;
+        }
+
+        // If the costume has been renamed already, we want to map from the ORIGINAL name, not the intermediate name
+        // (oldName).
+        for (String name : map.keySet()) {
+            if (map.get(name).equals(oldName)) {
+                oldName = name;
+                break;
+            }
+        }
+        if (oldName.equals(newName)) {
+            map.remove(oldName);
+        } else {
+            map.put(oldName, newName);
+        }
+    }
+    
+    
+    private <T extends Named> void rename( Class<T> klass, T subject, HashMap<String,T> map )
+    {
+        String newName = subject.getName();
+        String oldName = null;
+        
+        for (Entry<String, T> entry : map.entrySet()) {
+            if (entry.getValue() == subject) {
+                oldName = entry.getKey();
+                break;
+            }
+        }
+
+        if ((oldName == null) || oldName.equals(newName)) {
+            return;
+        }
+        
+        rename( klass, oldName, newName );
+        
+        map.remove(oldName);
+        map.put(newName, subject);
+    }
+    
+    
+    public boolean renamesPending()
+    {
+        for ( Class<?> klass : RENAME_CLASSES ) {
+            HashMap<String,String> map = this.renamedMaps.get(klass);
+            if ((map != null) && (!map.isEmpty())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void renameResourcesInScenes() throws Exception
     {
         for (String sceneName : this.sceneNames()) {
             SceneStub sceneStub = this.getScene(sceneName);
-            Scene scene = sceneStub.load(false);
+            Scene scene = sceneStub.load(true);
             sceneStub.save(scene);
         }
-        renamedCostumes.clear();
+        renamedMaps.clear();
     }
-
+    
     public static void dump(String label, Object... data)
     {
         System.out.print(label);

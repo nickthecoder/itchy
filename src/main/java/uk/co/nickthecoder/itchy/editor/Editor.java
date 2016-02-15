@@ -323,7 +323,7 @@ public final class Editor extends Game implements KeyListener
                 messageBox.showNow();
             }
             if (this.resources.renamesPending()) {
-                this.resources.renameSubjectsInScenes();
+                this.resources.renameResourcesInScenes();
             }
 
         } catch (Exception e) {
