@@ -74,9 +74,7 @@ class Player(AbstractRole) :
             if self.collected >= game.sceneDirector.collectables :
                 game.director.startScene( exit.nextLevel )
 
-        i = self.getCollisionStrategy().collisions(self.getActor(),"collectable").iterator()
-        while i.hasNext() :
-            collectable = i.next()
+        for collectable in self.collisions("collectable") :
             self.collected += collectable.collect()
 
 
