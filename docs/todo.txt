@@ -1,7 +1,8 @@
 Current Tasks
 =============
 
-Renaming a Layer/Layout will need to alter all scenes???
+Make some gates need balloons 2, rocks 2, instead of 3, 3?
+    Or make a new balloons3?
 
 Look over all TODOs
 
@@ -9,6 +10,7 @@ Implement change Layout in scene designer.
 
 All resources.renameXXX needs to update the renamed collection, so that renameSubjectsInScenes will work. 
     And do the same with other resources. Layouts, Fonts, ... ?
+
 
 BUGS
 ====
@@ -19,7 +21,8 @@ New Features
 
 NinePatches in SpriteSheet
     Use it on the defaultGUI resources.
-    Implement by allowing a Pose or a Filename for a NinePatch 
+    Implement by allowing a Pose or a Filename for a NinePatch ?
+    Or allow nine patches within sprite sheets?
 
 Client/Server views.
     A server runs the game, calling the director,scenedirector,roles ticks etc.

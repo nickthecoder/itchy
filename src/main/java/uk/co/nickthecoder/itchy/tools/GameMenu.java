@@ -15,6 +15,7 @@
 package uk.co.nickthecoder.itchy.tools;
 
 import java.io.File;
+import java.util.Arrays;
 
 import uk.co.nickthecoder.itchy.Game;
 import uk.co.nickthecoder.itchy.Itchy;
@@ -79,7 +80,10 @@ public class GameMenu implements Page
         File directory = new File(Itchy.getBaseDirectory(), "resources");
         File defaultImageFile = new File(directory, "defaultGui/images/unknown32.png");
 
-        for (File dir : directory.listFiles()) {
+        File[] directories = directory.listFiles();
+        Arrays.sort(directories);
+
+        for (File dir : directories ) {
             // Ignore Luancher's own directory.
             if (dir.getName().equals("Launcher")) {
                 continue;
