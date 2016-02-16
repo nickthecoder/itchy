@@ -21,15 +21,17 @@ import java.util.List;
 
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Button;
-import uk.co.nickthecoder.itchy.gui.PlainContainer;
 import uk.co.nickthecoder.itchy.gui.Notebook;
+import uk.co.nickthecoder.itchy.gui.PlainContainer;
 import uk.co.nickthecoder.itchy.gui.RootContainer;
 import uk.co.nickthecoder.itchy.gui.Stylesheet;
 import uk.co.nickthecoder.itchy.gui.VerticalLayout;
+import uk.co.nickthecoder.itchy.tools.ClientSetup;
 import uk.co.nickthecoder.itchy.tools.ForkGame;
 import uk.co.nickthecoder.itchy.tools.GameMenu;
 import uk.co.nickthecoder.itchy.tools.NewGameWizard;
 import uk.co.nickthecoder.itchy.tools.Page;
+import uk.co.nickthecoder.itchy.tools.ServerSetup;
 
 public class Launcher extends AbstractDirector
 {
@@ -82,6 +84,8 @@ public class Launcher extends AbstractDirector
         pages.add(new GameMenu());
         pages.add(new NewGameWizard());
         pages.add(new ForkGame());
+        pages.add(new ServerSetup());
+        pages.add(new ClientSetup());
 
         for (Page page : pages) {
             createNotebookPage(notebook, page);
