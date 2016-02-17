@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.ListIterator;
 
 import uk.co.nickthecoder.jame.Rect;
-import uk.co.nickthecoder.jame.Surface;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 
@@ -34,13 +33,14 @@ public class GenericCompoundView<V extends View> extends AbstractView implements
         rect.y += this.position.y;
     }
 
+    
     @Override
-    public void render2( Surface destSurface, Rect clip, int offsetX, int offsetY )
+    public void render2( GraphicsContext gc )
     {
         for (V child : this.children) {
             if (child.isVisible()) {
 
-                child.render(destSurface, clip, offsetX, offsetY);
+                child.render(gc);
 
             }
         }
@@ -141,4 +141,6 @@ public class GenericCompoundView<V extends View> extends AbstractView implements
 
         return result.toString();
     }
+
+
 }

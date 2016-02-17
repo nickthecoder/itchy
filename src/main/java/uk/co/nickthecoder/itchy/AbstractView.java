@@ -9,7 +9,6 @@ import java.util.List;
 
 import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.jame.Rect;
-import uk.co.nickthecoder.jame.Surface;
 
 public abstract class AbstractView implements View
 {
@@ -95,36 +94,16 @@ public abstract class AbstractView implements View
     }
 
     @Override
-    public void render( Surface destSurface, Rect parentClip, int offsetX, int offsetY )
+    public void render( GraphicsContext gc )
     {
         // This is where we would like to draw onto the surface, without taking into account the
         // clipping parentClip.
-        Rect newClip = new Rect(offsetX + this.position.x, offsetY + this.position.y, this.position.width, this.position.height);
+        GraphicsContext mygc = gc.window( this.position );
 
-        // Now lets ensure that parentClip is taken into account. i.e. newClip may get smaller, but
-        // never larger.
-        if (parentClip.x > newClip.x) {
-            newClip.width -= parentClip.x - newClip.x;
-            newClip.x = parentClip.x;
-        }
-        if (parentClip.y > newClip.y) {
-            newClip.height -= parentClip.y - newClip.y;
-            newClip.y = parentClip.y;
-        }
-        int rightDiff = (parentClip.x + parentClip.width) - (newClip.x + newClip.width);
-        if (rightDiff < 0) {
-            newClip.width += rightDiff;
-        }
-        int bottomDiff = (parentClip.y + parentClip.height) - (newClip.x + newClip.height);
-        if (bottomDiff < 0) {
-            newClip.height += bottomDiff;
-        }
-
-        render2(destSurface, newClip, offsetX + this.position.x, offsetY + this.position.y);
-
+        render2(mygc);
     }
 
-    public abstract void render2( Surface destSurface, Rect parentClip, int offsetX, int offsetY );
+    public abstract void render2( GraphicsContext gc );
 
     @Override
     public void reset()

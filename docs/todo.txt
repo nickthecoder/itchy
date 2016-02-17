@@ -1,6 +1,37 @@
 Current Tasks
 =============
 
+Client/Server views.
+    A server runs the game, calling the director,scenedirector,roles ticks etc.
+    The server sends each client a list of views containing a list of "appearances" (the data, not the images)
+    Client renders these view using the local images
+    Clients sends a list of events (keyboard, mouse)
+
+    Dynamics poses are an issue. Solutions:
+        disallow them completely (Limiting)
+        allow them to be sent ONCE at the beginning of the session (Needs extra code, but is possible).
+        allow code to generate them within the clients (Bad idea).
+        
+        Note. Pose PoseResource may need to be refactored again so that ALL poses have a name, and are in Resources.
+
+    This can let anybody play any game remotely just by downloading the resources. No game code needs to run on
+    their machine! Cool.
+        Resources could be automatically downloaded, and for bonus points, do this using bittorrent technology.
+    
+
+
+
+Convolution matrix using images as the matrix.
+    Assume 8bbp RGBA in any order (but the same order for the convolution matrix and the source image).
+    Loop over each pixel in the image
+        Loop over each pixel in the matrix. Multiply together, and accumulate into a total.
+            Divide by sum of the convolution matrix
+            Store in the destination.
+    Edges.
+        Extend the edges outwards, so there are no special cases
+        Or, specify a 'Background' colour for outside the image.
+        Or Crop
+
 Make some gates need balloons 2, rocks 2, instead of 3, 3?
     Or make a new balloons3?
 
@@ -24,23 +55,6 @@ NinePatches in SpriteSheet
     Implement by allowing a Pose or a Filename for a NinePatch ?
     Or allow nine patches within sprite sheets?
 
-Client/Server views.
-    A server runs the game, calling the director,scenedirector,roles ticks etc.
-    The server sends each client a list of views containing a list of "appearances" (the data, not the images)
-    Client renders these view using the local images
-    Clients sends a list of events (keyboard, mouse)
-
-    Dynamics poses are an issue. Solutions:
-        disallow them completely (Limiting)
-        allow them to be sent ONCE at the beginning of the session (Needs extra code, but is possible).
-        allow code to generate them within the clients (Bad idea).
-        
-        Note. Pose PoseResource may need to be refactored again so that ALL poses have a name, and are in Resources.
-
-    This can let anybody play any game remotely just by downloading the resources. No game code needs to run on
-    their machine! Cool.
-        Resources could be automatically downloaded, and for bonus points, do this using bittorrent technology.
-    
     
 Stickflick?
     

@@ -13,26 +13,25 @@ import java.util.Set;
 import uk.co.nickthecoder.itchy.property.BooleanProperty;
 import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.jame.Rect;
-import uk.co.nickthecoder.jame.Surface;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 
 public class StageView extends AbstractScrollableView implements StageListener, MouseListener, MouseListenerView
 {
-    protected static final List<Property<View,?>> properties = new ArrayList<Property<View,?>>();
+    protected static final List<Property<View, ?>> properties = new ArrayList<Property<View, ?>>();
 
     static {
-        properties.addAll( AbstractScrollableView.properties );
+        properties.addAll(AbstractScrollableView.properties);
         properties.add(new BooleanProperty<View>("enableMouse"));
     }
-    
+
     @Override
-    public List<Property<View,?>> getProperties()
+    public List<Property<View, ?>> getProperties()
     {
         return properties;
     }
-    
+
     private Stage stage;
 
     public int minimumAlpha = 0;
@@ -40,7 +39,8 @@ public class StageView extends AbstractScrollableView implements StageListener, 
     public int maximumAlpha = 255;
 
     /**
-     * A list of Roles of Actors on this view's Stage, who implements ViewMouseListener. They are expecting to hear events with their x,y
+     * A list of Roles of Actors on this view's Stage, who implements ViewMouseListener. They are expecting to hear
+     * events with their x,y
      * coordinates adjusted to their world coordinates.
      */
     private Set<ViewMouseListener> roleMouseListeners = null;
@@ -50,13 +50,12 @@ public class StageView extends AbstractScrollableView implements StageListener, 
      */
     private ViewMouseListener mouseOwner;
 
-    
     public StageView()
     {
         super();
     }
-    
-    public StageView( Rect position, Stage stage )
+
+    public StageView(Rect position, Stage stage)
     {
         super(position);
         this.stage = stage;
@@ -65,14 +64,14 @@ public class StageView extends AbstractScrollableView implements StageListener, 
         }
     }
 
-    public void setStage( Stage stage )
+    public void setStage(Stage stage)
     {
         this.stage = stage;
         if (stage != null) {
             this.stage.addStageListener(this);
         }
     }
-    
+
     public Stage getStage()
     {
         return this.stage;
@@ -82,8 +81,8 @@ public class StageView extends AbstractScrollableView implements StageListener, 
     {
         return this.roleMouseListeners != null;
     }
-    
-    public void setEnableMouse( boolean value )
+
+    public void setEnableMouse(boolean value)
     {
         if (value) {
             enableMouseListener(Itchy.getGame());
@@ -91,14 +90,22 @@ public class StageView extends AbstractScrollableView implements StageListener, 
             disableMouseListener(Itchy.getGame());
         }
     }
-    
-    @Override
-    public void render2( Surface destSurface, Rect clip, final int offsetX, final int offsetY )
-    {
-        // Where is the world's (0,0) on screen (in screen coordinates)?
-        int tx = offsetX - (int) this.worldRect.x;
-        int ty = offsetY + this.position.height + (int) this.worldRect.y;
 
+    @Override
+    public void render(GraphicsContext gc)
+    {
+        // This is where we would like to draw onto the surface, without taking into account the
+        // clipping parentClip.
+        GraphicsContext mygc = gc.window(this.position);
+        mygc.ox -= this.worldRect.x;
+        mygc.oy += this.position.height + this.worldRect.y;
+
+        render2(mygc);
+    }
+
+    @Override
+    public void render2(GraphicsContext gc)
+    {
         for (Iterator<Actor> i = this.stage.iterator(); i.hasNext();) {
 
             Actor actor = i.next();
@@ -112,9 +119,22 @@ public class StageView extends AbstractScrollableView implements StageListener, 
 
                 // Don't render actors that are invisible (or very nearly invisible)
                 if ((actor.getAppearance().getAlpha() > 1) || (this.minimumAlpha > 1)) {
-                    render( destSurface, clip, tx, ty, actor );
+                    if (actor.getAppearance().visibleWithin(this.worldRect)) {
+
+                        int alpha = (int) (actor.getAppearance().getAlpha());
+                        if (alpha < this.minimumAlpha) {
+                            alpha = this.minimumAlpha;
+                        }
+                        if (alpha > this.maximumAlpha) {
+                            alpha = this.maximumAlpha;
+                        }
+
+                        if (alpha > 0) {
+                            render(gc, actor, alpha);
+                        }
+                    }
                 }
-                
+
             } catch (Exception e) {
                 e.printStackTrace();
                 System.err.println("Failed to render " + actor);
@@ -122,90 +142,13 @@ public class StageView extends AbstractScrollableView implements StageListener, 
         }
     }
 
-    protected void render(Surface destSurface, Rect clip, int tx, int ty, Actor actor)
+    protected void render(GraphicsContext gc, Actor actor, int alpha)
     {
-
-        if (actor.getAppearance().visibleWithin(this.worldRect)) {
-
-            // Ensures the surface has been rendered, and offset_x,y are now valid.
-            Surface actorSurface = actor.getSurface();
-
-            // Top left of where the actor needs to be placed on the screen.
-            // Note the change of sign for "y", because in world
-            // coordinates "down" is negative.
-            int displayAtX = tx + (int) (actor.getX()) - actor.getAppearance().getOffsetX();
-            int displayAtY = ty - (int) (actor.getY()) - actor.getAppearance().getOffsetY();
-
-            int width = actorSurface.getWidth();
-            int height = actorSurface.getHeight();
-            int shiftX = 0;
-            int shiftY = 0;
-
-            // Clip within the layers positionOnScreen
-            if (displayAtX < clip.x) { // left
-                shiftX = clip.x - displayAtX;
-                displayAtX += shiftX;
-            }
-            if (displayAtY < clip.y) { // top
-                shiftY = clip.y - displayAtY;
-                displayAtY += shiftY;
-            }
-            if (displayAtX + actorSurface.getWidth() > clip.x + clip.width) { // right
-                width -= displayAtX + actorSurface.getWidth() - (clip.x + clip.width);
-            }
-            if (displayAtY + actorSurface.getHeight() > clip.y + clip.height) { // bottom
-                height -= displayAtY + actorSurface.getHeight() - (clip.y + clip.height);
-            }
-
-            if ((height > 0) && (width > 0)) {
-
-                Rect srcRect = new Rect(shiftX, shiftY, width, height);
-                Rect rect = new Rect(displayAtX, displayAtY, width, height);
-
-                int alpha = (int) (actor.getAppearance().getAlpha());
-                if (alpha < this.minimumAlpha) {
-                    alpha = this.minimumAlpha;
-                }
-                if (alpha > this.maximumAlpha) {
-                    alpha = this.maximumAlpha;
-                }
-                if (alpha >= 255) {
-
-                    // Fully opaque (normal role)
-                    actorSurface.blit(srcRect, destSurface, rect);
-
-                } else {
-
-                    if (alpha > 0 /* totally transparent */) {
-
-                        // Semi-transparent
-                        // Create a temp surface, and blit the current
-                        // contents of the screen onto it
-                        Surface tempSurface = new Surface(width, height, false);
-                        Rect tempRect = new Rect(0, 0, width, height);
-                        destSurface.blit(rect, tempSurface, tempRect);
-
-                        // Now blit the actor onto it
-                        Rect tempRect2 = new Rect(shiftX, shiftY, width, height);
-                        actorSurface.blit(tempRect2, tempSurface, tempRect);
-
-                        // Now blit the temp surface onto the screen,
-                        // with the correct amount of alpha
-                        tempSurface.setPerSurfaceAlpha(alpha);
-                        tempSurface.blit(destSurface, displayAtX, displayAtY);
-
-                        tempSurface.free();
-                    }
-
-                }
-
-            }
-        }
-
+        gc.render(actor, alpha);
     }
-        
+
     @Override
-    public void onAdded( Stage stage, Actor actor )
+    public void onAdded(Stage stage, Actor actor)
     {
         Role role = actor.getRole();
         if ((this.roleMouseListeners != null) && (role instanceof ViewMouseListener)) {
@@ -217,7 +160,7 @@ public class StageView extends AbstractScrollableView implements StageListener, 
     }
 
     @Override
-    public void onChangedRole( Stage stage, Actor actor )
+    public void onChangedRole(Stage stage, Actor actor)
     {
         Role role = actor.getRole();
         if ((this.roleMouseListeners != null) && (role instanceof ViewMouseListener)) {
@@ -229,7 +172,7 @@ public class StageView extends AbstractScrollableView implements StageListener, 
     }
 
     @Override
-    public void onRemoved( Stage stage, Actor actor )
+    public void onRemoved(Stage stage, Actor actor)
     {
         Role role = actor.getRole();
         if ((this.roleMouseListeners != null) && (role instanceof ViewMouseListener)) {
@@ -241,19 +184,19 @@ public class StageView extends AbstractScrollableView implements StageListener, 
     }
 
     @Override
-    public void enableMouseListener( Game game )
+    public void enableMouseListener(Game game)
     {
         this.roleMouseListeners = new HashSet<ViewMouseListener>();
-        for ( Actor actor : this.stage.getActors() ) {
+        for (Actor actor : this.stage.getActors()) {
             Role role = actor.getRole();
             if (role instanceof ViewMouseListener) {
-                this.roleMouseListeners.add( (ViewMouseListener) role );
+                this.roleMouseListeners.add((ViewMouseListener) role);
             }
         }
     }
 
     @Override
-    public void disableMouseListener( Game game )
+    public void disableMouseListener(Game game)
     {
         if (this.roleMouseListeners != null) {
             this.roleMouseListeners.clear();
@@ -262,14 +205,14 @@ public class StageView extends AbstractScrollableView implements StageListener, 
     }
 
     @Override
-    public void captureMouse( ViewMouseListener owner )
+    public void captureMouse(ViewMouseListener owner)
     {
         this.mouseOwner = owner;
         Itchy.getGame().captureMouse(this);
     }
 
     @Override
-    public void releaseMouse( ViewMouseListener owner )
+    public void releaseMouse(ViewMouseListener owner)
     {
         this.mouseOwner = null;
         Itchy.getGame().releaseMouse(this);
@@ -278,7 +221,7 @@ public class StageView extends AbstractScrollableView implements StageListener, 
     private int oldX;
     private int oldY;
 
-    public boolean adjustMouse( MouseEvent event )
+    public boolean adjustMouse(MouseEvent event)
     {
         // Store actual x,y so it can be restored by unadjustMouse
         this.oldX = event.x;
@@ -297,14 +240,14 @@ public class StageView extends AbstractScrollableView implements StageListener, 
         return result;
     }
 
-    public void unadjustMouse( MouseEvent event )
+    public void unadjustMouse(MouseEvent event)
     {
         event.x = this.oldX;
         event.y = this.oldY;
     }
 
     @Override
-    public void onMouseDown( MouseButtonEvent event )
+    public void onMouseDown(MouseButtonEvent event)
     {
         if (this.roleMouseListeners == null) {
             return;
@@ -329,7 +272,7 @@ public class StageView extends AbstractScrollableView implements StageListener, 
     }
 
     @Override
-    public void onMouseUp( MouseButtonEvent event )
+    public void onMouseUp(MouseButtonEvent event)
     {
         if (this.roleMouseListeners == null) {
             return;
@@ -354,7 +297,7 @@ public class StageView extends AbstractScrollableView implements StageListener, 
     }
 
     @Override
-    public void onMouseMove( MouseMotionEvent event )
+    public void onMouseMove(MouseMotionEvent event)
     {
         if (this.roleMouseListeners == null) {
             return;

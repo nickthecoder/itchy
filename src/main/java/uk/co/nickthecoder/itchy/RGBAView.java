@@ -11,7 +11,6 @@ import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.RGBAProperty;
 import uk.co.nickthecoder.jame.RGBA;
 import uk.co.nickthecoder.jame.Rect;
-import uk.co.nickthecoder.jame.Surface;
 
 /**
  * Renders a solid color over the whole area.
@@ -51,9 +50,9 @@ public class RGBAView extends AbstractView
     }
 
     @Override
-    public void render2( Surface destSurface, Rect clip, int offsetX, int offsetY )
+    public void render2( GraphicsContext gc )
     {
-        destSurface.fill(clip, this.color);
+        gc.fill(getRelativeRect(), this.color);
     }
 
     @Override

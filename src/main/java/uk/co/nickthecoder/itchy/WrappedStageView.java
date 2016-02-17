@@ -10,7 +10,6 @@ import java.util.List;
 import uk.co.nickthecoder.itchy.property.IntegerProperty;
 import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.jame.Rect;
-import uk.co.nickthecoder.jame.Surface;
 
 /**
  * Like a normal StageView, but wrapped, so that if an object moves off of one edge, it appears on the opposite side.
@@ -27,6 +26,11 @@ public class WrappedStageView extends StageView implements Wrapped
         properties.add(new IntegerProperty<View>("left"));
     }
     
+    @Override
+    public List<Property<View,?>> getProperties()
+    {
+        return properties;
+    }
     
     private int leftEdge = Integer.MIN_VALUE;
     private int rightEdge = Integer.MAX_VALUE;
@@ -139,20 +143,41 @@ public class WrappedStageView extends StageView implements Wrapped
     }
 
     @Override
-    protected void render( Surface destSurface, Rect clip, int tx, int ty, Actor actor )
+    protected void render( GraphicsContext gc, Actor actor, int alpha )
     {
         normalise(actor);
 
-        render2(destSurface, clip, tx, ty, actor);
+        render2(gc, actor, alpha);
 
         // Now check if its overlapping the left or right edges, and therefore needs to be rendered again.
         if (overlappingLeft(actor)) {
-            render2(destSurface, clip, tx + (this.rightEdge - this.leftEdge), ty, actor);
+            actor.moveBy( this.rightEdge - this.leftEdge, 0);
+            render2(gc, actor, alpha);
+            normalise(actor);
         } else if (overlappingRight(actor)) {
-            render2(destSurface, clip, tx - (this.rightEdge - this.leftEdge), ty, actor);
+            actor.moveBy( -this.rightEdge + this.leftEdge, 0);
+            render2(gc, actor, alpha);
+            normalise(actor);
         }
     }
+    
+    protected void render2( GraphicsContext gc, Actor actor, int alpha )
+    {
+        super.render(gc, actor, alpha);
 
+        // Now check if its overlapping the top or bottom edges and therefore needs to be rendered again.
+        if (overlappingTop(actor)) {
+            actor.moveBy( 0, this.bottomEdge-this.topEdge);
+            super.render(gc, actor, alpha);
+            actor.moveBy( 0, this.topEdge-this.bottomEdge);
+        } else if (overlappingBottom(actor)) {
+            actor.moveBy( 0, this.topEdge-this.bottomEdge);
+            super.render(gc, actor, alpha);
+            actor.moveBy( 0, this.bottomEdge-this.topEdge);
+        }
+
+    }
+    
     @Override
     public boolean overlappingLeft( Actor actor )
     {
@@ -177,22 +202,5 @@ public class WrappedStageView extends StageView implements Wrapped
         return actor.getY() + actor.getAppearance().getOffsetY() > this.topEdge;
     }
 
-    protected void render2( Surface destSurface, Rect clip, int tx, int ty, Actor actor )
-    {
-        super.render(destSurface, clip, tx, ty, actor);
 
-        // Now check if its overlapping the top or bottom edges and therefore needs to be rendered again.
-        if (overlappingBottom(actor)) {
-            super.render(destSurface, clip, tx, ty - (this.topEdge - this.bottomEdge), actor);
-        } else if (overlappingTop(actor)) {
-            super.render(destSurface, clip, tx, ty + (this.topEdge - this.bottomEdge), actor);
-        }
-
-    }
-
-    @Override
-    public List<Property<View,?>> getProperties()
-    {
-        return properties;
-    }
 }

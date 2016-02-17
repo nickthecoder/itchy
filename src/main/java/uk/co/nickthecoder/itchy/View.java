@@ -6,7 +6,6 @@ package uk.co.nickthecoder.itchy;
 
 import uk.co.nickthecoder.itchy.property.PropertySubject;
 import uk.co.nickthecoder.jame.Rect;
-import uk.co.nickthecoder.jame.Surface;
 
 public interface View extends PropertySubject<View>
 {
@@ -26,23 +25,13 @@ public interface View extends PropertySubject<View>
     public void setParent(ParentView<?> parent);
 
     /**
-     * Draws this layer to the given Surface. This is how layers are drawn to the display, but can also be used to draw
-     * to non-display
-     * surfaces. For example, if you want to take a snapshot of the game, you could render to a surface which you
-     * created, and then save
-     * that surface to disk.
+     * Draws the view. This is how layers are drawn to the display, but can also be used to draw
+     * to non-display surfaces.
+     * For example, if you want to take a snapshot of the game, you could render to a surface which you
+     * created, and then save that surface to disk.
      * 
-     * @param clip
-     *            The clip rectangle of the surface on which to draw. For the top-level
-     * @param destSurface
-     *            The surface to draw on
-     * 
-     * @param offsetX
-     *            How much to add to X.
-     * @param offsetY
-     *            How much to add to Y.
      */
-    public void render(Surface destSurface, Rect clip, int offsetX, int offsetY);
+    public void render( GraphicsContext gc );
 
     /**
      * @return The position of the view relative to the parent view

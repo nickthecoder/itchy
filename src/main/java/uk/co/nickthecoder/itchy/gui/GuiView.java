@@ -10,11 +10,12 @@ import uk.co.nickthecoder.itchy.GraphicsContext;
 import uk.co.nickthecoder.itchy.InputListener;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.MultiLineTextPose;
+import uk.co.nickthecoder.itchy.SurfaceGraphicsContext;
 import uk.co.nickthecoder.itchy.TextStyle;
 import uk.co.nickthecoder.itchy.View;
 import uk.co.nickthecoder.itchy.extras.Timer;
-import uk.co.nickthecoder.itchy.makeup.PictureFrame;
 import uk.co.nickthecoder.itchy.makeup.Makeup;
+import uk.co.nickthecoder.itchy.makeup.PictureFrame;
 import uk.co.nickthecoder.itchy.makeup.SimpleFrame;
 import uk.co.nickthecoder.jame.RGBA;
 import uk.co.nickthecoder.jame.Rect;
@@ -58,19 +59,19 @@ public class GuiView extends AbstractView implements View, InputListener
      */
     public Makeup tooltipMakeup;
 
-    public GuiView( Rect position, RootContainer rootContainer )
+    public GuiView(Rect position, RootContainer rootContainer)
     {
         super(position);
         this.rootContainer = rootContainer;
         this.rootContainer.view = this;
     }
-    
+
     @Override
-	public void setPosition( Rect position )
+    public void setPosition(Rect position)
     {
-    	super.setPosition( position );
-    	this.invalid = true;
-    	this.surface = null;
+        super.setPosition(position);
+        this.invalid = true;
+        this.surface = null;
     }
 
     public Surface getSurface()
@@ -81,7 +82,7 @@ public class GuiView extends AbstractView implements View, InputListener
         }
         if (this.invalid) {
             this.surface.fill(new RGBA(0, 0, 0, 0));
-            GraphicsContext gc = new GraphicsContext(this.surface);
+            GraphicsContext gc = new SurfaceGraphicsContext(this.surface);
             this.rootContainer.render(gc);
 
         }
@@ -102,7 +103,7 @@ public class GuiView extends AbstractView implements View, InputListener
      * 
      * @return true iff the event was within this view's viewport.
      */
-    protected boolean adjustMouse( MouseEvent event )
+    protected boolean adjustMouse(MouseEvent event)
     {
         this.oldX = event.x;
         this.oldY = event.y;
@@ -112,14 +113,14 @@ public class GuiView extends AbstractView implements View, InputListener
         return ((event.x >= 0) && (event.x < rect.width) && (event.y >= 0) && (event.y < rect.height));
     }
 
-    protected void unadjustMouse( MouseEvent event )
+    protected void unadjustMouse(MouseEvent event)
     {
         event.x = this.oldX;
         event.y = this.oldY;
     }
 
     @Override
-    public void onMouseDown( MouseButtonEvent event )
+    public void onMouseDown(MouseButtonEvent event)
     {
         try {
             if (!adjustMouse(event)) {
@@ -134,7 +135,7 @@ public class GuiView extends AbstractView implements View, InputListener
     }
 
     @Override
-    public void onMouseUp( MouseButtonEvent event )
+    public void onMouseUp(MouseButtonEvent event)
     {
         try {
             if (!adjustMouse(event)) {
@@ -148,7 +149,7 @@ public class GuiView extends AbstractView implements View, InputListener
     }
 
     @Override
-    public void onMouseMove( MouseMotionEvent event )
+    public void onMouseMove(MouseMotionEvent event)
     {
         try {
             if (!adjustMouse(event)) {
@@ -164,24 +165,23 @@ public class GuiView extends AbstractView implements View, InputListener
     }
 
     @Override
-    public void onKeyDown( KeyboardEvent event )
+    public void onKeyDown(KeyboardEvent event)
     {
         this.rootContainer.keyDown(event);
     }
 
     @Override
-    public void onKeyUp( KeyboardEvent ke )
+    public void onKeyUp(KeyboardEvent ke)
     {
     }
 
     @Override
-    public void render2( Surface destSurface, Rect clip, int offsetX, int offsetY )
+    public void render2(GraphicsContext gc)
     {
         this.checkTooltipTimer();
 
         Surface surface = getSurface();
-        Rect srcRect = new Rect(0, 0, surface.getWidth(), surface.getHeight());
-        surface.blit(srcRect, destSurface, offsetX + this.rootContainer.x, offsetY + this.rootContainer.y);
+        gc.blit(surface, 0, 0);
     }
 
     private void endTooltipTimer()
@@ -189,7 +189,7 @@ public class GuiView extends AbstractView implements View, InputListener
         this.timingTooltip = false;
     }
 
-    private void beginTooltipTimer( MouseEvent event )
+    private void beginTooltipTimer(MouseEvent event)
     {
         if (!this.isVisible()) {
             return;
@@ -237,23 +237,27 @@ public class GuiView extends AbstractView implements View, InputListener
             this.tooltipStyle.setMargins(4);
 
             if (dummy.background != null) {
-                PictureFrame frame = new PictureFrame(dummy.getMarginTop(), dummy.getMarginRight(), dummy.getMarginBottom(), dummy.getMarginLeft());
+                PictureFrame frame = new PictureFrame(dummy.getMarginTop(), dummy.getMarginRight(),
+                    dummy.getMarginBottom(), dummy.getMarginLeft());
                 frame.setBackground(dummy.background);
                 this.tooltipMakeup = frame;
             } else {
-                this.tooltipMakeup = new SimpleFrame(new RGBA(128, 128, 128, 200), new RGBA(160, 160, 160, 200), 2, dummy.getMarginTop(),
+                this.tooltipMakeup = new SimpleFrame(new RGBA(128, 128, 128, 200), new RGBA(160, 160, 160, 200), 2,
+                    dummy.getMarginTop(),
                     dummy.getMarginRight(), dummy.getMarginBottom(), dummy.getMarginLeft());
             }
         }
         if (this.tooltipMakeup == null) {
             this.tooltipMakeup = new SimpleFrame(new RGBA(128, 128, 128, 200), new RGBA(160, 160, 160, 200), 2,
-                this.tooltipStyle.marginTop, this.tooltipStyle.marginRight, this.tooltipStyle.marginBottom, this.tooltipStyle.marginLeft);
+                this.tooltipStyle.marginTop, this.tooltipStyle.marginRight, this.tooltipStyle.marginBottom,
+                this.tooltipStyle.marginLeft);
         }
         MultiLineTextPose pose = new MultiLineTextPose(this.tooltipStyle);
         pose.setText(this.tooltipText);
         pose.setAlignment(0, 0);
         this.tooltipActor = new Actor(pose);
-        this.tooltipActor.moveTo(Itchy.getMouseX() + 20, Itchy.getGame().getGlassView().getPosition().height - Itchy.getMouseY() - 20);
+        this.tooltipActor.moveTo(Itchy.getMouseX() + 20,
+            Itchy.getGame().getGlassView().getPosition().height - Itchy.getMouseY() - 20);
         this.tooltipActor.getAppearance().setMakeup(this.tooltipMakeup);
         Itchy.getGame().getGlassStage().add(this.tooltipActor);
 
@@ -264,4 +268,5 @@ public class GuiView extends AbstractView implements View, InputListener
     {
         return "GuiView : " + this.rootContainer;
     }
+
 }
