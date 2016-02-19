@@ -472,7 +472,7 @@ public class Itchy
      * 
      * @param event
      */
-    static void processEvent(Event event)
+    public static void processEvent(Event event)
     {
         if (event instanceof ResizeEvent) {
 

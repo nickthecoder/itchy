@@ -78,8 +78,14 @@ public class Client
             } catch (InterruptedException e) {
             }
         }
-        System.out.println("Starting client game");
+
+        System.out.println("Using ClientFrameRate");
         Itchy.frameRate = new ClientFrameRate();
+        
+        System.out.println("Using RemoteEventProcessor");
+        Itchy.eventProcessor = new RemoteEventProcessor(this);
+        
+        System.out.println("Starting client game");
         resources.game.start();
 
     }
@@ -106,81 +112,99 @@ public class Client
         socket = null;
     }
 
+    public void send(String command, Object... parameters)
+    {
+        out.print(command);
+        out.print(":");
+        boolean notFirst = false;
+        for (Object o : parameters) {
+            if (notFirst) {
+                out.print(",");
+            } else {
+                notFirst = true;
+            }
+            out.print(o.toString());
+        }
+        out.println();
+    }
+
     private void processCommand(String commandLine)
     {
-        // System.out.println("Client processLine " + commandLine);
+        // System.out.println("Client processCommand " + commandLine);
 
         try {
 
             int colon = commandLine.indexOf(':');
-            if (colon > 0) {
-                String command = commandLine.substring(0, colon);
-                String paramString = commandLine.substring(colon + 1);
-                String[] parameters = paramString.split(",");
-
-                if (command.equals("#game")) {
-                    beginGame(paramString);
-
-                } else if (command.equals("resize")) {
-                    Itchy.resizeScreen(Integer.parseInt(parameters[0]), Integer.parseInt(parameters[1]));
-
-                } else if (command.equals("fill")) {
-                    fill(RGBA.parse(parameters[0]),
-                        new Rect(
-                            Integer.parseInt(parameters[1]),
-                            Integer.parseInt(parameters[2]),
-                            Integer.parseInt(parameters[3]),
-                            Integer.parseInt(parameters[4])
-                        ));
-
-                } else if (command.equals("bounds")) {
-                    bounds(
-                        new Rect(
-                            Integer.parseInt(parameters[0]),
-                            Integer.parseInt(parameters[1]),
-                            Integer.parseInt(parameters[2]),
-                            Integer.parseInt(parameters[3])
-                        ),
-                        Integer.parseInt(parameters[4]),
-                        Integer.parseInt(parameters[5]));
-
-                } else if (command.equals("flip")) {
-                    Video.flip();
-
-                } else if (command.equals("actor")) {
-                    renderActor(
-                        Integer.parseInt(parameters[0]),
-                        Integer.parseInt(parameters[1]),
-                        parameters[2],
-                        Integer.parseInt(parameters[3]),
-                        Double.parseDouble(parameters[4]),
-                        Integer.parseInt(parameters[5]));
-
-                } else if (command.equals("text")) {
-                    renderText(
-                        Integer.parseInt(parameters[0]),
-                        Integer.parseInt(parameters[1]),
-                        parameters[2],
-                        parameters[3],
-                        RGBA.parse(parameters[4]),
-                        Integer.parseInt(parameters[5]),
-                        Integer.parseInt(parameters[6]),
-                        Double.parseDouble(parameters[7]),
-                        Integer.parseInt(parameters[8]));
-
-                } else if (command.equals("playSound")) {
-                    playSound(parameters[0], parameters[1]);
-
-                } else if (command.equals("stopSound")) {
-                    stopSound(parameters[0]);
-
-                } else if (command.equals("stopSounds")) {
-                    stopSounds();
-
-                } else {
-                    System.out.println("Skipping unknown command : " + command);
-                }
+            if (colon < 0) {
+                System.out.println("Badly formed commandLine " + commandLine);
             }
+            String command = commandLine.substring(0, colon);
+            String paramString = commandLine.substring(colon + 1);
+            String[] parameters = paramString.split(",");
+
+            if (command.equals("!game")) {
+                beginGame(paramString);
+
+            } else if (command.equals("resize")) {
+                Itchy.resizeScreen(Integer.parseInt(parameters[0]), Integer.parseInt(parameters[1]));
+
+            } else if (command.equals("fill")) {
+                fill(RGBA.parse(parameters[0]),
+                    new Rect(
+                        Integer.parseInt(parameters[1]),
+                        Integer.parseInt(parameters[2]),
+                        Integer.parseInt(parameters[3]),
+                        Integer.parseInt(parameters[4])
+                    ));
+
+            } else if (command.equals("bounds")) {
+                bounds(
+                    new Rect(
+                        Integer.parseInt(parameters[0]),
+                        Integer.parseInt(parameters[1]),
+                        Integer.parseInt(parameters[2]),
+                        Integer.parseInt(parameters[3])
+                    ),
+                    Integer.parseInt(parameters[4]),
+                    Integer.parseInt(parameters[5]));
+
+            } else if (command.equals("flip")) {
+                Video.flip();
+
+            } else if (command.equals("actor")) {
+                renderActor(
+                    Integer.parseInt(parameters[0]),
+                    Integer.parseInt(parameters[1]),
+                    parameters[2],
+                    Integer.parseInt(parameters[3]),
+                    Double.parseDouble(parameters[4]),
+                    Integer.parseInt(parameters[5]));
+
+            } else if (command.equals("text")) {
+                renderText(
+                    Integer.parseInt(parameters[0]),
+                    Integer.parseInt(parameters[1]),
+                    parameters[2],
+                    parameters[3],
+                    RGBA.parse(parameters[4]),
+                    Integer.parseInt(parameters[5]),
+                    Integer.parseInt(parameters[6]),
+                    Double.parseDouble(parameters[7]),
+                    Integer.parseInt(parameters[8]));
+
+            } else if (command.equals("playSound")) {
+                playSound(parameters[0], parameters[1]);
+
+            } else if (command.equals("stopSound")) {
+                stopSound(parameters[0]);
+
+            } else if (command.equals("stopSounds")) {
+                stopSounds();
+
+            } else {
+                System.out.println("Skipping unknown command : " + command);
+            }
+
         } catch (Exception e) {
             System.err.println("Failed to process command line : " + commandLine);
             e.printStackTrace();
@@ -302,7 +326,7 @@ public class Client
                         stopClient();
                         return;
                     } else {
-                        if (line.startsWith("#")) {
+                        if (line.startsWith("!")) {
                             processCommand(line);
                         } else {
                             commands.add(line);

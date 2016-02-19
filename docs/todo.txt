@@ -3,14 +3,20 @@ Current Tasks
 
 Client/Server views.
 
-    Fix popup window appearing in the wrong place.
-        CompoundView should change the gc and pass it to the child view.
-        Remove code from StageView
-        
+    Does it matter that the client is having to redraw all rotated images every time
+        (because Appearance cannot cache the results if only one client actor is used).
+
+    Makeup not being sent.
+        Should I attempt to cache makeup data on the client?
+
+    Escape strings
+        If using lines for each command, need to escape strings using: \n (newline) , \; (for a comma)  , \\ (slash)
+    
+    Send a protocol version number, and moan if the client and server are different
+    
     Send data via special data classes.
         Base class just has a String "command".
         Or have a class for each message type.
-            If using lines for each command, need to escape strings using: \n (newline) , \; (for a comma)  , \\ (slash)
         Use Properties to automate the encode/decode.
 
     Clients sends a list of events (keyboard, mouse)
@@ -18,6 +24,7 @@ Client/Server views.
     Dynamics poses are an issue. Solutions:
         disallow them completely (Limiting)
         allow them to be sent ONCE at the beginning of the session (Needs extra code, but is possible).
+        send them when needed - frames would stutter.
         allow code to generate them within the clients (Bad idea).
         
         Note. Pose PoseResource may need to be refactored again so that ALL poses have a name, and are in Resources.
