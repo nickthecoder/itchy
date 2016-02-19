@@ -23,9 +23,9 @@ public abstract class GraphicsContext
      */
     protected Rect clip;
 
-    public GraphicsContext( int width, int height )
+    public GraphicsContext( Rect rect )
     {
-        this.clip = new Rect(0, 0, width, height);
+        this.clip = new Rect(rect.x, rect.y, rect.width, rect.height);
     }
     
     public void blit( Surface surface, int x, int y )

@@ -26,6 +26,8 @@ import uk.co.nickthecoder.itchy.gui.PlainContainer;
 import uk.co.nickthecoder.itchy.gui.RootContainer;
 import uk.co.nickthecoder.itchy.gui.Stylesheet;
 import uk.co.nickthecoder.itchy.gui.VerticalLayout;
+import uk.co.nickthecoder.itchy.remote.Client;
+import uk.co.nickthecoder.itchy.remote.Server;
 import uk.co.nickthecoder.itchy.tools.ClientSetup;
 import uk.co.nickthecoder.itchy.tools.ForkGame;
 import uk.co.nickthecoder.itchy.tools.GameMenu;
@@ -121,25 +123,69 @@ public class Launcher extends AbstractDirector
         System.out.println("");
     }
 
+    private static void startServer( File resourcesFile, int port, int players )
+        throws Exception
+    {
+        Server server = new Server();
+        server.startServer(resourcesFile, port, players);
+    }
+    
+    private static void startClient( String serverAndPort )
+        throws Exception
+    {
+        // We need to initialise Itchy, so create a dummy resources, so that Itchy can use default width and height
+        // to initialise the video. The Window will be resized to the correct size later.
+        Resources resources = new Resources();
+        GameInfo gameInfo = new GameInfo();
+        gameInfo.width = 640;
+        gameInfo.height = 480;
+        resources.setGameInfo(gameInfo);
+        Itchy.init(resources);
+        
+        String[] parts = serverAndPort.split(":");
+        Client client = new Client();
+        client.startClient(parts[0], Integer.parseInt(parts[1]));
+    }
+    
     public static void main(String argv[]) throws Exception
     {
         boolean editor = false;
         String sceneName = null;
         String gameName = null;
 
+        String serverAndPort = null;
+        int port = 0;
+        int players = 1;
+
         for (int i = 0; i < argv.length; i++) {
             String arg = argv[i];
 
-            if (arg.equals("--editor")) {
+            if (arg.equals("--server")) {
+                i++;
+                port = Integer.parseInt(argv[i]);
+
+            } else if (arg.equals("--client")) {
+                i++;
+                serverAndPort = argv[i];
+
+            } else if (arg.equals("--players")) {
+                i++;
+                players = Integer.parseInt(argv[i]);
+
+            } else if (arg.equals("--editor")) {
                 editor = true;
+
             } else if (arg.equals("--scene")) {
                 i++;
                 sceneName = argv[i];
+
             } else if (arg.startsWith("--scene=")) {
                 sceneName = arg.substring(8);
+
             } else if (arg.equals("--help") || arg.equals("-h")) {
                 printUsage();
                 System.exit(0);
+
             } else {
                 if (gameName == null) {
                     gameName = arg;
@@ -153,12 +199,24 @@ public class Launcher extends AbstractDirector
             gameName = "Launcher";
         }
 
+        if ( serverAndPort != null ) {
+            startClient( serverAndPort );
+            return;
+        }
+        
+        
         File resourcesFile = new File(gameName);
         if (resourcesFile.exists() && (resourcesFile.isFile())) {
         } else {
-            resourcesFile = new File(Itchy.getBaseDirectory(), "resources" + File.separator + gameName + File.separator + gameName +
-                ".itchy");
+            resourcesFile = new File(Itchy.getBaseDirectory(),
+                "resources" + File.separator + gameName + File.separator + gameName + ".itchy");
         }
+
+        if (port > 0) {
+            startServer( resourcesFile, port, players );
+            return;
+        }
+
         Resources resources = new Resources();
         resources.load(resourcesFile);
 

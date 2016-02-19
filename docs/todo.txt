@@ -2,9 +2,17 @@ Current Tasks
 =============
 
 Client/Server views.
-    A server runs the game, calling the director,scenedirector,roles ticks etc.
-    The server sends each client a list of views containing a list of "appearances" (the data, not the images)
-    Client renders these view using the local images
+
+    Fix popup window appearing in the wrong place.
+        CompoundView should change the gc and pass it to the child view.
+        Remove code from StageView
+        
+    Send data via special data classes.
+        Base class just has a String "command".
+        Or have a class for each message type.
+            If using lines for each command, need to escape strings using: \n (newline) , \; (for a comma)  , \\ (slash)
+        Use Properties to automate the encode/decode.
+
     Clients sends a list of events (keyboard, mouse)
 
     Dynamics poses are an issue. Solutions:
@@ -18,6 +26,13 @@ Client/Server views.
     their machine! Cool.
         Resources could be automatically downloaded, and for bonus points, do this using bittorrent technology.
     
+    ClientSetup
+        Add an option to download the resources from the server. Put in a "downloads" directory, rather than "resources".
+        Don't download scripts, scenes or macros, only images, fonts, sounds and the itchy file.
+            *.txt (for licenses), *.itchy, *.png, *.bmp, *.ttf, *.otf??, *.wav, *.ogg?
+        Use a separate port, and use like a web server (maybe use an embedded web server?)
+    
+    Sounds are currently all owned by a single actor. Therefore they won't behave quite the same.
 
 
 

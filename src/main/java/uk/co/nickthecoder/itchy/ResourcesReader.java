@@ -33,7 +33,7 @@ public class ResourcesReader
      * true if the resources being read are included from another file.
      */
     public boolean included;
-
+    
     public ResourcesReader(Resources resources)
     {
         this.resources = resources;
@@ -57,10 +57,13 @@ public class ResourcesReader
     private void readResources(XMLTag resourcesTag) throws Exception
     {
 
-        for (Iterator<XMLTag> i = resourcesTag.getTags("game"); i.hasNext();) {
-            XMLTag gameTag = i.next();
-            this.readGame(gameTag);
+        if (!resources.client) {
+            for (Iterator<XMLTag> i = resourcesTag.getTags("game"); i.hasNext();) {
+                XMLTag gameTag = i.next();
+                this.readGame(gameTag);
+            }
         }
+        
         GameInfo gameInfo = this.resources.getGameInfo();
         if (gameInfo == null) {
             gameInfo = new GameInfo();
@@ -73,12 +76,14 @@ public class ResourcesReader
 
         director.onMessage(Director.GAME_INFO_LOADED);
 
-        for (Iterator<XMLTag> i = resourcesTag.getTags("inputs"); i.hasNext();) {
-            XMLTag inputsTag = i.next();
-            this.readInputs(inputsTag);
+        if (!resources.client) {
+            for (Iterator<XMLTag> i = resourcesTag.getTags("inputs"); i.hasNext();) {
+                XMLTag inputsTag = i.next();
+                this.readInputs(inputsTag);
+            }
+            director.onMessage(Director.INPUTS_LOADED);
         }
-        director.onMessage(Director.INPUTS_LOADED);
-
+        
         for (Iterator<XMLTag> i = resourcesTag.getTags("fonts"); i.hasNext();) {
             XMLTag fontsTag = i.next();
             this.readFonts(fontsTag);
@@ -114,36 +119,39 @@ public class ResourcesReader
             this.readAnimations(animationsTag);
         }
         director.onMessage(Director.ANIMIATIONS_LOADED);
-
+        
         for (Iterator<XMLTag> i = resourcesTag.getTags("costumes"); i.hasNext();) {
             XMLTag costumesTag = i.next();
             this.readCostumes(costumesTag);
         }
         director.onMessage(Director.COSTUMES_LOADED);
+    
+        if (!resources.client) {
 
-        for (Iterator<XMLTag> i = resourcesTag.getTags("layouts"); i.hasNext();) {
-            XMLTag layoutsTag = i.next();
-            this.readLayouts(layoutsTag);
-        }
-        /*
-         * For backwards compatibility (when layouts didn't exist), create a default layout, with a single layer.
-         */
-        if (this.resources.layoutNames().size() == 0) {
-            Layout layout = new Layout();
-            layout.name = "default";
-            Layer layer = new Layer();
-            layer.name = "main";
-            layer.position = new Rect(0, 0, gameInfo.width, gameInfo.height);
-            layout.addLayer(layer);
-            resources.addLayout(layout);
-        }
-        director.onMessage(Director.LAYOUTS_LOADED);
+            for (Iterator<XMLTag> i = resourcesTag.getTags("layouts"); i.hasNext();) {
+                XMLTag layoutsTag = i.next();
+                this.readLayouts(layoutsTag);
+            }
+            /*
+             * For backwards compatibility (when layouts didn't exist), create a default layout, with a single layer.
+             */
+            if (this.resources.layoutNames().size() == 0) {
+                Layout layout = new Layout();
+                layout.name = "default";
+                Layer layer = new Layer();
+                layer.name = "main";
+                layer.position = new Rect(0, 0, gameInfo.width, gameInfo.height);
+                layout.addLayer(layer);
+                resources.addLayout(layout);
+            }
+            director.onMessage(Director.LAYOUTS_LOADED);
 
-        for (Iterator<XMLTag> i = resourcesTag.getTags("scenes"); i.hasNext();) {
-            XMLTag scenesTag = i.next();
-            this.readScenes(scenesTag);
+            for (Iterator<XMLTag> i = resourcesTag.getTags("scenes"); i.hasNext();) {
+                XMLTag scenesTag = i.next();
+                this.readScenes(scenesTag);
+            }
+            director.onMessage(Director.SCENES_LOADED);
         }
-        director.onMessage(Director.SCENES_LOADED);
 
         director.onMessage(Director.LOADED);
     }
@@ -223,7 +231,13 @@ public class ResourcesReader
             XMLTag soundTag = i.next();
 
             SoundResource soundResource = new SoundResource();
-            this.readProperties(soundTag,  soundResource);
+            // Don't actually LOAD the sounds on a server, as they are only needed on the clients.
+            if ( resources.server ) {
+                String name = soundTag.getAttribute("name");
+                soundResource.setName(name);
+            } else {
+                this.readProperties(soundTag,  soundResource);
+            }
             this.resources.addSound(soundResource);
 
         }
@@ -274,15 +288,18 @@ public class ResourcesReader
 
             }
 
-            String roleName = costumeTag.getOptionalAttribute("role", PlainRole.class.getName());
-            ClassName roleClassName = new ClassName(Role.class, roleName);
-
-            if (roleClassName.isValid(resources.scriptManager)) {
-                costume.roleClassName = roleClassName;
-            } else {
-                throw new XMLException("Costume " + costumeName + ". Expected a subclass of Role : '" + roleClassName + "'");
+            // Don't set the role, because we don't want arbitrary scripts running on the client.
+            if ( ! resources.client ) {
+                String roleName = costumeTag.getOptionalAttribute("role", PlainRole.class.getName());
+                ClassName roleClassName = new ClassName(Role.class, roleName);
+    
+                if (roleClassName.isValid(resources.scriptManager)) {
+                    costume.roleClassName = roleClassName;
+                } else {
+                    throw new XMLException("Costume " + costumeName + ". Expected a subclass of Role : '" + roleClassName + "'");
+                }
             }
-
+            
             for (Iterator<XMLTag> j = costumeTag.getTags("pose"); j.hasNext();) {
                 XMLTag poseTag = j.next();
 

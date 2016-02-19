@@ -7,10 +7,8 @@ package uk.co.nickthecoder.itchy.role;
 import uk.co.nickthecoder.itchy.AbstractRole;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Appearance;
-import uk.co.nickthecoder.itchy.ImagePose;
 import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.Stage;
-import uk.co.nickthecoder.jame.Surface;
 
 /**
  * Creates duplicate images of the Actor as it moves, which gradually fade out. So you can see faded out versions of what the actor looked
@@ -51,13 +49,9 @@ public class OnionSkin extends Companion
     protected void createOnionSkin()
     {
         Appearance appearance = this.source.getAppearance();
-        Surface newSurface = appearance.getSurface().copy();
-
-        ImagePose pose = new ImagePose(newSurface, appearance.getOffsetX(), appearance.getOffsetY());
-        pose.setDirection(this.source.getDirection());
-
+        
         Actor actor = new Actor(this.source.getCostume());
-        actor.getAppearance().setPose(pose);
+        actor.getAppearance().setPose(appearance.getPose());
         actor.getAppearance().setDirection(this.source.getDirection());
 
         actor.moveTo(this.source);

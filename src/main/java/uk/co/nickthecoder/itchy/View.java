@@ -25,6 +25,11 @@ public interface View extends PropertySubject<View>
     public void setParent(ParentView<?> parent);
 
     /**
+     * Return a GraphicsContext, clipped to this view's position, and taking care of any scrolling. 
+     */
+    public GraphicsContext adjustGraphicsContext( GraphicsContext gc );
+
+    /**
      * Draws the view. This is how layers are drawn to the display, but can also be used to draw
      * to non-display surfaces.
      * For example, if you want to take a snapshot of the game, you could render to a surface which you

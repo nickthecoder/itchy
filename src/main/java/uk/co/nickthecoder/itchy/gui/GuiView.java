@@ -176,7 +176,13 @@ public class GuiView extends AbstractView implements View, InputListener
     }
 
     @Override
-    public void render2(GraphicsContext gc)
+    public GraphicsContext adjustGraphicsContext(GraphicsContext gc)
+    {
+        return gc.window(new Rect( rootContainer.x, rootContainer.y, rootContainer.width, rootContainer.height));
+    }
+
+    @Override
+    public void render(GraphicsContext gc)
     {
         this.checkTooltipTimer();
 

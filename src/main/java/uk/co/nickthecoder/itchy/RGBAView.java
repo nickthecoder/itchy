@@ -50,7 +50,7 @@ public class RGBAView extends AbstractView
     }
 
     @Override
-    public void render2( GraphicsContext gc )
+    public void render( GraphicsContext gc )
     {
         gc.fill(getRelativeRect(), this.color);
     }

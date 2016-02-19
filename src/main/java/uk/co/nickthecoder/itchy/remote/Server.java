@@ -8,8 +8,9 @@ import java.net.Socket;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.SimpleFrameRate;
+import uk.co.nickthecoder.itchy.StandardSoundManager;
 
-public class Server extends SimpleFrameRate implements Runnable
+public class Server implements Runnable
 {
     private int portNumber;
 
@@ -36,17 +37,40 @@ public class Server extends SimpleFrameRate implements Runnable
         
         thread = new Thread( this );
         thread.start();
+        System.out.println( "Server connection thread started" );
         
         Itchy.frameRate.end();
-        Itchy.frameRate = this;
+        Itchy.frameRate = new ServerFrameRate();
         
-        System.out.println( "Server started" );
+        Resources resources = new Resources();
+        resources.server = true;
+        try {
+            resources.load(resourcesFile);
+        } catch (Exception e) {
+            System.err.println( "Failed to load resources " + resourcesFile );
+            e.printStackTrace();
+            try {
+                this.stopServer();
+            } catch (IOException e1) {
+            }
+            return;
+        }
+
+        System.out.println( "Using RemoteSoundManager" );
+        Itchy.soundManager = new RemoteSoundManager( this );
+
+        System.out.println( "Server starting game" );
+        resources.getGame().start();
+        System.out.println( "Server started game" );
+
     }
 
     public void stopServer() throws IOException
     {
         Itchy.frameRate.end();
         Itchy.frameRate = new SimpleFrameRate();
+        
+        Itchy.soundManager = new StandardSoundManager();
 
         for ( ClientConnection cc : this.clientConnections ) {
             if (cc != null) {
@@ -64,6 +88,7 @@ public class Server extends SimpleFrameRate implements Runnable
     public void run()
     {
         // TODO Allow for connections to be dropped and reconnected.
+
         
         for ( int slot = findEmptySlot(); slot >= 0; slot = findEmptySlot() ) {
 
@@ -88,25 +113,11 @@ public class Server extends SimpleFrameRate implements Runnable
                 }
             }
         }
-        Resources resources = new Resources();
-        try {
-            resources.load(resourcesFile);
-        } catch (Exception e) {
-            System.err.println( "Failed to load resources " + resourcesFile );
-            e.printStackTrace();
-            try {
-                this.stopServer();
-            } catch (IOException e1) {
-            }
-            return;
+        
+        for ( ClientConnection connection : clientConnections ) {
+            connection.beginGame();
         }
 
-        resources.getGame().start();
-        for ( ClientConnection cc : clientConnections ) {
-            cc.beginGame();
-        }
-            
-        
         System.out.println( "Connected to " + this.players + " players" );
 
     }
@@ -114,8 +125,8 @@ public class Server extends SimpleFrameRate implements Runnable
     private int findEmptySlot()
     {
         int count = 0;
-        for ( ClientConnection cc : clientConnections ) {
-            if (cc == null) {
+        for ( ClientConnection connection : clientConnections ) {
+            if (connection == null) {
                 return count;
             }
             count ++;
@@ -124,16 +135,31 @@ public class Server extends SimpleFrameRate implements Runnable
     }
 
 
-    @Override
-    public void doRedraw()
+    public void send( String command, Object... parameters )
     {
         if (clientConnections != null) {
-            for (ClientConnection feed : clientConnections ) {
-                if (feed != null) {
-                    feed.frameSnapshot();
+            for (ClientConnection connection : clientConnections ) {
+                if (connection != null) {
+                    connection.send( command, parameters );
+                }
+            }
+        }        
+    }
+
+    private class ServerFrameRate extends SimpleFrameRate
+    {
+
+        @Override
+        public void doRedraw()
+        {
+            if (clientConnections != null) {
+                for (ClientConnection connection : clientConnections ) {
+                    if (connection != null) {
+                        connection.sendViews();
+                    }
                 }
             }
         }
+         
     }
-
 }

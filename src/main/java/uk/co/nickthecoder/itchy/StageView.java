@@ -92,7 +92,7 @@ public class StageView extends AbstractScrollableView implements StageListener, 
     }
 
     @Override
-    public void render(GraphicsContext gc)
+    public GraphicsContext adjustGraphicsContext(GraphicsContext gc)
     {
         // This is where we would like to draw onto the surface, without taking into account the
         // clipping parentClip.
@@ -100,11 +100,11 @@ public class StageView extends AbstractScrollableView implements StageListener, 
         mygc.ox -= this.worldRect.x;
         mygc.oy += this.position.height + this.worldRect.y;
 
-        render2(mygc);
+        return mygc;
     }
 
     @Override
-    public void render2(GraphicsContext gc)
+    public void render(GraphicsContext gc)
     {
         for (Iterator<Actor> i = this.stage.iterator(); i.hasNext();) {
 

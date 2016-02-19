@@ -93,17 +93,13 @@ public abstract class AbstractView implements View
         return position.y - screenY + position.height;
     }
 
-    @Override
-    public void render( GraphicsContext gc )
+    public GraphicsContext adjustGraphicsContext( GraphicsContext gc )
     {
-        // This is where we would like to draw onto the surface, without taking into account the
-        // clipping parentClip.
-        GraphicsContext mygc = gc.window( this.position );
-
-        render2(mygc);
+        return gc.window( this.position );
     }
-
-    public abstract void render2( GraphicsContext gc );
+    
+    @Override
+    public abstract void render( GraphicsContext gc );
 
     @Override
     public void reset()

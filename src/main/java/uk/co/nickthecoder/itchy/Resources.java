@@ -54,6 +54,18 @@ public class Resources extends Loadable
 
     public final ScriptManager scriptManager;
 
+    /**
+     * True if the resources are loaded on a Client, and therefore should not contain
+     * costumes, inputs, layouts or animations.
+     */
+    public boolean client;
+
+    /**
+     * True if the resources are loaded on a Server, and therefore should not contain
+     * read sounds. (The SoundResources will exist, but without the actual sounds).
+     */
+    public boolean server;
+    
     private GameInfo gameInfo;
 
     

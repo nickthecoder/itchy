@@ -149,6 +149,9 @@ public class Itchy
         if (initialised) {
             return;
         }
+        
+        System.out.println( "Itchy.init");
+
         Video.init();
         Audio.init();
         Audio.open();
@@ -156,7 +159,7 @@ public class Itchy
 
         keyboardState = new boolean[KEYBOARD_STATE_SIZE];
         mouseState = new boolean[ MOUSE_STATE_SIZE ];
-        soundManager = new SoundManager();
+        soundManager = new StandardSoundManager();
         setScreenMode(resources);
         initialised = true;
     }

@@ -8,13 +8,17 @@ public class SurfaceGraphicsContext extends GraphicsContext
 {
     private Surface destination;
 
-
     public SurfaceGraphicsContext( Surface destination )
     {
-        super( destination.getWidth(), destination.getHeight() );
+        this( new Rect( 0,0, destination.getWidth(), destination.getHeight() ), destination );
+    }
+
+    public SurfaceGraphicsContext( Rect clip, Surface destination )
+    {
+        super( clip );
         this.destination = destination;
     }
-    
+
     public void blit( Surface surface, int x, int y, Surface.BlendMode blendMode )
     {
         this.blit(surface, new Rect(0, 0, surface.getWidth(), surface.getHeight()), x, y, blendMode);

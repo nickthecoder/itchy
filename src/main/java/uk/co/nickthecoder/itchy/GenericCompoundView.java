@@ -35,12 +35,12 @@ public class GenericCompoundView<V extends View> extends AbstractView implements
 
     
     @Override
-    public void render2( GraphicsContext gc )
+    public void render( GraphicsContext gc )
     {
         for (V child : this.children) {
             if (child.isVisible()) {
 
-                child.render(gc);
+                child.render( child.adjustGraphicsContext(gc));
 
             }
         }
