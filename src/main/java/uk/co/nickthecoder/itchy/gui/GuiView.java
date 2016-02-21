@@ -178,7 +178,9 @@ public class GuiView extends AbstractView implements View, InputListener
     @Override
     public GraphicsContext adjustGraphicsContext(GraphicsContext gc)
     {
-        return gc.window(new Rect( rootContainer.x, rootContainer.y, rootContainer.width, rootContainer.height));
+        return gc.window(new Rect(
+            rootContainer.x + this.position.x, rootContainer.y + this.position.y,
+            rootContainer.width, rootContainer.height));
     }
 
     @Override

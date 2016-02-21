@@ -420,7 +420,10 @@ public class Actor implements PropertySubject<Actor>
                 animation.setFinishedMessage(message);
             }
         }
-        this.setAnimation(animation, ae);
+        
+        if (animation != null) {
+            this.setAnimation(animation, ae);
+        }
 
         ManagedSound cs = this.costume.getCostumeSound(eventName);
         if (cs != null) {

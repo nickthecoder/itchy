@@ -29,7 +29,7 @@ public class TextValue extends AbstractRole
     protected static final List<Property<Role, ?>> properties = new ArrayList<Property<Role, ?>>();
 
     static {
-        properties.add(new StringProperty<Role>("access"));
+        properties.add(new StringProperty<Role>("access").hint("from Game object"));
         properties.add(new StringProperty<Role>("errorValue"));
         properties.add(new StringProperty<Role>("nullValue"));
         properties.add(new DoubleProperty<Role>("updateInterval").hint("seconds. 0 for continuous"));
@@ -37,13 +37,11 @@ public class TextValue extends AbstractRole
     }
 
     /**
-     * The java bean of of your Game object. For example, if you have a public
-     * attribute called "sceneName", or a public method called "getSceneName",
-     * then this would value should be "sceneName" (not getSceneName).
+     * Access a property from the Game object.
      * 
      * You can traverse from one object to another. For example, Game has a
-     * methods called getSceneDirector, so if your SceneDirector has an
-     * attribute called "for" (or a method called "getFoo"), then you can get to
+     * method called getSceneDirector, so if your SceneDirector has an
+     * attribute called "foo" (or a method called "getFoo"), then you can get to
      * it using : <code>"sceneDirector.foo"</code>.
      */
     public String access;
@@ -64,7 +62,7 @@ public class TextValue extends AbstractRole
 
     /**
      * How often to update. The default is zero, which means it is updated every
-     * frame. This is fine unless the value take a long time to calculate, in
+     * frame. This is fine unless the value) take a long time to calculate, in
      * which case, you may want to update it less frequently. A negative value
      * means it will only retrieve the value when the actor is first activated.
      * This is handy for values you know won't need updating. The example game

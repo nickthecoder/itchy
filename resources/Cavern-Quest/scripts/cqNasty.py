@@ -11,7 +11,7 @@ class CqNasty(Movable) :
         self.addTag( "hittable" )
         self.addTag( "squashable" )
         self.direction = 0 # 0..3 North,East,South,West
-        self.getStuck = False
+        self.allowReverse = True
 
     def tick(self):
         if self.idle :
@@ -24,22 +24,20 @@ class CqNasty(Movable) :
         player = Itchy.getGame().sceneDirector.player
         #print self.actor.x, self.actor.y, " verses ", player.actor.x, player.actor.y
 
-        direct = False
         # If we are heading directly towards or away from the player, then do not try left or right
-        if player.actor.x == self.actor.x :
-            if (self.direction % 2) == 1 :
-                direct = True
-                newDir = 1 if (player.actor.y > self.actor.y) else 3
-                #print "Direct N/S", newDir
+        if player.actor.y == self.actor.y and (self.direction % 2) == 0 :
+            # When heading into an East/West cul-de-sac, then get stuck. This makes it easy to trap
+            # the nasties, but can also make life tricky for the player in some circumstances.
+            self.allowReverse = False
+            newDir = 0 if (player.actor.x > self.actor.x) else 2
+            #print "Direct E/W", newDir
 
-        if player.actor.y == self.actor.y :
-            if (self.direction % 2) == 0 :
-                direct = True
-                newDir = 0 if (player.actor.x > self.actor.x) else 2
-                #print "Direct E/W", newDir
+        elif player.actor.x == self.actor.x and (self.direction % 2) == 1 :
+            newDir = 1 if (player.actor.y > self.actor.y) else 3
+            #print "Direct N/S", newDir
 
-        if not direct :        
-            
+        else :
+
             # Try not to move forwards again, so look LEFT first
             newDir = (self.direction + 5) % 4
             #print "looking left first", newDir
@@ -60,23 +58,20 @@ class CqNasty(Movable) :
                         newDir = self.direction
                         #print "sticking with ", newDir
                     else :
-                        if self.getStuck :
-                            #print "Stuck in dead end"
-                            pass
-                        else :
+                        if self.allowReverse :
                             #print "Ok, can't turn left, right or forwards, let's reverse"
                             newDir = (self.direction + 6) % 4
                             if not self.canMove( newDir ) :
-                                #print "Stuck!"
+                                #print "Well and truely stuck!"
                                 pass
+
+            if self.canMove( newDir ) :
+                self.allowReverse = True
 
         if self.canMove( newDir ) :            
             self.direction = newDir
             #print "moving", self.direction
             self.moveDirection( self.direction )
-
-        # Next time round the loop, don't allow backwards if we've gone directly towards the player into a dead end.
-        self.getStuck = direct
 
 
     def canMove( self, direction ) :

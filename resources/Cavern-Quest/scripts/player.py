@@ -127,6 +127,8 @@ class Player(Movable) :
         
         return False
 
+    def onHalfInvaded(self, invader) :
+        self.killMe()
 
     def hit( self, x, y ) :
         self.killMe()

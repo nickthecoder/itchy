@@ -4,9 +4,6 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.editor;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.PoseResource;
 import uk.co.nickthecoder.itchy.Resources;
@@ -31,7 +28,7 @@ import uk.co.nickthecoder.itchy.gui.VerticalScroll;
 
 public class EditFramedAnimation extends EditSingleAnimation
 {
-    private List<Frame> frames;
+    private FramedAnimation framedAnimation;
 
     private PlainContainer framesContainer;
 
@@ -40,6 +37,7 @@ public class EditFramedAnimation extends EditSingleAnimation
     public EditFramedAnimation(Resources resources, FramedAnimation animation)
     {
         super(resources, animation);
+        this.framedAnimation = animation;
     }
 
     @Override
@@ -56,8 +54,7 @@ public class EditFramedAnimation extends EditSingleAnimation
                     @Override
                     public void pick(PoseResource poseResource)
                     {
-                        EditFramedAnimation.this.frames.add(new Frame(poseResource.getName(),
-                            poseResource.pose));
+                        framedAnimation.addFrame(new Frame(poseResource.getName(), poseResource.pose));
                         EditFramedAnimation.this.rebuildFrames();
                     }
                 };
@@ -74,8 +71,6 @@ public class EditFramedAnimation extends EditSingleAnimation
     {
         super.createForm();
 
-        this.frames = new ArrayList<Frame>(((FramedAnimation) this.subject).getFrames());
-
         this.framesContainer = new PlainContainer();
         this.framesContainer.addStyle("form");
         this.framesGrid = new GridLayout(this.framesContainer, 7);
@@ -91,9 +86,9 @@ public class EditFramedAnimation extends EditSingleAnimation
 
         PlainContainer both = new PlainContainer();
         both.setLayout(new VerticalLayout());
-        both.addChild( this.form.container);
-        both.addChild( vs );
-        
+        both.addChild(this.form.container);
+        both.addChild(vs);
+
         return both;
     }
 
@@ -102,7 +97,7 @@ public class EditFramedAnimation extends EditSingleAnimation
         this.framesGrid.clear();
 
         int i = -1;
-        for (Frame frame : this.frames) {
+        for (Frame frame : this.framedAnimation.getFrames()) {
             i++;
             this.rebuildFrame(i, frame);
         }
@@ -141,10 +136,10 @@ public class EditFramedAnimation extends EditSingleAnimation
                 @Override
                 public void action()
                 {
-                    Frame other = EditFramedAnimation.this.frames.get(i - 1);
-                    EditFramedAnimation.this.frames.set(i, other);
-                    EditFramedAnimation.this.frames.set(i - 1, frame);
-                    EditFramedAnimation.this.rebuildFrames();
+                    Frame other = framedAnimation.getFrames().get(i - 1);
+                    framedAnimation.getFrames().set(i, other);
+                    framedAnimation.getFrames().set(i - 1, frame);
+                    rebuildFrames();
                 }
             });
             up.addStyle("compact");
@@ -157,8 +152,8 @@ public class EditFramedAnimation extends EditSingleAnimation
             @Override
             public void action()
             {
-                EditFramedAnimation.this.frames.remove(i);
-                EditFramedAnimation.this.rebuildFrames();
+                framedAnimation.getFrames().remove(i);
+                rebuildFrames();
             }
         });
         delete.addStyle("compact");

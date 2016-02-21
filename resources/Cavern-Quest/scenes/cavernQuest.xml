@@ -2,7 +2,6 @@
   <sceneDirector blasts="100"/>
   <layer name="background"/>
   <layer name="plain">
-    <actor costume="cq-rocket" x="645.0" y="188.0" heading="90.0" id="" direction="90.0" colorize=""/>
     <actor costume="cq-moon" x="408.0" y="504.0" id="" colorize=""/>
     <actor costume="cq-dot" x="500.0" y="583.0" id="" colorize=""/>
     <actor costume="cq-dot" x="364.0" y="490.0" id="" colorize=""/>
@@ -23,11 +22,9 @@
     <actor costume="cq-dot" x="-495.0" y="425.0" id="" colorize=""/>
   </layer>
   <layer name="grid">
-    <actor costume="cq-player" x="648.0" y="180.0" id="" colorize="" role="player.py"/>
     <actor costume="cq-solid-b" x="684.0" y="108.0" id="" colorize="" role="wall.py"/>
     <actor costume="cq-soil" x="468.0" y="108.0" id="" colorize="" role="cqSoil.py"/>
     <actor costume="cq-soil" x="504.0" y="144.0" id="" colorize="" role="cqSoil.py"/>
-    <actor costume="cq-soil" x="648.0" y="72.0" id="" colorize="" role="cqSoil.py"/>
     <actor costume="cq-soil" x="612.0" y="108.0" id="" colorize="" role="cqSoil.py"/>
     <actor costume="cq-soil" x="468.0" y="144.0" id="" colorize="" role="cqSoil.py"/>
     <actor costume="cq-soil" x="720.0" y="108.0" id="" colorize="" role="cqSoil.py"/>
@@ -765,7 +762,6 @@
     <actor costume="cq-soil" x="-684.0" y="-108.0" id="" colorize="" role="cqSoil.py"/>
     <actor costume="cq-soil" x="-684.0" y="-144.0" id="" colorize="" role="cqSoil.py"/>
     <actor costume="cq-soil" x="-684.0" y="-180.0" id="" colorize="" role="cqSoil.py"/>
-    <actor costume="cq-solid-a" x="648.0" y="-468.0" id="" colorize="" role="wall.py"/>
     <actor costume="cq-soil" x="108.0" y="-468.0" id="" colorize="" role="cqSoil.py"/>
     <actor costume="cq-soil" x="72.0" y="-468.0" id="" colorize="" role="cqSoil.py"/>
     <actor costume="cq-soil" x="36.0" y="-468.0" id="" colorize="" role="cqSoil.py"/>
@@ -1178,12 +1174,6 @@
     <actor costume="cq-soil" x="-684.0" y="-1008.0" id="" colorize="" role="cqSoil.py"/>
     <actor costume="cq-soil" x="-684.0" y="-972.0" id="" colorize="" role="cqSoil.py"/>
     <actor costume="cq-solid-b" x="-108.0" y="-1080.0" id="" colorize="" role="wall.py"/>
-    <actor costume="cq-dot" x="-36.0" y="-1044.0" id="" colorize=""/>
-    <actor costume="cq-dot" x="-36.0" y="-1080.0" id="" colorize=""/>
-    <actor costume="cq-dot" y="-1044.0" id="" colorize=""/>
-    <actor costume="cq-dot" y="-1080.0" id="" colorize=""/>
-    <actor costume="cq-dot" x="36.0" y="-1044.0" id="" colorize=""/>
-    <actor costume="cq-dot" x="36.0" y="-1080.0" id="" colorize=""/>
     <actor costume="cq-soil" x="-144.0" y="-1044.0" id="" colorize="" role="cqSoil.py"/>
     <actor costume="cq-solid-a" x="-72.0" y="-1080.0" id="" colorize="" role="wall.py"/>
     <actor costume="cq-soil" x="-108.0" y="-1008.0" id="" colorize="" role="cqSoil.py"/>
@@ -1191,8 +1181,6 @@
     <actor costume="cq-solid-b" x="108.0" y="-1044.0" id="" colorize="" role="wall.py"/>
     <actor costume="cq-solid-a" x="108.0" y="-1008.0" id="" colorize="" role="wall.py"/>
     <actor costume="cq-solid-a" x="108.0" y="-1080.0" id="" colorize="" role="wall.py"/>
-    <actor costume="cq-dot" x="72.0" y="-1044.0" id="" colorize=""/>
-    <actor costume="cq-dot" x="72.0" y="-1080.0" id="" colorize=""/>
     <actor costume="cq-solid-b" x="72.0" y="-936.0" id="" colorize="" role="wall.py"/>
     <actor costume="cq-soil" x="72.0" y="-972.0" id="" colorize="" role="cqSoil.py"/>
     <actor costume="cq-soil" x="108.0" y="-972.0" id="" colorize="" role="cqSoil.py"/>
@@ -1450,6 +1438,54 @@
     <actor costume="cq-solid-a" x="576.0" y="-540.0" id="" colorize="" role="wall.py"/>
     <actor costume="cq-solid-b" x="576.0" y="-504.0" id="" colorize="" role="wall.py"/>
     <actor costume="cq-soil" x="648.0" y="-864.0" id="" colorize="" role="cqSoil.py"/>
+    <actor costume="ore" x="648.0" y="-468.0" id="" colorize="" role="ore.py"/>
+    <actor costume="magma" x="-36.0" y="-1044.0" id="" colorize="" role="wall.py"/>
+    <actor costume="magma" x="-36.0" y="-1080.0" id="" colorize="" role="wall.py"/>
+    <actor costume="magma" y="-1080.0" id="" colorize="" role="wall.py"/>
+    <actor costume="magma" y="-1044.0" id="" colorize="" role="wall.py"/>
+    <actor costume="magma" x="36.0" y="-1044.0" id="" colorize="" role="wall.py"/>
+    <actor costume="magma" x="36.0" y="-1080.0" id="" colorize="" role="wall.py"/>
+    <actor costume="magma" x="72.0" y="-1080.0" id="" colorize="" role="wall.py"/>
+    <actor costume="magma" x="72.0" y="-1044.0" id="" colorize="" role="wall.py"/>
+    <actor costume="surface-a2" x="504.0" y="180.0" id="" colorize="" role="wall.py"/>
+    <actor costume="surface-a3" x="432.0" y="216.0" id="" colorize="" role="wall.py"/>
+    <actor costume="surface-a2" x="468.0" y="216.0" id="" colorize="" role="wall.py"/>
+    <actor costume="surface-a3" x="360.0" y="252.0" id="" colorize="" role="wall.py"/>
+    <actor costume="surface-a2" x="396.0" y="252.0" id="" colorize="" role="wall.py"/>
+    <actor costume="surface-a2" x="324.0" y="288.0" id="" colorize="" role="wall.py"/>
+    <actor costume="surface-a3" x="252.0" y="324.0" id="" colorize="" role="wall.py"/>
+    <actor costume="surface-a1" x="288.0" y="324.0" id="" colorize="" role="wall.py"/>
+    <actor costume="surface-a2" x="216.0" y="360.0" id="" colorize="" role="wall.py"/>
+    <actor costume="surface-a2" x="180.0" y="396.0" id="" colorize="" role="wall.py"/>
+    <actor costume="surface-a2" x="144.0" y="432.0" id="" colorize="" role="wall.py"/>
+    <actor costume="surface-a2" x="108.0" y="468.0" id="" colorize="" role="wall.py"/>
+    <actor costume="surface-a2" x="72.0" y="504.0" id="" colorize="" role="wall.py"/>
+    <actor costume="surface-a3" x="36.0" y="504.0" id="" colorize="" role="wall.py"/>
+    <actor costume="surface-b3" y="504.0" id="" colorize="" role="wall.py"/>
+    <actor costume="surface-b2" x="-36.0" y="504.0" id="" colorize="" role="wall.py"/>
+    <actor costume="surface-b3" x="-72.0" y="468.0" id="" colorize="" role="wall.py"/>
+    <actor costume="surface-b3" x="-108.0" y="432.0" id="" colorize="" role="wall.py"/>
+    <actor costume="surface-b2" x="-144.0" y="432.0" id="" colorize="" role="wall.py"/>
+    <actor costume="surface-b1" x="-180.0" y="432.0" id="" colorize="" role="wall.py"/>
+    <actor costume="surface-b3" x="-216.0" y="396.0" id="" colorize="" role="wall.py"/>
+    <actor costume="surface-b2" x="-252.0" y="396.0" id="" colorize="" role="wall.py"/>
+    <actor costume="surface-b1" x="-324.0" y="396.0" id="" colorize="" role="wall.py"/>
+    <actor costume="surface-b3" x="-360.0" y="360.0" id="" colorize="" role="wall.py"/>
+    <actor costume="surface-b2" x="-396.0" y="360.0" id="" colorize="" role="wall.py"/>
+    <actor costume="surface-b1" x="-468.0" y="360.0" id="" colorize="" role="wall.py"/>
+    <actor costume="surface-a1" x="-432.0" y="360.0" id="" colorize="" role="wall.py"/>
+    <actor costume="surface-b1" x="-504.0" y="360.0" id="" colorize="" role="wall.py"/>
+    <actor costume="surface-b2" x="-540.0" y="324.0" id="" colorize="" role="wall.py"/>
+    <actor costume="surface-a2" x="-648.0" y="324.0" id="" colorize="" role="wall.py"/>
+    <actor costume="surface-a1" x="-612.0" y="324.0" id="" colorize="" role="wall.py"/>
+    <actor costume="surface-b1" x="-576.0" y="324.0" id="" colorize="" role="wall.py"/>
+    <actor costume="cq-solid-a" x="-684.0" y="324.0" id="" colorize="" role="wall.py"/>
+    <actor costume="cq-rocket" x="648.0" y="216.0" heading="90.0" id="ship" direction="90.0" colorize="" role="rocket.py"/>
+    <actor costume="cq-player" x="648.0" y="180.0" id="" colorize="" role="player.py"/>
+    <actor costume="surface-b1" x="684.0" y="180.0" id="" colorize="" role="wall.py"/>
+    <actor costume="surface-a1" x="612.0" y="180.0" id="" colorize="" role="wall.py"/>
+    <actor costume="surface-a1" x="540.0" y="180.0" id="" colorize="" role="wall.py"/>
+    <actor costume="cq-soil" x="648.0" y="72.0" id="" colorize="" role="cqSoil.py"/>
     <actor costume="cq-nasty" x="432.0" y="-180.0" zOrder="50" id="" colorize="" role="cqNasty.py"/>
     <actor costume="cq-nasty" x="252.0" y="216.0" zOrder="50" id="" colorize="" role="cqNasty.py"/>
     <actor costume="cq-nasty" x="-504.0" y="252.0" zOrder="50" id="" colorize="" role="cqNasty.py"/>
