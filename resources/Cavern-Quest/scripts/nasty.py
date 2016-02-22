@@ -4,10 +4,10 @@ from movable import Movable
 
 properties = ArrayList()
 
-class CqNasty(Movable) :
+class Nasty(Movable) :
 
     def __init__(self) :
-        super(CqNasty,self).__init__()
+        super(Nasty,self).__init__()
         self.addTag( "hittable" )
         self.addTag( "squashable" )
         self.direction = 0 # 0..3 North,East,South,West
@@ -104,7 +104,7 @@ class CqNasty(Movable) :
 
     def onDeath( self ) :
         grid = self.square.grid
-        super(CqNasty,self).onDeath()
+        super(Nasty,self).onDeath()
         self.removeTag( "hittable" )
         self.removeTag( "squashable" )
         

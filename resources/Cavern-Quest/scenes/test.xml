@@ -3,33 +3,33 @@
   <layer name="background"/>
   <layer name="plain"/>
   <layer name="grid">
-    <actor costume="cq-player" x="432.0" y="288.0" id="" colorize="" role="player.py"/>
-    <actor costume="cq-soil" x="288.0" y="252.0" id="" colorize="" role="cqSoil.py"/>
-    <actor costume="cq-soil" x="324.0" y="252.0" id="" colorize="" role="cqSoil.py"/>
-    <actor costume="cq-soil" x="324.0" y="288.0" id="" colorize="" role="cqSoil.py"/>
-    <actor costume="cq-soil" x="324.0" y="324.0" id="" colorize="" role="cqSoil.py"/>
-    <actor costume="cq-soil" x="288.0" y="324.0" id="" colorize="" role="cqSoil.py"/>
-    <actor costume="cq-soil" x="288.0" y="360.0" id="" colorize="" role="cqSoil.py"/>
-    <actor costume="cq-soil" x="216.0" y="396.0" id="" colorize="" role="cqSoil.py"/>
-    <actor costume="cq-soil" x="180.0" y="360.0" id="" colorize="" role="cqSoil.py"/>
-    <actor costume="cq-soil" x="252.0" y="360.0" id="" colorize="" role="cqSoil.py"/>
-    <actor costume="cq-soil" x="144.0" y="360.0" id="" colorize="" role="cqSoil.py"/>
-    <actor costume="cq-soil" x="144.0" y="324.0" id="" colorize="" role="cqSoil.py"/>
-    <actor costume="cq-soil" x="108.0" y="288.0" id="" colorize="" role="cqSoil.py"/>
-    <actor costume="cq-soil" x="144.0" y="252.0" id="" colorize="" role="cqSoil.py"/>
-    <actor costume="cq-soil" x="180.0" y="252.0" id="" colorize="" role="cqSoil.py"/>
-    <actor costume="cq-soil" x="216.0" y="216.0" id="" colorize="" role="cqSoil.py"/>
-    <actor costume="cq-soil" x="252.0" y="252.0" id="" colorize="" role="cqSoil.py"/>
-    <actor costume="cq-soil" x="36.0" y="468.0" id="" colorize="" role="cqSoil.py"/>
-    <actor costume="cq-soil" x="432.0" y="432.0" id="" colorize="" role="cqSoil.py"/>
-    <actor costume="cq-soil" x="504.0" y="144.0" id="" colorize="" role="cqSoil.py"/>
-    <actor costume="cq-soil" x="36.0" y="144.0" id="" colorize="" role="cqSoil.py"/>
-    <actor costume="cq-soil" x="180.0" y="396.0" id="" colorize="" role="cqSoil.py"/>
-    <actor costume="cq-soil" x="252.0" y="396.0" id="" colorize="" role="cqSoil.py"/>
-    <actor costume="cq-soil" x="252.0" y="216.0" id="" colorize="" role="cqSoil.py"/>
-    <actor costume="cq-soil" x="180.0" y="216.0" id="" colorize="" role="cqSoil.py"/>
-    <actor costume="cq-soil" x="108.0" y="252.0" id="" colorize="" role="cqSoil.py"/>
-    <actor costume="cq-soil" x="108.0" y="324.0" id="" colorize="" role="cqSoil.py"/>
-    <actor costume="cq-nasty" x="216.0" y="324.0" zOrder="50" id="" colorize="" role="cqNasty.py"/>
+    <actor costume="cq-player" x="432.0" y="288.0"/>
+    <actor costume="cq-soil" x="288.0" y="252.0"/>
+    <actor costume="cq-soil" x="324.0" y="252.0"/>
+    <actor costume="cq-soil" x="324.0" y="288.0"/>
+    <actor costume="cq-soil" x="324.0" y="324.0"/>
+    <actor costume="cq-soil" x="288.0" y="324.0"/>
+    <actor costume="cq-soil" x="288.0" y="360.0"/>
+    <actor costume="cq-soil" x="216.0" y="396.0"/>
+    <actor costume="cq-soil" x="180.0" y="360.0"/>
+    <actor costume="cq-soil" x="252.0" y="360.0"/>
+    <actor costume="cq-soil" x="144.0" y="360.0"/>
+    <actor costume="cq-soil" x="144.0" y="324.0"/>
+    <actor costume="cq-soil" x="108.0" y="288.0"/>
+    <actor costume="cq-soil" x="144.0" y="252.0"/>
+    <actor costume="cq-soil" x="180.0" y="252.0"/>
+    <actor costume="cq-soil" x="216.0" y="216.0"/>
+    <actor costume="cq-soil" x="252.0" y="252.0"/>
+    <actor costume="cq-soil" x="36.0" y="468.0"/>
+    <actor costume="cq-soil" x="432.0" y="432.0"/>
+    <actor costume="cq-soil" x="504.0" y="144.0"/>
+    <actor costume="cq-soil" x="36.0" y="144.0"/>
+    <actor costume="cq-soil" x="180.0" y="396.0"/>
+    <actor costume="cq-soil" x="252.0" y="396.0"/>
+    <actor costume="cq-soil" x="252.0" y="216.0"/>
+    <actor costume="cq-soil" x="180.0" y="216.0"/>
+    <actor costume="cq-soil" x="108.0" y="252.0"/>
+    <actor costume="cq-soil" x="108.0" y="324.0"/>
+    <actor costume="cq-nasty" x="216.0" y="324.0" zOrder="50"/>
   </layer>
 </scene>

@@ -32,7 +32,7 @@ public class Actor implements PropertySubject<Actor>
         properties.add(new StringProperty<Actor>("startEvent").defaultValue("default"));
         properties.add(new DoubleProperty<Actor>("activationDelay"));
         properties.add(new IntegerProperty<Actor>("zOrder"));
-        properties.add(new StringProperty<Actor>("id"));
+        properties.add(new StringProperty<Actor>("id").allowNull(true).defaultValue(null));
     }
 
     private static Pose startPose(Costume costume, String name)

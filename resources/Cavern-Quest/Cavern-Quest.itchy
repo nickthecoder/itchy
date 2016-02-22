@@ -28,7 +28,12 @@
   <fonts>
     <font name="Computer" file="fonts/dot_matrix/DOTMATRI.TTF"/>
   </fonts>
-  <sounds/>
+  <sounds>
+    <sound name="appear" file="sound/appear.ogg"/>
+    <sound name="drawing" file="sound/drawing.ogg"/>
+    <sound name="menu" file="sound/menu.ogg"/>
+    <sound name="nasty" file="sound/nasty.ogg"/>
+  </sounds>
   <animations>
     <animation name="enterShip">
       <sequence sequence="true" loops="1">
@@ -44,7 +49,7 @@
     </animation>
     <animation name="nasty">
       <sequence sequence="true" loops="0">
-        <frames pingPong="false">
+        <frames pingPong="false" finishedMessage="play">
           <frame pose="cq-nasty-a" delay="6" dx="0.0" dy="0.0"/>
           <frame pose="cq-nasty-b" delay="6" dx="0.0" dy="0.0"/>
         </frames>
@@ -75,7 +80,7 @@
     <costume name="cq-moon" defaultZOrder="0" order="120" showInDesigner="true">
       <pose name="default" pose="cq-moon"/>
     </costume>
-    <costume name="cq-nasty" defaultZOrder="50" order="110" showInDesigner="true" role="cqNasty.py">
+    <costume name="cq-nasty" defaultZOrder="50" order="110" showInDesigner="true" role="nasty.py">
       <pose name="default" pose="cq-nasty-a"/>
       <animation name="default" animation="nasty"/>
       <companion name="soil" companion="cq-soil"/>
@@ -84,14 +89,14 @@
       <pose name="default" pose="cq-player-a"/>
       <animation name="default" animation="player"/>
     </costume>
-    <costume name="cq-rock" defaultZOrder="0" order="115" showInDesigner="true" role="cqRock.py">
+    <costume name="cq-rock" defaultZOrder="0" order="115" showInDesigner="true" role="rock.py">
       <pose name="default" pose="cq-rock"/>
     </costume>
     <costume name="cq-rocket" defaultZOrder="0" order="120" showInDesigner="true" role="rocket.py">
       <pose name="default" pose="cq-rocket"/>
       <animation name="launch" animation="launch"/>
     </costume>
-    <costume name="cq-soil" defaultZOrder="0" order="110" showInDesigner="true" role="cqSoil.py">
+    <costume name="cq-soil" defaultZOrder="0" order="110" showInDesigner="true" role="soil.py">
       <pose name="default" pose="cq-soil"/>
       <animation name="dig" animation="soilHit"/>
     </costume>

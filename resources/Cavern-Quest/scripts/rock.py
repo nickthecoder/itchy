@@ -4,10 +4,10 @@ from movable import Movable
 
 properties = ArrayList()
 
-class CqRock(Movable) :
+class Rock(Movable) :
 
     def __init__(self) :
-        super(CqRock,self).__init__()
+        super(Rock,self).__init__()
         self.fallCounter = 0
         self.speed = 36
         self.addTag("rock")

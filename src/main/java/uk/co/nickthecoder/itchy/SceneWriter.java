@@ -142,8 +142,13 @@ public class SceneWriter extends XMLWriter
     {
         writeProperties(sceneActor);
         writeProperties(sceneActor.getAppearance());
-
-        if (PlainRole.class != role.getClass()) {
+        
+        String defaultRole = PlainRole.class.getName();
+        Costume costume = sceneActor.getCostume();
+        if ( costume != null ) {
+            defaultRole = costume.roleClassName.name;
+        }
+        if (defaultRole.equals(role.getClassName())) {
             this.attribute("role", role.getClassName().name);
         }
 

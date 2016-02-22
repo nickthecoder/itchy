@@ -144,8 +144,8 @@ public class ListSounds extends ListFileSubjects<SoundResource>
         SoundResource newSubject = new SoundResource();
         newSubject.setName(name);;
         newSubject.setFile(relativeFile);
-        EditSound edit = new EditSound( resources, ListSounds.this, newSubject, false );
-        edit.show();         
+        EditSound edit = new EditSound( resources, ListSounds.this, newSubject, true );
+        edit.show();
     }
 
 

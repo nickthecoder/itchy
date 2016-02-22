@@ -37,7 +37,7 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
         properties.add(new DoubleProperty<Appearance>("scale").defaultValue(1.0));
         properties.add(new DoubleProperty<Appearance>("direction"));
         properties.add(new DoubleProperty<Appearance>("alpha").defaultValue(255.0));
-        properties.add(new RGBAProperty<Appearance>("colorize").allowNull(true));
+        properties.add(new RGBAProperty<Appearance>("colorize").allowNull(true).defaultValue(null));
 
         textProperties.add(new FontProperty<Appearance>("pose.font"));
         textProperties.add(new DoubleProperty<Appearance>("pose.fontSize").aliases("size"));

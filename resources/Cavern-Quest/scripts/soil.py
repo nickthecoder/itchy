@@ -4,7 +4,7 @@ from gridRole import GridRole
 
 properties = ArrayList()
 
-class CqSoil(GridRole) :
+class Soil(GridRole) :
 
     def onBirth(self):
         self.addTag("soil")

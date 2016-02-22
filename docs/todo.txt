@@ -1,6 +1,16 @@
 Current Tasks
 =============
 
+Stop writing the role, id and colorize to scene files, when they are the defaults.
+
+Cavern Quest :
+    Rename the files without the cq prefix.
+    Respawn
+    Implement, or remove the macro record stuff.
+    Sound
+    Menu?
+    Draw the screen top left to bottom right when loading.
+
 Client/Server views.
 
     Does it matter that the client is having to redraw all rotated images every time
