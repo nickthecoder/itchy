@@ -1,0 +1,14 @@
+<scene name="menu" layout="default" sceneDirector="uk.co.nickthecoder.itchy.PlainSceneDirector" showMouse="true">
+  <layer name="background"/>
+  <layer name="plain"/>
+  <layer name="grid">
+    <text x="396.0" y="540.0" font="Computer" fontSize="22.0" text="Cavern Quest"/>
+    <text x="36.0" y="72.0" font="Computer" fontSize="22.0" text="Original TRS-80 Game by Barry Diller (c) 1982" xAlignment="0.0"/>
+    <text x="36.0" y="36.0" font="Computer" fontSize="22.0" text="This version by Nick Robinson (c) 2016" xAlignment="0.0"/>
+    <text x="396.0" y="396.0" font="Computer" fontSize="22.0" text="1) . . . . Play Game"/>
+    <text x="396.0" y="288.0" font="Computer" fontSize="22.0" text="ctrl+S to save"/>
+    <text x="396.0" y="252.0" font="Computer" fontSize="22.0" text="ctrl+L to load"/>
+    <text x="396.0" y="504.0" font="Computer" fontSize="22.0" text="==============="/>
+    <text x="396.0" y="216.0" font="Computer" fontSize="22.0" text="F5 to restart"/>
+  </layer>
+</scene>

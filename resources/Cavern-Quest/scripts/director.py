@@ -9,17 +9,12 @@ class Director(AbstractDirector) :
     def __init__(self) :
         
         self.squareSize = 36
-        self.macroRecord = False
-        self.macroPlayback = False
     
     
     def onStarted( self ) :
 
-        self.inputEditor = Input.find( "editor" )
         self.inputRestart = Input.find("restart")
         self.inputQuit = Input.find("quit")
-        self.inputRecord = Input.find("macroRecord")
-        self.inputPlayback = Input.find("macroPlayback")
         
             
     def centerOn( self, x, y ) :
@@ -44,41 +39,9 @@ class Director(AbstractDirector) :
         AbstractDirector.startScene(self,sceneName)
         print "starting scene", sceneName
     
-        # If we were playing a macro, or recording a macro, then stop.
-        Itchy.eventProcessor.end()
-
-        if self.macroRecord :
-            MacroRecord( self.macroFile(sceneName) ).begin()
-            self.macroRecord = False
-
-        if self.macroPlayback :
-            macro = self.macroFile(sceneName)
-            if macro.exists() :
-                print "Playing back macro"
-                MacroPlayback( macro ).begin()
-            else :
-                print "Macro not found"
-
-
-    def macroFile( self, sceneName ) :
-        return game.resources.resolveFile( File( File("macros"), sceneName + ".macro" ) )
-        
-    def onKeyDown(self,kevent) :
-            
-        if self.inputRecord.matches(kevent) :
-            self.macroRecord = True
-            self.macroPlayback = False
-            print "Will start recording macro as soon as you start a new scene"
-
-        if self.inputPlayback.matches(kevent) :
-            self.macroRecord = False
-            self.macroPlayback = True
-            print "Will start playing back the macro as soon as you start a new scene"
-
-        if self.inputEditor.matches(kevent) :
-            sceneName = Itchy.getGame().getSceneName()
-            game.startEditor( sceneName )
     
+    def onKeyDown(self,kevent) :
+         
         if self.inputRestart.matches(kevent) :
             Itchy.getGame().startScene( Itchy.getGame().getSceneName() )
 

@@ -2,17 +2,9 @@ Current Tasks
 =============
 
 Cavern Quest :
-    Sound
-        Dig
-        player dies
-        nasty dies
-        Pickup Ore
-        pickup Reload
-    Respawn
     Implement, or remove the macro record stuff.
-    Menu?
-    Draw the screen top left to bottom right when loading.
-
+    Menu? Including sound
+    Draw the screen top left to bottom right when loading. Including sound.
 
 Client/Server views.
 

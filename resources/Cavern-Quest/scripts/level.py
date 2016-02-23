@@ -10,10 +10,6 @@ properties.add( IntegerProperty( "blasts" ) )
 
 game = Itchy.getGame()
 
-# Globals used to allow the user to save and restore their location. Its done using MacroRecorder
-recordedInput = ""
-replayInput = False
-
 # The SceneDirector used by all of the play levels.
 #
 # After a scene has loaded, places all GridRole objects into a Grid. Without this grid,
@@ -26,16 +22,10 @@ class Level(PlainSceneDirector) :
         self.blasts = 100
         self.player = None
         
-        self.macroRecorder = None
-        self.macroPlayback = None
         self.random = Random()
 
     def loading( self, scene ) :
         print "loading"
-
-        # Record and playback the player's moves using the MacroRecorder and MacroPlayback
-        self.inputSave = Input.find("save")
-        self.inputLoad = Input.find("load")
 
         print "Calculating grid size"
         # Calculate the size of the grid needed to fit all of the actors
@@ -100,15 +90,6 @@ class Level(PlainSceneDirector) :
             game.layout.findView("grid").centerOn(self.player.actor)
             game.layout.findView("plain").centerOn(self.player.actor)
 
-        self.macroRecorder = MacroRecorder()
-        self.macroRecorder.startRecording()
-
-        global replayInput
-        global recordedInput
-        if replayInput :
-            replayInput = False
-            self.macroRecorder.recorded = recordedInput
-            self.macroPlayback = MacroPlayback( recordedInput )
 
     def respawn( self, nasty ) :
         if self.random.nextInt( 4 ) > 0 :
@@ -132,33 +113,6 @@ class Level(PlainSceneDirector) :
                 
         PlainSceneDirector.tick(self)
 
-        if self.macroPlayback :
-            self.macroPlayback.tick()
-        
-        if self.macroRecorder :
-            self.macroRecorder.tick()
-
-
-    def onKeyDown(self, kevent) :
-    
-        if self.inputSave.matches(kevent) :
-            self.saveGame()
-            
-        if self.inputLoad.matches(kevent) :
-            self.loadGame()
-
-
-    def saveGame(self) :
-        global recordedInput
-        recordedInput = self.macroRecorder.getRecording()
-        print "Recorded: ", recordedInput
-
-
-    def loadGame(self) :
-        global replayInput
-        replayInput = True
-        game.startScene(game.sceneName)
-        
 
     # Boiler plate code - no need to change this
     def getProperties(self):
