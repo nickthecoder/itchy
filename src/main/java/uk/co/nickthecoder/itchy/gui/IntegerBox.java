@@ -9,44 +9,44 @@ import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.Keys;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 
-public class IntegerBox extends EntryBox<IntegerBox>
+public class IntegerBox extends EntryBox
 {
 
     public int minimumValue = Integer.MIN_VALUE;
     public int maximumValue = Integer.MAX_VALUE;
 
-    public IntegerBox( int value )
+    public IntegerBox(int value)
     {
         this(value, 10);
     }
 
-    public IntegerBox( int value, int width )
+    public IntegerBox(int value, int width)
     {
         super(Integer.toString(value));
         this.addStyle("integerBox");
         this.boxWidth = width;
     }
 
-    public IntegerBox minimum( int from )
+    public IntegerBox minimum(int from)
     {
         this.minimumValue = from;
         return this;
     }
 
-    public IntegerBox maxium( int to )
+    public IntegerBox maxium(int to)
     {
         this.maximumValue = to;
         return this;
     }
 
-    public IntegerBox range( int from, int to )
+    public IntegerBox range(int from, int to)
     {
         this.minimumValue = from;
         this.maximumValue = to;
         return this;
     }
 
-    public int getSafeValue( int defaultValue )
+    public int getSafeValue(int defaultValue)
     {
         try {
             return this.getValue();
@@ -64,7 +64,7 @@ public class IntegerBox extends EntryBox<IntegerBox>
     }
 
     @Override
-    protected boolean setEntryText( String value )
+    protected boolean setEntryText(String value)
     {
         if (value.equals("") || value.equals("-")) {
         } else {
@@ -77,15 +77,15 @@ public class IntegerBox extends EntryBox<IntegerBox>
         return super.setEntryText(value);
     }
 
-    public void setValue( int value )
+    public void setValue(int value)
     {
         this.setEntryText(Integer.toString(value));
     }
 
-    public void adjust( int delta )
+    public void adjust(int delta)
     {
         try {
-            int newValue = this.getValue() + delta;
+            int newValue = Integer.parseInt(this.getText()) + delta;
             if ((newValue >= this.minimumValue) && (newValue <= this.maximumValue)) {
                 this.setValue(newValue);
             }
@@ -105,7 +105,7 @@ public class IntegerBox extends EntryBox<IntegerBox>
     }
 
     @Override
-    public void onKeyDown( KeyboardEvent ke )
+    public void onKeyDown(KeyboardEvent ke)
     {
         if (ke.symbol == Keys.UP) {
             this.adjust(1);
@@ -124,7 +124,7 @@ public class IntegerBox extends EntryBox<IntegerBox>
     }
 
     @Override
-    public void onMouseDown( MouseButtonEvent event )
+    public void onMouseDown(MouseButtonEvent event)
     {
         if (this.hasFocus) {
             if (event.button == MouseButtonEvent.BUTTON_WHEEL_UP) {

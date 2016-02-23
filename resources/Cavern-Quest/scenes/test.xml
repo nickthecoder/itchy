@@ -1,5 +1,5 @@
 <scene name="test" layout="default" sceneDirector="level.py" showMouse="true">
-  <sceneDirector blasts="100"/>
+  <sceneDirector blasts="100" respawnChance="2"/>
   <layer name="background"/>
   <layer name="plain"/>
   <layer name="grid">

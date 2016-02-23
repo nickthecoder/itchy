@@ -2,11 +2,10 @@ from common import * #@UnusedWildImport
 
 from grid import Grid
 from gridRole import GridRole
-from macroRecorder import MacroRecorder
-from macroPlayback import MacroPlayback
 
 properties = ArrayList()
 properties.add( IntegerProperty( "blasts" ) )
+properties.add( IntegerProperty( "respawnChance" ).min(1).hint( "One in ? (1=Always)") )
 
 game = Itchy.getGame()
 
@@ -21,6 +20,7 @@ class Level(PlainSceneDirector) :
                     
         self.blasts = 100
         self.player = None
+        self.respawnChance = 4
         
         self.random = Random()
 
@@ -92,9 +92,15 @@ class Level(PlainSceneDirector) :
 
 
     def respawn( self, nasty ) :
-        if self.random.nextInt( 4 ) > 0 :
+
+        if len(self.spawnLocations) == 0 :
             return
             
+        if self.respawnChance > 1 :
+            if self.random.nextInt( self.respawnChance ) > 0 :
+                return
+
+        # Try 10 times to find an empty spawn location, and if none is found, then give up.            
         for i in range(0,10) :
             index = self.random.nextInt( len(self.spawnLocations) )
             x = self.spawnLocations[index][0]

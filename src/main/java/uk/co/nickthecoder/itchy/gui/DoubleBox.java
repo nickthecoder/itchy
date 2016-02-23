@@ -12,9 +12,12 @@ import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.Keys;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 
-public class DoubleBox extends EntryBox<DoubleBox>
+public class DoubleBox extends EntryBox
 {
     public Format format;
+
+    public double minimumValue = Double.MIN_VALUE;
+    public double maximumValue = Double.MAX_VALUE;
 
     public DoubleBox( double value )
     {
@@ -28,9 +31,33 @@ public class DoubleBox extends EntryBox<DoubleBox>
         this.boxWidth = 10;
     }
 
-    public double getValue()
+    public DoubleBox minimum( double from )
     {
+        this.minimumValue = from;
+        return this;
+    }
+
+    public DoubleBox maxium( double to )
+    {
+        this.maximumValue = to;
+        return this;
+    }
+    
+    public double getValue() throws Exception
+    {
+        if (!isValid()) {
+            throw new Exception("Not valid");
+        }
         return Double.parseDouble(this.getText());
+    }
+
+    public double getSafeValue()
+    {
+        try {
+            return getValue();
+        } catch (Exception e) {
+            return 0;
+        }
     }
 
     @Override
@@ -54,7 +81,25 @@ public class DoubleBox extends EntryBox<DoubleBox>
 
     public void adjust( double delta )
     {
-        this.setValue(this.getValue() + delta);
+        try {
+            double newValue = Double.parseDouble(this.getText()) + delta;
+            if ((newValue >= this.minimumValue) && (newValue <= this.maximumValue)) {
+                this.setValue(newValue);
+            }
+        } catch (Exception e) {
+            // Do nothing
+        }
+    }
+
+
+    public boolean isValid()
+    {
+        try {
+            int number = Integer.parseInt(this.getText());
+            return (number >= this.minimumValue) && (number <= this.maximumValue);
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     @Override

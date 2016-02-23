@@ -12,16 +12,35 @@ import uk.co.nickthecoder.itchy.util.BeanHelper;
 
 public class DoubleProperty<S> extends Property<S, Double>
 {
+    public double minValue = Double.MIN_VALUE;
+    
+    public double maxValue = Double.MAX_VALUE;
+    
+
     public DoubleProperty( String key )
     {
         super(key);
         this.defaultValue = 0.0;
     }
 
+    public DoubleProperty<S> min( int value )
+    {
+        this.minValue = value;
+        return this;
+    }
+
+    public DoubleProperty<S> max( int value )
+    {
+        this.maxValue = value;
+        return this;
+    }
+    
     @Override
     public Component createUnvalidatedComponent( final S subject)
     {
         final DoubleBox box = new DoubleBox(this.getSafeValue(subject));
+        box.minimumValue = this.minValue;
+        box.maximumValue = this.maxValue;
 
         return box;
     }
@@ -54,7 +73,7 @@ public class DoubleProperty<S> extends Property<S, Double>
     }
 
     @Override
-    public Double getValueFromComponent(Component component )
+    public Double getValueFromComponent(Component component ) throws Exception
     {
         DoubleBox doubleBox = (DoubleBox) component;
         return doubleBox.getValue();
@@ -67,6 +86,23 @@ public class DoubleProperty<S> extends Property<S, Double>
         doubleBox.setValue(value);
     }
 
+    @Override
+    public boolean isValid(Component component)
+    {
+        try {
+            double value = getValueFromComponent( component );
+            if (value < this.minValue) {
+                return false;
+            }
+            if (value > this.maxValue) {
+                return false;
+            }
+        } catch (Exception e) {
+            return false;
+        }
+        return super.isValid(component);
+    }
+    
     @Override
     public Double parse( String value )
     {

@@ -2,7 +2,6 @@ Current Tasks
 =============
 
 Cavern Quest :
-    Implement, or remove the macro record stuff.
     Menu? Including sound
     Draw the screen top left to bottom right when loading. Including sound.
 

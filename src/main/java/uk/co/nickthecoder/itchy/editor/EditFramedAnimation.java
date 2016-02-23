@@ -165,7 +165,7 @@ public class EditFramedAnimation extends EditSingleAnimation
             @Override
             public void changed()
             {
-                frame.dx = dxBox.getValue();
+                frame.dx = dxBox.getSafeValue();
             }
         });
         final DoubleBox dyBox = new DoubleBox(frame.dy);
@@ -174,7 +174,7 @@ public class EditFramedAnimation extends EditSingleAnimation
             @Override
             public void changed()
             {
-                frame.dy = dyBox.getValue();
+                frame.dy = dyBox.getSafeValue();
             }
         });
 
