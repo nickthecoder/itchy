@@ -22,6 +22,16 @@ public class DelayedActivation extends AbstractRole
         this.actualRole = role;
     }
 
+    public void delaySeconds( double seconds )
+    {
+        if (this.seconds <= 0) {
+            this.alpha = getActor().getAppearance().getAlpha();
+            getActor().getAppearance().setAlpha(0);
+        }
+        this.seconds = seconds;
+        this.delay = Timer.createTimerSeconds(seconds);
+    }
+    
     @Override
     public void onAttach()
     {

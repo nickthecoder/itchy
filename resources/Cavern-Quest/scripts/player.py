@@ -15,6 +15,12 @@ class Player(Movable) :
     def __init__(self) :
         super(Player,self).__init__()
         
+        self.addTag("player")
+        self.addTag("soft")
+        self.addTag("squashable")
+        self.addTag("hittable")
+        self.addTag("player")
+        
         self.inputLeft = Input.find("left")
         self.inputRight = Input.find("right")
         self.inputUp = Input.find("up")
@@ -37,14 +43,6 @@ class Player(Movable) :
         
         self.digging = None
 
-    def onBirth( self ) :
-        super(Player,self).__init__()
-
-        self.addTag("player")
-        self.addTag("soft")
-        self.addTag("squashable")
-        self.addTag("hittable")
-        self.addTag("player")
                     
     # The player's tick is special - it is called before all other objects on the grid.
     # This is so that it is easier to predict what will happen to objects near us.
@@ -55,7 +53,7 @@ class Player(Movable) :
         pass
 
     def playerTick( self ) :
-
+        
         if self.scrollResetting :
             self.resetScroll()
         elif self.inputScrollReset.pressed() :
@@ -151,7 +149,7 @@ class Player(Movable) :
 
 
         self.removeFromGrid()
-        self.deathEvent("hit")
+        self.deathEvent("die")
 
 
     def resetScroll( self ) :

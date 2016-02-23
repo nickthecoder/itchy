@@ -1531,27 +1531,12 @@ public class SceneDesigner implements MouseListener, KeyListener
 
             Role role;
 
-            if (stampActor.getAppearance().getPose() instanceof TextPose) {
-                actor = new Actor(stampActor.getAppearance().getPose());
-                if (stampActor.getCostume() == null) {
-                    role = new PlainRole();
-                } else {
-                    try {
-                        role = (Role) stampActor.getCostume().roleClassName.createInstance(this.editor.resources);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        return;
-                    }
-                }
-
-            } else {
-                actor = new Actor(currentCostume);
-                try {
-                    role = (Role) stampActor.getCostume().roleClassName.createInstance(this.editor.resources);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    return;
-                }
+            actor = new Actor(currentCostume);
+            try {
+                role = (Role) stampActor.getCostume().roleClassName.createInstance(this.editor.resources);
+            } catch (Exception e) {
+                e.printStackTrace();
+                return;
             }
 
             SceneDesignerRole sdRole = new SceneDesignerRole(role);
@@ -1841,6 +1826,7 @@ public class SceneDesigner implements MouseListener, KeyListener
                 newTextPose.setAlignment(textPose.getXAlignment(), textPose.getYAlignment());
                 newTextPose.setColor(new RGBA(textPose.getColor()));
                 toActor = new Actor(newTextPose);
+                toActor.setCostume(fromActor.getCostume());
             } else {
                 toActor = new Actor(fromActor.getCostume());
             }

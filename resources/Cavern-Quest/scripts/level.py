@@ -31,43 +31,13 @@ class Level(PlainSceneDirector) :
 
 
     def loading( self, scene ) :
-        # Load the glass stage on top of the current scene.
-        print "Loading the glass"
-        game.mergeScene("glass")
-
-
-    def onActivate( self ) :
-
-        print "onActivate level"
+        print "loading"
 
         # Record and playback the player's moves using the MacroRecorder and MacroPlayback
         self.inputSave = Input.find("save")
         self.inputLoad = Input.find("load")
-                
-        print "Found all inputs"
 
-        for player in game.findRoleByTag("player") :
-            self.player = player
-
-        if self.player :
-            game.layout.findView("grid").centerOn(self.player.actor)
-            game.layout.findView("plain").centerOn(self.player.actor)
-
-        self.macroRecorder = MacroRecorder()
-        self.macroRecorder.startRecording()
-
-        global replayInput
-        global recordedInput
-        if replayInput :
-            replayInput = False
-            self.macroRecorder.recorded = recordedInput
-            self.macroPlayback = MacroPlayback( recordedInput )
-
-        
-    def onLoaded( self ) :
-        
-        print "onLoaded"
-        
+        print "Calculating grid size"
         # Calculate the size of the grid needed to fit all of the actors
         stage = game.layout.findStage("grid")
 
@@ -99,23 +69,40 @@ class Level(PlainSceneDirector) :
 
             if y > maxY :
                 maxY = y
-
+                
         squareSize = game.director.squareSize
         across = math.floor( (maxX - minX) / squareSize) + 1
         down = math.floor( (maxY - minY) / squareSize) + 1
         
+        print "Creating grid"
         self.grid = Grid( squareSize, across, down, minX, minY )
         game.layout.findStage("grid").grid = self.grid
-        
-        # Add all of the GridRoles to the grid
-        i = stage.iterator()
-        while (i.hasNext()) :
-            actor = i.next()
-            role = actor.role
-            if isinstance( role, GridRole ) :
-                if not role.actor.isDead() :
-                    role.placeOnGrid( self.grid )
 
+        # Load the glass stage on top of the current scene.
+        print "Loading the glass"
+        game.mergeScene("glass")
+
+
+    def onActivate( self ) :
+    
+        print "onActivate"
+        
+        for player in game.findRoleByTag("player") :
+            self.player = player
+
+        if self.player :
+            game.layout.findView("grid").centerOn(self.player.actor)
+            game.layout.findView("plain").centerOn(self.player.actor)
+
+        self.macroRecorder = MacroRecorder()
+        self.macroRecorder.startRecording()
+
+        global replayInput
+        global recordedInput
+        if replayInput :
+            replayInput = False
+            self.macroRecorder.recorded = recordedInput
+            self.macroPlayback = MacroPlayback( recordedInput )
 
     def tick(self) :
 

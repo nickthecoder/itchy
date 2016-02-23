@@ -7,6 +7,7 @@ properties = ArrayList()
 class Soil(GridRole) :
 
     def onBirth(self):
+        super(Soil,self).onBirth()
         self.addTag("soil")
 
     def dig(self) :

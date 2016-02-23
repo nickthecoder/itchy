@@ -321,8 +321,6 @@ public final class Editor extends Game implements KeyListener
             if (this.resources.renamesPending()) {
                 messageBox = new MessageBox("Renaming costumes", "This may take a little while");
                 messageBox.showNow();
-            }
-            if (this.resources.renamesPending()) {
                 this.resources.renameResourcesInScenes();
             }
 

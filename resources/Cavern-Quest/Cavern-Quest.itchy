@@ -1,20 +1,20 @@
 <resources>
-  <game title="Pyrox" width="800" height="600" resizable="false" initialScene="cavernQuest" testScene="cavernQuest" directorClassName="director.py" authors="Nick Robinson. nickthecoder@gmail.com&#xA;&#xA;Original TRS-80 Game written by Barry Diller (c) 1982&#xA;"/>
+  <game title="Pyrox" width="800" height="600" resizable="false" initialScene="cavernQuest" testScene="test" directorClassName="director.py" authors="Nick Robinson. nickthecoder@gmail.com&#xA;&#xA;Original TRS-80 Game written by Barry Diller (c) 1982&#xA;"/>
   <spriteSheets>
     <spriteSheet name="cavernQuest" file="images/cavernQuest.png">
-      <sprite name="cq-dot" direction="0.0" offsetX="0" offsetY="0" x="80" y="160" width="3" height="6"/>
-      <sprite name="cq-moon" direction="0.0" offsetX="30" offsetY="36" x="0" y="204" width="66" height="72"/>
-      <sprite name="cq-nasty-a" direction="0.0" offsetX="18" offsetY="18" x="0" y="144" width="36" height="36"/>
-      <sprite name="cq-nasty-b" direction="0.0" offsetX="18" offsetY="18" x="48" y="144" width="36" height="36"/>
-      <sprite name="cq-player-a" direction="0.0" offsetX="18" offsetY="18" x="0" y="0" width="36" height="36"/>
-      <sprite name="cq-player-b" direction="0.0" offsetX="18" offsetY="18" x="0" y="48" width="36" height="36"/>
-      <sprite name="cq-rock" direction="0.0" offsetX="18" offsetY="18" x="0" y="96" width="36" height="36"/>
-      <sprite name="cq-rocket" direction="90.0" offsetX="78" offsetY="222" x="204" y="0" width="157" height="276"/>
-      <sprite name="cq-soil" direction="0.0" offsetX="18" offsetY="18" x="48" y="96" width="36" height="36"/>
-      <sprite name="cq-solid-a" direction="0.0" offsetX="18" offsetY="18" x="48" y="0" width="36" height="36"/>
-      <sprite name="cq-solid-b" direction="0.0" offsetX="18" offsetY="18" x="48" y="48" width="36" height="36"/>
       <sprite name="magma" direction="0.0" offsetX="18" offsetY="18" x="96" y="0" width="36" height="36"/>
+      <sprite name="moon" direction="0.0" offsetX="30" offsetY="36" x="0" y="204" width="66" height="72"/>
+      <sprite name="nasty-a" direction="0.0" offsetX="18" offsetY="18" x="0" y="144" width="36" height="36"/>
+      <sprite name="nasty-b" direction="0.0" offsetX="18" offsetY="18" x="48" y="144" width="36" height="36"/>
       <sprite name="ore" direction="0.0" offsetX="18" offsetY="18" x="144" y="0" width="36" height="36"/>
+      <sprite name="player-a" direction="0.0" offsetX="18" offsetY="18" x="0" y="0" width="36" height="36"/>
+      <sprite name="player-b" direction="0.0" offsetX="18" offsetY="18" x="0" y="48" width="36" height="36"/>
+      <sprite name="rock" direction="0.0" offsetX="18" offsetY="18" x="0" y="96" width="36" height="36"/>
+      <sprite name="rocket" direction="90.0" offsetX="78" offsetY="222" x="204" y="0" width="157" height="276"/>
+      <sprite name="soil" direction="0.0" offsetX="18" offsetY="18" x="48" y="96" width="36" height="36"/>
+      <sprite name="solid-a" direction="0.0" offsetX="18" offsetY="18" x="48" y="0" width="36" height="36"/>
+      <sprite name="solid-b" direction="0.0" offsetX="18" offsetY="18" x="48" y="48" width="36" height="36"/>
+      <sprite name="star" direction="0.0" offsetX="0" offsetY="0" x="80" y="160" width="3" height="6"/>
       <sprite name="surface-a1" direction="0.0" offsetX="18" offsetY="18" x="96" y="48" width="36" height="36"/>
       <sprite name="surface-a2" direction="0.0" offsetX="18" offsetY="18" x="96" y="96" width="36" height="36"/>
       <sprite name="surface-a3" direction="0.0" offsetX="18" offsetY="18" x="96" y="144" width="36" height="36"/>
@@ -30,9 +30,18 @@
   </fonts>
   <sounds>
     <sound name="appear" file="sound/appear.ogg"/>
+    <sound name="collect1" file="sound/collect1.ogg"/>
+    <sound name="collect2" file="sound/collect2.ogg"/>
+    <sound name="collect3" file="sound/collect3.ogg"/>
+    <sound name="die" file="sound/die.ogg"/>
+    <sound name="dig" file="sound/dig.ogg"/>
     <sound name="drawing" file="sound/drawing.ogg"/>
     <sound name="menu" file="sound/menu.ogg"/>
-    <sound name="nasty" file="sound/nasty.ogg"/>
+    <sound name="nasty1" file="sound/nasty1.ogg"/>
+    <sound name="nasty2" file="sound/nasty2.ogg"/>
+    <sound name="nasty3" file="sound/nasty3.ogg"/>
+    <sound name="nasty4" file="sound/nasty4.ogg"/>
+    <sound name="squash" file="sound/squash.ogg"/>
   </sounds>
   <animations>
     <animation name="enterShip">
@@ -50,16 +59,18 @@
     <animation name="nasty">
       <sequence sequence="true" loops="0">
         <frames pingPong="false" finishedMessage="play">
-          <frame pose="cq-nasty-a" delay="6" dx="0.0" dy="0.0"/>
-          <frame pose="cq-nasty-b" delay="6" dx="0.0" dy="0.0"/>
+          <frame pose="nasty-a" delay="20" dx="0.0" dy="0.0"/>
+        </frames>
+        <frames pingPong="false" finishedMessage="play">
+          <frame pose="nasty-b" delay="20" dx="0.0" dy="0.0"/>
         </frames>
       </sequence>
     </animation>
     <animation name="player">
       <sequence sequence="true" loops="0">
         <frames pingPong="false">
-          <frame pose="cq-player-a" delay="6" dx="0.0" dy="0.0"/>
-          <frame pose="cq-player-b" delay="6" dx="0.0" dy="0.0"/>
+          <frame pose="player-a" delay="6" dx="0.0" dy="0.0"/>
+          <frame pose="player-b" delay="6" dx="0.0" dy="0.0"/>
         </frames>
       </sequence>
     </animation>
@@ -68,49 +79,66 @@
         <alpha target="128.0" ticks="10" ease="linear"/>
       </sequence>
     </animation>
+    <animation name="squash">
+      <sequence sequence="true" loops="1">
+        <color targetColor="#c12000ff" ticks="10" ease="easeIn"/>
+      </sequence>
+    </animation>
   </animations>
   <costumes>
     <costume name="Computer" defaultZOrder="0" order="130" showInDesigner="true" role="reload.py">
       <string name="default">*</string>
+      <sound name="collect1" sound="collect1" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND"/>
+      <sound name="collect2" sound="collect2" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND"/>
+      <sound name="collect3" sound="collect3" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND"/>
       <font name="default" font="Computer" fontSize="20" color="#ffffffff" xAlignment="0.5" yAlignment="0.5" marginTop="0" marginRight="0" marginBottom="0" marginLeft="0"/>
-    </costume>
-    <costume name="cq-dot" defaultZOrder="0" order="120" showInDesigner="true">
-      <pose name="default" pose="cq-dot"/>
-    </costume>
-    <costume name="cq-moon" defaultZOrder="0" order="120" showInDesigner="true">
-      <pose name="default" pose="cq-moon"/>
-    </costume>
-    <costume name="cq-nasty" defaultZOrder="50" order="110" showInDesigner="true" role="nasty.py">
-      <pose name="default" pose="cq-nasty-a"/>
-      <animation name="default" animation="nasty"/>
-      <companion name="soil" companion="cq-soil"/>
-    </costume>
-    <costume name="cq-player" defaultZOrder="0" order="110" showInDesigner="true" role="player.py">
-      <pose name="default" pose="cq-player-a"/>
-      <animation name="default" animation="player"/>
-    </costume>
-    <costume name="cq-rock" defaultZOrder="0" order="115" showInDesigner="true" role="rock.py">
-      <pose name="default" pose="cq-rock"/>
-    </costume>
-    <costume name="cq-rocket" defaultZOrder="0" order="120" showInDesigner="true" role="rocket.py">
-      <pose name="default" pose="cq-rocket"/>
-      <animation name="launch" animation="launch"/>
-    </costume>
-    <costume name="cq-soil" defaultZOrder="0" order="110" showInDesigner="true" role="soil.py">
-      <pose name="default" pose="cq-soil"/>
-      <animation name="dig" animation="soilHit"/>
-    </costume>
-    <costume name="cq-solid-a" defaultZOrder="0" order="115" showInDesigner="true" role="wall.py">
-      <pose name="default" pose="cq-solid-a"/>
-    </costume>
-    <costume name="cq-solid-b" defaultZOrder="0" order="115" showInDesigner="true" role="wall.py">
-      <pose name="default" pose="cq-solid-b"/>
     </costume>
     <costume name="magma" defaultZOrder="0" order="130" showInDesigner="true" role="wall.py">
       <pose name="default" pose="magma"/>
     </costume>
+    <costume name="moon" defaultZOrder="0" order="120" showInDesigner="true">
+      <pose name="default" pose="moon"/>
+    </costume>
+    <costume name="nasty" defaultZOrder="50" order="110" showInDesigner="true" role="nasty.py">
+      <pose name="default" pose="nasty-a"/>
+      <sound name="play" sound="nasty3" priority="3" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="PLAY_BOTH"/>
+      <sound name="play" sound="nasty1" priority="3" fadeOutSeconds="1.0" fadeOnDeath="true" multipleRole="PLAY_BOTH"/>
+      <sound name="play" sound="nasty2" priority="3" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="PLAY_BOTH"/>
+      <sound name="play" sound="nasty4" priority="3" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="PLAY_BOTH"/>
+      <sound name="squash" sound="squash" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND"/>
+      <animation name="default" animation="nasty"/>
+      <animation name="squash" animation="squash"/>
+      <companion name="soil" companion="soil"/>
+    </costume>
     <costume name="ore" defaultZOrder="0" order="125" showInDesigner="true" role="ore.py">
       <pose name="default" pose="ore"/>
+      <sound name="collect" sound="appear" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND"/>
+    </costume>
+    <costume name="player" defaultZOrder="0" order="110" showInDesigner="true" role="player.py">
+      <pose name="default" pose="player-a"/>
+      <sound name="die" sound="die" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND"/>
+      <animation name="default" animation="player"/>
+    </costume>
+    <costume name="rock" defaultZOrder="0" order="115" showInDesigner="true" role="rock.py">
+      <pose name="default" pose="rock"/>
+    </costume>
+    <costume name="rocket" defaultZOrder="0" order="120" showInDesigner="true" role="rocket.py">
+      <pose name="default" pose="rocket"/>
+      <animation name="launch" animation="launch"/>
+    </costume>
+    <costume name="soil" defaultZOrder="0" order="110" showInDesigner="true" role="soil.py">
+      <pose name="default" pose="soil"/>
+      <sound name="dig" sound="dig" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND"/>
+      <animation name="dig" animation="soilHit"/>
+    </costume>
+    <costume name="solid-a" defaultZOrder="0" order="115" showInDesigner="true" role="wall.py">
+      <pose name="default" pose="solid-a"/>
+    </costume>
+    <costume name="solid-b" defaultZOrder="0" order="115" showInDesigner="true" role="wall.py">
+      <pose name="default" pose="solid-b"/>
+    </costume>
+    <costume name="star" defaultZOrder="0" order="120" showInDesigner="true">
+      <pose name="default" pose="star"/>
     </costume>
     <costume name="surface-a1" defaultZOrder="0" order="130" showInDesigner="true" role="wall.py">
       <pose name="default" pose="surface-a1"/>
@@ -134,6 +162,7 @@
   <scenes>
     <scene name="cavernQuest"/>
     <scene name="glass"/>
+    <scene name="menu"/>
     <scene name="test"/>
   </scenes>
   <inputs>
@@ -158,7 +187,7 @@
   </inputs>
   <layouts>
     <layout name="default" defaultLayer="grid">
-      <layer name="background" zOrder="0" x="0" y="0" width="800" height="600" viewClassName="uk.co.nickthecoder.itchy.RGBAView" stageClassName="uk.co.nickthecoder.itchy.ZOrderStage" stageConstraintClassName="uk.co.nickthecoder.itchy.NullStageConstraint">
+      <layer name="background" zOrder="0" x="0" y="-1" width="800" height="600" viewClassName="uk.co.nickthecoder.itchy.RGBAView" stageClassName="uk.co.nickthecoder.itchy.ZOrderStage" stageConstraintClassName="uk.co.nickthecoder.itchy.NullStageConstraint">
         <view color="#0b1100ff"/>
       </layer>
       <layer name="plain" zOrder="30" x="0" y="50" width="800" height="550" viewClassName="uk.co.nickthecoder.itchy.StageView" stageClassName="uk.co.nickthecoder.itchy.ZOrderStage" stageConstraintClassName="uk.co.nickthecoder.itchy.NullStageConstraint">

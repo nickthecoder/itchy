@@ -11,7 +11,7 @@ class Ore(GridRole) :
 
     def onInvaded(self, invader) :
         print "Collected ore"
-        self.deathEvent("ore")
+        self.deathEvent("collect")
         shipActor = Itchy.getGame().findActorById("ship")
         if shipActor :
             shipActor.role.addTag( "soft" )

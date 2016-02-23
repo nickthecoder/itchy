@@ -152,7 +152,7 @@ public class EditFramedAnimation extends EditSingleAnimation
             @Override
             public void action()
             {
-                framedAnimation.getFrames().remove(i);
+                framedAnimation.removeFrame(frame);
                 rebuildFrames();
             }
         });

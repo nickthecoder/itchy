@@ -420,7 +420,7 @@ public class Actor implements PropertySubject<Actor>
                 animation.setFinishedMessage(message);
             }
         }
-        
+
         if (animation != null) {
             this.setAnimation(animation, ae);
         }
@@ -745,6 +745,24 @@ public class Actor implements PropertySubject<Actor>
     {
         if (this.appearance.getWorldRectangle().overlaps(other.appearance.getWorldRectangle())) {
             return true;
+        }
+        return false;
+    }
+
+    public boolean isVisible()
+    {
+        if (this.getStage() == null) {
+            return false;
+        }
+        
+        Layout layout = Itchy.getGame().getLayout();
+        for (Layer layer : layout.getLayers()) {
+            Stage stage = layer.getStage();
+            if (stage == this.getStage()) {
+                if (this.getAppearance().visibleWithin(layer.getStageView().worldRect)) {
+                    return true;
+                }
+            }
         }
         return false;
     }

@@ -42,7 +42,7 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
         textProperties.add(new FontProperty<Appearance>("pose.font"));
         textProperties.add(new DoubleProperty<Appearance>("pose.fontSize").aliases("size"));
         textProperties.add(new StringProperty<Appearance>("pose.text"));
-        textProperties.add(new RGBAProperty<Appearance>("pose.color"));
+        textProperties.add(new RGBAProperty<Appearance>("pose.color").defaultValue(RGBA.WHITE));
         textProperties.add(new DoubleProperty<Appearance>("pose.xAlignment").defaultValue(0.5));
         textProperties.add(new DoubleProperty<Appearance>("pose.yAlignment").defaultValue(0.5));
         textProperties.addAll( properties );

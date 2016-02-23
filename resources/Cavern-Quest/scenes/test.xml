@@ -3,33 +3,80 @@
   <layer name="background"/>
   <layer name="plain"/>
   <layer name="grid">
-    <actor costume="cq-player" x="432.0" y="288.0"/>
-    <actor costume="cq-soil" x="288.0" y="252.0"/>
-    <actor costume="cq-soil" x="324.0" y="252.0"/>
-    <actor costume="cq-soil" x="324.0" y="288.0"/>
-    <actor costume="cq-soil" x="324.0" y="324.0"/>
-    <actor costume="cq-soil" x="288.0" y="324.0"/>
-    <actor costume="cq-soil" x="288.0" y="360.0"/>
-    <actor costume="cq-soil" x="216.0" y="396.0"/>
-    <actor costume="cq-soil" x="180.0" y="360.0"/>
-    <actor costume="cq-soil" x="252.0" y="360.0"/>
-    <actor costume="cq-soil" x="144.0" y="360.0"/>
-    <actor costume="cq-soil" x="144.0" y="324.0"/>
-    <actor costume="cq-soil" x="108.0" y="288.0"/>
-    <actor costume="cq-soil" x="144.0" y="252.0"/>
-    <actor costume="cq-soil" x="180.0" y="252.0"/>
-    <actor costume="cq-soil" x="216.0" y="216.0"/>
-    <actor costume="cq-soil" x="252.0" y="252.0"/>
-    <actor costume="cq-soil" x="36.0" y="468.0"/>
-    <actor costume="cq-soil" x="432.0" y="432.0"/>
-    <actor costume="cq-soil" x="504.0" y="144.0"/>
-    <actor costume="cq-soil" x="36.0" y="144.0"/>
-    <actor costume="cq-soil" x="180.0" y="396.0"/>
-    <actor costume="cq-soil" x="252.0" y="396.0"/>
-    <actor costume="cq-soil" x="252.0" y="216.0"/>
-    <actor costume="cq-soil" x="180.0" y="216.0"/>
-    <actor costume="cq-soil" x="108.0" y="252.0"/>
-    <actor costume="cq-soil" x="108.0" y="324.0"/>
-    <actor costume="cq-nasty" x="216.0" y="324.0" zOrder="50"/>
+    <actor costume="player" x="360.0" y="468.0"/>
+    <actor costume="soil" x="324.0" y="216.0"/>
+    <actor costume="soil" x="360.0" y="252.0"/>
+    <actor costume="soil" x="360.0" y="288.0"/>
+    <actor costume="soil" x="360.0" y="360.0"/>
+    <actor costume="soil" x="288.0" y="324.0"/>
+    <actor costume="soil" x="288.0" y="468.0"/>
+    <actor costume="soil" x="180.0" y="360.0"/>
+    <actor costume="soil" x="360.0" y="432.0"/>
+    <actor costume="soil" x="72.0" y="324.0"/>
+    <actor costume="soil" x="144.0" y="360.0"/>
+    <actor costume="soil" x="108.0" y="288.0"/>
+    <actor costume="soil" x="144.0" y="252.0"/>
+    <actor costume="soil" x="180.0" y="252.0"/>
+    <actor costume="soil" x="216.0" y="216.0"/>
+    <actor costume="soil" x="288.0" y="216.0"/>
+    <actor costume="soil" x="-360.0" y="576.0"/>
+    <actor costume="soil" x="756.0" y="540.0"/>
+    <actor costume="soil" x="828.0"/>
+    <actor costume="soil" x="-216.0" y="-108.0"/>
+    <actor costume="soil" x="324.0" y="468.0"/>
+    <actor costume="soil" x="360.0" y="396.0"/>
+    <actor costume="soil" x="252.0" y="216.0"/>
+    <actor costume="soil" x="180.0" y="216.0"/>
+    <actor costume="soil" x="108.0" y="252.0"/>
+    <actor costume="soil" x="108.0" y="324.0"/>
+    <actor costume="soil" x="252.0" y="468.0"/>
+    <actor costume="soil" x="216.0" y="468.0"/>
+    <actor costume="soil" x="180.0" y="432.0"/>
+    <actor costume="soil" x="180.0" y="396.0"/>
+    <actor costume="soil" x="504.0" y="288.0"/>
+    <actor costume="soil" x="540.0" y="288.0"/>
+    <actor costume="soil" x="576.0" y="288.0"/>
+    <actor costume="soil" x="612.0" y="288.0"/>
+    <actor costume="soil" x="612.0" y="252.0"/>
+    <actor costume="soil" x="576.0" y="252.0"/>
+    <actor costume="soil" x="540.0" y="252.0"/>
+    <actor costume="soil" x="504.0" y="252.0"/>
+    <actor costume="soil" x="504.0" y="216.0"/>
+    <actor costume="soil" x="540.0" y="216.0"/>
+    <actor costume="soil" x="576.0" y="216.0"/>
+    <actor costume="soil" x="612.0" y="216.0"/>
+    <actor costume="soil" x="612.0" y="180.0"/>
+    <actor costume="soil" x="576.0" y="180.0"/>
+    <actor costume="soil" x="540.0" y="180.0"/>
+    <actor costume="soil" x="504.0" y="180.0"/>
+    <text costume="Computer" x="432.0" y="360.0" font="Computer" fontSize="20.0" text="*">
+      <role amount="25"/>
+    </text>
+    <text costume="Computer" x="576.0" y="360.0" font="Computer" fontSize="20.0" text="***">
+      <role amount="75"/>
+    </text>
+    <text costume="Computer" x="504.0" y="360.0" font="Computer" fontSize="20.0" text="**">
+      <role amount="50"/>
+    </text>
+    <actor costume="ore" x="504.0" y="432.0"/>
+    <actor costume="rock" x="324.0" y="504.0"/>
+    <actor costume="rock" x="216.0" y="504.0"/>
+    <actor costume="soil" x="216.0" y="360.0"/>
+    <actor costume="soil" x="252.0" y="324.0"/>
+    <actor costume="soil" x="36.0" y="324.0"/>
+    <actor costume="soil" x="36.0" y="360.0"/>
+    <actor costume="soil" x="36.0" y="432.0"/>
+    <actor costume="soil" x="36.0" y="396.0"/>
+    <actor costume="soil" x="72.0" y="468.0"/>
+    <actor costume="soil" x="108.0" y="468.0"/>
+    <actor costume="soil" x="144.0" y="468.0"/>
+    <actor costume="rock" x="72.0" y="504.0"/>
+    <actor costume="rock" x="324.0" y="360.0"/>
+    <actor costume="soil" x="324.0" y="324.0"/>
+    <actor costume="soil" x="468.0" y="288.0"/>
+    <actor costume="nasty" x="324.0" y="396.0" activationDelay="0.4" zOrder="50"/>
+    <actor costume="nasty" x="288.0" y="288.0" zOrder="50"/>
+    <actor costume="nasty" x="72.0" y="396.0" activationDelay="0.1" zOrder="50"/>
+    <actor costume="nasty" x="216.0" y="288.0" activationDelay="0.3" zOrder="50"/>
   </layer>
 </scene>

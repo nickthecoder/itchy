@@ -50,6 +50,16 @@ public class FramedAnimation extends AbstractAnimation
             this.delay = frame.getDelay();
         }
     }
+    
+    public void removeFrame( Frame frame )
+    {
+        this.frames.remove(frame);
+    }
+
+    public void removeFrame( int index)
+    {
+        this.frames.remove(index);
+    }
 
     public FramedAnimation()
     {

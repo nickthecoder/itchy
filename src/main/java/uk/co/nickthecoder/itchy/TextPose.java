@@ -18,7 +18,7 @@ public class TextPose extends AbstractTextPose
     }
     public TextPose( String text, Font font, double fontSize )
     {
-        this(text, font, fontSize, new RGBA(0,0,0));
+        this(text, font, fontSize, new RGBA(255,255,255));
     }
 
     public TextPose( String text, Font font, double fontSize, RGBA color )

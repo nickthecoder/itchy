@@ -148,7 +148,7 @@ public class SceneWriter extends XMLWriter
         if ( costume != null ) {
             defaultRole = costume.roleClassName.name;
         }
-        if (defaultRole.equals(role.getClassName())) {
+        if (! defaultRole.equals(role.getClassName().name)) {
             this.attribute("role", role.getClassName().name);
         }
 

@@ -21,7 +21,12 @@ class GridRole(AbstractRole) :
         self.talkActor = None
 
         self.talkX = 70
-        self.talkY = 10        
+        self.talkY = 10       
+
+        
+    def onBirth(self) :
+        self.placeOnGrid( Itchy.getGame().sceneDirector.grid ) 
+
 
     def moveToWorld( self, x, y ) :
    

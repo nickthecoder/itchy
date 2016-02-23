@@ -98,19 +98,25 @@ class Nasty(Movable) :
     
     
     def hit( self, x, y ) :
+        self.removeTag( "hittable" )
+        self.removeTag( "squashable" )
         self.actor.moveTo( x, y )
-        self.deathEvent( "hit" )
+        self.deathEvent( "squash" )
     
 
     def onDeath( self ) :
         grid = self.square.grid
         super(Nasty,self).onDeath()
-        self.removeTag( "hittable" )
-        self.removeTag( "squashable" )
         
         soil = self.actor.createCompanion("soil").role
         soil.placeOnGrid( grid )
 
+    def onMessage( self, message ) :
+        if self.actor.isVisible() :
+            # Play the sound in time with the ey movements.
+            if message == "play" :
+                self.event("play")
+    
     
     # Boiler plate code - no need to change this
     def getProperties(self):
