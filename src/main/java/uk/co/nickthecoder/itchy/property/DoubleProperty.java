@@ -12,7 +12,7 @@ import uk.co.nickthecoder.itchy.util.BeanHelper;
 
 public class DoubleProperty<S> extends Property<S, Double>
 {
-    public double minValue = Double.MIN_VALUE;
+    public double minValue = -Double.MAX_VALUE;
     
     public double maxValue = Double.MAX_VALUE;
     

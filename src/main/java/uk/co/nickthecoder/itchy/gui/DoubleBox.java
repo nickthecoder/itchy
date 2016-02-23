@@ -16,7 +16,7 @@ public class DoubleBox extends EntryBox
 {
     public Format format;
 
-    public double minimumValue = Double.MIN_VALUE;
+    public double minimumValue = -Double.MAX_VALUE;
     public double maximumValue = Double.MAX_VALUE;
 
     public DoubleBox( double value )
@@ -95,7 +95,7 @@ public class DoubleBox extends EntryBox
     public boolean isValid()
     {
         try {
-            int number = Integer.parseInt(this.getText());
+            double number = Double.parseDouble(this.getText());
             return (number >= this.minimumValue) && (number <= this.maximumValue);
         } catch (Exception e) {
             return false;

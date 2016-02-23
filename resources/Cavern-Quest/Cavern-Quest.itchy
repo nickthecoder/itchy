@@ -1,5 +1,5 @@
 <resources>
-  <game title="Pyrox" width="800" height="600" resizable="false" initialScene="cavernQuest" testScene="test" directorClassName="director.py" authors="Nick Robinson. nickthecoder@gmail.com&#xA;&#xA;Original TRS-80 Game written by Barry Diller (c) 1982&#xA;"/>
+  <game title="Pyrox" width="800" height="600" resizable="false" initialScene="menu" testScene="test" directorClassName="director.py" authors="Nick Robinson. nickthecoder@gmail.com&#xA;&#xA;Original TRS-80 Game written by Barry Diller (c) 1982&#xA;"/>
   <spriteSheets>
     <spriteSheet name="cavernQuest" file="images/cavernQuest.png">
       <sprite name="magma" direction="0.0" offsetX="18" offsetY="18" x="96" y="0" width="36" height="36"/>
@@ -181,6 +181,7 @@
     <input name="scrollReset" keys="o,KP5,ctrl+RETURN"/>
     <input name="scrollRight" keys="END,KP6,ctrl+RIGHT"/>
     <input name="scrollUp" keys="PAGEUP,KP8,ctrl+UP"/>
+    <input name="start" keys="KEY_1,RETURN"/>
     <input name="up" keys="UP,SEMICOLON"/>
   </inputs>
   <layouts>

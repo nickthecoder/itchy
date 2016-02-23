@@ -1,14 +1,23 @@
-<scene name="menu" layout="default" sceneDirector="uk.co.nickthecoder.itchy.PlainSceneDirector" showMouse="true">
+<scene name="menu" layout="default" sceneDirector="menu.py" showMouse="true">
   <layer name="background"/>
-  <layer name="plain"/>
+  <layer name="plain">
+    <actor costume="ore" x="347.0" y="215.0"/>
+  </layer>
   <layer name="grid">
     <text x="396.0" y="540.0" font="Computer" fontSize="22.0" text="Cavern Quest"/>
     <text x="36.0" y="72.0" font="Computer" fontSize="22.0" text="Original TRS-80 Game by Barry Diller (c) 1982" xAlignment="0.0"/>
     <text x="36.0" y="36.0" font="Computer" fontSize="22.0" text="This version by Nick Robinson (c) 2016" xAlignment="0.0"/>
-    <text x="396.0" y="396.0" font="Computer" fontSize="22.0" text="1) . . . . Play Game"/>
-    <text x="396.0" y="288.0" font="Computer" fontSize="22.0" text="ctrl+S to save"/>
-    <text x="396.0" y="252.0" font="Computer" fontSize="22.0" text="ctrl+L to load"/>
+    <text x="396.0" y="432.0" font="Computer" fontSize="22.0" text="1) . . . . Play Game" role="uk.co.nickthecoder.itchy.role.SceneButton">
+      <role sceneName="cavernQuest"/>
+    </text>
     <text x="396.0" y="504.0" font="Computer" fontSize="22.0" text="==============="/>
-    <text x="396.0" y="216.0" font="Computer" fontSize="22.0" text="F5 to restart"/>
+    <text x="396.0" y="324.0" font="Computer" fontSize="22.0" text="F5 to restart"/>
+    <text x="396.0" y="360.0" font="Computer" fontSize="22.0" text="Arrow keys to move"/>
+    <text x="396.0" y="216.0" font="Computer" fontSize="22.0" text="Collect the Ore (    ) and return to your ship."/>
+    <text x="396.0" y="180.0" font="Computer" fontSize="22.0" text="Creatures can be killed by dropping rocks on them."/>
+    <actor costume="rocket" x="684.0" y="324.0" heading="90.0" direction="90.0" role="uk.co.nickthecoder.itchy.role.PlainRole"/>
+    <actor costume="player" x="684.0" y="288.0" role="uk.co.nickthecoder.itchy.role.PlainRole"/>
+    <actor costume="rock" x="540.0" y="144.0" role="uk.co.nickthecoder.itchy.role.PlainRole"/>
+    <actor costume="nasty" x="180.0" y="144.0" zOrder="50" role="uk.co.nickthecoder.itchy.role.PlainRole"/>
   </layer>
 </scene>
