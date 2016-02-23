@@ -14,10 +14,8 @@ class Reload(GridRole) :
 
 
     def onInvaded(self, invader) :
-        print "Reload"
         if invader.hasTag("player") :
             Itchy.getGame().sceneDirector.blasts += self.amount
-            print "collect" + str( self.amount / 25)
             self.deathEvent( "collect" + str( self.amount / 25) )
 
 

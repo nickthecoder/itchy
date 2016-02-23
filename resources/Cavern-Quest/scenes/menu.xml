@@ -1,7 +1,7 @@
 <scene name="menu" layout="default" sceneDirector="menu.py" showMouse="true">
   <layer name="background"/>
   <layer name="plain">
-    <actor costume="ore" x="347.0" y="215.0"/>
+    <actor costume="ore" x="347.0" y="215.0" role="uk.co.nickthecoder.itchy.role.PlainRole"/>
   </layer>
   <layer name="grid">
     <text x="396.0" y="540.0" font="Computer" fontSize="22.0" text="Cavern Quest"/>
@@ -14,10 +14,9 @@
     <text x="396.0" y="324.0" font="Computer" fontSize="22.0" text="F5 to restart"/>
     <text x="396.0" y="360.0" font="Computer" fontSize="22.0" text="Arrow keys to move"/>
     <text x="396.0" y="216.0" font="Computer" fontSize="22.0" text="Collect the Ore (    ) and return to your ship."/>
-    <text x="396.0" y="180.0" font="Computer" fontSize="22.0" text="Creatures can be killed by dropping rocks on them."/>
+    <text x="396.0" y="180.0" font="Computer" fontSize="22.0" text="Creatures (    ) can be killed by dropping rocks (    )  on them."/>
     <actor costume="rocket" x="684.0" y="324.0" heading="90.0" direction="90.0" role="uk.co.nickthecoder.itchy.role.PlainRole"/>
-    <actor costume="player" x="684.0" y="288.0" role="uk.co.nickthecoder.itchy.role.PlainRole"/>
-    <actor costume="rock" x="540.0" y="144.0" role="uk.co.nickthecoder.itchy.role.PlainRole"/>
-    <actor costume="nasty" x="180.0" y="144.0" zOrder="50" role="uk.co.nickthecoder.itchy.role.PlainRole"/>
+    <actor costume="rock" x="612.0" y="180.0" role="uk.co.nickthecoder.itchy.role.PlainRole"/>
+    <actor costume="nasty" x="180.0" y="180.0" zOrder="50" role="uk.co.nickthecoder.itchy.role.PlainRole"/>
   </layer>
 </scene>

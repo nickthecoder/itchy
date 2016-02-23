@@ -4,5 +4,6 @@
     <text x="705.0" y="581.0" font="Computer" fontSize="22.0" text="0" xAlignment="0.0" yAlignment="0.0" role="uk.co.nickthecoder.itchy.role.NumberValue">
       <role access="sceneDirector.blasts" errorValue="" nullValue="" updateInterval="0.0" quiet="false" formatPattern="0"/>
     </text>
+    <actor costume="black" y="600.0"/>
   </layer>
 </scene>

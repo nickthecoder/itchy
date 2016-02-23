@@ -11,6 +11,7 @@ class GridStage(ZOrderStage) :
         # Used to ensure that each GridRole is never ticked twice in one frame.
         # Each GridRole has a "lastTicked", and if this is == this.tickCount, then don't tick.
         self.tickCount = 0
+        self.startTimer = Timer.createTimerSeconds(4)
 
     # In this strategy game, we want PREDICTABLE behaviour, and the standard ZOrderStage doesn't give us that.
     # In ZOrderStage, the ticks are done in z-order, but we can't SEE the z-order. Instead, we shall ensure
@@ -18,6 +19,9 @@ class GridStage(ZOrderStage) :
     # Note that this stage can also house actors not within the grid, and we must call their ticks too.
     def tick(self) :
     
+        if not self.startTimer.isFinished() :
+            return
+            
         self.tickCount += 1
         
         # It is possible for the grid to change during this method (when transitioning from one

@@ -2,6 +2,7 @@
   <game title="Pyrox" width="800" height="600" resizable="false" initialScene="menu" testScene="test" directorClassName="director.py" authors="Nick Robinson. nickthecoder@gmail.com&#xA;&#xA;Original TRS-80 Game written by Barry Diller (c) 1982&#xA;"/>
   <spriteSheets>
     <spriteSheet name="cavernQuest" file="images/cavernQuest.png">
+      <sprite name="black" direction="0.0" offsetX="0" offsetY="0" x="144" y="192" width="36" height="36"/>
       <sprite name="magma" direction="0.0" offsetX="18" offsetY="18" x="96" y="0" width="36" height="36"/>
       <sprite name="moon" direction="0.0" offsetX="30" offsetY="36" x="0" y="204" width="66" height="72"/>
       <sprite name="nasty-a" direction="0.0" offsetX="18" offsetY="18" x="0" y="144" width="36" height="36"/>
@@ -86,6 +87,9 @@
     </animation>
   </animations>
   <costumes>
+    <costume name="black" defaultZOrder="0" order="0" showInDesigner="true" role="black.py">
+      <pose name="default" pose="black"/>
+    </costume>
     <costume name="magma" defaultZOrder="0" order="130" showInDesigner="true" role="wall.py">
       <pose name="default" pose="magma"/>
     </costume>
@@ -109,6 +113,7 @@
     </costume>
     <costume name="player" defaultZOrder="0" order="110" showInDesigner="true" role="player.py">
       <pose name="default" pose="player-a"/>
+      <sound name="default" sound="drawing" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND"/>
       <sound name="die" sound="die" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND"/>
       <animation name="default" animation="player"/>
     </costume>
@@ -193,7 +198,7 @@
         <view enableMouse="true"/>
       </layer>
       <layer name="grid" zOrder="50" x="0" y="50" width="800" height="550" viewClassName="uk.co.nickthecoder.itchy.StageView" stageClassName="gridStage.py" stageConstraintClassName="uk.co.nickthecoder.itchy.GridStageConstraint">
-        <view enableMouse="false"/>
+        <view enableMouse="true"/>
         <stageConstraint boxWidth="36" boxHeight="36"/>
       </layer>
     </layout>

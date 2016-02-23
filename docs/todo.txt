@@ -2,8 +2,7 @@ Current Tasks
 =============
 
 Cavern Quest :
-    Menu? Including sound
-    Draw the screen top left to bottom right when loading. Including sound.
+    Menu sound.
 
 Client/Server views.
 
