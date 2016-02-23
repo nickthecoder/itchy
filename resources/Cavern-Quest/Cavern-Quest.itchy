@@ -86,13 +86,6 @@
     </animation>
   </animations>
   <costumes>
-    <costume name="Computer" defaultZOrder="0" order="130" showInDesigner="true" role="reload.py">
-      <string name="default">*</string>
-      <sound name="collect1" sound="collect1" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND"/>
-      <sound name="collect2" sound="collect2" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND"/>
-      <sound name="collect3" sound="collect3" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND"/>
-      <font name="default" font="Computer" fontSize="20" color="#ffffffff" xAlignment="0.5" yAlignment="0.5" marginTop="0" marginRight="0" marginBottom="0" marginLeft="0"/>
-    </costume>
     <costume name="magma" defaultZOrder="0" order="130" showInDesigner="true" role="wall.py">
       <pose name="default" pose="magma"/>
     </costume>
@@ -119,6 +112,13 @@
       <sound name="die" sound="die" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND"/>
       <animation name="default" animation="player"/>
     </costume>
+    <costume name="reload" defaultZOrder="0" order="130" showInDesigner="true" role="reload.py">
+      <string name="default">*</string>
+      <sound name="collect1" sound="collect1" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND"/>
+      <sound name="collect2" sound="collect2" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND"/>
+      <sound name="collect3" sound="collect3" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND"/>
+      <font name="default" font="Computer" fontSize="20" color="#ffffffff" xAlignment="0.5" yAlignment="0.5" marginTop="0" marginRight="0" marginBottom="0" marginLeft="0"/>
+    </costume>
     <costume name="rock" defaultZOrder="0" order="115" showInDesigner="true" role="rock.py">
       <pose name="default" pose="rock"/>
     </costume>
@@ -136,6 +136,10 @@
     </costume>
     <costume name="solid-b" defaultZOrder="0" order="115" showInDesigner="true" role="wall.py">
       <pose name="default" pose="solid-b"/>
+    </costume>
+    <costume name="spawn" defaultZOrder="0" order="0" showInDesigner="true" role="spawn.py">
+      <string name="default">spawn</string>
+      <font name="default" font="Computer" fontSize="14" color="#ffffffff" xAlignment="0.5" yAlignment="0.5" marginTop="0" marginRight="0" marginBottom="0" marginLeft="0"/>
     </costume>
     <costume name="star" defaultZOrder="0" order="120" showInDesigner="true">
       <pose name="default" pose="star"/>

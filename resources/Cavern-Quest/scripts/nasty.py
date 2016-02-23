@@ -106,6 +106,7 @@ class Nasty(Movable) :
 
     def onDeath( self ) :
         grid = self.square.grid
+        Itchy.getGame().sceneDirector.respawn( self )
         super(Nasty,self).onDeath()
         
         soil = self.actor.createCompanion("soil").role

@@ -28,7 +28,7 @@ class Level(PlainSceneDirector) :
         
         self.macroRecorder = None
         self.macroPlayback = None
-
+        self.random = Random()
 
     def loading( self, scene ) :
         print "loading"
@@ -90,6 +90,12 @@ class Level(PlainSceneDirector) :
         for player in game.findRoleByTag("player") :
             self.player = player
 
+        print "Looking for spawn sites"
+        self.spawnLocations = []
+        for spawn in game.findRoleByTag("spawn") :
+            self.spawnLocations.append((spawn.actor.x, spawn.actor.y))
+            spawn.deathEvent("remove")
+            
         if self.player :
             game.layout.findView("grid").centerOn(self.player.actor)
             game.layout.findView("plain").centerOn(self.player.actor)
@@ -104,6 +110,21 @@ class Level(PlainSceneDirector) :
             self.macroRecorder.recorded = recordedInput
             self.macroPlayback = MacroPlayback( recordedInput )
 
+    def respawn( self, nasty ) :
+        if self.random.nextInt( 4 ) > 0 :
+            return
+            
+        for i in range(0,10) :
+            index = self.random.nextInt( len(self.spawnLocations) )
+            x = self.spawnLocations[index][0]
+            y = self.spawnLocations[index][1]
+            square = self.grid.getSquareByPixel(x, y)
+            if square.getOccupant() == self.grid.empty :
+                newNastyActor = nasty.actor.costume.createActor("default")
+                newNastyActor.moveTo(x,y)
+                Itchy.getGame().layout.findStage( "grid" ).add( newNastyActor )
+                return
+     
     def tick(self) :
 
         if self.player :
