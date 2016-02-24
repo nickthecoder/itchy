@@ -58,7 +58,6 @@ public class ColorAnimation extends NumericAnimation
     @Override
     public void start( Actor actor )
     {
-        super.start(actor);
         if (actor.getAppearance().getPose() instanceof TextPose) {
             this.startColor = ((TextPose) actor.getAppearance().getPose()).getColor();
         } else {
@@ -68,6 +67,7 @@ public class ColorAnimation extends NumericAnimation
         if (this.startColor == null) {
             this.startColor = new RGBA(128,128,128,0); // Transparent mid grey
         }
+        super.start(actor);
     }
 
     @Override
@@ -86,8 +86,7 @@ public class ColorAnimation extends NumericAnimation
             if (alpha == 0) {
                 actor.getAppearance().setColorize(null);
             } else {
-                actor.getAppearance().setColorize(color);
-                
+                actor.getAppearance().setColorize(color);                
             }
         }
     }

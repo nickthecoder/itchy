@@ -53,7 +53,7 @@ public abstract class NumericAnimation extends AbstractAnimation
         
         if ( this.ticks <= 0 ) {
             tick( actor, 1, 1 );
-            super.tick(actor);
+            //super.tick(actor);
         }
     }
 

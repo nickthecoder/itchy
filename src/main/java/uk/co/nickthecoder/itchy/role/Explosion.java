@@ -95,8 +95,11 @@ public class Explosion extends Companion
     public boolean dependent = false;
 
     public Fragments fragments;
+
+    public int zOrder;
     
     private int toSkip = 0;
+    
 
     /**
      * The equivalent of : <code>new Explosion(role.getActor())</code>
@@ -118,6 +121,7 @@ public class Explosion extends Companion
         super(actor);
         this.direction = actor.getAppearance().getDirection();
         this.lifeTicks = (int) (DEFAULT_LIFE_SECONDS * Itchy.frameRate.getFrameRate());
+        this.zOrder = actor.getZOrder();
     }
 
 
@@ -185,6 +189,7 @@ public class Explosion extends Companion
             projectileBuilder.offsetSidewards(random.nextDouble() * this.randomOffsetSidewards);
 
             Actor actor = projectileBuilder.create().getActor();
+            actor.setZOrder(this.zOrder);
             if (this.pose != null) {
                 actor.getAppearance().setPose(this.pose);
             }
@@ -419,6 +424,12 @@ public class Explosion extends Companion
             return getThis();
         }
 
+        public B zOrder( int zOrder )
+        {
+            this.companion.zOrder = zOrder;
+            return getThis();
+        }
+        
         /**
          * Each projectile is points in a random direction within the given range. Note, if this method is not called, but {@link #rotate}
          * is called, then the projectiles will point in the same direction as their heading.

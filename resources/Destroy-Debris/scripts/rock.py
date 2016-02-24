@@ -14,7 +14,9 @@ costumeProperties.add( IntegerProperty("pieces") )
 costumeProperties.add( IntegerProperty("points") )
 costumeProperties.add( IntegerProperty("strength") )
 costumeProperties.add( IntegerProperty("hitsRequired") )
- 
+costumeProperties.add( IntegerProperty("offsetX") )
+costumeProperties.add( IntegerProperty("offsetY") )
+
 game = Itchy.getGame()
 
 class Rock(Moving) :
@@ -70,6 +72,10 @@ class Rock(Moving) :
         pieces = self.actor.costume.costumeFeatures.pieces
         for i in range( 0, pieces ) :
             actor = self.getActor().createCompanion("fragment-"+`i + 1`)
+            ox = actor.costume.costumeFeatures.offsetX
+            oy = actor.costume.costumeFeatures.offsetY
+            actor.direction = self.actor.direction
+            actor.moveForwards( ox, oy )
             role = actor.getRole()
             
             explosiveness = bullet.actor.costume.costumeFeatures.explosiveness
@@ -86,8 +92,6 @@ class Rock(Moving) :
             role.vx = self.vx + dx
             role.vy = self.vy + dy
             
-            actor.setDirection( self.getActor().getAppearance().getDirection() )
-
 
 
         game.getSceneDirector().addRocks(-1)
@@ -115,7 +119,9 @@ class RockFeatures(CostumeFeatures) :
         self.pieces = 0
         self.points = 1    
         self.strength = 1    
-        self.hitsRequired = 1    
+        self.hitsRequired = 1  
+        self.offsetX = 0
+        self.offsetY = 0  
 
     # Boiler plate code - no need to change this
     def getProperties(self):

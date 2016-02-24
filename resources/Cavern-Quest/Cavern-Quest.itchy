@@ -24,7 +24,9 @@
       <sprite name="surface-b3" direction="0.0" offsetX="18" offsetY="18" x="144" y="144" width="36" height="36"/>
     </spriteSheet>
   </spriteSheets>
-  <poses/>
+  <poses>
+    <pose name="puff" filename="images/puff.png"/>
+  </poses>
   <ninePatches/>
   <fonts>
     <font name="Computer" file="fonts/dot_matrix/DOTMATRI.TTF"/>
@@ -51,10 +53,16 @@
         <move dx="0.0" dy="36.0" ticks="5" ease="linear"/>
       </sequence>
     </animation>
+    <animation name="flame1">
+      <sequence sequence="true" loops="1">
+        <color targetColor="#c40017ff" ticks="0" ease="linear"/>
+        <color targetColor="#f9e100ff" ticks="60" ease="easeIn"/>
+      </sequence>
+    </animation>
     <animation name="launch">
       <sequence sequence="true" loops="1">
         <delay ticks="60"/>
-        <move dx="0.0" dy="400.0" ticks="200" ease="easeInCubic"/>
+        <move dx="0.0" dy="400.0" ticks="200" ease="easeInCirc"/>
       </sequence>
     </animation>
     <animation name="nasty">
@@ -127,8 +135,10 @@
     <costume name="rock" defaultZOrder="0" order="115" showInDesigner="true" role="rock.py">
       <pose name="default" pose="rock"/>
     </costume>
-    <costume name="rocket" defaultZOrder="0" order="120" showInDesigner="true" role="rocket.py">
+    <costume name="rocket" defaultZOrder="50" order="120" showInDesigner="true" role="rocket.py">
       <pose name="default" pose="rocket"/>
+      <pose name="flame" pose="puff"/>
+      <animation name="flame" animation="flame1"/>
       <animation name="launch" animation="launch"/>
     </costume>
     <costume name="soil" defaultZOrder="0" order="110" showInDesigner="true" role="soil.py">

@@ -3,7 +3,7 @@
   <layer name="background"/>
   <layer name="plain"/>
   <layer name="grid">
-    <actor costume="player" x="576.0" y="468.0"/>
+    <actor costume="player" x="504.0" y="396.0"/>
     <actor costume="soil" x="324.0" y="216.0"/>
     <actor costume="soil" x="360.0" y="252.0"/>
     <actor costume="soil" x="360.0" y="288.0"/>
@@ -80,6 +80,7 @@
     <text costume="spawn" x="252.0" y="396.0" font="Computer" fontSize="14.0" text="spawn"/>
     <text costume="spawn" x="144.0" y="396.0" font="Computer" fontSize="14.0" text="spawn"/>
     <text costume="spawn" x="108.0" y="396.0" font="Computer" fontSize="14.0" text="spawn"/>
+    <actor costume="rocket" x="504.0" y="504.0" heading="90.0" zOrder="50" id="ship" direction="90.0"/>
     <actor costume="nasty" x="324.0" y="396.0" activationDelay="0.4" zOrder="50"/>
     <actor costume="nasty" x="288.0" y="288.0" zOrder="50"/>
     <actor costume="nasty" x="72.0" y="396.0" activationDelay="0.1" zOrder="50"/>

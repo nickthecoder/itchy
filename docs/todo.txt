@@ -1,10 +1,38 @@
 Current Tasks
 =============
 
-Cavern Quest :
-    Menu sound.
+Duplicate scene
+
+Implement change Layout in scene designer.
+    Rename a Layer needs to update all scenes (just like renaming a costume, but the owner needs to be the Layout).
+
+
+
+Make some gates need balloons 2, rocks 2, instead of 3, 3?
+    Or make a new balloons3?
+
+Look over all TODOs
+
+
+Debris-rocks - pieces have offsets, so they explode naturally.
+    Can I use Fragments class as this already does what I want?
+    Make Fragments an abstract base class, then implement :
+        RandomFragments - (What Fragments currently does)
+        FloodFillFragments - Flood fill based on transparency for the keyboard and "K"
+        ColorKeyFragments - for the others Pyrox rocks, or maybe Random with a fixed key (to ensure pieces are not too small).
+    Replace naff rocks
+    Get rotation and speed right, so the game is more playable. 
+
+BUGS
+====
+
+
+New Features
+============
+
 
 Client/Server views.
+--------------------
 
     Does it matter that the client is having to redraw all rotated images every time
         (because Appearance cannot cache the results if only one client actor is used).
@@ -56,33 +84,11 @@ Convolution matrix using images as the matrix.
         Extend the edges outwards, so there are no special cases
         Or, specify a 'Background' colour for outside the image.
         Or Crop
-
-Make some gates need balloons 2, rocks 2, instead of 3, 3?
-    Or make a new balloons3?
-
-Look over all TODOs
-
-Implement change Layout in scene designer.
-
-All resources.renameXXX needs to update the renamed collection, so that renameSubjectsInScenes will work. 
-    And do the same with other resources. Layouts, Fonts, ... ?
-
-
-BUGS
-====
-
-
-New Features
-============
-
 NinePatches in SpriteSheet
     Use it on the defaultGUI resources.
     Implement by allowing a Pose or a Filename for a NinePatch ?
     Or allow nine patches within sprite sheets?
 
-    
-Stickflick?
-    
 
 Undo/Redo for Z Order Reset
     Create a "Group" undo/redo, and add each zorder change to that group.
@@ -97,15 +103,6 @@ Ensure Scrollbars of Scroll do not obscure the contents?
 
 Cover-of-Darkness Menu : A street - you are driving the van. Park outside a house to start the level.
     Streets with lights on are "locked"
-
-Bean Animation. Change the value of a Role's property.
-
-Debris-rocks - pieces have offsets, so they explode naturally.
-    Can I use Fragments class as this already does what I want?
-    Make Fragments an abstract base class, then implement :
-        RandomFragments - (What Fragments currently does)
-        FloodFillFragments - Flood fill based on transparency for the keyboard and "K"
-        ColorKeyFragments - for the others Pyrox rocks, or maybe Random with a fixed key (to ensure pieces are not too small).
 
 
 Editor to test if resources have changed and prompt for confirm before exiting.

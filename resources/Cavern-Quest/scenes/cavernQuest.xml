@@ -1,5 +1,5 @@
 <scene name="cavernQuest" layout="default" sceneDirector="level.py" showMouse="true">
-  <sceneDirector blasts="100"/>
+  <sceneDirector blasts="100" respawnChance="4"/>
   <layer name="background"/>
   <layer name="plain">
     <actor costume="moon" x="408.0" y="504.0"/>
@@ -250,7 +250,6 @@
     <actor costume="soil" x="396.0" y="-288.0"/>
     <actor costume="rock" x="432.0" y="-288.0"/>
     <actor costume="soil" x="648.0" y="108.0"/>
-    <actor costume="soil" x="648.0" y="144.0"/>
     <actor costume="solid-b" x="180.0" y="-252.0"/>
     <actor costume="solid-b" x="108.0" y="-252.0"/>
     <actor costume="solid-b" x="36.0" y="-252.0"/>
@@ -1458,7 +1457,6 @@
     <actor costume="surface-a1" x="-612.0" y="324.0"/>
     <actor costume="surface-b1" x="-576.0" y="324.0"/>
     <actor costume="solid-a" x="-684.0" y="324.0"/>
-    <actor costume="rocket" x="648.0" y="216.0" heading="90.0" id="ship" direction="90.0"/>
     <actor costume="player" x="648.0" y="180.0"/>
     <actor costume="surface-b1" x="684.0" y="180.0"/>
     <actor costume="surface-a1" x="612.0" y="180.0"/>
@@ -1498,6 +1496,8 @@
     <text costume="spawn" x="432.0" y="-828.0" font="Computer" fontSize="14.0" text="spawn"/>
     <text costume="spawn" x="216.0" y="180.0" font="Computer" fontSize="14.0" text="spawn"/>
     <text costume="spawn" x="-180.0" y="-864.0" font="Computer" fontSize="14.0" text="spawn"/>
+    <actor costume="soil" x="648.0" y="144.0"/>
+    <actor costume="rocket" x="648.0" y="216.0" heading="90.0" zOrder="50" id="ship" direction="90.0"/>
     <actor costume="nasty" x="432.0" y="-180.0" zOrder="50"/>
     <actor costume="nasty" x="252.0" y="216.0" zOrder="50"/>
     <actor costume="nasty" x="-504.0" y="252.0" zOrder="50"/>
