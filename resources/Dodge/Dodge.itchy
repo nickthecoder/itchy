@@ -1,0 +1,63 @@
+<resources>
+  <game title="Dodge 'Em" width="800" height="600" resizable="false" initialScene="menu" testScene="play" directorClassName="dodge.py" authors="Nick Robinson&#xA;"/>
+  <spriteSheets>
+    <spriteSheet name="graphics" file="images/graphics.png">
+      <sprite name="enemy-1" direction="0.0" offsetX="50" offsetY="10" x="205" y="116" width="100" height="20"/>
+      <sprite name="enemy-2" direction="0.0" offsetX="10" offsetY="50" x="205" y="116" width="20" height="100"/>
+      <sprite name="enemy-3" direction="0.0" offsetX="30" offsetY="20" x="205" y="116" width="60" height="40"/>
+      <sprite name="enemy-4" direction="0.0" offsetX="20" offsetY="30" x="205" y="116" width="40" height="60"/>
+      <sprite name="player-1" direction="0.0" offsetX="24" offsetY="24" x="450" y="354" width="48" height="48"/>
+      <sprite name="wall-h" direction="0.0" offsetX="400" offsetY="25" x="0" y="0" width="800" height="50"/>
+      <sprite name="wall-v" direction="0.0" offsetX="25" offsetY="300" x="0" y="0" width="50" height="600"/>
+    </spriteSheet>
+  </spriteSheets>
+  <poses/>
+  <ninePatches/>
+  <fonts>
+    <font name="vera" file="fonts/Vera/Vera.ttf"/>
+    <font name="veraBold" file="fonts/Vera/VeraBd.ttf"/>
+  </fonts>
+  <sounds/>
+  <animations/>
+  <costumes>
+    <costume name="enemy" defaultZOrder="60" order="60" showInDesigner="true" role="enemy.py"/>
+    <costume name="enemy-1" defaultZOrder="60" order="60" showInDesigner="true" role="enemy.py">
+      <pose name="default" pose="enemy-1"/>
+    </costume>
+    <costume name="enemy-2" defaultZOrder="60" order="60" showInDesigner="true" role="enemy.py">
+      <pose name="default" pose="enemy-2"/>
+    </costume>
+    <costume name="enemy-3" defaultZOrder="60" order="60" showInDesigner="true" role="enemy.py">
+      <pose name="default" pose="enemy-3"/>
+    </costume>
+    <costume name="enemy-4" defaultZOrder="60" order="60" showInDesigner="true" role="enemy.py">
+      <pose name="default" pose="enemy-4"/>
+    </costume>
+    <costume name="player" defaultZOrder="50" order="50" showInDesigner="true" role="player.py">
+      <pose name="default" pose="player-1"/>
+    </costume>
+    <costume name="wall-h" defaultZOrder="10" order="10" showInDesigner="true" role="wall.py">
+      <pose name="default" pose="wall-h"/>
+    </costume>
+    <costume name="wall-v" defaultZOrder="10" order="10" showInDesigner="true" role="wall.py">
+      <pose name="default" pose="wall-v"/>
+    </costume>
+  </costumes>
+  <scenes>
+    <scene name="menu"/>
+    <scene name="play"/>
+  </scenes>
+  <inputs>
+    <input name="exit" keys="click+ESCAPE"/>
+  </inputs>
+  <layouts>
+    <layout name="default" defaultLayer="background">
+      <layer name="background" zOrder="0" x="0" y="0" width="800" height="600" viewClassName="uk.co.nickthecoder.itchy.RGBAView" stageClassName="uk.co.nickthecoder.itchy.ZOrderStage" stageConstraintClassName="uk.co.nickthecoder.itchy.NullStageConstraint">
+        <view color="#002900ff"/>
+      </layer>
+      <layer name="main" zOrder="50" x="0" y="0" width="800" height="600" viewClassName="uk.co.nickthecoder.itchy.StageView" stageClassName="uk.co.nickthecoder.itchy.ZOrderStage" stageConstraintClassName="uk.co.nickthecoder.itchy.NullStageConstraint">
+        <view enableMouse="true"/>
+      </layer>
+    </layout>
+  </layouts>
+</resources>
