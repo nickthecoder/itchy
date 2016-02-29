@@ -1,0 +1,12 @@
+<scene name="glass" layout="glass" sceneDirector="uk.co.nickthecoder.itchy.PlainSceneDirector" showMouse="true">
+  <layer name="glass">
+    <text x="389.0" y="329.0" id="start" font="veraBold" fontSize="43.0" text="Click HERE to Start" yAlignment="0.0" role="uk.co.nickthecoder.itchy.role.MessageButton" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+      <role message="start"/>
+      <makeup dx="4" dy="-4"/>
+    </text>
+    <text x="400.0" y="600.0" font="veraBold" fontSize="43.0" text="0" yAlignment="0.0" role="uk.co.nickthecoder.itchy.role.NumberValue" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+      <role access="sceneDirector.score" errorValue="" nullValue="" updateInterval="0.0" quiet="false" formatPattern="0"/>
+      <makeup dx="4" dy="-4"/>
+    </text>
+  </layer>
+</scene>

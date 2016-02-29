@@ -1,0 +1,20 @@
+<scene name="a" layout="default" sceneDirector="play.py" showMouse="true">
+  <sceneDirector speedUp="0.1"/>
+  <layer name="background"/>
+  <layer name="main">
+    <actor costume="wall-v" x="25.0" y="300.0" zOrder="10"/>
+    <actor costume="wall-v" x="775.0" y="300.0" zOrder="10"/>
+    <actor costume="wall-h" x="400.0" y="25.0" zOrder="10"/>
+    <actor costume="wall-h" x="400.0" y="575.0" zOrder="10"/>
+    <actor costume="player" x="417.0" y="303.0" zOrder="50" scale="2.0"/>
+    <actor costume="enemy-3" x="170.0" y="431.0" zOrder="60" scale="2.0">
+      <role dx="4.0" dy="4.0"/>
+    </actor>
+    <actor costume="enemy-1" x="198.0" y="154.0" zOrder="60" scale="2.0">
+      <role dx="4.0" dy="4.0"/>
+    </actor>
+    <actor costume="enemy-2" x="618.0" y="193.0" zOrder="60" scale="2.0">
+      <role dx="4.0" dy="4.0"/>
+    </actor>
+  </layer>
+</scene>

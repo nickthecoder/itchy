@@ -44,6 +44,10 @@
     </costume>
   </costumes>
   <scenes>
+    <scene name="a"/>
+    <scene name="b"/>
+    <scene name="c"/>
+    <scene name="glass"/>
     <scene name="menu"/>
     <scene name="play"/>
   </scenes>
@@ -56,6 +60,11 @@
         <view color="#002900ff"/>
       </layer>
       <layer name="main" zOrder="50" x="0" y="0" width="800" height="600" viewClassName="uk.co.nickthecoder.itchy.StageView" stageClassName="uk.co.nickthecoder.itchy.ZOrderStage" stageConstraintClassName="uk.co.nickthecoder.itchy.NullStageConstraint">
+        <view enableMouse="true"/>
+      </layer>
+    </layout>
+    <layout name="glass" defaultLayer="glass">
+      <layer name="glass" zOrder="0" x="0" y="0" width="800" height="600" viewClassName="uk.co.nickthecoder.itchy.StageView" stageClassName="uk.co.nickthecoder.itchy.ZOrderStage" stageConstraintClassName="uk.co.nickthecoder.itchy.NullStageConstraint">
         <view enableMouse="true"/>
       </layer>
     </layout>
