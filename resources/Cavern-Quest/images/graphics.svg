@@ -14,20 +14,20 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.5 r10040"
-   sodipodi:docname="New document 1">
+   sodipodi:docname="graphics.svg">
   <defs
      id="defs4">
     <filter
        inkscape:collect="always"
-       id="filter3755"
-       x="-0.10171177"
-       width="1.2034235"
-       y="-0.095984989"
-       height="1.19197">
+       id="filter3778"
+       x="-0.1947495"
+       width="1.389499"
+       y="-0.21082602"
+       height="1.421652">
       <feGaussianBlur
          inkscape:collect="always"
-         stdDeviation="11.885464"
-         id="feGaussianBlur3757" />
+         stdDeviation="26.432929"
+         id="feGaussianBlur3780" />
     </filter>
   </defs>
   <sodipodi:namedview
@@ -66,21 +66,24 @@
      id="layer1">
     <path
        sodipodi:type="star"
-       style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;filter:url(#filter3755)"
+       style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;filter:url(#filter3778)"
        id="path2985"
        sodipodi:sides="6"
        sodipodi:cx="211.42857"
        sodipodi:cy="400.93362"
-       sodipodi:r1="180.02267"
-       sodipodi:r2="151.12489"
-       sodipodi:arg1="0.62762942"
-       sodipodi:arg2="1.1694689"
+       sodipodi:r1="137.22429"
+       sodipodi:r2="85.925665"
+       sodipodi:arg1="0.62267863"
+       sodipodi:arg2="1.1634661"
        inkscape:flatsided="false"
        inkscape:rounded="0"
        inkscape:randomized="0.252"
-       d="M 376.90861,471.50636 255.482,533.14562 158.81979,540.60165 147.05342,563.32115 82.940387,487.27993 56.874452,347.7279 51.161804,292.55713 191.01824,289.0427 l 28.34637,-26.62856 75.28286,43.09808 68.91238,29.39616 -23.81863,97.81912 z"
+       d="m 306.88489,460.94182 -53.81519,1.80166 -55.85741,109.08596 -21.41984,-81.55255 -90.087897,-51.36202 55.039437,-17.93041 -21.93787,-73.80634 54.9552,-36.87068 55.85741,-39.92492 48.82739,86.98003 58.95192,14.01235 -37.26378,17.34 z"
        inkscape:transform-center-x="2.7235756"
        inkscape:transform-center-y="-6.407736"
-       transform="matrix(0.23598683,0,0,0.23598683,172.34334,336.1815)" />
+       transform="matrix(0.23598683,0,0,0.23598683,172.34334,336.1815)"
+       inkscape:export-filename="/home/nick/server/projects/itchy/resources/Cavern-Quest/images/puff.png"
+       inkscape:export-xdpi="29.65"
+       inkscape:export-ydpi="29.65" />
   </g>
 </svg>
