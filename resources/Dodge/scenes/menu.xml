@@ -1,8 +1,8 @@
 <scene name="menu" layout="default" sceneDirector="uk.co.nickthecoder.itchy.PlainSceneDirector" showMouse="true">
   <layer name="background"/>
   <layer name="main">
-    <text x="320.0" y="186.0" font="veraBold" fontSize="64.0" text="Play" xAlignment="0.0" yAlignment="0.0" role="uk.co.nickthecoder.itchy.role.SceneButton" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
-      <role sceneName="play"/>
+    <text x="65.0" y="168.0" font="veraBold" fontSize="64.0" text="a" xAlignment="0.0" yAlignment="0.0" role="uk.co.nickthecoder.itchy.role.SceneButton" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+      <role sceneName="a"/>
       <makeup dx="4" dy="-4"/>
     </text>
     <text x="679.0" y="64.0" font="veraBold" fontSize="43.0" text="Quit" xAlignment="0.0" yAlignment="0.0" role="uk.co.nickthecoder.itchy.role.QuitButton" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
@@ -22,6 +22,18 @@
     </text>
     <text x="88.0" y="303.0" font="veraBold" fontSize="32.0" text="Don't touch the walls" xAlignment="0.0" yAlignment="0.0" role="uk.co.nickthecoder.itchy.role.SceneButton" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <role sceneName="play"/>
+      <makeup dx="4" dy="-4"/>
+    </text>
+    <text x="209.0" y="239.0" font="veraBold" fontSize="64.0" text="c" xAlignment="0.0" yAlignment="0.0" role="uk.co.nickthecoder.itchy.role.SceneButton" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+      <role sceneName="c"/>
+      <makeup dx="4" dy="-4"/>
+    </text>
+    <text x="135.0" y="215.0" font="veraBold" fontSize="64.0" text="b" xAlignment="0.0" yAlignment="0.0" role="uk.co.nickthecoder.itchy.role.SceneButton" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+      <role sceneName="b"/>
+      <makeup dx="4" dy="-4"/>
+    </text>
+    <text x="271.0" y="211.0" font="veraBold" fontSize="64.0" text="d" xAlignment="0.0" yAlignment="0.0" role="uk.co.nickthecoder.itchy.role.SceneButton" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+      <role sceneName="d"/>
       <makeup dx="4" dy="-4"/>
     </text>
   </layer>

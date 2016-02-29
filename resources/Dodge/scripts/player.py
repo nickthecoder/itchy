@@ -13,11 +13,11 @@ class Player(AbstractRole) :
     def tick(self):
         play = Itchy.getGame().sceneDirector
         
+        self.actor.moveTo( Itchy.getMouseX(), 600-Itchy.getMouseY() )
+
         if not play.playing :
             return
-            
-        self.actor.moveTo( Itchy.getMouseX(), 600-Itchy.getMouseY() )
-            
+                        
         if self.collided( "deadly" ) :
             play.stopPlaying()
 
@@ -29,7 +29,6 @@ class Player(AbstractRole) :
             self.deathEvent( "dead" )
                 
     def createCostumeFeatures(self,costume) :
-        print "createCostumeFeatures"
         return PlayerFeatures(costume)
         
     # Boiler plate code - no need to change this

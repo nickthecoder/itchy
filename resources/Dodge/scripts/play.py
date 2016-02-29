@@ -7,7 +7,7 @@ class Play(PlainSceneDirector) :
 
     def __init__(self) :
         self.speedUp = 0 # How much to add to enemy speed each time they bounce.
-        self.playing = True # Set to false when the player hits something.
+        self.playing = False # Set to false when the player hits something.
         self.score = 0
     
     def onActivate(self) :
@@ -24,6 +24,15 @@ class Play(PlainSceneDirector) :
         self.playing = False
         self.speedUp = 0
 
+
+    def loading( self, scene ) :
+        game.mergeScene("glass")
+
+
+    def onMessage( self, message ) :
+        if message == "start" :
+            self.playing = True
+        Itchy.getGame().findActorById( "start" ).deathEvent("clicked")
 
     # Boiler plate code - no need to change this
     def getProperties(self):
