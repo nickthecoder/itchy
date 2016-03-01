@@ -22,6 +22,8 @@ Destroy-Debris
 BUGS
 ====
 
+Scroll in the SceneDesigner messes up the background position.
+
 Reload a Role does NOT update the costume's CostumeFeatures which use it.
 
 Reload a Role from the editor trashes the Role's properties.

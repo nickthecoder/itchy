@@ -2,21 +2,17 @@
   <sceneDirector speedUp="0.02"/>
   <layer name="background"/>
   <layer name="main">
-    <actor costume="wall-v" x="25.0" y="300.0" zOrder="10"/>
-    <actor costume="wall-v" x="775.0" y="300.0" zOrder="10"/>
-    <actor costume="wall-h" x="400.0" y="25.0" zOrder="10"/>
-    <actor costume="wall-h" x="400.0" y="575.0" zOrder="10"/>
     <actor costume="player" x="417.0" y="303.0" zOrder="50" scale="2.0">
       <role maxSpeed="10.0"/>
     </actor>
     <actor costume="ball-2" x="184.0" y="172.0" zOrder="70">
-      <role dx="4.0" dy="4.0" rotation="0.0"/>
+      <role vx="4.0" vy="4.0" rotation="0.0"/>
     </actor>
     <actor costume="ball-1" x="684.0" y="470.0" zOrder="70">
-      <role dx="-4.0" dy="-4.0" rotation="0.0"/>
+      <role vx="-4.0" vy="-4.0" rotation="0.0"/>
     </actor>
     <actor costume="ball-1" x="422.0" y="189.0" zOrder="70">
-      <role dx="-4.0" dy="-4.0" rotation="0.0"/>
+      <role vx="-4.0" vy="-4.0" rotation="0.0"/>
     </actor>
     <actor costume="ball-4" x="180.0" y="413.0" zOrder="70">
       <role vx="1.0" vy="1.0" rotation="0.0"/>

@@ -1,18 +1,27 @@
 <scene name="glass" layout="glass" sceneDirector="uk.co.nickthecoder.itchy.PlainSceneDirector" showMouse="true">
+  <layer name="walls">
+    <actor costume="wall-h" x="400.0" y="575.0" zOrder="10"/>
+    <actor costume="wall-h" x="400.0" y="25.0" zOrder="10"/>
+    <actor costume="wall-v" x="775.0" y="300.0" zOrder="10"/>
+    <actor costume="wall-v" x="25.0" y="300.0" zOrder="10"/>
+  </layer>
   <layer name="glass">
     <text x="389.0" y="329.0" id="start" font="veraBold" fontSize="43.0" text="Click HERE to Start" yAlignment="0.0" role="uk.co.nickthecoder.itchy.role.MessageButton" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <role message="start"/>
       <makeup dx="4" dy="-4"/>
     </text>
-    <text x="400.0" y="600.0" font="veraBold" fontSize="43.0" text="0" yAlignment="0.0" role="uk.co.nickthecoder.itchy.role.NumberValue" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+    <text x="400.0" y="600.0" zOrder="50" font="veraBold" fontSize="43.0" text="0" yAlignment="0.0" role="uk.co.nickthecoder.itchy.role.NumberValue" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <role access="sceneDirector.score" errorValue="" nullValue="" updateInterval="0.0" quiet="false" formatPattern="0"/>
       <makeup dx="4" dy="-4"/>
     </text>
-    <text x="439.0" y="37.0" font="vera" fontSize="22.0" text="0" xAlignment="0.0" yAlignment="0.0" role="uk.co.nickthecoder.itchy.role.NumberValue" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+    <text x="323.0" y="38.0" zOrder="50" font="vera" fontSize="22.0" text="0" xAlignment="0.0" yAlignment="0.0" role="uk.co.nickthecoder.itchy.role.NumberValue" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <role access="sceneDirector.highScore" errorValue="" nullValue="" updateInterval="0.0" quiet="false" formatPattern="0"/>
       <makeup dx="2" dy="-2"/>
     </text>
-    <text x="367.0" y="38.0" font="vera" fontSize="22.0" text="Highscore :" yAlignment="0.0" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+    <text x="224.0" y="40.0" zOrder="50" font="vera" fontSize="22.0" text="Highscore :" yAlignment="0.0" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+      <makeup dx="2" dy="-2"/>
+    </text>
+    <text x="496.0" y="39.0" zOrder="50" font="vera" fontSize="22.0" text="(ctrl+shift+r to reset)" yAlignment="0.0" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <makeup dx="2" dy="-2"/>
     </text>
   </layer>

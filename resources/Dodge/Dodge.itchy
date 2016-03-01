@@ -75,6 +75,7 @@
   </scenes>
   <inputs>
     <input name="exit" keys="click+ESCAPE"/>
+    <input name="reset" keys="shift+ctrl+r"/>
     <input name="restart" keys="F5,RETURN"/>
   </inputs>
   <layouts>
@@ -87,7 +88,10 @@
       </layer>
     </layout>
     <layout name="glass" defaultLayer="glass">
-      <layer name="glass" zOrder="0" x="0" y="0" width="800" height="600" viewClassName="uk.co.nickthecoder.itchy.StageView" stageClassName="uk.co.nickthecoder.itchy.ZOrderStage" stageConstraintClassName="uk.co.nickthecoder.itchy.NullStageConstraint">
+      <layer name="walls" zOrder="10" x="0" y="0" width="800" height="600" viewClassName="uk.co.nickthecoder.itchy.StageView" stageClassName="uk.co.nickthecoder.itchy.ZOrderStage" stageConstraintClassName="uk.co.nickthecoder.itchy.NullStageConstraint">
+        <view enableMouse="false"/>
+      </layer>
+      <layer name="glass" zOrder="100" x="0" y="0" width="800" height="600" viewClassName="uk.co.nickthecoder.itchy.StageView" stageClassName="uk.co.nickthecoder.itchy.ZOrderStage" stageConstraintClassName="uk.co.nickthecoder.itchy.NullStageConstraint">
         <view enableMouse="true"/>
       </layer>
     </layout>

@@ -18,6 +18,7 @@ import uk.co.nickthecoder.itchy.ImagePose;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.KeyListener;
 import uk.co.nickthecoder.itchy.Layer;
+import uk.co.nickthecoder.itchy.Layout;
 import uk.co.nickthecoder.itchy.MouseListener;
 import uk.co.nickthecoder.itchy.Pose;
 import uk.co.nickthecoder.itchy.RGBAView;
@@ -102,23 +103,29 @@ public class SceneDesigner implements MouseListener, KeyListener
 
     private Scene scene;
 
-    private GenericCompoundView<View> designViews;
-
     private Layer currentLayer;
 
     private StageView currentStageView;
+
+    private final Rect sceneRect;
 
     private ZOrderStage overlayStage;
 
     private StageView overlayView;
 
+    private Layer overlayLayer;
+
     private RGBAView background;
 
-    private final Rect sceneRect;
+    private Layer backgroundLayer;
 
     private RootContainer toolbox;
 
+    private Layer toolboxLayer;
+
     private RootContainer toolbar;
+
+    private Layer toolbarLayer;
 
     private ButtonGroup costumeButtonGroup;
 
@@ -165,6 +172,8 @@ public class SceneDesigner implements MouseListener, KeyListener
 
     private ClassNameBox roleClassName;
 
+    private List<Layer> designLayers = new ArrayList<Layer>();
+
     /**
      * Has anything changed since onSave was last called?
      */
@@ -193,20 +202,20 @@ public class SceneDesigner implements MouseListener, KeyListener
 
     public void go()
     {
+        Rect wholeRect = new Rect(0, 0, editor.getWidth(), editor.getHeight());
+
         editor.root.hide();
 
         background = new RGBAView();
-        editor.getViews().add(background);
+        backgroundLayer = new Layer(background);
+        backgroundLayer.zOrder = -100;
+        backgroundLayer.position = wholeRect;
+        backgroundLayer.setName("sd_background");
+        editor.getLayout().addLayer(backgroundLayer);
 
         createToolbar();
 
-        Rect wholeRect = new Rect(0, 0, editor.getWidth(), editor.getHeight());
-        designViews = new GenericCompoundView<View>("designViews", wholeRect);
-
-        Rect editRect = new Rect(0, toolbar.getHeight(),
-            editor.getWidth(), editor.getHeight() - toolbar.getHeight());
-
-        editor.getViews().add(designViews);
+        Rect editRect = new Rect(0, toolbar.getHeight(), editor.getWidth(), editor.getHeight() - toolbar.getHeight());
 
         createToolbox();
 
@@ -219,14 +228,22 @@ public class SceneDesigner implements MouseListener, KeyListener
                 currentLayer = layer;
                 currentStageView = stageView;
             }
-            designViews.add(view);
+            Layer designLayer = new Layer(view);
+            this.designLayers.add(designLayer);
+            designLayer.name = layer.name;
+            designLayer.zOrder = layer.zOrder;
+            editor.getLayout().addLayer(designLayer);
         }
 
         overlayStage = new ZOrderStage();
         editor.getStages().add(overlayStage);
 
-        overlayView = new StageView(editRect, overlayStage);
-        editor.getViews().add(overlayView);
+        overlayView = new StageView(new Rect(editRect), overlayStage);
+        overlayLayer = new Layer(overlayView);
+        overlayLayer.zOrder = Integer.MAX_VALUE;
+        overlayLayer.position = wholeRect;
+        overlayLayer.name = "sd_overlay";
+        editor.getLayout().addLayer(overlayLayer);
 
         editor.addMouseListener(this);
         editor.addKeyListener(this);
@@ -281,10 +298,13 @@ public class SceneDesigner implements MouseListener, KeyListener
         editor.getStages().clear();
         overlayStage.clear();
 
+        Layout layout = editor.getLayout();
+        layout.removeLayer(toolbarLayer);
+        layout.removeLayer(toolboxLayer);
+        layout.removeLayer(overlayLayer);
+        layout.removeLayer(backgroundLayer);
+
         editor.getStages().remove(overlayStage);
-        editor.getViews().remove(designViews);
-        editor.getViews().remove(overlayView);
-        editor.getViews().remove(background);
         editor.removeMouseListener(this);
         editor.removeKeyListener(this);
 
@@ -299,15 +319,14 @@ public class SceneDesigner implements MouseListener, KeyListener
 
     public void resize(int width, int height)
     {
-        Rect viewsRect = new Rect(0, toolbar.getHeight(), width, height - toolbar.getHeight());
+        // Rect viewsRect = new Rect(0, toolbar.getHeight(), width, height - toolbar.getHeight());
         Rect editRect = new Rect(0, 0, width, height - toolbar.getHeight());
 
-        editor.getViews().setPosition(viewsRect);
         overlayView.setPosition(editRect);
         background.setPosition(editRect);
-        designViews.setPosition(new Rect(0, 0, width, height));
 
-        for (View view : designViews.getChildren()) {
+        for (Layer layer : designLayers) {
+            View view = layer.getView();
             if ((view instanceof ScrollableView) && (view instanceof StageView)) {
                 view.setPosition(editRect);
             }
@@ -322,7 +341,6 @@ public class SceneDesigner implements MouseListener, KeyListener
         toolbar.setPosition(0, 0, width, toolbar.getHeight());
         toolbox.setPosition(0, 0, width, toolbox.getHeight());
 
-        debugViews(this.editor.getGlassView().getParent(), "");
     }
 
     protected void debugViews(View view, String prefix)
@@ -448,6 +466,11 @@ public class SceneDesigner implements MouseListener, KeyListener
         Rect rect = new Rect(0, editor.getHeight() - toolHeight, editor.getWidth(), toolHeight);
         GuiView view = new GuiView(rect, toolbox);
         Itchy.getGame().show(view);
+
+        toolboxLayer = new Layer(view);
+        toolboxLayer.name = "sd_toolbox";
+        toolboxLayer.zOrder = 90;
+        editor.getLayout().addLayer(toolboxLayer);
     }
 
     private void createToolbar()
@@ -464,8 +487,12 @@ public class SceneDesigner implements MouseListener, KeyListener
 
         toolbar.setMinimumWidth(editor.getWidth());
         toolbar.show();
-        toolbar.setPosition(0, 0, editor.getWidth(),
-            toolbar.getRequiredHeight());
+        toolbar.setPosition(0, 0, editor.getWidth(), toolbar.getRequiredHeight());
+
+        toolbarLayer = new Layer(toolbar.getView());
+        toolbarLayer.name = "sd_toolbar";
+        toolbarLayer.zOrder = 90;
+        editor.layout.addLayer(toolbarLayer);
     }
 
     public Button createButton(String name, String text)
@@ -1693,14 +1720,15 @@ public class SceneDesigner implements MouseListener, KeyListener
 
     private void scrollBy(int dx, int dy)
     {
-        for (View view : designViews.getChildren()) {
+        for (Layer layer : designLayers) {
+            View view = layer.getView();
             if (view instanceof ScrollableView) {
                 ((ScrollableView) view).scrollBy(dx, dy);
             } else {
                 Rect rect = view.getPosition();
-                rect.x -= dx;
-                rect.y += dy;
-                view.setPosition(rect);
+                System.out.println( "Old position " + rect  + " " + layer.name);
+                view.setPosition(new Rect(rect.x- dx, rect.y + dy, rect.width, rect.height));
+                System.out.println( "New position " + rect  + " " + layer.name );
             }
         }
         overlayView.scrollBy(dx, dy);
@@ -1710,7 +1738,9 @@ public class SceneDesigner implements MouseListener, KeyListener
     {
         int x = 0;
         int y = sceneRect.height - (int) overlayView.getVisibleRectangle().height;
-        for (View view : designViews.getChildren()) {
+        for (Layer layer : designLayers) {
+            View view = layer.getView();
+
             if (view instanceof ScrollableView) {
                 ((ScrollableView) view).scrollTo(x, y);
             }
@@ -1721,7 +1751,8 @@ public class SceneDesigner implements MouseListener, KeyListener
     private Stage getStageBelow(Stage stage)
     {
         Stage result = null;
-        for (View view : designViews.getChildren()) {
+        for (Layer layer : designLayers) {
+            View view = layer.getView();
             if (view instanceof StageView) {
                 if (((StageView) view).getStage() == stage) {
                     return result;
@@ -1736,7 +1767,8 @@ public class SceneDesigner implements MouseListener, KeyListener
     private Stage getStageAbove(Stage stage)
     {
         boolean found = false;
-        for (View view : designViews.getChildren()) {
+        for (Layer layer : designLayers) {
+            View view = layer.getView();
             if (view instanceof StageView) {
                 if (found) {
                     return ((StageView) view).getStage();

@@ -93,16 +93,6 @@ public class Game
     private AutoFlushPreferences preferences;
 
     /**
-     * A tree structure of all the views.
-     */
-    private CompoundView allViews;
-
-    /**
-     * A sub-tree of {@link #allViews}, which excludes some special views which a game should not tamper with.
-     */
-    private CompoundView gameViews;
-
-    /**
      * A list of all the stages used by this game.
      */
     private List<Stage> stages;
@@ -232,24 +222,13 @@ public class Game
     {
         Rect displayRect = new Rect(0, 0, getWidth(), getHeight());
 
-        this.allViews = new CompoundView("allViews", displayRect);
         this.stages = new LinkedList<Stage>();
 
-        // Covered by game views
-        this.gameViews = new CompoundView("gameViews", displayRect);
-        this.allViews.add(this.gameViews);
-
-        // Covered by GUI Windows
         this.windows = new GenericCompoundView<GuiView>("windows", displayRect);
-        this.allViews.add(this.windows);
 
-        // Covered by the glass view
         this.glassStage = new ZOrderStage();
         this.glassView = new StageView(displayRect, this.glassStage);
         this.glassView.enableMouseListener(this);
-        this.allViews.add(this.glassView);
-
-        this.addMouseListener(this.allViews);
     }
 
     public FrameRate getFrameRate()
@@ -281,11 +260,6 @@ public class Game
     public Director getDirector()
     {
         return this.director;
-    }
-
-    public CompoundView getGameViews()
-    {
-        return this.gameViews;
     }
 
     public List<Stage> getStages()
@@ -320,8 +294,6 @@ public class Game
     {
         Itchy.resizeScreen(width, height);
         Rect rect = new Rect(0, 0, width, height);
-        this.allViews.setPosition(rect);
-        this.gameViews.setPosition(rect);
         this.windows.setPosition(rect);
     }
 
@@ -331,11 +303,9 @@ public class Game
      */
     public void clear()
     {
-        this.allViews.reset();
         for (Stage stage : this.stages) {
             stage.clear();
         }
-        this.gameViews.clear();
         this.stages.clear();
 
         this.glassStage.clear();
@@ -485,17 +455,6 @@ public class Game
     }
 
     /**
-     * Returns the views that are under your control. Add to this compound view from your Director's onStarted method.
-     * This CompoundView
-     * does not include the background view ({@link #getBackground()}), nor any pop-up windows, nor the glass view (
-     * {@link #getGlassView()} ), which is the top most view.
-     */
-    public CompoundView getViews()
-    {
-        return this.gameViews;
-    }
-
-    /**
      * The glass stage is used when you want something that absolutely must be above the regular game views. For
      * example, you could use this
      * to add some debugging information, such as the frames per second. You shouldn't use it for regular actors.
@@ -531,7 +490,14 @@ public class Game
     public void render(Surface display)
     {
         GraphicsContext gc = new SurfaceGraphicsContext(display);
-        this.allViews.render(gc);
+        if (this.layout != null) {
+            for (Layer layer : this.layout.getLayersByZOrder()) {
+                View view = layer.getView();
+                view.render( view.adjustGraphicsContext(gc));
+            }
+        }
+        this.windows.render(gc);
+        this.glassView.render(gc);
     }
 
     /**
@@ -622,9 +588,20 @@ public class Game
 
                     if (this.modalListener == null) {
 
+                        windows.onMouseDown(mbe);
+                        if (this.layout != null) {
+                            for (Layer layer : this.layout.getLayers()) {
+                                View view = layer.getView();
+                                if (view instanceof MouseListenerView) {
+                                    MouseListenerView mlv = (MouseListenerView) view;
+                                    mlv.onMouseDown(mbe);
+                                }
+                            }
+                        }
                         for (MouseListener ml : this.mouseListeners) {
                             ml.onMouseDown(mbe);
                         }
+
                     } else {
                         this.modalListener.onMouseDown(mbe);
                         return;
@@ -645,9 +622,20 @@ public class Game
 
                     if (this.modalListener == null) {
 
+                        windows.onMouseUp(mbe);
+                        if (this.layout != null) {
+                            for (Layer layer : this.layout.getLayers()) {
+                                View view = layer.getView();
+                                if (view instanceof MouseListenerView) {
+                                    MouseListenerView mlv = (MouseListenerView) view;
+                                    mlv.onMouseUp(mbe);
+                                }
+                            }
+                        }
                         for (MouseListener ml : this.mouseListeners) {
                             ml.onMouseUp(mbe);
                         }
+
                     } else {
                         this.modalListener.onMouseUp(mbe);
                         return;
@@ -671,9 +659,20 @@ public class Game
 
                 if (this.modalListener == null) {
 
+                    windows.onMouseMove(mme);
+                    if (this.layout != null) {
+                        for (Layer layer : this.layout.getLayers()) {
+                            View view = layer.getView();
+                            if (view instanceof MouseListenerView) {
+                                MouseListenerView mlv = (MouseListenerView) view;
+                                mlv.onMouseMove(mme);
+                            }
+                        }
+                    }
                     for (MouseListener el : this.mouseListeners) {
                         el.onMouseMove(mme);
                     }
+
                 } else {
                     this.modalListener.onMouseMove(mme);
                     return;
@@ -860,9 +859,6 @@ public class Game
         this.abortTicks = true;
 
         for (Layer layer : scene.layout.getLayers()) {
-            View view = layer.getView();
-            this.gameViews.remove(view);
-
             Stage stage = layer.getStage();
             if (stage != null) {
                 stage.clear();
@@ -952,7 +948,6 @@ public class Game
             }
 
             for (Layer layer : scene.layout.getLayersByZOrder()) {
-                this.gameViews.add(layer.getView());
 
                 Stage stage = layer.getStage();
                 if (stage != null) {

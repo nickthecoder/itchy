@@ -7,10 +7,11 @@ package uk.co.nickthecoder.itchy.editor;
 import java.io.File;
 
 import uk.co.nickthecoder.itchy.Game;
-import uk.co.nickthecoder.itchy.InputInterface;
 import uk.co.nickthecoder.itchy.Input;
+import uk.co.nickthecoder.itchy.InputInterface;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.KeyListener;
+import uk.co.nickthecoder.itchy.Layout;
 import uk.co.nickthecoder.itchy.PlainDirector;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
@@ -107,7 +108,8 @@ public final class Editor extends Game implements KeyListener
         this.listScenes = new ListScenes(this);
         this.listInputs = new ListInputs(this.resources);
         this.listLayouts = new ListLayouts(this.resources);
-
+        this.layout = new Layout();
+        
         // this.preferencesEditor = new PreferencesEditor(this);
 
         try {

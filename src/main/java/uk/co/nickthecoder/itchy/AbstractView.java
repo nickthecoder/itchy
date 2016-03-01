@@ -33,7 +33,7 @@ public abstract class AbstractView implements View
 
     public AbstractView( Rect position )
     {
-        this.position = position;
+        this.position = new Rect(position);
     }
 
     @Override

@@ -15,12 +15,17 @@ class Play(PlainSceneDirector) :
     def onActivate(self) :
         self.inputExit = Input.find('exit')
         self.inputRestart = Input.find('restart')
+        self.inputReset = Input.find('reset')
         self.highScore = game.preferences.getInt( self.highScoreKey(), 0 )
         
         
     def tick(self) :
         if self.inputRestart.pressed() :
             game.director.startScene( game.sceneName )
+
+        if self.inputReset.pressed() :
+            self.highScore = 0
+            game.preferences.putInt( self.highScoreKey(), 0 )
 
         if self.inputExit.pressed() :
             game.director.startScene("menu")

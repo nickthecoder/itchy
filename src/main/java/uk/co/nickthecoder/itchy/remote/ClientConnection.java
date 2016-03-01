@@ -10,6 +10,8 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 import uk.co.nickthecoder.itchy.Game;
 import uk.co.nickthecoder.itchy.Itchy;
+import uk.co.nickthecoder.itchy.Layer;
+import uk.co.nickthecoder.itchy.View;
 import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.event.Event;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
@@ -85,7 +87,10 @@ public class ClientConnection
         try {
             Game game = Itchy.getGame();
             RemoteGraphicsContext gc = new RemoteGraphicsContext( this, new Rect( 0,0,game.getWidth(), game.getHeight() ));
-            game.getViews().render(gc);
+            for (Layer layer : game.layout.getLayers()) {
+                View view = layer.getView();
+                view.render(view.adjustGraphicsContext(gc));
+            }
 
             out.println( "flip:");
         } catch (Exception e) {

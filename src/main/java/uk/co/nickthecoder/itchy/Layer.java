@@ -43,6 +43,12 @@ public class Layer implements Comparable<Layer>, NamedSubject<Layer>, Cloneable
 
     private View view;
 
+    public Layer( View view )
+    {
+        this();
+        this.view = view;
+    }
+
     public Layer()
     {
         name = "";
@@ -78,7 +84,7 @@ public class Layer implements Comparable<Layer>, NamedSubject<Layer>, Cloneable
         this.viewClassName = className;
         updateView();
     }
-    
+        
     private void updateView()
     {
         Resources resources = Itchy.getGame().resources;

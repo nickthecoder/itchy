@@ -1,23 +1,21 @@
-<scene name="e" layout="default" sceneDirector="play.py" showMouse="true">
+<scene name="f" layout="default" sceneDirector="play.py" showMouse="true">
   <sceneDirector/>
   <layer name="background"/>
   <layer name="main">
-    <actor costume="wall-v" x="25.0" y="300.0" zOrder="10"/>
-    <actor costume="wall-v" x="775.0" y="300.0" zOrder="10"/>
-    <actor costume="wall-h" x="400.0" y="25.0" zOrder="10"/>
-    <actor costume="wall-h" x="400.0" y="575.0" zOrder="10"/>
-    <actor costume="player" x="417.0" y="303.0" zOrder="50" scale="2.0"/>
+    <actor costume="player" x="417.0" y="303.0" zOrder="50" scale="2.0">
+      <role maxSpeed="10.0"/>
+    </actor>
     <actor costume="enemy-3" x="170.0" y="431.0" heading="9.462322208025617" zOrder="60" scale="2.0" direction="9.462322208025617">
-      <role dx="4.0" dy="4.0" rotation="0.1"/>
+      <role vx="4.0" vy="4.0" rotation="0.1"/>
     </actor>
     <actor costume="enemy-4" x="645.0" y="426.0" heading="5.9061411137704996" zOrder="60" scale="2.0" direction="5.9061411137704996">
-      <role dx="-4.0" dy="-4.0" rotation="-0.2"/>
+      <role vx="-4.0" vy="-4.0" rotation="-0.2"/>
     </actor>
     <actor costume="enemy-1" x="198.0" y="155.0" heading="5.710593137499643" zOrder="60" scale="2.0" direction="5.710593137499643">
-      <role dx="-4.0" dy="4.0" rotation="-0.3"/>
+      <role vx="-4.0" vy="4.0" rotation="-0.3"/>
     </actor>
     <actor costume="enemy-2" x="617.0" y="193.0" heading="7.594643368591445" zOrder="60" scale="2.0" direction="7.594643368591445">
-      <role dx="4.0" dy="-4.0" rotation="0.3"/>
+      <role vx="4.0" vy="-4.0" rotation="0.3"/>
     </actor>
   </layer>
 </scene>
