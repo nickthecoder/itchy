@@ -4,9 +4,11 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.WeakHashMap;
@@ -112,7 +114,7 @@ public class Game
     /**
      * The list of all of the windows currently shown.
      */
-    private GenericCompoundView<GuiView> windows;
+    private List<GuiView> windows;
 
     /**
      * A list of all the objects that need to know when a mouse is clicked or moved.
@@ -224,7 +226,7 @@ public class Game
 
         this.stages = new LinkedList<Stage>();
 
-        this.windows = new GenericCompoundView<GuiView>("windows", displayRect);
+        this.windows = new ArrayList<GuiView>();
 
         this.glassStage = new ZOrderStage();
         this.glassView = new StageView(displayRect, this.glassStage);
@@ -234,11 +236,6 @@ public class Game
     public FrameRate getFrameRate()
     {
         return Itchy.frameRate;
-    }
-
-    public List<GuiView> getGUIViews()
-    {
-        return this.windows.getChildren();
     }
 
     /**
@@ -293,8 +290,6 @@ public class Game
     public void resize(int width, int height)
     {
         Itchy.resizeScreen(width, height);
-        Rect rect = new Rect(0, 0, width, height);
-        this.windows.setPosition(rect);
     }
 
     /**
@@ -474,6 +469,11 @@ public class Game
     {
         return this.glassView;
     }
+    
+    public List<GuiView> getGUIViews()
+    {
+        return this.windows;
+    }
 
     /**
      * Renders all of the views to the display surface.
@@ -496,7 +496,9 @@ public class Game
                 view.render( view.adjustGraphicsContext(gc));
             }
         }
-        this.windows.render(gc);
+        for (GuiView window : this.windows) {
+            window.render(window.adjustGraphicsContext(gc));
+        }
         this.glassView.render(gc);
     }
 
@@ -588,7 +590,10 @@ public class Game
 
                     if (this.modalListener == null) {
 
-                        windows.onMouseDown(mbe);
+                        for (ListIterator<GuiView> i = this.windows.listIterator(this.windows.size()); i.hasPrevious();) {
+                            GuiView window = i.previous();
+                            window.onMouseDown(mbe);
+                        }
                         if (this.layout != null) {
                             for (Layer layer : this.layout.getLayers()) {
                                 View view = layer.getView();
@@ -622,7 +627,10 @@ public class Game
 
                     if (this.modalListener == null) {
 
-                        windows.onMouseUp(mbe);
+                        for (ListIterator<GuiView> i = this.windows.listIterator(this.windows.size()); i.hasPrevious();) {
+                            GuiView window = i.previous();
+                            window.onMouseUp(mbe);
+                        }
                         if (this.layout != null) {
                             for (Layer layer : this.layout.getLayers()) {
                                 View view = layer.getView();
@@ -659,7 +667,10 @@ public class Game
 
                 if (this.modalListener == null) {
 
-                    windows.onMouseMove(mme);
+                    for (ListIterator<GuiView> i = this.windows.listIterator(this.windows.size()); i.hasPrevious();) {
+                        GuiView window = i.previous();
+                        window.onMouseMove(mme);
+                    }
                     if (this.layout != null) {
                         for (Layer layer : this.layout.getLayers()) {
                             View view = layer.getView();
@@ -1031,8 +1042,8 @@ public class Game
         this.windows.remove(view);
 
         if (view.rootContainer.modal) {
-            if (this.windows.getChildren().size() > 0) {
-                GuiView topWindow = this.windows.getChildren().get(this.windows.getChildren().size() - 1);
+            if (this.windows.size() > 0) {
+                GuiView topWindow = this.windows.get(this.windows.size() - 1);
                 if (topWindow.rootContainer.modal) {
 
                     this.setModalListener(topWindow);

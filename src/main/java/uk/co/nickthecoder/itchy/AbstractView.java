@@ -20,8 +20,6 @@ public abstract class AbstractView implements View
         return properties;
     }
     
-    private ParentView<?> parent;
-
     protected Rect position;
 
     public boolean visible = true;
@@ -43,18 +41,6 @@ public abstract class AbstractView implements View
     }
 
     @Override
-    public ParentView<?> getParent()
-    {
-        return this.parent;
-    }
-
-    @Override
-    public void setParent( ParentView<?> parent )
-    {
-        this.parent = parent;
-    }
-
-    @Override
     public Rect getPosition()
     {
         return this.position;
@@ -64,32 +50,22 @@ public abstract class AbstractView implements View
     {
     	this.position = rect;
     }
-    
-    @Override
-    public Rect getAbsolutePosition()
-    {
-        Rect rect = new Rect(this.position);
-        for (ParentView<?> parent = this.getParent(); parent != null; parent = parent.getParent()) {
-            parent.adjustChildRect(rect);
-        }
-        return rect;
-    }
 
     @Override
     public boolean contains( int x, int y )
     {
-        return getAbsolutePosition().contains(x, y);
+        return getPosition().contains(x, y);
     }
     
     public double getWorldX( int screenX )
     {
-        Rect position = this.getAbsolutePosition();
+        Rect position = this.getPosition();
         return screenX - position.x;
     }
     
     public double getWorldY( int screenY )
     {
-        Rect position = this.getAbsolutePosition();
+        Rect position = this.getPosition();
         return position.y - screenY + position.height;
     }
 

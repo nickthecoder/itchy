@@ -107,7 +107,7 @@ public class GuiView extends AbstractView implements View, InputListener
     {
         this.oldX = event.x;
         this.oldY = event.y;
-        Rect rect = getAbsolutePosition();
+        Rect rect = getPosition();
         event.x -= rect.x;
         event.y -= rect.y;
         return ((event.x >= 0) && (event.x < rect.width) && (event.y >= 0) && (event.y < rect.height));

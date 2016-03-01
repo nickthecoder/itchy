@@ -10,21 +10,6 @@ import uk.co.nickthecoder.jame.Rect;
 public interface View extends PropertySubject<View>
 {
     /**
-     * Layers can be stacked in a hierarchical manner.
-     * 
-     * @return The parent layer, or null, if this is the root layer, and has no parent.
-     */
-    public ParentView<?> getParent();
-
-    /**
-     * Called by ParentLayer's when added or removed from a layer.
-     * 
-     * @param parent
-     *            The new parent, or null if this layer is being removed from a ParentLayer.
-     */
-    public void setParent(ParentView<?> parent);
-
-    /**
      * Return a GraphicsContext, clipped to this view's position, and taking care of any scrolling. 
      */
     public GraphicsContext adjustGraphicsContext( GraphicsContext gc );
@@ -44,11 +29,6 @@ public interface View extends PropertySubject<View>
     public Rect getPosition();
 
     public void setPosition(Rect rect);
-
-    /**
-     * @return The position of this View in display device coordinates, i.e. relative to the top left of the display.
-     */
-    public Rect getAbsolutePosition();
 
     public Rect getRelativeRect();
 

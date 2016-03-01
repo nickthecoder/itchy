@@ -228,10 +228,9 @@ public class StageView extends AbstractScrollableView implements StageListener, 
         this.oldY = event.y;
 
         // Calculate the position within the view, with (0,0) as the bottom left of the viewport.
-        Rect rect = getAbsolutePosition();
-        event.x -= rect.x;
-        event.y = rect.y + rect.height - event.y;
-        boolean result = ((event.x >= 0) && (event.x < rect.width) && (event.y >= 0) && (event.y < rect.height));
+        event.x -= position.x;
+        event.y = position.y + position.height - event.y;
+        boolean result = ((event.x >= 0) && (event.x < position.width) && (event.y >= 0) && (event.y < position.height));
 
         // Take scroll into affect.
         event.x += this.worldRect.x;

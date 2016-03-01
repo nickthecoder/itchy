@@ -69,7 +69,6 @@ public abstract class AbstractScrollableView extends AbstractView implements Scr
     @Override
     public boolean contains(int x, int y)
     {
-        Rect position = this.getAbsolutePosition();
         if ((x < position.x) || (y < position.y) || (x > position.x + position.width) ||
             (y > position.y + position.height)) {
             return false;

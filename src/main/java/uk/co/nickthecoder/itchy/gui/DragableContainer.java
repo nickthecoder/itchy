@@ -74,10 +74,7 @@ public abstract class DragableContainer extends ClickableContainer
 
     public static DragTarget findDragTagrget(MouseEvent event, Object source)
     {
-        System.out.println("Searching all roots for dragTargets" );
-
         for (GuiView guiView : Itchy.getGame().getGUIViews()) {
-            System.out.println("Searching guiView " + guiView );
             RootContainer root = guiView.rootContainer;
             DragTarget result = findDragTarget(root, event, source);
             if (result != null) {
@@ -89,13 +86,10 @@ public abstract class DragableContainer extends ClickableContainer
 
     public static DragTarget findDragTarget(RootContainer root, MouseEvent event, Object source)
     {
-        System.out.println("Searching root for DragTargets " + event.x + "," + event.y );
 
         for (Component component = root.getComponent(event); component != null; component = component.getParent()) {
-            System.out.println("Component under mouse " + component);
             if (component instanceof DragTarget) {
                 DragTarget dt = (DragTarget) component;
-                System.out.println("Found a target");
                 if (dt.accept(source)) {
                     return dt;
                 }

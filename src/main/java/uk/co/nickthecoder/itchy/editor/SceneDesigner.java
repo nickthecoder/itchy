@@ -13,7 +13,6 @@ import uk.co.nickthecoder.itchy.Appearance;
 import uk.co.nickthecoder.itchy.Costume;
 import uk.co.nickthecoder.itchy.Font;
 import uk.co.nickthecoder.itchy.Game;
-import uk.co.nickthecoder.itchy.GenericCompoundView;
 import uk.co.nickthecoder.itchy.ImagePose;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.KeyListener;
@@ -341,29 +340,6 @@ public class SceneDesigner implements MouseListener, KeyListener
         toolbar.setPosition(0, 0, width, toolbar.getHeight());
         toolbox.setPosition(0, 0, width, toolbox.getHeight());
 
-    }
-
-    protected void debugViews(View view, String prefix)
-    {
-        System.out.print(prefix);
-        if (view instanceof GenericCompoundView) {
-            GenericCompoundView<?> gcv = (GenericCompoundView<?>) view;
-            System.out.print(gcv.name + " : ");
-        } else {
-            System.out.print(view.getClass().getName() + " : ");
-        }
-        System.out.print(view.getPosition());
-        if (view instanceof StageView) {
-            Stage stage = ((StageView) view).getStage();
-            System.out.print(" Stage " + stage + " " + stage.getActors().size() + " actors.");
-        }
-        System.out.println();
-        if (view instanceof GenericCompoundView) {
-            GenericCompoundView<?> parent = (GenericCompoundView<?>) view;
-            for (View child : parent.getChildren()) {
-                debugViews(child, prefix + "    ");
-            }
-        }
     }
 
     private void createPageBorder()
@@ -1726,9 +1702,7 @@ public class SceneDesigner implements MouseListener, KeyListener
                 ((ScrollableView) view).scrollBy(dx, dy);
             } else {
                 Rect rect = view.getPosition();
-                System.out.println( "Old position " + rect  + " " + layer.name);
                 view.setPosition(new Rect(rect.x- dx, rect.y + dy, rect.width, rect.height));
-                System.out.println( "New position " + rect  + " " + layer.name );
             }
         }
         overlayView.scrollBy(dx, dy);

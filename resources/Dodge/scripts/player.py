@@ -26,10 +26,10 @@ class Player(AbstractRole) :
         if self.collided( "deadly" ) :
             play.stopPlaying()
 
-            ExplosionBuilder(self.actor) \
-                .fragments( self.costumeFeatures.fragments ) \
-                .speed(0.5,0.5,0.5,0.5).fade(2).vy(-3,3).vx(-3,3).gravity(-0.1) \
-                .create()
+            ExplosionBuilder(self.actor).fragments(self.costumeFeatures.fragments) \
+                .fade(3).speed(1.5, 4, 0,0).gravity(-0.1) \
+                .spin(-1, 1).create();
+
                 
             self.deathEvent( "dead" )
                 

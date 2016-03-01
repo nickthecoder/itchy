@@ -297,7 +297,7 @@ public class Fragments
         {
             this.edges = new LinkedList<Point>();
             this.owner = index;
-            surface = new Surface(Fragments.this.source.getWidth(), Fragments.this.source.getHeight(), true);
+            this.surface = new Surface(Fragments.this.source.getWidth(), Fragments.this.source.getHeight(), true);
         }
 
         void setOwner(int x, int y)
@@ -355,7 +355,7 @@ public class Fragments
 
             // Clip to just the pixels used by this piece.
             Surface surface = new Surface(width, height, true);
-            Fragments.this.source.blit(surface, -minX, -minY, Surface.BlendMode.COMPOSITE);
+            this.surface.blit(surface, -minX, -minY, Surface.BlendMode.COMPOSITE);
 
             ImagePose pose = new ImagePose(surface);
             pose.setOffsetX(width / 2);
