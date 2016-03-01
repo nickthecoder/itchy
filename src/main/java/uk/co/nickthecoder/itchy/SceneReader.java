@@ -54,7 +54,7 @@ public class SceneReader
         
         String layoutName = sceneTag.getOptionalAttribute("layout", "default");
         layoutName = this.resources.getNewLayoutName(layoutName);
-        this.scene.layout = this.resources.getLayout( layoutName );
+        this.scene.layout = this.resources.getLayout( layoutName ).clone();
         
         if (this.scene.layout == null) {
             this.scene.layout = resources.getLayout("default");

@@ -1,19 +1,24 @@
 from common import * #@UnusedWildImport
 
 properties = ArrayList()
+properties.add( DoubleProperty( "maxSpeed" ) )
 
 class Player(AbstractRole) :
 
     def __init__(self) :
-        pass
-        
-    def onBirth(self):
-        print "Fragments : ", self.costumeFeatures.fragments
-        
+        self.maxSpeed = 10
+
     def tick(self):
-        play = Itchy.getGame().sceneDirector
+        play = game.sceneDirector
         
-        self.actor.moveTo( Itchy.getMouseX(), 600-Itchy.getMouseY() )
+        # Move to the mouse, but don't let the player move too quickly
+        mx = Itchy.getMouseX()
+        my = 600-Itchy.getMouseY()
+        if self.actor.distanceTo( mx, my ) < self.maxSpeed :
+            self.actor.moveTo( mx, my )
+        else :
+            self.actor.setHeading( self.actor.directionOf( mx, my ) )
+            self.actor.moveForwards( self.maxSpeed )
 
         if not play.playing :
             return
@@ -30,7 +35,8 @@ class Player(AbstractRole) :
                 
     def createCostumeFeatures(self,costume) :
         return PlayerFeatures(costume)
-        
+
+
     # Boiler plate code - no need to change this
     def getProperties(self):
         return properties
@@ -39,11 +45,11 @@ class Player(AbstractRole) :
     def getClassName(self):
         return ClassName( Role, self.__module__ + ".py" )
 
+
 class PlayerFeatures(CostumeFeatures) :
 
     def __init__(self, costume) :
         super(PlayerFeatures,self).__init__(costume)
-        print "Creating player fragments"
         self.fragments = Fragments().pieces(20).create(costume)
 
 

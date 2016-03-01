@@ -1,15 +1,15 @@
 from common import * #@UnusedWildImport
 
 properties = ArrayList()
-properties.add( DoubleProperty( "dx" ) )
-properties.add( DoubleProperty( "dy" ) )
+properties.add( DoubleProperty( "vx" ).aliases("dx") )
+properties.add( DoubleProperty( "vy" ).aliases("dy") )
 properties.add( DoubleProperty( "rotation" ) )
 
 class Enemy(AbstractRole) :
 
     def __init__(self) :
-        self.dx = 0
-        self.dy = 0
+        self.vx = 0
+        self.vy = 0
         self.rotation = 0
         self.addTag("deadly")
 
@@ -19,24 +19,24 @@ class Enemy(AbstractRole) :
         width = self.actor.appearance.width
         height = self.actor.appearance.height
         
-        self.actor.x += self.dx
-        self.actor.y += self.dy
+        self.actor.x += self.vx
+        self.actor.y += self.vy
         self.actor.direction += self.rotation
         
-        if self.actor.x < width / 2 and self.dx < 0:
-            self.dx = -self.dx + play.speedUp
+        if self.actor.x < width / 2 and self.vx < 0:
+            self.vx = -self.vx + play.speedUp
             #self.rotation = - self.rotation
             
-        if self.actor.x > 800 - width / 2 and self.dx > 0:
-            self.dx = -self.dx - play.speedUp
+        if self.actor.x > 800 - width / 2 and self.vx > 0:
+            self.vx = -self.vx - play.speedUp
             #self.rotation = - self.rotation
         
-        if self.actor.y < height / 2 and self.dy < 0:
-            self.dy = -self.dy + play.speedUp
+        if self.actor.y < height / 2 and self.vy < 0:
+            self.vy = -self.vy + play.speedUp
             #self.rotation = - self.rotation
        
-        if self.actor.y > 600 - height / 2 and self.dy > 0:
-            self.dy = -self.dy - play.speedUp
+        if self.actor.y > 600 - height / 2 and self.vy > 0:
+            self.vy = -self.vy - play.speedUp
             #self.rotation = - self.rotation
 
 

@@ -22,5 +22,9 @@ Destroy-Debris
 BUGS
 ====
 
+Reload a Role does NOT update the costume's CostumeFeatures which use it.
+
+Reload a Role from the editor trashes the Role's properties.
+
 "Launch" Explosion in Cavern-Quest is not updating the 1st frame (it is black), despite the 1st being 0 ticks.
 

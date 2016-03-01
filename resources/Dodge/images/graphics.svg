@@ -25,16 +25,16 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.7"
-     inkscape:cx="128.57143"
-     inkscape:cy="514.28571"
+     inkscape:cx="389.28572"
+     inkscape:cy="568.57142"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="733"
-     inkscape:window-height="446"
-     inkscape:window-x="594"
-     inkscape:window-y="159"
-     inkscape:window-maximized="0" />
+     inkscape:window-width="1440"
+     inkscape:window-height="847"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1" />
   <metadata
      id="metadata7">
     <rdf:RDF>
@@ -51,26 +51,44 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1">
-    <rect
-       style="fill:#17a302;fill-opacity:1;stroke:none"
-       id="rect2987"
-       width="800"
-       height="600"
-       x="-1.4285715"
-       y="116.64792"
-       rx="0"
-       ry="0"
-       inkscape:export-filename="/home/nick/server/projects/itchy/resources/Dodge/images/graphics.png"
+    <g
+       id="g3044"
+       inkscape:export-filename="/media/home/nick/projects/itchy/resources/Dodge/images/graphics.png"
        inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90" />
+       inkscape:export-ydpi="90">
+      <rect
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/nick/server/projects/itchy/resources/Dodge/images/graphics.png"
+         ry="0"
+         rx="0"
+         y="116.64792"
+         x="-1.4285715"
+         height="600"
+         width="432.85715"
+         id="rect2987"
+         style="fill:#17a302;fill-opacity:1;stroke:none" />
+      <rect
+         style="fill:#17a302;fill-opacity:1;stroke:none"
+         id="rect3042"
+         width="800"
+         height="60"
+         x="-1.4285715"
+         y="116.64792"
+         rx="0"
+         ry="0"
+         inkscape:export-filename="/home/nick/server/projects/itchy/resources/Dodge/images/graphics.png"
+         inkscape:export-xdpi="90"
+         inkscape:export-ydpi="90" />
+    </g>
     <rect
        style="fill:#000000;fill-opacity:1;stroke:none"
        id="rect2985"
-       width="700"
+       width="384.28571"
        height="500"
        x="48.57143"
        y="166.64792"
-       rx="1.6139899"
+       rx="0.88604754"
        ry="1.5938352" />
     <rect
        style="fill:#0c21b9;fill-opacity:1;stroke:none"
@@ -84,11 +102,54 @@
     <rect
        style="fill:#a31702;fill-opacity:1;stroke:none"
        id="rect3759"
-       width="67.14286"
-       height="65.714287"
+       width="65"
+       height="65"
        x="448.57144"
-       y="470.93362"
-       rx="1.4285823"
-       ry="1.4285823" />
+       y="471.64792"
+       rx="1.3829892"
+       ry="1.4130542"
+       inkscape:export-filename="/media/home/nick/projects/itchy/resources/Dodge/icon32.png"
+       inkscape:export-xdpi="44.307693"
+       inkscape:export-ydpi="44.307693" />
+    <path
+       sodipodi:type="arc"
+       style="fill:#0c21b9;fill-opacity:1;stroke:none"
+       id="path2986"
+       sodipodi:cx="542.14288"
+       sodipodi:cy="367.36218"
+       sodipodi:rx="75"
+       sodipodi:ry="75"
+       d="m 617.14288,367.36218 a 75,75 0 1 1 -150,0 75,75 0 1 1 150,0 z"
+       transform="translate(-7.1428573,-112.85715)" />
+    <path
+       sodipodi:type="arc"
+       style="fill:#0c21b9;fill-opacity:1;stroke:none"
+       id="path2986-4"
+       sodipodi:cx="542.14288"
+       sodipodi:cy="367.36218"
+       sodipodi:rx="75"
+       sodipodi:ry="75"
+       d="m 617.14288,367.36218 a 75,75 0 1 1 -150,0 75,75 0 1 1 150,0 z"
+       transform="matrix(0.6,0,0,0.6,201.85712,171.94487)" />
+    <path
+       sodipodi:type="arc"
+       style="fill:#0c21b9;fill-opacity:1;stroke:none"
+       id="path2986-4-4"
+       sodipodi:cx="542.14288"
+       sodipodi:cy="367.36218"
+       sodipodi:rx="75"
+       sodipodi:ry="75"
+       d="m 617.14288,367.36218 a 75,75 0 1 1 -150,0 75,75 0 1 1 150,0 z"
+       transform="matrix(0.48571429,0,0,0.48571429,406.67346,66.786271)" />
+    <path
+       sodipodi:type="arc"
+       style="fill:#0c21b9;fill-opacity:1;stroke:none"
+       id="path2986-4-5"
+       sodipodi:cx="542.14288"
+       sodipodi:cy="367.36218"
+       sodipodi:rx="75"
+       sodipodi:ry="75"
+       d="m 617.14288,367.36218 a 75,75 0 1 1 -150,0 75,75 0 1 1 150,0 z"
+       transform="matrix(0.77142857,0,0,0.77142857,254.63264,100.39707)" />
   </g>
 </svg>

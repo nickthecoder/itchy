@@ -8,5 +8,12 @@
       <role access="sceneDirector.score" errorValue="" nullValue="" updateInterval="0.0" quiet="false" formatPattern="0"/>
       <makeup dx="4" dy="-4"/>
     </text>
+    <text x="439.0" y="37.0" font="vera" fontSize="22.0" text="0" xAlignment="0.0" yAlignment="0.0" role="uk.co.nickthecoder.itchy.role.NumberValue" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+      <role access="sceneDirector.highScore" errorValue="" nullValue="" updateInterval="0.0" quiet="false" formatPattern="0"/>
+      <makeup dx="2" dy="-2"/>
+    </text>
+    <text x="367.0" y="38.0" font="vera" fontSize="22.0" text="Highscore :" yAlignment="0.0" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+      <makeup dx="2" dy="-2"/>
+    </text>
   </layer>
 </scene>
