@@ -21,6 +21,7 @@ import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.itchy.util.NinePatch;
 import uk.co.nickthecoder.jame.JameException;
 import uk.co.nickthecoder.jame.Surface;
+import uk.co.nickthecoder.jame.Surface.BlendMode;
 
 public class Resources extends Loadable
 {
@@ -588,7 +589,7 @@ public class Resources extends Loadable
     }
 
     public Costume getCostume(String name)
-    {
+  {
         return costumes.get(name);
     }
 
@@ -630,11 +631,13 @@ public class Resources extends Loadable
             fontSize = 30;
         }
 
+        Surface clipped = new Surface(PoseResource.THUMBNAIL_WIDTH, PoseResource.THUMBNAIL_HEIGHT, true);
         try {
-            return textStyle.font.getSize(fontSize).renderBlended(text, textStyle.color);
+            Surface surface = textStyle.font.getSize(fontSize).renderBlended(text, textStyle.color);
+            surface.blit(clipped,0,0,BlendMode.COMPOSITE);
         } catch (JameException e) {
-            return null;
         }
+        return clipped;
     }
 
     /**

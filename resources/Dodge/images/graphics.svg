@@ -27,9 +27,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.98994949"
-     inkscape:cx="213.85094"
-     inkscape:cy="568.57142"
+     inkscape:zoom="2.8"
+     inkscape:cx="734.20747"
+     inkscape:cy="498.19358"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -50,7 +50,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -197,5 +197,84 @@
        inkscape:export-filename="/media/home/nick/projects/itchy/resources/Dodge/icon32.png"
        inkscape:export-xdpi="44.307693"
        inkscape:export-ydpi="44.307693" />
+    <g
+       id="g3127">
+      <rect
+         inkscape:export-ydpi="44.307693"
+         inkscape:export-xdpi="44.307693"
+         inkscape:export-filename="/media/home/nick/projects/itchy/resources/Dodge/icon32.png"
+         ry="0.77028942"
+         rx="0.75390196"
+         y="574.01575"
+         x="531.49603"
+         height="35.433044"
+         width="35.433128"
+         id="rect3759-6"
+         style="fill:#a31702;fill-opacity:1;stroke:none" />
+      <rect
+         style="fill:#0c21b9;fill-opacity:1;stroke:none"
+         id="rect3776-7"
+         width="35.433075"
+         height="35.433025"
+         x="540.62634"
+         y="554.78394"
+         rx="0.75390089"
+         ry="0.770289"
+         inkscape:export-filename="/media/home/nick/projects/itchy/resources/Dodge/icon32.png"
+         inkscape:export-xdpi="44.307693"
+         inkscape:export-ydpi="44.307693" />
+      <rect
+         inkscape:export-ydpi="44.307693"
+         inkscape:export-xdpi="44.307693"
+         inkscape:export-filename="/media/home/nick/projects/itchy/resources/Dodge/icon32.png"
+         ry="0.770289"
+         rx="0.75390083"
+         y="567.44977"
+         x="554.26343"
+         height="35.433025"
+         width="35.433071"
+         id="rect3778-5"
+         style="fill:#1ba418;fill-opacity:1;stroke:none" />
+    </g>
+    <g
+       id="g3122">
+      <path
+         sodipodi:type="arc"
+         style="fill:#a31702;fill-opacity:1;stroke:none"
+         id="path2986-4-4-3"
+         sodipodi:cx="542.14288"
+         sodipodi:cy="367.36218"
+         sodipodi:rx="75"
+         sodipodi:ry="75"
+         d="m 617.14288,367.36218 a 75,75 0 1 1 -150,0 75,75 0 1 1 150,0 z"
+         transform="matrix(0.27021508,0,0,0.27021508,514.57625,440.95252)" />
+      <path
+         transform="matrix(0.30686281,0,0,0.30686281,522.16978,379.47185)"
+         inkscape:transform-center-y="-10.873092"
+         inkscape:transform-center-x="-0.097576564"
+         d="m 519.16715,635.30582 -152.11647,0.67733 75.47166,-132.0754 z"
+         inkscape:randomized="0"
+         inkscape:rounded="0"
+         inkscape:flatsided="true"
+         sodipodi:arg2="1.5707964"
+         sodipodi:arg1="0.51914611"
+         sodipodi:r2="71.417641"
+         sodipodi:r1="87.825356"
+         sodipodi:cy="591.73224"
+         sodipodi:cx="442.91339"
+         sodipodi:sides="3"
+         id="path3000-3"
+         style="fill:#1ba418;fill-opacity:1;stroke:none"
+         sodipodi:type="star" />
+      <rect
+         ry="0.24260277"
+         rx="0.14809752"
+         y="533.14325"
+         x="670.08289"
+         height="36.63274"
+         width="21.029688"
+         id="rect3757-5"
+         style="fill:#0c21b9;fill-opacity:1;stroke:none" />
+    </g>
   </g>
 </svg>

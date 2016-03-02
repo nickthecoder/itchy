@@ -6,14 +6,11 @@ import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.gui.ClassNameBox;
 import uk.co.nickthecoder.itchy.gui.Component;
 import uk.co.nickthecoder.itchy.gui.ComponentChangeListener;
-import uk.co.nickthecoder.itchy.gui.CostumePicker;
-import uk.co.nickthecoder.itchy.gui.Button;
-import uk.co.nickthecoder.itchy.gui.Label;
 import uk.co.nickthecoder.itchy.gui.Notebook;
 import uk.co.nickthecoder.itchy.gui.PlainContainer;
 import uk.co.nickthecoder.itchy.gui.PropertiesForm;
 import uk.co.nickthecoder.itchy.gui.VerticalLayout;
-import uk.co.nickthecoder.jame.event.MouseButtonEvent;
+import uk.co.nickthecoder.itchy.property.CostumeProperty;
 
 public class EditCostume extends EditNamedSubject<Costume>
 {
@@ -21,9 +18,6 @@ public class EditCostume extends EditNamedSubject<Costume>
 
     private PlainContainer propertiesContainer;
 
-    private Label labelExtendedFrom;
-
-    private Button buttonExtendedFrom;
 
     public EditCostume(Resources resources, ListSubjects<Costume> listSubjects, Costume subject, boolean isNew)
     {
@@ -57,6 +51,8 @@ public class EditCostume extends EditNamedSubject<Costume>
     @Override
     protected Component createForm()
     {
+        form.add( new CostumeProperty<Costume>("extendedFrom").hint("Extends From") );
+
         super.createForm();
 
         final ClassNameBox cnb = (ClassNameBox) form.getComponent("roleClassName");
@@ -72,26 +68,7 @@ public class EditCostume extends EditNamedSubject<Costume>
             }
         });
 
-        Costume base = subject.getExtendedFrom();
-        labelExtendedFrom = new Label(base == null ? "None" : base.getName());
 
-        buttonExtendedFrom = new Button(labelExtendedFrom)
-        {
-            @Override
-            public void onClick(MouseButtonEvent e)
-            {
-                CostumePicker picker = new CostumePicker(resources, "None")
-                {
-                    @Override
-                    public void pick(Costume costume)
-                    {
-                        labelExtendedFrom.setText(costume == null ? "None" : costume.getName());
-                    }
-                };
-                picker.show();
-            };
-        };
-        form.grid.addRow("Extends", buttonExtendedFrom);
 
         notebook = new Notebook();
 

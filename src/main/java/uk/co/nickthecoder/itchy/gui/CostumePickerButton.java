@@ -30,8 +30,9 @@ public class CostumePickerButton extends Button implements ActionListener
         layout = new VerticalLayout();
         this.setXAlignment(0.5f);
 
-        img = new ImageComponent(costume.getThumbnail());
-        label = new Label(costume.getName());
+        
+        img = costume == null ? new ImageComponent() : new ImageComponent(costume.getThumbnail());
+        label = new Label(costume == null ? "None" : costume.getName());
         this.addChild(img);
         this.addChild(label);
 

@@ -6,6 +6,8 @@
       <sprite name="ball-2" direction="0.0" offsetX="46" offsetY="46" x="483" y="230" width="92" height="92"/>
       <sprite name="ball-3" direction="0.0" offsetX="59" offsetY="59" x="616" y="208" width="118" height="118"/>
       <sprite name="ball-4" direction="0.0" offsetX="76" offsetY="76" x="461" y="62" width="152" height="152"/>
+      <sprite name="enemy" direction="0.0" offsetX="29" offsetY="25" x="635" y="404" width="58" height="56"/>
+      <sprite name="player" direction="0.0" offsetX="25" offsetY="25" x="533" y="440" width="58" height="55"/>
       <sprite name="player-blue" direction="0.0" offsetX="24" offsetY="24" x="451" y="435" width="48" height="48"/>
       <sprite name="player-green" direction="0.0" offsetX="24" offsetY="24" x="531" y="355" width="48" height="48"/>
       <sprite name="player-red" direction="0.0" offsetX="24" offsetY="24" x="450" y="355" width="48" height="48"/>
@@ -57,20 +59,25 @@
     </animation>
   </animations>
   <costumes>
-    <costume name="ball" defaultZOrder="0" order="0" showInDesigner="true"/>
-    <costume name="ball-1" defaultZOrder="70" order="70" showInDesigner="true" role="ball.py">
+    <costume name="enemy" defaultZOrder="0" order="0" showInDesigner="true">
+      <pose name="default" pose="enemy"/>
+    </costume>
+    <costume name="ball" defaultZOrder="0" order="0" showInDesigner="true" extends="enemy">
+      <pose name="default" pose="ball-1"/>
+    </costume>
+    <costume name="ball-1" defaultZOrder="70" order="70" showInDesigner="true" extends="ball" role="ball.py">
       <pose name="default" pose="ball-1"/>
       <properties clan="red"/>
     </costume>
-    <costume name="ball-2" defaultZOrder="70" order="70" showInDesigner="true" role="ball.py">
+    <costume name="ball-2" defaultZOrder="70" order="70" showInDesigner="true" extends="ball" role="ball.py">
       <pose name="default" pose="ball-2"/>
       <properties clan="red"/>
     </costume>
-    <costume name="ball-3" defaultZOrder="70" order="70" showInDesigner="true" role="ball.py">
+    <costume name="ball-3" defaultZOrder="70" order="70" showInDesigner="true" extends="ball" role="ball.py">
       <pose name="default" pose="ball-3"/>
       <properties clan="red"/>
     </costume>
-    <costume name="ball-4" defaultZOrder="70" order="70" showInDesigner="true" role="ball.py">
+    <costume name="ball-4" defaultZOrder="70" order="70" showInDesigner="true" extends="ball" role="ball.py">
       <pose name="default" pose="ball-4"/>
       <properties clan="red"/>
     </costume>
@@ -83,6 +90,7 @@
       <animation name="default" animation="fadeInstructions"/>
     </costume>
     <costume name="player" defaultZOrder="0" order="0" showInDesigner="true">
+      <pose name="default" pose="player"/>
       <animation name="blue" animation="blue"/>
       <animation name="green" animation="green"/>
       <animation name="red" animation="red"/>
@@ -99,39 +107,42 @@
       <pose name="default" pose="player-red"/>
       <properties clan="red"/>
     </costume>
-    <costume name="rectangle" defaultZOrder="60" order="60" showInDesigner="true" role="enemy.py">
+    <costume name="rectangle" defaultZOrder="60" order="60" showInDesigner="true" extends="enemy" role="enemy.py">
+      <pose name="default" pose="rectangle-3"/>
       <properties clan="none"/>
     </costume>
-    <costume name="rectangle-1" defaultZOrder="60" order="60" showInDesigner="true" role="rectangle.py">
+    <costume name="rectangle-1" defaultZOrder="60" order="60" showInDesigner="true" extends="rectangle" role="rectangle.py">
       <pose name="default" pose="rectangle-1"/>
       <properties clan="blue"/>
     </costume>
-    <costume name="rectangle-2" defaultZOrder="60" order="60" showInDesigner="true" role="rectangle.py">
+    <costume name="rectangle-2" defaultZOrder="60" order="60" showInDesigner="true" extends="rectangle" role="rectangle.py">
       <pose name="default" pose="rectangle-2"/>
       <properties clan="blue"/>
     </costume>
-    <costume name="rectangle-3" defaultZOrder="60" order="60" showInDesigner="true" role="rectangle.py">
+    <costume name="rectangle-3" defaultZOrder="60" order="60" showInDesigner="true" extends="rectangle" role="rectangle.py">
       <pose name="default" pose="rectangle-3"/>
       <properties clan="blue"/>
     </costume>
-    <costume name="rectangle-4" defaultZOrder="60" order="60" showInDesigner="true" role="rectangle.py">
+    <costume name="rectangle-4" defaultZOrder="60" order="60" showInDesigner="true" extends="rectangle" role="rectangle.py">
       <pose name="default" pose="rectangle-4"/>
       <properties clan="blue"/>
     </costume>
-    <costume name="triangle" defaultZOrder="0" order="0" showInDesigner="true"/>
-    <costume name="triangle-1" defaultZOrder="80" order="80" showInDesigner="true" role="triangle.py">
+    <costume name="triangle" defaultZOrder="0" order="0" showInDesigner="true" extends="enemy">
+      <pose name="default" pose="triangle-1"/>
+    </costume>
+    <costume name="triangle-1" defaultZOrder="80" order="80" showInDesigner="true" extends="triangle" role="triangle.py">
       <pose name="default" pose="triangle-1"/>
       <properties clan="green"/>
     </costume>
-    <costume name="triangle-2" defaultZOrder="80" order="80" showInDesigner="true" role="triangle.py">
+    <costume name="triangle-2" defaultZOrder="80" order="80" showInDesigner="true" extends="triangle" role="triangle.py">
       <pose name="default" pose="triangle-2"/>
       <properties clan="green"/>
     </costume>
-    <costume name="triangle-3" defaultZOrder="80" order="80" showInDesigner="true" role="triangle.py">
+    <costume name="triangle-3" defaultZOrder="80" order="80" showInDesigner="true" extends="triangle" role="triangle.py">
       <pose name="default" pose="triangle-3"/>
       <properties clan="green"/>
     </costume>
-    <costume name="triangle-4" defaultZOrder="80" order="80" showInDesigner="true" role="triangle.py">
+    <costume name="triangle-4" defaultZOrder="80" order="80" showInDesigner="true" extends="triangle" role="triangle.py">
       <pose name="default" pose="triangle-4"/>
       <properties clan="green"/>
     </costume>

@@ -19,11 +19,12 @@ import uk.co.nickthecoder.itchy.gui.TableModel;
 import uk.co.nickthecoder.itchy.gui.TableModelColumn;
 import uk.co.nickthecoder.itchy.gui.TableModelRow;
 import uk.co.nickthecoder.itchy.gui.ThumbnailedPickerButton;
+import uk.co.nickthecoder.itchy.util.Filter;
 import uk.co.nickthecoder.jame.Surface;
 
 public class ListAnimations extends ListSubjects<AnimationResource>
 {
-    private PickerButton<Filter> filterPickerButton;
+    private PickerButton<AnimationResourceFilter> filterPickerButton;
 
     
     public ListAnimations(Resources resources)
@@ -35,8 +36,8 @@ public class ListAnimations extends ListSubjects<AnimationResource>
     @Override
     public void addHeader(Container page)
     {
-        HashMap<String, Filter> filterMap = new HashMap<String, Filter>();
-        Filter all = new Filter()
+        HashMap<String, AnimationResourceFilter> filterMap = new HashMap<String, AnimationResourceFilter>();
+        AnimationResourceFilter all = new AnimationResourceFilter()
         {
             @Override
             public boolean accept(AnimationResource ar)
@@ -44,7 +45,6 @@ public class ListAnimations extends ListSubjects<AnimationResource>
                 return true;
             }
 
-            @Override
             public Surface getThumbnail()
             {
                 return null;
@@ -54,11 +54,11 @@ public class ListAnimations extends ListSubjects<AnimationResource>
         
         for (String name : this.resources.costumeNames()) {
             Costume costume = this.resources.getCostume(name);
-            Filter filter = new CostumeFilter(costume);
+            AnimationResourceFilter filter = new CostumeFilter(costume);
             filterMap.put(costume.getName(), filter);
         }
 
-        this.filterPickerButton = new ThumbnailedPickerButton<Filter>("Filter", all, filterMap);
+        this.filterPickerButton = new ThumbnailedPickerButton<AnimationResourceFilter>("Filter", all, filterMap);
         this.filterPickerButton.addChangeListener(new ComponentChangeListener()
         {
             @Override
@@ -125,13 +125,11 @@ public class ListAnimations extends ListSubjects<AnimationResource>
         }
     }
 
-
-    interface Filter extends Thumbnailed
+    public interface AnimationResourceFilter extends Filter<AnimationResource>, Thumbnailed
     {
-        boolean accept(AnimationResource pr);
     }
-
-    class CostumeFilter implements Filter
+    
+    class CostumeFilter implements AnimationResourceFilter
     {
         Costume costume;
 
@@ -143,15 +141,17 @@ public class ListAnimations extends ListSubjects<AnimationResource>
         @Override
         public boolean accept(AnimationResource animationResource)
         {
-            while (costume != null) {
-                for (String eventName : costume.getAnimationNames()) {
-                    for (AnimationResource other : costume.getAnimationChoices(eventName)) {
+            Costume cost = this.costume;
+
+            while (cost != null) {
+                for (String eventName : cost.getAnimationNames()) {
+                    for (AnimationResource other : cost.getAnimationChoices(eventName)) {
                         if (animationResource == other) {
                             return true;
                         }
                     }
                 }
-                costume = costume.getExtendedFrom();
+                cost = cost.getExtendedFrom();
             }
             return false;
         }
@@ -159,7 +159,7 @@ public class ListAnimations extends ListSubjects<AnimationResource>
         @Override
         public Surface getThumbnail()
         {
-            return this.costume.getThumbnail();
+            return this.costume == null ? null : this.costume.getThumbnail();
         }
     }
 

@@ -23,12 +23,13 @@ import uk.co.nickthecoder.itchy.gui.TableModel;
 import uk.co.nickthecoder.itchy.gui.TableModelColumn;
 import uk.co.nickthecoder.itchy.gui.TableModelRow;
 import uk.co.nickthecoder.itchy.gui.ThumbnailedPickerButton;
+import uk.co.nickthecoder.itchy.util.Filter;
 import uk.co.nickthecoder.jame.JameException;
 import uk.co.nickthecoder.jame.Surface;
 
 public class ListPoses extends ListFileSubjects<FilePoseResource>
 {
-    private PickerButton<Filter> filterPickerButton;
+    private PickerButton<PoseResourceFilter> filterPickerButton;
 
     public ListPoses(Resources resources)
     {
@@ -38,8 +39,8 @@ public class ListPoses extends ListFileSubjects<FilePoseResource>
     @Override
     public void addHeader(Container page)
     {
-        HashMap<String, Filter> filterMap = new HashMap<String, Filter>();
-        Filter all = new Filter()
+        HashMap<String, PoseResourceFilter> filterMap = new HashMap<String, PoseResourceFilter>();
+        PoseResourceFilter all = new PoseResourceFilter()
         {
             @Override
             public boolean accept(PoseResource pr)
@@ -53,7 +54,7 @@ public class ListPoses extends ListFileSubjects<FilePoseResource>
                 return null;
             }
         };
-        Filter shared = new Filter()
+        PoseResourceFilter shared = new PoseResourceFilter()
         {
             @Override
             public boolean accept(PoseResource pr)
@@ -74,11 +75,11 @@ public class ListPoses extends ListFileSubjects<FilePoseResource>
         filterMap.put(" * Shared * ", shared);
         for (String name : this.resources.costumeNames()) {
             Costume costume = this.resources.getCostume(name);
-            Filter filter = new CostumeFilter(costume);
+            PoseResourceFilter filter = new CostumeFilter(costume);
             filterMap.put(costume.getName(), filter);
         }
 
-        this.filterPickerButton = new ThumbnailedPickerButton<Filter>("Filter", all, filterMap);
+        this.filterPickerButton = new ThumbnailedPickerButton<PoseResourceFilter>("Filter", all, filterMap);
         this.filterPickerButton.addChangeListener(new ComponentChangeListener()
         {
             @Override
@@ -169,13 +170,11 @@ public class ListPoses extends ListFileSubjects<FilePoseResource>
         }
     }
 
-    interface Filter extends Thumbnailed
+    interface PoseResourceFilter extends Filter<PoseResource>, Thumbnailed
     {
-        boolean accept(PoseResource pr);
-
     }
 
-    class CostumeFilter implements Filter
+    class CostumeFilter implements PoseResourceFilter
     {
         private Costume costume;
 
@@ -204,7 +203,7 @@ public class ListPoses extends ListFileSubjects<FilePoseResource>
         @Override
         public Surface getThumbnail()
         {
-            return this.costume.getThumbnail();
+            return this.costume == null ? null : this.costume.getThumbnail();
         }
     }
 

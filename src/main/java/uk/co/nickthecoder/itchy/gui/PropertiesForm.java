@@ -4,6 +4,7 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.gui;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,7 +34,8 @@ public class PropertiesForm<S>
     public PropertiesForm(S subject, List<Property<S, ?>> properties)
     {
         this.subject = subject;
-        this.properties = properties;
+        this.properties = new ArrayList<Property<S,?>>();
+        this.properties.addAll( properties );
 
         this.container = new PlainContainer();
         this.container.setType("form");
@@ -61,6 +63,11 @@ public class PropertiesForm<S>
         return this.container;
     }
 
+    public void add( Property<S,?> property )
+    {
+        this.properties.add( property );
+    }
+    
     /**
      * When using autoUpdate, check if any of the fields have been altered.
      * 

@@ -25,13 +25,14 @@ import uk.co.nickthecoder.itchy.gui.TableModel;
 import uk.co.nickthecoder.itchy.gui.TableModelColumn;
 import uk.co.nickthecoder.itchy.gui.TableModelRow;
 import uk.co.nickthecoder.itchy.gui.ThumbnailedPickerButton;
+import uk.co.nickthecoder.itchy.util.Filter;
 import uk.co.nickthecoder.jame.JameException;
 import uk.co.nickthecoder.jame.Surface;
 
 public class ListSounds extends ListFileSubjects<SoundResource>
 {
 
-    private PickerButton<Filter> filterPickerButton;
+    private PickerButton<SourceResourceFilter> filterPickerButton;
 
     public ListSounds(Resources resources)
     {
@@ -41,8 +42,8 @@ public class ListSounds extends ListFileSubjects<SoundResource>
     @Override
     public void addHeader( Container page )
     {
-        HashMap<String, Filter> filterMap = new HashMap<String, Filter>();
-        Filter all = new Filter() {
+        HashMap<String, SourceResourceFilter> filterMap = new HashMap<String, SourceResourceFilter>();
+        SourceResourceFilter all = new SourceResourceFilter() {
             @Override
             public boolean accept( SoundResource ar )
             {
@@ -59,11 +60,11 @@ public class ListSounds extends ListFileSubjects<SoundResource>
 
         for (String name : this.resources.costumeNames()) {
             Costume costume = this.resources.getCostume(name);
-            Filter filter = new CostumeFilter(costume);
+            SourceResourceFilter filter = new CostumeFilter(costume);
             filterMap.put(costume.getName(), filter);
         }
 
-        this.filterPickerButton = new ThumbnailedPickerButton<Filter>("Filter", all, filterMap);
+        this.filterPickerButton = new ThumbnailedPickerButton<SourceResourceFilter>("Filter", all, filterMap);
         this.filterPickerButton.addChangeListener(new ComponentChangeListener() {
             @Override
             public void changed()
@@ -171,12 +172,11 @@ public class ListSounds extends ListFileSubjects<SoundResource>
     }
     
 
-    interface Filter extends Thumbnailed
+    interface SourceResourceFilter extends Filter<SoundResource>, Thumbnailed
     {
-        boolean accept( SoundResource pr );
     }
     
-    class CostumeFilter implements Filter
+    class CostumeFilter implements SourceResourceFilter
     {
         Costume costume;
 
@@ -188,16 +188,18 @@ public class ListSounds extends ListFileSubjects<SoundResource>
         @Override
         public boolean accept( SoundResource soundResource )
         {
-            while (costume != null) {
-                for (String eventName : costume.getSoundNames()) {
-                    for (ManagedSound ms : costume.getSoundChoices(eventName)) {
+            Costume cost = this.costume;
+            
+            while (cost != null) {
+                for (String eventName : cost.getSoundNames()) {
+                    for (ManagedSound ms : cost.getSoundChoices(eventName)) {
                         SoundResource other = ms.soundResource;
                         if (soundResource == other) {
                             return true;
                         }
                     }
                 }
-                costume = costume.getExtendedFrom();
+                cost = cost.getExtendedFrom();
             }
             return false;
         }
@@ -205,7 +207,7 @@ public class ListSounds extends ListFileSubjects<SoundResource>
         @Override
         public Surface getThumbnail()
         {
-            return this.costume.getThumbnail();
+            return this.costume == null ? null : this.costume.getThumbnail();
         }
     }
 }
