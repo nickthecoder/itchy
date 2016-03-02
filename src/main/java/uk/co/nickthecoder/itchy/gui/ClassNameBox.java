@@ -15,7 +15,6 @@ import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.SceneDirector;
-import uk.co.nickthecoder.itchy.script.ScriptLanguage;
 import uk.co.nickthecoder.itchy.script.ScriptManager;
 import uk.co.nickthecoder.itchy.util.ClassName;
 
@@ -30,8 +29,6 @@ public class ClassNameBox extends PlainContainer
     private Button reloadButton;
 
     private Label editButtonLabel;
-
-    private Label errorText;
 
     private ClassName value;
 
@@ -65,12 +62,6 @@ public class ClassNameBox extends PlainContainer
 
         this.reloadButton = new Button("Reload");
         main.addChild(this.reloadButton);
-
-        this.errorText = new Label("");
-        this.addChild(this.errorText);
-
-        this.errorText.addStyle("error");
-        this.errorText.setVisible(false);
 
         this.textBox.addChangeListener(new ComponentChangeListener() {
 
@@ -139,7 +130,6 @@ public class ClassNameBox extends PlainContainer
     
     private void update()
     {
-        this.errorText.setVisible(false);
         this.addStyle("error", this.textBox.hasStyle("error"));
         this.value.name = this.textBox.getText();
 
@@ -156,9 +146,6 @@ public class ClassNameBox extends PlainContainer
             } catch (ScriptException e) {
                 this.scriptManager.resources.errorLog.log(e.getMessage());
                 this.textBox.addStyle("error");
-                ScriptLanguage language = this.scriptManager.findLanguage(getClassName());
-                this.errorText.setText(language.simpleMessage(e, false));
-                this.errorText.setVisible(true);
             } catch (Exception e) {
                 e.printStackTrace();
                 throw e;
@@ -197,7 +184,7 @@ public class ClassNameBox extends PlainContainer
             String baseName = getBaseName();
             if (baseName != null) {
                 this.scriptManager.createScript(baseName, this.value);
-                update();
+                fireChangeEvent();
             }
         }
 

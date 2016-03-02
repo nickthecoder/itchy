@@ -28,9 +28,9 @@ Destroy-Debris
 BUGS
 ====
 
-Cannot start a new animation from a finish event of an old animation (Dodge 'Em Player wanted to do it)
+Error when "Create" a script.
 
-Cannot set costume "extends" in the gui.
+Cannot start a new animation from a finish event of an old animation (Dodge 'Em Player wanted to do it)
 
 Reload a Role does NOT update the costume's CostumeFeatures which use it.
 
