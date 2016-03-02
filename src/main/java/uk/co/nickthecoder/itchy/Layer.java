@@ -54,7 +54,7 @@ public class Layer implements Comparable<Layer>, NamedSubject<Layer>, Cloneable
         name = "";
         position = new Rect(0, 0, 1, 1);
         viewClassName = new ClassName(View.class, StageView.class.getName());
-        stageClassName = new ClassName(View.class, ZOrderStage.class.getName());
+        stageClassName = new ClassName(Stage.class, ZOrderStage.class.getName());
         stageConstraintClassName = new ClassName(StageConstraint.class, NullStageConstraint.class.getName());
         
         updateView();

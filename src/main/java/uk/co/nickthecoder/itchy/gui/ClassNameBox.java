@@ -131,6 +131,7 @@ public class ClassNameBox extends PlainContainer
     private void update()
     {
         this.addStyle("error", this.textBox.hasStyle("error"));
+        
         this.value.name = this.textBox.getText();
 
         boolean isValidScript = this.scriptManager.isValidScript(this.value);
