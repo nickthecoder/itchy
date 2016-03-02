@@ -1,0 +1,26 @@
+<scene name="j" layout="default" sceneDirector="play.py" showMouse="true">
+  <sceneDirector speedUp="0.1"/>
+  <layer name="background"/>
+  <layer name="main">
+    <actor costume="player-blue" x="352.0" y="294.0" zOrder="50" scale="2.0">
+      <role maxSpeed="10.0"/>
+    </actor>
+  </layer>
+  <layer name="wrapped">
+    <actor costume="triangle-1" x="516.0" y="444.0" zOrder="80">
+      <role vx="-1.0" vy="4.0" rotation="0.1"/>
+    </actor>
+    <actor costume="triangle-2" x="532.0" y="132.0" zOrder="80">
+      <role vx="-2.0" vy="4.0" rotation="-0.5"/>
+    </actor>
+    <actor costume="triangle-3" x="173.0" y="190.0" zOrder="80">
+      <role vx="2.0" vy="-4.0" rotation="-2.0"/>
+    </actor>
+    <actor costume="triangle-4" x="97.0" y="495.0" zOrder="80">
+      <role vx="4.0" vy="4.0" rotation="1.0"/>
+    </actor>
+    <actor costume="triangle-4" x="662.0" y="226.0" zOrder="80">
+      <role vx="-3.0" vy="2.0" rotation="1.0"/>
+    </actor>
+  </layer>
+</scene>

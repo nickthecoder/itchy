@@ -1,0 +1,34 @@
+<scene name="m" layout="default" sceneDirector="play.py" showMouse="true">
+  <sceneDirector/>
+  <layer name="background"/>
+  <layer name="main">
+    <actor costume="player-red" x="407.0" y="315.0" zOrder="50" scale="2.0">
+      <role maxSpeed="10.0" clanPeriod="3.0" clans="red,blue"/>
+    </actor>
+    <actor costume="rectangle-1" x="164.0" y="356.0" zOrder="60" scale="2.0">
+      <role vx="5.0" vy="3.0" rotation="0.0"/>
+    </actor>
+    <actor costume="rectangle-2" x="637.0" y="188.0" zOrder="60" scale="2.0">
+      <role vx="-4.0" vy="4.0" rotation="0.0"/>
+    </actor>
+    <actor costume="rectangle-3" x="493.0" y="419.0" zOrder="60" scale="2.0">
+      <role vx="-3.0" vy="4.0" rotation="0.0"/>
+    </actor>
+    <actor costume="rectangle-4" x="71.0" y="127.0" zOrder="60" scale="2.0">
+      <role vx="3.0" vy="-2.0" rotation="0.0"/>
+    </actor>
+    <actor costume="ball-1" x="169.0" y="221.0" zOrder="70">
+      <role vx="3.0" vy="3.0" rotation="0.0"/>
+    </actor>
+    <actor costume="ball-3" x="361.0" y="188.0" zOrder="70">
+      <role vx="2.0" vy="2.0" rotation="0.0"/>
+    </actor>
+    <actor costume="ball-2" x="611.0" y="291.0" zOrder="70">
+      <role vx="-3.0" vy="-1.0" rotation="0.0"/>
+    </actor>
+    <actor costume="ball-1" x="192.0" y="467.0" zOrder="70">
+      <role vx="-1.0" vy="-1.0" rotation="0.0"/>
+    </actor>
+  </layer>
+  <layer name="wrapped"/>
+</scene>

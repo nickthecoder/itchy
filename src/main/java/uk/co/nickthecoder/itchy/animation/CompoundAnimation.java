@@ -124,6 +124,8 @@ public class CompoundAnimation extends AbstractAnimation
 
     public void fastForward( Actor actor )
     {
+        if (this.isFinished()) return;
+        
         for ( Animation animation : this.children ) {
             animation.fastForward(actor);
         }

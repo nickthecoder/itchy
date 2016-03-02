@@ -1,16 +1,22 @@
 <resources>
-  <game title="Dodge 'Em" width="800" height="600" resizable="false" initialScene="menu" testScene="play" directorClassName="dodge.py" authors="Nick Robinson&#xA;"/>
+  <game title="Dodge 'Em" width="800" height="600" resizable="false" initialScene="menu" testScene="l" directorClassName="dodge.py" authors="Nick Robinson&#xA;"/>
   <spriteSheets>
     <spriteSheet name="graphics" file="images/graphics.png">
       <sprite name="ball-1" direction="0.0" offsetX="38" offsetY="38" x="634" y="91" width="75" height="75"/>
       <sprite name="ball-2" direction="0.0" offsetX="46" offsetY="46" x="483" y="230" width="92" height="92"/>
       <sprite name="ball-3" direction="0.0" offsetX="59" offsetY="59" x="616" y="208" width="118" height="118"/>
       <sprite name="ball-4" direction="0.0" offsetX="76" offsetY="76" x="461" y="62" width="152" height="152"/>
-      <sprite name="enemy-1" direction="0.0" offsetX="50" offsetY="10" x="205" y="116" width="100" height="20"/>
-      <sprite name="enemy-2" direction="0.0" offsetX="10" offsetY="50" x="205" y="116" width="20" height="100"/>
-      <sprite name="enemy-3" direction="0.0" offsetX="30" offsetY="20" x="205" y="116" width="60" height="40"/>
-      <sprite name="enemy-4" direction="0.0" offsetX="20" offsetY="30" x="205" y="116" width="40" height="60"/>
-      <sprite name="player-1" direction="0.0" offsetX="24" offsetY="24" x="450" y="354" width="48" height="48"/>
+      <sprite name="player-blue" direction="0.0" offsetX="24" offsetY="24" x="451" y="435" width="48" height="48"/>
+      <sprite name="player-green" direction="0.0" offsetX="24" offsetY="24" x="531" y="355" width="48" height="48"/>
+      <sprite name="player-red" direction="0.0" offsetX="24" offsetY="24" x="450" y="355" width="48" height="48"/>
+      <sprite name="rectangle-1" direction="0.0" offsetX="50" offsetY="10" x="205" y="116" width="100" height="20"/>
+      <sprite name="rectangle-2" direction="0.0" offsetX="10" offsetY="50" x="205" y="116" width="20" height="100"/>
+      <sprite name="rectangle-3" direction="0.0" offsetX="30" offsetY="20" x="205" y="116" width="60" height="40"/>
+      <sprite name="rectangle-4" direction="0.0" offsetX="20" offsetY="30" x="205" y="116" width="40" height="60"/>
+      <sprite name="triangle-1" direction="0.0" offsetX="25" offsetY="27" x="219" y="361" width="50" height="43"/>
+      <sprite name="triangle-2" direction="0.0" offsetX="38" offsetY="41" x="206" y="361" width="75" height="65"/>
+      <sprite name="triangle-3" direction="0.0" offsetX="50" offsetY="53" x="194" y="361" width="100" height="86"/>
+      <sprite name="triangle-4" direction="0.0" offsetX="78" offsetY="83" x="168" y="360" width="153" height="133"/>
       <sprite name="wall-h" direction="0.0" offsetX="400" offsetY="25" x="0" y="0" width="800" height="50"/>
       <sprite name="wall-v" direction="0.0" offsetX="25" offsetY="300" x="0" y="0" width="50" height="600"/>
     </spriteSheet>
@@ -22,36 +28,112 @@
     <font name="veraBold" file="fonts/Vera/VeraBd.ttf"/>
   </fonts>
   <sounds/>
-  <animations/>
+  <animations>
+    <animation name="blue">
+      <sequence sequence="true" loops="1" finishedMessage="nextClan">
+        <color targetColor="#0c21b9ff" ticks="60" ease="linear"/>
+      </sequence>
+    </animation>
+    <animation name="fadeInstructions">
+      <sequence sequence="true" loops="1">
+        <alpha target="0.0" ticks="300" ease="easeInOut"/>
+      </sequence>
+    </animation>
+    <animation name="gameOver">
+      <sequence sequence="true" loops="1">
+        <alpha target="0.0" ticks="0" ease="linear"/>
+        <alpha target="255.0" ticks="60" ease="easeIn"/>
+      </sequence>
+    </animation>
+    <animation name="green">
+      <sequence sequence="true" loops="1" finishedMessage="nextClan">
+        <color targetColor="#1ba418ff" ticks="60" ease="linear"/>
+      </sequence>
+    </animation>
+    <animation name="red">
+      <sequence sequence="true" loops="1" finishedMessage="nextClan">
+        <color targetColor="#a31702ff" ticks="60" ease="linear"/>
+      </sequence>
+    </animation>
+  </animations>
   <costumes>
     <costume name="ball" defaultZOrder="0" order="0" showInDesigner="true"/>
     <costume name="ball-1" defaultZOrder="70" order="70" showInDesigner="true" role="ball.py">
       <pose name="default" pose="ball-1"/>
+      <properties clan="red"/>
     </costume>
     <costume name="ball-2" defaultZOrder="70" order="70" showInDesigner="true" role="ball.py">
       <pose name="default" pose="ball-2"/>
+      <properties clan="red"/>
     </costume>
     <costume name="ball-3" defaultZOrder="70" order="70" showInDesigner="true" role="ball.py">
       <pose name="default" pose="ball-3"/>
+      <properties clan="red"/>
     </costume>
     <costume name="ball-4" defaultZOrder="70" order="70" showInDesigner="true" role="ball.py">
       <pose name="default" pose="ball-4"/>
+      <properties clan="red"/>
     </costume>
-    <costume name="enemy" defaultZOrder="60" order="60" showInDesigner="true" role="enemy.py"/>
-    <costume name="enemy-1" defaultZOrder="60" order="60" showInDesigner="true" role="enemy.py">
-      <pose name="default" pose="enemy-1"/>
+    <costume name="gameOver" defaultZOrder="0" order="0" showInDesigner="true" role="uk.co.nickthecoder.itchy.role.MessageButton">
+      <font name="default" font="veraBold" fontSize="48" color="#ffffffff" xAlignment="0.5" yAlignment="0.5" marginTop="0" marginRight="0" marginBottom="0" marginLeft="0"/>
+      <animation name="default" animation="gameOver"/>
     </costume>
-    <costume name="enemy-2" defaultZOrder="60" order="60" showInDesigner="true" role="enemy.py">
-      <pose name="default" pose="enemy-2"/>
+    <costume name="instructions" defaultZOrder="95" order="95" showInDesigner="true">
+      <font name="default" font="veraBold" fontSize="22" color="#ffffffff" xAlignment="0.5" yAlignment="0.5" marginTop="0" marginRight="0" marginBottom="0" marginLeft="0"/>
+      <animation name="default" animation="fadeInstructions"/>
     </costume>
-    <costume name="enemy-3" defaultZOrder="60" order="60" showInDesigner="true" role="enemy.py">
-      <pose name="default" pose="enemy-3"/>
+    <costume name="player" defaultZOrder="0" order="0" showInDesigner="true">
+      <animation name="blue" animation="blue"/>
+      <animation name="green" animation="green"/>
+      <animation name="red" animation="red"/>
     </costume>
-    <costume name="enemy-4" defaultZOrder="60" order="60" showInDesigner="true" role="enemy.py">
-      <pose name="default" pose="enemy-4"/>
+    <costume name="player-blue" defaultZOrder="50" order="50" showInDesigner="true" extends="player" role="player.py">
+      <pose name="default" pose="player-blue"/>
+      <properties clan="blue"/>
     </costume>
-    <costume name="player" defaultZOrder="50" order="50" showInDesigner="true" role="player.py">
-      <pose name="default" pose="player-1"/>
+    <costume name="player-green" defaultZOrder="50" order="50" showInDesigner="true" extends="player" role="player.py">
+      <pose name="default" pose="player-green"/>
+      <properties clan="green"/>
+    </costume>
+    <costume name="player-red" defaultZOrder="50" order="50" showInDesigner="true" extends="player" role="player.py">
+      <pose name="default" pose="player-red"/>
+      <properties clan="red"/>
+    </costume>
+    <costume name="rectangle" defaultZOrder="60" order="60" showInDesigner="true" role="enemy.py">
+      <properties clan="none"/>
+    </costume>
+    <costume name="rectangle-1" defaultZOrder="60" order="60" showInDesigner="true" role="rectangle.py">
+      <pose name="default" pose="rectangle-1"/>
+      <properties clan="blue"/>
+    </costume>
+    <costume name="rectangle-2" defaultZOrder="60" order="60" showInDesigner="true" role="rectangle.py">
+      <pose name="default" pose="rectangle-2"/>
+      <properties clan="blue"/>
+    </costume>
+    <costume name="rectangle-3" defaultZOrder="60" order="60" showInDesigner="true" role="rectangle.py">
+      <pose name="default" pose="rectangle-3"/>
+      <properties clan="blue"/>
+    </costume>
+    <costume name="rectangle-4" defaultZOrder="60" order="60" showInDesigner="true" role="rectangle.py">
+      <pose name="default" pose="rectangle-4"/>
+      <properties clan="blue"/>
+    </costume>
+    <costume name="triangle" defaultZOrder="0" order="0" showInDesigner="true"/>
+    <costume name="triangle-1" defaultZOrder="80" order="80" showInDesigner="true" role="triangle.py">
+      <pose name="default" pose="triangle-1"/>
+      <properties clan="green"/>
+    </costume>
+    <costume name="triangle-2" defaultZOrder="80" order="80" showInDesigner="true" role="triangle.py">
+      <pose name="default" pose="triangle-2"/>
+      <properties clan="green"/>
+    </costume>
+    <costume name="triangle-3" defaultZOrder="80" order="80" showInDesigner="true" role="triangle.py">
+      <pose name="default" pose="triangle-3"/>
+      <properties clan="green"/>
+    </costume>
+    <costume name="triangle-4" defaultZOrder="80" order="80" showInDesigner="true" role="triangle.py">
+      <pose name="default" pose="triangle-4"/>
+      <properties clan="green"/>
     </costume>
     <costume name="wall-h" defaultZOrder="10" order="10" showInDesigner="true" role="wall.py">
       <pose name="default" pose="wall-h"/>
@@ -68,10 +150,19 @@
     <scene name="e"/>
     <scene name="f"/>
     <scene name="g"/>
+    <scene name="gameOver"/>
     <scene name="glass"/>
     <scene name="h"/>
+    <scene name="i"/>
+    <scene name="j"/>
+    <scene name="k"/>
+    <scene name="l"/>
+    <scene name="m"/>
     <scene name="menu"/>
+    <scene name="n"/>
+    <scene name="o"/>
     <scene name="play"/>
+    <scene name="test"/>
   </scenes>
   <inputs>
     <input name="exit" keys="click+ESCAPE"/>
@@ -79,12 +170,15 @@
     <input name="restart" keys="F5,RETURN"/>
   </inputs>
   <layouts>
-    <layout name="default" defaultLayer="background">
+    <layout name="default" defaultLayer="main">
       <layer name="background" zOrder="0" x="0" y="0" width="800" height="600" viewClassName="uk.co.nickthecoder.itchy.RGBAView" stageClassName="uk.co.nickthecoder.itchy.ZOrderStage" stageConstraintClassName="uk.co.nickthecoder.itchy.NullStageConstraint">
         <view color="#002900ff"/>
       </layer>
       <layer name="main" zOrder="50" x="0" y="0" width="800" height="600" viewClassName="uk.co.nickthecoder.itchy.StageView" stageClassName="uk.co.nickthecoder.itchy.ZOrderStage" stageConstraintClassName="uk.co.nickthecoder.itchy.NullStageConstraint">
         <view enableMouse="true"/>
+      </layer>
+      <layer name="wrapped" zOrder="55" x="0" y="0" width="800" height="600" viewClassName="uk.co.nickthecoder.itchy.WrappedStageView" stageClassName="uk.co.nickthecoder.itchy.ZOrderStage" stageConstraintClassName="uk.co.nickthecoder.itchy.NullStageConstraint">
+        <view enableMouse="false" top="600" right="800" bottom="0" left="0"/>
       </layer>
     </layout>
     <layout name="glass" defaultLayer="glass">
@@ -92,6 +186,11 @@
         <view enableMouse="false"/>
       </layer>
       <layer name="glass" zOrder="100" x="0" y="0" width="800" height="600" viewClassName="uk.co.nickthecoder.itchy.StageView" stageClassName="uk.co.nickthecoder.itchy.ZOrderStage" stageConstraintClassName="uk.co.nickthecoder.itchy.NullStageConstraint">
+        <view enableMouse="true"/>
+      </layer>
+    </layout>
+    <layout name="popup" defaultLayer="popup">
+      <layer name="popup" zOrder="110" x="0" y="0" width="800" height="600" viewClassName="uk.co.nickthecoder.itchy.StageView" stageClassName="uk.co.nickthecoder.itchy.ZOrderStage" stageConstraintClassName="uk.co.nickthecoder.itchy.NullStageConstraint">
         <view enableMouse="true"/>
       </layer>
     </layout>

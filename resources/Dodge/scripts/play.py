@@ -33,22 +33,28 @@ class Play(PlainSceneDirector) :
         if self.playing :
             self.score += 1
 
-
+            
     def stopPlaying( self ) :
         self.playing = False
         self.speedUp = 0
         if self.score >= self.highScore :
             game.preferences.putInt( self.highScoreKey(), self.score )
-
+        game.mergeScene("gameOver")
+        
 
     def loading( self, scene ) :
         game.mergeScene("glass")
 
 
     def onMessage( self, message ) :
+
         if message == "start" :
             self.playing = True
             game.findActorById( "start" ).deathEvent("clicked")
+
+        if message == "restart" :
+            game.director.startScene( game.sceneName )
+            
 
     def highScoreKey(self) :
         return "highScore_" + game.sceneName

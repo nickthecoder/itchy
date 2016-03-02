@@ -5,7 +5,7 @@ properties = ArrayList()
 class Wall(AbstractRole) :
 
     def __init__(self) :
-        self.addTag("deadly")
+        self.addTag("wall")
 
     # Boiler plate code - no need to change this
     def getProperties(self):

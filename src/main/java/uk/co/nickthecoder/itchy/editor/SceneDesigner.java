@@ -1534,9 +1534,15 @@ public class SceneDesigner implements MouseListener, KeyListener
 
             Role role;
 
-            actor = new Actor(currentCostume);
             try {
-                role = (Role) stampActor.getCostume().roleClassName.createInstance(this.editor.resources);
+                Costume costume = stampActor.getCostume();
+                if (costume == null) {
+                    actor = new Actor(stampActor.getAppearance().getPose());
+                    role = new PlainRole();
+                } else {
+                    actor = new Actor(currentCostume);
+                    role = (Role) costume.roleClassName.createInstance(this.editor.resources);
+                }
             } catch (Exception e) {
                 e.printStackTrace();
                 return;

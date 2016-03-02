@@ -351,7 +351,7 @@ public class Actor implements PropertySubject<Actor>
         Animation newAnimation;
 
         // What do we do when an animation is in progress. Either replace it, ignore the new animation or merge them.
-        if ((this.animation == null) || (ae == AnimationEvent.REPLACE)) {
+        if ((this.animation == null) || (this.animation.isFinished()) || (ae == AnimationEvent.REPLACE)) {
             newAnimation = animation.copy();
 
             if ((this.animation != null) && (!this.animation.isFinished())) {

@@ -2,7 +2,7 @@
   <sceneDirector speedUp="0.02"/>
   <layer name="background"/>
   <layer name="main">
-    <actor costume="player" x="417.0" y="303.0" zOrder="50" scale="2.0">
+    <actor costume="player-blue" x="444.0" y="300.0" zOrder="50" scale="2.0">
       <role maxSpeed="10.0"/>
     </actor>
     <actor costume="ball-2" x="184.0" y="172.0" zOrder="70">
@@ -18,4 +18,5 @@
       <role vx="1.0" vy="1.0" rotation="0.0"/>
     </actor>
   </layer>
+  <layer name="wrapped"/>
 </scene>

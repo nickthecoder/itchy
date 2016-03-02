@@ -1,6 +1,12 @@
 Current Tasks
 =============
 
+Should collisions filter on Actor or Role?
+
+Dodge - Colour each enemy differently?
+    Create scenes where there are more than one type, and you switch - only one type is deadly. you pass through the others.
+    
+
 Duplicate scene
 
 Implement change Layout in scene designer.
@@ -22,7 +28,9 @@ Destroy-Debris
 BUGS
 ====
 
-Scroll in the SceneDesigner messes up the background position.
+Cannot start a new animation from a finish event of an old animation (Dodge 'Em Player wanted to do it)
+
+Cannot set costume "extends" in the gui.
 
 Reload a Role does NOT update the costume's CostumeFeatures which use it.
 

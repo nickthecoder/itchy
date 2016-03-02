@@ -1,7 +1,7 @@
 <scene name="menu" layout="default" sceneDirector="menu.py" showMouse="true">
   <layer name="background"/>
   <layer name="main">
-    <text x="68.0" y="185.0" font="veraBold" fontSize="64.0" text="a" xAlignment="0.0" yAlignment="0.0" role="uk.co.nickthecoder.itchy.role.SceneButton" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+    <text x="191.0" y="96.0" font="veraBold" fontSize="64.0" text="a" xAlignment="0.0" yAlignment="0.0" role="uk.co.nickthecoder.itchy.role.SceneButton" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <role sceneName="a"/>
       <makeup dx="4" dy="-4"/>
     </text>
@@ -24,36 +24,65 @@
       <role sceneName="play"/>
       <makeup dx="4" dy="-4"/>
     </text>
-    <text x="189.0" y="237.0" font="veraBold" fontSize="64.0" text="c" xAlignment="0.0" yAlignment="0.0" role="uk.co.nickthecoder.itchy.role.SceneButton" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+    <text x="89.0" y="139.0" font="veraBold" fontSize="64.0" text="c" xAlignment="0.0" yAlignment="0.0" role="uk.co.nickthecoder.itchy.role.SceneButton" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <role sceneName="c"/>
       <makeup dx="4" dy="-4"/>
     </text>
-    <text x="124.0" y="216.0" font="veraBold" fontSize="64.0" text="b" xAlignment="0.0" yAlignment="0.0" role="uk.co.nickthecoder.itchy.role.SceneButton" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+    <text x="134.0" y="105.0" font="veraBold" fontSize="64.0" text="b" xAlignment="0.0" yAlignment="0.0" role="uk.co.nickthecoder.itchy.role.SceneButton" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <role sceneName="b"/>
       <makeup dx="4" dy="-4"/>
     </text>
-    <text x="245.0" y="214.0" font="veraBold" fontSize="64.0" text="d" xAlignment="0.0" yAlignment="0.0" role="uk.co.nickthecoder.itchy.role.SceneButton" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+    <text x="75.0" y="191.0" font="veraBold" fontSize="64.0" text="d" xAlignment="0.0" yAlignment="0.0" role="uk.co.nickthecoder.itchy.role.SceneButton" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <role sceneName="d"/>
       <makeup dx="4" dy="-4"/>
     </text>
-    <text x="304.0" y="183.0" font="veraBold" fontSize="64.0" text="e" xAlignment="0.0" yAlignment="0.0" role="uk.co.nickthecoder.itchy.role.SceneButton" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+    <text x="119.0" y="244.0" font="veraBold" fontSize="64.0" text="e" xAlignment="0.0" yAlignment="0.0" role="uk.co.nickthecoder.itchy.role.SceneButton" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <role sceneName="e"/>
       <makeup dx="4" dy="-4"/>
     </text>
-    <text x="366.0" y="155.0" font="veraBold" fontSize="64.0" text="f" xAlignment="0.0" yAlignment="0.0" role="uk.co.nickthecoder.itchy.role.SceneButton" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+    <text x="181.0" y="239.0" font="veraBold" fontSize="64.0" text="f" xAlignment="0.0" yAlignment="0.0" role="uk.co.nickthecoder.itchy.role.SceneButton" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <role sceneName="f"/>
       <makeup dx="4" dy="-4"/>
     </text>
-    <text x="415.0" y="149.0" font="veraBold" fontSize="64.0" text="g" xAlignment="0.0" yAlignment="0.0" role="uk.co.nickthecoder.itchy.role.SceneButton" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+    <text x="225.0" y="224.0" font="veraBold" fontSize="64.0" text="g" xAlignment="0.0" yAlignment="0.0" role="uk.co.nickthecoder.itchy.role.SceneButton" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <role sceneName="g"/>
       <makeup dx="4" dy="-4"/>
     </text>
-    <text x="481.0" y="156.0" font="veraBold" fontSize="64.0" text="h" xAlignment="0.0" yAlignment="0.0" role="uk.co.nickthecoder.itchy.role.SceneButton" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+    <text x="274.0" y="165.0" font="veraBold" fontSize="64.0" text="h" xAlignment="0.0" yAlignment="0.0" role="uk.co.nickthecoder.itchy.role.SceneButton" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <role sceneName="h"/>
       <makeup dx="4" dy="-4"/>
     </text>
-    <actor costume="player" x="553.0" y="293.0" zOrder="50" scale="1.5" alpha="128.0">
-      <role maxSpeed="10.0"/>
+    <text x="333.0" y="137.0" font="veraBold" fontSize="64.0" text="i" xAlignment="0.0" yAlignment="0.0" role="uk.co.nickthecoder.itchy.role.SceneButton" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+      <role sceneName="i"/>
+      <makeup dx="4" dy="-4"/>
+    </text>
+    <text x="374.0" y="118.0" font="veraBold" fontSize="64.0" text="j" xAlignment="0.0" yAlignment="0.0" role="uk.co.nickthecoder.itchy.role.SceneButton" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+      <role sceneName="j"/>
+      <makeup dx="4" dy="-4"/>
+    </text>
+    <text x="417.0" y="93.0" font="veraBold" fontSize="64.0" text="k" xAlignment="0.0" yAlignment="0.0" role="uk.co.nickthecoder.itchy.role.SceneButton" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+      <role sceneName="k"/>
+      <makeup dx="4" dy="-4"/>
+    </text>
+    <text x="477.0" y="93.0" font="veraBold" fontSize="64.0" text="l" xAlignment="0.0" yAlignment="0.0" role="uk.co.nickthecoder.itchy.role.SceneButton" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+      <role sceneName="l"/>
+      <makeup dx="4" dy="-4"/>
+    </text>
+    <text x="591.0" y="135.0" font="veraBold" fontSize="64.0" text="n" xAlignment="0.0" yAlignment="0.0" role="uk.co.nickthecoder.itchy.role.SceneButton" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+      <role sceneName="n"/>
+      <makeup dx="4" dy="-4"/>
+    </text>
+    <text x="516.0" y="111.0" font="veraBold" fontSize="64.0" text="m" xAlignment="0.0" yAlignment="0.0" role="uk.co.nickthecoder.itchy.role.SceneButton" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+      <role sceneName="m"/>
+      <makeup dx="4" dy="-4"/>
+    </text>
+    <text x="626.0" y="180.0" font="veraBold" fontSize="64.0" text="o" xAlignment="0.0" yAlignment="0.0" role="uk.co.nickthecoder.itchy.role.SceneButton" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+      <role sceneName="o"/>
+      <makeup dx="4" dy="-4"/>
+    </text>
+    <actor costume="player-green" x="572.0" y="286.0" zOrder="50" scale="1.5" alpha="128.0">
+      <role maxSpeed="10.0" clanPeriod="0.0" clans=""/>
     </actor>
   </layer>
+  <layer name="wrapped"/>
 </scene>

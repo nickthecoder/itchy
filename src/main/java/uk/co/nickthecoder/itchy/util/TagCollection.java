@@ -46,21 +46,4 @@ public class TagCollection<M>
         }
     }
     
-    class WithoutTagFilter<N> implements Filter<N>
-    {
-        private Set<M> members;
-        
-        public WithoutTagFilter( String tag )
-        {
-            this.members = membersByTag.get(tag);
-        }
-        
-        @Override
-        public boolean accept(N subject)
-        {
-            return ! members.contains(subject);
-        }
-        
-    }
-    
 }

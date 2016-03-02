@@ -14,7 +14,10 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.5 r10040"
-   sodipodi:docname="graphics.svg">
+   sodipodi:docname="graphics.svg"
+   inkscape:export-filename="/media/home/nick/projects/itchy/resources/Dodge/images/graphics.png"
+   inkscape:export-xdpi="44.307693"
+   inkscape:export-ydpi="44.307693">
   <defs
      id="defs4" />
   <sodipodi:namedview
@@ -24,8 +27,8 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.7"
-     inkscape:cx="389.28572"
+     inkscape:zoom="0.98994949"
+     inkscape:cx="213.85094"
      inkscape:cy="568.57142"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
@@ -34,7 +37,11 @@
      inkscape:window-height="847"
      inkscape:window-x="0"
      inkscape:window-y="27"
-     inkscape:window-maximized="1" />
+     inkscape:window-maximized="1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid2994" />
+  </sodipodi:namedview>
   <metadata
      id="metadata7">
     <rdf:RDF>
@@ -55,7 +62,8 @@
        id="g3044"
        inkscape:export-filename="/media/home/nick/projects/itchy/resources/Dodge/images/graphics.png"
        inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90">
+       inkscape:export-ydpi="90"
+       style="fill:#3f0062;fill-opacity:1">
       <rect
          inkscape:export-ydpi="90"
          inkscape:export-xdpi="90"
@@ -65,11 +73,11 @@
          y="116.64792"
          x="-1.4285715"
          height="600"
-         width="432.85715"
+         width="91.428574"
          id="rect2987"
-         style="fill:#17a302;fill-opacity:1;stroke:none" />
+         style="fill:#3f0062;fill-opacity:1;stroke:none" />
       <rect
-         style="fill:#17a302;fill-opacity:1;stroke:none"
+         style="fill:#3f0062;fill-opacity:1;stroke:none"
          id="rect3042"
          width="800"
          height="60"
@@ -81,15 +89,6 @@
          inkscape:export-xdpi="90"
          inkscape:export-ydpi="90" />
     </g>
-    <rect
-       style="fill:#000000;fill-opacity:1;stroke:none"
-       id="rect2985"
-       width="384.28571"
-       height="500"
-       x="48.57143"
-       y="166.64792"
-       rx="0.88604754"
-       ry="1.5938352" />
     <rect
        style="fill:#0c21b9;fill-opacity:1;stroke:none"
        id="rect3757"
@@ -111,45 +110,91 @@
        inkscape:export-filename="/media/home/nick/projects/itchy/resources/Dodge/icon32.png"
        inkscape:export-xdpi="44.307693"
        inkscape:export-ydpi="44.307693" />
+    <g
+       id="g3002"
+       style="fill:#a31702;fill-opacity:1">
+      <path
+         transform="translate(-7.1428573,-112.85715)"
+         d="m 617.14288,367.36218 a 75,75 0 1 1 -150,0 75,75 0 1 1 150,0 z"
+         sodipodi:ry="75"
+         sodipodi:rx="75"
+         sodipodi:cy="367.36218"
+         sodipodi:cx="542.14288"
+         id="path2986"
+         style="fill:#a31702;fill-opacity:1;stroke:none"
+         sodipodi:type="arc" />
+      <path
+         transform="matrix(0.6,0,0,0.6,201.85712,171.94487)"
+         d="m 617.14288,367.36218 a 75,75 0 1 1 -150,0 75,75 0 1 1 150,0 z"
+         sodipodi:ry="75"
+         sodipodi:rx="75"
+         sodipodi:cy="367.36218"
+         sodipodi:cx="542.14288"
+         id="path2986-4"
+         style="fill:#a31702;fill-opacity:1;stroke:none"
+         sodipodi:type="arc" />
+      <path
+         transform="matrix(0.48571429,0,0,0.48571429,406.67346,66.786271)"
+         d="m 617.14288,367.36218 a 75,75 0 1 1 -150,0 75,75 0 1 1 150,0 z"
+         sodipodi:ry="75"
+         sodipodi:rx="75"
+         sodipodi:cy="367.36218"
+         sodipodi:cx="542.14288"
+         id="path2986-4-4"
+         style="fill:#a31702;fill-opacity:1;stroke:none"
+         sodipodi:type="arc" />
+      <path
+         transform="matrix(0.77142857,0,0,0.77142857,254.63264,100.39707)"
+         d="m 617.14288,367.36218 a 75,75 0 1 1 -150,0 75,75 0 1 1 150,0 z"
+         sodipodi:ry="75"
+         sodipodi:rx="75"
+         sodipodi:cy="367.36218"
+         sodipodi:cx="542.14288"
+         id="path2986-4-5"
+         style="fill:#a31702;fill-opacity:1;stroke:none"
+         sodipodi:type="arc" />
+    </g>
     <path
-       sodipodi:type="arc"
-       style="fill:#0c21b9;fill-opacity:1;stroke:none"
-       id="path2986"
-       sodipodi:cx="542.14288"
-       sodipodi:cy="367.36218"
-       sodipodi:rx="75"
-       sodipodi:ry="75"
-       d="m 617.14288,367.36218 a 75,75 0 1 1 -150,0 75,75 0 1 1 150,0 z"
-       transform="translate(-7.1428573,-112.85715)" />
-    <path
-       sodipodi:type="arc"
-       style="fill:#0c21b9;fill-opacity:1;stroke:none"
-       id="path2986-4"
-       sodipodi:cx="542.14288"
-       sodipodi:cy="367.36218"
-       sodipodi:rx="75"
-       sodipodi:ry="75"
-       d="m 617.14288,367.36218 a 75,75 0 1 1 -150,0 75,75 0 1 1 150,0 z"
-       transform="matrix(0.6,0,0,0.6,201.85712,171.94487)" />
-    <path
-       sodipodi:type="arc"
-       style="fill:#0c21b9;fill-opacity:1;stroke:none"
-       id="path2986-4-4"
-       sodipodi:cx="542.14288"
-       sodipodi:cy="367.36218"
-       sodipodi:rx="75"
-       sodipodi:ry="75"
-       d="m 617.14288,367.36218 a 75,75 0 1 1 -150,0 75,75 0 1 1 150,0 z"
-       transform="matrix(0.48571429,0,0,0.48571429,406.67346,66.786271)" />
-    <path
-       sodipodi:type="arc"
-       style="fill:#0c21b9;fill-opacity:1;stroke:none"
-       id="path2986-4-5"
-       sodipodi:cx="542.14288"
-       sodipodi:cy="367.36218"
-       sodipodi:rx="75"
-       sodipodi:ry="75"
-       d="m 617.14288,367.36218 a 75,75 0 1 1 -150,0 75,75 0 1 1 150,0 z"
-       transform="matrix(0.77142857,0,0,0.77142857,254.63264,100.39707)" />
+       sodipodi:type="star"
+       style="fill:#1ba418;fill-opacity:1;stroke:none"
+       id="path3000"
+       sodipodi:sides="3"
+       sodipodi:cx="442.91339"
+       sodipodi:cy="591.73224"
+       sodipodi:r1="87.825356"
+       sodipodi:r2="71.417641"
+       sodipodi:arg1="0.51914611"
+       sodipodi:arg2="1.5707964"
+       inkscape:flatsided="true"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="m 519.16715,635.30582 -152.11647,0.67733 75.47166,-132.0754 z"
+       inkscape:transform-center-x="-0.3179975"
+       inkscape:transform-center-y="-35.433071"
+       transform="translate(-200.26952,-25.85702)" />
+    <rect
+       inkscape:export-ydpi="44.307693"
+       inkscape:export-xdpi="44.307693"
+       inkscape:export-filename="/media/home/nick/projects/itchy/resources/Dodge/icon32.png"
+       ry="1.4130542"
+       rx="1.3829892"
+       y="551.64795"
+       x="448.57144"
+       height="65"
+       width="65"
+       id="rect3776"
+       style="fill:#0c21b9;fill-opacity:1;stroke:none" />
+    <rect
+       style="fill:#1ba418;fill-opacity:1;stroke:none"
+       id="rect3778"
+       width="65"
+       height="65"
+       x="528.57141"
+       y="471.64795"
+       rx="1.3829892"
+       ry="1.4130542"
+       inkscape:export-filename="/media/home/nick/projects/itchy/resources/Dodge/icon32.png"
+       inkscape:export-xdpi="44.307693"
+       inkscape:export-ydpi="44.307693" />
   </g>
 </svg>

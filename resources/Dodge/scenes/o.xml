@@ -1,0 +1,28 @@
+<scene name="o" layout="default" sceneDirector="play.py" showMouse="true">
+  <sceneDirector/>
+  <layer name="background"/>
+  <layer name="main">
+    <actor costume="player-blue" x="436.0" y="263.0" zOrder="50" scale="2.0">
+      <role maxSpeed="10.0" clanPeriod="5.0" clans="blue,green,red,green,blue,red"/>
+    </actor>
+    <actor costume="rectangle-3" x="521.0" y="133.0" zOrder="60" scale="2.0">
+      <role vx="3.0" vy="3.0" rotation="0.0"/>
+    </actor>
+    <actor costume="rectangle-4" x="150.0" y="385.0" zOrder="60" scale="2.0">
+      <role vx="3.0" vy="4.0" rotation="0.0"/>
+    </actor>
+    <actor costume="ball-3" x="331.0" y="336.0" zOrder="70">
+      <role vx="-2.0" vy="-2.0" rotation="0.0"/>
+    </actor>
+    <actor costume="ball-2" x="640.0" y="192.0" zOrder="70">
+      <role vx="3.0" vy="-3.0" rotation="0.0"/>
+    </actor>
+    <actor costume="triangle-2" x="263.0" y="138.0" zOrder="80">
+      <role vx="-2.0" vy="4.0" rotation="0.0"/>
+    </actor>
+    <actor costume="triangle-3" x="457.0" y="436.0" zOrder="80">
+      <role vx="4.0" vy="2.0" rotation="0.0"/>
+    </actor>
+  </layer>
+  <layer name="wrapped"/>
+</scene>

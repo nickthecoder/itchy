@@ -1,16 +1,14 @@
 from common import * #@UnusedWildImport
 import math
-import enemy
+import rectangle
 
-properties = ArrayList()
-properties.addAll( enemy.properties )
-
-class Ball(enemy.Enemy) :
+class Ball(rectangle.Rectangle) :
 
     def __init__(self) :
         super(Ball,self).__init__()
         self.addTag("ball")
-        
+
+
     def tick(self):
         super(Ball,self).tick()
         for other in self.collisions("ball") :
@@ -46,10 +44,6 @@ class Ball(enemy.Enemy) :
         self.vy += dy / dist * collision * 2 * massB / massSum
         other.vy -= dy / dist * collision * 2 * massA / massSum
 
-
-    # Boiler plate code - no need to change this
-    def getProperties(self):
-        return properties
 
     # Boiler plate code - no need to change this
     def getClassName(self):

@@ -95,11 +95,20 @@ public abstract class AbstractRole implements Role
         return this.collisionStrategy.collisions(this.getActor(), tags, maxResults, filter);
     }
 
+    public boolean collided( Filter<Actor> filter, String... tags)
+    {
+        return !this.collisionStrategy.collisions(this.getActor(), tags, 1, filter).isEmpty();
+    }
+
     public boolean collided(String... tags)
     {
         return !this.collisionStrategy.collisions(this.getActor(), tags, 1).isEmpty();
     }
 
+    public Filter<Actor> withoutTag( String tag )
+    {
+        return new WithoutTagFilter(tag);
+    }
     
     @Override
     public ClassName getClassName()
@@ -305,5 +314,23 @@ public abstract class AbstractRole implements Role
     public void tick()
     {
     }
+
+    private class WithoutTagFilter implements Filter<Actor>
+    {
+        private String tag;
+        
+        public WithoutTagFilter( String tag )
+        {
+            this.tag = tag;
+        }
+        
+        @Override
+        public boolean accept(Actor subject)
+        {
+            return ! subject.getRole().hasTag(tag);
+        }
+        
+    }
+    
 
 }

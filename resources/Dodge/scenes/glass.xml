@@ -6,7 +6,7 @@
     <actor costume="wall-v" x="25.0" y="300.0" zOrder="10"/>
   </layer>
   <layer name="glass">
-    <text x="389.0" y="329.0" id="start" font="veraBold" fontSize="43.0" text="Click HERE to Start" yAlignment="0.0" role="uk.co.nickthecoder.itchy.role.MessageButton" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+    <text x="389.0" y="329.0" id="start" font="veraBold" fontSize="43.0" text="Start" yAlignment="0.0" role="uk.co.nickthecoder.itchy.role.MessageButton" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <role message="start"/>
       <makeup dx="4" dy="-4"/>
     </text>

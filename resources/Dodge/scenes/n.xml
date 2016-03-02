@@ -1,0 +1,35 @@
+<scene name="n" layout="default" sceneDirector="play.py" showMouse="true">
+  <sceneDirector/>
+  <layer name="background"/>
+  <layer name="main">
+    <actor costume="ball-1" x="285.0" y="382.0" zOrder="70">
+      <role vx="3.0" vy="3.0" rotation="0.0"/>
+    </actor>
+    <actor costume="ball-2" x="105.0" y="478.0" zOrder="70">
+      <role vx="-1.0" vy="3.0" rotation="0.0"/>
+    </actor>
+    <actor costume="ball-4" x="717.0" y="384.0" zOrder="70">
+      <role vx="1.0" vy="1.0" rotation="0.0"/>
+    </actor>
+    <actor costume="ball-3" x="401.0" y="132.0" zOrder="70">
+      <role vx="-2.0" vy="1.0" rotation="0.0"/>
+    </actor>
+  </layer>
+  <layer name="wrapped">
+    <actor costume="player-green" x="413.0" y="264.0" zOrder="50" scale="2.0">
+      <role maxSpeed="10.0" clanPeriod="5.0" clans="green,red"/>
+    </actor>
+    <actor costume="triangle-1" x="164.0" y="367.0" zOrder="80">
+      <role vx="3.0" vy="-4.0" rotation="0.0"/>
+    </actor>
+    <actor costume="triangle-2" x="480.0" y="408.0" zOrder="80">
+      <role vx="2.0" vy="-4.0" rotation="0.0"/>
+    </actor>
+    <actor costume="triangle-3" x="577.0" y="236.0" zOrder="80">
+      <role vx="4.0" vy="2.0" rotation="0.0"/>
+    </actor>
+    <actor costume="triangle-4" x="199.0" y="164.0" zOrder="80">
+      <role vx="4.0" vy="4.0" rotation="0.0"/>
+    </actor>
+  </layer>
+</scene>

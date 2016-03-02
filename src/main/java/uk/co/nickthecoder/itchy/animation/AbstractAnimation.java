@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.Actor;
+import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.StringProperty;
 import uk.co.nickthecoder.itchy.util.StringUtils;
@@ -15,15 +16,15 @@ import uk.co.nickthecoder.itchy.util.StringUtils;
 public abstract class AbstractAnimation implements Animation, Cloneable
 {
     protected static final List<Property<Animation, ?>> properties = new ArrayList<Property<Animation, ?>>();
-    
+
     static {
-        properties.add( new StringProperty<Animation>( "startMessage" ));
-        properties.add( new StringProperty<Animation>( "finishedMessage" ));
+        properties.add(new StringProperty<Animation>("startMessage"));
+        properties.add(new StringProperty<Animation>("finishedMessage"));
     }
 
-    public static void tick( Animation animation, Actor actor )
+    public static void tick(Animation animation, Actor actor)
     {
-        for ( int i = 0; i < 100; i ++ ) {
+        for (int i = 0; i < 100; i++) {
             if (!animation.tick(actor)) {
                 return;
             }
@@ -31,9 +32,9 @@ public abstract class AbstractAnimation implements Animation, Cloneable
                 return;
             }
         }
-        System.err.println( "Too many instananeous animations. Probably an infinite loop. Aborting. Actor : " + actor);
+        System.err.println("Too many instananeous animations. Probably an infinite loop. Aborting. Actor : " + actor);
     }
-    
+
     private String startMessage = null;
 
     private String finishedMessage = null;
@@ -47,7 +48,6 @@ public abstract class AbstractAnimation implements Animation, Cloneable
     @Override
     public abstract String getName();
 
-
     @Override
     public String getTagName()
     {
@@ -55,16 +55,16 @@ public abstract class AbstractAnimation implements Animation, Cloneable
     }
 
     @Override
-    public void start( Actor actor )
+    public void start(Actor actor)
     {
-        fireStart( actor );
+        fireStart(actor);
     }
 
     @Override
     public abstract boolean isFinished();
 
     @Override
-    public boolean tick( Actor actor )
+    public boolean tick(Actor actor)
     {
         if (this.isFinished()) {
             fireFinished(actor);
@@ -72,18 +72,26 @@ public abstract class AbstractAnimation implements Animation, Cloneable
         return false;
     }
 
-    protected void fireStart( Actor actor )
+    protected void fireStart(Actor actor)
     {
-        if (!StringUtils.isBlank(this.startMessage)) {
-            actor.getRole().onMessage(this.startMessage);
-        }        
+        try {
+            if (!StringUtils.isBlank(this.startMessage)) {
+                actor.getRole().onMessage(this.startMessage);
+            }
+        } catch (Exception e) {
+            Itchy.handleException(e);
+        }
     }
 
-    protected void fireFinished( Actor actor )
+    protected void fireFinished(Actor actor)
     {
-        if (!StringUtils.isBlank(this.finishedMessage)) {
-            actor.getRole().onMessage(this.finishedMessage);
-        }        
+        try {
+            if (!StringUtils.isBlank(this.finishedMessage)) {
+                actor.getRole().onMessage(this.finishedMessage);
+            }
+        } catch (Exception e) {
+            Itchy.handleException(e);
+        }
     }
 
     @Override
@@ -93,11 +101,10 @@ public abstract class AbstractAnimation implements Animation, Cloneable
     }
 
     @Override
-    public void setStartMessage( String message )
+    public void setStartMessage(String message)
     {
         this.startMessage = message;
     }
-
 
     @Override
     public String getFinishedMessage()
@@ -106,11 +113,11 @@ public abstract class AbstractAnimation implements Animation, Cloneable
     }
 
     @Override
-    public void setFinishedMessage( String message )
+    public void setFinishedMessage(String message)
     {
         this.finishedMessage = message;
     }
-    
+
     @Override
     public Animation clone() throws CloneNotSupportedException
     {

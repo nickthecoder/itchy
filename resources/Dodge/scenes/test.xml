@@ -1,0 +1,19 @@
+<scene name="test" layout="default" sceneDirector="play.py" showMouse="true">
+  <sceneDirector/>
+  <layer name="background"/>
+  <layer name="main">
+    <actor costume="player-blue" x="432.0" y="294.0" zOrder="50">
+      <role maxSpeed="10.0"/>
+    </actor>
+    <actor costume="rectangle-4" x="612.0" y="288.0" zOrder="60">
+      <role vx="0.0" vy="0.0" rotation="0.0"/>
+    </actor>
+    <actor costume="ball-1" x="238.0" y="294.0" zOrder="70">
+      <role vx="0.0" vy="0.0" rotation="0.0"/>
+    </actor>
+    <actor costume="triangle-1" x="344.0" y="415.0" zOrder="80">
+      <role vx="0.0" vy="0.0" rotation="0.0"/>
+    </actor>
+  </layer>
+  <layer name="wrapped"/>
+</scene>

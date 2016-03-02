@@ -1,0 +1,38 @@
+<scene name="l" layout="default" sceneDirector="play.py" showMouse="true">
+  <sceneDirector/>
+  <layer name="background"/>
+  <layer name="main">
+    <actor costume="player-green" x="390.0" y="315.0" zOrder="50" scale="2.0">
+      <role maxSpeed="10.0" clanPeriod="3.0" clans="green,blue"/>
+    </actor>
+    <actor costume="rectangle-1" x="286.0" y="472.0" zOrder="60" scale="2.0">
+      <role vx="-5.0" vy="3.0" rotation="0.0"/>
+    </actor>
+    <actor costume="rectangle-2" x="688.0" y="385.0" zOrder="60" scale="2.0">
+      <role vx="3.0" vy="2.0" rotation="0.0"/>
+    </actor>
+    <actor costume="rectangle-3" x="479.0" y="130.0" zOrder="60" scale="2.0">
+      <role vx="4.0" vy="4.0" rotation="0.0"/>
+    </actor>
+    <text costume="instructions" x="423.0" y="485.0" zOrder="95" font="veraBold" fontSize="22.0" text="Avoid the opposite colour..." makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+      <makeup dx="3" dy="-3"/>
+    </text>
+    <text costume="instructions" x="424.0" y="436.0" zOrder="95" font="veraBold" fontSize="22.0" text="You will change colour every few seconds!" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+      <makeup dx="3" dy="-3"/>
+    </text>
+  </layer>
+  <layer name="wrapped">
+    <actor costume="triangle-3" x="664.0" y="237.0" zOrder="80">
+      <role vx="2.0" vy="4.0" rotation="0.0"/>
+    </actor>
+    <actor costume="triangle-4" x="210.0" y="147.0" zOrder="80">
+      <role vx="2.0" vy="-3.0" rotation="0.0"/>
+    </actor>
+    <actor costume="triangle-2" x="562.0" y="409.0" zOrder="80">
+      <role vx="-3.0" vy="-2.0" rotation="0.0"/>
+    </actor>
+    <actor costume="triangle-1" x="134.0" y="406.0" zOrder="80">
+      <role vx="4.0" vy="4.0" rotation="0.0"/>
+    </actor>
+  </layer>
+</scene>
