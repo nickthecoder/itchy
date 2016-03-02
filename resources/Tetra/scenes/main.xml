@@ -1,27 +1,39 @@
 <scene name="main" layout="default" sceneDirector="uk.co.nickthecoder.itchy.PlainSceneDirector" showMouse="true">
   <layer name="main">
-    <actor costume="background" x="320.0" y="240.0" id="" colorize=""/>
-    <text x="515.0" y="250.0" id="" font="Boycott" fontSize="40.0" text="Level" colorize=""/>
-    <text x="513.0" y="347.0" id="" font="Boycott" fontSize="40.0" text="Score" colorize=""/>
-    <text x="515.0" y="422.0" id="" font="Boycott" fontSize="70.0" text="Tetra" colorize=""/>
-    <text x="510.0" y="427.0" id="" font="Boycott" fontSize="70.0" text="Tetra" color="#ffffffff" colorize=""/>
-    <text x="511.0" y="352.0" id="" font="Boycott" fontSize="40.0" text="Score" color="#ffffffff" colorize=""/>
-    <text x="512.0" y="91.0" id="" font="Boycott" fontSize="30.0" text="High Score" colorize=""/>
-    <text x="511.0" y="309.0" id="" font="Boycott" fontSize="22.0" text="0000000" color="#ffffffff" colorize="" role="uk.co.nickthecoder.itchy.role.NumberValue">
+    <actor costume="background" x="320.0" y="241.0"/>
+    <text x="515.0" y="250.0" font="Boycott" fontSize="40.0" text="Level" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+      <makeup dx="4" dy="-4"/>
+    </text>
+    <text x="513.0" y="347.0" font="Boycott" fontSize="40.0" text="Score" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+      <makeup dx="4" dy="-4"/>
+    </text>
+    <text x="506.0" y="422.0" font="Boycott" fontSize="70.0" text="Tetra" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+      <makeup dx="4" dy="-4"/>
+    </text>
+    <text x="512.0" y="91.0" font="Boycott" fontSize="30.0" text="High Score" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+      <makeup dx="4" dy="-4"/>
+    </text>
+    <text x="511.0" y="309.0" font="Boycott" fontSize="22.0" text="0000000" role="uk.co.nickthecoder.itchy.role.NumberValue" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <role access="director.score" errorValue="?" nullValue="null" updateInterval="0.0" quiet="true" formatPattern="0000000"/>
+      <makeup dx="3" dy="-3"/>
     </text>
-    <text x="511.0" y="209.0" id="" font="Boycott" fontSize="40.0" text="01" color="#ffffffff" colorize="" role="uk.co.nickthecoder.itchy.role.TextValue">
+    <text x="511.0" y="209.0" font="Boycott" fontSize="40.0" text="01" role="uk.co.nickthecoder.itchy.role.TextValue" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <role access="director.level" errorValue="?" nullValue="null" updateInterval="0.0" quiet="true"/>
+      <makeup dx="4" dy="-4"/>
     </text>
-    <text x="511.0" y="254.0" id="" font="Boycott" fontSize="40.0" text="Level" color="#ffffffff" colorize=""/>
-    <actor costume="board" x="164.0" y="228.0" id="" colorize=""/>
-    <text x="499.0" y="156.0" id="" font="Boycott" fontSize="22.0" text="Lines :" color="#ffffffff" colorize=""/>
-    <text x="538.0" y="155.0" id="" font="Boycott" fontSize="22.0" text="0" color="#ffffffff" colorize="" role="uk.co.nickthecoder.itchy.role.TextValue">
+    <actor costume="board" x="164.0" y="228.0" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+      <makeup dx="4" dy="2" color="#130029ff"/>
+    </actor>
+    <text x="499.0" y="156.0" font="Boycott" fontSize="22.0" text="Lines :" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+      <makeup dx="3" dy="-3"/>
+    </text>
+    <text x="538.0" y="155.0" font="Boycott" fontSize="22.0" text="0" role="uk.co.nickthecoder.itchy.role.TextValue" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <role access="director.completedLines" errorValue="" nullValue="" updateInterval="0.0" quiet="false"/>
+      <makeup dx="3" dy="-3"/>
     </text>
-    <text x="509.0" y="94.0" id="" font="Boycott" fontSize="30.0" text="High Score" color="#ffffffff" colorize=""/>
-    <text x="511.0" y="64.0" id="" font="Boycott" fontSize="22.0" text="0000000" color="#ffffffff" colorize="" role="uk.co.nickthecoder.itchy.role.NumberValue">
+    <text x="511.0" y="64.0" font="Boycott" fontSize="22.0" text="0000000" role="uk.co.nickthecoder.itchy.role.NumberValue" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <role access="director.highScore" errorValue="???" nullValue="null" updateInterval="-1.0" quiet="true" formatPattern="0000000"/>
+      <makeup dx="3" dy="-3"/>
     </text>
   </layer>
 </scene>
