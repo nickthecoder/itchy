@@ -189,6 +189,28 @@ public class Costume implements NamedSubject<Costume>, Cloneable
         return costumeFeatures;
     }
 
+    /**
+     * Used when the Role has been reloaded, and therefore the costume features may have different properties.
+     * Attempts to copy the CostumeFeature's properties across, but silently ignores any errors.
+     * Errors are expected, because a property may have been removed or their type changed.
+     */
+    public void resetCostumeFeatures()
+    {
+        if (this.costumeFeatures != null) {
+            CostumeFeatures oldFeatures = this.costumeFeatures;
+            this.costumeFeatures = null;
+            CostumeFeatures newFeatures = getCostumeFeatures();
+            
+            for ( Property<CostumeFeatures,?> property : newFeatures.getProperties() ) {
+                try {
+                    property.setValue(newFeatures, property.getSafeValue(oldFeatures));
+                } catch (Exception e) {
+                    
+                }
+            }
+        }
+    }
+    
     public Costume getExtendedFrom()
     {
         return extendedFrom;

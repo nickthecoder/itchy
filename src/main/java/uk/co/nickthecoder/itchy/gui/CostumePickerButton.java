@@ -50,8 +50,10 @@ public class CostumePickerButton extends Button implements ActionListener
     {
         this.costume = costume;
 
-        img.setImage(costume.getThumbnail());
-        label.setText(costume.getName());
+        if (costume != null) {
+            img.setImage(costume.getThumbnail());
+            label.setText(costume.getName());
+        }
 
         this.removeStyle("error");
         for (ComponentValidator validator : validators) {

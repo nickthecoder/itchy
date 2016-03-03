@@ -65,6 +65,8 @@ public abstract class ScriptLanguage
 				unload();
 				lastLoaded = null;
 			}
+			
+			this.manager.resources.classReloaded(className);
 		}
 		
 		if ( lastLoaded == null ) {

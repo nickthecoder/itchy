@@ -149,6 +149,18 @@ public class Resources extends Loadable
         }
     }
 
+    public void classReloaded( ClassName className )
+    {
+        if (className.baseClass == Role.class) {
+            for (Costume costume : this.costumes.values() ) {
+                if (costume.roleClassName.equals(className)) {
+                    costume.resetCostumeFeatures();
+                }
+            }
+        }
+
+    }
+    
     /**
      * Used by the SceneDesigner when testing a scene. It creates a duplicate set of resources, so that a new Game can
      * run the test, leaving the state of the old Game untouched. This is important when the editor is launched from

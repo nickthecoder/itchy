@@ -26,5 +26,3 @@ Cannot start a new animation from a finish event of an old animation (Dodge 'Em 
 
 Reload a Role does NOT update the costume's CostumeFeatures which use it.
 
-"Launch" Explosion in Cavern-Quest is not updating the 1st frame (it is black), despite the 1st being 0 ticks.
-
