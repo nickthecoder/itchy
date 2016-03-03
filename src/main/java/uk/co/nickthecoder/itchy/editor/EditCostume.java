@@ -51,7 +51,7 @@ public class EditCostume extends EditNamedSubject<Costume>
     @Override
     protected Component createForm()
     {
-        form.add( new CostumeProperty<Costume>("extendedFrom").hint("Extends From") );
+        form.add( new CostumeProperty<Costume>("extendedFrom").hint("Extends From").allowNull(true) );
 
         super.createForm();
 

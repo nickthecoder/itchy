@@ -23,6 +23,8 @@ public class CostumePickerButton extends Button implements ActionListener
     private ImageComponent img;
 
     private Label label;
+    
+    public boolean allowNull = false; 
 
     public CostumePickerButton(Resources resources, Costume costume)
     {
@@ -30,7 +32,6 @@ public class CostumePickerButton extends Button implements ActionListener
         layout = new VerticalLayout();
         this.setXAlignment(0.5f);
 
-        
         img = costume == null ? new ImageComponent() : new ImageComponent(costume.getThumbnail());
         label = new Label(costume == null ? "None" : costume.getName());
         this.addChild(img);
@@ -50,7 +51,10 @@ public class CostumePickerButton extends Button implements ActionListener
     {
         this.costume = costume;
 
-        if (costume != null) {
+        if (costume == null) {
+            img.setImage(null);
+            label.setText("None");
+        } else {
             img.setImage(costume.getThumbnail());
             label.setText(costume.getName());
         }
@@ -69,7 +73,7 @@ public class CostumePickerButton extends Button implements ActionListener
     @Override
     public void action()
     {
-        CostumePicker picker = new CostumePicker(resources)
+        CostumePicker picker = new CostumePicker(resources, allowNull ? "None" : null )
         {
             @Override
             public void pick(Costume costume)

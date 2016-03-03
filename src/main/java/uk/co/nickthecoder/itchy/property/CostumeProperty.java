@@ -20,6 +20,7 @@ public class CostumeProperty<S> extends Property<S, Costume>
         Costume costume = this.getSafeValue(subject);
 
         final CostumePickerButton pickerButton = new CostumePickerButton(Itchy.getGame().resources, costume);
+        pickerButton.allowNull = this.allowNull;
         return pickerButton;
     }
 
