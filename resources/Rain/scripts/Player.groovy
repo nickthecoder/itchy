@@ -6,10 +6,13 @@ class Player extends AbstractRole
 {
     public static properties = new ArrayList()
 
+    def outlineActor
+    
     void onBirth()
     {
         // When the game starts tell "Play.groovy" we are alive and well, the game is on!
         Itchy.game.sceneDirector.player = this;
+        outlineActor = new FollowerBuilder(actor).pose('outline').adjustZOrder(-1).create();
     }
     
     void tick()
@@ -32,7 +35,8 @@ class Player extends AbstractRole
 
             // Have we hit anything deadly? (i.e. any actor that has : addTag("deadly") - see Drop.js).
             if ( collided('deadly') ) {
-            
+                outlineActor.deathEvent("die")
+                
                 // Create a skeleton below the sheep, which will become visible when the sheep fades out.
                 new FollowerBuilder(actor).followRotatation().pose('bones').adjustZOrder(-1).create();
                 
@@ -42,6 +46,7 @@ class Player extends AbstractRole
                 game.sceneDirector.end();
             }
         }
+        outlineActor.tick();
      }
 
 
