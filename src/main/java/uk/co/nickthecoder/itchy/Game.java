@@ -499,7 +499,7 @@ public class Game
         for (GuiView window : this.windows) {
             window.render(window.adjustGraphicsContext(gc));
         }
-        this.glassView.render(gc);
+        this.glassView.render(this.glassView.adjustGraphicsContext(gc));
     }
 
     /**

@@ -377,7 +377,6 @@ public class SceneDesigner implements MouseListener, KeyListener
 
     public void resize(int width, int height)
     {
-        // Rect viewsRect = new Rect(0, toolbar.getHeight(), width, height - toolbar.getHeight());
         Rect editRect = new Rect(0, toolbar.getHeight(), width, height - toolbar.getHeight());
 
         overlayView.setPosition(editRect);
