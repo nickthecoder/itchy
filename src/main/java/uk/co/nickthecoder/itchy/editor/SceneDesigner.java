@@ -263,9 +263,11 @@ public class SceneDesigner implements MouseListener, KeyListener
                 view.setPosition(editRect);
             }
             Layer designLayer = new Layer(view);
-            this.designLayers.add(designLayer);
+            designLayer.position = new Rect( layer.position );
             designLayer.name = layer.name;
             designLayer.zOrder = layer.zOrder;
+
+            this.designLayers.add(designLayer);
             editor.getLayout().addLayer(designLayer);
         }
     }
@@ -312,6 +314,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         
         overlayView.scrollTo(0, 0);
         resize( Itchy.getDisplaySurface().getWidth(), Itchy.getDisplaySurface().getHeight());
+        onCenter();
         
         editor.layout.dump();
     }
@@ -375,15 +378,20 @@ public class SceneDesigner implements MouseListener, KeyListener
     public void resize(int width, int height)
     {
         // Rect viewsRect = new Rect(0, toolbar.getHeight(), width, height - toolbar.getHeight());
-        Rect editRect = new Rect(0, 0, width, height - toolbar.getHeight());
+        Rect editRect = new Rect(0, toolbar.getHeight(), width, height - toolbar.getHeight());
 
         overlayView.setPosition(editRect);
         background.setPosition(editRect);
 
+        // Move each layer, so that the top left if just under the toolbar.
         for (Layer layer : designLayers) {
             View view = layer.getView();
             if ((view instanceof ScrollableView) && (view instanceof StageView)) {
                 view.setPosition(editRect);
+            } else {
+                Rect rect =  new Rect( layer.position );
+                rect.y += toolbar.getHeight();
+                view.setPosition( rect );
             }
         }
 
