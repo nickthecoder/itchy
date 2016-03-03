@@ -26,3 +26,4 @@ Cannot start a new animation from a finish event of an old animation (Dodge 'Em 
 
 Reload a Role does NOT update the costume's CostumeFeatures which use it.
 
+Tooltips not working in scene designer

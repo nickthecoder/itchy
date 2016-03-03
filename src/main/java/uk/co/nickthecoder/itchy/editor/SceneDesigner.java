@@ -5,6 +5,7 @@
 package uk.co.nickthecoder.itchy.editor;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.AbstractRole;
@@ -195,8 +196,6 @@ public class SceneDesigner implements MouseListener, KeyListener
         this.scene = scene;
 
         costumeButtonGroup = new ButtonGroup();
-
-        this.scene.layout.dump();
     }
 
     public void go()
@@ -206,6 +205,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         editor.root.hide();
 
         background = new RGBAView();
+        background.color = new RGBA( 40,0,0,0 ); // TODO Change to black or remove?
         backgroundLayer = new Layer(background);
         backgroundLayer.zOrder = -100;
         backgroundLayer.position = wholeRect;
@@ -218,21 +218,7 @@ public class SceneDesigner implements MouseListener, KeyListener
 
         createToolbox();
 
-        for (Layer layer : scene.layout.getLayersByZOrder()) {
-            View view = layer.getView();
-            StageView stageView = layer.getStageView();
-            if (stageView != null) {
-                Stage stage = stageView.getStage();
-                editor.getStages().add(stage);
-                currentLayer = layer;
-                currentStageView = stageView;
-            }
-            Layer designLayer = new Layer(view);
-            this.designLayers.add(designLayer);
-            designLayer.name = layer.name;
-            designLayer.zOrder = layer.zOrder;
-            editor.getLayout().addLayer(designLayer);
-        }
+        addDesignLayers(scene.layout);
 
         overlayStage = new ZOrderStage();
         editor.getStages().add(overlayStage);
@@ -259,6 +245,75 @@ public class SceneDesigner implements MouseListener, KeyListener
         if (scene.layout.defaultLayer != null) {
             selectLayer(scene.layout.defaultLayer);
         }
+    }
+
+    private void addDesignLayers(Layout layout)
+    {
+        Rect editRect = new Rect(0, toolbar.getHeight(), editor.getWidth(), editor.getHeight() - toolbar.getHeight());
+
+        for (Layer layer : layout.getLayersByZOrder()) {
+            View view = layer.getView();
+            
+            StageView stageView = layer.getStageView();
+            if (stageView != null) {
+                Stage stage = stageView.getStage();
+                editor.getStages().add(stage);
+                currentLayer = layer;
+                currentStageView = stageView;
+                view.setPosition(editRect);
+            }
+            Layer designLayer = new Layer(view);
+            this.designLayers.add(designLayer);
+            designLayer.name = layer.name;
+            designLayer.zOrder = layer.zOrder;
+            editor.getLayout().addLayer(designLayer);
+        }
+    }
+
+    private void removeDesignLayers(Layout layout)
+    {
+        for (Iterator<Layer> i = layout.getLayers().iterator(); i.hasNext();) {
+            Layer layer = i.next();
+            Stage stage = layer.getStage();
+            if (stage != null) {
+                editor.getStages().remove(stage);
+            }
+            editor.getLayout().removeLayer(editor.getLayout().findLayer(layer.name));
+        }
+        this.designLayers.clear();
+    }
+
+    private void changeLayout()
+    {
+        // Move the actors from the old layout to the new.
+        // Try to match named layers, but otherwise use a default stage to add the actors to.
+        for (Layer layer : oldLayout.getLayers()) {
+            Stage stage = layer.getStage();
+            if (stage != null) {
+                Stage newStage = scene.layout.findSafeStage(layer.name);
+                if (newStage == null) {
+                    continue;
+                }
+
+                List<Actor> actors = new ArrayList<Actor>();
+                actors.addAll(stage.getActors());
+
+                for (Actor actor : actors) {
+                    stage.remove(actor);
+                    newStage.add(actor);
+                }
+            }
+        }
+
+        removeDesignLayers(oldLayout);
+        oldLayout = scene.layout;
+        addDesignLayers(scene.layout);
+        createLayersTable();
+        
+        overlayView.scrollTo(0, 0);
+        resize( Itchy.getDisplaySurface().getWidth(), Itchy.getDisplaySurface().getHeight());
+        
+        editor.layout.dump();
     }
 
     private void onDone()
@@ -292,6 +347,7 @@ public class SceneDesigner implements MouseListener, KeyListener
 
     private void exit()
     {
+        removeDesignLayers(scene.layout);
         editor.clear();
         editor.sceneDesigner = null;
         editor.getStages().clear();
@@ -713,10 +769,13 @@ public class SceneDesigner implements MouseListener, KeyListener
 
     private TextBox sceneNameBox;
 
+    private Layout oldLayout;
+
     private void createScenePage()
     {
-        sceneForm = new SceneDesignerPropertiesForm<Scene>(
-            "scene", this, scene, scene.getProperties());
+        oldLayout = scene.layout;
+
+        sceneForm = new SceneDesignerPropertiesForm<Scene>("scene", this, scene, scene.getProperties());
 
         sceneForm.autoUpdate = true;
         sceneDetailsContainer.clear();
@@ -726,15 +785,23 @@ public class SceneDesigner implements MouseListener, KeyListener
 
         oldSceneName = scene.getName();
 
-        sceneForm.addValidator("name",
-            new ComponentValidator()
+        sceneForm.addValidator("name", new ComponentValidator()
+        {
+            @Override
+            public boolean isValid()
             {
-                @Override
-                public boolean isValid()
-                {
-                    return sceneStub.isValidName(sceneNameBox.getText());
-                }
-            });
+                return sceneStub.isValidName(sceneNameBox.getText());
+            }
+        });
+
+        sceneForm.addComponentChangeListener("layout", new ComponentChangeListener()
+        {
+            @Override
+            public void changed()
+            {
+                changeLayout();
+            }
+        });
 
         sceneDirectorName = (ClassNameBox) sceneForm.getComponent("sceneDirectorClassName");
         sceneForm.addComponentChangeListener("sceneDirectorClassName", new ComponentChangeListener()
@@ -1099,6 +1166,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         layersTable.setFill(true, true);
         layersTable.setExpansion(1.0);
 
+        layersContainer.clear();
         layersContainer.setFill(true, true);
         layersContainer.addChild(layersTable);
         layersTable.setMaximumHeight(150);
@@ -1708,7 +1776,7 @@ public class SceneDesigner implements MouseListener, KeyListener
                 ((ScrollableView) view).scrollBy(dx, dy);
             } else {
                 Rect rect = view.getPosition();
-                view.setPosition(new Rect(rect.x- dx, rect.y + dy, rect.width, rect.height));
+                view.setPosition(new Rect(rect.x - dx, rect.y + dy, rect.width, rect.height));
             }
         }
         overlayView.scrollBy(dx, dy);

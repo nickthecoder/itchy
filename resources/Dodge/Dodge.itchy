@@ -154,6 +154,7 @@
     </costume>
   </costumes>
   <scenes>
+    <scene name="_test"/>
     <scene name="a"/>
     <scene name="b"/>
     <scene name="c"/>

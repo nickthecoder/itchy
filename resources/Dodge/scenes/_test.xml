@@ -1,0 +1,9 @@
+<scene name="_test" layout="default" sceneDirector="uk.co.nickthecoder.itchy.PlainSceneDirector" showMouse="true">
+  <layer name="background"/>
+  <layer name="main">
+    <actor costume="ball-1" x="55.0" y="548.0" zOrder="70">
+      <role vx="0.0" vy="0.0" rotation="0.0"/>
+    </actor>
+  </layer>
+  <layer name="wrapped"/>
+</scene>

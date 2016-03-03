@@ -46,7 +46,7 @@ public class Layout implements NamedSubject<Layout>, Cloneable
      * The active layer when starting the SceneDesigner
      */
     public Layer defaultLayer;
-    
+
     /**
      * Speeds up findStage.
      */
@@ -103,18 +103,18 @@ public class Layout implements NamedSubject<Layout>, Cloneable
         }
         return null;
     }
-    
-    public Layer findSafeLayer( String name )
+
+    public Layer findSafeLayer(String name)
     {
         Layer layer = findLayer(name);
         if (layer != null) {
             return layer;
         }
-        
+
         if (this.defaultLayer != null) {
             return this.defaultLayer;
         }
-        
+
         for (Layer layer2 : this.layers) {
             if (layer2.getStage() != null) {
                 return layer2;
@@ -153,6 +153,32 @@ public class Layout implements NamedSubject<Layout>, Cloneable
             result = stageView.getStage();
             stageMap.put(name, result);
             return result;
+        }
+        return null;
+    }
+
+    /**
+     * Tries hard to find a stage with the given name. If the named layer isn't found, or isn't a stage,
+     * then try the default layer, and if that fails, then return the first layer with a stage.
+     * If all that fails, then null will be returned.
+     */
+    public Stage findSafeStage(String name)
+    {
+        Stage stage = findStage(name);
+        if (stage != null) {
+            return stage;
+        }
+
+        stage = defaultLayer.getStage();
+        if (stage != null) {
+            return stage;
+        }
+
+        for (Layer layer : layers) {
+            stage = layer.getStage();
+            if (stage != null) {
+                return stage;
+            }
         }
         return null;
     }
@@ -205,8 +231,9 @@ public class Layout implements NamedSubject<Layout>, Cloneable
     public void dump()
     {
         Resources.dump("Layout");
-        for ( Layer layer : this.layers ) {
-            Resources.dump( "   ", layer.name, layer.getView(), layer.getStage(), layer.getStage() == null ? "" : (layer.getStage().getActors().size() + " actors") );
+        for (Layer layer : this.layers) {
+            Resources.dump("   ", layer.name, layer.getView(), layer.getStage(), layer.getStage() == null ? "" : (layer
+                .getStage().getActors().size() + " actors"));
         }
         Resources.dump("");
     }
