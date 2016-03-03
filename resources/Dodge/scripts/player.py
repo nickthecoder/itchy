@@ -96,10 +96,10 @@ class ClanFilter( Filter ) :
     def __init__( self, player ) :
         self.player = player
         
-    def accept( self, actor ) :
-        if actor.role.hasTag( self.player.clan ) :
+    def accept( self, role ) :
+        if role.hasTag( self.player.clan ) :
             return False
-        if actor.role.hasTag( self.player.nextClan ) :
+        if role.hasTag( self.player.nextClan ) :
             return False
         return True
         

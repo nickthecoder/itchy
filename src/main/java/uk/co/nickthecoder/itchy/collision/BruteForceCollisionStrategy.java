@@ -82,7 +82,7 @@ public class BruteForceCollisionStrategy implements CollisionStrategy
     }
     
     @Override
-    public List<Role> collisions( Actor source, String[] includeTags, int maxResults, Filter<Actor> filter )
+    public List<Role> collisions( Actor source, String[] includeTags, int maxResults, Filter<Role> filter )
     {
         List<Role> results = new ArrayList<Role>();
         for (String tag : includeTags) {
@@ -92,7 +92,7 @@ public class BruteForceCollisionStrategy implements CollisionStrategy
                     continue;
                 }
 
-                if ((other != source) && (filter.accept( other ))) {
+                if ((other != source) && (filter.accept( otherRole ))) {
                     if (!results.contains(other)) {
                         if (this.collisionTest.collided(source,other)) {
                             results.add(otherRole);

@@ -31,7 +31,7 @@ public interface CollisionStrategy
 {
     public static final int MAX_RESULTS = 100;
 
-    public static final AcceptFilter<Actor> acceptFilter = new AcceptFilter<Actor>();
+    public static final AcceptFilter<Role> acceptFilter = new AcceptFilter<Role>();
 
     
     
@@ -43,6 +43,6 @@ public interface CollisionStrategy
     
     public List<Role> collisions( Actor actor, String[] tags, int maxResults );
 
-    public List<Role> collisions( Actor actor, String[] tags, int maxResults, Filter<Actor> filter );
+    public List<Role> collisions( Actor actor, String[] tags, int maxResults, Filter<Role> filter );
 
 }

@@ -37,7 +37,7 @@ public class DebugCollisionStrategy extends ActorCollisionStrategy
     }
     
     @Override
-    public List<Role> collisions( Actor actor, String[] includeTags, int maxResults, Filter<Actor>filter )
+    public List<Role> collisions( Actor actor, String[] includeTags, int maxResults, Filter<Role>filter )
     {
         List<Role> results1 = this.strategy1.collisions(includeTags, maxResults, filter);
         List<Role> results2 = this.strategy2.collisions(includeTags, maxResults, filter);

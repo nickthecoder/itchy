@@ -122,7 +122,7 @@ public class NeighbourhoodCollisionStrategy extends ActorCollisionStrategy
     }
     
     @Override
-    public List<Role> collisions( Actor source, String[] tags, int maxResults, Filter<Actor> filter )
+    public List<Role> collisions( Actor source, String[] tags, int maxResults, Filter<Role> filter )
     {
         List<Role> results = new ArrayList<Role>();
 
@@ -133,8 +133,8 @@ public class NeighbourhoodCollisionStrategy extends ActorCollisionStrategy
             for (Actor actor : square.getOccupants()) {
                 Role role = actor.getRole();
 
-                if ((actor != source) && (!results.contains(actor))) {
-                    if (filter.accept( actor ) ) {
+                if ((actor != source) && (!results.contains(role))) {
+                    if (filter.accept( role ) ) {
                         for (String tag : tags) {
                             if (role.hasTag(tag)) {
     

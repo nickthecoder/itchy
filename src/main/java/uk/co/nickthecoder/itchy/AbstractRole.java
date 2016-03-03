@@ -90,12 +90,12 @@ public abstract class AbstractRole implements Role
         return this.collisionStrategy.collisions(this.getActor(), tags, maxResults);
     }
 
-    public List<Role> collisions(int maxResults, Filter<Actor> filter, String... tags)
+    public List<Role> collisions(int maxResults, Filter<Role> filter, String... tags)
     {
         return this.collisionStrategy.collisions(this.getActor(), tags, maxResults, filter);
     }
 
-    public boolean collided( Filter<Actor> filter, String... tags)
+    public boolean collided( Filter<Role> filter, String... tags)
     {
         return !this.collisionStrategy.collisions(this.getActor(), tags, 1, filter).isEmpty();
     }

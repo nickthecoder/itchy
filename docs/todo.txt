@@ -1,8 +1,6 @@
 Current Tasks
 =============
 
-Should collisions filter on Actor or Role?
-
 Dodge - Colour each enemy differently?
     Create scenes where there are more than one type, and you switch - only one type is deadly. you pass through the others.
     

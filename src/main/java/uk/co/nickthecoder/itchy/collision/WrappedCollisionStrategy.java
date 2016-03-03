@@ -49,7 +49,7 @@ public class WrappedCollisionStrategy implements CollisionStrategy
     }
     
     @Override
-    public List<Role> collisions( Actor actor, String[] includeTags, int maxResults, Filter<Actor> filter )
+    public List<Role> collisions( Actor actor, String[] includeTags, int maxResults, Filter<Role> filter )
     {
         wrapped.normalise(actor);
 
@@ -78,7 +78,7 @@ public class WrappedCollisionStrategy implements CollisionStrategy
         return result;
     }
     
-    public List<Role> collisions2( Actor actor, String[] tags, int maxResults, Filter<Actor> filter )
+    public List<Role> collisions2( Actor actor, String[] tags, int maxResults, Filter<Role> filter )
     {
         List<Role> result = innerCollisionStrategy.collisions( actor, tags, maxResults, filter );
         

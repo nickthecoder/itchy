@@ -39,7 +39,7 @@ public abstract class ActorCollisionStrategy implements CollisionStrategy
         return this.collisions(this.actor, tags, maxResults);
     }
     
-    public List<Role> collisions( String[] tags, int maxResults, Filter<Actor> filter)
+    public List<Role> collisions( String[] tags, int maxResults, Filter<Role> filter)
     {
         return this.collisions(this.actor, tags, maxResults, filter);
     }
