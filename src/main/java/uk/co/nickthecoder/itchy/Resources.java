@@ -1100,6 +1100,11 @@ public class Resources extends Loadable
                 return true;
             }
         }
+        for (Layout layout : this.layouts.values()) {
+            if (layout.renamePending() ) {
+                return true;
+            }
+        }
         return false;
     }
 

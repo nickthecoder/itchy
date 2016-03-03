@@ -3,11 +3,6 @@ Current Tasks
 
 Duplicate scene
 
-Implement change Layout in scene designer.
-    Rename a Layer needs to update all scenes (just like renaming a costume, but the owner needs to be the Layout).
-
-
-
 Make some gates need balloons 2, rocks 2, instead of 3, 3?
     Or make a new balloons3?
 
@@ -23,5 +18,3 @@ BUGS
 ====
 
 Cannot start a new animation from a finish event of an old animation (Dodge 'Em Player wanted to do it)
-
-Reload a Role does NOT update the costume's CostumeFeatures which use it.

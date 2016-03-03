@@ -20,6 +20,7 @@ public class Layout implements NamedSubject<Layout>, Cloneable
 
     private List<Property<Layout, ?>> customProperties;
 
+    
     @Override
     public List<Property<Layout, ?>> getProperties()
     {
@@ -204,6 +205,54 @@ public class Layout implements NamedSubject<Layout>, Cloneable
         }
     }
 
+
+    HashMap<String, String> renamedLayers;
+    
+    /**
+     * Used while loading - if a layer has been renamed since the scene was last saved, then we need to
+     * translate from the old name to the new name.
+     */
+    public String getNewLayerName(String name)
+    {
+        if ( renamedLayers == null ) {
+            return name;
+        }
+        
+        String origName = renamedLayers.get(name);
+        return origName == null ? name : origName;
+    }
+    
+    public void renameLayer( Layer layer, String oldName )
+    {
+        String newName = layer.getName();
+        if (renamedLayers == null) {
+            renamedLayers = new HashMap<String,String>();
+        }
+        
+        if ((oldName == null) || oldName.equals(newName)) {
+            return;
+        }
+        
+        // If the layer has been renamed already, we want to map from the ORIGINAL name, not the intermediate name
+        // (oldName).
+        for (String name : renamedLayers.keySet()) {
+            if (renamedLayers.get(name).equals(oldName)) {
+                oldName = name;
+                break;
+            }
+        }
+        if (oldName.equals(newName)) {
+            renamedLayers.remove(oldName);
+        } else {
+            renamedLayers.put(oldName, newName);
+        }
+    }
+    
+    public boolean renamePending()
+    {
+        return renamedLayers == null ? false : renamedLayers.size() > 0;
+    }
+    
     @Override
     public Layout clone()
     {

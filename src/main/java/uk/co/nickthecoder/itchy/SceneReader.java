@@ -80,7 +80,7 @@ public class SceneReader
 
         for (Iterator<XMLTag> i = sceneTag.getTags("layer"); i.hasNext();) {
             XMLTag layerTag = i.next();
-            String name = layerTag.getAttribute("name");
+            String name = this.scene.layout.getNewLayerName( layerTag.getAttribute("name") );
 
             this.readLayerProperties(layerTag, name);
 

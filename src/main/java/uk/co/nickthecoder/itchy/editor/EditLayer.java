@@ -30,6 +30,10 @@ public class EditLayer extends EditNamedSubject<Layer>
     private PropertiesForm<Stage> initialStagePropertiesForm = null;
     private PropertiesForm<StageConstraint> initialStageConstraintPropertiesForm = null;
 
+    /**
+     * The old name - used to keep track of renamed layers.
+     */
+    private String oldName;
     
     public EditLayer(Resources resources, ListSubjects<Layer> listSubjects, Layout layout, Layer subject, boolean isNew)
     {
@@ -69,6 +73,7 @@ public class EditLayer extends EditNamedSubject<Layer>
     {
         super.createForm();
 
+        this.oldName = this.subject.name;
         notebook = new Notebook();
 
         stagePropertiesContainer = new PlainContainer();
@@ -197,7 +202,8 @@ public class EditLayer extends EditNamedSubject<Layer>
     @Override
     protected void rename()
     {
-        // Do nothing because, unlike other resources, layers are not in a map keyed on their name.
+        this.layout.renameLayer(this.subject, this.oldName );
+        this.oldName = this.subject.name;
     }
 
     @Override
