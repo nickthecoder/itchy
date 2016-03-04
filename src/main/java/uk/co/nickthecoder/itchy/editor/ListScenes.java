@@ -1,17 +1,22 @@
 package uk.co.nickthecoder.itchy.editor;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Scene;
 import uk.co.nickthecoder.itchy.SceneStub;
+import uk.co.nickthecoder.itchy.gui.ActionListener;
+import uk.co.nickthecoder.itchy.gui.Button;
+import uk.co.nickthecoder.itchy.gui.Container;
 import uk.co.nickthecoder.itchy.gui.ReflectionTableModelRow;
 import uk.co.nickthecoder.itchy.gui.SimpleTableModel;
 import uk.co.nickthecoder.itchy.gui.SingleColumnRowComparator;
 import uk.co.nickthecoder.itchy.gui.TableModel;
 import uk.co.nickthecoder.itchy.gui.TableModelColumn;
 import uk.co.nickthecoder.itchy.gui.TableModelRow;
+import uk.co.nickthecoder.itchy.util.Util;
 
 public class ListScenes extends ListSubjects<SceneStub>
 {
@@ -87,6 +92,54 @@ public class ListScenes extends ListSubjects<SceneStub>
     {
         subject.delete();
         this.resources.removeScene(subject.getName());
+    }
+    
+    protected void addListButtons(Container buttonBar)
+    {
+        Button duplicate = new Button("Duplicate");
+        duplicate.addActionListener(new ActionListener()
+        {
+            @Override
+            public void action()
+            {
+                onDuplicate();
+            }
+        });
+        buttonBar.addChild(duplicate);
+        super.addListButtons(buttonBar);
+    }
+    
+    private void onDuplicate()
+    {
+        SceneStub oldStub = getCurrentItem();
+        
+        String newName = null;
+        if (oldStub != null) {
+            for ( int i = 1; i < 100; i ++ ) {
+                newName = oldStub.getName() + " copy#" + i;
+                if (resources.getScene(newName) == null) {
+                    break;
+                }
+            }
+            if (newName == null) {
+                return;
+            }
+            
+            SceneStub newStub = new SceneStub();
+            newStub.setName(newName);
+            File oldFile = oldStub.getFile();
+            File newFile = newStub.getFile();
+            try {
+                Util.copyFile(oldFile,newFile);
+            } catch (Exception e) {
+                e.printStackTrace();
+                return;
+            }
+            resources.addScene(newStub);
+            this.rebuildTable();
+            this.selectItem(newStub);
+            this.onEdit();
+        }
     }
 
 }

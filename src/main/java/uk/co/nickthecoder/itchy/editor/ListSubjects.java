@@ -223,29 +223,48 @@ public abstract class ListSubjects<S>
         this.addOrEdit(null);
     }
 
-    public void onEdit()
+    protected S getCurrentItem()
     {
-        this.adding = false;
         if (this.table.getCurrentTableModelRow() == null) {
-            return;
+            return null;
         }
         @SuppressWarnings("unchecked")
         ReflectionTableModelRow<S> row = (ReflectionTableModelRow<S>) this.table.getCurrentTableModelRow();
 
-        this.addOrEdit((S) row.getData());
+        return ((S) row.getData());
+        
+    }
+    
+    protected void selectItem( S subject )
+    {
+        TableModel model = this.table.getTableModel();
+        for ( int i = 0; i < model.getRowCount(); i ++ ) {
+            @SuppressWarnings("unchecked")
+            ReflectionTableModelRow<S> row = (ReflectionTableModelRow<S>) model.getRow(i);
+            if (row.getData() == subject) {
+                this.table.selectRow(row);
+            }
+        }
+    }
+    
+    public void onEdit()
+    {
+        this.adding = false;
+
+        S subject = getCurrentItem();
+        if (subject != null) {
+            this.addOrEdit( subject );
+        }        
     }
 
     public void onRemove()
     {
         this.adding = false;
-        if (this.table.getCurrentTableModelRow() == null) {
-            return;
-        }
-        @SuppressWarnings("unchecked")
-        ReflectionTableModelRow<S> row = (ReflectionTableModelRow<S>) this.table.getCurrentTableModelRow();
-
-        remove(row.getData());
-        rebuildTable();
+        S subject = getCurrentItem();
+        if (subject != null) {
+            remove(subject);
+            rebuildTable();
+        }        
     }
 
     /**
