@@ -23,7 +23,24 @@
       <sprite name="wall-v" direction="0.0" offsetX="25" offsetY="300" x="0" y="0" width="50" height="600"/>
     </spriteSheet>
   </spriteSheets>
-  <poses/>
+  <poses>
+    <pose name="thumbnail-a" filename="images/thumbnail-a.png"/>
+    <pose name="thumbnail-b" filename="images/thumbnail-b.png"/>
+    <pose name="thumbnail-c" filename="images/thumbnail-c.png"/>
+    <pose name="thumbnail-d" filename="images/thumbnail-d.png"/>
+    <pose name="thumbnail-e" filename="images/thumbnail-e.png"/>
+    <pose name="thumbnail-f" filename="images/thumbnail-f.png"/>
+    <pose name="thumbnail-g" filename="images/thumbnail-g.png"/>
+    <pose name="thumbnail-h" filename="images/thumbnail-h.png"/>
+    <pose name="thumbnail-i" filename="images/thumbnail-i.png"/>
+    <pose name="thumbnail-j" filename="images/thumbnail-j.png"/>
+    <pose name="thumbnail-k" filename="images/thumbnail-k.png"/>
+    <pose name="thumbnail-l" filename="images/thumbnail-l.png"/>
+    <pose name="thumbnail-m" filename="images/thumbnail-m.png"/>
+    <pose name="thumbnail-n" filename="images/thumbnail-n.png"/>
+    <pose name="thumbnail-notFound" filename="images/thumbnail-notFound.png"/>
+    <pose name="thumbnail-o" filename="images/thumbnail-o.png"/>
+  </poses>
   <ninePatches/>
   <fonts>
     <font name="vera" file="fonts/Vera/Vera.ttf"/>
@@ -126,6 +143,25 @@
     <costume name="rectangle-4" defaultZOrder="60" order="60" showInDesigner="true" extends="rectangle" role="rectangle.py">
       <pose name="default" pose="rectangle-4"/>
       <properties clan="blue"/>
+    </costume>
+    <costume name="thumbnail" defaultZOrder="50" order="50" showInDesigner="true" role="uk.co.nickthecoder.itchy.role.MessageButton">
+      <pose name="a" pose="thumbnail-a"/>
+      <pose name="b" pose="thumbnail-b"/>
+      <pose name="c" pose="thumbnail-c"/>
+      <pose name="d" pose="thumbnail-d"/>
+      <pose name="default" pose="thumbnail-a"/>
+      <pose name="e" pose="thumbnail-e"/>
+      <pose name="f" pose="thumbnail-f"/>
+      <pose name="g" pose="thumbnail-g"/>
+      <pose name="h" pose="thumbnail-h"/>
+      <pose name="i" pose="thumbnail-i"/>
+      <pose name="j" pose="thumbnail-j"/>
+      <pose name="k" pose="thumbnail-k"/>
+      <pose name="l" pose="thumbnail-l"/>
+      <pose name="m" pose="thumbnail-m"/>
+      <pose name="n" pose="thumbnail-n"/>
+      <pose name="o" pose="thumbnail-o"/>
+      <pose name="unknown" pose="thumbnail-notFound"/>
     </costume>
     <costume name="triangle" defaultZOrder="0" order="0" showInDesigner="true" extends="enemy">
       <pose name="default" pose="triangle-1"/>

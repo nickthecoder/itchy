@@ -1,0 +1,8 @@
+<scene name="notFound" layout="default" sceneDirector="play.py" showMouse="true">
+  <sceneDirector/>
+  <layer name="background"/>
+  <layer name="main">
+    <text x="394.0" y="277.0" font="vera" fontSize="520.0" text="?"/>
+  </layer>
+  <layer name="wrapped"/>
+</scene>
