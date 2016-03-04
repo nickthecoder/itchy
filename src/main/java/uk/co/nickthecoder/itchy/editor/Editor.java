@@ -24,6 +24,7 @@ import uk.co.nickthecoder.itchy.gui.RootContainer;
 import uk.co.nickthecoder.itchy.gui.Stylesheet;
 import uk.co.nickthecoder.itchy.gui.VerticalLayout;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
+import uk.co.nickthecoder.jame.event.Keys;
 
 public final class Editor extends Game implements KeyListener
 {
@@ -43,6 +44,8 @@ public final class Editor extends Game implements KeyListener
 
     // public PreferencesEditor preferencesEditor;
 
+    private Notebook notebook;
+    
     public GameInfoEditor gameInfoEditor;
 
     public ListSpriteSheets listSpriteSheets;
@@ -190,7 +193,7 @@ public final class Editor extends Game implements KeyListener
 
         this.root.show();
 
-        Notebook notebook = new Notebook();
+        notebook = new Notebook();
         this.root.addChild(notebook);
         notebook.setFill(true, true);
         notebook.setExpansion(1);
@@ -208,6 +211,11 @@ public final class Editor extends Game implements KeyListener
         notebook.addPage(new Label("Scenes"), this.listScenes.createPage());
         // notebook.addPage(new Label("Preferences"), this.preferencesEditor.createPage());
 
+        for ( int i = 0; i < notebook.size(); i ++ ) {
+            Button tab = notebook.getTab(i);
+            tab.setTooltip("F" + (i+1));
+        }
+        
         PlainContainer buttons = new PlainContainer();
         buttons.addStyle("buttonBar");
         buttons.setXAlignment(1);
@@ -361,6 +369,13 @@ public final class Editor extends Game implements KeyListener
     @Override
     public void onKeyDown(KeyboardEvent ke)
     {
+        if ((ke.symbol >= Keys.F1) && (ke.symbol <= Keys.F12)) {
+            int tab = ke.symbol - Keys.F1;
+            if (tab < notebook.size() ) {
+                notebook.getTab(tab).onClick(null);
+            }
+        }
+        
         if (inputTest.matches(ke)) {
             test();
         }

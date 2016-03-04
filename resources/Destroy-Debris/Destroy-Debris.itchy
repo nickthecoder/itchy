@@ -681,13 +681,13 @@
     <costume name="ship1" defaultZOrder="0" order="0" showInDesigner="true" extends="ship" role="ship.py">
       <pose name="default" pose="ship1"/>
       <companion name="life" companion="life1"/>
-      <properties rotationSpeed="2.0" thrust="1.0"/>
+      <properties rotationSpeed="3.0" thrust="0.2"/>
     </costume>
     <costume name="ship2" defaultZOrder="0" order="0" showInDesigner="true" extends="ship" role="ship.py">
       <pose name="default" pose="ship2"/>
       <companion name="bullet-2" companion="bullet2"/>
       <companion name="life" companion="life2"/>
-      <properties rotationSpeed="2.0" thrust="1.0"/>
+      <properties rotationSpeed="4.0" thrust="0.3"/>
     </costume>
     <costume name="stars1" defaultZOrder="0" order="0" showInDesigner="true">
       <pose name="default" pose="stars1"/>

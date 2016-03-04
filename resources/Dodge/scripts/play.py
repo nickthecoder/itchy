@@ -11,7 +11,6 @@ class Play(PlainSceneDirector) :
         self.score = 0
         self.highScore = -1
     
-    
     def onActivate(self) :
         self.inputExit = Input.find('exit')
         self.inputRestart = Input.find('restart')
@@ -20,6 +19,7 @@ class Play(PlainSceneDirector) :
         
         
     def tick(self) :
+        
         if self.inputRestart.pressed() :
             game.director.startScene( game.sceneName )
 
@@ -34,6 +34,7 @@ class Play(PlainSceneDirector) :
             self.score += 1
 
             
+        
     def stopPlaying( self ) :
         self.playing = False
         self.speedUp = 0
@@ -43,6 +44,13 @@ class Play(PlainSceneDirector) :
         
 
     def loading( self, scene ) :
+        thumbFile = game.resources.resolveFile( File( "images", "thumbnail-" + scene.name + ".png" ) )
+        if not thumbFile.exists() :
+            surface = Surface( game.width, game.height, True )
+            game.render(surface);
+            thumbnail = surface.rotoZoom( 0, 0.2, True )
+            thumbnail.saveAsPNG( thumbFile.path )
+
         game.mergeScene("glass")
 
 
