@@ -215,6 +215,9 @@
   </scenes>
   <inputs>
     <input name="exit" keys="click+ESCAPE"/>
+    <input name="go" keys="RETURN"/>
+    <input name="next" keys="RIGHT"/>
+    <input name="prev" keys="LEFT"/>
     <input name="reset" keys="shift+ctrl+r"/>
     <input name="restart" keys="F5,RETURN"/>
   </inputs>

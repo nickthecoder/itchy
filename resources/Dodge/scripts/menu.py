@@ -8,6 +8,11 @@ class Menu(PlainSceneDirector) :
         self.playing = False
         
         
+    def onActivate(self) :
+        self.inputNext = Input.find('next')
+        self.inputPrev = Input.find('prev')
+        self.inputGo = Input.find('go')
+        
     def onLoaded(self) :
         self.setSceneName( game.preferences.get("scene", "a") )
 
@@ -24,8 +29,17 @@ class Menu(PlainSceneDirector) :
         # Press a letter to start the scene.
         if game.hasScene( event.c ) :
             game.director.startScene( event.c )
-    
-    
+        
+        if self.inputNext.matches(event) :
+            self.changeScene( 1 )
+            
+        if self.inputPrev.matches(event) :
+            self.changeScene( -1 )
+
+        if self.inputGo.matches(event) :
+            game.startScene( self.sceneName )
+            
+            
     def onMessage(self, message) :
         
         if message == "go" :
