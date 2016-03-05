@@ -2,6 +2,9 @@ from common import * #@UnusedWildImport
 
 properties = ArrayList()
 
+# Used to obscure the scene when the scene is first loaded.
+# These black objects are then removed from top left to bottom right.
+# This is soely to mimic the origian game's appearance.
 class Black(AbstractRole) :
 
     def __init__(self) :

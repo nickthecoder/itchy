@@ -8,11 +8,14 @@ class Nasty(Movable) :
 
     def __init__(self) :
         super(Nasty,self).__init__()
-        self.addTag( "hittable" )
-        self.addTag( "squashable" )
         self.direction = 0 # 0..3 North,East,South,West
         self.allowReverse = True
 
+    def onBirth(self) :
+        super(Nasty,self).onBirth()
+        self.addTag( "hittable" )
+        self.addTag( "squashable" )
+        
     def tick(self):
         if self.idle :
             self.chooseMovement()        

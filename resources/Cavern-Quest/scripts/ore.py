@@ -5,8 +5,8 @@ properties = ArrayList()
 
 class Ore(GridRole) :
 
-    def __init__(self) :
-        super(Ore,self).__init__()
+    def onBirth(self) :
+        super(Ore,self).onBirth()
         self.addTag("soft")
 
     def onInvaded(self, invader) :

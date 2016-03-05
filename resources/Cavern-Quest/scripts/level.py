@@ -74,11 +74,11 @@ class Level(PlainSceneDirector) :
 
 
     def onActivate( self ) :
-    
-        print "onActivate"
-        
+            
+        print "level.onActivate"
         for player in game.findRoleByTag("player") :
             self.player = player
+        print "Player", self.player
 
         print "Looking for spawn sites"
         self.spawnLocations = []
