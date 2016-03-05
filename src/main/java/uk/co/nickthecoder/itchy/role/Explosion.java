@@ -222,12 +222,6 @@ public class Explosion extends Companion
 
             actor.moveForwards(this.distance + random.nextDouble() * this.randomDistance);
 
-            // We want the projectile to have a tick before the first redraw of the screen, because 
-            // it may have an animation which changes its appearance, and we don't want to see a single frame
-            // before the animation has had a chance to kick in. The "jet" out of Cavern-Quest's rocket highlighted this problem
-            // (before it was hidden using z-Order).
-            actor.tick();
-
             this.projectileCounter++;
             if (this.projectileCounter >= this.totalProjectiles) {
                 getActor().kill();

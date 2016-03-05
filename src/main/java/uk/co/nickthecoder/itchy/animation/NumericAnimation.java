@@ -52,8 +52,11 @@ public abstract class NumericAnimation extends AbstractAnimation
         this.currentFrame = 0;
         
         if ( this.ticks <= 0 ) {
-            tick( actor, 1, 1 );
-            //super.tick(actor);
+            double eased = this.ease.amount(1);
+            tick( actor, eased, eased );
+        } else {
+            double eased = this.ease.amount(0);
+            tick( actor, eased, eased );
         }
     }
 

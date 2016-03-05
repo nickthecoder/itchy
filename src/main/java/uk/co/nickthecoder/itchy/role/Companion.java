@@ -81,12 +81,16 @@ public abstract class Companion extends AbstractRole
             actor.getAppearance().setPose(this.pose);
         }
 
-        if (this.eventName != null) {
-            actor.event(this.eventName);
-        }
+        actor.getAppearance().setScale(this.scale);
+        actor.getAppearance().setColorize(this.colorize);
+        actor.getAppearance().setAlpha(this.alpha);
+        actor.setHeading(this.heading);
 
-        actor.setRole(this);
-        actor.setZOrder(this.zOrder);
+        actor.moveTo(this.source);
+        actor.moveForwards(this.offsetForwards * this.scale,
+            this.offsetSidewards * this.scale);
+        actor.moveBy(this.offsetX * this.scale, this.offsetY * this.scale);
+
         if (this.rotate) {
             actor.getAppearance().setDirection(this.direction);
         } else {
@@ -94,14 +98,12 @@ public abstract class Companion extends AbstractRole
                 actor.getAppearance().getPose().getDirection());
         }
 
-        actor.setHeading(this.heading);
-        actor.moveTo(this.source);
-        actor.moveForwards(this.offsetForwards * this.scale,
-            this.offsetSidewards * this.scale);
-        actor.moveBy(this.offsetX * this.scale, this.offsetY * this.scale);
-        actor.getAppearance().setScale(this.scale);
-        actor.getAppearance().setColorize(this.colorize);
-        actor.getAppearance().setAlpha(this.alpha);
+        if (this.eventName != null) {
+            actor.event(this.eventName);
+        }
+
+        actor.setRole(this);
+        actor.setZOrder(this.zOrder);
 
         this.source.getStage().add(actor);
 

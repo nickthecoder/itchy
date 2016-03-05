@@ -78,16 +78,13 @@ public class ColorAnimation extends NumericAnimation
         double blue = this.startColor.b + (this.targetColor.b - this.startColor.b) * amount;
         double alpha = this.startColor.a + (this.targetColor.a - this.startColor.a) * amount;
 
+
         RGBA color = new RGBA((int) red, (int) green, (int) blue, (int) alpha);
 
         if (actor.getAppearance().getPose() instanceof TextPose) {
             ((TextPose) actor.getAppearance().getPose()).setColor(color);
         } else {
-            if (alpha == 0) {
-                actor.getAppearance().setColorize(null);
-            } else {
-                actor.getAppearance().setColorize(color);                
-            }
+            actor.getAppearance().setColorize(color);                
         }
     }
 
