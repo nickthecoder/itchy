@@ -860,6 +860,8 @@ before we can harvest the honey.</string>
     <scene name="friends1a"/>
     <scene name="furniture"/>
     <scene name="furniture2"/>
+    <scene name="furniture3"/>
+    <scene name="furniture3a"/>
     <scene name="glass"/>
     <scene name="glass-empty"/>
     <scene name="grenades"/>

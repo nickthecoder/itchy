@@ -2,984 +2,988 @@
   <layer name="background"/>
   <layer name="plain"/>
   <layer name="grid">
-    <actor costume="warp" x="-300.0" y="840.0" zOrder="3" id="" colorize="" role="warp.py">
+    <actor costume="warp" x="-300.0" y="840.0" zOrder="3">
       <role scene="bees2" exitX="0" exitY="1"/>
     </actor>
-    <actor costume="warp" x="-240.0" y="600.0" zOrder="4" id="" colorize="" role="warp.py">
+    <actor costume="warp" x="-240.0" y="600.0" zOrder="4">
       <role scene="bees" exitX="0" exitY="1"/>
     </actor>
-    <actor costume="wall" x="1500.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-120.0" y="180.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="120.0" y="360.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-120.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-120.0" y="-120.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="180.0" y="240.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="120.0" y="240.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="120.0" y="300.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-60.0" y="-180.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="120.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="240.0" y="240.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="60.0" y="300.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="120.0" y="120.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-60.0" y="300.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-120.0" y="240.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="720.0" y="360.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="120.0" y="-120.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="60.0" y="-180.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="480.0" y="300.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="540.0" y="300.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="840.0" y="300.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="600.0" y="240.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-120.0" y="120.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="180.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-180.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-240.0" y="240.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="120.0" y="-180.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="240.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="300.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="360.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-240.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-360.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-300.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="360.0" y="-60.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="420.0" y="-300.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="360.0" y="-180.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="360.0" y="-240.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="420.0" y="-60.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-360.0" y="-240.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-360.0" y="-180.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-360.0" y="-60.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="480.0" y="-60.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="300.0" y="240.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="360.0" y="180.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="360.0" y="240.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="660.0" y="360.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="360.0" y="60.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-300.0" y="240.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-360.0" y="240.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-360.0" y="180.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-360.0" y="60.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-180.0" y="240.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="120.0" y="180.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-120.0" y="-240.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-120.0" y="-180.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="120.0" y="-300.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="120.0" y="-240.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="600.0" y="-300.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="540.0" y="-300.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="600.0" y="-120.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="600.0" y="-240.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="660.0" y="-360.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="660.0" y="-120.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="540.0" y="-60.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="720.0" y="-120.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="780.0" y="360.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="900.0" y="-180.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="840.0" y="-180.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="840.0" y="-300.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="780.0" y="-360.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="480.0" y="-300.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="720.0" y="-360.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="420.0" y="60.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="480.0" y="60.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="540.0" y="60.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="420.0" y="300.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="600.0" y="300.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="660.0" y="120.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="720.0" y="120.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="780.0" y="120.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="840.0" y="180.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="600.0" y="120.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="960.0" y="-180.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="780.0" y="-120.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallSE" x="600.0" y="60.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallSE" x="840.0" y="120.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallNE" x="600.0" y="-60.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallNE" x="840.0" y="-120.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallSW" x="600.0" y="-360.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallNW" x="600.0" y="360.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallNW" x="360.0" y="300.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="1020.0" y="-180.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="840.0" y="-360.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="900.0" y="-420.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="960.0" y="-420.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="1020.0" y="-420.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="1080.0" y="-240.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="1080.0" y="-360.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="1080.0" y="-420.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="1140.0" y="-240.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="1680.0" y="-240.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="1260.0" y="-240.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="1320.0" y="-300.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="1320.0" y="-420.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="1140.0" y="-480.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="1200.0" y="-480.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="1260.0" y="-480.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="1320.0" y="-480.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="1380.0" y="-540.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="1380.0" y="-300.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="1440.0" y="-300.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="1560.0" y="-360.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="1560.0" y="-420.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="1560.0" y="-480.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="1500.0" y="-540.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="1440.0" y="-540.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallSW" x="840.0" y="-420.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallSW" x="1080.0" y="-480.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallSW" x="1320.0" y="-540.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallSE" x="1560.0" y="-540.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallNE" x="1080.0" y="-180.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="900.0" y="180.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="960.0" y="180.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="1020.0" y="180.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="1080.0" y="240.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="1080.0" y="360.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="1080.0" y="420.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="840.0" y="360.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="900.0" y="420.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="960.0" y="420.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="1020.0" y="420.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="1140.0" y="240.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="1200.0" y="240.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="1260.0" y="240.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="1320.0" y="300.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="1320.0" y="420.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="1140.0" y="480.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="1260.0" y="480.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="1320.0" y="480.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="1200.0" y="480.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="1380.0" y="300.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="1500.0" y="300.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="1560.0" y="360.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="1560.0" y="420.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="1560.0" y="480.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="1500.0" y="540.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="1440.0" y="540.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="1380.0" y="540.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallNW" x="1320.0" y="540.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallNW" x="1080.0" y="480.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallSE" x="1560.0" y="300.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallSE" x="1320.0" y="240.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallSE" x="1080.0" y="180.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallNW" x="840.0" y="420.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallNE" x="1560.0" y="540.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallNE" x="1740.0" y="360.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="1620.0" y="360.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="1680.0" y="360.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="1740.0" y="300.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="1740.0" y="240.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="1740.0" y="180.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="1680.0" y="-180.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="1560.0" y="-300.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallSE" x="1680.0" y="-300.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="1440.0" y="-240.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="1500.0" y="-60.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="1620.0" y="-60.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="1620.0" y="-300.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="1440.0" y="-120.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="1440.0" y="-180.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallNW" x="1440.0" y="-60.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="1740.0" y="120.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="1740.0" y="60.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="1740.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="1680.0" y="-120.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallSE" x="1740.0" y="-60.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="1200.0" y="-240.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallNE" x="1320.0" y="-240.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-420.0" y="-60.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-480.0" y="-60.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-540.0" y="-60.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-600.0" y="-120.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-600.0" y="-240.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-600.0" y="-300.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-540.0" y="-480.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-480.0" y="-480.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-420.0" y="-480.0" heading="-1.3971810272963767" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-660.0" y="-120.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-780.0" y="-120.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-720.0" y="-120.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-840.0" y="-180.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-840.0" y="-300.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-840.0" y="-360.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-780.0" y="-540.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-720.0" y="-540.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-660.0" y="-540.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-900.0" y="-180.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-960.0" y="-180.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-1020.0" y="-180.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-1080.0" y="-240.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-1080.0" y="-360.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-1080.0" y="-420.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-1020.0" y="-600.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-960.0" y="-600.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-900.0" y="-600.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-1140.0" y="-240.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-1200.0" y="-240.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-1260.0" y="-240.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-1320.0" y="-300.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-1320.0" y="-360.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-1320.0" y="-420.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-1260.0" y="-480.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-1200.0" y="-480.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-1140.0" y="-480.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallNW" x="-600.0" y="-60.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallNW" x="-840.0" y="-120.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallNW" x="-1080.0" y="-180.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallNW" x="-1320.0" y="-240.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallSW" x="-1320.0" y="-480.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallSE" x="-840.0" y="-600.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-120.0" y="300.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-120.0" y="360.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-120.0" y="420.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-120.0" y="540.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-120.0" y="660.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-120.0" y="840.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="120.0" y="660.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="120.0" y="480.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="120.0" y="540.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="300.0" y="480.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="120.0" y="420.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-120.0" y="480.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-180.0" y="480.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-240.0" y="480.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-300.0" y="480.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-360.0" y="660.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-360.0" y="540.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-360.0" y="600.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-300.0" y="720.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-180.0" y="720.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="180.0" y="480.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="360.0" y="540.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="240.0" y="480.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="360.0" y="600.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="360.0" y="660.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="180.0" y="720.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="300.0" y="720.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="180.0" y="840.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallSE" x="360.0" y="480.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallSW" x="-360.0" y="480.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="360.0" y="960.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="240.0" y="960.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="420.0" y="780.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="180.0" y="900.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="180.0" y="780.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="360.0" y="720.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallNW" x="180.0" y="960.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-420.0" y="60.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-480.0" y="60.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-540.0" y="60.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-600.0" y="240.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-600.0" y="120.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-600.0" y="300.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-540.0" y="300.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-480.0" y="300.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-420.0" y="300.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-660.0" y="120.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-720.0" y="120.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-780.0" y="120.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-840.0" y="180.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-840.0" y="300.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-780.0" y="360.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-720.0" y="360.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-660.0" y="360.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-900.0" y="180.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-960.0" y="180.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-1020.0" y="180.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-1080.0" y="240.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-1080.0" y="360.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-1080.0" y="420.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-1020.0" y="420.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-960.0" y="420.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-900.0" y="420.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-840.0" y="360.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallNE" x="-360.0" y="300.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallNE" x="-600.0" y="360.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallNE" x="-840.0" y="420.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallSW" x="-600.0" y="60.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallSW" x="-840.0" y="120.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallSW" x="-1080.0" y="180.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="120.0" y="-360.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-120.0" y="-360.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-120.0" y="-300.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="1500.0" y="60.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="1500.0" y="120.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="1560.0" y="180.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="1680.0" y="180.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallNW" x="1500.0" y="180.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="1680.0" y="-60.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-1140.0" y="240.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-1200.0" y="240.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-1260.0" y="240.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-1320.0" y="300.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-1320.0" y="420.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-1320.0" y="480.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-1260.0" y="480.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-1200.0" y="480.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-1140.0" y="480.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-1380.0" y="300.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-1440.0" y="300.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-1500.0" y="300.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-1560.0" y="360.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-1560.0" y="420.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-1560.0" y="480.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-1500.0" y="540.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-1440.0" y="540.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-1380.0" y="540.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallNW" x="-1560.0" y="540.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallSW" x="-1560.0" y="300.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallSW" x="-1320.0" y="240.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallNE" x="-1080.0" y="480.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallNE" x="-1320.0" y="540.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-120.0" y="-420.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-120.0" y="-480.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-120.0" y="-600.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-60.0" y="-720.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" y="-720.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="60.0" y="-720.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="120.0" y="-660.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="120.0" y="-540.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="120.0" y="-480.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="120.0" y="-420.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="180.0" y="-480.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="240.0" y="-480.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="300.0" y="-480.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="360.0" y="-540.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="360.0" y="-600.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="360.0" y="-660.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="300.0" y="-720.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="180.0" y="-720.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="120.0" y="-720.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-180.0" y="-360.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-240.0" y="-360.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-300.0" y="-360.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="180.0" y="-780.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-120.0" y="-660.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-120.0" y="-540.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="180.0" y="-840.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="420.0" y="-780.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="420.0" y="-840.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="180.0" y="-900.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="240.0" y="-960.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="420.0" y="-900.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="360.0" y="-720.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallSW" x="180.0" y="-960.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallSW" x="-120.0" y="-720.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="420.0" y="840.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="420.0" y="900.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallNW" x="120.0" y="720.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallNE" x="-120.0" y="720.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-60.0" y="840.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallSE" x="420.0" y="720.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="240.0" y="1020.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="240.0" y="1080.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="240.0" y="1140.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="420.0" y="1200.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="300.0" y="1200.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="480.0" y="1200.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="480.0" y="1140.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="480.0" y="1080.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="480.0" y="1020.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="300.0" y="1260.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="540.0" y="1260.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="300.0" y="1320.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="300.0" y="1380.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="360.0" y="1440.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="480.0" y="1440.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="540.0" y="1440.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="540.0" y="1380.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="540.0" y="1320.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="360.0" y="1500.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="360.0" y="1560.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="600.0" y="1500.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="600.0" y="1560.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="600.0" y="1620.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="540.0" y="1680.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="480.0" y="1680.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="420.0" y="1680.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="360.0" y="1620.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallSE" x="600.0" y="1440.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallSE" x="540.0" y="1200.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallNW" x="300.0" y="1440.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallNW" x="240.0" y="1200.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallNW" x="360.0" y="1680.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallNE" x="600.0" y="1680.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallSE" x="480.0" y="960.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="420.0" y="960.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-180.0" y="780.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-180.0" y="840.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-180.0" y="900.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-420.0" y="780.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-420.0" y="900.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-420.0" y="840.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-360.0" y="720.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-240.0" y="960.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-360.0" y="960.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-420.0" y="960.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-240.0" y="1020.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-240.0" y="1140.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-240.0" y="1080.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-300.0" y="1200.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-420.0" y="1200.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-480.0" y="1200.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-480.0" y="1140.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-480.0" y="1080.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-480.0" y="1020.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-300.0" y="1260.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-300.0" y="1320.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-300.0" y="1380.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-360.0" y="1440.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-480.0" y="1440.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-540.0" y="1380.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-540.0" y="1320.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-540.0" y="1260.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallNE" x="-240.0" y="1200.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallNE" x="-300.0" y="1440.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallSW" x="-540.0" y="1200.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallSW" x="-480.0" y="960.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallSW" x="-420.0" y="720.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallNE" x="-180.0" y="960.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-600.0" y="-480.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-600.0" y="-420.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-600.0" y="-360.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-840.0" y="-480.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallSW" x="-1080.0" y="-600.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-840.0" y="-420.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-360.0" y="-300.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-360.0" y="-360.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-360.0" y="-420.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallNE" x="420.0" y="-720.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallNE" x="480.0" y="-960.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="420.0" y="-960.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="480.0" y="-1020.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="480.0" y="-1080.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="480.0" y="-1140.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="480.0" y="-1200.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="420.0" y="-1200.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="540.0" y="-1260.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="300.0" y="-1200.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="540.0" y="-1320.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="240.0" y="-1140.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="240.0" y="-1080.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="240.0" y="-1020.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="360.0" y="-960.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallSE" x="-360.0" y="-480.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallSW" x="240.0" y="-1200.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="300.0" y="-1260.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="300.0" y="-1320.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="300.0" y="-1380.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="360.0" y="-1440.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="480.0" y="-1440.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="540.0" y="-1380.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="540.0" y="-1440.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="360.0" y="-1500.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="600.0" y="-1560.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="600.0" y="-1500.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="600.0" y="-1620.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="360.0" y="-1560.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="360.0" y="-1620.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="420.0" y="-1680.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="540.0" y="-1680.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="480.0" y="-1680.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallSW" x="300.0" y="-1440.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallNE" x="540.0" y="-1200.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallNE" x="600.0" y="-1440.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallSE" x="600.0" y="-1680.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallSW" x="360.0" y="-1680.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="360.0" y="-300.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="360.0" y="-420.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="360.0" y="-480.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="360.0" y="-360.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-360.0" y="1500.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-360.0" y="1560.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-600.0" y="1620.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-600.0" y="1560.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallNW" x="-600.0" y="1680.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-540.0" y="1680.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-480.0" y="1680.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-420.0" y="1680.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-540.0" y="1440.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-600.0" y="1500.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-360.0" y="1620.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallNE" x="-360.0" y="1680.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallSW" x="-600.0" y="1440.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-180.0" y="1140.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-60.0" y="1200.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="180.0" y="1140.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-1080.0" y="-480.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-1080.0" y="-540.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-840.0" y="-540.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallSE" x="-600.0" y="-540.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallNW" x="-120.0" y="1200.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallSE" x="-120.0" y="1140.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallNE" x="120.0" y="1200.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallSW" x="120.0" y="1140.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="60.0" y="1200.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-240.0" y="1380.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-180.0" y="1380.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="-60.0" y="1440.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" y="1440.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="60.0" y="1440.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="180.0" y="1380.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="240.0" y="1380.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallSW" x="120.0" y="1380.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallNW" x="-120.0" y="1440.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallNE" x="120.0" y="1440.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="wallSE" x="-120.0" y="1380.0" zOrder="5" id="" colorize="" role="wall.py"/>
-    <actor costume="portcullis" x="-120.0" y="-60.0" zOrder="10" id="" colorize="" role="portcullis.py">
+    <actor costume="wall" x="1500.0" zOrder="5"/>
+    <actor costume="wall" x="-120.0" y="180.0" zOrder="5"/>
+    <actor costume="wall" x="120.0" y="360.0" zOrder="5"/>
+    <actor costume="wall" x="-120.0" zOrder="5"/>
+    <actor costume="wall" x="-120.0" y="-120.0" zOrder="5"/>
+    <actor costume="wall" x="180.0" y="240.0" zOrder="5"/>
+    <actor costume="wall" x="120.0" y="240.0" zOrder="5"/>
+    <actor costume="wall" x="120.0" y="300.0" zOrder="5"/>
+    <actor costume="wall" x="-60.0" y="-180.0" zOrder="5"/>
+    <actor costume="wall" x="120.0" zOrder="5"/>
+    <actor costume="wall" x="240.0" y="240.0" zOrder="5"/>
+    <actor costume="wall" x="60.0" y="300.0" zOrder="5"/>
+    <actor costume="wall" x="120.0" y="120.0" zOrder="5"/>
+    <actor costume="wall" x="-60.0" y="300.0" zOrder="5"/>
+    <actor costume="wall" x="-120.0" y="240.0" zOrder="5"/>
+    <actor costume="wall" x="720.0" y="360.0" zOrder="5"/>
+    <actor costume="wall" x="120.0" y="-120.0" zOrder="5"/>
+    <actor costume="wall" x="60.0" y="-180.0" zOrder="5"/>
+    <actor costume="wall" x="480.0" y="300.0" zOrder="5"/>
+    <actor costume="wall" x="540.0" y="300.0" zOrder="5"/>
+    <actor costume="wall" x="840.0" y="300.0" zOrder="5"/>
+    <actor costume="wall" x="600.0" y="240.0" zOrder="5"/>
+    <actor costume="wall" x="-120.0" y="120.0" zOrder="5"/>
+    <actor costume="wall" x="180.0" zOrder="5"/>
+    <actor costume="wall" x="-180.0" zOrder="5"/>
+    <actor costume="wall" x="-240.0" y="240.0" zOrder="5"/>
+    <actor costume="wall" x="120.0" y="-180.0" zOrder="5"/>
+    <actor costume="wall" x="240.0" zOrder="5"/>
+    <actor costume="wall" x="300.0" zOrder="5"/>
+    <actor costume="wall" x="360.0" zOrder="5"/>
+    <actor costume="wall" x="-240.0" zOrder="5"/>
+    <actor costume="wall" x="-360.0" zOrder="5"/>
+    <actor costume="wall" x="-300.0" zOrder="5"/>
+    <actor costume="wall" x="360.0" y="-60.0" zOrder="5"/>
+    <actor costume="wall" x="420.0" y="-300.0" zOrder="5"/>
+    <actor costume="wall" x="360.0" y="-180.0" zOrder="5"/>
+    <actor costume="wall" x="360.0" y="-240.0" zOrder="5"/>
+    <actor costume="wall" x="420.0" y="-60.0" zOrder="5"/>
+    <actor costume="wall" x="-360.0" y="-240.0" zOrder="5"/>
+    <actor costume="wall" x="-360.0" y="-180.0" zOrder="5"/>
+    <actor costume="wall" x="-360.0" y="-60.0" zOrder="5"/>
+    <actor costume="wall" x="480.0" y="-60.0" zOrder="5"/>
+    <actor costume="wall" x="300.0" y="240.0" zOrder="5"/>
+    <actor costume="wall" x="360.0" y="180.0" zOrder="5"/>
+    <actor costume="wall" x="360.0" y="240.0" zOrder="5"/>
+    <actor costume="wall" x="660.0" y="360.0" zOrder="5"/>
+    <actor costume="wall" x="360.0" y="60.0" zOrder="5"/>
+    <actor costume="wall" x="-300.0" y="240.0" zOrder="5"/>
+    <actor costume="wall" x="-360.0" y="240.0" zOrder="5"/>
+    <actor costume="wall" x="-360.0" y="180.0" zOrder="5"/>
+    <actor costume="wall" x="-360.0" y="60.0" zOrder="5"/>
+    <actor costume="wall" x="-180.0" y="240.0" zOrder="5"/>
+    <actor costume="wall" x="120.0" y="180.0" zOrder="5"/>
+    <actor costume="wall" x="-120.0" y="-240.0" zOrder="5"/>
+    <actor costume="wall" x="-120.0" y="-180.0" zOrder="5"/>
+    <actor costume="wall" x="120.0" y="-300.0" zOrder="5"/>
+    <actor costume="wall" x="120.0" y="-240.0" zOrder="5"/>
+    <actor costume="wall" x="600.0" y="-300.0" zOrder="5"/>
+    <actor costume="wall" x="540.0" y="-300.0" zOrder="5"/>
+    <actor costume="wall" x="600.0" y="-120.0" zOrder="5"/>
+    <actor costume="wall" x="600.0" y="-240.0" zOrder="5"/>
+    <actor costume="wall" x="660.0" y="-360.0" zOrder="5"/>
+    <actor costume="wall" x="660.0" y="-120.0" zOrder="5"/>
+    <actor costume="wall" x="540.0" y="-60.0" zOrder="5"/>
+    <actor costume="wall" x="720.0" y="-120.0" zOrder="5"/>
+    <actor costume="wall" x="780.0" y="360.0" zOrder="5"/>
+    <actor costume="wall" x="900.0" y="-180.0" zOrder="5"/>
+    <actor costume="wall" x="840.0" y="-180.0" zOrder="5"/>
+    <actor costume="wall" x="840.0" y="-300.0" zOrder="5"/>
+    <actor costume="wall" x="780.0" y="-360.0" zOrder="5"/>
+    <actor costume="wall" x="480.0" y="-300.0" zOrder="5"/>
+    <actor costume="wall" x="720.0" y="-360.0" zOrder="5"/>
+    <actor costume="wall" x="420.0" y="60.0" zOrder="5"/>
+    <actor costume="wall" x="480.0" y="60.0" zOrder="5"/>
+    <actor costume="wall" x="540.0" y="60.0" zOrder="5"/>
+    <actor costume="wall" x="420.0" y="300.0" zOrder="5"/>
+    <actor costume="wall" x="600.0" y="300.0" zOrder="5"/>
+    <actor costume="wall" x="660.0" y="120.0" zOrder="5"/>
+    <actor costume="wall" x="720.0" y="120.0" zOrder="5"/>
+    <actor costume="wall" x="780.0" y="120.0" zOrder="5"/>
+    <actor costume="wall" x="840.0" y="180.0" zOrder="5"/>
+    <actor costume="wall" x="600.0" y="120.0" zOrder="5"/>
+    <actor costume="wall" x="960.0" y="-180.0" zOrder="5"/>
+    <actor costume="wall" x="780.0" y="-120.0" zOrder="5"/>
+    <actor costume="wallSE" x="600.0" y="60.0" zOrder="5"/>
+    <actor costume="wallSE" x="840.0" y="120.0" zOrder="5"/>
+    <actor costume="wallNE" x="600.0" y="-60.0" zOrder="5"/>
+    <actor costume="wallNE" x="840.0" y="-120.0" zOrder="5"/>
+    <actor costume="wallSW" x="600.0" y="-360.0" zOrder="5"/>
+    <actor costume="wallNW" x="600.0" y="360.0" zOrder="5"/>
+    <actor costume="wallNW" x="360.0" y="300.0" zOrder="5"/>
+    <actor costume="wall" x="1020.0" y="-180.0" zOrder="5"/>
+    <actor costume="wall" x="840.0" y="-360.0" zOrder="5"/>
+    <actor costume="wall" x="900.0" y="-420.0" zOrder="5"/>
+    <actor costume="wall" x="960.0" y="-420.0" zOrder="5"/>
+    <actor costume="wall" x="1020.0" y="-420.0" zOrder="5"/>
+    <actor costume="wall" x="1080.0" y="-240.0" zOrder="5"/>
+    <actor costume="wall" x="1080.0" y="-360.0" zOrder="5"/>
+    <actor costume="wall" x="1080.0" y="-420.0" zOrder="5"/>
+    <actor costume="wall" x="1140.0" y="-240.0" zOrder="5"/>
+    <actor costume="wall" x="1680.0" y="-240.0" zOrder="5"/>
+    <actor costume="wall" x="1260.0" y="-240.0" zOrder="5"/>
+    <actor costume="wall" x="1320.0" y="-300.0" zOrder="5"/>
+    <actor costume="wall" x="1320.0" y="-420.0" zOrder="5"/>
+    <actor costume="wall" x="1140.0" y="-480.0" zOrder="5"/>
+    <actor costume="wall" x="1200.0" y="-480.0" zOrder="5"/>
+    <actor costume="wall" x="1260.0" y="-480.0" zOrder="5"/>
+    <actor costume="wall" x="1320.0" y="-480.0" zOrder="5"/>
+    <actor costume="wall" x="1380.0" y="-540.0" zOrder="5"/>
+    <actor costume="wall" x="1380.0" y="-300.0" zOrder="5"/>
+    <actor costume="wall" x="1440.0" y="-300.0" zOrder="5"/>
+    <actor costume="wall" x="1560.0" y="-360.0" zOrder="5"/>
+    <actor costume="wall" x="1560.0" y="-420.0" zOrder="5"/>
+    <actor costume="wall" x="1560.0" y="-480.0" zOrder="5"/>
+    <actor costume="wall" x="1500.0" y="-540.0" zOrder="5"/>
+    <actor costume="wall" x="1440.0" y="-540.0" zOrder="5"/>
+    <actor costume="wallSW" x="840.0" y="-420.0" zOrder="5"/>
+    <actor costume="wallSW" x="1080.0" y="-480.0" zOrder="5"/>
+    <actor costume="wallSW" x="1320.0" y="-540.0" zOrder="5"/>
+    <actor costume="wallSE" x="1560.0" y="-540.0" zOrder="5"/>
+    <actor costume="wallNE" x="1080.0" y="-180.0" zOrder="5"/>
+    <actor costume="wall" x="900.0" y="180.0" zOrder="5"/>
+    <actor costume="wall" x="960.0" y="180.0" zOrder="5"/>
+    <actor costume="wall" x="1020.0" y="180.0" zOrder="5"/>
+    <actor costume="wall" x="1080.0" y="240.0" zOrder="5"/>
+    <actor costume="wall" x="1080.0" y="360.0" zOrder="5"/>
+    <actor costume="wall" x="1080.0" y="420.0" zOrder="5"/>
+    <actor costume="wall" x="840.0" y="360.0" zOrder="5"/>
+    <actor costume="wall" x="900.0" y="420.0" zOrder="5"/>
+    <actor costume="wall" x="960.0" y="420.0" zOrder="5"/>
+    <actor costume="wall" x="1020.0" y="420.0" zOrder="5"/>
+    <actor costume="wall" x="1140.0" y="240.0" zOrder="5"/>
+    <actor costume="wall" x="1200.0" y="240.0" zOrder="5"/>
+    <actor costume="wall" x="1260.0" y="240.0" zOrder="5"/>
+    <actor costume="wall" x="1320.0" y="300.0" zOrder="5"/>
+    <actor costume="wall" x="1320.0" y="420.0" zOrder="5"/>
+    <actor costume="wall" x="1140.0" y="480.0" zOrder="5"/>
+    <actor costume="wall" x="1260.0" y="480.0" zOrder="5"/>
+    <actor costume="wall" x="1320.0" y="480.0" zOrder="5"/>
+    <actor costume="wall" x="1200.0" y="480.0" zOrder="5"/>
+    <actor costume="wall" x="1380.0" y="300.0" zOrder="5"/>
+    <actor costume="wall" x="1500.0" y="300.0" zOrder="5"/>
+    <actor costume="wall" x="1560.0" y="360.0" zOrder="5"/>
+    <actor costume="wall" x="1560.0" y="420.0" zOrder="5"/>
+    <actor costume="wall" x="1560.0" y="480.0" zOrder="5"/>
+    <actor costume="wall" x="1500.0" y="540.0" zOrder="5"/>
+    <actor costume="wall" x="1440.0" y="540.0" zOrder="5"/>
+    <actor costume="wall" x="1380.0" y="540.0" zOrder="5"/>
+    <actor costume="wallNW" x="1320.0" y="540.0" zOrder="5"/>
+    <actor costume="wallNW" x="1080.0" y="480.0" zOrder="5"/>
+    <actor costume="wallSE" x="1560.0" y="300.0" zOrder="5"/>
+    <actor costume="wallSE" x="1320.0" y="240.0" zOrder="5"/>
+    <actor costume="wallSE" x="1080.0" y="180.0" zOrder="5"/>
+    <actor costume="wallNW" x="840.0" y="420.0" zOrder="5"/>
+    <actor costume="wallNE" x="1560.0" y="540.0" zOrder="5"/>
+    <actor costume="wallNE" x="1740.0" y="360.0" zOrder="5"/>
+    <actor costume="wall" x="1620.0" y="360.0" zOrder="5"/>
+    <actor costume="wall" x="1680.0" y="360.0" zOrder="5"/>
+    <actor costume="wall" x="1740.0" y="300.0" zOrder="5"/>
+    <actor costume="wall" x="1740.0" y="240.0" zOrder="5"/>
+    <actor costume="wall" x="1740.0" y="180.0" zOrder="5"/>
+    <actor costume="wall" x="1680.0" y="-180.0" zOrder="5"/>
+    <actor costume="wall" x="1560.0" y="-300.0" zOrder="5"/>
+    <actor costume="wallSE" x="1680.0" y="-300.0" zOrder="5"/>
+    <actor costume="wall" x="1440.0" y="-240.0" zOrder="5"/>
+    <actor costume="wall" x="1500.0" y="-60.0" zOrder="5"/>
+    <actor costume="wall" x="1620.0" y="-60.0" zOrder="5"/>
+    <actor costume="wall" x="1620.0" y="-300.0" zOrder="5"/>
+    <actor costume="wall" x="1440.0" y="-120.0" zOrder="5"/>
+    <actor costume="wall" x="1440.0" y="-180.0" zOrder="5"/>
+    <actor costume="wallNW" x="1440.0" y="-60.0" zOrder="5"/>
+    <actor costume="wall" x="1740.0" y="120.0" zOrder="5"/>
+    <actor costume="wall" x="1740.0" y="60.0" zOrder="5"/>
+    <actor costume="wall" x="1740.0" zOrder="5"/>
+    <actor costume="wall" x="1680.0" y="-120.0" zOrder="5"/>
+    <actor costume="wallSE" x="1740.0" y="-60.0" zOrder="5"/>
+    <actor costume="wall" x="1200.0" y="-240.0" zOrder="5"/>
+    <actor costume="wallNE" x="1320.0" y="-240.0" zOrder="5"/>
+    <actor costume="wall" x="-420.0" y="-60.0" zOrder="5"/>
+    <actor costume="wall" x="-480.0" y="-60.0" zOrder="5"/>
+    <actor costume="wall" x="-540.0" y="-60.0" zOrder="5"/>
+    <actor costume="wall" x="-600.0" y="-120.0" zOrder="5"/>
+    <actor costume="wall" x="-600.0" y="-240.0" zOrder="5"/>
+    <actor costume="wall" x="-600.0" y="-300.0" zOrder="5"/>
+    <actor costume="wall" x="-540.0" y="-480.0" zOrder="5"/>
+    <actor costume="wall" x="-480.0" y="-480.0" zOrder="5"/>
+    <actor costume="wall" x="-420.0" y="-480.0" heading="-1.3971810272963767" zOrder="5"/>
+    <actor costume="wall" x="-660.0" y="-120.0" zOrder="5"/>
+    <actor costume="wall" x="-780.0" y="-120.0" zOrder="5"/>
+    <actor costume="wall" x="-720.0" y="-120.0" zOrder="5"/>
+    <actor costume="wall" x="-840.0" y="-180.0" zOrder="5"/>
+    <actor costume="wall" x="-840.0" y="-300.0" zOrder="5"/>
+    <actor costume="wall" x="-840.0" y="-360.0" zOrder="5"/>
+    <actor costume="wall" x="-780.0" y="-540.0" zOrder="5"/>
+    <actor costume="wall" x="-720.0" y="-540.0" zOrder="5"/>
+    <actor costume="wall" x="-660.0" y="-540.0" zOrder="5"/>
+    <actor costume="wall" x="-900.0" y="-180.0" zOrder="5"/>
+    <actor costume="wall" x="-960.0" y="-180.0" zOrder="5"/>
+    <actor costume="wall" x="-1020.0" y="-180.0" zOrder="5"/>
+    <actor costume="wall" x="-1080.0" y="-240.0" zOrder="5"/>
+    <actor costume="wall" x="-1080.0" y="-360.0" zOrder="5"/>
+    <actor costume="wall" x="-1080.0" y="-420.0" zOrder="5"/>
+    <actor costume="wall" x="-1020.0" y="-600.0" zOrder="5"/>
+    <actor costume="wall" x="-960.0" y="-600.0" zOrder="5"/>
+    <actor costume="wall" x="-900.0" y="-600.0" zOrder="5"/>
+    <actor costume="wall" x="-1140.0" y="-240.0" zOrder="5"/>
+    <actor costume="wall" x="-1200.0" y="-240.0" zOrder="5"/>
+    <actor costume="wall" x="-1260.0" y="-240.0" zOrder="5"/>
+    <actor costume="wall" x="-1320.0" y="-300.0" zOrder="5"/>
+    <actor costume="wall" x="-1320.0" y="-360.0" zOrder="5"/>
+    <actor costume="wall" x="-1320.0" y="-420.0" zOrder="5"/>
+    <actor costume="wall" x="-1260.0" y="-480.0" zOrder="5"/>
+    <actor costume="wall" x="-1200.0" y="-480.0" zOrder="5"/>
+    <actor costume="wall" x="-1140.0" y="-480.0" zOrder="5"/>
+    <actor costume="wallNW" x="-600.0" y="-60.0" zOrder="5"/>
+    <actor costume="wallNW" x="-840.0" y="-120.0" zOrder="5"/>
+    <actor costume="wallNW" x="-1080.0" y="-180.0" zOrder="5"/>
+    <actor costume="wallNW" x="-1320.0" y="-240.0" zOrder="5"/>
+    <actor costume="wallSW" x="-1320.0" y="-480.0" zOrder="5"/>
+    <actor costume="wallSE" x="-840.0" y="-600.0" zOrder="5"/>
+    <actor costume="wall" x="-120.0" y="300.0" zOrder="5"/>
+    <actor costume="wall" x="-120.0" y="360.0" zOrder="5"/>
+    <actor costume="wall" x="-120.0" y="420.0" zOrder="5"/>
+    <actor costume="wall" x="-120.0" y="540.0" zOrder="5"/>
+    <actor costume="wall" x="-120.0" y="660.0" zOrder="5"/>
+    <actor costume="wall" x="-120.0" y="840.0" zOrder="5"/>
+    <actor costume="wall" x="120.0" y="660.0" zOrder="5"/>
+    <actor costume="wall" x="120.0" y="480.0" zOrder="5"/>
+    <actor costume="wall" x="120.0" y="540.0" zOrder="5"/>
+    <actor costume="wall" x="300.0" y="480.0" zOrder="5"/>
+    <actor costume="wall" x="120.0" y="420.0" zOrder="5"/>
+    <actor costume="wall" x="-120.0" y="480.0" zOrder="5"/>
+    <actor costume="wall" x="-180.0" y="480.0" zOrder="5"/>
+    <actor costume="wall" x="-240.0" y="480.0" zOrder="5"/>
+    <actor costume="wall" x="-300.0" y="480.0" zOrder="5"/>
+    <actor costume="wall" x="-360.0" y="660.0" zOrder="5"/>
+    <actor costume="wall" x="-360.0" y="540.0" zOrder="5"/>
+    <actor costume="wall" x="-360.0" y="600.0" zOrder="5"/>
+    <actor costume="wall" x="-300.0" y="720.0" zOrder="5"/>
+    <actor costume="wall" x="-180.0" y="720.0" zOrder="5"/>
+    <actor costume="wall" x="180.0" y="480.0" zOrder="5"/>
+    <actor costume="wall" x="360.0" y="540.0" zOrder="5"/>
+    <actor costume="wall" x="240.0" y="480.0" zOrder="5"/>
+    <actor costume="wall" x="360.0" y="600.0" zOrder="5"/>
+    <actor costume="wall" x="360.0" y="660.0" zOrder="5"/>
+    <actor costume="wall" x="180.0" y="720.0" zOrder="5"/>
+    <actor costume="wall" x="300.0" y="720.0" zOrder="5"/>
+    <actor costume="wall" x="180.0" y="840.0" zOrder="5"/>
+    <actor costume="wallSE" x="360.0" y="480.0" zOrder="5"/>
+    <actor costume="wallSW" x="-360.0" y="480.0" zOrder="5"/>
+    <actor costume="wall" x="360.0" y="960.0" zOrder="5"/>
+    <actor costume="wall" x="240.0" y="960.0" zOrder="5"/>
+    <actor costume="wall" x="420.0" y="780.0" zOrder="5"/>
+    <actor costume="wall" x="180.0" y="900.0" zOrder="5"/>
+    <actor costume="wall" x="180.0" y="780.0" zOrder="5"/>
+    <actor costume="wall" x="360.0" y="720.0" zOrder="5"/>
+    <actor costume="wallNW" x="180.0" y="960.0" zOrder="5"/>
+    <actor costume="wall" x="-420.0" y="60.0" zOrder="5"/>
+    <actor costume="wall" x="-480.0" y="60.0" zOrder="5"/>
+    <actor costume="wall" x="-540.0" y="60.0" zOrder="5"/>
+    <actor costume="wall" x="-600.0" y="240.0" zOrder="5"/>
+    <actor costume="wall" x="-600.0" y="120.0" zOrder="5"/>
+    <actor costume="wall" x="-600.0" y="300.0" zOrder="5"/>
+    <actor costume="wall" x="-540.0" y="300.0" zOrder="5"/>
+    <actor costume="wall" x="-480.0" y="300.0" zOrder="5"/>
+    <actor costume="wall" x="-420.0" y="300.0" zOrder="5"/>
+    <actor costume="wall" x="-660.0" y="120.0" zOrder="5"/>
+    <actor costume="wall" x="-720.0" y="120.0" zOrder="5"/>
+    <actor costume="wall" x="-780.0" y="120.0" zOrder="5"/>
+    <actor costume="wall" x="-840.0" y="180.0" zOrder="5"/>
+    <actor costume="wall" x="-840.0" y="300.0" zOrder="5"/>
+    <actor costume="wall" x="-780.0" y="360.0" zOrder="5"/>
+    <actor costume="wall" x="-720.0" y="360.0" zOrder="5"/>
+    <actor costume="wall" x="-660.0" y="360.0" zOrder="5"/>
+    <actor costume="wall" x="-900.0" y="180.0" zOrder="5"/>
+    <actor costume="wall" x="-960.0" y="180.0" zOrder="5"/>
+    <actor costume="wall" x="-1020.0" y="180.0" zOrder="5"/>
+    <actor costume="wall" x="-1080.0" y="240.0" zOrder="5"/>
+    <actor costume="wall" x="-1080.0" y="360.0" zOrder="5"/>
+    <actor costume="wall" x="-1080.0" y="420.0" zOrder="5"/>
+    <actor costume="wall" x="-1020.0" y="420.0" zOrder="5"/>
+    <actor costume="wall" x="-960.0" y="420.0" zOrder="5"/>
+    <actor costume="wall" x="-900.0" y="420.0" zOrder="5"/>
+    <actor costume="wall" x="-840.0" y="360.0" zOrder="5"/>
+    <actor costume="wallNE" x="-360.0" y="300.0" zOrder="5"/>
+    <actor costume="wallNE" x="-600.0" y="360.0" zOrder="5"/>
+    <actor costume="wallNE" x="-840.0" y="420.0" zOrder="5"/>
+    <actor costume="wallSW" x="-600.0" y="60.0" zOrder="5"/>
+    <actor costume="wallSW" x="-840.0" y="120.0" zOrder="5"/>
+    <actor costume="wallSW" x="-1080.0" y="180.0" zOrder="5"/>
+    <actor costume="wall" x="120.0" y="-360.0" zOrder="5"/>
+    <actor costume="wall" x="-120.0" y="-360.0" zOrder="5"/>
+    <actor costume="wall" x="-120.0" y="-300.0" zOrder="5"/>
+    <actor costume="wall" x="1500.0" y="60.0" zOrder="5"/>
+    <actor costume="wall" x="1500.0" y="120.0" zOrder="5"/>
+    <actor costume="wall" x="1560.0" y="180.0" zOrder="5"/>
+    <actor costume="wall" x="1680.0" y="180.0" zOrder="5"/>
+    <actor costume="wallNW" x="1500.0" y="180.0" zOrder="5"/>
+    <actor costume="wall" x="1680.0" y="-60.0" zOrder="5"/>
+    <actor costume="wall" x="-1140.0" y="240.0" zOrder="5"/>
+    <actor costume="wall" x="-1200.0" y="240.0" zOrder="5"/>
+    <actor costume="wall" x="-1260.0" y="240.0" zOrder="5"/>
+    <actor costume="wall" x="-1320.0" y="300.0" zOrder="5"/>
+    <actor costume="wall" x="-1320.0" y="420.0" zOrder="5"/>
+    <actor costume="wall" x="-1320.0" y="480.0" zOrder="5"/>
+    <actor costume="wall" x="-1260.0" y="480.0" zOrder="5"/>
+    <actor costume="wall" x="-1200.0" y="480.0" zOrder="5"/>
+    <actor costume="wall" x="-1140.0" y="480.0" zOrder="5"/>
+    <actor costume="wall" x="-1380.0" y="300.0" zOrder="5"/>
+    <actor costume="wall" x="-1440.0" y="300.0" zOrder="5"/>
+    <actor costume="wall" x="-1500.0" y="300.0" zOrder="5"/>
+    <actor costume="wall" x="-1560.0" y="360.0" zOrder="5"/>
+    <actor costume="wall" x="-1560.0" y="420.0" zOrder="5"/>
+    <actor costume="wall" x="-1560.0" y="480.0" zOrder="5"/>
+    <actor costume="wall" x="-1500.0" y="540.0" zOrder="5"/>
+    <actor costume="wall" x="-1440.0" y="540.0" zOrder="5"/>
+    <actor costume="wall" x="-1380.0" y="540.0" zOrder="5"/>
+    <actor costume="wallNW" x="-1560.0" y="540.0" zOrder="5"/>
+    <actor costume="wallSW" x="-1560.0" y="300.0" zOrder="5"/>
+    <actor costume="wallSW" x="-1320.0" y="240.0" zOrder="5"/>
+    <actor costume="wallNE" x="-1080.0" y="480.0" zOrder="5"/>
+    <actor costume="wallNE" x="-1320.0" y="540.0" zOrder="5"/>
+    <actor costume="wall" x="-120.0" y="-420.0" zOrder="5"/>
+    <actor costume="wall" x="-120.0" y="-480.0" zOrder="5"/>
+    <actor costume="wall" x="-120.0" y="-600.0" zOrder="5"/>
+    <actor costume="wall" x="-60.0" y="-720.0" zOrder="5"/>
+    <actor costume="wall" y="-720.0" zOrder="5"/>
+    <actor costume="wall" x="60.0" y="-720.0" zOrder="5"/>
+    <actor costume="wall" x="120.0" y="-660.0" zOrder="5"/>
+    <actor costume="wall" x="120.0" y="-540.0" zOrder="5"/>
+    <actor costume="wall" x="120.0" y="-480.0" zOrder="5"/>
+    <actor costume="wall" x="120.0" y="-420.0" zOrder="5"/>
+    <actor costume="wall" x="180.0" y="-480.0" zOrder="5"/>
+    <actor costume="wall" x="240.0" y="-480.0" zOrder="5"/>
+    <actor costume="wall" x="300.0" y="-480.0" zOrder="5"/>
+    <actor costume="wall" x="360.0" y="-540.0" zOrder="5"/>
+    <actor costume="wall" x="360.0" y="-600.0" zOrder="5"/>
+    <actor costume="wall" x="360.0" y="-660.0" zOrder="5"/>
+    <actor costume="wall" x="300.0" y="-720.0" zOrder="5"/>
+    <actor costume="wall" x="180.0" y="-720.0" zOrder="5"/>
+    <actor costume="wall" x="120.0" y="-720.0" zOrder="5"/>
+    <actor costume="wall" x="-180.0" y="-360.0" zOrder="5"/>
+    <actor costume="wall" x="-240.0" y="-360.0" zOrder="5"/>
+    <actor costume="wall" x="-300.0" y="-360.0" zOrder="5"/>
+    <actor costume="wall" x="180.0" y="-780.0" zOrder="5"/>
+    <actor costume="wall" x="-120.0" y="-660.0" zOrder="5"/>
+    <actor costume="wall" x="-120.0" y="-540.0" zOrder="5"/>
+    <actor costume="wall" x="180.0" y="-840.0" zOrder="5"/>
+    <actor costume="wall" x="420.0" y="-780.0" zOrder="5"/>
+    <actor costume="wall" x="420.0" y="-840.0" zOrder="5"/>
+    <actor costume="wall" x="180.0" y="-900.0" zOrder="5"/>
+    <actor costume="wall" x="240.0" y="-960.0" zOrder="5"/>
+    <actor costume="wall" x="420.0" y="-900.0" zOrder="5"/>
+    <actor costume="wall" x="360.0" y="-720.0" zOrder="5"/>
+    <actor costume="wallSW" x="180.0" y="-960.0" zOrder="5"/>
+    <actor costume="wallSW" x="-120.0" y="-720.0" zOrder="5"/>
+    <actor costume="wall" x="420.0" y="840.0" zOrder="5"/>
+    <actor costume="wall" x="420.0" y="900.0" zOrder="5"/>
+    <actor costume="wallNW" x="120.0" y="720.0" zOrder="5"/>
+    <actor costume="wallNE" x="-120.0" y="720.0" zOrder="5"/>
+    <actor costume="wall" x="-60.0" y="840.0" zOrder="5"/>
+    <actor costume="wallSE" x="420.0" y="720.0" zOrder="5"/>
+    <actor costume="wall" x="240.0" y="1020.0" zOrder="5"/>
+    <actor costume="wall" x="240.0" y="1080.0" zOrder="5"/>
+    <actor costume="wall" x="240.0" y="1140.0" zOrder="5"/>
+    <actor costume="wall" x="420.0" y="1200.0" zOrder="5"/>
+    <actor costume="wall" x="300.0" y="1200.0" zOrder="5"/>
+    <actor costume="wall" x="480.0" y="1200.0" zOrder="5"/>
+    <actor costume="wall" x="540.0" y="1140.0" zOrder="5"/>
+    <actor costume="wall" x="540.0" y="1080.0" zOrder="5"/>
+    <actor costume="wall" x="540.0" y="1020.0" zOrder="5"/>
+    <actor costume="wall" x="300.0" y="1260.0" zOrder="5"/>
+    <actor costume="wall" x="540.0" y="1260.0" zOrder="5"/>
+    <actor costume="wall" x="300.0" y="1320.0" zOrder="5"/>
+    <actor costume="wall" x="300.0" y="1380.0" zOrder="5"/>
+    <actor costume="wall" x="360.0" y="1440.0" zOrder="5"/>
+    <actor costume="wall" x="480.0" y="1440.0" zOrder="5"/>
+    <actor costume="wall" x="540.0" y="1440.0" zOrder="5"/>
+    <actor costume="wall" x="540.0" y="1380.0" zOrder="5"/>
+    <actor costume="wall" x="540.0" y="1320.0" zOrder="5"/>
+    <actor costume="wall" x="360.0" y="1500.0" zOrder="5"/>
+    <actor costume="wall" x="360.0" y="1560.0" zOrder="5"/>
+    <actor costume="wall" x="600.0" y="1500.0" zOrder="5"/>
+    <actor costume="wall" x="600.0" y="1560.0" zOrder="5"/>
+    <actor costume="wall" x="600.0" y="1620.0" zOrder="5"/>
+    <actor costume="wall" x="540.0" y="1680.0" zOrder="5"/>
+    <actor costume="wall" x="480.0" y="1680.0" zOrder="5"/>
+    <actor costume="wall" x="420.0" y="1680.0" zOrder="5"/>
+    <actor costume="wall" x="360.0" y="1620.0" zOrder="5"/>
+    <actor costume="wallSE" x="600.0" y="1440.0" zOrder="5"/>
+    <actor costume="wallNW" x="300.0" y="1440.0" zOrder="5"/>
+    <actor costume="wallNW" x="240.0" y="1200.0" zOrder="5"/>
+    <actor costume="wallNW" x="360.0" y="1680.0" zOrder="5"/>
+    <actor costume="wallNE" x="600.0" y="1680.0" zOrder="5"/>
+    <actor costume="wallSE" x="540.0" y="960.0" zOrder="5"/>
+    <actor costume="wall" x="420.0" y="960.0" zOrder="5"/>
+    <actor costume="wall" x="-180.0" y="780.0" zOrder="5"/>
+    <actor costume="wall" x="-180.0" y="840.0" zOrder="5"/>
+    <actor costume="wall" x="-180.0" y="900.0" zOrder="5"/>
+    <actor costume="wall" x="-420.0" y="780.0" zOrder="5"/>
+    <actor costume="wall" x="-420.0" y="900.0" zOrder="5"/>
+    <actor costume="wall" x="-420.0" y="840.0" zOrder="5"/>
+    <actor costume="wall" x="-360.0" y="720.0" zOrder="5"/>
+    <actor costume="wall" x="-240.0" y="960.0" zOrder="5"/>
+    <actor costume="wall" x="-360.0" y="960.0" zOrder="5"/>
+    <actor costume="wall" x="-420.0" y="960.0" zOrder="5"/>
+    <actor costume="wall" x="-240.0" y="1020.0" zOrder="5"/>
+    <actor costume="wall" x="-240.0" y="1140.0" zOrder="5"/>
+    <actor costume="wall" x="-240.0" y="1080.0" zOrder="5"/>
+    <actor costume="wall" x="-300.0" y="1200.0" zOrder="5"/>
+    <actor costume="wall" x="-420.0" y="1200.0" zOrder="5"/>
+    <actor costume="wall" x="-480.0" y="1200.0" zOrder="5"/>
+    <actor costume="wall" x="-480.0" y="1140.0" zOrder="5"/>
+    <actor costume="wall" x="-480.0" y="1080.0" zOrder="5"/>
+    <actor costume="wall" x="-480.0" y="1020.0" zOrder="5"/>
+    <actor costume="wall" x="-300.0" y="1260.0" zOrder="5"/>
+    <actor costume="wall" x="-300.0" y="1320.0" zOrder="5"/>
+    <actor costume="wall" x="-300.0" y="1380.0" zOrder="5"/>
+    <actor costume="wall" x="-360.0" y="1440.0" zOrder="5"/>
+    <actor costume="wall" x="-480.0" y="1440.0" zOrder="5"/>
+    <actor costume="wall" x="-540.0" y="1380.0" zOrder="5"/>
+    <actor costume="wall" x="-540.0" y="1320.0" zOrder="5"/>
+    <actor costume="wall" x="-540.0" y="1260.0" zOrder="5"/>
+    <actor costume="wallNE" x="-240.0" y="1200.0" zOrder="5"/>
+    <actor costume="wallNE" x="-300.0" y="1440.0" zOrder="5"/>
+    <actor costume="wallSW" x="-540.0" y="1200.0" zOrder="5"/>
+    <actor costume="wallSW" x="-480.0" y="960.0" zOrder="5"/>
+    <actor costume="wallSW" x="-420.0" y="720.0" zOrder="5"/>
+    <actor costume="wallNE" x="-180.0" y="960.0" zOrder="5"/>
+    <actor costume="wall" x="-600.0" y="-480.0" zOrder="5"/>
+    <actor costume="wall" x="-600.0" y="-420.0" zOrder="5"/>
+    <actor costume="wall" x="-600.0" y="-360.0" zOrder="5"/>
+    <actor costume="wall" x="-840.0" y="-480.0" zOrder="5"/>
+    <actor costume="wallSW" x="-1080.0" y="-600.0" zOrder="5"/>
+    <actor costume="wall" x="-840.0" y="-420.0" zOrder="5"/>
+    <actor costume="wall" x="-360.0" y="-300.0" zOrder="5"/>
+    <actor costume="wall" x="-360.0" y="-360.0" zOrder="5"/>
+    <actor costume="wall" x="-360.0" y="-420.0" zOrder="5"/>
+    <actor costume="wallNE" x="420.0" y="-720.0" zOrder="5"/>
+    <actor costume="wallNE" x="480.0" y="-960.0" zOrder="5"/>
+    <actor costume="wall" x="420.0" y="-960.0" zOrder="5"/>
+    <actor costume="wall" x="480.0" y="-1020.0" zOrder="5"/>
+    <actor costume="wall" x="480.0" y="-1080.0" zOrder="5"/>
+    <actor costume="wall" x="480.0" y="-1140.0" zOrder="5"/>
+    <actor costume="wall" x="480.0" y="-1200.0" zOrder="5"/>
+    <actor costume="wall" x="420.0" y="-1200.0" zOrder="5"/>
+    <actor costume="wall" x="540.0" y="-1260.0" zOrder="5"/>
+    <actor costume="wall" x="300.0" y="-1200.0" zOrder="5"/>
+    <actor costume="wall" x="540.0" y="-1320.0" zOrder="5"/>
+    <actor costume="wall" x="240.0" y="-1140.0" zOrder="5"/>
+    <actor costume="wall" x="240.0" y="-1080.0" zOrder="5"/>
+    <actor costume="wall" x="240.0" y="-1020.0" zOrder="5"/>
+    <actor costume="wall" x="360.0" y="-960.0" zOrder="5"/>
+    <actor costume="wallSE" x="-360.0" y="-480.0" zOrder="5"/>
+    <actor costume="wallSW" x="240.0" y="-1200.0" zOrder="5"/>
+    <actor costume="wall" x="300.0" y="-1260.0" zOrder="5"/>
+    <actor costume="wall" x="300.0" y="-1320.0" zOrder="5"/>
+    <actor costume="wall" x="300.0" y="-1380.0" zOrder="5"/>
+    <actor costume="wall" x="360.0" y="-1440.0" zOrder="5"/>
+    <actor costume="wall" x="480.0" y="-1440.0" zOrder="5"/>
+    <actor costume="wall" x="540.0" y="-1380.0" zOrder="5"/>
+    <actor costume="wall" x="540.0" y="-1440.0" zOrder="5"/>
+    <actor costume="wall" x="360.0" y="-1500.0" zOrder="5"/>
+    <actor costume="wall" x="600.0" y="-1560.0" zOrder="5"/>
+    <actor costume="wall" x="600.0" y="-1500.0" zOrder="5"/>
+    <actor costume="wall" x="600.0" y="-1620.0" zOrder="5"/>
+    <actor costume="wall" x="360.0" y="-1560.0" zOrder="5"/>
+    <actor costume="wall" x="360.0" y="-1620.0" zOrder="5"/>
+    <actor costume="wall" x="420.0" y="-1680.0" zOrder="5"/>
+    <actor costume="wall" x="540.0" y="-1680.0" zOrder="5"/>
+    <actor costume="wall" x="480.0" y="-1680.0" zOrder="5"/>
+    <actor costume="wallSW" x="300.0" y="-1440.0" zOrder="5"/>
+    <actor costume="wallNE" x="540.0" y="-1200.0" zOrder="5"/>
+    <actor costume="wallNE" x="600.0" y="-1440.0" zOrder="5"/>
+    <actor costume="wallSE" x="600.0" y="-1680.0" zOrder="5"/>
+    <actor costume="wallSW" x="360.0" y="-1680.0" zOrder="5"/>
+    <actor costume="wall" x="360.0" y="-300.0" zOrder="5"/>
+    <actor costume="wall" x="360.0" y="-420.0" zOrder="5"/>
+    <actor costume="wall" x="360.0" y="-480.0" zOrder="5"/>
+    <actor costume="wall" x="360.0" y="-360.0" zOrder="5"/>
+    <actor costume="wall" x="-360.0" y="1500.0" zOrder="5"/>
+    <actor costume="wall" x="-360.0" y="1560.0" zOrder="5"/>
+    <actor costume="wall" x="-600.0" y="1620.0" zOrder="5"/>
+    <actor costume="wall" x="-600.0" y="1560.0" zOrder="5"/>
+    <actor costume="wallNW" x="-600.0" y="1680.0" zOrder="5"/>
+    <actor costume="wall" x="-540.0" y="1680.0" zOrder="5"/>
+    <actor costume="wall" x="-480.0" y="1680.0" zOrder="5"/>
+    <actor costume="wall" x="-420.0" y="1680.0" zOrder="5"/>
+    <actor costume="wall" x="-540.0" y="1440.0" zOrder="5"/>
+    <actor costume="wall" x="-600.0" y="1500.0" zOrder="5"/>
+    <actor costume="wall" x="-360.0" y="1620.0" zOrder="5"/>
+    <actor costume="wallNE" x="-360.0" y="1680.0" zOrder="5"/>
+    <actor costume="wallSW" x="-600.0" y="1440.0" zOrder="5"/>
+    <actor costume="wall" x="-180.0" y="1140.0" zOrder="5"/>
+    <actor costume="wall" x="-60.0" y="1200.0" zOrder="5"/>
+    <actor costume="wall" x="180.0" y="1140.0" zOrder="5"/>
+    <actor costume="wall" x="-1080.0" y="-480.0" zOrder="5"/>
+    <actor costume="wall" x="-1080.0" y="-540.0" zOrder="5"/>
+    <actor costume="wall" x="-840.0" y="-540.0" zOrder="5"/>
+    <actor costume="wallSE" x="-600.0" y="-540.0" zOrder="5"/>
+    <actor costume="wallNW" x="-120.0" y="1200.0" zOrder="5"/>
+    <actor costume="wallSE" x="-120.0" y="1140.0" zOrder="5"/>
+    <actor costume="wallNE" x="120.0" y="1200.0" zOrder="5"/>
+    <actor costume="wallSW" x="120.0" y="1140.0" zOrder="5"/>
+    <actor costume="wall" x="60.0" y="1200.0" zOrder="5"/>
+    <actor costume="wall" x="-240.0" y="1380.0" zOrder="5"/>
+    <actor costume="wall" x="-180.0" y="1380.0" zOrder="5"/>
+    <actor costume="wall" x="-60.0" y="1440.0" zOrder="5"/>
+    <actor costume="wall" y="1440.0" zOrder="5"/>
+    <actor costume="wall" x="60.0" y="1440.0" zOrder="5"/>
+    <actor costume="wall" x="180.0" y="1380.0" zOrder="5"/>
+    <actor costume="wall" x="240.0" y="1380.0" zOrder="5"/>
+    <actor costume="wallSW" x="120.0" y="1380.0" zOrder="5"/>
+    <actor costume="wallNW" x="-120.0" y="1440.0" zOrder="5"/>
+    <actor costume="wallNE" x="120.0" y="1440.0" zOrder="5"/>
+    <actor costume="wallSE" x="-120.0" y="1380.0" zOrder="5"/>
+    <actor costume="wall" x="480.0" y="960.0" zOrder="5"/>
+    <actor costume="wall" x="540.0" y="1200.0" zOrder="5"/>
+    <actor costume="portcullis" x="-120.0" y="-60.0" zOrder="10">
       <role requires="intro" text=""/>
     </actor>
-    <actor costume="portcullis" x="120.0" y="-60.0" zOrder="10" id="" colorize="" role="portcullis.py">
+    <actor costume="portcullis" x="120.0" y="-60.0" zOrder="10">
       <role requires="intro" text=""/>
     </actor>
-    <actor costume="portcullis" y="-180.0" zOrder="10" id="" colorize="" role="portcullis.py">
+    <actor costume="portcullis" y="-180.0" zOrder="10">
       <role requires="rocks3,balloons3" text="Rocks(3) and Balloons(3)"/>
     </actor>
-    <actor costume="portcullis" x="-120.0" y="60.0" zOrder="10" id="" colorize="" role="portcullis.py">
+    <actor costume="portcullis" x="-120.0" y="60.0" zOrder="10">
       <role requires="grenades3,balloons2,rocks2" text="Grenades(3), Rocks(2) and Balloons(2)"/>
     </actor>
-    <actor costume="portcullis" x="120.0" y="60.0" zOrder="10" id="" colorize="" role="portcullis.py">
+    <actor costume="portcullis" x="120.0" y="60.0" zOrder="10">
       <role requires="rocks3" text="Rocks(3)"/>
     </actor>
-    <actor costume="portcullis" y="840.0" zOrder="10" id="" colorize="" role="portcullis.py">
+    <actor costume="portcullis" y="840.0" zOrder="10">
       <role requires="grenades3,rocks2,balloons2" text="Grenades(3) Rocks(3) and Balloons(2)"/>
     </actor>
-    <actor costume="portcullis" x="360.0" y="-120.0" zOrder="10" id="" colorize="" role="portcullis.py">
+    <actor costume="portcullis" x="360.0" y="-120.0" zOrder="10">
       <role requires="rocks" text="Rocks"/>
     </actor>
-    <actor costume="portcullis" x="840.0" y="-240.0" zOrder="10" id="" colorize="" role="portcullis.py">
+    <actor costume="portcullis" x="840.0" y="-240.0" zOrder="10">
       <role requires="rocks3" text="Rocks(3)"/>
     </actor>
-    <actor costume="portcullis" x="360.0" y="120.0" zOrder="10" id="" colorize="" role="portcullis.py">
+    <actor costume="portcullis" x="360.0" y="120.0" zOrder="10">
       <role requires="grenades" text="Grenades"/>
     </actor>
-    <actor costume="portcullis" x="600.0" y="180.0" zOrder="10" id="" colorize="" role="portcullis.py">
+    <actor costume="portcullis" x="600.0" y="180.0" zOrder="10">
       <role requires="grenades2" text="Grenades(2)"/>
     </actor>
-    <actor costume="portcullis" x="840.0" y="240.0" zOrder="10" id="" colorize="" role="portcullis.py">
+    <actor costume="portcullis" x="840.0" y="240.0" zOrder="10">
       <role requires="grenades3" text="Grenades(3)"/>
     </actor>
-    <actor costume="portcullis" x="600.0" y="-180.0" zOrder="10" id="" colorize="" role="portcullis.py">
+    <actor costume="portcullis" x="600.0" y="-180.0" zOrder="10">
       <role requires="rocks2" text="Rocks(2)"/>
     </actor>
-    <actor costume="portcullis" x="1080.0" y="-300.0" zOrder="10" id="" colorize="" role="portcullis.py">
+    <actor costume="portcullis" x="1080.0" y="-300.0" zOrder="10">
       <role requires="rocks4" text="Rocks(4)"/>
     </actor>
-    <actor costume="portcullis" x="1320.0" y="-360.0" zOrder="10" id="" colorize="" role="portcullis.py">
+    <actor costume="portcullis" x="1320.0" y="-360.0" zOrder="10">
       <role requires="rocks5" text="Rocks(5)"/>
     </actor>
-    <actor costume="portcullis" x="1080.0" y="300.0" zOrder="10" id="" colorize="" role="portcullis.py">
+    <actor costume="portcullis" x="1080.0" y="300.0" zOrder="10">
       <role requires="grenades4" text="Grenades(4)"/>
     </actor>
-    <actor costume="portcullis" x="1320.0" y="360.0" zOrder="10" id="" colorize="" role="portcullis.py">
+    <actor costume="portcullis" x="1320.0" y="360.0" zOrder="10">
       <role requires="grenades5" text="Grenades(5)"/>
     </actor>
-    <actor costume="portcullis" x="1500.0" y="-300.0" zOrder="10" id="" colorize="" role="portcullis.py">
+    <actor costume="portcullis" x="1500.0" y="-300.0" zOrder="10">
       <role requires="rocks6" text="Rocks(6)"/>
     </actor>
-    <actor costume="portcullis" x="1440.0" y="300.0" zOrder="10" id="" colorize="" role="portcullis.py">
+    <actor costume="portcullis" x="1440.0" y="300.0" zOrder="10">
       <role requires="grenades6" text="Grenades(6)"/>
     </actor>
-    <actor costume="portcullis" x="1560.0" y="-60.0" zOrder="10" id="" colorize="" role="portcullis.py">
+    <actor costume="portcullis" x="1560.0" y="-60.0" zOrder="10">
       <role requires="rocks7" text="Rocks(7)"/>
     </actor>
-    <actor costume="portcullis" x="-360.0" y="-120.0" zOrder="10" id="" colorize="" role="portcullis.py">
+    <actor costume="portcullis" x="-360.0" y="-120.0" zOrder="10">
       <role requires="balloons" text="Balloons Stage 1"/>
     </actor>
-    <actor costume="portcullis" x="-600.0" y="-180.0" zOrder="10" id="" colorize="" role="portcullis.py">
+    <actor costume="portcullis" x="-600.0" y="-180.0" zOrder="10">
       <role requires="balloons2" text="Balloons(2)"/>
     </actor>
-    <actor costume="portcullis" x="-840.0" y="-240.0" zOrder="10" id="" colorize="" role="portcullis.py">
+    <actor costume="portcullis" x="-840.0" y="-240.0" zOrder="10">
       <role requires="balloons3,extras2" text="Balloons(3) and Extras(2)"/>
     </actor>
-    <actor costume="portcullis" x="-1080.0" y="-300.0" zOrder="10" id="" colorize="" role="portcullis.py">
+    <actor costume="portcullis" x="-1080.0" y="-300.0" zOrder="10">
       <role requires="balloons4" text="Balloons(4) and Extras(3)"/>
     </actor>
-    <actor costume="portcullis" x="240.0" y="720.0" zOrder="10" id="" colorize="" role="portcullis.py">
+    <actor costume="portcullis" x="240.0" y="720.0" zOrder="10">
       <role requires="furniture" text="Furniture"/>
     </actor>
-    <actor costume="portcullis" x="-360.0" y="120.0" zOrder="10" id="" colorize="" role="portcullis.py">
+    <actor costume="portcullis" x="-360.0" y="120.0" zOrder="10">
       <role requires="vehicles,extras" text="Vehicles and Extras"/>
     </actor>
-    <actor costume="portcullis" x="-600.0" y="180.0" zOrder="10" id="" colorize="" role="portcullis.py">
+    <actor costume="portcullis" x="-600.0" y="180.0" zOrder="10">
       <role requires="vehicles2" text="Vehicles(2)"/>
     </actor>
-    <actor costume="portcullis" x="-840.0" y="240.0" zOrder="10" id="" colorize="" role="portcullis.py">
+    <actor costume="portcullis" x="-840.0" y="240.0" zOrder="10">
       <role requires="vehicles3" text="Vehicles(3)"/>
     </actor>
-    <actor costume="portcullis" x="1620.0" y="180.0" zOrder="10" id="" colorize="" role="portcullis.py">
+    <actor costume="portcullis" x="1620.0" y="180.0" zOrder="10">
       <role requires="rocks8" text="Rocks(8)"/>
     </actor>
-    <actor costume="portcullis" x="-1320.0" y="360.0" zOrder="10" id="" colorize="" role="portcullis.py">
+    <actor costume="portcullis" x="-1320.0" y="360.0" zOrder="10">
       <role requires="vehicles5" text="Vehicles(5)"/>
     </actor>
-    <actor costume="portcullis" x="-1080.0" y="300.0" zOrder="10" id="" colorize="" role="portcullis.py">
+    <actor costume="portcullis" x="-1080.0" y="300.0" zOrder="10">
       <role requires="vehicles4" text="Vehicles(4)"/>
     </actor>
-    <actor costume="portcullis" x="240.0" y="-720.0" zOrder="10" id="" colorize="" role="portcullis.py">
+    <actor costume="portcullis" x="240.0" y="-720.0" zOrder="10">
       <role requires="extras" text="Extras"/>
     </actor>
-    <actor costume="portcullis" x="300.0" y="-960.0" zOrder="10" id="" colorize="" role="portcullis.py">
+    <actor costume="portcullis" x="300.0" y="-960.0" zOrder="10">
       <role requires="extras2" text="Extras(2)"/>
     </actor>
-    <actor costume="portcullis" x="-240.0" y="720.0" zOrder="10" id="" colorize="" role="portcullis.py">
+    <actor costume="portcullis" x="-240.0" y="720.0" zOrder="10">
       <role requires="bees" text="Bees"/>
     </actor>
-    <actor costume="warp" x="-1200.0" y="-360.0" zOrder="40" id="" colorize="" role="warp.py">
+    <actor costume="warp" x="-1200.0" y="-360.0" zOrder="40">
       <role scene="balloons5" exitX="-1" exitY="-1"/>
     </actor>
-    <actor costume="warp" y="60.0" zOrder="40" id="" colorize="" role="warp.py">
+    <actor costume="warp" y="60.0" zOrder="40">
       <role scene="intro" exitX="0" exitY="-1"/>
     </actor>
-    <actor costume="warp" x="240.0" y="-600.0" zOrder="40" id="" colorize="" role="warp.py">
+    <actor costume="warp" x="240.0" y="-600.0" zOrder="40">
       <role scene="extras" exitX="0" exitY="-1"/>
     </actor>
-    <actor costume="warp" x="-240.0" y="-120.0" zOrder="40" id="" colorize="" role="warp.py">
+    <actor costume="warp" x="-240.0" y="-120.0" zOrder="40">
       <role scene="balloons" exitX="-1" exitY="-1"/>
     </actor>
-    <actor costume="warp" x="240.0" y="120.0" zOrder="40" id="" colorize="" role="warp.py">
+    <actor costume="warp" x="240.0" y="120.0" zOrder="40">
       <role scene="grenades" exitX="1" exitY="-1"/>
     </actor>
-    <actor costume="warp" x="240.0" y="-120.0" zOrder="40" id="" colorize="" role="warp.py">
+    <actor costume="warp" x="240.0" y="-120.0" zOrder="40">
       <role scene="rocks" exitX="1" exitY="-1"/>
     </actor>
-    <actor costume="warp" x="-240.0" y="120.0" zOrder="40" id="" colorize="" role="warp.py">
+    <actor costume="warp" x="-240.0" y="120.0" zOrder="40">
       <role scene="vehicles" exitX="-1" exitY="-1"/>
     </actor>
-    <actor costume="warp" x="240.0" y="600.0" zOrder="40" id="" colorize="" role="warp.py">
+    <actor costume="warp" x="240.0" y="600.0" zOrder="40">
       <role scene="furniture" exitX="0" exitY="1"/>
     </actor>
-    <actor costume="warp" x="480.0" y="-180.0" zOrder="40" id="" colorize="" role="warp.py">
+    <actor costume="warp" x="480.0" y="-180.0" zOrder="40">
       <role scene="rocks2" exitX="1" exitY="-1"/>
     </actor>
-    <actor costume="warp" x="720.0" y="-240.0" zOrder="40" id="" colorize="" role="warp.py">
+    <actor costume="warp" x="720.0" y="-240.0" zOrder="40">
       <role scene="rocks3" exitX="1" exitY="-1"/>
     </actor>
-    <actor costume="warp" x="480.0" y="180.0" zOrder="40" id="" colorize="" role="warp.py">
+    <actor costume="warp" x="480.0" y="180.0" zOrder="40">
       <role scene="grenades2" exitX="1" exitY="-1"/>
     </actor>
-    <actor costume="warp" x="720.0" y="240.0" zOrder="40" id="" colorize="" role="warp.py">
+    <actor costume="warp" x="720.0" y="240.0" zOrder="40">
       <role scene="grenades3" exitX="1" exitY="-1"/>
     </actor>
-    <actor costume="warp" x="960.0" y="-300.0" zOrder="40" id="" colorize="" role="warp.py">
+    <actor costume="warp" x="960.0" y="-300.0" zOrder="40">
       <role scene="rocks4" exitX="1" exitY="-1"/>
     </actor>
-    <actor costume="warp" x="1200.0" y="-360.0" zOrder="40" id="" colorize="" role="warp.py">
+    <actor costume="warp" x="1200.0" y="-360.0" zOrder="40">
       <role scene="rocks5" exitX="1" exitY="-1"/>
     </actor>
-    <actor costume="warp" x="1440.0" y="-420.0" zOrder="40" id="" colorize="" role="warp.py">
+    <actor costume="warp" x="1440.0" y="-420.0" zOrder="40">
       <role scene="rocks6" exitX="0" exitY="1"/>
     </actor>
-    <actor costume="warp" x="960.0" y="300.0" zOrder="40" id="" colorize="" role="warp.py">
+    <actor costume="warp" x="960.0" y="300.0" zOrder="40">
       <role scene="grenades4" exitX="1" exitY="-1"/>
     </actor>
-    <actor costume="warp" x="1200.0" y="360.0" zOrder="40" id="" colorize="" role="warp.py">
+    <actor costume="warp" x="1200.0" y="360.0" zOrder="40">
       <role scene="grenades5" exitX="1" exitY="-1"/>
     </actor>
-    <actor costume="warp" x="1440.0" y="420.0" zOrder="40" id="" colorize="" role="warp.py">
+    <actor costume="warp" x="1440.0" y="420.0" zOrder="40">
       <role scene="grenades6" exitX="0" exitY="-1"/>
     </actor>
-    <actor costume="warp" x="1560.0" y="-180.0" zOrder="40" id="" colorize="" role="warp.py">
+    <actor costume="warp" x="1560.0" y="-180.0" zOrder="40">
       <role scene="rocks7" exitX="0" exitY="1"/>
     </actor>
-    <actor costume="warp" x="-480.0" y="-180.0" zOrder="40" id="" colorize="" role="warp.py">
+    <actor costume="warp" x="-480.0" y="-180.0" zOrder="40">
       <role scene="balloons2" exitX="-1" exitY="-1"/>
     </actor>
-    <actor costume="warp" x="-720.0" y="-240.0" zOrder="40" id="" colorize="" role="warp.py">
+    <actor costume="warp" x="-720.0" y="-240.0" zOrder="40">
       <role scene="balloons3" exitX="-1" exitY="-1"/>
     </actor>
-    <actor costume="warp" x="-960.0" y="-300.0" zOrder="40" id="" colorize="" role="warp.py">
+    <actor costume="warp" x="-960.0" y="-300.0" zOrder="40">
       <role scene="balloons4" exitX="-1" exitY="-1"/>
     </actor>
-    <actor costume="warp" x="300.0" y="840.0" zOrder="40" id="" colorize="" role="warp.py">
+    <actor costume="warp" x="300.0" y="840.0" zOrder="40">
       <role scene="furniture2" exitX="0" exitY="1"/>
     </actor>
-    <actor costume="warp" x="360.0" y="1080.0" zOrder="40" id="" colorize="" role="warp.py">
+    <actor costume="warp" x="360.0" y="1080.0" zOrder="40">
       <role scene="furniture3" exitX="1" exitY="-1"/>
     </actor>
-    <actor costume="warp" x="420.0" y="1320.0" zOrder="40" id="" colorize="" role="warp.py">
+    <actor costume="warp" x="420.0" y="1320.0" zOrder="40">
       <role scene="furniture4" exitX="-1" exitY="-1"/>
     </actor>
-    <actor costume="warp" x="480.0" y="1560.0" zOrder="40" id="" colorize="" role="warp.py">
+    <actor costume="warp" x="480.0" y="1560.0" zOrder="40">
       <role scene="furniture5" exitX="0" exitY="-1"/>
     </actor>
-    <actor costume="warp" x="-480.0" y="180.0" zOrder="40" id="" colorize="" role="warp.py">
+    <actor costume="warp" x="-480.0" y="180.0" zOrder="40">
       <role scene="vehicles2" exitX="-1" exitY="-1"/>
     </actor>
-    <actor costume="warp" x="-720.0" y="240.0" zOrder="40" id="" colorize="" role="warp.py">
+    <actor costume="warp" x="-720.0" y="240.0" zOrder="40">
       <role scene="vehicles3" exitX="-1" exitY="-1"/>
     </actor>
-    <actor costume="warp" x="-960.0" y="300.0" zOrder="40" id="" colorize="" role="warp.py">
+    <actor costume="warp" x="-960.0" y="300.0" zOrder="40">
       <role scene="vehicles4" exitX="-1" exitY="-1"/>
     </actor>
-    <actor costume="warp" x="1620.0" y="60.0" zOrder="40" id="" colorize="" role="warp.py">
+    <actor costume="warp" x="1620.0" y="60.0" zOrder="40">
       <role scene="rocks8" exitX="0" exitY="1"/>
     </actor>
-    <actor costume="warp" x="-1200.0" y="360.0" zOrder="40" id="" colorize="" role="warp.py">
+    <actor costume="warp" x="-1200.0" y="360.0" zOrder="40">
       <role scene="vehicles5" exitX="-1" exitY="-1"/>
     </actor>
-    <actor costume="warp" x="-1440.0" y="420.0" zOrder="40" id="" colorize="" role="warp.py">
+    <actor costume="warp" x="-1440.0" y="420.0" zOrder="40">
       <role scene="vehicles6" exitX="-1" exitY="-1"/>
     </actor>
-    <text y="60.0" zOrder="192" id="" font="Boycott" fontSize="22.0" text="Intro" color="#ffffffff" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+    <actor costume="warp" x="420.0" y="1080.0" zOrder="40">
+      <role scene="furniture3b" exitX="1" exitY="-1"/>
+    </actor>
+    <text y="60.0" zOrder="192" font="Boycott" fontSize="22.0" text="Intro" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <makeup dx="2" dy="-1"/>
     </text>
-    <text x="240.0" y="-600.0" zOrder="226" id="" font="Boycott" fontSize="22.0" text="Extras" color="#ffffffff" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+    <text x="240.0" y="-600.0" zOrder="226" font="Boycott" fontSize="22.0" text="Extras" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <makeup dx="2" dy="-1"/>
     </text>
-    <text x="-240.0" y="-120.0" zOrder="233" id="" font="Boycott" fontSize="22.0" text="Balloons" color="#ffffffff" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+    <text x="-240.0" y="-120.0" zOrder="233" font="Boycott" fontSize="22.0" text="Balloons" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <makeup dx="2" dy="-1"/>
     </text>
-    <text x="240.0" y="120.0" zOrder="234" id="" font="Boycott" fontSize="22.0" text="Grenades" color="#ffffffff" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+    <text x="240.0" y="120.0" zOrder="234" font="Boycott" fontSize="22.0" text="Grenades" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <makeup dx="2" dy="-1"/>
     </text>
-    <text x="240.0" y="-120.0" zOrder="237" id="" font="Boycott" fontSize="22.0" text="Rocks" color="#ffffffff" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+    <text x="240.0" y="-120.0" zOrder="237" font="Boycott" fontSize="22.0" text="Rocks" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <makeup dx="2" dy="-1"/>
     </text>
-    <text x="-240.0" y="120.0" zOrder="260" id="" font="Boycott" fontSize="22.0" text="Vehicles" color="#ffffffff" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+    <text x="-240.0" y="120.0" zOrder="260" font="Boycott" fontSize="22.0" text="Vehicles" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <makeup dx="2" dy="-1"/>
     </text>
-    <text x="240.0" y="600.0" zOrder="261" id="" font="Boycott" fontSize="22.0" text="Furniture" color="#ffffffff" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+    <text x="240.0" y="600.0" zOrder="261" font="Boycott" fontSize="22.0" text="Furniture" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <makeup dx="2" dy="-1"/>
     </text>
-    <text x="480.0" y="-180.0" zOrder="464" id="" font="Boycott" fontSize="22.0" text="2" color="#ffffffff" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+    <text x="480.0" y="-180.0" zOrder="464" font="Boycott" fontSize="22.0" text="2" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <makeup dx="2" dy="-1"/>
     </text>
-    <text x="720.0" y="-240.0" zOrder="465" id="" font="Boycott" fontSize="22.0" text="3" color="#ffffffff" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+    <text x="720.0" y="-240.0" zOrder="465" font="Boycott" fontSize="22.0" text="3" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <makeup dx="2" dy="-1"/>
     </text>
-    <text x="960.0" y="-300.0" zOrder="466" id="" font="Boycott" fontSize="22.0" text="4" color="#ffffffff" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+    <text x="960.0" y="-300.0" zOrder="466" font="Boycott" fontSize="22.0" text="4" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <makeup dx="2" dy="-1"/>
     </text>
-    <text x="1200.0" y="-360.0" zOrder="467" id="" font="Boycott" fontSize="22.0" text="5" color="#ffffffff" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+    <text x="1200.0" y="-360.0" zOrder="467" font="Boycott" fontSize="22.0" text="5" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <makeup dx="2" dy="-1"/>
     </text>
-    <text x="1440.0" y="-420.0" zOrder="468" id="" font="Boycott" fontSize="22.0" text="6" color="#ffffffff" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+    <text x="1440.0" y="-420.0" zOrder="468" font="Boycott" fontSize="22.0" text="6" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <makeup dx="2" dy="-1"/>
     </text>
-    <text x="1560.0" y="-180.0" zOrder="469" id="" font="Boycott" fontSize="22.0" text="7" color="#ffffffff" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+    <text x="1560.0" y="-180.0" zOrder="469" font="Boycott" fontSize="22.0" text="7" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <makeup dx="2" dy="-1"/>
     </text>
-    <text x="480.0" y="180.0" zOrder="470" id="" font="Boycott" fontSize="22.0" text="2" color="#ffffffff" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+    <text x="480.0" y="180.0" zOrder="470" font="Boycott" fontSize="22.0" text="2" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <makeup dx="2" dy="-1"/>
     </text>
-    <text x="720.0" y="240.0" zOrder="471" id="" font="Boycott" fontSize="22.0" text="3" color="#ffffffff" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+    <text x="720.0" y="240.0" zOrder="471" font="Boycott" fontSize="22.0" text="3" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <makeup dx="2" dy="-1"/>
     </text>
-    <text x="960.0" y="300.0" zOrder="472" id="" font="Boycott" fontSize="22.0" text="4" color="#ffffffff" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+    <text x="960.0" y="300.0" zOrder="472" font="Boycott" fontSize="22.0" text="4" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <makeup dx="2" dy="-1"/>
     </text>
-    <text x="1200.0" y="360.0" zOrder="473" id="" font="Boycott" fontSize="22.0" text="5" color="#ffffffff" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+    <text x="1200.0" y="360.0" zOrder="473" font="Boycott" fontSize="22.0" text="5" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <makeup dx="2" dy="-1"/>
     </text>
-    <text x="1440.0" y="420.0" zOrder="474" id="" font="Boycott" fontSize="22.0" text="6" color="#ffffffff" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+    <text x="1440.0" y="420.0" zOrder="474" font="Boycott" fontSize="22.0" text="6" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <makeup dx="2" dy="-1"/>
     </text>
-    <text x="-480.0" y="-180.0" zOrder="535" id="" font="Boycott" fontSize="22.0" text="2" color="#ffffffff" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+    <text x="-480.0" y="-180.0" zOrder="535" font="Boycott" fontSize="22.0" text="2" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <makeup dx="2" dy="-1"/>
     </text>
-    <text x="-720.0" y="-240.0" zOrder="536" id="" font="Boycott" fontSize="22.0" text="3" color="#ffffffff" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+    <text x="-720.0" y="-240.0" zOrder="536" font="Boycott" fontSize="22.0" text="3" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <makeup dx="2" dy="-1"/>
     </text>
-    <text x="-960.0" y="-300.0" zOrder="537" id="" font="Boycott" fontSize="22.0" text="4" color="#ffffffff" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+    <text x="-960.0" y="-300.0" zOrder="537" font="Boycott" fontSize="22.0" text="4" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <makeup dx="2" dy="-1"/>
     </text>
-    <text x="-1200.0" y="-360.0" zOrder="538" id="" font="Boycott" fontSize="22.0" text="5" color="#ffffffff" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+    <text x="-1200.0" y="-360.0" zOrder="538" font="Boycott" fontSize="22.0" text="5" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <makeup dx="2" dy="-1"/>
     </text>
-    <text x="300.0" y="840.0" zOrder="570" id="" font="Boycott" fontSize="22.0" text="2" color="#ffffffff" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+    <text x="300.0" y="840.0" zOrder="570" font="Boycott" fontSize="22.0" text="2" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <makeup dx="2" dy="-1"/>
     </text>
-    <text x="360.0" y="1080.0" zOrder="572" id="" font="Boycott" fontSize="22.0" text="3" color="#ffffffff" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+    <text x="360.0" y="1080.0" zOrder="572" font="Boycott" fontSize="22.0" text="3" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <makeup dx="2" dy="-1"/>
     </text>
-    <text x="420.0" y="1320.0" zOrder="600" id="" font="Boycott" fontSize="22.0" text="4" color="#ffffffff" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+    <text x="420.0" y="1320.0" zOrder="600" font="Boycott" fontSize="22.0" text="4" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <makeup dx="2" dy="-1"/>
     </text>
-    <text x="480.0" y="1560.0" zOrder="620" id="" font="Boycott" fontSize="22.0" text="5" color="#ffffffff" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+    <text x="480.0" y="1560.0" zOrder="620" font="Boycott" fontSize="22.0" text="5" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <makeup dx="2" dy="-1"/>
     </text>
-    <text x="-480.0" y="180.0" zOrder="668" id="" font="Boycott" fontSize="22.0" text="2" color="#ffffffff" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+    <text x="-480.0" y="180.0" zOrder="668" font="Boycott" fontSize="22.0" text="2" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <makeup dx="2" dy="-1"/>
     </text>
-    <text x="-720.0" y="240.0" zOrder="669" id="" font="Boycott" fontSize="22.0" text="3" color="#ffffffff" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+    <text x="-720.0" y="240.0" zOrder="669" font="Boycott" fontSize="22.0" text="3" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <makeup dx="2" dy="-1"/>
     </text>
-    <text x="-960.0" y="300.0" zOrder="670" id="" font="Boycott" fontSize="22.0" text="4" color="#ffffffff" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+    <text x="-960.0" y="300.0" zOrder="670" font="Boycott" fontSize="22.0" text="4" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <makeup dx="2" dy="-1"/>
     </text>
-    <text x="1620.0" y="60.0" zOrder="687" id="" font="Boycott" fontSize="22.0" text="8" color="#ffffffff" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+    <text x="1620.0" y="60.0" zOrder="687" font="Boycott" fontSize="22.0" text="8" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <makeup dx="2" dy="-1"/>
     </text>
-    <text x="-1200.0" y="360.0" zOrder="724" id="" font="Boycott" fontSize="22.0" text="5" color="#ffffffff" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+    <text x="-1200.0" y="360.0" zOrder="724" font="Boycott" fontSize="22.0" text="5" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <makeup dx="2" dy="-1"/>
     </text>
-    <text x="-1440.0" y="420.0" zOrder="726" id="" font="Boycott" fontSize="22.0" text="6" color="#ffffffff" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+    <text x="-1440.0" y="420.0" zOrder="726" font="Boycott" fontSize="22.0" text="6" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <makeup dx="2" dy="-1"/>
     </text>
-    <actor costume="warp" x="480.0" y="-1560.0" zOrder="727" id="" colorize="" role="warp.py">
+    <actor costume="warp" x="480.0" y="-1560.0" zOrder="727">
       <role scene="extras5" exitX="0" exitY="-1"/>
     </actor>
-    <actor costume="warp" x="420.0" y="-1320.0" zOrder="728" id="" colorize="" role="warp.py">
+    <actor costume="warp" x="420.0" y="-1320.0" zOrder="728">
       <role scene="extras4" exitX="0" exitY="-1"/>
     </actor>
-    <actor costume="warp" x="300.0" y="-840.0" zOrder="729" id="" colorize="" role="warp.py">
+    <actor costume="warp" x="300.0" y="-840.0" zOrder="729">
       <role scene="extras2" exitX="0" exitY="-1"/>
     </actor>
-    <actor costume="warp" x="360.0" y="-1080.0" zOrder="730" id="" colorize="" role="warp.py">
+    <actor costume="warp" x="360.0" y="-1080.0" zOrder="730">
       <role scene="extras3" exitX="0" exitY="-1"/>
     </actor>
-    <text x="300.0" y="-840.0" zOrder="731" id="" font="Boycott" fontSize="22.0" text="2" color="#ffffffff" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+    <text x="300.0" y="-840.0" zOrder="731" font="Boycott" fontSize="22.0" text="2" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <makeup dx="2" dy="-1"/>
     </text>
-    <text x="480.0" y="-1560.0" zOrder="732" id="" font="Boycott" fontSize="22.0" text="5" color="#ffffffff" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+    <text x="480.0" y="-1560.0" zOrder="732" font="Boycott" fontSize="22.0" text="5" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <makeup dx="2" dy="-1"/>
     </text>
-    <text x="420.0" y="-1320.0" zOrder="733" id="" font="Boycott" fontSize="22.0" text="4" color="#ffffffff" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+    <text x="420.0" y="-1320.0" zOrder="733" font="Boycott" fontSize="22.0" text="4" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <makeup dx="2" dy="-1"/>
     </text>
-    <text x="360.0" y="-1080.0" zOrder="734" id="" font="Boycott" fontSize="22.0" text="3" color="#ffffffff" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+    <text x="360.0" y="-1080.0" zOrder="734" font="Boycott" fontSize="22.0" text="3" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <makeup dx="2" dy="-1"/>
     </text>
-    <actor costume="warp" y="180.0" zOrder="736" id="" colorize="" role="warp.py">
+    <actor costume="warp" y="180.0" zOrder="736">
       <role scene="credits" exitX="1" exitY="-1"/>
     </actor>
-    <text y="180.0" zOrder="737" id="" font="Boycott" fontSize="22.0" text="Credits" color="#ffffffff" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+    <text y="180.0" zOrder="737" font="Boycott" fontSize="22.0" text="Credits" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <makeup dx="2" dy="-1"/>
     </text>
-    <text x="-240.0" y="600.0" zOrder="738" id="" font="Boycott" fontSize="22.0" text="Bees" color="#ffffffff" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+    <text x="-240.0" y="600.0" zOrder="738" font="Boycott" fontSize="22.0" text="Bees" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <makeup dx="2" dy="-1"/>
     </text>
-    <actor costume="portcullis" x="300.0" y="960.0" zOrder="739" id="" colorize="" role="portcullis.py">
+    <actor costume="portcullis" x="300.0" y="960.0" zOrder="739">
       <role requires="furniture2" text="Furniture(2)"/>
     </actor>
-    <actor costume="portcullis" x="360.0" y="1200.0" zOrder="740" id="" colorize="" role="portcullis.py">
+    <actor costume="portcullis" x="360.0" y="1200.0" zOrder="740">
       <role requires="furniture3" text="Furniture(3)"/>
     </actor>
-    <actor costume="portcullis" x="420.0" y="1440.0" zOrder="741" id="" colorize="" role="portcullis.py">
+    <actor costume="portcullis" x="420.0" y="1440.0" zOrder="741">
       <role requires="furniture4" text="Furniture(4)"/>
     </actor>
-    <actor costume="portcullis" x="-120.0" y="600.0" zOrder="742" id="" colorize="" role="portcullis.py">
+    <actor costume="portcullis" x="-120.0" y="600.0" zOrder="742">
       <role requires="grenades3,balloons2" text="Grenades(3) and Balloons(2)"/>
     </actor>
-    <actor costume="portcullis" x="120.0" y="600.0" zOrder="743" id="" colorize="" role="portcullis.py">
+    <actor costume="portcullis" x="120.0" y="600.0" zOrder="743">
       <role requires="grenades3,balloons3" text="Grenades(3) and Balloons(3)"/>
     </actor>
-    <actor costume="portcullis" x="-300.0" y="960.0" zOrder="744" id="" colorize="" role="portcullis.py">
+    <actor costume="portcullis" x="-300.0" y="960.0" zOrder="744">
       <role requires="bees2" text="Bees(2)"/>
     </actor>
-    <actor costume="portcullis" x="-360.0" y="1200.0" zOrder="745" id="" colorize="" role="portcullis.py">
+    <actor costume="portcullis" x="-360.0" y="1200.0" zOrder="745">
       <role requires="bees3" text="Bees(3)"/>
     </actor>
-    <actor costume="warp" x="-720.0" y="-300.0" zOrder="746" id="" colorize="" role="warp.py">
+    <actor costume="warp" x="-720.0" y="-300.0" zOrder="746">
       <role scene="balloons3a" exitX="-1" exitY="-1"/>
     </actor>
-    <actor costume="warp" x="-240.0" y="-180.0" zOrder="747" id="" colorize="" role="warp.py">
+    <actor costume="warp" x="-240.0" y="-180.0" zOrder="747">
       <role scene="balloons1a" exitX="-1" exitY="-1"/>
     </actor>
-    <actor costume="warp" x="-240.0" y="-240.0" zOrder="748" id="" colorize="" role="warp.py">
+    <actor costume="warp" x="-240.0" y="-240.0" zOrder="748">
       <role scene="balloons1c" exitX="-1" exitY="-1"/>
     </actor>
-    <actor costume="warp" x="-480.0" y="-240.0" zOrder="749" id="" colorize="" role="warp.py">
+    <actor costume="warp" x="-480.0" y="-240.0" zOrder="749">
       <role scene="balloons2a" exitX="-1" exitY="-1"/>
     </actor>
-    <actor costume="warp" x="-480.0" y="-300.0" zOrder="750" id="" colorize="" role="warp.py">
+    <actor costume="warp" x="-480.0" y="-300.0" zOrder="750">
       <role scene="balloons2b" exitX="-1" exitY="-1"/>
     </actor>
-    <actor costume="portcullis" x="360.0" y="-1200.0" zOrder="751" id="" colorize="" role="portcullis.py">
+    <actor costume="portcullis" x="360.0" y="-1200.0" zOrder="751">
       <role requires="extras3" text="Extras(3)"/>
     </actor>
-    <actor costume="portcullis" x="420.0" y="-1440.0" zOrder="752" id="" colorize="" role="portcullis.py">
+    <actor costume="portcullis" x="420.0" y="-1440.0" zOrder="752">
       <role requires="extras4" text="Extras(4)"/>
     </actor>
-    <actor costume="portcullis" x="120.0" y="-600.0" zOrder="753" id="" colorize="" role="portcullis.py">
+    <actor costume="portcullis" x="120.0" y="-600.0" zOrder="753">
       <role requires="rocks3,balloons3" text="Rocks(3) and Balloons(3)"/>
     </actor>
-    <actor costume="warp" x="240.0" y="-180.0" zOrder="754" id="" colorize="" role="warp.py">
+    <actor costume="warp" x="240.0" y="-180.0" zOrder="754">
       <role scene="rocks1a" exitX="1" exitY="-1"/>
     </actor>
-    <actor costume="warp" x="240.0" y="-240.0" zOrder="755" id="" colorize="" role="warp.py">
+    <actor costume="warp" x="240.0" y="-240.0" zOrder="755">
       <role scene="rocks1b" exitX="1" exitY="-1"/>
     </actor>
-    <actor costume="warp" x="240.0" y="-300.0" zOrder="756" id="" colorize="" role="warp.py">
+    <actor costume="warp" x="240.0" y="-300.0" zOrder="756">
       <role scene="rocks1c" exitX="1" exitY="-1"/>
     </actor>
-    <actor costume="warp" x="240.0" y="-360.0" zOrder="757" id="" colorize="" role="warp.py">
+    <actor costume="warp" x="240.0" y="-360.0" zOrder="757">
       <role scene="rocks1d" exitX="1" exitY="-1"/>
     </actor>
-    <actor costume="warp" x="-720.0" y="-360.0" zOrder="758" id="" colorize="" role="warp.py">
+    <actor costume="warp" x="-720.0" y="-360.0" zOrder="758">
       <role scene="balloons3b" exitX="-1" exitY="-1"/>
     </actor>
-    <actor costume="player" y="-60.0" zOrder="1000" id="player" colorize="" role="player.py">
+    <actor costume="player" y="-60.0" zOrder="1000" id="player">
       <role awake="true"/>
     </actor>
-    <actor costume="warp" x="-720.0" y="-420.0" zOrder="1001" id="" colorize="" role="warp.py">
+    <actor costume="warp" x="-720.0" y="-420.0" zOrder="1001">
       <role scene="balloons3c" exitX="-1" exitY="-1"/>
     </actor>
-    <text x="-300.0" y="840.0" zOrder="1002" id="" font="Boycott" fontSize="22.0" text="2" color="#ffffffff" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+    <text x="-300.0" y="840.0" zOrder="1002" font="Boycott" fontSize="22.0" text="2" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <makeup dx="2" dy="-1"/>
     </text>
-    <actor costume="portcullis" x="-420.0" y="1440.0" zOrder="1003" id="" colorize="" role="portcullis.py">
+    <actor costume="portcullis" x="-420.0" y="1440.0" zOrder="1003">
       <role requires="bees4" text="Bees(3)"/>
     </actor>
-    <actor costume="warp" x="-360.0" y="1080.0" zOrder="1004" id="" colorize="" role="warp.py">
+    <actor costume="warp" x="-360.0" y="1080.0" zOrder="1004">
       <role scene="bees3" exitX="0" exitY="1"/>
     </actor>
-    <text x="-360.0" y="1080.0" zOrder="1005" id="" font="Boycott" fontSize="22.0" text="3" color="#ffffffff" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+    <text x="-360.0" y="1080.0" zOrder="1005" font="Boycott" fontSize="22.0" text="3" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <makeup dx="2" dy="-1"/>
     </text>
-    <actor costume="warp" x="-420.0" y="1320.0" zOrder="1006" id="" colorize="" role="warp.py">
+    <actor costume="warp" x="-420.0" y="1320.0" zOrder="1006">
       <role scene="bees4" exitX="0" exitY="1"/>
     </actor>
-    <text x="-420.0" y="1320.0" zOrder="1007" id="" font="Boycott" fontSize="22.0" text="4" color="#ffffffff" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+    <text x="-420.0" y="1320.0" zOrder="1007" font="Boycott" fontSize="22.0" text="4" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <makeup dx="2" dy="-1"/>
     </text>
-    <actor costume="warp" x="-480.0" y="1560.0" zOrder="1008" id="" colorize="" role="warp.py">
+    <actor costume="warp" x="-480.0" y="1560.0" zOrder="1008">
       <role scene="bees5" exitX="0" exitY="1"/>
     </actor>
-    <text x="-480.0" y="1560.0" zOrder="1009" id="" font="Boycott" fontSize="22.0" text="5" color="#ffffffff" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+    <text x="-480.0" y="1560.0" zOrder="1009" font="Boycott" fontSize="22.0" text="5" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <makeup dx="2" dy="-1"/>
     </text>
-    <actor costume="warp" y="960.0" zOrder="1010" id="" colorize="" role="warp.py">
+    <actor costume="warp" y="960.0" zOrder="1010">
       <role scene="friends" exitX="1" exitY="-1"/>
     </actor>
-    <text y="960.0" zOrder="1011" id="" font="Boycott" fontSize="22.0" text="Friends" color="#ffffffff" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+    <text y="960.0" zOrder="1011" font="Boycott" fontSize="22.0" text="Friends" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <makeup dx="2" dy="-1"/>
     </text>
-    <actor costume="warp" y="1020.0" zOrder="1012" id="" colorize="" role="warp.py">
+    <actor costume="warp" y="1020.0" zOrder="1012">
       <role scene="friends1a" exitX="1" exitY="-1"/>
     </actor>
-    <actor costume="warp" y="1080.0" zOrder="1013" id="" colorize="" role="warp.py">
+    <actor costume="warp" y="1080.0" zOrder="1013">
       <role scene="friends1b" exitX="1" exitY="-1"/>
     </actor>
-    <actor costume="wall" x="60.0" y="840.0" zOrder="1014" id="" colorize="" role="wall.py"/>
-    <actor costume="wall" x="120.0" y="840.0" zOrder="1015" id="" colorize="" role="wall.py"/>
-    <actor costume="warp" y="1320.0" zOrder="1017" id="" colorize="" role="warp.py">
+    <actor costume="wall" x="60.0" y="840.0" zOrder="1014"/>
+    <actor costume="wall" x="120.0" y="840.0" zOrder="1015"/>
+    <actor costume="warp" y="1320.0" zOrder="1017">
       <role scene="friends2" exitX="0" exitY="1"/>
     </actor>
-    <text y="1320.0" zOrder="1018" id="" font="Boycott" fontSize="22.0" text="2" color="#ffffffff" colorize="" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+    <text y="1320.0" zOrder="1018" font="Boycott" fontSize="22.0" text="2" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <makeup dx="2" dy="-1"/>
     </text>
-    <actor costume="warp" x="-960.0" y="-360.0" zOrder="1019" id="" colorize="" role="warp.py">
+    <actor costume="warp" x="-960.0" y="-360.0" zOrder="1019">
       <role scene="balloons4a" exitX="-1" exitY="-1"/>
     </actor>
-    <actor costume="warp" x="-960.0" y="-420.0" zOrder="1020" id="" colorize="" role="warp.py">
+    <actor costume="warp" x="-960.0" y="-420.0" zOrder="1020">
       <role scene="balloons4b" exitX="-1" exitY="-1"/>
     </actor>
-    <actor costume="warp" x="-960.0" y="-480.0" zOrder="1021" id="" colorize="" role="warp.py">
+    <actor costume="warp" x="-960.0" y="-480.0" zOrder="1021">
       <role scene="balloons4c" exitX="-1" exitY="-1"/>
     </actor>
-    <actor costume="warp" x="-480.0" y="-360.0" zOrder="1022" id="" colorize="" role="warp.py">
+    <actor costume="warp" x="-480.0" y="-360.0" zOrder="1022">
       <role scene="balloons2c" exitX="-1" exitY="-1"/>
     </actor>
-    <actor costume="portcullis" y="1200.0" zOrder="1023" id="" colorize="" role="portcullis.py">
+    <actor costume="portcullis" y="1200.0" zOrder="1023">
       <role requires="friends" text="Friends"/>
     </actor>
-    <actor costume="portcullis" y="300.0" zOrder="1024" id="" colorize="" role="portcullis.py">
+    <actor costume="portcullis" y="300.0" zOrder="1024">
       <role requires="rocks2,balloons2" text="Rocks(3) and Balloons(2)"/>
     </actor>
   </layer>
   <layer name="test">
-    <actor costume="sledge" x="-180.0" y="300.0" zOrder="90" id="" colorize="" role="sledger.py">
+    <actor costume="sledge" x="-180.0" y="300.0" zOrder="90">
       <role text="Use the arrow keys\nto enter one of the gates.&#xA;What are you waiting for?&#xA;Oh come on,\npick a gate.&#xA;Are you still there?&#xA;" initialDelay="0.5" period="30.0" loop="true"/>
     </actor>
   </layer>

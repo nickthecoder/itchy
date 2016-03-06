@@ -17,5 +17,3 @@ BUGS
 
 Cannot start a new animation from a finish event of an old animation (Dodge 'Em Player wanted to do it)
 
-Explosion has to manually tick the animation in order for the first frame to be displayed correctly.
-Shouldn't the act of SETTING an animation cause the first tick to take place?

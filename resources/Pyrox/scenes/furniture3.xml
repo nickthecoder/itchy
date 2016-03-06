@@ -1,0 +1,154 @@
+<scene name="furniture3" layout="default" sceneDirector="level.py" showMouse="true">
+  <layer name="background"/>
+  <layer name="plain"/>
+  <layer name="grid">
+    <actor costume="wall" x="780.0" y="360.0" zOrder="5"/>
+    <actor costume="wall" x="780.0" y="420.0" zOrder="5"/>
+    <actor costume="wall" x="780.0" y="480.0" zOrder="5"/>
+    <actor costume="wall" x="780.0" y="540.0" zOrder="5"/>
+    <actor costume="wall" x="780.0" y="300.0" zOrder="5"/>
+    <actor costume="wall" x="780.0" y="240.0" zOrder="5"/>
+    <actor costume="wall" x="780.0" y="180.0" zOrder="5"/>
+    <actor costume="wall" x="780.0" y="120.0" zOrder="5"/>
+    <actor costume="wall" x="780.0" y="60.0" zOrder="5"/>
+    <actor costume="wall" x="720.0" zOrder="5"/>
+    <actor costume="wall" x="660.0" zOrder="5"/>
+    <actor costume="wall" x="600.0" zOrder="5"/>
+    <actor costume="wall" x="540.0" zOrder="5"/>
+    <actor costume="wall" x="480.0" zOrder="5"/>
+    <actor costume="wall" x="420.0" zOrder="5"/>
+    <actor costume="wall" x="360.0" zOrder="5"/>
+    <actor costume="wall" x="300.0" zOrder="5"/>
+    <actor costume="wall" x="240.0" zOrder="5"/>
+    <actor costume="wall" x="180.0" zOrder="5"/>
+    <actor costume="wall" x="120.0" zOrder="5"/>
+    <actor costume="wall" x="60.0" zOrder="5"/>
+    <actor costume="wall" zOrder="5"/>
+    <actor costume="wall" x="-60.0" zOrder="5"/>
+    <actor costume="wall" x="-120.0" zOrder="5"/>
+    <actor costume="wall" x="-180.0" zOrder="5"/>
+    <actor costume="wall" x="-240.0" zOrder="5"/>
+    <actor costume="wall" x="-300.0" zOrder="5"/>
+    <actor costume="wall" x="-360.0" y="60.0" zOrder="5"/>
+    <actor costume="wall" x="-360.0" y="120.0" zOrder="5"/>
+    <actor costume="wall" x="-360.0" y="180.0" zOrder="5"/>
+    <actor costume="wall" x="-360.0" y="240.0" zOrder="5"/>
+    <actor costume="wall" x="-360.0" y="300.0" zOrder="5"/>
+    <actor costume="wall" x="-360.0" y="360.0" zOrder="5"/>
+    <actor costume="wall" x="-360.0" y="420.0" zOrder="5"/>
+    <actor costume="wall" x="-360.0" y="480.0" zOrder="5"/>
+    <actor costume="wall" x="-360.0" y="540.0" zOrder="5"/>
+    <actor costume="wall" x="-360.0" y="600.0" zOrder="5"/>
+    <actor costume="wall" x="-360.0" y="660.0" zOrder="5"/>
+    <actor costume="wall" x="780.0" y="600.0" zOrder="5"/>
+    <actor costume="wall" x="780.0" y="660.0" zOrder="5"/>
+    <actor costume="wall" x="-300.0" y="360.0" zOrder="5"/>
+    <actor costume="wall" x="840.0" y="300.0" zOrder="5"/>
+    <actor costume="wall" x="900.0" y="300.0" zOrder="5"/>
+    <actor costume="wall" x="840.0" y="660.0" zOrder="5"/>
+    <actor costume="wall" x="900.0" y="660.0" zOrder="5"/>
+    <actor costume="wall" x="1140.0" y="420.0" zOrder="5"/>
+    <actor costume="wallNE" x="1140.0" y="660.0" zOrder="5"/>
+    <actor costume="wall" x="-300.0" y="780.0" zOrder="5"/>
+    <actor costume="wall" x="-240.0" y="780.0" zOrder="5"/>
+    <actor costume="wall" x="-180.0" y="780.0" zOrder="5"/>
+    <actor costume="wall" x="-120.0" y="780.0" zOrder="5"/>
+    <actor costume="wall" x="-60.0" y="780.0" zOrder="5"/>
+    <actor costume="wall" y="780.0" zOrder="5"/>
+    <actor costume="wall" x="60.0" y="780.0" zOrder="5"/>
+    <actor costume="wall" x="120.0" y="780.0" zOrder="5"/>
+    <actor costume="wall" x="180.0" y="780.0" zOrder="5"/>
+    <actor costume="wall" x="240.0" y="780.0" zOrder="5"/>
+    <actor costume="wall" x="300.0" y="780.0" zOrder="5"/>
+    <actor costume="wall" x="360.0" y="780.0" zOrder="5"/>
+    <actor costume="wall" x="420.0" y="780.0" zOrder="5"/>
+    <actor costume="wall" x="480.0" y="780.0" zOrder="5"/>
+    <actor costume="wall" x="540.0" y="780.0" zOrder="5"/>
+    <actor costume="wall" x="600.0" y="780.0" zOrder="5"/>
+    <actor costume="wall" x="660.0" y="780.0" zOrder="5"/>
+    <actor costume="wall" x="720.0" y="780.0" zOrder="5"/>
+    <actor costume="wall" x="780.0" y="720.0" zOrder="5"/>
+    <actor costume="wallNE" x="780.0" y="780.0" zOrder="5"/>
+    <actor costume="wall" x="-360.0" y="720.0" zOrder="5"/>
+    <actor costume="wallSW" x="-360.0" zOrder="5"/>
+    <actor costume="wallNW" x="-360.0" y="780.0" zOrder="5"/>
+    <actor costume="wallSW" x="720.0" y="360.0" zOrder="5"/>
+    <actor costume="wall" x="960.0" y="300.0" zOrder="5"/>
+    <actor costume="wall" x="1020.0" y="300.0" zOrder="5"/>
+    <actor costume="wall" x="1140.0" y="480.0" zOrder="5"/>
+    <actor costume="wall" x="960.0" y="660.0" zOrder="5"/>
+    <actor costume="wall" x="1020.0" y="660.0" zOrder="5"/>
+    <actor costume="wall" x="1080.0" y="660.0" zOrder="5"/>
+    <actor costume="wall" x="1140.0" y="600.0" zOrder="5"/>
+    <actor costume="wall" x="1140.0" y="540.0" zOrder="5"/>
+    <actor costume="wall" x="1140.0" y="360.0" zOrder="5"/>
+    <actor costume="wall" x="1080.0" y="300.0" zOrder="5"/>
+    <actor costume="wallSE" x="780.0" zOrder="5"/>
+    <actor costume="wallSE" x="1140.0" y="60.0" zOrder="5"/>
+    <actor costume="wall" x="840.0" y="60.0" zOrder="5"/>
+    <actor costume="wall" x="900.0" y="60.0" zOrder="5"/>
+    <actor costume="wall" x="960.0" y="60.0" zOrder="5"/>
+    <actor costume="wall" x="1020.0" y="60.0" zOrder="5"/>
+    <actor costume="wall" x="1080.0" y="60.0" zOrder="5"/>
+    <actor costume="wall" x="1140.0" y="180.0" zOrder="5"/>
+    <actor costume="wall" x="1140.0" y="240.0" zOrder="5"/>
+    <actor costume="wall" x="1140.0" y="300.0" zOrder="5"/>
+    <actor costume="wall" x="1140.0" y="120.0" zOrder="5"/>
+    <actor costume="soil" y="600.0" zOrder="10"/>
+    <actor costume="soil" x="180.0" y="420.0" zOrder="10"/>
+    <actor costume="soil" x="-240.0" y="540.0" zOrder="10"/>
+    <actor costume="soil" x="960.0" y="420.0" zOrder="10"/>
+    <actor costume="soil" x="1080.0" y="420.0" zOrder="10"/>
+    <actor costume="soil" x="1080.0" y="480.0" zOrder="10"/>
+    <actor costume="soil" x="1020.0" y="360.0" zOrder="10"/>
+    <actor costume="soil" x="960.0" y="360.0" zOrder="10"/>
+    <actor costume="table" x="300.0" y="360.0" zOrder="10"/>
+    <actor costume="table" x="300.0" y="300.0" zOrder="10"/>
+    <actor costume="grenade" y="660.0" zOrder="20"/>
+    <actor costume="rock" x="-180.0" y="180.0" zOrder="20"/>
+    <actor costume="grenade" x="180.0" y="480.0" zOrder="20"/>
+    <actor costume="rock" x="960.0" y="480.0" zOrder="20"/>
+    <actor costume="grenade2" x="1080.0" y="360.0" zOrder="20"/>
+    <actor costume="warp" x="840.0" y="600.0" zOrder="40">
+      <role scene="play" exitX="0" exitY="-1"/>
+    </actor>
+    <actor costume="coin" x="660.0" y="120.0" zOrder="60"/>
+    <actor costume="coin" x="720.0" y="60.0" zOrder="60"/>
+    <actor costume="coin" x="720.0" y="120.0" zOrder="60"/>
+    <actor costume="coin" x="660.0" y="60.0" zOrder="60"/>
+    <actor costume="coin" x="180.0" y="120.0" zOrder="60"/>
+    <actor costume="coin" x="240.0" y="120.0" zOrder="60"/>
+    <actor costume="coin" x="180.0" y="180.0" zOrder="60"/>
+    <actor costume="coin" x="240.0" y="180.0" zOrder="60"/>
+    <actor costume="coin" x="-240.0" y="120.0" zOrder="60"/>
+    <actor costume="coin" x="-240.0" y="60.0" zOrder="60"/>
+    <actor costume="coin" x="-180.0" y="60.0" zOrder="60"/>
+    <actor costume="coin" x="-180.0" y="120.0" zOrder="60"/>
+    <actor costume="coin" x="360.0" y="480.0" zOrder="60"/>
+    <actor costume="coin" x="300.0" y="480.0" zOrder="60"/>
+    <actor costume="coin" x="360.0" y="540.0" zOrder="60"/>
+    <actor costume="coin" x="300.0" y="540.0" zOrder="60"/>
+    <actor costume="coin" x="540.0" y="300.0" zOrder="60"/>
+    <actor costume="coin" x="540.0" y="240.0" zOrder="60"/>
+    <actor costume="coin" x="600.0" y="240.0" zOrder="60"/>
+    <actor costume="coin" x="600.0" y="300.0" zOrder="60"/>
+    <actor costume="coin" x="-120.0" y="120.0" zOrder="60"/>
+    <actor costume="coin" x="-120.0" y="60.0" zOrder="60"/>
+    <actor costume="coin" x="480.0" y="720.0" zOrder="60"/>
+    <actor costume="coin" x="540.0" y="720.0" zOrder="60"/>
+    <actor costume="coin" x="480.0" y="660.0" zOrder="60"/>
+    <actor costume="coin" x="540.0" y="660.0" zOrder="60"/>
+    <actor costume="coin" x="-300.0" y="60.0" zOrder="60"/>
+    <actor costume="coin" x="-300.0" y="120.0" zOrder="60"/>
+    <actor costume="coin" x="720.0" y="180.0" zOrder="60"/>
+    <actor costume="stamp" x="960.0" y="180.0" zOrder="60"/>
+    <actor costume="stamp" x="900.0" y="600.0" zOrder="60"/>
+    <actor costume="stamp" x="960.0" y="600.0" zOrder="60"/>
+    <actor costume="stamp" x="1020.0" y="600.0" zOrder="60"/>
+    <actor costume="stamp" x="1080.0" y="600.0" zOrder="60"/>
+    <actor costume="player" x="420.0" y="360.0" zOrder="1000">
+      <role awake="true"/>
+    </actor>
+  </layer>
+  <layer name="test"/>
+</scene>
