@@ -1,5 +1,5 @@
 <resources>
-  <game title="Dodge 'Em" width="800" height="600" resizable="false" initialScene="menu" testScene="l" directorClassName="dodge.py" authors="Nick Robinson&#xA;"/>
+  <game title="Dodge 'Em" width="800" height="600" resizable="false" initialScene="menu" testScene="a" directorClassName="dodge.py" authors="Nick Robinson&#xA;"/>
   <spriteSheets>
     <spriteSheet name="graphics" file="images/graphics.png">
       <sprite name="ball-1" direction="0.0" offsetX="38" offsetY="38" x="634" y="91" width="75" height="75"/>
@@ -11,6 +11,7 @@
       <sprite name="player-blue" direction="0.0" offsetX="24" offsetY="24" x="451" y="435" width="48" height="48"/>
       <sprite name="player-green" direction="0.0" offsetX="24" offsetY="24" x="531" y="355" width="48" height="48"/>
       <sprite name="player-red" direction="0.0" offsetX="24" offsetY="24" x="450" y="355" width="48" height="48"/>
+      <sprite name="pointer" direction="0.0" offsetX="19" offsetY="20" x="610" y="355" width="38" height="38"/>
       <sprite name="rectangle-1" direction="0.0" offsetX="50" offsetY="10" x="205" y="116" width="100" height="20"/>
       <sprite name="rectangle-2" direction="0.0" offsetX="10" offsetY="50" x="205" y="116" width="20" height="100"/>
       <sprite name="rectangle-3" direction="0.0" offsetX="30" offsetY="20" x="205" y="116" width="60" height="40"/>
@@ -123,6 +124,9 @@
     <costume name="player-red" defaultZOrder="50" order="50" showInDesigner="true" extends="player" role="player.py">
       <pose name="default" pose="player-red"/>
       <properties clan="red"/>
+    </costume>
+    <costume name="pointer" defaultZOrder="99" order="99" showInDesigner="true">
+      <pose name="default" pose="pointer"/>
     </costume>
     <costume name="rectangle" defaultZOrder="60" order="60" showInDesigner="true" extends="enemy" role="enemy.py">
       <pose name="default" pose="rectangle-3"/>

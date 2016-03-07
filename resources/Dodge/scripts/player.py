@@ -27,7 +27,10 @@ class Player(AbstractRole) :
             self.clanTimer = Timer.createTimerSeconds( self.clanPeriod )
             self.clanArray = self.clans.split(",")
             self.clanIndex = 0
+            
 
+    def onSceneCreated(self) :
+        self.view = game.layout.findView( "main" )
 
     def tick(self):
     
@@ -41,8 +44,8 @@ class Player(AbstractRole) :
 
         
         # Move to the mouse, but don't let the player move too quickly
-        mx = Itchy.getMouseX()
-        my = 600-Itchy.getMouseY()
+        mx = self.view.mouseX
+        my = self.view.mouseY
         if self.actor.distanceTo( mx, my ) < self.maxSpeed :
             self.actor.moveTo( mx, my )
         else :

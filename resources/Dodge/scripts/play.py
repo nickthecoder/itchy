@@ -17,6 +17,9 @@ class Play(PlainSceneDirector) :
         self.inputReset = Input.find('reset')
         self.highScore = game.preferences.getInt( self.highScoreKey(), 0 )
         
+        mousePointer = SimpleMousePointer("pointer")
+        game.mouse.setMousePointer( mousePointer )
+
         
     def tick(self) :
         

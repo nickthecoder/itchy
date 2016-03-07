@@ -1,9 +1,9 @@
-<scene name="a" layout="default" sceneDirector="play.py" showMouse="true">
+<scene name="a" layout="default" sceneDirector="play.py">
   <sceneDirector speedUp="0.1"/>
   <layer name="background"/>
   <layer name="main">
     <actor costume="player-red" x="417.0" y="303.0" zOrder="50" scale="2.0">
-      <role maxSpeed="10.0"/>
+      <role maxSpeed="10.0" clanPeriod="0.0" clans=""/>
     </actor>
     <actor costume="rectangle-3" x="170.0" y="432.0" zOrder="60" scale="2.0">
       <role vx="4.0" vy="4.0" rotation="0.0"/>
