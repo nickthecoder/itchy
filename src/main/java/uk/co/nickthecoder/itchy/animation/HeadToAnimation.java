@@ -57,7 +57,6 @@ public class HeadToAnimation extends NumericAnimation
     @Override
     public void start( Actor actor )
     {
-        super.start(actor);
         this.turn = ((this.heading - actor.getHeading()) % 360 + 360) % 360;
         // Now 0..360
 
@@ -70,6 +69,7 @@ public class HeadToAnimation extends NumericAnimation
                 this.turn -= 360;
             }
         }
+        super.start(actor);
     }
 
     @Override

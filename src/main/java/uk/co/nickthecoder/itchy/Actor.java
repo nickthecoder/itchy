@@ -351,27 +351,29 @@ public class Actor implements PropertySubject<Actor>
         Animation newAnimation;
 
         // What do we do when an animation is in progress. Either replace it, ignore the new animation or merge them.
-        if ((this.animation == null) || (this.animation.isFinished()) || (ae == AnimationEvent.REPLACE)) {
-            newAnimation = animation.copy();
-
+        if (ae == AnimationEvent.FAST_FORWARD) {
             if ((this.animation != null) && (!this.animation.isFinished())) {
                 this.animation.fastForward(this);
-            }
-
-            newAnimation.start(this);
-
-        } else if (ae == AnimationEvent.IGNORE) {
+            }            
+        }
+        
+        if ( (ae == AnimationEvent.IGNORE) && (this.animation != null) ) {
             return;
+        }
+        
 
-        } else {
+        if ((ae == AnimationEvent.SEQUENCE) || ((ae == AnimationEvent.PARALLEL)) ) {
             // Merge the two animations (either in sequence or in parallel, depending on "ae")
             CompoundAnimation ca = new CompoundAnimation(ae == AnimationEvent.SEQUENCE);
             ca.add(this.getAnimation());
             ca.add(animation.copy());
             ca.startExceptFirst(this);
             newAnimation = ca;
+        } else {
+            newAnimation = animation.copy();
+            newAnimation.start(this);
         }
-
+        
         this.animation = newAnimation;
         AbstractAnimation.tick(this.animation, this);
     }

@@ -51,8 +51,8 @@ public class ScaleAnimation extends NumericAnimation
     @Override
     public void start( Actor actor )
     {
-        super.start(actor);
         this.initialScale = actor.getAppearance().getScale();
+        super.start(actor);
     }
 
     @Override

@@ -67,7 +67,6 @@ public class ClipAnimation extends NumericAnimation
     @Override
     public void start( Actor actor )
     {
-        super.start(actor);
         Rect startClip = actor.getAppearance().getClip();
         if (startClip == null) {
             this.startTop = this.startRight = this.startBottom = this.startLeft = 0;
@@ -78,7 +77,7 @@ public class ClipAnimation extends NumericAnimation
             this.startRight = surface.getWidth() - (startClip.x + startClip.width);
             this.startBottom = surface.getHeight() - (startClip.y - startClip.height);
         }
-
+        super.start(actor);
     }
 
     @Override

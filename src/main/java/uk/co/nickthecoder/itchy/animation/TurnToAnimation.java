@@ -58,7 +58,6 @@ public class TurnToAnimation extends NumericAnimation
     @Override
     public void start( Actor actor )
     {
-        super.start(actor);
         this.turn = ((this.direction - actor.getAppearance().getDirection()) % 360 + 360) % 360;
         // Now 0..360
         
@@ -71,6 +70,7 @@ public class TurnToAnimation extends NumericAnimation
                 this.turn -= 360;
             }
         }
+        super.start(actor);
     }
 
     @Override

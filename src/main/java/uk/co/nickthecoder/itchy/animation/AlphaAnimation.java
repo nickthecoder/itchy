@@ -53,8 +53,8 @@ public class AlphaAnimation extends NumericAnimation
     @Override
     public void start( Actor actor )
     {
-        super.start(actor);
         this.initialValue = actor.getAppearance().getAlpha();
+        super.start(actor);
     }
 
     @Override

@@ -59,13 +59,13 @@ public class BeanAnimation extends NumericAnimation
     @Override
     public void start( Actor actor )
     {
-        super.start(actor);
         this.beanHelper = new BeanHelper(actor.getRole(), this.access );
         try {
             this.initialValue = (double) beanHelper.get();
         } catch (Exception e) {
             Itchy.handleException(e);
         }
+        super.start(actor);
     }
     
     @Override
