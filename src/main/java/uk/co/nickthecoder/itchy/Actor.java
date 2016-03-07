@@ -7,7 +7,6 @@ package uk.co.nickthecoder.itchy;
 import java.util.ArrayList;
 import java.util.List;
 
-import uk.co.nickthecoder.itchy.animation.AbstractAnimation;
 import uk.co.nickthecoder.itchy.animation.Animation;
 import uk.co.nickthecoder.itchy.animation.CompoundAnimation;
 import uk.co.nickthecoder.itchy.collision.PixelCollisionTest;
@@ -326,56 +325,38 @@ public class Actor implements PropertySubject<Actor>
 
     public void setAnimation(Animation animation, AnimationEvent ae)
     {
-
-        if (animation == null) {
-            if (ae == AnimationEvent.FAST_FORWARD) {
-                // If we are trying to FAST_FORWARD the old animation with null, then stop the old animation if there is
-                // one.
-                if ((this.animation != null) && (!this.animation.isFinished())) {
-                    this.animation.fastForward(this);
-                }
-                this.animation = null;
-                return;
-
-            } else if (ae == AnimationEvent.REPLACE) {
-                this.animation = null;
-                return;
-
-            } else {
-                // If we are trying to merge the old animation with null, then just let the old animation continue.
-                // We also do nothing when ae==IGNORE
+        if (ae == AnimationEvent.IGNORE) {
+            if (this.animation != null) {
                 return;
             }
-        }
 
-        Animation newAnimation;
-
-        // What do we do when an animation is in progress. Either replace it, ignore the new animation or merge them.
-        if (ae == AnimationEvent.FAST_FORWARD) {
+        } else if (ae == AnimationEvent.FAST_FORWARD) {
             if ((this.animation != null) && (!this.animation.isFinished())) {
                 this.animation.fastForward(this);
-            }            
+            }
+
+        } else if (ae == AnimationEvent.REPLACE) {
+            this.animation = null;
         }
-        
-        if ( (ae == AnimationEvent.IGNORE) && (this.animation != null) ) {
+
+        if (animation == null) {
+            this.animation = null;
             return;
         }
-        
 
-        if ((ae == AnimationEvent.SEQUENCE) || ((ae == AnimationEvent.PARALLEL)) ) {
+        if ( (this.animation != null) && ((ae == AnimationEvent.SEQUENCE) || ((ae == AnimationEvent.PARALLEL)))) {
             // Merge the two animations (either in sequence or in parallel, depending on "ae")
             CompoundAnimation ca = new CompoundAnimation(ae == AnimationEvent.SEQUENCE);
-            ca.add(this.getAnimation());
+            ca.add(this.animation);
             ca.add(animation.copy());
             ca.startExceptFirst(this);
-            newAnimation = ca;
+            this.animation = ca;
         } else {
-            newAnimation = animation.copy();
-            newAnimation.start(this);
+            this.animation = animation.copy();
+            this.animation.start(this);
         }
-        
-        this.animation = newAnimation;
-        AbstractAnimation.tick(this.animation, this);
+
+        // AbstractAnimation.tick(this.animation, this);
     }
 
     public Animation getAnimation()
@@ -756,7 +737,7 @@ public class Actor implements PropertySubject<Actor>
         if (this.getStage() == null) {
             return false;
         }
-        
+
         Layout layout = Itchy.getGame().getLayout();
         for (Layer layer : layout.getLayers()) {
             Stage stage = layer.getStage();

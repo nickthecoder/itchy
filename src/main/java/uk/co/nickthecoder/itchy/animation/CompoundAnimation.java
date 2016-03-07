@@ -101,7 +101,6 @@ public class CompoundAnimation extends AbstractAnimation
             this.sop = new Parallel(this, actor);
         }
         this.sop.startExceptFirst(actor);
-
     }
 
     @Override
