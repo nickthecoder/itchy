@@ -127,15 +127,15 @@
     </costume>
     <costume name="player-blue" defaultZOrder="50" order="50" showInDesigner="true" extends="player" role="player.py">
       <pose name="default" pose="player-blue"/>
-      <properties clan="none"/>
+      <properties clan="blue"/>
     </costume>
     <costume name="player-green" defaultZOrder="50" order="50" showInDesigner="true" extends="player" role="player.py">
       <pose name="default" pose="player-green"/>
-      <properties clan="none"/>
+      <properties clan="green"/>
     </costume>
     <costume name="player-red" defaultZOrder="50" order="50" showInDesigner="true" extends="player" role="player.py">
       <pose name="default" pose="player-red"/>
-      <properties clan="none"/>
+      <properties clan="red"/>
     </costume>
     <costume name="pointer" defaultZOrder="99" order="99" showInDesigner="true">
       <pose name="default" pose="pointer"/>
