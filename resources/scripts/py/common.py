@@ -1,9 +1,11 @@
-from uk.co.nickthecoder.itchy import Itchy, Actor, Role, AbstractRole, CostumeFeatures #@UnusedImport
+from uk.co.nickthecoder.itchy import Itchy, Actor, Actor, Role, AbstractRole, CostumeFeatures #@UnusedImport
 from uk.co.nickthecoder.itchy import Director, AbstractDirector #@UnusedImport
 from uk.co.nickthecoder.itchy import SceneDirector, PlainSceneDirector #@UnusedImport
 from uk.co.nickthecoder.itchy import Input #@UnusedImport
 from uk.co.nickthecoder.itchy import Pose, ImagePose, PoseResource, DynamicPoseResource #@UnusedImport
 from uk.co.nickthecoder.itchy import MacroRecord, MacroPlayback #@UnusedImport
+
+from uk.co.nickthecoder.itchy.Actor import AnimationEvent
 
 from uk.co.nickthecoder.itchy import ZOrderStage, StageView, GridStageConstraint, WrappedStageView #@UnusedImport
 
@@ -22,6 +24,7 @@ from uk.co.nickthecoder.itchy.property import FileProperty, ChoiceProperty, RGBA
 
 from uk.co.nickthecoder.jame import Surface, Rect, RGBA #@UnusedImport
 from uk.co.nickthecoder.jame.event import MouseButtonEvent #@UnusedImport
+
 
 from java.util import ArrayList #@UnusedImport
 from java.util import Random #@UnusedImport
