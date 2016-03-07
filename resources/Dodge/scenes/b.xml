@@ -3,7 +3,7 @@
   <layer name="background"/>
   <layer name="main">
     <actor costume="player-red" x="417.0" y="303.0" zOrder="50" scale="2.0">
-      <role maxSpeed="10.0"/>
+      <role maxSpeed="10.0" clanPeriod="0.0" clans=""/>
     </actor>
     <actor costume="rectangle-4" x="645.0" y="426.0" zOrder="60" scale="2.0">
       <role vx="-4.0" vy="4.0" rotation="0.0"/>

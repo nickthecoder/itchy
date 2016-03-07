@@ -1,4 +1,4 @@
-<scene name="a" layout="default" sceneDirector="play.py">
+<scene name="a" layout="default" sceneDirector="play.py" showMouse="true">
   <sceneDirector speedUp="0.1"/>
   <layer name="background"/>
   <layer name="main">

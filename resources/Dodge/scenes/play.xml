@@ -7,7 +7,7 @@
     <actor costume="wall-h" x="400.0" y="25.0" zOrder="10"/>
     <actor costume="wall-h" x="400.0" y="575.0" zOrder="10"/>
     <actor costume="player-red" x="417.0" y="303.0" zOrder="50" scale="2.0">
-      <role maxSpeed="10.0"/>
+      <role maxSpeed="10.0" clanPeriod="0.0" clans=""/>
     </actor>
     <actor costume="rectangle-3" x="170.0" y="431.0" zOrder="60" scale="2.0">
       <role vx="4.0" vy="4.0" rotation="0.0"/>

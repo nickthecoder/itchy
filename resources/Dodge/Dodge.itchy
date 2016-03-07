@@ -54,15 +54,26 @@
         <color targetColor="#0c21b9ff" ticks="60" ease="linear"/>
       </sequence>
     </animation>
+    <animation name="clickMe">
+      <sequence sequence="true" loops="1">
+        <alpha target="0.0" ticks="0" ease="linear"/>
+        <parallel sequence="false" loops="1">
+          <alpha target="255.0" ticks="60" ease="easeInOutCirc"/>
+          <sequence sequence="true" loops="0">
+            <scale target="1.5" ticks="60" ease="easeOut"/>
+            <scale target="1.0" ticks="60" ease="easeIn"/>
+          </sequence>
+        </parallel>
+      </sequence>
+    </animation>
     <animation name="fadeInstructions">
       <sequence sequence="true" loops="1">
         <alpha target="0.0" ticks="300" ease="easeInOut"/>
       </sequence>
     </animation>
-    <animation name="gameOver">
+    <animation name="fadeOut">
       <sequence sequence="true" loops="1">
-        <alpha target="0.0" ticks="0" ease="linear"/>
-        <alpha target="255.0" ticks="60" ease="easeIn"/>
+        <alpha target="0.0" ticks="30" ease="easeIn"/>
       </sequence>
     </animation>
     <animation name="green">
@@ -99,9 +110,10 @@
       <pose name="default" pose="ball-4"/>
       <properties clan="red"/>
     </costume>
-    <costume name="gameOver" defaultZOrder="0" order="0" showInDesigner="true" role="uk.co.nickthecoder.itchy.role.MessageButton">
+    <costume name="clickMe" defaultZOrder="0" order="0" showInDesigner="true" role="uk.co.nickthecoder.itchy.role.MessageButton">
       <font name="default" font="veraBold" fontSize="48" color="#ffffffff" xAlignment="0.5" yAlignment="0.5" marginTop="0" marginRight="0" marginBottom="0" marginLeft="0"/>
-      <animation name="default" animation="gameOver"/>
+      <animation name="clicked" animation="fadeOut"/>
+      <animation name="default" animation="clickMe"/>
     </costume>
     <costume name="instructions" defaultZOrder="95" order="95" showInDesigner="true">
       <font name="default" font="veraBold" fontSize="22" color="#ffffffff" xAlignment="0.5" yAlignment="0.5" marginTop="0" marginRight="0" marginBottom="0" marginLeft="0"/>
@@ -115,15 +127,15 @@
     </costume>
     <costume name="player-blue" defaultZOrder="50" order="50" showInDesigner="true" extends="player" role="player.py">
       <pose name="default" pose="player-blue"/>
-      <properties clan="blue"/>
+      <properties clan="none"/>
     </costume>
     <costume name="player-green" defaultZOrder="50" order="50" showInDesigner="true" extends="player" role="player.py">
       <pose name="default" pose="player-green"/>
-      <properties clan="green"/>
+      <properties clan="none"/>
     </costume>
     <costume name="player-red" defaultZOrder="50" order="50" showInDesigner="true" extends="player" role="player.py">
       <pose name="default" pose="player-red"/>
-      <properties clan="red"/>
+      <properties clan="none"/>
     </costume>
     <costume name="pointer" defaultZOrder="99" order="99" showInDesigner="true">
       <pose name="default" pose="pointer"/>

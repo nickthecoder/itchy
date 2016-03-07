@@ -15,9 +15,9 @@ public abstract class AbstractScrollableView extends AbstractView implements Scr
 
     public AbstractScrollableView()
     {
-        this( new Rect( 0,0,640,480) );
+        this(new Rect(0, 0, 640, 480));
     }
-    
+
     public AbstractScrollableView(Rect position)
     {
         super(position);
@@ -87,6 +87,27 @@ public abstract class AbstractScrollableView extends AbstractView implements Scr
     {
         return this.worldRect.y + super.getWorldY(screenY);
 
+    }
+
+    /**
+     * Returns the x coordinate of the mouse pointer in this view's coordinate system.
+     * The position of the view on the screen, and also the scroll offset is taken into account.
+     */
+    public double getMouseX()
+    {
+        return getWorldX(Itchy.getMouseX());
+    }
+
+    /**
+     * Returns the y coordinate of the mouse pointer in this view's coordinate system.
+     * The position of the view on the screen, and also the scroll offset is taken into account.
+     *
+     * The direction of the Y axis is also taken care of. Stage views have the Y axis pointing upwards,
+     * whereas raw mouse events have (0,0) in the top left, with the y axis pointing downwards.
+     */
+    public double getMouseY()
+    {
+        return getWorldY(Itchy.getMouseY());
     }
 
     @Override

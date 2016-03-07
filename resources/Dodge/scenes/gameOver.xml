@@ -1,8 +1,8 @@
 <scene name="gameOver" layout="popup" sceneDirector="uk.co.nickthecoder.itchy.PlainSceneDirector" showMouse="true">
   <layer name="popup">
-    <text costume="gameOver" x="400.0" y="300.0" font="veraBold" fontSize="48.0" text="Game Over" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+    <text costume="clickMe" x="400.0" y="300.0" font="veraBold" fontSize="48.0" text="Game Over" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <role message="restart"/>
-      <makeup dx="4" dy="4"/>
+      <makeup dx="4" dy="-4"/>
     </text>
   </layer>
 </scene>

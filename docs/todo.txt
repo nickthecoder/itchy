@@ -16,4 +16,3 @@ BUGS
 ====
 
 Cannot start a new animation from a finish event of an old animation (Dodge 'Em Player wanted to do it)
-

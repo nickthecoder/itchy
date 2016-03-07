@@ -59,10 +59,12 @@ class Play(PlainSceneDirector) :
 
     def onMessage( self, message ) :
 
+        print "Message : ", message
         if message == "start" :
             self.playing = True
-            game.findActorById( "start" ).deathEvent("clicked")
-
+            game.findActorById( "start" ).deathEvent("clicked", None, AnimationEvent.REPLACE)
+            #game.findActorById( "start" ).deathEvent("clicked" )
+            
         if message == "restart" :
             game.director.startScene( game.sceneName )
             
