@@ -9,27 +9,20 @@ class Director(AbstractDirector) :
         self.lives = 3
       
     def onStartingScene(self, sceneName) :
-        
         if game.pause.isPaused() :
             game.pause.unpause()
-            
-        if sceneName == "menu" and game.getSceneName() == "menu" :
-            return True
-        
-        transition = SceneTransition.fade()
-        
-        if game.getSceneName() == "menu" :
-            transition = SceneTransition.slideRight()
 
-        if sceneName == "menu" :
-            transition = SceneTransition.slideLeft()
+        transition = AnimationSceneTransition.slideUp()
+        
+        if sceneName == "about" :
+            transition = AnimationSceneTransition.slideRight()
+
+        elif sceneName == "menu" :
+            transition = AnimationSceneTransition.slideLeft()
             self.reset();
 
-        self.sceneTransition = SceneTransition(transition)
-        self.sceneTransition.prepare()
-
-    def onStartedScene(self) :        
-        self.sceneTransition.begin()
+        self.sceneTransition = AnimationSceneTransition(transition)
+        AbstractDirector.onStartingScene(self,sceneName)
 
 
     def reset(self) :

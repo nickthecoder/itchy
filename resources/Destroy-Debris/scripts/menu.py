@@ -24,8 +24,9 @@ class Menu(PlainSceneDirector) :
             game.startScene("easy-1")
             
         elif self.inputMenu.matches(event) :
-            game.startScene("menu")
-            
+            if game.sceneName != "menu" :
+                game.startScene("menu")
+                        
         elif self.inputAbout.matches(event) :
             game.startScene("about")
     

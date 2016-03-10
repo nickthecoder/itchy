@@ -23,7 +23,7 @@ import uk.co.nickthecoder.itchy.collision.ActorCollisionStrategy;
 import uk.co.nickthecoder.itchy.collision.Neighbourhood;
 import uk.co.nickthecoder.itchy.collision.NeighbourhoodCollisionStrategy;
 import uk.co.nickthecoder.itchy.collision.StandardNeighbourhood;
-import uk.co.nickthecoder.itchy.extras.SceneTransition;
+import uk.co.nickthecoder.itchy.extras.AnimationSceneTransition;
 import uk.co.nickthecoder.jame.Surface;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 
@@ -46,8 +46,6 @@ public class DrunkInvaders extends AbstractDirector
     Neighbourhood neighbourhood;
 
     private Role info;
-
-    public boolean transitioning = false;
 
     public WorldRectangle worldBounds;
 
@@ -155,42 +153,34 @@ public class DrunkInvaders extends AbstractDirector
         play();
     }
 
-    SceneTransition sceneTransition;
-    
     @Override
     public void onStartingScene(String sceneName)
     {
-        this.neighbourhood.clear();
         Animation transition = new CompoundAnimation(false)
-            .add(SceneTransition.slideUp())
-            .add(SceneTransition.fade());
+            .add(AnimationSceneTransition.slideUp())
+            .add(AnimationSceneTransition.fade());
 
         if ("about".equals(sceneName)) {
             transition = new CompoundAnimation(false)
-                .add(SceneTransition.slideRight())
-                .add(SceneTransition.fade());
+                .add(AnimationSceneTransition.slideRight())
+                .add(AnimationSceneTransition.fade());
 
         } else if ("levels".equals(sceneName)) {
             transition = new CompoundAnimation(false)
-                .add(SceneTransition.slideRight())
-                .add(SceneTransition.fade());
+                .add(AnimationSceneTransition.slideRight())
+                .add(AnimationSceneTransition.fade());
 
         } else if ("menu".equals(sceneName)) {
             transition = new CompoundAnimation(false)
-                .add(SceneTransition.slideLeft())
-                .add(SceneTransition.fade());
+                .add(AnimationSceneTransition.slideLeft())
+                .add(AnimationSceneTransition.fade());
         }
 
-        this.transitioning = true;
-        this.sceneTransition = new SceneTransition(transition);
-        this.sceneTransition.prepare();
+        this.setSceneTransition( new AnimationSceneTransition(transition) );
 
-    }
-    
-    @Override
-    public void onStartedScene()
-    {
-        this.sceneTransition.begin();
+        super.onStartingScene(sceneName);
+        this.neighbourhood.clear();
+
     }
 
     @Override
@@ -204,9 +194,6 @@ public class DrunkInvaders extends AbstractDirector
 
         } else if ("reset".equals(message)) {
             this.game.getPreferences().clear();
-
-        } else if (message == SceneTransition.COMPLETE) {
-            this.transitioning = false;
         }
     }
 

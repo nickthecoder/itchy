@@ -17,7 +17,7 @@ from uk.co.nickthecoder.itchy.role import PlainRole, ButtonRole, ProgressBar, Mo
 from uk.co.nickthecoder.itchy.role import Companion, Follower, Explosion, OnionSkin, Projectile, Talk, TalkProjectile #@UnusedImport
 from uk.co.nickthecoder.itchy.role import FollowerBuilder, ExplosionBuilder, OnionSkinBuilder, ProjectileBuilder, TalkBuilder, TalkProjectileBuilder #@UnusedImport
 
-from uk.co.nickthecoder.itchy.extras import Timer, SceneTransition, SimpleMousePointer, Fragments, Pixelator #@UnusedImport
+from uk.co.nickthecoder.itchy.extras import Timer, SceneTransition, AnimationSceneTransition, SimpleMousePointer, Fragments, Pixelator #@UnusedImport
 
 from uk.co.nickthecoder.itchy.property import StringProperty, BooleanProperty, DoubleProperty, IntegerProperty #@UnusedImport
 from uk.co.nickthecoder.itchy.property import FileProperty, ChoiceProperty, RGBAProperty #@UnusedImport

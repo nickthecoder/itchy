@@ -6,6 +6,7 @@ package uk.co.nickthecoder.itchy;
 
 import java.util.prefs.Preferences;
 
+import uk.co.nickthecoder.itchy.extras.SceneTransition;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
@@ -16,6 +17,9 @@ import uk.co.nickthecoder.jame.event.WindowEvent;
 public class AbstractDirector implements Director
 {
     protected Game game;
+    
+    protected SceneTransition sceneTransition;
+    
     
     public Game getGame()
     {
@@ -28,6 +32,15 @@ public class AbstractDirector implements Director
         this.game = game;
     }
 
+    public void setSceneTransition( SceneTransition sceneTransition )
+    {
+        if (this.sceneTransition != null) {
+            this.sceneTransition.complete();
+        }
+        this.sceneTransition = sceneTransition;
+    }
+    
+    
     @Override
     public void onStarted()
     {
@@ -35,12 +48,18 @@ public class AbstractDirector implements Director
 
     @Override
     public void onStartingScene(String sceneName)
-    {    
+    {
+        if (this.sceneTransition != null) {
+            this.sceneTransition.prepare();
+        }
     }
 
     @Override
     public void onStartedScene()
     {    
+        if (this.sceneTransition != null) {
+            this.sceneTransition.begin();
+        }
     }
     
     /**
