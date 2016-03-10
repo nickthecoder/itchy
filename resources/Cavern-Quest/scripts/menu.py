@@ -9,7 +9,7 @@ class Menu(PlainSceneDirector) :
     
     def tick(self) :
         if self.inputStart.pressed() :
-            Itchy.getGame().director.startScene( "cavernQuest" )
+            Itchy.getGame().startScene( "cavernQuest" )
 
 
     # Boiler plate code - no need to change this

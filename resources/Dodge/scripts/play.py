@@ -24,14 +24,14 @@ class Play(PlainSceneDirector) :
     def tick(self) :
         
         if self.inputRestart.pressed() :
-            game.director.startScene( game.sceneName )
+            game.startScene( game.sceneName )
 
         if self.inputReset.pressed() :
             self.highScore = 0
             game.preferences.putInt( self.highScoreKey(), 0 )
 
         if self.inputExit.pressed() :
-            game.director.startScene("menu")
+            game.startScene("menu")
 
         if self.playing :
             self.score += 1
@@ -65,7 +65,7 @@ class Play(PlainSceneDirector) :
             game.findActorById( "start" ).deathEvent("clicked", None, AnimationEvent.REPLACE)
             
         if message == "restart" :
-            game.director.startScene( game.sceneName )
+            game.startScene( game.sceneName )
             
 
     def highScoreKey(self) :

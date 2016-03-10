@@ -68,8 +68,7 @@ class Director(AbstractDirector) :
         
         view.scrollTo( newX, newY );
     
-    def startScene( self, sceneName ) :
-        AbstractDirector.startScene(self,sceneName)
+    def onStartingScene( self, sceneName ) :
         print "starting scene", sceneName
     
         # If we were playing a macro, or recording a macro, then stop.

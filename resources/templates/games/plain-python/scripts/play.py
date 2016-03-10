@@ -16,7 +16,7 @@ class Play(PlainSceneDirector) :
         
     def tick(self) :
         if self.inputExit.pressed() :
-            game.director.startScene("menu")
+            game.startScene("menu")
 
     # TODO Other methods include :
     # onMouseDown, onMouseUp, onMouseMove, onMessage

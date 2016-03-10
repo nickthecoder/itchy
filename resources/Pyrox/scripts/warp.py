@@ -36,7 +36,7 @@ class Warp(GridRole) :
 
     def onInvaded( self, invader ) :
         super(Warp,self).onInvaded(invader)
-        game.director.startScene( self.scene )
+        game.startScene( self.scene )
 
     def isCompleted(self):
         return game.preferences.node("completed").getBoolean( self.scene, False )

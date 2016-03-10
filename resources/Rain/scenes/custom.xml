@@ -2,17 +2,6 @@
   <sceneDirector speed="5" maxSpeed="15" speedUpAfter="10"/>
   <layer name="background"/>
   <layer name="main">
-    <actor costume="background" y="600.0" id="" colorize=""/>
-    <text x="403.0" y="550.0" zOrder="3" id="" font="Boycott" fontSize="65.0" text="Custom" color="#93472eff" colorize=""/>
-    <text x="73.0" y="576.0" zOrder="4" id="" font="Boycott" fontSize="35.0" text="Score :" colorize=""/>
-    <text x="31.0" y="538.0" zOrder="5" id="" font="Boycott" fontSize="32.0" text="0000" color="#93190eff" xAlignment="0.0" colorize="" role="uk.co.nickthecoder.itchy.role.NumberValue">
-      <role access="sceneDirector.score" errorValue="Err" nullValue="null" updateInterval="0.1" quiet="false" formatPattern="0000"/>
-    </text>
-    <text x="675.0" y="530.0" zOrder="6" id="" font="Boycott" fontSize="32.0" text="0000" color="#93190eff" xAlignment="0.0" colorize="" role="uk.co.nickthecoder.itchy.role.NumberValue">
-      <role access="sceneDirector.highScore" errorValue="Err" nullValue="Null" updateInterval="-1.0" quiet="false" formatPattern="0000"/>
-    </text>
-    <text x="704.0" y="570.0" zOrder="18" id="" font="Boycott" fontSize="35.0" text="High Score" color="#8f9688ff" colorize=""/>
-    <actor costume="player" x="421.0" y="20.0" zOrder="50" id="" colorize="" role="Player.groovy"/>
-    <actor costume="wally" x="-82.0" y="231.0" activationDelay="15.0" zOrder="100" id="" colorize="" role="Wally.groovy"/>
+    <text x="403.0" y="550.0" zOrder="3" font="Boycott" fontSize="65.0" text="Custom" color="#93472eff"/>
   </layer>
 </scene>

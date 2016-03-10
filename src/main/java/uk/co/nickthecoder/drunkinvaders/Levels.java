@@ -5,6 +5,7 @@
 package uk.co.nickthecoder.drunkinvaders;
 
 import uk.co.nickthecoder.itchy.Input;
+import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.PlainSceneDirector;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 
@@ -25,7 +26,7 @@ public class Levels extends PlainSceneDirector
     public void onKeyDown( KeyboardEvent ke )
     {
         if (this.inputExit.matches(ke)) {
-            DrunkInvaders.director.startScene("menu");
+            Itchy.getGame().startScene("menu");
             ke.stopPropagation();
         }
 

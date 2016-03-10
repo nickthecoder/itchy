@@ -1,9 +1,6 @@
 from common import * #@UnusedWildImport
 
 properties = ArrayList()
-# TODO declare properties here. Note that you must also initialise them in __init__
-# e.g.
-# properties.add( StringProperty( "myString" ).hint("My green label" ) )
 
 class Alien(AbstractRole) :
 
@@ -19,9 +16,6 @@ class Alien(AbstractRole) :
             self.actor.direction = self.testValue
             self.actor.appearance.alpha = self.testValue 
 
-
-    # TODO Other methods include :
-    # onSceneCreated, onDetach, onKill, onMouseDown, onMouseUp, onMouseMove, createCostumeProperties
 
     # Boiler plate code - no need to change this
     def getProperties(self):

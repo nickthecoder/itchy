@@ -29,7 +29,7 @@ class Play(PlainSceneDirector) :
     def tick(self) :
         
         if self.inputExit.pressed() :
-            game.director.startScene( "start" )
+            game.startScene( "start" )
         
         self.time = (Date().time - self.startTime) / 1000
 

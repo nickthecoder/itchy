@@ -1,0 +1,6 @@
+<scene name="failed" layout="default" sceneDirector="uk.co.nickthecoder.itchy.PlainSceneDirector" showMouse="true">
+  <layer name="background"/>
+  <layer name="main">
+    <text x="405.0" y="369.0" font="vera" fontSize="22.0" text="Test Failed, See stout for details." color="#d82323ff"/>
+  </layer>
+</scene>

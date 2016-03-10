@@ -314,7 +314,7 @@ public class Game
         Itchy.startGame(this);
         this.director.onStarted();
         if (!StringUtils.isBlank(this.resources.getGameInfo().initialScene)) {
-            this.director.startScene(this.resources.getGameInfo().initialScene);
+            this.startScene(this.resources.getGameInfo().initialScene);
         }
         running = true;
         Itchy.mainLoop();
@@ -334,7 +334,7 @@ public class Game
 
         if (!StringUtils.isBlank(sceneName)) {
             clear();
-            this.director.startScene(sceneName);
+            this.startScene(sceneName);
         }
         running = true;
         Itchy.mainLoop();
@@ -813,6 +813,11 @@ public class Game
         }
 
         this.getSceneDirector().tick();
+        
+        if (this.abortTicks) {
+            return;
+        }
+
         for (Stage stage : this.getStages()) {
             stage.tick();
             if (this.abortTicks) {
@@ -826,6 +831,16 @@ public class Game
     public SceneDirector getSceneDirector()
     {
         return this.sceneDirector;
+    }
+
+    public void setSceneDirector(SceneDirector sceneDirector)
+    {
+        if (this.sceneDirector != null) {
+            this.sceneDirector.onDeactivate();
+        }
+        this.sceneDirector = sceneDirector;
+        
+        this.sceneDirector.onActivate();
     }
 
     public boolean hasScene(String sceneName)
@@ -845,7 +860,7 @@ public class Game
         if (scene == null) {
             return null;
         }
-        // Prevent a concurrent modification exception by aborting the ticks after the current stage as ticked.
+        // Prevent a concurrent modification exception by aborting the ticks after the current stage has ticked.
         this.abortTicks = true;
 
         this.layout.merge(scene.layout);
@@ -886,6 +901,7 @@ public class Game
     public boolean startScene(String sceneName)
     {
         this.abortTicks = true;
+        this.director.onStartingScene(sceneName);
 
         if (this.pause.isPaused()) {
             this.pause.unpause();
@@ -932,10 +948,11 @@ public class Game
         }
 
         // Fire sceneDirector's onActivate
-        this.getSceneDirector().onActivate();
+        this.sceneDirector.onActivate();
 
         Itchy.frameRate.reset();
 
+        this.director.onStartedScene();
         return true;
     }
 

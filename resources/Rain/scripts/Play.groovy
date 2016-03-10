@@ -34,6 +34,11 @@ public class Play extends PlainSceneDirector
     
     def inputPause
 
+    void loading(Scene scene)
+    {
+        Itchy.game.mergeScene("common")
+    }
+    
     void onActivate()
     {
         inputRestart = Input.find('restart')

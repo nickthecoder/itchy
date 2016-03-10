@@ -348,8 +348,13 @@
     </costume>
   </costumes>
   <scenes>
+    <scene name="animation-001"/>
+    <scene name="animation-002"/>
     <scene name="explosions"/>
+    <scene name="failed"/>
+    <scene name="loadEvents"/>
     <scene name="menu"/>
+    <scene name="passed"/>
     <scene name="playground"/>
     <scene name="profiles"/>
     <scene name="projectiles"/>

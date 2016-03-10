@@ -141,7 +141,20 @@ public class SceneWriter extends XMLWriter
     private void writeSceneActorAttributes(Actor sceneActor, Role role) throws XMLException
     {
         writeProperties(sceneActor);
+
+        // The default heading is zero, but really actors are set to the pose's default direction,
+        // which may NOT be zero, so add the attribute manually if need be.
+        if ((sceneActor.getHeading() == 0) && (sceneActor.getAppearance().getPose().getDirection() != 0)) {
+            attribute("heading", sceneActor.getHeading());
+        }
+        
         writeProperties(sceneActor.getAppearance());
+        
+        // The default direction is zero, but really actors are set to the pose's default direction,
+        // which may NOT be zero, so add the attribute manually if need be.
+        if ((sceneActor.getAppearance().getDirection()  == 0) && (sceneActor.getAppearance().getPose().getDirection() != 0)) {
+            attribute("direction", sceneActor.getAppearance().getDirection());
+        }
         
         String defaultRole = PlainRole.class.getName();
         Costume costume = sceneActor.getCostume();

@@ -5,6 +5,7 @@
 package uk.co.nickthecoder.drunkinvaders;
 
 import uk.co.nickthecoder.itchy.Input;
+import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.PlainSceneDirector;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.Keys;
@@ -37,16 +38,16 @@ public class Menu extends PlainSceneDirector
         }
 
         if ((ke.symbol == Keys.p) || (ke.symbol == Keys.RETURN)) {
-            DrunkInvaders.director.startScene("levels");
+            Itchy.getGame().startScene("levels");
             ke.stopPropagation();
         }
 
         if ((ke.symbol == Keys.a) || (ke.symbol == Keys.c)) {
-            DrunkInvaders.director.startScene("about");
+            Itchy.getGame().startScene("about");
         }
 
         if ((ke.symbol == Keys.F12) || (ke.symbol == Keys.e)) {
-            DrunkInvaders.director.getGame().startEditor();
+            Itchy.getGame().startEditor();
         }
     }
 

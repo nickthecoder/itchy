@@ -1,6 +1,11 @@
 Current Tasks
 =============
 
+Make SceneTransition a part of Director?
+    Reset it when completed?
+    Remove need for self.transitioning boolean.
+    Debris and DrunkInvaders need updating
+     
 Make some gates need balloons 2, rocks 2, instead of 3, 3?
     Or make a new balloons3?
 
@@ -14,5 +19,5 @@ Destroy-Debris
 
 BUGS
 ====
-
+ 
 Cannot start a new animation from a finish event of an old animation (Dodge 'Em Player wanted to do it)

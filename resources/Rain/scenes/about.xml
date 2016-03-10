@@ -1,19 +1,25 @@
 <scene name="about" layout="default" sceneDirector="Menu.groovy" showMouse="true">
   <layer name="background"/>
   <layer name="main">
-    <actor costume="background" y="600.0" zOrder="1" id="" alpha="90.0" colorize=""/>
-    <text x="388.0" y="518.0" zOrder="3" id="" font="BlackCasper" fontSize="102.0" text="It's Gonna Rain" color="#3981afff" colorize=""/>
-    <text costume="button" x="173.0" y="46.0" zOrder="5" id="" font="Boycott" fontSize="34.0" text="Reset Highscores" color="#ffffffff" colorize="" role="uk.co.nickthecoder.itchy.role.MessageButton">
-      <role message="resetHighScores"/>
+    <actor costume="background" y="600.0" zOrder="1" alpha="90.0"/>
+    <text x="388.0" y="518.0" zOrder="3" font="BlackCasper" fontSize="102.0" text="It's Gonna Rain" color="#957537ff" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+      <makeup dx="4" dy="-4"/>
     </text>
-    <text costume="button" x="404.0" y="408.0" zOrder="6" id="" font="Boycott" fontSize="26.0" text="By Nick Robinson" color="#ffffffff" colorize="" role="uk.co.nickthecoder.itchy.role.LinkButton">
+    <text costume="button" x="402.0" y="343.0" zOrder="4" font="Boycott" fontSize="26.0" text="By Nick Robinson" color="#637e60ff" role="uk.co.nickthecoder.itchy.role.LinkButton" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <role url="http://nickthecoder.co.uk/"/>
+      <makeup dx="4" dy="-4"/>
     </text>
-    <text costume="button" x="399.0" y="454.0" zOrder="7" id="" font="Boycott" fontSize="29.0" text="Itchy Powered" color="#ffffffff" colorize="" role="uk.co.nickthecoder.itchy.role.LinkButton">
-      <role url="http://nickthecoder.co.uk/software/view/Itchy"/>
+    <text costume="button" x="173.0" y="46.0" zOrder="5" font="Boycott" fontSize="34.0" text="Reset Highscores" color="#694cffff" role="uk.co.nickthecoder.itchy.role.MessageButton" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+      <role message="resetHighScores"/>
+      <makeup dx="4" dy="-4"/>
     </text>
-    <text costume="button" x="389.0" y="188.0" zOrder="8" id="" font="BlackCasper" fontSize="80.0" text="Back" color="#ffffffff" colorize="" role="uk.co.nickthecoder.itchy.role.SceneButton">
+    <text costume="button" x="406.0" y="444.0" zOrder="7" font="Boycott" fontSize="29.0" text="Itchy Powered" color="#637e60ff" role="uk.co.nickthecoder.itchy.role.LinkButton" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
+      <role url="http://nickthecoder.co.uk/wiki/view/software/Itchy"/>
+      <makeup dx="4" dy="-4"/>
+    </text>
+    <text costume="button" x="674.0" y="73.0" zOrder="8" font="BlackCasper" fontSize="80.0" text="Back" color="#694cffff" role="uk.co.nickthecoder.itchy.role.SceneButton" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <role sceneName="menu"/>
+      <makeup dx="6" dy="-6" color="#140246ff"/>
     </text>
   </layer>
 </scene>

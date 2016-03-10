@@ -33,6 +33,16 @@ public class AbstractDirector implements Director
     {
     }
 
+    @Override
+    public void onStartingScene(String sceneName)
+    {    
+    }
+
+    @Override
+    public void onStartedScene()
+    {    
+    }
+    
     /**
      * The default role is to do nothing more than forward the event to the current scene's {@link SceneDirector}.
      */
@@ -119,14 +129,6 @@ public class AbstractDirector implements Director
     	} catch (Exception e) {
     		e.printStackTrace();
     	}
-    }
-    
-    @Override
-    public boolean startScene( String sceneName )
-    {
-        this.game.startScene( sceneName );
-        
-        return true;
     }
     
     /**

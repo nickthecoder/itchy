@@ -8,8 +8,8 @@ class Director(AbstractDirector) :
         self.score = 0
         self.lives = 3
       
-    def startScene(self, sceneName) :
-
+    def onStartingScene(self, sceneName) :
+        
         if game.pause.isPaused() :
             game.pause.unpause()
             
@@ -17,6 +17,7 @@ class Director(AbstractDirector) :
             return True
         
         transition = SceneTransition.fade()
+        
         if game.getSceneName() == "menu" :
             transition = SceneTransition.slideRight()
 
@@ -24,19 +25,17 @@ class Director(AbstractDirector) :
             transition = SceneTransition.slideLeft()
             self.reset();
 
-        st = SceneTransition(transition)
-        st.prepare()
-        
-        result = AbstractDirector.startScene( self, sceneName )
-        if result:
-            st.begin()
+        self.sceneTransition = SceneTransition(transition)
+        self.sceneTransition.prepare()
 
-        return result
+    def onStartedScene(self) :        
+        self.sceneTransition.begin()
 
 
     def reset(self) :
         self.score = 0
         self.lives = 3
+    
     
     def onMessage(self, message) :
         if message == "start" :

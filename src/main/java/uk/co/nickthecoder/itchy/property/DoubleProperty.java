@@ -23,16 +23,35 @@ public class DoubleProperty<S> extends Property<S, Double>
         this.defaultValue = 0.0;
     }
 
-    public DoubleProperty<S> min( int value )
+    public DoubleProperty<S> min( double value )
     {
         this.minValue = value;
         return this;
     }
 
-    public DoubleProperty<S> max( int value )
+    public DoubleProperty<S> max( double value )
     {
         this.maxValue = value;
         return this;
+    }
+    
+    public boolean isDefaultValue( S subject )
+    {
+        try {
+            
+            Double value = this.getValue( subject );
+            Double defaultValue = this.getDefaultValue();
+            
+            if (value == null) {
+                return defaultValue == null;
+            }
+            
+            // Add zero so that -0.0 is treated the same as 0.0
+            return ((double) (value + 0)) == (double) defaultValue;
+            
+        } catch (Exception e) {
+            return false;
+        }        
     }
     
     @Override

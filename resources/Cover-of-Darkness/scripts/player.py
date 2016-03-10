@@ -72,7 +72,7 @@ class Player(AbstractRole) :
 
             exit = self.collisions("exit").get(0)
             if self.collected >= game.sceneDirector.collectables :
-                game.director.startScene( exit.nextLevel )
+                game.startScene( exit.nextLevel )
 
         for collectable in self.collisions("collectable") :
             self.collected += collectable.collect()

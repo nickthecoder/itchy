@@ -35,10 +35,6 @@ class Director(AbstractDirector) :
         
         view.scrollTo( newX, newY );
     
-    def startSceneXX( self, sceneName ) :
-        AbstractDirector.startScene(self,sceneName)
-        print "starting scene", sceneName
-    
     
     def onKeyDown(self,kevent) :
          

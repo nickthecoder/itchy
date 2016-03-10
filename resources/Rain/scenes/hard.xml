@@ -2,67 +2,53 @@
   <sceneDirector speed="7" maxSpeed="15" speedUpAfter="10"/>
   <layer name="background"/>
   <layer name="main">
-    <actor costume="background" y="600.0" zOrder="1" id="" colorize=""/>
-    <text x="384.0" y="559.0" zOrder="2" id="" font="Boycott" fontSize="72.0" text="Hard" color="#401c00ff" colorize=""/>
-    <text x="384.0" y="559.0" zOrder="3" id="" font="Boycott" fontSize="65.0" text="Hard" color="#93472eff" colorize=""/>
-    <text x="84.0" y="570.0" zOrder="4" id="" font="Boycott" fontSize="35.0" text="Score :" colorize=""/>
-    <text x="35.0" y="537.0" zOrder="5" id="" font="Boycott" fontSize="32.0" text="0000" color="#93190eff" xAlignment="0.0" colorize="" role="uk.co.nickthecoder.itchy.role.NumberValue">
-      <role access="sceneDirector.score" errorValue="Err" nullValue="null" updateInterval="0.1" quiet="false" formatPattern="0000"/>
-    </text>
-    <text x="675.0" y="532.0" zOrder="6" id="" font="Boycott" fontSize="32.0" text="0000" color="#93190eff" xAlignment="0.0" colorize="" role="uk.co.nickthecoder.itchy.role.NumberValue">
-      <role access="sceneDirector.highScore" errorValue="Err" nullValue="null" updateInterval="-1.0" quiet="false" formatPattern="0000"/>
-    </text>
-    <text y="1200.0" zOrder="7" id="" font="BlackCasper" fontSize="22.0" text="Top" color="#ffffffff" colorize=""/>
-    <actor costume="player" x="414.0" y="21.0" zOrder="8" id="" colorize="" role="Player.groovy"/>
-    <actor costume="drop1" x="91.0" y="639.0" zOrder="9" id="" colorize="" role="Drop.groovy">
+    <text x="384.0" y="559.0" zOrder="2" font="Boycott" fontSize="72.0" text="Hard" color="#401c00ff"/>
+    <text x="384.0" y="559.0" zOrder="3" font="Boycott" fontSize="65.0" text="Hard" color="#93472eff"/>
+    <text y="1200.0" zOrder="7" font="BlackCasper" fontSize="22.0" text="Top"/>
+    <actor costume="drop1" x="91.0" y="639.0" zOrder="9">
       <role distance="600"/>
     </actor>
-    <actor costume="drop1" x="633.0" y="1082.0" zOrder="10" id="" colorize="" role="Drop.groovy">
+    <actor costume="drop1" x="633.0" y="1082.0" zOrder="10">
       <role distance="610"/>
     </actor>
-    <actor costume="drop1" x="84.0" y="1037.0" zOrder="11" id="" colorize="" role="Drop.groovy">
+    <actor costume="drop1" x="84.0" y="1037.0" zOrder="11">
       <role distance="610"/>
     </actor>
-    <actor costume="drop1" x="699.0" y="1122.0" zOrder="12" id="" colorize="" role="Drop.groovy">
+    <actor costume="drop1" x="699.0" y="1122.0" zOrder="12">
       <role distance="600"/>
     </actor>
-    <actor costume="drop1" x="436.0" y="672.0" zOrder="13" id="" colorize="" role="Drop.groovy">
+    <actor costume="drop1" x="436.0" y="672.0" zOrder="13">
       <role distance="600"/>
     </actor>
-    <actor costume="drop1" x="799.0" y="707.0" zOrder="14" id="" colorize="" role="Drop.groovy">
+    <actor costume="drop1" x="799.0" y="707.0" zOrder="14">
       <role distance="600"/>
     </actor>
-    <actor costume="drop1" x="332.0" y="877.0" zOrder="15" id="" colorize="" role="Drop.groovy">
+    <actor costume="drop1" x="332.0" y="877.0" zOrder="15">
       <role distance="600"/>
     </actor>
-    <actor costume="drop1" x="679.0" y="911.0" zOrder="16" id="" colorize="" role="Drop.groovy">
+    <actor costume="drop1" x="679.0" y="911.0" zOrder="16">
       <role distance="600"/>
     </actor>
-    <actor costume="drop3" x="753.0" y="794.0" zOrder="17" id="" colorize="" role="Drop.groovy">
+    <actor costume="drop3" x="753.0" y="794.0" zOrder="17">
       <role distance="610"/>
     </actor>
-    <actor costume="drop3" x="254.0" y="652.0" zOrder="18" id="" colorize="" role="Drop.groovy">
+    <actor costume="drop3" x="254.0" y="652.0" zOrder="18">
       <role distance="600"/>
     </actor>
-    <actor costume="drop3" x="289.0" y="988.0" zOrder="19" id="" colorize="" role="Drop.groovy">
+    <actor costume="drop3" x="289.0" y="988.0" zOrder="19">
       <role distance="600"/>
     </actor>
-    <actor costume="drop2" x="123.0" y="781.0" zOrder="20" id="" colorize="" role="Drop.groovy">
+    <actor costume="drop2" x="123.0" y="781.0" zOrder="20">
       <role distance="720"/>
     </actor>
-    <actor costume="drop2" x="253.0" y="979.0" zOrder="21" id="" colorize="" role="Drop.groovy">
+    <actor costume="drop2" x="253.0" y="979.0" zOrder="21">
       <role distance="720"/>
     </actor>
-    <actor costume="drop2" x="445.0" y="1009.0" zOrder="22" id="" colorize="" role="Drop.groovy">
+    <actor costume="drop2" x="445.0" y="1009.0" zOrder="22">
       <role distance="720"/>
     </actor>
-    <actor costume="drop3" x="289.0" y="1124.0" zOrder="23" id="" colorize="" role="Drop.groovy">
+    <actor costume="drop3" x="289.0" y="1124.0" zOrder="23">
       <role distance="600"/>
-    </actor>
-    <text x="704.0" y="570.0" zOrder="24" id="" font="Boycott" fontSize="35.0" text="High Score" color="#8f9688ff" colorize=""/>
-    <actor costume="wally" x="-107.0" y="185.0" activationDelay="30.0" zOrder="25" id="" colorize="" role="Wally.groovy"/>
-    <actor costume="speed" x="74.0" y="506.0" zOrder="27" id="" colorize="" role="uk.co.nickthecoder.itchy.role.ProgressBar">
-      <role from="0.0" to="15.0" access="sceneDirector.speed" updatePeriod="1.0" horizontal="true"/>
     </actor>
   </layer>
 </scene>

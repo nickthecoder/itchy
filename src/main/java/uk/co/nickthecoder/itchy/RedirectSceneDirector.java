@@ -25,6 +25,6 @@ public class RedirectSceneDirector extends PlainSceneDirector
     @Override
     public void onLoaded()
     {
-        Itchy.getGame().getDirector().startScene( this.sceneName );
+        Itchy.getGame().startScene( this.sceneName );
     }
 }

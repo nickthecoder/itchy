@@ -184,7 +184,7 @@ public class Tetra extends AbstractDirector
             if (this.escapeTimer.isFinished()) {
                 this.game.addKeyListener(this); // See removeKeyListener in onKeyDown
                 this.level = getStartingLevel();
-                startScene("menu");
+                getGame().startScene("menu");
                 this.escapeTimer = null;
             }
             return;
@@ -419,7 +419,7 @@ public class Tetra extends AbstractDirector
                 }
             }
         }
-        startScene("main");
+        getGame().startScene("main");
         this.playing = true;
     }
 

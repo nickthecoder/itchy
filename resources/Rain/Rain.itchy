@@ -92,6 +92,18 @@
         <scale target="1.0" ticks="10" ease="easeInOutCubic"/>
       </sequence>
     </animation>
+    <animation name="pause">
+      <sequence sequence="true" loops="1">
+        <parallel sequence="false" loops="1">
+          <alpha target="0.0" ticks="0" ease="linear"/>
+          <alpha target="255.0" ticks="30" ease="easeOut"/>
+          <sequence sequence="true" loops="0">
+            <scale target="1.5" ticks="10" ease="easeOut"/>
+            <scale target="1.0" ticks="30" ease="easeOut"/>
+          </sequence>
+        </parallel>
+      </sequence>
+    </animation>
     <animation name="wally_boo">
       <sequence sequence="true" loops="1">
         <move dx="-30.0" dy="100.0" ticks="20" ease="easeOutQuad"/>
@@ -221,6 +233,11 @@
       <sound name="drip" sound="myLordMyLord" priority="2" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="PLAY_BOTH"/>
       <properties speedFactor="1.2"/>
     </costume>
+    <costume name="pause" defaultZOrder="0" order="0" showInDesigner="true">
+      <string name="deafult">Pause</string>
+      <font name="default" font="BlackCasper" fontSize="32" color="#a70000ff" xAlignment="0.5" yAlignment="0.5" marginTop="0" marginRight="0" marginBottom="0" marginLeft="0"/>
+      <animation name="default" animation="pause"/>
+    </costume>
     <costume name="player" defaultZOrder="50" order="0" showInDesigner="true" role="Player.groovy">
       <pose name="bones" pose="sheepBones"/>
       <pose name="default" pose="sheep"/>
@@ -261,6 +278,7 @@
   </costumes>
   <scenes>
     <scene name="about"/>
+    <scene name="common"/>
     <scene name="custom"/>
     <scene name="customise"/>
     <scene name="easy"/>
@@ -275,6 +293,14 @@
     <input name="restart" keys="RETURN,KP_ENTER"/>
   </inputs>
   <layouts>
+    <layout name="common" defaultLayer="glass">
+      <layer name="background" zOrder="0" x="0" y="0" width="800" height="600" viewClassName="uk.co.nickthecoder.itchy.StageView" stageClassName="uk.co.nickthecoder.itchy.ZOrderStage" stageConstraintClassName="uk.co.nickthecoder.itchy.NullStageConstraint">
+        <view enableMouse="false"/>
+      </layer>
+      <layer name="glass" zOrder="100" x="0" y="0" width="800" height="600" viewClassName="uk.co.nickthecoder.itchy.StageView" stageClassName="uk.co.nickthecoder.itchy.ZOrderStage" stageConstraintClassName="uk.co.nickthecoder.itchy.NullStageConstraint">
+        <view enableMouse="false"/>
+      </layer>
+    </layout>
     <layout name="default" defaultLayer="main">
       <layer name="background" zOrder="0" x="0" y="0" width="800" height="600" viewClassName="uk.co.nickthecoder.itchy.RGBAView" stageClassName="uk.co.nickthecoder.itchy.ZOrderStage" stageConstraintClassName="uk.co.nickthecoder.itchy.NullStageConstraint">
         <view color="#000000ff"/>

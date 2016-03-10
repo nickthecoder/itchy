@@ -28,7 +28,7 @@ class Menu(PlainSceneDirector) :
     def onKeyDown(self, event) :
         # Press a letter to start the scene.
         if game.hasScene( event.c ) :
-            game.director.startScene( event.c )
+            game.startScene( event.c )
         
         if self.inputNext.matches(event) :
             self.changeScene( 1 )

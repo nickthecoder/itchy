@@ -79,7 +79,7 @@ public class DrunkInvaders extends AbstractDirector
     }
 
     @Override
-    public void onKeyDown( KeyboardEvent ke )
+    public void onKeyDown(KeyboardEvent ke)
     {
         if (this.inputDebug.matches(ke)) {
             debug();
@@ -142,7 +142,7 @@ public class DrunkInvaders extends AbstractDirector
         }
     }
 
-    public ActorCollisionStrategy createCollisionStrategy( Actor actor )
+    public ActorCollisionStrategy createCollisionStrategy(Actor actor)
     {
         return new NeighbourhoodCollisionStrategy(actor, this.neighbourhood);
     }
@@ -155,11 +155,12 @@ public class DrunkInvaders extends AbstractDirector
         play();
     }
 
+    SceneTransition sceneTransition;
+    
     @Override
-    public boolean startScene( String sceneName )
+    public void onStartingScene(String sceneName)
     {
         this.neighbourhood.clear();
-
         Animation transition = new CompoundAnimation(false)
             .add(SceneTransition.slideUp())
             .add(SceneTransition.fade());
@@ -179,22 +180,21 @@ public class DrunkInvaders extends AbstractDirector
                 .add(SceneTransition.slideLeft())
                 .add(SceneTransition.fade());
         }
+
         this.transitioning = true;
-        SceneTransition st = new SceneTransition(transition);
-        st.prepare();
-        
-        boolean result = super.startScene( sceneName );
-        
-        if (result) {
-            st.begin();
-            this.transitioning = true;
-        }
-        
-        return result;
+        this.sceneTransition = new SceneTransition(transition);
+        this.sceneTransition.prepare();
+
+    }
+    
+    @Override
+    public void onStartedScene()
+    {
+        this.sceneTransition.begin();
     }
 
     @Override
-    public void onMessage( String message )
+    public void onMessage(String message)
     {
         if ("editor".equals(message)) {
             this.game.startEditor();
@@ -210,19 +210,19 @@ public class DrunkInvaders extends AbstractDirector
         }
     }
 
-    public void addAliens( int n )
+    public void addAliens(int n)
     {
         if (this.game.getSceneDirector() instanceof Level) {
             ((Level) (this.game.getSceneDirector())).addAliens(n);
         }
     }
 
-    public boolean completedLevel( int level )
+    public boolean completedLevel(int level)
     {
         return this.game.getPreferences().getBoolean("completedLevel" + level, false);
     }
 
-    public void play( int levelNumber )
+    public void play(int levelNumber)
     {
         this.levelNumber = levelNumber;
         this.play();
@@ -231,7 +231,7 @@ public class DrunkInvaders extends AbstractDirector
     public void play()
     {
         DecimalFormat df = new DecimalFormat("00");
-        this.startScene("level" + df.format(this.levelNumber));
+        getGame().startScene("level" + df.format(this.levelNumber));
     }
 
     public void debug()
@@ -239,7 +239,7 @@ public class DrunkInvaders extends AbstractDirector
         this.neighbourhood.debug();
     }
 
-    public static void main( String argv[] ) throws Exception
+    public static void main(String argv[]) throws Exception
     {
         Launcher.main(new String[] { "Drunk Invaders" });
     }

@@ -1,0 +1,10 @@
+<scene name="animation-002" layout="default" sceneDirector="animation002.py" showMouse="true">
+  <sceneDirector nextScene="loadEvents"/>
+  <layer name="background"/>
+  <layer name="main">
+    <actor costume="alien1a" x="50.0" y="300.0" heading="-90.0" id="0" direction="-90.0"/>
+    <actor costume="alien1a" x="90.0" y="300.0" heading="-90.0" id="1" direction="-90.0"/>
+    <actor costume="alien1a" x="130.0" y="300.0" heading="-90.0" id="2" direction="-90.0"/>
+    <actor costume="alien1a" x="170.0" y="300.0" heading="-90.0" id="3" direction="-90.0"/>
+  </layer>
+</scene>

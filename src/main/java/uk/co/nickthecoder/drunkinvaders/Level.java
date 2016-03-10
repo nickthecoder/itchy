@@ -6,6 +6,7 @@ package uk.co.nickthecoder.drunkinvaders;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Input;
+import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.PlainSceneDirector;
 import uk.co.nickthecoder.itchy.collision.CollisionStrategy;
 import uk.co.nickthecoder.itchy.collision.NeighbourhoodCollisionStrategy;
@@ -57,7 +58,7 @@ public class Level extends PlainSceneDirector
     {
         if (this.inputExit.matches(ke)) {
             this.ending = true;
-            DrunkInvaders.director.startScene("menu");
+            Itchy.getGame().startScene("menu");
             ke.stopPropagation();
         }
 
