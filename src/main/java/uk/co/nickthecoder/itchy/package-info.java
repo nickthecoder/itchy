@@ -1,5 +1,6 @@
 /**
  * Welcome to Itchy API documentation.
+ * <a style="float: right;" href="{@docRoot}/classDiagram.html" alt="class diagram"><img src="{@docRoot}/classDiagramThumb.png"/></a>
  * <p>
  * {@link uk.co.nickthecoder.itchy.Game}, as its name implies, is the heart of every game.
  * But that's not where all the good stuff hangs out, so don't check it out just yet.

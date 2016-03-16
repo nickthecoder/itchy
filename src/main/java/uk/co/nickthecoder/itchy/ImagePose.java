@@ -7,11 +7,27 @@ package uk.co.nickthecoder.itchy;
 import uk.co.nickthecoder.jame.JameException;
 import uk.co.nickthecoder.jame.Surface;
 
+/**
+ * An ImagePose uses a simple bitmap
+ */
 public class ImagePose implements Pose
 {
     private static ImagePose dummyPose;
 
-    public static ImagePose superimpose( OffsetSurface below, OffsetSurface above, int dx, int dy )
+    /**
+     * Creates a new ImagePose by drawing two images on top of each other.
+     * 
+     * @param below
+     *            The lower image, which will be (partially) obscured by the other image.
+     * @param above
+     *            The upper image, which will (partially) obscure the other image.
+     * @param dx
+     *            The relative position of the two images. Their offsetXs are also taken into account.
+     * @param dy
+     *            The relative position of the two images. Their offsetYs are also taken into account.
+     * @return A new ImagePose, whose offsets will be at the same place as the 'below' image.
+     */
+    public static ImagePose superimpose(OffsetSurface below, OffsetSurface above, int dx, int dy)
     {
         int left = Math.max(above.getOffsetX() - below.getOffsetX() + dx, 0);
         int top = Math.max(above.getOffsetY() - below.getOffsetX() + dy, 0);
@@ -38,12 +54,14 @@ public class ImagePose implements Pose
     }
 
     private int offsetX;
+
     private int offsetY;
+
     private double direction;
 
     private Surface surface;
 
-    private static Surface loadSurface( String filename ) throws JameException
+    private static Surface loadSurface(String filename) throws JameException
     {
         Surface loaded = new Surface(filename);
         Surface result = loaded.convert();
@@ -51,7 +69,13 @@ public class ImagePose implements Pose
 
         return result;
     }
-    
+
+    /**
+     * Creates a 1x1 transparent pixel/
+     * 
+     * @return
+     * @priority 2
+     */
     public static ImagePose getDummyPose()
     {
         if (dummyPose == null) {
@@ -60,17 +84,38 @@ public class ImagePose implements Pose
         return dummyPose;
     }
 
-    public ImagePose( String filename ) throws JameException
+    /**
+     * Creates an ImagePose by loading it from a file.
+     * The offsets will be at the center of the image.
+     * 
+     * @param filename
+     *            The absolute path of the image.
+     * @throws JameException
+     */
+    public ImagePose(String filename) throws JameException
     {
         this(loadSurface(filename));
     }
 
-    public ImagePose( Surface surface )
+    /**
+     * Creates an ImagePose from an existing Surface.
+     * The offsets will be at the center of the image.
+     * 
+     * @param surface
+     */
+    public ImagePose(Surface surface)
     {
         this(surface, surface.getWidth() / 2, surface.getHeight() / 2);
     }
 
-    public ImagePose( Surface surface, int offsetX, int offsetY )
+    /**
+     * Creates an ImagePose from an existing Surface.
+     * 
+     * @param surface
+     * @param offsetX
+     * @param offsetY
+     */
+    public ImagePose(Surface surface, int offsetX, int offsetY)
     {
         this.surface = surface;
 
@@ -79,23 +124,41 @@ public class ImagePose implements Pose
         this.direction = 0;
     }
 
-    void load( String filename )
+    /**
+     * Used internally by Itchy when reloading the resources.
+     * 
+     * @param filename
+     * @throws JameException
+     * @priority 5
+     */
+    void load(String filename)
         throws JameException
     {
         this.surface = new Surface(filename);
     }
-    
-    public void setDirection( double direction )
+
+    /**
+     * Sets the direction the image is pointing in.
+     * For example an picture of a car heading to the left will have a direction of 180 degrees;
+     * A rocket pointing upwards will have a direction of 90 degrees.
+     * 
+     * @param direction
+     * @priority 2
+     */
+    public void setDirection(double direction)
     {
         this.direction = direction;
     }
 
+    /**
+     * A simple getter. See {@link #setDirection(double)}.
+     */
     @Override
     public double getDirection()
     {
         return this.direction;
     }
-    
+
     @Override
     public int getOffsetX()
     {
@@ -108,28 +171,56 @@ public class ImagePose implements Pose
         return this.offsetY;
     }
 
-    public void setOffsetX( int value )
+    /**
+     * A simple setter.
+     * 
+     * @param value
+     */
+    public void setOffsetX(int value)
     {
         this.offsetX = value;
     }
 
-    public void setOffsetY( int value )
+    /**
+     * A simple setter.
+     * 
+     * @param value
+     */
+    public void setOffsetY(int value)
     {
         this.offsetY = value;
     }
 
+    /**
+     * The image
+     * 
+     * @return
+     * @priority 3
+     */
     @Override
     public Surface getSurface()
     {
         return this.surface;
     }
 
+    /**
+     * Used internally by Itchy as part of the OffsetSurface interface.
+     * 
+     * @return true
+     * @priority 5
+     */
     @Override
     public boolean isShared()
     {
         return true;
     }
 
+    /**
+     * Use internally by Itchy.
+     * 
+     * @return 0
+     * @priority 5
+     */
     @Override
     public int getChangeId()
     {
@@ -137,15 +228,23 @@ public class ImagePose implements Pose
         return 0;
     }
 
+    /**
+     * Does nothing.
+     * 
+     * @priority 5
+     */
     @Override
-    public void attach( Appearance appearance )
+    public void attach(Appearance appearance)
     {
     }
 
+    /**
+     * @priority 2
+     */
     public String toString()
     {
         return "ImagePose: (" + surface.getWidth() + "x" + surface.getHeight() + ")"
-            + " offset(" + getOffsetX() + "," + getOffsetY() +")"
+            + " offset(" + getOffsetX() + "," + getOffsetY() + ")"
             + " direction: " + direction;
     }
 }

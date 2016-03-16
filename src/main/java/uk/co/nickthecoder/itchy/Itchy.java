@@ -22,64 +22,23 @@ import uk.co.nickthecoder.jame.event.Keys;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseButton;
 import uk.co.nickthecoder.jame.event.MouseEvent;
+import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 import uk.co.nickthecoder.jame.event.ResizeEvent;
 
 /**
- * The top-level manager of the game engine. It only has static methods. Manages the game loop, including the redrawing
- * of the screen, and dispatching events.
- * 
+ * The top-level manager of the Itchy game engine. It only has static methods.
  */
-public class Itchy
+public final class Itchy
 {
-
     /**
-     * This is the highest SDL key sym which can be checked using isKeyDown(). The highest key sym is currently 321, and
-     * I'm using 400, which leaves plenty of room for additional keys to be added in the future.
+     * How long a key is held down for (in milliseconds) before additional fake onKeyDown events are generated.
      */
-    private static int KEYBOARD_STATE_SIZE = 400;
-
-    private static int MOUSE_STATE_SIZE = MouseButton.values().length + 1;
-
-    /**
-     * Holds a boolean for each key. On key pressed events sets the appropriate boolean, and key released events reset
-     * the boolean. Uses the Keys values to index the array.
-     */
-    private static boolean[] keyboardState;
-
-    private static boolean[] mouseState;
-
-    private static int mouseX;
-
-    private static int mouseY;
-
-    private static boolean running;
-
-    private static Game currentGame;
-
-    private static Game loadingGame;
-    /**
-     * If one game calls another game, and then exists, this is how we return to the previous game.
-     */
-    private static Stack<Game> gameStack = new Stack<Game>();
-
-    private static boolean initialised = false;
-
-    private static File baseDirectory;
-
     public static int keyboardRepeatDelay = Events.DEFAULT_REPEAT_DELAY;
 
-    public static int keyboardRepeatInterval = Events.DEFAULT_REPEAT_INTERVAL;
-
-    private static long lastWindowResizeTime = 0;
-
     /**
-     * The FrameRate is in charge of ensuring that the game runs at the correct speed, redrawing the screen at regular
-     * intervals and decides what to do when the required frame rate cannot be maintained.
-     * 
-     * Most games can leave this alone, but advanced programmers may want to create a new implementation of FrameRate,
-     * and therefore having more control over the frame rate.
+     * The time (in milliseconds) between fake onKeyDown events when a key is held down.
      */
-    public static FrameRate frameRate = new SimpleFrameRate();
+    public static int keyboardRepeatInterval = Events.DEFAULT_REPEAT_INTERVAL;
 
     /**
      * SoundManager is a thin layer over Jame's sound system adding some extra features; the option to end sounds when
@@ -95,7 +54,83 @@ public class Itchy
      */
     public static final Registry registry = new Registry();
 
+    /**
+     * Normally events are polled from Jame and then dispatched to Game, and its dependencies.
+     * However, this behaviour can be changed to allow events to be recorded and played back, or just simulated.
+     * Use to record macros for testing, and to show solutions to puzzle games. Also used to take events from a client
+     * machine and feed them to a server (although this feature isn't finished at time of writing this).
+     */
     public static EventProcessor eventProcessor = new NormalEventProcessor();
+
+    /**
+     * This is the highest SDL key sym which can be checked using isKeyDown(). The highest key sym is currently 321, and
+     * I'm using 400, which leaves plenty of room for additional keys to be added in the future.
+     */
+    private static int KEYBOARD_STATE_SIZE = 400;
+
+    /**
+     * Number of mouse buttons + 1
+     */
+    private static int MOUSE_STATE_SIZE = MouseButton.values().length + 1;
+
+    /**
+     * The FrameRate is in charge of ensuring that the game runs at the correct speed, redrawing the screen at regular
+     * intervals and decides what to do when the required frame rate cannot be maintained.
+     * 
+     * Most games can leave this alone, but advanced programmers may want to create a new implementation of FrameRate,
+     * and therefore having more control over the frame rate.
+     */
+    private static FrameRate frameRate = new SimpleFrameRate();
+
+    /**
+     * Holds a boolean for each key indicating if it is currently up (false) or down (true). On key pressed events sets
+     * the appropriate boolean, and key released events reset
+     * the boolean. Uses {@link Keys} values to index the array.
+     */
+    private static boolean[] keyboardState;
+
+    /**
+     * Holds a boolean for each Mouse Button indicating if it is currently up (false) or down (true).
+     */
+    private static boolean[] mouseState;
+
+    /**
+     * Holds the position of the mouse between {@link MouseMotionEvent}s.
+     */
+    private static int mouseX;
+
+    /**
+     * Holds the position of the mouse between {@link MouseMotionEvent}s.
+     */
+    private static int mouseY;
+
+    private static boolean running;
+
+    private static Game currentGame;
+
+    private static Game loadingGame;
+
+    /**
+     * If one game calls another game, which then exists, this is how we return to the first game.
+     * Note that the {@link Launcher} is a game, so this stack is used often.
+     */
+    private static Stack<Game> gameStack = new Stack<Game>();
+
+    /**
+     * We only want to initialise Jame once.
+     */
+    private static boolean initialised = false;
+
+    /**
+     * Used to find the "resources" directory.
+     */
+    private static File baseDirectory;
+
+    /**
+     * Used in a bodge attempting to fix a bug in SDL, where the incorrect window size is returned when dragging a
+     * window's border.
+     */
+    private static long lastWindowResizeTime = 0;
 
     static {
         registry.add(new ClassName(Director.class, PlainDirector.class.getName()));
@@ -143,14 +178,15 @@ public class Itchy
      * @param resources
      *            Uses the resource's GameInfo to set the screen size.
      * @throws Exception
+     * @priority 5
      */
     public static void init(Resources resources) throws Exception
     {
         if (initialised) {
             return;
         }
-        
-        System.out.println( "Itchy.init");
+
+        System.out.println("Itchy.init");
 
         Video.init();
         Audio.init();
@@ -158,20 +194,21 @@ public class Itchy
         Events.enableKeyTranslation(true);
 
         keyboardState = new boolean[KEYBOARD_STATE_SIZE];
-        mouseState = new boolean[ MOUSE_STATE_SIZE ];
+        mouseState = new boolean[MOUSE_STATE_SIZE];
         soundManager = new StandardSoundManager();
         setScreenMode(resources);
         initialised = true;
     }
 
     /**
-     * Most games don't have resizable windows, so this method isn't used much. Note, this only changes the size of the
+     * Most games windows cannot be resized, so this method isn't used much. Note, this only changes the size of the
      * screen, it does not change the sizes of the {@link View}s.
      * 
      * @param width
      *            The new width of the screen in pixels.
      * @param height
      *            The new height of the screen in pixels.
+     * @priority 3
      */
     public static void resizeScreen(int width, int height)
     {
@@ -187,6 +224,7 @@ public class Itchy
      * property "itchy.base", then it will use that instead.
      * 
      * @return The system property "itchy.base" if it is set, otherwise the current directory (".").
+     * @priority 3
      */
     public static File getBaseDirectory()
     {
@@ -203,6 +241,7 @@ public class Itchy
 
     /**
      * @return The "resources" directory.
+     * @priority 3
      */
     public static File getResourcesDirectory()
     {
@@ -267,7 +306,11 @@ public class Itchy
         }
     }
 
-    public void setFrameRate(FrameRate newFrameRate)
+    /**
+     * 
+     * @param newFrameRate
+     */
+    public static void setFrameRate(FrameRate newFrameRate)
     {
         if (running) {
             frameRate.end();
@@ -278,6 +321,22 @@ public class Itchy
         }
     }
 
+    /**
+     * Get details about the frame rate that Itchy is running at.
+     * 
+     * @return
+     */
+    public static FrameRate getFrameRate()
+    {
+        return frameRate;
+    }
+
+    /**
+     * Used internally by Icthy.
+     * 
+     * @param game
+     * @priority 5
+     */
     public static void startGame(Game game)
     {
         loadingGame = null;
@@ -290,6 +349,12 @@ public class Itchy
         setScreenMode(currentGame);
     }
 
+    /**
+     * Used internally by Icthy.
+     * 
+     * @param game
+     * @priority 5
+     */
     public static void loadingGame(Game game)
     {
         loadingGame = game;
@@ -298,6 +363,8 @@ public class Itchy
     /**
      * Should be called once from the program's entry point (static void main method; usually from {@link Launcher}). To
      * exit from the mainLoop, call {@link #terminate()}.
+     * 
+     * @priority 5
      */
     public static void mainLoop()
     {
@@ -314,6 +381,14 @@ public class Itchy
         }
     }
 
+    /**
+     * Called when a game script throws an Exception. The current behaviour just prints a stack trace to stderr,
+     * but later versions of Itchy may report the error more gracefully. For example, it may stop reporting errors
+     * if too many are thrown, as they are likely all from the same bug.
+     * 
+     * @param e
+     * @priority 3
+     */
     public static void handleException(Exception e)
     {
         e.printStackTrace();
@@ -329,6 +404,14 @@ public class Itchy
         }
     }
 
+    /**
+     * Called when a {@link Game} ends. If there is another game on the stack, then continues to run, otherwise
+     * terminates.
+     * 
+     * Itchy.
+     * 
+     * @priority 5
+     */
     public static void endGame()
     {
         currentGame.onDeactivate();
@@ -351,6 +434,8 @@ public class Itchy
     /**
      * Indicates that the main loop should end. Note the game does not end immediately, it only sets a flag, which will
      * cause the main loop to end after the current frame has been processed.
+     * 
+     * @priority 3
      */
     public static void terminate()
     {
@@ -361,6 +446,8 @@ public class Itchy
 
     /**
      * Processes events (such as key strokes and mouse), called once per frame from {@link FrameRate}'s loop.
+     * 
+     * @priority 3
      */
     public static void processEvents()
     {
@@ -374,6 +461,8 @@ public class Itchy
     /**
      * Called once per frame from {@link FrameRate}'s loop. Calls tick on the soundManager, and the current game. (This
      * will in turn call the tick of the Director, the SceneDirector and all Actor's roles.
+     * 
+     * @priority 3
      */
     public static void tick()
     {
@@ -385,6 +474,11 @@ public class Itchy
         }
     }
 
+    /**
+     * Gets the surface the game is being drawn to. This will not have an alpha channel.
+     * 
+     * @return The display's surface.
+     */
     public static Surface getDisplaySurface()
     {
         return Video.getDisplaySurface();
@@ -392,6 +486,8 @@ public class Itchy
 
     /**
      * Renders (draws) the whole screen, and then flips the double buffer, so that the newly rendered screen is visible.
+     * 
+     * @priority 3
      */
     public static void render()
     {
@@ -407,6 +503,7 @@ public class Itchy
      * Is itchy still running?
      * 
      * @return False if Itchy should exit at the end of the current frame. True otherwise.
+     * @priority 3
      */
     public static boolean isRunning()
     {
@@ -415,6 +512,8 @@ public class Itchy
 
     /**
      * Should holding down a key cause repeated events, or just a single one?
+     * 
+     * @priority 2
      */
     public static void enableKeyboardRepeat(boolean value)
     {
@@ -425,6 +524,14 @@ public class Itchy
         }
     }
 
+    /**
+     * It is usually better to test for key presses via an {@link Input}, because this given more flexibility, and your
+     * game code looks cleaner. It is also easier for players to change keys to suit themselves.
+     * 
+     * @param keySym
+     * @return
+     * @priority 3
+     */
     public static boolean isKeyDown(int keySym)
     {
         return keyboardState[keySym];
@@ -433,6 +540,8 @@ public class Itchy
     /**
      * Tests state of either shift keys. A convenience method, the same as
      * <code>isKeyDown( Keys.LSHIFT ) || isKeyDown( Keys.RSHIFT )</code>
+     * 
+     * @priority 3
      */
     public static boolean isShiftDown()
     {
@@ -442,6 +551,8 @@ public class Itchy
     /**
      * Tests state of either control keys. A convenience method, the same as
      * <code>isKeyDown( Keys.LCTRL ) || isKeyDown( Keys.RCTRL )</code>
+     * 
+     * @priority 3
      */
     public static boolean isCtrlDown()
     {
@@ -451,6 +562,8 @@ public class Itchy
     /**
      * Tests state of either control keys. A convenience method, the same as
      * <code>isKeyDown( Keys.LALT ) || isKeyDown( Keys.RALT )</code>
+     * 
+     * @priority 3
      */
     public static boolean isAltDown()
     {
@@ -460,17 +573,19 @@ public class Itchy
     /**
      * Tests state of either meta keys. A convenience method, the same as
      * <code>isKeyDown( Keys.LMETA ) || isKeyDown( Keys.RMETA )</code>
+     * 
+     * @priority 3
      */
     public static boolean isMetaDown()
     {
         return keyboardState[Keys.LMETA] || keyboardState[Keys.RMETA];
     }
 
-    
     /**
      * Processes a single event. Called from {@link #processEvents}.
      * 
      * @param event
+     * @priority 5
      */
     public static void processEvent(Event event)
     {
@@ -515,7 +630,7 @@ public class Itchy
 
             if (event instanceof MouseButtonEvent) {
                 MouseButtonEvent mbe = (MouseButtonEvent) event;
-                if ( mbe.button < mouseState.length ) {
+                if (mbe.button < mouseState.length) {
                     mouseState[mbe.button] = mbe.state == MouseButtonEvent.STATE_PRESSED;
                 }
             }
@@ -526,7 +641,10 @@ public class Itchy
     }
 
     /**
-     * Taken from the last MouseEvent 0 is the left edge of the screen.
+     * Taken from the last {@link MouseMotionEvent}.
+     * 0 is the left edge of the screen.
+     * <p>
+     * To convert this to world coordinates use {@link View#getWorldX(int)}.
      * 
      * @return The x position of the mouse in pixels.
      */
@@ -536,7 +654,10 @@ public class Itchy
     }
 
     /**
-     * Taken from the last MouseEvent 0 is the top edge of the screen.
+     * Taken from the last {@link MouseMotionEvent}.
+     * 0 is the top edge of the screen, and the Y axis points downwards.
+     * <p>
+     * To convert this to world coordinates use {@link View#getWorldY(int)}.
      * 
      * @return The y position of the mouse in pixels.
      */
@@ -547,18 +668,24 @@ public class Itchy
 
     /**
      * Tests if the one of the mouse buttons is currently held down.
-     * @param mouseButton The number of the mouse button. See MouseButtonEvent for button numbers.
+     * <p>
+     * Consider using {@link Input} rather than testing mouse buttons directly. This will make you code more readable
+     * and flexible. Player can change the inputs to suit themselves without editing code.
+     * 
+     * @param mouseButton
+     *            The number of the mouse button. See MouseButtonEvent for button numbers.
      * @return true iff the button is down.
+     * @priority 3
      */
-    public static boolean isMouseButtonDown( int mouseButton )
+    public static boolean isMouseButtonDown(int mouseButton)
     {
-        if ( mouseButton >= mouseState.length ) {
+        if (mouseButton >= mouseState.length) {
             return false;
         } else {
             return mouseState[mouseButton];
         }
     }
-    
+
     /**
      * Prevent people creating instances of Itchy - it only has static methods.
      */

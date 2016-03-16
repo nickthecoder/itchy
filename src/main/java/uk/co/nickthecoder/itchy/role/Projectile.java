@@ -40,7 +40,7 @@ public class Projectile extends Companion
     public Projectile( Actor source )
     {
         super(source);
-        this.lifeTicks = (int) (DEFAULT_LIFE_SECONDS * Itchy.frameRate.getFrameRate());
+        this.lifeTicks = (int) (DEFAULT_LIFE_SECONDS * Itchy.getFrameRate().getFrameRate());
     }
 
     @Override
@@ -140,7 +140,7 @@ public class Projectile extends Companion
 
         public B life( double seconds )
         {
-            this.companion.lifeTicks = (int) (Itchy.frameRate.getFrameRate() * seconds);
+            this.companion.lifeTicks = (int) (Itchy.getFrameRate().getFrameRate() * seconds);
             return getThis();
         }
         

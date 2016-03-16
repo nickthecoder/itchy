@@ -1,10 +1,99 @@
 Current Tasks
 =============
 
-Make SceneTransition a part of Director?
-    Reset it when completed?
-    Remove need for self.transitioning boolean.
-    Debris and DrunkInvaders need updating
+Javadoc & code review...
+
+Actor
+    Delete adjustHeading?
+    Actor.getCornerX,Y Hardly used. Delete?
+    Actor.removeFromStage Not used?
+    Make Actor class final (and remove final from method sigs).
+    Actor isActive - what is this? Document it or remove.
+    Does isDying still return true after an actor dies?
+    Remove Actor.getSurface
+    Actor.moveTo(Actor) Needed?
+    Actor.moveForwards(forwards,sideways) sideways is to the left? A little non-mathematical.
+        Create a unit test for this.
+    Acťor.moveAngle - not needed?
+    Actor.moveToward - not needed?
+    Actor.contains - needed?
+    Actor.nearest - needed? If so why return a Role from Actor class?
+    Actor.adjustZOrder needed?
+    
+    Create a ActorMath class, which has static methods like distance(Actor a, Actor b)
+        distanceTo, directionOf, moveAngle, moveTowards
+
+Layout, Layer
+    Layer has public name, and public get/setName.
+    
+    
+Game
+    getFrameRate - Not used. There is no corresponding setter, and just ask for Itchy's frameRate. Remove? 
+    stages, getStages are these used? Should do everything via Layout and Layers.
+    layout and getLayout are both public.
+    Should Director.loadScene exist?
+    Does Editor need to be a subclass of Game? Eeek! Can't Editor be a Director, which is more in keeping with the Itchy philosophy.
+        Game could then be a final class.
+    Rename findRoleByTag to findRolesByTag
+
+Itchy
+    Why have loadGame and currentGame?
+    Replace baseDirectory with ItchyResourcesPath, which defaults to "./resources", but can be a set of directories.
+    Numerous things, if changed, can affect other games. Shouldn't they be on Game instead? e.g. keyboard repeat, FrameRate.
+
+View
+    getRelativeRect - is this used/needed?
+    isVisible - is this used/needed?
+    
+StageView
+    Why does enableMouseListener take a Game parameter?
+    
+Costume
+    method "copy" not used?! Delete it.
+    
+ZOrderStage
+    Look at ZOrderStageInterface. Is it needed, and if so, is it used in the correct places instead of ZOrderStage.
+        We don't move up/down the z-order any more.
+
+Appearance
+    is adjustAlpha needed?
+    superimpose - need to reset scale, direction, colorize ??? Use fixAppearance first.
+
+CostumeFeatures
+    Does it NEED to have a costume attribute? Most times it won't be used. Leave as an option for the sub-class.
+        In fact, make CostumeFeatures an empty interface.
+
+ImagePose
+    load- not used.
+ 
+AbstractRole
+    rename allByTag to findRolesByTag
+    isValidClassName use ClassName
+    createRole use ClassName
+    rename attached to attach?
+    attached, remove crap about annotations. Delete the Tag annotation class.
+    detached removes all tags, so how do collisions work after Pause???
+        If we allow Roles to keep their tags when detached,
+            then tags must use weak references, otherwise they will not be gc'd.
+            Collision Strategies must take care to check for detached Roles
+            Should probably set Role's actor to null
+             
+    Rename detached to detach
+
+SceneDirector
+    Rename getCollisionStrategy? (It often CREATES one).
+
+
+AbstractTextPose
+    remove adjustFontSize
+    
+Director (and QuitListener)
+    Why does onQuit take a QuitEvent parameter?
+
+
+Turn the generalise arrows the right way.
+
+
      
 Make some gates need balloons 2, rocks 2, instead of 3, 3?
     Or make a new balloons3?

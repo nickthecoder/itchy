@@ -10,6 +10,9 @@ import uk.co.nickthecoder.itchy.property.StringProperty;
 import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.jame.Rect;
 
+/**
+ * Layers are stacked together to form a {@link Layout}, which is the large scale structure of how your
+ */
 public class Layer implements Comparable<Layer>, NamedSubject<Layer>, Cloneable
 {
     protected static final List<Property<Layer, ?>> properties = new ArrayList<Property<Layer, ?>>();
@@ -26,12 +29,20 @@ public class Layer implements Comparable<Layer>, NamedSubject<Layer>, Cloneable
         properties.add(new ClassNameProperty<Layer>(StageConstraint.class, "stageConstraintClassName"));
     }
 
+    /**
+     * The name of the Layer.
+     * Used by {@link Layout#findLayer(String)}.
+     */
     public String name;
 
+    /**
+     * The position of the Layer on the screen. These are screen coodinates, with (0,0) at the top left, and the
+     * Y axis pointing downwards.
+     */
     public Rect position;
 
     /**
-     * High values are placed above those with smaller zOrders.
+     * High values obscure Layers with smaller zOrders.
      */
     public int zOrder;
 
@@ -43,101 +54,156 @@ public class Layer implements Comparable<Layer>, NamedSubject<Layer>, Cloneable
 
     private View view;
 
-    public Layer( View view )
+    /**
+     * Create an unnamed Layer.
+     * 
+     * @param view
+     */
+    public Layer(View view)
     {
         this();
         this.view = view;
     }
 
+    /**
+     * Creates an unnamed Layer with a new StageView, and a new ZOrderStage.
+     * This constructor is used by the {@link Editor}. If you want to create Layer's dynamically within your game,
+     * use the other constructor : {@link #Layer(View)}.
+     * 
+     * @priority 5
+     */
     public Layer()
     {
         name = "";
-        position = new Rect(0, 0, 1, 1);
+        Game game = Itchy.getGame();
+        position = new Rect(0, 0, game.getWidth(), game.getHeight());
         viewClassName = new ClassName(View.class, StageView.class.getName());
         stageClassName = new ClassName(Stage.class, ZOrderStage.class.getName());
         stageConstraintClassName = new ClassName(StageConstraint.class, NullStageConstraint.class.getName());
-        
+
         updateView();
         updateStage();
         updateStageConstraint();
     }
 
+    /**
+     * A simple getter, returns the layer's name.
+     */
     @Override
     public String getName()
     {
         return name;
     }
 
+    /**
+     * A simple setter.
+     */
     @Override
     public void setName(String name)
     {
         this.name = name;
     }
-    
+
+    /**
+     * Used internally by Itchy.
+     * 
+     * @return
+     * @priority 5
+     */
     public ClassName getViewClassName()
     {
         return this.viewClassName;
     }
-    
-    public void setViewClassName( ClassName className )
+
+    /**
+     * Used internally by Itchy.
+     * 
+     * @param className
+     * @priority 5
+     */
+    public void setViewClassName(ClassName className)
     {
         this.viewClassName = className;
         updateView();
     }
-        
+
     private void updateView()
     {
         Resources resources = Itchy.getGame().resources;
         try {
             view = (View) viewClassName.createInstance(resources);
             view.setPosition(this.position);
-            
+
             setStageClassName(this.stageClassName);
         } catch (Exception e) {
             Itchy.handleException(e);
         }
     }
 
+    /**
+     * Used internally by Itchy.
+     * 
+     * @return
+     * @priority 5
+     */
     public ClassName getStageClassName()
     {
         return this.stageClassName;
     }
-    
-    public void setStageClassName( ClassName className )
+
+    /**
+     * Used internally by Itchy.
+     * 
+     * @param className
+     * @priority 5
+     */
+    public void setStageClassName(ClassName className)
     {
         this.stageClassName = className;
         updateStage();
     }
-    
+
     private void updateStage()
     {
         Resources resources = Itchy.getGame().resources;
-        if ( view instanceof StageView) {
+        if (view instanceof StageView) {
             StageView stageView = (StageView) view;
             try {
-                stageView.setStage( (Stage) stageClassName.createInstance(resources));
-                setStageConstraintClassName( stageConstraintClassName );
+                stageView.setStage((Stage) stageClassName.createInstance(resources));
+                setStageConstraintClassName(stageConstraintClassName);
             } catch (Exception e) {
                 Itchy.handleException(e);
             }
         }
     }
-    
+
+    /**
+     * Used internally by Itchy.
+     * 
+     * @return
+     * @priority 5
+     */
     public ClassName getStageConstraintClassName()
     {
         return this.stageConstraintClassName;
     }
-    
-    public void setStageConstraintClassName( ClassName className )
+
+    /**
+     * Used internally by Itchy.
+     * 
+     * @param className
+     * @priority 5
+     */
+    public void setStageConstraintClassName(ClassName className)
     {
         this.stageConstraintClassName = className;
         updateStageConstraint();
     }
-    
+
     private void updateStageConstraint()
     {
         Resources resources = Itchy.getGame().resources;
-        if ( view instanceof StageView) {
+        if (view instanceof StageView) {
             StageView stageView = (StageView) view;
             try {
                 StageConstraint sc = (StageConstraint) stageConstraintClassName.createInstance(resources);
@@ -147,13 +213,19 @@ public class Layer implements Comparable<Layer>, NamedSubject<Layer>, Cloneable
             }
         }
     }
-    
 
+    /**
+     * @return This layer's View (all Layers should have a view, and therefore null is not expected).
+     */
     public View getView()
     {
         return view;
     }
-    
+
+    /**
+     * 
+     * @return This Layer's {@link View} if it is a {@link StageView}, or null otherwise.
+     */
     public StageView getStageView()
     {
         if (view instanceof StageView) {
@@ -162,26 +234,43 @@ public class Layer implements Comparable<Layer>, NamedSubject<Layer>, Cloneable
         return null;
     }
 
+    /**
+     * @return The {@link View}'s stage if the View is a {@link StageView}, otherwise null.
+     */
     public Stage getStage()
     {
-        if ( view instanceof StageView ) {
+        if (view instanceof StageView) {
             return ((StageView) view).getStage();
         }
         return null;
     }
-    
+
+    /**
+     * Defines the natural order of Layers, using their Z-Orders.
+     * @priority 3
+     */
     @Override
     public int compareTo(Layer other)
     {
         return this.zOrder - other.zOrder;
     }
 
+    /**
+     * Used internally by Itchy.
+     * 
+     * @priority 5
+     */
     @Override
     public List<Property<Layer, ?>> getProperties()
     {
         return properties;
     }
 
+    /**
+     * Used internally by Itchy.
+     * 
+     * @priority 5
+     */
     @Override
     public Layer clone()
     {
@@ -193,9 +282,9 @@ public class Layer implements Comparable<Layer>, NamedSubject<Layer>, Cloneable
         }
         result.position = new Rect(this.position);
 
-        result.setViewClassName(new ClassName( View.class, this.viewClassName.name));
-        result.setStageClassName(new ClassName( Stage.class, this.stageClassName.name));
-        result.setStageConstraintClassName(new ClassName( StageConstraint.class, this.stageConstraintClassName.name));
+        result.setViewClassName(new ClassName(View.class, this.viewClassName.name));
+        result.setStageClassName(new ClassName(Stage.class, this.stageClassName.name));
+        result.setStageConstraintClassName(new ClassName(StageConstraint.class, this.stageConstraintClassName.name));
 
         try {
             Property.copyProperties(this.getView(), result.getView());
@@ -206,7 +295,7 @@ public class Layer implements Comparable<Layer>, NamedSubject<Layer>, Cloneable
         } catch (Exception e) {
             Itchy.handleException(e);
         }
-        
+
         return result;
     }
 

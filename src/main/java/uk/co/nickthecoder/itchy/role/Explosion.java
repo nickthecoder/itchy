@@ -120,7 +120,7 @@ public class Explosion extends Companion
     {
         super(actor);
         this.direction = actor.getAppearance().getDirection();
-        this.lifeTicks = (int) (DEFAULT_LIFE_SECONDS * Itchy.frameRate.getFrameRate());
+        this.lifeTicks = (int) (DEFAULT_LIFE_SECONDS * Itchy.getFrameRate().getFrameRate());
         this.zOrder = actor.getZOrder();
     }
 
@@ -615,8 +615,8 @@ public class Explosion extends Companion
          */
         public B life( double from, double to )
         {
-            this.companion.lifeTicks = (int) (Itchy.frameRate.getFrameRate() * from);
-            this.companion.randomLifeTicks = (int) (Itchy.frameRate.getFrameRate() * (to - from));
+            this.companion.lifeTicks = (int) (Itchy.getFrameRate().getFrameRate() * from);
+            this.companion.randomLifeTicks = (int) (Itchy.getFrameRate().getFrameRate() * (to - from));
             return getThis();
         }
 

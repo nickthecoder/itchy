@@ -17,6 +17,11 @@ import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 
+/**
+ * StageViews draw all of the {@link Actor}s that are on a {@link Stage}.
+ * There can be many StageViews, for a single Stage. For example, a two player game with a split-screen will have a
+ * StageView for each player.
+ */
 public class StageView extends AbstractScrollableView implements StageListener, MouseListener, MouseListenerView
 {
     protected static final List<Property<View, ?>> properties = new ArrayList<Property<View, ?>>();
@@ -26,6 +31,11 @@ public class StageView extends AbstractScrollableView implements StageListener, 
         properties.add(new BooleanProperty<View>("enableMouse"));
     }
 
+    /**
+     * Used internally by Itchy.
+     * 
+     * @priority 5
+     */
     @Override
     public List<Property<View, ?>> getProperties()
     {
@@ -34,8 +44,16 @@ public class StageView extends AbstractScrollableView implements StageListener, 
 
     private Stage stage;
 
+    /**
+     * Setting this greater than zero will cause Actors that would normally be invisible to become visible.
+     * This is used in the {@link SceneDesigner} to reveal Actors, that would otherwise be hidden.
+     */
     public int minimumAlpha = 0;
 
+    /**
+     * Setting this lower than the default of 255, will cause all Actors to be semi-transparent.
+     * This is used in the {@link SceneDesigner} to dim chosen layers.
+     */
     public int maximumAlpha = 255;
 
     /**
@@ -50,11 +68,23 @@ public class StageView extends AbstractScrollableView implements StageListener, 
      */
     private ViewMouseListener mouseOwner;
 
+    /**
+     * Used internally by Itchy.
+     * If you wish to create StageView's dynamically, then use the other constructor : {@link #StageView(Rect, Stage)}.
+     * 
+     * @priority 5
+     */
     public StageView()
     {
         super();
     }
 
+    /**
+     * Create a new StageView
+     * 
+     * @param position
+     * @param stage
+     */
     public StageView(Rect position, Stage stage)
     {
         super(position);
@@ -64,6 +94,13 @@ public class StageView extends AbstractScrollableView implements StageListener, 
         }
     }
 
+    /**
+     * Used internally by Itchy. You game code should set the stage in the constructor ({link
+     * {@link #StageView(Rect, Stage)}, and then leave it unchanged.
+     * 
+     * @param stage
+     * @priority 5
+     */
     public void setStage(Stage stage)
     {
         this.stage = stage;
@@ -72,16 +109,34 @@ public class StageView extends AbstractScrollableView implements StageListener, 
         }
     }
 
+    /**
+     * A simple getter.
+     * 
+     * @return
+     */
     public Stage getStage()
     {
         return this.stage;
     }
 
+    /**
+     * @return True is Actors on this View's Stage receieve mouse events.
+     * @priority 3
+     */
     public boolean getEnableMouse()
     {
         return this.roleMouseListeners != null;
     }
 
+    /**
+     * For performance reasons, the Actors on a Stage don't normally receive mouse events. So if a Stage has buttons, or
+     * other Actors that need to receive mouse events, then call this method.
+     * <p>
+     * For Views created in the {@link Editor}, there is a tick box to enable/disable the mouse in the "View" tab of the
+     * "Edit Layer" dialog.
+     * 
+     * @param value
+     */
     public void setEnableMouse(boolean value)
     {
         if (value) {
@@ -91,6 +146,49 @@ public class StageView extends AbstractScrollableView implements StageListener, 
         }
     }
 
+    /**
+     * For performance reasons, the Actors on a Stage don't normally receive mouse events. So if a Stage has buttons, or
+     * other Actors that need to receive mouse events, then call this method.
+     * <p>
+     * For Views created in the {@link Editor}, there is a tick box to enable/disable the mouse in the "View" tab of the
+     * "Edit Layer" dialog.
+     * 
+     * @param game
+     */
+    @Override
+    public void enableMouseListener(Game game)
+    {
+        this.roleMouseListeners = new HashSet<ViewMouseListener>();
+        for (Actor actor : this.stage.getActors()) {
+            Role role = actor.getRole();
+            if (role instanceof ViewMouseListener) {
+                this.roleMouseListeners.add((ViewMouseListener) role);
+            }
+        }
+    }
+
+    /**
+     * Disables mouse events for Actors on the View's Stage.
+     * </p>
+     * For Views created in the {@link Editor}, there is a tick box to enable/disable the mouse in the "View" tab of the
+     * "Edit Layer" dialog.
+     * 
+     * @priority 3
+     */
+    @Override
+    public void disableMouseListener(Game game)
+    {
+        if (this.roleMouseListeners != null) {
+            this.roleMouseListeners.clear();
+        }
+        this.roleMouseListeners = null;
+    }
+
+    /**
+     * Used internally by Itchy.
+     * 
+     * @priority 5
+     */
     @Override
     public GraphicsContext adjustGraphicsContext(GraphicsContext gc)
     {
@@ -103,6 +201,11 @@ public class StageView extends AbstractScrollableView implements StageListener, 
         return mygc;
     }
 
+    /**
+     * Used internally by Itchy.
+     * 
+     * @priority 3
+     */
     @Override
     public void render(GraphicsContext gc)
     {
@@ -142,11 +245,24 @@ public class StageView extends AbstractScrollableView implements StageListener, 
         }
     }
 
+    /**
+     * Renders a single Actor
+     * 
+     * @param gc
+     * @param actor
+     * @param alpha
+     * @priority 3
+     */
     protected void render(GraphicsContext gc, Actor actor, int alpha)
     {
         gc.render(actor, alpha);
     }
 
+    /**
+     * Part of the {@link StageListener} interface, used to keep track of which Actors need to receive mouse events.
+     * 
+     * @priority 5
+     */
     @Override
     public void onAdded(Stage stage, Actor actor)
     {
@@ -159,6 +275,11 @@ public class StageView extends AbstractScrollableView implements StageListener, 
         }
     }
 
+    /**
+     * Part of the {@link StageListener} interface, used to keep track of which Actors need to receive mouse events.
+     * 
+     * @priority 5
+     */
     @Override
     public void onChangedRole(Stage stage, Actor actor)
     {
@@ -171,6 +292,11 @@ public class StageView extends AbstractScrollableView implements StageListener, 
         }
     }
 
+    /**
+     * Part of the {@link StageListener} interface, used to keep track of which Actors need to receive mouse events.
+     * 
+     * @priority 5
+     */
     @Override
     public void onRemoved(Stage stage, Actor actor)
     {
@@ -183,27 +309,14 @@ public class StageView extends AbstractScrollableView implements StageListener, 
         }
     }
 
-    @Override
-    public void enableMouseListener(Game game)
-    {
-        this.roleMouseListeners = new HashSet<ViewMouseListener>();
-        for (Actor actor : this.stage.getActors()) {
-            Role role = actor.getRole();
-            if (role instanceof ViewMouseListener) {
-                this.roleMouseListeners.add((ViewMouseListener) role);
-            }
-        }
-    }
-
-    @Override
-    public void disableMouseListener(Game game)
-    {
-        if (this.roleMouseListeners != null) {
-            this.roleMouseListeners.clear();
-        }
-        this.roleMouseListeners = null;
-    }
-
+    /**
+     * Capturing a mouse means that mouse events won't be sent to any other mouse listeners until the mouse is released.
+     * Typically used during a drag operation;
+     * This method is called when the mouse button is pressed, and {@link #releaseMouse(ViewMouseListener)} is called
+     * when the mouse button is released.
+     * 
+     * @see #releaseMouse(ViewMouseListener)
+     */
     @Override
     public void captureMouse(ViewMouseListener owner)
     {
@@ -211,6 +324,11 @@ public class StageView extends AbstractScrollableView implements StageListener, 
         Itchy.getGame().captureMouse(this);
     }
 
+    /**
+     * Release the mouse after capturing it.
+     * 
+     * @see #captureMouse(ViewMouseListener)
+     */
     @Override
     public void releaseMouse(ViewMouseListener owner)
     {
@@ -221,6 +339,15 @@ public class StageView extends AbstractScrollableView implements StageListener, 
     private int oldX;
     private int oldY;
 
+    /**
+     * This is a horrible bodge - it adjust the x,y values in a MouseEvent, such that they are transformed from being
+     * screen
+     * coordinates to world coordinates. It is on my todo list to implement this in a better, clean way.
+     * 
+     * @param event
+     * @return true if the mouse is within this view's rectangle.
+     * @priority 5
+     */
     public boolean adjustMouse(MouseEvent event)
     {
         // Store actual x,y so it can be restored by unadjustMouse
@@ -239,12 +366,23 @@ public class StageView extends AbstractScrollableView implements StageListener, 
         return result;
     }
 
+    /**
+     * Repalce's the mouses x,y values to their correct values.
+     * 
+     * @see #adjustMouse(MouseEvent)
+     * @param event
+     * @priority 5
+     */
     public void unadjustMouse(MouseEvent event)
     {
         event.x = this.oldX;
         event.y = this.oldY;
     }
 
+    /**
+     * Checks if the mouse is within the view's rectangle, and if so, forwards the event to all ViewMouseListeners
+     * (i.e. all of the Actors' Roles that are expecting mouse events.
+     */
     @Override
     public void onMouseDown(MouseButtonEvent event)
     {
@@ -269,6 +407,11 @@ public class StageView extends AbstractScrollableView implements StageListener, 
             unadjustMouse(event);
         }
     }
+
+    /**
+     * Checks if the mouse is within the view's rectangle, and if so, forwards the event to all ViewMouseListeners
+     * (i.e. all of the Actors' Roles that are expecting mouse events.
+     */
 
     @Override
     public void onMouseUp(MouseButtonEvent event)
@@ -295,6 +438,10 @@ public class StageView extends AbstractScrollableView implements StageListener, 
         }
     }
 
+    /**
+     * Checks if the mouse is within the view's rectangle, and if so, forwards the event to all ViewMouseListeners
+     * (i.e. all of the Actors' Roles that are expecting mouse events.
+     */
     @Override
     public void onMouseMove(MouseMotionEvent event)
     {

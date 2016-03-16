@@ -59,7 +59,7 @@ public class TurnAnimation extends NumericAnimation
         double turnage = this.turn * delta;
         actor.getAppearance().adjustDirection(turnage);
         if (this.headingToo) {
-            actor.adjustDirection(turnage);
+            actor.adjustHeading(turnage);
         }
     }
 

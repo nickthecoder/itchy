@@ -37,9 +37,9 @@ javadoc {
     options.addStringOption( "usecookies" )
     options.addStringOption( "title", "Itchy" )
     options.addStringOption( "link", "http://docs.oracle.com/javase/7/docs/api/")
+    options.addStringOption( "diagram", "src/docs/classDiagram.xml" )
 
     options.docletpath = configurations.compile.files.asType(List)
-    //options.addStringOption( "diagram", "src/docs/classDiagram.xml" )
     verbose = true
 }
 

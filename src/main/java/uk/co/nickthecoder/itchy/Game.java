@@ -36,28 +36,30 @@ import uk.co.nickthecoder.jame.event.ResizeEvent;
 import uk.co.nickthecoder.jame.event.WindowEvent;
 
 /**
- * Game is one of the core classes within Itchy, it is the central point around which all the other pieces work. As a
- * games designer, you do
- * not create a Game object directly, it is created automatically when the {@link Resources} are loaded.
+ * Game is the core class, from which everything else hangs. You can access the currently running game at any time by
+ * calling {@link Itchy#getGame()}.
+ * As a games designer, you do not create a Game object directly, it is created automatically when the Game's
+ * {@link Resources} are loaded. Loading the Resources also creates a {@link Director}, which is where some of your
+ * game's code sits.
  * <p>
- * A game consists of a set of {@link Stage} objects (typically {@link ZOrderStage}), and on each Stage, there live a
- * set of {@link Actor} objects. The Actors are things like spaceships, bullets and even the scenery. How the actors
- * move and interact is defined by their {@link Role}. Most of your game's code will probably be a type of Role.
+ * It isn't until a {@link Scene} is loaded, that the Game is ready for action. Loading a Scene, creates a
+ * {@link Layout}, which is made up of {@link Layers}, and some Layers will have {@link Stage}s, and on these Stages are
+ * {@link Actor}s. Each Actor has a {@link Role}, and Roles are were the vast majority of your game should be written.
  * <p>
- * A game needs to display the stage and its actors on the screen, and that is done via a {@link View} (a
- * {@link StageView} in fact). Each stage normally has one view, but there could be more. For example, you could split
- * the screen down the middle for a two player game, and there would be one Stage with two Views of it (one for each
- * player).
+ * Loading the Scene will also set up a {@link SceneDirector}, another place for your game code.
  * <p>
- * The Game, in partnership with its {@link Director}, is responsible for coordinating all of these pieces. Each frame
- * (sixty times a second), the game's {@link #tick()} method is called. This will call every Actor's Role's
- * {@link Role#animateAndTick()} method, and it is the Role's tick method that moves actors. The {@link SceneDesigner}'s
- * tick method is also called once every frame.
+ * Once the Scene is loaded, the main "game loop" runs. Each time round the loop is a single frame which is 1/60th of a
+ * second, also known as one "tick". Each tick calls {@link Director#tick()}, {@link SceneDirector#tick()} and for every
+ * Actor, {@link Role#tick()}.
  * <p>
- * After all the ticking has taken place, its time to draw to the screen. Every View is rendered (drawn), and what you
- * see on the screen is the combination of all of the views. You can think of views as a stack of transparent plastic
- * sheets stacked one on top of another. Each view may have only a small part of the final picture.
+ * It now time to redraw the whole screen. This is done through {@link View}s. You can think of Views as a stack of
+ * transparent plastic sheets stacked one on top of another. Each view may have only a small part of the final picture.
+ * You should not be able to see straight through any part of this stack of Views, and the easiest way to do this is for
+ * the bottom most layer to be fully opaque. It can either be a single solid colour (using the {@link RGBAView}), or be
+ * an image as big as the screen.
  * <p>
+ * The game loop, the ticks and the rendering (drawing) or the Views are all done automatically (so you don't need to
+ * write any code to do these things).
  */
 public class Game
 {
@@ -67,29 +69,44 @@ public class Game
     public final Resources resources;
 
     /**
-     * The overall controller of the game, but ironically, it often has very little to do, as most of the game logic is
-     * inside each Actor's {@link Role}. Also, each scene can have its own {@link SceneDirector} which controls a single
-     * scene. This leaves very little for
-     * Director to do in most cases.
-     * The director is set from the "Info" tab in the {@link Editor}.
+     * The Layout for the current Scene. Set each time a Scene is loaded.
      */
-    private Director director;
+    public Layout layout;
 
     /**
      * Holds the tag information for all of the Actors used within this game. This isn't typically used directly, but
      * instead used via {@link AbstractRole#allByTag(String)}, {@link AbstractRole#hasTag(String)},
      * {@link AbstractRole#addTag(String)} and {@link AbstractRole#removeTag(String)}.
+     * 
+     * @priority 5
      */
     public final TagCollection<Role> roleTags = new TagCollection<Role>();
 
     /**
-     * Helps to implement a pause feature within your game. Typically, you will pause/unpause from your game's
+     * Helps to implement a pause feature within your game. Typically, you will pause/un-pause from your game's
      * {@link SceneDirector#onKeyDown(KeyboardEvent)}
      */
     public Pause pause;
 
     /**
-     * Holds data about this game that is stored for use then next time the game is run. For example, it can be used to
+     * Controls how the mouse pointer appears while inside the game window. It could be hidden (useful for games which
+     * don't use a mouse),
+     * appear as a regular mouse pointer, or look a bit more flashy. The mouse is given special status, as it always
+     * receives mouse events, even if something else has 'captured' the mouse.
+     */
+    public Mouse mouse = new SimpleMouse();
+
+    /**
+     * The overall controller of the game, but ironically, it often has very little to do, as most of the game logic is
+     * inside each Actor's {@link Role}. Also, each scene can have its own {@link SceneDirector} which controls a single
+     * scene. This leaves very little for Director to do in most cases.
+     * <p>
+     * The director is set from the "Info" tab in the {@link Editor}.
+     */
+    private Director director;
+
+    /**
+     * Holds data about this game that is stored for use the next time the game is run. For example, it can be used to
      * store high scores.
      */
     private AutoFlushPreferences preferences;
@@ -179,15 +196,6 @@ public class Game
     public final ScriptManager scriptManager;
 
     /**
-     * Controls how the mouse pointer appears while inside the game window. It could be hidden (useful for games which
-     * don't use a mouse),
-     * appear as a regular mouse pointer, or look a bit more flashy. The mouse is given special status, as its
-     * MousePointer always receives
-     * mouse events, even if something else has captured the mouse.
-     */
-    public Mouse mouse = new SimpleMouse();
-
-    /**
      * Game constructor called when the resources are being loaded. Note that not much initialisation can take place
      * yet, as vital
      * information is missing. For example, the games width and height are unknown. The {@link #init()} method will be
@@ -196,6 +204,7 @@ public class Game
      * 
      * @param resources
      *            The resources being loaded. Note, the resources will NOT be fully loaded yet.
+     * @priority 3
      */
     public Game(Resources resources)
     {
@@ -219,6 +228,8 @@ public class Game
      * where most of Game's initialisation occurs; it couldn't take place in Game's constructor, because vital
      * information wasn't available
      * at that time (e.g. the game's width and height weren't known then.
+     * 
+     * @priority 3
      */
     public void init()
     {
@@ -233,9 +244,14 @@ public class Game
         this.glassView.enableMouseListener(this);
     }
 
+    /**
+     * 
+     * @return
+     * @priority 3
+     */
     public FrameRate getFrameRate()
     {
-        return Itchy.frameRate;
+        return Itchy.getFrameRate();
     }
 
     /**
@@ -244,6 +260,7 @@ public class Game
      * behaviour for different parts of the game, then use different SceneDirectors to code each part of the game.
      * 
      * @param director
+     * @priority 3
      */
     public void setDirector(Director director)
     {
@@ -254,24 +271,43 @@ public class Game
         this.addKeyListener(this.director);
     }
 
+    /**
+     * A simple getter.
+     * 
+     * @return
+     */
     public Director getDirector()
     {
         return this.director;
     }
 
+    /**
+     * 
+     * @return
+     * @priority 5
+     */
     public List<Stage> getStages()
     {
         return this.stages;
     }
 
+    /**
+     * Used internally by Itchy.
+     * 
+     * @return
+     * @priority 5
+     */
     public ScriptManager getScriptManager()
     {
         return this.scriptManager;
     }
 
     /**
+     * Used internally by Itchy.
      * Called soon after a Game is created and also when a Game creates another Game, and the second Game ends
      * (reactivating the first one).
+     * 
+     * @priority 5
      */
     public void onActivate()
     {
@@ -281,20 +317,34 @@ public class Game
 
     /**
      * Called when a Game gives starts another Game.
+     * 
+     * @priority 5
      */
     public void onDeactivate()
     {
         this.director.onDeactivate();
     }
 
+    /**
+     * Called when the game window is resized. {@link AbstractDirector#onResize(ResizeEvent)} take care of resizable
+     * windows, so there is no need for your code to call this.
+     * 
+     * @param width
+     *            The new width of the window's client area (excluding the windows borders).
+     * @param height
+     *            The new height of the window's client area (excluding the window boarders and title bar).
+     * @priority 3
+     */
     public void resize(int width, int height)
     {
         Itchy.resizeScreen(width, height);
     }
 
     /**
-     * Kills all Actors and resets the layers to the origin.
+     * Kills all Actors on all Stages. It is unlikely you will need this, because loading a new Scene calls clear
+     * automatically.
      * 
+     * @priority 5
      */
     public void clear()
     {
@@ -307,7 +357,9 @@ public class Game
     }
 
     /**
-     * Typically, this is called immediately the Game object is created, usually from the "main" method.
+     * Typically, this is called just after the Game object is created, usually from the "main" method.
+     * 
+     * @priority 5
      */
     public void start()
     {
@@ -326,6 +378,7 @@ public class Game
      * to a particular scene.
      * 
      * @param sceneName
+     * @priority 5
      */
     public void start(String sceneName)
     {
@@ -340,11 +393,21 @@ public class Game
         Itchy.mainLoop();
     }
 
+    /**
+     * @return false if this game has ended, or if another game has been started.
+     * @priority 3
+     */
     public boolean isRunning()
     {
         return this.running;
     }
 
+    /**
+     * While it is possible to start the editor while your game is running, it is currently not recommended, because
+     * weird things can happen if you edit the game while it is still running.
+     * 
+     * @priority 3
+     */
     public void startEditor()
     {
         // If the editor has been started without the game being started (i.e. directly from the
@@ -362,6 +425,12 @@ public class Game
         }
     }
 
+    /**
+     * While it is possible to start the editor while your game is running, it is currently not recommended, because
+     * weird things can happen if you edit the game while it is still running.
+     * 
+     * @priority 3
+     */
     public void startEditor(String designSceneName)
     {
         // If the editor has been started without the game being started (i.e. directly from the
@@ -385,6 +454,7 @@ public class Game
      * 
      * @param sceneName
      *            The name of the scene to play.
+     * @priority 5
      */
     public void testScene(String sceneName)
     {
@@ -402,6 +472,8 @@ public class Game
      * The flip side of {@link #testScene(String)}, will return to the scene designer.
      * 
      * Very similar to {@link #end()}.
+     * 
+     * @priority 5
      */
     public void endTest()
     {
@@ -444,6 +516,14 @@ public class Game
 
     Map<String, Actor> actorsById = new WeakHashMap<String, Actor>();
 
+    /**
+     * Looks for an Actor with the given ID. Note that there is nothing to enforce Actor's IDs to be unique. Looking for
+     * a non-unique ID will return just one Actor (which one is not defined). If you want to find a set of Actors, use
+     * tags and {@link #findRoleByTag(String)}.
+     * 
+     * @param id
+     * @return An Actor
+     */
     public Actor findActorById(String id)
     {
         return actorsById.get(id);
@@ -455,6 +535,7 @@ public class Game
      * to add some debugging information, such as the frames per second. You shouldn't use it for regular actors.
      * 
      * @return The glass stage, who's view is draw above all of the game's regular views.
+     * @priority 3
      */
     public ZOrderStage getGlassStage()
     {
@@ -464,12 +545,20 @@ public class Game
     /**
      * The glass view is drawn above all of the game's regular views. It is a view of the stage returned by
      * {@link #getGlassStage()}.
+     * 
+     * @priority 3
      */
     public StageView getGlassView()
     {
         return this.glassView;
     }
-    
+
+    /**
+     * Most games have no use for {@link GuiView}s.
+     * 
+     * @return
+     * @priority 2
+     */
     public List<GuiView> getGUIViews()
     {
         return this.windows;
@@ -480,12 +569,14 @@ public class Game
      * 
      * Itchy will call this from inside the game loop, so there is normally no need for you to call it explicitly.
      * However, you may call
-     * this with a surface of your creation to obtain a screenshot of the game. {@link SceneTransition} takes
+     * this with a surface of your own creation to obtain a screenshot of the game. {@link SceneTransition} takes
      * screenshots in this manner,
      * which are then slid, or faded from view.
      * 
      * @param display
-     *            The surface to draw onto. This will normally be the display surface, but can be any surface.
+     *            The surface to draw onto. This will normally be the display surface, but can be any surface WITHOUT an
+     *            alpha channel.
+     * @priority 3
      */
     public void render(Surface display)
     {
@@ -493,7 +584,7 @@ public class Game
         if (this.layout != null) {
             for (Layer layer : this.layout.getLayersByZOrder()) {
                 View view = layer.getView();
-                view.render( view.adjustGraphicsContext(gc));
+                view.render(view.adjustGraphicsContext(gc));
             }
         }
         for (GuiView window : this.windows) {
@@ -504,10 +595,13 @@ public class Game
 
     /**
      * Use this to time actual game play, which will exclude time while the game is paused. A single value from
-     * gameTimeMillis is
-     * meaningless, it only has meaning when one value is subtracted from a later value (which will give the number of
-     * milliseconds of game
-     * elapse time.
+     * gameTimeMillis is meaningless, it only has meaning when one value is subtracted from a later value (which will
+     * give the number of milliseconds of game elapse time.
+     * <p>
+     * To time events, it is usually easier to use {@link uk.co.nickthecoder.itchy.extras.Timer}, rather than using this
+     * method directly.
+     * 
+     * @priority 3
      */
     public long gameTimeMillis()
     {
@@ -524,6 +618,7 @@ public class Game
      * 
      * @param event
      *            The event that needs to be handled.
+     * @priority 5
      */
     void processEvent(Event event)
     {
@@ -710,21 +805,41 @@ public class Game
         }
     }
 
+    /**
+     * 
+     * @param listener
+     * @priority 3
+     */
     public void addMouseListener(MouseListener listener)
     {
         this.mouseListeners.add(listener);
     }
 
+    /**
+     * 
+     * @param listener
+     * @priority 3
+     */
     public void removeMouseListener(MouseListener listener)
     {
         this.mouseListeners.remove(listener);
     }
 
+    /**
+     * 
+     * @param listener
+     * @priority 3
+     */
     public void addKeyListener(KeyListener listener)
     {
         this.keyListeners.add(listener);
     }
 
+    /**
+     * 
+     * @param listener
+     * @priority 3
+     */
     public void removeKeyListener(KeyListener listener)
     {
         this.keyListeners.remove(listener);
@@ -735,6 +850,7 @@ public class Game
      * {@link #releaseMouse(MouseListener)} is
      * called.
      * 
+     * @priority 3
      */
     public void captureMouse(MouseListener owner)
     {
@@ -746,6 +862,7 @@ public class Game
      * The flip side of {@link #captureMouse(MouseListener)}. MouseListeners will receive mouse events as normal.
      * 
      * @param owner
+     * @priority 3
      */
     public void releaseMouse(MouseListener owner)
     {
@@ -753,6 +870,9 @@ public class Game
         this.mouseOwner = null;
     }
 
+    /**
+     * @priority 3
+     */
     public void setModalListener(InputListener listener)
     {
         this.modalListener = listener;
@@ -762,6 +882,8 @@ public class Game
      * Used when a single entity believes it deserves first priority to all key strokes. In particular, this is used by
      * GUI components,
      * which accept keyboard input when they have the focus.
+     * 
+     * @priority 3
      */
     public void setFocus(Focusable focus)
     {
@@ -788,21 +910,40 @@ public class Game
 
     /**
      * @return The title of the Game, as it should appear in the window's title bar. This is taken from the
-     *         {@link GameInfo}, which is
-     *         stored in the game's {@link Resources} file.
+     *         {@link GameInfo}, which is stored in the game's {@link Resources} file.
+     * @priority 3
      */
     public String getTitle()
     {
         return this.resources.getGameInfo().title;
     }
 
+    /**
+     * 
+     * @return
+     * @priority 3
+     */
     public boolean isResizable()
     {
         return this.resources.getGameInfo().resizable;
     }
 
+    /**
+     * If no further tick methods should be called for this frame, then
+     * this flag is set. For example, loading a new Scene will set this flag.
+     * The {@link #tick()} method checks this, and returns whenever it is set.
+     * 
+     */
     private boolean abortTicks;
 
+    /**
+     * Called once per frame (usually 60 times per second).
+     * Calls {@link Director#tick()}, {@link SceneDirector#tick()} and the {@link Stage#tick()} for each Stage, which
+     * will
+     * in turn, call all of the {@link Role#tick()}.
+     * 
+     * @priority 3
+     */
     public void tick()
     {
         this.abortTicks = false;
@@ -813,7 +954,7 @@ public class Game
         }
 
         this.getSceneDirector().tick();
-        
+
         if (this.abortTicks) {
             return;
         }
@@ -828,21 +969,37 @@ public class Game
         this.glassStage.tick();
     }
 
+    /**
+     * A simple getter for the current {@link SceneDirector}. The SceneDirector is set automatically when a
+     * {@link Scene} is loaded.
+     * 
+     * @return
+     */
     public SceneDirector getSceneDirector()
     {
         return this.sceneDirector;
     }
 
+    /**
+     * Automatically called when a {@link Scene} is loaded.
+     * 
+     * @param sceneDirector
+     * @priority 3
+     */
     public void setSceneDirector(SceneDirector sceneDirector)
     {
         if (this.sceneDirector != null) {
             this.sceneDirector.onDeactivate();
         }
         this.sceneDirector = sceneDirector;
-        
+
         this.sceneDirector.onActivate();
     }
 
+    /**
+     * @param sceneName
+     * @return true if the named scene exists.
+     */
     public boolean hasScene(String sceneName)
     {
         try {
@@ -852,8 +1009,17 @@ public class Game
         }
     }
 
-    public Layout layout;
-
+    /**
+     * Loads the named {@link Scene}, and merges it with the current one. The Game's layout will be a combination of the
+     * two Scene's Layouts.
+     * <p>
+     * Often called from {@link SceneDirector#loading(Scene)} when common Actors are needed by many scenes. For example
+     * the score is an Actor on a glass layer, which is needed for every level of a game. Rather than add the score's
+     * Actor to every Scene, create a Scene containing just the score, and merge it with the real game scenes.
+     * 
+     * @param additionalSceneName
+     * @return
+     */
     public Scene mergeScene(String additionalSceneName)
     {
         Scene scene = this.loadScene(additionalSceneName);
@@ -879,6 +1045,11 @@ public class Game
         return scene;
     }
 
+    /**
+     * 
+     * @param scene
+     * @priority 3
+     */
     public void unmergeScene(Scene scene)
     {
         // Prevent a concurrent modification exception by aborting the ticks after the current stage as ticked.
@@ -893,11 +1064,36 @@ public class Game
         }
     }
 
+    /**
+     * 
+     * @return
+     */
     public Layout getLayout()
     {
         return this.layout;
     }
 
+    /**
+     * Clears all Stages and Actors, and then loads the named {@link Scene}.
+     * <p>
+     * Many events are fired when loading the scene, and the order is very important.
+     * <ul>
+     * <li>{@link Director#onStartingScene(String)}</li>
+     * <li>{@link Director#loadScene(String)}</li>
+     * <li>{@link SceneDirector#onDeactivate()}
+     * <li>the actors are created</li>
+     * <li>new SceneDirector is created</li>
+     * <li>Each Actor's {@link AbstractRole#onAttach()}</li>
+     * <li>Each Actor's {@link AbstractRole#onBirth()}</li>
+     * <li>{@link SceneDirector#onLoaded()}</li>
+     * <li>Each Actor's {@link AbstractRole#onSceneCreated()}</li>
+     * <li>{@link SceneDirector#onActivate()}</li>
+     * <li>{@link Director#onStartedScene()}</li>
+     * </ul>
+     * 
+     * @param sceneName
+     * @return
+     */
     public boolean startScene(String sceneName)
     {
         this.abortTicks = true;
@@ -906,13 +1102,14 @@ public class Game
         if (this.pause.isPaused()) {
             this.pause.unpause();
         }
+
+        this.sceneDirector.onDeactivate();
+
         this.clear();
         Scene scene = this.director.loadScene(sceneName);
         if (scene == null) {
             return false;
         }
-
-        this.sceneDirector.onDeactivate();
 
         this.sceneName = sceneName;
         this.sceneDirector = scene.getSceneDirector();
@@ -950,13 +1147,21 @@ public class Game
         // Fire sceneDirector's onActivate
         this.sceneDirector.onActivate();
 
-        Itchy.frameRate.reset();
+        Itchy.getFrameRate().reset();
 
         this.director.onStartedScene();
         return true;
     }
 
-    public Scene loadScene(String sceneName)
+    /**
+     * Loads a scene. Should not be called directly. Use {@link #startScene(String)} or {@link #mergeScene(String)}
+     * instead.
+     * 
+     * @param sceneName
+     * @return
+     * @priority 5
+     */
+    Scene loadScene(String sceneName)
     {
         SceneStub sceneStub = this.resources.getScene(sceneName);
         if (sceneStub == null) {
@@ -991,6 +1196,10 @@ public class Game
         }
     }
 
+    /**
+     * 
+     * @return The current Scene's name.
+     */
     public String getSceneName()
     {
         return this.sceneName;
@@ -1012,16 +1221,34 @@ public class Game
         Itchy.endGame();
     }
 
+    /**
+     * Sets the {@link Stylesheet} used by all {@link GuiView}s.
+     * 
+     * @param rules
+     * @priority 3
+     */
     public void setStylesheet(Stylesheet rules)
     {
         this.stylesheet = rules;
     }
 
+    /**
+     * A simple getter.
+     * 
+     * @return
+     * @priority 3
+     */
     public Stylesheet getStylesheet()
     {
         return this.stylesheet;
     }
 
+    /**
+     * 
+     * @param rootContainer
+     * @return
+     * @priority 3
+     */
     public GuiView show(RootContainer rootContainer)
     {
         GuiView view = new GuiView(new Rect(0, 0, this.getWidth(), this.getHeight()), rootContainer);
@@ -1030,6 +1257,11 @@ public class Game
         return view;
     }
 
+    /**
+     * 
+     * @param view
+     * @priority 3
+     */
     public void show(GuiView view)
     {
         view.setVisible(true);
@@ -1050,6 +1282,11 @@ public class Game
 
     }
 
+    /**
+     * 
+     * @param view
+     * @priority 3
+     */
     public void hide(GuiView view)
     {
         view.setVisible(false);
@@ -1081,12 +1318,17 @@ public class Game
      * order of the actors with each stage.
      * 
      * @return An iterator of all actors on all stages
+     * @priority 3
      */
     public Iterator<Actor> getActors()
     {
         return new AllActorsIterator();
     }
 
+    /**
+     * 
+     * @priority 5
+     */
     class AllActorsIterator implements Iterator<Actor>
     {
         private Actor next;

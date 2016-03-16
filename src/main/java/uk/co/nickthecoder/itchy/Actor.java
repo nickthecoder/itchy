@@ -9,7 +9,9 @@ import java.util.List;
 
 import uk.co.nickthecoder.itchy.animation.Animation;
 import uk.co.nickthecoder.itchy.animation.CompoundAnimation;
+import uk.co.nickthecoder.itchy.collision.CollisionStrategy;
 import uk.co.nickthecoder.itchy.collision.PixelCollisionTest;
+import uk.co.nickthecoder.itchy.editor.SceneDesigner;
 import uk.co.nickthecoder.itchy.property.DoubleProperty;
 import uk.co.nickthecoder.itchy.property.IntegerProperty;
 import uk.co.nickthecoder.itchy.property.Property;
@@ -20,8 +22,30 @@ import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.jame.RGBA;
 import uk.co.nickthecoder.jame.Surface;
 
+/**
+ * Actors are at the very core of Itchy, every game object is an Actor. For example, in the space invaders game,
+ * each space invader is an actor, so is your ship, the bullets and the shields. More surprisingly, the score is also an
+ * actor, as well as the background image.
+ * <p>
+ * Each Actor has a {@link Role} which defines the behaviour of the Actor. Most of your game code will within Roles.
+ * <p>
+ * Each Actor has its own {@link Appearance}, which holds information such as the scale (size), its angle (if it has
+ * been rotated) and its alpha (if it is semi-transparent).
+ * <p>
+ * Actors also have a {@link Costume}. A Costume may be shared by many Actors. For example in space invaders, your ship
+ * has one Costume, and all of your ship's bullets share another Costume. Costumes hold an image (or a set of images),
+ * which are called {@link Pose}, but also have other goodies such as sounds.
+ * <p>
+ * Actors are added to a {@link Stage}, and the Stage is displayed on the screen via a {@link StageView}. Most of the
+ * time, you don't need to worry about Stages, or StageViews, because Actors are added to Stages automatically when the
+ * scene is loaded.
+ * 
+ */
 public class Actor implements PropertySubject<Actor>
 {
+    /**
+     * @priority 5
+     */
     protected static final List<Property<Actor, ?>> properties = new ArrayList<Property<Actor, ?>>();
 
     static {
@@ -63,7 +87,7 @@ public class Actor implements PropertySubject<Actor>
 
     private String id;
 
-    Role role;
+    private Role role;
 
     private Animation animation;
 
@@ -88,11 +112,23 @@ public class Actor implements PropertySubject<Actor>
 
     private boolean fullyCreated = false;
 
+    /**
+     * Create an actor with a costume, using the "default" pose.
+     */
     public Actor(Costume costume)
     {
         this(costume, "default");
     }
 
+    /**
+     * Create an actor with a {@link Costume}, and choose which of the costume's {@link Pose}s to use.
+     * 
+     * @param costume
+     * @param poseName
+     *            The name of the "event" to use as the Actor's {@link Pose}. Note this is NOT the name of a Pose within
+     *            the {@link Resources}.
+     * @priority 4
+     */
     public Actor(Costume costume, String poseName)
     {
         // Note, that we only set the pose based on poseName, we do NOT set the animation, or
@@ -102,6 +138,12 @@ public class Actor implements PropertySubject<Actor>
         this.costume = costume;
     }
 
+    /**
+     * Create an actor without a {@link Costume}
+     * 
+     * @param pose
+     * @priority 4
+     */
     public Actor(Pose pose)
     {
         this.sequenceNumber = nextSequenceNumber;
@@ -122,17 +164,40 @@ public class Actor implements PropertySubject<Actor>
     /**
      * @return A unique ID of this actor. This is useful when debugging a game, its a quick and simple way to
      *         keep track of a single actor.
+     * @priority 3
      */
     public int getSequenceNumber()
     {
         return this.sequenceNumber;
     }
 
+    /**
+     * Each actor can be assigned a String id (on the "Actor" tab within the {@link SceneDesigner}.
+     * This is useful when you want to find a specific Actor. For example to make a key unlock a specific door, give the
+     * door a unique ID in the Scene Designer. When you collect the key you can find that door using the method
+     * {@link Game#findActorById(String)}.
+     * <p>
+     * Note. It is up to you to ensure that the IDs are unique. If they aren't the behaviour of
+     * {@link Game#findActorById(String)} is undefined. If you want to find a set of game objects (for example, if you
+     * want a key to open many doors), then use {@link Role#addTag(String)} and {@link Game#findRoleByTag(String)}.
+     * 
+     * @return The ID
+     * @priority 3
+     */
     public String getId()
     {
         return this.id;
     }
 
+    /**
+     * Sets the Actor's ID. Typically you will use the {@link SceneDesigner} to set the IDs for actors, so this method
+     * is rarely used.
+     * <p>
+     * Find an Actor with a given ID using {@link Game#findRoleByTag(String)}.
+     * 
+     * @param id
+     * @priority 3
+     */
     public void setId(String id)
     {
         if (this.id != null) {
@@ -155,41 +220,88 @@ public class Actor implements PropertySubject<Actor>
         }
     }
 
+    /**
+     * Only used by the {@link SceneDesigner}.
+     * <p>
+     * When a {@link Scene} is loaded, each Actor has a startEvent, which is usually "default", but can be changed
+     * within the {@link SceneDesigner}. The startEvent determines which {@link Pose} to use, as well as which
+     * {@link Animation} to start, and which {@link ManagedSound} to play when the actor is born.
+     * 
+     * @return The start event for this Actor
+     * @priority 5
+     */
     public String getStartEvent()
     {
         return this.startEvent;
     }
 
+    /**
+     * Only used by the {@link SceneDesigner}.
+     * 
+     * @param value
+     * @priority 5
+     */
     public void setStartEvent(String value)
     {
         this.startEvent = value;
     }
 
     /**
-     * Sets the heading that the actor is travelling in. It does NOT affect the rotation of the actor's image.
+     * Sets the heading that the actor is travelling in, when used in conjunction with {@link #moveForwards(double)}.
+     * It does NOT affect the rotation of the Actor's {@link Pose}. To rotate, use
+     * {@link Appearance#setDirection(Actor)}.
+     * To change both the angle of the Pose, and the Actor's heading, use {@link #setDirection(double)}.
      * 
      * @param degrees
+     *            The angle in degrees. 0 is to the right (eastwards), 90 is straight up (i.e. anti-clockwise).
+     * @priority 1
      */
     public void setHeading(double degrees)
     {
         this.heading = degrees;
     }
 
+    /**
+     * Does the same as {@link #setHeading(double)}, but uses radians, rather than degrees. Always use radians when
+     * using trigonometric functions cos, sin etc.
+     * 
+     * @param radians
+     * @priority 2
+     */
     public void setHeadingRadians(double radians)
     {
         this.setHeading(radians * 180 / Math.PI);
     }
 
+    /**
+     * Gets the direction the Actor is heading in, ie the direction it will move when using
+     * {@link #moveForwards(double)}.
+     * This is NOT the angle of rotation, see {@link Appearance#getDirection()}.
+     * 
+     * @return The heading in degrees.
+     * @priority 1
+     */
     public double getHeading()
     {
         return this.heading;
     }
 
+    /**
+     * Does the same as {@link #getHeading()}, but uses radians rather than degrees.
+     * 
+     * @return The heading in radians.
+     * @priority 2
+     */
     public double getHeadingRadians()
     {
         return this.heading / 180 * Math.PI;
     }
 
+    /**
+     * 
+     * @param degrees
+     * @priority 2
+     */
     public void adjustHeading(double degrees)
     {
         this.setHeading(this.heading + degrees);
@@ -199,6 +311,7 @@ public class Actor implements PropertySubject<Actor>
      * Sets the heading and the appearance's direction.
      * 
      * @param degrees
+     * @priority 2
      */
     public void setDirection(double degrees)
     {
@@ -211,48 +324,82 @@ public class Actor implements PropertySubject<Actor>
      * 
      * @param radians
      *            The new heading in radians
+     * @priority 3
      */
     public void setDirectionRadians(double radians)
     {
         setDirection(radians * 180 / Math.PI);
     }
 
+    /**
+     * A handy shortcut for {@link Appearance#getDirection()}
+     * 
+     * @return The angle of rotation in degrees.
+     * @priority 3
+     */
     public double getDirection()
     {
         return this.getAppearance().getDirection();
     }
 
     /**
-     * Adjusts the heading by the given amount, and points the image in that direction too.
-     * 
-     * @param degrees
-     *            The number of degrees to turn by (positive is anticlockwise).
+     * @return The Costume, or null if the Actor has no Costume.
      */
-    public void adjustDirection(double degrees)
-    {
-        adjustHeading(degrees);
-        getAppearance().setDirection(this.heading);
-    }
-
     public Costume getCostume()
     {
         return this.costume;
     }
 
+    /**
+     * A simple setter.
+     * 
+     * @param costume
+     *            May be null
+     * @priority 2
+     */
     public void setCostume(Costume costume)
     {
         this.costume = costume;
     }
 
-    public Actor createCompanion(String name)
+    /**
+     * Looks up this Actor's Costume for a "Companion" Costume using the given eventName, and uses this Companion
+     * Costume to create a new Actor.
+     * <p>
+     * If more than one Costume is found with the given event name, then one is picked at random.
+     * 
+     * @param eventName
+     *            The name used to find the companion costume.
+     *            Note, this is NOT the name of a Costume within the {@link Resources}.
+     * @return
+     *         A newly created Actor at the same place as this Actor, and on the same stage.
+     *         Its Costume (and therefore its Pose) is looked up in this Actor's 'companion' event.
+     *         Its Role is taken from its Costume.
+     */
+    public Actor createCompanion(String eventName)
     {
-        return createCompanion(name, "default");
+        return createCompanion(eventName, "default");
     }
 
-    public Actor createCompanion(String name, String startEvent)
+    /**
+     * Does the same as {@link #createCompanion(String)}, but the startEvent does not have to be "default".
+     * 
+     * @param eventName
+     *            The name used to find the companion costume.
+     *            Note, this is NOT the name of a Costume within the {@link Resources}.
+     * @param startEvent
+     *            The start event for the new companion actor (which determines which {@link Pose} is used, and which
+     *            {@link Animation} to use as well as a sound to play when the Actor is born.
+     * @return
+     *         A newly created Actor at the same place as this Actor, and on the same stage.
+     *         Its Costume (and therefore its Pose) is looked up in this Actor's 'companion' event.
+     *         Its Role is taken from its Costume.
+     * @priority 3
+     */
+    public Actor createCompanion(String eventName, String startEvent)
     {
         Costume costume;
-        costume = this.costume.getCompanion(name);
+        costume = this.costume.getCompanion(eventName);
         Actor actor = costume.createActor(startEvent);
         actor.moveTo(this);
         getStage().add(actor);
@@ -260,26 +407,54 @@ public class Actor implements PropertySubject<Actor>
         return actor;
     }
 
+    /**
+     * 
+     * @return
+     * @priority 5
+     */
     public double getCornerY()
     {
         return this.getY() - this.getAppearance().getSurface().getHeight() + this.getAppearance().getOffsetY();
     }
 
+    /**
+     * 
+     * @return
+     * @priority 5
+     */
     public double getCornerX()
     {
         return this.getX() - this.getAppearance().getOffsetX();
     }
 
+    /**
+     * A simple getter
+     * 
+     * @return The {@link Stage} the Actor is on, or null if the Actor is not on a Stage.
+     */
     public Stage getStage()
     {
         return this.stage;
     }
 
+    /**
+     * Removes the Actor from its stage.
+     * 
+     * @priority 3
+     */
     public void removeFromStage()
     {
         setStage(null);
     }
 
+    /**
+     * Places the actor on a Stage. If the actor is already on a Stage, then it will be removed from that Stage before
+     * being
+     * added to the new one. An Actor can only be on a single Stage at a time.
+     * 
+     * @param stage
+     *            The Stage to be added to, or null to remove the actor from its current stage.
+     */
     public void setStage(Stage stage)
     {
         if (this.stage == stage) {
@@ -303,6 +478,7 @@ public class Actor implements PropertySubject<Actor>
      * important.
      * 
      * @param stage
+     * @priority 5
      */
     void setStageAttribute(Stage stage)
     {
@@ -318,24 +494,45 @@ public class Actor implements PropertySubject<Actor>
         checkFullyCreated();
     }
 
+    /**
+     * Begins an animation.
+     * If an animation is already part way through then the current animation is "fast-forwarded" to the end.
+     * See {@link #setAnimation(Animation, AnimationEvent)} if you do not want the fast-forward behaviour.
+     * It is more common to begin an animation using {@link #event(String)}, because it is easier, and gives more
+     * flexibility.
+     * 
+     * @param animation
+     * @priority 4
+     */
     public void setAnimation(Animation animation)
     {
         setAnimation(animation, AnimationEvent.FAST_FORWARD);
     }
 
-    public void setAnimation(Animation animation, AnimationEvent ae)
+    /**
+     * Begins an animation.
+     * If an animation is already part way through then the {@link AnimationEvent} determines whether the old animation
+     * is simply replaced, fast-forwarded, or merged.
+     * 
+     * @param animation
+     *            The new animation
+     * @param animationEvent
+     *            Determines the behaviour when an animation is already part way through.
+     * @priority 4
+     */
+    public void setAnimation(Animation animation, AnimationEvent animationEvent)
     {
-        if (ae == AnimationEvent.IGNORE) {
+        if (animationEvent == AnimationEvent.IGNORE) {
             if (this.animation != null) {
                 return;
             }
 
-        } else if (ae == AnimationEvent.FAST_FORWARD) {
+        } else if (animationEvent == AnimationEvent.FAST_FORWARD) {
             if ((this.animation != null) && (!this.animation.isFinished())) {
                 this.animation.fastForward(this);
             }
 
-        } else if (ae == AnimationEvent.REPLACE) {
+        } else if (animationEvent == AnimationEvent.REPLACE) {
             this.animation = null;
         }
 
@@ -344,9 +541,10 @@ public class Actor implements PropertySubject<Actor>
             return;
         }
 
-        if ( (this.animation != null) && ((ae == AnimationEvent.SEQUENCE) || ((ae == AnimationEvent.PARALLEL)))) {
+        if ((this.animation != null)
+            && ((animationEvent == AnimationEvent.SEQUENCE) || ((animationEvent == AnimationEvent.PARALLEL)))) {
             // Merge the two animations (either in sequence or in parallel, depending on "ae")
-            CompoundAnimation ca = new CompoundAnimation(ae == AnimationEvent.SEQUENCE);
+            CompoundAnimation ca = new CompoundAnimation(animationEvent == AnimationEvent.SEQUENCE);
             ca.add(this.animation);
             ca.add(animation.copy());
             ca.startExceptFirst(this);
@@ -359,11 +557,33 @@ public class Actor implements PropertySubject<Actor>
         // AbstractAnimation.tick(this.animation, this);
     }
 
+    /**
+     * A simple getter
+     * 
+     * @return The animation currently in effect, or null if the Actor is not currently animated.
+     * @priority 4
+     */
     public Animation getAnimation()
     {
         return this.animation;
     }
 
+    /**
+     * Determines the behaviour when {@link Actor#setAnimation(Animation, AnimationEvent)} is called, but the Actor is
+     * already
+     * in the middle of another Animation.
+     * 
+     * <ul>
+     * <li>{@link #REPLACE} The existing animation is simply stopped.</li>
+     * <li>{@link #FAST_FORWARD} The existing animation is fast-forwarded to the end.</li>
+     * <li>{@link #SEQUENCE} The two animations are merged, so that the new animation will start once the old one has
+     * finished.</li>
+     * <li>{@link #PARALLEL} The two animations are merged, so that both animations are carried out together in
+     * parallel.</li>
+     * <li>{@link #IGNORE} The new animation is ignored, and the old animation continues as normal.
+     * </ul>
+     *
+     */
     public enum AnimationEvent
     {
         REPLACE,
@@ -373,17 +593,33 @@ public class Actor implements PropertySubject<Actor>
         IGNORE
     }
 
+    /**
+     * Initiate an event, which can change the Actor's {@link Pose}, begin an {@link Animation}, and/or cause a Sound to
+     * play.
+     * 
+     * @param eventName
+     *            The name of the event (as defined in the Costume tab of the {@link Editor}
+     */
     public void event(String eventName)
     {
         this.event(eventName, null, AnimationEvent.REPLACE);
     }
 
-    public void event(String eventName, String message)
-    {
-        this.event(eventName, message, AnimationEvent.REPLACE);
-    }
-
-    public void event(String eventName, String message, AnimationEvent ae)
+    /**
+     * Take full control over initiating an event. Event can change the Actor's {@link Pose}, begin an {@link Animation}
+     * , and/or cause a Sound to play.
+     * 
+     * @param eventName
+     *            The name of the event (as defined in the Costume tab of the {@link Editor}
+     * @param message
+     *            The message sent to the {@link Role} when the event's {@link Animation} finishes. If the event has no
+     *            animation, then the message is sent straight away.
+     * @param animationEvent
+     *            Determines the behaviour when the Actor is currently in the middle of an {@link Animation} and the
+     *            event has an Animation too.
+     * @priority 4
+     */
+    public void event(String eventName, String message, AnimationEvent animationEvent)
     {
         if (this.costume == null) {
             return;
@@ -405,7 +641,7 @@ public class Actor implements PropertySubject<Actor>
         }
 
         if (animation != null) {
-            this.setAnimation(animation, ae);
+            this.setAnimation(animation, animationEvent);
         }
 
         ManagedSound cs = this.costume.getCostumeSound(eventName);
@@ -414,20 +650,37 @@ public class Actor implements PropertySubject<Actor>
         }
     }
 
+    /**
+     * Does the same as {@link #event(String)}, but also kills the actor when the event finishes. If the event has no
+     * Animation, then the Actor is killed straight away.
+     * 
+     * @param eventName
+     *            The name of the event (as defined in the Costume tab of the {@link Editor}
+     * 
+     */
     public void deathEvent(String eventName)
     {
         deathEvent(eventName, null, AnimationEvent.REPLACE);
     }
 
-    public void deathEvent(String eventName, String message)
-    {
-        deathEvent(eventName, message, AnimationEvent.REPLACE);
-    }
-
-    public void deathEvent(String eventName, String message, AnimationEvent ae)
+    /**
+     * Does the same as {@link #event(String, String, AnimationEvent)}, but also kills the actor when the event
+     * finishes. If the event has no Animation, then the Actor is killed straight away.
+     * 
+     * @param eventName
+     *            The name of the event (as defined in the Costume tab of the {@link Editor}
+     * @param message
+     *            The message sent to the Actor's {@link Role} when the event's {@link Animation} finishes. If the event
+     *            has no animation, then the message is sent straight away.
+     * @param animationEvent
+     *            Determines the behaviour when the Actor is currently in the middle of an {@link Animation} and the
+     *            event has an Animation too.
+     * @priority 4
+     */
+    public void deathEvent(String eventName, String message, AnimationEvent animationEvent)
     {
         this.dying = true;
-        this.event(eventName, message, ae);
+        this.event(eventName, message, animationEvent);
         if ((this.costume == null) || (this.costume.getAnimation(eventName) == null)) {
             this.kill();
         }
@@ -438,6 +691,7 @@ public class Actor implements PropertySubject<Actor>
      * corresponding animations.
      * 
      * @param eventName
+     * @priority 3
      */
     public void endEvent(String eventName)
     {
@@ -445,21 +699,37 @@ public class Actor implements PropertySubject<Actor>
     }
 
     /**
-     * @return true iff not dying or dead.
+     * Return true if neither {@link #deathEvent(String)} nor {@link #kill()} have been called on this Actor.
+     * Note, this is not quite the opposite of {@link #isDead()}
+     *
+     * @return true iff not dying nor dead.
+     * 
      */
     public boolean isAlive()
     {
         return !(this.dying || this.dead);
     }
 
-    public double getX()
+    /**
+     * Return true if {@link #kill()} has been called.
+     * Note, this is not quite the opposite of {@link #isAlive}, because this method returns false when a
+     * {@link #deathEvent(String)} has been called and the event's Animation hasn't finished yet.
+     * 
+     * @return true if {@link #kill()} has been called.
+     */
+    public boolean isDead()
     {
-        return this.x;
+        return this.dead;
     }
 
-    public double getY()
+    /**
+     * 
+     * @return true if a {@link #deathEvent(String)} has been called.
+     * @priority 2
+     */
+    public boolean isDying()
     {
-        return this.y;
+        return this.dying;
     }
 
     private void checkFullyCreated()
@@ -476,6 +746,29 @@ public class Actor implements PropertySubject<Actor>
         }
     }
 
+    /**
+     * Sets the Actor's {@link Role}. The Actor's old Role (if there is one) is detached (which will cause
+     * {@link AbstractRole#onDetach()} to be called). The new role is then attached (which will cause
+     * {@link AbstractRole#onAttach()} to be called).
+     * <p>
+     * If this is the first time this Actor has had its Role set, and the Actor is on a {@link Stage}, then the
+     * {@link AbstractRole#onBirth()} will also be called.
+     * <p>
+     * Most of the time, you do not need to worry about setting an Actor's Role, as they are set automatically when the
+     * scene is loaded. However, in rare cases you may choose to change an Actor's Role during the game. For example, in
+     * Pac-Man, the ghosts change behaviour when Pac-Man eats a power pill. You could implement this by changing the
+     * ghosts' roles from a "chasing" to "running away". However, there are other ways of implementing this, which are
+     * arguably better. See The-Mings demo game for an example of changing an Actor's behaviour without changing its
+     * Role.
+     * <p>
+     * Note. An Actor can have a delay set in the SceneDesigner. At the beginning of the scene, it will have a
+     * {@link DelayedActivation} Role, and the real Role will be set after the delay has elapsed.
+     * 
+     * @param role
+     *            The new Role for the Actor. If null, is passed, then the a {@link PlainRole} will be assigned, instead
+     *            of null.
+     * @priority 3
+     */
     public final void setRole(Role role)
     {
         if ((this.role != null) && (this.role.getClass() == DelayedActivation.class)) {
@@ -500,51 +793,72 @@ public class Actor implements PropertySubject<Actor>
         checkFullyCreated();
     }
 
+    /**
+     * @return The Actor's {@link Role}. When an Actor is first created, the Role may be null, but should soon be set to
+     *         a non-null value.
+     */
     public Role getRole()
     {
         return this.role;
     }
 
+    /**
+     * Used internally by Itchy while editing scenes, and also while loading a scene.
+     * 
+     * @return
+     * @priority 5
+     */
     public ClassName getRoleClassName()
     {
         return this.role.getClassName();
     }
 
+    /**
+     * @return The Actor's {@link Appearance}, which is never null.
+     */
     public Appearance getAppearance()
     {
         return this.appearance;
     }
 
+    /**
+     * 
+     * @return
+     * @priority 5
+     */
     public boolean isActive()
     {
         return this.active;
     }
 
+    /**
+     * Used internally by Itchy when editing a scene, and when loading a scene.
+     * 
+     * @param value
+     * @priority 5
+     */
     public void setActivationDelay(double value)
     {
         this.activationDelay = value;
     }
 
+    /**
+     * Used internally by Itchy when editing a scene, and when loading a scene.
+     * 
+     * @return
+     * @priority 5
+     */
     public double getActivationDelay()
     {
         return this.activationDelay;
     }
 
     /**
-     * @return true if kill has been called.
-     */
-    public boolean isDead()
-    {
-        return this.dead;
-    }
-
-    /**
-     * Called when the actor is no longer wanted. It will be removed from its Layer (during the next frame rendering),
-     * and therefore will
-     * not be visible. It will be deactivated (i.e. its tick method won't be called any more) It will have all of its
-     * tags removed.
-     * 
-     * Note, you must not try to resurrect an Actor once it has been killed, instead create a new Actor.
+     * Called when the actor is no longer wanted. It will be removed from its Stage (during the next frame rendering),
+     * and therefore will not be visible. It will be deactivated (i.e. its tick method won't be called any more).
+     * It will have all of its tags removed. The Actor's ID is also reset to null.
+     * <p>
+     * Note, you must not try to resurrect an Actor by adding it to a Stage after it has been killed.
      */
     public void kill()
     {
@@ -561,33 +875,71 @@ public class Actor implements PropertySubject<Actor>
         }
     }
 
-    public boolean isDying()
-    {
-        return this.dying;
-    }
-
+    /**
+     * 
+     * @return
+     * @priority 5
+     */
     public Surface getSurface()
     {
         return this.appearance.getSurface();
     }
 
+    /**
+     * @return The X coordinate of the Actor.
+     */
+    public double getX()
+    {
+        return this.x;
+    }
+
+    /**
+     * @return The Y coordinate of the Actor. Note that the Y axis points <b>upwards</b>, and zero is at the bottom.
+     */
+    public double getY()
+    {
+        return this.y;
+    }
+
+    /**
+     * Sets the X coordinate of the Actor.
+     * 
+     * @param x
+     */
     public void setX(double x)
     {
         this.x = x;
         this.appearance.invalidatePosition();
     }
 
+    /**
+     * Sets the Y coordinate of the Actor. Note that the Y axis points <b>upwards</b>, and zero is at the bottom.
+     * 
+     * @param y
+     */
     public void setY(double y)
     {
         this.y = y;
         this.appearance.invalidatePosition();
     }
 
+    /**
+     * 
+     * @param other
+     * @priority 3
+     */
     public void moveTo(Actor other)
     {
         this.moveTo(other.getX(), other.getY());
     }
 
+    /**
+     * Set both X and Y coordinates.
+     * 
+     * @param x
+     * @param y
+     *            Note that the Y axis points <b>upwards</b>, and zero is at the bottom.
+     */
     public void moveTo(double x, double y)
     {
         this.x = x;
@@ -595,6 +947,13 @@ public class Actor implements PropertySubject<Actor>
         this.appearance.invalidatePosition();
     }
 
+    /**
+     * Adds to the current X,Y coordinates.
+     * 
+     * @param x
+     * @param y
+     *            Note that the Y axis points <b>upwards</b>, and zero is at the bottom.
+     */
     public void moveBy(double x, double y)
     {
         this.x += x;
@@ -602,6 +961,13 @@ public class Actor implements PropertySubject<Actor>
         this.appearance.invalidatePosition();
     }
 
+    /**
+     * Uses the Actor's {@link #getHeading()}, and moves the Actor forwards.
+     * 
+     * @param amount
+     *            The amount of pixels to move forwards.
+     * @priority 2
+     */
     public void moveForwards(double amount)
     {
         double theta = this.getHeadingRadians();
@@ -611,11 +977,25 @@ public class Actor implements PropertySubject<Actor>
         this.moveBy((cosa * amount), (sina * amount));
     }
 
+    /**
+     * Uses the Actor's {@link #getHeading()}, and moves the Actor forwards.
+     * 
+     * @param amount
+     *            The amount of pixels to move forwards.
+     * @param sideways
+     *            The amount of pixels to move sideways (+ve numbers are to the Actor's left).
+     */
     public void moveForwards(double forward, double sideways)
     {
         this.moveAngle(this.getHeading(), forward, sideways);
     }
 
+    /**
+     * 
+     * @param degrees
+     * @param amount
+     * @priority 3
+     */
     public void moveAngle(double degrees, double amount)
     {
         double theta = degrees / 180 * Math.PI;
@@ -625,6 +1005,13 @@ public class Actor implements PropertySubject<Actor>
         this.moveBy((cosa * amount), (sina * amount));
     }
 
+    /**
+     * 
+     * @param degrees
+     * @param forward
+     * @param sideways
+     * @priority 3
+     */
     public void moveAngle(double degrees, double forward, double sideways)
     {
         double theta = degrees / 180 * Math.PI;
@@ -634,6 +1021,12 @@ public class Actor implements PropertySubject<Actor>
         this.moveBy((cosa * forward) - (sina * sideways), (sina * forward) + (cosa * sideways));
     }
 
+    /**
+     * 
+     * @param actor
+     * @param amount
+     * @priority 3
+     */
     public void moveTowards(Actor actor, double amount)
     {
         double dx = actor.x - this.x;
@@ -646,6 +1039,12 @@ public class Actor implements PropertySubject<Actor>
         this.moveBy(dx * amount / scale, dy * amount / scale);
     }
 
+    /**
+     * 
+     * @param other
+     * @return
+     * @priority 3
+     */
     public double distance(Actor other)
     {
         double dx = this.x - other.x;
@@ -654,16 +1053,26 @@ public class Actor implements PropertySubject<Actor>
         return Math.sqrt(dx * dx + dy * dy);
     }
 
-    public void play(String soundName)
-    {
-        this.costume.getSound(soundName).play();
-    }
-
+    /**
+     * 
+     * @param x
+     * @param y
+     * @return
+     * @priority 3
+     */
     public boolean contains(int x, int y)
     {
         return this.getAppearance().getWorldRectangle().contains(x, y);
     }
 
+    /**
+     * 
+     * @param x
+     * @param y
+     * @param tag
+     * @return
+     * @priority 3
+     */
     public static Role nearest(double x, double y, String tag)
     {
         Role closestRole = null;
@@ -681,9 +1090,12 @@ public class Actor implements PropertySubject<Actor>
     }
 
     /**
-     * If there are a large number of Actors with this tag, then this will be slow, because unlike overalpping and
-     * touching, there is no
-     * optimisation based on CollisionStrategy.
+     * If there are a large number of Actors with this tag, then this will be slow, because unlike overlapping and
+     * touching, there is no optimisation based on {@link CollisionStrategy}.
+     * 
+     * @param tag
+     * @return
+     * @priority 3
      */
     public Role nearest(String tag)
     {
@@ -703,27 +1115,59 @@ public class Actor implements PropertySubject<Actor>
         return closestRole;
     }
 
+    /**
+     * 
+     * @param x
+     * @param y
+     * @return
+     * @priority 3
+     */
     public double distanceTo(double x, double y)
     {
         return Math.sqrt((this.x - x) * (this.x - x) + (this.y - y) * (this.y - y));
     }
 
+    /**
+     * 
+     * @param other
+     * @return
+     * @priority 3
+     */
     public double distanceTo(Actor other)
     {
         return Math.sqrt((this.x - other.x) * (this.x - other.x) + (this.y - other.y) *
             (this.y - other.y));
     }
 
+    /**
+     * 
+     * @param x
+     * @param y
+     * @return
+     * @priority 3
+     */
     public double directionOf(double x, double y)
     {
         return Math.atan2(y - this.y, x - this.x) * 180.0 / Math.PI;
     }
 
+    /**
+     * 
+     * @param other
+     * @return
+     * @priority 3
+     */
     public double directionOf(Actor other)
     {
         return Math.atan2(other.y - this.y, other.x - this.x) * 180.0 / Math.PI;
     }
 
+    /**
+     * 
+     * @param other
+     * @return
+     * @priority 3
+     */
     public boolean overlapping(Actor other)
     {
         if (this.appearance.getWorldRectangle().overlaps(other.appearance.getWorldRectangle())) {
@@ -732,6 +1176,15 @@ public class Actor implements PropertySubject<Actor>
         return false;
     }
 
+    /**
+     * Checks if this Actor is visible on screen. If there are multiple {@link StageViews}, for the Actor's
+     * {@link Stage}, then true is returned if the Actor is visible on any of them.
+     * <p>
+     * Note. Only the Actor's bounding rectangle is considered. If the Actor has an alpha value of zero, or if only
+     * transparent pixels are one screen, then this method can still return true.
+     * 
+     * @return true iff the Actor is visible on screen.
+     */
     public boolean isVisible()
     {
         if (this.getStage() == null) {
@@ -750,41 +1203,80 @@ public class Actor implements PropertySubject<Actor>
         return false;
     }
 
+    /**
+     * 
+     * @return true iff the Actor is text (ie has a {@link TextPose}, rather than {@link ImagePose}).
+     * @priority 2
+     */
     public boolean isText()
     {
         return !(getAppearance().getPose() instanceof ImagePose);
     }
 
     /**
-     * For an Actor displaying text, this is the same as the method 'contains', but for other actors (displaying an
-     * image), it is the same
-     * as the method 'pixelOverlap'.
+     * For an Actor displaying text, this is the same as {@link #contains(int, int)}, but for other actors (displaying
+     * an image), it is the same as {@link #pixelOverlap(int, int)}
+     * <p>
+     * If you want to use this in conjunction with mouse position, then you need to convert the screen coordinates to
+     * world coordinates. See {@link StageView#getWorldX(int)} and {@link StageView#getWorldY(int)}.
      * 
-     * This should be used whenever you want to know if the mouse is clicking the actor.
+     * @param worldX
+     *            The world X coordinate (so if the view is scrolled, this will be different to the screen coordinate).
+     * @param worldY
+     *            The world Y coordinate. Note the Y axis points upwards (i.e. never the same of screen coordinates)
+     * @priority 3
      */
-    public boolean hitting(int x, int y)
+    public boolean hitting(int worldX, int worldY)
     {
         if (isText()) {
-            return this.contains(x, y);
+            return this.contains(worldX, worldY);
         } else {
-            return this.pixelOverlap(x, y);
+            return this.pixelOverlap(worldX, worldY);
         }
     }
 
-    public boolean pixelOverlap(int x, int y)
+    /**
+     * Checks if a given world coordinate is a visible part of this Actor.
+     * <p>
+     * If you want to use this in conjunction with mouse position, then you need to convert the screen coordinates to
+     * world coordinates. See {@link StageView#getWorldX(int)} and {@link StageView#getWorldY(int)}.
+     * 
+     * @param worldX
+     *            The world X coordinate. (so if the view is scrolled, this will be different to the screen coordinate).
+     * @param worldY
+     *            The world Y coordinate. Note the Y axis points upwards (i.e. never the same of screen coordinates)
+     * @return true iff the point is within the Actor's image, and the pixel is sufficiently opaque.
+     * @priority 3
+     */
+    public boolean pixelOverlap(int worldX, int worldY)
     {
-        return this.pixelOverlap(x, y, PixelCollisionTest.DEFAULT_THRESHOLD);
+        return this.pixelOverlap(worldX, worldY, PixelCollisionTest.DEFAULT_THRESHOLD);
     }
 
-    public boolean pixelOverlap(int x, int y, int alphaThreashold)
+    /**
+     * Checks if a given world coordinate is a visible part of this Actor.
+     * <p>
+     * If you want to use this in conjunction with mouse position, then you need to convert the screen coordinates to
+     * world coordinates. See {@link StageView#getWorldX(int)} and {@link StageView#getWorldY(int)}.
+     * 
+     * @param worldX
+     *            The world X coordinate. (so if the view is scrolled, this will be different to the screen coordinate).
+     * @param worldY
+     *            The world Y coordinate. Note the Y axis points upwards (i.e. never the same of screen coordinates)
+     * @param alphaThreashold
+     *            How opaque the pixel needs to be. This is an alpha channel value from 0 to 255.
+     * @return true iff the point is within the Actor's image, and the pixel is sufficiently opaque.
+     * @priority 3
+     */
+    public boolean pixelOverlap(int worldX, int worldY, int alphaThreashold)
     {
-        if (this.getAppearance().getWorldRectangle().contains(x, y)) {
+        if (this.getAppearance().getWorldRectangle().contains(worldX, worldY)) {
 
             Surface surface = this.getAppearance().getSurface();
             if (surface.hasAlphaChannel()) {
 
-                double px = x - this.getX() + this.getAppearance().getOffsetX();
-                double py = this.getAppearance().getOffsetY() - y + this.getY();
+                double px = worldX - this.getX() + this.getAppearance().getOffsetX();
+                double py = this.getAppearance().getOffsetY() - worldY + this.getY();
                 RGBA color = surface.getPixelRGBA((int) px, (int) py);
                 return color.a > alphaThreashold;
 
@@ -796,11 +1288,25 @@ public class Actor implements PropertySubject<Actor>
         return false;
     }
 
+    /**
+     * Checks if one Actor's pixels overlap another Actor's pixels.
+     * 
+     * @param other
+     * @return true if the two Actor's pixels overlap, and those pixels are sufficiently opaque (i.e. not transparent).
+     * @priority 3
+     */
     public boolean pixelOverlap(Actor other)
     {
         return pixelOverlap(other, 1);
     }
 
+    /**
+     * Checks if one Actor's pixels overlap another Actor's pixels.
+     * 
+     * @param other
+     * @return true if the two Actor's pixels overlap, and those pixels are sufficiently opaque (i.e. not transparent).
+     * @priority 3
+     */
     public boolean pixelOverlap(Actor other, int threshold)
     {
         int dx = ((int) this.getX() - this.appearance.getOffsetX())
@@ -812,11 +1318,26 @@ public class Actor implements PropertySubject<Actor>
             .pixelOverlap(other.getAppearance().getSurface(), dx, dy, threshold);
     }
 
+    /**
+     * The Actors' Z-Order determines the order the Actors are drawn, and therefore which Actor is obscured when two
+     * Actors overlap. (This assumes you are using a {@link ZOrderStage}, which is the default type of Stage).
+     * 
+     * @return The Z-Order.
+     * @priority 2
+     */
     public int getZOrder()
     {
         return this.zOrder;
     }
 
+    /**
+     * The Actors' Z-Order determines the order the Actors are drawn, and therefore which Actor is obscured when two
+     * Actors overlap. (This assumes you are using a {@link ZOrderStage}, which is the default type of Stage).
+     * 
+     * @param value
+     *            The Z-Order.
+     * @priority 2
+     */
     public void setZOrder(int value)
     {
         if (this.zOrder != value) {
@@ -831,16 +1352,34 @@ public class Actor implements PropertySubject<Actor>
         }
     }
 
+    /**
+     * Used internally by Itchy
+     * 
+     * @param value
+     * @priority 5
+     */
     void setZOrderAttribute(int value)
     {
         this.zOrder = value;
     }
 
+    /**
+     * 
+     * @param delta
+     * @priority 3
+     */
     public void adjustZOrder(int delta)
     {
         setZOrder(this.zOrder + delta);
     }
 
+    /**
+     * Called once per frame (60 times per second), there is no need to call an Actor's tick method from your game's
+     * code.
+     * Calls {@link Animation#tick(Actor)} as well as {@link Role#tick()}.
+     * 
+     * @priority 5
+     */
     public void tick()
     {
         if (this.role != null) {
@@ -862,6 +1401,11 @@ public class Actor implements PropertySubject<Actor>
         }
     }
 
+    /**
+     * Can be useful for debugging.
+     * 
+     * @priority 3
+     */
     @Override
     public String toString()
     {
@@ -869,14 +1413,11 @@ public class Actor implements PropertySubject<Actor>
             (getRole() == null ? "" : "(" + getRole().getClass().getName() + ")");
     }
 
-    public String info()
-    {
-        return "Actor #" + this.sequenceNumber + " @ " + getX() + "," + getY() +
-            " size(" + this.getAppearance().getWidth() + "," + this.getAppearance().getHeight() +
-            ") " +
-            (getRole() == null ? "" : "(" + getRole().getClass().getName() + ")");
-    }
-
+    /**
+     * Used internally by Itchy.
+     * 
+     * @priority 5
+     */
     @Override
     public List<Property<Actor, ?>> getProperties()
     {

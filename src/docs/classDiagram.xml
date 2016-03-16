@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram title="Itchy" filename="classDiagram.html" image="classDiagram.png" thumbnail="classDiagramThumb.png" thumbnailWidth="400" thumbnailHeight="400" width="1200" height="1600">
+
+<class name="uk.co.nickthecoder.itchy.Actor" x="646" y="145"/>
+
+    <class name="uk.co.nickthecoder.itchy.Appearance" x="716" y="705"/>
+    <class name="uk.co.nickthecoder.itchy.Costume" x="877" y="34"/>
+    <class name="uk.co.nickthecoder.itchy.CostumeFeatures" x="1034" y="353"/>
+    <class name="uk.co.nickthecoder.itchy.Game" x="21" y="440"/>
+    <class name="uk.co.nickthecoder.itchy.Itchy" x="30" y="40"/>
+    <class name="uk.co.nickthecoder.itchy.Layout" x="386" y="35"/>
+    <class name="uk.co.nickthecoder.itchy.Layer" x="407" y="377"/>
+    <class name="uk.co.nickthecoder.itchy.Role" x="987" y="570"/>
+    <class name="uk.co.nickthecoder.itchy.AbstractRole" x="993" y="964"/>
+    <class name="uk.co.nickthecoder.itchy.Stage" x="551" y="855"/>
+    <class name="uk.co.nickthecoder.itchy.ZOrderStage" x="539" y="1031"/>
+    <class name="uk.co.nickthecoder.itchy.StageView" x="313" y="851"/>
+    <class name="uk.co.nickthecoder.itchy.View" x="238" y="577"/>
+    <class name="uk.co.nickthecoder.itchy.Pose" x="738" y="1189"/>
+    <class name="uk.co.nickthecoder.itchy.AbstractTextPose" x="600" y="1378"/>
+    <class name="uk.co.nickthecoder.itchy.ImagePose" x="839" y="1376"/>
+    <class name="uk.co.nickthecoder.itchy.Director" x="25" y="1255"/>
+    <class name="uk.co.nickthecoder.itchy.SceneDirector" x="275" y="1257"/>
+    
+    <association from="uk.co.nickthecoder.itchy.Actor" to="uk.co.nickthecoder.itchy.Role" toLabel="1 getRole"/>
+    <association from="uk.co.nickthecoder.itchy.Actor" to="uk.co.nickthecoder.itchy.Appearance" toLabel="1 getAppearance"/>
+    <association from="uk.co.nickthecoder.itchy.Actor" to="uk.co.nickthecoder.itchy.Costume" toLabel="0..1 getCostume"/>
+    <association from="uk.co.nickthecoder.itchy.Costume" to="uk.co.nickthecoder.itchy.CostumeFeatures" toLabel="1 getCostumeFeatures"/>
+    <association from="uk.co.nickthecoder.itchy.Role" to="uk.co.nickthecoder.itchy.CostumeFeatures" toLabel="1 createCostumeFeatures"/>
+    
+    <association from="uk.co.nickthecoder.itchy.Game" to="uk.co.nickthecoder.itchy.Director" toLabel="1 getDirector"/>
+    <association from="uk.co.nickthecoder.itchy.Game" to="uk.co.nickthecoder.itchy.SceneDirector" toLabel="1 getSceneDirector"/>
+    
+    <association from="uk.co.nickthecoder.itchy.Itchy" to="uk.co.nickthecoder.itchy.Game" toLabel="1 getGame"/>
+    <association from="uk.co.nickthecoder.itchy.Game" to="uk.co.nickthecoder.itchy.Layout" toLabel="1 getLayout"/>
+    <composition from="uk.co.nickthecoder.itchy.Layout" to="uk.co.nickthecoder.itchy.Layer" toLabel="n getLayers" />
+    <association from="uk.co.nickthecoder.itchy.Layer" to="uk.co.nickthecoder.itchy.View" toLabel="1 getView"/>
+    <association from="uk.co.nickthecoder.itchy.Layer" to="uk.co.nickthecoder.itchy.StageView" toLabel="0..1 getStageView"/>
+    <association from="uk.co.nickthecoder.itchy.Layer" to="uk.co.nickthecoder.itchy.Stage" toLabel="0..1 getStage"/>
+    <association from="uk.co.nickthecoder.itchy.Appearance" to="uk.co.nickthecoder.itchy.Pose" toLabel="1 getPose"/>
+    <association from="uk.co.nickthecoder.itchy.Costume" to="uk.co.nickthecoder.itchy.ImagePose" toLabel="n getPoseChoices.pose"/>
+    
+    <association from="uk.co.nickthecoder.itchy.Stage" to="uk.co.nickthecoder.itchy.Actor" toLabel="n getActors" fromLabel="0..1 getStage"/>
+    <association from="uk.co.nickthecoder.itchy.StageView" to="uk.co.nickthecoder.itchy.Stage" toLabel="1 getStage"/>
+
+    <generalisation from="uk.co.nickthecoder.itchy.Role" to="uk.co.nickthecoder.itchy.AbstractRole"/>
+    <generalisation from="uk.co.nickthecoder.itchy.View" to="uk.co.nickthecoder.itchy.StageView"/>
+    <generalisation from="uk.co.nickthecoder.itchy.Stage" to="uk.co.nickthecoder.itchy.ZOrderStage"/>
+    <generalisation from="uk.co.nickthecoder.itchy.Pose" to="uk.co.nickthecoder.itchy.AbstractTextPose"/>
+    <generalisation from="uk.co.nickthecoder.itchy.Pose" to="uk.co.nickthecoder.itchy.ImagePose"/>
+    
+</diagram>
+

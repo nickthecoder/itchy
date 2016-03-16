@@ -121,7 +121,7 @@ public class DrunkInvaders extends AbstractDirector
                     }
                     pose.setText(
                         "Aliens Remaining     : " + aliensRemaining + "\n" +
-                            "Dropped Frames       : " + Itchy.frameRate.getDroppedFrames() + "\n" +
+                            "Dropped Frames       : " + Itchy.getFrameRate().getDroppedFrames() + "\n" +
                             "Surfaces Created     : " + Surface.totalCreated() + "\n" +
                             "Surfaces Existing    : " + Surface.totalExisting() + "\n" +
                             "Surfaces Freed by GC : " + Surface.totalFreedByGC()

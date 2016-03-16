@@ -13,19 +13,24 @@ import uk.co.nickthecoder.itchy.property.PropertySubject;
 public class CostumeFeatures implements PropertySubject<CostumeFeatures>, Cloneable
 {
     public Costume costume;
-    
-	public CostumeFeatures( Costume costume )
-	{
-	    this.costume = costume;
-	}
-	
-	private final static List<Property<CostumeFeatures, ?>> EMPTY_PROPERTIES =
-			new ArrayList<Property<CostumeFeatures, ?>>();
-	
-	@Override
+
+    public CostumeFeatures(Costume costume)
+    {
+        this.costume = costume;
+    }
+
+    private final static List<Property<CostumeFeatures, ?>> EMPTY_PROPERTIES =
+        new ArrayList<Property<CostumeFeatures, ?>>();
+
+    /**
+     * Used internally by Itchy.
+     * 
+     * @priority 5
+     */
+    @Override
     public List<Property<CostumeFeatures, ?>> getProperties()
     {
-		return  EMPTY_PROPERTIES;
+        return EMPTY_PROPERTIES;
     }
 
 }
